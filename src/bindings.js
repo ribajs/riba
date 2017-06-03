@@ -24,16 +24,16 @@ export class Binding {
   // All information about the binding is passed into the constructor; the
   // containing view, the DOM node, the type of binding, the model object and the
   // keypath at which to listen for changes.
-  constructor(view, el, type, keypath, binder, arg, options) {
+  constructor(view, el, type, keypath, binder, arg, formatters) {
     this.view = view
     this.el = el
     this.type = type
     this.keypath = keypath
-    this.options = options
-    this.formatterObservers = {}
-    this.model = undefined
     this.binder = binder
     this.arg = arg
+    this.formatters = formatters
+    this.formatterObservers = {}
+    this.model = undefined
   }
 
   // Observes the object keypath
@@ -82,7 +82,7 @@ export class Binding {
   // Applies all the current formatters to the supplied value and returns the
   // formatted value.
   formattedValue(value) {
-    this.options.formatters.forEach((formatterStr, fi) => {
+    this.formatters.forEach((formatterStr, fi) => {
       let args = formatterStr.match(/[^\s']+|'([^']|'[^\s])*'|"([^"]|"[^\s])*"/g)
       let id = args.shift()
       let formatter = this.view.options.formatters[id]
@@ -140,9 +140,9 @@ export class Binding {
     var value, lastformatterIndex;
     if (this.observer) {
       value = this.getValue(this.el)
-      lastformatterIndex = this.options.formatters.length - 1
+      lastformatterIndex = this.formatters.length - 1
 
-      this.options.formatters.slice(0).reverse().forEach((formatter, fiReversed) => {
+      this.formatters.slice(0).reverse().forEach((formatter, fiReversed) => {
         const fi = lastformatterIndex - fiReversed
         const args = formatter.split(/\s+/)
         const id = args.shift()

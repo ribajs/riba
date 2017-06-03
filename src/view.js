@@ -73,9 +73,7 @@ export default class View {
 
     let keypath = pipes.shift()
 
-    let options = {formatters: pipes}
-
-    this.bindings.push(new Binding(this, node, type, keypath, binder, arg, options))
+    this.bindings.push(new Binding(this, node, type, keypath, binder, arg, pipes))
   }
 
   // Parses the DOM tree and builds `Binding` instances for every matched

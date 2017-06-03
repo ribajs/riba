@@ -57,7 +57,7 @@ describe('Rivets.Binding', function() {
       view = rivets.bind(valueInput, {obj: { name: 'nothing' }});
       binding = view.bindings[0];
 
-      binding.options.formatters.should.be.eql(['awesome', 'radical', 'totally'])
+      binding.formatters.should.be.eql(['awesome', 'radical', 'totally'])
     });
 
     it('allows arguments with pipes', function () {
@@ -69,7 +69,7 @@ describe('Rivets.Binding', function() {
       view = rivets.bind(valueInput, { obj: { name: 'nothing' } });
       binding = view.bindings[0];
 
-      binding.options.formatters.should.be.eql(['awesome', "totally 'arg | with || pipes' 'and more args'", "and 'others formatters' with 'pi||pes'"])
+      binding.formatters.should.be.eql(['awesome', "totally 'arg | with || pipes' 'and more args'", "and 'others formatters' with 'pi||pes'"])
     })
   });
 
@@ -165,7 +165,7 @@ describe('Rivets.Binding', function() {
 
       view.options.formatters.awesome = function(value) { return 'awesome ' + value };
 
-      binding.options.formatters.push('awesome');
+      binding.formatters.push('awesome');
       binding.set('sweater');
       routineFn.calledWith(el, 'awesome sweater').should.be.true
     });
@@ -242,7 +242,7 @@ describe('Rivets.Binding', function() {
         routineFn = sinon.spy(binding, 'binder')
       }
 
-      binding.options.formatters.push('awesome');
+      binding.formatters.push('awesome');
       binding.set('sweater');
       routineFn.calledWith(el, 'awesome sweater').should.be.true
     });
@@ -454,7 +454,7 @@ describe('Rivets.Binding', function() {
   describe('formattedValue()', function() {
     it('applies the current formatters on the supplied value', function() {
       view.options.formatters.awesome = function(value) { return 'awesome ' + value };
-      binding.options.formatters.push('awesome');
+      binding.formatters.push('awesome');
       binding.formattedValue('hat').should.equal('awesome hat')
     });
 
@@ -464,7 +464,7 @@ describe('Rivets.Binding', function() {
           return prefix + ' awesome ' + value
         };
 
-        binding.options.formatters.push("awesome 'super'")
+        binding.formatters.push("awesome 'super'")
       });
 
       it('applies the formatter with arguments', function() {
@@ -479,7 +479,7 @@ describe('Rivets.Binding', function() {
           return prefix + ' totally ' + value
         };
 
-        binding.options.formatters.push("totally 'arg | with || pipes'")
+        binding.formatters.push("totally 'arg | with || pipes'")
       });
 
       it('applies the formatter with arguments with pipes', function () {
