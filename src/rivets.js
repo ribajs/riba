@@ -1,4 +1,5 @@
 import {EXTENSIONS} from './constants'
+import {parseTemplate, parseType} from './parsers'
 
 const rivets = {
   // Global binders.
@@ -24,6 +25,10 @@ const rivets = {
     this._fullPrefix = value + '-'
   },
 
+  parseTemplate: parseTemplate,
+
+  parseType: parseType,
+
   // Default template delimiters.
   templateDelimiters: ['{', '}'],
 
@@ -45,7 +50,7 @@ const rivets = {
       el.setAttribute(this.type, value)
     } else {
       el.removeAttribute(this.type)
-    }
+    }  
   },
 
   // Merges an object literal into the corresponding global options.

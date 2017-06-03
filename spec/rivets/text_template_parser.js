@@ -11,7 +11,7 @@ describe('Parsers', function () {
         {type: 0, value: " unread messages."}
       ]
 
-      results = parsers.parseTemplate(template, ['{{', '}}'])
+      results = rivets.parseTemplate(template, ['{{', '}}'])
       results.length.should.equal(5)
 
       for (i = 0; i < results.length; i++) {
@@ -24,7 +24,7 @@ describe('Parsers', function () {
       it("should return undefined", function() {
         template = "Hello World!"
 
-        results = parsers.parseTemplate(template, ['{{', '}}'])
+        results = rivets.parseTemplate(template, ['{{', '}}'])
         Should.not.exist(results)
       })
     })
@@ -34,7 +34,7 @@ describe('Parsers', function () {
         template = "{{ user.name }}"
         expected = [{type: 1, value: "user.name"}]
 
-        results = parsers.parseTemplate(template, ['{{', '}}'])
+        results = rivets.parseTemplate(template, ['{{', '}}'])
         results.length.should.equal(1)
 
         for (i = 0; i < results.length; i++) {
@@ -47,49 +47,49 @@ describe('Parsers', function () {
 
   describe('parseType', function () {
     it('parses string primitives', function () {
-      var token = parsers.parseType('"TEST"');
+      var token = rivets.parseType('"TEST"');
       token.type.should.equal(0);
       token.value.should.equal('TEST');
 
-      token = parsers.parseType("'hello'");
+      token = rivets.parseType("'hello'");
       token.type.should.equal(0);
       token.value.should.equal('hello');
 
-      //token = parsers.parseType('');
+      //token = rivets.parseType('');
       //token.type.should.equal(0);
       //token.value.should.equal('');
     });
 
     it('parses number primitives', function () {
-      var token = parsers.parseType('3');
+      var token = rivets.parseType('3');
       token.type.should.equal(0);
       token.value.should.equal(3);
 
-      token = parsers.parseType("3.14");
+      token = rivets.parseType("3.14");
       token.type.should.equal(0);
       token.value.should.equal(3.14);
     });
 
     it('parses boolean primitives', function () {
-      var token = parsers.parseType('true');
+      var token = rivets.parseType('true');
       token.type.should.equal(0);
       token.value.should.equal(true);
 
-      token = parsers.parseType("false");
+      token = rivets.parseType("false");
       token.type.should.equal(0);
       token.value.should.equal(false);
     });
 
     it('parses pathes', function () {
-      var token = parsers.parseType('path');
+      var token = rivets.parseType('path');
       token.type.should.equal(1);
       token.value.should.equal('path');
 
-      token = parsers.parseType("dotted.path");
+      token = rivets.parseType("dotted.path");
       token.type.should.equal(1);
       token.value.should.equal('dotted.path');
 
-      token = parsers.parseType("3a");
+      token = rivets.parseType("3a");
       token.type.should.equal(1);
       token.value.should.equal('3a');
     });
