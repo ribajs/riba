@@ -30,7 +30,6 @@ export class Binding {
     this.type = type
     this.keypath = keypath
     this.options = options
-    this.dependencies = []
     this.formatterObservers = {}
     this.model = undefined
     this.binder = binder
@@ -129,24 +128,7 @@ export class Binding {
   // Syncs up the view binding with the model.
   sync() {
     if (this.observer) {
-      if (this.model !== this.observer.target) {
-        let deps = this.options.dependencies
-
-        this.dependencies.forEach(observer => {
-          observer.unobserve()
-        })
-
-        this.dependencies = []
-        this.model = this.observer.target
-
-        if (this.model && deps && deps.length) {
-          deps.forEach(dependency => {
-            let observer = this.observe(this.model, dependency)
-            this.dependencies.push(observer)
-          })
-        }
-      }
-
+      this.model = this.observer.target
       this.set(this.observer.value())
     } else {
       this.set(this.value)
@@ -186,13 +168,6 @@ export class Binding {
       this.binder.bind.call(this, this.el)
     }
 
-    if (this.model && this.options.dependencies) {
-      this.options.dependencies.forEach(dependency => {
-        let observer = this.observe(this.model, dependency)
-        this.dependencies.push(observer)
-      })
-    }
-
     if (this.view.options.preloadData) {
       this.sync()
     }
@@ -207,13 +182,6 @@ export class Binding {
     if (this.observer) {
       this.observer.unobserve()
     }
-
-
-    this.dependencies.forEach(observer => {
-      observer.unobserve()
-    })
-
-    this.dependencies = []
 
     Object.keys(this.formatterObservers).forEach(fi => {
       let args = this.formatterObservers[fi]

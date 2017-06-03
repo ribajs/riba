@@ -71,15 +71,9 @@ export default class View {
   buildBinding(node, type, declaration, binder, arg) {
     let pipes = declaration.match(/((?:'[^']*')*(?:(?:[^\|']*(?:'[^']*')+[^\|']*)+|[^\|]+))|^$/g).map(trimStr)
 
-    let context = pipes.shift().split('<').map(trimStr)
+    let keypath = pipes.shift()
 
-    let keypath = context.shift()
-    let dependencies = context.shift()
     let options = {formatters: pipes}
-
-    if (dependencies) {
-      options.dependencies = dependencies.split(/\s+/)
-    }
 
     this.bindings.push(new Binding(this, node, type, keypath, binder, arg, options))
   }
