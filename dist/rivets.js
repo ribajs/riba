@@ -60,7 +60,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _rivets2 = _interopRequireDefault(_rivets);
 
-	var _view = __webpack_require__(3);
+	var _view = __webpack_require__(4);
 
 	var _view2 = _interopRequireDefault(_view);
 
@@ -139,6 +139,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _constants = __webpack_require__(2);
 
+	var _parsers = __webpack_require__(3);
+
 	var rivets = {
 	  // Global binders.
 	  binders: {},
@@ -162,6 +164,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this._prefix = value;
 	    this._fullPrefix = value + '-';
 	  },
+
+	  parseTemplate: _parsers.parseTemplate,
+
+	  parseType: _parsers.parseType,
 
 	  // Default template delimiters.
 	  templateDelimiters: ['{', '}'],
@@ -223,6 +229,109 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 3 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	exports.parseType = parseType;
+	exports.parseTemplate = parseTemplate;
+	var PRIMITIVE = 0;
+	var KEYPATH = 1;
+	var TEXT = 0;
+	var BINDING = 1;
+
+	// Parser and tokenizer for getting the type and value from a string.
+	function parseType(string) {
+	  var type = PRIMITIVE;
+	  var value = string;
+
+	  if (/^'.*'$|^".*"$/.test(string)) {
+	    value = string.slice(1, -1);
+	  } else if (string === 'true') {
+	    value = true;
+	  } else if (string === 'false') {
+	    value = false;
+	  } else if (string === 'null') {
+	    value = null;
+	  } else if (string === 'undefined') {
+	    value = undefined;
+	  } else if (!isNaN(string)) {
+	    value = Number(string);
+	  } else {
+	    type = KEYPATH;
+	  }
+
+	  return { type: type, value: value };
+	}
+
+	// Template parser and tokenizer for mustache-style text content bindings.
+	// Parses the template and returns a set of tokens, separating static portions
+	// of text from binding declarations.
+	function parseTemplate(template, delimiters) {
+	  var tokens;
+	  var length = template.length;
+	  var index = 0;
+	  var lastIndex = 0;
+	  var open = delimiters[0],
+	      close = delimiters[1];
+
+	  while (lastIndex < length) {
+	    index = template.indexOf(open, lastIndex);
+
+	    if (index < 0) {
+	      if (tokens) {
+	        tokens.push({
+	          type: TEXT,
+	          value: template.slice(lastIndex)
+	        });
+	      }
+
+	      break;
+	    } else {
+	      tokens || (tokens = []);
+	      if (index > 0 && lastIndex < index) {
+	        tokens.push({
+	          type: TEXT,
+	          value: template.slice(lastIndex, index)
+	        });
+	      }
+
+	      lastIndex = index + open.length;
+	      index = template.indexOf(close, lastIndex);
+
+	      if (index < 0) {
+	        var substring = template.slice(lastIndex - close.length);
+	        var lastToken = tokens[tokens.length - 1];
+
+	        if (lastToken && lastToken.type === TEXT) {
+	          lastToken.value += substring;
+	        } else {
+	          tokens.push({
+	            type: TEXT,
+	            value: substring
+	          });
+	        }
+
+	        break;
+	      }
+
+	      var value = template.slice(lastIndex, index).trim();
+
+	      tokens.push({
+	        type: BINDING,
+	        value: value
+	      });
+
+	      lastIndex = index + close.length;
+	    }
+	  }
+
+	  return tokens;
+	}
+
+/***/ },
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -233,9 +342,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _rivets2 = _interopRequireDefault(_rivets);
 
-	var _bindings = __webpack_require__(4);
+	var _bindings = __webpack_require__(5);
 
-	var _parsers = __webpack_require__(5);
+	var _parsers = __webpack_require__(3);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -312,17 +421,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  View.prototype.buildBinding = function buildBinding(node, type, declaration, binder, arg) {
 	    var pipes = declaration.match(/((?:'[^']*')*(?:(?:[^\|']*(?:'[^']*')+[^\|']*)+|[^\|]+))|^$/g).map(trimStr);
 
-	    var context = pipes.shift().split('<').map(trimStr);
+	    var keypath = pipes.shift();
 
-	    var keypath = context.shift();
-	    var dependencies = context.shift();
-	    var options = { formatters: pipes };
-
-	    if (dependencies) {
-	      options.dependencies = dependencies.split(/\s+/);
-	    }
-
-	    this.bindings.push(new _bindings.Binding(this, node, type, keypath, binder, arg, options));
+	    this.bindings.push(new _bindings.Binding(this, node, type, keypath, binder, arg, pipes));
 	  };
 
 	  // Parses the DOM tree and builds `Binding` instances for every matched
@@ -454,7 +555,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = View;
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -462,7 +563,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.__esModule = true;
 	exports.Binding = undefined;
 
-	var _parsers = __webpack_require__(5);
+	var _parsers = __webpack_require__(3);
 
 	var _observer = __webpack_require__(6);
 
@@ -496,19 +597,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // All information about the binding is passed into the constructor; the
 	  // containing view, the DOM node, the type of binding, the model object and the
 	  // keypath at which to listen for changes.
-	  function Binding(view, el, type, keypath, binder, arg, options) {
+	  function Binding(view, el, type, keypath, binder, arg, formatters) {
 	    _classCallCheck(this, Binding);
 
 	    this.view = view;
 	    this.el = el;
 	    this.type = type;
 	    this.keypath = keypath;
-	    this.options = options;
-	    this.dependencies = [];
-	    this.formatterObservers = {};
-	    this.model = undefined;
 	    this.binder = binder;
 	    this.arg = arg;
+	    this.formatters = formatters;
+	    this.formatterObservers = {};
+	    this.model = undefined;
 	  }
 
 	  // Observes the object keypath
@@ -566,7 +666,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Binding.prototype.formattedValue = function formattedValue(value) {
 	    var _this2 = this;
 
-	    this.options.formatters.forEach(function (formatterStr, fi) {
+	    this.formatters.forEach(function (formatterStr, fi) {
 	      var args = formatterStr.match(/[^\s']+|'([^']|'[^\s])*'|"([^"]|"[^\s])*"/g);
 	      var id = args.shift();
 	      var formatter = _this2.view.options.formatters[id];
@@ -617,27 +717,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	  Binding.prototype.sync = function sync() {
-	    var _this3 = this;
-
 	    if (this.observer) {
-	      if (this.model !== this.observer.target) {
-	        var deps = this.options.dependencies;
-
-	        this.dependencies.forEach(function (observer) {
-	          observer.unobserve();
-	        });
-
-	        this.dependencies = [];
-	        this.model = this.observer.target;
-
-	        if (this.model && deps && deps.length) {
-	          deps.forEach(function (dependency) {
-	            var observer = _this3.observe(_this3.model, dependency);
-	            _this3.dependencies.push(observer);
-	          });
-	        }
-	      }
-
+	      this.model = this.observer.target;
 	      this.set(this.observer.value());
 	    } else {
 	      this.set(this.value);
@@ -648,19 +729,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	  Binding.prototype.publish = function publish() {
-	    var _this4 = this;
+	    var _this3 = this;
 
 	    var value, lastformatterIndex;
 	    if (this.observer) {
 	      value = this.getValue(this.el);
-	      lastformatterIndex = this.options.formatters.length - 1;
+	      lastformatterIndex = this.formatters.length - 1;
 
-	      this.options.formatters.slice(0).reverse().forEach(function (formatter, fiReversed) {
+	      this.formatters.slice(0).reverse().forEach(function (formatter, fiReversed) {
 	        var fi = lastformatterIndex - fiReversed;
 	        var args = formatter.split(/\s+/);
 	        var id = args.shift();
-	        var f = _this4.view.options.formatters[id];
-	        var processedArgs = _this4.parseFormatterArguments(args, fi);
+	        var f = _this3.view.options.formatters[id];
+	        var processedArgs = _this3.parseFormatterArguments(args, fi);
 
 	        if (f && f.publish) {
 	          value = f.publish.apply(f, [value].concat(processedArgs));
@@ -677,19 +758,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	  Binding.prototype.bind = function bind() {
-	    var _this5 = this;
-
 	    this.parseTarget();
 
 	    if (this.binder.hasOwnProperty('bind')) {
 	      this.binder.bind.call(this, this.el);
-	    }
-
-	    if (this.model && this.options.dependencies) {
-	      this.options.dependencies.forEach(function (dependency) {
-	        var observer = _this5.observe(_this5.model, dependency);
-	        _this5.dependencies.push(observer);
-	      });
 	    }
 
 	    if (this.view.options.preloadData) {
@@ -701,7 +773,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	  Binding.prototype.unbind = function unbind() {
-	    var _this6 = this;
+	    var _this4 = this;
 
 	    if (this.binder.unbind) {
 	      this.binder.unbind.call(this, this.el);
@@ -711,14 +783,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.observer.unobserve();
 	    }
 
-	    this.dependencies.forEach(function (observer) {
-	      observer.unobserve();
-	    });
-
-	    this.dependencies = [];
-
 	    Object.keys(this.formatterObservers).forEach(function (fi) {
-	      var args = _this6.formatterObservers[fi];
+	      var args = _this4.formatterObservers[fi];
 
 	      Object.keys(args).forEach(function (ai) {
 	        args[ai].unobserve();
@@ -757,109 +823,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  return Binding;
 	}();
-
-/***/ },
-/* 5 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	exports.__esModule = true;
-	exports.parseType = parseType;
-	exports.parseTemplate = parseTemplate;
-	var PRIMITIVE = 0;
-	var KEYPATH = 1;
-	var TEXT = 0;
-	var BINDING = 1;
-
-	// Parser and tokenizer for getting the type and value from a string.
-	function parseType(string) {
-	  var type = PRIMITIVE;
-	  var value = string;
-
-	  if (/^'.*'$|^".*"$/.test(string)) {
-	    value = string.slice(1, -1);
-	  } else if (string === 'true') {
-	    value = true;
-	  } else if (string === 'false') {
-	    value = false;
-	  } else if (string === 'null') {
-	    value = null;
-	  } else if (string === 'undefined') {
-	    value = undefined;
-	  } else if (!isNaN(string)) {
-	    value = Number(string);
-	  } else {
-	    type = KEYPATH;
-	  }
-
-	  return { type: type, value: value };
-	}
-
-	// Template parser and tokenizer for mustache-style text content bindings.
-	// Parses the template and returns a set of tokens, separating static portions
-	// of text from binding declarations.
-	function parseTemplate(template, delimiters) {
-	  var tokens;
-	  var length = template.length;
-	  var index = 0;
-	  var lastIndex = 0;
-	  var open = delimiters[0],
-	      close = delimiters[1];
-
-	  while (lastIndex < length) {
-	    index = template.indexOf(open, lastIndex);
-
-	    if (index < 0) {
-	      if (tokens) {
-	        tokens.push({
-	          type: TEXT,
-	          value: template.slice(lastIndex)
-	        });
-	      }
-
-	      break;
-	    } else {
-	      tokens || (tokens = []);
-	      if (index > 0 && lastIndex < index) {
-	        tokens.push({
-	          type: TEXT,
-	          value: template.slice(lastIndex, index)
-	        });
-	      }
-
-	      lastIndex = index + open.length;
-	      index = template.indexOf(close, lastIndex);
-
-	      if (index < 0) {
-	        var substring = template.slice(lastIndex - close.length);
-	        var lastToken = tokens[tokens.length - 1];
-
-	        if (lastToken && lastToken.type === TEXT) {
-	          lastToken.value += substring;
-	        } else {
-	          tokens.push({
-	            type: TEXT,
-	            value: substring
-	          });
-	        }
-
-	        break;
-	      }
-
-	      var value = template.slice(lastIndex, index).trim();
-
-	      tokens.push({
-	        type: BINDING,
-	        value: value
-	      });
-
-	      lastIndex = index + close.length;
-	    }
-	  }
-
-	  return tokens;
-	}
 
 /***/ },
 /* 6 */
@@ -1288,7 +1251,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.__esModule = true;
 
-	var _view = __webpack_require__(3);
+	var _view = __webpack_require__(4);
 
 	var _view2 = _interopRequireDefault(_view);
 
