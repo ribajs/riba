@@ -14,16 +14,14 @@ const binders = {
     function: true,
     priority: 1000,
 
-      unbind: function(el) {
+    unbind: function(el) {
       if (this.handler) {
-        el.addEventListener( this.arg, this.handler)
+        el.removeEventListener(this.arg, this.handler)
       }
     },
 
     routine: function(el, value) {
-      if (this.handler) {
-        el.removeEventListener(this.arg, this.handler)
-      }
+      this.unbind(el)
 
       this.handler = this.eventHandler(value)
       el.addEventListener(this.arg, this.handler)
