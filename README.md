@@ -1,9 +1,10 @@
-This branch is used to keep the changes necessary to fit my needs:
+This branch is used to keep the changes necessary to fit my needs, it improve performance and
+reduce memory usage:
 
 * Change how scope of iteration binder works. Instead of copying properties down to children, uses a prototype like approach
- * Related: [486](https://github.com/mikeric/rivets/issues/486) [512](https://github.com/mikeric/rivets/issues/512) [417](https://github.com/mikeric/rivets/pull/417)
+  * Related: [486](https://github.com/mikeric/rivets/issues/486) [512](https://github.com/mikeric/rivets/issues/512) [417](https://github.com/mikeric/rivets/pull/417)
 * Change how to customize index name in each binder (using an attribute)
- * Related: [551](https://github.com/mikeric/rivets/issues/551) [552](https://github.com/mikeric/rivets/pull/552) 
+  * Related: [551](https://github.com/mikeric/rivets/issues/551) [552](https://github.com/mikeric/rivets/pull/552) 
 * Add ability to customize input event through event-name attribute 
 * Do not bind publish, bind and unbind methods to binding instances
 * Register default binder through fallbackBinder option instead of * binder
@@ -15,6 +16,7 @@ This branch is used to keep the changes necessary to fit my needs:
 * Add not/negate formatter
 * Changes how observer is registered / notified. Instead of passing a function (sync), pass an object with a sync method
 * Remove component binding -> buggy, untested code. Prefer standard compliant custom component implementation 
+* Remove compute feature - can be replaced by an identity formatter
 
 # Rivets.js
 
