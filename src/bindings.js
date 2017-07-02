@@ -85,21 +85,20 @@ export class Binding {
   // Applies all the current formatters to the supplied value and returns the
   // formatted value.
   formattedValue(value) {
-    this.formatters.forEach((formatterStr, fi) => {
-      let args = formatterStr.match(FORMATTER_ARGS)
+    return this.formatters.reduce((result, declaration, index) => {
+      let args = declaration.match(FORMATTER_ARGS)
       let id = args.shift()
       let formatter = this.view.options.formatters[id]
 
-      const processedArgs = this.parseFormatterArguments(args, fi)
+      const processedArgs = this.parseFormatterArguments(args, index)
 
       if (formatter && (formatter.read instanceof Function)) {
-        value = formatter.read(value, ...processedArgs)
+        result = formatter.read(result, ...processedArgs)
       } else if (formatter instanceof Function) {
-        value = formatter(value, ...processedArgs)
+        result = formatter(result, ...processedArgs)
       }
-    })
-
-    return value
+      return result
+    }, value)
   }
 
   // Returns an event handler for the binding around the supplied function.
@@ -140,22 +139,18 @@ export class Binding {
 
   // Publishes the value currently set on the input element back to the model.
   publish() {
-    var value, lastformatterIndex;
     if (this.observer) {
-      value = this.getValue(this.el)
-      lastformatterIndex = this.formatters.length - 1
-
-      this.formatters.slice(0).reverse().forEach((formatter, fiReversed) => {
-        const fi = lastformatterIndex - fiReversed
-        const args = formatter.split(FORMATTER_SPLIT)
+      var value = this.formatters.reduceRight((result, declaration, index) => {
+        const args = declaration.split(FORMATTER_SPLIT)
         const id = args.shift()
-        const f = this.view.options.formatters[id]
-        const processedArgs = this.parseFormatterArguments(args, fi)
+        const formatter = this.view.options.formatters[id]
+        const processedArgs = this.parseFormatterArguments(args, index)
 
-        if (f && f.publish) {
-          value = f.publish(value, ...processedArgs)
+        if (formatter && formatter.publish) {
+          result = formatter.publish(result, ...processedArgs)
         }
-      })
+        return result
+      }, this.getValue(this.el))
 
       this.observer.setValue(value)
     }
