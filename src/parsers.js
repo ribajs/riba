@@ -3,12 +3,14 @@ const KEYPATH = 1
 const TEXT = 0
 const BINDING = 1
 
+const QUOTED_STR = /^'.*'$|^".*"$/
+
 // Parser and tokenizer for getting the type and value from a string.
 export function parseType(string) {
   let type = PRIMITIVE
   let value = string
 
-  if (/^'.*'$|^".*"$/.test(string)) {
+  if (QUOTED_STR.test(string)) {
     value = string.slice(1, -1)
   } else if (string === 'true') {
     value = true

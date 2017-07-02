@@ -19,6 +19,9 @@ function getInputValue(el) {
   }
 }
 
+const FORMATTER_ARGS =  /[^\s']+|'([^']|'[^\s])*'|"([^"]|"[^\s])*"/g
+const FORMATTER_SPLIT = /\s+/
+
 // A single binding between a model attribute and a DOM element.
 export class Binding {
   // All information about the binding is passed into the constructor; the
@@ -83,7 +86,7 @@ export class Binding {
   // formatted value.
   formattedValue(value) {
     this.formatters.forEach((formatterStr, fi) => {
-      let args = formatterStr.match(/[^\s']+|'([^']|'[^\s])*'|"([^"]|"[^\s])*"/g)
+      let args = formatterStr.match(FORMATTER_ARGS)
       let id = args.shift()
       let formatter = this.view.options.formatters[id]
 
@@ -144,7 +147,7 @@ export class Binding {
 
       this.formatters.slice(0).reverse().forEach((formatter, fiReversed) => {
         const fi = lastformatterIndex - fiReversed
-        const args = formatter.split(/\s+/)
+        const args = formatter.split(FORMATTER_SPLIT)
         const id = args.shift()
         const f = this.view.options.formatters[id]
         const processedArgs = this.parseFormatterArguments(args, fi)

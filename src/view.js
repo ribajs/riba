@@ -8,6 +8,8 @@ const textBinder = {
   }
 }
 
+const DECLARATION_SPLIT = /((?:'[^']*')*(?:(?:[^\|']*(?:'[^']*')+[^\|']*)+|[^\|]+))|^$/g
+
 const parseNode = (view, node) => {
   let block = false
 
@@ -69,7 +71,7 @@ export default class View {
 
 
   buildBinding(node, type, declaration, binder, arg) {
-    let pipes = declaration.match(/((?:'[^']*')*(?:(?:[^\|']*(?:'[^']*')+[^\|']*)+|[^\|]+))|^$/g).map(trimStr)
+    let pipes = declaration.match(DECLARATION_SPLIT).map(trimStr)
 
     let keypath = pipes.shift()
 
