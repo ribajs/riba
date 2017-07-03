@@ -8,6 +8,14 @@ const times = (n, cb) => {
   for (let i = 0; i < n; i++) cb()
 }
 
+function createView(binding, data, anchorEl) {
+  let template = binding.el.cloneNode(true)
+  let view = new View(template, data, binding.view.options)
+  view.bind()
+  binding.marker.parentNode.insertBefore(template, anchorEl)
+  return view
+}
+
 const binders = {
   // Binds an event handler on the element.
   'on-*': {
@@ -31,9 +39,10 @@ const binders = {
   // Appends bound instances of the element in place for each item in the array.
   'each-*': {
     block: true,
-      priority: 4000,
 
-      bind: function(el) {
+    priority: 4000,
+
+    bind: function(el) {
       if (!this.marker) {
         this.marker = document.createComment(` rivets: ${this.type} `)
         this.iterated = []
@@ -60,20 +69,13 @@ const binders = {
       collection = collection || []
       let indexProp = el.getAttribute('index-property') || '$index'
 
-      if (this.iterated.length > collection.length) {
-        times(this.iterated.length - collection.length, () => {
-          let view = this.iterated.pop()
-          view.unbind()
-          this.marker.parentNode.removeChild(view.els[0])
-        })
-      }
-
       collection.forEach((model, index) => {
         let data = {$parent: this.view.models}
         data[indexProp] = index
         data[modelName] = model
+        let view = this.iterated[index]
 
-        if (!this.iterated[index]) {
+        if (!view) {
 
           let previous = this.marker
 
@@ -81,18 +83,36 @@ const binders = {
             previous = this.iterated[this.iterated.length - 1].els[0]
           }
 
-          //todo
-          //options.preloadData = true
-
-          let template = el.cloneNode(true)
-          let view = new View(template, data, this.view.options)
-          view.bind()
+          view = createView(this, data, previous.nextSibling)
           this.iterated.push(view)
-          this.marker.parentNode.insertBefore(template, previous.nextSibling)
-        } else if (this.iterated[index].models[modelName] !== model) {
-          this.iterated[index].update(data)
+        } else if (view.models[modelName] !== model) {
+          // search for a view that matches the model
+          let matchIndex, nextView
+          for (let nextIndex = index + 1; nextIndex < this.iterated.length; nextIndex++) {
+            nextView = this.iterated[nextIndex]
+            if (nextView.models[modelName] === model) {
+              matchIndex = nextIndex
+              break
+            }
+          }
+          if (matchIndex !== undefined) {
+            // model is in other position
+            this.marker.parentNode.insertBefore(nextView.els[0], view.els[0])
+          } else {
+            //new model
+            nextView = createView(this, data, view.els[0])
+          }
+          this.iterated.splice(index, 0, nextView)
         }
       })
+
+      if (this.iterated.length > collection.length) {
+        times(this.iterated.length - collection.length, () => {
+          let view = this.iterated.pop()
+          view.unbind()
+          this.marker.parentNode.removeChild(view.els[0])
+        })
+      }
 
       if (el.nodeName === 'OPTION') {
         this.view.bindings.forEach(binding => {
