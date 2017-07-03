@@ -84,6 +84,59 @@ describe("Rivets.binders", function() {
       Should(fragment.childNodes.length).be.exactly(model.items.length + 1);
     });
 
+    it("lets you pop an item", function() {
+      var view = rivets.bind(fragment, model);
+      var originalLength  = model.items.length;
+
+      // one child for each element in the model plus 1 for the comment placeholder
+      Should(fragment.childNodes.length).be.exactly(model.items.length + 1);
+      [].forEach.call(fragment.childNodes, function (itemEl, index) {
+        itemEl._key = index
+      });
+
+      model.items.pop();
+      Should(model.items.length).be.exactly(originalLength - 1);
+      Should(fragment.childNodes.length).be.exactly(model.items.length + 1);
+      Should(fragment.childNodes[1]._key).be.exactly(1);
+      Should(fragment.childNodes[2]._key).be.exactly(2)
+    });
+
+    it("lets you shift an item", function() {
+      var view = rivets.bind(fragment, model);
+      var originalLength  = model.items.length;
+
+      // one child for each element in the model plus 1 for the comment placeholder
+      Should(fragment.childNodes.length).be.exactly(model.items.length + 1);
+      [].forEach.call(fragment.childNodes, function (itemEl, index) {
+        itemEl._key = index
+      });
+
+      model.items.shift();
+      Should(model.items.length).be.exactly(originalLength - 1);
+      Should(fragment.childNodes.length).be.exactly(model.items.length + 1);
+      Should(fragment.childNodes[1]._key).be.exactly(2);
+      Should(fragment.childNodes[2]._key).be.exactly(3)
+    });
+
+    it("lets you splice an item", function() {
+      var view = rivets.bind(fragment, model);
+      var originalLength  = model.items.length;
+
+      // one child for each element in the model plus 1 for the comment placeholder
+      Should(fragment.childNodes.length).be.exactly(model.items.length + 1);
+      [].forEach.call(fragment.childNodes, function (itemEl, index) {
+        itemEl._key = index
+      });
+
+      model.items.splice(1, 1, {val: 'x'}, {val: 'y'});
+      Should(model.items.length).be.exactly(originalLength + 1);
+      Should(fragment.childNodes.length).be.exactly(model.items.length + 1);
+      Should(fragment.childNodes[1]._key).be.exactly(1);
+      Should(fragment.childNodes[2]._key).be.exactly(undefined);
+      Should(fragment.childNodes[3]._key).be.exactly(undefined);
+      Should(fragment.childNodes[4]._key).be.exactly(3);
+    });
+
     it("lets you push an item after unbind/bind", function() {
       var view = rivets.bind(fragment, model);
       var originalLength  = model.items.length;
