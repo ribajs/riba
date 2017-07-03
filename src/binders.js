@@ -97,6 +97,9 @@ const binders = {
           }
           if (matchIndex !== undefined) {
             // model is in other position
+            // todo: consider avoiding the splice here by setting a flag
+            // profile performance before implementing such change
+            this.iterated.splice(matchIndex, 1)
             this.marker.parentNode.insertBefore(nextView.els[0], view.els[0])
           } else {
             //new model
