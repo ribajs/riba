@@ -1,0 +1,56 @@
+<html>
+<head>
+    <script src="../dist/rivets.js"></script>
+</head>
+
+
+<body>
+<div id="test">
+  <button rv-on-click="push">Push</button>
+  <button rv-on-click="pop">Pop</button>
+  <button rv-on-click="shift">Shift</button>
+  <button rv-on-click="unshift">Unshift</button>
+  <button rv-on-click="splice">Splice</button>
+  <button rv-on-click="sort">Sort</button>
+  <button rv-on-click="reset">Reset</button>
+  <div rv-each-item="items">
+      <div>Item {$index} /&nbsp;{item.name}</div>
+  </div>
+
+</div>
+
+
+<script>
+  function getItems() {
+    return [{name: 'x', value: 2} ,{name: 'y', value: 1} , {name: 'z', value: 3}]
+  }
+  var model = {
+    items: getItems(),
+    push() {
+      model.items.push({name: 'pushed'})
+    },
+    pop() {
+      model.items.pop()
+    },
+    shift() {
+      model.items.shift()
+    },
+    unshift() {
+      model.items.unshift({name: 'shifted'})
+    },
+    splice() {
+      model.items.splice(1, 1, {name: 'spliced1'}, {name: 'spliced2'})
+    },
+    reset() {
+      model.items = getItems()
+    },
+    sort() {
+      model.items.sort(function (a, b) {
+        return (a.value || 0) - (b.value || 0)
+      })
+    }
+  }
+  rivets.bind(document.getElementById("test"), model);
+</script>
+</body>
+</html>
