@@ -18,7 +18,8 @@
   "scripts": {
     "pretest": "webpack",
     "test": "phantomjs node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js spec/runner.html",
-    "build": "webpack --x-minimize"
+    "build": "webpack --x-minimize",
+    "dev": "webpack --watch"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",
