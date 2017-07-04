@@ -29,7 +29,9 @@ const binders = {
     },
 
     routine: function(el, value) {
-      this.unbind(el)
+      if (this.handler) {
+        el.removeEventListener(this.arg, this.handler)
+      }
 
       this.handler = this.eventHandler(value)
       el.addEventListener(this.arg, this.handler)
