@@ -241,12 +241,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	var TEXT = 0;
 	var BINDING = 1;
 
+	var QUOTED_STR = /^'.*'$|^".*"$/;
+
 	// Parser and tokenizer for getting the type and value from a string.
 	function parseType(string) {
 	  var type = PRIMITIVE;
 	  var value = string;
 
-	  if (/^'.*'$|^".*"$/.test(string)) {
+	  if (QUOTED_STR.test(string)) {
 	    value = string.slice(1, -1);
 	  } else if (string === 'true') {
 	    value = true;
@@ -356,6 +358,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	};
 
+	var DECLARATION_SPLIT = /((?:'[^']*')*(?:(?:[^\|']*(?:'[^']*')+[^\|']*)+|[^\|]+))|^$/g;
+
 	var parseNode = function parseNode(view, node) {
 	  var block = false;
 
@@ -419,7 +423,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  View.prototype.buildBinding = function buildBinding(node, type, declaration, binder, arg) {
-	    var pipes = declaration.match(/((?:'[^']*')*(?:(?:[^\|']*(?:'[^']*')+[^\|']*)+|[^\|]+))|^$/g).map(trimStr);
+	    var pipes = declaration.match(DECLARATION_SPLIT).map(trimStr);
 
 	    var keypath = pipes.shift();
 
@@ -591,6 +595,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	}
 
+	var FORMATTER_ARGS = /[^\s']+|'([^']|'[^\s])*'|"([^"]|"[^\s])*"/g;
+	var FORMATTER_SPLIT = /\s+/;
+
 	// A single binding between a model attribute and a DOM element.
 
 	var Binding = exports.Binding = function () {
@@ -666,21 +673,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Binding.prototype.formattedValue = function formattedValue(value) {
 	    var _this2 = this;
 
-	    this.formatters.forEach(function (formatterStr, fi) {
-	      var args = formatterStr.match(/[^\s']+|'([^']|'[^\s])*'|"([^"]|"[^\s])*"/g);
+	    return this.formatters.reduce(function (result, declaration, index) {
+	      var args = declaration.match(FORMATTER_ARGS);
 	      var id = args.shift();
 	      var formatter = _this2.view.options.formatters[id];
 
-	      var processedArgs = _this2.parseFormatterArguments(args, fi);
+	      var processedArgs = _this2.parseFormatterArguments(args, index);
 
 	      if (formatter && formatter.read instanceof Function) {
-	        value = formatter.read.apply(formatter, [value].concat(processedArgs));
+	        result = formatter.read.apply(formatter, [result].concat(processedArgs));
 	      } else if (formatter instanceof Function) {
-	        value = formatter.apply(undefined, [value].concat(processedArgs));
+	        result = formatter.apply(undefined, [result].concat(processedArgs));
 	      }
-	    });
-
-	    return value;
+	      return result;
+	    }, value);
 	  };
 
 	  // Returns an event handler for the binding around the supplied function.
@@ -731,22 +737,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Binding.prototype.publish = function publish() {
 	    var _this3 = this;
 
-	    var value, lastformatterIndex;
 	    if (this.observer) {
-	      value = this.getValue(this.el);
-	      lastformatterIndex = this.formatters.length - 1;
-
-	      this.formatters.slice(0).reverse().forEach(function (formatter, fiReversed) {
-	        var fi = lastformatterIndex - fiReversed;
-	        var args = formatter.split(/\s+/);
+	      var value = this.formatters.reduceRight(function (result, declaration, index) {
+	        var args = declaration.split(FORMATTER_SPLIT);
 	        var id = args.shift();
-	        var f = _this3.view.options.formatters[id];
-	        var processedArgs = _this3.parseFormatterArguments(args, fi);
+	        var formatter = _this3.view.options.formatters[id];
+	        var processedArgs = _this3.parseFormatterArguments(args, index);
 
-	        if (f && f.publish) {
-	          value = f.publish.apply(f, [value].concat(processedArgs));
+	        if (formatter && formatter.publish) {
+	          result = formatter.publish.apply(formatter, [result].concat(processedArgs));
 	        }
-	      });
+	        return result;
+	      }, this.getValue(this.el));
 
 	      this.observer.setValue(value);
 	    }
@@ -1267,6 +1269,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	};
 
+	function createView(binding, data, anchorEl) {
+	  var template = binding.el.cloneNode(true);
+	  var view = new _view2.default(template, data, binding.view.options);
+	  view.bind();
+	  binding.marker.parentNode.insertBefore(template, anchorEl);
+	  return view;
+	}
+
 	var binders = {
 	  // Binds an event handler on the element.
 	  'on-*': {
@@ -1275,7 +1285,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    unbind: function unbind(el) {
 	      if (this.handler) {
-	        el.addEventListener(this.arg, this.handler);
+	        el.removeEventListener(this.arg, this.handler);
 	      }
 	    },
 
@@ -1292,6 +1302,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // Appends bound instances of the element in place for each item in the array.
 	  'each-*': {
 	    block: true,
+
 	    priority: 4000,
 
 	    bind: function bind(el) {
@@ -1323,20 +1334,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	      collection = collection || [];
 	      var indexProp = el.getAttribute('index-property') || '$index';
 
-	      if (this.iterated.length > collection.length) {
-	        times(this.iterated.length - collection.length, function () {
-	          var view = _this.iterated.pop();
-	          view.unbind();
-	          _this.marker.parentNode.removeChild(view.els[0]);
-	        });
-	      }
-
 	      collection.forEach(function (model, index) {
 	        var data = { $parent: _this.view.models };
 	        data[indexProp] = index;
 	        data[modelName] = model;
+	        var view = _this.iterated[index];
 
-	        if (!_this.iterated[index]) {
+	        if (!view) {
 
 	          var previous = _this.marker;
 
@@ -1344,18 +1348,45 @@ return /******/ (function(modules) { // webpackBootstrap
 	            previous = _this.iterated[_this.iterated.length - 1].els[0];
 	          }
 
-	          //todo
-	          //options.preloadData = true
-
-	          var template = el.cloneNode(true);
-	          var view = new _view2.default(template, data, _this.view.options);
-	          view.bind();
+	          view = createView(_this, data, previous.nextSibling);
 	          _this.iterated.push(view);
-	          _this.marker.parentNode.insertBefore(template, previous.nextSibling);
-	        } else if (_this.iterated[index].models[modelName] !== model) {
-	          _this.iterated[index].update(data);
+	        } else {
+	          if (view.models[modelName] !== model) {
+	            // search for a view that matches the model
+	            var matchIndex = void 0,
+	                nextView = void 0;
+	            for (var nextIndex = index + 1; nextIndex < _this.iterated.length; nextIndex++) {
+	              nextView = _this.iterated[nextIndex];
+	              if (nextView.models[modelName] === model) {
+	                matchIndex = nextIndex;
+	                break;
+	              }
+	            }
+	            if (matchIndex !== undefined) {
+	              // model is in other position
+	              // todo: consider avoiding the splice here by setting a flag
+	              // profile performance before implementing such change
+	              _this.iterated.splice(matchIndex, 1);
+	              _this.marker.parentNode.insertBefore(nextView.els[0], view.els[0]);
+	              nextView.models[indexProp] = index;
+	            } else {
+	              //new model
+	              nextView = createView(_this, data, view.els[0]);
+	            }
+	            _this.iterated.splice(index, 0, nextView);
+	          } else {
+	            view.models[indexProp] = index;
+	          }
 	        }
 	      });
+
+	      if (this.iterated.length > collection.length) {
+	        times(this.iterated.length - collection.length, function () {
+	          var view = _this.iterated.pop();
+	          view.unbind();
+	          _this.marker.parentNode.removeChild(view.els[0]);
+	        });
+	      }
 
 	      if (el.nodeName === 'OPTION') {
 	        this.view.bindings.forEach(function (binding) {
