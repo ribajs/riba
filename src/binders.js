@@ -87,27 +87,32 @@ const binders = {
 
           view = createView(this, data, previous.nextSibling)
           this.iterated.push(view)
-        } else if (view.models[modelName] !== model) {
-          // search for a view that matches the model
-          let matchIndex, nextView
-          for (let nextIndex = index + 1; nextIndex < this.iterated.length; nextIndex++) {
-            nextView = this.iterated[nextIndex]
-            if (nextView.models[modelName] === model) {
-              matchIndex = nextIndex
-              break
+        } else {
+          if (view.models[modelName] !== model) {
+            // search for a view that matches the model
+            let matchIndex, nextView
+            for (let nextIndex = index + 1; nextIndex < this.iterated.length; nextIndex++) {
+              nextView = this.iterated[nextIndex]
+              if (nextView.models[modelName] === model) {
+                matchIndex = nextIndex
+                break
+              }
             }
-          }
-          if (matchIndex !== undefined) {
-            // model is in other position
-            // todo: consider avoiding the splice here by setting a flag
-            // profile performance before implementing such change
-            this.iterated.splice(matchIndex, 1)
-            this.marker.parentNode.insertBefore(nextView.els[0], view.els[0])
+            if (matchIndex !== undefined) {
+              // model is in other position
+              // todo: consider avoiding the splice here by setting a flag
+              // profile performance before implementing such change
+              this.iterated.splice(matchIndex, 1)
+              this.marker.parentNode.insertBefore(nextView.els[0], view.els[0])
+              nextView.models[indexProp] = index
+            } else {
+              //new model
+              nextView = createView(this, data, view.els[0])
+            }
+            this.iterated.splice(index, 0, nextView)
           } else {
-            //new model
-            nextView = createView(this, data, view.els[0])
+            view.models[indexProp] = index
           }
-          this.iterated.splice(index, 0, nextView)
         }
       })
 
