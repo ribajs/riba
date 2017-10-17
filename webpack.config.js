@@ -1,50 +1,50 @@
 var webpack = require('webpack');
-//options
-var minimize = process.argv.indexOf('--x-minimize') !== -1;
 
-var entryKeys = ['rivets'];
+module.exports = function(env) {
+    var entry = {
+      rivets: './src/export.js'
+    }
 
-var entry = entryKeys.reduce(function (memo, key) {
-  memo[key] = './src/export';
-  if (minimize) {
-    memo[key + '.min'] = './src/export';
-  }
-  return memo;
-}, {});
+    if (env.minimize) {
+      entry['rivets.min'] = './src/export.js'
+    }
 
-module.exports = {
-  context: __dirname,
-  entry: entry,
+   return {
+    context: __dirname,
+    entry: entry,
 
-  output: {
-    path: __dirname + '/dist',
-    filename: '[name].js',
-    library: 'rivets',
-    libraryTarget: 'umd'
-  },
+    output: {
+      path: __dirname + '/dist',
+      filename: '[name].js',
+      library: 'rivets',
+      libraryTarget: 'umd'
+    },
 
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        exclude: '/node_modules/',
-        loader: 'babel',
-        query: {
-          presets: [
-            ['es2015', {'loose': true}]
-          ]
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          exclude: '/node_modules/',
+          use: [{
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                ['es2015', {'loose': true}]
+              ]
+            }
+          }]
         }
-      }
-    ]
-  },
+      ]
+    },
 
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      include: /\.min\.js$/
-    })
-  ],
+    plugins: [
+      new webpack.optimize.UglifyJsPlugin({
+        include: /\.min\.js$/
+      })
+    ],
 
-  resolve: {
-    extensions: ['', '.js']
+    resolve: {
+      extensions: ['.js']
+    }
   }
 };
