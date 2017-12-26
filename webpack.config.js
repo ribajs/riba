@@ -17,7 +17,8 @@ module.exports = function(env) {
       path: __dirname + '/dist',
       filename: '[name].js',
       library: 'tinybind',
-      libraryTarget: 'umd'
+      libraryTarget: 'umd',
+      libraryExport: 'default'
     },
 
     module: {
