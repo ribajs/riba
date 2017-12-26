@@ -2,11 +2,11 @@ var webpack = require('webpack');
 
 module.exports = function(env) {
     var entry = {
-      rivets: './src/export.js'
+      tinybind: './src/export.js'
     }
 
     if (env.minimize) {
-      entry['rivets.min'] = './src/export.js'
+      entry['tinybind.min'] = './src/export.js'
     }
 
    return {
@@ -16,7 +16,7 @@ module.exports = function(env) {
     output: {
       path: __dirname + '/dist',
       filename: '[name].js',
-      library: 'rivets',
+      library: 'tinybind',
       libraryTarget: 'umd'
     },
 
