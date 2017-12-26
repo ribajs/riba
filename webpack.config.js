@@ -29,7 +29,7 @@ module.exports = function(env) {
             loader: 'babel-loader',
             options: {
               presets: [
-                ['es2015', {'loose': true}]
+                ['es2015', {loose: true, modules: false}]
               ]
             }
           }]
@@ -38,6 +38,8 @@ module.exports = function(env) {
     },
 
     plugins: [
+      new webpack.optimize.ModuleConcatenationPlugin(),
+
       new webpack.optimize.UglifyJsPlugin({
         include: /\.min\.js$/
       })
