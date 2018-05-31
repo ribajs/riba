@@ -1,4 +1,4 @@
-import rivets from './rivets'
+import tinybind from './tinybind'
 import {Binding} from './bindings'
 import {parseTemplate} from './parsers'
 
@@ -14,7 +14,7 @@ const parseNode = (view, node) => {
   let block = false
 
   if (node.nodeType === 3) {
-    let tokens = parseTemplate(node.data, rivets.templateDelimiters)
+    let tokens = parseTemplate(node.data, tinybind.templateDelimiters)
 
     if (tokens) {
       for (let i = 0; i < tokens.length; i++) {
@@ -92,7 +92,7 @@ export default class View {
   }
 
   traverse(node) {
-    let bindingPrefix = rivets._fullPrefix
+    let bindingPrefix = tinybind._fullPrefix
     let block = node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE'
     let attributes = node.attributes
     let bindInfos = []
@@ -119,7 +119,7 @@ export default class View {
         }
 
         if (!binder) {
-          binder = rivets.fallbackBinder
+          binder = tinybind.fallbackBinder
         }
 
         if (binder.block) {

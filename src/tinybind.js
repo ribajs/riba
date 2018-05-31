@@ -1,7 +1,7 @@
 import {EXTENSIONS} from './constants'
 import {parseTemplate, parseType} from './parsers'
 
-const rivets = {
+const tinybind = {
   // Global binders.
   binders: {},
 
@@ -72,4 +72,4 @@ const rivets = {
   }
 }
 
-export default rivets
+export default tinybind

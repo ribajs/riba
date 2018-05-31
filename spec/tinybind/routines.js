@@ -44,7 +44,7 @@ describe('Routines', function() {
   };
 
   beforeEach(function() {
-    rivets.configure({
+    tinybind.configure({
       adapter: {
         subscribe: function() {},
         unsubscribe: function() {},
@@ -76,13 +76,13 @@ describe('Routines', function() {
 
   describe('text', function() {
     it("sets the element's text content", function() {
-      rivets.binders.text(el, '<em>hello</em>');
+      tinybind.binders.text(el, '<em>hello</em>');
       el.textContent.should.equal('<em>hello</em>');
       el.innerHTML.should.equal('&lt;em&gt;hello&lt;/em&gt;')
     });
 
     it("sets the element's text content to zero when a numeric zero is passed", function() {
-      rivets.binders.text(el, 0);
+      tinybind.binders.text(el, 0);
       el.textContent.should.equal('0');
       el.innerHTML.should.equal('0')
     })
@@ -90,13 +90,13 @@ describe('Routines', function() {
 
   describe('html', function() {
     it("sets the element's HTML content", function() {
-      rivets.binders.html(el, '<strong>hello</strong>');
+      tinybind.binders.html(el, '<strong>hello</strong>');
       el.textContent.should.equal('hello');
       el.innerHTML.should.equal('<strong>hello</strong>')
     });
 
     it("sets the element's HTML content to zero when a zero value is passed", function() {
-      rivets.binders.html(el, 0);
+      tinybind.binders.html(el, 0);
       el.textContent.should.equal('0');
       el.innerHTML.should.equal('0')
     })
@@ -104,17 +104,17 @@ describe('Routines', function() {
 
   describe('value', function() {
     it("sets the element's value", function() {
-      rivets.binders.value.routine(input, 'pitchfork');
+      tinybind.binders.value.routine(input, 'pitchfork');
       input.value.should.equal('pitchfork')
     });
 
     it("applies a default value to the element when the model doesn't contain it", function() {
-      rivets.binders.value.routine(input, undefined);
+      tinybind.binders.value.routine(input, undefined);
       input.value.should.equal('')
     });
 
     it("sets the element's value to zero when a zero value is passed", function() {
-      rivets.binders.value.routine(input, 0);
+      tinybind.binders.value.routine(input, 0);
       input.value.should.equal('0')
     });
 
@@ -127,13 +127,13 @@ describe('Routines', function() {
       });
 
       it("sets the correct option on a select element", function() {
-        rivets.binders.value.routine(selectEl, 'b');
-        rivets.binders.value.routine(selectEl, 'c');
+        tinybind.binders.value.routine(selectEl, 'b');
+        tinybind.binders.value.routine(selectEl, 'c');
         selectEl.value.should.equal('c')
       });
 
       it("sets the correct option on a select-multiple element", function() {
-        rivets.binders.value.routine(selectMultipleEl, ['d', 'f']);
+        tinybind.binders.value.routine(selectMultipleEl, ['d', 'f']);
         Array.prototype.slice.call(selectMultipleEl.children)
           .filter(function(option) {
             return option.selected
@@ -145,14 +145,14 @@ describe('Routines', function() {
       });
 
       it("sets the correct option on a grouped select element", function() {
-        rivets.binders.value.routine(groupedSelectEl, 'b');
-        rivets.binders.value.routine(groupedSelectEl, 'c');
+        tinybind.binders.value.routine(groupedSelectEl, 'b');
+        tinybind.binders.value.routine(groupedSelectEl, 'c');
         groupedSelectEl.value.should.equal('c')
       });
 
       it("sets the correct option on a select-multiple element", function() {
         var i;
-        rivets.binders.value.routine(groupedMultipleSelectEl, ['a', 'c']);
+        tinybind.binders.value.routine(groupedMultipleSelectEl, ['a', 'c']);
         Array.prototype.slice.call(groupedMultipleSelectEl.options)
           .filter(function(option) {
             return option.selected
@@ -176,14 +176,14 @@ describe('Routines', function() {
   describe('show', function() {
     describe('with a truthy value', function() {
       it('shows the element', function() {
-        rivets.binders.show(el, true);
+        tinybind.binders.show(el, true);
         el.style.display.should.equal('')
       })
     });
 
     describe('with a falsey value', function() {
       it('hides the element', function() {
-        rivets.binders.show(el, false);
+        tinybind.binders.show(el, false);
         el.style.display.should.equal('none')
       })
     })
@@ -192,14 +192,14 @@ describe('Routines', function() {
   describe('hide', function() {
     describe('with a truthy value', function() {
       it('hides the element', function() {
-        rivets.binders.hide(el, true);
+        tinybind.binders.hide(el, true);
         el.style.display.should.equal('none')
       })
     });
 
     describe('with a falsey value', function() {
       it('shows the element', function() {
-        rivets.binders.hide(el, false);
+        tinybind.binders.hide(el, false);
         el.style.display.should.equal('')
       })
     })
@@ -208,14 +208,14 @@ describe('Routines', function() {
   describe('enabled', function() {
     describe('with a truthy value', function() {
       it('enables the element', function() {
-        rivets.binders.enabled(el, true);
+        tinybind.binders.enabled(el, true);
         el.disabled.should.equal(false)
       })
     });
 
     describe('with a falsey value', function() {
       it('disables the element', function() {
-        rivets.binders.enabled(el, false);
+        tinybind.binders.enabled(el, false);
         el.disabled.should.equal(true)
       })
     })
@@ -224,14 +224,14 @@ describe('Routines', function() {
   describe('disabled', function() {
     describe('with a truthy value', function() {
       it('disables the element', function() {
-        rivets.binders.disabled(el, true);
+        tinybind.binders.disabled(el, true);
         el.disabled.should.equal(true)
       })
     });
 
     describe('with a falsey value', function() {
       it('enables the element', function() {
-        rivets.binders.disabled(el, false);
+        tinybind.binders.disabled(el, false);
         el.disabled.should.equal(false)
       })
     })
@@ -241,14 +241,14 @@ describe('Routines', function() {
     describe('with a checkbox input', function() {
       describe('and a truthy value', function() {
         it('checks the checkbox input', function() {
-          rivets.binders.checked.routine(checkboxInput, true);
+          tinybind.binders.checked.routine(checkboxInput, true);
           checkboxInput.checked.should.equal(true)
         })
       });
 
       describe('with a falsey value', function() {
         it('unchecks the checkbox input', function() {
-          rivets.binders.checked.routine(checkboxInput, false);
+          tinybind.binders.checked.routine(checkboxInput, false);
           checkboxInput.checked.should.equal(false)
         })
       })
@@ -257,14 +257,14 @@ describe('Routines', function() {
     describe('with a radio input with value="true"', function() {
       describe('and a truthy value', function() {
         it('checks the radio input', function() {
-          rivets.binders.checked.routine(trueRadioInput, true);
+          tinybind.binders.checked.routine(trueRadioInput, true);
           trueRadioInput.checked.should.equal(true)
         })
       });
 
       describe('with a falsey value', function() {
         it('unchecks the radio input', function() {
-          rivets.binders.checked.routine(trueRadioInput, false);
+          tinybind.binders.checked.routine(trueRadioInput, false);
           trueRadioInput.checked.should.equal(false)
         })
       })
@@ -273,14 +273,14 @@ describe('Routines', function() {
     describe('with a radio input with value="false"', function() {
       describe('and a truthy value', function() {
         it('checks the radio input', function() {
-          rivets.binders.checked.routine(falseRadioInput, true);
+          tinybind.binders.checked.routine(falseRadioInput, true);
           falseRadioInput.checked.should.equal(false)
         })
       });
 
       describe('with a falsey value', function() {
         it('unchecks the radio input', function() {
-          rivets.binders.checked.routine(falseRadioInput, false);
+          tinybind.binders.checked.routine(falseRadioInput, false);
           falseRadioInput.checked.should.equal(true)
         })
       })

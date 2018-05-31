@@ -1,4 +1,4 @@
-// The default `.` adapter that comes with Rivets.js. Allows subscribing to
+// The default `.` adapter that comes with tinybind.js. Allows subscribing to
 // properties on plain objects, implemented in ES5 natives using
 // `Object.defineProperty`.
 

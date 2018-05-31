@@ -1,4 +1,4 @@
-describe("Rivets.formatters", function() {
+describe("tinybind.formatters", function() {
 
   describe("call", function() {
     var model;
@@ -12,7 +12,7 @@ describe("Rivets.formatters", function() {
     });
 
     it("calls function with arguments", function() {
-      rivets.formatters['call'](model.fn, 'foo', 'bar').should.equal('foobar')
+      tinybind.formatters['call'](model.fn, 'foo', 'bar').should.equal('foobar')
     });
 
     it("calls function with the model as context", function() {
@@ -24,7 +24,7 @@ describe("Rivets.formatters", function() {
       };
       var el = document.createElement('div');
       el.setAttribute('rv-text', 'obj.fn | call');
-      rivets.bind(el, model);
+      tinybind.bind(el, model);
       el.innerText.should.equal('foo')
     })
   })

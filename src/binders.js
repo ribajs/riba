@@ -46,7 +46,7 @@ const binders = {
 
     bind: function(el) {
       if (!this.marker) {
-        this.marker = document.createComment(` rivets: ${this.type} `)
+        this.marker = document.createComment(` tinybind: ${this.type} `)
         this.iterated = []
 
         el.parentNode.insertBefore(this.marker, el)
@@ -275,7 +275,7 @@ const binders = {
 
     bind: function(el) {
       if (!this.marker) {
-        this.marker = document.createComment(' rivets: ' + this.type + ' ' + this.keypath + ' ');
+        this.marker = document.createComment(' tinybind: ' + this.type + ' ' + this.keypath + ' ');
         this.attached = false
 
         el.parentNode.insertBefore(this.marker, el)

@@ -11,7 +11,7 @@ describe('Parsers', function () {
         {type: 0, value: " unread messages."}
       ]
 
-      results = rivets.parseTemplate(template, ['{{', '}}'])
+      results = tinybind.parseTemplate(template, ['{{', '}}'])
       results.length.should.equal(5)
 
       for (i = 0; i < results.length; i++) {
@@ -24,7 +24,7 @@ describe('Parsers', function () {
       it("should return undefined", function() {
         template = "Hello World!"
 
-        results = rivets.parseTemplate(template, ['{{', '}}'])
+        results = tinybind.parseTemplate(template, ['{{', '}}'])
         Should.not.exist(results)
       })
     })
@@ -34,7 +34,7 @@ describe('Parsers', function () {
         template = "{{ user.name }}"
         expected = [{type: 1, value: "user.name"}]
 
-        results = rivets.parseTemplate(template, ['{{', '}}'])
+        results = tinybind.parseTemplate(template, ['{{', '}}'])
         results.length.should.equal(1)
 
         for (i = 0; i < results.length; i++) {
@@ -47,49 +47,49 @@ describe('Parsers', function () {
 
   describe('parseType', function () {
     it('parses string primitives', function () {
-      var token = rivets.parseType('"TEST"');
+      var token = tinybind.parseType('"TEST"');
       token.type.should.equal(0);
       token.value.should.equal('TEST');
 
-      token = rivets.parseType("'hello'");
+      token = tinybind.parseType("'hello'");
       token.type.should.equal(0);
       token.value.should.equal('hello');
 
-      //token = rivets.parseType('');
+      //token = tinybind.parseType('');
       //token.type.should.equal(0);
       //token.value.should.equal('');
     });
 
     it('parses number primitives', function () {
-      var token = rivets.parseType('3');
+      var token = tinybind.parseType('3');
       token.type.should.equal(0);
       token.value.should.equal(3);
 
-      token = rivets.parseType("3.14");
+      token = tinybind.parseType("3.14");
       token.type.should.equal(0);
       token.value.should.equal(3.14);
     });
 
     it('parses boolean primitives', function () {
-      var token = rivets.parseType('true');
+      var token = tinybind.parseType('true');
       token.type.should.equal(0);
       token.value.should.equal(true);
 
-      token = rivets.parseType("false");
+      token = tinybind.parseType("false");
       token.type.should.equal(0);
       token.value.should.equal(false);
     });
 
     it('parses pathes', function () {
-      var token = rivets.parseType('path');
+      var token = tinybind.parseType('path');
       token.type.should.equal(1);
       token.value.should.equal('path');
 
-      token = rivets.parseType("dotted.path");
+      token = tinybind.parseType("dotted.path");
       token.type.should.equal(1);
       token.value.should.equal('dotted.path');
 
-      token = rivets.parseType("3a");
+      token = tinybind.parseType("3a");
       token.type.should.equal(1);
       token.value.should.equal('3a');
     });

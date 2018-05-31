@@ -1,4 +1,4 @@
-import rivets from './rivets'
+import tinybind from './tinybind'
 import View from './view'
 import {OPTIONS, EXTENSIONS} from './constants'
 import adapter from './adapter'
@@ -7,11 +7,11 @@ import Observer from './observer'
 
 // Returns the public interface.
 
-rivets.binders = binders
-rivets.adapters['.'] = adapter
+tinybind.binders = binders
+tinybind.adapters['.'] = adapter
 
-// Binds some data to a template / element. Returns a Rivets.View instance.
-rivets.bind = (el, models, options) => {
+// Binds some data to a template / element. Returns a tinybind.View instance.
+tinybind.bind = (el, models, options) => {
   let viewOptions = {}
   models = models || {}
   options = options || {}
@@ -25,16 +25,16 @@ rivets.bind = (el, models, options) => {
       })
     }
 
-    Object.keys(rivets[extensionType]).forEach(key => {
+    Object.keys(tinybind[extensionType]).forEach(key => {
       if (!viewOptions[extensionType][key]) {
-        viewOptions[extensionType][key] = rivets[extensionType][key]
+        viewOptions[extensionType][key] = tinybind[extensionType][key]
       }
     })
   })
 
   OPTIONS.forEach(option => {
     let value = options[option]
-    viewOptions[option] = value != null ? value : rivets[option]
+    viewOptions[option] = value != null ? value : tinybind[option]
   })
 
   viewOptions.starBinders = Object.keys(viewOptions.binders).filter(function (key) {
@@ -48,8 +48,8 @@ rivets.bind = (el, models, options) => {
   return view
 }
 
-rivets.formatters.negate = rivets.formatters.not = function (value) {
+tinybind.formatters.negate = tinybind.formatters.not = function (value) {
   return !value;
 };
 
-export default rivets
+export default tinybind

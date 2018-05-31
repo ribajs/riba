@@ -1,26 +1,26 @@
-describe('Rivets.Binding', function() {
+describe('tinybind.Binding', function() {
   var model, el, view, binding, originalPrefix, adapter, routineFn;
 
   beforeEach(function() {
-    originalPrefix = rivets.prefix;
-    rivets.prefix = 'data';
-    adapter = rivets.adapters['.'];
+    originalPrefix = tinybind.prefix;
+    tinybind.prefix = 'data';
+    adapter = tinybind.adapters['.'];
 
     el = document.createElement('div');
     el.setAttribute('data-text', 'obj.name');
 
-    view = rivets.bind(el, {obj: {name: 'test'}});
+    view = tinybind.bind(el, {obj: {name: 'test'}});
     binding = view.bindings[0];
     model = binding.model
   });
 
   afterEach(function() {
-    rivets.prefix = originalPrefix
+    tinybind.prefix = originalPrefix
   });
 
   it('gets assigned the proper binder routine matching the identifier', function() {
     routineFn = binding.binder.routine || binding.binder
-    routineFn.should.equal(rivets.binders.text)
+    routineFn.should.equal(tinybind.binders.text)
   });
 
   describe('when bind to non configurable properties', function() {
@@ -40,7 +40,7 @@ describe('Rivets.Binding', function() {
 
     it('does not throw', function() {
       (function(){
-        rivets.bind(el, { obj: data})
+        tinybind.bind(el, { obj: data})
       }).should.not.throw();
     })
 
@@ -54,7 +54,7 @@ describe('Rivets.Binding', function() {
       valueInput.setAttribute('type','text');
       valueInput.setAttribute('data-value', "obj.name | awesome | radical | totally");
 
-      view = rivets.bind(valueInput, {obj: { name: 'nothing' }});
+      view = tinybind.bind(valueInput, {obj: { name: 'nothing' }});
       binding = view.bindings[0];
 
       binding.formatters.should.be.eql(['awesome', 'radical', 'totally'])
@@ -66,7 +66,7 @@ describe('Rivets.Binding', function() {
       valueInput.setAttribute('type', 'text');
       valueInput.setAttribute('data-value', "obj.name | awesome | totally 'arg | with || pipes' 'and more args' | and 'others formatters' with 'pi||pes'");
 
-      view = rivets.bind(valueInput, { obj: { name: 'nothing' } });
+      view = tinybind.bind(valueInput, { obj: { name: 'nothing' } });
       binding = view.bindings[0];
 
       binding.formatters.should.be.eql(['awesome', "totally 'arg | with || pipes' 'and more args'", "and 'others formatters' with 'pi||pes'"])
@@ -93,7 +93,7 @@ describe('Rivets.Binding', function() {
 
     describe('with preloadData set to true', function() {
       beforeEach(function() {
-        rivets.preloadData = true
+        tinybind.preloadData = true
       });
 
       it('sets the initial value', function() {
@@ -196,7 +196,7 @@ describe('Rivets.Binding', function() {
       el = document.createElement('div');
       el.setAttribute('data-text', 'employee.getName');
 
-      view = rivets.bind(el, model);
+      view = tinybind.bind(el, model);
       binding = view.bindings[0];
       if (binding.binder.routine) {
         routineFn = sinon.spy(binding.binder, 'routine')
@@ -217,7 +217,7 @@ describe('Rivets.Binding', function() {
       numberInput.setAttribute('type', 'number');
       numberInput.setAttribute('data-value', 'obj.num');
 
-      view = rivets.bind(numberInput, {obj: {num: 42}});
+      view = tinybind.bind(numberInput, {obj: {num: 42}});
       binding = view.bindings[0];
       model = binding.model;
 
@@ -248,7 +248,7 @@ describe('Rivets.Binding', function() {
     });
 
     it("should publish the value of a number input", function() {
-      rivets.formatters.awesome = {
+      tinybind.formatters.awesome = {
         publish: function(value) { return 'awesome ' + value }
       };
 
@@ -256,7 +256,7 @@ describe('Rivets.Binding', function() {
       numberInput.setAttribute('type', 'number');
       numberInput.setAttribute('data-value', 'obj.num | awesome');
 
-      view = rivets.bind(numberInput, {obj: {num: 42}});
+      view = tinybind.bind(numberInput, {obj: {num: 42}});
       binding = view.bindings[0];
       model = binding.model;
 
@@ -267,7 +267,7 @@ describe('Rivets.Binding', function() {
     });
 
     it("should format a value in both directions", function() {
-      rivets.formatters.awesome = {
+      tinybind.formatters.awesome = {
         publish: function(value) { return 'awesome ' + value },
         read: function(value) { return value + ' is awesome' }
       };
@@ -276,7 +276,7 @@ describe('Rivets.Binding', function() {
       valueInput.setAttribute('type','text');
       valueInput.setAttribute('data-value', 'obj.name | awesome');
 
-      view = rivets.bind(valueInput, {obj: { name: 'nothing' }});
+      view = tinybind.bind(valueInput, {obj: { name: 'nothing' }});
       binding = view.bindings[0];
       model = binding.model;
 
@@ -290,7 +290,7 @@ describe('Rivets.Binding', function() {
     });
 
     it("should resolve formatter arguments to their values", function() {
-      rivets.formatters.withArguments = {
+      tinybind.formatters.withArguments = {
         publish: function(value, arg1, arg2) {
           return value + ':' + arg1 + ':' + arg2
         },
@@ -303,7 +303,7 @@ describe('Rivets.Binding', function() {
       valueInput.setAttribute('type', 'text')
       valueInput.setAttribute('data-value', "obj.name | withArguments config.age 'male'")
 
-      view = rivets.bind(valueInput, {
+      view = tinybind.bind(valueInput, {
         obj: {
           name: 'nothing'
         },
@@ -326,7 +326,7 @@ describe('Rivets.Binding', function() {
     })
 
     it("should resolve formatter arguments correctly with multiple formatters", function() {
-      rivets.formatters.wrap = {
+      tinybind.formatters.wrap = {
         publish: function(value, arg1, arg2) {
           return arg1 + value + arg2
         },
@@ -335,7 +335,7 @@ describe('Rivets.Binding', function() {
         }
       }
 
-      rivets.formatters.saveAsCase = {
+      tinybind.formatters.saveAsCase = {
         publish: function(value, typeCase) {
           return value['to' + typeCase + 'Case']()
         },
@@ -351,7 +351,7 @@ describe('Rivets.Binding', function() {
         "obj.name | saveAsCase config.typeCase | wrap config.curly '}' | wrap config.square ']' | wrap config.paren ')'"
       )
 
-      view = rivets.bind(valueInput, {
+      view = tinybind.bind(valueInput, {
         obj: {
           name: 'nothing'
         },
@@ -378,12 +378,12 @@ describe('Rivets.Binding', function() {
 
 
     it("should not fail or format if the specified binding function doesn't exist", function() {
-      rivets.formatters.awesome = { };
+      tinybind.formatters.awesome = { };
       valueInput = document.createElement('input');
       valueInput.setAttribute('type','text');
       valueInput.setAttribute('data-value', 'obj.name | awesome');
 
-      view = rivets.bind(valueInput, {obj: { name: 'nothing' }});
+      view = tinybind.bind(valueInput, {obj: { name: 'nothing' }});
       binding = view.bindings[0];
       model = binding.model;
 
@@ -396,12 +396,12 @@ describe('Rivets.Binding', function() {
     });
 
     it("should apply read binders left to right, and write binders right to left", function() {
-      rivets.formatters.totally = {
+      tinybind.formatters.totally = {
         publish: function(value) { return value + ' totally' },
         read: function(value) { return value + ' totally' }
       };
 
-      rivets.formatters.awesome = {
+      tinybind.formatters.awesome = {
         publish: function(value) { return value + ' is awesome' },
         read: function(value) { return value + ' is awesome' }
       };
@@ -410,7 +410,7 @@ describe('Rivets.Binding', function() {
       valueInput.setAttribute('type','text');
       valueInput.setAttribute('data-value', 'obj.name | awesome | totally');
 
-      view = rivets.bind(valueInput, {obj: { name: 'nothing' }});
+      view = tinybind.bind(valueInput, {obj: { name: 'nothing' }});
       binding = view.bindings[0];
       model = binding.model;
 
@@ -423,22 +423,22 @@ describe('Rivets.Binding', function() {
     });
 
     it("binders in a chain should be skipped if they're not there", function() {
-      rivets.formatters.totally = {
+      tinybind.formatters.totally = {
         publish: function(value) { return value + ' totally' },
         read: function(value) { return value + ' totally' }
       };
 
-      rivets.formatters.radical = {
+      tinybind.formatters.radical = {
         publish: function(value) { return value + ' is radical' }
       };
 
-      rivets.formatters.awesome = function(value) { return value + ' is awesome' };
+      tinybind.formatters.awesome = function(value) { return value + ' is awesome' };
 
       valueInput = document.createElement('input');
       valueInput.setAttribute('type','text');
       valueInput.setAttribute('data-value', 'obj.name | awesome | radical | totally');
 
-      view = rivets.bind(valueInput, {obj: { name: 'nothing' }});
+      view = tinybind.bind(valueInput, {obj: { name: 'nothing' }});
       binding = view.bindings[0];
       model = binding.model;
 

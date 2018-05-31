@@ -1,4 +1,4 @@
-describe("Rivets.binders", function() {
+describe("tinybind.binders", function() {
   var context;
 
   beforeEach(function() {
@@ -21,13 +21,13 @@ describe("Rivets.binders", function() {
         boundFn = fn
       });
 
-      rivets.binders.value.bind.call(context, el);
+      tinybind.binders.value.bind.call(context, el);
 
       sinon.stub(el, 'removeEventListener', function(event, fn) {
         fn.should.equal(boundFn)
       });
 
-      rivets.binders.value.unbind.call(context, el)
+      tinybind.binders.value.unbind.call(context, el)
     })
   });
 
@@ -48,14 +48,14 @@ describe("Rivets.binders", function() {
     });
 
     it("binds to the model creating a list item for each element in items", function() {
-      var view = rivets.bind(fragment, model);
+      var view = tinybind.bind(fragment, model);
 
       // one child for each element in the model plus 1 for the comment placeholder
       Should(fragment.childNodes.length).be.exactly(model.items.length + 1);
     });
 
     it("reflects changes to the model into the DOM", function() {
-      var view = rivets.bind(fragment, model);
+      var view = tinybind.bind(fragment, model);
       Should(fragment.childNodes[1].textContent).be.exactly("0");
 
       model.items[0].val = "howdy";
@@ -63,7 +63,7 @@ describe("Rivets.binders", function() {
     });
 
     it("reflects changes to the model into the DOM after unbind/bind", function() {
-      var view = rivets.bind(fragment, model);
+      var view = tinybind.bind(fragment, model);
       Should(fragment.childNodes[1].textContent).be.exactly("0");
 
       view.unbind();
@@ -73,7 +73,7 @@ describe("Rivets.binders", function() {
     });
 
     it("lets you push an item", function() {
-      var view = rivets.bind(fragment, model);
+      var view = tinybind.bind(fragment, model);
       var originalLength  = model.items.length;
 
       // one child for each element in the model plus 1 for the comment placeholder
@@ -85,7 +85,7 @@ describe("Rivets.binders", function() {
     });
 
     it("lets you pop an item", function() {
-      var view = rivets.bind(fragment, model);
+      var view = tinybind.bind(fragment, model);
       var originalLength  = model.items.length;
 
       // one child for each element in the model plus 1 for the comment placeholder
@@ -102,7 +102,7 @@ describe("Rivets.binders", function() {
     });
 
     it("lets you shift an item", function() {
-      var view = rivets.bind(fragment, model);
+      var view = tinybind.bind(fragment, model);
       var originalLength  = model.items.length;
 
       // one child for each element in the model plus 1 for the comment placeholder
@@ -119,7 +119,7 @@ describe("Rivets.binders", function() {
     });
 
     it("lets you splice an item", function() {
-      var view = rivets.bind(fragment, model);
+      var view = tinybind.bind(fragment, model);
       var originalLength  = model.items.length;
 
       // one child for each element in the model plus 1 for the comment placeholder
@@ -138,7 +138,7 @@ describe("Rivets.binders", function() {
     });
 
     it("lets you push an item after unbind/bind", function() {
-      var view = rivets.bind(fragment, model);
+      var view = tinybind.bind(fragment, model);
       var originalLength  = model.items.length;
 
       // one child for each element in the model plus 1 for the comment placeholder
@@ -180,7 +180,7 @@ describe("Rivets.binders", function() {
 
     it("lets you access index from current and parent scope", function() {
       nestedEl.textContent = '{$parent.$index}-{$index}';
-      var view = rivets.bind(el, model);
+      var view = tinybind.bind(el, model);
 
       Should(fragment.childNodes[1].childNodes[1].textContent).be.exactly('0-0');
       Should(fragment.childNodes[1].childNodes[2].textContent).be.exactly('0-1');
@@ -189,7 +189,7 @@ describe("Rivets.binders", function() {
 
     it("lets you access properties from parent scopes", function() {
       nestedEl.textContent = '{root}!{item.name}';
-      var view = rivets.bind(el, model);
+      var view = tinybind.bind(el, model);
 
       Should(fragment.childNodes[1].childNodes[1].textContent).be.exactly('Root Node!Level 1 - 0');
       Should(fragment.childNodes[1].childNodes[2].textContent).be.exactly('Root Node!Level 1 - 0');
@@ -198,7 +198,7 @@ describe("Rivets.binders", function() {
 
     it("reflects changes in parent scopes properties", function() {
       nestedEl.textContent = '{root}!{item.name}';
-      var view = rivets.bind(el, model);
+      var view = tinybind.bind(el, model);
       model.root = 'New';
       Should(fragment.childNodes[1].childNodes[1].textContent).be.exactly('New!Level 1 - 0');
       Should(fragment.childNodes[1].childNodes[2].textContent).be.exactly('New!Level 1 - 0');
@@ -207,7 +207,7 @@ describe("Rivets.binders", function() {
 
     it("reflects changes when an undefined property is set in root scope", function() {
       nestedEl.textContent = '{unset}';
-      var view = rivets.bind(el, model);
+      var view = tinybind.bind(el, model);
       model.unset = 'NotUndefined';
       Should(fragment.childNodes[1].childNodes[1].textContent).be.exactly('NotUndefined');
       Should(fragment.childNodes[1].childNodes[2].textContent).be.exactly('NotUndefined');
@@ -236,7 +236,7 @@ describe("Rivets.binders", function() {
     });
 
     it("shows element with bound key inside if the value is true", function() {
-      var view = rivets.bind(fragment, model);
+      var view = tinybind.bind(fragment, model);
 
       // one child for the original div plus 1 for the comment placeholder
       Should(fragment.childNodes.length).be.exactly(2);
@@ -244,7 +244,7 @@ describe("Rivets.binders", function() {
     });
 
     it("hides if the value is false", function() {
-      var view = rivets.bind(fragment, model);
+      var view = tinybind.bind(fragment, model);
 
       model.data.show = false;
 
@@ -253,7 +253,7 @@ describe("Rivets.binders", function() {
     });
 
     it("keeps binding when element becomes visible again", function() {
-      var view = rivets.bind(fragment, model);
+      var view = tinybind.bind(fragment, model);
 
       model.data.show = false;
       model.data.count = 2;
@@ -265,7 +265,7 @@ describe("Rivets.binders", function() {
     });
 
     it("hides if the value is falsey - zero", function() {
-      var view = rivets.bind(fragment, model);
+      var view = tinybind.bind(fragment, model);
 
       model.data.show = 0;
       // 1 for the comment placeholder
@@ -273,7 +273,7 @@ describe("Rivets.binders", function() {
     });
 
     it("hides if the value is falsey - empty string", function() {
-      var view = rivets.bind(fragment, model);
+      var view = tinybind.bind(fragment, model);
 
       model.data.show = "";
       // 1 for the comment placeholder
@@ -281,7 +281,7 @@ describe("Rivets.binders", function() {
     });
 
     it("hides if the value is falsey - undefined", function() {
-      var view = rivets.bind(fragment, model);
+      var view = tinybind.bind(fragment, model);
 
       model.data.show = undefined;
       // 1 for the comment placeholder
@@ -294,7 +294,7 @@ describe("Rivets.binders", function() {
       nestedEl.innerHTML = "{ data.countNested }";
       el.appendChild(nestedEl);
 
-      var view = rivets.bind(fragment, model);
+      var view = tinybind.bind(fragment, model);
 
       model.data.countNested = "1";
       model.data.showNested = true;
@@ -311,7 +311,7 @@ describe("Rivets.binders", function() {
       nestedEl.setAttribute("rv-if", "data.showNested");
       el.appendChild(nestedEl);
 
-      var view = rivets.bind(fragment, model);
+      var view = tinybind.bind(fragment, model);
 
       model.data.showNested = true;
       Should(el.contains(nestedEl)).be.true;
@@ -333,7 +333,7 @@ describe("Rivets.binders", function() {
           }
         }
       };
-      var view = rivets.bind(el, model);
+      var view = tinybind.bind(el, model);
       (function(){
         model.scope.error = {};
       }).should.not.throw();
@@ -342,7 +342,7 @@ describe("Rivets.binders", function() {
  
   describe("Custom binder with no attribute value", function() {
     var el, model;
-    rivets.binders["custom-binder"] = function(el, value) {
+    tinybind.binders["custom-binder"] = function(el, value) {
       el.innerHTML = "received " + value;
     };
     beforeEach(function() {
@@ -356,12 +356,12 @@ describe("Rivets.binders", function() {
 
     it("receives undefined when html attribute is not specified", function() {
       el.innerHTML = "<div rv-custom-binder></div>";
-      var view = rivets.bind(fragment, model);
+      var view = tinybind.bind(fragment, model);
       Should(el.children[0].innerHTML).be.exactly('received undefined');
     });
     it("receives undefined when html attribute is not specified", function() {
       el.innerHTML = "<div rv-custom-binder=''></div>";
-      var view = rivets.bind(fragment, model);
+      var view = tinybind.bind(fragment, model);
       Should(el.children[0].innerHTML).be.exactly('received undefined');
     });
   });
@@ -409,7 +409,7 @@ describe("Rivets.binders", function() {
     });
 
     it('observes array changes after another array binding is unbound', function() {
-      var view = rivets.bind(fragment, model);
+      var view = tinybind.bind(fragment, model);
       model.scope.items.push({data:"data"});
       Should(el3.childNodes.length).be.exactly(2);
       model.scope.items.push({data:"data"});
