@@ -1,9 +1,9 @@
-Adapters are defined on `rivets.adapters` with the interface as the property name and the adapter object as the value. An adapter is just an object that responds to `observe`, `unobserve`, `get` and `set`.
+Adapters are defined on `tinybind.adapters` with the interface as the property name and the adapter object as the value. An adapter is just an object that responds to `observe`, `unobserve`, `get` and `set`.
 
 The following `:` adapter works for Backbone.js models / Stapes.js modules.
 
 ```javascript
-rivets.adapters[':'] = {
+tinybind.adapters[':'] = {
   observe: function(obj, keypath, callback) {
     obj.on('change:' + keypath, callback)
   },

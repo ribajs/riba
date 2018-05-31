@@ -2,7 +2,7 @@
 
 html
   head
-    title Rivets.js — Lightweight and powerful data binding + templating solution for building modern web applications
+    title tinybind.js — Lightweight and powerful data binding + templating solution for building modern web applications
 
     link(rel="stylesheet", href="/css/bootstrap.css")
     link(rel="stylesheet", href="/css/type.css")
@@ -17,26 +17,13 @@ html
 
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
 
-    script(type="text/javascript").
-      hljs.initHighlightingOnLoad();
-
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-6079274-2']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
   body(data-spy="scroll", data-target="#nav")
     header
       .container
         .row
           .col.col-xs-6
             h3.logotype
-              a(href="/") RIVETS
+              a(href="/") tinybind
 
           .col.col-xs-6.right.visible-xs
             i#hamburger &#9776;
@@ -47,6 +34,6 @@ html
               li
                 a(href="/docs/reference") Binder Reference
               li
-                a(href="http://github.com/mikeric/rivets") GitHub
+                a(href="http://github.com/blikblum/tinybind") GitHub
 
     != yield

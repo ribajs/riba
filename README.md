@@ -1,26 +1,6 @@
-This branch is used to keep the changes necessary to fit my needs, it improve performance and
-reduce memory usage:
+# tinybind
 
-* Change how scope of iteration binder works. Instead of copying properties down to children, uses a prototype like approach
-  * Related: [486](https://github.com/mikeric/rivets/issues/486) [512](https://github.com/mikeric/rivets/issues/512) [417](https://github.com/mikeric/rivets/pull/417)
-* Change how to customize index name in each binder (using an attribute)
-  * Related: [551](https://github.com/mikeric/rivets/issues/551) [552](https://github.com/mikeric/rivets/pull/552) 
-* Add ability to customize input event through event-name attribute 
-* Do not bind publish, bind and unbind methods to binding instances
-* Register default binder through fallbackBinder option instead of * binder
-* Integrate sightglass into rivets code base
-* Remove view.select method 
-* Rename binding property args to arg and changed type from array to string
-* The rv-* attributes are removed after binding
-* Remove unless and unchecked binders
-* Add not/negate formatter
-* Changes how observer is registered / notified. Instead of passing a function (sync), pass an object with a sync method
-* Remove component binding -> buggy, untested code. Prefer standard compliant custom component implementation 
-* Remove compute feature - can be replaced by an identity formatter
-
-# Rivets.js
-
-Rivets.js is a lightweight data binding and templating system that facilitates building data-driven views. It is agnostic about every aspect of a front-end MV(C|VM|P) stack, making it easy to introduce it into your current workflow or to use it as part of your own custom front-end stack comprised of other libraries.
+tinybind is the espiritual sucessor of Rivets.js, a lightweight data binding and templating system that facilitates building data-driven views. It is agnostic about every aspect of a front-end MV(C|VM|P) stack, making it easy to introduce it into your current workflow or to use it as part of your own custom front-end stack comprised of other libraries.
 
 ## Usage
 
@@ -36,12 +16,35 @@ Rivets.js is a lightweight data binding and templating system that facilitates b
 ```
 
 ```javascript
-rivets.bind($('#auction'), {auction: auction})
+tinybind.bind($('#auction'), {auction: auction})
 ```
 
 ## Getting Started and Documentation
 
-Documentation is available on the [homepage](http://rivetsjs.com). Learn by reading the [Guide](http://rivetsjs.com/docs/guide/) and refer to the [Binder Reference](http://rivetsjs.com/docs/reference/) to see what binders are available to you out-of-the-box.
+Documentation is available on the [homepage](http://tinybindjs.com). Learn by reading the [Guide](http://tinybindjs.com/docs/guide/) and refer to the [Binder Reference](http://tinybindjs.com/docs/reference/) to see what binders are available to you out-of-the-box.
+
+## Differences from Rivets.js
+
+* Public interface
+  * Remove component feature -> incomplete, untested code. Use web components libraries like SkateJs or LitElement
+  * Add not/negate formatter
+  * Remove unless and unchecked binders in favor of combining not/negate formatters with if/checked binders
+  * Remove computed feature - can be replaced by an identity formatter
+  * Add ability to customize input event through event-name attribute
+* Internal changes
+  * Written in ES6 instead of coffeescript
+  * Change how scope of iteration binder works. Instead of copying properties down to children, uses a prototype like approach
+    * Related: [486](https://github.com/mikeric/rivets/issues/486) [512](https://github.com/mikeric/rivets/issues/512) [417](https://github.com/mikeric/rivets/pull/417)
+  * Change how to customize index name in each binder (using an attribute)
+    * Related: [551](https://github.com/mikeric/rivets/issues/551) [552](https://github.com/mikeric/rivets/pull/552)
+  * Do not bind publish, bind and unbind methods to binding instances
+  * Register default binder through fallbackBinder option instead of * binder
+  * Integrate sightglass into tinybind code base
+  * Remove view.select method 
+  * Rename binding property args to arg and changed type from array to string
+  * The rv-* attributes are removed after binding
+  * Changes how observer is registered / notified. Instead of passing a function (sync), pass an object with a sync method
+
 
 ## Building and Testing
 
@@ -53,7 +56,7 @@ $ npm install
 
 #### Building
 
-Rivets.js uses [webpack](http://gulpjs.com/) as it's bundling / build tool. Run the following  to compile the source into `dist/`.
+tinybind.js uses rollup as it's bundling / build tool. Run the following  to compile the source into `dist/`.
 
 ```
 $ npm run build
@@ -61,7 +64,7 @@ $ npm run build
 
 #### Testing
 
-Rivets.js uses [mocha](http://visionmedia.github.io/mocha/) as it's testing framework, alongside [should](https://github.com/visionmedia/should.js/) for expectations and [sinon](http://sinonjs.org/) for spies, stubs and mocks. Run the following to run the full test suite.
+tinybind.js uses [mocha](http://visionmedia.github.io/mocha/) as it's testing framework, alongside [should](https://github.com/visionmedia/should.js/) for expectations and [sinon](http://sinonjs.org/) for spies, stubs and mocks. Run the following to run the full test suite.
 
 ```
 $ npm test

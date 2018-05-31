@@ -1,20 +1,17 @@
-You can grab the latest stable release [here](/dist/rivets.min.js) or install using the package manager of your choice. We currently maintain releases on npm, component, jam and bower (recommended).
+You can grab the latest stable release from [github](/dist/rivets.min.js) or install using the package manager of your choice. 
 
 ```bash
-bower install rivets
+npm install tinybind
 ```
 
-Rivets' only hard dependency is [Sightglass](https://github.com/mikeric/sightglass). If you wish to include Sightglass separately, just make sure to include it first.
+Use in a script tag...
 
 ```html
-<script src="bower_components/sightglass/index.js"></script>
-<script src="bower_components/rivets/dist/rivets.min.js"></script>
+<script src="node_modules/tinybind/dist/tinybind.js"></script>
 ```
 
-Alternatively you can just include the bundled distribution if Rivets, which contains both libraries.
+... or import using a bundler like webpack
 
-```html
-<script src="bower_components/rivets/dist/rivets.bundled.min.js"></script>
+```javascript
+import tinybind from 'tinybind'
 ```
-
-*Note that Rivets unconditionally occupies a `rivets` global but CommonJS and AMD module loaders such as [RequireJS](http://requirejs.org/) and [almond](https://github.com/jrburke/almond) are fully supported as well, if that's your thing.*
