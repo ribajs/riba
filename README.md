@@ -2,6 +2,25 @@
 
 tinybind is the espiritual sucessor of Rivets.js, a lightweight data binding and templating system that facilitates building data-driven views. It is agnostic about every aspect of a front-end MV(C|VM|P) stack, making it easy to introduce it into your current workflow or to use it as part of your own custom front-end stack comprised of other libraries.
 
+## Install
+
+```bash
+npm install tinybind
+```
+
+Use in a script tag...
+
+```html
+<script src="node_modules/tinybind/dist/tinybind.js"></script>
+```
+
+... or import using a bundler like webpack
+
+```javascript
+import tinybind from 'tinybind'
+```
+
+
 ## Usage
 
 ```html
