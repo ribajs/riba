@@ -40,7 +40,7 @@ tinybind.bind($('#auction'), {auction: auction})
 
 ## Getting Started and Documentation
 
-Documentation is available on the [homepage](http://tinybindjs.com). Learn by reading the [Guide](http://tinybindjs.com/docs/guide/) and refer to the [Binder Reference](http://tinybindjs.com/docs/reference/) to see what binders are available to you out-of-the-box.
+Documentation is available on the [homepage](http://blikblum.github.io/tinybind/). Learn by reading the [Guide](http://blikblum.github.io/tinybind/docs/guide/) and refer to the [Binder Reference](http://blikblum.github.io/tinybind/docs/reference/) to see what binders are available to you out-of-the-box.
 
 ## Differences from Rivets.js
 

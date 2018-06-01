@@ -1,0 +1,75 @@
+section.intro
+  .container
+    .row
+      .col.col-sm-12
+        p.blurb Lightweight and powerful data binding + templating solution for building modern web applications.
+        p.blurb The espiritual sucessor of <strong>Rivets.js</strong>
+
+        a.btn.btn-clear(href="https://raw.githubusercontent.com/blikblum/tinybind/master/dist/tinybind.js")
+          i &#128229;
+          span Download 0.11.0
+
+section.agnostic
+  .container
+    .row
+      .col.col-sm-12
+        .separator
+          h5 WHY TYNIBIND?
+
+    .row
+      .col.col-md-6
+        h3 Agnostic
+        p tinybind is completely agnostic about your model / controller layer and works well with existing libraries that employ an event-driven model such as <a href="http://backbonejs.org/">Backbone.js</a>. It also ships with built-in support for plain JavaScript objects, so you can use tinybind right away without needing a separate model or observables library.
+
+      .col.col-md-6
+        h3 Configurable
+        p From the event handlers to the template delimiters, the attribute prefixes to the preloading of data. It's all configurable and tunable at the application level as well as locally to individual views.
+
+section.highlights
+  .container
+    .row
+      .col.col-sm-12
+        .separator
+          h5 MOVING PARTS
+
+    .row
+      .col.col-sm-6
+        h3 Binders
+
+        span
+          = '<input rv-'
+          span.highlighted value
+          = '="item.summary">'
+
+        p Describe how your underlying data is reflected in the DOM and vice-versa. All binders create a binding that is automatically updated when model data changes or when the user interacts with the DOM.
+      .col.col-sm-6
+        h3 Formatters
+
+        span
+          = '{ item.due | '
+          span.highlighted fromNow
+          = ' | '
+          span.highlighted duration
+          = ' }'
+
+        p Format dates, numbers, currencies and implement logic gates and conversions. Formatters work in a similar fashion to the Unix pipeline, so you can stack as many of them together as you like.
+    .row
+      .col.col-sm-6
+        h3 Adapters via observer pattern
+
+        span
+          = '<select rv-value="user'
+          span.highlighted= '.'
+          = 'address'
+          span.highlighted= ':'
+          = 'city">'
+
+        p Teach tinybind how to observe and interact with different objects. Use <code>.</code> for plain object proterties and define a <code>:</code> adapter for Backbone model attributes. It's up to you. Adapters take care of observing and reading each key in a keypath.
+
+section.author
+  .container
+    .row
+      .col.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2
+        h2 Authors
+        p Luiz Américo Pereira Câmara
+        p Michael Richards, original author of Rivets.js
