@@ -4,16 +4,16 @@ html
   head
     title tinybind.js — Lightweight and powerful data binding + templating solution for building modern web applications
 
-    link(rel="stylesheet", href="/css/bootstrap.css")
-    link(rel="stylesheet", href="/css/type.css")
-    link(rel="stylesheet", href="/css/screen.css")
-    link(rel="stylesheet", href="/css/syntax.css")
-    link(rel="stylesheet", href="/css/responsive.css")
+    link(rel="stylesheet", href="/#{ rootpath }/css/bootstrap.css")
+    link(rel="stylesheet", href="/#{ rootpath }/css/type.css")
+    link(rel="stylesheet", href="/#{ rootpath }/css/screen.css")
+    link(rel="stylesheet", href="/#{ rootpath }/css/syntax.css")
+    link(rel="stylesheet", href="/#{ rootpath }/css/responsive.css")
 
-    script(src="/js/jquery.js")
-    script(src="/js/bootstrap.min.js")
-    script(src="/js/highlight.js")
-    script(src="/js/app.js")
+    script(src="/#{ rootpath }/js/jquery.js")
+    script(src="/#{ rootpath }/js/bootstrap.min.js")
+    script(src="/#{ rootpath }/js/highlight.js")
+    script(src="/#{ rootpath }/js/app.js")
 
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     meta(http-equiv="Content-Type" content="text/html;charset=utf-8")
@@ -24,16 +24,16 @@ html
         .row
           .col.col-xs-6
             h3.logotype
-              a(href="/") tinybind
+              a(href="/#{ rootpath }/") tinybind
 
           .col.col-xs-6.right.visible-xs
             i#hamburger &#9776;
           .col.col-sm-6.col-xs-12.right.hidden-xs#menu
             ul.list-unstyled
               li
-                a(href="/docs/guide") Guide
+                a(href="/#{ rootpath }/docs/guide") Guide
               li
-                a(href="/docs/reference") Binder Reference
+                a(href="/#{ rootpath }/docs/reference") Binder Reference
               li
                 a(href="https://github.com/blikblum/tinybind") GitHub
 
