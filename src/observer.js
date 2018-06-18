@@ -9,66 +9,66 @@ function error(message) {
   throw new Error('[Observer] ' + message)
 }
 
-var adapters
-var interfaces
-var rootInterface
+var adapters;
+var interfaces;
+var rootInterface;
 
 // Constructs a new keypath observer and kicks things off.
 function Observer(obj, keypath, callback) {
-  this.keypath = keypath
-  this.callback = callback
-  this.objectPath = []
-  this.parse()
-  this.obj = this.getRootObject(obj)
+  this.keypath = keypath;
+  this.callback = callback;
+  this.objectPath = [];
+  this.parse();
+  this.obj = this.getRootObject(obj);
 
   if (isObject(this.target = this.realize())) {
-    this.set(true, this.key, this.target, this.callback)
+    this.set(true, this.key, this.target, this.callback);
   }
 }
 
 Observer.updateOptions = function(options) {
-  adapters = options.adapters
-  interfaces = Object.keys(adapters)
-  rootInterface = options.rootInterface
+  adapters = options.adapters;
+  interfaces = Object.keys(adapters);
+  rootInterface = options.rootInterface;
 }
 
 // Tokenizes the provided keypath string into interface + path tokens for the
 // observer to work with.
 Observer.tokenize = function(keypath, root) {
   var tokens = []
-  var current = {i: root, path: ''}
-  var index, chr
+  var current = {i: root, path: ''};
+  var index, chr;
 
   for (index = 0; index < keypath.length; index++) {
-    chr = keypath.charAt(index)
+    chr = keypath.charAt(index);
 
     if (!!~interfaces.indexOf(chr)) {
       tokens.push(current)
-      current = {i: chr, path: ''}
+      current = {i: chr, path: ''};
     } else {
-      current.path += chr
+      current.path += chr;
     }
   }
 
-  tokens.push(current)
-  return tokens
+  tokens.push(current);
+  return tokens;
 }
 
 // Parses the keypath using the interfaces defined on the view. Sets variables
 // for the tokenized keypath as well as the end key.
 Observer.prototype.parse = function() {
-  var path, root
+  var path, root;
 
   if (!interfaces.length) {
-    error('Must define at least one adapter interface.')
+    error('Must define at least one adapter interface.');
   }
 
   if (!!~interfaces.indexOf(this.keypath[0])) {
-    root = this.keypath[0]
-    path = this.keypath.substr(1)
+    root = this.keypath[0];
+    path = this.keypath.substr(1);
   } else {
-    root = rootInterface
-    path = this.keypath
+    root = rootInterface;
+    path = this.keypath;
   }
 
   this.tokens = Observer.tokenize(path, root)

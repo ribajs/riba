@@ -4,31 +4,31 @@ describe("tinybind.binders", function() {
   beforeEach(function() {
     context = {
       publish: function() {}
-    }
+    };
   });
 
   describe("value", function() {
     var el;
 
     beforeEach(function() {
-      el = document.createElement('input')
+      el = document.createElement('input');
     });
 
     it("unbinds the same bound function", function() {
       var boundFn;
 
       sinon.stub(el, 'addEventListener', function(event, fn) {
-        boundFn = fn
+        boundFn = fn;
       });
 
       tinybind.binders.value.bind.call(context, el);
 
       sinon.stub(el, 'removeEventListener', function(event, fn) {
-        fn.should.equal(boundFn)
+        fn.should.equal(boundFn);
       });
 
-      tinybind.binders.value.unbind.call(context, el)
-    })
+      tinybind.binders.value.unbind.call(context, el);
+    });
   });
 
   describe("each-*", function() {
@@ -91,14 +91,14 @@ describe("tinybind.binders", function() {
       // one child for each element in the model plus 1 for the comment placeholder
       Should(fragment.childNodes.length).be.exactly(model.items.length + 1);
       [].forEach.call(fragment.childNodes, function (itemEl, index) {
-        itemEl._key = index
+        itemEl._key = index;
       });
 
       model.items.pop();
       Should(model.items.length).be.exactly(originalLength - 1);
       Should(fragment.childNodes.length).be.exactly(model.items.length + 1);
       Should(fragment.childNodes[1]._key).be.exactly(1);
-      Should(fragment.childNodes[2]._key).be.exactly(2)
+      Should(fragment.childNodes[2]._key).be.exactly(2);
     });
 
     it("lets you shift an item", function() {
@@ -108,14 +108,14 @@ describe("tinybind.binders", function() {
       // one child for each element in the model plus 1 for the comment placeholder
       Should(fragment.childNodes.length).be.exactly(model.items.length + 1);
       [].forEach.call(fragment.childNodes, function (itemEl, index) {
-        itemEl._key = index
+        itemEl._key = index;
       });
 
       model.items.shift();
       Should(model.items.length).be.exactly(originalLength - 1);
       Should(fragment.childNodes.length).be.exactly(model.items.length + 1);
       Should(fragment.childNodes[1]._key).be.exactly(2);
-      Should(fragment.childNodes[2]._key).be.exactly(3)
+      Should(fragment.childNodes[2]._key).be.exactly(3);
     });
 
     it("lets you splice an item", function() {
@@ -125,7 +125,7 @@ describe("tinybind.binders", function() {
       // one child for each element in the model plus 1 for the comment placeholder
       Should(fragment.childNodes.length).be.exactly(model.items.length + 1);
       [].forEach.call(fragment.childNodes, function (itemEl, index) {
-        itemEl._key = index
+        itemEl._key = index;
       });
 
       model.items.splice(1, 1, {val: 'x'}, {val: 'y'});
@@ -337,7 +337,7 @@ describe("tinybind.binders", function() {
       (function(){
         model.scope.error = {};
       }).should.not.throw();
-    })
+    });
   });
  
   describe("Custom binder with no attribute value", function() {
