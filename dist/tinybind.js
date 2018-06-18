@@ -15,6 +15,16 @@
 
   var QUOTED_STR = /^'.*'$|^".*"$/;
 
+  // Test if string is a json string
+  function isJson(str) {
+    try {
+      var val = JSON.parse(str);
+      return val instanceof Array || val instanceof Object ? true : false;
+    } catch (error) {
+      return false;
+    }
+  }
+
   // Parser and tokenizer for getting the type and value from a string.
   function parseType(string) {
     var type = PRIMITIVE;
@@ -22,6 +32,8 @@
 
     if (QUOTED_STR.test(string)) {
       value = string.slice(1, -1);
+    } else if (string === 'true') {
+      value = true;
     } else if (string === 'true') {
       value = true;
     } else if (string === 'false') {
@@ -32,6 +44,8 @@
       value = undefined;
     } else if (!isNaN(string)) {
       value = Number(string);
+    } else if (isJson(string)) {
+      value = JSON.parse(string);
     } else {
       type = KEYPATH;
     }
@@ -63,7 +77,7 @@
 
         break;
       } else {
-        tokens || (tokens = []);
+        tokens = tokens || [];
         if (index > 0 && lastIndex < index) {
           tokens.push({
             type: TEXT,
@@ -104,7 +118,7 @@
     return tokens;
   }
 
-  var tinybind$1 = {
+  var tinybind = {
     // Global binders.
     binders: {},
 
@@ -854,7 +868,7 @@
     var block = false;
 
     if (node.nodeType === 3) {
-      var tokens = parseTemplate(node.data, tinybind$1.templateDelimiters);
+      var tokens = parseTemplate(node.data, tinybind.templateDelimiters);
 
       if (tokens) {
         for (var i = 0; i < tokens.length; i++) {
@@ -938,7 +952,7 @@
     };
 
     View.prototype.traverse = function traverse(node) {
-      var bindingPrefix = tinybind$1._fullPrefix;
+      var bindingPrefix = tinybind._fullPrefix;
       var block = node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE';
       var attributes = node.attributes;
       var bindInfos = [];
@@ -964,7 +978,7 @@
           }
 
           if (!binder) {
-            binder = tinybind$1.fallbackBinder;
+            binder = tinybind.fallbackBinder;
           }
 
           if (binder.block) {
@@ -1411,7 +1425,7 @@
     'class-*': function _class(el, value) {
       var elClass = ' ' + el.className + ' ';
 
-      if (!value === elClass.indexOf(' ' + this.arg + ' ') > -1) {
+      if (value !== elClass.indexOf(' ' + this.arg + ' ') > -1) {
         if (value) {
           el.className = el.className + ' ' + this.arg;
         } else {
@@ -1551,7 +1565,8 @@
       },
 
       routine: function routine(el, value) {
-        if (!!value !== this.attached) {
+        value = !!value;
+        if (value !== this.attached) {
           if (value) {
 
             if (!this.nested) {
@@ -1578,11 +1593,11 @@
 
   // Returns the public interface.
 
-  tinybind$1.binders = binders;
-  tinybind$1.adapters['.'] = adapter;
+  tinybind.binders = binders;
+  tinybind.adapters['.'] = adapter;
 
   // Binds some data to a template / element. Returns a tinybind.View instance.
-  tinybind$1.bind = function (el, models, options) {
+  tinybind.bind = function (el, models, options) {
     var viewOptions = {};
     models = models || {};
     options = options || {};
@@ -1596,16 +1611,16 @@
         });
       }
 
-      Object.keys(tinybind$1[extensionType]).forEach(function (key) {
+      Object.keys(tinybind[extensionType]).forEach(function (key) {
         if (!viewOptions[extensionType][key]) {
-          viewOptions[extensionType][key] = tinybind$1[extensionType][key];
+          viewOptions[extensionType][key] = tinybind[extensionType][key];
         }
       });
     });
 
     OPTIONS.forEach(function (option) {
       var value = options[option];
-      viewOptions[option] = value != null ? value : tinybind$1[option];
+      viewOptions[option] = value != null ? value : tinybind[option];
     });
 
     viewOptions.starBinders = Object.keys(viewOptions.binders).filter(function (key) {
@@ -1621,26 +1636,26 @@
 
   // Initializes a new instance of a component on the specified element and
   // returns a tinybind.View instance.		
-  tinybind$1.init = function (component, el) {
+  tinybind.init = function (component, el) {
     var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
     if (!el) {
       el = document.createElement('div');
     }
 
-    component = tinybind$1.components[component];
-    el.innerHTML = component.template.call(tinybind$1, el);
-    var scope = component.initialize.call(tinybind$1, el, data);
+    component = tinybind.components[component];
+    el.innerHTML = component.template.call(tinybind, el);
+    var scope = component.initialize.call(tinybind, el, data);
 
-    var view = tinybind$1.bind(el, scope);
+    var view = tinybind.bind(el, scope);
     view.bind();
     return view;
   };
 
-  tinybind$1.formatters.negate = tinybind$1.formatters.not = function (value) {
+  tinybind.formatters.negate = tinybind.formatters.not = function (value) {
     return !value;
   };
 
-  return tinybind$1;
+  return tinybind;
 
 })));

@@ -72,7 +72,7 @@ const binders = {
       let indexProp = el.getAttribute('index-property') || '$index';
 
       collection.forEach((model, index) => {
-        let data = {$parent: this.view.models}
+        let data = {$parent: this.view.models};
         data[indexProp] = index;
         data[modelName] = model;
         let view = this.iterated[index];
@@ -82,17 +82,17 @@ const binders = {
           let previous = this.marker;
 
           if (this.iterated.length) {
-            previous = this.iterated[this.iterated.length - 1].els[0]
+            previous = this.iterated[this.iterated.length - 1].els[0];
           }
 
           view = createView(this, data, previous.nextSibling);
-          this.iterated.push(view)
+          this.iterated.push(view);
         } else {
           if (view.models[modelName] !== model) {
             // search for a view that matches the model
             let matchIndex, nextView;
             for (let nextIndex = index + 1; nextIndex < this.iterated.length; nextIndex++) {
-              nextView = this.iterated[nextIndex]
+              nextView = this.iterated[nextIndex];
               if (nextView.models[modelName] === model) {
                 matchIndex = nextIndex;
                 break;
@@ -102,8 +102,8 @@ const binders = {
               // model is in other position
               // todo: consider avoiding the splice here by setting a flag
               // profile performance before implementing such change
-              this.iterated.splice(matchIndex, 1)
-              this.marker.parentNode.insertBefore(nextView.els[0], view.els[0])
+              this.iterated.splice(matchIndex, 1);
+              this.marker.parentNode.insertBefore(nextView.els[0], view.els[0]);
               nextView.models[indexProp] = index;
             } else {
               //new model
@@ -114,14 +114,14 @@ const binders = {
             view.models[indexProp] = index;
           }
         }
-      })
+      });
 
       if (this.iterated.length > collection.length) {
         times(this.iterated.length - collection.length, () => {
           let view = this.iterated.pop();
           view.unbind();
           this.marker.parentNode.removeChild(view.els[0]);
-        })
+        });
       }
 
       if (el.nodeName === 'OPTION') {
@@ -129,7 +129,7 @@ const binders = {
           if (binding.el === this.marker.parentNode && binding.type === 'value') {
             binding.sync();
           }
-        })
+        });
       }
     },
 
@@ -142,11 +142,11 @@ const binders = {
         if (key !== this.arg) {
           data[key] = models[key];
         }
-      })
+      });
 
       this.iterated.forEach(view => {
         view.update(data);
-      })
+      });
     }
   },
 
@@ -154,7 +154,7 @@ const binders = {
   'class-*': function(el, value) {
     let elClass = ` ${el.className} `;
 
-    if (!value === (elClass.indexOf(` ${this.arg} `) > -1)) {
+    if (value !== (elClass.indexOf(` ${this.arg} `) > -1)) {
       if (value) {
         el.className = `${el.className} ${this.arg}`;
       } else {
@@ -204,20 +204,20 @@ const binders = {
       if (!this.callback) {
         this.callback = function () {
           self.publish();
-        }
+        };
       }
-      el.addEventListener('change', this.callback)
+      el.addEventListener('change', this.callback);
     },
 
     unbind: function(el) {
-      el.removeEventListener('change', this.callback)
+      el.removeEventListener('change', this.callback);
     },
 
     routine: function(el, value) {
       if (el.type === 'radio') {
-        el.checked = getString(el.value) === getString(value)
+        el.checked = getString(el.value) === getString(value);
       } else {
-        el.checked = !!value
+        el.checked = !!value;
       }
     }
   },
@@ -231,38 +231,38 @@ const binders = {
     bind: function(el) {
       this.isRadio = el.tagName === 'INPUT' && el.type === 'radio';
       if (!this.isRadio) {
-        this.event = el.getAttribute('event-name') || (el.tagName === 'SELECT' ? 'change' : 'input')
+        this.event = el.getAttribute('event-name') || (el.tagName === 'SELECT' ? 'change' : 'input');
 
         var self = this;
         if (!this.callback) {
           this.callback = function () {
             self.publish();
-          }
+          };
         }
 
-        el.addEventListener(this.event, this.callback)
+        el.addEventListener(this.event, this.callback);
       }
     },
 
     unbind: function(el) {
       if (!this.isRadio) {
-        el.removeEventListener(this.event, this.callback)
+        el.removeEventListener(this.event, this.callback);
       }
     },
 
     routine: function(el, value) {
       if (this.isRadio) {
-        el.setAttribute('value', value)
+        el.setAttribute('value', value);
       } else {
         if (el.type === 'select-multiple') {
           if (value instanceof Array) {
             for (let i = 0; i < el.length; i++) {
               let option = el[i];
-              option.selected = value.indexOf(option.value) > -1
+              option.selected = value.indexOf(option.value) > -1;
             }
           }
         } else if (getString(value) !== getString(el.value)) {
-          el.value = value != null ? value : ''
+          el.value = value != null ? value : '';
         }
       }
     }
@@ -276,47 +276,48 @@ const binders = {
     bind: function(el) {
       if (!this.marker) {
         this.marker = document.createComment(' tinybind: ' + this.type + ' ' + this.keypath + ' ');
-        this.attached = false
+        this.attached = false;
 
-        el.parentNode.insertBefore(this.marker, el)
-        el.parentNode.removeChild(el)
+        el.parentNode.insertBefore(this.marker, el);
+        el.parentNode.removeChild(el);
       } else if (this.bound === false && this.nested) {
-        this.nested.bind()
+        this.nested.bind();
       }
-      this.bound = true
+      this.bound = true;
     },
 
     unbind: function() {
       if (this.nested) {
-        this.nested.unbind()
-        this.bound = false
+        this.nested.unbind();
+        this.bound = false;
       }
     },
 
     routine: function(el, value) {
-      if (!!value !== this.attached) {
+      value = !!value;
+      if (value !== this.attached) {
         if (value) {
 
           if (!this.nested) {
-            this.nested = new View(el, this.view.models, this.view.options)
-            this.nested.bind()
+            this.nested = new View(el, this.view.models, this.view.options);
+            this.nested.bind();
           }
 
-          this.marker.parentNode.insertBefore(el, this.marker.nextSibling)
-          this.attached = true
+          this.marker.parentNode.insertBefore(el, this.marker.nextSibling);
+          this.attached = true;
         } else {
-          el.parentNode.removeChild(el)
-          this.attached = false
+          el.parentNode.removeChild(el);
+          this.attached = false;
         }
       }
     },
 
     update: function(models) {
       if (this.nested) {
-        this.nested.update(models)
+        this.nested.update(models);
       }
     }
   }
-}
+};
 
-export default binders
+export default binders;

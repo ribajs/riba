@@ -1,5 +1,6 @@
+import tinybind from './tinybind';
 import {EXTENSIONS, OPTIONS} from './constants';
-import {Binding} from './bindings';
+import {Binding} from './binding';
 
 // component view encapsulated as a binding within it's parent view.
 export class ComponentBinding extends Binding {

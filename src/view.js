@@ -1,6 +1,6 @@
 import tinybind from './tinybind';
-import { Binding } from './bindings';
-import { ComponentBinding } from './component-bindings';
+import { Binding } from './binding';
+import { ComponentBinding } from './component-binding';
 import { parseTemplate } from './parsers';
 
 const textBinder = {
