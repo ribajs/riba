@@ -5,18 +5,14 @@ const BINDING = 1;
 
 const QUOTED_STR = /^'.*'$|^".*"$/;
 
-/**
- * Try tp parses a string as json, if it fails it returns the unparsed json string
- */
-export function parseJson(jsonString) {
+// Test if string is a json string
+export function isJson(str) {
   try {
-    const val = JSON.parse(jsonString);
-    if(val instanceof Array || val instanceof Object) {
-      return val;
-    }
+    const val = JSON.parse(str);
+    return (val instanceof Array || val instanceof Object) ? true : false;
   }
   catch (error) {
-    return jsonString;
+    return false;
   }
 }
 
@@ -27,7 +23,8 @@ export function parseType(string) {
 
   if (QUOTED_STR.test(string)) {
     value = string.slice(1, -1);
-    value = parseJson(value);
+  } else if (string === 'true') {
+    value = true;
   } else if (string === 'true') {
     value = true;
   } else if (string === 'false') {
@@ -38,6 +35,8 @@ export function parseType(string) {
     value = undefined;
   } else if (!isNaN(string)) {
     value = Number(string);
+  } else if (isJson(string)) {
+    value = JSON.parse(string);
   } else {
     type = KEYPATH;
   }
