@@ -55,8 +55,11 @@ declare module 'tinybind' {
     function?: boolean
   }
 
+  export type scope = any;
+
   export interface Component {
-    template?: string | (() => string) | (() => HTMLElement)
+    template: string | (() => string) | (() => HTMLElement)
+    initialize: (el: HTMLElement, data: any) => scope;
   }
 
   export interface Binders {

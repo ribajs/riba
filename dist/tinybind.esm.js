@@ -292,7 +292,8 @@ Observer.prototype.realize = function () {
         unreached = index;
       }
 
-      if (prev = this.objectPath[index]) {
+      prev = this.objectPath[index];
+      if (prev) {
         this.set(false, token, prev, this);
       }
     }
@@ -361,7 +362,8 @@ Observer.prototype.unobserve = function () {
 
   for (var index = 0; index < this.tokens.length; index++) {
     token = this.tokens[index];
-    if (obj = this.objectPath[index]) {
+    obj = this.objectPath[index];
+    if (obj) {
       this.set(false, token, obj, this);
     }
   }
