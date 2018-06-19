@@ -314,11 +314,11 @@ describe("tinybind.binders", function() {
       var view = tinybind.bind(fragment, model);
 
       model.data.showNested = true;
-      should(el.contains(nestedEl)).be.true;
+      should(el.contains(nestedEl)).be.true();
       model.data.show = false;
       model.data.showNested = false;
       model.data.show = true;
-      should(el.contains(nestedEl)).be.false;
+      should(el.contains(nestedEl)).be.false();
     });
 
     it("does not throw when root scope is reset", function () {

@@ -77,7 +77,7 @@ describe('tinybind.Binding', function() {
     it('subscribes to the model for changes via the adapter', function() {
       sinon.spy(adapter, 'observe');
       binding.bind();
-      adapter.observe.calledWith(model, 'name', binding).should.be.true;
+      adapter.observe.calledWith(model, 'name', binding).should.be.true();
     });
 
     it("calls the binder's bind method if one exists", function() {
@@ -88,7 +88,7 @@ describe('tinybind.Binding', function() {
       binding.binder.bind = function(){};
       sinon.spy(binding.binder, 'bind');
       binding.bind();
-      binding.binder.bind.called.should.be.true;
+      binding.binder.bind.called.should.be.true();
     });
 
     describe('with preloadData set to true', function() {
@@ -99,7 +99,7 @@ describe('tinybind.Binding', function() {
       it('sets the initial value', function() {
         sinon.spy(binding, 'set');
         binding.bind();
-        binding.set.calledWith('test').should.be.true;
+        binding.set.calledWith('test').should.be.true();
       });
     });
 
@@ -111,8 +111,8 @@ describe('tinybind.Binding', function() {
 
       it('sets up observers on the dependant attributes', function() {
         binding.bind();
-        adapter.observe.calledWith(model, 'fname', binding).should.be.true;
-        adapter.observe.calledWith(model, 'lname', binding).should.be.true;
+        adapter.observe.calledWith(model, 'fname', binding).should.be.true();
+        adapter.observe.calledWith(model, 'lname', binding).should.be.true();
       });
     });
   });
@@ -140,7 +140,7 @@ describe('tinybind.Binding', function() {
       it("calls the binder's unbind method", function() {
         sinon.spy(binding.binder, 'unbind');
         binding.unbind();
-        binding.binder.unbind.called.should.be.true;
+        binding.binder.unbind.called.should.be.true();
       });
     });
   });
@@ -153,7 +153,7 @@ describe('tinybind.Binding', function() {
         routineFn = sinon.spy(binding, 'binder');
       }
       binding.set('sweater');
-      routineFn.calledWith(el, 'sweater').should.be.true;
+      routineFn.calledWith(el, 'sweater').should.be.true();
     });
 
     it('applies any formatters to the value before performing the routine', function() {
@@ -167,7 +167,7 @@ describe('tinybind.Binding', function() {
 
       binding.formatters.push('awesome');
       binding.set('sweater');
-      routineFn.calledWith(el, 'awesome sweater').should.be.true;
+      routineFn.calledWith(el, 'awesome sweater').should.be.true();
     });
 
     it('calls methods with the object as context', function() {
@@ -179,7 +179,7 @@ describe('tinybind.Binding', function() {
 
       binding.model = {foo: 'bar'};
       binding.set(function() { return this.foo; });
-      routineFn.calledWith(el, binding.model.foo).should.be.true;
+      routineFn.calledWith(el, binding.model.foo).should.be.true();
     });
   });
   
@@ -206,7 +206,7 @@ describe('tinybind.Binding', function() {
 
 
       model.employee = new Employee("Peter");
-      routineFn.calledWith(el, "Peter").should.be.true;
+      routineFn.calledWith(el, "Peter").should.be.true();
     });
   });
   
@@ -225,7 +225,7 @@ describe('tinybind.Binding', function() {
 
       sinon.spy(adapter, 'set');
       binding.publish({target: numberInput});
-      adapter.set.calledWith(model, 'num', '42').should.be.true;
+      adapter.set.calledWith(model, 'num', '42').should.be.true();
     });
   });
 
@@ -244,7 +244,7 @@ describe('tinybind.Binding', function() {
 
       binding.formatters.push('awesome');
       binding.set('sweater');
-      routineFn.calledWith(el, 'awesome sweater').should.be.true;
+      routineFn.calledWith(el, 'awesome sweater').should.be.true();
     });
 
     it("should publish the value of a number input", function() {
@@ -263,7 +263,7 @@ describe('tinybind.Binding', function() {
       numberInput.value = 42;
 
       binding.publish({target: numberInput});
-      adapter.set.calledWith(model, 'num', 'awesome 42').should.be.true;
+      adapter.set.calledWith(model, 'num', 'awesome 42').should.be.true();
     });
 
     it("should format a value in both directions", function() {
@@ -282,11 +282,11 @@ describe('tinybind.Binding', function() {
 
       valueInput.value = 'charles';
       binding.publish({target: valueInput});
-      adapter.set.calledWith(model, 'name', 'awesome charles').should.be.true;
+      adapter.set.calledWith(model, 'name', 'awesome charles').should.be.true();
 
       sinon.spy(binding.binder, 'routine');
       binding.set('fred');
-      binding.binder.routine.calledWith(valueInput, 'fred is awesome').should.be.true;
+      binding.binder.routine.calledWith(valueInput, 'fred is awesome').should.be.true();
     });
 
     it("should resolve formatter arguments to their values", function() {
@@ -317,12 +317,12 @@ describe('tinybind.Binding', function() {
 
       valueInput.value = 'bobby';
       binding.publish({target: valueInput});
-      adapter.set.calledWith(model, 'name', 'bobby:50:male').should.be.true;
+      adapter.set.calledWith(model, 'name', 'bobby:50:male').should.be.true();
 
       valueInput.value.should.equal('bobby');
 
       binding.set('andy:50:male');
-      binding.binder.routine.calledWith(valueInput, 'andy').should.be.true;
+      binding.binder.routine.calledWith(valueInput, 'andy').should.be.true();
     });
 
     it("should resolve formatter arguments correctly with multiple formatters", function() {
@@ -368,12 +368,12 @@ describe('tinybind.Binding', function() {
 
       valueInput.value = 'bobby';
       binding.publish({target: valueInput});
-      adapter.set.calledWith(model, 'name', '{[(BOBBY)]}').should.be.true;
+      adapter.set.calledWith(model, 'name', '{[(BOBBY)]}').should.be.true();
 
       valueInput.value.should.equal('bobby');
 
       binding.set('{[(ANDY)]}');
-      binding.binder.routine.calledWith(valueInput, 'andy').should.be.true;
+      binding.binder.routine.calledWith(valueInput, 'andy').should.be.true();
     });
 
 
@@ -389,10 +389,10 @@ describe('tinybind.Binding', function() {
 
       valueInput.value = 'charles';
       binding.publish({target: valueInput});
-      adapter.set.calledWith(model, 'name', 'charles').should.be.true;
+      adapter.set.calledWith(model, 'name', 'charles').should.be.true();
 
       binding.set('fred');
-      binding.binder.routine.calledWith(valueInput, 'fred').should.be.true;
+      binding.binder.routine.calledWith(valueInput, 'fred').should.be.true();
     });
 
     it("should apply read binders left to right, and write binders right to left", function() {
@@ -415,11 +415,11 @@ describe('tinybind.Binding', function() {
       model = binding.model;
 
       binding.set('fred');
-      binding.binder.routine.calledWith(valueInput, 'fred is awesome totally').should.be.true;
+      binding.binder.routine.calledWith(valueInput, 'fred is awesome totally').should.be.true();
 
       valueInput.value = 'fred';
       binding.publish({target: valueInput});
-      adapter.set.calledWith(model, 'name', 'fred totally is awesome').should.be.true;
+      adapter.set.calledWith(model, 'name', 'fred totally is awesome').should.be.true();
     });
 
     it("binders in a chain should be skipped if they're not there", function() {
@@ -443,11 +443,11 @@ describe('tinybind.Binding', function() {
       model = binding.model;
 
       binding.set('fred');
-      binding.binder.routine.calledWith(valueInput, 'fred is awesome totally').should.be.true;
+      binding.binder.routine.calledWith(valueInput, 'fred is awesome totally').should.be.true();
 
       valueInput.value = 'fred';
       binding.publish({target: valueInput});
-      adapter.set.calledWith(model, 'name', 'fred totally is radical').should.be.true;
+      adapter.set.calledWith(model, 'name', 'fred totally is radical').should.be.true();
     });
   });
 

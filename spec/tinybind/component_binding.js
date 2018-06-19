@@ -24,7 +24,7 @@ describe('Component binding', function() {
     componentRoot.setAttribute('rv-test-binder', 'true');
     tinybind.bind(element);
     
-    tinybind.binders['test-binder'].calledOnce.should.be.true;
+    tinybind.binders['test-binder'].calledOnce.should.be.true();
     
     delete tinybind.binders['test-binder'];
   });
@@ -40,7 +40,7 @@ describe('Component binding', function() {
     it('receives element as first argument and attributes as second', function() {
       tinybind.bind(element, locals);
     
-      component.initialize.calledWith(componentRoot, { item: locals.object }).should.be.true;
+      component.initialize.calledWith(componentRoot, { item: locals.object }).should.be.true();
     });
     
     it.skip('receives primitives attributes', function() {
@@ -64,7 +64,7 @@ describe('Component binding', function() {
       componentRoot.setAttribute('type', type);
       tinybind.bind(element, locals);
     
-      component.initialize.calledWith(componentRoot, { item: locals.object, type: type }).should.be.true;
+      component.initialize.calledWith(componentRoot, { item: locals.object, type: type }).should.be.true();
     });
   });
     
