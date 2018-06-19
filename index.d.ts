@@ -1,6 +1,6 @@
 declare module 'tinybind' {
   // TODO: check if these are correct:
-  export interface Options {
+  export interface IOptions {
     // Attribute prefix in templates
     prefix?: string;
 
@@ -22,77 +22,95 @@ declare module 'tinybind' {
     value: () => any
   }
 
-  export interface View extends Options {
+  export type TBlock = boolean;
+
+  export interface View extends IOptions {
     models: Object
-    options: () => Options
+    options: () => IOptions
     build(): void
     bind(): void
-    unbind(): void
-    addBinding(node: HTMLElement, type: Binder<any> | string, declaration: string): Binding
+    unbind(): void;
+    sync(): void;
+    publish(): void;
+    update(models: any): void;
+    buildBinding(node: HTMLElement, type: string, declaration: string, binder: Binder<any>, arg: any): IBinding;
+    traverse(node: HTMLElement): TBlock;
   }
 
-  export interface Binding {
-    view: View
-    unbind: () => void
-    observe: (obj: Object, keypath: string, callback: (newValue: any) => void) => Observer
-    keypath: string
-    arg: string[]
-    eventHandler: (handler: (event: Event) => void) => () => any
-    binderData: any
+  export interface IBinding {
+    view: View;
+    unbind: () => void;
+    observe: (obj: Object, keypath: string, callback: (newValue: any) => void) => Observer;
+    keypath: string;
+    arg: string[];
+    eventHandler: (handler: (event: Event) => void) => () => any;
+    binderData: any;
   }
 
-  export interface FunctionalBinder<ValueType> {
-    (this: Binding, element: HTMLElement, value: ValueType): void
+  export interface IOneWayBinder<ValueType> {
+    (this: IBinding, element: HTMLElement, value: ValueType): void;
   }
 
-  export interface Binder<ValueType> {
-    routine?: (this: Binding, element: HTMLElement, value: ValueType) => void
-    bind?: (this: Binding, element: HTMLElement) => void
-    unbind?: (this: Binding, element: HTMLElement) => void
-    update?: (this: Binding, model: ValueType) => void
-    getValue?: (this: Binding, element: HTMLElement) => void
-    block?: boolean
-    function?: boolean
+  export interface ITwoWayBinder<ValueType> {
+    routine?: (this: IBinding, element: HTMLElement, value: ValueType) => void;
+    bind?: (this: IBinding, element: HTMLElement) => void;
+    unbind?: (this: IBinding, element: HTMLElement) => void;
+    update?: (this: IBinding, model: ValueType) => void;
+    getValue?: (this: IBinding, element: HTMLElement) => void;
+    block?: boolean;
+    function?: boolean;
   }
+
+  export type Binder<ValueType> = IOneWayBinder<ValueType> | ITwoWayBinder<ValueType>
 
   export type scope = any;
 
-  export interface Component {
-    template: string | (() => string) | (() => HTMLElement)
+  export interface IComponent {
+    template: string | (() => string) | (() => HTMLElement);
     initialize: (el: HTMLElement, data: any) => scope;
   }
 
-  export interface Binders {
-    [name: string]: Binder<any> | FunctionalBinder<any>
+  export interface IComponents {
+    [name: string]: IComponent;
   }
 
-  export interface Tinybind extends Options{
+  export interface IBinders {
+    [name: string]: Binder<any>;
+  }
+
+  export interface IFormatter {
+    (val: any, ...args: any[]): any;
+  }
+
+  export interface IFormatters {
+    [name: string]: IFormatter;
+  }
+
+  export interface Tinybind extends IOptions {
     // Global binders.
-    binders: Binders;
+    binders: IBinders;
 
     // Global components.
-    components: any;
+    components: IComponents;
 
     // Global formatters.
-    formatters: any;
+    formatters: IFormatters;
 
     // Global sightglass adapters.
     adapters: any;
 
     handler(context: any, ev: Event, biding: any): void;
 
-    configure(options?: Options): void;
+    configure(options?: IOptions): void;
 
-    // bind(element: HTMLElement, models: Object, options?: Object): View;
-    // bind(element: JQuery, models: Object, options?: Object): View;
     bind(element: HTMLElement | Array<HTMLElement> | JQuery<HTMLElement>, models: any, options?: any): View;
 
     _: {
-      sightglass: any
+      sightglass: any;
     }
   }
 
-  const tinybind: Tinybind
+  const tinybind: Tinybind;
 
-  export default tinybind
+  export default tinybind;
 }
