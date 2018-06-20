@@ -1,11 +1,9 @@
-(function () {
-  'use strict';
-}());
+'use strict'
 
-import rollup from 'rollup';
-import {uglify} from 'rollup-plugin-uglify';
-import babel from 'rollup-plugin-babel';
-import pkg from '../package.json';
+const rollup = require('rollup')
+const {uglify} = require('rollup-plugin-uglify')
+const babel = require('rollup-plugin-babel')
+const pkg = require('../package.json')
 
 const isDev = process.argv.indexOf('--development') !== -1;
 

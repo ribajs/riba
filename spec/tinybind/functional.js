@@ -1,5 +1,5 @@
 describe('Functional', function() {
-  var data, bindData, el, input, originalPrefix, adapter;
+  let data, bindData, el, input, originalPrefix, adapter;
 
   beforeEach(function() {
     originalPrefix = tinybind.prefix;

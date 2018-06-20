@@ -73,9 +73,7 @@ export default class View {
 
   buildBinding(node, type, declaration, binder, arg) {
     let pipes = declaration.match(DECLARATION_SPLIT).map(trimStr);
-
     let keypath = pipes.shift();
-
     this.bindings.push(new Binding(this, node, type, keypath, binder, arg, pipes));
   }
 
@@ -103,6 +101,7 @@ export default class View {
 
     for (let i = 0, len = attributes.length; i < len; i++) {
       let attribute = attributes[i];
+      // if attribute starts with the binding prefix. E.g. rv
       if (attribute.name.indexOf(bindingPrefix) === 0) {
         type = attribute.name.slice(bindingPrefix.length);
         binder = this.options.binders[type];

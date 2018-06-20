@@ -63,11 +63,11 @@ declare module 'tinybind' {
 
   export type Binder<ValueType> = IOneWayBinder<ValueType> | ITwoWayBinder<ValueType>
 
-  export type scope = any;
+  export type Scope = any;
 
   export interface IComponent {
     template: string | (() => string) | (() => HTMLElement);
-    initialize: (el: HTMLElement, data: any) => scope;
+    initialize: (el: HTMLElement, data: any) => Scope;
   }
 
   export interface IComponents {

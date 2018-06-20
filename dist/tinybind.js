@@ -8,12 +8,18 @@
 
   var EXTENSIONS = ['binders', 'formatters', 'components', 'adapters'];
 
+  /**
+   * Used also in parsers.parseType
+   * TODO outsource
+   */
   var PRIMITIVE = 0;
   var KEYPATH = 1;
+
+  var QUOTED_STR = /^'.*'$|^".*"$/; // regex to test if string is wrapped in " or '
+
+  // Used in parsers.parseTemplate
   var TEXT = 0;
   var BINDING = 1;
-
-  var QUOTED_STR = /^'.*'$|^".*"$/;
 
   // Test if string is a json string
   function isJson(str) {
@@ -29,11 +35,8 @@
   function parseType(string) {
     var type = PRIMITIVE;
     var value = string;
-
     if (QUOTED_STR.test(string)) {
       value = string.slice(1, -1);
-    } else if (string === 'true') {
-      value = true;
     } else if (string === 'true') {
       value = true;
     } else if (string === 'false') {
@@ -46,10 +49,12 @@
       value = Number(string);
     } else if (isJson(string)) {
       value = JSON.parse(string);
+      // testme
+      // } else if (value === true) {
+      // } else if (value === false) {
     } else {
       type = KEYPATH;
     }
-
     return { type: type, value: value };
   }
 
@@ -451,6 +456,13 @@
   var FORMATTER_ARGS = /[^\s']+|'([^']|'[^\s])*'|"([^"]|"[^\s])*"/g;
   var FORMATTER_SPLIT = /\s+/;
 
+  /**
+   * Used also in parsers.parseType
+   * TODO outsource
+   */
+  var PRIMITIVE$1 = 0;
+  var KEYPATH$1 = 1;
+
   // A single binding between a model attribute and a DOM element.
   var Binding = function () {
     // All information about the binding is passed into the constructor; the
@@ -480,12 +492,13 @@
     Binding.prototype.parseTarget = function parseTarget() {
       if (this.keypath) {
         var token = parseType(this.keypath);
-
-        if (token.type === 0) {
+        if (token.type === PRIMITIVE$1) {
           this.value = token.value;
-        } else {
+        } else if (token.type === KEYPATH$1) {
           this.observer = this.observe(this.view.models, this.keypath);
           this.model = this.observer.target;
+        } else {
+          throw new Error('Unknown type in token', token);
         }
       } else {
         this.value = undefined;
@@ -499,9 +512,9 @@
         var type = _ref.type,
             value = _ref.value;
 
-        if (type === 0) {
+        if (type === PRIMITIVE$1) {
           return value;
-        } else {
+        } else if (type === KEYPATH$1) {
           if (!_this.formatterObservers[formatterIndex]) {
             _this.formatterObservers[formatterIndex] = {};
           }
@@ -514,6 +527,8 @@
           }
 
           return observer.value();
+        } else {
+          throw new Error('Unknown type', type, value);
         }
       });
     };
@@ -678,6 +693,13 @@
     return Binding;
   }();
 
+  /**
+   * Used also in parsers.parseType
+   * TODO outsource
+   */
+  var PRIMITIVE$2 = 0;
+  var KEYPATH$2 = 1;
+
   // component view encapsulated as a binding within it's parent view.
   var ComponentBinding = function (_Binding) {
     inherits(ComponentBinding, _Binding);
@@ -700,16 +722,24 @@
 
       var bindingPrefix = tinybind._fullPrefix;
 
+      // parse component attributes
       for (var i = 0, len = el.attributes.length; i < len; i++) {
         var attribute = el.attributes[i];
+
+        // if attribute starts not with binding prefix. E.g. rv-
         if (attribute.name.indexOf(bindingPrefix) !== 0) {
           var propertyName = _this.camelCase(attribute.name);
+          var token = parseType(attribute.value);
           var stat = _this.component.static;
 
           if (stat && stat.indexOf(propertyName) > -1) {
             _this.static[propertyName] = attribute.value;
-          } else {
+          } else if (token.type === PRIMITIVE$2) {
+            _this.static[propertyName] = token.value;
+          } else if (token.type === KEYPATH$2) {
             _this.observers[propertyName] = attribute.value;
+          } else {
+            throw new Error('can\'t parse component attribute', attribute, token);
           }
         }
       }
@@ -930,9 +960,7 @@
 
     View.prototype.buildBinding = function buildBinding(node, type, declaration, binder, arg) {
       var pipes = declaration.match(DECLARATION_SPLIT).map(trimStr);
-
       var keypath = pipes.shift();
-
       this.bindings.push(new Binding(this, node, type, keypath, binder, arg, pipes));
     };
 
@@ -963,6 +991,7 @@
 
       for (var i = 0, len = attributes.length; i < len; i++) {
         var attribute = attributes[i];
+        // if attribute starts with the binding prefix. E.g. rv
         if (attribute.name.indexOf(bindingPrefix) === 0) {
           type = attribute.name.slice(bindingPrefix.length);
           binder = this.options.binders[type];
@@ -1661,4 +1690,3 @@
   return tinybind;
 
 })));
-//# sourceMappingURL=tinybind.js.map

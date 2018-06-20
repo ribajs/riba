@@ -3,7 +3,7 @@ describe('Component binding', function() {
     
   beforeEach(function() {
     element = document.createElement('div');
-    element.innerHTML = '<test></test>';
+    element.innerHTML = `<test></test>`;
     componentRoot = element.firstChild;
     scope = { name: 'Tinybind' };
     component = tinybind.components.test = {
@@ -43,8 +43,8 @@ describe('Component binding', function() {
       component.initialize.calledWith(componentRoot, { item: locals.object }).should.be.true();
     });
     
-    it.skip('receives primitives attributes', function() {
-      //need to rework how bind primitive values
+    it('receives primitives attributes', function() {
+      // need to rework how bind primitive values
       componentRoot.setAttribute('primitivestring', "'value'");
       componentRoot.setAttribute('primitivenumber', "42");
       componentRoot.setAttribute('primitiveboolean', "true");

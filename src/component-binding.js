@@ -1,6 +1,14 @@
 import tinybind from './tinybind';
+import {parseType} from './parsers';
 import {EXTENSIONS, OPTIONS} from './constants';
 import {Binding} from './binding';
+
+/**
+ * Used also in parsers.parseType
+ * TODO outsource
+ */
+const PRIMITIVE = 0;
+const KEYPATH = 1;
 
 // component view encapsulated as a binding within it's parent view.
 export class ComponentBinding extends Binding {
@@ -19,16 +27,24 @@ export class ComponentBinding extends Binding {
     
     let bindingPrefix = tinybind._fullPrefix;
     
+    // parse component attributes
     for (let i = 0, len = el.attributes.length; i < len; i++) {
       let attribute = el.attributes[i];
+
+      // if attribute starts not with binding prefix. E.g. rv-
       if (attribute.name.indexOf(bindingPrefix) !== 0) {
         let propertyName = this.camelCase(attribute.name);
+        let token = parseType(attribute.value);
         let stat = this.component.static;
     
         if (stat && stat.indexOf(propertyName) > -1) {
           this.static[propertyName] = attribute.value;
-        } else {
+        } else if(token.type === PRIMITIVE) {
+          this.static[propertyName] = token.value;
+        } else if(token.type === KEYPATH) {
           this.observers[propertyName] = attribute.value;
+        } else {
+          throw new Error('can\'t parse component attribute', attribute, token);
         }
       }
     }

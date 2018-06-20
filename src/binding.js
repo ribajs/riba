@@ -22,6 +22,13 @@ function getInputValue(el) {
 const FORMATTER_ARGS =  /[^\s']+|'([^']|'[^\s])*'|"([^"]|"[^\s])*"/g;
 const FORMATTER_SPLIT = /\s+/;
 
+/**
+ * Used also in parsers.parseType
+ * TODO outsource
+ */
+const PRIMITIVE = 0;
+const KEYPATH = 1;
+
 // A single binding between a model attribute and a DOM element.
 export class Binding {
   // All information about the binding is passed into the constructor; the
@@ -47,12 +54,13 @@ export class Binding {
   parseTarget() {
     if (this.keypath) {
       let token = parseType(this.keypath);
-
-      if (token.type === 0) {
+      if (token.type === PRIMITIVE) {
         this.value = token.value;
-      } else {
+      } else if(token.type === KEYPATH){
         this.observer = this.observe(this.view.models, this.keypath);
         this.model = this.observer.target;
+      } else {
+        throw new Error('Unknown type in token', token);
       }
     } else {
       this.value = undefined;
@@ -63,9 +71,9 @@ export class Binding {
     return args
       .map(parseType)
       .map(({type, value}, ai) => {
-        if (type === 0) {
+        if (type === PRIMITIVE) {
           return value;
-        } else {
+        } else if (type === KEYPATH) {
           if (!this.formatterObservers[formatterIndex]) {
             this.formatterObservers[formatterIndex] = {};
           }
@@ -78,6 +86,8 @@ export class Binding {
           }
 
           return observer.value();
+        } else {
+          throw new Error('Unknown type', type, value);
         }
       });
   }

@@ -1,9 +1,15 @@
+/**
+ * Used also in parsers.parseType
+ * TODO outsource
+ */
 const PRIMITIVE = 0;
 const KEYPATH = 1;
+
+const QUOTED_STR = /^'.*'$|^".*"$/; // regex to test if string is wrapped in " or '
+
+// Used in parsers.parseTemplate
 const TEXT = 0;
 const BINDING = 1;
-
-const QUOTED_STR = /^'.*'$|^".*"$/;
 
 // Test if string is a json string
 export function isJson(str) {
@@ -20,11 +26,8 @@ export function isJson(str) {
 export function parseType(string) {
   let type = PRIMITIVE;
   let value = string;
-
   if (QUOTED_STR.test(string)) {
     value = string.slice(1, -1);
-  } else if (string === 'true') {
-    value = true;
   } else if (string === 'true') {
     value = true;
   } else if (string === 'false') {
@@ -40,7 +43,6 @@ export function parseType(string) {
   } else {
     type = KEYPATH;
   }
-
   return {type: type, value: value};
 }
 
