@@ -1,9 +1,9 @@
 'use strict'
 
-const rollup = require('rollup')
-const {uglify} = require('rollup-plugin-uglify')
-const babel = require('rollup-plugin-babel')
-const pkg = require('../package.json')
+const rollup = require('rollup');
+const {uglify} = require('rollup-plugin-uglify');
+const babel = require('rollup-plugin-babel');
+const pkg = require('../package.json');
 
 const isDev = process.argv.indexOf('--development') !== -1;
 

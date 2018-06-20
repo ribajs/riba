@@ -43,9 +43,6 @@ function parseType(string) {
     value = Number(string);
   } else if (isJson(string)) {
     value = JSON.parse(string);
-    // testme
-    // } else if (value === true) {
-    // } else if (value === false) {
   } else {
     type = KEYPATH;
   }
