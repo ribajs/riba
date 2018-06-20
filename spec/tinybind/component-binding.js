@@ -1,4 +1,4 @@
-describe('Component binding', function() {
+describe('tinybind.ComponentBinding', function() {
   var scope, element, component, componentRoot;
     
   beforeEach(function() {
