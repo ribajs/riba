@@ -1,3 +1,5 @@
+/// <reference types="jquery" />
+
 declare module 'tinybind' {
   // TODO: check if these are correct:
   export interface IOptions {

@@ -2,7 +2,7 @@
 
 #### Changes
 
-- components feature restored 
+- components feature restored
 - cleanups
 - Updated dependencies
 
