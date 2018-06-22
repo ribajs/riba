@@ -69,6 +69,12 @@ const binders = {
     routine: function(el, collection) {
       let modelName = this.arg;
       collection = collection || [];
+
+      // TODO support object keys to iterate over
+      if(!Array.isArray(collection)) {
+        throw new Error('each-' + modelName + ' needs an arry to iterate over, but it is', collection);
+      }
+
       let indexProp = el.getAttribute('index-property') || '$index';
 
       collection.forEach((model, index) => {

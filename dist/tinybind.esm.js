@@ -780,7 +780,7 @@ var ComponentBinding = function (_Binding) {
 
   ComponentBinding.prototype.camelCase = function camelCase(string) {
     return string.replace(/-([a-z])/g, function (grouped) {
-      grouped[1].toUpperCase();
+      return grouped[1].toUpperCase();
     });
   };
 
@@ -1359,6 +1359,12 @@ var binders = {
 
       var modelName = this.arg;
       collection = collection || [];
+
+      // TODO support object keys to iterate over
+      if (!Array.isArray(collection)) {
+        throw new Error('each-' + modelName + ' needs an arry to iterate over, but it is', collection);
+      }
+
       var indexProp = el.getAttribute('index-property') || '$index';
 
       collection.forEach(function (model, index) {
