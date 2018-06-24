@@ -1,3 +1,4 @@
+
 // Check if a value is an object than can be observed.
 function isObject(obj) {
   return typeof obj === 'object' && obj !== null
@@ -5,55 +6,50 @@ function isObject(obj) {
 
 // Error thrower.
 function error(message) {
-  throw new Error('[sightglass] ' + message)
+  throw new Error('[Observer] ' + message)
 }
 
-// Batteries not included.
+// TODO
 let adapters;
+let interfaces;
 let rootInterface;
 
-/**
- * Constructs a new keypath observer and kicks things off.
- */
 export class Observer {
-
-  options = {
-    adapters: {},
-    root: undefined
-  }
-  obj: any;
-  keypath: string;
-  callback: () => void;
-  objectPath = []
-
-  target: any;
-  key: any;
-  
-  constructor(obj, keypath, callback, options) {
-    this.options = options || {}
-    this.options.adapters = this.options.adapters || adapters;
-    this.obj = obj
-    this.keypath = keypath
-    this.callback = callback
-    this.objectPath = []
-    this.update = this.update.bind(this)
-    this.parse()
-  
-    if (isObject(this.target = this.realize())) {
+  keypath;
+  callback;
+  objectPath;
+  obj;
+  target;
+  key;
+  // Constructs a new keypath observer and kicks things off.
+  constructor(obj, keypath, callback) {
+    this.keypath = keypath;
+    this.callback = callback;
+    this.objectPath = [];
+    this.parse();
+    this.obj = this.getRootObject(obj);
+    this.target = this.realize();
+    if (isObject(this.target)) {
       this.set(true, this.key, this.target, this.callback)
     }
   }
 
+  static updateOptions = function(options) {
+    adapters = options.adapters;
+    interfaces = Object.keys(adapters);
+    rootInterface = options.rootInterface;
+  }
+  
   // Tokenizes the provided keypath string into interface + path tokens for the
   // observer to work with.
-  static tokenize = function(keypath, interfaces, root) {
+  static tokenize = function(keypath, root) {
     var tokens: any[] = []
     var current = {i: root, path: ''}
     var index, chr
-
+  
     for (index = 0; index < keypath.length; index++) {
       chr = keypath.charAt(index)
-
+  
       if (!!~interfaces.indexOf(chr)) {
         tokens.push(current)
         current = {i: chr, path: ''}
@@ -61,104 +57,95 @@ export class Observer {
         current.path += chr
       }
     }
-
+  
     tokens.push(current)
     return tokens
   }
-
-  static updateOptions = function(options) {
-    adapters = options.adapters;
-    console.warn('updateOptions', options);
-    // TODO
-    // interfaces = Object.keys(adapters)
-    rootInterface = options.rootInterface;
-  }
-
+  
   // Parses the keypath using the interfaces defined on the view. Sets variables
   // for the tokenized keypath as well as the end key.
   parse = function() {
-    var interfaces = this.interfaces()
-    var root, path
-
+    var path, root
+  
     if (!interfaces.length) {
-      error('Must define at least one adapter interface. ' + JSON.stringify(interfaces))
+      error('Must define at least one adapter interface.')
     }
-
+  
     if (!!~interfaces.indexOf(this.keypath[0])) {
       root = this.keypath[0]
       path = this.keypath.substr(1)
     } else {
-      if (typeof (root = this.options.root || rootInterface) === 'undefined') {
-        error('Must define a default root adapter.')
-      }
-
+      root = rootInterface
       path = this.keypath
     }
-
-    this.tokens = Observer.tokenize(path, interfaces, root)
+  
+    this.tokens = Observer.tokenize(path, root)
     this.key = this.tokens.pop()
   }
-
+  
   // Realizes the full keypath, attaching observers for every key and correcting
   // old observers to any changed objects in the keypath.
   realize = function() {
     var current = this.obj
-    var unreached = false
+    var unreached = -1
     var prev
-
-    this.tokens.forEach(function(token, index) {
+    var token
+  
+    for (let index = 0; index < this.tokens.length; index++) {
+      token = this.tokens[index]
       if (isObject(current)) {
         if (typeof this.objectPath[index] !== 'undefined') {
           if (current !== (prev = this.objectPath[index])) {
-            this.set(false, token, prev, this.update)
-            this.set(true, token, current, this.update)
+            this.set(false, token, prev, this)
+            this.set(true, token, current, this)
             this.objectPath[index] = current
           }
         } else {
-          this.set(true, token, current, this.update)
+          this.set(true, token, current, this)
           this.objectPath[index] = current
         }
-
+  
         current = this.get(token, current)
       } else {
-        if (unreached === false) {
+        if (unreached === -1) {
           unreached = index
         }
-
+  
         if (prev = this.objectPath[index]) {
-          this.set(false, token, prev, this.update)
+          this.set(false, token, prev, this)
         }
       }
-    }, this)
-
-    if (unreached !== false) {
+    }
+  
+    if (unreached !== -1) {
       this.objectPath.splice(unreached)
     }
-
+  
     return current
   }
-
+  
   // Updates the keypath. This is called when any intermediary key is changed.
-  update = function() {
-    var next, oldValue
-
+  sync = function() {
+    var next, oldValue, newValue
+  
     if ((next = this.realize()) !== this.target) {
       if (isObject(this.target)) {
         this.set(false, this.key, this.target, this.callback)
       }
-
+  
       if (isObject(next)) {
         this.set(true, this.key, next, this.callback)
       }
-
+  
       oldValue = this.value()
       this.target = next
-
-      // Always call callback if value is a function. If not a function, call callback only if value changed
-      if (this.value() instanceof Function || this.value() !== oldValue) this.callback()
+      newValue = this.value()
+      if (newValue !== oldValue || newValue instanceof Function) this.callback.sync()
+    } else if (next instanceof Array) {
+      this.callback.sync()
     }
   }
-
+  
   // Reads the current end value of the observed keypath. Returns undefined if
   // the full keypath is unreachable.
   value = function() {
@@ -166,57 +153,63 @@ export class Observer {
       return this.get(this.key, this.target)
     }
   }
-
+  
   // Sets the current end value of the observed keypath. Calling setValue when
   // the full keypath is unreachable is a no-op.
   setValue = function(value) {
     if (isObject(this.target)) {
-      this.adapter(this.key).set(this.target, this.key.path, value)
+      adapters[this.key.i].set(this.target, this.key.path, value)
     }
   }
-
+  
   // Gets the provided key on an object.
   get = function(key, obj) {
-    return this.adapter(key).get(obj, key.path)
+    return adapters[key.i].get(obj, key.path)
   }
-
+  
   // Observes or unobserves a callback on the object using the provided key.
   set = function(active, key, obj, callback) {
     var action = active ? 'observe' : 'unobserve'
-    this.adapter(key)[action](obj, key.path, callback)
+    adapters[key.i][action](obj, key.path, callback)
   }
-
-  // Returns an array of all unique adapter interfaces available.
-  interfaces = function() {
-    var interfaces = Object.keys(this.options.adapters)
-
-    Object.keys(adapters).forEach(function(i) {
-      if (!~interfaces.indexOf(i)) {
-        interfaces.push(i)
-      }
-    })
-
-    return interfaces
-  }
-
-  // Convenience function to grab the adapter for a specific key.
-  adapter = function(key) {
-    return this.options.adapters[key.i] || adapters[key.i]
-  }
-
+  
+  
   // Unobserves the entire keypath.
   unobserve = function() {
     var obj
-
-    this.tokens.forEach(function(token, index) {
+    var token
+  
+    for (let index = 0; index < this.tokens.length; index++) {
+      token = this.tokens[index]
       if (obj = this.objectPath[index]) {
-        this.set(false, token, obj, this.update)
+        this.set(false, token, obj, this)
       }
-    }, this)
-
+    }
+  
     if (isObject(this.target)) {
       this.set(false, this.key, this.target, this.callback)
     }
+  }
+  // traverse the scope chain to find the scope which has the root property
+  // if the property is not found in chain, returns the root scope
+  getRootObject = function (obj) {
+    var rootProp, current;
+    if (!obj.$parent) {
+      return obj;
+    }
+  
+    if (this.tokens.length) {
+      rootProp = this.tokens[0].path
+    } else {
+      rootProp = this.key.path
+    }
+  
+    current = obj;
+    while (current.$parent && (current[rootProp] === undefined)) {
+      current = current.$parent
+    }
+  
+    return current;
   }
 
 }

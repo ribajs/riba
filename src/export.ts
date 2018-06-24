@@ -19,13 +19,11 @@ export interface IViewOptions extends IOptionsParam {
 }
 
 const mergeObject = (target: any, obj: any) => {
-  console.log('mergeObject', target, obj);
   Object.keys(obj).forEach(key => {
     if (!target[key] || target[key] === {}) {
       target[key] = obj[key];
     }
   });
-  console.log('result', target);
   return target; 
 };
 
@@ -34,14 +32,14 @@ const mergeObject = (target: any, obj: any) => {
 tinybind.bind = (el: HTMLElement, models: any, options?: IOptionsParam) => {
   let viewOptions: IViewOptions = {
     // EXTENSIONS
-    binders: {},
-    formatters: {},
-    components: {},
-    adapters: {},
+    binders: Object.create(null),
+    formatters: Object.create(null),
+    components: Object.create(null),
+    adapters: Object.create(null),
     // other
-    starBinders: {},
+    starBinders: Object.create(null),
   };
-  models = models || {};
+  models = models || Object.create(null);
   // options = options || {};
 
   if(options) {
@@ -49,13 +47,13 @@ tinybind.bind = (el: HTMLElement, models: any, options?: IOptionsParam) => {
     mergeObject(viewOptions.formatters, options.formatters);
     mergeObject(viewOptions.components, options.components);
     mergeObject(viewOptions.adapters, options.adapters);
-
-    viewOptions.prefix = options.prefix ? options.prefix : tinybind.prefix
-    viewOptions.templateDelimiters = options.templateDelimiters ? options.templateDelimiters : tinybind.templateDelimiters
-    viewOptions.rootInterface = options.prefix ? options.rootInterface : tinybind.rootInterface
-    viewOptions.preloadData = options.prefix ? options.preloadData : tinybind.preloadData
-    viewOptions.handler = options.prefix ? options.handler : tinybind.handler
   }
+
+  viewOptions.prefix = options && options.prefix ? options.prefix : tinybind.prefix
+  viewOptions.templateDelimiters = options && options.templateDelimiters ? options.templateDelimiters : tinybind.templateDelimiters
+  viewOptions.rootInterface = options && options.prefix ? options.rootInterface : tinybind.rootInterface
+  viewOptions.preloadData = options && options.prefix ? options.preloadData : tinybind.preloadData
+  viewOptions.handler = options && options.prefix ? options.handler : tinybind.handler
 
   // merge extensions
   mergeObject(viewOptions.binders, tinybind.binders);

@@ -141,7 +141,7 @@ const adapter = {
 
                 if (callbacks) {
                   callbacks.forEach(cb => {
-                      cb.sync();
+                    cb.sync();
                   });
                 }
 
