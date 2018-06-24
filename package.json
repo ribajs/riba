@@ -22,13 +22,16 @@
     "pretest": "node tools/build.js --development",
     "test": "mocha-chrome spec/runner.html",
     "build": "node tools/build",
-    "dev": "webpack --watch --env.dev"
+    "dev": "webpack --watch --env.dev",
+    "doc": "harp server docs/_harp ./docs",
+    "build-doc": "harp compile docs/_harp ./docs"
   },
   "devDependencies": {
     "@types/jquery": "^3.3.4",
     "babel-core": "^6.26.0",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.7.0",
+    "harp": "^0.27.0",
     "mocha": "^5.2.0",
     "mocha-chrome": "^1.1.0",
     "rollup": "^0.60.7",

@@ -58,6 +58,13 @@
   },
   "iteration": {
     "title": "Iteration binding",
-    "sections": {}
+    "sections": {
+      "iteration": {
+        "title": "Iterate"
+      },
+      "index": {
+        "title": "Iteration index"
+      }
+    }
   }
 }
