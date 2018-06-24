@@ -2,9 +2,10 @@
 
 #### Changes
 
-- components feature restored
-- cleanups
+- Components feature restored
+- Cleanups
 - Updated dependencies
+- Support json strings in attributes
 
 # 0.11 and before
 
