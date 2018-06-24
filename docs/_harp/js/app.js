@@ -1,13 +1,15 @@
 $(document).ready(function() {
   $('#hamburger').on('click', function() {
-    menu = $('#menu')
+    menu = $('#menu');
 
     if(menu.data('open')) {
-      menu.attr('style', 'display: none')
-      menu.data('open', false)
+      menu.attr('style', 'display: none');
+      menu.data('open', false);
     } else {
-      menu.attr('style', 'display: block !important; float: left')
-      menu.data('open', true)
+      menu.attr('style', 'display: block !important; float: left');
+      menu.data('open', true);
     }
-  })
-})
+  });
+});
+
+hljs.initHighlightingOnLoad();
