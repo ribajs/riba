@@ -45,7 +45,7 @@ describe('Functional', function() {
       sinon.spy(data, 'get');
       el.setAttribute('data-text', 'data:foo');
       tinybind.bind(el, bindData);
-      data.get.calledWith('foo').should.be.true();
+      should(data.get.calledWith('foo')).be.true();
     });
 
     it('should read the initial value unless preloadData is false', function() {
@@ -53,7 +53,7 @@ describe('Functional', function() {
       sinon.spy(data, 'get');
       el.setAttribute('data-value', 'data:foo');
       tinybind.bind(el, bindData);
-      data.get.called.should.be.false();
+      should(data.get.called).be.false();
     });
 
     it('should subscribe to updates', function() {
@@ -233,7 +233,7 @@ describe('Functional', function() {
       });
 
       it('should allow binding to the iterated element index', function() {
-        listItem.setAttribute('data-index', '$index');
+        listItem.setAttribute('data-index', '%item%');
         tinybind.bind(el, bindData);
         el.getElementsByTagName('li')[0].getAttribute('index').should.equal('0');
         el.getElementsByTagName('li')[1].getAttribute('index').should.equal('1');

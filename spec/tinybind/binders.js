@@ -179,6 +179,21 @@ describe("tinybind.binders", function() {
     });
 
     it("lets you access index from current and parent scope", function() {
+      nestedEl.textContent = '{$parent.%item%}-{%nested%}';
+      var view = tinybind.bind(el, model);
+
+      should(fragment.childNodes[1].childNodes[1].textContent).be.exactly('0-0');
+      should(fragment.childNodes[1].childNodes[2].textContent).be.exactly('0-1');
+      should(fragment.childNodes[2].childNodes[2].textContent).be.exactly('1-1');
+    });
+
+    /**
+     * Overwrite the index property name on element and the nested element,
+     * both to `$index` and access both with the parent scope
+     */
+    it("lets you access overwritten index from current and parent scope with the same name", function() {
+      el.setAttribute("index-property", "$index");
+      nestedEl.setAttribute("index-property", "$index");
       nestedEl.textContent = '{$parent.$index}-{$index}';
       var view = tinybind.bind(el, model);
 

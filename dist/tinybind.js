@@ -511,6 +511,18 @@
       }
     };
 
+    /**
+     * Get the iteration alias, used in the interation binders like `each-*`
+     * @param {*} modelName 
+     * @see https://github.com/mikeric/rivets/blob/master/dist/rivets.js#L26
+     * @see https://github.com/mikeric/rivets/blob/master/dist/rivets.js#L1175
+     */
+
+
+    Binding.prototype.getIterationAlias = function getIterationAlias(modelName) {
+      return '%' + modelName + '%';
+    };
+
     Binding.prototype.parseFormatterArguments = function parseFormatterArguments(args, formatterIndex) {
       var _this = this;
 
@@ -1360,7 +1372,6 @@
           });
         }
       },
-
       unbind: function unbind(el) {
         if (this.iterated) {
           this.iterated.forEach(function (view) {
@@ -1368,7 +1379,6 @@
           });
         }
       },
-
       routine: function routine(el, collection) {
         var _this = this;
 
@@ -1377,10 +1387,11 @@
 
         // TODO support object keys to iterate over
         if (!Array.isArray(collection)) {
-          throw new Error('each-' + modelName + ' needs an arry to iterate over, but it is', collection);
+          throw new Error('each-' + modelName + ' needs an array to iterate over, but it is', collection);
         }
 
-        var indexProp = el.getAttribute('index-property') || '$index';
+        // if index name is seted by `index-property` use this name, otherwise `%[modelName]%`  
+        var indexProp = el.getAttribute('index-property') || this.getIterationAlias(modelName);
 
         collection.forEach(function (model, index) {
           var data = { $parent: _this.view.models };
@@ -1444,7 +1455,6 @@
           });
         }
       },
-
       update: function update(models) {
         var _this2 = this;
 

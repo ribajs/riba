@@ -75,6 +75,16 @@ export class Binding {
       this.value = undefined;
     }
   }
+  
+  /**
+   * Get the iteration alias, used in the interation binders like `each-*`
+   * @param {*} modelName 
+   * @see https://github.com/mikeric/rivets/blob/master/dist/rivets.js#L26
+   * @see https://github.com/mikeric/rivets/blob/master/dist/rivets.js#L1175
+   */
+  getIterationAlias(modelName) {
+    return '%' + modelName + '%';
+  }
 
   parseFormatterArguments(args, formatterIndex) {
     return args

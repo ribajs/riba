@@ -44,7 +44,7 @@ const binders = {
 
     priority: 4000,
 
-    bind: function(el) {
+    bind(el) {
       if (!this.marker) {
         this.marker = document.createComment(` tinybind: ${this.type} `);
         this.iterated = [];
@@ -58,7 +58,7 @@ const binders = {
       }
     },
 
-    unbind: function(el) {
+    unbind(el) {
       if (this.iterated) {
         this.iterated.forEach(view => {
           view.unbind();
@@ -66,16 +66,17 @@ const binders = {
       }
     },
 
-    routine: function(el, collection) {
+    routine(el, collection) {
       let modelName = this.args[0];
       collection = collection || [];
 
       // TODO support object keys to iterate over
       if(!Array.isArray(collection)) {
-        throw new Error('each-' + modelName + ' needs an arry to iterate over, but it is', collection);
+        throw new Error('each-' + modelName + ' needs an array to iterate over, but it is', collection);
       }
 
-      let indexProp = el.getAttribute('index-property') || '$index';
+      // if index name is seted by `index-property` use this name, otherwise `%[modelName]%`  
+      let indexProp = el.getAttribute('index-property') || this.getIterationAlias(modelName);
 
       collection.forEach((model, index) => {
         let data = {$parent: this.view.models};
@@ -139,7 +140,7 @@ const binders = {
       }
     },
 
-    update: function(models) {
+    update(models) {
       let data = {};
 
       //todo: add test and fix if necessary
