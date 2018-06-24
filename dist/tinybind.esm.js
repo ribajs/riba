@@ -805,8 +805,8 @@ var ComponentBinding = function (_Binding) {
     });
   };
 
-  // Intercepts `tinybind.Binding::bind` to build `@componentView` with a localized
-  // map of models from the root view. Bind `@componentView` on subsequent calls.
+  // Intercepts `tinybind.Binding::bind` to build `this.componentView` with a localized
+  // map of models from the root view. Bind `this.componentView` on subsequent calls.
 
 
   ComponentBinding.prototype.bind = function bind() {
@@ -878,7 +878,7 @@ var ComponentBinding = function (_Binding) {
     }
   };
 
-  // Intercept `tinybind.Binding::unbind` to be called on `@componentView`.
+  // Intercept `tinybind.Binding::unbind` to be called on `this.componentView`.
 
 
   ComponentBinding.prototype.unbind = function unbind() {
@@ -1066,9 +1066,14 @@ var View = function () {
 
 
   View.prototype.unbind = function unbind() {
-    this.bindings.forEach(function (binding) {
-      binding.unbind();
-    });
+    if (Array.isArray(this.bindings)) {
+      this.bindings.forEach(function (binding) {
+        binding.unbind();
+      });
+    }
+    if (this.componentView) {
+      this.componentView.unbind();
+    }
   };
 
   // Syncs up the view with the model by running the routines on all bindings.

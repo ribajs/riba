@@ -160,9 +160,14 @@ export default class View {
 
   // Unbinds all of the current bindings for this view.
   unbind() {
-    this.bindings.forEach(binding => {
-      binding.unbind();
-    });
+    if(Array.isArray(this.bindings)) {
+      this.bindings.forEach(binding => {
+        binding.unbind();
+      });
+    }
+    if(this.componentView) {
+      this.componentView.unbind();
+    }
   }
 
   // Syncs up the view with the model by running the routines on all bindings.

@@ -86,8 +86,8 @@ export class ComponentBinding extends Binding {
     });
   }
     
-  // Intercepts `tinybind.Binding::bind` to build `@componentView` with a localized
-  // map of models from the root view. Bind `@componentView` on subsequent calls.
+  // Intercepts `tinybind.Binding::bind` to build `this.componentView` with a localized
+  // map of models from the root view. Bind `this.componentView` on subsequent calls.
   bind() {
     var options = {};
     if (!this.bound) {
@@ -156,7 +156,7 @@ export class ComponentBinding extends Binding {
     }
   }
     
-  // Intercept `tinybind.Binding::unbind` to be called on `@componentView`.
+  // Intercept `tinybind.Binding::unbind` to be called on `this.componentView`.
   unbind() {
     Object.keys(this.upstreamObservers).forEach(key => {
       this.upstreamObservers[key].unobserve();
