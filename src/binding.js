@@ -1,5 +1,5 @@
 import {parseType} from './parsers';
-import Observer from './observer';
+import { Observer } from './sightglass';
 
 function getInputValue(el) {
   let results = [];

@@ -1,3 +1,5 @@
+export type TExtensionKey = 'binders' | 'formatters' | 'components' | 'adapters';
+
 export const OPTIONS = [
   'prefix',
   'templateDelimiters',

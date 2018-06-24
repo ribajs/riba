@@ -1,0 +1,17 @@
+{
+    "presets": [
+      "@babel/typescript",
+      [
+        "@babel/preset-env", {
+          "targets": {
+            "chrome": 52,
+            "browsers": ["last 2 versions", "ie >= 10", "safari >= 8"]
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-proposal-object-rest-spread"
+    ]
+  }
