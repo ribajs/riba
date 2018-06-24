@@ -2,10 +2,12 @@
 
 #### Changes
 
-- Components feature restored
-- Cleanups
-- Updated dependencies
+- Components feature restored from Rivets.js
+- Updated developer dependencies
+- Replaced mocha-phantomjs with mocha-chrome for local tests
 - Support json strings in attributes
+- Cleanups
+- Bugfixes
 
 # 0.11 and before
 
