@@ -31,16 +31,25 @@ const KEYPATH = 1;
 
 // A single binding between a model attribute and a DOM element.
 export class Binding {
-  // All information about the binding is passed into the constructor; the
-  // containing view, the DOM node, the type of binding, the model object and the
-  // keypath at which to listen for changes.
-  constructor(view, el, type, keypath, binder, arg, formatters) {
+  /**
+   * All information about the binding is passed into the constructor; the
+   * containing view, the DOM node, the type of binding, the model object and the
+   * keypath at which to listen for changes.
+   * @param {*} view 
+   * @param {*} el 
+   * @param {*} type 
+   * @param {*} keypath 
+   * @param {*} binder 
+   * @param {*} args The start binders, on `class-*` args[0] wil be the classname 
+   * @param {*} formatters 
+   */
+  constructor(view, el, type, keypath, binder, args, formatters) {
     this.view = view;
     this.el = el;
     this.type = type;
     this.keypath = keypath;
     this.binder = binder;
-    this.arg = arg;
+    this.args = args;
     this.formatters = formatters;
     this.formatterObservers = {};
     this.model = undefined;

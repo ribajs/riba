@@ -462,10 +462,19 @@
 
   // A single binding between a model attribute and a DOM element.
   var Binding = function () {
-    // All information about the binding is passed into the constructor; the
-    // containing view, the DOM node, the type of binding, the model object and the
-    // keypath at which to listen for changes.
-    function Binding(view, el, type, keypath, binder, arg, formatters) {
+    /**
+     * All information about the binding is passed into the constructor; the
+     * containing view, the DOM node, the type of binding, the model object and the
+     * keypath at which to listen for changes.
+     * @param {*} view 
+     * @param {*} el 
+     * @param {*} type 
+     * @param {*} keypath 
+     * @param {*} binder 
+     * @param {*} args The start binders, on `class-*` args[0] wil be the classname 
+     * @param {*} formatters 
+     */
+    function Binding(view, el, type, keypath, binder, args, formatters) {
       classCallCheck(this, Binding);
 
       this.view = view;
@@ -473,7 +482,7 @@
       this.type = type;
       this.keypath = keypath;
       this.binder = binder;
-      this.arg = arg;
+      this.args = args;
       this.formatters = formatters;
       this.formatterObservers = {};
       this.model = undefined;
@@ -955,10 +964,10 @@
       this.build();
     }
 
-    View.prototype.buildBinding = function buildBinding(node, type, declaration, binder, arg) {
+    View.prototype.buildBinding = function buildBinding(node, type, declaration, binder, args) {
       var pipes = declaration.match(DECLARATION_SPLIT).map(trimStr);
       var keypath = pipes.shift();
-      this.bindings.push(new Binding(this, node, type, keypath, binder, arg, pipes));
+      this.bindings.push(new Binding(this, node, type, keypath, binder, args, pipes));
     };
 
     // Parses the DOM tree and builds `Binding` instances for every matched
@@ -984,7 +993,7 @@
       var attributes = node.attributes;
       var bindInfos = [];
       var starBinders = this.options.starBinders;
-      var type, binder, identifier, arg;
+      var type, binder, identifier, args;
 
       for (var i = 0, len = attributes.length; i < len; i++) {
         var attribute = attributes[i];
@@ -992,14 +1001,14 @@
         if (attribute.name.indexOf(bindingPrefix) === 0) {
           type = attribute.name.slice(bindingPrefix.length);
           binder = this.options.binders[type];
-          arg = undefined;
+          args = [];
 
           if (!binder) {
             for (var k = 0; k < starBinders.length; k++) {
               identifier = starBinders[k];
               if (type.slice(0, identifier.length - 1) === identifier.slice(0, -1)) {
                 binder = this.options.binders[identifier];
-                arg = type.slice(identifier.length - 1);
+                args.push(type.slice(identifier.length - 1));
                 break;
               }
             }
@@ -1010,18 +1019,18 @@
           }
 
           if (binder.block) {
-            this.buildBinding(node, type, attribute.value, binder, arg);
+            this.buildBinding(node, type, attribute.value, binder, args);
             node.removeAttribute(attribute.name);
             return true;
           }
 
-          bindInfos.push({ attr: attribute, binder: binder, type: type, arg: arg });
+          bindInfos.push({ attr: attribute, binder: binder, type: type, args: args });
         }
       }
 
       for (var _i2 = 0; _i2 < bindInfos.length; _i2++) {
         var bindInfo = bindInfos[_i2];
-        this.buildBinding(node, bindInfo.type, bindInfo.attr.value, bindInfo.binder, bindInfo.arg);
+        this.buildBinding(node, bindInfo.type, bindInfo.attr.value, bindInfo.binder, bindInfo.args);
         node.removeAttribute(bindInfo.attr.name);
       }
 
@@ -1318,17 +1327,17 @@
 
       unbind: function unbind(el) {
         if (this.handler) {
-          el.removeEventListener(this.arg, this.handler);
+          el.removeEventListener(this.args[0], this.handler);
         }
       },
 
       routine: function routine(el, value) {
         if (this.handler) {
-          el.removeEventListener(this.arg, this.handler);
+          el.removeEventListener(this.args[0], this.handler);
         }
 
         this.handler = this.eventHandler(value);
-        el.addEventListener(this.arg, this.handler);
+        el.addEventListener(this.args[0], this.handler);
       }
     },
 
@@ -1363,7 +1372,7 @@
       routine: function routine(el, collection) {
         var _this = this;
 
-        var modelName = this.arg;
+        var modelName = this.args[0];
         collection = collection || [];
 
         // TODO support object keys to iterate over
@@ -1444,7 +1453,7 @@
         //todo: add test and fix if necessary
 
         Object.keys(models).forEach(function (key) {
-          if (key !== _this2.arg) {
+          if (key !== _this2.args[0]) {
             data[key] = models[key];
           }
         });
@@ -1459,11 +1468,11 @@
     'class-*': function _class(el, value) {
       var elClass = ' ' + el.className + ' ';
 
-      if (value !== elClass.indexOf(' ' + this.arg + ' ') > -1) {
+      if (value !== elClass.indexOf(' ' + this.args[0] + ' ') > -1) {
         if (value) {
-          el.className = el.className + ' ' + this.arg;
+          el.className = el.className + ' ' + this.args[0];
         } else {
-          el.className = elClass.replace(' ' + this.arg + ' ', ' ').trim();
+          el.className = elClass.replace(' ' + this.args[0] + ' ', ' ').trim();
         }
       }
     },
@@ -1693,4 +1702,3 @@
   return tinybind;
 
 })));
-//# sourceMappingURL=tinybind.js.map

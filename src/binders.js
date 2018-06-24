@@ -24,17 +24,17 @@ const binders = {
 
     unbind: function(el) {
       if (this.handler) {
-        el.removeEventListener(this.arg, this.handler);
+        el.removeEventListener(this.args[0], this.handler);
       }
     },
 
     routine: function(el, value) {
       if (this.handler) {
-        el.removeEventListener(this.arg, this.handler);
+        el.removeEventListener(this.args[0], this.handler);
       }
 
       this.handler = this.eventHandler(value);
-      el.addEventListener(this.arg, this.handler);
+      el.addEventListener(this.args[0], this.handler);
     }
   },
 
@@ -67,7 +67,7 @@ const binders = {
     },
 
     routine: function(el, collection) {
-      let modelName = this.arg;
+      let modelName = this.args[0];
       collection = collection || [];
 
       // TODO support object keys to iterate over
@@ -145,7 +145,7 @@ const binders = {
       //todo: add test and fix if necessary
 
       Object.keys(models).forEach(key => {
-        if (key !== this.arg) {
+        if (key !== this.args[0]) {
           data[key] = models[key];
         }
       });
@@ -160,11 +160,11 @@ const binders = {
   'class-*': function(el, value) {
     let elClass = ` ${el.className} `;
 
-    if (value !== (elClass.indexOf(` ${this.arg} `) > -1)) {
+    if (value !== (elClass.indexOf(` ${this.args[0]} `) > -1)) {
       if (value) {
-        el.className = `${el.className} ${this.arg}`;
+        el.className = `${el.className} ${this.args[0]}`;
       } else {
-        el.className = elClass.replace(` ${this.arg} `, ' ').trim();
+        el.className = elClass.replace(` ${this.args[0]} `, ' ').trim();
       }
     }
   },

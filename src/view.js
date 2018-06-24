@@ -71,10 +71,10 @@ export default class View {
   }
 
 
-  buildBinding(node, type, declaration, binder, arg) {
+  buildBinding(node, type, declaration, binder, args) {
     let pipes = declaration.match(DECLARATION_SPLIT).map(trimStr);
     let keypath = pipes.shift();
-    this.bindings.push(new Binding(this, node, type, keypath, binder, arg, pipes));
+    this.bindings.push(new Binding(this, node, type, keypath, binder, args, pipes));
   }
 
   // Parses the DOM tree and builds `Binding` instances for every matched
@@ -96,7 +96,7 @@ export default class View {
     let attributes = node.attributes;
     let bindInfos = [];
     let starBinders = this.options.starBinders;
-    var type, binder, identifier, arg;
+    var type, binder, identifier, args;
 
 
     for (let i = 0, len = attributes.length; i < len; i++) {
@@ -105,14 +105,14 @@ export default class View {
       if (attribute.name.indexOf(bindingPrefix) === 0) {
         type = attribute.name.slice(bindingPrefix.length);
         binder = this.options.binders[type];
-        arg = undefined;
+        args = [];
 
         if (!binder) {
           for (let k = 0; k < starBinders.length; k++) {
             identifier = starBinders[k];
             if (type.slice(0, identifier.length - 1) === identifier.slice(0, -1)) {
               binder = this.options.binders[identifier];
-              arg = type.slice(identifier.length - 1);
+              args.push(type.slice(identifier.length - 1));
               break;
             }
           }
@@ -123,18 +123,18 @@ export default class View {
         }
 
         if (binder.block) {
-          this.buildBinding(node, type, attribute.value, binder, arg);
+          this.buildBinding(node, type, attribute.value, binder, args);
           node.removeAttribute(attribute.name);
           return true;
         }
 
-        bindInfos.push({attr: attribute, binder: binder, type: type, arg: arg});
+        bindInfos.push({attr: attribute, binder: binder, type: type, args: args});
       }
     }
 
     for (let i = 0; i < bindInfos.length; i++) {
       let bindInfo = bindInfos[i];
-      this.buildBinding(node, bindInfo.type, bindInfo.attr.value, bindInfo.binder, bindInfo.arg);
+      this.buildBinding(node, bindInfo.type, bindInfo.attr.value, bindInfo.binder, bindInfo.args);
       node.removeAttribute(bindInfo.attr.name);
     }
 
