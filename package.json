@@ -2,8 +2,9 @@
   "name": "tinybind",
   "description": "Declarative data binding + templating solution.",
   "version": "0.12.0",
-  "author": "Michael Richards",
+  "author": "Pascal Garber <pascal@jumplink.eu>",
   "contributors": [
+    "Michael Richards",
     "Luiz Américo Pereira Câmara"
   ],
   "url": "https://github.com/blikblum/tinybind",
