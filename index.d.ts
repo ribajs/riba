@@ -127,13 +127,13 @@ declare module 'tinybind' {
 
   export type Scope = any;
 
-  export interface IComponent {
+  export interface IComponent<ValueType> {
     template: string | (() => string) | (() => HTMLElement);
-    initialize: (el: HTMLElement, data: any) => Scope;
+    initialize: (el: HTMLElement, data: ValueType) => Scope;
   }
 
   export interface IComponents {
-    [name: string]: IComponent;
+    [name: string]: IComponent<any>;
   }
 
   export interface IBinders {
