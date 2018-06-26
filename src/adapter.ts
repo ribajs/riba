@@ -1,4 +1,4 @@
-import { ICallback } from './sightglass';
+import { ICallback } from './observer';
 
 // The default `.` adapter that comes with tinybind.js. Allows subscribing to
 // properties on plain objects, implemented in ES5 natives using
@@ -44,11 +44,11 @@ export interface IAdapters {
   [name: string]: IAdapter;
 }
 
-const adapter: IAdapter = {
-  counter: 0,
-  weakmap: {},
+export class Adapter implements IAdapter {
+  counter: number = 0;
+  weakmap:any = {};
 
-  weakReference: function(obj: any) {
+  weakReference(obj: any) {
     if (!obj.hasOwnProperty('__rv')) {
       let id = this.counter++;
 
@@ -64,17 +64,17 @@ const adapter: IAdapter = {
     }
 
     return this.weakmap[obj.__rv];
-  },
+  }
 
-  cleanupWeakReference: function(ref: IRef, id: number) {
+  cleanupWeakReference(ref: IRef, id: number) {
     if (!Object.keys(ref.callbacks).length) {
       if (!(ref.pointers && Object.keys(ref.pointers).length)) {
         delete this.weakmap[id];
       }
     }
-  },
+  }
 
-  stubFunction: function(obj: any, fn: string) {
+  stubFunction(obj: any, fn: string) {
     let original = obj[fn];
     let map = this.weakReference(obj);
     let weakmap = this.weakmap;
@@ -96,9 +96,9 @@ const adapter: IAdapter = {
 
       return response;
     };
-  },
+  }
 
-  observeMutations: function(obj: any, ref: string, keypath: string) {
+  observeMutations(obj: any, ref: string, keypath: string) {
     if (obj instanceof Array) {
       let map = this.weakReference(obj);
 
@@ -118,9 +118,9 @@ const adapter: IAdapter = {
         map.pointers[ref].push(keypath);
       }
     }
-  },
+  }
 
-  unobserveMutations: function(obj: IRVArray, ref: string, keypath: string) {
+  unobserveMutations(obj: IRVArray, ref: string, keypath: string) {
     if ((obj instanceof Array) && (obj.__rv != null)) {
       let map = this.weakmap[obj.__rv];
 
@@ -142,9 +142,9 @@ const adapter: IAdapter = {
         }
       }
     }
-  },
+  }
 
-  observe: function(obj: any, keypath: string, callback: ICallback) {
+  observe(obj: any, keypath: string, callback: ICallback) {
     var value: any;
     let callbacks = this.weakReference(obj).callbacks;
 
@@ -190,9 +190,9 @@ const adapter: IAdapter = {
     }
 
     this.observeMutations(obj[keypath], obj.__rv, keypath);
-  },
+  }
 
-  unobserve: function(obj: any, keypath: string, callback: ICallback) {
+  unobserve(obj: any, keypath: string, callback: ICallback) {
     let map = this.weakmap[obj.__rv];
 
     if (map) {
@@ -213,15 +213,17 @@ const adapter: IAdapter = {
         this.cleanupWeakReference(map, obj.__rv);
       }
     }
-  },
+  }
 
-  get: function(obj: any, keypath: string) {
+  get(obj: any, keypath: string) {
     return obj[keypath];
-  },
+  }
 
-  set: (obj: any, keypath: string, value: any) => {
+  set(obj: any, keypath: string, value: any) {
     obj[keypath] = value;
   }
 };
+
+const adapter = new Adapter();
 
 export default adapter;

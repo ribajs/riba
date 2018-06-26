@@ -1,5 +1,5 @@
 import {parseType} from './parsers';
-import { Observer } from './sightglass';
+import { Observer } from './observer';
 
 function getInputValue(el) {
   let results = [];
@@ -53,6 +53,7 @@ export class Binding {
     this.formatters = formatters;
     this.formatterObservers = {};
     this.model = undefined;
+    this.customData = {};
   }
 
   // Observes the object keypath

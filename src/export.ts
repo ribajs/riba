@@ -3,9 +3,10 @@ import View from './view';
 import adapter from './adapter';
 import { IAdapters } from './adapter';
 import binders from './binders';
-import { Observer, Root } from './sightglass';
+import { IBinders } from './binders';
+import { Observer, Root } from './observer';
 
-import { IBinders, IFormatters, IOptions, IComponents } from '../index';
+import { IFormatters, IOptions, IComponents } from '../index';
 
 export interface IExtensions {
   binders: IBinders;

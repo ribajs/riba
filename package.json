@@ -22,7 +22,8 @@
   "scripts": {
     "test": "mocha-chrome spec/runner.html",
     "type-check": "tsc --noEmit",
-    "build": "npm run type-check && webpack && webpack --config webpack.dev.config.js",
+    "build": "npm run type-check && npm run webpack",
+    "webpack": "webpack && webpack --config webpack.dev.config.js",
     "watch": "webpack --watch --env.dev",
     "doc": "harp server docs/_harp ./docs",
     "build-doc": "harp compile docs/_harp ./docs"
