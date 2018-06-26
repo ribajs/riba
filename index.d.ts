@@ -1,12 +1,5 @@
 /// <reference types="jquery" />
 
-export interface IExtensions {
-  binders: any;
-  formatters: any;
-  components: any;
-  adapters: any;
-}
-
 export interface IOptions {
   // Attribute prefix in templates
   prefix?: string;

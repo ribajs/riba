@@ -1,3 +1,5 @@
+import { ICallback } from './sightglass';
+
 // The default `.` adapter that comes with tinybind.js. Allows subscribing to
 // properties on plain objects, implemented in ES5 natives using
 // `Object.defineProperty`.
@@ -12,11 +14,41 @@ const ARRAY_METHODS = [
   'splice'
 ];
 
-const adapter = {
+export interface IRef {
+  callbacks: any[];
+  pointers: any[];
+}
+
+// TODO what the hell?!
+export interface IRVArray extends Array<any> {
+  __rv: any;
+}
+
+export type AdapterFunction = (...args: any[]) => any;
+
+export interface IAdapter {
+  counter: number;
+  weakmap: any;
+  weakReference: (obj: any) => any; // => __rv ?
+  cleanupWeakReference: (ref: IRef, id: number) => void;
+  stubFunction: (obj: any, fn: string) => any // => response ?
+  observeMutations: (obj: any, ref: string, keypath: string) => void;
+  unobserveMutations: (obj: IRVArray, ref: string, keypath: string) => void;
+  observe: (obj: any, keypath: string, callback: ICallback) => void; 
+  unobserve: (obj: any, keypath: string, callback: ICallback) => void;
+  get: (obj: any, keypath: string) => any;
+  set: (obj: any, keypath: string, value: any) => void;
+}
+
+export interface IAdapters {
+  [name: string]: IAdapter;
+}
+
+const adapter: IAdapter = {
   counter: 0,
   weakmap: {},
 
-  weakReference: function(obj) {
+  weakReference: function(obj: any) {
     if (!obj.hasOwnProperty('__rv')) {
       let id = this.counter++;
 
@@ -34,7 +66,7 @@ const adapter = {
     return this.weakmap[obj.__rv];
   },
 
-  cleanupWeakReference: function(ref, id) {
+  cleanupWeakReference: function(ref: IRef, id: number) {
     if (!Object.keys(ref.callbacks).length) {
       if (!(ref.pointers && Object.keys(ref.pointers).length)) {
         delete this.weakmap[id];
@@ -42,12 +74,12 @@ const adapter = {
     }
   },
 
-  stubFunction: function(obj, fn) {
+  stubFunction: function(obj: any, fn: string) {
     let original = obj[fn];
     let map = this.weakReference(obj);
     let weakmap = this.weakmap;
 
-    obj[fn] = (...args) => {
+    obj[fn] = (...args: any[]): AdapterFunction => {
       let response = original.apply(obj, args);
 
       Object.keys(map.pointers).forEach(r => {
@@ -55,7 +87,7 @@ const adapter = {
 
         if (weakmap[r]) {
           if (weakmap[r].callbacks[k] instanceof Array) {
-            weakmap[r].callbacks[k].forEach(callback => {
+            weakmap[r].callbacks[k].forEach((callback: ICallback) => {
               callback.sync();
             });
           }
@@ -66,7 +98,7 @@ const adapter = {
     };
   },
 
-  observeMutations: function(obj, ref, keypath) {
+  observeMutations: function(obj: any, ref: string, keypath: string) {
     if (obj instanceof Array) {
       let map = this.weakReference(obj);
 
@@ -88,7 +120,7 @@ const adapter = {
     }
   },
 
-  unobserveMutations: function(obj, ref, keypath) {
+  unobserveMutations: function(obj: IRVArray, ref: string, keypath: string) {
     if ((obj instanceof Array) && (obj.__rv != null)) {
       let map = this.weakmap[obj.__rv];
 
@@ -112,8 +144,8 @@ const adapter = {
     }
   },
 
-  observe: function(obj, keypath, callback) {
-    var value;
+  observe: function(obj: any, keypath: string, callback: ICallback) {
+    var value: any;
     let callbacks = this.weakReference(obj).callbacks;
 
     if (!callbacks[keypath]) {
@@ -140,7 +172,7 @@ const adapter = {
                 let callbacks = map.callbacks[keypath];
 
                 if (callbacks) {
-                  callbacks.forEach(cb => {
+                  callbacks.forEach((cb: ICallback) => {
                     cb.sync();
                   });
                 }
@@ -160,7 +192,7 @@ const adapter = {
     this.observeMutations(obj[keypath], obj.__rv, keypath);
   },
 
-  unobserve: function(obj, keypath, callback) {
+  unobserve: function(obj: any, keypath: string, callback: ICallback) {
     let map = this.weakmap[obj.__rv];
 
     if (map) {
@@ -183,11 +215,11 @@ const adapter = {
     }
   },
 
-  get: function(obj, keypath) {
+  get: function(obj: any, keypath: string) {
     return obj[keypath];
   },
 
-  set: (obj, keypath, value) => {
+  set: (obj: any, keypath: string, value: any) => {
     obj[keypath] = value;
   }
 };

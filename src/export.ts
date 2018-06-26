@@ -1,11 +1,18 @@
 import tinybind from './tinybind';
 import View from './view';
-import { OPTIONS, EXTENSIONS, TExtensionKey } from './constants';
 import adapter from './adapter';
+import { IAdapters } from './adapter';
 import binders from './binders';
-import { Observer } from './sightglass';
+import { Observer, Root } from './sightglass';
 
-import { IOptions, IExtensions, IComponent } from '../index';
+import { IBinders, IFormatters, IOptions, IComponents } from '../index';
+
+export interface IExtensions {
+  binders: IBinders;
+  formatters: IFormatters;
+  components: IComponents;
+  adapters: IAdapters;
+}
 
 // Returns the public interface.
 
@@ -16,8 +23,11 @@ export interface IOptionsParam extends IExtensions, IOptions {}
 
 export interface IViewOptions extends IOptionsParam {
   starBinders: any;
+  // sightglass
+  rootInterface: Root;
 }
 
+// TODO move to uitils
 const mergeObject = (target: any, obj: any) => {
   Object.keys(obj).forEach(key => {
     if (!target[key] || target[key] === {}) {
@@ -38,6 +48,8 @@ tinybind.bind = (el: HTMLElement, models: any, options?: IOptionsParam) => {
     adapters: Object.create(null),
     // other
     starBinders: Object.create(null),
+    // sightglass
+    rootInterface: Object.create(null),
   };
   models = models || Object.create(null);
   // options = options || {};
@@ -51,9 +63,9 @@ tinybind.bind = (el: HTMLElement, models: any, options?: IOptionsParam) => {
 
   viewOptions.prefix = options && options.prefix ? options.prefix : tinybind.prefix
   viewOptions.templateDelimiters = options && options.templateDelimiters ? options.templateDelimiters : tinybind.templateDelimiters
-  viewOptions.rootInterface = options && options.prefix ? options.rootInterface : tinybind.rootInterface
-  viewOptions.preloadData = options && options.prefix ? options.preloadData : tinybind.preloadData
-  viewOptions.handler = options && options.prefix ? options.handler : tinybind.handler
+  viewOptions.rootInterface = options && options.rootInterface ? options.rootInterface : tinybind.rootInterface
+  viewOptions.preloadData = options && options.preloadData ? options.preloadData : tinybind.preloadData
+  viewOptions.handler = options && options.handler ? options.handler : tinybind.handler
 
   // merge extensions
   mergeObject(viewOptions.binders, tinybind.binders);
@@ -89,6 +101,7 @@ tinybind.init = (componentKey: string, el: HTMLElement, data = {}) => {
   return view;
 };
 
+// Move to formatters
 tinybind.formatters.negate = tinybind.formatters.not = function (value: boolean) {
   return !value;
 };

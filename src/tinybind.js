@@ -1,5 +1,15 @@
-import {EXTENSIONS} from './constants';
-import {parseTemplate, parseType} from './parsers';
+import { EXTENSIONS } from './constants';
+import { parseTemplate, parseType } from './parsers';
+
+// TODO move to uitils
+const mergeObject = (target, obj) => {
+  Object.keys(obj).forEach(key => {
+    if (!target[key] || target[key] === {}) {
+      target[key] = obj[key];
+    }
+  });
+  return target; 
+};
 
 const tinybind = {
   // Global binders.
@@ -61,6 +71,12 @@ const tinybind = {
     if (!options) {
       return;
     }
+
+    // mergeObject(this.binders, options.binders);
+    // mergeObject(this.formatters, options.formatters);
+    // mergeObject(this.components, options.components);
+    // mergeObject(this.adapters, options.adapters);
+
     Object.keys(options).forEach(option => {
       let value = options[option];
 
