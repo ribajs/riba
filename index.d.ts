@@ -1,44 +1,12 @@
 /// <reference types="jquery" />
+import { IBinders, Binder } from './src/binders';
+import { IOptions } from './src/export';
+import { View } from './src/view';
 
-import { IBinders, Binder, IBinding } from './src/binders';
-
-export interface IOptions {
-  // Attribute prefix in templates
-  prefix?: string;
-
-  //Preload templates with initial data on bind
-  preloadData?: boolean;
-
-  //Root sightglass interface for keypaths
-  rootInterface?: string;
-
-  // Template delimiters for text bindings
-  templateDelimiters?: Array<string>
-
-  // Augment the event handler of the on-* binder
-  handler?: Function;
-}
-
-export interface Observer {
-  unobserve: () => any
-  value: () => any
-}
-
-export type TBlock = boolean;
-
-export interface IView extends IOptions {
-  models: Object;
-  bindings: any[];
-  options: () => IOptions;
-  build(): void;
-  bind(): void;
-  unbind(): void;
-  sync(): void;
-  publish(): void;
-  update(models: any): void;
-  buildBinding(node: HTMLElement, type: string, declaration: string, binder: Binder<any>, arg: any): IBinding;
-  traverse(node: HTMLElement): TBlock;
-}
+// export interface Observer {
+//   unobserve: () => any
+//   value: () => any
+// }
 
 export type Scope = any;
 
@@ -61,7 +29,7 @@ export interface IFormatters {
 
 export interface Tinybind extends IOptions {
   // Global binders.
-  binders: IBinders;
+  binders: IBinders<any>;
 
   // Global components.
   components: IComponents;
@@ -76,7 +44,7 @@ export interface Tinybind extends IOptions {
 
   configure(options?: IOptions): void;
 
-  bind(element: HTMLElement | Array<HTMLElement> | JQuery<HTMLElement>, models: any, options?: any): IView;
+  bind(element: HTMLElement | Array<HTMLElement> | JQuery<HTMLElement>, models: any, options?: any): View;
 
   _: {
     sightglass: any;

@@ -1,15 +1,32 @@
 import tinybind from './tinybind';
-import View from './view';
+import { View } from './view';
 import adapter from './adapter';
 import { IAdapters } from './adapter';
 import binders from './binders';
 import { IBinders } from './binders';
 import { Observer, Root } from './observer';
 
-import { IFormatters, IOptions, IComponents } from '../index';
+import { IFormatters, IComponents } from '../index';
+
+export interface IOptions {
+  // Attribute prefix in templates
+  prefix?: string;
+
+  //Preload templates with initial data on bind
+  preloadData?: boolean;
+
+  //Root sightglass interface for keypaths
+  rootInterface?: string;
+
+  // Template delimiters for text bindings
+  templateDelimiters?: Array<string>
+
+  // Augment the event handler of the on-* binder
+  handler?: Function;
+}
 
 export interface IExtensions {
-  binders: IBinders;
+  binders: IBinders<any>;
   formatters: IFormatters;
   components: IComponents;
   adapters: IAdapters;

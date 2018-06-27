@@ -1,7 +1,8 @@
 import tinybind from './tinybind';
-import {parseType} from './parsers';
-import {EXTENSIONS, OPTIONS} from './constants';
-import {Binding} from './binding';
+import { parseType } from './parsers';
+import { EXTENSIONS, OPTIONS } from './constants';
+import { Binding } from './binding';
+import { View } from './view';
 
 /**
  * Used also in parsers.parseType
@@ -12,10 +13,17 @@ const KEYPATH = 1;
 
 // component view encapsulated as a binding within it's parent view.
 export class ComponentBinding extends Binding {
+  view;
+  el;
+  type;
+  component;
+  static: any;
+  observers;
+  upstreamObservers;
   // Initializes a component binding for the specified view. The raw component
   // element is passed in along with the component type. Attributes and scope
   // inflections are determined based on the components defined attributes.
-  constructor(view, el, type) {
+  constructor(view: View, el: Element, type: string) {
     super(view, el, type, null, null, null, null);
     this.view = view;
     this.el = el;
@@ -44,7 +52,7 @@ export class ComponentBinding extends Binding {
         } else if(token.type === KEYPATH) {
           this.observers[propertyName] = attribute.value;
         } else {
-          throw new Error('can\'t parse component attribute', attribute, token);
+          throw new Error('can\'t parse component attribute');
         }
       }
     }

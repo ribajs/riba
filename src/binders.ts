@@ -1,6 +1,7 @@
-import View from './view';
+import { View } from './view';
 import { Observer } from './observer';
-import { IView } from '../index';
+import { Binding } from './binding';
+// import { Node } from 'babel-types';
 
 export interface IBinding {
   view: View;
@@ -24,7 +25,8 @@ export interface IBinding {
   /**
    * HTML Comment to mark a binding in the DOM
    */
-  marker: Comment;
+  marker?: Comment;
+  _bound?: boolean;
   /**
    * just to have a value where we could store custom data
    */
@@ -86,16 +88,14 @@ export interface IBinding {
   getIterationAlias: (modelName: string) => string;
 }
 
-export interface IOneWayBinder<ValueType> {
-  (this: IBinding, element: HTMLElement, value: ValueType): void;
-}
+export type IOneWayBinder<ValueType> = (this: Binding, element: HTMLElement, value: ValueType) => void;
 
 export interface ITwoWayBinder<ValueType> {
-  routine?: (this: IBinding, element: HTMLElement, value: ValueType) => void;
-  bind: (this: IBinding, element: HTMLElement) => void;
-  unbind?: (this: IBinding, element: HTMLElement) => void;
-  update?: (this: IBinding, model: any) => void;
-  getValue?: (this: IBinding, element: HTMLElement) => void;
+  routine: (this: Binding, element: HTMLElement, value: ValueType) => void;
+  bind?: (this: Binding, element: HTMLElement) => void;
+  unbind?: (this: Binding, element: HTMLElement) => void;
+  update?: (this: Binding, model: any) => void;
+  getValue?: (this: Binding, element: HTMLElement) => void;
   block?: boolean;
   function?: boolean;
   publishes?: boolean;
@@ -108,8 +108,8 @@ export interface ITwoWayBinder<ValueType> {
 
 export type Binder<ValueType> = IOneWayBinder<ValueType> | ITwoWayBinder<ValueType>
 
-export interface IBinders {
-  [name: string]: Binder<any>;
+export interface IBinders<ValueType> {
+  [name: string]: Binder<ValueType>;
 }
 
 const getString = (value: string) => {
@@ -120,11 +120,11 @@ const times = (n: number, cb:() => void) => {
   for (let i = 0; i < n; i++) cb();
 };
 
-function createView(binding: IBinding, models: any, anchorEl: HTMLElement | Node | null) {
+function createView(binding: Binding, models: any, anchorEl: HTMLElement | Node | null) {
   let template = binding.el.cloneNode(true);
-  let view = new View(template, models, binding.view.options);
+  let view = new View((template as Node), models, binding.view.options);
   view.bind();
-  if(binding.marker.parentNode === null) {
+  if(!binding || !binding.marker || binding.marker.parentNode === null) {
     throw new Error('No parent node for binding!');
   }
 
@@ -133,7 +133,7 @@ function createView(binding: IBinding, models: any, anchorEl: HTMLElement | Node
   return view;
 }
 
-const binders: any /* TODO IBinders */ = {
+const binders: IBinders<any> = {
   // Binds an event handler on the element.
   'on-*': <ITwoWayBinder<any>> {
     function: true,
@@ -147,13 +147,13 @@ const binders: any /* TODO IBinders */ = {
       }
     },
 
-    unbind: function(el: HTMLElement) {
+    unbind(el: HTMLElement) {
       if (this.customData.handler) {
         el.removeEventListener(this.args[0], this.customData);
       }
     },
 
-    routine: function(el: HTMLElement, value: any /*TODO*/) {
+    routine(el: HTMLElement, value: any /*TODO*/) {
       if (this.customData.handler) {
         el.removeEventListener(this.args[0], this.customData.handler);
       }
@@ -173,7 +173,7 @@ const binders: any /* TODO IBinders */ = {
       if (!this.marker) {
         this.marker = document.createComment(` tinybind: ${this.type} `);
         this.customData = {
-          iterated: <IView[]> []
+          iterated: <View[]> []
         };
         if(!el.parentNode) {
           throw new Error('No parent node!');
@@ -181,7 +181,7 @@ const binders: any /* TODO IBinders */ = {
         el.parentNode.insertBefore(this.marker, el);
         el.parentNode.removeChild(el);
       } else {
-        this.customData.iterated.forEach((view: IView)  => {
+        this.customData.iterated.forEach((view: View)  => {
           view.bind();
         });
       }
@@ -189,7 +189,7 @@ const binders: any /* TODO IBinders */ = {
 
     unbind(el) {
       if (this.customData.iterated) {
-        this.customData.iterated.forEach((view: IView) => {
+        this.customData.iterated.forEach((view: View) => {
           view.unbind();
         });
       }
@@ -214,11 +214,14 @@ const binders: any /* TODO IBinders */ = {
         let view = this.customData.iterated[index];
 
         if (!view) {
-
-          let previous: Comment | HTMLElement = this.marker;
+          let previous: Comment | HTMLElement;
 
           if (this.customData.iterated.length) {
             previous = this.customData.iterated[this.customData.iterated.length - 1].els[0];
+          } else if(this.marker) {
+            previous = this.marker;
+          } else {
+            throw new Error('previous not defined');
           }
 
           view = createView(this, scope, previous.nextSibling);
@@ -239,7 +242,7 @@ const binders: any /* TODO IBinders */ = {
               // todo: consider avoiding the splice here by setting a flag
               // profile performance before implementing such change
               this.customData.iterated.splice(matchIndex, 1);
-              if(!this.marker.parentNode) {
+              if(!this.marker || !this.marker.parentNode) {
                 throw new Error('Marker has no parent node');
               }
               this.marker.parentNode.insertBefore(nextView.els[0], view.els[0]);
@@ -259,7 +262,7 @@ const binders: any /* TODO IBinders */ = {
         times(this.customData.iterated.length - collection.length, () => {
           let view = this.customData.iterated.pop();
           view.unbind();
-          if(!this.marker.parentNode) {
+          if(!this.marker || !this.marker.parentNode) {
             throw new Error('Marker has no parent node');
           }
           this.marker.parentNode.removeChild(view.els[0]);
@@ -267,8 +270,8 @@ const binders: any /* TODO IBinders */ = {
       }
 
       if (el.nodeName === 'OPTION' && this.view.bindings) {
-        this.view.bindings.forEach(binding => {
-          if (binding.el === this.marker.parentNode && binding.type === 'value') {
+        this.view.bindings.forEach((binding: Binding) => {
+          if (this.marker && (binding.el === this.marker.parentNode) && (binding.type === 'value')) {
             binding.sync();
           }
         });
@@ -286,14 +289,14 @@ const binders: any /* TODO IBinders */ = {
         }
       });
 
-      this.customData.iterated.forEach((view: IView) => {
+      this.customData.iterated.forEach((view: View) => {
         view.update(data);
       });
     }
   },
 
   // Adds or removes the class from the element when value is true or false.
-  'class-*': function(el: HTMLElement, value: boolean) {
+  'class-*': <IOneWayBinder<boolean>> function(el: HTMLElement, value: boolean) {
     let elClass = ` ${el.className} `;
 
     if (value !== (elClass.indexOf(` ${this.args[0]} `) > -1)) {
@@ -306,32 +309,32 @@ const binders: any /* TODO IBinders */ = {
   },
 
   // Sets the element's text value.
-  text: <IOneWayBinder> (el: HTMLElement, value: string) => {
+  text: <IOneWayBinder<string>> function(el: HTMLElement, value: string) {
     el.textContent = value != null ? value : '';
   },
 
   // Sets the element's HTML content.
-  html: <IOneWayBinder> (el: HTMLElement, value: string) => {
+  html: <IOneWayBinder<string>> function(el: HTMLElement, value: string) {
     el.innerHTML = value != null ? value : '';
   },
 
   // Shows the element when value is true.
-  show: <IOneWayBinder> (el: HTMLElement, value: boolean) => {
+  show: <IOneWayBinder<boolean>> function(el: HTMLElement, value: boolean) {
     el.style.display = value ? '' : 'none';
   },
 
   // Hides the element when value is true (negated version of `show` binder).
-  hide: <IOneWayBinder> (el: HTMLElement, value: boolean) => {
+  hide: <IOneWayBinder<boolean>> function(el: HTMLElement, value: boolean) {
     el.style.display = value ? 'none' : '';
   },
 
   // Enables the element when value is true.
-  enabled: <IOneWayBinder> (el: HTMLButtonElement, value: boolean) => {
+  enabled: <IOneWayBinder<boolean>> function(el: HTMLButtonElement, value: boolean) {
     el.disabled = !value;
   },
 
   // Disables the element when value is true (negated version of `enabled` binder).
-  disabled: <IOneWayBinder> (el: HTMLButtonElement, value: boolean) => {
+  disabled: <IOneWayBinder<boolean>> function(el: HTMLButtonElement, value: boolean) {
     el.disabled = !!value;
   },
 
@@ -356,7 +359,7 @@ const binders: any /* TODO IBinders */ = {
       el.removeEventListener('change', this.customData.callback);
     },
 
-    routine: function(el: HTMLSelectElement, value) {
+    routine(el: HTMLSelectElement, value) {
       if (el.type === 'radio') {
         el.checked = getString(el.value) === getString(value);
       } else {
@@ -371,7 +374,7 @@ const binders: any /* TODO IBinders */ = {
     publishes: true,
     priority: 3000,
 
-    bind: function(el: HTMLInputElement) {
+    bind(el: HTMLInputElement) {
       this.customData = {};
       this.customData.isRadio = el.tagName === 'INPUT' && el.type === 'radio';
       if (!this.customData.isRadio) {
@@ -388,13 +391,13 @@ const binders: any /* TODO IBinders */ = {
       }
     },
 
-    unbind: function(el) {
+    unbind(el) {
       if (!this.customData.isRadio) {
         el.removeEventListener(this.customData.event, this.customData.callback);
       }
     },
 
-    routine: function(el: HTMLInputElement | HTMLSelectElement, value) {
+    routine(el: HTMLInputElement | HTMLSelectElement, value) {
       if (this.customData && this.customData.isRadio) {
         el.setAttribute('value', value);
       } else {
@@ -417,7 +420,7 @@ const binders: any /* TODO IBinders */ = {
     block: true,
     priority: 4000,
 
-    bind: function(el: HTMLUnknownElement) {
+    bind(el: HTMLUnknownElement) {
       this.customData = {};
       if (!this.marker) {
         this.marker = document.createComment(' tinybind: ' + this.type + ' ' + this.keypath + ' ');
@@ -433,14 +436,14 @@ const binders: any /* TODO IBinders */ = {
        this.customData.bound = true;
     },
 
-    unbind: function() {
+    unbind() {
       if ( this.customData.nested) {
          this.customData.nested.unbind();
          this.customData.bound = false;
       }
     },
 
-    routine: function(el, value) {
+    routine(el: HTMLElement, value: boolean) {
       value = !!value;
       if (value !== this.customData.attached) {
         if (value) {
@@ -449,7 +452,7 @@ const binders: any /* TODO IBinders */ = {
              this.customData.nested = new View(el, this.view.models, this.view.options);
              this.customData.nested.bind();
           }
-          if(!this.marker.parentNode) {
+          if(!this.marker || !this.marker.parentNode) {
             throw new Error('Marker has no parent node');
           }
           this.marker.parentNode.insertBefore(el, this.marker.nextSibling);
@@ -464,7 +467,7 @@ const binders: any /* TODO IBinders */ = {
       }
     },
 
-    update: function(models) {
+    update(models) {
       if ( this.customData.nested) {
          this.customData.nested.update(models);
       }

@@ -2,7 +2,7 @@ import { EXTENSIONS } from './constants';
 import { parseTemplate, parseType } from './parsers';
 
 // TODO move to uitils
-const mergeObject = (target, obj) => {
+const mergeObject = (target: any, obj: any) => {
   Object.keys(obj).forEach(key => {
     if (!target[key] || target[key] === {}) {
       target[key] = obj[key];

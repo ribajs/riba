@@ -1,5 +1,8 @@
-import {parseType} from './parsers';
+import { parseType } from './parsers';
 import { Observer } from './observer';
+import { IBinding, Binder } from './binders';
+import { View } from './view';
+
 
 function getInputValue(el) {
   let results = [];
@@ -30,7 +33,37 @@ const PRIMITIVE = 0;
 const KEYPATH = 1;
 
 // A single binding between a model attribute and a DOM element.
-export class Binding {
+export class Binding implements IBinding {
+
+
+  view: View;
+  el: HTMLElement;
+  /**
+   * Name of the binder without the prefix
+   */
+  type: string;
+  binder: Binder<any>;
+  formatters: string[];
+  formatterObservers: any;
+  keypath: string;
+  /**
+   * Arguments parsed from star binders, e.g. on foo-*-* args[0] is the first star, args[1] the second-
+   */
+  args: string[];
+  /**
+   * 
+   */
+  model?: any;
+  /**
+   * HTML Comment to mark a binding in the DOM
+   */
+  marker?: Comment;
+  _bound?: boolean;
+  /**
+   * just to have a value where we could store custom data
+   */
+  customData?: any;
+
   /**
    * All information about the binding is passed into the constructor; the
    * containing view, the DOM node, the type of binding, the model object and the
@@ -43,7 +76,7 @@ export class Binding {
    * @param {*} args The start binders, on `class-*` args[0] wil be the classname 
    * @param {*} formatters 
    */
-  constructor(view, el, type, keypath, binder, args, formatters) {
+  constructor(view: View, el, type, keypath, binder, args, formatters) {
     this.view = view;
     this.el = el;
     this.type = type;
@@ -54,6 +87,7 @@ export class Binding {
     this.formatterObservers = {};
     this.model = undefined;
     this.customData = {};
+
   }
 
   // Observes the object keypath
