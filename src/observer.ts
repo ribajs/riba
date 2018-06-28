@@ -1,14 +1,18 @@
 
 import { IAdapters } from './adapter';
 
-import { IViewOptions } from './export';
+import { IViewOptions } from './tinybind';
 
-export interface ICallback {
+export interface IObserverSyncCallback {
   sync: () => void;
 }
 export interface IKey {
   path: any;
   i: Root;
+}
+
+export interface IObservers {
+  [key: string]: Observer;
 }
 
 export type Obj = any;
@@ -32,14 +36,20 @@ let rootInterface: Root;
 
 export class Observer {
   keypath: string;
-  callback: ICallback;
+  callback: IObserverSyncCallback;
   objectPath: Obj[];
   obj: Obj;
   target: Obj;
   key: IKey;
   tokens: IKey[];
-  // Constructs a new keypath observer and kicks things off.
-  constructor(obj: Obj, keypath: string, callback: ICallback) {
+
+  /**
+   * Constructs a new keypath observer and kicks things off.
+   * @param obj 
+   * @param keypath 
+   * @param callback 
+   */
+  constructor(obj: Obj, keypath: string, callback: IObserverSyncCallback) {
     this.keypath = keypath;
     this.callback = callback;
     this.objectPath = [];
@@ -59,8 +69,10 @@ export class Observer {
     rootInterface = options.rootInterface;
   }
   
-  // Tokenizes the provided keypath string into interface + path tokens for the
-  // observer to work with.
+  /**
+   * Tokenizes the provided keypath string into interface + path tokens for the
+   * observer to work with.
+   */
   static tokenize = function(keypath: string, root: Root) {
     var tokens: any[] = [];
     var current: IKey = {i: root, path: ''};
@@ -82,8 +94,10 @@ export class Observer {
     return tokens;
   }
   
-  // Parses the keypath using the interfaces defined on the view. Sets variables
-  // for the tokenized keypath as well as the end key.
+  /**
+   * Parses the keypath using the interfaces defined on the view. Sets variables
+   * for the tokenized keypath as well as the end key.
+   */
   parse() {
     var path: string;
     var root: Root;
@@ -114,8 +128,10 @@ export class Observer {
     }
   }
   
-  // Realizes the full keypath, attaching observers for every key and correcting
-  // old observers to any changed objects in the keypath.
+  /**
+   * Realizes the full keypath, attaching observers for every key and correcting
+   * old observers to any changed objects in the keypath.
+   */
   realize() {
     var current: Obj = this.obj
     var unreached = -1
@@ -155,7 +171,9 @@ export class Observer {
     return current
   }
   
-  // Updates the keypath. This is called when any intermediary key is changed.
+  /**
+   * Updates the keypath. This is called when any intermediary key is changed.
+   */
   sync() {
     var next, oldValue, newValue
   
@@ -193,13 +211,23 @@ export class Observer {
     }
   }
   
-  // Gets the provided key on an object.
+  /**
+   * Gets the provided key on an object.
+   * @param key 
+   * @param obj 
+   */
   get(key: IKey, obj: Obj) {
     return adapters[key.i].get(obj, key.path)
   }
   
-  // Observes or unobserves a callback on the object using the provided key.
-  set(active: boolean, key: IKey, obj: Obj, callback: ICallback) {
+  /**
+   * Observes or unobserves a callback on the object using the provided key.
+   * @param active 
+   * @param key 
+   * @param obj 
+   * @param callback 
+   */
+  set(active: boolean, key: IKey, obj: Obj, callback: IObserverSyncCallback) {
     if(active) {
       adapters[key.i].observe(obj, key.path, callback)
     } else {
@@ -207,8 +235,9 @@ export class Observer {
     }
   }
   
-  
-  // Unobserves the entire keypath.
+  /**
+   * Unobserves the entire keypath.
+   */
   unobserve() {
     var obj: Obj;
     var token;

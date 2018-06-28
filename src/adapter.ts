@@ -1,4 +1,4 @@
-import { ICallback } from './observer';
+import { IObserverSyncCallback } from './observer';
 
 // The default `.` adapter that comes with tinybind.js. Allows subscribing to
 // properties on plain objects, implemented in ES5 natives using
@@ -19,7 +19,9 @@ export interface IRef {
   pointers: any[];
 }
 
-// TODO what the hell?!
+/**
+ * TODO For what is this?
+ */
 export interface IRVArray extends Array<any> {
   __rv: any;
 }
@@ -34,8 +36,8 @@ export interface IAdapter {
   stubFunction: (obj: any, fn: string) => any // => response ?
   observeMutations: (obj: any, ref: string, keypath: string) => void;
   unobserveMutations: (obj: IRVArray, ref: string, keypath: string) => void;
-  observe: (obj: any, keypath: string, callback: ICallback) => void; 
-  unobserve: (obj: any, keypath: string, callback: ICallback) => void;
+  observe: (obj: any, keypath: string, callback: IObserverSyncCallback) => void; 
+  unobserve: (obj: any, keypath: string, callback: IObserverSyncCallback) => void;
   get: (obj: any, keypath: string) => any;
   set: (obj: any, keypath: string, value: any) => void;
 }
@@ -87,7 +89,7 @@ export class Adapter implements IAdapter {
 
         if (weakmap[r]) {
           if (weakmap[r].callbacks[k] instanceof Array) {
-            weakmap[r].callbacks[k].forEach((callback: ICallback) => {
+            weakmap[r].callbacks[k].forEach((callback: IObserverSyncCallback) => {
               callback.sync();
             });
           }
@@ -144,7 +146,7 @@ export class Adapter implements IAdapter {
     }
   }
 
-  observe(obj: any, keypath: string, callback: ICallback) {
+  observe(obj: any, keypath: string, callback: IObserverSyncCallback) {
     var value: any;
     let callbacks = this.weakReference(obj).callbacks;
 
@@ -172,7 +174,7 @@ export class Adapter implements IAdapter {
                 let callbacks = map.callbacks[keypath];
 
                 if (callbacks) {
-                  callbacks.forEach((cb: ICallback) => {
+                  callbacks.forEach((cb: IObserverSyncCallback) => {
                     cb.sync();
                   });
                 }
@@ -192,7 +194,7 @@ export class Adapter implements IAdapter {
     this.observeMutations(obj[keypath], obj.__rv, keypath);
   }
 
-  unobserve(obj: any, keypath: string, callback: ICallback) {
+  unobserve(obj: any, keypath: string, callback: IObserverSyncCallback) {
     let map = this.weakmap[obj.__rv];
 
     if (map) {

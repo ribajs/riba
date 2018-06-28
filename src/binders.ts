@@ -1,10 +1,14 @@
 import { View } from './view';
-import { Observer } from './observer';
 import { Binding } from './binding';
-// import { Node } from 'babel-types';
 
+/**
+ * One way binder interface
+ */
 export type IOneWayBinder<ValueType> = (this: Binding, element: HTMLElement, value: ValueType) => void;
 
+/**
+ * To way binder interface
+ */
 export interface ITwoWayBinder<ValueType> {
   routine: (this: Binding, element: HTMLElement, value: ValueType) => void;
   bind?: (this: Binding, element: HTMLElement) => void;
@@ -21,11 +25,18 @@ export interface ITwoWayBinder<ValueType> {
   customData?: any;
 }
 
+/**
+ * A binder can be a one way binder or a two way binder
+ */
 export type Binder<ValueType> = IOneWayBinder<ValueType> | ITwoWayBinder<ValueType>
 
+/**
+ * A list of binders with any key name
+ */
 export interface IBinders<ValueType> {
   [name: string]: Binder<ValueType>;
 }
+
 
 const getString = (value: string) => {
   return value != null ? value.toString() : undefined;
@@ -35,7 +46,7 @@ const times = (n: number, cb:() => void) => {
   for (let i = 0; i < n; i++) cb();
 };
 
-function createView(binding: Binding, models: any, anchorEl: HTMLElement | Node | null) {
+const createView = (binding: Binding, models: any, anchorEl: HTMLElement | Node | null) => {
   let template = binding.el.cloneNode(true);
   let view = new View((template as Node), models, binding.view.options);
   view.bind();
@@ -64,16 +75,25 @@ const binders: IBinders<any> = {
 
     unbind(el: HTMLElement) {
       if (this.customData.handler) {
+        if(this.args === null) {
+          throw new Error('args is null');
+        }
         el.removeEventListener(this.args[0], this.customData);
       }
     },
 
     routine(el: HTMLElement, value: any /*TODO*/) {
       if (this.customData.handler) {
+        if(this.args === null) {
+          throw new Error('args is null');
+        }
         el.removeEventListener(this.args[0], this.customData.handler);
       }
 
       this.customData.handler = this.eventHandler(value);
+      if(this.args === null) {
+        throw new Error('args is null');
+      }
       el.addEventListener(this.args[0], this.customData.handler);
     }
   },
@@ -111,6 +131,9 @@ const binders: IBinders<any> = {
     },
 
     routine(el, collection) {
+      if(this.args === null) {
+        throw new Error('args is null');
+      }
       let modelName = this.args[0];
       collection = collection || [];
 
@@ -199,6 +222,9 @@ const binders: IBinders<any> = {
       //todo: add test and fix if necessary
 
       Object.keys(models).forEach(key => {
+        if(this.args === null) {
+          throw new Error('args is null');
+        }
         if (key !== this.args[0]) {
           data[key] = models[key];
         }
@@ -213,7 +239,9 @@ const binders: IBinders<any> = {
   // Adds or removes the class from the element when value is true or false.
   'class-*': <IOneWayBinder<boolean>> function(el: HTMLElement, value: boolean) {
     let elClass = ` ${el.className} `;
-
+    if(this.args === null) {
+      throw new Error('args is null');
+    }
     if (value !== (elClass.indexOf(` ${this.args[0]} `) > -1)) {
       if (value) {
         el.className = `${el.className} ${this.args[0]}`;
@@ -389,5 +417,7 @@ const binders: IBinders<any> = {
     }
   }
 };
+
+export { binders };
 
 export default binders;

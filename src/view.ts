@@ -1,16 +1,13 @@
-import tinybind from './tinybind';
+import { tinybind, IViewOptions } from './tinybind';
 import { Binder, ITwoWayBinder } from './binders';
 import { Binding } from './binding';
-import { ComponentBinding } from './component-binding';
+import { ComponentBinding, IBoundElement } from './component-binding';
 import { parseTemplate } from './parsers';
-import { IViewOptions } from './export';
-// import { Node } from 'babel-types';
 
 export type TBlock = boolean;
 
 export interface IDataElement extends HTMLElement {
   data?: string;
-  _bound?: boolean
 }
 
 const textBinder: ITwoWayBinder<string> = {
@@ -99,7 +96,8 @@ export class View {
       throw new Error('no matches');
     }
     let pipes = matches.map(trimStr);
-    let keypath = pipes.shift();
+    let keypath = pipes.shift() || null;
+    console.log('pipes', pipes);
     this.bindings.push(new Binding((this as View), (node as HTMLElement), type, keypath, binder, args, pipes));
   }
 
@@ -116,7 +114,7 @@ export class View {
     this.bindings.sort(bindingComparator);
   }
 
-  traverse(node: IDataElement): TBlock {
+  traverse(node: IBoundElement): TBlock {
     let bindingPrefix = tinybind._fullPrefix;
     let block = node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE';
     let attributes = node.attributes;

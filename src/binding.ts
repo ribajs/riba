@@ -1,9 +1,7 @@
 import { parseType } from './parsers';
-import { Observer } from './observer';
+import { Observer, IObserverSyncCallback } from './observer';
 import { Binder, IOneWayBinder, ITwoWayBinder } from './binders';
 import { View } from './view';
-// import { isForOfStatement } from 'babel-types';
-import { IFormatters } from './formatters';
 
 export interface IFormatterObservers {
   [key: string]: {
@@ -49,7 +47,9 @@ const KEYPATH = 1;
 const FORMATTER_ARGS =  /[^\s']+|'([^']|'[^\s])*'|"([^"]|"[^\s])*"/g;
 const FORMATTER_SPLIT = /\s+/;
 
-// A single binding between a model attribute and a DOM element.
+/**
+ *  A single binding between a model attribute and a DOM element.
+ */
 export class Binding {
   value?: any;
   observer?: Observer;
@@ -58,15 +58,15 @@ export class Binding {
   /**
    * Name of the binder without the prefix
    */
-  type: string;
-  binder: Binder<any>;
-  formatters: IFormatters;
+  type: string | null;
+  binder: Binder<any> | null;
+  formatters: string[] | null;
   formatterObservers: IFormatterObservers;
-  keypath: string;
+  keypath: string | null;
   /**
    * Arguments parsed from star binders, e.g. on foo-*-* args[0] is the first star, args[1] the second-
    */
-  args: string[];
+  args: string[] | null;
   /**
    * 
    */
@@ -96,7 +96,7 @@ export class Binding {
    * @param {*} args The start binders, on `class-*` args[0] wil be the classname 
    * @param {*} formatters 
    */
-  constructor(view: View, el: HTMLElement, type: string, keypath: string, binder: Binder<any>, args: string[], formatters: IFormatters) {
+  constructor(view: View, el: HTMLElement, type: string | null, keypath: string | null, binder: Binder<any> | null, args: string[] | null, formatters: string[] | null) {
     this.view = view;
     this.el = el;
     this.type = type;
@@ -115,8 +115,13 @@ export class Binding {
    * @param obj 
    * @param keypath 
    */
-  observe(obj: any, keypath: string): Observer {
-    return new Observer(obj, keypath, this);
+  observe(obj: any, keypath: string, callback?: IObserverSyncCallback): Observer {
+    if(callback) {
+      return new Observer(obj, keypath, callback);
+    } else {
+      return new Observer(obj, keypath, this);
+    }
+    
   }
 
   parseTarget() {
@@ -177,6 +182,9 @@ export class Binding {
    * formatted value.
    */
   formattedValue(value: any) {
+    if(this.formatters === null) {
+      throw new Error('formatters is null');
+    }
     return this.formatters.reduce((result: any/*check type*/, declaration: string /*check type*/, index: number) => {
       let args = declaration.match(FORMATTER_ARGS);
       if(args === null) {
@@ -228,6 +236,9 @@ export class Binding {
     }
 
     let routineFn;
+    if(this.binder === null) {
+      throw new Error('binder is null');
+    }
     if(this.binder.hasOwnProperty('routine')) {
       this.binder = ( this.binder as ITwoWayBinder<any>);
       routineFn = this.binder.routine;
@@ -258,6 +269,9 @@ export class Binding {
    */
   publish() {
     if (this.observer) {
+      if(this.formatters === null) {
+        throw new Error('formatters is null');
+      }
       let value = this.formatters.reduceRight((result: any/*check type*/, declaration: string /*check type*/, index: number) => {
         const args = declaration.split(FORMATTER_SPLIT);
         const id = args.shift();
@@ -302,6 +316,9 @@ export class Binding {
    * Unsubscribes from the model and the element.
    */
   unbind() {
+    if(this.binder === null) {
+      throw new Error('binder is null');
+    }
     if(this.binder.hasOwnProperty('bind')) {
       this.binder = ( this.binder as ITwoWayBinder<any>);
       if (this.binder.unbind) {
@@ -333,6 +350,9 @@ export class Binding {
     if (this.observer) {
       this.model = this.observer.target;
     }
+    if(this.binder === null) {
+      throw new Error('binder is null');
+    }
     if(this.binder.hasOwnProperty('update')) {
       this.binder = ( this.binder as ITwoWayBinder<any>);
       if (this.binder.update) {
@@ -346,6 +366,9 @@ export class Binding {
    * @param el 
    */
   getValue(el: HTMLSelectElement | HTMLInputElement) {
+    if(this.binder === null) {
+      throw new Error('binder is null');
+    }
     if(this.binder.hasOwnProperty('getValue')) {
       this.binder = ( this.binder as ITwoWayBinder<any>);
       if(typeof(this.binder.getValue) !== 'function') {

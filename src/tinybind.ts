@@ -1,12 +1,10 @@
-import { EXTENSIONS } from './constants';
 import { parseTemplate, parseType } from './parsers';
 import { IFormatters, formatters } from './formatters';
 import { Binding } from './binding';
 import adapter from './adapter';
-import binders from './binders';
+import { binders, IBinders } from './binders';
 import { View } from './view';
 import { IAdapters } from './adapter';
-import { IBinders } from './binders';
 import { Observer, Root } from './observer';
 import { IComponents } from './components';
 
@@ -44,26 +42,28 @@ export interface IViewOptions extends IOptionsParam {
 
 // TODO move to uitils
 const mergeObject = (target: any, obj: any) => {
-  Object.keys(obj).forEach(key => {
-    if (!target[key] || target[key] === {}) {
-      target[key] = obj[key];
-    }
-  });
+  if(obj) {
+    Object.keys(obj).forEach(key => {
+      if (!target[key] || target[key] === {}) {
+        target[key] = obj[key];
+      }
+    });
+  }
   return target; 
 };
 
 const tinybind = {
   // Global binders.
-  binders: binders,
+  binders: <IBinders<any>> binders,
 
   // Global components.
-  components: {},
+  components: <IComponents> {},
 
   // Global formatters.
   formatters: <IFormatters> formatters,
 
   // Global sightglass adapters.
-  adapters: {
+  adapters: <IAdapters> {
     '.': adapter,
   },
 
@@ -98,7 +98,7 @@ const tinybind = {
    * Default event handler.
    * TODO is this used?
    */
-  handler(context: any, ev: Event, binding: Binding) {
+  handler(this: any /* TODO CHECME */, context: any, ev: Event, binding: Binding) {
     // console.warn('yes it is used');
     this.call(context, ev, binding.view.models);
   },
@@ -107,34 +107,58 @@ const tinybind = {
    * Sets the attribute on the element. If no binder above is matched it will fall
    * back to using this binder.
    */
-  fallbackBinder(el: HTMLElement, value) {
+  fallbackBinder(this: Binding, el: HTMLElement, value: any) {
+    if(!this.type) {
+      throw new Error('Can\'t set atttribute of ' + this.type);
+    }
     if (value != null) {
       el.setAttribute(this.type, value);
     } else {
       el.removeAttribute(this.type);
-    }  
+    }
   },
 
-  // Merges an object literal into the corresponding global options.
-  configure(options) {
+  /**
+   * Merges an object literal into the corresponding global options.
+   * @param options 
+   */
+  configure(options: any) {
     if (!options) {
       return;
     }
 
-    // mergeObject(this.binders, options.binders);
-    // mergeObject(this.formatters, options.formatters);
-    // mergeObject(this.components, options.components);
-    // mergeObject(this.adapters, options.adapters);
-
     Object.keys(options).forEach(option => {
       let value = options[option];
-
-      if (EXTENSIONS.indexOf(option) > -1) {
-        Object.keys(value).forEach(key => {
-          this[option][key] = value[key];
-        });
-      } else {
-        this[option] = value;
+      switch(option) {
+        case 'binders':
+          mergeObject(this.binders, value);
+        break;
+        case 'formatters':
+          mergeObject(this.formatters, value);
+        break;
+        case 'components':
+          mergeObject(this.components, value);
+        break;
+        case 'adapters':
+          mergeObject(this.adapters, value);
+        break;
+        case 'prefix':
+          this.prefix = value;
+        case 'parseTemplate':
+          this.parseTemplate = value;
+        case 'parseType':
+          this.parseType = value;
+        case 'prefix':
+          this.prefix = value;
+        case 'templateDelimiters':
+          this.templateDelimiters = value;
+        case 'rootInterface':
+          this.rootInterface = value;
+        case 'preloadData':
+          this.preloadData = value;
+        default:
+          console.warn('Option not supported', option, value);
+        break;
       }
     });
   },
@@ -202,5 +226,7 @@ const tinybind = {
     return view;
   },
 };
+
+export { tinybind };
 
 export default tinybind;
