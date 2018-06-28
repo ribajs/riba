@@ -8,7 +8,7 @@ import { IViewOptions } from './export';
 
 export type TBlock = boolean;
 
-export interface IDataElement extends Element {
+export interface IDataElement extends HTMLElement {
   data?: string;
   _bound?: boolean
 }
@@ -71,7 +71,7 @@ const trimStr = (str: string) => {
 // A collection of bindings built from a set of parent nodes.
 export class View {
 
-  els: HTMLCollection | Element[] | Node[];
+  els: HTMLCollection | HTMLElement[] | Node[];
   models: any;
   options: IViewOptions;
   bindings: Binding[] = [];
@@ -80,11 +80,11 @@ export class View {
   // The DOM elements and the model objects for binding are passed into the
   // constructor along with any local options that should be used throughout the
   // context of the view and it's bindings.
-  constructor(els: HTMLCollection | Element | Node, models: any, options: IViewOptions) {
+  constructor(els: HTMLCollection | HTMLElement | Node, models: any, options: IViewOptions) {
     if (els instanceof Array) {
       this.els = els;
     } else {
-      this.els = ([els] as Element[] | Node[] );
+      this.els = ([els] as HTMLElement[] | Node[] );
     }
 
     this.models = models;
@@ -93,14 +93,14 @@ export class View {
     this.build();
   }
 
-  public buildBinding(node: Element | Text, type: string | null, declaration: string, binder: Binder<any>, args: string[] | null) {
+  public buildBinding(node: HTMLElement | Text, type: string | null, declaration: string, binder: Binder<any>, args: string[] | null) {
     let matches = declaration.match(DECLARATION_SPLIT);
     if(matches === null) {
       throw new Error('no matches');
     }
     let pipes = matches.map(trimStr);
     let keypath = pipes.shift();
-    this.bindings.push(new Binding((this as View), node, type, keypath, binder, args, pipes));
+    this.bindings.push(new Binding((this as View), (node as HTMLElement), type, keypath, binder, args, pipes));
   }
 
   // Parses the DOM tree and builds `Binding` instances for every matched

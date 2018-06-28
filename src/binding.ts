@@ -1,29 +1,43 @@
 import { parseType } from './parsers';
 import { Observer } from './observer';
-import { IBinding, Binder } from './binders';
+import { Binder, IOneWayBinder, ITwoWayBinder } from './binders';
 import { View } from './view';
+// import { isForOfStatement } from 'babel-types';
+import { IFormatters } from './formatters';
 
+export interface IFormatterObservers {
+  [key: string]: {
+    [key: string]: Observer
+  }
+}
 
-function getInputValue(el) {
-  let results = [];
+export type eventHandlerFunction = (event: Event) => void;
+
+/**
+ * TODO move to utils
+ * @param el
+ */
+function getInputValue(el: HTMLSelectElement | HTMLInputElement) {
+  let results: string[] = [];
   if (el.type === 'checkbox') {
-    return el.checked;
+    return (el as HTMLInputElement).checked;
   } else if (el.type === 'select-multiple') {
+    let options:HTMLOptionsCollection = (el as HTMLSelectElement).options;
 
-    el.options.forEach(option => {
-      if (option.selected) {
-        results.push(option.value);
+    for (const key in options) {
+      if (options.hasOwnProperty(key)) {
+        const option = options[key];
+        if (option.selected) {
+          results.push(option.value);
+        }
       }
-    });
+    }
 
     return results;
   } else {
     return el.value;
   }
 }
-
-const FORMATTER_ARGS =  /[^\s']+|'([^']|'[^\s])*'|"([^"]|"[^\s])*"/g;
-const FORMATTER_SPLIT = /\s+/;
 
 /**
  * Used also in parsers.parseType
@@ -32,10 +46,13 @@ const FORMATTER_SPLIT = /\s+/;
 const PRIMITIVE = 0;
 const KEYPATH = 1;
 
+const FORMATTER_ARGS =  /[^\s']+|'([^']|'[^\s])*'|"([^"]|"[^\s])*"/g;
+const FORMATTER_SPLIT = /\s+/;
+
 // A single binding between a model attribute and a DOM element.
-export class Binding implements IBinding {
-
-
+export class Binding {
+  value?: any;
+  observer?: Observer;
   view: View;
   el: HTMLElement;
   /**
@@ -43,8 +60,8 @@ export class Binding implements IBinding {
    */
   type: string;
   binder: Binder<any>;
-  formatters: string[];
-  formatterObservers: any;
+  formatters: IFormatters;
+  formatterObservers: IFormatterObservers;
   keypath: string;
   /**
    * Arguments parsed from star binders, e.g. on foo-*-* args[0] is the first star, args[1] the second-
@@ -58,6 +75,9 @@ export class Binding implements IBinding {
    * HTML Comment to mark a binding in the DOM
    */
   marker?: Comment;
+  /**
+   * Used in component bindings. TODO e.g. move to ComponentBinding or binders?
+   */
   _bound?: boolean;
   /**
    * just to have a value where we could store custom data
@@ -76,7 +96,7 @@ export class Binding implements IBinding {
    * @param {*} args The start binders, on `class-*` args[0] wil be the classname 
    * @param {*} formatters 
    */
-  constructor(view: View, el, type, keypath, binder, args, formatters) {
+  constructor(view: View, el: HTMLElement, type: string, keypath: string, binder: Binder<any>, args: string[], formatters: IFormatters) {
     this.view = view;
     this.el = el;
     this.type = type;
@@ -90,8 +110,12 @@ export class Binding implements IBinding {
 
   }
 
-  // Observes the object keypath
-  observe(obj, keypath) {
+  /**
+   * Observes the object keypath
+   * @param obj 
+   * @param keypath 
+   */
+  observe(obj: any, keypath: string): Observer {
     return new Observer(obj, keypath, this);
   }
 
@@ -104,7 +128,7 @@ export class Binding implements IBinding {
         this.observer = this.observe(this.view.models, this.keypath);
         this.model = this.observer.target;
       } else {
-        throw new Error('Unknown type in token', token);
+        throw new Error('Unknown type in token');
       }
     } else {
       this.value = undefined;
@@ -117,41 +141,51 @@ export class Binding implements IBinding {
    * @see https://github.com/mikeric/rivets/blob/master/dist/rivets.js#L26
    * @see https://github.com/mikeric/rivets/blob/master/dist/rivets.js#L1175
    */
-  getIterationAlias(modelName) {
+  getIterationAlias(modelName: string) {
     return '%' + modelName + '%';
   }
 
-  parseFormatterArguments(args, formatterIndex) {
+  parseFormatterArguments(args: string[], formatterIndex: number): string[] {
     return args
-      .map(parseType)
-      .map(({type, value}, ai) => {
-        if (type === PRIMITIVE) {
-          return value;
-        } else if (type === KEYPATH) {
-          if (!this.formatterObservers[formatterIndex]) {
-            this.formatterObservers[formatterIndex] = {};
-          }
-
-          let observer = this.formatterObservers[formatterIndex][ai];
-
-          if (!observer) {
-            observer = this.observe(this.view.models, value);
-            this.formatterObservers[formatterIndex][ai] = observer;
-          }
-
-          return observer.value();
-        } else {
-          throw new Error('Unknown type', type, value);
+    .map(parseType)
+    .map(({type, value}, ai) => {
+      if (type === PRIMITIVE) {
+        const primitiveValue = value;
+        return primitiveValue;
+      } else if (type === KEYPATH) {
+        // keypath is string
+        const keypath = (value as string );
+        if (!this.formatterObservers[formatterIndex]) {
+          this.formatterObservers[formatterIndex] = {};
         }
-      });
+
+        let observer = this.formatterObservers[formatterIndex][ai];
+
+        if (!observer) {
+          observer = this.observe(this.view.models, keypath);
+          this.formatterObservers[formatterIndex][ai] = observer;
+        }
+        return observer.value();
+      } else {
+        throw new Error('Unknown argument type');
+      }
+    });
   }
 
-  // Applies all the current formatters to the supplied value and returns the
-  // formatted value.
-  formattedValue(value) {
-    return this.formatters.reduce((result, declaration, index) => {
+  /**
+   * Applies all the current formatters to the supplied value and returns the
+   * formatted value.
+   */
+  formattedValue(value: any) {
+    return this.formatters.reduce((result: any/*check type*/, declaration: string /*check type*/, index: number) => {
       let args = declaration.match(FORMATTER_ARGS);
+      if(args === null) {
+        throw new Error('No args matched from FORMATTER_ARGS');
+      }
       let id = args.shift();
+      if(!id) {
+        throw new Error('No id found in args');
+      }
       let formatter = this.view.options.formatters[id];
 
       const processedArgs = this.parseFormatterArguments(args, index);
@@ -165,33 +199,51 @@ export class Binding implements IBinding {
     }, value);
   }
 
-  // Returns an event handler for the binding around the supplied function.
-  eventHandler(fn) {
+  /**
+   * Returns an event handler for the binding around the supplied function.
+   */
+  eventHandler(fn: eventHandlerFunction): (ev: Event) => any {
     let binding = this;
     let handler = binding.view.options.handler;
 
-    return function(ev) {
+    return (ev) => {
+      if(!handler) {
+        throw new Error('No handler defined in binding.view.options.handler');
+      }
       handler.call(fn, this, ev, binding);
     };
   }
 
-  // Sets the value for the binding. This Basically just runs the binding routine
-  // with the supplied value formatted.
-  set(value) {
-    if ((value instanceof Function) && !this.binder.function) {
+  /**
+   * Sets the value for the binding. This Basically just runs the binding routine
+   * with the supplied value formatted.
+   */
+  set(value: any) {
+    if ((value instanceof Function) && !(this.binder as ITwoWayBinder<any> ).function) {
+      value = (value as IOneWayBinder<any> )
       value = this.formattedValue(value.call(this.model));
     } else {
+      value = (value as ITwoWayBinder<any> )
       value = this.formattedValue(value);
     }
 
-    let routineFn = this.binder.routine || this.binder;
+    let routineFn;
+    if(this.binder.hasOwnProperty('routine')) {
+      this.binder = ( this.binder as ITwoWayBinder<any>);
+      routineFn = this.binder.routine;
+    } else {
+      this.binder = ( this.binder as IOneWayBinder<any>);
+      routineFn = this.binder;
+    }
 
     if (routineFn instanceof Function) {
       routineFn.call(this, this.el, value);
     }
   }
 
-  // Syncs up the view binding with the model.
+  /**
+   * Syncs up the view binding with the model.
+   */
   sync() {
     if (this.observer) {
       this.model = this.observer.target;
@@ -201,12 +253,17 @@ export class Binding implements IBinding {
     }
   }
 
-  // Publishes the value currently set on the input element back to the model.
+  /**
+   * Publishes the value currently set on the input element back to the model.
+   */
   publish() {
     if (this.observer) {
-      var value = this.formatters.reduceRight((result, declaration, index) => {
+      let value = this.formatters.reduceRight((result: any/*check type*/, declaration: string /*check type*/, index: number) => {
         const args = declaration.split(FORMATTER_SPLIT);
         const id = args.shift();
+        if(!id) {
+          throw new Error('id not defined');
+        }
         const formatter = this.view.options.formatters[id];
         const processedArgs = this.parseFormatterArguments(args, index);
 
@@ -214,19 +271,25 @@ export class Binding implements IBinding {
           result = formatter.publish(result, ...processedArgs);
         }
         return result;
-      }, this.getValue(this.el));
+      }, this.getValue((this.el as HTMLInputElement)));
 
       this.observer.setValue(value);
     }
   }
 
-  // Subscribes to the model for changes at the specified keypath. Bi-directional
-  // routines will also listen for changes on the element to propagate them back
-  // to the model.
+  /**
+   * Subscribes to the model for changes at the specified keypath. Bi-directional
+   * routines will also listen for changes on the element to propagate them back
+   * to the model.
+   */
   bind() {
     this.parseTarget();
 
-    if (this.binder.hasOwnProperty('bind')) {
+    if (this.binder && this.binder.hasOwnProperty('bind')) {
+      this.binder = (this.binder as ITwoWayBinder<any>);
+      if(!this.binder.bind && typeof(this.binder.bind) !== 'function') {
+        throw new Error('the method bind is not a function');
+      }
       this.binder.bind.call(this, this.el);
     }
 
@@ -235,10 +298,15 @@ export class Binding implements IBinding {
     }
   }
 
-  // Unsubscribes from the model and the element.
+  /**
+   * Unsubscribes from the model and the element.
+   */
   unbind() {
-    if (this.binder.unbind) {
-      this.binder.unbind.call(this, this.el);
+    if(this.binder.hasOwnProperty('bind')) {
+      this.binder = ( this.binder as ITwoWayBinder<any>);
+      if (this.binder.unbind) {
+        this.binder.unbind.call(this, this.el);
+      }
     }
 
     if (this.observer) {
@@ -256,21 +324,33 @@ export class Binding implements IBinding {
     this.formatterObservers = {};
   }
 
-  // Updates the binding's model from what is currently set on the view. Unbinds
-  // the old model first and then re-binds with the new model.
-  update(models = {}) {
+  /**
+   * Updates the binding's model from what is currently set on the view. Unbinds
+   * the old model first and then re-binds with the new model.
+   * @param {any} models 
+   */
+  update(models: any = {}) {
     if (this.observer) {
       this.model = this.observer.target;
     }
-
-    if (this.binder.update) {
-      this.binder.update.call(this, models);
+    if(this.binder.hasOwnProperty('update')) {
+      this.binder = ( this.binder as ITwoWayBinder<any>);
+      if (this.binder.update) {
+        this.binder.update.call(this, models);
+      }
     }
   }
 
-  // Returns elements value
-  getValue(el) {
-    if (this.binder && this.binder.getValue) {
+  /**
+   * Returns elements value
+   * @param el 
+   */
+  getValue(el: HTMLSelectElement | HTMLInputElement) {
+    if(this.binder.hasOwnProperty('getValue')) {
+      this.binder = ( this.binder as ITwoWayBinder<any>);
+      if(typeof(this.binder.getValue) !== 'function') {
+        throw new Error('getValue is not a function');
+      }
       return this.binder.getValue.call(this, el);
     } else {
       return getInputValue(el);

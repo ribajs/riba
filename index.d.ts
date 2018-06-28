@@ -2,30 +2,14 @@
 import { IBinders, Binder } from './src/binders';
 import { IOptions } from './src/export';
 import { View } from './src/view';
+import { IComponents } from './src/components';
+import { IFormatters } from './src/formatters';
 
 // export interface Observer {
 //   unobserve: () => any
 //   value: () => any
 // }
 
-export type Scope = any;
-
-export interface IComponent {
-  template: string | (() => string) | (() => HTMLElement);
-  initialize: (el: HTMLElement, data: any) => Scope;
-}
-
-export interface IComponents {
-  [name: string]: IComponent;
-}
-
-export interface IFormatter {
-  (val: any, ...args: any[]): any;
-}
-
-export interface IFormatters {
-  [name: string]: IFormatter;
-}
 
 export interface Tinybind extends IOptions {
   // Global binders.

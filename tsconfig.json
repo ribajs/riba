@@ -1,6 +1,6 @@
 {
   "files": [
-    "src/export.ts"
+    "src/tinybind.ts"
   ],
   "compilerOptions": {
     /* Basic Options */

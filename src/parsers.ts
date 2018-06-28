@@ -25,7 +25,7 @@ export function isJson(str: string) {
 // Parser and tokenizer for getting the type and value from a string.
 export function parseType(string: string) {
   let type = PRIMITIVE;
-  let value: string | boolean | number | null | undefined = string;
+  let value: any = string;
   if (QUOTED_STR.test(string)) {
     value = string.slice(1, -1);
   } else if (string === 'true') {
