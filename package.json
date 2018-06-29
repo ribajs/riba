@@ -1,7 +1,7 @@
 {
   "name": "tinybind",
   "description": "Declarative data binding + templating solution.",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "contributors": [
     "Michael Richards",

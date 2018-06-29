@@ -411,5 +411,3 @@ const binders: IBinders<any> = {
 };
 
 export { binders };
-
-export default binders;

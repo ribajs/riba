@@ -2,6 +2,13 @@
 
 #### Changes
 
+- Rewritten in TypeScript
+- Simplified components
+
+# 0.12
+
+#### Changes
+
 - Components feature restored from Rivets.js
 - Updated developer dependencies
 - Replaced mocha-phantomjs with mocha-chrome for local tests

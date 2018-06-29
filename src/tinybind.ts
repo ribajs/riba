@@ -1,15 +1,22 @@
+import { mergeObject } from './utils';
 import { parseTemplate, parseType, ITokens } from './parsers';
 import { IFormatters, formatters } from './formatters';
 import { Binding } from './binding';
 import { adapter } from './adapter';
-import { binders, Binder, IBinders, ITwoWayBinder, IOneWayBinder } from './binders';
+import { binders, IBinders} from './binders';
 import { View } from './view';
 import { IAdapters } from './adapter';
 import { Observer, Root } from './observer';
-import { IComponents, IComponent } from './components';
-import { mergeObject } from './utils';
+import { IComponents } from './components';
 
-export declare interface IOptions {
+interface IExtensions {
+  binders: IBinders<any>;
+  formatters: IFormatters;
+  components: IComponents;
+  adapters: IAdapters;
+}
+
+export interface IOptions {
   // Attribute prefix in templates
   prefix?: string;
 
@@ -24,13 +31,6 @@ export declare interface IOptions {
 
   // Augment the event handler of the on-* binder
   handler?: Function;
-}
-
-export declare interface IExtensions {
-  binders: IBinders<any>;
-  formatters: IFormatters;
-  components: IComponents;
-  adapters: IAdapters;
 }
 
 export declare interface IOptionsParam extends IExtensions, IOptions {}
@@ -84,11 +84,11 @@ const tinybind: ITinybind = {
 
   _fullPrefix: 'rv-',
 
-  get prefix () {
+  get prefix() {
     return this._prefix;
   },
 
-  set prefix (value) {
+  set prefix(value) {
     this._prefix = value;
     this._fullPrefix = value + '-';
   },
@@ -118,7 +118,7 @@ const tinybind: ITinybind = {
    * back to using this binder.
    */
   fallbackBinder(this: Binding, el: HTMLElement, value: any) {
-    if(!this.type) {
+    if (!this.type) {
       throw new Error('Can\'t set atttribute of ' + this.type);
     }
     if (value != null) {
@@ -247,30 +247,6 @@ const tinybind: ITinybind = {
   },
 };
 
-export {
-  tinybind,
-  // ITinybind,
-  // IExtensions,
-  // IOptions,
-  // IOptionsParam,
-  // IViewOptions,
-  parseTemplate,
-  parseType,
-  IFormatters,
-  formatters,
-  Binding,
-  adapter,
-  binders,
-  Binder,
-  IBinders,
-  ITwoWayBinder,
-  IOneWayBinder,
-  View,
-  IAdapters,
-  Observer,
-  Root,
-  IComponents,
-  IComponent
-};
+export { tinybind };
 
 export default tinybind;
