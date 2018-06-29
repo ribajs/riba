@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+
+  <body>
+    <div class="test">
+      <div rv-html="'<strong>hello</strong>'"></div>
+      <div rv-hide="true">
+        <h1>hide me</h1>
+      </div>
+      <todo-item foo="'bar'"></todo-item>
+    </div>
+    <script src="../dist/tinybind.js"></script>
+    <script>
+      window.tinybind = tinybind;
+
+      tinybind.components['todo-item'] = {
+        // Return the template for the component.
+        template: function() {
+          return '<h1></h1>';
+        },
+      
+        // Takes the original element and the data that was passed into the
+        // component (either from rivets.init or the attributes on the component
+        // element in the template).
+        initialize: function(el, data) {
+          console.log('el, data', el, data);
+          return data;
+        }
+      }
+
+      tinybind.bind(document.getElementsByTagName("body")[0], {});
+
+    </script>
+  </body>
+</html>

@@ -57,15 +57,15 @@ describe('tinybind.ComponentBinding', function() {
       .should.be.true();
     });
     
-    it('returns attributes assigned to "static" property as they are', function() {
-      var type = 'text';
+    // it('returns attributes assigned to "static" property as they are', function() {
+    //   var type = 'text';
     
-      component.static = ['type'];
-      componentRoot.setAttribute('type', type);
-      tinybind.bind(element, locals);
+    //   component.static = ['type'];
+    //   componentRoot.setAttribute('type', type);
+    //   tinybind.bind(element, locals);
     
-      component.initialize.calledWith(componentRoot, { item: locals.object, type: type }).should.be.true();
-    });
+    //   component.initialize.calledWith(componentRoot, { item: locals.object, type: type }).should.be.true();
+    // });
   });
     
   describe('when "template" is a function', function() {

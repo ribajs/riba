@@ -142,20 +142,30 @@ const tinybind = {
         case 'adapters':
           mergeObject(this.adapters, value);
         break;
+        case 'adapter':
+          mergeObject(this.adapters, value);
+        break;
         case 'prefix':
           this.prefix = value;
+          break;
         case 'parseTemplate':
           this.parseTemplate = value;
+          break;
         case 'parseType':
           this.parseType = value;
+          break;
         case 'prefix':
           this.prefix = value;
+          break;
         case 'templateDelimiters':
           this.templateDelimiters = value;
+          break;
         case 'rootInterface':
           this.rootInterface = value;
+          break;
         case 'preloadData':
           this.preloadData = value;
+          break;
         default:
           console.warn('Option not supported', option, value);
         break;
