@@ -50,7 +50,7 @@ Documentation is available on the [homepage](http://blikblum.github.io/tinybind/
   * Remove computed feature - can be replaced by an identity formatter
   * Add ability to customize input event through event-name attribute
 * Internal changes
-  * Written in ES6 instead of coffeescript
+  * Written in TypeScript instead of coffeescript
   * Change how scope of iteration binder works. Instead of copying properties down to children, uses a prototype like approach
     * Related: [486](https://github.com/mikeric/rivets/issues/486) [512](https://github.com/mikeric/rivets/issues/512) [417](https://github.com/mikeric/rivets/pull/417)
   * Change how to customize index name in each binder (using an attribute)

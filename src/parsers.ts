@@ -1,31 +1,21 @@
+import { isJson } from './utils';
+
 /**
  * Used also in parsers.parseType
  * TODO outsource
  */
-const PRIMITIVE = 0;
-const KEYPATH = 1;
+export const PRIMITIVE = 0;
+export const KEYPATH = 1;
+export const TEXT = 0;
+export const BINDING = 1;
 
 const QUOTED_STR = /^'.*'$|^".*"$/; // regex to test if string is wrapped in " or '
 
-// Used in parsers.parseTemplate
-const TEXT = 0;
-const BINDING = 1;
-
-// Test if string is a json string
-export function isJson(str) {
-  try {
-    const val = JSON.parse(str);
-    return (val instanceof Array || val instanceof Object) ? true : false;
-  }
-  catch (error) {
-    return false;
-  }
-}
 
 // Parser and tokenizer for getting the type and value from a string.
-export function parseType(string) {
+export function parseType(string: string) {
   let type = PRIMITIVE;
-  let value = string;
+  let value: any = string;
   if (QUOTED_STR.test(string)) {
     value = string.slice(1, -1);
   } else if (string === 'true') {
@@ -36,7 +26,7 @@ export function parseType(string) {
     value = null;
   } else if (string === 'undefined') {
     value = undefined;
-  } else if (!isNaN(string)) {
+  } else if (!isNaN(Number(string))) {
     value = Number(string);
   } else if (isJson(string)) {
     value = JSON.parse(string);
@@ -46,11 +36,17 @@ export function parseType(string) {
   return {type: type, value: value};
 }
 
+
+export interface ITokens {
+  type: number;
+  value: string;
+}
+
 // Template parser and tokenizer for mustache-style text content bindings.
 // Parses the template and returns a set of tokens, separating static portions
 // of text from binding declarations.
-export function parseTemplate(template, delimiters) {
-  var tokens;
+export function parseTemplate(template: string, delimiters: string[]) {
+  var tokens: ITokens[] | null = null;
   let length = template.length;
   let index = 0;
   let lastIndex = 0;

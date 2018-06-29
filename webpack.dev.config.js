@@ -5,10 +5,11 @@ module.exports = {
     entry: {
       tinybind: './src/tinybind.ts'
     },
-    mode: 'production', // production | development
+    devtool: 'inline-source-map',
+    mode: 'development', // production | development
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: '[name].min.js',
+      filename: '[name].js',
       library: 'tinybind',
       libraryTarget: 'umd',
       libraryExport: 'default'

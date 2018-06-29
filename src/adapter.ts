@@ -1,3 +1,5 @@
+import { IObserverSyncCallback } from './observer';
+
 // The default `.` adapter that comes with tinybind.js. Allows subscribing to
 // properties on plain objects, implemented in ES5 natives using
 // `Object.defineProperty`.
@@ -12,11 +14,43 @@ const ARRAY_METHODS = [
   'splice'
 ];
 
-const adapter = {
-  counter: 0,
-  weakmap: {},
+export interface IRef {
+  callbacks: any[];
+  pointers: any[];
+}
 
-  weakReference: function(obj) {
+/**
+ * TODO For what is this?
+ */
+export interface IRVArray extends Array<any> {
+  __rv: any;
+}
+
+export type AdapterFunction = (...args: any[]) => any;
+
+export interface IAdapter {
+  counter: number;
+  weakmap: any;
+  weakReference: (obj: any) => any; // => __rv ?
+  cleanupWeakReference: (ref: IRef, id: number) => void;
+  stubFunction: (obj: any, fn: string) => any // => response ?
+  observeMutations: (obj: any, ref: string, keypath: string) => void;
+  unobserveMutations: (obj: IRVArray, ref: string, keypath: string) => void;
+  observe: (obj: any, keypath: string, callback: IObserverSyncCallback) => void; 
+  unobserve: (obj: any, keypath: string, callback: IObserverSyncCallback) => void;
+  get: (obj: any, keypath: string) => any;
+  set: (obj: any, keypath: string, value: any) => void;
+}
+
+export interface IAdapters {
+  [name: string]: IAdapter;
+}
+
+export class Adapter implements IAdapter {
+  counter: number = 0;
+  weakmap:any = {};
+
+  weakReference(obj: any) {
     if (!obj.hasOwnProperty('__rv')) {
       let id = this.counter++;
 
@@ -32,22 +66,22 @@ const adapter = {
     }
 
     return this.weakmap[obj.__rv];
-  },
+  }
 
-  cleanupWeakReference: function(ref, id) {
+  cleanupWeakReference(ref: IRef, id: number) {
     if (!Object.keys(ref.callbacks).length) {
       if (!(ref.pointers && Object.keys(ref.pointers).length)) {
         delete this.weakmap[id];
       }
     }
-  },
+  }
 
-  stubFunction: function(obj, fn) {
+  stubFunction(obj: any, fn: string) {
     let original = obj[fn];
     let map = this.weakReference(obj);
     let weakmap = this.weakmap;
 
-    obj[fn] = (...args) => {
+    obj[fn] = (...args: any[]): AdapterFunction => {
       let response = original.apply(obj, args);
 
       Object.keys(map.pointers).forEach(r => {
@@ -55,7 +89,7 @@ const adapter = {
 
         if (weakmap[r]) {
           if (weakmap[r].callbacks[k] instanceof Array) {
-            weakmap[r].callbacks[k].forEach(callback => {
+            weakmap[r].callbacks[k].forEach((callback: IObserverSyncCallback) => {
               callback.sync();
             });
           }
@@ -64,9 +98,9 @@ const adapter = {
 
       return response;
     };
-  },
+  }
 
-  observeMutations: function(obj, ref, keypath) {
+  observeMutations(obj: any, ref: string, keypath: string) {
     if (obj instanceof Array) {
       let map = this.weakReference(obj);
 
@@ -86,9 +120,9 @@ const adapter = {
         map.pointers[ref].push(keypath);
       }
     }
-  },
+  }
 
-  unobserveMutations: function(obj, ref, keypath) {
+  unobserveMutations(obj: IRVArray, ref: string, keypath: string) {
     if ((obj instanceof Array) && (obj.__rv != null)) {
       let map = this.weakmap[obj.__rv];
 
@@ -110,10 +144,10 @@ const adapter = {
         }
       }
     }
-  },
+  }
 
-  observe: function(obj, keypath, callback) {
-    var value;
+  observe(obj: any, keypath: string, callback: IObserverSyncCallback) {
+    var value: any;
     let callbacks = this.weakReference(obj).callbacks;
 
     if (!callbacks[keypath]) {
@@ -140,8 +174,8 @@ const adapter = {
                 let callbacks = map.callbacks[keypath];
 
                 if (callbacks) {
-                  callbacks.forEach(cb => {
-                      cb.sync();
+                  callbacks.forEach((cb: IObserverSyncCallback) => {
+                    cb.sync();
                   });
                 }
 
@@ -158,9 +192,9 @@ const adapter = {
     }
 
     this.observeMutations(obj[keypath], obj.__rv, keypath);
-  },
+  }
 
-  unobserve: function(obj, keypath, callback) {
+  unobserve(obj: any, keypath: string, callback: IObserverSyncCallback) {
     let map = this.weakmap[obj.__rv];
 
     if (map) {
@@ -181,15 +215,17 @@ const adapter = {
         this.cleanupWeakReference(map, obj.__rv);
       }
     }
-  },
+  }
 
-  get: function(obj, keypath) {
+  get(obj: any, keypath: string) {
     return obj[keypath];
-  },
+  }
 
-  set: (obj, keypath, value) => {
+  set(obj: any, keypath: string, value: any) {
     obj[keypath] = value;
   }
 };
 
-export default adapter;
+const adapter = new Adapter();
+export { adapter }
+// export default adapter;

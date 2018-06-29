@@ -35,7 +35,7 @@ const plugins = [babel({
       {
         loose: true, 
         modules: false,
-        targets: {ie: 11}, 
+        targets: {browsers: ['ie 11']}, 
         exclude: ['babel-plugin-transform-es2015-typeof-symbol']
       }
     ]
