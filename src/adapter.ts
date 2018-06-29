@@ -227,5 +227,5 @@ export class Adapter implements IAdapter {
 };
 
 const adapter = new Adapter();
-
+export { adapter }
 export default adapter;

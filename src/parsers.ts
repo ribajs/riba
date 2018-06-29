@@ -1,26 +1,16 @@
+import { isJson } from './utils';
+
 /**
  * Used also in parsers.parseType
  * TODO outsource
  */
-const PRIMITIVE = 0;
-const KEYPATH = 1;
+export const PRIMITIVE = 0;
+export const KEYPATH = 1;
+export const TEXT = 0;
+export const BINDING = 1;
 
 const QUOTED_STR = /^'.*'$|^".*"$/; // regex to test if string is wrapped in " or '
 
-// Used in parsers.parseTemplate
-const TEXT = 0;
-const BINDING = 1;
-
-// Test if string is a json string
-export function isJson(str: string) {
-  try {
-    const val = JSON.parse(str);
-    return (val instanceof Array || val instanceof Object) ? true : false;
-  }
-  catch (error) {
-    return false;
-  }
-}
 
 // Parser and tokenizer for getting the type and value from a string.
 export function parseType(string: string) {

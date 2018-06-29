@@ -1,5 +1,5 @@
 import { tinybind, IOptionsParam } from './tinybind';
-import { parseType } from './parsers';
+import { PRIMITIVE, KEYPATH, parseType } from './parsers';
 import { Binding } from './binding';
 import { IBinders } from './binders';
 import { IFormatters } from './formatters';
@@ -7,24 +7,11 @@ import { View } from './view';
 import { IComponent, IComponents } from './components';
 import { IObservers } from './observer';
 import { IAdapters } from './adapter';
+import { mergeObject } from './utils';
 
-const mergeObject = (target: any, obj: any) => {
-  if(obj) {
-    Object.keys(obj).forEach(key => {
-      if (!target[key] || target[key] === {}) {
-        target[key] = obj[key];
-      }
-    });
-  }
-  return target; 
-};
-
-/**
- * Used also in parsers.parseType
- * TODO outsource
- */
-const PRIMITIVE = 0;
-const KEYPATH = 1;
+export interface IBoundElement extends HTMLElement {	
+  _bound?: boolean	
+}
 
 export interface IKeypaths {
   [propertyName: string]: string;
@@ -36,9 +23,9 @@ export interface IKeypaths {
 export class ComponentBinding extends Binding {
   view: View;
   componentView?: View;
-  el: HTMLElement;
+  el: IBoundElement;
   type: string;
-  component: IComponent;
+  component: IComponent<any>;
   /**
    * static values (PRIMITIVE Attributes)
    */
@@ -158,6 +145,7 @@ export class ComponentBinding extends Binding {
        */
       let scope = this.component.initialize.call(this, this.el, this.locals());
       this.componentView = tinybind.bind(Array.prototype.slice.call(this.el.childNodes), scope, this.getMergedOptions());
+      this.el._bound = true;
     } else {
       this.componentView.bind();
     }

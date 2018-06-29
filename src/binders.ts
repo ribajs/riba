@@ -1,5 +1,6 @@
 import { View } from './view';
 import { Binding } from './binding';
+import { times, getString } from './utils';
 
 /**
  * One way binder interface
@@ -36,15 +37,6 @@ export type Binder<ValueType> = IOneWayBinder<ValueType> | ITwoWayBinder<ValueTy
 export interface IBinders<ValueType> {
   [name: string]: Binder<ValueType>;
 }
-
-
-const getString = (value: string) => {
-  return value != null ? value.toString() : undefined;
-};
-
-const times = (n: number, cb:() => void) => {
-  for (let i = 0; i < n; i++) cb();
-};
 
 const createView = (binding: Binding, models: any, anchorEl: HTMLElement | Node | null) => {
   let template = binding.el.cloneNode(true);

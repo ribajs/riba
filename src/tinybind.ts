@@ -1,14 +1,15 @@
-import { parseTemplate, parseType } from './parsers';
+import { parseTemplate, parseType, ITokens } from './parsers';
 import { IFormatters, formatters } from './formatters';
 import { Binding } from './binding';
-import adapter from './adapter';
-import { binders, IBinders } from './binders';
+import { adapter } from './adapter';
+import { binders, Binder, IBinders, ITwoWayBinder, IOneWayBinder } from './binders';
 import { View } from './view';
 import { IAdapters } from './adapter';
 import { Observer, Root } from './observer';
-import { IComponents } from './components';
+import { IComponents, IComponent } from './components';
+import { mergeObject } from './utils';
 
-export interface IOptions {
+export declare interface IOptions {
   // Attribute prefix in templates
   prefix?: string;
 
@@ -25,34 +26,45 @@ export interface IOptions {
   handler?: Function;
 }
 
-export interface IExtensions {
+export declare interface IExtensions {
   binders: IBinders<any>;
   formatters: IFormatters;
   components: IComponents;
   adapters: IAdapters;
 }
 
-export interface IOptionsParam extends IExtensions, IOptions {}
+export declare interface IOptionsParam extends IExtensions, IOptions {}
 
-export interface IViewOptions extends IOptionsParam {
+export declare interface IViewOptions extends IOptionsParam {
   starBinders: any;
   // sightglass
   rootInterface: Root;
 }
 
-// TODO move to uitils
-const mergeObject = (target: any, obj: any) => {
-  if(obj) {
-    Object.keys(obj).forEach(key => {
-      if (!target[key] || target[key] === {}) {
-        target[key] = obj[key];
-      }
-    });
-  }
-  return target; 
-};
+export declare interface ITinybind {
+  binders: IBinders<any>;
+  components: IComponents;
+  formatters: IFormatters;
+  adapters: IAdapters;
+  _prefix: string;
+  _fullPrefix: string;
+  prefix: string;
+  parseTemplate: (template: string, delimiters: string[]) => ITokens[] | null;
+  parseType: (string: string) => {
+    type: number;
+    value: any;
+  };
+  templateDelimiters: string[];
+  rootInterface: string;
+  preloadData: boolean;
+  handler(this: any, context: any, ev: Event, binding: Binding): void;
+  fallbackBinder(this: Binding, el: HTMLElement, value: any): void;
+  configure(options: any): void;
+  init: (componentKey: string, el: HTMLElement, data?: {}) => View;
+  bind: (el: HTMLElement, models: any, options?: IOptionsParam | undefined) => View;
+}
 
-const tinybind = {
+const tinybind: ITinybind = {
   // Global binders.
   binders: <IBinders<any>> binders,
 
@@ -96,10 +108,8 @@ const tinybind = {
 
   /**
    * Default event handler.
-   * TODO is this used?
    */
-  handler(this: any /* TODO CHECME */, context: any, ev: Event, binding: Binding) {
-    // console.warn('yes it is used');
+  handler(this: any, context: any, ev: Event, binding: Binding) {
     this.call(context, ev, binding.view.models);
   },
 
@@ -237,6 +247,30 @@ const tinybind = {
   },
 };
 
-export { tinybind };
+export {
+  tinybind,
+  // ITinybind,
+  // IExtensions,
+  // IOptions,
+  // IOptionsParam,
+  // IViewOptions,
+  parseTemplate,
+  parseType,
+  IFormatters,
+  formatters,
+  Binding,
+  adapter,
+  binders,
+  Binder,
+  IBinders,
+  ITwoWayBinder,
+  IOneWayBinder,
+  View,
+  IAdapters,
+  Observer,
+  Root,
+  IComponents,
+  IComponent
+};
 
 export default tinybind;

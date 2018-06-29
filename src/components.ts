@@ -5,10 +5,9 @@ import { IAdapters } from './adapter';
 
 export type Scope = any;
 
-export interface IComponent {
+export interface IComponent<ValueType> {
   template: (() => string) | (() => HTMLElement);
-  initialize: (el: HTMLElement, data: any) => Scope;
-  static?: any;
+  initialize: (el: HTMLElement, data: ValueType) => Scope;
 
   // extension options
   binders?: IBinders<any>;
@@ -25,5 +24,5 @@ export interface IComponent {
 }
 
 export interface IComponents {
-  [name: string]: IComponent;
+  [name: string]: IComponent<any>;
 }

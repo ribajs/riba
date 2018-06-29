@@ -1,4 +1,4 @@
-import { parseType } from './parsers';
+import { PRIMITIVE, KEYPATH, parseType } from './parsers';
 import { Observer, IObserverSyncCallback } from './observer';
 import { Binder, IOneWayBinder, ITwoWayBinder } from './binders';
 import { View } from './view';
@@ -37,12 +37,6 @@ function getInputValue(el: HTMLSelectElement | HTMLInputElement) {
   }
 }
 
-/**
- * Used also in parsers.parseType
- * TODO outsource
- */
-const PRIMITIVE = 0;
-const KEYPATH = 1;
 
 const FORMATTER_ARGS =  /[^\s']+|'([^']|'[^\s])*'|"([^"]|"[^\s])*"/g;
 const FORMATTER_SPLIT = /\s+/;

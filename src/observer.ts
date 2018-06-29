@@ -1,6 +1,6 @@
 
 import { IAdapters } from './adapter';
-
+import { isObject } from './utils';
 import { IViewOptions } from './tinybind';
 
 export interface IObserverSyncCallback {
@@ -18,11 +18,6 @@ export interface IObservers {
 export type Obj = any;
 
 export type Root = any;
-
-// Check if a value is an object than can be observed.
-function isObject(obj: Object) {
-  return typeof obj === 'object' && obj !== null
-}
 
 // Error thrower.
 function error(message: string) {
