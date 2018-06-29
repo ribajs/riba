@@ -63,11 +63,9 @@ const bindingComparator = (a: Binding, b: Binding) => {
   return bPriority - aPriority;
 };
 
-const trimStr = (str: string) => {
-  return str.trim();
-};
-
-// A collection of bindings built from a set of parent nodes.
+/**
+ * A collection of bindings built from a set of parent nodes.
+ */
 export class View {
 
   els: HTMLCollection | HTMLElement[] | Node[];
@@ -76,9 +74,14 @@ export class View {
   bindings: Binding[] = [];
   componentView: View | null = null;
 
-  // The DOM elements and the model objects for binding are passed into the
-  // constructor along with any local options that should be used throughout the
-  // context of the view and it's bindings.
+  /**
+   * The DOM elements and the model objects for binding are passed into the
+   * constructor along with any local options that should be used throughout the
+   * context of the view and it's bindings.
+   * @param els 
+   * @param models 
+   * @param options 
+   */
   constructor(els: HTMLCollection | HTMLElement | Node, models: any, options: IViewOptions) {
     if (els instanceof Array) {
       this.els = els;
@@ -91,13 +94,25 @@ export class View {
     this.build();
   }
 
-  public buildBinding(node: HTMLElement | Text, type: string | null, declaration: string, binder: Binder<any>, args: string[] | null) {
+  public static parseDeclaration(declaration: string) {
     let matches = declaration.match(DECLARATION_SPLIT);
     if(matches === null) {
       throw new Error('no matches');
     }
-    let pipes = matches.map(trimStr);
+    let pipes = matches.map((str: string) => {
+      return str.trim();
+    });
     let keypath = pipes.shift() || null;
+    return {
+      keypath,
+      pipes,
+    }
+  }
+
+  public buildBinding(node: HTMLElement | Text, type: string | null, declaration: string, binder: Binder<any>, args: string[] | null) {
+    const parsedDeclaration = View.parseDeclaration(declaration);
+    const keypath = parsedDeclaration.keypath;
+    const pipes = parsedDeclaration.pipes;
     this.bindings.push(new Binding((this as View), (node as HTMLElement), type, keypath, binder, args, pipes));
   }
 

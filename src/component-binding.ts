@@ -1,6 +1,6 @@
 import { tinybind, IOptionsParam } from './tinybind';
 import { PRIMITIVE, KEYPATH, parseType } from './parsers';
-import { Binding } from './binding';
+import { Binding, FORMATTER_ARGS, FORMATTER_SPLIT } from './binding';
 import { IBinders } from './binders';
 import { IFormatters } from './formatters';
 import { View } from './view';
@@ -36,6 +36,7 @@ export class ComponentBinding extends Binding {
   keypaths: IKeypaths = {};
   observers: IObservers;
   bindingPrefix = tinybind._fullPrefix;
+  pipes: any = {};
 
   // Initializes a component binding for the specified view. The raw component
   // element is passed in along with the component type. Attributes and scope
@@ -49,8 +50,7 @@ export class ComponentBinding extends Binding {
     this.static = {};
     this.observers = {};        
     this.parseTarget();
-  }
-    
+  }   
     
   /**
    * Intercepts `tinybind.Binding::sync` since component bindings are not bound to
@@ -83,11 +83,13 @@ export class ComponentBinding extends Binding {
     let result: any = {};
     
     Object.keys(this.static).forEach(key => {
-      result[key] = this.static[key];
+      // result[key] = this.static[key];
+      result[key] = this.formattedValues(this.static[key], key);
     });
     
     Object.keys(this.observers).forEach(key => {
-      result[key] = this.observers[key].value();
+      // result[key] = this.observers[key].value();
+      result[key] = this.formattedValues(this.observers[key].value(), key);
     });
     
     return result;
@@ -152,6 +154,7 @@ export class ComponentBinding extends Binding {
   }
 
   parseTarget() {
+
     // parse component attributes
     for (let i = 0, len = this.el.attributes.length; i < len; i++) {
       let attribute = this.el.attributes[i];
@@ -159,7 +162,14 @@ export class ComponentBinding extends Binding {
       // if attribute starts not with binding prefix. E.g. rv-
       if (attribute.name.indexOf(this.bindingPrefix) !== 0) {
         let propertyName = this.camelCase(attribute.name);
-        let token = parseType(attribute.value);
+        const declaration = attribute.value;
+        const parsedDeclaration = View.parseDeclaration(declaration);
+        
+        this.pipes[propertyName] = parsedDeclaration.pipes;
+        if(parsedDeclaration.keypath === null) {
+          throw new Error('parsedDeclaration.keypath is null');
+        }
+        let token = parseType(parsedDeclaration.keypath);
       if(token.type === PRIMITIVE) {
           this.static[propertyName] = token.value;
         } else if(token.type === KEYPATH) {
@@ -170,7 +180,63 @@ export class ComponentBinding extends Binding {
         }
       }
     }
+  }
 
+  parseFormatterArguments(args: string[], formatterIndex: number): string[] {
+    return args
+    .map(parseType)
+    .map(({type, value}, ai) => {
+      if (type === PRIMITIVE) {
+        const primitiveValue = value;
+        return primitiveValue;
+      } else if (type === KEYPATH) {
+        // keypath is string
+        const keypath = (value as string );
+        if (!this.formatterObservers[formatterIndex]) {
+          this.formatterObservers[formatterIndex] = {};
+        }
+
+        let observer = this.formatterObservers[formatterIndex][ai];
+
+        if (!observer) {
+          observer = this.observe(this.view.models, keypath);
+          this.formatterObservers[formatterIndex][ai] = observer;
+        }
+        return observer.value();
+      } else {
+        throw new Error('Unknown argument type');
+      }
+    });
+  }
+
+  /**
+   * Applies all the current formatters to the supplied value and returns the
+   * formatted value.
+   */
+  formattedValues(value: any, propertyName: string) {
+    if(this.pipes[propertyName] === null) {
+      throw new Error('formatters is null');
+    }
+    return this.pipes[propertyName].reduce((result: any/*check type*/, declaration: string /*check type*/, index: number) => {
+      let args = declaration.match(FORMATTER_ARGS);
+      if(args === null) {
+        throw new Error('No args matched from FORMATTER_ARGS');
+      }
+      let id = args.shift();
+      if(!id) {
+        throw new Error('No id found in args');
+      }
+      let formatter = this.view.options.formatters[id];
+
+      const processedArgs = this.parseFormatterArguments(args, index);
+
+      if (formatter && (formatter.read instanceof Function)) {
+        result = formatter.read(result, ...processedArgs);
+      } else if (formatter instanceof Function) {
+        result = formatter(result, ...processedArgs);
+      }
+      return result;
+    }, value);
   }
     
   /**

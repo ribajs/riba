@@ -1,3 +1,9 @@
+# 0.14.0
+
+#### Changes
+
+- Support formatters on component arguments
+
 # 0.13.0
 
 #### Changes

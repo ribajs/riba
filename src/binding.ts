@@ -37,9 +37,8 @@ function getInputValue(el: HTMLSelectElement | HTMLInputElement) {
   }
 }
 
-
-const FORMATTER_ARGS =  /[^\s']+|'([^']|'[^\s])*'|"([^"]|"[^\s])*"/g;
-const FORMATTER_SPLIT = /\s+/;
+export const FORMATTER_ARGS =  /[^\s']+|'([^']|'[^\s])*'|"([^"]|"[^\s])*"/g;
+export const FORMATTER_SPLIT = /\s+/;
 
 /**
  *  A single binding between a model attribute and a DOM element.

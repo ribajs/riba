@@ -12,7 +12,10 @@
       <div rv-hide="true">
         <h1>hide me</h1>
       </div>
-      <todo-item foo="'bar'"></todo-item>
+      <div rv-hide="true | not">
+          <h1>hide me not</h1>
+        </div>
+      <todo-item foo="'bar'" boolean-negate="true | not" boolean="true"></todo-item>
     </div>
     <script src="../dist/tinybind.js"></script>
     <script>
