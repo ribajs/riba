@@ -1,11 +1,11 @@
-# 0.12
+# 0.13.0
 
 #### Changes
 
 - Rewritten in TypeScript
 - Simplified components
 
-# 0.12
+# 0.12.0
 
 #### Changes
 
