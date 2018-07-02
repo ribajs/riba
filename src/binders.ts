@@ -52,7 +52,10 @@ const createView = (binding: Binding, models: any, anchorEl: HTMLElement | Node 
 }
 
 const binders: IBinders<any> = {
-  // Binds an event handler on the element.
+
+  /**
+   * Binds an event handler on the element.
+   */
   'on-*': <ITwoWayBinder<any>> {
     function: true,
     priority: 1000,
@@ -90,7 +93,9 @@ const binders: IBinders<any> = {
     }
   },
 
-  // Appends bound instances of the element in place for each item in the array.
+  /**
+   * Appends bound instances of the element in place for each item in the array.
+   */
   'each-*': <ITwoWayBinder<any>> {
     block: true,
 
@@ -210,9 +215,7 @@ const binders: IBinders<any> = {
 
     update(models) {
       let data: any = {};
-
       //todo: add test and fix if necessary
-
       Object.keys(models).forEach(key => {
         if(this.args === null) {
           throw new Error('args is null');
@@ -228,7 +231,9 @@ const binders: IBinders<any> = {
     }
   },
 
-  // Adds or removes the class from the element when value is true or false.
+  /**
+   * Adds or removes the class from the element when value is true or false.
+   */
   'class-*': <IOneWayBinder<boolean>> function(el: HTMLElement, value: boolean) {
     let elClass = ` ${el.className} `;
     if(this.args === null) {
@@ -243,38 +248,52 @@ const binders: IBinders<any> = {
     }
   },
 
-  // Sets the element's text value.
+  /**
+   * Sets the element's text value.
+   */
   text: <IOneWayBinder<string>> function(el: HTMLElement, value: string) {
     el.textContent = value != null ? value : '';
   },
 
-  // Sets the element's HTML content.
+  /**
+   * Sets the element's HTML content.
+   */
   html: <IOneWayBinder<string>> function(el: HTMLElement, value: string) {
     el.innerHTML = value != null ? value : '';
   },
 
-  // Shows the element when value is true.
+  /**
+   * Shows the element when value is true.
+   */
   show: <IOneWayBinder<boolean>> function(el: HTMLElement, value: boolean) {
     el.style.display = value ? '' : 'none';
   },
 
-  // Hides the element when value is true (negated version of `show` binder).
+  /**
+   * Hides the element when value is true (negated version of `show` binder).
+   */
   hide: <IOneWayBinder<boolean>> function(el: HTMLElement, value: boolean) {
     el.style.display = value ? 'none' : '';
   },
 
-  // Enables the element when value is true.
+  /**
+   * Enables the element when value is true.
+   */
   enabled: <IOneWayBinder<boolean>> function(el: HTMLButtonElement, value: boolean) {
     el.disabled = !value;
   },
 
-  // Disables the element when value is true (negated version of `enabled` binder).
+  /**
+   * Disables the element when value is true (negated version of `enabled` binder).
+   */
   disabled: <IOneWayBinder<boolean>> function(el: HTMLButtonElement, value: boolean) {
     el.disabled = !!value;
   },
 
-  // Checks a checkbox or radio input when the value is true. Also sets the model
-  // property when the input is checked or unchecked (two-way binder).
+  /**
+   * Checks a checkbox or radio input when the value is true. Also sets the model
+   * property when the input is checked or unchecked (two-way binder).
+   */
   checked: <ITwoWayBinder<any>> {
     publishes: true,
     priority: 2000,
@@ -303,8 +322,10 @@ const binders: IBinders<any> = {
     }
   },
 
-  // Sets the element's value. Also sets the model property when the input changes
-  // (two-way binder).
+  /**
+   * Sets the element's value. Also sets the model property when the input changes
+   * (two-way binder).
+   */
   value: <ITwoWayBinder<any>> {
     publishes: true,
     priority: 3000,
@@ -350,7 +371,9 @@ const binders: IBinders<any> = {
     }
   },
 
-  // Inserts and binds the element and it's child nodes into the DOM when true.
+  /**
+   * Inserts and binds the element and it's child nodes into the DOM when true.
+   */
   if: <ITwoWayBinder<any>> {
     block: true,
     priority: 4000,

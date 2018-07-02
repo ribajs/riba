@@ -1,8 +1,10 @@
-import { IObserverSyncCallback } from './observer';
+/**
+ * The default `.` adapter that comes with tinybind.js. Allows subscribing to
+ * properties on plain objects, implemented in ES5 natives using
+ * `Object.defineProperty`.
+ */
 
-// The default `.` adapter that comes with tinybind.js. Allows subscribing to
-// properties on plain objects, implemented in ES5 natives using
-// `Object.defineProperty`.
+import { IObserverSyncCallback } from './observer';
 
 const ARRAY_METHODS = [
   'push',
@@ -228,4 +230,3 @@ export class Adapter implements IAdapter {
 
 const adapter = new Adapter();
 export { adapter }
-// export default adapter;

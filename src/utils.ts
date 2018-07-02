@@ -9,7 +9,10 @@ export const mergeObject = (target: any, obj: any) => {
   return target;
 };
 
-// Test if string is a json string
+/**
+ * Test if string is a json string
+ * @param str 
+ */
 export const isJson = (str: string) => {
   try {
     const val = JSON.parse(str);
@@ -19,7 +22,10 @@ export const isJson = (str: string) => {
   }
 };
 
-// Check if a value is an object than can be observed.
+/**
+ * Check if a value is an object than can be observed.
+ * @param obj 
+ */
 export const isObject = (obj: object) => {
   return typeof obj === 'object' && obj !== null;
 };

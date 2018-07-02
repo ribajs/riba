@@ -17,19 +17,19 @@ interface IExtensions {
 }
 
 export interface IOptions {
-  // Attribute prefix in templates
+  /** Attribute prefix in templates */
   prefix?: string;
 
-  //Preload templates with initial data on bind
+  /** Preload templates with initial data on bind */
   preloadData?: boolean;
 
-  //Root sightglass interface for keypaths
+  /** Root sightglass interface for keypaths */
   rootInterface?: string;
 
-  // Template delimiters for text bindings
+  /** Template delimiters for text bindings */
   templateDelimiters?: Array<string>
 
-  // Augment the event handler of the on-* binder
+  /** Augment the event handler of the on-* binder */
   handler?: Function;
 }
 
@@ -78,8 +78,8 @@ const tinybind: ITinybind = {
   adapters: <IAdapters> {
     '.': adapter,
   },
-
-  // Default attribute prefix.
+ 
+  /** Default attribute prefix. */
   _prefix: 'rv',
 
   _fullPrefix: 'rv-',
@@ -97,13 +97,14 @@ const tinybind: ITinybind = {
 
   parseType: parseType,
 
-  // Default template delimiters.
+  /** Default template delimiters. */
   templateDelimiters: ['{', '}'],
 
-  // Default sightglass root interface.
+  /** Default sightglass root interface. */
   rootInterface: '.',
 
-  // Preload data by default.
+
+  /** Preload data by default. */
   preloadData: true,
 
   /**
@@ -183,8 +184,10 @@ const tinybind: ITinybind = {
     });
   },
 
-  // Initializes a new instance of a component on the specified element and
-  // returns a tinybind.View instance.	
+  /**
+   * Initializes a new instance of a component on the specified element and
+   * returns a tinybind.View instance.	
+   */
   init: (componentKey: string, el: HTMLElement, data = {}) => {
     if (!el) {
       el = document.createElement('div');
@@ -199,7 +202,9 @@ const tinybind: ITinybind = {
     return view;
   },
 
-  // Binds some data to a template / element. Returns a tinybind.View instance.
+  /**
+   * Binds some data to a template / element. Returns a tinybind.View instance.
+   */
   bind: (el: HTMLElement, models: any, options?: IOptionsParam) => {
     let viewOptions: IViewOptions = {
       // EXTENSIONS

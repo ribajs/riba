@@ -190,16 +190,21 @@ export class Observer {
     }
   }
   
-  // Reads the current end value of the observed keypath. Returns undefined if
-  // the full keypath is unreachable.
+  /**
+   * Reads the current end value of the observed keypath. Returns undefined if
+   * the full keypath is unreachable.
+   */
   value() {
     if (isObject(this.target)) {
       return this.get(this.key, this.target)
     }
   }
   
-  // Sets the current end value of the observed keypath. Calling setValue when
-  // the full keypath is unreachable is a no-op.
+  /**
+   * Sets the current end value of the observed keypath. Calling setValue when
+   *  the full keypath is unreachable is a no-op.
+   * @param value 
+   */
   setValue(value: any) {
     if (isObject(this.target)) {
       adapters[this.key.i].set(this.target, this.key.path, value)
@@ -248,8 +253,12 @@ export class Observer {
       this.set(false, this.key, this.target, this.callback)
     }
   }
-  // traverse the scope chain to find the scope which has the root property
-  // if the property is not found in chain, returns the root scope
+
+  /**
+   * traverse the scope chain to find the scope which has the root property
+   * if the property is not found in chain, returns the root scope
+   * @param obj 
+   */
   getRootObject(obj: Obj) {
     var rootProp, current;
     if (!obj.$parent) {

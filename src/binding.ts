@@ -54,7 +54,7 @@ export class Binding {
   type: string | null;
   binder: Binder<any> | null;
   formatters: string[] | null;
-  formatterObservers: IFormatterObservers;
+  formatterObservers: IFormatterObservers = {};
   keypath: string | null;
   /**
    * Arguments parsed from star binders, e.g. on foo-*-* args[0] is the first star, args[1] the second-
@@ -97,7 +97,6 @@ export class Binding {
     this.binder = binder;
     this.args = args;
     this.formatters = formatters;
-    this.formatterObservers = {};
     this.model = undefined;
     this.customData = {};
 

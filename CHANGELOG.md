@@ -1,19 +1,20 @@
-# 0.14.0
+# Changelog
 
-#### Changes
+## 0.15.0
+
+- Tow-Way-Databinding in components by calling publish function
+- Support formatters only on primitive arguments
+
+## 0.14.0
 
 - Support formatters on component arguments
 
-# 0.13.0
-
-#### Changes
+## 0.13.0
 
 - Rewritten in TypeScript
 - Simplified components
 
-# 0.12.0
-
-#### Changes
+## 0.12.0
 
 - Components feature restored from Rivets.js
 - Updated developer dependencies
@@ -22,39 +23,33 @@
 - Cleanups
 - Bugfixes
 
-# 0.11 and before
-
-#### Changes
+## 0.11.0 and before
 
 - Changes from the Rivets.js fork called [tinybind](https://github.com/blikblum/tinybind)
 
-# 0.8
-
-#### Changes
+## 0.8.0
 
 - More refined and useful components API. Some documentation is available [here](http://rivetsjs.com/docs/guide/#components).
 
-# 0.7
-
-### Changes
+## 0.7.0
 
 - Support for data-bound keypaths are formatter arguments.
 
-    ```
-    { item.price | lte user.balance }
-    ```
+  ```json
+  { item.price | lte user.balance }
+  ```
 
 - Support for primitives in binding declarations. This includes strings, numbers, booleans, null and undefined.
 
-    ```
-    { item.updated | date 'MMM DD, YYY' }
-    ```
+  ```json
+  { item.updated | date 'MMM DD, YYY' }
+  ```
 
 - Primitives are also supported as the binding target.
 
-    ```
-    { 'i18n.errors.' | append error | translate }
-    ```
+  ```json
+  { 'i18n.errors.' | append error | translate }
+  ```
 
 - Support for multiple binder arguments (wildcard matches). See [#383](https://github.com/mikeric/rivets/pull/383).
 
@@ -66,52 +61,50 @@
 
 - If a template includes `<script>` elements, they will now be ignored when the template is parsed.
 
-### Upgrading from 0.6
+### Upgrading from 0.6.0
 
 - Make sure you include the sightglass lib in your project. Just include `sightglass.js` before `rivets.js`. Alternatively you can just include `rivets.bundled.min.js` once (contains both libraries).
 
 - If you have defined any custom adapters, they will need to be updated from the old property names to the new property names.
 
-    - `adapter.subscribe` is now `adapter.observe`.
-    - `adapter.unsubscribe` is now `adapter.unobserve`.
-    - `adapter.read` is now `adapter.get`.
-    - `adapter.publish` is now `adapter.set`.
+- `adapter.subscribe` is now `adapter.observe`.
+- `adapter.unsubscribe` is now `adapter.unobserve`.
+- `adapter.read` is now `adapter.get`.
+- `adapter.publish` is now `adapter.set`.
 
 - Change all of your existing formatter arguments to be wrapped in quotes. This is because arguments are evaluated as keypaths by default (unless they are wrapped in quotes).
 
-    - For example, if you were previously doing the following:
+  - For example, if you were previously doing the following:
 
-        ```html
-        <p>{ item.enabled | switch green red }</p>
-        ```
+    ```html
+    <p>{ item.enabled | switch green red }</p>
+    ```
 
-        You will need to change it to:
+    You will need to change it to:
 
-        ```html
-        <p>{ item.enabled | switch 'green' 'red' }</p>
-        ```
+    ```html
+    <p>{ item.enabled | switch 'green' 'red' }</p>
+    ```
 
     - Note that if your keypath argument was a number, `true`, `false`, `null` or `undefined`, then you can leave them without quotes, but they will be passed to the formatter as the actual primitive value instead of a string.
 
 - If you ever set properties directly on the `rivets.config` object, you will need to change those to the `rivets` object itself.
 
-    - For example, if you were previously doing the following:
+  - For example, if you were previously doing the following:
 
-        ```javascript
-        rivets.config.templateDelimiters = ['{{', '}}']
-        ```
+      ```javascript
+      rivets.config.templateDelimiters = ['{{', '}}']
+      ```
 
-        You will need to change it to:
+      You will need to change it to:
 
-        ```javascript
-        rivets.templateDelimiters = ['{{', '}}']
-        ```
+      ```javascript
+      rivets.templateDelimiters = ['{{', '}}']
+      ```
 
-    - Note that if you were only using `rivets.configure({})` then no changes are needed (`rivets.configure` functions the same as before).
+  - Note that if you were only using `rivets.configure({})` then no changes are needed (`rivets.configure` functions the same as before).
 
-# 0.6
-
-### Changes
+## v0.6.0
 
 - Support for multiple adapters through interfaces.
 - Ships with a built-in `.` adapter using ES5 natives (getters and setters).

@@ -116,8 +116,10 @@ export class View {
     this.bindings.push(new Binding((this as View), (node as HTMLElement), type, keypath, binder, args, pipes));
   }
 
-  // Parses the DOM tree and builds `Binding` instances for every matched
-  // binding declaration.
+  /**
+   * Parses the DOM tree and builds `Binding` instances for every matched
+   * binding declaration.
+   */
   build() {
     this.bindings = [];
 
@@ -190,14 +192,18 @@ export class View {
     return block;
   }
 
-  // Binds all of the current bindings for this view.
+  /**
+   * Binds all of the current bindings for this view.
+   */
   bind() {
     this.bindings.forEach(binding => {
       binding.bind();
     });
   }
 
-  // Unbinds all of the current bindings for this view.
+  /**
+   * Unbinds all of the current bindings for this view.
+   */
   unbind() {
     if(Array.isArray(this.bindings)) {
       this.bindings.forEach(binding => {
@@ -209,14 +215,18 @@ export class View {
     }
   }
 
-  // Syncs up the view with the model by running the routines on all bindings.
+  /**
+   * Syncs up the view with the model by running the routines on all bindings.
+   */
   sync() {
     this.bindings.forEach(binding => {
       binding.sync();
     });
   }
 
-  // Publishes the input values from the view back to the model (reverse sync).
+  /**
+   * Publishes the input values from the view back to the model (reverse sync).
+   */
   publish() {
     this.bindings.forEach(binding => {
       if (binding.binder && (binding.binder as ITwoWayBinder<any>).publishes) {
@@ -225,7 +235,10 @@ export class View {
     });
   }
 
-  // Updates the view's models along with any affected bindings.
+  /**
+   * Updates the view's models along with any affected bindings.
+   * @param models 
+   */
   update(models: any = {}) {
     Object.keys(models).forEach(key => {
       this.models[key] = models[key];

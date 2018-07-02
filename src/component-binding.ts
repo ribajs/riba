@@ -1,16 +1,20 @@
 import { tinybind, IOptionsParam } from './tinybind';
 import { PRIMITIVE, KEYPATH, parseType } from './parsers';
-import { Binding, FORMATTER_ARGS, FORMATTER_SPLIT } from './binding';
+import { Binding, FORMATTER_ARGS, IFormatterObservers } from './binding';
 import { IBinders } from './binders';
 import { IFormatters } from './formatters';
 import { View } from './view';
 import { IComponent, IComponents } from './components';
-import { IObservers } from './observer';
+import { Observer, IObservers } from './observer';
 import { IAdapters } from './adapter';
 import { mergeObject } from './utils';
 
 export interface IBoundElement extends HTMLElement {	
   _bound?: boolean	
+}
+
+export interface IFormattersObservers {
+  [propertyName: string]: IFormatterObservers;
 }
 
 export interface IKeypaths {
@@ -34,13 +38,20 @@ export class ComponentBinding extends Binding {
    * keypath values (KEYPATH Attributes)
    */
   keypaths: IKeypaths = {};
+  formattersObservers: IFormattersObservers = {};
   observers: IObservers;
   bindingPrefix = tinybind._fullPrefix;
   pipes: any = {};
 
-  // Initializes a component binding for the specified view. The raw component
-  // element is passed in along with the component type. Attributes and scope
-  // inflections are determined based on the components defined attributes.
+  /**
+   * Initializes a component binding for the specified view. The raw component
+   * element is passed in along with the component type. Attributes and scope
+   * inflections are determined based on the components defined attributes.
+   * 
+   * @param view 
+   * @param el 
+   * @param type 
+   */
   constructor(view: View, el: HTMLElement, type: string) {
     super(view, el, type, null, null, null, null);
     this.view = view;
@@ -50,17 +61,17 @@ export class ComponentBinding extends Binding {
     this.static = {};
     this.observers = {};        
     this.parseTarget();
+    this.sync();
   }   
     
   /**
-   * Intercepts `tinybind.Binding::sync` since component bindings are not bound to
-   * a particular model to update it's value.
+   * Updates the values in model when the observer calls this function 
    */
   sync() {
-    Object.keys(this.observers).forEach(key => {
-      if(this.componentView) {
-        this.componentView.models[key] = this.observers[key].target;
-      }
+    Object.keys(this.observers).forEach(propertyName => {
+      this.view.models[propertyName] = this.observers[propertyName].value();
+      // TODO
+      // this.view.models[propertyName] = this.formattedValues(this.observers[propertyName].value(), propertyName);
     });
   }
     
@@ -71,10 +82,22 @@ export class ComponentBinding extends Binding {
   update() {}
     
   /**
-   * Intercepts `tinybind.Binding::publish` since component bindings are not bound
-   * to a particular model to update it's value.
+   * Publishes the value currently set on the model back to the parent model.
+   * You need to call this method manually in your component
    */
-  publish() {}
+  publish(propertyName?: string, value?: any) {
+    if(propertyName) {
+      if(this.observers[propertyName]) {
+        this.observers[propertyName].setValue(value);
+      }
+    } else {
+      // sync all observers
+      Object.keys(this.observers).forEach(propertyName => {
+        this.observers[propertyName].setValue(this.view.models[propertyName]);
+      });
+    }
+
+  }
     
   /**
    * Returns an object map using the component's scope inflections.
@@ -83,13 +106,16 @@ export class ComponentBinding extends Binding {
     let result: any = {};
     
     Object.keys(this.static).forEach(key => {
-      // result[key] = this.static[key];
       result[key] = this.formattedValues(this.static[key], key);
     });
     
+    /**
+     * 
+     */
     Object.keys(this.observers).forEach(key => {
-      // result[key] = this.observers[key].value();
-      result[key] = this.formattedValues(this.observers[key].value(), key);
+      // TODO fixme
+      result[key] = this.observers[key].value();
+      // result[key] = this.formattedValues(this.observers[key].value(), key);
     });
     
     return result;
@@ -140,16 +166,16 @@ export class ComponentBinding extends Binding {
    * map of models from the root view. Bind `this.componentView` on subsequent calls.
    */
   bind() {
-    if (!this.componentView) {
+    if (!this.el._bound) {
       this.el.innerHTML = this.component.template.call(this);
       /**
        * there's a cyclic dependency that makes imported View a dummy object. Use tinybind.bind
        */
       let scope = this.component.initialize.call(this, this.el, this.locals());
-      this.componentView = tinybind.bind(Array.prototype.slice.call(this.el.childNodes), scope, this.getMergedOptions());
+      this.view = tinybind.bind(Array.prototype.slice.call(this.el.childNodes), scope, this.getMergedOptions());
       this.el._bound = true;
     } else {
-      this.componentView.bind();
+      this.view.bind();
     }
   }
 
@@ -175,6 +201,7 @@ export class ComponentBinding extends Binding {
         } else if(token.type === KEYPATH) {
           this.keypaths[propertyName] = attribute.value;
           this.observers[propertyName] = this.observe(this.view.models, this.keypaths[propertyName], this);
+          // model biding is called in this.sync!!
         } else {
           throw new Error('can\'t parse component attribute');
         }
@@ -182,7 +209,12 @@ export class ComponentBinding extends Binding {
     }
   }
 
-  parseFormatterArguments(args: string[], formatterIndex: number): string[] {
+  /**
+   * 
+   * @param args parses the formatters in arguments
+   * @param formatterIndex 
+   */
+  parseFormatterArgumentsProperty(args: string[], formatterIndex: number, propertyName: string): string[] {
     return args
     .map(parseType)
     .map(({type, value}, ai) => {
@@ -190,17 +222,21 @@ export class ComponentBinding extends Binding {
         const primitiveValue = value;
         return primitiveValue;
       } else if (type === KEYPATH) {
+        console.log('TODO', propertyName);
         // keypath is string
         const keypath = (value as string );
-        if (!this.formatterObservers[formatterIndex]) {
-          this.formatterObservers[formatterIndex] = {};
+        if (!this.formattersObservers[propertyName]) {
+          this.formattersObservers[propertyName] = {};
+        }
+        if (!this.formattersObservers[propertyName][formatterIndex]) {
+          this.formattersObservers[propertyName][formatterIndex] = {};
         }
 
-        let observer = this.formatterObservers[formatterIndex][ai];
+        let observer = this.formattersObservers[propertyName][formatterIndex][ai];
 
         if (!observer) {
           observer = this.observe(this.view.models, keypath);
-          this.formatterObservers[formatterIndex][ai] = observer;
+          this.formattersObservers[propertyName][formatterIndex][ai] = observer;
         }
         return observer.value();
       } else {
@@ -228,7 +264,7 @@ export class ComponentBinding extends Binding {
       }
       let formatter = this.view.options.formatters[id];
 
-      const processedArgs = this.parseFormatterArguments(args, index);
+      const processedArgs = this.parseFormatterArgumentsProperty(args, index, propertyName);
 
       if (formatter && (formatter.read instanceof Function)) {
         result = formatter.read(result, ...processedArgs);
@@ -243,8 +279,8 @@ export class ComponentBinding extends Binding {
    * Intercept `tinybind.Binding::unbind` to be called on `this.componentView`.
    */
   unbind() {    
-    Object.keys(this.observers).forEach(key => {
-      this.observers[key].unobserve();
+    Object.keys(this.observers).forEach(propertyName => {
+      this.observers[propertyName].unobserve();
     });
     
     if (this.componentView) {

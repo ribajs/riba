@@ -12,7 +12,10 @@ export const BINDING = 1;
 const QUOTED_STR = /^'.*'$|^".*"$/; // regex to test if string is wrapped in " or '
 
 
-// Parser and tokenizer for getting the type and value from a string.
+/**
+ * Parser and tokenizer for getting the type and value from a string.
+ * @param string 
+ */
 export function parseType(string: string) {
   let type = PRIMITIVE;
   let value: any = string;
@@ -42,9 +45,13 @@ export interface ITokens {
   value: string;
 }
 
-// Template parser and tokenizer for mustache-style text content bindings.
-// Parses the template and returns a set of tokens, separating static portions
-// of text from binding declarations.
+/**
+ * Template parser and tokenizer for mustache-style text content bindings.
+ * Parses the template and returns a set of tokens, separating static portions
+ * of text from binding declarations.
+ * @param template 
+ * @param delimiters 
+ */
 export function parseTemplate(template: string, delimiters: string[]) {
   var tokens: ITokens[] | null = null;
   let length = template.length;

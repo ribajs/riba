@@ -20,7 +20,6 @@ Use in a script tag...
 import tinybind from 'tinybind'
 ```
 
-
 ## Usage
 
 ```html
@@ -58,46 +57,45 @@ Documentation is available on the [homepage](http://blikblum.github.io/tinybind/
   * Do not bind publish, bind and unbind methods to binding instances
   * Register default binder through fallbackBinder option instead of * binder
   * Integrate sightglass into tinybind code base
-  * Remove view.select method 
+  * Remove view.select method
   * Rename binding property args to arg and changed type from array to string
   * The rv-* attributes are removed after binding
   * Changes how observer is registered / notified. Instead of passing a function (sync), pass an object with a sync method
-
 
 ## Building and Testing
 
 First install any development dependencies.
 
-```
-$ npm install
+```bash
+npm install
 ```
 
-#### Building
+### Building
 
 tinybind.js uses rollup as it's bundling / build tool. Run the following  to compile the source into `dist/`.
 
-```
-$ npm run build
+```bash
+npm run build
 ```
 
-#### Testing
+### Testing
 
 tinybind.js uses [mocha](http://visionmedia.github.io/mocha/) as it's testing framework, alongside [should](https://github.com/visionmedia/should.js/) for expectations and [sinon](http://sinonjs.org/) for spies, stubs and mocks. Run the following to run the full test suite.
 
-```
-$ npm test
+```bash
+npm test
 ```
 
 ## Contributing
 
-#### Bug Reporting
+### Bug Reporting
 
 1. Ensure the bug can be reproduced on the latest master.
 2. Open an issue on GitHub and include an isolated [JSFiddle](http://jsfiddle.net/) demonstration of the bug. The more information you provide, the easier it will be to validate and fix.
 
-#### Pull Requests
+### Pull Requests
 
 1. Fork the repository and create a topic branch.
-3. Make sure not to commit any changes under `dist/` as they will surely cause conflicts for others later. Files under `dist/` are only committed when a new build is released.
-4. Include tests that cover any changes or additions that you've made.
-5. Push your topic branch to your fork and submit a pull request. Include details about the changes as well as a reference to related issue(s).
+2. Make sure not to commit any changes under `dist/` as they will surely cause conflicts for others later. Files under `dist/` are only committed when a new build is released.
+3. Include tests that cover any changes or additions that you've made.
+4. Push your topic branch to your fork and submit a pull request. Include details about the changes as well as a reference to related issue(s).
