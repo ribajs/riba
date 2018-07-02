@@ -4,7 +4,7 @@
 
 - Tow-Way-Databinding in components by calling the publish method
 - Support formatters only on primitive arguments
-- New router binders
+- New router binders based on [barba.js](https://github.com/luruke/barba.js)
   - View binder to load new content with pajax
   - Route binder to start loading content for the view
 
