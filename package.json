@@ -1,14 +1,14 @@
 {
   "name": "tinybind",
   "description": "Declarative data binding + templating solution.",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "contributors": [
     "Michael Richards",
     "Luiz Américo Pereira Câmara"
   ],
   "url": "https://github.com/blikblum/tinybind",
-  "main": "./src/tinybind.ts",
+  "main": "./dist/tinybind.ts",
   "licenses": [
     {
       "type": "MIT",

@@ -2,7 +2,7 @@
 
 ## 0.15.0
 
-- Tow-Way-Databinding in components by calling publish function
+- Tow-Way-Databinding in components by calling the publish method
 - Support formatters only on primitive arguments
 
 ## 0.14.0
