@@ -1,7 +1,9 @@
 import { PRIMITIVE, KEYPATH, parseType } from './parsers';
 import { Observer, IObserverSyncCallback } from './observer';
-import { Binder, IOneWayBinder, ITwoWayBinder } from './binders';
+import { Binder, IOneWayBinder, ITwoWayBinder } from './binder.service';
 import { View } from './view';
+import { getInputValue } from './utils';
+
 
 export interface IFormatterObservers {
   [key: string]: {
@@ -10,32 +12,6 @@ export interface IFormatterObservers {
 }
 
 export type eventHandlerFunction = (event: Event) => void;
-
-/**
- * TODO move to utils
- * @param el
- */
-function getInputValue(el: HTMLSelectElement | HTMLInputElement) {
-  let results: string[] = [];
-  if (el.type === 'checkbox') {
-    return (el as HTMLInputElement).checked;
-  } else if (el.type === 'select-multiple') {
-    let options:HTMLOptionsCollection = (el as HTMLSelectElement).options;
-
-    for (const key in options) {
-      if (options.hasOwnProperty(key)) {
-        const option = options[key];
-        if (option.selected) {
-          results.push(option.value);
-        }
-      }
-    }
-
-    return results;
-  } else {
-    return el.value;
-  }
-}
 
 export const FORMATTER_ARGS =  /[^\s']+|'([^']|'[^\s])*'|"([^"]|"[^\s])*"/g;
 export const FORMATTER_SPLIT = /\s+/;

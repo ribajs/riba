@@ -1,5 +1,5 @@
 import { tinybind, IViewOptions } from './tinybind';
-import { Binder, ITwoWayBinder } from './binders';
+import { Binder, ITwoWayBinder } from './binder.service';
 import { Binding } from './binding';
 import { ComponentBinding, IBoundElement } from './component-binding';
 import { parseTemplate } from './parsers';
@@ -9,59 +9,6 @@ export type TBlock = boolean;
 export interface IDataElement extends HTMLElement {
   data?: string;
 }
-
-const textBinder: ITwoWayBinder<string> = {
-  routine: (node: IDataElement, value: string) => {
-    node.data = (value != null) ? value : '';
-  }
-};
-
-const DECLARATION_SPLIT = /((?:'[^']*')*(?:(?:[^\|']*(?:'[^']*')+[^\|']*)+|[^\|]+))|^$/g;
-
-const parseNode = (view: View, node: IDataElement) => {
-  let block: TBlock = false;
-
-  // if node.nodeType === Node.TEXT_NODE
-  node = ( node as IDataElement);
-  if (node.nodeType === 3) {
-    if(!node.data) {
-      throw new Error('node has no data');
-    }
-    let tokens = parseTemplate(node.data, tinybind.templateDelimiters);
-
-    if (tokens) {
-      if(!node.parentNode) {
-        throw new Error('Node has no parent node');
-      }
-      for (let i = 0; i < tokens.length; i++) {
-        let token = tokens[i];
-        let text = document.createTextNode(token.value);
-        node.parentNode.insertBefore(text, node);
-        if (token.type === 1) {
-          view.buildBinding(text, null, token.value, textBinder, null);
-        }
-      }
-      node.parentNode.removeChild(node);
-    }
-    block = true;
-  } else if (node.nodeType === 1) {
-    block = view.traverse(node);
-  }
-
-  if (!block) {
-    if(node.childNodes) {
-      for (let i = 0; i < node.childNodes.length; i++) {
-        parseNode(view, (node.childNodes[i] as IDataElement));
-      }
-    }
-  }
-};
-
-const bindingComparator = (a: Binding, b: Binding) => {
-  let aPriority = a.binder ? ((a.binder as ITwoWayBinder<any>).priority || 0) : 0;
-  let bPriority = b.binder ? ((b.binder as ITwoWayBinder<any>).priority || 0) : 0;
-  return bPriority - aPriority;
-};
 
 /**
  * A collection of bindings built from a set of parent nodes.
@@ -73,6 +20,8 @@ export class View {
   options: IViewOptions;
   bindings: Binding[] = [];
   componentView: View | null = null;
+
+  static DECLARATION_SPLIT = /((?:'[^']*')*(?:(?:[^\|']*(?:'[^']*')+[^\|']*)+|[^\|]+))|^$/g;
 
   /**
    * The DOM elements and the model objects for binding are passed into the
@@ -94,8 +43,59 @@ export class View {
     this.build();
   }
 
+  static textBinder: ITwoWayBinder<string> = {
+    routine: (node: IDataElement, value: string) => {
+      node.data = (value != null) ? value : '';
+    }
+  };
+    
+  static bindingComparator = (a: Binding, b: Binding) => {
+    let aPriority = a.binder ? ((a.binder as ITwoWayBinder<any>).priority || 0) : 0;
+    let bPriority = b.binder ? ((b.binder as ITwoWayBinder<any>).priority || 0) : 0;
+    return bPriority - aPriority;
+  };
+
+  public static parseNode(view: View, node: IDataElement) {
+    let block: TBlock = false;
+
+    // if node.nodeType === Node.TEXT_NODE
+    node = ( node as IDataElement);
+    if (node.nodeType === 3) {
+      if(!node.data) {
+        throw new Error('node has no data');
+      }
+      let tokens = parseTemplate(node.data, tinybind.templateDelimiters);
+
+      if (tokens) {
+        if(!node.parentNode) {
+          throw new Error('Node has no parent node');
+        }
+        for (let i = 0; i < tokens.length; i++) {
+          let token = tokens[i];
+          let text = document.createTextNode(token.value);
+          node.parentNode.insertBefore(text, node);
+          if (token.type === 1) {
+            view.buildBinding(text, null, token.value, View.textBinder, null);
+          }
+        }
+        node.parentNode.removeChild(node);
+      }
+      block = true;
+    } else if (node.nodeType === 1) {
+      block = view.traverse(node);
+    }
+
+    if (!block) {
+      if(node.childNodes) {
+        for (let i = 0; i < node.childNodes.length; i++) {
+          View.parseNode(view, (node.childNodes[i] as IDataElement));
+        }
+      }
+    }
+  }
+
   public static parseDeclaration(declaration: string) {
-    let matches = declaration.match(DECLARATION_SPLIT);
+    let matches = declaration.match(View.DECLARATION_SPLIT);
     if(matches === null) {
       throw new Error('no matches');
     }
@@ -107,6 +107,19 @@ export class View {
       keypath,
       pipes,
     }
+  }
+
+  public static create(binding: Binding, models: any, anchorEl: HTMLElement | Node | null) {
+    let template = binding.el.cloneNode(true);
+    let view = new View((template as Node), models, binding.view.options);
+    view.bind();
+    if(!binding || !binding.marker || binding.marker.parentNode === null) {
+      throw new Error('No parent node for binding!');
+    }
+  
+    binding.marker.parentNode.insertBefore(template, anchorEl);
+  
+    return view;
   }
 
   public buildBinding(node: HTMLElement | Text, type: string | null, declaration: string, binder: Binder<any>, args: string[] | null) {
@@ -125,10 +138,10 @@ export class View {
 
     let elements = this.els, i, len;
     for (i = 0, len = elements.length; i < len; i++) {
-      parseNode(this, (elements[i] as IDataElement));
+      View.parseNode(this, (elements[i] as IDataElement));
     }
 
-    this.bindings.sort(bindingComparator);
+    this.bindings.sort(View.bindingComparator);
   }
 
   traverse(node: IBoundElement): TBlock {

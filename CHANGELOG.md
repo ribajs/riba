@@ -4,6 +4,9 @@
 
 - Tow-Way-Databinding in components by calling the publish method
 - Support formatters only on primitive arguments
+- New router binders
+  - View binder to load new content with pajax
+  - Route binder to start loading content for the view
 
 ## 0.14.0
 

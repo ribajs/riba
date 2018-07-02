@@ -3,7 +3,9 @@ import { parseTemplate, parseType, ITokens } from './parsers';
 import { IFormatters, formatters } from './formatters';
 import { Binding } from './binding';
 import { adapter } from './adapter';
-import { binders, IBinders} from './binders';
+
+import { basicBinders, routerBinders } from './binders';
+import { IBinders, BindersService } from './binder.service';
 import { View } from './view';
 import { IAdapters } from './adapter';
 import { Observer, Root } from './observer';
@@ -66,7 +68,7 @@ export declare interface ITinybind {
 
 const tinybind: ITinybind = {
   // Global binders.
-  binders: <IBinders<any>> binders,
+  binders: <IBinders<any>> {},
 
   // Global components.
   components: <IComponents> {},
@@ -251,6 +253,10 @@ const tinybind: ITinybind = {
     return view;
   },
 };
+
+const binderService = new BindersService(tinybind);
+binderService.regists(basicBinders);
+binderService.regists(routerBinders);
 
 export { tinybind };
 

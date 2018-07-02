@@ -1,4 +1,4 @@
-import { IBinders } from './binders';
+import { IBinders } from './binder.service';
 import { IFormatters } from './formatters';
 import { IComponent, IComponents } from './components';
 import { IAdapters } from './adapter';

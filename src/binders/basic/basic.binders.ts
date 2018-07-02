@@ -1,57 +1,9 @@
-import { View } from './view';
-import { Binding } from './binding';
-import { times, getString } from './utils';
+import { View } from '../../view';
+import { Binding } from '../../binding';
+import { times, getString } from '../../utils';
+import { IBinders, ITwoWayBinder, IOneWayBinder } from '../../binder.service';
 
-/**
- * One way binder interface
- */
-export type IOneWayBinder<ValueType> = (this: Binding, element: HTMLElement, value: ValueType) => void;
-
-/**
- * To way binder interface
- */
-export interface ITwoWayBinder<ValueType> {
-  routine: (this: Binding, element: HTMLElement, value: ValueType) => void;
-  bind?: (this: Binding, element: HTMLElement) => void;
-  unbind?: (this: Binding, element: HTMLElement) => void;
-  update?: (this: Binding, model: any) => void;
-  getValue?: (this: Binding, element: HTMLElement) => void;
-  block?: boolean;
-  function?: boolean;
-  publishes?: boolean;
-  priority?: number;
-  /**
-   * If you want to save custom data in this use this object
-   */
-  customData?: any;
-}
-
-/**
- * A binder can be a one way binder or a two way binder
- */
-export type Binder<ValueType> = IOneWayBinder<ValueType> | ITwoWayBinder<ValueType>
-
-/**
- * A list of binders with any key name
- */
-export interface IBinders<ValueType> {
-  [name: string]: Binder<ValueType>;
-}
-
-const createView = (binding: Binding, models: any, anchorEl: HTMLElement | Node | null) => {
-  let template = binding.el.cloneNode(true);
-  let view = new View((template as Node), models, binding.view.options);
-  view.bind();
-  if(!binding || !binding.marker || binding.marker.parentNode === null) {
-    throw new Error('No parent node for binding!');
-  }
-
-  binding.marker.parentNode.insertBefore(template, anchorEl);
-
-  return view;
-}
-
-const binders: IBinders<any> = {
+const basicBinders: IBinders<any> = {
 
   /**
    * Binds an event handler on the element.
@@ -159,7 +111,7 @@ const binders: IBinders<any> = {
             throw new Error('previous not defined');
           }
 
-          view = createView(this, scope, previous.nextSibling);
+          view = View.create(this, scope, previous.nextSibling);
           this.customData.iterated.push(view);
         } else {
           if (view.models[modelName] !== model) {
@@ -184,7 +136,7 @@ const binders: IBinders<any> = {
               nextView.models[indexProp] = index;
             } else {
               //new model
-              nextView = createView(this, scope, view.els[0]);
+              nextView = View.create(this, scope, view.els[0]);
             }
             this.customData.iterated.splice(index, 0, nextView);
           } else {
@@ -389,15 +341,15 @@ const binders: IBinders<any> = {
         el.parentNode.insertBefore(this.marker, el);
         el.parentNode.removeChild(el);
       } else if ( this.customData.bound === false &&  this.customData.nested) {
-         this.customData.nested.bind();
+        this.customData.nested.bind();
       }
-       this.customData.bound = true;
+      this.customData.bound = true;
     },
 
     unbind() {
       if ( this.customData.nested) {
-         this.customData.nested.unbind();
-         this.customData.bound = false;
+        this.customData.nested.unbind();
+        this.customData.bound = false;
       }
     },
 
@@ -407,8 +359,8 @@ const binders: IBinders<any> = {
         if (value) {
 
           if (! this.customData.nested) {
-             this.customData.nested = new View(el, this.view.models, this.view.options);
-             this.customData.nested.bind();
+            this.customData.nested = new View(el, this.view.models, this.view.options);
+            this.customData.nested.bind();
           }
           if(!this.marker || !this.marker.parentNode) {
             throw new Error('Marker has no parent node');
@@ -427,10 +379,10 @@ const binders: IBinders<any> = {
 
     update(models) {
       if ( this.customData.nested) {
-         this.customData.nested.update(models);
+        this.customData.nested.update(models);
       }
     }
   }
 };
 
-export { binders };
+export { basicBinders };

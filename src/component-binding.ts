@@ -1,7 +1,7 @@
 import { tinybind, IOptionsParam } from './tinybind';
 import { PRIMITIVE, KEYPATH, parseType } from './parsers';
 import { Binding, FORMATTER_ARGS, IFormatterObservers } from './binding';
-import { IBinders } from './binders';
+import { IBinders } from './binder.service';
 import { IFormatters } from './formatters';
 import { View } from './view';
 import { IComponent, IComponents } from './components';
