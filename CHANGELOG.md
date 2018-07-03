@@ -7,6 +7,8 @@
 - New router binders based on [barba.js](https://github.com/luruke/barba.js)
   - View binder to load new content with pajax
   - Route binder to start loading content for the view
+- Many new formatters
+- Code changes
 
 ## 0.14.0
 
