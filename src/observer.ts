@@ -19,16 +19,6 @@ export type Obj = any;
 
 export type Root = any;
 
-// Error thrower.
-function error(message: string) {
-  throw new Error('[Observer] ' + message)
-}
-
-// TODO
-let adapters: IAdapters;
-let interfaces: string[];
-let rootInterface: Root;
-
 export class Observer {
   keypath: string;
   callback: IObserverSyncCallback;
@@ -38,6 +28,15 @@ export class Observer {
   key: IKey;
   tokens: IKey[];
 
+  static adapters: IAdapters;
+  static interfaces: string[];
+  static rootInterface: Root;
+
+  // Error thrower.
+  static error(message: string) {
+    throw new Error('[Observer] ' + message)
+  }
+
   /**
    * Constructs a new keypath observer and kicks things off.
    * @param obj 
@@ -45,6 +44,7 @@ export class Observer {
    * @param callback 
    */
   constructor(obj: Obj, keypath: string, callback: IObserverSyncCallback) {
+    
     this.keypath = keypath;
     this.callback = callback;
     this.objectPath = [];
@@ -59,9 +59,9 @@ export class Observer {
   }
 
   static updateOptions = function(options: IViewOptions) {
-    adapters = options.adapters;
-    interfaces = Object.keys(adapters);
-    rootInterface = options.rootInterface;
+    Observer.adapters = options.adapters;
+    Observer.interfaces = Object.keys(Observer.adapters);
+    Observer.rootInterface = options.rootInterface;
   }
   
   /**
@@ -77,7 +77,7 @@ export class Observer {
     for (index = 0; index < keypath.length; index++) {
       chr = keypath.charAt(index);
   
-      if (!!~interfaces.indexOf(chr)) {
+      if (!!~Observer.interfaces.indexOf(chr)) {
         tokens.push(current);
         current = {i: chr, path: ''};
       } else {
@@ -97,22 +97,22 @@ export class Observer {
     var path: string;
     var root: Root;
   
-    if (!interfaces.length) {
-      error('Must define at least one adapter interface.');
+    if (!Observer.interfaces.length) {
+      Observer.error('Must define at least one adapter interface.');
     }
   
-    if (!!~interfaces.indexOf(this.keypath[0])) {
+    if (!!~Observer.interfaces.indexOf(this.keypath[0])) {
       root = this.keypath[0];
       path = this.keypath.substr(1);
     } else {
-      root = rootInterface;
+      root = Observer.rootInterface;
       path = this.keypath;
     }
   
     this.tokens = Observer.tokenize(path, root);
 
     if(!this.tokens.length) {
-      throw new Error('no tokens');
+      Observer.error('no tokens');
     }
 
     this.key = (this.tokens.pop() as IKey);
@@ -207,7 +207,7 @@ export class Observer {
    */
   setValue(value: any) {
     if (isObject(this.target)) {
-      adapters[this.key.i].set(this.target, this.key.path, value)
+      Observer.adapters[this.key.i].set(this.target, this.key.path, value)
     }
   }
   
@@ -217,7 +217,7 @@ export class Observer {
    * @param obj 
    */
   get(key: IKey, obj: Obj) {
-    return adapters[key.i].get(obj, key.path)
+    return Observer.adapters[key.i].get(obj, key.path)
   }
   
   /**
@@ -229,9 +229,9 @@ export class Observer {
    */
   set(active: boolean, key: IKey, obj: Obj, callback: IObserverSyncCallback) {
     if(active) {
-      adapters[key.i].observe(obj, key.path, callback)
+      Observer.adapters[key.i].observe(obj, key.path, callback)
     } else {
-      adapters[key.i].unobserve(obj, key.path, callback)
+      Observer.adapters[key.i].unobserve(obj, key.path, callback)
     }
   }
   

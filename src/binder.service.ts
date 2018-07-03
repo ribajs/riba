@@ -1,6 +1,5 @@
 import Debug from 'debug';
 import { Binding } from './binding';
-import { ITinybind} from './tinybind';
 /**
  * One way binder interface
  */
@@ -51,10 +50,15 @@ export interface IBinderWrapperResult {
 export type BinderWrapper = (...deps: any[]) => IBinderWrapperResult;
 
 export class BindersService {
-  private tinybind: ITinybind;
+  private binders: IBinders<any>;
   private debug = Debug('binders:binder-service');
-  constructor(tinybind: ITinybind) {
-    this.tinybind = tinybind;
+
+  /**
+   * 
+   * @param binders 
+   */
+  constructor(binders: IBinders<any>) {
+    this.binders = binders;
   }
 
   /**
@@ -67,8 +71,8 @@ export class BindersService {
       name = binderWrapper.name;
     }
     const binder = (binderWrapper as IBinderWrapperResult).binder;
-    this.tinybind.binders[name] = binder;
-    return this.tinybind.binders;
+    this.binders[name] = binder;
+    return this.binders;
   }
 
   /**
@@ -90,12 +94,12 @@ export class BindersService {
     this.debug('name', name, binder);
 
     if (!name) {
-      throw new Error('name is required');
+      throw new Error('[BindersService] name is required');
     }
 
     // if Binder<any>
-    this.tinybind.binders[name] = binder;
-    return this.tinybind.binders;
+    this.binders[name] = binder;
+    return this.binders;
   }
 
   /**
@@ -105,11 +109,10 @@ export class BindersService {
   public regists(binders: IBinders<any>): IBinders<any> {
     for (const name in binders) {
       if (binders.hasOwnProperty(name)) {
-        console.log('regists', name, binders[name]);
         this.regist(binders[name], name)
       }
     }
-    return this.tinybind.binders;
+    return this.binders;
   }
 
 }

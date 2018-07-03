@@ -1,11 +1,11 @@
 import { tinybind, IOptionsParam } from './tinybind';
 import { PRIMITIVE, KEYPATH, parseType } from './parsers';
-import { Binding, FORMATTER_ARGS, IFormatterObservers } from './binding';
+import { Binding, IFormatterObservers } from './binding';
 import { IBinders } from './binder.service';
 import { IFormatters } from './formatters';
 import { View } from './view';
 import { IComponent, IComponents } from './components';
-import { Observer, IObservers } from './observer';
+import { IObservers } from './observer';
 import { IAdapters } from './adapter';
 import { mergeObject } from './utils';
 
@@ -40,7 +40,7 @@ export class ComponentBinding extends Binding {
   keypaths: IKeypaths = {};
   formattersObservers: IFormattersObservers = {};
   observers: IObservers;
-  bindingPrefix = tinybind._fullPrefix;
+  bindingPrefix = tinybind.fullPrefix;
   pipes: any = {};
 
   /**
@@ -254,7 +254,7 @@ export class ComponentBinding extends Binding {
       throw new Error('formatters is null');
     }
     return this.pipes[propertyName].reduce((result: any/*check type*/, declaration: string /*check type*/, index: number) => {
-      let args = declaration.match(FORMATTER_ARGS);
+      let args = declaration.match(Binding.FORMATTER_ARGS);
       if(args === null) {
         throw new Error('No args matched from FORMATTER_ARGS');
       }

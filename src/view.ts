@@ -1,4 +1,4 @@
-import { tinybind, IViewOptions } from './tinybind';
+import { tinybind, IViewOptions, Tinybind } from './tinybind';
 import { Binder, ITwoWayBinder } from './binder.service';
 import { Binding } from './binding';
 import { ComponentBinding, IBoundElement } from './component-binding';
@@ -62,13 +62,13 @@ export class View {
     node = ( node as IDataElement);
     if (node.nodeType === 3) {
       if(!node.data) {
-        throw new Error('node has no data');
+        throw new Error('[View] node has no data');
       }
       let tokens = parseTemplate(node.data, tinybind.templateDelimiters);
 
       if (tokens) {
         if(!node.parentNode) {
-          throw new Error('Node has no parent node');
+          throw new Error('[View] Node has no parent node');
         }
         for (let i = 0; i < tokens.length; i++) {
           let token = tokens[i];
@@ -97,7 +97,7 @@ export class View {
   public static parseDeclaration(declaration: string) {
     let matches = declaration.match(View.DECLARATION_SPLIT);
     if(matches === null) {
-      throw new Error('no matches');
+      throw new Error('[View] No matches');
     }
     let pipes = matches.map((str: string) => {
       return str.trim();
@@ -114,7 +114,7 @@ export class View {
     let view = new View((template as Node), models, binding.view.options);
     view.bind();
     if(!binding || !binding.marker || binding.marker.parentNode === null) {
-      throw new Error('No parent node for binding!');
+      throw new Error('[View] No parent node for binding!');
     }
   
     binding.marker.parentNode.insertBefore(template, anchorEl);
@@ -145,7 +145,7 @@ export class View {
   }
 
   traverse(node: IBoundElement): TBlock {
-    let bindingPrefix = tinybind._fullPrefix;
+    let bindingPrefix = tinybind.fullPrefix;
     let block = node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE';
     let attributes = node.attributes;
     let bindInfos = [];
@@ -173,7 +173,7 @@ export class View {
         }
 
         if (!binder) {
-          binder = tinybind.fallbackBinder;
+          binder = Tinybind.fallbackBinder;
         }
 
         if ((binder as ITwoWayBinder<any>).block) {

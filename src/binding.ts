@@ -13,13 +13,17 @@ export interface IFormatterObservers {
 
 export type eventHandlerFunction = (event: Event) => void;
 
-export const FORMATTER_ARGS =  /[^\s']+|'([^']|'[^\s])*'|"([^"]|"[^\s])*"/g;
-export const FORMATTER_SPLIT = /\s+/;
+
+
 
 /**
  *  A single binding between a model attribute and a DOM element.
  */
 export class Binding {
+
+  static FORMATTER_ARGS =  /[^\s']+|'([^']|'[^\s])*'|"([^"]|"[^\s])*"/g;
+  static FORMATTER_SPLIT = /\s+/;
+
   value?: any;
   observer?: Observer;
   view: View;
@@ -154,7 +158,7 @@ export class Binding {
       throw new Error('formatters is null');
     }
     return this.formatters.reduce((result: any/*check type*/, declaration: string /*check type*/, index: number) => {
-      let args = declaration.match(FORMATTER_ARGS);
+      let args = declaration.match(Binding.FORMATTER_ARGS);
       if(args === null) {
         throw new Error('No args matched from FORMATTER_ARGS');
       }
@@ -241,7 +245,7 @@ export class Binding {
         throw new Error('formatters is null');
       }
       let value = this.formatters.reduceRight((result: any/*check type*/, declaration: string /*check type*/, index: number) => {
-        const args = declaration.split(FORMATTER_SPLIT);
+        const args = declaration.split(Binding.FORMATTER_SPLIT);
         const id = args.shift();
         if(!id) {
           throw new Error('id not defined');

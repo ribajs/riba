@@ -43,84 +43,73 @@ export declare interface IViewOptions extends IOptionsParam {
   rootInterface: Root;
 }
 
-export declare interface ITinybind {
-  binders: IBinders<any>;
-  components: IComponents;
-  formatters: IFormatters;
-  adapters: IAdapters;
-  _prefix: string;
-  _fullPrefix: string;
-  prefix: string;
-  parseTemplate: (template: string, delimiters: string[]) => ITokens[] | null;
-  parseType: (string: string) => {
-    type: number;
-    value: any;
-  };
-  templateDelimiters: string[];
-  rootInterface: string;
-  preloadData: boolean;
-  handler(this: any, context: any, ev: Event, binding: Binding): void;
-  fallbackBinder(this: Binding, el: HTMLElement, value: any): void;
-  configure(options: any): void;
-  init: (componentKey: string, el: HTMLElement, data?: {}) => View;
-  bind: (el: HTMLElement, models: any, options?: IOptionsParam | undefined) => View;
-}
+export class Tinybind {
 
-const tinybind: ITinybind = {
-  // Global binders.
-  binders: <IBinders<any>> {},
+  public binderService: BindersService;
 
-  // Global components.
-  components: <IComponents> {},
+  /** Global binders */
+  public binders: IBinders<any> = {};
 
-  // Global formatters.
-  formatters: <IFormatters> formatters,
+  /** Global components. */
+  public components: IComponents = {};
 
-  // Global sightglass adapters.
-  adapters: <IAdapters> {
+  /** Global formatters. */
+  public formatters: IFormatters = formatters;
+
+  /** Global (sightglass) adapters. */
+  public adapters: IAdapters = {
     '.': adapter,
-  },
+  };
  
   /** Default attribute prefix. */
-  _prefix: 'rv',
+  private _prefix = 'rv';
 
-  _fullPrefix: 'rv-',
+  /** Default attribute full prefix. */
+  private _fullPrefix = 'rv-';
 
   get prefix() {
     return this._prefix;
-  },
+  };
+
+  get fullPrefix() {
+    return this._fullPrefix;
+  };
 
   set prefix(value) {
     this._prefix = value;
     this._fullPrefix = value + '-';
-  },
+  };
 
-  parseTemplate: parseTemplate,
+  public parseTemplate = parseTemplate;
 
-  parseType: parseType,
+  public parseType = parseType;
 
   /** Default template delimiters. */
-  templateDelimiters: ['{', '}'],
+  public templateDelimiters = ['{', '}'];
 
   /** Default sightglass root interface. */
-  rootInterface: '.',
+  public rootInterface = '.';
 
 
   /** Preload data by default. */
-  preloadData: true,
+  public preloadData = true;
+
+  constructor() {
+    this.binderService = new BindersService(this.binders);
+  }
 
   /**
    * Default event handler.
    */
-  handler(this: any, context: any, ev: Event, binding: Binding) {
+  public static handler(this: any, context: any, ev: Event, binding: Binding) {
     this.call(context, ev, binding.view.models);
-  },
+  }
 
   /**
    * Sets the attribute on the element. If no binder above is matched it will fall
    * back to using this binder.
    */
-  fallbackBinder(this: Binding, el: HTMLElement, value: any) {
+  public static fallbackBinder(this: Binding, el: HTMLElement, value: any) {
     if (!this.type) {
       throw new Error('Can\'t set atttribute of ' + this.type);
     }
@@ -129,13 +118,13 @@ const tinybind: ITinybind = {
     } else {
       el.removeAttribute(this.type);
     }
-  },
+  }
 
   /**
    * Merges an object literal into the corresponding global options.
    * @param options 
    */
-  configure(options: any) {
+  public configure(options: any) {
     if (!options) {
       return;
     }
@@ -184,30 +173,30 @@ const tinybind: ITinybind = {
         break;
       }
     });
-  },
+  }
 
   /**
    * Initializes a new instance of a component on the specified element and
    * returns a tinybind.View instance.	
    */
-  init: (componentKey: string, el: HTMLElement, data = {}) => {
+  public init(componentKey: string, el: HTMLElement, data = {}) {
     if (!el) {
       el = document.createElement('div');
     }
 
-    const component = tinybind.components[componentKey];
-    el.innerHTML = component.template.call(tinybind, el);
-    let scope = component.initialize.call(tinybind, el, data);
+    const component = this.components[componentKey];
+    el.innerHTML = component.template.call(this, el);
+    let scope = component.initialize.call(this, el, data);
 
-    let view = tinybind.bind(el, scope);
+    let view = this.bind(el, scope);
     view.bind();
     return view;
-  },
+  }
 
   /**
    * Binds some data to a template / element. Returns a tinybind.View instance.
    */
-  bind: (el: HTMLElement, models: any, options?: IOptionsParam) => {
+  bind(el: HTMLElement, models: any, options?: IOptionsParam) {
     let viewOptions: IViewOptions = {
       // EXTENSIONS
       binders: <IBinders<any>> Object.create(null),
@@ -233,7 +222,7 @@ const tinybind: ITinybind = {
     viewOptions.templateDelimiters = options && options.templateDelimiters ? options.templateDelimiters : tinybind.templateDelimiters
     viewOptions.rootInterface = options && options.rootInterface ? options.rootInterface : tinybind.rootInterface
     viewOptions.preloadData = options && options.preloadData ? options.preloadData : tinybind.preloadData
-    viewOptions.handler = options && options.handler ? options.handler : tinybind.handler
+    viewOptions.handler = options && options.handler ? options.handler : Tinybind.handler
 
     // merge extensions
     mergeObject(viewOptions.binders, tinybind.binders);
@@ -251,13 +240,12 @@ const tinybind: ITinybind = {
     let view = new View(el, models, viewOptions);
     view.bind();
     return view;
-  },
+  }
 };
 
-const binderService = new BindersService(tinybind);
-binderService.regists(basicBinders);
-binderService.regists(routerBinders);
-
+// Global tinybind object
+const tinybind = new Tinybind();
+tinybind.binderService.regists(basicBinders);
+// tinybind.binderService.regists(routerBinders);
 export { tinybind };
-
 export default tinybind;
