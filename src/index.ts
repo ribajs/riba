@@ -1,7 +1,12 @@
-export { tinybind, Tinybind } from './tinybind';
-export { View } from './view';
-export { IComponent, IComponents, IComponentWrapperResult, ComponentWrapper, ComponentService } from './component.service';
-export { IOneWayBinder, ITwoWayBinder, Binder, IBinders, BinderWrapper, BindersService } from './binder.service';
+export * from './binders';
+export * from './formatters';
+export * from './adapter';
+export * from './binder.service';
+export * from './binding';
+export * from './component-binding';
+export * from './component.service';
 export * from './formatter.service';
-import * as basicFormatters  from './formatters/basic';
-export { basicFormatters };
+export * from './parsers';
+export * from './tinybind';
+export * from './utils';
+export * from './view';
