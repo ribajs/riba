@@ -10,11 +10,6 @@ import { Utils } from '../../utils';
  */
 export const routeBinder: BinderWrapper = (dispatcher: Dispatcher, pjax: Pjax, prefetch: Prefetch) => {
 
-  // TODO make to singleton
-  // const dispatcher = new Dispatcher();
-  // const pjax = new Pjax();
-  // const prefetch = new Prefetch();
-
   const name = 'route';
   const debug = Debug('binders:route');
 

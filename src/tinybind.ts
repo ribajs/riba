@@ -1,6 +1,7 @@
 import { mergeObject } from './utils';
 import { parseTemplate, parseType, ITokens } from './parsers';
-import { IFormatters, formatters } from './formatters';
+import { IFormatters, FormatterService } from './formatter.service';
+import { compareFormatters, mathFormatters, propertyFormatters, specialFormatters, stringFormatters } from './formatters';
 import { Binding } from './binding';
 import { adapter } from './adapter';
 
@@ -9,7 +10,7 @@ import { IBinders, BindersService } from './binder.service';
 import { View } from './view';
 import { IAdapters } from './adapter';
 import { Observer, Root } from './observer';
-import { IComponents } from './components';
+import { IComponents, ComponentService } from './component.service';
 
 interface IExtensions {
   binders: IBinders<any>;
@@ -47,6 +48,10 @@ export class Tinybind {
 
   public binderService: BindersService;
 
+  public componentService: ComponentService;
+
+  public formatterService: FormatterService;
+
   /** Global binders */
   public binders: IBinders<any> = {};
 
@@ -54,7 +59,7 @@ export class Tinybind {
   public components: IComponents = {};
 
   /** Global formatters. */
-  public formatters: IFormatters = formatters;
+  public formatters: IFormatters = {};
 
   /** Global (sightglass) adapters. */
   public adapters: IAdapters = {
@@ -96,6 +101,8 @@ export class Tinybind {
 
   constructor() {
     this.binderService = new BindersService(this.binders);
+    this.componentService = new ComponentService(this.components);
+    this.formatterService = new FormatterService(this.formatters);
   }
 
   /**
@@ -245,7 +252,17 @@ export class Tinybind {
 
 // Global tinybind object
 const tinybind = new Tinybind();
+
+// regist binders
 tinybind.binderService.regists(basicBinders);
-// tinybind.binderService.regists(routerBinders);
+tinybind.binderService.regists(routerBinders);
+
+// regist formatters
+tinybind.formatterService.regists(compareFormatters);
+tinybind.formatterService.regists(mathFormatters);
+tinybind.formatterService.regists(propertyFormatters);
+tinybind.formatterService.regists(specialFormatters);
+tinybind.formatterService.regists(stringFormatters);
+
 export { tinybind };
 export default tinybind;

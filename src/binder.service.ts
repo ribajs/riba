@@ -51,7 +51,7 @@ export type BinderWrapper = (...deps: any[]) => IBinderWrapperResult;
 
 export class BindersService {
   private binders: IBinders<any>;
-  private debug = Debug('binders:binder-service');
+  private debug = Debug('binders:BindersService');
 
   /**
    * 

@@ -1,2 +1,2 @@
-export { basicBinders } from './basic/basic.binders';
-export { routerBinders } from './router/router.binders';
+export { basicBinders } from './basic';
+export { routerBinders } from './router';

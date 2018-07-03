@@ -6,16 +6,6 @@
 
 import { IObserverSyncCallback } from './observer';
 
-const ARRAY_METHODS = [
-  'push',
-  'pop',
-  'shift',
-  'unshift',
-  'sort',
-  'reverse',
-  'splice'
-];
-
 export interface IRef {
   callbacks: any[];
   pointers: any[];
@@ -50,7 +40,17 @@ export interface IAdapters {
 
 export class Adapter implements IAdapter {
   counter: number = 0;
-  weakmap:any = {};
+  weakmap: any = {};
+
+  static ARRAY_METHODS = [
+    'push',
+    'pop',
+    'shift',
+    'unshift',
+    'sort',
+    'reverse',
+    'splice'
+  ];
 
   weakReference(obj: any) {
     if (!obj.hasOwnProperty('__rv')) {
@@ -109,7 +109,7 @@ export class Adapter implements IAdapter {
       if (!map.pointers) {
         map.pointers = {};
 
-        ARRAY_METHODS.forEach(fn => {
+        Adapter.ARRAY_METHODS.forEach(fn => {
           this.stubFunction(obj, fn);
         });
       }

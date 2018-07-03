@@ -27,18 +27,20 @@ class Prefetch {
    *
    * @memberOf Barba.Prefetch
    */
-  public init() {
+  public init(autobindLinks = false) {
     if (!window.history.pushState) {
       return false;
     }
 
     // We do this with rv-route
-    // document.body.addEventListener('mouseover', this.onLinkEnter.bind(this));
-    // document.body.addEventListener('touchstart', this.onLinkEnter.bind(this));
+    if(autobindLinks) {
+      document.body.addEventListener('mouseover', this.onLinkEnter.bind(this));
+      document.body.addEventListener('touchstart', this.onLinkEnter.bind(this));
+    }
   }
 
   /**
-   * Callback for the mousehover/touchstart
+   * Callback for the mousehover/touchstart, please use the rv-route binder instead
    *
    * @memberOf Barba.Prefetch
    * @private

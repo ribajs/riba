@@ -1,3 +1,11 @@
+import $ from 'jquery';
+
+// TODO
+export interface IDeferred {
+  resolve: any;
+  reject: any;
+}
+
 export const mergeObject = (target: any, obj: any) => {
   if (obj) {
     Object.keys(obj).forEach((key) => {
@@ -63,14 +71,6 @@ export const getInputValue = (el: HTMLSelectElement | HTMLInputElement) => {
   } else {
     return el.value;
   }
-}
-
-import $ from 'jquery';
-
-// TODO
-export interface IDeferred {
-  resolve: any;
-  reject: any;
 }
 
 /**

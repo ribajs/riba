@@ -21,12 +21,7 @@ export const viewBinder: BinderWrapper = (dispatcher: Dispatcher, pjax: Pjax, pr
 
   const binder: IOneWayBinder<string> = function (el: HTMLElement, options: any) {
     const $wrapper = $(el);
-    const $container = $wrapper.children().first();
     const self = this;
-
-    // WORKAROUND until logic is changed
-    $wrapper.attr('id', 'barba-wrapper');
-    $container.addClass('barba-container');
 
     this.customData = {
       nested: null,
@@ -45,7 +40,7 @@ export const viewBinder: BinderWrapper = (dispatcher: Dispatcher, pjax: Pjax, pr
 
     setTimeout(() => {
       prefetch.init();
-      pjax.start();
+      pjax.start($wrapper);
     }, 0)
   };
 

@@ -110,7 +110,7 @@ class Pjax {
     throw new Error('Can\t parse href');
   }
 
-  public dom = new Dom();
+  public dom?: Dom;
   public history = new HistoryManager();
 
  /**
@@ -133,15 +133,9 @@ class Pjax {
 
   private dispatcher = new Dispatcher();
 
-  private transition: ITransition;
+  private transition: ITransition = new HideShowTransition();;
 
-  constructor(transition?: ITransition) {
-
-    if (transition) {
-      this.transition = transition;
-    } else {
-      this.transition = new HideShowTransition();
-    }
+  constructor() {
 
   }
 
@@ -150,8 +144,15 @@ class Pjax {
   *
   * @memberOf Barba.Pjax
   */
-  public start() {
-    this.init();
+  public start($wrapper: JQuery<HTMLElement>, transition?: ITransition) {
+
+    this.dom = new Dom($wrapper);
+
+    if (transition) {
+      this.transition = transition;
+    }
+
+    this.init($wrapper);
   }
 
  /**
@@ -255,6 +256,11 @@ class Pjax {
     }
 
     xhr.then((data: string) => {
+
+        if (!self.dom) {
+          throw new Error('[Pjax] you need to call the start method first!');
+        }
+
         const $container = self.dom.parseResponse(data);
 
         self.dom.putContainer($container);
@@ -325,6 +331,8 @@ class Pjax {
     this.history.add(newUrl);
 
     const $newContainer = this.load(newUrl);
+
+    
     const transition = this.getTransition();
 
     this.transitionProgress = true;
@@ -333,6 +341,10 @@ class Pjax {
       this.history.currentStatus(),
       this.history.prevStatus(),
     );
+
+    if (!this.dom) {
+      throw new Error('[Pjax] you need to call the start method first!');
+    }
 
     const transitionInstance = transition.init(
       this.dom.getContainer(),
@@ -357,6 +369,11 @@ class Pjax {
   */
  protected onNewContainerLoaded($container: JQuery<HTMLElement>) {
     const currentStatus = this.history.currentStatus();
+
+    if (!this.dom) {
+      throw new Error('[Pjax] you need to call the start method first!');
+    }
+
     currentStatus.namespace = this.dom.getNamespace($container);
 
     this.dispatcher.trigger('newPageReady',
@@ -389,9 +406,12 @@ class Pjax {
    * @memberOf Barba.Pjax
    * @protected
    */
-  protected init() {
+  protected init($wrapper: JQuery<HTMLElement>) {
+    if (!this.dom) {
+      throw new Error('[Pjax] you need to call the start method first!');
+    }
     const $container = this.dom.getContainer();
-    const $wrapper = this.dom.getWrapper();
+    // const $wrapper = this.dom.getWrapper();
 
     $wrapper.attr('aria-live', 'polite');
 

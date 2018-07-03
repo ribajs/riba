@@ -13,9 +13,6 @@ export interface IFormatterObservers {
 
 export type eventHandlerFunction = (event: Event) => void;
 
-
-
-
 /**
  *  A single binding between a model attribute and a DOM element.
  */

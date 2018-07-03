@@ -1,5 +1,7 @@
 import { Dispatcher } from './dispatcher';
 import { Utils } from '../../../utils';
+import { IState } from './Pjax';
+
 
 /**
  * BaseView to be extended
@@ -17,7 +19,7 @@ abstract class BaseView {
    */
   protected namespace?: string;
 
-  protected container?: HTMLElement;
+  protected $container?: JQuery<HTMLElement>;
 
   private dispatcher = new Dispatcher();
 
@@ -43,20 +45,20 @@ abstract class BaseView {
   public init() {
     const self = this;
 
-    this.dispatcher.on('initStateChange', (newStatus: any, oldStatus: any) => {
+    this.dispatcher.on('initStateChange', (newStatus: IState, oldStatus: IState) => {
       if (oldStatus && oldStatus.namespace === self.namespace) {
         self.onLeave();
       }
     });
 
-    this.dispatcher.on('newPageReady', (newStatus: any, oldStatus: any, container: HTMLElement) => {
-      self.container = container;
+    this.dispatcher.on('newPageReady', (newStatus: IState, oldStatus: IState, $container: JQuery<HTMLElement>, html: string, isInit: boolean) => {
+      self.$container = $container;
       if (newStatus.namespace === self.namespace) {
         self.onEnter();
       }
     });
 
-    this.dispatcher.on('transitionCompleted', (newStatus: any, oldStatus: any) => {
+    this.dispatcher.on('transitionCompleted', (newStatus: IState, oldStatus: IState) => {
       if (newStatus.namespace === self.namespace) {
         self.onEnterCompleted();
       }

@@ -32,11 +32,6 @@ export class Observer {
   static interfaces: string[];
   static rootInterface: Root;
 
-  // Error thrower.
-  static error(message: string) {
-    throw new Error('[Observer] ' + message)
-  }
-
   /**
    * Constructs a new keypath observer and kicks things off.
    * @param obj 
@@ -98,7 +93,7 @@ export class Observer {
     var root: Root;
   
     if (!Observer.interfaces.length) {
-      Observer.error('Must define at least one adapter interface.');
+      new Error('[Observer] Must define at least one adapter interface.');
     }
   
     if (!!~Observer.interfaces.indexOf(this.keypath[0])) {
@@ -112,7 +107,7 @@ export class Observer {
     this.tokens = Observer.tokenize(path, root);
 
     if(!this.tokens.length) {
-      Observer.error('no tokens');
+      new Error('[Observer] No tokens');
     }
 
     this.key = (this.tokens.pop() as IKey);
