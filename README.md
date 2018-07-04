@@ -44,12 +44,12 @@ Documentation is available on the [homepage](http://blikblum.github.io/tinybind/
 ## Differences from Rivets.js
 
 * Public interface
-  * Add not/negate formatter
-  * Remove unless and unchecked binders in favor of combining not/negate formatters with if/checked binders
+  * Add not formatter
+  * Remove unless and unchecked binders in favor of combining not formatters with if/checked binders
   * Remove computed feature - can be replaced by an identity formatter
   * Add ability to customize input event through event-name attribute
 * Internal changes
-  * Written in TypeScript instead of coffeescript
+  * Written in TypeScript instead of CoffeeScript
   * Change how scope of iteration binder works. Instead of copying properties down to children, uses a prototype like approach
     * Related: [486](https://github.com/mikeric/rivets/issues/486) [512](https://github.com/mikeric/rivets/issues/512) [417](https://github.com/mikeric/rivets/pull/417)
   * Change how to customize index name in each binder (using an attribute)
@@ -58,7 +58,6 @@ Documentation is available on the [homepage](http://blikblum.github.io/tinybind/
   * Register default binder through fallbackBinder option instead of * binder
   * Integrate sightglass into tinybind code base
   * Remove view.select method
-  * Rename binding property args to arg and changed type from array to string
   * The rv-* attributes are removed after binding
   * Changes how observer is registered / notified. Instead of passing a function (sync), pass an object with a sync method
 
@@ -72,7 +71,7 @@ npm install
 
 ### Building
 
-tinybind.js uses rollup as it's bundling / build tool. Run the following  to compile the source into `dist/`.
+tinybind.js uses webpack as it's bundling / build tool. Run the following to compile the source into `dist/`.
 
 ```bash
 npm run build
