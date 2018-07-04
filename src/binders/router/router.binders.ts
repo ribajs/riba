@@ -1,5 +1,5 @@
-import { Pjax, Prefetch, Dispatcher } from './barba/index';
-import { IBinders, ITwoWayBinder, IOneWayBinder } from '../../binder.service';
+import { Pjax, Prefetch, Dispatcher } from './barba/barba';
+import { IBinders } from '../../binder.service';
 import { viewBinder } from './view.binder';
 import { routeBinder } from './route.binder';
 

@@ -1,4 +1,5 @@
-export * from './binders/index';
+export * from './binders/router/router.binders';
+export * from './binders/basic/basic.binders';
 export * from './formatters/index';
 export * from './adapter';
 export * from './binder.service';

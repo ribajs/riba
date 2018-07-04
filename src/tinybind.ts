@@ -1,12 +1,12 @@
 import { mergeObject } from './utils';
-import { parseTemplate, parseType, ITokens } from './parsers';
+import { parseTemplate, parseType } from './parsers';
 import { IFormatters, FormatterService } from './formatter.service';
 import { compareFormatters, mathFormatters, propertyFormatters, specialFormatters, stringFormatters } from './formatters/index';
 import { Binding } from './binding';
 import { adapter } from './adapter';
 
-import { routerBinders } from './binders/index';
-import { basicBinders } from './binders/basic/index';
+import { routerBinders } from './binders/router/router.binders';
+import { basicBinders } from './binders/basic/basic.binders';
 import { IBinders, BindersService } from './binder.service';
 import { View } from './view';
 import { IAdapters } from './adapter';
