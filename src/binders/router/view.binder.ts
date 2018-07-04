@@ -24,20 +24,27 @@ const viewBinder: BinderWrapper = (dispatcher: Dispatcher, pjax: Pjax, prefetch:
     }   
 
     dispatcher.on('newPageReady', (currentStatus: IState, prevStatus: IState, $container: JQuery<HTMLElement>, newPageRawHTML: string, dataset: any, isInit: boolean) => {
-      debug('newPageReady dataset:', dataset);
+      
       // unbind the old rivets view
-      if (!isInit && self.customData.nested !== null) {
+      if (self.customData.nested !== null) {
         self.customData.nested.unbind();
       }
 
+      // add the dateset to the model
       if(!Utils.isObject(self.view.models)) {
         self.view.models = {};
       }
-
       self.view.models.dataset = $container.data();
 
-      // bind the new container
-      self.customData.nested = new RivetsView($container[0], self.view.models, self.view.options);
+      debug('newPageReady dataset:', dataset);
+
+      // if this is the first time the page will be loaded we do not need to rebind the container
+      // because they are already bind with the parent view ( because they are not loaded by pajax) 
+      if(!isInit) {
+        // bind the new container
+        self.customData.nested = new RivetsView($container[0], self.view.models, self.view.options);
+        self.customData.nested.bind();
+      }
 
     });
 
