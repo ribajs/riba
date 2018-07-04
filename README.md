@@ -5,13 +5,13 @@ tinybind is the espiritual sucessor of Rivets.js, a lightweight data binding and
 ## Install
 
 ```bash
-npm install tinybind
+npm install JumpLinkNetwork/tinybind
 ```
 
 Use in a script tag...
 
 ```html
-<script src="node_modules/tinybind/dist/tinybind.js"></script>
+<script src="node_modules/tinybind/dist/tinybind.min.js"></script>
 ```
 
 ... or import using a bundler like webpack
@@ -34,7 +34,7 @@ import tinybind from 'tinybind'
 ```
 
 ```javascript
-tinybind.bind($('#auction')[0], {auction: auction})
+tinybind.bind($('#auction')[0], {auction: auction});
 ```
 
 ## Getting Started and Documentation
