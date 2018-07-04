@@ -61,14 +61,16 @@ export class View {
     // if node.nodeType === Node.TEXT_NODE
     node = ( node as IDataElement);
     if (node.nodeType === 3) {
-      if(!node.data) {
-        throw new Error('[View] node has no data');
-      }
-      let tokens = parseTemplate(node.data, templateDelimiters);
+      let tokens = null;
 
-      if (tokens) {
+      // TODO why check data?
+      if(node.data) {
+        tokens = parseTemplate(node.data, templateDelimiters);
+      }
+
+      if (tokens && tokens.length) {
         if(!node.parentNode) {
-          throw new Error('[View] Node has no parent node');
+          throw new Error('[View] Node (TEXT_NODE) has no parent node');
         }
         for (let i = 0; i < tokens.length; i++) {
           let token = tokens[i];

@@ -386,6 +386,7 @@ class Pjax {
       this.history.prevStatus(),
       $container,
       this.dom.currentHTML,
+      $container.data(),
       false, // true if this is the first time newPageReady is tiggered / true on initialisation
     );
   }
@@ -432,6 +433,7 @@ class Pjax {
       {},
       $container,
       this.dom.currentHTML,
+      $container.data(),
       true, // true if this is the first time newPageReady is tiggered / true on initialisation
     );
     this.dispatcher.trigger('transitionCompleted', this.history.currentStatus());

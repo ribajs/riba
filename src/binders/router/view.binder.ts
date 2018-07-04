@@ -4,6 +4,7 @@ import { IOneWayBinder, BinderWrapper } from '../../binder.service';
 import { Pjax, Prefetch, IState } from './barba/barba';
 import { Dispatcher } from './barba/dispatcher';
 import { View as RivetsView } from '../../view';
+import { Utils } from '../../utils';
 
 /**
  * Open link with pajax if the route is not the active route
@@ -22,12 +23,19 @@ const viewBinder: BinderWrapper = (dispatcher: Dispatcher, pjax: Pjax, prefetch:
       nested: null,
     }   
 
-    dispatcher.on('newPageReady', (currentStatus: IState, prevStatus: IState, $container: JQuery<HTMLElement>, newPageRawHTML: string, isInit: boolean) => {
-      debug('newPageReady');
+    dispatcher.on('newPageReady', (currentStatus: IState, prevStatus: IState, $container: JQuery<HTMLElement>, newPageRawHTML: string, dataset: any, isInit: boolean) => {
+      debug('newPageReady dataset:', dataset);
       // unbind the old rivets view
       if (!isInit && self.customData.nested !== null) {
         self.customData.nested.unbind();
       }
+
+      if(!Utils.isObject(self.view.models)) {
+        self.view.models = {};
+      }
+
+      self.view.models.dataset = $container.data();
+
       // bind the new container
       self.customData.nested = new RivetsView($container[0], self.view.models, self.view.options);
 
