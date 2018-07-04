@@ -1,5 +1,5 @@
-export { BaseCache } from './Cache';
-export { BaseTransition, CustomTransition, HideShowTransition } from './Transition/index';
-export { BaseView } from './View';
-export { HistoryManager, IState, Pjax, Prefetch } from './Pjax/index';
-export { Dispatcher } from './dispatcher';
+export * from './Cache';
+export * from './Transition/Transition';
+export * from './View';
+export * from './Pjax/Pjax';
+export * from './dispatcher';

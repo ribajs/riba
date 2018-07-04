@@ -5,8 +5,8 @@ import { compareFormatters, mathFormatters, propertyFormatters, specialFormatter
 import { Binding } from './binding';
 import { adapter } from './adapter';
 
-import { routerBinders } from './binders/router/router.binders';
 import { basicBinders } from './binders/basic/basic.binders';
+// import { routerBinders } from './binders/router/router.binders';
 import { IBinders, BindersService } from './binder.service';
 import { View } from './view';
 import { IAdapters } from './adapter';
@@ -63,7 +63,7 @@ export class Tinybind {
   public formatters: IFormatters = {};
 
   /** Global (sightglass) adapters. */
-  public adapters: IAdapters = {
+  public  adapters: IAdapters = {
     '.': adapter,
   };
  
@@ -226,17 +226,17 @@ export class Tinybind {
       mergeObject(viewOptions.adapters, options.adapters);
     }
 
-    viewOptions.prefix = options && options.prefix ? options.prefix : tinybind.prefix
-    viewOptions.templateDelimiters = options && options.templateDelimiters ? options.templateDelimiters : tinybind.templateDelimiters
-    viewOptions.rootInterface = options && options.rootInterface ? options.rootInterface : tinybind.rootInterface
-    viewOptions.preloadData = options && options.preloadData ? options.preloadData : tinybind.preloadData
+    viewOptions.prefix = options && options.prefix ? options.prefix : this.prefix
+    viewOptions.templateDelimiters = options && options.templateDelimiters ? options.templateDelimiters : this.templateDelimiters
+    viewOptions.rootInterface = options && options.rootInterface ? options.rootInterface : this.rootInterface
+    viewOptions.preloadData = options && options.preloadData ? options.preloadData : this.preloadData
     viewOptions.handler = options && options.handler ? options.handler : Tinybind.handler
 
     // merge extensions
-    mergeObject(viewOptions.binders, tinybind.binders);
-    mergeObject(viewOptions.formatters, tinybind.formatters);
-    mergeObject(viewOptions.components, tinybind.components);
-    mergeObject(viewOptions.adapters, tinybind.adapters);
+    mergeObject(viewOptions.binders, this.binders);
+    mergeObject(viewOptions.formatters, this.formatters);
+    mergeObject(viewOptions.components, this.components);
+    mergeObject(viewOptions.adapters, this.adapters);
 
     // get all starBinders from available binders
     viewOptions.starBinders = Object.keys(viewOptions.binders).filter(function (key) {
@@ -250,20 +250,3 @@ export class Tinybind {
     return view;
   }
 };
-
-// Global tinybind object
-const tinybind = new Tinybind();
-
-// regist binders
-tinybind.binderService.regists(basicBinders);
-tinybind.binderService.regists(routerBinders);
-
-// regist formatters
-tinybind.formatterService.regists(compareFormatters);
-tinybind.formatterService.regists(mathFormatters);
-tinybind.formatterService.regists(propertyFormatters);
-tinybind.formatterService.regists(specialFormatters);
-tinybind.formatterService.regists(stringFormatters);
-
-export { tinybind };
-export default tinybind;

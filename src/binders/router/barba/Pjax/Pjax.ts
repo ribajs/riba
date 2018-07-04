@@ -1,9 +1,14 @@
+export * from './HistoryManager';
+export * from './Dom';
+export * from './Prefetch';
+
 import { Dispatcher } from '../dispatcher';
 import { Utils } from '../../../../utils';
 import { BaseCache } from '../Cache';
-import { HideShowTransition, ITransition } from '../Transition/index';
+import { HideShowTransition, ITransition } from '../Transition/Transition';
 import { Dom } from './Dom';
 import { HistoryManager } from './HistoryManager';
+
 
 /**
  * Pjax is a static object with main function

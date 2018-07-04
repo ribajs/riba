@@ -1,4 +1,4 @@
-import { tinybind, IViewOptions, Tinybind } from './tinybind';
+import { IViewOptions, Tinybind } from './tinybind';
 import { Binder, ITwoWayBinder } from './binder.service';
 import { Binding } from './binding';
 import { ComponentBinding, IBoundElement } from './component-binding';
@@ -55,7 +55,7 @@ export class View {
     return bPriority - aPriority;
   };
 
-  public static parseNode(view: View, node: IDataElement) {
+  public static parseNode(view: View, node: IDataElement, templateDelimiters: Array<string>) {
     let block: TBlock = false;
 
     // if node.nodeType === Node.TEXT_NODE
@@ -64,7 +64,7 @@ export class View {
       if(!node.data) {
         throw new Error('[View] node has no data');
       }
-      let tokens = parseTemplate(node.data, tinybind.templateDelimiters);
+      let tokens = parseTemplate(node.data, templateDelimiters);
 
       if (tokens) {
         if(!node.parentNode) {
@@ -88,7 +88,7 @@ export class View {
     if (!block) {
       if(node.childNodes) {
         for (let i = 0; i < node.childNodes.length; i++) {
-          View.parseNode(view, (node.childNodes[i] as IDataElement));
+          View.parseNode(view, (node.childNodes[i] as IDataElement), templateDelimiters);
         }
       }
     }
@@ -138,14 +138,24 @@ export class View {
 
     let elements = this.els, i, len;
     for (i = 0, len = elements.length; i < len; i++) {
-      View.parseNode(this, (elements[i] as IDataElement));
+      if(! this.options.templateDelimiters) {
+        throw new Error('templateDelimiters required')
+      }
+      View.parseNode(this, (elements[i] as IDataElement), this.options.templateDelimiters);
     }
 
     this.bindings.sort(View.bindingComparator);
   }
 
   traverse(node: IBoundElement): TBlock {
-    let bindingPrefix = tinybind.fullPrefix;
+
+    // TODO
+    let bindingPrefix = this.options.prefix;
+    if(!bindingPrefix) {
+      throw new Error('prefix is required');
+    }
+    bindingPrefix = bindingPrefix + '-';
+
     let block = node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE';
     let attributes = node.attributes;
     let bindInfos = [];

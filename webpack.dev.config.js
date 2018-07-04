@@ -3,7 +3,7 @@ var path = require('path');
 
 module.exports = {
     entry: {
-      tinybind: './src/tinybind.ts'
+      tinybind: './src/browser.ts'
     },
     devtool: 'inline-source-map',
     mode: 'development', // production | development

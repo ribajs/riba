@@ -3,14 +3,17 @@ import { IBinders } from '../../binder.service';
 import { viewBinder } from './view.binder';
 import { routeBinder } from './route.binder';
 
-export { Pjax, Prefetch, Dispatcher };
-
 // TODO make to singleton
 const dispatcher = new Dispatcher();
 const pjax = new Pjax();
 const prefetch = new Prefetch();
 
-export const routerBinders: IBinders<any> = {
-  view: viewBinder(dispatcher, pjax, prefetch).binder,
-  route: routeBinder(dispatcher, pjax, prefetch).binder,
-}
+const routerBinders: IBinders<any> = {};
+
+const viewBinderWrapper = viewBinder(dispatcher, pjax, prefetch);
+const routeBinderWrapper = routeBinder(dispatcher, pjax, prefetch);
+
+routerBinders[viewBinderWrapper.name] = viewBinderWrapper.binder;
+routerBinders[routeBinderWrapper.name] = routeBinderWrapper.binder;
+
+export { Pjax, Prefetch, Dispatcher, routerBinders };

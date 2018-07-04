@@ -1,4 +1,4 @@
-import { tinybind, IOptionsParam } from './tinybind';
+import { IViewOptions } from './tinybind';
 import { PRIMITIVE, KEYPATH, parseType } from './parsers';
 import { Binding, IFormatterObservers } from './binding';
 import { IBinders } from './binder.service';
@@ -40,7 +40,7 @@ export class ComponentBinding extends Binding {
   keypaths: IKeypaths = {};
   formattersObservers: IFormattersObservers = {};
   observers: IObservers;
-  bindingPrefix = tinybind.fullPrefix;
+  bindingPrefix: string; // = tinybind.fullPrefix;
   pipes: any = {};
 
   /**
@@ -59,7 +59,8 @@ export class ComponentBinding extends Binding {
     this.type = type;
     this.component = view.options.components[this.type];
     this.static = {};
-    this.observers = {};        
+    this.observers = {};
+    this.bindingPrefix = view.options.prefix + '-'; // TODO
     this.parseTarget();
     this.sync();
   }   
@@ -135,12 +136,16 @@ export class ComponentBinding extends Binding {
   }
 
   getMergedOptions() {
-    var options: IOptionsParam = {
+    var options: IViewOptions = {
       // EXTENSIONS
       binders: <IBinders<any>> Object.create(null),
       formatters: <IFormatters> Object.create(null),
       components: <IComponents> Object.create(null),
       adapters: <IAdapters> Object.create(null),
+      // other
+      starBinders: Object.create(null),
+      // sightglass
+      rootInterface: Object.create(null),
     };
     
     mergeObject(options.binders, this.component.binders);
@@ -158,6 +163,13 @@ export class ComponentBinding extends Binding {
     options.rootInterface = this.component.rootInterface ? this.component.rootInterface : this.view.options.rootInterface
     options.preloadData = this.component.preloadData ? this.component.preloadData : this.view.options.preloadData
     options.handler = this.component.handler ? this.component.handler : this.view.options.handler
+
+    // get all starBinders from available binders
+    options.starBinders = Object.keys(options.binders).filter(function (key) {
+      return key.indexOf('*') > 0;
+    });
+
+
     return options;
   }
     
@@ -172,7 +184,11 @@ export class ComponentBinding extends Binding {
        * there's a cyclic dependency that makes imported View a dummy object. Use tinybind.bind
        */
       let scope = this.component.initialize.call(this, this.el, this.locals());
-      this.view = tinybind.bind(Array.prototype.slice.call(this.el.childNodes), scope, this.getMergedOptions());
+      // this.view = tinybind.bind(Array.prototype.slice.call(this.el.childNodes), scope, this.getMergedOptions());
+
+      let view = new View(Array.prototype.slice.call(this.el.childNodes), scope, this.getMergedOptions());
+      view.bind();
+
       this.el._bound = true;
     } else {
       this.view.bind();

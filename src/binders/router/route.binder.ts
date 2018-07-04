@@ -1,5 +1,5 @@
 import Debug from 'debug';
-import $ from 'jquery';
+import JQuery from 'jquery';
 import { IOneWayBinder, BinderWrapper } from '../../binder.service';
 import { Pjax, Prefetch, Dispatcher } from './barba/barba';
 import { Utils } from '../../utils';
@@ -8,13 +8,13 @@ import { Utils } from '../../utils';
  * Open link with pajax if the route is not the active route
  * Sets also the element active if his url is the current url
  */
-export const routeBinder: BinderWrapper = (dispatcher: Dispatcher, pjax: Pjax, prefetch: Prefetch) => {
+const routeBinder: BinderWrapper = (dispatcher: Dispatcher, pjax: Pjax, prefetch: Prefetch) => {
 
   const name = 'route';
   const debug = Debug('binders:route');
 
   const binder: IOneWayBinder<string> = function(el: HTMLElement, url: string | undefined) {
-    const $el = $(el);
+    const $el = JQuery(el);
     let newTab = false;
     const usePajax = true;
     const self = this;
@@ -69,7 +69,7 @@ export const routeBinder: BinderWrapper = (dispatcher: Dispatcher, pjax: Pjax, p
     if (usePajax) {
       dispatcher.on('newPageReady', () => checkURL(url));
     } else {
-      $(window).on('hashchange', () => checkURL(url));
+      JQuery(window).on('hashchange', () => checkURL(url));
     }
 
     $el.off('click').on('click', (event: JQuery.Event<HTMLElement, null>) => {
@@ -98,3 +98,5 @@ export const routeBinder: BinderWrapper = (dispatcher: Dispatcher, pjax: Pjax, p
     name,
   };
 };
+
+export { routeBinder };
