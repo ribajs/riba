@@ -9,6 +9,7 @@
   ],
   "url": "https://github.com/blikblum/tinybind",
   "main": "./src/index.ts",
+  "browser": "./dist/tinybind.min.js",
   "source": "./src/index.ts",
   "licenses": [
     {
@@ -21,7 +22,7 @@
     "url": "https://github.com/blikblum/tinybind.git"
   },
   "scripts": {
-    "test": "mocha-chrome spec/runner.html",
+    "test": "mocha-chrome spec/runner.html && mocha-chrome spec/runner.min.html",
     "type-check": "tsc --noEmit",
     "build": "npm run type-check && npm run webpack",
     "webpack": "webpack && webpack --config webpack.dev.config.js",
