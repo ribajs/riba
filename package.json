@@ -9,7 +9,6 @@
   ],
   "url": "https://github.com/blikblum/tinybind",
   "main": "./src/index.ts",
-  "browser": "./dist/tinybind.ts",
   "source": "./src/index.ts",
   "licenses": [
     {

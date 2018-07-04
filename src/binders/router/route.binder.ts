@@ -72,7 +72,7 @@ export const routeBinder: BinderWrapper = (dispatcher: Dispatcher, pjax: Pjax, p
       $(window).on('hashchange', () => checkURL(url));
     }
 
-    $el.off('click').on('click', (event) => {
+    $el.off('click').on('click', (event: JQuery.Event<HTMLElement, null>) => {
       debug('go to ', url);
       event.preventDefault();
       if (alreadyOnURL(url)) {
@@ -85,7 +85,7 @@ export const routeBinder: BinderWrapper = (dispatcher: Dispatcher, pjax: Pjax, p
     });
 
     if (usePajax && !newTab && !alreadyOnURL(url)) {
-      $el.off('mouseenter touchstart').on('mouseenter touchstart', (event) => {
+      $el.off('mouseenter touchstart').on('mouseenter touchstart', (event: JQuery.Event<HTMLElement, null>) => {
         prefetch.onLinkEnter(event, url);
       });
     }

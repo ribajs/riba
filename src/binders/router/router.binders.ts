@@ -3,6 +3,8 @@ import { IBinders } from '../../binder.service';
 import { viewBinder } from './view.binder';
 import { routeBinder } from './route.binder';
 
+export { Pjax, Prefetch, Dispatcher };
+
 // TODO make to singleton
 const dispatcher = new Dispatcher();
 const pjax = new Pjax();
