@@ -8,7 +8,9 @@
     "Luiz Américo Pereira Câmara"
   ],
   "url": "https://github.com/blikblum/tinybind",
-  "main": "./dist/tinybind.ts",
+  "main": "./src/index.ts",
+  "browser": "./dist/tinybind.ts",
+  "source": "./src/index.ts",
   "licenses": [
     {
       "type": "MIT",
