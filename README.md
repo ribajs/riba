@@ -34,7 +34,7 @@ import tinybind from 'tinybind'
 ```
 
 ```javascript
-tinybind.bind($('#auction'), {auction: auction})
+tinybind.bind($('#auction')[0], {auction: auction})
 ```
 
 ## Getting Started and Documentation
