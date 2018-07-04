@@ -8,6 +8,8 @@ tinybind is the espiritual sucessor of Rivets.js, a lightweight data binding and
 npm install JumpLinkNetwork/tinybind
 ```
 
+### JavaScript
+
 Use in a script tag...
 
 ```html
@@ -35,6 +37,56 @@ import tinybind from 'tinybind'
 
 ```javascript
 tinybind.bind($('#auction')[0], {auction: auction});
+```
+
+### TypeScript
+
+```typescript
+import JQuery from 'jquery';
+
+import {
+  Tinybind,
+  View,
+
+  // default binders
+  routerBinders,
+  basicBinders,
+
+  // default formatters
+  compareFormatters,
+  mathFormatters,
+  propertyFormatters,
+  specialFormatters,
+  stringFormatters,
+} from 'tinybind';
+
+export class Main {
+
+  private view: View;
+  private tinybind = new Tinybind();
+  private model: any = {};
+
+  constructor() {
+
+    // regist binders
+    this.tinybind.binderService.regists(routerBinders);
+    this.tinybind.binderService.regists(basicBinders);
+
+    // regist formatters
+    this.tinybind.formatterService.regists(compareFormatters);
+    this.tinybind.formatterService.regists(mathFormatters);
+    this.tinybind.formatterService.regists(propertyFormatters);
+    this.tinybind.formatterService.regists(specialFormatters);
+    this.tinybind.formatterService.regists(stringFormatters);
+
+    this.view = this.tinybind.bind(JQuery('body')[0], this.model);
+
+  }
+}
+
+JQuery(() => {
+  const main = new Main();
+});
 ```
 
 ## Getting Started and Documentation
