@@ -1,5 +1,5 @@
-export * from './binders';
-export * from './formatters';
+export * from './binders/index';
+export * from './formatters/index';
 export * from './adapter';
 export * from './binder.service';
 export * from './binding';

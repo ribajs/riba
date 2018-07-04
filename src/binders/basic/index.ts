@@ -3,7 +3,7 @@ import { Binding } from '../../binding';
 import { times, getString } from '../../utils';
 import { IBinders, ITwoWayBinder, IOneWayBinder } from '../../binder.service';
 
-const basicBinders: IBinders<any> = {
+export const basicBinders: IBinders<any> = {
 
   /**
    * Binds an event handler on the element.
@@ -384,5 +384,3 @@ const basicBinders: IBinders<any> = {
     }
   }
 };
-
-export { basicBinders };

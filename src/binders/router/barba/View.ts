@@ -1,6 +1,6 @@
 import { Dispatcher } from './dispatcher';
 import { Utils } from '../../../utils';
-import { IState } from './Pjax';
+import { IState } from './Pjax/index';
 
 
 /**

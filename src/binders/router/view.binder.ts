@@ -1,7 +1,7 @@
 import Debug from 'debug';
 import $ from 'jquery';
 import { IOneWayBinder, BinderWrapper } from '../../binder.service';
-import { Pjax, Prefetch, IState } from './barba';
+import { Pjax, Prefetch, IState } from './barba/index';
 import { Dispatcher } from './barba/dispatcher';
 import { View as RivetsView } from '../../view';
 

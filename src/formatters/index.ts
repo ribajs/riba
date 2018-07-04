@@ -1,7 +1,7 @@
-export { compareFormatters } from './compare';
-export { mathFormatters } from './math';
-export { propertyFormatters } from './property';
-export { specialFormatters } from './special';
-export { stringFormatters } from './string';
+export { compareFormatters } from './compare/index';
+export { mathFormatters } from './math/index';
+export { propertyFormatters } from './property/index';
+export { specialFormatters } from './special/index';
+export { stringFormatters } from './string/index';
 
 // export { date } from './date';

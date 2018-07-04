@@ -1,7 +1,7 @@
 import { Dispatcher } from '../dispatcher';
 import { Utils } from '../../../../utils';
 import { BaseCache } from '../Cache';
-import { HideShowTransition, ITransition } from '../Transition';
+import { HideShowTransition, ITransition } from '../Transition/index';
 import { Dom } from './Dom';
 import { HistoryManager } from './HistoryManager';
 
