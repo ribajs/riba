@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Components</title>
+  </head>
+
+  <body>
+    <div class="test">
+      <div rv-html="'<strong>hello</strong>'"></div>
+      <div rv-hide="true">
+        <h1>hide me</h1>
+      </div>
+      <div rv-hide="true | not">
+        <h1>hide me not</h1>
+      </div>
+
+      <div rv-text="foo">
+      </div>
+
+      <input type="text" rv-value="input">
+
+      <input type="text" rv-value="input"><br>
+
+      shouldNotBeSetted (but it should in this case): "{shouldNotBeSetted}"<br>
+
+      <todo-item
+        primitive-foo="'bar'"
+        databinding-input="input"
+        keypath-bar="foo"
+        keypath-boolean="boolean"
+        keypath-boolean-negate="boolean | not"
+        primitive-boolean="true"
+        primitive-boolean-negate="true | not"
+        ></todo-item>
+
+      <without-template>
+        <h1>without-template</h1>
+        <p>
+          settedFromComonent: "{settedFromComonent}"<br>
+          shouldNotBeSetted: "{shouldNotBeSetted}"<br>
+        </p>
+
+      </without-template>
+      
+    </div>
+    <script src="../dist/tinybind.js"></script>
+    <script>
+      window.tinybind = tinybind;
+
+      tinybind.components['without-template'] = {
+        template: function() {
+          return null;
+        },
+        initialize: function(el, locals) {
+          console.log('el, locals, this', el, locals, this);
+          var scope = this;
+
+          scope.settedFromComonent = 'works';
+
+          return scope;
+        }
+      };
+
+
+      tinybind.components['todo-item'] = {
+
+        bind: ['primitiveBoolean','keypathBar', 'keypathBoolean', 'primitiveFoo', 'databindingInput'],
+
+        template: function() {
+          return `<h1>todo-item</h1>
+          <p>
+            primitive-boolean: {primitiveBoolean}<br>
+            primitive-boolean | not: {primitiveBoolean | not}<br>
+            keypath-bar: {keypathBar}<br>
+            keypath-boolean: {keypathBoolean}<br>
+            keypath-boolean | not: {keypathBoolean | not}<br>
+            primitive-foo: {primitiveFoo}<br>
+          </p>
+          <input type="text" rv-value="databindingInput" rv-on-change="publishInput">
+          databindingInput: {databindingInput}<br>
+          databindingInput as json: {databindingInput | json}<br>
+          `;
+        },
+      
+        initialize: function(el, locals) {
+          console.log('el, locals, this', el, locals, this);
+          var scope = this;
+          // scope.databindingInput = locals.databindingInput;
+          // scope.keypathBar = locals.keypathBar;
+          // scope.keypathBoolean = locals.keypathBoolean;
+          // scope.primitiveBoolean = locals.primitiveBoolean;
+          // scope.primitiveBooleanNegate = locals.primitiveBooleanNegate;
+          // scope.primitiveFoo = locals.primitiveFoo;
+         
+          scope.publishInput = function() {
+            // call this for two way data binding
+            scope.publish('databindingInput', scope.databindingInput);
+            
+            // alternative you can publish all values at one
+            // scope.publish();
+          }
+          return scope;
+        }
+      };
+
+      tinybind.bind(document.getElementsByTagName("body")[0], {foo: 'bar', boolean: true, shouldNotBeSetted: 'looks like I was set'});
+
+    </script>
+  </body>
+</html>

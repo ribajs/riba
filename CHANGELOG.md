@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.16.0
+
+- Components
+  - Now also work without an HTML template and then use their already setted child elements instead
+  - Set attribute names to be automatically bound to the scope
+
 ## 0.15.0
 
 - Tow-Way-Databinding in components by calling the publish method

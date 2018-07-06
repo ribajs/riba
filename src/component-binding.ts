@@ -33,7 +33,7 @@ export class ComponentBinding extends Binding {
   /**
    * static values (PRIMITIVE Attributes)
    */
-  static: any = {};
+  static: {[key: string]: any} = {};
   /**
    * keypath values (KEYPATH Attributes)
    */
@@ -67,12 +67,21 @@ export class ComponentBinding extends Binding {
     
   /**
    * Updates the values in model when the observer calls this function 
+   * Only sync value if it is marked as bind
    */
   sync() {
+    Object.keys(this.static).forEach(propertyName => {
+      if(this.component.bind && this.component.bind.indexOf(propertyName) !== -1) {
+        (this as any)[propertyName] = this.static[propertyName];
+        // (this as any)[key] = this.formattedValues(this.static[key], key);
+      }
+    });
+
     Object.keys(this.observers).forEach(propertyName => {
-      this.view.models[propertyName] = this.observers[propertyName].value();
-      // TODO
-      // this.view.models[propertyName] = this.formattedValues(this.observers[propertyName].value(), propertyName);
+      if(this.component.bind && this.component.bind.indexOf(propertyName) !== -1) {
+        (this as any)[propertyName] = this.observers[propertyName].value();
+        // (this as any)[propertyName] = this.formattedValues(this.observers[propertyName].value(), propertyName);
+      }
     });
   }
     
@@ -91,13 +100,7 @@ export class ComponentBinding extends Binding {
       if(this.observers[propertyName]) {
         this.observers[propertyName].setValue(value);
       }
-    } else {
-      // sync all observers
-      Object.keys(this.observers).forEach(propertyName => {
-        this.observers[propertyName].setValue(this.view.models[propertyName]);
-      });
     }
-
   }
     
   /**
@@ -107,16 +110,11 @@ export class ComponentBinding extends Binding {
     let result: any = {};
     
     Object.keys(this.static).forEach(key => {
-      result[key] = this.formattedValues(this.static[key], key);
+      result[key] = this.static[key]
     });
-    
-    /**
-     * 
-     */
+
     Object.keys(this.observers).forEach(key => {
-      // TODO fixme
       result[key] = this.observers[key].value();
-      // result[key] = this.formattedValues(this.observers[key].value(), key);
     });
     
     return result;
@@ -179,13 +177,17 @@ export class ComponentBinding extends Binding {
    */
   bind() {
     if (!this.el._bound) {
-      this.el.innerHTML = this.component.template.call(this);
+
+      const innerHTML = this.component.template.call(this);
+      // if innerHTML is null this component uses the innerHTML which he already has!
+      if(innerHTML !== null) {
+        this.el.innerHTML = innerHTML;
+      }
+      
       /**
        * there's a cyclic dependency that makes imported View a dummy object. Use tinybind.bind
        */
       let scope = this.component.initialize.call(this, this.el, this.locals());
-      // this.view = tinybind.bind(Array.prototype.slice.call(this.el.childNodes), scope, this.getMergedOptions());
-
       let view = new View(Array.prototype.slice.call(this.el.childNodes), scope, this.getMergedOptions());
       view.bind();
 
@@ -206,13 +208,23 @@ export class ComponentBinding extends Binding {
         let propertyName = this.camelCase(attribute.name);
         const declaration = attribute.value;
         const parsedDeclaration = View.parseDeclaration(declaration);
+
+        if(parsedDeclaration.pipes.length > 0) {
+          console.warn('Formatters on component arguments not supported for the moment', parsedDeclaration.pipes);
+        }
         
         this.pipes[propertyName] = parsedDeclaration.pipes;
+        
         if(parsedDeclaration.keypath === null) {
           throw new Error('parsedDeclaration.keypath is null');
         }
+
         let token = parseType(parsedDeclaration.keypath);
-      if(token.type === PRIMITIVE) {
+        
+        // if component force this propertyName as static
+        if (typeof(this.component.static) !== 'undefined' && this.component.static.indexOf(propertyName) !== -1) {
+          this.static[propertyName] = attribute.value;
+        } else if(token.type === PRIMITIVE) {
           this.static[propertyName] = token.value;
         } else if(token.type === KEYPATH) {
           this.keypaths[propertyName] = attribute.value;
@@ -225,71 +237,74 @@ export class ComponentBinding extends Binding {
     }
   }
 
+  // FORMATTERS TODO
+
   /**
    * 
    * @param args parses the formatters in arguments
    * @param formatterIndex 
    */
-  parseFormatterArgumentsProperty(args: string[], formatterIndex: number, propertyName: string): string[] {
-    return args
-    .map(parseType)
-    .map(({type, value}, ai) => {
-      if (type === PRIMITIVE) {
-        const primitiveValue = value;
-        return primitiveValue;
-      } else if (type === KEYPATH) {
-        console.log('TODO', propertyName);
-        // keypath is string
-        const keypath = (value as string );
-        if (!this.formattersObservers[propertyName]) {
-          this.formattersObservers[propertyName] = {};
-        }
-        if (!this.formattersObservers[propertyName][formatterIndex]) {
-          this.formattersObservers[propertyName][formatterIndex] = {};
-        }
+  // parseFormatterArgumentsProperty(args: string[], formatterIndex: number, propertyName: string): string[] {
+  //   return args
+  //   .map(parseType)
+  //   .map(({type, value}, ai) => {
+  //     if (type === PRIMITIVE) {
+  //       const primitiveValue = value;
+  //       return primitiveValue;
+  //     } else if (type === KEYPATH) {
+  //       console.log('TODO', propertyName);
+  //       // keypath is string
+  //       const keypath = (value as string );
+  //       if (!this.formattersObservers[propertyName]) {
+  //         this.formattersObservers[propertyName] = {};
+  //       }
+  //       if (!this.formattersObservers[propertyName][formatterIndex]) {
+  //         this.formattersObservers[propertyName][formatterIndex] = {};
+  //       }
 
-        let observer = this.formattersObservers[propertyName][formatterIndex][ai];
+  //       let observer = this.formattersObservers[propertyName][formatterIndex][ai];
 
-        if (!observer) {
-          observer = this.observe(this.view.models, keypath);
-          this.formattersObservers[propertyName][formatterIndex][ai] = observer;
-        }
-        return observer.value();
-      } else {
-        throw new Error('Unknown argument type');
-      }
-    });
-  }
+  //       if (!observer) {
+  //         observer = this.observe(this.view.models, keypath, this);
+  //         this.formattersObservers[propertyName][formatterIndex][ai] = observer;
+  //       }
+  //       return observer.value();
+  //     } else {
+  //       throw new Error('Unknown argument type');
+  //     }
+  //   });
+  // }
 
   /**
    * Applies all the current formatters to the supplied value and returns the
    * formatted value.
    */
-  formattedValues(value: any, propertyName: string) {
-    if(this.pipes[propertyName] === null) {
-      throw new Error('formatters is null');
-    }
-    return this.pipes[propertyName].reduce((result: any/*check type*/, declaration: string /*check type*/, index: number) => {
-      let args = declaration.match(Binding.FORMATTER_ARGS);
-      if(args === null) {
-        throw new Error('No args matched from FORMATTER_ARGS');
-      }
-      let id = args.shift();
-      if(!id) {
-        throw new Error('No id found in args');
-      }
-      let formatter = this.view.options.formatters[id];
+  // formattedValues(value: any, propertyName: string) {
+  //   if(this.pipes[propertyName] === null) {
+  //     throw new Error('formatters is null');
+  //   }
+  //   return this.pipes[propertyName].reduce((result: any/*check type*/, declaration: string /*check type*/, index: number) => {
+  //     let args = declaration.match(Binding.FORMATTER_ARGS);
+  //     if(args === null) {
+  //       throw new Error('No args matched from FORMATTER_ARGS');
+  //     }
+  //     let id = args.shift();
+  //     if(!id) {
+  //       throw new Error('No id found in args');
+  //     }
+  //     let formatter = this.view.options.formatters[id];
 
-      const processedArgs = this.parseFormatterArgumentsProperty(args, index, propertyName);
+  //     const processedArgs = this.parseFormatterArgumentsProperty(args, index, propertyName);
 
-      if (formatter && (formatter.read instanceof Function)) {
-        result = formatter.read(result, ...processedArgs);
-      } else if (formatter instanceof Function) {
-        result = formatter(result, ...processedArgs);
-      }
-      return result;
-    }, value);
-  }
+  //     if (formatter && (formatter.read instanceof Function)) {
+  //       result = formatter.read(result, ...processedArgs);
+  //     } else if (formatter instanceof Function) {
+  //       result = formatter(result, ...processedArgs);
+  //     }
+  //     return result;
+  //   }, value);
+  // }
+
     
   /**
    * Intercept `tinybind.Binding::unbind` to be called on `this.componentView`.
@@ -297,6 +312,14 @@ export class ComponentBinding extends Binding {
   unbind() {    
     Object.keys(this.observers).forEach(propertyName => {
       this.observers[propertyName].unobserve();
+    });
+
+    Object.keys(this.formattersObservers).forEach(propertyName => {
+      Object.keys(this.formattersObservers[propertyName]).forEach(formatterIndex => {
+        Object.keys(this.formattersObservers[propertyName][formatterIndex]).forEach(ai => {
+          this.formattersObservers[propertyName][formatterIndex][ai].unobserve();
+        });
+      });
     });
     
     if (this.componentView) {

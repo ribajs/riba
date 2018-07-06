@@ -10,6 +10,12 @@ export interface IComponent<ValueType> {
   template: (() => string) | (() => HTMLElement);
   initialize: (el: HTMLElement, data: ValueType) => Scope;
 
+  /** array of attribiute names to force parse attributes as static (primitive) values */
+  static?: string[];
+
+  /** array of attribiute names to auto bind attributes to the scope */
+  bind?: string[];
+
   // extension options
   binders?: IBinders<any>;
   formatters?: IFormatters;

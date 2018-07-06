@@ -80,16 +80,17 @@ export class BindersService {
    * @param binder
    * @param name 
    */
-  public regist(binder: Binder<any>, name?: string): IBinders<any> {
-    if (!name) {
-      if (binder.hasOwnProperty('constructor')) {
-        name = binder.constructor.name;
-      }
-
-      if (binder.hasOwnProperty('name')) {
+  public regist(binder: Binder<any> | IBinderWrapperResult, name?: string): IBinders<any> {
+    
+    if (binder.hasOwnProperty('name')) {
+      binder = (binder as IBinderWrapperResult);
+      if (!name) {
         name = (binder as any).name;
       }
+      binder = binder.binder;
     }
+
+    binder = (binder as Binder<any>);
 
     this.debug('name', name, binder);
 

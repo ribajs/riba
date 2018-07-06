@@ -22,7 +22,7 @@ Use in a script tag...
 import tinybind from 'tinybind'
 ```
 
-## Usage
+#### Usage
 
 ```html
 <section id="auction">
