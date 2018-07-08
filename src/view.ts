@@ -1,8 +1,8 @@
 import { IViewOptions, Tinybind } from './tinybind';
 import { Binder, ITwoWayBinder } from './binder.service';
-import { Binding } from './binding';
+import { Binding, IBindable } from './binding';
 import { ComponentBinding, IBoundElement } from './component-binding';
-import { parseTemplate } from './parsers';
+import { parseTemplate, parseNode, parseDeclaration } from './parsers';
 
 export type TBlock = boolean;
 
@@ -18,7 +18,7 @@ export class View {
   els: HTMLCollection | HTMLElement[] | Node[];
   models: any;
   options: IViewOptions;
-  bindings: Binding[] = [];
+  bindings: IBindable[] = [];
   componentView: View | null = null;
 
   static DECLARATION_SPLIT = /((?:'[^']*')*(?:(?:[^\|']*(?:'[^']*')+[^\|']*)+|[^\|]+))|^$/g;
@@ -55,62 +55,6 @@ export class View {
     return bPriority - aPriority;
   };
 
-  public static parseNode(view: View, node: IDataElement, templateDelimiters: Array<string>) {
-    let block: TBlock = false;
-
-    // if node.nodeType === Node.TEXT_NODE
-    node = ( node as IDataElement);
-    if (node.nodeType === 3) {
-      let tokens = null;
-
-      // TODO why check data?
-      if(node.data) {
-        tokens = parseTemplate(node.data, templateDelimiters);
-      }
-
-      if (tokens && tokens.length) {
-        if(!node.parentNode) {
-          throw new Error('[View] Node (TEXT_NODE) has no parent node');
-        }
-        for (let i = 0; i < tokens.length; i++) {
-          let token = tokens[i];
-          let text = document.createTextNode(token.value);
-          node.parentNode.insertBefore(text, node);
-          if (token.type === 1) {
-            view.buildBinding(text, null, token.value, View.textBinder, null);
-          }
-        }
-        node.parentNode.removeChild(node);
-      }
-      block = true;
-    } else if (node.nodeType === 1) {
-      block = view.traverse(node);
-    }
-
-    if (!block) {
-      if(node.childNodes) {
-        for (let i = 0; i < node.childNodes.length; i++) {
-          View.parseNode(view, (node.childNodes[i] as IDataElement), templateDelimiters);
-        }
-      }
-    }
-  }
-
-  public static parseDeclaration(declaration: string) {
-    let matches = declaration.match(View.DECLARATION_SPLIT);
-    if(matches === null) {
-      throw new Error('[View] No matches');
-    }
-    let pipes = matches.map((str: string) => {
-      return str.trim();
-    });
-    let keypath = pipes.shift() || null;
-    return {
-      keypath,
-      pipes,
-    }
-  }
-
   public static create(binding: Binding, models: any, anchorEl: HTMLElement | Node | null) {
     let template = binding.el.cloneNode(true);
     let view = new View((template as Node), models, binding.view.options);
@@ -125,7 +69,7 @@ export class View {
   }
 
   public buildBinding(node: HTMLElement | Text, type: string | null, declaration: string, binder: Binder<any>, args: string[] | null) {
-    const parsedDeclaration = View.parseDeclaration(declaration);
+    const parsedDeclaration = parseDeclaration(declaration);
     const keypath = parsedDeclaration.keypath;
     const pipes = parsedDeclaration.pipes;
     this.bindings.push(new Binding((this as View), (node as HTMLElement), type, keypath, binder, args, pipes));
@@ -143,7 +87,7 @@ export class View {
       if(! this.options.templateDelimiters) {
         throw new Error('templateDelimiters required')
       }
-      View.parseNode(this, (elements[i] as IDataElement), this.options.templateDelimiters);
+      parseNode(this, (elements[i] as IDataElement), this.options.templateDelimiters);
     }
 
     this.bindings.sort(View.bindingComparator);

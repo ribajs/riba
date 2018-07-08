@@ -4,6 +4,39 @@ import { Binder, IOneWayBinder, ITwoWayBinder } from './binder.service';
 import { View } from './view';
 import { getInputValue } from './utils';
 
+export interface IBindable {
+  /**
+   * Observes the object keypath
+   * @param obj 
+   * @param keypath 
+   */
+  observe(obj: any, keypath: string, callback: IObserverSyncCallback): Observer;
+
+  /**
+   * Subscribes to the model for changes at the specified keypath. Bi-directional
+   * routines will also listen for changes on the element to propagate them back
+   * to the model.
+   */
+  bind(): void;
+
+  /**
+   * Unsubscribes from the model and the element.
+   */
+  unbind(): void;
+ 
+  /**
+   * Updates the binding's model from what is currently set on the view. Unbinds
+   * the old model first and then re-binds with the new model.
+   * @param {any} models 
+   */
+  update?(models: any): void;
+
+  publish?(): void;
+
+  sync?(): void;
+
+  binder?: Binder<any>;
+}
 
 export interface IFormatterObservers {
   [key: string]: {
@@ -16,7 +49,7 @@ export type eventHandlerFunction = (event: Event) => void;
 /**
  *  A single binding between a model attribute and a DOM element.
  */
-export class Binding {
+export class Binding implements IBindable {
 
   static FORMATTER_ARGS =  /[^\s']+|'([^']|'[^\s])*'|"([^"]|"[^\s])*"/g;
   static FORMATTER_SPLIT = /\s+/;
@@ -84,13 +117,8 @@ export class Binding {
    * @param obj 
    * @param keypath 
    */
-  observe(obj: any, keypath: string, callback?: IObserverSyncCallback): Observer {
-    if(callback) {
-      return new Observer(obj, keypath, callback);
-    } else {
-      return new Observer(obj, keypath, this);
-    }
-    
+  observe(obj: any, keypath: string, callback: IObserverSyncCallback): Observer {
+    return new Observer(obj, keypath, callback);
   }
 
   parseTarget() {
@@ -99,7 +127,7 @@ export class Binding {
       if (token.type === PRIMITIVE) {
         this.value = token.value;
       } else if(token.type === KEYPATH){
-        this.observer = this.observe(this.view.models, this.keypath);
+        this.observer = this.observe(this.view.models, this.keypath, this);
         this.model = this.observer.target;
       } else {
         throw new Error('Unknown type in token');
@@ -136,7 +164,7 @@ export class Binding {
         let observer = this.formatterObservers[formatterIndex][ai];
 
         if (!observer) {
-          observer = this.observe(this.view.models, keypath);
+          observer = this.observe(this.view.models, keypath, this);
           this.formatterObservers[formatterIndex][ai] = observer;
         }
         return observer.value();

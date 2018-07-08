@@ -13,7 +13,7 @@ import { IAdapters } from './adapter';
 import { Observer, Root } from './observer';
 import { IComponents, ComponentService } from './component.service';
 
-interface IExtensions {
+export interface IExtensions {
   binders: IBinders<any>;
   formatters: IFormatters;
   components: IComponents;

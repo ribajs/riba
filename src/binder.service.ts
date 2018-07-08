@@ -82,15 +82,13 @@ export class BindersService {
    */
   public regist(binder: Binder<any> | IBinderWrapperResult, name?: string): IBinders<any> {
     
-    if (binder.hasOwnProperty('name')) {
+    if (binder.hasOwnProperty('binder')) {
       binder = (binder as IBinderWrapperResult);
       if (!name) {
         name = (binder as any).name;
       }
       binder = binder.binder;
     }
-
-    binder = (binder as Binder<any>);
 
     this.debug('name', name, binder);
 
@@ -99,7 +97,7 @@ export class BindersService {
     }
 
     // if Binder<any>
-    this.binders[name] = binder;
+    this.binders[name] = (binder as Binder<any>);
     return this.binders;
   }
 

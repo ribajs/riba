@@ -1,11 +1,11 @@
 import { IViewOptions } from './tinybind';
-import { PRIMITIVE, KEYPATH, parseType } from './parsers';
-import { Binding, IFormatterObservers } from './binding';
+import { PRIMITIVE, KEYPATH, parseType, parseDeclaration } from './parsers';
+import { Binding, IFormatterObservers, IBindable } from './binding';
 import { IBinders } from './binder.service';
 import { IFormatters } from './formatter.service';
 import { View } from './view';
 import { IComponent, IComponents } from './component.service';
-import { IObservers } from './observer';
+import { Observer, IObservers, IObserverSyncCallback } from './observer';
 import { IAdapters } from './adapter';
 import { mergeObject } from './utils';
 
@@ -24,7 +24,7 @@ export interface IKeypaths {
 /**
  * component view encapsulated as a binding within it's parent view.
  */
-export class ComponentBinding extends Binding {
+export class ComponentBinding implements IBindable {
   view: View;
   componentView?: View;
   el: IBoundElement;
@@ -53,7 +53,6 @@ export class ComponentBinding extends Binding {
    * @param type 
    */
   constructor(view: View, el: HTMLElement, type: string) {
-    super(view, el, type, null, null, null, null);
     this.view = view;
     this.el = el;
     this.type = type;
@@ -63,7 +62,16 @@ export class ComponentBinding extends Binding {
     this.bindingPrefix = view.options.prefix + '-'; // TODO
     this.parseTarget();
     this.sync();
-  }   
+  }
+
+  /**
+   * Observes the object keypath
+   * @param obj 
+   * @param keypath 
+   */
+  observe(obj: any, keypath: string, callback: IObserverSyncCallback): Observer {
+    return new Observer(obj, keypath, callback);
+  }
     
   /**
    * Updates the values in model when the observer calls this function 
@@ -84,12 +92,6 @@ export class ComponentBinding extends Binding {
       }
     });
   }
-    
-  /**
-   * Intercepts `tinybind.Binding::update` since component bindings are not bound
-   * to a particular model to update it's value.
-   */
-  update() {}
     
   /**
    * Publishes the value currently set on the model back to the parent model.
@@ -207,7 +209,7 @@ export class ComponentBinding extends Binding {
       if (attribute.name.indexOf(this.bindingPrefix) !== 0) {
         let propertyName = this.camelCase(attribute.name);
         const declaration = attribute.value;
-        const parsedDeclaration = View.parseDeclaration(declaration);
+        const parsedDeclaration = parseDeclaration(declaration);
 
         if(parsedDeclaration.pipes.length > 0) {
           console.warn('Formatters on component arguments not supported for the moment', parsedDeclaration.pipes);

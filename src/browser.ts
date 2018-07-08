@@ -24,6 +24,7 @@ tinybind.formatterService.regists(specialFormatters);
 tinybind.formatterService.regists(stringFormatters);
 
 // regist binders
+console.log('basicBinders', basicBinders);
 tinybind.binderService.regists(basicBinders);
 tinybind.binderService.regists(routerBinders);
 

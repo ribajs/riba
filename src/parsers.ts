@@ -1,5 +1,7 @@
 import { isJson } from './utils';
 
+import { IDataElement, View, TBlock } from './view';
+
 /**
  * Used also in parsers.parseType
  * TODO outsource
@@ -10,7 +12,7 @@ export const TEXT = 0;
 export const BINDING = 1;
 
 const QUOTED_STR = /^'.*'$|^".*"$/; // regex to test if string is wrapped in " or '
-
+const DECLARATION_SPLIT = /((?:'[^']*')*(?:(?:[^\|']*(?:'[^']*')+[^\|']*)+|[^\|]+))|^$/g;
 
 /**
  * Parser and tokenizer for getting the type and value from a string.
@@ -111,4 +113,78 @@ export function parseTemplate(template: string, delimiters: string[]) {
   }
 
   return tokens;
+}
+
+
+export function parseNode(view: View, node: IDataElement, templateDelimiters: Array<string>) {
+  let block: TBlock = false;
+
+  // if node.nodeType === Node.TEXT_NODE
+  node = ( node as IDataElement);
+  if (node.nodeType === 3) {
+    let tokens = null;
+
+    // TODO why check data?
+    if(node.data) {
+      tokens = parseTemplate(node.data, templateDelimiters);
+    }
+
+    if (tokens && tokens.length) {
+      if(!node.parentNode) {
+        throw new Error('[View] Node (TEXT_NODE) has no parent node');
+      }
+      for (let i = 0; i < tokens.length; i++) {
+        let token = tokens[i];
+        let text = document.createTextNode(token.value);
+        node.parentNode.insertBefore(text, node);
+        if (token.type === 1) {
+          view.buildBinding(text, null, token.value, View.textBinder, null);
+        }
+      }
+      node.parentNode.removeChild(node);
+    }
+    block = true;
+  } else if (node.nodeType === 1) {
+    block = view.traverse(node);
+  }
+
+  if (!block) {
+    if(node.childNodes) {
+      for (let i = 0; i < node.childNodes.length; i++) {
+        parseNode(view, (node.childNodes[i] as IDataElement), templateDelimiters);
+      }
+    }
+  }
+}
+
+/**
+ * Parses an attribute argument to his keypath and splits the formatter names into a pipes array.
+ * @param declaration e.g. `object.data | validate | json`
+ * 
+ * if declaration is
+ * ```
+ * object.data | validate | json`
+ * ``
+ * 
+ * the result is
+ * ```
+ * {
+ *    keypath: "object.data",
+ *    pipes: ["validate", "json"]
+ * }
+ * ```
+ */
+export function parseDeclaration(declaration: string) {
+  let matches = declaration.match(DECLARATION_SPLIT);
+  if(matches === null) {
+    throw new Error('[View] No matches');
+  }
+  let pipes = matches.map((str: string) => {
+    return str.trim();
+  });
+  let keypath = pipes.shift() || null;
+  return {
+    keypath,
+    pipes,
+  }
 }
