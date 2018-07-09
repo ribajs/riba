@@ -182,7 +182,7 @@ export function parseDeclaration(declaration: string) {
   let pipes = matches.map((str: string) => {
     return str.trim();
   });
-  let keypath = pipes.shift() || null;
+  let keypath = pipes.shift();
   return {
     keypath,
     pipes,
