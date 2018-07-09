@@ -1,9 +1,17 @@
 import Debug from 'debug';
-export interface IFormatter {
+
+export interface IOneWayFormatter {
   (val: any, ...args: any[]): any;
   read?: (result: string, ...processedArgs: string[]) => void;
-  publish?: (result: string, ...processedArgs: string[]) => void;
 }
+
+export interface IOneTwoFormatter {
+  read: (result: string, ...processedArgs: string[]) => void;
+  publish: (result: string, ...processedArgs: string[]) => void;
+}
+
+
+export type IFormatter = IOneWayFormatter | IOneTwoFormatter;
 
 export interface IFormatters {
   [name: string]: IFormatter;

@@ -3,6 +3,7 @@ import { Observer, IObserverSyncCallback } from './observer';
 import { Binder, IOneWayBinder, ITwoWayBinder } from './binder.service';
 import { View } from './view';
 import { getInputValue } from './utils';
+import { IFormatter, IOneTwoFormatter }  from './formatter.service';
 
 export interface IBindable {
   /**
@@ -285,8 +286,8 @@ export class Binding implements IBindable {
         const formatter = this.view.options.formatters[id];
         const processedArgs = this.parseFormatterArguments(args, index);
 
-        if (formatter && formatter.publish) {
-          result = formatter.publish(result, ...processedArgs);
+        if (formatter && (formatter as IOneTwoFormatter).publish) {
+          result = (formatter as IOneTwoFormatter).publish(result, ...processedArgs);
         }
         return result;
       }, this.getValue((this.el as HTMLInputElement)));
