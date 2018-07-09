@@ -72,14 +72,9 @@ class Dispatcher {
       return;
     }
 
-    for (const i in this.events[e]) {
-      if (this.events[e][i]) {
-        this.events[e][i].apply(this, Array.prototype.slice.call(arguments, 1));
-      }
+    for (let i = 0; i < this.events[e].length; i++) {
+      this.events[e][i].apply(this, args);
     }
-    // for (let i = 0; i < this.events[e].length; i++) {
-    //   this.events[e][i].apply(this, Array.prototype.slice.call(arguments, 1));
-    // }
   }
 }
 
