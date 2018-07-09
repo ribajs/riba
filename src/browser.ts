@@ -1,3 +1,5 @@
+import JQuery from 'jquery';
+
 import {
   Tinybind,
 
@@ -9,7 +11,7 @@ import {
   stringFormatters,
 
   // binders
-  basicBinders,
+  basicBindersWrapper,
   routerBinders,
 
   // classes
@@ -27,7 +29,7 @@ tinybind.formatterService.regists(specialFormatters);
 tinybind.formatterService.regists(stringFormatters);
 
 // regist binders
-tinybind.binderService.regists(basicBinders);
+tinybind.binderService.regists(basicBindersWrapper(JQuery));
 tinybind.binderService.regists(routerBinders);
 
 /** Additional global exports */

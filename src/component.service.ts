@@ -8,7 +8,8 @@ import { IBindable } from './binding';
 export type Scope = any;
 
 export interface IComponent<ValueType> {
-  template: (() => string) | (() => HTMLElement);
+  /** If the template function returns null no template is injected */
+  template: (() => string | null) | (() => HTMLElement);
   initialize: (el: HTMLElement, data: ValueType) => Scope;
 
   /** array of attribiute names to force parse attributes as static (primitive) values */
