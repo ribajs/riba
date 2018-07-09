@@ -1,5 +1,5 @@
 import { View } from '../../view';
-import { Binding, IBindable } from '../../binding';
+import { IBindable } from '../../binding';
 import { times, getString } from '../../utils';
 import { IBinders, ITwoWayBinder, IOneWayBinder } from '../../binder.service';
 

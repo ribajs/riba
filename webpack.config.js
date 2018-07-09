@@ -12,6 +12,7 @@ module.exports = {
           mangle: true,
           output: {
             beautify: false,
+            comments: false,
           }
         }
       })
