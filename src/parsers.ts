@@ -31,6 +31,8 @@ export function parseType(string: string) {
     value = null;
   } else if (string === 'undefined') {
     value = undefined;
+  } else if (string === '') {
+    value = undefined;
   } else if (!isNaN(Number(string))) {
     value = Number(string);
   } else if (isJson(string)) {
