@@ -19,12 +19,27 @@ const viewBinder: BinderWrapper = (dispatcher: Dispatcher, pjax: Pjax, prefetch:
     const $wrapper = JQuery(el);
     const self = this;
 
+    /*
+     * Make the dispatcher available in the model to register event handlers.
+     *
+     * I.e., if we have initialized rivets/tinybind with:
+     *
+     *  `rivets.bind(document.body, model)`,
+     *
+     * then we can register event handlers for the Barba router dispatcher like this:
+     *
+     *  `model.routerDispatcher.on('newPageReady', ...);`
+     *  `model.routerDispatcher.on('transitionCompleted', ...);`
+     * ...etc.
+     *
+     */
+    self.view.models.routerDispatcher = dispatcher;
+
     this.customData = {
       nested: null,
     }   
 
     dispatcher.on('newPageReady', (currentStatus: IState, prevStatus: IState, $container: JQuery<HTMLElement>, newPageRawHTML: string, dataset: any, isInit: boolean) => {
-      
       // unbind the old rivets view
       if (self.customData.nested !== null) {
         self.customData.nested.unbind();
