@@ -2,7 +2,7 @@ import Debug from 'debug';
 import JQuery from 'jquery';
 import { IOneWayBinder, BinderWrapper } from '../../binder.service';
 import { Pjax, Prefetch, IState } from './barba/barba';
-import { Dispatcher } from './barba/dispatcher';
+import { GlobalEvent } from '../../global-event';
 import { View as RivetsView } from '../../view';
 import { Utils } from '../../utils';
 
@@ -10,7 +10,7 @@ import { Utils } from '../../utils';
  * Open link with pajax if the route is not the active route
  * Sets also the element active if his url is the current url
  */
-const viewBinder: BinderWrapper = (dispatcher: Dispatcher, pjax: Pjax, prefetch: Prefetch) => {
+const viewBinder: BinderWrapper = (dispatcher: GlobalEvent, pjax: Pjax, prefetch: Prefetch) => {
 
   const name = 'view';
   const debug = Debug('binders:view');

@@ -2,7 +2,7 @@ export * from './HistoryManager';
 export * from './Dom';
 export * from './Prefetch';
 
-import { Dispatcher } from '../dispatcher';
+import { GlobalEvent } from '../../../../global-event';
 import { Utils } from '../../../../utils';
 import { BaseCache } from '../Cache';
 import { HideShowTransition, ITransition } from '../Transition/Transition';
@@ -133,7 +133,7 @@ class Pjax {
   */
   public transitionProgress: boolean = false;
 
-  private dispatcher = new Dispatcher();
+  private dispatcher = new GlobalEvent();
 
   private transition: ITransition = new HideShowTransition();;
 

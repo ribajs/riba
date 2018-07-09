@@ -1,10 +1,10 @@
-import { Pjax, Prefetch, Dispatcher } from './barba/barba';
+import { Pjax, Prefetch, GlobalEvent } from './barba/barba';
 import { IBinders } from '../../binder.service';
 import { viewBinder } from './view.binder';
 import { routeBinder } from './route.binder';
 
 // TODO make to singleton
-const dispatcher = new Dispatcher();
+const dispatcher = new GlobalEvent();
 const pjax = new Pjax();
 const prefetch = new Prefetch();
 
@@ -16,4 +16,4 @@ const routeBinderWrapper = routeBinder(dispatcher, pjax, prefetch);
 routerBinders[viewBinderWrapper.name] = viewBinderWrapper.binder;
 routerBinders[routeBinderWrapper.name] = routeBinderWrapper.binder;
 
-export { Pjax, Prefetch, Dispatcher, routerBinders };
+export { Pjax, Prefetch, GlobalEvent, routerBinders };

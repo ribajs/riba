@@ -9,9 +9,9 @@ interface IEvents {
  *
  * @type {object}
  */
-class Dispatcher {
+class GlobalEvent {
   // TODO make global dispatcher optional
-  private static instance: Dispatcher;
+  private static instance: GlobalEvent;
   /**
    * Object that keeps all the events
    *
@@ -26,11 +26,11 @@ class Dispatcher {
    * @memberof Dispatcher
    */
   constructor() {
-    if (Dispatcher.instance) {
-      return Dispatcher.instance;
+    if (GlobalEvent.instance) {
+      return GlobalEvent.instance;
     }
 
-    Dispatcher.instance = this;
+    GlobalEvent.instance = this;
   }
 
   /**
@@ -78,4 +78,4 @@ class Dispatcher {
   }
 }
 
-export { Dispatcher };
+export { GlobalEvent };

@@ -1,14 +1,14 @@
 import Debug from 'debug';
 import JQuery from 'jquery';
 import { IOneWayBinder, BinderWrapper } from '../../binder.service';
-import { Pjax, Prefetch, Dispatcher } from './barba/barba';
+import { Pjax, Prefetch, GlobalEvent } from './barba/barba';
 import { Utils } from '../../utils';
 
 /**
  * Open link with pajax if the route is not the active route
  * Sets also the element active if his url is the current url
  */
-const routeBinder: BinderWrapper = (dispatcher: Dispatcher, pjax: Pjax, prefetch: Prefetch) => {
+const routeBinder: BinderWrapper = (dispatcher: GlobalEvent, pjax: Pjax, prefetch: Prefetch) => {
 
   const name = 'route';
   const debug = Debug('binders:route');

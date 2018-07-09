@@ -11,6 +11,9 @@ import {
   // binders
   basicBinders,
   routerBinders,
+
+  // classes
+  GlobalEvent,
 } from './index';
 
 // Global tinybind object
@@ -24,8 +27,17 @@ tinybind.formatterService.regists(specialFormatters);
 tinybind.formatterService.regists(stringFormatters);
 
 // regist binders
-console.log('basicBinders', basicBinders);
 tinybind.binderService.regists(basicBinders);
 tinybind.binderService.regists(routerBinders);
+
+
+declare global {
+  interface Window {
+    globalEvents: GlobalEvent
+  }
+}
+
+/** Additional global exports */
+window.globalEvents = new GlobalEvent();
 
 export default tinybind;
