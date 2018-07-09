@@ -203,11 +203,19 @@ export class Binding implements IBindable {
 
       const processedArgs = this.parseFormatterArguments(args, index);
 
+      let formatterReadFunction;
+
+      // get formatter read funcion
       if (formatter && (formatter.read instanceof Function)) {
-        result = formatter.read(result, ...processedArgs);
+        formatterReadFunction = formatter.read;
       } else if (formatter instanceof Function) {
-        result = formatter(result, ...processedArgs);
+        formatterReadFunction = formatter;
       }
+
+      if (formatterReadFunction instanceof Function) {
+        result = formatterReadFunction(result, ...processedArgs);
+      }
+
       return result;
     }, value);
   }
