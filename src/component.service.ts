@@ -29,6 +29,12 @@ export interface IComponent<ValueType> {
   preloadData?: boolean;
   rootInterface?: string;
   templateDelimiters?: Array<string>;
+
+  /**
+   * If you want to save custom data in your binder logic
+   */
+  [key: string]: any;
+
   handler?: (this: any, context: any, ev: Event, binding: IBindable) => void;
 }
 

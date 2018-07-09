@@ -223,8 +223,11 @@ export class Binding implements IBindable {
 
   /**
    * Returns an event handler for the binding around the supplied function.
+   * Tihs event Handler is mainly used by the on-* binder
+   * @param fn The function to call by the handler
+   * @param el The element the event was triggered from
    */
-  public eventHandler(fn: eventHandlerFunction): (ev: Event) => any {
+  public eventHandler(fn: eventHandlerFunction, el: HTMLElement): (ev: Event) => any {
     const binding = this;
     const handler = binding.view.options.handler;
 
@@ -232,7 +235,7 @@ export class Binding implements IBindable {
       if (!handler) {
         throw new Error('No handler defined in binding.view.options.handler');
       }
-      handler.call(fn, this, ev, binding);
+      handler.call(fn, this, ev, binding, el);
     };
   }
 

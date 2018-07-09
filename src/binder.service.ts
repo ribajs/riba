@@ -19,7 +19,7 @@ export interface ITwoWayBinder<ValueType> {
   publishes?: boolean;
   priority?: number;
   /**
-   * If you want to save custom data in this use this object
+   * If you want to save custom data in your binder logic
    */
   customData?: any;
 }

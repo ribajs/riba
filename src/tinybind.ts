@@ -1,4 +1,4 @@
-import { mergeObject } from './utils';
+import { Utils } from './utils';
 import { parseTemplate, parseType } from './parsers';
 import { IFormatters, FormatterService } from './formatter.service';
 import { Binding, IBindable } from './binding';
@@ -31,7 +31,7 @@ export interface IOptions {
   templateDelimiters?: Array<string>;
 
   /** Augment the event handler of the on-* binder */
-  handler?: (this: any, context: any, ev: Event, binding: Binding) => void;
+  handler?: (this: any, context: any, ev: Event, binding: Binding, el: HTMLElement) => void;
 }
 
 export declare interface IOptionsParam extends IExtensions, IOptions {}
@@ -45,10 +45,12 @@ export declare interface IViewOptions extends IOptionsParam {
 export class Tinybind {
 
   /**
-   * Default event handler.
+   * Default event handler, calles the function defined in his binder
+   * @see Binding.eventHandler
+   * @param el The element the event was triggered from
    */
-  public static handler(this: any, context: any, ev: Event, binding: Binding) {
-    this.call(context, ev, binding.view.models);
+  public static handler(this: any, context: any, ev: Event, binding: Binding, el: HTMLElement) {
+    this.call(context, ev, binding.view.models, el);
   }
 
   /**
@@ -137,19 +139,19 @@ export class Tinybind {
       const value = options[option];
       switch (option) {
         case 'binders':
-          mergeObject(this.binders, value);
+          this.binders = Utils.concat(false, this.binders, value);
           break;
         case 'formatters':
-          mergeObject(this.formatters, value);
+          this.formatters = Utils.concat(false, this.formatters, value);
           break;
         case 'components':
-          mergeObject(this.components, value);
+          this.components = Utils.concat(false, this.components, value);
           break;
         case 'adapters':
-          mergeObject(this.adapters, value);
+          this.adapters = Utils.concat(false, this.adapters, value);
           break;
         case 'adapter':
-          mergeObject(this.adapters, value);
+          this.adapters = Utils.concat(false, this.adapters, value);
           break;
         case 'prefix':
           this.prefix = value;
@@ -218,10 +220,10 @@ export class Tinybind {
     // options = options || {};
 
     if (options) {
-      mergeObject(viewOptions.binders, options.binders);
-      mergeObject(viewOptions.formatters, options.formatters);
-      mergeObject(viewOptions.components, options.components);
-      mergeObject(viewOptions.adapters, options.adapters);
+      viewOptions.binders = Utils.concat(false, viewOptions.binders, options.binders);
+      viewOptions.formatters = Utils.concat(false, viewOptions.formatters, options.formatters);
+      viewOptions.components = Utils.concat(false, viewOptions.components, options.components);
+      viewOptions.adapters = Utils.concat(false, viewOptions.adapters, options.adapters);
     }
 
     viewOptions.prefix = options && options.prefix ? options.prefix : this.prefix;
@@ -231,10 +233,10 @@ export class Tinybind {
     viewOptions.handler = options && options.handler ? options.handler : Tinybind.handler;
 
     // merge extensions
-    mergeObject(viewOptions.binders, this.binders);
-    mergeObject(viewOptions.formatters, this.formatters);
-    mergeObject(viewOptions.components, this.components);
-    mergeObject(viewOptions.adapters, this.adapters);
+    viewOptions.binders = Utils.concat(false, viewOptions.binders, this.binders);
+    viewOptions.formatters = Utils.concat(false, viewOptions.formatters, this.formatters);
+    viewOptions.components = Utils.concat(false, viewOptions.components, this.components);
+    viewOptions.adapters = Utils.concat(false, viewOptions.adapters, this.adapters);
 
     // get all starBinders from available binders
     viewOptions.starBinders = Object.keys(viewOptions.binders).filter((key) => {

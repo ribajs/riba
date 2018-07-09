@@ -1,10 +1,11 @@
 # Changelog
 
-## 0.16.0
+## master
 
 - Components
   - Now also work without an HTML template and then use their already setted child elements instead
   - Set attribute names to be automatically bound to the scope
+- The event handler now also passes the html element the event comes from
 
 ## 0.15.0
 

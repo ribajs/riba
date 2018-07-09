@@ -1,13 +1,13 @@
 import { IViewOptions } from './tinybind';
 import { PRIMITIVE, KEYPATH, parseType, parseDeclaration } from './parsers';
-import { Binding, IFormatterObservers, IBindable } from './binding';
+import { IFormatterObservers, IBindable } from './binding';
 import { IBinders } from './binder.service';
 import { IFormatters } from './formatter.service';
 import { View } from './view';
 import { IComponent, IComponents } from './component.service';
 import { Observer, IObservers, IObserverSyncCallback } from './observer';
 import { IAdapters } from './adapter';
-import { mergeObject } from './utils';
+import { Utils } from './utils';
 
 export interface IBoundElement extends HTMLElement {
   _bound?: boolean;
@@ -147,15 +147,23 @@ export class ComponentBinding implements IBindable {
       rootInterface: Object.create(null),
     };
 
-    mergeObject(options.binders, this.component.binders);
-    mergeObject(options.formatters, this.component.formatters);
-    mergeObject(options.components, this.component.components);
-    mergeObject(options.adapters, this.component.adapters);
+    if (this.component.binders) {
+      options.binders = Utils.concat(false, options.binders, this.component.binders);
+    }
+    if (this.component.formatters) {
+      options.formatters = Utils.concat(false, options.formatters, this.component.formatters);
+    }
+    if (this.component.components) {
+      options.components = Utils.concat(false, options.components, this.component.components);
+    }
+    if (this.component.adapters) {
+      options.adapters = Utils.concat(false, options.adapters, this.component.adapters);
+    }
 
-    mergeObject(options.binders, this.view.options.binders);
-    mergeObject(options.formatters, this.view.options.formatters);
-    mergeObject(options.components, this.view.options.components);
-    mergeObject(options.adapters, this.view.options.adapters);
+    options.binders = Utils.concat(false, options.binders, this.view.options.binders);
+    options.formatters = Utils.concat(false, options.formatters, this.view.options.formatters);
+    options.components = Utils.concat(false, options.components, this.view.options.components);
+    options.adapters = Utils.concat(false, options.adapters, this.view.options.adapters);
 
     options.prefix = this.component.prefix ? this.component.prefix : this.view.options.prefix;
     options.templateDelimiters = this.component.templateDelimiters ? this.component.templateDelimiters : this.view.options.templateDelimiters;

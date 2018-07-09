@@ -6,17 +6,6 @@ export interface IDeferred {
   reject: any;
 }
 
-export const mergeObject = (target: any, obj: any) => {
-  if (obj) {
-    Object.keys(obj).forEach((key) => {
-      if (!target[key] || target[key] === {}) {
-        target[key] = obj[key];
-      }
-    });
-  }
-  return target;
-};
-
 /**
  * Test if string is a json string
  * @param str
@@ -211,7 +200,7 @@ export class Utils {
    * @param {object} object1 An first object containing properties to concat.
    * @param {object} object2 The second object containing properties to concat.
    */
-  public static concat(deep: boolean, object1: object, object2: object) {
+  public static concat(deep: boolean, object1: object, object2: object): any {
     return this.extend(deep, {}, object1, object2);
   }
 
