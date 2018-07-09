@@ -31,6 +31,8 @@ export function parseType(string: string) {
     value = null;
   } else if (string === 'undefined') {
     value = undefined;
+  } else if (string === '') {
+    value = undefined;
   } else if (!isNaN(Number(string))) {
     value = Number(string);
   } else if (isJson(string)) {
@@ -182,7 +184,7 @@ export function parseDeclaration(declaration: string) {
   let pipes = matches.map((str: string) => {
     return str.trim();
   });
-  let keypath = pipes.shift() || null;
+  let keypath = pipes.shift();
   return {
     keypath,
     pipes,

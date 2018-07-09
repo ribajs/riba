@@ -216,10 +216,6 @@ export class ComponentBinding implements IBindable {
         }
         
         this.pipes[propertyName] = parsedDeclaration.pipes;
-        
-        if(parsedDeclaration.keypath === null) {
-          throw new Error('parsedDeclaration.keypath is null');
-        }
 
         let token = parseType(parsedDeclaration.keypath);
         

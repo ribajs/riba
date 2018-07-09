@@ -187,16 +187,18 @@ export const basicBinders: IBinders<any> = {
    * Adds or removes the class from the element when value is true or false.
    */
   'class-*': <IOneWayBinder<boolean>> function(el: HTMLElement, value: boolean) {
-    let elClass = ` ${el.className} `;
     if(this.args === null) {
       throw new Error('args is null');
     }
-    if (value !== (elClass.indexOf(` ${this.args[0]} `) > -1)) {
+    let classList = el.className.split(' ').filter(el => el !== '');
+    let arg = this.args[0].trim();
+    let idx = classList.indexOf(arg);
+    if (idx === -1) {
       if (value) {
-        el.className = `${el.className} ${this.args[0]}`;
-      } else {
-        el.className = elClass.replace(` ${this.args[0]} `, ' ').trim();
+        el.className += ` ${arg}`;
       }
+    } else if (!value) {
+      el.className = classList.filter((el, i) => i !== idx).join(' ');
     }
   },
 

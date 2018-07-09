@@ -100,19 +100,16 @@ class Pjax {
    * @param  {HTMLAnchorElement} el
    * @return {string} href
    */
-  public static getHref(el: HTMLAnchorElement | SVGAElement): string {
+  public static getHref(el: HTMLAnchorElement | SVGAElement): string | undefined {
     if (el.getAttribute && typeof el.getAttribute('xlink:href') === 'string') {
-      const href = el.getAttribute('xlink:href');
-      if(href !== null) {
-        return href;
-      }
+      return el.getAttribute('xlink:href');
     }
 
     if (typeof(el.href) === 'string') {
       return el.href;
     }
 
-    throw new Error('Can\t parse href');
+    return undefined;
   }
 
   public dom?: Dom;
