@@ -3,6 +3,7 @@ import { IBinders } from './binder.service';
 import { IFormatters } from './formatter.service';
 import { IComponent, IComponents } from './component.service';
 import { IAdapters } from './adapter';
+import { IBindable } from './binding';
 
 export type Scope = any;
 
@@ -26,8 +27,8 @@ export interface IComponent<ValueType> {
   prefix?: string;
   preloadData?: boolean;
   rootInterface?: string;
-  templateDelimiters?: Array<string>
-  handler?: Function;
+  templateDelimiters?: Array<string>;
+  handler?: (this: any, context: any, ev: Event, binding: IBindable) => void;
 }
 
 export interface IComponents {
@@ -45,8 +46,8 @@ export class ComponentService {
   private debug = Debug('components:ComponentService');
 
   /**
-   * 
-   * @param components 
+   *
+   * @param components
    */
   constructor(components: IComponents) {
     this.components = components;
@@ -55,13 +56,13 @@ export class ComponentService {
   /**
    * Regist a component wrapper
    * @param ComponentWrapper
-   * @param name 
+   * @param name
    */
-  public registWrapper(ComponentWrapper: IComponentWrapperResult<any>, name?: string): IComponents {
+  public registWrapper(componentWrapper: IComponentWrapperResult<any>, name?: string): IComponents {
     if (!name) {
-      name = ComponentWrapper.name;
+      name = componentWrapper.name;
     }
-    const component = (ComponentWrapper as IComponentWrapperResult<any>);
+    const component = (componentWrapper as IComponentWrapperResult<any>);
     this.components[name] = component;
     return this.components;
   }
@@ -69,7 +70,7 @@ export class ComponentService {
   /**
    * Regist a component with his name
    * @param component
-   * @param name 
+   * @param name
    */
   public regist(component: IComponent<any>, name?: string): IComponents {
     if (!name) {
@@ -94,15 +95,14 @@ export class ComponentService {
 
   /**
    * Regist a set of components
-   * @param components 
+   * @param components
    */
   public regists(components: IComponents): IComponents {
     for (const name in components) {
       if (components.hasOwnProperty(name)) {
-        this.regist(components[name], name)
+        this.regist(components[name], name);
       }
     }
     return this.components;
   }
-
 }

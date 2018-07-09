@@ -17,4 +17,4 @@ export { parse, json, first, last, contains, get, set, match, count, empty, isLa
 
 export const propertyFormatters: IFormatters = {
   parse, json, first, last, contains, get, set, match, count, empty, isLast,
-}
+};

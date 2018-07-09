@@ -30,14 +30,7 @@ tinybind.formatterService.regists(stringFormatters);
 tinybind.binderService.regists(basicBinders);
 tinybind.binderService.regists(routerBinders);
 
-
-declare global {
-  interface Window {
-    globalEvents: GlobalEvent
-  }
-}
-
 /** Additional global exports */
-window.globalEvents = new GlobalEvent();
+(window as any).globalEvents = new GlobalEvent();
 
 export default tinybind;

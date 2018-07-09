@@ -11,8 +11,8 @@ import { slice } from './slice.formatter';
 import { strip } from './strip.formatter';
 import { upcase } from './upcase.formatter';
 
-export { append, downcase, filled, isString, pluralize, prepend, slice, strip, upcase, };
+export { append, downcase, filled, isString, pluralize, prepend, slice, strip, upcase };
 
 export const stringFormatters: IFormatters = {
   append, downcase, filled, isString, pluralize, prepend, slice, strip, upcase,
-}
+};

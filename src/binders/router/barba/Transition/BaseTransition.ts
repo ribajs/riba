@@ -88,12 +88,12 @@ export abstract class BaseTransition implements ITransition {
   public done() {
     this.debug('done');
     // this.$oldContainer[0].parentNode.removeChild(this.$oldContainer[]);
-    if(!this.$oldContainer) {
+    if (!this.$oldContainer) {
       throw new Error('Can\'t remove old container');
     }
     this.$oldContainer.remove();
     // this.newContainer.style.visibility = 'visible';
-    if(!this.$newContainer) {
+    if (!this.$newContainer) {
       throw new Error('Can\'t show new container');
     }
     this.$newContainer.css('visibility', 'visible');

@@ -2,7 +2,6 @@ import { GlobalEvent } from '../../../global-event';
 import { Utils } from '../../../utils';
 import { IState } from './Pjax/Pjax';
 
-
 /**
  * BaseView to be extended
  *

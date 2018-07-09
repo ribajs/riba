@@ -19,7 +19,7 @@ export const mergeObject = (target: any, obj: any) => {
 
 /**
  * Test if string is a json string
- * @param str 
+ * @param str
  */
 export const isJson = (str: string) => {
   try {
@@ -32,7 +32,7 @@ export const isJson = (str: string) => {
 
 /**
  * Check if a value is an object than can be observed.
- * @param obj 
+ * @param obj
  */
 export const isObject = (obj: object) => {
   return typeof obj === 'object' && obj !== null;
@@ -49,14 +49,14 @@ export const times = (n: number, cb: () => void) => {
 };
 
 /**
- * 
+ *
  */
 export const getInputValue = (el: HTMLSelectElement | HTMLInputElement) => {
-  let results: string[] = [];
+  const results: string[] = [];
   if (el.type === 'checkbox') {
     return (el as HTMLInputElement).checked;
   } else if (el.type === 'select-multiple') {
-    let options:HTMLOptionsCollection = (el as HTMLSelectElement).options;
+    const options: HTMLOptionsCollection = (el as HTMLSelectElement).options;
 
     for (const key in options) {
       if (options.hasOwnProperty(key)) {
@@ -71,7 +71,7 @@ export const getInputValue = (el: HTMLSelectElement | HTMLInputElement) => {
   } else {
     return el.value;
   }
-}
+};
 
 /**
  * Just an Class with some helpful functions

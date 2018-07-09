@@ -1,6 +1,5 @@
 import { Utils } from '../../utils';
 
-
 export const pluralize = (input: any, singular: string, plural: string) => {
   if (plural === null) {
     plural = singular + 's';

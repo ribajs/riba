@@ -39,7 +39,7 @@ class CustomTransition extends BaseTransition implements ITransition {
 
   public start() {
     this.debug('CustomTransition start');
-    if(!this.newContainerLoading) {
+    if (!this.newContainerLoading) {
       throw new Error('this.newContainerLoading is not set');
     }
     this.newContainerLoading.then(this.finish.bind(this));

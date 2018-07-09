@@ -1,12 +1,9 @@
 import { mergeObject } from './utils';
 import { parseTemplate, parseType } from './parsers';
 import { IFormatters, FormatterService } from './formatter.service';
-import { compareFormatters, mathFormatters, propertyFormatters, specialFormatters, stringFormatters } from './formatters/index';
-import { Binding } from './binding';
+import { Binding, IBindable } from './binding';
 import { adapter } from './adapter';
 
-import { basicBinders } from './binders/basic/basic.binders';
-// import { routerBinders } from './binders/router/router.binders';
 import { IBinders, BindersService } from './binder.service';
 import { View } from './view';
 import { IAdapters } from './adapter';
@@ -31,10 +28,10 @@ export interface IOptions {
   rootInterface?: string;
 
   /** Template delimiters for text bindings */
-  templateDelimiters?: Array<string>
+  templateDelimiters?: Array<string>;
 
   /** Augment the event handler of the on-* binder */
-  handler?: Function;
+  handler?: (this: any, context: any, ev: Event, binding: Binding) => void;
 }
 
 export declare interface IOptionsParam extends IExtensions, IOptions {}
@@ -46,65 +43,6 @@ export declare interface IViewOptions extends IOptionsParam {
 }
 
 export class Tinybind {
-
-  public binderService: BindersService;
-
-  public componentService: ComponentService;
-
-  public formatterService: FormatterService;
-
-  /** Global binders */
-  public binders: IBinders<any> = {};
-
-  /** Global components. */
-  public components: IComponents = {};
-
-  /** Global formatters. */
-  public formatters: IFormatters = {};
-
-  /** Global (sightglass) adapters. */
-  public  adapters: IAdapters = {
-    '.': adapter,
-  };
- 
-  /** Default attribute prefix. */
-  private _prefix = 'rv';
-
-  /** Default attribute full prefix. */
-  private _fullPrefix = 'rv-';
-
-  get prefix() {
-    return this._prefix;
-  };
-
-  get fullPrefix() {
-    return this._fullPrefix;
-  };
-
-  set prefix(value) {
-    this._prefix = value;
-    this._fullPrefix = value + '-';
-  };
-
-  public parseTemplate = parseTemplate;
-
-  public parseType = parseType;
-
-  /** Default template delimiters. */
-  public templateDelimiters = ['{', '}'];
-
-  /** Default sightglass root interface. */
-  public rootInterface = '.';
-
-
-  /** Preload data by default. */
-  public preloadData = true;
-
-  constructor() {
-    this.binderService = new BindersService(this.binders);
-    this.componentService = new ComponentService(this.components);
-    this.formatterService = new FormatterService(this.formatters);
-  }
 
   /**
    * Default event handler.
@@ -128,33 +66,91 @@ export class Tinybind {
     }
   }
 
+  public binderService: BindersService;
+
+  public componentService: ComponentService;
+
+  public formatterService: FormatterService;
+
+  /** Global binders */
+  public binders: IBinders<any> = {};
+
+  /** Global components. */
+  public components: IComponents = {};
+
+  /** Global formatters. */
+  public formatters: IFormatters = {};
+
+  /** Global (sightglass) adapters. */
+  public  adapters: IAdapters = {
+    '.': adapter,
+  };
+
+  public parseTemplate = parseTemplate;
+
+  public parseType = parseType;
+
+  /** Default template delimiters. */
+  public templateDelimiters = ['{', '}'];
+
+  /** Default sightglass root interface. */
+  public rootInterface = '.';
+
+  /** Preload data by default. */
+  public preloadData = true;
+
+  /** Default attribute prefix. */
+  private _prefix = 'rv';
+
+  /** Default attribute full prefix. */
+  private _fullPrefix = 'rv-';
+
+  set prefix(value) {
+    this._prefix = value;
+    this._fullPrefix = value + '-';
+  }
+
+  get prefix() {
+    return this._prefix;
+  }
+
+  get fullPrefix() {
+    return this._fullPrefix;
+  }
+
+  constructor() {
+    this.binderService = new BindersService(this.binders);
+    this.componentService = new ComponentService(this.components);
+    this.formatterService = new FormatterService(this.formatters);
+  }
+
   /**
    * Merges an object literal into the corresponding global options.
-   * @param options 
+   * @param options
    */
   public configure(options: any) {
     if (!options) {
       return;
     }
 
-    Object.keys(options).forEach(option => {
-      let value = options[option];
-      switch(option) {
+    Object.keys(options).forEach( (option) => {
+      const value = options[option];
+      switch (option) {
         case 'binders':
           mergeObject(this.binders, value);
-        break;
+          break;
         case 'formatters':
           mergeObject(this.formatters, value);
-        break;
+          break;
         case 'components':
           mergeObject(this.components, value);
-        break;
+          break;
         case 'adapters':
           mergeObject(this.adapters, value);
-        break;
+          break;
         case 'adapter':
           mergeObject(this.adapters, value);
-        break;
+          break;
         case 'prefix':
           this.prefix = value;
           break;
@@ -178,14 +174,14 @@ export class Tinybind {
           break;
         default:
           console.warn('Option not supported', option, value);
-        break;
+          break;
       }
     });
   }
 
   /**
    * Initializes a new instance of a component on the specified element and
-   * returns a tinybind.View instance.	
+   * returns a tinybind.View instance.
    */
   public init(componentKey: string, el: HTMLElement, data = {}) {
     if (!el) {
@@ -194,9 +190,9 @@ export class Tinybind {
 
     const component = this.components[componentKey];
     el.innerHTML = component.template.call(this, el);
-    let scope = component.initialize.call(this, el, data);
+    const scope = component.initialize.call(this, el, data);
 
-    let view = this.bind(el, scope);
+    const view = this.bind(el, scope);
     view.bind();
     return view;
   }
@@ -204,33 +200,35 @@ export class Tinybind {
   /**
    * Binds some data to a template / element. Returns a tinybind.View instance.
    */
-  bind(el: HTMLElement, models: any, options?: IOptionsParam) {
-    let viewOptions: IViewOptions = {
+  public bind(el: HTMLElement, models: any, options?: IOptionsParam) {
+    const viewOptions: IViewOptions = {
       // EXTENSIONS
-      binders: <IBinders<any>> Object.create(null),
-      formatters: <IFormatters> Object.create(null),
-      components: <IComponents> Object.create(null),
       adapters: <IAdapters> Object.create(null),
+      binders: <IBinders<any>> Object.create(null),
+      components: <IComponents> Object.create(null),
+      formatters: <IFormatters> Object.create(null),
+
       // other
       starBinders: Object.create(null),
+
       // sightglass
       rootInterface: <Root> Object.create(null),
     };
     models = models || Object.create(null);
     // options = options || {};
 
-    if(options) {
+    if (options) {
       mergeObject(viewOptions.binders, options.binders);
       mergeObject(viewOptions.formatters, options.formatters);
       mergeObject(viewOptions.components, options.components);
       mergeObject(viewOptions.adapters, options.adapters);
     }
 
-    viewOptions.prefix = options && options.prefix ? options.prefix : this.prefix
-    viewOptions.templateDelimiters = options && options.templateDelimiters ? options.templateDelimiters : this.templateDelimiters
-    viewOptions.rootInterface = options && options.rootInterface ? options.rootInterface : this.rootInterface
-    viewOptions.preloadData = options && options.preloadData ? options.preloadData : this.preloadData
-    viewOptions.handler = options && options.handler ? options.handler : Tinybind.handler
+    viewOptions.prefix = options && options.prefix ? options.prefix : this.prefix;
+    viewOptions.templateDelimiters = options && options.templateDelimiters ? options.templateDelimiters : this.templateDelimiters;
+    viewOptions.rootInterface = options && options.rootInterface ? options.rootInterface : this.rootInterface;
+    viewOptions.preloadData = options && options.preloadData ? options.preloadData : this.preloadData;
+    viewOptions.handler = options && options.handler ? options.handler : Tinybind.handler;
 
     // merge extensions
     mergeObject(viewOptions.binders, this.binders);
@@ -239,14 +237,14 @@ export class Tinybind {
     mergeObject(viewOptions.adapters, this.adapters);
 
     // get all starBinders from available binders
-    viewOptions.starBinders = Object.keys(viewOptions.binders).filter(function (key) {
+    viewOptions.starBinders = Object.keys(viewOptions.binders).filter((key) => {
       return key.indexOf('*') > 0;
     });
 
     Observer.updateOptions(viewOptions);
 
-    let view = new View(el, models, viewOptions);
+    const view = new View(el, models, viewOptions);
     view.bind();
     return view;
   }
-};
+}

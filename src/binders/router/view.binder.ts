@@ -15,7 +15,7 @@ const viewBinder: BinderWrapper = (dispatcher: GlobalEvent, pjax: Pjax, prefetch
   const name = 'view';
   const debug = Debug('binders:view');
 
-  const binder: IOneWayBinder<string> = function (el: HTMLElement, options: any) {
+  const binder: IOneWayBinder<string> = function(el: HTMLElement, options: any) {
     const $wrapper = JQuery(el);
     const self = this;
 
@@ -37,7 +37,7 @@ const viewBinder: BinderWrapper = (dispatcher: GlobalEvent, pjax: Pjax, prefetch
 
     this.customData = {
       nested: null,
-    }   
+    };
 
     dispatcher.on('newPageReady', (currentStatus: IState, prevStatus: IState, $container: JQuery<HTMLElement>, newPageRawHTML: string, dataset: any, isInit: boolean) => {
       // unbind the old rivets view
@@ -46,7 +46,7 @@ const viewBinder: BinderWrapper = (dispatcher: GlobalEvent, pjax: Pjax, prefetch
       }
 
       // add the dateset to the model
-      if(!Utils.isObject(self.view.models)) {
+      if (!Utils.isObject(self.view.models)) {
         self.view.models = {};
       }
       self.view.models.dataset = $container.data();
@@ -54,8 +54,8 @@ const viewBinder: BinderWrapper = (dispatcher: GlobalEvent, pjax: Pjax, prefetch
       debug('newPageReady dataset:', dataset);
 
       // if this is the first time the page will be loaded we do not need to rebind the container
-      // because they are already bind with the parent view ( because they are not loaded by pajax) 
-      if(!isInit) {
+      // because they are already bind with the parent view ( because they are not loaded by pajax)
+      if (!isInit) {
         // bind the new container
         self.customData.nested = new RivetsView($container[0], self.view.models, self.view.options);
         self.customData.nested.bind();
@@ -66,7 +66,7 @@ const viewBinder: BinderWrapper = (dispatcher: GlobalEvent, pjax: Pjax, prefetch
     setTimeout(() => {
       prefetch.init();
       pjax.start($wrapper);
-    }, 0)
+    }, 0);
   };
 
   return {

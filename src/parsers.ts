@@ -16,33 +16,35 @@ const DECLARATION_SPLIT = /((?:'[^']*')*(?:(?:[^\|']*(?:'[^']*')+[^\|']*)+|[^\|]
 
 /**
  * Parser and tokenizer for getting the type and value from a string.
- * @param string 
+ * @param string
  */
-export function parseType(string: string) {
+export function parseType(str?: string) {
   let type = PRIMITIVE;
-  let value: any = string;
-  if (QUOTED_STR.test(string)) {
-    value = string.slice(1, -1);
-  } else if (string === 'true') {
+  let value: any = str;
+  if (str === undefined) {
+    return {type, value: undefined};
+  }
+  if (QUOTED_STR.test(str)) {
+    value = str.slice(1, -1);
+  } else if (str === 'true') {
     value = true;
-  } else if (string === 'false') {
+  } else if (str === 'false') {
     value = false;
-  } else if (string === 'null') {
+  } else if (str === 'null') {
     value = null;
-  } else if (string === 'undefined') {
+  } else if (str === 'undefined') {
     value = undefined;
-  } else if (string === '') {
+  } else if (str === '') {
     value = undefined;
-  } else if (!isNaN(Number(string))) {
-    value = Number(string);
-  } else if (isJson(string)) {
-    value = JSON.parse(string);
+  } else if (!isNaN(Number(str))) {
+    value = Number(str);
+  } else if (isJson(str)) {
+    value = JSON.parse(str);
   } else {
     type = KEYPATH;
   }
-  return {type: type, value: value};
+  return {type, value};
 }
-
 
 export interface ITokens {
   type: number;
@@ -53,15 +55,16 @@ export interface ITokens {
  * Template parser and tokenizer for mustache-style text content bindings.
  * Parses the template and returns a set of tokens, separating static portions
  * of text from binding declarations.
- * @param template 
- * @param delimiters 
+ * @param template
+ * @param delimiters
  */
 export function parseTemplate(template: string, delimiters: string[]) {
-  var tokens: ITokens[] | null = null;
-  let length = template.length;
+  let tokens: ITokens[] | null = null;
+  const length = template.length;
   let index = 0;
   let lastIndex = 0;
-  let open = delimiters[0], close = delimiters[1];
+  const open = delimiters[0];
+  const close = delimiters[1];
 
   while (lastIndex < length) {
     index = template.indexOf(open, lastIndex);
@@ -70,7 +73,7 @@ export function parseTemplate(template: string, delimiters: string[]) {
       if (tokens) {
         tokens.push({
           type: TEXT,
-          value: template.slice(lastIndex)
+          value: template.slice(lastIndex),
         });
       }
 
@@ -80,7 +83,7 @@ export function parseTemplate(template: string, delimiters: string[]) {
       if (index > 0 && lastIndex < index) {
         tokens.push({
           type: TEXT,
-          value: template.slice(lastIndex, index)
+          value: template.slice(lastIndex, index),
         });
       }
 
@@ -88,26 +91,26 @@ export function parseTemplate(template: string, delimiters: string[]) {
       index = template.indexOf(close, lastIndex);
 
       if (index < 0) {
-        let substring = template.slice(lastIndex - close.length);
-        let lastToken = tokens[tokens.length - 1];
+        const substring = template.slice(lastIndex - close.length);
+        const lastToken = tokens[tokens.length - 1];
 
         if (lastToken && lastToken.type === TEXT) {
           lastToken.value += substring;
         } else {
           tokens.push({
             type: TEXT,
-            value: substring
+            value: substring,
           });
         }
 
         break;
       }
 
-      let value = template.slice(lastIndex, index).trim();
+      const value = template.slice(lastIndex, index).trim();
 
       tokens.push({
         type: BINDING,
-        value: value
+        value,
       });
 
       lastIndex = index + close.length;
@@ -116,7 +119,6 @@ export function parseTemplate(template: string, delimiters: string[]) {
 
   return tokens;
 }
-
 
 export function parseNode(view: View, node: IDataElement, templateDelimiters: Array<string>) {
   let block: TBlock = false;
@@ -127,17 +129,17 @@ export function parseNode(view: View, node: IDataElement, templateDelimiters: Ar
     let tokens = null;
 
     // TODO why check data?
-    if(node.data) {
+    if (node.data) {
       tokens = parseTemplate(node.data, templateDelimiters);
     }
 
     if (tokens && tokens.length) {
-      if(!node.parentNode) {
+      if (!node.parentNode) {
         throw new Error('[View] Node (TEXT_NODE) has no parent node');
       }
       for (let i = 0; i < tokens.length; i++) {
-        let token = tokens[i];
-        let text = document.createTextNode(token.value);
+        const token = tokens[i];
+        const text = document.createTextNode(token.value);
         node.parentNode.insertBefore(text, node);
         if (token.type === 1) {
           view.buildBinding(text, null, token.value, View.textBinder, null);
@@ -151,7 +153,7 @@ export function parseNode(view: View, node: IDataElement, templateDelimiters: Ar
   }
 
   if (!block) {
-    if(node.childNodes) {
+    if (node.childNodes) {
       for (let i = 0; i < node.childNodes.length; i++) {
         parseNode(view, (node.childNodes[i] as IDataElement), templateDelimiters);
       }
@@ -159,15 +161,20 @@ export function parseNode(view: View, node: IDataElement, templateDelimiters: Ar
   }
 }
 
+export interface IParsedDeclarations {
+  keypath?: string;
+  pipes: string[];
+}
+
 /**
  * Parses an attribute argument to his keypath and splits the formatter names into a pipes array.
  * @param declaration e.g. `object.data | validate | json`
- * 
+ *
  * if declaration is
  * ```
  * object.data | validate | json`
  * ``
- * 
+ *
  * the result is
  * ```
  * {
@@ -176,17 +183,18 @@ export function parseNode(view: View, node: IDataElement, templateDelimiters: Ar
  * }
  * ```
  */
-export function parseDeclaration(declaration: string) {
-  let matches = declaration.match(DECLARATION_SPLIT);
-  if(matches === null) {
+export function parseDeclaration(declaration: string): IParsedDeclarations {
+  const matches = declaration.match(DECLARATION_SPLIT);
+  if (matches === null) {
     throw new Error('[View] No matches');
   }
-  let pipes = matches.map((str: string) => {
+  const pipes = matches.map((str: string) => {
     return str.trim();
   });
-  let keypath = pipes.shift();
-  return {
+  const keypath = pipes.shift() || undefined;
+
+  return <IParsedDeclarations> {
     keypath,
     pipes,
-  }
+  };
 }

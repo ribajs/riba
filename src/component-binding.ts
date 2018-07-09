@@ -9,8 +9,8 @@ import { Observer, IObservers, IObserverSyncCallback } from './observer';
 import { IAdapters } from './adapter';
 import { mergeObject } from './utils';
 
-export interface IBoundElement extends HTMLElement {	
-  _bound?: boolean	
+export interface IBoundElement extends HTMLElement {
+  _bound?: boolean;
 }
 
 export interface IFormattersObservers {
@@ -25,32 +25,32 @@ export interface IKeypaths {
  * component view encapsulated as a binding within it's parent view.
  */
 export class ComponentBinding implements IBindable {
-  view: View;
-  componentView?: View;
-  el: IBoundElement;
-  type: string;
-  component: IComponent<any>;
+  public view: View;
+  public componentView?: View;
+  public el: IBoundElement;
+  public type: string;
+  public component: IComponent<any>;
   /**
    * static values (PRIMITIVE Attributes)
    */
-  static: {[key: string]: any} = {};
+  public static: {[key: string]: any} = {};
   /**
    * keypath values (KEYPATH Attributes)
    */
-  keypaths: IKeypaths = {};
-  formattersObservers: IFormattersObservers = {};
-  observers: IObservers;
-  bindingPrefix: string; // = tinybind.fullPrefix;
-  pipes: any = {};
+  public keypaths: IKeypaths = {};
+  public formattersObservers: IFormattersObservers = {};
+  public observers: IObservers;
+  public bindingPrefix: string; // = tinybind.fullPrefix;
+  public pipes: any = {};
 
   /**
    * Initializes a component binding for the specified view. The raw component
    * element is passed in along with the component type. Attributes and scope
    * inflections are determined based on the components defined attributes.
-   * 
-   * @param view 
-   * @param el 
-   * @param type 
+   *
+   * @param view
+   * @param el
+   * @param type
    */
   constructor(view: View, el: HTMLElement, type: string) {
     this.view = view;
@@ -66,88 +66,87 @@ export class ComponentBinding implements IBindable {
 
   /**
    * Observes the object keypath
-   * @param obj 
-   * @param keypath 
+   * @param obj
+   * @param keypath
    */
-  observe(obj: any, keypath: string, callback: IObserverSyncCallback): Observer {
+  public observe(obj: any, keypath: string, callback: IObserverSyncCallback): Observer {
     return new Observer(obj, keypath, callback);
   }
-    
+
   /**
-   * Updates the values in model when the observer calls this function 
+   * Updates the values in model when the observer calls this function
    * Only sync value if it is marked as bind
    */
-  sync() {
-    Object.keys(this.static).forEach(propertyName => {
-      if(this.component.bind && this.component.bind.indexOf(propertyName) !== -1) {
+  public sync() {
+    Object.keys(this.static).forEach((propertyName) => {
+      if (this.component.bind && this.component.bind.indexOf(propertyName) !== -1) {
         (this as any)[propertyName] = this.static[propertyName];
         // (this as any)[key] = this.formattedValues(this.static[key], key);
       }
     });
 
-    Object.keys(this.observers).forEach(propertyName => {
-      if(this.component.bind && this.component.bind.indexOf(propertyName) !== -1) {
+    Object.keys(this.observers).forEach((propertyName) => {
+      if (this.component.bind && this.component.bind.indexOf(propertyName) !== -1) {
         (this as any)[propertyName] = this.observers[propertyName].value();
         // (this as any)[propertyName] = this.formattedValues(this.observers[propertyName].value(), propertyName);
       }
     });
   }
-    
+
   /**
    * Publishes the value currently set on the model back to the parent model.
    * You need to call this method manually in your component
    */
-  publish(propertyName?: string, value?: any) {
-    if(propertyName) {
-      if(this.observers[propertyName]) {
+  public publish(propertyName?: string, value?: any) {
+    if (propertyName) {
+      if (this.observers[propertyName]) {
         this.observers[propertyName].setValue(value);
       }
     }
   }
-    
+
   /**
    * Returns an object map using the component's scope inflections.
    */
-  locals() {
-    let result: any = {};
-    
-    Object.keys(this.static).forEach(key => {
-      result[key] = this.static[key]
+  public locals() {
+    const result: any = {};
+    Object.keys(this.static).forEach((key) => {
+      result[key] = this.static[key];
     });
 
-    Object.keys(this.observers).forEach(key => {
+    Object.keys(this.observers).forEach((key) => {
       result[key] = this.observers[key].value();
     });
-    
     return result;
   }
-    
 
   /**
    * Returns a camel-cased version of the string. Used when translating an
    * element's attribute name into a property name for the component's scope.
    * TODO move to utils
-   * @param string 
+   * @param string
    */
-  camelCase(string: string) {
-    return string.replace(/-([a-z])/g, grouped => {
+  public camelCase(str: string) {
+    return str.replace(/-([a-z])/g, (grouped) => {
       return grouped[1].toUpperCase();
     });
   }
 
-  getMergedOptions() {
-    var options: IViewOptions = {
+  public getMergedOptions() {
+    const options: IViewOptions = {
       // EXTENSIONS
-      binders: <IBinders<any>> Object.create(null),
-      formatters: <IFormatters> Object.create(null),
-      components: <IComponents> Object.create(null),
       adapters: <IAdapters> Object.create(null),
+      binders: <IBinders<any>> Object.create(null),
+      components: <IComponents> Object.create(null),
+      formatters: <IFormatters> Object.create(null),
+
       // other
       starBinders: Object.create(null),
+
       // sightglass
       rootInterface: Object.create(null),
     };
-    
+
     mergeObject(options.binders, this.component.binders);
     mergeObject(options.formatters, this.component.formatters);
     mergeObject(options.components, this.component.components);
@@ -158,39 +157,37 @@ export class ComponentBinding implements IBindable {
     mergeObject(options.components, this.view.options.components);
     mergeObject(options.adapters, this.view.options.adapters);
 
-    options.prefix = this.component.prefix ? this.component.prefix : this.view.options.prefix
-    options.templateDelimiters = this.component.templateDelimiters ? this.component.templateDelimiters : this.view.options.templateDelimiters
-    options.rootInterface = this.component.rootInterface ? this.component.rootInterface : this.view.options.rootInterface
-    options.preloadData = this.component.preloadData ? this.component.preloadData : this.view.options.preloadData
-    options.handler = this.component.handler ? this.component.handler : this.view.options.handler
+    options.prefix = this.component.prefix ? this.component.prefix : this.view.options.prefix;
+    options.templateDelimiters = this.component.templateDelimiters ? this.component.templateDelimiters : this.view.options.templateDelimiters;
+    options.rootInterface = this.component.rootInterface ? this.component.rootInterface : this.view.options.rootInterface;
+    options.preloadData = this.component.preloadData ? this.component.preloadData : this.view.options.preloadData;
+    options.handler = this.component.handler ? this.component.handler : this.view.options.handler;
 
     // get all starBinders from available binders
-    options.starBinders = Object.keys(options.binders).filter(function (key) {
+    options.starBinders = Object.keys(options.binders).filter((key) => {
       return key.indexOf('*') > 0;
     });
-
-
     return options;
   }
-    
+
   /**
    * Intercepts `tinybind.Binding::bind` to build `this.componentView` with a localized
    * map of models from the root view. Bind `this.componentView` on subsequent calls.
    */
-  bind() {
+  public bind() {
     if (!this.el._bound) {
 
       const innerHTML = this.component.template.call(this);
       // if innerHTML is null this component uses the innerHTML which he already has!
-      if(innerHTML !== null) {
+      if (innerHTML !== null) {
         this.el.innerHTML = innerHTML;
       }
-      
+
       /**
        * there's a cyclic dependency that makes imported View a dummy object. Use tinybind.bind
        */
-      let scope = this.component.initialize.call(this, this.el, this.locals());
-      let view = new View(Array.prototype.slice.call(this.el.childNodes), scope, this.getMergedOptions());
+      const scope = this.component.initialize.call(this, this.el, this.locals());
+      const view = new View(Array.prototype.slice.call(this.el.childNodes), scope, this.getMergedOptions());
       view.bind();
 
       this.el._bound = true;
@@ -199,32 +196,32 @@ export class ComponentBinding implements IBindable {
     }
   }
 
-  parseTarget() {
+  public parseTarget() {
 
     // parse component attributes
     for (let i = 0, len = this.el.attributes.length; i < len; i++) {
-      let attribute = this.el.attributes[i];
+      const attribute = this.el.attributes[i];
 
       // if attribute starts not with binding prefix. E.g. rv-
       if (attribute.name.indexOf(this.bindingPrefix) !== 0) {
-        let propertyName = this.camelCase(attribute.name);
+        const propertyName = this.camelCase(attribute.name);
         const declaration = attribute.value;
         const parsedDeclaration = parseDeclaration(declaration);
 
-        if(parsedDeclaration.pipes.length > 0) {
+        if (parsedDeclaration.pipes.length > 0) {
           console.warn('Formatters on component arguments not supported for the moment', parsedDeclaration.pipes);
         }
-        
+
         this.pipes[propertyName] = parsedDeclaration.pipes;
 
-        let token = parseType(parsedDeclaration.keypath);
-        
+        const token = parseType(parsedDeclaration.keypath);
+
         // if component force this propertyName as static
         if (typeof(this.component.static) !== 'undefined' && this.component.static.indexOf(propertyName) !== -1) {
           this.static[propertyName] = attribute.value;
-        } else if(token.type === PRIMITIVE) {
+        } else if (token.type === PRIMITIVE) {
           this.static[propertyName] = token.value;
-        } else if(token.type === KEYPATH) {
+        } else if (token.type === KEYPATH) {
           this.keypaths[propertyName] = attribute.value;
           this.observers[propertyName] = this.observe(this.view.models, this.keypaths[propertyName], this);
           // model biding is called in this.sync!!
@@ -238,9 +235,9 @@ export class ComponentBinding implements IBindable {
   // FORMATTERS TODO
 
   /**
-   * 
+   *
    * @param args parses the formatters in arguments
-   * @param formatterIndex 
+   * @param formatterIndex
    */
   // parseFormatterArgumentsProperty(args: string[], formatterIndex: number, propertyName: string): string[] {
   //   return args
@@ -303,23 +300,22 @@ export class ComponentBinding implements IBindable {
   //   }, value);
   // }
 
-    
   /**
    * Intercept `tinybind.Binding::unbind` to be called on `this.componentView`.
    */
-  unbind() {    
-    Object.keys(this.observers).forEach(propertyName => {
+  public unbind() {
+    Object.keys(this.observers).forEach((propertyName) => {
       this.observers[propertyName].unobserve();
     });
 
-    Object.keys(this.formattersObservers).forEach(propertyName => {
-      Object.keys(this.formattersObservers[propertyName]).forEach(formatterIndex => {
-        Object.keys(this.formattersObservers[propertyName][formatterIndex]).forEach(ai => {
+    Object.keys(this.formattersObservers).forEach((propertyName) => {
+      Object.keys(this.formattersObservers[propertyName]).forEach((formatterIndex) => {
+        Object.keys(this.formattersObservers[propertyName][formatterIndex]).forEach((ai) => {
           this.formattersObservers[propertyName][formatterIndex][ai].unobserve();
         });
       });
     });
-    
+
     if (this.componentView) {
       this.componentView.unbind.call(this);
     }

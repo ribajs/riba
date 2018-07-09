@@ -25,10 +25,10 @@ export interface IAdapter {
   weakmap: any;
   weakReference: (obj: any) => any; // => __rv ?
   cleanupWeakReference: (ref: IRef, id: number) => void;
-  stubFunction: (obj: any, fn: string) => any // => response ?
+  stubFunction: (obj: any, fn: string) => any; // => response ?
   observeMutations: (obj: any, ref: string, keypath: string) => void;
   unobserveMutations: (obj: IRVArray, ref: string, keypath: string) => void;
-  observe: (obj: any, keypath: string, callback: IObserverSyncCallback) => void; 
+  observe: (obj: any, keypath: string, callback: IObserverSyncCallback) => void;
   unobserve: (obj: any, keypath: string, callback: IObserverSyncCallback) => void;
   get: (obj: any, keypath: string) => any;
   set: (obj: any, keypath: string, value: any) => void;
@@ -39,38 +39,39 @@ export interface IAdapters {
 }
 
 export class Adapter implements IAdapter {
-  counter: number = 0;
-  weakmap: any = {};
 
-  static ARRAY_METHODS = [
+  public static ARRAY_METHODS = [
     'push',
     'pop',
     'shift',
     'unshift',
     'sort',
     'reverse',
-    'splice'
+    'splice',
   ];
 
-  weakReference(obj: any) {
+  public counter: number = 0;
+  public weakmap: any = {};
+
+  public weakReference(obj: any) {
     if (!obj.hasOwnProperty('__rv')) {
-      let id = this.counter++;
+      const id = this.counter++;
 
       Object.defineProperty(obj, '__rv', {
-        value: id
+        value: id,
       });
     }
 
     if (!this.weakmap[obj.__rv]) {
       this.weakmap[obj.__rv] = {
-        callbacks: {}
+        callbacks: {},
       };
     }
 
     return this.weakmap[obj.__rv];
   }
 
-  cleanupWeakReference(ref: IRef, id: number) {
+  public cleanupWeakReference(ref: IRef, id: number) {
     if (!Object.keys(ref.callbacks).length) {
       if (!(ref.pointers && Object.keys(ref.pointers).length)) {
         delete this.weakmap[id];
@@ -78,16 +79,16 @@ export class Adapter implements IAdapter {
     }
   }
 
-  stubFunction(obj: any, fn: string) {
-    let original = obj[fn];
-    let map = this.weakReference(obj);
-    let weakmap = this.weakmap;
+  public stubFunction(obj: any, fn: string) {
+    const original = obj[fn];
+    const map = this.weakReference(obj);
+    const weakmap = this.weakmap;
 
     obj[fn] = (...args: any[]): AdapterFunction => {
-      let response = original.apply(obj, args);
+      const response = original.apply(obj, args);
 
-      Object.keys(map.pointers).forEach(r => {
-        let k = map.pointers[r];
+      Object.keys(map.pointers).forEach((r) => {
+        const k = map.pointers[r];
 
         if (weakmap[r]) {
           if (weakmap[r].callbacks[k] instanceof Array) {
@@ -102,14 +103,14 @@ export class Adapter implements IAdapter {
     };
   }
 
-  observeMutations(obj: any, ref: string, keypath: string) {
+  public observeMutations(obj: any, ref: string, keypath: string) {
     if (obj instanceof Array) {
-      let map = this.weakReference(obj);
+      const map = this.weakReference(obj);
 
       if (!map.pointers) {
         map.pointers = {};
 
-        Adapter.ARRAY_METHODS.forEach(fn => {
+        Adapter.ARRAY_METHODS.forEach((fn) => {
           this.stubFunction(obj, fn);
         });
       }
@@ -124,15 +125,15 @@ export class Adapter implements IAdapter {
     }
   }
 
-  unobserveMutations(obj: IRVArray, ref: string, keypath: string) {
+  public unobserveMutations(obj: IRVArray, ref: string, keypath: string) {
     if ((obj instanceof Array) && (obj.__rv != null)) {
-      let map = this.weakmap[obj.__rv];
+      const map = this.weakmap[obj.__rv];
 
       if (map) {
-        let pointers = map.pointers[ref];
+        const pointers = map.pointers[ref];
 
         if (pointers) {
-          let idx = pointers.indexOf(keypath);
+          const idx = pointers.indexOf(keypath);
 
           if (idx > -1) {
             pointers.splice(idx, 1);
@@ -148,13 +149,13 @@ export class Adapter implements IAdapter {
     }
   }
 
-  observe(obj: any, keypath: string, callback: IObserverSyncCallback) {
-    var value: any;
-    let callbacks = this.weakReference(obj).callbacks;
+  public observe(obj: any, keypath: string, callback: IObserverSyncCallback) {
+    let value: any;
+    const callbacks = this.weakReference(obj).callbacks;
 
     if (!callbacks[keypath]) {
       callbacks[keypath] = [];
-      let desc = Object.getOwnPropertyDescriptor(obj, keypath);
+      const desc = Object.getOwnPropertyDescriptor(obj, keypath);
 
       if (!desc || !(desc.get || desc.set || !desc.configurable)) {
         value = obj[keypath];
@@ -166,17 +167,17 @@ export class Adapter implements IAdapter {
             return value;
           },
 
-          set: newValue => {
+          set: (newValue) => {
             if (newValue !== value) {
               this.unobserveMutations(value, obj.__rv, keypath);
               value = newValue;
-              let map = this.weakmap[obj.__rv];
+              const map = this.weakmap[obj.__rv];
 
               if (map) {
-                let callbacks = map.callbacks[keypath];
+                const _callbacks = map.callbacks[keypath];
 
-                if (callbacks) {
-                  callbacks.forEach((cb: IObserverSyncCallback) => {
+                if (_callbacks) {
+                  _callbacks.forEach((cb: IObserverSyncCallback) => {
                     cb.sync();
                   });
                 }
@@ -184,7 +185,7 @@ export class Adapter implements IAdapter {
                 this.observeMutations(newValue, obj.__rv, keypath);
               }
             }
-          }
+          },
         });
       }
     }
@@ -196,14 +197,14 @@ export class Adapter implements IAdapter {
     this.observeMutations(obj[keypath], obj.__rv, keypath);
   }
 
-  unobserve(obj: any, keypath: string, callback: IObserverSyncCallback) {
-    let map = this.weakmap[obj.__rv];
+  public unobserve(obj: any, keypath: string, callback: IObserverSyncCallback) {
+    const map = this.weakmap[obj.__rv];
 
     if (map) {
-      let callbacks = map.callbacks[keypath];
+      const callbacks = map.callbacks[keypath];
 
       if (callbacks) {
-        let idx = callbacks.indexOf(callback);
+        const idx = callbacks.indexOf(callback);
 
         if (idx > -1) {
           callbacks.splice(idx, 1);
@@ -219,14 +220,14 @@ export class Adapter implements IAdapter {
     }
   }
 
-  get(obj: any, keypath: string) {
+  public get(obj: any, keypath: string) {
     return obj[keypath];
   }
 
-  set(obj: any, keypath: string, value: any) {
+  public set(obj: any, keypath: string, value: any) {
     obj[keypath] = value;
   }
-};
+}
 
 const adapter = new Adapter();
-export { adapter }
+export { adapter };

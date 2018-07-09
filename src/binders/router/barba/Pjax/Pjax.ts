@@ -9,7 +9,6 @@ import { HideShowTransition, ITransition } from '../Transition/Transition';
 import { Dom } from './Dom';
 import { HistoryManager } from './HistoryManager';
 
-
 /**
  * Pjax is a static object with main function
  *
@@ -102,7 +101,7 @@ class Pjax {
    */
   public static getHref(el: HTMLAnchorElement | SVGAElement): string | undefined {
     if (el.getAttribute && typeof el.getAttribute('xlink:href') === 'string') {
-      return el.getAttribute('xlink:href');
+      return el.getAttribute('xlink:href') || undefined;
     }
 
     if (typeof(el.href) === 'string') {
@@ -135,11 +134,7 @@ class Pjax {
 
   private dispatcher = new GlobalEvent();
 
-  private transition: ITransition = new HideShowTransition();;
-
-  constructor() {
-
-  }
+  private transition: ITransition = new HideShowTransition();
 
  /**
   * Function to be called to start Pjax
@@ -178,7 +173,7 @@ class Pjax {
   public goTo(url: string, newTab?: boolean) {
     if (newTab) {
       const win = window.open(url, '_blank');
-      if(win) {
+      if (win) {
         return win.focus();
       }
       return false;
@@ -306,7 +301,7 @@ class Pjax {
       this.dispatcher.trigger('linkClicked', el, evt);
 
       const href = Pjax.getHref(el);
-      if(!href) {
+      if (!href) {
         throw new Error('href is null');
       }
       this.goTo(href);
@@ -334,7 +329,6 @@ class Pjax {
 
     const $newContainer = this.load(newUrl);
 
-    
     const transition = this.getTransition();
 
     this.transitionProgress = true;

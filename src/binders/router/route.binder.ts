@@ -45,7 +45,7 @@ const routeBinder: BinderWrapper = (dispatcher: GlobalEvent, pjax: Pjax, prefetc
     }
 
     const alreadyOnURL = (checkUrl?: string) => {
-      if(checkUrl) {
+      if (checkUrl) {
         const pathname = Utils.getLocation().pathname;
         debug('checkURL', pathname, checkUrl);
         if (checkUrl === pathname) {
@@ -56,7 +56,7 @@ const routeBinder: BinderWrapper = (dispatcher: GlobalEvent, pjax: Pjax, prefetc
     };
 
     const checkURL = (urlToCheck?: string) => {
-      if(urlToCheck) {
+      if (urlToCheck) {
         if (alreadyOnURL(urlToCheck)) {
           $el.addClass('active');
           return true;
@@ -78,7 +78,7 @@ const routeBinder: BinderWrapper = (dispatcher: GlobalEvent, pjax: Pjax, prefetc
       if (alreadyOnURL(url)) {
         debug('already on this site');
       } else {
-        if(url) {
+        if (url) {
           pjax.goTo(url, newTab);
         }
       }

@@ -13,16 +13,16 @@ export const basicBinders: IBinders<any> = {
     priority: 1000,
 
     bind(el) {
-      if(!this.customData) {
+      if (!this.customData) {
         this.customData = {
-          handler: null
+          handler: null,
         };
       }
     },
 
     unbind(el: HTMLElement) {
       if (this.customData.handler) {
-        if(this.args === null) {
+        if (this.args === null) {
           throw new Error('args is null');
         }
         el.removeEventListener(this.args[0], this.customData);
@@ -31,18 +31,18 @@ export const basicBinders: IBinders<any> = {
 
     routine(el: HTMLElement, value: any /*TODO*/) {
       if (this.customData.handler) {
-        if(this.args === null) {
+        if (this.args === null) {
           throw new Error('args is null');
         }
         el.removeEventListener(this.args[0], this.customData.handler);
       }
 
       this.customData.handler = this.eventHandler(value);
-      if(this.args === null) {
+      if (this.args === null) {
         throw new Error('args is null');
       }
       el.addEventListener(this.args[0], this.customData.handler);
-    }
+    },
   },
 
   /**
@@ -57,9 +57,9 @@ export const basicBinders: IBinders<any> = {
       if (!this.marker) {
         this.marker = document.createComment(` tinybind: ${this.type} `);
         this.customData = {
-          iterated: <View[]> []
+          iterated: <View[]> [],
         };
-        if(!el.parentNode) {
+        if (!el.parentNode) {
           throw new Error('No parent node!');
         }
         el.parentNode.insertBefore(this.marker, el);
@@ -80,22 +80,22 @@ export const basicBinders: IBinders<any> = {
     },
 
     routine(el, collection) {
-      if(this.args === null) {
+      if (this.args === null) {
         throw new Error('args is null');
       }
-      let modelName = this.args[0];
+      const modelName = this.args[0];
       collection = collection || [];
 
       // TODO support object keys to iterate over
-      if(!Array.isArray(collection)) {
+      if (!Array.isArray(collection)) {
         throw new Error('each-' + modelName + ' needs an array to iterate over, but it is');
       }
 
-      // if index name is seted by `index-property` use this name, otherwise `%[modelName]%`  
-      let indexProp = el.getAttribute('index-property') || this.getIterationAlias(modelName);
+      // if index name is seted by `index-property` use this name, otherwise `%[modelName]%`
+      const indexProp = el.getAttribute('index-property') || this.getIterationAlias(modelName);
 
       collection.forEach((model, index) => {
-        let scope: any = {$parent: this.view.models};
+        const scope: any = {$parent: this.view.models};
         scope[indexProp] = index;
         scope[modelName] = model;
         let view = this.customData.iterated[index];
@@ -105,7 +105,7 @@ export const basicBinders: IBinders<any> = {
 
           if (this.customData.iterated.length) {
             previous = this.customData.iterated[this.customData.iterated.length - 1].els[0];
-          } else if(this.marker) {
+          } else if (this.marker) {
             previous = this.marker;
           } else {
             throw new Error('previous not defined');
@@ -116,7 +116,8 @@ export const basicBinders: IBinders<any> = {
         } else {
           if (view.models[modelName] !== model) {
             // search for a view that matches the model
-            let matchIndex, nextView;
+            let matchIndex;
+            let nextView;
             for (let nextIndex = index + 1; nextIndex < this.customData.iterated.length; nextIndex++) {
               nextView = this.customData.iterated[nextIndex];
               if (nextView.models[modelName] === model) {
@@ -129,13 +130,13 @@ export const basicBinders: IBinders<any> = {
               // todo: consider avoiding the splice here by setting a flag
               // profile performance before implementing such change
               this.customData.iterated.splice(matchIndex, 1);
-              if(!this.marker || !this.marker.parentNode) {
+              if (!this.marker || !this.marker.parentNode) {
                 throw new Error('Marker has no parent node');
               }
               this.marker.parentNode.insertBefore(nextView.els[0], view.els[0]);
               nextView.models[indexProp] = index;
             } else {
-              //new model
+              // new model
               nextView = View.create(this, scope, view.els[0]);
             }
             this.customData.iterated.splice(index, 0, nextView);
@@ -147,9 +148,9 @@ export const basicBinders: IBinders<any> = {
 
       if (this.customData.iterated.length > collection.length) {
         times(this.customData.iterated.length - collection.length, () => {
-          let view = this.customData.iterated.pop();
+          const view = this.customData.iterated.pop();
           view.unbind();
-          if(!this.marker || !this.marker.parentNode) {
+          if (!this.marker || !this.marker.parentNode) {
             throw new Error('Marker has no parent node');
           }
           this.marker.parentNode.removeChild(view.els[0]);
@@ -166,10 +167,10 @@ export const basicBinders: IBinders<any> = {
     },
 
     update(models) {
-      let data: any = {};
-      //todo: add test and fix if necessary
-      Object.keys(models).forEach(key => {
-        if(this.args === null) {
+      const data: any = {};
+      // TODO: add test and fix if necessary
+      Object.keys(models).forEach((key) => {
+        if (this.args === null) {
           throw new Error('args is null');
         }
         if (key !== this.args[0]) {
@@ -180,67 +181,67 @@ export const basicBinders: IBinders<any> = {
       this.customData.iterated.forEach((view: View) => {
         view.update(data);
       });
-    }
+    },
   },
 
   /**
    * Adds or removes the class from the element when value is true or false.
    */
   'class-*': <IOneWayBinder<boolean>> function(el: HTMLElement, value: boolean) {
-    if(this.args === null) {
+    if (this.args === null) {
       throw new Error('args is null');
     }
-    let classList = el.className.split(' ').filter(el => el !== '');
-    let arg = this.args[0].trim();
-    let idx = classList.indexOf(arg);
+    const classList = el.className.split(' ').filter((ele) => ele !== '');
+    const arg = this.args[0].trim();
+    const idx = classList.indexOf(arg);
     if (idx === -1) {
       if (value) {
         el.className += ` ${arg}`;
       }
     } else if (!value) {
-      el.className = classList.filter((el, i) => i !== idx).join(' ');
+      el.className = classList.filter((_, i) => i !== idx).join(' ');
     }
   },
 
   /**
    * Sets the element's text value.
    */
-  text: <IOneWayBinder<string>> function(el: HTMLElement, value: string) {
+  'text'(el: HTMLElement, value: string) {
     el.textContent = value != null ? value : '';
   },
 
   /**
    * Sets the element's HTML content.
    */
-  html: <IOneWayBinder<string>> function(el: HTMLElement, value: string) {
+  'html'(el: HTMLElement, value: string) {
     el.innerHTML = value != null ? value : '';
   },
 
   /**
    * Shows the element when value is true.
    */
-  show: <IOneWayBinder<boolean>> function(el: HTMLElement, value: boolean) {
+  'show'(el: HTMLElement, value: boolean) {
     el.style.display = value ? '' : 'none';
   },
 
   /**
    * Hides the element when value is true (negated version of `show` binder).
    */
-  hide: <IOneWayBinder<boolean>> function(el: HTMLElement, value: boolean) {
+  'hide'(el: HTMLElement, value: boolean) {
     el.style.display = value ? 'none' : '';
   },
 
   /**
    * Enables the element when value is true.
    */
-  enabled: <IOneWayBinder<boolean>> function(el: HTMLButtonElement, value: boolean) {
+  'enabled'(el: HTMLButtonElement, value: boolean) {
     el.disabled = !value;
   },
 
   /**
    * Disables the element when value is true (negated version of `enabled` binder).
    */
-  disabled: <IOneWayBinder<boolean>> function(el: HTMLButtonElement, value: boolean) {
+  'disabled'(el: HTMLButtonElement, value: boolean) {
     el.disabled = !!value;
   },
 
@@ -248,22 +249,22 @@ export const basicBinders: IBinders<any> = {
    * Checks a checkbox or radio input when the value is true. Also sets the model
    * property when the input is checked or unchecked (two-way binder).
    */
-  checked: <ITwoWayBinder<any>> {
+  'checked': <ITwoWayBinder<any>> {
     publishes: true,
     priority: 2000,
 
-    bind: function(el) {
-      var self = this;
+    bind(el) {
+      const self = this;
       this.customData = {};
       if (!this.customData.callback) {
-        this.customData.callback = function () {
+        this.customData.callback = () => {
           self.publish();
         };
       }
       el.addEventListener('change', this.customData.callback);
     },
 
-    unbind: function(el) {
+    unbind(el) {
       el.removeEventListener('change', this.customData.callback);
     },
 
@@ -273,14 +274,14 @@ export const basicBinders: IBinders<any> = {
       } else {
         el.checked = !!value;
       }
-    }
+    },
   },
 
   /**
    * Sets the element's value. Also sets the model property when the input changes
    * (two-way binder).
    */
-  value: <ITwoWayBinder<any>> {
+  'value': <ITwoWayBinder<any>> {
     publishes: true,
     priority: 3000,
 
@@ -289,10 +290,9 @@ export const basicBinders: IBinders<any> = {
       this.customData.isRadio = el.tagName === 'INPUT' && el.type === 'radio';
       if (!this.customData.isRadio) {
         this.customData.event = el.getAttribute('event-name') || (el.tagName === 'SELECT' ? 'change' : 'input');
-
-        var self = this;
+        const self = this;
         if (!this.customData.callback) {
-          this.customData.callback = function () {
+          this.customData.callback = () => {
             self.publish();
           };
         }
@@ -314,7 +314,7 @@ export const basicBinders: IBinders<any> = {
         if (el.type === 'select-multiple' && el instanceof HTMLSelectElement) {
           if (value instanceof Array) {
             for (let i = 0; i < el.length; i++) {
-              let option = el[i];
+              const option = el[i];
               option.selected = value.indexOf(option.value) > -1;
             }
           }
@@ -322,13 +322,13 @@ export const basicBinders: IBinders<any> = {
           el.value = value != null ? value : '';
         }
       }
-    }
+    },
   },
 
   /**
    * Inserts and binds the element and it's child nodes into the DOM when true.
    */
-  if: <ITwoWayBinder<any>> {
+  'if': <ITwoWayBinder<any>> {
     block: true,
     priority: 4000,
 
@@ -337,7 +337,7 @@ export const basicBinders: IBinders<any> = {
       if (!this.marker) {
         this.marker = document.createComment(' tinybind: ' + this.type + ' ' + this.keypath + ' ');
         this.customData.attached = false;
-        if(!el.parentNode) {
+        if (!el.parentNode) {
           throw new Error('Element has no parent node');
         }
         el.parentNode.insertBefore(this.marker, el);
@@ -364,13 +364,13 @@ export const basicBinders: IBinders<any> = {
             this.customData.nested = new View(el, this.view.models, this.view.options);
             this.customData.nested.bind();
           }
-          if(!this.marker || !this.marker.parentNode) {
+          if (!this.marker || !this.marker.parentNode) {
             throw new Error('Marker has no parent node');
           }
           this.marker.parentNode.insertBefore(el, this.marker.nextSibling);
           this.customData.attached = true;
         } else {
-          if(!el.parentNode) {
+          if (!el.parentNode) {
             throw new Error('Element has no parent node');
           }
           el.parentNode.removeChild(el);
@@ -383,6 +383,6 @@ export const basicBinders: IBinders<any> = {
       if ( this.customData.nested) {
         this.customData.nested.update(models);
       }
-    }
-  }
+    },
+  },
 };

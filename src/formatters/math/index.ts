@@ -15,5 +15,5 @@ import { digits } from './digits.formatter';
 export { random, plus, minus, times, dividedBy, modulo, gcd, even, uneven, digits };
 
 export const mathFormatters: IFormatters = {
-  random, plus, minus, times, dividedBy, modulo, gcd, even, uneven, digits,
-}
+  digits, dividedBy, even, gcd, minus, modulo, plus, random, times, uneven,
+};

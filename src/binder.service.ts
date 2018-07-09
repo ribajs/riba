@@ -27,7 +27,7 @@ export interface ITwoWayBinder<ValueType> {
 /**
  * A binder can be a one way binder or a two way binder
  */
-export type Binder<ValueType> = IOneWayBinder<ValueType> | ITwoWayBinder<ValueType>
+export type Binder<ValueType> = IOneWayBinder<ValueType> | ITwoWayBinder<ValueType>;
 
 /**
  * A list of binders with any key name
@@ -54,8 +54,8 @@ export class BindersService {
   private debug = Debug('binders:BindersService');
 
   /**
-   * 
-   * @param binders 
+   *
+   * @param binders;
    */
   constructor(binders: IBinders<any>) {
     this.binders = binders;
@@ -64,7 +64,7 @@ export class BindersService {
   /**
    * Regist a binder wrapper
    * @param binder
-   * @param name 
+   * @param name
    */
   public registWrapper(binderWrapper: IBinderWrapperResult, name?: string): IBinders<any> {
     if (!name) {
@@ -78,10 +78,10 @@ export class BindersService {
   /**
    * Regist a binder with his name
    * @param binder
-   * @param name 
+   * @param name
    */
   public regist(binder: Binder<any> | IBinderWrapperResult, name?: string): IBinders<any> {
-    
+
     if (binder.hasOwnProperty('binder')) {
       binder = (binder as IBinderWrapperResult);
       if (!name) {
@@ -103,15 +103,14 @@ export class BindersService {
 
   /**
    * Regist a set of binders
-   * @param binders 
+   * @param binders
    */
   public regists(binders: IBinders<any>): IBinders<any> {
     for (const name in binders) {
       if (binders.hasOwnProperty(name)) {
-        this.regist(binders[name], name)
+        this.regist(binders[name], name);
       }
     }
     return this.binders;
   }
-
 }

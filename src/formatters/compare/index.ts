@@ -20,5 +20,5 @@ import { not } from './not.formatter';
 export { and, eq, ne, lt, elt, or, not };
 
 export const compareFormatters: IFormatters = {
-  and, eq, ne, lt, elt, or, not,
-}
+  and, elt, eq, lt, ne, not, or,
+};

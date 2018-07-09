@@ -33,7 +33,7 @@ class Prefetch {
     }
 
     // We do this with rv-route
-    if(autobindLinks) {
+    if (autobindLinks) {
       document.body.addEventListener('mouseover', this.onLinkEnter.bind(this));
       document.body.addEventListener('touchstart', this.onLinkEnter.bind(this));
     }
@@ -64,8 +64,12 @@ class Prefetch {
 
     this.debug('onLinkEnter', url);
 
+    if (!url) {
+      console.warn(`Url is not defined, you can't cache the link without the url. Please make shure your element has the href attribute or pass the url directly to this function.`);
+    }
+
     // Check if the link is elegible for Pjax
-    if (Pjax.preventCheck(evt, el) && !Pjax.cache.get(url)) {
+    if (url && Pjax.preventCheck(evt, el) && !Pjax.cache.get(url)) {
       const xhr = Utils.xhr(url);
       Pjax.cache.set(url, xhr);
     }

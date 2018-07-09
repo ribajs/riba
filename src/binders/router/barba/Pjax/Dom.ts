@@ -14,8 +14,6 @@ class Dom {
    */
   public dataNamespace = 'namespace';
 
-  private _$wrapper: JQuery<HTMLElement>;
-
   /**
    * Class name used to identify the containers
    *
@@ -32,13 +30,14 @@ class Dom {
    */
   public currentHTML?: string;
 
+  private _$wrapper: JQuery<HTMLElement>;
+
   constructor($wrapper: JQuery<HTMLElement>) {
     this._$wrapper = $wrapper;
   }
 
   /**
    * Parse the responseText obtained from the xhr call
-   * 
    */
   public parseResponse(responseText: string): JQuery<HTMLElement> {
     this.currentHTML = responseText;
@@ -103,8 +102,8 @@ class Dom {
    * @param element
    */
   public parseContainer($newPage: JQuery<HTMLElement>): JQuery<HTMLElement> {
-    let $container = $newPage.find(this.containerSelector);
-    if(!$container.length) {
+    const $container = $newPage.find(this.containerSelector);
+    if (!$container.length) {
       throw new Error(`No container with selector "${this.containerSelector}" found!`);
     }
     return $container;

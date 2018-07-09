@@ -23,7 +23,7 @@
   },
   "scripts": {
     "test": "mocha-chrome spec/runner.html && mocha-chrome spec/runner.min.html",
-    "type-check": "tsc --noEmit",
+    "type-check": "tslint -c tslint.json 'src/**/*.ts' && tsc --noEmit",
     "build": "npm run type-check && npm run webpack",
     "webpack": "webpack && webpack --config webpack.dev.config.js",
     "watch": "webpack --watch --env.dev",
@@ -44,6 +44,7 @@
     "mocha-chrome": "^1.1.0",
     "should": "^13.2.1",
     "sinon": "^6.0.0",
+    "tslint": "^5.10.0",
     "typescript": "^2.9.2",
     "webpack": "^4.14.0",
     "webpack-cli": "^3.0.8"

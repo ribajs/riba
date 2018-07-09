@@ -28,9 +28,9 @@ import { currency } from './currency.formatter';
 // };
 
 /**
-* Formats the product variant's weight. The weight unit is set in General Settings.
-* @see https://help.shopify.com/themes/liquid/filters/additional-filters#weightWithUnit
-*/
+ * Formats the product variant's weight. The weight unit is set in General Settings.
+ * @see https://help.shopify.com/themes/liquid/filters/additional-filters#weightWithUnit
+ */
 // export const weightWithUnit = (grams) => {
 //   return export const weight(grams) + CartJS.settings.weightUnit;
 // };
@@ -43,4 +43,4 @@ export { debug, def, currency };
 
 export const specialFormatters: IFormatters = {
   debug, def, currency,
-}
+};
