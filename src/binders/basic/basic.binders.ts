@@ -3,6 +3,9 @@ import { IBindable } from '../../binding';
 import { times, getString } from '../../utils';
 import { IBinders, ITwoWayBinder, IOneWayBinder } from '../../binder.service';
 
+import { enabled } from './enabled.binder';
+import { disabled } from './disabled.binder';
+
 export const basicBinders: IBinders<any> = {
 
   /**
@@ -220,30 +223,26 @@ export const basicBinders: IBinders<any> = {
   /**
    * Shows the element when value is true.
    */
-  'show'(el: HTMLElement, value: boolean) {
+  'show': (el: HTMLElement, value: boolean) => {
     el.style.display = value ? '' : 'none';
   },
 
   /**
    * Hides the element when value is true (negated version of `show` binder).
    */
-  'hide'(el: HTMLElement, value: boolean) {
+  'hide': (el: HTMLElement, value: boolean) => {
     el.style.display = value ? 'none' : '';
   },
 
   /**
    * Enables the element when value is true.
    */
-  'enabled'(el: HTMLButtonElement, value: boolean) {
-    el.disabled = !value;
-  },
+  'enabled': enabled,
 
   /**
    * Disables the element when value is true (negated version of `enabled` binder).
    */
-  'disabled'(el: HTMLButtonElement, value: boolean) {
-    el.disabled = !!value;
-  },
+  'disabled': disabled,
 
   /**
    * Checks a checkbox or radio input when the value is true. Also sets the model

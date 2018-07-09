@@ -1,5 +1,5 @@
 import Debug from 'debug';
-import { Binding } from './binding';
+import { Binding, IBindable } from './binding';
 /**
  * One way binder interface
  */
@@ -27,7 +27,7 @@ export interface ITwoWayBinder<ValueType> {
 /**
  * A binder can be a one way binder or a two way binder
  */
-export type Binder<ValueType> = IOneWayBinder<ValueType> | ITwoWayBinder<ValueType>;
+export type Binder<ValueType> = IOneWayBinder<ValueType> | ITwoWayBinder<ValueType> | IBindable;
 
 /**
  * A list of binders with any key name
