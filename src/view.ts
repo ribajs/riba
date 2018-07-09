@@ -49,7 +49,7 @@ export class View {
     }
   };
     
-  static bindingComparator = (a: Binding, b: Binding) => {
+  static bindingComparator = (a: IBindable, b: IBindable) => {
     let aPriority = a.binder ? ((a.binder as ITwoWayBinder<any>).priority || 0) : 0;
     let bPriority = b.binder ? ((b.binder as ITwoWayBinder<any>).priority || 0) : 0;
     return bPriority - aPriority;
@@ -189,7 +189,9 @@ export class View {
    */
   sync() {
     this.bindings.forEach(binding => {
-      binding.sync();
+      if(binding.sync) {
+        binding.sync();
+      }
     });
   }
 
@@ -198,7 +200,7 @@ export class View {
    */
   publish() {
     this.bindings.forEach(binding => {
-      if (binding.binder && (binding.binder as ITwoWayBinder<any>).publishes) {
+      if (binding.binder && binding.publish && (binding.binder as ITwoWayBinder<any>).publishes) {
         binding.publish();
       }
     });

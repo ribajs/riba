@@ -1,5 +1,5 @@
 import { View } from '../../view';
-import { Binding } from '../../binding';
+import { Binding, IBindable } from '../../binding';
 import { times, getString } from '../../utils';
 import { IBinders, ITwoWayBinder, IOneWayBinder } from '../../binder.service';
 
@@ -157,8 +157,8 @@ export const basicBinders: IBinders<any> = {
       }
 
       if (el.nodeName === 'OPTION' && this.view.bindings) {
-        this.view.bindings.forEach((binding: Binding) => {
-          if (this.marker && (binding.el === this.marker.parentNode) && (binding.type === 'value')) {
+        this.view.bindings.forEach((binding: IBindable) => {
+          if (this.marker && (binding.el === this.marker.parentNode) && (binding.type === 'value') && binding.sync) {
             binding.sync();
           }
         });

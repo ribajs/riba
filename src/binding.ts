@@ -36,6 +36,13 @@ export interface IBindable {
   sync?(): void;
 
   binder?: Binder<any>;
+
+  /**
+   * Name of the binder without the prefix
+   */
+  type: string | null;
+
+  el: HTMLElement;
 }
 
 export interface IFormatterObservers {
@@ -62,7 +69,7 @@ export class Binding implements IBindable {
    * Name of the binder without the prefix
    */
   type: string | null;
-  binder: Binder<any> | null;
+  binder: Binder<any>;
   formatters: string[] | null;
   formatterObservers: IFormatterObservers = {};
   keypath: string | null;
@@ -99,7 +106,7 @@ export class Binding implements IBindable {
    * @param {*} args The start binders, on `class-*` args[0] wil be the classname 
    * @param {*} formatters 
    */
-  constructor(view: View, el: HTMLElement, type: string | null, keypath: string | null, binder: Binder<any> | null, args: string[] | null, formatters: string[] | null) {
+  constructor(view: View, el: HTMLElement, type: string | null, keypath: string | null, binder: Binder<any>, args: string[] | null, formatters: string[] | null) {
     this.view = view;
     this.el = el;
     this.type = type;
