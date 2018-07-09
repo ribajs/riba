@@ -10,7 +10,8 @@ interface IEvents {
  * @type {object}
  */
 class GlobalEvent {
-  // TODO make global dispatcher optional
+
+  /** singleton instance */
   private static instance: GlobalEvent;
   /**
    * Object that keeps all the events

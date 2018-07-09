@@ -111,6 +111,9 @@ class Pjax {
     return undefined;
   }
 
+  /** singleton instance */
+  private static instance: Pjax;
+
   public dom?: Dom;
   public history = new HistoryManager();
 
@@ -135,6 +138,17 @@ class Pjax {
   private dispatcher = new GlobalEvent();
 
   private transition: ITransition = new HideShowTransition();
+
+  /**
+   * Creates an singleton instance of Dispatcher.
+   */
+  constructor() {
+    if (Pjax.instance) {
+      return Pjax.instance;
+    }
+
+    Pjax.instance = this;
+  }
 
  /**
   * Function to be called to start Pjax

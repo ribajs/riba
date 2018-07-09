@@ -10,6 +10,9 @@ import { Pjax } from './Pjax';
  */
 class Prefetch {
 
+  /** singleton instance */
+  private static instance: Prefetch;
+
   /**
    * Class name used to ignore prefetch on links
    *
@@ -20,6 +23,17 @@ class Prefetch {
   public ignoreClassLink = 'no-barba-prefetch';
 
   private debug = Debug('Prefetch');
+
+  /**
+   * Creates an singleton instance of Prefetch.
+   */
+  constructor() {
+    if (Prefetch.instance) {
+      return Prefetch.instance;
+    }
+
+    Prefetch.instance = this;
+  }
 
   /**
    * Init the event listener on mouseover and touchstart
