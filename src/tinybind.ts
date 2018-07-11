@@ -68,6 +68,9 @@ export class Tinybind {
     }
   }
 
+  /** singleton instance */
+  private static instance: Tinybind;
+
   public binderService: BindersService;
 
   public componentService: ComponentService;
@@ -120,10 +123,19 @@ export class Tinybind {
     return this._fullPrefix;
   }
 
+  /**
+   * Creates an singleton instance of Tinybind.
+   */
   constructor() {
+    if (Tinybind.instance) {
+      return Tinybind.instance;
+    }
+    Tinybind.instance = this;
+
     this.binderService = new BindersService(this.binders);
     this.componentService = new ComponentService(this.components);
     this.formatterService = new FormatterService(this.formatters);
+
   }
 
   /**

@@ -9,7 +9,7 @@
 import 'webcomponents.js';
 import Debug from 'debug';
 import { View } from './view';
-import { IViewOptions } from './tinybind';
+import { Tinybind, IViewOptions } from './tinybind';
 
 export type RibaTemplateFunction = () => string | null;
 
@@ -17,11 +17,12 @@ export abstract class Component extends HTMLElement {
 
   protected debug: Debug.IDebugger;
   protected view: View;
-  protected options: IViewOptions;
 
   constructor() {
     super();
     this.debug = Debug('webcomponents:' + this.constructor.name || 'RibaElement' );
+
+    const tinybind = new Tinybind();
 
     this.debug('constructor called');
 
@@ -37,7 +38,7 @@ export abstract class Component extends HTMLElement {
     /**
      * there's a cyclic dependency that makes imported View a dummy object. Use tinybind.bind
      */
-    this.view = new View(Array.prototype.slice.call(this.childNodes), scope, this.options);
+    this.view = new View(Array.prototype.slice.call(this.childNodes), scope, tinybind.getViewOptions());
     this.view.bind();
 
   }
