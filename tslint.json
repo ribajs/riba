@@ -3,6 +3,11 @@
   "extends": [
     "tslint:recommended"
   ],
+  "linterOptions": {
+    "exclude": [
+      "src/types/**/*"
+    ]
+  },
   "jsRules": {},
   "rules": {
     "quotemark": [true, "single", "jsx-double"],

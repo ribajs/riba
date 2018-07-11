@@ -6,14 +6,14 @@
  * @see https://github.com/webcomponents/webcomponentsjs
  * @see https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/webcomponents.js
  */
-import 'webcomponents.js';
+import '@webcomponents/webcomponentsjs';
 import Debug from 'debug';
 import { View } from './view';
 import { Tinybind, IViewOptions } from './tinybind';
 
 export type RibaTemplateFunction = () => string | null;
 
-export abstract class Component extends HTMLElement {
+export abstract class RibaComponent extends HTMLElement {
 
   protected debug: Debug.IDebugger;
   protected view: View;
