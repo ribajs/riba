@@ -1,5 +1,11 @@
 # Changelog
 
+## webcomponents
+
+- Web Components
+  - Start a new implementation of tinybind / rivets components by following the Web Components v1 [Specs](https://developer.mozilla.org/de/docs/Web/Web_Components)(https://github.com/luruke/barba.js)
+  - Using a Web Components [polyfill](https://github.com/webcomponents/webcomponentsjs) for browser they not support Web Components and to compile the components to ES5
+
 ## master
 
 - Components
