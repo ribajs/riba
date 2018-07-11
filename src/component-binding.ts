@@ -195,8 +195,8 @@ export class ComponentBinding implements IBindable {
        * there's a cyclic dependency that makes imported View a dummy object. Use tinybind.bind
        */
       const scope = this.component.initialize.call(this, this.el, this.locals());
-      const view = new View(Array.prototype.slice.call(this.el.childNodes), scope, this.getMergedOptions());
-      view.bind();
+      this.view = new View(Array.prototype.slice.call(this.el.childNodes), scope, this.getMergedOptions());
+      this.view.bind();
 
       this.el._bound = true;
     } else {
@@ -324,8 +324,8 @@ export class ComponentBinding implements IBindable {
       });
     });
 
-    if (this.componentView) {
-      this.componentView.unbind.call(this);
+    if (this.view) {
+      this.view.unbind.call(this);
     }
   }
 }

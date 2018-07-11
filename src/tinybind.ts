@@ -199,10 +199,7 @@ export class Tinybind {
     return view;
   }
 
-  /**
-   * Binds some data to a template / element. Returns a tinybind.View instance.
-   */
-  public bind(el: HTMLElement, models: any, options?: IOptionsParam) {
+  public getViewOptions(options?: IOptionsParam) {
     const viewOptions: IViewOptions = {
       // EXTENSIONS
       adapters: <IAdapters> Object.create(null),
@@ -216,8 +213,6 @@ export class Tinybind {
       // sightglass
       rootInterface: <Root> Object.create(null),
     };
-    models = models || Object.create(null);
-    // options = options || {};
 
     if (options) {
       viewOptions.binders = Utils.concat(false, viewOptions.binders, options.binders);
@@ -243,6 +238,16 @@ export class Tinybind {
       return key.indexOf('*') > 0;
     });
 
+    return viewOptions;
+  }
+
+  /**
+   * Binds some data to a template / element. Returns a tinybind.View instance.
+   */
+  public bind(el: HTMLElement, models: any, options?: IOptionsParam) {
+    const viewOptions: IViewOptions = this.getViewOptions(options);
+
+    models = models || Object.create(null);
     Observer.updateOptions(viewOptions);
 
     const view = new View(el, models, viewOptions);

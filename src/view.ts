@@ -28,6 +28,12 @@ export class View {
     return bPriority - aPriority;
   }
 
+  /**
+   * Helper function to Create a new view insite of a binding
+   * @param bindin
+   * @param models
+   * @param anchorEl
+   */
   public static create(binding: Binding, models: any, anchorEl: HTMLElement | Node | null) {
     const template = binding.el.cloneNode(true);
     const view = new View((template as Node), models, binding.view.options);
