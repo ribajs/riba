@@ -140,7 +140,7 @@ class Pjax {
   private transition: ITransition = new HideShowTransition();
 
   /**
-   * Creates an singleton instance of Dispatcher.
+   * Creates an singleton instance of Pjax.
    */
   constructor() {
     if (Pjax.instance) {
