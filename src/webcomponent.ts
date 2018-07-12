@@ -7,14 +7,15 @@
  * @see https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/webcomponents.js
  */
 // import 'core-js'; // Needed for IE 11 if custom elements polifill is used https://github.com/webcomponents/webcomponentsjs/issues/968
-import '@webcomponents/webcomponentsjs';
+// import '@webcomponents/webcomponentsjs';
+import 'custom-elements-es5-adapter.js';
 
 /**
  * TODO compile to es5 by wrapp to custom module
  * https://github.com/webcomponents/webcomponentsjs/issues/795
  * https://github.com/webcomponents/webcomponentsjs/#custom-elements-es5-adapterjs
  */
-import '@webcomponents/webcomponentsjs/custom-elements-es5-adapter';
+// import '@webcomponents/webcomponentsjs/custom-elements-es5-adapter';
 
 import Debug from 'debug';
 import { View } from './view';
