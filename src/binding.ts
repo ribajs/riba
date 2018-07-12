@@ -236,9 +236,6 @@ export class Binding implements IBindable {
   public eventHandler(fn: eventHandlerFunction, el: HTMLElement): (ev: Event) => any {
     const binding = this;
     const handler = binding.view.options.handler;
-
-    console.warn('get handler', handler);
-
     return (ev) => {
       if (!handler) {
         throw new Error('No handler defined in binding.view.options.handler');

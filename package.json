@@ -50,8 +50,10 @@
     "webpack-cli": "^3.0.8"
   },
   "dependencies": {
+    "@types/core-js": "^2.5.0",
     "@types/debug": "0.0.30",
     "@webcomponents/webcomponentsjs": "^2.0.2",
+    "core-js": "^2.5.7",
     "debug": "^3.1.0",
     "jquery": "^3.3.1"
   }

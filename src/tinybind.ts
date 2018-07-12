@@ -77,7 +77,7 @@ export class Tinybind {
    * @param el The element the event was triggered from
    */
   public static handler(this: any, context: any, ev: Event, binding: Binding, el: HTMLElement) {
-    console.warn('handler', this);
+    // console.warn('handler', this);
     this.call(context, ev, binding.view.models, el);
   }
 
