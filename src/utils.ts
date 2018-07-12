@@ -200,8 +200,8 @@ export class Utils {
    * @param {object} object1 An first object containing properties to concat.
    * @param {object} object2 The second object containing properties to concat.
    */
-  public static concat(deep: boolean, object1: object, object2: object): any {
-    return this.extend(deep, {}, object1, object2);
+  public static concat(deep: boolean, object1?: object, object2?: object): any {
+    return this.extend(deep, {}, object1 || {}, object2 || {});
   }
 
   /**

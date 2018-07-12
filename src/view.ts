@@ -3,6 +3,7 @@ import { Binder, ITwoWayBinder } from './binder.service';
 import { Binding, IBindable } from './binding';
 import { ComponentBinding, IBoundElement } from './component-binding';
 import { parseNode, parseDeclaration } from './parsers';
+import Debug from 'debug';
 
 export type TBlock = boolean;
 
@@ -14,6 +15,8 @@ export interface IDataElement extends HTMLElement {
  * A collection of bindings built from a set of parent nodes.
  */
 export class View {
+  public static debug = Debug('riba:view');
+
   public static DECLARATION_SPLIT = /((?:'[^']*')*(?:(?:[^\|']*(?:'[^']*')+[^\|']*)+|[^\|]+))|^$/g;
 
   public static textBinder: ITwoWayBinder<string> = {
@@ -100,13 +103,19 @@ export class View {
 
   public traverse(node: IBoundElement): TBlock {
 
-    // TODO
-    let bindingPrefix = this.options.prefix;
+    let bindingPrefix;
+    if (this.options.fullPrefix) {
+      bindingPrefix = this.options.fullPrefix;
+    } else {
+      // TODO FIXME
+      bindingPrefix = this.options.prefix + '-';
+    }
+
     if (!bindingPrefix) {
       throw new Error('prefix is required');
     }
-    bindingPrefix = bindingPrefix + '-';
 
+    /** If true stop / block the parseNode  recursion */
     let block = node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE';
     const attributes = node.attributes;
     const bindInfos = [];
@@ -116,51 +125,64 @@ export class View {
     let identifier;
     let args;
 
-    for (let i = 0, len = attributes.length; i < len; i++) {
-      const attribute = attributes[i];
-      // if attribute starts with the binding prefix. E.g. rv
-      if (attribute.name.indexOf(bindingPrefix) === 0) {
-        type = attribute.name.slice(bindingPrefix.length);
-        binder = this.options.binders[type];
-        args = [];
+    // bind attribute binders if avaible
+    if (this.options.binders) {
+      for (let i = 0, len = attributes.length; i < len; i++) {
+        const attribute = attributes[i];
+        // if attribute starts with the binding prefix. E.g. rv
+        if (attribute.name.indexOf(bindingPrefix) === 0) {
+          type = attribute.name.slice(bindingPrefix.length);
+          binder = this.options.binders[type];
+          args = [];
 
-        if (!binder) {
-          for (let k = 0; k < starBinders.length; k++) {
-            identifier = starBinders[k];
-            if (type.slice(0, identifier.length - 1) === identifier.slice(0, -1)) {
-              binder = this.options.binders[identifier];
-              args.push(type.slice(identifier.length - 1));
-              break;
+          if (!binder) {
+            for (let k = 0; k < starBinders.length; k++) {
+              identifier = starBinders[k];
+              if (type.slice(0, identifier.length - 1) === identifier.slice(0, -1)) {
+                binder = this.options.binders[identifier];
+                args.push(type.slice(identifier.length - 1));
+                break;
+              }
             }
           }
-        }
 
-        if (!binder) {
-          binder = Tinybind.fallbackBinder;
-        }
+          if (!binder) {
+            binder = Tinybind.fallbackBinder;
+          }
 
-        if ((binder as ITwoWayBinder<any>).block) {
-          this.buildBinding(node, type, attribute.value, binder, args);
-          node.removeAttribute(attribute.name);
-          return true;
-        }
+          if ((binder as ITwoWayBinder<any>).block) {
+            this.buildBinding(node, type, attribute.value, binder, args);
+            node.removeAttribute(attribute.name);
+            return true;
+          }
 
-        bindInfos.push({attr: attribute, binder, type, args});
+          bindInfos.push({attr: attribute, binder, type, args});
+        }
+      }
+
+      for (let i = 0; i < bindInfos.length; i++) {
+        const bindInfo = bindInfos[i];
+        this.buildBinding(node, bindInfo.type, bindInfo.attr.value, bindInfo.binder, bindInfo.args);
+        node.removeAttribute(bindInfo.attr.name);
       }
     }
 
-    for (let i = 0; i < bindInfos.length; i++) {
-      const bindInfo = bindInfos[i];
-      this.buildBinding(node, bindInfo.type, bindInfo.attr.value, bindInfo.binder, bindInfo.args);
-      node.removeAttribute(bindInfo.attr.name);
-    }
-
-    // bind components
     if (!block) {
       type = node.nodeName.toLowerCase();
 
-      if (this.options.components[type] && !node._bound) {
+      // bind (deprecated) components and stop / block the parsing of the childs
+      if (this.options.components && this.options.components[type] && !node._bound) {
         this.bindings.push(new ComponentBinding((this as View), node, type));
+        View.debug(`Stop parsing on (deprecated) component ${type}`);
+        block = true;
+      }
+
+      /**
+       * Stop / block the child parsing if the node name starts with the riba web component prefix
+       * because the new riba web components have their own binding.
+       */
+      if (type.indexOf(bindingPrefix) === 0) {
+        View.debug(`Stop parsing on riba web component ${type}`);
         block = true;
       }
     }

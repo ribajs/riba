@@ -121,9 +121,10 @@ export function parseTemplate(template: string, delimiters: string[]) {
 }
 
 export function parseNode(view: View, node: IDataElement, templateDelimiters: Array<string>) {
+  /** If true stop / block the parseNode  recursion */
   let block: TBlock = false;
 
-  // if node.nodeType === Node.TEXT_NODE
+  // if node.nodeType === 3 === Node.TEXT_NODE
   node = ( node as IDataElement);
   if (node.nodeType === 3) {
     let tokens = null;
@@ -148,7 +149,9 @@ export function parseNode(view: View, node: IDataElement, templateDelimiters: Ar
       node.parentNode.removeChild(node);
     }
     block = true;
+    // if node.nodeType === 1 === Node.ELEMENT_NODE
   } else if (node.nodeType === 1) {
+    // traverse binds attributes
     block = view.traverse(node);
   }
 

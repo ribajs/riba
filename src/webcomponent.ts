@@ -9,49 +9,48 @@
 import '@webcomponents/webcomponentsjs';
 import Debug from 'debug';
 import { View } from './view';
-import { Tinybind, IViewOptions } from './tinybind';
+import { Tinybind, EventHandler } from './tinybind';
+import { Binding } from './binding';
 
-export type RibaTemplateFunction = () => string | null;
+export type TemplateFunction = () => string | null;
 
 export abstract class RibaComponent extends HTMLElement {
 
+  public static tagName: string;
+
   protected debug: Debug.IDebugger;
-  protected view: View;
+  protected view?: View;
+
+   // Todo get the scope from
+  // protected model: any = {};
+
+  protected abstract scope: any;
 
   constructor() {
     super();
-    this.debug = Debug('webcomponents:' + this.constructor.name || 'RibaElement' );
-
-    const tinybind = new Tinybind();
+    this.debug = Debug('component:unknown');
 
     this.debug('constructor called');
 
-    const template = this._template();
+    const template = this.template();
     // if innerHTML is null this component uses the innerHTML which he already has!
     if (template !== null) {
       this.innerHTML = template;
     }
-
-    // Todo get the scope from
-    const scope = {};
-
-    /**
-     * there's a cyclic dependency that makes imported View a dummy object. Use tinybind.bind
-     */
-    this.view = new View(Array.prototype.slice.call(this.childNodes), scope, tinybind.getViewOptions());
-    this.view.bind();
-
   }
 
-  set template(tplFn: RibaTemplateFunction) {
-    this._template = tplFn;
+  protected eventHandler(self: RibaComponent): EventHandler {
+    // IMPORTANT this must be a function and not a Arrow Functions
+    return function(this: EventHandler, context: Binding, ev: Event, binding: Binding, el: HTMLElement) {
+      this.call(self, ev, binding.view.models, el, context);
+    };
   }
 
   /**
    * Default custom Element method
    * Invoked when the custom element is first connected to the document's DOM.
    */
-  public connectedCallback() {
+  protected connectedCallback() {
     this.debug('connectedCallback called');
   }
 
@@ -59,9 +58,11 @@ export abstract class RibaComponent extends HTMLElement {
    * Default custom Element method
    * Invoked when the custom element is disconnected from the document's DOM.
    */
-  public disconnectedCallback() {
+  protected disconnectedCallback() {
     this.debug('disconnectedCallback called');
-    this.view.unbind();
+    if (this.view) {
+      this.view.unbind();
+    }
   }
 
   /**
@@ -72,7 +73,7 @@ export abstract class RibaComponent extends HTMLElement {
    * @param newValue
    * @param namespace
    */
-  public attributeChangedCallback(attributeName, oldValue, newValue, namespace) {
+  protected attributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string) {
     this.debug('attributeChangedCallback called', attributeName, oldValue, newValue, namespace);
   }
 
@@ -83,12 +84,29 @@ export abstract class RibaComponent extends HTMLElement {
    * @param oldDocument
    * @param newDocument
    */
-  public adoptedCallback(oldDocument, newDocument) {
+  protected adoptedCallback(oldDocument: Document, newDocument: Document) {
     this.debug('adoptedCallback called', oldDocument, newDocument);
   }
 
-  /** If the template function returns null no template is injected */
-  private _template: RibaTemplateFunction = () => {
+  protected template() {
     return null;
+  }
+
+  protected bind() {
+    const tinybind = new Tinybind();
+    const viewOptions = tinybind.getViewOptions({
+      handler: this.eventHandler(this),
+    });
+
+    this.debug('bind scope', this.scope);
+
+    /**
+     * there's a cyclic dependency that makes imported View a dummy object. Use tinybind.bind
+     */
+    this.view = new View(Array.prototype.slice.call(this.childNodes), this.scope, viewOptions);
+    this.scope = this.view.models;
+    this.view.bind();
+
+    return this.view;
   }
 }

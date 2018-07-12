@@ -1,4 +1,4 @@
-import { IViewOptions } from './tinybind';
+import { IOptionsParam, IViewOptions } from './tinybind';
 import { PRIMITIVE, KEYPATH, parseType, parseDeclaration } from './parsers';
 import { IFormatterObservers, IBindable } from './binding';
 import { IBinders } from './binder.service';
@@ -26,7 +26,6 @@ export interface IKeypaths {
  */
 export class ComponentBinding implements IBindable {
   public view: View;
-  public componentView?: View;
   public el: IBoundElement;
   public type: string;
   public component: IComponent<any>;
@@ -53,6 +52,9 @@ export class ComponentBinding implements IBindable {
    * @param type
    */
   constructor(view: View, el: HTMLElement, type: string) {
+    if (!view.options.components) {
+      throw new Error('No components found!');
+    }
     this.view = view;
     this.el = el;
     this.type = type;
@@ -133,7 +135,7 @@ export class ComponentBinding implements IBindable {
   }
 
   public getMergedOptions() {
-    const options: IViewOptions = {
+    const options: IOptionsParam = {
       // EXTENSIONS
       adapters: <IAdapters> Object.create(null),
       binders: <IBinders<any>> Object.create(null),
@@ -172,15 +174,17 @@ export class ComponentBinding implements IBindable {
     options.handler = this.component.handler ? this.component.handler : this.view.options.handler;
 
     // get all starBinders from available binders
-    options.starBinders = Object.keys(options.binders).filter((key) => {
-      return key.indexOf('*') > 0;
-    });
-    return options;
+    if (options.binders) {
+      options.starBinders = Object.keys(options.binders).filter((key) => {
+        return key.indexOf('*') > 0;
+      });
+    }
+    return (options as IViewOptions );
   }
 
   /**
-   * Intercepts `tinybind.Binding::bind` to build `this.componentView` with a localized
-   * map of models from the root view. Bind `this.componentView` on subsequent calls.
+   * Intercepts `tinybind.Binding::bind` to build `this.view` with a localized
+   * map of models from the root view. Bind `this.view` on subsequent calls.
    */
   public bind() {
     if (!this.el._bound) {
@@ -309,7 +313,7 @@ export class ComponentBinding implements IBindable {
   // }
 
   /**
-   * Intercept `tinybind.Binding::unbind` to be called on `this.componentView`.
+   * Intercept `tinybind.Binding::unbind` to be called on `this.view`.
    */
   public unbind() {
     Object.keys(this.observers).forEach((propertyName) => {
