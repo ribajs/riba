@@ -8,7 +8,7 @@ import { IBinders, BindersService } from './binder.service';
 import { View } from './view';
 import { IAdapters } from './adapter';
 import { Observer, Root } from './observer';
-import { IComponents, ComponentService } from './component.service';
+import { IClassicComponent, IComponents, ComponentService } from './component.service';
 
 export interface IExtensions {
   binders?: IBinders<any>;
@@ -77,7 +77,7 @@ export class Tinybind {
    * @param el The element the event was triggered from
    */
   public static handler(this: any, context: any, ev: Event, binding: Binding, el: HTMLElement) {
-    // console.warn('handler', this);
+    console.warn('handler', this);
     this.call(context, ev, binding.view.models, el);
   }
 
@@ -225,13 +225,19 @@ export class Tinybind {
       el = document.createElement('div');
     }
 
-    const component = this.components[componentKey];
-    el.innerHTML = component.template.call(this, el);
-    const scope = component.initialize.call(this, el, data);
+    // Component is depricated component
+    if (this.components[componentKey].hasOwnProperty('initialize') && this.components[componentKey].hasOwnProperty('template')) {
+      const component = (this.components[componentKey] as IClassicComponent<any>);
+      const template = component.template.call(this, el);
+      if (template !== null) {
+        el.innerHTML = template;
+      }
+      const scope = component.initialize.call(this, el, data);
 
-    const view = this.bind(el, scope);
-    view.bind();
-    return view;
+      const view = this.bind(el, scope);
+      view.bind();
+      return view;
+    }
   }
 
   public getViewOptions(options?: IOptionsParam) {

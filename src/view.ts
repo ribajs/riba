@@ -1,9 +1,11 @@
 import { IViewOptions, Tinybind } from './tinybind';
 import { Binder, ITwoWayBinder } from './binder.service';
 import { Binding, IBindable } from './binding';
+import { ComponentService} from './component.service';
 import { ComponentBinding, IBoundElement } from './component-binding';
 import { parseNode, parseDeclaration } from './parsers';
 import Debug from 'debug';
+import { RibaComponentClass, RibaComponent } from './webcomponent';
 
 export type TBlock = boolean;
 
@@ -120,7 +122,7 @@ export class View {
     const attributes = node.attributes;
     const bindInfos = [];
     const starBinders = this.options.starBinders;
-    let type;
+    let nodeName;
     let binder;
     let identifier;
     let args;
@@ -131,16 +133,16 @@ export class View {
         const attribute = attributes[i];
         // if attribute starts with the binding prefix. E.g. rv
         if (attribute.name.indexOf(bindingPrefix) === 0) {
-          type = attribute.name.slice(bindingPrefix.length);
-          binder = this.options.binders[type];
+          nodeName = attribute.name.slice(bindingPrefix.length);
+          binder = this.options.binders[nodeName];
           args = [];
 
           if (!binder) {
             for (let k = 0; k < starBinders.length; k++) {
               identifier = starBinders[k];
-              if (type.slice(0, identifier.length - 1) === identifier.slice(0, -1)) {
+              if (nodeName.slice(0, identifier.length - 1) === identifier.slice(0, -1)) {
                 binder = this.options.binders[identifier];
-                args.push(type.slice(identifier.length - 1));
+                args.push(nodeName.slice(identifier.length - 1));
                 break;
               }
             }
@@ -151,29 +153,51 @@ export class View {
           }
 
           if ((binder as ITwoWayBinder<any>).block) {
-            this.buildBinding(node, type, attribute.value, binder, args);
+            this.buildBinding(node, nodeName, attribute.value, binder, args);
             node.removeAttribute(attribute.name);
             return true;
           }
 
-          bindInfos.push({attr: attribute, binder, type, args});
+          bindInfos.push({attr: attribute, binder, nodeName, args});
         }
       }
 
       for (let i = 0; i < bindInfos.length; i++) {
         const bindInfo = bindInfos[i];
-        this.buildBinding(node, bindInfo.type, bindInfo.attr.value, bindInfo.binder, bindInfo.args);
+        this.buildBinding(node, bindInfo.nodeName, bindInfo.attr.value, bindInfo.binder, bindInfo.args);
         node.removeAttribute(bindInfo.attr.name);
       }
     }
 
+    // bind components
     if (!block) {
-      type = node.nodeName.toLowerCase();
+      nodeName = node.nodeName.toLowerCase();
+      if (this.options.components && this.options.components[nodeName] && !node._bound) {
 
-      // bind (deprecated) components and stop / block the parsing of the childs
-      if (this.options.components && this.options.components[type] && !node._bound) {
-        this.bindings.push(new ComponentBinding((this as View), node, type));
-        View.debug(`Stop parsing on (deprecated) component ${type}`);
+        const type = ComponentService.type(this.options.components[nodeName]);
+
+         // bind (deprecated) components and stop / block the parsing of the childs
+        if (type === 'classic') {
+          this.bindings.push(new ComponentBinding((this as View), node, nodeName));
+          View.debug(`Stop parsing on (deprecated) component ${nodeName}`);
+        }
+
+        if (type === 'webcomponent') {
+          const COMPONENT = (this.options.components[nodeName] as typeof RibaComponentClass);
+          if (!window.customElements) {
+            View.debug(`Fallback for Webcomponent ${nodeName}`);
+            const component = new COMPONENT(node);
+          } else {
+            View.debug(`Define Webcomponent ${nodeName} with customElements.define`);
+            if (customElements.get(nodeName)) {
+              View.debug(`Web component already defined`);
+            } else {
+              customElements.define(nodeName, COMPONENT);
+            }
+          }
+
+        }
+
         block = true;
       }
 
@@ -181,10 +205,14 @@ export class View {
        * Stop / block the child parsing if the node name starts with the riba web component prefix
        * because the new riba web components have their own binding.
        */
-      if (type.indexOf(bindingPrefix) === 0) {
-        View.debug(`Stop parsing on riba web component ${type}`);
-        block = true;
-      }
+      // if (nodeName.indexOf(bindingPrefix) === 0) {
+      //   if (window.customElements) {
+      //     View.debug(`Component "${nodeName}" will be bound with window.customElements, so ignore`);
+      //   } else {
+      //     View.debug(`TODO`);
+      //   }
+      //   block = true;
+      // }
     }
 
     return block;

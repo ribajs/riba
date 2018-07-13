@@ -4,7 +4,7 @@ import { IFormatterObservers, IBindable } from './binding';
 import { IBinders } from './binder.service';
 import { IFormatters } from './formatter.service';
 import { View } from './view';
-import { IComponent, IComponents } from './component.service';
+import { IClassicComponent, IComponents } from './component.service';
 import { Observer, IObservers, IObserverSyncCallback } from './observer';
 import { IAdapters } from './adapter';
 import { Utils } from './utils';
@@ -28,7 +28,7 @@ export class ComponentBinding implements IBindable {
   public view: View;
   public el: IBoundElement;
   public type: string;
-  public component: IComponent<any>;
+  public component: IClassicComponent<any>;
   /**
    * static values (PRIMITIVE Attributes)
    */
@@ -58,7 +58,7 @@ export class ComponentBinding implements IBindable {
     this.view = view;
     this.el = el;
     this.type = type;
-    this.component = view.options.components[this.type];
+    this.component = (view.options.components[this.type] as IClassicComponent<any>);
     this.static = {};
     this.observers = {};
     this.bindingPrefix = view.options.prefix + '-'; // TODO
