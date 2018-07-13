@@ -184,6 +184,7 @@ export class View {
 
         if (type === 'webcomponent') {
           const COMPONENT = (this.options.components[nodeName] as typeof RibaComponentClass);
+          // Fallback
           if (!window.customElements) {
             View.debug(`Fallback for Webcomponent ${nodeName}`);
             const component = new COMPONENT(node);
@@ -192,7 +193,13 @@ export class View {
             if (customElements.get(nodeName)) {
               View.debug(`Web component already defined`);
             } else {
-              customElements.define(nodeName, COMPONENT);
+              try {
+                customElements.define(nodeName, COMPONENT);
+              } catch (error) {
+                console.error(error);
+                // Fallback
+                const component = new COMPONENT(node);
+              }
             }
           }
 
