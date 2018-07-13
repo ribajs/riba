@@ -202,7 +202,6 @@ export class View {
               }
             }
           }
-
         }
 
         block = true;

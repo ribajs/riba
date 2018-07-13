@@ -6,6 +6,8 @@ import { IBinders, ITwoWayBinder, IOneWayBinder } from '../../binder.service';
 import { enabled } from './enabled.binder';
 import { disabled } from './disabled.binder';
 import { onStarBinderWrapper } from './on-star.binder';
+import { valueBinder } from './value.binder';
+import $ from 'jquery';
 
 /**
  * Gets the basiic binders
@@ -251,49 +253,7 @@ export const basicBindersWrapper = (jQuery: JQueryStatic) => {
      * Sets the element's value. Also sets the model property when the input changes
      * (two-way binder).
      */
-    'value': <ITwoWayBinder<any>> {
-      publishes: true,
-      priority: 3000,
-
-      bind(el: HTMLInputElement) {
-        this.customData = {};
-        this.customData.isRadio = el.tagName === 'INPUT' && el.type === 'radio';
-        if (!this.customData.isRadio) {
-          this.customData.event = el.getAttribute('event-name') || (el.tagName === 'SELECT' ? 'change' : 'input');
-          const self = this;
-          if (!this.customData.callback) {
-            this.customData.callback = () => {
-              self.publish();
-            };
-          }
-
-          el.addEventListener(this.customData.event, this.customData.callback);
-        }
-      },
-
-      unbind(el) {
-        if (!this.customData.isRadio) {
-          el.removeEventListener(this.customData.event, this.customData.callback);
-        }
-      },
-
-      routine(el: HTMLInputElement | HTMLSelectElement, value) {
-        if (this.customData && this.customData.isRadio) {
-          el.setAttribute('value', value);
-        } else {
-          if (el.type === 'select-multiple' && el instanceof HTMLSelectElement) {
-            if (value instanceof Array) {
-              for (let i = 0; i < el.length; i++) {
-                const option = el[i];
-                option.selected = value.indexOf(option.value) > -1;
-              }
-            }
-          } else if (getString(value) !== getString(el.value)) {
-            el.value = value != null ? value : '';
-          }
-        }
-      },
-    },
+    'value': valueBinder,
 
     /**
      * Inserts and binds the element and it's child nodes into the DOM when true.

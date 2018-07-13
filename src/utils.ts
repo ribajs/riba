@@ -40,11 +40,11 @@ export const times = (n: number, cb: () => void) => {
 /**
  *
  */
-export const getInputValue = (el: HTMLSelectElement | HTMLInputElement) => {
+export const getInputValue = (el: HTMLElement) => {
   const results: string[] = [];
-  if (el.type === 'checkbox') {
+  if ((el as HTMLSelectElement).type === 'checkbox') {
     return (el as HTMLInputElement).checked;
-  } else if (el.type === 'select-multiple') {
+  } else if ((el as HTMLSelectElement).type === 'select-multiple') {
     const options: HTMLOptionsCollection = (el as HTMLSelectElement).options;
 
     for (const key in options) {
@@ -57,8 +57,10 @@ export const getInputValue = (el: HTMLSelectElement | HTMLInputElement) => {
     }
 
     return results;
+  } else if ( el.getAttribute('contenteditable')) {
+    return el.innerHTML; // TODO write test for contenteditable
   } else {
-    return el.value;
+    return (el as HTMLInputElement).value;
   }
 };
 
