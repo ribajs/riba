@@ -1,0 +1,49 @@
+{
+  "_from": "@types/webcomponents.js",
+  "_id": "@types/webcomponents.js@0.6.32",
+  "_inBundle": false,
+  "_integrity": "sha1-q6S7/LaIkgWqj44K3sC/xZW09s0=",
+  "_location": "/@types/webcomponents.js",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@types/webcomponents.js",
+    "name": "@types/webcomponents.js",
+    "escapedName": "@types%2fwebcomponents.js",
+    "scope": "@types",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@types/webcomponents.js/-/webcomponents.js-0.6.32.tgz",
+  "_shasum": "aba4bbfcb6889205aa8f8e0adec0bfc595b4f6cd",
+  "_spec": "@types/webcomponents.js",
+  "_where": "/home/jumplink/Projekte/tinybind",
+  "bundleDependencies": false,
+  "contributors": [
+    {
+      "name": "Adi Dahiya",
+      "url": "https://github.com/adidahiya"
+    }
+  ],
+  "dependencies": {},
+  "deprecated": false,
+  "description": "TypeScript definitions for webcomponents.js",
+  "license": "MIT",
+  "main": "",
+  "name": "@types/webcomponents.js",
+  "peerDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/DefinitelyTyped/DefinitelyTyped.git"
+  },
+  "scripts": {},
+  "typeScriptVersion": "2.0",
+  "typesPublisherContentHash": "dac052227b8f1758ba1cf8417cb976d8b6a4c73dca6507bbac41c277b5c73667",
+  "version": "0.6.32"
+}

@@ -3,6 +3,11 @@
   "extends": [
     "tslint:recommended"
   ],
+  "linterOptions": {
+    "exclude": [
+      "src/types/**/*"
+    ]
+  },
   "jsRules": {},
   "rules": {
     "quotemark": [true, "single", "jsx-double"],
@@ -13,7 +18,7 @@
     "array-type": false,
     "no-angle-bracket-type-assertion": false,
     "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
-    "no-console": [true, "log", "error", "info", "debug"],
+    "no-console": [true, "log", "info", "debug"],
     "prefer-for-of": false,
     "object-literal-sort-keys": false
   },

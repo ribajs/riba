@@ -1,8 +1,11 @@
 import { IViewOptions, Tinybind } from './tinybind';
 import { Binder, ITwoWayBinder } from './binder.service';
 import { Binding, IBindable } from './binding';
+import { ComponentService} from './component.service';
 import { ComponentBinding, IBoundElement } from './component-binding';
 import { parseNode, parseDeclaration } from './parsers';
+import Debug from 'debug';
+import { RibaComponentClass, RibaComponent } from './webcomponent';
 
 export type TBlock = boolean;
 
@@ -14,6 +17,8 @@ export interface IDataElement extends HTMLElement {
  * A collection of bindings built from a set of parent nodes.
  */
 export class View {
+  public static debug = Debug('riba:view');
+
   public static DECLARATION_SPLIT = /((?:'[^']*')*(?:(?:[^\|']*(?:'[^']*')+[^\|']*)+|[^\|]+))|^$/g;
 
   public static textBinder: ITwoWayBinder<string> = {
@@ -28,6 +33,12 @@ export class View {
     return bPriority - aPriority;
   }
 
+  /**
+   * Helper function to Create a new view insite of a binding
+   * @param bindin
+   * @param models
+   * @param anchorEl
+   */
   public static create(binding: Binding, models: any, anchorEl: HTMLElement | Node | null) {
     const template = binding.el.cloneNode(true);
     const view = new View((template as Node), models, binding.view.options);
@@ -94,69 +105,121 @@ export class View {
 
   public traverse(node: IBoundElement): TBlock {
 
-    // TODO
-    let bindingPrefix = this.options.prefix;
+    let bindingPrefix;
+    if (this.options.fullPrefix) {
+      bindingPrefix = this.options.fullPrefix;
+    } else {
+      // TODO FIXME
+      bindingPrefix = this.options.prefix + '-';
+    }
+
     if (!bindingPrefix) {
       throw new Error('prefix is required');
     }
-    bindingPrefix = bindingPrefix + '-';
 
+    /** If true stop / block the parseNode  recursion */
     let block = node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE';
     const attributes = node.attributes;
     const bindInfos = [];
     const starBinders = this.options.starBinders;
-    let type;
+    let nodeName;
     let binder;
     let identifier;
     let args;
 
-    for (let i = 0, len = attributes.length; i < len; i++) {
-      const attribute = attributes[i];
-      // if attribute starts with the binding prefix. E.g. rv
-      if (attribute.name.indexOf(bindingPrefix) === 0) {
-        type = attribute.name.slice(bindingPrefix.length);
-        binder = this.options.binders[type];
-        args = [];
+    // bind attribute binders if avaible
+    if (this.options.binders) {
+      for (let i = 0, len = attributes.length; i < len; i++) {
+        const attribute = attributes[i];
+        // if attribute starts with the binding prefix. E.g. rv
+        if (attribute.name.indexOf(bindingPrefix) === 0) {
+          nodeName = attribute.name.slice(bindingPrefix.length);
+          binder = this.options.binders[nodeName];
+          args = [];
 
-        if (!binder) {
-          for (let k = 0; k < starBinders.length; k++) {
-            identifier = starBinders[k];
-            if (type.slice(0, identifier.length - 1) === identifier.slice(0, -1)) {
-              binder = this.options.binders[identifier];
-              args.push(type.slice(identifier.length - 1));
-              break;
+          if (!binder) {
+            for (let k = 0; k < starBinders.length; k++) {
+              identifier = starBinders[k];
+              if (nodeName.slice(0, identifier.length - 1) === identifier.slice(0, -1)) {
+                binder = this.options.binders[identifier];
+                args.push(nodeName.slice(identifier.length - 1));
+                break;
+              }
             }
           }
-        }
 
-        if (!binder) {
-          binder = Tinybind.fallbackBinder;
-        }
+          if (!binder) {
+            binder = Tinybind.fallbackBinder;
+          }
 
-        if ((binder as ITwoWayBinder<any>).block) {
-          this.buildBinding(node, type, attribute.value, binder, args);
-          node.removeAttribute(attribute.name);
-          return true;
-        }
+          if ((binder as ITwoWayBinder<any>).block) {
+            this.buildBinding(node, nodeName, attribute.value, binder, args);
+            node.removeAttribute(attribute.name);
+            return true;
+          }
 
-        bindInfos.push({attr: attribute, binder, type, args});
+          bindInfos.push({attr: attribute, binder, nodeName, args});
+        }
       }
-    }
 
-    for (let i = 0; i < bindInfos.length; i++) {
-      const bindInfo = bindInfos[i];
-      this.buildBinding(node, bindInfo.type, bindInfo.attr.value, bindInfo.binder, bindInfo.args);
-      node.removeAttribute(bindInfo.attr.name);
+      for (let i = 0; i < bindInfos.length; i++) {
+        const bindInfo = bindInfos[i];
+        this.buildBinding(node, bindInfo.nodeName, bindInfo.attr.value, bindInfo.binder, bindInfo.args);
+        node.removeAttribute(bindInfo.attr.name);
+      }
     }
 
     // bind components
     if (!block) {
-      type = node.nodeName.toLowerCase();
+      nodeName = node.nodeName.toLowerCase();
+      if (this.options.components && this.options.components[nodeName] && !node._bound) {
 
-      if (this.options.components[type] && !node._bound) {
-        this.bindings.push(new ComponentBinding((this as View), node, type));
+        const type = ComponentService.type(this.options.components[nodeName]);
+
+         // bind (deprecated) components and stop / block the parsing of the childs
+        if (type === 'classic') {
+          this.bindings.push(new ComponentBinding((this as View), node, nodeName));
+          View.debug(`Stop parsing on (deprecated) component ${nodeName}`);
+        }
+
+        if (type === 'webcomponent') {
+          const COMPONENT = (this.options.components[nodeName] as typeof RibaComponentClass);
+          // Fallback
+          if (!window.customElements) {
+            View.debug(`Fallback for Webcomponent ${nodeName}`);
+            const component = new COMPONENT(node);
+          } else {
+            View.debug(`Define Webcomponent ${nodeName} with customElements.define`);
+            if (customElements.get(nodeName)) {
+              View.debug(`Web component already defined`);
+            } else {
+              try {
+                customElements.define(nodeName, COMPONENT);
+              } catch (error) {
+                console.error(error);
+                // Fallback
+                const component = new COMPONENT(node);
+              }
+            }
+          }
+
+        }
+
         block = true;
       }
+
+      /**
+       * Stop / block the child parsing if the node name starts with the riba web component prefix
+       * because the new riba web components have their own binding.
+       */
+      // if (nodeName.indexOf(bindingPrefix) === 0) {
+      //   if (window.customElements) {
+      //     View.debug(`Component "${nodeName}" will be bound with window.customElements, so ignore`);
+      //   } else {
+      //     View.debug(`TODO`);
+      //   }
+      //   block = true;
+      // }
     }
 
     return block;

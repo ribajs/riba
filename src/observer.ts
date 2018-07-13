@@ -26,6 +26,15 @@ export class Observer {
   public static rootInterface: Root;
 
   public static updateOptions(options: IViewOptions) {
+
+    if (!options.adapters) {
+      throw new Error('adapters are required!');
+    }
+
+    if (!options.rootInterface) {
+      throw new Error('rootInterface is required!');
+    }
+
     Observer.adapters = options.adapters;
     Observer.interfaces = Object.keys(Observer.adapters);
     Observer.rootInterface = options.rootInterface;

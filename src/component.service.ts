@@ -1,13 +1,13 @@
 import Debug from 'debug';
 import { IBinders } from './binder.service';
 import { IFormatters } from './formatter.service';
-import { IComponent, IComponents } from './component.service';
 import { IAdapters } from './adapter';
 import { IBindable } from './binding';
+import { RibaComponentClass, RibaComponent } from './webcomponent';
 
 export type Scope = any;
 
-export interface IComponent<ValueType> {
+export interface IClassicComponent<ValueType> {
   /** If the template function returns null no template is injected */
   template: (() => string | null) | (() => HTMLElement);
   initialize: (el: HTMLElement, data: ValueType) => Scope;
@@ -39,16 +39,29 @@ export interface IComponent<ValueType> {
 }
 
 export interface IComponents {
-  [name: string]: IComponent<any>;
+  [name: string]: IClassicComponent<any> | typeof RibaComponent;
 }
 
-export interface IComponentWrapperResult<ValueType> extends IComponent<ValueType> {
+export interface IComponentWrapperResult<ValueType> extends IClassicComponent<ValueType> {
   name: string;
 }
 
 export type ComponentWrapper<ValueType> = (...deps: any[]) => IComponentWrapperResult<ValueType>;
 
 export class ComponentService {
+
+  public static type(component: IClassicComponent<any> | typeof RibaComponent): 'classic' | 'webcomponent' | undefined {
+    if (component.hasOwnProperty('initialize') && component.hasOwnProperty('template')) {
+      return 'classic';
+    }
+
+    if ((component as typeof RibaComponent).tagName) {
+      return 'webcomponent';
+    }
+
+    return undefined;
+  }
+
   private components: IComponents;
   private debug = Debug('components:ComponentService');
 
@@ -79,14 +92,10 @@ export class ComponentService {
    * @param component
    * @param name
    */
-  public regist(component: IComponent<any>, name?: string): IComponents {
+  public regist(component: IClassicComponent<any> | typeof RibaComponent, name?: string): IComponents {
     if (!name) {
-      if (component.hasOwnProperty('constructor')) {
-        name = component.constructor.name;
-      }
-
       if (component.hasOwnProperty('name')) {
-        name = (component as any).name;
+        name = (component as typeof RibaComponent).tagName || (component as IClassicComponent<any>).name;
       }
     }
 

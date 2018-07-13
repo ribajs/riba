@@ -1,10 +1,10 @@
-import { IViewOptions } from './tinybind';
+import { IOptionsParam, IViewOptions } from './tinybind';
 import { PRIMITIVE, KEYPATH, parseType, parseDeclaration } from './parsers';
 import { IFormatterObservers, IBindable } from './binding';
 import { IBinders } from './binder.service';
 import { IFormatters } from './formatter.service';
 import { View } from './view';
-import { IComponent, IComponents } from './component.service';
+import { IClassicComponent, IComponents } from './component.service';
 import { Observer, IObservers, IObserverSyncCallback } from './observer';
 import { IAdapters } from './adapter';
 import { Utils } from './utils';
@@ -26,10 +26,9 @@ export interface IKeypaths {
  */
 export class ComponentBinding implements IBindable {
   public view: View;
-  public componentView?: View;
   public el: IBoundElement;
   public type: string;
-  public component: IComponent<any>;
+  public component: IClassicComponent<any>;
   /**
    * static values (PRIMITIVE Attributes)
    */
@@ -53,10 +52,13 @@ export class ComponentBinding implements IBindable {
    * @param type
    */
   constructor(view: View, el: HTMLElement, type: string) {
+    if (!view.options.components) {
+      throw new Error('No components found!');
+    }
     this.view = view;
     this.el = el;
     this.type = type;
-    this.component = view.options.components[this.type];
+    this.component = (view.options.components[this.type] as IClassicComponent<any>);
     this.static = {};
     this.observers = {};
     this.bindingPrefix = view.options.prefix + '-'; // TODO
@@ -133,7 +135,7 @@ export class ComponentBinding implements IBindable {
   }
 
   public getMergedOptions() {
-    const options: IViewOptions = {
+    const options: IOptionsParam = {
       // EXTENSIONS
       adapters: <IAdapters> Object.create(null),
       binders: <IBinders<any>> Object.create(null),
@@ -172,15 +174,17 @@ export class ComponentBinding implements IBindable {
     options.handler = this.component.handler ? this.component.handler : this.view.options.handler;
 
     // get all starBinders from available binders
-    options.starBinders = Object.keys(options.binders).filter((key) => {
-      return key.indexOf('*') > 0;
-    });
-    return options;
+    if (options.binders) {
+      options.starBinders = Object.keys(options.binders).filter((key) => {
+        return key.indexOf('*') > 0;
+      });
+    }
+    return (options as IViewOptions );
   }
 
   /**
-   * Intercepts `tinybind.Binding::bind` to build `this.componentView` with a localized
-   * map of models from the root view. Bind `this.componentView` on subsequent calls.
+   * Intercepts `tinybind.Binding::bind` to build `this.view` with a localized
+   * map of models from the root view. Bind `this.view` on subsequent calls.
    */
   public bind() {
     if (!this.el._bound) {
@@ -195,8 +199,8 @@ export class ComponentBinding implements IBindable {
        * there's a cyclic dependency that makes imported View a dummy object. Use tinybind.bind
        */
       const scope = this.component.initialize.call(this, this.el, this.locals());
-      const view = new View(Array.prototype.slice.call(this.el.childNodes), scope, this.getMergedOptions());
-      view.bind();
+      this.view = new View(Array.prototype.slice.call(this.el.childNodes), scope, this.getMergedOptions());
+      this.view.bind();
 
       this.el._bound = true;
     } else {
@@ -309,7 +313,7 @@ export class ComponentBinding implements IBindable {
   // }
 
   /**
-   * Intercept `tinybind.Binding::unbind` to be called on `this.componentView`.
+   * Intercept `tinybind.Binding::unbind` to be called on `this.view`.
    */
   public unbind() {
     Object.keys(this.observers).forEach((propertyName) => {
@@ -324,8 +328,8 @@ export class ComponentBinding implements IBindable {
       });
     });
 
-    if (this.componentView) {
-      this.componentView.unbind.call(this);
+    if (this.view) {
+      this.view.unbind.call(this);
     }
   }
 }

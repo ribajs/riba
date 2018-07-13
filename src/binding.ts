@@ -191,6 +191,7 @@ export class Binding implements IBindable {
     if (this.formatters === null) {
       throw new Error('formatters is null');
     }
+
     return this.formatters.reduce((result: any/*check type*/, declaration: string /*check type*/, index: number) => {
       const args = declaration.match(Binding.FORMATTER_ARGS);
       if (args === null) {
@@ -200,6 +201,11 @@ export class Binding implements IBindable {
       if (!id) {
         throw new Error('No id found in args');
       }
+
+      if (!this.view.options.formatters) {
+        throw new Error('No formatters are defined');
+      }
+
       const formatter = this.view.options.formatters[id];
 
       const processedArgs = this.parseFormatterArguments(args, index);
@@ -230,7 +236,6 @@ export class Binding implements IBindable {
   public eventHandler(fn: eventHandlerFunction, el: HTMLElement): (ev: Event) => any {
     const binding = this;
     const handler = binding.view.options.handler;
-
     return (ev) => {
       if (!handler) {
         throw new Error('No handler defined in binding.view.options.handler');
@@ -295,6 +300,11 @@ export class Binding implements IBindable {
         if (!id) {
           throw new Error('id not defined');
         }
+
+        if (!this.view.options.formatters) {
+          return undefined;
+        }
+
         const formatter = this.view.options.formatters[id];
         const processedArgs = this.parseFormatterArguments(args, index);
 

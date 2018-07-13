@@ -2,9 +2,14 @@
 
 ## master
 
-- Components
+- Web Components
+  - Start a new implementation of components by following the Web Components v1 [Specs](https://developer.mozilla.org/de/docs/Web/Web_Components)
+  - Fallback if customElements.define fails or is not supported
+
+- Classic Components
   - Now also work without an HTML template and then use their already setted child elements instead
   - Set attribute names to be automatically bound to the scope
+
 - The event handler now also passes the html element the event comes from
 
 ## 0.15.0

@@ -43,7 +43,15 @@ export const onStarBinderWrapper: BinderWrapper = (jQuery: JQueryStatic) => {
       }
 
       this.customData.handler = this.eventHandler(value, el);
-      jQuery(el).on(eventName, this.customData.handler);
+
+      try {
+        jQuery(el).on(eventName, (this.customData.handler));
+      } catch (error) {
+        console.warn(error);
+        jQuery(el).on(eventName, (event: JQuery.Event) => {
+          this.customData.handler(event);
+        });
+      }
     },
   };
   return { binder, name };
