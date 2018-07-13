@@ -1,16 +1,15 @@
 # Changelog
 
-## webcomponents
-
-- Web Components
-  - Start a new implementation of tinybind / rivets components by following the Web Components v1 [Specs](https://developer.mozilla.org/de/docs/Web/Web_Components)(https://github.com/luruke/barba.js)
-  - Using a Web Components [polyfill](https://github.com/webcomponents/webcomponentsjs) for browser they not support Web Components and to compile the components to ES5
-
 ## master
 
-- Components
+- Web Components
+  - Start a new implementation of components by following the Web Components v1 [Specs](https://developer.mozilla.org/de/docs/Web/Web_Components)
+  - Fallback if customElements.define fails or is not supported
+
+- Classic Components
   - Now also work without an HTML template and then use their already setted child elements instead
   - Set attribute names to be automatically bound to the scope
+
 - The event handler now also passes the html element the event comes from
 
 ## 0.15.0
