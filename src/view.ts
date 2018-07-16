@@ -1,11 +1,11 @@
 import { IViewOptions, Tinybind } from './tinybind';
 import { Binder, ITwoWayBinder } from './binder.service';
 import { Binding, IBindable } from './binding';
-import { ComponentService} from './component.service';
-import { ComponentBinding, IBoundElement } from './component-binding';
+import { ComponentService} from './components/component.service';
+import { ComponentBinding, IBoundElement } from './components/component-binding';
 import { parseNode, parseDeclaration } from './parsers';
 import Debug from 'debug';
-import { RibaComponentClass, RibaComponent } from './webcomponent';
+import { RibaComponentClass } from './components/riba-component-class';
 
 export type TBlock = boolean;
 

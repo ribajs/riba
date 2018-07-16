@@ -1,14 +1,14 @@
 import { Utils } from './utils';
 import { parseTemplate, parseType } from './parsers';
 import { IFormatters, FormatterService } from './formatter.service';
-import { Binding, IBindable } from './binding';
+import { Binding } from './binding';
 import { adapter } from './adapter';
 
 import { IBinders, BindersService } from './binder.service';
 import { View } from './view';
 import { IAdapters } from './adapter';
 import { Observer, Root } from './observer';
-import { IClassicComponent, IComponents, ComponentService } from './component.service';
+import { IClassicComponent, IComponents, ComponentService } from './components/component.service';
 
 export interface IExtensions {
   binders?: IBinders<any>;
@@ -17,6 +17,7 @@ export interface IExtensions {
   adapters?: IAdapters;
 }
 
+/** Interface for the event handler, augment the event handler of the on-* binder */
 export type EventHandler = (this: any, context: Binding, ev: Event, binding: Binding, el: HTMLElement) => void;
 
 export interface IOptions {
@@ -85,15 +86,31 @@ export class Tinybind {
    * Sets the attribute on the element. If no binder above is matched it will fall
    * back to using this binder.
    */
-  public static fallbackBinder(this: Binding, el: HTMLElement, value: any) {
+  public static fallbackBinder(this: Binding, el: HTMLElement, newValue: any) {
     if (!this.type) {
       throw new Error('Can\'t set atttribute of ' + this.type);
     }
-    if (value != null) {
-      el.setAttribute(this.type, value);
+
+    const oldValue = el.getAttribute(this.type);
+
+    if (newValue != null) {
+      if (oldValue !== newValue) {
+        el.setAttribute(this.type, newValue);
+      }
     } else {
       el.removeAttribute(this.type);
     }
+
+    if (oldValue !== newValue) {
+      // trigger event to catch them in web components to call the attributeChangedCallback method
+      el.dispatchEvent(new CustomEvent('attribute-changed', { detail: {
+        name: this.type,
+        oldValue,
+        newValue,
+        namespace: null, // TODO
+      }}));
+    }
+
   }
 
   /** singleton instance */

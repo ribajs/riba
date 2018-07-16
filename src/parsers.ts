@@ -46,6 +46,26 @@ export function parseType(str?: string) {
   return {type, value};
 }
 
+export function parseAttribute(attr: string | null) {
+  let value: any = attr;
+  if (attr === 'true') {
+    value = true;
+  } else if (attr === 'false') {
+    value = false;
+  } else if (attr === 'null') {
+    value = null;
+  } else if (attr === 'undefined') {
+    value = undefined;
+  } else if (attr === '') {
+    value = undefined;
+  } else if (!isNaN(Number(attr))) {
+    value = Number(attr);
+  } else if (isJson(attr)) {
+    value = JSON.parse(attr as any);
+  }
+  return value;
+}
+
 export interface ITokens {
   type: number;
   value: string;

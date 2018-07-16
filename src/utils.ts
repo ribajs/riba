@@ -10,7 +10,10 @@ export interface IDeferred {
  * Test if string is a json string
  * @param str
  */
-export const isJson = (str: string) => {
+export const isJson = (str?: string | null) => {
+  if (!str) {
+    return false;
+  }
   try {
     const val = JSON.parse(str);
     return (val instanceof Array || val instanceof Object) ? true : false;
@@ -185,25 +188,26 @@ export class Utils {
    * @returns
    * @memberof Utils
    */
-  public static extend(deep: boolean, target: object, object1: object, objectN?: object) {
+  public static extend(deep: boolean, target?: object, object1?: object, objectN?: object) {
     let result;
     if (deep) {
-      result = jQuery.extend(true, target, object1, objectN);
+      result = jQuery.extend(true, target || {}, object1 || {}, objectN);
     } else {
       // Passing false for deep argument is not supported.
-      result = jQuery.extend(target, object1, objectN);
+      result = jQuery.extend(target || {}, object1 || {}, objectN);
     }
     return result;
   }
 
   /**
-   * Concat the contents of two objects together into the first object.
+   * Concat the contents of two objects together into the first object and return the concatenated object.
    * @param {boolean} deep If true, the merge becomes recursive (aka. deep copy).
    * @param {object} object1 An first object containing properties to concat.
    * @param {object} object2 The second object containing properties to concat.
    */
   public static concat(deep: boolean, object1?: object, object2?: object): any {
-    return this.extend(deep, {}, object1 || {}, object2 || {});
+    object1 = this.extend(deep, object1 || {}, object1 || {}, object2 || {});
+    return object1;
   }
 
   /**
