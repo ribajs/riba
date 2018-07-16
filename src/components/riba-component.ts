@@ -182,31 +182,46 @@ export abstract class RibaComponent extends FakeHTMLElement {
 
     if ((window as any).customElements) {
       // use native implementaion
-    } else if ((window as any).MutationObserver) {
-      // use MutationObserver as fallback
-      this.attributeObserverFallback = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-          if (mutation.type === 'attributes') {
-            this.debug('attributes changed', mutation);
-            if (mutation.attributeName) {
-              // if this attribute is a watched attribute
-              if (observedAttributes.indexOf(mutation.attributeName) !== -1) {
-                const newValue = this.el.getAttribute(mutation.attributeName);
-                this.attributeChangedCallback(mutation.attributeName, mutation.oldValue, newValue, mutation.attributeNamespace);
+    } else {
+      if ((window as any).MutationObserver) {
+        // use MutationObserver as fallback
+        this.attributeObserverFallback = new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            if (mutation.type === 'attributes') {
+              this.debug('attributes changed', mutation);
+              if (mutation.attributeName) {
+                // if this attribute is a watched attribute
+                if (observedAttributes.indexOf(mutation.attributeName) !== -1) {
+                  const newValue = this.el.getAttribute(mutation.attributeName);
+                  this.attributeChangedCallback(mutation.attributeName, mutation.oldValue, newValue, mutation.attributeNamespace);
+                }
               }
             }
-          }
+          });
         });
-      });
-      this.attributeObserverFallback.observe(this.el, {
-        attributes: true,
-      });
-    } else {
-      // use attribute change event as fallback for MutationObserver
-      this.el.addEventListener('attribute-changed', (event) => {
-        const data = ( event as CustomEvent ).detail;
-        this.attributeChangedCallback(data.name, data.oldValue, data.oldValue, data.namespace);
-      });
+        this.attributeObserverFallback.observe(this.el, {
+          attributes: true,
+        });
+      } else {
+        // use attribute change event as fallback for MutationObserver
+        this.el.addEventListener('attribute-changed', (event) => {
+          const data = ( event as CustomEvent ).detail;
+          this.attributeChangedCallback(data.name, data.oldValue, data.oldValue, data.namespace);
+        });
+      }
+
+      // call attributeChangedCallback for all already setted static attributes
+      const attributes = this.el.attributes;
+      for (const i in attributes) {
+        if (attributes.hasOwnProperty(i)) {
+          const attribute: Node = attributes[i];
+          const name = attribute.nodeName;
+          if (observedAttributes.indexOf(name) !== -1) {
+            const newValue = attribute.nodeValue;
+            this.attributeChangedCallback(name, null, newValue, null);
+          }
+        }
+      }
     }
   }
 }
