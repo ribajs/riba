@@ -95,13 +95,18 @@ export class ComponentService {
   public regist(component: IClassicComponent<any> | typeof RibaComponent, name?: string): IComponents {
     if (!name) {
       if (component.hasOwnProperty('name')) {
-        name = (component as typeof RibaComponent).tagName || (component as IClassicComponent<any>).name;
+        name = (component as IClassicComponent<any>).name;
+      }
+
+      if ((component as typeof RibaComponent).tagName) {
+        name = (component as typeof RibaComponent).tagName;
       }
     }
 
     this.debug('name', name, component);
 
     if (!name) {
+      console.error(component);
       throw new Error('[ComponentService] name is required');
     }
 

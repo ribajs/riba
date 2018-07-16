@@ -4,8 +4,7 @@
       [
         "@babel/preset-env", {
           "targets": {
-            "chrome": 52,
-            "browsers": ["ie >= 11", "safari >= 10", "chrome >= 52", "edge >= 17"]
+            "browsers": ["ie >= 11", "safari >= 9", "chrome >= 52", "edge >= 17"]
           }
         }
       ]
