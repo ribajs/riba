@@ -10,3 +10,4 @@ export * from './parsers';
 export * from './tinybind';
 export * from './utils';
 export * from './view';
+export * from './extensions/shopify/index';
