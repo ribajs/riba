@@ -98,7 +98,7 @@ export class ComponentService {
         name = (component as IClassicComponent<any>).name;
       }
 
-      if ((component as typeof RibaComponent).tagName) {
+      if (typeof((component as typeof RibaComponent).tagName) === 'string') {
         name = (component as typeof RibaComponent).tagName;
       }
     }

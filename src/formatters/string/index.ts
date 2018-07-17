@@ -4,6 +4,7 @@ import { IFormatters } from '../../formatter.service';
 import { append } from './append.formatter';
 import { downcase } from './downcase.formatter';
 import { filled } from './filled.formatter';
+import { handleize } from './handleize.formatter';
 import { isString } from './isString.formatter';
 import { pluralize } from './pluralize.formatter';
 import { prepend } from './prepend.formatter';
@@ -11,8 +12,8 @@ import { slice } from './slice.formatter';
 import { strip } from './strip.formatter';
 import { upcase } from './upcase.formatter';
 
-export { append, downcase, filled, isString, pluralize, prepend, slice, strip, upcase };
+export { append, downcase, filled, handleize, isString, pluralize, prepend, slice, strip, upcase };
 
 export const stringFormatters: IFormatters = {
-  append, downcase, filled, isString, pluralize, prepend, slice, strip, upcase,
+  append, downcase, filled, isString, handleize, pluralize, prepend, slice, strip, upcase,
 };

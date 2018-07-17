@@ -8,7 +8,7 @@ import Debug from 'debug';
 import { View } from '../view';
 import { Tinybind, EventHandler } from '../tinybind';
 import { Binding } from '../binding';
-import { parseAttribute } from '../parsers';
+import { isJson } from '../utils';
 import { FakeHTMLElement } from './fake-html-element';
 
 export type TemplateFunction = () => string | null;
@@ -20,27 +20,11 @@ export abstract class RibaComponent extends FakeHTMLElement {
   protected debug: Debug.IDebugger;
   protected view?: View;
 
-  protected tinybind = new Tinybind();
+  protected tinybind?: Tinybind;
 
   protected el: HTMLElement;
 
   protected abstract scope: any;
-
-  /**
-   * Returns all properties setted as attributes on the custom element
-   */
-  protected get props() {
-    const props: any = {};
-    const attributes = this.el.attributes;
-    for (const i in attributes) {
-      if (attributes.hasOwnProperty(i)) {
-        const attribute: Node = attributes[i];
-        const name = attribute.nodeName;
-        props[name] = parseAttribute(attribute.nodeValue);
-      }
-    }
-    return props;
-  }
 
   private attributeObserverFallback?: MutationObserver;
 
@@ -61,7 +45,7 @@ export abstract class RibaComponent extends FakeHTMLElement {
 
   protected abstract template(): string | null;
 
-  protected init(observedAttributes: string[]) {
+  protected init(observedAttributes: string[], autobind = true) {
 
     // if innerHTML is null this component uses the innerHTML which he already has!
     const template = this.template();
@@ -70,30 +54,32 @@ export abstract class RibaComponent extends FakeHTMLElement {
       this.el.innerHTML = template;
     }
 
-    this.RibaObservedAttributes();
-
     this.initAttributeObserver(observedAttributes);
 
-    this.bind();
+    if (autobind) {
+      this.bind();
+    }
 
   }
 
-  /**
-   * Get attribute property by name
-   * @param name Name of the attribute
-   */
-  protected prop(name: string) {
-    return parseAttribute(this.el.getAttribute(name));
-  }
-
-  /**  */
-  protected RibaObservedAttributes(): string[] {
-    const fullPrefix = this.tinybind.fullPrefix;
-    const attributes = this.props;
-    this.debug('attributes', attributes);
-    const observedAttr: string[] = [];
-    const observedAttributes = [];
-    return [];
+  protected parseAttribute(attr: string | null) {
+    let value: any = attr;
+    if (attr === 'true') {
+      value = true;
+    } else if (attr === 'false') {
+      value = false;
+    } else if (attr === 'null') {
+      value = null;
+    } else if (attr === 'undefined') {
+      value = undefined;
+    } else if (attr === '') {
+      value = undefined;
+    } else if (!isNaN(Number(attr))) {
+      value = Number(attr);
+    } else if (isJson(attr)) {
+      value = JSON.parse(attr as any);
+    }
+    return value;
   }
 
   /**
@@ -138,13 +124,11 @@ export abstract class RibaComponent extends FakeHTMLElement {
    * @param namespace
    */
   protected attributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
+    newValue = this.parseAttribute(newValue);
     this.debug('attributeChangedCallback called', attributeName, oldValue, newValue, namespace);
 
     // automatically inject observed attributes to view scope
-    if (this.view && this.view.models) {
-      this.debug('this.scope', this.scope);
-      this.scope[attributeName] = newValue;
-    }
+    this.scope[attributeName] = newValue;
   }
 
   /**
@@ -159,11 +143,11 @@ export abstract class RibaComponent extends FakeHTMLElement {
   }
 
   protected bind() {
+    this.tinybind = new Tinybind();
     const viewOptions = this.tinybind.getViewOptions({
       handler: this.eventHandler(this),
     });
 
-    // this.debug('bind scope', this.scope);
     if (!this.el) {
       throw new Error('this.el is not defined');
     }
