@@ -7,7 +7,7 @@ import { View } from '../view';
 import { IClassicComponent, IComponents } from './component.service';
 import { Observer, IObservers, IObserverSyncCallback } from '../observer';
 import { IAdapters } from '../adapter';
-import { Utils } from '../utils';
+import { Utils, camelCase } from '../utils';
 
 export interface IBoundElement extends HTMLElement {
   _bound?: boolean;
@@ -122,18 +122,6 @@ export class ComponentBinding implements IBindable {
     return result;
   }
 
-  /**
-   * Returns a camel-cased version of the string. Used when translating an
-   * element's attribute name into a property name for the component's scope.
-   * TODO move to utils
-   * @param string
-   */
-  public camelCase(str: string) {
-    return str.replace(/-([a-z])/g, (grouped) => {
-      return grouped[1].toUpperCase();
-    });
-  }
-
   public getMergedOptions() {
     const options: IOptionsParam = {
       // EXTENSIONS
@@ -216,7 +204,7 @@ export class ComponentBinding implements IBindable {
 
       // if attribute starts not with binding prefix. E.g. rv-
       if (attribute.name.indexOf(this.bindingPrefix) !== 0) {
-        const propertyName = this.camelCase(attribute.name);
+        const propertyName = camelCase(attribute.name);
         const declaration = attribute.value;
         const parsedDeclaration = parseDeclaration(declaration);
 

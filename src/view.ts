@@ -206,19 +206,6 @@ export class View {
 
         block = true;
       }
-
-      /**
-       * Stop / block the child parsing if the node name starts with the riba web component prefix
-       * because the new riba web components have their own binding.
-       */
-      // if (nodeName.indexOf(bindingPrefix) === 0) {
-      //   if (window.customElements) {
-      //     View.debug(`Component "${nodeName}" will be bound with window.customElements, so ignore`);
-      //   } else {
-      //     View.debug(`TODO`);
-      //   }
-      //   block = true;
-      // }
     }
 
     return block;
@@ -242,9 +229,8 @@ export class View {
         binding.unbind();
       });
     }
-    // if(this.componentView) {
-    //   this.componentView.unbind();
-    // }
+
+    // TODO fallback to unbind web components
   }
 
   /**

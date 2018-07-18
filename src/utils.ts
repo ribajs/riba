@@ -68,6 +68,18 @@ export const getInputValue = (el: HTMLElement) => {
 };
 
 /**
+ * Returns a camel-cased version of the string. Used when translating an
+ * element's attribute name into a property name for the component's scope.
+ * TODO move to utils
+ * @param string
+ */
+export const camelCase = (str: string) => {
+  return str.replace(/-([a-z])/g, (grouped) => {
+    return grouped[1].toUpperCase();
+  });
+};
+
+/**
  * Just an Class with some helpful functions
  *
  * @export
