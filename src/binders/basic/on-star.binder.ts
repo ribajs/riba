@@ -5,10 +5,9 @@ import { eventHandlerFunction } from '../../binding';
 /**
  * Binds an event handler on the element.
  */
-export const onStarBinderWrapper: BinderWrapper = (jQuery: JQueryStatic) => {
+const onStarBinderWrapper: BinderWrapper = (jQuery: JQueryStatic) => {
 
   const name = 'on-*';
-  const debug = Debug('binders:' + name);
 
   const binder: ITwoWayBinder<eventHandlerFunction> = {
     function: true,
@@ -56,3 +55,5 @@ export const onStarBinderWrapper: BinderWrapper = (jQuery: JQueryStatic) => {
   };
   return { binder, name };
 };
+
+export { onStarBinderWrapper };
