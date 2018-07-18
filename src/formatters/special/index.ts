@@ -3,6 +3,7 @@ import { IFormatters } from '../../formatter.service';
 // special helper formatters
 import { debug } from './debug.formatter';
 import { def } from './def.formatter';
+import { call } from './call.formatter';
 import { currency } from './currency.formatter';
 
 // Add Shopify-specific formatters for Rivets.js.
@@ -42,5 +43,5 @@ import { currency } from './currency.formatter';
 export { debug, def, currency };
 
 export const specialFormatters: IFormatters = {
-  debug, def, currency,
+  debug, def, call, currency,
 };

@@ -220,7 +220,7 @@ export class Binding implements IBindable {
       }
 
       if (formatterReadFunction instanceof Function) {
-        result = formatterReadFunction(result, ...processedArgs);
+        result = formatterReadFunction.apply(this.model, [result, ...processedArgs]);
       }
 
       return result;
@@ -249,11 +249,15 @@ export class Binding implements IBindable {
    * with the supplied value formatted.
    */
   public set(value: any) {
-    if ((value instanceof Function) && !(this.binder as ITwoWayBinder<any> ).function) {
-      value = (value as IOneWayBinder<any> );
+    /*
+     * Since 0.9 : doesn't execute functions unless backward compatibility is active
+     * @see https://github.com/mikeric/rivets/blob/master/src/bindings.coffee#L87
+     */
+    const executeFunctions = false; // if true the call formatter is not working
+    if ((value instanceof Function) && !(this.binder as ITwoWayBinder<any> ).function && executeFunctions) {
+      // formatter is a function
       value = this.formattedValue(value.call(this.model));
     } else {
-      value = (value as ITwoWayBinder<any> );
       value = this.formattedValue(value);
     }
 

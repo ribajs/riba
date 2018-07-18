@@ -170,44 +170,47 @@ describe('tinybind.Binding', function() {
       routineFn.calledWith(el, 'awesome sweater').should.be.true();
     });
 
-    it('calls methods with the object as context', function() {
-      if (binding.binder.routine) {
-        routineFn = sinon.spy(binding.binder, 'routine');
-      } else {
-        routineFn = sinon.spy(binding, 'binder');
-      }
+    // TODO this should only be true if the function backward compatibility `executeFunctions` is set to true
+    // it('calls methods with the object as context', function() {
+    //   if (binding.binder.routine) {
+    //     routineFn = sinon.spy(binding.binder, 'routine');
+    //   } else {
+    //     routineFn = sinon.spy(binding, 'binder');
+    //   }
 
-      binding.model = {foo: 'bar'};
-      binding.set(function() { return this.foo; });
-      routineFn.calledWith(el, binding.model.foo).should.be.true();
-    });
+    //   binding.model = {foo: 'bar'};
+    //   binding.set(function() { return this.foo; });
+    //   routineFn.calledWith(el, binding.model.foo).should.be.true();
+    // });
   });
   
   describe('prototype functions', function() {
-    it('does call routine if observed value is a function', function() {
-      var Employee = function(name) {
-        this.name = name;
-      };
-      Employee.prototype.getName = function() {
-        return this.name;
-      };
-      var model = {employee: new Employee("John")};
 
-      el = document.createElement('div');
-      el.setAttribute('data-text', 'employee.getName');
+    // TODO this should only be true if the function backward compatibility `executeFunctions` is set to true
+    // it('does call routine if observed value is a function', function() {
+    //   var Employee = function(name) {
+    //     this.name = name;
+    //   };
+    //   Employee.prototype.getName = function() {
+    //     return this.name;
+    //   };
+    //   var model = {employee: new Employee("John")};
 
-      view = tinybind.bind(el, model);
-      binding = view.bindings[0];
-      if (binding.binder.routine) {
-        routineFn = sinon.spy(binding.binder, 'routine');
-      } else {
-        routineFn = sinon.spy(binding, 'binder');
-      }
+    //   el = document.createElement('div');
+    //   el.setAttribute('data-text', 'employee.getName');
+
+    //   view = tinybind.bind(el, model);
+    //   binding = view.bindings[0];
+    //   if (binding.binder.routine) {
+    //     routineFn = sinon.spy(binding.binder, 'routine');
+    //   } else {
+    //     routineFn = sinon.spy(binding, 'binder');
+    //   }
 
 
-      model.employee = new Employee("Peter");
-      routineFn.calledWith(el, "Peter").should.be.true();
-    });
+    //   model.employee = new Employee("Peter");
+    //   routineFn.calledWith(el, "Peter").should.be.true();
+    // });
   });
   
   describe('publish()', function() {
