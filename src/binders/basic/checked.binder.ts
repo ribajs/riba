@@ -20,11 +20,11 @@ export const checked: ITwoWayBinder<string> = {
     el.removeEventListener('change', this.customData.callback);
   },
 
-  routine(el: HTMLSelectElement, value) {
-    if (el.type === 'radio') {
-      el.checked = getString(el.value) === getString(value);
+  routine(el: HTMLElement, value) {
+    if ((el as HTMLSelectElement).type === 'radio') {
+      (el as HTMLSelectElement).checked = getString((el as HTMLSelectElement).value) === getString(value);
     } else {
-      el.checked = !!value;
+      (el as HTMLSelectElement).checked = !!value;
     }
   },
 };

@@ -287,10 +287,10 @@ export class Tinybind {
     viewOptions.handler = options && options.handler ? options.handler : Tinybind.handler;
 
     // merge extensions
-    viewOptions.binders = Utils.concat(false, viewOptions.binders, this.binders);
-    viewOptions.formatters = Utils.concat(false, viewOptions.formatters, this.formatters);
-    viewOptions.components = Utils.concat(false, viewOptions.components, this.components);
-    viewOptions.adapters = Utils.concat(false, viewOptions.adapters, this.adapters);
+    viewOptions.binders = Utils.concat(false, this.binders, viewOptions.binders);
+    viewOptions.formatters = Utils.concat(false, this.formatters, viewOptions.formatters);
+    viewOptions.components = Utils.concat(false, this.components, viewOptions.components);
+    viewOptions.adapters = Utils.concat(false, this.adapters, viewOptions.adapters);
 
     // get all starBinders from available binders
     if (viewOptions.binders) {

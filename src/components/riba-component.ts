@@ -93,6 +93,15 @@ export abstract class RibaComponent extends FakeHTMLElement {
   }
 
   /**
+   * Extra call formatter to avoid the "this" context problem
+   */
+  protected callFormatterHandler(self: this): any {
+    return (fn: (...args: any[]) => any, ...args: any[]) => {
+      return fn.apply(self, args);
+    };
+  }
+
+  /**
    * Default custom Element method
    * Invoked when the custom element is first connected to the document's DOM.
    */
@@ -146,7 +155,12 @@ export abstract class RibaComponent extends FakeHTMLElement {
     this.tinybind = new Tinybind();
     const viewOptions = this.tinybind.getViewOptions({
       handler: this.eventHandler(this),
+      formatters: {
+        call: this.callFormatterHandler(this),
+      },
     });
+
+    console.warn('viewOptions', viewOptions);
 
     if (!this.el) {
       throw new Error('this.el is not defined');
