@@ -13,9 +13,19 @@ export declare class RibaComponentClass extends RibaComponent {
 
   protected scope: any;
 
+  /**
+   * If true the component will automatically bind the component to riba if all required attributes are setted
+   */
+  protected autobind: boolean;
+
   constructor(element?: HTMLElement);
 
   protected template(): string | null;
+
+  /**
+   * returns a list of attributes wich are required until the riba binding starts
+   */
+  protected requiredAttributes(): string[];
 
   protected eventHandler(self: RibaComponent): EventHandler;
 
