@@ -10,7 +10,7 @@ import { Utils } from '../../utils';
  * Open link with pajax if the route is not the active route
  * Sets also the element active if his url is the current url
  */
-const viewBinder: BinderWrapper = (dispatcher: GlobalEvent, pjax: Pjax, prefetch: Prefetch) => {
+export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, pjax: Pjax, prefetch: Prefetch) => {
 
   const name = 'view';
   const debug = Debug('binders:view');
@@ -74,5 +74,3 @@ const viewBinder: BinderWrapper = (dispatcher: GlobalEvent, pjax: Pjax, prefetch
     name,
   };
 };
-
-export { viewBinder };

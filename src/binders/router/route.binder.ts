@@ -8,7 +8,7 @@ import { Utils } from '../../utils';
  * Open link with pajax if the route is not the active route
  * Sets also the element active if his url is the current url
  */
-const routeBinder: BinderWrapper = (dispatcher: GlobalEvent, pjax: Pjax, prefetch: Prefetch) => {
+export const routeBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, pjax: Pjax, prefetch: Prefetch) => {
 
   const name = 'route';
   const debug = Debug('binders:route');
@@ -18,10 +18,11 @@ const routeBinder: BinderWrapper = (dispatcher: GlobalEvent, pjax: Pjax, prefetc
     let newTab = false;
     const usePajax = true;
     const self = this;
+    const isAnkerHTMLElement = $el.prop('tagName') === 'A';
 
     debug('getBinder', el, url);
 
-    if (!url) {
+    if (!url && isAnkerHTMLElement) {
       url = $el.attr('href');
     }
 
@@ -32,7 +33,7 @@ const routeBinder: BinderWrapper = (dispatcher: GlobalEvent, pjax: Pjax, prefetc
     const location = Utils.getLocation();
     const host = location.protocol + '//' + location.hostname;
 
-    // nromalize url
+    // normalize url
     if (url && Utils.isAbsoluteUrl(url)) {
 
       // if is not an external link
@@ -44,24 +45,28 @@ const routeBinder: BinderWrapper = (dispatcher: GlobalEvent, pjax: Pjax, prefetc
       }
     }
 
-    const alreadyOnURL = (checkUrl?: string) => {
-      if (checkUrl) {
-        const pathname = Utils.getLocation().pathname;
-        debug('checkURL', pathname, checkUrl);
-        if (checkUrl === pathname) {
-          return true;
-        }
-      }
-      return false;
-    };
+    // set href if not set
+    if (isAnkerHTMLElement && !$el.attr('href') && url) {
+      $el.attr('href', url);
+    }
 
     const checkURL = (urlToCheck?: string) => {
       if (urlToCheck) {
-        if (alreadyOnURL(urlToCheck)) {
+        if (Utils.onRoute(urlToCheck)) {
           $el.addClass('active');
+
+          // check if element is radio input
+          if ($el.is(':radio')) {
+            $el.prop('checked', true);
+          }
           return true;
         }
         $el.removeClass('active');
+
+        // uncheck if element is radio input
+        if ($el.is(':radio')) {
+          $el.prop('checked', false);
+        }
       }
       return false;
     };
@@ -73,9 +78,13 @@ const routeBinder: BinderWrapper = (dispatcher: GlobalEvent, pjax: Pjax, prefetc
     }
 
     $el.off('click').on('click', (event: JQuery.Event<HTMLElement, null>) => {
-      debug('go to ', url);
-      event.preventDefault();
-      if (alreadyOnURL(url)) {
+      debug('go to', url);
+
+      // Do not go to ref without pajax
+      if (isAnkerHTMLElement) {
+        event.preventDefault();
+      }
+      if (Utils.onRoute(url)) {
         debug('already on this site');
       } else {
         if (url) {
@@ -84,7 +93,7 @@ const routeBinder: BinderWrapper = (dispatcher: GlobalEvent, pjax: Pjax, prefetc
       }
     });
 
-    if (usePajax && !newTab && !alreadyOnURL(url)) {
+    if (usePajax && !newTab && !Utils.onRoute(url)) {
       $el.off('mouseenter touchstart').on('mouseenter touchstart', (event: JQuery.Event<HTMLElement, null>) => {
         prefetch.onLinkEnter(event, url);
       });
@@ -98,5 +107,3 @@ const routeBinder: BinderWrapper = (dispatcher: GlobalEvent, pjax: Pjax, prefetc
     name,
   };
 };
-
-export { routeBinder };
