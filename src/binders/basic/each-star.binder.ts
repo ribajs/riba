@@ -14,10 +14,11 @@ export const eachStar: ITwoWayBinder<any[]> = {
         iterated: <View[]> [],
       };
       if (!el.parentNode) {
-        throw new Error('No parent node!');
+        // console.warn('No parent node!');
+      } else {
+        el.parentNode.insertBefore(this.marker, el);
+        el.parentNode.removeChild(el);
       }
-      el.parentNode.insertBefore(this.marker, el);
-      el.parentNode.removeChild(el);
     } else {
       this.customData.iterated.forEach((view: View)  => {
         view.bind();

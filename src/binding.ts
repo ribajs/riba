@@ -253,8 +253,7 @@ export class Binding implements IBindable {
      * Since 0.9 : doesn't execute functions unless backward compatibility is active
      * @see https://github.com/mikeric/rivets/blob/master/src/bindings.coffee#L87
      */
-    const executeFunctions = false; // if true the call formatter is not working
-    if ((value instanceof Function) && !(this.binder as ITwoWayBinder<any> ).function && executeFunctions) {
+    if ((value instanceof Function) && !(this.binder as ITwoWayBinder<any> ).function && this.view.options.executeFunctions) {
       // formatter is a function
       value = this.formattedValue(value.call(this.model));
     } else {

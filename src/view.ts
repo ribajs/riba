@@ -44,9 +44,10 @@ export class View {
     const view = new View((template as Node), models, binding.view.options);
     view.bind();
     if (!binding || !binding.marker || binding.marker.parentNode === null) {
-      throw new Error('[View] No parent node for binding!');
+      console.warn('[View] No parent node for binding!');
+    } else {
+      binding.marker.parentNode.insertBefore(template, anchorEl);
     }
-    binding.marker.parentNode.insertBefore(template, anchorEl);
     return view;
   }
 
@@ -154,7 +155,9 @@ export class View {
 
           if ((binder as ITwoWayBinder<any>).block) {
             this.buildBinding(node, nodeName, attribute.value, binder, args);
-            node.removeAttribute(attribute.name);
+            if (this.options.removeBinderAttributes) {
+              node.removeAttribute(attribute.name);
+            }
             return true;
           }
 
@@ -165,7 +168,9 @@ export class View {
       for (let i = 0; i < bindInfos.length; i++) {
         const bindInfo = bindInfos[i];
         this.buildBinding(node, bindInfo.nodeName, bindInfo.attr.value, bindInfo.binder, bindInfo.args);
-        node.removeAttribute(bindInfo.attr.name);
+        if (this.options.removeBinderAttributes) {
+          node.removeAttribute(bindInfo.attr.name);
+        }
       }
     }
 

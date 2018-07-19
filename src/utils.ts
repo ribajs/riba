@@ -307,6 +307,19 @@ export class Utils {
   }
 
   /**
+   * Check if we are on the route
+   */
+  public static onRoute = (checkUrl?: string) => {
+    if (checkUrl) {
+      const pathname = Utils.getLocation().pathname;
+      if (checkUrl === pathname) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
    * Given an url, return it without the hash
    *
    * @memberOf Barba.Utils

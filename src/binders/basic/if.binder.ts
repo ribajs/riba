@@ -11,10 +11,11 @@ export const ifBinder: ITwoWayBinder<boolean> = {
       this.marker = document.createComment(' tinybind: ' + this.type + ' ' + this.keypath + ' ');
       this.customData.attached = false;
       if (!el.parentNode) {
-        throw new Error('Element has no parent node');
+        // console.warn('Element has no parent node');
+      } else {
+        el.parentNode.insertBefore(this.marker, el);
+        el.parentNode.removeChild(el);
       }
-      el.parentNode.insertBefore(this.marker, el);
-      el.parentNode.removeChild(el);
     } else if ( this.customData.bound === false &&  this.customData.nested) {
       this.customData.nested.bind();
     }
@@ -38,15 +39,17 @@ export const ifBinder: ITwoWayBinder<boolean> = {
           this.customData.nested.bind();
         }
         if (!this.marker || !this.marker.parentNode) {
-          throw new Error('Marker has no parent node');
+          // console.warn('Marker has no parent node');
+        } else {
+          this.marker.parentNode.insertBefore(el, this.marker.nextSibling);
         }
-        this.marker.parentNode.insertBefore(el, this.marker.nextSibling);
         this.customData.attached = true;
       } else {
         if (!el.parentNode) {
-          throw new Error('Element has no parent node');
+          // console.warn('Element has no parent node');
+        } else {
+          el.parentNode.removeChild(el);
         }
-        el.parentNode.removeChild(el);
         this.customData.attached = false;
       }
     }

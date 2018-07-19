@@ -40,6 +40,10 @@ export interface IOptions {
   handler?: EventHandler;
 
   starBinders?: any;
+
+  removeBinderAttributes?: boolean;
+
+  executeFunctions?: boolean;
 }
 
 export declare interface IOptionsParam extends IExtensions, IOptions {}
@@ -68,6 +72,10 @@ export declare interface IViewOptions extends IOptionsParam {
   /** Augment the event handler of the on-* binder */
   handler?: EventHandler;
   starBinders: any;
+
+  removeBinderAttributes: boolean;
+
+  executeFunctions: boolean;
 }
 
 export class Tinybind {
@@ -78,7 +86,6 @@ export class Tinybind {
    * @param el The element the event was triggered from
    */
   public static handler(this: any, context: any, ev: Event, binding: Binding, el: HTMLElement) {
-    console.warn('handler', this);
     this.call(context, ev, binding.view.models, el);
   }
 
@@ -260,16 +267,22 @@ export class Tinybind {
   public getViewOptions(options?: IOptionsParam) {
     const viewOptions: IOptionsParam = {
       // EXTENSIONS
-      adapters: <IAdapters> new Object(),
-      binders: <IBinders<any>> new Object(null),
-      components: <IComponents> new Object(null),
-      formatters: <IFormatters> new Object(null),
+      adapters: <IAdapters> {},
+      binders: <IBinders<any>> {},
+      components: <IComponents> {},
+      formatters: <IFormatters> {},
 
       // other
-      starBinders: new Object(null),
+      starBinders: {},
 
       // sightglass
-      rootInterface: <Root> new Object(null),
+      rootInterface: <Root> {},
+
+      // Remove binder attributes after binding
+      removeBinderAttributes: true, // TODO fixme on false: Maximum call stack size exceeded
+
+      // Execute functions in bindings. Defaultis false since rivets 0.9. Set to true to be backward compatible with rivets 0.8.
+      executeFunctions: false,
     };
 
     if (options) {
