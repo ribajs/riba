@@ -1,8 +1,8 @@
 import Debug from 'debug';
 
-const consoleDebug = Debug('formatter');
+const debuggurito = Debug('formatter');
 
 export const debug = (target: any) => {
-  consoleDebug(target);
+  debuggurito(target);
   return target;
 };

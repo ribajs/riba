@@ -1,6 +1,7 @@
 import { IFormatters } from '../../formatter.service';
 
 // special helper formatters
+import { args } from './args.formatter';
 import { debug } from './debug.formatter';
 import { def } from './def.formatter';
 import { call } from './call.formatter';
@@ -40,8 +41,8 @@ import { currency } from './currency.formatter';
 //   return CartJS.Utils.getSizedImageUrl(src, size);
 // };
 
-export { debug, def, currency };
+export { args, debug, def, currency };
 
 export const specialFormatters: IFormatters = {
-  debug, def, call, currency,
+  args, debug, def, call, currency,
 };

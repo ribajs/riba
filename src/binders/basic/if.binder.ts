@@ -33,7 +33,6 @@ export const ifBinder: ITwoWayBinder<boolean> = {
     value = !!value;
     if (value !== this.customData.attached) {
       if (value) {
-
         if (! this.customData.nested) {
           this.customData.nested = new View(el, this.view.models, this.view.options);
           this.customData.nested.bind();

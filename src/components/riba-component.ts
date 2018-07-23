@@ -125,7 +125,23 @@ export abstract class RibaComponent extends FakeHTMLElement {
    */
   protected callFormatterHandler(self: this): any {
     return (fn: (...args: any[]) => any, ...args: any[]) => {
+      self.debug('callFormatterHandler', this, fn);
       return fn.apply(self, args);
+    };
+  }
+
+  /**
+   * Extra args formatter to avoid the "this" context problem
+   *
+   * Sets arguments to a function without directly call them
+   * @param fn The function you wish to call
+   * @param args the parameters you wish to call the function with
+   */
+  protected argsFormatterHandler(self: this): any {
+    return (fn: (...args: any[]) => any, ...fnArgs: any[]): any => {
+      return (event: Event, scope: any, el: HTMLElement, binding: any) => {
+        return fn.apply(self, fnArgs);
+      };
     };
   }
 
@@ -199,6 +215,7 @@ export abstract class RibaComponent extends FakeHTMLElement {
       handler: this.eventHandler(this),
       formatters: {
         call: this.callFormatterHandler(this),
+        args: this.argsFormatterHandler(this),
       },
     });
 
