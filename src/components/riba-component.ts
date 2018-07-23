@@ -140,6 +140,11 @@ export abstract class RibaComponent extends FakeHTMLElement {
   protected argsFormatterHandler(self: this): any {
     return (fn: (...args: any[]) => any, ...fnArgs: any[]): any => {
       return (event: Event, scope: any, el: HTMLElement, binding: any) => {
+        // append the event handler args to passed args
+        fnArgs.push(event);
+        fnArgs.push(scope);
+        fnArgs.push(el);
+        fnArgs.push(binding);
         return fn.apply(self, fnArgs);
       };
     };

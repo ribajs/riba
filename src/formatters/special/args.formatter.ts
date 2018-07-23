@@ -11,6 +11,11 @@ import { IFormatterFuntionParam, IFunctionFormatter } from './call.formatter';
  */
 export const args: IFunctionFormatter = function(fn: IFormatterFuntionParam, ...fnArgs: any[]) {
   return (event: Event, scope: any, el: HTMLElement, binding: any) => {
+    // append the event handler args to passed args
+    fnArgs.push(event);
+    fnArgs.push(scope);
+    fnArgs.push(el);
+    fnArgs.push(binding);
     return fn.apply(this, fnArgs);
   };
 };
