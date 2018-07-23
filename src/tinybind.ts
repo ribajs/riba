@@ -94,30 +94,7 @@ export class Tinybind {
    * back to using this binder.
    */
   public static fallbackBinder(this: Binding, el: HTMLElement, newValue: any) {
-    if (!this.type) {
-      throw new Error('Can\'t set atttribute of ' + this.type);
-    }
-
-    const oldValue = el.getAttribute(this.type);
-
-    if (newValue != null) {
-      if (oldValue !== newValue) {
-        el.setAttribute(this.type, newValue);
-      }
-    } else {
-      el.removeAttribute(this.type);
-    }
-
-    if (oldValue !== newValue) {
-      // trigger event to catch them in web components to call the attributeChangedCallback method
-      el.dispatchEvent(new CustomEvent('attribute-changed', { detail: {
-        name: this.type,
-        oldValue,
-        newValue,
-        namespace: null, // TODO
-      }}));
-    }
-
+    console.warn('No binder found for ' + this.type);
   }
 
   /** singleton instance */

@@ -150,7 +150,11 @@ export class View {
           }
 
           if (!binder) {
-            binder = Tinybind.fallbackBinder;
+            if (this.options.binders['*']) {
+              binder = this.options.binders['*'];
+            } else {
+              binder = Tinybind.fallbackBinder;
+            }
           }
 
           if ((binder as ITwoWayBinder<any>).block) {

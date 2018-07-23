@@ -292,11 +292,12 @@ export class Binding implements IBindable {
   /**
    * Publishes the value currently set on the input element back to the model.
    */
-  public publish() {
+  public publish(forceValue?: any) {
     if (this.observer) {
       if (this.formatters === null) {
         throw new Error('formatters is null');
       }
+
       const value = this.formatters.reduceRight((result: any/*check type*/, declaration: string /*check type*/, index: number) => {
         const args = declaration.split(Binding.FORMATTER_SPLIT);
         const id = args.shift();

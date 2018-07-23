@@ -14,6 +14,7 @@ import { hide } from './hide.binder';
 import { show } from './show.binder';
 import { text } from './text.binder';
 import { valueBinder } from './value.binder';
+import { starBinder } from './star.binder';
 
 /**
  * Gets the basiic binders
@@ -95,6 +96,12 @@ export const basicBindersWrapper = (jQuery: JQueryStatic) => {
      * Inserts and binds the element and it's child nodes into the DOM when true.
      */
     'if': ifBinder,
+
+    /**
+     * Sets the attribute on the element. If no binder above is matched it will fall
+     * back to using this binder.
+     */
+    '*': starBinder,
   };
   return binders;
 };
