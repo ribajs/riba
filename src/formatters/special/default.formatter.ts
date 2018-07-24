@@ -4,7 +4,7 @@ import { Utils } from '../../utils';
  * Set default value
  * @see https://gist.github.com/der-On/cdafe908847e2b882691
  */
-export const def = (value: any, defaultValue: any) => {
+export const defaultBinder = (value: any, defaultValue: any) => {
   if (Utils.isDefined(value)) {
     if (Utils.isString(value)) {
       if (value.length > 0) {
