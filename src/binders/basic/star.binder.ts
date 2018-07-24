@@ -1,5 +1,7 @@
 import { ITwoWayBinder, BinderWrapper } from '../../binder.service';
 
+// TODO this as custom binder? No web component staff for all fallback finders? eg rv-ca-* ca stands for component attribute
+
 /**
  * Event handler to liste for publish binder event for two-way-binding in web components
  */

@@ -3,6 +3,7 @@ import { IBinders, ITwoWayBinder, IOneWayBinder } from '../../binder.service';
 import { addClass } from './class.binder';
 import { checked } from './checked.binder';
 import { classStarJQuery } from './class-star.binder';
+import { cssStarBinder } from './css-star.binder';
 import { enabled } from './enabled.binder';
 import { disabled } from './disabled.binder';
 import { onStarBinderWrapper } from './on-star.binder';
@@ -49,6 +50,16 @@ export const basicBindersWrapper = (jQuery: JQueryStatic) => {
      * Adds or removes the class from the element when value is true or false.
      */
     'class-*': classStarJQuery,
+
+    /**
+     * Adds a style to the element.
+     *
+     * ```html
+     * <div rv-css-background-color="'blue'"></div>
+     * ```
+     * @see http://api.jquery.com/css/
+     */
+    'css-*': cssStarBinder,
 
     /**
      * Sets the element's text value.
