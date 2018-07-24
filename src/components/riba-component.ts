@@ -236,8 +236,7 @@ export abstract class RibaComponent extends FakeHTMLElement {
     this.debug('adoptedCallback called', oldDocument, newDocument);
   }
 
-  protected bind() {
-    this.beforeBind();
+  protected async bind() {
     if (this.view) {
       this.debug('component already bounded');
       return;
@@ -247,6 +246,9 @@ export abstract class RibaComponent extends FakeHTMLElement {
       this.debug('not all required attributes are set for bind');
       return;
     }
+
+    await this.beforeBind();
+
     this.tinybind = new Tinybind();
     const viewOptions = this.tinybind.getViewOptions({
       handler: this.eventHandler(this),
@@ -263,15 +265,15 @@ export abstract class RibaComponent extends FakeHTMLElement {
     this.view = new View(Array.prototype.slice.call(this.el.childNodes), this.scope, viewOptions);
     this.scope = this.view.models;
     this.view.bind();
-    this.afterBind();
+    await this.afterBind();
     return this.view;
   }
 
-  protected beforeBind() {
+  protected async beforeBind(): Promise<any> {
     this.debug('beforeBind');
   }
 
-  protected afterBind() {
+  protected async afterBind(): Promise<any> {
     this.debug('afterBind');
   }
 

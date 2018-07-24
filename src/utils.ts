@@ -6,6 +6,16 @@ export interface IDeferred {
   reject: any;
 }
 
+export const getJSON = async (url: string, data?: any) => {
+  return new Promise<any>((resolve, reject) => {
+    jQuery.getJSON(url, data)
+    .done((resolve))
+    .fail(( jqxhr, textStatus, error ) => {
+      reject(error);
+    });
+  });
+};
+
 /**
  * Test if string is a json string
  * @param str
@@ -88,15 +98,6 @@ export const camelCase = (str: string) => {
 export class Utils {
 
   /**
-   * Time in millisecond after the xhr request goes in timeout
-   *
-   * @memberOf Barba.Utils
-   * @type {Number}
-   * @default
-   */
-  public static xhrTimeout: 5000;
-
-  /**
    * Check if value is undefined
    */
   public static isUndefined(value?: any) {
@@ -134,7 +135,7 @@ export class Utils {
   }
 
   /**
-   * heck if type is Object
+   * Check if type is Object
    * @see https://stackoverflow.com/a/4775737/1465919
    */
   public static isObject(value?: any) {
@@ -227,9 +228,10 @@ export class Utils {
    *
    * @memberOf Barba.Utils
    * @param  {string} url
+   * @param  {number} xhrTimeout Time in millisecond after the xhr request goes in timeout
    * @return {Promise}
    */
-  public static xhr(url: string) {
+  public static xhr(url: string, xhrTimeout = 5000) {
     const deferred = this.deferred();
     const req = new XMLHttpRequest();
 
@@ -248,7 +250,7 @@ export class Utils {
     };
 
     req.open('GET', url);
-    req.timeout = this.xhrTimeout;
+    req.timeout = xhrTimeout;
     req.setRequestHeader('x-barba', 'yes');
     req.send();
 

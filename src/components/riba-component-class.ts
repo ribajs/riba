@@ -60,5 +60,5 @@ export declare class RibaComponentClass extends RibaComponent {
    */
   protected adoptedCallback(oldDocument: Document, newDocument: Document): void;
 
-  protected bind(): View;
+  protected bind(): Promise<View>;
 }

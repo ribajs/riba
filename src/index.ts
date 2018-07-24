@@ -1,3 +1,4 @@
+import './polyfills';
 export * from './adapter';
 export * from './binders/router/router.binders';
 export * from './binders/basic/basic.binders';
