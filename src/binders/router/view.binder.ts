@@ -1,7 +1,7 @@
 import Debug from 'debug';
 import JQuery from 'jquery';
 import { IOneWayBinder, BinderWrapper } from '../../binder.service';
-import { Pjax, Prefetch, IState } from './barba/barba';
+import { Pjax, Prefetch, IState, HideShowTransition, ITransition } from './barba/barba';
 import { GlobalEvent } from '../../global-event';
 import { View as RivetsView } from '../../view';
 import { Utils } from '../../utils';
@@ -18,6 +18,12 @@ export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, pjax: 
   const binder: IOneWayBinder<string> = function(el: HTMLElement, options: any) {
     const $wrapper = JQuery(el);
     const self = this;
+
+    // Set default options
+    options = options || {};
+    options.listenAllLinks = options.listenAllLinks || true;
+    options.transition = options.transition || new HideShowTransition();
+    debug('options', options);
 
     /*
      * Make the dispatcher available in the model to register event handlers.
@@ -65,7 +71,7 @@ export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, pjax: 
 
     setTimeout(() => {
       prefetch.init();
-      pjax.start($wrapper);
+      pjax.start($wrapper, options.listenAllLinks, options.transition);
     }, 0);
   };
 

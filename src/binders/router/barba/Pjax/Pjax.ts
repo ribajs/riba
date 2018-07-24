@@ -100,6 +100,11 @@ class Pjax {
    * @return {string} href
    */
   public static getHref(el: HTMLAnchorElement | SVGAElement): string | undefined {
+    if (!el) {
+      console.warn('No element to get href from');
+      return undefined;
+    }
+
     if (el.getAttribute && typeof el.getAttribute('xlink:href') === 'string') {
       return el.getAttribute('xlink:href') || undefined;
     }
@@ -155,15 +160,14 @@ class Pjax {
   *
   * @memberOf Barba.Pjax
   */
-  public start($wrapper: JQuery<HTMLElement>, transition?: ITransition) {
+  public start($wrapper: JQuery<HTMLElement>, listenAllLinks: boolean, transition?: ITransition) {
 
     this.dom = new Dom($wrapper);
-
     if (transition) {
       this.transition = transition;
     }
 
-    this.init($wrapper);
+    this.init($wrapper, listenAllLinks);
   }
 
  /**
@@ -219,11 +223,13 @@ class Pjax {
   * @memberOf Barba.Pjax
   * @protected
   */
- protected bindEvents() {
-    // we use the rv-router for this
-    // document.addEventListener('click',
-    //   this.onLinkClick.bind(this),
-    // );
+ protected bindEvents(listenAllLinks: boolean) {
+    // you can also use the rv-router for this
+    if (listenAllLinks) {
+      document.addEventListener('click',
+        this.onLinkClick.bind(this),
+      );
+    }
 
     window.addEventListener('popstate',
       this.onStateChange.bind(this),
@@ -417,7 +423,7 @@ class Pjax {
    * @memberOf Barba.Pjax
    * @protected
    */
-  protected init($wrapper: JQuery<HTMLElement>) {
+  protected init($wrapper: JQuery<HTMLElement>, listenAllLinks: boolean) {
     if (!this.dom) {
       throw new Error('[Pjax] you need to call the start method first!');
     }
@@ -442,7 +448,7 @@ class Pjax {
       true, // true if this is the first time newPageReady is tiggered / true on initialisation
     );
     this.dispatcher.trigger('transitionCompleted', this.history.currentStatus());
-    this.bindEvents();
+    this.bindEvents(listenAllLinks);
   }
 }
 

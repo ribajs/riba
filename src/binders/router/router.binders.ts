@@ -4,7 +4,6 @@ import { viewBinderWrapper } from './view.binder';
 import { routeBinderWrapper } from './route.binder';
 import { activeOnRouteBinderWrapper } from './active-on-route.binder';
 
-// TODO make to singleton
 const dispatcher = new GlobalEvent();
 const pjax = new Pjax();
 const prefetch = new Prefetch();

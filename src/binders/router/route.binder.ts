@@ -81,9 +81,7 @@ export const routeBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, pjax:
       debug('go to', url);
 
       // Do not go to ref without pajax
-      if (isAnkerHTMLElement) {
-        event.preventDefault();
-      }
+      event.preventDefault();
       if (Utils.onRoute(url)) {
         debug('already on this site');
       } else {
