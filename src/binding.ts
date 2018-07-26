@@ -97,7 +97,7 @@ export class Binding implements IBindable {
    */
   public customData?: any;
 
-  private debug = Debug('riba:Binding');
+  private debug: Debug.IDebugger;
 
   /**
    * All information about the binding is passed into the constructor; the
@@ -120,6 +120,7 @@ export class Binding implements IBindable {
     this.formatters = formatters;
     this.model = undefined;
     this.customData = {};
+    this.debug = Debug('riba:Binding');
 
     if (identifier && type) {
       this.args = this.getStarArguments(identifier, type);
@@ -127,9 +128,7 @@ export class Binding implements IBindable {
       this.args = new Array<string | number>();
     }
 
-    if (this.args.length > 1) {
-      this.debug('this.args', this.args);
-    }
+    // this.debug('constructor', this.args, identifier, type);
   }
 
   /**

@@ -145,7 +145,7 @@ export class View {
             for (let k = 0; k < starBinders.length; k++) {
               identifier = starBinders[k];
               const regexp = new RegExp(`^${identifier.replace(/\*/g, '.+')}$`);
-              if (regexp.test(nodeName) && nodeName.split('-')[0] === identifier.split('-')[0]) {
+              if (regexp.test(nodeName)) {
                 binder = this.options.binders[identifier];
                 break;
               }
