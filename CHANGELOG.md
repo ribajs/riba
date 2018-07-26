@@ -14,11 +14,11 @@
 - Binders
   - The event handler now also passes the html element the event comes from
   - Added support for multistar binders
-  - New multistar binder called `range-each-*-*-*` to iterate only over the specified range, e.g. `<img rv-range-each-image-0-5="images" rv src="image.src" />`
 
 - Formatters
   - Revert the call formatter from Rivets to call functions
   - New args formatter to pass arguments to the on-* binder
+  - New range formatter to get a subset of arra e.g. `<img rv-each-image="images | range 0 5" rv-src="image.src" />`
 
 ## 0.15.0
 

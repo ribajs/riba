@@ -12,9 +12,10 @@ import { match } from './match.formatter';
 import { count } from './count.formatter';
 import { empty } from './empty.formatter';
 import { isLast } from './isLast.formatter';
+import { range } from './range.formatter';
 
-export { parse, json, first, last, contains, get, set, match, count, empty, isLast };
+export { parse, json, first, last, contains, get, set, match, count, empty, isLast, range };
 
 export const propertyFormatters: IFormatters = {
-  parse, json, first, last, contains, get, set, match, count, empty, isLast,
+  parse, json, first, last, contains, get, set, match, count, empty, isLast, range,
 };
