@@ -2,6 +2,8 @@ export * from './HistoryManager';
 export * from './Dom';
 export * from './Prefetch';
 
+import Debug from 'debug';
+
 import { GlobalEvent } from '../../../../global-event';
 import { Utils } from '../../../../utils';
 import { BaseCache } from '../Cache';
@@ -143,6 +145,8 @@ class Pjax {
   private dispatcher = new GlobalEvent();
 
   private transition: ITransition = new HideShowTransition();
+
+  private debug = Debug('router:Pjax');
 
   /**
    * Creates an singleton instance of Pjax.

@@ -4,6 +4,7 @@ import { Binder, IOneWayBinder, ITwoWayBinder } from './binder.service';
 import { View } from './view';
 import { getInputValue } from './utils';
 import { IOneTwoFormatter } from './formatter.service';
+import Debug from 'debug';
 
 export interface IBindable {
 
@@ -96,6 +97,8 @@ export class Binding implements IBindable {
    */
   public customData?: any;
 
+  private debug = Debug('riba:Binding');
+
   /**
    * All information about the binding is passed into the constructor; the
    * containing view, the DOM node, the type of binding, the model object and the
@@ -108,16 +111,28 @@ export class Binding implements IBindable {
    * @param {*} args The start binders, on `class-*` args[0] wil be the classname.
    * @param {*} formatters
    */
-  constructor(view: View, el: HTMLElement, type: string | null, keypath: string | undefined, binder: Binder<any>, args: string[] | null, formatters: string[] | null) {
+  constructor(view: View, el: HTMLElement, type: string | null, keypath: string | undefined, binder: Binder<any>, formatters: string[] | null, identifier: string | null) {
     this.view = view;
     this.el = el;
     this.type = type;
     this.keypath = keypath;
     this.binder = binder;
-    this.args = args;
+    this.args = [];
     this.formatters = formatters;
     this.model = undefined;
     this.customData = {};
+
+    if (identifier && type) {
+      const splittedIdentifier = identifier.split('*');
+      // how many stars has the identifier?
+      const starCount = splittedIdentifier.length - 1;
+      if (starCount <= 1) {
+        this.args = [type.slice(identifier.length - 1)];
+      } else {
+        this.args = [type.slice(identifier.length - 1)];
+        this.debug('new multistar binder', identifier, type, this.args);
+      }
+    }
 
   }
 

@@ -22,7 +22,7 @@ class Prefetch {
    */
   public ignoreClassLink = 'no-barba-prefetch';
 
-  private debug = Debug('Prefetch');
+  private debug = Debug('router:Prefetch');
 
   /**
    * Creates an singleton instance of Prefetch.

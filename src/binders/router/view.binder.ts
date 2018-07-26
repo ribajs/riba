@@ -70,7 +70,7 @@ export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, pjax: 
     });
 
     setTimeout(() => {
-      prefetch.init();
+      prefetch.init(options.listenAllLinks);
       pjax.start($wrapper, options.listenAllLinks, options.transition);
     }, 0);
   };

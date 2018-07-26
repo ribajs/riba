@@ -77,11 +77,11 @@ export class View {
     this.build();
   }
 
-  public buildBinding(node: HTMLElement | Text, type: string | null, declaration: string, binder: Binder<any>, args: string[] | null) {
+  public buildBinding(node: HTMLElement | Text, type: string | null, declaration: string, binder: Binder<any>, identifier: string | null) {
     const parsedDeclaration = parseDeclaration(declaration);
     const keypath = parsedDeclaration.keypath;
     const pipes = parsedDeclaration.pipes;
-    this.bindings.push(new Binding((this as View), (node as HTMLElement), type, keypath, binder, args, pipes));
+    this.bindings.push(new Binding((this as View), (node as HTMLElement), type, keypath, binder, pipes, identifier));
   }
 
   /**
@@ -126,7 +126,7 @@ export class View {
     let nodeName;
     let binder;
     let identifier;
-    let args;
+    // let args;
 
     // bind attribute binders if avaible
     if (this.options.binders) {
@@ -136,14 +136,14 @@ export class View {
         if (attribute.name.indexOf(bindingPrefix) === 0) {
           nodeName = attribute.name.slice(bindingPrefix.length);
           binder = this.options.binders[nodeName];
-          args = [];
+          // args = [];
 
           if (!binder) {
             for (let k = 0; k < starBinders.length; k++) {
               identifier = starBinders[k];
               if (nodeName.slice(0, identifier.length - 1) === identifier.slice(0, -1)) {
                 binder = this.options.binders[identifier];
-                args.push(nodeName.slice(identifier.length - 1));
+                // args.push(nodeName.slice(identifier.length - 1));
                 break;
               }
             }
@@ -157,21 +157,22 @@ export class View {
             }
           }
 
+          // if block is set childs not bound (the binder bound it by itself)
           if ((binder as ITwoWayBinder<any>).block) {
-            this.buildBinding(node, nodeName, attribute.value, binder, args);
+            this.buildBinding(node, nodeName, attribute.value, binder, identifier);
             if (this.options.removeBinderAttributes) {
               node.removeAttribute(attribute.name);
             }
             return true;
           }
 
-          bindInfos.push({attr: attribute, binder, nodeName, args});
+          bindInfos.push({attr: attribute, binder, nodeName});
         }
       }
 
       for (let i = 0; i < bindInfos.length; i++) {
         const bindInfo = bindInfos[i];
-        this.buildBinding(node, bindInfo.nodeName, bindInfo.attr.value, bindInfo.binder, bindInfo.args);
+        this.buildBinding(node, bindInfo.nodeName, bindInfo.attr.value, bindInfo.binder, identifier);
         if (this.options.removeBinderAttributes) {
           node.removeAttribute(bindInfo.attr.name);
         }
