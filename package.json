@@ -11,6 +11,7 @@
   "main": "./src/index.ts",
   "browser": "./dist/tinybind.min.js",
   "source": "./src/index.ts",
+  "license": "MIT",
   "licenses": [
     {
       "type": "MIT",
@@ -42,7 +43,7 @@
     "harp": "^0.27.0",
     "mocha": "^5.2.0",
     "mocha-chrome": "^1.1.0",
-    "should": "^13.2.1",
+    "should": "^13.2.2",
     "sinon": "^6.1.4",
     "tslint": "^5.11.0",
     "typescript": "^2.9.2",

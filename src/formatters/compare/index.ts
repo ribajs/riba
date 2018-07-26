@@ -11,15 +11,17 @@ import { IFormatters } from '../../formatter.service';
 // compare functions
 import { and } from './and.formatter';
 import { between } from './between.formatter';
+import { egt } from './egt.formatter';
 import { eq } from './eq.formatter';
+import { gt } from './gt.formatter';
 import { ne } from './ne.formatter';
 import { lt } from './lt.formatter';
 import { elt } from './elt.formatter';
 import { or } from './or.formatter';
 import { not } from './not.formatter';
 
-export { and, between, eq, ne, lt, elt, or, not };
+export { and, between, egt, eq, gt, ne, lt, elt, or, not };
 
 export const compareFormatters: IFormatters = {
-  and, between, elt, eq, lt, ne, not, or,
+  and, between, egt, eq, gt, ne, lt, elt, or, not,
 };

@@ -9,7 +9,7 @@ import { disabled } from './disabled.binder';
 import { onStarBinderWrapper } from './on-star.binder';
 import { removeClass } from './remove-class.binder';
 import { ifBinder } from './if.binder';
-import { eachStar } from './each-star.binder';
+import { eachStarBinder } from './each-star.binder';
 import { html } from './html.binder';
 import { hide } from './hide.binder';
 import { show } from './show.binder';
@@ -32,7 +32,12 @@ export const basicBindersWrapper = (jQuery: JQueryStatic) => {
     /**
      * Appends bound instances of the element in place for each item in the array.
      */
-    'each-*': eachStar,
+    'each-*': eachStarBinder,
+
+    /**
+     * Like each-* but bounds instances of the element only if the index is in the start and end range
+     */
+    'each-*-*-*': eachStarBinder,
 
     /**
      * Adds the class from the element setted by the attribute value

@@ -55,7 +55,7 @@ export declare interface IShopifyProduct {
   compare_at_price_varies: boolean;
   created_at: Date;
   description: string;
-  featured_image: IShopifyProductImage;
+  featured_image: string;
   handle: string;
   id: number;
   images: string[];
