@@ -89,6 +89,7 @@ export const routeBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, pjax:
           pjax.goTo(url, newTab);
         }
       }
+
     });
 
     if (usePajax && !newTab && !Utils.onRoute(url)) {
