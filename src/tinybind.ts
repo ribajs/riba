@@ -285,7 +285,7 @@ export class Tinybind {
     // get all starBinders from available binders
     if (viewOptions.binders) {
       viewOptions.starBinders = Object.keys(viewOptions.binders).filter((key) => {
-        return key.indexOf('*') > 0;
+        return key.indexOf('*') >= 1; // Should ot start with *
       });
     }
 

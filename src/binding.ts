@@ -2,7 +2,7 @@ import { PRIMITIVE, KEYPATH, parseType } from './parsers';
 import { Observer, IObserverSyncCallback } from './observer';
 import { Binder, IOneWayBinder, ITwoWayBinder } from './binder.service';
 import { View } from './view';
-import { getInputValue } from './utils';
+import { getInputValue, Utils } from './utils';
 import { IOneTwoFormatter } from './formatter.service';
 import Debug from 'debug';
 
@@ -79,7 +79,7 @@ export class Binding implements IBindable {
   /**
    * Arguments parsed from star binders, e.g. on foo-*-* args[0] is the first star, args[1] the second-
    */
-  public args: string[] | null;
+  public args: Array<string | number>;
   /**
    *
    */
@@ -117,23 +117,19 @@ export class Binding implements IBindable {
     this.type = type;
     this.keypath = keypath;
     this.binder = binder;
-    this.args = [];
     this.formatters = formatters;
     this.model = undefined;
     this.customData = {};
 
     if (identifier && type) {
-      const splittedIdentifier = identifier.split('*');
-      // how many stars has the identifier?
-      const starCount = splittedIdentifier.length - 1;
-      if (starCount <= 1) {
-        this.args = [type.slice(identifier.length - 1)];
-      } else {
-        this.args = [type.slice(identifier.length - 1)];
-        this.debug('new multistar binder', identifier, type, this.args);
-      }
+      this.args = this.getStarArguments(identifier, type);
+    } else {
+      this.args = new Array<string | number>();
     }
 
+    if (this.args.length > 1) {
+      this.debug('this.args', this.args);
+    }
   }
 
   /**
@@ -424,5 +420,49 @@ export class Binding implements IBindable {
     } else {
       return getInputValue(el);
     }
+  }
+
+  private getStarArguments(identifier: string, type: string) {
+    const args = new Array<string | number>();
+    const regexp = new RegExp(`^${identifier.replace(/\*/g, '.+')}$`);
+    if (regexp.test(type) && type.split('-')[0] === identifier.split('-')[0]) {
+      // this.debug('matches', identifier, type);
+    } else {
+      if (identifier !== '*') {
+        console.error('Nodename not matchs the identifier,', identifier, type);
+      }
+    }
+
+    const splittedIdentifier = identifier.split('*');
+    // splittedIdentifier.pop();
+    if (splittedIdentifier.length > 0) {
+      // how many stars has the identifier?
+      const starCount = splittedIdentifier.length - 1;
+      if (starCount <= 1) {
+        args.push(type.slice(identifier.length - 1));
+      } else {
+        /**
+         * On more than one star this is a multi star binder
+         * We split the identifier on each star and use the identifier pieces as a serperator
+         */
+        const subIdentifier = splittedIdentifier[0];
+        let argsString = type.slice(subIdentifier.length);
+        splittedIdentifier.forEach((separator, index) => {
+          if (index > 0) {
+            let arg: string | number = argsString.split(separator)[0];
+            // the rest of the string
+            if (index === splittedIdentifier.length - 1) {
+              arg = argsString;
+            }
+            if (Utils.isNumber(arg)) {
+              arg = Number(arg);
+            }
+            argsString = argsString.substring(argsString.indexOf(separator) + 1);
+            args.push(arg);
+          }
+        });
+      }
+    }
+    return args;
   }
 }

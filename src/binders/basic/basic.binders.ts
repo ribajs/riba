@@ -37,7 +37,7 @@ export const basicBindersWrapper = (jQuery: JQueryStatic) => {
     /**
      * Like each-* but bounds instances of the element only if the index is in the start and end range
      */
-    'each-*-*-*': eachStarBinder,
+    'range-each-*-*-*': eachStarBinder,
 
     /**
      * Adds the class from the element setted by the attribute value

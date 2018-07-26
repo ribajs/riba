@@ -5,6 +5,7 @@
 - Web Components
   - Start a new implementation of components by following the Web Components v1 [Specs](https://developer.mozilla.org/de/docs/Web/Web_Components)
   - Fallback if customElements.define fails or is not supported
+  - Tow-Way-Databinding by calling the publish method
 
 - Classic Components
   - Now also work without an HTML template and then use their already setted child elements instead
@@ -12,9 +13,12 @@
 
 - Binders
   - The event handler now also passes the html element the event comes from
+  - Added support for multistar binders
+  - New multistar binder called `range-each-*-*-*` to iterate only over the specified range, e.g. `<img rv-range-each-image-0-5="images" rv src="image.src" />`
 
 - Formatters
   - Revert the call formatter from Rivets to call functions
+  - New args formatter to pass arguments to the on-* binder
 
 ## 0.15.0
 

@@ -135,18 +135,19 @@ export function parseNode(view: View, node: IDataElement, templateDelimiters: Ar
     }
 
     if (tokens && tokens.length) {
-      if (!node.parentNode) {
-        throw new Error('[View] Node (TEXT_NODE) has no parent node');
-      }
       for (let i = 0; i < tokens.length; i++) {
         const token = tokens[i];
         const text = document.createTextNode(token.value);
-        node.parentNode.insertBefore(text, node);
+        if (node.parentNode) {
+          node.parentNode.insertBefore(text, node);
+        }
         if (token.type === 1) {
           view.buildBinding(text, null, token.value, View.textBinder, null);
         }
       }
-      node.parentNode.removeChild(node);
+      if (node.parentNode) {
+        node.parentNode.removeChild(node);
+      }
     }
     block = true;
     // if node.nodeType === 1 === Node.ELEMENT_NODE

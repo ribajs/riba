@@ -123,41 +123,46 @@ export class View {
     const attributes = node.attributes;
     const bindInfos = [];
     const starBinders = this.options.starBinders;
-    let nodeName;
-    let binder;
-    let identifier;
-    // let args;
 
-    // bind attribute binders if avaible
+    // bind attribute binders if available
     if (this.options.binders) {
       for (let i = 0, len = attributes.length; i < len; i++) {
+        let nodeName = null;
+        let binder = null;
+        let identifier = null;
         const attribute = attributes[i];
         // if attribute starts with the binding prefix. E.g. rv
         if (attribute.name.indexOf(bindingPrefix) === 0) {
           nodeName = attribute.name.slice(bindingPrefix.length);
-          binder = this.options.binders[nodeName];
-          // args = [];
+          // if binder is not a starBinder binder should be setted
+          if (this.options.binders.hasOwnProperty(nodeName)) {
+            binder = this.options.binders[nodeName];
+          }
 
-          if (!binder) {
+          if (binder === null) {
+            // seems to be a star binder (because binder was not set)
+            // Check if any starBinder matchs
             for (let k = 0; k < starBinders.length; k++) {
               identifier = starBinders[k];
-              if (nodeName.slice(0, identifier.length - 1) === identifier.slice(0, -1)) {
+              const regexp = new RegExp(`^${identifier.replace(/\*/g, '.+')}$`);
+              if (regexp.test(nodeName) && nodeName.split('-')[0] === identifier.split('-')[0]) {
                 binder = this.options.binders[identifier];
-                // args.push(nodeName.slice(identifier.length - 1));
                 break;
               }
             }
           }
 
-          if (!binder) {
-            if (this.options.binders['*']) {
+          if (binder === null) {
+            if (this.options.binders.hasOwnProperty('*')) {
               binder = this.options.binders['*'];
+              identifier = '*';
             } else {
               binder = Tinybind.fallbackBinder;
             }
           }
 
           // if block is set childs not bound (the binder bound it by itself)
+          // and build binding directly (do not push it to bindInfos array)
           if ((binder as ITwoWayBinder<any>).block) {
             this.buildBinding(node, nodeName, attribute.value, binder, identifier);
             if (this.options.removeBinderAttributes) {
@@ -166,13 +171,13 @@ export class View {
             return true;
           }
 
-          bindInfos.push({attr: attribute, binder, nodeName});
+          bindInfos.push({attr: attribute, binder, nodeName, identifier});
         }
       }
 
       for (let i = 0; i < bindInfos.length; i++) {
         const bindInfo = bindInfos[i];
-        this.buildBinding(node, bindInfo.nodeName, bindInfo.attr.value, bindInfo.binder, identifier);
+        this.buildBinding(node, bindInfo.nodeName, bindInfo.attr.value, bindInfo.binder, bindInfo.identifier);
         if (this.options.removeBinderAttributes) {
           node.removeAttribute(bindInfo.attr.name);
         }
@@ -181,7 +186,7 @@ export class View {
 
     // bind components
     if (!block) {
-      nodeName = node.nodeName.toLowerCase();
+      const nodeName = node.nodeName.toLowerCase();
       if (this.options.components && this.options.components[nodeName] && !node._bound) {
 
         const type = ComponentService.type(this.options.components[nodeName]);

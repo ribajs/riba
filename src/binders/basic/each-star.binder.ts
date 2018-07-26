@@ -38,12 +38,12 @@ export const eachStarBinder: ITwoWayBinder<any[]> = {
     if (this.args === null) {
       throw new Error('args is null');
     }
-    const modelName = this.args[0];
+    const modelName = this.args[0] as string;
     collection = collection || [];
     // start value to iterate over
     const start = Number(this.args[1] || 0);
     // end value to iterate over
-    const end = Number(this.args[2] || collection.length - 1);
+    const end = this.args[2] && this.args[2] !== 'x' ? this.args[2] : collection.length - 1;
 
     // console.warn('start end', modelName, start, end);
 
