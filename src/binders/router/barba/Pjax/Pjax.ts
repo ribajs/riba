@@ -81,6 +81,11 @@ class Pjax {
       return false;
     }
 
+    // Ignore case if router binder manages the link TODO use tinybind prefix
+    if (element.getAttribute && typeof element.hasAttribute('rv-route')) {
+      return false;
+    }
+
     // In case you're trying to load the same page
     if (Utils.cleanLink(href) === Utils.cleanLink(location.href)) {
       return false;
