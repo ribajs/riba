@@ -86,16 +86,16 @@ class Pjax {
       return false;
     }
 
+    if (element.classList.contains(this.ignoreClassLink)) {
+      return false;
+    }
+
+    if (element.classList.contains(this.ignoreClassLink)) {
+      return false;
+    }
+
     // In case you're trying to load the same page
     if (Utils.cleanLink(href) === Utils.cleanLink(location.href)) {
-      return false;
-    }
-
-    if (element.classList.contains(this.ignoreClassLink)) {
-      return false;
-    }
-
-    if (element.classList.contains(this.ignoreClassLink)) {
       return false;
     }
 

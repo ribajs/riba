@@ -13,11 +13,9 @@ export const routeBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, pjax:
   const name = 'route';
   const debug = Debug('binders:route');
 
-  const binder: IOneWayBinder<string> = function(el: HTMLElement, url: string | undefined) {
+  const binder: IOneWayBinder<string> = (el: HTMLElement, url: string | undefined) => {
     const $el = JQuery(el);
     let newTab = false;
-    const usePajax = true;
-    const self = this;
     const isAnkerHTMLElement = $el.prop('tagName') === 'A';
 
     debug('getBinder', el, url);
@@ -51,31 +49,13 @@ export const routeBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, pjax:
     }
 
     const checkURL = (urlToCheck?: string) => {
-      if (urlToCheck) {
-        if (Utils.onRoute(urlToCheck)) {
-          $el.addClass('active');
-
-          // check if element is radio input
-          if ($el.is(':radio')) {
-            $el.prop('checked', true);
-          }
-          return true;
-        }
-        $el.removeClass('active');
-
-        // uncheck if element is radio input
-        if ($el.is(':radio')) {
-          $el.prop('checked', false);
-        }
+      if (urlToCheck && Utils.onRoute(urlToCheck)) {
+        return true;
       }
       return false;
     };
 
-    if (usePajax) {
-      dispatcher.on('newPageReady', () => checkURL(url));
-    } else {
-      JQuery(window).on('hashchange', () => checkURL(url));
-    }
+    dispatcher.on('newPageReady', () => checkURL(url));
 
     $el.off('click').on('click', (event: JQuery.Event<HTMLElement, null>) => {
       debug('go to', url);
@@ -92,7 +72,7 @@ export const routeBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, pjax:
 
     });
 
-    if (usePajax && !newTab && !Utils.onRoute(url)) {
+    if (!newTab && !Utils.onRoute(url)) {
       $el.off('mouseenter touchstart').on('mouseenter touchstart', (event: JQuery.Event<HTMLElement, null>) => {
         prefetch.onLinkEnter(event, url);
       });
