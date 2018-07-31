@@ -62,7 +62,7 @@ export const valueBinder: ITwoWayBinder<any> = {
       if ((el as HTMLSelectElement).type === 'select-multiple' && el instanceof HTMLSelectElement) {
         if (value instanceof Array) {
           for (let i = 0; i < el.length; i++) {
-            const option = el[i];
+            const option = el[i] as HTMLOptionElement;
             option.selected = value.indexOf(option.value) > -1;
           }
         }

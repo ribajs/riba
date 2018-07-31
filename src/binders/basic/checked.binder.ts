@@ -21,10 +21,10 @@ export const checked: ITwoWayBinder<string> = {
   },
 
   routine(el: HTMLElement, value) {
-    if ((el as HTMLSelectElement).type === 'radio') {
-      (el as HTMLSelectElement).checked = getString((el as HTMLSelectElement).value) === getString(value);
+    if ((el as HTMLInputElement).type === 'radio') {
+      (el as HTMLInputElement).checked = getString((el as HTMLInputElement).value) === getString(value);
     } else {
-      (el as HTMLSelectElement).checked = !!value;
+      (el as HTMLInputElement).checked = !!value;
     }
   },
 };

@@ -4,7 +4,7 @@ import { IFormatters, FormatterService } from './formatter.service';
 import { Binding } from './binding';
 import { adapter } from './adapter';
 
-import { IBinders, BindersService } from './binder.service';
+import { IBinders, BindersService, ITwoWayBinder } from './binder.service';
 import { View } from './view';
 import { IAdapters } from './adapter';
 import { Observer, Root } from './observer';
@@ -16,6 +16,60 @@ export interface IExtensions {
   components?: IComponents;
   adapters?: IAdapters;
 }
+
+/**
+ * Event handler to liste for publish binder event for two-way-binding in web components
+ */
+const publishBinderChangeEventHandler = function(this: any, event: Event) {
+  const data = ( event as CustomEvent ).detail;
+  const oldValue = this.observer.value();
+  if (oldValue !== data.newValue) {
+    // TODO this overwrites also the _rv counter
+    this.observer.setValue(data.newValue);
+  }
+};
+
+/**
+ * Sets the attribute on the element. If no binder above is matched it will fall
+ * back to using this binder.
+ */
+export const fallbackBinder: ITwoWayBinder<string> = {
+  bind(el) {
+    // Listen for changes from web component
+    el.addEventListener('publish-binder-change:' + this.type, publishBinderChangeEventHandler.bind(this));
+  },
+
+  unbind(el: HTMLElement) {
+    delete this.customData;
+    this.el.removeEventListener('publish-binder-change', publishBinderChangeEventHandler.bind(this));
+  },
+
+  routine(el: HTMLElement, newValue: string) {
+    if (!this.type) {
+      throw new Error('Can\'t set attribute of ' + this.type);
+    }
+
+    const oldValue = el.getAttribute(this.type);
+
+    if (newValue != null) {
+      if (oldValue !== newValue) {
+        el.setAttribute(this.type, newValue);
+      }
+    } else {
+      el.removeAttribute(this.type);
+    }
+
+    if (oldValue !== newValue) {
+      // Fallback for MutationObserver and attributeChangedCallback: Trigger event to catch them in web components to call the attributeChangedCallback method
+      el.dispatchEvent(new CustomEvent('binder-changed', { detail: {
+        name: this.type,
+        oldValue,
+        newValue,
+        namespace: null, // TODO
+      }}));
+    }
+  },
+};
 
 /** Interface for the event handler, augment the event handler of the on-* binder */
 export type EventHandler = (this: any, context: Binding, ev: Event, binding: Binding, el: HTMLElement) => void;
@@ -81,20 +135,18 @@ export declare interface IViewOptions extends IOptionsParam {
 export class Tinybind {
 
   /**
+   * Sets the attribute on the element. If no binder above is matched it will fall
+   * back to using this binder.
+   */
+  public static fallbackBinder = fallbackBinder;
+
+  /**
    * Default event handler, calles the function defined in his binder
    * @see Binding.eventHandler
    * @param el The element the event was triggered from
    */
   public static handler(this: any, context: any, ev: Event, binding: Binding, el: HTMLElement) {
     this.call(context, ev, binding.view.models, el);
-  }
-
-  /**
-   * Sets the attribute on the element. If no binder above is matched it will fall
-   * back to using this binder.
-   */
-  public static fallbackBinder(this: Binding, el: HTMLElement, newValue: any) {
-    console.warn('No binder found for ' + this.type);
   }
 
   /** singleton instance */
