@@ -5,4 +5,9 @@ import { IOneWayBinder } from '../../binder.service';
  */
 export const show: IOneWayBinder<boolean> = (el: HTMLElement, value: boolean) => {
   el.style.display = value ? '' : 'none';
+  if (value) {
+    el.removeAttribute('hidden');
+  } else {
+    el.setAttribute('hidden', 'true');
+  }
 };

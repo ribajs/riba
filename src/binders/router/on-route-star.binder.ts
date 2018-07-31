@@ -6,7 +6,6 @@ import { GlobalEvent } from './barba/barba';
 export const onRouteStarBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent) => {
 
   const binder: IOneWayBinder<string> = function(el: HTMLElement, url: string) {
-    const usePajax = true;
     const $el = $(el);
     const className = this.args[0].toString() || 'active';
     const checkURL = (urlToCheck?: string) => {
@@ -15,6 +14,7 @@ export const onRouteStarBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent)
           $el.addClass(className);
           // check if element is radio input
           if ($el.is(':radio')) {
+            console.warn('check radio', $el);
             $el.prop('checked', true);
           }
           return true;
@@ -27,11 +27,10 @@ export const onRouteStarBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent)
       }
       return false;
     };
-    if (usePajax) {
-      dispatcher.on('newPageReady', () => checkURL(url));
-    } else {
-      $(window).on('hashchange', () => checkURL(url));
-    }
+
+    dispatcher.on('newPageReady', () => checkURL(url));
+    // $(window).on('hashchange', () => checkURL(url));
+    checkURL(url);
   };
 
   return {

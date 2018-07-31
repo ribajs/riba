@@ -1,5 +1,6 @@
-import { IBinders, ITwoWayBinder, IOneWayBinder } from '../../binder.service';
+import { IBinders } from '../../binder.service';
 
+import { assign } from './assign.binder';
 import { addClass } from './class.binder';
 import { checked } from './checked.binder';
 import { classStarJQuery } from './class-star.binder';
@@ -24,6 +25,12 @@ import { starBinder } from './star.binder';
 export const basicBindersWrapper = (jQuery: JQueryStatic) => {
 
   const binders: IBinders<any> = {
+
+    /**
+     * Binds an event handler on the element.
+     */
+    'assign': assign,
+
     /**
      * Binds an event handler on the element.
      */
