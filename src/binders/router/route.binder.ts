@@ -8,7 +8,7 @@ import { Utils } from '../../utils';
  * Open link with pajax if the route is not the active route
  * Sets also the element active if his url is the current url
  */
-export const routeBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, pjax: Pjax, prefetch: Prefetch) => {
+export const routeBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefetch: Prefetch) => {
 
   const name = 'route';
   const debug = Debug('binders:route');
@@ -17,6 +17,9 @@ export const routeBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, pjax:
     const $el = JQuery(el);
     let newTab = false;
     const isAnkerHTMLElement = $el.prop('tagName') === 'A';
+
+    // TODO
+    const pjax = new Pjax('global');
 
     debug('getBinder', el, url);
 
@@ -55,7 +58,14 @@ export const routeBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, pjax:
       return false;
     };
 
-    dispatcher.on('newPageReady', () => checkURL(url));
+    $(window).on('hashchange', () => {
+      $el.trigger('hashchange');
+    });
+
+    dispatcher.on('newPageReady', () => {
+      $el.trigger('new-page-ready');
+      checkURL(url);
+    });
 
     $el.off('click').on('click', (event: JQuery.Event<HTMLElement, null>) => {
       debug('go to', url);

@@ -11,6 +11,10 @@ import { HideShowTransition, ITransition } from '../Transition/Transition';
 import { Dom } from './Dom';
 import { HistoryManager } from './HistoryManager';
 
+export interface IPjaxInstances {
+  [key: string]: Pjax;
+}
+
 /**
  * Pjax is a static object with main function
  *
@@ -30,6 +34,8 @@ class Pjax {
   public static ignoreClassLink = 'no-barba';
 
   public static cache = new BaseCache();
+
+  public static instances: IPjaxInstances = {};
 
   /**
    * Determine if the link should be followed
@@ -112,7 +118,7 @@ class Pjax {
    */
   public static getHref(el: HTMLAnchorElement | SVGAElement): string | undefined {
     if (!el) {
-      console.warn('No element to get href from');
+      // console.warn('No element to get href from');
       return undefined;
     }
 
@@ -138,9 +144,6 @@ class Pjax {
 
     return undefined;
   }
-
-  /** singleton instance */
-  private static instance: Pjax;
 
   public dom?: Dom;
   public history = new HistoryManager();
@@ -172,12 +175,17 @@ class Pjax {
   /**
    * Creates an singleton instance of Pjax.
    */
-  constructor() {
-    if (Pjax.instance) {
-      return Pjax.instance;
+  constructor(id: string, $wrapper?: JQuery<HTMLElement>) {
+    this.debug('constructor');
+    if ($wrapper) {
+      this.dom = new Dom($wrapper);
     }
 
-    Pjax.instance = this;
+    if (Pjax.instances[id]) {
+      return Pjax.instances[id];
+    }
+
+    Pjax.instances[id] = this;
   }
 
  /**
@@ -191,7 +199,6 @@ class Pjax {
     if (transition) {
       this.transition = transition;
     }
-
     this.init($wrapper, listenAllLinks);
   }
 
@@ -244,41 +251,6 @@ class Pjax {
   }
 
  /**
-  * Attach the eventlisteners
-  *
-  * @memberOf Barba.Pjax
-  * @protected
-  */
- protected bindEvents(listenAllLinks: boolean) {
-    // you can also use the rv-router for this
-    if (listenAllLinks) {
-      document.addEventListener('click',
-        this.onLinkClick.bind(this),
-      );
-    }
-
-    window.addEventListener('popstate',
-      this.onStateChange.bind(this),
-    );
-  }
-
- /**
-  * Force the browser to go to a certain url
-  *
-  * @memberOf Barba.Pjax
-  * @param {Location} url
-  * @private
-  */
- protected forceGoTo(url: Location | string) {
-   if (url instanceof Location) {
-    window.location = url;
-   }
-   if (typeof url === 'string') {
-    window.location.href = url;
-   }
-  }
-
- /**
   * Load an url, will start an xhr request or load from the cache
   *
   * @memberOf Barba.Pjax
@@ -286,7 +258,7 @@ class Pjax {
   * @param  {string} url
   * @return {Promise<JQuery<HTMLElement>>}
   */
- protected load(url: string): Promise<JQuery<HTMLElement>> {
+  public load(url: string): Promise<JQuery<HTMLElement>> {
     const deferred = Utils.deferred();
     const self = this;
     let xhr;
@@ -322,6 +294,41 @@ class Pjax {
     );
 
     return deferred.promise;
+  }
+
+ /**
+  * Attach the eventlisteners
+  *
+  * @memberOf Barba.Pjax
+  * @protected
+  */
+ protected bindEvents(listenAllLinks: boolean) {
+    // you can also use the rv-router for this
+    if (listenAllLinks) {
+      document.addEventListener('click',
+        this.onLinkClick.bind(this),
+      );
+    }
+
+    window.addEventListener('popstate',
+      this.onStateChange.bind(this),
+    );
+  }
+
+ /**
+  * Force the browser to go to a certain url
+  *
+  * @memberOf Barba.Pjax
+  * @param {Location} url
+  * @private
+  */
+ protected forceGoTo(url: Location | string) {
+   if (url instanceof Location) {
+    window.location = url;
+   }
+   if (typeof url === 'string') {
+    window.location.href = url;
+   }
   }
 
  /**

@@ -1,5 +1,6 @@
 import Debug from 'debug';
 import { BaseTransition, ITransition } from './BaseTransition';
+import $ from 'jquery';
 
 /**
  * Basic Transition object, wait for the new Container to be ready,
@@ -9,11 +10,15 @@ import { BaseTransition, ITransition } from './BaseTransition';
  * @namespace Barba.HideShowTransition
  * @augments Barba.BaseTransition
  */
-class HideShowTransition extends BaseTransition implements ITransition {
+export class HideShowTransition extends BaseTransition implements ITransition {
 
   protected debug = Debug('barba:HideShowTransition');
 
   public start() {
+    this.debug('start');
+    $('html,body').animate({
+      scrollTop: 0,
+    }, 1000);
     if (!this.newContainerLoading) {
       throw new Error('this.newContainerLoading is not set');
     }
@@ -21,9 +26,8 @@ class HideShowTransition extends BaseTransition implements ITransition {
   }
 
   public finish() {
-    document.body.scrollTop = 0;
+    this.debug('finish');
+    // document.body.scrollTop = 0;
     this.done();
   }
 }
-
-export { HideShowTransition };
