@@ -58,9 +58,9 @@ export const routeBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefe
       return false;
     };
 
-    $(window).on('hashchange', () => {
-      $el.trigger('hashchange');
-    });
+    // JQuery(window).on('hashchange', () => {
+    //   $el.trigger('hashchange');
+    // });
 
     dispatcher.on('newPageReady', () => {
       $el.trigger('new-page-ready');
