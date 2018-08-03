@@ -47,7 +47,6 @@ class CustomTransition extends BaseTransition implements ITransition {
 
   public finish($container: JQuery<HTMLElement>) {
     document.body.scrollTop = 0;
-    // this.view = Rivets.bind(this.$newContainer, window.model);
     this.debug('CustomTransition finish');
     this.done();
   }

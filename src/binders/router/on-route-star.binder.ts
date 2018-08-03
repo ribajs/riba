@@ -14,7 +14,6 @@ export const onRouteStarBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent)
           $el.addClass(className);
           // check if element is radio input
           if ($el.is(':radio')) {
-            console.warn('check radio', $el);
             $el.prop('checked', true);
           }
           return true;
