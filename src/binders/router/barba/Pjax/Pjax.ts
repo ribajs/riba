@@ -37,6 +37,10 @@ class Pjax {
 
   public static instances: IPjaxInstances = {};
 
+  public static getInstance(id: string) {
+    return Pjax.instances[id];
+  }
+
   /**
    * Determine if the link should be followed
    *
@@ -166,9 +170,9 @@ class Pjax {
   */
   public transitionProgress: boolean = false;
 
-  private listenAllLinks: boolean;
+  private listenAllLinks: boolean = false;
 
-  private parseTitle: boolean ;
+  private parseTitle: boolean = false;
 
   private dispatcher = new GlobalEvent();
 
@@ -180,7 +184,11 @@ class Pjax {
    * Creates an singleton instance of Pjax.
    */
   constructor(id: string, $wrapper?: JQuery<HTMLElement>, listenAllLinks: boolean = false, transition?: ITransition, parseTitle = false) {
-    this.debug('constructor');
+    this.debug('constructor', id);
+
+    if (Pjax.instances[id]) {
+      return Pjax.instances[id];
+    }
 
     this.listenAllLinks = listenAllLinks;
     this.parseTitle = parseTitle;
@@ -193,10 +201,6 @@ class Pjax {
       this.transition = transition;
     }
 
-    if (Pjax.instances[id]) {
-      return Pjax.instances[id];
-    }
-
     Pjax.instances[id] = this;
   }
 
@@ -205,12 +209,19 @@ class Pjax {
   *
   * @memberOf Barba.Pjax
   */
-  public start($wrapper: JQuery<HTMLElement>, listenAllLinks: boolean, transition?: ITransition) {
+  public start($wrapper: JQuery<HTMLElement>, listenAllLinks: boolean = false, transition?: ITransition, parseTitle = false) {
 
-    this.dom = new Dom($wrapper, this.parseTitle);
+    this.listenAllLinks = listenAllLinks;
+    this.parseTitle = parseTitle;
+
+    if ($wrapper) {
+      this.dom = new Dom($wrapper, this.parseTitle);
+    }
+
     if (transition) {
       this.transition = transition;
     }
+
     this.init($wrapper, listenAllLinks);
   }
 

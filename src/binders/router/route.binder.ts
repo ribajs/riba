@@ -18,8 +18,7 @@ export const routeBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefe
     let newTab = false;
     const isAnkerHTMLElement = $el.prop('tagName') === 'A';
 
-    // TODO
-    const pjax = new Pjax('global');
+    const pjax = Pjax.getInstance('global');
 
     debug('getBinder', el, url);
 

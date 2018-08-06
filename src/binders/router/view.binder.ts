@@ -14,6 +14,7 @@ export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefet
 
   const name = 'view';
   const debug = Debug('binders:view');
+  const pjax = new Pjax('global');
 
   const binder: IOneWayBinder<string> = function(el: HTMLElement, options: any) {
     const $wrapper = JQuery(el);
@@ -25,7 +26,7 @@ export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefet
     options.transition = options.transition || new HideShowTransition();
     debug('options', options);
 
-    const pjax = new Pjax('global', $wrapper, options.listenAllLinks, options.transition, true);
+    // const pjax = new Pjax('global', $wrapper, options.listenAllLinks, options.transition, true);
 
     /*
      * Make the dispatcher available in the model to register event handlers.
@@ -73,7 +74,7 @@ export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefet
 
     setTimeout(() => {
       prefetch.init(options.listenAllLinks);
-      pjax.start($wrapper, options.listenAllLinks, options.transition);
+      pjax.start($wrapper, options.listenAllLinks, options.transition, true);
     }, 0);
   };
 
