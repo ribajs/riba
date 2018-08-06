@@ -25,7 +25,7 @@ export const viewStaticBinderWrapper: BinderWrapper = () => {
     // options.transition = options.transition || new HideShowTransition();
     debug('options', options);
 
-    const pjax = new Pjax(options.url, $wrapper);
+    const pjax = new Pjax(options.url, $wrapper, false, undefined, false);
 
     const $newContainer = pjax.load(options.url);
 

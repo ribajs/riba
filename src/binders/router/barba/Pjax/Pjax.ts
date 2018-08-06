@@ -166,6 +166,10 @@ class Pjax {
   */
   public transitionProgress: boolean = false;
 
+  private listenAllLinks: boolean;
+
+  private parseTitle: boolean ;
+
   private dispatcher = new GlobalEvent();
 
   private transition: ITransition = new HideShowTransition();
@@ -175,10 +179,18 @@ class Pjax {
   /**
    * Creates an singleton instance of Pjax.
    */
-  constructor(id: string, $wrapper?: JQuery<HTMLElement>) {
+  constructor(id: string, $wrapper?: JQuery<HTMLElement>, listenAllLinks: boolean = false, transition?: ITransition, parseTitle = false) {
     this.debug('constructor');
+
+    this.listenAllLinks = listenAllLinks;
+    this.parseTitle = parseTitle;
+
     if ($wrapper) {
-      this.dom = new Dom($wrapper);
+      this.dom = new Dom($wrapper, this.parseTitle);
+    }
+
+    if (transition) {
+      this.transition = transition;
     }
 
     if (Pjax.instances[id]) {
@@ -195,7 +207,7 @@ class Pjax {
   */
   public start($wrapper: JQuery<HTMLElement>, listenAllLinks: boolean, transition?: ITransition) {
 
-    this.dom = new Dom($wrapper);
+    this.dom = new Dom($wrapper, this.parseTitle);
     if (transition) {
       this.transition = transition;
     }

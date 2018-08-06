@@ -19,14 +19,13 @@ export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefet
     const $wrapper = JQuery(el);
     const self = this;
 
-    // TODO
-    const pjax = new Pjax('global');
-
     // Set default options
     options = options || {};
     options.listenAllLinks = options.listenAllLinks || true;
     options.transition = options.transition || new HideShowTransition();
     debug('options', options);
+
+    const pjax = new Pjax('global', $wrapper, options.listenAllLinks, options.transition, true);
 
     /*
      * Make the dispatcher available in the model to register event handlers.

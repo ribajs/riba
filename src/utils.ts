@@ -167,7 +167,7 @@ export class Utils {
   /**
    * Check if string contains only numbers
    */
-  public static stringHasOnlyNumber(value?: any) {
+  public static stringHasOnlyNumbers(value?: any) {
     return /^\d+$/.test(value);
   }
 

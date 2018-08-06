@@ -32,8 +32,11 @@ class Dom {
 
   private _$wrapper: JQuery<HTMLElement>;
 
-  constructor($wrapper: JQuery<HTMLElement>) {
+  private parseTitle: boolean;
+
+  constructor($wrapper: JQuery<HTMLElement>, parseTitle: boolean) {
     this._$wrapper = $wrapper;
+    this.parseTitle = parseTitle;
   }
 
   /**
@@ -42,10 +45,14 @@ class Dom {
   public parseResponse(responseText: string): JQuery<HTMLElement> {
     this.currentHTML = responseText;
     const $newPage = $( $.parseHTML(responseText) );
-    const $title = $newPage.filter('title');
-    if ($title.length) {
-      document.title = $title.text();
+
+    if (this.parseTitle === true) {
+      const $title = $newPage.filter('title');
+      if ($title.length) {
+        document.title = $title.text();
+      }
     }
+
     return this.getContainer(($newPage as any));
   }
 
