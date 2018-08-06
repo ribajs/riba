@@ -33,11 +33,25 @@ export const isJson = (str?: string | null) => {
 };
 
 /**
- * Check if a value is an object than can be observed.
- * @param obj
+ * Check if value is undefined
+ */
+export const isUndefined = (value?: any) => {
+  return typeof(value) === 'undefined';
+};
+
+/**
+ * Check if value is undefined
+ */
+export const isDefined = (value?: any) => {
+  return !isUndefined(value);
+};
+
+/**
+ * Check if type is Object
+ * @see https://stackoverflow.com/a/4775737/1465919
  */
 export const isObject = (obj: object) => {
-  return typeof obj === 'object' && obj !== null;
+  return isDefined(obj) && typeof obj === 'object' && obj !== null;
 };
 
 export const getString = (value: string) => {
@@ -97,19 +111,46 @@ export const camelCase = (str: string) => {
  */
 export class Utils {
 
+  public static getJSON = getJSON;
+
   /**
-   * Check if value is undefined
+   * Convert value to string if it is not null or undefined
    */
-  public static isUndefined(value?: any) {
-    return typeof(value) === 'undefined';
-  }
+  public static getString = getString;
+
+  public static times = times;
+
+  /**
+   * Returns a camel-cased version of the string. Used when translating an
+   * element's attribute name into a property name for the component's scope.
+   * TODO move to utils
+   * @param string
+   */
+  public static camelCase = camelCase;
+
+  public static getInputValue = getInputValue;
+
+  /**
+   * Test if string is a json string
+   * @param str
+   */
+  public static isJson = isJson;
+
+  /**
+   * Check if type is Object
+   * @see https://stackoverflow.com/a/4775737/1465919
+   */
+  public static isObject = isObject;
 
   /**
    * Check if value is undefined
    */
-  public static isDefined(value?: any) {
-    return !this.isUndefined(value);
-  }
+  public static isUndefined = isUndefined;
+
+  /**
+   * Check if value is undefined
+   */
+  public static isDefined = isDefined;
 
   /**
    * Check if value is a function
@@ -132,14 +173,6 @@ export class Utils {
    */
   public static isNumber(value?: any): boolean {
     return !isNaN(parseFloat(value)) && !isNaN(value - 0);
-  }
-
-  /**
-   * Check if type is Object
-   * @see https://stackoverflow.com/a/4775737/1465919
-   */
-  public static isObject(value?: any) {
-    return this.isDefined(value) && typeof value === 'object';
   }
 
   /**
@@ -414,32 +447,5 @@ export class Utils {
       w,
     };
   }
-
-  /**
-   * Format a monetary amount using Shopify's formatMoney if available.
-   * If it's not available, just return the value.
-   * @source https://github.com/discolabs/cartjs/blob/master/src/utils.coffee
-   * @source https://github.com/JumpLinkNetwork/shopify-productjs/blob/master/src/utilities.js
-   */
-  // public static formatMoney(value, format, formatName, currency) {
-  //   var _ref, _ref1;
-  //   if (currency == null) {
-  //     currency = '';
-  //   }
-  //   if (!currency) {
-  //     currency = ProductJS.settings.currency;
-  //   }
-  //   if ((window.Currency != null) && currency !== ProductJS.settings.currency) {
-  //     value = Currency.convert(value, ProductJS.settings.currency, currency);
-  //     if ((((_ref = window.Currency) != null ? _ref.moneyFormats : void 0) != null) && (currency in window.Currency.moneyFormats)) {
-  //       format = window.Currency.moneyFormats[currency][formatName];
-  //     }
-  //   }
-  //   if (((_ref1 = window.Shopify) != null ? _ref1.formatMoney : void 0) != null) {
-  //     return Shopify.formatMoney(value, format);
-  //   } else {
-  //     return value;
-  //   }
-  // }
 
 }

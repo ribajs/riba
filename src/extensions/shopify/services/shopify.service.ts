@@ -72,6 +72,8 @@ export class ShopifyService {
    * @param format
    *
    * @see https://github.com/NathanPJF/deploybot-shopify/blob/master/assets/ajaxify.js.liquid
+   * @see https://github.com/discolabs/cartjs/blob/master/src/utils.coffee
+   * @see https://github.com/JumpLinkNetwork/shopify-productjs/blob/master/src/utilities.js
    */
   public formatMoney(cents: string | number, format?: string) {
     let value = '';

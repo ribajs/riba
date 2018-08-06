@@ -18,7 +18,7 @@
 - Formatters
   - Revert the call formatter from Rivets to call functions
   - New args formatter to pass arguments to the on-* binder
-  - New range formatter to get a subset of arra e.g. `<img rv-each-image="images | range 0 5" rv-src="image.src" />`
+  - New range formatter to get a subset of array e.g. `<img rv-each-image="images | range 0 5" rv-src="image.src" />`
 
 ## 0.15.0
 
