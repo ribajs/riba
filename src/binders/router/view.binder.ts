@@ -1,6 +1,6 @@
 import Debug from 'debug';
 import JQuery from 'jquery';
-import { IOneWayBinder, BinderWrapper } from '../../binder.service';
+import { ITwoWayBinder, BinderWrapper } from '../../binder.service';
 import { Pjax, Prefetch, IState, HideShowTransition, ITransition } from './barba/barba';
 import { GlobalEvent } from '../../global-event';
 import { View as RivetsView } from '../../view';
@@ -16,66 +16,81 @@ export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefet
   const debug = Debug('binders:view');
   const pjax = new Pjax('global');
 
-  const binder: IOneWayBinder<string> = function(el: HTMLElement, options: any) {
-    const $wrapper = JQuery(el);
-    const self = this;
+  const binder: ITwoWayBinder<string> = {
 
-    // Set default options
-    options = options || {};
-    options.listenAllLinks = options.listenAllLinks || true;
-    options.transition = options.transition || new HideShowTransition();
-    debug('options', options);
+    block: true,
+    priority: 4000,
 
-    // const pjax = new Pjax('global', $wrapper, options.listenAllLinks, options.transition, true);
+    bind(el: HTMLUnknownElement) {
+      debug('bind', this.customData);
+      const self = this;
+      this.customData = {
+        nested: null,
+        $wrapper: JQuery(el),
+      };
 
-    /*
-     * Make the dispatcher available in the model to register event handlers.
-     *
-     * I.e., if we have initialized rivets/tinybind with:
-     *
-     *  `rivets.bind(document.body, model)`,
-     *
-     * then we can register event handlers for the Barba router dispatcher like this:
-     *
-     *  `model.routerDispatcher.on('newPageReady', ...);`
-     *  `model.routerDispatcher.on('transitionCompleted', ...);`
-     * ...etc.
-     *
-     */
-    self.view.models.routerDispatcher = dispatcher;
+      this.customData.onPageReady = (currentStatus: IState, prevStatus: IState, $container: JQuery<HTMLElement>, newPageRawHTML: string, dataset: any, isInit: boolean) => {
+        // unbind the old rivets view
+        if (self.customData.nested) {
+          debug('unbind nested'); // TODO not called?
+          self.customData.nested.unbind();
+        }
 
-    this.customData = {
-      nested: null,
-    };
+        // add the dateset to the model
+        if (!Utils.isObject(self.view.models)) {
+          self.view.models = {};
+        }
+        self.view.models.dataset = $container.data();
 
-    dispatcher.on('newPageReady', (currentStatus: IState, prevStatus: IState, $container: JQuery<HTMLElement>, newPageRawHTML: string, dataset: any, isInit: boolean) => {
-      // unbind the old rivets view
-      if (self.customData.nested !== null) {
-        self.customData.nested.unbind();
-      }
+        debug('newPageReady dataset:', dataset);
 
-      // add the dateset to the model
-      if (!Utils.isObject(self.view.models)) {
-        self.view.models = {};
-      }
-      self.view.models.dataset = $container.data();
-
-      debug('newPageReady dataset:', dataset);
-
-      // if this is the first time the page will be loaded we do not need to rebind the container
-      // because they are already bind with the parent view ( because they are not loaded by pajax)
-      if (!isInit) {
-        // bind the new container
         self.customData.nested = new RivetsView($container[0], self.view.models, self.view.options);
         self.customData.nested.bind();
+      };
+
+      /*
+      * Make the dispatcher available in the model to register event handlers.
+      *
+      * I.e., if we have initialized rivets/tinybind with:
+      *
+      *  `rivets.bind(document.body, model)`,
+      *
+      * then we can register event handlers for the Barba router dispatcher like this:
+      *
+      *  `model.routerDispatcher.on('newPageReady', ...);`
+      *  `model.routerDispatcher.on('transitionCompleted', ...);`
+      * ...etc.
+      *
+      */
+      this.view.models.routerDispatcher = dispatcher;
+    },
+
+    routine(el: HTMLUnknownElement, options: any) {
+      debug('bind', this.customData);
+      // Set default options
+      options = options || {};
+      options.listenAllLinks = options.listenAllLinks || true;
+      options.transition = options.transition || new HideShowTransition();
+      debug('options', options);
+
+      this.view.models.routerDispatcher.on('newPageReady', this.customData.onPageReady);
+
+      prefetch.init(options.listenAllLinks);
+      pjax.start(this.customData.$wrapper, options.listenAllLinks, options.transition, true);
+    },
+
+    unbind(el: HTMLUnknownElement) {
+      debug('unbind');
+      if ( this.view.models &&  this.view.models.routerDispatcher) {
+        this.view.models.routerDispatcher.off('newPageReady', this.customData.onPageReady);
       }
 
-    });
+      if (this.customData.nested !== null) {
+        this.customData.nested.unbind();
+      }
 
-    setTimeout(() => {
-      prefetch.init(options.listenAllLinks);
-      pjax.start($wrapper, options.listenAllLinks, options.transition, true);
-    }, 0);
+      delete this.customData;
+    },
   };
 
   return {
