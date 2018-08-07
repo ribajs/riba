@@ -1,7 +1,7 @@
 export * from './interfaces/interfaces.d';
 import * as components from './components/shopify.components';
 import * as formatters from './formatters/shopify.formatters';
-import * as services from './services/shopify.service';
+import * as services from './services/shopify.services';
 
 export const shopifyExtension = {
   formatters,

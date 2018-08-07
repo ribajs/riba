@@ -1,4 +1,4 @@
-import Debug from 'debug';
+// import Debug from 'debug';
 import { BinderWrapper, ITwoWayBinder } from '../../binder.service';
 import { eventHandlerFunction } from '../../binding';
 

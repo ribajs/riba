@@ -1,5 +1,6 @@
 import { Utils } from '../../../utils';
 import Debug from 'debug';
+// import { ShopifyCartService } from './shopify-cart.service';
 
 declare global {
   // tslint:disable: interface-name
@@ -44,6 +45,8 @@ export class ShopifyService {
 
   /** singleton instance */
   private static instance: ShopifyService;
+
+  // public cart = new ShopifyCartService();
 
   protected moneyFormat?: string;
   protected moneyWithCurrencyFormat?: string;

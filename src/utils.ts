@@ -28,11 +28,12 @@ export const getJSON = (url: string, data?: any) => {
  * Load data from the server using a HTTP POST request.
  * @param url A string containing the URL to which the request is sent.
  * @param data A plain object or string that is sent to the server with the request.
+ * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html).
  * @see https://api.jquery.com/jquery.post/
  */
-export const post = (url: string, data?: any) => {
+export const post = (url: string, data?: any, dataType?: string) => {
   return new Promise<any>((resolve, reject) => {
-    jQuery.post(url, data)
+    jQuery.post(url, data, null, dataType)
     .done((resolve))
     .fail(( jqxhr, textStatus, error ) => {
       reject(error);
@@ -45,11 +46,12 @@ export const post = (url: string, data?: any) => {
  * Load data from the server using a HTTP GET request.
  * @param url A string containing the URL to which the request is sent.
  * @param data A plain object or string that is sent to the server with the request.
+ * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html).
  * @see https://api.jquery.com/jquery.get/
  */
-export const get = (url: string, data?: any) => {
+export const get = (url: string, data?: any, dataType?: string) => {
   return new Promise<any>((resolve, reject) => {
-    jQuery.get(url, data)
+    jQuery.get(url, data, null, dataType)
     .done((resolve))
     .fail(( jqxhr, textStatus, error ) => {
       reject(error);
