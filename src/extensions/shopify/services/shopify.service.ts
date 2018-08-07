@@ -1,6 +1,11 @@
 import { Utils } from '../../../utils';
 import Debug from 'debug';
 
+declare global {
+  // tslint:disable: interface-name
+  interface Window { model: any; }
+}
+
 /**
  * Custom version of shopify tools like api.jquery.js / option-selection.js
  * @see https://mayert-douglas4935.myshopify.com/pages/api

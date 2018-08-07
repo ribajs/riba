@@ -1,18 +1,12 @@
 export * from './interfaces/interfaces.d';
-export * from './components/shopify-section.component';
-export * from './components/shopify-section.component';
-import { img_url } from './formatters/img-url.formatter';
-import { money } from './formatters/money.formatter';
-import { money_with_currency } from './formatters/money-with-currency.formatter';
-
-export const formatters = {
-  img_url,
-  money,
-  money_with_currency,
-};
+import * as components from './components/shopify.components';
+import * as formatters from './formatters/shopify.formatters';
+import * as services from './services/shopify.service';
 
 export const shopifyExtension = {
   formatters,
+  services,
+  components,
 };
 
 // Add Shopify-specific formatters for Rivets.js.
