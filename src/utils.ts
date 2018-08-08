@@ -97,8 +97,20 @@ export const isObject = (obj: object) => {
   return isDefined(obj) && typeof obj === 'object' && obj !== null;
 };
 
+/**
+ * Parse value to string or return undefined if value is null
+ * @param value
+ */
 export const getString = (value: string) => {
   return value != null ? value.toString() : undefined;
+};
+
+/**
+ * Parse value to number or return 0 if value is null or undefined
+ * @param value
+ */
+export const getNumber = (value: string) => {
+  return value ? parseFloat(value) : undefined;
 };
 
 export const times = (n: number, cb: () => void) => {
@@ -182,9 +194,16 @@ export class Utils {
   public static get = get;
 
   /**
-   * Convert value to string if it is not null or undefined
+   * Parse value to string orreturn undefined if value is null
+   * @param value
    */
   public static getString = getString;
+
+  /**
+   * Parse value to number or return 0 if value is null or undefined
+   * @param value
+   */
+  public static getNumber = getNumber;
 
   public static times = times;
 
@@ -236,7 +255,7 @@ export class Utils {
   }
 
   /**
-   * Check whether variable is number or string in JavaScript
+   * Check whether variable is number or a string with numbers in JavaScript
    * @see https://stackoverflow.com/a/1421988/1465919
    */
   public static isNumber(value?: any): boolean {
