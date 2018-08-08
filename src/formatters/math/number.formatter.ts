@@ -1,7 +1,7 @@
 import { Utils } from '../../utils';
 
 /**
- * Just get the digits of a string, useful to remove px from css value
+ * Parse a string to number / float
  * @see http://stackoverflow.com/a/1100653/1465919
  */
 export const numberFormatter = (str: string, def: number) => {

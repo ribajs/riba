@@ -37,7 +37,7 @@ tinybind.binderService.regists(routerBinders);
 
 /** Additional global exports */
 (window as any).globalEvents = new GlobalEvent();
-(window as any).pjax = new Pjax();
+// (window as any).pjax = new Pjax();
 (window as any).prefetch = new Prefetch();
 
 export default tinybind;

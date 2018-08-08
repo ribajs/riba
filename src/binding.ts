@@ -205,7 +205,7 @@ export class Binding implements IBindable {
     return this.formatters.reduce((result: any/*check type*/, declaration: string /*check type*/, index: number) => {
       const args = declaration.match(Binding.FORMATTER_ARGS);
       if (args === null) {
-        throw new Error('No args matched from FORMATTER_ARGS');
+        throw new Error(`No args matched from FORMATTER_ARGS "${declaration}"`);
       }
       const id = args.shift();
       if (!id) {

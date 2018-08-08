@@ -1,28 +1,76 @@
 import { Utils } from '../../../utils';
+import jQuery from 'jquery';
 import PQueue from 'p-queue'; // https://github.com/sindresorhus/p-queue
+import { GlobalEvent } from '../../../global-event';
 
 export interface ICartUpdateProperty {
   [variantId: number]: number;
+}
+
+export interface IShopifyCartAddError {
+  status: number;
+  message: string;
+  description: string;
+}
+
+export interface IShopifyCartLineItem {
+  id: number;
+  title: string;
+  price: number;
+  line_price: number;
+  quantity: number;
+  sku: string | null;
+  grams: number;
+  vendor: string;
+  properties: null | any;
+  variant_id: number;
+  gift_card: boolean;
+  url: string;
+  image: string;
+  handle: string;
+  requires_shipping: boolean;
+  product_title: string;
+  product_description: string;
+  product_type: string;
+  variant_title: string;
+  variant_options: Array<string>;
 }
 
 export class ShopifyCartService {
 
   public static queue = new PQueue({concurrency: 1});
 
+  public static cart = {};
+
+  public static dispatcher = new GlobalEvent();
+
   /**
    * Use this to add a variant to the cart.
    * @param id Variant id
    * @param quantity Quantity
    * @param properties Additional properties
+   * @return Response if successful, the JSON of the line item associated with the added variant.
    * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#add-to-cart
    */
-  public static add(id: number | number, quantity = 1, properties = {}) {
+  public static add(id: number | number, quantity = 1, properties = {}): Promise<IShopifyCartLineItem> {
+    this.triggerDispatcher();
     return this.queue.add(() => {
       return Utils.post(this.CART_POST_ADD_URL, {
         id,
         quantity,
         properties,
-      }, 'json');
+      }, 'json')
+      .then((lineItem: IShopifyCartLineItem) => {
+        // Force update cart object
+        return Utils.get(this.CART_GET_URL, {}, 'json')
+        .then((cart: any) => {
+          ShopifyCartService.cart = cart;
+          return lineItem; // return original response
+        }) as any;
+      })
+      .catch((jqxhr) => {
+        return jqxhr.responseJSON as IShopifyCartAddError;
+      });
     });
   }
 
@@ -33,8 +81,14 @@ export class ShopifyCartService {
    * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#get-cart
    */
   public static get() {
+    this.triggerDispatcher();
     return this.queue.add(() => {
-      return Utils.get(this.CART_GET_URL);
+      ShopifyCartService.dispatcher.trigger('ShopifyCart:request:start');
+      return Utils.get(this.CART_GET_URL, {}, 'json')
+      .then((cart: any) => {
+        ShopifyCartService.cart = cart;
+        return ShopifyCartService.cart;
+      });
     });
   }
 
@@ -43,15 +97,18 @@ export class ShopifyCartService {
    * @param id Variant ID
    * @param quantity Quantity
    * @param properties Additional properties
+   * @return Response The JSON of the cart.
    * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#update-cart
    */
   public static update(id: number | number, quantity: number, properties = {}) {
+    this.triggerDispatcher();
     return this.queue.add(() => {
+      ShopifyCartService.dispatcher.trigger('ShopifyCart:request:start');
       return Utils.post(this.CART_POST_UPDATE_URL, {
         id,
         quantity,
         properties,
-      });
+      }, 'json');
     });
   }
 
@@ -60,13 +117,21 @@ export class ShopifyCartService {
    * @param id Variant ID
    * @param quantity Quantity
    * @param properties Additional properties
+   * @return Response The JSON of the cart.
    * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#update-cart
    */
   public static updates(updates: ICartUpdateProperty | Array<number>) {
+    this.triggerDispatcher();
     return this.queue.add(() => {
+      ShopifyCartService.dispatcher.trigger('ShopifyCart:request:start');
       return Utils.post(this.CART_POST_UPDATE_URL, {
         updates,
-      });
+      }, 'json');
+    })
+    .then((cart: any) => {
+
+      ShopifyCartService.cart = cart;
+      return ShopifyCartService.cart;
     });
   }
 
@@ -87,14 +152,21 @@ export class ShopifyCartService {
    * @param id Variant ID
    * @param quantity Quantity
    * @param properties Additional properties
+   * @return Response The JSON of the cart.
    * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#change-cart
    */
   public static change(id: number | number, quantity: number, properties = {}) {
+    this.triggerDispatcher();
     return this.queue.add(() => {
+      ShopifyCartService.dispatcher.trigger('ShopifyCart:request:start');
       return Utils.post(this.CART_POST_CHANGE_URL, {
         id,
         quantity,
         properties,
+      }, 'json')
+      .then((cart: any) => {
+        ShopifyCartService.cart = cart;
+        return ShopifyCartService.cart;
       });
     });
   }
@@ -104,13 +176,20 @@ export class ShopifyCartService {
    * @param line -based index of the item in the cart
    * @param quantity Quantity
    * @param properties Additional properties
+   * @return Response The JSON of the cart.
    */
   public static changeLine(line: number | number, quantity: number, properties = {}) {
+    this.triggerDispatcher();
     return this.queue.add(() => {
+      ShopifyCartService.dispatcher.trigger('ShopifyCart:request:start');
       return Utils.post(this.CART_POST_CHANGE_URL, {
         line,
         quantity,
         properties,
+      }, 'json')
+      .then((cart: any) => {
+        ShopifyCartService.cart = cart;
+        return ShopifyCartService.cart;
       });
     });
   }
@@ -118,11 +197,18 @@ export class ShopifyCartService {
   /**
    * This call sets all quantities of all line items in the cart to zero.
    * @return The JSON of an empty cart. This does not remove cart attributes nor the cart note.
+   * @return Response The JSON of an empty cart. This does not remove cart attributes nor the cart note.
    * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#clear-cart
    */
   public static clear() {
+    this.triggerDispatcher();
     return this.queue.add(() => {
-      return Utils.post(this.CART_POST_CLEAR_URL);
+      ShopifyCartService.dispatcher.trigger('ShopifyCart:request:start');
+      return Utils.post(this.CART_POST_CLEAR_URL, {}, 'json')
+      .then((cart: any) => {
+        ShopifyCartService.cart = cart;
+        return ShopifyCartService.cart;
+      });
     });
   }
 
@@ -133,7 +219,7 @@ export class ShopifyCartService {
    */
   public static shippingRates(shippingAddress: any) {
     return this.queue.add(() => {
-      return Utils.post(this.CART_POST_CLEAR_URL);
+      return Utils.post(this.CART_POST_CLEAR_URL, {}, 'json');
     });
   }
 
@@ -149,4 +235,32 @@ export class ShopifyCartService {
 
   protected static CART_GET_SHIPPING_RATES_URL = '/cart/shipping_rates.json';
 
+  /**
+   * Trigger `ShopifyCart:request:complete`, if queue is already panding no noting (in this case we already looking for onIdle)
+   */
+  protected static triggerOnComplete() {
+    if (this.queue.pending > 0) {
+      return;
+    }
+    return this.queue
+    .onIdle()
+    .then(() => {
+      ShopifyCartService.dispatcher.trigger('ShopifyCart:request:complete', ShopifyCartService.cart);
+    });
+  }
+
+  /**
+   * Trigger `ShopifyCart:request:start`, if not already triggered
+   */
+  protected static triggerOnStart() {
+    if (this.queue.pending > 0) {
+      return;
+    }
+    ShopifyCartService.dispatcher.trigger('ShopifyCart:request:start');
+  }
+
+  protected static triggerDispatcher() {
+    this.triggerOnStart();
+    this.triggerOnComplete();
+  }
 }

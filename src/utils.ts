@@ -18,7 +18,8 @@ export const getJSON = (url: string, data?: any) => {
     jQuery.getJSON(url, data)
     .done((resolve))
     .fail(( jqxhr, textStatus, error ) => {
-      reject(error);
+      // console.warn('jqxhr', jqxhr, 'textStatus', textStatus, 'error', error);
+      reject(jqxhr);
     });
   });
 };
@@ -36,7 +37,8 @@ export const post = (url: string, data?: any, dataType?: string) => {
     jQuery.post(url, data, null, dataType)
     .done((resolve))
     .fail(( jqxhr, textStatus, error ) => {
-      reject(error);
+      // console.warn('jqxhr', jqxhr, 'textStatus', textStatus, 'error', error);
+      reject(jqxhr);
     });
   });
 };
@@ -54,7 +56,8 @@ export const get = (url: string, data?: any, dataType?: string) => {
     jQuery.get(url, data, null, dataType)
     .done((resolve))
     .fail(( jqxhr, textStatus, error ) => {
-      reject(error);
+      // console.warn('jqxhr', jqxhr, 'textStatus', textStatus, 'error', error);
+      reject(jqxhr);
     });
   });
 };
@@ -341,6 +344,19 @@ export class Utils {
   public static concat(deep: boolean, object1?: object, object2?: object): any {
     object1 = this.extend(deep, object1 || {}, object1 || {}, object2 || {});
     return object1;
+  }
+
+  /**
+   * Clone an object or array
+   * @param deep If true, the merge becomes recursive (aka. deep copy).
+   * @param val The value(s) to clone
+   */
+  public static clone(deep: boolean, val: any) {
+    if (Utils.isArray(val)) {
+      return val.slice();
+    } else {
+      return Utils.extend(deep, {}, val);
+    }
   }
 
   /**
