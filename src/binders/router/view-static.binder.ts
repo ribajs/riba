@@ -17,7 +17,6 @@ export const viewStaticBinderWrapper: BinderWrapper = () => {
   const binder: ITwoWayBinder<string> = {
 
     block: true,
-    priority: 5000,
 
     bind(el: HTMLElement) {
       debug('bind', this.customData);

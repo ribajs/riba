@@ -10,7 +10,6 @@ import { Utils } from '../../utils';
  */
 export const routeBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefetch: Prefetch) => {
 
-  const name = 'route';
   const debug = Debug('binders:route');
 
   const binder: IOneWayBinder<string> = (el: HTMLElement, url: string | undefined) => {
@@ -92,6 +91,6 @@ export const routeBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefe
 
   return {
     binder,
-    name,
+    name: 'route',
   };
 };

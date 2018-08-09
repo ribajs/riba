@@ -12,14 +12,12 @@ import { Utils } from '../../utils';
  */
 export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefetch: Prefetch) => {
 
-  const name = 'view';
   const debug = Debug('binders:view');
   const pjax = new Pjax('global');
 
   const binder: ITwoWayBinder<string> = {
 
     block: true,
-    priority: 4000,
 
     bind(el: HTMLUnknownElement) {
       debug('bind', this.customData);
@@ -73,7 +71,7 @@ export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefet
       options.transition = options.transition || new HideShowTransition();
       debug('options', options);
 
-      this.view.models.routerDispatcher.on('newPageReady', this.customData.onPageReady);
+      dispatcher.on('newPageReady', this.customData.onPageReady);
 
       prefetch.init(options.listenAllLinks);
       pjax.start(this.customData.$wrapper, options.listenAllLinks, options.transition, true);
@@ -81,8 +79,8 @@ export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefet
 
     unbind(el: HTMLUnknownElement) {
       debug('unbind');
-      if ( this.view.models &&  this.view.models.routerDispatcher) {
-        this.view.models.routerDispatcher.off('newPageReady', this.customData.onPageReady);
+      if (dispatcher) {
+        dispatcher.off('newPageReady', this.customData.onPageReady);
       }
 
       if (this.customData.nested !== null) {
@@ -95,6 +93,6 @@ export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefet
 
   return {
     binder,
-    name,
+    name: 'view',
   };
 };

@@ -4,9 +4,14 @@ import { Utils } from '../../utils';
  * Get property of object or array
  * @see https://gist.github.com/der-On/cdafe908847e2b882691
  */
-export const get = (obj: any | any[], key: string | number) => {
-  if (Utils.isObject(obj) || Utils.isArray(obj)) {
-    return obj[key];
+export const get = (value: any | any[] | string, key: string | number) => {
+  if (Utils.isObject(value) || Utils.isArray(value)) {
+    return value[key];
+  }
+  if (Utils.isString(value)) {
+    if (Utils.isNumber(key)) {
+      return (value as string).charAt(key as number);
+    }
   }
   return null;
 };

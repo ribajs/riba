@@ -1,46 +1,14 @@
 import { Utils } from '../../../utils';
-import jQuery from 'jquery';
+// import jQuery from 'jquery';
 import PQueue from 'p-queue'; // https://github.com/sindresorhus/p-queue
 import { GlobalEvent } from '../../../global-event';
-
-export interface ICartUpdateProperty {
-  [variantId: number]: number;
-}
-
-export interface IShopifyCartAddError {
-  status: number;
-  message: string;
-  description: string;
-}
-
-export interface IShopifyCartLineItem {
-  id: number;
-  title: string;
-  price: number;
-  line_price: number;
-  quantity: number;
-  sku: string | null;
-  grams: number;
-  vendor: string;
-  properties: null | any;
-  variant_id: number;
-  gift_card: boolean;
-  url: string;
-  image: string;
-  handle: string;
-  requires_shipping: boolean;
-  product_title: string;
-  product_description: string;
-  product_type: string;
-  variant_title: string;
-  variant_options: Array<string>;
-}
+import { IShopifyCartLineItem, IShopifyCartUpdateProperty, IShopifyCartAddError, IShopifyCartObject } from '../interfaces/interfaces';
 
 export class ShopifyCartService {
 
   public static queue = new PQueue({concurrency: 1});
 
-  public static cart = {};
+  public static cart: IShopifyCartObject | null = null;
 
   public static dispatcher = new GlobalEvent();
 
@@ -63,8 +31,9 @@ export class ShopifyCartService {
       .then((lineItem: IShopifyCartLineItem) => {
         // Force update cart object
         return Utils.get(this.CART_GET_URL, {}, 'json')
-        .then((cart: any) => {
+        .then((cart: IShopifyCartObject) => {
           ShopifyCartService.cart = cart;
+          this.triggerOnChange();
           return lineItem; // return original response
         }) as any;
       })
@@ -80,13 +49,13 @@ export class ShopifyCartService {
    * @return The JSON of the cart.
    * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#get-cart
    */
-  public static get() {
+  public static get(): Promise<IShopifyCartObject> {
     this.triggerDispatcher();
     return this.queue.add(() => {
-      ShopifyCartService.dispatcher.trigger('ShopifyCart:request:start');
       return Utils.get(this.CART_GET_URL, {}, 'json')
-      .then((cart: any) => {
+      .then((cart: IShopifyCartObject) => {
         ShopifyCartService.cart = cart;
+        this.triggerOnChange();
         return ShopifyCartService.cart;
       });
     });
@@ -100,15 +69,19 @@ export class ShopifyCartService {
    * @return Response The JSON of the cart.
    * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#update-cart
    */
-  public static update(id: number | number, quantity: number, properties = {}) {
+  public static update(id: number | number, quantity: number, properties = {}): Promise<IShopifyCartObject> {
     this.triggerDispatcher();
     return this.queue.add(() => {
-      ShopifyCartService.dispatcher.trigger('ShopifyCart:request:start');
       return Utils.post(this.CART_POST_UPDATE_URL, {
         id,
         quantity,
         properties,
       }, 'json');
+    })
+    .then((cart: IShopifyCartObject) => {
+      ShopifyCartService.cart = cart;
+      this.triggerOnChange();
+      return ShopifyCartService.cart;
     });
   }
 
@@ -120,17 +93,16 @@ export class ShopifyCartService {
    * @return Response The JSON of the cart.
    * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#update-cart
    */
-  public static updates(updates: ICartUpdateProperty | Array<number>) {
+  public static updates(updates: IShopifyCartUpdateProperty | Array<number>): Promise<IShopifyCartObject> {
     this.triggerDispatcher();
     return this.queue.add(() => {
-      ShopifyCartService.dispatcher.trigger('ShopifyCart:request:start');
       return Utils.post(this.CART_POST_UPDATE_URL, {
         updates,
       }, 'json');
     })
-    .then((cart: any) => {
-
+    .then((cart: IShopifyCartObject) => {
       ShopifyCartService.cart = cart;
+      this.triggerOnChange();
       return ShopifyCartService.cart;
     });
   }
@@ -155,17 +127,17 @@ export class ShopifyCartService {
    * @return Response The JSON of the cart.
    * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#change-cart
    */
-  public static change(id: number | number, quantity: number, properties = {}) {
+  public static change(id: number | number, quantity: number, properties = {}): Promise<IShopifyCartObject> {
     this.triggerDispatcher();
     return this.queue.add(() => {
-      ShopifyCartService.dispatcher.trigger('ShopifyCart:request:start');
       return Utils.post(this.CART_POST_CHANGE_URL, {
         id,
         quantity,
         properties,
       }, 'json')
-      .then((cart: any) => {
+      .then((cart: IShopifyCartObject) => {
         ShopifyCartService.cart = cart;
+        this.triggerOnChange();
         return ShopifyCartService.cart;
       });
     });
@@ -178,17 +150,17 @@ export class ShopifyCartService {
    * @param properties Additional properties
    * @return Response The JSON of the cart.
    */
-  public static changeLine(line: number | number, quantity: number, properties = {}) {
+  public static changeLine(line: string | number, quantity: number, properties = {}): Promise<IShopifyCartObject> {
     this.triggerDispatcher();
     return this.queue.add(() => {
-      ShopifyCartService.dispatcher.trigger('ShopifyCart:request:start');
       return Utils.post(this.CART_POST_CHANGE_URL, {
         line,
         quantity,
         properties,
       }, 'json')
-      .then((cart: any) => {
+      .then((cart: IShopifyCartObject) => {
         ShopifyCartService.cart = cart;
+        this.triggerOnChange();
         return ShopifyCartService.cart;
       });
     });
@@ -200,13 +172,13 @@ export class ShopifyCartService {
    * @return Response The JSON of an empty cart. This does not remove cart attributes nor the cart note.
    * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#clear-cart
    */
-  public static clear() {
+  public static clear(): Promise<IShopifyCartObject> {
     this.triggerDispatcher();
     return this.queue.add(() => {
-      ShopifyCartService.dispatcher.trigger('ShopifyCart:request:start');
       return Utils.post(this.CART_POST_CLEAR_URL, {}, 'json')
-      .then((cart: any) => {
+      .then((cart: IShopifyCartObject) => {
         ShopifyCartService.cart = cart;
+        this.triggerOnChange();
         return ShopifyCartService.cart;
       });
     });
@@ -245,8 +217,13 @@ export class ShopifyCartService {
     return this.queue
     .onIdle()
     .then(() => {
+      // FIXME if only one promise is in queue onIdle resolves before the queue promise resolves
       ShopifyCartService.dispatcher.trigger('ShopifyCart:request:complete', ShopifyCartService.cart);
     });
+  }
+
+  protected static triggerOnChange() {
+    ShopifyCartService.dispatcher.trigger('ShopifyCart:request:changed', ShopifyCartService.cart);
   }
 
   /**
@@ -260,7 +237,7 @@ export class ShopifyCartService {
   }
 
   protected static triggerDispatcher() {
-    this.triggerOnStart();
     this.triggerOnComplete();
+    this.triggerOnStart();
   }
 }
