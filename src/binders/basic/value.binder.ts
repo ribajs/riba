@@ -45,9 +45,7 @@ export const valueBinder: ITwoWayBinder<any> = {
   },
 
   unbind(el) {
-    if (!this.customData.isRadio) {
-      $(el).off(this.customData.event, this.customData.callback);
-    }
+    $(el).off(this.customData.event, this.customData.callback);
   },
 
   routine(el: HTMLElement, value) {

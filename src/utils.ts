@@ -43,6 +43,38 @@ export const post = (url: string, data?: any, dataType?: string) => {
   });
 };
 
+export const _delete = (url: string, data?: any, dataType?: string) => {
+  return new Promise<any>((resolve, reject) => {
+    return jQuery.ajax({
+      url,
+      type: 'DELETE',
+      data,
+      dataType,
+    })
+    .done((resolve))
+    .fail(( jqxhr, textStatus, error ) => {
+      // console.warn('jqxhr', jqxhr, 'textStatus', textStatus, 'error', error);
+      reject(jqxhr);
+    });
+  });
+};
+
+export const put = (url: string, data?: any, dataType?: string) => {
+  return new Promise<any>((resolve, reject) => {
+    return jQuery.ajax({
+      url,
+      type: 'PUT',
+      data,
+      dataType,
+    })
+    .done((resolve))
+    .fail(( jqxhr, textStatus, error ) => {
+      // console.warn('jqxhr', jqxhr, 'textStatus', textStatus, 'error', error);
+      reject(jqxhr);
+    });
+  });
+};
+
 /**
  * Promise version of jQuery.get()
  * Load data from the server using a HTTP GET request.
@@ -186,6 +218,10 @@ export class Utils {
    * @see https://api.jquery.com/jquery.post/
    */
   public static post = post;
+
+  public static delete = _delete;
+
+  public static put = put;
 
   /**
    * Promise version of jQuery.get()
