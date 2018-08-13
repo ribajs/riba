@@ -1,5 +1,5 @@
-import { count } from './count.formatter';
+import { size } from './size.formatter';
 
 export const empty = (a: any[] | string ) => {
-  return !count(a);
+  return size(a) <= 0;
 };
