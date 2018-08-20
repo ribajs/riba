@@ -38,7 +38,7 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0-rc.1",
     "@babel/preset-env": "^7.0.0-rc.1",
     "@babel/preset-typescript": "^7.0.0-rc.1",
-    "@types/jquery": "^3.3.5",
+    "@types/jquery": "^3.3.6",
     "babel-loader": "^8.0.0-beta.4",
     "harp": "^0.27.0",
     "mocha": "^5.2.0",

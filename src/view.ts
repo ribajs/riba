@@ -191,7 +191,7 @@ export class View {
 
         const type = ComponentService.type(this.options.components[nodeName]);
 
-         // bind (deprecated) components and stop / block the parsing of the childs
+        // bind (deprecated) components and stop / block the parsing of the childs
         if (type === 'classic') {
           this.bindings.push(new ComponentBinding((this as View), node, nodeName));
           View.debug(`Stop parsing on (deprecated) component ${nodeName}`);

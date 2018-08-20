@@ -83,8 +83,11 @@ export abstract class RibaComponent extends FakeHTMLElement {
     let allDefined = true;
     const requiredAttributes = this.requiredAttributes();
     requiredAttributes.forEach((requiredAttribute: string) => {
-      if (!this.scope.hasOwnProperty(requiredAttribute)) {
+      if (!this.scope.hasOwnProperty(requiredAttribute) || !this.scope[requiredAttribute] ) {
+        this.debug(`Attribute ${requiredAttribute} not set: ${this.scope[requiredAttribute]}`);
         allDefined = false;
+      } else {
+        this.debug(`Attribute ${requiredAttribute} is defined: ${this.scope[requiredAttribute]}`);
       }
     });
     return allDefined;
@@ -125,6 +128,7 @@ export abstract class RibaComponent extends FakeHTMLElement {
    * Returns an event handler for the bindings (most on-*) insite this component.
    */
   protected eventHandler(self: RibaComponent): EventHandler {
+    this.debug('eventHandler', self);
     // IMPORTANT this must be a function and not a Arrow Functions
     return function(this: EventHandler, context: Binding, ev: Event, binding: Binding, el: HTMLElement) {
       this.call(self, ev, binding.view.models, el, context);
@@ -149,6 +153,7 @@ export abstract class RibaComponent extends FakeHTMLElement {
    * @param args the parameters you wish to call the function with
    */
   protected argsFormatterHandler(self: this): any {
+    this.debug('argsFormatterHandler');
     return (fn: (...args: any[]) => any, ...fnArgs: any[]): any => {
       return (event: Event, scope: any, el: HTMLElement, binding: any) => {
         // append the event handler args to passed args
@@ -247,8 +252,6 @@ export abstract class RibaComponent extends FakeHTMLElement {
       return;
     }
 
-    await this.beforeBind();
-
     this.tinybind = new Tinybind();
     const viewOptions = this.tinybind.getViewOptions({
       handler: this.eventHandler(this),
@@ -258,6 +261,11 @@ export abstract class RibaComponent extends FakeHTMLElement {
       },
     });
 
+    await this.beforeBind()
+    .catch((error) => {
+      console.error(error);
+    });
+
     if (!this.el) {
       throw new Error('this.el is not defined');
     }
@@ -265,7 +273,10 @@ export abstract class RibaComponent extends FakeHTMLElement {
     this.view = new View(Array.prototype.slice.call(this.el.childNodes), this.scope, viewOptions);
     this.scope = this.view.models;
     this.view.bind();
-    await this.afterBind();
+    await this.afterBind()
+    .catch((error) => {
+      console.error(error);
+    });
     return this.view;
   }
 

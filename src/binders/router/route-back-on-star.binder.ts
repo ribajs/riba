@@ -15,7 +15,7 @@ const routeBackOnStarBinderWrapper: BinderWrapper = () => {
   const name = 'route-back-on-*';
 
   const binder: ITwoWayBinder<eventHandlerFunction> = {
-    priority: 1000,
+    priority: 3000,
 
     bind(el) {
       // noting
