@@ -44,7 +44,7 @@ export class View {
     const view = new View((template as Node), models, binding.view.options);
     view.bind();
     if (!binding || !binding.marker || binding.marker.parentNode === null) {
-      console.warn('[View] No parent node for binding!');
+      this.debug('[View] Warn: No parent node for binding!');
     } else {
       binding.marker.parentNode.insertBefore(template, anchorEl);
     }

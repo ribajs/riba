@@ -252,15 +252,6 @@ export abstract class RibaComponent extends FakeHTMLElement {
       return;
     }
 
-    this.tinybind = new Tinybind();
-    const viewOptions = this.tinybind.getViewOptions({
-      handler: this.eventHandler(this),
-      formatters: {
-        call: this.callFormatterHandler(this),
-        args: this.argsFormatterHandler(this),
-      },
-    });
-
     await this.beforeBind()
     .catch((error) => {
       console.error(error);
@@ -269,6 +260,15 @@ export abstract class RibaComponent extends FakeHTMLElement {
     if (!this.el) {
       throw new Error('this.el is not defined');
     }
+
+    this.tinybind = new Tinybind();
+    const viewOptions = this.tinybind.getViewOptions({
+      handler: this.eventHandler(this),
+      formatters: {
+        call: this.callFormatterHandler(this),
+        args: this.argsFormatterHandler(this),
+      },
+    });
 
     this.view = new View(Array.prototype.slice.call(this.el.childNodes), this.scope, viewOptions);
     this.scope = this.view.models;
