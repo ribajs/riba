@@ -1,5 +1,6 @@
 import { IBinders } from '../../binder.service';
 
+import { animateStar } from './animateStarStar.binder';
 import { assign } from './assign.binder';
 import { addClass } from './class.binder';
 import { checked } from './checked.binder';
@@ -25,6 +26,12 @@ import { starBinder } from './star.binder';
 export const basicBindersWrapper = (jQuery: JQueryStatic) => {
 
   const binders: IBinders<any> = {
+
+    /**
+     * animate-{class}
+     * Add animation class with start and done affix
+     */
+    'animate-*': animateStar,
 
     /**
      * Binds an event handler on the element.
@@ -54,11 +61,13 @@ export const basicBindersWrapper = (jQuery: JQueryStatic) => {
     'remove-class': removeClass,
 
     /**
+     * class-{classname}
      * Adds or removes the class from the element when value is true or false.
      */
     'class-*': classStarJQuery,
 
     /**
+     * class-{style attribute name}
      * Adds a style to the element.
      *
      * ```html
