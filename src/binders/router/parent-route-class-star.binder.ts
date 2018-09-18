@@ -3,7 +3,7 @@ import { ITwoWayBinder, BinderWrapper } from '../../binder.service';
 import { Utils } from '../../utils';
 import { GlobalEvent } from './barba/barba';
 
-export const routeClassStarBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent) => {
+export const parentRouteClassStarBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent) => {
 
   const binder: ITwoWayBinder<string> = {
 
@@ -28,7 +28,7 @@ export const routeClassStarBinderWrapper: BinderWrapper = (dispatcher: GlobalEve
       }
       const onUrlChange = (urlToCheck?: string) => {
         if (urlToCheck) {
-          if (Utils.onRoute(urlToCheck)) {
+          if (Utils.onParentRoute(urlToCheck)) {
             $el.addClass(className);
             // check if element is radio input
             if ($el.is(':radio')) {
@@ -47,7 +47,6 @@ export const routeClassStarBinderWrapper: BinderWrapper = (dispatcher: GlobalEve
       };
 
       dispatcher.on('newPageReady', () => onUrlChange(url));
-      // $(window).on('hashchange', () => onUrlChange(url));
       onUrlChange(url);
     },
 
@@ -58,6 +57,6 @@ export const routeClassStarBinderWrapper: BinderWrapper = (dispatcher: GlobalEve
 
   return {
     binder,
-    name: 'route-class-*',
+    name: 'parent-route-class-*',
   };
 };

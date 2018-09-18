@@ -7,8 +7,7 @@ import { View as RivetsView } from '../../view';
 import { Utils } from '../../utils';
 
 /**
- * Open link with pajax if the route is not the active route
- * Sets also the element active if his url is the current url
+ * TODO doc
  */
 export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefetch: Prefetch) => {
 

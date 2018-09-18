@@ -26,7 +26,7 @@ const onStarBinderWrapper: BinderWrapper = (jQuery: JQueryStatic) => {
         if (this.args === null) {
           throw new Error('args is null');
         }
-        jQuery(el).off(this.args[0] as string, this.customData);
+        jQuery(el).off(this.args[0] as string, this.customData.handler);
       }
     },
 

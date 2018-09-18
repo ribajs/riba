@@ -486,9 +486,18 @@ export class Utils {
   public static onRoute = (checkUrl?: string) => {
     if (checkUrl) {
       const pathname = Utils.getLocation().pathname;
-      if (checkUrl === pathname) {
-        return true;
-      }
+      return checkUrl === pathname;
+    }
+    return false;
+  }
+
+  /**
+   * Check if the current location url stats with a url or is equal
+   */
+  public static onParentRoute = (checkUrl?: string) => {
+    if (checkUrl) {
+      const pathname = Utils.getLocation().pathname;
+      return pathname.startsWith(checkUrl);
     }
     return false;
   }
