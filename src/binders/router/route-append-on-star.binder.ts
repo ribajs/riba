@@ -43,6 +43,10 @@ export const routeAppendBinderOnStarWrapper: BinderWrapper = () => {
             self.customData.nested = new RivetsView($container[0], self.view.models, self.view.options);
             self.customData.nested.bind();
 
+            if (self.customData.options.replaceHistory) {
+              window.history.replaceState(null, undefined, self.customData.options.url);
+            }
+
             if (this.customData.options.removeAfterLoad) {
               self.unbind();
               el.remove();
@@ -58,6 +62,7 @@ export const routeAppendBinderOnStarWrapper: BinderWrapper = () => {
       // Set default options
       this.customData.options = options;
       this.customData.options.listenAllLinks = this.customData.options.listenAllLinks || false;
+      this.customData.options.replaceHistory = this.customData.options.replaceHistory || false;
       this.customData.options.removeAfterLoad = this.customData.options.removeAfterLoad || true;
 
       if (this.customData.options.removeAfterLoad) {

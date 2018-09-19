@@ -176,15 +176,17 @@ class Pjax {
 
   private dispatcher = new GlobalEvent();
 
-  private transition: ITransition = new HideShowTransition();
+  private transition: ITransition;
 
   private debug = Debug('router:Pjax');
 
   /**
    * Creates an singleton instance of Pjax.
    */
-  constructor(id: string, $wrapper?: JQuery<HTMLElement>, listenAllLinks: boolean = false, transition?: ITransition, parseTitle = false) {
+  constructor(id: string, $wrapper?: JQuery<HTMLElement>, listenAllLinks: boolean = false, transition: ITransition = new HideShowTransition(), parseTitle = false) {
     this.debug('constructor', id);
+
+    this.transition = transition;
 
     if (Pjax.instances[id]) {
       return Pjax.instances[id];
@@ -195,10 +197,6 @@ class Pjax {
 
     if ($wrapper) {
       this.dom = new Dom($wrapper, this.parseTitle);
-    }
-
-    if (transition) {
-      this.transition = transition;
     }
 
     Pjax.instances[id] = this;

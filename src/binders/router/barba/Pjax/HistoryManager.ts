@@ -75,4 +75,5 @@ export class HistoryManager {
       url,
     });
   }
+
 }

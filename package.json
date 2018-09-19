@@ -32,22 +32,22 @@
     "build-doc": "harp compile docs/_harp ./docs"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/preset-typescript": "^7.0.0",
-    "@types/jquery": "^3.3.6",
-    "babel-loader": "^8.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-typescript": "^7.1.0",
+    "@types/jquery": "^3.3.9",
+    "babel-loader": "^8.0.2",
     "harp": "^0.27.0",
     "mocha": "^5.2.0",
     "mocha-chrome": "^1.1.0",
     "should": "^13.2.3",
-    "sinon": "^6.1.5",
+    "sinon": "^6.3.4",
     "tslint": "^5.11.0",
-    "typescript": "^3.0.1",
-    "webpack": "^4.17.1",
+    "typescript": "^3.0.3",
+    "webpack": "^4.19.1",
     "webpack-cli": "^3.1.0"
   },
   "dependencies": {
@@ -55,7 +55,7 @@
     "@types/core-js": "^2.5.0",
     "@types/debug": "0.0.30",
     "@types/p-queue": "^2.3.1",
-    "debug": "^3.1.0",
+    "debug": "^3.2.5",
     "jquery": "^3.3.1",
     "p-queue": "^2.4.2"
   }

@@ -7,7 +7,16 @@ import { View as RivetsView } from '../../view';
 import { Utils } from '../../utils';
 
 /**
- * TODO doc
+ * The main wrapper for the riba view
+ * TODO convert this to a component
+ *
+ * ```
+ *   <div rv-view='{"listenAllLinks": true}'>
+ *     <div class="rv-view-container" {% include 'jumplink-utils-barba-container-attributes', parseCollection: true %}>
+ *       {{ content_for_layout }}
+ *     </div>
+ *   </div>
+ * ```
  */
 export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefetch: Prefetch) => {
 
@@ -45,6 +54,37 @@ export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefet
         self.customData.nested.bind();
       };
 
+      this.customData.onTransitionCompleted = () => {
+        debug('onTransitionCompleted');
+
+        // scroll to Anchor of hash
+        if (this.customData.options.scrollToAnchorHash && window.location.hash) {
+          const $scrollToMe = JQuery(window.location.hash);
+          if ($scrollToMe && $scrollToMe.length) {
+            const offset = $scrollToMe.offset();
+            if (offset && offset.top) {
+              debug('scroll to anchor:', $scrollToMe);
+              return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                  JQuery('html').animate({scrollTop: offset.top}, {
+                    duration: 1000,
+                    complete: () => {
+                      debug('scroll complete');
+                      resolve();
+                    },
+                    fail: () => {
+                      debug('scroll fail');
+                      reject();
+                    },
+                  });
+                }, 0);
+              });
+            }
+          }
+        }
+        return Promise.resolve();
+      };
+
       /*
       * Make the dispatcher available in the model to register event handlers.
       *
@@ -65,12 +105,14 @@ export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefet
     routine(el: HTMLUnknownElement, options: any) {
       debug('bind', this.customData);
       // Set default options
-      options = options || {};
-      options.listenAllLinks = options.listenAllLinks || true;
-      options.transition = options.transition || new HideShowTransition();
-      debug('options', options);
+      this.customData.options = this.customData.options || {};
+      this.customData.options.listenAllLinks = this.customData.options.listenAllLinks || true;
+      this.customData.options.scrollToAnchorHash = this.customData.options.scrollToAnchorHash || true;
+      this.customData.options.transition = this.customData.options.transition || new HideShowTransition(/*this.customData.options.scrollToAnchorHash*/);
+      debug('options', this.customData.options);
 
       dispatcher.on('newPageReady', this.customData.onPageReady);
+      dispatcher.on('transitionCompleted', this.customData.onTransitionCompleted);
 
       prefetch.init(options.listenAllLinks);
       pjax.start(this.customData.$wrapper, options.listenAllLinks, options.transition, true);

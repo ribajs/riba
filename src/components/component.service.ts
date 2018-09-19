@@ -119,11 +119,17 @@ export class ComponentService {
    * @param components
    */
   public regists(components: IComponents): IComponents {
-    for (const name in components) {
+    for (let name in components) {
       if (components.hasOwnProperty(name)) {
-        this.regist(components[name], name);
+        const component = components[name];
+        if (typeof((component as typeof RibaComponent).tagName) === 'string') {
+          name = (component as typeof RibaComponent).tagName;
+        }
+
+        this.regist(component, name);
       }
     }
+
     return this.components;
   }
 }
