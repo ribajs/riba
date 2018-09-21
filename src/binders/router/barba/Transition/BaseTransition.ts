@@ -40,16 +40,11 @@ export abstract class BaseTransition implements ITransition {
 
   protected debug = Debug('barba:BaseTransition');
 
-  /**
-   * Helper to extend the object
-   *
-   * @memberOf Barba.BaseTransition
-   * @param  {Object} newObject
-   * @return {Object} newInheritObject
-   */
-  // public extend(obj: object) {
-  //   return Utils.extend(this, obj);
-  // }
+  protected action: 'replace' | 'append';
+
+  constructor(action: 'replace' | 'append' = 'replace') {
+    this.action = action;
+  }
 
   /**
    * This function is called from Pjax module to initialize
@@ -91,7 +86,10 @@ export abstract class BaseTransition implements ITransition {
     if (!this.$oldContainer) {
       throw new Error('Can\'t remove old container');
     }
-    this.$oldContainer.remove();
+
+    if (this.action === 'replace') {
+      this.$oldContainer.remove();
+    }
     // this.newContainer.style.visibility = 'visible';
     if (!this.$newContainer) {
       throw new Error('Can\'t show new container');

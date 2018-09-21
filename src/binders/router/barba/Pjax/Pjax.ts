@@ -38,7 +38,11 @@ class Pjax {
   public static instances: IPjaxInstances = {};
 
   public static getInstance(id: string) {
-    return Pjax.instances[id];
+    const result = Pjax.instances[id];
+    if (!result) {
+      throw new Error(`No Pjax instance with id ${id} found!`);
+    }
+    return result;
   }
 
   /**
@@ -174,32 +178,43 @@ class Pjax {
 
   private parseTitle: boolean = false;
 
-  private dispatcher = new GlobalEvent();
+  private dispatcher = new GlobalEvent(); // TODO instead of globalevent get event instance of viewId
 
-  private transition: ITransition;
+  private transition?: ITransition;
+
+  private $wrapper?: JQuery<HTMLElement>;
 
   private debug = Debug('router:Pjax');
+
+  private viewId: string;
 
   /**
    * Creates an singleton instance of Pjax.
    */
-  constructor(id: string, $wrapper?: JQuery<HTMLElement>, listenAllLinks: boolean = false, transition: ITransition = new HideShowTransition(), parseTitle = false) {
+  constructor(id: string, $wrapper?: JQuery<HTMLElement>, containerSelector = '[data-namespace]', listenAllLinks: boolean = false, transition: ITransition = new HideShowTransition(), parseTitle = false) {
     this.debug('constructor', id);
 
-    this.transition = transition;
+    this.viewId = id;
 
-    if (Pjax.instances[id]) {
-      return Pjax.instances[id];
+    let instance = this as Pjax;
+
+    if (Pjax.instances[this.viewId]) {
+      instance = Pjax.instances[this.viewId];
     }
 
-    this.listenAllLinks = listenAllLinks;
-    this.parseTitle = parseTitle;
+    instance.transition = instance.transition || transition;
+
+    instance.$wrapper = instance.$wrapper || $wrapper;
+
+    instance.listenAllLinks = instance.listenAllLinks || listenAllLinks;
+    instance.parseTitle = instance.parseTitle || parseTitle;
 
     if ($wrapper) {
-      this.dom = new Dom($wrapper, this.parseTitle);
+      instance.dom = instance.dom || new Dom($wrapper, containerSelector, this.parseTitle);
     }
 
-    Pjax.instances[id] = this;
+    Pjax.instances[this.viewId] = instance;
+    return Pjax.instances[this.viewId];
   }
 
  /**
@@ -207,20 +222,12 @@ class Pjax {
   *
   * @memberOf Barba.Pjax
   */
-  public start($wrapper: JQuery<HTMLElement>, listenAllLinks: boolean = false, transition?: ITransition, parseTitle = false) {
-
-    this.listenAllLinks = listenAllLinks;
-    this.parseTitle = parseTitle;
-
-    if ($wrapper) {
-      this.dom = new Dom($wrapper, this.parseTitle);
+  public start() {
+    if (this.$wrapper) {
+      this.init(this.$wrapper, this.listenAllLinks);
+    } else {
+      console.error(`Can't init pjax without wrapper`);
     }
-
-    if (transition) {
-      this.transition = transition;
-    }
-
-    this.init($wrapper, listenAllLinks);
   }
 
  /**
@@ -268,7 +275,7 @@ class Pjax {
   */
   public getTransition(): ITransition {
     // User customizable
-    return this.transition;
+    return this.transition || new HideShowTransition();
   }
 
  /**
@@ -409,6 +416,7 @@ class Pjax {
     this.transitionProgress = true;
 
     this.dispatcher.trigger('initStateChange',
+      this.viewId,
       this.history.currentStatus(),
       this.history.prevStatus(),
     );
@@ -448,6 +456,7 @@ class Pjax {
     currentStatus.namespace = this.dom.getNamespace($container);
 
     this.dispatcher.trigger('newPageReady',
+      this.viewId,
       this.history.currentStatus(),
       this.history.prevStatus(),
       $container,
@@ -467,6 +476,7 @@ class Pjax {
     this.transitionProgress = false;
 
     this.dispatcher.trigger('transitionCompleted',
+      this.viewId,
       this.history.currentStatus(),
       this.history.prevStatus(),
     );
@@ -493,8 +503,13 @@ class Pjax {
     );
 
     // Fire for the current view.
-    this.dispatcher.trigger('initStateChange', this.history.currentStatus());
+    this.dispatcher.trigger('initStateChange',
+      this.viewId,
+      this.history.currentStatus(),
+    );
+
     this.dispatcher.trigger('newPageReady',
+      this.viewId,
       this.history.currentStatus(),
       {},
       $container,
@@ -502,7 +517,12 @@ class Pjax {
       $container.data(),
       true, // true if this is the first time newPageReady is tiggered / true on initialisation
     );
-    this.dispatcher.trigger('transitionCompleted', this.history.currentStatus());
+
+    this.dispatcher.trigger('transitionCompleted',
+      this.viewId,
+      this.history.currentStatus(),
+    );
+
     this.bindEvents(listenAllLinks);
   }
 }

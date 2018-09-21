@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Debug from 'debug';
 
 /**
  * Object that is going to deal with DOM parsing/manipulation
@@ -19,7 +20,7 @@ class Dom {
    *
    * @default
    */
-  public containerSelector = '.rv-view-container';
+  public containerSelector: string;
 
   /**
    * Full HTML String of the current page.
@@ -34,8 +35,11 @@ class Dom {
 
   private parseTitle: boolean;
 
-  constructor($wrapper: JQuery<HTMLElement>, parseTitle: boolean) {
+  private debug = Debug('router:Dom');
+
+  constructor($wrapper: JQuery<HTMLElement>, containerSelector = '[data-namespace]', parseTitle: boolean) {
     this._$wrapper = $wrapper;
+    this.containerSelector = containerSelector;
     this.parseTitle = parseTitle;
   }
 
@@ -78,6 +82,7 @@ class Dom {
     if (!$container) {
       throw new Error('[DOM] No container found');
     }
+    this.debug('getContainer', $container);
     return $container;
   }
 
@@ -96,6 +101,7 @@ class Dom {
    * Put the container on the page
    */
   public putContainer($element: JQuery<HTMLElement>) {
+    this.debug('putContainer', $element);
     $element.css('visibility', 'hidden');
     const $wrapper = this.getWrapper();
     $wrapper.append($element);
@@ -111,6 +117,7 @@ class Dom {
   public parseContainer($newPage: JQuery<HTMLElement>): JQuery<HTMLElement> {
     const $container = $newPage.find(this.containerSelector);
     if (!$container.length) {
+      this.debug(`No container with selector "${this.containerSelector}" found!`, $newPage);
       throw new Error(`No container with selector "${this.containerSelector}" found!`);
     }
     return $container;

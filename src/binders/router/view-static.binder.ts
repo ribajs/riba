@@ -1,7 +1,7 @@
 import Debug from 'debug';
 import JQuery from 'jquery';
 import { ITwoWayBinder, BinderWrapper } from '../../binder.service';
-import { Pjax } from './barba/barba';
+import { Pjax, HideShowTransition } from './barba/barba';
 import { View as RivetsView } from '../../view';
 import { Utils } from '../../utils';
 
@@ -34,10 +34,11 @@ export const viewStaticBinderWrapper: BinderWrapper = () => {
       // Set default options
       options = options || {};
       options.listenAllLinks = false;
-      // options.transition = options.transition || new HideShowTransition();
+      options.parseTitle = false;
+      options.transition = options.transition || new HideShowTransition();
       debug('options', options);
 
-      const pjax = new Pjax(options.url, $wrapper, false, undefined, false);
+      const pjax = new Pjax(options.url, $wrapper, '[data-namespace]', options.listenAllLinks , options.transition, options.parseTitle);
 
       const $newContainer = pjax.load(options.url);
 

@@ -44,20 +44,20 @@ abstract class BaseView {
   public init() {
     const self = this;
 
-    this.dispatcher.on('initStateChange', (newStatus: IState, oldStatus: IState) => {
+    this.dispatcher.on('initStateChange', (viewId: string, newStatus: IState, oldStatus: IState) => {
       if (oldStatus && oldStatus.namespace === self.namespace) {
         self.onLeave();
       }
     });
 
-    this.dispatcher.on('newPageReady', (newStatus: IState, oldStatus: IState, $container: JQuery<HTMLElement>, html: string, isInit: boolean) => {
+    this.dispatcher.on('newPageReady', (viewId: string, newStatus: IState, oldStatus: IState, $container: JQuery<HTMLElement>, html: string, isInit: boolean) => {
       self.$container = $container;
       if (newStatus.namespace === self.namespace) {
         self.onEnter();
       }
     });
 
-    this.dispatcher.on('transitionCompleted', (newStatus: IState, oldStatus: IState) => {
+    this.dispatcher.on('transitionCompleted', (viewId: string, newStatus: IState, oldStatus: IState) => {
       if (newStatus.namespace === self.namespace) {
         self.onEnterCompleted();
       }

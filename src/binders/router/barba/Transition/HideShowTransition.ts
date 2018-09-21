@@ -14,18 +14,21 @@ export class HideShowTransition extends BaseTransition implements ITransition {
 
   protected debug = Debug('barba:HideShowTransition');
 
-  protected scrollToAnchorHash: boolean;
+  protected action: 'replace' | 'append';
 
-  constructor(scrollToAnchorHash: boolean = true) {
-    super();
-    this.debug('new HideShowTransition');
-    this.scrollToAnchorHash = scrollToAnchorHash;
+  protected scrollToTop: boolean;
+
+  constructor(action: 'replace' | 'append' = 'replace', scrollToTop: boolean = true) {
+    super(action);
+    this.action = action;
+    this.scrollToTop = scrollToTop;
+    this.debug('new HideShowTransition', this.action);
   }
 
   /**
    * TODO use css transition: https://github.com/julianshapiro/velocity/wiki/Property---ScrollTop
    */
-  public scrollToTop() {
+  public doScrollToTop() {
     this.debug('scrollToTop');
     return new Promise((resolve, reject) => {
       JQuery('html')
@@ -50,10 +53,12 @@ export class HideShowTransition extends BaseTransition implements ITransition {
     if (!this.newContainerLoading) {
       throw new Error('this.newContainerLoading is not set');
     }
-    this.scrollToTop()
-    .then(() => {
-      this.debug('scroll then done');
-    });
+    if (this.scrollToTop) {
+      this.doScrollToTop()
+      .then(() => {
+        this.debug('scroll then done');
+      });
+    }
 
     this.newContainerLoading.then(this.finish.bind(this));
   }

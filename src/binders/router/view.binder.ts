@@ -1,7 +1,7 @@
 import Debug from 'debug';
 import JQuery from 'jquery';
 import { ITwoWayBinder, BinderWrapper } from '../../binder.service';
-import { Pjax, Prefetch, IState, HideShowTransition, ITransition } from './barba/barba';
+import { Pjax, Prefetch, IState, HideShowTransition } from './barba/barba';
 import { GlobalEvent } from '../../global-event';
 import { View as RivetsView } from '../../view';
 import { Utils } from '../../utils';
@@ -21,7 +21,6 @@ import { Utils } from '../../utils';
 export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefetch: Prefetch) => {
 
   const debug = Debug('binders:view');
-  const pjax = new Pjax('global');
 
   const binder: ITwoWayBinder<string> = {
 
@@ -30,16 +29,26 @@ export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefet
     bind(el: HTMLUnknownElement) {
       debug('bind', this.customData);
       const self = this;
-      this.customData = {
-        nested: null,
-        $wrapper: JQuery(el),
-      };
+      if (!this.customData) {
+        this.customData = {};
+      }
 
-      this.customData.onPageReady = (currentStatus: IState, prevStatus: IState, $container: JQuery<HTMLElement>, newPageRawHTML: string, dataset: any, isInit: boolean) => {
+      this.customData.nested = this.customData.nested || null,
+      this.customData.$wrapper = this.customData.$wrapper || JQuery(el),
+
+      this.customData.onPageReady = (viewId: string, currentStatus: IState, prevStatus: IState, $container: JQuery<HTMLElement>, newPageRawHTML: string, dataset: any, isInit: boolean) => {
+        // Only to anything if the viewID is eqal (in this way it is possible to have multiple views)
+        if (viewId !== self.customData.options.viewId) {
+          debug('not the right view', self.customData.options.viewId, viewId);
+          return;
+        }
+
         // unbind the old rivets view
         if (self.customData.nested) {
           debug('unbind nested'); // TODO not called?
-          self.customData.nested.unbind();
+          if (self.customData.options.action === 'replace') {
+            self.customData.nested.unbind();
+          }
         }
 
         // add the dateset to the model
@@ -50,12 +59,19 @@ export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefet
 
         debug('newPageReady dataset:', dataset);
 
+        // TODO append on action append
         self.customData.nested = new RivetsView($container[0], self.view.models, self.view.options);
         self.customData.nested.bind();
       };
 
-      this.customData.onTransitionCompleted = () => {
-        debug('onTransitionCompleted');
+      this.customData.onTransitionCompleted = (viewId: string) => {
+        debug('onTransitionCompleted', self.customData);
+
+        // Only to anything if the viewID is eqal (in this way it is possible to have multiple views)
+        if (viewId !== self.customData.options.viewId) {
+          debug('[onTransitionCompleted] not the right view', self.customData.options.viewId, viewId);
+          return;
+        }
 
         // scroll to Anchor of hash
         if (this.customData.options.scrollToAnchorHash && window.location.hash) {
@@ -103,28 +119,40 @@ export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefet
     },
 
     routine(el: HTMLUnknownElement, options: any) {
-      debug('bind', this.customData);
+      const $el = JQuery(el);
       // Set default options
-      this.customData.options = this.customData.options || {};
-      this.customData.options.listenAllLinks = this.customData.options.listenAllLinks || true;
-      this.customData.options.scrollToAnchorHash = this.customData.options.scrollToAnchorHash || true;
-      this.customData.options.transition = this.customData.options.transition || new HideShowTransition(/*this.customData.options.scrollToAnchorHash*/);
+      this.customData.options = options || {};
+      this.customData.options.action = this.customData.options.action || 'replace'; // replace / append
+      this.customData.options.scrollToTop = Utils.isBoolean(this.customData.options.scrollToTop) ? this.customData.options.scrollToTop : true;
+      this.customData.options.listenAllLinks = Utils.isBoolean(this.customData.options.listenAllLinks) ? this.customData.options.listenAllLinks : true;
+      this.customData.options.scrollToAnchorHash = Utils.isBoolean(this.customData.options.scrollToAnchorHash) ? this.customData.options.scrollToAnchorHash : true;
+      this.customData.options.parseTitle = Utils.isBoolean(this.customData.options.parseTitle) ? this.customData.options.parseTitle : false;
+      this.customData.options.transition = this.customData.options.transition || new HideShowTransition(this.customData.options.action, this.customData.options.scrollToTop);
+      this.customData.options.viewId = this.customData.options.viewId || $el.attr('id') || 'main';
+      // this.customData.options.wrapperSelector = '#' + this.customData.options.viewId;
+      this.customData.options.containerSelector = this.customData.options.containerSelector || '[data-namespace]';
+
+      debug('routine', this.customData.options.viewId);
+
+      this.customData.$wrapper.attr('id', this.customData.options.viewId);
       debug('options', this.customData.options);
 
       dispatcher.on('newPageReady', this.customData.onPageReady);
       dispatcher.on('transitionCompleted', this.customData.onTransitionCompleted);
 
-      prefetch.init(options.listenAllLinks);
-      pjax.start(this.customData.$wrapper, options.listenAllLinks, options.transition, true);
+      const pjax = new Pjax(this.customData.options.viewId, this.customData.$wrapper, this.customData.options.containerSelector, this.customData.options.listenAllLinks, this.customData.options.transition, this.customData.options.parseTitle);
+      prefetch.init(this.customData.options.listenAllLinks);
+      pjax.start();
     },
 
     unbind(el: HTMLUnknownElement) {
-      debug('unbind');
+      debug('unbind', this.customData.options.viewId);
       if (dispatcher) {
         dispatcher.off('newPageReady', this.customData.onPageReady);
+        dispatcher.off('transitionCompleted', this.customData.onTransitionCompleted);
       }
 
-      if (this.customData.nested !== null) {
+      if (this.customData && this.customData.nested !== null) {
         this.customData.nested.unbind();
       }
 
