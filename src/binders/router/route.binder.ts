@@ -33,8 +33,6 @@ export const routeBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefe
     let newTab = false;
     const isAnkerHTMLElement = $el.prop('tagName') === 'A';
 
-    const pjax = Pjax.getInstance(options.viewId);
-
     debug('getBinder', el, options.url);
 
     if (!options.url && isAnkerHTMLElement) {
@@ -90,6 +88,7 @@ export const routeBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefe
         debug('already on this site');
       } else {
         if (options.url) {
+          const pjax = Pjax.getInstance(options.viewId);
           pjax.goTo(options.url, newTab);
         }
       }

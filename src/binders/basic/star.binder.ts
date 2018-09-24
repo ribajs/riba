@@ -1,4 +1,5 @@
 import { ITwoWayBinder, BinderWrapper } from '../../binder.service';
+import JQuery from 'jquery';
 
 // TODO this as custom binder? No web component staff for all fallback finders? eg rv-ca-* ca stands for component attribute
 
@@ -20,6 +21,7 @@ const publishBinderChangeEventHandler = function(this: any, event: Event) {
  */
 export const starBinder: ITwoWayBinder<string> = {
   bind(el) {
+    this.customData.$el = JQuery(el);
     // Listen for changes from web component
     el.addEventListener('publish-binder-change:' + this.type, publishBinderChangeEventHandler.bind(this));
   },
@@ -46,12 +48,20 @@ export const starBinder: ITwoWayBinder<string> = {
 
     if (oldValue !== newValue) {
       // Fallback for MutationObserver and attributeChangedCallback: Trigger event to catch them in web components to call the attributeChangedCallback method
-      el.dispatchEvent(new CustomEvent('binder-changed', { detail: {
+      // el.dispatchEvent(new CustomEvent('binder-changed', { detail: {
+      //   name: this.type,
+      //   oldValue,
+      //   newValue,
+      //   namespace: null, // TODO
+      // }}));
+
+      this.customData.$el.trigger('binder-changed', { detail: {
         name: this.type,
         oldValue,
         newValue,
         namespace: null, // TODO
-      }}));
+      }});
+
     }
   },
 };

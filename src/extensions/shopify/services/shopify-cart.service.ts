@@ -1,6 +1,6 @@
 import { Utils, isDefined } from '../../../utils';
 import Debug from 'debug';
-import PQueue from 'p-queue'; // https://github.com/sindresorhus/p-queue
+import { PQueue } from './p-queue.service'; // https://github.com/sindresorhus/p-queue
 import { GlobalEvent } from '../../../global-event';
 import {
   IShopifyCartLineItem,

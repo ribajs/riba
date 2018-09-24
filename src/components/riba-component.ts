@@ -10,6 +10,7 @@ import { Tinybind, EventHandler } from '../tinybind';
 import { Binding } from '../binding';
 import { isJson, camelCase } from '../utils';
 import { FakeHTMLElement } from './fake-html-element';
+import JQuery from 'jquery';
 
 export type TemplateFunction = () => string | null;
 
@@ -23,6 +24,8 @@ export abstract class RibaComponent extends FakeHTMLElement {
   protected tinybind?: Tinybind;
 
   protected el: HTMLElement;
+
+  // protected $el: JQuery<HTMLElement>;
 
   protected abstract scope: any;
 
@@ -45,6 +48,7 @@ export abstract class RibaComponent extends FakeHTMLElement {
     } else {
       throw new Error(`element is required on browsers without custom elements support`);
     }
+    // this.$el = JQuery(this.el);
   }
 
   protected abstract template(): string | null;
@@ -188,7 +192,8 @@ export abstract class RibaComponent extends FakeHTMLElement {
       this.attributeObserverFallback.disconnect();
     }
 
-    this.el.removeEventListener('binder-changed', this.BinderChangedEventHandler);
+    // this.el.removeEventListener('binder-changed', this.BinderChangedEventHandler);
+    // this.$el.off('binder-changed', this.BinderChangedEventHandler);
   }
 
   /**
@@ -323,6 +328,7 @@ export abstract class RibaComponent extends FakeHTMLElement {
       } else {
         // use attribute change event as fallback for MutationObserver
         this.el.addEventListener('binder-changed', this.BinderChangedEventHandler);
+        // this.$el.on('binder-changed', this.BinderChangedEventHandler);
       }
 
       // call attributeChangedCallback for all already setted static attributes
