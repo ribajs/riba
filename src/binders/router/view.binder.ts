@@ -55,9 +55,11 @@ export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefet
         if (!Utils.isObject(self.view.models)) {
           self.view.models = {};
         }
-        self.view.models.dataset = $container.data();
 
-        debug('newPageReady dataset:', dataset);
+        if (self.customData.options.datasetToModel === true && Utils.isObject(dataset)) {
+          self.view.models.dataset = dataset; // = $container.data();
+          debug('newPageReady dataset:', dataset);
+        }
 
         // TODO append on action append
         self.customData.nested = new RivetsView($container[0], self.view.models, self.view.options);
@@ -122,15 +124,28 @@ export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefet
       const $el = JQuery(el);
       // Set default options
       this.customData.options = options || {};
-      this.customData.options.action = this.customData.options.action || 'replace'; // replace / append
-      this.customData.options.scrollToTop = Utils.isBoolean(this.customData.options.scrollToTop) ? this.customData.options.scrollToTop : true;
-      this.customData.options.listenAllLinks = Utils.isBoolean(this.customData.options.listenAllLinks) ? this.customData.options.listenAllLinks : true;
-      this.customData.options.scrollToAnchorHash = Utils.isBoolean(this.customData.options.scrollToAnchorHash) ? this.customData.options.scrollToAnchorHash : true;
-      this.customData.options.parseTitle = Utils.isBoolean(this.customData.options.parseTitle) ? this.customData.options.parseTitle : false;
-      this.customData.options.transition = this.customData.options.transition || new HideShowTransition(this.customData.options.action, this.customData.options.scrollToTop);
+
       this.customData.options.viewId = this.customData.options.viewId || $el.attr('id') || 'main';
-      // this.customData.options.wrapperSelector = '#' + this.customData.options.viewId;
+      this.customData.options.action = this.customData.options.action || 'replace'; // replace / append
+      this.customData.options.parseTitle = Utils.isBoolean(this.customData.options.parseTitle) ? this.customData.options.parseTitle : false;
       this.customData.options.containerSelector = this.customData.options.containerSelector || '[data-namespace]';
+
+      if (this.customData.options.viewId === 'main') {
+        this.customData.options.scrollToTop = Utils.isBoolean(this.customData.options.scrollToTop) ? this.customData.options.scrollToTop : true;
+        this.customData.options.listenAllLinks = Utils.isBoolean(this.customData.options.listenAllLinks) ? this.customData.options.listenAllLinks : true;
+        this.customData.options.listenPopstate = Utils.isBoolean(this.customData.options.listenPopstate) ? this.customData.options.listenPopstate : true;
+        this.customData.options.scrollToAnchorHash = Utils.isBoolean(this.customData.options.scrollToAnchorHash) ? this.customData.options.scrollToAnchorHash : true;
+        this.customData.options.datasetToModel = Utils.isBoolean(this.customData.options.datasetToModel) ? this.customData.options.datasetToModel : true;
+      } else {
+        this.customData.options.scrollToTop = Utils.isBoolean(this.customData.options.scrollToTop) ? this.customData.options.scrollToTop : false;
+        this.customData.options.listenAllLinks = Utils.isBoolean(this.customData.options.listenAllLinks) ? this.customData.options.listenAllLinks : false;
+        this.customData.options.listenPopstate = Utils.isBoolean(this.customData.options.listenPopstate) ? this.customData.options.listenPopstate : false;
+        this.customData.options.scrollToAnchorHash = Utils.isBoolean(this.customData.options.scrollToAnchorHash) ? this.customData.options.scrollToAnchorHash : false;
+        this.customData.options.datasetToModel = Utils.isBoolean(this.customData.options.datasetToModel) ? this.customData.options.datasetToModel : false;
+      }
+
+      this.customData.options.autoprefetchLinks = this.customData.options.listenAllLinks;
+      this.customData.options.transition = this.customData.options.transition || new HideShowTransition(this.customData.options.action, this.customData.options.scrollToTop);
 
       debug('routine', this.customData.options.viewId);
 
@@ -140,8 +155,8 @@ export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefet
       dispatcher.on('newPageReady', this.customData.onPageReady);
       dispatcher.on('transitionCompleted', this.customData.onTransitionCompleted);
 
-      const pjax = new Pjax(this.customData.options.viewId, this.customData.$wrapper, this.customData.options.containerSelector, this.customData.options.listenAllLinks, this.customData.options.transition, this.customData.options.parseTitle);
-      prefetch.init(this.customData.options.listenAllLinks);
+      const pjax = new Pjax(this.customData.options.viewId, this.customData.$wrapper, this.customData.options.containerSelector, this.customData.options.listenAllLinks, this.customData.options.listenPopstate, this.customData.options.transition, this.customData.options.parseTitle);
+      prefetch.init(this.customData.options.autoprefetchLinks);
       pjax.start();
     },
 

@@ -41,6 +41,7 @@
     "@babel/preset-typescript": "^7.1.0",
     "@types/jquery": "^3.3.9",
     "babel-loader": "^8.0.2",
+    "babel-plugin-array-includes": "^2.0.3",
     "harp": "^0.27.0",
     "mocha": "^5.2.0",
     "mocha-chrome": "^1.1.0",

@@ -34,11 +34,12 @@ export const viewStaticBinderWrapper: BinderWrapper = () => {
       // Set default options
       options = options || {};
       options.listenAllLinks = false;
+      options.listenPopstate = false;
       options.parseTitle = false;
       options.transition = options.transition || new HideShowTransition();
       debug('options', options);
 
-      const pjax = new Pjax(options.url, $wrapper, '[data-namespace]', options.listenAllLinks , options.transition, options.parseTitle);
+      const pjax = new Pjax(options.url, $wrapper, '[data-namespace]', options.listenAllLinks, options.listenPopstate , options.transition, options.parseTitle);
 
       const $newContainer = pjax.load(options.url);
 

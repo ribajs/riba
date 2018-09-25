@@ -48,19 +48,19 @@ export const starBinder: ITwoWayBinder<string> = {
 
     if (oldValue !== newValue) {
       // Fallback for MutationObserver and attributeChangedCallback: Trigger event to catch them in web components to call the attributeChangedCallback method
-      // el.dispatchEvent(new CustomEvent('binder-changed', { detail: {
-      //   name: this.type,
-      //   oldValue,
-      //   newValue,
-      //   namespace: null, // TODO
-      // }}));
-
-      this.customData.$el.trigger('binder-changed', { detail: {
+      el.dispatchEvent(new CustomEvent('binder-changed', { detail: {
         name: this.type,
         oldValue,
         newValue,
         namespace: null, // TODO
-      }});
+      }}));
+
+      // this.customData.$el.trigger('binder-changed', { detail: {
+      //   name: this.type,
+      //   oldValue,
+      //   newValue,
+      //   namespace: null, // TODO
+      // }});
 
     }
   },

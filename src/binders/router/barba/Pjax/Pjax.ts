@@ -174,7 +174,9 @@ class Pjax {
   */
   public transitionProgress: boolean = false;
 
-  private listenAllLinks: boolean = false;
+  private listenAllLinks: boolean;
+
+  private listenPopstate: boolean;
 
   private parseTitle: boolean = false;
 
@@ -191,12 +193,15 @@ class Pjax {
   /**
    * Creates an singleton instance of Pjax.
    */
-  constructor(id: string, $wrapper?: JQuery<HTMLElement>, containerSelector = '[data-namespace]', listenAllLinks: boolean = false, transition: ITransition = new HideShowTransition(), parseTitle = false) {
+  constructor(id: string, $wrapper?: JQuery<HTMLElement>, containerSelector = '[data-namespace]', listenAllLinks: boolean = false, listenPopstate: boolean = true,  transition: ITransition = new HideShowTransition(), parseTitle: boolean = false) {
     this.debug('constructor', id);
 
     this.viewId = id;
 
     let instance = this as Pjax;
+
+    this.listenAllLinks = listenAllLinks;
+    this.listenPopstate = listenPopstate;
 
     if (Pjax.instances[this.viewId]) {
       instance = Pjax.instances[this.viewId];
@@ -206,11 +211,13 @@ class Pjax {
 
     instance.$wrapper = instance.$wrapper || $wrapper;
 
-    instance.listenAllLinks = instance.listenAllLinks || listenAllLinks;
+    instance.listenAllLinks = Utils.isBoolean(instance.listenAllLinks) ? instance.listenAllLinks : listenAllLinks;
+    instance.listenPopstate = Utils.isBoolean(instance.listenPopstate) ? instance.listenPopstate : listenPopstate;
     instance.parseTitle = instance.parseTitle || parseTitle;
 
-    if ($wrapper) {
-      instance.dom = instance.dom || new Dom($wrapper, containerSelector, this.parseTitle);
+    if (instance.$wrapper) {
+      instance.dom = instance.dom || new Dom(instance.$wrapper, containerSelector, this.parseTitle);
+      instance.$wrapper.attr('aria-live', 'polite');
     }
 
     Pjax.instances[this.viewId] = instance;
@@ -224,7 +231,7 @@ class Pjax {
   */
   public start() {
     if (this.$wrapper) {
-      this.init(this.$wrapper, this.listenAllLinks);
+      this.init(this.$wrapper, this.listenAllLinks, this.listenPopstate);
     } else {
       console.error(`Can't init pjax without wrapper`);
     }
@@ -330,7 +337,7 @@ class Pjax {
   * @memberOf Barba.Pjax
   * @protected
   */
- protected bindEvents(listenAllLinks: boolean) {
+ protected bindEvents(listenAllLinks: boolean, listenPopstate: boolean) {
     // you can also use the rv-router for this
     if (listenAllLinks) {
       document.addEventListener('click',
@@ -338,9 +345,11 @@ class Pjax {
       );
     }
 
-    window.addEventListener('popstate',
-      this.onStateChange.bind(this),
-    );
+    if (listenPopstate) {
+      window.addEventListener('popstate',
+        this.onStateChange.bind(this),
+      );
+    }
   }
 
  /**
@@ -488,14 +497,14 @@ class Pjax {
    * @memberOf Barba.Pjax
    * @protected
    */
-  protected init($wrapper: JQuery<HTMLElement>, listenAllLinks: boolean) {
+  protected init($wrapper: JQuery<HTMLElement>, listenAllLinks: boolean, listenPopstate: boolean) {
     if (!this.dom) {
       throw new Error('[Pjax] you need to call the start method first!');
     }
     const $container = this.dom.getContainer();
     // const $wrapper = this.dom.getWrapper();
 
-    $wrapper.attr('aria-live', 'polite');
+    this.$wrapper = $wrapper;
 
     this.history.add(
       this.getCurrentUrl(),
@@ -523,7 +532,7 @@ class Pjax {
       this.history.currentStatus(),
     );
 
-    this.bindEvents(listenAllLinks);
+    this.bindEvents(listenAllLinks, listenPopstate);
   }
 }
 
