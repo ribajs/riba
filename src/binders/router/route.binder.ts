@@ -1,7 +1,7 @@
 import Debug from 'debug';
 import JQuery from 'jquery';
 import { IOneWayBinder, BinderWrapper } from '../../binder.service';
-import { Pjax, Prefetch, GlobalEvent } from './barba/barba';
+import { Pjax, Prefetch, EventDispatcher } from './barba/barba';
 import { Utils } from '../../utils';
 
 export type IRouteOptions = any;
@@ -10,7 +10,7 @@ export type IRouteOptions = any;
  * Open link with pajax if the route is not the active route
  * Sets also the element active if his url is the current url
  */
-export const routeBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefetch: Prefetch) => {
+export const routeBinderWrapper: BinderWrapper = () => {
 
   const debug = Debug('binders:route');
 
@@ -28,6 +28,8 @@ export const routeBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefe
 
     options.viewId = options.viewId || 'main';
     options.removeAfterActivation = Utils.isBoolean(options.removeAfterActivation) ? options.removeAfterActivation : false;
+    const dispatcher = new EventDispatcher(options.viewId);
+    const prefetch = new Prefetch();
 
     const $el = JQuery(el);
     let newTab = false;

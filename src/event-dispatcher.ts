@@ -4,15 +4,27 @@ interface IEvents {
   [eventName: string]: EventCallback[];
 }
 
+export interface IEventDispatcherInstances {
+  [key: string]: EventDispatcher;
+}
+
 /**
  * Little Dispatcher inspired by MicroEvent.js
  *
  * @type {object}
  */
-class GlobalEvent {
+class EventDispatcher {
 
-  /** singleton instance */
-  private static instance: GlobalEvent;
+  public static instances: IEventDispatcherInstances = {};
+
+  public static getInstance(id: string) {
+    const result = EventDispatcher.instances[id];
+    if (!result) {
+      throw new Error(`No EventDispatcher instance with id ${id} found!`);
+    }
+    return result;
+  }
+
   /**
    * Object that keeps all the events
    *
@@ -22,16 +34,21 @@ class GlobalEvent {
    */
   private events: IEvents = {};
 
+  private id: string;
+
   /**
    * Creates an singleton instance of Dispatcher.
    * @memberof Dispatcher
    */
-  constructor() {
-    if (GlobalEvent.instance) {
-      return GlobalEvent.instance;
+  constructor(id: string = 'main') {
+    this.id = id;
+
+    if (EventDispatcher.instances[this.id]) {
+      return EventDispatcher.instances[this.id];
     }
 
-    GlobalEvent.instance = this;
+    EventDispatcher.instances[this.id] = this;
+    return EventDispatcher.instances[this.id];
   }
 
   /**
@@ -79,4 +96,4 @@ class GlobalEvent {
   }
 }
 
-export { GlobalEvent };
+export { EventDispatcher };

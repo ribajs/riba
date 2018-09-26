@@ -1,14 +1,16 @@
 import $ from 'jquery';
 import { ITwoWayBinder, BinderWrapper } from '../../binder.service';
 import { Utils } from '../../utils';
-import { GlobalEvent } from './barba/barba';
+import { EventDispatcher } from './barba/barba';
 
-export const routeClassStarBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent) => {
+export const routeClassStarBinderWrapper: BinderWrapper = () => {
 
   const binder: ITwoWayBinder<string> = {
 
     bind(el: HTMLUnknownElement) {
-      // console.warn('routeClassStarBinder bind', el);
+      this.customData = {
+        dispatcher: new EventDispatcher('main'),
+      };
     },
 
     /**
@@ -45,8 +47,7 @@ export const routeClassStarBinderWrapper: BinderWrapper = (dispatcher: GlobalEve
         }
         return false;
       };
-
-      dispatcher.on('newPageReady', () => onUrlChange(url));
+      this.customData.dispatcher.on('newPageReady', () => onUrlChange(url));
       // $(window).on('hashchange', () => onUrlChange(url));
       onUrlChange(url);
     },

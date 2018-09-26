@@ -16,7 +16,7 @@ import {
   routerBinders,
 
   // classes
-  GlobalEvent,
+  EventDispatcher,
   Pjax,
   Prefetch,
 } from './index';
@@ -36,7 +36,7 @@ tinybind.binderService.regists(basicBindersWrapper(JQuery));
 tinybind.binderService.regists(routerBinders);
 
 /** Additional global exports */
-(window as any).globalEvents = new GlobalEvent();
+// (window as any).dispatcher = new EventDispatcher('main');
 (window as any).prefetch = new Prefetch();
 
 export default tinybind;

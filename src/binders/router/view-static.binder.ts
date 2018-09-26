@@ -37,9 +37,10 @@ export const viewStaticBinderWrapper: BinderWrapper = () => {
       options.listenPopstate = false;
       options.parseTitle = false;
       options.transition = options.transition || new HideShowTransition();
+      options.viewId = options.url;
       debug('options', options);
 
-      const pjax = new Pjax(options.url, $wrapper, '[data-namespace]', options.listenAllLinks, options.listenPopstate , options.transition, options.parseTitle);
+      const pjax = new Pjax(options.viewId, $wrapper, '[data-namespace]', options.listenAllLinks, options.listenPopstate , options.transition, options.parseTitle);
 
       const $newContainer = pjax.load(options.url);
 

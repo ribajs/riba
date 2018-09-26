@@ -2,7 +2,7 @@ import Debug from 'debug';
 import JQuery from 'jquery';
 import { ITwoWayBinder, BinderWrapper } from '../../binder.service';
 import { Pjax, Prefetch, IState, HideShowTransition } from './barba/barba';
-import { GlobalEvent } from '../../global-event';
+import { EventDispatcher } from '../../event-dispatcher';
 import { View as RivetsView } from '../../view';
 import { Utils } from '../../utils';
 
@@ -18,7 +18,7 @@ import { Utils } from '../../utils';
  *   </div>
  * ```
  */
-export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefetch: Prefetch) => {
+export const viewBinderWrapper: BinderWrapper = () => {
 
   const debug = Debug('binders:view');
 
@@ -117,7 +117,7 @@ export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefet
       * ...etc.
       *
       */
-      this.view.models.routerDispatcher = dispatcher;
+      // this.view.models.routerDispatcher = dispatcher;
     },
 
     routine(el: HTMLUnknownElement, options: any) {
@@ -147,24 +147,27 @@ export const viewBinderWrapper: BinderWrapper = (dispatcher: GlobalEvent, prefet
       this.customData.options.autoprefetchLinks = this.customData.options.listenAllLinks;
       this.customData.options.transition = this.customData.options.transition || new HideShowTransition(this.customData.options.action, this.customData.options.scrollToTop);
 
+      this.customData.dispatcher = new EventDispatcher(this.customData.options.viewId);
+      this.customData.prefetch = new Prefetch();
+
       debug('routine', this.customData.options.viewId);
 
       this.customData.$wrapper.attr('id', this.customData.options.viewId);
       debug('options', this.customData.options);
 
-      dispatcher.on('newPageReady', this.customData.onPageReady);
-      dispatcher.on('transitionCompleted', this.customData.onTransitionCompleted);
+      this.customData.dispatcher.on('newPageReady', this.customData.onPageReady);
+      this.customData.dispatcher.on('transitionCompleted', this.customData.onTransitionCompleted);
 
       const pjax = new Pjax(this.customData.options.viewId, this.customData.$wrapper, this.customData.options.containerSelector, this.customData.options.listenAllLinks, this.customData.options.listenPopstate, this.customData.options.transition, this.customData.options.parseTitle);
-      prefetch.init(this.customData.options.autoprefetchLinks);
+      this.customData.prefetch.init(this.customData.options.autoprefetchLinks);
       pjax.start();
     },
 
     unbind(el: HTMLUnknownElement) {
       debug('unbind', this.customData.options.viewId);
-      if (dispatcher) {
-        dispatcher.off('newPageReady', this.customData.onPageReady);
-        dispatcher.off('transitionCompleted', this.customData.onTransitionCompleted);
+      if (this.customData.dispatcher) {
+        this.customData.dispatcher.off('newPageReady', this.customData.onPageReady);
+        this.customData.dispatcher.off('transitionCompleted', this.customData.onTransitionCompleted);
       }
 
       if (this.customData && this.customData.nested !== null) {

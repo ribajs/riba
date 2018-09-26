@@ -4,7 +4,7 @@ export * from './Prefetch';
 
 import Debug from 'debug';
 
-import { GlobalEvent } from '../../../../global-event';
+import { EventDispatcher } from '../../../../event-dispatcher';
 import { Utils } from '../../../../utils';
 import { BaseCache } from '../Cache';
 import { HideShowTransition, ITransition } from '../Transition/Transition';
@@ -180,7 +180,7 @@ class Pjax {
 
   private parseTitle: boolean = false;
 
-  private dispatcher = new GlobalEvent(); // TODO instead of globalevent get event instance of viewId
+  private dispatcher: EventDispatcher;
 
   private transition?: ITransition;
 
@@ -199,6 +199,8 @@ class Pjax {
     this.viewId = id;
 
     let instance = this as Pjax;
+
+    this.dispatcher = new EventDispatcher(this.viewId);
 
     this.listenAllLinks = listenAllLinks;
     this.listenPopstate = listenPopstate;

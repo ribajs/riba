@@ -1,4 +1,4 @@
-import { GlobalEvent } from '../../../global-event';
+import { EventDispatcher } from '../../../event-dispatcher';
 import { Utils } from '../../../utils';
 import { IState } from './Pjax/Pjax';
 
@@ -20,7 +20,7 @@ abstract class BaseView {
 
   protected $container?: JQuery<HTMLElement>;
 
-  private dispatcher = new GlobalEvent();
+  private dispatcher = new EventDispatcher();
 
   /**
    * Helper to extend the object

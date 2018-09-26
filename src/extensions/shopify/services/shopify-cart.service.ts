@@ -1,7 +1,7 @@
 import { Utils, isDefined } from '../../../utils';
 import Debug from 'debug';
 import { PQueue } from './p-queue.service'; // https://github.com/sindresorhus/p-queue
-import { GlobalEvent } from '../../../global-event';
+import { EventDispatcher } from '../../../event-dispatcher';
 import {
   IShopifyCartLineItem,
   IShopifyCartUpdateProperty,
@@ -24,7 +24,7 @@ export class ShopifyCartService {
 
   public static cart: IShopifyCartObject | null = null;
 
-  public static dispatcher = new GlobalEvent();
+  public static shopifyCartEventDispatcher = new EventDispatcher('ShopifyCart');
 
   /**
    * Use this to add a variant to the cart.
@@ -324,7 +324,7 @@ export class ShopifyCartService {
       return this.queue
       .onIdle()
       .then(() => {
-        ShopifyCartService.dispatcher.trigger('ShopifyCart:request:complete', this.cart);
+        ShopifyCartService.shopifyCartEventDispatcher.trigger('ShopifyCart:request:complete', this.cart);
         this.waitForComplete = false;
       });
     }
@@ -336,7 +336,7 @@ export class ShopifyCartService {
    */
   protected static triggerOnChange(cart: IShopifyCartObject) {
     this.cart = cart;
-    ShopifyCartService.dispatcher.trigger('ShopifyCart:request:changed', this.cart);
+    ShopifyCartService.shopifyCartEventDispatcher.trigger('ShopifyCart:request:changed', this.cart);
   }
 
   /**
@@ -346,7 +346,7 @@ export class ShopifyCartService {
     if (this.queue.pending > 0) {
       return;
     }
-    ShopifyCartService.dispatcher.trigger('ShopifyCart:request:start');
+    ShopifyCartService.shopifyCartEventDispatcher.trigger('ShopifyCart:request:start');
   }
 
   protected static normalizeShippingRates(shippingRates: IShopifyShippingRates): IShopifyShippingRatesNormalized {
