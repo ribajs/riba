@@ -268,7 +268,7 @@ class Pjax {
     }
 
     if (url.indexOf('http') !== 0) {
-      window.history.pushState(null, undefined, url);
+      window.history.pushState(null, '', url);
       return this.onStateChange();
     }
 

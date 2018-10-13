@@ -462,7 +462,7 @@ export class Utils {
       return window.location;
     }
     // l.href = href;
-    const l = (jQuery(`<a href="${url}"></a>`)[0] as HTMLAnchorElement as HTMLHyperlinkElementUtils as Location);
+    const l = (jQuery(`<a href="${url}"></a>`)[0] as any as Location);
     return l;
   }
 
@@ -588,8 +588,8 @@ export class Utils {
   }
 
   public static getViewportDimensions()  {
-    const w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-    const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    const w = Math.max(document.documentElement ? document.documentElement.clientWidth : 0, window.innerWidth || 0);
+    const h = Math.max(document.documentElement ? document.documentElement.clientHeight : 0, window.innerHeight || 0);
     return {
       h,
       w,
