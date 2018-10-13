@@ -11,9 +11,9 @@ export class PQueue {
   private _intervalCount = 0;
   private _intervalCap: typeof Infinity;
   private _interval: number;
-  private _intervalId?: number;
+  private _intervalId?: any;
   private _intervalEnd = 0;
-  private _timeoutId: number | null;
+  private _timeoutId: any | null;
 
   private _queueClass: string;
   private _pendingCount = 0;
