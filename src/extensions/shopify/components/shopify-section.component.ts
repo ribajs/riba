@@ -6,10 +6,6 @@ export abstract class ShopifySectionComponent extends RibaComponent {
 
   public static tagName: string = 'rv-shopify-section';
 
-  static get observedAttributes() {
-    return [];
-  }
-
   protected debug = Debug('component:' + ShopifySectionComponent.tagName);
 
   protected $el: JQuery<HTMLElement>;
