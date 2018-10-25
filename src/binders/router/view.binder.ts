@@ -84,7 +84,7 @@ export const viewBinderWrapper: BinderWrapper = () => {
               debug('scroll to anchor:', $scrollToMe);
               return new Promise((resolve, reject) => {
                 setTimeout(() => {
-                  JQuery('html').animate({scrollTop: offset.top}, {
+                  JQuery('body, html').animate({scrollTop: offset.top}, {
                     duration: 1000,
                     complete: () => {
                       debug('scroll complete');

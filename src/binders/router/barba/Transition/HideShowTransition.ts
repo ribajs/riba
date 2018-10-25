@@ -31,9 +31,9 @@ export class HideShowTransition extends BaseTransition implements ITransition {
   public doScrollToTop() {
     this.debug('scrollToTop');
     return new Promise((resolve, reject) => {
-      JQuery('html')
+      JQuery('html, body')
       .animate({
-        scrollTop: 0,
+        scrollTop: '0px',
       }, {
         duration: 1000,
         complete: () => {
