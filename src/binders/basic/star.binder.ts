@@ -3,6 +3,15 @@ import JQuery from 'jquery';
 
 // TODO this as custom binder? No web component staff for all fallback finders? eg rv-ca-* ca stands for component attribute
 
+export interface IBinderAttributeChangedEvent {
+  detail: {
+    name: string;
+    oldValue: string;
+    newValue: string;
+    namespace: null,
+  };
+}
+
 /**
  * Event handler to liste for publish binder event for two-way-binding in web components
  */
@@ -53,7 +62,7 @@ export const starBinder: ITwoWayBinder<string> = {
         oldValue,
         newValue,
         namespace: null, // TODO
-      }}));
+      }} as IBinderAttributeChangedEvent));
 
       // this.customData.$el.trigger('binder-changed', { detail: {
       //   name: this.type,
