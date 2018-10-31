@@ -1,8 +1,7 @@
-import { IFormatters } from '../../formatter.service';
+import { IFormatters } from '../../services/formatter.service';
 
 // property / object / array formatters
 import { parse } from './parse.formatter';
-import { json } from './json.formatter';
 import { first } from './first.formatter';
 import { last } from './last.formatter';
 import { contains } from './contains.formatter';
@@ -14,8 +13,8 @@ import { empty } from './empty.formatter';
 import { isLast } from './isLast.formatter';
 import { range } from './range.formatter';
 
-export { parse, json, first, last, contains, get, set, match, size, empty, isLast, range };
+export { parse, first, last, contains, get, set, match, size, empty, isLast, range };
 
 export const propertyFormatters: IFormatters = {
-  parse, json, first, last, contains, get, set, match, size, empty, isLast, range,
+  parse, first, last, contains, get, set, match, size, empty, isLast, range,
 };

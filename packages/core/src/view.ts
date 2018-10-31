@@ -1,7 +1,7 @@
 import { IViewOptions, Riba } from './riba';
-import { Binder, ITwoWayBinder } from './binder.service';
+import { Binder, ITwoWayBinder } from './services/binder.service';
 import { Binding, IBindable } from './binding';
-import { ComponentService} from './components/component.service';
+import { ComponentService} from './services/component.service';
 import { ComponentBinding, IBoundElement } from './components/component-binding';
 import { parseNode, parseDeclaration } from './parsers';
 import Debug from 'debug';

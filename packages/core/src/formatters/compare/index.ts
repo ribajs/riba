@@ -6,7 +6,7 @@
  * @see https://github.com/JumpLinkNetwork/shopify-productjs
  */
 
-import { IFormatters } from '../../formatter.service';
+import { IFormatters } from '../../services/formatter.service';
 
 // compare functions
 import { and } from './and.formatter';

@@ -1,4 +1,4 @@
-import './polyfills';
+import './modules/polyfills.module';
 import JQuery from 'jquery';
 
 import {
@@ -13,12 +13,7 @@ import {
 
   // binders
   basicBindersWrapper,
-  routerBinders,
 
-  // classes
-  EventDispatcher,
-  Pjax,
-  Prefetch,
 } from './index';
 
 // Global riba object
@@ -33,10 +28,5 @@ riba.formatterService.regists(stringFormatters);
 
 // regist binders
 riba.binderService.regists(basicBindersWrapper(JQuery));
-riba.binderService.regists(routerBinders);
-
-/** Additional global exports */
-// (window as any).dispatcher = new EventDispatcher('main');
-(window as any).prefetch = new Prefetch();
 
 export default riba;

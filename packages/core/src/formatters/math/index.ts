@@ -1,4 +1,4 @@
-import { IFormatters } from '../../formatter.service';
+import { IFormatters } from '../../services/formatter.service';
 
 // math formatters
 import { random } from './random.formatter';

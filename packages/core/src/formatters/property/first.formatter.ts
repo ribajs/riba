@@ -1,4 +1,3 @@
-import { Utils } from '../../utils';
 import { get } from './get.formatter';
 
 /**

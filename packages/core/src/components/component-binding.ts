@@ -1,10 +1,10 @@
 import { IOptionsParam, IViewOptions } from '../riba';
 import { PRIMITIVE, KEYPATH, parseType, parseDeclaration } from '../parsers';
 import { IFormatterObservers, IBindable } from '../binding';
-import { IBinders } from '../binder.service';
-import { IFormatters } from '../formatter.service';
+import { IBinders } from '../services/binder.service';
+import { IFormatters } from '../services/formatter.service';
 import { View } from '../view';
-import { IClassicComponent, IComponents } from './component.service';
+import { IClassicComponent, IComponents } from '../services/component.service';
 import { Observer, IObservers, IObserverSyncCallback } from '../observer';
 import { IAdapters } from '../adapter';
 import { Utils, camelCase } from '../utils';

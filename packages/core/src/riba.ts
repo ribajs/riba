@@ -1,14 +1,14 @@
 import { Utils } from './utils';
 import { parseTemplate, parseType } from './parsers';
-import { IFormatters, FormatterService } from './formatter.service';
+import { IFormatters, FormatterService } from './services/formatter.service';
 import { Binding } from './binding';
 import { adapter } from './adapter';
 
-import { IBinders, BindersService, ITwoWayBinder } from './binder.service';
+import { IBinders, BindersService, ITwoWayBinder } from './services/binder.service';
 import { View } from './view';
 import { IAdapters } from './adapter';
 import { Observer, Root } from './observer';
-import { IClassicComponent, IComponents, ComponentService } from './components/component.service';
+import { IClassicComponent, IComponents, ComponentService } from './services/component.service';
 
 export interface IExtensions {
   binders?: IBinders<any>;

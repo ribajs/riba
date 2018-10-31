@@ -1,9 +1,9 @@
 import { PRIMITIVE, KEYPATH, parseType } from './parsers';
 import { Observer, IObserverSyncCallback } from './observer';
-import { Binder, IOneWayBinder, ITwoWayBinder } from './binder.service';
+import { Binder, IOneWayBinder, ITwoWayBinder } from './services/binder.service';
 import { View } from './view';
 import { getInputValue, Utils } from './utils';
-import { IOneTwoFormatter } from './formatter.service';
+import { IOneTwoFormatter } from './services/formatter.service';
 import Debug from 'debug';
 
 export interface IBindable {

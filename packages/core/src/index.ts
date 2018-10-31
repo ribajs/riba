@@ -1,14 +1,19 @@
-import './polyfills';
+import './modules/polyfills.module';
+export * from './modules/jquery.module';
+export * from './modules/debug.module';
+
+export * from './services/binder.service';
+export * from './services/component.service';
+export * from './services/event-dispatcher.service';
+export * from './services/formatter.service';
+
 export * from './adapter';
-export * from './binders/router/router.binders';
-export * from './binders/basic/basic.binders';
-export * from './binder.service';
+export * from './binders/basic.binders';
+
 export * from './binding';
 export * from './components/index';
 export * from './formatters/index';
-export * from './formatter.service';
 export * from './parsers';
 export * from './riba';
 export * from './utils';
 export * from './view';
-export * from './extensions/shopify/index';
