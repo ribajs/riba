@@ -119,7 +119,7 @@ export class View {
     }
 
     /** If true stop / block the parseNode  recursion */
-    let block = node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE';
+    let block = node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TEMPLATE';
     const attributes = node.attributes;
     const bindInfos = [];
     const starBinders = this.options.starBinders;
