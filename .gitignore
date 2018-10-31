@@ -1,7 +1,6 @@
 .DS_Store
 *.swp
-node_modules/**/*
-/.idea/
-/node_modules/
+node_modules/
+.idea/
 package-lock.json
 yarn.lock

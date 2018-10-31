@@ -1,7 +1,7 @@
-Use `tinybind.configure` to set the following configuration options for your app. Note that all configuration options can be overridden locally to a particular view if needed.
+Use `riba.configure` to set the following configuration options for your app. Note that all configuration options can be overridden locally to a particular view if needed.
 
 ```javascript
-tinybind.configure({
+riba.configure({
 
   // Attribute prefix in templates
   prefix: 'rv',

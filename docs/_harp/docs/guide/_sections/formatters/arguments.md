@@ -7,7 +7,7 @@ Formatters can accept any number of arguments in the form of keypaths or primiti
 The value of each argument in the binding declaration will be evaluated and passed into the formatter function as an additional argument.
 
 ```javascript
-tinybind.formatters.time = function(value, timezone, format) {
+riba.formatters.time = function(value, timezone, format) {
   return moment(value).tz(timezone).format(format)
 }
 ```

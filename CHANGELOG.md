@@ -50,7 +50,7 @@
 
 ## 0.11.0 and before
 
-- Changes from the Rivets.js fork called [tinybind](https://github.com/blikblum/tinybind)
+- Changes from the Rivets.js fork called [riba](https://github.com/blikblum/riba)
 
 ## 0.8.0
 

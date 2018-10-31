@@ -1,11 +1,11 @@
-# tinybind
+# riba
 
-tinybind is the espiritual sucessor of Rivets.js, a lightweight data binding and templating system that facilitates building data-driven views. It is agnostic about every aspect of a front-end MV(C|VM|P) stack, making it easy to introduce it into your current workflow or to use it as part of your own custom front-end stack comprised of other libraries.
+riba is the espiritual sucessor of Rivets.js, a lightweight data binding and templating system that facilitates building data-driven views. It is agnostic about every aspect of a front-end MV(C|VM|P) stack, making it easy to introduce it into your current workflow or to use it as part of your own custom front-end stack comprised of other libraries.
 
 ## Install
 
 ```bash
-npm install JumpLinkNetwork/tinybind
+npm install JumpLinkNetwork/riba
 ```
 
 ### JavaScript
@@ -13,13 +13,13 @@ npm install JumpLinkNetwork/tinybind
 Use in a script tag...
 
 ```html
-<script src="node_modules/tinybind/dist/tinybind.min.js"></script>
+<script src="node_modules/riba/dist/riba.min.js"></script>
 ```
 
 ... or import using a bundler like webpack
 
 ```javascript
-import tinybind from 'tinybind'
+import riba from 'riba'
 ```
 
 #### Usage
@@ -36,7 +36,7 @@ import tinybind from 'tinybind'
 ```
 
 ```javascript
-tinybind.bind($('#auction')[0], {auction: auction});
+riba.bind($('#auction')[0], {auction: auction});
 ```
 
 ### TypeScript
@@ -45,7 +45,7 @@ tinybind.bind($('#auction')[0], {auction: auction});
 import JQuery from 'jquery';
 
 import {
-  Tinybind,
+  Riba,
   View,
 
   // default binders
@@ -58,28 +58,28 @@ import {
   propertyFormatters,
   specialFormatters,
   stringFormatters,
-} from 'tinybind';
+} from 'riba';
 
 export class Main {
 
   private view: View;
-  private tinybind = new Tinybind();
+  private riba = new Riba();
   private model: any = {};
 
   constructor() {
 
     // regist binders
-    this.tinybind.binderService.regists(routerBinders);
-    this.tinybind.binderService.regists(basicBinders);
+    this.riba.binderService.regists(routerBinders);
+    this.riba.binderService.regists(basicBinders);
 
     // regist formatters
-    this.tinybind.formatterService.regists(compareFormatters);
-    this.tinybind.formatterService.regists(mathFormatters);
-    this.tinybind.formatterService.regists(propertyFormatters);
-    this.tinybind.formatterService.regists(specialFormatters);
-    this.tinybind.formatterService.regists(stringFormatters);
+    this.riba.formatterService.regists(compareFormatters);
+    this.riba.formatterService.regists(mathFormatters);
+    this.riba.formatterService.regists(propertyFormatters);
+    this.riba.formatterService.regists(specialFormatters);
+    this.riba.formatterService.regists(stringFormatters);
 
-    this.view = this.tinybind.bind(JQuery('body')[0], this.model);
+    this.view = this.riba.bind(JQuery('body')[0], this.model);
 
   }
 }
@@ -91,7 +91,7 @@ JQuery(() => {
 
 ## Getting Started and Documentation
 
-Documentation is available on the [homepage](http://blikblum.github.io/tinybind/). Learn by reading the [Guide](http://blikblum.github.io/tinybind/docs/guide/) and refer to the [Binder Reference](http://blikblum.github.io/tinybind/docs/reference/) to see what binders are available to you out-of-the-box.
+Documentation is available on the [homepage](http://blikblum.github.io/riba/). Learn by reading the [Guide](http://blikblum.github.io/riba/docs/guide/) and refer to the [Binder Reference](http://blikblum.github.io/riba/docs/reference/) to see what binders are available to you out-of-the-box.
 
 ## Differences from Rivets.js
 
@@ -108,7 +108,7 @@ Documentation is available on the [homepage](http://blikblum.github.io/tinybind/
     * Related: [551](https://github.com/mikeric/rivets/issues/551) [552](https://github.com/mikeric/rivets/pull/552)
   * Do not bind publish, bind and unbind methods to binding instances
   * Register default binder through fallbackBinder option instead of * binder
-  * Integrate sightglass into tinybind code base
+  * Integrate sightglass into riba code base
   * Remove view.select method
   * The rv-* attributes are removed after binding
   * Changes how observer is registered / notified. Instead of passing a function (sync), pass an object with a sync method
@@ -123,7 +123,7 @@ npm install
 
 ### Building
 
-tinybind.js uses webpack as it's bundling / build tool. Run the following to compile the source into `dist/`.
+riba.js uses webpack as it's bundling / build tool. Run the following to compile the source into `dist/`.
 
 ```bash
 npm run build
@@ -131,7 +131,7 @@ npm run build
 
 ### Testing
 
-tinybind.js uses [mocha](http://visionmedia.github.io/mocha/) as it's testing framework, alongside [should](https://github.com/visionmedia/should.js/) for expectations and [sinon](http://sinonjs.org/) for spies, stubs and mocks. Run the following to run the full test suite.
+riba.js uses [mocha](http://visionmedia.github.io/mocha/) as it's testing framework, alongside [should](https://github.com/visionmedia/should.js/) for expectations and [sinon](http://sinonjs.org/) for spies, stubs and mocks. Run the following to run the full test suite.
 
 ```bash
 npm test

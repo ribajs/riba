@@ -1,9 +1,9 @@
-<!DOCTYPE html><html><head><title>tinybind.js — Lightweight and powerful data binding + templating solution for building modern web applications</title><link rel="stylesheet" href="/./css/bootstrap.css"><link rel="stylesheet" href="/./css/type.css"><link rel="stylesheet" href="/./css/screen.css"><link rel="stylesheet" href="/./css/syntax.css"><link rel="stylesheet" href="/./css/responsive.css"><script src="/./js/jquery.js"></script><script src="/./js/bootstrap.min.js"></script><script src="/./js/highlight.js"></script><script src="/./js/app.js"></script><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html;charset=utf-8"></head><body data-spy="scroll" data-target="#nav"><header><div class="container"><div class="row"><div class="col col-xs-6"><h3 class="logotype"><a href="/./">tinybind</a></h3></div><div class="col col-xs-6 right visible-xs"><i id="hamburger">&#9776;</i></div><div id="menu" class="col col-sm-6 col-xs-12 right hidden-xs"><ul class="list-unstyled"><li><a href="/./docs/guide">Guide</a></li><li><a href="/./docs/reference">Binder Reference</a></li><li><a href="https://github.com/blikblum/tinybind">GitHub</a></li></ul></div></div></div></header><section class="docs"><div class="container"><div class="row"><article class="guide col col-md-9"><h2 id="install">Installation</h2><p>You can grab the latest stable release from <a href="https://raw.githubusercontent.com/blikblum/tinybind/master/dist/tinybind.js">github</a> or install using the package manager of your choice. </p>
-<pre><code class="language-bash">npm install tinybind</code></pre>
+<!DOCTYPE html><html><head><title>riba.js — Lightweight and powerful data binding + templating solution for building modern web applications</title><link rel="stylesheet" href="/./css/bootstrap.css"><link rel="stylesheet" href="/./css/type.css"><link rel="stylesheet" href="/./css/screen.css"><link rel="stylesheet" href="/./css/syntax.css"><link rel="stylesheet" href="/./css/responsive.css"><script src="/./js/jquery.js"></script><script src="/./js/bootstrap.min.js"></script><script src="/./js/highlight.js"></script><script src="/./js/app.js"></script><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html;charset=utf-8"></head><body data-spy="scroll" data-target="#nav"><header><div class="container"><div class="row"><div class="col col-xs-6"><h3 class="logotype"><a href="/./">riba</a></h3></div><div class="col col-xs-6 right visible-xs"><i id="hamburger">&#9776;</i></div><div id="menu" class="col col-sm-6 col-xs-12 right hidden-xs"><ul class="list-unstyled"><li><a href="/./docs/guide">Guide</a></li><li><a href="/./docs/reference">Binder Reference</a></li><li><a href="https://github.com/blikblum/riba">GitHub</a></li></ul></div></div></div></header><section class="docs"><div class="container"><div class="row"><article class="guide col col-md-9"><h2 id="install">Installation</h2><p>You can grab the latest stable release from <a href="https://raw.githubusercontent.com/blikblum/riba/master/dist/riba.js">github</a> or install using the package manager of your choice. </p>
+<pre><code class="language-bash">npm install riba</code></pre>
 <p>Use in a script tag...</p>
-<pre><code class="language-html">&lt;script src=&quot;tinybind.js&quot;&gt;&lt;/script&gt;</code></pre>
+<pre><code class="language-html">&lt;script src=&quot;riba.js&quot;&gt;&lt;/script&gt;</code></pre>
 <p>... or import using a bundler like webpack</p>
-<pre><code class="language-javascript">import tinybind from &#39;tinybind&#39;</code></pre>
+<pre><code class="language-javascript">import riba from &#39;riba&#39;</code></pre>
 <h2 id="usage">Usage</h2><h3 id="usage-templates">Templates</h3><p>Templates describe your UI in plain HTML. You can define them directly in the document, use template elements or store and load them however you like. Just make sure you have a convenient way to reference your templates when you want to bind some data to them.</p>
 <pre><code class="language-html">&lt;section id=&quot;auction&quot;&gt;
   &lt;h3&gt;{ auction.product.name }&lt;/h3&gt;
@@ -13,14 +13,14 @@
     Hurry up! There is { auction.timeLeft | time } left.
   &lt;/aside&gt;
 &lt;/section&gt;</code></pre>
-<p>The important parts to note here are the attributes prefixed with <code>rv-</code> and portions of text wrapped in <code>{ ... }</code>. These are binding declarations and they are the sole way that tinybind ties data to your templates. The values of these declarations all follow the same minimal and expressive syntax.</p>
+<p>The important parts to note here are the attributes prefixed with <code>rv-</code> and portions of text wrapped in <code>{ ... }</code>. These are binding declarations and they are the sole way that riba ties data to your templates. The values of these declarations all follow the same minimal and expressive syntax.</p>
 <pre><code>(keypath | primitive) [formatters...]</code></pre><p>Keypaths get observed and will recompute the binding when any intermediary key changes. A primitive can be a string, number, boolean, null or undefined.</p>
 <p><a href="#formatters">Formatters</a> can be piped to values using <code>|</code> and they follow a similarly minimal yet expressive syntax. <a href="#formatters-arguments">Formatter arguments</a> can be keypaths or primitives. Keypath arguments get observed and will recompute the binding when any intermediary key changes.</p>
-<pre><code>(formatter) [keypath | primitive...]</code></pre><h3 id="usage-binding">Binding</h3><p>Simply call <code>tinybind.bind</code> on a template element with some data that you would like to bind.</p>
-<pre><code class="language-javascript">tinybind.bind(document.getElementById(&#39;auction&#39;), {auction: auction})</code></pre>
-<p><em>Every call to <code>tinybind.bind</code> returns a fully data-bound view that you should hold on to for later. You&#39;ll need it in order to unbind it&#39;s listeners using <code>view.unbind()</code>.</em></p>
-<h3 id="usage-configuring">Configuring</h3><p>Use <code>tinybind.configure</code> to set the following configuration options for your app. Note that all configuration options can be overridden locally to a particular view if needed.</p>
-<pre><code class="language-javascript">tinybind.configure({
+<pre><code>(formatter) [keypath | primitive...]</code></pre><h3 id="usage-binding">Binding</h3><p>Simply call <code>riba.bind</code> on a template element with some data that you would like to bind.</p>
+<pre><code class="language-javascript">riba.bind(document.getElementById(&#39;auction&#39;), {auction: auction})</code></pre>
+<p><em>Every call to <code>riba.bind</code> returns a fully data-bound view that you should hold on to for later. You&#39;ll need it in order to unbind it&#39;s listeners using <code>view.unbind()</code>.</em></p>
+<h3 id="usage-configuring">Configuring</h3><p>Use <code>riba.configure</code> to set the following configuration options for your app. Note that all configuration options can be overridden locally to a particular view if needed.</p>
+<pre><code class="language-javascript">riba.configure({
 
   // Attribute prefix in templates
   prefix: &#39;rv&#39;,
@@ -40,17 +40,17 @@
   }
 
 })</code></pre>
-<h2 id="binders">Binders</h2><p>Binders are the sets of instructions that tell tinybind how to update the DOM when an observed property changes. tinybind.js comes bundled with a handful commonly-used binders for your conveneience. See the <a href="/docs/reference/">Binder Reference</a> to learn more about the built-in binders that are available out of the box.</p>
-<p>While you can accomplish most UI tasks with the built-in binders, it is highly encouraged to extend tinybind with your own binders that are specific to the needs of your application.</p>
+<h2 id="binders">Binders</h2><p>Binders are the sets of instructions that tell riba how to update the DOM when an observed property changes. riba.js comes bundled with a handful commonly-used binders for your conveneience. See the <a href="/docs/reference/">Binder Reference</a> to learn more about the built-in binders that are available out of the box.</p>
+<p>While you can accomplish most UI tasks with the built-in binders, it is highly encouraged to extend riba with your own binders that are specific to the needs of your application.</p>
 <h3 id="binders-one-way">One-way binders</h3><p>One-way binders simply update the DOM when a model property changes (model-to-view only). Let&#39;s say we want a simple binder that updates an element&#39;s color when the model property changes. Here we can define a one-way <code>color</code> binder as a single function. This function takes the element and the current value of the model property, which we will use to updates the element&#39;s color.</p>
-<pre><code class="language-javascript">tinybind.binders.color = function(el, value) {
+<pre><code class="language-javascript">riba.binders.color = function(el, value) {
   el.style.color = value
 }</code></pre>
 <p>With the above binder defined, you can now utilize the <code>rv-color</code> declaration in your views.</p>
 <pre><code class="language-html">&lt;button rv-color=&quot;label.color&quot;&gt;Apply&lt;/button&gt;</code></pre>
 <h3 id="binders-two-way">Two-way binders</h3><p>Two-way binders, like one-way binders, can update the DOM when a model property changes (model-to-view) but can also update the model when the user interacts with the DOM (view-to-model), such as updating a control input, clicking an element or interacting with a third-party widget.</p>
-<p>In order to update the model when the user interacts with the DOM, you need to tell tinybind.js how to bind and unbind to that DOM element to set the value on the model. Instead of defining the binder as a single function, two-way binders are defined as an object containing a few extra functions.</p>
-<pre><code class="language-javascript">tinybind.binders.toggle = {
+<p>In order to update the model when the user interacts with the DOM, you need to tell riba.js how to bind and unbind to that DOM element to set the value on the model. Instead of defining the binder as a single function, two-way binders are defined as an object containing a few extra functions.</p>
+<pre><code class="language-javascript">riba.binders.toggle = {
   bind: function(el) {
     adapter = this.config.adapters[this.key.interface]
     model = this.model
@@ -79,15 +79,15 @@
 <h4>binder.block</h4><p>Blocks the current node and child nodes from being parsed (used for iteration binding as well as the if/unless binders).</p>
 <h2 id="formatters">Formatters</h2><p>Formatters are functions that mutate the incoming and/or outgoing value of a binding. You can use them to format dates, numbers, currencies, etc. and because they work in a similar fashion to the Unix pipeline, the output of each feeds directly as input to the next one, so you can stack as many of them together as you like.</p>
 <h3 id="formatters-one-way">One-way formatters</h3><p>This is by far the most common and practical way to use formatters &mdash; simple read-only mutations to a value. Taking the dates example from above, we can define a <code>date</code> formatter that returns a human-friendly version of a date value.</p>
-<pre><code class="language-javascript">tinybind.formatters.date = function(value){
+<pre><code class="language-javascript">riba.formatters.date = function(value){
   return moment(value).format(&#39;MMM DD, YYYY&#39;)
 }</code></pre>
 <p>Formatters are applied by piping them to binding declarations using <code>|</code> as a delimiter.</p>
 <pre><code class="language-html">&lt;span rv-text=&quot;event.startDate | date&quot;&gt;&lt;/span&gt;</code></pre>
 <h3 id="formatters-two-way">Two-way formatters</h3><p>Two-way formatters are useful when you want to store a value in a particular format, such as a unix epoch time or a cent value, but still let the user input the value in a different format.</p>
-<p>Instead of defining the formatter as a single function, you define it as an object containing <code>read</code> and <code>publish</code> functions. When a formatter is defined as a single function, tinybind assumes it to be in the read direction only. When defined as an object, tinybind uses it&#39;s <code>read</code> and <code>publish</code> functions to effectively serialize and de-serialize the value.</p>
+<p>Instead of defining the formatter as a single function, you define it as an object containing <code>read</code> and <code>publish</code> functions. When a formatter is defined as a single function, riba assumes it to be in the read direction only. When defined as an object, riba uses it&#39;s <code>read</code> and <code>publish</code> functions to effectively serialize and de-serialize the value.</p>
 <p>Using the cent value example from above, let&#39;s say we want to store a monetary value as cents but let the user input it in a dollar amount and automatically round to two decimal places when setting the value on the model. For this we can define a two-way <code>currency</code> formatter.</p>
-<pre><code class="language-javascript">tinybind.formatters.currency = {
+<pre><code class="language-javascript">riba.formatters.currency = {
   read: function(value) {
     return (value / 100).toFixed(2)
   },
@@ -101,18 +101,18 @@
 <h3 id="formatters-arguments">Formatter arguments</h3><p>Formatters can accept any number of arguments in the form of keypaths or primitives. Keypath arguments get observed and will recompute the binding when any intermediary key changes. A primitive can be a string, number, boolean, null or undefined.</p>
 <pre><code class="language-html">&lt;span&gt;{ alarm.time | time user.timezone &#39;hh:mm&#39; }&lt;/span&gt;</code></pre>
 <p>The value of each argument in the binding declaration will be evaluated and passed into the formatter function as an additional argument.</p>
-<pre><code class="language-javascript">tinybind.formatters.time = function(value, timezone, format) {
+<pre><code class="language-javascript">riba.formatters.time = function(value, timezone, format) {
   return moment(value).tz(timezone).format(format)
 }</code></pre>
-<h2 id="adapters">Adapters</h2><p>tinybind is agnostic about the objects that it can subscribe to. This makes it very flexible as it can adapt to work with virtually any library or framework, but it also means that you need to tell tinybind <em>how</em> to subscribe to those objects. This is where adapters come in to play. This feature is driven by the observer pattern.</p>
+<h2 id="adapters">Adapters</h2><p>riba is agnostic about the objects that it can subscribe to. This makes it very flexible as it can adapt to work with virtually any library or framework, but it also means that you need to tell riba <em>how</em> to subscribe to those objects. This is where adapters come in to play. This feature is driven by the observer pattern.</p>
 <p>Each adapter is defined to a unique interface (a single character) which is used to separate the keys in a keypath. The interfaces used in a keypath determine which adapter to use for each intermediary key.</p>
 <pre><code>user.address:city</code></pre><p>The above keypath will use the <code>.</code> adapter to access the <code>address</code> key on the <code>user</code> object, and the <code>:</code> adapter to access the <code>city</code> key on the <code>address</code> object. If you can imagine for a second that <code>address</code> is just a normal property on the user object pointing to a Backbone model, but <code>city</code> is actually an attribute on that Backbone model, you can see how this kind of notation is actually very succint and expressive.</p>
-<p>tinybind comes with a default <code>.</code> adapter based on custom property getter and setter</p>
-<h3 id="adapters-default">The built-in adapter</h3><p>tinybind ships with a <code>.</code> adapter for subscribing to properties on plain JavaScript objects. The adapter is self-implemented using ES5 natives such as <code>Object.defineProperty</code>. In the future, this adapter will be implemented purely using <code>Object.observe</code> as soon as browser support permits.</p>
+<p>riba comes with a default <code>.</code> adapter based on custom property getter and setter</p>
+<h3 id="adapters-default">The built-in adapter</h3><p>riba ships with a <code>.</code> adapter for subscribing to properties on plain JavaScript objects. The adapter is self-implemented using ES5 natives such as <code>Object.defineProperty</code>. In the future, this adapter will be implemented purely using <code>Object.observe</code> as soon as browser support permits.</p>
 <p>If you need to support non-ES5 browsers (&lt; IE 9), you can replace this adapter to use polyfills or with a third-party library that has the browser support you need. If you&#39;re only targetting Chrome Canary, feel free to replace it with an <code>Object.observe</code> adapter now and enter data binding bliss.</p>
-<h3 id="adapters-creating">Creating an adapter</h3><p>Adapters are defined on <code>tinybind.adapters</code> with the interface as the property name and the adapter object as the value. An adapter is just an object that responds to <code>observe</code>, <code>unobserve</code>, <code>get</code> and <code>set</code>.</p>
+<h3 id="adapters-creating">Creating an adapter</h3><p>Adapters are defined on <code>riba.adapters</code> with the interface as the property name and the adapter object as the value. An adapter is just an object that responds to <code>observe</code>, <code>unobserve</code>, <code>get</code> and <code>set</code>.</p>
 <p>The following <code>:</code> adapter works for Backbone.js models / Stapes.js modules.</p>
-<pre><code class="language-javascript">tinybind.adapters[&#39;:&#39;] = {
+<pre><code class="language-javascript">riba.adapters[&#39;:&#39;] = {
   observe: function(obj, keypath, callback) {
     obj.on(&#39;change:&#39; + keypath, callback)
   },
@@ -126,7 +126,7 @@
     obj.set(keypath, value)
   }
 }</code></pre>
-<h2 id="iteration">Iteration binding</h2><p>Use the <code>rv-each-[item]</code> binder to have tinybind automatically loop over items in an array and append bound instances of that element. Within that element you can bind to the iterated item as well as any contexts that are available in the parent view.</p>
+<h2 id="iteration">Iteration binding</h2><p>Use the <code>rv-each-[item]</code> binder to have riba automatically loop over items in an array and append bound instances of that element. Within that element you can bind to the iterated item as well as any contexts that are available in the parent view.</p>
 <pre><code class="language-html">&lt;ul&gt;
   &lt;li rv-each-todo=&quot;list.todos&quot;&gt;
     &lt;input type=&quot;checkbox&quot; rv-checked=&quot;todo.done&quot;&gt;

@@ -1,17 +1,17 @@
-You can grab the latest stable release from [github](https://raw.githubusercontent.com/blikblum/tinybind/master/dist/tinybind.js) or install using the package manager of your choice. 
+You can grab the latest stable release from [github](https://raw.githubusercontent.com/blikblum/riba/master/dist/riba.js) or install using the package manager of your choice. 
 
 ```bash
-npm install tinybind
+npm install riba
 ```
 
 Use in a script tag...
 
 ```html
-<script src="tinybind.js"></script>
+<script src="riba.js"></script>
 ```
 
 ... or import using a bundler like webpack
 
 ```javascript
-import tinybind from 'tinybind'
+import riba from 'riba'
 ```

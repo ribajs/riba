@@ -11,7 +11,7 @@ Templates describe your UI in plain HTML. You can define them directly in the do
 </section>
 ```
 
-The important parts to note here are the attributes prefixed with `rv-` and portions of text wrapped in `{ ... }`. These are binding declarations and they are the sole way that tinybind ties data to your templates. The values of these declarations all follow the same minimal and expressive syntax.
+The important parts to note here are the attributes prefixed with `rv-` and portions of text wrapped in `{ ... }`. These are binding declarations and they are the sole way that riba ties data to your templates. The values of these declarations all follow the same minimal and expressive syntax.
 
 ```
 (keypath | primitive) [formatters...]
