@@ -1,5 +1,5 @@
-import { IShopifyCustomer } from './customer.d';
-import { IShopifyDiscount } from './discount.d';
+import { IShopifyCustomer } from './customer.';
+import { IShopifyDiscount } from './discount';
 
 export interface IShopifyOrderCustomAttributes {
   [key: string]: string;

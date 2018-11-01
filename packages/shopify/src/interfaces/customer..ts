@@ -1,5 +1,5 @@
-import { IShopifyCustomerAddress } from './address.d';
-import { IShopifyOrder } from './order.d';
+import { IShopifyCustomerAddress } from './address';
+import { IShopifyOrder } from './order';
 
 /**
  * The customer object

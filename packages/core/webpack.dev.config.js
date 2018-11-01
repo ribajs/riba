@@ -19,14 +19,14 @@ module.exports = {
     ]
   },
   entry: {
-    riba: './src/browser.ts'
+    'riba-core': './src/browser.ts'
   },
   devtool: 'inline-source-map',
   mode: 'development', // production | development
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
-    library: 'riba',
+    library: 'riba-core',
     libraryTarget: 'umd',
     libraryExport: 'default'
   },

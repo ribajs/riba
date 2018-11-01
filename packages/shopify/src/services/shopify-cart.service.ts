@@ -53,7 +53,7 @@ export class ShopifyCartService {
           return lineItem; // return original response
         }) as any;
       })
-      .catch((jqxhr) => {
+      .catch((jqxhr: any) => {
         return jqxhr.responseJSON as IShopifyCartAddError;
       });
     });

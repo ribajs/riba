@@ -1,6 +1,6 @@
 import { Pjax, Prefetch, IState } from './barba/barba';
 
-import { IBinders, EventDispatcher } from '@ribajs/core';
+import { IBinders } from '@ribajs/core';
 
 import { viewBinderWrapper } from './view.binder';
 import { viewStaticBinderWrapper } from './view-static.binder';
@@ -25,4 +25,4 @@ routerBinders[routeClassStarBinder.name] = routeClassStarBinder.binder;
 routerBinders[parentRouteClassStarBinder.name] = parentRouteClassStarBinder.binder;
 routerBinders[routeBackOnStarBinder.name] = routeBackOnStarBinder.binder;
 
-export { Pjax, Prefetch, EventDispatcher, IState, routerBinders };
+export { Pjax, Prefetch, IState, routerBinders };

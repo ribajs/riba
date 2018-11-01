@@ -29,4 +29,6 @@ riba.formatterService.regists(stringFormatters);
 // regist binders
 riba.binderService.regists(basicBindersWrapper(JQuery));
 
+(window as any).riba = riba;
+
 export default riba;

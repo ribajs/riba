@@ -10,7 +10,6 @@ import { Riba, EventHandler } from '../riba';
 import { Binding } from '../binding';
 import { isJson, camelCase } from '../utils';
 import { FakeHTMLElement } from './fake-html-element';
-import JQuery from 'jquery';
 
 export type TemplateFunction = () => string | null;
 

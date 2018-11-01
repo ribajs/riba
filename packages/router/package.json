@@ -1,15 +1,16 @@
 {
   "name": "@ribajs/router",
   "description": "Router extension for Ribajs",
-  "version": "0.16.0",
+  "version": "0.16.2",
   "author": "Pascal Garber <pascal@jumplink.eu>",
-  "contributors": [
-
-  ],
+  "contributors": [],
   "url": "https://github.com/ribajs/riba",
-  "main": "./src/index.ts",
-  "browser": "./dist/riba.min.js",
-  "source": "./src/index.ts",
+  "main": "src/index.ts",
+  "_main": "lib/index.js",
+  "jsnext:main": "lib/index.js",
+  "module": "src/index.js",
+  "types": "lib/index.d.ts",
+  "source": "src/index.ts",
   "license": "MIT",
   "licenses": [
     {
@@ -22,13 +23,9 @@
     "url": "https://github.com/ribajs/riba.git"
   },
   "scripts": {
-    "test": "mocha-chrome spec/runner.html && mocha-chrome spec/runner.min.html",
     "type-check": "tslint -c tslint.json 'src/**/*.ts' && tsc --noEmit",
-    "build": "npm run type-check && npm run webpack",
-    "webpack": "webpack && webpack --config webpack.dev.config.js",
-    "watch": "webpack --watch --env.dev",
-    "doc": "harp server docs/_harp ./docs",
-    "build-doc": "harp compile docs/_harp ./docs"
+    "build": "npm run build:module",
+    "build:module": "tsc"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",

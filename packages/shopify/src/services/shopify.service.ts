@@ -1,9 +1,9 @@
 import { Debug, Utils } from '@ribajs/core';
 
-declare global {
-  // tslint:disable: interface-name
-  interface Window { model: any; }
-}
+// declare global {
+//   // tslint:disable: interface-name
+//   interface Window { model: any; }
+// }
 
 /**
  * Custom version of shopify tools like api.jquery.js / option-selection.js
@@ -53,9 +53,9 @@ export class ShopifyService {
 
   constructor(shopSettings?: any) {
 
-    if (window.model && window.model.system && window.model.system.shopSettings) {
-      this.moneyFormat = window.model.system.shopSettings.moneyFormat;
-      this.moneyWithCurrencyFormat = window.model.system.shopSettings.moneyWithCurrencyFormat;
+    if ((window as any).model && (window as any).model.system && (window as any).model.system.shopSettings) {
+      this.moneyFormat = (window as any).model.system.shopSettings.moneyFormat;
+      this.moneyWithCurrencyFormat = (window as any).model.system.shopSettings.moneyWithCurrencyFormat;
     }
 
     if (ShopifyService.instance) {

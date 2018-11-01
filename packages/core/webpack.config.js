@@ -21,13 +21,13 @@ module.exports = {
     ]
   },
   entry: {
-    riba: './src/browser.ts'
+    'riba-core': './src/browser.ts'
   },
   mode: 'production', // production | development
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].min.js',
-    library: 'riba',
+    library: 'riba-core',
     libraryTarget: 'umd',
     libraryExport: 'default'
   },

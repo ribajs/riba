@@ -1,5 +1,5 @@
-import { IShopifyImage } from './image.d';
-import { IShopifyMetafield } from './metafield.d';
+import { IShopifyImage } from './image';
+import { IShopifyMetafield } from './metafield';
 
 export declare interface IShopifyProductImage extends IShopifyImage {
   position: number;

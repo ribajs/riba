@@ -1,4 +1,4 @@
-export * from './interfaces/interfaces.d';
+export * from './interfaces/interfaces';
 import * as components from './components/shopify.components';
 import * as formatters from './formatters/shopify.formatters';
 import * as services from './services/shopify.services';

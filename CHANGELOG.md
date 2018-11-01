@@ -1,24 +1,11 @@
 # Changelog
 
-## master
+## 0.16.2
 
-- Web Components
-  - Start a new implementation of components by following the Web Components v1 [Specs](https://developer.mozilla.org/de/docs/Web/Web_Components)
-  - Fallback if customElements.define fails or is not supported
-  - Tow-Way-Databinding by calling the publish method
-
-- Classic Components
-  - Now also work without an HTML template and then use their already setted child elements instead
-  - Set attribute names to be automatically bound to the scope
-
-- Binders
-  - The event handler now also passes the html element the event comes from
-  - Added support for multistar binders
-
-- Formatters
-  - Revert the call formatter from Rivets to call functions
-  - New args formatter to pass arguments to the on-* binder
-  - New range formatter to get a subset of array e.g. `<img rv-each-image="images | range 0 5" rv-src="image.src" />`
+- Renamed to Riba (Rivets.js + barba.js)
+- Moved the core, the router and the shopify extension to seperate packages
+- New Binders
+- Bugfixes
 
 ## 0.15.0
 
