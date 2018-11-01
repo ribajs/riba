@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/core",
-  "description": "Core module of Ribajs",
-  "version": "0.16.2",
+  "description": "Core module of Riba.js",
+  "version": "0.16.3",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "private": false,
   "contributors": [
@@ -10,10 +10,7 @@
   ],
   "url": "https://github.com/ribajs/riba",
   "main": "src/index.ts",
-  "_main": "lib/index.js",
-  "jsnext:main": "lib/index.js",
-  "module": "src/index.js",
-  "types": "lib/index.d.ts",
+  "module": "src/index.ts",
   "source": "src/index.ts",
   "license": "MIT",
   "licenses": [

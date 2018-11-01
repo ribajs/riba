@@ -1,97 +1,27 @@
 # riba
 
-riba is the espiritual sucessor of Rivets.js, a lightweight data binding and templating system that facilitates building data-driven views. It is agnostic about every aspect of a front-end MV(C|VM|P) stack, making it easy to introduce it into your current workflow or to use it as part of your own custom front-end stack comprised of other libraries.
+Riba.js is the espiritual sucessor of Rivets.js, a lightweight data binding and templating system that facilitates building data-driven views. It is agnostic about every aspect of a front-end MV(C|VM|P) stack, making it easy to introduce it into your current workflow or to use it as part of your own custom front-end stack comprised of other libraries.
 
 ## Install
 
 ```bash
-npm install JumpLinkNetwork/riba
-```
-
-### JavaScript
-
-Use in a script tag...
-
-```html
-<script src="node_modules/riba/dist/riba.min.js"></script>
-```
-
-... or import using a bundler like webpack
-
-```javascript
-import riba from 'riba'
-```
-
-#### Usage
-
-```html
-<section id="auction">
-  <h3>{ auction.product.name }</h3>
-  <p>Current bid: { auction.currentBid | money }</p>
-
-  <aside rv-if="auction.timeLeft | lt 120">
-    Hurry up! There is { auction.timeLeft | time } left.
-  </aside>
-</section>
-```
-
-```javascript
-riba.bind($('#auction')[0], {auction: auction});
+npm install @ribajs/core @ribajs/router
 ```
 
 ### TypeScript
 
+
 ```typescript
-import JQuery from 'jquery';
-
-import {
-  Riba,
-  View,
-
-  // default binders
-  routerBinders,
-  basicBinders,
-
-  // default formatters
-  compareFormatters,
-  mathFormatters,
-  propertyFormatters,
-  specialFormatters,
-  stringFormatters,
-} from 'riba';
-
-export class Main {
-
-  private view: View;
-  private riba = new Riba();
-  private model: any = {};
-
-  constructor() {
-
-    // regist binders
-    this.riba.binderService.regists(routerBinders);
-    this.riba.binderService.regists(basicBinders);
-
-    // regist formatters
-    this.riba.formatterService.regists(compareFormatters);
-    this.riba.formatterService.regists(mathFormatters);
-    this.riba.formatterService.regists(propertyFormatters);
-    this.riba.formatterService.regists(specialFormatters);
-    this.riba.formatterService.regists(stringFormatters);
-
-    this.view = this.riba.bind(JQuery('body')[0], this.model);
-
-  }
-}
-
-JQuery(() => {
-  const main = new Main();
-});
+import { Riba } from '@ribajs/core'
 ```
+
+#### Usage
+
+TODO
 
 ## Getting Started and Documentation
 
-Documentation is available on the [homepage](http://blikblum.github.io/riba/). Learn by reading the [Guide](http://blikblum.github.io/riba/docs/guide/) and refer to the [Binder Reference](http://blikblum.github.io/riba/docs/reference/) to see what binders are available to you out-of-the-box.
+TODO
 
 ## Differences from Rivets.js
 
@@ -147,6 +77,5 @@ npm test
 ### Pull Requests
 
 1. Fork the repository and create a topic branch.
-2. Make sure not to commit any changes under `dist/` as they will surely cause conflicts for others later. Files under `dist/` are only committed when a new build is released.
-3. Include tests that cover any changes or additions that you've made.
-4. Push your topic branch to your fork and submit a pull request. Include details about the changes as well as a reference to related issue(s).
+2. Include tests that cover any changes or additions that you've made.
+3. Push your topic branch to your fork and submit a pull request. Include details about the changes as well as a reference to related issue(s).

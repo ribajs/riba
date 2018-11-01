@@ -1,0 +1,38 @@
+import { PriorityQueue } from './priority-queue.service';
+export declare class PQueue {
+    queue: PriorityQueue;
+    private _carryoverConcurrencyCount;
+    private _isIntervalIgnored;
+    private _intervalCount;
+    private _intervalCap;
+    private _interval;
+    private _intervalId?;
+    private _intervalEnd;
+    private _timeoutId;
+    private _queueClass;
+    private _pendingCount;
+    private _concurrency;
+    private _isPaused;
+    private _resolveEmpty;
+    private _resolveIdle;
+    constructor(options: any);
+    add(fn: any, options?: any): Promise<any>;
+    addAll(fns: any, options: any): Promise<[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]>;
+    start(): void;
+    pause(): void;
+    clear(): void;
+    onEmpty(): Promise<void> | Promise<{}>;
+    onIdle(): Promise<any>;
+    readonly _doesIntervalAllowAnother: boolean;
+    readonly _doesConcurrentAllowAnother: boolean;
+    private _next;
+    private _resolvePromises;
+    private _onResumeInterval;
+    private _intervalPaused;
+    private _tryToStartAnother;
+    private _initializeIntervalIfNeeded;
+    private _onInterval;
+    readonly size: number;
+    readonly pending: number;
+    readonly isPaused: boolean;
+}
