@@ -1,4 +1,4 @@
-# riba
+# Riba.js
 
 Riba.js is the espiritual sucessor of Rivets.js, a lightweight data binding and templating system that facilitates building data-driven views. It is agnostic about every aspect of a front-end MV(C|VM|P) stack, making it easy to introduce it into your current workflow or to use it as part of your own custom front-end stack comprised of other libraries.
 
@@ -9,7 +9,6 @@ npm install @ribajs/core @ribajs/router
 ```
 
 ### TypeScript
-
 
 ```typescript
 import { Riba } from '@ribajs/core'
@@ -23,40 +22,12 @@ TODO
 
 TODO
 
-## Differences from Rivets.js
-
-* Public interface
-  * Add not formatter
-  * Remove unless and unchecked binders in favor of combining not formatters with if/checked binders
-  * Remove computed feature - can be replaced by an identity formatter
-  * Add ability to customize input event through event-name attribute
-* Internal changes
-  * Written in TypeScript instead of CoffeeScript
-  * Change how scope of iteration binder works. Instead of copying properties down to children, uses a prototype like approach
-    * Related: [486](https://github.com/mikeric/rivets/issues/486) [512](https://github.com/mikeric/rivets/issues/512) [417](https://github.com/mikeric/rivets/pull/417)
-  * Change how to customize index name in each binder (using an attribute)
-    * Related: [551](https://github.com/mikeric/rivets/issues/551) [552](https://github.com/mikeric/rivets/pull/552)
-  * Do not bind publish, bind and unbind methods to binding instances
-  * Register default binder through fallbackBinder option instead of * binder
-  * Integrate sightglass into riba code base
-  * Remove view.select method
-  * The rv-* attributes are removed after binding
-  * Changes how observer is registered / notified. Instead of passing a function (sync), pass an object with a sync method
-
 ## Building and Testing
 
 First install any development dependencies.
 
 ```bash
 npm install
-```
-
-### Building
-
-riba.js uses webpack as it's bundling / build tool. Run the following to compile the source into `dist/`.
-
-```bash
-npm run build
 ```
 
 ### Testing
