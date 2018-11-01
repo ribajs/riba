@@ -110,6 +110,10 @@ export abstract class RibaComponent extends FakeHTMLElement {
       value = undefined;
     } else if (!isNaN(Number(attr))) {
       value = Number(attr);
+      // If number is too large store the value as string
+      if (value >= Number.MAX_SAFE_INTEGER) {
+        value = attr;
+      }
     } else if (isJson(attr)) {
       value = JSON.parse(attr as any);
     }
