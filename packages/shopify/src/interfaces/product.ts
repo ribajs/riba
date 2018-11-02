@@ -18,7 +18,7 @@ export declare interface IShopifyProductVariant {
   available: boolean;
   barcode: string;
   compare_at_price: number | null;
-  featured_image: IShopifyProductImage;
+  featured_image: IShopifyProductImage | null;
   created_at: Date;
   fulfillment_service?: string;
   grams?: number;
