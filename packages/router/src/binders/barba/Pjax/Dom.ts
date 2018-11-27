@@ -46,7 +46,7 @@ class Dom {
    */
   public parseResponse(responseText: string): JQuery<HTMLElement> {
     this.currentHTML = responseText;
-    const $newPage = JQuery( $.parseHTML(responseText) );
+    const $newPage = JQuery( responseText );
 
     if (this.parseTitle === true) {
       const $title = $newPage.filter('title');

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/// <reference types="jquery" />
 /*!
  * jQuery Mobile Events
  * by Ben Major
@@ -23,14 +25,14 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
- * 
+ *
  */
 
-export default function ($) {
+export default ($: any) => {
   'use strict';
   $.attrFn = $.attrFn || {};
 
-  var touchCapable  = ('ontouchstart' in window),
+  let touchCapable  = ('ontouchstart' in window),
 
       settings = {
           tap_pixel_range: 5,
@@ -49,8 +51,8 @@ export default function ($) {
           tapevent:    (touchCapable) ? 'tap' : 'click',
           scrollevent: (touchCapable) ? 'touchmove' : 'scroll',
 
-          hold_timer: null,
-          tap_timer: null
+          hold_timer: undefined as number | undefined,
+          tap_timer: undefined as number | undefined,
       };
   
 // Declare touch namespace:
@@ -66,38 +68,38 @@ $.touch = { };
   
 // SETTERS:
 // Set the X threshold of swipe events:
-$.touch.setSwipeThresholdX = function( threshold ) {
+$.touch.setSwipeThresholdX = function( threshold: number ) {
   if( typeof threshold !== 'number' ) { throw new Error('Threshold parameter must be a type of number'); }
   settings.swipe_h_threshold = threshold;
 };
 
 // Set the Y threshold of swipe events:
-$.touch.setSwipeThresholdY = function( threshold ) {
+$.touch.setSwipeThresholdY = function( threshold: number ) {
   if( typeof threshold !== 'number' ) { throw new Error('Threshold parameter must be a type of number'); }
   settings.swipe_v_threshold = threshold;
 };
 
 // Set the double tap interval:
-$.touch.setDoubleTapInt    = function( interval ) {
+$.touch.setDoubleTapInt    = function( interval: number ) {
   if( typeof interval !== 'number' ) { throw new Error('Interval parameter must be a type of number'); }
   settings.doubletap_int = interval;
 };
 
 // Set the taphold threshold:
-$.touch.setTapHoldThreshold = function( threshold ) {
+$.touch.setTapHoldThreshold = function( threshold: number ) {
   if( typeof threshold !== 'number' ) { throw new Error('Threshold parameter must be a type of number'); }
   settings.taphold_threshold = threshold;
 };
 
 // Set the pixel range for tapas:
-$.touch.setTapRange = function( range ) {
+$.touch.setTapRange = function( range: number ) {
   if( typeof range !== 'number' ) { throw new Error('Ranger parameter must be a type of number'); }
-  settings.tap_pixel_range = threshold;
+  settings.tap_pixel_range = range;
 };
 
   // Add Event shortcuts:
-  $.each(['tapstart', 'tapend', 'tapmove', 'tap', 'singletap', 'doubletap', 'taphold', 'swipe', 'swipeup', 'swiperight', 'swipedown', 'swipeleft', 'swipeend', 'scrollstart', 'scrollend', 'orientationchange', 'tap2', 'taphold2'], function (i, name) {
-      $.fn[name] = function (fn) {
+  $.each(['tapstart', 'tapend', 'tapmove', 'tap', 'singletap', 'doubletap', 'taphold', 'swipe', 'swipeup', 'swiperight', 'swipedown', 'swipeleft', 'swipeend', 'scrollstart', 'scrollend', 'orientationchange', 'tap2', 'taphold2'], function (i: number, name: string) {
+      $.fn[name] = function (fn: any) {
           return fn ? this.on(name, fn) : this.trigger(name);
       };
 
@@ -111,7 +113,7 @@ $.touch.setTapRange = function( range ) {
           var thisObject = this,
               $this = $(thisObject);
       
-          $this.on(settings.startevent, function tapStartFunc(e) {
+          $this.on(settings.startevent, function tapStartFunc(e: any) {
       
               $this.data('callee', tapStartFunc);
               if (e.which && e.which !== 1) {
@@ -148,7 +150,7 @@ $.touch.setTapRange = function( range ) {
           var thisObject = this,
           $this = $(thisObject);
           
-          $this.on(settings.moveevent, function tapMoveFunc(e) {
+          $this.on(settings.moveevent, function tapMoveFunc(e: any) {
               $this.data('callee', tapMoveFunc);
           
               var origEvent = e.originalEvent,
@@ -180,7 +182,7 @@ $.touch.setTapRange = function( range ) {
           var thisObject = this,
               $this = $(thisObject);
 
-          $this.on(settings.endevent, function tapEndFunc(e) {
+          $this.on(settings.endevent, function tapEndFunc(e: any) {
               // Touch event data:
               $this.data('callee', tapEndFunc);
 
@@ -211,7 +213,7 @@ $.touch.setTapRange = function( range ) {
       setup: function () {
           var thisObject = this,
               $this = $(thisObject),
-              origTarget,
+              origTarget: any,
               start_pos = {
                   x: 0,
                   y: 0
@@ -219,7 +221,7 @@ $.touch.setTapRange = function( range ) {
               end_x = 0,
               end_y = 0;
 
-          $this.on(settings.startevent, function tapHoldFunc1(e) {
+          $this.on(settings.startevent, function tapHoldFunc1(e: any) {
               if (e.which && e.which !== 1) {
                   return false;
               } else {
@@ -295,7 +297,7 @@ $.touch.setTapRange = function( range ) {
               $this.data('tapheld', false);
               window.clearTimeout(settings.hold_timer);
           })
-          .on(settings.moveevent, function tapHoldFunc3(e) {
+          .on(settings.moveevent, function tapHoldFunc3(e: any) {
               $this.data('callee3', tapHoldFunc3);
       
               end_x = (e.originalEvent.targetTouches) ? e.originalEvent.targetTouches[0].pageX : e.pageX;
@@ -314,13 +316,13 @@ $.touch.setTapRange = function( range ) {
           var thisObject = this,
               $this = $(thisObject),
               origTarget,
-              action,
-              firstTap = null,
-              origEvent,
+              action: number,
+              firstTap: any = null,
+              origEvent: any,
       cooloff,
       cooling = false;
 
-          $this.on(settings.startevent, function doubleTapFunc1(e) {
+          $this.on(settings.startevent, function doubleTapFunc1(e: any) {
               if (e.which && e.which !== 1) {
                   return false;
               }
@@ -348,7 +350,7 @@ $.touch.setTapRange = function( range ) {
               }
 
               return true;
-          }).on(settings.endevent, function doubleTapFunc2(e) {
+          }).on(settings.endevent, function doubleTapFunc2(e: any) {
       
               var now = Date.now();
               var lastTouch = $this.data('lastTouch') || now + 1;
@@ -414,14 +416,14 @@ $.touch.setTapRange = function( range ) {
       setup: function () {
           var thisObject = this,
               $this = $(thisObject),
-              origTarget = null,
-              startTime = null,
+              origTarget: any = null,
+              startTime: any = null,
               start_pos = {
                   x: 0,
                   y: 0
               };
 
-          $this.on(settings.startevent, function singleTapFunc1(e) {
+          $this.on(settings.startevent, function singleTapFunc1(e: any) {
               if (e.which && e.which !== 1) {
                   return false;
               } else {
@@ -435,7 +437,7 @@ $.touch.setTapRange = function( range ) {
                   
                   return true;
               }
-          }).on(settings.endevent, function singleTapFunc2(e) {
+          }).on(settings.endevent, function singleTapFunc2(e: any) {
               $this.data('callee2', singleTapFunc2);
               if (e.target == origTarget) {
                   
@@ -487,15 +489,15 @@ $.touch.setTapRange = function( range ) {
           var thisObject = this,
               $this = $(thisObject),
               started = false,
-              origTarget = null,
-              start_time,
+              origTarget: any = null,
+              start_time: any,
               start_pos = {
                   x: 0,
                   y: 0
               },
-              touches;
+              touches: any;
 
-          $this.on(settings.startevent, function tapFunc1(e) {
+          $this.on(settings.startevent, function tapFunc1(e: any) {
               $this.data('callee1', tapFunc1);
 
               if( e.which && e.which !== 1 )
@@ -513,7 +515,7 @@ $.touch.setTapRange = function( range ) {
                   touches = (e.originalEvent.targetTouches) ? e.originalEvent.targetTouches : [ e ];
                   return true;
               }
-          }).on(settings.endevent, function tapFunc2(e) {
+          }).on(settings.endevent, function tapFunc2(e: any) {
               $this.data('callee2', tapFunc2);
 
               // Only trigger if they've started, and the target matches:
@@ -572,11 +574,11 @@ $.touch.setTapRange = function( range ) {
                   x: 0,
                   y: 0
               },
-              startEvnt;
+              startEvnt: any;
 
           // Screen touched, store the original coordinate
 
-          function touchStart(e) {
+          function touchStart(e: any) {
               $this = $(e.currentTarget);
               $this.data('callee1', touchStart);
               originalCoord.x = (e.originalEvent.targetTouches) ? e.originalEvent.targetTouches[0].pageX : e.pageX;
@@ -602,7 +604,7 @@ $.touch.setTapRange = function( range ) {
 
           // Store coordinates as finger is swiping
 
-          function touchMove(e) {
+          function touchMove(e: any) {
               $this = $(e.currentTarget);
               $this.data('callee2', touchMove);
               finalCoord.x = (e.originalEvent.targetTouches) ? e.originalEvent.targetTouches[0].pageX : e.pageX;
@@ -667,7 +669,7 @@ $.touch.setTapRange = function( range ) {
               }
           }
 
-          function touchEnd(e) {
+          function touchEnd(e: any) {
               $this = $(e.currentTarget);
               var swipedir = "";
               $this.data('callee3', touchEnd);
@@ -740,16 +742,16 @@ $.touch.setTapRange = function( range ) {
       setup: function () {
           var thisObject = this,
               $this = $(thisObject),
-              scrolling,
-              timer;
+              scrolling: any,
+              timer: any;
 
-          function trigger(event, state) {
+          function trigger(event: Event, state: boolean) {
               scrolling = state;
               triggerCustomEvent(thisObject, scrolling ? 'scrollstart' : 'scrollend', event);
           }
 
           // iPhone triggers scroll after a small delay; use touchmove instead
-          $this.on(settings.scrollevent, function scrollFunc(event) {
+          $this.on(settings.scrollevent, function scrollFunc(event: any) {
               $this.data('callee', scrollFunc);
 
               if (!scrolling) {
@@ -771,11 +773,11 @@ $.touch.setTapRange = function( range ) {
   // This is the orientation change (largely borrowed from jQuery Mobile):
   var win = $(window),
       special_event,
-      get_orientation,
-      last_orientation,
+      get_orientation: any,
+      last_orientation: any,
       initial_orientation_is_landscape,
       initial_orientation_is_default,
-      portrait_map = {
+      portrait_map: any = {
           '0': true,
           '180': true
       };
@@ -818,11 +820,11 @@ $.touch.setTapRange = function( range ) {
           win.off('throttledresize', handler);
           return true;
       },
-      add: function (handleObj) {
+      add: function (handleObj: any) {
           // Save a reference to the bound event handler.
           var old_handler = handleObj.handler;
 
-          handleObj.handler = function (event) {
+          handleObj.handler = function (event: any) {
               event.orientation = get_orientation();
               return old_handler.apply(this, arguments);
           };
@@ -844,7 +846,7 @@ $.touch.setTapRange = function( range ) {
   }
 
   $.event.special.orientationchange.orientation = get_orientation = function () {
-      var isPortrait = true,
+      var isPortrait: any = true,
           elem = document.documentElement;
 
       if (settings.orientation_support) {
@@ -867,7 +869,7 @@ $.touch.setTapRange = function( range ) {
   };
 
   var throttle = 250,
-      throttle_handler = function () {
+      throttle_handler = function (this: any) {
           curr = Date.now();
           diff = curr - lastCall;
 
@@ -885,13 +887,13 @@ $.touch.setTapRange = function( range ) {
           }
       },
       lastCall = 0,
-      heldCall,
+      heldCall: any,
       curr,
       diff;
 
   // Trigger a custom event:
 
-  function triggerCustomEvent(obj, eventType, event, touchData) {
+  function triggerCustomEvent(obj: any, eventType: string, event: any, touchData?: any) {
       var originalType = event.type;
       event.type = eventType;
 
@@ -909,7 +911,7 @@ $.touch.setTapRange = function( range ) {
       swipeend: 'swipe',
   tap2:     'tap',
   taphold2: 'taphold'
-  }, function (e, srcE) {
+  }, function (e: any, srcE: any) {
       $.event.special[e] = {
           setup: function () {
               $(this).on(srcE, $.noop);

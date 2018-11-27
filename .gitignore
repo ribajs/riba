@@ -4,3 +4,5 @@ node_modules/
 .idea/
 package-lock.json
 yarn.lock
+packages/*/dist/
+packages/*/lib/
