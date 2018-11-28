@@ -11,7 +11,7 @@ import { Binding } from '../binding';
 import { isJson, camelCase } from '../utils';
 import { FakeHTMLElement } from './fake-html-element';
 
-export type TemplateFunction = () => string | null;
+export type TemplateFunction = () => Promise<string | null> | string | null;
 
 export abstract class RibaComponent extends FakeHTMLElement {
 
