@@ -19,6 +19,8 @@ export abstract class RibaComponent extends FakeHTMLElement {
 
   protected debug: Debug.IDebugger;
   protected view?: View;
+  protected bound: boolean = false;
+  protected templateLoaded: boolean = false;
 
   protected riba?: Riba;
 
@@ -50,7 +52,7 @@ export abstract class RibaComponent extends FakeHTMLElement {
     // this.$el = JQuery(this.el);
   }
 
-  protected abstract template(): string | null;
+  protected abstract template(): Promise<string | null> | string | null;
 
   /**
    * returns a list of attributes wich are required until the riba binding starts
@@ -59,19 +61,23 @@ export abstract class RibaComponent extends FakeHTMLElement {
     return [];
   }
 
-  protected init(observedAttributes: string[]) {
-
-    // if innerHTML is null this component uses the innerHTML which he already has!
-    const template = this.template();
-    this.debug('template', template);
-    if (template !== null) {
-      this.el.innerHTML = template;
-    }
+  protected async init(observedAttributes: string[]) {
 
     this.initAttributeObserver(observedAttributes);
 
-    if (this.autobind) {
-      this.bind();
+    /**
+     * After all required attributes are set we load the template and bind the component
+     */
+    if (this.checkRequiredAttributes()) {
+      return this.loadTemplate()
+      .then((template) => {
+        if (this.autobind) {
+          return this.bind();
+        }
+        return Promise.resolve(null);
+      });
+    } else {
+      this.debug('not all required attributes are set to load and bind the template');
     }
   }
 
@@ -222,8 +228,19 @@ export abstract class RibaComponent extends FakeHTMLElement {
     // call custom attribute changed callback with parsed values
     this.parsedAttributeChangedCallback(attributeName, oldValue, newValue, namespace);
 
-    if (this.autobind) {
-      this.bind();
+    /**
+     * After all required attributes are set we load the template and bind the component
+     */
+    if (this.checkRequiredAttributes()) {
+      this.loadTemplate()
+      .then((template) => {
+        if (this.autobind) {
+          return this.bind();
+        }
+        return Promise.resolve(null);
+      });
+    } else {
+      this.debug('not all required attributes are set to load and bind the template');
     }
   }
 
@@ -249,8 +266,38 @@ export abstract class RibaComponent extends FakeHTMLElement {
     this.debug('adoptedCallback called', oldDocument, newDocument);
   }
 
+  protected async loadTemplate() {
+    if (this.templateLoaded) {
+      this.debug('template already loaded');
+      return null;
+    }
+
+    if (!this.checkRequiredAttributes()) {
+      this.debug('not all required attributes are set to load the template');
+      return null;
+    }
+
+    // if innerHTML is null this component uses the innerHTML which he already has!
+    return Promise.resolve(this.template())
+    .then((template) => {
+      this.debug('template', template);
+      if (template !== null) {
+        this.el.innerHTML = template;
+      }
+      return template;
+    })
+    .then((template) => {
+      this.templateLoaded = true;
+      return template;
+    })
+    .catch((error) => {
+      this.templateLoaded = false;
+      return error;
+    });
+  }
+
   protected async bind() {
-    if (this.view) {
+    if (this.bound) {
       this.debug('component already bounded');
       return;
     }
@@ -281,6 +328,7 @@ export abstract class RibaComponent extends FakeHTMLElement {
     this.view = new View(Array.prototype.slice.call(this.el.childNodes), this.scope, viewOptions);
     this.scope = this.view.models;
     this.view.bind();
+    this.bound = true;
     await this.afterBind()
     .catch((error) => {
       console.error(error);

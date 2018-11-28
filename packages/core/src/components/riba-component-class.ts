@@ -8,6 +8,8 @@ export declare class RibaComponentClass extends RibaComponent {
 
   protected debug: Debug.IDebugger;
   protected view?: View;
+  protected bound: boolean;
+  protected templateLoaded: boolean;
 
   protected el: HTMLElement;
 
@@ -20,7 +22,7 @@ export declare class RibaComponentClass extends RibaComponent {
 
   constructor(element?: HTMLElement);
 
-  protected template(): string | null;
+  protected template(): Promise<string | null> | string | null;
 
   /**
    * returns a list of attributes wich are required until the riba binding starts
