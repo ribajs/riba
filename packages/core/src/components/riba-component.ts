@@ -30,12 +30,8 @@ export abstract class RibaComponent extends FakeHTMLElement {
 
   protected abstract scope: any;
 
-  protected get bound() {
+  public get bound() {
     return !!this._bound || !!this.view;
-  }
-
-  protected set bound(bound: boolean) {
-    this._bound = !! bound;
   }
 
   /**
@@ -58,6 +54,14 @@ export abstract class RibaComponent extends FakeHTMLElement {
       throw new Error(`element is required on browsers without custom elements support`);
     }
     // this.$el = JQuery(this.el);
+  }
+
+  public disconnectedFallbackCallback() {
+    this.disconnectedCallback();
+    // const parent = this.el.parentNode;
+    // if (parent) {
+    //   parent.removeChild(this.el);
+    // }
   }
 
   protected abstract template(): Promise<string | null> | string | null;
@@ -210,7 +214,7 @@ export abstract class RibaComponent extends FakeHTMLElement {
     }
 
     this.el.removeEventListener('binder-changed', this.BinderChangedEventHandler);
-    this.bound = false;
+    this._bound = false;
   }
 
   /**
@@ -335,7 +339,7 @@ export abstract class RibaComponent extends FakeHTMLElement {
     });
 
     this.view = new View(Array.prototype.slice.call(this.el.childNodes), this.scope, viewOptions);
-    this.bound = true;
+    this._bound = true;
     this.scope = this.view.models;
     this.view.bind();
 
@@ -347,11 +351,11 @@ export abstract class RibaComponent extends FakeHTMLElement {
   }
 
   protected async beforeBind(): Promise<any> {
-    this.debug('beforeBind');
+    this.debug('beforeBind', this.bound);
   }
 
   protected async afterBind(): Promise<any> {
-    this.debug('afterBind');
+    this.debug('afterBind', this.bound);
   }
 
   private BinderChangedEventHandler(event: Event) {

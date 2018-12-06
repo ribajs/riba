@@ -54,7 +54,8 @@ export class View {
   public els: HTMLCollection | HTMLElement[] | Node[];
   public models: any;
   public options: IViewOptions;
-  public bindings: IBindable[] = [];
+  public bindings: Array<IBindable> = [];
+  public webComponents: Array<RibaComponentClass> = [];
   // public componentView: View | null = null;
 
   /**
@@ -203,6 +204,8 @@ export class View {
           if (!window.customElements) {
             View.debug(`Fallback for Webcomponent ${nodeName}`);
             const component = new COMPONENT(node);
+            // TODO call disconnectedCallback for unbind
+            this.webComponents.push(component);
           } else {
             View.debug(`Define Webcomponent ${nodeName} with customElements.define`);
             if (customElements.get(nodeName)) {
@@ -214,6 +217,8 @@ export class View {
                 console.error(error);
                 // Fallback
                 const component = new COMPONENT(node);
+                // TODO call disconnectedCallback for unbind
+                this.webComponents.push(component);
               }
             }
           }
@@ -242,6 +247,9 @@ export class View {
     if (Array.isArray(this.bindings)) {
       this.bindings.forEach((binding) => {
         binding.unbind();
+      });
+      this.webComponents.forEach((webcomponent) => {
+        webcomponent.disconnectedFallbackCallback();
       });
     }
 

@@ -6,9 +6,12 @@ import { EventHandler } from '../riba';
 export declare class RibaComponentClass extends RibaComponent {
   public static tagName: string;
 
+  public readonly bound: boolean;
+
   protected debug: Debug.IDebugger;
   protected view?: View;
-  protected bound: boolean;
+  protected _bound: boolean;
+
   protected templateLoaded: boolean;
 
   protected el: HTMLElement;
@@ -21,6 +24,8 @@ export declare class RibaComponentClass extends RibaComponent {
   protected autobind: boolean;
 
   constructor(element?: HTMLElement);
+
+  public disconnectedFallbackCallback(): void;
 
   protected template(): Promise<string | null> | string | null;
 
