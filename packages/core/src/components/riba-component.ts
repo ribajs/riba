@@ -13,13 +13,24 @@ import { FakeHTMLElement } from './fake-html-element';
 
 export type TemplateFunction = () => Promise<string | null> | string | null;
 
+export interface IRibaComponentContext {
+  fallback: boolean;
+  view: View;
+}
+
 export abstract class RibaComponent extends FakeHTMLElement {
 
   public static tagName: string;
 
+  /**
+   * Context of this component, used for debugging
+   */
+  public context?: IRibaComponentContext;
+
   protected debug: Debug.IDebugger;
   protected view?: View;
   protected _bound: boolean = false;
+
   protected templateLoaded: boolean = false;
 
   protected riba?: Riba;
@@ -41,10 +52,11 @@ export abstract class RibaComponent extends FakeHTMLElement {
 
   private attributeObserverFallback?: MutationObserver;
 
-  constructor(element?: HTMLElement) {
+  constructor(element?: HTMLElement, context?: IRibaComponentContext) {
     super(element);
+    this.context = context;
     this.debug = Debug('component:RibaComponent');
-    this.debug('constructor called', element, this);
+    this.debug('constructor called', element, this.context, this);
 
     if (element) {
       this.el = element;

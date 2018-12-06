@@ -1,5 +1,5 @@
 import Debug from 'debug';
-import { RibaComponent } from './riba-component';
+import { RibaComponent, IRibaComponentContext } from './riba-component';
 import { View } from '../view';
 import { EventHandler } from '../riba';
 
@@ -7,6 +7,8 @@ export declare class RibaComponentClass extends RibaComponent {
   public static tagName: string;
 
   public readonly bound: boolean;
+
+  public context?: IRibaComponentContext;
 
   protected debug: Debug.IDebugger;
   protected view?: View;
@@ -23,7 +25,7 @@ export declare class RibaComponentClass extends RibaComponent {
    */
   protected autobind: boolean;
 
-  constructor(element?: HTMLElement);
+  constructor(element?: HTMLElement, context?: IRibaComponentContext);
 
   public disconnectedFallbackCallback(): void;
 

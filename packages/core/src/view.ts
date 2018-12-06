@@ -203,8 +203,10 @@ export class View {
           // Fallback
           if (!window.customElements) {
             View.debug(`Fallback for Webcomponent ${nodeName}`);
-            const component = new COMPONENT(node);
-            // TODO call disconnectedCallback for unbind
+            const component = new COMPONENT(node, {
+              fallback: true,
+              view: this,
+            });
             this.webComponents.push(component);
           } else {
             View.debug(`Define Webcomponent ${nodeName} with customElements.define`);
@@ -213,11 +215,20 @@ export class View {
             } else {
               try {
                 customElements.define(nodeName, COMPONENT);
+                // TODO ?? call unbind (on unbind this view) of this component instance to unbind this view
+                // (not disconnectedCallback / disconnectedFallbackCallback, this is automatically called from customElements)
+                const component = customElements.get(nodeName);
+                component.context = {
+                  fallback: true,
+                  view: this,
+                };
               } catch (error) {
                 console.error(error);
                 // Fallback
-                const component = new COMPONENT(node);
-                // TODO call disconnectedCallback for unbind
+                const component = new COMPONENT(node, {
+                  fallback: true,
+                  view: this,
+                });
                 this.webComponents.push(component);
               }
             }
