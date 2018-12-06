@@ -19,7 +19,7 @@ export abstract class RibaComponent extends FakeHTMLElement {
 
   protected debug: Debug.IDebugger;
   protected view?: View;
-  protected bound: boolean = false;
+  protected _bound: boolean = false;
   protected templateLoaded: boolean = false;
 
   protected riba?: Riba;
@@ -29,6 +29,14 @@ export abstract class RibaComponent extends FakeHTMLElement {
   // protected $el: JQuery<HTMLElement>;
 
   protected abstract scope: any;
+
+  protected get bound() {
+    return !!this._bound || !!this.view;
+  }
+
+  protected set bound(bound: boolean) {
+    this._bound = !! bound;
+  }
 
   /**
    * If true the component will automatically bind the component to riba if all required attributes are setted
@@ -201,8 +209,8 @@ export abstract class RibaComponent extends FakeHTMLElement {
       this.attributeObserverFallback.disconnect();
     }
 
-    // this.el.removeEventListener('binder-changed', this.BinderChangedEventHandler);
-    // this.$el.off('binder-changed', this.BinderChangedEventHandler);
+    this.el.removeEventListener('binder-changed', this.BinderChangedEventHandler);
+    this.bound = false;
   }
 
   /**
@@ -291,6 +299,7 @@ export abstract class RibaComponent extends FakeHTMLElement {
       return template;
     })
     .catch((error) => {
+      console.error(error);
       this.templateLoaded = false;
       return error;
     });
@@ -326,9 +335,10 @@ export abstract class RibaComponent extends FakeHTMLElement {
     });
 
     this.view = new View(Array.prototype.slice.call(this.el.childNodes), this.scope, viewOptions);
+    this.bound = true;
     this.scope = this.view.models;
     this.view.bind();
-    this.bound = true;
+
     await this.afterBind()
     .catch((error) => {
       console.error(error);

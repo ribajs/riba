@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/core",
   "description": "Core module of Riba.js",
-  "version": "0.16.6",
+  "version": "0.16.7",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "private": false,
   "contributors": [
@@ -24,7 +24,7 @@
     "url": "git+https://github.com/ribajs/riba.git"
   },
   "scripts": {
-    "test": "mocha-chrome spec/runner.html && mocha-chrome spec/runner.min.html",
+    "test": "npm run build:browser && mocha-chrome spec/runner.html && mocha-chrome spec/runner.min.html",
     "type-check": "tslint -c tslint.json 'src/**/*.ts' && tsc --noEmit",
     "build": "tsc",
     "build:browser": "npm run type-check && npm run webpack:browser",
