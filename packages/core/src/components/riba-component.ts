@@ -56,7 +56,7 @@ export abstract class RibaComponent extends FakeHTMLElement {
     super(element);
     this.context = context;
     this.debug = Debug('component:RibaComponent');
-    this.debug('constructor called', element, this.context, this);
+    this.debug('constructor called', element, context, this);
 
     if (element) {
       this.el = element;

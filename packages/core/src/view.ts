@@ -210,8 +210,9 @@ export class View {
             this.webComponents.push(component);
           } else {
             View.debug(`Define Webcomponent ${nodeName} with customElements.define`);
-            if (customElements.get(nodeName)) {
-              View.debug(`Web component already defined`);
+            // if node.constructor is not HTMLElement and not HTMLUnknownElement, it was registed
+            if (customElements.get(nodeName) || (node.constructor !== HTMLElement && node.constructor !== HTMLUnknownElement)) {
+              View.debug(`Web component already defined`, node.constructor);
             } else {
               try {
                 customElements.define(nodeName, COMPONENT);
@@ -219,7 +220,7 @@ export class View {
                 // (not disconnectedCallback / disconnectedFallbackCallback, this is automatically called from customElements)
                 const component = customElements.get(nodeName);
                 component.context = {
-                  fallback: true,
+                  fallback: false,
                   view: this,
                 };
               } catch (error) {
