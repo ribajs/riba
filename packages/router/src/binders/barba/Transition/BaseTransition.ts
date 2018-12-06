@@ -1,11 +1,11 @@
 import { Debug, Utils } from '@ribajs/core';
 
 export interface ITransition {
-  // $oldContainer: JQuery<HTMLElement>;
-  // $newContainer: JQuery<HTMLElement>;
-  // newContainerLoading: Promise<JQuery<HTMLElement>>;
+  // $oldContainer: JQuery<Element>;
+  // $newContainer: JQuery<Element>;
+  // newContainerLoading: Promise<JQuery<Element>>;
   // extend(obj: object): object;
-  init($oldContainer: JQuery<HTMLElement>, newContainer: Promise<JQuery<HTMLElement>>): Promise<void>;
+  init($oldContainer: JQuery<Element>, newContainer: Promise<JQuery<Element>>): Promise<void>;
   done(): void;
   start(): any;
 }
@@ -19,21 +19,21 @@ export interface ITransition {
 export abstract class BaseTransition implements ITransition {
   /**
    * @memberOf Barba.BaseTransition
-   * @type {JQuery<HTMLElement>}
+   * @type {JQuery<Element>}
    */
-  protected $oldContainer?: JQuery<HTMLElement>;
+  protected $oldContainer?: JQuery<Element>;
 
   /**
    * @memberOf Barba.BaseTransition
-   * @type {JQuery<HTMLElement>}
+   * @type {JQuery<Element>}
    */
-  protected $newContainer?: JQuery<HTMLElement>;
+  protected $newContainer?: JQuery<Element>;
 
   /**
    * @memberOf Barba.BaseTransition
    * @type {Promise}
    */
-  protected newContainerLoading?: Promise<JQuery<HTMLElement>>;
+  protected newContainerLoading?: Promise<JQuery<Element>>;
 
   protected deferred: any; // TODO type
 
@@ -51,11 +51,11 @@ export abstract class BaseTransition implements ITransition {
    *
    * @memberOf Barba.BaseTransition
    * @private
-   * @param  {HTMLElement} oldContainer
+   * @param  {Element} oldContainer
    * @param  {Promise} newContainer
    * @return {Promise}
    */
-  public init($oldContainer: JQuery<HTMLElement>, newContainer: Promise<JQuery<HTMLElement>>): Promise<void> {
+  public init($oldContainer: JQuery<Element>, newContainer: Promise<JQuery<Element>>): Promise<void> {
     const self = this;
 
     this.$oldContainer = $oldContainer;
@@ -66,7 +66,7 @@ export abstract class BaseTransition implements ITransition {
 
     this.start();
 
-    newContainer.then(($newContainer: JQuery<HTMLElement>) => {
+    newContainer.then(($newContainer: JQuery<Element>) => {
       self.$newContainer = $newContainer;
       newContainerReady.resolve();
     });

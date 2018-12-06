@@ -16,7 +16,7 @@ class CustomTransition extends BaseTransition implements ITransition {
 
   protected debug = Debug('rivets:CustomTransition');
 
-  public init($oldContainer: JQuery<HTMLElement>, newContainer: Promise<JQuery<HTMLElement>>): Promise<void> {
+  public init($oldContainer: JQuery<Element>, newContainer: Promise<JQuery<Element>>): Promise<void> {
     const self = this;
 
     this.$oldContainer = $oldContainer;
@@ -28,7 +28,7 @@ class CustomTransition extends BaseTransition implements ITransition {
 
     this.start();
 
-    newContainer.then(($newContainer: JQuery<HTMLElement>) => {
+    newContainer.then(($newContainer: JQuery<Element>) => {
       self.$newContainer = $newContainer;
       newContainerReady.resolve();
     });
@@ -44,7 +44,7 @@ class CustomTransition extends BaseTransition implements ITransition {
     this.newContainerLoading.then(this.finish.bind(this));
   }
 
-  public finish($container: JQuery<HTMLElement>) {
+  public finish($container: JQuery<Element>) {
     document.body.scrollTop = 0;
     this.debug('CustomTransition finish');
     this.done();
