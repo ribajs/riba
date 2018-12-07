@@ -436,7 +436,7 @@ class Pjax {
     }
 
     const transitionInstance = transition.init(
-      this.dom.getContainer(),
+      this.dom.getContainer(document.body),
       $newContainer,
     );
 

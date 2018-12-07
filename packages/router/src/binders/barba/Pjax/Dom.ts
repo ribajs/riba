@@ -80,7 +80,7 @@ class Dom {
    * Get the container on the current DOM,
    * or from an Element passed via argument
    */
-  public getContainer(element?: HTMLTemplateElement | JQuery<HTMLTemplateElement>): JQuery<Element> {
+  public getContainer(element?: HTMLTemplateElement | HTMLElement | JQuery<HTMLTemplateElement>): JQuery<Element> {
 
     if (!element) {
       throw new Error('Barba.js: [getContainer] No element to get container from!');
