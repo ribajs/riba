@@ -43,6 +43,7 @@ class Dom {
 
   /**
    * Parse the responseText obtained from the xhr call
+   * @see https://stackoverflow.com/a/41038197/1465919
    */
   public parseResponse(responseText: string): JQuery<Element> {
     this.currentHTML = responseText;
@@ -80,18 +81,18 @@ class Dom {
    * Get the container on the current DOM,
    * or from an Element passed via argument
    */
-  public getContainer(element?: HTMLTemplateElement | HTMLElement | JQuery<HTMLTemplateElement>): JQuery<Element> {
+  public getContainer(element?: HTMLElement | HTMLTemplateElement | JQuery<HTMLElement | HTMLTemplateElement>): JQuery<Element> {
 
     if (!element) {
       throw new Error('Barba.js: [getContainer] No element to get container from!');
     }
 
-    let el: HTMLTemplateElement;
+    let el: HTMLElement | HTMLTemplateElement ;
 
-    if ((element as JQuery<HTMLTemplateElement>).jquery) {
-      el = (element as JQuery<HTMLTemplateElement>)[0];
+    if ((element as JQuery<Node>).jquery) {
+      el = (element as JQuery<HTMLElement | HTMLTemplateElement>)[0];
     } else {
-      el = element as HTMLTemplateElement;
+      el = element as HTMLTemplateElement | HTMLElement;
     }
 
     if (!el) {
@@ -99,9 +100,6 @@ class Dom {
     }
 
     const container = this.parseContainer(el);
-    if (el.parentNode) {
-      el.parentNode.removeChild(el);
-    }
 
     if (!container) {
       throw new Error('[DOM] No container found');
@@ -137,11 +135,20 @@ class Dom {
   /**
    * Put the container on the page
    */
-  public putContainer($element: JQuery<Element>) {
-    this.debug('putContainer', $element);
-    $element.css('visibility', 'hidden');
-    const $wrapper = this.getWrapper();
-    $wrapper[0].appendChild($element[0]);
+  public putContainer(element: HTMLElement | JQuery<Element>) {
+    this.debug('putContainer', element);
+    if ((element as JQuery<Element>).jquery) {
+      element = element as JQuery<Element>;
+      element.css('visibility', 'hidden');
+      const wrapper = this.getWrapper()[0];
+      wrapper.appendChild(element[0]);
+    } else {
+      element = element as HTMLElement;
+      element.style.visibility = 'hidden';
+      const wrapper = this.getWrapper()[0];
+      wrapper.appendChild(element);
+    }
+
   }
 
   /**
@@ -151,16 +158,18 @@ class Dom {
    * @private
    * @param element
    */
-  public parseContainer(newPage: HTMLTemplateElement): Element  {
+  public parseContainer(newPage: HTMLTemplateElement | HTMLElement): Element  {
     if (!newPage) {
       throw new Error(`No container with selector "${this.containerSelector}" found!`);
     }
-    const result =  newPage.querySelector(this.containerSelector);
+
+    const result = newPage.querySelector(this.containerSelector);
+
     if (!result) {
       throw new Error(`No container with selector "${this.containerSelector}" found!`);
     }
 
-    return result;
+    return result; // .cloneNode(true);
     // const $container = $newPage.find(this.containerSelector);
     // if (!$container.length) {
     //   this.debug(`No container with selector "${this.containerSelector}" found!`, $newPage);
