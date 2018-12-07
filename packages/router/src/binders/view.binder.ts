@@ -21,7 +21,7 @@ export const viewBinderWrapper: BinderWrapper = () => {
 
     block: true,
 
-    bind(el: HTMLUnknownElement) {
+    bind(el: Element) {
       debug('bind', this.customData);
       const self = this;
       if (!this.customData) {
