@@ -163,13 +163,19 @@ class Dom {
       throw new Error(`No container with selector "${this.containerSelector}" found!`);
     }
 
-    const result = newPage.querySelector(this.containerSelector);
+    let result: Element | null;
 
-    if (!result) {
-      throw new Error(`No container with selector "${this.containerSelector}" found!`);
+    if ((newPage as HTMLTemplateElement).content) {
+      result = (newPage as HTMLTemplateElement).content.querySelector(this.containerSelector);
+    } else {
+      result = newPage.querySelector(this.containerSelector);
     }
 
-    return result; // .cloneNode(true);
+    if (!result) {
+      throw new Error(`No container with selector "${this.containerSelector}" found! ${newPage.tagName}`);
+    }
+
+    return result;
     // const $container = $newPage.find(this.containerSelector);
     // if (!$container.length) {
     //   this.debug(`No container with selector "${this.containerSelector}" found!`, $newPage);
