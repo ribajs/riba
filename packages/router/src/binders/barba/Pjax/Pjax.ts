@@ -502,8 +502,7 @@ class Pjax {
     if (!this.dom) {
       throw new Error('[Pjax] you need to call the start method first!');
     }
-    const $container = this.dom.getContainer();
-    // const $wrapper = this.dom.getWrapper();
+    const $container = this.dom.getContainer(document.body);
 
     this.$wrapper = $wrapper;
 
