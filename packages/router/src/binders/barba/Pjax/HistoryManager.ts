@@ -1,8 +1,4 @@
-export interface IState {
-  url: string;
-  namespace?: string;
-}
-
+import { IState } from '../interfaces/state';
 /**
  * HistoryManager helps to keep track of the navigation
  *

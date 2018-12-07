@@ -1,5 +1,6 @@
 import { Debug, Utils } from '@ribajs/core';
-import { BaseTransition, ITransition } from './BaseTransition';
+import { BaseTransition } from './BaseTransition';
+import { ITransition } from '../interfaces/transition';
 
 declare global {
   // tslint:disable: interface-name

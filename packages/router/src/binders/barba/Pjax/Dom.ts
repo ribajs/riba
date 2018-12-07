@@ -80,22 +80,22 @@ class Dom {
    * Get the container on the current DOM,
    * or from an Element passed via argument
    */
-  public getContainer(element?: HTMLTemplateElement | Element | JQuery<HTMLTemplateElement>): JQuery<Element> {
-
-    let el: HTMLTemplateElement | Element;
+  public getContainer(element?: HTMLTemplateElement | JQuery<HTMLTemplateElement>): JQuery<Element> {
 
     if (!element) {
-      element = document.body;
+      throw new Error('Barba.js: [getContainer] No element to get container from!');
     }
 
-    if ((element as JQuery<Element>).jquery) {
-      el = (element as JQuery<Element>)[0];
+    let el: HTMLTemplateElement;
+
+    if ((element as JQuery<HTMLTemplateElement>).jquery) {
+      el = (element as JQuery<HTMLTemplateElement>)[0];
     } else {
-      el = element as Element;
+      el = element as HTMLTemplateElement;
     }
 
     if (!el) {
-      throw new Error('Barba.js: DOM not ready!');
+      throw new Error('Barba.js: [getContainer] DOM not ready!');
     }
 
     const container = this.parseContainer(el);
@@ -141,7 +141,7 @@ class Dom {
     this.debug('putContainer', $element);
     $element.css('visibility', 'hidden');
     const $wrapper = this.getWrapper();
-    $wrapper.append($element);
+    $wrapper[0].appendChild($element[0]);
   }
 
   /**
@@ -151,7 +151,7 @@ class Dom {
    * @private
    * @param element
    */
-  public parseContainer(newPage: Element): Element  {
+  public parseContainer(newPage: HTMLTemplateElement): Element  {
     if (!newPage) {
       throw new Error(`No container with selector "${this.containerSelector}" found!`);
     }
