@@ -211,6 +211,7 @@ export class View {
           } else {
             View.debug(`Define Webcomponent ${nodeName} with customElements.define`);
             // if node.constructor is not HTMLElement and not HTMLUnknownElement, it was registed
+            // @see https://stackoverflow.com/questions/27334365/how-to-get-list-of-registered-custom-elements
             if (customElements.get(nodeName) || (node.constructor !== HTMLElement && node.constructor !== HTMLUnknownElement)) {
               View.debug(`Web component already defined`, node.constructor);
             } else {

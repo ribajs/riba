@@ -47,7 +47,7 @@ class Dom {
   public parseResponse(responseText: string): JQuery<Element> {
     this.currentHTML = responseText;
 
-    const wrapper = document.createElement('template');
+    const wrapper = document.createElement('template') as HTMLTemplateElement;
     wrapper.innerHTML = responseText;
 
     const titleEl = wrapper.querySelector('title');
@@ -56,7 +56,7 @@ class Dom {
       document.title = titleEl.textContent;
     }
 
-    return this.getContainer(wrapper.content.cloneNode(true));
+    return this.getContainer(wrapper);
     // this.currentHTML = responseText;
     // const $newPage = JQuery( responseText );
 
@@ -80,9 +80,9 @@ class Dom {
    * Get the container on the current DOM,
    * or from an Element passed via argument
    */
-  public getContainer(element?: Node | Element | JQuery<Element>): JQuery<Element> {
+  public getContainer(element?: HTMLTemplateElement | Element | JQuery<HTMLTemplateElement>): JQuery<Element> {
 
-    let el: Element;
+    let el: HTMLTemplateElement | Element;
 
     if (!element) {
       element = document.body;
@@ -151,7 +151,7 @@ class Dom {
    * @private
    * @param element
    */
-  public parseContainer(newPage: Element): Element {
+  public parseContainer(newPage: Element): Element  {
     if (!newPage) {
       throw new Error(`No container with selector "${this.containerSelector}" found!`);
     }
