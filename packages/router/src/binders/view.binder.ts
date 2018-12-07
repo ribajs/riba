@@ -1,5 +1,6 @@
 import { Debug, JQuery, ITwoWayBinder, BinderWrapper, EventDispatcher, Utils, View as RivetsView } from '@ribajs/core';
-import { Pjax, Prefetch, IState, HideShowTransition } from './barba/barba';
+import { Pjax, Prefetch, HideShowTransition } from './barba/barba';
+import { IState } from './barba/interfaces/state';
 
 /**
  * The main wrapper for the riba view

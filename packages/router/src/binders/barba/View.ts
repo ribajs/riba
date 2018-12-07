@@ -1,5 +1,5 @@
 import { EventDispatcher, Utils } from '@ribajs/core';
-import { IState } from './Pjax/Pjax';
+import { IState } from './interfaces/state';
 
 /**
  * BaseView to be extended
