@@ -270,7 +270,7 @@ export class Binding implements IBindable {
       value = this.formattedValue(value);
     }
 
-    let routineFn;
+    let routineFn: (...args: any[]) => void;
     if (this.binder === null) {
       throw new Error('binder is null');
     }
@@ -283,7 +283,17 @@ export class Binding implements IBindable {
     }
 
     if (routineFn instanceof Function) {
-      routineFn.call(this, this.el, value);
+      // If value is a promise
+      if (value && typeof(value.then) === 'function' && typeof(value.catch) === 'function') {
+        value.then((realValue: any) => {
+          routineFn.call(this, this.el, realValue);
+        })
+        .catch((error: Error) => {
+          console.error(error);
+        });
+      } else {
+        routineFn.call(this, this.el, value);
+      }
     }
   }
 
