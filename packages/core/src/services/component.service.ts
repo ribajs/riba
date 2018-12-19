@@ -9,7 +9,7 @@ export type Scope = any;
 
 export interface IClassicComponent<ValueType> {
   /** If the template function returns null no template is injected */
-  template: (() => string | null) | (() => HTMLElement);
+  template: ((el: HTMLElement) => string | null);
   initialize: (el: HTMLElement, data: ValueType) => Scope;
 
   /** array of attribiute names to force parse attributes as static (primitive) values */

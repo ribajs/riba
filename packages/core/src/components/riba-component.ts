@@ -167,8 +167,8 @@ export abstract class RibaComponent extends FakeHTMLElement {
   protected eventHandler(self: RibaComponent): EventHandler {
     this.debug('eventHandler', self);
     // IMPORTANT this must be a function and not a Arrow Functions
-    return function(this: EventHandler, context: Binding, ev: Event, binding: Binding, el: HTMLElement) {
-      this.call(self, ev, binding.view.models, el, context);
+    return function(this: EventHandler, context: Binding, event: Event, binding: Binding, el: HTMLElement) {
+      this.call(self, context, event, binding.view.models, el);
     };
   }
 
@@ -350,7 +350,7 @@ export abstract class RibaComponent extends FakeHTMLElement {
       },
     });
 
-    this.view = new View(Array.prototype.slice.call(this.el.childNodes), this.scope, viewOptions);
+    this.view = new View(Array.prototype.slice.call(this.el.childNodes) as unknown as NodeListOf<ChildNode>, this.scope, viewOptions);
     this._bound = true;
     this.scope = this.view.models;
     this.view.bind();

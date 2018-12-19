@@ -66,7 +66,7 @@ export class View {
    * @param models
    * @param options
    */
-  constructor(els: HTMLCollection | HTMLElement | Node, models: any, options: IViewOptions) {
+  constructor(els: HTMLCollection | HTMLElement | Node | NodeListOf<ChildNode>, models: any, options: IViewOptions) {
     if (els instanceof Array) {
       this.els = els;
     } else {

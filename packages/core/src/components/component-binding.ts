@@ -177,7 +177,7 @@ export class ComponentBinding implements IBindable {
   public bind() {
     if (!this.el._bound) {
 
-      const innerHTML = this.component.template.call(this);
+      const innerHTML = this.component.template.call(this, this.el);
       // if innerHTML is null this component uses the innerHTML which he already has!
       if (innerHTML !== null) {
         this.el.innerHTML = innerHTML;
@@ -187,7 +187,7 @@ export class ComponentBinding implements IBindable {
        * there's a cyclic dependency that makes imported View a dummy object. Use riba.bind
        */
       const scope = this.component.initialize.call(this, this.el, this.locals());
-      this.view = new View(Array.prototype.slice.call(this.el.childNodes), scope, this.getMergedOptions());
+      this.view = new View(Array.prototype.slice.call(this.el.childNodes) as unknown as NodeListOf<ChildNode>, scope, this.getMergedOptions());
       this.view.bind();
 
       this.el._bound = true;
