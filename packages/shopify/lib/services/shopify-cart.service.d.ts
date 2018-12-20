@@ -1,3 +1,4 @@
+import { Debug, EventDispatcher } from '@ribajs/core';
 import { PQueue } from './p-queue.service';
 import { IShopifyCartLineItem, IShopifyCartUpdateProperty, IShopifyCartAddError, IShopifyCartObject, IShopifyCustomerAddress, IShopifyShippingRates, IShopifyShippingRatesNormalized } from '../interfaces/interfaces';
 export interface IShopifyCartRequestOptions {
@@ -8,7 +9,7 @@ export interface IShopifyCartRequestOptions {
 export declare class ShopifyCartService {
     static queue: PQueue;
     static cart: IShopifyCartObject | null;
-    static shopifyCartEventDispatcher: any;
+    static shopifyCartEventDispatcher: EventDispatcher;
     /**
      * Use this to add a variant to the cart.
      * @param id Variant id
@@ -87,7 +88,7 @@ export declare class ShopifyCartService {
      * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#get-shipping-rates
      */
     static getShippingRates(shippingAddress: IShopifyCustomerAddress, normalize?: boolean, options?: IShopifyCartRequestOptions): Promise<IShopifyShippingRates | IShopifyShippingRatesNormalized>;
-    protected static debug: any;
+    protected static debug: Debug.IDebugger;
     protected static CART_POST_ADD_URL: string;
     protected static CART_GET_URL: string;
     protected static CART_POST_UPDATE_URL: string;

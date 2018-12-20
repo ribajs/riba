@@ -52,7 +52,7 @@ class Pjax {
    * @param  {HTMLAnchorElement} element
    * @return {boolean}
    */
-  public static preventCheck(evt: JQuery.Event<HTMLElement, null>, element: HTMLAnchorElement): boolean {
+  public static preventCheck(evt: JQuery.Event | Event, element: HTMLAnchorElement): boolean {
     if (!window.history.pushState) {
       return false;
     }
@@ -65,7 +65,7 @@ class Pjax {
     }
 
     // Middle click, cmd click, and ctrl click
-    if (evt.which > 1 || evt.metaKey || evt.ctrlKey || evt.shiftKey || evt.altKey) {
+    if (((evt as JQuery.Event).which && (evt as any).which > 1) || (evt as JQuery.Event).metaKey || (evt as JQuery.Event).ctrlKey || (evt as JQuery.Event).shiftKey || (evt as JQuery.Event).altKey) {
       return false;
     }
 
@@ -376,8 +376,8 @@ class Pjax {
   * @protected
   * @param {MouseEvent} evt
   */
- protected onLinkClick(evt: JQuery.Event<HTMLElement, null>) {
-    let el: HTMLAnchorElement = (evt.target as HTMLAnchorElement );
+ protected onLinkClick(evt: JQuery.Event | Event) {
+    let el: HTMLAnchorElement = ((evt as Event).target as HTMLAnchorElement );
 
     // Go up in the nodelist until we
     // find something with an href

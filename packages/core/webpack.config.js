@@ -9,9 +9,8 @@ module.exports = {
         sourceMap: false,
         uglifyOptions: {
           compress: true,
-          mangle: {
-            safari10: true, // https://github.com/webpack-contrib/uglifyjs-webpack-plugin/issues/92
-          },
+          safari10: true, // https://github.com/webpack-contrib/uglifyjs-webpack-plugin/issues/92
+          mangle: {},
           output: {
             beautify: false,
             comments: false,

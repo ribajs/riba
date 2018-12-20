@@ -59,7 +59,7 @@ class Prefetch {
    * @private
    * @param  {object} evt
    */
-  public onLinkEnter(evt: JQuery.Event<HTMLElement, null>, url?: string) {
+  public onLinkEnter(evt: Event, url?: string) {
 
     let el = (evt.target as HTMLAnchorElement);
 

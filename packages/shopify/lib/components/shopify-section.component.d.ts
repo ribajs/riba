@@ -1,7 +1,7 @@
-import { RibaComponent, JQuery } from '@ribajs/core';
+import { Debug, RibaComponent } from '@ribajs/core';
 export declare abstract class ShopifySectionComponent extends RibaComponent {
     static tagName: string;
-    protected debug: any;
+    protected debug: Debug.IDebugger;
     protected $el: JQuery<HTMLElement>;
     protected abstract scope: any;
     constructor(element?: HTMLElement);

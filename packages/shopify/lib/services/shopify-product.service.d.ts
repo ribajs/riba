@@ -1,3 +1,4 @@
+import { Debug } from '@ribajs/core';
 import { IShopifyProduct, IShopifyProductVariant } from '../interfaces/interfaces';
 export interface IProductsCache {
     [handle: string]: IShopifyProduct;
@@ -29,6 +30,6 @@ export declare class ShopifyProductService {
      * @param product product object
      */
     static prepair(product: IShopifyProduct): IShopifyProduct;
-    protected static debug: any;
+    protected static debug: Debug.IDebugger;
     protected static cache: IProductsCache;
 }
