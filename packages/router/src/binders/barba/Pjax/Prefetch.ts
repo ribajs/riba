@@ -59,9 +59,15 @@ class Prefetch {
    * @private
    * @param  {object} evt
    */
-  public onLinkEnter(evt: Event, url?: string) {
+  public onLinkEnter(evt: Event | JQuery.Event, url?: string, el?: HTMLAnchorElement) {
 
-    let el = (evt.target as HTMLAnchorElement);
+    if (!el && evt) {
+      el = ((evt as Event).target as HTMLAnchorElement) || (evt as any).currentTarget;
+    }
+
+    if (!el) {
+      throw new Error('HTML Element not set');
+    }
 
     if (!url) {
       while (el && !Pjax.getHref(el)) {

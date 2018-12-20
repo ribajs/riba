@@ -65,7 +65,7 @@ class Pjax {
     }
 
     // Middle click, cmd click, and ctrl click
-    if (((evt as JQuery.Event).which && (evt as any).which > 1) || (evt as JQuery.Event).metaKey || (evt as JQuery.Event).ctrlKey || (evt as JQuery.Event).shiftKey || (evt as JQuery.Event).altKey) {
+    if ((evt && ((evt as JQuery.Event).which && (evt as any).which > 1) || (evt as JQuery.Event).metaKey || (evt as JQuery.Event).ctrlKey || (evt as JQuery.Event).shiftKey || (evt as JQuery.Event).altKey)) {
       return false;
     }
 
