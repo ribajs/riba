@@ -152,7 +152,7 @@ export const routeBinderWrapper: BinderWrapper = () => {
   };
 
   return {
-    binder,
+    binder: binder as ITwoWayBinder<string>,
     name: 'route',
   };
 };
