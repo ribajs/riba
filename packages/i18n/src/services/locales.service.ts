@@ -23,6 +23,10 @@ export abstract class ALocalesService {
    */
   protected abstract initalLangcode: string;
 
+  constructor(private doNotTranslateDefaultLanguage: boolean) {
+
+  }
+
   /**
    * Get translation by properties, e.g. `de.form.newsletter_label`
    * Properties object must include the language code, e.g. `de`.
@@ -206,8 +210,8 @@ export abstract class ALocalesService {
           browserLangFound = true;
         }
       }
-      // ony switch language if autodetectLanguage is true and the browser language is not the default language
-      if (browserLangFound && browserLangcode !== this.currentLangcode) {
+      // only switch language if the browser language is not the default language (if doNotTranslateDefaultLanguage is true)
+      if (/*this.doNotTranslateDefaultLanguage TODO &&*/ browserLangFound && browserLangcode !== this.currentLangcode) {
         this.setLangcode(browserLangcode, true);
       }
       return availableLangcodes;

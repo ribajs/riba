@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/i18n",
   "description": "Internationalization extension for Riba.js",
-  "version": "0.17.0",
+  "version": "0.17.2",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "url": "https://github.com/ribajs/riba/tree/master/packages/i18n",
   "main": "src/index.ts",
@@ -16,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ribajs/riba.git"
+    "url": "git+https://github.com/ribajs/riba.git"
   },
   "scripts": {
     "type-check": "tslint -c tslint.json 'src/**/*.ts' && tsc --noEmit",
@@ -47,5 +47,12 @@
   "dependencies": {
     "@babel/runtime-corejs2": "^7.2.0",
     "@ribajs/core": "^0.17.0"
+  },
+  "bugs": {
+    "url": "https://github.com/ribajs/riba/issues"
+  },
+  "homepage": "https://github.com/ribajs/riba#readme",
+  "directories": {
+    "lib": "lib"
   }
 }
