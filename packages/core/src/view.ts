@@ -27,9 +27,9 @@ export class View {
     },
   };
 
-  public static bindingComparator = (a: IBindable, b: IBindable) => {
-    const aPriority = a.binder ? ((a.binder as ITwoWayBinder<any>).priority || 0) : 0;
-    const bPriority = b.binder ? ((b.binder as ITwoWayBinder<any>).priority || 0) : 0;
+  public static bindingComparator = (a: Binding | ComponentBinding, b: Binding | ComponentBinding) => {
+    const aPriority = (a as Binding).binder ? (((a as Binding).binder as ITwoWayBinder<any>).priority || 0) : 0;
+    const bPriority = (b as Binding).binder ? (((b as Binding).binder as ITwoWayBinder<any>).priority || 0) : 0;
     return bPriority - aPriority;
   }
 
@@ -54,7 +54,7 @@ export class View {
   public els: HTMLCollection | HTMLElement[] | Node[];
   public models: any;
   public options: IViewOptions;
-  public bindings: Array<IBindable> = [];
+  public bindings: Array<Binding | ComponentBinding> = [];
   public webComponents: Array<RibaComponentClass> = [];
   // public componentView: View | null = null;
 
@@ -285,7 +285,7 @@ export class View {
    */
   public publish() {
     this.bindings.forEach((binding) => {
-      if (binding.binder && binding.publish && (binding.binder as ITwoWayBinder<any>).publishes) {
+      if ((binding as Binding).binder && binding.publish && ((binding as Binding).binder as ITwoWayBinder<any>).publishes) {
         binding.publish();
       }
     });
@@ -301,8 +301,8 @@ export class View {
     });
 
     this.bindings.forEach((binding) => {
-      if (binding.update) {
-        binding.update(models);
+      if ((binding as Binding).update) {
+        (binding as Binding).update(models);
       }
     });
   }

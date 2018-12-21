@@ -1,12 +1,9 @@
 {
-  "name": "@ribajs/router",
-  "description": "Routing extension for Riba.js inspired by Barba.js",
-  "version": "0.17.4",
+  "name": "@ribajs/i18n",
+  "description": "Internationalization extension for Riba.js",
+  "version": "0.17.0",
   "author": "Pascal Garber <pascal@jumplink.eu>",
-  "contributors": [
-    "Luigi De Rosa <lurukee@gmail.com>"
-  ],
-  "url": "https://github.com/ribajs/riba",
+  "url": "https://github.com/ribajs/riba/tree/master/packages/i18n",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "source": "src/index.ts",
@@ -48,6 +45,7 @@
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {
+    "@babel/runtime-corejs2": "^7.2.0",
     "@ribajs/core": "^0.17.0"
   }
 }

@@ -1,14 +1,14 @@
 {
   "name": "@ribajs/core",
   "description": "Core module of Riba.js",
-  "version": "0.17.0",
+  "version": "0.17.1",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "private": false,
   "contributors": [
     "Michael Richards",
     "Luiz Américo Pereira Câmara"
   ],
-  "url": "https://github.com/ribajs/riba",
+  "url": "https://github.com/ribajs/riba/tree/master/packages/core",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "source": "src/index.ts",

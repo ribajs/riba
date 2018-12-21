@@ -61,15 +61,16 @@ class Prefetch {
    */
   public onLinkEnter(evt: Event | JQuery.Event, url?: string, el?: HTMLAnchorElement) {
 
-    if (!el && evt) {
-      el = ((evt as Event).target as HTMLAnchorElement) || (evt as any).currentTarget;
-    }
-
-    if (!el) {
-      throw new Error('HTML Element not set');
-    }
-
     if (!url) {
+
+      if (!el && evt) {
+        el = ((evt as Event).target as HTMLAnchorElement) || (evt as any).currentTarget;
+      }
+
+      if (!el) {
+        throw new Error('HTML Element not set');
+      }
+
       while (el && !Pjax.getHref(el)) {
         el = (el.parentNode as HTMLAnchorElement); // TODO testme
       }
@@ -88,9 +89,20 @@ class Prefetch {
     }
 
     // Check if the link is elegible for Pjax
-    if (url && Pjax.preventCheck(evt, el) && !Pjax.cache.get(url)) {
+    if (url && Pjax.preventCheck(evt, el, url) && !Pjax.cache.get(url)) {
       const xhr = Utils.xhr(url);
       Pjax.cache.set(url, xhr);
+      this.debug('cached', url, xhr);
+    } else {
+      this.debug('not cached', url);
+      if (url) {
+        if (Pjax.cache.get(url)) {
+          this.debug('already cached', Pjax.cache.get(url));
+        }
+        if (!Pjax.preventCheck(evt, el, url)) {
+          this.debug('preventCheck failed', Pjax.preventCheck(evt, el, url));
+        }
+      }
     }
   }
 }

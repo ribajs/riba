@@ -4,7 +4,7 @@
   "version": "0.17.1",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "contributors": [],
-  "url": "https://github.com/ribajs/riba",
+  "url": "https://github.com/ribajs/riba/tree/master/packages/shopify",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "source": "src/index.ts",

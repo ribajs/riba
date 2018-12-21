@@ -18,16 +18,12 @@ export interface ITwoWayBinder<ValueType> {
   function?: boolean;
   publishes?: boolean;
   priority?: number;
-  /**
-   * If you want to save custom data in your binder logic
-   */
-  customData?: any;
 }
 
 /**
  * A binder can be a one way binder or a two way binder
  */
-export type Binder<ValueType> = IOneWayBinder<ValueType> | ITwoWayBinder<ValueType> | IBindable;
+export type Binder<ValueType> = IOneWayBinder<ValueType> | ITwoWayBinder<ValueType>;
 
 /**
  * A list of binders with any key name

@@ -59,7 +59,7 @@ export type eventHandlerFunction = (event: Event) => void;
 /**
  *  A single binding between a model attribute and a DOM element.
  */
-export class Binding implements IBindable {
+export class Binding {
 
   public static FORMATTER_ARGS =  /[^\s']+|'([^']|'[^\s])*'|"([^"]|"[^\s])*"/g;
   public static FORMATTER_SPLIT = /\s+/;
@@ -312,7 +312,7 @@ export class Binding implements IBindable {
   /**
    * Publishes the value currently set on the input element back to the model.
    */
-  public publish(forceValue?: any) {
+  public publish() {
     if (this.observer) {
       if (this.formatters === null) {
         throw new Error('formatters is null');

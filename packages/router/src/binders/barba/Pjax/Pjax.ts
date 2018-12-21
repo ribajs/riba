@@ -52,35 +52,33 @@ class Pjax {
    * @param  {HTMLAnchorElement} element
    * @return {boolean}
    */
-  public static preventCheck(evt: JQuery.Event | Event, element: HTMLAnchorElement): boolean {
+  public static preventCheck(evt: JQuery.Event | Event, element?: HTMLAnchorElement, href?: string): boolean {
     if (!window.history.pushState) {
       return false;
     }
 
-    const href = this.getHref(element);
+    /**
+     * Get href from element if href is not set
+     */
+    if (!href && element) {
+      href = this.getHref(element);
+    }
 
-    // User
-    if (!element || !href) {
+    /**
+     * Create fake html element if element is not set
+     */
+    if (href && !element) {
+      element = document.createElement('a');
+      element.setAttribute('href', href);
+    }
+
+    Pjax.DEBUG('preventCheck', href, element);
+
+    if (!element) {
       return false;
     }
 
-    // Middle click, cmd click, and ctrl click
-    if ((evt && ((evt as JQuery.Event).which && (evt as any).which > 1) || (evt as JQuery.Event).metaKey || (evt as JQuery.Event).ctrlKey || (evt as JQuery.Event).shiftKey || (evt as JQuery.Event).altKey)) {
-      return false;
-    }
-
-    // Ignore target with _blank target
-    if (element.target && element.target === '_blank') {
-      return false;
-    }
-
-    // Check if it's the same domain
-    if (window.location.protocol !== element.protocol || window.location.hostname !== element.hostname) {
-      return false;
-    }
-
-    // Check if the port is the same
-    if (Utils.getPort() !== Utils.getPort(element.port)) {
+    if (!href) {
       return false;
     }
 
@@ -89,26 +87,43 @@ class Pjax {
       return false;
     }
 
-    // Ignore case where there is download attribute
-    if (element.getAttribute && typeof element.getAttribute('download') === 'string') {
-      return false;
-    }
-
-    // Ignore case if router binder manages the link TODO use riba prefix
-    if (element.getAttribute && typeof element.hasAttribute('rv-route')) {
-      return false;
-    }
-
-    if (element.classList.contains(this.ignoreClassLink)) {
-      return false;
-    }
-
-    if (element.classList.contains(this.ignoreClassLink)) {
-      return false;
-    }
-
     // In case you're trying to load the same page
     if (Utils.cleanLink(href) === Utils.cleanLink(location.href)) {
+      Pjax.DEBUG('trying to load the same page');
+      return false;
+    }
+
+    // Middle click, cmd click and ctrl click
+    if ((evt && ((evt as JQuery.Event).which && (evt as any).which > 1) || (evt as JQuery.Event).metaKey || (evt as JQuery.Event).ctrlKey || (evt as JQuery.Event).shiftKey || (evt as JQuery.Event).altKey)) {
+      Pjax.DEBUG('Middle click, cmd click or ctrl click');
+      return false;
+    }
+
+    // Ignore target with _blank target
+    if (element.target && element.target === '_blank') {
+      Pjax.DEBUG('_blank target');
+      return false;
+    }
+
+    // Check if it's the same domain
+    if (window.location.protocol !== element.protocol || window.location.hostname !== element.hostname) {
+      Pjax.DEBUG('not the the same domain');
+      return false;
+    }
+
+    // Check if the port is the same
+    if (Utils.getPort() !== Utils.getPort(element.port)) {
+      Pjax.DEBUG('not the the same port');
+      return false;
+    }
+
+    // Ignore case where there is download attribute
+    if (element.getAttribute && typeof element.getAttribute('download') === 'string') {
+      Pjax.DEBUG('download link');
+      return false;
+    }
+
+    if (element.classList.contains(this.ignoreClassLink)) {
       return false;
     }
 
@@ -125,7 +140,6 @@ class Pjax {
    */
   public static getHref(el: HTMLAnchorElement | SVGAElement): string | undefined {
     if (!el) {
-      // console.warn('No element to get href from');
       return undefined;
     }
 
@@ -151,6 +165,8 @@ class Pjax {
 
     return undefined;
   }
+
+  private static DEBUG = Debug('router:Pjax');
 
   public dom?: Dom;
   public history = new HistoryManager();
@@ -185,15 +201,13 @@ class Pjax {
 
   private $wrapper?: JQuery<HTMLElement>;
 
-  private debug = Debug('router:Pjax');
-
   private viewId: string;
 
   /**
    * Creates an singleton instance of Pjax.
    */
   constructor(id: string, $wrapper?: JQuery<HTMLElement>, containerSelector = '[data-namespace]', listenAllLinks: boolean = false, listenPopstate: boolean = true,  transition: ITransition = new HideShowTransition(), parseTitle: boolean = false) {
-    this.debug('constructor', id);
+    Pjax.DEBUG('constructor', id);
 
     this.viewId = id;
 
@@ -257,7 +271,7 @@ class Pjax {
    * @param {string} newUrl
    */
   public goTo(url: string, newTab = false) {
-    this.debug('goTo', url, newTab);
+    Pjax.DEBUG('goTo', url, newTab);
     if (newTab) {
       const win = window.open(url, '_blank');
       if (win) {
@@ -341,6 +355,7 @@ class Pjax {
  protected bindEvents(listenAllLinks: boolean, listenPopstate: boolean) {
     // you can also use the rv-router for this
     if (listenAllLinks) {
+      console.warn('listenAllLinks');
       document.addEventListener('click',
         this.onLinkClick.bind(this),
       );
@@ -385,13 +400,14 @@ class Pjax {
       el = (el.parentNode as HTMLAnchorElement);
     }
 
-    if (Pjax.preventCheck(evt, el)) {
+    const href = Pjax.getHref(el);
+
+    if (Pjax.preventCheck(evt, el, href)) {
       evt.stopPropagation();
       evt.preventDefault();
 
       this.dispatcher.trigger('linkClicked', el, evt);
 
-      const href = Pjax.getHref(el);
       if (!href) {
         throw new Error('href is null');
       }

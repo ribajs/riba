@@ -1,5 +1,5 @@
 import { Pjax, Prefetch } from './barba/barba';
-import { ITwoWayBinder, BinderWrapper, EventDispatcher, JQuery, Debug, Utils } from '@ribajs/core';
+import { Binding, ITwoWayBinder, BinderWrapper, EventDispatcher, JQuery, Debug, Utils, IBindable } from '@ribajs/core';
 
 export interface IRouteOptions {
   url: string;
@@ -13,15 +13,10 @@ export interface ICustomData {
   dispatcher?: EventDispatcher;
   options: IRouteOptions;
   $el?: JQuery<HTMLUnknownElement>;
-}
-
-export interface IRouterBinder extends ITwoWayBinder<string> {
-  customData: ICustomData;
-  checkURL(urlToCheck?: string): boolean;
-  onClick(event: JQuery.Event): void;
-  onNewPageReady(): void;
-  onLinkEnter(event: Event): void;
-  routine(el: HTMLElement, optionsOrUrl?: string | IRouteOptions): void;
+  checkURL(this: Binding, urlToCheck?: string): boolean;
+  onClick(this: Binding, event: JQuery.Event): void;
+  onNewPageReady(this: Binding): void;
+  onLinkEnter(this: Binding, event: Event): void;
 }
 
 /**
@@ -32,61 +27,53 @@ export const routeBinderWrapper: BinderWrapper = () => {
 
   const debug = Debug('binders:route');
 
-  const binder: IRouterBinder =  {
+  const binder: ITwoWayBinder<string> = {
 
-    customData: {
-      prefetch: new Prefetch(),
-      dispatcher: undefined,
-      options: {
-        removeAfterActivation: false,
-        newTab: false,
-      } as IRouteOptions,
+    bind(this: Binding, el: HTMLUnknownElement) {
+      this.customData = <ICustomData> {
+        prefetch: new Prefetch(),
+        dispatcher: undefined,
+        options: {
+          removeAfterActivation: false,
+          newTab: false,
+        } as IRouteOptions,
+        $el: JQuery(el),
+        checkURL(this: Binding, urlToCheck?: string) {
+          if (urlToCheck && Utils.onRoute(urlToCheck)) {
+            return true;
+          }
+          return false;
+        },
+        onClick(this: Binding, event: JQuery.Event) {
+          debug('go to', this.customData.options.url);
+          // Do not go to ref without pajax
+          event.preventDefault();
+          if (Utils.onRoute(this.customData.options.url)) {
+            debug('already on this site');
+          } else {
+            if (this.customData.options.url) {
+              const pjax = Pjax.getInstance(this.customData.options.viewId);
+              pjax.goTo(this.customData.options.url, this.customData.options.newTab);
+            }
+          }
+          if (this.customData.options.removeAfterActivation && this.customData.$el) {
+            // this.unbind(); TODO?
+            this.customData.$el.remove();
+          }
+        },
+        onNewPageReady(this: Binding) {
+          if (this.customData.$el) {
+            this.customData.$el.trigger('new-page-ready');
+          }
+          this.customData.checkURL.call(this, this.customData.options.url);
+        },
+        onLinkEnter(this: Binding, event: Event) {
+          (this.customData as ICustomData).prefetch.onLinkEnter(event, this.customData.options.url);
+        },
+      };
     },
 
-    bind(el: HTMLUnknownElement) {
-      this.customData.el = JQuery(el);
-      this.customData.prefetch = new Prefetch();
-    },
-
-    checkURL(urlToCheck?: string) {
-      if (urlToCheck && Utils.onRoute(urlToCheck)) {
-        return true;
-      }
-      return false;
-    },
-
-    onClick(event: JQuery.Event) {
-      debug('go to', this.customData.options.url);
-
-      // Do not go to ref without pajax
-      event.preventDefault();
-      if (Utils.onRoute(this.customData.options.url)) {
-        debug('already on this site');
-      } else {
-        if (this.customData.options.url) {
-          const pjax = Pjax.getInstance(this.customData.options.viewId);
-          pjax.goTo(this.customData.options.url, this.customData.options.newTab);
-        }
-      }
-
-      if (this.customData.options.removeAfterActivation && this.customData.$el) {
-        // this.unbind(); TODO?
-        this.customData.$el.remove();
-      }
-    },
-
-    onNewPageReady() {
-      if (this.customData.$el) {
-        this.customData.$el.trigger('new-page-ready');
-      }
-      this.checkURL(this.customData.options.url);
-    },
-
-    onLinkEnter(event: Event) {
-      this.customData.prefetch.onLinkEnter(event, this.customData.options.url);
-    },
-
-    routine(el: HTMLElement, optionsOrUrl?: string | IRouteOptions) {
+    routine(this: Binding, el: HTMLElement, optionsOrUrl?: string | IRouteOptions) {
       if (Utils.isString(optionsOrUrl)) {
         this.customData.options.url = optionsOrUrl as string;
       } else if (Utils.isObject(optionsOrUrl as IRouteOptions)) {
@@ -135,24 +122,28 @@ export const routeBinderWrapper: BinderWrapper = () => {
         this.customData.$el.attr('href', this.customData.options.url);
       }
 
-      this.customData.dispatcher.on('newPageReady', this.onNewPageReady.bind(this));
+      this.customData.dispatcher.on('newPageReady', this.customData.onNewPageReady.bind(this));
 
-      this.customData.$el.off('click').on('click', this.onClick.bind(this));
+      this.customData.$el.off('click').on('click', this.customData.onClick.bind(this));
 
       if (!this.customData.options.newTab && !Utils.onRoute(this.customData.options.url)) {
-        el.addEventListener('mouseover', this.onLinkEnter.bind(this));
-        el.addEventListener('touchstart', this.onLinkEnter.bind(this));
+        el.addEventListener('mouseover', this.customData.onLinkEnter.bind(this));
+        el.addEventListener('touchstart', this.customData.onLinkEnter.bind(this));
       }
 
-      this.checkURL(this.customData.options.url);
+      this.customData.checkURL.call(this, this.customData.options.url);
     },
-    unbind(el: HTMLUnknownElement) {
+    unbind(this: Binding, el: HTMLUnknownElement) {
+      el.removeEventListener('mouseover', this.customData.onLinkEnter);
+      el.removeEventListener('touchstart', this.customData.onLinkEnter);
+      this.customData.$el.off('click', this.customData.onClick);
+      this.customData.dispatcher.off('newPageReady', this.customData.onNewPageReady);
       // console.warn('routeClassStarBinder routine', el);
     },
   };
 
   return {
-    binder: binder,
+    binder,
     name: 'route',
   };
 };
