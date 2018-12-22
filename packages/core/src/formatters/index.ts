@@ -1,5 +1,5 @@
-export { compareFormatters } from './compare/index';
-export { mathFormatters } from './math/index';
-export { propertyFormatters } from './property/index';
-export { specialFormatters } from './special/index';
-export { stringFormatters } from './string/index';
+export * from './compare/index';
+export * from './math/index';
+export * from './property/index';
+export * from './special/index';
+export * from './string/index';

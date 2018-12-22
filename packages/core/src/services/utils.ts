@@ -1,197 +1,10 @@
-import jQuery from 'jquery';
+import { JQuery } from '../modules';
 
 // TODO
 export interface IDeferred {
   resolve: any;
   reject: any;
 }
-
-/**
- * Promise version of jQuery.getJSON()
- * Load JSON-encoded data from the server using a GET HTTP request.
- * @param url A string containing the URL to which the request is sent.
- * @param data A plain object or string that is sent to the server with the request.
- * @see https://api.jquery.com/jquery.getjson/
- */
-export const getJSON = (url: string, data?: any) => {
-  return new Promise<any>((resolve, reject) => {
-    jQuery.getJSON(url, data)
-    .done((resolve))
-    .fail(( jqxhr, textStatus, error ) => {
-      // console.warn('jqxhr', jqxhr, 'textStatus', textStatus, 'error', error);
-      reject(jqxhr);
-    });
-  });
-};
-
-/**
- * Promise version of jQuery.post()
- * Load data from the server using a HTTP POST request.
- * @param url A string containing the URL to which the request is sent.
- * @param data A plain object or string that is sent to the server with the request.
- * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html).
- * @see https://api.jquery.com/jquery.post/
- */
-export const post = (url: string, data?: any, dataType?: string) => {
-  return new Promise<any>((resolve, reject) => {
-    jQuery.post(url, data, null, dataType)
-    .done((resolve))
-    .fail(( jqxhr, textStatus, error ) => {
-      // console.warn('jqxhr', jqxhr, 'textStatus', textStatus, 'error', error);
-      reject(jqxhr);
-    });
-  });
-};
-
-export const _delete = (url: string, data?: any, dataType?: string) => {
-  return new Promise<any>((resolve, reject) => {
-    return jQuery.ajax({
-      url,
-      type: 'DELETE',
-      data,
-      dataType,
-    })
-    .done((resolve))
-    .fail(( jqxhr, textStatus, error ) => {
-      // console.warn('jqxhr', jqxhr, 'textStatus', textStatus, 'error', error);
-      reject(jqxhr);
-    });
-  });
-};
-
-export const put = (url: string, data?: any, dataType?: string) => {
-  return new Promise<any>((resolve, reject) => {
-    return jQuery.ajax({
-      url,
-      type: 'PUT',
-      data,
-      dataType,
-    })
-    .done((resolve))
-    .fail(( jqxhr, textStatus, error ) => {
-      // console.warn('jqxhr', jqxhr, 'textStatus', textStatus, 'error', error);
-      reject(jqxhr);
-    });
-  });
-};
-
-/**
- * Promise version of jQuery.get()
- * Load data from the server using a HTTP GET request.
- * @param url A string containing the URL to which the request is sent.
- * @param data A plain object or string that is sent to the server with the request.
- * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html).
- * @see https://api.jquery.com/jquery.get/
- */
-export const get = (url: string, data?: any, dataType?: string) => {
-  return new Promise<any>((resolve, reject) => {
-    jQuery.get(url, data, null, dataType)
-    .done((resolve))
-    .fail(( jqxhr, textStatus, error ) => {
-      // console.warn('jqxhr', jqxhr, 'textStatus', textStatus, 'error', error);
-      reject(jqxhr);
-    });
-  });
-};
-
-/**
- * Test if string is a json string
- * @param str
- */
-export const isJson = (str?: string | null) => {
-  if (!str) {
-    return false;
-  }
-  try {
-    const val = JSON.parse(str);
-    return (val instanceof Array || val instanceof Object) ? true : false;
-  } catch (error) {
-    return false;
-  }
-};
-
-/**
- * Check if value is undefined
- */
-export const isUndefined = (value?: any) => {
-  return typeof(value) === 'undefined';
-};
-
-/**
- * Check if value is undefined
- */
-export const isDefined = (value?: any) => {
-  return !isUndefined(value);
-};
-
-/**
- * Check if type is Object
- * @see https://stackoverflow.com/a/4775737/1465919
- */
-export const isObject = (obj: object) => {
-  return isDefined(obj) && typeof obj === 'object' && obj !== null;
-};
-
-/**
- * Parse value to string or return undefined if value is null
- * @param value
- */
-export const getString = (value: string) => {
-  return value != null ? value.toString() : undefined;
-};
-
-/**
- * Parse value to number or return 0 if value is null or undefined
- * @param value
- */
-export const getNumber = (value: string) => {
-  return value ? parseFloat(value) : undefined;
-};
-
-export const times = (n: number, cb: () => void) => {
-  for (let i = 0; i < n; i++) {
-    cb();
-  }
-};
-
-/**
- *
- */
-export const getInputValue = (el: HTMLElement) => {
-  const results: string[] = [];
-  if ((el as HTMLSelectElement).type === 'checkbox') {
-    return (el as HTMLInputElement).checked;
-  } else if ((el as HTMLSelectElement).type === 'select-multiple') {
-    const options: HTMLOptionsCollection = (el as HTMLSelectElement).options;
-
-    for (const key in options) {
-      if (options.hasOwnProperty(key)) {
-        const option = options[key];
-        if (option.selected) {
-          results.push(option.value);
-        }
-      }
-    }
-
-    return results;
-  } else if ( el.getAttribute('contenteditable')) {
-    return el.innerHTML; // TODO write test for contenteditable
-  } else {
-    return (el as HTMLInputElement).value;
-  }
-};
-
-/**
- * Returns a camel-cased version of the string. Used when translating an
- * element's attribute name into a property name for the component's scope.
- * TODO move to utils
- * @param string
- */
-export const camelCase = (str: string) => {
-  return str.replace(/-([a-z])/g, (grouped) => {
-    return grouped[1].toUpperCase();
-  });
-};
 
 /**
  * Just an Class with some helpful functions
@@ -202,49 +15,179 @@ export const camelCase = (str: string) => {
 export class Utils {
 
   /**
-   * Promise version of jQuery.getJSON()
+   * Promise version of JQuery.getJSON()
    * Load JSON-encoded data from the server using a GET HTTP request.
    * @param url A string containing the URL to which the request is sent.
    * @param data A plain object or string that is sent to the server with the request.
    * @see https://api.jquery.com/jquery.getjson/
    */
-  public static getJSON = getJSON;
+  public static getJSON(url: string, data?: any) {
+    return new Promise<any>((resolve, reject) => {
+      JQuery.getJSON(url, data)
+      .done((resolve))
+      .fail(( jqxhr, textStatus, error ) => {
+        // console.warn('jqxhr', jqxhr, 'textStatus', textStatus, 'error', error);
+        reject(jqxhr);
+      });
+    });
+  }
 
   /**
-   * Promise version of jQuery.post()
+   * Promise version of JQuery.post()
    * Load data from the server using a HTTP POST request.
    * @param url A string containing the URL to which the request is sent.
    * @param data A plain object or string that is sent to the server with the request.
+   * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html).
    * @see https://api.jquery.com/jquery.post/
    */
-  public static post = post;
+  public static post(url: string, data?: any, dataType?: string) {
+    return new Promise<any>((resolve, reject) => {
+      JQuery.post(url, data, null, dataType)
+      .done((resolve))
+      .fail(( jqxhr, textStatus, error ) => {
+        // console.warn('jqxhr', jqxhr, 'textStatus', textStatus, 'error', error);
+        reject(jqxhr);
+      });
+    });
+  }
 
-  public static delete = _delete;
+  public static _delete(url: string, data?: any, dataType?: string) {
+    return new Promise<any>((resolve, reject) => {
+      return JQuery.ajax({
+        url,
+        type: 'DELETE',
+        data,
+        dataType,
+      })
+      .done((resolve))
+      .fail(( jqxhr, textStatus, error ) => {
+        // console.warn('jqxhr', jqxhr, 'textStatus', textStatus, 'error', error);
+        reject(jqxhr);
+      });
+    });
+  }
 
-  public static put = put;
+  public static put(url: string, data?: any, dataType?: string) {
+    return new Promise<any>((resolve, reject) => {
+      return JQuery.ajax({
+        url,
+        type: 'PUT',
+        data,
+        dataType,
+      })
+      .done((resolve))
+      .fail(( jqxhr, textStatus, error ) => {
+        // console.warn('jqxhr', jqxhr, 'textStatus', textStatus, 'error', error);
+        reject(jqxhr);
+      });
+    });
+  }
 
   /**
-   * Promise version of jQuery.get()
+   * Promise version of JQuery.get()
    * Load data from the server using a HTTP GET request.
    * @param url A string containing the URL to which the request is sent.
    * @param data A plain object or string that is sent to the server with the request.
+   * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html).
    * @see https://api.jquery.com/jquery.get/
    */
-  public static get = get;
+  public static get(url: string, data?: any, dataType?: string) {
+    return new Promise<any>((resolve, reject) => {
+      JQuery.get(url, data, null, dataType)
+      .done((resolve))
+      .fail(( jqxhr, textStatus, error ) => {
+        // console.warn('jqxhr', jqxhr, 'textStatus', textStatus, 'error', error);
+        reject(jqxhr);
+      });
+    });
+  }
 
   /**
-   * Parse value to string orreturn undefined if value is null
+   * Test if string is a json string
+   * @param str
+   */
+  public static isJson(str?: string | null) {
+    if (!str) {
+      return false;
+    }
+    try {
+      const val = JSON.parse(str);
+      return (val instanceof Array || val instanceof Object) ? true : false;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  /**
+   * Check if value is undefined
+   */
+  public static isUndefined(value?: any) {
+    return typeof(value) === 'undefined';
+  }
+
+  /**
+   * Check if value is undefined
+   */
+  public static isDefined(value?: any) {
+    return !Utils.isUndefined(value);
+  }
+
+  /**
+   * Check if type is Object
+   * @see https://stackoverflow.com/a/4775737/1465919
+   */
+  public static isObject(obj: object) {
+    return Utils.isDefined(obj) && typeof obj === 'object' && obj !== null;
+  }
+
+  /**
+   * Parse value to string or return undefined if value is null
    * @param value
    */
-  public static getString = getString;
+  public static getString(value: string) {
+    return value != null ? value.toString() : undefined;
+  }
 
   /**
    * Parse value to number or return 0 if value is null or undefined
    * @param value
    */
-  public static getNumber = getNumber;
+  public static getNumber(value: string) {
+    return value ? parseFloat(value) : undefined;
+  }
 
-  public static times = times;
+  public static times(n: number, cb: () => void) {
+    for (let i = 0; i < n; i++) {
+      cb();
+    }
+  }
+
+  /**
+   *
+   */
+  public static getInputValue(el: HTMLElement) {
+    const results: string[] = [];
+    if ((el as HTMLSelectElement).type === 'checkbox') {
+      return (el as HTMLInputElement).checked;
+    } else if ((el as HTMLSelectElement).type === 'select-multiple') {
+      const options: HTMLOptionsCollection = (el as HTMLSelectElement).options;
+
+      for (const key in options) {
+        if (options.hasOwnProperty(key)) {
+          const option = options[key];
+          if (option.selected) {
+            results.push(option.value);
+          }
+        }
+      }
+
+      return results;
+    } else if ( el.getAttribute('contenteditable')) {
+      return el.innerHTML; // TODO write test for contenteditable
+    } else {
+      return (el as HTMLInputElement).value;
+    }
+  }
 
   /**
    * Returns a camel-cased version of the string. Used when translating an
@@ -252,31 +195,11 @@ export class Utils {
    * TODO move to utils
    * @param string
    */
-  public static camelCase = camelCase;
-
-  public static getInputValue = getInputValue;
-
-  /**
-   * Test if string is a json string
-   * @param str
-   */
-  public static isJson = isJson;
-
-  /**
-   * Check if type is Object
-   * @see https://stackoverflow.com/a/4775737/1465919
-   */
-  public static isObject = isObject;
-
-  /**
-   * Check if value is undefined
-   */
-  public static isUndefined = isUndefined;
-
-  /**
-   * Check if value is undefined
-   */
-  public static isDefined = isDefined;
+  public static camelCase = (str: string) => {
+    return str.replace(/-([a-z])/g, (grouped) => {
+      return grouped[1].toUpperCase();
+    });
+  }
 
   /**
    * Check if value is a function
@@ -354,7 +277,7 @@ export class Utils {
   /**
    * Merge the contents of two or more objects together into the first object.
    * @param {boolean} deep If true, the merge becomes recursive (aka. deep copy).
-   * @param {object} target An object that will receive the new properties if additional objects are passed in or that will extend the jQuery namespace if it is the sole argument.
+   * @param {object} target An object that will receive the new properties if additional objects are passed in or that will extend the JQuery namespace if it is the sole argument.
    * @param {object} object1 An object containing additional properties to merge in.
    * @param {object} [objectN] Additional objects containing properties to merge in.
    * @returns
@@ -363,10 +286,10 @@ export class Utils {
   public static extend(deep: boolean, target?: object, object1?: object, objectN?: object) {
     let result;
     if (deep) {
-      result = jQuery.extend(true, target || {}, object1 || {}, objectN);
+      result = JQuery.extend(true, target || {}, object1 || {}, objectN);
     } else {
       // Passing false for deep argument is not supported.
-      result = jQuery.extend(target || {}, object1 || {}, objectN);
+      result = JQuery.extend(target || {}, object1 || {}, objectN);
     }
     return result;
   }
@@ -462,7 +385,7 @@ export class Utils {
       return window.location;
     }
     // l.href = href;
-    const l = (jQuery(`<a href="${url}"></a>`)[0] as any as Location);
+    const l = (JQuery(`<a href="${url}"></a>`)[0] as any as Location);
     return l;
   }
 

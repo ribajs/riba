@@ -1,10 +1,9 @@
 import { PRIMITIVE, KEYPATH, parseType } from './parsers';
 import { Observer, IObserverSyncCallback } from './observer';
-import { Binder, IOneWayBinder, ITwoWayBinder } from './services/binder.service';
+import { Binder, IOneWayBinder, ITwoWayBinder, IOneTwoFormatter } from './interfaces';
 import { View } from './view';
-import { getInputValue, Utils } from './utils';
-import { IOneTwoFormatter } from './services/formatter.service';
-import Debug from 'debug';
+import { Utils } from './services/utils';
+import { Debug } from './modules';
 
 export interface IBindable {
 
@@ -427,7 +426,7 @@ export class Binding {
       }
       return this.binder.getValue.call(this, el);
     } else {
-      return getInputValue(el);
+      return Utils.getInputValue(el);
     }
   }
 

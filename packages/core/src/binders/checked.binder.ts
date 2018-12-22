@@ -1,5 +1,5 @@
 import { ITwoWayBinder, BinderWrapper } from '../services/binder.service';
-import { getString } from '../utils';
+import { Utils } from '../services/utils';
 
 export const checked: ITwoWayBinder<string> = {
   publishes: true,
@@ -22,7 +22,7 @@ export const checked: ITwoWayBinder<string> = {
 
   routine(el: HTMLElement, value) {
     if ((el as HTMLInputElement).type === 'radio') {
-      (el as HTMLInputElement).checked = getString((el as HTMLInputElement).value) === getString(value);
+      (el as HTMLInputElement).checked = Utils.getString((el as HTMLInputElement).value) === Utils.getString(value);
     } else {
       (el as HTMLInputElement).checked = !!value;
     }

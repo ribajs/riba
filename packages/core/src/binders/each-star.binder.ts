@@ -1,7 +1,7 @@
 import { IBindable } from '../binding';
 import { ITwoWayBinder, BinderWrapper } from '../services/binder.service';
 import { View } from '../view';
-import { times } from '../utils';
+import { Utils } from '../services/utils';
 
 export const eachStarBinder: ITwoWayBinder<any[]> = {
   block: true,
@@ -102,7 +102,7 @@ export const eachStarBinder: ITwoWayBinder<any[]> = {
     });
 
     if (this.customData.iterated.length > collection.length) {
-      times(this.customData.iterated.length - collection.length, () => {
+      Utils.times(this.customData.iterated.length - collection.length, () => {
         const view = this.customData.iterated.pop();
         view.unbind();
         if (!this.marker || !this.marker.parentNode) {

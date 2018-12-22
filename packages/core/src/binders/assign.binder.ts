@@ -1,5 +1,5 @@
 import { IOneWayBinder } from '../services/binder.service';
-import { Utils } from '../utils';
+import { Utils } from '../services/utils';
 
 export interface IAssign {
   key: string;

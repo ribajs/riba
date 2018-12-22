@@ -1,5 +1,5 @@
 import { get } from './get.formatter';
-import { Utils } from '../../utils';
+import { Utils } from '../../services/utils';
 
 /**
  * Array formatter to get a subarray from array

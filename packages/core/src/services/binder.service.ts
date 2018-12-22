@@ -1,59 +1,20 @@
-import Debug from 'debug';
-import { Binding, IBindable } from '../binding';
-/**
- * One way binder interface
- */
-export type IOneWayBinder<ValueType> = (this: Binding, element: HTMLElement, value: ValueType) => void;
-
-/**
- * To way binder interface
- */
-export interface ITwoWayBinder<ValueType> {
-  routine: (this: Binding, element: HTMLElement, value: ValueType) => void;
-  bind?: (this: Binding, element: HTMLElement) => void;
-  unbind?: (this: Binding, element: HTMLElement) => void;
-  update?: (this: Binding, model: any) => void;
-  getValue?: (this: Binding, element: HTMLElement) => void;
-  block?: boolean;
-  function?: boolean;
-  publishes?: boolean;
-  priority?: number;
-}
-
-/**
- * A binder can be a one way binder or a two way binder
- */
-export type Binder<ValueType> = IOneWayBinder<ValueType> | ITwoWayBinder<ValueType>;
-
-/**
- * A list of binders with any key name
- */
-export interface IBinders<ValueType> {
-  [name: string]: Binder<ValueType>;
-}
-
-/**
- * This wrapper i used to store the binder name in the name property
- */
-export interface IBinderWrapperResult {
-  name: string;
-  binder: Binder<any>;
-}
+import { Debug } from '../modules';
+import { Binder, IModuleBinderWrapper, IModuleBinders } from '../interfaces';
 
 /**
  * This wrapper is used if you need to pass over some dependencies for your binder
  */
-export type BinderWrapper = (...deps: any[]) => IBinderWrapperResult;
+export type BinderWrapper = (...deps: any[]) => IModuleBinderWrapper;
 
 export class BindersService {
-  private binders: IBinders<any>;
+  private binders: IModuleBinders<any>;
   private debug = Debug('binders:BindersService');
 
   /**
    *
    * @param binders;
    */
-  constructor(binders: IBinders<any>) {
+  constructor(binders: IModuleBinders<any>) {
     this.binders = binders;
   }
 
@@ -62,11 +23,11 @@ export class BindersService {
    * @param binder
    * @param name
    */
-  public registWrapper(binderWrapper: IBinderWrapperResult, name?: string): IBinders<any> {
+  public registWrapper(binderWrapper: IModuleBinderWrapper, name?: string): IModuleBinders<any> {
     if (!name) {
       name = binderWrapper.name;
     }
-    const binder = (binderWrapper as IBinderWrapperResult).binder;
+    const binder = (binderWrapper as IModuleBinderWrapper).binder;
     this.binders[name] = binder;
     return this.binders;
   }
@@ -76,10 +37,10 @@ export class BindersService {
    * @param binder
    * @param name
    */
-  public regist(binder: Binder<any> | IBinderWrapperResult, name?: string): IBinders<any> {
+  public regist(binder: Binder<any> | IModuleBinderWrapper, name?: string): IModuleBinders<any> {
 
     if (binder.hasOwnProperty('binder')) {
-      binder = (binder as IBinderWrapperResult);
+      binder = (binder as IModuleBinderWrapper);
       if (!name) {
         name = (binder as any).name;
       }
@@ -101,7 +62,7 @@ export class BindersService {
    * Regist a set of binders
    * @param binders
    */
-  public regists(binders: IBinders<any>): IBinders<any> {
+  public regists(binders: IModuleBinders<any>): IModuleBinders<any> {
     for (const name in binders) {
       if (binders.hasOwnProperty(name)) {
         this.regist(binders[name], name);

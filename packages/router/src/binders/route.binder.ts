@@ -1,4 +1,4 @@
-import { Pjax, Prefetch } from './barba/barba';
+import { Pjax, Prefetch } from '../services';
 import { Binding, ITwoWayBinder, BinderWrapper, EventDispatcher, JQuery, Debug, Utils, IBindable } from '@ribajs/core';
 
 export interface IRouteOptions {

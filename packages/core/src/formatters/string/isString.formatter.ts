@@ -1,4 +1,4 @@
-import { Utils } from '../../utils';
+import { Utils } from '../../services/utils';
 
 /**
  * Check if value is a string

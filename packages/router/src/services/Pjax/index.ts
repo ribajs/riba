@@ -5,8 +5,8 @@ export * from './Prefetch';
 import { Debug, EventDispatcher, Utils } from '@ribajs/core';
 
 import { BaseCache } from '../Cache';
-import { HideShowTransition } from '../Transition/Transition';
-import { ITransition } from '../interfaces/transition';
+import { HideShowTransition } from '../Transition';
+import { ITransition } from '../../interfaces';
 import { Dom } from './Dom';
 import { HistoryManager } from './HistoryManager';
 

@@ -1,6 +1,5 @@
 import Debug from 'debug';
-import { IBinders } from './binder.service';
-import { IFormatters } from './formatter.service';
+import { IModuleBinders, IModuleFormatters } from 'interfaces';
 import { IAdapters } from '../adapter';
 import { IBindable } from '../binding';
 import { RibaComponent } from '../components/riba-component';
@@ -19,8 +18,8 @@ export interface IClassicComponent<ValueType> {
   bind?: string[];
 
   // extension options
-  binders?: IBinders<any>;
-  formatters?: IFormatters;
+  binders?: IModuleBinders<any>;
+  formatters?: IModuleFormatters;
   components?: IComponents;
   adapters?: IAdapters;
 

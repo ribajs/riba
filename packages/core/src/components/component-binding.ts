@@ -7,7 +7,7 @@ import { View } from '../view';
 import { IClassicComponent, IComponents } from '../services/component.service';
 import { Observer, IObservers, IObserverSyncCallback } from '../observer';
 import { IAdapters } from '../adapter';
-import { Utils, camelCase } from '../utils';
+import { Utils } from '../services/utils';
 
 export interface IBoundElement extends HTMLElement {
   _bound?: boolean;
@@ -204,7 +204,7 @@ export class ComponentBinding implements IBindable {
 
       // if attribute starts not with binding prefix. E.g. rv-
       if (attribute.name.indexOf(this.bindingPrefix) !== 0) {
-        const propertyName = camelCase(attribute.name);
+        const propertyName = Utils.camelCase(attribute.name);
         const declaration = attribute.value;
         const parsedDeclaration = parseDeclaration(declaration);
 

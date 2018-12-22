@@ -1,5 +1,5 @@
-import { Debug } from '@ribajs/core';
-import { ALocalesService } from '../services/locales.service';
+import { Debug, IModuleFormatterWrapper } from '@ribajs/core';
+import { ALocalesService } from '../services/locales-base.service';
 
 const translate = async (translateMePathString: string, localesService: ALocalesService, langcode?: string) => {
   const properties = translateMePathString.split('.');
@@ -17,7 +17,7 @@ const translate = async (translateMePathString: string, localesService: ALocales
 
 const debug = Debug('formatter:t');
 
-export const i18nFormatterWrapper = (localesService: ALocalesService) => {
+export const tFormatterWrapper = (localesService: ALocalesService): IModuleFormatterWrapper => {
   return {
     name: 't',
     formatter: async (translateMePathString: string, langcode: string, ...vars: string[]) => {

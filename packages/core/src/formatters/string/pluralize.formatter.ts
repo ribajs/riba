@@ -1,4 +1,4 @@
-import { Utils } from '../../utils';
+import { Utils } from '../../services/utils';
 
 export const pluralize = (input: any, singular: string, plural: string) => {
   if (plural === null) {

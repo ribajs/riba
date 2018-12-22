@@ -1,10 +1,12 @@
-import { Debug, getJSON } from '@ribajs/core';
-import { ALocalesService } from '@ribajs/i18n';
+import { Debug, Utils } from '@ribajs/core';
+import { ALocalesService } from './locales-base.service';
 
-// TODO move to the-developer-app modul
-export class LocalesService extends ALocalesService {
+/**
+ * LocalesRestService get locales object from url
+ */
+export class LocalesRestService extends ALocalesService {
 
-  public static instance: LocalesService;
+  public static instance: LocalesRestService;
 
   public static baseUrl = 'https://the-developer-app.artandcode.studio/shopify/api/themes';
 
@@ -15,8 +17,6 @@ export class LocalesService extends ALocalesService {
    */
   protected currentLangcode: string;
 
-  protected themeID?: string;
-
   /**
    * The default theme langcode before any language was choosed
    */
@@ -24,16 +24,10 @@ export class LocalesService extends ALocalesService {
 
   protected debug = Debug('services:LocalesService');
 
-  constructor(themeID?: string, doNotTranslateDefaultLanguage: boolean = true) {
+  constructor(protected url?: string, doNotTranslateDefaultLanguage: boolean = true) {
     super(doNotTranslateDefaultLanguage);
 
-    if (!themeID) {
-      themeID = (window as any).Shopify.theme.id;
-    }
-
-    this.themeID = themeID;
-
-    if (!this.themeID) {
+    if (!this.url) {
       throw new Error(`Theme id object is requred!`);
     }
 
@@ -44,39 +38,38 @@ export class LocalesService extends ALocalesService {
       throw new Error(`The lang attribute on the html element is requred to detect the default theme language: ${this.initalLangcode}`);
     }
 
-    if (LocalesService.instance) {
-      return LocalesService.instance;
+    if (LocalesRestService.instance) {
+      return LocalesRestService.instance;
     }
 
     this.switchToBrowserLanguage();
 
-    LocalesService.instance = this;
+    LocalesRestService.instance = this;
   }
 
   /**
    * Get file with all languages
    * @param themeID
    */
-  protected async getAll(themeID?: string) {
-    if (!themeID) {
-      themeID = this.themeID;
+  protected async getAll(url?: string) {
+    if (!url) {
+      url = this.url;
     }
 
-    if (!themeID) {
-      throw new Error(`theme object is requred!`);
+    if (!url) {
+      throw new Error(`url is requred!`);
     }
 
-    let url = `${LocalesService.baseUrl}/${themeID}/locales`;
     if ((window as any).Shopify.shop) {
       url = url + `?shop=${(window as any).Shopify.shop}`;
     }
-    if (this.locales[themeID]) {
-      return this.locales[themeID];
+    if (this.locales[url]) {
+      return this.locales[url];
     }
-    return getJSON(url)
+    return Utils.getJSON(url)
     .then((locals: any /** TODO any */) => {
-      this.locales[themeID as string] = locals;
-      return this.locales[themeID as string];
+      this.locales[url as string] = locals;
+      return this.locales[url as string];
     });
   }
 

@@ -1,4 +1,4 @@
-import { isJson } from './utils';
+import { Utils } from './services/utils';
 
 import { IDataElement, View, TBlock } from './view';
 
@@ -38,7 +38,7 @@ export function parseType(str?: string) {
     value = undefined;
   } else if (!isNaN(Number(str))) {
     value = Number(str);
-  } else if (isJson(str)) {
+  } else if (Utils.isJson(str)) {
     value = JSON.parse(str);
   } else {
     type = KEYPATH;

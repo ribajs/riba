@@ -1,4 +1,4 @@
-import { Utils } from '../../utils';
+import { Utils } from '../../services/utils';
 
 /**
  * Just get the digits of a string, useful to remove px from css value

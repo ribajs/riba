@@ -1,5 +1,5 @@
-import { Utils, ITwoWayBinder, BinderWrapper, Debug, View, JQuery as $ } from '@ribajs/core';
-import { ALocalesService } from '../../services/locales.service';
+import { Utils, ITwoWayBinder, BinderWrapper, JQuery as $ } from '@ribajs/core';
+import { ALocalesService } from '../../services/locales-base.service';
 
 // see star.binder.ts
 export interface IBinderAttributeChangedEvent {

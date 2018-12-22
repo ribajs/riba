@@ -1,4 +1,13 @@
-export * from './binders/router.binders';
-export * from './binders/barba/interfaces/transition';
-export * from './binders/barba/interfaces/state';
-export { Pjax, Prefetch } from './binders/barba/barba';
+import { IRibaModule } from '@ribajs/core';
+
+export * from './binders';
+export * from './interfaces';
+export * from './services';
+
+import * as binders from './binders';
+import * as services from './services';
+
+export default <IRibaModule> {
+  binders,
+  services,
+};

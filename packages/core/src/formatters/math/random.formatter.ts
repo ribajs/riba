@@ -1,4 +1,4 @@
-import { Utils } from '../../utils';
+import { Utils } from '../../services/utils';
 
 /**
  * Get a back random value of array

@@ -1,5 +1,5 @@
 import { Debug, Utils } from '@ribajs/core';
-import { Pjax } from './Pjax';
+import { Pjax } from '.';
 
 /**
  * Prefetch

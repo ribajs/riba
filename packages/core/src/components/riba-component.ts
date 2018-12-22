@@ -8,7 +8,7 @@ import Debug from 'debug';
 import { View } from '../view';
 import { Riba, EventHandler } from '../riba';
 import { Binding } from '../binding';
-import { isJson, camelCase } from '../utils';
+import { Utils } from '../services/utils';
 import { FakeHTMLElement } from './fake-html-element';
 
 export type TemplateFunction = () => Promise<string | null> | string | null;
@@ -144,7 +144,7 @@ export abstract class RibaComponent extends FakeHTMLElement {
       if (value >= Number.MAX_SAFE_INTEGER) {
         value = attr;
       }
-    } else if (isJson(attr)) {
+    } else if (Utils.isJson(attr)) {
       value = JSON.parse(attr as any);
     }
     return value;
@@ -239,7 +239,7 @@ export abstract class RibaComponent extends FakeHTMLElement {
    */
   protected attributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
     newValue = this.parseAttribute(newValue);
-    attributeName = camelCase(attributeName);
+    attributeName = Utils.camelCase(attributeName);
     this.debug('attributeChangedCallback called', attributeName, oldValue, newValue, namespace);
 
     if (this.scope && this.scope[attributeName]) {

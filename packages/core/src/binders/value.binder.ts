@@ -1,6 +1,6 @@
 import Debug from 'debug';
 import { ITwoWayBinder } from '../services/binder.service';
-import { getString, getInputValue } from '../utils';
+import { Utils } from '../services/utils';
 import $ from 'jquery';
 
 const debug = Debug('binder:value');
@@ -65,16 +65,16 @@ export const valueBinder: ITwoWayBinder<any> = {
           }
         }
       } else if (el.getAttribute('contenteditable')) {
-        if (getString(value) !== oldValue) {
+        if (Utils.getString(value) !== oldValue) {
           el.innerHTML = value; // TODO write test for contenteditable
         }
       } else {
-        if (getString(value) !== oldValue) {
+        if (Utils.getString(value) !== oldValue) {
           (el as HTMLInputElement).value = value != null ? value : '';
         }
       }
     }
   },
 
-  getValue: getInputValue,
+  getValue: Utils.getInputValue,
 };

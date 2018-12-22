@@ -1,4 +1,4 @@
-import { Utils } from './utils';
+import { Utils } from './services/utils';
 import { parseTemplate, parseType } from './parsers';
 import { IFormatters, FormatterService } from './services/formatter.service';
 import { Binding } from './binding';

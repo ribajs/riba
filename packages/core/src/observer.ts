@@ -1,6 +1,6 @@
 
 import { IAdapters } from './adapter';
-import { isObject } from './utils';
+import { Utils } from './services/utils';
 import { IViewOptions } from './riba';
 
 export interface IObserverSyncCallback {
@@ -86,7 +86,7 @@ export class Observer {
     this.tokens = parseResult.tokens;
     this.obj = this.getRootObject(obj);
     this.target = this.realize();
-    if (isObject(this.target)) {
+    if (Utils.isObject(this.target)) {
       this.set(true, this.key, this.target, this.callback);
     }
   }
@@ -137,7 +137,7 @@ export class Observer {
 
     for (let index = 0; index < this.tokens.length; index++) {
       token = this.tokens[index];
-      if (isObject(current)) {
+      if (Utils.isObject(current)) {
         if (typeof this.objectPath[index] !== 'undefined') {
           prev = this.objectPath[index];
           if (current !== prev) {
@@ -175,11 +175,11 @@ export class Observer {
     let newValue;
     next = this.realize();
     if (next !== this.target) {
-      if (isObject(this.target)) {
+      if (Utils.isObject(this.target)) {
         this.set(false, this.key, this.target, this.callback);
       }
 
-      if (isObject(next)) {
+      if (Utils.isObject(next)) {
         this.set(true, this.key, next, this.callback);
       }
 
@@ -199,7 +199,7 @@ export class Observer {
    * the full keypath is unreachable.
    */
   public value() {
-    if (isObject(this.target)) {
+    if (Utils.isObject(this.target)) {
       return this.get(this.key, this.target);
     }
   }
@@ -210,7 +210,7 @@ export class Observer {
    * @param value
    */
   public setValue(value: any) {
-    if (isObject(this.target)) {
+    if (Utils.isObject(this.target)) {
       Observer.adapters[this.key.i].set(this.target, this.key.path, value);
     }
   }
@@ -254,7 +254,7 @@ export class Observer {
       }
     }
 
-    if (isObject(this.target)) {
+    if (Utils.isObject(this.target)) {
       this.set(false, this.key, this.target, this.callback);
     }
   }
