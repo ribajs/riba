@@ -1,5 +1,6 @@
-import $ from 'jquery';
-import { IOneWayBinder, BinderWrapper } from '../services/binder.service';
+import { IOneWayBinder } from '../interfaces';
+import { JQuery as $ } from '../modules/jquery.module';
+import { BinderWrapper } from '../services/binder.service';
 
 export const removeClass: IOneWayBinder<string> = (el: HTMLElement, value: string) => {
   const $el = $(el);

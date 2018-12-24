@@ -1,4 +1,4 @@
-import { IBinders } from '../services/binder.service';
+import { IModuleBinders } from '../interfaces';
 
 import { animateStar } from './animateStarStar.binder';
 import { assign } from './assign.binder';
@@ -25,7 +25,7 @@ import { starBinder } from './star.binder';
  */
 export const basicBindersWrapper = (jQuery: JQueryStatic) => {
 
-  const binders: IBinders<any> = {
+  const binders: IModuleBinders<any> = {
 
     /**
      * animate-{class}

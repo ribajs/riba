@@ -1,4 +1,5 @@
-import { ITwoWayBinder, BinderWrapper } from '../services/binder.service';
+import { ITwoWayBinder } from '../interfaces';
+import { BinderWrapper } from '../services/binder.service';
 import { Utils } from '../services/utils';
 
 export const checked: ITwoWayBinder<string> = {

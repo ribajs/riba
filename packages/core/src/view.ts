@@ -1,10 +1,14 @@
-import { IViewOptions, Riba } from './riba';
-import { Binder, ITwoWayBinder } from './services/binder.service';
-import { Binding, IBindable } from './binding';
+import { Riba } from './riba';
+import {
+  Binder,
+  ITwoWayBinder,
+  IViewOptions,
+} from './interfaces';
+import { Binding } from './binding';
 import { ComponentService} from './services/component.service';
 import { ComponentBinding, IBoundElement } from './components/component-binding';
 import { parseNode, parseDeclaration } from './parsers';
-import Debug from 'debug';
+import { Debug } from './modules/debug.module';
 import { RibaComponentClass } from './components/riba-component-class';
 
 export type TBlock = boolean;

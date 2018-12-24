@@ -51,7 +51,7 @@ export class Utils {
     });
   }
 
-  public static _delete(url: string, data?: any, dataType?: string) {
+  public static delete(url: string, data?: any, dataType?: string) {
     return new Promise<any>((resolve, reject) => {
       return JQuery.ajax({
         url,

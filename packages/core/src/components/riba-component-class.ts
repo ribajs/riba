@@ -1,7 +1,7 @@
-import Debug from 'debug';
+import { Debug } from '../modules';
 import { RibaComponent, IRibaComponentContext } from './riba-component';
 import { View } from '../view';
-import { EventHandler } from '../riba';
+import { EventHandler } from '../interfaces';
 
 export declare class RibaComponentClass extends RibaComponent {
   public static tagName: string;

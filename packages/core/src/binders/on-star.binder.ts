@@ -1,6 +1,6 @@
+import { ITwoWayBinder, eventHandlerFunction } from '../interfaces';
 // import Debug from 'debug';
-import { BinderWrapper, ITwoWayBinder } from '../services/binder.service';
-import { eventHandlerFunction } from '../binding';
+import { BinderWrapper } from '../services/binder.service';
 
 /**
  * Binds an event handler on the element.

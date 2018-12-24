@@ -1,4 +1,4 @@
-import { IOneWayBinder } from '../services/binder.service';
+import { IOneWayBinder } from '../interfaces';
 
 /**
  * Disables the element when value is true (negated version of `enabled` binder).

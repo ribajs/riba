@@ -1,4 +1,4 @@
-import { IOneWayBinder } from '../services/binder.service';
+import { IOneWayBinder } from '../interfaces';
 
 /**
  * Shows the element when value is true.

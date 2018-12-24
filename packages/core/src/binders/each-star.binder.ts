@@ -1,5 +1,5 @@
-import { IBindable } from '../binding';
-import { ITwoWayBinder, BinderWrapper } from '../services/binder.service';
+import { IBindable, ITwoWayBinder } from '../interfaces';
+import { BinderWrapper } from '../services/binder.service';
 import { View } from '../view';
 import { Utils } from '../services/utils';
 

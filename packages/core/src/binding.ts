@@ -1,59 +1,17 @@
 import { PRIMITIVE, KEYPATH, parseType } from './parsers';
-import { Observer, IObserverSyncCallback } from './observer';
-import { Binder, IOneWayBinder, ITwoWayBinder, IOneTwoFormatter } from './interfaces';
+import { Observer } from './observer';
+import {
+  Binder,
+  IOneWayBinder,
+  ITwoWayBinder,
+  IOneTwoFormatter,
+  IFormatterObservers,
+  eventHandlerFunction,
+  IObserverSyncCallback,
+} from './interfaces';
 import { View } from './view';
 import { Utils } from './services/utils';
 import { Debug } from './modules';
-
-export interface IBindable {
-
-  binder?: Binder<any>;
-
-  /**
-   * Name of the binder without the prefix
-   */
-  type: string | null;
-
-  el: HTMLElement;
-
-  /**
-   * Observes the object keypath
-   * @param obj
-   * @param keypath
-   */
-  observe(obj: any, keypath: string, callback: IObserverSyncCallback): Observer;
-
-  /**
-   * Subscribes to the model for changes at the specified keypath. Bi-directional
-   * routines will also listen for changes on the element to propagate them back
-   * to the model.
-   */
-  bind(): void;
-
-  /**
-   * Unsubscribes from the model and the element.
-   */
-  unbind(): void;
-
-  /**
-   * Updates the binding's model from what is currently set on the view. Unbinds
-   * the old model first and then re-binds with the new model.
-   * @param {any} models
-   */
-  update?(models: any): void;
-
-  publish?(): void;
-
-  sync?(): void;
-}
-
-export interface IFormatterObservers {
-  [key: string]: {
-    [key: string]: Observer,
-  };
-}
-
-export type eventHandlerFunction = (event: Event) => void;
 
 /**
  *  A single binding between a model attribute and a DOM element.

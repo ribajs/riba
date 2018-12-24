@@ -1,7 +1,6 @@
-import Debug from 'debug';
-import { ITwoWayBinder } from '../services/binder.service';
+import { Debug, JQuery as $ } from '../modules';
+import { ITwoWayBinder } from '../interfaces';
 import { Utils } from '../services/utils';
-import $ from 'jquery';
 
 const debug = Debug('binder:value');
 
@@ -44,33 +43,33 @@ export const valueBinder: ITwoWayBinder<any> = {
     }
   },
 
-  unbind(el) {
+  unbind(el: HTMLUnknownElement) {
     $(el).off(this.customData.event, this.customData.callback);
   },
 
-  routine(el: HTMLElement, value) {
+  routine(el: HTMLElement, value: string | string[]) {
     const oldValue = this.getValue((el as HTMLInputElement));
     debug('routine value', value);
     if (!this.customData) {
       this.customData = getData(el);
     }
     if (this.customData.isRadio) {
-      el.setAttribute('value', value);
+      el.setAttribute('value', value as string);
     } else {
       if ((el as HTMLSelectElement).type === 'select-multiple' && el instanceof HTMLSelectElement) {
         if (value instanceof Array) {
-          for (let i = 0; i < el.length; i++) {
-            const option = el[i] as HTMLOptionElement;
+          for (let i = 0; i < el.options.length; i++) {
+            const option = el.options[i] as HTMLOptionElement;
             option.selected = value.indexOf(option.value) > -1;
           }
         }
       } else if (el.getAttribute('contenteditable')) {
-        if (Utils.getString(value) !== oldValue) {
-          el.innerHTML = value; // TODO write test for contenteditable
+        if (Utils.getString(value as string) !== oldValue) {
+          el.innerHTML = value as string; // TODO write test for contenteditable
         }
       } else {
-        if (Utils.getString(value) !== oldValue) {
-          (el as HTMLInputElement).value = value != null ? value : '';
+        if (Utils.getString(value as string) !== oldValue) {
+          (el as HTMLInputElement).value = value != null ? value as string : '';
         }
       }
     }

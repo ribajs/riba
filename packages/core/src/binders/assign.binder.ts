@@ -1,4 +1,4 @@
-import { IOneWayBinder } from '../services/binder.service';
+import { IOneWayBinder } from '../interfaces';
 import { Utils } from '../services/utils';
 
 export interface IAssign {

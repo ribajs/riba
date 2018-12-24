@@ -1,4 +1,4 @@
-import { IFormatters } from '../../services/formatter.service';
+import { IModuleFormatters } from '../../interfaces';
 
 // math formatters
 import { random } from './random.formatter';
@@ -15,6 +15,6 @@ import { digits } from './digits.formatter';
 
 export { random, plus, minus, numberFormatter, timesFormatter, dividedBy, modulo, gcd, even, uneven, digits };
 
-export const mathFormatters: IFormatters = {
+export const mathFormatters: IModuleFormatters = {
   digits, dividedBy, even, gcd, minus, number: numberFormatter, modulo, plus, random, times: timesFormatter, uneven,
 };

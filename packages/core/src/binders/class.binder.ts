@@ -1,5 +1,6 @@
-import $ from 'jquery';
-import { ITwoWayBinder, BinderWrapper } from '../services/binder.service';
+import { ITwoWayBinder } from '../interfaces';
+import { JQuery as $ } from '../modules/jquery.module';
+import { BinderWrapper } from '../services/binder.service';
 
 export const addClass: ITwoWayBinder<string> = {
   function: true,

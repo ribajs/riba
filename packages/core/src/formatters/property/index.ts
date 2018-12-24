@@ -1,4 +1,4 @@
-import { IFormatters } from '../../services/formatter.service';
+import { IModuleFormatters } from '../../interfaces';
 
 // property / object / array formatters
 import { parse } from './parse.formatter';
@@ -15,6 +15,6 @@ import { range } from './range.formatter';
 
 export { parse, first, last, contains, get, set, match, size, empty, isLast, range };
 
-export const propertyFormatters: IFormatters = {
+export const propertyFormatters: IModuleFormatters = {
   parse, first, last, contains, get, set, match, size, empty, isLast, range,
 };

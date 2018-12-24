@@ -1,4 +1,4 @@
-import { IFormatters } from '../../services/formatter.service';
+import { IModuleFormatters } from '../../interfaces';
 
 // string formatters
 import { append } from './append.formatter';
@@ -20,6 +20,6 @@ export {
   append, downcase, filled, handleize, isString, pluralize, prepend, upcase, replace, replace_first, slice, strip, strip_html, stringFormatter,
 };
 
-export const stringFormatters: IFormatters = {
+export const stringFormatters: IModuleFormatters = {
   append, downcase, filled, isString, handleize, pluralize, prepend, upcase, replace, replace_first, slice, strip, strip_html, string: stringFormatter,
 };

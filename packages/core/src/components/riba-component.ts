@@ -4,9 +4,10 @@
  * @see https://developer.mozilla.org/de/docs/Web/Web_Components/Using_custom_elements
  */
 
-import Debug from 'debug';
+import { Debug } from '../modules';
+import { EventHandler } from '../interfaces';
 import { View } from '../view';
-import { Riba, EventHandler } from '../riba';
+import { Riba } from '../riba';
 import { Binding } from '../binding';
 import { Utils } from '../services/utils';
 import { FakeHTMLElement } from './fake-html-element';

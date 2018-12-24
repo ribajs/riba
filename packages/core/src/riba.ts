@@ -1,21 +1,22 @@
+import {
+  IModuleFormatters,
+  IModuleBinders,
+  ITwoWayBinder,
+  IAdapters,
+  Root,
+  IComponents,
+  IClassicComponent,
+  IOptionsParam,
+  IViewOptions,
+} from './interfaces';
 import { Utils } from './services/utils';
 import { parseTemplate, parseType } from './parsers';
-import { IFormatters, FormatterService } from './services/formatter.service';
 import { Binding } from './binding';
 import { adapter } from './adapter';
 
-import { IBinders, BindersService, ITwoWayBinder } from './services/binder.service';
 import { View } from './view';
-import { IAdapters } from './adapter';
-import { Observer, Root } from './observer';
-import { IClassicComponent, IComponents, ComponentService } from './services/component.service';
-
-export interface IExtensions {
-  binders?: IBinders<any>;
-  formatters?: IFormatters;
-  components?: IComponents;
-  adapters?: IAdapters;
-}
+import { Observer } from './observer';
+import { ModulesService } from './services/module.service';
 
 /**
  * Event handler to liste for publish binder event for two-way-binding in web components
@@ -71,67 +72,6 @@ export const fallbackBinder: ITwoWayBinder<string> = {
   },
 };
 
-/** Interface for the event handler, augment the event handler of the on-* binder */
-export type EventHandler = (this: any, context: Binding, ev: Event, binding: Binding, el: HTMLElement) => void;
-
-export interface IOptions {
-  /** Attribute / web-component prefix in templates */
-  prefix?: string;
-
-  /** Attribute/ web-component  prefix + '-' */
-  fullPrefix?: string;
-
-  /** Preload templates with initial data on bind */
-  preloadData?: boolean;
-
-  /** Root sightglass interface for keypaths */
-  rootInterface?: string;
-
-  /** Template delimiters for text bindings */
-  templateDelimiters?: Array<string>;
-
-  /** Augment the event handler of the on-* binder */
-  handler?: EventHandler;
-
-  starBinders?: any;
-
-  removeBinderAttributes?: boolean;
-
-  executeFunctions?: boolean;
-}
-
-export declare interface IOptionsParam extends IExtensions, IOptions {}
-
-export declare interface IViewOptions extends IOptionsParam {
-  binders: IBinders<any>;
-  formatters: IFormatters;
-  components: IComponents;
-  adapters: IAdapters;
-
-  /** Attribute / web-component prefix in templates */
-  prefix: string;
-
-  /** Attribute/ web-component  prefix + '-' */
-  fullPrefix: string;
-
-  /** Preload templates with initial data on bind */
-  preloadData: boolean;
-
-  /** Root sightglass interface for keypaths */
-  rootInterface: string;
-
-  /** Template delimiters for text bindings */
-  templateDelimiters?: Array<string>;
-
-  /** Augment the event handler of the on-* binder */
-  handler?: EventHandler;
-  starBinders: any;
-
-  removeBinderAttributes: boolean;
-
-  executeFunctions: boolean;
-}
-
 export class Riba {
 
   /**
@@ -152,20 +92,16 @@ export class Riba {
   /** singleton instance */
   private static instance: Riba;
 
-  public binderService: BindersService;
-
-  public componentService: ComponentService;
-
-  public formatterService: FormatterService;
+  public module: ModulesService;
 
   /** Global binders */
-  public binders: IBinders<any> = {};
+  public binders: IModuleBinders<any> = {};
 
   /** Global components. */
   public components: IComponents = {};
 
   /** Global formatters. */
-  public formatters: IFormatters = {};
+  public formatters: IModuleFormatters = {};
 
   /** Global (sightglass) adapters. */
   public  adapters: IAdapters = {
@@ -208,9 +144,7 @@ export class Riba {
    * Creates an singleton instance of Riba.
    */
   constructor() {
-    this.binderService = new BindersService(this.binders);
-    this.componentService = new ComponentService(this.components);
-    this.formatterService = new FormatterService(this.formatters);
+    this.module = new ModulesService(this.binders, this.components, this.formatters);
     if (Riba.instance) {
       return Riba.instance;
     }
@@ -297,9 +231,9 @@ export class Riba {
     const viewOptions: IOptionsParam = {
       // EXTENSIONS
       adapters: <IAdapters> {},
-      binders: <IBinders<any>> {},
+      binders: <IModuleBinders<any>> {},
       components: <IComponents> {},
-      formatters: <IFormatters> {},
+      formatters: <IModuleFormatters> {},
 
       // other
       starBinders: {},

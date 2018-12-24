@@ -5,6 +5,7 @@ import {
   IModuleFormatters,
   IModuleComponents,
   IServices,
+  IAdapters,
 } from '../interfaces';
 
 export interface IRibaModule {
@@ -23,6 +24,8 @@ export interface IRibaModule {
    * or an array of binders with binder and name property (IModuleFormatterWrapper)
    */
   formatters?: IModuleFormatterWrapper[] | IModuleFormatters;
+
+  adapters?: IAdapters;
 
   /**
    * Components must be a object of service classes

@@ -1,5 +1,6 @@
 import { Debug } from '../modules';
 import { Binder, IModuleBinderWrapper, IModuleBinders } from '../interfaces';
+import { Utils } from './utils';
 
 /**
  * This wrapper is used if you need to pass over some dependencies for your binder
@@ -62,10 +63,18 @@ export class BindersService {
    * Regist a set of binders
    * @param binders
    */
-  public regists(binders: IModuleBinders<any>): IModuleBinders<any> {
-    for (const name in binders) {
-      if (binders.hasOwnProperty(name)) {
-        this.regist(binders[name], name);
+  public regists(binders: IModuleBinderWrapper[] | IModuleBinders<any>): IModuleBinders<any> {
+    if (Utils.isArray(binders)) {
+      for (let index = 0; index < binders.length; index++) {
+        const binder = (binders as IModuleBinderWrapper[])[index];
+        this.regist(binder.binder, binder.name);
+      }
+    }
+    if (Utils.isObject(binders)) {
+      for (const name in binders) {
+        if (binders.hasOwnProperty(name)) {
+          this.regist((binders as IModuleBinders<any>)[name], name);
+        }
       }
     }
     return this.binders;

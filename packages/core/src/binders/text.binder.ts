@@ -1,4 +1,4 @@
-import { IOneWayBinder } from '../services/binder.service';
+import { IOneWayBinder } from '../interfaces';
 
 /**
  * Sets the element's text value.

@@ -1,4 +1,5 @@
-import { ITwoWayBinder, BinderWrapper } from '../services/binder.service';
+import { ITwoWayBinder } from '../interfaces';
+import { BinderWrapper } from '../services/binder.service';
 import { View } from '../view';
 
 export const ifBinder: ITwoWayBinder<boolean> = {

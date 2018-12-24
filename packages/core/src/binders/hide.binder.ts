@@ -1,4 +1,4 @@
-import { IOneWayBinder } from '../services/binder.service';
+import { IOneWayBinder } from '../interfaces';
 
 /**
  * Hides the element when value is true (negated version of `show` binder).

@@ -1,5 +1,6 @@
-import { ITwoWayBinder, BinderWrapper } from '../services/binder.service';
-import JQuery from 'jquery';
+import { BinderWrapper } from '../services/binder.service';
+import { JQuery } from '../modules/jquery.module';
+import { ITwoWayBinder } from '../interfaces';
 
 // TODO this as custom binder? No web component staff for all fallback finders? eg rv-ca-* ca stands for component attribute
 

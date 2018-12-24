@@ -1,19 +1,26 @@
-import { IOptionsParam, IViewOptions } from '../riba';
+import {
+  IFormatterObservers,
+  IBindable,
+  IModuleBinders,
+  IModuleFormatters,
+  IClassicComponent,
+  IComponents,
+  IObservers,
+  IObserverSyncCallback,
+  IAdapters,
+  IOptionsParam,
+  IViewOptions,
+} from '../interfaces';
 import { PRIMITIVE, KEYPATH, parseType, parseDeclaration } from '../parsers';
-import { IFormatterObservers, IBindable } from '../binding';
-import { IBinders } from '../services/binder.service';
-import { IFormatters } from '../services/formatter.service';
 import { View } from '../view';
-import { IClassicComponent, IComponents } from '../services/component.service';
-import { Observer, IObservers, IObserverSyncCallback } from '../observer';
-import { IAdapters } from '../adapter';
+import { Observer } from '../observer';
 import { Utils } from '../services/utils';
 
 export interface IBoundElement extends HTMLElement {
   _bound?: boolean;
 }
 
-export interface IFormattersObservers {
+export interface IModuleFormattersObservers {
   [propertyName: string]: IFormatterObservers;
 }
 
@@ -37,7 +44,7 @@ export class ComponentBinding implements IBindable {
    * keypath values (KEYPATH Attributes)
    */
   public keypaths: IKeypaths = {};
-  public formattersObservers: IFormattersObservers = {};
+  public formattersObservers: IModuleFormattersObservers = {};
   public observers: IObservers;
   public bindingPrefix: string; // = riba.fullPrefix;
   public pipes: any = {};
@@ -126,9 +133,9 @@ export class ComponentBinding implements IBindable {
     const options: IOptionsParam = {
       // EXTENSIONS
       adapters: <IAdapters> Object.create(null),
-      binders: <IBinders<any>> Object.create(null),
+      binders: <IModuleBinders<any>> Object.create(null),
       components: <IComponents> Object.create(null),
-      formatters: <IFormatters> Object.create(null),
+      formatters: <IModuleFormatters> Object.create(null),
 
       // other
       starBinders: Object.create(null),

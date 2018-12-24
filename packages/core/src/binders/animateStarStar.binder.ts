@@ -1,5 +1,6 @@
 import { JQuery as $ } from '../modules';
-import { ITwoWayBinder, BinderWrapper } from '../services/binder.service';
+import { BinderWrapper } from '../services/binder.service';
+import { ITwoWayBinder } from '../interfaces';
 
 export const animateStar: ITwoWayBinder<boolean> = {
   function: true,

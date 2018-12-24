@@ -1,4 +1,4 @@
-import { IFormatters } from '../../services/formatter.service';
+import { IModuleFormatters } from '../../interfaces';
 
 // special helper formatters
 import { args } from './args.formatter';
@@ -11,6 +11,6 @@ import { json } from './json.formatter';
 
 export { args, booleanFormatter, debug, defaultBinder, call, currency, json };
 
-export const specialFormatters: IFormatters = {
+export const specialFormatters: IModuleFormatters = {
   args, boolean: booleanFormatter, debug, default: defaultBinder, call, currency, json,
 };
