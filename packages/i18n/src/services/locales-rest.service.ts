@@ -6,9 +6,9 @@ import { ALocalesService } from './locales-base.service';
  */
 export class LocalesRestService extends ALocalesService {
 
-  public static instance: LocalesRestService;
-
-  public static baseUrl = 'https://the-developer-app.artandcode.studio/shopify/api/themes';
+  public static instances: {
+    [url: string]: LocalesRestService;
+  } = {};
 
   public locales: any = {};
 
@@ -24,11 +24,13 @@ export class LocalesRestService extends ALocalesService {
 
   protected debug = Debug('services:LocalesService');
 
-  constructor(protected url?: string, doNotTranslateDefaultLanguage: boolean = true) {
+  constructor(protected url: string, doNotTranslateDefaultLanguage: boolean = false) {
     super(doNotTranslateDefaultLanguage);
 
+    this.url = url;
+
     if (!this.url) {
-      throw new Error(`Theme id object is requred!`);
+      throw new Error(`Url is requred!`);
     }
 
     this.initalLangcode = this.getHTMLLangcode();
@@ -38,13 +40,13 @@ export class LocalesRestService extends ALocalesService {
       throw new Error(`The lang attribute on the html element is requred to detect the default theme language: ${this.initalLangcode}`);
     }
 
-    if (LocalesRestService.instance) {
-      return LocalesRestService.instance;
+    if (LocalesRestService.instances[this.url]) {
+      return LocalesRestService.instances[this.url];
     }
 
     this.switchToBrowserLanguage();
 
-    LocalesRestService.instance = this;
+    LocalesRestService.instances[this.url] = this;
   }
 
   /**
@@ -57,7 +59,7 @@ export class LocalesRestService extends ALocalesService {
     }
 
     if (!url) {
-      throw new Error(`url is requred!`);
+      throw new Error(`Url is requred!`);
     }
 
     if ((window as any).Shopify.shop) {

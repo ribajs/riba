@@ -1,5 +1,5 @@
 import { Utils, EventDispatcher, Debug } from '@ribajs/core';
-import { ILangcode, ILocalPluralization, ILocalVar } from '../interfaces/interfaces';
+import { ILangcode, ILocalPluralization, ILocalVar } from '../interfaces';
 
 export abstract class ALocalesService {
 
@@ -23,7 +23,7 @@ export abstract class ALocalesService {
    */
   protected abstract initalLangcode: string;
 
-  constructor(private doNotTranslateDefaultLanguage: boolean) {
+  constructor(protected doNotTranslateDefaultLanguage: boolean = false) {
 
   }
 
@@ -211,7 +211,7 @@ export abstract class ALocalesService {
         }
       }
       // only switch language if the browser language is not the default language (if doNotTranslateDefaultLanguage is true)
-      if (/*this.doNotTranslateDefaultLanguage TODO &&*/ browserLangFound && browserLangcode !== this.currentLangcode) {
+      if (!this.doNotTranslateDefaultLanguage || (browserLangFound && browserLangcode !== this.currentLangcode)) {
         this.setLangcode(browserLangcode, true);
       }
       return availableLangcodes;

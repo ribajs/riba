@@ -9,7 +9,7 @@ import {
   IShopifyCustomerAddress,
   IShopifyShippingRates,
   IShopifyShippingRatesNormalized,
-} from '../interfaces/interfaces';
+} from '../interfaces';
 
 export interface IShopifyCartRequestOptions {
   triggerOnStart: boolean;

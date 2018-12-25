@@ -1,4 +1,4 @@
-import { IState } from '../interfaces/state';
+import { IState } from '../../interfaces/state';
 /**
  * HistoryManager helps to keep track of the navigation
  *

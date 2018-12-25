@@ -1,5 +1,5 @@
 import { Debug, JQuery, ITwoWayBinder, BinderWrapper, Utils, View as RivetsView } from '@ribajs/core';
-import { Pjax, HideShowTransition } from './barba/barba';
+import { Pjax, HideShowTransition } from '../services';
 
 /**
  * Loads a url with pjax and show them insite the element this binder is used on

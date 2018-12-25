@@ -4,14 +4,14 @@ export * from './binders';
 export * from './components';
 export * from './formatters';
 export * from './interfaces';
-export * from 'services';
+export * from './services';
 
 import bindersWrapper from './binders';
 import componentsWrapper from './components';
 import formattersWrapper from './formatters';
 import * as services from './services';
 
-export default (localesService: services.ALocalesService): IRibaModule => {
+export const i18nModule = (localesService: services.ALocalesService): IRibaModule => {
   return {
     binders: bindersWrapper(localesService),
     components: componentsWrapper(localesService),
@@ -19,3 +19,5 @@ export default (localesService: services.ALocalesService): IRibaModule => {
     services,
   };
 };
+
+export default i18nModule;

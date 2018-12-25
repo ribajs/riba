@@ -1,4 +1,4 @@
-import { IBinders } from '@ribajs/core';
+import { IModuleBinders } from '@ribajs/core';
 
 import { viewBinderWrapper } from './view.binder';
 import { viewStaticBinderWrapper } from './view-static.binder';
@@ -7,7 +7,7 @@ import { routeClassStarBinderWrapper } from './route-class-star.binder';
 import { parentRouteClassStarBinderWrapper } from './parent-route-class-star.binder';
 import { routeBackOnStarBinderWrapper } from './route-back-on-star.binder';
 
-const routerBinders: IBinders<any> = {};
+const routerBinders: IModuleBinders<any> = {};
 
 const viewBinder = viewBinderWrapper();
 const viewStaticBinder = viewStaticBinderWrapper();

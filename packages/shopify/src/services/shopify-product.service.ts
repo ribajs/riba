@@ -3,7 +3,7 @@ import { Debug, Utils } from '@ribajs/core';
 import {
   IShopifyProduct,
   IShopifyProductVariant,
-} from '../interfaces/interfaces';
+} from '../interfaces';
 
 export interface IProductsCache {
   [handle: string]: IShopifyProduct;

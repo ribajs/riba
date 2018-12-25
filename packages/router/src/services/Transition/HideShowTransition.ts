@@ -1,6 +1,6 @@
 import { Debug, JQuery } from '@ribajs/core';
 import { BaseTransition } from './BaseTransition';
-import { ITransition } from '../interfaces/transition';
+import { ITransition } from '../../interfaces/transition';
 
 /**
  * Basic Transition object, wait for the new Container to be ready,

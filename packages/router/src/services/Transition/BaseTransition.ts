@@ -1,5 +1,5 @@
 import { Debug, Utils } from '@ribajs/core';
-import { ITransition } from '../interfaces/transition';
+import { ITransition } from '../../interfaces/transition';
 
 /**
  * BaseTransition to extend
