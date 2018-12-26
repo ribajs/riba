@@ -1,5 +1,5 @@
 import { Utils, Debug } from '@ribajs/core';
-import { TheDeveloperAppService } from './the-developer-app.service';
+import { BaseService } from './base.service';
 
 export interface IInstagramMediaData {
   media_url: string;
@@ -33,7 +33,7 @@ export interface IInstagramResponse {
 // TODO move to the-developer-app modul
 export class InstagramService {
 
-  public static baseUrl = TheDeveloperAppService.baseUrl + '/instagram/api';
+  public static baseUrl = BaseService.baseUrl + '/instagram/api';
 
   public static async loadMedia(instagramId: string, limit = 0) {
     const url = `${this.baseUrl}/media/${instagramId}`;
