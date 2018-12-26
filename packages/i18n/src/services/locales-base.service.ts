@@ -116,6 +116,7 @@ export abstract class ALocalesService {
 
   public setLangcode(langcode: string, initial: boolean = false) {
     if (this.currentLangcode !== langcode) {
+      this.debug('setLangcode', langcode, this.currentLangcode);
       this.currentLangcode = langcode;
 
       // $('html').attr('lang', langcode);
@@ -199,16 +200,12 @@ export abstract class ALocalesService {
    */
   protected abstract async getAll(): Promise<any>;
 
-  protected init() {
+  protected async init() {
     this.initalLangcode = this.getHTMLLangcode();
     this.currentLangcode = this.initalLangcode;
-    this._ready = true;
     if (!this.initalLangcode ) {
       throw new Error(`The lang attribute on the html element is requred to detect the default theme language: ${this.initalLangcode}`);
     }
-  }
-
-  protected async switchToBrowserLanguage() {
     // Detect browser language and switch to this language when available
     const browserLangcode = this.getBrowserLangcode();
     return this.getAvailableLangcodes()
@@ -226,6 +223,7 @@ export abstract class ALocalesService {
       return availableLangcodes;
     })
     .then((availableLangcodes) => {
+      this._ready = true;
       // If the current langcode is not the inital langcode then translation is needed
       const translationNeeded = this.currentLangcode !== this.initalLangcode || !this.doNotTranslateDefaultLanguage;
       this.event.trigger('ready', this.currentLangcode, translationNeeded);

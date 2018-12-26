@@ -1,6 +1,6 @@
 {
-  "name": "@ribajs/shopify",
-  "description": "Shopify extension for Riba.js",
+  "name": "@ribajs/shopify-tda",
+  "description": "The Developer App for Shopify module for Riba.js",
   "version": "0.18.1",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "contributors": [],
@@ -23,7 +23,7 @@
     "type-check": "tslint -c tslint.json 'src/**/*.ts' && tsc --noEmit",
     "build": "npm run build:module",
     "build:module": "tsc",
-    "link": "npm link; npm link @ribajs/core; npm link @ribajs/i18n;"
+    "link": "npm link; npm link @ribajs/core; npm link @ribajs/i18n; npm link @ribajs/shopify"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "@ribajs/core": "^0.18.0",
-    "@ribajs/i18n": "^0.18.0"
+    "@ribajs/i18n": "^0.18.0",
+    "@ribajs/shopify": "^0.18.0"
   }
 }

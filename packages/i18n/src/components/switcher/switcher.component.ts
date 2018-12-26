@@ -112,6 +112,7 @@ export default (localesService: ALocalesService) => {
     }
 
     protected setLangcode(langcode: string) {
+      this.debug('setLangcode', langcode);
       this.localesService.setLangcode(langcode);
     }
 

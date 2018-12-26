@@ -37,14 +37,11 @@ export class LocalesRestService extends ALocalesService {
       throw new Error(`Url is requred!`);
     }
 
-    this.init();
-
     if (LocalesRestService.instances[this.url]) {
       return LocalesRestService.instances[this.url];
     }
 
-    this.switchToBrowserLanguage();
-
+    this.init();
     LocalesRestService.instances[this.url] = this;
   }
 
@@ -68,8 +65,9 @@ export class LocalesRestService extends ALocalesService {
       return this.locales[url];
     }
     return Utils.getJSON(url)
-    .then((locals: any /** TODO any */) => {
-      this.locales[url as string] = locals;
+    .then((locales: any) => {
+      this.locales[url as string] = locales;
+      this.debug('getAll', locales);
       return this.locales[url as string];
     });
   }

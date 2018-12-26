@@ -28,14 +28,11 @@ export class LocalesStaticService extends ALocalesService {
 
     this.locales = locales;
 
-    this.init();
-
     if (LocalesStaticService.instances[id]) {
       return LocalesStaticService.instances[id];
     }
 
-    this.switchToBrowserLanguage();
-
+    this.init();
     LocalesStaticService.instances[id] = this;
   }
 

@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/core",
   "description": "Core module of Riba.js",
-  "version": "0.18.0",
+  "version": "0.18.1",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "private": false,
   "contributors": [
@@ -31,7 +31,8 @@
     "webpack:browser": "webpack && webpack --config webpack.dev.config.js",
     "watch:browser": "webpack --watch --env.dev",
     "doc": "harp server docs/_harp ./docs",
-    "build-doc": "harp compile docs/_harp ./docs"
+    "build-doc": "harp compile docs/_harp ./docs",
+    "link": "npm link"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -41,7 +42,7 @@
     "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-typescript": "^7.1.0",
-    "@types/jquery": "^3.3.28",
+    "@types/jquery": "^3.3.29",
     "babel-loader": "^8.0.4",
     "babel-plugin-array-includes": "^2.0.3",
     "harp": "^0.27.0",
@@ -51,8 +52,8 @@
     "sinon": "^6.3.5",
     "tslint": "^5.12.0",
     "typescript": "^3.2.2",
-    "uglifyjs-webpack-plugin": "^2.0.1",
-    "webpack": "^4.28.0",
+    "uglifyjs-webpack-plugin": "^2.1.0",
+    "webpack": "^4.28.2",
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {

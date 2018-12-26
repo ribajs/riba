@@ -21,7 +21,8 @@
   "scripts": {
     "type-check": "tslint -c tslint.json 'src/**/*.ts' && tsc --noEmit",
     "build": "npm run build:module",
-    "build:module": "tsc"
+    "build:module": "tsc",
+    "link": "npm link; npm link @ribajs/core"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.0",
