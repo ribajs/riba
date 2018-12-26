@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/router",
   "description": "Routing extension for Riba.js inspired by Barba.js",
-  "version": "0.18.0",
+  "version": "0.18.1",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "contributors": [
     "Luigi De Rosa <lurukee@gmail.com>"
