@@ -78,11 +78,10 @@ export const i18nStarBinderWrapper: BinderWrapper = (localesService: ALocalesSer
         }
         if (!langcode) {
           langcode = this.customData.i18n.getLangcode();
-        }
-
-        if (!langcode) {
-          console.error('Langcode is requred', langcode);
-          return;
+          if (!langcode) {
+            console.error('Langcode is requred', langcode);
+            return;
+          }
         }
 
         // translate by using the already translated language variable

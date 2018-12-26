@@ -23,7 +23,7 @@ export abstract class ALocalesService {
    */
   protected abstract initalLangcode?: string;
 
-  constructor(public readonly doNotTranslateDefaultLanguage: boolean = false) {
+  constructor(public doNotTranslateDefaultLanguage: boolean) {
 
   }
 

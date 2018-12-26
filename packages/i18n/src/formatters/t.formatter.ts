@@ -5,6 +5,9 @@ const translate = async (translateMePathString: string, localesService: ALocales
   const properties = translateMePathString.split('.');
   if (!langcode) {
     langcode = localesService.getLangcode();
+    if (!langcode) {
+      return null;
+    }
   }
   return localesService.get([langcode, ...properties]/*, vars */)
   .then((locale: string) => {
