@@ -36,7 +36,10 @@ export default (localesService: ALocalesService) => {
       this.debug('constructor', this);
 
       if (this.localesService.ready) {
-        this.initOnReady(this.localesService.getLangcode());
+        const langcode = this.localesService.getLangcode();
+        if (langcode) {
+          this.initOnReady(langcode);
+        }
       } else {
         this.localesService.event.on('ready', (langcode: string, translationNeeded: boolean) => {
           this.initOnReady(langcode);
@@ -129,12 +132,7 @@ export default (localesService: ALocalesService) => {
     }
 
     protected template() {
-      // Only set the component template if there no childs already
-      if (this.el.hasChildNodes()) {
-        return null;
-      } else {
-        return '';
-      }
+      return null;
     }
   };
 };

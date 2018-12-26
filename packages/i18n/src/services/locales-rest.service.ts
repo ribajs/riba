@@ -10,17 +10,21 @@ export class LocalesRestService extends ALocalesService {
     [url: string]: LocalesRestService;
   } = {};
 
+  public static getInstance(url: string) {
+    return LocalesRestService.instances[url];
+  }
+
   public locales: any = {};
 
   /**
    * The current setted langcode
    */
-  protected currentLangcode: string;
+  protected currentLangcode?: string;
 
   /**
    * The default theme langcode before any language was choosed
    */
-  protected initalLangcode: string;
+  protected initalLangcode?: string;
 
   protected debug = Debug('services:LocalesService');
 
@@ -33,12 +37,7 @@ export class LocalesRestService extends ALocalesService {
       throw new Error(`Url is requred!`);
     }
 
-    this.initalLangcode = this.getHTMLLangcode();
-    this.currentLangcode = this.initalLangcode;
-    this._ready = true;
-    if (!this.initalLangcode ) {
-      throw new Error(`The lang attribute on the html element is requred to detect the default theme language: ${this.initalLangcode}`);
-    }
+    this.init();
 
     if (LocalesRestService.instances[this.url]) {
       return LocalesRestService.instances[this.url];

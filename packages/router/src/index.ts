@@ -7,7 +7,9 @@ export * from './services';
 import { routerBinders } from './binders';
 import * as services from './services';
 
-export default <IRibaModule> {
+export const routerModule = <IRibaModule> {
   binders: routerBinders,
   services,
 };
+
+export default routerModule;

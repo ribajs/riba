@@ -163,7 +163,7 @@ export const i18nStarBinderWrapper: BinderWrapper = (localesService: ALocalesSer
 
         // Translate if language is ready
         if (this.customData.i18n.ready) {
-          this.customData.initOnReady(this.customData.i18n.getLangcode(), this.customData.i18n.currentLangcode !== this.customData.i18n.initalLangcode);
+          this.customData.initOnReady(this.customData.i18n.getLangcode(), this.customData.i18n.currentLangcode !== this.customData.i18n.initalLangcode || !localesService.doNotTranslateDefaultLanguage);
         } else {
           this.customData.i18n.event.on('ready', this.customData.initOnReady);
         }

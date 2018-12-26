@@ -9,8 +9,10 @@ import * as components from './components';
 import * as formatters from './formatters';
 import * as services from './services';
 
-export default <IRibaModule> {
+export const shopifyModule = <IRibaModule> {
   formatters,
   services,
   components,
 };
+
+export default shopifyModule;
