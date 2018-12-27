@@ -32,7 +32,7 @@
     "watch:browser": "webpack --watch --env.dev",
     "doc": "harp server docs/_harp ./docs",
     "build-doc": "harp compile docs/_harp ./docs",
-    "link": "npm link"
+    "link": "npm install && npm link"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

@@ -1,4 +1,4 @@
-import Debug from 'debug';
+import { Debug } from '../../modules/debug.module';
 
 const debuggurito = Debug('formatter');
 
