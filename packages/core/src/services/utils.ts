@@ -319,12 +319,28 @@ export class Utils {
   }
 
   /**
+   * Set header for each xhr and jquery request
+   * @param name Header name
+   * @param value Hander value
+   */
+  public static setRequestHeaderEachRequest(name: string, value: string) {
+    // TODO Are old values overwritten if JQuery.ajaxSetup called multiple times?
+    JQuery.ajaxSetup({
+      beforeSend: (xhr: JQueryXHR) => {
+        xhr.setRequestHeader(name, value);
+      },
+    });
+    this._requestHeadersEachRequest.push({
+      name,
+      value,
+    });
+  }
+  /**
    * Start an XMLHttpRequest() and return a Promise
    *
    * @memberOf Barba.Utils
-   * @param  {string} url
-   * @param  {number} xhrTimeout Time in millisecond after the xhr request goes in timeout
-   * @return {Promise}
+   * @param url
+   * @param xhrTimeout Time in millisecond after the xhr request goes in timeout
    */
   public static xhr(url: string, xhrTimeout = 5000) {
     const deferred = this.deferred();
@@ -346,7 +362,9 @@ export class Utils {
 
     req.open('GET', url);
     req.timeout = xhrTimeout;
-    req.setRequestHeader('x-barba', 'yes');
+    for (const header of this._requestHeadersEachRequest) {
+      req.setRequestHeader(header.name, header.value);
+    }
     req.send();
 
     return deferred.promise;
@@ -518,5 +536,13 @@ export class Utils {
       w,
     };
   }
+
+  /**
+   * Header name value pair to send on each request
+   */
+  protected static _requestHeadersEachRequest: {name: string, value: string}[] = [{
+    name: 'x-barba',
+    value: 'yes',
+  }];
 
 }
