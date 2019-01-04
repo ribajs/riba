@@ -30,7 +30,6 @@ export abstract class RibaComponent extends FakeHTMLElement {
 
   protected debug: Debug.IDebugger;
   protected view?: View;
-  protected _bound: boolean = false;
 
   protected templateLoaded: boolean = false;
 
@@ -43,7 +42,7 @@ export abstract class RibaComponent extends FakeHTMLElement {
   protected abstract scope: any;
 
   public get bound() {
-    return !!this._bound || !!this.view;
+    return !!this.view;
   }
 
   /**
@@ -67,6 +66,19 @@ export abstract class RibaComponent extends FakeHTMLElement {
       throw new Error(`element is required on browsers without custom elements support`);
     }
     // this.$el = JQuery(this.el);
+  }
+
+  /**
+   * Remove this custom element
+   */
+  public remove() {
+    this.debug('remove', this.el);
+    if (this.el && this.el.parentElement) {
+      this.el.parentElement.removeChild(this.el);
+      if (!(window as any).customElements) {
+        this.disconnectedFallbackCallback();
+      }
+    }
   }
 
   public disconnectedFallbackCallback() {
@@ -227,7 +239,6 @@ export abstract class RibaComponent extends FakeHTMLElement {
     }
 
     this.el.removeEventListener('binder-changed', this.BinderChangedEventHandler);
-    this._bound = false;
   }
 
   /**
@@ -352,7 +363,6 @@ export abstract class RibaComponent extends FakeHTMLElement {
     });
 
     this.view = new View(Array.prototype.slice.call(this.el.childNodes) as unknown as NodeListOf<ChildNode>, this.scope, viewOptions);
-    this._bound = true;
     this.scope = this.view.models;
     this.view.bind();
 
@@ -361,6 +371,19 @@ export abstract class RibaComponent extends FakeHTMLElement {
       console.error(error);
     });
     return this.view;
+  }
+
+  protected async unbind() {
+    if (this.view) {
+      this.view.unbind();
+      delete this.view;
+    }
+  }
+
+  protected async build() {
+    if (this.view) {
+      this.view.build();
+    }
   }
 
   protected async beforeBind(): Promise<any> {
