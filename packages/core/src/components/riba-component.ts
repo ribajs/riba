@@ -203,7 +203,7 @@ export abstract class RibaComponent extends FakeHTMLElement {
    * @param args the parameters you wish to call the function with
    */
   protected argsFormatterHandler(self: this): any {
-    this.debug('argsFormatterHandler');
+    this.debug('argsFormatterHandler', self);
     return (fn: (...args: any[]) => any, ...fnArgs: any[]): any => {
       return (event: Event, scope: any, el: HTMLElement, binding: any) => {
         // append the event handler args to passed args
@@ -345,31 +345,32 @@ export abstract class RibaComponent extends FakeHTMLElement {
     }
 
     await this.beforeBind()
+    .then(() => {
+      if (!this.el) {
+        throw new Error('this.el is not defined');
+      }
+
+      this.riba = new Riba();
+      const viewOptions = this.riba.getViewOptions({
+        handler: this.eventHandler(this),
+        formatters: {
+          call: this.callFormatterHandler(this),
+          args: this.argsFormatterHandler(this),
+        },
+      });
+
+      this.view = new View(Array.prototype.slice.call(this.el.childNodes) as unknown as NodeListOf<ChildNode>, this.scope, viewOptions);
+      this.scope = this.view.models;
+      this.view.bind();
+      return this.view;
+    })
+    .then((view) => {
+      return this.afterBind();
+    })
     .catch((error) => {
       console.error(error);
     });
 
-    if (!this.el) {
-      throw new Error('this.el is not defined');
-    }
-
-    this.riba = new Riba();
-    const viewOptions = this.riba.getViewOptions({
-      handler: this.eventHandler(this),
-      formatters: {
-        call: this.callFormatterHandler(this),
-        args: this.argsFormatterHandler(this),
-      },
-    });
-
-    this.view = new View(Array.prototype.slice.call(this.el.childNodes) as unknown as NodeListOf<ChildNode>, this.scope, viewOptions);
-    this.scope = this.view.models;
-    this.view.bind();
-
-    await this.afterBind()
-    .catch((error) => {
-      console.error(error);
-    });
     return this.view;
   }
 

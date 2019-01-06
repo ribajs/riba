@@ -82,7 +82,7 @@ export class Observer {
     let path: string;
     let root: Root;
 
-    if (!Observer.interfaces.length) {
+    if (!Observer.interfaces || !Observer.interfaces.length) {
       throw new Error('[Observer] Must define at least one adapter interface.');
     }
 

@@ -3,6 +3,9 @@ import { BaseService } from './base.service';
 
 export class LocalesService extends LocalesRestService {
   public static instance: LocalesService;
+  static getInstance() {
+    return this.instance;
+  }
   constructor() {
     let url = `${BaseService.baseUrl}/shopify/api/themes/${(window as any).Shopify.theme.id}/locales`;
     if ((window as any).Shopify.shop) {

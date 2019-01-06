@@ -1,6 +1,6 @@
 import {
   RibaComponent,
-  JQuery as $,
+  JQuery,
   Debug,
   Binder,
 } from '@ribajs/core';
@@ -17,7 +17,7 @@ export default (localesService: ALocalesService) => {
       return [];
     }
 
-    protected $el: JQuery<HTMLElement>;
+    // protected $el: JQuery<HTMLElement>;
 
     protected localesService = localesService;
 
@@ -25,14 +25,14 @@ export default (localesService: ALocalesService) => {
 
     protected scope = {
       langcodes: <ILangcode[]> [],
-      switch: <I18nSwitcherComponent['switch']> this.switch,
-      toggle: <I18nSwitcherComponent['toggle']> this.toggle,
+      switch: this.switch,
+      toggle: this.toggle,
       ready: <boolean> false,
     };
 
     constructor(element?: HTMLElement) {
       super(element);
-      this.$el = $(this.el);
+      // this.$el = JQuery(this.el);
       this.debug('constructor', this);
 
       if (this.localesService.ready) {
@@ -45,7 +45,6 @@ export default (localesService: ALocalesService) => {
           this.initOnReady(langcode);
         });
       }
-
     }
 
     public async initOnReady(langcode: string) {
@@ -57,7 +56,11 @@ export default (localesService: ALocalesService) => {
         this.scope.langcodes.forEach((langCode) => {
           langCode.active = (langCode.code === langcode);
         });
-        return this.init(I18nSwitcherComponent.observedAttributes);
+        try {
+          this.init(I18nSwitcherComponent.observedAttributes);
+        } catch (error) {
+          console.error(error);
+        }
       })
       .then(() => {
         this.localesService.event.on('changed', (changedLangcode: string, initial: boolean) => {
@@ -117,7 +120,7 @@ export default (localesService: ALocalesService) => {
     }
 
     protected async beforeBind() {
-      this.debug('beforeBind');
+      this.debug('beforeBind', this.scope);
     }
 
     protected async afterBind() {
