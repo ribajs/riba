@@ -1,7 +1,7 @@
 {
   "name": "ribajs",
   "description": "Declarative data binding + templating solution.",
-  "version": "0.18.4",
+  "version": "0.18.5",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "contributors": [],
   "private": true,
@@ -18,7 +18,8 @@
     "url": "https://github.com/ribajs/riba.git"
   },
   "scripts": {
-    "link": "cd packages/core && npm run link && cd ../i18n && npm run link && cd ../router && npm run link && cd ../bs4 && npm run link && cd ../shopify && npm run link && cd ../shopify-easdk && npm run link && cd ../shopify-tda && npm run link && cd ../core && npm install"
+    "link": "cd packages/core && npm run link && cd ../i18n && npm run link && cd ../router && npm run link && cd ../bs4 && npm run link && cd ../shopify && npm run link && cd ../shopify-easdk && npm run link && cd ../shopify-tda && npm run link && cd ../core && npm install",
+    "publish": "node tools/publish.js"
   },
   "devDependencies": {},
   "dependencies": {}
