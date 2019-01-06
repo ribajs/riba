@@ -178,10 +178,11 @@ export abstract class ALocalesService {
    * @param vars
    */
   public setTranslateStringVars(translateString: string, vars: ILocalVar) {
-    if (!translateString || typeof(translateString.match) !== 'function') {
+    if (!translateString || Object.keys(vars).length === 0 || typeof(translateString.match) !== 'function') {
       return translateString;
     }
-    const matches = translateString.match(/{{\s*?[A-Za-z_-]+\s*?}}/gm);
+    this.debug('setTranslateStringVars', translateString, vars);
+    const matches = translateString.match(/{{\s*?[A-Za-z0-9_-]+\s*?}}/gm);
     if (matches) {
       for (const match of matches) {
         if (match) {
@@ -192,6 +193,7 @@ export abstract class ALocalesService {
         }
       }
     }
+    this.debug('setTranslateStringVars', translateString);
     return translateString;
   }
 

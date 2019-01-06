@@ -482,10 +482,29 @@ export class Utils {
 
   /**
    * Test if url is absolute or relative
+   * @see https://stackoverflow.com/a/19709846/1465919
    */
   public static isAbsoluteUrl(url: string) {
-    const pat = /^https?:\/\//i;
-    return pat.test(url);
+    const isProtokoll = new RegExp('^(?:[a-z]+:)?//', 'i');
+    const isAbsolute = isProtokoll.test(url) || url.startsWith('mailto:') || url.startsWith('tel:') || url.startsWith('fax:');
+    return isAbsolute;
+  }
+
+  public static isExternalUrl = (absoluteUrl: string) => {
+    if (Utils.isAbsoluteUrl(absoluteUrl)) {
+      const location = Utils.getLocation();
+      const host = location.protocol + '//' + location.hostname;
+      let isExternal = true;
+      if (absoluteUrl.startsWith(host)) {
+        isExternal = false;
+      }
+      return isExternal;
+    }
+    return false;
+  }
+
+  public static isInternalUrl = (url: string) => {
+    return !Utils.isExternalUrl(url);
   }
 
   /**

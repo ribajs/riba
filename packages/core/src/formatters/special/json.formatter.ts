@@ -4,7 +4,7 @@
  */
 export const json = (object: any, replaceSingleQuate: boolean = true) => {
   const result = JSON.stringify(object);
-  if (replaceSingleQuate) {
+  if (replaceSingleQuate && result) {
     return result.replace(/'/g, `&#39;`);
   }
   return result;

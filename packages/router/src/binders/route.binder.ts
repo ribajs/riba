@@ -108,13 +108,19 @@ export const routeBinderWrapper: BinderWrapper = () => {
       // normalize url
       if (this.customData.options.url && Utils.isAbsoluteUrl(this.customData.options.url)) {
 
-        // if is not an external link
-        if (this.customData.options.url.indexOf(host) === 0) {
+        debug('is absolut url', this.customData.options.url);
+
+        // if is an internal link
+        if (Utils.isInternalUrl(this.customData.options.url)) {
+          debug('interal url', this.customData.options.url);
           // get relative url
           this.customData.options.url = this.customData.options.url.replace(host, '');
         } else {
+          debug('external url', this.customData.options.url);
           this.customData.options.newTab = true;
         }
+      } else {
+        debug('is relative url', this.customData.options.url);
       }
 
       // set href if not set
