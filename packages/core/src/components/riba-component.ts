@@ -109,7 +109,7 @@ export abstract class RibaComponent extends FakeHTMLElement {
       return this.loadTemplate()
       .then((template) => {
         if (this.autobind) {
-          return this.bind();
+          return Promise.resolve(this.bind());
         }
         return Promise.resolve(null);
       });
