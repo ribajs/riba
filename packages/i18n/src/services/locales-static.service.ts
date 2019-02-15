@@ -7,7 +7,7 @@ export class LocalesStaticService extends ALocalesService {
     [id: string]: LocalesStaticService;
   } = {};
 
-  public static getInstance(id: string = 'main') {
+  public static getInstance(id: string) {
     return LocalesStaticService.instances[id];
   }
 
@@ -23,8 +23,11 @@ export class LocalesStaticService extends ALocalesService {
 
   protected debug = Debug('services:LocalesStaticService');
 
-  constructor(protected locales: any, protected id: string = 'main', doNotTranslateDefaultLanguage: boolean = false) {
+  constructor(protected locales: any, protected id?: string, doNotTranslateDefaultLanguage: boolean = false) {
     super(doNotTranslateDefaultLanguage);
+    if (!id) {
+      id = 'main';
+    }
 
     this.locales = locales;
 

@@ -40,7 +40,10 @@ class EventDispatcher {
    * Creates an singleton instance of Dispatcher.
    * @memberof Dispatcher
    */
-  constructor(id: string = 'main') {
+  constructor(id?: string) {
+    if (!id) {
+      id = 'main';
+    }
     this.id = id;
 
     if (EventDispatcher.instances[this.id]) {
