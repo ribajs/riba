@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/i18n",
   "description": "Internationalization extension for Riba.js",
-  "version": "0.18.5",
+  "version": "0.18.6",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "url": "https://github.com/ribajs/riba/tree/master/packages/i18n",
   "main": "src/index.ts",

@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/core",
   "description": "Core module of Riba.js",
-  "version": "0.18.5",
+  "version": "0.18.6",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "private": false,
   "contributors": [
