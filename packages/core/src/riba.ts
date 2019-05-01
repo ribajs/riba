@@ -281,7 +281,7 @@ export class Riba {
   /**
    * Binds some data to a template / element. Returns a riba.View instance.
    */
-  public bind(el: HTMLElement, models: any, options?: IOptionsParam) {
+  public bind(el: HTMLElement | DocumentFragment, models: any, options?: IOptionsParam) {
     const viewOptions: IViewOptions = this.getViewOptions(options);
 
     models = models || new Object(null);

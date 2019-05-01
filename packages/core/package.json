@@ -24,11 +24,13 @@
     "url": "git+https://github.com/ribajs/riba.git"
   },
   "scripts": {
-    "test": "npm run build:browser && mocha-chrome spec/runner.html && mocha-chrome spec/runner.min.html",
+    "test:deprecated": "npm run build:browser && mocha-chrome spec/runner.html && mocha-chrome spec-deprecated/runner.min.html",
+    "test": "npm run webpack:test && mocha-chrome spec/runner.html",
     "type-check": "tslint -c tslint.json 'src/**/*.ts' && tsc --noEmit",
     "build": "tsc",
     "build:browser": "npm run type-check && npm run webpack:browser",
     "webpack:browser": "webpack && webpack --config webpack.dev.config.js",
+    "webpack:test": "webpack && webpack --config webpack.test.config.js",
     "watch:browser": "webpack --watch --env.dev",
     "doc": "harp server docs/_harp ./docs",
     "build-doc": "harp compile docs/_harp ./docs",
@@ -43,6 +45,7 @@
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-typescript": "^7.1.0",
     "@types/jquery": "^3.3.29",
+    "@types/mocha": "^5.2.6",
     "babel-loader": "^8.0.4",
     "babel-plugin-array-includes": "^2.0.3",
     "harp": "^0.27.0",
@@ -50,11 +53,13 @@
     "mocha-chrome": "^1.1.0",
     "should": "^13.2.3",
     "sinon": "^6.3.5",
+    "source-map-support": "^0.5.12",
     "tslint": "^5.12.0",
     "typescript": "^3.2.2",
     "uglifyjs-webpack-plugin": "^2.1.0",
     "webpack": "^4.28.2",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.1.2",
+    "webpack-glob-entry": "^2.1.1"
   },
   "dependencies": {
     "@babel/runtime-corejs2": "^7.2.0",
