@@ -2,7 +2,9 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "baseUrl": "./src/",
-    "outDir": "./lib/"
+    "outDir": "./lib/",
   },
-  "include": ["*.ts", "**/*.ts"]
+  "include": ["*.ts", "**/*.ts"],
+  "typeRoots": ["./node_modules/@types"],
+  "types": ["jest"],
 }
