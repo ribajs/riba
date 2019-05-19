@@ -31,6 +31,7 @@ export const valueBinder: ITwoWayBinder<any> = {
       const self = this;
       if (!this.customData.callback) {
         this.customData.callback = () => {
+          debug('callback called');
           self.publish();
         };
       }

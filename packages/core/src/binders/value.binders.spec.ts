@@ -1,39 +1,71 @@
-import 'mocha';
-import 'should';
-import * as sinon from 'sinon';
-
 import {
     Riba,
-} from '../riba';
+    JQuery,
+} from '../index';
 
 import {
     valueBinder,
 } from './value.binder';
 
+// import * as puppeteer from 'puppeteer';
+
+// import 'jest-environment-puppeteer';
+
 describe('value', () => {
-    let el: Element;
     const riba = new Riba();
     riba.module.binderService.regist(valueBinder, 'value');
 
+    let fragment: DocumentFragment;
+    let el: HTMLInputElement;
+    let model: any;
+
     beforeEach(() => {
+        model = { value: 'foobar' };
+        fragment = document.createDocumentFragment();
         el = document.createElement('input');
-        // el.setAttribute('rv-value', 'item.val');
+        el.setAttribute('rv-value', 'value');
+        fragment.appendChild(el);
     });
 
     it('unbinds the same bound function', () => {
-        let boundFn;
+        let boundFn: EventListenerOrEventListenerObject;
 
-        sinon.stub(el, 'addEventListener').callsFake((event, fn) => {
+        jest.spyOn(el, 'addEventListener').mockImplementation((event, fn) => {
             boundFn = fn;
         });
 
-        riba.binders.value.bind.call(context, el);
+        const view = riba.bind(fragment, model);
 
-        sinon.stub(el, 'removeEventListener').callsFake((event, fn) => {
-            fn.should.equal(boundFn);
+        jest.spyOn(el, 'removeEventListener').mockImplementation((event, fn) => {
+            expect(fn).toEqual(boundFn);
         });
 
-        // TODO fix type
-        (riba.binders.value as any).unbind.call(context, el);
+        view.unbind();
     });
+
+    it('binds to the model to input', () => {
+        const view = riba.bind(fragment, model);
+        expect(el.value).toBe(model.value);
+    });
+
+    it('reflects changes to the model into the DOM', () => {
+        const view = riba.bind(fragment, model);
+
+        expect(el.value).toBe('foobar');
+
+        model.value = 'howdy';
+        expect(el.value).toBe('howdy');
+    });
+
+    it('reflects changes to the model into the DOM after unbind/bind', () => {
+        const view = riba.bind(fragment, model);
+        expect(el.value).toBe('foobar');
+
+        view.unbind();
+        view.bind();
+
+        model.value = 'howdy';
+        expect(el.value).toBe('howdy');
+    });
+
 });
