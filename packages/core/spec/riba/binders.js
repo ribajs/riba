@@ -7,83 +7,83 @@ describe('riba.binders', function() {
     };
   });
 
-  describe('nested-each-*', function() {
-    var fragment;
-    var el;
-    var nestedEl;
-    var model;
+  // describe('nested-each-*', function() {
+  //   var fragment;
+  //   var el;
+  //   var nestedEl;
+  //   var model;
 
-    beforeEach(function() {
-      fragment = document.createDocumentFragment();
-      el = document.createElement('span');
-      el.setAttribute('rv-each-item', 'items');
-      nestedEl = document.createElement('span');
-      nestedEl.setAttribute('rv-each-nested', 'item.items');
-      el.appendChild(nestedEl);
-      fragment.appendChild(el);
+  //   beforeEach(function() {
+  //     fragment = document.createDocumentFragment();
+  //     el = document.createElement('span');
+  //     el.setAttribute('rv-each-item', 'items');
+  //     nestedEl = document.createElement('span');
+  //     nestedEl.setAttribute('rv-each-nested', 'item.items');
+  //     el.appendChild(nestedEl);
+  //     fragment.appendChild(el);
 
-      model = {
-        root: 'Root Node',
-        items: [
-          {name: 'Level 1 - 0', items: [{val: 0}, {val: 1}]},
-          {name: 'Level 1 - 1', items: [{val: 2}, {val: 3}]},
-          {name: 'Level 1 - 2', items: [{val: 4}, {val: 5}]}
-        ]
-      };
-    });
+  //     model = {
+  //       root: 'Root Node',
+  //       items: [
+  //         {name: 'Level 1 - 0', items: [{val: 0}, {val: 1}]},
+  //         {name: 'Level 1 - 1', items: [{val: 2}, {val: 3}]},
+  //         {name: 'Level 1 - 2', items: [{val: 4}, {val: 5}]}
+  //       ]
+  //     };
+  //   });
 
-    it('lets you access index from current and parent scope', function() {
-      nestedEl.textContent = '{$parent.%item%}-{%nested%}';
-      var view = riba.bind(el, model);
+  //   it('lets you access index from current and parent scope', function() {
+  //     nestedEl.textContent = '{$parent.%item%}-{%nested%}';
+  //     var view = riba.bind(el, model);
 
-      should(fragment.childNodes[1].childNodes[1].textContent).be.exactly('0-0');
-      should(fragment.childNodes[1].childNodes[2].textContent).be.exactly('0-1');
-      should(fragment.childNodes[2].childNodes[2].textContent).be.exactly('1-1');
-    });
+  //     should(fragment.childNodes[1].childNodes[1].textContent).be.exactly('0-0');
+  //     should(fragment.childNodes[1].childNodes[2].textContent).be.exactly('0-1');
+  //     should(fragment.childNodes[2].childNodes[2].textContent).be.exactly('1-1');
+  //   });
 
-    /**
-     * Overwrite the index property name on element and the nested element,
-     * both to `$index` and access both with the parent scope
-     */
-    it('lets you access overwritten index from current and parent scope with the same name', function() {
-      el.setAttribute('index-property', '$index');
-      nestedEl.setAttribute('index-property', '$index');
-      nestedEl.textContent = '{$parent.$index}-{$index}';
-      var view = riba.bind(el, model);
+  //   /**
+  //    * Overwrite the index property name on element and the nested element,
+  //    * both to `$index` and access both with the parent scope
+  //    */
+  //   it('lets you access overwritten index from current and parent scope with the same name', function() {
+  //     el.setAttribute('index-property', '$index');
+  //     nestedEl.setAttribute('index-property', '$index');
+  //     nestedEl.textContent = '{$parent.$index}-{$index}';
+  //     var view = riba.bind(el, model);
 
-      should(fragment.childNodes[1].childNodes[1].textContent).be.exactly('0-0');
-      should(fragment.childNodes[1].childNodes[2].textContent).be.exactly('0-1');
-      should(fragment.childNodes[2].childNodes[2].textContent).be.exactly('1-1');
-    });
+  //     should(fragment.childNodes[1].childNodes[1].textContent).be.exactly('0-0');
+  //     should(fragment.childNodes[1].childNodes[2].textContent).be.exactly('0-1');
+  //     should(fragment.childNodes[2].childNodes[2].textContent).be.exactly('1-1');
+  //   });
 
-    it('lets you access properties from parent scopes', function() {
-      nestedEl.textContent = '{root}!{item.name}';
-      var view = riba.bind(el, model);
+  //   it('lets you access properties from parent scopes', function() {
+  //     nestedEl.textContent = '{root}!{item.name}';
+  //     var view = riba.bind(el, model);
 
-      should(fragment.childNodes[1].childNodes[1].textContent).be.exactly('Root Node!Level 1 - 0');
-      should(fragment.childNodes[1].childNodes[2].textContent).be.exactly('Root Node!Level 1 - 0');
-      should(fragment.childNodes[2].childNodes[2].textContent).be.exactly('Root Node!Level 1 - 1');
-    });
+  //     should(fragment.childNodes[1].childNodes[1].textContent).be.exactly('Root Node!Level 1 - 0');
+  //     should(fragment.childNodes[1].childNodes[2].textContent).be.exactly('Root Node!Level 1 - 0');
+  //     should(fragment.childNodes[2].childNodes[2].textContent).be.exactly('Root Node!Level 1 - 1');
+  //   });
 
-    it('reflects changes in parent scopes properties', function() {
-      nestedEl.textContent = '{root}!{item.name}';
-      var view = riba.bind(el, model);
-      model.root = 'New';
-      should(fragment.childNodes[1].childNodes[1].textContent).be.exactly('New!Level 1 - 0');
-      should(fragment.childNodes[1].childNodes[2].textContent).be.exactly('New!Level 1 - 0');
-      should(fragment.childNodes[2].childNodes[2].textContent).be.exactly('New!Level 1 - 1');
-    });
+  //   it('reflects changes in parent scopes properties', function() {
+  //     nestedEl.textContent = '{root}!{item.name}';
+  //     var view = riba.bind(el, model);
+  //     model.root = 'New';
+  //     should(fragment.childNodes[1].childNodes[1].textContent).be.exactly('New!Level 1 - 0');
+  //     should(fragment.childNodes[1].childNodes[2].textContent).be.exactly('New!Level 1 - 0');
+  //     should(fragment.childNodes[2].childNodes[2].textContent).be.exactly('New!Level 1 - 1');
+  //   });
 
-    it('reflects changes when an undefined property is set in root scope', function() {
-      nestedEl.textContent = '{unset}';
-      var view = riba.bind(el, model);
-      model.unset = 'NotUndefined';
-      should(fragment.childNodes[1].childNodes[1].textContent).be.exactly('NotUndefined');
-      should(fragment.childNodes[1].childNodes[2].textContent).be.exactly('NotUndefined');
-      should(fragment.childNodes[2].childNodes[2].textContent).be.exactly('NotUndefined');
-    });
+  //   it('reflects changes when an undefined property is set in root scope', function() {
+  //     nestedEl.textContent = '{unset}';
+  //     var view = riba.bind(el, model);
+  //     model.unset = 'NotUndefined';
+  //     should(fragment.childNodes[1].childNodes[1].textContent).be.exactly('NotUndefined');
+  //     should(fragment.childNodes[1].childNodes[2].textContent).be.exactly('NotUndefined');
+  //     should(fragment.childNodes[2].childNodes[2].textContent).be.exactly('NotUndefined');
+  //   });
 
-  });
+  // });
 
   describe('if', function() {
     var fragment;

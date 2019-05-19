@@ -14,6 +14,7 @@ describe('each-*', () => {
   const riba = new Riba();
   riba.module.binderService.regist(eachStarBinderWrapper());
   riba.module.binderService.regist(text, 'text');
+
   let fragment: DocumentFragment;
   let el: HTMLLIElement;
   let model: any;
@@ -136,4 +137,85 @@ describe('each-*', () => {
     expect(model.items.length).toBe(originalLength + 1);
     expect(fragment.childNodes.length).toBe(model.items.length + 1);
   });
+});
+
+describe('nested-each-*', () => {
+  const riba = new Riba();
+  riba.module.binderService.regist(eachStarBinderWrapper());
+
+  let fragment: DocumentFragment;
+  let el: HTMLSpanElement;
+  let nestedEl: HTMLSpanElement;
+  let model: any;
+
+  beforeEach(() => {
+    fragment = document.createDocumentFragment();
+    el = document.createElement('span');
+    el.setAttribute('rv-each-item', 'items');
+    nestedEl = document.createElement('span');
+    nestedEl.setAttribute('rv-each-nested', 'item.items');
+    el.appendChild(nestedEl);
+    fragment.appendChild(el);
+
+    model = {
+      root: 'Root Node',
+      items: [
+        {name: 'Level 1 - 0', items: [{val: 0}, {val: 1}]},
+        {name: 'Level 1 - 1', items: [{val: 2}, {val: 3}]},
+        {name: 'Level 1 - 2', items: [{val: 4}, {val: 5}]}
+      ]
+    };
+  });
+
+  it('lets you access index from current and parent scope', () => {
+    nestedEl.textContent = '{$parent.%item%}-{%nested%}';
+    riba.bind(el, model);
+
+    expect(fragment.childNodes[1].childNodes[1].textContent).toEqual('0-0');
+    expect(fragment.childNodes[1].childNodes[2].textContent).toEqual('0-1');
+    expect(fragment.childNodes[2].childNodes[2].textContent).toEqual('1-1');
+  });
+
+  /**
+   * Overwrite the index property name on element and the nested element,
+   * both to `$index` and access both with the parent scope
+   */
+  it('lets you access overwritten index from current and parent scope with the same name', () => {
+    el.setAttribute('index-property', '$index');
+    nestedEl.setAttribute('index-property', '$index');
+    nestedEl.textContent = '{$parent.$index}-{$index}';
+    riba.bind(el, model);
+
+    expect(fragment.childNodes[1].childNodes[1].textContent).toEqual('0-0');
+    expect(fragment.childNodes[1].childNodes[2].textContent).toEqual('0-1');
+    expect(fragment.childNodes[2].childNodes[2].textContent).toEqual('1-1');
+  });
+
+  it('lets you access properties from parent scopes', () => {
+    nestedEl.textContent = '{root}!{item.name}';
+    riba.bind(el, model);
+
+    expect(fragment.childNodes[1].childNodes[1].textContent).toEqual('Root Node!Level 1 - 0');
+    expect(fragment.childNodes[1].childNodes[2].textContent).toEqual('Root Node!Level 1 - 0');
+    expect(fragment.childNodes[2].childNodes[2].textContent).toEqual('Root Node!Level 1 - 1');
+  });
+
+  it('reflects changes in parent scopes properties', () => {
+    nestedEl.textContent = '{root}!{item.name}';
+    riba.bind(el, model);
+    model.root = 'New';
+    expect(fragment.childNodes[1].childNodes[1].textContent).toEqual('New!Level 1 - 0');
+    expect(fragment.childNodes[1].childNodes[2].textContent).toEqual('New!Level 1 - 0');
+    expect(fragment.childNodes[2].childNodes[2].textContent).toEqual('New!Level 1 - 1');
+  });
+
+  it('reflects changes when an undefined property is set in root scope', () => {
+    nestedEl.textContent = '{unset}';
+    riba.bind(el, model);
+    model.unset = 'NotUndefined';
+    expect(fragment.childNodes[1].childNodes[1].textContent).toEqual('NotUndefined');
+    expect(fragment.childNodes[1].childNodes[2].textContent).toEqual('NotUndefined');
+    expect(fragment.childNodes[2].childNodes[2].textContent).toEqual('NotUndefined');
+  });
+
 });
