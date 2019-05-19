@@ -1,7 +1,6 @@
 import {
     Riba,
-    JQuery,
-} from '../index';
+} from '../riba';
 
 import {
     valueBinder,

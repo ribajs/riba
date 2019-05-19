@@ -208,32 +208,6 @@ describe('riba.binders', function() {
       }).should.not.throw();
     });
   });
- 
-  describe('Custom binder with no attribute value', function() {
-    var el, model;
-    riba.binders['custom-binder'] = function(el, value) {
-      el.innerHTML = 'received ' + value;
-    };
-    beforeEach(function() {
-      fragment = document.createDocumentFragment();
-      el = document.createElement('div');
-
-      fragment.appendChild(el);
-
-      model = {};
-    });
-
-    it('receives undefined when html attribute is not specified', function() {
-      el.innerHTML = '<div rv-custom-binder></div>';
-      var view = riba.bind(fragment, model);
-      should(el.children[0].innerHTML).be.exactly('received undefined');
-    });
-    it('receives undefined when html attribute is not specified', function() {
-      el.innerHTML = '<div rv-custom-binder=""></div>';
-      var view = riba.bind(fragment, model);
-      should(el.children[0].innerHTML).be.exactly('received undefined');
-    });
-  });
 
   describe('Array observe and unobserve', function() {
     var fragment;
