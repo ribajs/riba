@@ -6,6 +6,10 @@ import {
     ifBinderWrapper,
 } from './if.binder';
 
+import {
+    eachStarBinderWrapper,
+  } from './each-star.binder';
+
 describe('if', () => {
     const riba = new Riba();
     riba.module.binderService.regist(ifBinderWrapper());
@@ -136,5 +140,63 @@ describe('if', () => {
         riba.bind(el, model);
         resetRootScope();
         expect(resetRootScope).toHaveReturned();
+    });
+});
+
+describe('Array observe and unobserve', () => {
+    const riba = new Riba();
+    riba.module.binderService.regist(eachStarBinderWrapper());
+
+    let fragment: DocumentFragment;
+    let el1: HTMLDivElement;
+    let elEach: HTMLDivElement;
+    let el2: HTMLDivElement;
+    let el3: HTMLDivElement;
+    let model: any;
+
+    beforeEach(() => {
+        /*
+          DOM for test
+          <div>
+            <div rv-if='scope.visible'>
+              <div>
+                <div rv-each-item='scope.items'>{item.data}</div>
+              </div>
+            </div>
+            <div>
+              <div rv-each-item='scope.items'>{item.data}</div>
+            </div>
+          </div>
+        */
+        // fragment = document.createElement('div');
+        fragment = document.createDocumentFragment();
+        el1 = document.createElement('div');
+        el1.setAttribute('rv-if', 'scope.visible');
+        el2 = document.createElement('div');
+        elEach = document.createElement('div');
+        elEach.setAttribute('rv-each-item', 'scope.items');
+        elEach.innerHTML = '{item.data}';
+        el2.appendChild(elEach);
+        el1.appendChild(el2);
+        el3 = document.createElement('div');
+        elEach = document.createElement('div');
+        elEach.setAttribute('rv-each-item', 'scope.items');
+        elEach.innerHTML = '{item.data}';
+        el3.appendChild(elEach);
+        fragment.appendChild(el1);
+        fragment.appendChild(el3);
+
+        model = { scope: { items: [], visible: true } };
+    });
+
+    it('observes array changes after another array binding is unbound', () => {
+        riba.bind(fragment, model);
+        model.scope.items.push({ data: 'data' });
+        expect(el3.childNodes.length).toEqual(2);
+        model.scope.items.push({ data: 'data' });
+        expect(el3.childNodes.length).toEqual(3);
+        model.scope.visible = false;
+        model.scope.items.push({ data: 'data' });
+        expect(el3.childNodes.length).toEqual(4);
     });
 });
