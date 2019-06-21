@@ -7,7 +7,7 @@ export class LocalesStaticService extends ALocalesService {
     [id: string]: LocalesStaticService;
   } = {};
 
-  public static getInstance(id: string) {
+  public static getInstance(id: string = 'main') {
     return LocalesStaticService.instances[id];
   }
 

@@ -135,13 +135,15 @@ class Dom {
   /**
    * Put the container on the page
    */
-  public putContainer(element: HTMLElement | JQuery<Element>) {
+  public putContainer(element: HTMLElement | JQuery<Element>, appendChild: 'append' | 'replace' = 'replace') {
     this.debug('putContainer', element);
     if ((element as JQuery<Element>).jquery) {
       element = element as JQuery<Element>;
       element.css('visibility', 'hidden');
       const wrapper = this.getWrapper()[0];
-      wrapper.appendChild(element[0]);
+      for (const el of element) {
+        wrapper.appendChild(el);
+      }
     } else {
       element = element as HTMLElement;
       element.style.visibility = 'hidden';
