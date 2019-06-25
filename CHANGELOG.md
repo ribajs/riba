@@ -1,5 +1,9 @@
 # Changelog
 
+## Dev
+- Moved from mocha to jest
+- Removed Rivets.js components feature (we have RibaComponents based on Custom Elements)
+
 ## 0.16.2
 
 - Renamed to Riba (Rivets.js + barba.js)
