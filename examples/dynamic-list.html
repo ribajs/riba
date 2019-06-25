@@ -1,6 +1,6 @@
 <html>
 <head>
-    <script src="../dist/rivets.js"></script>
+    <script src="./index.js"></script>
 </head>
 
 
@@ -19,38 +19,5 @@
 
 </div>
 
-
-<script>
-  function getItems() {
-    return [{name: 'x', value: 2} ,{name: 'y', value: 1} , {name: 'z', value: 3}]
-  }
-  var model = {
-    items: getItems(),
-    push() {
-      model.items.push({name: 'pushed'})
-    },
-    pop() {
-      model.items.pop()
-    },
-    shift() {
-      model.items.shift()
-    },
-    unshift() {
-      model.items.unshift({name: 'shifted'})
-    },
-    splice() {
-      model.items.splice(1, 1, {name: 'spliced1'}, {name: 'spliced2'})
-    },
-    reset() {
-      model.items = getItems()
-    },
-    sort() {
-      model.items.sort(function (a, b) {
-        return (a.value || 0) - (b.value || 0)
-      })
-    }
-  }
-  rivets.bind(document.getElementById("test"), model);
-</script>
 </body>
 </html>
