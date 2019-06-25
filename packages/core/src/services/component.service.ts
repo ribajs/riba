@@ -1,6 +1,6 @@
 import { Debug } from '../modules';
 import { IComponents } from '../interfaces';
-import { RibaComponent } from '../components/riba-component';
+import { AbstractRibaComponent } from '../components';
 
 export class ComponentService {
 
@@ -20,7 +20,7 @@ export class ComponentService {
    * @param ComponentWrapper
    * @param name
    */
-  public registWrapper(componentWrapper: typeof RibaComponent): IComponents {
+  public registWrapper(componentWrapper: typeof AbstractRibaComponent): IComponents {
     this.components[componentWrapper.tagName] = componentWrapper;
     return this.components;
   }
@@ -30,7 +30,7 @@ export class ComponentService {
    * @param component
    * @param name
    */
-  public regist(component: typeof RibaComponent): IComponents {
+  public regist(component: typeof AbstractRibaComponent): IComponents {
     this.debug('name', name, component);
     this.components[component.tagName] = component;
     return this.components;

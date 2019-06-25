@@ -1,6 +1,6 @@
-import { Debug, RibaComponent, JQuery } from '@ribajs/core';
+import { Debug, AbstractRibaComponent, JQuery } from '@ribajs/core';
 
-export abstract class ShopifySectionComponent extends RibaComponent {
+export abstract class ShopifySectionComponent extends AbstractRibaComponent {
 
   public static tagName: string = 'rv-shopify-section';
 

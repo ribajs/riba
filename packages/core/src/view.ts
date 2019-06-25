@@ -9,7 +9,7 @@ import { Binding } from './binding';
 import { ComponentService} from './services/component.service';
 import { parseNode, parseDeclaration } from './parsers';
 import { Debug } from './modules/debug.module';
-import { RibaComponentClass } from './components/riba-component-class';
+import { RibaComponent, AbstractRibaComponent } from './components';
 
 export type TBlock = boolean;
 
@@ -59,7 +59,7 @@ export class View {
   public models: any;
   public options: IViewOptions;
   public bindings: Array<Binding> = [];
-  public webComponents: Array<RibaComponentClass> = [];
+  public webComponents: Array<AbstractRibaComponent> = [];
   // public componentView: View | null = null;
 
   /**
@@ -193,7 +193,7 @@ export class View {
     if (!block) {
       const nodeName = node.nodeName.toLowerCase();
       if (this.options.components && this.options.components[nodeName] && !node._bound) {
-        const COMPONENT = (this.options.components[nodeName] as typeof RibaComponentClass);
+        const COMPONENT = (this.options.components[nodeName] as typeof RibaComponent);
         // Fallback
         if (!window.customElements) {
           View.debug(`Fallback for Webcomponent ${nodeName}`);

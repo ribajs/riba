@@ -1,7 +1,7 @@
-import { RibaComponent, Debug, JQuery as $, EventDispatcher, Binder } from '@ribajs/core';
+import { AbstractRibaComponent, Debug, JQuery as $, EventDispatcher, Binder } from '@ribajs/core';
 import { CollapseService } from '../../services/collapse.service';
 
-export class NavbarComponent extends RibaComponent {
+export class NavbarComponent extends AbstractRibaComponent {
 
   public static tagName: string = 'bs4-navbar';
 

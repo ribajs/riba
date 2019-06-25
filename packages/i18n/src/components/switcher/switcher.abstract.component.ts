@@ -1,5 +1,5 @@
 import {
-  RibaComponent,
+  AbstractRibaComponent,
   JQuery,
   Debug,
   Binder,
@@ -15,7 +15,7 @@ export interface IScope {
   ready: boolean;
 }
 
-export abstract class AI18nSwitcherComponent extends RibaComponent {
+export abstract class AI18nSwitcherComponent extends AbstractRibaComponent {
 
   protected abstract localesService: ALocalesService;
 
@@ -82,7 +82,7 @@ export abstract class AI18nSwitcherComponent extends RibaComponent {
         this.initLocales(langcode)
         .then((langcodes) => {
           super.init(observedAttributes)
-          .then((view) => {
+          .then((view: View) => {
             resolve(view);
           });
         });
