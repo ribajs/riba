@@ -46,10 +46,6 @@ export class Binding {
    */
   public marker?: Comment;
   /**
-   * Used in component bindings. TODO e.g. move to ComponentBinding or binders?
-   */
-  public _bound?: boolean;
-  /**
    * just to have a value where we could store custom data
    */
   public customData?: any;

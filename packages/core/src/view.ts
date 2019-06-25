@@ -3,10 +3,10 @@ import {
   Binder,
   ITwoWayBinder,
   IViewOptions,
+  IBindableElement,
 } from './interfaces';
 import { Binding } from './binding';
 import { ComponentService} from './services/component.service';
-import { ComponentBinding, IBoundElement } from './components/component-binding';
 import { parseNode, parseDeclaration } from './parsers';
 import { Debug } from './modules/debug.module';
 import { RibaComponentClass } from './components/riba-component-class';
@@ -31,7 +31,7 @@ export class View {
     },
   };
 
-  public static bindingComparator = (a: Binding | ComponentBinding, b: Binding | ComponentBinding) => {
+  public static bindingComparator = (a: Binding, b: Binding) => {
     const aPriority = (a as Binding).binder ? (((a as Binding).binder as ITwoWayBinder<any>).priority || 0) : 0;
     const bPriority = (b as Binding).binder ? (((b as Binding).binder as ITwoWayBinder<any>).priority || 0) : 0;
     return bPriority - aPriority;
@@ -58,7 +58,7 @@ export class View {
   public els: HTMLCollection | HTMLElement[] | Node[];
   public models: any;
   public options: IViewOptions;
-  public bindings: Array<Binding | ComponentBinding> = [];
+  public bindings: Array<Binding> = [];
   public webComponents: Array<RibaComponentClass> = [];
   // public componentView: View | null = null;
 
@@ -109,7 +109,7 @@ export class View {
     this.bindings.sort(View.bindingComparator);
   }
 
-  public traverse(node: IBoundElement): TBlock {
+  public traverse(node: IBindableElement): TBlock {
 
     let bindingPrefix;
     if (this.options.fullPrefix) {
@@ -193,50 +193,39 @@ export class View {
     if (!block) {
       const nodeName = node.nodeName.toLowerCase();
       if (this.options.components && this.options.components[nodeName] && !node._bound) {
-
-        const type = ComponentService.type(this.options.components[nodeName]);
-
-        // bind (deprecated) components and stop / block the parsing of the childs
-        if (type === 'classic') {
-          this.bindings.push(new ComponentBinding((this as View), node, nodeName));
-          View.debug(`Stop parsing on (deprecated) component ${nodeName}`);
-        }
-
-        if (type === 'webcomponent') {
-          const COMPONENT = (this.options.components[nodeName] as typeof RibaComponentClass);
-          // Fallback
-          if (!window.customElements) {
-            View.debug(`Fallback for Webcomponent ${nodeName}`);
-            const component = new COMPONENT(node, {
-              fallback: true,
-              view: this,
-            });
-            this.webComponents.push(component);
+        const COMPONENT = (this.options.components[nodeName] as typeof RibaComponentClass);
+        // Fallback
+        if (!window.customElements) {
+          View.debug(`Fallback for Webcomponent ${nodeName}`);
+          const component = new COMPONENT(node, {
+            fallback: true,
+            view: this,
+          });
+          this.webComponents.push(component);
+        } else {
+          View.debug(`Define Webcomponent ${nodeName} with customElements.define`);
+          // if node.constructor is not HTMLElement and not HTMLUnknownElement, it was registed
+          // @see https://stackoverflow.com/questions/27334365/how-to-get-list-of-registered-custom-elements
+          if (customElements.get(nodeName) || (node.constructor !== HTMLElement && node.constructor !== HTMLUnknownElement)) {
+            View.debug(`Web component already defined`, node.constructor);
           } else {
-            View.debug(`Define Webcomponent ${nodeName} with customElements.define`);
-            // if node.constructor is not HTMLElement and not HTMLUnknownElement, it was registed
-            // @see https://stackoverflow.com/questions/27334365/how-to-get-list-of-registered-custom-elements
-            if (customElements.get(nodeName) || (node.constructor !== HTMLElement && node.constructor !== HTMLUnknownElement)) {
-              View.debug(`Web component already defined`, node.constructor);
-            } else {
-              try {
-                customElements.define(nodeName, COMPONENT);
-                // TODO ?? call unbind (on unbind this view) of this component instance to unbind this view
-                // (not disconnectedCallback / disconnectedFallbackCallback, this is automatically called from customElements)
-                const component = customElements.get(nodeName);
-                component.context = {
-                  fallback: false,
-                  view: this,
-                };
-              } catch (error) {
-                console.error(error);
-                // Fallback
-                const component = new COMPONENT(node, {
-                  fallback: true,
-                  view: this,
-                });
-                this.webComponents.push(component);
-              }
+            try {
+              customElements.define(nodeName, COMPONENT);
+              // TODO ?? call unbind (on unbind this view) of this component instance to unbind this view
+              // (not disconnectedCallback / disconnectedFallbackCallback, this is automatically called from customElements)
+              const component = customElements.get(nodeName);
+              component.context = {
+                fallback: false,
+                view: this,
+              };
+            } catch (error) {
+              console.error(error);
+              // Fallback
+              const component = new COMPONENT(node, {
+                fallback: true,
+                view: this,
+              });
+              this.webComponents.push(component);
             }
           }
         }

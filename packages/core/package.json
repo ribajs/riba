@@ -24,8 +24,7 @@
     "url": "git+https://github.com/ribajs/riba.git"
   },
   "scripts": {
-    "test:deprecated": "npm run build:browser && mocha-chrome spec/runner.html && mocha-chrome spec-deprecated/runner.min.html",
-    "test:deprecated2": "npm run webpack:test && mocha-chrome spec/runner.html",
+    "test:deprecated": "npm run build:browser && mocha-chrome spec/runner.html",
     "test": "jest --config=jest.config.js",
     "type-check": "tslint -c tslint.json 'src/**/*.ts' && tsc --noEmit",
     "build": "tsc",
@@ -45,7 +44,7 @@
     "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-typescript": "^7.1.0",
-    "@types/jest": "^24.0.12",
+    "@types/jest": "^24.0.15",
     "@types/jquery": "^3.3.29",
     "babel-loader": "^8.0.4",
     "babel-plugin-array-includes": "^2.0.3",

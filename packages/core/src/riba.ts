@@ -5,7 +5,6 @@ import {
   IAdapters,
   Root,
   IComponents,
-  IClassicComponent,
   IOptionsParam,
   IViewOptions,
 } from './interfaces';
@@ -201,30 +200,6 @@ export class Riba {
           break;
       }
     });
-  }
-
-  /**
-   * Initializes a new instance of a component on the specified element and
-   * returns a riba.View instance.
-   */
-  public init(componentKey: string, el: HTMLElement, data = {}) {
-    if (!el) {
-      el = document.createElement('div');
-    }
-
-    // Component is depricated component
-    if (this.components[componentKey].hasOwnProperty('initialize') && this.components[componentKey].hasOwnProperty('template')) {
-      const component = (this.components[componentKey] as IClassicComponent<any>);
-      const template = component.template.call(this, el);
-      if (template !== null) {
-        el.innerHTML = template;
-      }
-      const scope = component.initialize.call(this, el, data);
-
-      const view = this.bind(el, scope);
-      view.bind();
-      return view;
-    }
   }
 
   public getViewOptions(options?: IOptionsParam) {

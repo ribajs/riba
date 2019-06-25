@@ -12,7 +12,7 @@ export declare class RibaComponentClass extends RibaComponent {
 
   protected debug: Debug.IDebugger;
   protected view?: View;
-  protected _bound: boolean;
+  // protected _bound: boolean;
 
   protected templateLoaded: boolean;
 

@@ -1,5 +1,9 @@
 import { Binding } from '../binding';
 
+export interface IBindableElement extends HTMLElement {
+  _bound?: boolean;
+}
+
 /**
  * One way binder interface
  */
