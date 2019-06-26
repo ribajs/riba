@@ -19,7 +19,7 @@ export declare class RibaComponent extends AbstractRibaComponent {
 
   protected templateLoaded: boolean;
 
-  protected el: HTMLElement;
+  protected el: HTMLUnknownElement;
 
   protected scope: any;
 
@@ -28,7 +28,7 @@ export declare class RibaComponent extends AbstractRibaComponent {
    */
   protected autobind: boolean;
 
-  constructor(element?: HTMLElement, context?: IRibaComponentContext);
+  constructor(element?: HTMLUnknownElement, context?: IRibaComponentContext);
 
   public disconnectedFallbackCallback(): void;
 

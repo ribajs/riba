@@ -1,5 +1,5 @@
 import { Debug } from '../modules';
-import { Binder, IModuleBinderWrapper, IModuleBinders } from '../interfaces';
+import { IBinder, IModuleBinderWrapper, IModuleBinders } from '../interfaces';
 import { Utils } from './utils';
 
 /**
@@ -38,7 +38,7 @@ export class BindersService {
    * @param binder
    * @param name
    */
-  public regist(binder: Binder<any> | IModuleBinderWrapper, name?: string): IModuleBinders<any> {
+  public regist(binder: IBinder<any> | IModuleBinderWrapper, name?: string): IModuleBinders<any> {
 
     if (binder.hasOwnProperty('binder')) {
       binder = (binder as IModuleBinderWrapper);
@@ -54,8 +54,8 @@ export class BindersService {
       throw new Error('[BindersService] name is required');
     }
 
-    // if Binder<any>
-    this.binders[name] = (binder as Binder<any>);
+    // if IBinder<any>
+    this.binders[name] = (binder as IBinder<any>);
     return this.binders;
   }
 

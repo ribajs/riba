@@ -1,8 +1,10 @@
-import { IOneWayBinder } from '../interfaces';
+import { IBinder } from '../interfaces';
 
 /**
  * Disables the element when value is true (negated version of `enabled` binder).
  */
-export const disabled: IOneWayBinder<boolean> = (el: HTMLElement, value: boolean) => {
-  (el as HTMLButtonElement).disabled = !!value;
+export const disabled: IBinder<boolean> = {
+  routine(el: HTMLUnknownElement, value: boolean) {
+    (el as HTMLButtonElement).disabled = !!value;
+  },
 };

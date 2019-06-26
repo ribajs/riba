@@ -2,7 +2,7 @@ import {
   AbstractRibaComponent,
   JQuery,
   Debug,
-  Binder,
+  IBinder,
   View,
 } from '@ribajs/core';
 import { ILangcode } from '../../interfaces';
@@ -38,7 +38,7 @@ export abstract class AI18nSwitcherComponent extends AbstractRibaComponent {
    * @param langcode
    * @param event
    */
-  public switch(langcode: ILangcode, context: Binder<any>, event: Event) {
+  public switch(langcode: ILangcode, context: IBinder<any>, event: Event) {
     event.preventDefault();
     event.stopPropagation();
     this.debug('switch', langcode);
@@ -52,7 +52,7 @@ export abstract class AI18nSwitcherComponent extends AbstractRibaComponent {
    * @param langcode
    * @param event
    */
-  public toggle(context: Binder<any>, event: Event) {
+  public toggle(context: IBinder<any>, event: Event) {
     event.preventDefault();
     event.stopPropagation();
     this.debug('toggle');
@@ -82,7 +82,7 @@ export abstract class AI18nSwitcherComponent extends AbstractRibaComponent {
         this.initLocales(langcode)
         .then((langcodes) => {
           super.init(observedAttributes)
-          .then((view: View) => {
+          .then((view) => {
             resolve(view);
           });
         });

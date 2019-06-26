@@ -1,8 +1,8 @@
-import { ITwoWayBinder, BinderWrapper, Utils, EventDispatcher, JQuery } from '@ribajs/core';
+import { IBinder, BinderWrapper, Utils, EventDispatcher, JQuery } from '@ribajs/core';
 
 export const parentRouteClassStarBinderWrapper: BinderWrapper = () => {
 
-  const binder: ITwoWayBinder<string> = {
+  const binder: IBinder<string> = {
 
     bind(el: HTMLUnknownElement) {
       this.customData = {

@@ -1,4 +1,4 @@
-import { AbstractRibaComponent, Debug, JQuery as $, EventDispatcher, Binder } from '@ribajs/core';
+import { AbstractRibaComponent, Debug, JQuery as $, EventDispatcher, IBinder } from '@ribajs/core';
 import { CollapseService } from '../../services/collapse.service';
 
 export class NavbarComponent extends AbstractRibaComponent {
@@ -52,7 +52,7 @@ export class NavbarComponent extends AbstractRibaComponent {
     this.init(NavbarComponent.observedAttributes);
   }
 
-  public toggle(context: Binder<any>, event: Event) {
+  public toggle(context: IBinder<any>, event: Event) {
     this.debug('toggle');
     this.collapseService.toggle();
     event.preventDefault();

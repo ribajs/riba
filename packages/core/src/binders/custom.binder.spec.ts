@@ -2,13 +2,15 @@ import {
     Riba,
 } from '../riba';
 
-import { IOneWayBinder } from '../interfaces';
+import { IBinder } from '../interfaces';
 
 /**
  * Sets the element's text value.
  */
-export const custom: IOneWayBinder<string> = (el: HTMLElement, value: string) => {
-  el.innerHTML = 'received ' + value;
+export const custom: IBinder<string> = {
+  routine(el: HTMLElement, value: string) {
+    el.innerHTML = 'received ' + value;
+  },
 };
 
 describe('Custom binder with no attribute value', () => {

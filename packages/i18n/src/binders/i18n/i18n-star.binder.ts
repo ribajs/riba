@@ -1,4 +1,4 @@
-import { Utils, ITwoWayBinder, BinderWrapper, JQuery as $ } from '@ribajs/core';
+import { Utils, IBinder, BinderWrapper, JQuery as $ } from '@ribajs/core';
 import { ALocalesService } from '../../services/locales-base.service';
 
 // see star.binder.ts
@@ -16,7 +16,7 @@ export interface IBinderAttributeChangedEvent {
  */
 export const i18nStarBinderWrapper: BinderWrapper = (localesService: ALocalesService) => {
   const name = 'i18n-*';
-  const binder: ITwoWayBinder<string> = {
+  const binder: IBinder<string> = {
     block: false,
     priority: 0,
     bind(el: HTMLUnknownElement) {

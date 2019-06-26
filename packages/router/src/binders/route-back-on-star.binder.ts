@@ -1,4 +1,4 @@
-import { ITwoWayBinder, BinderWrapper, eventHandlerFunction, JQuery } from '@ribajs/core';
+import { IBinder, BinderWrapper, eventHandlerFunction, JQuery } from '@ribajs/core';
 
 export const goBack = () => {
   window.history.back();
@@ -11,7 +11,7 @@ const routeBackOnStarBinderWrapper: BinderWrapper = () => {
 
   const name = 'route-back-on-*';
 
-  const binder: ITwoWayBinder<eventHandlerFunction> = {
+  const binder: IBinder<eventHandlerFunction> = {
     priority: 3000,
 
     bind(el) {

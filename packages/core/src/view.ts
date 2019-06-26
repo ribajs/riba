@@ -1,7 +1,6 @@
 import { Riba } from './riba';
 import {
-  Binder,
-  ITwoWayBinder,
+  IBinder,
   IViewOptions,
   IBindableElement,
 } from './interfaces';
@@ -25,15 +24,15 @@ export class View {
 
   public static DECLARATION_SPLIT = /((?:'[^']*')*(?:(?:[^\|']*(?:'[^']*')+[^\|']*)+|[^\|]+))|^$/g;
 
-  public static textBinder: ITwoWayBinder<string> = {
+  public static textBinder: IBinder<string> = {
     routine: (node: IDataElement, value: string) => {
       node.data = (value != null) ? value : '';
     },
   };
 
   public static bindingComparator = (a: Binding, b: Binding) => {
-    const aPriority = (a as Binding).binder ? (((a as Binding).binder as ITwoWayBinder<any>).priority || 0) : 0;
-    const bPriority = (b as Binding).binder ? (((b as Binding).binder as ITwoWayBinder<any>).priority || 0) : 0;
+    const aPriority = (a as Binding).binder ? (((a as Binding).binder as IBinder<any>).priority || 0) : 0;
+    const bPriority = (b as Binding).binder ? (((b as Binding).binder as IBinder<any>).priority || 0) : 0;
     return bPriority - aPriority;
   }
 
@@ -82,11 +81,11 @@ export class View {
     this.build();
   }
 
-  public buildBinding(node: HTMLElement | Text, type: string | null, declaration: string, binder: Binder<any>, identifier: string | null) {
+  public buildBinding(node: HTMLUnknownElement, type: string | null, declaration: string, binder: IBinder<any>, identifier: string | null) {
     const parsedDeclaration = parseDeclaration(declaration);
     const keypath = parsedDeclaration.keypath;
     const pipes = parsedDeclaration.pipes;
-    this.bindings.push(new Binding((this as View), (node as HTMLElement), type, keypath, binder, pipes, identifier));
+    this.bindings.push(new Binding((this as View), node, type, keypath, binder, pipes, identifier));
   }
 
   /**
@@ -130,7 +129,7 @@ export class View {
     const starBinders = this.options.starBinders;
 
     // bind attribute binders if available
-    if (this.options.binders) {
+    if (attributes && this.options.binders) {
       for (let i = 0, len = attributes.length; i < len; i++) {
         let nodeName = null;
         let binder = null;
@@ -168,9 +167,9 @@ export class View {
 
           // if block is set childs not bound (the binder bound it by itself)
           // and build binding directly (do not push it to bindInfos array)
-          if ((binder as ITwoWayBinder<any>).block) {
+          if ((binder as IBinder<any>).block) {
             this.buildBinding(node, nodeName, attribute.value, binder, identifier);
-            if (this.options.removeBinderAttributes) {
+            if (node.removeAttribute && this.options.removeBinderAttributes) {
               node.removeAttribute(attribute.name);
             }
             return true;
@@ -183,7 +182,7 @@ export class View {
       for (let i = 0; i < bindInfos.length; i++) {
         const bindInfo = bindInfos[i];
         this.buildBinding(node, bindInfo.nodeName, bindInfo.attr.value, bindInfo.binder, bindInfo.identifier);
-        if (this.options.removeBinderAttributes) {
+        if (node.removeAttribute && this.options.removeBinderAttributes) {
           node.removeAttribute(bindInfo.attr.name);
         }
       }
@@ -278,7 +277,7 @@ export class View {
    */
   public publish() {
     this.bindings.forEach((binding) => {
-      if ((binding as Binding).binder && binding.publish && ((binding as Binding).binder as ITwoWayBinder<any>).publishes) {
+      if ((binding as Binding).binder && binding.publish && ((binding as Binding).binder as IBinder<any>).publishes) {
         binding.publish();
       }
     });

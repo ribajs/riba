@@ -18,7 +18,7 @@
     "url": "https://github.com/ribajs/riba.git"
   },
   "scripts": {
-    "link": "cd packages/core && npm run link && cd ../i18n && npm run link && cd ../router && npm run link && cd ../bs4 && npm run link && cd ../shopify && npm run link && cd ../shopify-easdk && npm run link && cd ../shopify-tda && npm run link && cd ../core && npm install",
+    "link": "(cd packages/core && npm run link) && (cd packages/i18n && npm run link) && (cd packages/router && npm run link) && (cd packages/bs4 && npm run link) && (cd packages/shopify && npm run link) && (cd packages/shopify-easdk && npm run link) && (cd packages/shopify-tda && npm run link) && (cd packages/core && npm install)",
     "publish": "node tools/publish.js",
     "doc": "harp server docs/_harp ./docs",
     "build-doc": "harp compile docs/_harp ./docs"

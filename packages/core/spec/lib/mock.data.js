@@ -14,7 +14,7 @@ Data.prototype.hasCallback = function(key, callback) {
   return indexOf(this.change[key], callback) !== -1;
 };
 
-indexOf = function(array, value) {
+var indexOf = function(array, value) {
   array = array || [];
   if(array.indexOf)
     return array.indexOf(value);

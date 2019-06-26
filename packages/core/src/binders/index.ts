@@ -4,7 +4,7 @@ import { animateStar } from './animateStarStar.binder';
 import { assign } from './assign.binder';
 import { addClass } from './class.binder';
 import { checked } from './checked.binder';
-import { classStarJQuery } from './class-star.binder';
+import { classStar } from './class-star.binder';
 import { cssStarBinder } from './css-star.binder';
 import { enabled } from './enabled.binder';
 import { disabled } from './disabled.binder';
@@ -64,7 +64,7 @@ export const basicBindersWrapper = (jQuery: JQueryStatic) => {
      * class-{classname}
      * Adds or removes the class from the element when value is true or false.
      */
-    'class-*': classStarJQuery,
+    'class-*': classStar,
 
     /**
      * class-{style attribute name}

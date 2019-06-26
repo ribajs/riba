@@ -1,4 +1,4 @@
-import { Debug, JQuery, ITwoWayBinder, BinderWrapper, EventDispatcher, Utils, View as RivetsView } from '@ribajs/core';
+import { Debug, JQuery, IBinder, BinderWrapper, EventDispatcher, Utils, View as RivetsView } from '@ribajs/core';
 import { Pjax, Prefetch, HideShowTransition } from '../services';
 import { IState } from '../interfaces';
 
@@ -18,7 +18,7 @@ export const viewBinderWrapper: BinderWrapper = () => {
 
   const debug = Debug('binders:view');
 
-  const binder: ITwoWayBinder<string> = {
+  const binder: IBinder<string> = {
 
     block: true,
 

@@ -35,9 +35,9 @@ export abstract class AbstractRibaComponent extends FakeHTMLElement {
 
   protected riba?: Riba;
 
-  protected el: HTMLElement;
+  protected el: HTMLUnknownElement;
 
-  // protected $el: JQuery<HTMLElement>;
+  // protected $el: JQuery<HTMLUnknownElement>;
 
   protected abstract scope: any;
 
@@ -52,7 +52,7 @@ export abstract class AbstractRibaComponent extends FakeHTMLElement {
 
   private attributeObserverFallback?: MutationObserver;
 
-  constructor(element?: HTMLElement, context?: IRibaComponentContext) {
+  constructor(element?: HTMLUnknownElement, context?: IRibaComponentContext) {
     super(element);
     this.context = context;
     this.debug = Debug('component:AbstractRibaComponent');
@@ -61,7 +61,7 @@ export abstract class AbstractRibaComponent extends FakeHTMLElement {
     if (element) {
       this.el = element;
     } else if (window.customElements) {
-      this.el = ((this as any) as HTMLElement);
+      this.el = this as unknown as HTMLElement;
     } else {
       throw new Error(`element is required on browsers without custom elements support`);
     }

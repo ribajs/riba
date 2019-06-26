@@ -1,23 +1,17 @@
 import { Binding } from '../binding';
 
-export interface IBindableElement extends HTMLElement {
+export interface IBindableElement extends HTMLUnknownElement {
   _bound?: boolean;
 }
-
 /**
- * One way binder interface
+ * A one way or to way binder interface
  */
-export type IOneWayBinder<ValueType> = (this: Binding, element: HTMLElement, value: ValueType) => void;
-
-/**
- * To way binder interface
- */
-export interface ITwoWayBinder<ValueType> {
-  routine: (this: Binding, element: HTMLElement, value: ValueType) => void;
-  bind?: (this: Binding, element: HTMLElement) => void;
-  unbind?: (this: Binding, element: HTMLElement) => void;
+export interface IBinder<ValueType> {
+  routine: (this: Binding, element: HTMLUnknownElement, value: ValueType) => void;
+  bind?: (this: Binding, element: HTMLUnknownElement) => void;
+  unbind?: (this: Binding, element: HTMLUnknownElement) => void;
   update?: (this: Binding, model: any) => void;
-  getValue?: (this: Binding, element: HTMLElement) => void;
+  getValue?: (this: Binding, element: HTMLUnknownElement) => void;
   block?: boolean;
   function?: boolean;
   publishes?: boolean;
@@ -25,15 +19,10 @@ export interface ITwoWayBinder<ValueType> {
 }
 
 /**
- * A binder can be a one way binder or a two way binder
- */
-export type Binder<ValueType> = IOneWayBinder<ValueType> | ITwoWayBinder<ValueType>;
-
-/**
  * A list of binders with any key name
  */
 export interface IModuleBinders<ValueType> {
-  [name: string]: Binder<ValueType>;
+  [name: string]: IBinder<any>;
 }
 
 /**
@@ -41,5 +30,5 @@ export interface IModuleBinders<ValueType> {
  */
 export interface IModuleBinderWrapper {
   name: string;
-  binder: Binder<any>;
+  binder: IBinder<any>;
 }

@@ -1,4 +1,4 @@
-import { IOneWayBinder } from '../interfaces';
+import { IBinder } from '../interfaces';
 import { Utils } from '../services/utils';
 
 export interface IAssign {
@@ -10,6 +10,8 @@ export interface IAssign {
  * Assign a value in your model, value must be a object
  * experimental, please TESTME
  */
-export const assign: IOneWayBinder<IAssign> = function(el: HTMLElement, obj: any) {
-  Utils.extend(false, this.view.models, obj);
+export const assign: IBinder<IAssign> = {
+  routine(el: HTMLElement, obj: any) {
+    Utils.extend(false, this.view.models, obj);
+  },
 };

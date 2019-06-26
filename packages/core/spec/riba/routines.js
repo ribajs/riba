@@ -77,13 +77,13 @@ describe('Routines', function() {
 
   describe('text', function() {
     it("sets the element's text content", function() {
-      riba.binders.text(el, '<em>hello</em>');
+      riba.binders.text.routine(el, '<em>hello</em>');
       el.textContent.should.equal('<em>hello</em>');
       el.innerHTML.should.equal('&lt;em&gt;hello&lt;/em&gt;');
     });
 
     it("sets the element's text content to zero when a numeric zero is passed", function() {
-      riba.binders.text(el, 0);
+      riba.binders.text.routine(el, 0);
       el.textContent.should.equal('0');
       el.innerHTML.should.equal('0');
     });
@@ -91,13 +91,13 @@ describe('Routines', function() {
 
   describe('html', function() {
     it("sets the element's HTML content", function() {
-      riba.binders.html(el, '<strong>hello</strong>');
+      riba.binders.html.routine(el, '<strong>hello</strong>');
       el.textContent.should.equal('hello');
       el.innerHTML.should.equal('<strong>hello</strong>');
     });
 
     it("sets the element's HTML content to zero when a zero value is passed", function() {
-      riba.binders.html(el, 0);
+      riba.binders.html.routine(el, 0);
       el.textContent.should.equal('0');
       el.innerHTML.should.equal('0');
     });
@@ -177,14 +177,14 @@ describe('Routines', function() {
   describe('show', function() {
     describe('with a truthy value', function() {
       it('shows the element', function() {
-        riba.binders.show(el, true);
+        riba.binders.show.routine(el, true);
         el.style.display.should.equal('');
       });
     });
 
     describe('with a falsey value', function() {
       it('hides the element', function() {
-        riba.binders.show(el, false);
+        riba.binders.show.routine(el, false);
         el.style.display.should.equal('none');
       });
     });
@@ -193,14 +193,14 @@ describe('Routines', function() {
   describe('hide', function() {
     describe('with a truthy value', function() {
       it('hides the element', function() {
-        riba.binders.hide(el, true);
+        riba.binders.hide.routine(el, true);
         el.style.display.should.equal('none');
       });
     });
 
     describe('with a falsey value', function() {
       it('shows the element', function() {
-        riba.binders.hide(el, false);
+        riba.binders.hide.routine(el, false);
         el.style.display.should.equal('');
       });
     });
@@ -209,14 +209,14 @@ describe('Routines', function() {
   describe('enabled', function() {
     describe('with a truthy value', function() {
       it('enables the element', function() {
-        riba.binders.enabled(el, true);
+        riba.binders.enabled.routine(el, true);
         el.disabled.should.equal(false);
       });
     });
 
     describe('with a falsey value', function() {
       it('disables the element', function() {
-        riba.binders.enabled(el, false);
+        riba.binders.enabled.routine(el, false);
         el.disabled.should.equal(true);
       });
     });
@@ -225,14 +225,14 @@ describe('Routines', function() {
   describe('disabled', function() {
     describe('with a truthy value', function() {
       it('disables the element', function() {
-        riba.binders.disabled(el, true);
+        riba.binders.disabled.routine(el, true);
         el.disabled.should.equal(true);
       });
     });
 
     describe('with a falsey value', function() {
       it('enables the element', function() {
-        riba.binders.disabled(el, false);
+        riba.binders.disabled.routine(el, false);
         el.disabled.should.equal(false);
       });
     });

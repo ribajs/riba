@@ -1,8 +1,8 @@
-import { ITwoWayBinder } from '../interfaces';
+import { IBinder } from '../interfaces';
 import { JQuery as $ } from '../modules/jquery.module';
 import { BinderWrapper } from '../services/binder.service';
 
-export const addClass: ITwoWayBinder<string> = {
+export const addClass: IBinder<string> = {
   function: true,
   priority: 1000,
 

@@ -1,8 +1,8 @@
-import { ITwoWayBinder } from '../interfaces';
+import { IBinder } from '../interfaces';
 import { BinderWrapper } from '../services/binder.service';
 import { View } from '../view';
 
-export const ifBinder: ITwoWayBinder<boolean> = {
+export const ifBinder: IBinder<boolean> = {
   block: true,
   priority: 4000,
 

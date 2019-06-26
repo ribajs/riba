@@ -1,7 +1,7 @@
 import {
   IModuleFormatters,
   IModuleBinders,
-  ITwoWayBinder,
+  IBinder,
   IAdapters,
   Root,
   IComponents,
@@ -33,7 +33,7 @@ const publishBinderChangeEventHandler = function(this: any, event: Event) {
  * Sets the attribute on the element. If no binder above is matched it will fall
  * back to using this binder.
  */
-export const fallbackBinder: ITwoWayBinder<string> = {
+export const fallbackBinder: IBinder<string> = {
   bind(el) {
     // Listen for changes from web component
     el.addEventListener('publish-binder-change:' + this.type, publishBinderChangeEventHandler.bind(this));

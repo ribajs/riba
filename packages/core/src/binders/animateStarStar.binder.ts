@@ -1,8 +1,8 @@
 import { JQuery as $ } from '../modules';
 import { BinderWrapper } from '../services/binder.service';
-import { ITwoWayBinder } from '../interfaces';
+import { IBinder } from '../interfaces';
 
-export const animateStar: ITwoWayBinder<boolean> = {
+export const animateStar: IBinder<boolean> = {
   function: true,
   priority: 1000,
 

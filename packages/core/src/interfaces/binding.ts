@@ -1,10 +1,10 @@
-import { Binder } from './binder';
+import { IBinder } from './binder';
 import { IObserverSyncCallback } from './observer';
 import { Observer } from '../observer';
 
 export interface IBindable {
 
-  binder?: Binder<any>;
+  binder?: IBinder<any>;
 
   /**
    * Name of the binder without the prefix

@@ -19,8 +19,7 @@ describe('riba.Binding', function() {
   });
 
   it('gets assigned the proper binder routine matching the identifier', function() {
-    routineFn = binding.binder.routine || binding.binder;
-    routineFn.should.equal(riba.binders.text);
+    binding.binder.routine.should.equal(riba.binders.text.routine);
   });
 
   describe('when bind to non configurable properties', function() {
@@ -147,22 +146,13 @@ describe('riba.Binding', function() {
 
   describe('set()', function() {
     it('performs the binding routine with the supplied value', function() {
-      if (binding.binder.routine) {
-        routineFn = sinon.spy(binding.binder, 'routine');
-      } else {
-        routineFn = sinon.spy(binding, 'binder');
-      }
+      routineFn = sinon.spy(binding.binder, 'routine');
       binding.set('sweater');
       routineFn.calledWith(el, 'sweater').should.be.true();
     });
 
     it('applies any formatters to the value before performing the routine', function() {
-      if (binding.binder.routine) {
-        routineFn = sinon.spy(binding.binder, 'routine');
-      } else {
-        routineFn = sinon.spy(binding, 'binder');
-      }
-
+      routineFn = sinon.spy(binding.binder, 'routine');      }
       view.options.formatters.awesome = function(value) { return 'awesome ' + value; };
 
       binding.formatters.push('awesome');

@@ -1,9 +1,9 @@
-import { IBindable, ITwoWayBinder } from '../interfaces';
+import { IBindable, IBinder } from '../interfaces';
 import { BinderWrapper } from '../services/binder.service';
 import { View } from '../view';
 import { Utils } from '../services/utils';
 
-export const eachStarBinder: ITwoWayBinder<any[]> = {
+export const eachStarBinder: IBinder<any[]> = {
   block: true,
   priority: 4000,
 

@@ -6,7 +6,7 @@ import Popper from 'popper.js'; // /dist/umd/popper
  * @see https://github.com/twbs/bootstrap/blob/v4-dev/js/src/tooltip.js
  */
 import Debug from 'debug';
-import { Utils, ITwoWayBinder, BinderWrapper, View, JQuery as $ } from '@ribajs/core';
+import { Utils, IBinder, BinderWrapper, View, JQuery as $ } from '@ribajs/core';
 
 const template = '<div class="tooltip" role="tooltip">' +
 '<div class="arrow"></div>' +
@@ -19,7 +19,7 @@ const debug = Debug('binder:rv-bs4-tooltip');
  */
 export const tooltipBinderWrapper: BinderWrapper = () => {
   const name = 'bs4-tooltip';
-  const binder: ITwoWayBinder<string> = {
+  const binder: IBinder<string> = {
     block: false,
     bind(el: HTMLUnknownElement) {
       this.customData.$tip = $(template);

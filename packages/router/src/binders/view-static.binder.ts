@@ -1,4 +1,4 @@
-import { Debug, JQuery, ITwoWayBinder, BinderWrapper, Utils, View as RivetsView } from '@ribajs/core';
+import { Debug, JQuery, IBinder, BinderWrapper, Utils, View as RivetsView } from '@ribajs/core';
 import { Pjax, HideShowTransition } from '../services';
 
 /**
@@ -9,7 +9,7 @@ export const viewStaticBinderWrapper: BinderWrapper = () => {
   const name = 'view-static';
   const debug = Debug('binders:view-static');
 
-  const binder: ITwoWayBinder<string> = {
+  const binder: IBinder<string> = {
 
     block: true,
 

@@ -1,5 +1,5 @@
 import { Debug, JQuery as $ } from '../modules';
-import { ITwoWayBinder } from '../interfaces';
+import { IBinder } from '../interfaces';
 import { Utils } from '../services/utils';
 
 const debug = Debug('binder:value');
@@ -18,7 +18,7 @@ const getData = (el: HTMLElement) => {
  * Sets the element's value. Also sets the model property when the input changes
  * (two-way binder).
  */
-export const valueBinder: ITwoWayBinder<any> = {
+export const valueBinder: IBinder<any> = {
   publishes: true,
   priority: 3000,
 
@@ -49,7 +49,7 @@ export const valueBinder: ITwoWayBinder<any> = {
   },
 
   routine(el: HTMLElement, value: string | string[]) {
-    const oldValue = this.getValue((el as HTMLInputElement));
+    const oldValue = this.getValue(el);
     debug('routine value', value);
     if (!this.customData) {
       this.customData = getData(el);

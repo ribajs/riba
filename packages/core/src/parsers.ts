@@ -124,8 +124,8 @@ export function parseNode(view: View, node: IDataElement, templateDelimiters: Ar
   /** If true stop / block the parseNode  recursion */
   let block: TBlock = false;
 
-  // if node.nodeType === 3 === Node.TEXT_NODE
   node = ( node as IDataElement);
+  // if node.nodeType === 3 === Node.TEXT_NODE
   if (node.nodeType === 3) {
     let tokens = null;
 
@@ -142,7 +142,8 @@ export function parseNode(view: View, node: IDataElement, templateDelimiters: Ar
           node.parentNode.insertBefore(text, node);
         }
         if (token.type === 1) {
-          view.buildBinding(text, null, token.value, View.textBinder, null);
+          // TODO fix any
+          view.buildBinding(text as any, null, token.value, View.textBinder, null);
         }
       }
       if (node.parentNode) {

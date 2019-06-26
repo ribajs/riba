@@ -1,4 +1,4 @@
-import { ITwoWayBinder, eventHandlerFunction } from '../interfaces';
+import { IBinder, eventHandlerFunction } from '../interfaces';
 // import Debug from 'debug';
 import { BinderWrapper } from '../services/binder.service';
 
@@ -9,7 +9,7 @@ const onStarBinderWrapper: BinderWrapper = (jQuery: JQueryStatic) => {
 
   const name = 'on-*';
 
-  const binder: ITwoWayBinder<eventHandlerFunction> = {
+  const binder: IBinder<eventHandlerFunction> = {
     function: true,
     priority: 1000,
 

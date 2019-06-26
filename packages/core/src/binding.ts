@@ -1,9 +1,7 @@
 import { PRIMITIVE, KEYPATH, parseType } from './parsers';
 import { Observer } from './observer';
 import {
-  Binder,
-  IOneWayBinder,
-  ITwoWayBinder,
+  IBinder,
   IOneTwoFormatter,
   IFormatterObservers,
   eventHandlerFunction,
@@ -24,12 +22,12 @@ export class Binding {
   public value?: any;
   public observer?: Observer;
   public view: View;
-  public el: HTMLElement;
+  public el: HTMLUnknownElement;
   /**
    * Name of the binder without the prefix
    */
   public type: string | null;
-  public binder: Binder<any>;
+  public binder: IBinder<any>;
   public formatters: string[] | null;
   public formatterObservers: IFormatterObservers = {};
   public keypath?: string;
@@ -64,7 +62,7 @@ export class Binding {
    * @param {*} args The start binders, on `class-*` args[0] wil be the classname.
    * @param {*} formatters
    */
-  constructor(view: View, el: HTMLElement, type: string | null, keypath: string | undefined, binder: Binder<any>, formatters: string[] | null, identifier: string | null) {
+  constructor(view: View, el: HTMLUnknownElement, type: string | null, keypath: string | undefined, binder: IBinder<any>, formatters: string[] | null, identifier: string | null) {
     this.view = view;
     this.el = el;
     this.type = type;
@@ -216,36 +214,35 @@ export class Binding {
      * Since 0.9 : doesn't execute functions unless backward compatibility is active
      * @see https://github.com/mikeric/rivets/blob/master/src/bindings.coffee#L87
      */
-    if ((value instanceof Function) && !(this.binder as ITwoWayBinder<any> ).function && this.view.options.executeFunctions) {
+    if ((value instanceof Function) && !(this.binder as IBinder<any> ).function && this.view.options.executeFunctions) {
       // formatter is a function
       value = this.formattedValue(value.call(this.model));
     } else {
       value = this.formattedValue(value);
     }
 
-    let routineFn: (...args: any[]) => void;
     if (this.binder === null) {
       throw new Error('binder is null');
     }
-    if (this.binder.hasOwnProperty('routine')) {
-      this.binder = ( this.binder as ITwoWayBinder<any>);
-      routineFn = this.binder.routine;
-    } else {
-      this.binder = ( this.binder as IOneWayBinder<any>);
-      routineFn = this.binder;
-    }
+    // if (this.binder.hasOwnProperty('routine')) {
+    //   this.binder = ( this.binder as IBinder<any>);
+    //   routineFn = this.binder.routine;
+    // } else {
+    //   this.binder = ( this.binder as IBinder<any>);
+    //   routineFn = this.binder;
+    // }
 
-    if (routineFn instanceof Function) {
+    if (this.binder.routine instanceof Function) {
       // If value is a promise
       if (value && typeof(value.then) === 'function' && typeof(value.catch) === 'function') {
         value.then((realValue: any) => {
-          routineFn.call(this, this.el, realValue);
+          this.binder.routine.call(this, this.el, realValue);
         })
         .catch((error: Error) => {
           console.error(error);
         });
       } else {
-        routineFn.call(this, this.el, value);
+        this.binder.routine.call(this, this.el, value);
       }
     }
   }
@@ -289,7 +286,7 @@ export class Binding {
           result = (formatter as IOneTwoFormatter).publish(result, ...processedArgs);
         }
         return result;
-      }, this.getValue((this.el as HTMLInputElement)));
+      }, this.getValue(this.el));
 
       this.observer.setValue(value);
     }
@@ -304,7 +301,7 @@ export class Binding {
     this.parseTarget();
 
     if (this.binder && this.binder.hasOwnProperty('bind')) {
-      this.binder = (this.binder as ITwoWayBinder<any>);
+      this.binder = (this.binder as IBinder<any>);
       if (!this.binder.bind && typeof(this.binder.bind) !== 'function') {
         throw new Error('the method bind is not a function');
       }
@@ -324,7 +321,7 @@ export class Binding {
       throw new Error('binder is null');
     }
     if (this.binder.hasOwnProperty('bind')) {
-      this.binder = ( this.binder as ITwoWayBinder<any>);
+      this.binder = ( this.binder as IBinder<any>);
       if (this.binder.unbind) {
         this.binder.unbind.call(this, this.el);
       }
@@ -358,7 +355,7 @@ export class Binding {
       throw new Error('binder is null');
     }
     if (this.binder.hasOwnProperty('update')) {
-      this.binder = ( this.binder as ITwoWayBinder<any>);
+      this.binder = ( this.binder as IBinder<any>);
       if (this.binder.update) {
         this.binder.update.call(this, models);
       }
@@ -369,12 +366,12 @@ export class Binding {
    * Returns elements value
    * @param el
    */
-  public getValue(el: HTMLSelectElement | HTMLInputElement) {
+  public getValue(el: HTMLElement) {
     if (this.binder === null) {
       throw new Error('binder is null');
     }
     if (this.binder.hasOwnProperty('getValue')) {
-      this.binder = ( this.binder as ITwoWayBinder<any>);
+      this.binder = ( this.binder as IBinder<any>);
       if (typeof(this.binder.getValue) !== 'function') {
         throw new Error('getValue is not a function');
       }

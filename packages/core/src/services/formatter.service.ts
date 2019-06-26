@@ -35,7 +35,7 @@ export class FormatterService {
       throw new Error('[FormatterService] name is required');
     }
 
-    // if Binder<any>
+    // if IBinder<any>
     this.formatters[name] = formatter;
     return this.formatters;
   }

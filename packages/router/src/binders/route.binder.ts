@@ -1,5 +1,5 @@
 import { Pjax, Prefetch } from '../services';
-import { Binding, ITwoWayBinder, BinderWrapper, EventDispatcher, JQuery, Debug, Utils, IBindable } from '@ribajs/core';
+import { Binding, IBinder, BinderWrapper, EventDispatcher, JQuery, Debug, Utils, IBindable } from '@ribajs/core';
 
 export interface IRouteOptions {
   url: string;
@@ -27,7 +27,7 @@ export const routeBinderWrapper: BinderWrapper = () => {
 
   const debug = Debug('binders:route');
 
-  const binder: ITwoWayBinder<string> = {
+  const binder: IBinder<string> = {
 
     bind(this: Binding, el: HTMLUnknownElement) {
       this.customData = <ICustomData> {
