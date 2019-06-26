@@ -1,14 +1,17 @@
+export type FormatterFn = (val: any, ...args: any[]) => any;
+
 export interface IOneWayFormatter {
   (val: any, ...args: any[]): any;
-  read?: (result: string, ...processedArgs: string[]) => void;
+  read?: FormatterFn;
+  publish?: FormatterFn;
 }
 
-export interface IOneTwoFormatter {
-  read: (result: string, ...processedArgs: string[]) => void;
-  publish: (result: string, ...processedArgs: string[]) => void;
+export interface ITwoWayFormatter {
+  read?: FormatterFn;
+  publish?: FormatterFn;
 }
 
-export type IFormatter = IOneWayFormatter | IOneTwoFormatter;
+export type IFormatter = FormatterFn &(IOneWayFormatter | ITwoWayFormatter);
 
 export interface IModuleFormatters {
   [name: string]: IFormatter;

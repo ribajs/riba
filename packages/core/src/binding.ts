@@ -2,7 +2,6 @@ import { PRIMITIVE, KEYPATH, parseType } from './parsers';
 import { Observer } from './observer';
 import {
   IBinder,
-  IOneTwoFormatter,
   IFormatterObservers,
   eventHandlerFunction,
   IObserverSyncCallback,
@@ -224,13 +223,6 @@ export class Binding {
     if (this.binder === null) {
       throw new Error('binder is null');
     }
-    // if (this.binder.hasOwnProperty('routine')) {
-    //   this.binder = ( this.binder as IBinder<any>);
-    //   routineFn = this.binder.routine;
-    // } else {
-    //   this.binder = ( this.binder as IBinder<any>);
-    //   routineFn = this.binder;
-    // }
 
     if (this.binder.routine instanceof Function) {
       // If value is a promise
@@ -282,8 +274,8 @@ export class Binding {
         const formatter = this.view.options.formatters[id];
         const processedArgs = this.parseFormatterArguments(args, index);
 
-        if (formatter && (formatter as IOneTwoFormatter).publish) {
-          result = (formatter as IOneTwoFormatter).publish(result, ...processedArgs);
+        if (formatter && formatter.publish) {
+          result = formatter.publish(result, ...processedArgs);
         }
         return result;
       }, this.getValue(this.el));
@@ -301,7 +293,6 @@ export class Binding {
     this.parseTarget();
 
     if (this.binder && this.binder.hasOwnProperty('bind')) {
-      this.binder = (this.binder as IBinder<any>);
       if (!this.binder.bind && typeof(this.binder.bind) !== 'function') {
         throw new Error('the method bind is not a function');
       }
@@ -317,14 +308,12 @@ export class Binding {
    * Unsubscribes from the model and the element.
    */
   public unbind() {
-    if (this.binder === null) {
-      throw new Error('binder is null');
+    if (!this.bind) {
+      throw new Error('binder is not defined');
     }
-    if (this.binder.hasOwnProperty('bind')) {
-      this.binder = ( this.binder as IBinder<any>);
-      if (this.binder.unbind) {
-        this.binder.unbind.call(this, this.el);
-      }
+
+    if (this.binder.unbind) {
+      this.binder.unbind.call(this, this.el);
     }
 
     if (this.observer) {
@@ -355,7 +344,6 @@ export class Binding {
       throw new Error('binder is null');
     }
     if (this.binder.hasOwnProperty('update')) {
-      this.binder = ( this.binder as IBinder<any>);
       if (this.binder.update) {
         this.binder.update.call(this, models);
       }
@@ -371,7 +359,6 @@ export class Binding {
       throw new Error('binder is null');
     }
     if (this.binder.hasOwnProperty('getValue')) {
-      this.binder = ( this.binder as IBinder<any>);
       if (typeof(this.binder.getValue) !== 'function') {
         throw new Error('getValue is not a function');
       }

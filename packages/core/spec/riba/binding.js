@@ -152,7 +152,7 @@ describe('riba.Binding', function() {
     });
 
     it('applies any formatters to the value before performing the routine', function() {
-      routineFn = sinon.spy(binding.binder, 'routine');      }
+      routineFn = sinon.spy(binding.binder, 'routine');
       view.options.formatters.awesome = function(value) { return 'awesome ' + value; };
 
       binding.formatters.push('awesome');
@@ -229,11 +229,7 @@ describe('riba.Binding', function() {
         read: function(value) { return 'awesome ' + value; }
       };
 
-      if (binding.binder.routine) {
-        routineFn = sinon.spy(binding.binder, 'routine');
-      } else {
-        routineFn = sinon.spy(binding, 'binder');
-      }
+      routineFn = sinon.spy(binding.binder, 'routine');
 
       binding.formatters.push('awesome');
       binding.set('sweater');

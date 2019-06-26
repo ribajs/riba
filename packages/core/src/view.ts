@@ -167,7 +167,7 @@ export class View {
 
           // if block is set childs not bound (the binder bound it by itself)
           // and build binding directly (do not push it to bindInfos array)
-          if ((binder as IBinder<any>).block) {
+          if (binder.block) {
             this.buildBinding(node, nodeName, attribute.value, binder, identifier);
             if (node.removeAttribute && this.options.removeBinderAttributes) {
               node.removeAttribute(attribute.name);
