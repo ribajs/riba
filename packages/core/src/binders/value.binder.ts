@@ -48,7 +48,7 @@ export const valueBinder: IBinder<any> = {
     $(el).off(this.customData.event, this.customData.callback);
   },
 
-  routine(el: HTMLElement, value: string | string[]) {
+  routine(el: HTMLElement | HTMLSelectElement, value: string | string[]) {
     const oldValue = this.getValue(el);
     debug('routine value', value);
     if (!this.customData) {
@@ -57,10 +57,10 @@ export const valueBinder: IBinder<any> = {
     if (this.customData.isRadio) {
       el.setAttribute('value', value as string);
     } else {
-      if ((el as HTMLSelectElement).type === 'select-multiple' && el instanceof HTMLSelectElement) {
-        if (value instanceof Array) {
-          for (let i = 0; i < el.options.length; i++) {
-            const option = el.options[i] as HTMLOptionElement;
+      if ((el as HTMLSelectElement).type === 'select-multiple') {
+        if (Array.isArray(value)) {
+          for (let i = 0; i < (el as HTMLSelectElement).options.length; i++) {
+            const option = (el as HTMLSelectElement).options[i] as HTMLOptionElement;
             option.selected = value.indexOf(option.value) > -1;
           }
         }

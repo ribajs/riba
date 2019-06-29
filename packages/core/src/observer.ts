@@ -169,10 +169,10 @@ export class Observer {
       oldValue = this.value();
       this.target = next;
       newValue = this.value();
-      if (newValue !== oldValue || newValue instanceof Function) {
+      if (newValue !== oldValue || Array.isArray(newValue)) {
         this.callback.sync();
       }
-    } else if (next instanceof Array) {
+    } else if (Array.isArray(next)) {
       this.callback.sync();
     }
   }

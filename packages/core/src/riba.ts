@@ -219,8 +219,6 @@ export class Riba {
       // Remove binder attributes after binding
       removeBinderAttributes: true, // TODO fixme on false: Maximum call stack size exceeded
 
-      // Execute functions in bindings. Defaultis false since rivets 0.9. Set to true to be backward compatible with rivets 0.8.
-      executeFunctions: false,
     };
 
     if (options) {

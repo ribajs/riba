@@ -54,7 +54,7 @@ export class Adapter implements IAdapter {
         const k = map.pointers[r];
 
         if (weakmap[r]) {
-          if (weakmap[r].callbacks[k] instanceof Array) {
+          if (Array.isArray(weakmap[r].callbacks[k])) {
             weakmap[r].callbacks[k].forEach((callback: IObserverSyncCallback) => {
               callback.sync();
             });
@@ -67,7 +67,7 @@ export class Adapter implements IAdapter {
   }
 
   public observeMutations(obj: any, ref: string, keypath: string) {
-    if (obj instanceof Array) {
+    if (Array.isArray(obj)) {
       const map = this.weakReference(obj);
 
       if (!map.pointers) {
@@ -89,7 +89,7 @@ export class Adapter implements IAdapter {
   }
 
   public unobserveMutations(obj: IRVArray, ref: string, keypath: string) {
-    if ((obj instanceof Array) && (obj.__rv != null)) {
+    if (Array.isArray(obj) && (obj.__rv != null)) {
       const map = this.weakmap[obj.__rv];
 
       if (map) {

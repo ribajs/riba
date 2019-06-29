@@ -33,8 +33,6 @@ export interface IOptions {
   starBinders?: any;
 
   removeBinderAttributes?: boolean;
-
-  executeFunctions?: boolean;
 }
 
 export declare interface IOptionsParam extends IExtensions, IOptions {}
@@ -65,6 +63,4 @@ export declare interface IViewOptions extends IOptionsParam {
   starBinders: any;
 
   removeBinderAttributes: boolean;
-
-  executeFunctions: boolean;
 }

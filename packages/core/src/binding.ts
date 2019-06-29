@@ -173,13 +173,14 @@ export class Binding {
       let formatterReadFunction;
 
       // get formatter read funcion
-      if (formatter && (formatter.read instanceof Function)) {
-        formatterReadFunction = formatter.read;
-      } else if (formatter instanceof Function) {
+      if (typeof(formatter) === 'function') {
+        // DEPRICATED
         formatterReadFunction = formatter;
+      } else if (formatter && typeof(formatter.read) === 'function') {
+        formatterReadFunction = formatter.read;
       }
 
-      if (formatterReadFunction instanceof Function) {
+      if (typeof(formatterReadFunction) === 'function') {
         result = formatterReadFunction.apply(this.model, [result, ...processedArgs]);
       }
 
@@ -209,26 +210,18 @@ export class Binding {
    * with the supplied value formatted.
    */
   public set(value: any) {
-    /*
-     * Since 0.9 : doesn't execute functions unless backward compatibility is active
-     * @see https://github.com/mikeric/rivets/blob/master/src/bindings.coffee#L87
-     */
-    if ((value instanceof Function) && !(this.binder as IBinder<any> ).function && this.view.options.executeFunctions) {
-      // formatter is a function
-      value = this.formattedValue(value.call(this.model));
-    } else {
-      value = this.formattedValue(value);
-    }
+
+    value = this.formattedValue(value);
 
     if (this.binder === null) {
       throw new Error('binder is null');
     }
 
-    if (this.binder.routine instanceof Function) {
+    if (typeof(this.binder.routine) === 'function') {
       // If value is a promise
       if (value && typeof(value.then) === 'function' && typeof(value.catch) === 'function') {
         value.then((realValue: any) => {
-          this.binder.routine.call(this, this.el, realValue);
+          return this.binder.routine.call(this, this.el, realValue);
         })
         .catch((error: Error) => {
           console.error(error);
@@ -274,7 +267,7 @@ export class Binding {
         const formatter = this.view.options.formatters[id];
         const processedArgs = this.parseFormatterArguments(args, index);
 
-        if (formatter && formatter.publish) {
+        if (formatter && typeof(formatter.publish) === 'function') {
           result = formatter.publish(result, ...processedArgs);
         }
         return result;

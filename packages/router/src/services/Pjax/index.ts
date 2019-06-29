@@ -376,8 +376,8 @@ class Pjax {
   * @private
   */
  protected forceGoTo(url: Location | string) {
-   if (url instanceof Location) {
-    window.location = url;
+   if (url && (url as Location).href) {
+    window.location = url as Location;
    }
    if (typeof url === 'string') {
     window.location.href = url;

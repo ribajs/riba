@@ -112,7 +112,7 @@ export class Utils {
     }
     try {
       const val = JSON.parse(str);
-      return (val instanceof Array || val instanceof Object) ? true : false;
+      return (Array.isArray(val) || typeof(val) === 'object') ? true : false;
     } catch (error) {
       return false;
     }

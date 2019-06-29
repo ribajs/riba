@@ -70,7 +70,7 @@ export class View {
    * @param options
    */
   constructor(els: HTMLCollection | HTMLElement | Node | NodeListOf<ChildNode>, models: any, options: IViewOptions) {
-    if (els instanceof Array) {
+    if (Array.isArray(els)) {
       this.els = els;
     } else {
       this.els = ([els] as HTMLElement[] | Node[] );

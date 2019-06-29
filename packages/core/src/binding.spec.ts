@@ -161,12 +161,10 @@ describe('riba.Binding', () => {
             routineFn = jest.spyOn(binding.binder, 'routine');
 
             binding.set('sweater');
-            // TODO FIXME
-            // expect(routineFn).toHaveBeenCalledWith(el, 'sweater');
+            expect(routineFn).toHaveBeenCalledWith(el, 'sweater');
         });
 
         it('applies any formatters to the value before performing the routine', () => {
-            routineFn = jest.spyOn(binding.binder, 'routine');
 
             view.options.formatters.awesome = (value) => 'awesome ' + value;
 
@@ -175,8 +173,7 @@ describe('riba.Binding', () => {
             }
             binding.set('sweater');
 
-            // TODO FIXME
-            // expect(routineFn).toHaveBeenCalledWith(el, 'awesome sweater');
+            expect(binding.binder.routine).toHaveBeenCalledWith(el, 'awesome sweater');
         });
     });
 
@@ -209,9 +206,12 @@ describe('riba.Binding', () => {
 
             routineFn = jest.spyOn(binding.binder, 'routine');
 
-            if (binding.formatters) {
-                binding.formatters.push('awesome');
+            if (!binding.formatters) {
+                throw new Error('Formatters not set!');
             }
+
+            binding.formatters.push('awesome');
+
             binding.set('sweater');
             expect(routineFn).toHaveBeenCalledWith(el, 'awesome sweater');
         });
@@ -253,238 +253,260 @@ describe('riba.Binding', () => {
             binding = view.bindings[0];
             model = binding.model;
 
+            jest.spyOn(binding.binder, 'routine');
+
             valueInput.value = 'charles';
             binding.publish();
             expect(adapter.set).toHaveBeenCalledWith(model, 'name', 'awesome charles');
 
-            jest.spyOn(binding.binder, 'routine');
             binding.set('fred');
             expect(binding.binder.routine).toHaveBeenCalledWith(valueInput, 'fred is awesome');
         });
 
-    //     it(`should resolve formatter arguments to their values`, () => {
-    //         riba.formatters.withArguments = {
-    //             publish: function (value, arg1, arg2) {
-    //                 return value + ':' + arg1 + ':' + arg2;
-    //             },
-    //             read: function (value, arg1, arg2) {
-    //                 return value.replace(':' + arg1 + ':' + arg2, '');
-    //             }
-    //         };
+        it(`should resolve formatter arguments to their values`, () => {
+            (riba.formatters.withArguments as ITwoWayFormatter) = {
+                publish: (value, arg1, arg2) => {
+                    return value + ':' + arg1 + ':' + arg2;
+                },
+                read: (value, arg1, arg2) => {
+                    return value.replace(':' + arg1 + ':' + arg2, '');
+                },
+            };
 
-    //         valueInput = document.createElement('input');
-    //         valueInput.setAttribute('type', 'text');
-    //         valueInput.setAttribute('data-value', `obj.name | withArguments config.age 'male'`);
+            valueInput = document.createElement('input');
+            valueInput.setAttribute('type', 'text');
+            valueInput.setAttribute('data-value', `obj.name | withArguments config.age 'male'`);
 
-    //         view = riba.bind(valueInput, {
-    //             obj: {
-    //                 name: 'nothing'
-    //             },
-    //             config: {
-    //                 age: 50
-    //             }
-    //         });
+            view = riba.bind(valueInput, {
+                obj: {
+                    name: 'nothing',
+                },
+                config: {
+                    age: 50,
+                },
+            });
 
-    //         binding = view.bindings[0] as Binding;
-    //         model = binding.model;
+            binding = view.bindings[0] as Binding;
+            model = binding.model;
 
-    //         valueInput.value = 'bobby';
-    //         binding.publish({ target: valueInput });
-    //         adapter.set.calledWith(model, 'name', 'bobby:50:male');
+            valueInput.value = 'bobby';
+            binding.publish();
+            expect(adapter.set).toBeCalledWith(model, 'name', 'bobby:50:male');
 
-    //         expect(valueInput.value).toEqual('bobby');
+            expect(valueInput.value).toEqual('bobby');
 
-    //         binding.set('andy:50:male');
-    //         binding.binder.routine.calledWith(valueInput, 'andy');
-    //     });
+            binding.set('andy:50:male');
+            expect(binding.binder.routine).toBeCalledWith(valueInput, 'andy');
+        });
 
-    //     it(`should resolve formatter arguments correctly with multiple formatters`, () => {
-    //         riba.formatters.wrap = {
-    //             publish: function (value, arg1, arg2) {
-    //                 return arg1 + value + arg2;
-    //             },
-    //             read: function (value, arg1, arg2) {
-    //                 return value.replace(arg1, '').replace(arg2, '');
-    //             }
-    //         };
+        it(`should resolve formatter arguments correctly with multiple formatters`, () => {
+            (riba.formatters.wrap as ITwoWayFormatter ) = {
+                publish: (value: string, arg1: string, arg2: string) => {
+                    return arg1 + value + arg2;
+                },
+                read: (value: string, arg1: string, arg2: string) => {
+                    return value.replace(arg1, '').replace(arg2, '');
+                },
+            };
 
-    //         riba.formatters.saveAsCase = {
-    //             publish: function (value, typeCase) {
-    //                 return value['to' + typeCase + 'Case']();
-    //             },
-    //             read: function (value, typeCase) {
-    //                 return value[typeCase === 'Upper' ? 'toLowerCase' : 'toUpperCase']();
-    //             }
-    //         };
+            (riba.formatters.saveAsCase as ITwoWayFormatter) = {
+                publish: (value, typeCase) => {
+                    return value['to' + typeCase + 'Case']();
+                },
+                read: (value, typeCase) => {
+                    return value[typeCase === 'Upper' ? 'toLowerCase' : 'toUpperCase']();
+                },
+            };
 
-    //         valueInput = document.createElement('input');
-    //         valueInput.setAttribute('type', 'text');
-    //         valueInput.setAttribute(
-    //             'data-value',
-    //             `obj.name | saveAsCase config.typeCase | wrap config.curly '}' | wrap config.square ']' | wrap config.paren ')'`
-    //         );
+            valueInput = document.createElement('input');
+            valueInput.setAttribute('type', 'text');
+            valueInput.setAttribute(
+                'data-value',
+                `obj.name | saveAsCase config.typeCase | wrap config.curly '}' | wrap config.square ']' | wrap config.paren ')'`,
+            );
 
-    //         view = riba.bind(valueInput, {
-    //             obj: {
-    //                 name: 'nothing'
-    //             },
-    //             config: {
-    //                 paren: '(',
-    //                 square: '[',
-    //                 curly: '{',
-    //                 typeCase: 'Upper'
-    //             }
-    //         });
+            view = riba.bind(valueInput, {
+                obj: {
+                    name: 'nothing',
+                },
+                config: {
+                    paren: '(',
+                    square: '[',
+                    curly: '{',
+                    typeCase: 'Upper',
+                },
+            });
 
-    //         binding = view.bindings[0] as Binding;
-    //         model = binding.model;
+            binding = view.bindings[0] as Binding;
+            model = binding.model;
 
-    //         valueInput.value = 'bobby';
-    //         binding.publish({ target: valueInput });
-    //         adapter.set.calledWith(model, 'name', '{[(BOBBY)]}');
+            jest.spyOn(binding.binder, 'routine');
 
-    //         expect(valueInput.value).toEqual('bobby');
+            valueInput.value = 'bobby';
+            binding.publish();
+            expect(adapter.set).toBeCalledWith(model, 'name', '{[(BOBBY)]}');
 
-    //         binding.set('{[(ANDY)]}');
-    //         binding.binder.routine.calledWith(valueInput, 'andy');
-    //     });
+            expect(valueInput.value).toEqual('bobby');
 
-    //     it(`should not fail or format if the specified binding function doesn't exist`, () => {
-    //         riba.formatters.awesome = {};
-    //         valueInput = document.createElement('input');
-    //         valueInput.setAttribute('type', 'text');
-    //         valueInput.setAttribute('data-value', 'obj.name | awesome');
+            binding.set('{[(ANDY)]}');
+            expect(binding.binder.routine).toBeCalledWith(valueInput, 'andy');
+        });
 
-    //         view = riba.bind(valueInput, { obj: { name: 'nothing' } });
-    //         binding = view.bindings[0] as Binding;
-    //         model = binding.model;
+        it(`should not fail or format if the specified binding function doesn't exist`, () => {
+            (riba.formatters.awesome as any) = {};
+            valueInput = document.createElement('input');
+            valueInput.setAttribute('type', 'text');
+            valueInput.setAttribute('data-value', 'obj.name | awesome');
 
-    //         valueInput.value = 'charles';
-    //         binding.publish({ target: valueInput });
-    //         adapter.set.calledWith(model, 'name', 'charles');
+            view = riba.bind(valueInput, { obj: { name: 'nothing' } });
+            binding = view.bindings[0] as Binding;
+            model = binding.model;
 
-    //         binding.set('fred');
-    //         binding.binder.routine.calledWith(valueInput, 'fred');
-    //     });
+            jest.spyOn(binding.binder, 'routine');
 
-    //     it(`should apply read binders left to right, and write binders right to left`, () => {
-    //         riba.formatters.totally = {
-    //             publish: (value) => value + ' totally',
-    //             read: (value) => value + ' totally',
-    //         };
+            valueInput.value = 'charles';
+            binding.publish();
+            expect(adapter.set).toBeCalledWith(model, 'name', 'charles');
 
-    //         riba.formatters.awesome = {
-    //             publish: (value) => value + ' is awesome',
-    //             read: (value) => value + ' is awesome',
-    //         };
+            binding.set('fred');
+            expect(binding.binder.routine).toBeCalledWith(valueInput, 'fred');
+        });
 
-    //         valueInput = document.createElement('input');
-    //         valueInput.setAttribute('type', 'text');
-    //         valueInput.setAttribute('data-value', 'obj.name | awesome | totally');
+        it(`should apply read binders left to right, and write binders right to left`, () => {
+            (riba.formatters.totally as ITwoWayFormatter) = {
+                publish: (value) => value + ' totally',
+                read: (value) => value + ' totally',
+            };
 
-    //         view = riba.bind(valueInput, { obj: { name: 'nothing' } });
-    //         binding = view.bindings[0] as Binding;
-    //         model = binding.model;
+            (riba.formatters.awesome as ITwoWayFormatter) = {
+                publish: (value) => value + ' is awesome',
+                read: (value) => value + ' is awesome',
+            };
 
-    //         binding.set('fred');
-    //         binding.binder.routine.calledWith(valueInput, 'fred is awesome totally');
+            valueInput = document.createElement('input');
+            valueInput.setAttribute('type', 'text');
+            valueInput.setAttribute('data-value', 'obj.name | awesome | totally');
 
-    //         valueInput.value = 'fred';
-    //         binding.publish({ target: valueInput });
-    //         adapter.set.calledWith(model, 'name', 'fred totally is awesome');
-    //     });
+            view = riba.bind(valueInput, { obj: { name: 'nothing' } });
+            binding = view.bindings[0] as Binding;
+            model = binding.model;
 
-    //     it(`binders in a chain should be skipped if they're not there`, () => {
-    //         riba.formatters.totally = {
-    //             publish: (value) => { return value + ' totally'; },
-    //             read: (value) => { return value + ' totally'; }
-    //         };
+            jest.spyOn(binding.binder, 'routine');
 
-    //         riba.formatters.radical = {
-    //             publish: (value) => { return value + ' is radical'; }
-    //         };
+            binding.set('fred');
+            expect(binding.binder.routine).toBeCalledWith(valueInput, 'fred is awesome totally');
 
-    //         riba.formatters.awesome = (value) => { return value + ' is awesome'; };
+            valueInput.value = 'fred';
+            binding.publish();
+            expect(adapter.set).toBeCalledWith(model, 'name', 'fred totally is awesome');
+        });
 
-    //         valueInput = document.createElement('input');
-    //         valueInput.setAttribute('type', 'text');
-    //         valueInput.setAttribute('data-value', 'obj.name | awesome | radical | totally');
+        it(`binders in a chain should be skipped if they're not there`, () => {
+            (riba.formatters.totally as ITwoWayFormatter) = {
+                publish: (value) => value + ' totally',
+                read: (value) => value + ' totally',
+            };
 
-    //         view = riba.bind(valueInput, { obj: { name: 'nothing' } });
-    //         binding = view.bindings[0] as Binding;
-    //         model = binding.model;
+            (riba.formatters.radical as ITwoWayFormatter) = {
+                publish: (value) => value + ' is radical',
+            };
 
-    //         binding.set('fred');
-    //         binding.binder.routine.calledWith(valueInput, 'fred is awesome totally');
+            (riba.formatters.awesome as ITwoWayFormatter) = {
+                read: (value) => value + ' is awesome',
+            };
 
-    //         valueInput.value = 'fred';
-    //         binding.publish({ target: valueInput });
-    //         adapter.set.calledWith(model, 'name', 'fred totally is radical');
-    //     });
+            valueInput = document.createElement('input');
+            valueInput.setAttribute('type', 'text');
+            valueInput.setAttribute('data-value', 'obj.name | awesome | radical | totally');
+
+            view = riba.bind(valueInput, { obj: { name: 'nothing' } });
+            binding = view.bindings[0] as Binding;
+            model = binding.model;
+
+            jest.spyOn(binding.binder, 'routine');
+
+            expect(binding.binder.routine).toHaveBeenCalledWith(valueInput, 'nothing is awesome totally');
+
+            binding.set('fred');
+            expect(binding.binder.routine).toHaveBeenCalledWith(valueInput, 'fred is awesome totally');
+
+            valueInput.value = 'fred';
+            binding.publish();
+            expect(adapter.set).toHaveBeenCalledWith(model, 'name', 'fred totally is radical');
+        });
     });
 
-    // describe('formattedValue()', () => {
-    //     it('applies the current formatters on the supplied value', () => {
-    //         view.options.formatters.awesome = (value) => { return 'awesome ' + value; };
-    //         binding.formatters.push('awesome');
-    //         expect(binding.formattedValue('hat')).toEqual('awesome hat');
-    //     });
+    describe('formattedValue()', () => {
+        it('applies the current formatters on the supplied value', () => {
+            view.options.formatters.awesome = (value) => 'awesome ' + value;
+            if (!binding.formatters) {
+                throw new Error('Formatters not set!');
+            }
+            binding.formatters.push('awesome');
+            expect(binding.formattedValue('hat')).toEqual('awesome hat');
+        });
 
-    //     describe('with a multi-argument formatter string', () => {
-    //         beforeEach(() => {
-    //             view.options.formatters.awesome = function (value, prefix) {
-    //                 return prefix + ' awesome ' + value;
-    //             };
+        describe('with a multi-argument formatter string', () => {
+            beforeEach(() => {
+                view.options.formatters.awesome = (value, prefix) => {
+                    return prefix + ' awesome ' + value;
+                };
 
-    //             binding.formatters.push(`awesome 'super'`);
-    //         });
+                if (!binding.formatters) {
+                    throw new Error('Formatters not set!');
+                }
+                binding.formatters.push(`awesome 'super'`);
+            });
 
-    //         it('applies the formatter with arguments', () => {
-    //             expect(binding.formattedValue('jacket')).toEqual('super awesome jacket');
-    //         });
-    //     });
+            it('applies the formatter with arguments', () => {
+                expect(binding.formattedValue('jacket')).toEqual('super awesome jacket');
+            });
+        });
 
-    //     describe('with a formatter string with pipes in argument', () => {
-    //         beforeEach(() => {
+        describe('with a formatter string with pipes in argument', () => {
+            beforeEach(() => {
 
-    //             view.options.formatters.totally = (value, prefix) => {
-    //                 return prefix + ' totally ' + value;
-    //             };
+                view.options.formatters.totally = (value, prefix) => {
+                    return prefix + ' totally ' + value;
+                };
 
-    //             binding.formatters.push(`totally 'arg | with || pipes'`);
-    //         });
+                if (!binding.formatters) {
+                    throw new Error('Formatters not set!');
+                }
+                binding.formatters.push(`totally 'arg | with || pipes'`);
+            });
 
-    //         it('applies the formatter with arguments with pipes', () => {
-    //             expect(binding.formattedValue('jacket')).toEqual('arg | with || pipes totally jacket');
-    //         });
-    //     });
-    // });
+            it('applies the formatter with arguments with pipes', () => {
+                expect(binding.formattedValue('jacket')).toEqual('arg | with || pipes totally jacket');
+            });
+        });
+    });
 
-    // describe('getValue()', () => {
-    //     it('should use binder.getValue() if present', () => {
-    //         binding.binder.getValue = () => {
-    //             return 'foo';
-    //         };
+    describe('getValue()', () => {
+        it('should use binder.getValue() if present', () => {
+            binding.binder.getValue = () => {
+                return 'foo';
+            };
 
-    //         expect(binding.getValue(el)).toEqual('foo');
-    //     });
+            expect(binding.getValue(el)).toEqual('foo');
+        });
 
-    //     it('binder.getValue() should have access to passed element', () => {
-    //         binding.binder.getValue = function (el) {
-    //             return el.dataset.foo;
-    //         };
+        it('binder.getValue() should have access to passed element', () => {
+            binding.binder.getValue = (_el) => {
+                return _el.dataset.foo;
+            };
 
-    //         el.dataset.foo = 'bar';
-    //         expect(binding.getValue(el)).toEqual('bar');
-    //     });
+            el.dataset.foo = 'bar';
+            expect(binding.getValue(el)).toEqual('bar');
+        });
 
-    //     it('binder.getValue() should have access to binding', () => {
-    //         binding.binder.getValue = () => {
-    //             return this.foo;
-    //         };
+        it('binder.getValue() should have access to binding', () => {
+            binding.binder.getValue = function() {
+                return (this as any).foo;
+            };
 
-    //         binding.foo = 'bar';
-    //         expect(binding.getValue(el)).toEqual('bar');
-    //     });
-    // });
+            (binding as any).foo = 'bar';
+            expect(binding.getValue(el)).toEqual('bar');
+        });
+    });
 });
