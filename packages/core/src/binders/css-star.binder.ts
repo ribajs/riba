@@ -1,6 +1,5 @@
 import { IBinder } from '../interfaces';
 import { JQuery as $ } from '../modules/jquery.module';
-import { BinderWrapper } from '../services/binder.service';
 
 /**
  * css-*
@@ -12,6 +11,7 @@ import { BinderWrapper } from '../services/binder.service';
  * @see http://api.jquery.com/css/
  */
 export const cssStarBinder: IBinder<string> = {
+  name: 'css-*',
   routine(el: HTMLElement, value: string) {
     const $el = $(el);
     const propertyName = (this as any).args[0];
@@ -22,11 +22,4 @@ export const cssStarBinder: IBinder<string> = {
     }
     return value;
   },
-};
-
-export const cssStarBinderWrapper: BinderWrapper = () => {
-  return {
-    binder: cssStarBinder,
-    name: 'css-*',
-  };
 };

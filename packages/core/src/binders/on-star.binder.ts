@@ -1,15 +1,14 @@
 import { IBinder, eventHandlerFunction } from '../interfaces';
 // import Debug from 'debug';
-import { BinderWrapper } from '../services/binder.service';
+import { BinderWrapper } from '../interfaces/binder';
 
 /**
  * Binds an event handler on the element.
  */
-const onStarBinderWrapper: BinderWrapper = (jQuery: JQueryStatic) => {
-
-  const name = 'on-*';
+const onStarBinderWrapper: BinderWrapper<eventHandlerFunction> = (jQuery: JQueryStatic) => {
 
   const binder: IBinder<eventHandlerFunction> = {
+    name: 'on-*',
     function: true,
     priority: 1000,
 
@@ -53,7 +52,7 @@ const onStarBinderWrapper: BinderWrapper = (jQuery: JQueryStatic) => {
       }
     },
   };
-  return { binder, name };
+  return binder;
 };
 
 export { onStarBinderWrapper };

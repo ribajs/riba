@@ -12,6 +12,10 @@ export interface IBinder<ValueType> {
   unbind?: (this: Binding, element: HTMLUnknownElement) => void;
   update?: (this: Binding, model: any) => void;
   getValue?: (this: Binding, element: HTMLUnknownElement) => void;
+  /**
+   * The name of the binder to access the binder by
+   */
+  name: string;
   block?: boolean;
   function?: boolean;
   publishes?: boolean;
@@ -22,13 +26,10 @@ export interface IBinder<ValueType> {
  * A list of binders with any key name
  */
 export interface IModuleBinders<ValueType> {
-  [name: string]: IBinder<any>;
+  [name: string]: IBinder<ValueType>;
 }
 
 /**
- * This wrapper i used to store the binder name in the name property
+ * This wrapper is used if you need to pass over some dependencies for your binder
  */
-export interface IModuleBinderWrapper {
-  name: string;
-  binder: IBinder<any>;
-}
+export type BinderWrapper<ValueType> = (...deps: any[]) => IBinder<ValueType>;

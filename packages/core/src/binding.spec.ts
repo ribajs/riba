@@ -2,17 +2,16 @@ import {
     Riba,
     View,
     Binding,
-    IBinder,
     Adapter,
 } from './index';
 
 import {
-    text,
+    textBinder,
 } from '../src/binders/text.binder';
 import { ITwoWayFormatter } from './interfaces';
 
 const riba = new Riba();
-riba.module.binderService.regist(text, 'text');
+riba.module.binderService.regist(textBinder);
 
 describe('riba.Binding', () => {
     let model: object;

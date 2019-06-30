@@ -7,7 +7,8 @@ import { IBinder } from '../interfaces';
 /**
  * Sets the element's text value.
  */
-export const custom: IBinder<string> = {
+export const customBinder: IBinder<string> = {
+  name: 'custom-binder',
   routine(el: HTMLElement, value: string) {
     el.innerHTML = 'received ' + value;
   },
@@ -16,7 +17,7 @@ export const custom: IBinder<string> = {
 describe('Custom binder with no attribute value', () => {
 
     const riba = new Riba();
-    riba.module.binderService.regist(custom, 'custom-binder');
+    riba.module.binderService.regist(customBinder);
 
     let el: HTMLDivElement;
     let model: any;

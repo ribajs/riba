@@ -3,16 +3,16 @@ import {
 } from '../riba';
 
 import {
-    ifBinderWrapper,
+    ifBinder,
 } from './if.binder';
 
 import {
-    eachStarBinderWrapper,
+    eachStarBinder,
   } from './each-star.binder';
 
 describe('if', () => {
     const riba = new Riba();
-    riba.module.binderService.regist(ifBinderWrapper());
+    riba.module.binderService.regist(ifBinder);
 
     let el: HTMLDivElement;
     let model: any;
@@ -145,7 +145,7 @@ describe('if', () => {
 
 describe('Array observe and unobserve', () => {
     const riba = new Riba();
-    riba.module.binderService.regist(eachStarBinderWrapper());
+    riba.module.binderService.regist(eachStarBinder);
 
     let fragment: DocumentFragment;
     let el1: HTMLDivElement;

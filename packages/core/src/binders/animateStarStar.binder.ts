@@ -1,8 +1,12 @@
 import { JQuery as $ } from '../modules';
-import { BinderWrapper } from '../services/binder.service';
 import { IBinder } from '../interfaces';
 
-export const animateStar: IBinder<boolean> = {
+/**
+ * animate-{class}-{duration in ms}
+ * Add animation class with start and done affix with duration
+ */
+export const animateStarBinder: IBinder<boolean> = {
+  name: 'animate-*',
   function: true,
   priority: 1000,
 
@@ -30,16 +34,4 @@ export const animateStar: IBinder<boolean> = {
       .addClass(animateClassName + '-done');
     }
   },
-};
-
-/**
- * animate-{class}-{duration in ms}
- * Add animation class with start and done affix with duration
- */
-export const classBinderWrapper: BinderWrapper = () => {
-  const name = 'animate-*';
-  return {
-    binder: animateStar,
-    name,
-  };
 };

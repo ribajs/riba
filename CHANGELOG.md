@@ -3,7 +3,10 @@
 ## Dev
 - Moved from mocha to jest
 - Removed Rivets.js components feature (we have RibaComponents based on Custom Elements)
-- Remove One-Way-Binder as funktion feature (One-Way-Binders are needing the `routine` method now)
+- Binders: Remove One-Way-Binder as funktion feature (One-Way-Binders are needing the `routine` method now)
+- Simplified binders interface 
+- Binders now need their own name as a property
+
 
 ## 0.16.2
 

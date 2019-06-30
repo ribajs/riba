@@ -1,9 +1,13 @@
 import { IBindable, IBinder } from '../interfaces';
-import { BinderWrapper } from '../services/binder.service';
 import { View } from '../view';
 import { Utils } from '../services/utils';
 
+/**
+ * each-*
+ * Appends bound instances of the element in place for each item in the array.
+ */
 export const eachStarBinder: IBinder<any[]> = {
+  name: 'each-*',
   block: true,
   priority: 4000,
 
@@ -137,17 +141,4 @@ export const eachStarBinder: IBinder<any[]> = {
       view.update(data);
     });
   },
-};
-
-/**
- * each-*
- * Appends bound instances of the element in place for each item in the array.
- */
-export const eachStarBinderWrapper: BinderWrapper = () => {
-  const name = 'each-*';
-
-  return {
-    binder: eachStarBinder,
-    name,
-  };
 };

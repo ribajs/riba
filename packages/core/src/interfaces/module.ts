@@ -1,5 +1,5 @@
 import {
-  IModuleBinderWrapper,
+  IBinder,
   IModuleBinders,
   IModuleFormatterWrapper,
   IModuleFormatters,
@@ -11,9 +11,9 @@ import {
 export interface IRibaModule {
   /**
    * Binders can be a object of binders named by property key (IModuleBinders<any>)
-   * or an array of binders with binder and name property (IModuleBinderWrapper[])
+   * or an array of binders with binder and name property (IBinder<any>)
    */
-  binders?: IModuleBinderWrapper[] | IModuleBinders<any>;
+  binders?: IBinder<any>[] | IModuleBinders<any>;
 
   /**
    * Components must be a object of component classes

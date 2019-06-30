@@ -1,8 +1,12 @@
 import { IBinder } from '../interfaces';
-import { BinderWrapper } from '../services/binder.service';
 import { View } from '../view';
 
+/**
+ * if
+ * Inserts and binds the element and it's child nodes into the DOM when true.
+ */
 export const ifBinder: IBinder<boolean> = {
+  name: 'if',
   block: true,
   priority: 4000,
 
@@ -60,17 +64,4 @@ export const ifBinder: IBinder<boolean> = {
       this.customData.nested.update(models);
     }
   },
-};
-
-/**
- * if
- * Inserts and binds the element and it's child nodes into the DOM when true.
- */
-export const ifBinderWrapper: BinderWrapper = () => {
-  const name = 'if';
-
-  return {
-    binder: ifBinder,
-    name,
-  };
 };

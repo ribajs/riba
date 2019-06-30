@@ -1,8 +1,11 @@
 import { IBinder } from '../interfaces';
 import { JQuery as $ } from '../modules/jquery.module';
-import { BinderWrapper } from '../services/binder.service';
 
-export const removeClass: IBinder<string> = {
+/**
+ * remove-class
+ */
+export const removeClassBinder: IBinder<string> = {
+  name: 'remove-class',
   routine(el: HTMLElement, value: string) {
     const $el = $(el);
     if (value) {
@@ -10,14 +13,4 @@ export const removeClass: IBinder<string> = {
     }
     return value;
   },
-};
-
-/**
- * remove-class
- */
-export const removeClassBinder: BinderWrapper = () => {
-  return {
-    binder: removeClass,
-    name: 'remove-class',
-  };
 };

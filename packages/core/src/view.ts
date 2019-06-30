@@ -12,7 +12,10 @@ import { RibaComponent, AbstractRibaComponent } from './components';
 
 export type TBlock = boolean;
 
-export interface IDataElement extends HTMLElement {
+/**
+ * TODO Check if there is an official interface which fits better here
+ */
+export interface IDataElement extends HTMLUnknownElement {
   data?: string;
 }
 
@@ -25,6 +28,7 @@ export class View {
   public static DECLARATION_SPLIT = /((?:'[^']*')*(?:(?:[^\|']*(?:'[^']*')+[^\|']*)+|[^\|]+))|^$/g;
 
   public static textBinder: IBinder<string> = {
+    name: 'mustache-text',
     routine: (node: IDataElement, value: string) => {
       node.data = (value != null) ? value : '';
     },

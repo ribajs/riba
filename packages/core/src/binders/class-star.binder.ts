@@ -1,6 +1,4 @@
 import { IBinder } from '../interfaces';
-import { JQuery as $ } from '../modules/jquery.module';
-import { BinderWrapper } from '../services/binder.service';
 
 /**
  * class-*
@@ -8,7 +6,8 @@ import { BinderWrapper } from '../services/binder.service';
  *
  * Adds a class (whatever value is in place of [classname]) on the element when the value evaluates to true and removes that class if the value evaluates to false.
  */
-export const classStar: IBinder<boolean> = {
+export const classStarBinder: IBinder<boolean> = {
+  name: 'class-*',
   routine(el: HTMLElement, value: boolean) {
     if (this.args === null) {
       throw new Error('args is null');
@@ -24,11 +23,4 @@ export const classStar: IBinder<boolean> = {
       el.className = classList.filter((_, i) => i !== idx).join(' ');
     }
   },
-};
-
-export const classStarBinderWrapper: BinderWrapper = () => {
-  return {
-    binder: classStar,
-    name: 'class-*',
-  };
 };

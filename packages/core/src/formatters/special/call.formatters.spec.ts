@@ -3,11 +3,11 @@ import {
 } from '../../index';
 
 import { call } from './call.formatter';
-import { text } from '../../binders/text.binder';
+import { textBinder } from '../../binders/text.binder';
 
 const riba = new Riba();
 riba.module.formatterService.regist(call, 'call');
-riba.module.binderService.regist(text, 'text');
+riba.module.binderService.regist(textBinder);
 
 interface IModel {
     fn?: (arg1: string, arg2: string) => string;

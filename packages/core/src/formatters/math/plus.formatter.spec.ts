@@ -3,11 +3,11 @@ import {
 } from '../../index';
 
 import { plus } from './plus.formatter';
-import { text } from '../../binders/text.binder';
+import { textBinder } from '../../binders/text.binder';
 
 const riba = new Riba();
 riba.module.formatterService.regist(plus, 'plus');
-riba.module.binderService.regist(text, 'text');
+riba.module.binderService.regist(textBinder);
 
 interface IModel {
     obj?: {

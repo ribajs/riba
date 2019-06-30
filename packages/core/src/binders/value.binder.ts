@@ -19,6 +19,7 @@ const getData = (el: HTMLElement) => {
  * (two-way binder).
  */
 export const valueBinder: IBinder<any> = {
+  name: 'value',
   publishes: true,
   priority: 3000,
 

@@ -1,8 +1,13 @@
 import { IBinder } from '../interfaces';
-import { BinderWrapper } from '../services/binder.service';
 import { Utils } from '../services/utils';
 
-export const checked: IBinder<string> = {
+/**
+ * checked
+ * Checks a checkbox or radio input when the value is true. Also sets the model
+ * property when the input is checked or unchecked (two-way binder).
+ */
+export const checkedBinder: IBinder<string> = {
+  name: 'checked',
   publishes: true,
   priority: 2000,
 
@@ -28,18 +33,4 @@ export const checked: IBinder<string> = {
       (el as HTMLInputElement).checked = !!value;
     }
   },
-};
-
-/**
- * checked
- * Checks a checkbox or radio input when the value is true. Also sets the model
- * property when the input is checked or unchecked (two-way binder).
- */
-export const checkedBinderWrapper: BinderWrapper = () => {
-  const name = 'checked';
-
-  return {
-    binder: checked,
-    name,
-  };
 };

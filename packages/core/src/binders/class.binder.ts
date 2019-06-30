@@ -1,8 +1,13 @@
 import { IBinder } from '../interfaces';
 import { JQuery as $ } from '../modules/jquery.module';
-import { BinderWrapper } from '../services/binder.service';
 
-export const addClass: IBinder<string> = {
+/**
+ * class
+ * Adds the value of the attribute to the class.
+ * Instead of `class-[classname]` the classname is setted by the attributes value and not by the star value
+ */
+export const classBinder: IBinder<string> = {
+  name: 'class',
   function: true,
   priority: 1000,
 
@@ -24,17 +29,4 @@ export const addClass: IBinder<string> = {
       $(el).addClass(newValue);
     }
   },
-};
-
-/**
- * class
- * Adds the value of the attribute to the class.
- * Instead of `class-[classname]` the classname is setted by the attributes value and not by the star value
- */
-export const classBinderWrapper: BinderWrapper = () => {
-  const name = 'class';
-  return {
-    binder: addClass,
-    name,
-  };
 };

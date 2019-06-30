@@ -1,21 +1,23 @@
 import { IModuleBinders } from '../interfaces';
 
-import { animateStar } from './animateStarStar.binder';
-import { assign } from './assign.binder';
-import { addClass } from './class.binder';
-import { checked } from './checked.binder';
-import { classStar } from './class-star.binder';
+import { animateStarBinder } from './animateStarStar.binder';
+import { assignBinder } from './assign.binder';
+import { classBinder } from './class.binder';
+import { checkedBinder } from './checked.binder';
+import { classStarBinder } from './class-star.binder';
 import { cssStarBinder } from './css-star.binder';
-import { enabled } from './enabled.binder';
-import { disabled } from './disabled.binder';
+import { enabledBinder } from './enabled.binder';
+import { disabledBinder } from './disabled.binder';
 import { onStarBinderWrapper } from './on-star.binder';
-import { removeClass } from './remove-class.binder';
+import { removeClassBinder } from './remove-class.binder';
 import { ifBinder } from './if.binder';
 import { eachStarBinder } from './each-star.binder';
-import { html } from './html.binder';
-import { hide } from './hide.binder';
-import { show } from './show.binder';
-import { text } from './text.binder';
+import { htmlBinder } from './html.binder';
+// This binder should not be used direcly.
+// import { fallback } from './fallback.binder';
+import { hideBinder } from './hide.binder';
+import { showBinder } from './show.binder';
+import { textBinder } from './text.binder';
 import { valueBinder } from './value.binder';
 import { starBinder } from './star.binder';
 
@@ -31,17 +33,17 @@ export const basicBindersWrapper = (jQuery: JQueryStatic) => {
      * animate-{class}
      * Add animation class with start and done affix
      */
-    'animate-*': animateStar,
+    'animate-*': animateStarBinder,
 
     /**
      * Binds an event handler on the element.
      */
-    'assign': assign,
+    'assign': assignBinder,
 
     /**
      * Binds an event handler on the element.
      */
-    'on-*': onStarBinderWrapper(jQuery).binder,
+    'on-*': onStarBinderWrapper(jQuery),
 
     /**
      * Appends bound instances of the element in place for each item in the array.
@@ -52,19 +54,19 @@ export const basicBindersWrapper = (jQuery: JQueryStatic) => {
      * Adds the class from the element setted by the attribute value
      * (not by true or false like on the `class-*` binder).
      */
-    'class': addClass,
+    'class': classBinder,
 
     /**
      * Removes the class from the element setted by the attribute value
      * (not by true or false like on the `class-*` binder).
      */
-    'remove-class': removeClass,
+    'remove-class': removeClassBinder,
 
     /**
      * class-{classname}
      * Adds or removes the class from the element when value is true or false.
      */
-    'class-*': classStar,
+    'class-*': classStarBinder,
 
     /**
      * class-{style attribute name}
@@ -80,38 +82,41 @@ export const basicBindersWrapper = (jQuery: JQueryStatic) => {
     /**
      * Sets the element's text value.
      */
-    'text': text,
+    'text': textBinder,
 
     /**
      * Sets the element's HTML content.
      */
-    'html': html,
+    'html': htmlBinder,
 
     /**
      * Shows the element when value is true.
      */
-    'show': show,
+    'show': showBinder,
+
+    // This binder should not be used direcly.
+    // 'fallback': fallback,
 
     /**
      * Hides the element when value is true (negated version of `show` binder).
      */
-    'hide': hide,
+    'hide': hideBinder,
 
     /**
      * Enables the element when value is true.
      */
-    'enabled': enabled,
+    'enabled': enabledBinder,
 
     /**
      * Disables the element when value is true (negated version of `enabled` binder).
      */
-    'disabled': disabled,
+    'disabled': disabledBinder,
 
     /**
      * Checks a checkbox or radio input when the value is true. Also sets the model
      * property when the input is checked or unchecked (two-way binder).
      */
-    'checked': checked,
+    'checked': checkedBinder,
 
     /**
      * Sets the element's value. Also sets the model property when the input changes

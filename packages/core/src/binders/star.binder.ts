@@ -1,8 +1,7 @@
-import { BinderWrapper } from '../services/binder.service';
 import { JQuery } from '../modules/jquery.module';
 import { IBinder } from '../interfaces';
 
-// TODO this as custom binder? No web component staff for all fallback finders? eg rv-ca-* ca stands for component attribute
+// TODO this as custom binder? No web component staff for all fallback binders? eg rv-ca-* ca stands for component attribute
 
 export interface IBinderAttributeChangedEvent {
   detail: {
@@ -30,6 +29,7 @@ const publishBinderChangeEventHandler = function(this: any, event: Event) {
  * back to using this binder.
  */
 export const starBinder: IBinder<string> = {
+  name: '*',
   bind(el) {
     this.customData.$el = JQuery(el);
     // Listen for changes from web component
@@ -74,17 +74,4 @@ export const starBinder: IBinder<string> = {
 
     }
   },
-};
-
-/**
- * class
- * Adds the value of the attribute to the class.
- * Instead of `class-[classname]` the classname is setted by the attributes value and not by the star value
- */
-export const starBinderWrapper: BinderWrapper = () => {
-  const name = '*';
-  return {
-    binder: starBinder,
-    name,
-  };
 };

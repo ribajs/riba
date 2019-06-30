@@ -52,7 +52,7 @@ export interface ITokens {
 }
 
 /**
- * Template parser and tokenizer for mustache-style text content bindings.
+ * Template parser and tokenizer for {{ mustache-style }} text content bindings.
  * Parses the template and returns a set of tokens, separating static portions
  * of text from binding declarations.
  * @param template

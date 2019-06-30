@@ -10,7 +10,8 @@ export interface IAssign {
  * Assign a value in your model, value must be a object
  * experimental, please TESTME
  */
-export const assign: IBinder<IAssign> = {
+export const assignBinder: IBinder<IAssign> = {
+  name: 'assign',
   routine(el: HTMLElement, obj: any) {
     Utils.extend(false, this.view.models, obj);
   },
