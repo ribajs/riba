@@ -25,7 +25,7 @@
   },
   "scripts": {
     "test:deprecated": "npm run build:browser && mocha-chrome spec/runner.html",
-    "test": "jest --config=jest.config.js",
+    "test": "npm run type-check && jest --config=jest.config.js",
     "type-check": "tslint -c tslint.json 'src/**/*.ts' && tsc --noEmit",
     "build": "tsc",
     "build:browser": "npm run type-check && npm run webpack:browser",

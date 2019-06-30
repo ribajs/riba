@@ -8,6 +8,7 @@ import {
 import {
     textBinder,
 } from '../src/binders/text.binder';
+
 import { ITwoWayFormatter } from './interfaces';
 
 const riba = new Riba();

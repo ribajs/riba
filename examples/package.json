@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "link": "npm install && npm link @ribajs/core"
   },
   "author": "",
   "license": "MIT",

@@ -10,9 +10,8 @@ export * from './parsers';
 export * from './riba';
 export * from './view';
 
-import { JQuery } from './modules';
 import { IRibaModule } from './interfaces';
-import { basicBindersWrapper } from './binders';
+import * as basicBinders from './binders';
 import {
   compareFormatters,
   mathFormatters,
@@ -30,6 +29,6 @@ export const coreModule: IRibaModule = {
     ...stringFormatters,
     ...propertyFormatters,
   },
-  binders: basicBindersWrapper(JQuery),
+  binders: basicBinders,
   services,
 };

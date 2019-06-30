@@ -36,9 +36,10 @@ export class BindersService {
       }
     }
     if (Utils.isObject(binders)) {
-      for (const name in binders) {
-        if (binders.hasOwnProperty(name)) {
-          this.regist((binders as IModuleBinders<any>)[name], name);
+      for (const key in binders as IModuleBinders<any>) {
+        if (binders.hasOwnProperty(key)) {
+          const binder = (binders as IModuleBinders<any>)[key];
+          this.regist(binder);
         }
       }
     }
