@@ -13,8 +13,6 @@ import { removeClassBinder } from './remove-class.binder';
 import { ifBinder } from './if.binder';
 import { eachStarBinder } from './each-star.binder';
 import { htmlBinder } from './html.binder';
-// This binder should not be used direcly.
-// import { fallback } from './fallback.binder';
 import { hideBinder } from './hide.binder';
 import { showBinder } from './show.binder';
 import { textBinder } from './text.binder';
@@ -93,9 +91,6 @@ export const basicBindersWrapper = (jQuery: JQueryStatic) => {
      * Shows the element when value is true.
      */
     'show': showBinder,
-
-    // This binder should not be used direcly.
-    // 'fallback': fallback,
 
     /**
      * Hides the element when value is true (negated version of `show` binder).

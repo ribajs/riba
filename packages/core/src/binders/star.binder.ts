@@ -1,8 +1,4 @@
-import { JQuery } from '../modules/jquery.module';
 import { IBinder } from '../interfaces';
-
-// TODO this as custom binder? No web component staff for all fallback binders? eg rv-ca-* ca stands for component attribute
-
 export interface IBinderAttributeChangedEvent {
   detail: {
     name: string;
@@ -31,7 +27,6 @@ const publishBinderChangeEventHandler = function(this: any, event: Event) {
 export const starBinder: IBinder<string> = {
   name: '*',
   bind(el) {
-    this.customData.$el = JQuery(el);
     // Listen for changes from web component
     el.addEventListener('publish-binder-change:' + this.type, publishBinderChangeEventHandler.bind(this));
   },
@@ -64,14 +59,6 @@ export const starBinder: IBinder<string> = {
         newValue,
         namespace: null, // TODO
       }} as IBinderAttributeChangedEvent));
-
-      // this.customData.$el.trigger('binder-changed', { detail: {
-      //   name: this.type,
-      //   oldValue,
-      //   newValue,
-      //   namespace: null, // TODO
-      // }});
-
     }
   },
 };

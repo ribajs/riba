@@ -12,7 +12,7 @@ import { Utils } from './services/utils';
 import { parseTemplate, parseType } from './parsers';
 import { Binding } from './binding';
 import { adapter } from './adapter';
-import { fallback } from './binders/fallback.binder';
+import { starBinder } from './binders/star.binder';
 
 import { View } from './view';
 import { Observer } from './observer';
@@ -24,7 +24,7 @@ export class Riba {
    * Sets the attribute on the element. If no binder above is matched it will fall
    * back to using this binder.
    */
-  public static fallbackBinder = fallback;
+  public static fallbackBinder = starBinder;
 
   /**
    * Default event handler, calles the function defined in his binder
