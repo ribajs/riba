@@ -22,13 +22,13 @@ export interface IRVArray extends Array<any> {
 export type AdapterFunction = (...args: any[]) => any;
 
 export interface IAdapter {
-  counter: number;
-  weakmap: any;
-  weakReference: (obj: any) => any; // => __rv ?
-  cleanupWeakReference: (ref: IRef, id: number) => void;
-  stubFunction: (obj: any, fn: string) => any; // => response ?
-  observeMutations: (obj: any, ref: string, keypath: string) => void;
-  unobserveMutations: (obj: IRVArray, ref: string, keypath: string) => void;
+  counter?: number;
+  weakmap?: any;
+  weakReference?: (obj: any) => any; // => __rv ?
+  cleanupWeakReference?: (ref: IRef, id: number) => void;
+  stubFunction?: (obj: any, fn: string) => any; // => response ?
+  observeMutations?: (obj: any, ref: string, keypath: string) => void;
+  unobserveMutations?: (obj: IRVArray, ref: string, keypath: string) => void;
   observe: (obj: any, keypath: string, callback: IObserverSyncCallback) => void;
   unobserve: (obj: any, keypath: string, callback: IObserverSyncCallback) => void;
   get: (obj: any, keypath: string) => any;

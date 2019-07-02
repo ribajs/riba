@@ -30,7 +30,6 @@
     "build": "tsc",
     "build:browser": "npm run type-check && npm run webpack:browser",
     "webpack:browser": "webpack && webpack --config webpack.dev.config.js",
-    "webpack:test": "webpack && webpack --config webpack.test.config.js",
     "watch:browser": "webpack --watch --env.dev",
     "link": "npm install && npm link"
   },

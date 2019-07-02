@@ -9,7 +9,7 @@ import {
     textBinder,
 } from '../src/binders/text.binder';
 
-import { ITwoWayFormatter } from './interfaces';
+import { ITwoWayFormatter, IAdapter } from './interfaces';
 
 const riba = new Riba();
 riba.module.binderService.regist(textBinder);
@@ -20,7 +20,7 @@ describe('riba.Binding', () => {
     let view: View;
     let binding: Binding;
     let originalPrefix: string;
-    let adapter: Adapter;
+    let adapter: IAdapter;
     let routineFn;
 
     beforeEach(() => {
