@@ -365,7 +365,7 @@ export class Binding {
     const args = new Array<string | number>();
     const regexp = new RegExp(`^${identifier.replace(/\*/g, '.+')}$`);
     if (regexp.test(type) && type.split('-')[0] === identifier.split('-')[0]) {
-      // this.debug('matches', identifier, type);
+      this.debug('matches', identifier, type);
     } else {
       if (identifier !== '*') {
         console.error('Nodename not matchs the identifier,', identifier, type);

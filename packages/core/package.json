@@ -46,6 +46,7 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-array-includes": "^2.0.3",
     "jest": "^24.8.0",
+    "jest-extended": "^0.11.1",
     "mocha": "^6.1.4",
     "mocha-chrome": "^2.0.0",
     "should": "^13.2.3",

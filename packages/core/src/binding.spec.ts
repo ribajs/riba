@@ -1,18 +1,43 @@
+import 'jest-extended';
+
 import {
     Riba,
     View,
     Binding,
-    Adapter,
 } from './index';
+
+import {
+    Data,
+} from '../spec/lib/moch.data';
 
 import {
     textBinder,
 } from '../src/binders/text.binder';
 
+import {
+    htmlBinder,
+} from '../src/binders/html.binder';
+
+import {
+    valueBinder,
+} from '../src/binders/value.binder';
+
+import {
+    eachStarBinder,
+} from '../src/binders/each-star.binder';
+
+import {
+    classBinder,
+} from '../src/binders/class.binder';
+
 import { ITwoWayFormatter, IAdapter } from './interfaces';
 
 const riba = new Riba();
 riba.module.binderService.regist(textBinder);
+riba.module.binderService.regist(htmlBinder);
+riba.module.binderService.regist(valueBinder);
+riba.module.binderService.regist(eachStarBinder);
+riba.module.binderService.regist(classBinder);
 
 describe('riba.Binding', () => {
     let model: object;
@@ -507,6 +532,280 @@ describe('riba.Binding', () => {
 
             (binding as any).foo = 'bar';
             expect(binding.getValue(el)).toEqual('bar');
+        });
+    });
+});
+
+describe('Functional', () => {
+    let data: Data;
+    let bindData: { data: Data };
+    let el: HTMLUnknownElement;
+    let input: HTMLInputElement;
+    let originalPrefix: string;
+    let adapter: IAdapter;
+
+    beforeEach(() => {
+        originalPrefix = riba.prefix;
+        riba.prefix = 'data';
+        adapter = {
+            observe: (obj, keypath, callback) => {
+                obj.on(keypath, callback);
+            },
+            unobserve: (obj, keypath, callback) => {
+                obj.off(keypath, callback);
+            },
+            get: (obj, keypath) => {
+                return obj.get(keypath);
+            },
+            set: (obj, keypath, value) => {
+                const attributes: {[keypath: string]: any} = {};
+                attributes[keypath] = value;
+                obj.set(attributes);
+            },
+        };
+
+        riba.adapters[':'] = adapter;
+        riba.configure({ preloadData: true });
+
+        data = new Data({
+            foo: 'bar',
+            items: [{ name: 'a' }, { name: 'b' }],
+        });
+
+        bindData = { data };
+
+        el = document.createElement('div');
+        input = document.createElement('input');
+        input.setAttribute('type', 'text');
+    });
+
+    afterEach(() => {
+        riba.prefix = originalPrefix;
+    });
+
+    describe('Binds', () => {
+        describe('Text', () => {
+            it('should set the text content of the element', () => {
+                el.setAttribute('data-text', 'data:foo');
+                riba.bind(el, bindData);
+                expect(el.textContent).toEqual(data.get('foo'));
+            });
+
+            it('should correctly handle HTML in the content', () => {
+                el.setAttribute('data-text', 'data:foo');
+                const value = '<b>Fail</b>';
+                data.set({ foo: value });
+                riba.bind(el, bindData);
+                expect(el.textContent).toEqual(value);
+            });
+        });
+
+        describe('HTML', () => {
+            it('should set the html content of the element', () => {
+                el.setAttribute('data-html', 'data:foo');
+                riba.bind(el, bindData);
+                expect(el.textContent).toEqual(data.get('foo'));
+            });
+
+            it('should correctly handle HTML in the content', () => {
+                el.setAttribute('data-html', 'data:foo');
+                const value = '<b>Fail</b>';
+                data.set({ foo: value });
+                riba.bind(el, bindData);
+                expect(el.innerHTML).toEqual(value);
+            });
+        });
+
+        describe('Value', () => {
+            it('should set the value of the element', () => {
+                input.setAttribute('data-value', 'data:foo');
+                riba.bind(input, bindData);
+                expect(input.value).toEqual(data.get('foo'));
+            });
+        });
+
+        describe('Multiple', () => {
+            it('should bind a list of multiple elements', () => {
+                el.setAttribute('data-html', 'data:foo');
+                input.setAttribute('data-value', 'data:foo');
+                riba.bind([el, input], bindData);
+                expect(el.textContent).toEqual(data.get('foo'));
+                expect(input.value).toEqual(data.get('foo'));
+            });
+        });
+
+        describe('Priority', () => {
+            let mockA: jest.Mock<any, any>;
+            let mockB: jest.Mock<any, any>;
+            beforeEach(() => {
+                mockA = jest.fn();
+                mockB = jest.fn();
+
+                riba.binders.a = { name: 'a', bind: () => mockA(), routine: () => {/**/} };
+                riba.binders.b = { name: 'b', bind: () => mockB(), routine: () => {/**/}  };
+
+                el.setAttribute('data-a', 'data:foo');
+                el.setAttribute('data-b', 'data:foo');
+            });
+
+            describe('a:10, b:30', () => {
+                beforeEach(() => {
+                    riba.binders.a.priority = 10;
+                    riba.binders.b.priority = 30;
+                    riba.bind(el, bindData);
+                });
+
+                it('should bind b before a', () => {
+                    expect(mockB).toHaveBeenCalledBefore(mockA);
+                });
+            });
+
+            describe('a:5, b:2', () => {
+                beforeEach(() => {
+                    riba.binders.a.priority = 5;
+                    riba.binders.b.priority = 2;
+                    riba.bind(el, bindData);
+                });
+
+                it('should bind a before b', () => {
+                    expect(mockA).toHaveBeenCalledBefore(mockB);
+                });
+            });
+
+            describe('a:undefined, b:1', () => {
+                beforeEach(() => {
+                    riba.binders.b.priority = 1;
+                    riba.bind(el, bindData);
+                });
+
+                it('should bind b before a', () => {
+                    expect(mockB).toHaveBeenCalledBefore(mockA);
+                });
+            });
+        });
+
+        describe('Iteration', () => {
+            let listItem: HTMLLIElement;
+            let list: HTMLUListElement;
+            beforeEach(() => {
+                list = document.createElement('ul');
+                el.appendChild(list);
+                listItem = document.createElement('li');
+                listItem.setAttribute('data-each-item', 'data:items');
+                list.appendChild(listItem);
+            });
+
+            it('should loop over a collection and create new instances of that element + children', () => {
+                expect(el.getElementsByTagName('li').length).toEqual(1);
+                riba.bind(el, bindData);
+                expect(el.getElementsByTagName('li').length).toEqual(2);
+            });
+
+            it('should not fail if the collection being bound to is null', () => {
+                data.set({ items: null });
+                riba.bind(el, bindData);
+                expect(el.getElementsByTagName('li').length).toEqual(0);
+            });
+
+            it('should re-loop over the collection and create new instances when the array changes', () => {
+                riba.bind(el, bindData);
+                expect(el.getElementsByTagName('li').length).toEqual(2);
+
+                const newItems = [{ name: 'a' }, { name: 'b' }, { name: 'c' }];
+                data.set({ items: newItems });
+                expect(el.getElementsByTagName('li').length).toEqual(3);
+            });
+
+            it('should allow binding to the iterated item as well as any parent contexts', () => {
+                const span1 = document.createElement('span');
+                span1.setAttribute('data-text', 'item.name');
+                const span2 = document.createElement('span');
+                span2.setAttribute('data-text', 'data:foo');
+                listItem.appendChild(span1);
+                listItem.appendChild(span2);
+
+                riba.bind(el, bindData);
+                expect(el.getElementsByTagName('span')[0].textContent).toEqual('a');
+                expect(el.getElementsByTagName('span')[1].textContent).toEqual('bar');
+            });
+
+            it('should allow binding to the iterated element directly', () => {
+                listItem.setAttribute('data-text', 'item.name');
+                listItem.setAttribute('data-class', 'data:foo');
+                riba.bind(el, bindData);
+                expect(el.getElementsByTagName('li')[0].textContent).toEqual('a');
+                expect(el.getElementsByTagName('li')[0].className).toEqual('bar');
+            });
+
+            it('should insert items between any surrounding elements', () => {
+                const firstItem = document.createElement('li');
+                const lastItem = document.createElement('li');
+                firstItem.textContent = 'first';
+                lastItem.textContent = 'last';
+                list.appendChild(lastItem);
+                list.insertBefore(firstItem, listItem);
+                listItem.setAttribute('data-text', 'item.name');
+
+                riba.bind(el, bindData);
+
+                expect(el.getElementsByTagName('li')[0].textContent).toEqual('first');
+                expect(el.getElementsByTagName('li')[1].textContent).toEqual('a');
+                expect(el.getElementsByTagName('li')[2].textContent).toEqual('b');
+                expect(el.getElementsByTagName('li')[3].textContent).toEqual('last');
+            });
+
+            it('should allow binding to the iterated element index', () => {
+                listItem.setAttribute('data-index', '%item%');
+                riba.bind(el, bindData);
+                expect(el.getElementsByTagName('li')[0].getAttribute('index')).toEqual('0');
+                expect(el.getElementsByTagName('li')[1].getAttribute('index')).toEqual('1');
+            });
+
+            it('should allow the developer to configure the index attribute available in the iteration', () => {
+                listItem.setAttribute('data-index', 'itemIndex');
+                listItem.setAttribute('index-property', 'itemIndex');
+                riba.bind(el, bindData);
+                expect(el.getElementsByTagName('li')[0].getAttribute('index')).toEqual('0');
+                expect(el.getElementsByTagName('li')[1].getAttribute('index')).toEqual('1');
+            });
+        });
+    });
+
+    describe('Updates', () => {
+        it('should change the value', () => {
+            el.setAttribute('data-text', 'data:foo');
+            riba.bind(el, bindData);
+            data.set({ foo: 'some new value' });
+            expect(el.textContent).toEqual(data.get('foo'));
+        });
+    });
+
+    describe('Input', () => {
+        it('should update the model value', () => {
+            input.setAttribute('data-value', 'data:foo');
+            riba.bind(input, bindData);
+            input.value = 'some new value';
+            const event = document.createEvent('HTMLEvents');
+            event.initEvent('input', true, true);
+            input.dispatchEvent(event);
+            expect(data.get('foo')).toEqual('some new value');
+        });
+
+        it('should allow to change the event listened', () => {
+            let event;
+            input.setAttribute('data-value', 'data:foo');
+            input.setAttribute('event-name', 'blur');
+            riba.bind(input, bindData);
+            input.value = 'some new value';
+            event = document.createEvent('HTMLEvents');
+            event.initEvent('input', true, true);
+            input.dispatchEvent(event);
+            expect(data.get('foo')).toEqual('bar');
+
+            event = document.createEvent('HTMLEvents');
+            event.initEvent('blur', true, true);
+            input.dispatchEvent(event);
+            expect(data.get('foo')).toEqual('some new value');
         });
     });
 });

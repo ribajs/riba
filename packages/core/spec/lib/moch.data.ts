@@ -1,15 +1,22 @@
-import { IObserverSyncCallback } from '../../src/interfaces'
+import { IObserverSyncCallback } from '../../src/interfaces';
+import { Observer } from '../../src/observer';
+
+export interface IChange {
+    [key: string]: Observer[];
+}
 
 export class Data {
 
     private attributes: {[key: string]: any};
+
+    private change: IChange;
 
     constructor(attributes: {[key: string]: any}) {
         this.attributes = attributes || {};
         this.change = {};
     }
 
-    public on(key: string, callback: IObserverSyncCallback) {
+    public on(key: string, callback: Observer) {
         if (this.hasCallback(key, callback)) {
             return;
         }
@@ -52,20 +59,20 @@ export class Data {
             return;
         }
 
-        for (let i in this.change[key]) {
+        for (const i in this.change[key]) {
             if (this.change[key][i]) {
-                this.change[key][i].sync(this.get(key));
+                this.change[key][i].sync();
             }
         }
     }
 
-    private indexOf(array: Array<any>, value: any) {
+    private indexOf<Type>(array: Array<Type>, value: Type) {
         array = array || [];
         if (array.indexOf) {
             return array.indexOf(value);
         }
 
-        for (let i in array || {}) {
+        for (let i = 0; i < array.length; i++) {
             if (array[i] === value) {
                 return i;
             }

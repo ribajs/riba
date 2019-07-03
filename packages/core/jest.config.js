@@ -19,4 +19,5 @@ module.exports = {
         "json",
         "lcov"
     ],
+    "setupFilesAfterEnv": ["jest-extended"]
 };
