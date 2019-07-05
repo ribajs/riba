@@ -1,7 +1,6 @@
 import {
   IModuleFormatters,
   IModuleBinders,
-  IBinder,
   IAdapters,
   Root,
   IComponents,
