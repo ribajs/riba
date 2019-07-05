@@ -1,5 +1,4 @@
 import { IBinder } from '../interfaces';
-import { JQuery as $ } from '../modules/jquery.module';
 import { Utils } from '../services/utils';
 
 /**

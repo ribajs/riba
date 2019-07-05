@@ -3,11 +3,11 @@ import {
 } from '../index';
 
 import {
-    assignBinder,
-} from './assign.binder';
+    starBinder,
+} from './star.binder';
 
 const riba = new Riba();
-riba.module.binderService.regist(assignBinder);
+riba.module.binderService.regist(starBinder);
 
 describe('riba.binders', () => {
     let element: HTMLDivElement;
@@ -20,19 +20,20 @@ describe('riba.binders', () => {
         fragment.appendChild(element);
 
         model = {
-            value: 'world',
+            barString: 'bar',
         };
     });
 
-    describe('assign-*', () => {
-        it('Set\'s a value to the model given as json string', () => {
-            element.setAttribute('rv-assign', '{"newValue": "hello"}');
+    describe('*', () => {
+        it('Adds or removes the class name passed as star parameter', () => {
+            element.className = 'foobar';
+            element.setAttribute('rv-foo', 'barString');
 
-            expect(model).toEqual({value: 'world'});
+            expect(element.getAttribute('foo')).toEqual(null);
 
             riba.bind(fragment, model);
 
-            expect(model).toEqual({value: 'world', newValue: 'hello'});
+            expect(element.getAttribute('foo')).toEqual('bar');
         });
     });
 

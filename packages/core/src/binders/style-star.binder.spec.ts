@@ -46,8 +46,8 @@ describe('riba.binders', () => {
             expect(element.getAttribute('style')).toEqual('padding-top: 0px; background-color: black;');
 
             model.style.paddingTop = undefined;
-            // TODO not implemented yet
-            // expect(element.getAttribute('style')).toEqual('background-color: black;');
+            // TODO delete style not implemented yet
+            expect(element.getAttribute('style')).toEqual('background-color: black;');
         });
     });
 
