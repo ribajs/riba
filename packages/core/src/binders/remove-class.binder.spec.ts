@@ -27,7 +27,7 @@ describe('riba.binders', () => {
     });
 
     describe('remove-class', () => {
-        it('disables the element', () => {
+        it('Removes a class by a value string in the model', () => {
             element.className = 'foobar remove-me';
             element.setAttribute('rv-remove-class', 'class.remove');
 
@@ -39,7 +39,6 @@ describe('riba.binders', () => {
 
             model.class.remove = 'foobar';
 
-            // TODO readd class?
             expect(element.className).toEqual('');
         });
     });

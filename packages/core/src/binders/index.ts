@@ -1,4 +1,4 @@
-export { animateStarBinder } from './animateStarStar.binder';
+export { animateStarBinder } from './animateStar.binder';
 export { assignBinder } from './assign.binder';
 export { classBinder } from './class.binder';
 export { checkedBinder } from './checked.binder';

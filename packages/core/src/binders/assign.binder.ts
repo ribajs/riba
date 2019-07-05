@@ -13,6 +13,7 @@ export interface IAssign {
 export const assignBinder: IBinder<IAssign> = {
   name: 'assign',
   routine(el: HTMLElement, obj: any) {
+    console.log('obj', obj);
     Utils.extend(false, this.view.models, obj);
   },
 };

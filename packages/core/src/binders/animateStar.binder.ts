@@ -2,8 +2,8 @@ import { JQuery as $ } from '../modules';
 import { IBinder } from '../interfaces';
 
 /**
- * animate-{class}-{duration in ms}
- * Add animation class with start and done affix with duration
+ * animate-{class}
+ * Add / remove animation class with start and done affix
  */
 export const animateStarBinder: IBinder<boolean> = {
   name: 'animate-*',
