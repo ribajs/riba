@@ -6,6 +6,7 @@
 - Binders: Remove One-Way-Binder as funktion feature (One-Way-Binders are needing the `routine` method now)
 - Simplified binders interface 
 - Binders now need their own name as a property
+- Renamed `css-*` binder tp `style-`
 
 
 ## 0.16.2
