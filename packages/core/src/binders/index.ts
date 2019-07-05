@@ -3,7 +3,7 @@ export { assignBinder } from './assign.binder';
 export { classBinder } from './class.binder';
 export { checkedBinder } from './checked.binder';
 export { classStarBinder } from './class-star.binder';
-export { cssStarBinder } from './css-star.binder';
+export { cssStarBinder } from './style-star.binder';
 export { enabledBinder } from './enabled.binder';
 export { disabledBinder } from './disabled.binder';
 export { onStarBinder } from './on-star.binder';

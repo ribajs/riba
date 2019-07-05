@@ -192,7 +192,6 @@ export class Utils {
   /**
    * Returns a camel-cased version of the string. Used when translating an
    * element's attribute name into a property name for the component's scope.
-   * TODO move to utils
    * @param string
    */
   public static camelCase = (str: string) => {
