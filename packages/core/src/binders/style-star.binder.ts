@@ -1,25 +1,21 @@
 import { IBinder } from '../interfaces';
-import { Utils } from '../services/utils';
 
 /**
- * css-*
+ * style-*
  * Adds a style to the element.
  *
  * ```html
  * <div rv-style-background-color="'blue'"></div>
  * ```
- * @see http://api.jquery.com/css/
  */
 export const cssStarBinder: IBinder<string> = {
   name: 'style-*',
   routine(el: HTMLElement, value: string) {
-    const propertyName = Utils.camelCase((this as any).args[0]);
-    (el.style as any)[propertyName] = value;
-    // if (typeof(value) !== 'undefined') {
-    //   (el.style as any)[propertyName] = value;
-    // } else {
-    //   // TODO how remove style?
-    //   delete (el.style as any)[propertyName];
-    // }
+    const propertyName = (this as any).args[0];
+    if (value === null || value === undefined || value === '') {
+      (el.style as any).removeProperty(propertyName);
+    } else {
+      (el.style as any)[propertyName] = value;
+    }
   },
 };
