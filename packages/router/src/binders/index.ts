@@ -1,26 +1,6 @@
-import { IModuleBinders } from '@ribajs/core';
-
-import { viewBinderWrapper } from './view.binder';
-import { viewStaticBinderWrapper } from './view-static.binder';
-import { routeBinderWrapper } from './route.binder';
-import { routeClassStarBinderWrapper } from './route-class-star.binder';
-import { parentRouteClassStarBinderWrapper } from './parent-route-class-star.binder';
-import { routeBackOnStarBinderWrapper } from './route-back-on-star.binder';
-
-const routerBinders: IModuleBinders<any> = {};
-
-const viewBinder = viewBinderWrapper();
-const viewStaticBinder = viewStaticBinderWrapper();
-const routeBinder = routeBinderWrapper();
-const routeClassStarBinder = routeClassStarBinderWrapper();
-const parentRouteClassStarBinder = parentRouteClassStarBinderWrapper();
-const routeBackOnStarBinder = routeBackOnStarBinderWrapper();
-
-routerBinders[viewBinder.name] = viewBinder.binder;
-routerBinders[viewStaticBinder.name] = viewStaticBinder.binder;
-routerBinders[routeBinder.name] = routeBinder.binder;
-routerBinders[routeClassStarBinder.name] = routeClassStarBinder.binder;
-routerBinders[parentRouteClassStarBinder.name] = parentRouteClassStarBinder.binder;
-routerBinders[routeBackOnStarBinder.name] = routeBackOnStarBinder.binder;
-
-export { routerBinders };
+export { viewBinder } from './view.binder';
+export { viewStaticBinder } from './view-static.binder';
+export { routeBinder } from './route.binder';
+export { routeClassStarBinder } from './route-class-star.binder';
+export { parentRouteClassStarBinder } from './parent-route-class-star.binder';
+export { routeBackOnStarBinder } from './route-back-on-star.binder';

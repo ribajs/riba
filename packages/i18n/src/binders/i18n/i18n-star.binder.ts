@@ -14,9 +14,9 @@ export interface IBinderAttributeChangedEvent {
 /**
  *
  */
-export const i18nStarBinderWrapper: BinderWrapper = (localesService: ALocalesService) => {
-  const name = 'i18n-*';
-  const binder: IBinder<string> = {
+export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALocalesService) => {
+  return {
+    name: 'i18n-*',
     block: false,
     priority: 0,
     bind(el: HTMLUnknownElement) {
@@ -192,10 +192,5 @@ export const i18nStarBinderWrapper: BinderWrapper = (localesService: ALocalesSer
       this.customData.i18n.event.off('changed', this.customData.onLanguageChanged);
     },
 
-  };
-
-  return {
-    binder,
-    name,
   };
 };

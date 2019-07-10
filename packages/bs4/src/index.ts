@@ -1,7 +1,7 @@
 export * from './services';
 
 // import * from './interfaces/interfaces';
-import { binders } from './binders';
+import * as binders  from './binders';
 import * as components from './components';
 // import * as formatters from './formatters/bs4.formatters';
 import * as services from './services';

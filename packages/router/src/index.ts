@@ -4,7 +4,7 @@ export * from './binders';
 export * from './interfaces';
 export * from './services';
 
-import { routerBinders } from './binders';
+import * as routerBinders from './binders';
 import * as services from './services';
 
 export const routerModule = <IRibaModule> {

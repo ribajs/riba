@@ -1,4 +1,4 @@
-import { IBinder, BinderWrapper, eventHandlerFunction, JQuery } from '@ribajs/core';
+import { IBinder, eventHandlerFunction, JQuery } from '@ribajs/core';
 
 export const goBack = () => {
   window.history.back();
@@ -7,33 +7,27 @@ export const goBack = () => {
 /**
  * Calls `window.history.back()` an event.
  */
-const routeBackOnStarBinderWrapper: BinderWrapper = () => {
+export const routeBackOnStarBinder: IBinder<eventHandlerFunction> = {
 
-  const name = 'route-back-on-*';
+  name: 'route-back-on-*',
+  priority: 3000,
 
-  const binder: IBinder<eventHandlerFunction> = {
-    priority: 3000,
+  bind(el) {
+    // noting
+  },
 
-    bind(el) {
-      // noting
-    },
+  unbind(el: HTMLElement) {
+    JQuery(el).off(this.args[0] as string, goBack);
+  },
 
-    unbind(el: HTMLElement) {
-      JQuery(el).off(this.args[0] as string, goBack);
-    },
+  routine(el: HTMLElement, options: any) {
 
-    routine(el: HTMLElement, options: any) {
+    if (this.args === null) {
+      throw new Error('args is null');
+    }
+    const eventName = this.args[0] as string;
+    JQuery(el).off(eventName, goBack);
 
-      if (this.args === null) {
-        throw new Error('args is null');
-      }
-      const eventName = this.args[0] as string;
-      JQuery(el).off(eventName, goBack);
-
-      JQuery(el).on(eventName, goBack);
-    },
-  };
-  return { binder, name };
+    JQuery(el).on(eventName, goBack);
+  },
 };
-
-export { routeBackOnStarBinderWrapper };
