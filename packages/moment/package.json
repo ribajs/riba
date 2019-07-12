@@ -1,10 +1,10 @@
 {
-  "name": "@ribajs/jquery",
-  "description": "JQuery module for Riba.js",
+  "name": "@ribajs/moment",
+  "description": "Moment.js module for Riba.js",
   "version": "0.18.6",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "contributors": [],
-  "url": "https://github.com/ribajs/riba/tree/master/packages/jquery",
+  "url": "https://github.com/ribajs/riba/tree/master/packages/moment",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "source": "src/index.ts",
