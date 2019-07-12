@@ -32,7 +32,7 @@ const shopifyEasdk = require(shopifyEasdkPath);
 const shopifyTdaPath = path.join(__dirname, '..', 'packages/shopify-tda/package.json');
 const shopifyTda = require(shopifyTdaPath);
 
-const exampleEachStarPath = path.join(__dirname, '..', 'examples/each-star/package.json');
+const exampleEachStarPath = path.join(__dirname, '..', 'examples/binders/each-star/package.json');
 const exampleEachStar = require(exampleEachStarPath);
 
 console.log('Upgrade packages to v' + general.version);
