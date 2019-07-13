@@ -3,14 +3,16 @@ import { IFormatter, IModuleFormatters, IModuleFormatterWrapper } from '../inter
 import { Utils } from './utils';
 
 export class FormatterService {
-  private formatters: IModuleFormatters;
+  private formatters: IModuleFormatters = {};
   private debug = Debug('formatters:FormatterService');
 
   /**
    *
    */
-  constructor(formatters: IModuleFormatters) {
-    this.formatters = formatters;
+  constructor(formatters?: IModuleFormatters) {
+    if (formatters) {
+      this.regists(formatters);
+    }
   }
 
   /**

@@ -5,7 +5,6 @@ import {
   IBindableElement,
 } from './interfaces';
 import { Binding } from './binding';
-import { ComponentService} from './services/component.service';
 import { parseNode, parseDeclaration } from './parsers';
 import { Debug } from './modules/debug.module';
 import { RibaComponent, AbstractRibaComponent } from './components';

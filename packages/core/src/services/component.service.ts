@@ -4,15 +4,17 @@ import { AbstractRibaComponent } from '../components';
 
 export class ComponentService {
 
-  private components: IComponents;
+  private components: IComponents = {};
   private debug = Debug('components:ComponentService');
 
   /**
    *
    * @param components
    */
-  constructor(components: IComponents) {
-    this.components = components;
+  constructor(components?: IComponents) {
+    if (components) {
+      this.regists(components);
+    }
   }
 
   /**
