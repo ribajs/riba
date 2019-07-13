@@ -7,7 +7,7 @@ import {
 } from './show.binder';
 
 const riba = new Riba();
-riba.module.binderService.regist(showBinder);
+riba.module.binder.regist(showBinder);
 
 describe('riba.binders', () => {
     let el: HTMLUnknownElement;

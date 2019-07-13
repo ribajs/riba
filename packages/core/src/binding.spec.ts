@@ -33,11 +33,11 @@ import {
 import { ITwoWayFormatter, IAdapter } from './interfaces';
 
 const riba = new Riba();
-riba.module.binderService.regist(textBinder);
-riba.module.binderService.regist(htmlBinder);
-riba.module.binderService.regist(valueBinder);
-riba.module.binderService.regist(eachStarBinder);
-riba.module.binderService.regist(classBinder);
+riba.module.binder.regist(textBinder);
+riba.module.binder.regist(htmlBinder);
+riba.module.binder.regist(valueBinder);
+riba.module.binder.regist(eachStarBinder);
+riba.module.binder.regist(classBinder);
 
 describe('riba.Binding', () => {
     let model: object;

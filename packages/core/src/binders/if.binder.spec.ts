@@ -12,7 +12,7 @@ import {
 
 describe('if', () => {
     const riba = new Riba();
-    riba.module.binderService.regist(ifBinder);
+    riba.module.binder.regist(ifBinder);
 
     let el: HTMLDivElement;
     let model: any;
@@ -145,7 +145,7 @@ describe('if', () => {
 
 describe('Array observe and unobserve', () => {
     const riba = new Riba();
-    riba.module.binderService.regist(eachStarBinder);
+    riba.module.binder.regist(eachStarBinder);
 
     let fragment: DocumentFragment;
     let el1: HTMLDivElement;

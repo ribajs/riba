@@ -7,7 +7,7 @@ import {
 } from './class.binder';
 
 const riba = new Riba();
-riba.module.binderService.regist(classBinder);
+riba.module.binder.regist(classBinder);
 
 describe('riba.binders', () => {
     let element: HTMLDivElement;

@@ -17,7 +17,7 @@ export const customBinder: IBinder<string> = {
 describe('Custom binder with no attribute value', () => {
 
     const riba = new Riba();
-    riba.module.binderService.regist(customBinder);
+    riba.module.binder.regist(customBinder);
 
     let el: HTMLDivElement;
     let model: any;

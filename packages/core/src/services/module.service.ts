@@ -5,9 +5,9 @@ import { ComponentService } from './component.service';
 import { FormatterService } from './formatter.service';
 
 export class ModulesService {
-  public binderService: BindersService;
-  public componentService: ComponentService;
-  public formatterService: FormatterService;
+  public binder: BindersService;
+  public component: ComponentService;
+  public formatter: FormatterService;
   protected debug = Debug('binders:ModulesService');
 
   /**
@@ -15,9 +15,9 @@ export class ModulesService {
    * @param binders;
    */
   constructor(binders: IModuleBinders<any>, components: IComponents, formatters: IModuleFormatters) {
-    this.binderService = new BindersService(binders);
-    this.componentService = new ComponentService(components);
-    this.formatterService = new FormatterService(formatters);
+    this.binder = new BindersService(binders);
+    this.component = new ComponentService(components);
+    this.formatter = new FormatterService(formatters);
   }
 
   /**
@@ -26,13 +26,13 @@ export class ModulesService {
    */
   public regist(module: IRibaModule) {
     if (module.binders) {
-      this.binderService.regists(module.binders);
+      this.binder.regists(module.binders);
     }
     if (module.components) {
-      this.componentService.regists(module.components);
+      this.component.regists(module.components);
     }
     if (module.formatters) {
-      this.formatterService.regists(module.formatters);
+      this.formatter.regists(module.formatters);
     }
   }
 }

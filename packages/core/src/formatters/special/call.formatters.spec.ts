@@ -6,8 +6,8 @@ import { call } from './call.formatter';
 import { textBinder } from '../../binders/text.binder';
 
 const riba = new Riba();
-riba.module.formatterService.regist(call, 'call');
-riba.module.binderService.regist(textBinder);
+riba.module.formatter.regist(call, 'call');
+riba.module.binder.regist(textBinder);
 
 interface IModel {
     fn?: (arg1: string, arg2: string) => string;

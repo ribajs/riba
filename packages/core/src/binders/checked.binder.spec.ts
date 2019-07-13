@@ -7,7 +7,7 @@ import {
 } from './checked.binder';
 
 const riba = new Riba();
-riba.module.binderService.regist(checkedBinder);
+riba.module.binder.regist(checkedBinder);
 
 describe('riba.binders', () => {
     let trueRadioInput: HTMLInputElement;

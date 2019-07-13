@@ -7,7 +7,7 @@ import {
 } from './enabled.binder';
 
 const riba = new Riba();
-riba.module.binderService.regist(enabledBinder);
+riba.module.binder.regist(enabledBinder);
 
 describe('riba.binders', () => {
     let button: HTMLButtonElement;

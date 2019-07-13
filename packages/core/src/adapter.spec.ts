@@ -23,8 +23,8 @@ describe('Functional', () => {
     let adapter: IAdapter;
 
     const riba = new Riba();
-    riba.module.binderService.regist(textBinder);
-    riba.module.binderService.regist(valueBinder);
+    riba.module.binder.regist(textBinder);
+    riba.module.binder.regist(valueBinder);
 
     beforeEach(() => {
         originalPrefix = riba.prefix;

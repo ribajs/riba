@@ -9,7 +9,7 @@ import {
 describe('riba.binders', () => {
     let el: HTMLUnknownElement;
     const riba = new Riba();
-    riba.module.binderService.regist(htmlBinder);
+    riba.module.binder.regist(htmlBinder);
 
     beforeEach(() => {
         riba.configure({

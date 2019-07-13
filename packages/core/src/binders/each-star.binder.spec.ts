@@ -12,8 +12,8 @@ import {
 
 describe('each-*', () => {
   const riba = new Riba();
-  riba.module.binderService.regist(eachStarBinder);
-  riba.module.binderService.regist(textBinder);
+  riba.module.binder.regist(eachStarBinder);
+  riba.module.binder.regist(textBinder);
 
   let fragment: DocumentFragment;
   let el: HTMLLIElement;
@@ -141,7 +141,7 @@ describe('each-*', () => {
 
 describe('nested-each-*', () => {
   const riba = new Riba();
-  riba.module.binderService.regist(eachStarBinder);
+  riba.module.binder.regist(eachStarBinder);
 
   let fragment: DocumentFragment;
   let el: HTMLSpanElement;

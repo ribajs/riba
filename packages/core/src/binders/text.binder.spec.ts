@@ -10,7 +10,7 @@ describe('riba.binders', () => {
     let el: HTMLUnknownElement;
 
     const riba = new Riba();
-    riba.module.binderService.regist(textBinder);
+    riba.module.binder.regist(textBinder);
 
     beforeEach(() => {
         riba.configure({

@@ -7,7 +7,7 @@ import {
 } from './remove-class.binder';
 
 const riba = new Riba();
-riba.module.binderService.regist(removeClassBinder);
+riba.module.binder.regist(removeClassBinder);
 
 describe('riba.binders', () => {
     let element: HTMLDivElement;

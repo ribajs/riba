@@ -64,14 +64,18 @@ export const valueBinder: IBinder<any> = {
             const option = (el as HTMLSelectElement).options[i] as HTMLOptionElement;
             option.selected = value.indexOf(option.value) > -1;
           }
+          // TODO check if the value was really changed
+          el.dispatchEvent(new Event('change'));
         }
       } else if (el.getAttribute('contenteditable')) {
         if (Utils.getString(value as string) !== oldValue) {
           el.innerHTML = value as string; // TODO write test for contenteditable
+          el.dispatchEvent(new Event('change'));
         }
       } else {
         if (Utils.getString(value as string) !== oldValue) {
           (el as HTMLInputElement).value = value != null ? value as string : '';
+          el.dispatchEvent(new Event('change'));
         }
       }
     }
