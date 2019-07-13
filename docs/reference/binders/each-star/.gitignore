@@ -1,1 +1,4 @@
 *.bunde.js
+node_modules/
+.cache/
+dist/

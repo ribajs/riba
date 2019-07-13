@@ -1,6 +1,7 @@
 <html>
 <head>
-  <script src="./index.ts"></script>
+    <script src="./index.bundle.js"></script>
+    <script src="./vendors~index.bundle.js"></script>
 </head>
 
 
@@ -14,7 +15,7 @@
   <button rv-on-click="sort">Sort</button>
   <button rv-on-click="reset">Reset</button>
   <div rv-each-item="items">
-    <div>Item {%item%} /&nbsp;{item.name}</div>
+      <div>Item {%item%} /&nbsp;{item.name}</div>
   </div>
 
 </div>
