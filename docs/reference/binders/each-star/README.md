@@ -13,6 +13,8 @@ Appends a new instance of the element in place for each item in an array. Each e
 <ul>
 ```
 
+<iframe src="https://codesandbox.io/embed/github/ribajs/riba/tree/master/docs/reference/binders/each-star?fontsize=14" title="each-star-example" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
 ### Nested `rv-each`
 By nesting elements bound by `rv-each`, a scope is created for each nest level. The variables from parent scopes can be acessed by child ones, using a resolution algorithm similar to JavaScript prototype chain, i.e., looks for current scope if not found, look in parent scope repeating until find.
 
