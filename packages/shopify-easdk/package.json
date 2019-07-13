@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/shopify-easdk",
   "description": "Shopify Embedded App SDK module for Riba.js",
-  "version": "0.18.6",
+  "version": "1.0.0",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "contributors": [],
   "url": "https://github.com/ribajs/riba/tree/master/packages/shopify",
@@ -42,8 +42,8 @@
     "webpack-cli": "^3.3.5"
   },
   "dependencies": {
-    "@ribajs/core": "^0.18.6",
-    "@ribajs/router": "^0.18.6"
+    "@ribajs/core": "^1.0.0",
+    "@ribajs/router": "^1.0.0"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"
