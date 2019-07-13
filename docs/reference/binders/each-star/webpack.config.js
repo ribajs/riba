@@ -24,16 +24,20 @@ module.exports = {
         safari10: true,
       },
     })],
+    splitChunks: {
+      chunks: 'all'
+    },
   },
   // Change to your "entry-point".
   entry: {
-    'app': './main.ts',
+    'index': './index.ts',
   },
   // devtool: 'inline-source-map',
   mode: 'production', // 'development', //'production', 
   output: {
     globalObject: 'self',
-    filename: 'index.js',
+    filename: '[name].bundle.js',
+    chunkFilename: '[name].bundle.js',
     path: path.resolve(__dirname),
   },
   resolve: {

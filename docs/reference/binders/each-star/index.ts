@@ -30,7 +30,7 @@ export class Main {
   };
 
   constructor() {
-    this.debug('init the main application');
+    this.debug('init the main application test');
 
     // Regist modules
     this.riba.module.regist(coreModule);
