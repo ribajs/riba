@@ -64,7 +64,6 @@ updateModule('packages/i18n/', true);
 updateModule('packages/router/', true);
 updateModule('packages/shopify/', true);
 updateModule('packages/shopify-easdk/', true);
-updateModule('packages/shopify-easdk/', true);
 updateModule('packages/shopify-tda/', true);
 
 // WIP Riba modules, not ready to publish
