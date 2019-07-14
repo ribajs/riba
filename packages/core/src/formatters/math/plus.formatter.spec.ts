@@ -30,7 +30,7 @@ describe('riba.formatters', () => {
             };
             const el = document.createElement('div');
             el.setAttribute('rv-text', 'obj.value | plus 200');
-            const view = riba.bind(el, model);
+            riba.bind(el, model);
             expect(el.textContent).toEqual('300');
         });
     });

@@ -31,14 +31,14 @@ describe('each-*', () => {
   });
 
   it('binds to the model creating a list item for each element in items', () => {
-    const view = riba.bind(fragment, model);
+    riba.bind(fragment, model);
 
     // one child for each element in the model plus 1 for the comment placeholder
     expect(fragment.childNodes.length).toBe(model.items.length + 1);
   });
 
   it('reflects changes to the model into the DOM', () => {
-    const view = riba.bind(fragment, model);
+    riba.bind(fragment, model);
 
     expect(fragment.childNodes[1].textContent).toBe('0');
 
@@ -57,7 +57,7 @@ describe('each-*', () => {
   });
 
   it('lets you push an item', () => {
-    const view = riba.bind(fragment, model);
+    riba.bind(fragment, model);
     const originalLength = model.items.length;
 
     // one child for each element in the model plus 1 for the comment placeholder
@@ -69,7 +69,7 @@ describe('each-*', () => {
   });
 
   it('lets you pop an item', () => {
-    const view = riba.bind(fragment, model);
+    riba.bind(fragment, model);
     const originalLength = model.items.length;
 
     // one child for each element in the model plus 1 for the comment placeholder
@@ -88,7 +88,7 @@ describe('each-*', () => {
   });
 
   it('lets you shift an item', () => {
-    const view = riba.bind(fragment, model);
+    riba.bind(fragment, model);
     const originalLength = model.items.length;
 
     // one child for each element in the model plus 1 for the comment placeholder
@@ -105,7 +105,7 @@ describe('each-*', () => {
   });
 
   it('lets you splice an item', () => {
-    const view = riba.bind(fragment, model);
+    riba.bind(fragment, model);
     const originalLength = model.items.length;
 
     // one child for each element in the model plus 1 for the comment placeholder

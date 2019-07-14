@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/router",
   "description": "Routing extension for Riba.js inspired by Barba.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "contributors": [
     "Luigi De Rosa <lurukee@gmail.com>"
@@ -44,6 +44,6 @@
     "webpack-cli": "^3.3.5"
   },
   "dependencies": {
-    "@ribajs/core": "^1.0.0"
+    "@ribajs/core": "^1.0.1"
   }
 }

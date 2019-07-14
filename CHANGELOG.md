@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1
+
+- Changed Binder and Formatter interface to allow any other properties or methods on it.
+
 ## 1.0.0
 
 - Moved tests from mocha to jest

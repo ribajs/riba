@@ -1,19 +1,15 @@
-import { Debug } from '../modules';
 import { IBinder, IModuleBinders } from '../interfaces';
 import { Utils } from './utils';
 
 export class BindersService {
-  private binders: IModuleBinders<any> = {};
-  private debug = Debug('binders:BindersService');
+  private binders: IModuleBinders<any>;
 
   /**
    *
    * @param binders;
    */
-  constructor(binders?: IModuleBinders<any>) {
-    if (binders) {
-      this.regists(binders);
-    }
+  constructor(binders: IModuleBinders<any>) {
+    this.binders = binders;
   }
 
   /**

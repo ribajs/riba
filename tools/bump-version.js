@@ -50,7 +50,7 @@ const updateModule = (modulePath, publish = false) => {
     
     fs.writeFileSync(packagePath, JSON.stringify(package, null, 2));
 
-    if (publish) {
+    if (publish && process.argv[2] && process.argv[2] === '--publish') {
       exec(`npm publish`, {cwd: path.dirname(packagePath)}, log);
     }
     

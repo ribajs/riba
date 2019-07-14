@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/core",
   "description": "Core module of Riba.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "private": false,
   "contributors": [
@@ -26,7 +26,7 @@
   "scripts": {
     "test": "npm run type-check && jest --config=jest.config.js",
     "test:watch": "jest --config=jest.config.js --watch",
-    "type-check": "tslint -c tslint.json 'src/**/*.ts' && tsc --noEmit",
+    "type-check": "tslint --fix -c tslint.json 'src/**/*.ts' && tsc --noEmit",
     "build": "tsc",
     "build:browser": "npm run type-check && npm run webpack:browser",
     "webpack:browser": "webpack && webpack --config webpack.dev.config.js",

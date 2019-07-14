@@ -1,5 +1,4 @@
 import { AbstractRibaComponent } from '../components';
-import { IModuleBinders, IModuleFormatters, IAdapters, IBindable } from './';
 
 export interface IModuleComponents {
   [name: string]: typeof AbstractRibaComponent;

@@ -1,7 +1,7 @@
 {
   "name": "ribajs",
   "description": "Declarative data binding + templating solution.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "contributors": [],
   "private": true,
@@ -19,7 +19,8 @@
   },
   "scripts": {
     "link": "(cd packages/core && npm run link) && (cd packages/i18n && npm run link) && (cd packages/router && npm run link) && (cd packages/bs4 && npm run link) && (cd packages/shopify && npm run link) && (cd packages/shopify-easdk && npm run link) && (cd packages/shopify-tda && npm run link) && (cd packages/core && npm install)",
-    "publish": "node tools/publish.js",
+    "bump-version": "node tools/bump-version.js",
+    "publish": "node tools/bump-version.js --publish",
     "doc": "harp server docs/_harp ./docs",
     "build-doc": "harp compile docs/_harp ./docs"
   },

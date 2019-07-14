@@ -9,10 +9,8 @@ export class FormatterService {
   /**
    *
    */
-  constructor(formatters?: IModuleFormatters) {
-    if (formatters) {
-      this.regists(formatters);
-    }
+  constructor(formatters: IModuleFormatters) {
+    this.formatters = formatters;
   }
 
   /**

@@ -229,16 +229,7 @@ export default ($: any) => {
                     origTarget = e.target;
 
                     var origEvent = e.originalEvent;
-                    var start_time = Date.now(),
-                        startPosition = {
-                            'x': (settings.touch_capable) ? origEvent.touches[0].pageX : e.pageX,
-                            'y': (settings.touch_capable) ? origEvent.touches[0].pageY : e.pageY
-                        },
-                        startOffset = {
-                            'x': (settings.touch_capable) ? origEvent.touches[0].pageX - origEvent.touches[0].target.offsetLeft : e.offsetX,
-                            'y': (settings.touch_capable) ? origEvent.touches[0].pageY - origEvent.touches[0].target.offsetTop : e.offsetY
-                        };
-
+                    var start_time = Date.now();
                     start_pos.x = (e.originalEvent.targetTouches) ? e.originalEvent.targetTouches[0].pageX : e.pageX;
                     start_pos.y = (e.originalEvent.targetTouches) ? e.originalEvent.targetTouches[0].pageY : e.pageY;
 
@@ -314,11 +305,9 @@ export default ($: any) => {
         setup: function () {
             var thisObject = this,
                 $this = $(thisObject),
-                origTarget,
                 action: number,
                 firstTap: any = null,
                 origEvent: any,
-                cooloff,
                 cooling = false;
 
             $this.on(settings.startevent, function doubleTapFunc1(e: any) {
@@ -327,7 +316,6 @@ export default ($: any) => {
                 }
 
                 $this.data('doubletapped', false);
-                origTarget = e.target;
                 $this.data('callee1', doubleTapFunc1);
 
                 origEvent = e.originalEvent;
@@ -389,11 +377,6 @@ export default ($: any) => {
                     }
 
                     cooling = true;
-
-                    cooloff = window.setTimeout(function () {
-                        cooling = false;
-                    }, settings.doubletap_int);
-
                 } else {
                     $this.data('lastTouch', now);
                     action = window.setTimeout(function () {
@@ -438,7 +421,7 @@ export default ($: any) => {
                 }
             }).on(settings.endevent, function singleTapFunc2(e: any) {
                 $this.data('callee2', singleTapFunc2);
-                if (e.target == origTarget) {
+                if (e.target === origTarget) {
 
                     // Get the end point:
                     var end_pos_x = (e.originalEvent.changedTouches) ? e.originalEvent.changedTouches[0].pageX : e.pageX,
@@ -518,8 +501,7 @@ export default ($: any) => {
                 var end_x = (e.originalEvent.targetTouches) ? e.originalEvent.changedTouches[0].pageX : e.pageX,
                     end_y = (e.originalEvent.targetTouches) ? e.originalEvent.changedTouches[0].pageY : e.pageY,
                     diff_x = (start_pos.x - end_x),
-                    diff_y = (start_pos.y - end_y),
-                    eventName;
+                    diff_y = (start_pos.y - end_y);
 
                 if (origTarget == e.target && started && ((Date.now() - start_time) < settings.taphold_threshold) && ((start_pos.x == end_x && start_pos.y == end_y) || (diff_x >= -(settings.tap_pixel_range) && diff_x <= settings.tap_pixel_range && diff_y >= -(settings.tap_pixel_range) && diff_y <= settings.tap_pixel_range))) {
                     var origEvent = e.originalEvent;
@@ -767,7 +749,6 @@ export default ($: any) => {
 
     // This is the orientation change (largely borrowed from jQuery Mobile):
     var win = $(window),
-        special_event,
         get_orientation: any,
         last_orientation: any,
         initial_orientation_is_landscape,
@@ -793,7 +774,7 @@ export default ($: any) => {
         }
     }
 
-    $.event.special.orientationchange = special_event = {
+    $.event.special.orientationchange = {
         setup: function () {
             // If the event is supported natively, return false so that jQuery
             // will on to the event using DOM methods.

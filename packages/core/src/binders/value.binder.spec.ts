@@ -40,12 +40,12 @@ describe('riba.binders', () => {
         });
 
         it('binds to the model to input', () => {
-            const view = riba.bind(fragment, model);
+            riba.bind(fragment, model);
             expect(el.value).toBe(model.value);
         });
 
         it('reflects changes to the model into the DOM', () => {
-            const view = riba.bind(fragment, model);
+            riba.bind(fragment, model);
 
             expect(el.value).toBe('foobar');
 

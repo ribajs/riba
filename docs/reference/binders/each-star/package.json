@@ -1,6 +1,6 @@
 {
   "name": "each-star-example",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.html",
   "scripts": {
@@ -26,6 +26,6 @@
   },
   "dependencies": {
     "@types/jquery": "^3.3.30",
-    "@ribajs/core": "^1.0.0"
+    "@ribajs/core": "^1.0.1"
   }
 }

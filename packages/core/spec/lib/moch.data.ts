@@ -20,7 +20,7 @@ export class Data {
         if (this.hasCallback(key, callback)) {
             return;
         }
-        const ref = this.change[key] || (this.change[key] = []);
+        this.change[key] = this.change[key] || [];
         this.change[key].push(callback);
     }
 

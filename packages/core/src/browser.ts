@@ -1,5 +1,3 @@
-import { JQuery } from './modules';
-
 import {
   Riba,
   coreModule,
