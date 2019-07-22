@@ -4,7 +4,7 @@ import {
 
 import {
     onStarBinder,
-} from './on-star.binder';
+} from './on-[event].binder';
 
 import {
     valueBinder,

@@ -4,7 +4,7 @@ import {
 
 import {
     animateStarBinder,
-} from './animateStar.binder';
+} from './animate-[classname].binder';
 
 const riba = new Riba();
 riba.module.binder.regist(animateStarBinder);

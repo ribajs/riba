@@ -4,7 +4,7 @@ import {
 
 import {
     starBinder,
-} from './star.binder';
+} from './[attribute].binder';
 
 const riba = new Riba();
 riba.module.binder.regist(starBinder);
