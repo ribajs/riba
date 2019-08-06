@@ -4,7 +4,7 @@ import {
 
 import {
     cssStarBinder,
-} from './style-star.binder';
+} from './style-[css-property].binder';
 
 const riba = new Riba();
 riba.module.binder.regist(cssStarBinder);

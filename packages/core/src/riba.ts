@@ -11,7 +11,7 @@ import { Utils } from './services/utils';
 import { parseTemplate, parseType } from './parsers';
 import { Binding } from './binding';
 import { adapter } from './adapter';
-import { starBinder } from './binders/star.binder';
+import { starBinder } from './binders/[attribute].binder';
 
 import { View } from './view';
 import { Observer } from './observer';
