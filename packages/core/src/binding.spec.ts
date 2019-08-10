@@ -24,7 +24,7 @@ import {
 
 import {
     eachStarBinder,
-} from '../src/binders/each-star.binder';
+} from '../src/binders/each-[item].binder';
 
 import {
     classBinder,

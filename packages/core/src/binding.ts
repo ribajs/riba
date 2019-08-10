@@ -99,7 +99,7 @@ export class Binding {
         this.observer = this.observe(this.view.models, this.keypath, this);
         this.model = this.observer.target;
       } else {
-        throw new Error('Unknown type in token');
+        throw new Error(`[${this.binder.name}] Unknown type in token`);
       }
     } else {
       this.value = undefined;
@@ -138,7 +138,7 @@ export class Binding {
         }
         return observer.value();
       } else {
-        throw new Error('Unknown argument type');
+        throw new Error(`[${this.binder.name}] Unknown argument type`);
       }
     });
   }
@@ -149,21 +149,21 @@ export class Binding {
    */
   public formattedValue(value: any) {
     if (this.formatters === null) {
-      throw new Error('formatters is null');
+      throw new Error(`[${this.binder.name} formatters is null`);
     }
 
     return this.formatters.reduce((result: any/*check type*/, declaration: string /*check type*/, index: number) => {
       const args = declaration.match(Binding.FORMATTER_ARGS);
       if (args === null) {
-        throw new Error(`No args matched from FORMATTER_ARGS "${declaration}"`);
+        throw new Error(`[${this.binder.name}] No args matched from FORMATTER_ARGS "${declaration}"`);
       }
       const id = args.shift();
       if (!id) {
-        throw new Error('No id found in args');
+        throw new Error(`[${this.binder.name}] No id found in args`);
       }
 
       if (!this.view.options.formatters) {
-        throw new Error('No formatters are defined');
+        throw new Error(`[${this.binder.name}] No formatters are defined`);
       }
 
       const formatter = this.view.options.formatters[id];
