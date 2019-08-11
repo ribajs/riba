@@ -143,7 +143,7 @@ export function parseNode(view: View, node: IDataElement, templateDelimiters: Ar
         }
         if (token.type === 1) {
           // TODO fix any
-          view.buildBinding(text as any, null, token.value, View.textBinder, null);
+          view.buildBinding(text as any, null, token.value, View.mustacheTextBinder, null);
         }
       }
       if (node.parentNode) {

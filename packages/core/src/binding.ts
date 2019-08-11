@@ -152,21 +152,27 @@ export class Binding {
       throw new Error(`[${this.binder.name} formatters is null`);
     }
 
-    return this.formatters.reduce((result: any/*check type*/, declaration: string /*check type*/, index: number) => {
+    return this.formatters.reduce((result: any/*check type*/, declaration: string, index: number) => {
       const args = declaration.match(Binding.FORMATTER_ARGS);
       if (args === null) {
-        throw new Error(`[${this.binder.name}] No args matched from FORMATTER_ARGS "${declaration}"`);
+        console.warn(new Error(`[${this.binder.name}] No args matched with regex "FORMATTER_ARGS"!\nvalue: ${value}\nresult: ${result}\ndeclaration: ${declaration}\nindex: ${index}\n`));
+        return result;
       }
       const id = args.shift();
+
       if (!id) {
-        throw new Error(`[${this.binder.name}] No id found in args`);
+        throw new Error(`[${this.binder.name}] No formatter id found in args!`);
       }
 
       if (!this.view.options.formatters) {
-        throw new Error(`[${this.binder.name}] No formatters are defined`);
+        throw new Error(`[${this.binder.name}] No formatters are defined!`);
       }
 
       const formatter = this.view.options.formatters[id];
+
+      if (!formatter) {
+        throw new Error(`[${this.binder.name}] No formatters with id "${id}" found!`);
+      }
 
       const processedArgs = this.parseFormatterArguments(args, index);
 
@@ -211,11 +217,11 @@ export class Binding {
    */
   public set(value: any) {
 
-    value = this.formattedValue(value);
-
     if (this.binder === null) {
       throw new Error('binder is null');
     }
+
+    value = this.formattedValue(value);
 
     if (typeof(this.binder.routine) === 'function') {
       // If value is a promise

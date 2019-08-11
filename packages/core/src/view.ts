@@ -26,7 +26,10 @@ export class View {
 
   public static DECLARATION_SPLIT = /((?:'[^']*')*(?:(?:[^\|']*(?:'[^']*')+[^\|']*)+|[^\|]+))|^$/g;
 
-  public static textBinder: IBinder<string> = {
+  /**
+   * Special binder which replaces mustache style `{replace.me}` text parts
+   */
+  public static mustacheTextBinder: IBinder<string> = {
     name: 'mustache-text',
     routine: (node: IDataElement, value: string) => {
       node.data = (value != null) ? value : '';
