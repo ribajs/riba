@@ -30,7 +30,7 @@ import {
     classBinder,
 } from '../src/binders/class.binder';
 
-import { ITwoWayFormatter, IAdapter } from './interfaces';
+import { ITwoWayFormatter, IFormatter, IAdapter } from './interfaces';
 
 const riba = new Riba();
 riba.module.binder.regist(textBinder);
@@ -96,6 +96,30 @@ describe('riba.Binding', () => {
 
     describe('with formatters', () => {
         let valueInput: HTMLInputElement;
+
+        beforeEach(() => {
+            const awesomeFormatter = {
+                name: 'awesome',
+                read: (value) => 'awesome ' + value,
+            } as IFormatter;
+
+            const totallyFormatter = {
+                name: 'totally',
+                read: (value, prefix) => prefix + ' totally ' + value,
+            } as IFormatter;
+
+            const placeholderFormatter = {
+                name: 'and',
+                read: (value, affix) => value + affix,
+            } as IFormatter;
+
+            riba.module.formatter.regist(awesomeFormatter);
+            riba.module.formatter.regist(totallyFormatter);
+            riba.module.formatter.regist(placeholderFormatter, 'and');
+            riba.module.formatter.regist(placeholderFormatter, 'radical');
+            riba.module.formatter.regist(placeholderFormatter, 'totally');
+        });
+
         it('register all formatters', () => {
 
             valueInput = document.createElement('input');
@@ -225,9 +249,11 @@ describe('riba.Binding', () => {
         let numberInput;
         let valueInput;
         it('applies a two-way read formatter to function same as a single-way', () => {
-            (view.options.formatters.awesome as ITwoWayFormatter) = {
+            const awesomeFormatter = {
                 read: (value) => 'awesome ' + value,
-            };
+            } as IFormatter;
+
+            riba.module.formatter.regist(awesomeFormatter, 'awesome');
 
             routineFn = jest.spyOn(binding.binder, 'routine');
 
