@@ -1,5 +1,6 @@
 export { animateStarBinder } from './animate-[classname].binder';
 export { assignBinder } from './assign.binder';
+export { blockBinder } from './block.binder';
 export { classBinder } from './class.binder';
 export { checkedBinder } from './checked.binder';
 export { classStarBinder } from './class-[classname].binder';
