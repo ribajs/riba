@@ -1,0 +1,9 @@
+.gitignore
+
+# source
+**/*.ts
+*.ts
+
+# definitions
+!**/*.d.ts
+!*.d.ts

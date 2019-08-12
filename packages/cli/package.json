@@ -1,0 +1,26 @@
+{
+  "name": "@ribajs/cli",
+  "version": "1.0.1",
+  "description": "CLI tool for Riba applications 🍹",
+  "bin": {
+    "riba": "bin/riba.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "npm run build -- -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pascal Garber <pascal@artandcode.studio>",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "commander": "^3.0.0",
+    "dashify": "^2.0.0",
+    "pascalcase": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.1",
+    "@types/dashify": "^1.0.0",
+    "typescript": "^3.5.3"
+  }
+}
