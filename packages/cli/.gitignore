@@ -15,3 +15,6 @@ bin/**/*.d.ts
 
 interfaces/**/*.ts
 interfaces/**/*.d.ts
+
+schematics/**/*.ts
+schematics/**/*.d.ts

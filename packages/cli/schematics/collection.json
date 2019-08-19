@@ -1,0 +1,10 @@
+{
+  "$schema": "./node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "component": {
+      "factory": "./component/component.factory#main",
+      "description": "Create a Riba web component.",
+      "schema": "./component/schema.json"
+    }
+  }
+}

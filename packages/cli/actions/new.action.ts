@@ -1,11 +1,11 @@
 import chalk from 'chalk';
 import { ICommandInput } from '../interfaces';
 import { AbstractAction } from './abstract.action';
-import { SkeletonGenerator } from '../lib/skeleton-generator/skeleton.generator';
+import { RibaCollection } from '../lib/schematics/riba.collection';
 
 export class NewAction extends AbstractAction {
 
-  skeletonGenerator = new SkeletonGenerator();
+  ribaCollection = new RibaCollection();
 
   public async handle(inputs: ICommandInput[], options: ICommandInput[]) {
     const projectName = this.getProjectName(inputs);
@@ -14,7 +14,7 @@ export class NewAction extends AbstractAction {
     const shouldSkipInstall = this.getBooleanOption(options, 'skip-install');
     const shouldSkipGit = this.getBooleanOption(options, 'skip-git');
 
-    // this.skeletonGenerator.new(projectName);
+    // this.ribaCollection.new(projectName);
   }
 
   private getProjectName(inputs: ICommandInput[]) {

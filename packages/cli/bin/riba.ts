@@ -3,6 +3,10 @@ import * as commander from 'commander';
 import { CommanderStatic } from 'commander';
 import { CommandLoader } from '../commands';
 
+declare namespace JSX {
+  type Element = any;
+}
+
 const bootstrap = () => {
   const program: CommanderStatic = commander;
   program.version(require('../package.json').version);

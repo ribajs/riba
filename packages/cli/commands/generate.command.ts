@@ -2,20 +2,22 @@
 import { Command, CommanderStatic } from 'commander';
 import { AbstractCommand } from './abstract.command';
 import { ICommandInput } from '../interfaces/command.input';
-import { SkeletonGenerator } from '../lib/skeleton-generator/skeleton.generator';
+import { RibaCollection } from '../lib/schematics/riba.collection';
 import * as Table from 'cli-table3';
 
 export class GenerateCommand extends AbstractCommand {
   public load(program: CommanderStatic) {
     program
-      .command('generate <skeleton> <name> [path]')
+      .command('generate <schematic> <name> [path]')
       .alias('g')    
       .description(this.buildDescription())  
-      .action(async (skeleton: string, name: string, path: string, command: Command) => {
+      .option('--template-engine <name>', 'Which template engine to use', 'html')
+      .action(async (schematic: string, name: string, path: string, command: Command) => {
         const options: ICommandInput[] = [];
-        // Parse cli options here
+        options.push({ name: 'template-engine', value: command.templateEngine});
+
         const inputs: ICommandInput[] = [];
-        inputs.push({ name: 'skeleton', value: skeleton });
+        inputs.push({ name: 'schematic', value: schematic });
         inputs.push({ name: 'name', value: name });
         inputs.push({ name: 'path', value: path });
 
@@ -25,8 +27,8 @@ export class GenerateCommand extends AbstractCommand {
 
   private buildDescription(): string {
     return (
-      'Generate a Riba skeleton element\n' +
-      '  Available skeletons:\n' +
+      'Generate a Riba schematic element\n' +
+      '  Available schematics:\n' +
       this.buildSchematicsListAsTable()
     );
   }
@@ -48,7 +50,7 @@ export class GenerateCommand extends AbstractCommand {
       },
     };
     const table: any = new Table(tableConfig);
-    for (const schematic of SkeletonGenerator.getSkeletons()) {
+    for (const schematic of RibaCollection.getSchematics()) {
       table.push([schematic.name, schematic.alias]);
     }
     return table.toString();
