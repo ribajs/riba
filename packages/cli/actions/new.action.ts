@@ -1,20 +1,20 @@
 import chalk from 'chalk';
-import * as dashify from 'dashify';
-import * as pascalcase from 'pascalcase';
-import { ICommandInput } from '../interfaces/command.input';
+import { ICommandInput } from '../interfaces';
 import { AbstractAction } from './abstract.action';
+import { SkeletonGenerator } from '../lib/skeleton-generator/skeleton.generator';
 
 export class NewAction extends AbstractAction {
 
+  skeletonGenerator = new SkeletonGenerator();
+
   public async handle(inputs: ICommandInput[], options: ICommandInput[]) {
     const projectName = this.getProjectName(inputs);
-    const objectPrefix = pascalcase(projectName);
-    const filePrefix = dashify(objectPrefix);
+
 
     const shouldSkipInstall = this.getBooleanOption(options, 'skip-install');
     const shouldSkipGit = this.getBooleanOption(options, 'skip-git');
 
-    console.log(`Generate a new Riba project with the name "${objectPrefix}" and file prefix: "${filePrefix}"`);
+    // this.skeletonGenerator.new(projectName);
   }
 
   private getProjectName(inputs: ICommandInput[]) {

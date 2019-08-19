@@ -2,14 +2,16 @@ import chalk from 'chalk';
 import { CommanderStatic } from 'commander';
 
 // Actions
-import { NewAction } from '../actions';
+import { GenerateAction, NewAction } from '../actions';
 
 // Commands
+import { GenerateCommand } from './generate.command';
 import { NewCommand } from './new.command';
 
 
 export class CommandLoader {
   public static load(program: CommanderStatic): void {
+    new GenerateCommand(new GenerateAction()).load(program);
     new NewCommand(new NewAction()).load(program);
 
     this.handleInvalidCommand(program);

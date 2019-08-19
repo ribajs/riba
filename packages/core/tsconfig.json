@@ -6,6 +6,6 @@
     "noUnusedLocals": true
   },
   "include": ["*.ts", "**/*.ts"],
-  "typeRoots": ["./node_modules/@types"],
+  "typeRoots": ["./node_modules/@types", "./src/types"],
   "types": ["jest"]
 }

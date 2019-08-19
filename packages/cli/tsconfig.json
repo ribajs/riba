@@ -7,7 +7,7 @@
       "skipLibCheck": true,
       "sourceMap": false,
       "strict": true,
-      "typeRoots" : ["./typings", "./node_modules/@types"]
+      "typeRoots" : ["./typings", "./node_modules/@types", "./node_modules/@ribajs/core/src/types"]
     },
     "include": ["actions", "bin", "commands", "lib"],
     "exclude": ["node_modules"]
