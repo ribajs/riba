@@ -13,8 +13,8 @@ actions/**/*.d.ts
 bin/**/*.js
 bin/**/*.d.ts
 
-interfaces/**/*.ts
+interfaces/**/*.js
 interfaces/**/*.d.ts
 
-schematics/**/*.ts
+schematics/**/*.js
 schematics/**/*.d.ts
