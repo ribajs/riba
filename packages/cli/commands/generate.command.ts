@@ -4,8 +4,12 @@ import { AbstractCommand } from './abstract.command';
 import { ICommandInput } from '../interfaces/command.input';
 import { RibaCollection } from '../lib/schematics/riba.collection';
 import * as Table from 'cli-table3';
+import { debug as Debug } from 'debug';
 
 export class GenerateCommand extends AbstractCommand {
+
+  debug = Debug('commands:generate');
+
   public load(program: CommanderStatic) {
     program
       .command('generate <schematic> <name> [path]')
@@ -20,6 +24,8 @@ export class GenerateCommand extends AbstractCommand {
         inputs.push({ name: 'schematic', value: schematic });
         inputs.push({ name: 'name', value: name });
         inputs.push({ name: 'path', value: path });
+
+        this.debug('inputs: ', inputs)
 
         await this.action.handle(inputs, options);
       });

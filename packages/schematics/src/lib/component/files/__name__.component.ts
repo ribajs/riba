@@ -3,19 +3,15 @@ import {
   Debug,
 } from '@ribajs/core';
 
-{/* <$if test={$.templateEngine === 'pug'}>
-  import pugTemplate from './component-skeleton.component.pug';
-</$if>
 
-<$if test={$.templateEngine === 'html'}>
-  import template from './component-skeleton.component.html';
-</$if> */}
+import template from './component-skeleton.component.html';
+
 
 interface IScope {
   hello?: string;
 }
 
-export class <$string value={$.objectPrefix} />Component extends RibaComponent {
+export class<%= classify(name) %>Component extends RibaComponent {
 
   public static tagName: string = 'rv-component-skeleton';
 
@@ -25,7 +21,7 @@ export class <$string value={$.objectPrefix} />Component extends RibaComponent {
     return ['hello'];
   }
 
-  protected debug = Debug('component:' + <$string value={$.objectPrefix} />Component.tagName);
+  protected debug = Debug('component:' +<%= classify(name) %>Component.tagName);
 
   protected scope: IScope = {
     hello: undefined,

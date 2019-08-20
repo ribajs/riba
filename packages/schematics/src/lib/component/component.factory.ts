@@ -1,4 +1,8 @@
-import { join, Path, strings } from '@angular-devkit/core';
+import {
+  join,
+  Path,
+  strings
+} from '@angular-devkit/core';
 import {
   apply,
   branchAndMerge,
@@ -14,6 +18,7 @@ import {
   Tree,
   url,
 } from '@angular-devkit/schematics';
+import 'source-map-support/register';
 import { isNullOrUndefined } from 'util';
 import {
   DeclarationOptions,
@@ -22,9 +27,9 @@ import {
 import { ModuleFinder } from '../../utils/module.finder';
 import { Location, NameParser } from '../../utils/name.parser';
 import { mergeSourceRoot } from '../../utils/source-root.helpers';
-import { ServiceOptions } from './service.schema';
+import { ComponentOptions } from './component.schema';
 
-export function main(options: ServiceOptions): Rule {
+export function main(options: ComponentOptions): Rule {
   options = transform(options);
   return (tree: Tree, context: SchematicContext) => {
     return branchAndMerge(
@@ -37,10 +42,10 @@ export function main(options: ServiceOptions): Rule {
   };
 }
 
-function transform(source: ServiceOptions): ServiceOptions {
-  const target: ServiceOptions = Object.assign({}, source);
-  target.metadata = 'providers';
-  target.type = 'service';
+function transform(source: ComponentOptions): ComponentOptions {
+  const target: ComponentOptions = Object.assign({}, source);
+  target.metadata = 'component';
+  target.type = 'component';
 
   if (isNullOrUndefined(target.name)) {
     throw new SchematicsException('Option (name) is required.');
@@ -56,9 +61,12 @@ function transform(source: ServiceOptions): ServiceOptions {
   return target;
 }
 
-function generate(options: ServiceOptions) {
-  return (context: SchematicContext) =>
-    apply(url(join('./files' as Path, options.language)), [
+function generate(options: ComponentOptions) {
+  return (context: SchematicContext) => {
+    if (!options.path) {
+      throw new Error('options.path not found!');
+    }
+    return apply(url(join('./files' as Path)), [
       options.spec ? noop() : filter(path => !path.endsWith('.spec.ts')),
       template({
         ...strings,
@@ -66,9 +74,10 @@ function generate(options: ServiceOptions) {
       }),
       move(options.path),
     ])(context);
+  };
 }
 
-function addDeclarationToModule(options: ServiceOptions): Rule {
+function addDeclarationToModule(options: ComponentOptions): Rule {
   return (tree: Tree) => {
     if (options.skipImport !== undefined && options.skipImport) {
       return tree;
@@ -80,7 +89,11 @@ function addDeclarationToModule(options: ServiceOptions): Rule {
     if (!options.module) {
       return tree;
     }
-    const content = tree.read(options.module).toString();
+    const contentBugger = tree.read(options.module);
+    if (!contentBugger) {
+      return tree;
+    }
+    const content = contentBugger.toString();
     const declarator: ModuleDeclarator = new ModuleDeclarator();
     tree.overwrite(
       options.module,

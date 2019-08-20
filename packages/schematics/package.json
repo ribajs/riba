@@ -1,0 +1,40 @@
+{
+  "name": "@ribajs/schematics",
+  "version": "0.0.1",
+  "description": "Riba schematics for the cli",
+  "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc --project tsconfig.json && cp src/collection.json dist/collection.json && cp src/lib/component/schema.json dist/lib/component/schema.json && cp src/lib/component/files dist/lib/component/files -R",
+    "lint:src": "tslint --project tsconfig.json",
+    "lint:test": "tslint --project test/tsconfig.json",
+    "test": "jest --no-cache --config test/jest-config.json",
+    "test:dev": "npm run -s test -- --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ribajs/riba.git"
+  },
+  "contributors": [
+    "Pascal Garber"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ribajs/riba/issues"
+  },
+  "homepage": "https://github.com/ribajs/riba/tree/master/packages/schematics#readme",
+  "dependencies": {
+    "@angular-devkit/core": "8.2.2",
+    "@angular-devkit/schematics": "8.2.2",
+    "source-map-support": "^0.5.13",
+    "typescript": "3.5.3"
+  },
+  "devDependencies": {
+    "@types/jest": "24.0.18",
+    "@types/node": "12.7.2",
+    "tslint": "5.18.0"
+  },
+  "schematics": "./dist/collection.json"
+}

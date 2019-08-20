@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import 'source-map-support/register'
 import * as commander from 'commander';
 import { CommanderStatic } from 'commander';
 import { CommandLoader } from '../commands';

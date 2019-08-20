@@ -1,7 +1,11 @@
 import { AbstractRunner } from '../runners';
 import { SchematicOption } from './schematic.option';
+import { debug as Debug } from 'debug';
 
 export class AbstractCollection {
+
+  debug = Debug('schematic:collection');
+
   constructor(protected collection: string, protected runner: AbstractRunner) {}
 
   public async execute(
@@ -11,6 +15,7 @@ export class AbstractCollection {
   ) {
     let command = this.buildCommandLine(name, options);
     command = extraFlags ? command.concat(` ${extraFlags}`) : command;
+    this.debug(`Execute command: ${command}`);
     await this.runner.run(command);
   }
 
