@@ -3,12 +3,13 @@
       "declaration": true,
       "lib": ["es2017"],
       "module": "commonjs",
+      "outDir": "dist",
       "target": "es6",
       "skipLibCheck": true,
       "inlineSourceMap": true,
       "strict": true,
       "typeRoots" : ["./typings", "./node_modules/@types", "./node_modules/@ribajs/core/src/types"]
     },
-    "include": ["actions", "bin", "commands", "lib", "schematics"],
-    "exclude": ["node_modules", "schematics/*/files"]
+    "include": ["src"],
+    "exclude": ["node_modules"]
   }

@@ -1,4 +1,4 @@
-const ve = require('../../package.json').version;
+const ve = require('../../../package.json').version;
 
 export const BANNER = `
   ┌────────────────────────────────────────┐

@@ -13,7 +13,7 @@ export class RibaCollection extends AbstractCollection {
   ];
 
   constructor(runner: AbstractRunner = new SchematicRunner()) {
-    super('@ribajs/schematics', runner);
+    super('', runner);
   }
 
   public async execute(name: string, options: SchematicOption[]) {

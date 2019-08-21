@@ -1,20 +1,4 @@
 node_modules/
 
 # output
-lib/**/*.js
-lib/**/*.d.ts
-
-commands/**/*.js
-commands/**/*.d.ts
-
-actions/**/*.js
-actions/**/*.d.ts
-
-bin/**/*.js
-bin/**/*.d.ts
-
-interfaces/**/*.js
-interfaces/**/*.d.ts
-
-schematics/**/*.js
-schematics/**/*.d.ts
+dist/

@@ -3,11 +3,12 @@
   "version": "0.0.1",
   "description": "CLI tool for Riba applications 🍹",
   "bin": {
-    "riba": "bin/riba.js"
+    "riba": "dist/bin/riba.js"
   },
   "scripts": {
-    "build": "tsc",
-    "clean": "rm ./*/*.js ./*/*/*.js ./*/*.d.ts ./*/*/*.d.ts -rf",
+    "build": "(npm run clean) && (npm run build:ts)",
+    "build:ts": "tsc",
+    "clean": "rm ./dist -rf",
     "watch": "npm run build -- -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

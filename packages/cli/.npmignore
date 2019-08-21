@@ -1,9 +1,7 @@
 .gitignore
 
 # source
-**/*.ts
-*.ts
+src/
 
-# definitions
-!**/*.d.ts
-!*.d.ts
+# output
+!dist/
