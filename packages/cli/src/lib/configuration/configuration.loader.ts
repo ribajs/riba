@@ -7,10 +7,8 @@ export class ConfigurationLoader implements IConfigurationLoader {
 
   public async load(): Promise<IConfiguration> {
     const content: string | undefined = await this.reader.readAnyOf([
-      '.nestcli.json',
-      '.nest-cli.json',
-      'nest-cli.json',
-      'nest.json',
+      '.riba-cli.json',
+      'riba-cli.json',
     ]);
     if (!content) {
       return defaultConfiguration;

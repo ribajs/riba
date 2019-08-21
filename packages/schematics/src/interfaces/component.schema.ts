@@ -1,6 +1,6 @@
 import { Path } from '@angular-devkit/core';
 
-export interface ComponentOptions {
+export interface IComponentOptions {
   /**
    * The name of the service.
    */
@@ -28,7 +28,7 @@ export interface ComponentOptions {
   /**
    * Application language.
    */
-  language?: string;
+  language?: 'ts' | 'js';
   /**
    * The source root path
    */
@@ -41,4 +41,8 @@ export interface ComponentOptions {
    * Flag to indicate if a directory is created.
    */
   flat?: boolean;
+  /**
+   * Which template engine the component should use.
+   */
+  templateEngine?: 'html' | 'pug';
 }

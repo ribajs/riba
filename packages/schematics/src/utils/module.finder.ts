@@ -1,16 +1,11 @@
 import { join, Path, PathFragment } from '@angular-devkit/core';
 import { DirEntry, Tree } from '@angular-devkit/schematics';
-
-export interface FindOptions {
-  name?: string;
-  path: Path;
-  kind?: string;
-}
+import { IFindOptions } from '../interfaces';
 
 export class ModuleFinder {
   constructor(private tree: Tree) {}
 
-  public find(options: FindOptions): Path | null {
+  public find(options: IFindOptions): Path | null {
     const generatedDirectoryPath: Path = options.path;
     const generatedDirectory: DirEntry = this.tree.getDir(
       generatedDirectoryPath,

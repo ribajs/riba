@@ -3,17 +3,15 @@ import {
   Debug,
 } from '@ribajs/core';
 
-
-import template from './component-skeleton.component.html';
-
+<% if (templateEngine === 'pug') { %>import pugTemplate from './<%= name %>..component.pug';<% } %><% if (templateEngine === 'html') { %>import template from './<%= name %>.component.html';<% } %>
 
 interface IScope {
   hello?: string;
 }
 
-export class<%= classify(name) %>Component extends RibaComponent {
+export class <%= classify(name) %>Component extends RibaComponent {
 
-  public static tagName: string = 'rv-component-skeleton';
+  public static tagName: string = 'rv-<%= name %>';
 
   protected autobind = true;
 
@@ -30,7 +28,7 @@ export class<%= classify(name) %>Component extends RibaComponent {
   constructor(element?: HTMLElement) {
     super(element);
     this.debug('constructor', this);
-    this.init(<$string value={$.objectPrefix} />Component.observedAttributes);
+    this.init(<%= classify(name) %>Component.observedAttributes);
   }
 
   protected async init(observedAttributes: string[]) {
@@ -62,13 +60,12 @@ export class<%= classify(name) %>Component extends RibaComponent {
   }
 
   protected template() {
-    let template: string | null = null;
     // Only set the component template if there no childs already
     if (this.el.hasChildNodes()) {
-      this.debug('Do not template, because element has child nodes');
-      return template;
+      this.debug('Do not use template, because element has child nodes');
+      return null;
     } else {
-      template = pugTemplate(this.scope);
+      <% if (templateEngine === 'pug') { %>const template = pugTemplate(this.scope);<% } %>
       this.debug('Use template', template);
       return template;
     }

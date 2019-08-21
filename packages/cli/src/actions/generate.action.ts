@@ -22,13 +22,17 @@ export class GenerateAction extends AbstractAction {
 
   private async generateFiles(inputs: ICommandInput[]) {
     const configuration: IConfiguration = await this.loadConfiguration();
+    const schematicInput = this.getInput(inputs, 'schematic');
+
+
+    if (!schematicInput || typeof(schematicInput.value) !== 'string') {
+      throw new Error('Unable to find a schematic for this configuration');
+    }
+
+    this.setPathInput(inputs, configuration, schematicInput);
 
     this.schematicOptions = this.mapSchematicOptions(inputs);
 
-    // Default options
-    this.schematicOptions.push(
-      new SchematicOption('templateEngine', configuration.templateEngine),
-    );
     this.schematicOptions.push(
       new SchematicOption('language', configuration.language),
     );
@@ -36,36 +40,16 @@ export class GenerateAction extends AbstractAction {
       new SchematicOption('sourceRoot', configuration.sourceRoot),
     );
 
+    this.debug('schematic: ' + schematicInput.value);
+    this.debug('options:', this.schematicOptions);
+
     try {
-      const schematicInput = this.getSchematic(inputs);
-      if (!schematicInput) {
-        throw new Error('Unable to find a schematic for this configuration');
-      }
-      this.debug('schematic: ' + schematicInput.value);
-      this.debug('options:', this.schematicOptions);
-      await this.collection.execute(schematicInput.value as string, this.schematicOptions);
+      await this.collection.execute(schematicInput.value, this.schematicOptions);
     } catch (error) {
       if (error && error.message) {
         console.error(chalk.red(error.message));
       }
     }
-
-  }
-
-  private getName(inputs: ICommandInput[]) {
-    const input = inputs.find(input => input.name === 'name');
-    if (!input || !input.value) {
-      throw new Error(chalk.red('A name is required!'));
-    }
-    return input.value.toString();
-  }
-
-  private getSchematic(inputs: ICommandInput[]) {
-    const input = inputs.find(input => input.name === 'schematic');
-    if (!input || !input.value) {
-      throw new Error(chalk.red('A schematic name is required!'));
-    }
-    return input;
   }
 
   private mapSchematicOptions(inputs: ICommandInput[]): SchematicOption[] {
@@ -82,5 +66,31 @@ export class GenerateAction extends AbstractAction {
       new FileSystemReader(process.cwd()),
     );
     return loader.load();
+  }
+
+  /**
+   * If no path is set and the current directory has not the name of the default directory name, only then set the default path
+   * @param inputs
+   * @param configuration
+   * @param schematicInput
+   */
+  private async setPathInput(inputs: ICommandInput[], configuration: IConfiguration, schematicInput: ICommandInput) {
+    const pathInput = this.getInput(inputs, 'path');
+    if (!pathInput || !pathInput.value) {
+      const fsr = new FileSystemReader(process.cwd());
+      if (typeof(schematicInput.value) === 'string' && configuration[schematicInput.value] && configuration[schematicInput.value].path ) {
+        const currentDir = fsr.getDirname();
+        const targetDir = fsr.getDirname(configuration[schematicInput.value].path);
+        if (currentDir !== targetDir) {
+          this.schematicOptions.push(
+            new SchematicOption('path', configuration[schematicInput.value].path),
+          );
+        }
+      }
+    } else {
+      if(pathInput.value === '.') {
+        pathInput.value = '';
+      }
+    }
   }
 }

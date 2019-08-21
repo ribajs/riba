@@ -6,4 +6,10 @@ export abstract class AbstractAction {
     options?: ICommandInput[],
     extraFlags?: string[],
   ): Promise<void>;
+
+  protected getInput(inputs: ICommandInput[], name: string) {
+    const input = inputs.find(input => input.name === name);
+    return input;
+  }
+
 }

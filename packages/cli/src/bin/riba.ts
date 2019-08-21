@@ -10,7 +10,7 @@ declare namespace JSX {
 
 const bootstrap = () => {
   const program: CommanderStatic = commander;
-  program.version(require('../package.json').version);
+  program.version(require('../../package.json').version);
   CommandLoader.load(program);
   commander.parse(process.argv);
 

@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import * as path from 'path';
 import { IReader } from '../../interfaces';
 
 export class FileSystemReader implements IReader {
@@ -44,5 +45,9 @@ export class FileSystemReader implements IReader {
         ? await this.readAnyOf(filenames.slice(1, filenames.length))
         : undefined;
     }
+  }
+
+  public getDirname(pathString?: string) {
+    return path.basename(pathString || this.directory);
   }
 }

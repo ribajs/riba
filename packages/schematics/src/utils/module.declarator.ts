@@ -1,20 +1,7 @@
-import { Path } from '@angular-devkit/core';
 import { capitalize, classify } from '@angular-devkit/core/src/utils/strings';
+import { IDeclarationOptions } from '../interfaces/declarations-options';
 import { ModuleImportDeclarator } from './module-import.declarator';
 import { ModuleMetadataDeclarator } from './module-metadata.declarator';
-
-export interface DeclarationOptions {
-  metadata: string;
-  type?: string;
-  name: string;
-  path: Path;
-  module: Path;
-  symbol?: string;
-  staticOptions?: {
-    name: string;
-    value: Record<string, any>;
-  };
-}
 
 export class ModuleDeclarator {
   constructor(
@@ -22,14 +9,14 @@ export class ModuleDeclarator {
     private metadata: ModuleMetadataDeclarator = new ModuleMetadataDeclarator(),
   ) {}
 
-  public declare(content: string, options: DeclarationOptions): string {
+  public declare(content: string, options: IDeclarationOptions): string {
     options = this.computeSymbol(options);
     content = this.imports.declare(content, options);
     content = this.metadata.declare(content, options);
     return content;
   }
 
-  private computeSymbol(options: DeclarationOptions): DeclarationOptions {
+  private computeSymbol(options: IDeclarationOptions): IDeclarationOptions {
     const target = Object.assign({}, options);
     if (options.type !== undefined) {
       target.symbol = classify(options.name).concat(capitalize(options.type));

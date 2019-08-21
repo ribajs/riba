@@ -14,11 +14,20 @@ export class GenerateCommand extends AbstractCommand {
     program
       .command('generate <schematic> <name> [path]')
       .alias('g')    
-      .description(this.buildDescription())  
-      .option('--template-engine <name>', 'Which template engine to use', 'html')
+      .description(this.buildDescription())
+      .option('--dry-run', 'Allow to test changes before command execution')
+      .option('--flat', 'Enforce flat structure of generated element')
+      .option('--no-spec', 'Disable spec files generation')
+      .option('--templateEngine <name>', 'Which template engine to use', 'html')
       .action(async (schematic: string, name: string, path: string, command: Command) => {
         const options: ICommandInput[] = [];
-        options.push({ name: 'template-engine', value: command.templateEngine});
+        options.push({ name: 'dry-run', value: !!command.dryRun });
+        options.push({ name: 'flat', value: command.flat });
+        options.push({
+          name: 'spec',
+          value: command.spec,
+        });
+        options.push({ name: 'templateEngine', value: command.templateEngine});
 
         const inputs: ICommandInput[] = [];
         inputs.push({ name: 'schematic', value: schematic });

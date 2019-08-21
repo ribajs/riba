@@ -1,8 +1,12 @@
 import { existsSync } from 'fs';
 import { join, sep } from 'path';
+import { debug as Debug } from 'debug';
 import { AbstractRunner } from './abstract.runner';
 
 export class SchematicRunner extends AbstractRunner {
+
+  static debug = Debug('schematic:runner');
+
   constructor() {
     super(`"${SchematicRunner.findClosestSchematicsBinary(__dirname)}"`);
   }
@@ -31,7 +35,8 @@ export class SchematicRunner extends AbstractRunner {
     if (existsSync(schematicsLocalPath)) {
       return schematicsLocalPath;
     }
-
-    return join(__dirname, '../..', 'node_modules/.bin/schematics');
+    const schematicsBin = join(__dirname, '../../..', 'node_modules/.bin/schematics');
+    this.debug('Äschematics binary: ' + schematicsBin);
+    return schematicsBin;
   }
 }

@@ -1,12 +1,13 @@
 import { join, normalize } from '@angular-devkit/core';
 import { Rule, Tree } from '@angular-devkit/schematics';
+import { debug as Debug } from 'debug';
 import { DEFAULT_PATH_NAME } from '../lib/defaults';
 
 export function isInRootDirectory(
   host: Tree,
   extraFiles: string[] = [],
 ): boolean {
-  const files = ['nest-cli.json', 'nest.json'].concat(extraFiles || []);
+  const files = ['.riba-cli.json', 'riba-cli.json'].concat(extraFiles || []);
   return files.map(file => host.exists(file)).some(isPresent => isPresent);
 }
 

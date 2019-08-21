@@ -26,6 +26,11 @@
       "type": "string",
       "description": "Riba web component source root directory."
     },
+    "templateEngine": {
+      "type": "string",
+      "description": "The template engine you want to use for your web component (html/pug).",
+      "default": "html"
+    },
     "flat": {
       "default": false,
       "description": "Flag to indicate if a directory is created."

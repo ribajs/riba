@@ -2,7 +2,6 @@
   "extends": ["tslint:recommended"],
   "jsRules": {},
   "rules": {
-    "interface-name": [true, "never-prefix"],
     "quotemark": false,
     "no-empty": false,
     "no-empty-interface": false,
