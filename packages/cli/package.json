@@ -26,6 +26,7 @@
     "commander": "^3.0.0",
     "dashify": "^2.0.0",
     "debug": "^4.1.1",
+    "inquirer": "^6.5.1",
     "node-emoji": "^1.10.0",
     "ora": "^3.4.0",
     "os-name": "^3.1.0",
@@ -35,6 +36,7 @@
   "devDependencies": {
     "@types/dashify": "^1.0.0",
     "@types/debug": "^4.1.5",
+    "@types/inquirer": "^6.5.0",
     "@types/node": "^12.7.2",
     "@types/ora": "^3.2.0",
     "@types/os-name": "^3.1.0",

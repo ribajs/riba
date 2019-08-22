@@ -1,7 +1,7 @@
     
 import { Command, CommanderStatic } from 'commander';
 import { AbstractCommand } from './abstract.command';
-import { ICommandInput } from '../interfaces/command.input';
+import { ICommandInput } from '../interfaces';
 import { RibaCollection } from '../lib/schematics/riba.collection';
 import * as Table from 'cli-table3';
 import { debug as Debug } from 'debug';
@@ -19,6 +19,10 @@ export class GenerateCommand extends AbstractCommand {
       .option('--flat', 'Enforce flat structure of generated element')
       .option('--no-spec', 'Disable spec files generation')
       .option('--templateEngine <name>', 'Which template engine to use', 'html')
+      .option(
+        '-c, --collection [collectionName]',
+        'Specify the Collection that shall be used.',
+      )
       .action(async (schematic: string, name: string, path: string, command: Command) => {
         const options: ICommandInput[] = [];
         options.push({ name: 'dry-run', value: !!command.dryRun });
@@ -28,6 +32,10 @@ export class GenerateCommand extends AbstractCommand {
           value: command.spec,
         });
         options.push({ name: 'templateEngine', value: command.templateEngine});
+        options.push({
+          name: 'collection',
+          value: command.collection,
+        });
 
         const inputs: ICommandInput[] = [];
         inputs.push({ name: 'schematic', value: schematic });

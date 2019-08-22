@@ -1,4 +1,5 @@
 export interface IConfiguration {
+  collection: string;
   language: 'ts' | 'js';
   templateEngine: 'html' | 'pug';
   sourceRoot: string;

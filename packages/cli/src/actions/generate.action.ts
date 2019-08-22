@@ -2,8 +2,8 @@ import chalk from 'chalk';
 import { debug as Debug } from 'debug';
 import { ICommandInput, IConfiguration, IConfigurationLoader } from '../interfaces';
 import { AbstractAction } from './abstract.action';
-import { AbstractCollection, RibaCollection, SchematicOption } from '../lib/schematics';
-import { ConfigurationLoader } from '../lib/configuration/configuration.loader';
+import { AbstractCollection, CollectionFactory, SchematicOption } from '../lib/schematics';
+import { ConfigurationLoader } from '../lib/configuration';
 import { FileSystemReader } from '../lib/readers';
 
 export class GenerateAction extends AbstractAction {
@@ -12,7 +12,7 @@ export class GenerateAction extends AbstractAction {
 
   schematicOptions: SchematicOption[] = new Array<SchematicOption>();
 
-  constructor(readonly collection: AbstractCollection = new RibaCollection()) {
+  constructor() {
     super();
   }
 
@@ -23,7 +23,11 @@ export class GenerateAction extends AbstractAction {
   private async generateFiles(inputs: ICommandInput[]) {
     const configuration: IConfiguration = await this.loadConfiguration();
     const schematicInput = this.getInput(inputs, 'schematic');
+    const collectionName = this.getInput(inputs, 'collection')!.value;
 
+    const collection: AbstractCollection = CollectionFactory.create(
+      typeof(collectionName) === 'string' ? collectionName : configuration.collection,
+    );
 
     if (!schematicInput || typeof(schematicInput.value) !== 'string') {
       throw new Error('Unable to find a schematic for this configuration');
@@ -44,7 +48,7 @@ export class GenerateAction extends AbstractAction {
     this.debug('options:', this.schematicOptions);
 
     try {
-      await this.collection.execute(schematicInput.value, this.schematicOptions);
+      await collection.execute(schematicInput.value, this.schematicOptions);
     } catch (error) {
       if (error && error.message) {
         console.error(chalk.red(error.message));

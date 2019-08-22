@@ -1,7 +1,7 @@
 import { get } from 'node-emoji';
 
 export const emojis = {
-  // HEART: get('heart'),
+  HEART: get('heart'),
   COFFEE: get('coffee'),
   // BEER: get('beer'),
   // BROKEN_HEART: get('broken_heart'),
@@ -14,8 +14,9 @@ export const emojis = {
   SMIRK: get('smirk_cat'),
   // RAISED_HANDS: get('raised_hands'),
   POINT_RIGHT: get('point_right'),
-  // ZAP: get('zap'),
+  ZAP: get('zap'),
   // BOOM: get('boom'),
-  // PRAY: get('pray'),
-  // WINE: get('wine_glass'),
+  PRAY: get('pray'),
+  WINE: get('wine_glass'),
+  CHICK: get('baby_chick'),
 };

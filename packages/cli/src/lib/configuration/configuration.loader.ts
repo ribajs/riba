@@ -1,6 +1,6 @@
 import { IConfiguration, IConfigurationLoader, IReader } from '../../interfaces';
 import {  } from './configuration.loader';
-import { defaultConfiguration } from './defaults';
+import { defaultConfiguration } from './configuration.default';
 
 export class ConfigurationLoader implements IConfigurationLoader {
   constructor(private readonly reader: IReader) {}
