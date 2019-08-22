@@ -6,7 +6,7 @@
     "riba": "dist/bin/riba.js"
   },
   "scripts": {
-    "build": "(npm run clean) && (npm run build:ts)",
+    "build": "(npm run clean) && (npm run build:ts) && (chmod +x ./dist/bin/riba.js)",
     "build:ts": "tsc",
     "clean": "rm ./dist -rf",
     "watch": "npm run build -- -w",
@@ -27,6 +27,8 @@
     "dashify": "^2.0.0",
     "debug": "^4.1.1",
     "node-emoji": "^1.10.0",
+    "ora": "^3.4.0",
+    "os-name": "^3.1.0",
     "pascalcase": "^1.0.0",
     "source-map-support": "^0.5.13"
   },
@@ -34,6 +36,8 @@
     "@types/dashify": "^1.0.0",
     "@types/debug": "^4.1.5",
     "@types/node": "^12.7.2",
+    "@types/ora": "^3.2.0",
+    "@types/os-name": "^3.1.0",
     "typescript": "^3.5.3"
   }
 }

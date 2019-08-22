@@ -1,6 +1,8 @@
-const ve = require('../../../package.json').version;
+import * as Color from '../ui/colors';
+const version = require('../../../package.json').version;
+const ver = Color.setString.yellow(`v${version}`);
 
-export const BANNER = `
+let BANNER = `
   ┌────────────────────────────────────────┐
   │                                        │
   │      ######  ### ######     #          │
@@ -11,5 +13,9 @@ export const BANNER = `
   │      #    #   #  #     # #     #       │
   │      #     # ### ######  #     #       │
   │                                        │
-  └─────────────── V ${ve} ────────────────┘
+  └──────────────── ${ver} ────────────────┘
 `;
+BANNER = Color.setChars(BANNER, ['#'], 'green');
+BANNER = Color.setChars(BANNER, ['─', '│', '┘', '┐', '┌', '└'], 'blue');
+
+export { BANNER };
