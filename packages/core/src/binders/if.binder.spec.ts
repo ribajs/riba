@@ -8,7 +8,7 @@ import {
 
 import {
     eachStarBinder,
-  } from './each-[item].binder';
+  } from './each-item.binder';
 
 describe('if', () => {
     const riba = new Riba();

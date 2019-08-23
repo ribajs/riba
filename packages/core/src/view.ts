@@ -27,7 +27,7 @@ export class View {
   public static DECLARATION_SPLIT = /((?:'[^']*')*(?:(?:[^\|']*(?:'[^']*')+[^\|']*)+|[^\|]+))|^$/g;
 
   /**
-   * Special binder which replaces mustache style `{replace.me}` text parts
+   * Binder for mustache style `{model.property}` text Binders
    */
   public static mustacheTextBinder: IBinder<string> = {
     name: 'mustache-text',

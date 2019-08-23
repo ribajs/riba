@@ -1,8 +1,11 @@
+import { Debug } from '../modules';
 import { IBinder, IModuleBinders } from '../interfaces';
 import { Utils } from './utils';
 
 export class BindersService {
   private binders: IModuleBinders<any>;
+
+  private debug = Debug('binders:BindersService');
 
   /**
    *
@@ -18,7 +21,16 @@ export class BindersService {
    * @param name  Overwrites the name to access the binder over
    */
   public regist(binder: IBinder<any>, name?: string): IModuleBinders<any> {
-    this.binders[name || binder.name] = binder;
+    if (!binder || typeof(binder.routine) !== 'function') {
+      this.debug(new Error('Can not regist binder!'), name, binder);
+      return this.binders;
+    }
+    name = name || binder.name;
+    if (!name) {
+      console.warn(new Error('Binder name not found!'), binder);
+      return this.binders;
+    }
+    this.binders[name] = binder;
     return this.binders;
   }
 
@@ -30,13 +42,15 @@ export class BindersService {
     if (Utils.isArray(binders)) {
       for (let index = 0; index < binders.length; index++) {
         const binder = (binders as IBinder<any>[])[index];
-        this.regist(binder, binder.name);
+        this.debug(`Regist binder with index "${index}"`, binder);
+        this.regist(binder);
       }
     }
     if (Utils.isObject(binders)) {
       for (const key in binders as IModuleBinders<any>) {
         if (binders.hasOwnProperty(key)) {
           const binder = (binders as IModuleBinders<any>)[key];
+          this.debug(`Regist binder with key "${key}"`, binder);
           this.regist(binder);
         }
       }

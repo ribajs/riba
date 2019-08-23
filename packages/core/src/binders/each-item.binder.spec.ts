@@ -4,7 +4,7 @@ import {
 
 import {
   eachStarBinder,
-} from './each-[item].binder';
+} from './each-item.binder';
 
 import {
   textBinder,

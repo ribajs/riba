@@ -54,7 +54,9 @@ export class FormatterService {
     if (Utils.isObject(formatters)) {
       for (const name in formatters) {
         if (formatters.hasOwnProperty(name)) {
-          this.regist((formatters as IModuleFormatters)[name], name);
+          const formatter = (formatters as IModuleFormatters)[name];
+          this.debug(`Regist formatter with key "${name}"`, formatter);
+          this.regist(formatter, name);
         }
       }
     }

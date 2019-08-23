@@ -218,12 +218,13 @@ export class Binding {
   public set(value: any) {
 
     if (this.binder === null) {
-      throw new Error('binder is null');
+      console.warn(new Error('Binder is null'), this);
+      return;
     }
 
     value = this.formattedValue(value);
 
-    if (typeof(this.binder.routine) === 'function') {
+    if (this.binder && typeof(this.binder.routine) === 'function') {
       // If value is a promise
       if (value && typeof(value.then) === 'function' && typeof(value.catch) === 'function') {
         value.then((realValue: any) => {
@@ -307,8 +308,9 @@ export class Binding {
    * Unsubscribes from the model and the element.
    */
   public unbind() {
-    if (!this.bind) {
-      throw new Error('binder is not defined');
+    if (!this.binder) {
+      console.warn(new Error('Binder is not defined'), this);
+      return;
     }
 
     if (this.binder.unbind) {

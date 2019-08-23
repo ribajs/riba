@@ -26,12 +26,15 @@ export class ModulesService {
    */
   public regist(module: IRibaModule) {
     if (module.binders) {
+      this.debug('Regist binders; ', module.binders);
       this.binder.regists(module.binders);
     }
     if (module.components) {
+      this.debug('Regist components; ', module.components);
       this.component.regists(module.components);
     }
     if (module.formatters) {
+      this.debug('Regist formatters; ', module.formatters);
       this.formatter.regists(module.formatters);
     }
   }

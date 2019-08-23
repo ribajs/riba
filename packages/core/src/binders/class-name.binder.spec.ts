@@ -3,11 +3,11 @@ import {
 } from '../index';
 
 import {
-    starBinder,
-} from './[attribute].binder';
+    classStarBinder,
+} from './class-name.binder';
 
 const riba = new Riba();
-riba.module.binder.regist(starBinder);
+riba.module.binder.regist(classStarBinder);
 
 describe('riba.binders', () => {
     let element: HTMLDivElement;
@@ -20,20 +20,26 @@ describe('riba.binders', () => {
         fragment.appendChild(element);
 
         model = {
-            barString: 'bar',
+            class: {
+                hasMyClass: true,
+            },
         };
     });
 
-    describe('*', () => {
+    describe('class-*', () => {
         it('Adds or removes the class name passed as star parameter', () => {
             element.className = 'foobar';
-            element.setAttribute('rv-foo', 'barString');
+            element.setAttribute('rv-class-myclass', 'class.hasMyClass');
 
-            expect(element.getAttribute('foo')).toEqual(null);
+            expect(element.className).toEqual('foobar');
 
             riba.bind(fragment, model);
 
-            expect(element.getAttribute('foo')).toEqual('bar');
+            expect(element.className).toEqual('foobar myclass');
+
+            model.class.hasMyClass = false;
+
+            expect(element.className).toEqual('foobar');
         });
     });
 
