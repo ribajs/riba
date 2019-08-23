@@ -1,9 +1,8 @@
 import chalk from 'chalk';
 import { debug as Debug } from 'debug';
-import { ICommandInput, IConfiguration, IConfigurationLoader } from '../interfaces';
+import { ICommandInput, IConfiguration } from '../interfaces';
 import { AbstractAction } from './abstract.action';
-import { AbstractCollection, CollectionFactory, SchematicOption } from '../lib/schematics';
-import { ConfigurationLoader } from '../lib/configuration';
+import { Collection, SchematicOption } from '../lib/schematics';
 import { FileSystemReader } from '../lib/readers';
 
 export class GenerateAction extends AbstractAction {
@@ -20,14 +19,18 @@ export class GenerateAction extends AbstractAction {
     await this.generateFiles(inputs.concat(options));
   }
 
-  private async generateFiles(inputs: ICommandInput[]) {
+  protected async generateFiles(inputs: ICommandInput[]) {
     const configuration: IConfiguration = await this.loadConfiguration();
     const schematicInput = this.getInput(inputs, 'schematic');
-    const collectionName = this.getInput(inputs, 'collection')!.value;
 
-    const collection: AbstractCollection = CollectionFactory.create(
-      typeof(collectionName) === 'string' ? collectionName : configuration.collection,
-    );
+    // Set collection name by default collection or input value
+    const collectionInput = this.getInput(inputs, 'collection');
+    let collectionName = configuration.collection;
+    if (collectionInput && typeof(collectionInput.value) === 'string') {
+      collectionName = collectionInput.value;
+    }
+
+    const collection = new Collection(collectionName);
 
     if (!schematicInput || typeof(schematicInput.value) !== 'string') {
       throw new Error('Unable to find a schematic for this configuration');
@@ -64,13 +67,6 @@ export class GenerateAction extends AbstractAction {
     });
     return this.schematicOptions;
   };
-
-  private async loadConfiguration() {
-    const loader: IConfigurationLoader = new ConfigurationLoader(
-      new FileSystemReader(process.cwd()),
-    );
-    return loader.load();
-  }
 
   /**
    * If no path is set and the current directory has not the name of the default directory name, only then set the default path

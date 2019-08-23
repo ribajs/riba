@@ -38,6 +38,13 @@ If you work on the schematics you can use your local package by running:
 npm link @ribajs/schematics
 ```
 
+## Support / Donations
+If you want to support Riba development, please consider donating (it helps me keeping my projects active and alive!):
+
+[![https://www.paypal.me/artandcode](https://img.shields.io/badge/Donate-PayPal-red)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TUEJGDUHVBUX4&source=url)
+[![https://www.paypal.me/artandcode](https://img.shields.io/badge/Donate-Patreon-red)](https://www.patreon.com/artandcodestudio)
+
+
 ## License
 
 [![FOSSA Status](https://app.fossa.com/api/projects/custom%2B12684%2Fgithub.com%2Fribajs%2Friba.svg?type=large)](https://app.fossa.com/projects/custom%2B12684%2Fgithub.com%2Fribajs%2Friba?ref=badge_large)

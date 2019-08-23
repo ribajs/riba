@@ -1,5 +1,10 @@
 # Changelog
 
+## Dev
+
+- Add cli tool
+- Fix docs
+
 ## 1.0.1
 
 - Changed Binder and Formatter interface to allow any other properties or methods on it.
@@ -13,7 +18,6 @@
 - Binders now need their own name as a property
 - Renamed `css-*` binder to `style-`
 - Added ModuleServer to regist modules
-
 
 ## 0.16.2
 

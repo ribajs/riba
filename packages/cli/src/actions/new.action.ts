@@ -10,11 +10,7 @@ import { defaultGitIgnore, defaultConfiguration } from '../lib/configuration';
 import { AbstractPackageManager, PackageManagerFactory } from '../lib/package-managers';
 import { generateInput, generateSelect, messages, emojis } from '../lib/ui';
 import { GitRunner } from '../lib/runners/git.runner';
-import {
-  AbstractCollection,
-  CollectionFactory,
-  SchematicOption,
-} from '../lib/schematics';
+import { Collection, SchematicOption } from '../lib/schematics';
 import { AbstractAction } from './abstract.action';
 
 export class NewAction extends AbstractAction {
@@ -23,7 +19,7 @@ export class NewAction extends AbstractAction {
     const isDryRunEnabled = dryRunOption && dryRunOption.value;
 
     await this.askForMissingInformation(inputs);
-    await this.generateApplicationFiles(inputs, options).catch(exit);
+    await this.generateFiles(inputs.concat(options)).catch(exit);
 
     const shouldSkipInstall = options.some(
       option => option.name === 'skip-install' && option.value === true,
@@ -31,8 +27,7 @@ export class NewAction extends AbstractAction {
     const shouldSkipGit = options.some(
       option => option.name === 'skip-git' && option.value === true,
     );
-    const projectDirectory = dasherize(this.getApplicationNameICommandInput(inputs)!
-      .value as string);
+    const projectDirectory = dasherize(this.getInput(inputs, 'name')!.value as string);
 
     if (!shouldSkipInstall) {
       await this.installPackages(
@@ -51,16 +46,12 @@ export class NewAction extends AbstractAction {
     }
   }
 
-  private getApplicationNameICommandInput(inputs: ICommandInput[]) {
-    return inputs.find(input => input.name === 'name');
-  }
-
   private async askForMissingInformation (inputs: ICommandInput[]) {
     console.info(messages.PROJECT_INFORMATION_START);
     console.info();
 
     const prompt: PromptModule = createPromptModule();
-    const nameICommandInput = this.getApplicationNameICommandInput(inputs);
+    const nameICommandInput = this.getInput(inputs, 'name');
     if (!nameICommandInput!.value) {
       const message = messages.QUESTION_NAME_OF_NEW_PROJECT;
       const questions = [generateInput('name', message)('riba-app')];
@@ -77,16 +68,20 @@ export class NewAction extends AbstractAction {
     );
   };
 
-  private async generateApplicationFiles(args: ICommandInput[], options: ICommandInput[]) {
-    const collectionName = this.getInput(options, 'collection')!.value;
-    const collection: AbstractCollection = CollectionFactory.create(
-      typeof(collectionName) === 'string' ? collectionName : defaultConfiguration.collection,
-    );
-    const schematicOptions: SchematicOption[] = this.mapSchematicOptions(
-      args.concat(options),
-    );
+  protected async generateFiles(inputs: ICommandInput[]) {
+    const configuration = await this.loadConfiguration();
+
+    // Set collection name by default collection or input value
+    const collectionInput = this.getInput(inputs, 'collection');
+    let collectionName = configuration.collection;
+    if (collectionInput && typeof(collectionInput.value) === 'string') {
+      collectionName = collectionInput.value;
+    }
+
+    const collection = new Collection(collectionName);
+
+    const schematicOptions: SchematicOption[] = this.mapSchematicOptions(inputs);
     await collection.execute('application', schematicOptions);
-    console.info();
   };
 
   private mapSchematicOptions = (options: ICommandInput[]): SchematicOption[] => {

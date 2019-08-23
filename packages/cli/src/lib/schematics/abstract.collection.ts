@@ -8,11 +8,7 @@ export class AbstractCollection {
 
   constructor(protected collection: string, protected runner: AbstractRunner) {}
 
-  public async execute(
-    name: string,
-    options: SchematicOption[],
-    extraFlags?: string,
-  ) {
+  public async execute(name: string, options: SchematicOption[], extraFlags?: string) {
     let command = this.buildCommandLine(name, options);
     command = extraFlags ? command.concat(` ${extraFlags}`) : command;
     this.debug(`Execute command: schematics ${command}`);

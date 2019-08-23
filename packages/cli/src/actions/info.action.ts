@@ -15,7 +15,7 @@ export class InfoAction extends AbstractAction {
   public async handle() {
     this.displayBanner();
     await this.displaySystemInformation();
-    await this.displayNestInformation();
+    await this.displayRibaInformation();
   }
 
   private displayBanner() {
@@ -34,17 +34,21 @@ export class InfoAction extends AbstractAction {
     const manager: AbstractPackageManager = await PackageManagerFactory.find();
     try {
       const version: string = await manager.version();
-      console.info(`${manager.name} Version    :`, chalk.yellow(version));
+      if (manager.name === 'NPM') {
+        console.info(`${manager.name} Version     :`, chalk.yellow(version));
+      } else {
+        console.info(`${manager.name} Version    :`, chalk.yellow(version));
+      }
     } catch {
       console.error(`${manager.name} Version    :`, chalk.red('Unknown'));
     }
   };
   
-  private displayNestInformation = async () => {
-    console.info(chalk.green('[Nest Information]'));
+  private displayRibaInformation = async () => {
+    console.info(chalk.green('[Riba Information]'));
     try {
       const dependencies: IPackageJsonDependencies = await this.readProjectIPackageJsonDependencies();
-      this.displayNestVersions(dependencies);
+      this.displayRibaVersions(dependencies);
     } catch {
       console.error(chalk.red(messages.RIBA_INFORMATION_PACKAGE_MANAGER_FAILED));
     }
@@ -65,13 +69,13 @@ export class InfoAction extends AbstractAction {
     });
   };
   
-  private displayNestVersions(dependencies: IPackageJsonDependencies) {
-    this.buildNestVersionsMessage(dependencies).forEach(dependency =>
+  private displayRibaVersions(dependencies: IPackageJsonDependencies) {
+    this.buildRibaVersionsMessage(dependencies).forEach(dependency =>
       console.info(dependency.name, chalk.yellow(dependency.value)),
     );
   }
   
-  private buildNestVersionsMessage(dependencies: IPackageJsonDependencies): IRibaDependency[] {
+  private buildRibaVersionsMessage(dependencies: IPackageJsonDependencies): IRibaDependency[] {
     const nestDependencies = this.collectNestDependencies(dependencies);
     return this.format(nestDependencies);
   };
@@ -79,9 +83,11 @@ export class InfoAction extends AbstractAction {
   private collectNestDependencies(dependencies: IPackageJsonDependencies): IRibaDependency[] {
     const nestDependencies: IRibaDependency[] = [];
     Object.keys(dependencies).forEach(key => {
-      if (key.indexOf('@nestjs') > -1) {
+      if (key.indexOf('@ribajs') > -1) {
+        let name = `${key.replace(/@ribajs\//, '')} Version`;
+        name = name.charAt(0).toUpperCase() + name.slice(1)
         nestDependencies.push({
-          name: `${key.replace(/@nestjs\//, '')} version`,
+          name: name,
           value: dependencies[key],
         });
       }

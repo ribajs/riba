@@ -2,7 +2,7 @@
 import { Command, CommanderStatic } from 'commander';
 import { AbstractCommand } from './abstract.command';
 import { ICommandInput } from '../interfaces';
-import { RibaCollection } from '../lib/schematics/riba.collection';
+import { Collection } from '../lib/schematics';
 import * as Table from 'cli-table3';
 import { debug as Debug } from 'debug';
 
@@ -23,7 +23,10 @@ export class GenerateCommand extends AbstractCommand {
         '-c, --collection [collectionName]',
         'Specify the Collection that shall be used.',
       )
-      .action(async (schematic: string, name: string, path: string, command: Command) => {
+      .action(async (schematicOrAlias: string, name: string, path: string, command: Command) => {
+
+        const schematic = Collection.getSchematic(schematicOrAlias);
+
         const options: ICommandInput[] = [];
         options.push({ name: 'dry-run', value: !!command.dryRun });
         options.push({ name: 'flat', value: command.flat });
@@ -38,7 +41,7 @@ export class GenerateCommand extends AbstractCommand {
         });
 
         const inputs: ICommandInput[] = [];
-        inputs.push({ name: 'schematic', value: schematic });
+        inputs.push({ name: 'schematic', value: schematic!.name });
         inputs.push({ name: 'name', value: name });
         inputs.push({ name: 'path', value: path });
 
@@ -56,6 +59,15 @@ export class GenerateCommand extends AbstractCommand {
     );
   }
 
+  /**
+   * Returns a table listing which schematics are available with the generate argument
+   * @example
+   *       ┌───────────┬───────┐
+   *       │ name      │ alias │
+   *       │ component │ com   │
+   *       │ ...       │ ...   │
+   *       └───────────┴───────┘
+   */
   private buildSchematicsListAsTable(): string {
     const leftMargin = '    ';
     const tableConfig = {
@@ -73,7 +85,7 @@ export class GenerateCommand extends AbstractCommand {
       },
     };
     const table: any = new Table(tableConfig);
-    for (const schematic of RibaCollection.getSchematics()) {
+    for (const schematic of Collection.getSchematics()) {
       table.push([schematic.name, schematic.alias]);
     }
     return table.toString();
