@@ -1,23 +1,16 @@
-import {
-  Riba,
-  View,
-  Debug,
-  JQuery,
-
-  coreModule,
-
-} from '@ribajs/core';
+import { Riba, Debug, coreModule } from '@ribajs/core';
+import { EachItemExampleComponent } from './components/each-item-example/each-item-example.component';
 
 export interface IItem {
   name: string;
   value?: number;
 }
 
-export class Main {
+export class MainModule {
 
-  protected view?: View;
-  protected debug = Debug('app:main');
+  protected debug = Debug('app:MainModule');
   protected riba = new Riba();
+
   protected model = {
     items: this.getItems(),
     push: this.push,
@@ -32,13 +25,14 @@ export class Main {
   constructor() {
     this.debug('init the main application test');
 
-    // Regist modules
+    // Register modules
     this.riba.module.regist(coreModule);
 
-    JQuery(() => {
-      const bindToElement = JQuery('#test')[0];
+    // Wait until dom is ready
+    document.addEventListener("DOMContentLoaded", () => {
+      const bindToElement = document.getElementById("rv-app");
       this.debug('bind to', bindToElement);
-      this.view = this.riba.bind(bindToElement, this.model);
+      this.riba.bind(bindToElement, this.model);
     });
   }
 
@@ -77,4 +71,4 @@ export class Main {
   }
 }
 
-const app = new Main();
+new MainModule();

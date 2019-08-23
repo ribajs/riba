@@ -1,0 +1,18 @@
+{
+  "language": "ts",
+  "collection": "@ribajs/schematics",
+  "sourceRoot": "src",
+  "templateEngine": "html",
+  "component": {
+    "path": "components"
+  },
+  "binder": {
+    "path": "binders"
+  },
+  "formatter": {
+    "path": "formatters"
+  },
+  "service": {
+    "path": "services"
+  }
+}

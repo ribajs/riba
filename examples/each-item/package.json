@@ -1,0 +1,33 @@
+{
+  "name": "each-star-example",
+  "version": "1.0.1",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html",
+    "clear": "rm -rf ./dist",
+    "link": "npm install && npm link @ribajs/core"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/plugin-syntax-export-default-from": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-typescript": "^7.3.3",
+    "@babel/runtime-corejs2": "^7.5.5",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-array-includes": "^2.0.3",
+    "parcel-bundler": "^1.12.3",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "@types/jquery": "^3.3.31",
+    "@ribajs/core": "^1.0.1"
+  }
+}
