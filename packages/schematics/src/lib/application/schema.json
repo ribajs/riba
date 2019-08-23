@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "SchematicsRibaApplication",
+  "title": "Riba Application Options Schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the application.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the new project?"
+    },
+    "author": {
+      "type": "string",
+      "description": "Riba application author.",
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "description": "Riba application description.",
+      "default": ""
+    },
+    "version": {
+      "type": "string",
+      "description": "Riba application version.",
+      "default": "0.0.1"
+    },
+    "language": {
+      "type": "string",
+      "description": "Riba application language."
+    },
+    "packageManager": {
+      "type": "string",
+      "description": "Riba application package manager.",
+      "default": "npm"
+    },
+    "dependencies": {
+      "type": "string",
+      "description": "Riba application dependencies."
+    },
+    "devDependencies": {
+      "type": "string",
+      "description": "Riba application development dependencies."
+    }
+  },
+  "required": ["name"]
+}

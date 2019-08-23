@@ -25,14 +25,13 @@ export class MetadataManager {
     symbol: string,
     staticOptions?: IDeclarationOptions['staticOptions'],
   ): string {
-    const source: SourceFile = createSourceFile(
-      'filename.ts',
-      this.content,
-      ScriptTarget.ES2017,
-    );
+    const source: SourceFile = createSourceFile('filename.ts', this.content, ScriptTarget.ES2017);
     const decoratorNodes: Node[] = this.getDecoratorMetadata(source, '@Module');
     const node: Node = decoratorNodes[0];
-    const matchingProperties: ObjectLiteralElement[] = (node as ObjectLiteralExpression).properties
+    const properties = node ? (node as ObjectLiteralExpression).properties : null;
+    let matchingProperties = new Array<ObjectLiteralElement>();
+    if (properties) {
+      matchingProperties = properties
       .filter(prop => prop.kind === SyntaxKind.PropertyAssignment)
       .filter((prop) => {
         const name = prop.name;
@@ -48,6 +47,7 @@ export class MetadataManager {
             return false;
         }
       });
+    }
 
     symbol = this.mergeSymbolAndExpr(symbol, staticOptions);
     const addBlankLinesIfDynamic = () => {
@@ -55,29 +55,15 @@ export class MetadataManager {
     };
     if (matchingProperties.length === 0) {
       const expr = node as ObjectLiteralExpression;
-      if (expr.properties.length === 0) {
+      if (!expr || !expr.properties || expr.properties.length === 0) {
         addBlankLinesIfDynamic();
-        return this.insertMetadataToEmptyModuleDecorator(
-          expr,
-          metadata,
-          symbol,
-        );
+        return this.insertMetadataToEmptyModuleDecorator(expr, metadata, symbol);
       } else {
         addBlankLinesIfDynamic();
-        return this.insertNewMetadataToDecorator(
-          expr,
-          source,
-          metadata,
-          symbol,
-        );
+        return this.insertNewMetadataToDecorator(expr, source, metadata, symbol);
       }
     } else {
-      return this.insertSymbolToMetadata(
-        source,
-        matchingProperties,
-        symbol,
-        staticOptions,
-      );
+      return this.insertSymbolToMetadata(source, matchingProperties, symbol, staticOptions);
     }
   }
 

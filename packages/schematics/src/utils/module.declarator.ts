@@ -12,7 +12,17 @@ export class ModuleDeclarator {
   public declare(content: string, options: IDeclarationOptions): string {
     options = this.computeSymbol(options);
     content = this.imports.declare(content, options);
-    content = this.metadata.declare(content, options);
+    /**
+     * TODO Riba
+     * A metadata of `"components"` would add the component to the array of `components` in:
+     * ```ts
+     *   @Module({
+     *     components: [EachItemExample4Component],
+     *   })
+     * ```
+     * but Riba currently not supports the `@Module` decorator
+     */
+    // content = this.metadata.declare(content, options);
     return content;
   }
 
