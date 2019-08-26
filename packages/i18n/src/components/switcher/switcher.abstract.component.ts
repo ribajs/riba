@@ -1,5 +1,5 @@
 import {
-  AbstractRibaComponent,
+  Component,
   JQuery,
   Debug,
   IBinder,
@@ -15,7 +15,7 @@ export interface IScope {
   ready: boolean;
 }
 
-export abstract class AI18nSwitcherComponent extends AbstractRibaComponent {
+export abstract class AI18nSwitcherComponent extends Component {
 
   protected abstract localesService: ALocalesService;
 

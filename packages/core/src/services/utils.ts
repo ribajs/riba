@@ -1,4 +1,4 @@
-import { JQuery } from '../modules';
+import { JQuery } from '../vendors';
 
 // TODO
 export interface IDeferred {

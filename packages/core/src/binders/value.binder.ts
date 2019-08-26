@@ -1,4 +1,4 @@
-import { Debug, JQuery as $ } from '../modules';
+import { Debug, JQuery as $ } from '../vendors';
 import { IBinder } from '../interfaces';
 import { Utils } from '../services/utils';
 

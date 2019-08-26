@@ -6,7 +6,7 @@
  * @see https://github.com/JumpLinkNetwork/shopify-productjs
  */
 
-import { IModuleFormatters } from '../../interfaces';
+import { IFormatters } from '../../interfaces';
 
 // compare functions
 import { and } from './and.formatter';
@@ -25,6 +25,6 @@ import { not } from './not.formatter';
 
 export { and, between, egt, eq, gt, isDefined, isObject, isUndefined, ne, lt, elt, or, not };
 
-export const compareFormatters: IModuleFormatters = {
+export const compareFormatters: IFormatters = {
   and, between, egt, eq, gt, isDefined, isObject, isUndefined, ne, lt, elt, or, not,
 };

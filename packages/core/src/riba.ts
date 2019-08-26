@@ -1,6 +1,6 @@
 import {
-  IModuleFormatters,
-  IModuleBinders,
+  IFormatters,
+  IBinders,
   IAdapters,
   Root,
   IComponents,
@@ -40,13 +40,13 @@ export class Riba {
   public module: ModulesService;
 
   /** Global binders */
-  public binders: IModuleBinders<any> = {};
+  public binders: IBinders<any> = {};
 
   /** Global components. */
   public components: IComponents = {};
 
   /** Global formatters. */
-  public formatters: IModuleFormatters = {};
+  public formatters: IFormatters = {};
 
   /** Global (sightglass) adapters. */
   public  adapters: IAdapters = {
@@ -152,9 +152,9 @@ export class Riba {
     const viewOptions: IOptionsParam = {
       // EXTENSIONS
       adapters: <IAdapters> {},
-      binders: <IModuleBinders<any>> {},
+      binders: <IBinders<any>> {},
       components: <IComponents> {},
-      formatters: <IModuleFormatters> {},
+      formatters: <IFormatters> {},
 
       // other
       starBinders: {},

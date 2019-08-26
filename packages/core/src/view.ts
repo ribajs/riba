@@ -6,8 +6,8 @@ import {
 } from './interfaces';
 import { Binding } from './binding';
 import { parseNode, parseDeclaration } from './parsers';
-import { Debug } from './modules/debug.module';
-import { RibaComponent, AbstractRibaComponent } from './components';
+import { Debug } from './vendors/debug.module';
+import { RibaComponent, Component } from './components';
 
 export type TBlock = boolean;
 
@@ -64,7 +64,7 @@ export class View {
   public models: any;
   public options: IViewOptions;
   public bindings: Array<Binding> = [];
-  public webComponents: Array<AbstractRibaComponent> = [];
+  public webComponents: Array<Component> = [];
   // public componentView: View | null = null;
 
   /**

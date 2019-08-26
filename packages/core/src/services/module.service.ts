@@ -1,5 +1,5 @@
-import { Debug } from '../modules';
-import { IModuleBinders, IModuleFormatters, IComponents, IRibaModule } from '../interfaces';
+import { Debug } from '../vendors';
+import { IBinders, IFormatters, IComponents, IRibaModule } from '../interfaces';
 import { BindersService } from './binder.service';
 import { ComponentService } from './component.service';
 import { FormatterService } from './formatter.service';
@@ -8,13 +8,13 @@ export class ModulesService {
   public binder: BindersService;
   public component: ComponentService;
   public formatter: FormatterService;
-  protected debug = Debug('binders:ModulesService');
+  protected debug = Debug('services:ModulesService');
 
   /**
    *
    * @param binders;
    */
-  constructor(binders: IModuleBinders<any>, components: IComponents, formatters: IModuleFormatters) {
+  constructor(binders: IBinders<any>, components: IComponents, formatters: IFormatters) {
     this.binder = new BindersService(binders);
     this.component = new ComponentService(components);
     this.formatter = new FormatterService(formatters);

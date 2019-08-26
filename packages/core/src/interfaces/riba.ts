@@ -1,9 +1,9 @@
-import { IModuleFormatters, IModuleBinders, IAdapters, IComponents } from '../interfaces';
+import { IFormatters, IBinders, IAdapters, IComponents } from '../interfaces';
 import { Binding } from '../binding';
 
 export interface IExtensions {
-  binders?: IModuleBinders<any>;
-  formatters?: IModuleFormatters;
+  binders?: IBinders<any>;
+  formatters?: IFormatters;
   components?: IComponents;
   adapters?: IAdapters;
 }
@@ -38,8 +38,8 @@ export interface IOptions {
 export declare interface IOptionsParam extends IExtensions, IOptions {}
 
 export declare interface IViewOptions extends IOptionsParam {
-  binders: IModuleBinders<any>;
-  formatters: IModuleFormatters;
+  binders: IBinders<any>;
+  formatters: IFormatters;
   components: IComponents;
   adapters: IAdapters;
 

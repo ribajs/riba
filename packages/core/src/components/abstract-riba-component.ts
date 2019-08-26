@@ -4,7 +4,7 @@
  * @see https://developer.mozilla.org/de/docs/Web/Web_Components/Using_custom_elements
  */
 
-import { Debug } from '../modules';
+import { Debug, IDebugger } from '../vendors';
 import { EventHandler } from '../interfaces';
 import { View } from '../view';
 import { Riba } from '../riba';
@@ -19,7 +19,7 @@ export interface IRibaComponentContext {
   view: View;
 }
 
-export abstract class AbstractRibaComponent extends FakeHTMLElement {
+export abstract class Component extends FakeHTMLElement {
 
   public static tagName: string;
 
@@ -28,7 +28,7 @@ export abstract class AbstractRibaComponent extends FakeHTMLElement {
    */
   public context?: IRibaComponentContext;
 
-  protected debug: Debug.IDebugger;
+  protected debug: IDebugger;
   protected view?: View;
 
   protected templateLoaded: boolean = false;
@@ -55,7 +55,7 @@ export abstract class AbstractRibaComponent extends FakeHTMLElement {
   constructor(element?: HTMLUnknownElement, context?: IRibaComponentContext) {
     super(element);
     this.context = context;
-    this.debug = Debug('component:AbstractRibaComponent');
+    this.debug = Debug('component:Component');
     this.debug('constructor called', element, context, this);
 
     if (element) {
@@ -177,7 +177,7 @@ export abstract class AbstractRibaComponent extends FakeHTMLElement {
   /**
    * Returns an event handler for the bindings (most on-*) insite this component.
    */
-  protected eventHandler(self: AbstractRibaComponent): EventHandler {
+  protected eventHandler(self: Component): EventHandler {
     this.debug('eventHandler', self);
     // IMPORTANT this must be a function and not a Arrow Functions
     return function(this: EventHandler, context: Binding, event: Event, binding: Binding, el: HTMLElement) {

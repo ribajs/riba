@@ -1,7 +1,7 @@
-import { AbstractRibaComponent, Debug, JQuery as $, IBinder } from '@ribajs/core';
+import { Component, Debug, JQuery as $, IBinder } from '@ribajs/core';
 import { DropdownService } from '../../services/dropdown.service';
 
-export class DropdownComponent extends AbstractRibaComponent {
+export class DropdownComponent extends Component {
 
   public static tagName: string = 'bs4-dropdown';
 

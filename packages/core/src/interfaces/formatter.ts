@@ -20,15 +20,3 @@ export interface ITwoWayFormatter {
 }
 
 export type IFormatter = FormatterFn &(IOneWayFormatter | ITwoWayFormatter);
-
-export interface IModuleFormatters {
-  [name: string]: IFormatter;
-}
-
-/**
- * This wrapper i used to store the binder name in the name property
- */
-export interface IModuleFormatterWrapper {
-  name: string;
-  formatter: IFormatter;
-}

@@ -1,7 +1,7 @@
 /* tslint:disable:max-classes-per-file */
-import { AbstractRibaComponent, Debug, JQuery as $ } from '@ribajs/core';
+import { Component, Debug, JQuery as $ } from '@ribajs/core';
 
-export class TabsComponent extends AbstractRibaComponent {
+export class TabsComponent extends Component {
 
   public static tagName: string = 'bs4-tabs';
 

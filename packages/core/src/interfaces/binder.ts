@@ -50,15 +50,3 @@ export interface IBinder<ValueType> {
    */
   [propertyOrFunction: string]: any;
 }
-
-/**
- * A list of binders with any key name
- */
-export interface IModuleBinders<ValueType> {
-  [name: string]: IBinder<ValueType>;
-}
-
-/**
- * This wrapper is used if you need to pass over some dependencies for your binder
- */
-export type BinderWrapper<ValueType> = (...deps: any[]) => IBinder<ValueType>;

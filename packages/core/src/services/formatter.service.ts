@@ -1,16 +1,15 @@
-import { Debug } from '../modules';
-import { IFormatter, IModuleFormatters, IModuleFormatterWrapper } from '../interfaces/formatter';
-import { Utils } from './utils';
+import { IFormatter, IFormatters} from '../interfaces';
+import { ModuleElementService } from './module-element.service';
 
-export class FormatterService {
-  private formatters: IModuleFormatters = {};
-  private debug = Debug('formatters:FormatterService');
+export class FormatterService extends ModuleElementService {
+
+  protected type: 'binder' | 'formatter' | 'components' | 'services' = 'formatter';
 
   /**
    *
    */
-  constructor(formatters: IModuleFormatters) {
-    this.formatters = formatters;
+  constructor(formatters: IFormatters) {
+   super(formatters);
   }
 
   /**
@@ -18,7 +17,7 @@ export class FormatterService {
    * @param formatter
    * @param name
    */
-  public regist(formatter: IFormatter, name?: string): IModuleFormatters {
+  public regist(formatter: IFormatter, name?: string): IFormatters {
     if (!name) {
       if (formatter.hasOwnProperty('constructor')) {
         name = formatter.constructor.name;
@@ -35,31 +34,23 @@ export class FormatterService {
       throw new Error('[FormatterService] name is required');
     }
 
-    // if IBinder<any>
-    this.formatters[name] = formatter;
-    return this.formatters;
+    this.elements[name] = formatter;
+    return this.elements;
   }
 
   /**
    * Regist a set of formatters
    * @param formatters
    */
-  public regists(formatters: IModuleFormatterWrapper[] | IModuleFormatters): IModuleFormatters {
-    if (Utils.isArray(formatters)) {
-      for (let index = 0; index < formatters.length; index++) {
-        const formatterWrapper = (formatters as IModuleFormatterWrapper[])[index];
-        this.regist((formatterWrapper as IModuleFormatterWrapper).formatter, (formatterWrapper as IModuleFormatterWrapper).name);
+  public regists(formatters: IFormatters): IFormatters {
+    for (const name in formatters) {
+      if (formatters.hasOwnProperty(name)) {
+        const formatter = (formatters as IFormatters)[name];
+        this.debug(`Regist formatter with key "${name}"`, formatter);
+        this.regist(formatter, name);
       }
     }
-    if (Utils.isObject(formatters)) {
-      for (const name in formatters) {
-        if (formatters.hasOwnProperty(name)) {
-          const formatter = (formatters as IModuleFormatters)[name];
-          this.debug(`Regist formatter with key "${name}"`, formatter);
-          this.regist(formatter, name);
-        }
-      }
-    }
-    return this.formatters;
+    return this.elements;
   }
+
 }

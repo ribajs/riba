@@ -1,5 +1,5 @@
 import {
-  AbstractRibaComponent,
+  Component,
   JQuery,
   Debug,
 } from '@ribajs/core';
@@ -52,7 +52,7 @@ interface IScope extends IBarConfig {
   showFallbackBar: boolean;
 }
 
-export class BarComponent extends AbstractRibaComponent {
+export class BarComponent extends Component {
 
   public static tagName: string = 'rv-shopify-easdk-bar';
 

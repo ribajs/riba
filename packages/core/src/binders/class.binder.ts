@@ -1,5 +1,5 @@
 import { IBinder } from '../interfaces';
-import { JQuery as $ } from '../modules/jquery.module';
+import { JQuery as $ } from '../vendors/jquery.module';
 
 /**
  * class

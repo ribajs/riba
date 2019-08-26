@@ -1,5 +1,5 @@
 import { IBinder, eventHandlerFunction } from '../interfaces';
-import { JQuery } from '../modules';
+import { JQuery } from '../vendors';
 
 /**
  * Binds an event handler on the element.

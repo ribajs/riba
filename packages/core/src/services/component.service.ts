@@ -1,28 +1,17 @@
-import { Debug } from '../modules';
 import { IComponents } from '../interfaces';
-import { AbstractRibaComponent } from '../components';
+import { Component } from '../components';
+import { ModuleElementService } from './module-element.service';
 
-export class ComponentService {
+export class ComponentService extends ModuleElementService {
 
-  private components: IComponents;
-  private debug = Debug('components:ComponentService');
+  protected type: 'binder' | 'formatter' | 'components' | 'services' = 'components';
 
   /**
    *
    * @param components
    */
   constructor(components: IComponents) {
-    this.components = components;
-  }
-
-  /**
-   * Regist a component wrapper
-   * @param ComponentWrapper
-   * @param name
-   */
-  public registWrapper(componentWrapper: typeof AbstractRibaComponent): IComponents {
-    this.components[componentWrapper.tagName] = componentWrapper;
-    return this.components;
+    super(components);
   }
 
   /**
@@ -30,24 +19,9 @@ export class ComponentService {
    * @param component
    * @param name
    */
-  public regist(component: typeof AbstractRibaComponent): IComponents {
-    this.debug('name', name, component);
-    this.components[component.tagName] = component;
-    return this.components;
+  public regist(component: typeof Component): IComponents {
+    this.elements[component.tagName] = component;
+    return this.elements;
   }
 
-  /**
-   * Regist a set of components
-   * @param components
-   */
-  public regists(components: IComponents): IComponents {
-    for (const tagName in components) {
-      if (components.hasOwnProperty(tagName)) {
-        const component = components[tagName];
-        this.regist(component);
-      }
-    }
-
-    return this.components;
-  }
 }

@@ -1,19 +1,19 @@
-import { Debug } from '../modules';
-import { AbstractRibaComponent, IRibaComponentContext } from './abstract-riba-component';
+import { IDebugger } from '../vendors';
+import { Component, IRibaComponentContext } from './abstract-riba-component';
 import { View } from '../view';
 import { EventHandler } from '../interfaces';
 
 /**
- * This class is just used in view.ts because types of `AbstractRibaComponent` can not have a `new` constuctor
+ * This class is just used in view.ts because types of `Component` can not have a `new` constuctor
  */
-export declare class RibaComponent extends AbstractRibaComponent {
+export declare class RibaComponent extends Component {
   public static tagName: string;
 
   public readonly bound: boolean;
 
   public context?: IRibaComponentContext;
 
-  protected debug: Debug.IDebugger;
+  protected debug: IDebugger;
   protected view?: View;
   // protected _bound: boolean;
 
@@ -39,7 +39,7 @@ export declare class RibaComponent extends AbstractRibaComponent {
    */
   protected requiredAttributes(): string[];
 
-  protected eventHandler(self: AbstractRibaComponent): EventHandler;
+  protected eventHandler(self: Component): EventHandler;
 
   /**
    * Default custom Element method

@@ -8,7 +8,7 @@ import {
 } from './interfaces';
 import { View } from './view';
 import { Utils } from './services/utils';
-import { Debug } from './modules';
+import { Debug, IDebugger } from './vendors';
 
 /**
  *  A single binding between a model attribute and a DOM element.
@@ -47,7 +47,7 @@ export class Binding {
    */
   public customData?: any;
 
-  private debug: Debug.IDebugger;
+  private debug: IDebugger;
 
   /**
    * All information about the binding is passed into the constructor; the
