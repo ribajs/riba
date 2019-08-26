@@ -1,34 +1,88 @@
 import {
-  RibaComponent,
+  Component,
   Debug,
+  IDebugger,
 } from '@ribajs/core';
 
 import template from './each-item-example.component.html';
 
-interface IScope {
-  hello?: string;
+interface IItem {
+  name: string;
+  value?: number;
 }
 
-export class EachItemExampleComponent extends RibaComponent {
+interface IScope {
+  items: Array<IItem>,
+  push: EachItemExampleComponent['push'],
+  pop: EachItemExampleComponent['pop'],
+  shift: EachItemExampleComponent['shift'],
+  unshift: EachItemExampleComponent['unshift'],
+  splice: EachItemExampleComponent['splice'],
+  reset: EachItemExampleComponent['reset'],
+  sort: EachItemExampleComponent['sort'],
+}
+
+export class EachItemExampleComponent extends Component {
 
   public static tagName: string = 'rv-each-item-example';
 
   protected autobind = true;
 
-  static get observedAttributes() {
-    return ['hello'];
-  }
-
-  protected debug = Debug('component:' +EachItemExampleComponent.tagName);
+  protected debug: IDebugger = Debug('component:' +EachItemExampleComponent.tagName);
 
   protected scope: IScope = {
-    hello: undefined,
+    items: this.getItems(),
+    push: this.push,
+    pop: this.pop,
+    shift: this.shift,
+    unshift: this.unshift,
+    splice: this.splice,
+    reset: this.reset,
+    sort: this.sort,
   };
 
   constructor(element?: HTMLElement) {
     super(element);
     this.debug('constructor', this);
     this.init(EachItemExampleComponent.observedAttributes);
+  }
+
+  static get observedAttributes() {
+    return [];
+  }
+
+  public push() {
+    this.scope.items.push({name: 'pushed'})
+  }
+
+  public pop() {
+    this.scope.items.pop()
+  }
+
+  public shift() {
+    this.scope.items.shift()
+  }
+
+  public unshift() {
+    this.scope.items.unshift({name: 'shifted'})
+  }
+
+  public splice() {
+    this.scope.items.splice(1, 1, {name: 'spliced1'}, {name: 'spliced2'})
+  }
+
+  public reset() {
+    this.scope.items = this.getItems()
+  }
+
+  public sort() {
+    this.scope.items.sort((a, b) => {
+      return (a.value || 0) - (b.value || 0)
+    })
+  }
+
+  private getItems(): IItem[] {
+    return [{name: 'x', value: 2} ,{name: 'y', value: 1} , {name: 'z', value: 3}]
   }
 
   protected async init(observedAttributes: string[]) {
@@ -38,25 +92,12 @@ export class EachItemExampleComponent extends RibaComponent {
     });
   }
 
-  protected async beforeBind() {
-    this.debug('beforeBind');
-  }
-
-  protected async afterBind() {
-    this.debug('afterBind', this.scope);
-  }
-
   protected requiredAttributes() {
     return [];
   }
 
   protected attributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
     super.attributeChangedCallback(attributeName, oldValue, newValue, namespace);
-  }
-
-  // deconstructor
-  protected disconnectedCallback() {
-    super.disconnectedCallback();
   }
 
   protected template() {

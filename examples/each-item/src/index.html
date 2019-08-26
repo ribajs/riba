@@ -2,20 +2,11 @@
 <html>
   <head>
     <title>each-star-example</title>
-    <script src="./main.module.ts"></script>
+    <script src="./main.ts"></script>
   </head>
   <body>
     <div id="rv-app">
-      <button rv-on-click="push">Push</button>
-      <button rv-on-click="pop">Pop</button>
-      <button rv-on-click="shift">Shift</button>
-      <button rv-on-click="unshift">Unshift</button>
-      <button rv-on-click="splice">Splice</button>
-      <button rv-on-click="sort">Sort</button>
-      <button rv-on-click="reset">Reset</button>
-      <div rv-each-item="items">
-        <div>Item {%item%} /&nbsp;{item.name}</div>
-      </div>
+      <rv-each-item-example></rv-each-item-example>
     </div>
   </body>
 </html>
