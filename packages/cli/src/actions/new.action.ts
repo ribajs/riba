@@ -101,11 +101,23 @@ export class NewAction extends AbstractAction {
    */
   protected async generateExampleFiles(inputs: ICommandInput[], options: ICommandInput[]) {
     this.debug('generateExampleFiles');
-    const configuration = await this.loadConfiguration();
     const generateAction = new GenerateAction();
+    const generate = await this.getInputsForGenerateExamples(inputs, options, generateAction, 'component');
+    return generateAction.handle(generate.inputs, generate.options);
+  }
+
+  /**
+   * Set inputs and options to generate example files
+   * @param inputs 
+   * @param options 
+   * @param generateAction 
+   * @param schematic 
+   */
+  private async getInputsForGenerateExamples(inputs: ICommandInput[], options: ICommandInput[], generateAction: GenerateAction, schematic: string)  {
+    const configuration = await this.loadConfiguration();
     const clonedInputs = this.deepCopyInput(inputs);
     const clonedOptions = this.deepCopyInput(options);
-    const schematicInput = this.setInput(clonedInputs, 'schematic', 'component');
+    const schematicInput = this.setInput(clonedInputs, 'schematic', schematic);
     if (!schematicInput || typeof(schematicInput.value) !== 'string') {
       throw new Error('Schematic not set!');
     }
@@ -138,8 +150,10 @@ export class NewAction extends AbstractAction {
     this.setInput(clonedInputs, 'path', join(applicationSourceRoot, pathInput.value));
 
     this.debug('pathInput.value', pathInput.value);
-    
-    return generateAction.handle(clonedInputs, clonedOptions);
+    return {
+      inputs: clonedInputs,
+      options: clonedOptions,
+    }
   }
 
   private mapSchematicOptions = (options: ICommandInput[]): SchematicOption[] => {
@@ -162,9 +176,7 @@ export class NewAction extends AbstractAction {
 
     let packageManager: AbstractPackageManager;
     if (dryRunMode) {
-      console.info();
-      console.info(chalk.green(messages.DRY_RUN_MODE));
-      console.info();
+      console.info('\n' + chalk.green(messages.DRY_RUN_MODE) + '\n');
       return;
     }
     if (typeof(inputPackageManager) === 'string') {
