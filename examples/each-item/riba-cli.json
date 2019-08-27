@@ -3,6 +3,7 @@
   "collection": "@ribajs/schematics",
   "sourceRoot": "src",
   "templateEngine": "html",
+  "styleLanguage": "scss",
   "component": {
     "path": "components"
   },

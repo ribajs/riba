@@ -52,30 +52,37 @@ export class EachItemExampleComponent extends Component {
   }
 
   public push() {
-    this.scope.items.push({name: 'pushed'})
+    this.debug('push');
+    this.scope.items.push({name: 'pushed'});
   }
 
   public pop() {
+    this.debug('pop');
     this.scope.items.pop()
   }
 
   public shift() {
+    this.debug('shift');
     this.scope.items.shift()
   }
 
   public unshift() {
+    this.debug('unshift');
     this.scope.items.unshift({name: 'shifted'})
   }
 
   public splice() {
+    this.debug('splice');
     this.scope.items.splice(1, 1, {name: 'spliced1'}, {name: 'spliced2'})
   }
 
   public reset() {
+    this.debug('reset');
     this.scope.items = this.getItems()
   }
 
   public sort() {
+    this.debug('sort');
     this.scope.items.sort((a, b) => {
       return (a.value || 0) - (b.value || 0)
     })
