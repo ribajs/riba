@@ -12,32 +12,21 @@ export class NewCommand extends AbstractCommand {
       .option('-d, --dry-run', 'Allow to test changes before execute command.')
       .option('-g, --skip-git', 'Allow to skip git repository initialization.')
       .option('-s, --skip-install', 'Allow to skip package installation.')
-      .option(
-        '-p, --package-manager [package-manager]',
-        'Allow to specify package manager to skip package-manager selection.',
-      )
-      .option('-l, --language [language]', 'Specify ts or js language to use')
-      .option(
-        '-c, --collection [collectionName]',
-        'Specify the Collection that shall be used.',
-      )
+      .option('-p, --package-manager [package-manager]', 'Allow to specify package manager to skip package-manager selection.')
+      .option('-l, --language [language]', 'Specify ts or js language to use', 'ts')
+      .option('-sl, --style-language [styleLanguage]', 'Specify css or scss style sheet language to use', 'scss')
+      .option('-t, --template-engine [templateEngine]', 'Specify template engine to use', 'html')
+      .option('-c, --collection [collectionName]', 'Specify the Collection that shall be used.',)
       .action(async (name: string, command: Command) => {
         const options: ICommandInput[] = [];
         options.push({ name: 'dry-run', value: !!command.dryRun });
         options.push({ name: 'skip-git', value: !!command.skipGit });
         options.push({ name: 'skip-install', value: !!command.skipInstall });
-        options.push({
-          name: 'package-manager',
-          value: command.packageManager,
-        });
-        options.push({
-          name: 'language',
-          value: !!command.language ? command.language : 'ts',
-        });
-        options.push({
-          name: 'collection',
-          value: command.collection,
-        });
+        options.push({ name: 'package-manager', value: command.packageManager });
+        options.push({ name: 'language', value: command.language });
+        options.push({ name: 'styleLanguage', value: command.styleLanguage });
+        options.push({ name: 'templateEngine', value: command.templateEngine });
+        options.push({ name: 'collection', value: command.collection });
 
         const inputs: ICommandInput[] = [];
         inputs.push({ name: 'name', value: name });
@@ -45,4 +34,4 @@ export class NewCommand extends AbstractCommand {
         await this.action.handle(inputs, options);
       });
   }
-}green
+}

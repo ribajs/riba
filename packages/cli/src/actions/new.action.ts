@@ -1,5 +1,6 @@
 import { dasherize } from '@angular-devkit/core/src/utils/strings';
 import chalk from 'chalk';
+import { debug as Debug } from 'debug';
 import { execSync } from 'child_process';
 import * as fs from 'fs';
 import { Answers, Question, createPromptModule, PromptModule } from 'inquirer';
@@ -12,14 +13,19 @@ import { generateInput, generateSelect, messages, emojis } from '../lib/ui';
 import { GitRunner } from '../lib/runners/git.runner';
 import { Collection, SchematicOption } from '../lib/schematics';
 import { AbstractAction } from './abstract.action';
+import { GenerateAction } from './generate.action';
 
 export class NewAction extends AbstractAction {
+  private debug = Debug('actions:new');
+  
   public async handle(inputs: ICommandInput[], options: ICommandInput[]) {
     const dryRunOption = options.find(option => option.name === 'dry-run');
     const isDryRunEnabled = dryRunOption && dryRunOption.value;
 
+    inputs = await this.setDefaults(inputs);
     await this.askForMissingInformation(inputs);
-    await this.generateFiles(inputs.concat(options)).catch(exit);
+    await this.generateFiles(this.concatOptions([inputs, options]));
+    await this.generateExampleFiles(inputs, options);
 
     const shouldSkipInstall = options.some(
       option => option.name === 'skip-install' && option.value === true,
@@ -68,21 +74,73 @@ export class NewAction extends AbstractAction {
     );
   };
 
-  protected async generateFiles(inputs: ICommandInput[]) {
+  protected async setDefaults(inputs: ICommandInput[]) {
     const configuration = await this.loadConfiguration();
+    this.setDefaultInput(inputs, 'collection', configuration.collection);
+    this.setDefaultInput(inputs, 'sourceRoot', configuration.sourceRoot);
+    return inputs;
+  }
 
-    // Set collection name by default collection or input value
+  protected async generateFiles(inputs: ICommandInput[]) {
+    this.debug('generateFiles inputs', inputs);
     const collectionInput = this.getInput(inputs, 'collection');
-    let collectionName = configuration.collection;
-    if (collectionInput && typeof(collectionInput.value) === 'string') {
-      collectionName = collectionInput.value;
+    if (!collectionInput || typeof(collectionInput.value) !== 'string') {
+      throw new Error('Unable to find a collection for this configuration');
     }
 
-    const collection = new Collection(collectionName);
+    const collection = new Collection(collectionInput.value);
 
     const schematicOptions: SchematicOption[] = this.mapSchematicOptions(inputs);
     await collection.execute('application', schematicOptions);
   };
+
+  /**
+   * Calls some generation actions to generate example files
+   * @param inputs 
+   * @param options 
+   */
+  protected async generateExampleFiles(inputs: ICommandInput[], options: ICommandInput[]) {
+    this.debug('generateExampleFiles');
+    const configuration = await this.loadConfiguration();
+    const generateAction = new GenerateAction();
+    const clonedInputs = this.deepCopyInput(inputs);
+    const clonedOptions = this.deepCopyInput(options);
+    const schematicInput = this.setInput(clonedInputs, 'schematic', 'component');
+    if (!schematicInput || typeof(schematicInput.value) !== 'string') {
+      throw new Error('Schematic not set!');
+    }
+
+    const sourceRootInput = this.getInput(clonedInputs, 'sourceRoot');
+    if (!sourceRootInput || typeof(sourceRootInput.value) !== 'string') {
+      throw new Error('Unable to find a source root for this configuration!');
+    }
+
+    const projectNameInput = this.getInput(inputs, 'name');
+    if (!projectNameInput || typeof(projectNameInput.value) !== 'string') {
+      throw new Error('Unable to find name!');
+    }
+
+    const nameInput = this.setInput(clonedInputs, 'name', projectNameInput.value + '-example');
+    if (!nameInput || typeof(nameInput.value) !== 'string') {
+      throw new Error('Unable to set name!');
+    }
+
+    const pathInput = await generateAction.setPathInput(clonedInputs, configuration, schematicInput);
+    if (!pathInput || typeof(pathInput.value) !== 'string') {
+      throw new Error('Unable to find path!');
+    }
+
+    const applicationSourceRoot = join(dasherize(projectNameInput.value), sourceRootInput.value);
+
+    this.debug('applicationSourceRoot', applicationSourceRoot);
+
+    // Set source root to new generated project
+    this.setInput(clonedInputs, 'path', join(applicationSourceRoot, pathInput.value));
+
+    this.debug('pathInput.value', pathInput.value);
+    
+    return generateAction.handle(clonedInputs, clonedOptions);
+  }
 
   private mapSchematicOptions = (options: ICommandInput[]): SchematicOption[] => {
     return options.reduce(
@@ -172,14 +230,14 @@ export class NewAction extends AbstractAction {
     const emptyLine = this.print();
 
     emptyLine();
-    yellow(`Thanks for installing Riba ${emojis.PRAY}`);
-    dim('Please consider donating to our open collective');
-    dim('to help us maintain this package.');
+    yellow(`Thanks for installing Riba ${emojis.WORKER}`);
+    dim('We are always looking for interesting jobs');
+    dim('or for help to maintain this package.');
     emptyLine();
     emptyLine();
     this.print()(
-      `${chalk.bold(`${emojis.WINE}  Donate:`)} ${chalk.underline(
-        'https://opencollective.com/nest',
+      `${chalk.bold(`${emojis.LETTER}  Contact:`)} ${chalk.underline(
+        'https://artandcode.studio/',
       )}`,
     );
     emptyLine();

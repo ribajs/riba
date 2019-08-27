@@ -9,7 +9,7 @@
     "build": "(npm run clean) && (npm run build:ts) && (chmod +x ./dist/bin/riba.js)",
     "build:ts": "tsc",
     "clean": "rm ./dist -rf",
-    "watch": "npm run build -- -w",
+    "watch": "npm run build:ts -- --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Pascal Garber <pascal@artandcode.studio>",

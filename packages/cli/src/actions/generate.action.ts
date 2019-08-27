@@ -16,38 +16,45 @@ export class GenerateAction extends AbstractAction {
   }
 
   public async handle(inputs: ICommandInput[], options: ICommandInput[]) {
-    await this.generateFiles(inputs.concat(options));
+    inputs = await this.setDefaults(inputs);
+    await this.generateFiles(this.concatOptions([inputs, options]));
   }
 
-  protected async generateFiles(inputs: ICommandInput[]) {
+  protected async setDefaults(inputs: ICommandInput[]) {
     const configuration: IConfiguration = await this.loadConfiguration();
+    this.setDefaultInput(inputs, 'language', configuration.language);
+    this.setDefaultInput(inputs, 'sourceRoot', configuration.sourceRoot);
+    this.setDefaultInput(inputs, 'collection', configuration.collection);
+
     const schematicInput = this.getInput(inputs, 'schematic');
-
-    // Set collection name by default collection or input value
-    const collectionInput = this.getInput(inputs, 'collection');
-    let collectionName = configuration.collection;
-    if (collectionInput && typeof(collectionInput.value) === 'string') {
-      collectionName = collectionInput.value;
-    }
-
-    const collection = new Collection(collectionName);
-
     if (!schematicInput || typeof(schematicInput.value) !== 'string') {
       throw new Error('Unable to find a schematic for this configuration');
     }
 
-    this.setPathInput(inputs, configuration, schematicInput);
+    const pathInput = await this.setPathInput(inputs, configuration, schematicInput);
+
+    if (!pathInput || typeof(pathInput.value) !== 'string') {
+      throw new Error('pathInput not set!');
+    }
+
+    return inputs;
+  }
+
+  protected async generateFiles(inputs: ICommandInput[]) {  
+    this.debug('generateFiles inputs', inputs);
+    const collectionInput = this.getInput(inputs, 'collection');
+    if (!collectionInput || typeof(collectionInput.value) !== 'string') {
+      throw new Error('Unable to find a collection for this configuration');
+    }
+    const collection = new Collection(collectionInput.value);
+
+    const schematicInput = this.getInput(inputs, 'schematic');
+    if (!schematicInput || typeof(schematicInput.value) !== 'string') {
+      throw new Error('Unable to find a schematic for this configuration');
+    }
 
     this.schematicOptions = this.mapSchematicOptions(inputs);
 
-    this.schematicOptions.push(
-      new SchematicOption('language', configuration.language),
-    );
-    this.schematicOptions.push(
-      new SchematicOption('sourceRoot', configuration.sourceRoot),
-    );
-
-    this.debug('schematic: ' + schematicInput.value);
     this.debug('options:', this.schematicOptions);
 
     try {
@@ -74,17 +81,15 @@ export class GenerateAction extends AbstractAction {
    * @param configuration
    * @param schematicInput
    */
-  private async setPathInput(inputs: ICommandInput[], configuration: IConfiguration, schematicInput: ICommandInput) {
-    const pathInput = this.getInput(inputs, 'path');
-    if (!pathInput || !pathInput.value) {
+  public async setPathInput(inputs: ICommandInput[], configuration: IConfiguration, schematicInput: ICommandInput) {
+    let pathInput = this.getInput(inputs, 'path');
+    if (!pathInput || typeof(pathInput.value) !== 'string') {
       const fsr = new FileSystemReader(process.cwd());
       if (typeof(schematicInput.value) === 'string' && configuration[schematicInput.value] && configuration[schematicInput.value].path ) {
         const currentDir = fsr.getDirname();
         const targetDir = fsr.getDirname(configuration[schematicInput.value].path);
         if (currentDir !== targetDir) {
-          this.schematicOptions.push(
-            new SchematicOption('path', configuration[schematicInput.value].path),
-          );
+          pathInput = this.setInput(inputs, 'path', configuration[schematicInput.value].path);
         }
       }
     } else {
@@ -92,5 +97,7 @@ export class GenerateAction extends AbstractAction {
         pathInput.value = '';
       }
     }
+
+    return pathInput;
   }
 }

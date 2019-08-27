@@ -47,7 +47,10 @@ export class GenerateCommand extends AbstractCommand {
 
         this.debug('inputs: ', inputs)
 
-        await this.action.handle(inputs, options);
+        await this.action.handle(inputs, options)
+        .catch((error) => {
+          console.error(error);
+        });
       });
   }
 

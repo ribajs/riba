@@ -10,9 +10,14 @@ import { GenerateCommand, InfoCommand, NewCommand } from './index';
 
 export class CommandLoader {
   public static load(program: CommanderStatic): void {
-    new GenerateCommand(new GenerateAction()).load(program);
-    new NewCommand(new NewAction()).load(program);
-    new InfoCommand(new InfoAction()).load(program);
+    try {
+      new GenerateCommand(new GenerateAction()).load(program);
+      new NewCommand(new NewAction()).load(program);
+      new InfoCommand(new InfoAction()).load(program);
+    } catch (error) {
+      console.error(chalk.red(error));
+    }
+
 
     this.handleInvalidCommand(program);
   }

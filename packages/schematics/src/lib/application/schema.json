@@ -30,7 +30,18 @@
     },
     "language": {
       "type": "string",
-      "description": "Riba application language."
+      "description": "Riba application language.",
+      "default": "ts"
+    },
+    "styleLanguage": {
+      "type": "string",
+      "description": "Riba application style sheet language",
+      "default": "scss"
+    },
+    "templateEngine": {
+      "type": "string",
+      "description": "Riba application template engine",
+      "default": "html"
     },
     "packageManager": {
       "type": "string",

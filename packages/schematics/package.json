@@ -7,11 +7,14 @@
     "access": "public"
   },
   "scripts": {
-    "build": "(npm run clean) && (npm run build:others) && (npm run build:ts)",
+    "build": "(npm run clean) && (npm run build:copy) && (npm run build:ts)",
     "watch": "npm run watch:ts",
-    "watch:ts": "(npm run clean) && (npm run build:others) && (npm run build:ts -- --watch)",
+    "watch:ts": "(npm run clean) && (npm run build:copy) && (npm run build:ts -- --watch)",
     "build:ts": "tsc --project tsconfig.json",
-    "build:others": "(mkdir -p dist/lib/component) && (cp src/collection.json dist/collection.json) && (cp src/lib/component/schema.json dist/lib/component/schema.json) && (cp -R src/lib/component/files dist/lib/component/files)",
+    "build:copy": "npm run build:copy:collection && npm run build:copy:application && npm run build:copy:component",
+    "build:copy:collection": "(mkdir -p dist/lib/) && (cp src/collection.json dist/collection.json)",
+    "build:copy:application": "(mkdir -p dist/lib/application) && (cp src/lib/application/schema.json dist/lib/application/schema.json) && (cp -R src/lib/application/files dist/lib/application/files)",
+    "build:copy:component": "(mkdir -p dist/lib/component) && (cp src/lib/component/schema.json dist/lib/component/schema.json) && (cp -R src/lib/component/files dist/lib/component/files)",
     "clean": "rm -rf dist",
     "lint:src": "tslint --project tsconfig.json",
     "lint:test": "tslint --project test/tsconfig.json",

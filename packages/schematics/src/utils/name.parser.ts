@@ -6,10 +6,7 @@ export class NameParser {
 
   public parse(options: IParseOptions): ILocation {
     const nameWithoutPath: string = basename(options.name as Path);
-    const namePath: string = dirname((options.path === undefined
-      ? ''
-      : options.path
-    )
+    const namePath: string = dirname((options.path === undefined ? '' : options.path)
       .concat('/')
       .concat(options.name) as Path);
     return {

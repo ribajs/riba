@@ -1,6 +1,11 @@
 {
   "$schema": "@angular-devkit/schematics/collection-schema.json",
   "schematics": {
+    "application": {
+      "factory": "./lib/application/application.factory#main",
+      "description": "Create a new Riba application.",
+      "schema": "./lib/application/schema.json"
+    },
     "component": {
       "factory": "./lib/component/component.factory#main",
       "description": "Create a Riba web component.",

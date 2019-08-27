@@ -3,6 +3,7 @@ export interface IConfiguration {
   language: 'ts' | 'js';
   templateEngine: 'html' | 'pug';
   sourceRoot: string;
+  styleLanguage: 'css' | 'scss',
   component: {
     path: string;
   },
