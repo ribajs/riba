@@ -1,7 +1,8 @@
 import {
+  dirname,
   join,
   Path,
-  strings
+  strings,
 } from '@angular-devkit/core';
 import {
   apply,
@@ -21,8 +22,8 @@ import { debug as Debug } from 'debug';
 import 'source-map-support/register';
 import { isNullOrUndefined } from 'util';
 import { IComponentOptions, IDeclarationOptions, ILocation } from '../../interfaces';
-import { ModuleDeclarator } from '../../utils/module.declarator';
-import { ModuleFinder } from '../../utils/module.finder';
+import { ExportDeclarator } from '../../utils/export.declarator';
+import { IndexFinder } from '../../utils/index.finder';
 import { NameParser } from '../../utils/name.parser';
 import { mergeSourceRoot } from '../../utils/source-root.helpers';
 import { DEFAULT_LANGUAGE } from '../defaults';
@@ -39,7 +40,7 @@ export function main(options: IComponentOptions): Rule {
       chain([
         mergeSourceRoot(options),
         // Adds an import to the modules source file if found
-        addDeclarationToModule(options),
+        addExportToIndex(options),
         mergeWith(generate(options)),
       ]),
     )(tree, context);
@@ -92,26 +93,27 @@ function generate(options: IComponentOptions) {
   };
 }
 
-function addDeclarationToModule(options: IComponentOptions): Rule {
+function addExportToIndex(options: IComponentOptions): Rule {
   return (tree: Tree) => {
     if (options.skipImport !== undefined && options.skipImport) {
       return tree;
     }
-    options.module = new ModuleFinder(tree).find({
+    options.index = new IndexFinder(tree).find({
       name: options.name,
-      path: options.path as Path,
+      path: dirname(options.path as Path),
+      language: options.language,
     });
-    if (!options.module) {
+    if (!options.index) {
       return tree;
     }
-    const contentBugger = tree.read(options.module);
+    const contentBugger = tree.read(options.index);
     if (!contentBugger) {
       return tree;
     }
     const content = contentBugger.toString();
-    const declarator: ModuleDeclarator = new ModuleDeclarator();
+    const declarator: ExportDeclarator = new ExportDeclarator();
     tree.overwrite(
-      options.module,
+      options.index,
       declarator.declare(content, options as IDeclarationOptions),
     );
     return tree;

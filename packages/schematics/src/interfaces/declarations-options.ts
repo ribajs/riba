@@ -1,11 +1,16 @@
 import { Path } from '@angular-devkit/core';
 
 export interface IDeclarationOptions {
+  name: string;
+  collection: string;
+  sourceRoot: string;
+  path: Path;
+  language: string;
+  styleLanguage: string;
+  templateEingine: string;
   metadata: string;
   type?: string;
-  name: string;
-  path: Path;
-  module: Path;
+  index: Path;
   symbol?: string;
   staticOptions?: {
     name: string;

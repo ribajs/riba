@@ -1,17 +1,17 @@
 import { capitalize, classify } from '@angular-devkit/core/src/utils/strings';
 import { IDeclarationOptions } from '../interfaces/declarations-options';
-import { ModuleImportDeclarator } from './module-import.declarator';
+import { ElementExportDeclarator } from './element-export.declarator';
 import { ModuleMetadataDeclarator } from './module-metadata.declarator';
 
-export class ModuleDeclarator {
+export class ExportDeclarator {
   constructor(
-    private imports: ModuleImportDeclarator = new ModuleImportDeclarator(),
+    private exports: ElementExportDeclarator = new ElementExportDeclarator(),
     private metadata: ModuleMetadataDeclarator = new ModuleMetadataDeclarator(),
   ) {}
 
   public declare(content: string, options: IDeclarationOptions): string {
     options = this.computeSymbol(options);
-    content = this.imports.declare(content, options);
+    content = this.exports.declare(content, options);
     /**
      * TODO Riba
      * A metadata of `"components"` would add the component to the array of `components` in:

@@ -1,5 +1,5 @@
 import {
-  RibaComponent,
+  Component,
   Debug,
 } from '@ribajs/core';
 
@@ -9,7 +9,7 @@ interface IScope {
   hello?: string;
 }
 
-export class <%= classify(name) %>Component extends RibaComponent {
+export class <%= classify(name) %>Component extends Component {
 
   public static tagName: string = 'rv-<%= name %>';
 

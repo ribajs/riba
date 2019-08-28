@@ -12,7 +12,7 @@ export interface IComponentOptions {
   /**
    * The path to insert the service declaration.
    */
-  module?: Path | null;
+  index?: Path | null;
   /**
    * Directive to insert declaration in module.
    */
