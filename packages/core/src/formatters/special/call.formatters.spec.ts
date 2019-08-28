@@ -31,7 +31,12 @@ describe('riba.formatters', () => {
         });
 
         it('calls with arguments', () => {
-            expect(riba.formatters.call(model.fn, 'foo', 'bar')).toEqual('foobar');
+            expect(riba.formatters).toBeDefined();
+            expect(riba.formatters.call).toBeDefined();
+            expect(riba.formatters.call.read).toBeDefined();
+            if (typeof(riba.formatters.call.read) === 'function') {
+                expect(riba.formatters.call.read(model.fn, 'foo', 'bar')).toEqual('foobar');
+            }
         });
 
         it('calls with the model as context', () => {

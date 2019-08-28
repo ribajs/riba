@@ -1,8 +1,11 @@
 import { Debug } from '../../vendors/debug.module';
 
-const debuggurito = Debug('formatter');
+const _debug = Debug('formatter');
 
-export const debug = (target: any) => {
-  debuggurito(target);
-  return target;
+export const debug = {
+  name: 'debug',
+  read(toPrint: any) {
+    _debug(toPrint);
+    return toPrint;
+  },
 };

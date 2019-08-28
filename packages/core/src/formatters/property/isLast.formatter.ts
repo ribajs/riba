@@ -5,6 +5,9 @@
  * ```
  * @see https://help.shopify.com/themes/liquid/objects/for-loops#forloop-last
  */
-export const isLast = (array: any[], i: number) => {
-  return (array.length === i + 1);
+export const isLast = {
+  name: 'isLast',
+  read(array: any[], i: number) {
+    return (array.length === i + 1);
+  },
 };

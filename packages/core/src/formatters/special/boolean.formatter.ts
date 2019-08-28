@@ -1,6 +1,9 @@
 /**
  * Parse a string to boolean
  */
-export const booleanFormatter = (value: string | boolean) => {
-  return value === 'true' || value === true;
+export const booleanFormatter = {
+  name: 'boolean',
+  read(value: string | boolean) {
+    return value === 'true' || value === true;
+  },
 };

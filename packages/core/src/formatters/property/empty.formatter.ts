@@ -1,5 +1,8 @@
 import { size } from './size.formatter';
 
-export const empty = (a: any[] | string ) => {
-  return size(a) <= 0;
+export const empty = {
+  name: 'empty',
+  read(a: any[] | string ) {
+    return size.read(a) <= 0;
+  },
 };

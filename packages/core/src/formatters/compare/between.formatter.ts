@@ -1,6 +1,10 @@
+import { IFormatter } from '../../interfaces/formatter';
 /**
  * a >= b && a <= c
  */
-export const between = (num: number,  ...nums: any[]) => {
-  return num >= nums[0] && num <= nums[1];
+export const between: IFormatter = {
+  name: 'between',
+  read(num: number,  ...nums: any[]) {
+    return num >= nums[0] && num <= nums[1];
+  },
 };
