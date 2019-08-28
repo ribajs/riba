@@ -7,7 +7,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "(npm run clean) && (npm run build:copy) && (npm run build:ts)",
+    "build": "(npm run clean) && (npm run build:copy) && (npm run lint:src) && (npm run build:ts)",
     "watch": "npm run watch:ts",
     "watch:ts": "(npm run clean) && (npm run build:copy) && (npm run build:ts -- --watch)",
     "build:ts": "tsc --project tsconfig.json",

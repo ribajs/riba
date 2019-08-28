@@ -8,8 +8,6 @@ export class IndexFinder {
   public find(options: IFindOptions): Path | null {
     const indexPath: Path = options.path;
     const generatedDirectory: DirEntry = this.tree.getDir(indexPath);
-    console.error('options', options);
-    console.error('generatedDirectory', generatedDirectory.path);
     return this.findInOrCreate(options, generatedDirectory, false);
   }
 

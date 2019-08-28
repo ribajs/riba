@@ -4,6 +4,7 @@ import { ICommandInput, IConfiguration } from '../interfaces';
 import { AbstractAction } from './abstract.action';
 import { Collection, SchematicOption } from '../lib/schematics';
 import { FileSystemReader } from '../lib/readers';
+import { join, normalize } from 'path';
 
 export class GenerateAction extends AbstractAction {
 
@@ -21,18 +22,20 @@ export class GenerateAction extends AbstractAction {
   }
 
   protected async setDefaults(inputs: ICommandInput[], options: ICommandInput[]) {
-    const configuration: IConfiguration = await this.loadConfiguration();
-    this.setDefaultInput(options, 'language', configuration.language);
-    this.setDefaultInput(options, 'sourceRoot', configuration.sourceRoot);
-    this.setDefaultInput(options, 'collection', configuration.collection);
-    this.setDefaultInput(options, 'templateEngine', configuration.templateEngine);
-
     const schematicInput = this.getInput(inputs, 'schematic');
     if (!schematicInput || typeof(schematicInput.value) !== 'string') {
       throw new Error('Unable to find a schematic for this configuration');
     }
 
-    const pathInput = await this.setPathInput(inputs, configuration, schematicInput);
+    const configuration: IConfiguration = await this.loadConfiguration();
+
+    this.setDefaultInput(options, 'language', configuration.language);
+    this.setDefaultInput(options, 'sourceRoot', configuration.sourceRoot);
+    this.setDefaultInput(options, 'collection', configuration.collection);
+    this.setDefaultInput(options, 'templateEngine', configuration.templateEngine);
+    this.setDefaultInput(options, 'flat', configuration[schematicInput.value].flat);
+
+    const pathInput = await this.setPathInput(inputs, options, configuration, schematicInput);
 
     if (!pathInput || typeof(pathInput.value) !== 'string') {
       throw new Error('pathInput not set!');
@@ -79,7 +82,11 @@ export class GenerateAction extends AbstractAction {
    * @param configuration
    * @param schematicInput
    */
-  public async setPathInput(inputs: ICommandInput[], configuration: IConfiguration, schematicInput: ICommandInput) {
+  public async setPathInput(inputs: ICommandInput[], options: ICommandInput[], configuration: IConfiguration, schematicInput: ICommandInput) {
+    const sourceRootOption = this.getInput(options, 'sourceRoot');
+    if (!sourceRootOption || typeof(sourceRootOption.value) !== 'string') {
+      throw new Error('sourceRoot not found!');
+    }
     let pathInput = this.getInput(inputs, 'path');
     if (!pathInput || typeof(pathInput.value) !== 'string') {
       const fsr = new FileSystemReader(process.cwd());
@@ -87,13 +94,17 @@ export class GenerateAction extends AbstractAction {
         const currentDir = fsr.getDirname();
         const targetDir = fsr.getDirname(configuration[schematicInput.value].path);
         if (currentDir !== targetDir) {
-          pathInput = this.setInput(inputs, 'path', configuration[schematicInput.value].path);
+          pathInput = this.setInput(inputs, 'path', join(sourceRootOption.value, configuration[schematicInput.value].path));
         }
       }
     } else {
       if(pathInput.value === '.') {
         pathInput.value = '';
       }
+    }
+
+    if (pathInput && typeof(pathInput.value) === 'string') {
+      pathInput = this.setInput(inputs, 'path', normalize(pathInput.value));
     }
 
     return pathInput;

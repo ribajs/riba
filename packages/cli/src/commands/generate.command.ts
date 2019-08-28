@@ -18,8 +18,9 @@ export class GenerateCommand extends AbstractCommand {
       .option('--dry-run', 'Allow to test changes before command execution')
       .option('--flat', 'Enforce flat structure of generated element')
       .option('--no-spec', 'Disable spec files generation')
-      .option('-t, --template-engine [templateEngine]', 'Which template engine to use', 'html')
-      .option('-c, --collection [collectionName]', 'Specify the Collection that shall be used.')
+      .option('-t, --template-engine [templateEngine]', 'Which template engine to use')
+      .option('-c, --collection [collectionName]', 'Specify the schematic collection which should be used.')
+      .option('--source-root [sourceRoot]', 'Specify the root directory of your source files')
       .action(async (schematicOrAlias: string, name: string, path: string, command: Command) => {
 
         const schematic = Collection.getSchematic(schematicOrAlias);
@@ -30,6 +31,7 @@ export class GenerateCommand extends AbstractCommand {
         options.push({ name: 'spec', value: command.spec });
         options.push({ name: 'templateEngine', value: command.templateEngine });
         options.push({ name: 'collection', value: command.collection });
+        options.push({ name: 'sourceRoot', value: command.sourceRoot });
 
         const inputs: ICommandInput[] = [];
         inputs.push({ name: 'schematic', value: schematic!.name });

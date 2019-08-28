@@ -4,7 +4,7 @@ import { debug as Debug } from 'debug';
 import { execSync } from 'child_process';
 import * as fs from 'fs';
 import { Answers, Question, createPromptModule, PromptModule } from 'inquirer';
-import { join } from 'path';
+import { join, dirname } from 'path';
 import { promisify } from 'util';
 import { ICommandInput, PackageManager } from '../interfaces';
 import { defaultGitIgnore } from '../lib/configuration';
@@ -96,6 +96,8 @@ export class NewAction extends AbstractAction {
    */
   protected async generateExampleFiles(inputs: ICommandInput[], options: ICommandInput[]) {
 
+    console.log('generateExampleFiles');
+
     const projectNameInput = this.getInput(inputs, 'name');
     if (!projectNameInput || typeof(projectNameInput.value) !== 'string') {
       throw new Error('Unable to find name!');
@@ -149,12 +151,12 @@ export class NewAction extends AbstractAction {
       throw new Error('Unable to set name!');
     }
 
-    const pathInput = await generateAction.setPathInput(clonedInputs, configuration, schematicInput);
+    const pathInput = await generateAction.setPathInput(clonedInputs, clonedOptions, configuration, schematicInput);
     if (!pathInput || typeof(pathInput.value) !== 'string') {
       throw new Error('Unable to find path!');
     }
 
-    const applicationSourceRoot = join(dasherize(name), sourceRootInput.value);
+    const applicationSourceRoot = join(dasherize(name));
 
     this.debug('applicationSourceRoot', applicationSourceRoot);
 

@@ -20,6 +20,18 @@ export interface IApplicationOptions {
    */
   language?: string;
   /**
+   * Style sheet language
+   */
+  styleLanguage?: 'css' | 'scss';
+  /**
+   * Root directory of your source files
+   */
+  sourceRoot?: string;
+  /**
+   * sed collection for this schematics
+   */
+  collection?: string;
+  /**
    * The used package manager.
    */
   packageManager?: 'npm' | 'yarn';
