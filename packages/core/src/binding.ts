@@ -176,18 +176,9 @@ export class Binding {
 
       const processedArgs = this.parseFormatterArguments(args, index);
 
-      let formatterReadFunction;
-
       // get formatter read funcion
-      if (typeof(formatter) === 'function') {
-        // DEPRICATED
-        formatterReadFunction = formatter;
-      } else if (formatter && typeof(formatter.read) === 'function') {
-        formatterReadFunction = formatter.read;
-      }
-
-      if (typeof(formatterReadFunction) === 'function') {
-        result = formatterReadFunction.apply(this.model, [result, ...processedArgs]);
+      if (formatter && typeof(formatter.read) === 'function') {
+        result = formatter.read.apply(this.model, [result, ...processedArgs]);
       }
 
       return result;

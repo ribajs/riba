@@ -30,7 +30,7 @@ import {
     classBinder,
 } from '../src/binders/class.binder';
 
-import { ITwoWayFormatter, IFormatter, IAdapter } from './interfaces';
+import { IFormatter, IAdapter } from './interfaces';
 
 const riba = new Riba();
 riba.module.binder.regist(textBinder);
@@ -215,7 +215,10 @@ describe('riba.Binding', () => {
 
         it('applies any formatters to the value before performing the routine', () => {
 
-            view.options.formatters.awesome = (value) => 'awesome ' + value;
+            view.options.formatters.awesome = {
+                name: 'awesome',
+                read(value: string) { return 'awesome ' + value; },
+            };
 
             if (binding.formatters) {
                 binding.formatters.push('awesome');
@@ -315,7 +318,8 @@ describe('riba.Binding', () => {
         });
 
         it(`should resolve formatter arguments to their values`, () => {
-            (riba.formatters.withArguments as ITwoWayFormatter) = {
+            (riba.formatters.withArguments as IFormatter) = {
+                name: 'withArguments',
                 publish: (value, arg1, arg2) => {
                     return value + ':' + arg1 + ':' + arg2;
                 },
@@ -351,7 +355,8 @@ describe('riba.Binding', () => {
         });
 
         it(`should resolve formatter arguments correctly with multiple formatters`, () => {
-            (riba.formatters.wrap as ITwoWayFormatter ) = {
+            (riba.formatters.wrap as IFormatter ) = {
+                name: 'wrap',
                 publish: (value: string, arg1: string, arg2: string) => {
                     return arg1 + value + arg2;
                 },
@@ -360,7 +365,8 @@ describe('riba.Binding', () => {
                 },
             };
 
-            (riba.formatters.saveAsCase as ITwoWayFormatter) = {
+            (riba.formatters.saveAsCase as IFormatter) = {
+                name: 'saveAsCase',
                 publish: (value, typeCase) => {
                     return value['to' + typeCase + 'Case']();
                 },
@@ -424,12 +430,14 @@ describe('riba.Binding', () => {
         });
 
         it(`should apply read binders left to right, and write binders right to left`, () => {
-            (riba.formatters.totally as ITwoWayFormatter) = {
+            (riba.formatters.totally as IFormatter) = {
+                name: 'totally',
                 publish: (value) => value + ' totally',
                 read: (value) => value + ' totally',
             };
 
-            (riba.formatters.awesome as ITwoWayFormatter) = {
+            (riba.formatters.awesome as IFormatter) = {
+                name: 'awesome',
                 publish: (value) => value + ' is awesome',
                 read: (value) => value + ' is awesome',
             };
@@ -453,16 +461,19 @@ describe('riba.Binding', () => {
         });
 
         it(`binders in a chain should be skipped if they're not there`, () => {
-            (riba.formatters.totally as ITwoWayFormatter) = {
+            (riba.formatters.totally as IFormatter) = {
+                name: 'totally',
                 publish: (value) => value + ' totally',
                 read: (value) => value + ' totally',
             };
 
-            (riba.formatters.radical as ITwoWayFormatter) = {
+            (riba.formatters.radical as IFormatter) = {
+                name: 'radical',
                 publish: (value) => value + ' is radical',
             };
 
-            (riba.formatters.awesome as ITwoWayFormatter) = {
+            (riba.formatters.awesome as IFormatter) = {
+                name: 'awesome',
                 read: (value) => value + ' is awesome',
             };
 
@@ -489,7 +500,12 @@ describe('riba.Binding', () => {
 
     describe('formattedValue()', () => {
         it('applies the current formatters on the supplied value', () => {
-            view.options.formatters.awesome = (value) => 'awesome ' + value;
+            view.options.formatters.awesome = {
+                name: 'awesome',
+                read(value) {
+                    return 'awesome ' + value;
+                },
+            };
             if (!binding.formatters) {
                 throw new Error('Formatters not set!');
             }
@@ -499,8 +515,11 @@ describe('riba.Binding', () => {
 
         describe('with a multi-argument formatter string', () => {
             beforeEach(() => {
-                view.options.formatters.awesome = (value, prefix) => {
-                    return prefix + ' awesome ' + value;
+                view.options.formatters.awesome = {
+                    name: 'awesome',
+                    read(value: string, prefix: string) {
+                        return prefix + ' awesome ' + value;
+                    },
                 };
 
                 if (!binding.formatters) {
@@ -517,8 +536,11 @@ describe('riba.Binding', () => {
         describe('with a formatter string with pipes in argument', () => {
             beforeEach(() => {
 
-                view.options.formatters.totally = (value, prefix) => {
-                    return prefix + ' totally ' + value;
+                view.options.formatters.totally = {
+                    name: 'totally',
+                    read(value, prefix) {
+                        return prefix + ' totally ' + value;
+                    },
                 };
 
                 if (!binding.formatters) {
