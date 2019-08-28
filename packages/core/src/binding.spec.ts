@@ -115,9 +115,9 @@ describe('riba.Binding', () => {
 
             riba.module.formatter.regist(awesomeFormatter);
             riba.module.formatter.regist(totallyFormatter);
-            riba.module.formatter.regist(placeholderFormatter, 'and');
-            riba.module.formatter.regist(placeholderFormatter, 'radical');
-            riba.module.formatter.regist(placeholderFormatter, 'totally');
+            riba.module.formatter.regist(placeholderFormatter, 'and', true);
+            riba.module.formatter.regist(placeholderFormatter, 'radical', true);
+            riba.module.formatter.regist(placeholderFormatter, 'totally', true);
         });
 
         it('register all formatters', () => {

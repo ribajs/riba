@@ -19,8 +19,8 @@ export class ComponentService extends ModuleElementService {
    * @param component
    * @param name
    */
-  public regist(component: typeof Component, fallbackName?: string): IComponents {
-    const name = component.tagName || fallbackName;
+  public regist(component: typeof Component, fallbackName?: string, forceFallback: boolean = false): IComponents {
+    const name = forceFallback ? fallbackName || component.tagName : component.tagName || fallbackName;
 
     if (!name) {
       console.warn(new Error('Component name not found!'), component);

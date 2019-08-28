@@ -17,9 +17,9 @@ export class FormatterService extends ModuleElementService {
    * @param formatter
    * @param name
    */
-  public regist(formatter: IFormatter, fallbackName?: string): IFormatters {
+  public regist(formatter: IFormatter, fallbackName?: string, forceFallback: boolean = false): IFormatters {
 
-    const name = formatter.name || fallbackName;
+    const name = forceFallback ? fallbackName || formatter.name : formatter.name || fallbackName;
 
     if (!name) {
       throw new Error('Formatter name not found!');
