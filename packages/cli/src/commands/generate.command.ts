@@ -18,11 +18,8 @@ export class GenerateCommand extends AbstractCommand {
       .option('--dry-run', 'Allow to test changes before command execution')
       .option('--flat', 'Enforce flat structure of generated element')
       .option('--no-spec', 'Disable spec files generation')
-      .option('--templateEngine <name>', 'Which template engine to use', 'html')
-      .option(
-        '-c, --collection [collectionName]',
-        'Specify the Collection that shall be used.',
-      )
+      .option('-t, --template-engine [templateEngine]', 'Which template engine to use', 'html')
+      .option('-c, --collection [collectionName]', 'Specify the Collection that shall be used.')
       .action(async (schematicOrAlias: string, name: string, path: string, command: Command) => {
 
         const schematic = Collection.getSchematic(schematicOrAlias);
@@ -30,15 +27,9 @@ export class GenerateCommand extends AbstractCommand {
         const options: ICommandInput[] = [];
         options.push({ name: 'dry-run', value: !!command.dryRun });
         options.push({ name: 'flat', value: command.flat });
-        options.push({
-          name: 'spec',
-          value: command.spec,
-        });
-        options.push({ name: 'templateEngine', value: command.templateEngine});
-        options.push({
-          name: 'collection',
-          value: command.collection,
-        });
+        options.push({ name: 'spec', value: command.spec });
+        options.push({ name: 'templateEngine', value: command.templateEngine });
+        options.push({ name: 'collection', value: command.collection });
 
         const inputs: ICommandInput[] = [];
         inputs.push({ name: 'schematic', value: schematic!.name });
@@ -65,11 +56,11 @@ export class GenerateCommand extends AbstractCommand {
   /**
    * Returns a table listing which schematics are available with the generate argument
    * @example
-   *       ┌───────────┬───────┐
-   *       │ name      │ alias │
-   *       │ component │ com   │
-   *       │ ...       │ ...   │
-   *       └───────────┴───────┘
+   *  ┌───────────┬───────┐
+   *  │ name      │ alias │
+   *  │ component │ com   │
+   *  │ ...       │ ...   │
+   *  └───────────┴───────┘
    */
   private buildSchematicsListAsTable(): string {
     const leftMargin = '    ';

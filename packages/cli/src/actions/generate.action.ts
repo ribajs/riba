@@ -16,15 +16,16 @@ export class GenerateAction extends AbstractAction {
   }
 
   public async handle(inputs: ICommandInput[], options: ICommandInput[]) {
-    inputs = await this.setDefaults(inputs);
+    await this.setDefaults(inputs, options);
     await this.generateFiles(this.concatOptions([inputs, options]));
   }
 
-  protected async setDefaults(inputs: ICommandInput[]) {
+  protected async setDefaults(inputs: ICommandInput[], options: ICommandInput[]) {
     const configuration: IConfiguration = await this.loadConfiguration();
-    this.setDefaultInput(inputs, 'language', configuration.language);
-    this.setDefaultInput(inputs, 'sourceRoot', configuration.sourceRoot);
-    this.setDefaultInput(inputs, 'collection', configuration.collection);
+    this.setDefaultInput(options, 'language', configuration.language);
+    this.setDefaultInput(options, 'sourceRoot', configuration.sourceRoot);
+    this.setDefaultInput(options, 'collection', configuration.collection);
+    this.setDefaultInput(options, 'templateEngine', configuration.templateEngine);
 
     const schematicInput = this.getInput(inputs, 'schematic');
     if (!schematicInput || typeof(schematicInput.value) !== 'string') {
@@ -40,8 +41,7 @@ export class GenerateAction extends AbstractAction {
     return inputs;
   }
 
-  protected async generateFiles(inputs: ICommandInput[]) {  
-    this.debug('generateFiles inputs', inputs);
+  protected async generateFiles(inputs: ICommandInput[]) { 
     const collectionInput = this.getInput(inputs, 'collection');
     if (!collectionInput || typeof(collectionInput.value) !== 'string') {
       throw new Error('Unable to find a collection for this configuration');
@@ -54,8 +54,6 @@ export class GenerateAction extends AbstractAction {
     }
 
     this.schematicOptions = this.mapSchematicOptions(inputs);
-
-    this.debug('options:', this.schematicOptions);
 
     try {
       await collection.execute(schematicInput.value, this.schematicOptions);

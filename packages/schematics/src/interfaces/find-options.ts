@@ -5,4 +5,5 @@ export interface IFindOptions {
   path: Path;
   kind?: string;
   language: string;
+  flat?: boolean;
 }

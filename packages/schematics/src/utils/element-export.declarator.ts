@@ -1,4 +1,4 @@
-import { dirname, normalize, relative } from '@angular-devkit/core';
+import { dirname, join, normalize, relative } from '@angular-devkit/core';
 import { IDeclarationOptions } from '../interfaces';
 
 export class ElementExportDeclarator {
@@ -28,10 +28,10 @@ export class ElementExportDeclarator {
 
   private computeRelativePath(options: IDeclarationOptions): string {
     const targetFilename = `${options.name}.${options.type}`;
-    const targetRelativeDirname = `${options.name}`;
+    const targetRelativeDirname = options.flat ? '' : options.name;
     const indexAbsolutPath = normalize(options.index);
     const indexAbsolutDirname = dirname(indexAbsolutPath);
-    const targetAbsolutPath = normalize(`${indexAbsolutDirname}/${targetRelativeDirname}/${targetFilename}`);
+    const targetAbsolutPath = normalize(join(indexAbsolutDirname, targetRelativeDirname, targetFilename));
     const targetRelativePath = `./${relative(indexAbsolutDirname, targetAbsolutPath)}`;
     return targetRelativePath;
   }

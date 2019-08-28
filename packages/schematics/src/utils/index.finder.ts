@@ -8,23 +8,38 @@ export class IndexFinder {
   public find(options: IFindOptions): Path | null {
     const indexPath: Path = options.path;
     const generatedDirectory: DirEntry = this.tree.getDir(indexPath);
-    return this.findIn(options, generatedDirectory);
+    console.error('options', options);
+    console.error('generatedDirectory', generatedDirectory.path);
+    return this.findInOrCreate(options, generatedDirectory, false);
   }
 
-  private findIn(options: IFindOptions, directory: DirEntry): Path | null {
+  private findInOrCreate(options: IFindOptions, directory: DirEntry, createIfNotFound: boolean): Path | null {
     if (!directory) {
       return null;
     }
-    const indexFilename: PathFragment | undefined = directory.subfiles.find(filename =>
-      new RegExp(`index\.${options.language}`, 's').test(filename),
-    );
-    // if found
+    const indexFilename = this.findIn(options, directory);
+
+    // if found in current path
     if (indexFilename) {
       return join(directory.path, indexFilename.valueOf());
     }
-    // otherwise create an index file
+
+    // check parent dir or create index in there
+    if (!options.flat && !createIfNotFound) {
+      return this.findInOrCreate(options, directory.parent, true);
+    }
+
+    // otherwise create an index file if createIfNotFound is ture
     const newIndexFilePath = join(directory.path, `index.${options.language}`);
     this.tree.create(newIndexFilePath, '');
     return newIndexFilePath;
+
+  }
+
+  findIn(options: IFindOptions, directory: DirEntry) {
+    const indexFilename: PathFragment | undefined = directory.subfiles.find(filename =>
+      new RegExp(`index\.${options.language}`, 's').test(filename),
+    );
+    return indexFilename;
   }
 }

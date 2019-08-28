@@ -31,7 +31,6 @@ export const viewStaticBinder: IBinder<string> = {
     options.parseTitle = false;
     options.transition = options.transition || new HideShowTransition();
     options.viewId = options.url;
-    debug('options', options);
 
     const pjax = new Pjax(options.viewId, $wrapper, '[data-namespace]', options.listenAllLinks, options.listenPopstate , options.transition, options.parseTitle);
 

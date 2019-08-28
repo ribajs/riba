@@ -10,8 +10,8 @@ import { IElementOptions } from '../../interfaces';
 import { ElementFactory } from '../../utils/element.factory';
 import { mergeSourceRoot } from '../../utils/source-root.helpers';
 
-const ELEMENT_METADATA = 'components';
-const ELEMENT_TYPE = 'component';
+const ELEMENT_METADATA = 'formatters';
+const ELEMENT_TYPE = 'formatter';
 
 export function main(options: IElementOptions): Rule {
   options.metadata = options.metadata || ELEMENT_METADATA;

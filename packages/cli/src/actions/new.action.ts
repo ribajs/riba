@@ -7,54 +7,49 @@ import { Answers, Question, createPromptModule, PromptModule } from 'inquirer';
 import { join } from 'path';
 import { promisify } from 'util';
 import { ICommandInput, PackageManager } from '../interfaces';
-import { defaultGitIgnore, defaultConfiguration } from '../lib/configuration';
+import { defaultGitIgnore } from '../lib/configuration';
 import { AbstractPackageManager, PackageManagerFactory } from '../lib/package-managers';
 import { generateInput, generateSelect, messages, emojis } from '../lib/ui';
 import { GitRunner } from '../lib/runners/git.runner';
 import { Collection, SchematicOption } from '../lib/schematics';
 import { AbstractAction } from './abstract.action';
 import { GenerateAction } from './generate.action';
+import { timingSafeEqual } from 'crypto';
 
 export class NewAction extends AbstractAction {
   private debug = Debug('actions:new');
   
   public async handle(inputs: ICommandInput[], options: ICommandInput[]) {
-    const dryRunOption = options.find(option => option.name === 'dry-run');
-    const isDryRunEnabled = dryRunOption && dryRunOption.value;
+    await this.setDefaults(inputs, options);
 
-    inputs = await this.setDefaults(inputs);
-    await this.askForMissingInformation(inputs);
-    await this.generateFiles(this.concatOptions([inputs, options]));
-    await this.generateExampleFiles(inputs, options);
-
-    const shouldSkipInstall = options.some(
-      option => option.name === 'skip-install' && option.value === true,
-    );
-    const shouldSkipGit = options.some(
-      option => option.name === 'skip-git' && option.value === true,
-    );
     const projectDirectory = dasherize(this.getInput(inputs, 'name')!.value as string);
+    const isDryRunEnabled = this.getInput(options, 'dry-run')!.value;
+    const shouldSkipInstall = this.getInput(options, 'skip-install')!.value;
+    const shouldSkipGit = this.getInput(options, 'skip-git')!.value;
+    const shouldSkipExamples = this.getInput(options, 'skip-examples')!.value;
+
+    await this.askForMissingInformation(inputs);
+
+    await this.generateFiles(this.concatOptions([inputs, options]));
+    if (!shouldSkipExamples) {
+      await this.generateExampleFiles(inputs, options);
+    }
 
     if (!shouldSkipInstall) {
-      await this.installPackages(
-        options,
-        isDryRunEnabled as boolean,
-        projectDirectory,
-      );
+      await this.installPackages(options, isDryRunEnabled as boolean, projectDirectory);
     }
+
     if (!isDryRunEnabled) {
       if (!shouldSkipGit) {
         await this.initializeGitRepository(projectDirectory);
         await this.createGitIgnoreFile(projectDirectory);
       }
-
       this.printCollective();
     }
   }
 
   private async askForMissingInformation (inputs: ICommandInput[]) {
-    console.info(messages.PROJECT_INFORMATION_START);
-    console.info();
+    console.info(messages.PROJECT_INFORMATION_START + '\n');
 
     const prompt: PromptModule = createPromptModule();
     const nameICommandInput = this.getInput(inputs, 'name');
@@ -74,15 +69,15 @@ export class NewAction extends AbstractAction {
     );
   };
 
-  protected async setDefaults(inputs: ICommandInput[]) {
+  protected async setDefaults(inputs: ICommandInput[], options: ICommandInput[]) {
     const configuration = await this.loadConfiguration();
-    this.setDefaultInput(inputs, 'collection', configuration.collection);
-    this.setDefaultInput(inputs, 'sourceRoot', configuration.sourceRoot);
-    return inputs;
+    this.setDefaultInput(options, 'language', configuration.language);
+    this.setDefaultInput(options, 'sourceRoot', configuration.sourceRoot);
+    this.setDefaultInput(options, 'collection', configuration.collection);
+    this.setDefaultInput(options, 'templateEngine', configuration.templateEngine);
   }
 
   protected async generateFiles(inputs: ICommandInput[]) {
-    this.debug('generateFiles inputs', inputs);
     const collectionInput = this.getInput(inputs, 'collection');
     if (!collectionInput || typeof(collectionInput.value) !== 'string') {
       throw new Error('Unable to find a collection for this configuration');
@@ -100,10 +95,26 @@ export class NewAction extends AbstractAction {
    * @param options 
    */
   protected async generateExampleFiles(inputs: ICommandInput[], options: ICommandInput[]) {
-    this.debug('generateExampleFiles');
-    const generateAction = new GenerateAction();
-    const generate = await this.getInputsForGenerateExamples(inputs, options, generateAction, 'component');
-    return generateAction.handle(generate.inputs, generate.options);
+
+    const projectNameInput = this.getInput(inputs, 'name');
+    if (!projectNameInput || typeof(projectNameInput.value) !== 'string') {
+      throw new Error('Unable to find name!');
+    }
+
+    const generateComponentAction = new GenerateAction();
+    const generateComponent = await this.getInputsForGenerateExamples(projectNameInput.value, inputs, options, generateComponentAction, 'component');
+    this.setInput(generateComponent.options, 'flat', false);
+    await generateComponentAction.handle(generateComponent.inputs, generateComponent.options);
+
+    const generateBinderAction = new GenerateAction();
+    const generateBinder = await this.getInputsForGenerateExamples(projectNameInput.value, inputs, options, generateBinderAction, 'binder');
+    this.setInput(generateBinder.options, 'flat', true);
+    await generateBinderAction.handle(generateBinder.inputs, generateBinder.options);
+
+    const generateFormatterAction = new GenerateAction();
+    const generateFormatter = await this.getInputsForGenerateExamples(projectNameInput.value, inputs, options, generateFormatterAction, 'formatter');
+    this.setInput(generateFormatter.options, 'flat', true);
+    await generateFormatterAction.handle(generateFormatter.inputs, generateFormatter.options);
   }
 
   /**
@@ -113,26 +124,27 @@ export class NewAction extends AbstractAction {
    * @param generateAction 
    * @param schematic 
    */
-  private async getInputsForGenerateExamples(inputs: ICommandInput[], options: ICommandInput[], generateAction: GenerateAction, schematic: string)  {
+  private async getInputsForGenerateExamples(name: string, inputs: ICommandInput[], options: ICommandInput[], generateAction: GenerateAction, schematic: string)  {
     const configuration = await this.loadConfiguration();
+
     const clonedInputs = this.deepCopyInput(inputs);
     const clonedOptions = this.deepCopyInput(options);
+
+    // options
+
+    const sourceRootInput = this.getInput(clonedOptions, 'sourceRoot');
+    if (!sourceRootInput || typeof(sourceRootInput.value) !== 'string') {
+      throw new Error('Unable to find a source root for this configuration!');
+    }
+
+    // inputs
+
     const schematicInput = this.setInput(clonedInputs, 'schematic', schematic);
     if (!schematicInput || typeof(schematicInput.value) !== 'string') {
       throw new Error('Schematic not set!');
     }
 
-    const sourceRootInput = this.getInput(clonedInputs, 'sourceRoot');
-    if (!sourceRootInput || typeof(sourceRootInput.value) !== 'string') {
-      throw new Error('Unable to find a source root for this configuration!');
-    }
-
-    const projectNameInput = this.getInput(inputs, 'name');
-    if (!projectNameInput || typeof(projectNameInput.value) !== 'string') {
-      throw new Error('Unable to find name!');
-    }
-
-    const nameInput = this.setInput(clonedInputs, 'name', projectNameInput.value + '-example');
+    const nameInput = this.setInput(clonedInputs, 'name', name + '-example');
     if (!nameInput || typeof(nameInput.value) !== 'string') {
       throw new Error('Unable to set name!');
     }
@@ -142,14 +154,13 @@ export class NewAction extends AbstractAction {
       throw new Error('Unable to find path!');
     }
 
-    const applicationSourceRoot = join(dasherize(projectNameInput.value), sourceRootInput.value);
+    const applicationSourceRoot = join(dasherize(name), sourceRootInput.value);
 
     this.debug('applicationSourceRoot', applicationSourceRoot);
 
     // Set source root to new generated project
     this.setInput(clonedInputs, 'path', join(applicationSourceRoot, pathInput.value));
 
-    this.debug('pathInput.value', pathInput.value);
     return {
       inputs: clonedInputs,
       options: clonedOptions,

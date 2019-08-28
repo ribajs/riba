@@ -1,22 +1,22 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "SchematicsRibaComponent",
-  "title": "Riba Web Component Options Schema",
+  "id": "SchematicsRibaFormatter",
+  "title": "Riba Formatter Options Schema",
   "type": "object",
   "properties": {
     "name": {
       "type": "string",
-      "description": "The name of the web component.",
+      "description": "The name of the formatter.",
       "$default": {
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "What name would you like to use for the web component?"
+      "x-prompt": "What name would you like to use for the formatter?"
     },
     "path": {
       "type": "string",
       "format": "path",
-      "description": "The path to create the web component."
+      "description": "The path to create the formatter."
     },
     "language": {
       "type": "string",
@@ -26,14 +26,9 @@
       "type": "string",
       "description": "Riba project source root directory."
     },
-    "templateEngine": {
-      "type": "string",
-      "description": "The template engine you want to use for your web component (html/pug).",
-      "default": "html"
-    },
     "skipImport": {
       "default": false,
-      "description": "Flag to indicate if an the component declaration should be inserted to the module file"
+      "description": "Flag to indicate if an the formatter declaration should be inserted to the module file"
     },
     "flat": {
       "default": false,

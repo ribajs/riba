@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
       "declaration": true,
-      "lib": ["es2017"],
+      "lib": ["es7"],
       "module": "commonjs",
       "outDir": "dist",
       "target": "es6",

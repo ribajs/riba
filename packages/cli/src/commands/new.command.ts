@@ -1,7 +1,6 @@
 import { Command, CommanderStatic } from 'commander';
 import { ICommandInput } from '../interfaces';
 import { AbstractCommand } from './abstract.command';
-import { green } from '@angular-devkit/core/src/terminal';
 
 export class NewCommand extends AbstractCommand {
   public load(program: CommanderStatic) {
@@ -9,6 +8,7 @@ export class NewCommand extends AbstractCommand {
       .command('new [name]')
       .alias('n')
       .description('Generate a new Riba application')
+      .option('-e, --skip-examples', 'Allow to skip generation of example files.')
       .option('-d, --dry-run', 'Allow to test changes before execute command.')
       .option('-g, --skip-git', 'Allow to skip git repository initialization.')
       .option('-s, --skip-install', 'Allow to skip package installation.')
@@ -18,10 +18,10 @@ export class NewCommand extends AbstractCommand {
       .option('-t, --template-engine [templateEngine]', 'Specify template engine to use', 'html')
       .option('-c, --collection [collectionName]', 'Specify the Collection that shall be used.',)
       .action(async (name: string, command: Command) => {
-        console.log();
         const options: ICommandInput[] = [];
         options.push({ name: 'dry-run', value: !!command.dryRun });
         options.push({ name: 'skip-git', value: !!command.skipGit });
+        options.push({ name: 'skip-examples', value: !!command.skipExamples });
         options.push({ name: 'skip-install', value: !!command.skipInstall });
         options.push({ name: 'package-manager', value: command.packageManager });
         options.push({ name: 'language', value: command.language });

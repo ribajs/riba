@@ -19,8 +19,15 @@ export class ComponentService extends ModuleElementService {
    * @param component
    * @param name
    */
-  public regist(component: typeof Component): IComponents {
-    this.elements[component.tagName] = component;
+  public regist(component: typeof Component, fallbackName?: string): IComponents {
+    const name = component.tagName || fallbackName;
+
+    if (!name) {
+      console.warn(new Error('Component name not found!'), component);
+      return this.elements;
+    }
+
+    this.elements[name] = component;
     return this.elements;
   }
 

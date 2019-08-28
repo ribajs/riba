@@ -41,7 +41,7 @@ export abstract class ModuleElementService {
       if (elements.hasOwnProperty(key) && key !== '__esModule') {
         const element = elements[key];
         this.debug(`Regist ${this.type} with key "${key}"`, element);
-        this.regist(element);
+        this.regist(element, key);
       }
     }
     return this.elements;

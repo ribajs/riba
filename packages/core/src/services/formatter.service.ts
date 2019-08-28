@@ -17,40 +17,15 @@ export class FormatterService extends ModuleElementService {
    * @param formatter
    * @param name
    */
-  public regist(formatter: IFormatter, name?: string): IFormatters {
-    if (!name) {
-      if (formatter.hasOwnProperty('constructor')) {
-        name = formatter.constructor.name;
-      }
+  public regist(formatter: IFormatter, fallbackName?: string): IFormatters {
 
-      if (formatter.hasOwnProperty('name')) {
-        name = (formatter as any).name;
-      }
-    }
-
-    this.debug('name', name, formatter);
+    const name = formatter.name || fallbackName;
 
     if (!name) {
-      throw new Error('[FormatterService] name is required');
+      throw new Error('Formatter name not found!');
     }
 
     this.elements[name] = formatter;
     return this.elements;
   }
-
-  /**
-   * Regist a set of formatters
-   * @param formatters
-   */
-  public regists(formatters: IFormatters): IFormatters {
-    for (const name in formatters) {
-      if (formatters.hasOwnProperty(name)) {
-        const formatter = (formatters as IFormatters)[name];
-        this.debug(`Regist formatter with key "${name}"`, formatter);
-        this.regist(formatter, name);
-      }
-    }
-    return this.elements;
-  }
-
 }

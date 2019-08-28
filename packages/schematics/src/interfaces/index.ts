@@ -1,5 +1,5 @@
 export * from './application.schema';
-export * from './component.schema';
+export * from './element.schema';
 export * from './declarations-options';
 export * from './find-options';
 export * from './location';

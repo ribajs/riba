@@ -50,9 +50,13 @@ export abstract class AbstractAction {
 
   protected concatOptions(inputsSources: ICommandInput[][]) {
     const result = new Array<ICommandInput>();
+
     for (const inputs of inputsSources) {
-      for (const input of inputs) {
-        this.setDefaultInput(result, input.name, input.value); 
+      const toConcat = this.deepCopyInput(inputs);
+      for (const input of toConcat) {
+        if (typeof(input.value) !== 'undefined') {
+          this.setInput(result, input.name, input.value)
+        }
       }
     }
     return result;

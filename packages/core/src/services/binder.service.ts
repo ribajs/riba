@@ -18,16 +18,19 @@ export class BindersService extends ModuleElementService {
    * @param binder
    * @param name  Overwrites the name to access the binder over
    */
-  public regist(binder: IBinder<any>, name?: string): IBinders<any> {
+  public regist(binder: IBinder<any>, fallbackName?: string): IBinders<any> {
     if (!binder || typeof(binder.routine) !== 'function') {
-      this.debug(new Error('Can not regist binder!'), name, binder);
+      this.debug(new Error('Can not regist binder!'), binder);
       return this.elements;
     }
-    name = name || binder.name;
+
+    const name = binder.name || fallbackName;
+
     if (!name) {
       console.warn(new Error('Binder name not found!'), binder);
       return this.elements;
     }
+
     this.elements[name] = binder;
     return this.elements;
   }

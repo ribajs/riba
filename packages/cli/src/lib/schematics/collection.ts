@@ -9,7 +9,9 @@ export interface Schematic {
 
 export class Collection extends AbstractCollection {
   private static schematics: Schematic[] = [
-    { name: 'component', alias: 'com' },
+    { name: 'component', alias: 'c' },
+    { name: 'binder', alias: 'b' },
+    { name: 'formatter', alias: 'f' },
   ];
 
   constructor(collection: string, runner: AbstractRunner = new SchematicRunner()) {
