@@ -15,7 +15,7 @@
 - Moved tests from mocha to jest
 - Removed Rivets.js components feature (we have RibaComponents based on Custom Elements)
 - Binders: Remove One-Way-Binder as function feature (Also One-Way-Binders are needing the `routine` method now)
-- Simplified binders interface 
+- Simplified binders interface
 - Binders now need their own name as a property
 - Renamed `css-*` binder to `style-`
 - Added ModuleServer to regist modules

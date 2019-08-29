@@ -103,7 +103,18 @@ const bumpVersion = (modulePath) => {
 
 const publishPackage = (modulePath) => {
   const packagePath = getPackagePath(modulePath);
-  exec('npm publish', {cwd: path.dirname(packagePath), stdio: 'inherit'}, log);
+  const package = require(packagePath);
+  const publishedVersion = getPublishPackageVersion(modulePath, package.name);
+  if (package.version === publishedVersion) {
+    return console.log(chalk.yellow(`\nSkipped because the current version has already been published`));
+  }
+  exec('npm publish --access public', {cwd: path.dirname(packagePath), stdio: 'inherit'}, log);
+};
+
+const getPublishPackageVersion = (modulePath, moduleNpmName) => {
+  const packagePath = getPackagePath(modulePath);
+  const version = exec(`npm view ${moduleNpmName} version`, {cwd: path.dirname(packagePath), stdio: 'pipe'}, log);
+  return version.toString().trim();
 };
 
 // npm i -g npm-upgrade
