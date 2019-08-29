@@ -18,12 +18,12 @@
     "url": "https://github.com/ribajs/riba.git"
   },
   "scripts": {
-    "bump": "node tools/cli.js bump",
-    "publish": "node tools/cli.js publish",
-    "upgrade": "node tools/cli.js upgrade",
-    "install": "node tools/cli.js install",
-    "link": "node tools/cli.js link",
-    "build": "node tools/cli.js build"
+    "bump:packages": "node tools/cli.js bump",
+    "publish:packages": "node tools/cli.js publish",
+    "upgrade:packages": "node tools/cli.js upgrade",
+    "install:packages": "node tools/cli.js install",
+    "link:packages": "node tools/cli.js link",
+    "build:packages": "node tools/cli.js build"
   },
   "devDependencies": {
     "commander": "^3.0.0",
