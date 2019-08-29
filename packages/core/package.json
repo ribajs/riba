@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/core",
   "description": "Core module of Riba.js",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "private": false,
   "contributors": [
@@ -31,8 +31,7 @@
     "build:ts": "npm run type-check && npm run build:ts",
     "build:browser": "npm run type-check && npm run webpack:browser",
     "webpack:browser": "webpack && webpack --config webpack.dev.config.js",
-    "watch:browser": "webpack --watch --env.dev",
-    "link": "npm install && npm link"
+    "watch:browser": "webpack --watch --env.dev"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -42,21 +41,21 @@
     "@babel/plugin-transform-runtime": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-typescript": "^7.3.3",
-    "@types/jest": "^24.0.17",
+    "@types/jest": "^24.0.18",
     "@types/jquery": "^3.3.31",
-    "@types/node": "^12.7.1",
+    "@types/node": "^12.7.2",
     "babel-loader": "^8.0.6",
     "babel-plugin-array-includes": "^2.0.3",
-    "husky": "^3.0.3",
-    "jest": "^24.8.0",
+    "husky": "^3.0.4",
+    "jest": "^24.9.0",
     "jest-extended": "^0.11.2",
     "source-map-support": "^0.5.13",
     "ts-jest": "^24.0.2",
-    "tslint": "^5.18.0",
-    "typescript": "^3.5.3",
+    "tslint": "^5.19.0",
+    "typescript": "^3.6.2",
     "uglifyjs-webpack-plugin": "^2.2.0",
-    "webpack": "^4.39.1",
-    "webpack-cli": "^3.3.6",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.7",
     "webpack-glob-entry": "^2.1.1"
   },
   "dependencies": {

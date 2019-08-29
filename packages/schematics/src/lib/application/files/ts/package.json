@@ -4,7 +4,7 @@
   "description": "<%= description %>",
   "main": "index.html",
   "scripts": {
-    "start": "npm run lint:ts && parcel src/index.html",
+    "start": "parcel src/index.html",
     "build": "npm run lint:ts && parcel build src/index.html",
     "clear": "rm -rf ./dist",
     "lint:ts": "tslint --fix -c tslint.json 'src/**/*.ts' && tsc --noEmit",
@@ -30,10 +30,10 @@
     "sass": "^1.22.10",
     "ts-jest": "^24.0.2",
     "tslint": "^5.19.0",
-    "typescript": "^3.5.3"
+    "typescript": "^3.6.2"
   },
   "dependencies": {
-    "@ribajs/core": "^1.0.1",
+    "@ribajs/core": "^1.1.0",
     "@types/jest": "^24.0.18",
     "@types/jquery": "^3.3.31",
     "autoprefixer": "^9.6.1",

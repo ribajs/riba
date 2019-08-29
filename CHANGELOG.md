@@ -1,9 +1,10 @@
 # Changelog
 
-## Dev
+## 1.1.0
 
-- Add cli tool
-- Fix docs
+- Add cli tool to generate new riba frontend projects and create new binders, formaters and components to the project
+- Add schematics to generate project templates (used by the cli tool)
+- Binder and formatters must now be an object (Removed binder / formatter as a function feature)
 
 ## 1.0.1
 

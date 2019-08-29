@@ -1,6 +1,5 @@
 import {
   Component,
-  JQuery,
   Debug,
   IBinder,
   View,

@@ -1,9 +1,9 @@
 import { tFormatterWrapper } from './t.formatter';
 import { ALocalesService } from '../services/locales-base.service';
-import { IFormatterWrapper } from '@ribajs/core';
+import { IFormatters } from '@ribajs/core';
 
-export default (localesService: ALocalesService): IFormatterWrapper[] => {
-  return [
-    tFormatterWrapper(localesService),
-  ];
+export default (localesService: ALocalesService): IFormatters => {
+  return {
+    ...tFormatterWrapper(localesService),
+  };
 };

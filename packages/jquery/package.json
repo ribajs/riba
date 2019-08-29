@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/jquery",
   "description": "JQuery module for Riba.js",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "contributors": [],
   "url": "https://github.com/ribajs/riba/tree/master/packages/jquery",
@@ -23,8 +23,7 @@
     "test": "npm run type-check && jest --config=jest.config.js",
     "type-check": "tslint -c tslint.json 'src/**/*.ts' && tsc --noEmit",
     "build": "npm run build:module",
-    "build:module": "tsc",
-    "link": "npm install && npm link && npm link @ribajs/core"
+    "build:module": "tsc"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -36,19 +35,19 @@
     "@babel/plugin-transform-runtime": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-typescript": "^7.3.3",
-    "@types/jest": "^24.0.17",
+    "@types/jest": "^24.0.18",
     "@types/jquery": "^3.3.28",
     "babel-loader": "^8.0.6",
     "babel-plugin-array-includes": "^2.0.3",
-    "jest": "^24.8.0",
+    "jest": "^24.9.0",
     "ts-jest": "^24.0.2",
-    "tslint": "^5.18.0",
-    "typescript": "^3.5.3",
-    "webpack": "^4.39.1",
-    "webpack-cli": "^3.3.6"
+    "tslint": "^5.19.0",
+    "typescript": "^3.6.2",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.7"
   },
   "dependencies": {
-    "@ribajs/core": "^1.0.1",
+    "@ribajs/core": "^1.1.0",
     "@types/jquery": "^3.3.31",
     "jquery": "^3.4.1"
   },

@@ -3,9 +3,9 @@
   "compilerOptions": {
     "baseUrl": "./src/",
     "outDir": "./lib/",
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "types": ["jest"]
   },
   "include": ["*.ts", "**/*.ts"],
-  "typeRoots": ["./node_modules/@types", "./src/types"],
-  "types": ["jest"]
 }

@@ -7,14 +7,13 @@ export * from './interfaces';
 export * from './services';
 
 import bindersWrapper from './binders';
-import { AI18nSwitcherComponent } from './components';
 import formattersWrapper from './formatters';
 import * as services from './services';
 
 export const i18nModule = (localesService: services.ALocalesService): IRibaModule => {
   return {
     binders: bindersWrapper(localesService),
-    // components: [],
+    components: {},
     formatters: formattersWrapper(localesService),
     services,
   };

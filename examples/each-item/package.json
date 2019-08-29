@@ -1,13 +1,12 @@
 {
   "name": "each-star-example",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "",
   "main": "index.html",
   "scripts": {
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html",
-    "clear": "rm -rf ./dist",
-    "link": "npm install && npm link @ribajs/core"
+    "clear": "rm -rf ./dist"
   },
   "author": "",
   "license": "MIT",
@@ -25,10 +24,10 @@
     "babel-plugin-array-includes": "^2.0.3",
     "parcel-bundler": "^1.12.3",
     "sass": "^1.22.10",
-    "typescript": "^3.5.3"
+    "typescript": "^3.6.2"
   },
   "dependencies": {
-    "@ribajs/core": "^1.0.1",
+    "@ribajs/core": "^1.1.0",
     "@types/jquery": "^3.3.31",
     "autoprefixer": "^9.6.1",
     "postcss-modules": "^1.4.1"

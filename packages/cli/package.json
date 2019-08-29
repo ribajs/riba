@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/cli",
-  "version": "0.0.1",
+  "version": "1.1.0",
   "description": "CLI tool for Riba applications 🍹",
   "bin": {
     "riba": "dist/bin/riba.js"
@@ -15,18 +15,18 @@
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "license": "MIT",
   "dependencies": {
-    "@angular-devkit/core": "^8.2.2",
-    "@angular-devkit/schematics": "^8.2.2",
-    "@angular-devkit/schematics-cli": "^0.802.2",
-    "@ribajs/core": "^1.0.1",
-    "@ribajs/schematics": "0.0.1",
+    "@angular-devkit/core": "^8.3.1",
+    "@angular-devkit/schematics": "^8.3.1",
+    "@angular-devkit/schematics-cli": "^0.803.1",
+    "@ribajs/core": "^1.1.0",
+    "@ribajs/schematics": "^1.1.0",
     "@types/node-emoji": "^1.8.1",
     "chalk": "^2.4.2",
     "cli-table3": "^0.5.1",
     "commander": "^3.0.0",
     "dashify": "^2.0.0",
     "debug": "^4.1.1",
-    "inquirer": "^6.5.1",
+    "inquirer": "^7.0.0",
     "node-emoji": "^1.10.0",
     "ora": "^3.4.0",
     "os-name": "^3.1.0",
@@ -40,6 +40,6 @@
     "@types/node": "^12.7.2",
     "@types/ora": "^3.2.0",
     "@types/os-name": "^3.1.0",
-    "typescript": "^3.5.3"
+    "typescript": "^3.6.2"
   }
 }
