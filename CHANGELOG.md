@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1
+
+- Fixed small spelling mistake
+
 ## 1.1.0
 
 - Add cli tool to generate new riba frontend projects and create new binders, formaters and components to the project

@@ -23,7 +23,7 @@ describe('riba.binders', () => {
   describe('<%= classify(name) %>', () => {
     it('sets the element\'s text content', () => {
       (riba.binders['test-app-example'] as any).routine(el, '<em>hello</em>');
-      expect(el.innerHTML).toEqual('<em>hello</em> form test-app-example <strong>binder</strong>!');
+      expect(el.innerHTML).toEqual('<em>hello</em> from test-app-example <strong>binder</strong>!');
     });
   });
 });
