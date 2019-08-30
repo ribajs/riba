@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/bs4",
   "description": "Bootstrap 4 module for Riba.js",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "contributors": [],
   "url": "https://github.com/ribajs/riba/tree/master/packages/shopify",
@@ -41,7 +41,7 @@
     "webpack-cli": "^3.3.7"
   },
   "dependencies": {
-    "@ribajs/core": "^1.1.1",
+    "@ribajs/core": "^1.1.2",
     "@types/jquery": "^3.3.31",
     "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",

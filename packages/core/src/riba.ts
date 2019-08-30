@@ -4,8 +4,7 @@ import {
   IAdapters,
   Root,
   IComponents,
-  IOptionsParam,
-  IViewOptions,
+  IOptions,
 } from './interfaces';
 import { Utils } from './services/utils';
 import { parseTemplate, parseType } from './parsers';
@@ -66,6 +65,12 @@ export class Riba {
   /** Preload data by default. */
   public preloadData = true;
 
+  /** Remove binder attributes after binding */
+  public removeBinderAttributes = true; // TODO fixme on false: Maximum call stack size exceeded
+
+  /** Stop binding on this node types */
+  public blockNodeNames = ['SCRIPT', 'STYLE', 'TEMPLATE', 'CODE'];
+
   /** Default attribute prefix. */
   private _prefix = 'rv';
 
@@ -100,13 +105,13 @@ export class Riba {
    * Merges an object literal into the corresponding global options.
    * @param options
    */
-  public configure(options: any) {
+  public configure(options: Partial<IOptions>) {
     if (!options) {
       return;
     }
 
-    Object.keys(options).forEach( (option) => {
-      const value = options[option];
+    Object.keys(options).forEach((option) => {
+      const value = (options as any)[option];
       switch (option) {
         case 'binders':
           this.binders = Utils.concat(false, this.binders, value);
@@ -118,8 +123,6 @@ export class Riba {
           this.components = Utils.concat(false, this.components, value);
           break;
         case 'adapters':
-          this.adapters = Utils.concat(false, this.adapters, value);
-          break;
         case 'adapter':
           this.adapters = Utils.concat(false, this.adapters, value);
           break;
@@ -148,8 +151,8 @@ export class Riba {
     });
   }
 
-  public getViewOptions(options?: IOptionsParam) {
-    const viewOptions: IOptionsParam = {
+  public getViewOptions(options?: Partial<IOptions>) {
+    const viewOptions: Partial<IOptions> = {
       // EXTENSIONS
       adapters: <IAdapters> {},
       binders: <IBinders<any>> {},
@@ -161,10 +164,6 @@ export class Riba {
 
       // sightglass
       rootInterface: <Root> {},
-
-      // Remove binder attributes after binding
-      removeBinderAttributes: true, // TODO fixme on false: Maximum call stack size exceeded
-
     };
 
     if (options) {
@@ -176,9 +175,12 @@ export class Riba {
 
     viewOptions.prefix = options && options.prefix ? options.prefix : this.prefix;
     viewOptions.fullPrefix = viewOptions.prefix ? viewOptions.prefix + '-' : this.fullPrefix;
+
     viewOptions.templateDelimiters = options && options.templateDelimiters ? options.templateDelimiters : this.templateDelimiters;
     viewOptions.rootInterface = options && options.rootInterface ? options.rootInterface : this.rootInterface;
-    viewOptions.preloadData = options && options.preloadData ? options.preloadData : this.preloadData;
+    viewOptions.removeBinderAttributes = options && typeof(options.removeBinderAttributes) === 'boolean' ? options.removeBinderAttributes : this.removeBinderAttributes;
+    viewOptions.blockNodeNames = options &&  options.blockNodeNames ? options.blockNodeNames : this.blockNodeNames;
+    viewOptions.preloadData = options && typeof(options.preloadData) === 'boolean' ? options.preloadData : this.preloadData;
     viewOptions.handler = options && options.handler ? options.handler : Riba.handler;
 
     // merge extensions
@@ -194,14 +196,14 @@ export class Riba {
       });
     }
 
-    return (viewOptions as IViewOptions);
+    return (viewOptions as IOptions);
   }
 
   /**
    * Binds some data to a template / element. Returns a riba.View instance.
    */
-  public bind(el: HTMLElement | DocumentFragment | HTMLUnknownElement[], models: any, options?: IOptionsParam) {
-    const viewOptions: IViewOptions = this.getViewOptions(options);
+  public bind(el: HTMLElement | DocumentFragment | HTMLUnknownElement[], models: any, options?: IOptions) {
+    const viewOptions: IOptions = this.getViewOptions(options);
 
     models = models || new Object(null);
     Observer.updateOptions(viewOptions);

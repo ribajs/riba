@@ -3,7 +3,7 @@ import {
   Debug,
 } from '@ribajs/core';
 
-<% if (templateEngine === 'pug') { %>import pugTemplate from './<%= name %>..component.pug';<% } %><% if (templateEngine === 'html') { %>import template from './<%= name %>.component.html';<% } %>
+<% if (templateEngine === 'pug') { %>import pugTemplate from './<%= name %>.component.pug';<% } %><% if (templateEngine === 'html') { %>import template from './<%= name %>.component.html';<% } %>
 
 interface IScope {
   hello?: string;
@@ -19,7 +19,7 @@ export class <%= classify(name) %>Component extends Component {
     return ['hello'];
   }
 
-  protected debug = Debug('component:' +<%= classify(name) %>Component.tagName);
+  protected debug = Debug('component:' + <%= classify(name) %>Component.tagName);
 
   protected scope: IScope = {
     hello: undefined,
@@ -65,8 +65,7 @@ export class <%= classify(name) %>Component extends Component {
       this.debug('Do not use template, because element has child nodes');
       return null;
     } else {
-      <% if (templateEngine === 'pug') { %>const template = pugTemplate(this.scope);<% } %>
-      this.debug('Use template', template);
+      <% if (templateEngine === 'pug') { %>const template = pugTemplate(this.scope);<% } %>this.debug('Use template', template);
       return template;
     }
   }

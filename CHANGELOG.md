@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.2
+
+- New option `blockNodeNames` to define that should be ignored
+
 ## 1.1.1
 
 - Fixed small spelling mistake

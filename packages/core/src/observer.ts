@@ -1,5 +1,5 @@
 
-import { IAdapters, Root, IKey, IObserverSyncCallback, Obj, IViewOptions } from './interfaces';
+import { IAdapters, Root, IKey, IObserverSyncCallback, Obj, IOptions } from './interfaces';
 import { Utils } from './services/utils';
 
 export class Observer {
@@ -8,7 +8,7 @@ export class Observer {
   public static interfaces: string[];
   public static rootInterface: Root;
 
-  public static updateOptions(options: IViewOptions) {
+  public static updateOptions(options: IOptions) {
 
     if (!options.adapters) {
       throw new Error('adapters are required!');

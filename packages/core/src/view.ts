@@ -1,7 +1,7 @@
 import { Riba } from './riba';
 import {
   IBinder,
-  IViewOptions,
+  IOptions,
   IBindableElement,
 } from './interfaces';
 import { Binding } from './binding';
@@ -62,7 +62,7 @@ export class View {
 
   public els: HTMLCollection | HTMLElement[] | Node[];
   public models: any;
-  public options: IViewOptions;
+  public options: IOptions;
   public bindings: Array<Binding> = [];
   public webComponents: Array<Component> = [];
   // public componentView: View | null = null;
@@ -75,7 +75,7 @@ export class View {
    * @param models
    * @param options
    */
-  constructor(els: HTMLCollection | HTMLElement | Node | NodeListOf<ChildNode> | HTMLUnknownElement[] , models: any, options: IViewOptions) {
+  constructor(els: HTMLCollection | HTMLElement | Node | NodeListOf<ChildNode> | HTMLUnknownElement[] , models: any, options: IOptions) {
     if (Array.isArray(els)) {
       this.els = els;
     } else {
@@ -128,8 +128,8 @@ export class View {
       throw new Error('prefix is required');
     }
 
-    /** If true stop / block the parseNode  recursion */
-    let block = node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TEMPLATE';
+    /** If true stop / block the parseNode recursion */
+    let block = this.options.blockNodeNames.includes(node.nodeName);
     const attributes = node.attributes;
     const bindInfos = [];
     const starBinders = this.options.starBinders;

@@ -1,7 +1,7 @@
 {
   "name": "ribajs",
   "description": "Declarative data binding + templating solution.",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "contributors": [],
   "private": true,
@@ -18,15 +18,15 @@
     "url": "https://github.com/ribajs/riba.git"
   },
   "scripts": {
-    "bump:packages": "node tools/cli.js bump",
-    "publish:packages": "node tools/cli.js publish",
-    "upgrade:packages": "node tools/cli.js upgrade",
-    "install:packages": "node tools/cli.js install",
-    "link:packages": "node tools/cli.js link",
-    "build:packages": "node tools/cli.js build"
+    "packages:bump": "node tools/cli.js bump",
+    "packages:publish": "node tools/cli.js publish",
+    "packages:upgrade": "node tools/cli.js upgrade",
+    "packages:install": "node tools/cli.js install",
+    "packages:link": "node tools/cli.js link",
+    "packages:build": "node tools/cli.js build"
   },
   "devDependencies": {
-    "commander": "^3.0.0",
+    "commander": "^3.0.1",
     "chalk": "^2.4.2"
   },
   "dependencies": {}
