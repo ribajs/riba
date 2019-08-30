@@ -123,7 +123,6 @@ export class Riba {
           this.components = Utils.concat(false, this.components, value);
           break;
         case 'adapters':
-        case 'adapter':
           this.adapters = Utils.concat(false, this.adapters, value);
           break;
         case 'prefix':
@@ -144,6 +143,9 @@ export class Riba {
         case 'preloadData':
           this.preloadData = value;
           break;
+        case 'blockNodeNames':
+            this.blockNodeNames = value;
+            break;
         default:
           console.warn('Option not supported', option, value);
           break;
@@ -179,7 +181,7 @@ export class Riba {
     viewOptions.templateDelimiters = options && options.templateDelimiters ? options.templateDelimiters : this.templateDelimiters;
     viewOptions.rootInterface = options && options.rootInterface ? options.rootInterface : this.rootInterface;
     viewOptions.removeBinderAttributes = options && typeof(options.removeBinderAttributes) === 'boolean' ? options.removeBinderAttributes : this.removeBinderAttributes;
-    viewOptions.blockNodeNames = options &&  options.blockNodeNames ? options.blockNodeNames : this.blockNodeNames;
+    viewOptions.blockNodeNames = options && options.blockNodeNames ? options.blockNodeNames : this.blockNodeNames;
     viewOptions.preloadData = options && typeof(options.preloadData) === 'boolean' ? options.preloadData : this.preloadData;
     viewOptions.handler = options && options.handler ? options.handler : Riba.handler;
 

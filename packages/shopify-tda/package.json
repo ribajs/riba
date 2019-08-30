@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/shopify-tda",
   "description": "The Developer App for Shopify module for Riba.js",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "contributors": [],
   "url": "https://github.com/ribajs/riba/tree/master/packages/shopify",
@@ -41,9 +41,9 @@
     "webpack-cli": "^3.3.7"
   },
   "dependencies": {
-    "@ribajs/core": "^1.1.2",
-    "@ribajs/i18n": "^1.1.2",
-    "@ribajs/shopify": "^1.1.2",
+    "@ribajs/core": "^1.1.3",
+    "@ribajs/i18n": "^1.1.3",
+    "@ribajs/shopify": "^1.1.3",
     "@types/jquery": "^3.3.31"
   },
   "bugs": {

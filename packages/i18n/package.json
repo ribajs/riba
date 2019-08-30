@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/i18n",
   "description": "Internationalization extension for Riba.js",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "url": "https://github.com/ribajs/riba/tree/master/packages/i18n",
   "main": "src/index.ts",
@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@babel/runtime-corejs2": "^7.5.5",
-    "@ribajs/core": "^1.1.2"
+    "@ribajs/core": "^1.1.3"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

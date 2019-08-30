@@ -24,5 +24,5 @@ export const collapseOnUrlBinder: IBinder<string> = {
     };
 
     dispatcher.on('newPageReady', () => checkURL(url));
-  }
+  },
 };
