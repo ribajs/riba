@@ -6,6 +6,8 @@ import {
     htmlBinder,
 } from './html.binder';
 
+import { IAdapters } from '../interfaces';
+
 describe('riba.binders', () => {
     let el: HTMLUnknownElement;
     const riba = new Riba();
@@ -13,12 +15,12 @@ describe('riba.binders', () => {
 
     beforeEach(() => {
         riba.configure({
-            adapter: {
+            adapters: {
                 subscribe: () => {/**/},
                 unsubscribe: () => {/**/},
                 read: () => {/**/},
                 publish: () => {/**/},
-            },
+            } as unknown as IAdapters,
         });
 
         el = document.createElement('div');

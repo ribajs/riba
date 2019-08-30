@@ -5,6 +5,7 @@ import {
 import {
     checkedBinder,
 } from './checked.binder';
+import { IAdapters } from '../interfaces';
 
 const riba = new Riba();
 riba.module.binder.regist(checkedBinder);
@@ -26,12 +27,12 @@ describe('riba.binders', () => {
 
     beforeEach(() => {
         riba.configure({
-            adapter: {
+            adapters: {
                 subscribe: () => {/**/},
                 unsubscribe: () => {/**/},
                 read: () => {/**/},
                 publish: () => {/**/},
-            },
+            } as unknown as IAdapters,
         });
 
         // to test the radio input scenario when its value is 'true'

@@ -6,6 +6,8 @@ import {
     valueBinder,
 } from './value.binder';
 
+import { IAdapters } from '../interfaces';
+
 describe('riba.binders', () => {
     describe('value', () => {
         const riba = new Riba();
@@ -118,12 +120,12 @@ describe('riba.binders', () => {
 
         beforeEach(() => {
             riba.configure({
-                adapter: {
+                adapters: {
                     subscribe: () => {/**/},
                     unsubscribe: () => {/**/},
                     read: () => {/**/},
                     publish: () => {/**/},
-                },
+                } as unknown as IAdapters,
             });
 
             input = createInputElement('text');

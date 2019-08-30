@@ -214,7 +214,9 @@ describe('riba.Binding', () => {
         });
 
         it('applies any formatters to the value before performing the routine', () => {
-
+            if (!view.options.formatters) {
+                throw new Error('formatters are undefined!');
+            }
             view.options.formatters.awesome = {
                 name: 'awesome',
                 read(value: string) { return 'awesome ' + value; },
@@ -500,6 +502,9 @@ describe('riba.Binding', () => {
 
     describe('formattedValue()', () => {
         it('applies the current formatters on the supplied value', () => {
+            if (!view.options.formatters) {
+                throw new Error('formatters are undefined!');
+            }
             view.options.formatters.awesome = {
                 name: 'awesome',
                 read(value) {
@@ -515,6 +520,9 @@ describe('riba.Binding', () => {
 
         describe('with a multi-argument formatter string', () => {
             beforeEach(() => {
+                if (!view.options.formatters) {
+                    throw new Error('formatters are undefined!');
+                }
                 view.options.formatters.awesome = {
                     name: 'awesome',
                     read(value: string, prefix: string) {
@@ -535,7 +543,9 @@ describe('riba.Binding', () => {
 
         describe('with a formatter string with pipes in argument', () => {
             beforeEach(() => {
-
+                if (!view.options.formatters) {
+                    throw new Error('formatters are undefined!');
+                }
                 view.options.formatters.totally = {
                     name: 'totally',
                     read(value, prefix) {

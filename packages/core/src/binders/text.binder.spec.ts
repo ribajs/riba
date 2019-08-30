@@ -6,6 +6,8 @@ import {
     textBinder,
 } from './text.binder';
 
+import { IAdapters } from '../interfaces';
+
 describe('riba.binders', () => {
     let el: HTMLUnknownElement;
 
@@ -14,12 +16,12 @@ describe('riba.binders', () => {
 
     beforeEach(() => {
         riba.configure({
-            adapter: {
+            adapters: {
                 subscribe: () => {/**/},
                 unsubscribe: () => {/**/},
                 read: () => {/**/},
                 publish: () => {/**/},
-            },
+            } as unknown as IAdapters,
         });
 
         el = document.createElement('div');

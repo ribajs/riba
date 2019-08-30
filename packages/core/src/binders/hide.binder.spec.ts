@@ -6,6 +6,8 @@ import {
     hideBinder,
 } from './hide.binder';
 
+import { IAdapters } from '../interfaces';
+
 const riba = new Riba();
 riba.module.binder.regist(hideBinder);
 
@@ -14,12 +16,12 @@ describe('riba.binders', () => {
 
     beforeEach(() => {
         riba.configure({
-            adapter: {
+            adapters: {
                 subscribe: () => {/**/},
                 unsubscribe: () => {/**/},
                 read: () => {/**/},
                 publish: () => {/**/},
-            },
+            } as unknown as IAdapters,
         });
 
         el = document.createElement('div');
