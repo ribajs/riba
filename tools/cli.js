@@ -1,6 +1,6 @@
 /* jshint esversion: 6 */
 const program = require('commander');
-const chalk = require('chalk');
+const chalk = require('chalk').default;
 const exec = require('child_process').execSync;
 const path = require('path');
 const fs = require('fs');
@@ -108,24 +108,24 @@ const publishPackage = (modulePath) => {
   if (package.version === publishedVersion) {
     return console.log(chalk.yellow(`\nSkipped because the current version has already been published`));
   }
-  exec('npm publish --access public', {cwd: path.dirname(packagePath), stdio: 'inherit'}, log);
+  exec('npm publish --access public', {cwd: path.dirname(packagePath), stdio: 'inherit'});
 };
 
 const getPublishPackageVersion = (modulePath, moduleNpmName) => {
   const packagePath = getPackagePath(modulePath);
-  const version = exec(`npm view ${moduleNpmName} version`, {cwd: path.dirname(packagePath), stdio: 'pipe'}, log);
+  const version = exec(`npm view ${moduleNpmName} version`, {cwd: path.dirname(packagePath), stdio: 'pipe'});
   return version.toString().trim();
 };
 
 // npm i -g npm-upgrade
 const upgradePackage = (modulePath) => {
   const packagePath = getPackagePath(modulePath);
-  exec('npm-upgrade', {cwd: path.dirname(packagePath), stdio: 'inherit'}, log);
+  exec('npm-upgrade', {cwd: path.dirname(packagePath), stdio: 'inherit'});
 };
 
 const installPackage = (modulePath) => {
   const packagePath = getPackagePath(modulePath);
-  exec('npm install', {cwd: path.dirname(packagePath), stdio: 'inherit'}, log);
+  exec('npm install', {cwd: path.dirname(packagePath), stdio: 'inherit'},);
 };
 
 /**
@@ -134,7 +134,7 @@ const installPackage = (modulePath) => {
  */
 const linkPackage = (modulePath) => {
   const packagePath = getPackagePath(modulePath);
-  exec('npm link', {cwd: path.dirname(packagePath), stdio: 'inherit'}, log);
+  exec('npm link', {cwd: path.dirname(packagePath), stdio: 'inherit'});
 };
 
 /**
@@ -144,7 +144,7 @@ const linkPackage = (modulePath) => {
  */
 const linkPackageDependency = (modulePath, dependency ) => {
   const packagePath = getPackagePath(modulePath);
-  exec('npm link ' + dependency, {cwd: path.dirname(packagePath), stdio: 'inherit'}, log);
+  exec('npm link ' + dependency, {cwd: path.dirname(packagePath), stdio: 'inherit'});
 };
 
 /**
@@ -165,14 +165,14 @@ const linkPackageDependencies = (modulePath) => {
 
 const buildPackage = (modulePath) => {
   const packagePath = getPackagePath(modulePath);
-  exec('npm run build', {cwd: path.dirname(packagePath), stdio: 'inherit'}, log);
+  exec('npm run build', {cwd: path.dirname(packagePath), stdio: 'inherit'});
 };
 
 /**
  * 
  * @param {string} modulePath 
- * @param {boolen} bump Bump version of riba packages
- * @param {boolen} publish Publish package to npm 
+ * @param {boolean} bump Bump version of riba packages
+ * @param {boolean} publish Publish package to npm 
  */
 const processPackage = (modulePath, bump = false, publish = false, upgrade = false, install = false, link = false, linkDependencies = false, build = false) => {
   console.log(chalk.blue(`\nProcess ${modulePath}...`));

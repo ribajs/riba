@@ -25,20 +25,20 @@
     "build:module": "tsc"
   },
   "devDependencies": {
-    "@babel/cli": "^7.5.5",
-    "@babel/core": "^7.5.5",
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.6.0",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
-    "@babel/plugin-transform-runtime": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "@babel/preset-typescript": "^7.3.3",
+    "@babel/plugin-transform-runtime": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/preset-typescript": "^7.6.0",
     "@types/jquery": "^3.3.28",
     "babel-loader": "^8.0.6",
     "babel-plugin-array-includes": "^2.0.3",
-    "tslint": "^5.19.0",
-    "typescript": "^3.6.2",
-    "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.7"
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.3",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.8"
   },
   "dependencies": {
     "@ribajs/core": "^1.1.3",

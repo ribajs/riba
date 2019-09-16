@@ -18,9 +18,9 @@ export class Observer {
       throw new Error('rootInterface is required!');
     }
 
-    Observer.adapters = options.adapters;
-    Observer.interfaces = Object.keys(Observer.adapters);
-    Observer.rootInterface = options.rootInterface;
+    this.adapters = options.adapters;
+    this.interfaces = Object.keys(Observer.adapters);
+    this.rootInterface = options.rootInterface;
   }
 
   /**
@@ -35,7 +35,7 @@ export class Observer {
 
     for (index = 0; index < keypath.length; index++) {
       chr = keypath.charAt(index);
-      if (!!~Observer.interfaces.indexOf(chr)) {
+      if (!!~this.interfaces.indexOf(chr)) {
         tokens.push(current);
         current = {i: chr, path: ''};
       } else {
