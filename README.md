@@ -2,6 +2,10 @@
 
 Riba.js is the espiritual sucessor of Rivets.js, a lightweight data binding and templating system that facilitates building data-driven views. It is agnostic about every aspect of a front-end MV(C|VM|P) stack, making it easy to introduce it into your current workflow or to use it as part of your own custom front-end stack comprised of other libraries.
 
+## Documentation
+
+You found the documentation source files on [github.com/ribajs/doc](https://github.com/ribajs/doc/tree/master/doc) or rendered on [ribajs.com](https://ribajs.com/).
+
 ## Contributing
 
 ### Clone

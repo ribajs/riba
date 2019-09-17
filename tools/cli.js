@@ -58,7 +58,7 @@ const PACKAGES = [
     available: false,
   },
 
-  // Tools, helpers
+  // Tools, helpers, docs
   {
     path: 'packages/cli/',
     npm: '@ribajs/cli',
@@ -68,16 +68,13 @@ const PACKAGES = [
     path: 'packages/schematics/',
     npm: '@ribajs/schematics',
     available: true,
+  },
+  {
+    path: 'packages/doc/',
+    npm: '@ribajs/doc',
+    available: false,
   }
 ];
-
-const log = function (error, stdout, stderr) {
-  console.log(stdout);
-  console.error(chalk.red(stderr));
-  if (error !== null) {
-    console.error(chalk.red('exec error: ' + error));
-  }
-};
 
 const getPackagePath = (modulePath) => {
   return path.join(__dirname, '..', modulePath, 'package.json');
