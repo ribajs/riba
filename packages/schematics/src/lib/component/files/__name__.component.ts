@@ -50,8 +50,8 @@ export class <%= classify(name) %>Component extends Component {
     return [];
   }
 
-  protected attributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
-    super.attributeChangedCallback(attributeName, oldValue, newValue, namespace);
+  protected parsedAttributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
+    super.parsedAttributeChangedCallback(attributeName, oldValue, newValue, namespace);
   }
 
   // deconstructor

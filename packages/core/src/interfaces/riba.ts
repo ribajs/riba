@@ -32,6 +32,7 @@ export interface IOptions extends IExtensions {
 
   starBinders?: any;
 
+  /** Removes binder attribute after the binder was bound */
   removeBinderAttributes?: boolean;
 
   /** Stop binding on this node types */
