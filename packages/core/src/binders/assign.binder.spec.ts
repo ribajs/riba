@@ -21,18 +21,31 @@ describe('riba.binders', () => {
 
         model = {
             value: 'world',
+            setMeToValue: {
+                value: 'hey man!',
+            },
         };
     });
 
-    describe('assign-*', () => {
+    describe('assign', () => {
         it('Set\'s a value to the model given as json string', () => {
             element.setAttribute('rv-assign', '{"newValue": "hello"}');
 
-            expect(model).toEqual({value: 'world'});
+            expect(model).toEqual({value: 'world', setMeToValue: { value: 'hey man!' }});
 
             riba.bind(fragment, model);
 
-            expect(model).toEqual({value: 'world', newValue: 'hello'});
+            expect(model).toEqual({value: 'world', newValue: 'hello', setMeToValue: { value: 'hey man!' }});
+        });
+
+        it('Overwrites a value to the model given as keypath', () => {
+            element.setAttribute('rv-assign', 'setMeToValue');
+
+            expect(model).toEqual({value: 'world', setMeToValue: { value: 'hey man!' }});
+
+            riba.bind(fragment, model);
+
+            expect(model.value).toEqual('hey man!');
         });
     });
 

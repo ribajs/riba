@@ -67,7 +67,6 @@
   ],
   "exclude": [
     "node_modules",
-    "**/*.spec.ts",
     "packages/*/lib/**/*",
     "packages/*/src/ts/types",
   ]

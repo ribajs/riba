@@ -1,16 +1,22 @@
 import { IBinder } from '../interfaces';
-import { JQuery as $ } from '../vendors/jquery.module';
 
 /**
  * remove-class
+ * Removes the given class string the class attibute.
+ * Instead of `class-[classname]` the classname is removed by the
+ * given attribute and not by the star value,
+ * @example
+ * <img class="loading" rv-src="img.src" rv-remove-class="loadingClass">
  */
 export const removeClassBinder: IBinder<string> = {
   name: 'remove-class',
+  bind(el) {
+    this.customData = {
+      staticClassesString: el.className,
+    };
+  },
   routine(el: HTMLElement, value: string) {
-    const $el = $(el);
-    if (value) {
-      $el.removeClass(value);
-    }
-    return value;
+    const regex = new RegExp(`\\b${value}\\b`, 'g');
+    el.className = this.customData.staticClassesString.replace(regex, '').trim();
   },
 };

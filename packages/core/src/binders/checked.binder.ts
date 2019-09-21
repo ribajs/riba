@@ -12,18 +12,11 @@ export const checkedBinder: IBinder<string> = {
   priority: 2000,
 
   bind(el) {
-    const self = this;
-    this.customData = {};
-    if (!this.customData.callback) {
-      this.customData.callback = () => {
-        self.publish();
-      };
-    }
-    el.addEventListener('change', this.customData.callback);
+    el.addEventListener('change', this.publish);
   },
 
   unbind(el) {
-    el.removeEventListener('change', this.customData.callback);
+    el.removeEventListener('change', this.publish);
   },
 
   routine(el: HTMLElement, value) {

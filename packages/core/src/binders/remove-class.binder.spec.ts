@@ -39,7 +39,8 @@ describe('riba.binders', () => {
 
             model.class.remove = 'foobar';
 
-            expect(element.className).toEqual('');
+            // Do not remove both inital classes (only the last bound one)
+            expect(element.className).toEqual('remove-me');
         });
     });
 

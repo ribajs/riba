@@ -3,11 +3,11 @@ import {
 } from '../index';
 
 import {
-    classBinder,
-} from './class.binder';
+    addClassBinder,
+} from './add-class.binder';
 
 const riba = new Riba();
-riba.module.binder.regist(classBinder);
+riba.module.binder.regist(addClassBinder);
 
 describe('riba.binders', () => {
     let element: HTMLDivElement;
@@ -26,10 +26,10 @@ describe('riba.binders', () => {
         };
     });
 
-    describe('class', () => {
+    describe('add-class', () => {
         it('Adds a class by a value string in the model', () => {
             element.className = 'foobar';
-            element.setAttribute('rv-class', 'class.add');
+            element.setAttribute('rv-add-class', 'class.add');
 
             expect(element.className).toEqual('foobar');
 
@@ -39,6 +39,7 @@ describe('riba.binders', () => {
 
             model.class.add = 'add-me-too';
 
+            // Do not add both new classes (only the last bound one)
             expect(element.className).toEqual('foobar add-me-too');
         });
     });

@@ -36,8 +36,8 @@
   },
   "homepage": "https://github.com/ribajs/riba/tree/master/packages/schematics#readme",
   "dependencies": {
-    "@angular-devkit/core": "8.3.4",
-    "@angular-devkit/schematics": "8.3.4",
+    "@angular-devkit/core": "8.3.5",
+    "@angular-devkit/schematics": "8.3.5",
     "debug": "^4.1.1",
     "source-map-support": "^0.5.13",
     "typescript": "3.6.3"

@@ -7,12 +7,18 @@ export interface IAssign {
 }
 
 /**
- * Assign a value in your model, value must be a object
- * experimental, please TESTME
+ * assign
+ * Assign a value in your model.
+ * The value you want to assign must be an object and will be concatenate with your model.
+ * @example
+ * <div rv-assign='{"newValue": "hello", "anotherNewValue": "world"}'>{newValue} {anotherNewValue}!</div>
  */
 export const assignBinder: IBinder<IAssign> = {
   name: 'assign',
-  routine(el: HTMLElement, obj: any) {
-    Utils.extend(false, this.view.models, obj);
+  routine(el: HTMLElement, value: object) {
+    if (typeof(value) === 'object') {
+      return Utils.extend(false, this.view.models, value);
+    }
+    console.warn('Value must be an object or propertyName is required');
   },
 };

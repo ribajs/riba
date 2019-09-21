@@ -1,5 +1,13 @@
 # Changelog
 
+## Dev
+
+- Upgrade Dependencies
+- Portend unless binder from Rivets.js to Riba.js
+- Portend unchecked binder from Rivets.js to Riba.js
+- Renamed add class binder attribute from `rv-class` to `rv-add-class`
+- Added new assign-property binder
+
 ## 1.1.3
 
 - New option `blockNodeNames` to define that should be ignored

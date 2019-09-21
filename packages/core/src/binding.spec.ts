@@ -27,8 +27,8 @@ import {
 } from '../src/binders/each-item.binder';
 
 import {
-    classBinder,
-} from '../src/binders/class.binder';
+    addClassBinder,
+} from './binders/add-class.binder';
 
 import { IFormatter, IAdapter } from './interfaces';
 
@@ -37,7 +37,7 @@ riba.module.binder.regist(textBinder);
 riba.module.binder.regist(htmlBinder);
 riba.module.binder.regist(valueBinder);
 riba.module.binder.regist(eachStarBinder);
-riba.module.binder.regist(classBinder);
+riba.module.binder.regist(addClassBinder);
 
 describe('riba.Binding', () => {
     let model: object;
@@ -789,7 +789,7 @@ describe('Functional', () => {
 
             it('should allow binding to the iterated element directly', () => {
                 listItem.setAttribute('data-text', 'item.name');
-                listItem.setAttribute('data-class', 'data:foo');
+                listItem.setAttribute('data-add-class', 'data:foo');
                 riba.bind(el, bindData);
                 expect(el.getElementsByTagName('li')[0].textContent).toEqual('a');
                 expect(el.getElementsByTagName('li')[0].className).toEqual('bar');

@@ -1,7 +1,7 @@
 export { animateStarBinder } from './animate-classname.binder';
 export { assignBinder } from './assign.binder';
 export { blockBinder } from './block.binder';
-export { classBinder } from './class.binder';
+export { addClassBinder } from './add-class.binder';
 export { checkedBinder } from './checked.binder';
 export { classStarBinder } from './class-name.binder';
 export { cssStarBinder } from './style-css-property.binder';
