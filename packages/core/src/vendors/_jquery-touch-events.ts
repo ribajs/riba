@@ -29,6 +29,9 @@
  */
 
 export default ($: any) => {
+    if (!$) {
+        return;
+    }
     'use strict';
     $.attrFn = $.attrFn || {};
 
