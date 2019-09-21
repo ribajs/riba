@@ -1,7 +1,7 @@
 {
   "name": "ribajs",
   "description": "Declarative data binding + templating solution.",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "contributors": [],
   "private": true,

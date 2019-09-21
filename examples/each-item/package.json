@@ -1,6 +1,6 @@
 {
   "name": "each-star-example",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "",
   "main": "src/components/each-item-example/each-item-example.component.ts",
   "scripts": {
@@ -27,7 +27,7 @@
     "typescript": "^3.6.3"
   },
   "dependencies": {
-    "@ribajs/core": "^1.1.3",
+    "@ribajs/core": "^1.1.4",
     "@types/jquery": "^3.3.31",
     "autoprefixer": "^9.6.1",
     "postcss-modules": "^1.4.1"
