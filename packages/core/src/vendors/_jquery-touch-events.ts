@@ -30,6 +30,7 @@
 
 export default ($: any) => {
     if (!$) {
+        console.error('JQuery is required for touch events!');
         return;
     }
     'use strict';
