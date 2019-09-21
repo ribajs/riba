@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.4
+## 1.1.5
 
 - Upgrade Dependencies
 - Portend unless binder from Rivets.js to Riba.js

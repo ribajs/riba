@@ -10,9 +10,14 @@ class FakeHTMLElement /*implements HTMLElement*/ {
 }
 
 if (window.customElements) {
-  FakeHTMLElement.prototype = Object.create(HTMLElement.prototype, {
-    constructor: {value: HTMLElement, configurable: true, writable: true},
-  });
+  try {
+    FakeHTMLElement.prototype = Object.create(HTMLElement.prototype, {
+      constructor: {value: HTMLElement, configurable: true, writable: true},
+    });
+  } catch (error) {
+    console.error(error);
+  }
+
   Object.setPrototypeOf(FakeHTMLElement, HTMLElement);
 }
 

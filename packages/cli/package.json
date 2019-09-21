@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/cli",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "CLI tool for Riba applications 🍹",
   "bin": {
     "riba": "dist/bin/riba.js"
@@ -18,8 +18,8 @@
     "@angular-devkit/core": "^8.3.5",
     "@angular-devkit/schematics": "^8.3.5",
     "@angular-devkit/schematics-cli": "^0.803.5",
-    "@ribajs/core": "^1.1.4",
-    "@ribajs/schematics": "^1.1.4",
+    "@ribajs/core": "^1.1.5",
+    "@ribajs/schematics": "^1.1.5",
     "@types/node-emoji": "^1.8.1",
     "chalk": "^2.4.2",
     "cli-table3": "^0.5.1",
