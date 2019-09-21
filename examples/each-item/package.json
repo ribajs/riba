@@ -2,7 +2,7 @@
   "name": "each-star-example",
   "version": "1.1.5",
   "description": "",
-  "main": "src/components/each-item-example/each-item-example.component.ts",
+  "main": "src/main.ts",
   "scripts": {
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html",
