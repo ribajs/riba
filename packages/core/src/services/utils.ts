@@ -195,7 +195,7 @@ export class Utils {
    * @param string
    */
   public static camelCase = (str: string) => {
-    return str.replace(/-([a-z])/g, (grouped) => {
+    return str.replace(/-([a-z0-9])/g, (grouped) => {
       return grouped[1].toUpperCase();
     });
   }
@@ -553,6 +553,18 @@ export class Utils {
       h,
       w,
     };
+  }
+
+  public static escapeHtml(str: string) {
+    const tagsToReplace = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+    };
+
+    return str.replace(/[&<>]/g, (tag) => {
+      return tagsToReplace[tag as '&' | '<' | '>'] || tag;
+    });
   }
 
   /**

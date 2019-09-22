@@ -37,8 +37,6 @@ export abstract class Component extends FakeHTMLElement {
 
   protected el: HTMLUnknownElement;
 
-  // protected $el: JQuery<HTMLUnknownElement>;
-
   protected abstract scope: any;
 
   public get bound() {
