@@ -5,7 +5,7 @@
  * @see https://help.shopify.com/en/themes/liquid/filters/string-filters#replace_first
  */
 export const replaceFirst = {
-  name: 'replace-first',
+  name: 'replace_first',
   read(str: string, value: string, replaceValue: string) {
     return str.replace(value, replaceValue);
   },
