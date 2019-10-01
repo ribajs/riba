@@ -23,8 +23,8 @@ export class LocalesStaticService extends ALocalesService {
 
   protected debug = Debug('services:LocalesStaticService');
 
-  constructor(protected locales: any, protected id?: string, doNotTranslateDefaultLanguage: boolean = false) {
-    super(doNotTranslateDefaultLanguage);
+  constructor(protected locales: any, protected id?: string, doNotTranslateDefaultLanguage: boolean = false, showMissingTranslation: boolean = false) {
+    super(doNotTranslateDefaultLanguage, showMissingTranslation);
     if (!id) {
       id = 'main';
     }

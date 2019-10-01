@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.2.0
+
+- Upgrade Dependencies
+- Fix args component formatter
+
+### Shopify Package
+
+- Fix formatters
+
+### i18n Package
+
+- Fix module exports
+- new option to disable "missing translation" messages
+
 ## 1.1.5
 
 - Upgrade Dependencies

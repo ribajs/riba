@@ -1,5 +1,6 @@
 import { IFormatter } from '../../interfaces';
 import { IFormatterFuntionParam } from './call.formatter';
+import { Binding } from '../../binding';
 
 /**
  * Sets arguments to a function without directly call them
@@ -12,7 +13,7 @@ import { IFormatterFuntionParam } from './call.formatter';
 export const args: IFormatter = {
   name: 'args',
   read(fn: IFormatterFuntionParam, ...fnArgs: any[]) {
-    return (event: Event, scope: any, el: HTMLElement, binding: any) => {
+    return (event: Event, scope: any, el: HTMLElement, binding: Binding) => {
       // append the event handler args to passed args
       fnArgs.push(event);
       fnArgs.push(scope);

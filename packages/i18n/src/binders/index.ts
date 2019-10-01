@@ -4,6 +4,6 @@ import { IBinders } from '@ribajs/core';
 
 export default (localesService: ALocalesService) => {
   return {
-    ...i18nStarBinderWrapper(localesService),
-  };
+    i18nStarBinder: i18nStarBinderWrapper(localesService),
+   } as IBinders<any>;
 };

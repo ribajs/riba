@@ -5,7 +5,7 @@
  */
 
 import { Debug, IDebugger } from '../vendors';
-import { EventHandler } from '../interfaces';
+import { EventHandler, IFormatter } from '../interfaces';
 import { View } from '../view';
 import { Riba } from '../riba';
 import { Binding } from '../binding';
@@ -200,17 +200,20 @@ export abstract class Component extends FakeHTMLElement {
    * @param fn The function you wish to call
    * @param args the parameters you wish to call the function with
    */
-  protected argsFormatterHandler(self: this): any {
+  protected argsFormatterHandler(self: this): IFormatter {
     this.debug('argsFormatterHandler', self);
-    return (fn: (...args: any[]) => any, ...fnArgs: any[]): any => {
-      return (event: Event, scope: any, el: HTMLElement, binding: any) => {
-        // append the event handler args to passed args
-        fnArgs.push(event);
-        fnArgs.push(scope);
-        fnArgs.push(el);
-        fnArgs.push(binding);
-        return fn.apply(self, fnArgs);
-      };
+    return {
+      name: 'args',
+      read: (fn: (...args: any[]) => any, ...fnArgs: any[]) => {
+        return (event: Event, scope: any, el: HTMLElement, binding: any) => {
+          // append the event handler args to passed args
+          fnArgs.push(event);
+          fnArgs.push(scope);
+          fnArgs.push(el);
+          fnArgs.push(binding);
+          return fn.apply(self, fnArgs);
+        };
+      },
     };
   }
 

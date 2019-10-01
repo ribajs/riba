@@ -3,7 +3,7 @@ import { BaseService } from './base.service';
 
 export class LocalesService extends LocalesRestService {
   public static instance: LocalesService;
-  static getInstance() {
+  public static getInstance() {
     return this.instance;
   }
   constructor() {

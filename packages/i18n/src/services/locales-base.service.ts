@@ -9,6 +9,8 @@ export abstract class ALocalesService {
 
   public event = new EventDispatcher('i18n');
 
+  public showMissingTranslation: boolean = false;
+
   protected _ready: boolean = false;
 
   protected debug = Debug('services:ALocalesService');
@@ -23,8 +25,9 @@ export abstract class ALocalesService {
    */
   protected abstract initalLangcode?: string;
 
-  constructor(public doNotTranslateDefaultLanguage: boolean) {
-
+  constructor(public doNotTranslateDefaultLanguage: boolean, showMissingTranslation: boolean) {
+    this.doNotTranslateDefaultLanguage = doNotTranslateDefaultLanguage;
+    this.showMissingTranslation = showMissingTranslation;
   }
 
   /**

@@ -213,7 +213,12 @@ export class Binding {
       return;
     }
 
-    value = this.formattedValue(value);
+    try {
+      value = this.formattedValue(value);
+    } catch (error) {
+      console.error(error);
+      return value;
+    }
 
     if (this.binder && typeof(this.binder.routine) === 'function') {
       // If value is a promise

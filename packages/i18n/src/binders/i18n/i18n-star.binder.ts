@@ -38,7 +38,11 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
 
       this.customData.applyTranslation = (locale: string) => {
         if (!locale) {
-          locale = `translation missing: "${this.customData.properties.join('.')}"`;
+          if (this.customData.i18n.showMissingTranslation) {
+            locale = `translation missing: "${this.customData.properties.join('.')}"`;
+          } else {
+            return;
+          }
         }
         if (this.customData.attributeName === 'html') {
           this.customData.$el.html(locale);
@@ -192,5 +196,5 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
       this.customData.i18n.event.off('changed', this.customData.onLanguageChanged);
     },
 
-  };
+  } as IBinder<string>;
 };

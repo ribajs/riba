@@ -23,7 +23,7 @@ const debug = Debug('formatter:t');
 export const tFormatterWrapper = (localesService: ALocalesService): IFormatter => {
   return {
     name: 't',
-    async read(translateMePathString: string, langcode: string, ...vars: string[]) {
+    read(translateMePathString: string, langcode: string, ...vars: string[]) {
       debug('formatter t', translateMePathString, langcode);
       if (localesService.ready) {
         return translate(translateMePathString, localesService, langcode)
@@ -46,5 +46,5 @@ export const tFormatterWrapper = (localesService: ALocalesService): IFormatter =
         });
       }
     },
-  };
+  } as IFormatter;
 };

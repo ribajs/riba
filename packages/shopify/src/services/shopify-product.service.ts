@@ -30,6 +30,24 @@ export class ShopifyProductService {
   }
 
   /**
+   * Check if the option values fits to the current variant.
+   * @param variant
+   * @param optionValues
+   * @return Returns true if the option values fitting to the variant
+   */
+  public static fitsVariantOptions(variant: IShopifyProductVariant, optionValues: string[])  {
+    let fit = true;
+    // position0 is the option index starting on 0
+    for (const position0 in optionValues) {
+      if (optionValues[position0]) {
+        const optionValue = optionValues[position0];
+        fit = fit && variant.options.indexOf(optionValue.toString()) > -1;
+      }
+    }
+    return fit;
+  }
+
+  /**
    * Get product variant of (selected) option values
    * @param optionValues (selected) option values
    */
@@ -40,15 +58,8 @@ export class ShopifyProductService {
         if (product.variants[i]) {
           result = null;
           const variant = product.variants[i];
-          let fit = false;
-          // position0 is the option index starting on 0
-          for (const position0 in optionValues) {
-            if (optionValues[position0]) {
-              const optionValue = optionValues[position0];
-              fit = variant.options.indexOf(optionValue.toString()) > -1;
-            }
-          }
-          if (fit) {
+          const fits = this.fitsVariantOptions(variant, optionValues);
+          if (fits) {
             result = variant;
             break;
           }

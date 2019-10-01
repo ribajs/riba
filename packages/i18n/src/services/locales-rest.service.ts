@@ -28,8 +28,8 @@ export class LocalesRestService extends ALocalesService {
 
   protected debug = Debug('services:LocalesService');
 
-  constructor(protected url: string, doNotTranslateDefaultLanguage: boolean = false) {
-    super(doNotTranslateDefaultLanguage);
+  constructor(protected url: string, doNotTranslateDefaultLanguage: boolean = false, showMissingTranslation: boolean = false) {
+    super(doNotTranslateDefaultLanguage, showMissingTranslation);
 
     this.url = url;
 

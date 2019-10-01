@@ -122,7 +122,7 @@ const upgradePackage = (modulePath) => {
 
 const installPackage = (modulePath) => {
   const packagePath = getPackagePath(modulePath);
-  exec('npm install', {cwd: path.dirname(packagePath), stdio: 'inherit'},);
+  exec('npm install', {cwd: path.dirname(packagePath), stdio: 'inherit'});
 };
 
 /**

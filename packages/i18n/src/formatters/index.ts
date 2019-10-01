@@ -4,6 +4,6 @@ import { IFormatters } from '@ribajs/core';
 
 export default (localesService: ALocalesService): IFormatters => {
   return {
-    ...tFormatterWrapper(localesService),
+    t: tFormatterWrapper(localesService),
   };
 };
