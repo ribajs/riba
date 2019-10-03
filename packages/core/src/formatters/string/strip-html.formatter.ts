@@ -4,7 +4,7 @@
  * Strips all HTML tags from a string.
  * @see https://help.shopify.com/en/themes/liquid/filters/string-filters#strip_html
  */
-export const stripHtml = {
+export const stripHtmlFormatter = {
   name: 'strip_html',
   read(html: string) {
     const tmp = document.createElement('DIV');

@@ -1,16 +1,8 @@
-import { IFormatters } from '../../interfaces';
-
 // special helper formatters
-import { args } from './args.formatter';
-import { booleanFormatter } from './boolean.formatter';
-import { debug } from './debug.formatter';
-import { defaultBinder } from './default.formatter';
-import { call } from './call.formatter';
-import { currency } from './currency.formatter';
-import { json } from './json.formatter';
-
-export { args, booleanFormatter, debug, defaultBinder, call, currency, json };
-
-export const specialFormatters: IFormatters = {
-  args, boolean: booleanFormatter, debug, default: defaultBinder, call, currency, json,
-};
+export { args } from './args.formatter';
+export { booleanFormatter } from './boolean.formatter';
+export { debug } from './debug.formatter';
+export { defaultBinder } from './default.formatter';
+export { call } from './call.formatter';
+export { currency } from './currency.formatter';
+export { json } from './json.formatter';

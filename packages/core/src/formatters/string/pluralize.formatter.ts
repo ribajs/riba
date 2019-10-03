@@ -1,6 +1,6 @@
 import { Utils } from '../../services/utils';
 
-export const pluralize = {
+export const pluralizeFormatter = {
   name: 'pluralize',
   read(input: any, singular: string, plural: string) {
     if (plural === null) {

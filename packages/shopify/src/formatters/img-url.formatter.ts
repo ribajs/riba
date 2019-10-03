@@ -1,4 +1,4 @@
-import { IFormatter } from '@ribajs/core';
+import { IFormatter, Utils } from '@ribajs/core';
 
 /**
  * Return a resized shopify image URL
@@ -12,10 +12,23 @@ import { IFormatter } from '@ribajs/core';
  */
 export const imgUrlFormatter: IFormatter = {
   name: 'img_url',
-  read(url: string, size: string, scale: number, crop: string, extension: string) {
+  read(url: string, size: string, scale?: number, crop?: string, extension?: string, element?: HTMLImageElement) {
     try {
-      if ('original' === size || 'master' === size) {
+      if (size === 'original' || size === 'master') {
         return url;
+      }
+      if (size === 'auto') {
+        scale = window.devicePixelRatio;
+        let width: number = 0;
+        if (element) {
+          width = element.offsetWidth;
+        } else {
+          width = Utils.getViewportDimensions().w;
+        }
+        size = width + 'x';
+      }
+      if (scale && scale !== 1) {
+        size += '@' + scale + 'x';
       }
       const result = url.match(/(.*\/[\w\-\_\.]+)\.(\w{2,4})/);
 
