@@ -1,8 +1,19 @@
 # Changelog
 
+## Dev
+
+## Core
+
+- Cleanups
+- New `srcset-*` binder
+
+## BS4
+
+- Improve tabs component
+
 ## 1.2.0
 
-- Upgrade Dependencies
+- Upgrade dependencies
 - Fix args component formatter
 
 ### Shopify Package

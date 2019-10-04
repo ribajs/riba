@@ -1,21 +1,25 @@
-<div class="col-12 tab-list nav nav-tabs nav-tabs-underline d-flex flex-nowrap" rv-id="'tab-list-' | append tab.handle" role="tablist">
+<div class="col-12 tab-list nav nav-tabs nav-tabs-underline d-flex flex-nowrap" role="tablist">
   <a class="nav-item nav-link d-inline-block text-truncate"
     rv-each-tab="tabs"
+    rv-class-active="tab.active"
     rv-href="'#tab-content-' | append tab.handle"
+    rv-add-class="'tab-title-' | append tab.handle"
     rv-id="'tab-title-' | append tab.handle"
     rv-aria-controls="'tab-content-' | append tab.handle"
     rv-html="tab.title"
-    rv-on-click="activate"
+    rv-on-click="activate | args tab"
     role="tab"
     aria-selected="false"
   ></a>
 </div>
-<div class="col-12 col-md-6 tab-content product-tab-content px-5 mx-auto">
+<div class="col-12 col-md-6 tab-content px-5 mx-auto">
   <div
+    class="tab-pane mt-3 mb-4"
     rv-each-tab="tabs"
+    rv-class-show="tab.active"
+    rv-add-class="'tab-content-' | append tab.handle"
     rv-id="'tab-content-' | append tab.handle"
     rv-html="tab.content"
-    class="tab-pane mt-3 mb-4"
     role="tabpanel"
     aria-labelledby="'tab-title-' | append tab.handle"
   ></div>

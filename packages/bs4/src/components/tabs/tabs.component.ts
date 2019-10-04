@@ -1,34 +1,37 @@
-import { Component, Debug, Binding } from '@ribajs/core';
+import { Component, Debug, Binding, handleizeFormatter } from '@ribajs/core';
 import template from './tabs.component.html';
 
 interface Tab {
   title: string;
   content: string;
   handle: string;
+  active: boolean;
 }
 
 interface Scope {
   tabs: Tab[];
   activate: TabsComponent['activate'];
+  optionTabsAutoHeight: boolean;
 }
 
 export class TabsComponent extends Component {
 
   public static tagName: string = 'bs4-tabs';
 
-  protected debug = Debug('component:bs4-tabs');
+  protected debug = Debug('y');
   protected scope: Scope = {
     tabs: [],
     activate: this.activate,
+    optionTabsAutoHeight: false,
   };
 
-  private tabs: NodeListOf<Element>;
-  private tabPanes: NodeListOf<Element>;
-  private scrollable: Element | null;
-  private tabsSameHeight = true;
+  protected tabs?: NodeListOf<Element>;
+  protected tabPanes?: NodeListOf<Element>;
+  protected scrollable?: Element | null;
 
   static get observedAttributes() {
     return [
+      'option-tabs-auto-height',
       'tab-0-title', 'tab-0-content', 'tab-0-handle',
       'tab-1-title', 'tab-1-content', 'tab-1-handle',
       'tab-2-title', 'tab-2-content', 'tab-2-handle',
@@ -55,50 +58,9 @@ export class TabsComponent extends Component {
   constructor(element?: HTMLElement) {
     super(element);
 
-    // Bind static template
-    this.tabs = this.el.querySelectorAll('[role="tab"]');
-    this.tabPanes = this.el.querySelectorAll('.tab-pane');
-    this.scrollable = this.el.querySelector('[scrollable]');
-
-    this.debug('constructor', this.el, this.tabs, this.tabPanes);
-
-    this.tabs.forEach((tab => {
-      // TODO use `rv-on-click="activate"` instead?
-      tab.addEventListener('click', (event) => {
-        this.activateByTabElement(tab, event);
-      });
-
-      tab.addEventListener('shown.bs.tab', (event) => {
-        const tab = (event.target || event.srcElement) as Element | null;
-        if (!tab) {
-          return;
-        }
-        if (this.scrollable) {
-          const tabScrollPosition = tab.getBoundingClientRect();
-          const scrollLeftTo = this.scrollable.scrollLeft || 0 + tabScrollPosition.left;
-          // TODO animate
-          // this.scrollable.animate({ scrollLeft: scrollLeftTo}, 'slow');
-          this.scrollable.scrollLeft = scrollLeftTo;
-        }
-      });
-
-      tab.addEventListener('shown.bs.tab', (event) => {
-        if (this.scrollable) {
-          const tabScrollPosition = tab.getBoundingClientRect();
-          const scrollLeftTo = this.scrollable.scrollLeft || 0 + tabScrollPosition.left;
-          // TODO animate
-          // this.$scrollable.animate({ scrollLeft: scrollLeftTo}, 'slow');
-          this.scrollable.scrollLeft = scrollLeftTo;
-        }
-      });
-    }));
-
-    if (this.tabsSameHeight) {
-      window.addEventListener('resize', () => {
-        this.setHeight();
-      });
-    }
-  
+    this.addTabsByTemplate();
+    this.initTabs();
+    this.activateFirstTab();
     this.init(TabsComponent.observedAttributes);
   }
 
@@ -106,7 +68,16 @@ export class TabsComponent extends Component {
    * Make all tabs panes as height as the heighest tab pane
    */
   public setHeight() {
+    if (this.scope.optionTabsAutoHeight) {
+      return;
+    }
+    // Bind static template
+    this.setElements();
+
     let heigest = 0;
+    if (!this.tabPanes) {
+      return;
+    }
     this.tabPanes.forEach((tabPane) => {
       if (!(tabPane as unknown as HTMLElement).style) {
         return;
@@ -131,128 +102,157 @@ export class TabsComponent extends Component {
   }
 
   public deactivateAll() {
-    // static
-    this.tabs.forEach((tabEl) => {
-      tabEl.classList.remove('active', 'show');
-    });
-    this.tabPanes.forEach((tabPaneEl) => {
-      tabPaneEl.classList.remove('active', 'show');
-    });
-    // dynamic
-    this.scope.tabs.forEach((tab) => {
-      const tabEl = this.el.querySelector('#tab-title-' + tab.handle);
-      const tabPaneEl = this.el.querySelector('#tab-content-' + tab.handle);
-      if (tabEl) tabEl.classList.remove('active', 'show');
-      if (tabPaneEl) tabPaneEl.classList.remove('active', 'show');
-    });
+    for (const tab of this.scope.tabs) {
+      tab.active = false;
+    }
   }
 
-  /**
-   * Used for static templates 
-   */
-  public activateByTabElement(tab: Element, event?: Event) {
+  public activate(tab: Tab, binding?: Binding, event?: Event) {
+    this.deactivateAll();
+    tab.active = true;
+    this.debug('activate', event);
     if (event) {
       event.preventDefault();
-    }
-    const target = tab.getAttribute('href');
-    if (!target) {
-      console.warn('The href attribute to find the target is required!');
-      return;
-    }
-    const targetEl = this.el.querySelector(target);
-    if (!targetEl) {
-      console.warn(`Target not found with selector "${target}" not found!`);
-      return;
-    }
-    this.debug('activate', target, targetEl);
-    this.deactivateAll();
-    targetEl.classList.add('active');
-    targetEl.classList.add('show');
-    tab.classList.add("active");
-    targetEl.dispatchEvent(new Event('shown.bs.tab'));
-    tab.dispatchEvent(new Event('shown.bs.tab'));
-  }
-
-  public activate(binding: Binding, event: Event, model: any, el: HTMLElement) {
-    this.activateByTabElement(el, event);
-  }
-
-  public activateByHandle(handle: string) {
-    const tabEl = this.el.querySelector('#tab-title-' + handle);
-    if (tabEl) {
-      this.activateByTabElement(tabEl);
     }
   }
 
   public activateFirstTab() {
-    const tabEl = this.el.querySelector('[role="tab"]');
-    if (tabEl) {
-      this.activateByTabElement(tabEl);
+    if (this.scope.tabs.length > 0) {
+      this.activate(this.scope.tabs[0]);
     }
   }
 
-  protected resizeTabs(newSize: number) {
-    while(newSize > this.scope.tabs.length) {
-      this.scope.tabs.push({handle: '', title: '', content: ''});
+  protected setElements() {
+    this.tabs = this.el.querySelectorAll('[role="tab"]');
+    this.tabPanes = this.el.querySelectorAll('[role="tabpanel"]');
+    this.scrollable = this.el.querySelector('[scrollable]');
+  }
+
+  protected resizeTabsArray(newSize: number) {
+    while (newSize > this.scope.tabs.length) {
+      this.scope.tabs.push({handle: '', title: '', content: '', active: false});
     }
     this.scope.tabs.length = newSize;
-  } 
+  }
+
+  protected onTabShownEventHandler(event: Event) {
+    const curTab = (event.target || event.srcElement) as Element | null;
+    if (!curTab) {
+      return;
+    }
+    if (this.scrollable) {
+      const tabScrollPosition = curTab.getBoundingClientRect();
+      const scrollLeftTo = this.scrollable.scrollLeft || 0 + tabScrollPosition.left;
+      // TODO animate
+      // this.scrollable.animate({ scrollLeft: scrollLeftTo}, 'slow');
+      this.scrollable.scrollLeft = scrollLeftTo;
+    }
+  }
+
+  protected onResizeEventHandler(event: Event) {
+    this.setHeight();
+  }
+
+  protected initTabs() {
+    // Bind static template
+    this.setElements();
+
+    this.debug('constructor', this.el, this.tabs, this.tabPanes);
+
+    if (this.tabs) {
+      this.tabs.forEach(((tab) => {
+        tab.removeEventListener('shown.bs.tab', this.onTabShownEventHandler);
+        tab.addEventListener('shown.bs.tab', this.onTabShownEventHandler);
+      }));
+    }
+
+    if (this.scope.optionTabsAutoHeight) {
+      window.removeEventListener('resize', this.onResizeEventHandler.bind(this));
+      window.addEventListener('resize', this.onResizeEventHandler.bind(this));
+      this.setHeight();
+    }
+  }
+
+  protected addTabByAttribute(attributeName: string, newValue: string) {
+    const index = Number(attributeName.replace(/[^0-9]/g, ''));
+    this.debug('index', index);
+    if (index >= this.scope.tabs.length) {
+      this.resizeTabsArray(index + 1);
+    }
+    if (attributeName.endsWith('Content')) {
+      this.scope.tabs[index].content = newValue;
+    }
+    if (attributeName.endsWith('Title')) {
+      this.scope.tabs[index].title = newValue;
+    }
+    if (attributeName.endsWith('Handle')) {
+      this.scope.tabs[index].handle = newValue;
+    }
+
+    // if is first tab
+    if (
+      this.scope.tabs.length > 0 &&
+      this.scope.tabs[0] &&
+      this.scope.tabs[0].content.length > 0 &&
+      this.scope.tabs[0].title.length > 0 &&
+      this.scope.tabs[0].handle.length > 0
+    ) {
+      this.activateFirstTab();
+    }
+  }
+
+  protected addTabsByTemplate() {
+    const templates = this.el.querySelectorAll<HTMLTemplateElement>('template');
+    templates.forEach((tpl) => {
+      const title = tpl.getAttribute('title');
+      if (!title) {
+        console.error(new Error('template "title" attribute is required"'));
+        return;
+      }
+      const handle = tpl.getAttribute('handle') || handleizeFormatter.read(title);
+      if (!handle) {
+        console.error(new Error('template "handle" attribute is required"'));
+        return;
+      }
+      const content = tpl.innerHTML;
+      this.scope.tabs.push({title, handle, content, active: false});
+    });
+  }
 
   protected parsedAttributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
     super.parsedAttributeChangedCallback(attributeName, oldValue, newValue, namespace);
     if (attributeName.startsWith('tab')) {
-      const index = Number(attributeName.replace(/[^0-9]/g, ''));
-      this.debug('index', index);
-      if (index >= this.scope.tabs.length) {
-        this.resizeTabs(index + 1);
-      }
-      if (attributeName.endsWith('Content')) {
-        this.scope.tabs[index].content = newValue;
-      }
-      if (attributeName.endsWith('Title')) {
-        this.scope.tabs[index].title = newValue;
-      }
-      if (attributeName.endsWith('Handle')) {
-        this.scope.tabs[index].handle = newValue;
-      }
-
-      if (
-        this.scope.tabs.length > 0 &&
-        this.scope.tabs[0] &&
-        this.scope.tabs[0].content.length > 0 &&
-        this.scope.tabs[0].title.length > 0 &&
-        this.scope.tabs[0].handle.length > 0
-      ) {
-        this.activateFirstTab();
-      }
-
-      if (this.tabsSameHeight) {
-        this.setHeight();
-      }
+      this.addTabByAttribute(attributeName, newValue);
+      this.initTabs();
     }
   }
 
   protected async afterBind(): Promise<any> {
     // Workaround
     setTimeout(() => {
-      if (this.tabs.length > 0) {
-        this.activateFirstTab();
-      }
-  
-      if (this.tabsSameHeight) {
+      if (this.scope.optionTabsAutoHeight) {
         this.setHeight();
       }
-    }, 200);
+    }, 500);
+  }
+
+  protected onlyTemplateChilds() {
+    let allAreTemplates: boolean = true;
+    this.el.childNodes.forEach((child) => {
+      this.debug('child', child);
+      allAreTemplates = allAreTemplates && (child.nodeName === 'TEMPLATE' || child.nodeName === '#text');
+    });
+    return allAreTemplates;
   }
 
   protected template() {
-    // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
-      this.debug('Do not use template, because element has child nodes');
-      return null;
-    } else {
+    // Only set the component template if there no childs or the childs are templates
+    if (!this.el.hasChildNodes() || this.onlyTemplateChilds()) {
       this.debug('Use template', template);
       return template;
+    } else {
+      this.debug('Do not use template, because element has child nodes');
+      return null;
     }
   }
 }

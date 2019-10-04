@@ -17,3 +17,4 @@ export { showBinder } from './show.binder';
 export { textBinder } from './text.binder';
 export { valueBinder } from './value.binder';
 export { starBinder } from './attribute.binder';
+export { srcsetSizeBinder } from './srcset-size.binder';

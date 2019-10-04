@@ -20,7 +20,8 @@
     "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
     "no-console": [true, "log", "info", "debug"],
     "prefer-for-of": false,
-    "object-literal-sort-keys": false
+    "object-literal-sort-keys": false,
+    "interface-name": [false]
   },
   "rulesDirectory": []
 }

@@ -11,7 +11,7 @@ import { IBinder } from '../interfaces';
 export const cssStarBinder: IBinder<string> = {
   name: 'style-*',
   routine(el: HTMLElement, value: string) {
-    const propertyName = (this as any).args[0];
+    const propertyName = this.args[0];
     if (value === null || value === undefined || value === '') {
       (el.style as any).removeProperty(propertyName);
     } else {
