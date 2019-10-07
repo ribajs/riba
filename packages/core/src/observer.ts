@@ -9,9 +9,6 @@ export class Observer {
   public static rootInterface: Root;
 
   public static updateOptions(options: IOptions) {
-
-    console.warn('updateOptions', options);
-
     if (!options.adapters) {
       throw new Error('adapters are required!');
     }
@@ -23,7 +20,6 @@ export class Observer {
     Observer.adapters = options.adapters;
     Observer.interfaces = Object.keys(Observer.adapters);
     Observer.rootInterface = options.rootInterface;
-    console.warn('this.interfaces', Observer.interfaces);
   }
 
   /**
@@ -64,7 +60,6 @@ export class Observer {
    * @param callback
    */
   constructor(obj: Obj, keypath: string, callback: IObserverSyncCallback) {
-    console.warn('constructor', Observer.interfaces);
     this.keypath = keypath;
     this.callback = callback;
     this.objectPath = [];
