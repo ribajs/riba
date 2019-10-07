@@ -17,16 +17,6 @@ export const imgUrlFormatter: IFormatter = {
       if (size === 'original' || size === 'master') {
         return url;
       }
-      if (size === 'auto') {
-        scale = window.devicePixelRatio;
-        let width: number = 0;
-        if (element) {
-          width = element.offsetWidth;
-        } else {
-          width = Utils.getViewportDimensions().w;
-        }
-        size = width + 'x';
-      }
       if (scale && scale !== 1) {
         size += '@' + scale + 'x';
       }

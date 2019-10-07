@@ -1,5 +1,11 @@
 # Changelog
 
+## Dev
+
+### Shopify
+
+- New shopify-img binder
+
 ## 1.2.1
 
 ### Core
@@ -16,11 +22,11 @@
 - Upgrade dependencies
 - Fix args component formatter
 
-### Shopify Package
+### Shopify
 
 - Fix formatters
 
-### i18n Package
+### i18n
 
 - Fix module exports
 - new option to disable "missing translation" messages
