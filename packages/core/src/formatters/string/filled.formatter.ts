@@ -1,5 +1,5 @@
 import { Utils } from '../../services/utils';
-import { empty } from '../property/empty.formatter';
+import { emptyFormatter } from '../property/empty.formatter';
 
 /**
  * Check if value is a string and not empty
@@ -7,6 +7,6 @@ import { empty } from '../property/empty.formatter';
 export const filledFormatter = {
   name: 'filled',
   read(str: string) {
-    return Utils.isString(str) && !empty.read(str.replace(/\s/g, ''));
+    return Utils.isString(str) && !emptyFormatter.read(str.replace(/\s/g, ''));
   },
 };

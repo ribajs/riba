@@ -2,11 +2,11 @@ import {
     Riba,
 } from '../../index';
 
-import { call } from './call.formatter';
+import { callFormatter } from './call.formatter';
 import { textBinder } from '../../binders/text.binder';
 
 const riba = new Riba();
-riba.module.formatter.regist(call, 'call');
+riba.module.formatter.regist(callFormatter, 'call');
 riba.module.binder.regist(textBinder);
 
 interface IModel {

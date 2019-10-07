@@ -73,7 +73,17 @@ const PACKAGES = [
     path: 'packages/doc/',
     npm: '@ribajs/doc',
     available: false,
-  }
+  },
+
+  // Examples
+  {
+    path: 'examples/each-item/',
+    available: false,
+  },
+  {
+    path: 'examples/bs4-tabs-attr/',
+    available: false,
+  },
 ];
 
 const getPackagePath = (modulePath) => {
@@ -89,7 +99,7 @@ const bumpVersion = (modulePath) => {
   if (package.dependencies) {
 
     PACKAGES.forEach((dependencyPackage) => {
-      if (package.dependencies[dependencyPackage.npm]) {
+      if (dependencyPackage.npm && package.dependencies[dependencyPackage.npm]) {
         package.dependencies[dependencyPackage.npm] = "^" + GENERAL.version;
       }
     });
@@ -153,7 +163,7 @@ const linkPackageDependencies = (modulePath) => {
   const package = require(packagePath);
   if (package.dependencies) {
     PACKAGES.forEach((dependencyPackage) => {
-      if (package.dependencies[dependencyPackage.npm]) {
+      if (dependencyPackage.npm && package.dependencies[dependencyPackage.npm]) {
         linkPackageDependency(modulePath, dependencyPackage.npm);
       }
     });
@@ -169,7 +179,12 @@ const buildPackage = (modulePath) => {
  * 
  * @param {string} modulePath 
  * @param {boolean} bump Bump version of riba packages
- * @param {boolean} publish Publish package to npm 
+ * @param {boolean} publish Publish package to npm
+ * @param {boolean} upgrade 
+ * @param {boolean} install 
+ * @param {boolean} link 
+ * @param {boolean} linkDependencies 
+ * @param {boolean} build 
  */
 const processPackage = (modulePath, bump = false, publish = false, upgrade = false, install = false, link = false, linkDependencies = false, build = false) => {
   console.log(chalk.blue(`\nProcess ${modulePath}...`));
@@ -207,14 +222,21 @@ const processPackage = (modulePath, bump = false, publish = false, upgrade = fal
   }
 };
 
+/**
+ * 
+ * @param {boolean} bump 
+ * @param {boolean} publish 
+ * @param {boolean} upgrade 
+ * @param {boolean} install 
+ * @param {boolean} link 
+ * @param {boolean} linkDependencies 
+ * @param {boolean} build 
+ */
 const processModules = (bump, publish, upgrade, install, link, linkDependencies, build) => {
 
   PACKAGES.forEach((package) => {
-    processPackage(package.path, bump, package.available && publish, upgrade, install, link, linkDependencies, build);
+    processPackage(package.path, bump, package.available && publish, upgrade, install, package.npm && link, linkDependencies, build);
   });
-
-  // Examples
-  processPackage('examples/each-item/', bump, false, upgrade, false, false, linkDependencies);
 
   // Schematics applications
   processPackage('packages/schematics/src/lib/application/files/ts', false, false, upgrade, false, false);

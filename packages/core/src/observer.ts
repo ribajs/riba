@@ -10,6 +10,8 @@ export class Observer {
 
   public static updateOptions(options: IOptions) {
 
+    console.warn('updateOptions', options);
+
     if (!options.adapters) {
       throw new Error('adapters are required!');
     }
@@ -18,9 +20,10 @@ export class Observer {
       throw new Error('rootInterface is required!');
     }
 
-    this.adapters = options.adapters;
-    this.interfaces = Object.keys(Observer.adapters);
-    this.rootInterface = options.rootInterface;
+    Observer.adapters = options.adapters;
+    Observer.interfaces = Object.keys(Observer.adapters);
+    Observer.rootInterface = options.rootInterface;
+    console.warn('this.interfaces', Observer.interfaces);
   }
 
   /**
@@ -35,7 +38,7 @@ export class Observer {
 
     for (index = 0; index < keypath.length; index++) {
       chr = keypath.charAt(index);
-      if (!!~this.interfaces.indexOf(chr)) {
+      if (!!~Observer.interfaces.indexOf(chr)) {
         tokens.push(current);
         current = {i: chr, path: ''};
       } else {
@@ -61,6 +64,7 @@ export class Observer {
    * @param callback
    */
   constructor(obj: Obj, keypath: string, callback: IObserverSyncCallback) {
+    console.warn('constructor', Observer.interfaces);
     this.keypath = keypath;
     this.callback = callback;
     this.objectPath = [];

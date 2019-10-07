@@ -3,7 +3,7 @@ import { Utils } from '../../services/utils';
 /**
  * Array formatter to get a subarray from array
  */
-export const range = {
+export const rangeFormatter = {
   name: 'range',
   read(arr: any[], start: number, end: number) {
     start = Number(Utils.isNumber(start) ? start : 0);

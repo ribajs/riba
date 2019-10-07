@@ -1,8 +1,8 @@
 // special helper formatters
-export { args } from './args.formatter';
+export { argsFormatter } from './args.formatter';
 export { booleanFormatter } from './boolean.formatter';
-export { debug } from './debug.formatter';
-export { defaultBinder } from './default.formatter';
-export { call } from './call.formatter';
-export { currency } from './currency.formatter';
-export { json } from './json.formatter';
+export { debugFormatter } from './debug.formatter';
+export { defaultFormatter } from './default.formatter';
+export { callFormatter } from './call.formatter';
+export { currencyFormatter } from './currency.formatter';
+export { jsonFormatter } from './json.formatter';

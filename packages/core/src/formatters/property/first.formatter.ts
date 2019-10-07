@@ -1,11 +1,11 @@
-import { get } from './get.formatter';
+import { getFormatter } from './get.formatter';
 
 /**
  * Array formatter to get the first element of an array
  */
-export const first = {
+export const firstFormatter = {
   name: 'first',
   read(value: any | any[] | string) {
-    return get.read(value, 0);
+    return getFormatter.read(value, 0);
   },
 };

@@ -1,8 +1,8 @@
-import { size } from './size.formatter';
+import { sizeFormatter } from './size.formatter';
 
-export const empty = {
+export const emptyFormatter = {
   name: 'empty',
   read(a: any[] | string ) {
-    return size.read(a) <= 0;
+    return sizeFormatter.read(a) <= 0;
   },
 };

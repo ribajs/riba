@@ -9,6 +9,6 @@ const model = {};
 riba.module.regist(coreModule);
 riba.module.regist(<%= classify(name) %>Module);
 
-const bindToElement = document.getElementById("rv-<%= name %>");
+const bindToElement = document.getElementById('rv-<%= name %>');
 debug('bind to', bindToElement);
 riba.bind(bindToElement, model);

@@ -4,7 +4,7 @@ import { Utils } from '../../services/utils';
  * Get property of object or array
  * @see https://gist.github.com/der-On/cdafe908847e2b882691
  */
-export const get = {
+export const getFormatter = {
   name: 'get',
   read(value: any | any[] | string, key: string | number) {
     if (Utils.isObject(value) || Utils.isArray(value)) {

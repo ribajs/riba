@@ -10,7 +10,7 @@ import { Binding } from '../../binding';
  * @param fn The function the event handler should call
  * @param fnArgs the parameters you wish to get called the function with
  */
-export const args: IFormatter = {
+export const argsFormatter: IFormatter = {
   name: 'args',
   read(fn: IFormatterFuntionParam, ...fnArgs: any[]) {
     return (event: Event, scope: any, el: HTMLElement, binding: Binding) => {

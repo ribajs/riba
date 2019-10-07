@@ -1,13 +1,13 @@
 # Changelog
 
-## Dev
+## 1.2.1
 
-## Core
+### Core
 
 - Cleanups
 - New `srcset-*` binder
 
-## BS4
+### BS4
 
 - Improve tabs component
 

@@ -2,7 +2,7 @@ import { Debug } from '../../vendors/debug.module';
 
 const _debug = Debug('formatter');
 
-export const debug = {
+export const debugFormatter = {
   name: 'debug',
   read(toPrint: any) {
     _debug(toPrint);

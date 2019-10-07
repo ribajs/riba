@@ -4,7 +4,7 @@
  * @param symbol Currency symbol or identifier to be displayed. (optional)
  * @see https://docs.angularjs.org/api/ng/filter/currency
  */
-export const currency = {
+export const currencyFormatter = {
   name: 'currency',
   read(amount: number, symbol: string) {
     let result = amount.toFixed(2).toString().replace('.', ',');

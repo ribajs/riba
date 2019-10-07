@@ -18,9 +18,9 @@ export class TabsComponent extends Component {
 
   public static tagName: string = 'bs4-tabs';
 
-  protected debug = Debug('y');
+  protected debug = Debug('component:' + TabsComponent.tagName);
   protected scope: Scope = {
-    tabs: [],
+    tabs: new Array<Tab>(),
     activate: this.activate,
     optionTabsAutoHeight: false,
   };
@@ -174,6 +174,7 @@ export class TabsComponent extends Component {
   }
 
   protected addTabByAttribute(attributeName: string, newValue: string) {
+    this.debug('addTabByAttribute');
     const index = Number(attributeName.replace(/[^0-9]/g, ''));
     this.debug('index', index);
     if (index >= this.scope.tabs.length) {
@@ -184,10 +185,12 @@ export class TabsComponent extends Component {
     }
     if (attributeName.endsWith('Title')) {
       this.scope.tabs[index].title = newValue;
+      this.scope.tabs[index].handle = this.scope.tabs[index].handle || handleizeFormatter.read(this.scope.tabs[index].title);
     }
     if (attributeName.endsWith('Handle')) {
       this.scope.tabs[index].handle = newValue;
     }
+    this.debug('this.scope',  this.scope);
 
     // if is first tab
     if (
@@ -221,6 +224,7 @@ export class TabsComponent extends Component {
 
   protected parsedAttributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
     super.parsedAttributeChangedCallback(attributeName, oldValue, newValue, namespace);
+    this.debug('parsedAttributeChangedCallback', attributeName);
     if (attributeName.startsWith('tab')) {
       this.addTabByAttribute(attributeName, newValue);
       this.initTabs();

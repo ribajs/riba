@@ -4,7 +4,7 @@ import { Utils } from '../../services/utils';
 /**
  * Check if value is undefined
  */
-export const isObject: IFormatter = {
+export const isObjectFormatter: IFormatter = {
   name: 'isObject',
   read: Utils.isObject,
 };

@@ -6,7 +6,7 @@ const _gcd = (a: number, b: number): number => {
   return (b === 0) ? a : _gcd(b, a % b);
 };
 
-export const gcd = {
+export const gcdFormatter = {
   name: 'gcd',
   read: _gcd,
 };

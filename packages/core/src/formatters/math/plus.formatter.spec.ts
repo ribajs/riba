@@ -2,11 +2,11 @@ import {
     Riba,
 } from '../../index';
 
-import { plus } from './plus.formatter';
+import { plusFormatter } from './plus.formatter';
 import { textBinder } from '../../binders/text.binder';
 
 const riba = new Riba();
-riba.module.formatter.regist(plus, 'plus');
+riba.module.formatter.regist(plusFormatter);
 riba.module.binder.regist(textBinder);
 
 interface IModel {

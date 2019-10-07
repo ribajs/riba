@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/jquery",
   "description": "JQuery module for Riba.js",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "contributors": [],
   "url": "https://github.com/ribajs/riba/tree/master/packages/jquery",
@@ -47,7 +47,7 @@
     "webpack-cli": "^3.3.9"
   },
   "dependencies": {
-    "@ribajs/core": "^1.2.0",
+    "@ribajs/core": "^1.2.1",
     "@types/jquery": "^3.3.31",
     "jquery": "^3.4.1"
   },

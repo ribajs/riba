@@ -6,16 +6,16 @@
  * @see https://github.com/matthieuriolo/rivetsjs-stdlib
  * @see https://github.com/JumpLinkNetwork/shopify-productjs
  */
-export { and } from './and.formatter';
-export { between } from './between.formatter';
-export { egt } from './egt.formatter';
-export { eq } from './eq.formatter';
-export { gt } from './gt.formatter';
-export { isDefined } from './is-defined.formatters';
-export { isObject } from './is-object.formatter';
-export { isUndefined } from './is-undefined.formatters';
-export { ne } from './ne.formatter';
-export { lt } from './lt.formatter';
-export { elt } from './elt.formatter';
-export { or } from './or.formatter';
-export { not } from './not.formatter';
+export { andFormatter } from './and.formatter';
+export { betweenFormatter } from './between.formatter';
+export { egtFormatter } from './egt.formatter';
+export { eqFormatter } from './eq.formatter';
+export { gtFormatter } from './gt.formatter';
+export { isDefinedFormatter } from './is-defined.formatters';
+export { isObjectFormatter } from './is-object.formatter';
+export { isUndefinedFormatter } from './is-undefined.formatters';
+export { neFormatter } from './ne.formatter';
+export { ltFormatter } from './lt.formatter';
+export { eltFormatter } from './elt.formatter';
+export { orFormatter } from './or.formatter';
+export { notFormatter } from './not.formatter';

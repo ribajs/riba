@@ -8,7 +8,7 @@ export type IFormatterFuntionParam = (this: any, ...args: any[]) => any;
  * @param fn The function you wish to call
  * @param args the parameters you wish to call the function with
  */
-export const call: IFormatter = {
+export const callFormatter: IFormatter = {
   name: 'call',
   read(fn: IFormatterFuntionParam, ...args: any[]) {
     return fn.apply(this, args);

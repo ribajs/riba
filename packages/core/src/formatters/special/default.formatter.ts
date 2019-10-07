@@ -4,7 +4,7 @@ import { Utils } from '../../services/utils';
  * Set default value
  * @see https://gist.github.com/der-On/cdafe908847e2b882691
  */
-export const defaultBinder = {
+export const defaultFormatter = {
   name: 'default',
   read(value: any, defaultValue: any) {
     if (Utils.isDefined(value)) {
