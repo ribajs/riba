@@ -1,0 +1,8 @@
+rv-bs4-tabs-attr-example {
+  display: block;
+  bs4-tabs {
+    > .tab-content {
+      color: black;
+    }
+  }
+}

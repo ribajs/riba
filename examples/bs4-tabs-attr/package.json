@@ -1,0 +1,43 @@
+{
+  "name": "bs4-tabs-attr",
+  "version": "1.2.1",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "npm run lint:ts && parcel build src/index.html",
+    "clear": "rm -rf ./dist",
+    "lint:ts": "tslint --fix -c tslint.json 'src/**/*.ts' && tsc --noEmit",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.6.2",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/plugin-syntax-export-default-from": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "@babel/preset-typescript": "^7.6.0",
+    "@babel/runtime-corejs2": "^7.6.2",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-array-includes": "^2.0.3",
+    "jest": "^24.9.0",
+    "jest-extended": "^0.11.2",
+    "parcel-bundler": "^1.12.4",
+    "sass": "^1.23.0",
+    "ts-jest": "^24.1.0",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.3"
+  },
+  "dependencies": {
+    "@ribajs/bs4": "^1.2.1",
+    "@ribajs/core": "^1.2.1",
+    "@types/jest": "^24.0.18",
+    "@types/jquery": "^3.3.31",
+    "autoprefixer": "^9.6.4",
+    "postcss-modules": "^1.4.1"
+  }
+}
