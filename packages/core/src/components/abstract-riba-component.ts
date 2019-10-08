@@ -187,9 +187,12 @@ export abstract class Component extends FakeHTMLElement {
    * Extra call formatter to avoid the "this" context problem
    */
   protected callFormatterHandler(self: this): any {
-    return (fn: (...args: any[]) => any, ...args: any[]) => {
-      self.debug('callFormatterHandler', this, fn);
-      return fn.apply(self, args);
+    return {
+      name: 'call',
+      read: (fn: (...args: any[]) => any, ...args: any[]) => {
+        self.debug('callFormatterHandler', this, fn);
+        return fn.apply(self, args);
+      },
     };
   }
 
