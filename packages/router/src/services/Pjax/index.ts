@@ -327,7 +327,7 @@ class Pjax {
         }
 
         const $container = self.dom.parseResponse(data);
-
+        $container.filter('title');
         self.dom.putContainer($container);
 
         if (!self.cacheEnabled) {

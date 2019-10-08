@@ -51,23 +51,15 @@ class Dom {
     const wrapper = document.createElement('template') as HTMLTemplateElement;
     wrapper.innerHTML = responseText;
 
-    const titleEl = wrapper.querySelector('title');
-
-    if (titleEl && titleEl.textContent) {
-      document.title = titleEl.textContent;
+    if (this.parseTitle === true) {
+      // TODO this is slow, find out how this was working in biba!
+      // const title = wrapper.getElementsByTagName('title').item(0);
+      const title = this.findHTMLTagContent('title', wrapper.innerHTML);
+      if (title) {
+        document.title = title;
+      }
     }
-
     return this.getContainer(wrapper);
-    // this.currentHTML = responseText;
-    // const $newPage = JQuery( responseText );
-
-    // if (this.parseTitle === true) {
-    //   const $title = $newPage.filter('title');
-    //   if ($title.length) {
-    //     document.title = $title.text();
-    //   }
-    // }
-    // return this.getContainer($newPage);
   }
 
   /**
@@ -184,6 +176,24 @@ class Dom {
     //   throw new Error(`No container with selector "${this.containerSelector}" found!`);
     // }
     // return $container;
+  }
+
+  /**
+   * TODO move to utils?
+   * @param tagName html tag name, e.g. `title`
+   * @param html The html string in which you are searching the tag
+   */
+  protected findHTMLTags(tagName: string, html: string) {
+    const regex = new RegExp(`<\s*${tagName}[^>]*>((.|\n)*?)<\s*\/\s*${tagName}>`, 'g');
+    return html.match(regex);
+  }
+
+  protected findHTMLTagContent(tagName: string, html: string) {
+    const matches = this.findHTMLTags(tagName, html);
+    if (matches && matches.length > 0) {
+      return matches[0].replace(`<${tagName}>`, '').replace(`</${tagName}>`, '').replace('&amp;', '&').replace('&lt;', '<').replace('&gt;', '>').trim();
+    }
+    return null;
   }
 }
 

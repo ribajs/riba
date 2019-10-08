@@ -2,6 +2,10 @@
 
 ## Dev
 
+### Core
+
+- Fix component callFormatterHandler
+
 ### Shopify
 
 - New shopify-img binder
