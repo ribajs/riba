@@ -18,7 +18,6 @@ export class DropdownComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    const self = this;
     const $el = $(this.el);
     this.dropdownService = new DropdownService($el.find('.dropdown-toggle')[0] as HTMLButtonElement);
     this.init(DropdownComponent.observedAttributes);

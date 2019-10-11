@@ -19,7 +19,6 @@ export class NavbarComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    const self = this;
     const $el = $(this.el);
     const $collapse = $el.find('.navbar-collapse');
     const dispatcher = new EventDispatcher('main');

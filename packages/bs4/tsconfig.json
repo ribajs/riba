@@ -1,9 +1,14 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "./src/",
-    "outDir": "./lib/",
-    "types": ["jquery"],
+    "module": "commonjs",
+    "target": "es2017",
+    "typeRoots": ["./node_modules/@ribajs/core/src/types", "./node_modules/@types"],
+    "outDir": "dist",
+    "declaration": true,
+    "inlineSourceMap": true,
+    "noUnusedLocals": true,
+    "esModuleInterop": true
   },
-  "include": ["*.ts", "**/*.ts"]
+  "include": ["src"],
+  "types": ["jest"]
 }

@@ -6,6 +6,10 @@
 
 - Fix component callFormatterHandler
 
+### Examples
+
+- Add new bs4-tabs component example
+
 ### Shopify
 
 - New shopify-img binder

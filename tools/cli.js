@@ -84,6 +84,10 @@ const PACKAGES = [
     path: 'examples/bs4-tabs-attr/',
     available: false,
   },
+  {
+    path: 'examples/bs4-tabs-tpl/',
+    available: false,
+  },
 ];
 
 const getPackagePath = (modulePath) => {

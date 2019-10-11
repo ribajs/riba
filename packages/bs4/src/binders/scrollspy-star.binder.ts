@@ -11,10 +11,6 @@ export const scrollspyStarBinder: IBinder<string> = {
     const nativeIDTargetSelector = targetSelector.replace('#', '');
     // const dispatcher = new EventDispatcher('main');
     let target = document.getElementById(nativeIDTargetSelector);
-    let $target: JQuery<Element> | null = null;
-    if (target) {
-      $target = $(target);
-    }
     const className = this.args[0] as string;
 
     /**
@@ -35,9 +31,7 @@ export const scrollspyStarBinder: IBinder<string> = {
     const onScroll = () => {
       // reget element each scroll because it could be removed from the page using the router
       target = document.getElementById(nativeIDTargetSelector);
-      if (target) {
-        $target = $(nativeIDTargetSelector);
-      } else {
+      if (!target) {
         return;
       }
 

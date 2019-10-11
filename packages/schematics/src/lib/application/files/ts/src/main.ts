@@ -1,4 +1,4 @@
-import { Riba, Debug, coreModule } from '@ribajs/core';
+import { coreModule, Debug, Riba } from '@ribajs/core';
 import { <%= classify(name) %>Module } from './<%= name %>.module';
 
 const debug = Debug('main');
