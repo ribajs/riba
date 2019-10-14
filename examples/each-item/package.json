@@ -29,7 +29,7 @@
   "dependencies": {
     "@ribajs/core": "^1.2.1",
     "@types/jquery": "^3.3.31",
-    "autoprefixer": "^9.6.4",
+    "autoprefixer": "^9.6.5",
     "postcss-modules": "^1.4.1"
   }
 }

@@ -10,6 +10,7 @@
   },
   "jsRules": {},
   "rules": {
+    "interface-name": [false, "always-prefix"],
     "quotemark": [true, "single", "jsx-double"],
     "max-line-length": [false],
     "no-bitwise": [false],

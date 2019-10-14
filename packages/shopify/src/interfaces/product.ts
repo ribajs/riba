@@ -1,5 +1,4 @@
 import { IShopifyImage } from './image';
-import { IShopifyMetafield } from './metafield';
 
 export declare interface IShopifyProductImage extends IShopifyImage {
   position: number;

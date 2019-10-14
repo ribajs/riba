@@ -1,0 +1,203 @@
+/**
+ * Mixin to customize scrollbars
+ * Beware, this does not work in all browsers
+ *
+ * @author Hugo Giraudel
+ *
+ * @param {Length} $size - Horizontal scrollbar's height and vertical scrollbar's width
+ * @param {Color} $foreground-color - Scrollbar's color
+ * @param {Color} $background-color [mix($foreground-color, white, 50%)] - Scrollbar's color
+ * @example scss - Scrollbar styling
+ *   @include scrollbars(.5em, slategray);
+ *
+ * @see https://css-tricks.com/snippets/sass/custom-scrollbars-mixin/
+ */
+ @mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white,  50%)) {
+  // For Google Chrome
+  &::-webkit-scrollbar {
+    width:  $size;
+    height: $size;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $foreground-color;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $background-color;
+  }
+
+  // For Internet Explorer
+  scrollbar-face-color: $foreground-color !important;
+  scrollbar-track-color: $background-color !important;
+}
+
+.scrollbar-default {
+  &::-webkit-scrollbar, &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-track {
+    all: unset !important;
+  }
+  scrollbar-face-color: unset !important;
+  scrollbar-track-color: unset !important;
+}
+
+.scrollbar-black {
+  @include scrollbars(.5em, $black, transparent);
+}
+
+.scrollbar-primary {
+  @include scrollbars(.5em, theme-color(primary), transparent);
+}
+
+.scrollbar-secondary {
+  @include scrollbars(.5em, theme-color(secondary), transparent);
+}
+
+.scrollbar-success {
+  @include scrollbars(.5em, theme-color(success), transparent);
+}
+
+.scrollbar-danger {
+  @include scrollbars(.5em, theme-color(danger), transparent);
+}
+
+.scrollbar-warning {
+  @include scrollbars(.5em, theme-color(warning), transparent);
+}
+
+.scrollbar-info {
+  @include scrollbars(.5em, theme-color(info), transparent);
+}
+
+.scrollbar-light {
+  @include scrollbars(.5em, theme-color(light), transparent);
+}
+
+.scrollbar-dark {
+  @include scrollbars(.5em, theme-color(dark), transparent);
+}
+
+.scrollbar-white {
+  @include scrollbars(.5em, $white, transparent);
+}
+
+.scrollbar-invisible {
+  @include scrollbars(.5em, transparent, transparent);
+}
+
+
+
+.scrollbar-black-on-hover {
+  @extend .scrollbar-invisible;
+  &:hover {
+    @extend .scrollbar-black;
+  }
+}
+
+.scrollbar-primary-on-hover {
+  @extend .scrollbar-invisible;
+  &:hover {
+    @extend .scrollbar-primary;
+  }
+}
+
+.scrollbar-secondary-on-hover {
+  @extend .scrollbar-invisible;
+  &:hover {
+    @extend .scrollbar-secondary;
+  }
+}
+
+.scrollbar-success-on-hover {
+  @extend .scrollbar-invisible;
+  &:hover {
+    @extend .scrollbar-success;
+  }
+}
+
+.scrollbar-danger-on-hover {
+  @extend .scrollbar-invisible;
+  &:hover {
+    @extend .scrollbar-danger;
+  }
+}
+
+.scrollbar-warning-on-hover {
+  @extend .scrollbar-invisible;
+  &:hover {
+    @extend .scrollbar-warning;
+  }
+}
+
+.scrollbar-info-on-hover {
+  @extend .scrollbar-invisible;
+  &:hover {
+    @extend .scrollbar-info;
+  }
+}
+
+.scrollbar-light-on-hover {
+  @extend .scrollbar-invisible;
+  &:hover {
+    @extend .scrollbar-light;
+  }
+}
+
+.scrollbar-dark-on-hover {
+  @extend .scrollbar-invisible;
+  &:hover {
+    @extend .scrollbar-dark;
+  }
+}
+
+.scrollbar-white-on-hover {
+  @extend .scrollbar-invisible;
+  &:hover {
+    @extend .scrollbar-white;
+  }
+}
+
+.scrollbar-x-auto {
+  overflow-x: auto;
+}
+
+.scrollbar-y-auto {
+  overflow-y: auto;
+}
+
+.scrollbar-x-hidden {
+  overflow-x: hidden;
+}
+
+.scrollbar-y-hidden {
+  overflow-y: hidden;
+}
+
+.scrollbar-x-scroll-on-hover {
+  overflow-x: hidden !important;
+  &:hover {
+    overflow-x: scroll !important;
+    margin-bottom: 0px !important;
+  }
+}
+
+.scrollbar-y-scroll-on-hover {
+  overflow-y: hidden !important;
+  &:hover {
+    overflow-y: scroll !important;
+    margin-right: 0px !important;
+  }
+}
+
+.scrollbar-a-scroll-on-hover {
+  @extend .scrollbar-x-scroll-on-hover;
+  @extend .scrollbar-y-scroll-on-hover;
+}
+
+
+.scrollbar-x-primary-on-hover {
+  @extend .scrollbar-invisible;
+  &:hover {
+    overflow-x: scroll !important;
+    margin-bottom: 0px !important;
+  }
+}

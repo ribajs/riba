@@ -1,17 +1,27 @@
 {
-  "extends": ["tslint:recommended"],
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "src/types/**/*"
+    ]
+  },
   "jsRules": {},
   "rules": {
-    "quotemark": false,
-    "no-empty": false,
-    "no-empty-interface": false,
-    "max-classes-per-file": false,
-    "arrow-parens": false,
-    "variable-name": false,
-    "trailing-comma": false,
-    "object-literal-sort-keys": false,
-    "member-ordering": false,
-    "member-access": false
+    "interface-name": [false, "always-prefix"],
+    "quotemark": [true, "single", "jsx-double"],
+    "max-line-length": [false],
+    "no-bitwise": [false],
+    "no-namespace": [false],
+    "ordered-imports": false,
+    "array-type": false,
+    "no-angle-bracket-type-assertion": false,
+    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
+    "no-console": [true, "log", "info", "debug"],
+    "prefer-for-of": false,
+    "object-literal-sort-keys": false
   },
   "rulesDirectory": []
 }

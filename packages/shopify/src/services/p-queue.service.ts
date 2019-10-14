@@ -15,7 +15,6 @@ export class PQueue {
   private _intervalEnd = 0;
   private _timeoutId: any | null;
 
-  private _queueClass: string;
   private _pendingCount = 0;
   private _concurrency: typeof Infinity;
   private _isPaused: boolean;
@@ -55,7 +54,6 @@ export class PQueue {
     this._timeoutId = null;
 
     this.queue = new options.queueClass(); // eslint-disable-line new-cap
-    this._queueClass = options.queueClass;
     this._pendingCount = 0;
     this._concurrency = options.concurrency;
     this._isPaused = options.autoStart === false;

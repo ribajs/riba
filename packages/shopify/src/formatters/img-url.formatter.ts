@@ -1,4 +1,4 @@
-import { IFormatter, Utils } from '@ribajs/core';
+import { IFormatter } from '@ribajs/core';
 
 /**
  * Return a resized shopify image URL

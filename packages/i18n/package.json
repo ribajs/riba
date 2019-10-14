@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/i18n",
-  "description": "Internationalization extension for Riba.js",
+  "description": "Internationalization module for Riba.js",
   "version": "1.2.1",
   "author": "Pascal Garber <pascal@jumplink.eu>",
   "url": "https://github.com/ribajs/riba/tree/master/packages/i18n",
@@ -36,7 +36,7 @@
     "babel-plugin-array-includes": "^2.0.3",
     "tslint": "^5.20.0",
     "typescript": "^3.6.4",
-    "webpack": "^4.41.0",
+    "webpack": "^4.41.1",
     "webpack-cli": "^3.3.9"
   },
   "dependencies": {

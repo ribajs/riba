@@ -1,0 +1,12 @@
+$languages: de en;
+
+@each $lang in $languages {
+    html[lang="#{$lang}"] {
+        .d-#{$lang}-block {
+        display: block !important;
+        }
+        .d-#{$lang}-none {
+            display: none !important;
+        }
+    }
+}

@@ -46,7 +46,7 @@
     "@types/node": "^12.7.12",
     "babel-loader": "^8.0.6",
     "babel-plugin-array-includes": "^2.0.3",
-    "husky": "^3.0.8",
+    "husky": "^3.0.9",
     "jest": "^24.9.0",
     "jest-extended": "^0.11.2",
     "source-map-support": "^0.5.13",
@@ -54,7 +54,7 @@
     "tslint": "^5.20.0",
     "typescript": "^3.6.4",
     "uglifyjs-webpack-plugin": "^2.2.0",
-    "webpack": "^4.41.0",
+    "webpack": "^4.41.1",
     "webpack-cli": "^3.3.9",
     "webpack-glob-entry": "^2.1.1"
   },

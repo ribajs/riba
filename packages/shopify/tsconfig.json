@@ -3,7 +3,9 @@
   "compilerOptions": {
     "baseUrl": "./src/",
     "outDir": "./lib/",
-    "types": ["jquery"],
+    "noUnusedLocals": true,
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "types": ["jest"]
   },
   "include": ["*.ts", "**/*.ts"]
 }

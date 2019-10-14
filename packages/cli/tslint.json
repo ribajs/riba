@@ -3,8 +3,14 @@
   "extends": [
     "tslint:recommended"
   ],
+  "linterOptions": {
+    "exclude": [
+      "src/types/**/*"
+    ]
+  },
   "jsRules": {},
   "rules": {
+    "interface-name": [false, "always-prefix"],
     "quotemark": [true, "single", "jsx-double"],
     "max-line-length": [false],
     "no-bitwise": [false],
@@ -13,6 +19,7 @@
     "array-type": false,
     "no-angle-bracket-type-assertion": false,
     "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
+    "no-console": [true, "log", "info", "debug"],
     "prefer-for-of": false,
     "object-literal-sort-keys": false
   },

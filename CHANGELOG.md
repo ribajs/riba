@@ -14,6 +14,10 @@
 
 - New shopify-img binder
 
+### BS4
+
+- Add style extensions
+
 ## 1.2.1
 
 ### Core

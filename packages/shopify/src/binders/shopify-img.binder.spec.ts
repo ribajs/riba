@@ -1,15 +1,15 @@
 import { Riba } from '@ribajs/core';
 
-import { ShopifyImgBinder } from './shopify-img.binder';
+import { shopifyImgBinder } from './shopify-img.binder';
 
 describe('riba.binders', () => {
-  let el: HTMLUnknownElement;
+  let el: HTMLImageElement;
 
   const riba = new Riba();
-  riba.module.binder.regist(ShopifyImgBinder);
+  riba.module.binder.regist(shopifyImgBinder);
 
   beforeEach(() => {
-    el = document.createElement('div');
+    el = document.createElement('img');
     document.body.appendChild(el);
   });
 
