@@ -17,6 +17,8 @@
 ### BS4
 
 - Add style extensions
+- New `scroll-to-on-*` binder
+- New bs4ScrollspyComponent
 
 ## 1.2.1
 

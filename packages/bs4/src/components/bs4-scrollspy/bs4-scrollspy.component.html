@@ -1,0 +1,10 @@
+<ul class="list-unstyled list-scrollspy list-scrollspy-level-1">
+  <li class="nav-item nav-item-level-1" rv-each-anachor="anchors" rv-bs4-scrollspy-active="anachor.href" rv-data-offset="offset" rv-data-offset-bottom="offsetBottom">
+    <a class="nav-link" rv-href="anachor.href" rv-html="anachor.title" rv-scroll-to-on-click="anachor.href" rv-data-offset="scrollOffset"></a>
+    <ul rv-if="anachor.childs | size | gt 0" class="list-unstyled list-scrollspy list-scrollspy-level-2" >
+        <li class="nav-item nav-item-level-2" rv-each-child="anachor.childs" rv-bs4-scrollspy-active="child.href" rv-data-offset="offset" rv-data-offset-bottom="offsetBottom">
+            <a class="nav-link" rv-href="child.href" rv-html="child.title" rv-scroll-to-on-click="child.href" rv-data-offset="scrollOffset"></a>
+        </li>
+    </ul>
+  </li>
+</ul>

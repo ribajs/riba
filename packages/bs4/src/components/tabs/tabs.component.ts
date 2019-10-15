@@ -1,14 +1,15 @@
 import { Component, Debug, Binding, handleizeFormatter } from '@ribajs/core';
 import template from './tabs.component.html';
 
-interface Tab {
+export interface Tab {
   title: string;
   content: string;
   handle: string;
   active: boolean;
+  type?: string;
 }
 
-interface Scope {
+export interface Scope {
   tabs: Tab[];
   activate: TabsComponent['activate'];
   optionTabsAutoHeight: boolean;
@@ -204,21 +205,26 @@ export class TabsComponent extends Component {
     }
   }
 
+  protected addTabByTemplate(tpl: HTMLTemplateElement) {
+    const title = tpl.getAttribute('title');
+    if (!title) {
+      console.error(new Error('template "title" attribute is required"'));
+      return;
+    }
+    const handle = tpl.getAttribute('handle') || handleizeFormatter.read(title);
+    if (!handle) {
+      console.error(new Error('template "handle" attribute is required"'));
+      return;
+    }
+    const type = tpl.getAttribute('type') || undefined;
+    const content = tpl.innerHTML;
+    this.scope.tabs.push({title, handle, content, active: false, type });
+  }
+
   protected addTabsByTemplate() {
     const templates = this.el.querySelectorAll<HTMLTemplateElement>('template');
     templates.forEach((tpl) => {
-      const title = tpl.getAttribute('title');
-      if (!title) {
-        console.error(new Error('template "title" attribute is required"'));
-        return;
-      }
-      const handle = tpl.getAttribute('handle') || handleizeFormatter.read(title);
-      if (!handle) {
-        console.error(new Error('template "handle" attribute is required"'));
-        return;
-      }
-      const content = tpl.innerHTML;
-      this.scope.tabs.push({title, handle, content, active: false});
+      this.addTabByTemplate(tpl);
     });
   }
 
