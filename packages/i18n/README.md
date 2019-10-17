@@ -19,6 +19,6 @@ const localesService = new LocalesService();
 const model = {};
 riba.module.regist(i18nModule(localesService));
 JQuery(($: JQueryStatic) => {
-  riba.bind(document.body, this.model);
+  riba.bind(document.body, model);
 });
 ```

@@ -33,7 +33,7 @@ export class ShopifyCartService {
    * @return Response if successful, the JSON of the line item associated with the added variant.
    * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#add-to-cart
    */
-  public static add(id: number | number, quantity = 1, properties = {}, options: IShopifyCartRequestOptions = this.requestOptionDefaults): Promise<IShopifyCartLineItem | IShopifyCartAddError> {
+  public static add(id: number, quantity = 1, properties = {}, options: IShopifyCartRequestOptions = this.requestOptionDefaults): Promise<IShopifyCartLineItem | IShopifyCartAddError> {
     if (options.triggerOnStart) {
       this.triggerOnStart();
     }
@@ -50,6 +50,7 @@ export class ShopifyCartService {
           if (options.triggerOnChange) {
             this.triggerOnChange(cart);
           }
+          this.triggerAdd(id, quantity, properties);
           return lineItem; // return original response
         }) as any;
       })
@@ -346,6 +347,13 @@ export class ShopifyCartService {
       return;
     }
     ShopifyCartService.shopifyCartEventDispatcher.trigger('ShopifyCart:request:start');
+  }
+
+  /**
+   * Trigger `ShopifyCart:add`
+   */
+  protected static triggerAdd(id: number, quantity: number, properties: any) {
+    ShopifyCartService.shopifyCartEventDispatcher.trigger('ShopifyCart:add', {id, quantity, properties});
   }
 
   protected static normalizeShippingRates(shippingRates: IShopifyShippingRates): IShopifyShippingRatesNormalized {

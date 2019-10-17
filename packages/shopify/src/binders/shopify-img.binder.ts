@@ -3,7 +3,7 @@ import { imgUrlFormatter } from '../formatters/img-url.formatter';
 import './ResizeObserver.d';
 
 const PX_OFFSET = 10;
-const OVERWRITE_ORIGINAL_SRC = false;
+const OVERWRITE_ORIGINAL_SRC = true;
 
 /**
  * shopify-img
@@ -16,36 +16,43 @@ export const shopifyImgBinder: IBinder<string> = {
     this.customData = {
       initialSrc: (el as HTMLImageElement).src,
       oldImageWidth: ((PX_OFFSET + 1) * -1),
-      onResize: () => {
-        const currentImageWidth = el.offsetWidth;
+      setSrcset: (width: number) => {
+        // Max width
+        if (width > 5760) {
+          width = 5760;
+        }
         let currentSrcset = (el as HTMLImageElement).srcset;
         let currentSizes = (el as HTMLImageElement).sizes;
         if (!imgUrlFormatter.read) {
           throw new Error('Shopify imgUrlFormatter read method is missing!');
         }
+        const vw = Utils.getViewportDimensions().w;
+        const filterScale = window.devicePixelRatio || 1;
+        const filterSize = width + 'x';
+        const newSrc = imgUrlFormatter.read(this.customData.initialSrc, filterSize, filterScale, undefined, undefined, el);
+        if (typeof(currentSrcset) === 'string' && currentSrcset.length > 0) {
+          currentSrcset = currentSrcset + ', ';
+        } else {
+          currentSrcset = '';
+        }
+        if (typeof(currentSizes) === 'string' && currentSizes.length > 0) {
+          currentSizes = currentSizes + ', ';
+        } else {
+          currentSizes = '';
+        }
+        const newSrcset = `${currentSrcset}${newSrc} ${width}w`;
+        const newSizes = `${currentSizes} (width: ${vw}px) ${width}px`;
+        (el as HTMLImageElement).srcset = newSrcset;
+        (el as HTMLImageElement).sizes = newSizes;
+        if (OVERWRITE_ORIGINAL_SRC) {
+          (el as HTMLImageElement).src = newSrc;
+        }
+      },
+      onResize: () => {
+        const currentImageWidth = el.offsetWidth;
+        const currentSrcset = (el as HTMLImageElement).srcset;
         if (this.customData.oldImageWidth + PX_OFFSET < currentImageWidth && currentImageWidth > 0 && !currentSrcset.includes(`${currentImageWidth}w`)) {
-          const vw = Utils.getViewportDimensions().w;
-          const filterScale = window.devicePixelRatio || 1;
-          const filterSize = currentImageWidth + 'x';
-          const newSrc = imgUrlFormatter.read(this.customData.initialSrc, filterSize, filterScale, undefined, undefined, el);
-          if (typeof(currentSrcset) === 'string' && currentSrcset.length > 0) {
-            currentSrcset = currentSrcset + ', ';
-          } else {
-            currentSrcset = '';
-          }
-          if (typeof(currentSizes) === 'string' && currentSizes.length > 0) {
-            currentSizes = currentSizes + ', ';
-          } else {
-            currentSizes = '';
-          }
-          const newSrcset = `${currentSrcset}${newSrc} ${currentImageWidth}w`;
-          const newSizes = `${currentSizes} (width: ${vw}px) ${currentImageWidth}px`;
-
-          (el as HTMLImageElement).srcset = newSrcset;
-          (el as HTMLImageElement).sizes = newSizes;
-          if (OVERWRITE_ORIGINAL_SRC) {
-            (el as HTMLImageElement).src = newSrc;
-          }
+          this.customData.setSrcset(currentImageWidth);
           this.customData.oldImageWidth = currentImageWidth;
         }
       },
@@ -71,15 +78,14 @@ export const shopifyImgBinder: IBinder<string> = {
     if (!imgUrlFormatter.read) {
       throw new Error('Shopify imgUrlFormatter read method is missing!');
     }
-    this.customData.initialSrc = this.customData.initialSrc || src;
     if (src) {
-      if (el.offsetWidth > 0) {
-        this.customData.onResize();
-      } else {
-        setTimeout(this.customData.onResize, 200);
+      this.customData.onResize();
+      setTimeout(this.customData.onResize, 200);
+      // Set src attribute if it is not set statically
+      if (typeof(this.customData.initialSrc) !== 'string' || this.customData.initialSrc.length <= 0) {
+        this.customData.initialSrc = src;
+        (el as HTMLImageElement).src = src;
       }
-    } else {
-      (el as HTMLImageElement).src = this.customData.initialSrc;
     }
   },
 };

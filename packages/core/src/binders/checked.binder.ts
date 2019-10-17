@@ -12,11 +12,15 @@ export const checkedBinder: IBinder<string> = {
   priority: 2000,
 
   bind(el) {
-    el.addEventListener('change', this.publish);
+    this.customData = {};
+    this.customData.onChange = () => {
+      this.publish();
+    };
+    el.addEventListener('change', this.customData.onChange, false);
   },
 
   unbind(el) {
-    el.removeEventListener('change', this.publish);
+    el.removeEventListener('change', this.customData.onChange, false);
   },
 
   routine(el: HTMLElement, value) {

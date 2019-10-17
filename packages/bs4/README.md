@@ -17,6 +17,6 @@ const riba = new Riba();
 const model = {};
 riba.module.regist(bs4Module);
 JQuery(($: JQueryStatic) => {
-  riba.bind(document.body, this.model);
+  riba.bind(document.body, model);
 });
 ```

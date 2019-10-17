@@ -18,7 +18,9 @@
 
 - Add style extensions
 - New `scroll-to-on-*` binder
-- New bs4ScrollspyComponent
+- New Bs4ScrollspyComponent
+- New Bs4ContentsComponent
+- New Bs4IconComponent
 
 ## 1.2.1
 

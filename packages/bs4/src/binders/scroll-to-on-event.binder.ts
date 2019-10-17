@@ -2,17 +2,34 @@ import { IBinder } from '@ribajs/core';
 
 /**
  * Scrolls to an element by event and selector
+ *
+ * Attributes:
+ *  * scroll-element="query-selector"
  * @see https://stackoverflow.com/a/31987330
  * @param element
  * @param to
  * @param duration
  */
-const scrollTo = (to: HTMLElement, offset: number) => {
-  window.scroll({
-    behavior: 'smooth',
-    left: 0,
-    top: (to.getBoundingClientRect().top + window.pageYOffset) - offset,
-  });
+const scrollTo = (to: HTMLElement, offset: number, scrollElement: Element | (Window & typeof globalThis) | null) => {
+  if (!scrollElement) {
+    scrollElement = window;
+  }
+
+  if (typeof((scrollElement as Window).pageYOffset) === 'number') {
+    // if is is window to scroll
+    scrollElement.scroll({
+      behavior: 'smooth',
+      left: 0,
+      top: (to.getBoundingClientRect().top + (scrollElement as Window).pageYOffset) - offset,
+    });
+  } else {
+    // if is is another element to scroll
+    scrollElement.scroll({
+      behavior: 'smooth',
+      left: 0,
+      top: (to.offsetTop ) - offset,
+    });
+  }
 };
 
 export const scrollToOnEventBinder: IBinder<string> = {
@@ -21,7 +38,8 @@ export const scrollToOnEventBinder: IBinder<string> = {
     this.customData = {};
     this.customData.onEvent = (event: Event) => {
       const offset = Number(el.dataset.offset || 0);
-      scrollTo(this.customData.target, offset);
+      const scrollElement = el.dataset.scrollElement ? document.querySelector(el.dataset.scrollElement) : window;
+      scrollTo(this.customData.target, offset, scrollElement);
       event.preventDefault();
     };
     const eventName = this.args[0] as string;
