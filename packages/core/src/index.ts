@@ -3,6 +3,7 @@ export * from './vendors';
 export * from './services';
 export * from './adapter';
 export * from './binders';
+export * from './component';
 export * from './components';
 export * from './formatters';
 export * from './binding';

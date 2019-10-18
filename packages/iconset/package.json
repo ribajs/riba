@@ -1,0 +1,58 @@
+{
+  "name": "@ribajs/iconset",
+  "description": "Iconset for Riba.js",
+  "version": "1.2.2",
+  "author": "Pascal Garber <pascal@artandcode.studio>",
+  "contributors": [],
+  "url": "https://github.com/ribajs/riba/tree/master/packages/iconset",
+  "homepage": "https://ribajs.com/",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "source": "src/index.ts",
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/ribajs/riba/blob/master/LICENSE"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ribajs/riba.git"
+  },
+  "keywords": [
+    "iconset",
+    "icon",
+    "icons",
+    "Riba",
+    "Rivets",
+    "tinybind",
+    "SPA",
+    "TypeScript",
+    "Browser"
+  ],
+  "scripts": {
+    "build": "gulp",
+    "build:svg": "gulp build:svg",
+    "build:filelist": "gulp build:filelist",
+    "build:filelist:svg": "gulp build:filelist:svg",
+    "build:filelist:png": "gulp build:filelist:png",
+    "build:png": "gulp build:png",
+    "build:png:8": "gulp build:png:8",
+    "build:png:16": "gulp build:png:16",
+    "build:png:32": "gulp build:png:32",
+    "build:png:64": "gulp build:png:64",
+    "build:png:128": "gulp build:png:128",
+    "build:png:256": "gulp build:png:256"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-exec": "^4.0.0",
+    "gulp-filelist": "^2.0.3",
+    "gulp-svgmin": "^2.2.0"
+  },
+  "dependencies": {},
+  "bugs": {
+    "url": "https://github.com/ribajs/riba/issues"
+  }
+}

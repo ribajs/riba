@@ -2,11 +2,12 @@
   "name": "@ribajs/router",
   "description": "Routing extension for Riba.js inspired by Barba.js",
   "version": "1.2.2",
-  "author": "Pascal Garber <pascal@jumplink.eu>",
+  "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [
     "Luigi De Rosa <lurukee@gmail.com>"
   ],
   "url": "https://github.com/ribajs/riba",
+  "homepage": "https://ribajs.com/",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "source": "src/index.ts",
@@ -21,6 +22,15 @@
     "type": "git",
     "url": "https://github.com/ribajs/riba.git"
   },
+  "keywords": [
+    "Router",
+    "Riba",
+    "Rivets",
+    "tinybind",
+    "SPA",
+    "TypeScript",
+    "Browser"
+  ],
   "scripts": {
     "type-check": "tslint -c tslint.json 'src/**/*.ts' && tsc --noEmit",
     "build": "npm run build:module",

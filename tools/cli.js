@@ -45,6 +45,11 @@ const PACKAGES = [
     npm: '@ribajs/shopify-tda',
     available: true,
   },
+  {
+    path: 'packages/iconset/',
+    npm: '@ribajs/iconset',
+    available: true,
+  },
 
   // WIP Riba modules, not ready to publish
   {

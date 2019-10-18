@@ -1,3 +1,3 @@
-import { Component } from '../components';
+import { Component } from '../component';
 
 export type ComponentWrapper = (...deps: any[]) => typeof Component;

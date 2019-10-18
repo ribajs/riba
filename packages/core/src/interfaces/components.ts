@@ -1,4 +1,4 @@
-import { Component } from '../components';
+import { Component } from '../component';
 import { ComponentWrapper } from './component.wrapper';
 
 export interface IComponents {

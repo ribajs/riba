@@ -5,7 +5,7 @@ import {
 
 <% if (templateEngine === 'pug') { %>import pugTemplate from './<%= name %>.component.pug';<% } %><% if (templateEngine === 'html') { %>import template from './<%= name %>.component.html';<% } %>
 
-interface IScope {
+interface Scope {
   hello?: string;
 }
 
@@ -21,7 +21,7 @@ export class <%= classify(name) %>Component extends Component {
 
   protected debug = Debug('component:' + <%= classify(name) %>Component.tagName);
 
-  protected scope: IScope = {
+  protected scope: Scope = {
     hello: undefined,
   };
 

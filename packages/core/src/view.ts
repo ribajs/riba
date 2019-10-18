@@ -7,7 +7,7 @@ import {
 import { Binding } from './binding';
 import { parseNode, parseDeclaration } from './parsers';
 import { Debug } from './vendors/debug.module';
-import { RibaComponent, Component } from './components';
+import { RibaComponent, Component } from './component';
 
 export type TBlock = boolean;
 

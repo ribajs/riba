@@ -2,9 +2,14 @@
 
 ## Dev
 
+### Iconset
+
+- Add new iconset package
+
 ### Core
 
 - Fix component callFormatterHandler
+- Add new VideoComponent
 
 ### Examples
 

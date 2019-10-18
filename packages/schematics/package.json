@@ -27,6 +27,16 @@
     "type": "git",
     "url": "git@github.com:ribajs/riba.git"
   },
+  "keywords": [
+    "schematics",
+    "cli",
+    "Riba",
+    "Rivets",
+    "tinybind",
+    "SPA",
+    "TypeScript",
+    "Browser"
+  ],
   "contributors": [
     "Pascal Garber"
   ],
@@ -34,7 +44,8 @@
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"
   },
-  "homepage": "https://github.com/ribajs/riba/tree/master/packages/schematics#readme",
+  "url": "https://github.com/ribajs/riba/tree/master/packages/schematics",
+  "homepage": "https://ribajs.com/",
   "dependencies": {
     "@angular-devkit/core": "8.3.9",
     "@angular-devkit/schematics": "8.3.9",

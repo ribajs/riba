@@ -2,7 +2,7 @@
   "name": "@ribajs/core",
   "description": "Core module of Riba.js",
   "version": "1.2.2",
-  "author": "Pascal Garber <pascal@jumplink.eu>",
+  "author": "Pascal Garber <pascal@artandcode.studio>",
   "private": false,
   "contributors": [
     "Michael Richards",
@@ -23,6 +23,15 @@
     "type": "git",
     "url": "git+https://github.com/ribajs/riba.git"
   },
+  "keywords": [
+    "Art+Code Studio",
+    "Riba",
+    "Rivets",
+    "tinybind",
+    "SPA",
+    "TypeScript",
+    "Browser"
+  ],
   "scripts": {
     "test": "npm run type-check && jest --config=jest.config.js",
     "test:watch": "jest --config=jest.config.js --watch",

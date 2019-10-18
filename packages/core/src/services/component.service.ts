@@ -1,5 +1,5 @@
 import { IComponents } from '../interfaces';
-import { Component } from '../components';
+import { Component } from '../component';
 import { ModuleElementService } from './module-element.service';
 
 export class ComponentService extends ModuleElementService {

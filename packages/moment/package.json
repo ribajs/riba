@@ -2,9 +2,10 @@
   "name": "@ribajs/moment",
   "description": "Moment.js module for Riba.js",
   "version": "1.2.2",
-  "author": "Pascal Garber <pascal@jumplink.eu>",
+  "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [],
   "url": "https://github.com/ribajs/riba/tree/master/packages/moment",
+  "homepage": "https://ribajs.com/",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "source": "src/index.ts",
@@ -19,6 +20,17 @@
     "type": "git",
     "url": "git+https://github.com/ribajs/riba.git"
   },
+  "keywords": [
+    "moment",
+    "moment.js",
+    "MomentJs",
+    "Riba",
+    "Rivets",
+    "tinybind",
+    "SPA",
+    "TypeScript",
+    "Browser"
+  ],
   "scripts": {
     "test": "npm run type-check && jest --config=jest.config.js",
     "type-check": "tslint -c tslint.json 'src/**/*.ts' && tsc --noEmit",
