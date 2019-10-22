@@ -14,6 +14,7 @@ interface Scope {
   paused: boolean;
   // methods
   toggleMute: VideoComponent['toggleMute'];
+  toggleControls: VideoComponent['toggleControls'];
   play: VideoComponent['play'];
   pause: VideoComponent['pause'];
   togglePlay: VideoComponent['togglePlay'];
@@ -68,6 +69,11 @@ export class VideoComponent extends Component {
   public set loop(loop: boolean) {
     this.video.loop = loop;
     this.scope.loop = this.video.loop;
+    if (loop) {
+      this.video.setAttribute('loop', '');
+    } else {
+      this.video.removeAttribute('loop');
+    }
   }
 
   public get controls() {
@@ -77,6 +83,15 @@ export class VideoComponent extends Component {
   public set controls(controls: boolean) {
     this.video.controls = controls;
     this.scope.controls = this.video.controls;
+    if (controls) {
+      this.video.setAttribute('controls', '');
+      // show controls
+      this.video.dispatchEvent( new Event('mouseover'));
+      this.video.dispatchEvent( new Event('mouseenter'));
+      this.video.dispatchEvent( new Event('mousemove'));
+    } else {
+      this.video.removeAttribute('controls');
+    }
   }
 
   public get currentTime() {
@@ -112,6 +127,7 @@ export class VideoComponent extends Component {
     paused: this.paused,
     // methods
     toggleMute: this.toggleMute,
+    toggleControls: this.toggleControls,
     play: this.play,
     pause: this.pause,
     togglePlay: this.togglePlay,
@@ -138,6 +154,11 @@ export class VideoComponent extends Component {
   public toggleMute() {
     this.debug('toggleMute', this.muted);
     this.muted = !this.muted;
+  }
+
+  public toggleControls() {
+    this.debug('toggleControls', this.controls);
+    this.controls = !this.controls;
   }
 
   public play() {
