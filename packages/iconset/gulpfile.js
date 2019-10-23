@@ -1,9 +1,15 @@
 const gulp = require('gulp');
 const svg = require('gulp-svgmin');
 const exec = require('gulp-exec');
+const clean = require('gulp-clean');
 const filelist = require('gulp-filelist');
 
 const svgSource = 'src/svg/*.svg';
+
+gulp.task('clean:svg', () => {
+  return gulp.src('./dest/svg/*')
+    .pipe(clean());
+});
  
 gulp.task('build:svg', () => {
   return gulp.src(svgSource)

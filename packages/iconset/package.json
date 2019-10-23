@@ -33,7 +33,7 @@
   ],
   "scripts": {
     "build": "gulp",
-    "build:svg": "gulp build:svg",
+    "build:svg": "npm run clean:svg && gulp build:svg",
     "build:filelist": "gulp build:filelist",
     "build:filelist:svg": "gulp build:filelist:svg",
     "build:filelist:png": "gulp build:filelist:png",
@@ -43,10 +43,12 @@
     "build:png:32": "gulp build:png:32",
     "build:png:64": "gulp build:png:64",
     "build:png:128": "gulp build:png:128",
-    "build:png:256": "gulp build:png:256"
+    "build:png:256": "gulp build:png:256",
+    "clean:svg": "gulp clean:svg"
   },
   "devDependencies": {
     "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0",
     "gulp-exec": "^4.0.0",
     "gulp-filelist": "^2.0.3",
     "gulp-svgmin": "^2.2.0"
