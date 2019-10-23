@@ -37,10 +37,16 @@ export class Bs4IconComponent extends Component {
       if (fetch) {
         fetch(newValue)
         .then((response) => {
+          if (response.status !== 200) {
+            throw new Error(response.statusText);
+          }
           return response.text();
         })
         .then((response) => {
           this.el.innerHTML = response;
+        })
+        .catch((error) => {
+          console.error(error);
         });
       }
 
