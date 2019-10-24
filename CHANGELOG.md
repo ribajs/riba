@@ -2,6 +2,12 @@
 
 ## Dev
 
+### Shopify
+- New ShopifyLinklistComponent
+- New Shopify snippet templates
+
+## 1.3.0
+
 ### Core
 
 - Fix component callFormatterHandler

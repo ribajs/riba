@@ -2,7 +2,7 @@ import { Debug, Component, JQuery } from '@ribajs/core';
 
 export abstract class ShopifySectionComponent extends Component {
 
-  public static tagName: string = 'rv-shopify-section';
+  public static tagName: string = 'shopify-section';
 
   protected debug = Debug('component:' + ShopifySectionComponent.tagName);
 

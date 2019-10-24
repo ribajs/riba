@@ -1,0 +1,5 @@
+[
+  {% for link in links %}
+    {% include 'utils-json-link', link: link, level: level %}{% if forloop.last != true %},{% endif %}
+  {% endfor %}
+]

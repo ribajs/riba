@@ -1,17 +1,11 @@
-
-import { IRibaModule } from '@ribajs/core';
 export * from './services';
+export * from './binders';
+export * from './components';
+// export * as formatters from './formatters/bs4.formatters';
+export * from './services';
+// export * from './interfaces/interfaces';
+import bs4Module from './bs4.module';
 
-// import * from './interfaces/interfaces';
-import * as binders from './binders';
-import * as components from './components';
-// import * as formatters from './formatters/bs4.formatters';
-import * as services from './services';
-export const bs4Module: IRibaModule = {
-  binders,
-  services,
-  // formatters,
-  components,
-};
+export { bs4Module };
 
 export default bs4Module;

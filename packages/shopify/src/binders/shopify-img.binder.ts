@@ -27,7 +27,7 @@ export const shopifyImgBinder: IBinder<string> = {
           throw new Error('Shopify imgUrlFormatter read method is missing!');
         }
         const vw = Utils.getViewportDimensions().w;
-        const filterScale = window.devicePixelRatio || 1;
+        const filterScale = Math.round(window.devicePixelRatio || 1);
         const filterSize = width + 'x';
         const newSrc = imgUrlFormatter.read(this.customData.initialSrc, filterSize, filterScale, undefined, undefined, el);
         if (typeof(currentSrcset) === 'string' && currentSrcset.length > 0) {

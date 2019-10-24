@@ -1,0 +1,43 @@
+<nav class="nav" rv-add-class="linklist.handle" rv-class-nav-pills="pills" rv-class-w-100="vertical" rv-class-flex-column="vertical" rv-class-flex-row="vertical | not">
+  <div class="nav-item nav-item-level-0" rv-each-link="linklist.links">
+    <a
+      rv-if="link.collapseable | not"
+      class="nav-link"
+      rv-class-active="link.active"
+      rv-route-class-active="link.url"
+      rv-route="link.url"
+      rv-href="link.url"
+      >
+      <span>{link.title}</span>
+    </a>
+
+    <button rv-if="link.collapseable" class="btn nav-link" rv-on-click="toggle | args link">
+      <span>{link.title}</span>
+    </button>
+
+    <div class="nav-item nav-item-level-1" rv-hide="link.collapsed" rv-each-sublink="link.links">
+      <a
+        class="nav-link"
+        rv-add-class="sublink.level | prepend 'level-'"
+        rv-class-active="sublink.active"
+        rv-route-class-active="sublink.url"
+        rv-route="sublink.url"
+        rv-href="sublink.url"
+      >
+        <span>{sublink.title}</span>
+      </a>
+      <div class="nav-item nav-item-level-2" rv-each-subsublink="sublink.links">
+        <a
+          class="nav-link"
+          rv-add-class="subsublink.level | prepend 'level-'"
+          rv-class-active="subsublink.active"
+          rv-route-class-active="subsublink.url"
+          rv-route="subsublink.url"
+          rv-href="subsublink.url"
+        >
+          <span>{subsublink.title}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
