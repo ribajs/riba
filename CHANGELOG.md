@@ -2,18 +2,15 @@
 
 ## Dev
 
-### Iconset
-
-- Add new iconset package
-
 ### Core
 
 - Fix component callFormatterHandler
 - Add new VideoComponent
+- new Riba component check if all passed attributes are initialized before Riba is bind in this component, this fixes a bug with multiple execution of the bind method
 
-### Examples
+### Iconset
 
-- Add new bs4-tabs component example
+- Add new iconset package
 
 ### Shopify
 
@@ -26,6 +23,10 @@
 - New Bs4ScrollspyComponent
 - New Bs4ContentsComponent
 - New Bs4IconComponent
+
+### Examples
+
+- Add new bs4-tabs component example
 
 ## 1.2.1
 

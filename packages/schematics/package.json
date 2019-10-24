@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/schematics",
-  "version": "1.2.2",
+  "version": "1.3.0",
   "description": "Riba schematics for the cli",
   "main": "index.js",
   "publishConfig": {
@@ -47,15 +47,15 @@
   "url": "https://github.com/ribajs/riba/tree/master/packages/schematics",
   "homepage": "https://ribajs.com/",
   "dependencies": {
-    "@angular-devkit/core": "8.3.9",
-    "@angular-devkit/schematics": "8.3.9",
+    "@angular-devkit/core": "8.3.14",
+    "@angular-devkit/schematics": "8.3.14",
     "debug": "^4.1.1",
     "source-map-support": "^0.5.13",
     "typescript": "3.6.4"
   },
   "devDependencies": {
-    "@types/jest": "24.0.18",
-    "@types/node": "12.7.12",
+    "@types/jest": "24.0.19",
+    "@types/node": "12.11.6",
     "@types/debug": "^4.1.5",
     "tslint": "5.20.0"
   },

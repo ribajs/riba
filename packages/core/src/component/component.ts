@@ -19,6 +19,15 @@ export interface IRibaComponentContext {
   view: View;
 }
 
+export interface ObservedAttributeToCheck {
+  initialized: boolean;
+  passed: boolean;
+}
+
+export interface ObservedAttributesToCheck {
+  [key: string]: ObservedAttributeToCheck;
+}
+
 export abstract class Component extends FakeHTMLElement {
 
   public static tagName: string;
@@ -32,6 +41,11 @@ export abstract class Component extends FakeHTMLElement {
   protected view?: View;
 
   protected templateLoaded: boolean = false;
+
+  /**
+   * Used to check if all passed observedAttributes are initialized
+   */
+  protected observedAttributesToCheck: ObservedAttributesToCheck = {};
 
   protected riba?: Riba;
 
@@ -100,20 +114,68 @@ export abstract class Component extends FakeHTMLElement {
 
     this.initAttributeObserver(observedAttributes);
 
+    this.getPassedObservedAttributes(observedAttributes);
+
+    return this.bindIfReady();
+  }
+
+  /**
+   * If `autobind` is true this component will bind riba automatically in this component if all all passed observed and required attributes are initialized
+   */
+  protected async bindIfReady() {
     /**
-     * After all required attributes are set we load the template and bind the component
+     * After all required and passed attributes are set we load the template and bind the component
      */
-    if (this.checkRequiredAttributes()) {
+    if (this.allPassedObservedAttributesAreInitialized() && this.checkRequiredAttributes()) {
       return this.loadTemplate()
       .then((template) => {
         if (this.autobind) {
-          return Promise.resolve(this.bind());
+          return this.bind();
         }
-        return Promise.resolve(null);
+        return null;
       });
-    } else {
-      this.debug('not all required attributes are set to load and bind the template');
     }
+    this.debug('Not all required and passed attributes are set to load and bind the template', this.observedAttributesToCheck);
+    return null;
+  }
+
+  /**
+   * Check if the attribute (e.g. `src`) is passed to this custom element also checks if the attribute was passed with riba (e.g. `rv-src`)
+   * @param observedAttribute
+   */
+  protected attributeIsPassed(observedAttribute: string) {
+    // TODO this.riba is not defined on this time, so the TODO is get the fullPrefix from riba
+    const fullPrefix = this.riba ? this.riba.fullPrefix : 'rv-';
+    return this.el.getAttribute(observedAttribute) !== null || this.el.getAttribute(fullPrefix + observedAttribute) !== null;
+  }
+
+  /**
+   * Get passed observed attributes, used to check if all passed attributes are initialized
+   * @param observedAttributes
+   */
+  protected getPassedObservedAttributes(observedAttributes: string[]) {
+    for (const observedAttribute of observedAttributes) {
+      const passed = this.attributeIsPassed(observedAttribute);
+      this.observedAttributesToCheck[observedAttribute] = {
+        passed,
+        initialized: false,
+      };
+    }
+  }
+
+  /**
+   * Checks if all passed observed attributes are initialized
+   */
+  protected allPassedObservedAttributesAreInitialized() {
+    let allInitialized = true;
+    for (const key in this.observedAttributesToCheck) {
+      if (this.observedAttributesToCheck.hasOwnProperty(key)) {
+        if (this.observedAttributesToCheck[key].passed) {
+          allInitialized = allInitialized && this.observedAttributesToCheck[key].initialized;
+        }
+      }
+    }
+    return allInitialized;
   }
 
   /**
@@ -254,34 +316,27 @@ export abstract class Component extends FakeHTMLElement {
    * @param namespace
    */
   protected attributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
-    newValue = this.parseAttribute(newValue);
-    attributeName = Utils.camelCase(attributeName);
-    this.debug('attributeChangedCallback called', attributeName, oldValue, newValue, namespace);
 
-    if (this.scope && this.scope[attributeName]) {
-      oldValue = this.scope[attributeName];
+    if (this.observedAttributesToCheck && this.observedAttributesToCheck[attributeName]) {
+      this.observedAttributesToCheck[attributeName].initialized = true;
+    }
+
+    newValue = this.parseAttribute(newValue);
+
+    const parsedAttributeName = Utils.camelCase(attributeName);
+    this.debug('attributeChangedCallback called', parsedAttributeName, oldValue, newValue, namespace);
+
+    if (this.scope && this.scope[parsedAttributeName]) {
+      oldValue = this.scope[parsedAttributeName];
     }
 
     // automatically inject observed attributes to view scope
-    this.scope[attributeName] = newValue;
+    this.scope[parsedAttributeName] = newValue;
 
     // call custom attribute changed callback with parsed values
-    this.parsedAttributeChangedCallback(attributeName, oldValue, newValue, namespace);
+    this.parsedAttributeChangedCallback(parsedAttributeName, oldValue, newValue, namespace);
 
-    /**
-     * After all required attributes are set we load the template and bind the component
-     */
-    if (this.checkRequiredAttributes()) {
-      this.loadTemplate()
-      .then((template) => {
-        if (this.autobind) {
-          return this.bind();
-        }
-        return Promise.resolve(null);
-      });
-    } else {
-      this.debug('not all required attributes are set to load and bind the template');
-    }
+    this.bindIfReady();
   }
 
   /**

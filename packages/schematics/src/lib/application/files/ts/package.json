@@ -27,14 +27,14 @@
     "jest": "^24.9.0",
     "jest-extended": "^0.11.2",
     "parcel-bundler": "^1.12.4",
-    "sass": "^1.23.0",
+    "sass": "^1.23.1",
     "ts-jest": "^24.1.0",
     "tslint": "^5.20.0",
     "typescript": "^3.6.4"
   },
   "dependencies": {
-    "@ribajs/core": "^1.2.1",
-    "@types/jest": "^24.0.18",
+    "@ribajs/core": "^1.2.2",
+    "@types/jest": "^24.0.19",
     "@types/jquery": "^3.3.31",
     "autoprefixer": "^9.6.5",
     "postcss-modules": "^1.4.1"
