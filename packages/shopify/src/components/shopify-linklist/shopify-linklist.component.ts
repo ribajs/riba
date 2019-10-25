@@ -26,13 +26,28 @@ export interface Linklist {
 }
 
 export interface Scope {
+  // Properties
+  /** The linklist as a json string */
   linklist?: Linklist;
+  /** Sets the linklist by his name */
+  handle?: string;
+  /** @deprecated Use `handle` instead */
+  name?: string;
+  /** If the navigation should be displayed as pills */
+  pills: boolean;
+  /** If the navigation should be displayed as vertically */
+  vertical: boolean;
+  /** Set this option to true if toggleable links should be automatically collapse when a page changes */
+  collapseOnNewPage: boolean;
+  /** Set this option to true if toggleable links should be automatically open when a child link is active */
+  showOnActiveChild: boolean;
+
+  // Methods
   toggle: ShopifyLinklistComponent['toggle'];
   collapse: ShopifyLinklistComponent['collapse'];
-  show: ShopifyLinklistComponent['show'];
   collapseAll: ShopifyLinklistComponent['collapseAll'];
-  optionCollapseOnNewPage: boolean;
-  optionShowOnChildUrl: boolean;
+  show: ShopifyLinklistComponent['show'];
+  showAll: ShopifyLinklistComponent['showAll'];
 }
 
 export interface IState {
@@ -54,16 +69,21 @@ export class ShopifyLinklistComponent extends Component {
   protected autobind = true;
 
   static get observedAttributes() {
-    return ['linklist', 'name', 'pills', 'vertical', 'option-collapse-on-new-page', 'option-show-on-child-url'];
+    return ['linklist', 'handle', 'name', 'pills', 'vertical', 'collapse-on-new-page', 'show-on-child-url'];
   }
 
   protected scope: Scope = {
+    // properties
+    pills: false,
+    vertical: false,
+    collapseOnNewPage: true,
+    showOnActiveChild: true,
+    // methods
     toggle: this.toggle,
     collapse: this.collapse,
-    show: this.show,
     collapseAll: this.collapseAll,
-    optionCollapseOnNewPage: true,
-    optionShowOnChildUrl: true,
+    show: this.show,
+    showAll: this.showAll,
   };
 
   constructor(element?: HTMLElement, observedAttributes?: string[]) {
@@ -85,6 +105,17 @@ export class ShopifyLinklistComponent extends Component {
   public show(link: LinklistLink) {
     this.debug('show', link);
     link.collapsed = false;
+  }
+
+  public showAll() {
+    this.debug('showAll');
+    if (this.scope.linklist) {
+      for (const link of this.scope.linklist.links) {
+        if (link.collapseable) {
+          link.collapsed = true;
+        }
+      }
+    }
   }
 
   public collapseAll() {
@@ -118,9 +149,13 @@ export class ShopifyLinklistComponent extends Component {
     // injects the changed attributes to scope
     super.attributeChangedCallback(name, oldValue, newValue, namespace);
 
-    // set linklist by name
-    if (name === 'name') {
-      this.scope.linklist = (window as any).model.system.linklists[newValue];
+    // set linklist by handle
+    if (name === 'handle' || name === 'name') {
+      if ((window as any).model && (window as any).model.system && (window as any).model.system.linklists && (window as any).model.system.linklists[newValue]) {
+        this.scope.linklist = (window as any).model.system.linklists[newValue];
+      } else {
+        throw new Error(`Linklist not found! \nNote: The linklist must be available under "window.model.system.linklists['${newValue}']" to set it using his handle.`);
+      }
     }
 
     if (name === 'linklist') {
@@ -133,28 +168,30 @@ export class ShopifyLinklistComponent extends Component {
         }
       }
 
-      this.scope.linklist = (window as any).model.system.linklists[newValue];
+      this.scope.linklist = newValue;
     }
   }
 
   protected onNewPageReady(viewId: string, currentStatus: IState, prevStatus: IState, $container: JQuery<HTMLElement>, newPageRawHTML: string, dataset: any, isFirstPageLoad: boolean) {
     const url = new URL(currentStatus.url);
     this.debug('onNewPageReady', url.pathname);
-    if (this.scope.optionCollapseOnNewPage) {
+    if (this.scope.collapseOnNewPage) {
       this.collapseAll();
     }
-    if (this.scope.optionShowOnChildUrl) {
+    if (this.scope.showOnActiveChild) {
       this.showByChildUrl(url.pathname);
     }
   }
 
   protected async beforeBind(): Promise<any> {
     super.beforeBind();
-    this.transformLinklist();
-    if (this.scope.optionCollapseOnNewPage) {
-      this.collapseAll();
+    if (this.scope.linklist && this.scope.linklist.links) {
+      this.transformLinks(this.scope.linklist.links);
+      if (this.scope.collapseOnNewPage) {
+        this.collapseAll();
+      }
     }
-    if (this.scope.optionShowOnChildUrl) {
+    if (this.scope.showOnActiveChild) {
       this.showByChildUrl(window.location.pathname);
     }
   }
@@ -162,17 +199,17 @@ export class ShopifyLinklistComponent extends Component {
   /**
    * Checks if link are collapseable and set initializes corresponding attributes
    */
-  protected transformLinklist() {
-    this.debug('current linklist', this.scope.linklist);
-    if (this.scope.linklist) {
-      for (const link of this.scope.linklist.links) {
-        if (link.url === '#collapse') {
-          link.collapseable = true;
-          link.collapsed = true;
-        } else {
-          link.collapseable = false;
-          link.collapsed = false;
-        }
+  protected transformLinks(links: LinklistLink[]) {
+    for (const link of links) {
+      if (link.url === '#collapse') {
+        link.collapseable = true;
+        link.collapsed = true;
+      } else {
+        link.collapseable = false;
+        link.collapsed = false;
+      }
+      if (link.links) {
+        this.transformLinks(link.links);
       }
     }
   }
