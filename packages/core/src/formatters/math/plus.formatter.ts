@@ -1,5 +1,5 @@
 /**
- * Adds a number to an output.
+ * Adds a number to an value.
  * @see https://help.shopify.com/themes/liquid/filters/math-filters#plus
  */
 export const plusFormatter = {

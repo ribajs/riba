@@ -1,5 +1,5 @@
 /**
- * Divides an output by a number and returns the remainder.
+ * Divides an value by a number and returns the remainder.
  * @see https://help.shopify.com/themes/liquid/filters/math-filters#modulo
  */
 export const moduloFormatter = {
