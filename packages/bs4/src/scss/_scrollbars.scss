@@ -158,10 +158,12 @@
 
 .scrollbar-x-auto {
   overflow-x: auto;
+  max-width: 100%;
 }
 
 .scrollbar-y-auto {
   overflow-y: auto;
+  max-height: 100%;
 }
 
 .scrollbar-x-hidden {

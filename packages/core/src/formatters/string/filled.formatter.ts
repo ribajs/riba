@@ -1,5 +1,5 @@
 import { Utils } from '../../services/utils';
-import { emptyFormatter } from '../property/empty.formatter';
+import { emptyFormatter } from '../array/empty.formatter';
 
 /**
  * Check if value is a string and not empty

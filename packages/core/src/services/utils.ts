@@ -156,6 +156,24 @@ export class Utils {
     return value ? parseFloat(value) : undefined;
   }
 
+  public static parseJsonString(value: string) {
+    let object = null;
+    if (value.startsWith('{') || value.startsWith('[')) {
+      if (Utils.isJson(value)) {
+        object = JSON.parse(value) || null;
+      } else {
+        try {
+          // Transform an invalid json string with single quotation to a valid json string with double quotation
+          object = JSON.parse(value.replace(/'/g, '"')) || null;
+        } catch (error) {
+          console.warn(error);
+        }
+      }
+    }
+
+    return object;
+  }
+
   public static times(n: number, cb: () => void) {
     for (let i = 0; i < n; i++) {
       cb();

@@ -1,11 +1,7 @@
-import { Debug } from '../../vendors/debug.module';
-
-const _debug = Debug('formatter');
-
 export const debugFormatter = {
   name: 'debug',
-  read(toPrint: any) {
-    _debug(toPrint);
+  read(toPrint: any, level: 'log' | 'debug' | 'info' | 'error' | 'warn' = 'debug') {
+    console[level](toPrint);
     return toPrint;
   },
 };

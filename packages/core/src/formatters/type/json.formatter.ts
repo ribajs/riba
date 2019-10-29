@@ -1,5 +1,5 @@
 /**
- * Converts a string into JSON format.
+ * Converts a string into a JSON string.
  * @see https://help.shopify.com/themes/liquid/filters/additional-filters#json
  */
 export const jsonFormatter = {

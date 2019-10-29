@@ -2,6 +2,9 @@
 
 ## Dev
 
+### Core
+- Add support for attributes with (normally invalid) single qoute json strings
+
 ### Shopify
 - New ShopifyLinklistComponent
 - New Shopify snippet templates

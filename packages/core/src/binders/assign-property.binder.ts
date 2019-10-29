@@ -17,7 +17,6 @@ export const assignPropertyBinder: IBinder<IAssign> = {
   name: 'assign-*',
   routine(el: HTMLElement, value: any) {
     const propertyName = Utils.camelCase((this.args[0] as string).trim());
-    console.error('propertyName', propertyName);
     const obj: any = {};
     obj[propertyName] = value;
     return Utils.extend(false, this.view.models, obj);

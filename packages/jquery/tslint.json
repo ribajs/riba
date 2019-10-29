@@ -19,7 +19,7 @@
     "array-type": false,
     "no-angle-bracket-type-assertion": false,
     "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
-    "no-console": [true, "log", "info", "debug"],
+    "no-console": [true, "log", "info"],
     "prefer-for-of": false,
     "object-literal-sort-keys": false
   },

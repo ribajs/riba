@@ -5,7 +5,7 @@
  * @see https://help.shopify.com/en/themes/liquid/filters/string-filters#strip_html
  */
 export const stripHtmlFormatter = {
-  name: 'strip_html',
+  name: 'stripHtml',
   read(html: string) {
     const tmp = document.createElement('DIV');
     tmp.innerHTML = html;

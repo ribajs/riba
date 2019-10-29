@@ -26,6 +26,8 @@ export function parseType(str?: string) {
   }
   if (QUOTED_STR.test(str)) {
     value = str.slice(1, -1);
+    const jsonString = Utils.parseJsonString(value);
+    value = jsonString ? jsonString : value;
   } else if (str === 'true') {
     value = true;
   } else if (str === 'false') {
@@ -38,8 +40,9 @@ export function parseType(str?: string) {
     value = undefined;
   } else if (!isNaN(Number(str))) {
     value = Number(str);
-  } else if (Utils.isJson(str)) {
-    value = JSON.parse(str);
+  } else if (value.startsWith('{') || value.startsWith('[')) {
+    const jsonString = Utils.parseJsonString(value);
+    value = jsonString ? jsonString : value;
   } else {
     type = KEYPATH;
   }

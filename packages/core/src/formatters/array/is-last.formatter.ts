@@ -1,5 +1,5 @@
 /**
- * Returns true if value index it the last index of the array. Returns false if it is not the last index.
+ * Returns true if value index is the last index of the array. Returns false if it is not the last index.
  * ```
  *  <div rv-each-image="product.images" rv-hide="product.images | last %image%"></div>
  * ```

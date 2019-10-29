@@ -1,7 +1,7 @@
 import { Utils } from '../../services/utils';
 
 /**
- * Set default value
+ * Sets a default value if the first value is not set
  * @see https://gist.github.com/der-On/cdafe908847e2b882691
  */
 export const defaultFormatter = {

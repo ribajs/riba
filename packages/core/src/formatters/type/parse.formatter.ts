@@ -8,8 +8,10 @@ export const parseFormatter = {
   name: 'parse',
   read(jsonString: string) {
     if (Utils.isString(jsonString)) {
-      const object = JSON.parse(jsonString);
-      return object;
+      return Utils.parseJsonString(jsonString);
+    } else if (Utils.isObject(jsonString as any) || Utils.isArray(jsonString as any)) {
+      console.warn('[parseFormatter] You do not need to parse the value because since it already been parsed');
+      return jsonString;
     }
     return null;
   },
