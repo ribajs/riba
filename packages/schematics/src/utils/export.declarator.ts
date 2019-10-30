@@ -1,17 +1,20 @@
 import { capitalize, classify } from '@angular-devkit/core/src/utils/strings';
-import { IDeclarationOptions } from '../interfaces/declarations-options';
-import { ElementExportDeclarator } from './element-export.declarator';
+import { Path } from '@angular-devkit/core';
+import { ScriptExportDeclarator } from './script-export.declarator';
+import { StyleExportDeclarator } from './style-export.declarator';
 import { ModuleMetadataDeclarator } from './module-metadata.declarator';
+import { IDeclarationOptions } from '../interfaces';
 
 export class ExportDeclarator {
   constructor(
-    private exports: ElementExportDeclarator = new ElementExportDeclarator(),
+    private scriptExports: ScriptExportDeclarator = new ScriptExportDeclarator(),
+    private styleExports: StyleExportDeclarator = new StyleExportDeclarator(),
     private metadata: ModuleMetadataDeclarator = new ModuleMetadataDeclarator(),
   ) {}
 
-  public declare(content: string, options: IDeclarationOptions): string {
+  public declareScript(content: string, options: IDeclarationOptions, index: Path): string {
     options = this.computeSymbol(options);
-    content = this.exports.declare(content, options);
+    content = this.scriptExports.declare(content, options, index);
     /**
      * TODO Riba
      * A metadata of `"components"` would add the component to the array of `components` in:
@@ -23,6 +26,12 @@ export class ExportDeclarator {
      * but Riba currently not supports the `@Module` decorator
      */
     // content = this.metadata.declare(content, options);
+    return content;
+  }
+
+  public declareStyle(content: string, options: IDeclarationOptions, index: Path): string {
+    options = this.computeSymbol(options);
+    content = this.styleExports.declare(content, options, index);
     return content;
   }
 

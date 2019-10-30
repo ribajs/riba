@@ -34,10 +34,10 @@ export class IndexFinder {
 
   }
 
-  findIn(options: IFindOptions, directory: DirEntry) {
-    const indexFilename: PathFragment | undefined = directory.subfiles.find(filename =>
-      new RegExp(`index\.${options.language}`, 's').test(filename),
-    );
+  private findIn(options: IFindOptions, directory: DirEntry) {
+    const indexFilename: PathFragment | undefined = directory.subfiles.find((filename) => {
+      return new RegExp(`index\.${options.language}`, 's').test(filename);
+    });
     return indexFilename;
   }
 }

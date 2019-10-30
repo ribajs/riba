@@ -8,10 +8,9 @@ export interface IDeclarationOptions {
   path: Path;
   language: string;
   styleLanguage: string;
-  templateEingine: string;
+  templateEngine: string;
   metadata: string;
   type?: string;
-  index: Path;
   symbol?: string;
   staticOptions?: {
     name: string;

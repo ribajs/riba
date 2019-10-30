@@ -32,7 +32,7 @@ export class MetadataManager {
     let matchingProperties = new Array<ObjectLiteralElement>();
     if (properties) {
       matchingProperties = properties
-      .filter(prop => prop.kind === SyntaxKind.PropertyAssignment)
+      .filter((prop) => prop.kind === SyntaxKind.PropertyAssignment)
       .filter((prop) => {
         const name = prop.name;
         if (!name) {
@@ -70,17 +70,17 @@ export class MetadataManager {
   private getDecoratorMetadata(source: SourceFile, identifier: string): Node[] {
     return this.getSourceNodes(source)
       .filter(
-        node =>
+        (node) =>
           node.kind === SyntaxKind.Decorator &&
           (node as Decorator).expression.kind === SyntaxKind.CallExpression,
       )
-      .map(node => (node as Decorator).expression as CallExpression)
+      .map((node) => (node as Decorator).expression as CallExpression)
       .filter(
-        expr =>
+        (expr) =>
           expr.arguments[0] &&
           expr.arguments[0].kind === SyntaxKind.ObjectLiteralExpression,
       )
-      .map(expr => expr.arguments[0] as ObjectLiteralExpression);
+      .map((expr) => expr.arguments[0] as ObjectLiteralExpression);
   }
 
   private getSourceNodes(sourceFile: SourceFile): Node[] {
@@ -155,7 +155,7 @@ export class MetadataManager {
     }
     if (Array.isArray(node)) {
       const nodeArray = (node as {}) as Node[];
-      const symbolsArray = nodeArray.map(childNode =>
+      const symbolsArray = nodeArray.map((childNode) =>
         childNode.getText(source),
       );
       if (symbolsArray.includes(symbol)) {

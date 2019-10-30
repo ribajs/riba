@@ -31,6 +31,11 @@
       "description": "The template engine you want to use for your web component (html/pug).",
       "default": "html"
     },
+    "styleLanguage": {
+      "type": "string",
+      "description": "The style engine you want to use for your web component (scss).",
+      "default": "scss"
+    },
     "skipImport": {
       "default": false,
       "description": "Flag to indicate if an the component declaration should be inserted to the module file"

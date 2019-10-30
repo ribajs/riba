@@ -2,7 +2,7 @@ import { basename, dirname, normalize, Path } from '@angular-devkit/core';
 import { ILocation, IParseOptions } from '../interfaces';
 
 export class NameParser {
-  constructor() {}
+  constructor() {/**/}
 
   public parse(options: IParseOptions): ILocation {
     const nameWithoutPath: string = basename(options.name as Path);

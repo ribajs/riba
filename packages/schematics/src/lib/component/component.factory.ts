@@ -20,7 +20,8 @@ export function main(options: IElementOptions): Rule {
   const rules = chain([
     mergeSourceRoot(options),
     // Adds an export to the index file
-    elementFactory.addExportToIndex(),
+    elementFactory.addScriptExportToIndex(),
+    elementFactory.addStyleImportToIndex(),
     mergeWith(elementFactory.generate()),
   ]);
   return (tree: Tree, context: SchematicContext) => {

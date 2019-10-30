@@ -22,14 +22,16 @@ import { debug as Debug } from 'debug';
 import 'source-map-support/register';
 import { isNullOrUndefined } from 'util';
 import { IDeclarationOptions, IElementOptions, ILocation } from '../interfaces';
-import { DEFAULT_LANGUAGE } from '../lib/defaults';
+import { DEFAULT_LANGUAGE, DEFAULT_STYLE_LANGUAGE } from '../lib/defaults';
 import { ExportDeclarator } from './export.declarator';
 import { IndexFinder } from './index.finder';
 import { NameParser } from './name.parser';
 
 export class ElementFactory {
+
+  public target: IElementOptions;
+
   protected debug = Debug('binder:factory');
-  target: IElementOptions;
 
   constructor(protected options: IElementOptions) {
     this.target = this.getTarget(options);
@@ -50,29 +52,57 @@ export class ElementFactory {
     };
   }
 
-  public addExportToIndex(): Rule {
+  public addScriptExportToIndex(): Rule {
     return (tree: Tree) => {
       if (!!this.target.skipImport) {
         return tree;
       }
-      this.target.index = new IndexFinder(tree).find({
+      const index = new IndexFinder(tree).find({
         name: this.target.name,
         path: this.target.path as Path,
         language: this.target.language,
         flat: this.target.flat,
       });
-      if (!this.target.index) {
+      if (!index) {
         return tree;
       }
-      const contentBugger = tree.read(this.target.index);
+      const contentBugger = tree.read(index);
       if (!contentBugger) {
         return tree;
       }
       const content = contentBugger.toString();
       const declarator: ExportDeclarator = new ExportDeclarator();
       tree.overwrite(
-        this.target.index,
-        declarator.declare(content, this.target as IDeclarationOptions),
+        index,
+        declarator.declareScript(content, this.target as IDeclarationOptions, index),
+      );
+      return tree;
+    };
+  }
+
+  public addStyleImportToIndex(): Rule {
+    return (tree: Tree) => {
+      if (!!this.target.skipImport) {
+        return tree;
+      }
+      const index = new IndexFinder(tree).find({
+        name: this.target.name,
+        path: this.target.path as Path,
+        language: this.target.styleLanguage,
+        flat: this.target.flat,
+      });
+      if (!index) {
+        return tree;
+      }
+      const contentBugger = tree.read(index);
+      if (!contentBugger) {
+        return tree;
+      }
+      const content = contentBugger.toString();
+      const declarator: ExportDeclarator = new ExportDeclarator();
+      tree.overwrite(
+        index,
+        declarator.declareStyle(content, this.target as IDeclarationOptions, index),
       );
       return tree;
     };
@@ -90,6 +120,7 @@ export class ElementFactory {
     target.name = strings.dasherize(location.name);
     target.path = strings.dasherize(location.path);
     target.language = target.language !== undefined ? target.language : DEFAULT_LANGUAGE;
+    target.styleLanguage = target.styleLanguage !== undefined ? target.styleLanguage : DEFAULT_STYLE_LANGUAGE;
 
     target.path = target.flat ? target.path : join(target.path as Path, target.name);
 
@@ -110,6 +141,11 @@ export class ElementFactory {
           return false;
         }
         if (options.templateEngine === 'pug' && path.endsWith('.html')) {
+          return false;
+        }
+      }
+      if (options.styleLanguage) {
+        if (options.styleLanguage === 'scss' && path.endsWith('.css')) {
           return false;
         }
       }

@@ -10,10 +10,6 @@ export interface IElementOptions {
    */
   path?: string;
   /**
-   * The path to insert the service declaration.
-   */
-  index?: Path | null;
-  /**
    * Directive to insert declaration in module.
    */
   skipImport?: boolean;
@@ -45,4 +41,8 @@ export interface IElementOptions {
    * Which template engine the component should use.
    */
   templateEngine?: 'html' | 'pug';
+  /**
+   * Which style engine the component should use.
+   */
+  styleLanguage?: 'scss';
 }
