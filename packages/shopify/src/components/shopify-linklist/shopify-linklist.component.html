@@ -11,7 +11,7 @@
       <span>{link.title}</span>
     </a>
 
-    <div rv-if="link.collapseable" class="nav-link nav-item-level-0 cursor-pointer dropdown-toggle" rv-on-click="toggle | args link">
+    <div rv-if="link.collapseable" class="nav-link cursor-pointer dropdown-toggle" rv-on-click="toggle | args link">
       <span>{link.title}</span>
     </div>
 
@@ -28,11 +28,11 @@
         <span>{sublink.title}</span>
       </a>
 
-      <div rv-if="sublink.collapseable" class="nav-link nav-item-level-1 cursor-pointer dropdown-toggle" rv-on-click="toggle | args sublink">
+      <div rv-if="sublink.collapseable" class="nav-link cursor-pointer dropdown-toggle" rv-on-click="toggle | args sublink">
         <span>{sublink.title}</span>
       </div>
 
-      <div class="nav-item nav-item-level-2" rv-each-subsublink="sublink.links">
+      <div class="nav-item nav-item-level-2" rv-hide="sublink.collapsed" rv-each-subsublink="sublink.links">
         <a
           class="nav-link"
           rv-add-class="subsublink.level | prepend 'level-'"

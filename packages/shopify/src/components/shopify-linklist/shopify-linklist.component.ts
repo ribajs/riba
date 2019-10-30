@@ -110,22 +110,14 @@ export class ShopifyLinklistComponent extends Component {
   public showAll() {
     this.debug('showAll');
     if (this.scope.linklist) {
-      for (const link of this.scope.linklist.links) {
-        if (link.collapseable) {
-          link.collapsed = true;
-        }
-      }
+      this.showAllByLinks(this.scope.linklist.links);
     }
   }
 
   public collapseAll() {
     this.debug('collapseAll');
     if (this.scope.linklist) {
-      for (const link of this.scope.linklist.links) {
-        if (link.collapseable) {
-          link.collapsed = true;
-        }
-      }
+      this.collapseAllByLinks(this.scope.linklist.links);
     }
   }
 
@@ -139,6 +131,13 @@ export class ShopifyLinklistComponent extends Component {
           if (sublink.url === url) {
             this.show(link);
             break;
+          }
+          for (const subsublink of sublink.links) {
+            if (subsublink.url === url) {
+              this.show(link);
+              this.show(sublink);
+              break;
+            }
           }
         }
       }
@@ -169,6 +168,32 @@ export class ShopifyLinklistComponent extends Component {
       }
 
       this.scope.linklist = newValue;
+    }
+  }
+
+  protected collapseAllByLinks(links: LinklistLink[]) {
+    if (this.scope.linklist) {
+      for (const link of links) {
+        if (link.collapseable) {
+          link.collapsed = true;
+        }
+        if (link.links) {
+          this.collapseAllByLinks(link.links);
+        }
+      }
+    }
+  }
+
+  protected showAllByLinks(links: LinklistLink[]) {
+    if (this.scope.linklist) {
+      for (const link of links) {
+        if (link.collapseable) {
+          link.collapsed = false;
+        }
+        if (link.links) {
+          this.collapseAllByLinks(link.links);
+        }
+      }
     }
   }
 
