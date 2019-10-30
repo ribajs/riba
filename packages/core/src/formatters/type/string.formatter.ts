@@ -1,7 +1,7 @@
 import { Utils } from '../../services/utils';
 
 /**
- * Parse a value to string
+ * Parses a value to string
  * @param value The value you want to parse to string
  * @param def Default value if value is undefined
  */

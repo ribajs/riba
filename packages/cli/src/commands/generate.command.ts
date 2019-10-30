@@ -19,6 +19,7 @@ export class GenerateCommand extends AbstractCommand {
       .option('--flat', 'Enforce flat structure of generated element')
       .option('--no-spec', 'Disable spec files generation')
       .option('-t, --template-engine [templateEngine]', 'Which template engine to use')
+      .option('-s, --style-language [styleLanguage]', 'Which style language / engine to use')
       .option('-c, --collection [collectionName]', 'Specify the schematic collection which should be used.')
       .option('--source-root [sourceRoot]', 'Specify the root directory of your source files')
       .action(async (schematicOrAlias: string, name: string, path: string, command: Command) => {
@@ -30,6 +31,7 @@ export class GenerateCommand extends AbstractCommand {
         options.push({ name: 'flat', value: command.flat });
         options.push({ name: 'spec', value: command.spec });
         options.push({ name: 'templateEngine', value: command.templateEngine });
+        options.push({ name: 'styleLanguage', value: command.styleLanguage });
         options.push({ name: 'collection', value: command.collection });
         options.push({ name: 'sourceRoot', value: command.sourceRoot });
 
