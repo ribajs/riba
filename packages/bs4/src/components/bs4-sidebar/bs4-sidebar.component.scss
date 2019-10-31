@@ -1,0 +1,26 @@
+bs4-sidebar {
+  display: block;
+  height: calc(100vh);
+  position: fixed;
+  width: 250px;
+  top: 0;
+  bottom: 0;
+  // left: 0;
+  z-index: $zindex-fixed + 1;
+  transition: all .2s cubic-bezier(.7,0,.3,1);
+  @extend .bg-dark;
+  color: $white;
+
+  &[position="right"] {
+    right: 0;
+    // Changeable values
+    transform: translateX(100%);
+  }
+
+  &:not([position="right"]) {
+    left: 0;
+    // Changeable values
+    transform: translateX(-100%);
+  }
+
+}

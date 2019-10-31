@@ -33,7 +33,7 @@ export class Bs4ScrollspyComponent extends Bs4ContentsComponent {
   protected wrapperElement?: Element;
 
   static get observedAttributes() {
-    return ['headers-start', 'headers-depth', 'header-parent-selector', 'offset', 'offset-bottom', 'scroll-offset'];
+    return ['headers-start', 'headers-depth', 'find-header-id-depth', 'header-parent-selector', 'offset', 'offset-bottom', 'scroll-offset'];
   }
 
   protected debug = Debug('component:' + Bs4ScrollspyComponent.tagName);
@@ -41,6 +41,7 @@ export class Bs4ScrollspyComponent extends Bs4ContentsComponent {
   protected scope: Scope = {
     headersDepth: 1,
     headersStart: 2,
+    findHeaderIdDepth: 1,
     headerParentSelector: undefined,
     offset: 0,
     offsetBottom: 0,

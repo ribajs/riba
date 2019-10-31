@@ -17,10 +17,10 @@ class EventDispatcher {
 
   public static instances: IEventDispatcherInstances = {};
 
-  public static getInstance(id: string) {
-    const result = EventDispatcher.instances[id];
+  public static getInstance(namespace: string) {
+    const result = EventDispatcher.instances[namespace];
     if (!result) {
-      throw new Error(`No EventDispatcher instance with id ${id} found!`);
+      throw new Error(`No EventDispatcher instance with namespace ${namespace} found!`);
     }
     return result;
   }
@@ -28,30 +28,26 @@ class EventDispatcher {
   /**
    * Object that keeps all the events
    *
-   * @memberOf Barba.Dispatcher
    * @readOnly
    * @type {object}
    */
   private events: IEvents = {};
 
-  private id: string;
+  private namespace: string;
 
   /**
    * Creates an singleton instance of Dispatcher.
    * @memberof Dispatcher
    */
-  constructor(id?: string) {
-    if (!id) {
-      id = 'main';
-    }
-    this.id = id;
+  constructor(namespace: string = 'main') {
+    this.namespace = namespace;
 
-    if (EventDispatcher.instances[this.id]) {
-      return EventDispatcher.instances[this.id];
+    if (EventDispatcher.instances[this.namespace]) {
+      return EventDispatcher.instances[this.namespace];
     }
 
-    EventDispatcher.instances[this.id] = this;
-    return EventDispatcher.instances[this.id];
+    EventDispatcher.instances[this.namespace] = this;
+    return EventDispatcher.instances[this.namespace];
   }
 
   /**

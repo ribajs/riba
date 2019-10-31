@@ -217,8 +217,9 @@ export abstract class Component extends FakeHTMLElement {
       if (value >= Number.MAX_SAFE_INTEGER) {
         value = attr;
       }
-    } else if (Utils.isJson(attr)) {
-      value = JSON.parse(attr as any);
+    } else {
+      const jsonString = Utils.parseJsonString(value);
+      value = jsonString ? jsonString : value;
     }
     return value;
   }
@@ -346,8 +347,8 @@ export abstract class Component extends FakeHTMLElement {
    * @param newValue
    * @param namespace
    */
-  protected parsedAttributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
-    this.debug('parsedAttributeChangedCallback called', attributeName, oldValue, newValue, namespace);
+  protected parsedAttributeChangedCallback(attributeNames: string | string[], oldValue: any, newValue: any, namespace: string | null) {
+    this.debug('parsedAttributeChangedCallback called', attributeNames, oldValue, newValue, namespace);
   }
 
   /**
@@ -424,7 +425,7 @@ export abstract class Component extends FakeHTMLElement {
       return this.view;
     })
     .then((view) => {
-      return this.afterBind();
+      return this.afterBind(view);
     })
     .catch((error) => {
       console.error(error);
@@ -450,7 +451,7 @@ export abstract class Component extends FakeHTMLElement {
     this.debug('beforeBind', this.bound);
   }
 
-  protected async afterBind(): Promise<any> {
+  protected async afterBind(view: View): Promise<any> {
     this.debug('afterBind', this.bound);
   }
 

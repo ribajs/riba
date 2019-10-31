@@ -22,6 +22,10 @@ export interface Scope {
    */
   headersDepth: number;
   /**
+   * Depth in how many parents elements should be searched for an id for each found header element (default `1`)
+   */
+  findHeaderIdDepth: number;
+  /**
    * Selector to search for headers insite of the element
    */
   headerParentSelector?: string;
@@ -33,6 +37,9 @@ export interface Scope {
    * The element to scroll (default `window`)
    */
   scrollElement?: string;
+  /**
+   * Array of found headers / anchors
+   */
   anchors: Anchor[];
 }
 
@@ -45,7 +52,7 @@ export class Bs4ContentsComponent extends Component {
   protected wrapperElement?: Element;
 
   static get observedAttributes() {
-    return ['headers-start', 'headers-depth', 'header-parent-selector', 'scroll-offset', 'scroll-element'];
+    return ['headers-start', 'headers-depth', 'find-header-id-depth', 'header-parent-selector', 'scroll-offset', 'scroll-element'];
   }
 
   protected debug = Debug('component:' + Bs4ContentsComponent.tagName);
@@ -53,6 +60,7 @@ export class Bs4ContentsComponent extends Component {
   protected scope: Scope = {
     headersDepth: 1,
     headersStart: 2,
+    findHeaderIdDepth: 1,
     headerParentSelector: undefined,
     scrollOffset: 0,
     anchors: [],
@@ -71,11 +79,11 @@ export class Bs4ContentsComponent extends Component {
     });
   }
 
-  protected getIdFromElementOrParent(element: HTMLElement, depth = 0): string | null {
+  protected getIdFromElementOrParent(element: HTMLElement, depth = 1): string | null {
     if (element.id) {
       return element.id;
     }
-    if (depth <= 1) {
+    if (depth <= this.scope.findHeaderIdDepth) {
       if (element.parentElement) {
         return this.getIdFromElementOrParent(element.parentElement, ++depth);
       }

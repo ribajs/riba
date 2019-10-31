@@ -9,6 +9,10 @@
 - New ShopifyLinklistComponent
 - New Shopify snippet templates
 
+### BS4
+- New Bs4SidebarComponent
+- New Bs4ToggleButtonComponent
+
 ## 1.3.0
 
 ### Core

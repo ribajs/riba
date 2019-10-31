@@ -156,6 +156,10 @@ export class Utils {
     return value ? parseFloat(value) : undefined;
   }
 
+  /**
+   * Parses a json string with the special feature that json strings
+   * can also havesingle quotations for defining the properties and values
+   */
   public static parseJsonString(value: string) {
     let object = null;
     if (value.startsWith('{') || value.startsWith('[')) {
