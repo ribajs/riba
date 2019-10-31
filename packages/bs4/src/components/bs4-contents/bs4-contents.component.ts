@@ -128,7 +128,7 @@ export class Bs4ContentsComponent extends Component {
   }
 
   protected async afterBind() {
-    this.debug('afterBind', this.scope);
+    super.afterBind();
   }
 
   protected requiredAttributes() {

@@ -425,7 +425,7 @@ export abstract class Component extends FakeHTMLElement {
       return this.view;
     })
     .then((view) => {
-      return this.afterBind(view);
+      return this.afterBind();
     })
     .catch((error) => {
       console.error(error);
@@ -451,7 +451,7 @@ export abstract class Component extends FakeHTMLElement {
     this.debug('beforeBind', this.bound);
   }
 
-  protected async afterBind(view: View): Promise<any> {
+  protected async afterBind(): Promise<any> {
     this.debug('afterBind', this.bound);
   }
 
