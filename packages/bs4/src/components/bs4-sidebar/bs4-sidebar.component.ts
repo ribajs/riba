@@ -164,7 +164,6 @@ export class Bs4SidebarComponent extends Component {
   }
 
   protected setStateByEnviroment() {
-    console.error('this.scope.forceHideOnLocationPathnames', this.scope.forceHideOnLocationPathnames, window.location.pathname, this.scope.forceHideOnLocationPathnames.includes(window.location.pathname));
     if (this.scope.forceHideOnLocationPathnames.includes(window.location.pathname)) {
       return this.hide();
     }

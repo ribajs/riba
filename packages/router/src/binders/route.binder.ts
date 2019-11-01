@@ -1,5 +1,5 @@
 import { Pjax, Prefetch } from '../services';
-import { Binding, IBinder, EventDispatcher, JQuery, Debug, Utils, IBindable } from '@ribajs/core';
+import { Binding, IBinder, EventDispatcher, Debug, Utils } from '@ribajs/core';
 
 export interface IRouteOptions {
   url: string;
@@ -12,7 +12,6 @@ export interface ICustomData {
   prefetch: Prefetch;
   dispatcher?: EventDispatcher;
   options: IRouteOptions;
-  $el?: JQuery<HTMLUnknownElement>;
   checkURL(this: Binding, urlToCheck?: string): boolean;
   onClick(this: Binding, event: JQuery.Event): void;
   onNewPageReady(this: Binding): void;
@@ -23,7 +22,6 @@ const debug = Debug('binders:route');
 
 /**
  * Open link with pajax if the route is not the active route
- * Sets also the element active if his url is the current url
  */
 export const routeBinder: IBinder<string> = {
   name: 'route',
@@ -36,7 +34,6 @@ export const routeBinder: IBinder<string> = {
         removeAfterActivation: false,
         newTab: false,
       } as IRouteOptions,
-      $el: JQuery(el),
       checkURL(this: Binding, urlToCheck?: string) {
         if (urlToCheck && Utils.onRoute(urlToCheck)) {
           return true;
@@ -55,15 +52,12 @@ export const routeBinder: IBinder<string> = {
             pjax.goTo(this.customData.options.url, this.customData.options.newTab);
           }
         }
-        if (this.customData.options.removeAfterActivation && this.customData.$el) {
+        if (this.customData.options.removeAfterActivation && this.el && this.el.parentNode) {
           // this.unbind(); TODO?
-          this.customData.$el.remove();
+          this.el.parentNode.removeChild(this.el);
         }
       },
       onNewPageReady(this: Binding) {
-        if (this.customData.$el) {
-          this.customData.$el.trigger('new-page-ready');
-        }
         this.customData.checkURL.call(this, this.customData.options.url);
       },
       onLinkEnter(this: Binding, event: Event) {
@@ -83,21 +77,18 @@ export const routeBinder: IBinder<string> = {
     this.customData.dispatcher = new EventDispatcher(this.customData.options.viewId);
 
     this.customData.options.newTab = false;
-    if (!this.customData.$el) {
-      throw new Error('$el is not set');
-    }
-    const isAnkerHTMLElement = this.customData.$el.prop('tagName') === 'A';
+    const isAnkerHTMLElement = el.tagName === 'A';
 
     debug('getBinder', el, this.customData.options.url);
 
     if (!this.customData.options.url && isAnkerHTMLElement) {
-      const url = this.customData.$el.attr('href');
+      const url = el.getAttribute('href');
       if (url) {
         this.customData.options.url = url;
       }
     }
 
-    if (this.customData.$el.attr('target') === '_blank') {
+    if (el.getAttribute('target') === '_blank') {
       this.customData.options.newTab = true;
     }
 
@@ -123,13 +114,13 @@ export const routeBinder: IBinder<string> = {
     }
 
     // set href if not set
-    if (isAnkerHTMLElement && !this.customData.$el.attr('href') && this.customData.options.url) {
-      this.customData.$el.attr('href', this.customData.options.url);
+    if (isAnkerHTMLElement && !el.getAttribute('href') && this.customData.options.url) {
+      el.setAttribute('href', this.customData.options.url);
     }
 
     this.customData.dispatcher.on('newPageReady', this.customData.onNewPageReady.bind(this));
 
-    this.customData.$el.off('click').on('click', this.customData.onClick.bind(this));
+    el.addEventListener('click', this.customData.onClick.bind(this));
 
     if (!this.customData.options.newTab && !Utils.onRoute(this.customData.options.url)) {
       el.addEventListener('mouseover', this.customData.onLinkEnter.bind(this));
@@ -141,8 +132,6 @@ export const routeBinder: IBinder<string> = {
   unbind(this: Binding, el: HTMLUnknownElement) {
     el.removeEventListener('mouseover', this.customData.onLinkEnter);
     el.removeEventListener('touchstart', this.customData.onLinkEnter);
-    this.customData.$el.off('click', this.customData.onClick);
-    this.customData.dispatcher.off('newPageReady', this.customData.onNewPageReady);
-    // console.warn('routeClassStarBinder routine', el);
+    el.removeEventListener('click', this.customData.onClick);
   },
 };

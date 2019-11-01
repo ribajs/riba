@@ -5,7 +5,7 @@ import { IState } from '../interfaces';
 const debug = Debug('binders:view');
 
 /**
- * The main wrapper for the riba view
+ * The main wrapper for the riba router
  * TODO convert this to a component
  *
  * ```
@@ -121,7 +121,6 @@ export const viewBinder: IBinder<string> = {
 
     this.customData.options.viewId = this.customData.options.viewId || $el.attr('id') || 'main';
     this.customData.options.action = this.customData.options.action || 'replace'; // replace / append
-    this.customData.options.parseTitle = Utils.isBoolean(this.customData.options.parseTitle) ? this.customData.options.parseTitle : false;
     this.customData.options.containerSelector = this.customData.options.containerSelector || '[data-namespace]';
 
     if (this.customData.options.viewId === 'main') {
@@ -130,15 +129,19 @@ export const viewBinder: IBinder<string> = {
       this.customData.options.listenPopstate = Utils.isBoolean(this.customData.options.listenPopstate) ? this.customData.options.listenPopstate : true;
       this.customData.options.scrollToAnchorHash = Utils.isBoolean(this.customData.options.scrollToAnchorHash) ? this.customData.options.scrollToAnchorHash : true;
       this.customData.options.datasetToModel = Utils.isBoolean(this.customData.options.datasetToModel) ? this.customData.options.datasetToModel : true;
+      this.customData.options.parseTitle = Utils.isBoolean(this.customData.options.parseTitle) ? this.customData.options.parseTitle : true;
+      this.customData.options.changeBrowserUrl = Utils.isBoolean(this.customData.options.changeBrowserUrl) ? this.customData.options.changeBrowserUrl : true;
     } else {
       this.customData.options.scrollToTop = Utils.isBoolean(this.customData.options.scrollToTop) ? this.customData.options.scrollToTop : false;
       this.customData.options.listenAllLinks = Utils.isBoolean(this.customData.options.listenAllLinks) ? this.customData.options.listenAllLinks : false;
       this.customData.options.listenPopstate = Utils.isBoolean(this.customData.options.listenPopstate) ? this.customData.options.listenPopstate : false;
       this.customData.options.scrollToAnchorHash = Utils.isBoolean(this.customData.options.scrollToAnchorHash) ? this.customData.options.scrollToAnchorHash : false;
       this.customData.options.datasetToModel = Utils.isBoolean(this.customData.options.datasetToModel) ? this.customData.options.datasetToModel : false;
+      this.customData.options.parseTitle = Utils.isBoolean(this.customData.options.parseTitle) ? this.customData.options.parseTitle : false;
+      this.customData.options.changeBrowserUrl = Utils.isBoolean(this.customData.options.changeBrowserUrl) ? this.customData.options.changeBrowserUrl : false;
     }
 
-    this.customData.options.autoprefetchLinks = this.customData.options.listenAllLinks;
+    this.customData.options.autoprefetchLinks = Utils.isBoolean(this.customData.options.autoprefetchLinks) ? this.customData.options.autoprefetchLinks : this.customData.options.listenAllLinks;
     this.customData.options.transition = this.customData.options.transition || new HideShowTransition(this.customData.options.action, this.customData.options.scrollToTop);
 
     this.customData.dispatcher = new EventDispatcher(this.customData.options.viewId);
@@ -152,7 +155,9 @@ export const viewBinder: IBinder<string> = {
     this.customData.dispatcher.on('newPageReady', this.customData.onPageReady);
     this.customData.dispatcher.on('transitionCompleted', this.customData.onTransitionCompleted);
 
-    const pjax = new Pjax(this.customData.options.viewId, this.customData.$wrapper, this.customData.options.containerSelector, this.customData.options.listenAllLinks, this.customData.options.listenPopstate, this.customData.options.transition, this.customData.options.parseTitle);
+    console.error('[view binder] this.customData.options.changeBrowserUrl', this.customData.options.changeBrowserUrl);
+
+    const pjax = new Pjax(this.customData.options.viewId, this.customData.$wrapper, this.customData.options.containerSelector, this.customData.options.listenAllLinks, this.customData.options.listenPopstate, this.customData.options.transition, this.customData.options.parseTitle, this.customData.options.changeBrowserUrl);
     this.customData.prefetch.init(this.customData.options.autoprefetchLinks);
     pjax.start();
   },

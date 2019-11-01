@@ -193,7 +193,9 @@ class Pjax {
 
   private listenPopstate: boolean;
 
-  private parseTitle: boolean = false;
+  private parseTitle: boolean;
+
+  private changeBrowserUrl: boolean;
 
   private dispatcher: EventDispatcher;
 
@@ -206,8 +208,10 @@ class Pjax {
   /**
    * Creates an singleton instance of Pjax.
    */
-  constructor(id: string, $wrapper?: JQuery<HTMLElement>, containerSelector = '[data-namespace]', listenAllLinks: boolean = false, listenPopstate: boolean = true,  transition: ITransition = new HideShowTransition(), parseTitle: boolean = false) {
+  constructor(id: string, $wrapper?: JQuery<HTMLElement>, containerSelector = '[data-namespace]', listenAllLinks: boolean = false, listenPopstate: boolean = true, transition: ITransition = new HideShowTransition(), parseTitle: boolean = true, changeBrowserUrl: boolean = true) {
     Pjax.DEBUG('constructor', id);
+
+    console.error('[Pjax] changeBrowserUrl', changeBrowserUrl);
 
     this.viewId = id;
 
@@ -217,6 +221,8 @@ class Pjax {
 
     this.listenAllLinks = listenAllLinks;
     this.listenPopstate = listenPopstate;
+    this.parseTitle = parseTitle;
+    this.changeBrowserUrl = changeBrowserUrl;
 
     if (Pjax.instances[this.viewId]) {
       instance = Pjax.instances[this.viewId];
@@ -228,7 +234,8 @@ class Pjax {
 
     instance.listenAllLinks = Utils.isBoolean(instance.listenAllLinks) ? instance.listenAllLinks : listenAllLinks;
     instance.listenPopstate = Utils.isBoolean(instance.listenPopstate) ? instance.listenPopstate : listenPopstate;
-    instance.parseTitle = instance.parseTitle || parseTitle;
+    instance.parseTitle = Utils.isBoolean(instance.parseTitle) ? instance.parseTitle : parseTitle;
+    instance.changeBrowserUrl = Utils.isBoolean(instance.changeBrowserUrl) ? instance.changeBrowserUrl : changeBrowserUrl;
 
     if (instance.$wrapper) {
       instance.dom = instance.dom || new Dom(instance.$wrapper, containerSelector, this.parseTitle);
@@ -281,8 +288,10 @@ class Pjax {
     }
 
     if (url.indexOf('http') !== 0) {
-      window.history.pushState(null, '', url);
-      return this.onStateChange();
+      if (this.changeBrowserUrl) {
+        window.history.pushState(null, '', url);
+      }
+      return this.onStateChange(url);
     }
 
     // fallback
@@ -422,14 +431,13 @@ class Pjax {
   * @memberOf Barba.Pjax
   * @protected
   */
- protected onStateChange() {
-    const newUrl = this.getCurrentUrl();
+ protected onStateChange(newUrl: string = this.getCurrentUrl()) {
 
     if (this.transitionProgress) {
       this.forceGoTo(newUrl);
     }
 
-    if (this.history.currentStatus().url === newUrl) {
+    if (this.changeBrowserUrl && this.history.currentStatus().url === newUrl) {
       return false;
     }
 
