@@ -72,7 +72,7 @@ export class Bs4SidebarComponent extends Component {
     this.debug('constructor', this);
     this.init(Bs4SidebarComponent.observedAttributes);
     this.style = window.getComputedStyle(this.el);
-    window.addEventListener('resize', this.onResize.bind(this), false);
+    window.addEventListener('resize', this.onEnviromentChanges.bind(this), false);
   }
 
   public setState(state: State) {
@@ -120,7 +120,7 @@ export class Bs4SidebarComponent extends Component {
   }
 
   protected initRouterEventDispatcher() {
-    this.routerEvents.on('newPageReady', this.setStateByEnviroment.bind(this));
+    this.routerEvents.on('newPageReady', this.onEnviromentChanges.bind(this));
   }
 
   protected onHidden() {
@@ -164,6 +164,7 @@ export class Bs4SidebarComponent extends Component {
   }
 
   protected setStateByEnviroment() {
+    console.error('this.scope.forceHideOnLocationPathnames', this.scope.forceHideOnLocationPathnames, window.location.pathname, this.scope.forceHideOnLocationPathnames.includes(window.location.pathname));
     if (this.scope.forceHideOnLocationPathnames.includes(window.location.pathname)) {
       return this.hide();
     }
@@ -179,7 +180,10 @@ export class Bs4SidebarComponent extends Component {
     }
   }
 
-  protected onResize() {
+  /**
+   * If vieport size changes, location url changes or something else
+   */
+  protected onEnviromentChanges() {
     this.setStateByEnviroment();
   }
 
@@ -251,12 +255,13 @@ export class Bs4SidebarComponent extends Component {
 
   protected async beforeBind() {
     this.debug('beforeBind');
-    this.setStateByEnviroment();
+    this.initRouterEventDispatcher();
+    this.onEnviromentChanges();
   }
 
   protected async afterBind() {
     this.debug('afterBind', this.scope);
-    this.initRouterEventDispatcher();
+    this.onEnviromentChanges();
   }
 
   protected requiredAttributes() {
