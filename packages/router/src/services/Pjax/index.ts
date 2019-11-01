@@ -291,7 +291,7 @@ class Pjax {
       if (this.changeBrowserUrl) {
         window.history.pushState(null, '', url);
       }
-      return this.onStateChange(url);
+      return this.onStateChange(undefined, url);
     }
 
     // fallback
@@ -431,7 +431,7 @@ class Pjax {
   * @memberOf Barba.Pjax
   * @protected
   */
- protected onStateChange(newUrl: string = this.getCurrentUrl()) {
+ protected onStateChange(event?: Event, newUrl: string = this.getCurrentUrl()) {
 
     if (this.transitionProgress) {
       this.forceGoTo(newUrl);

@@ -1,7 +1,7 @@
 {
   "name": "ribajs",
   "description": "Declarative data binding + templating solution.",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [],
   "private": true,
@@ -38,7 +38,7 @@
     "packages:build": "node tools/cli.js build"
   },
   "devDependencies": {
-    "commander": "^3.0.2",
+    "commander": "^4.0.0",
     "chalk": "^2.4.2"
   },
   "dependencies": {}
