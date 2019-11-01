@@ -211,8 +211,6 @@ class Pjax {
   constructor(id: string, $wrapper?: JQuery<HTMLElement>, containerSelector = '[data-namespace]', listenAllLinks: boolean = false, listenPopstate: boolean = true, transition: ITransition = new HideShowTransition(), parseTitle: boolean = true, changeBrowserUrl: boolean = true) {
     Pjax.DEBUG('constructor', id);
 
-    console.error('[Pjax] changeBrowserUrl', changeBrowserUrl);
-
     this.viewId = id;
 
     let instance = this as Pjax;

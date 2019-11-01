@@ -155,8 +155,6 @@ export const viewBinder: IBinder<string> = {
     this.customData.dispatcher.on('newPageReady', this.customData.onPageReady);
     this.customData.dispatcher.on('transitionCompleted', this.customData.onTransitionCompleted);
 
-    console.error('[view binder] this.customData.options.changeBrowserUrl', this.customData.options.changeBrowserUrl);
-
     const pjax = new Pjax(this.customData.options.viewId, this.customData.$wrapper, this.customData.options.containerSelector, this.customData.options.listenAllLinks, this.customData.options.listenPopstate, this.customData.options.transition, this.customData.options.parseTitle, this.customData.options.changeBrowserUrl);
     this.customData.prefetch.init(this.customData.options.autoprefetchLinks);
     pjax.start();
