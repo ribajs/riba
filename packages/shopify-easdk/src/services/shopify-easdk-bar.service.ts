@@ -177,7 +177,7 @@ export class BarWrapperService extends WrapperService implements IBarWrapper {
    * @memberof BarWrapperService
    */
   public autoLoading(forceFallback: boolean = false) {
-    this.route.on('newPageReady', (viewId: string, currentStatus: IState, prevStatus: IState, $container: JQuery<HTMLElement>, newPageRawHTML: string, dataset: any, isFirstPageLoad: boolean) => {
+    this.route.on('newPageReady', (viewId: string, currentStatus: IState, prevStatus: IState, container: HTMLElement, newPageRawHTML: string, dataset: any, isFirstPageLoad: boolean) => {
       this.loadingOff();
     });
 
@@ -201,7 +201,7 @@ export class BarWrapperService extends WrapperService implements IBarWrapper {
    * Automatically set the title on route change, needs the title property in rbia route dataset
    */
   public autoTitle(formatter?: (title: string) => Promise<string>) {
-    this.route.on('newPageReady', (viewId: string, currentStatus: IState, prevStatus: IState, $container: JQuery<HTMLElement>, newPageRawHTML: string, dataset: any, isFirstPageLoad: boolean) => {
+    this.route.on('newPageReady', (viewId: string, currentStatus: IState, prevStatus: IState, container: HTMLElement, newPageRawHTML: string, dataset: any, isFirstPageLoad: boolean) => {
       if (formatter) {
         formatter(dataset.title)
         .then((title) => {
@@ -232,7 +232,7 @@ export class BarWrapperService extends WrapperService implements IBarWrapper {
    * Automatically set the icon on route change, needs the icon property in rbia route dataset
    */
   public autoIcon(forceFallback: boolean = false) {
-    this.route.on('newPageReady', (viewId: string, currentStatus: IState, prevStatus: IState, $container: JQuery<HTMLElement>, newPageRawHTML: string, dataset: any, isFirstPageLoad: boolean) => {
+    this.route.on('newPageReady', (viewId: string, currentStatus: IState, prevStatus: IState, container: HTMLElement, newPageRawHTML: string, dataset: any, isFirstPageLoad: boolean) => {
       this.setTitle(dataset.icon);
     });
   }

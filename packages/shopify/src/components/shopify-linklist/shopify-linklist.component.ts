@@ -158,12 +158,10 @@ export class ShopifyLinklistComponent extends Component {
     }
 
     if (name === 'linklist') {
-      console.error('linklist newValue', newValue);
       if (typeof(newValue) === 'object') {
         // if object is in form of "main-menu": {...}
         if (Object.keys(newValue).length === 1) {
           newValue = newValue[Object.keys(newValue)[0]];
-          console.error('newValue', newValue);
         }
       }
 
@@ -197,14 +195,14 @@ export class ShopifyLinklistComponent extends Component {
     }
   }
 
-  protected onNewPageReady(viewId: string, currentStatus: IState, prevStatus: IState, $container: JQuery<HTMLElement>, newPageRawHTML: string, dataset: any, isFirstPageLoad: boolean) {
-    const url = new URL(currentStatus.url);
-    this.debug('onNewPageReady', url.pathname);
+  protected onNewPageReady(viewId: string, currentStatus: IState, prevStatus: IState, container: HTMLElement, newPageRawHTML: string, dataset: any, isFirstPageLoad: boolean) {
+    const url = currentStatus.url;
+    this.debug('[ShopifyLinklistComponent] onNewPageReady', url);
     if (this.scope.collapseOnNewPage) {
       this.collapseAll();
     }
     if (this.scope.showOnActiveChild) {
-      this.showByChildUrl(url.pathname);
+      this.showByChildUrl(url);
     }
   }
 

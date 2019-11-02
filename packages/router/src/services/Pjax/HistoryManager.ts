@@ -1,9 +1,6 @@
 import { IState } from '../../interfaces/state';
 /**
  * HistoryManager helps to keep track of the navigation
- *
- * @namespace Barba.HistoryManager
- * @type {object}
  */
 export class HistoryManager {
 
@@ -11,12 +8,8 @@ export class HistoryManager {
 
   /**
    * Keep track of the status in historic order
-   *
-   * @memberOf Barba.HistoryManager
-   * @readOnly
-   * @type {Array}
    */
-  private history: IState[] = new Array();
+  private readonly history: IState[] = new Array();
 
   constructor() {
     if (HistoryManager.instance) {
@@ -29,9 +22,6 @@ export class HistoryManager {
 
   /**
    * Return information about the current status
-   *
-   * @memberOf Barba.HistoryManager
-   * @return {IState}
    */
   public currentStatus(): IState {
     return this.history[this.history.length - 1];
@@ -39,9 +29,6 @@ export class HistoryManager {
 
   /**
    * Return information about the previous status
-   *
-   * @memberOf Barba.HistoryManager
-   * @return {IState}
    */
   public prevStatus(): IState | null {
     const history = this.history;
@@ -55,17 +42,8 @@ export class HistoryManager {
 
   /**
    * Add a new set of url and namespace
-   *
-   * @memberOf Barba.HistoryManager
-   * @param {String} url
-   * @param {String} namespace
    */
-  public add(url: string, namespace?: string) {
-
-    if (!namespace) {
-      namespace = undefined;
-    }
-
+  public add(url: string, namespace: string | null = null) {
     this.history.push({
       namespace,
       url,

@@ -1,19 +1,29 @@
 # Changelog
 
+## Dev
+
+### Router
+
+- Removed jQuery from Router Module
+
 ## 1.4.0
 
 ### Core
+
 - Add support for attributes with (normally invalid) single qoute json strings
 
 ### Shopify
+
 - New ShopifyLinklistComponent
 - New Shopify snippet templates
 
 ### BS4
+
 - New Bs4SidebarComponent
 - New Bs4ToggleButtonComponent
 
 ### Router
+
 - New option to not update the browser url
 
 ## 1.3.0

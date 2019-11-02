@@ -590,6 +590,38 @@ export class Utils {
   }
 
   /**
+   * Scrolls to an element by event and selector
+   *
+   * Attributes:
+   *  * scroll-element="query-selector"
+   * @see https://stackoverflow.com/a/31987330
+   * @param element
+   * @param to
+   * @param duration
+   */
+  public static scrollTo(to: HTMLElement, offset: number, scrollElement: Element | (Window & typeof globalThis) | null) {
+    if (!scrollElement) {
+      scrollElement = window;
+    }
+
+    if (typeof((scrollElement as Window).pageYOffset) === 'number') {
+      // if is is window to scroll
+      scrollElement.scroll({
+        behavior: 'smooth',
+        left: 0,
+        top: (to.getBoundingClientRect().top + (scrollElement as Window).pageYOffset) - offset,
+      });
+    } else {
+      // if is is another element to scroll
+      scrollElement.scroll({
+        behavior: 'smooth',
+        left: 0,
+        top: (to.offsetTop ) - offset,
+      });
+    }
+  }
+
+  /**
    * Header name value pair to send on each request
    */
   protected static _requestHeadersEachRequest: {name: string, value: string}[] = [{

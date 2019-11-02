@@ -1,4 +1,4 @@
-import { Debug, JQuery, IBinder, EventDispatcher, Utils, View as RivetsView } from '@ribajs/core';
+import { Debug, IBinder, EventDispatcher, Utils, View as RivetsView } from '@ribajs/core';
 import { Pjax, Prefetch, HideShowTransition } from '../services';
 import { IState } from '../interfaces';
 
@@ -28,9 +28,9 @@ export const viewBinder: IBinder<string> = {
     }
 
     this.customData.nested = this.customData.nested || null,
-    this.customData.$wrapper = this.customData.$wrapper || JQuery(el),
+    this.customData.wrapper = this.customData.wrapper || el,
 
-    this.customData.onPageReady = (viewId: string, currentStatus: IState, prevStatus: IState, $container: JQuery<HTMLElement>, newPageRawHTML: string, dataset: any, isInit: boolean) => {
+    this.customData.onPageReady = (viewId: string, currentStatus: IState, prevStatus: IState, container: HTMLElement, newPageRawHTML: string, dataset: any, isInit: boolean) => {
       // Only to anything if the viewID is eqal (in this way it is possible to have multiple views)
       if (viewId !== self.customData.options.viewId) {
         debug('not the right view', self.customData.options.viewId, viewId);
@@ -51,12 +51,12 @@ export const viewBinder: IBinder<string> = {
       }
 
       if (self.customData.options.datasetToModel === true && Utils.isObject(dataset)) {
-        self.view.models.dataset = dataset; // = $container.data();
+        self.view.models.dataset = dataset; // = container.data();
         debug('newPageReady dataset:', dataset);
       }
 
       // TODO append on action append
-      self.customData.nested = new RivetsView($container[0], self.view.models, self.view.options);
+      self.customData.nested = new RivetsView(container, self.view.models, self.view.options);
       self.customData.nested.bind();
     };
 
@@ -71,27 +71,12 @@ export const viewBinder: IBinder<string> = {
 
       // scroll to Anchor of hash
       if (this.customData.options.scrollToAnchorHash && window.location.hash) {
-        const $scrollToMe = JQuery(window.location.hash);
-        if ($scrollToMe && $scrollToMe.length) {
-          const offset = $scrollToMe.offset();
-          if (offset && offset.top) {
-            debug('scroll to anchor:', $scrollToMe);
-            return new Promise((resolve, reject) => {
-              setTimeout(() => {
-                JQuery('body, html').animate({scrollTop: offset.top}, {
-                  duration: 1000,
-                  complete: () => {
-                    debug('scroll complete');
-                    resolve();
-                  },
-                  fail: () => {
-                    debug('scroll fail');
-                    reject();
-                  },
-                });
-              }, 0);
-            });
-          }
+        const scrollToMe = document.getElementById(window.location.hash.substr(1));
+        if (scrollToMe) {
+          debug('scroll to anchor:', scrollToMe);
+          return new Promise((resolve, reject) => {
+            resolve(Utils.scrollTo(scrollToMe, 0, window));
+          });
         }
       }
       return Promise.resolve();
@@ -115,11 +100,10 @@ export const viewBinder: IBinder<string> = {
   },
 
   routine(el: HTMLUnknownElement, options: any) {
-    const $el = JQuery(el);
     // Set default options
     this.customData.options = options || {};
 
-    this.customData.options.viewId = this.customData.options.viewId || $el.attr('id') || 'main';
+    this.customData.options.viewId = this.customData.options.viewId || el.getAttribute('id') || 'main';
     this.customData.options.action = this.customData.options.action || 'replace'; // replace / append
     this.customData.options.containerSelector = this.customData.options.containerSelector || '[data-namespace]';
 
@@ -149,13 +133,13 @@ export const viewBinder: IBinder<string> = {
 
     debug('routine', this.customData.options.viewId);
 
-    this.customData.$wrapper.attr('id', this.customData.options.viewId);
+    this.customData.wrapper.setAttribute('id', this.customData.options.viewId);
     debug('options', this.customData.options);
 
     this.customData.dispatcher.on('newPageReady', this.customData.onPageReady);
     this.customData.dispatcher.on('transitionCompleted', this.customData.onTransitionCompleted);
 
-    const pjax = new Pjax(this.customData.options.viewId, this.customData.$wrapper, this.customData.options.containerSelector, this.customData.options.listenAllLinks, this.customData.options.listenPopstate, this.customData.options.transition, this.customData.options.parseTitle, this.customData.options.changeBrowserUrl);
+    const pjax = new Pjax(this.customData.options.viewId, this.customData.wrapper, this.customData.options.containerSelector, this.customData.options.listenAllLinks, this.customData.options.listenPopstate, this.customData.options.transition, this.customData.options.parseTitle, this.customData.options.changeBrowserUrl);
     this.customData.prefetch.init(this.customData.options.autoprefetchLinks);
     pjax.start();
   },

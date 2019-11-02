@@ -2,17 +2,11 @@ import { Utils } from '@ribajs/core';
 
 /**
  * BaseCache it's a simple static cache
- *
- * @namespace Barba.BaseCache
- * @type {Object}
  */
 class BaseCache {
 
   /**
    * The Object that keeps all the key value information
-   *
-   * @memberOf Barba.BaseCache
-   * @type {Object}
    */
   public data: {[key: string]: any};
 
@@ -23,9 +17,6 @@ class BaseCache {
   /**
    * Set a key and value data, mainly Barba is going to save promises
    *
-   * @memberOf Barba.BaseCache
-   * @param {String} key
-   * @param {*} value
    */
   public set(key: string, val: any) {
     return this.data[key] = val;
@@ -33,10 +24,6 @@ class BaseCache {
 
   /**
    * Retrieve the data using the key
-   *
-   * @memberOf Barba.BaseCache
-   * @param  {String} key
-   * @return {*}
    */
   public get(key: string) {
     return this.data[key];
@@ -44,8 +31,6 @@ class BaseCache {
 
   /**
    * Flush the cache
-   *
-   * @memberOf Barba.BaseCache
    */
   public reset() {
     this.data = {};
@@ -54,9 +39,6 @@ class BaseCache {
   /**
    * Helper to extend this object
    *
-   * @memberOf Barba.BaseCache
-   * @private
-   * @param  {object} newObject
    * @return {object} newInheritObject
    */
   private extend(obj: object) {

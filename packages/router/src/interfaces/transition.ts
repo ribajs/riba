@@ -1,9 +1,9 @@
 export interface ITransition {
-  // $oldContainer: JQuery<Element>;
-  // $newContainer: JQuery<Element>;
-  // newContainerLoading: Promise<JQuery<Element>>;
+  // $oldContainer: HTMLElement;
+  // $newContainer: HTMLElement;
+  // newContainerLoading: Promise<HTMLElement>;
   // extend(obj: object): object;
-  init($oldContainer: JQuery<Element>, newContainer: Promise<JQuery<Element>>): Promise<void>;
+  init($oldContainer: HTMLElement, newContainer: Promise<HTMLElement>): Promise<void>;
   done(): void;
   start(): any;
 }

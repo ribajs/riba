@@ -10,21 +10,61 @@ import template from './bs4-sidebar.component.html';
 type State = 'overlay-left' | 'overlay-right' | 'side-left' | 'side-right' | 'hidden';
 
 interface IScope {
+  /**
+   * Selector string to get the container element from DOM
+   */
   containerSelector?: string;
+  /**
+   * The current state of the sidebar, can be `'hidden'`, `'side-left'`, `'side-right'`, `'overlay-left'` or `'overlay-right'`
+   */
   state: State;
+  /**
+   * The 'id' is required to react to events of the `bs4-toggle-button`, the `target-id` attribute of the `bs4-toggle-button` must be identical to this `id`
+   */
   id?: string;
+  /**
+   * The width of the sidebar
+   */
   width: number;
 
   // Options
+  /**
+   * The sidebar can be positioned `right` or `left`
+   */
   position: 'left' | 'right';
+  /**
+   * Auto show the sidebar if the viewport width is wider than this value
+   */
   autoShowOnWiderThan: number;
+  /**
+   * Auto hide the sidebar if the viewport width is slimmer than this value
+   */
   autoHideOnSlimmerThan: number;
+  /**
+   * You can force to hide the sidebar on corresponding URL pathames e.g. you can hide the sidebar on home with `['/']`.
+   */
   forceHideOnLocationPathnames: Array<string>;
+  /**
+   * Like `force-hide-on-location-pathnames`, but to force to open the sidebar
+   */
+  forceShowOnLocationPathnames: Array<string>;
+  /**
+   * If the viewport width is wider than this value the sidebar adds a margin to the container (detected with the `container-selector`) to reduce its content, if the viewport width is slimmer than this value the sidebar opens over the content
+   */
   overlayOnSlimmerThan: number;
 
   // Template methods
+  /**
+   * Hides / closes the sidebar
+   */
   hide: Bs4SidebarComponent['hide'];
+  /**
+   * Shows / opens the sidebar
+   */
   show: Bs4SidebarComponent['show'];
+  /**
+   * Toggles (closes or opens) the sidebar
+   */
   toggle: Bs4SidebarComponent['toggle'];
 }
 
@@ -37,7 +77,7 @@ export class Bs4SidebarComponent extends Component {
   protected autobind = true;
 
   static get observedAttributes() {
-    return ['id', 'container-selector', 'position', 'width', 'auto-show-in-wider-than', 'auto-hide-on-slimmer-than', 'force-hide-on-location-pathnames', 'overlay-on-slimmer-than'];
+    return ['id', 'container-selector', 'position', 'width', 'auto-show-in-wider-than', 'auto-hide-on-slimmer-than', 'force-hide-on-location-pathnames', 'force-show-on-location-pathnames', 'overlay-on-slimmer-than'];
   }
 
   protected toggleButtonEvents?: EventDispatcher;
@@ -59,6 +99,7 @@ export class Bs4SidebarComponent extends Component {
     autoShowOnWiderThan: 1199,
     autoHideOnSlimmerThan: 1200,
     forceHideOnLocationPathnames: [],
+    forceShowOnLocationPathnames: [],
     overlayOnSlimmerThan: 1200,
 
     // template methods
@@ -166,6 +207,9 @@ export class Bs4SidebarComponent extends Component {
   protected setStateByEnviroment() {
     if (this.scope.forceHideOnLocationPathnames.includes(window.location.pathname)) {
       return this.hide();
+    }
+    if (this.scope.forceShowOnLocationPathnames.includes(window.location.pathname)) {
+      return this.show();
     }
     const vw = Utils.getViewportDimensions().w;
     if (vw < this.scope.autoHideOnSlimmerThan) {

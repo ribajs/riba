@@ -17,18 +17,12 @@ export interface IPjaxInstances {
 /**
  * Pjax is a static object with main function
  *
- * @namespace Barba.Pjax
  * @borrows Dom as Dom
- * @type {object}
  */
 class Pjax {
 
   /**
    * Class name used to ignore links
-   *
-   * @memberOf Barba.Pjax
-   * @type {string}
-   * @default
    */
   public static ignoreClassLink = 'no-barba';
 
@@ -46,13 +40,8 @@ class Pjax {
 
   /**
    * Determine if the link should be followed
-   *
-   * @memberOf Barba.Pjax
-   * @param  {MouseEvent} evt
-   * @param  {HTMLAnchorElement} element
-   * @return {boolean}
    */
-  public static preventCheck(evt: JQuery.Event | Event, element?: HTMLAnchorElement, href?: string): boolean {
+  public static preventCheck(evt: Event, element?: HTMLAnchorElement, href?: string): boolean {
     if (!window.history.pushState) {
       return false;
     }
@@ -94,7 +83,7 @@ class Pjax {
     }
 
     // Middle click, cmd click and ctrl click
-    if ((evt && ((evt as JQuery.Event).which && (evt as any).which > 1) || (evt as JQuery.Event).metaKey || (evt as JQuery.Event).ctrlKey || (evt as JQuery.Event).shiftKey || (evt as JQuery.Event).altKey)) {
+    if ((evt && ((evt as any).which && (evt as any).which > 1) || (evt as any).metaKey || (evt as any).ctrlKey || (evt as any).shiftKey || (evt as any).altKey)) {
       Pjax.DEBUG('Middle click, cmd click or ctrl click');
       return false;
     }
@@ -133,10 +122,6 @@ class Pjax {
   /**
    * Get the .href parameter out of an element
    * and handle special cases (like xlink:href)
-   *
-   * @memberOf Barba.Pjax
-   * @param  {HTMLAnchorElement} el
-   * @return {string} href
    */
   public static getHref(el: HTMLAnchorElement | SVGAElement): string | undefined {
     if (!el) {
@@ -173,19 +158,11 @@ class Pjax {
 
  /**
   * Indicate wether or not use the cache
-  *
-  * @memberOf Barba.Pjax
-  * @type {boolean}
-  * @default
   */
   public cacheEnabled: boolean = true;
 
  /**
   * Indicate if there is an animation in progress
-  *
-  * @memberOf Barba.Pjax
-  * @readOnly
-  * @type {boolean}
   */
   public transitionProgress: boolean = false;
 
@@ -201,14 +178,14 @@ class Pjax {
 
   private transition?: ITransition;
 
-  private $wrapper?: JQuery<HTMLElement>;
+  private wrapper?: HTMLElement;
 
   private viewId: string;
 
   /**
    * Creates an singleton instance of Pjax.
    */
-  constructor(id: string, $wrapper?: JQuery<HTMLElement>, containerSelector = '[data-namespace]', listenAllLinks: boolean = false, listenPopstate: boolean = true, transition: ITransition = new HideShowTransition(), parseTitle: boolean = true, changeBrowserUrl: boolean = true) {
+  constructor(id: string, wrapper?: HTMLElement, containerSelector = '[data-namespace]', listenAllLinks: boolean = false, listenPopstate: boolean = true, transition: ITransition = new HideShowTransition(), parseTitle: boolean = true, changeBrowserUrl: boolean = true) {
     Pjax.DEBUG('constructor', id);
 
     this.viewId = id;
@@ -228,16 +205,16 @@ class Pjax {
 
     instance.transition = instance.transition || transition;
 
-    instance.$wrapper = instance.$wrapper || $wrapper;
+    instance.wrapper = instance.wrapper || wrapper;
 
     instance.listenAllLinks = Utils.isBoolean(instance.listenAllLinks) ? instance.listenAllLinks : listenAllLinks;
     instance.listenPopstate = Utils.isBoolean(instance.listenPopstate) ? instance.listenPopstate : listenPopstate;
     instance.parseTitle = Utils.isBoolean(instance.parseTitle) ? instance.parseTitle : parseTitle;
     instance.changeBrowserUrl = Utils.isBoolean(instance.changeBrowserUrl) ? instance.changeBrowserUrl : changeBrowserUrl;
 
-    if (instance.$wrapper) {
-      instance.dom = instance.dom || new Dom(instance.$wrapper, containerSelector, this.parseTitle);
-      instance.$wrapper.attr('aria-live', 'polite');
+    if (instance.wrapper) {
+      instance.dom = instance.dom || new Dom(instance.wrapper, containerSelector, this.parseTitle);
+      instance.wrapper.setAttribute('aria-live', 'polite');
     }
 
     Pjax.instances[this.viewId] = instance;
@@ -246,12 +223,10 @@ class Pjax {
 
  /**
   * Function to be called to start Pjax
-  *
-  * @memberOf Barba.Pjax
   */
   public start() {
-    if (this.$wrapper) {
-      this.init(this.$wrapper, this.listenAllLinks, this.listenPopstate);
+    if (this.wrapper) {
+      this.init(this.wrapper, this.listenAllLinks, this.listenPopstate);
     } else {
       console.error(`Can't init pjax without wrapper`);
     }
@@ -259,9 +234,6 @@ class Pjax {
 
  /**
   * Return the currentURL cleaned
-  *
-  * @memberOf Barba.Pjax
-  * @return {string} currentUrl
   */
   public getCurrentUrl() {
     return Utils.cleanLink(
@@ -271,9 +243,6 @@ class Pjax {
 
   /**
    * Change the URL with pushstate and trigger the state change
-   *
-   * @memberOf Barba.Pjax
-   * @param {string} newUrl
    */
   public goTo(url: string, newTab = false) {
     Pjax.DEBUG('goTo', url, newTab);
@@ -298,9 +267,6 @@ class Pjax {
 
  /**
   * Return a transition object
-  *
-  * @memberOf Barba.Pjax
-  * @return {Barba.Transition} Transition object
   */
   public getTransition(): ITransition {
     // User customizable
@@ -309,13 +275,8 @@ class Pjax {
 
  /**
   * Load an url, will start an xhr request or load from the cache
-  *
-  * @memberOf Barba.Pjax
-  * @protected
-  * @param  {string} url
-  * @return {Promise<JQuery<HTMLElement>>}
   */
-  public load(url: string): Promise<JQuery<HTMLElement>> {
+  public load(url: string): Promise<HTMLElement> {
     const deferred = Utils.deferred();
     const self = this;
     let xhr;
@@ -333,15 +294,14 @@ class Pjax {
           throw new Error('[Pjax] you need to call the start method first!');
         }
 
-        const $container = self.dom.parseResponse(data);
-        $container.filter('title');
-        self.dom.putContainer($container);
+        const container = self.dom.parseResponse(data);
+        self.dom.putContainer(container);
 
         if (!self.cacheEnabled) {
           Pjax.cache.reset();
         }
 
-        deferred.resolve($container);
+        deferred.resolve(container);
       }, () => {
         // Something went wrong (timeout, 404, 505...)
         self.forceGoTo(url);
@@ -355,9 +315,6 @@ class Pjax {
 
  /**
   * Attach the eventlisteners
-  *
-  * @memberOf Barba.Pjax
-  * @protected
   */
  protected bindEvents(listenAllLinks: boolean, listenPopstate: boolean) {
     // you can also use the rv-router for this
@@ -377,10 +334,6 @@ class Pjax {
 
  /**
   * Force the browser to go to a certain url
-  *
-  * @memberOf Barba.Pjax
-  * @param {Location} url
-  * @private
   */
  protected forceGoTo(url: Location | string) {
    if (url && (url as Location).href) {
@@ -393,12 +346,8 @@ class Pjax {
 
  /**
   * Callback called from click event
-  *
-  * @memberOf Barba.Pjax
-  * @protected
-  * @param {MouseEvent} evt
   */
- protected onLinkClick(evt: JQuery.Event | Event) {
+ protected onLinkClick(evt: Event) {
     let el: HTMLAnchorElement = ((evt as Event).target as HTMLAnchorElement );
 
     // Go up in the nodelist until we
@@ -425,9 +374,6 @@ class Pjax {
 
  /**
   * Method called after a 'popstate' or from .goTo()
-  *
-  * @memberOf Barba.Pjax
-  * @protected
   */
  protected onStateChange(event?: Event, newUrl: string = this.getCurrentUrl()) {
 
@@ -441,7 +387,7 @@ class Pjax {
 
     this.history.add(newUrl);
 
-    const $newContainer = this.load(newUrl);
+    const newContainer = this.load(newUrl);
 
     const transition = this.getTransition();
 
@@ -459,10 +405,10 @@ class Pjax {
 
     const transitionInstance = transition.init(
       this.dom.getContainer(document.body),
-      $newContainer,
+      newContainer,
     );
 
-    $newContainer.then(
+    newContainer.then(
       this.onNewContainerLoaded.bind(this),
     );
 
@@ -473,36 +419,29 @@ class Pjax {
 
  /**
   * Function called as soon the new container is ready
-  *
-  * @memberOf Barba.Pjax
-  * @protected
-  * @param {JQuery<HTMLElement>} $container
   */
- protected onNewContainerLoaded($container: JQuery<HTMLElement>) {
+ protected onNewContainerLoaded(container: HTMLElement) {
     const currentStatus = this.history.currentStatus();
 
     if (!this.dom) {
       throw new Error('[Pjax] you need to call the start method first!');
     }
 
-    currentStatus.namespace = this.dom.getNamespace($container);
+    currentStatus.namespace = this.dom.getNamespace(container);
 
     this.dispatcher.trigger('newPageReady',
       this.viewId,
       this.history.currentStatus(),
       this.history.prevStatus(),
-      $container,
+      container,
       this.dom.currentHTML,
-      $container.data(),
+      container.dataset,
       false, // true if this is the first time newPageReady is tiggered / true on initialisation
     );
   }
 
  /**
   * Function called as soon the transition is finished
-  *
-  * @memberOf Barba.Pjax
-  * @protected
   */
   protected onTransitionEnd() {
     this.transitionProgress = false;
@@ -516,21 +455,18 @@ class Pjax {
 
   /**
    * Init the events
-   *
-   * @memberOf Barba.Pjax
-   * @protected
    */
-  protected init($wrapper: JQuery<HTMLElement>, listenAllLinks: boolean, listenPopstate: boolean) {
+  protected init(wrapper: HTMLElement, listenAllLinks: boolean, listenPopstate: boolean) {
     if (!this.dom) {
       throw new Error('[Pjax] you need to call the start method first!');
     }
-    const $container = this.dom.getContainer(document.body);
+    const container = this.dom.getContainer(document.body);
 
-    this.$wrapper = $wrapper;
+    this.wrapper = wrapper;
 
     this.history.add(
       this.getCurrentUrl(),
-      this.dom.getNamespace($container),
+      this.dom.getNamespace(container),
     );
 
     // Fire for the current view.
@@ -543,9 +479,9 @@ class Pjax {
       this.viewId,
       this.history.currentStatus(),
       {},
-      $container,
+      container,
       this.dom.currentHTML,
-      $container.data(),
+      container.dataset,
       true, // true if this is the first time newPageReady is tiggered / true on initialisation
     );
 

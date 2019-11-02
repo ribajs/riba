@@ -1,4 +1,4 @@
-import { IBinder, Utils, EventDispatcher, JQuery } from '@ribajs/core';
+import { IBinder, Utils, EventDispatcher } from '@ribajs/core';
 
 export const parentRouteClassStarBinder: IBinder<string> = {
   name: 'parent-route-class-*',
@@ -15,11 +15,10 @@ export const parentRouteClassStarBinder: IBinder<string> = {
    * @param url Url to compare with the current location
    */
   routine(el: HTMLElement, url: string) {
-    const $el = JQuery(el);
     const className = this.args[0].toString() || 'active';
-    const isAnkerHTMLElement = $el.prop('tagName') === 'A';
+    const isAnkerHTMLElement = el.tagName === 'A';
     if (!url && isAnkerHTMLElement) {
-      const href = $el.attr('href');
+      const href = el.getAttribute('href');
       if (href) {
         url = href;
       }
@@ -27,17 +26,17 @@ export const parentRouteClassStarBinder: IBinder<string> = {
     const onUrlChange = (urlToCheck?: string) => {
       if (urlToCheck) {
         if (Utils.onParentRoute(urlToCheck)) {
-          $el.addClass(className);
+          el.classList.add(className);
           // check if element is radio input
-          if ($el.is(':radio')) {
-            $el.prop('checked', true);
+          if (el.getAttribute('type') === 'radio') {
+            (el as HTMLInputElement).checked = true;
           }
           return true;
         } else {
-          $el.removeClass(className);
+          el.classList.remove(className);
           // uncheck if element is radio input
-          if ($el.is(':radio')) {
-            $el.prop('checked', false);
+          if (el.getAttribute('type') === 'radio') {
+            (el as HTMLInputElement).checked = false;
           }
         }
       }

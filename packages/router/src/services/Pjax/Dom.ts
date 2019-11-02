@@ -1,15 +1,10 @@
-import { Debug, JQuery } from '@ribajs/core';
+import { Debug } from '@ribajs/core';
 /**
  * Object that is going to deal with DOM parsing/manipulation
- *
- * @namespace Barba.Pjax.Dom
- * @type {Object}
  */
 class Dom {
   /**
    * The name of the data attribute on the container
-   *
-   * @default
    */
   public dataNamespace = 'namespace';
 
@@ -29,14 +24,14 @@ class Dom {
    */
   public currentHTML?: string;
 
-  private _$wrapper: JQuery<Element>;
+  private _wrapper: HTMLElement;
 
   private parseTitle: boolean;
 
   private debug = Debug('router:Dom');
 
-  constructor($wrapper: JQuery<Element>, containerSelector = '[data-namespace]', parseTitle: boolean) {
-    this._$wrapper = $wrapper;
+  constructor(wrapper: HTMLElement, containerSelector = '[data-namespace]', parseTitle: boolean) {
+    this._wrapper = wrapper;
     this.containerSelector = containerSelector;
     this.parseTitle = parseTitle;
   }
@@ -45,7 +40,7 @@ class Dom {
    * Parse the responseText obtained from the xhr call
    * @see https://stackoverflow.com/a/41038197/1465919
    */
-  public parseResponse(responseText: string): JQuery<Element> {
+  public parseResponse(responseText: string): HTMLElement {
     this.currentHTML = responseText;
 
     const wrapper = document.createElement('template') as HTMLTemplateElement;
@@ -65,99 +60,64 @@ class Dom {
   /**
    * Get the main barba wrapper by the ID `wrapperId`
    */
-  public getWrapper(): JQuery<Element> {
-    return this._$wrapper;
+  public getWrapper(): Element {
+    return this._wrapper;
   }
 
   /**
    * Get the container on the current DOM,
    * or from an Element passed via argument
    */
-  public getContainer(element?: HTMLElement | HTMLTemplateElement | JQuery<HTMLElement | HTMLTemplateElement>): JQuery<Element> {
+  public getContainer(element?: HTMLTemplateElement | HTMLElement): HTMLElement {
 
     if (!element) {
       throw new Error('Barba.js: [getContainer] No element to get container from!');
     }
 
-    let el: HTMLElement | HTMLTemplateElement ;
-
-    if ((element as JQuery<Node>).jquery) {
-      el = (element as JQuery<HTMLElement | HTMLTemplateElement>)[0];
-    } else {
-      el = element as HTMLTemplateElement | HTMLElement;
-    }
-
-    if (!el) {
+    if (!element) {
       throw new Error('Barba.js: [getContainer] DOM not ready!');
     }
 
-    const container = this.parseContainer(el);
+    const container = this.parseContainer(element);
 
     if (!container) {
       throw new Error('[DOM] No container found');
     }
 
-    return JQuery(container);
-
-    // if (!$newPage) {
-    //   $newPage = JQuery(document.body);
-    // }
-    // if (!$newPage) {
-    //   throw new Error('[DOM] DOM not ready!');
-    // }
-    // const $container = this.parseContainer($newPage[0] as Element);
-    // if (!$container) {
-    //   throw new Error('[DOM] No container found');
-    // }
-    // this.debug('getContainer', $container);
-    // return $container;
+    return container;
   }
 
   /**
    * Get the namespace of the container
    */
-  public getNamespace($element: JQuery<Element>): string {
-    if ($element && $element.data()) {
-      return $element.data('namespace');
+  public getNamespace(element: HTMLElement): string | null {
+    if (element && element.dataset && element.dataset.namespace) {
+      return element.dataset.namespace;
     } else {
-      throw new Error('[DOM] Missing data-namespace attribute');
+      return null;
     }
   }
 
   /**
    * Put the container on the page
    */
-  public putContainer(element: HTMLElement | JQuery<Element>, appendChild: 'append' | 'replace' = 'replace') {
+  public putContainer(element: HTMLElement | HTMLElement, appendChild: 'append' | 'replace' = 'replace') {
     this.debug('putContainer', element);
-    if ((element as JQuery<Element>).jquery) {
-      element = element as JQuery<Element>;
-      element.css('visibility', 'hidden');
-      const wrapper = this.getWrapper()[0];
-      for (const el of element) {
-        wrapper.appendChild(el);
-      }
-    } else {
-      element = element as HTMLElement;
-      element.style.visibility = 'hidden';
-      const wrapper = this.getWrapper()[0];
-      wrapper.appendChild(element);
-    }
-
+    element = element as HTMLElement;
+    element.style.visibility = 'hidden';
+    const wrapper = this.getWrapper();
+    wrapper.appendChild(element);
   }
 
   /**
    * Get container selector
-   *
-   * @memberOf Barba.Pjax.Dom
-   * @private
-   * @param element
    */
-  public parseContainer(newPage: HTMLTemplateElement | HTMLElement): Element  {
+  protected parseContainer(newPage: HTMLTemplateElement | HTMLElement): HTMLElement  {
     if (!newPage) {
       throw new Error(`No container with selector "${this.containerSelector}" found!`);
     }
 
-    let result: Element | null;
+    let result: HTMLElement | null;
 
     if ((newPage as HTMLTemplateElement).content) {
       result = (newPage as HTMLTemplateElement).content.querySelector(this.containerSelector);
@@ -170,12 +130,6 @@ class Dom {
     }
 
     return result;
-    // const $container = $newPage.find(this.containerSelector);
-    // if (!$container.length) {
-    //   this.debug(`No container with selector "${this.containerSelector}" found!`, $newPage);
-    //   throw new Error(`No container with selector "${this.containerSelector}" found!`);
-    // }
-    // return $container;
   }
 
   /**

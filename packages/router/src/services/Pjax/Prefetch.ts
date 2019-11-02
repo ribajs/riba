@@ -3,9 +3,6 @@ import { Pjax } from '.';
 
 /**
  * Prefetch
- *
- * @namespace Barba.Prefetch
- * @type {object}
  */
 class Prefetch {
 
@@ -15,8 +12,6 @@ class Prefetch {
   /**
    * Class name used to ignore prefetch on links
    *
-   * @memberOf Barba.Prefetch
-   * @type {String}
    * @default
    */
   public ignoreClassLink = 'no-barba-prefetch';
@@ -38,7 +33,6 @@ class Prefetch {
    * Init the event listener on mouseover and touchstart
    * for the prefetch
    *
-   * @memberOf Barba.Prefetch
    */
   public init(autobindLinks = false) {
     if (!window.history.pushState) {
@@ -55,11 +49,8 @@ class Prefetch {
   /**
    * Callback for the mousehover/touchstart, please use the rv-route binder instead
    *
-   * @memberOf Barba.Prefetch
-   * @private
-   * @param  {object} evt
    */
-  public onLinkEnter(evt: Event | JQuery.Event, url?: string, el?: HTMLAnchorElement) {
+  public onLinkEnter(evt: Event, url?: string, el?: HTMLAnchorElement) {
 
     if (!url) {
 

@@ -1,4 +1,4 @@
-import { Debug, JQuery } from '@ribajs/core';
+import { Debug } from '@ribajs/core';
 import { BaseTransition } from './BaseTransition';
 import { ITransition } from '../../interfaces/transition';
 
@@ -7,8 +7,6 @@ import { ITransition } from '../../interfaces/transition';
  * scroll top, and finish the transition (removing the old container and displaying the new one)
  *
  * @private
- * @namespace Barba.HideShowTransition
- * @augments Barba.BaseTransition
  */
 export class HideShowTransition extends BaseTransition implements ITransition {
 
@@ -31,20 +29,10 @@ export class HideShowTransition extends BaseTransition implements ITransition {
   public doScrollToTop() {
     this.debug('scrollToTop');
     return new Promise((resolve, reject) => {
-      JQuery('html, body')
-      .animate({
-        scrollTop: '0px',
-      }, {
-        duration: 1000,
-        complete: () => {
-          this.debug('scrollToTop complete');
-          resolve();
-        },
-        fail: () => {
-          this.debug('scrollToTop fail');
-          reject();
-        },
-      });
+      resolve(window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      }));
     });
   }
 

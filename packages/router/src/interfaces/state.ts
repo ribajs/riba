@@ -1,4 +1,4 @@
 export interface IState {
   url: string;
-  namespace?: string;
+  namespace?: string | null;
 }

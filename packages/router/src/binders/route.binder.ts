@@ -13,7 +13,7 @@ export interface ICustomData {
   dispatcher?: EventDispatcher;
   options: IRouteOptions;
   checkURL(this: Binding, urlToCheck?: string): boolean;
-  onClick(this: Binding, event: JQuery.Event): void;
+  onClick(this: Binding, event: Event): void;
   onNewPageReady(this: Binding): void;
   onLinkEnter(this: Binding, event: Event): void;
 }
@@ -40,7 +40,7 @@ export const routeBinder: IBinder<string> = {
         }
         return false;
       },
-      onClick(this: Binding, event: JQuery.Event) {
+      onClick(this: Binding, event: Event) {
         debug('go to', this.customData.options.url);
         // Do not go to ref without pajax
         event.preventDefault();

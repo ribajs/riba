@@ -3,28 +3,13 @@ import { ITransition } from '../../interfaces/transition';
 
 /**
  * BaseTransition to extend
- *
- * @namespace Barba.BaseTransition
- * @type {Object}
  */
 export abstract class BaseTransition implements ITransition {
-  /**
-   * @memberOf Barba.BaseTransition
-   * @type {JQuery<Element>}
-   */
-  protected $oldContainer?: JQuery<Element>;
+  protected oldContainer?: HTMLElement;
 
-  /**
-   * @memberOf Barba.BaseTransition
-   * @type {JQuery<Element>}
-   */
-  protected $newContainer?: JQuery<Element>;
+  protected newContainer?: HTMLElement;
 
-  /**
-   * @memberOf Barba.BaseTransition
-   * @type {Promise}
-   */
-  protected newContainerLoading?: Promise<JQuery<Element>>;
+  protected newContainerLoading?: Promise<HTMLElement>;
 
   protected deferred: any; // TODO type
 
@@ -40,16 +25,11 @@ export abstract class BaseTransition implements ITransition {
    * This function is called from Pjax module to initialize
    * the transition.
    *
-   * @memberOf Barba.BaseTransition
-   * @private
-   * @param  {Element} oldContainer
-   * @param  {Promise} newContainer
-   * @return {Promise}
    */
-  public init($oldContainer: JQuery<Element>, newContainer: Promise<JQuery<Element>>): Promise<void> {
+  public init(oldContainer: HTMLElement, newContainer: Promise<HTMLElement>): Promise<void> {
     const self = this;
 
-    this.$oldContainer = $oldContainer;
+    this.oldContainer = oldContainer;
 
     this.deferred = Utils.deferred();
     const newContainerReady = Utils.deferred();
@@ -57,8 +37,8 @@ export abstract class BaseTransition implements ITransition {
 
     this.start();
 
-    newContainer.then(($newContainer: JQuery<Element>) => {
-      self.$newContainer = $newContainer;
+    newContainer.then((_newContainer: HTMLElement) => {
+      self.newContainer = _newContainer;
       newContainerReady.resolve();
     });
 
@@ -67,32 +47,27 @@ export abstract class BaseTransition implements ITransition {
 
   /**
    * This function needs to be called as soon the Transition is finished
-   *
-   * @memberOf Barba.BaseTransition
    */
   public done() {
     this.debug('done');
-    // this.$oldContainer[0].parentNode.removeChild(this.$oldContainer[]);
-    if (!this.$oldContainer) {
+    // this.oldContainer[0].parentNode.removeChild(this.oldContainer[]);
+    if (!this.oldContainer) {
       throw new Error('Can\'t remove old container');
     }
 
     if (this.action === 'replace') {
-      this.$oldContainer.remove();
+      this.oldContainer.remove();
     }
     // this.newContainer.style.visibility = 'visible';
-    if (!this.$newContainer) {
+    if (!this.newContainer) {
       throw new Error('Can\'t show new container');
     }
-    this.$newContainer.css('visibility', 'visible');
+    this.newContainer.style.visibility = 'visible';
     this.deferred.resolve();
   }
 
   /**
    * Constructor for your Transition
-   *
-   * @memberOf Barba.BaseTransition
-   * @abstract
    */
   public abstract start(): any;
 }

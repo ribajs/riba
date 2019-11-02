@@ -1,4 +1,4 @@
-import { Debug, JQuery, IBinder, Utils, View as RivetsView } from '@ribajs/core';
+import { Debug, IBinder, Utils, View as RivetsView } from '@ribajs/core';
 import { Pjax, HideShowTransition } from '../services';
 
 const debug = Debug('binders:view-static');
@@ -21,7 +21,7 @@ export const viewStaticBinder: IBinder<string> = {
 
   routine(el: HTMLElement, options: any) {
     debug('routine', this.customData);
-    const $wrapper = JQuery(el);
+    const wrapper = el;
     const self = this;
 
     // Set default options
@@ -32,26 +32,26 @@ export const viewStaticBinder: IBinder<string> = {
     options.transition = options.transition || new HideShowTransition();
     options.viewId = options.url;
 
-    const pjax = new Pjax(options.viewId, $wrapper, '[data-namespace]', options.listenAllLinks, options.listenPopstate , options.transition, options.parseTitle);
+    const pjax = new Pjax(options.viewId, wrapper, '[data-namespace]', options.listenAllLinks, options.listenPopstate , options.transition, options.parseTitle);
 
     const $newContainer = pjax.load(options.url);
 
-    $newContainer.then(($container: JQuery<HTMLElement>) => {
-      $wrapper.replaceWith($container);
+    $newContainer.then((container: HTMLElement) => {
+      wrapper.replaceWith(container);
 
-      $container.css('visibility', 'visible');
+      container.style.visibility = 'visible';
 
       // add the dateset to the model
       if (!Utils.isObject(self.view.models)) {
         self.view.models = {};
       }
 
-      // self.view.models.dataset = $container.data();
+      // self.view.models.dataset = container.data();
       if (self.customData.nested) {
         debug('unbind nested');
         self.customData.nested.unbind();
       }
-      self.customData.nested = new RivetsView($container[0], self.view.models, self.view.options);
+      self.customData.nested = new RivetsView(container, self.view.models, self.view.options);
       self.customData.nested.bind();
 
     });
