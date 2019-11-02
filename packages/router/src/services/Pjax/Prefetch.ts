@@ -81,7 +81,7 @@ class Prefetch {
 
     // Check if the link is elegible for Pjax
     if (url && Pjax.preventCheck(evt, el, url) && !Pjax.cache.get(url)) {
-      const xhr = Utils.xhr(url);
+      const xhr = Utils.fetch(url);
       Pjax.cache.set(url, xhr);
       this.debug('cached', url, xhr);
     } else {

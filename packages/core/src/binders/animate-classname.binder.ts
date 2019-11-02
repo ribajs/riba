@@ -1,4 +1,3 @@
-import { JQuery as $ } from '../vendors';
 import { IBinder } from '../interfaces';
 
 /**
@@ -11,10 +10,8 @@ export const animateStarBinder: IBinder<boolean> = {
   priority: 1000,
 
   bind(el) {
-    const $el = $(el);
     const animateClassName = (this as any).args[0];
-    $el
-    .addClass(animateClassName);
+    el.classList.add(animateClassName);
   },
 
   unbind(el: HTMLElement) {
@@ -22,16 +19,13 @@ export const animateStarBinder: IBinder<boolean> = {
   },
 
   routine(el: HTMLElement, start: boolean) {
-    const $el = $(el);
     const animateClassName = (this as any).args[0];
     if (start) {
-      $el
-      .addClass(animateClassName + '-start')
-      .removeClass(animateClassName + '-done');
+      el.classList.add(animateClassName + '-start');
+      el.classList.remove(animateClassName + '-done');
     } else {
-      $el
-      .removeClass(animateClassName + '-start')
-      .addClass(animateClassName + '-done');
+      el.classList.remove(animateClassName + '-start');
+      el.classList.add(animateClassName + '-done');
     }
   },
 };

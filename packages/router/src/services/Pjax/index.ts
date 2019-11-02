@@ -284,31 +284,32 @@ class Pjax {
     xhr = Pjax.cache.get(url);
 
     if (!xhr) {
-      xhr = Utils.xhr(url);
+      xhr = Utils.fetch(url, 'GET', undefined, 'html');
       Pjax.cache.set(url, xhr);
     }
 
-    xhr.then((data: string) => {
+    xhr
+    .then((data: string) => {
+      if (!self.dom) {
+        throw new Error('[Pjax] you need to call the start method first!');
+      }
 
-        if (!self.dom) {
-          throw new Error('[Pjax] you need to call the start method first!');
-        }
+      const container = self.dom.parseResponse(data);
+      self.dom.putContainer(container);
 
-        const container = self.dom.parseResponse(data);
-        self.dom.putContainer(container);
+      if (!self.cacheEnabled) {
+        Pjax.cache.reset();
+      }
 
-        if (!self.cacheEnabled) {
-          Pjax.cache.reset();
-        }
+      deferred.resolve(container);
+    })
+    .catch((error: any) => {
+      console.error(error);
+      // Something went wrong (timeout, 404, 505...)
+      self.forceGoTo(url);
 
-        deferred.resolve(container);
-      }, () => {
-        // Something went wrong (timeout, 404, 505...)
-        self.forceGoTo(url);
-
-        deferred.reject();
-      },
-    );
+      deferred.reject();
+    });
 
     return deferred.promise;
   }

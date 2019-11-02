@@ -77,7 +77,6 @@ export abstract class Component extends FakeHTMLElement {
     } else {
       throw new Error(`element is required on browsers without custom elements support`);
     }
-    // this.$el = JQuery(this.el);
   }
 
   /**

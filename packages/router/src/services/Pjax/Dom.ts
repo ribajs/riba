@@ -43,15 +43,13 @@ class Dom {
   public parseResponse(responseText: string): HTMLElement {
     this.currentHTML = responseText;
 
-    const wrapper = document.createElement('template') as HTMLTemplateElement;
+    const wrapper = document.createElement('div') as HTMLElement;
     wrapper.innerHTML = responseText;
 
     if (this.parseTitle === true) {
-      // TODO this is slow, find out how this was working in biba!
-      // const title = wrapper.getElementsByTagName('title').item(0);
-      const title = this.findHTMLTagContent('title', wrapper.innerHTML);
-      if (title) {
-        document.title = title;
+      const titleElement = wrapper.querySelector('title');
+      if (titleElement && titleElement.textContent) {
+        document.title = titleElement.textContent;
       }
     }
     return this.getContainer(wrapper);
@@ -114,7 +112,9 @@ class Dom {
    */
   protected parseContainer(newPage: HTMLTemplateElement | HTMLElement): HTMLElement  {
     if (!newPage) {
-      throw new Error(`No container with selector "${this.containerSelector}" found!`);
+      const error = new Error('New page not loaded!');
+      console.error(error, newPage);
+      throw error;
     }
 
     let result: HTMLElement | null;
@@ -126,28 +126,12 @@ class Dom {
     }
 
     if (!result) {
-      throw new Error(`No container with selector "${this.containerSelector}" found! ${newPage.tagName}`);
+      const error = new Error(`No container with selector "${this.containerSelector}" found!`);
+      console.error(error, newPage);
+      throw error;
     }
 
     return result;
-  }
-
-  /**
-   * TODO move to utils?
-   * @param tagName html tag name, e.g. `title`
-   * @param html The html string in which you are searching the tag
-   */
-  protected findHTMLTags(tagName: string, html: string) {
-    const regex = new RegExp(`<\s*${tagName}[^>]*>((.|\n)*?)<\s*\/\s*${tagName}>`, 'g');
-    return html.match(regex);
-  }
-
-  protected findHTMLTagContent(tagName: string, html: string) {
-    const matches = this.findHTMLTags(tagName, html);
-    if (matches && matches.length > 0) {
-      return matches[0].replace(`<${tagName}>`, '').replace(`</${tagName}>`, '').replace('&amp;', '&').replace('&lt;', '<').replace('&gt;', '>').trim();
-    }
-    return null;
   }
 }
 

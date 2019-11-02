@@ -1,5 +1,3 @@
-import { JQuery } from '../vendors';
-
 // TODO
 export interface IDeferred {
   resolve: any;
@@ -13,27 +11,17 @@ export interface IDeferred {
  * @class Utils
  */
 export class Utils {
-
   /**
-   * Promise version of JQuery.getJSON()
    * Load JSON-encoded data from the server using a GET HTTP request.
    * @param url A string containing the URL to which the request is sent.
    * @param data A plain object or string that is sent to the server with the request.
    * @see https://api.jquery.com/jquery.getjson/
    */
   public static getJSON(url: string, data?: any) {
-    return new Promise<any>((resolve, reject) => {
-      JQuery.getJSON(url, data)
-      .done((resolve))
-      .fail(( jqxhr, textStatus, error ) => {
-        // console.warn('jqxhr', jqxhr, 'textStatus', textStatus, 'error', error);
-        reject(jqxhr);
-      });
-    });
+    return this.fetch(url, 'GET', data, 'json');
   }
 
   /**
-   * Promise version of JQuery.post()
    * Load data from the server using a HTTP POST request.
    * @param url A string containing the URL to which the request is sent.
    * @param data A plain object or string that is sent to the server with the request.
@@ -41,50 +29,18 @@ export class Utils {
    * @see https://api.jquery.com/jquery.post/
    */
   public static post(url: string, data?: any, dataType?: string) {
-    return new Promise<any>((resolve, reject) => {
-      JQuery.post(url, data, null, dataType)
-      .done((resolve))
-      .fail(( jqxhr, textStatus, error ) => {
-        // console.warn('jqxhr', jqxhr, 'textStatus', textStatus, 'error', error);
-        reject(jqxhr);
-      });
-    });
+    return this.fetch(url, 'POST', data, dataType);
   }
 
   public static delete(url: string, data?: any, dataType?: string) {
-    return new Promise<any>((resolve, reject) => {
-      return JQuery.ajax({
-        url,
-        type: 'DELETE',
-        data,
-        dataType,
-      })
-      .done((resolve))
-      .fail(( jqxhr, textStatus, error ) => {
-        // console.warn('jqxhr', jqxhr, 'textStatus', textStatus, 'error', error);
-        reject(jqxhr);
-      });
-    });
+    return this.fetch(url, 'DELETE', data, dataType);
   }
 
   public static put(url: string, data?: any, dataType?: string) {
-    return new Promise<any>((resolve, reject) => {
-      return JQuery.ajax({
-        url,
-        type: 'PUT',
-        data,
-        dataType,
-      })
-      .done((resolve))
-      .fail(( jqxhr, textStatus, error ) => {
-        // console.warn('jqxhr', jqxhr, 'textStatus', textStatus, 'error', error);
-        reject(jqxhr);
-      });
-    });
+    return this.fetch(url, 'PUT', data, dataType);
   }
 
   /**
-   * Promise version of JQuery.get()
    * Load data from the server using a HTTP GET request.
    * @param url A string containing the URL to which the request is sent.
    * @param data A plain object or string that is sent to the server with the request.
@@ -92,14 +48,7 @@ export class Utils {
    * @see https://api.jquery.com/jquery.get/
    */
   public static get(url: string, data?: any, dataType?: string) {
-    return new Promise<any>((resolve, reject) => {
-      JQuery.get(url, data, null, dataType)
-      .done((resolve))
-      .fail(( jqxhr, textStatus, error ) => {
-        // console.warn('jqxhr', jqxhr, 'textStatus', textStatus, 'error', error);
-        reject(jqxhr);
-      });
-    });
+    return this.fetch(url, 'GET', data, dataType);
   }
 
   /**
@@ -298,21 +247,32 @@ export class Utils {
   /**
    * Merge the contents of two or more objects together into the first object.
    * @param {boolean} deep If true, the merge becomes recursive (aka. deep copy).
-   * @param {object} target An object that will receive the new properties if additional objects are passed in or that will extend the JQuery namespace if it is the sole argument.
-   * @param {object} object1 An object containing additional properties to merge in.
-   * @param {object} [objectN] Additional objects containing properties to merge in.
-   * @returns
-   * @memberof Utils
+   * @param {object} target An object that will receive the new properties
+   * @param {any[]} objects The objects containing additional properties to merge in.
+   * @see http://www.damirscorner.com/blog/posts/20180216-VariableNumberOfArgumentsInTypescript.html
    */
-  public static extend(deep: boolean, target?: object, object1?: object, objectN?: object) {
-    let result;
-    if (deep) {
-      result = JQuery.extend(true, target || {}, object1 || {}, objectN);
-    } else {
-      // Passing false for deep argument is not supported.
-      result = JQuery.extend(target || {}, object1 || {}, objectN);
+  public static extend(deep: boolean, extended: any = {}, ...objects: any[]) {
+    // Merge the object into the extended object
+    const merge = (obj: any) => {
+      for (const prop in obj) {
+        if (obj.hasOwnProperty(prop)) {
+          if (deep && Object.prototype.toString.call(obj[prop]) === '[object Object]') {
+            // If we're doing a deep merge and the property is an object
+            extended[prop] = this.extend(true, extended[prop], obj[prop]);
+          } else {
+            // Otherwise, do a regular merge
+            extended[prop] = obj[prop];
+          }
+        }
+      }
+    };
+
+    // Loop through each object and conduct a merge
+    for (let i = 0; i < objects.length; i++) {
+      merge(objects[i]);
     }
-    return result;
+
+    return extended;
   }
 
   /**
@@ -346,16 +306,72 @@ export class Utils {
    */
   public static setRequestHeaderEachRequest(name: string, value: string) {
     // TODO Are old values overwritten if JQuery.ajaxSetup called multiple times?
-    JQuery.ajaxSetup({
-      beforeSend: (xhr: JQueryXHR) => {
-        xhr.setRequestHeader(name, value);
-      },
-    });
+    // JQuery.ajaxSetup({
+    //   beforeSend: (xhr: JQueryXHR) => {
+    //     xhr.setRequestHeader(name, value);
+    //   },
+    // });
     this._requestHeadersEachRequest.push({
       name,
       value,
     });
   }
+
+  /**
+   *
+   * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html).
+   */
+  public static parseContentType(dataType: string) {
+    let contentType = '';
+    switch (dataType) {
+      case 'script':
+      case 'javascript':
+        contentType = 'application/javascript';
+        break;
+      case 'json':
+      case 'xml':
+      case 'ogg':
+      case 'pdf':
+      case 'zip':
+      case 'x-www-form-urlencoded':
+        contentType = 'application/' + dataType;
+        break;
+      case 'text':
+        contentType = 'text/plain';
+        break;
+      case 'css':
+      case 'csv':
+      case 'html':
+        contentType = 'text/' + dataType;
+        break;
+      case 'mpeg':
+      case 'mp4':
+      case 'quicktime':
+      case 'webm':
+        contentType = 'video/' + dataType;
+        break;
+      case 'gif':
+      case 'jpeg':
+      case 'png':
+      case 'tiff':
+      case 'svg+xml':
+        contentType = 'image/' + dataType;
+        break;
+      case 'svg':
+        contentType = 'image/svg+xml';
+        break;
+      case 'mixed':
+      case 'alternative':
+      case 'related':
+      case 'form-data':
+        contentType = 'multipart/' + dataType;
+        break;
+      default:
+        contentType = dataType;
+    }
+    return contentType;
+  }
+
   /**
    * Start an XMLHttpRequest() and return a Promise
    *
@@ -363,16 +379,24 @@ export class Utils {
    * @param url
    * @param xhrTimeout Time in millisecond after the xhr request goes in timeout
    */
-  public static xhr(url: string, xhrTimeout = 5000) {
+  public static xhr(url: string, xhrTimeout = 5000, method: 'GET' | 'POST' | 'PUT' | 'DELETE' = 'GET', dataType?: string, data?: any): Promise<string | any> {
     const deferred = this.deferred();
     const req = new XMLHttpRequest();
 
     req.onreadystatechange = () => {
       if (req.readyState === 4) {
         if (req.status === 200) {
+          if (typeof(dataType) === 'string' && (dataType === 'json' || dataType.includes('json'))) {
+            try {
+              deferred.resolve(JSON.parse(req.responseText));
+            } catch (error) {
+              // If json can't be parsed
+              return deferred.resolve(req.responseText);
+            }
+          }
           return deferred.resolve(req.responseText);
         } else {
-          return deferred.reject(new Error('xhr: HTTP code is not 200'));
+          return deferred.reject(req);
         }
       }
     };
@@ -383,12 +407,47 @@ export class Utils {
 
     req.open('GET', url);
     req.timeout = xhrTimeout;
+
+    // headers
     for (const header of this._requestHeadersEachRequest) {
       req.setRequestHeader(header.name, header.value);
     }
-    req.send();
+    if (dataType) {
+      const contentType = this.parseContentType(dataType);
+      req.setRequestHeader('Content-type', contentType);
+    }
+
+    req.send(method !== 'GET' && data ? JSON.stringify(data) : data);
 
     return deferred.promise;
+  }
+
+  public static fetch(url: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE' = 'GET', data: any = {}, dataType?: string) {
+    if (fetch) {
+      const headers: any = {};
+      // headers
+      for (const header of this._requestHeadersEachRequest) {
+        headers[header.name] = header.value;
+      }
+      if (dataType) {
+        const contentType = this.parseContentType(dataType);
+        headers['Content-Type'] = contentType;
+      }
+      return fetch(url, {
+        method: 'GET',
+        body: method !== 'GET' && data ? JSON.stringify(data) : null,
+        headers,
+      })
+      .then((response) => {
+        if (typeof(dataType) === 'string' && (dataType === 'json' || dataType.includes('json'))) {
+          return response.json();
+        }
+        return response.text();
+      });
+    }
+
+    // Fallback
+    return this.xhr(url, undefined, 'GET', dataType, data);
   }
 
   /**
@@ -423,9 +482,9 @@ export class Utils {
     if (!url) {
       return window.location;
     }
-    // l.href = href;
-    const l = (JQuery(`<a href="${url}"></a>`)[0] as any as Location);
-    return l;
+    const l = document.createElement('a');
+    l.href = url;
+    return l as any as Location;
   }
 
   /**
@@ -619,6 +678,35 @@ export class Utils {
         top: (to.offsetTop ) - offset,
       });
     }
+  }
+
+  /**
+   * Cross-browser Document Ready check
+   * @see https://www.competa.com/blog/cross-browser-document-ready-with-vanilla-javascript/
+   * @param callback
+   */
+  public static domIsReady(callback: () => void) {
+    if (!callback || typeof(callback) !== 'function') {
+      return new Error('The callback is required!');
+    }
+
+    const checkReady = () => {
+      if (document.readyState !== 'loading') {
+        callback();
+        if ((document as any).attachEvent) {
+          (document as any).detachEvent('onreadystatechange', checkReady);
+        }
+        document.removeEventListener('DOMContentLoaded', checkReady);
+      }
+    };
+
+    if ((document as any).attachEvent) {
+      (document as any).attachEvent('onreadystatechange', checkReady);
+    }
+    if (document.addEventListener) {
+      document.addEventListener('DOMContentLoaded', checkReady);
+    }
+    checkReady();
   }
 
   /**

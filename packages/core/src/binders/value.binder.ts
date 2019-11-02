@@ -1,4 +1,4 @@
-import { Debug, JQuery as $ } from '../vendors';
+import { Debug } from '../vendors';
 import { IBinder } from '../interfaces';
 import { Utils } from '../services/utils';
 
@@ -6,10 +6,9 @@ const debug = Debug('binder:value');
 
 const getData = (el: HTMLElement) => {
   const customData: any = {};
-  customData.$el = $(el);
-  customData.type = customData.$el.prop('type');
-  customData.tagName = customData.$el.prop('tagName');
-  customData.contenteditable = customData.$el.attr('contenteditable') ? true : false;
+  customData.type = (el as HTMLInputElement).type;
+  customData.tagName = el.tagName;
+  customData.contenteditable = el.getAttribute('contenteditable') ? true : false;
   customData.isRadio = customData.tagName === 'INPUT' && customData.type === 'radio';
   return customData;
 };
