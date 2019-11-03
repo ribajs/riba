@@ -113,7 +113,7 @@ const bumpVersion = (modulePath) => {
       }
     });
     
-    fs.writeFileSync(packagePath, JSON.stringify(package, null, 2));
+    fs.writeFileSync(packagePath, JSON.stringify(package, null, 2) + '\n');
   }
 };
 

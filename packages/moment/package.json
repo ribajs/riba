@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/moment",
   "description": "Moment.js module for Riba.js",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [],
   "url": "https://github.com/ribajs/riba/tree/master/packages/moment",
@@ -59,7 +59,7 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "@ribajs/core": "^1.4.0",
+    "@ribajs/core": "^1.5.0",
     "@types/jquery": "^3.3.31",
     "jquery": "^3.4.1"
   },
