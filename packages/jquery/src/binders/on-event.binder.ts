@@ -1,9 +1,10 @@
-import { IBinder, eventHandlerFunction, JQuery } from '@ribajs/core';
+import { IBinder, eventHandlerFunction } from '@ribajs/core';
+import { JQuery } from '../vendors/jquery.module';
 
 /**
  * Binds an event handler on the element.
  */
-export const onStarBinder: IBinder<eventHandlerFunction> = {
+export const onEventBinder: IBinder<eventHandlerFunction> = {
   name: 'on-*',
   function: true,
   priority: 1000,
@@ -21,7 +22,8 @@ export const onStarBinder: IBinder<eventHandlerFunction> = {
       if (this.args === null) {
         throw new Error('args is null');
       }
-      JQuery(el).off(this.args[0] as string, this.customData.handler);
+      const eventName = this.args[0] as string;
+      JQuery(el).off(eventName, this.customData.handler);
     }
   },
 
@@ -33,7 +35,7 @@ export const onStarBinder: IBinder<eventHandlerFunction> = {
     const eventName = this.args[0] as string;
 
     if (this.customData.handler) {
-      JQuery(el).off(eventName, this.customData);
+      JQuery(el).off(eventName, this.customData.handler);
     }
 
     this.customData.handler = this.eventHandler(value, el);

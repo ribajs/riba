@@ -1,1 +1,1 @@
-export { onStarBinder } from './on-star.binder';
+export { onEventBinder } from './on-event.binder';

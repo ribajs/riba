@@ -1,5 +1,6 @@
-import { Component, Debug, JQuery as $, EventDispatcher, IBinder } from '@ribajs/core';
+import { Component, Debug, EventDispatcher, IBinder } from '@ribajs/core';
 import { CollapseService } from '../../services/collapse.service';
+import { JQuery as $ } from '@ribajs/jquery';
 
 export class NavbarComponent extends Component {
 

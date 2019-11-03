@@ -1,4 +1,5 @@
-import { IBinder, JQuery as $ } from '@ribajs/core';
+import { IBinder } from '@ribajs/core';
+import { JQuery as $ } from '@ribajs/jquery';
 import { CollapseService } from '../services/collapse.service';
 
 /**

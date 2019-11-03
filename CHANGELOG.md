@@ -2,9 +2,17 @@
 
 ## Dev
 
+### Core
+
+- Removed jQuery from Core Module
+
 ### Router
 
 - Removed jQuery from Router Module
+
+### JQuery
+
+- New jQuery Module
 
 ## 1.4.0
 

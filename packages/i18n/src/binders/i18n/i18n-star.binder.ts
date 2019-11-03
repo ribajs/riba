@@ -1,4 +1,4 @@
-import { Utils, IBinder, BinderWrapper, JQuery as $ } from '@ribajs/core';
+import { Utils, IBinder, BinderWrapper } from '@ribajs/core';
 import { ALocalesService } from '../../services/locales-base.service';
 
 // see star.binder.ts
@@ -22,10 +22,9 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
     bind(el: HTMLUnknownElement) {
       const getElementData = () => {
         const customData: any = {};
-        customData.$el = $(el);
-        customData.type = customData.$el.prop('type');
-        customData.tagName = customData.$el.prop('tagName');
-        customData.contenteditable = customData.$el.attr('contenteditable') ? true : false;
+        customData.type = (el as HTMLInputElement).type;
+        customData.tagName = el.tagName;
+        customData.contenteditable = el.getAttribute('contenteditable') ? true : false;
         customData.isRadio = customData.tagName === 'INPUT' && customData.type === 'radio';
         return customData;
       };
@@ -45,10 +44,10 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
           }
         }
         if (this.customData.attributeName === 'html') {
-          this.customData.$el.html(locale);
+          el.innerHTML = locale;
         }
         if (this.customData.attributeName === 'text') {
-          this.customData.$el.text(locale);
+          el.innerText = locale;
         }
         if (this.customData.attributeName === 'value') {
           // TODO support also: https://github.com/JumpLinkNetwork/tinybind/blob/master/src/binders/basic/value.binder.ts#L51
@@ -58,12 +57,12 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
             (el as HTMLInputElement).value = locale;
           }
         }
-        this.customData.$el.attr(this.customData.attributeName, locale);
+        el.setAttribute(this.customData.attributeName, locale);
       };
 
       this.customData.parseVars = (_el: HTMLElement) => {
         // parse templates to vars
-        const newVars = this.customData.i18n.parseTemplateVars(this.customData.$el);
+        const newVars = this.customData.i18n.parseTemplateVars(_el);
         this.customData.vars = Utils.concat(true, this.customData.vars, newVars);
         if (Object.keys(this.customData.vars).length) {
           this.customData.i18n.debug('parsed templates vars', this.customData.vars);
@@ -72,13 +71,12 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
         // parse data attributes to vars
         // Vanilla works better than jquery data function?
         this.customData.vars = Utils.concat(true, this.customData.vars, _el.dataset);
-        this.customData.vars = Utils.concat(true, this.customData.vars, this.customData.$el.data());
         if (Object.keys(this.customData.vars).length) {
           this.customData.i18n.debug('parsed attribute vars', this.customData.vars);
         }
 
         // Parse templates wich have his own translations
-        this.customData.langVars = this.customData.i18n.parseLocalVars(this.customData.$el);
+        this.customData.langVars = this.customData.i18n.parseLocalVars(_el);
         if (this.customData.langVars && Object.keys(this.customData.langVars).length) {
           this.customData.i18n.debug('parsed own translations', this.customData.langVars);
         }
@@ -161,7 +159,7 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
         this.customData.i18n.event.on('changed', this.customData.onLanguageChanged);
 
         // Translate if binder attribute event is changed
-        this.customData.$el.on('binder-changed', this.customData.onAttributeChanged);
+        el.addEventListener('binder-changed', this.customData.onAttributeChanged);
       };
     },
 
@@ -192,7 +190,7 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
     },
 
     unbind() {
-      this.customData.$el.off('binder-changed', this.customData.onAttributeChanged);
+      this.el.removeEventListener('binder-changed', this.customData.onAttributeChanged);
       this.customData.i18n.event.off('changed', this.customData.onLanguageChanged);
     },
 

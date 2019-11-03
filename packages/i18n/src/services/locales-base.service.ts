@@ -148,10 +148,10 @@ export abstract class ALocalesService {
   /**
    * Parse templates wich can be used to set variables on language strings
    */
-  public parseTemplateVars($el: JQuery<HTMLElement>): ILocalVar {
-    const templates = $el.find('template');
+  public parseTemplateVars(el: HTMLElement): ILocalVar {
+    const templates = el.querySelectorAll<HTMLTemplateElement>('template');
     const vars: ILocalVar = {};
-    templates.each((i, template) => {
+    templates.forEach((template) => {
       const name: string | null = template.getAttribute('name');
       if (name !== null) {
         vars[name] = template.innerHTML.trim();
@@ -163,10 +163,10 @@ export abstract class ALocalesService {
   /**
    * Parse templates wich have his own translations
    */
-  public parseLocalVars($el: JQuery<HTMLElement>): ILocalVar {
-    const templates = $el.find('template');
+  public parseLocalVars(el: HTMLElement): ILocalVar {
+    const templates = el.querySelectorAll<HTMLTemplateElement>('template');
     const vars: ILocalVar = {};
-    templates.each((i, template) => {
+    templates.forEach((template) => {
       const lang: string | null = template.getAttribute('lang');
       if (lang !== null) {
         vars[lang] = template.innerHTML.trim();

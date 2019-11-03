@@ -8,7 +8,7 @@ export { classStarBinder } from './class-name.binder';
 export { cssStarBinder } from './style-css-property.binder';
 export { enabledBinder } from './enabled.binder';
 export { disabledBinder } from './disabled.binder';
-export { onStarBinder } from './on-event.binder';
+export { onEventBinder } from './on-event.binder';
 export { removeClassBinder } from './remove-class.binder';
 export { ifBinder } from './if.binder';
 export { eachStarBinder } from './each-item.binder';

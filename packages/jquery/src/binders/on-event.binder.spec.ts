@@ -1,14 +1,8 @@
-import {
-    Riba,
-} from '../index';
+import { Riba, valueBinder } from '@ribajs/core';
 
 import {
     onEventBinder,
 } from './on-event.binder';
-
-import {
-    valueBinder,
-} from './value.binder';
 
 const riba = new Riba();
 riba.module.binder.regists([onEventBinder, valueBinder]);

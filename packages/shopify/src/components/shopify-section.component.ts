@@ -1,4 +1,4 @@
-import { Debug, Component, JQuery } from '@ribajs/core';
+import { Debug, Component } from '@ribajs/core';
 
 export abstract class ShopifySectionComponent extends Component {
 
@@ -6,21 +6,21 @@ export abstract class ShopifySectionComponent extends Component {
 
   protected debug = Debug('component:' + ShopifySectionComponent.tagName);
 
-  protected $el: JQuery<HTMLElement>;
-
   protected abstract scope: any;
 
   constructor(element?: HTMLElement) {
     super(element);
-    this.$el = JQuery(this.el);
+    this.initEventListeners();
+  }
 
-    this.$el.on('shopify:section:load', this.onSectionLoad);
-    this.$el.on('shopify:section:unload', this.onSectionUnload);
-    this.$el.on('shopify:section:select', this.onSectionSelect);
-    this.$el.on('shopify:section:deselect', this.onSectionDeselect);
-    this.$el.on('shopify:section:reorder', this.onSectionReorder);
-    this.$el.on('shopify:block:select', this.onBlockSelect);
-    this.$el.on('shopify:block:deselect', this.onBlockDeselect);
+  protected initEventListeners() {
+    this.el.addEventListener('shopify:section:load', this.onSectionLoad);
+    this.el.addEventListener('shopify:section:unload', this.onSectionUnload);
+    this.el.addEventListener('shopify:section:select', this.onSectionSelect);
+    this.el.addEventListener('shopify:section:deselect', this.onSectionDeselect);
+    this.el.addEventListener('shopify:section:reorder', this.onSectionReorder);
+    this.el.addEventListener('shopify:block:select', this.onBlockSelect);
+    this.el.addEventListener('shopify:block:deselect', this.onBlockDeselect);
   }
 
   protected abstract template(): string | null;
@@ -29,32 +29,32 @@ export abstract class ShopifySectionComponent extends Component {
    * A section has been added or re-rendered.
    * Re-execute any JavaScript needed for the section to work and display properly (as if the page had just been loaded).
    */
-  protected onSectionLoad(event: JQuery.Event, data: any) {
-    this.debug('onSectionLoad', data);
+  protected onSectionLoad(event: Event) {
+    this.debug('onSectionLoad', event);
   }
 
-  protected onSectionUnload(event: JQuery.Event, data: any) {
-    this.debug('onSectionUnload', data);
+  protected onSectionUnload(event: Event) {
+    this.debug('onSectionUnload', event);
   }
 
-  protected onSectionSelect(event: JQuery.Event, data: any) {
-    this.debug('onSectionSelect', data);
+  protected onSectionSelect(event: Event) {
+    this.debug('onSectionSelect', event);
   }
 
-  protected onSectionDeselect(event: JQuery.Event, data: any) {
-    this.debug('onSectionDeselect', data);
+  protected onSectionDeselect(event: Event) {
+    this.debug('onSectionDeselect', event);
   }
 
-  protected onSectionReorder(event: JQuery.Event, data: any) {
-    this.debug('onSectionReorder', data);
+  protected onSectionReorder(event: Event) {
+    this.debug('onSectionReorder', event);
   }
 
-  protected onBlockSelect(event: JQuery.Event, data: any) {
-    this.debug('onBlockSelect', data);
+  protected onBlockSelect(event: Event) {
+    this.debug('onBlockSelect', event);
   }
 
-  protected onBlockDeselect(event: JQuery.Event, data: any) {
-    this.debug('onBlockDeselect', data);
+  protected onBlockDeselect(event: Event) {
+    this.debug('onBlockDeselect', event);
   }
 
 }

@@ -1,4 +1,5 @@
-import { IBinder, JQuery as $ } from '@ribajs/core';
+import { IBinder } from '@ribajs/core';
+import { JQuery as $ } from '@ribajs/jquery';
 import { DropdownService } from '../services/dropdown.service';
 
 /**
@@ -11,13 +12,13 @@ export const dropdownBinder: IBinder<string> = {
     const $el = $(el);
     let $toggler: JQuery<HTMLButtonElement>;
     if ($el.hasClass('dropdown-toggle')) {
-        $toggler = $el as JQuery<HTMLButtonElement>;
+      $toggler = $el as JQuery<HTMLButtonElement>;
     } else {
-        $toggler = $el.find('.dropdown-toggle') as JQuery<HTMLButtonElement>;
+      $toggler = $el.find('.dropdown-toggle') as JQuery<HTMLButtonElement>;
     }
 
     if (!$toggler) {
-        $toggler = $el as JQuery<HTMLButtonElement>;
+      $toggler = $el as JQuery<HTMLButtonElement>;
     }
 
     const dropdownService = new DropdownService($toggler[0]);

@@ -1,10 +1,9 @@
 import { IBinder, eventHandlerFunction } from '../interfaces';
-import { JQuery } from '../vendors';
 
 /**
  * Binds an event handler on the element.
  */
-export const onStarBinder: IBinder<eventHandlerFunction> = {
+export const onEventBinder: IBinder<eventHandlerFunction> = {
   name: 'on-*',
   function: true,
   priority: 1000,
@@ -22,7 +21,8 @@ export const onStarBinder: IBinder<eventHandlerFunction> = {
       if (this.args === null) {
         throw new Error('args is null');
       }
-      JQuery(el).off(this.args[0] as string, this.customData.handler);
+      const eventName = this.args[0] as string;
+      el.removeEventListener(eventName, this.customData.handler);
     }
   },
 
@@ -34,16 +34,16 @@ export const onStarBinder: IBinder<eventHandlerFunction> = {
     const eventName = this.args[0] as string;
 
     if (this.customData.handler) {
-      JQuery(el).off(eventName, this.customData);
+      el.removeEventListener(eventName, this.customData.handler);
     }
 
     this.customData.handler = this.eventHandler(value, el);
 
     try {
-      JQuery(el).on(eventName, (this.customData.handler));
+      el.addEventListener(eventName, this.customData.handler);
     } catch (error) {
       console.warn(error);
-      JQuery(el).on(eventName, (event: JQuery.Event) => {
+      el.addEventListener(eventName, (event: Event) => {
         this.customData.handler(event);
       });
     }

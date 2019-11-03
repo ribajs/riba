@@ -5,8 +5,8 @@ import Popper from 'popper.js'; // /dist/umd/popper
  * @see https://getbootstrap.com/docs/4.1/components/tooltips/
  * @see https://github.com/twbs/bootstrap/blob/v4-dev/js/src/tooltip.js
  */
-import Debug from 'debug';
-import { IBinder, JQuery as $ } from '@ribajs/core';
+import { IBinder, Debug } from '@ribajs/core';
+import { JQuery as $ } from '@ribajs/jquery';
 
 const template = '<div class="tooltip" role="tooltip">' +
 '<div class="arrow"></div>' +

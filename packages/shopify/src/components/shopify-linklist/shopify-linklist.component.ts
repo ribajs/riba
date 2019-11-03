@@ -116,7 +116,7 @@ export class ShopifyLinklistComponent extends Component {
 
   public collapseAll() {
     this.debug('collapseAll');
-    if (this.scope.linklist) {
+    if (this.scope.linklist && this.scope.linklist.links) {
       this.collapseAllByLinks(this.scope.linklist.links);
     }
   }
@@ -125,7 +125,7 @@ export class ShopifyLinklistComponent extends Component {
    * Show (uncollapse) link by child url
    */
   public showByChildUrl(url: string) {
-    if (this.scope.linklist) {
+    if (this.scope.linklist && this.scope.linklist.links) {
       for (const link of this.scope.linklist.links) {
         for (const sublink of link.links) {
           if (sublink.url === url) {
@@ -170,7 +170,7 @@ export class ShopifyLinklistComponent extends Component {
   }
 
   protected collapseAllByLinks(links: LinklistLink[]) {
-    if (this.scope.linklist) {
+    if (this.scope.linklist && this.scope.linklist.links) {
       for (const link of links) {
         if (link.collapseable) {
           link.collapsed = true;
@@ -183,7 +183,7 @@ export class ShopifyLinklistComponent extends Component {
   }
 
   protected showAllByLinks(links: LinklistLink[]) {
-    if (this.scope.linklist) {
+    if (this.scope.linklist && this.scope.linklist.links) {
       for (const link of links) {
         if (link.collapseable) {
           link.collapsed = false;

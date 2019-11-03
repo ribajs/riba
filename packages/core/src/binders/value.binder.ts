@@ -40,12 +40,12 @@ export const valueBinder: IBinder<any> = {
         this.customData.event = 'change input keyup paste blur focus';
       }
 
-      $(el).on(this.customData.event, this.customData.callback);
+      el.addEventListener(this.customData.event, this.customData.callback);
     }
   },
 
   unbind(el: HTMLUnknownElement) {
-    $(el).off(this.customData.event, this.customData.callback);
+    el.removeEventListener(this.customData.event, this.customData.callback);
   },
 
   routine(el: HTMLElement | HTMLSelectElement, value: string | string[]) {

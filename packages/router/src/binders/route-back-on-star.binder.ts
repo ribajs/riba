@@ -1,4 +1,4 @@
-import { IBinder, eventHandlerFunction, JQuery } from '@ribajs/core';
+import { IBinder, eventHandlerFunction } from '@ribajs/core';
 
 export const goBack = () => {
   window.history.back();
@@ -17,7 +17,7 @@ export const routeBackOnStarBinder: IBinder<eventHandlerFunction> = {
   },
 
   unbind(el: HTMLElement) {
-    JQuery(el).off(this.args[0] as string, goBack);
+    el.removeEventListener(this.args[0] as string, goBack);
   },
 
   routine(el: HTMLElement, options: any) {
@@ -26,8 +26,7 @@ export const routeBackOnStarBinder: IBinder<eventHandlerFunction> = {
       throw new Error('args is null');
     }
     const eventName = this.args[0] as string;
-    JQuery(el).off(eventName, goBack);
-
-    JQuery(el).on(eventName, goBack);
+    el.removeEventListener(this.args[0] as string, goBack);
+    el.addEventListener(this.args[0] as string, goBack);
   },
 };

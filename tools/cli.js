@@ -55,7 +55,7 @@ const PACKAGES = [
   {
     path: 'packages/jquery/',
     npm: '@ribajs/jquery',
-    available: false,
+    available: true,
   },
   {
     path: 'packages/moment/',
