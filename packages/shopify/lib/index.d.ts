@@ -1,7 +1,8 @@
-import { IRibaModule } from '@ribajs/core';
-export * from './components';
-export * from './formatters';
 export * from './services';
+export * from './binders';
+export * from './formatters';
+export * from './components';
 export * from './interfaces';
-export declare const shopifyModule: IRibaModule;
+import shopifyModule from './shopify.module';
+export { shopifyModule };
 export default shopifyModule;

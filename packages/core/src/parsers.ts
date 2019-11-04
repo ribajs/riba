@@ -161,9 +161,12 @@ export function parseNode(view: View, node: IDataElement, templateDelimiters: Ar
   }
 
   if (!block) {
-    if (node.childNodes) {
+    if (node.childNodes && node.childNodes.length > 0) {
       for (let i = 0; i < node.childNodes.length; i++) {
-        parseNode(view, (node.childNodes[i] as IDataElement), templateDelimiters);
+        const childNode = node.childNodes[i];
+        if (childNode) {
+          parseNode(view, (childNode as IDataElement), templateDelimiters);
+        }
       }
     }
   }

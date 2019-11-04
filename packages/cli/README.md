@@ -39,11 +39,11 @@ npm link @ribajs/schematics
 ```
 
 ## Support / Donations
+
 If you want to support Riba development, please consider donating (it helps me keeping my projects active and alive!):
 
 [![https://www.paypal.me/artandcode](https://img.shields.io/badge/Donate-PayPal-red)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TUEJGDUHVBUX4&source=url)
 [![https://www.paypal.me/artandcode](https://img.shields.io/badge/Donate-Patreon-red)](https://www.patreon.com/artandcodestudio)
-
 
 ## License
 

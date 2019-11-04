@@ -1,4 +1,4 @@
-import { Debug, Utils } from '@ribajs/core';
+import { Utils } from '@ribajs/core';
 import { ITransition } from '../../interfaces/transition';
 
 /**
@@ -12,8 +12,6 @@ export abstract class BaseTransition implements ITransition {
   protected newContainerLoading?: Promise<HTMLElement>;
 
   protected deferred: any; // TODO type
-
-  protected debug = Debug('barba:BaseTransition');
 
   protected action: 'replace' | 'append';
 
@@ -49,7 +47,6 @@ export abstract class BaseTransition implements ITransition {
    * This function needs to be called as soon the Transition is finished
    */
   public done() {
-    this.debug('done');
     // this.oldContainer[0].parentNode.removeChild(this.oldContainer[]);
     if (!this.oldContainer) {
       throw new Error('Can\'t remove old container');

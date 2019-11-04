@@ -1,4 +1,4 @@
-import { Debug, Utils } from '@ribajs/core';
+import { Utils } from '@ribajs/core';
 import { ALocalesService } from './locales-base.service';
 
 /**
@@ -25,8 +25,6 @@ export class LocalesRestService extends ALocalesService {
    * The default theme langcode before any language was choosed
    */
   protected initalLangcode?: string;
-
-  protected debug = Debug('services:LocalesService');
 
   constructor(protected url: string, doNotTranslateDefaultLanguage: boolean = false, showMissingTranslation: boolean = false) {
     super(doNotTranslateDefaultLanguage, showMissingTranslation);
@@ -67,7 +65,6 @@ export class LocalesRestService extends ALocalesService {
     return Utils.getJSON(url)
     .then((locales: any) => {
       this.locales[url as string] = locales;
-      this.debug('getAll', locales);
       return this.locales[url as string];
     });
   }

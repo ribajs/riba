@@ -25,7 +25,7 @@ import {
   ShopifyApp,
 } from '../interfaces/shopify-easdk';
 
-import { EventDispatcher, Debug } from '@ribajs/core';
+import { EventDispatcher } from '@ribajs/core';
 
 import { IState } from '@ribajs/router';
 
@@ -145,7 +145,7 @@ export class BarWrapperService extends WrapperService implements IBarWrapper {
       this.loading = {
         on: true,
       };
-      this.debug('loadingOn', fallback, this.loading);
+      console.debug('loadingOn', fallback, this.loading);
       this.event.trigger('bar:loading', fallback, this.loading);
       this.event.trigger('bar:loadingOn', fallback, this.loading);
       return this.shopifyApp.Bar.loadingOn();
@@ -162,7 +162,7 @@ export class BarWrapperService extends WrapperService implements IBarWrapper {
         on: false,
       };
       const fallback = this.useFallback(false);
-      this.debug('loadingOff', fallback);
+      console.debug('loadingOff', fallback);
       this.event.trigger('bar:loading', fallback, this.loading);
       this.event.trigger('bar:loadingOff', fallback, this.loading);
       return this.shopifyApp.Bar.loadingOff();

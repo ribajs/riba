@@ -1,4 +1,3 @@
-import { Debug } from '../vendors';
 import { Utils } from './utils';
 
 export type Element = any;
@@ -11,8 +10,6 @@ export abstract class ModuleElementService {
   protected elements: IElements;
 
   protected abstract type: 'binder' | 'formatter' | 'components' | 'services';
-
-  protected debug = Debug('services:ModuleElementService');
 
   /**
    *
@@ -40,7 +37,6 @@ export abstract class ModuleElementService {
     for (const key in elements) {
       if (elements.hasOwnProperty(key) && key !== '__esModule') {
         const element = elements[key];
-        this.debug(`Regist ${this.type} with key "${key}"`, element);
         this.regist(element, key);
       }
     }

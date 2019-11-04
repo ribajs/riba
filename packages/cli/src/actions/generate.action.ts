@@ -1,5 +1,4 @@
 import chalk from 'chalk';
-import { debug as Debug } from 'debug';
 import { ICommandInput, IConfiguration } from '../interfaces';
 import { AbstractAction } from './abstract.action';
 import { Collection, SchematicOption } from '../lib/schematics';
@@ -7,8 +6,6 @@ import { FileSystemReader } from '../lib/readers';
 import { join, normalize } from 'path';
 
 export class GenerateAction extends AbstractAction {
-
-  debug = Debug('actions:generate');
 
   schematicOptions: SchematicOption[] = new Array<SchematicOption>();
 

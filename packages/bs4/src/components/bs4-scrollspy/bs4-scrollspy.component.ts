@@ -1,7 +1,3 @@
-import {
-  Debug,
-} from '@ribajs/core';
-
 import { Bs4ContentsComponent, Scope as Bs4ContentsComponentScope } from '../bs4-contents/bs4-contents.component';
 
 import template from './bs4-scrollspy.component.html';
@@ -36,8 +32,6 @@ export class Bs4ScrollspyComponent extends Bs4ContentsComponent {
     return ['headers-start', 'headers-depth', 'find-header-id-depth', 'header-parent-selector', 'offset', 'offset-bottom', 'scroll-offset'];
   }
 
-  protected debug = Debug('component:' + Bs4ScrollspyComponent.tagName);
-
   protected scope: Scope = {
     headersDepth: 1,
     headersStart: 2,
@@ -51,7 +45,6 @@ export class Bs4ScrollspyComponent extends Bs4ContentsComponent {
 
   constructor(element?: HTMLElement) {
     super(element);
-    this.debug('constructor', this);
     this.init(Bs4ScrollspyComponent.observedAttributes);
   }
 
@@ -62,10 +55,8 @@ export class Bs4ScrollspyComponent extends Bs4ContentsComponent {
   protected template() {
     // Only set the component template if there no childs already
     if (this.el.hasChildNodes()) {
-      this.debug('Do not use template, because element has child nodes');
       return null;
     } else {
-      this.debug('Use template', template);
       return template;
     }
   }

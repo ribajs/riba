@@ -1,5 +1,5 @@
 import { Pjax, Prefetch } from '../services';
-import { Binding, IBinder, EventDispatcher, Debug, Utils } from '@ribajs/core';
+import { Binding, IBinder, EventDispatcher, Utils } from '@ribajs/core';
 
 export interface IRouteOptions {
   url: string;
@@ -17,8 +17,6 @@ export interface ICustomData {
   onNewPageReady(this: Binding): void;
   onLinkEnter(this: Binding, event: Event): void;
 }
-
-const debug = Debug('binders:route');
 
 /**
  * Open link with pajax if the route is not the active route
@@ -41,11 +39,10 @@ export const routeBinder: IBinder<string> = {
         return false;
       },
       onClick(this: Binding, event: Event) {
-        debug('go to', this.customData.options.url);
         // Do not go to ref without pajax
         event.preventDefault();
         if (Utils.onRoute(this.customData.options.url)) {
-          debug('already on this site');
+          console.debug('already on this site');
         } else {
           if (this.customData.options.url) {
             const pjax = Pjax.getInstance(this.customData.options.viewId);
@@ -79,8 +76,6 @@ export const routeBinder: IBinder<string> = {
     this.customData.options.newTab = false;
     const isAnkerHTMLElement = el.tagName === 'A';
 
-    debug('getBinder', el, this.customData.options.url);
-
     if (!this.customData.options.url && isAnkerHTMLElement) {
       const url = el.getAttribute('href');
       if (url) {
@@ -97,20 +92,13 @@ export const routeBinder: IBinder<string> = {
 
     // normalize url
     if (this.customData.options.url && Utils.isAbsoluteUrl(this.customData.options.url)) {
-
-      debug('is absolut url', this.customData.options.url);
-
       // if is an internal link
       if (Utils.isInternalUrl(this.customData.options.url)) {
-        debug('interal url', this.customData.options.url);
         // get relative url
         this.customData.options.url = this.customData.options.url.replace(host, '');
       } else {
-        debug('external url', this.customData.options.url);
         this.customData.options.newTab = true;
       }
-    } else {
-      debug('is relative url', this.customData.options.url);
     }
 
     // set href if not set

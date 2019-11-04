@@ -1,4 +1,3 @@
-import { IDebugger } from '../vendors';
 import { Component, IRibaComponentContext } from './component';
 import { View } from '../view';
 import { EventHandler } from '../interfaces';
@@ -13,7 +12,6 @@ export declare class RibaComponent extends Component {
 
   public context?: IRibaComponentContext;
 
-  protected debug: IDebugger;
   protected view?: View;
   // protected _bound: boolean;
 

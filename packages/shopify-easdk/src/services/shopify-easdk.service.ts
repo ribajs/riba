@@ -3,7 +3,7 @@
 
 /* tslint:disable:member-ordering variable-name */
 
-import { Utils, EventDispatcher, Debug } from '@ribajs/core';
+import { Utils, EventDispatcher } from '@ribajs/core';
 
 import {
   IEASDK,
@@ -81,41 +81,41 @@ export class EASDKWrapperService extends WrapperService implements IEASDKWrapper
         data = _data.data;
         message = _data.message;
       } catch (error) {
-        this.debug('Error on parse message data', error);
+        console.debug('Error on parse message data', error);
       }
       this.message = {
         message,
         data,
       };
-      this.debug('Receive message:', event, message, data);
+      console.debug('Receive message:', event, message, data);
     }, false);
 
     this.event.on('bar:loading', (fallback: boolean, loading: ILoadingStateWrapper) => {
-      this.debug('bar:loading', fallback, loading);
+      console.debug('bar:loading', fallback, loading);
     });
 
     this.event.on('bar:loadingOn', (fallback: boolean, loading: ILoadingStateWrapper) => {
-      this.debug('bar:loadingOn', fallback, loading);
+      console.debug('bar:loadingOn', fallback, loading);
     });
 
     this.event.on('bar:loadingOff', (fallback: boolean, loading: ILoadingStateWrapper) => {
-      this.debug('bar:loadingOff', fallback, loading);
+      console.debug('bar:loadingOff', fallback, loading);
     });
 
     this.event.on('bar:setTitle', (fallback: boolean, title: string) => {
-      this.debug('bar:setTitle', fallback, title);
+      console.debug('bar:setTitle', fallback, title);
     });
 
     this.event.on('bar:setIcon', (fallback: boolean, icon: string) => {
-      this.debug('bar:setIcon', fallback, icon);
+      console.debug('bar:setIcon', fallback, icon);
     });
 
     this.event.on('bar:setPagination', (fallback: boolean, config: IPaginationConfig) => {
-      this.debug('bar:setPagination', fallback, config);
+      console.debug('bar:setPagination', fallback, config);
     });
 
     this.event.on('bar:setBreadcrumb', (fallback: boolean, config: IButtonConfig) => {
-      this.debug('bar:setBreadcrumb', fallback, config);
+      console.debug('bar:setBreadcrumb', fallback, config);
     });
 
   }
@@ -198,7 +198,7 @@ export class EASDKWrapperService extends WrapperService implements IEASDKWrapper
    * @memberof EASDKWrapperService
    */
   public redirect(path: string, forceFallback: boolean = false): void {
-    this.debug('redirect', path);
+    console.debug('redirect', path);
     if (this.useFallback(forceFallback)) {
       const config = this.config;
       if (!config.shopOrigin || config.shopOrigin.length <= 0) {
@@ -206,7 +206,7 @@ export class EASDKWrapperService extends WrapperService implements IEASDKWrapper
         return;
       }
       const href = config.shopOrigin + '/admin' + path;
-      this.debug('redirect in fallbackmode to', href);
+      console.debug('redirect in fallbackmode to', href);
       window.location.href = href;
     } else {
       return this.shopifyApp.redirect(path);

@@ -1,4 +1,4 @@
-import { Debug, Utils } from '@ribajs/core';
+import { Utils } from '@ribajs/core';
 
 import {
   IShopifyProduct,
@@ -66,7 +66,6 @@ export class ShopifyProductService {
         }
       }
     }
-    this.debug('getVariantOfOptions optionValues', optionValues, 'variant', result);
     return result;
   }
 
@@ -83,7 +82,6 @@ export class ShopifyProductService {
         }
       });
     }
-    this.debug('getVariant', result);
     return result;
   }
 
@@ -118,8 +116,6 @@ export class ShopifyProductService {
 
     return product;
   }
-
-  protected static debug = Debug('ShopifyExtension:ShopifyProductService');
 
   protected static cache: IProductsCache = {};
 

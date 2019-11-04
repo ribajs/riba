@@ -1,7 +1,4 @@
-import {
-  Component,
-  Debug,
-} from '@ribajs/core';
+import { Component } from '@ribajs/core';
 
 import template from './bs4-contents.component.html';
 
@@ -55,8 +52,6 @@ export class Bs4ContentsComponent extends Component {
     return ['headers-start', 'headers-depth', 'find-header-id-depth', 'header-parent-selector', 'scroll-offset', 'scroll-element'];
   }
 
-  protected debug = Debug('component:' + Bs4ContentsComponent.tagName);
-
   protected scope: Scope = {
     headersDepth: 1,
     headersStart: 2,
@@ -68,15 +63,7 @@ export class Bs4ContentsComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    this.debug('constructor', this);
     this.init(Bs4ContentsComponent.observedAttributes);
-  }
-
-  protected async init(observedAttributes: string[]) {
-    return super.init(observedAttributes)
-    .then((view) => {
-      return view;
-    });
   }
 
   protected getIdFromElementOrParent(element: HTMLElement, depth = 1): string | null {
@@ -93,11 +80,9 @@ export class Bs4ContentsComponent extends Component {
 
   protected pushHeaders(wrapperElement: Element, headersStart: number, headersDepth: number, pushTo: Anchor[]) {
     const headerElements = wrapperElement.querySelectorAll('h' + headersStart) as NodeListOf<HTMLHeadingElement>;
-    this.debug(`search for h${headersStart} in`, wrapperElement);
     headerElements.forEach((headerElement) => {
       const id = this.getIdFromElementOrParent(headerElement);
       if (!id) {
-        this.debug('Ignore element because it has no id', headerElement);
         return;
       }
       pushTo.push({
@@ -106,8 +91,6 @@ export class Bs4ContentsComponent extends Component {
         title: headerElement.innerHTML,
         childs: [],
       });
-      this.debug('Header pushed', id);
-      this.debug('headersDepth <= headersStart + 1', headersDepth <= headersStart + 1, headersDepth, headersStart + 1);
       if (headerElement.parentElement && headersDepth >= headersStart + 1) {
         this.pushHeaders(headerElement.parentElement, headersStart + 1, headersDepth, pushTo[pushTo.length - 1].childs);
       }
@@ -115,7 +98,6 @@ export class Bs4ContentsComponent extends Component {
   }
 
   protected async beforeBind() {
-    this.debug('beforeBind');
     if (this.scope.headerParentSelector && this.scope.headersStart && this.scope.headersDepth) {
       this.wrapperElement = document.querySelector(this.scope.headerParentSelector) || undefined;
       this.scope.anchors = [];
@@ -147,10 +129,8 @@ export class Bs4ContentsComponent extends Component {
   protected template() {
     // Only set the component template if there no childs already
     if (this.el.hasChildNodes()) {
-      this.debug('Do not use template, because element has child nodes');
       return null;
     } else {
-      this.debug('Use template', template);
       return template;
     }
   }

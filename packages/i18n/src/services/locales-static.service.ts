@@ -1,4 +1,3 @@
-import { Debug } from '@ribajs/core';
 import { ALocalesService } from './locales-base.service';
 
 export class LocalesStaticService extends ALocalesService {
@@ -20,8 +19,6 @@ export class LocalesStaticService extends ALocalesService {
    * The default theme langcode before any language was choosed
    */
   protected initalLangcode?: string;
-
-  protected debug = Debug('services:LocalesStaticService');
 
   constructor(protected locales: any, protected id?: string, doNotTranslateDefaultLanguage: boolean = false, showMissingTranslation: boolean = false) {
     super(doNotTranslateDefaultLanguage, showMissingTranslation);

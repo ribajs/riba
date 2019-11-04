@@ -1,6 +1,5 @@
 import {
   Component,
-  Debug,
   EventDispatcher,
   Utils,
 } from '@ribajs/core';
@@ -84,8 +83,6 @@ export class Bs4SidebarComponent extends Component {
 
   protected routerEvents = new EventDispatcher('main');
 
-  protected debug = Debug('component:' + Bs4SidebarComponent.tagName);
-
   protected scope: IScope = {
 
     // template properties
@@ -110,7 +107,6 @@ export class Bs4SidebarComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    this.debug('constructor', this);
     this.init(Bs4SidebarComponent.observedAttributes);
     this.style = window.getComputedStyle(this.el);
     window.addEventListener('resize', this.onEnviromentChanges.bind(this), false);
@@ -148,7 +144,6 @@ export class Bs4SidebarComponent extends Component {
   }
 
   protected onToggle(targetId: string) {
-    this.debug('toggle targetId', targetId);
     this.toggle();
   }
 
@@ -181,7 +176,6 @@ export class Bs4SidebarComponent extends Component {
   }
 
   protected onStateChange() {
-    this.debug('state changed: ' + this.scope.state);
     switch (this.scope.state) {
       case 'side-left':
       case 'side-right':
@@ -235,7 +229,6 @@ export class Bs4SidebarComponent extends Component {
   }
 
   protected initContainers() {
-    this.debug('initContainers', this.scope.containerSelector);
     const containers = this.getContainers();
     this.setContainersStyle(containers);
   }
@@ -245,7 +238,8 @@ export class Bs4SidebarComponent extends Component {
       containers = this.getContainers();
     }
     if (containers) {
-      for (const container of containers) {
+      for (let i = 0; i < containers.length; i++) {
+        const container = containers[i];
         this.setContainerStyle(container, style, move);
       }
     }
@@ -289,21 +283,12 @@ export class Bs4SidebarComponent extends Component {
     return container.setAttribute('style', `transition:${this.style.transition};${style}`);
   }
 
-  protected async init(observedAttributes: string[]) {
-    return super.init(observedAttributes)
-    .then((view) => {
-      return view;
-    });
-  }
-
   protected async beforeBind() {
-    this.debug('beforeBind');
     this.initRouterEventDispatcher();
     this.onEnviromentChanges();
   }
 
   protected async afterBind() {
-    this.debug('afterBind', this.scope);
     this.onEnviromentChanges();
   }
 
@@ -329,10 +314,8 @@ export class Bs4SidebarComponent extends Component {
   protected template() {
     // Only set the component template if there no childs already
     if (this.el.hasChildNodes()) {
-      this.debug('Do not use template, because element has child nodes');
       return null;
     } else {
-      this.debug('Use template', template);
       return template;
     }
   }

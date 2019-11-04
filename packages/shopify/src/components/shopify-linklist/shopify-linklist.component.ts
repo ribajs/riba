@@ -1,4 +1,4 @@
-import { Component, Debug, EventDispatcher } from '@ribajs/core';
+import { Component, EventDispatcher } from '@ribajs/core';
 import template from './shopify-linklist.component.html';
 
 export interface LinklistLink {
@@ -62,8 +62,6 @@ export class ShopifyLinklistComponent extends Component {
 
   public static tagName: string = 'shopify-linklist';
 
-  protected debug = Debug('component:' + ShopifyLinklistComponent.tagName);
-
   protected mainDispatcher = new EventDispatcher('main');
 
   protected autobind = true;
@@ -93,29 +91,24 @@ export class ShopifyLinklistComponent extends Component {
   }
 
   public toggle(link: LinklistLink) {
-    this.debug('toggle', link);
     link.collapsed = !link.collapsed;
   }
 
   public collapse(link: LinklistLink) {
-    this.debug('collapse', link);
     link.collapsed = true;
   }
 
   public show(link: LinklistLink) {
-    this.debug('show', link);
     link.collapsed = false;
   }
 
   public showAll() {
-    this.debug('showAll');
     if (this.scope.linklist) {
       this.showAllByLinks(this.scope.linklist.links);
     }
   }
 
   public collapseAll() {
-    this.debug('collapseAll');
     if (this.scope.linklist && this.scope.linklist.links) {
       this.collapseAllByLinks(this.scope.linklist.links);
     }
@@ -197,7 +190,6 @@ export class ShopifyLinklistComponent extends Component {
 
   protected onNewPageReady(viewId: string, currentStatus: IState, prevStatus: IState, container: HTMLElement, newPageRawHTML: string, dataset: any, isFirstPageLoad: boolean) {
     const url = currentStatus.url;
-    this.debug('[ShopifyLinklistComponent] onNewPageReady', url);
     if (this.scope.collapseOnNewPage) {
       this.collapseAll();
     }

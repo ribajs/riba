@@ -1,4 +1,4 @@
-import { Component, Debug, EventDispatcher, IBinder } from '@ribajs/core';
+import { Component, EventDispatcher, IBinder } from '@ribajs/core';
 import { CollapseService } from '../../services/collapse.service';
 import { JQuery as $ } from '@ribajs/jquery';
 
@@ -6,7 +6,6 @@ export class NavbarComponent extends Component {
 
   public static tagName: string = 'bs4-navbar';
 
-  protected debug = Debug('component:bs4-navbar');
   protected scope: any = {
     toggle: this.toggle,
     isCollapsed: true,
@@ -53,7 +52,6 @@ export class NavbarComponent extends Component {
   }
 
   public toggle(context: IBinder<any>, event: Event) {
-    this.debug('toggle');
     this.collapseService.toggle();
     event.preventDefault();
     event.stopPropagation();

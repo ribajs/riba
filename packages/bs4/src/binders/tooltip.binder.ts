@@ -5,14 +5,12 @@ import Popper from 'popper.js'; // /dist/umd/popper
  * @see https://getbootstrap.com/docs/4.1/components/tooltips/
  * @see https://github.com/twbs/bootstrap/blob/v4-dev/js/src/tooltip.js
  */
-import { IBinder, Debug } from '@ribajs/core';
+import { IBinder } from '@ribajs/core';
 import { JQuery as $ } from '@ribajs/jquery';
 
 const template = '<div class="tooltip" role="tooltip">' +
 '<div class="arrow"></div>' +
 '<div class="tooltip-inner"></div></div>';
-
-const debug = Debug('binder:rv-bs4-tooltip');
 
 /**
  *
@@ -41,12 +39,6 @@ export const tooltipBinder: IBinder<string> = {
             boundariesElement: 'scrollParent',
           },
         },
-        onCreate: (data) => {
-          debug('onCreate');
-        },
-        onUpdate: (data) => {
-          debug('onUpdate');
-        },
       });
       this.customData.$tip.appendTo(document.body);
       this.customData.$tip.addClass('show');
@@ -63,7 +55,6 @@ export const tooltipBinder: IBinder<string> = {
   },
 
   routine(el: HTMLElement, text: string) {
-    debug('TODO routine');
     this.customData.$tip.find('.tooltip-inner').html(text);
   },
 

@@ -1,4 +1,4 @@
-import { Utils, Debug } from '@ribajs/core';
+import { Utils } from '@ribajs/core';
 import { BaseService } from './base.service';
 
 export interface IInstagramMediaData {

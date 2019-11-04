@@ -1,4 +1,4 @@
-import { Debug, Utils } from '@ribajs/core';
+import { Utils } from '@ribajs/core';
 import { BaseTransition } from './BaseTransition';
 import { ITransition } from '../../interfaces/transition';
 
@@ -15,14 +15,10 @@ declare global {
  */
 class CustomTransition extends BaseTransition implements ITransition {
 
-  protected debug = Debug('rivets:CustomTransition');
-
   public init(oldContainer: HTMLElement, newContainer: Promise<HTMLElement>): Promise<void> {
     const self = this;
 
     this.oldContainer = oldContainer;
-    this.debug('init');
-
     this.deferred = Utils.deferred();
     const newContainerReady = Utils.deferred();
     this.newContainerLoading = newContainerReady.promise;
@@ -38,7 +34,6 @@ class CustomTransition extends BaseTransition implements ITransition {
   }
 
   public start() {
-    this.debug('CustomTransition start');
     if (!this.newContainerLoading) {
       throw new Error('this.newContainerLoading is not set');
     }
@@ -47,7 +42,6 @@ class CustomTransition extends BaseTransition implements ITransition {
 
   public finish(container: HTMLElement) {
     document.body.scrollTop = 0;
-    this.debug('CustomTransition finish');
     this.done();
   }
 

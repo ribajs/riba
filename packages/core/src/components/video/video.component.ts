@@ -1,5 +1,4 @@
 import { Component } from '../../component/component';
-import { Debug } from '../../vendors/debug.module';
 
 interface Scope {
   // properties
@@ -112,8 +111,6 @@ export class VideoComponent extends Component {
 
   protected video: HTMLVideoElement;
 
-  protected debug = Debug('component:' + VideoComponent.tagName);
-
   protected scope: Scope = {
     // properties
     muted: this.muted,
@@ -136,7 +133,6 @@ export class VideoComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    this.debug('constructor', this);
     const video = this.el.querySelector('video');
     if (!video) {
       throw new Error('The video child element is required!');
@@ -152,12 +148,10 @@ export class VideoComponent extends Component {
   }
 
   public toggleMute() {
-    this.debug('toggleMute', this.muted);
     this.muted = !this.muted;
   }
 
   public toggleControls() {
-    this.debug('toggleControls', this.controls);
     this.controls = !this.controls;
   }
 

@@ -34,7 +34,6 @@ class PQueue {
         this._intervalEnd = 0;
         this._timeoutId = null;
         this.queue = new options.queueClass(); // eslint-disable-line new-cap
-        this._queueClass = options.queueClass;
         this._pendingCount = 0;
         this._concurrency = options.concurrency;
         this._isPaused = options.autoStart === false;

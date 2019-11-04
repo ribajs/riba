@@ -1,4 +1,4 @@
-import { Debug, EventDispatcher } from '@ribajs/core';
+import { EventDispatcher } from '@ribajs/core';
 import { PQueue } from './p-queue.service';
 import { IShopifyCartLineItem, IShopifyCartUpdateProperty, IShopifyCartAddError, IShopifyCartObject, IShopifyCustomerAddress, IShopifyShippingRates, IShopifyShippingRatesNormalized } from '../interfaces';
 export interface IShopifyCartRequestOptions {
@@ -18,7 +18,7 @@ export declare class ShopifyCartService {
      * @return Response if successful, the JSON of the line item associated with the added variant.
      * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#add-to-cart
      */
-    static add(id: number | number, quantity?: number, properties?: {}, options?: IShopifyCartRequestOptions): Promise<IShopifyCartLineItem | IShopifyCartAddError>;
+    static add(id: number, quantity?: number, properties?: {}, options?: IShopifyCartRequestOptions): Promise<IShopifyCartLineItem | IShopifyCartAddError>;
     static _get(): Promise<IShopifyCartObject>;
     /**
      * Use this to get the cart as JSON.
@@ -88,7 +88,6 @@ export declare class ShopifyCartService {
      * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#get-shipping-rates
      */
     static getShippingRates(shippingAddress: IShopifyCustomerAddress, normalize?: boolean, options?: IShopifyCartRequestOptions): Promise<IShopifyShippingRates | IShopifyShippingRatesNormalized>;
-    protected static debug: Debug.Debugger;
     protected static CART_POST_ADD_URL: string;
     protected static CART_GET_URL: string;
     protected static CART_POST_UPDATE_URL: string;
@@ -114,5 +113,9 @@ export declare class ShopifyCartService {
      * Trigger `ShopifyCart:request:start`, if not already triggered
      */
     protected static triggerOnStart(): void;
+    /**
+     * Trigger `ShopifyCart:add`
+     */
+    protected static triggerAdd(id: number, quantity: number, properties: any): void;
     protected static normalizeShippingRates(shippingRates: IShopifyShippingRates): IShopifyShippingRatesNormalized;
 }

@@ -28,6 +28,7 @@ class ShopifyCartService {
                     if (options.triggerOnChange) {
                         this.triggerOnChange(cart);
                     }
+                    this.triggerAdd(id, quantity, properties);
                     return lineItem; // return original response
                 });
             })
@@ -234,7 +235,6 @@ class ShopifyCartService {
         return core_1.Utils.get(this.CART_GET_SHIPPING_RATES_URL, { shipping_address: shippingAddress }, 'json')
             .then((shippingRates) => {
             if (core_1.Utils.isObject(shippingRates) && core_1.Utils.isObject(shippingRates.shipping_rates)) {
-                this.debug('getShippingRates result', shippingRates.shipping_rates);
                 if (normalize) {
                     return this.normalizeShippingRates(shippingRates.shipping_rates);
                 }
@@ -293,6 +293,12 @@ class ShopifyCartService {
         }
         ShopifyCartService.shopifyCartEventDispatcher.trigger('ShopifyCart:request:start');
     }
+    /**
+     * Trigger `ShopifyCart:add`
+     */
+    static triggerAdd(id, quantity, properties) {
+        ShopifyCartService.shopifyCartEventDispatcher.trigger('ShopifyCart:add', { id, quantity, properties });
+    }
     static normalizeShippingRates(shippingRates) {
         const normalized = new Array(shippingRates.length);
         for (const i in shippingRates) {
@@ -305,11 +311,11 @@ class ShopifyCartService {
                         normalized[i].price *= 100;
                     }
                     else {
-                        this.debug(`Can't parse "${normalized[i].price}" to number`);
+                        console.warn(`Can't parse "${normalized[i].price}" to number`);
                     }
                 }
                 else {
-                    this.debug(`price property not defined`, normalized[i]);
+                    console.warn(`price property not defined`, normalized[i]);
                 }
             }
         }
@@ -320,7 +326,6 @@ exports.ShopifyCartService = ShopifyCartService;
 ShopifyCartService.queue = new p_queue_service_1.PQueue({ concurrency: 1 });
 ShopifyCartService.cart = null;
 ShopifyCartService.shopifyCartEventDispatcher = new core_1.EventDispatcher('ShopifyCart');
-ShopifyCartService.debug = core_1.Debug('ShopifyExtension:ShopifyCartService');
 ShopifyCartService.CART_POST_ADD_URL = '/cart/add.js';
 ShopifyCartService.CART_GET_URL = '/cart.js';
 ShopifyCartService.CART_POST_UPDATE_URL = '/cart/update.js';

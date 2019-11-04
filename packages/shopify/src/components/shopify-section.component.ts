@@ -1,10 +1,8 @@
-import { Debug, Component } from '@ribajs/core';
+import { Component } from '@ribajs/core';
 
 export abstract class ShopifySectionComponent extends Component {
 
   public static tagName: string = 'shopify-section';
-
-  protected debug = Debug('component:' + ShopifySectionComponent.tagName);
 
   protected abstract scope: any;
 
@@ -30,31 +28,31 @@ export abstract class ShopifySectionComponent extends Component {
    * Re-execute any JavaScript needed for the section to work and display properly (as if the page had just been loaded).
    */
   protected onSectionLoad(event: Event) {
-    this.debug('onSectionLoad', event);
+    console.debug('onSectionLoad', event);
   }
 
   protected onSectionUnload(event: Event) {
-    this.debug('onSectionUnload', event);
+    console.debug('onSectionUnload', event);
   }
 
   protected onSectionSelect(event: Event) {
-    this.debug('onSectionSelect', event);
+    console.debug('onSectionSelect', event);
   }
 
   protected onSectionDeselect(event: Event) {
-    this.debug('onSectionDeselect', event);
+    console.debug('onSectionDeselect', event);
   }
 
   protected onSectionReorder(event: Event) {
-    this.debug('onSectionReorder', event);
+    console.debug('onSectionReorder', event);
   }
 
   protected onBlockSelect(event: Event) {
-    this.debug('onBlockSelect', event);
+    console.debug('onBlockSelect', event);
   }
 
   protected onBlockDeselect(event: Event) {
-    this.debug('onBlockDeselect', event);
+    console.debug('onBlockDeselect', event);
   }
 
 }

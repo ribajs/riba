@@ -1,9 +1,4 @@
-import { Debug, Utils } from '@ribajs/core';
-
-// declare global {
-//   // tslint:disable: interface-name
-//   interface Window { model: any; }
-// }
+import { Utils } from '@ribajs/core';
 
 /**
  * Custom version of shopify tools like api.jquery.js / option-selection.js
@@ -43,16 +38,10 @@ export class ShopifyService {
     }
   }
 
-  private debug = Debug('service:ShopifyService');
-
   constructor(shopSettings?: any) {
-
     if (ShopifyService.instance) {
       return ShopifyService.instance;
     }
-
-    this.debug('shop settings', this.moneyFormat);
-
     ShopifyService.instance = this;
   }
 

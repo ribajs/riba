@@ -1,4 +1,4 @@
-import { Debug, Utils } from '@ribajs/core';
+import { Utils } from '@ribajs/core';
 import { Pjax } from '.';
 
 /**
@@ -15,8 +15,6 @@ class Prefetch {
    * @default
    */
   public ignoreClassLink = 'no-barba-prefetch';
-
-  private debug = Debug('router:Prefetch');
 
   /**
    * Creates an singleton instance of Prefetch.
@@ -73,8 +71,6 @@ class Prefetch {
       url = Pjax.getHref(el);
     }
 
-    this.debug('onLinkEnter', url);
-
     if (!url) {
       console.warn(`Url is not defined, you can't cache the link without the url. Please make shure your element has the href attribute or pass the url directly to this function.`);
     }
@@ -83,15 +79,10 @@ class Prefetch {
     if (url && Pjax.preventCheck(evt, el, url) && !Pjax.cache.get(url)) {
       const xhr = Utils.fetch(url);
       Pjax.cache.set(url, xhr);
-      this.debug('cached', url, xhr);
     } else {
-      this.debug('not cached', url);
       if (url) {
-        if (Pjax.cache.get(url)) {
-          this.debug('already cached', Pjax.cache.get(url));
-        }
         if (!Pjax.preventCheck(evt, el, url)) {
-          this.debug('preventCheck failed', Pjax.preventCheck(evt, el, url));
+          console.warn('preventCheck failed', Pjax.preventCheck(evt, el, url));
         }
       }
     }

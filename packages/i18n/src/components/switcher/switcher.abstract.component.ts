@@ -1,6 +1,5 @@
 import {
   Component,
-  Debug,
   IBinder,
   View,
 } from '@ribajs/core';
@@ -18,8 +17,6 @@ export abstract class AI18nSwitcherComponent extends Component {
 
   protected abstract localesService: ALocalesService;
 
-  protected debug = Debug('component:' + AI18nSwitcherComponent.tagName);
-
   protected scope = {
     langcodes: <ILangcode[]> [],
     switch: this.switch,
@@ -29,7 +26,6 @@ export abstract class AI18nSwitcherComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    this.debug('constructor', this);
   }
 
   /**
@@ -40,7 +36,6 @@ export abstract class AI18nSwitcherComponent extends Component {
   public switch(langcode: ILangcode, context: IBinder<any>, event: Event) {
     event.preventDefault();
     event.stopPropagation();
-    this.debug('switch', langcode);
     if (!langcode.active) {
       this.setLangcode(langcode.code);
     }
@@ -54,11 +49,9 @@ export abstract class AI18nSwitcherComponent extends Component {
   public toggle(context: IBinder<any>, event: Event) {
     event.preventDefault();
     event.stopPropagation();
-    this.debug('toggle');
     for (const i in this.scope.langcodes) {
       if (this.scope.langcodes.hasOwnProperty(i)) {
         if (this.scope.langcodes[i].active !== true) {
-          this.debug('toggle active', this.scope.langcodes[i].active, this.scope.langcodes[i].code);
           this.setLangcode(this.scope.langcodes[i].code);
           return;
         }
@@ -106,7 +99,6 @@ export abstract class AI18nSwitcherComponent extends Component {
         this.scope.langcodes.forEach((langCode) => {
           langCode.active = (langCode.code === changedLangcode);
         });
-        this.debug('changed', this.scope.langcodes, changedLangcode);
       });
       return langcodes;
     })
@@ -117,16 +109,7 @@ export abstract class AI18nSwitcherComponent extends Component {
   }
 
   protected setLangcode(langcode: string) {
-    this.debug('setLangcode', langcode);
     this.localesService.setLangcode(langcode);
-  }
-
-  protected async beforeBind() {
-    this.debug('beforeBind', this.scope);
-  }
-
-  protected async afterBind() {
-    this.debug('afterBind', this.scope);
   }
 
   protected requiredAttributes() {

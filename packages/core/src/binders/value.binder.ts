@@ -1,8 +1,5 @@
-import { Debug } from '../vendors';
 import { IBinder } from '../interfaces';
 import { Utils } from '../services/utils';
-
-const debug = Debug('binder:value');
 
 const getData = (el: HTMLElement) => {
   const customData: any = {};
@@ -31,7 +28,6 @@ export const valueBinder: IBinder<any> = {
       const self = this;
       if (!this.customData.callback) {
         this.customData.callback = () => {
-          debug('callback called');
           self.publish();
         };
       }
@@ -50,7 +46,6 @@ export const valueBinder: IBinder<any> = {
 
   routine(el: HTMLElement | HTMLSelectElement, value: string | string[]) {
     const oldValue = this.getValue(el);
-    debug('routine value', value);
     if (!this.customData) {
       this.customData = getData(el);
     }

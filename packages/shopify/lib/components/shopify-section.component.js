@@ -4,41 +4,42 @@ const core_1 = require("@ribajs/core");
 class ShopifySectionComponent extends core_1.Component {
     constructor(element) {
         super(element);
-        this.debug = core_1.Debug('component:' + ShopifySectionComponent.tagName);
-        this.$el = core_1.JQuery(this.el);
-        this.$el.on('shopify:section:load', this.onSectionLoad);
-        this.$el.on('shopify:section:unload', this.onSectionUnload);
-        this.$el.on('shopify:section:select', this.onSectionSelect);
-        this.$el.on('shopify:section:deselect', this.onSectionDeselect);
-        this.$el.on('shopify:section:reorder', this.onSectionReorder);
-        this.$el.on('shopify:block:select', this.onBlockSelect);
-        this.$el.on('shopify:block:deselect', this.onBlockDeselect);
+        this.initEventListeners();
+    }
+    initEventListeners() {
+        this.el.addEventListener('shopify:section:load', this.onSectionLoad);
+        this.el.addEventListener('shopify:section:unload', this.onSectionUnload);
+        this.el.addEventListener('shopify:section:select', this.onSectionSelect);
+        this.el.addEventListener('shopify:section:deselect', this.onSectionDeselect);
+        this.el.addEventListener('shopify:section:reorder', this.onSectionReorder);
+        this.el.addEventListener('shopify:block:select', this.onBlockSelect);
+        this.el.addEventListener('shopify:block:deselect', this.onBlockDeselect);
     }
     /**
      * A section has been added or re-rendered.
      * Re-execute any JavaScript needed for the section to work and display properly (as if the page had just been loaded).
      */
-    onSectionLoad(event, data) {
-        this.debug('onSectionLoad', data);
+    onSectionLoad(event) {
+        console.debug('onSectionLoad', event);
     }
-    onSectionUnload(event, data) {
-        this.debug('onSectionUnload', data);
+    onSectionUnload(event) {
+        console.debug('onSectionUnload', event);
     }
-    onSectionSelect(event, data) {
-        this.debug('onSectionSelect', data);
+    onSectionSelect(event) {
+        console.debug('onSectionSelect', event);
     }
-    onSectionDeselect(event, data) {
-        this.debug('onSectionDeselect', data);
+    onSectionDeselect(event) {
+        console.debug('onSectionDeselect', event);
     }
-    onSectionReorder(event, data) {
-        this.debug('onSectionReorder', data);
+    onSectionReorder(event) {
+        console.debug('onSectionReorder', event);
     }
-    onBlockSelect(event, data) {
-        this.debug('onBlockSelect', data);
+    onBlockSelect(event) {
+        console.debug('onBlockSelect', event);
     }
-    onBlockDeselect(event, data) {
-        this.debug('onBlockDeselect', data);
+    onBlockDeselect(event) {
+        console.debug('onBlockDeselect', event);
     }
 }
 exports.ShopifySectionComponent = ShopifySectionComponent;
-ShopifySectionComponent.tagName = 'rv-shopify-section';
+ShopifySectionComponent.tagName = 'shopify-section';

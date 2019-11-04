@@ -1,4 +1,3 @@
-import { Debug } from '@ribajs/core';
 /**
  * Object that is going to deal with DOM parsing/manipulation
  */
@@ -27,8 +26,6 @@ class Dom {
   private _wrapper: HTMLElement;
 
   private parseTitle: boolean;
-
-  private debug = Debug('router:Dom');
 
   constructor(wrapper: HTMLElement, containerSelector = '[data-namespace]', parseTitle: boolean) {
     this._wrapper = wrapper;
@@ -100,7 +97,6 @@ class Dom {
    * Put the container on the page
    */
   public putContainer(element: HTMLElement | HTMLElement, appendChild: 'append' | 'replace' = 'replace') {
-    this.debug('putContainer', element);
     element = element as HTMLElement;
     element.style.visibility = 'hidden';
     const wrapper = this.getWrapper();

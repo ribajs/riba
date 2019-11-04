@@ -1,7 +1,5 @@
-import { Debug, IBinder, Utils, View as RivetsView } from '@ribajs/core';
+import { IBinder, Utils, View as RivetsView } from '@ribajs/core';
 import { Pjax, HideShowTransition } from '../services';
-
-const debug = Debug('binders:view-static');
 
 /**
  * Loads a url with pjax and show them insite the element this binder is used on
@@ -11,7 +9,6 @@ export const viewStaticBinder: IBinder<string> = {
   block: true,
 
   bind(el: HTMLElement) {
-    debug('bind', this.customData);
     if (!this.customData) {
       this.customData = {
         nested: null,
@@ -20,7 +17,6 @@ export const viewStaticBinder: IBinder<string> = {
   },
 
   routine(el: HTMLElement, options: any) {
-    debug('routine', this.customData);
     const wrapper = el;
     const self = this;
 
@@ -48,7 +44,6 @@ export const viewStaticBinder: IBinder<string> = {
 
       // self.view.models.dataset = container.data();
       if (self.customData.nested) {
-        debug('unbind nested');
         self.customData.nested.unbind();
       }
       self.customData.nested = new RivetsView(container, self.view.models, self.view.options);
@@ -58,14 +53,9 @@ export const viewStaticBinder: IBinder<string> = {
   },
 
   unbind(el: HTMLUnknownElement) {
-
-    debug('unbind');
-
     if (this.customData.nested) {
-      debug('unbind nested'); // TODO not called?
       this.customData.nested.unbind();
     }
-
     delete this.customData;
   },
 };

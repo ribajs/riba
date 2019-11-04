@@ -6,7 +6,6 @@ import {
 } from './interfaces';
 import { Binding } from './binding';
 import { parseNode, parseDeclaration } from './parsers';
-import { Debug } from './vendors/debug.module';
 import { RibaComponent, Component } from './component';
 
 export type TBlock = boolean;
@@ -22,8 +21,6 @@ export interface IDataElement extends HTMLUnknownElement {
  * A collection of bindings built from a set of parent nodes.
  */
 export class View {
-  public static debug = Debug('riba:view');
-
   public static DECLARATION_SPLIT = /((?:'[^']*')*(?:(?:[^\|']*(?:'[^']*')+[^\|']*)+|[^\|]+))|^$/g;
 
   /**
@@ -53,7 +50,7 @@ export class View {
     const view = new View((template as Node), models, binding.view.options);
     view.bind();
     if (!binding || !binding.marker || binding.marker.parentNode === null) {
-      this.debug('[View] Warn: No parent node for binding!');
+      console.warn('[View]: No parent node for binding!');
     } else {
       binding.marker.parentNode.insertBefore(template, anchorEl);
     }
@@ -101,14 +98,16 @@ export class View {
   public build() {
     this.bindings = [];
 
+    if (!this.options.templateDelimiters) {
+      throw new Error('templateDelimiters required');
+    }
+
     const elements = this.els;
-    let i: number;
-    let len: number;
-    for (i = 0, len = elements.length; i < len; i++) {
-      if (! this.options.templateDelimiters) {
-        throw new Error('templateDelimiters required');
+    for (let i = 0; i < elements.length; i++) {
+      const element = elements[i];
+      if (element) {
+        parseNode(this, (element as IDataElement), this.options.templateDelimiters);
       }
-      parseNode(this, (elements[i] as IDataElement), this.options.templateDelimiters);
     }
 
     this.bindings.sort(View.bindingComparator);
@@ -201,18 +200,18 @@ export class View {
         const COMPONENT = (this.options.components[nodeName] as typeof RibaComponent);
         // Fallback
         if (!window.customElements) {
-          View.debug(`Fallback for Webcomponent ${nodeName}`);
+          console.warn(`Fallback for Webcomponent ${nodeName}`);
           const component = new COMPONENT(node, {
             fallback: true,
             view: this,
           });
           this.webComponents.push(component);
         } else {
-          View.debug(`Define Webcomponent ${nodeName} with customElements.define`);
+          // console.warn(`Define Webcomponent ${nodeName} with customElements.define`);
           // if node.constructor is not HTMLElement and not HTMLUnknownElement, it was registed
           // @see https://stackoverflow.com/questions/27334365/how-to-get-list-of-registered-custom-elements
           if (customElements.get(nodeName) || (node.constructor !== HTMLElement && node.constructor !== HTMLUnknownElement)) {
-            View.debug(`Web component already defined`, node.constructor);
+            // console.warn(`Web component already defined`, node.constructor);
           } else {
             try {
               customElements.define(nodeName, COMPONENT);

@@ -1,4 +1,4 @@
-import { Component, Debug, Binding, handleizeFormatter } from '@ribajs/core';
+import { Component, Binding, handleizeFormatter } from '@ribajs/core';
 import template from './tabs.component.html';
 
 export interface Tab {
@@ -19,7 +19,6 @@ export class TabsComponent extends Component {
 
   public static tagName: string = 'bs4-tabs';
 
-  protected debug = Debug('component:' + TabsComponent.tagName);
   protected scope: Scope = {
     tabs: new Array<Tab>(),
     activate: this.activate,
@@ -111,7 +110,6 @@ export class TabsComponent extends Component {
   public activate(tab: Tab, binding?: Binding, event?: Event) {
     this.deactivateAll();
     tab.active = true;
-    this.debug('activate', event);
     if (event) {
       event.preventDefault();
     }
@@ -158,8 +156,6 @@ export class TabsComponent extends Component {
     // Bind static template
     this.setElements();
 
-    this.debug('constructor', this.el, this.tabs, this.tabPanes);
-
     if (this.tabs) {
       this.tabs.forEach(((tab) => {
         tab.removeEventListener('shown.bs.tab', this.onTabShownEventHandler);
@@ -175,9 +171,7 @@ export class TabsComponent extends Component {
   }
 
   protected addTabByAttribute(attributeName: string, newValue: string) {
-    this.debug('addTabByAttribute');
     const index = Number(attributeName.replace(/[^0-9]/g, ''));
-    this.debug('index', index);
     if (index >= this.scope.tabs.length) {
       this.resizeTabsArray(index + 1);
     }
@@ -191,7 +185,6 @@ export class TabsComponent extends Component {
     if (attributeName.endsWith('Handle')) {
       this.scope.tabs[index].handle = newValue;
     }
-    this.debug('this.scope',  this.scope);
 
     // if is first tab
     if (
@@ -230,7 +223,6 @@ export class TabsComponent extends Component {
 
   protected parsedAttributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
     super.parsedAttributeChangedCallback(attributeName, oldValue, newValue, namespace);
-    this.debug('parsedAttributeChangedCallback', attributeName);
     if (attributeName.startsWith('tab')) {
       this.addTabByAttribute(attributeName, newValue);
       this.initTabs();
@@ -249,7 +241,6 @@ export class TabsComponent extends Component {
   protected onlyTemplateChilds() {
     let allAreTemplates: boolean = true;
     this.el.childNodes.forEach((child) => {
-      this.debug('child', child);
       allAreTemplates = allAreTemplates && (child.nodeName === 'TEMPLATE' || child.nodeName === '#text');
     });
     return allAreTemplates;
@@ -258,10 +249,8 @@ export class TabsComponent extends Component {
   protected template() {
     // Only set the component template if there no childs or the childs are templates
     if (!this.el.hasChildNodes() || this.onlyTemplateChilds()) {
-      this.debug('Use template', template);
       return template;
     } else {
-      this.debug('Do not use template, because element has child nodes');
       return null;
     }
   }

@@ -8,7 +8,6 @@ import {
 } from './interfaces';
 import { View } from './view';
 import { Utils } from './services/utils';
-import { Debug, IDebugger } from './vendors';
 
 /**
  *  A single binding between a model attribute and a DOM element.
@@ -47,8 +46,6 @@ export class Binding {
    */
   public customData?: any;
 
-  private debug: IDebugger;
-
   /**
    * All information about the binding is passed into the constructor; the
    * containing view, the DOM node, the type of binding, the model object and the
@@ -70,15 +67,12 @@ export class Binding {
     this.formatters = formatters;
     this.model = undefined;
     this.customData = {};
-    this.debug = Debug('riba:Binding');
 
     if (identifier && type) {
       this.args = this.getStarArguments(identifier, type);
     } else {
       this.args = new Array<string | number>();
     }
-
-    // this.debug('constructor', this.args, identifier, type);
   }
 
   /**
@@ -368,9 +362,7 @@ export class Binding {
   private getStarArguments(identifier: string, type: string) {
     const args = new Array<string | number>();
     const regexp = new RegExp(`^${identifier.replace(/\*/g, '.+')}$`);
-    if (regexp.test(type) && type.split('-')[0] === identifier.split('-')[0]) {
-      this.debug('matches', identifier, type);
-    } else {
+    if (!(regexp.test(type) && type.split('-')[0] === identifier.split('-')[0])) {
       if (identifier !== '*') {
         console.error('Nodename not matchs the identifier,', identifier, type);
       }

@@ -1,8 +1,6 @@
-import { Debug, IBinder, EventDispatcher, Utils, View as RivetsView } from '@ribajs/core';
+import { IBinder, EventDispatcher, Utils, View as RivetsView } from '@ribajs/core';
 import { Pjax, Prefetch, HideShowTransition } from '../services';
 import { IState } from '../interfaces';
-
-const debug = Debug('binders:view');
 
 /**
  * The main wrapper for the riba router
@@ -21,7 +19,6 @@ export const viewBinder: IBinder<string> = {
   block: true,
 
   bind(el: Element) {
-    debug('bind', this.customData);
     const self = this;
     if (!this.customData) {
       this.customData = {};
@@ -33,13 +30,12 @@ export const viewBinder: IBinder<string> = {
     this.customData.onPageReady = (viewId: string, currentStatus: IState, prevStatus: IState, container: HTMLElement, newPageRawHTML: string, dataset: any, isInit: boolean) => {
       // Only to anything if the viewID is eqal (in this way it is possible to have multiple views)
       if (viewId !== self.customData.options.viewId) {
-        debug('not the right view', self.customData.options.viewId, viewId);
+        console.warn('not the right view', self.customData.options.viewId, viewId);
         return;
       }
 
       // unbind the old rivets view
       if (self.customData.nested) {
-        debug('unbind nested'); // TODO not called?
         if (self.customData.options.action === 'replace') {
           self.customData.nested.unbind();
         }
@@ -52,7 +48,6 @@ export const viewBinder: IBinder<string> = {
 
       if (self.customData.options.datasetToModel === true && Utils.isObject(dataset)) {
         self.view.models.dataset = dataset; // = container.data();
-        debug('newPageReady dataset:', dataset);
       }
 
       // TODO append on action append
@@ -61,11 +56,9 @@ export const viewBinder: IBinder<string> = {
     };
 
     this.customData.onTransitionCompleted = (viewId: string) => {
-      debug('onTransitionCompleted', self.customData);
 
       // Only to anything if the viewID is eqal (in this way it is possible to have multiple views)
       if (viewId !== self.customData.options.viewId) {
-        debug('[onTransitionCompleted] not the right view', self.customData.options.viewId, viewId);
         return;
       }
 
@@ -73,7 +66,6 @@ export const viewBinder: IBinder<string> = {
       if (this.customData.options.scrollToAnchorHash && window.location.hash) {
         const scrollToMe = document.getElementById(window.location.hash.substr(1));
         if (scrollToMe) {
-          debug('scroll to anchor:', scrollToMe);
           return new Promise((resolve, reject) => {
             resolve(Utils.scrollTo(scrollToMe, 0, window));
           });
@@ -131,10 +123,7 @@ export const viewBinder: IBinder<string> = {
     this.customData.dispatcher = new EventDispatcher(this.customData.options.viewId);
     this.customData.prefetch = new Prefetch();
 
-    debug('routine', this.customData.options.viewId);
-
     this.customData.wrapper.setAttribute('id', this.customData.options.viewId);
-    debug('options', this.customData.options);
 
     this.customData.dispatcher.on('newPageReady', this.customData.onPageReady);
     this.customData.dispatcher.on('transitionCompleted', this.customData.onTransitionCompleted);
@@ -145,7 +134,6 @@ export const viewBinder: IBinder<string> = {
   },
 
   unbind(el: HTMLUnknownElement) {
-    debug('unbind', this.customData.options.viewId);
     if (this.customData.dispatcher) {
       this.customData.dispatcher.off('newPageReady', this.customData.onPageReady);
       this.customData.dispatcher.off('transitionCompleted', this.customData.onTransitionCompleted);

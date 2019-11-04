@@ -1,4 +1,4 @@
-import { Debug, IFormatter } from '@ribajs/core';
+import { IFormatter } from '@ribajs/core';
 import { ALocalesService } from '../services/locales-base.service';
 
 const translate = async (translateMePathString: string, localesService: ALocalesService, langcode?: string) => {
@@ -18,17 +18,13 @@ const translate = async (translateMePathString: string, localesService: ALocales
   });
 };
 
-const debug = Debug('formatter:t');
-
 export const tFormatterWrapper = (localesService: ALocalesService): IFormatter => {
   return {
     name: 't',
     read(translateMePathString: string, langcode: string, ...vars: string[]) {
-      debug('formatter t', translateMePathString, langcode);
       if (localesService.ready) {
         return translate(translateMePathString, localesService, langcode)
         .then((locale) => {
-          debug('locale');
           return locale;
         });
       } else {
@@ -36,7 +32,6 @@ export const tFormatterWrapper = (localesService: ALocalesService): IFormatter =
           localesService.event.on('ready', () => {
             translate(translateMePathString, localesService, langcode)
             .then((locale) => {
-              debug('locale');
               resolve(locale as any);
             })
             .catch((error: Error) => {

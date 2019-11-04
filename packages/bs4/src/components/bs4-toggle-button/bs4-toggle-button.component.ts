@@ -1,6 +1,5 @@
 import {
   Component,
-  Debug,
   EventDispatcher,
 } from '@ribajs/core';
 
@@ -25,8 +24,6 @@ export class Bs4ToggleButtonComponent extends Component {
     return ['target-id'];
   }
 
-  protected debug = Debug('component:' + Bs4ToggleButtonComponent.tagName);
-
   protected eventDispatcher?: EventDispatcher;
 
   protected scope: IScope = {
@@ -38,12 +35,10 @@ export class Bs4ToggleButtonComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    this.debug('constructor', this);
     this.init(Bs4ToggleButtonComponent.observedAttributes);
   }
 
   public toggle() {
-    this.debug('toggle');
     if (this.eventDispatcher) {
       this.eventDispatcher.trigger('toggle', this.scope.targetId);
     }
@@ -60,21 +55,6 @@ export class Bs4ToggleButtonComponent extends Component {
     }
     this.eventDispatcher = new EventDispatcher('bs4-toggle-button:' + id);
     this.eventDispatcher.on('toggled', this.onToggledEvent.bind(this));
-  }
-
-  protected async init(observedAttributes: string[]) {
-    return super.init(observedAttributes)
-    .then((view) => {
-      return view;
-    });
-  }
-
-  protected async beforeBind() {
-    this.debug('beforeBind');
-  }
-
-  protected async afterBind() {
-    this.debug('afterBind', this.scope);
   }
 
   protected requiredAttributes() {
@@ -103,10 +83,8 @@ export class Bs4ToggleButtonComponent extends Component {
   protected template() {
     // Only set the component template if there no childs already
     if (this.el.hasChildNodes()) {
-      this.debug('Do not use template, because element has child nodes');
       return null;
     } else {
-      this.debug('Use template', template);
       return template;
     }
   }

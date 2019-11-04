@@ -2,7 +2,7 @@ export * from './HistoryManager';
 export * from './Dom';
 export * from './Prefetch';
 
-import { Debug, EventDispatcher, Utils } from '@ribajs/core';
+import { EventDispatcher, Utils } from '@ribajs/core';
 
 import { BaseCache } from '../Cache';
 import { HideShowTransition } from '../Transition';
@@ -61,8 +61,6 @@ class Pjax {
       element.setAttribute('href', href);
     }
 
-    Pjax.DEBUG('preventCheck', href, element);
-
     if (!element) {
       return false;
     }
@@ -78,37 +76,31 @@ class Pjax {
 
     // In case you're trying to load the same page
     if (Utils.cleanLink(href) === Utils.cleanLink(location.href)) {
-      Pjax.DEBUG('trying to load the same page');
       return false;
     }
 
     // Middle click, cmd click and ctrl click
     if ((evt && ((evt as any).which && (evt as any).which > 1) || (evt as any).metaKey || (evt as any).ctrlKey || (evt as any).shiftKey || (evt as any).altKey)) {
-      Pjax.DEBUG('Middle click, cmd click or ctrl click');
       return false;
     }
 
     // Ignore target with _blank target
     if (element.target && element.target === '_blank') {
-      Pjax.DEBUG('_blank target');
       return false;
     }
 
     // Check if it's the same domain
     if (window.location.protocol !== element.protocol || window.location.hostname !== element.hostname) {
-      Pjax.DEBUG('not the the same domain');
       return false;
     }
 
     // Check if the port is the same
     if (Utils.getPort() !== Utils.getPort(element.port)) {
-      Pjax.DEBUG('not the the same port');
       return false;
     }
 
     // Ignore case where there is download attribute
     if (element.getAttribute && typeof element.getAttribute('download') === 'string') {
-      Pjax.DEBUG('download link');
       return false;
     }
 
@@ -151,8 +143,6 @@ class Pjax {
     return undefined;
   }
 
-  private static DEBUG = Debug('router:Pjax');
-
   public dom?: Dom;
   public history = new HistoryManager();
 
@@ -186,8 +176,6 @@ class Pjax {
    * Creates an singleton instance of Pjax.
    */
   constructor(id: string, wrapper?: HTMLElement, containerSelector = '[data-namespace]', listenAllLinks: boolean = false, listenPopstate: boolean = true, transition: ITransition = new HideShowTransition(), parseTitle: boolean = true, changeBrowserUrl: boolean = true) {
-    Pjax.DEBUG('constructor', id);
-
     this.viewId = id;
 
     let instance = this as Pjax;
@@ -245,7 +233,6 @@ class Pjax {
    * Change the URL with pushstate and trigger the state change
    */
   public goTo(url: string, newTab = false) {
-    Pjax.DEBUG('goTo', url, newTab);
     if (newTab) {
       const win = window.open(url, '_blank');
       if (win) {
@@ -320,7 +307,6 @@ class Pjax {
  protected bindEvents(listenAllLinks: boolean, listenPopstate: boolean) {
     // you can also use the rv-router for this
     if (listenAllLinks) {
-      console.warn('listenAllLinks');
       document.addEventListener('click',
         this.onLinkClick.bind(this),
       );

@@ -9,7 +9,6 @@ export declare class PQueue {
     private _intervalId?;
     private _intervalEnd;
     private _timeoutId;
-    private _queueClass;
     private _pendingCount;
     private _concurrency;
     private _isPaused;

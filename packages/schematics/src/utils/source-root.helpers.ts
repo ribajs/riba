@@ -1,6 +1,5 @@
 import { join, normalize } from '@angular-devkit/core';
 import { Rule, Tree } from '@angular-devkit/schematics';
-import { debug as Debug } from 'debug';
 import { DEFAULT_PATH_NAME } from '../lib/defaults';
 
 export function isInRootDirectory(

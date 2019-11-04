@@ -1,4 +1,4 @@
-import { Utils, EventDispatcher, Debug } from '@ribajs/core';
+import { Utils, EventDispatcher } from '@ribajs/core';
 
 import {
   IEASDK,
@@ -43,8 +43,6 @@ export class WrapperService {
 
   public event = new EventDispatcher('shopify-easdk');
 
-  protected debug: Debug.IDebugger;
-
   protected shopifyApp: IEASDK;
 
   constructor(
@@ -54,7 +52,6 @@ export class WrapperService {
       throw new Error(WrapperService.ERRORS.EASDK_NOT_FOUND);
     }
     this.shopifyApp = shopifyApp || ShopifyApp;
-    this.debug = Debug('services:' + this.constructor.name);
   }
 
   public useFallback(force: boolean) {

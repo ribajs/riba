@@ -1,3 +1,11 @@
 {
-  "extends": "../core/tsconfig.json"
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./src/",
+    "outDir": "./lib/",
+    "noUnusedLocals": true,
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "types": ["jest"]
+  },
+  "include": ["*.ts", "**/*.ts"]
 }

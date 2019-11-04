@@ -1,7 +1,5 @@
 import {
   Component,
-  JQuery,
-  Debug,
 } from '@ribajs/core';
 
 import {
@@ -62,17 +60,12 @@ export class BarComponent extends Component {
 
   protected bar: IBarWrapper = new shopifyEasdkModule.services.BarWrapperService();
 
-  protected $el: JQuery<HTMLElement>;
-  protected debug = Debug('component:' + BarComponent.tagName);
-
   protected scope: IScope = {
     showFallbackBar: false,
   };
 
   constructor(element?: HTMLElement) {
     super(element);
-    this.$el = JQuery(this.el);
-    this.debug('constructor', this);
     this.init(BarComponent.observedAttributes);
     this.listenForConfigChanges();
   }
@@ -81,7 +74,6 @@ export class BarComponent extends Component {
 
     this.bar.event.on('bar:setShowFallbackBar', (showFallbackBar: boolean) => {
       this.scope.showFallbackBar = showFallbackBar;
-      this.debug('bar:showFallbackBar', showFallbackBar);
     });
 
     this.bar.event.on('bar:initialize', (fallback: boolean, config: IBarConfig) => {
@@ -100,35 +92,35 @@ export class BarComponent extends Component {
       if (this.scope.pagination !== config.pagination) {
         this.scope.pagination = config.pagination;
       }
-      this.debug('bar:initialize', fallback, config);
+      console.debug('bar:initialize', fallback, config);
     });
 
     this.bar.event.on('bar:setTitle', (fallback: boolean, title: string) => {
       if (this.scope.title !== title) {
         this.scope.title = title;
       }
-      this.debug('bar:setTitle', fallback, title);
+      console.debug('bar:setTitle', fallback, title);
     });
 
     this.bar.event.on('bar:loading', (fallback: boolean, loading: ILoadingStateWrapper) => {
       if (this.scope.loading !== loading.on) {
         this.scope.loading = loading.on;
       }
-      this.debug('bar:loading', fallback, loading);
+      console.debug('bar:loading', fallback, loading);
     });
 
     this.bar.event.on('bar:setPagination', (fallback: boolean, pagination?: IPaginationConfig) => {
       if (this.scope.pagination !== pagination) {
         this.scope.pagination = pagination;
       }
-      this.debug('bar:setPagination', fallback, pagination);
+      console.debug('bar:setPagination', fallback, pagination);
     });
 
     this.bar.event.on('bar:setBreadcrumb', (fallback: boolean, breadcrumb?: IButtonConfig) => {
       if (this.scope.breadcrumb !== breadcrumb) {
         this.scope.breadcrumb = breadcrumb;
       }
-      this.debug('bar:setBreadcrumb', fallback, breadcrumb);
+      console.debug('bar:setBreadcrumb', fallback, breadcrumb);
     });
 
   }
@@ -140,12 +132,12 @@ export class BarComponent extends Component {
     this.scope.icon =  this.bar.icon;
     this.scope.pagination =  this.bar.pagination;
     this.scope.showFallbackBar =  this.bar.showFallbackBar;
-    this.debug('beforeBind');
+    console.debug('beforeBind');
   }
 
   protected async afterBind() {
 
-    this.debug('afterBind', this.scope);
+    console.debug('afterBind', this.scope);
   }
 
   protected requiredAttributes() {
@@ -197,11 +189,11 @@ export class BarComponent extends Component {
     let template: string | null = null;
     // Only set the component template if there no childs already
     if (this.el.hasChildNodes()) {
-      this.debug('Do not template, because element has child nodes');
+      console.debug('Do not template, because element has child nodes');
       return template;
     } else {
       template = pugTemplate(this.scope);
-      this.debug('Use template', template);
+      console.debug('Use template', template);
       return template;
     }
   }

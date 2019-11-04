@@ -4,11 +4,13 @@
 
 ### Core
 
-- Removed jQuery from Core Module
+- Removed jQuery dependency
+- Removed Debug dependency
 
 ### Router
 
-- Removed jQuery from Router Module
+- Removed jQuery dependency
+- Removed Debug dependency
 
 ### JQuery
 

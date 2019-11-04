@@ -1,6 +1,5 @@
 import {
   Component,
-  Debug,
 } from '@ribajs/core';
 
 <% if (templateEngine === 'pug') { %>import pugTemplate from './<%= name %>.component.pug';<% } %><% if (templateEngine === 'html') { %>import template from './<%= name %>.component.html';<% } %>
@@ -19,15 +18,13 @@ export class <%= classify(name) %>Component extends Component {
     return ['hello'];
   }
 
-  protected debug = Debug('component:' + <%= classify(name) %>Component.tagName);
-
   protected scope: Scope = {
     hello: undefined,
   };
 
   constructor(element?: HTMLElement) {
     super(element);
-    this.debug('constructor', this);
+    console.debug('constructor', this);
     this.init(<%= classify(name) %>Component.observedAttributes);
   }
 
@@ -39,11 +36,11 @@ export class <%= classify(name) %>Component extends Component {
   }
 
   protected async beforeBind() {
-    this.debug('beforeBind');
+    console.debug('beforeBind');
   }
 
   protected async afterBind() {
-    this.debug('afterBind', this.scope);
+    console.debug('afterBind', this.scope);
   }
 
   protected requiredAttributes() {
@@ -62,10 +59,10 @@ export class <%= classify(name) %>Component extends Component {
   protected template() {
     // Only set the component template if there no childs already
     if (this.el.hasChildNodes()) {
-      this.debug('Do not use template, because element has child nodes');
+      console.debug('Do not use template, because element has child nodes');
       return null;
     } else {
-      <% if (templateEngine === 'pug') { %>const template = pugTemplate(this.scope);<% } %>this.debug('Use template', template);
+      <% if (templateEngine === 'pug') { %>const template = pugTemplate(this.scope);<% } %>console.debug('Use template', template);
       return template;
     }
   }

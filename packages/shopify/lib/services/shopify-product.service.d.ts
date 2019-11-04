@@ -1,4 +1,3 @@
-import { Debug } from '@ribajs/core';
 import { IShopifyProduct, IShopifyProductVariant } from '../interfaces';
 export interface IProductsCache {
     [handle: string]: IShopifyProduct;
@@ -9,6 +8,13 @@ export declare class ShopifyProductService {
      * @param handle product handle
      */
     static get(handle: string): Promise<IShopifyProduct>;
+    /**
+     * Check if the option values fits to the current variant.
+     * @param variant
+     * @param optionValues
+     * @return Returns true if the option values fitting to the variant
+     */
+    static fitsVariantOptions(variant: IShopifyProductVariant, optionValues: string[]): boolean;
     /**
      * Get product variant of (selected) option values
      * @param optionValues (selected) option values
@@ -30,6 +36,5 @@ export declare class ShopifyProductService {
      * @param product product object
      */
     static prepair(product: IShopifyProduct): IShopifyProduct;
-    protected static debug: Debug.Debugger;
     protected static cache: IProductsCache;
 }

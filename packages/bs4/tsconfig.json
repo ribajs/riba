@@ -1,14 +1,11 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es2017",
-    "typeRoots": ["./node_modules/@ribajs/core/src/types", "./node_modules/@types"],
-    "outDir": "dist",
-    "declaration": true,
-    "inlineSourceMap": true,
+    "baseUrl": "./src/",
+    "outDir": "./lib/",
     "noUnusedLocals": true,
-    "esModuleInterop": true
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "types": ["jest"]
   },
-  "include": ["src"],
-  "types": ["jest"]
+  "include": ["*.ts", "**/*.ts"]
 }

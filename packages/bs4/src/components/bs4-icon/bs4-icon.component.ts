@@ -1,11 +1,8 @@
-import Debug from 'debug';
 import { Component } from '@ribajs/core';
 
 export class Bs4IconComponent extends Component {
 
   public static tagName: string = 'bs4-icon';
-
-  protected debug = Debug('component:' + Bs4IconComponent.tagName);
 
   static get observedAttributes() {
     return ['size', 'width', 'height', 'src', 'color', 'direction'];
@@ -29,7 +26,6 @@ export class Bs4IconComponent extends Component {
   }
 
   public attributeChangedCallback(name: string, oldValue: any, newValue: any, namespace: string | null) {
-    this.debug('attributeChangedCallback', name, oldValue, newValue, namespace);
     // injects the changed attributes to scope
     super.attributeChangedCallback(name, oldValue, newValue, namespace);
 
@@ -60,7 +56,6 @@ export class Bs4IconComponent extends Component {
 
     if (name === 'size') {
       const size = newValue;
-      this.debug('set size', this.el);
       this.el.style.height = size;
       this.el.style.width = size;
       this.el.className.replace(/(^|\s)size-\S+/g, '');
@@ -69,7 +64,6 @@ export class Bs4IconComponent extends Component {
 
     if (name === 'width') {
       const width = newValue;
-      this.debug('set width', this.el);
       this.el.style.width = width;
       this.el.className.replace(/(^|\s)width-\S+/g, '');
       this.el.classList.add(`width-${width}`);
@@ -77,7 +71,6 @@ export class Bs4IconComponent extends Component {
 
     if (name === 'height') {
       const height = newValue;
-      this.debug('set height', this.el);
       this.el.style.height = height;
       this.el.className.replace(/(^|\s)height-\S+/g, '');
       this.el.classList.add(`height-${height}`);

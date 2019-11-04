@@ -1,4 +1,4 @@
-import { ShopifyService } from '../services/shopify.service';
+import { IFormatter } from '@ribajs/core';
 /**
  * Return a resized shopify image URL
  * @see https://help.shopify.com/en/themes/liquid/filters/url-filters#img_url
@@ -9,4 +9,4 @@ import { ShopifyService } from '../services/shopify.service';
  * @param crop TODO
  * @param extension
  */
-export declare const img_url: typeof ShopifyService.resizeImage;
+export declare const imgUrlFormatter: IFormatter;

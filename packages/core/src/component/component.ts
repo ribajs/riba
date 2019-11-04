@@ -4,7 +4,6 @@
  * @see https://developer.mozilla.org/de/docs/Web/Web_Components/Using_custom_elements
  */
 
-import { Debug, IDebugger } from '../vendors';
 import { EventHandler, IFormatter } from '../interfaces';
 import { View } from '../view';
 import { Riba } from '../riba';
@@ -37,7 +36,6 @@ export abstract class Component extends FakeHTMLElement {
    */
   public context?: IRibaComponentContext;
 
-  protected debug: IDebugger;
   protected view?: View;
 
   protected templateLoaded: boolean = false;
@@ -67,8 +65,6 @@ export abstract class Component extends FakeHTMLElement {
   constructor(element?: HTMLUnknownElement, context?: IRibaComponentContext) {
     super(element);
     this.context = context;
-    this.debug = Debug('component:Component');
-    this.debug('constructor called', element, context, this);
 
     if (element) {
       this.el = element;
@@ -83,7 +79,6 @@ export abstract class Component extends FakeHTMLElement {
    * Remove this custom element
    */
   public remove() {
-    this.debug('remove', this.el);
     if (this.el && this.el.parentElement) {
       this.el.parentElement.removeChild(this.el);
       if (!(window as any).customElements) {
@@ -94,10 +89,6 @@ export abstract class Component extends FakeHTMLElement {
 
   public disconnectedFallbackCallback() {
     this.disconnectedCallback();
-    // const parent = this.el.parentNode;
-    // if (parent) {
-    //   parent.removeChild(this.el);
-    // }
   }
 
   protected abstract template(): Promise<string | null> | string | null;
@@ -134,7 +125,7 @@ export abstract class Component extends FakeHTMLElement {
         return null;
       });
     }
-    this.debug('Not all required and passed attributes are set to load and bind the template', this.observedAttributesToCheck);
+    // console.warn('Not all required and passed attributes are set to load and bind the template', this.observedAttributesToCheck);
     return null;
   }
 
@@ -189,10 +180,10 @@ export abstract class Component extends FakeHTMLElement {
     const requiredAttributes = this.requiredAttributes();
     requiredAttributes.forEach((requiredAttribute: string) => {
       if (!this.scope.hasOwnProperty(requiredAttribute) || !this.scope[requiredAttribute] ) {
-        this.debug(`Attribute ${requiredAttribute} not set: ${this.scope[requiredAttribute]}`);
+        // console.warn(`Attribute ${requiredAttribute} not set: ${this.scope[requiredAttribute]}`);
         allDefined = false;
       } else {
-        this.debug(`Attribute ${requiredAttribute} is defined: ${this.scope[requiredAttribute]}`);
+        // console.warn(`Attribute ${requiredAttribute} is defined: ${this.scope[requiredAttribute]}`);
       }
     });
     return allDefined;
@@ -238,7 +229,6 @@ export abstract class Component extends FakeHTMLElement {
    * Returns an event handler for the bindings (most on-*) insite this component.
    */
   protected eventHandler(self: Component): EventHandler {
-    this.debug('eventHandler', self);
     // IMPORTANT this must be a function and not a Arrow Functions
     return function(this: EventHandler, context: Binding, event: Event, binding: Binding, el: HTMLElement) {
       this.call(self, context, event, binding.view.models, el);
@@ -252,7 +242,6 @@ export abstract class Component extends FakeHTMLElement {
     return {
       name: 'call',
       read: (fn: (...args: any[]) => any, ...args: any[]) => {
-        self.debug('callFormatterHandler', this, fn);
         return fn.apply(self, args);
       },
     };
@@ -266,7 +255,6 @@ export abstract class Component extends FakeHTMLElement {
    * @param args the parameters you wish to call the function with
    */
   protected argsFormatterHandler(self: this): IFormatter {
-    this.debug('argsFormatterHandler', self);
     return {
       name: 'args',
       read: (fn: (...args: any[]) => any, ...fnArgs: any[]) => {
@@ -287,7 +275,7 @@ export abstract class Component extends FakeHTMLElement {
    * Invoked when the custom element is first connected to the document's DOM.
    */
   protected connectedCallback() {
-    this.debug('connectedCallback called');
+    // console.warn('connectedCallback called');
   }
 
   /**
@@ -295,7 +283,6 @@ export abstract class Component extends FakeHTMLElement {
    * Invoked when the custom element is disconnected from the document's DOM.
    */
   protected disconnectedCallback() {
-    this.debug('disconnectedCallback called');
     if (this.view) {
       this.view.unbind();
     }
@@ -324,7 +311,6 @@ export abstract class Component extends FakeHTMLElement {
     newValue = this.parseAttribute(newValue);
 
     const parsedAttributeName = Utils.camelCase(attributeName);
-    this.debug('attributeChangedCallback called', parsedAttributeName, oldValue, newValue, namespace);
 
     if (this.scope && this.scope[parsedAttributeName]) {
       oldValue = this.scope[parsedAttributeName];
@@ -347,7 +333,7 @@ export abstract class Component extends FakeHTMLElement {
    * @param namespace
    */
   protected parsedAttributeChangedCallback(attributeNames: string | string[], oldValue: any, newValue: any, namespace: string | null) {
-    this.debug('parsedAttributeChangedCallback called', attributeNames, oldValue, newValue, namespace);
+    // console.warn('parsedAttributeChangedCallback called', attributeNames, oldValue, newValue, namespace);
   }
 
   /**
@@ -358,24 +344,23 @@ export abstract class Component extends FakeHTMLElement {
    * @param newDocument
    */
   protected adoptedCallback(oldDocument: Document, newDocument: Document) {
-    this.debug('adoptedCallback called', oldDocument, newDocument);
+    // console.warn('adoptedCallback called', oldDocument, newDocument);
   }
 
   protected async loadTemplate() {
     if (this.templateLoaded) {
-      this.debug('template already loaded');
+      console.warn('template already loaded');
       return null;
     }
 
     if (!this.checkRequiredAttributes()) {
-      this.debug('not all required attributes are set to load the template');
+      // console.warn('not all required attributes are set to load the template');
       return null;
     }
 
     // if innerHTML is null this component uses the innerHTML which he already has!
     return Promise.resolve(this.template())
     .then((template) => {
-      this.debug('template', template);
       if (template !== null) {
         this.el.innerHTML = template;
       }
@@ -394,12 +379,12 @@ export abstract class Component extends FakeHTMLElement {
 
   protected async bind() {
     if (this.bound) {
-      this.debug('component already bounded');
+      console.warn('component already bounded');
       return;
     }
 
     if (!this.checkRequiredAttributes()) {
-      this.debug('not all required attributes are set for bind');
+      // console.warn('not all required attributes are set for bind');
       return;
     }
 
@@ -447,11 +432,11 @@ export abstract class Component extends FakeHTMLElement {
   }
 
   protected async beforeBind(): Promise<any> {
-    this.debug('beforeBind', this.bound);
+    // console.warn('beforeBind', this.bound);
   }
 
   protected async afterBind(): Promise<any> {
-    this.debug('afterBind', this.bound);
+    // console.warn('afterBind', this.bound);
   }
 
   private BinderChangedEventHandler(event: Event) {
@@ -472,7 +457,6 @@ export abstract class Component extends FakeHTMLElement {
         this.attributeObserverFallback = new MutationObserver((mutations) => {
           mutations.forEach((mutation) => {
             if (mutation.type === 'attributes') {
-              this.debug('attributes changed', mutation);
               if (mutation.attributeName) {
                 // if this attribute is a watched attribute
                 if (observedAttributes.indexOf(mutation.attributeName) !== -1) {

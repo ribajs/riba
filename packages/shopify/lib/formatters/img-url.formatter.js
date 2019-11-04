@@ -1,7 +1,5 @@
 "use strict";
-/* tslint:disable:variable-name */
 Object.defineProperty(exports, "__esModule", { value: true });
-const shopify_service_1 = require("../services/shopify.service");
 /**
  * Return a resized shopify image URL
  * @see https://help.shopify.com/en/themes/liquid/filters/url-filters#img_url
@@ -12,4 +10,27 @@ const shopify_service_1 = require("../services/shopify.service");
  * @param crop TODO
  * @param extension
  */
-exports.img_url = shopify_service_1.ShopifyService.resizeImage;
+exports.imgUrlFormatter = {
+    name: 'img_url',
+    read(url, size, scale, crop, extension, element) {
+        try {
+            if (size === 'original' || size === 'master') {
+                return url;
+            }
+            if (scale && scale !== 1) {
+                size += '@' + scale + 'x';
+            }
+            const result = url.match(/(.*\/[\w\-\_\.]+)\.(\w{2,4})/);
+            if (!result || !result[1] || !result[2]) {
+                throw new Error(`Can't match url ${url}`);
+            }
+            const path = result[1];
+            extension = extension || result[2];
+            return path + '_' + size + '.' + extension;
+        }
+        catch (error) {
+            console.error(error);
+            return url;
+        }
+    },
+};

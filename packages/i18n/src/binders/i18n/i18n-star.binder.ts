@@ -64,22 +64,22 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
         // parse templates to vars
         const newVars = this.customData.i18n.parseTemplateVars(_el);
         this.customData.vars = Utils.concat(true, this.customData.vars, newVars);
-        if (Object.keys(this.customData.vars).length) {
-          this.customData.i18n.debug('parsed templates vars', this.customData.vars);
-        }
+        // if (Object.keys(this.customData.vars).length) {
+        //   console.warn('parsed templates vars', this.customData.vars);
+        // }
 
         // parse data attributes to vars
         // Vanilla works better than jquery data function?
         this.customData.vars = Utils.concat(true, this.customData.vars, _el.dataset);
-        if (Object.keys(this.customData.vars).length) {
-          this.customData.i18n.debug('parsed attribute vars', this.customData.vars);
-        }
+        // if (Object.keys(this.customData.vars).length) {
+        //   console.warn('parsed attribute vars', this.customData.vars);
+        // }
 
         // Parse templates wich have his own translations
         this.customData.langVars = this.customData.i18n.parseLocalVars(_el);
-        if (this.customData.langVars && Object.keys(this.customData.langVars).length) {
-          this.customData.i18n.debug('parsed own translations', this.customData.langVars);
-        }
+        // if (this.customData.langVars && Object.keys(this.customData.langVars).length) {
+        //   console.warn('parsed own translations', this.customData.langVars);
+        // }
       };
 
       this.customData.translate = (langcode?: string) => {
@@ -103,7 +103,7 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
         if (!this.customData.properties || this.customData.properties.length === 0) {
           // get the default translation if available
           if (this.customData.langVars && this.customData.langVars.default) {
-            this.customData.i18n.debug('Translate by default', this.customData.langVars.default);
+            // console.warn('Translate by default', this.customData.langVars.default);
             return this.customData.applyTranslation(this.customData.langVars.default);
           }
         }
@@ -112,12 +112,12 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
         return this.customData.i18n.get([langcode, ...this.customData.properties], this.customData.vars)
         .then((local: string) => {
           if (local && typeof(local) === 'string') {
-            // this.customData.i18n.debug('Translate by properties', [langcode, ...this.customData.properties], local);
+            // console.warn('Translate by properties', [langcode, ...this.customData.properties], local);
             return this.customData.applyTranslation(local);
           }
           // get the default translation if available
           if (this.customData.langVars && this.customData.langVars.default) {
-            this.customData.i18n.debug('Translate by default as fallback', this.customData.langVars.default);
+            // console.warn('Translate by default as fallback', this.customData.langVars.default);
             return this.customData.applyTranslation(this.customData.langVars.default);
           }
 
@@ -133,7 +133,7 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
           const varName = data.detail.name.slice(5);
           const newVar: any = {};
           newVar[varName] = data.detail.newValue;
-          this.customData.i18n.debug('binder-changed newVar', newVar);
+          // console.warn('binder-changed newVar', newVar);
           this.customData.vars = Utils.concat(true, this.customData.vars, newVar);
           this.customData.translate();
         }

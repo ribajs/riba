@@ -1,5 +1,4 @@
 import Popper from 'popper.js'; // /dist/umd/popper
-import { Debug } from '@ribajs/core';
 import { JQuery as $ } from '@ribajs/jquery';
 
 import { Utils } from './utils.service';
@@ -222,8 +221,6 @@ export class DropdownService {
   private _menu: Element;
   private _inNavbar: boolean;
 
-  private debug = Debug('service:DropdownService');
-
   constructor(element: HTMLButtonElement | HTMLAnchorElement, config?: any) {
     this._element  = element;
     this._popper   = null;
@@ -239,12 +236,10 @@ export class DropdownService {
   // Public
 
   public close() {
-    this.debug('close');
     return DropdownService.close(this._element, $(this._menu));
   }
 
   public show() {
-    this.debug('show');
     const relatedTarget = {
       relatedTarget: this._element,
     };
@@ -266,8 +261,6 @@ export class DropdownService {
     if ((this._element as HTMLButtonElement).disabled || $(this._element).hasClass(CLASSNAME.DISABLED)) {
       return;
     }
-
-    this.debug('toggle');
 
     const parent   = DropdownService._getParentFromElement(this._element);
     const isActive = $(this._menu).hasClass(CLASSNAME.SHOW);

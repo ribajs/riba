@@ -25,8 +25,6 @@ import {
 
 import { WrapperService } from './wrapper.service';
 
-import { EventDispatcher, Debug } from '@ribajs/core';
-
 export class ModalWrapperService extends WrapperService implements IModalWrapper  {
 
   // Singleton instace
@@ -80,7 +78,7 @@ export class ModalWrapperService extends WrapperService implements IModalWrapper
      */
     public alert(options: IModalAlertOptions, fn: (confirmed: boolean) => void, forceFallback: boolean = false) {
       const fallback = this.useFallback(forceFallback);
-      this.debug('alert', options);
+      console.debug('alert', options);
       this.event.trigger('alert', fallback, options);
       this.shopifyApp.Modal.alert(options, (confirmed) => {
         // modal closed
@@ -102,7 +100,7 @@ export class ModalWrapperService extends WrapperService implements IModalWrapper
      */
     public confirm(options: IModalConfirmOptions, fn: (confirmed: boolean) => void, forceFallback: boolean = false) {
       const fallback = this.useFallback(forceFallback);
-      this.debug('alert', fallback, options);
+      console.debug('alert', fallback, options);
       this.event.trigger('alert', fallback, options);
       this.shopifyApp.Modal.confirm(options, (confirmed) => {
         // modal closed
@@ -125,7 +123,7 @@ export class ModalWrapperService extends WrapperService implements IModalWrapper
     public input(options: IModalInputOptions, fn: (result: boolean, data: any) => void, forceFallback: boolean = false) {
 
       const fallback = this.useFallback(forceFallback);
-      this.debug('alert', fallback, options);
+      console.debug('alert', fallback, options);
       this.event.trigger('alert', fallback, options);
       this.shopifyApp.Modal.input(options, (confirmed: boolean, data: any) => {
         // modal closed

@@ -1,4 +1,4 @@
-import { Debug, Utils, EventDispatcher } from '@ribajs/core';
+import { Utils, EventDispatcher } from '@ribajs/core';
 import { PQueue } from './p-queue.service'; // https://github.com/sindresorhus/p-queue
 
 import {
@@ -264,7 +264,6 @@ export class ShopifyCartService {
     return Utils.get(this.CART_GET_SHIPPING_RATES_URL, { shipping_address: shippingAddress }, 'json')
     .then((shippingRates: any) => {
       if (Utils.isObject(shippingRates) && Utils.isObject(shippingRates.shipping_rates)) {
-        this.debug('getShippingRates result', shippingRates.shipping_rates);
         if (normalize) {
           return this.normalizeShippingRates(shippingRates.shipping_rates);
         }
@@ -292,8 +291,6 @@ export class ShopifyCartService {
     }
     return promise;
   }
-
-  protected static debug = Debug('ShopifyExtension:ShopifyCartService');
 
   protected static CART_POST_ADD_URL = '/cart/add.js';
 
@@ -367,10 +364,10 @@ export class ShopifyCartService {
           if (normalized[i].price) {
             normalized[i].price *= 100;
           } else {
-            this.debug(`Can't parse "${normalized[i].price}" to number`);
+            console.warn(`Can't parse "${normalized[i].price}" to number`);
           }
         } else {
-          this.debug(`price property not defined`, normalized[i]);
+          console.warn(`price property not defined`, normalized[i]);
         }
       }
     }

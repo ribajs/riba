@@ -20,7 +20,7 @@ export class BindersService extends ModuleElementService {
    */
   public regist(binder: IBinder<any>, fallbackName?: string, forceFallback: boolean = false): IBinders<any> {
     if (!binder || typeof(binder.routine) !== 'function') {
-      this.debug(new Error('Can not regist binder!'), binder);
+      console.warn(new Error('Can not regist binder!'), binder);
       return this.elements;
     }
 

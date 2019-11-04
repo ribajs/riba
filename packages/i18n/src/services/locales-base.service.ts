@@ -1,4 +1,4 @@
-import { Utils, EventDispatcher, Debug } from '@ribajs/core';
+import { Utils, EventDispatcher } from '@ribajs/core';
 import { ILangcode, ILocalPluralization, ILocalVar } from '../interfaces';
 
 export abstract class ALocalesService {
@@ -12,8 +12,6 @@ export abstract class ALocalesService {
   public showMissingTranslation: boolean = false;
 
   protected _ready: boolean = false;
-
-  protected debug = Debug('services:ALocalesService');
 
   /**
    * The current setted langcode
@@ -61,7 +59,7 @@ export abstract class ALocalesService {
     })
     .then((local) => {
       if (local === null && properties) {
-        this.debug(`WARNING translation missing: "${properties.join('.')}"`, local, properties);
+        console.warn(`WARNING translation missing: "${properties.join('.')}"`, local, properties);
       }
       return local;
     })
@@ -119,7 +117,6 @@ export abstract class ALocalesService {
 
   public setLangcode(langcode: string, initial: boolean = false) {
     if (this.currentLangcode !== langcode) {
-      this.debug('setLangcode', langcode, this.currentLangcode);
       this.currentLangcode = langcode;
 
       // $('html').attr('lang', langcode);
@@ -184,7 +181,6 @@ export abstract class ALocalesService {
     if (!translateString || Object.keys(vars).length === 0 || typeof(translateString.match) !== 'function') {
       return translateString;
     }
-    this.debug('setTranslateStringVars', translateString, vars);
     const matches = translateString.match(/{{\s*?[A-Za-z0-9_-]+\s*?}}/gm);
     if (matches) {
       for (const match of matches) {
@@ -196,7 +192,6 @@ export abstract class ALocalesService {
         }
       }
     }
-    this.debug('setTranslateStringVars', translateString);
     return translateString;
   }
 
