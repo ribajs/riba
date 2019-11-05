@@ -49,6 +49,7 @@
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
+    "gulp-debug": "^4.0.0",
     "gulp-exec": "^4.0.0",
     "gulp-filelist": "^2.0.3",
     "gulp-svgmin": "^2.2.0"
