@@ -1,4 +1,4 @@
-import { IBinder, Utils, View as RivetsView } from '@ribajs/core';
+import { IBinder, Utils, View as RivetsView, handleizeFormatter } from '@ribajs/core';
 import { Pjax, HideShowTransition } from '../services';
 
 /**
@@ -26,9 +26,10 @@ export const viewStaticBinder: IBinder<string> = {
     options.listenPopstate = false;
     options.parseTitle = false;
     options.transition = options.transition || new HideShowTransition();
-    options.viewId = options.url;
+    options.viewId = options.viewId || el.getAttribute('id') || handleizeFormatter.read(options.url);
+    options.containerSelector = options.containerSelector || '[data-namespace]';
 
-    const pjax = new Pjax(options.viewId, wrapper, '[data-namespace]', options.listenAllLinks, options.listenPopstate , options.transition, options.parseTitle);
+    const pjax = new Pjax(options.viewId, wrapper, options.containerSelector, options.listenAllLinks, options.listenPopstate , options.transition, options.parseTitle);
 
     const $newContainer = pjax.load(options.url);
 

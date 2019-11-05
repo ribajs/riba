@@ -1,6 +1,6 @@
 import { Utils } from '@ribajs/core';
 import { BaseTransition } from './BaseTransition';
-import { ITransition } from '../../interfaces/transition';
+import { Transition } from '../../interfaces/transition';
 
 declare global {
   // tslint:disable: interface-name
@@ -13,7 +13,7 @@ declare global {
  *
  * @private
  */
-class CustomTransition extends BaseTransition implements ITransition {
+class CustomTransition extends BaseTransition implements Transition {
 
   public init(oldContainer: HTMLElement, newContainer: Promise<HTMLElement>): Promise<void> {
     const self = this;

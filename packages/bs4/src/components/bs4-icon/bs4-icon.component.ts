@@ -49,9 +49,23 @@ export class Bs4IconComponent extends Component {
     }
 
     if (name === 'color') {
-      this.el.style.color = newValue;
-      this.el.className.replace(/(^|\s)color-\S+/g, '');
-      this.el.classList.add(`color-${newValue}`);
+      if (newValue.indexOf(',') !== -1) {
+        newValue = newValue.split(',');
+        if (newValue.length > 0) {
+          this.el.className.replace(/(^|\s)color-\S+/g, '');
+          for (let i = 0; i < newValue.length; i++) {
+            const newColor: string = newValue[i];
+            if (newColor.startsWith('#') || newColor.startsWith('rgb')) {
+              this.el.style.color = newColor;
+            }
+            this.el.classList.add(`color-${newColor}`);
+          }
+        }
+      } else {
+        this.el.style.color = newValue;
+        this.el.className.replace(/(^|\s)color-\S+/g, '');
+        this.el.classList.add(`color-${newValue}`);
+      }
     }
 
     if (name === 'size') {

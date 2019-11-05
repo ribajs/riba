@@ -97,9 +97,9 @@ export const viewBinder: IBinder<string> = {
 
     this.customData.options.viewId = this.customData.options.viewId || el.getAttribute('id') || 'main';
     this.customData.options.action = this.customData.options.action || 'replace'; // replace / append
-    this.customData.options.containerSelector = this.customData.options.containerSelector || '[data-namespace]';
 
     if (this.customData.options.viewId === 'main') {
+      this.customData.options.containerSelector = this.customData.options.containerSelector || '[data-namespace]';
       this.customData.options.scrollToTop = Utils.isBoolean(this.customData.options.scrollToTop) ? this.customData.options.scrollToTop : true;
       this.customData.options.listenAllLinks = Utils.isBoolean(this.customData.options.listenAllLinks) ? this.customData.options.listenAllLinks : true;
       this.customData.options.listenPopstate = Utils.isBoolean(this.customData.options.listenPopstate) ? this.customData.options.listenPopstate : true;
@@ -108,6 +108,7 @@ export const viewBinder: IBinder<string> = {
       this.customData.options.parseTitle = Utils.isBoolean(this.customData.options.parseTitle) ? this.customData.options.parseTitle : true;
       this.customData.options.changeBrowserUrl = Utils.isBoolean(this.customData.options.changeBrowserUrl) ? this.customData.options.changeBrowserUrl : true;
     } else {
+      this.customData.options.containerSelector = this.customData.options.containerSelector || `#${this.customData.options.viewId} > *:first-child`;
       this.customData.options.scrollToTop = Utils.isBoolean(this.customData.options.scrollToTop) ? this.customData.options.scrollToTop : false;
       this.customData.options.listenAllLinks = Utils.isBoolean(this.customData.options.listenAllLinks) ? this.customData.options.listenAllLinks : false;
       this.customData.options.listenPopstate = Utils.isBoolean(this.customData.options.listenPopstate) ? this.customData.options.listenPopstate : false;

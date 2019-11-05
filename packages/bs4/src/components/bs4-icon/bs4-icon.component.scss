@@ -47,22 +47,21 @@ bs4-icon {
       color: colors('gray-lighter');
     }
     &.color-stroke-gray-lighter {
-        svg {
-            path {
-                stroke: colors('gray-lighter') !important;
-            }
+      svg {
+        path {
+          stroke: colors('gray-lighter') !important;
         }
+      }
     }
   
     // white
     &.color-white {
-        color: colors('white');
+      color: $white;
     }
     &.color-stroke-white {
       svg {
-        stroke: colors('white') !important;
-        * {
-          stroke: colors('white') !important;
+        path {
+          stroke: $white !important;
         }
       }
     }

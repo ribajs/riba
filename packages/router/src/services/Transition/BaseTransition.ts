@@ -1,10 +1,10 @@
 import { Utils } from '@ribajs/core';
-import { ITransition } from '../../interfaces/transition';
+import { Transition } from '../../interfaces/transition';
 
 /**
  * BaseTransition to extend
  */
-export abstract class BaseTransition implements ITransition {
+export abstract class BaseTransition implements Transition {
   protected oldContainer?: HTMLElement;
 
   protected newContainer?: HTMLElement;

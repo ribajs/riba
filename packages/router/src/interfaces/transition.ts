@@ -1,4 +1,4 @@
-export interface ITransition {
+export interface Transition {
   // $oldContainer: HTMLElement;
   // $newContainer: HTMLElement;
   // newContainerLoading: Promise<HTMLElement>;

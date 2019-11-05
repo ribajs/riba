@@ -1,5 +1,5 @@
 import { BaseTransition } from './BaseTransition';
-import { ITransition } from '../../interfaces/transition';
+import { Transition } from '../../interfaces/transition';
 
 /**
  * Basic Transition object, wait for the new Container to be ready,
@@ -7,7 +7,7 @@ import { ITransition } from '../../interfaces/transition';
  *
  * @private
  */
-export class HideShowTransition extends BaseTransition implements ITransition {
+export class HideShowTransition extends BaseTransition implements Transition {
   protected action: 'replace' | 'append';
 
   protected scrollToTop: boolean;

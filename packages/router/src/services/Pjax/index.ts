@@ -6,7 +6,7 @@ import { EventDispatcher, Utils } from '@ribajs/core';
 
 import { BaseCache } from '../Cache';
 import { HideShowTransition } from '../Transition';
-import { ITransition } from '../../interfaces';
+import { Transition } from '../../interfaces';
 import { Dom } from './Dom';
 import { HistoryManager } from './HistoryManager';
 
@@ -166,7 +166,7 @@ class Pjax {
 
   private dispatcher: EventDispatcher;
 
-  private transition?: ITransition;
+  private transition?: Transition;
 
   private wrapper?: HTMLElement;
 
@@ -175,7 +175,7 @@ class Pjax {
   /**
    * Creates an singleton instance of Pjax.
    */
-  constructor(id: string, wrapper?: HTMLElement, containerSelector = '[data-namespace]', listenAllLinks: boolean = false, listenPopstate: boolean = true, transition: ITransition = new HideShowTransition(), parseTitle: boolean = true, changeBrowserUrl: boolean = true) {
+  constructor(id: string, wrapper?: HTMLElement, containerSelector = '[data-namespace]', listenAllLinks: boolean = false, listenPopstate: boolean = true, transition: Transition = new HideShowTransition(), parseTitle: boolean = true, changeBrowserUrl: boolean = true) {
     this.viewId = id;
 
     let instance = this as Pjax;
@@ -255,7 +255,7 @@ class Pjax {
  /**
   * Return a transition object
   */
-  public getTransition(): ITransition {
+  public getTransition(): Transition {
     // User customizable
     return this.transition || new HideShowTransition();
   }
