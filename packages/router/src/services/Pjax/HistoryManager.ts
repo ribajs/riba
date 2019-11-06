@@ -1,4 +1,4 @@
-import { IState } from '../../interfaces/state';
+import { State } from '../../interfaces/state';
 /**
  * HistoryManager helps to keep track of the navigation
  */
@@ -9,7 +9,7 @@ export class HistoryManager {
   /**
    * Keep track of the status in historic order
    */
-  private readonly history: IState[] = new Array();
+  private readonly history: State[] = new Array();
 
   constructor() {
     if (HistoryManager.instance) {
@@ -23,14 +23,14 @@ export class HistoryManager {
   /**
    * Return information about the current status
    */
-  public currentStatus(): IState {
+  public currentStatus(): State {
     return this.history[this.history.length - 1];
   }
 
   /**
    * Return information about the previous status
    */
-  public prevStatus(): IState | null {
+  public prevStatus(): State | null {
     const history = this.history;
 
     if (history.length < 2) {

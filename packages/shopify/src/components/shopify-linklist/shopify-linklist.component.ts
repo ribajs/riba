@@ -50,7 +50,7 @@ export interface Scope {
   showAll: ShopifyLinklistComponent['showAll'];
 }
 
-export interface IState {
+export interface State {
   url: string;
   namespace?: string;
 }
@@ -188,7 +188,7 @@ export class ShopifyLinklistComponent extends Component {
     }
   }
 
-  protected onNewPageReady(viewId: string, currentStatus: IState, prevStatus: IState, container: HTMLElement, newPageRawHTML: string, dataset: any, isFirstPageLoad: boolean) {
+  protected onNewPageReady(viewId: string, currentStatus: State, prevStatus: State, container: HTMLElement, newPageRawHTML: string, dataset: any, isFirstPageLoad: boolean) {
     const url = currentStatus.url;
     if (this.scope.collapseOnNewPage) {
       this.collapseAll();

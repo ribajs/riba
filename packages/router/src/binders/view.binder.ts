@@ -1,6 +1,6 @@
 import { IBinder, EventDispatcher, Utils, View as RivetsView } from '@ribajs/core';
 import { Pjax, Prefetch, HideShowTransition } from '../services';
-import { IState } from '../interfaces';
+import { State } from '../interfaces';
 
 /**
  * The main wrapper for the riba router
@@ -27,7 +27,7 @@ export const viewBinder: IBinder<string> = {
     this.customData.nested = this.customData.nested || null,
     this.customData.wrapper = this.customData.wrapper || el,
 
-    this.customData.onPageReady = (viewId: string, currentStatus: IState, prevStatus: IState, container: HTMLElement, newPageRawHTML: string, dataset: any, isInit: boolean) => {
+    this.customData.onPageReady = (viewId: string, currentStatus: State, prevStatus: State, container: HTMLElement, newPageRawHTML: string, dataset: any, isInit: boolean) => {
       // Only to anything if the viewID is eqal (in this way it is possible to have multiple views)
       if (viewId !== self.customData.options.viewId) {
         console.warn('not the right view', self.customData.options.viewId, viewId);
