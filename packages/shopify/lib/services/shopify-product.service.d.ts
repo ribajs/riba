@@ -1,40 +1,40 @@
-import { IShopifyProduct, IShopifyProductVariant } from '../interfaces';
-export interface IProductsCache {
-    [handle: string]: IShopifyProduct;
+import { ShopifyProduct, ShopifyProductVariant } from '../interfaces';
+export interface ProductsCache {
+    [handle: string]: ShopifyProduct;
 }
 export declare class ShopifyProductService {
     /**
      * Get product object by handle
      * @param handle product handle
      */
-    static get(handle: string): Promise<IShopifyProduct>;
+    static get(handle: string): Promise<ShopifyProduct>;
     /**
      * Check if the option values fits to the current variant.
      * @param variant
      * @param optionValues
      * @return Returns true if the option values fitting to the variant
      */
-    static fitsVariantOptions(variant: IShopifyProductVariant, optionValues: string[]): boolean;
+    static fitsVariantOptions(variant: ShopifyProductVariant, optionValues: string[]): boolean;
     /**
      * Get product variant of (selected) option values
      * @param optionValues (selected) option values
      */
-    static getVariantOfOptions(product: IShopifyProduct, optionValues: string[]): IShopifyProductVariant | null;
+    static getVariantOfOptions(product: ShopifyProduct, optionValues: string[]): ShopifyProductVariant | null;
     /**
      * Get variant object by variant id
      * @param id Variant id
      */
-    static getVariant(product: IShopifyProduct, id: number): null;
+    static getVariant(product: ShopifyProduct, id: number): null;
     /**
      * Get product option by name
      * @param product product wich holds the options
      * @param name option name
      */
-    static getOption(product: IShopifyProduct, name: string): null;
+    static getOption(product: ShopifyProduct, name: string): null;
     /**
      * Prepair product, remove protocol from featured_image, lovercase the option names
      * @param product product object
      */
-    static prepair(product: IShopifyProduct): IShopifyProduct;
-    protected static cache: IProductsCache;
+    static prepair(product: ShopifyProduct): ShopifyProduct;
+    protected static cache: ProductsCache;
 }

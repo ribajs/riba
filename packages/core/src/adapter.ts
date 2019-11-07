@@ -1,7 +1,7 @@
 
-import { IAdapter, AdapterFunction, IRef, IObserverSyncCallback, IRVArray } from './interfaces';
+import { AAdapter, AdapterFunction, Ref, ObserverSyncCallback, RVArray } from './interfaces';
 
-export class Adapter implements IAdapter {
+export class Adapter implements AAdapter {
 
   public static ARRAY_METHODS = [
     'push',
@@ -34,7 +34,7 @@ export class Adapter implements IAdapter {
     return this.weakmap[obj.__rv];
   }
 
-  public cleanupWeakReference(ref: IRef, id: number) {
+  public cleanupWeakReference(ref: Ref, id: number) {
     if (!Object.keys(ref.callbacks).length) {
       if (!(ref.pointers && Object.keys(ref.pointers).length)) {
         delete this.weakmap[id];
@@ -55,7 +55,7 @@ export class Adapter implements IAdapter {
 
         if (weakmap[r]) {
           if (Array.isArray(weakmap[r].callbacks[k])) {
-            weakmap[r].callbacks[k].forEach((callback: IObserverSyncCallback) => {
+            weakmap[r].callbacks[k].forEach((callback: ObserverSyncCallback) => {
               callback.sync();
             });
           }
@@ -88,7 +88,7 @@ export class Adapter implements IAdapter {
     }
   }
 
-  public unobserveMutations(obj: IRVArray, ref: string, keypath: string) {
+  public unobserveMutations(obj: RVArray, ref: string, keypath: string) {
     if (Array.isArray(obj) && (obj.__rv != null)) {
       const map = this.weakmap[obj.__rv];
 
@@ -112,7 +112,7 @@ export class Adapter implements IAdapter {
     }
   }
 
-  public observe(obj: any, keypath: string, callback: IObserverSyncCallback) {
+  public observe(obj: any, keypath: string, callback: ObserverSyncCallback) {
     let value: any;
     const callbacks = this.weakReference(obj).callbacks;
 
@@ -140,7 +140,7 @@ export class Adapter implements IAdapter {
                 const _callbacks = map.callbacks[keypath];
 
                 if (_callbacks) {
-                  _callbacks.forEach((cb: IObserverSyncCallback) => {
+                  _callbacks.forEach((cb: ObserverSyncCallback) => {
                     cb.sync();
                   });
                 }
@@ -160,7 +160,7 @@ export class Adapter implements IAdapter {
     this.observeMutations(obj[keypath], obj.__rv, keypath);
   }
 
-  public unobserve(obj: any, keypath: string, callback: IObserverSyncCallback) {
+  public unobserve(obj: any, keypath: string, callback: ObserverSyncCallback) {
     const map = this.weakmap[obj.__rv];
 
     if (map) {

@@ -8,7 +8,7 @@ import template from './bs4-sidebar.component.html';
 
 type State = 'overlay-left' | 'overlay-right' | 'side-left' | 'side-right' | 'hidden';
 
-interface IScope {
+interface Scope {
   /**
    * Selector string to get the container element from DOM
    */
@@ -83,7 +83,7 @@ export class Bs4SidebarComponent extends Component {
 
   protected routerEvents = new EventDispatcher('main');
 
-  protected scope: IScope = {
+  protected scope: Scope = {
 
     // template properties
     containerSelector: undefined,

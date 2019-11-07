@@ -1,10 +1,10 @@
-import { IFormatter } from '../../interfaces/formatter';
+import { Formatter } from '../../interfaces/formatter';
 import { Utils } from '../../services/utils';
 
 /**
  * Checks if value is a number
  */
-export const isNumberFormatter: IFormatter = {
+export const isNumberFormatter: Formatter = {
   name: 'isNumber',
   read: Utils.isNumber,
 };

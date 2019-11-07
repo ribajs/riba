@@ -1,8 +1,8 @@
-import { IFormatter } from '../../interfaces/formatter';
+import { Formatter } from '../../interfaces/formatter';
 /**
  * !a
  */
-export const notFormatter: IFormatter = {
+export const notFormatter: Formatter = {
   name: 'not',
   read(a: boolean) {
     return !a;

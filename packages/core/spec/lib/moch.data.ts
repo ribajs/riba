@@ -1,7 +1,7 @@
-import { IObserverSyncCallback } from '../../src/interfaces';
+import { ObserverSyncCallback } from '../../src/interfaces';
 import { Observer } from '../../src/observer';
 
-export interface IChange {
+export interface Change {
     [key: string]: Observer[];
 }
 
@@ -9,7 +9,7 @@ export class Data {
 
     private attributes: {[key: string]: any};
 
-    private change: IChange;
+    private change: Change;
 
     constructor(attributes: {[key: string]: any}) {
         this.attributes = attributes || {};
@@ -24,11 +24,11 @@ export class Data {
         this.change[key].push(callback);
     }
 
-    public hasCallback(key: string, callback: IObserverSyncCallback) {
+    public hasCallback(key: string, callback: ObserverSyncCallback) {
         return this.indexOf(this.change[key], callback) !== -1;
     }
 
-    public off(key: string, callback: IObserverSyncCallback) {
+    public off(key: string, callback: ObserverSyncCallback) {
         const index = this.indexOf(this.change[key], callback);
         if (index !== -1) {
             this.change[key].splice(index, 1);

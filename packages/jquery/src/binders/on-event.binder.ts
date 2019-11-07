@@ -1,10 +1,10 @@
-import { IBinder, eventHandlerFunction } from '@ribajs/core';
+import { Binder, eventHandlerFunction } from '@ribajs/core';
 import { JQuery } from '../vendors/jquery.module';
 
 /**
  * Binds an event handler on the element.
  */
-export const onEventBinder: IBinder<eventHandlerFunction> = {
+export const onEventBinder: Binder<eventHandlerFunction> = {
   name: 'on-*',
   function: true,
   priority: 1000,

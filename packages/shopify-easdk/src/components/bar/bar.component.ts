@@ -3,25 +3,25 @@ import {
 } from '@ribajs/core';
 
 import {
-  IBarConfig,
-  IBarWrapper,
+  BarConfig,
+  BarWrapper,
   shopifyEasdkModule,
-  ILoadingStateWrapper,
-  IButtonsConfig,
-  IPaginationConfig,
-  IButtonConfig,
+  LoadingStateWrapper,
+  ButtonsConfig,
+  PaginationConfig,
+  ButtonConfig,
 } from '../../index';
 
 import pugTemplate from './bar.component.pug';
 
-interface IScope extends IBarConfig {
+interface Scope extends BarConfig {
   /**
    * An object describing the buttons displayed in the top bar.
    * The object contains two keys, primary and secondary, and each of those keys contain an array of button objects.
    * Primary buttons default to blue, and have a maximum of one button.
    * Secondary buttons have a maximum of four buttons.
    */
-  buttons?: IButtonsConfig;
+  buttons?: ButtonsConfig;
   /**
    * The title string displayed in the header behind the application's name.
    */
@@ -33,11 +33,11 @@ interface IScope extends IBarConfig {
   /**
    * An object configuring and toggling the pagination arrow button group.
    */
-  pagination?: IPaginationConfig;
+  pagination?: PaginationConfig;
   /**
    * A button object configuring and toggling the breadcrumb in the top bar.
    */
-  breadcrumb?: IButtonConfig;
+  breadcrumb?: ButtonConfig;
 
   /**
    * If true the loading bar shows a loading animation
@@ -58,9 +58,9 @@ export class BarComponent extends Component {
     return ['buttons', 'title', 'icon', 'pagination', 'breadcrumb', 'loading', 'show-fallback-bar'];
   }
 
-  protected bar: IBarWrapper = new shopifyEasdkModule.services.BarWrapperService();
+  protected bar: BarWrapper = new shopifyEasdkModule.services.BarWrapperService();
 
-  protected scope: IScope = {
+  protected scope: Scope = {
     showFallbackBar: false,
   };
 
@@ -76,7 +76,7 @@ export class BarComponent extends Component {
       this.scope.showFallbackBar = showFallbackBar;
     });
 
-    this.bar.event.on('bar:initialize', (fallback: boolean, config: IBarConfig) => {
+    this.bar.event.on('bar:initialize', (fallback: boolean, config: BarConfig) => {
       if (this.scope.buttons !== config.buttons) {
         this.scope.buttons = config.buttons;
       }
@@ -102,21 +102,21 @@ export class BarComponent extends Component {
       console.debug('bar:setTitle', fallback, title);
     });
 
-    this.bar.event.on('bar:loading', (fallback: boolean, loading: ILoadingStateWrapper) => {
+    this.bar.event.on('bar:loading', (fallback: boolean, loading: LoadingStateWrapper) => {
       if (this.scope.loading !== loading.on) {
         this.scope.loading = loading.on;
       }
       console.debug('bar:loading', fallback, loading);
     });
 
-    this.bar.event.on('bar:setPagination', (fallback: boolean, pagination?: IPaginationConfig) => {
+    this.bar.event.on('bar:setPagination', (fallback: boolean, pagination?: PaginationConfig) => {
       if (this.scope.pagination !== pagination) {
         this.scope.pagination = pagination;
       }
       console.debug('bar:setPagination', fallback, pagination);
     });
 
-    this.bar.event.on('bar:setBreadcrumb', (fallback: boolean, breadcrumb?: IButtonConfig) => {
+    this.bar.event.on('bar:setBreadcrumb', (fallback: boolean, breadcrumb?: ButtonConfig) => {
       if (this.scope.breadcrumb !== breadcrumb) {
         this.scope.breadcrumb = breadcrumb;
       }

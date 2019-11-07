@@ -1,6 +1,6 @@
-import { IBinder, Utils } from '@ribajs/core';
+import { Binder, Utils } from '@ribajs/core';
 
-export const scrollToOnEventBinder: IBinder<string> = {
+export const scrollToOnEventBinder: Binder<string> = {
   name: 'scroll-to-on-*',
   bind(el: HTMLUnknownElement) {
     this.customData = {};

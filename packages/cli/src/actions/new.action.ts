@@ -6,7 +6,7 @@ import * as fs from 'fs';
 import { Answers, Question, createPromptModule, PromptModule } from 'inquirer';
 import { join, dirname } from 'path';
 import { promisify } from 'util';
-import { ICommandInput, PackageManager } from '../interfaces';
+import { CommandInput, PackageManager } from '../interfaces';
 import { defaultGitIgnore } from '../lib/configuration';
 import { AbstractPackageManager, PackageManagerFactory } from '../lib/package-managers';
 import { generateInput, generateSelect, messages, emojis } from '../lib/ui';
@@ -19,7 +19,7 @@ import { timingSafeEqual } from 'crypto';
 export class NewAction extends AbstractAction {
   private debug = Debug('actions:new');
   
-  public async handle(inputs: ICommandInput[], options: ICommandInput[]) {
+  public async handle(inputs: CommandInput[], options: CommandInput[]) {
     await this.setDefaults(inputs, options);
 
     const projectDirectory = dasherize(this.getInput(inputs, 'name')!.value as string);
@@ -48,20 +48,20 @@ export class NewAction extends AbstractAction {
     }
   }
 
-  private async askForMissingInformation (inputs: ICommandInput[]) {
+  private async askForMissingInformation (inputs: CommandInput[]) {
     console.info(messages.PROJECT_INFORMATION_START + '\n');
 
     const prompt: PromptModule = createPromptModule();
-    const nameICommandInput = this.getInput(inputs, 'name');
-    if (!nameICommandInput!.value) {
+    const nameCommandInput = this.getInput(inputs, 'name');
+    if (!nameCommandInput!.value) {
       const message = messages.QUESTION_NAME_OF_NEW_PROJECT;
       const questions = [generateInput('name', message)('riba-app')];
       const answers: Answers = await prompt(questions as ReadonlyArray<Question>);
-      this.replaceICommandInputMissingInformation(inputs, answers);
+      this.replaceCommandInputMissingInformation(inputs, answers);
     }
   };
 
-  private replaceICommandInputMissingInformation(inputs: ICommandInput[], answers: Answers): ICommandInput[] {
+  private replaceCommandInputMissingInformation(inputs: CommandInput[], answers: Answers): CommandInput[] {
     return inputs.map(
       input =>
         (input.value =
@@ -69,7 +69,7 @@ export class NewAction extends AbstractAction {
     );
   };
 
-  protected async setDefaults(inputs: ICommandInput[], options: ICommandInput[]) {
+  protected async setDefaults(inputs: CommandInput[], options: CommandInput[]) {
     const configuration = await this.loadConfiguration();
     this.setDefaultInput(options, 'language', configuration.language);
     this.setDefaultInput(options, 'sourceRoot', configuration.sourceRoot);
@@ -77,7 +77,7 @@ export class NewAction extends AbstractAction {
     this.setDefaultInput(options, 'templateEngine', configuration.templateEngine);
   }
 
-  protected async generateFiles(inputs: ICommandInput[]) {
+  protected async generateFiles(inputs: CommandInput[]) {
     const collectionInput = this.getInput(inputs, 'collection');
     if (!collectionInput || typeof(collectionInput.value) !== 'string') {
       throw new Error('Unable to find a collection for this configuration');
@@ -94,7 +94,7 @@ export class NewAction extends AbstractAction {
    * @param inputs 
    * @param options 
    */
-  protected async generateExampleFiles(inputs: ICommandInput[], options: ICommandInput[]) {
+  protected async generateExampleFiles(inputs: CommandInput[], options: CommandInput[]) {
 
     console.log('generateExampleFiles');
 
@@ -126,7 +126,7 @@ export class NewAction extends AbstractAction {
    * @param generateAction 
    * @param schematic 
    */
-  private async getInputsForGenerateExamples(name: string, inputs: ICommandInput[], options: ICommandInput[], generateAction: GenerateAction, schematic: string)  {
+  private async getInputsForGenerateExamples(name: string, inputs: CommandInput[], options: CommandInput[], generateAction: GenerateAction, schematic: string)  {
     const configuration = await this.loadConfiguration();
 
     const clonedInputs = this.deepCopyInput(inputs);
@@ -169,9 +169,9 @@ export class NewAction extends AbstractAction {
     }
   }
 
-  private mapSchematicOptions = (options: ICommandInput[]): SchematicOption[] => {
+  private mapSchematicOptions = (options: CommandInput[]): SchematicOption[] => {
     return options.reduce(
-      (schematicOptions: SchematicOption[], option: ICommandInput) => {
+      (schematicOptions: SchematicOption[], option: CommandInput) => {
         if (
           option.name !== 'skip-install' &&
           option.value !== 'package-manager'
@@ -184,7 +184,7 @@ export class NewAction extends AbstractAction {
     );
   };
 
-  private async installPackages (options: ICommandInput[], dryRunMode: boolean, installDirectory: string) {
+  private async installPackages (options: CommandInput[], dryRunMode: boolean, installDirectory: string) {
     const inputPackageManager = this.getInput(options, 'package-manager')!.value;
 
     let packageManager: AbstractPackageManager;

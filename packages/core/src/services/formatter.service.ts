@@ -1,4 +1,4 @@
-import { IFormatter, IFormatters} from '../interfaces';
+import { Formatter, Formatters} from '../interfaces';
 import { ModuleElementService } from './module-element.service';
 
 export class FormatterService extends ModuleElementService {
@@ -8,7 +8,7 @@ export class FormatterService extends ModuleElementService {
   /**
    *
    */
-  constructor(formatters: IFormatters) {
+  constructor(formatters: Formatters) {
    super(formatters);
   }
 
@@ -17,7 +17,7 @@ export class FormatterService extends ModuleElementService {
    * @param formatter
    * @param name
    */
-  public regist(formatter: IFormatter, fallbackName?: string, forceFallback: boolean = false): IFormatters {
+  public regist(formatter: Formatter, fallbackName?: string, forceFallback: boolean = false): Formatters {
 
     const name = forceFallback ? fallbackName || formatter.name : formatter.name || fallbackName;
 

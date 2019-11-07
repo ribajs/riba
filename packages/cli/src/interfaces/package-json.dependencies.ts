@@ -1,3 +1,3 @@
-export interface IPackageJsonDependencies {
+export interface PackageJsonDependencies {
   [key: string]: string;
 }

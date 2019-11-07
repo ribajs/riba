@@ -1,4 +1,4 @@
-import { IBinder } from '../interfaces';
+import { Binder } from '../interfaces';
 
 /**
  * add-class
@@ -12,7 +12,7 @@ import { IBinder } from '../interfaces';
  *   </li>
  * <ul>
  */
-export const addClassBinder: IBinder<string> = {
+export const addClassBinder: Binder<string> = {
   name: 'add-class',
   function: true,
   priority: 1000,

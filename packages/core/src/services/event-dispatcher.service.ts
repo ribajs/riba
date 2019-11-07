@@ -1,10 +1,10 @@
 type EventCallback = (...args: any[]) => any;
 
-interface IEvents {
+interface Events {
   [eventName: string]: EventCallback[];
 }
 
-export interface IEventDispatcherInstances {
+export interface EventDispatcherInstances {
   [key: string]: EventDispatcher;
 }
 
@@ -15,7 +15,7 @@ export interface IEventDispatcherInstances {
  */
 class EventDispatcher {
 
-  public static instances: IEventDispatcherInstances = {};
+  public static instances: EventDispatcherInstances = {};
 
   public static getInstance(namespace: string) {
     const result = EventDispatcher.instances[namespace];
@@ -31,7 +31,7 @@ class EventDispatcher {
    * @readOnly
    * @type {object}
    */
-  private events: IEvents = {};
+  private events: Events = {};
 
   private namespace: string;
 

@@ -5,7 +5,7 @@ export class EachItemExampleComponent extends Component {
 
   public static tagName: string = 'rv-each-item-example';
 
-  protected scope: IScope = {
+  protected scope: Scope = {
     items: this.getItems(),
     push: this.push,
     pop: this.pop,
@@ -51,7 +51,7 @@ export class EachItemExampleComponent extends Component {
     })
   }
 
-  private getItems(): IItem[] {
+  private getItems(): Item[] {
     return [{name: 'x', value: 2} ,{name: 'y', value: 1} , {name: 'z', value: 3}]
   }
 
@@ -67,13 +67,13 @@ export class EachItemExampleComponent extends Component {
   }
 }
 
-interface IItem {
+interface Item {
   name: string;
   value?: number;
 }
 
-interface IScope {
-  items: Array<IItem>,
+interface Scope {
+  items: Array<Item>,
   push: EachItemExampleComponent['push'],
   pop: EachItemExampleComponent['pop'],
   shift: EachItemExampleComponent['shift'],

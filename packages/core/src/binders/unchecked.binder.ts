@@ -1,4 +1,4 @@
-import { IBinder } from '../interfaces';
+import { Binder } from '../interfaces';
 import { Utils } from '../services/utils';
 
 /**
@@ -7,7 +7,7 @@ import { Utils } from '../services/utils';
  * `checked` binder). Also sets the model property when the input is checked or
  * unchecked (two-way binder).
  */
-export const uncheckedBinder: IBinder<string> = {
+export const uncheckedBinder: Binder<string> = {
   name: 'unchecked',
   publishes: true,
   priority: 2000,

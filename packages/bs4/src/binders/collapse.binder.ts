@@ -1,4 +1,4 @@
-import { IBinder } from '@ribajs/core';
+import { Binder } from '@ribajs/core';
 import { JQuery as $ } from '@ribajs/jquery';
 import { CollapseService } from '../services/collapse.service';
 
@@ -6,7 +6,7 @@ import { CollapseService } from '../services/collapse.service';
  *
  * @see https://getbootstrap.com/docs/4.1/components/collapse/
  */
-export const collapseBinder: IBinder<string> = {
+export const collapseBinder: Binder<string> = {
   name: 'bs4-collapse',
   routine(el: HTMLElement, targetSelector: string) {
 

@@ -1,6 +1,6 @@
 import {
     Riba,
-    IAdapter,
+    AAdapter,
 } from './index';
 
 import {
@@ -20,7 +20,7 @@ describe('Functional', () => {
     let bindData: { data: Data };
     let el: HTMLUnknownElement;
     let originalPrefix: string;
-    let adapter: IAdapter;
+    let adapter: AAdapter;
 
     const riba = new Riba();
     riba.module.binder.regist(textBinder);

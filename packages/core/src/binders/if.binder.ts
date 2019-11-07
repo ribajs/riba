@@ -1,11 +1,11 @@
-import { IBinder } from '../interfaces';
+import { Binder } from '../interfaces';
 import { View } from '../view';
 
 /**
  * if
  * Inserts and binds the element and it's child nodes into the DOM when true.
  */
-export const ifBinder: IBinder<boolean> = {
+export const ifBinder: Binder<boolean> = {
   name: 'if',
   block: true,
   priority: 4000,

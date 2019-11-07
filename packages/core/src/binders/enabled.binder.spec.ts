@@ -6,7 +6,7 @@ import {
     enabledBinder,
 } from './enabled.binder';
 
-import { IAdapters } from '../interfaces';
+import { Adapters } from '../interfaces';
 
 const riba = new Riba();
 riba.module.binder.regist(enabledBinder);
@@ -21,7 +21,7 @@ describe('riba.binders', () => {
                 unsubscribe: () => {/**/},
                 read: () => {/**/},
                 publish: () => {/**/},
-            } as unknown as IAdapters,
+            } as unknown as Adapters,
         });
 
         button = document.createElement('button');

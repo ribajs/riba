@@ -1,17 +1,17 @@
-export interface IElementIConfiguration {
+export interface ElementConfiguration {
   path: string;
   flat: boolean;
 }
 
-export interface IConfiguration {
+export interface Configuration {
   collection: string;
   language: 'ts' | 'js';
   templateEngine: 'html' | 'pug';
   sourceRoot: string;
   styleLanguage: 'css' | 'scss';
-  component: IElementIConfiguration;
-  binder: IElementIConfiguration;
-  formatter: IElementIConfiguration;
-  service: IElementIConfiguration;
+  component: ElementConfiguration;
+  binder: ElementConfiguration;
+  formatter: ElementConfiguration;
+  service: ElementConfiguration;
   [key: string]: any;
 }

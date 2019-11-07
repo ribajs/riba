@@ -1,4 +1,4 @@
-import { IBinder, Utils } from '@ribajs/core';
+import { Binder, Utils } from '@ribajs/core';
 import { imgUrlFormatter } from '../formatters/img-url.formatter';
 import './ResizeObserver.d';
 
@@ -10,7 +10,7 @@ const OVERWRITE_ORIGINAL_SRC = true;
  * Loads an shopify image with the exact size for the current `img` element without the need to get the right size manually over the `img_url` filter / formatter.
  * The image source path is set by the `srcset` and `sizes` attributes to make them responsive.
  */
-export const shopifyImgBinder: IBinder<string> = {
+export const shopifyImgBinder: Binder<string> = {
   name: 'shopify-img',
   bind(el) {
     this.customData = {

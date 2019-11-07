@@ -1,10 +1,10 @@
-import { IBinder } from './binder';
-import { IObserverSyncCallback } from './observer';
+import { Binder } from './binder';
+import { ObserverSyncCallback } from './observer';
 import { Observer } from '../observer';
 
-export interface IBindable {
+export interface Bindable {
 
-  binder?: IBinder<any>;
+  binder?: Binder<any>;
 
   /**
    * Name of the binder without the prefix
@@ -18,7 +18,7 @@ export interface IBindable {
    * @param obj
    * @param keypath
    */
-  observe(obj: any, keypath: string, callback: IObserverSyncCallback): Observer;
+  observe(obj: any, keypath: string, callback: ObserverSyncCallback): Observer;
 
   /**
    * Subscribes to the model for changes at the specified keypath. Bi-directional
@@ -44,7 +44,7 @@ export interface IBindable {
   sync?(): void;
 }
 
-export interface IFormatterObservers {
+export interface FormatterObservers {
   [key: string]: {
     [key: string]: Observer,
   };

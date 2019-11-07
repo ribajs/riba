@@ -9,7 +9,7 @@ const riba = new Riba();
 riba.module.formatter.regist(plusFormatter);
 riba.module.binder.regist(textBinder);
 
-interface IModel {
+interface Model {
     obj?: {
         value: number;
     };
@@ -18,7 +18,7 @@ interface IModel {
 describe('riba.formatters', () => {
 
     describe('plus', () => {
-        let model: IModel = {};
+        let model: Model = {};
 
         beforeEach(() => {
             model = {};

@@ -1,4 +1,4 @@
-export interface IParseOptions {
+export interface ParseOptions {
   name: string;
   path?: string;
 }

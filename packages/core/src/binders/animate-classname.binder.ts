@@ -1,10 +1,10 @@
-import { IBinder } from '../interfaces';
+import { Binder } from '../interfaces';
 
 /**
  * animate-{class}
  * Add / remove animation class with start and done affix
  */
-export const animateStarBinder: IBinder<boolean> = {
+export const animateStarBinder: Binder<boolean> = {
   name: 'animate-*',
   function: true,
   priority: 1000,

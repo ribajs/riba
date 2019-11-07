@@ -1,5 +1,5 @@
-import { IFormatter } from './formatter';
+import { Formatter } from './formatter';
 
-export interface IFormatters {
-  [name: string]: IFormatter;
+export interface Formatters {
+  [name: string]: Formatter;
 }

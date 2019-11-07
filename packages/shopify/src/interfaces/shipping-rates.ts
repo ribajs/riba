@@ -2,7 +2,7 @@
  * Estimated shipping rate
  * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#get-shipping-rates
  */
-export interface IShopifyShippingRate {
+export interface ShopifyShippingRate {
   name: string;
   price: string;
   delivery_date: string | null; // Date?
@@ -13,12 +13,12 @@ export interface IShopifyShippingRate {
  * Estimated shipping rates
  * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#get-shipping-rates
  */
-export type IShopifyShippingRates = IShopifyShippingRate[];
+export type ShopifyShippingRates = ShopifyShippingRate[];
 
 /**
  * Normalized shipping rate, e.g. to get the price in small amounts (cents, pounds, ..) and as a number
  */
-export interface IShopifyShippingRateNormalized {
+export interface ShopifyShippingRateNormalized {
   name: string;
   price: number;
   delivery_date: string | null; // Date?
@@ -28,4 +28,4 @@ export interface IShopifyShippingRateNormalized {
 /**
  * Normalized shipping rates, e.g. to get the price in small amounts (cents, pounds, ..) and as a number
  */
-export type IShopifyShippingRatesNormalized = IShopifyShippingRateNormalized[];
+export type ShopifyShippingRatesNormalized = ShopifyShippingRateNormalized[];

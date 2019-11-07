@@ -3,7 +3,7 @@ import { Path } from '@angular-devkit/core';
 import { ScriptExportDeclarator } from './script-export.declarator';
 import { StyleExportDeclarator } from './style-export.declarator';
 import { ModuleMetadataDeclarator } from './module-metadata.declarator';
-import { IDeclarationOptions } from '../interfaces';
+import { DeclarationOptions } from '../interfaces';
 
 export class ExportDeclarator {
   constructor(
@@ -12,7 +12,7 @@ export class ExportDeclarator {
     private metadata: ModuleMetadataDeclarator = new ModuleMetadataDeclarator(),
   ) {}
 
-  public declareScript(content: string, options: IDeclarationOptions, index: Path): string {
+  public declareScript(content: string, options: DeclarationOptions, index: Path): string {
     options = this.computeSymbol(options);
     content = this.scriptExports.declare(content, options, index);
     /**
@@ -29,13 +29,13 @@ export class ExportDeclarator {
     return content;
   }
 
-  public declareStyle(content: string, options: IDeclarationOptions, index: Path): string {
+  public declareStyle(content: string, options: DeclarationOptions, index: Path): string {
     options = this.computeSymbol(options);
     content = this.styleExports.declare(content, options, index);
     return content;
   }
 
-  private computeSymbol(options: IDeclarationOptions): IDeclarationOptions {
+  private computeSymbol(options: DeclarationOptions): DeclarationOptions {
     const target = Object.assign({}, options);
     if (options.type !== undefined) {
       target.symbol = classify(options.name).concat(capitalize(options.type));

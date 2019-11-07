@@ -1,24 +1,24 @@
-import { ICommandInput, IConfigurationLoader } from '../interfaces';
+import { CommandInput, ConfigurationLoader as IConfigurationLoader } from '../interfaces';
 import { ConfigurationLoader } from '../lib/configuration';
 import { FileSystemReader } from '../lib/readers';
 
 export abstract class AbstractAction {
   public abstract async handle(
-    inputs?: ICommandInput[],
-    options?: ICommandInput[],
+    inputs?: CommandInput[],
+    options?: CommandInput[],
     extraFlags?: string[],
   ): Promise<void>;
 
-  protected deepCopyInput(inputs: ICommandInput[]) {
+  protected deepCopyInput(inputs: CommandInput[]) {
     return inputs.map(input => ({...input}));
   }
 
-  protected getInput(inputs: ICommandInput[], name: string) {
+  protected getInput(inputs: CommandInput[], name: string) {
     const input = inputs.find(input => input.name === name);
     return input;
   }
 
-  protected setInput(inputs: ICommandInput[], name: string, value: string | boolean) {
+  protected setInput(inputs: CommandInput[], name: string, value: string | boolean) {
     const input = inputs.find(input => input.name === name);
     // Add new input if input not exists
     if (!input) {
@@ -35,7 +35,7 @@ export abstract class AbstractAction {
    * @param name 
    * @param value 
    */
-  protected setDefaultInput(inputs: ICommandInput[], name: string, value: string | boolean) {
+  protected setDefaultInput(inputs: CommandInput[], name: string, value: string | boolean) {
     const input = inputs.find(input => input.name === name);
     if (!input) {
       inputs.push({name, value});
@@ -48,8 +48,8 @@ export abstract class AbstractAction {
   }
 
 
-  protected concatOptions(inputsSources: ICommandInput[][]) {
-    const result = new Array<ICommandInput>();
+  protected concatOptions(inputsSources: CommandInput[][]) {
+    const result = new Array<CommandInput>();
 
     for (const inputs of inputsSources) {
       const toConcat = this.deepCopyInput(inputs);
@@ -69,7 +69,7 @@ export abstract class AbstractAction {
     return loader.load();
   }
 
-  protected async generateFiles(args: ICommandInput[], options: ICommandInput[]): Promise<void> {
+  protected async generateFiles(args: CommandInput[], options: CommandInput[]): Promise<void> {
     return Promise.resolve();
   }
 

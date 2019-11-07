@@ -1,12 +1,12 @@
 import { Binding } from '../binding';
 
-export interface IBindableElement extends HTMLUnknownElement {
+export interface BindableElement extends HTMLUnknownElement {
   _bound?: boolean;
 }
 /**
  * A one way or to way binder interface
  */
-export interface IBinder<ValueType> {
+export interface Binder<ValueType> {
   /**
    * The routine function is called when an observed attribute on the model changes and is used to update the DOM. When defining a one-way binder as a single function, it is actually the routine function that you're defining.
    */

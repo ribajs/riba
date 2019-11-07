@@ -1,23 +1,23 @@
-import { IShopifyImage } from './image';
+import { ShopifyImage } from './image';
 
-export declare interface IShopifyProductImage extends IShopifyImage {
+export declare interface ShopifyProductImage extends ShopifyImage {
   position: number;
   product_id: number;
   variant_ids: number[];
 }
 
-export declare enum IShopifyProductWeightUnit {
+export declare enum ShopifyProductWeightUnit {
   GRAMS = 'g',
   KILOGRAMS = 'kg',
   OUNCES = 'oz',
   POUNDS = 'lb',
 }
 
-export declare interface IShopifyProductVariant {
+export declare interface ShopifyProductVariant {
   available: boolean;
   barcode: string;
   compare_at_price: number | null;
-  featured_image: IShopifyProductImage | null;
+  featured_image: ShopifyProductImage | null;
   created_at: Date;
   fulfillment_service?: string;
   grams?: number;
@@ -37,16 +37,16 @@ export declare interface IShopifyProductVariant {
   title: string;
   updated_at: Date;
   weight: number;
-  weight_unit?: IShopifyProductWeightUnit; // TODO
+  weight_unit?: ShopifyProductWeightUnit; // TODO
 }
 
-export declare interface IShopifyProductVariantOption {
+export declare interface ShopifyProductVariantOption {
   name: string;
   position: number;
   values: string[];
 }
 
-export declare interface IShopifyProduct {
+export declare interface ShopifyProduct {
   available: boolean;
   compare_at_price: number | null;
   compare_at_price_max: number;
@@ -58,7 +58,7 @@ export declare interface IShopifyProduct {
   handle: string;
   id: number;
   images: string[];
-  options: IShopifyProductVariantOption[];
+  options: ShopifyProductVariantOption[];
   price: number;
   price_max: number;
   price_min: number;
@@ -69,6 +69,6 @@ export declare interface IShopifyProduct {
   type: string;
   updated_at?: Date;
   url: string;
-  variants: IShopifyProductVariant[];
+  variants: ShopifyProductVariant[];
   vendor: string;
 }

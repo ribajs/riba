@@ -1,5 +1,5 @@
 import { Utils, EventDispatcher } from '@ribajs/core';
-import { ILangcode, ILocalPluralization, ILocalVar } from '../interfaces';
+import { Langcode, LocalPluralization, LocalVar } from '../interfaces';
 
 export abstract class ALocalesService {
 
@@ -34,7 +34,7 @@ export abstract class ALocalesService {
    * @param properties properties, e.g. `['de', 'form', 'newsletter', 'label']`
    * @param force Set this to true if you want to force the request also if the service is not ready, you should use this only one the time
    */
-  public async get(properties?: string[], vars?: ILocalVar, force: boolean = false) {
+  public async get(properties?: string[], vars?: LocalVar, force: boolean = false) {
     if (!this.ready && !force) {
       throw new Error('not ready');
     }
@@ -83,7 +83,7 @@ export abstract class ALocalesService {
    * Properties object must not include the language code.
    * @param properties properties, e.g. `[form', 'newsletter', 'label']`
    */
-  public async getByCurrentLang(properties: string[] = [], vars?: ILocalVar) {
+  public async getByCurrentLang(properties: string[] = [], vars?: LocalVar) {
     const langcode = this.getLangcode();
     if (!langcode) {
       throw new Error('Langcode not found in html tag');
@@ -131,7 +131,7 @@ export abstract class ALocalesService {
     const activeCode = this.getLangcode();
     return this.get(undefined, undefined, true)
     .then((locals) => {
-      const langcodes: ILangcode[] = [];
+      const langcodes: Langcode[] = [];
       Object.keys(locals).forEach((langcode) => {
         langcodes.push({
           code: langcode,
@@ -145,9 +145,9 @@ export abstract class ALocalesService {
   /**
    * Parse templates wich can be used to set variables on language strings
    */
-  public parseTemplateVars(el: HTMLElement): ILocalVar {
+  public parseTemplateVars(el: HTMLElement): LocalVar {
     const templates = el.querySelectorAll<HTMLTemplateElement>('template');
-    const vars: ILocalVar = {};
+    const vars: LocalVar = {};
     templates.forEach((template) => {
       const name: string | null = template.getAttribute('name');
       if (name !== null) {
@@ -160,9 +160,9 @@ export abstract class ALocalesService {
   /**
    * Parse templates wich have his own translations
    */
-  public parseLocalVars(el: HTMLElement): ILocalVar {
+  public parseLocalVars(el: HTMLElement): LocalVar {
     const templates = el.querySelectorAll<HTMLTemplateElement>('template');
-    const vars: ILocalVar = {};
+    const vars: LocalVar = {};
     templates.forEach((template) => {
       const lang: string | null = template.getAttribute('lang');
       if (lang !== null) {
@@ -177,7 +177,7 @@ export abstract class ALocalesService {
    * @param translateString
    * @param vars
    */
-  public setTranslateStringVars(translateString: string, vars: ILocalVar) {
+  public setTranslateStringVars(translateString: string, vars: LocalVar) {
     if (!translateString || Object.keys(vars).length === 0 || typeof(translateString.match) !== 'function') {
       return translateString;
     }
@@ -240,7 +240,7 @@ export abstract class ALocalesService {
    * @param translateString
    * @param vars
    */
-  protected setTranslateStringPluralization(translateObj: ILocalPluralization | string, vars: ILocalVar) {
+  protected setTranslateStringPluralization(translateObj: LocalPluralization | string, vars: LocalVar) {
     if (vars.count && typeof(translateObj) === 'object' && translateObj !== null) {
       const count = Number(vars.count);
       if (count === 0) {

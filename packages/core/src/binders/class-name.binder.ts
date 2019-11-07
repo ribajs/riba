@@ -1,4 +1,4 @@
-import { IBinder } from '../interfaces';
+import { Binder } from '../interfaces';
 
 /**
  * class-*
@@ -10,7 +10,7 @@ import { IBinder } from '../interfaces';
  * @example
  * <li rv-class-completed="todo.done">{ todo.name }</li>
  */
-export const classStarBinder: IBinder<boolean> = {
+export const classStarBinder: Binder<boolean> = {
   name: 'class-*',
   routine(el: HTMLElement, value: boolean) {
     if (this.args === null) {

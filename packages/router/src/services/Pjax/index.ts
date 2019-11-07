@@ -10,7 +10,7 @@ import { Transition } from '../../interfaces';
 import { Dom } from './Dom';
 import { HistoryManager } from './HistoryManager';
 
-export interface IPjaxInstances {
+export interface PjaxInstances {
   [key: string]: Pjax;
 }
 
@@ -28,7 +28,7 @@ class Pjax {
 
   public static cache = new BaseCache();
 
-  public static instances: IPjaxInstances = {};
+  public static instances: PjaxInstances = {};
 
   public static getInstance(id: string) {
     const result = Pjax.instances[id];

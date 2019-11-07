@@ -1,4 +1,4 @@
-import { IBinder } from '../interfaces';
+import { Binder } from '../interfaces';
 import { ifBinder } from './if.binder';
 
 /**
@@ -6,7 +6,7 @@ import { ifBinder } from './if.binder';
  * Removes and unbinds the element and it's child nodes into the DOM when true
  * (negated version of `if` binder).
  */
-export const unlessBinder: IBinder<boolean> = {
+export const unlessBinder: Binder<boolean> = {
   name: 'unless',
   block: true,
   priority: 4000,

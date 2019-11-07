@@ -5,7 +5,7 @@ import * as ora from 'ora';
 import { join } from 'path';
 import { AbstractRunner } from '../runners/abstract.runner';
 import { messages } from '../ui';
-import { IPackageManagerCommands, IProjectDependency } from '../../interfaces';
+import { PackageManagerCommands, ProjectDependency } from '../../interfaces';
 
 export abstract class AbstractPackageManager {
   constructor(protected runner: AbstractRunner) {}
@@ -84,7 +84,7 @@ export abstract class AbstractPackageManager {
     await this.runner.run(commandArguments, collect);
   }
 
-  public async getProduction(): Promise<IProjectDependency[]> {
+  public async getProduction(): Promise<ProjectDependency[]> {
     const packageJsonContent = await this.readPackageJson();
     const packageJsonDependencies: any = packageJsonContent.dependencies;
     const dependencies = [];
@@ -93,10 +93,10 @@ export abstract class AbstractPackageManager {
       dependencies.push({ name, version });
     }
 
-    return dependencies as IProjectDependency[];
+    return dependencies as ProjectDependency[];
   }
 
-  public async getDevelopement(): Promise<IProjectDependency[]> {
+  public async getDevelopement(): Promise<ProjectDependency[]> {
     const packageJsonContent = await this.readPackageJson();
     const packageJsonDevDependencies: any = packageJsonContent.devDependencies;
     const dependencies = [];
@@ -105,7 +105,7 @@ export abstract class AbstractPackageManager {
       dependencies.push({ name, version });
     }
 
-    return dependencies as IProjectDependency[];
+    return dependencies as ProjectDependency[];
   }
 
   private async readPackageJson(): Promise<any> {
@@ -174,5 +174,5 @@ export abstract class AbstractPackageManager {
 
   public abstract get name(): string;
 
-  public abstract get cli(): IPackageManagerCommands;
+  public abstract get cli(): PackageManagerCommands;
 }

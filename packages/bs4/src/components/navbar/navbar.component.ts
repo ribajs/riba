@@ -1,4 +1,4 @@
-import { Component, EventDispatcher, IBinder } from '@ribajs/core';
+import { Component, EventDispatcher, Binder } from '@ribajs/core';
 import { CollapseService } from '../../services/collapse.service';
 import { JQuery as $ } from '@ribajs/jquery';
 
@@ -51,7 +51,7 @@ export class NavbarComponent extends Component {
     this.init(NavbarComponent.observedAttributes);
   }
 
-  public toggle(context: IBinder<any>, event: Event) {
+  public toggle(context: Binder<any>, event: Event) {
     this.collapseService.toggle();
     event.preventDefault();
     event.stopPropagation();

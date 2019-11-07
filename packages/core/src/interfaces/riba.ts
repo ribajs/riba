@@ -1,17 +1,17 @@
-import { IFormatters, IBinders, IAdapters, IComponents } from '../interfaces';
+import { Formatters, Binders, Adapters, Components } from '../interfaces';
 import { Binding } from '../binding';
 
-export interface IExtensions {
-  binders?: IBinders<any>;
-  formatters?: IFormatters;
-  components?: IComponents;
-  adapters?: IAdapters;
+export interface Extensions {
+  binders?: Binders<any>;
+  formatters?: Formatters;
+  components?: Components;
+  adapters?: Adapters;
 }
 
 /** Interface for the event handler, augment the event handler of the on-* binder */
 export type EventHandler = (this: any, context: Binding, ev: Event, binding: Binding, el: HTMLElement) => void;
 
-export interface IOptions extends IExtensions {
+export interface Options extends Extensions {
   /** Attribute / web-component prefix in templates */
   prefix?: string;
 

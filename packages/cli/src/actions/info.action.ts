@@ -9,7 +9,7 @@ import {
 } from '../lib/package-managers';
 import { BANNER, messages } from '../lib/ui';
 import { AbstractAction } from './abstract.action';
-import { IPackageJsonDependencies, IRibaDependency } from '../interfaces';
+import { PackageJsonDependencies, RibaDependency } from '../interfaces';
 
 export class InfoAction extends AbstractAction {
   public async handle() {
@@ -47,15 +47,15 @@ export class InfoAction extends AbstractAction {
   private displayRibaInformation = async () => {
     console.info(chalk.green('[Riba Information]'));
     try {
-      const dependencies: IPackageJsonDependencies = await this.readProjectIPackageJsonDependencies();
+      const dependencies: PackageJsonDependencies = await this.readProjectPackageJsonDependencies();
       this.displayRibaVersions(dependencies);
     } catch {
       console.error(chalk.red(messages.RIBA_INFORMATION_PACKAGE_MANAGER_FAILED));
     }
   };
   
-  private async readProjectIPackageJsonDependencies(): Promise<IPackageJsonDependencies> {
-    return new Promise<IPackageJsonDependencies>((resolve, reject) => {
+  private async readProjectPackageJsonDependencies(): Promise<PackageJsonDependencies> {
+    return new Promise<PackageJsonDependencies>((resolve, reject) => {
       readFile(
         join(process.cwd(), 'package.json'),
         (error: NodeJS.ErrnoException | null, buffer: Buffer) => {
@@ -69,19 +69,19 @@ export class InfoAction extends AbstractAction {
     });
   };
   
-  private displayRibaVersions(dependencies: IPackageJsonDependencies) {
+  private displayRibaVersions(dependencies: PackageJsonDependencies) {
     this.buildRibaVersionsMessage(dependencies).forEach(dependency =>
       console.info(dependency.name, chalk.yellow(dependency.value)),
     );
   }
   
-  private buildRibaVersionsMessage(dependencies: IPackageJsonDependencies): IRibaDependency[] {
+  private buildRibaVersionsMessage(dependencies: PackageJsonDependencies): RibaDependency[] {
     const nestDependencies = this.collectNestDependencies(dependencies);
     return this.format(nestDependencies);
   };
   
-  private collectNestDependencies(dependencies: IPackageJsonDependencies): IRibaDependency[] {
-    const nestDependencies: IRibaDependency[] = [];
+  private collectNestDependencies(dependencies: PackageJsonDependencies): RibaDependency[] {
+    const nestDependencies: RibaDependency[] = [];
     Object.keys(dependencies).forEach(key => {
       if (key.indexOf('@ribajs') > -1) {
         let name = `${key.replace(/@ribajs\//, '')} Version`;
@@ -95,7 +95,7 @@ export class InfoAction extends AbstractAction {
     return nestDependencies;
   };
   
-  private format(dependencies: IRibaDependency[]): IRibaDependency[] {
+  private format(dependencies: RibaDependency[]): RibaDependency[] {
     const sorted = dependencies.sort(
       (dependencyA, dependencyB) =>
         dependencyB.name.length - dependencyA.name.length,

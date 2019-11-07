@@ -1,4 +1,4 @@
-import { IFormatter } from '@ribajs/core';
+import { Formatter } from '@ribajs/core';
 import { ALocalesService } from '../services/locales-base.service';
 
 const translate = async (translateMePathString: string, localesService: ALocalesService, langcode?: string) => {
@@ -18,7 +18,7 @@ const translate = async (translateMePathString: string, localesService: ALocales
   });
 };
 
-export const tFormatterWrapper = (localesService: ALocalesService): IFormatter => {
+export const tFormatterWrapper = (localesService: ALocalesService): Formatter => {
   return {
     name: 't',
     read(translateMePathString: string, langcode: string, ...vars: string[]) {
@@ -41,5 +41,5 @@ export const tFormatterWrapper = (localesService: ALocalesService): IFormatter =
         });
       }
     },
-  } as IFormatter;
+  } as Formatter;
 };

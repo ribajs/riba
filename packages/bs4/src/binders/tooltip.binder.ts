@@ -5,7 +5,7 @@ import Popper from 'popper.js'; // /dist/umd/popper
  * @see https://getbootstrap.com/docs/4.1/components/tooltips/
  * @see https://github.com/twbs/bootstrap/blob/v4-dev/js/src/tooltip.js
  */
-import { IBinder } from '@ribajs/core';
+import { Binder } from '@ribajs/core';
 import { JQuery as $ } from '@ribajs/jquery';
 
 const template = '<div class="tooltip" role="tooltip">' +
@@ -15,7 +15,7 @@ const template = '<div class="tooltip" role="tooltip">' +
 /**
  *
  */
-export const tooltipBinder: IBinder<string> = {
+export const tooltipBinder: Binder<string> = {
   name: 'bs4-tooltip',
   block: false,
   bind(el: HTMLUnknownElement) {

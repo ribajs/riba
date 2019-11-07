@@ -1,5 +1,5 @@
 // TODO
-export interface IDeferred {
+export interface Deferred {
   resolve: any;
   reject: any;
 }
@@ -455,7 +455,7 @@ export class Utils {
    * https://developer.mozilla.org/en-US/docs/Mozilla/JavaScript_code_modules/Promise.jsm/Deferred
    *
    * @memberOf Barba.Utils
-   * @return {IDeferred}
+   * @return {Deferred}
    */
   public static deferred(): any {
     const obj: any = {};

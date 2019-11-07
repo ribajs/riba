@@ -3,7 +3,7 @@
 ## Install
 
 ```bash
-npm install --save-dev @ribajs/shopify
+npm install --save @ribajs/shopify
 ```
 
 ## Regist

@@ -1,20 +1,20 @@
-import { IShopifyCustomerAddress } from './address';
-import { IShopifyOrder } from './order';
+import { ShopifyCustomerAddress } from './address';
+import { ShopifyOrder } from './order';
 
 /**
  * The customer object
  * The `customer` object contains information about a customer who has a [customer account](https://help.shopify.com/en/manual/customers/customer-accounts).
  * @see https://help.shopify.com/en/themes/liquid/objects/customer
  */
-export interface IShopifyCustomer {
+export interface ShopifyCustomer {
   /** Returns `true` if the customer accepts marketing, returns `false` if the customer does not. */
   accepts_marketing: boolean;
   /** Returns an array of all addresses associated with a customer. See customer_address for a full list of available attributes. */
-  addresses: IShopifyCustomerAddress[];
+  addresses: ShopifyCustomerAddress[];
   /** Returns the number of addresses associated with a customer. */
   addresses_count: number;
   /** Returns the default customer_address. */
-  default_address: IShopifyCustomerAddress | null;
+  default_address: ShopifyCustomerAddress | null;
   /** Returns the email address of the customer. */
   email: string;
   /** Returns the first name of the customer. */
@@ -30,11 +30,11 @@ export interface IShopifyCustomer {
   /** Returns the last name of the customer. */
   last_name: string;
   /** Returns the last order placed by the customer, not including test orders. */
-  last_order: IShopifyOrder;
+  last_order: ShopifyOrder;
   /** Returns the full name of the customer. */
   name: string;
   /** Returns an array of all orders placed by the customer. */
-  orders: IShopifyOrder[];
+  orders: ShopifyOrder[];
   /** Returns the total number of orders a customer has placed. */
   orders_count: number;
   /** Returns the list of tags associated with the customer. */

@@ -1,5 +1,5 @@
-import { IConfiguration } from './configuration';
+import { Configuration } from './configuration';
 
-export interface IConfigurationLoader {
-  load(): IConfiguration | Promise<IConfiguration>;
+export interface ConfigurationLoader {
+  load(): Configuration | Promise<Configuration>;
 }

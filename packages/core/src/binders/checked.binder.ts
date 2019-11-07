@@ -1,4 +1,4 @@
-import { IBinder } from '../interfaces';
+import { Binder } from '../interfaces';
 import { Utils } from '../services/utils';
 
 /**
@@ -6,7 +6,7 @@ import { Utils } from '../services/utils';
  * Checks a checkbox or radio input when the value is true. Also sets the model
  * property when the input is checked or unchecked (two-way binder).
  */
-export const checkedBinder: IBinder<string> = {
+export const checkedBinder: Binder<string> = {
   name: 'checked',
   publishes: true,
   priority: 2000,

@@ -1,4 +1,4 @@
-export declare interface IShopifyImage {
+export declare interface ShopifyImage {
   alt: string;
   created_at: Date;
   height: number;

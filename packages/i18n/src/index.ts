@@ -1,4 +1,4 @@
-import { IRibaModule } from '@ribajs/core';
+import { RibaModule } from '@ribajs/core';
 
 export * from './binders';
 export * from './components';
@@ -10,7 +10,7 @@ import bindersWrapper from './binders';
 import formattersWrapper from './formatters';
 import * as services from './services';
 
-export const i18nModule = (localesService: services.ALocalesService): IRibaModule => {
+export const i18nModule = (localesService: services.ALocalesService): RibaModule => {
   return {
     binders: bindersWrapper(localesService),
     components: {},

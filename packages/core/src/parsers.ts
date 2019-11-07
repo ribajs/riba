@@ -1,6 +1,6 @@
 import { Utils } from './services/utils';
 
-import { IDataElement, View, TBlock } from './view';
+import { DataElement, View, TBlock } from './view';
 
 /**
  * Used also in parsers.parseType
@@ -49,7 +49,7 @@ export function parseType(str?: string) {
   return {type, value};
 }
 
-export interface ITokens {
+export interface Tokens {
   type: number;
   value: string;
 }
@@ -62,7 +62,7 @@ export interface ITokens {
  * @param delimiters
  */
 export function parseTemplate(template: string, delimiters: string[]) {
-  let tokens: ITokens[] | null = null;
+  let tokens: Tokens[] | null = null;
   const length = template.length;
   let index = 0;
   let lastIndex = 0;
@@ -123,11 +123,11 @@ export function parseTemplate(template: string, delimiters: string[]) {
   return tokens;
 }
 
-export function parseNode(view: View, node: IDataElement, templateDelimiters: Array<string>) {
+export function parseNode(view: View, node: DataElement, templateDelimiters: Array<string>) {
   /** If true stop / block the parseNode  recursion */
   let block: TBlock = false;
 
-  node = ( node as IDataElement);
+  node = ( node as DataElement);
   // if node.nodeType === 3 === Node.TEXT_NODE
   if (node.nodeType === 3) {
     let tokens = null;
@@ -165,14 +165,14 @@ export function parseNode(view: View, node: IDataElement, templateDelimiters: Ar
       for (let i = 0; i < node.childNodes.length; i++) {
         const childNode = node.childNodes[i];
         if (childNode) {
-          parseNode(view, (childNode as IDataElement), templateDelimiters);
+          parseNode(view, (childNode as DataElement), templateDelimiters);
         }
       }
     }
   }
 }
 
-export interface IParsedDeclarations {
+export interface ParsedDeclarations {
   keypath?: string;
   pipes: string[];
 }
@@ -194,7 +194,7 @@ export interface IParsedDeclarations {
  * }
  * ```
  */
-export function parseDeclaration(declaration: string): IParsedDeclarations {
+export function parseDeclaration(declaration: string): ParsedDeclarations {
   const matches = declaration.match(DECLARATION_SPLIT);
   if (matches === null) {
     throw new Error('[View] No matches');
@@ -204,7 +204,7 @@ export function parseDeclaration(declaration: string): IParsedDeclarations {
   });
   const keypath = pipes.shift() || undefined;
 
-  return <IParsedDeclarations> {
+  return <ParsedDeclarations> {
     keypath,
     pipes,
   };

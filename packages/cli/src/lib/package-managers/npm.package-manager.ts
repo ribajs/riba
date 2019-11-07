@@ -1,7 +1,7 @@
 import { RunnerFactory } from '../runners';
 import { NpmRunner } from '../runners/npm.runner';
 import { AbstractPackageManager } from './abstract.package-manager';
-import { IPackageManagerCommands, Runner, PackageManager } from '../../interfaces';
+import { PackageManagerCommands, Runner, PackageManager } from '../../interfaces';
 
 export class NpmPackageManager extends AbstractPackageManager {
   constructor() {
@@ -12,7 +12,7 @@ export class NpmPackageManager extends AbstractPackageManager {
     return PackageManager.NPM.toUpperCase();
   }
 
-  get cli(): IPackageManagerCommands {
+  get cli(): PackageManagerCommands {
     return {
       install: 'install',
       add: 'install',

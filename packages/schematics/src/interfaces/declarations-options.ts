@@ -1,6 +1,6 @@
 import { Path } from '@angular-devkit/core';
 
-export interface IDeclarationOptions {
+export interface DeclarationOptions {
   flat?: boolean;
   name: string;
   collection: string;

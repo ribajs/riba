@@ -1,4 +1,4 @@
-import { IBinder } from '../interfaces';
+import { Binder } from '../interfaces';
 
 /**
  * style-*
@@ -8,7 +8,7 @@ import { IBinder } from '../interfaces';
  * <div rv-style-background-color="'blue'"></div>
  * ```
  */
-export const cssStarBinder: IBinder<string> = {
+export const cssStarBinder: Binder<string> = {
   name: 'style-*',
   routine(el: HTMLElement, value: string) {
     const propertyName = this.args[0];

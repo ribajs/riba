@@ -3,7 +3,7 @@
  * The `customer_address` contains information of addresses tied to a [Customer Account](https://help.shopify.com/en/manual/customers/customer-accounts).
  * @see https://help.shopify.com/en/themes/liquid/objects/customer-address
  */
-export interface IShopifyCustomerAddress {
+export interface ShopifyCustomerAddress {
     /** Returns the value of the Address1 field of the address. */
     address1: string;
     /** Returns the value of the Address2 field of the address. */

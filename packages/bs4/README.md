@@ -3,7 +3,7 @@
 ## Install
 
 ```bash
-npm install --save-dev @ribajs/bs4
+npm install --save @ribajs/bs4
 ```
 
 ## Regist

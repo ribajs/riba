@@ -1,4 +1,4 @@
-import { IFormatter } from '@ribajs/core';
+import { Formatter } from '@ribajs/core';
 /**
  * Formats the price based on the shop's HTML with currency setting (if the format is not overwritten by passing a format parameter).
  * @param cents
@@ -9,4 +9,4 @@ import { IFormatter } from '@ribajs/core';
  * @see https://github.com/JumpLinkNetwork/shopify-productjs/blob/master/src/utilities.js
  * @see https://help.shopify.com/en/themes/liquid/filters/money-filters
  */
-export declare const moneyFormatter: IFormatter;
+export declare const moneyFormatter: Formatter;

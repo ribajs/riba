@@ -1,8 +1,8 @@
-import { IDeclarationOptions } from '../interfaces';
+import { DeclarationOptions } from '../interfaces';
 import { MetadataManager } from './metadata.manager';
 
 export class ModuleMetadataDeclarator {
-  public declare(content: string, options: IDeclarationOptions): string {
+  public declare(content: string, options: DeclarationOptions): string {
     const manager = new MetadataManager(content);
     if (!options.symbol) {
       throw new Error('Symbol not found!');

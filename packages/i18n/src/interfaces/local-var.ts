@@ -1,10 +1,10 @@
-export interface ILocalPluralization {
+export interface LocalPluralization {
   zero?: string;
   one?: string;
   two?: string;
   other?: string;
 }
 
-export interface ILocalVar {
-  [name: string]: string | ILocalPluralization;
+export interface LocalVar {
+  [name: string]: string | LocalPluralization;
 }

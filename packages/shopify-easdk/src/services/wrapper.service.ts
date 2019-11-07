@@ -1,27 +1,27 @@
 import { Utils, EventDispatcher } from '@ribajs/core';
 
 import {
-  IEASDK,
-  IEASDKWrapper,
-  IBarConfig,
-  IBar,
-  IBarWrapper,
-  ILoadingStateWrapper,
-  IConfig,
-  IPaginationConfig,
-  IButtonConfig,
+  EASDK,
+  EASDKWrapper,
+  BarConfig,
+  Bar,
+  BarWrapper,
+  LoadingStateWrapper,
+  Config,
+  PaginationConfig,
+  ButtonConfig,
   ButtonCallback,
-  IModal,
-  IModalWrapper,
-  IModalInit,
-  IModalAlertOptions,
-  IModalConfirmOptions,
-  IModalInputOptions,
-  IProductPickerOptions,
+  Modal,
+  ModalWrapper,
+  ModalInit,
+  ModalAlertOptions,
+  ModalConfirmOptions,
+  ModalInputOptions,
+  ProductPickerOptions,
   ProductPickerCallback,
-  IUser,
-  IUserData,
-  IReceiveMessage,
+  User,
+  UserData,
+  ReceiveMessage,
   ShopifyApp,
 } from '../interfaces/shopify-easdk';
 
@@ -43,10 +43,10 @@ export class WrapperService {
 
   public event = new EventDispatcher('shopify-easdk');
 
-  protected shopifyApp: IEASDK;
+  protected shopifyApp: EASDK;
 
   constructor(
-    shopifyApp?: IEASDK,
+    shopifyApp?: EASDK,
   ) {
     if (!shopifyApp && !ShopifyApp) {
       throw new Error(WrapperService.ERRORS.EASDK_NOT_FOUND);

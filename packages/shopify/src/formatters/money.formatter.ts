@@ -1,4 +1,4 @@
-import { IFormatter } from '@ribajs/core';
+import { Formatter } from '@ribajs/core';
 import { ShopifyService } from '../services/shopify.service';
 
 /**
@@ -11,7 +11,7 @@ import { ShopifyService } from '../services/shopify.service';
  * @see https://github.com/JumpLinkNetwork/shopify-productjs/blob/master/src/utilities.js
  * @see https://help.shopify.com/en/themes/liquid/filters/money-filters
  */
-export const moneyFormatter: IFormatter = {
+export const moneyFormatter: Formatter = {
   name: 'money',
   read(cents: string | number, format?: string) {
     let value = '';

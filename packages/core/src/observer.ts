@@ -1,14 +1,14 @@
 
-import { IAdapters, Root, IKey, IObserverSyncCallback, Obj, IOptions } from './interfaces';
+import { Adapters, Root, Key, ObserverSyncCallback, Obj, Options } from './interfaces';
 import { Utils } from './services/utils';
 
 export class Observer {
 
-  public static adapters: IAdapters;
+  public static adapters: Adapters;
   public static interfaces: string[];
   public static rootInterface: Root;
 
-  public static updateOptions(options: IOptions) {
+  public static updateOptions(options: Options) {
     if (!options.adapters) {
       throw new Error('adapters are required!');
     }
@@ -28,7 +28,7 @@ export class Observer {
    */
   public static tokenize(keypath: string, root: Root) {
     const tokens: any[] = [];
-    let current: IKey = {i: root, path: ''};
+    let current: Key = {i: root, path: ''};
     let index: number;
     let chr: string;
 
@@ -46,12 +46,12 @@ export class Observer {
   }
 
   public keypath: string;
-  public callback: IObserverSyncCallback;
+  public callback: ObserverSyncCallback;
   public objectPath: Obj[];
   public obj: Obj;
   public target: Obj;
-  public key: IKey;
-  public tokens: IKey[];
+  public key: Key;
+  public tokens: Key[];
 
   /**
    * Constructs a new keypath observer and kicks things off.
@@ -59,7 +59,7 @@ export class Observer {
    * @param keypath
    * @param callback
    */
-  constructor(obj: Obj, keypath: string, callback: IObserverSyncCallback) {
+  constructor(obj: Obj, keypath: string, callback: ObserverSyncCallback) {
     this.keypath = keypath;
     this.callback = callback;
     this.objectPath = [];
@@ -99,7 +99,7 @@ export class Observer {
       throw new Error('[Observer] No tokens');
     }
 
-    this.key = (this.tokens.pop() as IKey);
+    this.key = (this.tokens.pop() as Key);
 
     return {
       key: this.key,
@@ -202,7 +202,7 @@ export class Observer {
    * @param key
    * @param obj
    */
-  public get(key: IKey, obj: Obj) {
+  public get(key: Key, obj: Obj) {
     return Observer.adapters[key.i].get(obj, key.path);
   }
 
@@ -213,7 +213,7 @@ export class Observer {
    * @param obj
    * @param callback
    */
-  public set(active: boolean, key: IKey, obj: Obj, callback: IObserverSyncCallback) {
+  public set(active: boolean, key: Key, obj: Obj, callback: ObserverSyncCallback) {
     if (active) {
       Observer.adapters[key.i].observe(obj, key.path, callback);
     } else {

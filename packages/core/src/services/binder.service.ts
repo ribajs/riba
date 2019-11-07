@@ -1,4 +1,4 @@
-import { IBinder, IBinders } from '../interfaces';
+import { Binder, Binders } from '../interfaces';
 import { ModuleElementService } from './module-element.service';
 
 export class BindersService extends ModuleElementService {
@@ -9,7 +9,7 @@ export class BindersService extends ModuleElementService {
    *
    * @param binders;
    */
-  constructor(binders: IBinders<any>) {
+  constructor(binders: Binders<any>) {
     super(binders);
   }
 
@@ -18,7 +18,7 @@ export class BindersService extends ModuleElementService {
    * @param binder
    * @param name  Overwrites the name to access the binder over
    */
-  public regist(binder: IBinder<any>, fallbackName?: string, forceFallback: boolean = false): IBinders<any> {
+  public regist(binder: Binder<any>, fallbackName?: string, forceFallback: boolean = false): Binders<any> {
     if (!binder || typeof(binder.routine) !== 'function') {
       console.warn(new Error('Can not regist binder!'), binder);
       return this.elements;

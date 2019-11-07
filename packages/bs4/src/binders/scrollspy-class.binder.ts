@@ -1,10 +1,10 @@
-import { IBinder } from '@ribajs/core';
+import { Binder } from '@ribajs/core';
 
 /**
  * scrollspy-class
  * @see https://getbootstrap.com/docs/4.1/components/scrollspy/
  */
-export const scrollspyClassBinder: IBinder<string> = {
+export const scrollspyClassBinder: Binder<string> = {
   name: 'bs4-scrollspy-*',
   bind(el: HTMLElement) {
     this.customData = {};

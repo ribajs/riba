@@ -7,7 +7,7 @@ import template from './bs4-toggle-button.component.html';
 
 type State = 'undefined' | 'overlay-left' | 'overlay-right' | 'side-left' | 'side-right' | 'hidden';
 
-interface IScope {
+interface Scope {
   targetId?: string;
   toggle: Bs4ToggleButtonComponent['toggle'];
   state: State;
@@ -26,7 +26,7 @@ export class Bs4ToggleButtonComponent extends Component {
 
   protected eventDispatcher?: EventDispatcher;
 
-  protected scope: IScope = {
+  protected scope: Scope = {
     targetId: undefined,
     toggle: this.toggle,
     state: 'undefined',

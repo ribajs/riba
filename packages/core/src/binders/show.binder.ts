@@ -1,9 +1,9 @@
-import { IBinder } from '../interfaces';
+import { Binder } from '../interfaces';
 
 /**
  * Shows the element when value is true.
  */
-export const showBinder: IBinder<boolean> = {
+export const showBinder: Binder<boolean> = {
   name: 'show',
   routine(el: HTMLElement, value: boolean) {
     el.style.display = value ? '' : 'none';

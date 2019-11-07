@@ -2,10 +2,13 @@
 
 ## Dev
 
+- Removed `I` prefix from interface names
+
 ### Core
 
 - Removed jQuery dependency
 - Removed Debug dependency
+- bugfixes
 
 ### Router
 
@@ -15,6 +18,11 @@
 ### JQuery
 
 - New jQuery Module
+
+### Iconset
+
+- Fix sizes in some icons
+- Allow multiple colors in bs4-icon binder
 
 ## 1.4.0
 

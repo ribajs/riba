@@ -1,5 +1,5 @@
-import { IFormatter } from '../../interfaces';
-import { IFormatterFuntionParam } from './call.formatter';
+import { Formatter } from '../../interfaces';
+import { FormatterFuntionParam } from './call.formatter';
 import { Binding } from '../../binding';
 
 /**
@@ -10,9 +10,9 @@ import { Binding } from '../../binding';
  * @param fn The function the event handler should call
  * @param fnArgs the parameters you wish to get called the function with
  */
-export const argsFormatter: IFormatter = {
+export const argsFormatter: Formatter = {
   name: 'args',
-  read(fn: IFormatterFuntionParam, ...fnArgs: any[]) {
+  read(fn: FormatterFuntionParam, ...fnArgs: any[]) {
     return (event: Event, scope: any, el: HTMLElement, binding: Binding) => {
       // append the event handler args to passed args
       fnArgs.push(event);

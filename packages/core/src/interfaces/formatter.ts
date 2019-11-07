@@ -1,6 +1,6 @@
 export type FormatterFn = (val: any, ...args: any[]) => any;
 
-export interface IFormatter {
+export interface Formatter {
   name: string;
   read?: FormatterFn;
   publish?: FormatterFn;

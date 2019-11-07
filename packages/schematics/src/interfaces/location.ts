@@ -1,6 +1,6 @@
 import { Path } from '@angular-devkit/core';
 
-export interface ILocation {
+export interface Location {
   name: string;
   path: Path;
 }

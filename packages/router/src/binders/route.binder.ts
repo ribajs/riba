@@ -1,17 +1,17 @@
 import { Pjax, Prefetch } from '../services';
-import { Binding, IBinder, EventDispatcher, Utils } from '@ribajs/core';
+import { Binding, Binder, EventDispatcher, Utils } from '@ribajs/core';
 
-export interface IRouteOptions {
+export interface RouteOptions {
   url: string;
   viewId: string;
   removeAfterActivation: boolean;
   newTab: boolean;
 }
 
-export interface ICustomData {
+export interface CustomData {
   prefetch: Prefetch;
   dispatcher?: EventDispatcher;
-  options: IRouteOptions;
+  options: RouteOptions;
   checkURL(this: Binding, urlToCheck?: string): boolean;
   onClick(this: Binding, event: Event): void;
   onNewPageReady(this: Binding): void;
@@ -21,17 +21,17 @@ export interface ICustomData {
 /**
  * Open link with pajax if the route is not the active route
  */
-export const routeBinder: IBinder<string> = {
+export const routeBinder: Binder<string> = {
   name: 'route',
 
   bind(this: Binding, el: HTMLUnknownElement) {
-    this.customData = <ICustomData> {
+    this.customData = <CustomData> {
       prefetch: new Prefetch(),
       dispatcher: undefined,
       options: {
         removeAfterActivation: false,
         newTab: false,
-      } as IRouteOptions,
+      } as RouteOptions,
       checkURL(this: Binding, urlToCheck?: string) {
         if (urlToCheck && Utils.onRoute(urlToCheck)) {
           return true;
@@ -58,16 +58,16 @@ export const routeBinder: IBinder<string> = {
         this.customData.checkURL.call(this, this.customData.options.url);
       },
       onLinkEnter(this: Binding, event: Event) {
-        (this.customData as ICustomData).prefetch.onLinkEnter(event, this.customData.options.url);
+        (this.customData as CustomData).prefetch.onLinkEnter(event, this.customData.options.url);
       },
     };
   },
 
-  routine(this: Binding, el: HTMLElement, optionsOrUrl?: string | IRouteOptions) {
+  routine(this: Binding, el: HTMLElement, optionsOrUrl?: string | RouteOptions) {
     if (Utils.isString(optionsOrUrl)) {
       this.customData.options.url = optionsOrUrl as string;
-    } else if (Utils.isObject(optionsOrUrl as IRouteOptions)) {
-      this.customData.options = optionsOrUrl as IRouteOptions;
+    } else if (Utils.isObject(optionsOrUrl as RouteOptions)) {
+      this.customData.options = optionsOrUrl as RouteOptions;
     }
     this.customData.options.viewId = this.customData.options.viewId || 'main';
     this.customData.options.removeAfterActivation = Utils.isBoolean(this.customData.options.removeAfterActivation) ? this.customData.options.removeAfterActivation : false;

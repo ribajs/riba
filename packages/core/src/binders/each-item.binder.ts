@@ -1,4 +1,4 @@
-import { IBindable, IBinder } from '../interfaces';
+import { Bindable, Binder } from '../interfaces';
 import { View } from '../view';
 import { Utils } from '../services/utils';
 
@@ -6,7 +6,7 @@ import { Utils } from '../services/utils';
  * each-*
  * Appends bound instances of the element in place for each item in the array.
  */
-export const eachStarBinder: IBinder<any[]> = {
+export const eachStarBinder: Binder<any[]> = {
   name: 'each-*',
   block: true,
   priority: 4000,
@@ -117,7 +117,7 @@ export const eachStarBinder: IBinder<any[]> = {
     }
 
     if (el.nodeName === 'OPTION' && this.view.bindings) {
-      this.view.bindings.forEach((binding: IBindable) => {
+      this.view.bindings.forEach((binding: Bindable) => {
         if (this.marker && (binding.el === this.marker.parentNode) && (binding.type === 'value') && binding.sync) {
           binding.sync();
         }

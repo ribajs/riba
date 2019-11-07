@@ -1,4 +1,4 @@
-export declare interface IShopifyMetafield {
+export declare interface ShopifyMetafield {
     key: string;
     value: string;
     value_type?: string;

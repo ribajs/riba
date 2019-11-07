@@ -1,9 +1,9 @@
-import { IBinder, eventHandlerFunction } from '../interfaces';
+import { Binder, eventHandlerFunction } from '../interfaces';
 
 /**
  * Binds an event handler on the element.
  */
-export const onEventBinder: IBinder<eventHandlerFunction> = {
+export const onEventBinder: Binder<eventHandlerFunction> = {
   name: 'on-*',
   function: true,
   priority: 1000,

@@ -1,7 +1,7 @@
 import { RunnerFactory } from '../runners';
 import { YarnRunner } from '../runners/yarn.runner';
 import { AbstractPackageManager } from './abstract.package-manager';
-import { PackageManager, Runner, IPackageManagerCommands } from '../../interfaces';
+import { PackageManager, Runner, PackageManagerCommands } from '../../interfaces';
 
 export class YarnPackageManager extends AbstractPackageManager {
   constructor() {
@@ -12,7 +12,7 @@ export class YarnPackageManager extends AbstractPackageManager {
     return PackageManager.YARN.toUpperCase();
   }
 
-  get cli(): IPackageManagerCommands {
+  get cli(): PackageManagerCommands {
     return {
       install: 'install',
       add: 'add',

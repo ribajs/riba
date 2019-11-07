@@ -1,6 +1,6 @@
-import { IBinder, EventDispatcher, Utils } from '@ribajs/core';
+import { Binder, EventDispatcher, Utils } from '@ribajs/core';
 
-export const routeClassStarBinder: IBinder<string> = {
+export const routeClassStarBinder: Binder<string> = {
 
   name: 'route-class-*',
 

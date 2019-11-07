@@ -1,6 +1,6 @@
 import { Path } from '@angular-devkit/core';
 
-export interface IFindOptions {
+export interface FindOptions {
   name?: string;
   path: Path;
   kind?: string;

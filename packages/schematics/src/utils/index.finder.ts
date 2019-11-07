@@ -1,17 +1,17 @@
 import { join, Path, PathFragment } from '@angular-devkit/core';
 import { DirEntry, Tree } from '@angular-devkit/schematics';
-import { IFindOptions } from '../interfaces';
+import { FindOptions } from '../interfaces';
 
 export class IndexFinder {
   constructor(private tree: Tree) {}
 
-  public find(options: IFindOptions): Path | null {
+  public find(options: FindOptions): Path | null {
     const indexPath: Path = options.path;
     const generatedDirectory: DirEntry = this.tree.getDir(indexPath);
     return this.findInOrCreate(options, generatedDirectory, false);
   }
 
-  private findInOrCreate(options: IFindOptions, directory: DirEntry, createIfNotFound: boolean): Path | null {
+  private findInOrCreate(options: FindOptions, directory: DirEntry, createIfNotFound: boolean): Path | null {
     if (!directory) {
       return null;
     }
@@ -34,7 +34,7 @@ export class IndexFinder {
 
   }
 
-  private findIn(options: IFindOptions, directory: DirEntry) {
+  private findIn(options: FindOptions, directory: DirEntry) {
     const indexFilename: PathFragment | undefined = directory.subfiles.find((filename) => {
       return new RegExp(`index\.${options.language}`, 's').test(filename);
     });

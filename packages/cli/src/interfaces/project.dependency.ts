@@ -1,4 +1,4 @@
-export interface IProjectDependency {
+export interface ProjectDependency {
   name: string;
   version: string;
 }

@@ -2,12 +2,12 @@ import { Utils } from './utils';
 
 export type Element = any;
 
-export interface IElements {
+export interface Elements {
   [key: string]: Element;
 }
 
 export abstract class ModuleElementService {
-  protected elements: IElements;
+  protected elements: Elements;
 
   protected abstract type: 'binder' | 'formatter' | 'components' | 'services';
 
@@ -15,7 +15,7 @@ export abstract class ModuleElementService {
    *
    * @param elements;
    */
-  constructor(elements: IElements) {
+  constructor(elements: Elements) {
     this.elements = elements;
   }
 
@@ -24,13 +24,13 @@ export abstract class ModuleElementService {
    * @param element
    * @param name  Overwrites the name to access the element over
    */
-  public abstract regist(element: Element, name?: string): IElements;
+  public abstract regist(element: Element, name?: string): Elements;
 
   /**
    * Regist a set / array of elements
    * @param elements
    */
-  public regists(elements: IElements): IElements {
+  public regists(elements: Elements): Elements {
     if (!Utils.isObject(elements)) {
       throw new Error('Elements to register must be an object of elements');
     }

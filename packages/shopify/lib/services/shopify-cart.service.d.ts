@@ -1,14 +1,14 @@
 import { EventDispatcher } from '@ribajs/core';
 import { PQueue } from './p-queue.service';
-import { IShopifyCartLineItem, IShopifyCartUpdateProperty, IShopifyCartAddError, IShopifyCartObject, IShopifyCustomerAddress, IShopifyShippingRates, IShopifyShippingRatesNormalized } from '../interfaces';
-export interface IShopifyCartRequestOptions {
+import { ShopifyCartLineItem, ShopifyCartUpdateProperty, ShopifyCartAddError, ShopifyCartObject, ShopifyCustomerAddress, ShopifyShippingRates, ShopifyShippingRatesNormalized } from '../interfaces';
+export interface ShopifyCartRequestOptions {
     triggerOnStart: boolean;
     triggerOnComplete: boolean;
     triggerOnChange: boolean;
 }
 export declare class ShopifyCartService {
     static queue: PQueue;
-    static cart: IShopifyCartObject | null;
+    static cart: ShopifyCartObject | null;
     static shopifyCartEventDispatcher: EventDispatcher;
     /**
      * Use this to add a variant to the cart.
@@ -18,15 +18,15 @@ export declare class ShopifyCartService {
      * @return Response if successful, the JSON of the line item associated with the added variant.
      * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#add-to-cart
      */
-    static add(id: number, quantity?: number, properties?: {}, options?: IShopifyCartRequestOptions): Promise<IShopifyCartLineItem | IShopifyCartAddError>;
-    static _get(): Promise<IShopifyCartObject>;
+    static add(id: number, quantity?: number, properties?: {}, options?: ShopifyCartRequestOptions): Promise<ShopifyCartLineItem | ShopifyCartAddError>;
+    static _get(): Promise<ShopifyCartObject>;
     /**
      * Use this to get the cart as JSON.
      * @param data
      * @return The JSON of the cart.
      * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#get-cart
      */
-    static get(options?: IShopifyCartRequestOptions): Promise<IShopifyCartObject>;
+    static get(options?: ShopifyCartRequestOptions): Promise<ShopifyCartObject>;
     /**
      * Use this to change cart attributes, the cart note, and quantities of line items in the cart.
      * @param id Variant ID
@@ -35,7 +35,7 @@ export declare class ShopifyCartService {
      * @return Response The JSON of the cart.
      * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#update-cart
      */
-    static update(id: number | number, quantity: number, properties?: {}, options?: IShopifyCartRequestOptions): Promise<IShopifyCartObject>;
+    static update(id: number | number, quantity: number, properties?: {}, options?: ShopifyCartRequestOptions): Promise<ShopifyCartObject>;
     /**
      * Use this to change cart attributes, the cart note, and quantities of line items in the cart.
      * @param id Variant ID
@@ -44,7 +44,7 @@ export declare class ShopifyCartService {
      * @return Response The JSON of the cart.
      * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#update-cart
      */
-    static updates(updates: IShopifyCartUpdateProperty | Array<number>, options?: IShopifyCartRequestOptions): Promise<IShopifyCartObject>;
+    static updates(updates: ShopifyCartUpdateProperty | Array<number>, options?: ShopifyCartRequestOptions): Promise<ShopifyCartObject>;
     /**
      * This call sets the quantity of an item already in the cart.
      *
@@ -65,7 +65,7 @@ export declare class ShopifyCartService {
      * @return Response The JSON of the cart.
      * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#change-cart
      */
-    static change(id: number | number, quantity: number, properties?: {}, options?: IShopifyCartRequestOptions): Promise<IShopifyCartObject>;
+    static change(id: number | number, quantity: number, properties?: {}, options?: ShopifyCartRequestOptions): Promise<ShopifyCartObject>;
     /**
      * If you use Line Item Properties you may end up with several items in the cart that share the same variant ID. How do you update the quantity of an item in the cart that has specific line item properties? Once you have identified the 1-based index of the item in the cart, you can use the line property instead of id like so:
      * @param line -based index of the item in the cart
@@ -73,21 +73,21 @@ export declare class ShopifyCartService {
      * @param properties Additional properties
      * @return Response The JSON of the cart.
      */
-    static changeLine(line: string | number, quantity: number, properties?: {}, options?: IShopifyCartRequestOptions): Promise<IShopifyCartObject>;
+    static changeLine(line: string | number, quantity: number, properties?: {}, options?: ShopifyCartRequestOptions): Promise<ShopifyCartObject>;
     /**
      * This call sets all quantities of all line items in the cart to zero.
      * @return The JSON of an empty cart. This does not remove cart attributes nor the cart note.
      * @return Response The JSON of an empty cart. This does not remove cart attributes nor the cart note.
      * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#clear-cart
      */
-    static clear(options?: IShopifyCartRequestOptions): Promise<IShopifyCartObject>;
-    static _getShippingRates(shippingAddress: IShopifyCustomerAddress, normalize?: boolean): Promise<IShopifyShippingRates | IShopifyShippingRatesNormalized>;
+    static clear(options?: ShopifyCartRequestOptions): Promise<ShopifyCartObject>;
+    static _getShippingRates(shippingAddress: ShopifyCustomerAddress, normalize?: boolean): Promise<ShopifyShippingRates | ShopifyShippingRatesNormalized>;
     /**
      * Get estimated shipping rates.
      * @param shippingAddress TODO: /cart/shipping_rates.json?shipping_address[zip]=K1N 5T2&shipping_address[country]=Canada&shipping_address[province]=Ontario
      * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#get-shipping-rates
      */
-    static getShippingRates(shippingAddress: IShopifyCustomerAddress, normalize?: boolean, options?: IShopifyCartRequestOptions): Promise<IShopifyShippingRates | IShopifyShippingRatesNormalized>;
+    static getShippingRates(shippingAddress: ShopifyCustomerAddress, normalize?: boolean, options?: ShopifyCartRequestOptions): Promise<ShopifyShippingRates | ShopifyShippingRatesNormalized>;
     protected static CART_POST_ADD_URL: string;
     protected static CART_GET_URL: string;
     protected static CART_POST_UPDATE_URL: string;
@@ -108,7 +108,7 @@ export declare class ShopifyCartService {
      * TODO check if cart values are changed
      * @param cart The cart object
      */
-    protected static triggerOnChange(cart: IShopifyCartObject): void;
+    protected static triggerOnChange(cart: ShopifyCartObject): void;
     /**
      * Trigger `ShopifyCart:request:start`, if not already triggered
      */
@@ -117,5 +117,5 @@ export declare class ShopifyCartService {
      * Trigger `ShopifyCart:add`
      */
     protected static triggerAdd(id: number, quantity: number, properties: any): void;
-    protected static normalizeShippingRates(shippingRates: IShopifyShippingRates): IShopifyShippingRatesNormalized;
+    protected static normalizeShippingRates(shippingRates: ShopifyShippingRates): ShopifyShippingRatesNormalized;
 }

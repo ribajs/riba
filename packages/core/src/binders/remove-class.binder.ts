@@ -1,4 +1,4 @@
-import { IBinder } from '../interfaces';
+import { Binder } from '../interfaces';
 
 /**
  * remove-class
@@ -8,7 +8,7 @@ import { IBinder } from '../interfaces';
  * @example
  * <img class="loading" rv-src="img.src" rv-remove-class="loadingClass">
  */
-export const removeClassBinder: IBinder<string> = {
+export const removeClassBinder: Binder<string> = {
   name: 'remove-class',
   bind(el) {
     this.customData = {

@@ -1,5 +1,5 @@
-import { IBinder } from '../interfaces';
-export interface IBinderAttributeChangedEvent {
+import { Binder } from '../interfaces';
+export interface BinderAttributeChangedEvent {
   detail: {
     name: string;
     oldValue: string;
@@ -24,7 +24,7 @@ const publishBinderChangeEventHandler = function(this: any, event: Event) {
  * Sets the attribute on the element. If no binder above is matched it will fall
  * back to using this binder.
  */
-export const starBinder: IBinder<string> = {
+export const starBinder: Binder<string> = {
   name: '*',
   bind(el) {
     // Listen for changes from web component
@@ -58,7 +58,7 @@ export const starBinder: IBinder<string> = {
         oldValue,
         newValue,
         namespace: null, // TODO
-      }} as IBinderAttributeChangedEvent));
+      }} as BinderAttributeChangedEvent));
     }
   },
 };

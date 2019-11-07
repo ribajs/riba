@@ -1,4 +1,4 @@
-import { IComponents } from '../interfaces';
+import { Components } from '../interfaces';
 import { Component } from '../component';
 import { ModuleElementService } from './module-element.service';
 
@@ -10,7 +10,7 @@ export class ComponentService extends ModuleElementService {
    *
    * @param components
    */
-  constructor(components: IComponents) {
+  constructor(components: Components) {
     super(components);
   }
 
@@ -19,7 +19,7 @@ export class ComponentService extends ModuleElementService {
    * @param component
    * @param name
    */
-  public regist(component: typeof Component, fallbackName?: string, forceFallback: boolean = false): IComponents {
+  public regist(component: typeof Component, fallbackName?: string, forceFallback: boolean = false): Components {
     const name = forceFallback ? fallbackName || component.tagName : component.tagName || fallbackName;
 
     if (!name) {

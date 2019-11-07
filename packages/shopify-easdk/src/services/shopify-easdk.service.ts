@@ -6,27 +6,27 @@
 import { Utils, EventDispatcher } from '@ribajs/core';
 
 import {
-  IEASDK,
-  IEASDKWrapper,
-  IBarConfig,
-  IBar,
-  IBarWrapper,
-  ILoadingStateWrapper,
-  IConfig,
-  IPaginationConfig,
-  IButtonConfig,
+  EASDK,
+  EASDKWrapper,
+  BarConfig,
+  Bar,
+  BarWrapper,
+  LoadingStateWrapper,
+  Config,
+  PaginationConfig,
+  ButtonConfig,
   ButtonCallback,
-  IModal,
-  IModalWrapper,
-  IModalInit,
-  IModalAlertOptions,
-  IModalConfirmOptions,
-  IModalInputOptions,
-  IProductPickerOptions,
+  Modal,
+  ModalWrapper,
+  ModalInit,
+  ModalAlertOptions,
+  ModalConfirmOptions,
+  ModalInputOptions,
+  ProductPickerOptions,
   ProductPickerCallback,
-  IUser,
-  IUserData,
-  IReceiveMessage,
+  User,
+  UserData,
+  ReceiveMessage,
   ShopifyApp,
 } from '../interfaces/shopify-easdk';
 
@@ -39,22 +39,22 @@ import { UserWrapperService } from './shopify-easdk-user.service';
 // import { ConfirmComponent } from './confirm/confirm.component';
 // import { OpenComponent } from './open/open.component';
 
-export class EASDKWrapperService extends WrapperService implements IEASDKWrapper {
+export class EASDKWrapperService extends WrapperService implements EASDKWrapper {
 
   public static instance?: EASDKWrapperService;
 
   public event = new EventDispatcher('shopify-easdk');
 
-  protected config: IConfig = {shopOrigin: '', apiKey: ''};
+  protected config: Config = {shopOrigin: '', apiKey: ''};
 
-  protected message?: IReceiveMessage;
+  protected message?: ReceiveMessage;
 
   public Bar: BarWrapperService;
   public Modal: ModalWrapperService;
   public User: UserWrapperService;
 
   constructor(
-    shopifyApp?: IEASDK,
+    shopifyApp?: EASDK,
   ) {
     super(shopifyApp);
     this.Bar = new BarWrapperService(this.shopifyApp);
@@ -90,15 +90,15 @@ export class EASDKWrapperService extends WrapperService implements IEASDKWrapper
       console.debug('Receive message:', event, message, data);
     }, false);
 
-    this.event.on('bar:loading', (fallback: boolean, loading: ILoadingStateWrapper) => {
+    this.event.on('bar:loading', (fallback: boolean, loading: LoadingStateWrapper) => {
       console.debug('bar:loading', fallback, loading);
     });
 
-    this.event.on('bar:loadingOn', (fallback: boolean, loading: ILoadingStateWrapper) => {
+    this.event.on('bar:loadingOn', (fallback: boolean, loading: LoadingStateWrapper) => {
       console.debug('bar:loadingOn', fallback, loading);
     });
 
-    this.event.on('bar:loadingOff', (fallback: boolean, loading: ILoadingStateWrapper) => {
+    this.event.on('bar:loadingOff', (fallback: boolean, loading: LoadingStateWrapper) => {
       console.debug('bar:loadingOff', fallback, loading);
     });
 
@@ -110,11 +110,11 @@ export class EASDKWrapperService extends WrapperService implements IEASDKWrapper
       console.debug('bar:setIcon', fallback, icon);
     });
 
-    this.event.on('bar:setPagination', (fallback: boolean, config: IPaginationConfig) => {
+    this.event.on('bar:setPagination', (fallback: boolean, config: PaginationConfig) => {
       console.debug('bar:setPagination', fallback, config);
     });
 
-    this.event.on('bar:setBreadcrumb', (fallback: boolean, config: IButtonConfig) => {
+    this.event.on('bar:setBreadcrumb', (fallback: boolean, config: ButtonConfig) => {
       console.debug('bar:setBreadcrumb', fallback, config);
     });
 
@@ -126,7 +126,7 @@ export class EASDKWrapperService extends WrapperService implements IEASDKWrapper
    * It will initialize data values, add postMessage listeners,
    * check that the app is embedded in an iframe, and setup our initializers.
    */
-  public init(config: IConfig): void {
+  public init(config: Config): void {
     this.config = config;
     this.shopifyApp.init(config);
     return;

@@ -1,5 +1,5 @@
 import { Command, CommanderStatic } from 'commander';
-import { ICommandInput } from '../interfaces';
+import { CommandInput } from '../interfaces';
 import { AbstractCommand } from './abstract.command';
 
 export class NewCommand extends AbstractCommand {
@@ -18,7 +18,7 @@ export class NewCommand extends AbstractCommand {
       .option('-t, --template-engine [templateEngine]', 'Specify template engine to use', 'html')
       .option('-c, --collection [collectionName]', 'Specify the Collection that shall be used.',)
       .action(async (name: string, command: Command) => {
-        const options: ICommandInput[] = [];
+        const options: CommandInput[] = [];
         options.push({ name: 'dry-run', value: !!command.dryRun });
         options.push({ name: 'skip-git', value: !!command.skipGit });
         options.push({ name: 'skip-examples', value: !!command.skipExamples });
@@ -29,7 +29,7 @@ export class NewCommand extends AbstractCommand {
         options.push({ name: 'templateEngine', value: command.templateEngine });
         options.push({ name: 'collection', value: command.collection });
 
-        const inputs: ICommandInput[] = [];
+        const inputs: CommandInput[] = [];
         inputs.push({ name: 'name', value: name });
 
         await this.action.handle(inputs, options);

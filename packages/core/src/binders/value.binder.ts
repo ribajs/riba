@@ -1,4 +1,4 @@
-import { IBinder } from '../interfaces';
+import { Binder } from '../interfaces';
 import { Utils } from '../services/utils';
 
 const getData = (el: HTMLElement) => {
@@ -14,7 +14,7 @@ const getData = (el: HTMLElement) => {
  * Sets the element's value. Also sets the model property when the input changes
  * (two-way binder).
  */
-export const valueBinder: IBinder<any> = {
+export const valueBinder: Binder<any> = {
   name: 'value',
   publishes: true,
   priority: 3000,

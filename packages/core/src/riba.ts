@@ -1,10 +1,10 @@
 import {
-  IFormatters,
-  IBinders,
-  IAdapters,
+  Formatters,
+  Binders,
+  Adapters,
   Root,
-  IComponents,
-  IOptions,
+  Components,
+  Options,
 } from './interfaces';
 import { Utils } from './services/utils';
 import { parseTemplate, parseType } from './parsers';
@@ -39,16 +39,16 @@ export class Riba {
   public module: ModulesService;
 
   /** Global binders */
-  public binders: IBinders<any> = {};
+  public binders: Binders<any> = {};
 
   /** Global components. */
-  public components: IComponents = {};
+  public components: Components = {};
 
   /** Global formatters. */
-  public formatters: IFormatters = {};
+  public formatters: Formatters = {};
 
   /** Global (sightglass) adapters. */
-  public  adapters: IAdapters = {
+  public  adapters: Adapters = {
     '.': adapter,
   };
 
@@ -105,7 +105,7 @@ export class Riba {
    * Merges an object literal into the corresponding global options.
    * @param options
    */
-  public configure(options: Partial<IOptions>) {
+  public configure(options: Partial<Options>) {
     if (!options) {
       return;
     }
@@ -153,13 +153,13 @@ export class Riba {
     });
   }
 
-  public getViewOptions(options?: Partial<IOptions>) {
-    const viewOptions: Partial<IOptions> = {
+  public getViewOptions(options?: Partial<Options>) {
+    const viewOptions: Partial<Options> = {
       // EXTENSIONS
-      adapters: <IAdapters> {},
-      binders: <IBinders<any>> {},
-      components: <IComponents> {},
-      formatters: <IFormatters> {},
+      adapters: <Adapters> {},
+      binders: <Binders<any>> {},
+      components: <Components> {},
+      formatters: <Formatters> {},
 
       // other
       starBinders: {},
@@ -198,14 +198,14 @@ export class Riba {
       });
     }
 
-    return (viewOptions as IOptions);
+    return (viewOptions as Options);
   }
 
   /**
    * Binds some data to a template / element. Returns a riba.View instance.
    */
-  public bind(el: HTMLElement | DocumentFragment | HTMLUnknownElement[], models: any, options?: IOptions) {
-    const viewOptions: IOptions = this.getViewOptions(options);
+  public bind(el: HTMLElement | DocumentFragment | HTMLUnknownElement[], models: any, options?: Options) {
+    const viewOptions: Options = this.getViewOptions(options);
 
     models = models || new Object(null);
     Observer.updateOptions(viewOptions);

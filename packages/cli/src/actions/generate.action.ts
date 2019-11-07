@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { ICommandInput, IConfiguration } from '../interfaces';
+import { CommandInput, Configuration } from '../interfaces';
 import { AbstractAction } from './abstract.action';
 import { Collection, SchematicOption } from '../lib/schematics';
 import { FileSystemReader } from '../lib/readers';
@@ -13,18 +13,18 @@ export class GenerateAction extends AbstractAction {
     super();
   }
 
-  public async handle(inputs: ICommandInput[], options: ICommandInput[]) {
+  public async handle(inputs: CommandInput[], options: CommandInput[]) {
     await this.setDefaults(inputs, options);
     await this.generateFiles(this.concatOptions([inputs, options]));
   }
 
-  protected async setDefaults(inputs: ICommandInput[], options: ICommandInput[]) {
+  protected async setDefaults(inputs: CommandInput[], options: CommandInput[]) {
     const schematicInput = this.getInput(inputs, 'schematic');
     if (!schematicInput || typeof(schematicInput.value) !== 'string') {
       throw new Error('Unable to find a schematic for this configuration');
     }
 
-    const configuration: IConfiguration = await this.loadConfiguration();
+    const configuration: Configuration = await this.loadConfiguration();
 
     this.setDefaultInput(options, 'language', configuration.language);
     this.setDefaultInput(options, 'sourceRoot', configuration.sourceRoot);
@@ -41,7 +41,7 @@ export class GenerateAction extends AbstractAction {
     return inputs;
   }
 
-  protected async generateFiles(inputs: ICommandInput[]) { 
+  protected async generateFiles(inputs: CommandInput[]) { 
     const collectionInput = this.getInput(inputs, 'collection');
     if (!collectionInput || typeof(collectionInput.value) !== 'string') {
       throw new Error('Unable to find a collection for this configuration');
@@ -64,7 +64,7 @@ export class GenerateAction extends AbstractAction {
     }
   }
 
-  private mapSchematicOptions(inputs: ICommandInput[]): SchematicOption[] {
+  private mapSchematicOptions(inputs: CommandInput[]): SchematicOption[] {
     inputs.forEach(input => {
       if (input.name !== 'schematic' && input.value !== undefined) {
         this.schematicOptions.push(new SchematicOption(input.name, input.value));
@@ -79,7 +79,7 @@ export class GenerateAction extends AbstractAction {
    * @param configuration
    * @param schematicInput
    */
-  public async setPathInput(inputs: ICommandInput[], options: ICommandInput[], configuration: IConfiguration, schematicInput: ICommandInput) {
+  public async setPathInput(inputs: CommandInput[], options: CommandInput[], configuration: Configuration, schematicInput: CommandInput) {
     const sourceRootOption = this.getInput(options, 'sourceRoot');
     if (!sourceRootOption || typeof(sourceRootOption.value) !== 'string') {
       throw new Error('sourceRoot not found!');

@@ -15,7 +15,7 @@ import {
   StringLiteral,
   SyntaxKind,
 } from 'typescript';
-import { IDeclarationOptions } from '../interfaces';
+import { DeclarationOptions } from '../interfaces';
 
 export class MetadataManager {
   constructor(private content: string) {}
@@ -23,7 +23,7 @@ export class MetadataManager {
   public insert(
     metadata: string,
     symbol: string,
-    staticOptions?: IDeclarationOptions['staticOptions'],
+    staticOptions?: DeclarationOptions['staticOptions'],
   ): string {
     const source: SourceFile = createSourceFile('filename.ts', this.content, ScriptTarget.ES2017);
     const decoratorNodes: Node[] = this.getDecoratorMetadata(source, '@Module');
@@ -143,7 +143,7 @@ export class MetadataManager {
     source: SourceFile,
     matchingProperties: ObjectLiteralElement[],
     symbol: string,
-    staticOptions?: IDeclarationOptions['staticOptions'],
+    staticOptions?: DeclarationOptions['staticOptions'],
   ): string {
     const assignment = matchingProperties[0] as PropertyAssignment;
     let node: Node | NodeArray<Expression>;
@@ -192,7 +192,7 @@ export class MetadataManager {
 
   private mergeSymbolAndExpr(
     symbol: string,
-    staticOptions?: IDeclarationOptions['staticOptions'],
+    staticOptions?: DeclarationOptions['staticOptions'],
   ): string {
     if (!staticOptions) {
       return symbol;

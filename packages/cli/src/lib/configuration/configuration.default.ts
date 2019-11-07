@@ -1,4 +1,4 @@
-import { IConfiguration } from '../../interfaces';
+import { Configuration } from '../../interfaces';
 
 export const defaultConfiguration = {
   language: 'ts',
@@ -22,4 +22,4 @@ export const defaultConfiguration = {
     path: 'services',
     flat: true,
   },
-} as IConfiguration;
+} as Configuration;

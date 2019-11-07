@@ -1,4 +1,4 @@
-export interface IClientTheme {
+export interface ClientTheme {
   handle: 'null';
   id: number;
   name: string;

@@ -5,7 +5,7 @@ const riba = new Riba();
 riba.module.formatter.regist(<%= classify(name) %>Formatter);
 riba.module.binder.regist(textBinder);
 
-interface IModel {
+interface Model {
   obj?: {
     value: string;
   };
@@ -14,7 +14,7 @@ interface IModel {
 describe('riba.formatters', () => {
 
   describe('<%= name %>', () => {
-    let model: IModel = {};
+    let model: Model = {};
 
     beforeEach(() => {
       model = {};

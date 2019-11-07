@@ -1,8 +1,8 @@
 import { Riba } from './riba';
 import {
-  IBinder,
-  IOptions,
-  IBindableElement,
+  Binder,
+  Options,
+  BindableElement,
 } from './interfaces';
 import { Binding } from './binding';
 import { parseNode, parseDeclaration } from './parsers';
@@ -13,7 +13,7 @@ export type TBlock = boolean;
 /**
  * TODO Check if there is an official interface which fits better here
  */
-export interface IDataElement extends HTMLUnknownElement {
+export interface DataElement extends HTMLUnknownElement {
   data?: string;
 }
 
@@ -26,16 +26,16 @@ export class View {
   /**
    * Binder for mustache style `{model.property}` text Binders
    */
-  public static mustacheTextBinder: IBinder<string> = {
+  public static mustacheTextBinder: Binder<string> = {
     name: 'mustache-text',
-    routine: (node: IDataElement, value: string) => {
+    routine: (node: DataElement, value: string) => {
       node.data = (value != null) ? value : '';
     },
   };
 
   public static bindingComparator = (a: Binding, b: Binding) => {
-    const aPriority = (a as Binding).binder ? (((a as Binding).binder as IBinder<any>).priority || 0) : 0;
-    const bPriority = (b as Binding).binder ? (((b as Binding).binder as IBinder<any>).priority || 0) : 0;
+    const aPriority = (a as Binding).binder ? (((a as Binding).binder as Binder<any>).priority || 0) : 0;
+    const bPriority = (b as Binding).binder ? (((b as Binding).binder as Binder<any>).priority || 0) : 0;
     return bPriority - aPriority;
   }
 
@@ -59,7 +59,7 @@ export class View {
 
   public els: HTMLCollection | HTMLElement[] | Node[];
   public models: any;
-  public options: IOptions;
+  public options: Options;
   public bindings: Array<Binding> = [];
   public webComponents: Array<Component> = [];
   // public componentView: View | null = null;
@@ -72,7 +72,7 @@ export class View {
    * @param models
    * @param options
    */
-  constructor(els: HTMLCollection | HTMLElement | Node | NodeListOf<ChildNode> | HTMLUnknownElement[] , models: any, options: IOptions) {
+  constructor(els: HTMLCollection | HTMLElement | Node | NodeListOf<ChildNode> | HTMLUnknownElement[] , models: any, options: Options) {
     if (Array.isArray(els)) {
       this.els = els;
     } else {
@@ -84,7 +84,7 @@ export class View {
     this.build();
   }
 
-  public buildBinding(node: HTMLUnknownElement, type: string | null, declaration: string, binder: IBinder<any>, identifier: string | null) {
+  public buildBinding(node: HTMLUnknownElement, type: string | null, declaration: string, binder: Binder<any>, identifier: string | null) {
     const parsedDeclaration = parseDeclaration(declaration);
     const keypath = parsedDeclaration.keypath;
     const pipes = parsedDeclaration.pipes;
@@ -106,14 +106,14 @@ export class View {
     for (let i = 0; i < elements.length; i++) {
       const element = elements[i];
       if (element) {
-        parseNode(this, (element as IDataElement), this.options.templateDelimiters);
+        parseNode(this, (element as DataElement), this.options.templateDelimiters);
       }
     }
 
     this.bindings.sort(View.bindingComparator);
   }
 
-  public traverse(node: IBindableElement): TBlock {
+  public traverse(node: BindableElement): TBlock {
 
     let bindingPrefix;
     if (this.options.fullPrefix) {
@@ -282,7 +282,7 @@ export class View {
    */
   public publish() {
     this.bindings.forEach((binding) => {
-      if ((binding as Binding).binder && binding.publish && ((binding as Binding).binder as IBinder<any>).publishes) {
+      if ((binding as Binding).binder && binding.publish && ((binding as Binding).binder as Binder<any>).publishes) {
         binding.publish();
       }
     });

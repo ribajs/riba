@@ -1,7 +1,7 @@
-import { IRibaModule } from '@ribajs/core';
+import { RibaModule } from '@ribajs/core';
 import * as components from './components';
 
-export const Bs4TabsAttrModule: IRibaModule = {
+export const Bs4TabsAttrModule: RibaModule = {
   binders: {},
   components,
   formatters: {},

@@ -1,4 +1,4 @@
-import { IFormatter } from '@ribajs/core';
+import { Formatter } from '@ribajs/core';
 /**
  * Return a resized shopify image URL
  * @see https://help.shopify.com/en/themes/liquid/filters/url-filters#img_url
@@ -9,4 +9,4 @@ import { IFormatter } from '@ribajs/core';
  * @param crop TODO
  * @param extension
  */
-export declare const imgUrlFormatter: IFormatter;
+export declare const imgUrlFormatter: Formatter;

@@ -1,7 +1,7 @@
     
 import { Command, CommanderStatic } from 'commander';
 import { AbstractCommand } from './abstract.command';
-import { ICommandInput } from '../interfaces';
+import { CommandInput } from '../interfaces';
 import { Collection } from '../lib/schematics';
 import * as Table from 'cli-table3';
 import { debug as Debug } from 'debug';
@@ -26,7 +26,7 @@ export class GenerateCommand extends AbstractCommand {
 
         const schematic = Collection.getSchematic(schematicOrAlias);
 
-        const options: ICommandInput[] = [];
+        const options: CommandInput[] = [];
         options.push({ name: 'dry-run', value: !!command.dryRun });
         options.push({ name: 'flat', value: command.flat });
         options.push({ name: 'spec', value: command.spec });
@@ -35,7 +35,7 @@ export class GenerateCommand extends AbstractCommand {
         options.push({ name: 'collection', value: command.collection });
         options.push({ name: 'sourceRoot', value: command.sourceRoot });
 
-        const inputs: ICommandInput[] = [];
+        const inputs: CommandInput[] = [];
         inputs.push({ name: 'schematic', value: schematic!.name });
         inputs.push({ name: 'name', value: name });
         inputs.push({ name: 'path', value: path });

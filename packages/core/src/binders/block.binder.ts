@@ -1,6 +1,6 @@
-import { IBinder } from '../interfaces';
+import { Binder } from '../interfaces';
 
-export interface IAssign {
+export interface Assign {
   key: string;
   value: any;
 }
@@ -16,7 +16,7 @@ export interface IAssign {
  *  { value }
  * </div>
  */
-export const blockBinder: IBinder<IAssign> = {
+export const blockBinder: Binder<Assign> = {
   name: 'block',
   block: true,
   routine(el: HTMLElement) {/**/},

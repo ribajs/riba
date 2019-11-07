@@ -4,9 +4,9 @@ import { WrapperService } from '../services';
  * type definitions for Shopify's Embedded App SDK
  * @see https://help.shopify.com/api/sdks/embedded-app-sdk
  */
-export const ShopifyApp: IEASDK = (window as any).ShopifyApp;
+export const ShopifyApp: EASDK = (window as any).ShopifyApp;
 
-export interface IConfig {
+export interface Config {
     /**
      * ff9b1d04414785029e066f8fd0465d00 or similar.
      * The API key provided to you for your application in the Shopify Partners area.*
@@ -39,7 +39,7 @@ export type ButtonCallback = (message: string, data: any) => void;
  * Alternately it accepts a href attribute which will make the button open the provided link in a new window.
  * The use case for the link is something like "Open preview in a new window".
  */
-export interface IButtonConfig {
+export interface ButtonConfig {
     /**
      * The text displayed in the button.
      */
@@ -93,29 +93,29 @@ export interface IButtonConfig {
      * A list of buttons. Accepts the same attributes as a regular button, like label, target and callback.
      * Only valid for secondary top bar buttons.
      */
-    links?: Array<IButtonConfig>;
+    links?: Array<ButtonConfig>;
 
     /**
      * Custom object to save custom properties ignored from shopify's easdk
      *
      * @type {*}
-     * @memberof IButtonConfig
+     * @memberof ButtonConfig
      */
     custom?: any;
 }
 
-export interface IButtonsConfig {
-    primary?: IButtonConfig;
-    secondary?: IButtonConfig;
+export interface ButtonsConfig {
+    primary?: ButtonConfig;
+    secondary?: ButtonConfig;
 }
 
-export interface IReceiveMessage {
+export interface ReceiveMessage {
     message: string;
     data: any;
 }
 
-// export interface IButtonWrapperReturn {
-//     onClick?: () => Promise<IReceiveMessage>
+// export interface ButtonWrapperReturn {
+//     onClick?: () => Promise<ReceiveMessage>
 // }
 
 /**
@@ -124,18 +124,18 @@ export interface IReceiveMessage {
  * The pagination: key expects an object containing two objects as previous: and next:, each describing a button.
  * The button definition objects look like this:
  */
-export interface IPaginationConfig {
-    next: IButtonConfig;
-    previous: IButtonConfig;
+export interface PaginationConfig {
+    next: ButtonConfig;
+    previous: ButtonConfig;
 }
-export interface IBarConfig {
+export interface BarConfig {
     /**
      * An object describing the buttons displayed in the top bar.
      * The object contains two keys, primary and secondary, and each of those keys contain an array of button objects.
      * Primary buttons default to blue, and have a maximum of one button.
      * Secondary buttons have a maximum of four buttons.
      */
-    buttons?: IButtonsConfig;
+    buttons?: ButtonsConfig;
     /**
      * The title string displayed in the header behind the application's name.
      */
@@ -147,11 +147,11 @@ export interface IBarConfig {
     /**
      * An object configuring and toggling the pagination arrow button group.
      */
-    pagination?: IPaginationConfig;
+    pagination?: PaginationConfig;
     /**
      * A button object configuring and toggling the breadcrumb in the top bar.
      */
-    breadcrumb?: IButtonConfig;
+    breadcrumb?: ButtonConfig;
 }
 
 /**
@@ -159,23 +159,23 @@ export interface IBarConfig {
  * Inspired by https://medium.com/beautiful-angular/show-loader-on-every-request-in-angular-2-9a0fca86afef
  *
  * @export
- * @interface ILoadingStateWrapper
+ * @interface LoadingStateWrapper
  */
-export interface ILoadingStateWrapper {
+export interface LoadingStateWrapper {
     /**
      * If true show the loader
      */
     on: boolean;
 }
 
-export interface IBar {
+export interface Bar {
     /**
      * Accepts an object that defines how the top bar and buttons will look and behave.
      * This should almost always be called in the ready() method.
      * Default behavior if initialize is never called will result in some pretty safe defaults,
      * except that the loading spinner will never stop spinning.
      */
-    initialize(config: IBarConfig): void;
+    initialize(config: BarConfig): void;
     /**
      * Restarts the loading bar. It is a best practice to call it when moving between pages or firing off AJAX requests.
      */
@@ -185,34 +185,34 @@ export interface IBar {
      */
     loadingOff(): void;
     /**
-     * Manually set the title string in the top bar. See ShopifyApp.IBar.initialize().
+     * Manually set the title string in the top bar. See ShopifyApp.Bar.initialize().
      */
     setTitle(title?: string): void;
     /**
-     * Manually set the icon of the top bar from a URL. See ShopifyApp.IBar.initialize().
+     * Manually set the icon of the top bar from a URL. See ShopifyApp.Bar.initialize().
      */
     setIcon(icon: string): void;
     /**
-     * Manually set the icon of the top bar from a URL. See ShopifyApp.IBar.initialize().
+     * Manually set the icon of the top bar from a URL. See ShopifyApp.Bar.initialize().
      */
-    setPagination(config?: IPaginationConfig): void;
+    setPagination(config?: PaginationConfig): void;
     /**
      * Manually set the breadcrumb in the top bar for an extra level of navigation.
-     * Pass a button object, or pass undefined to remove it entirely. See ShopifyApp.IBar.initialize().
+     * Pass a button object, or pass undefined to remove it entirely. See ShopifyApp.Bar.initialize().
      */
-    setBreadcrumb(config?: IButtonConfig): void;
+    setBreadcrumb(config?: ButtonConfig): void;
 }
 
-export interface IBarWrapper extends IBar, WrapperService, IBarConfig {
+export interface BarWrapper extends Bar, WrapperService, BarConfig {
     /**
-     * Holds the setted buttons (setted by initialize IBarWrapper['method']) to access for the fallback mode
+     * Holds the setted buttons (setted by initialize BarWrapper['method']) to access for the fallback mode
      */
-    buttons?: IButtonsConfig;
+    buttons?: ButtonsConfig;
 
     /**
      * Holds the setted breadcrumbs config to access for the fallback mode
      */
-    breadcrumb?: IButtonConfig;
+    breadcrumb?: ButtonConfig;
 
     /**
      * Holds the setted title string to access for the fallback mode
@@ -227,13 +227,13 @@ export interface IBarWrapper extends IBar, WrapperService, IBarConfig {
     /**
      *  Holds the pagination config to access for the fallback mode.
      */
-    pagination?: IPaginationConfig;
+    pagination?: PaginationConfig;
 
     /**
      * Holds the loading status to access for the fallback mode.
      * Inspired by https://medium.com/beautiful-angular/show-loader-on-every-request-in-angular-2-9a0fca86afef
      */
-    loading: ILoadingStateWrapper;
+    loading: LoadingStateWrapper;
 
     /**
      * With this BehaviorSubject you can force the visablity of the fallback bar
@@ -260,7 +260,7 @@ export interface IBarWrapper extends IBar, WrapperService, IBarConfig {
      * See ShopifyApp.Bar.initialize().
      * Can be applied only if a title has been set with ShopifyApp.Bar.setTitle().
      */
-    setBreadcrumb(config?: IButtonConfig): void;
+    setBreadcrumb(config?: ButtonConfig): void;
 }
 
 /**
@@ -268,26 +268,26 @@ export interface IBarWrapper extends IBar, WrapperService, IBarConfig {
  * Each of those keys contain an array of button objects.
  *
  * @export
- * @interface IButtonsIModalConfig
+ * @interface ButtonsModalConfig
  */
-export interface IButtonsIModalConfig {
+export interface ButtonsModalConfig {
     /**
      * Primary buttons default to blue, are floated right, and have a maximum of one button.
      */
-    primary?: [IButtonConfig];
+    primary?: [ButtonConfig];
 
     /**
      * Secondary buttons are floated right and have a maximum of two buttons.
      */
-    secondary?: [IButtonConfig];
+    secondary?: [ButtonConfig];
 
     /**
      * Tertiary buttons are floated left and have a maximum of two buttons.
      */
-    tertiary?: [IButtonConfig];
+    tertiary?: [ButtonConfig];
 }
 
-export interface IModalInit {
+export interface ModalInit {
     /**
      * The URL to be opened in the iframe.
      */
@@ -308,7 +308,7 @@ export interface IModalInit {
     /**
      * This determines the height of the modal in pixels up to a maximum height of 700px and a minimum of 100px.
      * The height is applied to the body (excluding the header and footer) of the rendered modal.
-     * This can also be set from within the modal using the `ShopifyApp.IModal.setHeight()` method.
+     * This can also be set from within the modal using the `ShopifyApp.Modal.setHeight()` method.
      */
     height?: number;
 
@@ -320,14 +320,14 @@ export interface IModalInit {
      * Secondary buttons are floated right and have a maximum of two buttons.
      * Tertiary buttons are floated left and have a maximum of two buttons.
      */
-    buttons?: IButtonsIModalConfig;
+    buttons?: ButtonsModalConfig;
 
     /**
      * When the modal is closed, this function will be executed in the app. Params are `(result, data)`.
      *
      * @param {any} result
      * @param {any} data
-     * @memberof IModalInit
+     * @memberof ModalInit
      */
     callback?(result: boolean, data: any): void;
 }
@@ -337,9 +337,9 @@ export interface IModalInit {
  * or it can be an object containing a message, a title for the modal, and a button label.
  *
  * @export
- * @interface IModalAlertOptions
+ * @interface ModalAlertOptions
  */
-export interface IModalAlertOptions {
+export interface ModalAlertOptions {
     title: string;
     message: string;
     okButton: string;
@@ -358,9 +358,9 @@ export interface IModalAlertOptions {
  * and labels for the 'OK' and 'Cancel' buttons.
  *
  * @export
- * @interface IModalConfirmOptions
+ * @interface ModalConfirmOptions
  */
-export interface IModalConfirmOptions {
+export interface ModalConfirmOptions {
     title?: string;
     message?: string;
     okButton?: string;
@@ -381,9 +381,9 @@ export interface IModalConfirmOptions {
  * See the description for confirm() for an example.
  *
  * @export
- * @interface IModalInputOptions
+ * @interface ModalInputOptions
  */
-export interface IModalInputOptions {
+export interface ModalInputOptions {
     title?: string;
     message?: string;
     okButton?: string;
@@ -397,7 +397,7 @@ export interface IModalInputOptions {
     style?: 'danger' | 'disabled' | undefined;
 }
 
-export interface IProductPickerOptions {
+export interface ProductPickerOptions {
     /**
      * Determines if the user can select multiple products or collections.
      */
@@ -429,7 +429,7 @@ export type ProductPickerCallback = (
     },
 ) => void;
 
-export interface IUserData {
+export interface UserData {
 
     /**
      * Can have 3 possible values: Account owner, Full access or Limited access.
@@ -438,31 +438,31 @@ export interface IUserData {
     accountAccess: 'Account owner' | 'Full access' | 'Limited access';
 }
 
-export interface IUser {
+export interface User {
 
     /**
      * Returns an object representing the current user logged in to the admin.
      * It is available anytime after the Shopify.ready call.
      * Currently it only returns the accountAccess of the user.
      */
-    current: IUserData | undefined;
+    current: UserData | undefined;
 }
 
-export interface IModal {
+export interface Modal {
 
     /**
      * Opens a modal dialog in the Shopify admin that in turn loads an iframe inside of it with the passed in URL.
      * It accepts a src attribute to be loaded, a title for the top of the bar,
-     * and a configuration of primary and secondary buttons identical to IBar.initialize().
+     * and a configuration of primary and secondary buttons identical to Bar.initialize().
      * It also accepts a callback function that is called when the modal is closed.
      *
-     * To learn how to communicate from the modal iframe to the app iframe, read IModal & App Communication.
+     * To learn how to communicate from the modal iframe to the app iframe, read Modal & App Communication.
      *
      * @see https://help.shopify.com/api/sdks/shopify-apps/embedded-app-sdk/features#modal-and-application-communication
      * @param init
      * @param fn
      */
-    open(init: IModalInit, fn?: (result: boolean, data: any) => void, forceFallback?: boolean): void;
+    open(init: ModalInit, fn?: (result: boolean, data: any) => void, forceFallback?: boolean): void;
 
     /**
      * Opens a Javascript style alert() in the admin.
@@ -471,7 +471,7 @@ export interface IModal {
      * @param options
      * @param fn
      */
-    alert(options: IModalAlertOptions, fn?: (result: boolean) => void): void;
+    alert(options: ModalAlertOptions, fn?: (result: boolean) => void): void;
 
     /**
      * Opens a Javascript style confirm() in the admin.
@@ -481,7 +481,7 @@ export interface IModal {
      * @param options
      * @param fn
      */
-    confirm(options: IModalConfirmOptions, fn: (result: boolean) => void): void;
+    confirm(options: ModalConfirmOptions, fn: (result: boolean) => void): void;
 
     /**
      * Opens a Javascript style input() dialog in the admin.
@@ -491,7 +491,7 @@ export interface IModal {
      * @param options
      * @param fn
      */
-    input(options: IModalInputOptions, fn: (result: boolean, data: any) => void): void;
+    input(options: ModalInputOptions, fn: (result: boolean, data: any) => void): void;
 
     /**
      * Closes the currently open modal window and manually sets the result and data payload.
@@ -523,7 +523,7 @@ export interface IModal {
      * @param options
      * @param fn
      */
-    productPicker(options: IProductPickerOptions, fn: ProductPickerCallback): void;
+    productPicker(options: ProductPickerOptions, fn: ProductPickerCallback): void;
 
     /**
      * The collection picker has the same interface as the product picker.
@@ -531,23 +531,23 @@ export interface IModal {
      * @param options
      * @param fn
      */
-    collectionPicker(options: IProductPickerOptions, fn: ProductPickerCallback): void;
+    collectionPicker(options: ProductPickerOptions, fn: ProductPickerCallback): void;
 }
 
-export interface IModalWrapper extends IModal {
-    open(init: IModalInit, fn: (result: boolean, data: any) => void, forceFallback?: boolean): void;
-    alert(options: IModalAlertOptions, fn?: (result: boolean) => void, forceFallback?: boolean): void;
-    confirm(options: IModalConfirmOptions, fn: (result: boolean) => void, forceFallback?: boolean): void;
-    input(options: IModalInputOptions, fn: (result: boolean, data: any) => void, forceFallback?: boolean): void;
+export interface ModalWrapper extends Modal {
+    open(init: ModalInit, fn: (result: boolean, data: any) => void, forceFallback?: boolean): void;
+    alert(options: ModalAlertOptions, fn?: (result: boolean) => void, forceFallback?: boolean): void;
+    confirm(options: ModalConfirmOptions, fn: (result: boolean) => void, forceFallback?: boolean): void;
+    input(options: ModalInputOptions, fn: (result: boolean, data: any) => void, forceFallback?: boolean): void;
 }
 
-export interface IEASDK {
+export interface EASDK {
 
-    Bar: IBar;
+    Bar: Bar;
 
-    Modal: IModal;
+    Modal: Modal;
 
-    User: IUser;
+    User: User;
 
     /**
      * Should be called immediately after the script file has loaded,
@@ -555,7 +555,7 @@ export interface IEASDK {
      * It will initialize data values, add postMessage listeners,
      * check that the app is embedded in an iframe, and setup our initializers.
      */
-    init(config: IConfig): void;
+    init(config: Config): void;
     /**
      * Works similarly to jQuery's ready() function.
      * It can be called many times on a page, it accepts functions,
@@ -594,7 +594,7 @@ export interface IEASDK {
     redirect(path: string): void;
 }
 
-export interface IEASDKWrapper extends IEASDK {
+export interface EASDKWrapper extends EASDK {
     flashNotice(message: string, forceFallback?: boolean, action?: string, onAction?: () => Promise<void>): void;
     flashError(message: string, forceFallback?: boolean, action?: string, onAction?: () => Promise<void>): void;
 }

@@ -9,7 +9,7 @@ import {
   template,
   url,
 } from '@angular-devkit/schematics';
-import { IApplicationOptions } from '../../interfaces';
+import { ApplicationOptions } from '../../interfaces';
 import {
   DEFAULT_AUTHOR,
   DEFAULT_DESCRIPTION,
@@ -17,13 +17,13 @@ import {
   DEFAULT_VERSION,
 } from '../defaults';
 
-export function main(options: IApplicationOptions): Rule {
+export function main(options: ApplicationOptions): Rule {
   options = transform(options);
   return mergeWith(generate(options));
 }
 
-function transform(options: IApplicationOptions): IApplicationOptions {
-  const target: IApplicationOptions = Object.assign({}, options);
+function transform(options: ApplicationOptions): ApplicationOptions {
+  const target: ApplicationOptions = Object.assign({}, options);
 
   target.author = !!target.author ? target.author : DEFAULT_AUTHOR;
   target.description = !!target.description ? target.description : DEFAULT_DESCRIPTION;
@@ -37,7 +37,7 @@ function transform(options: IApplicationOptions): IApplicationOptions {
   return target;
 }
 
-function generate(options: IApplicationOptions): Source {
+function generate(options: ApplicationOptions): Source {
   return apply(url(join('./files' as Path, options.language)), [
     template({
       ...strings,

@@ -1,7 +1,7 @@
-import { IShopifyCustomer } from './customer.';
-import { IShopifyDiscount } from './discount';
+import { ShopifyCustomer } from './customer.';
+import { ShopifyDiscount } from './discount';
 
-export interface IShopifyOrderCustomAttributes {
+export interface ShopifyOrderCustomAttributes {
   [key: string]: string;
 }
 
@@ -10,8 +10,8 @@ export interface IShopifyOrderCustomAttributes {
  * You can access the `order` object in a theme's Liquid templates with `customer.orders`.
  * @see https://help.shopify.com/en/themes/liquid/objects/order
  */
-export interface IShopifyOrder {
-  attributes: IShopifyOrderCustomAttributes;
+export interface ShopifyOrder {
+  attributes: ShopifyOrderCustomAttributes;
   /** Returns `true` if an order is canceled, or `false` if it is not. */
   cancelled: boolean;
   /** Returns the timestamp of when an order was canceled. Use the date filter to format the timestamp. */
@@ -29,11 +29,11 @@ export interface IShopifyOrder {
   /** Returns the timestamp of when an order was created. Use the date filter to format the timestamp. */
   created_at: string; // Date?
   /** Returns the customer associated with the order. */
-  customer: IShopifyCustomer;
+  customer: ShopifyCustomer;
   /** Returns a unique URL that the customer can use to access the order. */
   customer_url: string;
   /** Returns an array of discounts for an order. */
-  discounts: IShopifyDiscount;
+  discounts: ShopifyDiscount;
   /** Returns the email address associated with an order, if it exists. */
   email: string;
   /**

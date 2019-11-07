@@ -1,4 +1,4 @@
-export interface IPackageManagerCommands {
+export interface PackageManagerCommands {
   install: string;
   add: string;
   update: string;

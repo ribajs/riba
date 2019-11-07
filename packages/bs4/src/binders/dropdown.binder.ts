@@ -1,4 +1,4 @@
-import { IBinder } from '@ribajs/core';
+import { Binder } from '@ribajs/core';
 import { JQuery as $ } from '@ribajs/jquery';
 import { DropdownService } from '../services/dropdown.service';
 
@@ -6,7 +6,7 @@ import { DropdownService } from '../services/dropdown.service';
  *
  * @see https://getbootstrap.com/docs/4.1/components/dropdown/
  */
-export const dropdownBinder: IBinder<string> = {
+export const dropdownBinder: Binder<string> = {
   name: 'bs4-dropdown',
   routine(el: HTMLElement, option: string) {
     const $el = $(el);

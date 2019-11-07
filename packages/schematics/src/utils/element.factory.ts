@@ -21,7 +21,7 @@ import {
 import { debug as Debug } from 'debug';
 import 'source-map-support/register';
 import { isNullOrUndefined } from 'util';
-import { IDeclarationOptions, IElementOptions, ILocation } from '../interfaces';
+import { DeclarationOptions, ElementOptions, Location } from '../interfaces';
 import { DEFAULT_LANGUAGE, DEFAULT_STYLE_LANGUAGE } from '../lib/defaults';
 import { ExportDeclarator } from './export.declarator';
 import { IndexFinder } from './index.finder';
@@ -29,11 +29,11 @@ import { NameParser } from './name.parser';
 
 export class ElementFactory {
 
-  public target: IElementOptions;
+  public target: ElementOptions;
 
   protected debug = Debug('binder:factory');
 
-  constructor(protected options: IElementOptions) {
+  constructor(protected options: ElementOptions) {
     this.target = this.getTarget(options);
   }
 
@@ -74,7 +74,7 @@ export class ElementFactory {
       const declarator: ExportDeclarator = new ExportDeclarator();
       tree.overwrite(
         index,
-        declarator.declareScript(content, this.target as IDeclarationOptions, index),
+        declarator.declareScript(content, this.target as DeclarationOptions, index),
       );
       return tree;
     };
@@ -102,20 +102,20 @@ export class ElementFactory {
       const declarator: ExportDeclarator = new ExportDeclarator();
       tree.overwrite(
         index,
-        declarator.declareStyle(content, this.target as IDeclarationOptions, index),
+        declarator.declareStyle(content, this.target as DeclarationOptions, index),
       );
       return tree;
     };
   }
 
-  protected getTarget(source: IElementOptions): IElementOptions {
-    const target: IElementOptions = Object.assign({}, source);
+  protected getTarget(source: ElementOptions): ElementOptions {
+    const target: ElementOptions = Object.assign({}, source);
 
     if (isNullOrUndefined(target.name)) {
       throw new SchematicsException('Option (name) is required.');
     }
 
-    const location: ILocation = new NameParser().parse(target);
+    const location: Location = new NameParser().parse(target);
 
     target.name = strings.dasherize(location.name);
     target.path = strings.dasherize(location.path);
@@ -133,7 +133,7 @@ export class ElementFactory {
   /**
    * Filter template source files, e.g. filter .html files if the template engine is plain html
    */
-  protected templateFilesFilter(options: IElementOptions): Rule {
+  protected templateFilesFilter(options: ElementOptions): Rule {
     return filter((path) => {
       this.debug('templateFilesFilter path: ' + path);
       if (options.templateEngine) {

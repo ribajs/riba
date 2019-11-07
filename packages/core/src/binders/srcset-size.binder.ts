@@ -1,10 +1,10 @@
-import { IBinder } from '../interfaces';
+import { Binder } from '../interfaces';
 
 /**
  * srcset-size
  * Sets an url with size to the `srcset` attribute
  */
-export const srcsetSizeBinder: IBinder<string> = {
+export const srcsetSizeBinder: Binder<string> = {
   name: 'srcset-*',
   routine(el: HTMLUnknownElement, url: string) {
     const size: string = this.args[0] as string;

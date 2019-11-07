@@ -1,37 +1,37 @@
 import {
-  IEASDK,
-  IEASDKWrapper,
-  IBarConfig,
-  IBar,
-  IBarWrapper,
-  ILoadingStateWrapper,
-  IConfig,
-  IPaginationConfig,
-  IButtonConfig,
+  EASDK,
+  EASDKWrapper,
+  BarConfig,
+  Bar,
+  BarWrapper,
+  LoadingStateWrapper,
+  Config,
+  PaginationConfig,
+  ButtonConfig,
   ButtonCallback,
-  IModal,
-  IModalWrapper,
-  IModalInit,
-  IModalAlertOptions,
-  IModalConfirmOptions,
-  IModalInputOptions,
-  IProductPickerOptions,
+  Modal,
+  ModalWrapper,
+  ModalInit,
+  ModalAlertOptions,
+  ModalConfirmOptions,
+  ModalInputOptions,
+  ProductPickerOptions,
   ProductPickerCallback,
-  IUser,
-  IUserData,
-  IReceiveMessage,
+  User,
+  UserData,
+  ReceiveMessage,
   ShopifyApp,
 } from '../interfaces/shopify-easdk';
 
 import { WrapperService } from './wrapper.service';
 
-export class UserWrapperService extends WrapperService implements IUser {
+export class UserWrapperService extends WrapperService implements User {
 
   // Singleton instace
   public static instance?: UserWrapperService;
 
   constructor(
-    shopifyApp?: IEASDK,
+    shopifyApp?: EASDK,
   ) {
     super(shopifyApp);
     if (UserWrapperService.instance) {
@@ -40,7 +40,7 @@ export class UserWrapperService extends WrapperService implements IUser {
     UserWrapperService.instance = this;
   }
 
-  get current(): IUserData | undefined {
+  get current(): UserData | undefined {
     if (this.shopifyApp.User) {
       return this.shopifyApp.User.current;
     } else {

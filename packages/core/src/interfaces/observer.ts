@@ -1,14 +1,14 @@
 import { Observer } from '../observer';
 
-export interface IObserverSyncCallback {
+export interface ObserverSyncCallback {
   sync: () => void;
 }
-export interface IKey {
+export interface Key {
   path: any;
   i: Root;
 }
 
-export interface IObservers {
+export interface Observers {
   [key: string]: Observer;
 }
 

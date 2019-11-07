@@ -30,7 +30,7 @@ import {
     addClassBinder,
 } from './binders/add-class.binder';
 
-import { IFormatter, IAdapter } from './interfaces';
+import { Formatter, AAdapter } from './interfaces';
 
 const riba = new Riba();
 riba.module.binder.regist(textBinder);
@@ -45,7 +45,7 @@ describe('riba.Binding', () => {
     let view: View;
     let binding: Binding;
     let originalPrefix: string;
-    let adapter: IAdapter;
+    let adapter: AAdapter;
     let routineFn;
 
     beforeEach(() => {
@@ -101,17 +101,17 @@ describe('riba.Binding', () => {
             const awesomeFormatter = {
                 name: 'awesome',
                 read: (value) => 'awesome ' + value,
-            } as IFormatter;
+            } as Formatter;
 
             const totallyFormatter = {
                 name: 'totally',
                 read: (value, prefix) => prefix + ' totally ' + value,
-            } as IFormatter;
+            } as Formatter;
 
             const placeholderFormatter = {
                 name: 'and',
                 read: (value, affix) => value + affix,
-            } as IFormatter;
+            } as Formatter;
 
             riba.module.formatter.regist(awesomeFormatter);
             riba.module.formatter.regist(totallyFormatter);
@@ -256,7 +256,7 @@ describe('riba.Binding', () => {
         it('applies a two-way read formatter to function same as a single-way', () => {
             const awesomeFormatter = {
                 read: (value) => 'awesome ' + value,
-            } as IFormatter;
+            } as Formatter;
 
             riba.module.formatter.regist(awesomeFormatter, 'awesome');
 
@@ -320,7 +320,7 @@ describe('riba.Binding', () => {
         });
 
         it(`should resolve formatter arguments to their values`, () => {
-            (riba.formatters.withArguments as IFormatter) = {
+            (riba.formatters.withArguments as Formatter) = {
                 name: 'withArguments',
                 publish: (value, arg1, arg2) => {
                     return value + ':' + arg1 + ':' + arg2;
@@ -357,7 +357,7 @@ describe('riba.Binding', () => {
         });
 
         it(`should resolve formatter arguments correctly with multiple formatters`, () => {
-            (riba.formatters.wrap as IFormatter ) = {
+            (riba.formatters.wrap as Formatter ) = {
                 name: 'wrap',
                 publish: (value: string, arg1: string, arg2: string) => {
                     return arg1 + value + arg2;
@@ -367,7 +367,7 @@ describe('riba.Binding', () => {
                 },
             };
 
-            (riba.formatters.saveAsCase as IFormatter) = {
+            (riba.formatters.saveAsCase as Formatter) = {
                 name: 'saveAsCase',
                 publish: (value, typeCase) => {
                     return value['to' + typeCase + 'Case']();
@@ -432,13 +432,13 @@ describe('riba.Binding', () => {
         });
 
         it(`should apply read binders left to right, and write binders right to left`, () => {
-            (riba.formatters.totally as IFormatter) = {
+            (riba.formatters.totally as Formatter) = {
                 name: 'totally',
                 publish: (value) => value + ' totally',
                 read: (value) => value + ' totally',
             };
 
-            (riba.formatters.awesome as IFormatter) = {
+            (riba.formatters.awesome as Formatter) = {
                 name: 'awesome',
                 publish: (value) => value + ' is awesome',
                 read: (value) => value + ' is awesome',
@@ -463,18 +463,18 @@ describe('riba.Binding', () => {
         });
 
         it(`binders in a chain should be skipped if they're not there`, () => {
-            (riba.formatters.totally as IFormatter) = {
+            (riba.formatters.totally as Formatter) = {
                 name: 'totally',
                 publish: (value) => value + ' totally',
                 read: (value) => value + ' totally',
             };
 
-            (riba.formatters.radical as IFormatter) = {
+            (riba.formatters.radical as Formatter) = {
                 name: 'radical',
                 publish: (value) => value + ' is radical',
             };
 
-            (riba.formatters.awesome as IFormatter) = {
+            (riba.formatters.awesome as Formatter) = {
                 name: 'awesome',
                 read: (value) => value + ' is awesome',
             };
@@ -600,7 +600,7 @@ describe('Functional', () => {
     let el: HTMLUnknownElement;
     let input: HTMLInputElement;
     let originalPrefix: string;
-    let adapter: IAdapter;
+    let adapter: AAdapter;
 
     beforeEach(() => {
         originalPrefix = riba.prefix;

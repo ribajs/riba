@@ -1,4 +1,4 @@
-import { IFormatter } from '@ribajs/core';
+import { Formatter } from '@ribajs/core';
 import { moneyFormatter } from './money.formatter';
 import { ShopifyService } from '../services/shopify.service';
 
@@ -6,7 +6,7 @@ import { ShopifyService } from '../services/shopify.service';
  * Formats the price based on the shop's HTML with currency setting (if the format is not overwritten by passing a format parameter).
  * @see https://help.shopify.com/en/themes/liquid/filters/money-filters
  */
-export const moneyWithCurrencyFormatter: IFormatter = {
+export const moneyWithCurrencyFormatter: Formatter = {
   name: 'money_with_currency',
   read(cents: string | number, format?: string) {
     const formatString = format || ShopifyService.moneyWithCurrencyFormat;

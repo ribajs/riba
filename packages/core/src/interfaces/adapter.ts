@@ -5,9 +5,9 @@
  * `Object.defineProperty`.
  */
 
-import { IObserverSyncCallback } from './observer';
+import { ObserverSyncCallback } from './observer';
 
-export interface IRef {
+export interface Ref {
   callbacks: any[];
   pointers: any[];
 }
@@ -15,26 +15,26 @@ export interface IRef {
 /**
  * TODO For what is this?
  */
-export interface IRVArray extends Array<any> {
+export interface RVArray extends Array<any> {
   __rv: any;
 }
 
 export type AdapterFunction = (...args: any[]) => any;
 
-export interface IAdapter {
-  counter?: number;
-  weakmap?: any;
-  weakReference?: (obj: any) => any; // => __rv ?
-  cleanupWeakReference?: (ref: IRef, id: number) => void;
-  stubFunction?: (obj: any, fn: string) => any; // => response ?
-  observeMutations?: (obj: any, ref: string, keypath: string) => void;
-  unobserveMutations?: (obj: IRVArray, ref: string, keypath: string) => void;
-  observe: (obj: any, keypath: string, callback: IObserverSyncCallback) => void;
-  unobserve: (obj: any, keypath: string, callback: IObserverSyncCallback) => void;
-  get: (obj: any, keypath: string) => any;
-  set: (obj: any, keypath: string, value: any) => void;
+export abstract class AAdapter {
+  public abstract counter?: number;
+  public abstract weakmap?: any;
+  public abstract weakReference?: (obj: any) => any; // => __rv ?
+  public abstract cleanupWeakReference?: (ref: Ref, id: number) => void;
+  public abstract stubFunction?: (obj: any, fn: string) => any; // => response ?
+  public abstract observeMutations?: (obj: any, ref: string, keypath: string) => void;
+  public abstract unobserveMutations?: (obj: RVArray, ref: string, keypath: string) => void;
+  public abstract observe: (obj: any, keypath: string, callback: ObserverSyncCallback) => void;
+  public abstract unobserve: (obj: any, keypath: string, callback: ObserverSyncCallback) => void;
+  public abstract get: (obj: any, keypath: string) => any;
+  public abstract set: (obj: any, keypath: string, value: any) => void;
 }
 
-export interface IAdapters {
-  [name: string]: IAdapter;
+export interface Adapters {
+  [name: string]: AAdapter;
 }

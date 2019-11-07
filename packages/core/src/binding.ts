@@ -1,10 +1,10 @@
 import { PRIMITIVE, KEYPATH, parseType } from './parsers';
 import { Observer } from './observer';
 import {
-  IBinder,
-  IFormatterObservers,
+  Binder,
+  FormatterObservers,
   eventHandlerFunction,
-  IObserverSyncCallback,
+  ObserverSyncCallback,
 } from './interfaces';
 import { View } from './view';
 import { Utils } from './services/utils';
@@ -25,9 +25,9 @@ export class Binding {
    * Name of the binder without the prefix
    */
   public type: string | null;
-  public binder: IBinder<any>;
+  public binder: Binder<any>;
   public formatters: string[] | null;
-  public formatterObservers: IFormatterObservers = {};
+  public formatterObservers: FormatterObservers = {};
   public keypath?: string;
   /**
    * Arguments parsed from star binders, e.g. on foo-*-* args[0] is the first star, args[1] the second-
@@ -58,7 +58,7 @@ export class Binding {
    * @param {*} args The start binders, on `class-*` args[0] wil be the classname.
    * @param {*} formatters
    */
-  constructor(view: View, el: HTMLUnknownElement, type: string | null, keypath: string | undefined, binder: IBinder<any>, formatters: string[] | null, identifier: string | null) {
+  constructor(view: View, el: HTMLUnknownElement, type: string | null, keypath: string | undefined, binder: Binder<any>, formatters: string[] | null, identifier: string | null) {
     this.view = view;
     this.el = el;
     this.type = type;
@@ -80,7 +80,7 @@ export class Binding {
    * @param obj
    * @param keypath
    */
-  public observe(obj: any, keypath: string, callback: IObserverSyncCallback): Observer {
+  public observe(obj: any, keypath: string, callback: ObserverSyncCallback): Observer {
     return new Observer(obj, keypath, callback);
   }
 

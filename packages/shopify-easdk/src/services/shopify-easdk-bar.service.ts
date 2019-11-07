@@ -1,27 +1,27 @@
 
 import {
-  IEASDK,
-  IEASDKWrapper,
-  IBarConfig,
-  IBar,
-  IBarWrapper,
-  ILoadingStateWrapper,
-  IConfig,
-  IPaginationConfig,
-  IButtonConfig,
-  IButtonsConfig,
+  EASDK,
+  EASDKWrapper,
+  BarConfig,
+  Bar,
+  BarWrapper,
+  LoadingStateWrapper,
+  Config,
+  PaginationConfig,
+  ButtonConfig,
+  ButtonsConfig,
   ButtonCallback,
-  IModal,
-  IModalWrapper,
-  IModalInit,
-  IModalAlertOptions,
-  IModalConfirmOptions,
-  IModalInputOptions,
-  IProductPickerOptions,
+  Modal,
+  ModalWrapper,
+  ModalInit,
+  ModalAlertOptions,
+  ModalConfirmOptions,
+  ModalInputOptions,
+  ProductPickerOptions,
   ProductPickerCallback,
-  IUser,
-  IUserData,
-  IReceiveMessage,
+  User,
+  UserData,
+  ReceiveMessage,
   ShopifyApp,
 } from '../interfaces/shopify-easdk';
 
@@ -31,7 +31,7 @@ import { State } from '@ribajs/router';
 
 import { WrapperService } from './wrapper.service';
 
-export class BarWrapperService extends WrapperService implements IBarWrapper {
+export class BarWrapperService extends WrapperService implements BarWrapper {
 
   /**
    * Singleton instace
@@ -39,14 +39,14 @@ export class BarWrapperService extends WrapperService implements IBarWrapper {
   public static instance?: BarWrapperService;
 
   /**
-   * Holds the setted buttons (setted by initialize IBarWrapper['method']) to access for the fallback mode
+   * Holds the setted buttons (setted by initialize BarWrapper['method']) to access for the fallback mode
    */
-  public buttons?: IButtonsConfig;
+  public buttons?: ButtonsConfig;
 
   /**
    * Holds the setted breadcrumbs config to access for the fallback mode
    */
-  public breadcrumb?: IButtonConfig;
+  public breadcrumb?: ButtonConfig;
 
   /**
    * Holds the setted title string to access for the fallback mode
@@ -61,7 +61,7 @@ export class BarWrapperService extends WrapperService implements IBarWrapper {
   /**
    *  Holds the pagination config to access for the fallback mode.
    */
-  public pagination?: IPaginationConfig;
+  public pagination?: PaginationConfig;
 
   /**
    * Holds the loading status to subscribe for the fallback mode.
@@ -70,7 +70,7 @@ export class BarWrapperService extends WrapperService implements IBarWrapper {
    * @type {LoadingStateWrapper>}
    * @memberof BarWrapperService
    */
-  public loading: ILoadingStateWrapper = {
+  public loading: LoadingStateWrapper = {
     on: false,
   };
 
@@ -85,7 +85,7 @@ export class BarWrapperService extends WrapperService implements IBarWrapper {
   protected route = new EventDispatcher('main');
 
   constructor(
-    shopifyApp?: IEASDK,
+    shopifyApp?: EASDK,
   ) {
     super(shopifyApp);
     if (BarWrapperService.instance) {
@@ -100,7 +100,7 @@ export class BarWrapperService extends WrapperService implements IBarWrapper {
    * Default behavior if initialize is never called will result in some pretty safe defaults,
    * except that the loading spinner will never stop spinning.
    */
-  public initialize(config: IBarConfig): void {
+  public initialize(config: BarConfig): void {
     this.buttons = config.buttons;
     this.breadcrumb = config.breadcrumb;
     this.title = config.title;
@@ -240,7 +240,7 @@ export class BarWrapperService extends WrapperService implements IBarWrapper {
   /**
    * Manually set the pagination arrows, or pass undefined to remove them entirely. See ShopifyApp.Bar.initialize().
    */
-  public setPagination(config?: IPaginationConfig): void {
+  public setPagination(config?: PaginationConfig): void {
     if (this.pagination !== config) {
       this.pagination = config;
       this.event.trigger('bar:setPagination', this.useFallback(false), this.pagination);
@@ -254,7 +254,7 @@ export class BarWrapperService extends WrapperService implements IBarWrapper {
    * @param config
    * @memberof BarWrapperService
    */
-  public setBreadcrumb(config?: IButtonConfig) {
+  public setBreadcrumb(config?: ButtonConfig) {
     if (this.breadcrumb !== config) {
       this.breadcrumb = config;
       this.event.trigger('bar:setBreadcrumb', this.useFallback(false), this.breadcrumb);

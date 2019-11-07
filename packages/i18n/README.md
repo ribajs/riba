@@ -3,7 +3,7 @@
 ## Install
 
 ```bash
-npm install --save-dev @ribajs/i18n
+npm install --save @ribajs/i18n
 ```
 
 ## Regist

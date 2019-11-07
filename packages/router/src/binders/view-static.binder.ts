@@ -1,10 +1,10 @@
-import { IBinder, Utils, View as RivetsView, handleizeFormatter } from '@ribajs/core';
+import { Binder, Utils, View as RivetsView, handleizeFormatter } from '@ribajs/core';
 import { Pjax, HideShowTransition } from '../services';
 
 /**
  * Loads a url with pjax and show them insite the element this binder is used on
  */
-export const viewStaticBinder: IBinder<string> = {
+export const viewStaticBinder: Binder<string> = {
   name: 'view-static',
   block: true,
 

@@ -2,12 +2,12 @@ import {
     Riba,
 } from '../riba';
 
-import { IBinder } from '../interfaces';
+import { Binder } from '../interfaces';
 
 /**
  * Sets the element's text value.
  */
-export const customBinder: IBinder<string> = {
+export const customBinder: Binder<string> = {
   name: 'custom-binder',
   routine(el: HTMLElement, value: string) {
     el.innerHTML = 'received ' + value;

@@ -4,7 +4,7 @@
  * @see https://developer.mozilla.org/de/docs/Web/Web_Components/Using_custom_elements
  */
 
-import { EventHandler, IFormatter } from '../interfaces';
+import { EventHandler, Formatter } from '../interfaces';
 import { View } from '../view';
 import { Riba } from '../riba';
 import { Binding } from '../binding';
@@ -13,7 +13,7 @@ import { FakeHTMLElement } from './fake-html-element';
 
 export type TemplateFunction = () => Promise<string | null> | string | null;
 
-export interface IRibaComponentContext {
+export interface RibaComponentContext {
   fallback: boolean;
   view: View;
 }
@@ -34,7 +34,7 @@ export abstract class Component extends FakeHTMLElement {
   /**
    * Context of this component, used for debugging
    */
-  public context?: IRibaComponentContext;
+  public context?: RibaComponentContext;
 
   protected view?: View;
 
@@ -62,7 +62,7 @@ export abstract class Component extends FakeHTMLElement {
 
   private attributeObserverFallback?: MutationObserver;
 
-  constructor(element?: HTMLUnknownElement, context?: IRibaComponentContext) {
+  constructor(element?: HTMLUnknownElement, context?: RibaComponentContext) {
     super(element);
     this.context = context;
 
@@ -254,7 +254,7 @@ export abstract class Component extends FakeHTMLElement {
    * @param fn The function you wish to call
    * @param args the parameters you wish to call the function with
    */
-  protected argsFormatterHandler(self: this): IFormatter {
+  protected argsFormatterHandler(self: this): Formatter {
     return {
       name: 'args',
       read: (fn: (...args: any[]) => any, ...fnArgs: any[]) => {

@@ -1,8 +1,8 @@
-import { Utils, IBinder, BinderWrapper } from '@ribajs/core';
+import { Utils, Binder, BinderWrapper } from '@ribajs/core';
 import { ALocalesService } from '../../services/locales-base.service';
 
 // see star.binder.ts
-export interface IBinderAttributeChangedEvent {
+export interface BinderAttributeChangedEvent {
   detail: {
     name: string;
     oldValue: string;
@@ -128,7 +128,7 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
         });
       };
 
-      this.customData.onAttributeChanged = (data: IBinderAttributeChangedEvent) => {
+      this.customData.onAttributeChanged = (data: BinderAttributeChangedEvent) => {
         if (data.detail.name.startsWith('data-')) {
           const varName = data.detail.name.slice(5);
           const newVar: any = {};
@@ -194,5 +194,5 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
       this.customData.i18n.event.off('changed', this.customData.onLanguageChanged);
     },
 
-  } as IBinder<string>;
+  } as Binder<string>;
 };

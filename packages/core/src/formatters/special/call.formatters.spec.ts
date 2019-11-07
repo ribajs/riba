@@ -9,7 +9,7 @@ const riba = new Riba();
 riba.module.formatter.regist(callFormatter, 'call');
 riba.module.binder.regist(textBinder);
 
-interface IModel {
+interface Model {
     fn?: (arg1: string, arg2: string) => string;
     obj?: {
         name: string;
@@ -20,7 +20,7 @@ interface IModel {
 describe('riba.formatters', () => {
 
     describe('call', () => {
-        let model: IModel = {};
+        let model: Model = {};
 
         beforeEach(() => {
             model = {

@@ -1,7 +1,7 @@
-import { IBinder } from '../interfaces';
+import { Binder } from '../interfaces';
 import { Utils } from '../services/utils';
 
-export interface IAssign {
+export interface Assign {
   key: string;
   value: any;
 }
@@ -13,7 +13,7 @@ export interface IAssign {
  * @example
  * <div rv-assign-new='"hello"'>{new}</div>
  */
-export const assignPropertyBinder: IBinder<IAssign> = {
+export const assignPropertyBinder: Binder<Assign> = {
   name: 'assign-*',
   routine(el: HTMLElement, value: any) {
     const propertyName = Utils.camelCase((this.args[0] as string).trim());

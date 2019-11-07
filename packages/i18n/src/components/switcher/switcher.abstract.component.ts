@@ -1,13 +1,13 @@
 import {
   Component,
-  IBinder,
+  Binder,
   View,
 } from '@ribajs/core';
-import { ILangcode } from '../../interfaces';
+import { Langcode } from '../../interfaces';
 import { ALocalesService } from '../../services/locales-base.service';
 
-export interface IScope {
-  langcodes: ILangcode[];
+export interface Scope {
+  langcodes: Langcode[];
   switch: AI18nSwitcherComponent['switch'];
   toggle: AI18nSwitcherComponent['toggle'];
   ready: boolean;
@@ -18,7 +18,7 @@ export abstract class AI18nSwitcherComponent extends Component {
   protected abstract localesService: ALocalesService;
 
   protected scope = {
-    langcodes: <ILangcode[]> [],
+    langcodes: <Langcode[]> [],
     switch: this.switch,
     toggle: this.toggle,
     ready: <boolean> false,
@@ -33,7 +33,7 @@ export abstract class AI18nSwitcherComponent extends Component {
    * @param langcode
    * @param event
    */
-  public switch(langcode: ILangcode, context: IBinder<any>, event: Event) {
+  public switch(langcode: Langcode, context: Binder<any>, event: Event) {
     event.preventDefault();
     event.stopPropagation();
     if (!langcode.active) {
@@ -46,7 +46,7 @@ export abstract class AI18nSwitcherComponent extends Component {
    * @param langcode
    * @param event
    */
-  public toggle(context: IBinder<any>, event: Event) {
+  public toggle(context: Binder<any>, event: Event) {
     event.preventDefault();
     event.stopPropagation();
     for (const i in this.scope.langcodes) {

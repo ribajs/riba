@@ -2,16 +2,16 @@ import { Utils, EventDispatcher } from '@ribajs/core';
 import { PQueue } from './p-queue.service'; // https://github.com/sindresorhus/p-queue
 
 import {
-  IShopifyCartLineItem,
-  IShopifyCartUpdateProperty,
-  IShopifyCartAddError,
-  IShopifyCartObject,
-  IShopifyCustomerAddress,
-  IShopifyShippingRates,
-  IShopifyShippingRatesNormalized,
+  ShopifyCartLineItem,
+  ShopifyCartUpdateProperty,
+  ShopifyCartAddError,
+  ShopifyCartObject,
+  ShopifyCustomerAddress,
+  ShopifyShippingRates,
+  ShopifyShippingRatesNormalized,
 } from '../interfaces';
 
-export interface IShopifyCartRequestOptions {
+export interface ShopifyCartRequestOptions {
   triggerOnStart: boolean;
   triggerOnComplete: boolean;
   triggerOnChange: boolean;
@@ -21,7 +21,7 @@ export class ShopifyCartService {
 
   public static queue = new PQueue({concurrency: 1});
 
-  public static cart: IShopifyCartObject | null = null;
+  public static cart: ShopifyCartObject | null = null;
 
   public static shopifyCartEventDispatcher = new EventDispatcher('ShopifyCart');
 
@@ -33,7 +33,7 @@ export class ShopifyCartService {
    * @return Response if successful, the JSON of the line item associated with the added variant.
    * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#add-to-cart
    */
-  public static add(id: number, quantity = 1, properties = {}, options: IShopifyCartRequestOptions = this.requestOptionDefaults): Promise<IShopifyCartLineItem | IShopifyCartAddError> {
+  public static add(id: number, quantity = 1, properties = {}, options: ShopifyCartRequestOptions = this.requestOptionDefaults): Promise<ShopifyCartLineItem | ShopifyCartAddError> {
     if (options.triggerOnStart) {
       this.triggerOnStart();
     }
@@ -43,10 +43,10 @@ export class ShopifyCartService {
         quantity,
         properties,
       }, 'json')
-      .then((lineItem: IShopifyCartLineItem) => {
+      .then((lineItem: ShopifyCartLineItem) => {
         // Force update cart object
         return Utils.get(this.CART_GET_URL, {}, 'json')
-        .then((cart: IShopifyCartObject) => {
+        .then((cart: ShopifyCartObject) => {
           if (options.triggerOnChange) {
             this.triggerOnChange(cart);
           }
@@ -55,7 +55,7 @@ export class ShopifyCartService {
         }) as any;
       })
       .catch((jqxhr: any) => {
-        return jqxhr.responseJSON as IShopifyCartAddError;
+        return jqxhr.responseJSON as ShopifyCartAddError;
       });
     });
     if (options.triggerOnComplete) {
@@ -64,7 +64,7 @@ export class ShopifyCartService {
     return promise;
   }
 
-  public static _get(): Promise<IShopifyCartObject> {
+  public static _get(): Promise<ShopifyCartObject> {
     if (ShopifyCartService.cart !== null) {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -77,7 +77,7 @@ export class ShopifyCartService {
       });
     }
     return Utils.get(this.CART_GET_URL, {}, 'json')
-    .then((cart: IShopifyCartObject) => {
+    .then((cart: ShopifyCartObject) => {
       ShopifyCartService.cart = cart;
       return cart;
     });
@@ -89,7 +89,7 @@ export class ShopifyCartService {
    * @return The JSON of the cart.
    * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#get-cart
    */
-  public static get(options: IShopifyCartRequestOptions = this.requestOptionDefaults): Promise<IShopifyCartObject> {
+  public static get(options: ShopifyCartRequestOptions = this.requestOptionDefaults): Promise<ShopifyCartObject> {
     if (options.triggerOnStart) {
       this.triggerOnStart();
     }
@@ -110,7 +110,7 @@ export class ShopifyCartService {
    * @return Response The JSON of the cart.
    * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#update-cart
    */
-  public static update(id: number | number, quantity: number, properties = {}, options: IShopifyCartRequestOptions = this.requestOptionDefaults): Promise<IShopifyCartObject> {
+  public static update(id: number | number, quantity: number, properties = {}, options: ShopifyCartRequestOptions = this.requestOptionDefaults): Promise<ShopifyCartObject> {
     if (options.triggerOnStart) {
       this.triggerOnStart();
     }
@@ -121,7 +121,7 @@ export class ShopifyCartService {
         properties,
       }, 'json');
     })
-    .then((cart: IShopifyCartObject) => {
+    .then((cart: ShopifyCartObject) => {
       if (options.triggerOnChange) {
         this.triggerOnChange(cart);
       }
@@ -141,7 +141,7 @@ export class ShopifyCartService {
    * @return Response The JSON of the cart.
    * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#update-cart
    */
-  public static updates(updates: IShopifyCartUpdateProperty | Array<number>, options: IShopifyCartRequestOptions = this.requestOptionDefaults): Promise<IShopifyCartObject> {
+  public static updates(updates: ShopifyCartUpdateProperty | Array<number>, options: ShopifyCartRequestOptions = this.requestOptionDefaults): Promise<ShopifyCartObject> {
     if (options.triggerOnStart) {
       this.triggerOnStart();
     }
@@ -150,7 +150,7 @@ export class ShopifyCartService {
         updates,
       }, 'json');
     })
-    .then((cart: IShopifyCartObject) => {
+    .then((cart: ShopifyCartObject) => {
       if (options.triggerOnChange) {
         this.triggerOnChange(cart);
       }
@@ -182,7 +182,7 @@ export class ShopifyCartService {
    * @return Response The JSON of the cart.
    * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#change-cart
    */
-  public static change(id: number | number, quantity: number, properties = {}, options: IShopifyCartRequestOptions = this.requestOptionDefaults): Promise<IShopifyCartObject> {
+  public static change(id: number | number, quantity: number, properties = {}, options: ShopifyCartRequestOptions = this.requestOptionDefaults): Promise<ShopifyCartObject> {
     if (options.triggerOnStart) {
       this.triggerOnStart();
     }
@@ -192,7 +192,7 @@ export class ShopifyCartService {
         quantity,
         properties,
       }, 'json')
-      .then((cart: IShopifyCartObject) => {
+      .then((cart: ShopifyCartObject) => {
         if (options.triggerOnChange) {
           this.triggerOnChange(cart);
         }
@@ -212,7 +212,7 @@ export class ShopifyCartService {
    * @param properties Additional properties
    * @return Response The JSON of the cart.
    */
-  public static changeLine(line: string | number, quantity: number, properties = {}, options: IShopifyCartRequestOptions = this.requestOptionDefaults): Promise<IShopifyCartObject> {
+  public static changeLine(line: string | number, quantity: number, properties = {}, options: ShopifyCartRequestOptions = this.requestOptionDefaults): Promise<ShopifyCartObject> {
     if (options.triggerOnStart) {
       this.triggerOnStart();
     }
@@ -222,7 +222,7 @@ export class ShopifyCartService {
         quantity,
         properties,
       }, 'json')
-      .then((cart: IShopifyCartObject) => {
+      .then((cart: ShopifyCartObject) => {
         if (options.triggerOnChange) {
           this.triggerOnChange(cart);
         }
@@ -232,7 +232,7 @@ export class ShopifyCartService {
     if (options.triggerOnComplete) {
       this.triggerOnComplete();
     }
-    return promise  as Promise<IShopifyCartObject>;
+    return promise  as Promise<ShopifyCartObject>;
   }
 
   /**
@@ -241,13 +241,13 @@ export class ShopifyCartService {
    * @return Response The JSON of an empty cart. This does not remove cart attributes nor the cart note.
    * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#clear-cart
    */
-  public static clear(options: IShopifyCartRequestOptions = this.requestOptionDefaults): Promise<IShopifyCartObject> {
+  public static clear(options: ShopifyCartRequestOptions = this.requestOptionDefaults): Promise<ShopifyCartObject> {
     if (options.triggerOnStart) {
       this.triggerOnStart();
     }
     const promise = this.queue.add(() => {
       return Utils.post(this.CART_POST_CLEAR_URL, {}, 'json')
-      .then((cart: IShopifyCartObject) => {
+      .then((cart: ShopifyCartObject) => {
         if (options.triggerOnChange) {
           this.triggerOnChange(cart);
         }
@@ -260,14 +260,14 @@ export class ShopifyCartService {
     return promise;
   }
 
-  public static _getShippingRates(shippingAddress: IShopifyCustomerAddress, normalize: boolean = true): Promise<IShopifyShippingRates | IShopifyShippingRatesNormalized> {
+  public static _getShippingRates(shippingAddress: ShopifyCustomerAddress, normalize: boolean = true): Promise<ShopifyShippingRates | ShopifyShippingRatesNormalized> {
     return Utils.get(this.CART_GET_SHIPPING_RATES_URL, { shipping_address: shippingAddress }, 'json')
     .then((shippingRates: any) => {
       if (Utils.isObject(shippingRates) && Utils.isObject(shippingRates.shipping_rates)) {
         if (normalize) {
           return this.normalizeShippingRates(shippingRates.shipping_rates);
         }
-        return shippingRates.shipping_rates as IShopifyShippingRates;
+        return shippingRates.shipping_rates as ShopifyShippingRates;
      } else {
        throw new Error('shipping_rates property not found: ' + JSON.stringify(shippingRates));
      }
@@ -279,7 +279,7 @@ export class ShopifyCartService {
    * @param shippingAddress TODO: /cart/shipping_rates.json?shipping_address[zip]=K1N 5T2&shipping_address[country]=Canada&shipping_address[province]=Ontario
    * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#get-shipping-rates
    */
-  public static getShippingRates(shippingAddress: IShopifyCustomerAddress, normalize: boolean = true, options: IShopifyCartRequestOptions = this.requestOptionDefaults): Promise<IShopifyShippingRates | IShopifyShippingRatesNormalized> {
+  public static getShippingRates(shippingAddress: ShopifyCustomerAddress, normalize: boolean = true, options: ShopifyCartRequestOptions = this.requestOptionDefaults): Promise<ShopifyShippingRates | ShopifyShippingRatesNormalized> {
     if (options.triggerOnStart) {
       this.triggerOnStart();
     }
@@ -331,7 +331,7 @@ export class ShopifyCartService {
    * TODO check if cart values are changed
    * @param cart The cart object
    */
-  protected static triggerOnChange(cart: IShopifyCartObject) {
+  protected static triggerOnChange(cart: ShopifyCartObject) {
     this.cart = cart;
     ShopifyCartService.shopifyCartEventDispatcher.trigger('ShopifyCart:request:changed', this.cart);
   }
@@ -353,12 +353,12 @@ export class ShopifyCartService {
     ShopifyCartService.shopifyCartEventDispatcher.trigger('ShopifyCart:add', {id, quantity, properties});
   }
 
-  protected static normalizeShippingRates(shippingRates: IShopifyShippingRates): IShopifyShippingRatesNormalized {
+  protected static normalizeShippingRates(shippingRates: ShopifyShippingRates): ShopifyShippingRatesNormalized {
     const normalized = new Array<any>(shippingRates.length);
     for (const i in shippingRates) {
       if (shippingRates[i]) {
         const shippingRate = shippingRates[i];
-        normalized[i] = Utils.clone(false, shippingRate) as IShopifyShippingRates;
+        normalized[i] = Utils.clone(false, shippingRate) as ShopifyShippingRates;
         if (normalized[i] && normalized[i].price) {
           normalized[i].price = Utils.getNumber(normalized[i].price);
           if (normalized[i].price) {
@@ -371,6 +371,6 @@ export class ShopifyCartService {
         }
       }
     }
-    return normalized as IShopifyShippingRatesNormalized;
+    return normalized as ShopifyShippingRatesNormalized;
   }
 }

@@ -1,7 +1,7 @@
 import { Utils } from '@ribajs/core';
 import { BaseService } from './base.service';
 
-export interface IInstagramMediaData {
+export interface InstagramMediaData {
   media_url: string;
   media_type: 'VIDEO' | 'IMAGE' | 'CAROUSEL_ALBUM';
   caption: string;
@@ -13,20 +13,20 @@ export interface IInstagramMediaData {
   timestamp: string;
 }
 
-export interface IInstagramMediaPaging {
+export interface InstagramMediaPaging {
   cursors: {
     after: string;
     before: string;
   };
 }
 
-export interface IInstagramMedia {
-  data: IInstagramMediaData[];
-  paging: IInstagramMediaPaging;
+export interface InstagramMedia {
+  data: InstagramMediaData[];
+  paging: InstagramMediaPaging;
 }
 
-export interface IInstagramResponse {
-  media: IInstagramMedia;
+export interface InstagramResponse {
+  media: InstagramMedia;
   id: string;
 }
 

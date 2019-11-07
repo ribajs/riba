@@ -6,7 +6,7 @@ import {
     valueBinder,
 } from './value.binder';
 
-import { IAdapters } from '../interfaces';
+import { Adapters } from '../interfaces';
 
 describe('riba.binders', () => {
     describe('value', () => {
@@ -125,7 +125,7 @@ describe('riba.binders', () => {
                     unsubscribe: () => {/**/},
                     read: () => {/**/},
                     publish: () => {/**/},
-                } as unknown as IAdapters,
+                } as unknown as Adapters,
             });
 
             input = createInputElement('text');

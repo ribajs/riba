@@ -1,4 +1,4 @@
-import { Component, IRibaComponentContext } from './component';
+import { Component, RibaComponentContext } from './component';
 import { View } from '../view';
 import { EventHandler } from '../interfaces';
 
@@ -10,7 +10,7 @@ export declare class RibaComponent extends Component {
 
   public readonly bound: boolean;
 
-  public context?: IRibaComponentContext;
+  public context?: RibaComponentContext;
 
   protected view?: View;
   // protected _bound: boolean;
@@ -26,7 +26,7 @@ export declare class RibaComponent extends Component {
    */
   protected autobind: boolean;
 
-  constructor(element?: HTMLUnknownElement, context?: IRibaComponentContext);
+  constructor(element?: HTMLUnknownElement, context?: RibaComponentContext);
 
   public disconnectedFallbackCallback(): void;
 

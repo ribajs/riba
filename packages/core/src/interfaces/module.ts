@@ -1,32 +1,32 @@
 import {
-  IBinders,
-  IFormatters,
-  IComponents,
-  IServices,
-  IAdapters,
+  Binders,
+  Formatters,
+  Components,
+  Services,
+  Adapters,
 } from '../interfaces';
 
-export interface IRibaModule {
+export interface RibaModule {
   /**
-   * Binders can be a object of binders named by property key (IBinders<any>)
-   * or an array of binders with binder and name property (IBinder<any>)
+   * Binders can be a object of binders named by property key (Binders<any>)
+   * or an array of binders with binder and name property (Binder<any>)
    */
-  binders?: IBinders<any>;
+  binders?: Binders<any>;
 
   /**
    * Components must be a object of component classes
    */
-  components?: IComponents;
+  components?: Components;
   /**
-   * Formatters can be a object of formatters named by property key (IFormatters)
-   * or an array of binders with binder and name property (IFormatterWrapper)
+   * Formatters can be a object of formatters named by property key (Formatters)
+   * or an array of binders with binder and name property (FormatterWrapper)
    */
-  formatters?: IFormatters;
+  formatters?: Formatters;
 
-  adapters?: IAdapters;
+  adapters?: Adapters;
 
   /**
    * Components must be a object of service classes
    */
-  services?: IServices;
+  services?: Services;
 }

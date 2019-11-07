@@ -1,4 +1,4 @@
-import { IBinder, eventHandlerFunction } from '@ribajs/core';
+import { Binder, eventHandlerFunction } from '@ribajs/core';
 
 export const goBack = () => {
   window.history.back();
@@ -7,7 +7,7 @@ export const goBack = () => {
 /**
  * Calls `window.history.back()` an event.
  */
-export const routeBackOnStarBinder: IBinder<eventHandlerFunction> = {
+export const routeBackOnStarBinder: Binder<eventHandlerFunction> = {
 
   name: 'route-back-on-*',
   priority: 3000,

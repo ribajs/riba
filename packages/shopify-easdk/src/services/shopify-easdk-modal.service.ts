@@ -1,31 +1,31 @@
 import {
-  IEASDK,
-  IEASDKWrapper,
-  IBarConfig,
-  IBar,
-  IBarWrapper,
-  ILoadingStateWrapper,
-  IConfig,
-  IPaginationConfig,
-  IButtonConfig,
+  EASDK,
+  EASDKWrapper,
+  BarConfig,
+  Bar,
+  BarWrapper,
+  LoadingStateWrapper,
+  Config,
+  PaginationConfig,
+  ButtonConfig,
   ButtonCallback,
-  IModal,
-  IModalWrapper,
-  IModalInit,
-  IModalAlertOptions,
-  IModalConfirmOptions,
-  IModalInputOptions,
-  IProductPickerOptions,
+  Modal,
+  ModalWrapper,
+  ModalInit,
+  ModalAlertOptions,
+  ModalConfirmOptions,
+  ModalInputOptions,
+  ProductPickerOptions,
   ProductPickerCallback,
-  IUser,
-  IUserData,
-  IReceiveMessage,
+  User,
+  UserData,
+  ReceiveMessage,
   ShopifyApp,
 } from '../interfaces/shopify-easdk';
 
 import { WrapperService } from './wrapper.service';
 
-export class ModalWrapperService extends WrapperService implements IModalWrapper  {
+export class ModalWrapperService extends WrapperService implements ModalWrapper  {
 
   // Singleton instace
   public static instance?: ModalWrapperService;
@@ -33,7 +33,7 @@ export class ModalWrapperService extends WrapperService implements IModalWrapper
   protected dialog: any; // TODO
 
   constructor(
-    shopifyApp?: IEASDK,
+    shopifyApp?: EASDK,
   ) {
     super(shopifyApp);
     if (ModalWrapperService.instance) {
@@ -51,11 +51,11 @@ export class ModalWrapperService extends WrapperService implements IModalWrapper
      * To learn how to communicate from the modal iframe to the app iframe, read Modal & App Communication.
      *
      * @see https://help.shopify.com/api/sdks/shopify-apps/embedded-app-sdk/features#modal-and-application-communication
-     * @param {IModalInit} init
+     * @param {ModalInit} init
      * @param {(result, data) => void} fn
      * @memberof Modal
      */
-    public open(init: IModalInit, fn?: (confirmed: boolean, data: any) => void, forceFallback: boolean = false) {
+    public open(init: ModalInit, fn?: (confirmed: boolean, data: any) => void, forceFallback: boolean = false) {
       const fallback = this.useFallback(forceFallback);
       this.event.trigger('open', fallback, init);
       this.shopifyApp.Modal.open(init, (confirmed: boolean, data: any) => {
@@ -76,7 +76,7 @@ export class ModalWrapperService extends WrapperService implements IModalWrapper
      * @param fn not used in this wrapper, use afterClosed you get as return value instead!
      * @memberof ModalWrapperService
      */
-    public alert(options: IModalAlertOptions, fn: (confirmed: boolean) => void, forceFallback: boolean = false) {
+    public alert(options: ModalAlertOptions, fn: (confirmed: boolean) => void, forceFallback: boolean = false) {
       const fallback = this.useFallback(forceFallback);
       console.debug('alert', options);
       this.event.trigger('alert', fallback, options);
@@ -98,7 +98,7 @@ export class ModalWrapperService extends WrapperService implements IModalWrapper
      * @param fn `result` of callback is true if the user has accepted
      * @memberof Modal
      */
-    public confirm(options: IModalConfirmOptions, fn: (confirmed: boolean) => void, forceFallback: boolean = false) {
+    public confirm(options: ModalConfirmOptions, fn: (confirmed: boolean) => void, forceFallback: boolean = false) {
       const fallback = this.useFallback(forceFallback);
       console.debug('alert', fallback, options);
       this.event.trigger('alert', fallback, options);
@@ -116,11 +116,11 @@ export class ModalWrapperService extends WrapperService implements IModalWrapper
      * When the modal is closed the optional callback is called and a modal close message is sent.
      * The callback has the status of the closure and the contents of the input box passed in.
      *
-     * @param {IModalInputOptions} options
+     * @param {ModalInputOptions} options
      * @param {(result, data) => void} fn
      * @memberof Modal
      */
-    public input(options: IModalInputOptions, fn: (result: boolean, data: any) => void, forceFallback: boolean = false) {
+    public input(options: ModalInputOptions, fn: (result: boolean, data: any) => void, forceFallback: boolean = false) {
 
       const fallback = this.useFallback(forceFallback);
       console.debug('alert', fallback, options);
@@ -167,22 +167,22 @@ export class ModalWrapperService extends WrapperService implements IModalWrapper
      * The second parameter is a data object (JSON) which contains the selected products (if any)
      * and any errors that may have surfaced.
      *
-     * @param {IProductPickerOptions} options
+     * @param {ProductPickerOptions} options
      * @param {(success: boolean, data: {products: [any], errors: [String]}) => void} fn
      * @memberof Modal
      */
-    public productPicker(options: IProductPickerOptions, fn: ProductPickerCallback): void {
+    public productPicker(options: ProductPickerOptions, fn: ProductPickerCallback): void {
       return this.shopifyApp.Modal.productPicker(options, fn);
     }
 
     /**
      * The collection picker has the same interface as the product picker.
      *
-     * @param {IProductPickerOptions} options
+     * @param {ProductPickerOptions} options
      * @param {ProductPickerCallback} fn
      * @memberof Modal
      */
-    public collectionPicker(options: IProductPickerOptions, fn: ProductPickerCallback): void {
+    public collectionPicker(options: ProductPickerOptions, fn: ProductPickerCallback): void {
       return this.shopifyApp.Modal.collectionPicker(options, fn);
     }
 }

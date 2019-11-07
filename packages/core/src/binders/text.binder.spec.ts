@@ -6,7 +6,7 @@ import {
     textBinder,
 } from './text.binder';
 
-import { IAdapters } from '../interfaces';
+import { Adapters } from '../interfaces';
 
 describe('riba.binders', () => {
     let el: HTMLUnknownElement;
@@ -21,7 +21,7 @@ describe('riba.binders', () => {
                 unsubscribe: () => {/**/},
                 read: () => {/**/},
                 publish: () => {/**/},
-            } as unknown as IAdapters,
+            } as unknown as Adapters,
         });
 
         el = document.createElement('div');

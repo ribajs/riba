@@ -1,8 +1,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { IReader } from '../../interfaces';
+import { Reader } from '../../interfaces';
 
-export class FileSystemReader implements IReader {
+export class FileSystemReader implements Reader {
   constructor(private readonly directory: string) {}
 
   public async list(): Promise<string[]> {

@@ -1,4 +1,4 @@
-import { IBinder, EventDispatcher, Utils, View as RivetsView } from '@ribajs/core';
+import { Binder, EventDispatcher, Utils, View as RivetsView } from '@ribajs/core';
 import { Pjax, Prefetch, HideShowTransition } from '../services';
 import { State } from '../interfaces';
 
@@ -14,7 +14,7 @@ import { State } from '../interfaces';
  *   </div>
  * ```
  */
-export const viewBinder: IBinder<string> = {
+export const viewBinder: Binder<string> = {
   name: 'view',
   block: true,
 

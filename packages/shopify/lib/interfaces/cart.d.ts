@@ -1,8 +1,8 @@
-export interface IShopifyCartObject {
+export interface ShopifyCartObject {
     attributes: any;
     currency: string;
     item_count: number;
-    items: IShopifyCartLineItem[];
+    items: ShopifyCartLineItem[];
     note: string | null;
     original_total_price: number;
     requires_shipping: boolean;
@@ -11,15 +11,15 @@ export interface IShopifyCartObject {
     total_price: number;
     total_weight: number;
 }
-export interface IShopifyCartUpdateProperty {
+export interface ShopifyCartUpdateProperty {
     [variantId: number]: number;
 }
-export interface IShopifyCartAddError {
+export interface ShopifyCartAddError {
     status: number;
     message: string;
     description: string;
 }
-export interface IShopifyCartLineItem {
+export interface ShopifyCartLineItem {
     id: number;
     title: string;
     price: number;

@@ -1,7 +1,7 @@
-import { IBinder } from '../interfaces';
+import { Binder } from '../interfaces';
 import { Utils } from '../services/utils';
 
-export interface IAssign {
+export interface Assign {
   key: string;
   value: any;
 }
@@ -13,7 +13,7 @@ export interface IAssign {
  * @example
  * <div rv-assign='{"newValue": "hello", "anotherNewValue": "world"}'>{newValue} {anotherNewValue}!</div>
  */
-export const assignBinder: IBinder<IAssign> = {
+export const assignBinder: Binder<Assign> = {
   name: 'assign',
   routine(el: HTMLElement, value: object) {
     if (typeof(value) === 'object') {

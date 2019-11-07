@@ -1,4 +1,4 @@
-export interface IApplicationOptions {
+export interface ApplicationOptions {
   /**
    * The Nest application name.
    */
