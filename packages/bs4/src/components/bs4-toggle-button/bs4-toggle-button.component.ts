@@ -3,8 +3,6 @@ import {
   EventDispatcher,
 } from '@ribajs/core';
 
-import template from './bs4-toggle-button.component.html';
-
 type State = 'undefined' | 'overlay-left' | 'overlay-right' | 'side-left' | 'side-right' | 'hidden';
 
 interface Scope {
@@ -81,11 +79,9 @@ export class Bs4ToggleButtonComponent extends Component {
   }
 
   protected template() {
-    // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
-      return null;
-    } else {
-      return template;
+    if (!this.el.hasChildNodes()) {
+      console.warn('No child elements found, this component as no template so you need to define your own as child of this component.');
     }
+    return null;
   }
 }

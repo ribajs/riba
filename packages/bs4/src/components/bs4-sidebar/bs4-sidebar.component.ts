@@ -4,8 +4,6 @@ import {
   Utils,
 } from '@ribajs/core';
 
-import template from './bs4-sidebar.component.html';
-
 type State = 'overlay-left' | 'overlay-right' | 'side-left' | 'side-right' | 'hidden';
 
 interface Scope {
@@ -312,11 +310,9 @@ export class Bs4SidebarComponent extends Component {
   }
 
   protected template() {
-    // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
-      return null;
-    } else {
-      return template;
+    if (!this.el.hasChildNodes()) {
+      console.warn('No child elements found, this component as no template so you need to define your own as child of this component.');
     }
+    return null;
   }
 }

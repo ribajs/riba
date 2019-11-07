@@ -4,6 +4,8 @@
 
 - Removed `I` prefix from interface names
 
+## 1.5.0
+
 ### Core
 
 - Removed jQuery dependency

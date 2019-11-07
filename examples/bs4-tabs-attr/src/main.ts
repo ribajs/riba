@@ -10,7 +10,4 @@ riba.module.regist(coreModule);
 riba.module.regist(bs4Module);
 riba.module.regist(Bs4TabsAttrModule);
 
-console.warn(riba);
-
-const bindToElement = document.getElementsByTagName('body').item(0);
-riba.bind(bindToElement, model);
+riba.bind(document.body, model);
