@@ -4,7 +4,7 @@ import { debug as Debug } from 'debug';
 import { execSync } from 'child_process';
 import * as fs from 'fs';
 import { Answers, Question, createPromptModule, PromptModule } from 'inquirer';
-import { join, dirname } from 'path';
+import { join } from 'path';
 import { promisify } from 'util';
 import { CommandInput, PackageManager } from '../interfaces';
 import { defaultGitIgnore } from '../lib/configuration';

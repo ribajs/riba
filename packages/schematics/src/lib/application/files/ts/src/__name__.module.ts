@@ -9,3 +9,5 @@ export const <%= classify(name) %>Module: RibaModule = {
   formatters,
   services: {},
 };
+
+export default <%= classify(name) %>Module;

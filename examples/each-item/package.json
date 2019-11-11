@@ -24,12 +24,11 @@
     "babel-plugin-array-includes": "^2.0.3",
     "parcel-bundler": "^1.12.4",
     "sass": "^1.23.3",
-    "typescript": "^3.7.2"
-  },
-  "dependencies": {
-    "@ribajs/core": "^1.5.0",
-    "@types/jquery": "^3.3.31",
+    "typescript": "^3.7.2",
     "autoprefixer": "^9.7.1",
     "postcss-modules": "^1.4.1"
+  },
+  "dependencies": {
+    "@ribajs/core": "^1.5.0"
   }
 }

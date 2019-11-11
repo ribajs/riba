@@ -48,7 +48,6 @@
     "@babel/preset-env": "^7.7.1",
     "@babel/preset-typescript": "^7.7.2",
     "@types/jest": "^24.0.22",
-    "@types/jquery": "^3.3.28",
     "babel-loader": "^8.0.6",
     "babel-plugin-array-includes": "^2.0.3",
     "jest": "^24.9.0",
@@ -61,7 +60,6 @@
   "dependencies": {
     "@ribajs/core": "^1.5.0",
     "@ribajs/jquery": "^1.5.0",
-    "@types/jquery": "^3.3.31",
     "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",
     "popper.js": "^1.16.0"

@@ -45,19 +45,19 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
         }
         if (this.customData.attributeName === 'html') {
           el.innerHTML = locale;
-        }
-        if (this.customData.attributeName === 'text') {
+        } else if (this.customData.attributeName === 'text') {
           el.innerText = locale;
-        }
-        if (this.customData.attributeName === 'value') {
+        } else if (this.customData.attributeName === 'value') {
           // TODO support also: https://github.com/JumpLinkNetwork/tinybind/blob/master/src/binders/basic/value.binder.ts#L51
           if (this.customData.contenteditable) {
             el.innerHTML = locale;
           } else {
+            console.debug('Set value:', locale);
             (el as HTMLInputElement).value = locale;
           }
+        } else {
+          el.setAttribute(this.customData.attributeName, locale);
         }
-        el.setAttribute(this.customData.attributeName, locale);
       };
 
       this.customData.parseVars = (_el: HTMLElement) => {

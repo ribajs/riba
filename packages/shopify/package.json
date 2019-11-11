@@ -46,7 +46,6 @@
     "@babel/preset-env": "^7.7.1",
     "@babel/preset-typescript": "^7.7.2",
     "@types/jest": "^24.0.22",
-    "@types/jquery": "^3.3.31",
     "@types/node": "^12.12.6",
     "babel-loader": "^8.0.6",
     "babel-plugin-array-includes": "^2.0.3",

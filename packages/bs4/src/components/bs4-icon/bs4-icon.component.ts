@@ -70,22 +70,22 @@ export class Bs4IconComponent extends Component {
 
     if (name === 'size') {
       const size = newValue;
-      this.el.style.height = size;
-      this.el.style.width = size;
+      this.el.style.height = size + 'px';
+      this.el.style.width = size + 'px';
       this.el.className.replace(/(^|\s)size-\S+/g, '');
       this.el.classList.add(`size-${size}`);
     }
 
     if (name === 'width') {
       const width = newValue;
-      this.el.style.width = width;
+      this.el.style.width = width  + 'px';
       this.el.className.replace(/(^|\s)width-\S+/g, '');
       this.el.classList.add(`width-${width}`);
     }
 
     if (name === 'height') {
       const height = newValue;
-      this.el.style.height = height;
+      this.el.style.height = height  + 'px';
       this.el.className.replace(/(^|\s)height-\S+/g, '');
       this.el.classList.add(`height-${height}`);
     }
@@ -111,8 +111,6 @@ export class Bs4IconComponent extends Component {
         classString += ' rotate-225';
       }
 
-      this.el.style.height = newValue;
-      this.el.style.width = newValue;
       this.el.className.replace(/(^|\s)direction-\S+/g, '');
       this.el.className.replace(/(^|\s)rotate-\S+/g, '');
       this.el.className += ' ' + classString;

@@ -349,7 +349,7 @@ export abstract class Component extends FakeHTMLElement {
 
   protected async loadTemplate() {
     if (this.templateLoaded) {
-      console.warn('template already loaded');
+      // console.warn('template already loaded');
       return null;
     }
 
