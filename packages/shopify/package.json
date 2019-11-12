@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/shopify",
   "description": "Shopify extension for Riba.js",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [],
   "url": "https://github.com/ribajs/riba/tree/master/packages/shopify",
@@ -58,7 +58,7 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "@ribajs/core": "^1.5.0",
-    "@ribajs/i18n": "^1.5.0"
+    "@ribajs/core": "^1.6.0",
+    "@ribajs/i18n": "^1.6.0"
   }
 }
