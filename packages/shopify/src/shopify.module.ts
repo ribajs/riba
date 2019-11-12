@@ -4,7 +4,7 @@ import * as components from './components';
 import * as formatters from './formatters';
 import * as services from './services';
 
-export const shopifyModule = <RibaModule> {
+export const shopifyModule: RibaModule = {
   binders,
   formatters,
   services,

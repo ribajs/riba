@@ -1,10 +1,14 @@
 import {
     Riba,
-} from '../index';
+} from '../riba';
 
 import {
     textBinder,
 } from './text.binder';
+
+import {
+    dotAdapter,
+} from '../adapters/dot.adapter';
 
 import { Adapters } from '../interfaces';
 
@@ -12,6 +16,7 @@ describe('riba.binders', () => {
     let el: HTMLUnknownElement;
 
     const riba = new Riba();
+    riba.module.adapter.regist(dotAdapter);
     riba.module.binder.regist(textBinder);
 
     beforeEach(() => {

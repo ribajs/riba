@@ -1,6 +1,10 @@
 import {
     Riba,
-} from '../index';
+} from '../riba';
+
+import {
+    dotAdapter,
+} from '../adapters/dot.adapter';
 
 import {
     showBinder,
@@ -9,6 +13,7 @@ import {
 import { Adapters } from '../interfaces';
 
 const riba = new Riba();
+riba.module.adapter.regist(dotAdapter);
 riba.module.binder.regist(showBinder);
 
 describe('riba.binders', () => {

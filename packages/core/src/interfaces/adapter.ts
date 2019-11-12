@@ -21,7 +21,8 @@ export interface RVArray extends Array<any> {
 
 export type AdapterFunction = (...args: any[]) => any;
 
-export abstract class AAdapter {
+export abstract class Adapter {
+  public abstract name: string;
   public abstract counter?: number;
   public abstract weakmap?: any;
   public abstract weakReference?: (obj: any) => any; // => __rv ?
@@ -33,8 +34,4 @@ export abstract class AAdapter {
   public abstract unobserve: (obj: any, keypath: string, callback: ObserverSyncCallback) => void;
   public abstract get: (obj: any, keypath: string) => any;
   public abstract set: (obj: any, keypath: string, value: any) => void;
-}
-
-export interface Adapters {
-  [name: string]: AAdapter;
 }

@@ -2,6 +2,10 @@ import {
   Riba,
 } from '../index';
 
+import {
+  dotAdapter,
+} from '../adapters/dot.adapter';
+
 import { srcsetSizeBinder } from './srcset-size.binder';
 
 describe('riba.binders', () => {
@@ -10,6 +14,7 @@ describe('riba.binders', () => {
   let model: any = {};
 
   const riba = new Riba();
+  riba.module.adapter.regist(dotAdapter);
   riba.module.binder.regist(srcsetSizeBinder);
 
   beforeEach(() => {

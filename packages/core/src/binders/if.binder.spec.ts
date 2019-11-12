@@ -8,10 +8,15 @@ import {
 
 import {
     eachStarBinder,
-  } from './each-item.binder';
+} from './each-item.binder';
+
+import {
+    dotAdapter,
+} from '../adapters/dot.adapter';
 
 describe('if', () => {
     const riba = new Riba();
+    riba.module.adapter.regist(dotAdapter);
     riba.module.binder.regist(ifBinder);
 
     let el: HTMLDivElement;

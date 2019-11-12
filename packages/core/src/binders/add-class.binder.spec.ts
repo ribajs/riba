@@ -1,12 +1,17 @@
 import {
     Riba,
-} from '../index';
+} from '../riba';
 
 import {
     addClassBinder,
 } from './add-class.binder';
 
+import {
+    dotAdapter,
+} from '../adapters/dot.adapter';
+
 const riba = new Riba();
+riba.module.adapter.regist(dotAdapter);
 riba.module.binder.regist(addClassBinder);
 
 describe('riba.binders', () => {

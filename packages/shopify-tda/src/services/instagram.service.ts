@@ -30,7 +30,6 @@ export interface InstagramResponse {
   id: string;
 }
 
-// TODO move to the-developer-app modul
 export class InstagramService {
 
   public static baseUrl = BaseService.baseUrl + '/instagram/api';

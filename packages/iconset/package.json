@@ -32,7 +32,7 @@
     "Browser"
   ],
   "scripts": {
-    "build": "gulp",
+    "build": "npm run build:svg && npm run build:filelist:svg",
     "build:svg": "npm run clean:svg && gulp build:svg",
     "build:filelist": "gulp build:filelist",
     "build:filelist:svg": "gulp build:filelist:svg",

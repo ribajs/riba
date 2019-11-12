@@ -6,7 +6,12 @@ import {
   blockBinder,
 } from './block.binder';
 
+import {
+  dotAdapter,
+} from '../adapters/dot.adapter';
+
 const riba = new Riba();
+riba.module.adapter.regist(dotAdapter);
 riba.module.binder.regist(blockBinder);
 
 describe('riba.binders', () => {

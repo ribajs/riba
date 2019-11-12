@@ -33,9 +33,11 @@ export abstract class AI18nSwitcherComponent extends Component {
    * @param langcode
    * @param event
    */
-  public switch(langcode: Langcode, context: Binder<any>, event: Event) {
-    event.preventDefault();
-    event.stopPropagation();
+  public switch(langcode: Langcode, context?: Binder<any>, event?: Event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
     if (!langcode.active) {
       this.setLangcode(langcode.code);
     }
@@ -46,9 +48,11 @@ export abstract class AI18nSwitcherComponent extends Component {
    * @param langcode
    * @param event
    */
-  public toggle(context: Binder<any>, event: Event) {
-    event.preventDefault();
-    event.stopPropagation();
+  public toggle(context?: Binder<any>, event?: Event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
     for (const i in this.scope.langcodes) {
       if (this.scope.langcodes.hasOwnProperty(i)) {
         if (this.scope.langcodes[i].active !== true) {

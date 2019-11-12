@@ -9,9 +9,9 @@ module.exports = {
     "transform": {
         "^.+\\.tsx?$": "ts-jest"
     },
-    "testRegex": "/src/.*\\.(test|spec).(ts|tsx|js)$",
+    "testRegex": "/src/.*\\.(test|spec).(ts|tsx)$",
     "collectCoverageFrom": [
-        "src/**/*.{js,jsx,tsx,ts}",
+        "src/**/*.{tsx,ts}",
         "!**/node_modules/**",
         "!**/vendor/**"
     ],

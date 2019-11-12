@@ -1,4 +1,5 @@
 import { Utils } from './utils';
+import { ModuleElementType } from '../interfaces/module-element-type';
 
 export type Element = any;
 
@@ -9,7 +10,7 @@ export interface Elements {
 export abstract class ModuleElementService {
   protected elements: Elements;
 
-  protected abstract type: 'binder' | 'formatter' | 'components' | 'services';
+  protected abstract type: ModuleElementType;
 
   /**
    *

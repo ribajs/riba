@@ -1,6 +1,6 @@
 /* jshint esversion: 6 */
 const program = require('commander');
-const chalk = require('chalk').default;
+const chalk = require('chalk');
 const exec = require('child_process').execSync;
 const path = require('path');
 const fs = require('fs');
@@ -93,6 +93,10 @@ const PACKAGES = [
     path: 'examples/bs4-tabs-tpl/',
     available: false,
   },
+  {
+    path: 'examples/i18n-static/',
+    available: false,
+  },
 ];
 
 const getPackagePath = (modulePath) => {
@@ -142,6 +146,7 @@ const upgradePackage = (modulePath) => {
 const installPackage = (modulePath) => {
   const packagePath = getPackagePath(modulePath);
   exec('npm install', {cwd: path.dirname(packagePath), stdio: 'inherit'});
+  exec('npm audit fix', {cwd: path.dirname(packagePath), stdio: 'inherit'});  
 };
 
 /**

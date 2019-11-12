@@ -218,7 +218,7 @@ export class Binding {
       // If value is a promise
       if (value && typeof(value.then) === 'function' && typeof(value.catch) === 'function') {
         value.then((realValue: any) => {
-          return this.binder.routine.call(this, this.el, realValue);
+          this.binder.routine.call(this, this.el, realValue);
         })
         .catch((error: Error) => {
           console.error(error);

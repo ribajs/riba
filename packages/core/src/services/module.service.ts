@@ -1,21 +1,24 @@
-import { Binders, Formatters, Components, RibaModule } from '../interfaces';
+import { Adapters, Binders, Formatters, Components, RibaModule } from '../interfaces';
 import { BindersService } from './binder.service';
 import { ComponentService } from './component.service';
 import { FormatterService } from './formatter.service';
+import { AdapterService } from './adapter.service';
 
 export class ModulesService {
   public binder: BindersService;
   public component: ComponentService;
   public formatter: FormatterService;
+  public adapter: AdapterService;
 
   /**
    *
    * @param binders;
    */
-  constructor(binders: Binders<any>, components: Components, formatters: Formatters) {
+  constructor(binders: Binders<any>, components: Components, formatters: Formatters, adapters: Adapters) {
     this.binder = new BindersService(binders);
     this.component = new ComponentService(components);
     this.formatter = new FormatterService(formatters);
+    this.adapter = new AdapterService(adapters);
   }
 
   /**
@@ -31,6 +34,9 @@ export class ModulesService {
     }
     if (module.formatters) {
       this.formatter.regists(module.formatters);
+    }
+    if (module.adapters) {
+      this.adapter.regists(module.adapters);
     }
   }
 }

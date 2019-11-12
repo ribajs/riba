@@ -1,7 +1,7 @@
 
-import { AAdapter, AdapterFunction, Ref, ObserverSyncCallback, RVArray } from './interfaces';
+import { Adapter, AdapterFunction, Ref, ObserverSyncCallback, RVArray } from '../interfaces';
 
-export class Adapter implements AAdapter {
+export class DotAdapter implements Adapter {
 
   public static ARRAY_METHODS = [
     'push',
@@ -12,6 +12,8 @@ export class Adapter implements AAdapter {
     'reverse',
     'splice',
   ];
+
+  public name = '.';
 
   public counter: number = 0;
   public weakmap: any = {};
@@ -73,7 +75,7 @@ export class Adapter implements AAdapter {
       if (!map.pointers) {
         map.pointers = {};
 
-        Adapter.ARRAY_METHODS.forEach((fn) => {
+        DotAdapter.ARRAY_METHODS.forEach((fn) => {
           this.stubFunction(obj, fn);
         });
       }
@@ -192,5 +194,5 @@ export class Adapter implements AAdapter {
   }
 }
 
-const adapter = new Adapter();
-export { adapter };
+const dotAdapter = new DotAdapter();
+export { dotAdapter };

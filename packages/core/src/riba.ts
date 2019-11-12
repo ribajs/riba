@@ -9,7 +9,6 @@ import {
 import { Utils } from './services/utils';
 import { parseTemplate, parseType } from './parsers';
 import { Binding } from './binding';
-import { adapter } from './adapter';
 import { starBinder } from './binders/attribute.binder';
 
 import { View } from './view';
@@ -48,9 +47,7 @@ export class Riba {
   public formatters: Formatters = {};
 
   /** Global (sightglass) adapters. */
-  public  adapters: Adapters = {
-    '.': adapter,
-  };
+  public adapters: Adapters = {};
 
   public parseTemplate = parseTemplate;
 
@@ -94,7 +91,7 @@ export class Riba {
    * Creates an singleton instance of Riba.
    */
   constructor() {
-    this.module = new ModulesService(this.binders, this.components, this.formatters);
+    this.module = new ModulesService(this.binders, this.components, this.formatters, this.adapters);
     if (Riba.instance) {
       return Riba.instance;
     }

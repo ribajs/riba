@@ -4,5 +4,5 @@ export declare class PriorityQueue {
     constructor();
     enqueue(run: any, options: any): void;
     dequeue(): any;
-    readonly size: number;
+    get size(): number;
 }

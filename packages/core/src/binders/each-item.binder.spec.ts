@@ -10,8 +10,13 @@ import {
   textBinder,
 } from './text.binder';
 
+import {
+  dotAdapter,
+} from '../adapters/dot.adapter';
+
 describe('each-*', () => {
   const riba = new Riba();
+  riba.module.adapter.regist(dotAdapter);
   riba.module.binder.regist(eachStarBinder);
   riba.module.binder.regist(textBinder);
 

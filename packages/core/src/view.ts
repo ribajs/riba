@@ -3,10 +3,11 @@ import {
   Binder,
   Options,
   BindableElement,
+  Type,
 } from './interfaces';
 import { Binding } from './binding';
 import { parseNode, parseDeclaration } from './parsers';
-import { RibaComponent, Component } from './component';
+import { Component } from './component';
 
 export type TBlock = boolean;
 
@@ -197,7 +198,7 @@ export class View {
     if (!block) {
       const nodeName = node.nodeName.toLowerCase();
       if (this.options.components && this.options.components[nodeName] && !node._bound) {
-        const COMPONENT = (this.options.components[nodeName] as typeof RibaComponent);
+        const COMPONENT = (this.options.components[nodeName] as Type<Component>);
         // Fallback
         if (!window.customElements) {
           console.warn(`Fallback for Webcomponent ${nodeName}`);

@@ -22,24 +22,36 @@ export const tFormatterWrapper = (localesService: ALocalesService): Formatter =>
   return {
     name: 't',
     read(translateMePathString: string, langcode: string, ...vars: string[]) {
-      if (localesService.ready) {
-        return translate(translateMePathString, localesService, langcode)
-        .then((locale) => {
-          return locale;
-        });
-      } else {
-        return new Promise((resolve, reject) => {
-          localesService.event.on('ready', () => {
-            translate(translateMePathString, localesService, langcode)
-            .then((locale) => {
-              resolve(locale as any);
-            })
-            .catch((error: Error) => {
-              reject(error);
-            });
+      return new Promise((resolve, reject) => {
+
+        localesService.event.on('changed', () => {
+          console.debug('changed');
+          translate(translateMePathString, localesService, langcode)
+          .then((locale) => {
+            resolve(locale as any);
+          })
+          .catch((error: Error) => {
+            reject(error);
           });
         });
-      }
+
+        localesService.event.on('ready', () => {
+          translate(translateMePathString, localesService, langcode)
+          .then((locale) => {
+            resolve(locale as any);
+          })
+          .catch((error: Error) => {
+            reject(error);
+          });
+        });
+
+        if (localesService.ready) {
+          translate(translateMePathString, localesService, langcode)
+          .then((locale) => {
+            resolve(locale);
+          });
+        }
+      });
     },
   } as Formatter;
 };

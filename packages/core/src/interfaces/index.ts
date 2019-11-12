@@ -1,4 +1,5 @@
 export * from './adapter';
+export * from './adapters';
 export * from './binder';
 export * from './binder.wrapper';
 export * from './binders';
@@ -12,3 +13,4 @@ export * from './module';
 export * from './observer';
 export * from './riba';
 export * from './services';
+export * from './type';

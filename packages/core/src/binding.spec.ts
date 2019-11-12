@@ -11,28 +11,33 @@ import {
 } from '../spec/lib/moch.data';
 
 import {
+    dotAdapter,
+} from './adapters/dot.adapter';
+
+import {
     textBinder,
-} from '../src/binders/text.binder';
+} from './binders/text.binder';
 
 import {
     htmlBinder,
-} from '../src/binders/html.binder';
+} from './binders/html.binder';
 
 import {
     valueBinder,
-} from '../src/binders/value.binder';
+} from './binders/value.binder';
 
 import {
     eachStarBinder,
-} from '../src/binders/each-item.binder';
+} from './binders/each-item.binder';
 
 import {
     addClassBinder,
 } from './binders/add-class.binder';
 
-import { Formatter, AAdapter } from './interfaces';
+import { Formatter, Adapter } from './interfaces';
 
 const riba = new Riba();
+riba.module.adapter.regist(dotAdapter);
 riba.module.binder.regist(textBinder);
 riba.module.binder.regist(htmlBinder);
 riba.module.binder.regist(valueBinder);
@@ -45,7 +50,7 @@ describe('riba.Binding', () => {
     let view: View;
     let binding: Binding;
     let originalPrefix: string;
-    let adapter: AAdapter;
+    let adapter: Adapter;
     let routineFn;
 
     beforeEach(() => {
@@ -600,12 +605,13 @@ describe('Functional', () => {
     let el: HTMLUnknownElement;
     let input: HTMLInputElement;
     let originalPrefix: string;
-    let adapter: AAdapter;
+    let adapter: Adapter;
 
     beforeEach(() => {
         originalPrefix = riba.prefix;
         riba.prefix = 'data';
         adapter = {
+            name: ':',
             observe: (obj, keypath, callback) => {
                 obj.on(keypath, callback);
             },
@@ -621,8 +627,7 @@ describe('Functional', () => {
                 obj.set(attributes);
             },
         };
-
-        riba.adapters[':'] = adapter;
+        riba.module.adapter.regist(adapter);
         riba.configure({ preloadData: true });
 
         data = new Data({

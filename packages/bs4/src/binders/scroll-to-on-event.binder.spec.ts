@@ -1,4 +1,4 @@
-import { Riba } from '@ribajs/core';
+import { Riba, dotAdapter } from '@ribajs/core';
 
 import { scrollToOnEventBinder } from './scroll-to-on-event.binder';
 
@@ -9,6 +9,7 @@ describe('riba.binders', () => {
   const model: any = {};
 
   const riba = new Riba();
+  riba.module.adapter.regist(dotAdapter);
   riba.module.binder.regist(scrollToOnEventBinder);
 
   beforeEach(() => {

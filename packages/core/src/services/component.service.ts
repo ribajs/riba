@@ -1,10 +1,10 @@
-import { Components } from '../interfaces';
+import { Components, ModuleElementType } from '../interfaces';
 import { Component } from '../component';
 import { ModuleElementService } from './module-element.service';
 
 export class ComponentService extends ModuleElementService {
 
-  protected type: 'binder' | 'formatter' | 'components' | 'services' = 'components';
+  protected type: ModuleElementType = 'components';
 
   /**
    *

@@ -52,7 +52,6 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
           if (this.customData.contenteditable) {
             el.innerHTML = locale;
           } else {
-            console.debug('Set value:', locale);
             (el as HTMLInputElement).value = locale;
           }
         } else {

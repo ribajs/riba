@@ -3,6 +3,10 @@ import {
 } from '../riba';
 
 import {
+    dotAdapter,
+} from '../adapters/dot.adapter';
+
+import {
     valueBinder,
 } from './value.binder';
 
@@ -11,6 +15,7 @@ import { Adapters } from '../interfaces';
 describe('riba.binders', () => {
     describe('value', () => {
         const riba = new Riba();
+        riba.module.adapter.regist(dotAdapter);
         riba.module.binder.regist(valueBinder, 'value');
 
         let fragment: DocumentFragment;

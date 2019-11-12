@@ -5,7 +5,10 @@ import { Utils } from './services/utils';
 export class Observer {
 
   public static adapters: Adapters;
-  public static interfaces: string[];
+  public static interfaces: string[] = [];
+  // public static get interfaces() {
+  //   return Object.keys(Observer.adapters);
+  // }
   public static rootInterface: Root;
 
   public static updateOptions(options: Options) {
@@ -16,10 +19,11 @@ export class Observer {
     if (!options.rootInterface) {
       throw new Error('rootInterface is required!');
     }
-
-    Observer.adapters = options.adapters;
-    Observer.interfaces = Object.keys(Observer.adapters);
-    Observer.rootInterface = options.rootInterface;
+    if (options.adapters) {
+      Observer.adapters = options.adapters;
+      Observer.interfaces = Object.keys(Observer.adapters);
+    }
+    Observer.rootInterface = options.rootInterface || Observer.interfaces[0];
   }
 
   /**
@@ -82,7 +86,7 @@ export class Observer {
     let root: Root;
 
     if (!Observer.interfaces || !Observer.interfaces.length) {
-      throw new Error(`[Observer] Must define at least one adapter interface. "${JSON.stringify(Observer.interfaces)}"`);
+      throw new Error(`[Observer] Must define at least one adapter interface. interfaces: "${JSON.stringify(Observer.interfaces)}" adapters: "${JSON.stringify(Observer.adapters)}"`);
     }
 
     if (!!~Observer.interfaces.indexOf(this.keypath[0])) {

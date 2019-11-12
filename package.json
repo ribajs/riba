@@ -1,7 +1,7 @@
 {
   "name": "ribajs",
   "description": "Declarative data binding + templating solution.",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [],
   "private": true,
@@ -30,6 +30,8 @@
     "Browser"
   ],
   "scripts": {
+    "packages:test": "cd packages/core && npm run test && cd ../bs4 && npm run test",
+    "packages:type-check": "cd packages/core && npm run type-check && cd ../bs4 && npm run type-check",
     "packages:bump": "node tools/cli.js bump",
     "packages:publish": "node tools/cli.js publish",
     "packages:upgrade": "node tools/cli.js upgrade",
@@ -38,8 +40,15 @@
     "packages:build": "node tools/cli.js build"
   },
   "devDependencies": {
-    "commander": "^4.0.0",
-    "chalk": "^2.4.2"
+    "chalk": "^3.0.0",
+    "commander": "^4.0.1",
+    "husky": "^3.0.9"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run packages:test",
+      "pre-commit": "npm run packages:type-check"
+    }
+  }
 }

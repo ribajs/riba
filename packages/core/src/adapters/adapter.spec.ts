@@ -1,28 +1,33 @@
 import {
     Riba,
-    AAdapter,
-} from './index';
+    Adapter,
+} from '../index';
+
+import {
+    dotAdapter,
+} from '../adapters/dot.adapter';
 
 import {
     textBinder,
-} from '../src/binders/text.binder';
+} from '../binders/text.binder';
 
 import {
     valueBinder,
-} from '../src/binders/value.binder';
+} from '../binders/value.binder';
 
 import {
     Data,
-} from '../spec/lib/moch.data';
+} from '../../spec/lib/moch.data';
 
 describe('Functional', () => {
     let data: Data;
     let bindData: { data: Data };
     let el: HTMLUnknownElement;
     let originalPrefix: string;
-    let adapter: AAdapter;
+    let adapter: Adapter;
 
     const riba = new Riba();
+    riba.module.adapter.regist(dotAdapter);
     riba.module.binder.regist(textBinder);
     riba.module.binder.regist(valueBinder);
 
@@ -30,6 +35,7 @@ describe('Functional', () => {
         originalPrefix = riba.prefix;
         riba.prefix = 'data';
         adapter = {
+            name: ':',
             observe: (obj, keypath, callback) => {
                 obj.on(keypath, callback);
             },
@@ -46,7 +52,7 @@ describe('Functional', () => {
             },
         };
 
-        riba.adapters[':'] = adapter;
+        riba.adapters[adapter.name] = adapter;
         riba.configure({ preloadData: true });
 
         data = new Data({

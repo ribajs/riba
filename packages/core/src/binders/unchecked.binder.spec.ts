@@ -1,13 +1,19 @@
 import {
     Riba,
-} from '../index';
+} from '../riba';
 
 import {
     uncheckedBinder,
 } from './unchecked.binder';
+
+import {
+    dotAdapter,
+} from '../adapters/dot.adapter';
+
 import { Adapters } from '../interfaces';
 
 const riba = new Riba();
+riba.module.adapter.regist(dotAdapter);
 riba.module.binder.regist(uncheckedBinder);
 
 describe('riba.binders', () => {

@@ -22,8 +22,8 @@ export declare class PQueue {
     clear(): void;
     onEmpty(): Promise<unknown>;
     onIdle(): Promise<any>;
-    readonly _doesIntervalAllowAnother: boolean;
-    readonly _doesConcurrentAllowAnother: boolean;
+    get _doesIntervalAllowAnother(): boolean;
+    get _doesConcurrentAllowAnother(): boolean;
     private _next;
     private _resolvePromises;
     private _onResumeInterval;
@@ -31,7 +31,7 @@ export declare class PQueue {
     private _tryToStartAnother;
     private _initializeIntervalIfNeeded;
     private _onInterval;
-    readonly size: number;
-    readonly pending: number;
-    readonly isPaused: boolean;
+    get size(): number;
+    get pending(): number;
+    get isPaused(): boolean;
 }

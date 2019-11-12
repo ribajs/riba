@@ -1,8 +1,13 @@
 # Changelog
 
-## Dev
+## 1.6.0
 
 - Removed `I` prefix from interface names
+
+## I18n
+
+- Added locale switcher component
+- Added new static locales example
 
 ## 1.5.0
 

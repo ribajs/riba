@@ -1,6 +1,10 @@
 import {
     Riba,
-} from '../index';
+} from '../riba';
+
+import {
+    dotAdapter,
+} from '../adapters/dot.adapter';
 
 import {
     onEventBinder,
@@ -11,6 +15,7 @@ import {
 } from './value.binder';
 
 const riba = new Riba();
+riba.module.adapter.regist(dotAdapter);
 riba.module.binder.regists([onEventBinder, valueBinder]);
 
 describe('riba.binders', () => {

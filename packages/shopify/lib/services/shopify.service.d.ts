@@ -8,7 +8,7 @@ export declare class ShopifyService {
     protected static instance: ShopifyService;
     protected moneyFormat?: string;
     protected moneyWithCurrencyFormat?: string;
-    static readonly moneyWithCurrencyFormat: any;
-    static readonly moneyFormat: any;
+    static get moneyWithCurrencyFormat(): any;
+    static get moneyFormat(): any;
     constructor(shopSettings?: any);
 }

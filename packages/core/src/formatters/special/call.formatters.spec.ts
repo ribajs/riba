@@ -2,10 +2,15 @@ import {
     Riba,
 } from '../../index';
 
+import {
+    dotAdapter,
+} from '../../adapters/dot.adapter';
+
 import { callFormatter } from './call.formatter';
 import { textBinder } from '../../binders/text.binder';
 
 const riba = new Riba();
+riba.module.adapter.regist(dotAdapter);
 riba.module.formatter.regist(callFormatter, 'call');
 riba.module.binder.regist(textBinder);
 

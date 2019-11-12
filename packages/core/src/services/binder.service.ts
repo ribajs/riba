@@ -1,9 +1,9 @@
-import { Binder, Binders } from '../interfaces';
+import { Binder, Binders, ModuleElementType } from '../interfaces';
 import { ModuleElementService } from './module-element.service';
 
 export class BindersService extends ModuleElementService {
 
-  protected type: 'binder' | 'formatter' | 'components' | 'services' = 'binder';
+  protected type: ModuleElementType = 'binder';
 
   /**
    *

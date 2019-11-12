@@ -8,12 +8,13 @@ export * from './services';
 
 import bindersWrapper from './binders';
 import formattersWrapper from './formatters';
+import componentsWrapper from './components';
 import * as services from './services';
 
 export const i18nModule = (localesService: services.ALocalesService): RibaModule => {
   return {
     binders: bindersWrapper(localesService),
-    components: {},
+    components: componentsWrapper(localesService),
     formatters: formattersWrapper(localesService),
     services,
   };

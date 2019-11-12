@@ -3,6 +3,10 @@ import {
 } from '../riba';
 
 import {
+    dotAdapter,
+} from '../adapters/dot.adapter';
+
+import {
     unlessBinder,
 } from './unless.binder';
 
@@ -12,6 +16,7 @@ import {
 
 describe('unless', () => {
     const riba = new Riba();
+    riba.module.adapter.regist(dotAdapter);
     riba.module.binder.regist(unlessBinder);
 
     let el: HTMLDivElement;
