@@ -2,7 +2,7 @@ export * from './HistoryManager';
 export * from './Dom';
 export * from './Prefetch';
 
-import { EventDispatcher, Utils } from '@ribajs/core';
+import { EventDispatcher, Utils, HttpService } from '@ribajs/core';
 
 import { BaseCache } from '../Cache';
 import { HideShowTransition } from '../Transition';
@@ -261,44 +261,39 @@ class Pjax {
   }
 
  /**
-  * Load an url, will start an xhr request or load from the cache
+  * Load an url, will start an fetch request or load from the cache
   */
   public load(url: string): Promise<HTMLElement> {
-    const deferred = Utils.deferred();
-    const self = this;
-    let xhr;
+    let fetch;
 
-    xhr = Pjax.cache.get(url);
+    fetch = Pjax.cache.get(url);
 
-    if (!xhr) {
-      xhr = Utils.fetch(url, 'GET', undefined, 'html');
-      Pjax.cache.set(url, xhr);
+    if (!fetch) {
+      fetch = HttpService.get(url, undefined, 'html');
+      Pjax.cache.set(url, fetch);
     }
 
-    xhr
+    return fetch
     .then((data: string) => {
-      if (!self.dom) {
+      if (!this.dom) {
         throw new Error('[Pjax] you need to call the start method first!');
       }
 
-      const container = self.dom.parseResponse(data);
-      self.dom.putContainer(container);
+      const container = this.dom.parseResponse(data);
+      this.dom.putContainer(container);
 
-      if (!self.cacheEnabled) {
+      if (!this.cacheEnabled) {
         Pjax.cache.reset();
       }
 
-      deferred.resolve(container);
+      return container;
     })
     .catch((error: any) => {
       console.error(error);
       // Something went wrong (timeout, 404, 505...)
-      self.forceGoTo(url);
-
-      deferred.reject();
+      this.forceGoTo(url);
+      throw error;
     });
-
-    return deferred.promise;
   }
 
  /**

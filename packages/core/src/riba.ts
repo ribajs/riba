@@ -191,7 +191,7 @@ export class Riba {
     // get all starBinders from available binders
     if (viewOptions.binders) {
       viewOptions.starBinders = Object.keys(viewOptions.binders).filter((key) => {
-        return key.indexOf('*') >= 1; // Should ot start with *
+        return key.indexOf('*') >= 1; // Should start with *
       });
     }
 

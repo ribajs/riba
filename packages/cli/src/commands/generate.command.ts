@@ -3,7 +3,7 @@ import { Command, CommanderStatic } from 'commander';
 import { AbstractCommand } from './abstract.command';
 import { CommandInput } from '../interfaces';
 import { Collection } from '../lib/schematics';
-import * as Table from 'cli-table3';
+import Table from 'cli-table3';
 import { debug as Debug } from 'debug';
 
 export class GenerateCommand extends AbstractCommand {

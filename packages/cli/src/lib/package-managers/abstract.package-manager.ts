@@ -1,7 +1,7 @@
 import { dasherize } from '@angular-devkit/core/src/utils/strings';
 import chalk from 'chalk';
 import { readFile } from 'fs';
-import * as ora from 'ora';
+import ora from 'ora';
 import { join } from 'path';
 import { AbstractRunner } from '../runners/abstract.runner';
 import { messages } from '../ui';

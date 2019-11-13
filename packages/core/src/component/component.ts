@@ -379,7 +379,7 @@ export abstract class Component extends FakeHTMLElement {
 
   protected async bind() {
     if (this.bound) {
-      console.warn('component already bounded');
+      // console.warn('component already bounded');
       return;
     }
 

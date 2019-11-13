@@ -1,4 +1,4 @@
-import { Utils } from '@ribajs/core';
+import { HttpService } from '@ribajs/core';
 
 import {
   ShopifyProduct,
@@ -21,7 +21,7 @@ export class ShopifyProductService {
         resolve(this.cache[handle]);
       });
     } else {
-      return Utils.getJSON(`/products/${handle}.js`)
+      return HttpService.getJSON(`/products/${handle}.js`)
       .then((product: ShopifyProduct) => {
         this.cache[handle] = product;
         return this.cache[handle];

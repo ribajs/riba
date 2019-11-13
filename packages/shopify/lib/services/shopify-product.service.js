@@ -13,7 +13,7 @@ class ShopifyProductService {
             });
         }
         else {
-            return core_1.Utils.getJSON(`/products/${handle}.js`)
+            return core_1.HttpService.getJSON(`/products/${handle}.js`)
                 .then((product) => {
                 this.cache[handle] = product;
                 return this.cache[handle];

@@ -4,7 +4,7 @@
 class FakeHTMLElement /*implements HTMLElement*/ {
   constructor(element?: HTMLElement) {
     if (window.customElements) {
-      return Reflect.construct(HTMLElement, [], this.constructor);
+      return Reflect.construct(HTMLElement as any, [], this.constructor);
     }
   }
 }

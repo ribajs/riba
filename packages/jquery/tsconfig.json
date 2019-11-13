@@ -5,7 +5,8 @@
     "outDir": "./lib/",
     "noUnusedLocals": true,
     "typeRoots": ["./node_modules/@types", "./src/types"],
-    "types": ["jest"]
+    "types": ["jest"],
+    "esModuleInterop": true,
   },
   "include": ["*.ts", "**/*.ts"]
 }

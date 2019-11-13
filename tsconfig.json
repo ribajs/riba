@@ -20,6 +20,6 @@
   "exclude": [
     "node_modules",
     "packages/*/lib/**/*",
-    "packages/*/src/ts/types",
+    "packages/*/src/ts/types"
   ]
 }

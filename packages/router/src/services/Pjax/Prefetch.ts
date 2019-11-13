@@ -1,4 +1,4 @@
-import { Utils } from '@ribajs/core';
+import { HttpService } from '@ribajs/core';
 import { Pjax } from '.';
 
 /**
@@ -77,13 +77,13 @@ class Prefetch {
 
     // Check if the link is elegible for Pjax
     if (url && Pjax.preventCheck(evt, el, url) && !Pjax.cache.get(url)) {
-      const xhr = Utils.fetch(url);
+      const xhr = HttpService.get(url, undefined, 'html');
       Pjax.cache.set(url, xhr);
     } else {
       if (url) {
-        if (!Pjax.preventCheck(evt, el, url)) {
-          console.warn('preventCheck failed', Pjax.preventCheck(evt, el, url));
-        }
+        // if (!Pjax.preventCheck(evt, el, url)) {
+        //   console.warn('preventCheck failed', Pjax.preventCheck(evt, el, url));
+        // }
       }
     }
   }

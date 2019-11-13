@@ -1,4 +1,4 @@
-import { Utils, EventDispatcher } from '@ribajs/core';
+import { Utils, EventDispatcher, HttpService } from '@ribajs/core';
 import { PQueue } from './p-queue.service'; // https://github.com/sindresorhus/p-queue
 
 import {
@@ -38,14 +38,14 @@ export class ShopifyCartService {
       this.triggerOnStart();
     }
     const promise = this.queue.add(() => {
-      return Utils.post(this.CART_POST_ADD_URL, {
-        id,
-        quantity,
-        properties,
-      }, 'json')
+      const body: any = {id, quantity};
+      if (Object.keys(properties).length !== 0) {
+        body.properties = properties;
+      }
+      return HttpService.post(this.CART_POST_ADD_URL, body, 'json')
       .then((lineItem: ShopifyCartLineItem) => {
         // Force update cart object
-        return Utils.get(this.CART_GET_URL, {}, 'json')
+        return HttpService.get(this.CART_GET_URL, {}, 'json')
         .then((cart: ShopifyCartObject) => {
           if (options.triggerOnChange) {
             this.triggerOnChange(cart);
@@ -76,7 +76,7 @@ export class ShopifyCartService {
         }, 0);
       });
     }
-    return Utils.get(this.CART_GET_URL, {}, 'json')
+    return HttpService.get(this.CART_GET_URL, {}, 'json')
     .then((cart: ShopifyCartObject) => {
       ShopifyCartService.cart = cart;
       return cart;
@@ -115,11 +115,15 @@ export class ShopifyCartService {
       this.triggerOnStart();
     }
     const promise = this.queue.add(() => {
-      return Utils.post(this.CART_POST_UPDATE_URL, {
-        id,
-        quantity,
-        properties,
-      }, 'json');
+      const body: any = {id, quantity};
+      if (Object.keys(properties).length !== 0) {
+        body.properties = properties;
+      }
+      return HttpService.post(this.CART_POST_UPDATE_URL, body, 'form');
+    })
+    // because type is form we need to parse the json response by self
+    .then((cart: string) => {
+      return JSON.parse(cart);
     })
     .then((cart: ShopifyCartObject) => {
       if (options.triggerOnChange) {
@@ -146,9 +150,13 @@ export class ShopifyCartService {
       this.triggerOnStart();
     }
     const promise = this.queue.add(() => {
-      return Utils.post(this.CART_POST_UPDATE_URL, {
+      return HttpService.post(this.CART_POST_UPDATE_URL, {
         updates,
-      }, 'json');
+      }, 'form');
+    })
+    // because type is form we need to parse the json response by self
+    .then((cart: string) => {
+      return JSON.parse(cart);
     })
     .then((cart: ShopifyCartObject) => {
       if (options.triggerOnChange) {
@@ -187,11 +195,16 @@ export class ShopifyCartService {
       this.triggerOnStart();
     }
     const promise = this.queue.add(() => {
-      return Utils.post(this.CART_POST_CHANGE_URL, {
-        id,
-        quantity,
-        properties,
-      }, 'json')
+      const body: any = {id, quantity};
+      if (Object.keys(properties).length !== 0) {
+        body.properties = properties;
+      }
+
+      return HttpService.post(this.CART_POST_CHANGE_URL, body, 'form')
+      // because type is form we need to parse the json response by self
+      .then((cart: string) => {
+        return JSON.parse(cart);
+      })
       .then((cart: ShopifyCartObject) => {
         if (options.triggerOnChange) {
           this.triggerOnChange(cart);
@@ -217,11 +230,15 @@ export class ShopifyCartService {
       this.triggerOnStart();
     }
     const promise = this.queue.add(() => {
-      return Utils.post(this.CART_POST_CHANGE_URL, {
-        line,
-        quantity,
-        properties,
-      }, 'json')
+      const body: any = {line, quantity};
+      if (Object.keys(properties).length !== 0) {
+        body.properties = properties;
+      }
+      return HttpService.post(this.CART_POST_CHANGE_URL, body, 'form')
+      // because type is form we need to parse the json response by self
+      .then((cart: string) => {
+        return JSON.parse(cart);
+      })
       .then((cart: ShopifyCartObject) => {
         if (options.triggerOnChange) {
           this.triggerOnChange(cart);
@@ -246,7 +263,11 @@ export class ShopifyCartService {
       this.triggerOnStart();
     }
     const promise = this.queue.add(() => {
-      return Utils.post(this.CART_POST_CLEAR_URL, {}, 'json')
+      return HttpService.post(this.CART_POST_CLEAR_URL, {}, 'form')
+      // because type is form we need to parse the json response by self
+      .then((cart: string) => {
+        return JSON.parse(cart);
+      })
       .then((cart: ShopifyCartObject) => {
         if (options.triggerOnChange) {
           this.triggerOnChange(cart);
@@ -261,7 +282,7 @@ export class ShopifyCartService {
   }
 
   public static _getShippingRates(shippingAddress: ShopifyCustomerAddress, normalize: boolean = true): Promise<ShopifyShippingRates | ShopifyShippingRatesNormalized> {
-    return Utils.get(this.CART_GET_SHIPPING_RATES_URL, { shipping_address: shippingAddress }, 'json')
+    return HttpService.get(this.CART_GET_SHIPPING_RATES_URL, { shipping_address: shippingAddress }, 'json')
     .then((shippingRates: any) => {
       if (Utils.isObject(shippingRates) && Utils.isObject(shippingRates.shipping_rates)) {
         if (normalize) {

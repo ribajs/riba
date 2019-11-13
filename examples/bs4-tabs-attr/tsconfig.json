@@ -2,11 +2,12 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es2017",
-    "typeRoots": ["./node_modules/@ribajs/core/src/types"],
+    "typeRoots": ["./node_modules/@types", "./node_modules/@ribajs/core/src/types"],
     "outDir": "dist",
     "declaration": true,
     "inlineSourceMap": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "esModuleInterop": true
   },
   "include": ["src"],
   "types": ["jest"]

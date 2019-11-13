@@ -1,4 +1,4 @@
-import { Utils } from '@ribajs/core';
+import { HttpService } from '@ribajs/core';
 import { ALocalesService } from './locales-base.service';
 
 /**
@@ -62,7 +62,7 @@ export class LocalesRestService extends ALocalesService {
     if (this.locales[url]) {
       return this.locales[url];
     }
-    return Utils.getJSON(url)
+    return HttpService.getJSON(url)
     .then((locales: any) => {
       this.locales[url as string] = locales;
       return this.locales[url as string];

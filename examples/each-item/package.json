@@ -1,12 +1,13 @@
 {
   "name": "each-star-example",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "",
   "main": "src/main.ts",
   "scripts": {
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html",
-    "clear": "rm -rf ./dist"
+    "clear": "rm -rf ./dist",
+    "packages:link": "npm link @ribajs/core"
   },
   "author": "",
   "license": "MIT",
@@ -29,6 +30,6 @@
     "postcss-modules": "^1.4.1"
   },
   "dependencies": {
-    "@ribajs/core": "^1.6.0"
+    "@ribajs/core": "^1.6.1"
   }
 }

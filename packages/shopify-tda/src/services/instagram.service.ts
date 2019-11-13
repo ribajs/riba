@@ -1,4 +1,4 @@
-import { Utils } from '@ribajs/core';
+import { HttpService } from '@ribajs/core';
 import { BaseService } from './base.service';
 
 export interface InstagramMediaData {
@@ -44,7 +44,7 @@ export class InstagramService {
       data.shop = (window as any).Shopify.shop;
     }
 
-    return Utils.getJSON(url, data);
+    return HttpService.getJSON(url, data);
   }
 
 }

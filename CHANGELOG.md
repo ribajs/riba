@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.6.1
+
+### Core
+
+- Moved http methods from Utils to HttpService
+- Bugfixes
+
+### Shopify
+
+- Fix ShopifyCartService requests
+
 ## 1.6.0
 
 - Removed `I` prefix from interface names

@@ -23,9 +23,9 @@ exports.moneyFormatter = {
         }
         if (typeof cents === 'string') {
             cents = cents.replace('.', '');
+            // cents to float number
+            cents = parseFloat(cents.toString());
         }
-        // cents to float number
-        cents = parseFloat(cents.toString());
         const matchedFormat = formatString.match(placeholderRegex);
         if (matchedFormat !== null && matchedFormat.length >= 1) {
             switch (matchedFormat[1]) {

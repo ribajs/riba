@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/iconset",
   "description": "Iconset for Riba.js",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [],
   "url": "https://github.com/ribajs/riba/tree/master/packages/iconset",

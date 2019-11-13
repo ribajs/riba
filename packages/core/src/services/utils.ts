@@ -11,44 +11,12 @@ export interface Deferred {
  * @class Utils
  */
 export class Utils {
-  /**
-   * Load JSON-encoded data from the server using a GET HTTP request.
-   * @param url A string containing the URL to which the request is sent.
-   * @param data A plain object or string that is sent to the server with the request.
-   * @see https://api.jquery.com/jquery.getjson/
-   */
-  public static getJSON(url: string, data?: any) {
-    return this.fetch(url, 'GET', data, 'json');
-  }
 
-  /**
-   * Load data from the server using a HTTP POST request.
-   * @param url A string containing the URL to which the request is sent.
-   * @param data A plain object or string that is sent to the server with the request.
-   * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html).
-   * @see https://api.jquery.com/jquery.post/
-   */
-  public static post(url: string, data?: any, dataType?: string) {
-    return this.fetch(url, 'POST', data, dataType);
-  }
-
-  public static delete(url: string, data?: any, dataType?: string) {
-    return this.fetch(url, 'DELETE', data, dataType);
-  }
-
-  public static put(url: string, data?: any, dataType?: string) {
-    return this.fetch(url, 'PUT', data, dataType);
-  }
-
-  /**
-   * Load data from the server using a HTTP GET request.
-   * @param url A string containing the URL to which the request is sent.
-   * @param data A plain object or string that is sent to the server with the request.
-   * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html).
-   * @see https://api.jquery.com/jquery.get/
-   */
-  public static get(url: string, data?: any, dataType?: string) {
-    return this.fetch(url, 'GET', data, dataType);
+  public static couldBeJson(str?: string | null) {
+    if (!str) {
+      return false;
+    }
+    return str.startsWith('{') || str.startsWith('[');
   }
 
   /**
@@ -111,7 +79,7 @@ export class Utils {
    */
   public static parseJsonString(value: string) {
     let object = null;
-    if (value.startsWith('{') || value.startsWith('[')) {
+    if (Utils.couldBeJson(value)) {
       if (Utils.isJson(value)) {
         object = JSON.parse(value) || null;
       } else {
@@ -297,157 +265,6 @@ export class Utils {
     } else {
       return Utils.extend(deep, {}, val);
     }
-  }
-
-  /**
-   * Set header for each xhr and jquery request
-   * @param name Header name
-   * @param value Hander value
-   */
-  public static setRequestHeaderEachRequest(name: string, value: string) {
-    // TODO Are old values overwritten if JQuery.ajaxSetup called multiple times?
-    // JQuery.ajaxSetup({
-    //   beforeSend: (xhr: JQueryXHR) => {
-    //     xhr.setRequestHeader(name, value);
-    //   },
-    // });
-    this._requestHeadersEachRequest.push({
-      name,
-      value,
-    });
-  }
-
-  /**
-   *
-   * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html).
-   */
-  public static parseContentType(dataType: string) {
-    let contentType = '';
-    switch (dataType) {
-      case 'script':
-      case 'javascript':
-        contentType = 'application/javascript';
-        break;
-      case 'json':
-      case 'xml':
-      case 'ogg':
-      case 'pdf':
-      case 'zip':
-      case 'x-www-form-urlencoded':
-        contentType = 'application/' + dataType;
-        break;
-      case 'text':
-        contentType = 'text/plain';
-        break;
-      case 'css':
-      case 'csv':
-      case 'html':
-        contentType = 'text/' + dataType;
-        break;
-      case 'mpeg':
-      case 'mp4':
-      case 'quicktime':
-      case 'webm':
-        contentType = 'video/' + dataType;
-        break;
-      case 'gif':
-      case 'jpeg':
-      case 'png':
-      case 'tiff':
-      case 'svg+xml':
-        contentType = 'image/' + dataType;
-        break;
-      case 'svg':
-        contentType = 'image/svg+xml';
-        break;
-      case 'mixed':
-      case 'alternative':
-      case 'related':
-      case 'form-data':
-        contentType = 'multipart/' + dataType;
-        break;
-      default:
-        contentType = dataType;
-    }
-    return contentType;
-  }
-
-  /**
-   * Start an XMLHttpRequest() and return a Promise
-   *
-   * @memberOf Barba.Utils
-   * @param url
-   * @param xhrTimeout Time in millisecond after the xhr request goes in timeout
-   */
-  public static xhr(url: string, xhrTimeout = 5000, method: 'GET' | 'POST' | 'PUT' | 'DELETE' = 'GET', dataType?: string, data?: any): Promise<string | any> {
-    const deferred = this.deferred();
-    const req = new XMLHttpRequest();
-
-    req.onreadystatechange = () => {
-      if (req.readyState === 4) {
-        if (req.status === 200) {
-          if (typeof(dataType) === 'string' && (dataType === 'json' || dataType.includes('json'))) {
-            try {
-              deferred.resolve(JSON.parse(req.responseText));
-            } catch (error) {
-              // If json can't be parsed
-              return deferred.resolve(req.responseText);
-            }
-          }
-          return deferred.resolve(req.responseText);
-        } else {
-          return deferred.reject(req);
-        }
-      }
-    };
-
-    req.ontimeout = () => {
-      return deferred.reject(new Error('xhr: Timeout exceeded'));
-    };
-
-    req.open('GET', url);
-    req.timeout = xhrTimeout;
-
-    // headers
-    for (const header of this._requestHeadersEachRequest) {
-      req.setRequestHeader(header.name, header.value);
-    }
-    if (dataType) {
-      const contentType = this.parseContentType(dataType);
-      req.setRequestHeader('Content-type', contentType);
-    }
-
-    req.send(method !== 'GET' && data ? JSON.stringify(data) : data);
-
-    return deferred.promise;
-  }
-
-  public static fetch(url: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE' = 'GET', data: any = {}, dataType?: string) {
-    if (fetch) {
-      const headers: any = {};
-      // headers
-      for (const header of this._requestHeadersEachRequest) {
-        headers[header.name] = header.value;
-      }
-      if (dataType) {
-        const contentType = this.parseContentType(dataType);
-        headers['Content-Type'] = contentType;
-      }
-      return fetch(url, {
-        method: 'GET',
-        body: method !== 'GET' && data ? JSON.stringify(data) : null,
-        headers,
-      })
-      .then((response) => {
-        if (typeof(dataType) === 'string' && (dataType === 'json' || dataType.includes('json'))) {
-          return response.json();
-        }
-        return response.text();
-      });
-    }
-
-    // Fallback
-    return this.xhr(url, undefined, 'GET', dataType, data);
   }
 
   /**
@@ -708,13 +525,5 @@ export class Utils {
     }
     checkReady();
   }
-
-  /**
-   * Header name value pair to send on each request
-   */
-  protected static _requestHeadersEachRequest: {name: string, value: string}[] = [{
-    name: 'x-barba',
-    value: 'yes',
-  }];
 
 }
