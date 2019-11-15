@@ -1,5 +1,4 @@
 import { Binder, EventDispatcher } from '@ribajs/core';
-import { JQuery as $ } from '@ribajs/jquery';
 import { CollapseService } from '../services/collapse.service';
 import { Utils } from '../services/utils.service';
 
@@ -11,8 +10,7 @@ import { Utils } from '../services/utils.service';
 export const collapseOnUrlBinder: Binder<string> = {
   name: 'bs4-collapse-on-url',
   routine(el: HTMLElement, url: string) {
-    const $el = $(el);
-    const collapseService = new CollapseService($el);
+    const collapseService = new CollapseService([this.el]);
     const dispatcher = new EventDispatcher('main');
 
     const checkURL = (urlToCheck?: string) => {

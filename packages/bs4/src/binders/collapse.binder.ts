@@ -1,5 +1,4 @@
 import { Binder } from '@ribajs/core';
-import { JQuery as $ } from '@ribajs/jquery';
 import { CollapseService } from '../services/collapse.service';
 
 /**
@@ -10,28 +9,26 @@ export const collapseBinder: Binder<string> = {
   name: 'bs4-collapse',
   routine(el: HTMLElement, targetSelector: string) {
 
-    const $el = $(el);
-    const $target = $(targetSelector);
+    const targets = el.querySelectorAll(targetSelector);
 
-    const collapseService = new CollapseService($target);
+    const collapseService = new CollapseService(targets);
 
     const onStateChange = () => {
       if (collapseService.isCollapsed()) {
-        $el
-        .addClass(CollapseService.CLASSNAME.COLLAPSED)
-        .attr('aria-expanded', 'false');
+        el.classList.add(CollapseService.CLASSNAME.COLLAPSED);
+        el.setAttribute('aria-expanded', 'false');
       } else {
-        $el
-        .removeClass(CollapseService.CLASSNAME.COLLAPSED)
-        .attr('aria-expanded', 'true');
+        el.classList.remove(CollapseService.CLASSNAME.COLLAPSED);
+        el.setAttribute('aria-expanded', 'true');
       }
     };
 
-    $target.on(CollapseService.EVENT.SHOWN, onStateChange);
+    targets.forEach((target) => {
+      target.addEventListener(CollapseService.EVENT.SHOWN, onStateChange.bind(this));
+      target.addEventListener(CollapseService.EVENT.HIDDEN, onStateChange.bind(this));
+    });
 
-    $target.on(CollapseService.EVENT.HIDDEN, onStateChange);
-
-    $el.on('click', (event) => {
+    el.addEventListener('click', (event) => {
       event.preventDefault();
       collapseService.toggle();
     });

@@ -1,5 +1,4 @@
 import { Binder } from '@ribajs/core';
-import { JQuery as $ } from '@ribajs/jquery';
 import { DropdownService } from '../services/dropdown.service';
 
 /**
@@ -9,22 +8,21 @@ import { DropdownService } from '../services/dropdown.service';
 export const dropdownBinder: Binder<string> = {
   name: 'bs4-dropdown',
   routine(el: HTMLElement, option: string) {
-    const $el = $(el);
-    let $toggler: JQuery<HTMLButtonElement>;
-    if ($el.hasClass('dropdown-toggle')) {
-      $toggler = $el as JQuery<HTMLButtonElement>;
+    let toggler: HTMLButtonElement;
+    if (el.classList.contains('dropdown-toggle')) {
+      toggler = el as HTMLButtonElement;
     } else {
-      $toggler = $el.find('.dropdown-toggle') as JQuery<HTMLButtonElement>;
+      toggler = el.querySelector('.dropdown-toggle') as HTMLButtonElement;
     }
 
-    if (!$toggler) {
-      $toggler = $el as JQuery<HTMLButtonElement>;
+    if (!toggler) {
+      toggler = el as HTMLButtonElement;
     }
 
-    const dropdownService = new DropdownService($toggler[0]);
+    const dropdownService = new DropdownService(toggler);
 
-    $toggler.on('click', (event) => {
-        dropdownService.toggle();
+    toggler.addEventListener('click', (event) => {
+      dropdownService.toggle();
     });
   },
 };

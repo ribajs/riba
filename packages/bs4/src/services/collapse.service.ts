@@ -23,14 +23,14 @@ export class CollapseService {
     COLLAPSED  : 'collapsed',
   };
 
-  private targets: NodeListOf<Element>;
+  private targets: NodeListOf<Element> | Array<Element>;
 
-  constructor(targetss: NodeListOf<Element>) {
-    this.targets = targetss;
+  constructor(targets: NodeListOf<Element> | Array<Element>) {
+    this.targets = targets;
   }
 
   public show() {
-    this.targets.forEach((target) => {
+    this.targets.forEach((target: Element) => {
       target.classList.remove(CollapseService.CLASSNAME.COLLAPSE);
       target.classList.add(CollapseService.CLASSNAME.SHOW);
       target.dispatchEvent(new Event(CollapseService.EVENT.SHOWN));
@@ -38,7 +38,7 @@ export class CollapseService {
   }
 
   public hide() {
-    this.targets.forEach((target) => {
+    this.targets.forEach((target: Element) => {
       target.classList.remove(CollapseService.CLASSNAME.SHOW);
       target.classList.add(CollapseService.CLASSNAME.COLLAPSE);
       target.dispatchEvent(new Event(CollapseService.EVENT.HIDDEN));
