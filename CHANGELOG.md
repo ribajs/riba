@@ -1,5 +1,11 @@
 # Changelog
 
+## Dev
+
+### BS4
+
+- Removed JQuery from CollapseService
+
 ## 1.6.1
 
 ### Core

@@ -33,7 +33,7 @@
     "typescript": "^3.7.2",
     "autoprefixer": "^9.7.1",
     "postcss-modules": "^1.4.1",
-    "@types/jest": "^24.0.22"
+    "@types/jest": "^24.0.23"
   },
   "dependencies": {
     "@ribajs/core": "^1.6.1",
