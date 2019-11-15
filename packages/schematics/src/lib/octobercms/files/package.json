@@ -1,0 +1,78 @@
+{
+  "name": "hypnose-october-theme",
+  "version": "1.6.1",
+  "description": "Hypnose OctoberCMS Theme",
+  "main": "assets/ts/main.ts",
+  "typings": "assets/ts/types",
+  "scripts": {
+    "webpack": "webpack --env.production",
+    "webpack:dev": "webpack --env.development",
+    "test:ts": "tslint --fix -c tslint.json 'src/**/*.ts' && tsc --noEmit",
+    "test": "npm run test:ts",
+    "build": "concurrently \"npm:build:prod:*\"",
+    "build:prod:ts": "npm run test:ts && npm run webpack",
+    "build:dev": "concurrently \"npm:build:dev:*\"",
+    "build:dev:ts": "npm run test:ts && npm run webpack:dev",
+    "watch": "concurrently \"npm:watch:*\"",
+    "watch:ts": "npm run webpack:dev -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ribajs/doc"
+  },
+  "keywords": [
+    "Bootstrap",
+    "Bootstrap4",
+    "OctoberCMS",
+    "Art+Code Studio",
+    "Riba",
+    "Rivets",
+    "tinybind",
+    "Hypnose",
+    "hypnosis"
+  ],
+  "author": "Art+Code Studio <hi@artandcode.studio>",
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/ArtCodeStudio/hypnose-october-theme/blob/master/README.md"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/ArtCodeStudio/hypnose-october-theme/issues"
+  },
+  "url": "https://github.com/ArtCodeStudio/hypnose-october-theme",
+  "homepage": "https://hypnose.jumplink.eu/",
+  "devDependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@babel/plugin-proposal-class-properties": "^7.7.0",
+    "@babel/plugin-proposal-export-default-from": "^7.5.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/plugin-syntax-export-default-from": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-typescript": "^7.7.2",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-array-includes": "^2.0.3",
+    "concurrently": "^5.0.0",
+    "html-loader": "^0.5.5",
+    "inspectpack": "^4.2.2",
+    "pug-loader": "^2.4.0",
+    "terser-webpack-plugin": "^2.2.1",
+    "ts-loader": "^6.2.1",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "@babel/runtime-corejs2": "^7.7.2",
+    "@ribajs/bs4": "^1.6.1",
+    "@ribajs/core": "^1.6.1",
+    "@ribajs/iconset": "^1.6.1",
+    "@ribajs/router": "^1.6.1",
+    "bootstrap": "^4.3.1"
+  }
+}

@@ -1,0 +1,54 @@
+[viewBag]
+==
+{% if namespace is not defined or namespace is empty %}
+    {% set namespace = page.id | lower | replace({'/':'_'}) %}
+{% endif %}
+{% if namespace is not defined or namespace is empty %}
+    {% set namespace = this.page.id | lower | replace({'/':'_'}) %}
+{% endif %}
+{% if namespace is not defined or namespace is empty %}
+    {% set namespace = str_studly(this.page.title) | lower | replace({'/':'_'}) %}
+{% endif %}
+
+data-namespace="{{ namespace }}"
+
+id="{{ namespace }}"
+
+{% if this.layout %}
+    data-layout="true" 
+    data-layout-id="{{ this.layout.id }}"
+{% endif %}
+
+
+{% if this.page.id %}
+    data-page="true" 
+    data-page-id="{{ this.page.id }}"
+    data-page-file-name="{{ this.page.fileName }}"
+    data-page-url="{{ this.page.id | page }}"
+{% endif %}
+
+{% if page %}
+    data-static-page="true" 
+    data-static-page-title="{{ str_studly(page.title) }}"
+    data-static-page-id="{{ page.id }}"
+    data-static-page-url="{{ page.id | staticPage }}"
+{% endif %}
+
+{% if category %}
+    data-blog-category="true" 
+    data-blog-category-name="{{ str_studly(category.name) }}"
+    data-blog-category-id="{{ str_studly(category.id) }}"
+    data-blog-category-slug="{{ category.slug }}"
+{% endif %} 
+
+{% if currentCategorySlug %}
+    data-blog-current-category-slug="{{ str_studly(currentCategorySlug) }}"
+{% endif %}
+
+{% if post %}
+    data-blog-post="true" 
+    data-blog-post-slug="{{ str_studly(post.slug) }}"
+    data-blog-post-title="{{ str_studly(post.title) }}"
+    data-blog-post-id="{{ str_studly(post.id) }}"  
+    data-blog-post-categories="{% for category in post.categories %}{{ category.slug }}{% if not loop.last %},{% endif %}{% endfor %}"
+{% endif %}

@@ -4,5 +4,5 @@ export { Bs4ScrollspyComponent } from './bs4-scrollspy/bs4-scrollspy.component';
 export { Bs4SidebarComponent } from './bs4-sidebar/bs4-sidebar.component';
 export { Bs4ToggleButtonComponent } from './bs4-toggle-button/bs4-toggle-button.component';
 export { DropdownComponent } from './dropdown/dropdown.component';
-export { NavbarComponent } from './navbar/navbar.component';
+export { Bs4NavbarComponent } from './bs4-navbar/bs4-navbar.component';
 export { TabsComponent } from './tabs/tabs.component';
