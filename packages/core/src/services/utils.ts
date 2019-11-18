@@ -324,7 +324,8 @@ export class Utils {
   public static onRoute = (checkUrl?: string) => {
     if (checkUrl) {
       const pathname = Utils.getLocation().pathname;
-      return checkUrl === pathname;
+      const checkPathname = Utils.getLocation(checkUrl).pathname;
+      return pathname === checkPathname;
     }
     return false;
   }
@@ -335,7 +336,8 @@ export class Utils {
   public static onParentRoute = (checkUrl?: string) => {
     if (checkUrl) {
       const pathname = Utils.getLocation().pathname;
-      return pathname.startsWith(checkUrl);
+      const checkPathname = Utils.getLocation(checkUrl).pathname;
+      return pathname.startsWith(checkPathname);
     }
     return false;
   }

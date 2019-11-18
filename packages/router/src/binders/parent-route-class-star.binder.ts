@@ -10,7 +10,7 @@ export const parentRouteClassStarBinder: Binder<string> = {
   },
 
   /**
-   * Tests the url with the current location, if the url is equal to the current location this element is active
+   * Tests the url with the current location, if the current location starts with the url this element gets the `[classname]` class
    * @param el Binder HTML Element
    * @param url Url to compare with the current location
    */
