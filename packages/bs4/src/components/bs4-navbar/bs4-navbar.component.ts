@@ -15,7 +15,7 @@ export class Bs4NavbarComponent extends Component {
 
   protected collapse?: NodeListOf<Element>;
   protected collapseService?: CollapseService;
-  protected router: EventDispatcher;
+  protected router?: EventDispatcher;
 
   static get observedAttributes() {
     return ['collapse-selector'];
@@ -23,15 +23,6 @@ export class Bs4NavbarComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-
-    this.router = new EventDispatcher('main');
-    this.router.on('newPageReady', this.onNewPageReady.bind(this));
-
-    this.setCollapseElement();
-
-    this.onStateChange();
-
-    this.init(Bs4NavbarComponent.observedAttributes);
   }
 
   public toggle(context?: Binder<any>, event?: Event) {
@@ -62,6 +53,18 @@ export class Bs4NavbarComponent extends Component {
       event.preventDefault();
       event.stopPropagation();
     }
+  }
+
+  protected connectedCallback() {
+    super.connectedCallback();
+    this.router = new EventDispatcher('main');
+    this.router.on('newPageReady', this.onNewPageReady.bind(this));
+
+    this.setCollapseElement();
+
+    this.onStateChange();
+
+    this.init(Bs4NavbarComponent.observedAttributes);
   }
 
   protected setCollapseElement() {
@@ -99,7 +102,9 @@ export class Bs4NavbarComponent extends Component {
   protected disconnectedCallback() {
     super.disconnectedCallback();
     this.removeCollapseEventListeners();
-    this.router.off('newPageReady', this.onNewPageReady);
+    if (this.router) {
+      this.router.off('newPageReady', this.onNewPageReady);
+    }
   }
 
   protected onStateChange() {
