@@ -8,8 +8,6 @@ bs4-sidebar {
   // left: 0;
   z-index: $zindex-fixed + 1;
   transition: all .2s cubic-bezier(.7,0,.3,1);
-  @extend .bg-dark;
-  color: $white;
 
   &[position="right"] {
     right: 0;
