@@ -1,8 +1,7 @@
 import { Component, Binder } from '@ribajs/core';
-import { JQuery as $ } from '@ribajs/jquery';
 import { DropdownService } from '../../services/dropdown.service';
 
-export class DropdownComponent extends Component {
+export class Bs4DropdownComponent extends Component {
 
   public static tagName: string = 'bs4-dropdown';
 
@@ -18,9 +17,8 @@ export class DropdownComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    const $el = $(this.el);
-    this.dropdownService = new DropdownService($el.find('.dropdown-toggle')[0] as HTMLButtonElement);
-    this.init(DropdownComponent.observedAttributes);
+    this.dropdownService = new DropdownService(this.el.querySelector('.dropdown-toggle') as HTMLButtonElement | HTMLAnchorElement);
+    this.init(Bs4DropdownComponent.observedAttributes);
   }
 
   public toggle(context: Binder<any>, event: Event) {

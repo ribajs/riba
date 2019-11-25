@@ -1,6 +1,4 @@
 import Popper from 'popper.js'; // /dist/umd/popper
-import { JQuery as $ } from '@ribajs/jquery';
-
 import { Utils } from './utils.service';
 /**
  * --------------------------------------------------------------------------
@@ -110,109 +108,50 @@ export class DropdownService {
   // Static
 
   public static closeAll() {
-    const $menus = $('.dropdown-menu.show');
-    $menus.each((index, menu) => {
-      const $menu = $(menu);
-      const $dropdown = $menu.closest('dropdown-menu.show');
-      this.close($menu[0], $menu, $dropdown);
+    console.debug('closeAll');
+    const buttons = document.querySelectorAll(SELECTOR.DATA_TOGGLE);
+    buttons.forEach((button, index) => {
+      if (button.parentElement) {
+        const menu = button.parentElement.querySelector(SELECTOR.MENU + '.' + CLASSNAME.SHOW) || undefined;
+        if (menu) {
+          return this.close(button, menu, button);
+        }
+      }
+      this.close(button, button);
     });
   }
 
-  public static close(triggerCloseElement: Element, $menu: JQuery<Element>, $dropdown?: JQuery<Element>) {
+  public static close(triggerCloseElement: Element, menu: Element, dropdown?: Element) {
     const relatedTarget = {
       relatedTarget: triggerCloseElement,
     };
 
-    const $parent = DropdownService._getParentFromElement(triggerCloseElement);
-
-    if ($menu && $menu.hasClass(CLASSNAME.SHOW)) {
-      $menu.removeClass(CLASSNAME.SHOW);
+    if (menu && menu.classList.contains(CLASSNAME.SHOW)) {
+      menu.classList.remove(CLASSNAME.SHOW);
     }
 
-    if ($dropdown && $dropdown.hasClass(CLASSNAME.SHOW)) {
-      $dropdown.removeClass(CLASSNAME.SHOW)
-      .removeClass(CLASSNAME.SHOW)
-      .trigger($.Event(EVENT.HIDDEN, relatedTarget));
+    if (dropdown && dropdown.classList.contains(CLASSNAME.SHOW)) {
+      dropdown.classList.remove(CLASSNAME.SHOW);
+      dropdown.dispatchEvent(new CustomEvent(EVENT.HIDDEN, { detail: relatedTarget}));
     }
 
-    if ($parent.hasClass(CLASSNAME.SHOW)) {
-      $parent
-      .removeClass(CLASSNAME.SHOW)
-      .trigger($.Event(EVENT.HIDDEN, relatedTarget));
+    const parent = DropdownService._getParentFromElement(triggerCloseElement);
+
+    if (parent && parent.classList.contains(CLASSNAME.SHOW)) {
+      parent.classList.remove(CLASSNAME.SHOW);
+      parent.dispatchEvent(new CustomEvent(EVENT.HIDDEN, { detail: relatedTarget}));
     }
   }
 
-  public static _clearMenus(event?: JQuery.Event) {
-    if (event && (event.which === RIGHT_MOUSE_BUTTON_WHICH ||
-      event.type === 'keyup' && event.which !== TAB_KEYCODE)) {
-      return;
-    }
-
-    const toggles = [].slice.call($(SELECTOR.DATA_TOGGLE).get()) as Element[];
-
-    $(SELECTOR.DATA_TOGGLE).each((i, element) => {
-    // for (let i = 0, len = toggles.length; i < len; i++) {
-      const parent = DropdownService._getParentFromElement(element);
-      const context = $(toggles[i]).data(DATA_KEY);
-      // console.warn('_clearMenus parent', parent, context);
-      const relatedTarget: any = {
-        relatedTarget: toggles[i],
-      };
-
-      if (event && event.type === 'click') {
-        relatedTarget.clickEvent = event;
-      }
-
-      if (!context) {
-        // continue;
-        return;
-      }
-
-      const dropdownMenu = parent.find(SELECTOR.MENU);
-      if (!$(parent).hasClass(CLASSNAME.SHOW)) {
-        // continue;
-        return;
-      }
-
-      if (event && (event.type === 'click' &&
-          /input|textarea/i.test(((event as unknown as Event).target as Element).tagName) || event.type === 'keyup' && event.which === TAB_KEYCODE) &&
-          $.contains(parent.get(0), (event as unknown as Event).target as Element)) {
-        // continue;
-        return;
-      }
-
-      const hideEvent = $.Event(EVENT.HIDE, relatedTarget);
-      $(parent).trigger(hideEvent);
-      if (hideEvent.isDefaultPrevented()) {
-        // continue;
-        return;
-      }
-
-      // If this is a touch-enabled device we remove the extra
-      // empty mouseover listeners we added for iOS support
-      if (document.documentElement && 'ontouchstart' in document.documentElement) {
-        $(document.body).children().off('mouseover', 'null', $.noop);
-      }
-
-      toggles[i].setAttribute('aria-expanded', 'false');
-
-      dropdownMenu.removeClass(CLASSNAME.SHOW);
-      parent
-        .removeClass(CLASSNAME.SHOW)
-        .trigger($.Event(EVENT.HIDDEN, relatedTarget));
-    });
+  public static _clearMenus(event?: MouseEvent) {
+    return this.closeAll();
   }
 
   public static _getParentFromElement(element: Element) {
-    return $(element).parent();
-    // let parent;
-    // const selector = Utils.getSelectorFromElement(element);
-
-    // if (selector) {
-    //   parent = document.querySelector(selector);
-    // }
-
-    // return parent || element.parentNode;
+    if (!element.parentElement) {
+      throw new Error('Parent element not found!');
+    }
+    return element.parentElement;
   }
 
   private _element: HTMLButtonElement | HTMLAnchorElement;
@@ -221,22 +160,19 @@ export class DropdownService {
   private _menu: Element;
   private _inNavbar: boolean;
 
-  constructor(element: HTMLButtonElement | HTMLAnchorElement, config?: any) {
-    this._element  = element;
+  constructor(elements: HTMLButtonElement | HTMLAnchorElement, config?: any) {
+    this._element  = elements;
     this._popper   = null;
     this._config   = this._getConfig(config);
     this._menu     = this._getMenuElement();
     this._inNavbar = this._detectNavbar();
-
-    $(this._element).data(DATA_KEY, this._config);
-
     this.clouseOnClickOutsite(DropdownService._getParentFromElement(this._element));
   }
 
   // Public
 
   public close() {
-    return DropdownService.close(this._element, $(this._menu));
+    return DropdownService.close(this._element, this._menu);
   }
 
   public show() {
@@ -244,26 +180,25 @@ export class DropdownService {
       relatedTarget: this._element,
     };
 
-    const $parent = DropdownService._getParentFromElement(this._element);
+    const parent = DropdownService._getParentFromElement(this._element);
 
-    if (!$(this._menu).hasClass(CLASSNAME.SHOW)) {
-      $(this._menu).addClass(CLASSNAME.SHOW);
+    if (!this._menu.classList.contains(CLASSNAME.SHOW)) {
+      this._menu.classList.add(CLASSNAME.SHOW);
     }
 
-    if (!$parent.hasClass(CLASSNAME.SHOW)) {
-      $parent
-      .addClass(CLASSNAME.SHOW)
-      .trigger($.Event(EVENT.SHOWN, relatedTarget));
+    if (parent && !parent.classList.contains(CLASSNAME.SHOW)) {
+      parent.classList.add(CLASSNAME.SHOW);
+      parent.dispatchEvent(new CustomEvent(EVENT.SHOWN, {detail: relatedTarget}));
     }
   }
 
   public toggle() {
-    if ((this._element as HTMLButtonElement).disabled || $(this._element).hasClass(CLASSNAME.DISABLED)) {
+    if ((this._element as HTMLButtonElement).disabled || this._element.classList.contains(CLASSNAME.DISABLED)) {
       return;
     }
 
     const parent   = DropdownService._getParentFromElement(this._element);
-    const isActive = $(this._menu).hasClass(CLASSNAME.SHOW);
+    const isActive = this._menu.classList.contains(CLASSNAME.SHOW);
 
     DropdownService._clearMenus();
 
@@ -275,12 +210,13 @@ export class DropdownService {
     const relatedTarget = {
       relatedTarget: this._element,
     };
-    const showEvent = $.Event(EVENT.SHOW, relatedTarget);
+    const showEvent = new CustomEvent(EVENT.SHOW, {detail: relatedTarget});
 
-    $(parent).trigger(showEvent);
-
-    if (showEvent.isDefaultPrevented()) {
-      return;
+    if (parent) {
+      parent.dispatchEvent(showEvent);
+      if (showEvent.defaultPrevented) {
+        return;
+      }
     }
 
     this.clouseOnClickOutsite(DropdownService._getParentFromElement(this._element));
@@ -298,7 +234,7 @@ export class DropdownService {
       let referenceElement = this._element as HTMLElement;
 
       if (this._config.reference === 'parent') {
-        referenceElement = parent.get(0) as HTMLElement;
+        referenceElement = parent as HTMLElement;
       } else if (Utils.isElement(this._config.reference)) {
         referenceElement = this._config.reference;
 
@@ -311,19 +247,10 @@ export class DropdownService {
       // If boundary is not `scrollParent`, then set position to `static`
       // to allow the menu to "escape" the scroll parent's boundaries
       // https://github.com/twbs/bootstrap/issues/24251
-      if (this._config.boundary !== 'scrollParent') {
-        $(parent).addClass(CLASSNAME.POSITION_STATIC);
+      if (parent && this._config.boundary !== 'scrollParent') {
+        parent.classList.add(CLASSNAME.POSITION_STATIC);
       }
       this._popper = new Popper(referenceElement, this._menu as HTMLElement, this._getPopperConfig());
-    }
-
-    // If this is a touch-enabled device we add extra
-    // empty mouseover listeners to the body's immediate children;
-    // only needed because of broken event delegation on iOS
-    // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
-    if (document.documentElement && 'ontouchstart' in document.documentElement &&
-        $(parent).closest(SELECTOR.NAVBAR_NAV).length === 0) {
-      $(document.body).children().on('mouseover', null, $.noop);
     }
 
     this.clouseOnClickOutsite(DropdownService._getParentFromElement(this._element));
@@ -331,17 +258,18 @@ export class DropdownService {
     this._element.focus();
     this._element.setAttribute('aria-expanded', 'true');
 
-    $(this._menu).toggleClass(CLASSNAME.SHOW);
-    $(parent)
-      .toggleClass(CLASSNAME.SHOW)
-      .trigger($.Event(EVENT.SHOWN, relatedTarget));
+    if (this._menu.classList.contains(CLASSNAME.SHOW)) {
+      this._menu.classList.remove(CLASSNAME.SHOW);
+    } else {
+      this._menu.classList.add(CLASSNAME.SHOW);
+    }
+    this._menu.dispatchEvent(new CustomEvent(EVENT.SHOWN, {detail: relatedTarget}));
   }
 
   public dispose() {
-    $.removeData(this._element, DATA_KEY);
-    $(this._element).off(EVENT_KEY);
-    delete this._element; // = null;
-    delete this._menu; // = null;
+    this._element.removeAttribute('data-' + DATA_KEY);
+    delete this._element;
+    delete this._menu;
     if (this._popper !== null) {
       this._popper.destroy();
       this._popper = null;
@@ -361,9 +289,10 @@ export class DropdownService {
    * @see https://stackoverflow.com/questions/152975/how-do-i-detect-a-click-outside-an-element
    * @param selector
    */
-  private clouseOnClickOutsite($element: JQuery<Element>) {
+  private clouseOnClickOutsite(element: Element) {
     const outsideClickListener = (event: Event) => {
-      if (!$(event.target as any).closest($element.get(0)).length) {
+      const target = event.target || event.srcElement || event.currentTarget;
+      if (target && !element.contains(target as Node)) {
         this.close();
         removeClickListener();
       }
@@ -379,7 +308,7 @@ export class DropdownService {
   private _getConfig(config?: any) {
     config = {
       ...DropdownService.Default,
-      ...$(this._element).data(),
+      ...this._element.dataset,
       ...config,
     };
 
@@ -396,34 +325,42 @@ export class DropdownService {
     if (!this._menu) {
       const parent = DropdownService._getParentFromElement(this._element);
       if (parent) {
-        this._menu = parent.find(SELECTOR.MENU).get(0);
+        const menu = parent.querySelector(SELECTOR.MENU);
+        if (!menu) {
+          throw new Error('Menu not found!');
+        }
+        this._menu = menu;
       }
     }
     return this._menu;
   }
 
   private _getPlacement() {
-    const $parentDropdown = $(this._element.parentNode as any);
+    const parentDropdown = this._element.parentElement;
     let placement = ATTACHMENTMAP.BOTTOM;
 
+    if (!parentDropdown) {
+      throw new Error('Parent of element not found!');
+    }
+
     // Handle dropup
-    if ($parentDropdown.hasClass(CLASSNAME.DROPUP)) {
+    if (parentDropdown.classList.contains(CLASSNAME.DROPUP)) {
       placement = ATTACHMENTMAP.TOP;
-      if ($(this._menu).hasClass(CLASSNAME.MENURIGHT)) {
+      if (this._menu.classList.contains(CLASSNAME.MENURIGHT)) {
         placement = ATTACHMENTMAP.TOPEND;
       }
-    } else if ($parentDropdown.hasClass(CLASSNAME.DROPRIGHT)) {
+    } else if (parentDropdown.classList.contains(CLASSNAME.DROPRIGHT)) {
       placement = ATTACHMENTMAP.RIGHT;
-    } else if ($parentDropdown.hasClass(CLASSNAME.DROPLEFT)) {
+    } else if (parentDropdown.classList.contains(CLASSNAME.DROPLEFT)) {
       placement = ATTACHMENTMAP.LEFT;
-    } else if ($(this._menu).hasClass(CLASSNAME.MENURIGHT)) {
+    } else if (this._menu.classList.contains(CLASSNAME.MENURIGHT)) {
       placement = ATTACHMENTMAP.BOTTOMEND;
     }
     return placement;
   }
 
   private _detectNavbar() {
-    return $(this._element).closest('.navbar').length > 0;
+    return this._element.closest && this._element.closest('.navbar') !== null;
   }
 
   private _getPopperConfig() {

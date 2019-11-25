@@ -1,5 +1,5 @@
 import { Component, Binding, handleizeFormatter } from '@ribajs/core';
-import template from './tabs.component.html';
+import template from './bs4-tabs.component.html';
 
 export interface Tab {
   title: string;
@@ -11,11 +11,11 @@ export interface Tab {
 
 export interface Scope {
   tabs: Tab[];
-  activate: TabsComponent['activate'];
+  activate: Bs4TabsComponent['activate'];
   optionTabsAutoHeight: boolean;
 }
 
-export class TabsComponent extends Component {
+export class Bs4TabsComponent extends Component {
 
   public static tagName: string = 'bs4-tabs';
 
@@ -61,7 +61,7 @@ export class TabsComponent extends Component {
     this.addTabsByTemplate();
     this.initTabs();
     this.activateFirstTab();
-    this.init(TabsComponent.observedAttributes);
+    this.init(Bs4TabsComponent.observedAttributes);
   }
 
   /**
