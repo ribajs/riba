@@ -1,6 +1,7 @@
 bs4-sidebar {
   display: block;
-  height: calc(100vh);
+  height: 100vh;
+  max-height: 100vh;
   position: fixed;
   width: 250px;
   top: 0;

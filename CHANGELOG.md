@@ -2,9 +2,17 @@
 
 ## Dev
 
+- Upgrade dependencies
+
 ### BS4
 
-- Removed JQuery from CollapseService
+- Removed jQuery dependency
+- Add Bs4 prefix to components and binders
+- Some bugfixes
+
+### CLI
+
+- Fix issue #4
 
 ## 1.6.1
 
