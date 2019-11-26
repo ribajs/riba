@@ -1,6 +1,6 @@
 {
   "name": "bs4-tabs-tpl",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "description": "",
   "main": "index.html",
   "scripts": {
@@ -36,7 +36,7 @@
     "postcss-modules": "^1.4.1"
   },
   "dependencies": {
-    "@ribajs/bs4": "^1.6.1",
-    "@ribajs/core": "^1.6.1"
+    "@ribajs/bs4": "^1.7.0",
+    "@ribajs/core": "^1.7.0"
   }
 }

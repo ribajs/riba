@@ -1,6 +1,6 @@
 # Changelog
 
-## Dev
+## 1.7.0
 
 - Upgrade dependencies
 

@@ -1,6 +1,6 @@
 {
   "name": "i18n-static",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "description": "",
   "main": "index.html",
   "scripts": {
@@ -36,7 +36,7 @@
     "@types/jest": "^24.0.23"
   },
   "dependencies": {
-    "@ribajs/core": "^1.6.1",
-    "@ribajs/i18n": "^1.6.1"
+    "@ribajs/core": "^1.7.0",
+    "@ribajs/i18n": "^1.7.0"
   }
 }

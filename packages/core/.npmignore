@@ -1,5 +1,5 @@
-/dist
-/spec
+/dist/
+/spec/
 /.jshintrc
 /.npmignore
 /babel.config.js
@@ -7,3 +7,8 @@
 /tslint.json
 /webpack.config.js
 /webpack.dev.config.js
+# Include src and types
+!/src/
+!/src/*
+!/src/types/
+!/src/types/*

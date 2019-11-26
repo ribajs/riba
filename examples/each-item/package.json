@@ -1,6 +1,6 @@
 {
   "name": "each-star-example",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "description": "",
   "main": "src/main.ts",
   "scripts": {
@@ -30,6 +30,6 @@
     "postcss-modules": "^1.4.1"
   },
   "dependencies": {
-    "@ribajs/core": "^1.6.1"
+    "@ribajs/core": "^1.7.0"
   }
 }

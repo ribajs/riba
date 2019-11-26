@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/schematics",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "description": "Riba schematics for the cli",
   "main": "index.js",
   "publishConfig": {
@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "@types/jest": "24.0.23",
-    "@types/node": "12.12.12",
+    "@types/node": "12.12.14",
     "@types/debug": "^4.1.5",
     "tslint": "5.20.1"
   },
