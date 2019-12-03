@@ -175,7 +175,7 @@ class Pjax {
   /**
    * Creates an singleton instance of Pjax.
    */
-  constructor(id: string, wrapper?: HTMLElement, containerSelector = '[data-namespace]', listenAllLinks: boolean = false, listenPopstate: boolean = true, transition: Transition = new HideShowTransition(), parseTitle: boolean = true, changeBrowserUrl: boolean = true) {
+  constructor(id: string, wrapper?: HTMLElement, containerSelector = '[data-namespace]', listenAllLinks: boolean = false, listenPopstate: boolean = true, transition: Transition = new HideShowTransition(), parseTitle: boolean = true, changeBrowserUrl: boolean = true, useTemplate: boolean = true) {
     this.viewId = id;
 
     let instance = this as Pjax;
@@ -198,10 +198,11 @@ class Pjax {
     instance.listenAllLinks = Utils.isBoolean(instance.listenAllLinks) ? instance.listenAllLinks : listenAllLinks;
     instance.listenPopstate = Utils.isBoolean(instance.listenPopstate) ? instance.listenPopstate : listenPopstate;
     instance.parseTitle = Utils.isBoolean(instance.parseTitle) ? instance.parseTitle : parseTitle;
+    instance.parseTitle = Utils.isBoolean(instance.parseTitle) ? instance.parseTitle : parseTitle;
     instance.changeBrowserUrl = Utils.isBoolean(instance.changeBrowserUrl) ? instance.changeBrowserUrl : changeBrowserUrl;
 
     if (instance.wrapper) {
-      instance.dom = instance.dom || new Dom(instance.wrapper, containerSelector, this.parseTitle);
+      instance.dom = instance.dom || new Dom(instance.wrapper, containerSelector, this.parseTitle, useTemplate);
       instance.wrapper.setAttribute('aria-live', 'polite');
     }
 
@@ -263,12 +264,12 @@ class Pjax {
  /**
   * Load an url, will start an fetch request or load from the cache
   */
-  public load(url: string): Promise<HTMLElement> {
+  public async load(url: string): Promise<HTMLElement> {
     let fetch;
 
     fetch = Pjax.cache.get(url);
 
-    if (!fetch) {
+    if (!fetch || !fetch.then) {
       fetch = HttpService.get(url, undefined, 'html');
       Pjax.cache.set(url, fetch);
     }
@@ -318,6 +319,7 @@ class Pjax {
   * Force the browser to go to a certain url
   */
  protected forceGoTo(url: Location | string) {
+   console.debug('forceGoTo', url);
    if (url && (url as Location).href) {
     window.location = url as Location;
    }
@@ -358,10 +360,6 @@ class Pjax {
   * Method called after a 'popstate' or from .goTo()
   */
  protected onStateChange(event?: Event, newUrl: string = this.getCurrentUrl()) {
-
-    if (this.transitionProgress) {
-      this.forceGoTo(newUrl);
-    }
 
     if (this.changeBrowserUrl && this.history.currentStatus().url === newUrl) {
       return false;

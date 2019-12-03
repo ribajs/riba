@@ -23,30 +23,43 @@ class Dom {
    */
   public currentHTML?: string;
 
-  private _wrapper: HTMLElement;
+  protected _wrapper: HTMLElement;
 
-  private parseTitle: boolean;
+  protected parseTitle: boolean;
 
-  constructor(wrapper: HTMLElement, containerSelector = '[data-namespace]', parseTitle: boolean) {
+  protected useTemplate: boolean;
+
+  constructor(wrapper: HTMLElement, containerSelector = '[data-namespace]', parseTitle: boolean, useTemplate: boolean) {
     this._wrapper = wrapper;
     this.containerSelector = containerSelector;
     this.parseTitle = parseTitle;
+    this.useTemplate = useTemplate;
   }
 
   /**
-   * Parse the responseText obtained from the xhr call
+   * Parse the responseText obtained from the fetch call
    * @see https://stackoverflow.com/a/41038197/1465919
    */
   public parseResponse(responseText: string): HTMLElement {
     this.currentHTML = responseText;
 
-    const wrapper = document.createElement('div') as HTMLElement;
+    const wrapper = document.createElement(this.useTemplate ? 'template' : 'div') as HTMLElement;
     wrapper.innerHTML = responseText;
 
     if (this.parseTitle === true) {
-      const titleElement = wrapper.querySelector('title');
-      if (titleElement && titleElement.textContent) {
-        document.title = titleElement.textContent;
+      // TODO what has more advantages? What is faster? 
+      if (this.useTemplate) {
+        // We need to parse the title by self on `template` wrapper
+        const title = this.findHTMLTagContent('title', wrapper.innerHTML);
+        if (title) {
+          document.title = title;
+        }
+      } else {
+        // we can use the quey selector on `div` wrapper
+        const titleElement = wrapper.querySelector('title');
+        if (titleElement && titleElement.textContent) {
+          document.title = titleElement.textContent;
+        }
       }
     }
     return this.getContainer(wrapper);
@@ -128,6 +141,24 @@ class Dom {
     }
 
     return result;
+  }
+
+  protected findHTMLTagContent(tagName: string, html: string) {
+    const matches = this.findHTMLTags(tagName, html);
+    if (matches && matches.length > 0) {
+      return matches[0].replace(`<${tagName}>`, '').replace(`</${tagName}>`, '').replace('&amp;', '&').replace('&lt;', '<').replace('&gt;', '>').trim();
+    }
+    return null;
+  }
+
+  /**
+   * TODO move to utils?
+   * @param tagName html tag name, e.g. `title`
+   * @param html The html string in which you are searching the tag
+   */
+  protected findHTMLTags(tagName: string, html: string) {
+    const regex = new RegExp(`<\s*${tagName}[^>]*>((.|\n)*?)<\s*\/\s*${tagName}>`, 'g');
+    return html.match(regex);
   }
 }
 

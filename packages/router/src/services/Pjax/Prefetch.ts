@@ -1,5 +1,5 @@
 import { HttpService } from '@ribajs/core';
-import { Pjax } from '.';
+import { Pjax } from './index';
 
 /**
  * Prefetch
@@ -73,18 +73,20 @@ class Prefetch {
 
     if (!url) {
       console.warn(`Url is not defined, you can't cache the link without the url. Please make shure your element has the href attribute or pass the url directly to this function.`);
+      return;
     }
 
-    // Check if the link is elegible for Pjax
-    if (url && Pjax.preventCheck(evt, el, url) && !Pjax.cache.get(url)) {
-      const xhr = HttpService.get(url, undefined, 'html');
-      Pjax.cache.set(url, xhr);
+    const preventCheck = Pjax.preventCheck(evt, el, url);
+    let fetch = Pjax.cache.get(url);
+
+    // Check if the link is eligible for Pjax
+    if (url && preventCheck && !fetch) {
+      fetch = HttpService.get(url, undefined, 'html');
+      Pjax.cache.set(url, fetch);
     } else {
-      if (url) {
-        // if (!Pjax.preventCheck(evt, el, url)) {
-        //   console.warn('preventCheck failed', Pjax.preventCheck(evt, el, url));
-        // }
-      }
+      // if (!preventCheck) {
+      //   console.warn('preventCheck failed: ' + url, preventCheck);
+      // }
     }
   }
 }
