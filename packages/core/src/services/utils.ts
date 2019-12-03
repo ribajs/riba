@@ -384,6 +384,9 @@ export class Utils {
    * @see https://stackoverflow.com/a/19709846/1465919
    */
   public static isAbsoluteUrl(url: string) {
+    if (!url) {
+      return false;
+    }
     const isProtokoll = new RegExp('^(?:[a-z]+:)?//', 'i');
     const isAbsolute = isProtokoll.test(url) || url.startsWith('mailto:') || url.startsWith('tel:') || url.startsWith('fax:');
     return isAbsolute;

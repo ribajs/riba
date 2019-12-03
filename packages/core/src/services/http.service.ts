@@ -24,7 +24,7 @@ export class HttpService {
    * @param data A plain object or string that is sent to the server with the request.
    * @see https://api.jquery.com/jquery.getjson/
    */
-  public static getJSON(url: string, data?: any) {
+  public static async getJSON(url: string, data?: any) {
     return this.fetch(url, 'GET', data, 'json');
   }
 
@@ -35,15 +35,15 @@ export class HttpService {
    * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html).
    * @see https://api.jquery.com/jquery.post/
    */
-  public static post(url: string, data?: any, dataType?: string) {
+  public static async post(url: string, data?: any, dataType?: string) {
     return this.fetch(url, 'POST', data, dataType);
   }
 
-  public static delete(url: string, data?: any, dataType?: string) {
+  public static async delete(url: string, data?: any, dataType?: string) {
     return this.fetch(url, 'DELETE', data, dataType);
   }
 
-  public static put(url: string, data?: any, dataType?: string) {
+  public static async put(url: string, data?: any, dataType?: string) {
     return this.fetch(url, 'PUT', data, dataType);
   }
 
@@ -54,7 +54,7 @@ export class HttpService {
    * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html).
    * @see https://api.jquery.com/jquery.get/
    */
-  public static get(url: string, data?: any, dataType?: string) {
+  public static async get(url: string, data?: any, dataType?: string) {
     return this.fetch(url, 'GET', data, dataType);
   }
 
