@@ -20,9 +20,9 @@ interface Scope {
    */
   id?: string;
   /**
-   * The width of the sidebar
+   * The width of the sidebar with unit
    */
-  width: number;
+  width: string;
 
   // Options
   /**
@@ -37,6 +37,10 @@ interface Scope {
    * Auto hide the sidebar if the viewport width is slimmer than this value
    */
   autoHideOnSlimmerThan: number;
+  /**
+   * Watch the routers `newPageReady` event to update the sidebar state, e.g. hide on slime than after route changes
+   */
+  watchNewPageReadyEvent: boolean;
   /**
    * You can force to hide the sidebar on corresponding URL pathames e.g. you can hide the sidebar on home with `['/']`.
    */
@@ -69,12 +73,23 @@ export class Bs4SidebarComponent extends Component {
 
   public static tagName: string = 'bs4-sidebar';
 
-  protected style: CSSStyleDeclaration;
+  protected style?: CSSStyleDeclaration;
 
   protected autobind = true;
 
   static get observedAttributes() {
-    return ['id', 'container-selector', 'position', 'width', 'auto-show-in-wider-than', 'auto-hide-on-slimmer-than', 'force-hide-on-location-pathnames', 'force-show-on-location-pathnames', 'overlay-on-slimmer-than'];
+    return [
+      'id',
+      'container-selector',
+      'position',
+      'width',
+      'auto-show-on-wider-than',
+      'auto-hide-on-slimmer-than',
+      'force-hide-on-location-pathnames',
+      'force-show-on-location-pathnames',
+      'overlay-on-slimmer-than',
+      'watch-new-page-ready-event',
+    ];
   }
 
   protected toggleButtonEvents?: EventDispatcher;
@@ -87,12 +102,13 @@ export class Bs4SidebarComponent extends Component {
     containerSelector: undefined,
     state: 'hidden',
     id: undefined,
-    width: 250,
+    width: '250px',
 
     // Options
     position: 'left',
     autoShowOnWiderThan: 1199,
     autoHideOnSlimmerThan: 1200,
+    watchNewPageReadyEvent: true,
     forceHideOnLocationPathnames: [],
     forceShowOnLocationPathnames: [],
     overlayOnSlimmerThan: 1200,
@@ -105,9 +121,6 @@ export class Bs4SidebarComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    this.init(Bs4SidebarComponent.observedAttributes);
-    this.style = window.getComputedStyle(this.el);
-    window.addEventListener('resize', this.onEnviromentChanges.bind(this), false);
   }
 
   public setState(state: State) {
@@ -141,6 +154,13 @@ export class Bs4SidebarComponent extends Component {
     }
   }
 
+  protected connectedCallback() {
+    super.connectedCallback();
+    this.init(Bs4SidebarComponent.observedAttributes);
+    this.style = window.getComputedStyle(this.el);
+    window.addEventListener('resize', this.onEnviromentChanges.bind(this), false);
+  }
+
   protected onToggle(targetId: string) {
     this.toggle();
   }
@@ -154,23 +174,25 @@ export class Bs4SidebarComponent extends Component {
   }
 
   protected initRouterEventDispatcher() {
-    this.routerEvents.on('newPageReady', this.onEnviromentChanges.bind(this));
+    if (this.scope.watchNewPageReadyEvent) {
+      this.routerEvents.on('newPageReady', this.onEnviromentChanges.bind(this));
+    }
   }
 
   protected onHidden() {
     this.setContainersStyle();
     const translateX = this.scope.position === 'left' ? '-100%' : '100%';
-    this.el.setAttribute('style', `transform:translateX(${translateX});width:${this.scope.width}px;`);
+    this.el.setAttribute('style', `transform:translateX(${translateX});width:${this.scope.width};`);
   }
 
   protected onSide(directon: State) {
     this.setContainersStyle(undefined, '', directon);
-    this.el.setAttribute('style', `transform:translateX(0);width:${this.scope.width}px;`);
+    this.el.setAttribute('style', `transform:translateX(0);width:${this.scope.width};`);
   }
 
   protected onOverlay(directon: State) {
     this.setContainersStyle(undefined, '', directon);
-    this.el.setAttribute('style', `transform:translateX(0);width:${this.scope.width}px;`);
+    this.el.setAttribute('style', `transform:translateX(0);width:${this.scope.width};`);
   }
 
   protected onStateChange() {
@@ -193,7 +215,7 @@ export class Bs4SidebarComponent extends Component {
   }
 
   protected get width() {
-    return this.el.offsetWidth || this.scope.width;
+    return this.el.offsetWidth ? this.el.offsetWidth + 'px' : this.scope.width;
   }
 
   protected setStateByEnviroment() {
@@ -204,13 +226,10 @@ export class Bs4SidebarComponent extends Component {
       return this.show();
     }
     const vw = Utils.getViewportDimensions().w;
-    if (vw < this.scope.autoHideOnSlimmerThan) {
+    if (this.scope.autoHideOnSlimmerThan > -1 && vw < this.scope.autoHideOnSlimmerThan) {
       return this.hide();
     }
-    if (vw < this.scope.autoHideOnSlimmerThan) {
-      return this.hide();
-    }
-    if (vw > this.scope.autoShowOnWiderThan) {
+    if (this.scope.autoShowOnWiderThan > -1 && vw > this.scope.autoShowOnWiderThan) {
       return this.show();
     }
   }
@@ -257,20 +276,20 @@ export class Bs4SidebarComponent extends Component {
         case 'side-left':
           switch (conStyle.position) {
             case 'fixed':
-              style += 'left:' + width + 'px';
+              style += 'left:' + width;
               break;
             default:
-              style += 'margin-left:' + width + 'px';
+              style += 'margin-left:' + width;
               break;
           }
           break;
         case 'side-right':
           switch (conStyle.position) {
             case 'fixed':
-              style += 'right:' + width + 'px';
+              style += 'right:' + width;
               break;
             default:
-              style += 'margin-right:' + width + 'px';
+              style += 'margin-right:' + width;
               break;
           }
           break;
@@ -278,7 +297,7 @@ export class Bs4SidebarComponent extends Component {
           break;
       }
     }
-    return container.setAttribute('style', `transition:${this.style.transition};${style}`);
+    return container.setAttribute('style', `transition:${this.style ? this.style.transition : ''};${style}`);
   }
 
   protected async beforeBind() {
