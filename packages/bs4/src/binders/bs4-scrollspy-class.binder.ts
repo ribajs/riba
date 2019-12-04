@@ -1,4 +1,4 @@
-import { Binder } from '@ribajs/core';
+import { Binder, Utils } from '@ribajs/core';
 
 /**
  * scrollspy-class
@@ -53,7 +53,7 @@ export const scrollspyClassBinder: Binder<string> = {
         }
       }
     };
-    window.addEventListener('scroll', this.customData.onScroll, { passive: true });
+    window.addEventListener('scroll', Utils.debounce(this.customData.onScroll.bind(this)), { passive: true });
     this.customData.onScroll();
   },
   routine(el: HTMLElement, targetSelector: string) {
@@ -62,6 +62,6 @@ export const scrollspyClassBinder: Binder<string> = {
     this.customData.className = this.args[0] as string;
   },
   unbind() {
-    window.removeEventListener('scroll', this.customData.onScroll);
+    window.removeEventListener('scroll', Utils.debounce(this.customData.onScroll.bind(this)));
   },
 };
