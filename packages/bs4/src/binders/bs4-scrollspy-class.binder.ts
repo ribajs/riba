@@ -53,7 +53,7 @@ export const scrollspyClassBinder: Binder<string> = {
         }
       }
     };
-    window.addEventListener('scroll', this.customData.onScroll);
+    window.addEventListener('scroll', this.customData.onScroll, { passive: true });
     this.customData.onScroll();
   },
   routine(el: HTMLElement, targetSelector: string) {
