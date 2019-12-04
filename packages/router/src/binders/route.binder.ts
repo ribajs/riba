@@ -26,7 +26,6 @@ export const routeBinder: Binder<string> = {
 
   bind(this: Binding, el: HTMLUnknownElement) {
     this.customData = <CustomData> {
-      prefetch: new Prefetch(),
       dispatcher: undefined,
       options: {
         removeAfterActivation: false,
@@ -46,6 +45,9 @@ export const routeBinder: Binder<string> = {
         } else {
           if (this.customData.options.url) {
             const pjax = Pjax.getInstance(this.customData.options.viewId);
+            if (!pjax) {
+              return;
+            }
             pjax.goTo(this.customData.options.url, this.customData.options.newTab);
           }
         }
@@ -70,6 +72,7 @@ export const routeBinder: Binder<string> = {
       this.customData.options = optionsOrUrl as RouteOptions;
     }
     this.customData.options.viewId = this.customData.options.viewId || 'main';
+    this.customData.prefetch = new Prefetch(this.customData.options.viewId),
     this.customData.options.removeAfterActivation = Utils.isBoolean(this.customData.options.removeAfterActivation) ? this.customData.options.removeAfterActivation : false;
     this.customData.dispatcher = new EventDispatcher(this.customData.options.viewId);
 

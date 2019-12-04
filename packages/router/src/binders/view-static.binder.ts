@@ -28,15 +28,16 @@ export const viewStaticBinder: Binder<string> = {
     options.transition = options.transition || new HideShowTransition();
     options.viewId = options.viewId || el.getAttribute('id') || handleizeFormatter.read(options.url);
     options.containerSelector = options.containerSelector || '[data-namespace]';
+    options.changeBrowserUrl = false;
 
-    const pjax = new Pjax(options.viewId, wrapper, options.containerSelector, options.listenAllLinks, options.listenPopstate , options.transition, options.parseTitle);
+    const pjax = new Pjax(options);
 
-    const $newContainer = pjax.load(options.url);
+    const response = pjax.loadResponse(options.url);
 
-    $newContainer.then((container: HTMLElement) => {
-      wrapper.replaceWith(container);
+    response.then((_response) => {
+      wrapper.replaceWith(_response.container);
 
-      container.style.visibility = 'visible';
+      _response.container.style.visibility = 'visible';
 
       // add the dateset to the model
       if (!Utils.isObject(self.view.models)) {
@@ -47,7 +48,7 @@ export const viewStaticBinder: Binder<string> = {
       if (self.customData.nested) {
         self.customData.nested.unbind();
       }
-      self.customData.nested = new RivetsView(container, self.view.models, self.view.options);
+      self.customData.nested = new RivetsView(_response.container, self.view.models, self.view.options);
       self.customData.nested.bind();
 
     });

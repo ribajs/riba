@@ -6,7 +6,7 @@ import { EventDispatcher, Utils, HttpService } from '@ribajs/core';
 
 import { BaseCache } from '../Cache';
 import { HideShowTransition } from '../Transition';
-import { Transition } from '../../interfaces';
+import { Transition, Response, PjaxOptions } from '../../interfaces';
 import { Dom } from './Dom';
 import { HistoryManager } from './HistoryManager';
 
@@ -26,14 +26,12 @@ class Pjax {
    */
   public static ignoreClassLink = 'no-barba';
 
-  public static cache = new BaseCache();
+  public static cache = new BaseCache<Promise<Response>>();
 
-  public static instances: PjaxInstances = {};
-
-  public static getInstance(id: string) {
+  public static getInstance(id: string = 'main'): Pjax | undefined {
     const result = Pjax.instances[id];
     if (!result) {
-      throw new Error(`No Pjax instance with id ${id} found!`);
+      console.warn(`No pjax instance for viewId "${id}" found!`);
     }
     return result;
   }
@@ -143,7 +141,8 @@ class Pjax {
     return undefined;
   }
 
-  public dom?: Dom;
+  private static instances: PjaxInstances = {};
+
   public history = new HistoryManager();
 
  /**
@@ -156,26 +155,40 @@ class Pjax {
   */
   public transitionProgress: boolean = false;
 
-  private listenAllLinks: boolean;
+  protected listenAllLinks: boolean;
 
-  private listenPopstate: boolean;
+  protected listenPopstate: boolean;
 
-  private parseTitle: boolean;
+  protected parseTitle: boolean;
 
-  private changeBrowserUrl: boolean;
+  protected changeBrowserUrl: boolean;
 
-  private dispatcher: EventDispatcher;
+  protected dispatcher: EventDispatcher;
 
-  private transition?: Transition;
+  protected transition?: Transition;
 
-  private wrapper?: HTMLElement;
+  protected wrapper?: HTMLElement;
 
-  private viewId: string;
+  protected viewId: string;
+
+  protected containerSelector: string;
+
+  protected prefetchLinks: boolean;
 
   /**
    * Creates an singleton instance of Pjax.
    */
-  constructor(id: string, wrapper?: HTMLElement, containerSelector = '[data-namespace]', listenAllLinks: boolean = false, listenPopstate: boolean = true, transition: Transition = new HideShowTransition(), parseTitle: boolean = true, changeBrowserUrl: boolean = true, useTemplate: boolean = true) {
+  constructor({
+    id,
+    wrapper,
+    containerSelector = '[data-namespace]',
+    listenAllLinks = false,
+    listenPopstate = true,
+    transition = new HideShowTransition(),
+    parseTitle = true,
+    changeBrowserUrl = true,
+    prefetchLinks = true,
+  }: PjaxOptions) {
     this.viewId = id;
 
     let instance = this as Pjax;
@@ -186,23 +199,24 @@ class Pjax {
     this.listenPopstate = listenPopstate;
     this.parseTitle = parseTitle;
     this.changeBrowserUrl = changeBrowserUrl;
+    this.containerSelector = containerSelector;
+    this.prefetchLinks = prefetchLinks;
 
     if (Pjax.instances[this.viewId]) {
       instance = Pjax.instances[this.viewId];
     }
 
     instance.transition = instance.transition || transition;
-
     instance.wrapper = instance.wrapper || wrapper;
+    instance.containerSelector = instance.containerSelector || containerSelector;
 
     instance.listenAllLinks = Utils.isBoolean(instance.listenAllLinks) ? instance.listenAllLinks : listenAllLinks;
     instance.listenPopstate = Utils.isBoolean(instance.listenPopstate) ? instance.listenPopstate : listenPopstate;
     instance.parseTitle = Utils.isBoolean(instance.parseTitle) ? instance.parseTitle : parseTitle;
-    instance.parseTitle = Utils.isBoolean(instance.parseTitle) ? instance.parseTitle : parseTitle;
     instance.changeBrowserUrl = Utils.isBoolean(instance.changeBrowserUrl) ? instance.changeBrowserUrl : changeBrowserUrl;
+    instance.prefetchLinks = Utils.isBoolean(instance.prefetchLinks) ? instance.prefetchLinks : prefetchLinks;
 
     if (instance.wrapper) {
-      instance.dom = instance.dom || new Dom(instance.wrapper, containerSelector, this.parseTitle, useTemplate);
       instance.wrapper.setAttribute('aria-live', 'polite');
     }
 
@@ -262,32 +276,38 @@ class Pjax {
   }
 
  /**
-  * Load an url, will start an fetch request or load from the cache
+  * Load an url, will start an fetch request or load from the cache will return the Container
+  * Also puts the container to the DOM and sets the title (if this option is active)
   */
   public async load(url: string): Promise<HTMLElement> {
-    let fetch;
+    const response = this.loadResponse(url);
 
-    fetch = Pjax.cache.get(url);
-
-    if (!fetch || !fetch.then) {
-      fetch = HttpService.get(url, undefined, 'html');
-      Pjax.cache.set(url, fetch);
-    }
-
-    return fetch
-    .then((data: string) => {
-      if (!this.dom) {
-        throw new Error('[Pjax] you need to call the start method first!');
+    return response
+    .then((_response) => {
+      if (!this.wrapper) {
+        throw new Error('[Pjax] you need a wrapper!');
+      }
+      Dom.putContainer(_response.container, this.wrapper);
+      if (this.parseTitle === true && _response.title) {
+        document.title = _response.title;
+      }
+      if (this.prefetchLinks === true && _response.prefetchLinks) {
+        document.title = _response.title;
+        const head = document.getElementsByTagName('head')[0];
+        const oldPrefetchLinkElements = head.querySelectorAll('link[href][rel="dns-prefetch"], link[href][rel="preconnect"], link[href][rel="prefetch"], link[href][rel="subresource"], link[href][rel="preload"]') as NodeListOf<HTMLLinkElement>;
+        // Remove the old prefetch link elements
+        oldPrefetchLinkElements.forEach((linkElement: HTMLLinkElement) => {
+          if (linkElement && linkElement.parentNode) {
+            linkElement.parentNode.removeChild(linkElement);
+          }
+        });
+        // Append the new prefetch link elements
+        _response.prefetchLinks.forEach((linkElement: HTMLLinkElement) => {
+          head.appendChild(linkElement);
+        });
       }
 
-      const container = this.dom.parseResponse(data);
-      this.dom.putContainer(container);
-
-      if (!this.cacheEnabled) {
-        Pjax.cache.reset();
-      }
-
-      return container;
+      return _response.container;
     })
     .catch((error: any) => {
       console.error(error);
@@ -295,6 +315,26 @@ class Pjax {
       this.forceGoTo(url);
       throw error;
     });
+  }
+
+ /**
+  * Load an url, will start an fetch request or load from the cache (and set it to the cache) and will return a `Response` pbject
+  */
+ public async loadResponse(url: string) {
+    let response = Pjax.cache.get(this.viewId + '_' + url);
+
+    if (!response || !response.then) {
+      response = HttpService.get(url, undefined, 'html')
+      .then((data: string) => {
+        return Dom.parseResponse(data, this.parseTitle, this.containerSelector, this.prefetchLinks);
+      });
+      if (this.cacheEnabled) {
+        Pjax.cache.set(this.viewId + '_' + url, response);
+      } else {
+        Pjax.cache.reset();
+      }
+    }
+    return response;
   }
 
  /**
@@ -379,12 +419,8 @@ class Pjax {
       this.history.prevStatus(),
     );
 
-    if (!this.dom) {
-      throw new Error('[Pjax] you need to call the start method first!');
-    }
-
     const transitionInstance = transition.init(
-      this.dom.getContainer(document.body),
+      Dom.getContainer(document.body, this.containerSelector),
       newContainer,
     );
 
@@ -403,18 +439,14 @@ class Pjax {
  protected onNewContainerLoaded(container: HTMLElement) {
     const currentStatus = this.history.currentStatus();
 
-    if (!this.dom) {
-      throw new Error('[Pjax] you need to call the start method first!');
-    }
-
-    currentStatus.namespace = this.dom.getNamespace(container);
+    currentStatus.namespace = Dom.getNamespace(container);
 
     this.dispatcher.trigger('newPageReady',
       this.viewId,
       this.history.currentStatus(),
       this.history.prevStatus(),
       container,
-      this.dom.currentHTML,
+      container.innerHTML,
       container.dataset,
       false, // true if this is the first time newPageReady is tiggered / true on initialisation
     );
@@ -437,16 +469,13 @@ class Pjax {
    * Init the events
    */
   protected init(wrapper: HTMLElement, listenAllLinks: boolean, listenPopstate: boolean) {
-    if (!this.dom) {
-      throw new Error('[Pjax] you need to call the start method first!');
-    }
-    const container = this.dom.getContainer(document.body);
+    const container = Dom.getContainer(document.body, this.containerSelector);
 
     this.wrapper = wrapper;
 
     this.history.add(
       this.getCurrentUrl(),
-      this.dom.getNamespace(container),
+      Dom.getNamespace(container),
     );
 
     // Fire for the current view.
@@ -460,7 +489,7 @@ class Pjax {
       this.history.currentStatus(),
       {},
       container,
-      this.dom.currentHTML,
+      container.innerHTML,
       container.dataset,
       true, // true if this is the first time newPageReady is tiggered / true on initialisation
     );

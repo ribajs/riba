@@ -1,13 +1,25 @@
 import { HttpService } from '@ribajs/core';
 import { Pjax } from './index';
 
+export interface PrefetchInstances {
+  [key: string]: Prefetch;
+}
+
 /**
  * Prefetch
  */
 class Prefetch {
 
+  public static getInstance(id: string = 'main'): Prefetch | undefined {
+    const result = Prefetch.instances[id];
+    if (!result) {
+      console.warn(`No Pjax instance with id ${id} found!`);
+    }
+    return result;
+  }
+
   /** singleton instance */
-  private static instance: Prefetch;
+  protected static instances: PrefetchInstances = {};
 
   /**
    * Class name used to ignore prefetch on links
@@ -16,15 +28,15 @@ class Prefetch {
    */
   public ignoreClassLink = 'no-barba-prefetch';
 
+  public preloadImages = false;
+
   /**
    * Creates an singleton instance of Prefetch.
    */
-  constructor() {
-    if (Prefetch.instance) {
-      return Prefetch.instance;
+  constructor(readonly viewId: string) {
+    if (Prefetch.instances[this.viewId]) {
+      return Prefetch.instances[this.viewId];
     }
-
-    Prefetch.instance = this;
   }
 
   /**
@@ -32,10 +44,11 @@ class Prefetch {
    * for the prefetch
    *
    */
-  public init(autobindLinks = false) {
+  public init(autobindLinks = false, preloadImages = true) {
     if (!window.history.pushState) {
       return false;
     }
+    this.preloadImages = preloadImages;
 
     // We do this with rv-route
     if (autobindLinks) {
@@ -77,12 +90,18 @@ class Prefetch {
     }
 
     const preventCheck = Pjax.preventCheck(evt, el, url);
-    let fetch = Pjax.cache.get(url);
+    let response = Pjax.cache.get(this.viewId + '_' + url);
 
     // Check if the link is eligible for Pjax
-    if (url && preventCheck && !fetch) {
-      fetch = HttpService.get(url, undefined, 'html');
-      Pjax.cache.set(url, fetch);
+    if (url && preventCheck && !response) {
+      const pjax = Pjax.getInstance(this.viewId);
+      if (pjax) {
+        // This method also caches the response
+        response = pjax.loadResponse(url);
+      } else {
+        console.warn(`No pjax instace for viewId "${this.viewId}" found!`);
+      }
+
     } else {
       // if (!preventCheck) {
       //   console.warn('preventCheck failed: ' + url, preventCheck);

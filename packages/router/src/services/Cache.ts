@@ -3,12 +3,12 @@ import { Utils } from '@ribajs/core';
 /**
  * BaseCache it's a simple static cache
  */
-class BaseCache {
+class BaseCache<T = any> {
 
   /**
    * The Object that keeps all the key value information
    */
-  public data: {[key: string]: any};
+  public data: {[key: string]: T};
 
   constructor() {
     this.data = {};
@@ -18,14 +18,14 @@ class BaseCache {
    * Set a key and value data, mainly Barba is going to save promises
    *
    */
-  public set(key: string, val: any) {
+  public set(key: string, val: T) {
     return this.data[key] = val;
   }
 
   /**
    * Retrieve the data using the key
    */
-  public get(key: string) {
+  public get(key: string): T | undefined {
     return this.data[key];
   }
 
@@ -34,15 +34,6 @@ class BaseCache {
    */
   public reset() {
     this.data = {};
-  }
-
-  /**
-   * Helper to extend this object
-   *
-   * @return {object} newInheritObject
-   */
-  private extend(obj: object) {
-    return Utils.extend(false, this, obj);
   }
 }
 

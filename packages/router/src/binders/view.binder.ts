@@ -1,6 +1,6 @@
 import { Binder, EventDispatcher, Utils, View as RivetsView } from '@ribajs/core';
 import { Pjax, Prefetch, HideShowTransition } from '../services';
-import { State } from '../interfaces';
+import { State, PjaxOptions } from '../interfaces';
 
 /**
  * The main wrapper for the riba router
@@ -122,14 +122,25 @@ export const viewBinder: Binder<string> = {
     this.customData.options.transition = this.customData.options.transition || new HideShowTransition(this.customData.options.action, this.customData.options.scrollToTop);
 
     this.customData.dispatcher = new EventDispatcher(this.customData.options.viewId);
-    this.customData.prefetch = new Prefetch();
-
     this.customData.wrapper.setAttribute('id', this.customData.options.viewId);
 
     this.customData.dispatcher.on('newPageReady', this.customData.onPageReady);
     this.customData.dispatcher.on('transitionCompleted', this.customData.onTransitionCompleted);
 
-    const pjax = new Pjax(this.customData.options.viewId, this.customData.wrapper, this.customData.options.containerSelector, this.customData.options.listenAllLinks, this.customData.options.listenPopstate, this.customData.options.transition, this.customData.options.parseTitle, this.customData.options.changeBrowserUrl);
+    const pjaxOptions: PjaxOptions = {
+      id: this.customData.options.viewId,
+      wrapper: this.customData.wrapper,
+      containerSelector: this.customData.options.containerSelector,
+      listenAllLinks: this.customData.options.listenAllLinks,
+      listenPopstate: this.customData.options.listenPopstate,
+      transition: this.customData.options.transition,
+      parseTitle: this.customData.options.parseTitle,
+      changeBrowserUrl: this.customData.options.changeBrowserUrl,
+      prefetchLinks: this.customData.options.prefetchLinks,
+    };
+
+    const pjax = new Pjax(pjaxOptions);
+    this.customData.prefetch = new Prefetch(this.customData.options.viewId);
     this.customData.prefetch.init(this.customData.options.autoprefetchLinks);
     pjax.start();
   },
