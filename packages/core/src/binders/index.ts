@@ -19,3 +19,4 @@ export { textBinder } from './text.binder';
 export { valueBinder } from './value.binder';
 export { starBinder } from './attribute.binder';
 export { srcsetSizeBinder } from './srcset-size.binder';
+export { dataScrollPositionBinder } from './data-scroll-position.binder';
