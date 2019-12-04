@@ -1,5 +1,13 @@
 # Changelog
 
+## Dev
+
+### Router
+
+- Cache container instead of full http request result
+- Initial support for prefetch links
+- Speed improvements
+
 ## 1.7.0
 
 - Upgrade dependencies

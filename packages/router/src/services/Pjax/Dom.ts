@@ -99,29 +99,6 @@ class Dom {
 
     return result;
   }
-
-  /**
-   * Gets the content of an html element without any DOM Tree
-   * @param tagName
-   * @param html
-   */
-  protected static findHTMLTagContent(tagName: string, html: string) {
-    const matches = this.findHTMLTags(tagName, html, false);
-    if (matches && matches.length > 0) {
-      return matches[0].replace(`<${tagName}>`, '').replace(`</${tagName}>`, '').replace('&amp;', '&').replace('&lt;', '<').replace('&gt;', '>').trim();
-    }
-    return null;
-  }
-
-  /**
-   * Finds an html tag in an html string (without any DOM Tree)
-   * @param tagName html tag name, e.g. `title`
-   * @param html The html string in which you are searching the tag
-   */
-  protected static findHTMLTags(tagName: string, html: string, global: boolean = false) {
-    const regex = new RegExp(`<\s*${tagName}[^>]*>((.|\n)*?)<\s*\/\s*${tagName}>`, global ? 'g' : '');
-    return html.match(regex);
-  }
 }
 
 export { Dom };
