@@ -40,7 +40,7 @@ export const onEventBinder: Binder<eventHandlerFunction> = {
     this.customData.handler = this.eventHandler(value, el);
 
     try {
-      el.addEventListener(eventName, this.customData.handler, {passive: true});
+      el.addEventListener(eventName, this.customData.handler, /*{passive: true}*/); // todo passive with data-passive
     } catch (error) {
       console.warn(error);
       el.addEventListener(eventName, (event: Event) => {
