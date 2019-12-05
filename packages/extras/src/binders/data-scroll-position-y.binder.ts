@@ -15,20 +15,32 @@ const DEFAULT_OFFSET = 10;
  */
 export const dataScrollPositionYBinder: Binder<string> = {
   name: 'data-scroll-position-y',
+  customData: {},
   bind() {
     if (!this.customData) {
       this.customData = {};
     }
-    this.customData.offset = Number(this.el.dataset.offset) || DEFAULT_OFFSET;
-    this.customData.onScroll = (event: WheelEvent) => {
-      const element = this.customData.watchScrollOnElement as Window;
-      if (element.scrollY <= 0 + this.customData.offset) {
-        this.el.dataset.scrollPositionY = 'top';
-      } else if ((window.innerHeight + window.pageYOffset + this.customData.offset) >= document.body.offsetHeight) { // TODO only working for window!
-        this.el.dataset.scrollPositionY = 'bottom';
+    this.customData.onScroll = () => {
+      if (this.customData.elementSelector === 'window') {
+        const element = this.customData.watchScrollOnElement as Window;
+        if (element.scrollY <= 0 + this.customData.offsetTop) {
+          this.el.dataset.scrollPositionY = 'top';
+        } else if ((element.innerHeight + element.pageYOffset + this.customData.offsetBottom) >= document.body.offsetHeight) {
+          this.el.dataset.scrollPositionY = 'bottom';
+        } else {
+          this.el.dataset.scrollPositionY = 'scrolled';
+        }
       } else {
-        this.el.dataset.scrollPositionY = 'scrolled';
+        const element = this.customData.watchScrollOnElement as HTMLElement;
+        if (element.scrollTop <= 0 + this.customData.offsetTop) {
+          this.el.dataset.scrollPositionY = 'top';
+        } else if ((element.scrollTop + this.customData.offsetBottom) >= element.scrollHeight - element.clientHeight) {
+          this.el.dataset.scrollPositionY = 'bottom';
+        } else {
+          this.el.dataset.scrollPositionY = 'scrolled';
+        }
       }
+
     };
   },
   routine(el: HTMLElement, elementSelector: string = 'window') {
@@ -40,6 +52,8 @@ export const dataScrollPositionYBinder: Binder<string> = {
     // Set new element to watch for the scroll event
     if (elementSelector === 'window') {
       this.customData.watchScrollOnElement = window;
+    } else if (elementSelector === 'this') {
+      this.customData.watchScrollOnElement = this.el;
     } else {
       this.customData.watchScrollOnElement = document.querySelector(elementSelector);
     }
@@ -49,6 +63,10 @@ export const dataScrollPositionYBinder: Binder<string> = {
       console.debug('addEventListener', this.customData.watchScrollOnElement);
       this.customData.watchScrollOnElement.addEventListener('scroll', Utils.debounce(this.customData.onScroll.bind(this)), { passive: true });
     }
+
+    this.customData.offsetTop = Number(this.el.dataset.offsetTop) || DEFAULT_OFFSET;
+    this.customData.offsetBottom = Number(this.el.dataset.offsetBottom) || DEFAULT_OFFSET;
+    this.customData.elementSelector = elementSelector;
 
     // inital scroll position
     this.customData.onScroll();

@@ -5,7 +5,6 @@ export { assignPropertyBinder } from './assign-property.binder';
 export { blockBinder } from './block.binder';
 export { checkedBinder } from './checked.binder';
 export { classStarBinder } from './class-name.binder';
-export { dataScrollPositionYBinder } from './data-scroll-position-y.binder';
 export { cssStarBinder } from './style-css-property.binder';
 export { enabledBinder } from './enabled.binder';
 export { disabledBinder } from './disabled.binder';
