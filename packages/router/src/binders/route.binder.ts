@@ -39,7 +39,9 @@ export const routeBinder: Binder<string> = {
       },
       onClick(this: Binding, event: Event) {
         // Do not go to ref without pajax
-        event.preventDefault();
+        if (this.el.tagName === 'A') {
+          event.preventDefault();
+        }
         if (Utils.onRoute(this.customData.options.url)) {
           console.debug('already on this site');
         } else {

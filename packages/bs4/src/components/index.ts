@@ -6,3 +6,4 @@ export { Bs4SidebarComponent } from './bs4-sidebar/bs4-sidebar.component';
 export { Bs4ToggleButtonComponent } from './bs4-toggle-button/bs4-toggle-button.component';
 export { Bs4NavbarComponent } from './bs4-navbar/bs4-navbar.component';
 export { Bs4TabsComponent } from './bs4-tabs/bs4-tabs.component';
+export { Bs4ButtonComponent } from './bs4-button/bs4-button.component';
