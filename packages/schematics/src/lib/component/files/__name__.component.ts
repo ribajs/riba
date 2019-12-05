@@ -25,6 +25,10 @@ export class <%= classify(name) %>Component extends Component {
   constructor(element?: HTMLElement) {
     super(element);
     console.debug('constructor', this);
+  }
+
+  protected connectedCallback() {
+    super.connectedCallback();
     this.init(<%= classify(name) %>Component.observedAttributes);
   }
 

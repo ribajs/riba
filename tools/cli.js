@@ -50,13 +50,18 @@ const PACKAGES = [
     npm: '@ribajs/iconset',
     available: true,
   },
-
-  // WIP Riba modules, not ready to publish
   {
     path: 'packages/jquery/',
     npm: '@ribajs/jquery',
     available: true,
   },
+  {
+    path: 'packages/extras/',
+    npm: '@ribajs/extras',
+    available: true,
+  },
+
+  // WIP Riba modules, not ready to publish
   {
     path: 'packages/moment/',
     npm: '@ribajs/moment',

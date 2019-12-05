@@ -1,5 +1,4 @@
-import { Binder } from '../interfaces';
-import { Utils } from '../services/utils';
+import { Binder, Utils } from '@ribajs/core';
 
 const DEFAULT_OFFSET = 10;
 
@@ -32,7 +31,7 @@ export const dataScrollPositionYBinder: Binder<string> = {
       }
     };
   },
-  routine(el: HTMLUnknownElement, elementSelector: string = 'window') {
+  routine(el: HTMLElement, elementSelector: string = 'window') {
     // Remove old scroll event
     if (this.customData.watchScrollOnElement) {
       this.customData.watchScrollOnElement.removeEventListener('scroll', Utils.debounce.bind(this, this.customData.onScroll.bind(this)));

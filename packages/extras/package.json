@@ -1,0 +1,55 @@
+{
+  "name": "@ribajs/extras",
+  "description": "Extras module for Riba.js",
+  "version": "1.7.0",
+  "author": "Pascal Garber <pascal@artandcode.studio>",
+  "contributors": [],
+  "url": "https://github.com/ribajs/riba/tree/master/packages/extra",
+  "homepage": "https://github.com/ribajs/riba#readme",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "source": "src/index.ts",
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/ribajs/riba/blob/master/LICENSE"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ribajs/riba.git"
+  },
+  "scripts": {
+    "test": "npm run type-check && jest --config=jest.config.js",
+    "type-check": "tslint -c tslint.json 'src/**/*.ts' && tsc --noEmit",
+    "build": "npm run build:module",
+    "build:module": "tsc"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-export-default-from": "^7.7.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.7.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/preset-typescript": "^7.7.4",
+    "@types/jest": "^24.0.23",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-array-includes": "^2.0.3",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.2.0",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "@ribajs/core": "^1.7.0"
+  },
+  "bugs": {
+    "url": "https://github.com/ribajs/riba/issues"
+  }
+}
