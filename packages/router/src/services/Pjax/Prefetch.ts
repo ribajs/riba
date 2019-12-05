@@ -52,8 +52,8 @@ class Prefetch {
 
     // We do this with rv-route
     if (autobindLinks) {
-      document.body.addEventListener('mouseover', this.onLinkEnter.bind(this));
-      document.body.addEventListener('touchstart', this.onLinkEnter.bind(this));
+      document.body.addEventListener('mouseover', this.onLinkEnter.bind(this), { passive: true });
+      document.body.addEventListener('touchstart', this.onLinkEnter.bind(this), { passive: true });
     }
   }
 
