@@ -159,6 +159,8 @@ export class Bs4SidebarComponent extends Component {
     this.init(Bs4SidebarComponent.observedAttributes);
     this.style = window.getComputedStyle(this.el);
     window.addEventListener('resize', this.onEnviromentChanges.bind(this), false);
+    // inital
+    this.onEnviromentChanges();
   }
 
   protected onToggle(targetId: string) {
