@@ -1,5 +1,7 @@
-import { Component, Binding, handleizeFormatter } from '@ribajs/core';
+import { Binding, handleizeFormatter } from '@ribajs/core';
 import template from './bs4-tabs.component.html';
+
+import { TemplatesComponent } from '../templates/templates.component';
 
 export interface Tab {
   title: string;
@@ -10,17 +12,36 @@ export interface Tab {
 }
 
 export interface Scope {
-  tabs: Tab[];
+  items: Tab[];
   activate: Bs4TabsComponent['activate'];
   optionTabsAutoHeight: boolean;
 }
 
-export class Bs4TabsComponent extends Component {
+export class Bs4TabsComponent extends TemplatesComponent {
 
   public static tagName: string = 'bs4-tabs';
 
+  protected static templateAttributes = [
+    {
+      name: 'title',
+      required: true,
+    },
+    {
+      name: 'handle',
+      required: true,
+    },
+    {
+      name: 'type',
+      required: false,
+    },
+    {
+      name: 'active',
+      required: false,
+    },
+  ];
+
   protected scope: Scope = {
-    tabs: new Array<Tab>(),
+    items: new Array<Tab>(),
     activate: this.activate,
     optionTabsAutoHeight: false,
   };
@@ -58,7 +79,7 @@ export class Bs4TabsComponent extends Component {
   constructor(element?: HTMLElement) {
     super(element);
 
-    this.addTabsByTemplate();
+    this.addItemsByTemplate();
     this.initTabs();
     this.activateFirstTab();
     this.init(Bs4TabsComponent.observedAttributes);
@@ -102,7 +123,7 @@ export class Bs4TabsComponent extends Component {
   }
 
   public deactivateAll() {
-    for (const tab of this.scope.tabs) {
+    for (const tab of this.scope.items) {
       tab.active = false;
     }
   }
@@ -116,8 +137,8 @@ export class Bs4TabsComponent extends Component {
   }
 
   public activateFirstTab() {
-    if (this.scope.tabs.length > 0) {
-      this.activate(this.scope.tabs[0]);
+    if (this.scope.items.length > 0) {
+      this.activate(this.scope.items[0]);
     }
   }
 
@@ -128,10 +149,10 @@ export class Bs4TabsComponent extends Component {
   }
 
   protected resizeTabsArray(newSize: number) {
-    while (newSize > this.scope.tabs.length) {
-      this.scope.tabs.push({handle: '', title: '', content: '', active: false});
+    while (newSize > this.scope.items.length) {
+      this.scope.items.push({handle: '', title: '', content: '', active: false});
     }
-    this.scope.tabs.length = newSize;
+    this.scope.items.length = newSize;
   }
 
   protected onTabShownEventHandler(event: Event) {
@@ -172,53 +193,36 @@ export class Bs4TabsComponent extends Component {
 
   protected addTabByAttribute(attributeName: string, newValue: string) {
     const index = Number(attributeName.replace(/[^0-9]/g, ''));
-    if (index >= this.scope.tabs.length) {
+    if (index >= this.scope.items.length) {
       this.resizeTabsArray(index + 1);
     }
     if (attributeName.endsWith('Content')) {
-      this.scope.tabs[index].content = newValue;
+      this.scope.items[index].content = newValue;
     }
     if (attributeName.endsWith('Title')) {
-      this.scope.tabs[index].title = newValue;
-      this.scope.tabs[index].handle = this.scope.tabs[index].handle || handleizeFormatter.read(this.scope.tabs[index].title);
+      this.scope.items[index].title = newValue;
+      this.scope.items[index].handle = this.scope.items[index].handle || handleizeFormatter.read(this.scope.items[index].title);
     }
     if (attributeName.endsWith('Handle')) {
-      this.scope.tabs[index].handle = newValue;
+      this.scope.items[index].handle = newValue;
     }
 
     // if is first tab
     if (
-      this.scope.tabs.length > 0 &&
-      this.scope.tabs[0] &&
-      this.scope.tabs[0].content.length > 0 &&
-      this.scope.tabs[0].title.length > 0 &&
-      this.scope.tabs[0].handle.length > 0
+      this.scope.items.length > 0 &&
+      this.scope.items[0] &&
+      this.scope.items[0].content.length > 0 &&
+      this.scope.items[0].title.length > 0 &&
+      this.scope.items[0].handle.length > 0
     ) {
       this.activateFirstTab();
     }
   }
 
-  protected addTabByTemplate(tpl: HTMLTemplateElement) {
-    const title = tpl.getAttribute('title');
-    if (!title) {
-      console.error(new Error('template "title" attribute is required"'));
-      return;
-    }
-    const handle = tpl.getAttribute('handle') || handleizeFormatter.read(title);
-    if (!handle) {
-      console.error(new Error('template "handle" attribute is required"'));
-      return;
-    }
-    const type = tpl.getAttribute('type') || undefined;
-    const content = tpl.innerHTML;
-    this.scope.tabs.push({title, handle, content, active: false, type });
-  }
-
-  protected addTabsByTemplate() {
-    const templates = this.el.querySelectorAll<HTMLTemplateElement>('template');
-    templates.forEach((tpl) => {
-      this.addTabByTemplate(tpl);
-    });
+  protected transformTemplateAttributes(attributes: any) {
+    attributes.handle = attributes.handle || handleizeFormatter.read(attributes.title);
+    attributes.active = attributes.active || false;
+    return attributes;
   }
 
   protected parsedAttributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
@@ -238,17 +242,9 @@ export class Bs4TabsComponent extends Component {
     }, 500);
   }
 
-  protected onlyTemplateChilds() {
-    let allAreTemplates: boolean = true;
-    this.el.childNodes.forEach((child) => {
-      allAreTemplates = allAreTemplates && (child.nodeName === 'TEMPLATE' || child.nodeName === '#text');
-    });
-    return allAreTemplates;
-  }
-
   protected template() {
     // Only set the component template if there no childs or the childs are templates
-    if (!this.el.hasChildNodes() || this.onlyTemplateChilds()) {
+    if (!this.el.hasChildNodes() || this.hasOnlyTemplateChilds()) {
       return template;
     } else {
       return null;

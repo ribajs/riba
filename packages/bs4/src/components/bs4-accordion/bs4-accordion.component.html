@@ -1,0 +1,15 @@
+<div class="accordion">
+  <div class="card" rv-each-item="items">
+    <div class="card-header">
+      <h2 class="my-0">
+        <button class="btn btn-link" type="button" rv-aria-expanded="item.show" rv-html="item.title" rv-on-click="toggle | args item %item%">
+        </button>
+      </h2>
+    </div>
+
+    <div class="collapse" rv-data-index="%item%">
+      <div class="card-body" rv-html="item.content">
+      </div>
+    </div>
+  </div>
+<div>

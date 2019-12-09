@@ -97,6 +97,6 @@ export class Bs4ButtonComponent extends Component {
   }
 
   protected template() {
-    return null
+    return null;
   }
 }

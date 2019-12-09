@@ -18,38 +18,71 @@ export class CollapseService {
 
   public static CLASSNAME = {
     SHOW       : 'show',
-    COLLAPSE   : 'collapse',
-    COLLAPSING : 'collapsing',
-    COLLAPSED  : 'collapsed',
+    COLLAPSE   : 'collapse', // hidden
+    COLLAPSING : 'collapsing', // TODO
+    COLLAPSED  : 'collapsed', // TODO
   };
 
-  private targets: NodeListOf<Element> | Array<Element>;
+  public static show(element: Element) {
+    element.classList.remove(CollapseService.CLASSNAME.COLLAPSE);
+    element.classList.add(CollapseService.CLASSNAME.SHOW);
+    element.dispatchEvent(new Event(CollapseService.EVENT.SHOWN));
+  }
+
+  public static hide(element: Element) {
+    element.classList.remove(CollapseService.CLASSNAME.SHOW);
+    element.classList.add(CollapseService.CLASSNAME.COLLAPSE);
+    element.dispatchEvent(new Event(CollapseService.EVENT.HIDDEN));
+  }
+
+  public static hideAll(elements: NodeListOf<Element> | Array<Element>) {
+    elements.forEach((element: Element) => {
+      this.hide(element);
+    });
+  }
+
+  public static isExpanded(element: Element) {
+    return element.classList.contains(CollapseService.CLASSNAME.SHOW);
+  }
+
+  public static isCollapsed(element: Element) {
+    return !this.isExpanded(element);
+  }
+
+  public static toggle(element: Element) {
+    if (this.isCollapsed(element)) {
+      this.show(element);
+    } else {
+      this.hide(element);
+    }
+  }
+
+  protected targets: NodeListOf<Element> | Array<Element>;
 
   constructor(targets: NodeListOf<Element> | Array<Element>) {
     this.targets = targets;
   }
 
+  /**
+   * Show all
+   */
   public show() {
     this.targets.forEach((target: Element) => {
-      target.classList.remove(CollapseService.CLASSNAME.COLLAPSE);
-      target.classList.add(CollapseService.CLASSNAME.SHOW);
-      target.dispatchEvent(new Event(CollapseService.EVENT.SHOWN));
+      CollapseService.show(target);
     });
   }
 
+  /**
+   * Collapse / hide all
+   */
   public hide() {
     this.targets.forEach((target: Element) => {
-      target.classList.remove(CollapseService.CLASSNAME.SHOW);
-      target.classList.add(CollapseService.CLASSNAME.COLLAPSE);
-      target.dispatchEvent(new Event(CollapseService.EVENT.HIDDEN));
+      CollapseService.hide(target);
     });
   }
 
   public isExpanded() {
-    if (this.targets.length > 0 && this.targets[0]) {
-      return this.targets[0].classList.contains(CollapseService.CLASSNAME.SHOW);
-    }
-    return false;
+    return CollapseService.isExpanded(this.targets[0]);
   }
 
   public isCollapsed() {
