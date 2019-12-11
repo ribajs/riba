@@ -59,6 +59,7 @@ export abstract class TemplatesComponent extends Component {
 
   protected getTemplateAttributes(tpl: HTMLTemplateElement) {
     const attributes: any = {};
+    console.debug('getTemplateAttributes', tpl, this.templateAttributes);
     for (const attribute of this.templateAttributes) {
       const attrValue = this.transformTemplateAttribute(attribute.name, tpl.getAttribute(attribute.name));
       if (attribute.required && !attrValue) {

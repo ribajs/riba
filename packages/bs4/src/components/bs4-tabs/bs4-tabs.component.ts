@@ -21,14 +21,14 @@ export class Bs4TabsComponent extends TemplatesComponent {
 
   public static tagName: string = 'bs4-tabs';
 
-  protected static templateAttributes = [
+  protected templateAttributes = [
     {
       name: 'title',
       required: true,
     },
     {
       name: 'handle',
-      required: true,
+      required: false,
     },
     {
       name: 'type',
@@ -139,7 +139,6 @@ export class Bs4TabsComponent extends TemplatesComponent {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.addItemsByTemplate();
     this.initTabs();
     this.activateFirstTab();
     this.init(Bs4TabsComponent.observedAttributes);
@@ -223,7 +222,10 @@ export class Bs4TabsComponent extends TemplatesComponent {
   }
 
   protected transformTemplateAttributes(attributes: any) {
-    attributes.handle = attributes.handle || handleizeFormatter.read(attributes.title);
+    console.debug('transformTemplateAttributes', attributes);
+    if (!attributes.handle && attributes.title) {
+      attributes.handle = handleizeFormatter.read(attributes.title);
+    }
     attributes.active = attributes.active || false;
     return attributes;
   }
