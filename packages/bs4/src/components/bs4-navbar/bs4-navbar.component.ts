@@ -11,6 +11,7 @@ export class Bs4NavbarComponent extends Component {
     hide: this.hide,
     isCollapsed: true,
     collapseSelector: '.navbar-collapse',
+    animated: true,
   };
 
   protected collapse?: NodeListOf<HTMLElement>;
@@ -18,7 +19,7 @@ export class Bs4NavbarComponent extends Component {
   protected router?: EventDispatcher;
 
   static get observedAttributes() {
-    return ['collapse-selector'];
+    return ['collapse-selector', 'animated'];
   }
 
   constructor(element?: HTMLElement) {
@@ -27,7 +28,7 @@ export class Bs4NavbarComponent extends Component {
 
   public toggle(context?: Binder<any>, event?: Event) {
     if (this.collapseService) {
-      this.collapseService.toggle(false);
+      this.collapseService.toggle(this.scope.animated);
     }
     if (event) {
       event.preventDefault();
@@ -37,7 +38,7 @@ export class Bs4NavbarComponent extends Component {
 
   public show(context?: Binder<any>, event?: Event) {
     if (this.collapseService) {
-      this.collapseService.show(false);
+      this.collapseService.show(this.scope.animated);
     }
     if (event) {
       event.preventDefault();
@@ -47,7 +48,7 @@ export class Bs4NavbarComponent extends Component {
 
   public hide(context?: Binder<any>, event?: Event) {
     if (this.collapseService) {
-      this.collapseService.hide(false);
+      this.collapseService.hide(this.scope.animated);
     }
     if (event) {
       event.preventDefault();
@@ -124,7 +125,7 @@ export class Bs4NavbarComponent extends Component {
 
   protected onNewPageReady() {
     if (this.collapseService) {
-      this.collapseService.hide(false);
+      this.collapseService.hide(this.scope.animated);
     }
   }
 
