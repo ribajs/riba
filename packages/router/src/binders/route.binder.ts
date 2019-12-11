@@ -43,7 +43,7 @@ export const routeBinder: Binder<string> = {
           event.preventDefault();
         }
         if (Utils.onRoute(this.customData.options.url)) {
-          console.debug('already on this site');
+          // console.debug('already on this site');
         } else {
           if (this.customData.options.url) {
             const pjax = Pjax.getInstance(this.customData.options.viewId);

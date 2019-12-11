@@ -222,7 +222,6 @@ export class Bs4TabsComponent extends TemplatesComponent {
   }
 
   protected transformTemplateAttributes(attributes: any) {
-    console.debug('transformTemplateAttributes', attributes);
     if (!attributes.handle && attributes.title) {
       attributes.handle = handleizeFormatter.read(attributes.title);
     }

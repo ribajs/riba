@@ -47,15 +47,12 @@ export class Bs4AccordionComponent extends TemplatesComponent {
 
   constructor(element?: HTMLElement) {
     super(element);
-    console.debug('constructor', this);
+    // console.debug('constructor', this);
   }
 
   public toggle(item: AccordionItem, index: number, binding: Binding, event: Event, model: any, element: HTMLElement) {
-    console.debug('item', item);
-    console.debug('index', index);
     const target = this.el.querySelector<HTMLElement>(`[data-index="${index}"]`);
     const others = this.el.querySelectorAll<HTMLElement>(`[data-index]:not([data-index="${index}"])`);
-    console.debug('target', target);
     if (others) {
       CollapseService.hideAll(others);
     }
@@ -84,11 +81,13 @@ export class Bs4AccordionComponent extends TemplatesComponent {
   }
 
   protected async beforeBind() {
-    console.debug('beforeBind');
+    return super.beforeBind();
+    // console.debug('beforeBind');
   }
 
   protected async afterBind() {
-    console.debug('afterBind', this.scope);
+    return super.beforeBind();
+    // console.debug('afterBind', this.scope);
   }
 
   protected requiredAttributes() {

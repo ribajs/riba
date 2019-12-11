@@ -25,7 +25,7 @@ export const tFormatterWrapper = (localesService: ALocalesService): Formatter =>
       return new Promise((resolve, reject) => {
 
         localesService.event.on('changed', () => {
-          console.debug('changed');
+          // console.debug('changed');
           translate(translateMePathString, localesService, langcode)
           .then((locale) => {
             resolve(locale as any);

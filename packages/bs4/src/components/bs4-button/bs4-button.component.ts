@@ -24,11 +24,11 @@ export class Bs4ButtonComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    console.debug('constructor', this);
+    // console.debug('constructor', this);
   }
 
   public onClick(event: Event) {
-    console.debug('onClick');
+    // console.debug('onClick');
     this.startAnimation();
   }
 
@@ -42,12 +42,12 @@ export class Bs4ButtonComponent extends Component {
   }
 
   protected onStartAnimation(event: AnimationEvent) {
-    console.debug('onStartAnimation');
+    // console.debug('onStartAnimation');
   }
 
   protected onEndAnimation(event: AnimationEvent) {
     // window.getComputedStyle(this.el)
-    console.debug('onEndAnimation', event, window.getComputedStyle(this.el));
+    // console.debug('onEndAnimation', event, window.getComputedStyle(this.el));
 
     setTimeout(() => {
       this.el.classList.remove(this.scope.animationClass);
@@ -67,16 +67,16 @@ export class Bs4ButtonComponent extends Component {
   }
 
   protected async beforeBind() {
-    super.beforeBind()
+    return super.beforeBind()
     .then(() => {
-      console.debug('beforeBind', this.scope);
+      // console.debug('beforeBind', this.scope);
     });
   }
 
   protected async afterBind() {
-    super.afterBind()
+    return super.afterBind()
     .then(() => {
-      console.debug('afterBind', this.scope);
+      // console.debug('afterBind', this.scope);
     });
   }
 

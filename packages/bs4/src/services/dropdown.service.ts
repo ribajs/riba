@@ -108,7 +108,6 @@ export class DropdownService {
   // Static
 
   public static closeAll() {
-    console.debug('closeAll');
     const buttons = document.querySelectorAll(SELECTOR.DATA_TOGGLE);
     buttons.forEach((button, index) => {
       if (button.parentElement) {

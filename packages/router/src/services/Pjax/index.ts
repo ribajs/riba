@@ -359,7 +359,7 @@ class Pjax {
   * Force the browser to go to a certain url
   */
  protected forceGoTo(url: Location | string) {
-   console.debug('forceGoTo', url);
+   console.warn('forceGoTo', url);
    if (url && (url as Location).href) {
     window.location = url as Location;
    }

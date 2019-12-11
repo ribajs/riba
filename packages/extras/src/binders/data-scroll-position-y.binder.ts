@@ -60,7 +60,7 @@ export const dataScrollPositionYBinder: Binder<string> = {
 
     // Watch new element for scroll event
     if (this.customData.watchScrollOnElement) {
-      console.debug('addEventListener', this.customData.watchScrollOnElement);
+      // console.debug('addEventListener', this.customData.watchScrollOnElement);
       this.customData.watchScrollOnElement.addEventListener('scroll', Utils.debounce(this.customData.onScroll.bind(this)), { passive: true });
     }
 
