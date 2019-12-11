@@ -3,6 +3,7 @@ import {
 } from '@ribajs/core';
 
 interface Scope {
+  animationClass: string;
   onClick: Bs4ButtonComponent['onClick'];
 }
 
@@ -13,10 +14,11 @@ export class Bs4ButtonComponent extends Component {
   protected autobind = true;
 
   static get observedAttributes() {
-    return [];
+    return ['animation-class'];
   }
 
   protected scope: Scope = {
+    animationClass: 'btn-animation-start',
     onClick: this.onClick,
   };
 
@@ -30,8 +32,13 @@ export class Bs4ButtonComponent extends Component {
     this.startAnimation();
   }
 
+  protected connectedCallback() {
+    super.connectedCallback();
+    this.init(Bs4ButtonComponent.observedAttributes);
+  }
+
   protected startAnimation() {
-    this.el.classList.add('btn-animation-start');
+    this.el.classList.add(this.scope.animationClass);
   }
 
   protected onStartAnimation(event: AnimationEvent) {
@@ -43,13 +50,8 @@ export class Bs4ButtonComponent extends Component {
     console.debug('onEndAnimation', event, window.getComputedStyle(this.el));
 
     setTimeout(() => {
-      this.el.classList.remove('btn-animation-start');
+      this.el.classList.remove(this.scope.animationClass);
     });
-  }
-
-  protected connectedCallback() {
-    super.connectedCallback();
-    this.init(Bs4ButtonComponent.observedAttributes);
   }
 
   protected async init(observedAttributes: string[]) {

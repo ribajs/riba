@@ -2,6 +2,8 @@ import {
   Utils as RibaUtils,
 } from '@ribajs/core';
 
+const MILLISECONDS_MULTIPLIER = 1000;
+
 /**
  *
  * @see https://github.com/twbs/bootstrap/blob/v4-dev/js/src/util.js#L124
@@ -46,5 +48,27 @@ export class Utils extends RibaUtils {
         }
       }
     }
+  }
+
+  // https://github.com/twbs/bootstrap/blob/master/dist/js/bootstrap.bundle.js#L137
+  public static  getTransitionDurationFromElement(element: HTMLElement) {
+    if (!element) {
+      return 0;
+    } // Get transition-duration of the element
+
+    const _window$getComputedSt = window.getComputedStyle(element);
+    let transitionDuration = _window$getComputedSt.transitionDuration;
+    let transitionDelay = _window$getComputedSt.transitionDelay;
+
+    const floatTransitionDuration = parseFloat(transitionDuration);
+    const floatTransitionDelay = parseFloat(transitionDelay); // Return 0 if element or transition duration is not found
+
+    if (!floatTransitionDuration && !floatTransitionDelay) {
+      return 0;
+    } // If multiple durations are defined, take the first
+
+    transitionDuration = transitionDuration.split(',')[0];
+    transitionDelay = transitionDelay.split(',')[0];
+    return (parseFloat(transitionDuration) + parseFloat(transitionDelay)) * MILLISECONDS_MULTIPLIER;
   }
 }

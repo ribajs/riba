@@ -13,7 +13,7 @@ export class Bs4NavbarComponent extends Component {
     collapseSelector: '.navbar-collapse',
   };
 
-  protected collapse?: NodeListOf<Element>;
+  protected collapse?: NodeListOf<HTMLElement>;
   protected collapseService?: CollapseService;
   protected router?: EventDispatcher;
 
@@ -27,7 +27,7 @@ export class Bs4NavbarComponent extends Component {
 
   public toggle(context?: Binder<any>, event?: Event) {
     if (this.collapseService) {
-      this.collapseService.toggle();
+      this.collapseService.toggle(false);
     }
     if (event) {
       event.preventDefault();
@@ -37,7 +37,7 @@ export class Bs4NavbarComponent extends Component {
 
   public show(context?: Binder<any>, event?: Event) {
     if (this.collapseService) {
-      this.collapseService.show();
+      this.collapseService.show(false);
     }
     if (event) {
       event.preventDefault();
@@ -47,7 +47,7 @@ export class Bs4NavbarComponent extends Component {
 
   public hide(context?: Binder<any>, event?: Event) {
     if (this.collapseService) {
-      this.collapseService.hide();
+      this.collapseService.hide(false);
     }
     if (event) {
       event.preventDefault();
@@ -124,7 +124,7 @@ export class Bs4NavbarComponent extends Component {
 
   protected onNewPageReady() {
     if (this.collapseService) {
-      this.collapseService.hide();
+      this.collapseService.hide(false);
     }
   }
 

@@ -17,6 +17,7 @@ interface AccordionItem {
 interface Scope {
   items: AccordionItem[];
   toggle: Bs4AccordionComponent['toggle'];
+  CLASSNAME: typeof CollapseService.CLASSNAME;
 }
 
 export class Bs4AccordionComponent extends TemplatesComponent {
@@ -41,6 +42,7 @@ export class Bs4AccordionComponent extends TemplatesComponent {
   protected scope: Scope = {
     items: [],
     toggle: this.toggle,
+    CLASSNAME: CollapseService.CLASSNAME,
   };
 
   constructor(element?: HTMLElement) {
@@ -48,11 +50,11 @@ export class Bs4AccordionComponent extends TemplatesComponent {
     console.debug('constructor', this);
   }
 
-  public toggle(item: AccordionItem, index: number, binding: Binding, event: Event, model: any, element: Element) {
+  public toggle(item: AccordionItem, index: number, binding: Binding, event: Event, model: any, element: HTMLElement) {
     console.debug('item', item);
     console.debug('index', index);
-    const target = this.el.querySelector(`[data-index="${index}"]`);
-    const others = this.el.querySelectorAll(`[data-index]:not([data-index="${index}"])`);
+    const target = this.el.querySelector<HTMLElement>(`[data-index="${index}"]`);
+    const others = this.el.querySelectorAll<HTMLElement>(`[data-index]:not([data-index="${index}"])`);
     console.debug('target', target);
     if (others) {
       CollapseService.hideAll(others);

@@ -1,3 +1,7 @@
 bs4-accordion {
-  display: block;
+  .card-header {
+    &.btn {
+      text-align: inherit;
+    }
+  }
 }

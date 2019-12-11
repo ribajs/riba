@@ -133,18 +133,8 @@ export class VideoComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    const video = this.el.querySelector('video');
-    if (!video) {
-      throw new Error('The video child element is required!');
-    }
+    const video = this.el.querySelector('video') as HTMLVideoElement;
     this.video = video;
-    this.scope.muted = this.video.muted;
-    this.scope.volume = this.video.volume;
-    this.scope.loop = this.video.loop;
-    this.scope.controls = this.video.controls;
-    this.scope.currentTime = this.video.currentTime;
-    this.scope.paused = this.video.paused;
-    this.init(VideoComponent.observedAttributes);
   }
 
   public toggleMute() {
@@ -169,6 +159,22 @@ export class VideoComponent extends Component {
     } else {
       this.pause();
     }
+  }
+
+  protected connectedCallback() {
+    super.connectedCallback();
+    const video = this.el.querySelector('video');
+    if (!video) {
+      throw new Error('The video child element is required!');
+    }
+    this.video = video;
+    this.scope.muted = this.video.muted;
+    this.scope.volume = this.video.volume;
+    this.scope.loop = this.video.loop;
+    this.scope.controls = this.video.controls;
+    this.scope.currentTime = this.video.currentTime;
+    this.scope.paused = this.video.paused;
+    this.init(VideoComponent.observedAttributes);
   }
 
   protected async init(observedAttributes: string[]) {

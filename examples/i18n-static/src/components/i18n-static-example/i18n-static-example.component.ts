@@ -18,6 +18,10 @@ export class I18nStaticExampleComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
+  }
+
+  protected connectedCallback() {
+    super.connectedCallback();
     this.init(I18nStaticExampleComponent.observedAttributes);
   }
 

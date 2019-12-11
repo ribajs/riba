@@ -14,15 +14,6 @@ export class Bs4IconComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    this.el.setAttribute('aria-hidden', 'true');
-    this.el.setAttribute('role', 'img');
-    this.el.classList.add('iconset');
-
-    // set default values
-    // this.attributeChangedCallback('size', null, 32, null);
-    this.attributeChangedCallback('direction', null, 'top', null);
-
-    this.init(Bs4IconComponent.observedAttributes);
   }
 
   public attributeChangedCallback(name: string, oldValue: any, newValue: any, namespace: string | null) {
@@ -115,6 +106,19 @@ export class Bs4IconComponent extends Component {
       this.el.className.replace(/(^|\s)rotate-\S+/g, '');
       this.el.className += ' ' + classString;
     }
+  }
+
+  protected connectedCallback() {
+    super.connectedCallback();
+    this.el.setAttribute('aria-hidden', 'true');
+    this.el.setAttribute('role', 'img');
+    this.el.classList.add('iconset');
+
+    // set default values
+    // this.attributeChangedCallback('size', null, 32, null);
+    this.attributeChangedCallback('direction', null, 'top', null);
+
+    this.init(Bs4IconComponent.observedAttributes);
   }
 
   protected template() {

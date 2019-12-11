@@ -78,11 +78,6 @@ export class Bs4TabsComponent extends TemplatesComponent {
 
   constructor(element?: HTMLElement) {
     super(element);
-
-    this.addItemsByTemplate();
-    this.initTabs();
-    this.activateFirstTab();
-    this.init(Bs4TabsComponent.observedAttributes);
   }
 
   /**
@@ -140,6 +135,14 @@ export class Bs4TabsComponent extends TemplatesComponent {
     if (this.scope.items.length > 0) {
       this.activate(this.scope.items[0]);
     }
+  }
+
+  protected connectedCallback() {
+    super.connectedCallback();
+    this.addItemsByTemplate();
+    this.initTabs();
+    this.activateFirstTab();
+    this.init(Bs4TabsComponent.observedAttributes);
   }
 
   protected setElements() {

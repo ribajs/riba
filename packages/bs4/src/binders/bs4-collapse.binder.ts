@@ -9,7 +9,7 @@ export const collapseBinder: Binder<string> = {
   name: 'bs4-collapse',
   routine(el: HTMLElement, targetSelector: string) {
 
-    const targets = el.querySelectorAll(targetSelector);
+    const targets = el.querySelectorAll<HTMLElement>(targetSelector);
 
     const collapseService = new CollapseService(targets);
 

@@ -18,7 +18,6 @@ export class EachItemExampleComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    this.init([]);
   }
 
   public push() {
@@ -51,7 +50,12 @@ export class EachItemExampleComponent extends Component {
     })
   }
 
-  private getItems(): Item[] {
+  protected connectedCallback() {
+    super.connectedCallback();
+    this.init([]);
+  }
+
+  protected getItems(): Item[] {
     return [{name: 'x', value: 2} ,{name: 'y', value: 1} , {name: 'z', value: 3}]
   }
 

@@ -9,7 +9,7 @@ export class Bs4DropdownComponent extends Component {
     toggle: this.toggle,
   };
 
-  protected dropdownService: DropdownService;
+  protected dropdownService?: DropdownService;
 
   static get observedAttributes() {
     return [];
@@ -17,14 +17,21 @@ export class Bs4DropdownComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    this.dropdownService = new DropdownService(this.el.querySelector('.dropdown-toggle') as HTMLButtonElement | HTMLAnchorElement);
-    this.init(Bs4DropdownComponent.observedAttributes);
   }
 
   public toggle(context: Binder<any>, event: Event) {
     event.preventDefault();
     event.stopPropagation();
+    if (!this.dropdownService) {
+      throw new Error('DropdownService not ready!');
+    }
     return this.dropdownService.toggle();
+  }
+
+  protected connectedCallback() {
+    super.connectedCallback();
+    this.dropdownService = new DropdownService(this.el.querySelector('.dropdown-toggle') as HTMLButtonElement | HTMLAnchorElement);
+    this.init(Bs4DropdownComponent.observedAttributes);
   }
 
   protected template() {

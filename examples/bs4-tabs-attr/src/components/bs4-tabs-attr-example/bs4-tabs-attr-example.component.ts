@@ -12,6 +12,10 @@ export class Bs4TabsAttrExampleComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
+  }
+
+  protected connectedCallback() {
+    super.connectedCallback();
     this.init([]);
   }
 

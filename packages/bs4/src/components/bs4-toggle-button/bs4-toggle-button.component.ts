@@ -12,15 +12,16 @@ interface Scope {
   isClosed: boolean;
 }
 
+// TODO extend from Bs4ButtonComponent
 export class Bs4ToggleButtonComponent extends Component {
-
-  public static tagName: string = 'bs4-toggle-button';
-
-  protected autobind = true;
 
   static get observedAttributes() {
     return ['target-id'];
   }
+
+  public static tagName: string = 'bs4-toggle-button';
+
+  protected autobind = true;
 
   protected eventDispatcher?: EventDispatcher;
 
@@ -33,13 +34,17 @@ export class Bs4ToggleButtonComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    this.init(Bs4ToggleButtonComponent.observedAttributes);
   }
 
   public toggle() {
     if (this.eventDispatcher) {
       this.eventDispatcher.trigger('toggle', this.scope.targetId);
     }
+  }
+
+  protected connectedCallback() {
+    super.connectedCallback();
+    this.init(Bs4ToggleButtonComponent.observedAttributes);
   }
 
   protected onToggledEvent(state: State) {

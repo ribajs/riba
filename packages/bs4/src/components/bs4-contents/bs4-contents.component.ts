@@ -63,6 +63,10 @@ export class Bs4ContentsComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
+  }
+
+  protected connectedCallback() {
+    super.connectedCallback();
     this.init(Bs4ContentsComponent.observedAttributes);
   }
 

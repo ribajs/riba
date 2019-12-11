@@ -7,6 +7,9 @@ export class Bs4TabsTplExampleComponent extends Component {
   protected scope = {};
   constructor(element?: HTMLElement) {
     super(element);
+  }
+  protected connectedCallback() {
+    super.connectedCallback();
     this.init([]);
   }
   protected template() {
