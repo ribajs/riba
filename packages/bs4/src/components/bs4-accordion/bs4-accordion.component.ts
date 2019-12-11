@@ -19,6 +19,8 @@ interface Scope {
   toggle: Bs4AccordionComponent['toggle'];
   show: Bs4AccordionComponent['show'];
   hide: Bs4AccordionComponent['hide'];
+  collapseIconSrc?: string;
+  collapseIconSize: number;
 }
 
 export class Bs4AccordionComponent extends TemplatesComponent {
@@ -45,7 +47,7 @@ export class Bs4AccordionComponent extends TemplatesComponent {
   // protected collapseService?: CollapseService;
 
   static get observedAttributes() {
-    return ['collapse-icon-src'];
+    return ['collapse-icon-src', 'collapse-icon-size'];
   }
 
   protected scope: Scope = {
@@ -53,6 +55,7 @@ export class Bs4AccordionComponent extends TemplatesComponent {
     toggle: this.toggle,
     show: this.show,
     hide: this.hide,
+    collapseIconSize: 16,
   };
 
   constructor(element?: HTMLElement) {
