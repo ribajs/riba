@@ -1,5 +1,4 @@
 import {
-  Binding,
   handleizeFormatter,
 } from '@ribajs/core';
 import { CollapseService } from '../../services/collapse.service';
@@ -12,12 +11,14 @@ interface AccordionItem {
   title: string;
   content: string;
   show: boolean;
+  iconDirection: 'left' | 'left-up' | 'up' | 'up-right' | 'right' | 'right-down' | 'down' | 'down-left';
 }
 
 interface Scope {
   items: AccordionItem[];
   toggle: Bs4AccordionComponent['toggle'];
-  CLASSNAME: typeof CollapseService.CLASSNAME;
+  show: Bs4AccordionComponent['show'];
+  hide: Bs4AccordionComponent['hide'];
 }
 
 export class Bs4AccordionComponent extends TemplatesComponent {
@@ -31,18 +32,27 @@ export class Bs4AccordionComponent extends TemplatesComponent {
       name: 'title',
       required: true,
     },
+    {
+      name: 'show',
+      required: false,
+    },
+    {
+      name: 'icon-direction',
+      required: false,
+    },
   ];
 
   // protected collapseService?: CollapseService;
 
   static get observedAttributes() {
-    return [];
+    return ['collapse-icon-src'];
   }
 
   protected scope: Scope = {
     items: [],
     toggle: this.toggle,
-    CLASSNAME: CollapseService.CLASSNAME,
+    show: this.show,
+    hide: this.hide,
   };
 
   constructor(element?: HTMLElement) {
@@ -50,16 +60,55 @@ export class Bs4AccordionComponent extends TemplatesComponent {
     // console.debug('constructor', this);
   }
 
-  public toggle(item: AccordionItem, index: number, binding: Binding, event: Event, model: any, element: HTMLElement) {
+  public hide(item: AccordionItem, index: number) {
+    const target = this.el.querySelector<HTMLElement>(`[data-index="${index}"]`);
+    if (target) {
+      this.initItemEventListeners(item, target);
+      CollapseService.hide(target);
+    }
+  }
+
+  public show(item: AccordionItem, index: number) {
     const target = this.el.querySelector<HTMLElement>(`[data-index="${index}"]`);
     const others = this.el.querySelectorAll<HTMLElement>(`[data-index]:not([data-index="${index}"])`);
     if (others) {
       CollapseService.hideAll(others);
     }
     if (target) {
+      this.initItemEventListeners(item, target);
+      CollapseService.show(target);
+    }
+  }
+
+  public toggle(item: AccordionItem, index: number) {
+    const target = this.el.querySelector<HTMLElement>(`[data-index="${index}"]`);
+    const others = this.el.querySelectorAll<HTMLElement>(`[data-index]:not([data-index="${index}"])`);
+    if (others) {
+      CollapseService.hideAll(others);
+    }
+    if (target) {
+      this.initItemEventListeners(item, target);
       CollapseService.toggle(target);
     }
+  }
+
+  protected initItemEventListeners(item: AccordionItem, element: HTMLElement) {
+    element.removeEventListener(CollapseService.EVENT.HIDE, this.onHide.bind(this, element, item));
+    element.removeEventListener(CollapseService.EVENT.SHOW, this.onShow.bind(this, element, item));
+    element.addEventListener(CollapseService.EVENT.HIDE, this.onHide.bind(this, element, item), { once: true });
+    element.addEventListener(CollapseService.EVENT.SHOW, this.onShow.bind(this, element, item), { once: true });
+  }
+
+  protected onShow(element: HTMLElement, item: AccordionItem) {
+    console.debug('onShow', element, item);
     item.show = true;
+    item.iconDirection = 'down';
+  }
+
+  protected onHide(element: HTMLElement, item: AccordionItem) {
+    console.debug('onHide', element, item);
+    item.show = false;
+    item.iconDirection = 'up';
   }
 
   protected transformTemplateAttributes(attributes: any) {

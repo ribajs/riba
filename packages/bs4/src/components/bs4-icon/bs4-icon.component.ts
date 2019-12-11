@@ -43,7 +43,7 @@ export class Bs4IconComponent extends Component {
       if (newValue.indexOf(',') !== -1) {
         newValue = newValue.split(',');
         if (newValue.length > 0) {
-          this.el.className.replace(/(^|\s)color-\S+/g, '');
+          this.el.className = this.el.className.replace(/(^|\s)color-\S+/g, '');
           for (let i = 0; i < newValue.length; i++) {
             const newColor: string = newValue[i];
             if (newColor.startsWith('#') || newColor.startsWith('rgb')) {
@@ -54,7 +54,7 @@ export class Bs4IconComponent extends Component {
         }
       } else {
         this.el.style.color = newValue;
-        this.el.className.replace(/(^|\s)color-\S+/g, '');
+        this.el.className = this.el.className.replace(/(^|\s)color-\S+/g, '');
         this.el.classList.add(`color-${newValue}`);
       }
     }
@@ -63,21 +63,21 @@ export class Bs4IconComponent extends Component {
       const size = newValue;
       this.el.style.height = size + 'px';
       this.el.style.width = size + 'px';
-      this.el.className.replace(/(^|\s)size-\S+/g, '');
+      this.el.className = this.el.className.replace(/(^|\s)size-\S+/g, '');
       this.el.classList.add(`size-${size}`);
     }
 
     if (name === 'width') {
       const width = newValue;
       this.el.style.width = width  + 'px';
-      this.el.className.replace(/(^|\s)width-\S+/g, '');
+      this.el.className = this.el.className.replace(/(^|\s)width-\S+/g, '');
       this.el.classList.add(`width-${width}`);
     }
 
     if (name === 'height') {
       const height = newValue;
       this.el.style.height = height  + 'px';
-      this.el.className.replace(/(^|\s)height-\S+/g, '');
+      this.el.className = this.el.className.replace(/(^|\s)height-\S+/g, '');
       this.el.classList.add(`height-${height}`);
     }
 
@@ -102,8 +102,8 @@ export class Bs4IconComponent extends Component {
         classString += ' rotate-225';
       }
 
-      this.el.className.replace(/(^|\s)direction-\S+/g, '');
-      this.el.className.replace(/(^|\s)rotate-\S+/g, '');
+      this.el.className = this.el.className.replace(/(^|\s)direction-\S+/g, '');
+      this.el.className = this.el.className.replace(/(^|\s)rotate-\S+/g, '');
       this.el.className += ' ' + classString;
     }
   }

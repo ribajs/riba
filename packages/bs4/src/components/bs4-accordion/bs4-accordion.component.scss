@@ -2,6 +2,12 @@ bs4-accordion {
   .card-header {
     &.btn {
       text-align: inherit;
+      &.btn-link {
+        text-decoration: none;
+        &:hover {
+          text-decoration: none;
+        }
+      }
     }
   }
 }

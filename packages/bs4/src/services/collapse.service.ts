@@ -25,6 +25,7 @@ export class CollapseService {
   };
 
   public static show(element: HTMLElement, animated = true) {
+    element.dispatchEvent(new Event(CollapseService.EVENT.SHOW));
     if (animated) {
       element.addEventListener('webkitTransitionEnd' as 'animationend', this.onShowTransitionEnd.bind(this, element), { once: true });
       element.addEventListener('transitionend', this.onShowTransitionEnd.bind(this, element), { once: true });
@@ -46,6 +47,7 @@ export class CollapseService {
   }
 
   public static hide(element: HTMLElement, animated = true) {
+    element.dispatchEvent(new Event(CollapseService.EVENT.HIDE));
     if (animated) {
       element.addEventListener('webkitTransitionEnd' as 'animationend', this.onHideTransitionEnd.bind(this, element), { once: true });
       element.addEventListener('transitionend', this.onHideTransitionEnd.bind(this, element), { once: true });
