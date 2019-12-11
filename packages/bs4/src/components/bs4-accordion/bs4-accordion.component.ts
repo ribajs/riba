@@ -60,7 +60,6 @@ export class Bs4AccordionComponent extends TemplatesComponent {
 
   constructor(element?: HTMLElement) {
     super(element);
-    // console.debug('constructor', this);
   }
 
   public hide(item: AccordionItem, index: number) {
@@ -103,13 +102,11 @@ export class Bs4AccordionComponent extends TemplatesComponent {
   }
 
   protected onShow(element: HTMLElement, item: AccordionItem) {
-    console.debug('onShow', element, item);
     item.show = true;
     item.iconDirection = 'down';
   }
 
   protected onHide(element: HTMLElement, item: AccordionItem) {
-    console.debug('onHide', element, item);
     item.show = false;
     item.iconDirection = 'up';
   }
@@ -134,12 +131,10 @@ export class Bs4AccordionComponent extends TemplatesComponent {
 
   protected async beforeBind() {
     return super.beforeBind();
-    // console.debug('beforeBind');
   }
 
   protected async afterBind() {
     return super.beforeBind();
-    // console.debug('afterBind', this.scope);
   }
 
   protected requiredAttributes() {
