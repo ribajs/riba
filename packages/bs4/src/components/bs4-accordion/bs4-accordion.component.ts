@@ -103,17 +103,19 @@ export class Bs4AccordionComponent extends TemplatesComponent {
 
   protected onShow(element: HTMLElement, item: AccordionItem) {
     item.show = true;
-    item.iconDirection = 'down';
+    item.iconDirection = 'up';
   }
 
   protected onHide(element: HTMLElement, item: AccordionItem) {
     item.show = false;
-    item.iconDirection = 'up';
+    item.iconDirection = 'down';
   }
 
   protected transformTemplateAttributes(attributes: any) {
     attributes.handle = attributes.handle || handleizeFormatter.read(attributes.title);
-    attributes.show = attributes.show || false;
+    attributes.show = !!attributes.show;
+    attributes.iconDirection = attributes.iconDirection || attributes.show ? 'up' : 'down';
+
     return attributes;
   }
 

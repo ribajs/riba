@@ -113,12 +113,12 @@ export class Bs4IconComponent extends Component {
     this.el.setAttribute('aria-hidden', 'true');
     this.el.setAttribute('role', 'img');
     this.el.classList.add('iconset');
-
-    // set default values
-    // this.attributeChangedCallback('size', null, 32, null);
-    this.attributeChangedCallback('direction', null, 'top', null);
-
     this.init(Bs4IconComponent.observedAttributes);
+    // set default values
+    if (!this.scope.direction) {
+      this.scope.direction = 'up';
+      this.attributeChangedCallback('direction', null, this.scope.direction, null);
+    }
   }
 
   protected template() {
