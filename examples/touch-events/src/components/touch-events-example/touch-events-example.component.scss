@@ -1,0 +1,23 @@
+rv-touch-events-example {
+  display: block;
+  #touch-zone {
+    user-select: none;
+    min-height: 300px;
+  }
+  #console {
+    overflow: auto;
+    max-height: 100%;
+    .log {
+      margin: 0;
+      @extend .small;
+      @extend .d-flex;
+      @extend .justify-content-between;
+      .name {
+
+      }
+      time {
+  
+      }
+    }
+  }
+}

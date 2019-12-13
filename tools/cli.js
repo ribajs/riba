@@ -102,6 +102,10 @@ const PACKAGES = [
     path: 'examples/i18n-static/',
     available: false,
   },
+  {
+    path: 'examples/touch-events/',
+    available: false,
+  },
 ];
 
 const getPackagePath = (modulePath) => {

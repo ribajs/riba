@@ -1,0 +1,27 @@
+<div class="row flex-column flex-md-row d-flex flex-nowrap h-100">
+  <!--rv-on-tapmove="log | args 'tapmove'"-->
+  <div
+    class="col-md-8 bg-light text-dark py-3 d-flex justify-content-center align-items-center"
+    id="touch-zone"
+    rv-on-tapstart="log | args 'tapstart'"
+    rv-on-tapend="log | args 'tapend'"
+    rv-on-tap="log | args 'tap'"
+    rv-on-singletap="log | args 'singletap'"
+    rv-on-doubletap="log | args 'doubletap'"
+    rv-on-taphold="log | args 'taphold'"
+    rv-on-swipe="log | args 'swipe'"
+    rv-on-swipeup="log | args 'swipeup'"
+    rv-on-swiperight="log | args 'swiperight'"
+    rv-on-swipedown="log | args 'swipedown'"
+    rv-on-swipeleft="log | args 'swipeleft'"
+    rv-on-swipeend="log | args 'swipeend'"
+    rv-on-scrollstart="log | args 'scrollstart'"
+    rv-on-scrollend="log | args 'scrollend'"
+    rv-on-orientationchange="log | args 'orientationchange'"
+  >
+    <span>Touch here</span>
+  </div>
+  <div class="col-md-4 bg-dark text-light py-3 h-100" id="console">
+    <p id="no-data" style="display: none;">Start touching to send data to this console.</p>
+  </div>
+</div>
