@@ -43,15 +43,15 @@
     "watch:browser": "webpack --watch --env.dev"
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.4",
-    "@babel/core": "^7.7.4",
+    "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.7.4",
-    "@babel/plugin-transform-runtime": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.7.6",
+    "@babel/preset-env": "^7.7.6",
     "@babel/preset-typescript": "^7.7.4",
     "@types/jest": "^24.0.23",
-    "@types/node": "^12.12.14",
+    "@types/node": "^12.12.17",
     "babel-loader": "^8.0.6",
     "babel-plugin-array-includes": "^2.0.3",
     "jest": "^24.9.0",
@@ -59,14 +59,14 @@
     "source-map-support": "^0.5.16",
     "ts-jest": "^24.2.0",
     "tslint": "^5.20.1",
-    "typescript": "^3.7.2",
+    "typescript": "^3.7.3",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-glob-entry": "^2.1.1"
   },
   "dependencies": {
-    "@babel/runtime-corejs2": "^7.7.4",
+    "@babel/runtime-corejs2": "^7.7.6",
     "@types/core-js": "^2.5.2"
   },
   "bugs": {

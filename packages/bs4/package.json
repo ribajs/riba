@@ -40,12 +40,12 @@
     "build:module": "tsc"
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.4",
-    "@babel/core": "^7.7.4",
+    "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.7.4",
-    "@babel/plugin-transform-runtime": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.7.6",
+    "@babel/preset-env": "^7.7.6",
     "@babel/preset-typescript": "^7.7.4",
     "@types/jest": "^24.0.23",
     "babel-loader": "^8.0.6",
@@ -53,13 +53,13 @@
     "jest": "^24.9.0",
     "ts-jest": "^24.2.0",
     "tslint": "^5.20.1",
-    "typescript": "^3.7.2",
+    "typescript": "^3.7.3",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
     "@ribajs/core": "^1.7.0",
-    "bootstrap": "^4.3.1",
+    "bootstrap": "^4.4.1",
     "popper.js": "^1.16.0"
   },
   "bugs": {

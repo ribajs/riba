@@ -47,15 +47,15 @@
   "url": "https://github.com/ribajs/riba/tree/master/packages/schematics",
   "homepage": "https://ribajs.com/",
   "dependencies": {
-    "@angular-devkit/core": "8.3.19",
-    "@angular-devkit/schematics": "8.3.19",
+    "@angular-devkit/core": "8.3.20",
+    "@angular-devkit/schematics": "8.3.20",
     "debug": "^4.1.1",
     "source-map-support": "^0.5.16",
-    "typescript": "3.7.2"
+    "typescript": "3.7.3"
   },
   "devDependencies": {
     "@types/jest": "24.0.23",
-    "@types/node": "12.12.14",
+    "@types/node": "12.12.17",
     "@types/debug": "^4.1.5",
     "tslint": "5.20.1"
   },
