@@ -5,7 +5,7 @@
  * by Ben Major
  * https://github.com/benmajor/jQuery-Touch-Events
  *
- * Copyright 2011-2017, Ben Major
+ * Copyright 2011-2019, Ben Major
  * Licensed under the MIT License:
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -244,7 +244,7 @@ export default ($: any) => {
                     var ele_threshold = ($this.parent().data('threshold')) ? $this.parent().data('threshold') : $this.data('threshold'),
                         threshold = (typeof ele_threshold !== 'undefined' && ele_threshold !== false && parseInt(ele_threshold)) ? parseInt(ele_threshold) : settings.taphold_threshold;
 
-                    settings.hold_timer = window.setTimeout(function () {
+                    $this.data('hold_timer', window.setTimeout(function () {
 
                         var diff_x = (start_pos.x - end_x),
                             diff_y = (start_pos.y - end_y);
@@ -282,14 +282,14 @@ export default ($: any) => {
 
                             triggerCustomEvent(thisObject, evt_name, e, touchData);
                         }
-                    }, threshold);
+                    }, threshold) );
 
                     return true;
                 }
             }).on(settings.endevent, function tapHoldFunc2() {
                 $this.data('callee2', tapHoldFunc2);
                 $this.data('tapheld', false);
-                window.clearTimeout(settings.hold_timer);
+                window.clearTimeout($this.data('hold_timer'));
             })
                 .on(settings.moveevent, function tapHoldFunc3(e: any) {
                     $this.data('callee3', tapHoldFunc3);
@@ -307,22 +307,24 @@ export default ($: any) => {
     // doubletap Event:
     $.event.special.doubletap = {
         setup: function () {
-            var thisObject = this,
-                $this = $(thisObject),
-                action: number,
-                firstTap: any = null,
-                origEvent: any,
-                cooling = false;
+            const thisObject = this;
+            const $this = $(thisObject);
+            let action: number;
+            let firstTap: any = null;
+            let origEvent: TouchEvent;
+            // let origTarget: EventTarget | null = null;
+            let cooling = false;
 
-            $this.on(settings.startevent, function doubleTapFunc1(e: any) {
+            $this.on(settings.startevent, function doubleTapFunc1(e: JQuery.Event & Event) {
                 if (e.which && e.which !== 1) {
                     return false;
                 }
 
                 $this.data('doubletapped', false);
+                // origTarget = e.target;
                 $this.data('callee1', doubleTapFunc1);
 
-                origEvent = e.originalEvent;
+                origEvent = (e as any).originalEvent as TouchEvent;
                 if (!firstTap) {
                     firstTap = {
                         'position': {
@@ -330,12 +332,12 @@ export default ($: any) => {
                             'y': (settings.touch_capable) ? origEvent.touches[0].pageY : e.pageY
                         },
                         'offset': {
-                            'x': (settings.touch_capable) ? Math.round(origEvent.changedTouches[0].pageX - ($this.offset() ? $this.offset().left : 0)) : Math.round(e.pageX - ($this.offset() ? $this.offset().left : 0)),
-                            'y': (settings.touch_capable) ? Math.round(origEvent.changedTouches[0].pageY - ($this.offset() ? $this.offset().top : 0)) : Math.round(e.pageY - ($this.offset() ? $this.offset().top : 0))
+                            'x': (settings.touch_capable) ? Math.round(origEvent.changedTouches[0].pageX - ($this.offset() ? $this.offset().left : 0)) : Math.round(e.pageX || 0 - ($this.offset() ? $this.offset().left : 0)),
+                            'y': (settings.touch_capable) ? Math.round(origEvent.changedTouches[0].pageY - ($this.offset() ? $this.offset().top : 0)) : Math.round(e.pageY || 0 - ($this.offset() ? $this.offset().top : 0))
                         },
                         'time': Date.now(),
                         'target': e.target,
-                        'element': e.originalEvent.srcElement,
+                        'element': (e as any).originalEvent.srcElement,
                         'index': $(e.target).index()
                     };
                 }
@@ -381,6 +383,11 @@ export default ($: any) => {
                     }
 
                     cooling = true;
+
+                    window.setTimeout(function () {
+                    	cooling = false;
+                    }, settings.doubletap_int);
+
                 } else {
                     $this.data('lastTouch', now);
                     action = window.setTimeout(function () {

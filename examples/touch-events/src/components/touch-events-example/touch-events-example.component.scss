@@ -1,10 +1,10 @@
 rv-touch-events-example {
   display: block;
-  #touch-zone {
+  .touch-zone {
     user-select: none;
     min-height: 300px;
   }
-  #console {
+  .console {
     overflow: auto;
     max-height: 100%;
     .log {
