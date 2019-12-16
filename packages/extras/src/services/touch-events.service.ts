@@ -102,11 +102,13 @@ export class TouchEventService {
     return instances[index];
   }
 
+  /** Used internally for taphold */
   protected startPosition: Position = {
     x: 0,
     y: 0,
   };
 
+  /** Used internally for taphold */
   protected endPosition: Position = {
     x: 0,
     y: 0,
@@ -324,7 +326,7 @@ export class TouchEventService {
 
           touchData.push(touch);
         }
-        const eventName = (touchesLength === 2) ? 'taphold2' : 'taphold';
+        const eventName = (touchesLength > 1) ? 'taphold' + touchesLength : 'taphold';
         this.triggerCustomEvent(eventName, touchData);
       }
 

@@ -1,5 +1,4 @@
 import { Binder, eventHandlerFunction } from '../interfaces';
-import { TouchEventService } from '../services/touch-events.service';
 
 /**
  * Binds an event handler on the element.
@@ -15,11 +14,6 @@ export const onEventBinder: Binder<eventHandlerFunction> = {
         handler: null,
       };
     }
-    if (this.el.dataset.touchEvents) {
-      this.customData.touchEventService = TouchEventService.getInstance(Number(this.el.dataset.touchEvents));
-    } else {
-      this.customData.touchEventService = new TouchEventService(el);
-    }
   },
 
   unbind(el: HTMLElement) {
@@ -29,9 +23,6 @@ export const onEventBinder: Binder<eventHandlerFunction> = {
       }
       const eventName = this.args[0] as string;
       el.removeEventListener(eventName, this.customData.handler);
-    }
-    if (this.customData.touchEventService) {
-      (this.customData.touchEventService as TouchEventService).removeEventListeners();
     }
   },
 
