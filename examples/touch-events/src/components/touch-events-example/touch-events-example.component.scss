@@ -3,6 +3,12 @@ rv-touch-events-example {
   .touch-zone {
     user-select: none;
     min-height: 300px;
+    overflow: auto;
+    span {
+      height: 200%;
+      @extend .d-flex;
+      @extend .justify-content-center;
+    }
   }
   .console {
     overflow: auto;
