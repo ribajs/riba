@@ -137,6 +137,7 @@ const publishPackage = (modulePath) => {
   if (package.version === publishedVersion) {
     return console.log(chalk.yellow(`\nSkipped because the current version has already been published`));
   }
+  console.log(chalk.blue(`Publish module in ${modulePath}..`));
   exec('npm publish --access public', {cwd: path.dirname(packagePath), stdio: 'inherit'});
 };
 
@@ -149,13 +150,21 @@ const getPublishPackageVersion = (modulePath, moduleNpmName) => {
 // npm i -g npm-upgrade
 const upgradePackage = (modulePath) => {
   const packagePath = getPackagePath(modulePath);
+  console.log(chalk.blue(`Upgrade packages in ${modulePath}..`));
   exec('npm-upgrade', {cwd: path.dirname(packagePath), stdio: 'inherit'});
 };
 
 const installPackage = (modulePath) => {
   const packagePath = getPackagePath(modulePath);
+  console.log(chalk.blue(`Install packages in ${modulePath}..`));
   exec('npm install', {cwd: path.dirname(packagePath), stdio: 'inherit'});
   exec('npm audit fix', {cwd: path.dirname(packagePath), stdio: 'inherit'});  
+};
+
+const removeNodeModules = (modulePath) => {
+  const packagePath = getPackagePath(modulePath);
+  console.log(chalk.red(`Remove  ${modulePath}node_modules and package-lock.json`));
+  exec('rm -rf package-lock.json ./node_modules', {cwd: path.dirname(packagePath), stdio: 'inherit'});  
 };
 
 /**
@@ -164,6 +173,7 @@ const installPackage = (modulePath) => {
  */
 const linkPackage = (modulePath) => {
   const packagePath = getPackagePath(modulePath);
+  console.log(chalk.blue(`Link packages in ${modulePath}..`));
   exec('npm link', {cwd: path.dirname(packagePath), stdio: 'inherit'});
 };
 
@@ -209,11 +219,15 @@ const buildPackage = (modulePath) => {
  * @param {boolean} linkDependencies 
  * @param {boolean} build 
  */
-const processPackage = (modulePath, bump = false, publish = false, upgrade = false, install = false, link = false, linkDependencies = false, build = false) => {
+const processPackage = (modulePath, bump = false, publish = false, upgrade = false, install = false, link = false, linkDependencies = false, build = false, reinstall = false) => {
   console.log(chalk.blue(`\nProcess ${modulePath}...`));
 
-  if (!bump && !publish && !upgrade && !install && !link && !linkDependencies && !build) {
+  if (!bump && !publish && !upgrade && !install && !link && !linkDependencies && !build && !reinstall) {
     return console.log(chalk.yellow(`\nSkipped`));
+  }
+
+  if (reinstall) {
+    removeNodeModules(modulePath);
   }
 
   if (bump) {
@@ -228,7 +242,7 @@ const processPackage = (modulePath, bump = false, publish = false, upgrade = fal
     upgradePackage(modulePath);
   }
 
-  if (install) {
+  if (install || reinstall) {
     installPackage(modulePath);
   }
 
@@ -255,21 +269,21 @@ const processPackage = (modulePath, bump = false, publish = false, upgrade = fal
  * @param {boolean} linkDependencies 
  * @param {boolean} build 
  */
-const processModules = (bump, publish, upgrade, install, link, linkDependencies, build) => {
+const processModules = (bump, publish, upgrade, install, link, linkDependencies, build, reinstall) => {
 
   PACKAGES.forEach((package) => {
-    processPackage(package.path, bump, package.available && publish, upgrade, install, package.npm && link, linkDependencies, build);
+    processPackage(package.path, bump, package.available && publish, upgrade, install, package.npm && link, linkDependencies, build, reinstall);
   });
 
   // Schematics applications
-  processPackage('packages/schematics/src/lib/application/files/ts', false, false, upgrade, false, false);
+  processPackage('packages/schematics/src/lib/application/files/ts/', false, false, upgrade, false, false, false, false, false);
 
   // root (do not bump this version because it is used as the main version for all other packages)
-  processPackage('', false, false, upgrade, install, false);
+  processPackage('', false, false, upgrade, install, false, false, false, reinstall);
 
   // Special case: Reinstall dependencies on core module after all packages are linked
   if (link) {
-    processPackage('packages/core/', false, false, false, true, false);
+    processPackage('packages/core/', false, false, false, true, false, false, false, false);
   }
 };
 
@@ -316,6 +330,13 @@ program
   .description('Build all packages')
   .action(() => {
     processModules(false, false, false, false, false, false, true);
+  });
+
+  program
+  .command('reinstall')
+  .description('Removeall "node_modules" folders and install the modules again')
+  .action(() => {
+    processModules(false, false, false, false, false, false, false, true);
   });
 
 program.parse(process.argv);

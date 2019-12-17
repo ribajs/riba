@@ -136,6 +136,8 @@ export class TouchEventService {
 
   // PROPERTIES:
 
+  protected el: HTMLElement;
+
   /** Used internally for `taphold` */
   protected startPosition: Position = {
     x: 0,
@@ -205,7 +207,7 @@ export class TouchEventService {
 
   protected settings: Settings;
 
-  constructor(readonly el: HTMLElement, settings: Settings = {
+  constructor(el: HTMLElement, settings: Settings = {
     tapPixelRange: 5,
     swipeHThreshold: 50,
     swipeVThreshold: 50,
@@ -220,6 +222,8 @@ export class TouchEventService {
     tapevent:    ['tap'],
     scrollevent: ['touchmove'],
   }) {
+    this.el = el;
+
     // Set settings by device type (if device is touch capable)
     settings.startevent = settings.touchCapable ? ['touchstart'] : ['mousedown'];
     settings.endevent = settings.touchCapable ? ['touchend'] : ['mouseup'];

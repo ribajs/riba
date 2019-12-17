@@ -4,20 +4,15 @@ module.exports = {
     "@babel/typescript",
     [
       "@babel/preset-env", {
-        "targets": {
-          "ie": "11",
-          "safari": "10",
-          "chrome": "52",
-          "edge": "16",
-          "firefox": "59"
-        }
+        corejs: 3,
+        useBuiltIns: "entry",
       }
     ]
   ],
   "plugins": [
     [
       "@babel/plugin-transform-runtime", {
-        "corejs": 2
+        corejs: 3
       }
     ],
     "@babel/plugin-proposal-class-properties",

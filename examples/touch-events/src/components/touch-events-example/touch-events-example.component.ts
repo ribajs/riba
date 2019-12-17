@@ -4,30 +4,21 @@ import {
 
 import template from './touch-events-example.component.html';
 
-interface Scope {
-  log: TouchEventsExampleComponent['log'];
-}
-
 export class TouchEventsExampleComponent extends Component {
 
   public static tagName: string = 'rv-touch-events-example';
 
   protected autobind = true;
 
-  protected consoleElement?: HTMLDivElement;
-  protected touchZoneElement?: HTMLDivElement;
+  protected consoleElement: HTMLDivElement | null = null;
+  protected touchZoneElement: HTMLDivElement | null = null;
 
-  static get observedAttributes() {
-    return [];
-  }
-
-  protected scope: Scope = {
+  protected scope: any = {
     log: this.log,
   };
 
   constructor(element?: HTMLElement) {
     super(element);
-    // console.debug('constructor', this);
   }
 
   public log(eventName: string, binder: any, event: Event) {
@@ -44,13 +35,12 @@ export class TouchEventsExampleComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init(TouchEventsExampleComponent.observedAttributes);
+    this.init([]);
   }
 
   protected async beforeBind() {
     super.beforeBind()
     .then(() => {
-      // console.debug('beforeBind', this.scope);
       this.consoleElement = this.el.querySelector('.console');
       this.touchZoneElement = this.el.querySelector('.touch-zone');
     });

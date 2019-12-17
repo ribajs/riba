@@ -1,1 +1,1 @@
-export * from './polyfills.module';
+import './polyfills.module';

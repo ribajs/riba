@@ -7,13 +7,15 @@ module.exports = {
     ],
     [
       "@babel/preset-env", {
+        corejs: 3,
+        useBuiltIns: "usage", // or "entry"
       }
     ]
   ],
   "plugins": [
     [
       "@babel/plugin-transform-runtime", {
-        "corejs": 2
+        corejs: 3
       },
     ],
     "@babel/plugin-syntax-export-default-from",

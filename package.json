@@ -36,6 +36,7 @@
     "packages:publish": "node tools/cli.js publish",
     "packages:upgrade": "node tools/cli.js upgrade",
     "packages:install": "node tools/cli.js install",
+    "packages:reinstall": "node tools/cli.js reinstall",
     "packages:link": "node tools/cli.js link",
     "packages:build": "node tools/cli.js build"
   },

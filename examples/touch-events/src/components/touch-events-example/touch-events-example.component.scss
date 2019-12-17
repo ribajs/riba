@@ -15,6 +15,7 @@ rv-touch-events-example {
       @extend .justify-content-between;
       .name {
         @extend .text-info;
+        min-width: 100px;
       }
       .detail {
         @extend .text-warning;

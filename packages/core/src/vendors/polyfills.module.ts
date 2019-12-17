@@ -1,6 +1,3 @@
-// import '@babel/runtime-corejs2/regenerator/index'
-// import '@babel/runtime-corejs2/core-js/promise.js';
-
 // https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent#Polyfill#Polyfill
 (() => {
 
@@ -19,6 +16,3 @@
 
   (window as any).CustomEvent = CustomEvent;
 })();
-
-import 'core-js/fn/string/starts-with.js';
-import '@babel/runtime-corejs2/core-js/promise.js';
