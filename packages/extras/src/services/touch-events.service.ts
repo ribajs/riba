@@ -36,7 +36,6 @@ export interface Settings {
   shakeThreshold: number;
 
   touchCapable: boolean;
-  orientationSupport: boolean;
 
   startevent: Array<'touchstart' | 'mousedown'>;
   endevent: Array<'touchend' | 'touchcancel' | 'mouseup'>;
@@ -53,8 +52,6 @@ export interface Position {
 export interface ScrollPosition extends Position {
   maxX: number;
   maxY: number;
-  percentX: number;
-  percentY: number;
 }
 
 export interface Offset {
@@ -193,6 +190,7 @@ export class TouchEventService {
   /** Used internally for `swipe` */
   protected swipeStarted = false;
 
+  /** Used internally for `tap`, `taphold` and `singletap` */
   protected startTime: number = 0;
 
   // TIMERS:
@@ -214,7 +212,6 @@ export class TouchEventService {
     tapholdThreshold: 750,
     doubletapInterval: 500,
     shakeThreshold: 15,
-    orientationSupport: ('orientation' in window && 'onorientationchange' in window),
     touchCapable: ('ontouchstart' in window),
 
     startevent:  ['touchstart'],
@@ -284,12 +281,7 @@ export class TouchEventService {
       y: element.scrollLeft,
       maxX: element.scrollHeight - element.clientHeight,
       maxY: element.scrollWidth - element.clientWidth,
-      percentX: 0,
-      percentY: 0,
     };
-
-    scrollPosition.percentX = scrollPosition.x / scrollPosition.maxX;
-    scrollPosition.percentY = scrollPosition.y / scrollPosition.maxY;
 
     return scrollPosition;
   }
@@ -751,14 +743,8 @@ export class TouchEventService {
     }
 
     this.scrollTimer = window.setTimeout(() => {
-      Utils.debounce(this.triggerCustomEvent.bind(this, 'scrollend', event, this.scrollPosition));
+      Utils.debounce(this.triggerCustomEvent.bind(this, 'scrollend', event, event.target ? this.getScrollPosition(event.target as HTMLElement) : {}));
       this.scrollPosition = null;
     }, 50);
   }
-
-  /** orientationchange Event */
-  protected orientationchange(event: DeviceOrientationEvent) {
-    // TODO
-  }
-
 }

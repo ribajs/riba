@@ -2,28 +2,7 @@
   <!--rv-on-tapmove="log | args 'tapmove'"-->
   <div
     class="col-md-8 bg-light text-dark py-3 d-flex justify-content-center align-items-center touch-zone"
-    id="touch-zone"
-
-    rv-jquery-on-tapstart="log2 | args 'tapstart'"
-    rv-jquery-on-tapend="log2 | args 'tapend'"
-    rv-jquery-on-tap="log2 | args 'tap'"
-    rv-jquery-on-tap2="log2 | args 'tap2'"
-    rv-jquery-on-tap3="log2 | args 'tap3'"
-    rv-jquery-on-singletap="log2 | args 'singletap'"
-    rv-jquery-on-doubletap="log2 | args 'doubletap'"
-    rv-jquery-on-taphold="log2 | args 'taphold'"
-    rv-jquery-on-swipe="log2 | args 'swipe'"
-    rv-jquery-on-swipeup="log2 | args 'swipeup'"
-    rv-jquery-on-swiperight="log2 | args 'swiperight'"
-    rv-jquery-on-swipedown="log2 | args 'swipedown'"
-    rv-jquery-on-swipeleft="log2 | args 'swipeleft'"
-    rv-jquery-on-swipeend="log2 | args 'swipeend'"
-    rv-jquery-on-scrollstart="log2 | args 'scrollstart'"
-    rv-jquery-on-scrollend="log2 | args 'scrollend'"
-    rv-jquery-on-orientationchange="log2 | args 'orientationchange'"
-
     rv-touch-events
-
     rv-on-tapstart="log | args 'tapstart'"
     rv-on-tapend="log | args 'tapend'"
     rv-on-tap="log | args 'tap'"
@@ -38,16 +17,12 @@
     rv-on-swipedown="log | args 'swipedown'"
     rv-on-swipeleft="log | args 'swipeleft'"
     rv-on-swipeend="log | args 'swipeend'"
-    rv-on-scrollstart="log | args 'scrollstart'"
-    rv-on-scrollend="log | args 'scrollend'"
-    rv-on-orientationchange="log | args 'orientationchange'"
   >
     <span>Touch here</span>
   </div>
-  <div class="col-md-2 bg-dark text-light py-3 h-100 console" id="console">
-    <p class="no-data" style="display: none;">Start touching to send data to this console.</p>
-  </div>
-  <div class="col-md-2 bg-dark text-light py-3 h-100 console" id="console2">
-    <p class="no-data" style="display: none;">Start touching to send data to this console.</p>
+  <div class="col-md-4 bg-dark text-light py-3 h-100 console">
+    <p class="log">
+      <span class="no-data">Start touching to send data to this console.</span>
+    </p>
   </div>
 </div>

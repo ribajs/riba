@@ -9,7 +9,7 @@
     "clear": "rm -rf ./dist",
     "lint:ts": "tslint --fix -c tslint.json 'src/**/*.ts' && tsc --noEmit",
     "test": "jest",
-    "packages:link": "npm link @ribajs/bs4 @ribajs/core @ribajs/jquery @ribajs/extras"
+    "packages:link": "npm link @ribajs/bs4 @ribajs/core @ribajs/extras"
   },
   "author": "",
   "license": "MIT",
@@ -37,7 +37,6 @@
     "@ribajs/bs4": "^1.7.0",
     "@ribajs/core": "^1.7.0",
     "@ribajs/extras": "^1.7.0",
-    "@ribajs/jquery": "^1.7.0",
     "@types/jest": "^24.0.23",
     "autoprefixer": "^9.7.3",
     "postcss-modules": "^1.4.1"
