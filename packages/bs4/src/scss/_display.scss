@@ -1,5 +1,3 @@
-$languages: de en !default;
-
 @each $lang in $languages {
     html[lang="#{$lang}"] {
         .d-#{$lang}-block {

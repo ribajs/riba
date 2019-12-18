@@ -63,7 +63,6 @@ export interface TouchData {
   position: Position;
   offset: Offset;
   time: number;
-  target: EventTarget | null;
   index?: number;
 }
 
@@ -255,6 +254,7 @@ export class TouchEventService {
 
   protected triggerCustomEvent(eventName: string, originalEvent: Event, extraParameters: any = {}) {
     extraParameters.originalEvent = originalEvent;
+    extraParameters.target = originalEvent.target;
     // create and dispatch the event
     const event = new CustomEvent(eventName, {
       detail: extraParameters,
@@ -336,7 +336,6 @@ export class TouchEventService {
       position: this.getPostion(event, positionType),
       offset: this.getOffset(event, offsetType),
       time: Date.now(),
-      target: event.target,
     };
     if (withIndex) {
       touchData.index = this.getElementIndex(event.target as Element | null);
@@ -489,7 +488,7 @@ export class TouchEventService {
         const endTime = Date.now();
         const duration = endTime - this.startTime;
         const touchesLength: number = ((event as TouchEvent).targetTouches) ? (event as TouchEvent).targetTouches.length : 1;
-        const touchData = new Array<TouchData>();
+        const touches = new Array<Partial<TouchData>>();
 
         for (let i = 0; i < touchesLength; i++) {
           const elOffset = this.el.getBoundingClientRect();
@@ -502,14 +501,18 @@ export class TouchEventService {
               x: (this.settings.touchCapable) ? Math.round((event as TouchEvent).changedTouches[i].pageX - (elOffset ? elOffset.left : 0)) : Math.round((event as MouseEvent).pageX - (elOffset ? elOffset.left : 0)),
               y: (this.settings.touchCapable) ? Math.round((event as TouchEvent).changedTouches[i].pageY - (elOffset ? elOffset.top : 0)) : Math.round((event as MouseEvent).pageY - (elOffset ? elOffset.top : 0)),
             },
-            time: Date.now(),
-            target: event.target,
-            duration,
           };
 
-          touchData.push(touch);
+          touches.push(touch);
         }
         const eventName = (touchesLength > 1) ? 'taphold' + touchesLength : 'taphold';
+
+        const touchData = {
+          touches,
+          time: Date.now(),
+          duration,
+        };
+
         this.triggerCustomEvent(eventName, event, touchData);
       }
 
@@ -643,7 +646,7 @@ export class TouchEventService {
       )
     ) {
       const touchesLength: number = ((event as TouchEvent).targetTouches) ? (event as TouchEvent).targetTouches.length : 1;
-      const touchData = new Array<TouchData>();
+      const touches = new Array<Partial<TouchData>>();
 
       for (let i = 0; i < touchesLength; i++) {
         const elOffset = this.el.getBoundingClientRect();
@@ -656,12 +659,16 @@ export class TouchEventService {
             x: (this.settings.touchCapable) ? Math.round((event as TouchEvent).changedTouches[i].pageX - (elOffset ? elOffset.left : 0)) : Math.round((event as MouseEvent).pageX - (elOffset ? elOffset.left : 0)),
             y: (this.settings.touchCapable) ? Math.round((event as TouchEvent).changedTouches[i].pageY - (elOffset ? elOffset.top : 0)) : Math.round((event as MouseEvent).pageY - (elOffset ? elOffset.top : 0)),
           },
-          time: Date.now(),
-          target: event.target,
         };
 
-        touchData.push(touch);
+        touches.push(touch);
       }
+
+      const touchData = {
+        touches,
+        touchesLength,
+        time: Date.now(),
+      };
 
       const eventName = (touchesLength > 1) ? 'tap' + touchesLength : 'tap';
       this.triggerCustomEvent(eventName, event, touchData);
