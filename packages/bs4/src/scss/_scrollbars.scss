@@ -1,37 +1,3 @@
-/**
- * Mixin to customize scrollbars
- * Beware, this does not work in all browsers
- *
- * @author Hugo Giraudel
- *
- * @param {Length} $size - Horizontal scrollbar's height and vertical scrollbar's width
- * @param {Color} $foreground-color - Scrollbar's color
- * @param {Color} $background-color [mix($foreground-color, white, 50%)] - Scrollbar's color
- * @example scss - Scrollbar styling
- *   @include scrollbars(.5em, slategray);
- *
- * @see https://css-tricks.com/snippets/sass/custom-scrollbars-mixin/
- */
- @mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white,  50%)) {
-  // For Google Chrome
-  &::-webkit-scrollbar {
-    width:  $size;
-    height: $size;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: $foreground-color;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: $background-color;
-  }
-
-  // For Internet Explorer
-  scrollbar-face-color: $foreground-color !important;
-  scrollbar-track-color: $background-color !important;
-}
-
 .scrollbar-default {
   &::-webkit-scrollbar, &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-track {
     all: unset !important;
@@ -83,7 +49,6 @@
 .scrollbar-invisible {
   @include scrollbars(.5em, transparent, transparent);
 }
-
 
 
 .scrollbar-black-on-hover {
@@ -156,12 +121,29 @@
   }
 }
 
+
 .scrollbar-x-auto {
   overflow-x: auto;
   max-width: 100%;
 }
 
 .scrollbar-y-auto {
+  overflow-y: auto;
+  max-height: 100%;
+}
+
+.scrollbar-auto {
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+}
+
+.scrollbar-x-visible {
+  overflow-x: visible;
+  max-width: 100%;
+}
+
+.scrollbar-y-visible {
   overflow-y: auto;
   max-height: 100%;
 }
@@ -174,32 +156,81 @@
   overflow-y: hidden;
 }
 
-.scrollbar-x-scroll-on-hover {
-  overflow-x: hidden !important;
+.scrollbar-hidden {
+  overflow: hidden;
+}
+
+.scrollbar-x-scroll {
+  overflow-x: scroll;
+}
+
+.scrollbar-y-scroll {
+  overflow-y: scroll;
+}
+
+.scrollbar-scroll {
+  overflow: scroll;
+}
+
+
+.flex-scrollbar-y-auto {
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  @extend .scrollbar-y-auto;
+}
+
+.flex-scrollbar-x-auto {
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  @extend .scrollbar-x-auto;
+}
+
+.flex-scrollbar-y-visible {
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  @extend .scrollbar-y-visible;
+}
+
+.flex-scrollbar-x-visible {
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  @extend .scrollbar-x-visible;
+}
+
+.flex-scrollbar-y-scroll {
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  @extend .scrollbar-y-scroll;
+}
+
+.flex-scrollbar-x-scroll {
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  @extend .scrollbar-x-scroll;
+}
+
+.flex-scrollbar-scroll {
+  @extend .flex-scrollbar-x-scroll;
+  @extend .flex-scrollbar-y-scroll;
+}
+
+.scrollbar-x-visible-on-hover {
+  @extend .scrollbar-invisible;
   &:hover {
-    overflow-x: scroll !important;
+    overflow-x: visible !important;
     margin-bottom: 0px !important;
   }
 }
 
-.scrollbar-y-scroll-on-hover {
-  overflow-y: hidden !important;
+.scrollbar-y-visible-on-hover {
+  @extend .scrollbar-invisible;
   &:hover {
-    overflow-y: scroll !important;
+    overflow-y: visible !important;
     margin-right: 0px !important;
   }
 }
 
-.scrollbar-a-scroll-on-hover {
-  @extend .scrollbar-x-scroll-on-hover;
-  @extend .scrollbar-y-scroll-on-hover;
-}
-
-
-.scrollbar-x-primary-on-hover {
-  @extend .scrollbar-invisible;
-  &:hover {
-    overflow-x: scroll !important;
-    margin-bottom: 0px !important;
-  }
+.scrollbar-visible-on-hover {
+  @extend .scrollbar-x-visible-on-hover;
+  @extend .scrollbar-y-visible-on-hover;
 }

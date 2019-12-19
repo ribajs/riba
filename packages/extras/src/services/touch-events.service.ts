@@ -1,4 +1,6 @@
 import { Utils } from '@ribajs/core';
+import { Utils as ExtraUtils } from './utils.service';
+import { Position } from '../types';
 
 /**
  * Vanilla version of jQuery Mobile Events
@@ -42,16 +44,6 @@ export interface Settings {
   moveevent: Array<'touchmove' | 'mousemove'>;
   tapevent: Array<'tap' | 'click'>;
   scrollevent: Array<'touchmove' | 'scroll'>;
-}
-
-export interface Position {
-  x: number;
-  y: number;
-}
-
-export interface ScrollPosition extends Position {
-  maxX: number;
-  maxY: number;
 }
 
 export interface Offset {
@@ -279,17 +271,6 @@ export class TouchEventService {
     return swipeDir;
   }
 
-  protected getScrollPosition(element: Element) {
-    const scrollPosition: ScrollPosition = {
-      x: element.scrollTop,
-      y: element.scrollLeft,
-      maxX: element.scrollHeight - element.clientHeight,
-      maxY: element.scrollWidth - element.clientWidth,
-    };
-
-    return scrollPosition;
-  }
-
   protected getPostion(event: TouchEvent | MouseEvent, type: TouchType = TouchType.DEFAULT, index = 0): Position {
     let touchesTypes: TouchList;
     switch (type) {
@@ -338,25 +319,9 @@ export class TouchEventService {
       time: Date.now(),
     };
     if (withIndex) {
-      touchData.index = this.getElementIndex(event.target as Element | null);
+      touchData.index = ExtraUtils.getElementIndex(event.target as Element | null);
     }
     return touchData;
-  }
-
-  /**
-   * Similar to JQuerys `$(el).index();`
-   * @param el
-   */
-  protected getElementIndex(el: Element | null) {
-    if (!el) {
-      return -1;
-    }
-    let i = 0;
-    do {
-      i++;
-      el = (el as HTMLElement).previousElementSibling;
-    } while (el);
-    return i;
   }
 
   protected addEventListeners() {
@@ -538,7 +503,7 @@ export class TouchEventService {
       (
         this.firstTap
         &&
-        this.getElementIndex(event.target as Element | null) === this.firstTap.index
+        ExtraUtils.getElementIndex(event.target as Element | null) === this.firstTap.index
       )
     ) {
       this.doubletapped = true;
@@ -666,7 +631,6 @@ export class TouchEventService {
 
       const touchData = {
         touches,
-        touchesLength,
         time: Date.now(),
       };
 
@@ -745,7 +709,7 @@ export class TouchEventService {
       return false;
     }
     if (this.scrollPosition === null) {
-      this.scrollPosition = this.getScrollPosition(event.target as Element);
+      this.scrollPosition = ExtraUtils.getScrollPosition(event.target as Element);
       this.triggerCustomEvent('scrollstart', event, this.scrollPosition);
     }
 
@@ -754,7 +718,7 @@ export class TouchEventService {
     }
 
     this.scrollTimer = window.setTimeout(() => {
-      Utils.debounce(this.triggerCustomEvent.bind(this, 'scrollend', event, event.target ? this.getScrollPosition(event.target as HTMLElement) : {}));
+      Utils.debounce(this.triggerCustomEvent.bind(this, 'scrollend', event, event.target ? ExtraUtils.getScrollPosition(event.target as HTMLElement) : {}));
       this.scrollPosition = null;
     }, 50);
   }

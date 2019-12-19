@@ -1,7 +1,3 @@
-button, .btn, select, .custom-select, [href] {
-  cursor: pointer;
-}
-
 // The cursor indicates an alias of something is to be created
 .cursor-alias {
   cursor: alias;
@@ -190,4 +186,19 @@ button, .btn, select, .custom-select, [href] {
 // Inherits this property from its parent element. See https://www.w3schools.com/cssref/css_inherit.asp
 .cursor-inherit {
   cursor: inherit;
+}
+
+
+// Default pointer elements
+button, .btn, select, .custom-select, [href] {
+  cursor: pointer;
+}
+
+// Drag and drop / scrollbar-dragable
+.dragable {
+  user-select: none;
+  @extend .cursor-grab;
+  &:active {
+    @extend .cursor-grabbing;
+  }
 }

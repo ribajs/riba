@@ -28,6 +28,7 @@ export abstract class TemplatesComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     this.addItemsByTemplate();
+    this.removeTemplates();
   }
 
   /**
@@ -81,6 +82,13 @@ export abstract class TemplatesComponent extends Component {
     const templates = this.el.querySelectorAll<HTMLTemplateElement>('template');
     templates.forEach((tpl) => {
       this.addItemByTemplate(tpl);
+    });
+  }
+
+  protected removeTemplates() {
+    const templates = this.el.querySelectorAll<HTMLTemplateElement>('template');
+    templates.forEach((tpl) => {
+      this.el.removeChild(tpl);
     });
   }
 

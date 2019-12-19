@@ -7,12 +7,12 @@ export * from './services';
 import { RibaModule } from '@ribajs/core';
 import * as binders from './binders';
 // import * as formatters from './formatters';
-import { TouchEventService } from './services';
+import { TouchEventService, Autoscroll } from './services';
 // import * as components from './components';
 
 export const extrasModule: RibaModule = {
   formatters: {},
   binders,
-  services: { TouchEventService },
+  services: { TouchEventService, Autoscroll },
   components: {},
 };
