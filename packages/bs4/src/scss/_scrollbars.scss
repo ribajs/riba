@@ -1,9 +1,9 @@
 .scrollbar-default {
   &::-webkit-scrollbar, &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-track {
-    all: unset !important;
+    all: initial !important;
   }
-  scrollbar-face-color: unset !important;
-  scrollbar-track-color: unset !important;
+  scrollbar-face-color: initial !important;
+  scrollbar-track-color: initial !important;
 }
 
 .scrollbar-black {
@@ -144,9 +144,15 @@
 }
 
 .scrollbar-y-visible {
-  overflow-y: auto;
+  overflow-y: visible;
   max-height: 100%;
 }
+
+.scrollbar-visible {
+  @extend .scrollbar-x-visible;
+  @extend .scrollbar-y-visible;
+}
+
 
 .scrollbar-x-hidden {
   overflow-x: hidden;
@@ -159,6 +165,7 @@
 .scrollbar-hidden {
   overflow: hidden;
 }
+
 
 .scrollbar-x-scroll {
   overflow-x: scroll;
@@ -185,6 +192,11 @@
   @extend .scrollbar-x-auto;
 }
 
+.flex-scrollbar-auto {
+  @extend .flex-scrollbar-x-auto;
+  @extend .flex-scrollbar-y-auto;
+}
+
 .flex-scrollbar-y-visible {
   flex-wrap: nowrap;
   white-space: nowrap;
@@ -196,6 +208,7 @@
   white-space: nowrap;
   @extend .scrollbar-x-visible;
 }
+
 
 .flex-scrollbar-y-scroll {
   flex-wrap: nowrap;
@@ -213,6 +226,7 @@
   @extend .flex-scrollbar-x-scroll;
   @extend .flex-scrollbar-y-scroll;
 }
+
 
 .scrollbar-x-visible-on-hover {
   @extend .scrollbar-invisible;

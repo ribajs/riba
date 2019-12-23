@@ -17,9 +17,9 @@
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "license": "MIT",
   "dependencies": {
-    "@angular-devkit/core": "^8.3.20",
-    "@angular-devkit/schematics": "^8.3.20",
-    "@angular-devkit/schematics-cli": "^0.803.20",
+    "@angular-devkit/core": "^8.3.21",
+    "@angular-devkit/schematics": "^8.3.21",
+    "@angular-devkit/schematics-cli": "^0.803.21",
     "@ribajs/core": "^1.7.0",
     "@ribajs/schematics": "^1.7.0",
     "@types/node-emoji": "^1.8.1",
@@ -36,14 +36,14 @@
     "source-map-support": "^0.5.16"
   },
   "devDependencies": {
-    "@babel/runtime-corejs3": "^7.7.6",
+    "@babel/runtime-corejs3": "^7.7.7",
     "@types/dashify": "^1.0.0",
     "@types/debug": "^4.1.5",
     "@types/inquirer": "^6.5.0",
-    "@types/node": "^12.12.19",
+    "@types/node": "^12.12.21",
     "@types/ora": "^3.2.0",
     "@types/os-name": "^3.1.0",
-    "core-js": "^3.5.0",
-    "typescript": "^3.7.3"
+    "core-js": "^3.6.0",
+    "typescript": "^3.7.4"
   }
 }

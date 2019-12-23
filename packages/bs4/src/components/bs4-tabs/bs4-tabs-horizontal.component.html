@@ -1,8 +1,8 @@
-<ul role="tablist" class="nav nav-tabs">
+<ul rv-scrollbar-dragable rv-aria-orientation="optionTabsAngle" role="tablist" class="nav nav-tabs flex-scrollbar-x-auto scrollbar-y-hidden">
   <li class="nav-item" rv-each-tab="items">
     <button role="tab" class="btn btn-link nav-link" rv-class-active="tab.active" rv-id="'tab-title-' | append tab.handle" rv-aria-controls="'tab-content-' | append tab.handle" rv-on-click="activate | args tab" rv-html="tab.title"></button>
   </li>
 </ul>
 <div class="tab-content">
   <div rv-each-tab="items" role="tabpanel" class="tab-pane" rv-class-show="tab.active" rv-class-active="tab.active" rv-id="'tab-content-' | append tab.handle" rv-aria-labelledby="'tab-title-' | append tab.handle" rv-html="tab.content"></div>
-</div>
+</div>  

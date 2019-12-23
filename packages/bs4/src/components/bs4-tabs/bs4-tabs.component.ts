@@ -1,5 +1,6 @@
 import { Binding, handleizeFormatter } from '@ribajs/core';
-import template from './bs4-tabs.component.html';
+import templateHorizontal from './bs4-tabs-horizontal.component.html';
+import templateVertical from './bs4-tabs-vertical.component.html';
 
 import { TemplatesComponent } from '../templates/templates.component';
 
@@ -15,6 +16,7 @@ export interface Scope {
   items: Tab[];
   activate: Bs4TabsComponent['activate'];
   optionTabsAutoHeight: boolean;
+  optionTabsAngle: 'vertical' | 'horizontal';
 }
 
 export class Bs4TabsComponent extends TemplatesComponent {
@@ -44,6 +46,7 @@ export class Bs4TabsComponent extends TemplatesComponent {
     items: new Array<Tab>(),
     activate: this.activate,
     optionTabsAutoHeight: false,
+    optionTabsAngle: 'horizontal',
   };
 
   protected tabs?: NodeListOf<Element>;
@@ -53,6 +56,7 @@ export class Bs4TabsComponent extends TemplatesComponent {
   static get observedAttributes() {
     return [
       'option-tabs-auto-height',
+      'option-tabs-angle',
       'tab-0-title', 'tab-0-content', 'tab-0-handle',
       'tab-1-title', 'tab-1-content', 'tab-1-handle',
       'tab-2-title', 'tab-2-content', 'tab-2-handle',
@@ -249,7 +253,11 @@ export class Bs4TabsComponent extends TemplatesComponent {
   protected template() {
     // Only set the component template if there no childs or the childs are templates
     if (!this.el.hasChildNodes() || this.hasOnlyTemplateChilds()) {
-      return template;
+      if (this.scope.optionTabsAngle === 'horizontal') {
+        return templateHorizontal;
+      } else {
+        return templateVertical;
+      }
     } else {
       return null;
     }
