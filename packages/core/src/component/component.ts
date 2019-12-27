@@ -51,9 +51,7 @@ export abstract class Component extends FakeHTMLElement {
 
   protected abstract scope: any;
 
-  public get bound() {
-    return !!this.view;
-  }
+  protected bound = false;
 
   /**
    * If true the component will automatically bind the component to riba if all required attributes are setted
@@ -101,7 +99,6 @@ export abstract class Component extends FakeHTMLElement {
   }
 
   protected async init(observedAttributes: string[]) {
-
     this.initAttributeObserver(observedAttributes);
 
     this.getPassedObservedAttributes(observedAttributes);
@@ -358,16 +355,14 @@ export abstract class Component extends FakeHTMLElement {
       return null;
     }
 
+    this.templateLoaded = true;
+
     // if innerHTML is null this component uses the innerHTML which he already has!
     return Promise.resolve(this.template())
     .then((template) => {
       if (template !== null) {
         this.el.innerHTML = template;
       }
-      return template;
-    })
-    .then((template) => {
-      this.templateLoaded = true;
       return template;
     })
     .catch((error) => {
@@ -379,14 +374,16 @@ export abstract class Component extends FakeHTMLElement {
 
   protected async bind() {
     if (this.bound) {
-      // console.warn('component already bounded');
-      return;
+      console.warn('component already bounded');
+      return this.view;
     }
 
     if (!this.checkRequiredAttributes()) {
       // console.warn('not all required attributes are set for bind');
       return;
     }
+
+    this.bound = true;
 
     await this.beforeBind()
     .then(() => {
@@ -412,6 +409,7 @@ export abstract class Component extends FakeHTMLElement {
       return this.afterBind();
     })
     .catch((error) => {
+      this.bound = false;
       console.error(error);
     });
 

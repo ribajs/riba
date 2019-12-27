@@ -1,0 +1,37 @@
+bs4-slideshow {
+  display: block;
+  @extend .carousel;
+
+  .slideshow-inner {
+    @extend .row;
+    @extend .flex-scrollbar-x-scroll;
+    @extend .scrollbar-invisible;
+  }
+
+  .slideshow-control-prev, .slideshow-control-next {
+    color: inherit;
+    width: 50px;
+    padding: 0;
+    opacity: 1;
+    &:hover, &:focus {
+      opacity: 1;
+      color: $link-color;
+    }
+  }
+
+  .slideshow-control-prev {
+    @extend .carousel-control-prev;
+    left: -50px;
+  }
+  .slideshow-control-next {
+    @extend .carousel-control-next;
+    right: -50px;
+  }
+
+  .slideshow-control-fallback-prev-icon {
+    @extend .carousel-control-next-icon;
+  }
+  .slideshow-control-fallback-next-icon {
+    @extend .carousel-control-next-icon;
+  }
+}

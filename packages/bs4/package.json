@@ -37,21 +37,23 @@
     "test": "npm run type-check && jest --config=jest.config.js",
     "type-check": "tslint -c tslint.json 'src/**/*.ts' && tsc --noEmit",
     "build": "npm run build:module",
-    "build:module": "tsc"
+    "build:module": "tsc",
+    "packages:link": "npm link @ribajs/core @ribajs/extras"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.7",
     "@babel/core": "^7.7.7",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.7.7",
+    "@babel/plugin-proposal-optional-chaining": "^7.7.5",
     "@babel/plugin-transform-runtime": "^7.7.6",
     "@babel/preset-env": "^7.7.7",
     "@babel/preset-typescript": "^7.7.7",
     "@babel/runtime-corejs3": "^7.7.7",
-    "@types/jest": "^24.0.24",
+    "@types/jest": "^24.0.25",
     "babel-loader": "^8.0.6",
     "babel-plugin-array-includes": "^2.0.3",
-    "core-js": "^3.6.0",
+    "core-js": "^3.6.1",
     "jest": "^24.9.0",
     "ts-jest": "^24.2.0",
     "tslint": "^5.20.1",
@@ -61,6 +63,7 @@
   },
   "dependencies": {
     "@ribajs/core": "^1.7.0",
+    "@ribajs/extras": "^1.7.0",
     "bootstrap": "^4.4.1",
     "popper.js": "^1.16.0"
   },

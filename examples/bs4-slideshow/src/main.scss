@@ -1,0 +1,9 @@
+// Original Bootstrap 4 Styles
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+// Bootstrap style extensions from @ribajs/bs4
+@import "../node_modules/@ribajs/bs4/src/index";
+
+@import './binders/index';
+@import './components/index';
+@import './formatters/index';

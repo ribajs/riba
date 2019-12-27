@@ -3,7 +3,7 @@ import {
   Utils,
 } from '@ribajs/core';
 
-export type AttributeType = 'string' | 'number' | 'boolean';
+export type AttributeType = string; // 'string' | 'number' | 'boolean';
 
 export interface TemplateAttribute {
   name: string;
@@ -55,11 +55,11 @@ export abstract class TemplatesComponent extends Component {
    * Called before getting all attribute values, use this method to tramsform the attribute values if you wish
    * @param attributes
    */
-  protected transformTemplateAttributes(attributes: any) {
+  protected transformTemplateAttributes(attributes: any, index: number) {
     return attributes;
   }
 
-  protected getTemplateAttributes(tpl: HTMLTemplateElement) {
+  protected getTemplateAttributes(tpl: HTMLTemplateElement, index: number) {
     const attributes: any = {};
     for (const attribute of this.templateAttributes) {
       const attrValue = this.transformTemplateAttribute(attribute.name, tpl.getAttribute(attribute.name));
@@ -69,19 +69,19 @@ export abstract class TemplatesComponent extends Component {
       }
       attributes[Utils.camelCase(attribute.name)] = attrValue;
     }
-    return this.transformTemplateAttributes(attributes);
+    return this.transformTemplateAttributes(attributes, index);
   }
 
-  protected addItemByTemplate(tpl: HTMLTemplateElement) {
-    const attributes = this.getTemplateAttributes(tpl);
+  protected addItemByTemplate(tpl: HTMLTemplateElement, index: number) {
+    const attributes = this.getTemplateAttributes(tpl, index);
     const content = tpl.innerHTML;
     this.scope.items.push({...attributes, content});
   }
 
   protected addItemsByTemplate() {
     const templates = this.el.querySelectorAll<HTMLTemplateElement>('template');
-    templates.forEach((tpl) => {
-      this.addItemByTemplate(tpl);
+    templates.forEach((tpl, index) => {
+      this.addItemByTemplate(tpl, index);
     });
   }
 

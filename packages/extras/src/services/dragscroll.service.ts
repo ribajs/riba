@@ -1,4 +1,6 @@
-export interface Options {
+import { Utils } from './utils.service';
+
+export interface DragscrollOptions {
   preventDefault?: boolean;
   detectGlobalMove?: boolean;
 }
@@ -8,21 +10,21 @@ export interface Options {
  * inspired by https://github.com/asvd/dragscroll
  */
 export class Dragscroll {
-  private options: Options;
+  private options: DragscrollOptions;
   private lastClientX = 0;
   private lastClientY = 0;
   private el: HTMLElement;
   private pushed: boolean = false;
 
-  constructor(el: HTMLElement, options: Options = { detectGlobalMove: true, preventDefault: true }) {
+  constructor(el: HTMLElement, options: DragscrollOptions = { detectGlobalMove: true, preventDefault: true }) {
     this.el = el;
     this.options = options;
 
     el.removeEventListener('mousedown', this.md.bind(this), false);
     el.addEventListener('mousedown', this.md.bind(this), false);
 
-    window.addEventListener('resize', this.checkDragable.bind(this));
-    this.checkDragable();
+    window.addEventListener('resize', this.checkDraggable.bind(this));
+    this.checkDraggable();
 
     // Use global move if your element does not use the full width / height
     if (this.options.detectGlobalMove) {
@@ -41,22 +43,21 @@ export class Dragscroll {
   }
 
   public removeEventListeners() {
-    window.removeEventListener('resize', this.checkDragable);
+    window.removeEventListener('resize', this.checkDraggable);
     this.el.removeEventListener('mousedown', this.md.bind(this), false);
     this.el.removeEventListener('mouseup', this.mu.bind(this), false);
     this.el.removeEventListener('mousemove', this.mm.bind(this), false);
   }
 
-  protected checkDragable() {
-    const maxScrollTop = (this.el.scrollHeight || 0) - (this.el.offsetHeight || 0);
-    // console.debug('checkDragable maxScrollTop', maxScrollTop);
-    if (maxScrollTop > 0) {
-      if (!this.el.classList.contains('dragable')) {
-        this.el.classList.add('dragable');
+  protected checkDraggable() {
+    const scrollPosition = Utils.getScrollPosition(this.el);
+    if (scrollPosition.maxX > 0 || scrollPosition.maxY) {
+      if (!this.el.classList.contains('draggable')) {
+        this.el.classList.add('draggable');
       }
     } else {
-      if (this.el.classList.contains('dragable')) {
-        this.el.classList.remove('dragable');
+      if (this.el.classList.contains('draggable')) {
+        this.el.classList.remove('draggable');
       }
     }
   }

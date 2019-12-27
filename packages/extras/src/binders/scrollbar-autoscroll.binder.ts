@@ -1,12 +1,12 @@
 import { Binder, Utils } from '@ribajs/core';
-import { Autoscroll, Options } from '../services/autoscroll.service';
+import { Autoscroll, AutoscrollOptions } from '../services/autoscroll.service';
 
 /**
  * Slideout click event to toggle the slideout
  */
-export const autoscrollBinder: Binder<Options> = {
+export const autoscrollBinder: Binder<AutoscrollOptions> = {
   name: 'autoscroll',
-  routine(el: HTMLElement, options: Options) {
+  routine(el: HTMLElement, options: AutoscrollOptions) {
     this.customData = this.customData || {};
     if (options && options.width && Utils.isString(options.width)) {
       if (options.width === '100vw') {

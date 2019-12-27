@@ -29,7 +29,7 @@ export class <%= classify(name) %>Component extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init(<%= classify(name) %>Component.observedAttributes);
+    return this.init(<%= classify(name) %>Component.observedAttributes);
   }
 
   protected async init(observedAttributes: string[]) {
@@ -40,14 +40,14 @@ export class <%= classify(name) %>Component extends Component {
   }
 
   protected async beforeBind() {
-    super.beforeBind()
+    return super.beforeBind()
     .then(() => {
       console.debug('beforeBind', this.scope);
     });
   }
 
   protected async afterBind() {
-    super.afterBind()
+    return super.afterBind()
     .then(() => {
       console.debug('afterBind', this.scope);
     });
@@ -58,12 +58,12 @@ export class <%= classify(name) %>Component extends Component {
   }
 
   protected parsedAttributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
-    super.parsedAttributeChangedCallback(attributeName, oldValue, newValue, namespace);
+    return super.parsedAttributeChangedCallback(attributeName, oldValue, newValue, namespace);
   }
 
   // deconstructor
   protected disconnectedCallback() {
-    super.disconnectedCallback();
+    return super.disconnectedCallback();
   }
 
   protected template() {

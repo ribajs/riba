@@ -194,11 +194,14 @@ button, .btn, select, .custom-select, [href] {
   cursor: pointer;
 }
 
-// Drag and drop / scrollbar-dragable
-.dragable {
+// Drag and drop / scrollbar-draggable / bs4-slideshow
+.draggable {
   user-select: none;
   @extend .cursor-grab;
   &:active {
     @extend .cursor-grabbing;
+  }
+  &img, img {
+    pointer-events: none;
   }
 }

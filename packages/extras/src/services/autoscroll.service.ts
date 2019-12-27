@@ -1,11 +1,10 @@
-import { Utils } from '@ribajs/core';
 import { Utils as ExtraUtils } from './utils.service';
 import { Gameloop } from './gameloop.service';
 
-export interface Options {
-  angle: 'vertical' | 'horizontal';
-  direction: 1 | -1;
-  velocity: number;
+export interface AutoscrollOptions {
+  angle?: 'vertical' | 'horizontal';
+  direction?: 1 | -1;
+  velocity?: number;
   width?: string;
 }
 
@@ -15,7 +14,7 @@ export class Autoscroll {
 
   protected limit: number;
 
-  protected options: Options;
+  protected options: AutoscrollOptions;
 
   protected el: HTMLElement;
 
@@ -31,7 +30,7 @@ export class Autoscroll {
 
   protected angle = 'horizontal';
 
-  constructor(el: HTMLElement, options: Options = { velocity: 0.8, direction: 1, angle: 'horizontal' }) {
+  constructor(el: HTMLElement, options: AutoscrollOptions = {}) {
     this.el = el;
     this.options = options;
     this.direction = this.options.direction || this.direction;
@@ -92,7 +91,7 @@ export class Autoscroll {
     return this.el.scrollLeft || 0;
   }
 
-  protected getLimit(el: HTMLElement, options: Options) {
+  protected getLimit(el: HTMLElement, options: AutoscrollOptions) {
     return ExtraUtils.getScrollPosition(el).maxY;
   }
 

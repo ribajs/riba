@@ -21,13 +21,23 @@ export class Bs4IconComponent extends Component {
     super.attributeChangedCallback(name, oldValue, newValue, namespace);
 
     if (name === 'src') {
+      if (!newValue) {
+        console.warn('The src attribute must have a value!');
+        return '';
+      }
       if (fetch) {
         fetch(newValue)
         .then((response) => {
+          console.debug('response.headers.get("content-type")', response.headers.get('content-type'));
           if (response.status !== 200) {
-            throw new Error(response.statusText);
+            console.error(response.statusText);
           }
-          return response.text();
+          if (response.headers.get('content-type')?.indexOf('image/svg+xml') !== -1) {
+            return response.text();
+          } else {
+            console.error('[bs4-icon] Only svg\'s are supported! But content-type is ' + response.headers.get('content-type'));
+          }
+          return '';
         })
         .then((response) => {
           this.el.innerHTML = response;
