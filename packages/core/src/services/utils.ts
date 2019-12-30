@@ -480,26 +480,35 @@ export class Utils {
    * @param to
    * @param duration
    */
-  public static scrollTo(to: HTMLElement, offset: number, scrollElement: Element | (Window & typeof globalThis) | null) {
+  public static scrollTo(to: HTMLElement, offset: number, scrollElement: Element | (Window & typeof globalThis) | null, angle: 'horizontal' | 'vertical' = 'vertical', behavior: 'auto' | 'smooth' | undefined = 'smooth') {
     if (!scrollElement) {
       scrollElement = window;
     }
 
+    let top = 0;
+    let left = 0;
+
     if (typeof((scrollElement as Window).pageYOffset) === 'number') {
-      // if is is window to scroll
-      scrollElement.scroll({
-        behavior: 'smooth',
-        left: 0,
-        top: (to.getBoundingClientRect().top + (scrollElement as Window).pageYOffset) - offset,
-      });
+      if (angle === 'vertical') {
+        top = (to.getBoundingClientRect().top + (scrollElement as Window).pageYOffset) - offset;
+      } else {
+        left = (to.getBoundingClientRect().left + (scrollElement as Window).pageXOffset) - offset;
+      }
+
     } else {
-      // if is is another element to scroll
-      scrollElement.scroll({
-        behavior: 'smooth',
-        left: 0,
-        top: (to.offsetTop ) - offset,
-      });
+      if (angle === 'vertical') {
+        top = (to.offsetTop ) - offset;
+      } else {
+        left = (to.offsetLeft ) - offset;
+      }
     }
+
+    // if is is window to scroll
+    scrollElement.scroll({
+      behavior,
+      left,
+      top,
+    });
   }
 
   /**

@@ -21,11 +21,11 @@ bs4-slideshow {
 
   .slideshow-control-prev {
     @extend .carousel-control-prev;
-    left: -50px;
+    left: 0;
   }
   .slideshow-control-next {
     @extend .carousel-control-next;
-    right: -50px;
+    right: 0;
   }
 
   .slideshow-control-fallback-prev-icon {

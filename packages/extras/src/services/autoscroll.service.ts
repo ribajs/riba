@@ -6,6 +6,7 @@ export interface AutoscrollOptions {
   direction?: 1 | -1;
   velocity?: number;
   width?: string;
+  pauseOnHover?: boolean;
 }
 
 export class Autoscroll {
@@ -28,7 +29,9 @@ export class Autoscroll {
 
   protected position: number;
 
-  protected angle = 'horizontal';
+  protected angle: 'horizontal' | 'vertical' = 'horizontal';
+
+  protected pauseOnHover = true;
 
   constructor(el: HTMLElement, options: AutoscrollOptions = {}) {
     this.el = el;
@@ -36,6 +39,7 @@ export class Autoscroll {
     this.direction = this.options.direction || this.direction;
     this.velocity = this.options.velocity || this.velocity;
     this.angle = this.options.angle || this.angle;
+    this.pauseOnHover = typeof(this.options.pauseOnHover) === 'boolean' ? this.options.pauseOnHover : this.pauseOnHover;
 
     this.limit = this.getLimit(this.el, this.options);
     this.position = this.getPosition();
@@ -57,7 +61,7 @@ export class Autoscroll {
     this.el.addEventListener('mouseup', this.onTouch.bind(this));
     this.el.addEventListener('touchend', this.onTouch.bind(this));
 
-    Gameloop.startLoop({ limitFPS: 30 }, this.render.bind(this), this.update.bind(this));
+    Gameloop.startLoop({ limitFPS: 60 }, this.render.bind(this), this.update.bind(this));
   }
 
   public removeEventListeners() {
@@ -71,7 +75,9 @@ export class Autoscroll {
   }
 
   protected onMouseIn() {
-    this.pause = true;
+    if (this.pauseOnHover) {
+      this.pause = true;
+    }
   }
 
   protected onMouseOut() {
@@ -84,15 +90,15 @@ export class Autoscroll {
   }
 
   protected onTouch() {
-    this.position = this.el.scrollLeft;
+    this.position = this.angle === 'vertical' ? this.el.scrollTop : this.el.scrollLeft;
   }
 
   protected getPosition() {
-    return this.el.scrollLeft || 0;
+    return (this.angle === 'vertical' ? this.el.scrollTop : this.el.scrollLeft) || 0;
   }
 
   protected getLimit(el: HTMLElement, options: AutoscrollOptions) {
-    return ExtraUtils.getScrollPosition(el).maxY;
+    return this.angle === 'vertical' ? ExtraUtils.getScrollPosition(el).maxY : ExtraUtils.getScrollPosition(el).maxX;
   }
 
   protected render(interp: number) {
@@ -125,7 +131,11 @@ export class Autoscroll {
 
   protected scroll(move: number) {
     const newPosition = this.direction > 0 ? this.position + move : this.position - move;
-    this.el.scrollLeft = newPosition;
+    if (this.angle === 'vertical') {
+      this.el.scrollTop = Math.ceil(newPosition);
+    } else {
+      this.el.scrollLeft = Math.ceil(newPosition);
+    }
     this.position = newPosition;
   }
 

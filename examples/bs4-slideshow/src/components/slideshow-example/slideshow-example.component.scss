@@ -1,3 +1,16 @@
 rv-slideshow-example {
   display: block;
+  [center-mode="true"] {
+    .slideshow-inner {
+      .slide {
+        opacity: 0.5;
+        transform: scale(0.8);
+        transition: all 0.5s ease-in-out;
+        &.centered {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    }
+  }
 }
