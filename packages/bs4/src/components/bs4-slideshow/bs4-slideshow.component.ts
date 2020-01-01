@@ -34,7 +34,7 @@ export interface Options {
   autoplayVelocity: number;
   controlPrevIconSrc: string;
   controlNextIconSrc: string;
-  centerMode: boolean;
+  centeredOnCenter: boolean;
   angle: 'vertical' | 'horizontal';
   pauseOnHover: boolean;
 }
@@ -42,7 +42,6 @@ export interface Options {
 export interface Scope extends Options {
   next: Bs4SlideshowComponent['next'];
   prev: Bs4SlideshowComponent['prev'];
-  onScroll: Bs4SlideshowComponent['onScroll'];
   items: Slide[];
 }
 
@@ -132,14 +131,14 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       'slides-to-show',
       'slides-to-scroll',
       'controls',
-      'dragable',
+      'draggable',
       'autoplay',
       'autoplay-speed',
       'autoplay-velocity',
       'control-prev-icon-src',
       'control-next-icon-src',
       'angle',
-      'center-mode',
+      'centered-on-center',
       'pause-on-hover',
     ];
   }
@@ -148,7 +147,6 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     // Template methods
     next: this.next,
     prev: this.prev,
-    onScroll: this.onScroll,
     // Template properties
     items: new Array<Slide>(),
     // Options
@@ -161,7 +159,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     controlPrevIconSrc: '',
     controlNextIconSrc: '',
     angle: 'horizontal',
-    centerMode: false,
+    centeredOnCenter: false,
     pauseOnHover: true,
   };
 
@@ -181,9 +179,18 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     this.scrollToPrevSlide();
   }
 
-  public onScroll() {
+  protected onScroll() {
+    // console.debug('onScroll');
     this.setSlidePositions();
-    if (this.scope.centerMode) {
+    if (this.scope.centeredOnCenter) {
+      this.setCenteredSlide();
+    }
+  }
+
+  protected onScrollend() {
+    console.debug('onScrollend');
+    this.setSlidePositions();
+    if (this.scope.centeredOnCenter) {
       this.setCenteredSlide();
     }
   }
@@ -193,24 +200,10 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     return this.init(Bs4SlideshowComponent.observedAttributes);
   }
 
-  // protected async init(observedAttributes: string[]) {
-  //   return super.init(observedAttributes)
-  //   .then((view) => {
-  //     return view;
-  //   });
-  // }
-
   protected addEventListeners() {
     this.el.addEventListener('resize', this.onResize.bind(this));
-    if (this.slideshowInner) {
-      if (this.scope.autoplay && this.scope.autoplaySpeed === 0) {
-        console.debug('On scroll');
-        this.slideshowInner.addEventListener('scroll', this.onScroll.bind(this));
-      } else {
-        console.debug('On scroll end');
-        this.slideshowInner.addEventListener('scrollend', this.onScroll.bind(this));
-      }
-    }
+    this.slideshowInner.addEventListener('scroll', this.onScroll.bind(this), { passive: true});
+    this.slideshowInner.addEventListener('scrollend', this.onScrollend.bind(this));
 
     // inital
     this.onResize();
@@ -219,10 +212,8 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   protected removeEventListeners() {
     this.el.removeEventListener('resize', this.onResize.bind(this));
-    if (this.slideshowInner) {
-      this.slideshowInner.removeEventListener('scroll', this.onScroll.bind(this));
-      this.slideshowInner.removeEventListener('scrollend', this.onScroll.bind(this));
-    }
+    this.slideshowInner.removeEventListener('scroll', this.onScroll.bind(this));
+    this.slideshowInner.removeEventListener('scrollend', this.onScroll.bind(this));
   }
 
   protected onResize() {
@@ -251,7 +242,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
     this.initSlideshowInnerSlides();
     if (!this.dragscroll && this.scope.draggable) {
-      const dragscrollOptions: DragscrollOptions = {};
+      const dragscrollOptions: DragscrollOptions = {detectGlobalMove: true};
       this.dragscroll = new Dragscroll(this.slideshowInner, dragscrollOptions);
     }
 
@@ -414,6 +405,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
         }
       }
     }
+
     console.debug('this.scope.items[index].position', this.scope.items[index].position);
   }
 

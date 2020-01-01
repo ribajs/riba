@@ -20,49 +20,57 @@ export class Dragscroll {
     this.el = el;
     this.options = options;
 
-    el.removeEventListener('mousedown', this.md.bind(this), false);
-    el.addEventListener('mousedown', this.md.bind(this), false);
+    el.removeEventListener('mousedown', this.onMouseDown.bind(this), false);
+    el.addEventListener('mousedown', this.onMouseDown.bind(this), false);
 
     window.addEventListener('resize', this.checkDraggable.bind(this));
-    this.checkDraggable();
 
     // Use global move if your element does not use the full width / height
     if (this.options.detectGlobalMove) {
-      window.removeEventListener('mouseup', this.mu.bind(this), false);
-      window.removeEventListener('mousemove', this.mm.bind(this), false);
+      window.removeEventListener('mouseup', this.onMouseUp.bind(this), false);
+      window.removeEventListener('mousemove', this.onMouseMove.bind(this), false);
 
-      window.addEventListener('mouseup', this.mu.bind(this), false);
-      window.addEventListener('mousemove', this.mm.bind(this), false);
+      window.addEventListener('mouseup', this.onMouseUp.bind(this), false);
+      window.addEventListener('mousemove', this.onMouseMove.bind(this), false);
     } else {
-      el.removeEventListener('mouseup', this.mu.bind(this), false);
-      el.removeEventListener('mousemove', this.mm.bind(this), false);
+      el.removeEventListener('mouseup', this.onMouseUp.bind(this), false);
+      el.removeEventListener('mousemove', this.onMouseMove.bind(this), false);
 
-      el.addEventListener('mouseup', this.mu.bind(this), false);
-      el.addEventListener('mousemove', this.mm.bind(this), false);
+      el.addEventListener('mouseup', this.onMouseUp.bind(this), false);
+      el.addEventListener('mousemove', this.onMouseMove.bind(this), false);
     }
+
+    // initial
+    this.checkDraggable();
   }
 
   public removeEventListeners() {
     window.removeEventListener('resize', this.checkDraggable);
-    this.el.removeEventListener('mousedown', this.md.bind(this), false);
-    this.el.removeEventListener('mouseup', this.mu.bind(this), false);
-    this.el.removeEventListener('mousemove', this.mm.bind(this), false);
+    this.el.removeEventListener('mousedown', this.onMouseDown.bind(this), false);
+    this.el.removeEventListener('mouseup', this.onMouseUp.bind(this), false);
+    this.el.removeEventListener('mousemove', this.onMouseMove.bind(this), false);
   }
 
   protected checkDraggable() {
     const scrollPosition = Utils.getScrollPosition(this.el);
-    if (scrollPosition.maxX > 0 || scrollPosition.maxY) {
-      if (!this.el.classList.contains('draggable')) {
-        this.el.classList.add('draggable');
-      }
+    if (scrollPosition.maxX > 0 || scrollPosition.maxY > 0) {
+      this.el.classList.add('draggable');
     } else {
-      if (this.el.classList.contains('draggable')) {
-        this.el.classList.remove('draggable');
-      }
+      this.el.classList.remove('draggable');
     }
   }
 
-  protected md <EventListener>(e: MouseEvent) {
+  protected triggerScrollendEvent(originalEvent: Event) {
+    const extraParameters: any = Utils.getScrollPosition(originalEvent.target as HTMLElement);
+    extraParameters.originalEvent = originalEvent;
+    extraParameters.target = originalEvent.target;
+    const scrollendEvent = new CustomEvent('scrollend', {
+      detail: extraParameters,
+    });
+    this.el.dispatchEvent(scrollendEvent);
+  }
+
+  protected onMouseDown <EventListener>(e: MouseEvent) {
     this.pushed = true;
     this.lastClientX = e.clientX;
     this.lastClientY = e.clientY;
@@ -71,11 +79,12 @@ export class Dragscroll {
     }
   }
 
-  protected mu <EventListener>(e: MouseEvent) {
+  protected onMouseUp <EventListener>(e: MouseEvent) {
     this.pushed = false;
+    this.triggerScrollendEvent(e);
   }
 
-  protected mm <EventListener>(e: MouseEvent) {
+  protected onMouseMove <EventListener>(e: MouseEvent) {
     let newScrollX = 0;
     let newScrollY = 0;
     if (this.pushed) {

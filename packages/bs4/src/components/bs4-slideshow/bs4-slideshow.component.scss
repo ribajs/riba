@@ -5,7 +5,7 @@ bs4-slideshow {
   .slideshow-inner {
     @extend .row;
     @extend .flex-scrollbar-x-scroll;
-    @extend .scrollbar-invisible;
+    // @extend .scrollbar-invisible;
   }
 
   .slideshow-control-prev, .slideshow-control-next {

@@ -106,6 +106,10 @@ const PACKAGES = [
     path: 'examples/touch-events/',
     available: false,
   },
+  {
+    path: 'examples/bs4-slideshow/',
+    available: false,
+  },
 ];
 
 const getPackagePath = (modulePath) => {
