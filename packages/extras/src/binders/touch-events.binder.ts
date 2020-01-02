@@ -1,5 +1,5 @@
 import { Binder } from '@ribajs/core';
-import { TouchEventService } from '../services/touch-events.service';
+import { TouchEventService } from '../services/touch-events/touch-events.service';
 
 export const touchEventsBinder: Binder<string> = {
   name: 'touch-events',

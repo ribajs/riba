@@ -1,6 +1,8 @@
-import { Utils } from '@ribajs/core';
-import { Utils as ExtraUtils } from './utils.service';
-import { Position } from '../types';
+import { Utils as ExtraUtils } from '../utils.service';
+import { Position } from '../../types';
+
+import { ScrollEventsService } from './scroll-events.service';
+import { BaseTouchEventService } from './base-touch-events.service';
 
 /**
  * Vanilla version of jQuery Mobile Events
@@ -43,7 +45,6 @@ export interface Settings {
   endevent: Array<'touchend' | 'touchcancel' | 'mouseup'>;
   moveevent: Array<'touchmove' | 'mousemove'>;
   tapevent: Array<'tap' | 'click'>;
-  scrollevent: Array<'touchmove' | 'scroll'>;
 }
 
 export interface Offset {
@@ -64,7 +65,7 @@ export enum TouchType {
   CHANGED,
 }
 
-export class TouchEventService {
+export class TouchEventService extends BaseTouchEventService {
 
   // GETTERS:
 
@@ -89,7 +90,7 @@ export class TouchEventService {
   }
 
   public get scrollEvent() {
-    return this.settings.scrollevent;
+    return this.scrollEvents.scrollEvent;
   }
 
   // SETTERS:
@@ -127,6 +128,7 @@ export class TouchEventService {
 
   // PROPERTIES:
 
+  /** The element to trigger the events on */
   protected el: HTMLElement;
 
   /** Used internally for `taphold` */
@@ -152,9 +154,6 @@ export class TouchEventService {
     x: 0,
     y: 0,
   };
-
-  /** Used internally for `scrollstart` and `scrollend` */
-  protected scrollPosition: Position | null = null;
 
   /** Used internally for `swipe` */
   protected startEvnt: TouchData | null = null;
@@ -194,9 +193,9 @@ export class TouchEventService {
   /** Used internally for `doubletap` */
   protected actionTimer: number = -1;
 
-  protected scrollTimer: number = -1;
-
   protected settings: Settings;
+
+  protected scrollEvents: ScrollEventsService;
 
   constructor(el: HTMLElement, settings: Settings = {
     tapPixelRange: 5,
@@ -211,8 +210,8 @@ export class TouchEventService {
     endevent:    ['touchend'],
     moveevent:   ['touchmove'],
     tapevent:    ['tap'],
-    scrollevent: ['touchmove'],
   }) {
+    super(el);
     this.el = el;
 
     // Set settings by device type (if device is touch capable)
@@ -220,9 +219,10 @@ export class TouchEventService {
     settings.endevent = settings.touchCapable ? ['touchend'] : ['mouseup'];
     settings.moveevent = settings.touchCapable ? ['touchmove'] : ['mousemove'];
     settings.tapevent = settings.touchCapable ? ['tap'] : ['click'];
-    settings.scrollevent = settings.touchCapable ? ['touchmove'] : ['scroll'];
 
     this.settings = settings;
+
+    this.scrollEvents = new ScrollEventsService(this.el);
 
     this.addEventListeners();
   }
@@ -237,22 +237,10 @@ export class TouchEventService {
     for (const eventName of this.settings.endevent) {
       this.el.removeEventListener<any>(eventName, this.onEndEvent.bind(this));
     }
-    for (const eventName of this.settings.scrollevent) {
-      this.el.removeEventListener<any>(eventName, this.onScrollEvent.bind(this));
-    }
+    this.scrollEvents.removeEventListeners();
   }
 
   // HELPER METHODS:
-
-  protected triggerCustomEvent(eventName: string, originalEvent: Event, extraParameters: any = {}) {
-    extraParameters.originalEvent = originalEvent;
-    extraParameters.target = originalEvent.target;
-    // create and dispatch the event
-    const event = new CustomEvent(eventName, {
-      detail: extraParameters,
-    });
-    this.el.dispatchEvent(event);
-  }
 
   protected getSwipeDir(startPosition: Position, endPosition: Position, hThreshold: number = this.settings.swipeHThreshold, vThreshold: number = this.settings.swipeVThreshold) {
     let swipeDir = '';
@@ -334,9 +322,6 @@ export class TouchEventService {
     for (const eventName of this.settings.endevent) {
       this.el.addEventListener<any>(eventName, this.onEndEvent.bind(this));
     }
-    for (const eventName of this.settings.scrollevent) {
-      this.el.addEventListener<any>(eventName, this.onScrollEvent.bind(this));
-    }
   }
 
   // EVENT HANDLERS:
@@ -395,11 +380,6 @@ export class TouchEventService {
     this.finalCoord = this.getPostion(event, TouchType.TARGET);
     this.tapmove(event);
     this.swipe(event);
-    return true;
-  }
-
-  protected onScrollEvent(event: TouchEvent | MouseEvent) {
-    this.scrollstart(event);
     return true;
   }
 
@@ -700,26 +680,5 @@ export class TouchEventService {
     }
   }
 
-  /**
-   * scrollstart Event
-   * (also handles `scrollend`)
-   */
-  protected scrollstart(event: TouchEvent | MouseEvent) {
-    if (!event.target) {
-      return false;
-    }
-    if (this.scrollPosition === null) {
-      this.scrollPosition = ExtraUtils.getScrollPosition(event.target as Element);
-      this.triggerCustomEvent('scrollstart', event, this.scrollPosition);
-    }
 
-    if (this.scrollTimer !== -1) {
-      window.clearTimeout(this.scrollTimer);
-    }
-
-    this.scrollTimer = window.setTimeout(() => {
-      Utils.debounce(this.triggerCustomEvent.bind(this, 'scrollend', event, event.target ? ExtraUtils.getScrollPosition(event.target as HTMLElement) : {}));
-      this.scrollPosition = null;
-    }, 50);
-  }
 }

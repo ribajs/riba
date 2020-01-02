@@ -21,7 +21,7 @@ export class Autoscroll {
 
   protected pause = false;
 
-  protected velocity: number = 0.8;
+  protected velocity: number = 0.008;
 
   protected move: number = 0;
 
@@ -58,10 +58,10 @@ export class Autoscroll {
     this.el.addEventListener('mouseover', this.onMouseIn.bind(this));
     this.el.addEventListener('mouseout', this.onMouseOut.bind(this));
     this.el.addEventListener('mouseleave', this.onMouseOut.bind(this));
-    this.el.addEventListener('mouseup', this.onTouch.bind(this));
-    this.el.addEventListener('touchend', this.onTouch.bind(this));
+    this.el.addEventListener('mouseup', this.onTouchEnd.bind(this));
+    this.el.addEventListener('touchend', this.onTouchEnd.bind(this));
 
-    Gameloop.startLoop({ limitFPS: 60 }, this.render.bind(this), this.update.bind(this));
+    Gameloop.startLoop({ maxFPS: 60 }, this.render.bind(this), this.update.bind(this));
   }
 
   public removeEventListeners() {
@@ -70,8 +70,8 @@ export class Autoscroll {
     this.el.removeEventListener('mouseover', this.onMouseIn.bind(this));
     this.el.removeEventListener('mouseout', this.onMouseOut.bind(this));
     this.el.removeEventListener('mouseleave', this.onMouseOut.bind(this));
-    this.el.removeEventListener('mouseup', this.onTouch.bind(this));
-    this.el.removeEventListener('touchend', this.onTouch.bind(this));
+    this.el.removeEventListener('mouseup', this.onTouchEnd.bind(this));
+    this.el.removeEventListener('touchend', this.onTouchEnd.bind(this));
   }
 
   protected onMouseIn() {
@@ -89,7 +89,7 @@ export class Autoscroll {
     this.pause = false;
   }
 
-  protected onTouch() {
+  protected onTouchEnd() {
     this.position = this.angle === 'vertical' ? this.el.scrollTop : this.el.scrollLeft;
   }
 
@@ -107,16 +107,18 @@ export class Autoscroll {
     }
 
     const move = (this.lastMove + (this.move - this.lastMove) * interp);
+    this.move = 0;
     this.scroll(move);
   }
 
-  protected update(delta: number, progress: number) {
+  protected update(delta: number) {
+    // console.debug('delta', delta);
     if (this.pause) {
       return;
     }
 
     this.lastMove = this.move;
-    this.move = (this.velocity * delta);
+    this.move += (this.velocity * delta);
 
     // Switch directions if we go too far
     // `Math.floor()` rounds down, `Math.ceil()` rounds up, `Math.round()` rounds to the nearest integer

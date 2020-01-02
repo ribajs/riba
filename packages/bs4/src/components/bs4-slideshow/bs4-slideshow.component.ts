@@ -1,9 +1,11 @@
 import { TemplatesComponent } from '../templates/templates.component';
-import { Dragscroll, DragscrollOptions, Autoscroll, AutoscrollOptions, Utils as ExtraUtils, ScrollPosition, TouchEventService } from '@ribajs/extras';
+import { Dragscroll, DragscrollOptions, Autoscroll, AutoscrollOptions, Utils as ExtraUtils, ScrollPosition, ScrollEventsService } from '@ribajs/extras';
 
 import templateSlides from './bs4-slideshow-slides.component.html';
 
 import templateControls from './bs4-slideshow-controls.component.html';
+
+import templateIndicators from './bs4-slideshow-indicators.component.html';
 
 const SLIDESHOW_INNER_SELECTOR = '.slideshow-inner';
 
@@ -18,7 +20,7 @@ export interface Slide {
   title?: string;
   content: string;
   handle?: string;
-  centered: boolean;
+  active: boolean;
   type?: string;
   position: Position;
   index: number;
@@ -30,74 +32,30 @@ export interface Options {
   draggable: boolean;
   autoplay: boolean;
   /** Pause between autoscroll, 0 for continuously autoscrolling */
-  autoplaySpeed: number;
+  autoplayInterval: number;
   autoplayVelocity: number;
   controlPrevIconSrc: string;
   controlNextIconSrc: string;
-  centeredOnCenter: boolean;
+  indicatorInactiveIconSrc: string;
+  indicatorActiveIconSrc: string;
   angle: 'vertical' | 'horizontal';
   pauseOnHover: boolean;
+  /** Autoscroll to the nearest slide after manual scroll or dragscroll */
+  sticky: boolean;
+  /** Show indicators */
+  indicators: boolean;
+  /** Pause on autoplay (with interval) */
+  pause: boolean;
 }
 
 export interface Scope extends Options {
   next: Bs4SlideshowComponent['next'];
   prev: Bs4SlideshowComponent['prev'];
+  goTo: Bs4SlideshowComponent['goTo'];
   items: Slide[];
 }
 
 export class Bs4SlideshowComponent extends TemplatesComponent {
-
-  public static tagName: string = 'bs4-slideshow';
-
-  protected templateAttributes = [
-    {
-      name: 'class',
-      required: true,
-    },
-    // {
-    //   name: 'title',
-    //   required: false,
-    // },
-    {
-      name: 'handle',
-      required: false,
-    },
-    {
-      name: 'type',
-      required: true,
-    },
-    {
-      name: 'centered',
-      type: 'boolean',
-      required: false,
-    },
-    {
-      name: 'width',
-      type: 'number',
-      required: false,
-    },
-    {
-      name: 'index',
-      type: 'number',
-      required: false,
-    },
-  ];
-
-  protected autobind = true;
-
-  protected dragscroll?: Dragscroll;
-
-  protected autoscroll?: Autoscroll;
-
-  protected touchEvents?: TouchEventService;
-
-  protected _slideshowInner: HTMLElement | null = null;
-
-  protected _slideElements: NodeListOf<Element> | null = null;
-
-  protected _controlsElements: NodeListOf<Element> | null = null;
-
-  protected templateControls = templateControls;
 
   protected get slideshowInner() {
     if (!this._slideshowInner) {
@@ -126,6 +84,13 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     return this._controlsElements;
   }
 
+  protected get indicatorsElement() {
+    if (!this._indicatorsElement) {
+      this._indicatorsElement = this.el.querySelector('.slideshow-indicators');
+    }
+    return this._indicatorsElement;
+  }
+
   static get observedAttributes() {
     return [
       'slides-to-show',
@@ -133,20 +98,75 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       'controls',
       'draggable',
       'autoplay',
-      'autoplay-speed',
+      'autoplay-interval',
       'autoplay-velocity',
       'control-prev-icon-src',
       'control-next-icon-src',
+      'indicator-inactive-icon-src',
+      'indicator-active-icon-src',
       'angle',
-      'centered-on-center',
+      'set-active-slide',
       'pause-on-hover',
+      'sticky',
+      'indicators',
+      'pause',
     ];
   }
 
+  public static tagName: string = 'bs4-slideshow';
+
+  protected templateAttributes = [
+    {
+      name: 'class',
+      required: false,
+    },
+    {
+      name: 'handle',
+      required: false,
+    },
+    {
+      name: 'type',
+      required: true,
+    },
+    {
+      name: 'active',
+      type: 'boolean',
+      required: false,
+    },
+    {
+      name: 'index',
+      type: 'number',
+      required: false,
+    },
+  ];
+
+  protected autobind = true;
+
+  protected dragscroll?: Dragscroll;
+
+  protected autoscroll?: Autoscroll;
+
+  protected scrollEvents?: ScrollEventsService;
+
+  protected _slideshowInner: HTMLElement | null = null;
+
+  protected _slideElements: NodeListOf<Element> | null = null;
+
+  protected _controlsElements: NodeListOf<Element> | null = null;
+
+  protected _indicatorsElement: HTMLElement | null = null;
+
+  protected templateControls = templateControls;
+
+  protected templateIndicators = templateIndicators;
+
+  protected intervalAutoplayInterval: number | null = null;
+
   protected scope: Scope = {
     // Template methods
-    next: this.next,
-    prev: this.prev,
+    next: this.next.bind(this),
+    prev: this.prev.bind(this),
+    goTo: this.goTo.bind(this),
     // Template properties
     items: new Array<Slide>(),
     // Options
@@ -154,45 +174,96 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     controls: true,
     draggable: true,
     autoplay: false,
-    autoplaySpeed: 0,
+    autoplayInterval: 0,
     autoplayVelocity: 0.8,
     controlPrevIconSrc: '',
     controlNextIconSrc: '',
+    indicatorActiveIconSrc: '',
+    indicatorInactiveIconSrc: '',
     angle: 'horizontal',
-    centeredOnCenter: false,
     pauseOnHover: true,
+    sticky: false,
+    indicators: true,
+    pause: false,
   };
 
   constructor(element?: HTMLElement) {
     super(element);
-    // console.debug('constructor', this);
   }
 
   public next() {
-    console.debug('next');
-    // const scrollPosition = this.getScrollPosition();
     this.scrollToNextSlide();
   }
 
   public prev() {
-    console.debug('prev');
     this.scrollToPrevSlide();
   }
 
-  protected onScroll() {
-    // console.debug('onScroll');
+  public goTo(index: number) {
     this.setSlidePositions();
-    if (this.scope.centeredOnCenter) {
-      this.setCenteredSlide();
+    let top = 0;
+    let left = 0;
+
+    if (this.scope.angle === 'vertical') {
+      // Check if we do not need to slide
+      if (this.scope.items[index].position.centerY === 0) {
+        // We do not need to scroll
+        return;
+      }
+      top = this.slideshowInner.scrollTop + this.scope.items[index].position.centerY;
+    } else {
+      // Check if we do not need to slide
+      if (this.scope.items[index].position.centerX === 0) {
+        // We do not need to scroll
+        return;
+      }
+      left = this.slideshowInner.scrollLeft + this.scope.items[index].position.centerX;
+    }
+
+    // TODO new scrollservice based on https://pawelgrzybek.com/page-scroll-in-vanilla-javascript/
+    if (this.slideElements[index]) {
+      // if is is window to scroll
+      if (typeof(this.slideshowInner.scroll) === 'function') {
+        this.slideshowInner.scroll({
+          behavior: 'smooth',
+          left,
+          top,
+        });
+      } else {
+        if (this.scope.angle === 'vertical') {
+          this.slideshowInner.scrollTop = top;
+        } else {
+          this.slideshowInner.scrollLeft = left;
+        }
+      }
     }
   }
 
-  protected onScrollend() {
-    console.debug('onScrollend');
+  protected onResize() {
+    this.onScrollend();
+  }
+
+  protected onScroll() {
     this.setSlidePositions();
-    if (this.scope.centeredOnCenter) {
-      this.setCenteredSlide();
+    this.setCenteredSlide();
+  }
+
+  protected onScrollend(event?: Event) {
+    this.setSlidePositions();
+    this.setCenteredSlide();
+    if (this.scope.sticky) {
+      this.scrollToNearestSlide();
     }
+  }
+
+  protected onMouseIn() {
+    if (this.scope.pauseOnHover) {
+      this.scope.pause = true;
+    }
+  }
+
+  protected onMouseOut() {
+    this.scope.pause = false;
   }
 
   protected connectedCallback() {
@@ -201,41 +272,42 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   }
 
   protected addEventListeners() {
-    this.el.addEventListener('resize', this.onResize.bind(this));
-    this.slideshowInner.addEventListener('scroll', this.onScroll.bind(this), { passive: true});
-    this.slideshowInner.addEventListener('scrollend', this.onScrollend.bind(this));
+    this.el.addEventListener('resize', this.onResize.bind(this), false);
+    // this.slideshowInner.addEventListener('scroll', this.onScroll.bind(this), { passive: true});
+    this.slideshowInner.addEventListener('scrollEnd', this.onScrollend.bind(this), false);
+
+    this.el.addEventListener('mouseenter', this.onMouseIn.bind(this));
+    this.el.addEventListener('mouseover', this.onMouseIn.bind(this));
+    this.el.addEventListener('mouseout', this.onMouseOut.bind(this));
+    this.el.addEventListener('mouseleave', this.onMouseOut.bind(this));
 
     // inital
     this.onResize();
-    this.onScroll();
+    // this.onScroll();
+    this.onScrollend();
   }
 
   protected removeEventListeners() {
-    this.el.removeEventListener('resize', this.onResize.bind(this));
-    this.slideshowInner.removeEventListener('scroll', this.onScroll.bind(this));
-    this.slideshowInner.removeEventListener('scrollend', this.onScroll.bind(this));
-  }
+    this.el.removeEventListener('resize', this.onResize);
+    this.slideshowInner.removeEventListener('scroll', this.onScroll);
+    this.slideshowInner.removeEventListener('scrollEnd', this.onScrollend);
 
-  protected onResize() {
-    console.debug('on resize');
-    this.setSlidePositions();
+    this.el.removeEventListener('mouseenter', this.onMouseIn.bind(this));
+    this.el.removeEventListener('mouseover', this.onMouseIn.bind(this));
+    this.el.removeEventListener('mouseout', this.onMouseOut.bind(this));
+    this.el.removeEventListener('mouseleave', this.onMouseOut.bind(this));
   }
 
   protected async beforeBind() {
-    return super.beforeBind()
-    .then(() => {
-      console.debug('beforeBind done', this.scope);
-    });
+    return super.beforeBind();
   }
 
   protected async afterBind() {
-    return super.afterBind()
-    .then(() => {
-      // console.debug('afterBind', this.scope);
-      this.initSlideshowInner();
+    await super.afterBind();
 
-      this.addEventListeners();
-    });
+    this.initSlideshowInner();
+    this.removeEventListeners();
+    this.addEventListeners();
   }
 
   protected initSlideshowInner() {
@@ -246,7 +318,15 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       this.dragscroll = new Dragscroll(this.slideshowInner, dragscrollOptions);
     }
 
-    if (!this.autoscroll && this.scope.autoplay) {
+    if (this.scope.autoplay) {
+      this.initAutoplay();
+    }
+
+    this.scrollEvents = new ScrollEventsService(this.slideshowInner);
+  }
+
+  protected initContinuousAutoplay() {
+    if (!this.autoscroll) {
       const autoscrollOptions: AutoscrollOptions = {
         velocity: this.scope.autoplayVelocity,
         angle: this.scope.angle,
@@ -254,8 +334,23 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       };
       this.autoscroll = new Autoscroll(this.slideshowInner, autoscrollOptions);
     }
+  }
 
-    this.touchEvents = new TouchEventService(this.slideshowInner);
+  protected initIntervalAutoplay() {
+    this.intervalAutoplayInterval = setInterval(() => {
+      if (!this.scope.pause) {
+        this.next();
+      }
+    }, this.scope.autoplayInterval);
+  }
+
+  protected initAutoplay() {
+    // continuous scrolling
+    if (this.scope.autoplayInterval <= 0) {
+      this.initContinuousAutoplay();
+    } else {
+      this.initIntervalAutoplay();
+    }
   }
 
   protected initSlideshowInnerSlides() {
@@ -273,6 +368,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   protected transformTemplateAttributes(attributes: any, index: number) {
     attributes.handle = attributes.handle || index.toString();
     attributes.index = index;
+    attributes.class = attributes.class || '';
     attributes.class += ' slide';
     return attributes;
   }
@@ -284,12 +380,18 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   protected addItemByTemplate(tpl: HTMLTemplateElement, index: number) {
     const attributes = this.getTemplateAttributes(tpl, index);
     const content = tpl.innerHTML;
-    if (attributes.type && attributes.type === 'slide') {
-      this.scope.items.push({...attributes, content});
-    }
-    if (attributes.type && attributes.type === 'controls') {
-      console.debug('Custom controls template');
-      this.templateControls = content;
+    if (attributes.type) {
+      if (attributes.type === 'slide') {
+        this.scope.items.push({...attributes, content});
+      }
+      if (attributes.type === 'controls') {
+        console.debug('Custom controls template', content);
+        this.templateControls = content;
+      }
+      if (attributes.type === 'indicators') {
+        console.debug('Custom indicators template', content);
+        this.templateIndicators = content;
+      }
     }
   }
 
@@ -306,19 +408,17 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       slideElement.setAttribute('index', index.toString());
       const attributes = {
         handle,
-        centered: false,
+        active: false,
         content: slideElement.innerHTML,
         index,
         position: {...slideElement.getBoundingClientRect(), centerY: 0, centerX: 0},
       };
       this.scope.items.push(attributes);
     });
-    console.debug('addItemsByChilds done', this.scope.items);
   }
 
   protected getScrollPosition(): ScrollPosition {
     const scrollPosition = ExtraUtils.getScrollPosition(this.slideshowInner);
-    console.debug('scrollPosition', scrollPosition);
     return scrollPosition;
   }
 
@@ -350,17 +450,17 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     return minIndex;
   }
 
-  protected setAllSlidesUncentered(excludeIndex: number = -1) {
+  protected setAllSlidesUnactive(excludeIndex: number = -1) {
     if (!this.slideElements) {
       return;
     }
     for (let index = 0; index < this.scope.items.length; index++) {
       if (index !== excludeIndex) {
         if (this.scope.items[index]) {
-          this.scope.items[index].centered = false;
+          this.scope.items[index].active = false;
         }
         if (this.slideElements[index] && this.slideElements[index].classList.remove) {
-          this.slideElements[index].classList.remove('centered');
+          this.slideElements[index].classList.remove('active');
         }
       }
     }
@@ -368,45 +468,14 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   protected setCenteredSlide() {
     const index = this.getMostCenteredSlideIndex();
-    this.setAllSlidesUncentered(index);
+    this.setAllSlidesUnactive(index);
     if (!this.scope.items[index]) {
       return;
     }
-    this.scope.items[index].centered = true;
+    this.scope.items[index].active = true;
     if (this.slideElements && this.slideElements[index].classList.add) {
-      this.slideElements[index].classList.add('centered');
+      this.slideElements[index].classList.add('active');
     }
-  }
-
-  protected scrollToSlide(index: number) {
-    let top = 0;
-    let left = 0;
-
-    if (this.scope.angle === 'vertical') {
-      top = this.slideshowInner.scrollTop + this.scope.items[index].position.centerY;
-    } else {
-      left = this.slideshowInner.scrollLeft + this.scope.items[index].position.centerX;
-    }
-
-    // TODO new scrollservice based on https://pawelgrzybek.com/page-scroll-in-vanilla-javascript/
-    if (this.slideElements[index]) {
-      // if is is window to scroll
-      if (typeof(this.slideshowInner.scroll) === 'function') {
-        this.slideshowInner.scroll({
-          behavior: 'smooth',
-          left,
-          top,
-        });
-      } else {
-        if (this.scope.angle === 'vertical') {
-          this.slideshowInner.scrollTop = top;
-        } else {
-          this.slideshowInner.scrollLeft = left;
-        }
-      }
-    }
-
-    console.debug('this.scope.items[index].position', this.scope.items[index].position);
   }
 
   protected isScrollableToIndex(index: number) {
@@ -415,9 +484,9 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     }
     const maxScrollTo = this.scope.angle === 'vertical' ? this.getScrollPosition().maxY : this.getScrollPosition().maxX;
     const scrollTo = this.scope.angle === 'vertical' ? this.slideshowInner.scrollTop + this.scope.items[index].position.centerY : this.slideshowInner.scrollLeft + this.scope.items[index].position.centerX;
-    console.debug('scrollTo <= maxScrollTo && scrollTo >= 0', scrollTo <= maxScrollTo && scrollTo >= 0);
     console.debug('scrollTo', scrollTo);
     console.debug('maxScrollTo', maxScrollTo);
+    console.debug('scrollTo <= maxScrollTo && scrollTo >= 0', scrollTo <= maxScrollTo && scrollTo >= 0);
     return scrollTo <= maxScrollTo && scrollTo >= 0;
   }
 
@@ -430,18 +499,15 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       nextIndex = nextIndex - this.slideElements.length;
     }
 
-    if (!this.isScrollableToIndex(nextIndex)) {
-      nextIndex++;
-    }
+    // if (!this.isScrollableToIndex(nextIndex)) {
+    //   nextIndex++;
+    // }
 
-    if (nextIndex >= this.slideElements.length) {
-      nextIndex = nextIndex - this.slideElements.length;
-    }
+    // if (nextIndex >= this.slideElements.length) {
+    //   nextIndex = nextIndex - this.slideElements.length;
+    // }
 
-    console.debug('currentIndex', currentIndex);
-    console.debug('nextIndex', nextIndex);
-
-    this.scrollToSlide(nextIndex);
+    return this.goTo(nextIndex);
   }
 
   protected scrollToPrevSlide() {
@@ -449,22 +515,25 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     const currentIndex = this.getMostCenteredSlideIndex();
     let prevIndex = currentIndex - this.scope.slidesToScroll;
 
-    if (prevIndex <= 0) {
+    if (prevIndex < 0) {
       prevIndex = (this.slideElements.length - 1) - prevIndex;
     }
 
-    if (!this.isScrollableToIndex(prevIndex)) {
-      prevIndex--;
-    }
+    // if (!this.isScrollableToIndex(prevIndex)) {
+    //   prevIndex--;
+    // }
 
-    if (prevIndex <= 0) {
-      prevIndex = (this.slideElements.length - 1) - prevIndex;
-    }
+    // if (prevIndex < 0) {
+    //   prevIndex = (this.slideElements.length - 1) - prevIndex;
+    // }
 
-    console.debug('currentIndex', currentIndex);
-    console.debug('prevIndex', prevIndex);
+    return this.goTo(prevIndex);
+  }
 
-    this.scrollToSlide(prevIndex);
+  protected scrollToNearestSlide() {
+    this.setSlidePositions();
+    const nearestIndex = this.getMostCenteredSlideIndex();
+    return this.goTo(nearestIndex);
   }
 
   protected setSlidePositions() {
@@ -473,7 +542,6 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       return;
     }
     const mainBoundingClient = this.slideshowInner.getBoundingClientRect();
-    // console.debug('boundingClient ', this.slideshowInner?.getBoundingClientRect());
     for (let i = 0; i < this.scope.items.length; i++) {
       const slideElement = this.slideElements[i];
       const slideObject = this.scope.items[i];
@@ -497,7 +565,6 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
         // 0 if element is in the middle / center
         centerX: (rect.x + (rect.width / 2)) - mainBoundingClient.width / 2,
       };
-      // console.debug('position ' + slideObject.index, rect, slideObject.position);
     }
   }
 
@@ -512,19 +579,29 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   // deconstructor
   protected disconnectedCallback() {
     this.removeEventListeners();
-    this.touchEvents?.removeEventListeners();
+    this.scrollEvents?.removeEventListeners();
+    if (this.intervalAutoplayInterval) {
+      clearInterval(this.intervalAutoplayInterval);
+    }
     return super.disconnectedCallback();
   }
 
   protected template() {
     // Only set the component template if there no childs or the childs are templates
     if (!this.el.hasChildNodes() || this.hasOnlyTemplateChilds()) {
-      return templateSlides + this.templateControls;
+      console.debug('Full template!', this.templateIndicators);
+      return templateSlides + this.templateControls + this.templateIndicators;
     } else {
+      console.debug('Append to template!');
       // Prepend control elements if no custom control elements in template are found
       if (this.scope.controls && this.controlsElements.length <= 0) {
-        this.el.innerHTML = this.templateControls + this.el.innerHTML;
+        this.el.innerHTML += this.templateControls;
       }
+
+      if (this.scope.indicators && !this.indicatorsElement) {
+        this.el.innerHTML += this.templateIndicators;
+      }
+
       return null;
     }
   }

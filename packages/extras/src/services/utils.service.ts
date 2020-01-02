@@ -59,6 +59,11 @@ export class Utils {
     return scrollPosition;
   }
 
+  public static isScrollable(element: Element) {
+    const scrollPosition = this.getScrollPosition(element);
+    return scrollPosition.maxX > 0 || scrollPosition.maxY > 0;
+  }
+
   /**
    * Similar to JQuerys `$(el).index();`
    * @param el

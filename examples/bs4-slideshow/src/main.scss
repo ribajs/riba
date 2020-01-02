@@ -7,3 +7,13 @@
 @import './binders/index';
 @import './components/index';
 @import './formatters/index';
+
+
+body {
+  background-color: #3498db;
+  color: $light;
+}
+
+h2 {
+  margin-bottom: 2em;
+}

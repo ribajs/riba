@@ -17,18 +17,23 @@ export interface Scope {
   items: Array<any>;
 }
 
-// TODO move to riba core?
-// TODO use this for Bs4TabsComponent
 export abstract class TemplatesComponent extends Component {
 
   protected templateAttributes: TemplateAttributes = [];
 
+  protected templateReady = false;
+
   protected abstract scope: Scope;
 
   protected connectedCallback() {
-    super.connectedCallback();
     this.addItemsByTemplate();
+    super.connectedCallback();
     this.removeTemplates();
+    this.bindIfReady();
+  }
+
+  protected ready() {
+    return super.ready() && this.templateReady;
   }
 
   /**
@@ -80,23 +85,27 @@ export abstract class TemplatesComponent extends Component {
 
   protected addItemsByTemplate() {
     const templates = this.el.querySelectorAll<HTMLTemplateElement>('template');
-    templates.forEach((tpl, index) => {
+    for (let index = 0; index < templates.length; index++) {
+      const tpl = templates[index];
       this.addItemByTemplate(tpl, index);
-    });
+    }
+    this.templateReady = true;
   }
 
   protected removeTemplates() {
     const templates = this.el.querySelectorAll<HTMLTemplateElement>('template');
-    templates.forEach((tpl) => {
+    for (let index = 0; index < templates.length; index++) {
+      const tpl = templates[index];
       this.el.removeChild(tpl);
-    });
+    }
   }
 
   protected hasOnlyTemplateChilds() {
     let allAreTemplates: boolean = true;
-    this.el.childNodes.forEach((child) => {
+    for (let index = 0; index < this.el.childNodes.length; index++) {
+      const child = this.el.childNodes[index];
       allAreTemplates = allAreTemplates && (child.nodeName === 'TEMPLATE' || child.nodeName === '#text');
-    });
+    }
     return allAreTemplates;
   }
 

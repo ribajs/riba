@@ -106,6 +106,10 @@ export abstract class Component extends FakeHTMLElement {
     return this.bindIfReady();
   }
 
+  protected ready() {
+    return this.allPassedObservedAttributesAreInitialized() && this.checkRequiredAttributes();
+  }
+
   /**
    * If `autobind` is true this component will bind riba automatically in this component if all all passed observed and required attributes are initialized
    */
@@ -113,7 +117,7 @@ export abstract class Component extends FakeHTMLElement {
     /**
      * After all required and passed attributes are set we load the template and bind the component
      */
-    if (this.allPassedObservedAttributesAreInitialized() && this.checkRequiredAttributes()) {
+    if (this.ready()) {
       return this.loadTemplate()
       .then((template) => {
         if (this.autobind) {

@@ -5,7 +5,11 @@ bs4-slideshow {
   .slideshow-inner {
     @extend .row;
     @extend .flex-scrollbar-x-scroll;
-    // @extend .scrollbar-invisible;
+    @extend .scrollbar-invisible;
+
+    .slide-caption {
+      @extend .carousel-caption;
+    }
   }
 
   .slideshow-control-prev, .slideshow-control-next {
@@ -33,5 +37,27 @@ bs4-slideshow {
   }
   .slideshow-control-fallback-next-icon {
     @extend .carousel-control-next-icon;
+  }
+
+  // .slideshow-indicators {
+  //   @extend .carousel-indicators;
+  // }
+
+  .slideshow-indicators {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 15;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin-right: $carousel-control-width;
+    margin-left: $carousel-control-width;
+    li {
+      flex: 0 1 auto;
+      margin-right: $carousel-indicator-spacer;
+      margin-left: $carousel-indicator-spacer;
+    }
   }
 }

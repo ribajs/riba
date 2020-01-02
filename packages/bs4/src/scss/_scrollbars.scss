@@ -47,7 +47,9 @@
 }
 
 .scrollbar-invisible {
-  @include scrollbars(.5em, transparent, transparent);
+  @include scrollbars(0, transparent, transparent);
+  -ms-overflow-style: none; /* IE 11 */
+  scrollbar-width: none; /* Firefox 64 */
 }
 
 

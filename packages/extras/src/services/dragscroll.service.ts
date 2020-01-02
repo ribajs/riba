@@ -52,23 +52,22 @@ export class Dragscroll {
   }
 
   protected checkDraggable() {
-    const scrollPosition = Utils.getScrollPosition(this.el);
-    if (scrollPosition.maxX > 0 || scrollPosition.maxY > 0) {
+    if (Utils.isScrollable(this.el)) {
       this.el.classList.add('draggable');
     } else {
       this.el.classList.remove('draggable');
     }
   }
 
-  protected triggerScrollendEvent(originalEvent: Event) {
-    const extraParameters: any = Utils.getScrollPosition(originalEvent.target as HTMLElement);
-    extraParameters.originalEvent = originalEvent;
-    extraParameters.target = originalEvent.target;
-    const scrollendEvent = new CustomEvent('scrollend', {
-      detail: extraParameters,
-    });
-    this.el.dispatchEvent(scrollendEvent);
-  }
+  // protected triggerScrollendEvent(originalEvent: Event) {
+  //   const extraParameters: any = Utils.getScrollPosition(originalEvent.target as HTMLElement);
+  //   extraParameters.originalEvent = originalEvent;
+  //   extraParameters.target = originalEvent.target;
+  //   const scrollendEvent = new CustomEvent('scrollend', {
+  //     detail: extraParameters,
+  //   });
+  //   this.el.dispatchEvent(scrollendEvent);
+  // }
 
   protected onMouseDown <EventListener>(e: MouseEvent) {
     this.pushed = true;
@@ -81,7 +80,7 @@ export class Dragscroll {
 
   protected onMouseUp <EventListener>(e: MouseEvent) {
     this.pushed = false;
-    this.triggerScrollendEvent(e);
+    // this.triggerScrollendEvent(e);
   }
 
   protected onMouseMove <EventListener>(e: MouseEvent) {

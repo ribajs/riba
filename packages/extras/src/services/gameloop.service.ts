@@ -1,6 +1,10 @@
 export type RenderCallback = (interp: number) => void;
 
-export type UpdateCallback = (delta: number, progress: number) => void;
+export type UpdateCallback = (delta: number) => void;
+
+export interface GameloopOptions {
+  maxFPS?: number;
+}
 
 /**
  * @see https://www.sitepoint.com/quick-tip-game-loop-in-javascript/
@@ -10,7 +14,10 @@ export class Gameloop {
 
   public static maxFPS: number = 60;
 
-  public static startLoop(options: {}, renderCallback?: RenderCallback, updateCallback?: UpdateCallback) {
+  public static startLoop(options: GameloopOptions = {}, renderCallback?: RenderCallback, updateCallback?: UpdateCallback) {
+
+    this.setOptions(options);
+
     if (renderCallback) {
       this.addRenderCallback(renderCallback);
     }
@@ -19,7 +26,7 @@ export class Gameloop {
     }
     if (!this.loopStarted) {
       this.loopStarted = true;
-      window.requestAnimationFrame(this.loop.bind(this, options));
+      window.requestAnimationFrame(this.loop.bind(this));
     }
   }
 
@@ -42,15 +49,19 @@ export class Gameloop {
 
   protected static lastFpsUpdate = 0;
 
+  protected static setOptions(options: GameloopOptions) {
+    this.maxFPS = typeof(options.maxFPS) === 'number' ? options.maxFPS : this.maxFPS;
+  }
+
   /**
    * The main / game loop
    * @param timestamp
    */
-  protected static loop(options: {}, timestamp: number) {
+  protected static loop(timestamp: number) {
 
     // Throttle the frame rate.
     if (timestamp < this.lastFrameTimeMs + (1000 / this.maxFPS)) {
-      requestAnimationFrame(this.loop.bind(this, options));
+      requestAnimationFrame(this.loop.bind(this));
       return;
     }
 
@@ -70,7 +81,7 @@ export class Gameloop {
 
     let numUpdateSteps = 0;
     while (this.delta >= this.timestep) {
-      this.update(this.timestep, 0);
+      this.update(this.timestep);
       this.delta -= this.timestep;
       if (++numUpdateSteps >= 240) {
         this.panic();
@@ -80,7 +91,7 @@ export class Gameloop {
 
     this.render(this.delta / this.timestep);
 
-    window.requestAnimationFrame(this.loop.bind(this, options));
+    window.requestAnimationFrame(this.loop.bind(this));
   }
 
   protected static begin(timestamp: number, delta: number) {
@@ -95,10 +106,10 @@ export class Gameloop {
     }
   }
 
-  protected static update(delta: number, progress: number) {
+  protected static update(delta: number) {
     for (const updateCallback of this.updateCallbacks) {
       if (typeof(updateCallback) === 'function') {
-        updateCallback(delta, progress);
+        updateCallback(delta);
       }
     }
   }
@@ -113,6 +124,10 @@ export class Gameloop {
 
   protected static panic() {
     this.delta = 0; // discard the unsimulated time
+  }
+
+  constructor(options: GameloopOptions = {}) {
+    Gameloop.setOptions(options);
   }
 
 }
