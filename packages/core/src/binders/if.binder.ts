@@ -21,16 +21,14 @@ export const ifBinder: Binder<boolean> = {
         el.parentNode.insertBefore(this.marker, el);
         el.parentNode.removeChild(el);
       }
-    } else if ( this.customData.bound === false &&  this.customData.nested) {
+    } else if (this.customData.nested) {
       this.customData.nested.bind();
     }
-    this.customData.bound = true;
   },
 
   unbind() {
     if ( this.customData.nested) {
       this.customData.nested.unbind();
-      this.customData.bound = false;
     }
   },
 
@@ -38,7 +36,7 @@ export const ifBinder: Binder<boolean> = {
     value = !!value;
     if (value !== this.customData.attached) {
       if (value) {
-        if (! this.customData.nested) {
+        if (!this.customData.nested) {
           this.customData.nested = new View(el, this.view.models, this.view.options);
           this.customData.nested.bind();
         }
