@@ -31,6 +31,7 @@ export class Bs4IconComponent extends Component {
           console.debug('response.headers.get("content-type")', response.headers.get('content-type'));
           if (response.status !== 200) {
             console.error(response.statusText);
+            return '';
           }
           if (response.headers.get('content-type')?.indexOf('image/svg+xml') !== -1) {
             return response.text();

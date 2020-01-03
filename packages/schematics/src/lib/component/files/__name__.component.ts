@@ -40,17 +40,13 @@ export class <%= classify(name) %>Component extends Component {
   }
 
   protected async beforeBind() {
-    return super.beforeBind()
-    .then(() => {
-      console.debug('beforeBind', this.scope);
-    });
+    await super.beforeBind();
+    console.debug('beforeBind', this.scope);
   }
 
   protected async afterBind() {
-    return super.afterBind()
-    .then(() => {
-      console.debug('afterBind', this.scope);
-    });
+    await super.afterBind();
+    console.debug('afterBind', this.scope);
   }
 
   protected requiredAttributes() {

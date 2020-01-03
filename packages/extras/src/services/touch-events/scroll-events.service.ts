@@ -41,7 +41,7 @@ export class ScrollEventsService extends BaseTouchEventService {
 
   /**
    * scrollstart Event
-   * (also handles `scrollEnd`)
+   * (also handles `scrollended`)
    */
   protected scrollstart(event: TouchEvent | MouseEvent) {
     if (!event.target) {
@@ -50,7 +50,7 @@ export class ScrollEventsService extends BaseTouchEventService {
 
     if (!this.isScrolling) {
       this.isScrolling = true;
-      this.triggerCustomEvent('scrollStart', event, {});
+      this.triggerCustomEvent('scrollstart', event, {});
     }
 
     // console.debug('scroll timer is ', this.scrollTimer);
@@ -59,9 +59,9 @@ export class ScrollEventsService extends BaseTouchEventService {
       this.scrollTimer = null;
     }
 
-    this.scrollTimer = setTimeout(() => {
-      this.triggerCustomEvent('scrollEnd', event, {});
+    this.scrollTimer = window.setTimeout(() => {
+      this.triggerCustomEvent('scrollended', event, {});
       this.isScrolling = false;
-    }, 100);
+    }, 200);
   }
 }

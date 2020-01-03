@@ -2,6 +2,8 @@
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const { DuplicatesPlugin } = require("inspectpack/plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 /**
  * output errors on watch
@@ -49,18 +51,21 @@ module.exports = env => {
       },
     },
     // Change to your "entry-point".
-    entry: ['./src/ts/main.ts'],
+    entry: ['./src/main.scss', './src/main.ts'],
     devtool: env.production ? '' : 'inline-source-map',
     mode: env.production ? 'production' : 'development',
     output: {
       filename: '[name].bundle.js',
       chunkFilename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'theme/assets/')
+      path: path.resolve(__dirname, 'dist/')
     },
     resolve: {
       modules: [ 'node_modules', 'src/modules' ],
       extensions: ['.ts', '.tsx', '.js', '.json'],
       symlinks: true
+    },
+    devServer: {
+      contentBase: './src',
     },
     module: {
       rules: [
@@ -89,10 +94,40 @@ module.exports = env => {
               minimize: true
             }
           }]
-        }
+        },
+				{
+					test: /.scss$/,
+					use: [
+            {
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                // only enable hot in development
+                hmr: process.env.NODE_ENV === 'development',
+                // if hmr does not work, this is a forceful method.
+                reloadAll: true,
+              },
+            },
+						{
+							loader: 'css-loader'
+						},
+						{
+							loader: 'postcss-loader'
+						},
+						{
+							loader: 'sass-loader'
+						}
+					]
+				}
       ]
     },
     plugins: [
+      new MiniCssExtractPlugin({
+        filename: '[name].css',
+        chunkFilename: '[id].css',
+      }),
+      new HtmlWebpackPlugin({
+        template: "./src/index.html"
+      }),
       new ConsoleNotifierPlugin(),
       new DuplicatesPlugin(),
     ],

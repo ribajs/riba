@@ -169,10 +169,12 @@ export class Bs4SidebarComponent extends Component {
 
   protected initToggleButtonEventDispatcher() {
     if (this.toggleButtonEvents) {
-      this.toggleButtonEvents.off('toggle', this.onToggle);
+      this.toggleButtonEvents.off('toggle', this.onToggle.bind(this));
+      this.toggleButtonEvents.off('init', this.triggerState.bind(this));
     }
     this.toggleButtonEvents = new EventDispatcher('bs4-toggle-button:' + this.scope.id);
     this.toggleButtonEvents.on('toggle', this.onToggle.bind(this));
+    this.toggleButtonEvents.on('init', this.triggerState.bind(this));
   }
 
   protected initRouterEventDispatcher() {
@@ -195,6 +197,10 @@ export class Bs4SidebarComponent extends Component {
   protected onOverlay(directon: State) {
     this.setContainersStyle(undefined, '', directon);
     this.el.setAttribute('style', `transform:translateX(0);width:${this.scope.width};`);
+  }
+
+  protected triggerState(targetId: string) {
+    this.toggleButtonEvents?.trigger('state', this.scope.state);
   }
 
   protected onStateChange() {
@@ -303,12 +309,14 @@ export class Bs4SidebarComponent extends Component {
   }
 
   protected async beforeBind() {
+    await super.beforeBind();
     this.initRouterEventDispatcher();
-    this.onEnviromentChanges();
+    return this.onEnviromentChanges();
   }
 
   protected async afterBind() {
-    this.onEnviromentChanges();
+    await super.afterBind();
+    return this.onEnviromentChanges();
   }
 
   protected requiredAttributes() {
@@ -328,6 +336,11 @@ export class Bs4SidebarComponent extends Component {
   // deconstructor
   protected disconnectedCallback() {
     super.disconnectedCallback();
+    this.toggleButtonEvents?.off('init', this.triggerState.bind(this));
+    this.toggleButtonEvents?.off('toggle', this.onToggle.bind(this));
+    this.toggleButtonEvents?.off('init', this.triggerState.bind(this));
+    this.routerEvents.off('newPageReady', this.onEnviromentChanges.bind(this));
+    window.removeEventListener('resize', this.onEnviromentChanges.bind(this), false);
   }
 
   protected template() {

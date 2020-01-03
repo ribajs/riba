@@ -212,3 +212,5 @@ export class Riba {
     return view;
   }
 }
+
+(window as any).Riba = Riba;

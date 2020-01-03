@@ -50,6 +50,7 @@ export class Bs4ScrollspyComponent extends Bs4ContentsComponent {
   protected connectedCallback() {
     super.connectedCallback();
     this.init(Bs4ScrollspyComponent.observedAttributes);
+    console.debug('Bs4ScrollspyComponent', this.scope);
   }
 
   protected requiredAttributes() {

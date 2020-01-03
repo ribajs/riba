@@ -42,6 +42,12 @@ export class Bs4ToggleButtonComponent extends Component {
     }
   }
 
+  protected async afterBind() {
+    await super.afterBind();
+    // Trigger init to trigger there current state of all the components that are connected to this component
+    return this.eventDispatcher?.trigger('init', this.scope.targetId);
+  }
+
   protected connectedCallback() {
     super.connectedCallback();
     this.init(Bs4ToggleButtonComponent.observedAttributes);
@@ -58,6 +64,8 @@ export class Bs4ToggleButtonComponent extends Component {
     }
     this.eventDispatcher = new EventDispatcher('bs4-toggle-button:' + id);
     this.eventDispatcher.on('toggled', this.onToggledEvent.bind(this));
+    // Triggered state triggered by `..trigger('init', ...`
+    this.eventDispatcher.on('state', this.onToggledEvent.bind(this));
   }
 
   protected requiredAttributes() {

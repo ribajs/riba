@@ -130,6 +130,7 @@ export class Bs4TabsComponent extends TemplatesComponent {
   public activate(tab: Tab, binding?: Binding, event?: Event) {
     this.deactivateAll();
     tab.active = true;
+
     if (event) {
       event.preventDefault();
     }

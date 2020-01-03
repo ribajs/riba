@@ -6,6 +6,6 @@ import { Binder } from '../interfaces';
 export const htmlBinder: Binder<string> = {
   name: 'html',
   routine(el: HTMLElement, value: string) {
-    el.innerHTML = value != null ? value : '';
+    el.innerHTML = value ? value : '';
   },
 };

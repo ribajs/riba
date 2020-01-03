@@ -132,11 +132,11 @@ export class Bs4AccordionComponent extends TemplatesComponent {
   }
 
   protected async beforeBind() {
-    return super.beforeBind();
+    return await super.beforeBind();
   }
 
   protected async afterBind() {
-    return super.beforeBind();
+    return await super.beforeBind();
   }
 
   protected requiredAttributes() {

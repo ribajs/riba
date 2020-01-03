@@ -1,9 +1,9 @@
-import { Binder, Type } from '@ribajs/core';
+import { Binder, TypeOfComponent } from '@ribajs/core';
 import { AI18nSwitcherComponent } from '../abstract-switcher/switcher.abstract.component';
 import { Langcode } from '../../interfaces';
 import { ALocalesService } from '../../services/locales-base.service';
 
-export const i18nSwitcherComponentWrapper = (localesService: ALocalesService): Type<AI18nSwitcherComponent> => {
+export const i18nSwitcherComponentWrapper = (localesService: ALocalesService): TypeOfComponent<AI18nSwitcherComponent> => {
 
   return class I18nSwitcherComponent extends AI18nSwitcherComponent {
 

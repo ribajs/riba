@@ -34,17 +34,13 @@ export class SlideshowExampleComponent extends Component {
   }
 
   protected async beforeBind() {
-    super.beforeBind()
-    .then(() => {
-      console.debug('beforeBind', this.scope);
-    });
+    await super.beforeBind();
+    console.debug('beforeBind', this.scope);
   }
 
   protected async afterBind() {
-    super.afterBind()
-    .then(() => {
-      console.debug('afterBind', this.scope);
-    });
+    await super.afterBind();
+    console.debug('afterBind', this.scope);
   }
 
   protected requiredAttributes() {

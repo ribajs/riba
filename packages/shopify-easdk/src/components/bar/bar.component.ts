@@ -126,6 +126,7 @@ export class BarComponent extends Component {
   }
 
   protected async beforeBind() {
+    await super.beforeBind();
     this.scope.buttons =  this.bar.buttons;
     this.scope.breadcrumb =  this.bar.breadcrumb;
     this.scope.title =  this.bar.title;
@@ -136,7 +137,7 @@ export class BarComponent extends Component {
   }
 
   protected async afterBind() {
-
+    await super.afterBind();
     console.debug('afterBind', this.scope);
   }
 

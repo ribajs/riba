@@ -79,6 +79,7 @@ export abstract class TemplatesComponent extends Component {
 
   protected addItemByTemplate(tpl: HTMLTemplateElement, index: number) {
     const attributes = this.getTemplateAttributes(tpl, index);
+    console.debug('getTemplateAttributes', attributes);
     const content = tpl.innerHTML;
     this.scope.items.push({...attributes, content});
   }

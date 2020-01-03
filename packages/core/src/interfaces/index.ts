@@ -4,7 +4,7 @@ export * from './binder';
 export * from './binder.wrapper';
 export * from './binders';
 export * from './binding';
-export * from './component.wrapper';
+// export * from './component.wrapper';
 export * from './components';
 export * from './formatter';
 export * from './formatters';

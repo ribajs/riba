@@ -102,6 +102,11 @@ export class Bs4ContentsComponent extends Component {
   }
 
   protected async beforeBind() {
+    await super.beforeBind();
+  }
+
+  protected async afterBind() {
+    await super.afterBind();
     if (this.scope.headerParentSelector && this.scope.headersStart && this.scope.headersDepth) {
       this.wrapperElement = document.querySelector(this.scope.headerParentSelector) || undefined;
       this.scope.anchors = [];
@@ -111,10 +116,6 @@ export class Bs4ContentsComponent extends Component {
       }
       this.pushHeaders(this.wrapperElement, this.scope.headersStart, this.scope.headersDepth, this.scope.anchors);
     }
-  }
-
-  protected async afterBind() {
-    super.afterBind();
   }
 
   protected requiredAttributes() {
@@ -128,6 +129,7 @@ export class Bs4ContentsComponent extends Component {
   // deconstructor
   protected disconnectedCallback() {
     super.disconnectedCallback();
+    this.scope.anchors = [];
   }
 
   protected template() {

@@ -7,17 +7,18 @@ export class EachItemExampleComponent extends Component {
 
   protected scope: Scope = {
     items: this.getItems(),
-    push: this.push,
     pop: this.pop,
-    shift: this.shift,
-    unshift: this.unshift,
-    splice: this.splice,
+    push: this.push,
     reset: this.reset,
+    shift: this.shift,
     sort: this.sort,
+    splice: this.splice,
+    unshift: this.unshift,
   };
 
   constructor(element?: HTMLElement) {
     super(element);
+    console.debug('[EachItemExampleComponent] constructor', this.scope);
   }
 
   public push() {
@@ -25,38 +26,39 @@ export class EachItemExampleComponent extends Component {
   }
 
   public pop() {
-    this.scope.items.pop()
+    this.scope.items.pop();
   }
 
   public shift() {
-    this.scope.items.shift()
+    this.scope.items.shift();
   }
 
   public unshift() {
-    this.scope.items.unshift({name: 'shifted'})
+    this.scope.items.unshift({name: 'shifted'});
   }
 
   public splice() {
-    this.scope.items.splice(1, 1, {name: 'spliced1'}, {name: 'spliced2'})
+    this.scope.items.splice(1, 1, {name: 'spliced1'}, {name: 'spliced2'});
   }
 
   public reset() {
-    this.scope.items = this.getItems()
+    this.scope.items = this.getItems();
   }
 
   public sort() {
     this.scope.items.sort((a, b) => {
-      return (a.value || 0) - (b.value || 0)
-    })
+      return (a.value || 0) - (b.value || 0);
+    });
   }
 
   protected connectedCallback() {
     super.connectedCallback();
     this.init([]);
+    console.debug('[EachItemExampleComponent] connectedCallback', this.scope);
   }
 
   protected getItems(): Item[] {
-    return [{name: 'x', value: 2} ,{name: 'y', value: 1} , {name: 'z', value: 3}]
+    return [{name: 'x', value: 2}, {name: 'y', value: 1}, {name: 'z', value: 3}];
   }
 
   protected async init(observedAttributes: string[]) {
@@ -77,12 +79,12 @@ interface Item {
 }
 
 interface Scope {
-  items: Array<Item>,
-  push: EachItemExampleComponent['push'],
-  pop: EachItemExampleComponent['pop'],
-  shift: EachItemExampleComponent['shift'],
-  unshift: EachItemExampleComponent['unshift'],
-  splice: EachItemExampleComponent['splice'],
-  reset: EachItemExampleComponent['reset'],
-  sort: EachItemExampleComponent['sort'],
+  items: Item[];
+  push: EachItemExampleComponent['push'];
+  pop: EachItemExampleComponent['pop'];
+  shift: EachItemExampleComponent['shift'];
+  unshift: EachItemExampleComponent['unshift'];
+  splice: EachItemExampleComponent['splice'];
+  reset: EachItemExampleComponent['reset'];
+  sort: EachItemExampleComponent['sort'];
 }

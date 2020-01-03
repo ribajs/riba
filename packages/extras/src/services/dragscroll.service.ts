@@ -59,16 +59,6 @@ export class Dragscroll {
     }
   }
 
-  // protected triggerScrollendEvent(originalEvent: Event) {
-  //   const extraParameters: any = Utils.getScrollPosition(originalEvent.target as HTMLElement);
-  //   extraParameters.originalEvent = originalEvent;
-  //   extraParameters.target = originalEvent.target;
-  //   const scrollendEvent = new CustomEvent('scrollend', {
-  //     detail: extraParameters,
-  //   });
-  //   this.el.dispatchEvent(scrollendEvent);
-  // }
-
   protected onMouseDown <EventListener>(e: MouseEvent) {
     this.pushed = true;
     this.lastClientX = e.clientX;

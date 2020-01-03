@@ -1,7 +1,10 @@
 import { Component } from '../component';
-import { ComponentWrapper } from './component.wrapper';
 import { Type } from '../interfaces/type';
 
+export interface TypeOfComponent<T = Component> extends Type<T> {
+  tagName: string;
+}
+
 export interface Components {
-  [name: string]: Type<Component> | ComponentWrapper;
+  [name: string]: TypeOfComponent;
 }

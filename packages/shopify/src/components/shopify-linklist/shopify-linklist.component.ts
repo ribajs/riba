@@ -199,7 +199,7 @@ export class ShopifyLinklistComponent extends Component {
   }
 
   protected async beforeBind(): Promise<any> {
-    super.beforeBind();
+    await super.beforeBind();
     if (this.scope.linklist && this.scope.linklist.links) {
       this.transformLinks(this.scope.linklist.links);
       if (this.scope.collapseOnNewPage) {

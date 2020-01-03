@@ -249,6 +249,7 @@
           <button class="btn btn-link carousel-control-prev" role="button" data-slide="prev" rv-on-click="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
+          </button>
           <button class="btn btn-link carousel-control-next" role="button" data-slide="next" rv-on-click="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
@@ -258,6 +259,36 @@
           <ol class="carousel-indicators">
             <li rv-each-slide="items" rv-class-active="slide.active" rv-on-click="goTo | args slide.index"></li>
           </ol>
+        </template>
+      </bs4-slideshow>
+    </section>
+
+    <section class="col-12 my-5">
+      <h2 class="text-center">Slides as Templates</h2>
+      <bs4-slideshow control-prev-icon-src="arrow_carrot.svg" control-next-icon-src="arrow_carrot.svg" sticky="true">
+        <template type="slide" class="slide col-7 p-2">
+          <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1500/600?random=1" alt="Static Random Image from https://picsum.photos/">
+        </template>
+        <template type="slide" class="slide col-7 p-2">
+          <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1500/600?random=2" alt="Static Random Image from https://picsum.photos/">
+        </template>
+        <template type="slide" class="slide col-7 p-2">
+          <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1500/600?random=3" alt="Static Random Image from https://picsum.photos/">
+        </template>
+        <template type="slide" class="slide col-7 p-2">
+          <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1500/600?random=4" alt="Static Random Image from https://picsum.photos/">
+        </template>
+        <template type="slide" class="slide col-7 p-2">
+          <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1500/600?random=5" alt="Static Random Image from https://picsum.photos/">
+        </template>
+        <template type="slide" class="slide col-7 p-2">
+          <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1500/600?random=6" alt="Static Random Image from https://picsum.photos/">
+        </template>
+        <template type="slide" class="slide col-7 p-2">
+          <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1500/600?random=7" alt="Static Random Image from https://picsum.photos/">
+        </template>
+        <template type="slide" class="slide col-7 p-2">
+          <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1500/600?random=8" alt="Static Random Image from https://picsum.photos/">
         </template>
       </bs4-slideshow>
     </section>

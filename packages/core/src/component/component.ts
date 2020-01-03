@@ -383,7 +383,7 @@ export abstract class Component extends FakeHTMLElement {
     }
 
     if (!this.checkRequiredAttributes()) {
-      // console.warn('not all required attributes are set for bind');
+      console.warn('not all required attributes are set for bind');
       return;
     }
 

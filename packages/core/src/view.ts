@@ -3,7 +3,7 @@ import {
   Binder,
   Options,
   BindableElement,
-  Type,
+  TypeOfComponent,
 } from './interfaces';
 import { Binding } from './binding';
 import { parseNode, parseDeclaration } from './parsers';
@@ -85,11 +85,85 @@ export class View {
     this.build();
   }
 
-  public buildBinding(node: HTMLUnknownElement, type: string | null, declaration: string, binder: Binder<any>, identifier: string | null) {
-    const parsedDeclaration = parseDeclaration(declaration);
-    const keypath = parsedDeclaration.keypath;
-    const pipes = parsedDeclaration.pipes;
-    this.bindings.push(new Binding((this as View), node, type, keypath, binder, pipes, identifier));
+  /**
+   * Regist all components
+   * This can sometimes be useful so that the browser automatically recognizes whether a component is inserted into the dom.
+   * However, the components are already registered when they are found by riba in the DOM.
+   *
+   * Please note, this method does not support the browser fallback for browsers that cannot use custom elements.
+   */
+  public registComponents() {
+    for (const nodeName in this.options.components) {
+      if (this.options.components[nodeName]) {
+        // Not already registred?
+        if (!customElements.get(nodeName)) {
+          const COMPONENT = this.options.components[nodeName];
+          this.registComponent(COMPONENT, nodeName);
+        }
+      }
+    }
+  }
+  /**
+   * Binds all of the current bindings for this view.
+   */
+  public bind() {
+    this.bindings.forEach((binding) => {
+      binding.bind();
+    });
+  }
+
+  /**
+   * Unbinds all of the current bindings for this view.
+   */
+  public unbind() {
+    if (Array.isArray(this.bindings)) {
+      this.bindings.forEach((binding) => {
+        binding.unbind();
+      });
+      this.webComponents.forEach((webcomponent) => {
+        webcomponent.disconnectedFallbackCallback();
+      });
+    }
+
+    // TODO fallback to unbind web components
+  }
+
+  /**
+   * Syncs up the view with the model by running the routines on all bindings.
+   */
+  public sync() {
+    this.bindings.forEach((binding) => {
+      if (binding.sync) {
+        binding.sync();
+      }
+    });
+  }
+
+  /**
+   * Publishes the input values from the view back to the model (reverse sync).
+   */
+  public publish() {
+    this.bindings.forEach((binding) => {
+      if ((binding as Binding).binder && binding.publish && ((binding as Binding).binder as Binder<any>).publishes) {
+        binding.publish();
+      }
+    });
+  }
+
+  /**
+   * Updates the view's models along with any affected bindings.
+   * @param models
+   */
+  public update(models: any = {}) {
+    Object.keys(models).forEach((key) => {
+      this.models[key] = models[key];
+    });
+
+    this.bindings.forEach((binding) => {
+      if ((binding as Binding).update) {
+        (binding as Binding).update(models);
+      }
+    });
   }
 
   /**
@@ -198,110 +272,76 @@ export class View {
     if (!block) {
       const nodeName = node.nodeName.toLowerCase();
       if (this.options.components && this.options.components[nodeName] && !node._bound) {
-        const COMPONENT = (this.options.components[nodeName] as Type<Component>);
-        // Fallback
-        if (!window.customElements) {
-          console.warn(`Fallback for Webcomponent ${nodeName}`);
-          const component = new COMPONENT(node, {
-            fallback: true,
-            view: this,
-          });
-          this.webComponents.push(component);
-        } else {
-          // console.warn(`Define Webcomponent ${nodeName} with customElements.define`);
-          // if node.constructor is not HTMLElement and not HTMLUnknownElement, it was registed
-          // @see https://stackoverflow.com/questions/27334365/how-to-get-list-of-registered-custom-elements
-          if (customElements.get(nodeName) || (node.constructor !== HTMLElement && node.constructor !== HTMLUnknownElement)) {
-            // console.warn(`Web component already defined`, node.constructor);
-          } else {
-            try {
-              customElements.define(nodeName, COMPONENT);
-              // TODO ?? call unbind (on unbind this view) of this component instance to unbind this view
-              // (not disconnectedCallback / disconnectedFallbackCallback, this is automatically called from customElements)
-              const component = customElements.get(nodeName);
-              component.context = {
-                fallback: false,
-                view: this,
-              };
-            } catch (error) {
-              console.error(error);
-              // Fallback
-              const component = new COMPONENT(node, {
-                fallback: true,
-                view: this,
-              });
-              this.webComponents.push(component);
-            }
-          }
-        }
-
+        const COMPONENT = this.options.components[nodeName];
+        this.registComponentWithFallback(node, COMPONENT, nodeName);
         block = true;
       }
     }
-
     return block;
   }
 
-  /**
-   * Binds all of the current bindings for this view.
-   */
-  public bind() {
-    this.bindings.forEach((binding) => {
-      binding.bind();
-    });
+  public buildBinding(node: HTMLUnknownElement, type: string | null, declaration: string, binder: Binder<any>, identifier: string | null) {
+    const parsedDeclaration = parseDeclaration(declaration);
+    const keypath = parsedDeclaration.keypath;
+    const pipes = parsedDeclaration.pipes;
+    this.bindings.push(new Binding((this as View), node, type, keypath, binder, pipes, identifier));
   }
 
-  /**
-   * Unbinds all of the current bindings for this view.
-   */
-  public unbind() {
-    if (Array.isArray(this.bindings)) {
-      this.bindings.forEach((binding) => {
-        binding.unbind();
-      });
-      this.webComponents.forEach((webcomponent) => {
-        webcomponent.disconnectedFallbackCallback();
-      });
+  protected registComponentWithFallback(node: Node, COMPONENT: TypeOfComponent, nodeName?: string) {
+    nodeName = nodeName || COMPONENT.tagName;
+    // Fallback
+    if (!window.customElements) {
+      this.registComponentFallback(node, COMPONENT, nodeName);
+    } else {
+      // if node.constructor is not HTMLElement and not HTMLUnknownElement, it was registed
+      // @see https://stackoverflow.com/questions/27334365/how-to-get-list-of-registered-custom-elements
+      if (customElements.get(nodeName) || (node.constructor !== HTMLElement && node.constructor !== HTMLUnknownElement)) {
+        // console.warn(`Web component already defined`, node.constructor);
+      } else {
+        try {
+          this.registComponent(COMPONENT, nodeName);
+        } catch (error) {
+          this.registComponentFallback(node, COMPONENT, nodeName);
+        }
+      }
     }
-
-    // TODO fallback to unbind web components
   }
 
   /**
-   * Syncs up the view with the model by running the routines on all bindings.
+   * Regist a custom element using the fallback logic for browsers that cannot native use custom elements.
+   * @param node
+   * @param COMPONENT
+   * @param nodeName
    */
-  public sync() {
-    this.bindings.forEach((binding) => {
-      if (binding.sync) {
-        binding.sync();
-      }
+  protected registComponentFallback(node: Node, COMPONENT: TypeOfComponent, nodeName?: string) {
+    nodeName = nodeName || COMPONENT.tagName;
+    console.warn(`Fallback for Webcomponent ${nodeName}`);
+    const component = new COMPONENT(node, {
+      fallback: true,
+      view: this,
     });
+    this.webComponents.push(component);
   }
 
   /**
-   * Publishes the input values from the view back to the model (reverse sync).
+   * Regist a custom element using the native customElements feature.
+   * @param COMPONENT
+   * @param nodeName
    */
-  public publish() {
-    this.bindings.forEach((binding) => {
-      if ((binding as Binding).binder && binding.publish && ((binding as Binding).binder as Binder<any>).publishes) {
-        binding.publish();
-      }
-    });
+  protected registComponent(COMPONENT: TypeOfComponent, nodeName?: string) {
+    if (!window.customElements) {
+      console.warn('customElements not supported by your browser! Do nothing.');
+      return;
+    }
+    nodeName = nodeName || COMPONENT.tagName;
+    window.customElements.define(COMPONENT.tagName, COMPONENT);
+    // TODO ?? call unbind (on unbind this view) of this component instance to unbind this view
+    // (not disconnectedCallback / disconnectedFallbackCallback, this is automatically called from customElements)
+    const component = window.customElements.get(nodeName) as Component;
+    component.context = {
+      fallback: false,
+      view: this,
+    };
   }
 
-  /**
-   * Updates the view's models along with any affected bindings.
-   * @param models
-   */
-  public update(models: any = {}) {
-    Object.keys(models).forEach((key) => {
-      this.models[key] = models[key];
-    });
-
-    this.bindings.forEach((binding) => {
-      if ((binding as Binding).update) {
-        (binding as Binding).update(models);
-      }
-    });
-  }
 }

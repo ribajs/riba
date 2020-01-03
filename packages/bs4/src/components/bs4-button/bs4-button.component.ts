@@ -67,17 +67,13 @@ export class Bs4ButtonComponent extends Component {
   }
 
   protected async beforeBind() {
-    return super.beforeBind()
-    .then(() => {
-      // console.debug('beforeBind', this.scope);
-    });
+    return await super.beforeBind();
+    // console.debug('beforeBind', this.scope);
   }
 
   protected async afterBind() {
-    return super.afterBind()
-    .then(() => {
-      // console.debug('afterBind', this.scope);
-    });
+    return await super.afterBind();
+    // console.debug('afterBind', this.scope);
   }
 
   protected requiredAttributes() {

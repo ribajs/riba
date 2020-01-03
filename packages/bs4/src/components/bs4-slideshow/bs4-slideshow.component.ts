@@ -274,7 +274,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   protected addEventListeners() {
     this.el.addEventListener('resize', this.onResize.bind(this), false);
     // this.slideshowInner.addEventListener('scroll', this.onScroll.bind(this), { passive: true});
-    this.slideshowInner.addEventListener('scrollEnd', this.onScrollend.bind(this), false);
+    this.slideshowInner.addEventListener('scrollended', this.onScrollend.bind(this), false);
 
     this.el.addEventListener('mouseenter', this.onMouseIn.bind(this));
     this.el.addEventListener('mouseover', this.onMouseIn.bind(this));
@@ -290,7 +290,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   protected removeEventListeners() {
     this.el.removeEventListener('resize', this.onResize);
     this.slideshowInner.removeEventListener('scroll', this.onScroll);
-    this.slideshowInner.removeEventListener('scrollEnd', this.onScrollend);
+    this.slideshowInner.removeEventListener('scrollended', this.onScrollend);
 
     this.el.removeEventListener('mouseenter', this.onMouseIn.bind(this));
     this.el.removeEventListener('mouseover', this.onMouseIn.bind(this));
@@ -337,7 +337,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   }
 
   protected initIntervalAutoplay() {
-    this.intervalAutoplayInterval = setInterval(() => {
+    this.intervalAutoplayInterval = window.setInterval(() => {
       if (!this.scope.pause) {
         this.next();
       }

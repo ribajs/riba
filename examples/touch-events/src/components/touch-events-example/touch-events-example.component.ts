@@ -39,7 +39,7 @@ export class TouchEventsExampleComponent extends Component {
   }
 
   protected async beforeBind() {
-    super.beforeBind()
+    return super.beforeBind()
     .then(() => {
       this.consoleElement = this.el.querySelector('.console');
       this.touchZoneElement = this.el.querySelector('.touch-zone');
