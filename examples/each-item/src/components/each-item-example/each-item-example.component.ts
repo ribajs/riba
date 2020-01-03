@@ -18,7 +18,6 @@ export class EachItemExampleComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    console.debug('[EachItemExampleComponent] constructor', this.scope);
   }
 
   public push() {
@@ -54,7 +53,6 @@ export class EachItemExampleComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     this.init([]);
-    console.debug('[EachItemExampleComponent] connectedCallback', this.scope);
   }
 
   protected getItems(): Item[] {

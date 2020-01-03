@@ -61,6 +61,7 @@ export class Utils {
 
   public static isScrollable(element: Element) {
     const scrollPosition = this.getScrollPosition(element);
+    console.debug('isScrollable', scrollPosition);
     return scrollPosition.maxX > 0 || scrollPosition.maxY > 0;
   }
 

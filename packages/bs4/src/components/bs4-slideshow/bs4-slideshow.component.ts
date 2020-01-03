@@ -313,16 +313,17 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   protected initSlideshowInner() {
 
     this.initSlideshowInnerSlides();
-    if (!this.dragscroll && this.scope.draggable) {
-      const dragscrollOptions: DragscrollOptions = {detectGlobalMove: true};
-      this.dragscroll = new Dragscroll(this.slideshowInner, dragscrollOptions);
-    }
 
     if (this.scope.autoplay) {
       this.initAutoplay();
     }
 
     this.scrollEvents = new ScrollEventsService(this.slideshowInner);
+
+    if (!this.dragscroll && this.scope.draggable) {
+      const dragscrollOptions: DragscrollOptions = {detectGlobalMove: true};
+      this.dragscroll = new Dragscroll(this.slideshowInner, dragscrollOptions);
+    }
   }
 
   protected initContinuousAutoplay() {
@@ -385,11 +386,9 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
         this.scope.items.push({...attributes, content});
       }
       if (attributes.type === 'controls') {
-        console.debug('Custom controls template', content);
         this.templateControls = content;
       }
       if (attributes.type === 'indicators') {
-        console.debug('Custom indicators template', content);
         this.templateIndicators = content;
       }
     }
@@ -484,9 +483,6 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     }
     const maxScrollTo = this.scope.angle === 'vertical' ? this.getScrollPosition().maxY : this.getScrollPosition().maxX;
     const scrollTo = this.scope.angle === 'vertical' ? this.slideshowInner.scrollTop + this.scope.items[index].position.centerY : this.slideshowInner.scrollLeft + this.scope.items[index].position.centerX;
-    console.debug('scrollTo', scrollTo);
-    console.debug('maxScrollTo', maxScrollTo);
-    console.debug('scrollTo <= maxScrollTo && scrollTo >= 0', scrollTo <= maxScrollTo && scrollTo >= 0);
     return scrollTo <= maxScrollTo && scrollTo >= 0;
   }
 
@@ -589,10 +585,10 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   protected template() {
     // Only set the component template if there no childs or the childs are templates
     if (!this.el.hasChildNodes() || this.hasOnlyTemplateChilds()) {
-      console.debug('Full template!', this.templateIndicators);
+      // ('Full template!', this.templateIndicators);
       return templateSlides + this.templateControls + this.templateIndicators;
     } else {
-      console.debug('Append to template!');
+      // console.debug('Append to template!');
       // Prepend control elements if no custom control elements in template are found
       if (this.scope.controls && this.controlsElements.length <= 0) {
         this.el.innerHTML += this.templateControls;

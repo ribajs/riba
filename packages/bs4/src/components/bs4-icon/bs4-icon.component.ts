@@ -28,7 +28,7 @@ export class Bs4IconComponent extends Component {
       if (fetch) {
         fetch(newValue)
         .then((response) => {
-          console.debug('response.headers.get("content-type")', response.headers.get('content-type'));
+          // console.debug('response.headers.get("content-type")', response.headers.get('content-type'));
           if (response.status !== 200) {
             console.error(response.statusText);
             return '';

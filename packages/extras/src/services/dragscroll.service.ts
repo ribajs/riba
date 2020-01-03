@@ -51,12 +51,13 @@ export class Dragscroll {
     this.el.removeEventListener('mousemove', this.onMouseMove.bind(this), false);
   }
 
-  protected checkDraggable() {
+  public checkDraggable() {
     if (Utils.isScrollable(this.el)) {
       this.el.classList.add('draggable');
-    } else {
-      this.el.classList.remove('draggable');
+      return true;
     }
+    this.el.classList.remove('draggable');
+    return false;
   }
 
   protected onMouseDown <EventListener>(e: MouseEvent) {
