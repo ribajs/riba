@@ -9,12 +9,12 @@ export const touchEventsBinder: Binder<string> = {
     }
     this.customData.touchEventService = new TouchEventService(el);
   },
-  unbind(el: HTMLElement) {
+  unbind() {
     if (this.customData.touchEventService) {
       (this.customData.touchEventService as TouchEventService).removeEventListeners();
     }
   },
-  routine(el: HTMLUnknownElement, value: string) {
+  routine() {
    // nothing
   },
 };

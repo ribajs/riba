@@ -22,7 +22,7 @@
   },
   "scripts": {
     "test": "npm run type-check && jest --config=jest.config.js",
-    "type-check": "tslint -c tslint.json 'src/**/*.ts' && tsc --noEmit",
+    "type-check": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
     "build": "npm run build:module",
     "build:module": "tsc",
     "packages:link": "npm link @ribajs/core"
@@ -44,9 +44,10 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-array-includes": "^2.0.3",
     "core-js": "^3.6.1",
-    "jest": "^24.9.0",
-    "ts-jest": "^24.2.0",
     "eslint": "^6.8.0",
+    "jest": "^24.9.0",
+    "jest-extended": "^0.11.2",
+    "ts-jest": "^24.2.0",
     "typescript": "^3.7.4",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"

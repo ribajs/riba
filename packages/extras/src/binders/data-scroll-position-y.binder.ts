@@ -43,7 +43,7 @@ export const dataScrollPositionYBinder: Binder<string> = {
 
     };
   },
-  routine(el: HTMLElement, elementSelector: string = 'window') {
+  routine(el: HTMLElement, elementSelector = 'window') {
     // Remove old scroll event
     if (this.customData.watchScrollOnElement) {
       this.customData.watchScrollOnElement.removeEventListener('scroll', Utils.debounce.bind(this, this.customData.onScroll.bind(this)));

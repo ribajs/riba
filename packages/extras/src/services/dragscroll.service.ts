@@ -14,7 +14,7 @@ export class Dragscroll {
   protected lastClientX = 0;
   protected lastClientY = 0;
   protected el: HTMLElement;
-  protected pushed: boolean = false;
+  protected pushed = false;
   protected touchCapable = ('ontouchstart' in window);
 
   constructor(el: HTMLElement, options: DragscrollOptions = { detectGlobalMove: true, preventDefault: true }) {
@@ -75,7 +75,7 @@ export class Dragscroll {
     }
   }
 
-  protected onMouseUp <EventListener>(e: MouseEvent) {
+  protected onMouseUp <EventListener>() {
     this.pushed = false;
     // this.triggerScrollendEvent(e);
   }

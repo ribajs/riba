@@ -12,7 +12,7 @@ export interface GameloopOptions {
  */
 export class Gameloop {
 
-  public static maxFPS: number = 60;
+  public static maxFPS = 60;
 
   public static startLoop(options: GameloopOptions = {}, renderCallback?: RenderCallback, updateCallback?: UpdateCallback) {
 
@@ -69,7 +69,7 @@ export class Gameloop {
     this.delta += progress;
     this.lastFrameTimeMs = timestamp;
 
-    this.begin(timestamp, this.delta);
+    // this.begin(timestamp, this.delta);
 
     if (timestamp > this.lastFpsUpdate + 1000) {
       this.fps = 0.25 * this.framesThisSecond + 0.75 * this.fps;
@@ -94,9 +94,9 @@ export class Gameloop {
     window.requestAnimationFrame(this.loop.bind(this));
   }
 
-  protected static begin(timestamp: number, delta: number) {
-    //
-  }
+  // protected static begin(timestamp: number, delta: number) {
+  //   //
+  // }
 
   protected static render(interp: number) {
     for (const renderCallback of this.renderCallbacks) {

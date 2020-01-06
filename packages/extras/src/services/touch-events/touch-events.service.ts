@@ -183,15 +183,15 @@ export class TouchEventService extends BaseTouchEventService {
   protected swipeStarted = false;
 
   /** Used internally for `tap`, `taphold` and `singletap` */
-  protected startTime: number = 0;
+  protected startTime = 0;
 
   // TIMERS:
 
-  protected holdTimer: number = -1;
-  protected tapTimer: number = -1;
+  protected holdTimer = -1;
+  protected tapTimer = -1;
 
   /** Used internally for `doubletap` */
-  protected actionTimer: number = -1;
+  protected actionTimer = -1;
 
   protected settings: Settings;
 

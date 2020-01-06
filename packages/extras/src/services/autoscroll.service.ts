@@ -11,7 +11,7 @@ export interface AutoscrollOptions {
 
 export class Autoscroll {
 
-  protected direction: number = 1;
+  protected direction = 1;
 
   protected limit: number;
 
@@ -21,11 +21,11 @@ export class Autoscroll {
 
   protected pause = false;
 
-  protected velocity: number = 0.008;
+  protected velocity = 0.008;
 
-  protected move: number = 0;
+  protected move = 0;
 
-  protected lastMove: number = 0;
+  protected lastMove = 0;
 
   protected position: number;
 
@@ -41,7 +41,7 @@ export class Autoscroll {
     this.angle = this.options.angle || this.angle;
     this.pauseOnHover = typeof(this.options.pauseOnHover) === 'boolean' ? this.options.pauseOnHover : this.pauseOnHover;
 
-    this.limit = this.getLimit(this.el, this.options);
+    this.limit = this.getLimit(this.el);
     this.position = this.getPosition();
 
     window.addEventListener('resize', this.onResize.bind(this));
@@ -85,7 +85,7 @@ export class Autoscroll {
   }
 
   protected onResize() {
-    this.limit = this.getLimit(this.el, this.options);
+    this.limit = this.getLimit(this.el);
     this.pause = false;
   }
 
@@ -97,7 +97,7 @@ export class Autoscroll {
     return (this.angle === 'vertical' ? this.el.scrollTop : this.el.scrollLeft) || 0;
   }
 
-  protected getLimit(el: HTMLElement, options: AutoscrollOptions) {
+  protected getLimit(el: HTMLElement) {
     return this.angle === 'vertical' ? ExtraUtils.getScrollPosition(el).maxY : ExtraUtils.getScrollPosition(el).maxX;
   }
 
