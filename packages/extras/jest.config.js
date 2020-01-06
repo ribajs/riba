@@ -1,23 +1,28 @@
 module.exports = {
-    "testEnvironment": "jsdom",
-    "moduleFileExtensions": [
+    testEnvironment: "jsdom",
+    moduleFileExtensions: [
         "ts",
         "tsx",
         "js",
         "json"
     ],
-    "transform": {
+    transform: {
         "^.+\\.tsx?$": "ts-jest"
     },
-    "testRegex": "/src/.*\\.(test|spec).(ts|tsx|js)$",
-    "collectCoverageFrom": [
-        "src/**/*.{js,jsx,tsx,ts}",
+    testRegex: "/src/.*\\.(test|spec).(ts|tsx)$",
+    collectCoverageFrom: [
+        "src/**/*.{tsx,ts}",
         "!**/node_modules/**",
         "!**/vendor/**"
     ],
-    "coverageReporters": [
+    coverageReporters: [
         "json",
         "lcov"
     ],
-    // "setupFilesAfterEnv": ["jest-extended"]
+    setupFilesAfterEnv: ["jest-extended"],
+    globals: {
+        'ts-jest': {
+            babelConfig: true
+        }
+    }
 };

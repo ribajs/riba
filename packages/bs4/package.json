@@ -34,10 +34,11 @@
     "Browser"
   ],
   "scripts": {
-    "test": "npm run type-check && jest --config=jest.config.js",
+    "test": "npm run clean && npm run type-check && jest --config=jest.config.js",
     "type-check": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
     "build": "npm run type-check && npm run build:module",
     "build:module": "tsc",
+    "clean": "rm -rf ./dist ./lib",
     "packages:link": "npm link @ribajs/core @ribajs/extras"
   },
   "devDependencies": {
@@ -46,6 +47,7 @@
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.7.7",
     "@babel/plugin-proposal-optional-chaining": "^7.7.5",
+    "@babel/plugin-syntax-export-default-from": "^7.7.4",
     "@babel/plugin-transform-runtime": "^7.7.6",
     "@babel/preset-env": "^7.7.7",
     "@babel/preset-typescript": "^7.7.7",
@@ -56,9 +58,10 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-array-includes": "^2.0.3",
     "core-js": "^3.6.1",
-    "jest": "^24.9.0",
-    "ts-jest": "^24.2.0",
     "eslint": "^6.8.0",
+    "jest": "^24.9.0",
+    "jest-extended": "^0.11.2",
+    "ts-jest": "^24.2.0",
     "typescript": "^3.7.4",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
