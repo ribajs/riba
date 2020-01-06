@@ -56,22 +56,33 @@ export class Autoscroll {
 
     this.el.addEventListener('mouseenter', this.onMouseIn.bind(this));
     this.el.addEventListener('mouseover', this.onMouseIn.bind(this));
+    this.el.addEventListener('focusin', this.onMouseIn.bind(this));
+    this.el.addEventListener('touchstart', this.onMouseIn.bind(this));
+
     this.el.addEventListener('mouseout', this.onMouseOut.bind(this));
     this.el.addEventListener('mouseleave', this.onMouseOut.bind(this));
-    this.el.addEventListener('mouseup', this.onTouchEnd.bind(this));
-    this.el.addEventListener('touchend', this.onTouchEnd.bind(this));
+    this.el.addEventListener('focusout', this.onMouseOut.bind(this));
+
+    this.el.addEventListener('mouseup', this.onMouseOut.bind(this));
+    this.el.addEventListener('touchend', this.onMouseOut.bind(this));
 
     Gameloop.startLoop({ maxFPS: 60 }, this.render.bind(this), this.update.bind(this));
   }
 
   public removeEventListeners() {
     window.removeEventListener('resize', this.onResize.bind(this));
+
     this.el.removeEventListener('mouseenter', this.onMouseIn.bind(this));
     this.el.removeEventListener('mouseover', this.onMouseIn.bind(this));
+    this.el.removeEventListener('focusin', this.onMouseIn.bind(this));
+    this.el.removeEventListener('touchstart', this.onMouseIn.bind(this));
+
     this.el.removeEventListener('mouseout', this.onMouseOut.bind(this));
     this.el.removeEventListener('mouseleave', this.onMouseOut.bind(this));
-    this.el.removeEventListener('mouseup', this.onTouchEnd.bind(this));
-    this.el.removeEventListener('touchend', this.onTouchEnd.bind(this));
+    this.el.removeEventListener('focusout', this.onMouseOut.bind(this));
+
+    this.el.removeEventListener('mouseup', this.onMouseOut.bind(this));
+    this.el.removeEventListener('touchend', this.onMouseOut.bind(this));
   }
 
   protected onMouseIn() {
@@ -82,15 +93,12 @@ export class Autoscroll {
 
   protected onMouseOut() {
     this.pause = false;
+    this.position = this.angle === 'vertical' ? this.el.scrollTop : this.el.scrollLeft;
   }
 
   protected onResize() {
     this.limit = this.getLimit(this.el);
     this.pause = false;
-  }
-
-  protected onTouchEnd() {
-    this.position = this.angle === 'vertical' ? this.el.scrollTop : this.el.scrollLeft;
   }
 
   protected getPosition() {

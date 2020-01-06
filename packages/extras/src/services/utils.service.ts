@@ -44,12 +44,38 @@ export class Utils {
     return t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * (--t) * t * t * t * t;
   }
 
-  public static getScrollPosition(element: Element) {
+  public static getScrollPosition(element: Element): ScrollPosition {
+    // const rect = element.getBoundingClientRect();
+
+    // const scrollWidth = element.scrollWidth;
+    // const scrollWidthFallback = rect.left;
+
+    // const x = element.scrollLeft;
+    // const xFallback = Math.abs(rect.left);
+
+    // const y = element.scrollTop;
+    // const yFallback = Math.abs(rect.top);
+
+    // console.debug('x', x);
+    // console.debug('xFallback', xFallback);
+
+    // console.debug('y', y);
+    // console.debug('yFallback', yFallback);
+
+    // console.debug('rect', rect);
+
+    // const maxX = element.scrollHeight - element.clientHeight;
+    // const maxXFallback = element.scrollHeight - element.clientHeight;
+
+    // console.debug('maxX', maxX);
+    // console.debug('maxXFallback', maxXFallback);
+
+
     const scrollPosition: ScrollPosition = {
       /** horizontal: left / right / width */
-      x: element.scrollTop,
+      x: element.scrollLeft,
       /** vertical: top / bottom / height */
-      y: element.scrollLeft,
+      y: element.scrollTop,
       /** horizontal: left / right / width */
       maxX: element.scrollWidth - element.clientWidth,
       /** vertical: top / bottom / height */

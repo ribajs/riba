@@ -1,4 +1,3 @@
-import { HttpService } from '@ribajs/core';
 import { Pjax } from './index';
 
 export interface PrefetchInstances {

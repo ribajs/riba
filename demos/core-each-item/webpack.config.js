@@ -65,6 +65,7 @@ module.exports = env => {
       symlinks: true
     },
     devServer: {
+      host: '0.0.0.0',
       contentBase: './src',
     },
     module: {

@@ -25,8 +25,9 @@ export class ExtrasScrollEventsExampleComponent extends Component {
     // console.debug(eventName + ' called', event.type, (event as any), (event as any).detail);
     if (this.consoleElement) {
       let html = `<p class="log"><span class="name">${eventName}</span>`;
-      if ((event as any).detail && (event as any).detail.offset) {
-        html += `<span class="detail">(X: ${(event as any).detail.offset.x} Y: ${(event as any).detail.offset.y})</span>`;
+      const detail = (event as CustomEvent).detail;
+      if (detail && detail.position) {
+        html += `<span class="detail">(x: ${detail.position.x} y: ${detail.position.y} maxX: ${detail.position.maxX} maxY: ${detail.position.maxY})</span>`;
       }
       html += '<span class="time">' + new Date().toLocaleTimeString() + '</span></p>';
       this.consoleElement.insertAdjacentHTML('afterbegin', html);

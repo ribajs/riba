@@ -1,5 +1,3 @@
-import { Utils } from '@ribajs/core';
-
 /**
  * BaseCache it's a simple static cache
  */

@@ -25,7 +25,7 @@ export const routeBackOnStarBinder: Binder<eventHandlerFunction> = {
     if (this.args === null) {
       throw new Error('args is null');
     }
-    const eventName = this.args[0] as string;
+    // const eventName = this.args[0] as string;
     el.removeEventListener(this.args[0] as string, goBack);
     el.addEventListener(this.args[0] as string, goBack);
   },
