@@ -39,7 +39,9 @@
     "packages:reinstall": "node tools/cli.js reinstall",
     "packages:link": "node tools/cli.js link",
     "packages:build": "node tools/cli.js build",
-    "packages:configure-modules": "node tools/cli.js configure-modules"
+    "packages:configure": "npm run packages:configure:modules && npm run packages:configure:demos",
+    "packages:configure:modules": "node tools/cli.js configure-modules",
+    "packages:configure:demos": "node tools/cli.js configure-demos"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.14.0",

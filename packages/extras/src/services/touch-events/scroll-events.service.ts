@@ -1,3 +1,4 @@
+import { Utils as ExtraUtils } from '../utils.service';
 import { BaseTouchEventService } from './base-touch-events.service';
 
 export class ScrollEventsService extends BaseTouchEventService {
@@ -48,9 +49,12 @@ export class ScrollEventsService extends BaseTouchEventService {
       return false;
     }
 
+    const scrollPosition = ExtraUtils.getScrollPosition(event.target as HTMLElement);
+    console.debug('[scrollstart] scrollPosition', scrollPosition);
+
     if (!this.isScrolling) {
       this.isScrolling = true;
-      this.triggerCustomEvent('scrollstart', event, {});
+      this.triggerCustomEvent('scrollstart', event);
     }
 
     // console.debug('scroll timer is ', this.scrollTimer);

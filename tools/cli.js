@@ -14,70 +14,80 @@ const PACKAGES = [
     path: 'packages/core/',
     npm: '@ribajs/core',
     available: true,
-    isModule: true,
+    isRibaModule: true,
+    isDemo: false,
     configure: true,
   },
   {
     path: 'packages/i18n/',
     npm: '@ribajs/i18n',
     available: true,
-    isModule: true,
+    isRibaModule: true,
+    isDemo: false,
     configure: true,
   },
   {
     path: 'packages/router/',
     npm: '@ribajs/router',
     available: true,
-    isModule: true,
+    isRibaModule: true,
+    isDemo: false,
     configure: true,
   },
   {
     path: 'packages/bs4/',
     npm: '@ribajs/bs4',
     available: true,
-    isModule: true,
+    isRibaModule: true,
+    isDemo: false,
     configure: true,
   },
   {
     path: 'packages/shopify/',
     npm: '@ribajs/shopify',
     available: true,
-    isModule: true,
+    isRibaModule: true,
+    isDemo: false,
     configure: true,
   },
   {
     path: 'packages/shopify-easdk/',
     npm: '@ribajs/shopify-easdk',
     available: true,
-    isModule: true,
+    isRibaModule: true,
+    isDemo: false,
     configure: true,
   },
   {
     path: 'packages/shopify-tda/',
     npm: '@ribajs/shopify-tda',
     available: true,
-    isModule: true,
+    isRibaModule: true,
+    isDemo: false,
     configure: true,
   },
   {
     path: 'packages/iconset/',
     npm: '@ribajs/iconset',
     available: true,
-    isModule: true,
+    isRibaModule: true,
+    isDemo: false,
     configure: false,
   },
   {
     path: 'packages/jquery/',
     npm: '@ribajs/jquery',
     available: true,
-    isModule: true,
+    isRibaModule: true,
+    isDemo: false,
     configure: true,
   },
   {
     path: 'packages/extras/',
     npm: '@ribajs/extras',
     available: true,
-    isModule: true,
+    isRibaModule: true,
+    isDemo: false,
     configure: true,
   },
 
@@ -86,7 +96,8 @@ const PACKAGES = [
     path: 'packages/moment/',
     npm: '@ribajs/moment',
     available: false,
-    isModule: true,
+    isRibaModule: true,
+    isDemo: false,
     configure: true,
   },
 
@@ -95,21 +106,24 @@ const PACKAGES = [
     path: 'packages/cli/',
     npm: '@ribajs/cli',
     available: true,
-    isModule: false,
+    isRibaModule: false,
+    isDemo: false,
     configure: false,
   },
   {
     path: 'packages/schematics/',
     npm: '@ribajs/schematics',
     available: true,
-    isModule: false,
+    isRibaModule: false,
+    isDemo: false,
     configure: false,
   },
   {
     path: 'packages/doc/',
     npm: '@ribajs/doc',
     available: false,
-    isModule: false,
+    isRibaModule: false,
+    isDemo: false,
     configure: false,
   },
 
@@ -117,43 +131,50 @@ const PACKAGES = [
   {
     path: 'demos/core-each-item/',
     available: false,
-    isModule: false,
+    isRibaModule: false,
+    isDemo: true,
     configure: true,
   },
   {
     path: 'demos/bs4-tabs-attr/',
     available: false,
-    isModule: false,
+    isRibaModule: false,
+    isDemo: true,
     configure: true,
   },
   {
     path: 'demos/bs4-tabs-tpl/',
     available: false,
-    isModule: false,
+    isRibaModule: false,
+    isDemo: true,
     configure: true,
   },
   {
     path: 'demos/i18n-static/',
     available: false,
-    isModule: false,
+    isRibaModule: false,
+    isDemo: true,
     configure: true,
   },
   {
     path: 'demos/extras-touch-events/',
     available: false,
-    isModule: false,
+    isRibaModule: false,
+    isDemo: true,
     configure: true,
   },
   {
     path: 'demos/extras-scroll-events/',
     available: false,
-    isModule: false,
+    isRibaModule: false,
+    isDemo: true,
     configure: true,
   },
   {
     path: 'demos/bs4-slideshow/',
     available: false,
-    isModule: false,
+    isRibaModule: false,
+    isDemo: true,
     configure: true,
   },
 ];
@@ -258,9 +279,27 @@ const buildPackage = (modulePath) => {
   exec('npm run build', {cwd: path.dirname(packagePath), stdio: 'inherit'});
 };
 
+const configureGeneralPackage = (modulePath) => {
+  const packagePath = getPackagePath(modulePath);
+  const sourcePath = path.resolve(path.dirname(__dirname), './configs/general/');
+  const destPath = path.resolve(path.dirname(packagePath));
+  const command = `cp -a ${sourcePath}/. ${destPath}/`;
+  console.log(command);
+  exec(command, {stdio: 'inherit'});
+}
+
 const configureModulePackage = (modulePath) => {
   const packagePath = getPackagePath(modulePath);
-  const sourcePath = path.resolve(path.dirname(__dirname), './configs/modules');
+  const sourcePath = path.resolve(path.dirname(__dirname), './configs/modules/');
+  const destPath = path.resolve(path.dirname(packagePath));
+  const command = `cp -a ${sourcePath}/. ${destPath}/`;
+  console.log(command);
+  exec(command, {stdio: 'inherit'});
+}
+
+const configureDemoPackage = (modulePath) => {
+  const packagePath = getPackagePath(modulePath);
+  const sourcePath = path.resolve(path.dirname(__dirname), './configs/demo');
   const destPath = path.resolve(path.dirname(packagePath));
   const command = `cp -a ${sourcePath}/. ${destPath}/`;
   console.log(command);
@@ -278,10 +317,10 @@ const configureModulePackage = (modulePath) => {
  * @param {boolean} linkDependencies 
  * @param {boolean} build 
  */
-const processPackage = (modulePath, bump = false, publish = false, upgrade = false, install = false, link = false, linkDependencies = false, build = false, reinstall = false, configureModule = false) => {
+const processPackage = (modulePath, bump = false, publish = false, upgrade = false, install = false, link = false, linkDependencies = false, build = false, reinstall = false, configureModule = false, configureDemo) => {
   console.log(chalk.blue(`\nProcess ${modulePath}...`));
 
-  if (!bump && !publish && !upgrade && !install && !link && !linkDependencies && !build && !reinstall && !configureModule) {
+  if (!bump && !publish && !upgrade && !install && !link && !linkDependencies && !build && !reinstall && !configureModule && !configureDemo) {
     return console.log(chalk.yellow(`\nSkipped`));
   }
 
@@ -318,7 +357,13 @@ const processPackage = (modulePath, bump = false, publish = false, upgrade = fal
   }
 
   if (configureModule) {
+    configureGeneralPackage(modulePath);
     configureModulePackage(modulePath);
+  }
+
+  if (configureDemo) {
+    configureGeneralPackage(modulePath);
+    configureDemoPackage(modulePath);
   }
 };
 
@@ -332,21 +377,21 @@ const processPackage = (modulePath, bump = false, publish = false, upgrade = fal
  * @param {boolean} linkDependencies 
  * @param {boolean} build 
  */
-const processModules = (bump, publish, upgrade, install, link, linkDependencies, build, reinstall, configureModule) => {
+const processModules = (bump, publish, upgrade, install, link, linkDependencies, build, reinstall, configureModules, configureDemos) => {
 
   PACKAGES.forEach((package) => {
-    processPackage(package.path, bump, package.available && publish, upgrade, install, package.npm && link, linkDependencies, build, reinstall, package.isModule && package.configure && configureModule);
+    processPackage(package.path, bump, package.available && publish, upgrade, install, package.npm && link, linkDependencies, build, reinstall, package.isRibaModule && package.configure && configureModules, package.isDemo && package.configure && configureDemos);
   });
 
   // Schematics applications
-  processPackage('packages/schematics/src/lib/application/files/ts/', false, false, upgrade, false, false, false, false, false, false);
+  processPackage('packages/schematics/src/lib/application/files/ts/', false, false, upgrade, false, false, false, false, false, false, false);
 
   // root (do not bump this version because it is used as the main version for all other packages)
-  processPackage('', false, false, upgrade, install, false, false, false, reinstall, false);
+  processPackage('', false, false, upgrade, install, false, false, false, reinstall, false, false);
 
   // Special case: Reinstall dependencies on core module after all packages are linked
   if (link) {
-    processPackage('packages/core/', false, false, false, true, false, false, false, false, false);
+    processPackage('packages/core/', false, false, false, true, false, false, false, false, false, false);
   }
 };
 
@@ -404,9 +449,16 @@ program
 
   program
   .command('configure-modules')
-  .description('Replace config files in all packages with the rott config files')
+  .description('Replace config files in all packages')
   .action(() => {
     processModules(false, false, false, false, false, false, false, false, true);
+  });
+
+  program
+  .command('configure-demos')
+  .description('Replace config files in all demos')
+  .action(() => {
+    processModules(false, false, false, false, false, false, false, false, false, true);
   });
 
 program.parse(process.argv);
