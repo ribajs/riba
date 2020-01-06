@@ -36,7 +36,7 @@ export abstract class ModuleElementService {
       throw new Error('Elements to register must be an object of elements');
     }
     for (const key in elements) {
-      if (elements.hasOwnProperty(key) && key !== '__esModule') {
+      if (elements[key] && key !== '__esModule') {
         const element = elements[key];
         this.regist(element, key);
       }

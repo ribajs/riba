@@ -25,7 +25,7 @@ interface Scope {
 
 export class VideoComponent extends Component {
 
-  public static tagName: string = 'rv-video';
+  public static tagName = 'rv-video';
 
   protected autobind = true;
 

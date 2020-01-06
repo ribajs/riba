@@ -71,7 +71,7 @@ interface Scope {
 
 export class Bs4SidebarComponent extends Component {
 
-  public static tagName: string = 'bs4-sidebar';
+  public static tagName = 'bs4-sidebar';
 
   protected style?: CSSStyleDeclaration;
 
@@ -163,7 +163,7 @@ export class Bs4SidebarComponent extends Component {
     this.onEnviromentChanges();
   }
 
-  protected onToggle(targetId: string) {
+  protected onToggle() {
     this.toggle();
   }
 
@@ -199,7 +199,7 @@ export class Bs4SidebarComponent extends Component {
     this.el.setAttribute('style', `transform:translateX(0);width:${this.scope.width};`);
   }
 
-  protected triggerState(targetId: string) {
+  protected triggerState() {
     this.toggleButtonEvents?.trigger('state', this.scope.state);
   }
 
@@ -276,7 +276,7 @@ export class Bs4SidebarComponent extends Component {
    * @param style
    * @param move
    */
-  protected setContainerStyle(container: HTMLUnknownElement, style: string = '', move?: State) {
+  protected setContainerStyle(container: HTMLUnknownElement, style = '', move?: State) {
     if (move) {
       const width = this.width;
       const conStyle = window.getComputedStyle(container);

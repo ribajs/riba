@@ -12,7 +12,7 @@ import { Utils } from '../../services/utils';
  */
 export const randomFormatter = {
   name: 'random',
-  read(arrayOrMaxNumber: any, min: number = 0) {
+  read(arrayOrMaxNumber: any, min = 0) {
     // If is array
     if (Utils.isArray(arrayOrMaxNumber)) {
       return arrayOrMaxNumber[Math.floor(Math.random() * arrayOrMaxNumber.length)];

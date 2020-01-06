@@ -21,7 +21,7 @@ export const dataScrollPositionYBinder: Binder<string> = {
       this.customData = {};
     }
     this.customData.offset = Number(this.el.dataset.offset) || DEFAULT_OFFSET;
-    this.customData.onScroll = (event: WheelEvent) => {
+    this.customData.onScroll = () => {
       const element = this.customData.watchScrollOnElement as Window;
       if (element.scrollY <= 0 + this.customData.offset) {
         this.el.dataset.scrollPositionY = 'top';
@@ -32,7 +32,7 @@ export const dataScrollPositionYBinder: Binder<string> = {
       }
     };
   },
-  routine(el: HTMLUnknownElement, elementSelector: string = 'window') {
+  routine(el: HTMLUnknownElement, elementSelector = 'window') {
     // Remove old scroll event
     if (this.customData.watchScrollOnElement) {
       this.customData.watchScrollOnElement.removeEventListener('scroll', Utils.debounce.bind(this, this.customData.onScroll.bind(this)));

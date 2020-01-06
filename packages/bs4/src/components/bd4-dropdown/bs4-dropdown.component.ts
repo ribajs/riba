@@ -3,7 +3,7 @@ import { DropdownService } from '../../services/dropdown.service';
 
 export class Bs4DropdownComponent extends Component {
 
-  public static tagName: string = 'bs4-dropdown';
+  public static tagName = 'bs4-dropdown';
 
   protected scope: any = {
     toggle: this.toggle,

@@ -22,7 +22,7 @@ export interface DataElement extends HTMLUnknownElement {
  * A collection of bindings built from a set of parent nodes.
  */
 export class View {
-  public static DECLARATION_SPLIT = /((?:'[^']*')*(?:(?:[^\|']*(?:'[^']*')+[^\|']*)+|[^\|]+))|^$/g;
+  public static DECLARATION_SPLIT = /((?:'[^']*')*(?:(?:[^|']*(?:'[^']*')+[^|']*)+|[^|]+))|^$/g;
 
   /**
    * Binder for mustache style `{model.property}` text Binders
@@ -219,7 +219,7 @@ export class View {
         if (attribute.name.indexOf(bindingPrefix) === 0) {
           nodeName = attribute.name.slice(bindingPrefix.length);
           // if binder is not a starBinder binder should be setted
-          if (this.options.binders.hasOwnProperty(nodeName)) {
+          if (this.options.binders[nodeName]) {
             binder = this.options.binders[nodeName];
           }
 
@@ -237,7 +237,7 @@ export class View {
           }
 
           if (binder === null) {
-            if (this.options.binders.hasOwnProperty('*')) {
+            if (this.options.binders['*']) {
               binder = this.options.binders['*'];
               identifier = '*';
             } else {

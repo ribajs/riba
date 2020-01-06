@@ -39,7 +39,7 @@ class EventDispatcher {
    * Creates an singleton instance of Dispatcher.
    * @memberof Dispatcher
    */
-  constructor(namespace: string = 'main') {
+  constructor(namespace = 'main') {
     this.namespace = namespace;
 
     if (EventDispatcher.instances[this.namespace]) {

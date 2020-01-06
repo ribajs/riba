@@ -15,10 +15,12 @@ export class DotAdapter implements Adapter {
 
   public name = '.';
 
-  public counter: number = 0;
+  public counter = 0;
   public weakmap: any = {};
 
   public weakReference(obj: any) {
+
+    // eslint-disable-next-line no-prototype-builtins
     if (!obj.hasOwnProperty('__rv')) {
       const id = this.counter++;
 

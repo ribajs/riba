@@ -9,7 +9,7 @@ interface Scope {
 
 export class Bs4ButtonComponent extends Component {
 
-  public static tagName: string = 'bs4-button';
+  public static tagName = 'bs4-button';
 
   protected autobind = true;
 
@@ -27,7 +27,7 @@ export class Bs4ButtonComponent extends Component {
     // console.debug('constructor', this);
   }
 
-  public onClick(event: Event) {
+  public onClick() {
     // console.debug('onClick');
     this.startAnimation();
   }
@@ -41,11 +41,11 @@ export class Bs4ButtonComponent extends Component {
     this.el.classList.add(this.scope.animationClass);
   }
 
-  protected onStartAnimation(event: AnimationEvent) {
+  protected onStartAnimation() {
     // console.debug('onStartAnimation');
   }
 
-  protected onEndAnimation(event: AnimationEvent) {
+  protected onEndAnimation() {
     // window.getComputedStyle(this.el)
     // console.debug('onEndAnimation', event, window.getComputedStyle(this.el));
 

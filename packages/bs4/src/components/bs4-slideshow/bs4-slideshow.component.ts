@@ -113,7 +113,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     ];
   }
 
-  public static tagName: string = 'bs4-slideshow';
+  public static tagName = 'bs4-slideshow';
 
   protected templateAttributes = [
     {
@@ -248,7 +248,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     this.setCenteredSlide();
   }
 
-  protected onScrollend(event?: Event) {
+  protected onScrollend() {
     this.setSlidePositions();
     this.setCenteredSlide();
     if (this.scope.sticky) {
@@ -449,7 +449,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     return minIndex;
   }
 
-  protected setAllSlidesUnactive(excludeIndex: number = -1) {
+  protected setAllSlidesUnactive(excludeIndex = -1) {
     if (!this.slideElements) {
       return;
     }

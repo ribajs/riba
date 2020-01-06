@@ -7,7 +7,7 @@ import { DropdownService } from '../services/dropdown.service';
  */
 export const dropdownBinder: Binder<string> = {
   name: 'bs4-dropdown',
-  routine(el: HTMLElement, option: string) {
+  routine(el: HTMLElement, option: any = {}) {
     let toggler: HTMLButtonElement;
     if (el.classList.contains('dropdown-toggle')) {
       toggler = el as HTMLButtonElement;
@@ -19,9 +19,9 @@ export const dropdownBinder: Binder<string> = {
       toggler = el as HTMLButtonElement;
     }
 
-    const dropdownService = new DropdownService(toggler);
+    const dropdownService = new DropdownService(toggler, option);
 
-    toggler.addEventListener('click', (event) => {
+    toggler.addEventListener('click', () => {
       dropdownService.toggle();
     });
   },

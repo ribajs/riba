@@ -2,14 +2,12 @@ import { capitalize, classify } from '@angular-devkit/core/src/utils/strings';
 import { Path } from '@angular-devkit/core';
 import { ScriptExportDeclarator } from './script-export.declarator';
 import { StyleExportDeclarator } from './style-export.declarator';
-import { ModuleMetadataDeclarator } from './module-metadata.declarator';
 import { DeclarationOptions } from '../interfaces';
 
 export class ExportDeclarator {
   constructor(
     private scriptExports: ScriptExportDeclarator = new ScriptExportDeclarator(),
     private styleExports: StyleExportDeclarator = new StyleExportDeclarator(),
-    private metadata: ModuleMetadataDeclarator = new ModuleMetadataDeclarator(),
   ) {}
 
   public declareScript(content: string, options: DeclarationOptions, index: Path): string {

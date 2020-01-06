@@ -22,7 +22,7 @@ export interface Scope extends Bs4ContentsComponentScope {
 
 export class Bs4ScrollspyComponent extends Bs4ContentsComponent {
 
-  public static tagName: string = 'bs4-scrollspy';
+  public static tagName = 'bs4-scrollspy';
 
   protected autobind = true;
 

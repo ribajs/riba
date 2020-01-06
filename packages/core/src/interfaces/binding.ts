@@ -46,7 +46,7 @@ export interface Bindable {
 
 export interface FormatterObservers {
   [key: string]: {
-    [key: string]: Observer,
+    [key: string]: Observer;
   };
 }
 

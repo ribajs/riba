@@ -60,10 +60,12 @@ export abstract class TemplatesComponent extends Component {
    * Called before getting all attribute values, use this method to tramsform the attribute values if you wish
    * @param attributes
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected transformTemplateAttributes(attributes: any, index: number) {
     return attributes;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected getTemplateAttributes(tpl: HTMLTemplateElement, index: number) {
     const attributes: any = {};
     for (const attribute of this.templateAttributes) {
@@ -101,7 +103,7 @@ export abstract class TemplatesComponent extends Component {
   }
 
   protected hasOnlyTemplateChilds() {
-    let allAreTemplates: boolean = true;
+    let allAreTemplates = true;
     for (let index = 0; index < this.el.childNodes.length; index++) {
       const child = this.el.childNodes[index];
       allAreTemplates = allAreTemplates && (child.nodeName === 'TEMPLATE' || child.nodeName === '#text');

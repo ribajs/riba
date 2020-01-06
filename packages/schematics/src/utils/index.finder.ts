@@ -23,7 +23,7 @@ export class IndexFinder {
     }
 
     // check parent dir or create index in there
-    if (!options.flat && !createIfNotFound) {
+    if (!options.flat && !createIfNotFound && directory.parent) {
       return this.findInOrCreate(options, directory.parent, true);
     }
 
@@ -36,7 +36,7 @@ export class IndexFinder {
 
   private findIn(options: FindOptions, directory: DirEntry) {
     const indexFilename: PathFragment | undefined = directory.subfiles.find((filename) => {
-      return new RegExp(`index\.${options.language}`, 's').test(filename);
+      return new RegExp(`index.${options.language}`, 's').test(filename);
     });
     return indexFilename;
   }

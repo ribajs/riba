@@ -153,16 +153,16 @@ export class Riba {
   public getViewOptions(options?: Partial<Options>) {
     const viewOptions: Partial<Options> = {
       // EXTENSIONS
-      adapters: <Adapters> {},
-      binders: <Binders<any>> {},
-      components: <Components> {},
-      formatters: <Formatters> {},
+      adapters: {} as Adapters,
+      binders: {} as Binders<any>,
+      components: {} as Components,
+      formatters: {} as Formatters,
 
       // other
       starBinders: {},
 
       // sightglass
-      rootInterface: <Root> {},
+      rootInterface: {} as Root,
     };
 
     if (options) {

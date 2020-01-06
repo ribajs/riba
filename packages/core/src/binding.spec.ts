@@ -161,7 +161,7 @@ describe('riba.Binding', () => {
                 binding.bind();
             }).not.toThrow();
 
-            binding.binder.bind = (_: HTMLElement) => { return; };
+            binding.binder.bind = () => { return; };
             jest.spyOn(binding.binder, 'bind');
 
             binding.bind();

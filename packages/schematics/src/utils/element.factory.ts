@@ -1,15 +1,11 @@
 import {
-  dirname,
   join,
   Path,
   strings,
 } from '@angular-devkit/core';
 import {
   apply,
-  branchAndMerge,
-  chain,
   filter,
-  mergeWith,
   move,
   Rule,
   SchematicContext,
@@ -54,7 +50,7 @@ export class ElementFactory {
 
   public addScriptExportToIndex(): Rule {
     return (tree: Tree) => {
-      if (!!this.target.skipImport) {
+      if (this.target.skipImport) {
         return tree;
       }
       const index = new IndexFinder(tree).find({
@@ -82,7 +78,7 @@ export class ElementFactory {
 
   public addStyleImportToIndex(): Rule {
     return (tree: Tree) => {
-      if (!!this.target.skipImport) {
+      if (this.target.skipImport) {
         return tree;
       }
       const index = new IndexFinder(tree).find({

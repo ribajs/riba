@@ -4,7 +4,7 @@
  */
 export const jsonFormatter = {
   name: 'json',
-  read(object: any, replaceSingleQuate: boolean = true) {
+  read(object: any, replaceSingleQuate = true) {
     const result = JSON.stringify(object);
     if (replaceSingleQuate && result) {
       return result.replace(/'/g, `&#39;`);

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /**
  * This implementation of components replaces the old components of rivets following the Web Components v1 specs
  *
@@ -38,7 +39,7 @@ export abstract class Component extends FakeHTMLElement {
 
   protected view?: View;
 
-  protected templateLoaded: boolean = false;
+  protected templateLoaded = false;
 
   /**
    * Used to check if all passed observedAttributes are initialized
@@ -56,7 +57,7 @@ export abstract class Component extends FakeHTMLElement {
   /**
    * If true the component will automatically bind the component to riba if all required attributes are setted
    */
-  protected autobind: boolean = true;
+  protected autobind = true;
 
   private attributeObserverFallback?: MutationObserver;
 
@@ -160,7 +161,7 @@ export abstract class Component extends FakeHTMLElement {
   protected allPassedObservedAttributesAreInitialized() {
     let allInitialized = true;
     for (const key in this.observedAttributesToCheck) {
-      if (this.observedAttributesToCheck.hasOwnProperty(key)) {
+      if (this.observedAttributesToCheck[key]) {
         if (this.observedAttributesToCheck[key].passed) {
           allInitialized = allInitialized && this.observedAttributesToCheck[key].initialized;
         }
@@ -180,7 +181,7 @@ export abstract class Component extends FakeHTMLElement {
     let allDefined = true;
     const requiredAttributes = this.requiredAttributes();
     requiredAttributes.forEach((requiredAttribute: string) => {
-      if (!this.scope.hasOwnProperty(requiredAttribute) || !this.scope[requiredAttribute] ) {
+      if (!this.scope[requiredAttribute] || !this.scope[requiredAttribute] ) {
         // console.warn(`Attribute ${requiredAttribute} not set: ${this.scope[requiredAttribute]}`);
         allDefined = false;
       } else {
@@ -409,7 +410,7 @@ export abstract class Component extends FakeHTMLElement {
       this.view.bind();
       return this.view;
     })
-    .then((view) => {
+    .then(() => {
       return this.afterBind();
     })
     .catch((error) => {
@@ -481,13 +482,11 @@ export abstract class Component extends FakeHTMLElement {
       // call attributeChangedCallback for all already setted static attributes
       const attributes = this.el.attributes;
       for (const i in attributes) {
-        if (attributes.hasOwnProperty(i)) {
-          const attribute: Node = attributes[i];
-          const name = attribute.nodeName;
-          if (observedAttributes.indexOf(name) !== -1) {
-            const newValue = attribute.nodeValue;
-            this.attributeChangedCallback(name, null, newValue, null);
-          }
+        const attribute: Node = attributes[i];
+        const name = attribute.nodeName;
+        if (observedAttributes.indexOf(name) !== -1) {
+          const newValue = attribute.nodeValue;
+          this.attributeChangedCallback(name, null, newValue, null);
         }
       }
     }

@@ -8,7 +8,7 @@ export const onEventBinder: Binder<eventHandlerFunction> = {
   function: true,
   priority: 1000,
 
-  bind(el) {
+  bind() {
     if (!this.customData) {
       this.customData = {
         handler: null,

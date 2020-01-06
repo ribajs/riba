@@ -4,7 +4,7 @@ export interface BinderAttributeChangedEvent {
     name: string;
     oldValue: string;
     newValue: string;
-    namespace: null,
+    namespace: null;
   };
 }
 
@@ -31,7 +31,7 @@ export const starBinder: Binder<string> = {
     el.addEventListener('publish-binder-change:' + this.type, publishBinderChangeEventHandler.bind(this));
   },
 
-  unbind(el: HTMLElement) {
+  unbind() {
     delete this.customData;
     this.el.removeEventListener('publish-binder-change', publishBinderChangeEventHandler.bind(this));
   },

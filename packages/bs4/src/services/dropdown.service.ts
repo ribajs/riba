@@ -109,7 +109,7 @@ export class DropdownService {
 
   public static closeAll() {
     const buttons = document.querySelectorAll(SELECTOR.DATA_TOGGLE);
-    buttons.forEach((button, index) => {
+    buttons.forEach((button) => {
       if (button.parentElement) {
         const menu = button.parentElement.querySelector(SELECTOR.MENU + '.' + CLASSNAME.SHOW) || undefined;
         if (menu) {
@@ -142,7 +142,7 @@ export class DropdownService {
     }
   }
 
-  public static _clearMenus(event?: MouseEvent) {
+  public static _clearMenus() {
     return this.closeAll();
   }
 
@@ -284,24 +284,20 @@ export class DropdownService {
 
   // Private
 
+  private outsideClickListener(element: Element, event: Event) {
+    const target = event.target || event.srcElement || event.currentTarget;
+    if (target && !element.contains(target as Node)) {
+      this.close();
+      document.removeEventListener('click', this.outsideClickListener.bind(this, element));
+    }
+  }
+
   /**
    * @see https://stackoverflow.com/questions/152975/how-do-i-detect-a-click-outside-an-element
    * @param selector
    */
   private clouseOnClickOutsite(element: Element) {
-    const outsideClickListener = (event: Event) => {
-      const target = event.target || event.srcElement || event.currentTarget;
-      if (target && !element.contains(target as Node)) {
-        this.close();
-        removeClickListener();
-      }
-    };
-
-    const removeClickListener = () => {
-      document.removeEventListener('click', outsideClickListener);
-    };
-
-    document.addEventListener('click', outsideClickListener);
+    document.addEventListener('click', this.outsideClickListener.bind(this, element));
   }
 
   private _getConfig(config?: any) {

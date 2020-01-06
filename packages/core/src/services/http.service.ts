@@ -203,5 +203,5 @@ export class HttpService {
   /**
    * Header name value pair to send on each request
    */
-  protected static _requestHeadersEachRequest: {name: string, value: string}[] = [];
+  protected static _requestHeadersEachRequest: {name: string; value: string}[] = [];
 }

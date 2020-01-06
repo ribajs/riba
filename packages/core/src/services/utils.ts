@@ -112,7 +112,7 @@ export class Utils {
       const options: HTMLOptionsCollection = (el as HTMLSelectElement).options;
 
       for (const key in options) {
-        if (options.hasOwnProperty(key)) {
+        if (options[key]) {
           const option = options[key];
           if (option.selected) {
             results.push(option.value);
@@ -204,7 +204,7 @@ export class Utils {
    * @see http://stackoverflow.com/a/1100653/1465919
    */
   public static justDigits(str: string) {
-    const num = str.replace(/[^-\d\.]/g, '');
+    const num = str.replace(/[^-\d.]/g, '');
     if (!Utils.isNumber(num)) {
       return 0;
     } else {
@@ -223,7 +223,7 @@ export class Utils {
     // Merge the object into the extended object
     const merge = (obj: any) => {
       for (const prop in obj) {
-        if (obj.hasOwnProperty(prop)) {
+        if (obj[prop]) {
           if (deep && Object.prototype.toString.call(obj[prop]) === '[object Object]') {
             // If we're doing a deep merge and the property is an object
             extended[prop] = this.extend(true, extended[prop], obj[prop]);
@@ -416,7 +416,7 @@ export class Utils {
     if (!url) {
       url = window.location.href;
     }
-    name = name.replace(/[\[\]]/g, '\\$&');
+    name = name.replace(/[[\]]/g, '\\$&');
     const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
     const results = regex.exec(url);
     if (!results) {

@@ -10,7 +10,7 @@ export const digitsFormatter = {
     if (Utils.isNumber(str)) {
       return str;
     }
-    const num = str.replace(/[^-\d\.]/g, '');
+    const num = str.replace(/[^-\d.]/g, '');
     if (isNaN(Number(num))) {
       return 0;
     } else {

@@ -1,5 +1,3 @@
-import { Path } from '@angular-devkit/core';
-
 export interface ElementOptions {
   /**
    * The name of the service.

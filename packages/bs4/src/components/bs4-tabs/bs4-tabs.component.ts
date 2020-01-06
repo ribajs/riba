@@ -21,7 +21,7 @@ export interface Scope {
 
 export class Bs4TabsComponent extends TemplatesComponent {
 
-  public static tagName: string = 'bs4-tabs';
+  public static tagName = 'bs4-tabs';
 
   protected templateAttributes = [
     {
@@ -176,7 +176,7 @@ export class Bs4TabsComponent extends TemplatesComponent {
     }
   }
 
-  protected onResizeEventHandler(event: Event) {
+  protected onResizeEventHandler() {
     this.setHeight();
   }
 

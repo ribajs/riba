@@ -186,6 +186,7 @@ export class Binding {
    * @param el The element the event was triggered from
    */
   public eventHandler(fn: eventHandlerFunction, el: HTMLElement): (ev: Event) => any {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const binding = this;
     const handler = binding.view.options.handler;
     return (ev) => {
@@ -282,12 +283,13 @@ export class Binding {
   public bind() {
     this.parseTarget();
 
-    if (this.binder && this.binder.hasOwnProperty('bind')) {
-      if (!this.binder.bind && typeof(this.binder.bind) !== 'function') {
+    if (this.binder && this.binder.bind) {
+      if (typeof(this.binder.bind) !== 'function') {
         throw new Error('the method bind is not a function');
       }
       this.binder.bind.call(this, this.el);
     }
+
 
     if (this.view.options.preloadData) {
       this.sync();
@@ -334,10 +336,8 @@ export class Binding {
     if (this.binder === null) {
       throw new Error('binder is null');
     }
-    if (this.binder.hasOwnProperty('update')) {
-      if (this.binder.update) {
-        this.binder.update.call(this, models);
-      }
+    if (typeof(this.binder.update) === 'function') {
+      this.binder.update.call(this, models);
     }
   }
 
@@ -349,10 +349,7 @@ export class Binding {
     if (this.binder === null) {
       throw new Error('binder is null');
     }
-    if (this.binder.hasOwnProperty('getValue')) {
-      if (typeof(this.binder.getValue) !== 'function') {
-        throw new Error('getValue is not a function');
-      }
+    if (typeof(this.binder.getValue) === 'function') {
       return this.binder.getValue.call(this, el);
     } else {
       return Utils.getInputValue(el);

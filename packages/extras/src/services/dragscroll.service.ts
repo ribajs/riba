@@ -10,15 +10,21 @@ export interface DragscrollOptions {
  * inspired by https://github.com/asvd/dragscroll
  */
 export class Dragscroll {
-  private options: DragscrollOptions;
-  private lastClientX = 0;
-  private lastClientY = 0;
-  private el: HTMLElement;
-  private pushed: boolean = false;
+  protected options: DragscrollOptions;
+  protected lastClientX = 0;
+  protected lastClientY = 0;
+  protected el: HTMLElement;
+  protected pushed: boolean = false;
+  protected touchCapable = ('ontouchstart' in window);
 
   constructor(el: HTMLElement, options: DragscrollOptions = { detectGlobalMove: true, preventDefault: true }) {
     this.el = el;
     this.options = options;
+
+    if (this.touchCapable) {
+      // Do noting on touch devices
+      return this;
+    }
 
     el.removeEventListener('mousedown', this.onMouseDown.bind(this), false);
     el.addEventListener('mousedown', this.onMouseDown.bind(this), false);

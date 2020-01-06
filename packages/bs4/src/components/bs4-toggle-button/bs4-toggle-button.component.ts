@@ -19,7 +19,7 @@ export class Bs4ToggleButtonComponent extends Component {
     return ['target-id'];
   }
 
-  public static tagName: string = 'bs4-toggle-button';
+  public static tagName = 'bs4-toggle-button';
 
   protected autobind = true;
 

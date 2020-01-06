@@ -26,7 +26,7 @@ export class MetadataManager {
     staticOptions?: DeclarationOptions['staticOptions'],
   ): string {
     const source: SourceFile = createSourceFile('filename.ts', this.content, ScriptTarget.ES2017);
-    const decoratorNodes: Node[] = this.getDecoratorMetadata(source, '@Module');
+    const decoratorNodes: Node[] = this.getDecoratorMetadata(source);
     const node: Node = decoratorNodes[0];
     const properties = node ? (node as ObjectLiteralExpression).properties : null;
     let matchingProperties = new Array<ObjectLiteralElement>();
@@ -67,7 +67,7 @@ export class MetadataManager {
     }
   }
 
-  private getDecoratorMetadata(source: SourceFile, identifier: string): Node[] {
+  private getDecoratorMetadata(source: SourceFile): Node[] {
     return this.getSourceNodes(source)
       .filter(
         (node) =>
@@ -199,8 +199,8 @@ export class MetadataManager {
     }
     const spacing = 6;
     let options = JSON.stringify(staticOptions.value, null, spacing);
-    options = options.replace(/\"([^(\")"]+)\":/g, '$1:');
-    options = options.replace(/\"/g, `'`);
+    options = options.replace(/"([^(")"]+)":/g, '$1:');
+    options = options.replace(/"/g, `'`);
     options = options.slice(0, options.length - 1) + '    }';
     symbol += `.${staticOptions.name}(${options})`;
     return symbol;

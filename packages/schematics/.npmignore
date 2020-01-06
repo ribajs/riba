@@ -1,28 +1,14 @@
-.idea/
-.DS_Store
-
-.git
-.dockerignore
-Dockerfile
-
-.npmrc
-.npmignore
-
-.nyc_output/
-coverage/
-Makefile
-node_modules/
-test/
-
-# tests
-**/*.test.ts
-
-# source
-src/
-
-# add dist
-!dist/
-
-# add definitions
-!**/*.d.ts
-!*.d.ts
+/dist/
+/spec/
+/.jshintrc
+/.npmignore
+/babel.config.js
+/tsconfig.json
+/tslint.json
+/webpack.config.js
+/webpack.dev.config.js
+# Include src and types
+!/src/
+!/src/*
+!/src/types/
+!/src/types/*

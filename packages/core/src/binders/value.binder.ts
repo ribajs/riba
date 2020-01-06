@@ -25,6 +25,7 @@ export const valueBinder: Binder<any> = {
     }
     if (!this.customData.isRadio) {
       this.customData.event = el.getAttribute('event-name') || (el.tagName === 'SELECT' ? 'change' : 'input');
+      // eslint-disable-next-line @typescript-eslint/no-this-alias
       const self = this;
       if (!this.customData.callback) {
         this.customData.callback = () => {

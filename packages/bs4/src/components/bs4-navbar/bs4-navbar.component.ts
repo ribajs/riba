@@ -3,7 +3,7 @@ import { CollapseService } from '../../services/collapse.service';
 
 export class Bs4NavbarComponent extends Component {
 
-  public static tagName: string = 'bs4-navbar';
+  public static tagName = 'bs4-navbar';
 
   protected scope: any = {
     toggle: this.toggle,

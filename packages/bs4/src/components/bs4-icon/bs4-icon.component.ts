@@ -2,7 +2,7 @@ import { Component } from '@ribajs/core';
 
 export class Bs4IconComponent extends Component {
 
-  public static tagName: string = 'bs4-icon';
+  public static tagName = 'bs4-icon';
 
   static get observedAttributes() {
     return ['size', 'width', 'height', 'src', 'color', 'direction'];

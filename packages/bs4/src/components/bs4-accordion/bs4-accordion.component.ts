@@ -25,7 +25,7 @@ interface Scope {
 
 export class Bs4AccordionComponent extends TemplatesComponent {
 
-  public static tagName: string = 'bs4-accordion';
+  public static tagName = 'bs4-accordion';
 
   protected autobind = true;
 

@@ -1,6 +1,7 @@
 export const defaultGitIgnore =
 `# compiled output
 /dist
+/lib
 /node_modules
 /.cache
 # Logs

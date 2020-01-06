@@ -18,7 +18,7 @@ export class AdapterService extends ModuleElementService {
    * @param adapter
    * @param name
    */
-  public regist(adapter: Adapter, fallbackName?: string, forceFallback: boolean = false): Adapters {
+  public regist(adapter: Adapter, fallbackName?: string, forceFallback = false): Adapters {
     const name = forceFallback ? fallbackName || adapter.name : adapter.name || fallbackName;
     if (!name) {
       throw new Error('Adapter name not found!');

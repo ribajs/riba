@@ -17,9 +17,7 @@ export const stringFormatter = {
       }
     } else if (Utils.isObject(value)) {
       for (const key in value) {
-        if ((value.hasOwnProperty(key))) {
-          value[key] = Utils.getString(value[key]);
-        }
+        value[key] = Utils.getString(value[key]);
       }
     } else {
       value = Utils.getString(value);

@@ -42,7 +42,7 @@ export interface Scope {
 
 export class Bs4ContentsComponent extends Component {
 
-  public static tagName: string = 'bs4-contents';
+  public static tagName = 'bs4-contents';
 
   protected autobind = true;
 

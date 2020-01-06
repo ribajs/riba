@@ -14,7 +14,7 @@ export const animateStarBinder: Binder<boolean> = {
     el.classList.add(animateClassName);
   },
 
-  unbind(el: HTMLElement) {
+  unbind() {
     //
   },
 

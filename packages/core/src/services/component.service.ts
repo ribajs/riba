@@ -19,7 +19,7 @@ export class ComponentService extends ModuleElementService {
    * @param component
    * @param name
    */
-  public regist(component: typeof Component, fallbackName?: string, forceFallback: boolean = false): Components {
+  public regist(component: typeof Component, fallbackName?: string, forceFallback = false): Components {
     const name = forceFallback ? fallbackName || component.tagName : component.tagName || fallbackName;
 
     if (!name) {

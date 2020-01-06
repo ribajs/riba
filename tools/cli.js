@@ -14,51 +14,71 @@ const PACKAGES = [
     path: 'packages/core/',
     npm: '@ribajs/core',
     available: true,
+    isModule: true,
+    configure: true,
   },
   {
     path: 'packages/i18n/',
     npm: '@ribajs/i18n',
     available: true,
+    isModule: true,
+    configure: true,
   },
   {
     path: 'packages/router/',
     npm: '@ribajs/router',
     available: true,
+    isModule: true,
+    configure: true,
   },
   {
     path: 'packages/bs4/',
     npm: '@ribajs/bs4',
     available: true,
+    isModule: true,
+    configure: true,
   },
   {
     path: 'packages/shopify/',
     npm: '@ribajs/shopify',
     available: true,
+    isModule: true,
+    configure: true,
   },
   {
     path: 'packages/shopify-easdk/',
     npm: '@ribajs/shopify-easdk',
     available: true,
+    isModule: true,
+    configure: true,
   },
   {
     path: 'packages/shopify-tda/',
     npm: '@ribajs/shopify-tda',
     available: true,
+    isModule: true,
+    configure: true,
   },
   {
     path: 'packages/iconset/',
     npm: '@ribajs/iconset',
     available: true,
+    isModule: true,
+    configure: false,
   },
   {
     path: 'packages/jquery/',
     npm: '@ribajs/jquery',
     available: true,
+    isModule: true,
+    configure: true,
   },
   {
     path: 'packages/extras/',
     npm: '@ribajs/extras',
     available: true,
+    isModule: true,
+    configure: true,
   },
 
   // WIP Riba modules, not ready to publish
@@ -66,6 +86,8 @@ const PACKAGES = [
     path: 'packages/moment/',
     npm: '@ribajs/moment',
     available: false,
+    isModule: true,
+    configure: true,
   },
 
   // Tools, helpers, docs
@@ -73,42 +95,66 @@ const PACKAGES = [
     path: 'packages/cli/',
     npm: '@ribajs/cli',
     available: true,
+    isModule: false,
+    configure: false,
   },
   {
     path: 'packages/schematics/',
     npm: '@ribajs/schematics',
     available: true,
+    isModule: false,
+    configure: false,
   },
   {
     path: 'packages/doc/',
     npm: '@ribajs/doc',
     available: false,
+    isModule: false,
+    configure: false,
   },
 
   // Examples
   {
-    path: 'examples/each-item/',
+    path: 'demos/core-each-item/',
     available: false,
+    isModule: false,
+    configure: true,
   },
   {
-    path: 'examples/bs4-tabs-attr/',
+    path: 'demos/bs4-tabs-attr/',
     available: false,
+    isModule: false,
+    configure: true,
   },
   {
-    path: 'examples/bs4-tabs-tpl/',
+    path: 'demos/bs4-tabs-tpl/',
     available: false,
+    isModule: false,
+    configure: true,
   },
   {
-    path: 'examples/i18n-static/',
+    path: 'demos/i18n-static/',
     available: false,
+    isModule: false,
+    configure: true,
   },
   {
-    path: 'examples/touch-events/',
+    path: 'demos/extras-touch-events/',
     available: false,
+    isModule: false,
+    configure: true,
   },
   {
-    path: 'examples/bs4-slideshow/',
+    path: 'demos/extras-scroll-events/',
     available: false,
+    isModule: false,
+    configure: true,
+  },
+  {
+    path: 'demos/bs4-slideshow/',
+    available: false,
+    isModule: false,
+    configure: true,
   },
 ];
 
@@ -212,6 +258,15 @@ const buildPackage = (modulePath) => {
   exec('npm run build', {cwd: path.dirname(packagePath), stdio: 'inherit'});
 };
 
+const configureModulePackage = (modulePath) => {
+  const packagePath = getPackagePath(modulePath);
+  const sourcePath = path.resolve(path.dirname(__dirname), './configs/modules');
+  const destPath = path.resolve(path.dirname(packagePath));
+  const command = `cp -a ${sourcePath}/. ${destPath}/`;
+  console.log(command);
+  exec(command, {stdio: 'inherit'});
+}
+
 /**
  * 
  * @param {string} modulePath 
@@ -223,10 +278,10 @@ const buildPackage = (modulePath) => {
  * @param {boolean} linkDependencies 
  * @param {boolean} build 
  */
-const processPackage = (modulePath, bump = false, publish = false, upgrade = false, install = false, link = false, linkDependencies = false, build = false, reinstall = false) => {
+const processPackage = (modulePath, bump = false, publish = false, upgrade = false, install = false, link = false, linkDependencies = false, build = false, reinstall = false, configureModule = false) => {
   console.log(chalk.blue(`\nProcess ${modulePath}...`));
 
-  if (!bump && !publish && !upgrade && !install && !link && !linkDependencies && !build && !reinstall) {
+  if (!bump && !publish && !upgrade && !install && !link && !linkDependencies && !build && !reinstall && !configureModule) {
     return console.log(chalk.yellow(`\nSkipped`));
   }
 
@@ -261,6 +316,10 @@ const processPackage = (modulePath, bump = false, publish = false, upgrade = fal
   if (build) {
     buildPackage(modulePath);
   }
+
+  if (configureModule) {
+    configureModulePackage(modulePath);
+  }
 };
 
 /**
@@ -273,21 +332,21 @@ const processPackage = (modulePath, bump = false, publish = false, upgrade = fal
  * @param {boolean} linkDependencies 
  * @param {boolean} build 
  */
-const processModules = (bump, publish, upgrade, install, link, linkDependencies, build, reinstall) => {
+const processModules = (bump, publish, upgrade, install, link, linkDependencies, build, reinstall, configureModule) => {
 
   PACKAGES.forEach((package) => {
-    processPackage(package.path, bump, package.available && publish, upgrade, install, package.npm && link, linkDependencies, build, reinstall);
+    processPackage(package.path, bump, package.available && publish, upgrade, install, package.npm && link, linkDependencies, build, reinstall, package.isModule && package.configure && configureModule);
   });
 
   // Schematics applications
-  processPackage('packages/schematics/src/lib/application/files/ts/', false, false, upgrade, false, false, false, false, false);
+  processPackage('packages/schematics/src/lib/application/files/ts/', false, false, upgrade, false, false, false, false, false, false);
 
   // root (do not bump this version because it is used as the main version for all other packages)
-  processPackage('', false, false, upgrade, install, false, false, false, reinstall);
+  processPackage('', false, false, upgrade, install, false, false, false, reinstall, false);
 
   // Special case: Reinstall dependencies on core module after all packages are linked
   if (link) {
-    processPackage('packages/core/', false, false, false, true, false, false, false, false);
+    processPackage('packages/core/', false, false, false, true, false, false, false, false, false);
   }
 };
 
@@ -341,6 +400,13 @@ program
   .description('Removeall "node_modules" folders and install the modules again')
   .action(() => {
     processModules(false, false, false, false, false, false, false, true);
+  });
+
+  program
+  .command('configure-modules')
+  .description('Replace config files in all packages with the rott config files')
+  .action(() => {
+    processModules(false, false, false, false, false, false, false, false, true);
   });
 
 program.parse(process.argv);

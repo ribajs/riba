@@ -33,42 +33,45 @@
     "Browser"
   ],
   "scripts": {
-    "test": "npm run type-check && jest --config=jest.config.js",
+    "test": "jest --config=jest.config.js",
     "test:watch": "jest --config=jest.config.js --watch",
-    "type-check": "tslint --fix -c tslint.json 'src/**/*.ts' && tsc --noEmit",
+    "type-check": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
     "build": "npm run type-check && tsc",
-    "build:ts": "npm run type-check && npm run build:ts",
-    "build:browser": "npm run type-check && npm run webpack:browser",
-    "webpack:browser": "webpack && webpack --config webpack.dev.config.js",
-    "watch:browser": "webpack --watch --env.dev"
+    "build:ts": "npm run type-check",
+    "build:browser": "npm run type-check && npm run webpack:browser"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.7",
     "@babel/core": "^7.7.7",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.7.7",
+    "@babel/plugin-proposal-optional-chaining": "^7.7.5",
+    "@babel/plugin-syntax-export-default-from": "^7.7.4",
     "@babel/plugin-transform-runtime": "^7.7.6",
     "@babel/preset-env": "^7.7.7",
     "@babel/preset-typescript": "^7.7.7",
     "@babel/runtime-corejs3": "^7.7.7",
     "@types/jest": "^24.0.25",
-    "@types/node": "^13.1.1",
+    "@types/node": "^13.1.4",
     "babel-loader": "^8.0.6",
     "babel-plugin-array-includes": "^2.0.3",
     "core-js": "^3.6.1",
+    "eslint": "^6.8.0",
     "jest": "^24.9.0",
     "jest-extended": "^0.11.2",
     "source-map-support": "^0.5.16",
     "ts-jest": "^24.2.0",
-    "tslint": "^5.20.1",
     "typescript": "^3.7.4",
     "uglifyjs-webpack-plugin": "^2.2.0",
-    "webpack": "^4.41.4",
+    "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "webpack-glob-entry": "^2.1.1"
   },
   "dependencies": {
-    "@types/core-js": "^2.5.2"
+    "@types/core-js": "^2.5.2",
+    "@typescript-eslint/eslint-plugin": "^2.14.0",
+    "@typescript-eslint/parser": "^2.14.0",
+    "save-dev": "0.0.1-security"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

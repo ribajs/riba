@@ -12,6 +12,7 @@ export const scrollbarDraggableBinder: Binder<DragscrollOptions> = {
       (this.customData.dragscroll as Dragscroll).removeEventListeners();
     }
     this.customData.dragscroll = new Dragscroll(el, options);
+    console.debug('scrollbar-draggable', this);
   },
   unbind() {
     if (this.customData.dragscroll) {

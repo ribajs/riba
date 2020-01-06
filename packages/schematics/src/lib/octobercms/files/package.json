@@ -7,7 +7,7 @@
   "scripts": {
     "webpack": "webpack --env.production",
     "webpack:dev": "webpack --env.development",
-    "test:ts": "tslint --fix -c tslint.json 'src/**/*.ts' && tsc --noEmit",
+    "test:ts": "eslint src --ext .js,.jsx,.ts,.tsx && tsc --noEmit",
     "test": "npm run test:ts",
     "build": "concurrently \"npm:build:prod:*\"",
     "build:prod:ts": "npm run test:ts && npm run webpack",
@@ -62,7 +62,7 @@
     "pug-loader": "^2.4.0",
     "terser-webpack-plugin": "^2.2.1",
     "ts-loader": "^6.2.1",
-    "tslint": "^5.20.1",
+    "eslint": "^6.8.0",
     "typescript": "^3.7.2",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"

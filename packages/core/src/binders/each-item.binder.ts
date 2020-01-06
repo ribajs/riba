@@ -15,7 +15,7 @@ export const eachStarBinder: Binder<any[]> = {
     if (!this.marker) {
       this.marker = document.createComment(` riba: ${this.type} `);
       this.customData = {
-        iterated: <View[]> [],
+        iterated: [] as View[],
       };
       if (!el.parentNode) {
         // console.warn('No parent node!');
@@ -30,7 +30,7 @@ export const eachStarBinder: Binder<any[]> = {
     }
   },
 
-  unbind(el) {
+  unbind() {
     if (this.customData.iterated) {
       this.customData.iterated.forEach((view: View) => {
         view.unbind();

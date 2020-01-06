@@ -14,7 +14,6 @@ import { GitRunner } from '../lib/runners/git.runner';
 import { Collection, SchematicOption } from '../lib/schematics';
 import { AbstractAction } from './abstract.action';
 import { GenerateAction } from './generate.action';
-import { timingSafeEqual } from 'crypto';
 
 export class NewAction extends AbstractAction {
   private debug = Debug('actions:new');

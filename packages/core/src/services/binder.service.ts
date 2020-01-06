@@ -18,7 +18,7 @@ export class BindersService extends ModuleElementService {
    * @param binder
    * @param name  Overwrites the name to access the binder over
    */
-  public regist(binder: Binder<any>, fallbackName?: string, forceFallback: boolean = false): Binders<any> {
+  public regist(binder: Binder<any>, fallbackName?: string, forceFallback = false): Binders<any> {
     if (!binder || typeof(binder.routine) !== 'function') {
       console.warn(new Error('Can not regist binder!'), binder);
       return this.elements;

@@ -19,5 +19,5 @@ export interface Assign {
 export const blockBinder: Binder<Assign> = {
   name: 'block',
   block: true,
-  routine(el: HTMLElement) {/**/},
+  routine() {/**/},
 };

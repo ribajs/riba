@@ -18,10 +18,7 @@
     "build:copy:binder": "(mkdir -p dist/lib/binder) && (cp src/lib/binder/schema.json dist/lib/binder/schema.json) && (cp -R src/lib/binder/files dist/lib/binder/files)",
     "build:copy:formatter": "(mkdir -p dist/lib/formatter) && (cp src/lib/formatter/schema.json dist/lib/formatter/schema.json) && (cp -R src/lib/formatter/files dist/lib/formatter/files)",
     "clean": "rm -rf dist",
-    "lint:src": "tslint --project tsconfig.json",
-    "lint:test": "tslint --project test/tsconfig.json",
-    "test": "jest --no-cache --config test/jest-config.json",
-    "test:dev": "npm run -s test -- --watchAll"
+    "lint:src": "eslint src --ext .js,.jsx,.ts,.tsx --fix"
   },
   "repository": {
     "type": "git",
@@ -57,7 +54,7 @@
     "@babel/runtime-corejs3": "^7.7.7",
     "@types/debug": "^4.1.5",
     "@types/jest": "24.0.25",
-    "@types/node": "13.1.1",
+    "@types/node": "13.1.4",
     "core-js": "^3.6.1",
     "tslint": "5.20.1"
   },

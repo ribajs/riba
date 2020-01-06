@@ -38,7 +38,7 @@ export class Observer {
 
     for (index = 0; index < keypath.length; index++) {
       chr = keypath.charAt(index);
-      if (!!~Observer.interfaces.indexOf(chr)) {
+      if (~Observer.interfaces.indexOf(chr)) {
         tokens.push(current);
         current = {i: chr, path: ''};
       } else {
@@ -89,7 +89,7 @@ export class Observer {
       throw new Error(`[Observer] Must define at least one adapter interface. interfaces: "${JSON.stringify(Observer.interfaces)}" adapters: "${JSON.stringify(Observer.adapters)}"`);
     }
 
-    if (!!~Observer.interfaces.indexOf(this.keypath[0])) {
+    if (~Observer.interfaces.indexOf(this.keypath[0])) {
       root = this.keypath[0];
       path = this.keypath.substr(1);
     } else {
@@ -156,10 +156,9 @@ export class Observer {
    * Updates the keypath. This is called when any intermediary key is changed.
    */
   public sync() {
-    let next;
     let oldValue;
     let newValue;
-    next = this.realize();
+    const next = this.realize();
     if (next !== this.target) {
       if (Utils.isObject(this.target)) {
         this.set(false, this.key, this.target, this.callback);

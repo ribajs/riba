@@ -12,7 +12,7 @@ export const TEXT = 0;
 export const BINDING = 1;
 
 const QUOTED_STR = /^'.*'$|^".*"$/; // regex to test if string is wrapped in " or '
-const DECLARATION_SPLIT = /((?:'[^']*')*(?:(?:[^\|']*(?:'[^']*')+[^\|']*)+|[^\|]+))|^$/g;
+const DECLARATION_SPLIT = /((?:'[^']*')*(?:(?:[^|']*(?:'[^']*')+[^|']*)+|[^|]+))|^$/g;
 
 /**
  * Parser and tokenizer for getting the type and value from a string.
@@ -204,8 +204,8 @@ export function parseDeclaration(declaration: string): ParsedDeclarations {
   });
   const keypath = pipes.shift() || undefined;
 
-  return <ParsedDeclarations> {
+  return {
     keypath,
     pipes,
-  };
+  } as ParsedDeclarations;
 }

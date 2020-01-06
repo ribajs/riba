@@ -23,7 +23,7 @@ export const addClassBinder: Binder<string> = {
     };
   },
 
-  unbind(el: HTMLElement) {
+  unbind() {
     delete this.customData;
   },
 
