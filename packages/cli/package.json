@@ -9,9 +9,10 @@
   },
   "scripts": {
     "build": "(npm run clean) && (npm run build:ts) && (chmod +x ./dist/bin/riba.js)",
-    "build:ts": "tsc",
+    "build:ts": "(npm run lint:src) && tsc",
     "clean": "rm -rf ./dist",
     "watch": "npm run build:ts -- --watch",
+    "lint:src": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Pascal Garber <pascal@artandcode.studio>",
@@ -43,7 +44,10 @@
     "@types/node": "^13.1.4",
     "@types/ora": "^3.2.0",
     "@types/os-name": "^3.1.0",
+    "@typescript-eslint/eslint-plugin": "^2.15.0",
+    "@typescript-eslint/parser": "^2.15.0",
     "core-js": "^3.6.1",
+    "eslint": "^6.8.0",
     "typescript": "^3.7.4"
   }
 }

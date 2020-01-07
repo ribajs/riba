@@ -15,6 +15,18 @@ import { Collection, SchematicOption } from '../lib/schematics';
 import { AbstractAction } from './abstract.action';
 import { GenerateAction } from './generate.action';
 
+export const retrieveCols = () => {
+  const defaultCols = 80;
+  try {
+    const terminalCols = execSync('tput cols', {
+      stdio: ['pipe', 'pipe', 'ignore'],
+    });
+    return parseInt(terminalCols.toString(), 10) || defaultCols;
+  } catch {
+    return defaultCols;
+  }
+};
+
 export class NewAction extends AbstractAction {
   private debug = Debug('actions:new');
   
@@ -58,7 +70,7 @@ export class NewAction extends AbstractAction {
       const answers: Answers = await prompt(questions as ReadonlyArray<Question>);
       this.replaceCommandInputMissingInformation(inputs, answers);
     }
-  };
+  }
 
   private replaceCommandInputMissingInformation(inputs: CommandInput[], answers: Answers): CommandInput[] {
     return inputs.map(
@@ -66,7 +78,7 @@ export class NewAction extends AbstractAction {
         (input.value =
           input.value !== undefined ? input.value : answers[input.name]),
     );
-  };
+  }
 
   protected async setDefaults(inputs: CommandInput[], options: CommandInput[]) {
     const configuration = await this.loadConfiguration();
@@ -86,7 +98,7 @@ export class NewAction extends AbstractAction {
 
     const schematicOptions: SchematicOption[] = this.mapSchematicOptions(inputs);
     await collection.execute('application', schematicOptions);
-  };
+  }
 
   /**
    * Calls some generation actions to generate example files
@@ -207,12 +219,12 @@ export class NewAction extends AbstractAction {
         packageManager.name.toLowerCase(),
       );
     }
-  };
+  }
 
   private async selectPackageManager(): Promise<AbstractPackageManager> {
     const answers: Answers = await this.askForPackageManager();
     return PackageManagerFactory.create(answers['package-manager']);
-  };
+  }
 
   private async askForPackageManager(): Promise<Answers> {
     const questions: Question[] = [
@@ -223,14 +235,14 @@ export class NewAction extends AbstractAction {
     ];
     const prompt = createPromptModule();
     return await prompt(questions);
-  };
+  }
 
   private async initializeGitRepository(dir: string) {
     const runner = new GitRunner();
     await runner.run('init', true, join(process.cwd(), dir)).catch(() => {
       console.error(chalk.red(messages.GIT_INITIALIZATION_ERROR));
     });
-  };
+  }
 
   /**
    * Write a file `.gitignore` in the root of the newly created project.
@@ -246,7 +258,7 @@ export class NewAction extends AbstractAction {
     const fileContent = content || defaultGitIgnore;
     const filePath = join(process.cwd(), dir, '.gitignore');
     return promisify(fs.writeFile)(filePath, fileContent);
-  };
+  }
 
   private printCollective() {
     const dim = this.print('dim');
@@ -265,10 +277,11 @@ export class NewAction extends AbstractAction {
       )}`,
     );
     emptyLine();
-  };
+  }
 
   private print = (color: string | null = null) => (str = '') => {
     const terminalCols = retrieveCols();
+    // eslint-disable-next-line no-control-regex
     const strLength = str.replace(/\u001b\[[0-9]{2}m/g, '').length;
     const leftPaddingLength = Math.floor((terminalCols - strLength) / 2);
     const leftPadding = ' '.repeat(Math.max(leftPaddingLength, 0));
@@ -279,17 +292,5 @@ export class NewAction extends AbstractAction {
   };
 
 }
-
-export const retrieveCols = () => {
-  const defaultCols = 80;
-  try {
-    const terminalCols = execSync('tput cols', {
-      stdio: ['pipe', 'pipe', 'ignore'],
-    });
-    return parseInt(terminalCols.toString(), 10) || defaultCols;
-  } catch {
-    return defaultCols;
-  }
-};
 
 export const exit = () => process.exit(1);

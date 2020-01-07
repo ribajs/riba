@@ -20,7 +20,7 @@ export class InfoAction extends AbstractAction {
 
   private displayBanner() {
     console.info(BANNER);
-  };
+  }
 
 
   private async displaySystemInformation() {
@@ -28,7 +28,7 @@ export class InfoAction extends AbstractAction {
     console.info('OS Version      :', chalk.yellow(osName(platform(), release())));
     console.info('NodeJS Version  :', chalk.yellow(process.version));
     await this.displayPackageManagerVersion();
-  };
+  }
   
   private async displayPackageManagerVersion() {
     const manager: AbstractPackageManager = await PackageManagerFactory.find();
@@ -42,7 +42,7 @@ export class InfoAction extends AbstractAction {
     } catch {
       console.error(`${manager.name} Version    :`, chalk.red('Unknown'));
     }
-  };
+  }
   
   private displayRibaInformation = async () => {
     console.info(chalk.green('[Riba Information]'));
@@ -67,7 +67,7 @@ export class InfoAction extends AbstractAction {
         },
       );
     });
-  };
+  }
   
   private displayRibaVersions(dependencies: PackageJsonDependencies) {
     this.buildRibaVersionsMessage(dependencies).forEach(dependency =>
@@ -78,7 +78,7 @@ export class InfoAction extends AbstractAction {
   private buildRibaVersionsMessage(dependencies: PackageJsonDependencies): RibaDependency[] {
     const nestDependencies = this.collectNestDependencies(dependencies);
     return this.format(nestDependencies);
-  };
+  }
   
   private collectNestDependencies(dependencies: PackageJsonDependencies): RibaDependency[] {
     const nestDependencies: RibaDependency[] = [];
@@ -93,7 +93,7 @@ export class InfoAction extends AbstractAction {
       }
     });
     return nestDependencies;
-  };
+  }
   
   private format(dependencies: RibaDependency[]): RibaDependency[] {
     const sorted = dependencies.sort(
@@ -106,16 +106,16 @@ export class InfoAction extends AbstractAction {
         dependency.name = this.rightPad(dependency.name, length);
       }
       dependency.name = dependency.name.concat(' :');
-      dependency.value = dependency.value.replace(/(\^|\~)/, '');
+      dependency.value = dependency.value.replace(/(\^|~)/, '');
     });
     return sorted;
-  };
+  }
   
   private rightPad(name: string, length: number): string {
     while (name.length < length) {
       name = name.concat(' ');
     }
     return name;
-  };
+  }
 
 }

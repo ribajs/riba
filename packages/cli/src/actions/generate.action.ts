@@ -71,7 +71,7 @@ export class GenerateAction extends AbstractAction {
       }
     });
     return this.schematicOptions;
-  };
+  }
 
   /**
    * If no path is set and the current directory has not the name of the default directory name, only then set the default path

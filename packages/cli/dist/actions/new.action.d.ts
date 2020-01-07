@@ -1,5 +1,6 @@
 import { CommandInput } from '../interfaces';
 import { AbstractAction } from './abstract.action';
+export declare const retrieveCols: () => number;
 export declare class NewAction extends AbstractAction {
     private debug;
     handle(inputs: CommandInput[], options: CommandInput[]): Promise<void>;
@@ -40,5 +41,4 @@ export declare class NewAction extends AbstractAction {
     private printCollective;
     private print;
 }
-export declare const retrieveCols: () => number;
 export declare const exit: () => never;

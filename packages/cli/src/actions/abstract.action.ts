@@ -69,6 +69,7 @@ export abstract class AbstractAction {
     return loader.load();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected async generateFiles(args: CommandInput[], options: CommandInput[]): Promise<void> {
     return Promise.resolve();
   }
