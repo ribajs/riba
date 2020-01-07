@@ -177,6 +177,13 @@ const PACKAGES = [
     isDemo: true,
     configure: true,
   },
+  {
+    path: 'demos/extras-game-loop/',
+    available: false,
+    isRibaModule: false,
+    isDemo: true,
+    configure: true,
+  }, 
 ];
 
 const getPackagePath = (modulePath) => {

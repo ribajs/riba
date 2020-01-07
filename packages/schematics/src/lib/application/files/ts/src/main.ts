@@ -9,4 +9,10 @@ riba.module.regist(coreModule);
 riba.module.regist(<%= classify(name) %>Module);
 
 const bindToElement = document.getElementById('rv-<%= name %>');
-riba.bind(bindToElement, model);
+if (bindToElement !== null) {
+  riba.bind(bindToElement, model);
+} else {
+  console.warn(new Error('No element with id "rv-<%= name %>" found! Use body as fallback.'));
+  riba.bind(document.body, model);
+}
+

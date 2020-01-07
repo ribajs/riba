@@ -14,6 +14,10 @@ export class Gameloop {
 
   public static maxFPS = 60;
 
+  public static getFps() {
+    return this.fps;
+  }
+
   public static startLoop(options: GameloopOptions = {}) {
 
     this.setOptions(options);
@@ -24,6 +28,8 @@ export class Gameloop {
     }
   }
 
+  public static fps = 60;
+
   // We want to simulate 1000 ms / 60 FPS = 16.667 ms per frame every time we run scroll()
   protected static timestep = 1000 / 60;
 
@@ -33,11 +39,11 @@ export class Gameloop {
 
   protected static delta = 0;
 
-  protected static fps = 60;
-
   protected static framesThisSecond = 0;
 
   protected static lastFpsUpdate = 0;
+
+  protected static frameID = 0;
 
   protected static setOptions(options: GameloopOptions) {
     this.maxFPS = typeof(options.maxFPS) === 'number' ? options.maxFPS : this.maxFPS;
@@ -51,7 +57,7 @@ export class Gameloop {
 
     // Throttle the frame rate.
     if (timestamp < this.lastFrameTimeMs + (1000 / this.maxFPS)) {
-      requestAnimationFrame(this.loop.bind(this));
+      this.frameID = requestAnimationFrame(this.loop.bind(this));
       return;
     }
 
@@ -59,7 +65,7 @@ export class Gameloop {
     this.delta += progress;
     this.lastFrameTimeMs = timestamp;
 
-    // this.begin(timestamp, this.delta);
+    this.begin(timestamp, this.delta);
 
     if (timestamp > this.lastFpsUpdate + 1000) {
       this.fps = 0.25 * this.framesThisSecond + 0.75 * this.fps;
@@ -81,7 +87,9 @@ export class Gameloop {
 
     this.render(this.delta / this.timestep);
 
-    window.requestAnimationFrame(this.loop.bind(this));
+    this.end(this.fps);
+
+    this.frameID = window.requestAnimationFrame(this.loop.bind(this));
   }
 
   protected static begin(timestamp: number, delta: number) {
@@ -94,6 +102,10 @@ export class Gameloop {
 
   protected static update(delta: number) {
     this.events.trigger('update', delta);
+  }
+
+  protected static end(delta: number) {
+    this.events.trigger('end', delta);
   }
 
   protected static panic() {
