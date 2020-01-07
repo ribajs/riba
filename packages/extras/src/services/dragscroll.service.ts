@@ -1,7 +1,6 @@
 import { Utils } from './utils.service';
 
 export interface DragscrollOptions {
-  preventDefault?: boolean;
   detectGlobalMove?: boolean;
 }
 
@@ -17,7 +16,7 @@ export class Dragscroll {
   protected pushed = false;
   protected touchCapable = ('ontouchstart' in window);
 
-  constructor(el: HTMLElement, options: DragscrollOptions = { detectGlobalMove: true, preventDefault: true }) {
+  constructor(el: HTMLElement, options: DragscrollOptions = { detectGlobalMove: true }) {
     this.el = el;
     this.options = options;
 
@@ -27,7 +26,7 @@ export class Dragscroll {
     }
 
     el.removeEventListener('mousedown', this.onMouseDown.bind(this), false);
-    el.addEventListener('mousedown', this.onMouseDown.bind(this), false);
+    el.addEventListener('mousedown', this.onMouseDown.bind(this), {passive: true});
 
     window.addEventListener('resize', this.checkDraggable.bind(this));
 
@@ -36,25 +35,23 @@ export class Dragscroll {
       window.removeEventListener('mouseup', this.onMouseUp.bind(this), false);
       window.removeEventListener('mousemove', this.onMouseMove.bind(this), false);
 
-      window.addEventListener('mouseup', this.onMouseUp.bind(this), false);
-      window.addEventListener('mousemove', this.onMouseMove.bind(this), false);
+      window.addEventListener('mouseup', this.onMouseUp.bind(this), {passive: true});
+      window.addEventListener('mousemove', this.onMouseMove.bind(this), {passive: true});
     } else {
       el.removeEventListener('mouseup', this.onMouseUp.bind(this), false);
       el.removeEventListener('mousemove', this.onMouseMove.bind(this), false);
 
-      el.addEventListener('mouseup', this.onMouseUp.bind(this), false);
-      el.addEventListener('mousemove', this.onMouseMove.bind(this), false);
+      el.addEventListener('mouseup', this.onMouseUp.bind(this), {passive: true});
+      el.addEventListener('mousemove', this.onMouseMove.bind(this), {passive: true});
     }
 
     // initial
     this.checkDraggable();
   }
 
-  public removeEventListeners() {
-    window.removeEventListener('resize', this.checkDraggable);
-    this.el.removeEventListener('mousedown', this.onMouseDown.bind(this), false);
-    this.el.removeEventListener('mouseup', this.onMouseUp.bind(this), false);
-    this.el.removeEventListener('mousemove', this.onMouseMove.bind(this), false);
+  public destroy() {
+    this.removeEventListeners();
+    this.el.classList.remove('draggable');
   }
 
   public checkDraggable() {
@@ -70,14 +67,10 @@ export class Dragscroll {
     this.pushed = true;
     this.lastClientX = e.clientX;
     this.lastClientY = e.clientY;
-    if (this.options.preventDefault) {
-      e.preventDefault();
-    }
   }
 
   protected onMouseUp <EventListener>() {
     this.pushed = false;
-    // this.triggerScrollendEvent(e);
   }
 
   protected onMouseMove <EventListener>(e: MouseEvent) {
@@ -95,4 +88,12 @@ export class Dragscroll {
       }
     }
   }
+
+  protected removeEventListeners() {
+    window.removeEventListener('resize', this.checkDraggable);
+    this.el.removeEventListener('mousedown', this.onMouseDown.bind(this), false);
+    this.el.removeEventListener('mouseup', this.onMouseUp.bind(this), false);
+    this.el.removeEventListener('mousemove', this.onMouseMove.bind(this), false);
+  }
+
 }

@@ -45,32 +45,6 @@ export class Utils {
   }
 
   public static getScrollPosition(element: Element): ScrollPosition {
-    // const rect = element.getBoundingClientRect();
-
-    // const scrollWidth = element.scrollWidth;
-    // const scrollWidthFallback = rect.left;
-
-    // const x = element.scrollLeft;
-    // const xFallback = Math.abs(rect.left);
-
-    // const y = element.scrollTop;
-    // const yFallback = Math.abs(rect.top);
-
-    // console.debug('x', x);
-    // console.debug('xFallback', xFallback);
-
-    // console.debug('y', y);
-    // console.debug('yFallback', yFallback);
-
-    // console.debug('rect', rect);
-
-    // const maxX = element.scrollHeight - element.clientHeight;
-    // const maxXFallback = element.scrollHeight - element.clientHeight;
-
-    // console.debug('maxX', maxX);
-    // console.debug('maxXFallback', maxXFallback);
-
-
     const scrollPosition: ScrollPosition = {
       /** horizontal: left / right / width */
       x: element.scrollLeft,
@@ -87,7 +61,6 @@ export class Utils {
 
   public static isScrollable(element: Element) {
     const scrollPosition = this.getScrollPosition(element);
-    console.debug('isScrollable', scrollPosition);
     return scrollPosition.maxX > 0 || scrollPosition.maxY > 0;
   }
 

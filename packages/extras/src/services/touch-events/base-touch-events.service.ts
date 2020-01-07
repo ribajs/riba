@@ -1,4 +1,4 @@
-export abstract class BaseTouchEventService {
+export abstract class BaseTouchEventsService {
   protected touchCapable: boolean;
   /** The element to trigger the events on */
   protected el: HTMLElement;

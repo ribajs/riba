@@ -1,7 +1,7 @@
 // import { Utils as ExtraUtils } from '../utils.service';
-import { BaseTouchEventService } from './base-touch-events.service';
+import { BaseTouchEventsService } from './base-touch-events.service';
 
-export class ScrollEventsService extends BaseTouchEventService {
+export class ScrollEventsService extends BaseTouchEventsService {
 
   public isScrolling = false;
 
@@ -20,14 +20,18 @@ export class ScrollEventsService extends BaseTouchEventService {
     this.addEventListeners();
   }
 
-  public removeEventListeners() {
-    for (const eventName of this._scrollEvent) {
-      this.el.removeEventListener<any>(eventName, this.onScrollEvent.bind(this));
-    }
+  public destroy() {
+    this.removeEventListeners();
   }
 
   public get scrollEvent() {
     return this._scrollEvent;
+  }
+
+  protected removeEventListeners() {
+    for (const eventName of this._scrollEvent) {
+      this.el.removeEventListener<any>(eventName, this.onScrollEvent.bind(this));
+    }
   }
 
   protected addEventListeners() {

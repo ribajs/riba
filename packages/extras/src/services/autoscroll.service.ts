@@ -33,6 +33,8 @@ export class Autoscroll {
 
   protected pauseOnHover = true;
 
+  protected resumeTimer: number | null = null;
+
   constructor(el: HTMLElement, options: AutoscrollOptions = {}) {
     this.el = el;
     this.options = options;
@@ -44,7 +46,7 @@ export class Autoscroll {
     this.limit = this.getLimit(this.el);
     this.position = this.getPosition();
 
-    window.addEventListener('resize', this.onResize.bind(this));
+    window.addEventListener('resize', this.onResize.bind(this), {passive: true});
 
     if (this.direction === -1) {
       // start right
@@ -54,22 +56,30 @@ export class Autoscroll {
       this.el.scrollLeft = 0;
     }
 
-    this.el.addEventListener('mouseenter', this.onMouseIn.bind(this));
-    this.el.addEventListener('mouseover', this.onMouseIn.bind(this));
-    this.el.addEventListener('focusin', this.onMouseIn.bind(this));
-    this.el.addEventListener('touchstart', this.onMouseIn.bind(this));
+    this.el.addEventListener('mouseenter', this.onMouseIn.bind(this), {passive: true});
+    this.el.addEventListener('mouseover', this.onMouseIn.bind(this), {passive: true});
+    this.el.addEventListener('focusin', this.onMouseIn.bind(this), {passive: true});
+    this.el.addEventListener('touchstart', this.onMouseIn.bind(this), {passive: true});
 
-    this.el.addEventListener('mouseout', this.onMouseOut.bind(this));
-    this.el.addEventListener('mouseleave', this.onMouseOut.bind(this));
-    this.el.addEventListener('focusout', this.onMouseOut.bind(this));
+    this.el.addEventListener('mouseout', this.onMouseOut.bind(this), {passive: true});
+    this.el.addEventListener('mouseleave', this.onMouseOut.bind(this), {passive: true});
+    this.el.addEventListener('focusout', this.onMouseOut.bind(this), {passive: true});
 
-    this.el.addEventListener('mouseup', this.onMouseOut.bind(this));
-    this.el.addEventListener('touchend', this.onMouseOut.bind(this));
+    this.el.addEventListener('mouseup', this.onMouseUp.bind(this), {passive: true});
+    this.el.addEventListener('touchend', this.onMouseUp.bind(this), {passive: true});
+    this.el.addEventListener('scroll', this.onMouseUp.bind(this), {passive: true});
+    this.el.addEventListener('scrollend', this.onMouseUp.bind(this), {passive: true});
+    // See ScrollEventsService for this event
+    this.el.addEventListener('scrollended', this.onMouseUp.bind(this), {passive: true});
 
     Gameloop.startLoop({ maxFPS: 60 }, this.render.bind(this), this.update.bind(this));
   }
 
-  public removeEventListeners() {
+  public destroy() {
+    this.removeEventListeners();
+  }
+
+  protected removeEventListeners() {
     window.removeEventListener('resize', this.onResize.bind(this));
 
     this.el.removeEventListener('mouseenter', this.onMouseIn.bind(this));
@@ -81,8 +91,11 @@ export class Autoscroll {
     this.el.removeEventListener('mouseleave', this.onMouseOut.bind(this));
     this.el.removeEventListener('focusout', this.onMouseOut.bind(this));
 
-    this.el.removeEventListener('mouseup', this.onMouseOut.bind(this));
-    this.el.removeEventListener('touchend', this.onMouseOut.bind(this));
+    this.el.removeEventListener('mouseup', this.onMouseUp.bind(this));
+    this.el.removeEventListener('touchend', this.onMouseUp.bind(this));
+    this.el.removeEventListener('scroll', this.onMouseUp.bind(this));
+    this.el.removeEventListener('scrollend', this.onMouseUp.bind(this));
+    this.el.removeEventListener('scrollended', this.onMouseUp.bind(this));
   }
 
   protected onMouseIn() {
@@ -92,8 +105,11 @@ export class Autoscroll {
   }
 
   protected onMouseOut() {
-    this.pause = false;
-    this.position = this.angle === 'vertical' ? this.el.scrollTop : this.el.scrollLeft;
+    this.resume(200);
+  }
+
+  protected onMouseUp() {
+    this.resume(1000);
   }
 
   protected onResize() {
@@ -101,8 +117,29 @@ export class Autoscroll {
     this.pause = false;
   }
 
+  /** Resume if this method was not called up for [delay] milliseconds */
+  protected resume(delay = 1000) {
+    if (!this.pause) {
+      return;
+    }
+
+    if (this.resumeTimer !== null) {
+      clearTimeout(this.resumeTimer);
+      this.resumeTimer = null;
+    }
+
+    this.resumeTimer = window.setTimeout(() => {
+      this.setPosition();
+      this.pause = false;
+    }, delay);
+  }
+
   protected getPosition() {
     return (this.angle === 'vertical' ? this.el.scrollTop : this.el.scrollLeft) || 0;
+  }
+
+  protected setPosition() {
+    this.position = this.getPosition();
   }
 
   protected getLimit(el: HTMLElement) {

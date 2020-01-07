@@ -1,17 +1,17 @@
 import { Binder } from '@ribajs/core';
-import { TouchEventsService } from '../services/touch-events/touch-events.service';
+import { ScrollEventsService } from '../services/touch-events/scroll-events.service';
 
 export const touchEventsBinder: Binder<string> = {
-  name: 'touch-events',
+  name: 'scroll-events',
   bind(el) {
     if (!this.customData) {
       this.customData = {};
     }
-    this.customData.touchEventService = new TouchEventsService(el);
+    this.customData.touchEventService = new ScrollEventsService(el);
   },
   unbind() {
     if (this.customData.touchEventService) {
-      (this.customData.touchEventService as TouchEventsService).destroy();
+      (this.customData.touchEventService as ScrollEventsService).destroy();
     }
   },
   routine() {

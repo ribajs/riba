@@ -20,14 +20,14 @@ export const autoscrollBinder: Binder<AutoscrollOptions> = {
 
     setTimeout(() => {
       if (this.customData.autoscroll) {
-        (this.customData.autoscroll as Autoscroll).removeEventListeners();
+        (this.customData.autoscroll as Autoscroll).destroy();
       }
       this.customData.autoscroll = new Autoscroll(el, options);
     }, 1000);
   },
   unbind() {
     if (this.customData.autoscroll) {
-      (this.customData.autoscroll as Autoscroll).removeEventListeners();
+      (this.customData.autoscroll as Autoscroll).destroy();
     }
   },
 };

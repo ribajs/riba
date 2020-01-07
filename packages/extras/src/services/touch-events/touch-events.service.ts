@@ -1,8 +1,8 @@
 import { Utils as ExtraUtils } from '../utils.service';
 import { Position } from '../../types';
 
-import { ScrollEventsService } from './scroll-events.service';
-import { BaseTouchEventService } from './base-touch-events.service';
+// import { ScrollEventsService } from './scroll-events.service';
+import { BaseTouchEventsService } from './base-touch-events.service';
 
 /**
  * Vanilla version of jQuery Mobile Events
@@ -65,7 +65,7 @@ export enum TouchType {
   CHANGED,
 }
 
-export class TouchEventService extends BaseTouchEventService {
+export class TouchEventsService extends BaseTouchEventsService {
 
   // GETTERS:
 
@@ -89,9 +89,9 @@ export class TouchEventService extends BaseTouchEventService {
     return this.settings.tapevent;
   }
 
-  public get scrollEvent() {
-    return this.scrollEvents.scrollEvent;
-  }
+  // public get scrollEvent() {
+  //   return this.scrollEvents.scrollEvent;
+  // }
 
   // SETTERS:
 
@@ -195,7 +195,7 @@ export class TouchEventService extends BaseTouchEventService {
 
   protected settings: Settings;
 
-  protected scrollEvents: ScrollEventsService;
+  // protected scrollEvents: ScrollEventsService;
 
   constructor(el: HTMLElement, settings: Settings = {
     tapPixelRange: 5,
@@ -222,12 +222,17 @@ export class TouchEventService extends BaseTouchEventService {
 
     this.settings = settings;
 
-    this.scrollEvents = new ScrollEventsService(this.el);
+    // this.scrollEvents = new ScrollEventsService(this.el);
 
     this.addEventListeners();
   }
 
-  public removeEventListeners() {
+  public destroy() {
+    this.removeEventListeners();
+    // this.scrollEvents.destroy();
+  }
+
+  protected removeEventListeners() {
     for (const eventName of this.settings.startevent) {
       this.el.removeEventListener<any>(eventName, this.onStartEvent.bind(this));
     }
@@ -237,7 +242,7 @@ export class TouchEventService extends BaseTouchEventService {
     for (const eventName of this.settings.endevent) {
       this.el.removeEventListener<any>(eventName, this.onEndEvent.bind(this));
     }
-    this.scrollEvents.removeEventListeners();
+    // this.scrollEvents.destroy();
   }
 
   // HELPER METHODS:
@@ -314,13 +319,13 @@ export class TouchEventService extends BaseTouchEventService {
 
   protected addEventListeners() {
     for (const eventName of this.settings.startevent) {
-      this.el.addEventListener<any>(eventName, this.onStartEvent.bind(this));
+      this.el.addEventListener<any>(eventName, this.onStartEvent.bind(this), {passive: true});
     }
     for (const eventName of this.settings.moveevent) {
-      this.el.addEventListener<any>(eventName, this.onMoveEvent.bind(this));
+      this.el.addEventListener<any>(eventName, this.onMoveEvent.bind(this), {passive: true});
     }
     for (const eventName of this.settings.endevent) {
-      this.el.addEventListener<any>(eventName, this.onEndEvent.bind(this));
+      this.el.addEventListener<any>(eventName, this.onEndEvent.bind(this), {passive: true});
     }
   }
 
