@@ -1,6 +1,4 @@
-export type RenderCallback = (interp: number) => void;
-
-export type UpdateCallback = (delta: number) => void;
+import { EventDispatcher } from '@ribajs/core';
 
 export interface GameloopOptions {
   maxFPS?: number;
@@ -12,27 +10,19 @@ export interface GameloopOptions {
  */
 export class Gameloop {
 
+  public static events = new EventDispatcher('gameloop');
+
   public static maxFPS = 60;
 
-  public static startLoop(options: GameloopOptions = {}, renderCallback?: RenderCallback, updateCallback?: UpdateCallback) {
+  public static startLoop(options: GameloopOptions = {}) {
 
     this.setOptions(options);
-
-    if (renderCallback) {
-      this.addRenderCallback(renderCallback);
-    }
-    if (updateCallback) {
-      this.addUpdateCallback(updateCallback);
-    }
+  
     if (!this.loopStarted) {
       this.loopStarted = true;
       window.requestAnimationFrame(this.loop.bind(this));
     }
   }
-
-  protected static renderCallbacks = new Array<RenderCallback>();
-
-  protected static updateCallbacks = new Array<UpdateCallback>();
 
   // We want to simulate 1000 ms / 60 FPS = 16.667 ms per frame every time we run scroll()
   protected static timestep = 1000 / 60;
@@ -94,32 +84,16 @@ export class Gameloop {
     window.requestAnimationFrame(this.loop.bind(this));
   }
 
-  // protected static begin(timestamp: number, delta: number) {
-  //   //
-  // }
+  protected static begin(timestamp: number, delta: number) {
+    this.events.trigger('begin', timestamp, delta);
+  }
 
   protected static render(interp: number) {
-    for (const renderCallback of this.renderCallbacks) {
-      if (typeof(renderCallback) === 'function') {
-        renderCallback(interp);
-      }
-    }
+    this.events.trigger('render', interp);
   }
 
   protected static update(delta: number) {
-    for (const updateCallback of this.updateCallbacks) {
-      if (typeof(updateCallback) === 'function') {
-        updateCallback(delta);
-      }
-    }
-  }
-
-  protected static addRenderCallback(renderCallback: RenderCallback) {
-    this.renderCallbacks.push(renderCallback);
-  }
-
-  protected static addUpdateCallback(updateCallback: UpdateCallback) {
-    this.updateCallbacks.push(updateCallback);
+    this.events.trigger('update', delta);
   }
 
   protected static panic() {

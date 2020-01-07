@@ -60,8 +60,8 @@ export abstract class TemplatesComponent extends Component {
    * Called before getting all attribute values, use this method to tramsform the attribute values if you wish
    * @param attributes
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected transformTemplateAttributes(attributes: any, index: number) {
+    attributes.index = attributes.index || index;
     return attributes;
   }
 
@@ -89,6 +89,7 @@ export abstract class TemplatesComponent extends Component {
     const templates = this.el.querySelectorAll<HTMLTemplateElement>('template');
     for (let index = 0; index < templates.length; index++) {
       const tpl = templates[index];
+      
       this.addItemByTemplate(tpl, index);
     }
     this.templateReady = true;

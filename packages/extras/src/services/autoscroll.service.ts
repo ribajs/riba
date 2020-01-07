@@ -72,7 +72,15 @@ export class Autoscroll {
     // See ScrollEventsService for this event
     this.el.addEventListener('scrollended', this.onMouseUp.bind(this), {passive: true});
 
-    Gameloop.startLoop({ maxFPS: 60 }, this.render.bind(this), this.update.bind(this));
+    Gameloop.events.on('render', this.render.bind(this));
+    Gameloop.events.on('update', this.updateMove.bind(this));
+
+    Gameloop.startLoop({ maxFPS: 60 });
+  }
+
+  public update() {
+    this.limit = this.getLimit(this.el);
+    this.setPosition();
   }
 
   public destroy() {
@@ -96,6 +104,9 @@ export class Autoscroll {
     this.el.removeEventListener('scroll', this.onMouseUp.bind(this));
     this.el.removeEventListener('scrollend', this.onMouseUp.bind(this));
     this.el.removeEventListener('scrollended', this.onMouseUp.bind(this));
+
+    Gameloop.events.off('render', this.render.bind(this));
+    Gameloop.events.off('update', this.updateMove.bind(this));
   }
 
   protected onMouseIn() {
@@ -156,7 +167,7 @@ export class Autoscroll {
     this.scroll(move);
   }
 
-  protected update(delta: number) {
+  protected updateMove(delta: number) {
     // console.debug('delta', delta);
     if (this.pause) {
       return;

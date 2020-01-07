@@ -1,4 +1,4 @@
-import { Binding, handleizeFormatter } from '@ribajs/core';
+import { handleizeFormatter } from '@ribajs/core';
 import templateHorizontal from './bs4-tabs-horizontal.component.html';
 import templateVertical from './bs4-tabs-vertical.component.html';
 
@@ -10,11 +10,14 @@ export interface Tab {
   handle: string;
   active: boolean;
   type?: string;
+  index: number;
 }
 
 export interface Scope {
   items: Tab[];
   activate: Bs4TabsComponent['activate'];
+  deactivate: Bs4TabsComponent['activate'];
+  deactivateAll: Bs4TabsComponent['deactivateAll'];
   optionTabsAutoHeight: boolean;
   optionTabsAngle: 'vertical' | 'horizontal';
 }
@@ -40,11 +43,17 @@ export class Bs4TabsComponent extends TemplatesComponent {
       name: 'active',
       required: false,
     },
+    {
+      name: 'index',
+      required: false,
+    },
   ];
 
   protected scope: Scope = {
     items: new Array<Tab>(),
     activate: this.activate,
+    deactivate: this.deactivate,
+    deactivateAll:this.deactivateAll,
     optionTabsAutoHeight: false,
     optionTabsAngle: 'horizontal',
   };
@@ -122,24 +131,56 @@ export class Bs4TabsComponent extends TemplatesComponent {
   }
 
   public deactivateAll() {
-    for (const tab of this.scope.items) {
-      tab.active = false;
+    for (let index = 0; index < this.scope.items.length; index++) {
+      const tab = this.scope.items[index];
+      this.deactivate(tab);
     }
   }
 
-  public activate(tab: Tab, binding?: Binding, event?: Event) {
+  public deactivate(tab: Tab) {
+    tab.active = false;
+
+    const firstTabContentChild = this.getTabContentChildByIndex(tab.index);
+    if (firstTabContentChild) {
+      this.triggerVisibilityChangedForElement(firstTabContentChild, tab.active);
+    }
+  }
+
+  public activate(tab: Tab) {
     this.deactivateAll();
     tab.active = true;
+
+    const firstTabContentChild = this.getTabContentChildByIndex(tab.index);
+    if (firstTabContentChild) {
+      this.triggerVisibilityChangedForElement(firstTabContentChild as Element, tab.active);
+    }
 
     if (event) {
       event.preventDefault();
     }
   }
 
-  public activateFirstTab() {
+  protected activateFirstTab() {
     if (this.scope.items.length > 0) {
       this.activate(this.scope.items[0]);
     }
+  }
+
+  protected getTabContentChildByIndex(index: number) {
+    return this.el.querySelector(`.tab-content .tab-pane:nth-child(${index + 1}) > *`) || undefined;
+  }
+
+  /**
+   * Trigger `visibility-changed` for components that need to update if visibility changes.
+   * E.g. this event is used the bs4-slideshow component
+   * @param element 
+   * @param visibile 
+   */
+  protected triggerVisibilityChangedForElement(element: Element, visibile: boolean) {
+    setTimeout(() => {
+      // Use this event to update any custom element when it becomes visibile
+      element.dispatchEvent(new CustomEvent('visibility-changed', {detail: {visibile}}));
+    }, 200);
   }
 
   protected connectedCallback() {
@@ -157,9 +198,8 @@ export class Bs4TabsComponent extends TemplatesComponent {
 
   protected resizeTabsArray(newSize: number) {
     while (newSize > this.scope.items.length) {
-      this.scope.items.push({handle: '', title: '', content: '', active: false});
+      this.scope.items.push({handle: '', title: '', content: '', active: false, index: this.scope.items.length - 1});
     }
-    this.scope.items.length = newSize;
   }
 
   protected onTabShownEventHandler(event: Event) {
@@ -203,6 +243,7 @@ export class Bs4TabsComponent extends TemplatesComponent {
     if (index >= this.scope.items.length) {
       this.resizeTabsArray(index + 1);
     }
+    this.scope.items[index].index = index;
     if (attributeName.endsWith('Content')) {
       this.scope.items[index].content = newValue;
     }
@@ -226,7 +267,8 @@ export class Bs4TabsComponent extends TemplatesComponent {
     }
   }
 
-  protected transformTemplateAttributes(attributes: any) {
+  protected transformTemplateAttributes(attributes: any, index: number) {
+    attributes = super.transformTemplateAttributes(attributes, index);
     if (!attributes.handle && attributes.title) {
       attributes.handle = handleizeFormatter.read(attributes.title);
     }

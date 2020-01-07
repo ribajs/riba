@@ -424,6 +424,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     this.setOptionsByBreakpoint(this.breakpoint);
   }
 
+  // TODO create independent bs4 breakpoint service
   protected getBreakpoint(): Breakpoint {
     const size = window.innerWidth;
     // XS
@@ -443,7 +444,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       return 'lg';
     }
     // XL
-    return 'xs';
+    return 'xl';
   }
 
   protected setOptionsByBreakpoint(breakpoint: Breakpoint) {
@@ -469,6 +470,13 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     if (newBreakpoint !== this.breakpoint) {
       this.breakpoint = newBreakpoint;
       this.onBreakpointChanges();
+    }
+  }
+
+  protected onVisibilityChanged(event: CustomEvent) {
+    if (event.detail.visibile) {
+      this.dragscrollService?.checkDraggable();
+      this.continuousAutoplayService?.update();
     }
   }
 
@@ -526,6 +534,9 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   protected addEventListeners() {
     window.addEventListener('resize', this.onResize.bind(this), {passive: true});
 
+    // Custom event triggered by some parent components when this component changes his visibility, e.g. triggered in the bs4-tabs component
+    this.el.addEventListener('visibility-changed' as any, this.onVisibilityChanged.bind(this));
+
     this.slideshowInner.addEventListener('scroll', this.onScroll.bind(this), { passive: true});
     this.slideshowInner.addEventListener('scrollended', this.onScrollend.bind(this), {passive: true});
 
@@ -553,6 +564,8 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   protected removeEventListeners() {
     window.removeEventListener('resize', this.onResize.bind(this));
+
+    this.el.removeEventListener('visibility-changed' as any, this.onVisibilityChanged.bind(this));
 
     this.slideshowInner.removeEventListener('scroll', this.onScroll.bind(this));
     this.slideshowInner.removeEventListener('scrollended', this.onScrollend.bind(this));
@@ -664,6 +677,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   }
 
   protected transformTemplateAttributes(attributes: any, index: number) {
+    attributes = super.transformTemplateAttributes(attributes, index);
     attributes.handle = attributes.handle || index.toString();
     attributes.index = index;
     attributes.class = attributes.class || '';
