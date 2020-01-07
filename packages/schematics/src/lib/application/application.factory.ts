@@ -16,11 +16,6 @@ import {
   DEFAULT_VERSION,
 } from '../defaults';
 
-export function main(options: ApplicationOptions): Rule {
-  options = transform(options);
-  return mergeWith(generate(options));
-}
-
 function transform(options: ApplicationOptions): ApplicationOptions {
   const target: ApplicationOptions = Object.assign({}, options);
 
@@ -44,4 +39,9 @@ function generate(options: ApplicationOptions): Source {
     }),
     move(options.name),
   ]);
+}
+
+export function main(options: ApplicationOptions): Rule {
+  options = transform(options);
+  return mergeWith(generate(options));
 }

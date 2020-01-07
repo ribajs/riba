@@ -215,6 +215,40 @@
     </section>
 
     <section class="col-12 my-5">
+      <h2 class="text-center">Responsive</h2>
+      <bs4-slideshow controls="false" lg-controls="true" indicators="false" lg-indicators="true" control-prev-icon-src="arrow_carrot.svg" control-next-icon-src="arrow_carrot.svg" indicator-inactive-icon-src="icon_circle-empty.svg" indicator-active-icon-src="icon_circle-selected.svg">
+        <div class="slideshow-inner">
+          <div class="slide-placeholder d-none d-sm-block col-sm-6 col-xl-4">&nbsp;</div>
+          <div class="slide col-12 col-sm-6 col-xl-4">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=1" alt="Static Random Image from https://picsum.photos/">
+          </div>
+          <div class="slide col-12 col-sm-6 col-xl-4">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=2" alt="Static Random Image from https://picsum.photos/">
+          </div>
+          <div class="slide col-12 col-sm-6 col-xl-4">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=3" alt="Static Random Image from https://picsum.photos/">
+          </div>
+          <div class="slide col-12 col-sm-6 col-xl-4">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=4" alt="Static Random Image from https://picsum.photos/">
+          </div>
+          <div class="slide col-12 col-sm-6 col-xl-4">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=5" alt="Static Random Image from https://picsum.photos/">
+          </div>
+          <div class="slide col-12 col-sm-6 col-xl-4">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=6" alt="Static Random Image from https://picsum.photos/">
+          </div>
+          <div class="slide col-12 col-sm-6 col-xl-4">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=7" alt="Static Random Image from https://picsum.photos/">
+          </div>
+          <div class="slide col-12 col-sm-6 col-xl-4">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=8" alt="Static Random Image from https://picsum.photos/">
+          </div>
+          <div class="slide-placeholder d-none d-sm-block col-sm-6 col-xl-4">&nbsp;</div>
+        </div>
+      </bs4-slideshow>
+    </section>
+
+    <section class="col-12 my-5">
       <h2 class="text-center">Custom Templates</h2>
       <bs4-slideshow sticky="true">
         <div class="slideshow-inner">
@@ -246,17 +280,17 @@
           <div class="slide-placeholder col-2">&nbsp;</div>
         </div>
         <template type="controls">
-          <button class="btn btn-link carousel-control-prev" role="button" data-slide="prev" rv-on-click="prev">
+          <button rv-show="controls" class="btn btn-link carousel-control-prev" role="button" data-slide="prev" rv-on-click="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
           </button>
-          <button class="btn btn-link carousel-control-next" role="button" data-slide="next" rv-on-click="next">
+          <button rv-show="controls" class="btn btn-link carousel-control-next" role="button" data-slide="next" rv-on-click="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
           </button>
         </template>
         <template type="indicators">
-          <ol class="carousel-indicators">
+          <ol rv-show="indicators" class="carousel-indicators">
             <li rv-each-slide="items" rv-class-active="slide.active" rv-on-click="goTo | args slide.index"></li>
           </ol>
         </template>

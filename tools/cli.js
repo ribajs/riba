@@ -440,21 +440,21 @@ program
     processModules(false, false, false, false, false, false, true);
   });
 
-  program
+program
   .command('reinstall')
   .description('Removeall "node_modules" folders and install the modules again')
   .action(() => {
     processModules(false, false, false, false, false, false, false, true);
   });
 
-  program
+program
   .command('configure-modules')
   .description('Replace config files in all packages')
   .action(() => {
     processModules(false, false, false, false, false, false, false, false, true);
   });
 
-  program
+program
   .command('configure-demos')
   .description('Replace config files in all demos')
   .action(() => {

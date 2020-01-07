@@ -6,7 +6,7 @@ import template from './slideshow-example.component.html';
 
 export class SlideshowExampleComponent extends Component {
 
-  public static tagName: string = 'rv-slideshow-example';
+  public static tagName = 'rv-slideshow-example';
 
   protected autobind = true;
 

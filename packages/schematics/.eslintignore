@@ -9,4 +9,4 @@ cssnano.config.js
 jest.config.js
 webpack.config.js
 
-src/lib
+src/lib/*/files

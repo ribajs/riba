@@ -5,7 +5,8 @@
     rv-scrollbar-draggable
     rv-on-scrollstart="log | args 'scrollstart'"
     rv-on-scrollended="log | args 'scrollended'"
-    rv-on-scrollend="log | args 'native scrollend'"
+    rv-on-scrollend="log | args '(native scrollend)'"
+    rv-on-scroll="log | args '(native scroll)'"
   >
     <div class="touch-zone-background d-flex justify-content-center align-items-center h-100 w-100">Scroll here</div>
     <div class="touch-space"></div>

@@ -262,9 +262,14 @@ export class Utils {
   public static clone(deep: boolean, val: any) {
     if (Utils.isArray(val)) {
       return val.slice();
-    } else {
+    }
+    if (Utils.isObject(val)) {
       return Utils.extend(deep, {}, val);
     }
+    if (Utils.isString(val)) {
+      return val.repeat(1) ;
+    }
+    return val;
   }
 
   /**

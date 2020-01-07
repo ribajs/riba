@@ -13,5 +13,6 @@ module.exports = {
     // disable the rule for all files
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
   },
 };
