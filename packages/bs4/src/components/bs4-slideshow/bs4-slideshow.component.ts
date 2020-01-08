@@ -267,6 +267,8 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   protected autoplayIntervalIndex: number | null = null;
 
+  protected continuousAutoplayIntervalIndex: number | null = null;
+
   protected resumeTimer: number | null = null;
   
   /**
@@ -482,13 +484,13 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   protected onScroll() {
     // this.setSlidePositions();
-    // this.setCenteredSlide();
+    // this.setCenteredSlideActive();
     this.resume(1000);
   }
 
   protected onScrollend() {
     this.setSlidePositions();
-    this.setCenteredSlide();
+    this.setCenteredSlideActive();
     if (this.scope.sticky) {
       this.scrollToNearestSlide();
     }
@@ -623,12 +625,23 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       };
       this.continuousAutoplayService = new Autoscroll(this.slideshowInner, autoscrollOptions);
     }
+    // on continuous autoplay the scrollended event is never triggered, so call this method all `intervalsTimeMs` milliseconds as a WORKAROUND
+    if (!this.continuousAutoplayIntervalIndex) {
+      // intervals are depending on the autoscrolling speed (autoplayVelocity)
+      const intervalsTimeMs = this.scope.autoplayVelocity * 10000;
+      console.debug('intervalsTimeMs', intervalsTimeMs);
+      this.continuousAutoplayIntervalIndex = window.setInterval(this.onScrollend.bind(this), intervalsTimeMs);
+    }
   }
 
   protected disableContinuousAutoplay() {
     if (this.continuousAutoplayService) {
       this.continuousAutoplayService.destroy();
       this.continuousAutoplayService = undefined;
+    }
+    if (this.continuousAutoplayIntervalIndex) {
+      window.clearInterval(this.continuousAutoplayIntervalIndex);
+      this.continuousAutoplayIntervalIndex = null;
     }
   }
 
@@ -776,7 +789,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     }
   }
 
-  protected setCenteredSlide() {
+  protected setCenteredSlideActive() {
     const index = this.getMostCenteredSlideIndex();
     this.setAllSlidesUnactive(index);
     if (!this.scope.items[index]) {
