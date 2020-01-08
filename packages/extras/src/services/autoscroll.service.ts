@@ -27,8 +27,6 @@ export class Autoscroll {
 
   protected lastMove = 0;
 
-  protected position: number;
-
   protected angle: 'horizontal' | 'vertical' = 'horizontal';
 
   protected pauseOnHover = true;
@@ -44,7 +42,7 @@ export class Autoscroll {
     this.pauseOnHover = typeof(this.options.pauseOnHover) === 'boolean' ? this.options.pauseOnHover : this.pauseOnHover;
 
     this.limit = this.getLimit(this.el);
-    this.position = this.getPosition();
+    this.move = this.getPosition();
 
     window.addEventListener('resize', this.onResize.bind(this), {passive: true});
 
@@ -150,51 +148,59 @@ export class Autoscroll {
   }
 
   protected setPosition() {
-    this.position = this.getPosition();
+    this.move = this.getPosition();
   }
 
   protected getLimit(el: HTMLElement) {
     return this.angle === 'vertical' ? ExtraUtils.getScrollPosition(el).maxY : ExtraUtils.getScrollPosition(el).maxX;
   }
 
-  protected render(interp: number) {
+  /**
+   * This Interpolation:
+   * ```
+   * protected render(interp: number) {
+   * ...
+   * this.move = (this.lastMove + (this.move - this.lastMove) * interp);
+   * ```
+   * is not working here for some reasion
+   * like it works in the demos/extras-game-loop demo or here:
+   * https://isaacsukin.com/news/2015/01/detailed-explanation-javascript-game-loops-and-timing
+   * 
+   * Without this the scrollbar scrolls smooth, need to find out why.
+   */
+  protected render() {
     if (this.pause) {
       return;
     }
 
-    const move = (this.lastMove + (this.move - this.lastMove) * interp);
-    this.move = 0;
-    this.scroll(move);
+    this.scroll(this.move);
   }
 
   protected updateMove(delta: number) {
-    // console.debug('delta', delta);
     if (this.pause) {
       return;
     }
 
     this.lastMove = this.move;
-    this.move += (this.velocity * delta);
+    const append = ((this.velocity * this.direction) * delta);
+    this.move += append;
 
     // Switch directions if we go too far
-    // `Math.floor()` rounds down, `Math.ceil()` rounds up, `Math.round()` rounds to the nearest integer
-    if (Math.floor(this.position) <= 0 && this.direction !== 1) {
+    if (this.move <= 0 && this.direction !== 1) {
       this.direction = 1;
     }
 
-    if (Math.ceil(this.position) >= this.limit && this.direction !== -1) {
+    if (this.move >= this.limit && this.direction !== -1) {
       this.direction = -1;
     }
   }
 
   protected scroll(move: number) {
-    const newPosition = this.direction > 0 ? this.position + move : this.position - move;
     if (this.angle === 'vertical') {
-      this.el.scrollTop = Math.ceil(newPosition);
+      this.el.scrollTop = move;
     } else {
-      this.el.scrollLeft = Math.ceil(newPosition);
+      this.el.scrollLeft = move;
     }
-    this.position = newPosition;
   }
 
 }

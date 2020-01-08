@@ -7,6 +7,8 @@ bs4-slideshow {
     @extend .flex-scrollbar-x-scroll;
     @extend .scrollbar-invisible;
 
+    // scroll-behavior: smooth;
+
     .slide-caption {
       @extend .carousel-caption;
     }

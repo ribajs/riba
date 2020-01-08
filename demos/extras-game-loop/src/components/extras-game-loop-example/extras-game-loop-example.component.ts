@@ -24,10 +24,6 @@ export class ExtrasGameLoopExampleComponent extends Component {
 
   protected limit = 300;
 
-  static get observedAttributes() {
-    return [];
-  }
-
   protected scope = {
     fps: 60,
     left: '10px',
@@ -36,7 +32,6 @@ export class ExtrasGameLoopExampleComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    console.debug('constructor', this);
   }
 
   protected connectedCallback() {
@@ -61,11 +56,10 @@ export class ExtrasGameLoopExampleComponent extends Component {
   }
 
   protected end() {
-    const fps = Gameloop.getFps();
-    if (fps < 25) {
+    if (this.scope.fps < 25) {
       this.scope.color = 'black';
     }
-    else if (fps > 30) {
+    else if (this.scope.fps > 30) {
       this.scope.color = 'red';
     }
   }
