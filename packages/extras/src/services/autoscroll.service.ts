@@ -84,6 +84,9 @@ export class Autoscroll {
     Gameloop.startLoop({ maxFPS: 60 });
   }
 
+  /**
+   * @note this is not the gameloop update method!
+   */
   public update() {
     this.limit = this.getLimit(this.el);
     this.setPosition();
@@ -91,6 +94,27 @@ export class Autoscroll {
 
   public destroy() {
     this.removeEventListeners();
+  }
+
+  public pause() {
+    this.el.style.scrollBehavior = '';
+    this._pause = true;
+  }
+
+  /** Resume autoscrolling if this method was not called up for [delay] milliseconds */
+  public resume(delay = 0) {
+    if (!this._pause) {
+      return;
+    }
+
+    this.stopResumeTimeout();
+
+    this.resumeTimer = window.setTimeout(() => {
+      this.setPosition();
+      this._pause = false;
+      // Disable smooth scrolling on autoscroll if set
+      this.el.style.scrollBehavior = 'auto';
+    }, delay);
   }
 
   protected removeEventListeners() {
@@ -149,27 +173,6 @@ export class Autoscroll {
       clearTimeout(this.resumeTimer);
       this.resumeTimer = null;
     }
-  }
-
-  public pause() {
-    this.el.style.scrollBehavior = '';
-    this._pause = true;
-  }
-
-  /** Resume if this method was not called up for [delay] milliseconds */
-  protected resume(delay = 1000) {
-    if (!this._pause) {
-      return;
-    }
-
-    this.stopResumeTimeout();
-
-    this.resumeTimer = window.setTimeout(() => {
-      this.setPosition();
-      this._pause = false;
-      // Disable smooth scrolling on autoscroll if set
-      this.el.style.scrollBehavior = 'auto';
-    }, delay);
   }
 
   protected getPosition() {
