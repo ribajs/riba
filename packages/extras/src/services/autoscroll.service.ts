@@ -11,6 +11,8 @@ export interface AutoscrollOptions {
 
 export class Autoscroll {
 
+  protected touchCapable = ('ontouchstart' in window);
+
   protected direction = 1;
 
   protected limit: number;
@@ -19,7 +21,7 @@ export class Autoscroll {
 
   protected el: HTMLElement;
 
-  protected pause = false;
+  protected _pause = false;
 
   protected velocity = 0.008;
 
@@ -59,16 +61,22 @@ export class Autoscroll {
     this.el.addEventListener('focusin', this.onMouseIn.bind(this), {passive: true});
     this.el.addEventListener('touchstart', this.onMouseIn.bind(this), {passive: true});
 
-    this.el.addEventListener('mouseout', this.onMouseOut.bind(this), {passive: true});
     this.el.addEventListener('mouseleave', this.onMouseOut.bind(this), {passive: true});
     this.el.addEventListener('focusout', this.onMouseOut.bind(this), {passive: true});
 
     this.el.addEventListener('mouseup', this.onMouseUp.bind(this), {passive: true});
     this.el.addEventListener('touchend', this.onMouseUp.bind(this), {passive: true});
-    this.el.addEventListener('scroll', this.onMouseUp.bind(this), {passive: true});
-    this.el.addEventListener('scrollend', this.onMouseUp.bind(this), {passive: true});
-    // See ScrollEventsService for this event
-    this.el.addEventListener('scrollended', this.onMouseUp.bind(this), {passive: true});
+    
+    if (this.touchCapable) {
+      this.el.addEventListener('scroll', this.onMouseUp.bind(this), {passive: true});
+      this.el.addEventListener('scrollend', this.onMouseUp.bind(this), {passive: true});
+      // See ScrollEventsService for "scrollended" event
+      this.el.addEventListener('scrollended', this.onMouseUp.bind(this), {passive: true});
+    } else {
+      this.el.addEventListener('scroll', this.onScroll.bind(this), {passive: true});
+      this.el.addEventListener('scrollend', this.onScroll.bind(this), {passive: true});
+      this.el.addEventListener('scrollended', this.onScroll.bind(this), {passive: true});
+    }
 
     Gameloop.events.on('render', this.render.bind(this));
     Gameloop.events.on('update', this.updateMove.bind(this));
@@ -93,15 +101,21 @@ export class Autoscroll {
     this.el.removeEventListener('focusin', this.onMouseIn.bind(this));
     this.el.removeEventListener('touchstart', this.onMouseIn.bind(this));
 
-    this.el.removeEventListener('mouseout', this.onMouseOut.bind(this));
     this.el.removeEventListener('mouseleave', this.onMouseOut.bind(this));
     this.el.removeEventListener('focusout', this.onMouseOut.bind(this));
 
     this.el.removeEventListener('mouseup', this.onMouseUp.bind(this));
     this.el.removeEventListener('touchend', this.onMouseUp.bind(this));
-    this.el.removeEventListener('scroll', this.onMouseUp.bind(this));
-    this.el.removeEventListener('scrollend', this.onMouseUp.bind(this));
-    this.el.removeEventListener('scrollended', this.onMouseUp.bind(this));
+
+    if (this.touchCapable) {
+      this.el.removeEventListener('scroll', this.onMouseUp.bind(this));
+      this.el.removeEventListener('scrollend', this.onMouseUp.bind(this));
+      this.el.removeEventListener('scrollended', this.onMouseUp.bind(this));
+    } else {
+      this.el.removeEventListener('scroll', this.onScroll.bind(this));
+      this.el.removeEventListener('scrollend', this.onScroll.bind(this));
+      this.el.removeEventListener('scrollended', this.onScroll.bind(this));
+    }
 
     Gameloop.events.off('render', this.render.bind(this));
     Gameloop.events.off('update', this.updateMove.bind(this));
@@ -109,7 +123,7 @@ export class Autoscroll {
 
   protected onMouseIn() {
     if (this.pauseOnHover) {
-      this.pause = true;
+      this.pause();
     }
   }
 
@@ -123,23 +137,38 @@ export class Autoscroll {
 
   protected onResize() {
     this.limit = this.getLimit(this.el);
-    this.pause = false;
+    this.resume(200);
   }
 
-  /** Resume if this method was not called up for [delay] milliseconds */
-  protected resume(delay = 1000) {
-    if (!this.pause) {
-      return;
-    }
+  protected onScroll() {
+    this.stopResumeTimeout();
+  }
 
+  protected stopResumeTimeout() {
     if (this.resumeTimer !== null) {
       clearTimeout(this.resumeTimer);
       this.resumeTimer = null;
     }
+  }
+
+  public pause() {
+    this.el.style.scrollBehavior = '';
+    this._pause = true;
+  }
+
+  /** Resume if this method was not called up for [delay] milliseconds */
+  protected resume(delay = 1000) {
+    if (!this._pause) {
+      return;
+    }
+
+    this.stopResumeTimeout();
 
     this.resumeTimer = window.setTimeout(() => {
       this.setPosition();
-      this.pause = false;
+      this._pause = false;
+      // Disable smooth scrolling on autoscroll if set
+      this.el.style.scrollBehavior = 'auto';
     }, delay);
   }
 
@@ -169,7 +198,7 @@ export class Autoscroll {
    * Without this the scrollbar scrolls smooth, need to find out why.
    */
   protected render() {
-    if (this.pause) {
+    if (this._pause) {
       return;
     }
 
@@ -177,7 +206,7 @@ export class Autoscroll {
   }
 
   protected updateMove(delta: number) {
-    if (this.pause) {
+    if (this._pause) {
       return;
     }
 

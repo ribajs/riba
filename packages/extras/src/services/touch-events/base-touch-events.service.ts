@@ -1,5 +1,5 @@
 export abstract class BaseTouchEventsService {
-  protected touchCapable: boolean;
+  protected touchCapable = ('ontouchstart' in window);
   /** The element to trigger the events on */
   protected el: HTMLElement;
   public get isTouchCapable() {
@@ -7,7 +7,6 @@ export abstract class BaseTouchEventsService {
   }
   constructor(el: HTMLElement) {
     this.el = el;
-    this.touchCapable = ('ontouchstart' in window);
   }
 
   protected triggerCustomEvent(eventName: string, originalEvent: Event, extraParameters: any = {}) {
