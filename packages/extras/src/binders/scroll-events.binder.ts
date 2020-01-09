@@ -1,7 +1,7 @@
 import { Binder } from '@ribajs/core';
 import { ScrollEventsService } from '../services/touch-events/scroll-events.service';
 
-export const touchEventsBinder: Binder<string> = {
+export const scrollEventsBinder: Binder<string> = {
   name: 'scroll-events',
   bind(el) {
     if (!this.customData) {
