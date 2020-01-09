@@ -215,8 +215,7 @@ const bumpVersion = (modulePath) => {
 const createGithubRelease = () => {
   const releaseTitle = 'v' + GENERAL.version;
   const tagName = releaseTitle;
-  const filename = releaseTitle + '.zip';
-  const githubCommand = `hub release create -a ${filename} -m '${releaseTitle}' ${tagName}`;
+  const githubCommand = `hub release create -m '${releaseTitle}' ${tagName}`;
   console.log(githubCommand);
   exec(githubCommand, {cwd: getRootPath(), stdio: 'inherit'});
 }
