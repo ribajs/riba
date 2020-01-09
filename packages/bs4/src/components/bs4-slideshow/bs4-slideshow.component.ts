@@ -16,6 +16,10 @@ const SLIDES_SELECTOR = `${SLIDESHOW_INNER_SELECTOR} > .slide`;
 
 export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
+export type ControlsPosition = 'insite-middle' | 'insite-bottom' | 'insite-top' | 'outsite-middle' | 'outsite-bottom' | 'outsite-top';
+
+export type IndicatorsPosition = 'insite-bottom' | 'insite-top' | 'insite-right' | 'insite-left' | 'outsite-bottom' | 'outsite-top' | 'outsite-right' | 'outsite-left';
+
 export interface Position extends DOMRect {
   centerX: number;
   centerY: number;
@@ -37,10 +41,20 @@ export interface ResponsiveOptions extends Partial<Options> {
 }
 
 export interface Options {
-  /** number of slides to be scrolled by clicking on the controls */
-  slidesToScroll: number;
  /** Show controls */
   controls: boolean;
+  /** Position of the controls */
+  controlsPosition: ControlsPosition;
+  /** Show indicators */
+  indicators: boolean;
+  /** Position of the indicators */
+  indicatorsPosition: IndicatorsPosition;
+  /** Pauses autoscolling on hover or focus */
+  pauseOnHover: boolean;
+  /** number of slides to be scrolled by clicking on the controls */
+  slidesToScroll: number;
+  /** Autoscroll to the nearest slide after manual scroll or dragscroll */
+  sticky: boolean;
   /** Slides are dragable on desktop browsers */
   draggable: boolean;
   /** Enables autoplay continuously or with interval */
@@ -59,12 +73,6 @@ export interface Options {
   indicatorActiveIconSrc: string;
   /** Slide angle, can be vertical or horizontal */
   angle: 'vertical' | 'horizontal';
-  /** Pauses autoscolling on hover or focus */
-  pauseOnHover: boolean;
-  /** Autoscroll to the nearest slide after manual scroll or dragscroll */
-  sticky: boolean;
-  /** Show indicators */
-  indicators: boolean;
   /** Pause on autoplay (with interval) */
   pause: boolean;
 
@@ -80,6 +88,8 @@ export interface Scope extends Options {
   next: Bs4SlideshowComponent['next'];
   prev: Bs4SlideshowComponent['prev'];
   goTo: Bs4SlideshowComponent['goTo'];
+  controlsPositionClass: string;
+  indicatorsPositionClass: string;
   items: Slide[];
 }
 
@@ -125,6 +135,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       'slides-to-show',
       'slides-to-scroll',
       'controls',
+      'controls-position',
       'draggable',
       'autoplay',
       'autoplay-interval',
@@ -138,12 +149,14 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       'pause-on-hover',
       'sticky',
       'indicators',
+      'indicators-position',
       'pause',
 
       'sm-min-width',
       'sm-slides-to-show',
       'sm-slides-to-scroll',
       'sm-controls',
+      'sm-controls-position',
       'sm-draggable',
       'sm-autoplay',
       'sm-autoplay-interval',
@@ -157,12 +170,14 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       'sm-pause-on-hover',
       'sm-sticky',
       'sm-indicators',
+      'sm-indicators-position',
       'sm-pause',
 
       'md-min-width',
       'md-slides-to-show',
       'md-slides-to-scroll',
       'md-controls',
+      'md-controls-position',
       'md-draggable',
       'md-autoplay',
       'md-autoplay-interval',
@@ -176,12 +191,14 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       'md-pause-on-hover',
       'md-sticky',
       'md-indicators',
+      'sm-indicators-position',
       'md-pause',
 
       'lg-min-width',
       'lg-slides-to-show',
       'lg-slides-to-scroll',
       'lg-controls',
+      'lg-controls-position',
       'lg-draggable',
       'lg-autoplay',
       'lg-autoplay-interval',
@@ -195,12 +212,14 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       'lg-pause-on-hover',
       'lg-sticky',
       'lg-indicators',
+      'lg-indicators-position',
       'lg-pause',
 
       'xl-min-width',
       'xl-slides-to-show',
       'xl-slides-to-scroll',
       'xl-controls',
+      'xl-controls-position',
       'xl-draggable',
       'xl-autoplay',
       'xl-autoplay-interval',
@@ -214,6 +233,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       'xl-pause-on-hover',
       'xl-sticky',
       'xl-indicators',
+      'xl-indicators-position',
       'xl-pause',
     ];
   }
@@ -286,6 +306,12 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     // Options
     slidesToScroll: 1,
     controls: true,
+    controlsPosition: 'insite-middle',
+    pauseOnHover: true,
+    sticky: false,
+    indicators: true,
+    indicatorsPosition: 'insite-bottom',
+    pause: false,
     draggable: true,
     autoplay: false,
     autoplayInterval: 0,
@@ -295,10 +321,6 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     indicatorActiveIconSrc: '',
     indicatorInactiveIconSrc: '',
     angle: 'horizontal',
-    pauseOnHover: true,
-    sticky: false,
-    indicators: true,
-    pause: false,
 
     // Responsive options
     xs: {
@@ -316,6 +338,10 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     xl: {
       minWidth: 1200,
     },
+
+    // Classes
+    controlsPositionClass: '',
+    indicatorsPositionClass: '',
   };
 
   constructor(element?: HTMLElement) {
@@ -383,6 +409,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   protected setOptions(dest: ResponsiveOptions | Options, source: ResponsiveOptions | Options) {
     dest.slidesToScroll = typeof(source.slidesToScroll) !== 'undefined' ? Utils.clone(false, source.slidesToScroll) : dest.slidesToScroll;
     dest.controls = typeof(source.controls) !== 'undefined' ? Utils.clone(false, source.controls) : dest.controls;
+    dest.controlsPosition = typeof(source.controlsPosition) !== 'undefined' ? Utils.clone(false, source.controlsPosition) : dest.controlsPosition;
     dest.draggable = typeof(source.draggable) !== 'undefined' ? Utils.clone(false, source.draggable) : dest.draggable;
     dest.autoplay = typeof(source.autoplay) !== 'undefined' ? Utils.clone(false, source.autoplay) : dest.autoplay;
     dest.autoplayInterval = typeof(source.autoplayInterval) !== 'undefined' ? Utils.clone(false, source.autoplayInterval) : dest.autoplayInterval;
@@ -395,12 +422,14 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     dest.pauseOnHover = typeof(source.pauseOnHover) !== 'undefined' ? Utils.clone(false, source.pauseOnHover) : dest.pauseOnHover;
     dest.sticky = typeof(source.sticky) !== 'undefined' ? Utils.clone(false, source.sticky) : dest.sticky;
     dest.indicators = typeof(source.indicators) !== 'undefined' ? Utils.clone(false, source.indicators) : dest.indicators;
+    dest.indicatorsPosition = typeof(source.indicatorsPosition) !== 'undefined' ? Utils.clone(false, source.indicatorsPosition) : dest.indicatorsPosition;
     dest.pause = typeof(source.pause) !== 'undefined' ? Utils.clone(false, source.pause) : dest.pause;
   }
 
   protected setOptionsIfUndefined(dest: ResponsiveOptions | Options, source: ResponsiveOptions | Options) {
     dest.slidesToScroll = typeof(dest.slidesToScroll) === 'undefined' ? source.slidesToScroll : dest.slidesToScroll;
     dest.controls = typeof(dest.controls) === 'undefined' ? source.controls : dest.controls;
+    dest.controlsPosition = typeof(dest.controlsPosition) === 'undefined' ? source.controlsPosition : dest.controlsPosition;
     dest.draggable = typeof(dest.draggable) === 'undefined' ? source.draggable : dest.draggable;
     dest.autoplay = typeof(dest.autoplay) === 'undefined' ? source.autoplay : dest.autoplay;
     dest.autoplayInterval = typeof(dest.autoplayInterval) === 'undefined' ? source.autoplayInterval : dest.autoplayInterval;
@@ -413,6 +442,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     dest.pauseOnHover = typeof(dest.pauseOnHover) === 'undefined' ? source.pauseOnHover : dest.pauseOnHover;
     dest.sticky = typeof(dest.sticky) === 'undefined' ? source.sticky : dest.sticky;
     dest.indicators = typeof(dest.indicators) === 'undefined' ? source.indicators : dest.indicators;
+    dest.indicatorsPosition = typeof(dest.indicatorsPosition) === 'undefined' ? source.indicatorsPosition : dest.indicatorsPosition;
     dest.pause = typeof(dest.pause) === 'undefined' ? source.pause : dest.pause;
   }
 
@@ -424,6 +454,28 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     this.setOptionsIfUndefined(this.scope.xl, this.scope.lg);
     this.breakpoint = this.getBreakpoint();
     this.setOptionsByBreakpoint(this.breakpoint);
+  }
+
+  protected setControlsOptions() {
+
+    const xsControlsPosition = this.scope.xs.controlsPosition?.split('-') as ControlsPosition[];
+    const smControlsPosition = this.scope.sm.controlsPosition?.split('-') as ControlsPosition[];
+    const mdControlsPosition = this.scope.md.controlsPosition?.split('-') as ControlsPosition[];
+    const lgControlsPosition = this.scope.lg.controlsPosition?.split('-') as ControlsPosition[];
+    const xlControlsPosition = this.scope.xl.controlsPosition?.split('-') as ControlsPosition[];
+
+    this.scope.controlsPositionClass = `control-${xsControlsPosition[0]} control-${xsControlsPosition[1]} control-sm-${smControlsPosition[0]} control-sm-${smControlsPosition[1]} control-md-${mdControlsPosition[0]} control-md-${mdControlsPosition[1]} control-lg-${lgControlsPosition[0]} control-lg-${lgControlsPosition[1]} control-xl-${xlControlsPosition[0]} control-xl-${xlControlsPosition[1]}`;
+  }
+
+  protected setIndicatorsOptions() {
+
+    const xsIndicatorsPosition = this.scope.xs.indicatorsPosition?.split('-') as IndicatorsPosition[];
+    const smIndicatorsPosition = this.scope.sm.indicatorsPosition?.split('-') as IndicatorsPosition[];
+    const mdIndicatorsPosition = this.scope.md.indicatorsPosition?.split('-') as IndicatorsPosition[];
+    const lgIndicatorsPosition = this.scope.lg.indicatorsPosition?.split('-') as IndicatorsPosition[];
+    const xlIndicatorsPosition = this.scope.xl.indicatorsPosition?.split('-') as IndicatorsPosition[];
+
+    this.scope.indicatorsPositionClass = `indicators-${xsIndicatorsPosition[0]} indicators-${xsIndicatorsPosition[1]} indicators-sm-${smIndicatorsPosition[0]} indicators-sm-${smIndicatorsPosition[1]} indicators-md-${mdIndicatorsPosition[0]} indicators-md-${mdIndicatorsPosition[1]} indicators-lg-${lgIndicatorsPosition[0]} indicators-lg-${lgIndicatorsPosition[1]} indicators-xl-${xlIndicatorsPosition[0]} indicators-xl-${xlIndicatorsPosition[1]}`;
   }
 
   // TODO create independent bs4 breakpoint service
@@ -461,6 +513,8 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     } else {
       this.disableDesktopDragscroll();
     }
+    this.setControlsOptions();
+    this.setIndicatorsOptions();
   }
 
   protected onBreakpointChanges() {
@@ -472,6 +526,11 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     if (newBreakpoint !== this.breakpoint) {
       this.breakpoint = newBreakpoint;
       this.onBreakpointChanges();
+    }
+    this.setSlidePositions();
+    const index = this.setCenteredSlideActive();
+    if (this.scope.sticky) {
+      this.goTo(index);
     }
   }
 
@@ -789,16 +848,17 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     }
   }
 
-  protected setCenteredSlideActive() {
+  protected setCenteredSlideActive(): number {
     const index = this.getMostCenteredSlideIndex();
     this.setAllSlidesUnactive(index);
     if (!this.scope.items[index]) {
-      return;
+      return -1;
     }
     this.scope.items[index].active = true;
     if (this.slideElements && this.slideElements[index].classList.add) {
       this.slideElements[index].classList.add('active');
     }
+    return index;
   }
 
   protected isScrollableToIndex(index: number) {
