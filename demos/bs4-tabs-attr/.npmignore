@@ -1,12 +1,3 @@
-/dist/
-/spec/
-/.jshintrc
-/.npmignore
-/babel.config.js
-/tsconfig.json
-/tslint.json
-/webpack.config.js
-/webpack.dev.config.js
 # Include src and types
 !/src/
 !/src/*

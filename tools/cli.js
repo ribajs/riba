@@ -186,6 +186,10 @@ const PACKAGES = [
   }, 
 ];
 
+const getRootPath = (modulePath) => {
+  return path.join(__dirname, '..');
+};
+
 const getPackagePath = (modulePath) => {
   return path.join(__dirname, '..', modulePath, 'package.json');
 };
@@ -208,6 +212,15 @@ const bumpVersion = (modulePath) => {
   }
 };
 
+const createGithubRelease = () => {
+  const releaseTitle = 'v' + package.version;
+  const tagName = releaseTitle;
+  const filename = releaseTitle + '.zip';
+  const githubCommand = `hub release create -a ${filename} -m '${releaseTitle}' ${tagName}`;
+  console.log(chalk.blue(`Publish module in ${modulePath}..`));
+  // exec(githubCommand, {cwd: getRootPath, stdio: 'inherit'});
+}
+
 const publishPackage = (modulePath) => {
   const packagePath = getPackagePath(modulePath);
   const package = require(packagePath);
@@ -216,7 +229,9 @@ const publishPackage = (modulePath) => {
     return console.log(chalk.yellow(`\nSkipped because the current version has already been published`));
   }
   console.log(chalk.blue(`Publish module in ${modulePath}..`));
-  exec('npm publish --access public', {cwd: path.dirname(packagePath), stdio: 'inherit'});
+  const command = 'npm publish --access public';
+  exec(command, {cwd: path.dirname(packagePath), stdio: 'inherit'});
+
 };
 
 const getPublishPackageVersion = (modulePath, moduleNpmName) => {
@@ -399,6 +414,11 @@ const processModules = (bump, publish, upgrade, install, link, linkDependencies,
   // Special case: Reinstall dependencies on core module after all packages are linked
   if (link) {
     processPackage('packages/core/', false, false, false, true, false, false, false, false, false, false);
+  }
+
+  // Create a new github release
+  if (publish) {
+    createGithubRelease();
   }
 };
 

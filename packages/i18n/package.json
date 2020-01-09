@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/i18n",
   "description": "Internationalization module for Riba.js",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "url": "https://github.com/ribajs/riba/tree/master/packages/i18n",
   "homepage": "https://github.com/ribajs/riba#readme",
@@ -43,7 +43,7 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "@ribajs/core": "^1.7.0"
+    "@ribajs/core": "^1.8.0"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

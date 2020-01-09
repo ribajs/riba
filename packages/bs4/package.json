@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/bs4",
   "description": "Bootstrap 4 module for Riba.js",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [],
   "url": "https://github.com/ribajs/riba/tree/master/packages/bs4",
@@ -67,8 +67,8 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "@ribajs/core": "^1.7.0",
-    "@ribajs/extras": "^1.7.0",
+    "@ribajs/core": "^1.8.0",
+    "@ribajs/extras": "^1.8.0",
     "bootstrap": "^4.4.1",
     "popper.js": "^1.16.0"
   },

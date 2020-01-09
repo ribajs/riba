@@ -1,6 +1,36 @@
 # Changelog
 
-## Dev
+## 1.8.0
+
+- Upgrade dependencies
+- Moved from corejs@2 to corejs@3
+- Moved from tslint to eslint
+- New demos
+
+### Core
+
+- New data-passive attribute for on-event binder
+
+### Extras
+
+- New scroll-events service and binder
+- New touch-events service and binder
+- New autoscroll service
+- New gameloop service
+- New dragscroll service (scrollbar-draggable)
+- New data-scroll-position-y binder
+
+### BS4
+
+- New bs4-slideshow component
+- bs4-tabs component improvments
+  - now, triggers a `visibility-changed` event on the first tab content element to react in components when they become visible
+  - Support for vertical tabs
+- New bs4-accordion component
+- New bs4-button component
+- Improved bs4-icon component
+- Improved bs4-sidebar component
+- Additional styles and existing style improvments
 
 ### Router
 
