@@ -401,20 +401,20 @@ const processPackage = (modulePath, bump = false, publish = false, upgrade = fal
  */
 const processModules = (bump, publish, upgrade, install, link, linkDependencies, build, reinstall, configureModules, configureDemos) => {
 
-  // PACKAGES.forEach((package) => {
-  //   processPackage(package.path, bump, package.available && publish, upgrade, install, package.npm && link, linkDependencies, build, reinstall, package.isRibaModule && package.configure && configureModules, package.isDemo && package.configure && configureDemos);
-  // });
+  PACKAGES.forEach((package) => {
+    processPackage(package.path, bump, package.available && publish, upgrade, install, package.npm && link, linkDependencies, build, reinstall, package.isRibaModule && package.configure && configureModules, package.isDemo && package.configure && configureDemos);
+  });
 
-  // // Schematics applications
-  // processPackage('packages/schematics/src/lib/application/files/ts/', false, false, upgrade, false, false, false, false, false, false, false);
+  // Schematics applications
+  processPackage('packages/schematics/src/lib/application/files/ts/', false, false, upgrade, false, false, false, false, false, false, false);
 
-  // // root (do not bump this version because it is used as the main version for all other packages)
-  // processPackage('', false, false, upgrade, install, false, false, false, reinstall, false, false);
+  // root (do not bump this version because it is used as the main version for all other packages)
+  processPackage('', false, false, upgrade, install, false, false, false, reinstall, false, false);
 
-  // // Special case: Reinstall dependencies on core module after all packages are linked
-  // if (link) {
-  //   processPackage('packages/core/', false, false, false, true, false, false, false, false, false, false);
-  // }
+  // Special case: Reinstall dependencies on core module after all packages are linked
+  if (link) {
+    processPackage('packages/core/', false, false, false, true, false, false, false, false, false, false);
+  }
 
   // Create a new github release
   if (publish) {
