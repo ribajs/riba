@@ -217,7 +217,7 @@ const createGithubRelease = () => {
   const tagName = releaseTitle;
   const filename = releaseTitle + '.zip';
   const githubCommand = `hub release create -a ${filename} -m '${releaseTitle}' ${tagName}`;
-  console.log(githubCommand));
+  console.log(githubCommand);
   exec(githubCommand, {cwd: getRootPath, stdio: 'inherit'});
 }
 
