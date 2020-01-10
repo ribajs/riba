@@ -21,14 +21,11 @@ bs4-slideshow {
     width: 50px;
     padding: 0;
     opacity: 1;
-    &:hover, &:focus {
-      opacity: 1;
-      color: $link-color;
-    }
 
     &.slideshow-control-prev, &.slideshow-control-next {
       color: inherit;
-      &:hover {
+      &:hover, &:focus {
+        opacity: 1;
         color: inherit;
       }
     }

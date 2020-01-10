@@ -7,8 +7,15 @@
  * @info See snippets/product-grid-item and for example usage
  */
 
-// ASPECT RATIO size for background images
-.background-box {
+/**
+ * ASPECT RATIO size for background images
+ * To migrate to the new classnames which are more based on those of bootstrap replace the following name styles:
+ *
+ * - ".background-box" with ".embed-responsive-bg"
+ * - ".ratio-md-4-3" with ".embed-responsive-bg-md-4by3"
+ *
+ */
+.embed-responsive-bg {
   width: 100%;
   display: block;
   background-repeat: no-repeat;
@@ -33,161 +40,73 @@
   &.position-center-bottom {
     background-position: center bottom;
   }
+  &.position-center-top {
+    background-position: center top ;
+  }
+  &.position-bottom-center {
+    background-position: bottom center;
+  }
+  &.position-top-center {
+    background-position: top center;
+  }
+}
 
-  @each $breakpoint in map-keys($grid-breakpoints) {
-    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+@each $breakpoint in map-keys($grid-breakpoints) {
+  $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+  @each $embed-responsive-aspect-ratio in $embed-responsive-aspect-ratios {
+    $embed-responsive-aspect-ratio-x: nth($embed-responsive-aspect-ratio, 1);
+    $embed-responsive-aspect-ratio-y: nth($embed-responsive-aspect-ratio, 2);
     @include media-breakpoint-up($breakpoint) {
-
-      &.ratio#{$infix}-1-1 {
-        padding-top: 100%; // Default 1-1 ASPECT RATIO
-      }
-      &.ratio#{$infix}-3-2 {
-        padding-top: 66.67%;
-      }
-      &.ratio#{$infix}-2-3 {
-        padding-top: 150%;
-      }
-      &.ratio#{$infix}-2-1 {
-        padding-top: 50%;
-      }
-      &.ratio#{$infix}-1-2 {
-        padding-top: 200%;
-      }
-      &.ratio#{$infix}-4-3 {
-        padding-top: 75%;
-      }
-      &.ratio#{$infix}-3-4 {
-        padding-top: 133.33%;
-      }
-      &.ratio#{$infix}-16-9 {
-        padding-top: 56.25%;
-      }
-      &.ratio#{$infix}-9-16 {
-        padding-top: 177.78%;
-      }
-      &.ratio#{$infix}-10-3 {
-        padding-top: 333%;
-      }
-      &.ratio#{$infix}-3-10 {
-        padding-top: 30%;
-      }
-      &.ratio#{$infix}-17-10 {
-        padding-top: 59%;
-      }
-      &.ratio#{$infix}-10-17 {
-        padding-top: 170%;
-      }
-      &.ratio#{$infix}-14-9 {
-        padding-top: 64%;
-      }
-      &.ratio#{$infix}-9-14 {
-        padding-top: 155.56%;
+      &.embed-responsive-bg#{$infix}-#{$embed-responsive-aspect-ratio-x}by#{$embed-responsive-aspect-ratio-y} {
+        padding-top: percentage($embed-responsive-aspect-ratio-y / $embed-responsive-aspect-ratio-x);
       }
     }
   }
 }
 
-
-// ASPECT RATIO size for contens and images
-.content-box {
-  display: block;
-  position: relative;
-  width: 100%;   /* desired width */
-  overflow: hidden;
-  &:before {
-    content: "";
-    display: block;
-    padding-top: 100%;  /* initial ratio of 1:1*/
-  }
-  // And here is the trick
-  .content {
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-
+/**
+ * ASPECT RATIO size for objects like iframes, videos, img, etc
+ * To migrate to the new classnames which are more based on those of bootstrap replace the following name styles:
+ *
+ * - `.content-box` with `.embed-responsive`,
+ * - `.content` with `.embed-responsive-item` and
+ * - `.ratio-md-4-3` with `.embed-responsive-md-4by3`
+ *
+ * see https://getbootstrap.com/docs/4.4/utilities/embed/#about
+ */
+.embed-responsive {
+  .embed-responsive-item {
     // default fit is cover
     object-fit: cover;
-
-    // default aspect ratio 1:1
-    &:before {
-      padding-top: 100%;
+    // Fix for vimeo videos in safari
+    &iframe {
+      object-fit: initial !important;
     }
-  }
 
-  // Fix for vimeo videos in safari
-  iframe.content {
-    object-fit: initial !important;
-  }
-
-  &.fit-cover {
-    .content {
+    &.fit-cover {
       object-fit: cover !important;
     }
-  }
-  &.fit-contain {
-    .content {
+
+    &.fit-contain {
       object-fit: contain !important;
     }
-  }
-
-  &.fit-initial {
-    .content {
+  
+    &.fit-initial {
       object-fit: initial !important;
     }
   }
-  
-  @each $breakpoint in map-keys($grid-breakpoints) {
-    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+  @each $embed-responsive-aspect-ratio in $embed-responsive-aspect-ratios {
+    $embed-responsive-aspect-ratio-x: nth($embed-responsive-aspect-ratio, 1);
+    $embed-responsive-aspect-ratio-y: nth($embed-responsive-aspect-ratio, 2);
     @include media-breakpoint-up($breakpoint) {
-      &.ratio#{$infix}-1-1:before {
-        padding-top: 100%;
-      }
-      &.ratio#{$infix}-3-2:before {
-        padding-top: 66.67%;
-      }
-      &.ratio#{$infix}-2-3:before {
-        padding-top: 150%;
-      }
-      &.ratio#{$infix}-2-1:before {
-        padding-top: 50%;
-      }
-      &.ratio#{$infix}-1-2:before {
-        padding-top: 200%;
-      }
-      &.ratio#{$infix}-4-3:before {
-        padding-top: 75%;
-      }
-      &.ratio#{$infix}-3-4:before {
-        padding-top: 133.33%;
-      }
-      &.ratio#{$infix}-16-9:before {
-        padding-top: 56.25%;
-      }
-      &.ratio#{$infix}-9-16:before {
-        padding-top: 177.78%;
-      }
-      &.ratio#{$infix}-10-3:before {
-        padding-top: 333%;
-      }
-      &.ratio#{$infix}-3-10:before {
-        padding-top: 30%;
-      }
-      &.ratio#{$infix}-17-10:before {
-        padding-top: 59%;
-      }
-      &.ratio#{$infix}-10-17:before {
-        padding-top: 170%;
-      }
-      &.ratio#{$infix}-14-9:before {
-        padding-top: 64%;
-      }
-      &.ratio#{$infix}-9-14:before {
-        padding-top: 155.56%;
+      .embed-responsive#{$infix}-#{$embed-responsive-aspect-ratio-x}by#{$embed-responsive-aspect-ratio-y} {
+        &::before {
+          padding-top: percentage($embed-responsive-aspect-ratio-y / $embed-responsive-aspect-ratio-x);
+        }
       }
     }
   }
