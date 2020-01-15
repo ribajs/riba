@@ -1,0 +1,26 @@
+<form class="">
+  <div class="form-group" rv-each-form="forms">
+
+    <div class="row" rv-if="form.fieldType | eq 'Tx'" rv-index="%form%">
+      <label rv-for="form.id" class="col-sm-2 col-md-4 col-form-label">{ form.fieldName }</label>
+      <div class="col-sm-10 col-md-8">
+        <input rv-if="form.parsedFieldType | eq 'text'" class="form-control form-control-lg" rv-name="form.fieldName" rv-id="form.id" rv-placeholder="form.alternativeText" rv-value="form.parsedFieldValue" rv-readonly="form.readOnly"></input>
+        <textarea rv-if="form.parsedFieldType | eq 'textarea'" class="form-control form-control-lg" rv-name="form.fieldName" rv-id="form.id" rv-placeholder="form.alternativeText" rv-value="form.parsedFieldValue" rv-readonly="form.readOnly" rows="6"></textarea>
+      </div>
+    </div>
+
+    <div class="row" rv-if="form.parsedFieldType | eq 'checkBox'" rv-index="%form%">
+
+        <div class="col-sm-2 col-md-4">&nbsp;</div>
+        <div class="col-sm-10 col-md-8" >
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" rv-name="form.fieldName" rv-id="form.id" rv-checked="form.parsedFieldValue" rv-readonly="form.readOnly">
+            <label rv-for="form.id" class="custom-control-label">{ form.fieldName } {form.alternativeText}</label>
+          </div>
+        </div>
+
+    </div>
+
+    
+  </div>
+</form>
