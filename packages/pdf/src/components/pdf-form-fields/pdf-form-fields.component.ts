@@ -3,7 +3,7 @@ import {
 } from '@ribajs/core';
 
 import {
-  FormFields,
+  FormGroup,
 } from '../../types';
 
 
@@ -14,7 +14,7 @@ import template from './pdf-form-fields.component.html';
 interface Scope {
   src: string;
   workerSrc: string;
-  forms: FormFields[];
+  forms: FormGroup[];
 }
 
 export class PdfFormFieldsComponent extends Component {
