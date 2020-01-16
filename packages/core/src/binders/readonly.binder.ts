@@ -8,14 +8,9 @@ export const readonlyBinder: Binder<boolean> = {
 
   bind(el) {
     this.customData = {};
-    this.customData.onChange = () => {
-      this.publish();
-    };
-    el.addEventListener('change', this.customData.onChange, false);
   },
 
   unbind(el) {
-    el.removeEventListener('change', this.customData.onChange, false);
   },
 
   routine(el: HTMLElement, readOnly: boolean) {
