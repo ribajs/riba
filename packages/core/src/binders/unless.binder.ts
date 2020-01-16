@@ -16,9 +16,7 @@ export const unlessBinder: Binder<boolean> = {
   unbind: ifBinder.unbind,
 
   routine(el: HTMLElement, value: boolean) {
-    if (ifBinder.routine) {
-        return ifBinder.routine.call(this, el, !value);
-    }
+    return ifBinder.routine.call(this, el, !value);
   },
 
   update: ifBinder.update,
