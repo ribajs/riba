@@ -18,18 +18,18 @@
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "license": "MIT",
   "dependencies": {
-    "@angular-devkit/core": "^8.3.21",
-    "@angular-devkit/schematics": "^8.3.21",
-    "@angular-devkit/schematics-cli": "^0.803.21",
+    "@angular-devkit/core": "^9.0.3",
+    "@angular-devkit/schematics": "^9.0.3",
+    "@angular-devkit/schematics-cli": "^0.900.3",
     "@ribajs/core": "^1.8.0",
     "@ribajs/schematics": "^1.8.0",
     "@types/node-emoji": "^1.8.1",
     "chalk": "^3.0.0",
     "cli-table3": "^0.5.1",
-    "commander": "^4.1.0",
+    "commander": "^4.1.1",
     "dashify": "^2.0.0",
     "debug": "^4.1.1",
-    "inquirer": "^7.0.3",
+    "inquirer": "^7.0.4",
     "node-emoji": "^1.10.0",
     "ora": "^4.0.3",
     "os-name": "^3.1.0",
@@ -37,17 +37,17 @@
     "source-map-support": "^0.5.16"
   },
   "devDependencies": {
-    "@babel/runtime-corejs3": "^7.7.7",
+    "@babel/runtime-corejs3": "^7.8.4",
     "@types/dashify": "^1.0.0",
     "@types/debug": "^4.1.5",
     "@types/inquirer": "^6.5.0",
-    "@types/node": "^13.1.4",
+    "@types/node": "^13.7.4",
     "@types/ora": "^3.2.0",
     "@types/os-name": "^3.1.0",
-    "@typescript-eslint/eslint-plugin": "^2.15.0",
-    "@typescript-eslint/parser": "^2.15.0",
-    "core-js": "^3.6.2",
+    "@typescript-eslint/eslint-plugin": "^2.20.0",
+    "@typescript-eslint/parser": "^2.20.0",
+    "core-js": "^3.6.4",
     "eslint": "^6.8.0",
-    "typescript": "^3.7.4"
+    "typescript": "^3.8.2"
   }
 }
