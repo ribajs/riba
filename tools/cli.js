@@ -90,6 +90,14 @@ const PACKAGES = [
     isDemo: false,
     configure: true,
   },
+  {
+    path: 'packages/pdf/',
+    npm: '@ribajs/pdf',
+    available: true,
+    isRibaModule: true,
+    isDemo: false,
+    configure: true,
+  },
 
   // WIP Riba modules, not ready to publish
   {

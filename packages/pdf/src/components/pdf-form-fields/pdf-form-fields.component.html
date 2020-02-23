@@ -1,0 +1,94 @@
+<form class="">
+  <div class="form-group" rv-show="forms | size | gt 0" rv-each-group="forms" rv-index="%group%">
+    <h3 rv-text="group.name"></h3>
+
+    <div class="mb-2" rv-each-form="group.group">
+
+      <!-- Text -->
+      <div class="row" rv-if="form.fieldType | eq 'Tx'">
+        <label rv-for="form.customId" class="col-sm-2 col-md-4 col-form-label" rv-text="form.parsedFieldName"></label>
+        <div class="col-sm-10 col-md-8">
+          <p class="alternativeText" rv-text="form.alternativeText"></p>
+          <input rv-if="form.parsedFieldType | eq 'text'" class="form-control form-control-lg" rv-name="form.parsedFieldName" rv-id="form.customId"  rv-value="form.parsedFieldValue" rv-readonly="form.readOnly" rv-maxlength="form.maxLen"></input>
+          <textarea rv-if="form.parsedFieldType | eq 'textarea'" class="form-control form-control-lg" rv-name="form.parsedFieldName" rv-id="form.customId" rv-value="form.parsedFieldValue" rv-readonly="form.readOnly" rv-maxlength="form.maxLen" rows="6"></textarea>
+        </div>
+      </div>
+
+      <!-- checkBox -->
+      <div class="row" rv-if="form.parsedFieldType | eq 'checkBox'">
+        <div class="col-sm-2 col-md-4">
+          <label class="m-0" rv-if="form.customFieldDesc" rv-text="form.parsedFieldName"></label>
+        </div>
+        <div class="col-sm-10 col-md-8" >
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" rv-name="form.parsedFieldName" rv-id="form.customId" rv-checked="form.parsedFieldValue" rv-readonly="form.readOnly">
+            <label rv-for="form.customId" class="custom-control-label" rv-unless="form.customFieldDesc" rv-text="form.parsedFieldName"></label>
+            <label rv-for="form.customId" class="custom-control-label" rv-if="form.customFieldDesc" rv-text="form.customFieldDesc"></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- radioButton -->
+      <div class="row" rv-if="form.parsedFieldType | eq 'radioButton'">
+        <div class="col-sm-2 col-md-4">
+          <!-- TODO Group -->
+          <label class="m-0" rv-if="form.customFieldDesc" rv-text="form.parsedFieldName"></label>
+        </div>
+        <div class="col-sm-10 col-md-8" >
+          <div class="form-check custom-control custom-radio">
+            <input type="radio" class="custom-control-input" rv-name="form.parsedFieldName" rv-id="form.customId" rv-checked="form.parsedFieldValue" rv-readonly="form.readOnly">
+            <label rv-for="form.customId" class="custom-control-label" rv-unless="form.customFieldDesc" rv-text="form.parsedFieldName"></label>
+            <label rv-for="form.customId" class="custom-control-label" rv-if="form.customFieldDesc" rv-text="form.customFieldDesc"></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- checkBoxGroup -->
+      <div class="row" rv-if="form.parsedFieldType | eq 'checkBoxGroup'">
+        <div class="col-sm-2 col-md-4">
+          <label class="m-0" rv-if="form.customFieldDesc" rv-text="form.parsedFieldName"></label>
+        </div>
+        <div class="col-sm-10 col-md-8" >
+          <div class="custom-control custom-checkbox" rv-each-checkbox="form.group">
+            <input type="checkbox" class="custom-control-input" rv-name="checkbox.fieldName" rv-id="checkbox.id" rv-checked="checkbox.fieldValue" rv-readonly="form.readOnly">
+            <label rv-for="checkbox.id" class="custom-control-label" rv-unless="checkbox.fieldDesc" rv-text="form.parsedFieldName"></label>
+            <label rv-for="checkbox.id" class="custom-control-label" rv-if="checkbox.fieldDesc" rv-text="checkbox.fieldDesc"></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- radioButtonGroup -->
+      <div class="row" rv-if="form.parsedFieldType | eq 'radioButtonGroup'">
+        <div class="col-sm-2 col-md-4">
+          <label class="m-0" rv-if="form.customFieldDesc" rv-text="form.parsedFieldName"></label>
+        </div>
+        <div class="col-sm-10 col-md-8" >
+          <div class="custom-control custom-radio" rv-each-radio="form.group">
+            <input type="radio" class="custom-control-input" rv-name="radio.fieldName" rv-id="radio.id" rv-checked="radio.fieldValue" rv-readonly="form.readOnly">
+            <label rv-for="radio.id" class="custom-control-label" rv-unless="radio.fieldDesc" rv-text="form.parsedFieldName"></label>
+            <label rv-for="radio.id" class="custom-control-label" rv-if="radio.fieldDesc" rv-text="radio.fieldDesc"></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- select -->
+      <div class="row" rv-if="form.parsedFieldType | eq 'select'">
+        <label rv-for="form.customId" class="col-sm-2 col-md-4 col-form-label" rv-text="form.parsedFieldName"></label>
+        <div class="col-sm-10 col-md-8" >
+          <select class="custom-select custom-select-lg" rv-name="form.parsedFieldName" rv-id="form.customId">
+            <option rv-each-option="form.options" rv-value="option.exportValue" rv-text="option.displayValue"></option>
+          </select>
+        </div>
+      </div>
+
+       <!-- pushButton -->
+      <div class="row" rv-if="form.parsedFieldType | eq 'pushButton'">
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary btn-lg" rv-name="form.parsedFieldName" rv-id="form.customId" rv-text="form.parsedFieldName"></button>
+        </div>
+      </div>
+
+
+    </div>    
+  </div>
+</form>

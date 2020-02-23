@@ -101,14 +101,26 @@ export class Bs4AccordionComponent extends TemplatesComponent {
     element.addEventListener(CollapseService.EVENT.SHOW, this.onShow.bind(this, element, item), { once: true });
   }
 
+  protected getContentChildByIndex() {
+    return this.el.querySelector(`.card-body > *`) || undefined;
+  }
+
   protected onShow(element: HTMLElement, item: AccordionItem) {
     item.show = true;
     item.iconDirection = 'up';
+    const firstContentChild = this.getContentChildByIndex();
+    if (firstContentChild) {
+      this.triggerVisibilityChangedForElement(firstContentChild, item.show);
+    }
   }
 
   protected onHide(element: HTMLElement, item: AccordionItem) {
     item.show = false;
     item.iconDirection = 'down';
+    const firstContentChild = this.getContentChildByIndex();
+    if (firstContentChild) {
+      this.triggerVisibilityChangedForElement(firstContentChild, item.show);
+    }
   }
 
   protected transformTemplateAttributes(attributes: any) {
@@ -117,6 +129,19 @@ export class Bs4AccordionComponent extends TemplatesComponent {
     attributes.iconDirection = attributes.iconDirection || attributes.show ? 'up' : 'down';
 
     return attributes;
+  }
+
+  /**
+   * Trigger `visibility-changed` for components that need to update if visibility changes.
+   * Se also bsf-tabs
+   * @param element 
+   * @param visibile 
+   */
+  protected triggerVisibilityChangedForElement(element: Element, visibile: boolean) {
+    setTimeout(() => {
+      // Use this event to update any custom element when it becomes visibile
+      element.dispatchEvent(new CustomEvent('visibility-changed', {detail: {visibile}}));
+    }, 200);
   }
 
   protected connectedCallback() {
