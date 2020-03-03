@@ -290,7 +290,7 @@ export class Utils {
   }
 
   /**
-   * get hostname an path of address bar
+   * get location object ofpath or address bar
    * @see http://stackoverflow.com/a/736970/1465919
    *
    * @example
@@ -310,9 +310,24 @@ export class Utils {
   }
 
   /**
+   * If the webapps url is https://mysupersite.org and the url is https://mysupersite.org/subpage
+   * this method will return /subpage
+   * If the url is https://anothersite.org/subpage this method will return https://anothersite.org/subpage
+   * @param url 
+   */
+  public static normalizeUrl(url: string): string {
+    const checkLocation = Utils.getLocation(url);
+    const hostname = Utils.getLocation().hostname;
+    if (checkLocation.hostname === hostname) {
+      return checkLocation.pathname;
+    } else {
+      return Utils.getUrl(url)
+    }
+  }
+
+  /**
    * Return the current url
    *
-   * @memberOf Barba.Utils
    * @return {string} currentUrl
    */
   public static getUrl(url?: string): string {
@@ -328,9 +343,13 @@ export class Utils {
    */
   public static onRoute = (checkUrl?: string) => {
     if (checkUrl) {
-      const pathname = Utils.getLocation().pathname;
-      const checkPathname = Utils.getLocation(checkUrl).pathname;
-      return pathname === checkPathname;
+      const location = Utils.getLocation();
+      const pathname = location.pathname;
+      const hostname = location.hostname;
+      const checkLocation = Utils.getLocation(checkUrl);
+      const checkPathname = checkLocation.pathname;
+      const checkHostname = checkLocation.hostname;
+      return hostname === checkHostname && pathname === checkPathname;
     }
     return false;
   }
@@ -340,9 +359,13 @@ export class Utils {
    */
   public static onParentRoute = (checkUrl?: string) => {
     if (checkUrl) {
-      const pathname = Utils.getLocation().pathname;
-      const checkPathname = Utils.getLocation(checkUrl).pathname;
-      return pathname.startsWith(checkPathname);
+      const location = Utils.getLocation();
+      const pathname = location.pathname;
+      const hostname = location.hostname;
+      const checkLocation = Utils.getLocation(checkUrl);
+      const checkPathname = checkLocation.pathname;
+      const checkHostname = checkLocation.hostname;
+      return hostname === checkHostname && pathname.startsWith(checkPathname);
     }
     return false;
   }

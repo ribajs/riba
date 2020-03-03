@@ -77,7 +77,7 @@ export class Bs4NavbarComponent extends Component {
     // Add new event listeners
     this.addCollapseEventListeners();
 
-    if (this.collapse) {
+    if (this.collapse && this.collapse.length > 0) {
       this.collapseService = new CollapseService(this.collapse);
     }
   }
