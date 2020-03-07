@@ -1,4 +1,4 @@
-export { Bs4DropdownComponent } from './bd4-dropdown/bs4-dropdown.component';
+export { Bs4DropdownComponent } from './bs4-dropdown/bs4-dropdown.component';
 export { Bs4AccordionComponent } from './bs4-accordion/bs4-accordion.component';
 export { Bs4ButtonComponent } from './bs4-button/bs4-button.component';
 export { Bs4CarouselComponent } from './bs4-carousel/bs4-carousel.component';
