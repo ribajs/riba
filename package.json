@@ -69,22 +69,5 @@
       "packages/*",
       "demos/*"
     ]
-  },
-  "resolutions": {
-    "@ribajs/bs4": "portal:/home/jumplink/Projekte/riba/packages/bs4",
-    "@ribajs/cli": "portal:/home/jumplink/Projekte/riba/packages/cli",
-    "@ribajs/core": "portal:/home/jumplink/Projekte/riba/packages/core",
-    "@ribajs/doc": "portal:/home/jumplink/Projekte/riba/packages/doc",
-    "@ribajs/extras": "portal:/home/jumplink/Projekte/riba/packages/extras",
-    "@ribajs/i18n": "portal:/home/jumplink/Projekte/riba/packages/i18n",
-    "@ribajs/iconset": "portal:/home/jumplink/Projekte/riba/packages/iconset",
-    "@ribajs/jquery": "portal:/home/jumplink/Projekte/riba/packages/jquery",
-    "@ribajs/moment": "portal:/home/jumplink/Projekte/riba/packages/moment",
-    "@ribajs/pdf": "portal:/home/jumplink/Projekte/riba/packages/pdf",
-    "@ribajs/router": "portal:/home/jumplink/Projekte/riba/packages/router",
-    "@ribajs/schematics": "portal:/home/jumplink/Projekte/riba/packages/schematics",
-    "@ribajs/shopify": "portal:/home/jumplink/Projekte/riba/packages/shopify",
-    "@ribajs/shopify-easdk": "portal:/home/jumplink/Projekte/riba/packages/shopify-easdk",
-    "@ribajs/shopify-tda": "portal:/home/jumplink/Projekte/riba/packages/shopify-tda"
   }
 }
