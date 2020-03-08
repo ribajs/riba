@@ -24,8 +24,8 @@ export interface CustomData {
 export const routeBinder: Binder<string> = {
   name: 'route',
 
-  bind(this: Binding, el: HTMLUnknownElement) {
-    this.customData = <CustomData> {
+  bind(this: Binding) {
+    this.customData = {
       dispatcher: undefined,
       options: {
         removeAfterActivation: false,
@@ -64,7 +64,7 @@ export const routeBinder: Binder<string> = {
       onLinkEnter(this: Binding, event: Event) {
         (this.customData as CustomData).prefetch.onLinkEnter(event, this.customData.options.url);
       },
-    };
+    } as CustomData;
   },
 
   routine(this: Binding, el: HTMLElement, optionsOrUrl?: string | RouteOptions) {
