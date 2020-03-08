@@ -31,4 +31,6 @@ lerna-debug.log*
 !.vscode/extensions.json
 # Yarn
 .pnp.js
-.yarn/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
