@@ -47,7 +47,7 @@
     "clean:svg": "gulp clean:svg"
   },
   "devDependencies": {
-    "@babel/runtime-corejs3": "^7.8.4",
+    "@babel/runtime-corejs3": "^7.8.7",
     "core-js": "^3.6.4",
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
@@ -56,7 +56,6 @@
     "gulp-filelist": "^2.0.3",
     "gulp-svgmin": "^2.2.0"
   },
-  "dependencies": {},
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"
   }

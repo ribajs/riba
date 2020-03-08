@@ -34,8 +34,8 @@
     "packages:type-check": "cd packages/core && npm run type-check && cd ../bs4 && npm run type-check",
     "packages:bump": "node tools/cli.js bump",
     "packages:publish": "node tools/cli.js publish",
-    "packages:upgrade": "node tools/cli.js upgrade && npm run packages:install && npm run packages:link",
-    "packages:install": "node tools/cli.js install",
+    "packages:upgrade": "yarn upgrade-interactive && npm run packages:install && npm run packages:link",
+    "packages:install": "yarn install",
     "packages:reinstall": "node tools/cli.js reinstall",
     "packages:link": "node tools/cli.js link",
     "packages:build": "node tools/cli.js build",
@@ -44,20 +44,26 @@
     "packages:configure:demos": "node tools/cli.js configure-demos"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.20.0",
-    "@typescript-eslint/parser": "^2.20.0",
+    "@typescript-eslint/eslint-plugin": "^2.22.0",
+    "@typescript-eslint/parser": "^2.22.0",
     "chalk": "^3.0.0",
     "commander": "^4.1.1",
     "eslint": "^6.8.0",
-    "husky": "^4.2.3"
+    "husky": "^4.2.3",
+    "yarn": "^2.0.0-rc.27"
   },
   "dependencies": {
-    "typescript": "^3.8.2"
+    "typescript": "^3.8.3"
   },
   "husky": {
     "hooks": {
       "pre-push": "npm run packages:test",
       "pre-commit": "npm run packages:type-check"
     }
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
   }
 }

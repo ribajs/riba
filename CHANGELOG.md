@@ -2,6 +2,8 @@
 
 ## Dev
 
+- Start working with yarn 2 workspaces
+
 ### BS4
 
 - Renamed aspect ratio classnames to the existing bootstrap ratio classnames
