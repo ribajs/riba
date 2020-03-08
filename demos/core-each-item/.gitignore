@@ -3,6 +3,7 @@ node_modules/
 .cache/
 dist/
 # Yarn
+yarn.lock
 .pnp.js
 .yarn/cache/
 .yarn/unplugged/
