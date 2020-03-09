@@ -49,10 +49,14 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.22.0",
     "@typescript-eslint/parser": "^2.22.0",
+    "@yarnpkg/pnpify": "^2.0.0-rc.18",
     "chalk": "^3.0.0",
     "commander": "^4.1.1",
     "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
     "husky": "^4.2.3",
+    "prettier": "^1.19.1",
     "yarn": "^2.0.0-rc.27"
   },
   "dependencies": {
