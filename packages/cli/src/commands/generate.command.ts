@@ -8,7 +8,7 @@ import { debug as Debug } from 'debug';
 
 export class GenerateCommand extends AbstractCommand {
 
-  debug = Debug('commands:generate');
+  protected debug = Debug('commands:generate');
 
   public load(program: CommanderStatic) {
     program

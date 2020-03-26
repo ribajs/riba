@@ -4,7 +4,7 @@ import { debug as Debug } from 'debug';
 
 export class AbstractCollection {
 
-  debug = Debug('schematic:collection');
+  protected debug = Debug('schematic:collection');
 
   constructor(protected collection: string, protected runner: AbstractRunner) {}
 

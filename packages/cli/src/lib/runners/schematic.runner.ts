@@ -5,7 +5,7 @@ import { AbstractRunner } from './abstract.runner';
 
 export class SchematicRunner extends AbstractRunner {
 
-  static debug = Debug('schematic:runner');
+  static protected debug = Debug('schematic:runner');
 
   constructor() {
     super(`"${SchematicRunner.findClosestSchematicsBinary(__dirname)}"`);
