@@ -4,11 +4,11 @@ import { AbstractCommand } from './abstract.command';
 import { CommandInput } from '../interfaces';
 import { Collection } from '../lib/schematics';
 import Table from 'cli-table3';
-import { debug as Debug } from 'debug';
+import { debug as Debug, Debugger } from 'debug';
 
 export class GenerateCommand extends AbstractCommand {
 
-  protected debug = Debug('commands:generate');
+  protected debug: Debugger = Debug('commands:generate');
 
   public load(program: CommanderStatic) {
     program
