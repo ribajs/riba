@@ -5,6 +5,7 @@
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [],
   "private": true,
+  "main": "src/index.ts",
   "url": "https://github.com/ribajs/riba",
   "license": "MIT",
   "licenses": [
@@ -73,5 +74,31 @@
       "packages/*",
       "demos/*"
     ]
+  },
+  "resolutions": {
+    "@ribajs/bs4": "portal:/srv/users/karate/apps/karate/riba/packages/bs4",
+    "@ribajs/cli": "portal:/srv/users/karate/apps/karate/riba/packages/cli",
+    "@ribajs/core": "portal:/srv/users/karate/apps/karate/riba/packages/core",
+    "@ribajs/doc": "portal:/srv/users/karate/apps/karate/riba/packages/doc",
+    "@ribajs/extras": "portal:/srv/users/karate/apps/karate/riba/packages/extras",
+    "@ribajs/i18n": "portal:/srv/users/karate/apps/karate/riba/packages/i18n",
+    "@ribajs/iconset": "portal:/srv/users/karate/apps/karate/riba/packages/iconset",
+    "@ribajs/jquery": "portal:/srv/users/karate/apps/karate/riba/packages/jquery",
+    "@ribajs/moment": "portal:/srv/users/karate/apps/karate/riba/packages/moment",
+    "@ribajs/pdf": "portal:/srv/users/karate/apps/karate/riba/packages/pdf",
+    "@ribajs/photoswipe": "portal:/srv/users/karate/apps/karate/riba/packages/photoswipe",
+    "@ribajs/router": "portal:/srv/users/karate/apps/karate/riba/packages/router",
+    "@ribajs/schematics": "portal:/srv/users/karate/apps/karate/riba/packages/schematics",
+    "@ribajs/shopify": "portal:/srv/users/karate/apps/karate/riba/packages/shopify",
+    "@ribajs/shopify-easdk": "portal:/srv/users/karate/apps/karate/riba/packages/shopify-easdk",
+    "@ribajs/shopify-tda": "portal:/srv/users/karate/apps/karate/riba/packages/shopify-tda",
+    "bs4-slideshow": "portal:/srv/users/karate/apps/karate/riba/demos/bs4-slideshow",
+    "bs4-tabs-attr": "portal:/srv/users/karate/apps/karate/riba/demos/bs4-tabs-attr",
+    "bs4-tabs-tpl": "portal:/srv/users/karate/apps/karate/riba/demos/bs4-tabs-tpl",
+    "each-star-example": "portal:/srv/users/karate/apps/karate/riba/demos/core-each-item",
+    "extras-game-loop": "portal:/srv/users/karate/apps/karate/riba/demos/extras-game-loop",
+    "extras-scroll-events": "portal:/srv/users/karate/apps/karate/riba/demos/extras-scroll-events",
+    "touch-events": "portal:/srv/users/karate/apps/karate/riba/demos/extras-touch-events",
+    "i18n-static": "portal:/srv/users/karate/apps/karate/riba/demos/i18n-static"
   }
 }
