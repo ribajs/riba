@@ -1,4 +1,4 @@
-import { Binder } from '../interfaces';
+import { Binder } from "../interfaces";
 
 /**
  * class-*
@@ -11,12 +11,12 @@ import { Binder } from '../interfaces';
  * <li rv-class-completed="todo.done">{ todo.name }</li>
  */
 export const classStarBinder: Binder<boolean> = {
-  name: 'class-*',
+  name: "class-*",
   routine(el: HTMLElement, value: boolean) {
     if (this.args === null) {
-      throw new Error('args is null');
+      throw new Error("args is null");
     }
-    const classList = el.className.split(' ').filter((ele) => ele !== '');
+    const classList = el.className.split(" ").filter(ele => ele !== "");
     const arg = (this.args[0] as string).trim();
     const idx = classList.indexOf(arg);
     if (idx === -1) {
@@ -24,7 +24,7 @@ export const classStarBinder: Binder<boolean> = {
         el.className += ` ${arg}`;
       }
     } else if (!value) {
-      el.className = classList.filter((_, i) => i !== idx).join(' ');
+      el.className = classList.filter((_, i) => i !== idx).join(" ");
     }
-  },
+  }
 };

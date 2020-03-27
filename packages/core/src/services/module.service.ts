@@ -1,8 +1,14 @@
-import { Adapters, Binders, Formatters, Components, RibaModule } from '../interfaces';
-import { BindersService } from './binder.service';
-import { ComponentService } from './component.service';
-import { FormatterService } from './formatter.service';
-import { AdapterService } from './adapter.service';
+import {
+  Adapters,
+  Binders,
+  Formatters,
+  Components,
+  RibaModule
+} from "../interfaces";
+import { BindersService } from "./binder.service";
+import { ComponentService } from "./component.service";
+import { FormatterService } from "./formatter.service";
+import { AdapterService } from "./adapter.service";
 
 export class ModulesService {
   public binder: BindersService;
@@ -14,7 +20,12 @@ export class ModulesService {
    *
    * @param binders;
    */
-  constructor(binders: Binders<any>, components: Components, formatters: Formatters, adapters: Adapters) {
+  constructor(
+    binders: Binders<any>,
+    components: Components,
+    formatters: Formatters,
+    adapters: Adapters
+  ) {
     this.binder = new BindersService(binders);
     this.component = new ComponentService(components);
     this.formatter = new FormatterService(formatters);

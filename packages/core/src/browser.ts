@@ -1,7 +1,4 @@
-import {
-  Riba,
-  coreModule,
-} from './index';
+import { Riba, coreModule } from "./index";
 
 // Global riba object
 const riba = new Riba();

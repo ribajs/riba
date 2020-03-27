@@ -5,8 +5,8 @@
  * @see https://help.shopify.com/themes/liquid/filters/string-filters#slice
  */
 export const sliceFormatter = {
-  name: 'slice',
-  read(value: any, start: number, end: number ) {
+  name: "slice",
+  read(value: any, start: number, end: number) {
     return value.slice(start, end);
-  },
+  }
 };

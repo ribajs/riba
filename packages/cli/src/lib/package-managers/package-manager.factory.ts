@@ -1,8 +1,8 @@
-import { readdir } from 'fs';
-import { AbstractPackageManager } from './abstract.package-manager';
-import { NpmPackageManager } from './npm.package-manager';
-import { PackageManager } from '../../interfaces';
-import { YarnPackageManager } from './yarn.package-manager';
+import { readdir } from "fs";
+import { AbstractPackageManager } from "./abstract.package-manager";
+import { NpmPackageManager } from "./npm.package-manager";
+import { PackageManager } from "../../interfaces";
+import { YarnPackageManager } from "./yarn.package-manager";
 
 export class PackageManagerFactory {
   public static create(name: PackageManager | string): AbstractPackageManager {
@@ -17,12 +17,12 @@ export class PackageManagerFactory {
   }
 
   public static async find(): Promise<AbstractPackageManager> {
-    return new Promise<AbstractPackageManager>(resolve => {
+    return new Promise<AbstractPackageManager>((resolve) => {
       readdir(process.cwd(), (error, files) => {
         if (error) {
           resolve(this.create(PackageManager.NPM));
         } else {
-          if (files.findIndex(filename => filename === 'yarn.lock') > -1) {
+          if (files.findIndex((filename) => filename === "yarn.lock") > -1) {
             resolve(this.create(PackageManager.YARN));
           } else {
             resolve(this.create(PackageManager.NPM));

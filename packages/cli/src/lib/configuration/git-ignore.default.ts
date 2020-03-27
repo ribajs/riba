@@ -1,5 +1,4 @@
-export const defaultGitIgnore =
-`# compiled output
+export const defaultGitIgnore = `# compiled output
 /dist
 /lib
 /node_modules

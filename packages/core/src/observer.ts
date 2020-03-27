@@ -1,29 +1,37 @@
-
-import { Adapters, Root, Key, ObserverSyncCallback, Obj, Options } from './interfaces';
-import { Utils } from './services/utils';
+import {
+  Adapters,
+  Root,
+  Key,
+  ObserverSyncCallback,
+  Obj,
+  Options
+} from "./interfaces";
+import { Utils } from "./services/utils";
 
 export class Observer {
-
   public static adapters: Adapters;
   public static interfaces: string[] = [];
   public static rootInterface: Root;
 
   public static updateOptions(options: Partial<Options>) {
     if (!options.adapters) {
-      throw new Error('adapters are required!');
+      throw new Error("adapters are required!");
     }
 
     if (options.adapters) {
-      Observer.adapters = Utils.concat(false, Observer.adapters, options.adapters);
+      Observer.adapters = Utils.concat(
+        false,
+        Observer.adapters,
+        options.adapters
+      );
       Observer.interfaces = Object.keys(Observer.adapters);
     }
 
     Observer.rootInterface = options.rootInterface || Observer.interfaces[0];
 
     if (!Observer.rootInterface) {
-      throw new Error('rootInterface is required!');
+      throw new Error("rootInterface is required!");
     }
-
   }
 
   /**
@@ -32,7 +40,7 @@ export class Observer {
    */
   public static tokenize(keypath: string, root: Root) {
     const tokens: any[] = [];
-    let current: Key = {i: root, path: ''};
+    let current: Key = { i: root, path: "" };
     let index: number;
     let chr: string;
 
@@ -40,7 +48,7 @@ export class Observer {
       chr = keypath.charAt(index);
       if (~Observer.interfaces.indexOf(chr)) {
         tokens.push(current);
-        current = {i: chr, path: ''};
+        current = { i: chr, path: "" };
       } else {
         current.path += chr;
       }
@@ -86,7 +94,11 @@ export class Observer {
     let root: Root;
 
     if (!Observer.interfaces || !Observer.interfaces.length) {
-      throw new Error(`[Observer] Must define at least one adapter interface. interfaces: "${JSON.stringify(Observer.interfaces)}" adapters: "${JSON.stringify(Observer.adapters)}"`);
+      throw new Error(
+        `[Observer] Must define at least one adapter interface. interfaces: "${JSON.stringify(
+          Observer.interfaces
+        )}" adapters: "${JSON.stringify(Observer.adapters)}"`
+      );
     }
 
     if (~Observer.interfaces.indexOf(this.keypath[0])) {
@@ -100,14 +112,14 @@ export class Observer {
     this.tokens = Observer.tokenize(path, root);
 
     if (!this.tokens.length) {
-      throw new Error('[Observer] No tokens');
+      throw new Error("[Observer] No tokens");
     }
 
-    this.key = (this.tokens.pop() as Key);
+    this.key = this.tokens.pop() as Key;
 
     return {
       key: this.key,
-      tokens: this.tokens,
+      tokens: this.tokens
     };
   }
 
@@ -124,7 +136,7 @@ export class Observer {
     for (let index = 0; index < this.tokens.length; index++) {
       token = this.tokens[index];
       if (Utils.isObject(current)) {
-        if (typeof this.objectPath[index] !== 'undefined') {
+        if (typeof this.objectPath[index] !== "undefined") {
           prev = this.objectPath[index];
           if (current !== prev) {
             this.set(false, token, prev, this);
@@ -216,7 +228,12 @@ export class Observer {
    * @param obj
    * @param callback
    */
-  public set(active: boolean, key: Key, obj: Obj, callback: ObserverSyncCallback) {
+  public set(
+    active: boolean,
+    key: Key,
+    obj: Obj,
+    callback: ObserverSyncCallback
+  ) {
     if (active) {
       Observer.adapters[key.i].observe(obj, key.path, callback);
     } else {
@@ -263,7 +280,7 @@ export class Observer {
     }
 
     current = obj;
-    while (current.$parent && (current[rootProp] === undefined)) {
+    while (current.$parent && current[rootProp] === undefined) {
       current = current.$parent;
     }
     return current;

@@ -1,10 +1,10 @@
-import { Utils } from '../../services/utils';
+import { Utils } from "../../services/utils";
 
 export const pluralizeFormatter = {
-  name: 'pluralize',
+  name: "pluralize",
   read(input: any, singular: string, plural: string) {
     if (plural === null) {
-      plural = singular + 's';
+      plural = singular + "s";
     }
     if (Utils.isArray(input)) {
       input = input.length;
@@ -14,5 +14,5 @@ export const pluralizeFormatter = {
     } else {
       return plural;
     }
-  },
+  }
 };

@@ -3,8 +3,8 @@
  * @see https://help.shopify.com/themes/liquid/filters/array-filters#size
  */
 export const sizeFormatter = {
-  name: 'size',
+  name: "size",
   read(value: any[] | string) {
-    return (value && value.length) ? value.length : 0;
-  },
+    return value && value.length ? value.length : 0;
+  }
 };

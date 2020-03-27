@@ -6,8 +6,8 @@
  * @see https://help.shopify.com/themes/liquid/objects/for-loops#forloop-last
  */
 export const isLastFormatter = {
-  name: 'isLast',
+  name: "isLast",
   read(array: any[], i: number) {
-    return (array.length === i + 1);
-  },
+    return array.length === i + 1;
+  }
 };

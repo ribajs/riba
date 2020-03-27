@@ -4,10 +4,10 @@ export interface ElementConfiguration {
 }
 export interface Configuration {
     collection: string;
-    language: 'ts' | 'js';
-    templateEngine: 'html' | 'pug';
+    language: "ts" | "js";
+    templateEngine: "html" | "pug";
     sourceRoot: string;
-    styleLanguage: 'css' | 'scss';
+    styleLanguage: "css" | "scss";
     component: ElementConfiguration;
     binder: ElementConfiguration;
     formatter: ElementConfiguration;

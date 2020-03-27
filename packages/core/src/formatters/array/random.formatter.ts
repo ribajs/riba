@@ -1,4 +1,4 @@
-import { Utils } from '../../services/utils';
+import { Utils } from "../../services/utils";
 
 /**
  * Gets back random value of array
@@ -11,11 +11,13 @@ import { Utils } from '../../services/utils';
  * @example <div rv-add-class='6 | random 1'>
  */
 export const randomFormatter = {
-  name: 'random',
+  name: "random",
   read(arrayOrMaxNumber: any, min = 0) {
     // If is array
     if (Utils.isArray(arrayOrMaxNumber)) {
-      return arrayOrMaxNumber[Math.floor(Math.random() * arrayOrMaxNumber.length)];
+      return arrayOrMaxNumber[
+        Math.floor(Math.random() * arrayOrMaxNumber.length)
+      ];
     }
     // If is number
     if (Utils.isNumber(arrayOrMaxNumber)) {
@@ -23,5 +25,5 @@ export const randomFormatter = {
       return Math.floor(Math.random() * (max - min + 1) + min);
     }
     return null;
-  },
+  }
 };

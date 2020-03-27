@@ -1,5 +1,5 @@
-import { Binder } from '../interfaces';
-import { Utils } from '../services/utils';
+import { Binder } from "../interfaces";
+import { Utils } from "../services/utils";
 
 /**
  * checked
@@ -7,7 +7,7 @@ import { Utils } from '../services/utils';
  * property when the input is checked or unchecked (two-way binder).
  */
 export const checkedBinder: Binder<string> = {
-  name: 'checked',
+  name: "checked",
   publishes: true,
   priority: 2000,
 
@@ -16,18 +16,20 @@ export const checkedBinder: Binder<string> = {
     this.customData.onChange = () => {
       this.publish();
     };
-    el.addEventListener('change', this.customData.onChange, false);
+    el.addEventListener("change", this.customData.onChange, false);
   },
 
   unbind(el) {
-    el.removeEventListener('change', this.customData.onChange, false);
+    el.removeEventListener("change", this.customData.onChange, false);
   },
 
   routine(el: HTMLElement, value) {
-    if ((el as HTMLInputElement).type === 'radio') {
-      (el as HTMLInputElement).checked = Utils.getString((el as HTMLInputElement).value) === Utils.getString(value);
+    if ((el as HTMLInputElement).type === "radio") {
+      (el as HTMLInputElement).checked =
+        Utils.getString((el as HTMLInputElement).value) ===
+        Utils.getString(value);
     } else {
       (el as HTMLInputElement).checked = !!value;
     }
-  },
+  }
 };

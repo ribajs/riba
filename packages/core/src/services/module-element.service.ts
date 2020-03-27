@@ -1,5 +1,5 @@
-import { Utils } from './utils';
-import { ModuleElementType } from '../interfaces/module-element-type';
+import { Utils } from "./utils";
+import { ModuleElementType } from "../interfaces/module-element-type";
 
 export type Element = any;
 
@@ -33,10 +33,10 @@ export abstract class ModuleElementService {
    */
   public regists(elements: Elements): Elements {
     if (!Utils.isObject(elements)) {
-      throw new Error('Elements to register must be an object of elements');
+      throw new Error("Elements to register must be an object of elements");
     }
     for (const key in elements) {
-      if (elements[key] && key !== '__esModule') {
+      if (elements[key] && key !== "__esModule") {
         const element = elements[key];
         this.regist(element, key);
       }

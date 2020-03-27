@@ -1,7 +1,7 @@
-/// <reference types="debug" />
-import { AbstractRunner } from './abstract.runner';
+import { Debugger } from "debug";
+import { AbstractRunner } from "./abstract.runner";
 export declare class SchematicRunner extends AbstractRunner {
-    static debug: import("debug").Debugger;
+    protected static debug: Debugger;
     constructor();
     static findClosestSchematicsBinary(path: string): string;
 }

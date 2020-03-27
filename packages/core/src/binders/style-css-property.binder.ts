@@ -1,4 +1,4 @@
-import { Binder } from '../interfaces';
+import { Binder } from "../interfaces";
 
 /**
  * style-*
@@ -9,13 +9,13 @@ import { Binder } from '../interfaces';
  * ```
  */
 export const cssStarBinder: Binder<string> = {
-  name: 'style-*',
+  name: "style-*",
   routine(el: HTMLElement, value: string) {
     const propertyName = this.args[0];
-    if (value === null || value === undefined || value === '') {
+    if (value === null || value === undefined || value === "") {
       (el.style as any).removeProperty(propertyName);
     } else {
       (el.style as any)[propertyName] = value;
     }
-  },
+  }
 };

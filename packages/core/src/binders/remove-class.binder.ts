@@ -1,4 +1,4 @@
-import { Binder } from '../interfaces';
+import { Binder } from "../interfaces";
 
 /**
  * remove-class
@@ -9,14 +9,16 @@ import { Binder } from '../interfaces';
  * <img class="loading" rv-src="img.src" rv-remove-class="loadingClass">
  */
 export const removeClassBinder: Binder<string> = {
-  name: 'remove-class',
+  name: "remove-class",
   bind(el) {
     this.customData = {
-      staticClassesString: el.className,
+      staticClassesString: el.className
     };
   },
   routine(el: HTMLElement, value: string) {
-    const regex = new RegExp(`\\b${value}\\b`, 'g');
-    el.className = this.customData.staticClassesString.replace(regex, '').trim();
-  },
+    const regex = new RegExp(`\\b${value}\\b`, "g");
+    el.className = this.customData.staticClassesString
+      .replace(regex, "")
+      .trim();
+  }
 };

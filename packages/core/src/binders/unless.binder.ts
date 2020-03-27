@@ -1,5 +1,5 @@
-import { Binder } from '../interfaces';
-import { ifBinder } from './if.binder';
+import { Binder } from "../interfaces";
+import { ifBinder } from "./if.binder";
 
 /**
  * unless
@@ -7,7 +7,7 @@ import { ifBinder } from './if.binder';
  * (negated version of `if` binder).
  */
 export const unlessBinder: Binder<boolean> = {
-  name: 'unless',
+  name: "unless",
   block: true,
   priority: 4000,
 
@@ -19,5 +19,5 @@ export const unlessBinder: Binder<boolean> = {
     return ifBinder.routine.call(this, el, !value);
   },
 
-  update: ifBinder.update,
+  update: ifBinder.update
 };

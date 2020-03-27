@@ -1,4 +1,4 @@
-import { Reader } from '../../interfaces';
+import { Reader } from "../../interfaces";
 export declare class FileSystemReader implements Reader {
     private readonly directory;
     constructor(directory: string);

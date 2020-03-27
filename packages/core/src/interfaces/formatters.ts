@@ -1,4 +1,4 @@
-import { Formatter } from './formatter';
+import { Formatter } from "./formatter";
 
 export interface Formatters {
   [name: string]: Formatter;

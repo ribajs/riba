@@ -3,8 +3,8 @@
  * @see https://help.shopify.com/themes/liquid/filters/string-filters#downcase
  */
 export const downcaseFormatter = {
-  name: 'downcase',
+  name: "downcase",
   read(str: string) {
     return str.toLowerCase();
-  },
+  }
 };

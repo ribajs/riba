@@ -5,12 +5,12 @@
  * @see https://developer.mozilla.org/de/docs/Web/Web_Components/Using_custom_elements
  */
 
-import { EventHandler, Formatter } from '../interfaces';
-import { View } from '../view';
-import { Riba } from '../riba';
-import { Binding } from '../binding';
-import { Utils } from '../services/utils';
-import { FakeHTMLElement } from './fake-html-element';
+import { EventHandler, Formatter } from "../interfaces";
+import { View } from "../view";
+import { Riba } from "../riba";
+import { Binding } from "../binding";
+import { Utils } from "../services/utils";
+import { FakeHTMLElement } from "./fake-html-element";
 
 export type TemplateFunction = () => Promise<string | null> | string | null;
 
@@ -29,7 +29,6 @@ export interface ObservedAttributesToCheck {
 }
 
 export abstract class Component extends FakeHTMLElement {
-
   public static tagName: string;
 
   /**
@@ -68,9 +67,11 @@ export abstract class Component extends FakeHTMLElement {
     if (element) {
       this.el = element;
     } else if (window.customElements) {
-      this.el = this as unknown as HTMLElement;
+      this.el = (this as unknown) as HTMLElement;
     } else {
-      throw new Error(`element is required on browsers without custom elements support`);
+      throw new Error(
+        `element is required on browsers without custom elements support`
+      );
     }
   }
 
@@ -108,7 +109,10 @@ export abstract class Component extends FakeHTMLElement {
   }
 
   protected ready() {
-    return this.allPassedObservedAttributesAreInitialized() && this.checkRequiredAttributes();
+    return (
+      this.allPassedObservedAttributesAreInitialized() &&
+      this.checkRequiredAttributes()
+    );
   }
 
   /**
@@ -119,8 +123,7 @@ export abstract class Component extends FakeHTMLElement {
      * After all required and passed attributes are set we load the template and bind the component
      */
     if (this.ready()) {
-      return this.loadTemplate()
-      .then((template) => {
+      return this.loadTemplate().then(template => {
         if (this.autobind) {
           return this.bind();
         }
@@ -137,8 +140,11 @@ export abstract class Component extends FakeHTMLElement {
    */
   protected attributeIsPassed(observedAttribute: string) {
     // TODO this.riba is not defined on this time, so the TODO is get the fullPrefix from riba
-    const fullPrefix = this.riba ? this.riba.fullPrefix : 'rv-';
-    return this.el.getAttribute(observedAttribute) !== null || this.el.getAttribute(fullPrefix + observedAttribute) !== null;
+    const fullPrefix = this.riba ? this.riba.fullPrefix : "rv-";
+    return (
+      this.el.getAttribute(observedAttribute) !== null ||
+      this.el.getAttribute(fullPrefix + observedAttribute) !== null
+    );
   }
 
   /**
@@ -150,7 +156,7 @@ export abstract class Component extends FakeHTMLElement {
       const passed = this.attributeIsPassed(observedAttribute);
       this.observedAttributesToCheck[observedAttribute] = {
         passed,
-        initialized: false,
+        initialized: false
       };
     }
   }
@@ -163,7 +169,8 @@ export abstract class Component extends FakeHTMLElement {
     for (const key in this.observedAttributesToCheck) {
       if (this.observedAttributesToCheck[key]) {
         if (this.observedAttributesToCheck[key].passed) {
-          allInitialized = allInitialized && this.observedAttributesToCheck[key].initialized;
+          allInitialized =
+            allInitialized && this.observedAttributesToCheck[key].initialized;
         }
       }
     }
@@ -181,7 +188,7 @@ export abstract class Component extends FakeHTMLElement {
     let allDefined = true;
     const requiredAttributes = this.requiredAttributes();
     requiredAttributes.forEach((requiredAttribute: string) => {
-      if (!this.scope[requiredAttribute] || !this.scope[requiredAttribute] ) {
+      if (!this.scope[requiredAttribute] || !this.scope[requiredAttribute]) {
         // console.warn(`Attribute ${requiredAttribute} not set: ${this.scope[requiredAttribute]}`);
         allDefined = false;
       } else {
@@ -193,15 +200,15 @@ export abstract class Component extends FakeHTMLElement {
 
   protected parseAttribute(attr: string | null) {
     let value: any = attr;
-    if (attr === 'true') {
+    if (attr === "true") {
       value = true;
-    } else if (attr === 'false') {
+    } else if (attr === "false") {
       value = false;
-    } else if (attr === 'null') {
+    } else if (attr === "null") {
       value = null;
-    } else if (attr === 'undefined') {
+    } else if (attr === "undefined") {
       value = undefined;
-    } else if (attr === '') {
+    } else if (attr === "") {
       value = undefined;
     } else if (!isNaN(Number(attr))) {
       value = Number(attr);
@@ -220,11 +227,15 @@ export abstract class Component extends FakeHTMLElement {
    * Event handler to liste for publish binder event for two-way-binding in web components
    */
   protected publish(name: string, newValue: any, namespace: string | null) {
-    this.el.dispatchEvent(new CustomEvent('publish-binder-change:' + name, { detail: {
-      name,
-      newValue,
-      namespace: null, // TODO
-    }}));
+    this.el.dispatchEvent(
+      new CustomEvent("publish-binder-change:" + name, {
+        detail: {
+          name,
+          newValue,
+          namespace: null // TODO
+        }
+      })
+    );
   }
 
   /**
@@ -232,7 +243,13 @@ export abstract class Component extends FakeHTMLElement {
    */
   protected eventHandler(self: Component): EventHandler {
     // IMPORTANT this must be a function and not a Arrow Functions
-    return function(this: EventHandler, context: Binding, event: Event, binding: Binding, el: HTMLElement) {
+    return function(
+      this: EventHandler,
+      context: Binding,
+      event: Event,
+      binding: Binding,
+      el: HTMLElement
+    ) {
       this.call(self, context, event, binding.view.models, el);
     };
   }
@@ -242,10 +259,10 @@ export abstract class Component extends FakeHTMLElement {
    */
   protected callFormatterHandler(self: this): any {
     return {
-      name: 'call',
+      name: "call",
       read: (fn: (...args: any[]) => any, ...args: any[]) => {
         return fn.apply(self, args);
-      },
+      }
     };
   }
 
@@ -258,7 +275,7 @@ export abstract class Component extends FakeHTMLElement {
    */
   protected argsFormatterHandler(self: this): Formatter {
     return {
-      name: 'args',
+      name: "args",
       read: (fn: (...args: any[]) => any, ...fnArgs: any[]) => {
         return (event: Event, scope: any, el: HTMLElement, binding: any) => {
           // append the event handler args to passed args
@@ -268,7 +285,7 @@ export abstract class Component extends FakeHTMLElement {
           fnArgs.push(binding);
           return fn.apply(self, fnArgs);
         };
-      },
+      }
     };
   }
 
@@ -293,7 +310,10 @@ export abstract class Component extends FakeHTMLElement {
       this.attributeObserverFallback.disconnect();
     }
 
-    this.el.removeEventListener('binder-changed', this.BinderChangedEventHandler);
+    this.el.removeEventListener(
+      "binder-changed",
+      this.BinderChangedEventHandler
+    );
   }
 
   /**
@@ -304,9 +324,16 @@ export abstract class Component extends FakeHTMLElement {
    * @param newValue
    * @param namespace
    */
-  protected attributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
-
-    if (this.observedAttributesToCheck && this.observedAttributesToCheck[attributeName]) {
+  protected attributeChangedCallback(
+    attributeName: string,
+    oldValue: any,
+    newValue: any,
+    namespace: string | null
+  ) {
+    if (
+      this.observedAttributesToCheck &&
+      this.observedAttributesToCheck[attributeName]
+    ) {
       this.observedAttributesToCheck[attributeName].initialized = true;
     }
 
@@ -322,7 +349,12 @@ export abstract class Component extends FakeHTMLElement {
     this.scope[parsedAttributeName] = newValue;
 
     // call custom attribute changed callback with parsed values
-    this.parsedAttributeChangedCallback(parsedAttributeName, oldValue, newValue, namespace);
+    this.parsedAttributeChangedCallback(
+      parsedAttributeName,
+      oldValue,
+      newValue,
+      namespace
+    );
 
     this.bindIfReady();
   }
@@ -334,7 +366,12 @@ export abstract class Component extends FakeHTMLElement {
    * @param newValue
    * @param namespace
    */
-  protected parsedAttributeChangedCallback(attributeNames: string | string[], oldValue: any, newValue: any, namespace: string | null) {
+  protected parsedAttributeChangedCallback(
+    attributeNames: string | string[],
+    oldValue: any,
+    newValue: any,
+    namespace: string | null
+  ) {
     // console.warn('parsedAttributeChangedCallback called', attributeNames, oldValue, newValue, namespace);
   }
 
@@ -364,17 +401,17 @@ export abstract class Component extends FakeHTMLElement {
 
     // if innerHTML is null this component uses the innerHTML which he already has!
     return Promise.resolve(this.template())
-    .then((template) => {
-      if (template !== null) {
-        this.el.innerHTML = template;
-      }
-      return template;
-    })
-    .catch((error) => {
-      console.error(error);
-      this.templateLoaded = false;
-      return error;
-    });
+      .then(template => {
+        if (template !== null) {
+          this.el.innerHTML = template;
+        }
+        return template;
+      })
+      .catch(error => {
+        console.error(error);
+        this.templateLoaded = false;
+        return error;
+      });
   }
 
   protected async bind() {
@@ -384,39 +421,45 @@ export abstract class Component extends FakeHTMLElement {
     }
 
     if (!this.checkRequiredAttributes()) {
-      console.warn('not all required attributes are set for bind');
+      console.warn("not all required attributes are set for bind");
       return;
     }
 
     this.bound = true;
 
     await this.beforeBind()
-    .then(() => {
-      if (!this.el) {
-        throw new Error('this.el is not defined');
-      }
+      .then(() => {
+        if (!this.el) {
+          throw new Error("this.el is not defined");
+        }
 
-      this.riba = new Riba();
-      const viewOptions = this.riba.getViewOptions({
-        handler: this.eventHandler(this),
-        formatters: {
-          call: this.callFormatterHandler(this),
-          args: this.argsFormatterHandler(this),
-        },
+        this.riba = new Riba();
+        const viewOptions = this.riba.getViewOptions({
+          handler: this.eventHandler(this),
+          formatters: {
+            call: this.callFormatterHandler(this),
+            args: this.argsFormatterHandler(this)
+          }
+        });
+
+        this.view = new View(
+          (Array.prototype.slice.call(
+            this.el.childNodes
+          ) as unknown) as NodeListOf<ChildNode>,
+          this.scope,
+          viewOptions
+        );
+        this.scope = this.view.models;
+        this.view.bind();
+        return this.view;
+      })
+      .then(() => {
+        return this.afterBind();
+      })
+      .catch(error => {
+        this.bound = false;
+        console.error(error);
       });
-
-      this.view = new View(Array.prototype.slice.call(this.el.childNodes) as unknown as NodeListOf<ChildNode>, this.scope, viewOptions);
-      this.scope = this.view.models;
-      this.view.bind();
-      return this.view;
-    })
-    .then(() => {
-      return this.afterBind();
-    })
-    .catch((error) => {
-      this.bound = false;
-      console.error(error);
-    });
 
     return this.view;
   }
@@ -443,39 +486,51 @@ export abstract class Component extends FakeHTMLElement {
   }
 
   private BinderChangedEventHandler(event: Event) {
-    const data = ( event as CustomEvent ).detail;
-    this.attributeChangedCallback(data.name, data.oldValue, data.oldValue, data.namespace);
+    const data = (event as CustomEvent).detail;
+    this.attributeChangedCallback(
+      data.name,
+      data.oldValue,
+      data.oldValue,
+      data.namespace
+    );
   }
 
   /**
    * Event handler to listen attribute change event as fallback for MutationObserver
    */
   private initAttributeObserver(observedAttributes: string[]) {
-
     if ((window as any).customElements) {
       // use native implementaion
     } else {
       if ((window as any).MutationObserver) {
         // use MutationObserver as fallback
-        this.attributeObserverFallback = new MutationObserver((mutations) => {
-          mutations.forEach((mutation) => {
-            if (mutation.type === 'attributes') {
+        this.attributeObserverFallback = new MutationObserver(mutations => {
+          mutations.forEach(mutation => {
+            if (mutation.type === "attributes") {
               if (mutation.attributeName) {
                 // if this attribute is a watched attribute
                 if (observedAttributes.indexOf(mutation.attributeName) !== -1) {
                   const newValue = this.el.getAttribute(mutation.attributeName);
-                  this.attributeChangedCallback(mutation.attributeName, mutation.oldValue, newValue, mutation.attributeNamespace);
+                  this.attributeChangedCallback(
+                    mutation.attributeName,
+                    mutation.oldValue,
+                    newValue,
+                    mutation.attributeNamespace
+                  );
                 }
               }
             }
           });
         });
         this.attributeObserverFallback.observe(this.el, {
-          attributes: true,
+          attributes: true
         });
       } else {
         // use attribute change event as fallback for MutationObserver
-        this.el.addEventListener('binder-changed', this.BinderChangedEventHandler);
+        this.el.addEventListener(
+          "binder-changed",
+          this.BinderChangedEventHandler
+        );
         // this.$el.on('binder-changed', this.BinderChangedEventHandler);
       }
 

@@ -1,11 +1,11 @@
-import { Binder } from '../interfaces';
+import { Binder } from "../interfaces";
 
 /**
  * Sets the element's text value.
  */
 export const textBinder: Binder<string> = {
-  name: 'text',
+  name: "text",
   routine(el: HTMLElement, value: string) {
-    el.textContent = value != null ? value : '';
-  },
+    el.textContent = value != null ? value : "";
+  }
 };

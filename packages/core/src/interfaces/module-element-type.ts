@@ -1,1 +1,6 @@
-export type ModuleElementType = 'binder' | 'formatter' | 'components' | 'services' | 'adapter';
+export type ModuleElementType =
+  | "binder"
+  | "formatter"
+  | "components"
+  | "services"
+  | "adapter";

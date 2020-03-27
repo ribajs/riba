@@ -1,20 +1,19 @@
-import { PRIMITIVE, KEYPATH, parseType } from './parsers';
-import { Observer } from './observer';
+import { PRIMITIVE, KEYPATH, parseType } from "./parsers";
+import { Observer } from "./observer";
 import {
   Binder,
   FormatterObservers,
   eventHandlerFunction,
-  ObserverSyncCallback,
-} from './interfaces';
-import { View } from './view';
-import { Utils } from './services/utils';
+  ObserverSyncCallback
+} from "./interfaces";
+import { View } from "./view";
+import { Utils } from "./services/utils";
 
 /**
  *  A single binding between a model attribute and a DOM element.
  */
 export class Binding {
-
-  public static FORMATTER_ARGS =  /[^\s']+|'([^']|'[^\s])*'|"([^"]|"[^\s])*"/g;
+  public static FORMATTER_ARGS = /[^\s']+|'([^']|'[^\s])*'|"([^"]|"[^\s])*"/g;
   public static FORMATTER_SPLIT = /\s+/;
 
   public value?: any;
@@ -58,7 +57,15 @@ export class Binding {
    * @param {*} args The start binders, on `class-*` args[0] wil be the classname.
    * @param {*} formatters
    */
-  constructor(view: View, el: HTMLUnknownElement, type: string | null, keypath: string | undefined, binder: Binder<any>, formatters: string[] | null, identifier: string | null) {
+  constructor(
+    view: View,
+    el: HTMLUnknownElement,
+    type: string | null,
+    keypath: string | undefined,
+    binder: Binder<any>,
+    formatters: string[] | null,
+    identifier: string | null
+  ) {
     this.view = view;
     this.el = el;
     this.type = type;
@@ -80,7 +87,11 @@ export class Binding {
    * @param obj
    * @param keypath
    */
-  public observe(obj: any, keypath: string, callback: ObserverSyncCallback): Observer {
+  public observe(
+    obj: any,
+    keypath: string,
+    callback: ObserverSyncCallback
+  ): Observer {
     return new Observer(obj, keypath, callback);
   }
 
@@ -107,19 +118,20 @@ export class Binding {
    * @see https://github.com/mikeric/rivets/blob/master/dist/rivets.js#L1175
    */
   public getIterationAlias(modelName: string) {
-    return '%' + modelName + '%';
+    return "%" + modelName + "%";
   }
 
-  public parseFormatterArguments(args: string[], formatterIndex: number): string[] {
-    return args
-    .map(parseType)
-    .map(({type, value}, ai) => {
+  public parseFormatterArguments(
+    args: string[],
+    formatterIndex: number
+  ): string[] {
+    return args.map(parseType).map(({ type, value }, ai) => {
       if (type === PRIMITIVE) {
         const primitiveValue = value;
         return primitiveValue;
       } else if (type === KEYPATH) {
         // keypath is string
-        const keypath = (value as string );
+        const keypath = value as string;
         if (!this.formatterObservers[formatterIndex]) {
           this.formatterObservers[formatterIndex] = {};
         }
@@ -146,10 +158,18 @@ export class Binding {
       throw new Error(`[${this.binder.name} formatters is null`);
     }
 
-    return this.formatters.reduce((result: any/*check type*/, declaration: string, index: number) => {
+    return this.formatters.reduce((
+      result: any /*check type*/,
+      declaration: string,
+      index: number
+    ) => {
       const args = declaration.match(Binding.FORMATTER_ARGS);
       if (args === null) {
-        console.warn(new Error(`[${this.binder.name}] No args matched with regex "FORMATTER_ARGS"!\nvalue: ${value}\nresult: ${result}\ndeclaration: ${declaration}\nindex: ${index}\n`));
+        console.warn(
+          new Error(
+            `[${this.binder.name}] No args matched with regex "FORMATTER_ARGS"!\nvalue: ${value}\nresult: ${result}\ndeclaration: ${declaration}\nindex: ${index}\n`
+          )
+        );
         return result;
       }
       const id = args.shift();
@@ -165,13 +185,15 @@ export class Binding {
       const formatter = this.view.options.formatters[id];
 
       if (!formatter) {
-        throw new Error(`[${this.binder.name}] No formatters with id "${id}" found!`);
+        throw new Error(
+          `[${this.binder.name}] No formatters with id "${id}" found!`
+        );
       }
 
       const processedArgs = this.parseFormatterArguments(args, index);
 
       // get formatter read funcion
-      if (formatter && typeof(formatter.read) === 'function') {
+      if (formatter && typeof formatter.read === "function") {
         result = formatter.read.apply(this.model, [result, ...processedArgs]);
       }
 
@@ -185,13 +207,16 @@ export class Binding {
    * @param fn The function to call by the handler
    * @param el The element the event was triggered from
    */
-  public eventHandler(fn: eventHandlerFunction, el: HTMLElement): (ev: Event) => any {
+  public eventHandler(
+    fn: eventHandlerFunction,
+    el: HTMLElement
+  ): (ev: Event) => any {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const binding = this;
     const handler = binding.view.options.handler;
-    return (ev) => {
+    return ev => {
       if (!handler) {
-        throw new Error('No handler defined in binding.view.options.handler');
+        throw new Error("No handler defined in binding.view.options.handler");
       }
       handler.call(fn, this, ev, binding, el);
     };
@@ -202,9 +227,8 @@ export class Binding {
    * with the supplied value formatted.
    */
   public set(value: any) {
-
     if (this.binder === null) {
-      console.warn(new Error('Binder is null'), this);
+      console.warn(new Error("Binder is null"), this);
       return;
     }
 
@@ -215,15 +239,20 @@ export class Binding {
       return value;
     }
 
-    if (this.binder && typeof(this.binder.routine) === 'function') {
+    if (this.binder && typeof this.binder.routine === "function") {
       // If value is a promise
-      if (value && typeof(value.then) === 'function' && typeof(value.catch) === 'function') {
-        value.then((realValue: any) => {
-          this.binder.routine.call(this, this.el, realValue);
-        })
-        .catch((error: Error) => {
-          console.error(error);
-        });
+      if (
+        value &&
+        typeof value.then === "function" &&
+        typeof value.catch === "function"
+      ) {
+        value
+          .then((realValue: any) => {
+            this.binder.routine.call(this, this.el, realValue);
+          })
+          .catch((error: Error) => {
+            console.error(error);
+          });
       } else {
         this.binder.routine.call(this, this.el, value);
       }
@@ -248,14 +277,18 @@ export class Binding {
   public publish() {
     if (this.observer) {
       if (this.formatters === null) {
-        throw new Error('formatters is null');
+        throw new Error("formatters is null");
       }
 
-      const value = this.formatters.reduceRight((result: any/*check type*/, declaration: string /*check type*/, index: number) => {
+      const value = this.formatters.reduceRight((
+        result: any /*check type*/,
+        declaration: string /*check type*/,
+        index: number
+      ) => {
         const args = declaration.split(Binding.FORMATTER_SPLIT);
         const id = args.shift();
         if (!id) {
-          throw new Error('id not defined');
+          throw new Error("id not defined");
         }
 
         if (!this.view.options.formatters) {
@@ -265,7 +298,7 @@ export class Binding {
         const formatter = this.view.options.formatters[id];
         const processedArgs = this.parseFormatterArguments(args, index);
 
-        if (formatter && typeof(formatter.publish) === 'function') {
+        if (formatter && typeof formatter.publish === "function") {
           result = formatter.publish(result, ...processedArgs);
         }
         return result;
@@ -284,12 +317,11 @@ export class Binding {
     this.parseTarget();
 
     if (this.binder && this.binder.bind) {
-      if (typeof(this.binder.bind) !== 'function') {
-        throw new Error('the method bind is not a function');
+      if (typeof this.binder.bind !== "function") {
+        throw new Error("the method bind is not a function");
       }
       this.binder.bind.call(this, this.el);
     }
-
 
     if (this.view.options.preloadData) {
       this.sync();
@@ -301,7 +333,7 @@ export class Binding {
    */
   public unbind() {
     if (!this.binder) {
-      console.warn(new Error('Binder is not defined'), this);
+      console.warn(new Error("Binder is not defined"), this);
       return;
     }
 
@@ -313,10 +345,10 @@ export class Binding {
       this.observer.unobserve();
     }
 
-    Object.keys(this.formatterObservers).forEach((fi) => {
+    Object.keys(this.formatterObservers).forEach(fi => {
       const args = this.formatterObservers[fi];
 
-      Object.keys(args).forEach((ai) => {
+      Object.keys(args).forEach(ai => {
         args[ai].unobserve();
       });
     });
@@ -334,9 +366,9 @@ export class Binding {
       this.model = this.observer.target;
     }
     if (this.binder === null) {
-      throw new Error('binder is null');
+      throw new Error("binder is null");
     }
-    if (typeof(this.binder.update) === 'function') {
+    if (typeof this.binder.update === "function") {
       this.binder.update.call(this, models);
     }
   }
@@ -347,9 +379,9 @@ export class Binding {
    */
   public getValue(el: HTMLElement) {
     if (this.binder === null) {
-      throw new Error('binder is null');
+      throw new Error("binder is null");
     }
-    if (typeof(this.binder.getValue) === 'function') {
+    if (typeof this.binder.getValue === "function") {
       return this.binder.getValue.call(this, el);
     } else {
       return Utils.getInputValue(el);
@@ -358,14 +390,16 @@ export class Binding {
 
   private getStarArguments(identifier: string, type: string) {
     const args = new Array<string | number>();
-    const regexp = new RegExp(`^${identifier.replace(/\*/g, '.+')}$`);
-    if (!(regexp.test(type) && type.split('-')[0] === identifier.split('-')[0])) {
-      if (identifier !== '*') {
-        console.error('Nodename not matchs the identifier,', identifier, type);
+    const regexp = new RegExp(`^${identifier.replace(/\*/g, ".+")}$`);
+    if (
+      !(regexp.test(type) && type.split("-")[0] === identifier.split("-")[0])
+    ) {
+      if (identifier !== "*") {
+        console.error("Nodename not matchs the identifier,", identifier, type);
       }
     }
 
-    const splittedIdentifier = identifier.split('*');
+    const splittedIdentifier = identifier.split("*");
     // splittedIdentifier.pop();
     if (splittedIdentifier.length > 0) {
       // how many stars has the identifier?
@@ -389,7 +423,9 @@ export class Binding {
             if (Utils.isNumber(arg)) {
               arg = Number(arg);
             }
-            argsString = argsString.substring(argsString.indexOf(separator) + 1);
+            argsString = argsString.substring(
+              argsString.indexOf(separator) + 1
+            );
             args.push(arg);
           }
         });

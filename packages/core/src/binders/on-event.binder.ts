@@ -1,17 +1,17 @@
-import { Binder, eventHandlerFunction } from '../interfaces';
+import { Binder, eventHandlerFunction } from "../interfaces";
 
 /**
  * Binds an event handler on the element.
  */
 export const onEventBinder: Binder<eventHandlerFunction> = {
-  name: 'on-*',
+  name: "on-*",
   function: true,
   priority: 1000,
 
   bind() {
     if (!this.customData) {
       this.customData = {
-        handler: null,
+        handler: null
       };
     }
   },
@@ -19,7 +19,7 @@ export const onEventBinder: Binder<eventHandlerFunction> = {
   unbind(el: HTMLElement) {
     if (this.customData.handler) {
       if (this.args === null) {
-        throw new Error('args is null');
+        throw new Error("args is null");
       }
       const eventName = this.args[0] as string;
       el.removeEventListener(eventName, this.customData.handler);
@@ -27,9 +27,8 @@ export const onEventBinder: Binder<eventHandlerFunction> = {
   },
 
   routine(el: HTMLElement, value: eventHandlerFunction) {
-
     if (this.args === null) {
-      throw new Error('args is null');
+      throw new Error("args is null");
     }
     const eventName = this.args[0] as string;
 
@@ -39,15 +38,15 @@ export const onEventBinder: Binder<eventHandlerFunction> = {
 
     this.customData.handler = this.eventHandler(value, el);
 
-    const passive = this.el.dataset.passive === 'true'; // data-passive="true"
+    const passive = this.el.dataset.passive === "true"; // data-passive="true"
 
     try {
-      el.addEventListener(eventName, this.customData.handler,  { passive });
+      el.addEventListener(eventName, this.customData.handler, { passive });
     } catch (error) {
       console.warn(error);
       el.addEventListener(eventName, (event: Event) => {
         this.customData.handler(event);
       });
     }
-  },
+  }
 };

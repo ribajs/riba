@@ -1,4 +1,4 @@
-import { Binder } from './binder';
+import { Binder } from "./binder";
 /**
  * A list of binders with any key name
  */

@@ -1,5 +1,5 @@
-import setString from 'chalk';
-import { Color } from '../../interfaces';
+import setString from "chalk";
+import { Color } from "../../interfaces/index";
 export { setString };
 /**
  * Gives all characters of a string a desired color

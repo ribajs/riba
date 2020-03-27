@@ -1,1 +1,1 @@
-export { dotAdapter } from './dot.adapter';
+export { dotAdapter } from "./dot.adapter";

@@ -1,4 +1,4 @@
-import { Configuration } from './configuration';
+import { Configuration } from "./configuration";
 export interface ConfigurationLoader {
     load(): Configuration | Promise<Configuration>;
 }

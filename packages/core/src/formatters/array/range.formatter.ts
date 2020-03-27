@@ -1,10 +1,10 @@
-import { Utils } from '../../services/utils';
+import { Utils } from "../../services/utils";
 
 /**
  * Array formatter to get a subarray from array
  */
 export const rangeFormatter = {
-  name: 'range',
+  name: "range",
   read(arr: any[], start: number, end: number) {
     start = Number(Utils.isNumber(start) ? start : 0);
     end = Number(Utils.isNumber(end) ? end : arr.length - 1);
@@ -15,5 +15,5 @@ export const rangeFormatter = {
       return [];
     }
     return arr.slice(Number(start || 0), 1 + end);
-  },
+  }
 };

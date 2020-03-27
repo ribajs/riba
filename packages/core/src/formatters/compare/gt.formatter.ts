@@ -1,11 +1,11 @@
-import { Formatter } from '../../interfaces/formatter';
+import { Formatter } from "../../interfaces/formatter";
 /**
  * greater than
  * a > b
  */
 export const gtFormatter: Formatter = {
-  name: 'gt',
+  name: "gt",
   read(a: number, b: number) {
     return a > b;
-  },
+  }
 };

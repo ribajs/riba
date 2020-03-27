@@ -1,4 +1,4 @@
-import { CommandInput } from '../interfaces';
+import { CommandInput } from "../interfaces/index";
 export declare abstract class AbstractAction {
     abstract handle(inputs?: CommandInput[], options?: CommandInput[], extraFlags?: string[]): Promise<void>;
     protected deepCopyInput(inputs: CommandInput[]): {

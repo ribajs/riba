@@ -1,4 +1,4 @@
-import { Binder } from './binder';
+import { Binder } from "./binder";
 /**
  * This wrapper is used if you need to pass over some dependencies for your binder
  */

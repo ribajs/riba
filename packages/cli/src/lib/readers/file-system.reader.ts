@@ -1,6 +1,6 @@
-import * as fs from 'fs';
-import * as path from 'path';
-import { Reader } from '../../interfaces';
+import * as fs from "fs";
+import * as path from "path";
+import { Reader } from "../../interfaces";
 
 export class FileSystemReader implements Reader {
   constructor(private readonly directory: string) {}
@@ -15,7 +15,7 @@ export class FileSystemReader implements Reader {
           } else {
             resolve(filenames);
           }
-        },
+        }
       );
     });
   }
@@ -30,7 +30,7 @@ export class FileSystemReader implements Reader {
           } else {
             resolve(data.toString());
           }
-        },
+        }
       );
     });
   }

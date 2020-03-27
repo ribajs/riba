@@ -11,12 +11,11 @@ export interface Deferred {
  * @class Utils
  */
 export class Utils {
-
   public static couldBeJson(str?: string | null) {
     if (!str) {
       return false;
     }
-    return str.startsWith('{') || str.startsWith('[');
+    return str.startsWith("{") || str.startsWith("[");
   }
 
   /**
@@ -29,7 +28,7 @@ export class Utils {
     }
     try {
       const val = JSON.parse(str);
-      return (Array.isArray(val) || typeof(val) === 'object') ? true : false;
+      return Array.isArray(val) || typeof val === "object" ? true : false;
     } catch (error) {
       return false;
     }
@@ -39,7 +38,7 @@ export class Utils {
    * Check if value is undefined
    */
   public static isUndefined(value?: any) {
-    return typeof(value) === 'undefined';
+    return typeof value === "undefined";
   }
 
   /**
@@ -54,7 +53,7 @@ export class Utils {
    * @see https://stackoverflow.com/a/4775737/1465919
    */
   public static isObject(obj: object) {
-    return Utils.isDefined(obj) && typeof obj === 'object' && obj !== null;
+    return Utils.isDefined(obj) && typeof obj === "object" && obj !== null;
   }
 
   /**
@@ -106,9 +105,9 @@ export class Utils {
    */
   public static getInputValue(el: HTMLElement) {
     const results: string[] = [];
-    if ((el as HTMLSelectElement).type === 'checkbox') {
+    if ((el as HTMLSelectElement).type === "checkbox") {
       return (el as HTMLInputElement).checked;
-    } else if ((el as HTMLSelectElement).type === 'select-multiple') {
+    } else if ((el as HTMLSelectElement).type === "select-multiple") {
       const options: HTMLOptionsCollection = (el as HTMLSelectElement).options;
 
       for (const key in options) {
@@ -121,7 +120,7 @@ export class Utils {
       }
 
       return results;
-    } else if ( el.getAttribute('contenteditable')) {
+    } else if (el.getAttribute("contenteditable")) {
       return el.innerHTML; // TODO write test for contenteditable
     } else {
       return (el as HTMLInputElement).value;
@@ -134,16 +133,16 @@ export class Utils {
    * @param string
    */
   public static camelCase = (str: string) => {
-    return str.replace(/-([a-z0-9])/g, (grouped) => {
+    return str.replace(/-([a-z0-9])/g, grouped => {
       return grouped[1].toUpperCase();
     });
-  }
+  };
 
   /**
    * Check if value is a function
    */
   public static isFunction(value: any) {
-    return typeof(value) === 'function';
+    return typeof value === "function";
   }
 
   /**
@@ -151,7 +150,7 @@ export class Utils {
    * @see https://stackoverflow.com/a/4775737/1465919
    */
   public static isArray(value: any) {
-    return Object.prototype.toString.call( value ) === '[object Array]';
+    return Object.prototype.toString.call(value) === "[object Array]";
   }
 
   /**
@@ -167,14 +166,14 @@ export class Utils {
    * @see https://stackoverflow.com/a/28814615/1465919
    */
   public static isBoolean(value?: any) {
-    return typeof(value) === typeof(true);
+    return typeof value === typeof true;
   }
 
   /**
    * Check if value is a string
    */
   public static isString(value?: any) {
-    return this.isDefined(value) && typeof(value) === 'string';
+    return this.isDefined(value) && typeof value === "string";
   }
 
   /**
@@ -204,7 +203,7 @@ export class Utils {
    * @see http://stackoverflow.com/a/1100653/1465919
    */
   public static justDigits(str: string) {
-    const num = str.replace(/[^-\d.]/g, '');
+    const num = str.replace(/[^-\d.]/g, "");
     if (!Utils.isNumber(num)) {
       return 0;
     } else {
@@ -224,7 +223,10 @@ export class Utils {
     const merge = (obj: any) => {
       for (const prop in obj) {
         if (obj[prop]) {
-          if (deep && Object.prototype.toString.call(obj[prop]) === '[object Object]') {
+          if (
+            deep &&
+            Object.prototype.toString.call(obj[prop]) === "[object Object]"
+          ) {
             // If we're doing a deep merge and the property is an object
             extended[prop] = this.extend(true, extended[prop], obj[prop]);
           } else {
@@ -267,7 +269,7 @@ export class Utils {
       return Utils.extend(deep, {}, val);
     }
     if (Utils.isString(val)) {
-      return val.repeat(1) ;
+      return val.repeat(1);
     }
     return val;
   }
@@ -304,16 +306,16 @@ export class Utils {
     if (!url) {
       return window.location;
     }
-    const l = document.createElement('a');
+    const l = document.createElement("a");
     l.href = url;
-    return l as any as Location;
+    return (l as any) as Location;
   }
 
   /**
    * If the webapps url is https://mysupersite.org and the url is https://mysupersite.org/subpage
    * this method will return /subpage
    * If the url is https://anothersite.org/subpage this method will return https://anothersite.org/subpage
-   * @param url 
+   * @param url
    */
   public static normalizeUrl(url: string): string {
     const checkLocation = Utils.getLocation(url);
@@ -321,7 +323,7 @@ export class Utils {
     if (checkLocation.hostname === hostname) {
       return checkLocation.pathname;
     } else {
-      return Utils.getUrl(url)
+      return Utils.getUrl(url);
     }
   }
 
@@ -332,10 +334,13 @@ export class Utils {
    */
   public static getUrl(url?: string): string {
     const location = Utils.getLocation(url);
-    return location.protocol + '//' +
+    return (
+      location.protocol +
+      "//" +
       location.host +
       location.pathname +
-      location.search;
+      location.search
+    );
   }
 
   /**
@@ -352,7 +357,7 @@ export class Utils {
       return hostname === checkHostname && pathname === checkPathname;
     }
     return false;
-  }
+  };
 
   /**
    * Check if the current location url stats with a url or is equal
@@ -368,7 +373,7 @@ export class Utils {
       return hostname === checkHostname && pathname.startsWith(checkPathname);
     }
     return false;
-  }
+  };
 
   /**
    * Given an url, return it without the hash
@@ -379,7 +384,7 @@ export class Utils {
    * @return {string} newCleanUrl
    */
   public static cleanLink(url: string): string {
-    return url.replace(/#.*/, '');
+    return url.replace(/#.*/, "");
   }
 
   /**
@@ -392,17 +397,17 @@ export class Utils {
    */
   public static getPort(p?: string, url?: string) {
     const location = Utils.getLocation(url);
-    const port = typeof p !== 'undefined' ? p : location.port;
+    const port = typeof p !== "undefined" ? p : location.port;
     const protocol = location.protocol;
 
-    if (port !== '') {
+    if (port !== "") {
       return Number(port);
     }
-    if (protocol === 'http:') {
+    if (protocol === "http:") {
       return 80;
     }
 
-    if (protocol === 'https:') {
+    if (protocol === "https:") {
       return 443;
     }
   }
@@ -415,15 +420,19 @@ export class Utils {
     if (!url) {
       return false;
     }
-    const isProtokoll = new RegExp('^(?:[a-z]+:)?//', 'i');
-    const isAbsolute = isProtokoll.test(url) || url.startsWith('mailto:') || url.startsWith('tel:') || url.startsWith('fax:');
+    const isProtokoll = new RegExp("^(?:[a-z]+:)?//", "i");
+    const isAbsolute =
+      isProtokoll.test(url) ||
+      url.startsWith("mailto:") ||
+      url.startsWith("tel:") ||
+      url.startsWith("fax:");
     return isAbsolute;
   }
 
   public static isExternalUrl = (absoluteUrl: string) => {
     if (Utils.isAbsoluteUrl(absoluteUrl)) {
       const location = Utils.getLocation();
-      const host = location.protocol + '//' + location.hostname;
+      const host = location.protocol + "//" + location.hostname;
       let isExternal = true;
       if (absoluteUrl.startsWith(host)) {
         isExternal = false;
@@ -431,11 +440,11 @@ export class Utils {
       return isExternal;
     }
     return false;
-  }
+  };
 
   public static isInternalUrl = (url: string) => {
     return !Utils.isExternalUrl(url);
-  }
+  };
 
   /**
    * get param from hash
@@ -444,16 +453,16 @@ export class Utils {
     if (!url) {
       url = window.location.href;
     }
-    name = name.replace(/[[\]]/g, '\\$&');
-    const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+    name = name.replace(/[[\]]/g, "\\$&");
+    const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
     const results = regex.exec(url);
     if (!results) {
       return null;
     }
     if (!results[2]) {
-      return '';
+      return "";
     }
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
   }
 
   /**
@@ -467,34 +476,44 @@ export class Utils {
    * Change hash from address bar
    */
   public static updateHash(hash: string) {
-    return window.location.hash = hash;
+    return (window.location.hash = hash);
   }
 
   /**
    * Remove hash from address bar
    */
   public static removeHash() {
-    return history.pushState('', document.title, window.location.pathname + window.location.search);
+    return history.pushState(
+      "",
+      document.title,
+      window.location.pathname + window.location.search
+    );
   }
 
-  public static getViewportDimensions()  {
-    const w = Math.max(document.documentElement ? document.documentElement.clientWidth : 0, window.innerWidth || 0);
-    const h = Math.max(document.documentElement ? document.documentElement.clientHeight : 0, window.innerHeight || 0);
+  public static getViewportDimensions() {
+    const w = Math.max(
+      document.documentElement ? document.documentElement.clientWidth : 0,
+      window.innerWidth || 0
+    );
+    const h = Math.max(
+      document.documentElement ? document.documentElement.clientHeight : 0,
+      window.innerHeight || 0
+    );
     return {
       h,
-      w,
+      w
     };
   }
 
   public static escapeHtml(str: string) {
     const tagsToReplace = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;"
     };
 
-    return str.replace(/[&<>]/g, (tag) => {
-      return tagsToReplace[tag as '&' | '<' | '>'] || tag;
+    return str.replace(/[&<>]/g, tag => {
+      return tagsToReplace[tag as "&" | "<" | ">"] || tag;
     });
   }
 
@@ -508,7 +527,13 @@ export class Utils {
    * @param to
    * @param duration
    */
-  public static scrollTo(to: HTMLElement, offset: number, scrollElement: Element | (Window & typeof globalThis) | null, angle: 'horizontal' | 'vertical' = 'vertical', behavior: 'auto' | 'smooth' | undefined = 'smooth') {
+  public static scrollTo(
+    to: HTMLElement,
+    offset: number,
+    scrollElement: Element | (Window & typeof globalThis) | null,
+    angle: "horizontal" | "vertical" = "vertical",
+    behavior: "auto" | "smooth" | undefined = "smooth"
+  ) {
     if (!scrollElement) {
       scrollElement = window;
     }
@@ -516,18 +541,23 @@ export class Utils {
     let top = 0;
     let left = 0;
 
-    if (typeof((scrollElement as Window).pageYOffset) === 'number') {
-      if (angle === 'vertical') {
-        top = (to.getBoundingClientRect().top + (scrollElement as Window).pageYOffset) - offset;
+    if (typeof (scrollElement as Window).pageYOffset === "number") {
+      if (angle === "vertical") {
+        top =
+          to.getBoundingClientRect().top +
+          (scrollElement as Window).pageYOffset -
+          offset;
       } else {
-        left = (to.getBoundingClientRect().left + (scrollElement as Window).pageXOffset) - offset;
+        left =
+          to.getBoundingClientRect().left +
+          (scrollElement as Window).pageXOffset -
+          offset;
       }
-
     } else {
-      if (angle === 'vertical') {
-        top = (to.offsetTop ) - offset;
+      if (angle === "vertical") {
+        top = to.offsetTop - offset;
       } else {
-        left = (to.offsetLeft ) - offset;
+        left = to.offsetLeft - offset;
       }
     }
 
@@ -535,7 +565,7 @@ export class Utils {
     scrollElement.scroll({
       behavior,
       left,
-      top,
+      top
     });
   }
 
@@ -544,13 +574,11 @@ export class Utils {
    * @see https://css-tricks.com/styling-based-on-scroll-position/
    */
   public static debounce = (fn: (...params: any) => any) => {
-
     // This holds the requestAnimationFrame reference, so we can cancel it if we wish
     let frame: number;
 
     // The debounce function returns a new function that can receive a variable number of arguments
     return (...params: any) => {
-
       // If the frame variable has been defined, clear it now, and queue for next frame
       if (frame) {
         cancelAnimationFrame(frame);
@@ -558,12 +586,11 @@ export class Utils {
 
       // Queue our function call for the next frame
       frame = requestAnimationFrame(() => {
-
         // Call our function and pass any params we received
         fn(...params);
       });
     };
-  }
+  };
 
   /**
    * Cross-browser Document Ready check
@@ -571,27 +598,26 @@ export class Utils {
    * @param callback
    */
   public static domIsReady(callback: () => void) {
-    if (!callback || typeof(callback) !== 'function') {
-      return new Error('The callback is required!');
+    if (!callback || typeof callback !== "function") {
+      return new Error("The callback is required!");
     }
 
     const checkReady = () => {
-      if (document.readyState !== 'loading') {
+      if (document.readyState !== "loading") {
         callback();
         if ((document as any).attachEvent) {
-          (document as any).detachEvent('onreadystatechange', checkReady);
+          (document as any).detachEvent("onreadystatechange", checkReady);
         }
-        document.removeEventListener('DOMContentLoaded', checkReady);
+        document.removeEventListener("DOMContentLoaded", checkReady);
       }
     };
 
     if ((document as any).attachEvent) {
-      (document as any).attachEvent('onreadystatechange', checkReady);
+      (document as any).attachEvent("onreadystatechange", checkReady);
     }
     if (document.addEventListener) {
-      document.addEventListener('DOMContentLoaded', checkReady);
+      document.addEventListener("DOMContentLoaded", checkReady);
     }
     checkReady();
   }
-
 }

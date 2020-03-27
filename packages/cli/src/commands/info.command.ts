@@ -1,12 +1,12 @@
-import { CommanderStatic } from 'commander';
-import { AbstractCommand } from './abstract.command';
+import { CommanderStatic } from "commander";
+import { AbstractCommand } from "./abstract.command";
 
 export class InfoCommand extends AbstractCommand {
   public load(program: CommanderStatic) {
     program
-      .command('info')
-      .alias('i')
-      .description('Display Riba CLI details')
+      .command("info")
+      .alias("i")
+      .description("Display Riba CLI details")
       .action(async () => {
         await this.action.handle();
       });

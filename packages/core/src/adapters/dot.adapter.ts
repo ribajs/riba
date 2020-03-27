@@ -1,37 +1,40 @@
-
-import { Adapter, AdapterFunction, Ref, ObserverSyncCallback, RVArray } from '../interfaces';
+import {
+  Adapter,
+  AdapterFunction,
+  Ref,
+  ObserverSyncCallback,
+  RVArray
+} from "../interfaces";
 
 export class DotAdapter implements Adapter {
-
   public static ARRAY_METHODS = [
-    'push',
-    'pop',
-    'shift',
-    'unshift',
-    'sort',
-    'reverse',
-    'splice',
+    "push",
+    "pop",
+    "shift",
+    "unshift",
+    "sort",
+    "reverse",
+    "splice"
   ];
 
-  public name = '.';
+  public name = ".";
 
   public counter = 0;
   public weakmap: any = {};
 
   public weakReference(obj: any) {
-
     // eslint-disable-next-line no-prototype-builtins
-    if (!obj.hasOwnProperty('__rv')) {
+    if (!obj.hasOwnProperty("__rv")) {
       const id = this.counter++;
 
-      Object.defineProperty(obj, '__rv', {
-        value: id,
+      Object.defineProperty(obj, "__rv", {
+        value: id
       });
     }
 
     if (!this.weakmap[obj.__rv]) {
       this.weakmap[obj.__rv] = {
-        callbacks: {},
+        callbacks: {}
       };
     }
 
@@ -54,14 +57,16 @@ export class DotAdapter implements Adapter {
     obj[fn] = (...args: any[]): AdapterFunction => {
       const response = original.apply(obj, args);
 
-      Object.keys(map.pointers).forEach((r) => {
+      Object.keys(map.pointers).forEach(r => {
         const k = map.pointers[r];
 
         if (weakmap[r]) {
           if (Array.isArray(weakmap[r].callbacks[k])) {
-            weakmap[r].callbacks[k].forEach((callback: ObserverSyncCallback) => {
-              callback.sync();
-            });
+            weakmap[r].callbacks[k].forEach(
+              (callback: ObserverSyncCallback) => {
+                callback.sync();
+              }
+            );
           }
         }
       });
@@ -77,7 +82,7 @@ export class DotAdapter implements Adapter {
       if (!map.pointers) {
         map.pointers = {};
 
-        DotAdapter.ARRAY_METHODS.forEach((fn) => {
+        DotAdapter.ARRAY_METHODS.forEach(fn => {
           this.stubFunction(obj, fn);
         });
       }
@@ -93,7 +98,7 @@ export class DotAdapter implements Adapter {
   }
 
   public unobserveMutations(obj: RVArray, ref: string, keypath: string) {
-    if (Array.isArray(obj) && (obj.__rv != null)) {
+    if (Array.isArray(obj) && obj.__rv != null) {
       const map = this.weakmap[obj.__rv];
 
       if (map) {
@@ -134,7 +139,7 @@ export class DotAdapter implements Adapter {
             return value;
           },
 
-          set: (newValue) => {
+          set: newValue => {
             if (newValue !== value) {
               this.unobserveMutations(value, obj.__rv, keypath);
               value = newValue;
@@ -152,7 +157,7 @@ export class DotAdapter implements Adapter {
                 this.observeMutations(newValue, obj.__rv, keypath);
               }
             }
-          },
+          }
         });
       }
     }

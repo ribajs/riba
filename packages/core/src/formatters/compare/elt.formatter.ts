@@ -1,11 +1,11 @@
-import { Formatter } from '../../interfaces/formatter';
+import { Formatter } from "../../interfaces/formatter";
 /**
  * euqal or lower than
  * a <= b
  */
 export const eltFormatter: Formatter = {
-  name: 'elt',
+  name: "elt",
   read(a: number, b: number) {
     return a <= b;
-  },
+  }
 };

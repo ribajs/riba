@@ -3,8 +3,8 @@
  * @see https://help.shopify.com/themes/liquid/filters/string-filters#upcase
  */
 export const upcaseFormatter = {
-  name: 'upcase',
+  name: "upcase",
   read(str: string) {
     return str.toUpperCase();
-  },
+  }
 };

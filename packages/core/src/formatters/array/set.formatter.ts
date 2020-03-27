@@ -1,11 +1,11 @@
-import { Utils } from '../../services/utils';
+import { Utils } from "../../services/utils";
 
 /**
  * Sets property of object, array or value
  * @see https://gist.github.com/der-On/cdafe908847e2b882691
  */
 export const setFormatter = {
-  name: 'set',
+  name: "set",
   read(obj: any | any[], key: string | number, value?: any) {
     // the key is the value if value is not set
     if (!value) {
@@ -18,5 +18,5 @@ export const setFormatter = {
       obj = value;
     }
     return obj;
-  },
+  }
 };

@@ -14,13 +14,14 @@ export interface EventDispatcherInstances {
  * @type {object}
  */
 class EventDispatcher {
-
   public static instances: EventDispatcherInstances = {};
 
   public static getInstance(namespace: string) {
     const result = EventDispatcher.instances[namespace];
     if (!result) {
-      throw new Error(`No EventDispatcher instance with namespace ${namespace} found!`);
+      throw new Error(
+        `No EventDispatcher instance with namespace ${namespace} found!`
+      );
     }
     return result;
   }
@@ -39,7 +40,7 @@ class EventDispatcher {
    * Creates an singleton instance of Dispatcher.
    * @memberof Dispatcher
    */
-  constructor(namespace = 'main') {
+  constructor(namespace = "main") {
     this.namespace = namespace;
 
     if (EventDispatcher.instances[this.namespace]) {
@@ -84,7 +85,8 @@ class EventDispatcher {
    * @param  {string} eventName
    * @param  {any[]} args
    */
-  public trigger(e: string, ...args: any[]) { // e, ...args
+  public trigger(e: string, ...args: any[]) {
+    // e, ...args
     if (e in this.events === false) {
       return;
     }

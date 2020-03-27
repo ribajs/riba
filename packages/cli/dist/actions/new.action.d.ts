@@ -1,5 +1,5 @@
-import { CommandInput } from '../interfaces';
-import { AbstractAction } from './abstract.action';
+import { CommandInput } from "../interfaces/index";
+import { AbstractAction } from "./abstract.action";
 export declare const retrieveCols: () => number;
 export declare class NewAction extends AbstractAction {
     private debug;

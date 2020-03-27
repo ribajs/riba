@@ -1,6 +1,6 @@
-import { Formatter } from '../../interfaces';
-import { FormatterFuntionParam } from './call.formatter';
-import { Binding } from '../../binding';
+import { Formatter } from "../../interfaces";
+import { FormatterFuntionParam } from "./call.formatter";
+import { Binding } from "../../binding";
 
 /**
  * Sets arguments to a function without directly call them
@@ -11,7 +11,7 @@ import { Binding } from '../../binding';
  * @param fnArgs the parameters you wish to get called the function with
  */
 export const argsFormatter: Formatter = {
-  name: 'args',
+  name: "args",
   read(fn: FormatterFuntionParam, ...fnArgs: any[]) {
     return (event: Event, scope: any, el: HTMLElement, binding: Binding) => {
       // append the event handler args to passed args
@@ -21,5 +21,5 @@ export const argsFormatter: Formatter = {
       fnArgs.push(binding);
       return fn.apply(this, fnArgs);
     };
-  },
+  }
 };

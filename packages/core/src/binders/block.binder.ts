@@ -1,4 +1,4 @@
-import { Binder } from '../interfaces';
+import { Binder } from "../interfaces";
 
 export interface Assign {
   key: string;
@@ -17,7 +17,9 @@ export interface Assign {
  * </div>
  */
 export const blockBinder: Binder<Assign> = {
-  name: 'block',
+  name: "block",
   block: true,
-  routine() {/**/},
+  routine() {
+    /**/
+  }
 };

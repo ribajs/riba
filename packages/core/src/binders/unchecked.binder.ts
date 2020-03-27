@@ -1,5 +1,5 @@
-import { Binder } from '../interfaces';
-import { Utils } from '../services/utils';
+import { Binder } from "../interfaces";
+import { Utils } from "../services/utils";
 
 /**
  * unchecked
@@ -8,23 +8,25 @@ import { Utils } from '../services/utils';
  * unchecked (two-way binder).
  */
 export const uncheckedBinder: Binder<string> = {
-  name: 'unchecked',
+  name: "unchecked",
   publishes: true,
   priority: 2000,
 
   bind(el) {
-    el.addEventListener('change', this.publish);
+    el.addEventListener("change", this.publish);
   },
 
   unbind(el) {
-    el.removeEventListener('change', this.publish);
+    el.removeEventListener("change", this.publish);
   },
 
   routine(el: HTMLElement, value) {
-    if ((el as HTMLInputElement).type === 'radio') {
-      (el as HTMLInputElement).checked = Utils.getString((el as HTMLInputElement).value) !== Utils.getString(value);
+    if ((el as HTMLInputElement).type === "radio") {
+      (el as HTMLInputElement).checked =
+        Utils.getString((el as HTMLInputElement).value) !==
+        Utils.getString(value);
     } else {
       (el as HTMLInputElement).checked = !value;
     }
-  },
+  }
 };

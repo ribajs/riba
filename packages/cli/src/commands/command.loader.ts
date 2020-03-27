@@ -1,12 +1,11 @@
-import chalk from 'chalk';
-import { CommanderStatic } from 'commander';
+import chalk from "chalk";
+import { CommanderStatic } from "commander";
 
 // Actions
-import { GenerateAction, InfoAction, NewAction } from '../actions';
+import { GenerateAction, InfoAction, NewAction } from "../actions";
 
 // Commands
-import { GenerateCommand, InfoCommand, NewCommand } from './index';
-
+import { GenerateCommand, InfoCommand, NewCommand } from "./index";
 
 export class CommandLoader {
   public static load(program: CommanderStatic): void {
@@ -18,14 +17,13 @@ export class CommandLoader {
       console.error(chalk.red(error));
     }
 
-
     this.handleInvalidCommand(program);
   }
 
   private static handleInvalidCommand(program: CommanderStatic) {
-    program.on('command:*', () => {
-      console.error(chalk.red('Invalid command: %s'), program.args.join(' '));
-      console.log('See --help for a list of available commands.');
+    program.on("command:*", () => {
+      console.error(chalk.red("Invalid command: %s"), program.args.join(" "));
+      console.log("See --help for a list of available commands.");
       process.exit(1);
     });
   }

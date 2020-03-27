@@ -1,5 +1,5 @@
-import { Formatters, Binders, Adapters, Components } from '../interfaces';
-import { Binding } from '../binding';
+import { Formatters, Binders, Adapters, Components } from "../interfaces";
+import { Binding } from "../binding";
 
 export interface Extensions {
   binders?: Binders<any>;
@@ -9,7 +9,13 @@ export interface Extensions {
 }
 
 /** Interface for the event handler, augment the event handler of the on-* binder */
-export type EventHandler = (this: any, context: Binding, ev: Event, binding: Binding, el: HTMLElement) => void;
+export type EventHandler = (
+  this: any,
+  context: Binding,
+  ev: Event,
+  binding: Binding,
+  el: HTMLElement
+) => void;
 
 export interface Options extends Extensions {
   /** Attribute / web-component prefix in templates */

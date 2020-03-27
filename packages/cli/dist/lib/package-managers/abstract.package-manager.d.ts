@@ -1,5 +1,5 @@
-import { AbstractRunner } from '../runners/abstract.runner';
-import { PackageManagerCommands, ProjectDependency } from '../../interfaces';
+import { AbstractRunner } from "../runners/abstract.runner";
+import { PackageManagerCommands, ProjectDependency } from "../../interfaces/index";
 export declare abstract class AbstractPackageManager {
     protected runner: AbstractRunner;
     constructor(runner: AbstractRunner);

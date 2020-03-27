@@ -1,6 +1,6 @@
-import { CommandInput, Configuration } from '../interfaces';
-import { AbstractAction } from './abstract.action';
-import { SchematicOption } from '../lib/schematics';
+import { CommandInput, Configuration } from "../interfaces";
+import { AbstractAction } from "./abstract.action";
+import { SchematicOption } from "../lib/schematics";
 export declare class GenerateAction extends AbstractAction {
     schematicOptions: SchematicOption[];
     constructor();

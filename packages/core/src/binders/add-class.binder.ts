@@ -1,4 +1,4 @@
-import { Binder } from '../interfaces';
+import { Binder } from "../interfaces";
 
 /**
  * add-class
@@ -13,13 +13,13 @@ import { Binder } from '../interfaces';
  * <ul>
  */
 export const addClassBinder: Binder<string> = {
-  name: 'add-class',
+  name: "add-class",
   function: true,
   priority: 1000,
 
   bind(el) {
     this.customData = {
-      staticClasses: el.className.split(' '),
+      staticClasses: el.className.split(" ")
     };
   },
 
@@ -30,11 +30,11 @@ export const addClassBinder: Binder<string> = {
   routine(el: HTMLElement, newValue: string) {
     if (newValue) {
       if (this.customData.staticClasses.indexOf(newValue) === -1) {
-        el.className = this.customData.staticClasses.join(' ') + ' ' + newValue;
+        el.className = this.customData.staticClasses.join(" ") + " " + newValue;
       }
     } else {
-      el.className = this.customData.staticClasses.join(' ');
+      el.className = this.customData.staticClasses.join(" ");
     }
     el.className = el.className.trim();
-  },
+  }
 };

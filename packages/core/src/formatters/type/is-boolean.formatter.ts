@@ -1,10 +1,10 @@
-import { Formatter } from '../../interfaces/formatter';
-import { Utils } from '../../services/utils';
+import { Formatter } from "../../interfaces/formatter";
+import { Utils } from "../../services/utils";
 
 /**
  * Checks if value is an boolean
  */
 export const isBooleanFormatter: Formatter = {
-  name: 'isBoolean',
-  read: Utils.isBoolean,
+  name: "isBoolean",
+  read: Utils.isBoolean
 };

@@ -1,8 +1,8 @@
-/// <reference types="debug" />
-import { CommanderStatic } from 'commander';
-import { AbstractCommand } from './abstract.command';
+import { CommanderStatic } from "commander";
+import { AbstractCommand } from "./abstract.command";
+import { Debugger } from "debug";
 export declare class GenerateCommand extends AbstractCommand {
-    debug: import("debug").Debugger;
+    protected debug: Debugger;
     load(program: CommanderStatic): void;
     private buildDescription;
     /**

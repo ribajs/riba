@@ -1,5 +1,5 @@
-import { Binder } from '../interfaces';
-import { Utils } from '../services/utils';
+import { Binder } from "../interfaces";
+import { Utils } from "../services/utils";
 
 const DEFAULT_OFFSET = 10;
 
@@ -15,7 +15,7 @@ const DEFAULT_OFFSET = 10;
  * @see https://css-tricks.com/styling-based-on-scroll-position/
  */
 export const dataScrollPositionYBinder: Binder<string> = {
-  name: 'data-scroll-position-y',
+  name: "data-scroll-position-y",
   bind() {
     if (!this.customData) {
       this.customData = {};
@@ -24,31 +24,44 @@ export const dataScrollPositionYBinder: Binder<string> = {
     this.customData.onScroll = () => {
       const element = this.customData.watchScrollOnElement as Window;
       if (element.scrollY <= 0 + this.customData.offset) {
-        this.el.dataset.scrollPositionY = 'top';
-      } else if ((window.innerHeight + window.pageYOffset + this.customData.offset) >= document.body.offsetHeight) { // TODO only working for window!
-        this.el.dataset.scrollPositionY = 'bottom';
+        this.el.dataset.scrollPositionY = "top";
+      } else if (
+        window.innerHeight + window.pageYOffset + this.customData.offset >=
+        document.body.offsetHeight
+      ) {
+        // TODO only working for window!
+        this.el.dataset.scrollPositionY = "bottom";
       } else {
-        this.el.dataset.scrollPositionY = 'scrolled';
+        this.el.dataset.scrollPositionY = "scrolled";
       }
     };
   },
-  routine(el: HTMLUnknownElement, elementSelector = 'window') {
+  routine(el: HTMLUnknownElement, elementSelector = "window") {
     // Remove old scroll event
     if (this.customData.watchScrollOnElement) {
-      this.customData.watchScrollOnElement.removeEventListener('scroll', Utils.debounce.bind(this, this.customData.onScroll.bind(this)));
+      this.customData.watchScrollOnElement.removeEventListener(
+        "scroll",
+        Utils.debounce.bind(this, this.customData.onScroll.bind(this))
+      );
     }
 
     // Set new element to watch for the scroll event
-    if (elementSelector === 'window') {
+    if (elementSelector === "window") {
       this.customData.watchScrollOnElement = window;
     } else {
-      this.customData.watchScrollOnElement = document.querySelector(elementSelector);
+      this.customData.watchScrollOnElement = document.querySelector(
+        elementSelector
+      );
     }
 
     // Watch new element for scroll event
     if (this.customData.watchScrollOnElement) {
       // console.debug('addEventListener', this.customData.watchScrollOnElement);
-      this.customData.watchScrollOnElement.addEventListener('scroll', Utils.debounce(this.customData.onScroll.bind(this)), { passive: true });
+      this.customData.watchScrollOnElement.addEventListener(
+        "scroll",
+        Utils.debounce(this.customData.onScroll.bind(this)),
+        { passive: true }
+      );
     }
 
     // inital scroll position
@@ -57,7 +70,10 @@ export const dataScrollPositionYBinder: Binder<string> = {
   unbind() {
     // Remove old scroll event
     if (this.customData.watchScrollOnElement) {
-      this.customData.watchScrollOnElement.removeEventListener('scroll', Utils.debounce(this.customData.onScroll.bind(this)));
+      this.customData.watchScrollOnElement.removeEventListener(
+        "scroll",
+        Utils.debounce(this.customData.onScroll.bind(this))
+      );
     }
-  },
+  }
 };

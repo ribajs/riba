@@ -1,11 +1,14 @@
-import { dasherize } from '@angular-devkit/core/src/utils/strings';
-import chalk from 'chalk';
-import { readFile } from 'fs';
-import ora from 'ora';
-import { join } from 'path';
-import { AbstractRunner } from '../runners/abstract.runner';
-import { messages } from '../ui';
-import { PackageManagerCommands, ProjectDependency } from '../../interfaces';
+import { dasherize } from "@angular-devkit/core/src/utils/strings";
+import chalk from "chalk";
+import { readFile } from "fs";
+import ora from "ora";
+import { join } from "path";
+import { AbstractRunner } from "../runners/abstract.runner";
+import { messages } from "../ui/index";
+import {
+  PackageManagerCommands,
+  ProjectDependency,
+} from "../../interfaces/index";
 
 export abstract class AbstractPackageManager {
   constructor(protected runner: AbstractRunner) {}
@@ -14,7 +17,7 @@ export abstract class AbstractPackageManager {
     const spinner = ora({
       spinner: {
         interval: 120,
-        frames: ['▹▹▹▹▹', '▸▹▹▹▹', '▹▸▹▹▹', '▹▹▸▹▹', '▹▹▹▸▹', '▹▹▹▹▸'],
+        frames: ["▹▹▹▹▹", "▸▹▹▹▹", "▹▸▹▹▹", "▹▹▸▹▹", "▹▹▹▸▹", "▹▹▹▹▸"],
       },
       text: messages.PACKAGE_MANAGER_INSTALLATION_IN_PROGRESS,
     });
@@ -26,7 +29,7 @@ export abstract class AbstractPackageManager {
       await this.runner.run(
         commandArguments,
         collect,
-        join(process.cwd(), dasherizedDirectory),
+        join(process.cwd(), dasherizedDirectory)
       );
       spinner.succeed();
       console.info();
@@ -43,22 +46,22 @@ export abstract class AbstractPackageManager {
   }
 
   public async version(): Promise<string> {
-    const commandArguments = '--version';
+    const commandArguments = "--version";
     const collect = true;
     return this.runner.run(commandArguments, collect) as Promise<string>;
   }
 
   public async addProduction(dependencies: string[], tag: string) {
     const command: string = [this.cli.add, this.cli.saveFlag]
-      .filter(i => i)
-      .join(' ');
+      .filter((i) => i)
+      .join(" ");
     const args: string = dependencies
-      .map(dependency => `${dependency}@${tag}`)
-      .join(' ');
+      .map((dependency) => `${dependency}@${tag}`)
+      .join(" ");
     const spinner = ora({
       spinner: {
         interval: 120,
-        frames: ['▹▹▹▹▹', '▸▹▹▹▹', '▹▸▹▹▹', '▹▹▸▹▹', '▹▹▹▸▹', '▹▹▹▹▸'],
+        frames: ["▹▹▹▹▹", "▸▹▹▹▹", "▹▸▹▹▹", "▹▹▸▹▹", "▹▹▹▸▹", "▹▹▹▹▸"],
       },
       text: messages.PACKAGE_MANAGER_INSTALLATION_IN_PROGRESS,
     });
@@ -74,8 +77,8 @@ export abstract class AbstractPackageManager {
   public async addDevelopment(dependencies: string[], tag: string) {
     const command = `${this.cli.add} ${this.cli.saveDevFlag}`;
     const args: string = dependencies
-      .map(dependency => `${dependency}@${tag}`)
-      .join(' ');
+      .map((dependency) => `${dependency}@${tag}`)
+      .join(" ");
     await this.add(`${command} ${args}`);
   }
 
@@ -111,29 +114,25 @@ export abstract class AbstractPackageManager {
   private async readPackageJson(): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       readFile(
-        join(process.cwd(), 'package.json'),
+        join(process.cwd(), "package.json"),
         (error: NodeJS.ErrnoException | null, buffer: Buffer) => {
           if (error !== undefined && error !== null) {
             reject(error);
           } else {
             resolve(JSON.parse(buffer.toString()));
           }
-        },
+        }
       );
     });
   }
 
   public async updateProduction(dependencies: string[]) {
-    const commandArguments = `${this.cli.update} ${dependencies.join(
-      ' ',
-    )}`;
+    const commandArguments = `${this.cli.update} ${dependencies.join(" ")}`;
     await this.update(commandArguments);
   }
 
   public async updateDevelopement(dependencies: string[]) {
-    const commandArguments = `${this.cli.update} ${dependencies.join(
-      ' ',
-    )}`;
+    const commandArguments = `${this.cli.update} ${dependencies.join(" ")}`;
     await this.update(commandArguments);
   }
 
@@ -154,16 +153,16 @@ export abstract class AbstractPackageManager {
 
   public async deleteProduction(dependencies: string[]) {
     const command: string = [this.cli.remove, this.cli.saveFlag]
-      .filter(i => i)
-      .join(' ');
-    const args: string = dependencies.join(' ');
+      .filter((i) => i)
+      .join(" ");
+    const args: string = dependencies.join(" ");
     await this.delete(`${command} ${args}`);
   }
 
   public async deleteDevelopment(dependencies: string[]) {
     const commandArguments = `${this.cli.remove} ${
       this.cli.saveDevFlag
-    } ${dependencies.join(' ')}`;
+    } ${dependencies.join(" ")}`;
     await this.delete(commandArguments);
   }
 

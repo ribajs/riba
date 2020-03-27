@@ -1,4 +1,4 @@
-import { Component } from '../../component/component';
+import { Component } from "../../component/component";
 
 interface Scope {
   // properties
@@ -12,11 +12,11 @@ interface Scope {
    */
   paused: boolean;
   // methods
-  toggleMute: VideoComponent['toggleMute'];
-  toggleControls: VideoComponent['toggleControls'];
-  play: VideoComponent['play'];
-  pause: VideoComponent['pause'];
-  togglePlay: VideoComponent['togglePlay'];
+  toggleMute: VideoComponent["toggleMute"];
+  toggleControls: VideoComponent["toggleControls"];
+  play: VideoComponent["play"];
+  pause: VideoComponent["pause"];
+  togglePlay: VideoComponent["togglePlay"];
 
   // custom
   /** If the user will pass the mp4 source for some reason */
@@ -24,13 +24,12 @@ interface Scope {
 }
 
 export class VideoComponent extends Component {
-
-  public static tagName = 'rv-video';
+  public static tagName = "rv-video";
 
   protected autobind = true;
 
   static get observedAttributes() {
-    return ['mp4-src'];
+    return ["mp4-src"];
   }
 
   public get muted() {
@@ -41,9 +40,9 @@ export class VideoComponent extends Component {
     this.video.muted = muted;
     this.scope.muted = this.video.muted;
     if (muted) {
-      this.video.setAttribute('muted', '');
+      this.video.setAttribute("muted", "");
     } else {
-      this.video.removeAttribute('muted');
+      this.video.removeAttribute("muted");
     }
   }
 
@@ -69,9 +68,9 @@ export class VideoComponent extends Component {
     this.video.loop = loop;
     this.scope.loop = this.video.loop;
     if (loop) {
-      this.video.setAttribute('loop', '');
+      this.video.setAttribute("loop", "");
     } else {
-      this.video.removeAttribute('loop');
+      this.video.removeAttribute("loop");
     }
   }
 
@@ -83,13 +82,13 @@ export class VideoComponent extends Component {
     this.video.controls = controls;
     this.scope.controls = this.video.controls;
     if (controls) {
-      this.video.setAttribute('controls', '');
+      this.video.setAttribute("controls", "");
       // show controls
-      this.video.dispatchEvent( new Event('mouseover'));
-      this.video.dispatchEvent( new Event('mouseenter'));
-      this.video.dispatchEvent( new Event('mousemove'));
+      this.video.dispatchEvent(new Event("mouseover"));
+      this.video.dispatchEvent(new Event("mouseenter"));
+      this.video.dispatchEvent(new Event("mousemove"));
     } else {
-      this.video.removeAttribute('controls');
+      this.video.removeAttribute("controls");
     }
   }
 
@@ -128,12 +127,12 @@ export class VideoComponent extends Component {
     play: this.play,
     pause: this.pause,
     togglePlay: this.togglePlay,
-    mp4Src: '',
+    mp4Src: ""
   };
 
   constructor(element?: HTMLElement) {
     super(element);
-    const video = this.el.querySelector('video') as HTMLVideoElement;
+    const video = this.el.querySelector("video") as HTMLVideoElement;
     this.video = video;
   }
 
@@ -163,9 +162,9 @@ export class VideoComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    const video = this.el.querySelector('video');
+    const video = this.el.querySelector("video");
     if (!video) {
-      throw new Error('The video child element is required!');
+      throw new Error("The video child element is required!");
     }
     this.video = video;
     this.scope.muted = this.video.muted;
@@ -178,8 +177,7 @@ export class VideoComponent extends Component {
   }
 
   protected async init(observedAttributes: string[]) {
-    return super.init(observedAttributes)
-    .then((view) => {
+    return super.init(observedAttributes).then(view => {
       return view;
     });
   }

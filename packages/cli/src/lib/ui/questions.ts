@@ -1,6 +1,6 @@
 export const generateInput = (name: string, message: string) => {
   return (defaultAnswer: string): any => ({
-    type: 'input',
+    type: "input",
     name,
     message,
     default: defaultAnswer,
@@ -8,11 +8,11 @@ export const generateInput = (name: string, message: string) => {
 };
 
 export const generateSelect = (
-  name: string,
+  name: string
 ): ((message: string) => (choices: string[]) => any) => {
   return (message: string) => {
     return (choices: string[]) => ({
-      type: 'list',
+      type: "list",
       name,
       message,
       choices,

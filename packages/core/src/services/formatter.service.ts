@@ -1,15 +1,15 @@
-import { Formatter, Formatters} from '../interfaces';
-import { ModuleElementService } from './module-element.service';
+import { Formatter, Formatters } from "../interfaces";
+import { ModuleElementService } from "./module-element.service";
 
 export class FormatterService extends ModuleElementService {
-
-  protected type: 'binder' | 'formatter' | 'components' | 'services' = 'formatter';
+  protected type: "binder" | "formatter" | "components" | "services" =
+    "formatter";
 
   /**
    *
    */
   constructor(formatters: Formatters) {
-   super(formatters);
+    super(formatters);
   }
 
   /**
@@ -17,12 +17,17 @@ export class FormatterService extends ModuleElementService {
    * @param formatter
    * @param name
    */
-  public regist(formatter: Formatter, fallbackName?: string, forceFallback = false): Formatters {
-
-    const name = forceFallback ? fallbackName || formatter.name : formatter.name || fallbackName;
+  public regist(
+    formatter: Formatter,
+    fallbackName?: string,
+    forceFallback = false
+  ): Formatters {
+    const name = forceFallback
+      ? fallbackName || formatter.name
+      : formatter.name || fallbackName;
 
     if (!name) {
-      throw new Error('Formatter name not found!');
+      throw new Error("Formatter name not found!");
     }
 
     this.elements[name] = formatter;

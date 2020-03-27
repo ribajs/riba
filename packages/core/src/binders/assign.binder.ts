@@ -1,5 +1,5 @@
-import { Binder } from '../interfaces';
-import { Utils } from '../services/utils';
+import { Binder } from "../interfaces";
+import { Utils } from "../services/utils";
 
 export interface Assign {
   key: string;
@@ -14,11 +14,11 @@ export interface Assign {
  * <div rv-assign='{"newValue": "hello", "anotherNewValue": "world"}'>{newValue} {anotherNewValue}!</div>
  */
 export const assignBinder: Binder<Assign> = {
-  name: 'assign',
+  name: "assign",
   routine(el: HTMLElement, value: object) {
-    if (typeof(value) === 'object') {
+    if (typeof value === "object") {
       return Utils.extend(false, this.view.models, value);
     }
-    console.warn('Value must be an object or propertyName is required');
-  },
+    console.warn("Value must be an object or propertyName is required");
+  }
 };

@@ -1,5 +1,5 @@
-import setString from 'chalk';
-import { Color } from '../../interfaces';
+import setString from "chalk";
+import { Color } from "../../interfaces/index";
 
 export { setString };
 
@@ -12,7 +12,7 @@ export { setString };
  */
 export const setChars = function (str: string, chars: string[], color: Color) {
   for (const char of chars) {
-    str = str.replace(new RegExp(char, 'g'), setString[color](char));
+    str = str.replace(new RegExp(char, "g"), setString[color](char));
   }
   return str;
-}
+};

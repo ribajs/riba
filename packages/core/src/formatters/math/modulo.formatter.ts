@@ -3,8 +3,8 @@
  * @see https://help.shopify.com/themes/liquid/filters/math-filters#modulo
  */
 export const moduloFormatter = {
-  name: 'modulo',
+  name: "modulo",
   read(a: string | number, b: string | number) {
     return Number(a) % Number(b);
-  },
+  }
 };

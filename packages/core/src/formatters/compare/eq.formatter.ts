@@ -1,10 +1,10 @@
-import { Formatter } from '../../interfaces/formatter';
+import { Formatter } from "../../interfaces/formatter";
 /**
  * a === b
  */
 export const eqFormatter: Formatter = {
-  name: 'eq',
+  name: "eq",
   read(a: any, b: any) {
     return a === b;
-  },
+  }
 };

@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateInput = (name, message) => {
     return (defaultAnswer) => ({
-        type: 'input',
+        type: "input",
         name,
         message,
         default: defaultAnswer,
@@ -11,7 +11,7 @@ exports.generateInput = (name, message) => {
 exports.generateSelect = (name) => {
     return (message) => {
         return (choices) => ({
-            type: 'list',
+            type: "list",
             name,
             message,
             choices,

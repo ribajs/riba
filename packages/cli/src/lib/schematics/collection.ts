@@ -1,6 +1,6 @@
-import { AbstractRunner, SchematicRunner } from '../runners';
-import { AbstractCollection } from './abstract.collection';
-import { SchematicOption } from './schematic.option';
+import { AbstractRunner, SchematicRunner } from "../runners";
+import { AbstractCollection } from "./abstract.collection";
+import { SchematicOption } from "./schematic.option";
 
 export interface Schematic {
   name: string;
@@ -9,12 +9,15 @@ export interface Schematic {
 
 export class Collection extends AbstractCollection {
   private static schematics: Schematic[] = [
-    { name: 'component', alias: 'c' },
-    { name: 'binder', alias: 'b' },
-    { name: 'formatter', alias: 'f' },
+    { name: "component", alias: "c" },
+    { name: "binder", alias: "b" },
+    { name: "formatter", alias: "f" },
   ];
 
-  constructor(collection: string, runner: AbstractRunner = new SchematicRunner()) {
+  constructor(
+    collection: string,
+    runner: AbstractRunner = new SchematicRunner()
+  ) {
     super(collection, runner);
   }
 
@@ -32,7 +35,7 @@ export class Collection extends AbstractCollection {
    */
   public static getSchematic(name: string) {
     const schematic = Collection.schematics.find(
-      s => s.name === name || s.alias === name,
+      (s) => s.name === name || s.alias === name
     );
     return schematic;
   }

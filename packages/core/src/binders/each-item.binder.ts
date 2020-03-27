@@ -1,13 +1,13 @@
-import { Bindable, Binder } from '../interfaces';
-import { View } from '../view';
-import { Utils } from '../services/utils';
+import { Bindable, Binder } from "../interfaces";
+import { View } from "../view";
+import { Utils } from "../services/utils";
 
 /**
  * each-*
  * Appends bound instances of the element in place for each item in the array.
  */
 export const eachStarBinder: Binder<any[]> = {
-  name: 'each-*',
+  name: "each-*",
   block: true,
   priority: 4000,
 
@@ -15,7 +15,7 @@ export const eachStarBinder: Binder<any[]> = {
     if (!this.marker) {
       this.marker = document.createComment(` riba: ${this.type} `);
       this.customData = {
-        iterated: [] as View[],
+        iterated: [] as View[]
       };
       if (!el.parentNode) {
         // console.warn('No parent node!');
@@ -24,7 +24,7 @@ export const eachStarBinder: Binder<any[]> = {
         el.parentNode.removeChild(el);
       }
     } else {
-      this.customData.iterated.forEach((view: View)  => {
+      this.customData.iterated.forEach((view: View) => {
         view.bind();
       });
     }
@@ -40,21 +40,24 @@ export const eachStarBinder: Binder<any[]> = {
 
   routine(el, collection) {
     if (this.args === null) {
-      throw new Error('args is null');
+      throw new Error("args is null");
     }
     const modelName = this.args[0] as string;
     collection = collection || [];
 
     // TODO support object keys to iterate over
     if (!Array.isArray(collection)) {
-      throw new Error('each-' + modelName + ' needs an array to iterate over, but it is');
+      throw new Error(
+        "each-" + modelName + " needs an array to iterate over, but it is"
+      );
     }
 
     // if index name is seted by `index-property` use this name, otherwise `%[modelName]%`
-    const indexProp = el.getAttribute('index-property') || this.getIterationAlias(modelName);
+    const indexProp =
+      el.getAttribute("index-property") || this.getIterationAlias(modelName);
 
     collection.forEach((model, index) => {
-      const scope: any = {$parent: this.view.models};
+      const scope: any = { $parent: this.view.models };
       scope[indexProp] = index;
       scope[modelName] = model;
       let view = this.customData.iterated[index];
@@ -63,11 +66,13 @@ export const eachStarBinder: Binder<any[]> = {
         let previous: Comment | HTMLElement;
 
         if (this.customData.iterated.length) {
-          previous = this.customData.iterated[this.customData.iterated.length - 1].els[0];
+          previous = this.customData.iterated[
+            this.customData.iterated.length - 1
+          ].els[0];
         } else if (this.marker) {
           previous = this.marker;
         } else {
-          throw new Error('previous not defined');
+          throw new Error("previous not defined");
         }
 
         view = View.create(this, scope, previous.nextSibling);
@@ -77,7 +82,11 @@ export const eachStarBinder: Binder<any[]> = {
           // search for a view that matches the model
           let matchIndex;
           let nextView;
-          for (let nextIndex = index + 1; nextIndex < this.customData.iterated.length; nextIndex++) {
+          for (
+            let nextIndex = index + 1;
+            nextIndex < this.customData.iterated.length;
+            nextIndex++
+          ) {
             nextView = this.customData.iterated[nextIndex];
             if (nextView.models[modelName] === model) {
               matchIndex = nextIndex;
@@ -90,7 +99,7 @@ export const eachStarBinder: Binder<any[]> = {
             // profile performance before implementing such change
             this.customData.iterated.splice(matchIndex, 1);
             if (!this.marker || !this.marker.parentNode) {
-              throw new Error('Marker has no parent node');
+              throw new Error("Marker has no parent node");
             }
             this.marker.parentNode.insertBefore(nextView.els[0], view.els[0]);
             nextView.models[indexProp] = index;
@@ -110,15 +119,20 @@ export const eachStarBinder: Binder<any[]> = {
         const view = this.customData.iterated.pop();
         view.unbind();
         if (!this.marker || !this.marker.parentNode) {
-          throw new Error('Marker has no parent node');
+          throw new Error("Marker has no parent node");
         }
         this.marker.parentNode.removeChild(view.els[0]);
       });
     }
 
-    if (el.nodeName === 'OPTION' && this.view.bindings) {
+    if (el.nodeName === "OPTION" && this.view.bindings) {
       this.view.bindings.forEach((binding: Bindable) => {
-        if (this.marker && (binding.el === this.marker.parentNode) && (binding.type === 'value') && binding.sync) {
+        if (
+          this.marker &&
+          binding.el === this.marker.parentNode &&
+          binding.type === "value" &&
+          binding.sync
+        ) {
           binding.sync();
         }
       });
@@ -128,9 +142,9 @@ export const eachStarBinder: Binder<any[]> = {
   update(models) {
     const data: any = {};
     // TODO: add test and fix if necessary
-    Object.keys(models).forEach((key) => {
+    Object.keys(models).forEach(key => {
       if (this.args === null) {
-        throw new Error('args is null');
+        throw new Error("args is null");
       }
       if (key !== this.args[0]) {
         data[key] = models[key];
@@ -140,5 +154,5 @@ export const eachStarBinder: Binder<any[]> = {
     this.customData.iterated.forEach((view: View) => {
       view.update(data);
     });
-  },
+  }
 };

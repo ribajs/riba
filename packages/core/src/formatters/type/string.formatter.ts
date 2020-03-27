@@ -1,4 +1,4 @@
-import { Utils } from '../../services/utils';
+import { Utils } from "../../services/utils";
 
 /**
  * Parses a value to string
@@ -6,7 +6,7 @@ import { Utils } from '../../services/utils';
  * @param def Default value if value is undefined
  */
 export const stringFormatter = {
-  name: 'string',
+  name: "string",
   read(value: any, def: string) {
     // If value is an array convert each value in array to string
     if (Utils.isArray(value)) {
@@ -29,5 +29,5 @@ export const stringFormatter = {
     }
 
     return value;
-  },
+  }
 };

@@ -1,1 +1,1 @@
-import './polyfills.module';
+import "./polyfills.module";

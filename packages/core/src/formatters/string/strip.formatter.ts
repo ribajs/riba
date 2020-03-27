@@ -3,8 +3,8 @@
  * @see https://help.shopify.com/themes/liquid/filters/string-filters#strip
  */
 export const stripFormatter = {
-  name: 'strip',
+  name: "strip",
   read(str: string) {
     return str.trim();
-  },
+  }
 };

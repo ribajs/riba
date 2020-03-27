@@ -1,25 +1,25 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.defaultConfiguration = {
-    language: 'ts',
-    collection: '@ribajs/schematics',
-    sourceRoot: 'src',
-    templateEngine: 'html',
-    styleLanguage: 'scss',
+    language: "ts",
+    collection: "@ribajs/schematics",
+    sourceRoot: "src",
+    templateEngine: "html",
+    styleLanguage: "scss",
     component: {
-        path: 'components',
+        path: "components",
         flat: false,
     },
     binder: {
-        path: 'binders',
+        path: "binders",
         flat: true,
     },
     formatter: {
-        path: 'formatters',
+        path: "formatters",
         flat: true,
     },
     service: {
-        path: 'services',
+        path: "services",
         flat: true,
     },
 };

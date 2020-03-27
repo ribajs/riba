@@ -1,10 +1,10 @@
-import { Binder } from '../interfaces';
+import { Binder } from "../interfaces";
 
 /**
  * readonly
  */
 export const readonlyBinder: Binder<boolean> = {
-  name: 'readonly',
+  name: "readonly",
 
   bind() {
     this.customData = {};
@@ -14,10 +14,9 @@ export const readonlyBinder: Binder<boolean> = {
     readOnly = !!readOnly;
     (el as HTMLInputElement).readOnly = readOnly;
     if (readOnly) {
-      (el as HTMLInputElement).setAttribute('readonly', '');
+      (el as HTMLInputElement).setAttribute("readonly", "");
     } else {
-      (el as HTMLInputElement).removeAttribute('readonly');
+      (el as HTMLInputElement).removeAttribute("readonly");
     }
-
-  },
+  }
 };

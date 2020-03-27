@@ -1,6 +1,6 @@
-import { AbstractRunner } from '../runners';
-import { AbstractCollection } from './abstract.collection';
-import { SchematicOption } from './schematic.option';
+import { AbstractRunner } from "../runners";
+import { AbstractCollection } from "./abstract.collection";
+import { SchematicOption } from "./schematic.option";
 export interface Schematic {
     name: string;
     alias: string;

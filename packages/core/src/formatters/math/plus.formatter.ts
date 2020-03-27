@@ -3,8 +3,8 @@
  * @see https://help.shopify.com/themes/liquid/filters/math-filters#plus
  */
 export const plusFormatter = {
-  name: 'plus',
+  name: "plus",
   read(a: string | number, b: string | number) {
     return Number(a) + Number(b);
-  },
+  }
 };

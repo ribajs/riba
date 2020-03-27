@@ -1,9 +1,8 @@
-import { Binder } from './binder';
-import { ObserverSyncCallback } from './observer';
-import { Observer } from '../observer';
+import { Binder } from "./binder";
+import { ObserverSyncCallback } from "./observer";
+import { Observer } from "../observer";
 
 export interface Bindable {
-
   binder?: Binder<any>;
 
   /**

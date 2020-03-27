@@ -1,14 +1,18 @@
-import { AbstractRunner } from '../runners';
-import { SchematicOption } from './schematic.option';
-import { debug as Debug } from 'debug';
+import { AbstractRunner } from "../runners/index";
+import { SchematicOption } from "./schematic.option";
+import { debug as Debug } from "debug";
+import { Debugger } from "debug";
 
 export class AbstractCollection {
-
-  protected debug = Debug('schematic:collection');
+  protected debug: Debugger = Debug("schematic:collection");
 
   constructor(protected collection: string, protected runner: AbstractRunner) {}
 
-  public async execute(name: string, options: SchematicOption[], extraFlags?: string) {
+  public async execute(
+    name: string,
+    options: SchematicOption[],
+    extraFlags?: string
+  ) {
     let command = this.buildCommandLine(name, options);
     command = extraFlags ? command.concat(` ${extraFlags}`) : command;
     this.debug(`Execute command: schematics ${command}`);
@@ -22,6 +26,6 @@ export class AbstractCollection {
   private buildOptions(options: SchematicOption[]): string {
     return options.reduce((line, option) => {
       return line.concat(` ${option.toCommandString()}`);
-    }, '');
+    }, "");
   }
 }

@@ -1,6 +1,6 @@
-import { Utils } from './services/utils';
+import { Utils } from "./services/utils";
 
-import { DataElement, View, TBlock } from './view';
+import { DataElement, View, TBlock } from "./view";
 
 /**
  * Used also in parsers.parseType
@@ -22,31 +22,31 @@ export function parseType(str?: string) {
   let type = PRIMITIVE;
   let value: any = str;
   if (str === undefined) {
-    return {type, value: undefined};
+    return { type, value: undefined };
   }
   if (QUOTED_STR.test(str)) {
     value = str.slice(1, -1);
     const jsonString = Utils.parseJsonString(value);
     value = jsonString ? jsonString : value;
-  } else if (str === 'true') {
+  } else if (str === "true") {
     value = true;
-  } else if (str === 'false') {
+  } else if (str === "false") {
     value = false;
-  } else if (str === 'null') {
+  } else if (str === "null") {
     value = null;
-  } else if (str === 'undefined') {
+  } else if (str === "undefined") {
     value = undefined;
-  } else if (str === '') {
+  } else if (str === "") {
     value = undefined;
   } else if (!isNaN(Number(str))) {
     value = Number(str);
-  } else if (value.startsWith('{') || value.startsWith('[')) {
+  } else if (value.startsWith("{") || value.startsWith("[")) {
     const jsonString = Utils.parseJsonString(value);
     value = jsonString ? jsonString : value;
   } else {
     type = KEYPATH;
   }
-  return {type, value};
+  return { type, value };
 }
 
 export interface Tokens {
@@ -76,7 +76,7 @@ export function parseTemplate(template: string, delimiters: string[]) {
       if (tokens) {
         tokens.push({
           type: TEXT,
-          value: template.slice(lastIndex),
+          value: template.slice(lastIndex)
         });
       }
 
@@ -86,7 +86,7 @@ export function parseTemplate(template: string, delimiters: string[]) {
       if (index > 0 && lastIndex < index) {
         tokens.push({
           type: TEXT,
-          value: template.slice(lastIndex, index),
+          value: template.slice(lastIndex, index)
         });
       }
 
@@ -102,7 +102,7 @@ export function parseTemplate(template: string, delimiters: string[]) {
         } else {
           tokens.push({
             type: TEXT,
-            value: substring,
+            value: substring
           });
         }
 
@@ -113,7 +113,7 @@ export function parseTemplate(template: string, delimiters: string[]) {
 
       tokens.push({
         type: BINDING,
-        value,
+        value
       });
 
       lastIndex = index + close.length;
@@ -123,11 +123,15 @@ export function parseTemplate(template: string, delimiters: string[]) {
   return tokens;
 }
 
-export function parseNode(view: View, node: DataElement, templateDelimiters: Array<string>) {
+export function parseNode(
+  view: View,
+  node: DataElement,
+  templateDelimiters: Array<string>
+) {
   /** If true stop / block the parseNode  recursion */
   let block: TBlock = false;
 
-  node = ( node as DataElement);
+  node = node as DataElement;
   // if node.nodeType === 3 === Node.TEXT_NODE
   if (node.nodeType === 3) {
     let tokens = null;
@@ -146,7 +150,13 @@ export function parseNode(view: View, node: DataElement, templateDelimiters: Arr
         }
         if (token.type === 1) {
           // TODO fix any
-          view.buildBinding(text as any, null, token.value, View.mustacheTextBinder, null);
+          view.buildBinding(
+            text as any,
+            null,
+            token.value,
+            View.mustacheTextBinder,
+            null
+          );
         }
       }
       if (node.parentNode) {
@@ -165,7 +175,7 @@ export function parseNode(view: View, node: DataElement, templateDelimiters: Arr
       for (let i = 0; i < node.childNodes.length; i++) {
         const childNode = node.childNodes[i];
         if (childNode) {
-          parseNode(view, (childNode as DataElement), templateDelimiters);
+          parseNode(view, childNode as DataElement, templateDelimiters);
         }
       }
     }
@@ -197,7 +207,7 @@ export interface ParsedDeclarations {
 export function parseDeclaration(declaration: string): ParsedDeclarations {
   const matches = declaration.match(DECLARATION_SPLIT);
   if (matches === null) {
-    throw new Error('[View] No matches');
+    throw new Error("[View] No matches");
   }
   const pipes = matches.map((str: string) => {
     return str.trim();
@@ -206,6 +216,6 @@ export function parseDeclaration(declaration: string): ParsedDeclarations {
 
   return {
     keypath,
-    pipes,
+    pipes
   } as ParsedDeclarations;
 }
