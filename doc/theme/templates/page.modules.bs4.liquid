@@ -1,0 +1,1211 @@
+<div class="container py-5 page {{template|handleize}}" id="page-content-{{page.handle}}"><div class="row pt-5"><div class="col-12"><div class="row"><div class="col-12"><h1 class="page-title">{{ page.title }}</h1><div class="rte">{{ page.content }}</div><div class="content"><bs4-contents class="d-block d-lg-none top-contents" header-parent-selector="#main-container" headers-start="2" headers-depth="4" scroll-offset="80"></bs4-contents><section class="my-5"><h1>Bootstrap 4 Module</h1>
+<h2>Install</h2>
+<pre><code class="language-bash">npm install --save @ribajs/bs4
+</code></pre>
+<h2>Regist</h2>
+<p>To regist the module include <code>import bs4Module from '@ribajs/bs4';</code> in your <code>main.ts</code> file and regist the module with <code>riba.module.regist(bs4Module);</code>:</p>
+<pre><code class="language-ts">import { Riba, Utils } from '@ribajs/core';
+import bs4Module from '@ribajs/bs4';
+const riba = new Riba();
+const model = {};
+riba.module.regist(bs4Module);
+Utils.domIsReady(() =&gt; {
+  riba.bind(document.body, model);
+});
+</code></pre>
+</section><section class="my-5" id="binders"><h2>Binders</h2><section class="my-5" id="scroll-to-on-event"><h3>scroll-to-on-[event]</h3><section><p>Scrolls to an element by event and selector</p>
+<rv-bind-content class="pt-3">
+  <template>
+    <rv-example-tabs handle="scroll-to-on-event" class="pt-3">
+      <template type="single-html-file">
+        <button class="btn btn-success" rv-scroll-to-on-click="'#bs4-tabs'" data-offset="80">
+          Scroll to bs4-tabs
+        </button>
+      </template>
+    </rv-example-tabs>
+  </template>
+</rv-bind-content>
+</section></section><section class="my-5" id="tooltip-binder"><h3>bs4-tooltip</h3><section><h4>Options</h4>
+<p>Options can be passed via data attributes, e.g <code>data-placement=&quot;right&quot;</code></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>placement</td>
+<td><code>'top'</code></td>
+<td>How to position the tooltip - <code>auto | top | bottom | left | right</code>. When auto is specified, it will dynamically reorient the tooltip.</td>
+</tr>
+</tbody>
+</table>
+<rv-bind-content class="pt-3">
+  <template>
+    <rv-example-tabs handle="bs4-tooltip-binder" class="pt-3">
+      <template type="single-html-file">
+        <button type="button" class="btn btn-secondary" rv-bs4-tooltip="'Tooltip on top'" data-placement="top">
+          Tooltip on top
+        </button>
+        <button type="button" class="btn btn-secondary" rv-bs4-tooltip="'Tooltip on right'" data-placement="right">
+          Tooltip on right
+        </button>
+        <button type="button" class="btn btn-secondary" rv-bs4-tooltip="'Tooltip on bottom'" data-placement="bottom">
+          Tooltip on bottom
+        </button>
+        <button type="button" class="btn btn-secondary" rv-bs4-tooltip="'Tooltip on left'" data-placement="left">
+          Tooltip on left
+        </button>
+      </template>
+    </rv-example-tabs>
+  </template>
+</rv-bind-content>
+</section></section></section><section class="my-5" id="components"><h2>Components</h2><section class="my-5" id="bs4-icon"><h3>bs4-icon</h3><section><p>Loads and displays an svg icon.</p>
+<h4>Attributes</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>size</td>
+<td style="text-align:left">Sets the width and height of the icon</td>
+</tr>
+<tr>
+<td>width</td>
+<td style="text-align:left">Sets the width of the icon</td>
+</tr>
+<tr>
+<td>height</td>
+<td style="text-align:left">Sets the height of the icon</td>
+</tr>
+<tr>
+<td>src</td>
+<td style="text-align:left">The source url of the icon image</td>
+</tr>
+<tr>
+<td>color</td>
+<td style="text-align:left">Color of the icon</td>
+</tr>
+<tr>
+<td>direction</td>
+<td style="text-align:left">Direction of the icon (default is <code>top</code>)</td>
+</tr>
+</tbody>
+</table>
+<rv-bind-content class="pt-3">
+  <template>
+    <rv-example-tabs class="pt-3" handle="bs4-icon">
+      <template type="single-html-file">
+        <bs4-icon color="danger" rv-src="'{{ 'icon_close.svg' | asset_url }}'" size="32"></bs4-icon>
+      </template>
+    </rv-example-tabs>
+  </template>
+</rv-bind-content>
+</section></section><section class="my-5" id="bs4-accordion"><h3>bs4-accordion</h3><section><p>Component to collapse multiple cards like an accordion as it exists on <a href="https://getbootstrap.com/docs/4.4/components/collapse/#accordion-example">the original bootstrap</a> example.
+Each accordion item is added by an <code>&lt;template&gt;</code> element with a <code>title</code> attribut`and his content as the accordion item body.</p>
+<h4>Attributes</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th style="text-align:center">Required</th>
+<th style="text-align:center">Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>collapse-icon-src</code></td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"></td>
+<td>Source of an collapse icon if you want to display an icon</td>
+</tr>
+<tr>
+<td><code>collapse-icon-src</code></td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"><code>16</code></td>
+<td>Size of the collapse icon in px</td>
+</tr>
+</tbody>
+</table>
+<h4>Template methods</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th style="text-align:center">Arguments</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hide</td>
+<td style="text-align:center">item, index</td>
+<td>Hides / closes / collapses the accordion item</td>
+</tr>
+<tr>
+<td>show</td>
+<td style="text-align:center">item, index</td>
+<td>Shows / opens / expands the accordion item</td>
+</tr>
+<tr>
+<td>toggle</td>
+<td style="text-align:center">item, index</td>
+<td>Toggles (closes or opens) the accordion item</td>
+</tr>
+</tbody>
+</table>
+<h4>Template properties</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>items</td>
+<td>An array of all accordion items</td>
+</tr>
+<tr>
+<td>collapseSelector</td>
+<td>See <code>collapse-selector</code> attribute</td>
+</tr>
+</tbody>
+</table>
+<h4>Child Template Attributes</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th style="text-align:center">Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td style="text-align:center">Yes</td>
+<td>Title of the accordion item</td>
+</tr>
+<tr>
+<td>show</td>
+<td style="text-align:center">No</td>
+<td>Set this to <code>true</code> if the accordion item should be visable on start</td>
+</tr>
+<tr>
+<td>icon-direction</td>
+<td style="text-align:center">No</td>
+<td>Starting icon direction for the collapse icon</td>
+</tr>
+</tbody>
+</table>
+<rv-bind-content class="pt-3">
+  <template>
+    <rv-example-tabs handle="bs4-navbar" class="pt-3">
+      <template type="single-html-file">
+        <bs4-accordion collapse-icon-src="{{ 'arrow_carrot_thin.svg' | asset_url }}">
+          <template title="Collapsible Group Item #1">
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+          </template>
+          <template title="Collapsible Group Item #2">
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+          </template>
+          <template title="Collapsible Group Item #3">
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+          </template>
+        </bs4-accordion>
+      </template>
+    </rv-example-tabs>
+  </template>
+</rv-bind-content>
+</section></section><section class="my-5" id="bs4-contents"><h3>bs4-contents</h3><section><p>Generates a jumpable table of contents of all found headings.</p>
+<h4>Attributes</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th style="text-align:center">Required</th>
+<th style="text-align:center">Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>headers-start</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"><code>1</code></td>
+<td>Headers start depth e.g. <code>1</code> for <code>h1</code></td>
+</tr>
+<tr>
+<td>headers-depth</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"><code>2</code></td>
+<td>Headers end depth e.g. <code>5</code> for <code>h5</code></td>
+</tr>
+<tr>
+<td>header-parent-selector</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center"></td>
+<td>Selector to search for headers</td>
+</tr>
+<tr>
+<td>find-header-id-depth</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"><code>1</code></td>
+<td>Depth in how many parents elements should be searched for an id for each found header element</td>
+</tr>
+<tr>
+<td>scroll-offset</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"><code>0</code></td>
+<td>Scroll offset after click on an element</td>
+</tr>
+<tr>
+<td>scroll-element</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"><code>window</code></td>
+<td>Container element which should be scrolled (default is <code>window</code>)</td>
+</tr>
+</tbody>
+</table>
+<h4>Template properties</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>anchors</td>
+<td>Array of found headers / anchors with the properties <code>element</code>, <code>href</code>, <code>title</code>, <code>childs</code></td>
+</tr>
+<tr>
+<td>headersStart</td>
+<td>Passed attribute value, see <code>headers-start</code> attribute</td>
+</tr>
+<tr>
+<td>headersDepth</td>
+<td>Passed attribute value, see <code>headers-depth</code> attribute</td>
+</tr>
+<tr>
+<td>headersParentSelector</td>
+<td>Passed attribute value, see <code>headers-parent-selector</code> attribute</td>
+</tr>
+<tr>
+<td>findHeaderIdDepth</td>
+<td>Passed attribute value, see <code>find-header-id-depth</code> attribute</td>
+</tr>
+<tr>
+<td>scrollOffset</td>
+<td>Passed attribute value, see <code>scroll-offset</code> attribute</td>
+</tr>
+<tr>
+<td>scrollEement</td>
+<td>Passed attribute value, see <code>scroll-element</code> attribute</td>
+</tr>
+</tbody>
+</table>
+<rv-bind-content class="pt-3">
+  <template>
+    <rv-example-tabs class="pt-3" handle="bs4-contents">
+      <template type="single-html-file">
+        <bs4-contents headers-start="1" headers-depth="6" header-parent-selector="#header-example-wrapper" scroll-offset="80" scroll-element="[handle='bs4-contents'] .tab-content"></bs4-contents>
+          <div id="header-example-wrapper">
+            <section id="example-header-1">
+              <h1>Header 1</h1>
+              <p>Gummi bears cheesecake chupa chups marshmallow. Pie marshmallow chocolate bar topping macaroon muffin lemon drops tiramisu. Powder cake lollipop cotton candy cookie pastry carrot cake jujubes. Cake tart topping cake gummi bears cookie liquorice marshmallow. Jelly powder carrot cake pie bear claw. Cupcake candy sugar plum jelly gummies donut lollipop chocolate bar gingerbread. Icing donut halvah sweet roll lollipop jelly beans caramels jelly beans cake. Tiramisu toffee gummi bears. Candy canes bear claw bonbon cupcake. Muffin chupa chups icing bear claw. Soufflé tootsie roll biscuit wafer apple pie marzipan. Powder ice cream toffee dessert sweet oat cake cheesecake candy canes sesame snaps. Marzipan pastry fruitcake halvah ice cream jelly beans biscuit lemon drops chocolate cake.</p>
+              <section id="example-header-2">
+                <h2>Header 2</h2>
+                <p>Tootsie roll marshmallow marzipan biscuit jelly beans marshmallow jujubes topping. Cheesecake gummies lollipop chocolate cake bear claw cupcake. Topping toffee brownie chupa chups sesame snaps lollipop candy. Ice cream biscuit icing dessert toffee. Liquorice caramels soufflé. Powder tiramisu halvah sugar plum. Danish tiramisu chupa chups. Sweet donut gummi bears apple pie macaroon chupa chups cheesecake pie cupcake. Donut marzipan liquorice carrot cake pudding bonbon. Muffin lemon drops tart oat cake. Chocolate cake halvah dessert dessert. Dragée chupa chups halvah biscuit muffin chocolate bar danish. Jujubes sesame snaps chocolate cake jelly beans cookie candy lollipop.</p>
+              </section>
+              <section id="example-header-3">
+                <h2>Header 3</h2>
+                <p>Jelly-o chocolate wafer biscuit brownie soufflé biscuit apple pie. Fruitcake macaroon lemon drops sweet roll jujubes liquorice. Jelly toffee bear claw croissant tiramisu. Brownie sweet roll cheesecake chupa chups. Oat cake caramels gummi bears caramels. Biscuit sugar plum marshmallow jelly candy canes. Liquorice chocolate bar biscuit jelly-o danish powder tart. Lollipop cotton candy lemon drops dragée tart toffee muffin. Chupa chups bear claw chocolate candy dragée cookie jelly dessert. Tiramisu donut danish gummi bears brownie icing brownie. Cheesecake gummies brownie cheesecake lemon drops biscuit jelly beans icing cake. Gummi bears icing liquorice gummi bears tootsie roll sweet roll soufflé cake jelly beans.</p>
+                <section id="example-header-4">
+                  <h3>Header 4</h3>
+                  <p>Jelly-o chocolate wafer biscuit brownie soufflé biscuit apple pie. Fruitcake macaroon lemon drops sweet roll jujubes liquorice. Jelly toffee bear claw croissant tiramisu. Brownie sweet roll cheesecake chupa chups. Oat cake caramels gummi bears caramels. Biscuit sugar plum marshmallow jelly candy canes. Liquorice chocolate bar biscuit jelly-o danish powder tart. Lollipop cotton candy lemon drops dragée tart toffee muffin. Chupa chups bear claw chocolate candy dragée cookie jelly dessert. Tiramisu donut danish gummi bears brownie icing brownie. Cheesecake gummies brownie cheesecake lemon drops biscuit jelly beans icing cake. Gummi bears icing liquorice gummi bears tootsie roll sweet roll soufflé cake jelly beans.</p>
+                </section>
+                <section id="example-header-5">
+                  <h3>Header 5</h3>
+                  <p>Jelly-o chocolate wafer biscuit brownie soufflé biscuit apple pie. Fruitcake macaroon lemon drops sweet roll jujubes liquorice. Jelly toffee bear claw croissant tiramisu. Brownie sweet roll cheesecake chupa chups. Oat cake caramels gummi bears caramels. Biscuit sugar plum marshmallow jelly candy canes. Liquorice chocolate bar biscuit jelly-o danish powder tart. Lollipop cotton candy lemon drops dragée tart toffee muffin. Chupa chups bear claw chocolate candy dragée cookie jelly dessert. Tiramisu donut danish gummi bears brownie icing brownie. Cheesecake gummies brownie cheesecake lemon drops biscuit jelly beans icing cake. Gummi bears icing liquorice gummi bears tootsie roll sweet roll soufflé cake jelly beans.</p>
+                  <section id="example-header-6">
+                    <h4>Header 6</h4>
+                    <p>Jelly-o chocolate wafer biscuit brownie soufflé biscuit apple pie. Fruitcake macaroon lemon drops sweet roll jujubes liquorice. Jelly toffee bear claw croissant tiramisu. Brownie sweet roll cheesecake chupa chups. Oat cake caramels gummi bears caramels. Biscuit sugar plum marshmallow jelly candy canes. Liquorice chocolate bar biscuit jelly-o danish powder tart. Lollipop cotton candy lemon drops dragée tart toffee muffin. Chupa chups bear claw chocolate candy dragée cookie jelly dessert. Tiramisu donut danish gummi bears brownie icing brownie. Cheesecake gummies brownie cheesecake lemon drops biscuit jelly beans icing cake. Gummi bears icing liquorice gummi bears tootsie roll sweet roll soufflé cake jelly beans.</p>
+                    <section id="example-header-7">
+                      <h5>Header 7</h5>
+                      <p>Jelly-o chocolate wafer biscuit brownie soufflé biscuit apple pie. Fruitcake macaroon lemon drops sweet roll jujubes liquorice. Jelly toffee bear claw croissant tiramisu. Brownie sweet roll cheesecake chupa chups. Oat cake caramels gummi bears caramels. Biscuit sugar plum marshmallow jelly candy canes. Liquorice chocolate bar biscuit jelly-o danish powder tart. Lollipop cotton candy lemon drops dragée tart toffee muffin. Chupa chups bear claw chocolate candy dragée cookie jelly dessert. Tiramisu donut danish gummi bears brownie icing brownie. Cheesecake gummies brownie cheesecake lemon drops biscuit jelly beans icing cake. Gummi bears icing liquorice gummi bears tootsie roll sweet roll soufflé cake jelly beans.</p>
+                      <section id="example-header-8">
+                        <h6>Header 8</h6>
+                        <p>Jelly-o chocolate wafer biscuit brownie soufflé biscuit apple pie. Fruitcake macaroon lemon drops sweet roll jujubes liquorice. Jelly toffee bear claw croissant tiramisu. Brownie sweet roll cheesecake chupa chups. Oat cake caramels gummi bears caramels. Biscuit sugar plum marshmallow jelly candy canes. Liquorice chocolate bar biscuit jelly-o danish powder tart. Lollipop cotton candy lemon drops dragée tart toffee muffin. Chupa chups bear claw chocolate candy dragée cookie jelly dessert. Tiramisu donut danish gummi bears brownie icing brownie. Cheesecake gummies brownie cheesecake lemon drops biscuit jelly beans icing cake. Gummi bears icing liquorice gummi bears tootsie roll sweet roll soufflé cake jelly beans.</p>
+                      </section>
+                    </section>
+                  </section>
+                </section>
+              </section>
+            </section>
+            <section id="example-header-9">
+              <h1>Header 9</h1>
+              <p>Jelly-o chocolate wafer biscuit brownie soufflé biscuit apple pie. Fruitcake macaroon lemon drops sweet roll jujubes liquorice. Jelly toffee bear claw croissant tiramisu. Brownie sweet roll cheesecake chupa chups. Oat cake caramels gummi bears caramels. Biscuit sugar plum marshmallow jelly candy canes. Liquorice chocolate bar biscuit jelly-o danish powder tart. Lollipop cotton candy lemon drops dragée tart toffee muffin. Chupa chups bear claw chocolate candy dragée cookie jelly dessert. Tiramisu donut danish gummi bears brownie icing brownie. Cheesecake gummies brownie cheesecake lemon drops biscuit jelly beans icing cake. Gummi bears icing liquorice gummi bears tootsie roll sweet roll soufflé cake jelly beans.</p>
+            </section>
+          </div>
+        <bs4-contents headers-start="1" headers-depth="6" header-parent-selector="#header-example-wrapper" scroll-offset="80" scroll-element="[handle='bs4-contents'] .tab-content"></bs4-contents>
+      </template>
+    </rv-example-tabs>
+  </template>
+</rv-bind-content>
+</section></section><section class="my-5" id="bs4-tabs"><h3>bs4-tabs</h3><section><h4>Attributes</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th style="text-align:center">Required</th>
+<th style="text-align:center">Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>option-tabs-auto-height</code></td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"><code>false</code></td>
+<td>Sets the tab content height to the highest tab content height (so that ervery tab content has the same height)</td>
+</tr>
+<tr>
+<td><code>option-tabs-angle</code></td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"><code>'horizontal'</code></td>
+<td>Tabs angle, can be <code>'horizontal'</code> or <code>'vertical'</code></td>
+</tr>
+<tr>
+<td><code>tab-[index]-title'</code></td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"></td>
+<td>Title of tab with [index] (starts at 0)</td>
+</tr>
+<tr>
+<td><code>tab-[index]-content</code></td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"></td>
+<td>Content of tab with index</td>
+</tr>
+<tr>
+<td><code>tab-[index]-handle</code></td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"></td>
+<td>Tab handle (is used for identification, if not set, it is automatically generated from the title)</td>
+</tr>
+</tbody>
+</table>
+<p>You can define the tab tilte and content with the <code>tab-[index]-title</code> and <code>tab-[index]-content</code> attributes.</p>
+<rv-bind-content><template><rv-example-tabs handle="bs4-tabs-attr"><template title="Source" type="source"><pre><code class="language-html">&lt;bs4-tabs
+  option-tabs-angle=&quot;vertical&quot;
+  tab-0-title=&quot;Tab 0&quot;
+  tab-0-content=&quot;&lt;p class=&#39;my-3&#39;&gt;Hello from &lt;strong&gt;tab 0&lt;/strong&gt;&lt;/p&gt;&quot;
+  tab-1-title=&quot;Tab 1&quot;
+  tab-1-content=&quot;&lt;p class=&#39;my-3&#39;&gt;Hello from &lt;strong&gt;tab 1&lt;/strong&gt;&lt;/p&gt;&quot;
+  tab-2-title=&quot;Tab 2&quot;
+  tab-2-content=&quot;&lt;p class=&#39;my-3&#39;&gt;Hello from &lt;strong&gt;tab 2&lt;/strong&gt;&lt;/p&gt;&quot;
+  tab-3-title=&quot;Tab 3&quot;
+  tab-3-content=&quot;&lt;p class=&#39;my-3&#39;&gt;Hello from &lt;strong&gt;tab 3&lt;/strong&gt;&lt;/p&gt;&quot;
+  tab-4-title=&quot;Tab 4&quot;
+  tab-4-content=&quot;&lt;p class=&#39;my-3&#39;&gt;Hello from &lt;strong&gt;tab 4&lt;/strong&gt;&lt;/p&gt;&quot;
+  tab-5-title=&quot;Tab 5&quot;
+  tab-5-content=&quot;&lt;p class=&#39;my-3&#39;&gt;Hello from &lt;strong&gt;tab 5&lt;/strong&gt;&lt;/p&gt;&quot;
+  tab-6-title=&quot;Tab 6&quot;
+  tab-6-content=&quot;&lt;p class=&#39;my-3&#39;&gt;Hello from &lt;strong&gt;tab 6&lt;/strong&gt;&lt;/p&gt;&quot;
+  tab-7-title=&quot;Tab 7&quot;
+  tab-7-content=&quot;&lt;p class=&#39;my-3&#39;&gt;Hello from &lt;strong&gt;tab 7&lt;/strong&gt;&lt;/p&gt;&quot;
+  tab-8-title=&quot;Tab 8&quot;
+  tab-8-content=&quot;&lt;p class=&#39;my-3&#39;&gt;Hello from &lt;strong&gt;tab 8&lt;/strong&gt;&lt;/p&gt;&quot;
+  tab-9-title=&quot;Tab 9&quot;
+  tab-9-content=&quot;&lt;p class=&#39;my-3&#39;&gt;Hello from &lt;strong&gt;tab 9&lt;/strong&gt;&lt;/p&gt;&quot;
+&gt;&lt;/bs4-tabs&gt;
+</code></pre></template><template title="Preview" type="preview"><rv-bs4-tabs-attr-example></rv-bs4-tabs-attr-example></template><template title="Info" type="info"><h1>bs4-tabs-attr</h1>
+<pre><code class="language-bash">git clone --recurse-submodules https://github.com/ribajs/riba.git
+cd riba/examples/bs4-tabs-attr
+npm install
+npm run start
+</code></pre>
+</template></rv-example-tabs></template></rv-bind-content></section><section class="mt-5"><p>Sometimes it is useful to define the tabs via templates, for example if the html content of the tabs are too complex.</p>
+<rv-bind-content><template><rv-example-tabs handle="bs4-tabs-tpl"><template title="Source" type="source"><pre><code class="language-html">&lt;bs4-tabs&gt;
+  &lt;template title=&quot;Tab 0&quot;&gt;
+    &lt;img class=&quot;img-fluid my-3&quot; src=&quot;https://via.placeholder.com/150/7c00b5/FFFFFF?text=Tab%200&quot; alt=&quot;Tab 0&quot;&gt;
+  &lt;/template&gt;
+  &lt;template title=&quot;Tab 1&quot;&gt;
+    &lt;img class=&quot;img-fluid my-3&quot; src=&quot;https://via.placeholder.com/150/00b56a/FFFFFF?text=Tab%201&quot; alt=&quot;Tab 1&quot;&gt;
+  &lt;/template&gt;
+  &lt;template title=&quot;Tab 2&quot;&gt;
+    &lt;img class=&quot;img-fluid my-3&quot; src=&quot;https://via.placeholder.com/150/001f3f/FFFFFF?text=Tab%202&quot; alt=&quot;Tab 2&quot;&gt;
+  &lt;/template&gt;
+  &lt;template title=&quot;Tab 3&quot;&gt;
+    &lt;img class=&quot;img-fluid my-3&quot; src=&quot;https://via.placeholder.com/150/0074D9/FFFFFF?text=Tab%203&quot; alt=&quot;Tab 3&quot;&gt;
+  &lt;/template&gt;
+  &lt;template title=&quot;Tab 4&quot;&gt;
+    &lt;img class=&quot;img-fluid my-3&quot; src=&quot;https://via.placeholder.com/150/7FDBFF/FFFFFF?text=Tab%204&quot; alt=&quot;Tab 4&quot;&gt;
+  &lt;/template&gt;
+  &lt;template title=&quot;Tab 5&quot;&gt;
+    &lt;img class=&quot;img-fluid my-3&quot; src=&quot;https://via.placeholder.com/150/39CCCC/FFFFFF?text=Tab%205&quot; alt=&quot;Tab 5&quot;&gt;
+  &lt;/template&gt;
+  &lt;template title=&quot;Tab 6&quot;&gt;
+    &lt;img class=&quot;img-fluid my-3&quot; src=&quot;https://via.placeholder.com/150/3D9970/FFFFFF?text=Tab%206&quot; alt=&quot;Tab 6&quot;&gt;
+  &lt;/template&gt;
+  &lt;template title=&quot;Tab 7&quot;&gt;
+    &lt;img class=&quot;img-fluid my-3&quot; src=&quot;https://via.placeholder.com/150/2ECC40/FFFFFF?text=Tab%207&quot; alt=&quot;Tab 7&quot;&gt;
+  &lt;/template&gt;
+  &lt;template title=&quot;Tab 8&quot;&gt;
+    &lt;img class=&quot;img-fluid my-3&quot; src=&quot;https://via.placeholder.com/150/FF851B/FFFFFF?text=Tab%208&quot; alt=&quot;Tab 8&quot;&gt;
+  &lt;/template&gt;
+  &lt;template title=&quot;Tab 9&quot;&gt;
+    &lt;img class=&quot;img-fluid my-3&quot; src=&quot;https://via.placeholder.com/150/85144b/FFFFFF?text=Tab%209&quot; alt=&quot;Tab 9&quot;&gt;
+  &lt;/template&gt;
+&lt;/bs4-tabs&gt;
+</code></pre></template><template title="Preview" type="preview"><rv-bs4-tabs-tpl-example></rv-bs4-tabs-tpl-example></template><template title="Info" type="info"><h1>bs4-tabs-tpl</h1>
+<pre><code class="language-bash">git clone --recurse-submodules https://github.com/ribajs/riba.git
+cd riba/examples/bs4-tabs-tpl
+npm install
+npm run start
+</code></pre>
+</template></rv-example-tabs></template></rv-bind-content></section></section><section class="my-5" id="bs4-toggle-button"><h3>bs4-toggle-button</h3><section><p>This components is used to trigger a toggle event used in other components or parts of your project.
+This site itself uses the <code>bs4-toggle-button</code> to open or close the sidebar.</p>
+<h4>Attributes</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th style="text-align:center">Required</th>
+<th style="text-align:center">Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target-id</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center"></td>
+<td>The id with which the toggle event is triggered</td>
+</tr>
+</tbody>
+</table>
+<h4>Template methods</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th style="text-align:center">Arguments</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>toggle</td>
+<td style="text-align:center"></td>
+<td>Triggeres the toggle event</td>
+</tr>
+</tbody>
+</table>
+<h4>Template properties</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>state</td>
+<td>Can be 'hidden' or something else</td>
+</tr>
+<tr>
+<td>isClosed</td>
+<td>Is true if the state is 'hidden'</td>
+</tr>
+<tr>
+<td>targetId</td>
+<td>Passed attribute value, see <code>target-id</code> attribute</td>
+</tr>
+</tbody>
+</table>
+<p>To react on the &quot;toggle&quot; event triggered by the <code>bs4-toggle-button</code> component you need to create a object of <code>EventDispatcher</code> like this:</p>
+<pre><code class="language-typescript">import { EventDispatcher } from '@ribajs/core';
+// The id must be identical to the id of the `bs4-toggle-button`
+const id = 'example-sidebar';
+const toggleButtonEvents = new EventDispatcher('bs4-toggle-button:' + id);
+toggleButtonEvents.on('toggle', () =&gt; {
+  // do something
+});
+</code></pre>
+<p>After reacting to the toggle event, you should fire an event yourself to let the <code>bs4-toggle-button</code> component know that your logic has toggled:</p>
+<pre><code class="language-typescript">toggleButtonEvents.trigger('toggled', 'hidden');
+</code></pre>
+<rv-bind-content class="pt-3">
+  <template>
+    <rv-example-tabs handle="bs4-toggle-button-component" class="pt-3">
+      <template type="single-html-file">
+        <bs4-toggle-button target-id="main-sidebar" class="p-3">
+          <button rv-on-click="toggle" class="btn btn-warning">
+            Click to toggle the main sidebar <span rv-show="isClosed">(Closed)</span><span rv-hide="isClosed">(Open)</span>
+          </button>
+        </bs4-toggle-button>
+        <bs4-toggle-button target-id="example-sidebar" class="p-3">
+          <button rv-on-click="toggle" class="btn btn-info">
+            Click to toggle the sidebar in the example below <span rv-show="isClosed">(Closed)</span><span rv-hide="isClosed">(Open)</span>
+          </button>
+          <p class="m-3"><em>Before you click on this button, make sure that the preview of the sidebar component example is open.</em></p>
+        </bs4-toggle-button>
+      </template>
+    </rv-example-tabs>
+  </template>
+</rv-bind-content>
+</section></section><section class="my-5" id="bs4-sidebar"><h3>bs4-sidebar</h3><section><p>A sidebar component as it is also used for this Riba website.</p>
+<p>You can use the <code>bs4-toggle-button</code> component to open or close the sidebar at any point in the DOM.</p>
+<h4>Attributes</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th style="text-align:center">Required</th>
+<th style="text-align:center">Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center"></td>
+<td>The 'id' is required to react to events of the <code>bs4-toggle-button</code>, the <code>target-id</code> attribute of the <code>bs4-toggle-button</code> must be identical to this <code>id</code></td>
+</tr>
+<tr>
+<td>container-selector</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"></td>
+<td>Selector string to get the container element from DOM</td>
+</tr>
+<tr>
+<td>position</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"><code>&quot;left&quot;</code></td>
+<td>The sidebar can be positioned <code>'right'</code> or <code>'left'</code></td>
+</tr>
+<tr>
+<td>width</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"><code>&quot;250px&quot;</code></td>
+<td>The width of the sidebar with unit (e.g. &quot;px&quot;)</td>
+</tr>
+<tr>
+<td>auto-show-on-wider-than</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"><code>1199</code></td>
+<td>Auto show the sidebar if the viewport width is wider than this value, pass <code>-1</code> to disable auto show</td>
+</tr>
+<tr>
+<td>auto-hide-on-slimmer-than</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"><code>1200</code></td>
+<td>Auto hide the sidebar if the viewport width is slimmer than this value, pass <code>-1</code> to disable auto hide</td>
+</tr>
+<tr>
+<td>watch-new-page-ready-event</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"><code>true</code></td>
+<td>Watch the routers <code>newPageReady</code> event to update the sidebar state, e.g. hide on slime than after route changes</td>
+</tr>
+<tr>
+<td>force-hide-on-location-pathnames</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"><code>[]</code></td>
+<td>You can force to hide the sidebar on corresponding URL pathames e.g. you can hide the sidebar on home with <code>['/']</code></td>
+</tr>
+<tr>
+<td>force-show-on-location-pathnames</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"><code>[]</code></td>
+<td>Like <code>force-hide-on-location-pathnames</code>, but to force to open the sidebar</td>
+</tr>
+<tr>
+<td>overlay-on-slimmer-than</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"><code>1200</code></td>
+<td>If the viewport width is wider than this value the sidebar adds a margin to the container (detected with the <code>container-selector</code>) to reduce its content, if the viewport width is slimmer than this value the sidebar opens over the content</td>
+</tr>
+</tbody>
+</table>
+<h4>Template methods</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th style="text-align:center">Arguments</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hide</td>
+<td style="text-align:center"></td>
+<td>Hides / closes the sidebar</td>
+</tr>
+<tr>
+<td>show</td>
+<td style="text-align:center"></td>
+<td>Shows / opens the sidebar</td>
+</tr>
+<tr>
+<td>toggle</td>
+<td style="text-align:center"></td>
+<td>Toggles (closes or opens) the sidebar</td>
+</tr>
+</tbody>
+</table>
+<h4>Template properties</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>state</td>
+<td>The current state of the sidebar, can be <code>'hidden'</code>, <code>'side-left'</code>, <code>'side-right'</code>, <code>'overlay-left'</code> or <code>'overlay-right'</code></td>
+</tr>
+<tr>
+<td>containerSelector</td>
+<td>Passed attribute value, see <code>container-selector</code> attribute</td>
+</tr>
+<tr>
+<td>position</td>
+<td>Passed attribute value, see <code>position</code> attribute</td>
+</tr>
+<tr>
+<td>width</td>
+<td>Passed attribute value, see <code>width</code> attribute</td>
+</tr>
+<tr>
+<td>autoShowInWiderThan</td>
+<td>Passed attribute value, see <code>auto-show-on-wider-than</code> attribute</td>
+</tr>
+<tr>
+<td>autoHideOnSlimmerThan</td>
+<td>Passed attribute value, see <code>auto-hide-on-slimmer-than</code> attribute</td>
+</tr>
+<tr>
+<td>forceHideOnLocationPathnames</td>
+<td>Passed attribute value, see <code>force-hide-on-location-pathnames</code> attribute</td>
+</tr>
+<tr>
+<td>force-show-on-location-pathnames</td>
+<td>Passed attribute value, see <code>force-show-on-location-pathnames</code> attribute</td>
+</tr>
+<tr>
+<td>overlayOnSlimmerThan</td>
+<td>Passed attribute value, see <code>overlay-on-slimmer-than</code> attribute</td>
+</tr>
+</tbody>
+</table>
+<rv-bind-content class="pt-3">
+  <template>
+    <rv-example-tabs handle="bs4-sidebar-component" class="pt-3">
+      <template type="single-html-file">
+        <div>
+          <bs4-sidebar id="example-sidebar" container-selector="#example-sidebar-container" position="right" class="p-3">
+            <div rv-hide="isClosed" rv-on-click="hide" class="d-flex justify-content-center">
+              <bs4-icon src="{{ 'icon_close.svg' | asset_url }}" size="32"></bs4-icon>
+            </div>
+            <p class="text-center">Hello World!</p>
+          </bs4-sidebar>
+          <div id="example-sidebar-container">
+            <bs4-toggle-button target-id="example-sidebar" class="d-flex justify-content-center">
+              <div rv-show="isClosed" rv-on-click="toggle">
+                <bs4-icon src="{{ 'icon_menu.svg' | asset_url }}" size="32"></bs4-icon>
+              </div>
+              <div rv-hide="isClosed" rv-on-click="toggle">
+                <bs4-icon src="{{ 'icon_close.svg' | asset_url }}" size="32"></bs4-icon>
+              </div>
+            </bs4-toggle-button>
+            <p class="text-center">Brownie marshmallow powder apple pie bear claw jujubes. Cake sweet roll marzipan. Chocolate cake carrot cake ice cream cake ice cream sesame snaps cake. Jelly-o biscuit jelly beans sweet roll soufflé apple pie. Powder soufflé sugar plum soufflé chocolate bar liquorice oat cake. Halvah powder pudding tart marshmallow. Cake jujubes cookie ice cream danish chupa chups bear claw candy croissant. Caramels fruitcake bonbon bonbon. Fruitcake marshmallow sesame snaps icing oat cake apple pie gummies toffee. Icing bear claw chocolate bar oat cake chocolate dragée apple pie. Jelly-o jelly-o macaroon jujubes lollipop carrot cake lemon drops cake biscuit. Cotton candy muffin gingerbread chupa chups.</p>
+          </div>
+        </div>
+      </template>
+    </rv-example-tabs>
+  </template>
+</rv-bind-content>
+</section></section><section class="my-5" id="bs4-navbar"><h3>bs4-navbar</h3><section><p>Component to collapse the Bootstrap 4 navbar.</p>
+<h4>Attributes</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th style="text-align:center">Required</th>
+<th style="text-align:center">Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>collapse-selector</code></td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"><code>'.navbar-collapse'</code></td>
+<td>The selector of the collabseable child element</td>
+</tr>
+<tr>
+<td><code>animated</code></td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"><code>true</code></td>
+<td>Set the attribute to <code>animated=&quot;false&quot;</code> to disable collapse animations</td>
+</tr>
+</tbody>
+</table>
+<h4>Template methods</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th style="text-align:center">Arguments</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hide</td>
+<td style="text-align:center"></td>
+<td>Hides / closes / collapses the navbar collabseable child element</td>
+</tr>
+<tr>
+<td>show</td>
+<td style="text-align:center"></td>
+<td>Shows / opens / expands the navbar collabseable child element</td>
+</tr>
+<tr>
+<td>toggle</td>
+<td style="text-align:center"></td>
+<td>Toggles (closes or opens) the navbar collabseable child element</td>
+</tr>
+</tbody>
+</table>
+<h4>Template properties</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>isCollapsed</td>
+<td><code>true</code> if navbar collabseable child element is collapsed, otherwise <code>false</code></td>
+</tr>
+<tr>
+<td>collapseSelector</td>
+<td>See <code>collapse-selector</code> attribute</td>
+</tr>
+</tbody>
+</table>
+<rv-bind-content class="pt-3">
+  <template>
+    <rv-example-tabs handle="bs4-navbar" class="pt-3">
+      <template type="single-html-file">
+        <bs4-navbar class="navbar navbar-dark bg-dark">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <div class="navbar-toggler" rv-show="isCollapsed" rv-on-click="toggle">
+            <bs4-icon src="{{ 'icon_menu.svg' | asset_url }}" size="32"></bs4-icon>
+          </div>
+          <div class="navbar-toggler" rv-hide="isCollapsed" rv-on-click="toggle">
+            <bs4-icon src="{{ 'icon_close.svg' | asset_url }}" size="32"></bs4-icon>
+          </div>
+          <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+              </li>
+            </ul>
+          </div>
+        </bs4-navbar>
+      </template>
+    </rv-example-tabs>
+  </template>
+</rv-bind-content>
+</section></section><section class="my-5" id="bs4-dropdown"><h3>bs4-dropdown</h3><section><p>Instead of adding <code>data-toggle=&quot;dropdown&quot;</code> to your html element (as it is with the original bootstrap 4) you need to set the wrapper element tag name to <code>&lt;bs4-dropdown class=&quot;dropup&quot;&gt;...&lt;/bs4-dropdown&gt;</code> and add the attribute <code>rv-on-click=&quot;toggle&quot;</code> to the element which should trigger the toggle.</p>
+<rv-bind-content class="pt-3">
+  <template>
+    <rv-example-tabs class="pt-3" handle="bs4-dropdown">
+      <template type="single-html-file">
+        <bs4-dropdown class="dropdown">
+          <a rv-on-click="toggle" class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false">
+            Dropdown link
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+          </div>
+        </bs4-dropdown>
+        <bs4-dropdown class="dropup">
+          <a rv-on-click="toggle" class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropupMenuLink" aria-haspopup="true" aria-expanded="false">
+            Dropdown link
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropupMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+          </div>
+        </bs4-dropdown>
+      </template>
+    </rv-example-tabs>
+  </template>
+</rv-bind-content>
+</section></section><section class="my-5" id="bs4-slideshow"><h3>bs4-slideshow</h3><section><rv-bind-content class="pt-3">
+  <template>
+    <rv-example-tabs handle="bs4-slideshow-1" class="pt-3">
+      <template type="single-html-file">
+        <bs4-slideshow controls="false" lg-controls="true" indicators="false" lg-indicators="true" control-prev-icon-src="{{ 'arrow_carrot_alt.svg' | asset_url }}" control-next-icon-src="{{ 'arrow_carrot_alt.svg' | asset_url }}" indicator-inactive-icon-src="{{ 'icon_circle-empty.svg' | asset_url }}" indicator-active-icon-src="{{ 'icon_circle-selected.svg' | asset_url }}" sticky="true" autoplay="true" autoplay-interval="10000">
+          <div class="slideshow-inner">
+            <div class="slide col-12 p-0">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=1" alt="Static Random Image from https://picsum.photos/">
+              <div class="slide-caption">
+                <h1>bs4-slideshow<br><small>The last bootstrap carousel you'll ever need</small></h1>
+              </div>
+            </div>
+            <div class="slide col-12 p-0">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=2" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 p-0">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=3" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 p-0">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=4" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 p-0">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=5" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 p-0">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=6" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 p-0">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=7" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 p-0">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=8" alt="Static Random Image from https://picsum.photos/">
+            </div>
+          </div>
+        </bs4-slideshow>
+      </template>
+    </rv-example-tabs>
+  </template>
+</rv-bind-content>
+<h4>Multiple Items</h4>
+<rv-bind-content class="pt-3">
+  <template>
+    <rv-example-tabs handle="bs4-slideshow-1" class="pt-3">
+      <template type="single-html-file">
+        <bs4-slideshow controls="false" lg-controls="true" indicators="false" lg-indicators="true" control-prev-icon-src="{{ 'arrow_carrot.svg' | asset_url }}" control-next-icon-src="{{ 'arrow_carrot.svg' | asset_url }}" indicator-inactive-icon-src="{{ 'icon_circle-empty.svg' | asset_url }}" indicator-active-icon-src="{{ 'icon_circle-selected.svg' | asset_url }}" slides-to-scroll="3" indicators="false">
+          <div class="slideshow-inner">
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=1" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=2" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=3" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=4" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=5" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=6" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=7" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=8" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=9" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=10" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=11" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=12" alt="Static Random Image from https://picsum.photos/">
+            </div>
+          </div>
+        </bs4-slideshow>
+      </template>
+    </rv-example-tabs>
+  </template>
+</rv-bind-content>
+<h4>Variable Width</h4>
+<rv-bind-content class="pt-3">
+  <template>
+    <rv-example-tabs handle="bs4-slideshow-1" class="pt-3">
+      <template type="single-html-file">
+        <bs4-slideshow controls="false" lg-controls="true" indicators="false" lg-indicators="true" control-prev-icon-src="{{ 'arrow_carrot.svg' | asset_url }}" control-next-icon-src="{{ 'arrow_carrot.svg' | asset_url }}" indicator-inactive-icon-src="{{ 'icon_circle-empty.svg' | asset_url }}" indicator-active-icon-src="{{ 'icon_circle-selected.svg' | asset_url }}">
+          <div class="slideshow-inner align-items-center">
+            <div class="slide-placeholder col-3">&nbsp;</div>
+            <div class="slide col-6 col-xl-6">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=1" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=2" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-6 col-xl-2">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=3" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-xl-6">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=4" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-6 col-xl-3">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=5" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-xl-8">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=6" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-6 col-xl-5">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=7" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=8" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide-placeholder col-4">&nbsp;</div>
+          </div>
+        </bs4-slideshow>
+      </template>
+    </rv-example-tabs>
+  </template>
+</rv-bind-content>
+<h4>Autoplay</h4>
+<rv-bind-content class="pt-3">
+  <template>
+    <rv-example-tabs handle="bs4-slideshow-1" class="pt-3">
+      <template type="single-html-file">
+        <bs4-slideshow autoplay="true" autoplay-velocity="0.05" controls="false" lg-controls="true" indicators="false" lg-indicators="true" control-prev-icon-src="{{ 'arrow_carrot.svg' | asset_url }}" indicator-inactive-icon-src="{{ 'icon_circle-empty.svg' | asset_url }}" indicator-active-icon-src="{{ 'icon_circle-selected.svg' | asset_url }}" control-next-icon-src="{{ 'arrow_carrot.svg' | asset_url }}">
+          <div class="slideshow-inner">
+            <div class="slide-placeholder d-none d-sm-block col-sm-6 col-xl-4">&nbsp;</div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=1" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=2" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=3" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=4" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=5" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=6" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=7" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=8" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide-placeholder d-none d-sm-block col-sm-6 col-xl-4">&nbsp;</div>
+          </div>
+        </bs4-slideshow>
+      </template>
+    </rv-example-tabs>
+  </template>
+</rv-bind-content>
+<h4>Autoplay with interval</h4>
+<rv-bind-content class="pt-3">
+  <template>
+    <rv-example-tabs handle="bs4-slideshow-1" class="pt-3">
+      <template type="single-html-file">
+        <bs4-slideshow autoplay="true" autoplay-interval="4000" controls="false" lg-controls="true" indicators="false" lg-indicators="true" control-prev-icon-src="{{ 'arrow_carrot.svg' | asset_url }}" indicator-inactive-icon-src="{{ 'icon_circle-empty.svg' | asset_url }}" indicator-active-icon-src="{{ 'icon_circle-selected.svg' | asset_url }}" control-next-icon-src="{{ 'arrow_carrot.svg' | asset_url }}">
+          <div class="slideshow-inner">
+            <div class="slide-placeholder d-none d-sm-block col-sm-6 col-xl-4">&nbsp;</div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=1" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=2" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=3" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=4" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=5" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=6" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=7" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=8" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide-placeholder d-none d-sm-block col-sm-6 col-xl-4">&nbsp;</div>
+          </div>
+        </bs4-slideshow>
+      </template>
+    </rv-example-tabs>
+  </template>
+</rv-bind-content>
+<h4>With captions</h4>
+<rv-bind-content class="pt-3">
+  <template>
+    <rv-example-tabs handle="bs4-slideshow-1" class="pt-3">
+      <template type="single-html-file">
+        <bs4-slideshow controls="false" lg-controls="true" indicators="false" lg-indicators="true" control-prev-icon-src="{{ 'arrow_carrot.svg' | asset_url }}" control-next-icon-src="{{ 'arrow_carrot.svg' | asset_url }}" indicator-inactive-icon-src="{{ 'icon_circle-empty.svg' | asset_url }}" indicator-active-icon-src="{{ 'icon_circle-selected.svg' | asset_url }}" sticky="true">
+          <div class="slideshow-inner">
+            <div class="slide col-12">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=1" alt="Static Random Image from https://picsum.photos/">
+              <div class="slide-caption">
+                <h5>First slide label</h5>
+                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+              </div>
+            </div>
+            <div class="slide col-12">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=2" alt="Static Random Image from https://picsum.photos/">
+              <div class="slide-caption">
+                <h5>Second slide label</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+            </div>
+            <div class="slide col-12">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=3" alt="Static Random Image from https://picsum.photos/">
+              <div class="slide-caption">
+                <h5>Third slide label</h5>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+              </div>
+            </div>
+          </div>
+        </bs4-slideshow>
+      </template>
+    </rv-example-tabs>
+  </template>
+</rv-bind-content>
+<h4>Responsive</h4>
+<p>This demo shows how you can start autoplay on small devices and stop on medium devices using responsive attribute options like <code>autoplay=&quot;false&quot; md-autoplay=&quot;true&quot; controls=&quot;false&quot; lg-controls=&quot;true&quot; indicators=&quot;false&quot; lg-indicators=&quot;true&quot;</code></p>
+<rv-bind-content class="pt-3">
+  <template>
+    <rv-example-tabs handle="bs4-slideshow-1" class="pt-3">
+      <template type="single-html-file">
+        <bs4-slideshow autoplay="false" md-autoplay="true" autoplay-velocity="0.03" controls="false" lg-controls="true" indicators="false" lg-indicators="true" control-prev-icon-src="{{ 'arrow_carrot.svg' | asset_url }}" indicator-inactive-icon-src="{{ 'icon_circle-empty.svg' | asset_url }}" indicator-active-icon-src="{{ 'icon_circle-selected.svg' | asset_url }}" control-next-icon-src="{{ 'arrow_carrot.svg' | asset_url }}">
+          <div class="slideshow-inner">
+            <div class="slide-placeholder d-none d-sm-block col-sm-6 col-xl-4">&nbsp;</div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=1" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=2" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=3" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=4" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=5" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=6" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=7" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-4">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=8" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide-placeholder d-none d-sm-block col-12 col-sm-6 col-xl-4">&nbsp;</div>
+          </div>
+        </bs4-slideshow>
+      </template>
+    </rv-example-tabs>
+  </template>
+</rv-bind-content>
+<h4>Custom Templates</h4>
+<rv-bind-content class="pt-3">
+  <template>
+    <rv-example-tabs handle="bs4-slideshow-1" class="pt-3">
+      <template type="single-html-file">
+        <bs4-slideshow controls="false" lg-controls="true" indicators="false" lg-indicators="true" sticky="true">
+          <div class="slideshow-inner">
+            <div class="slide-placeholder col-12 col-sm-6 col-xl-2">&nbsp;</div>
+            <div class="slide col-12 col-sm-6 col-xl-7 p-2">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=1" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-7 p-2">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=2" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-7 p-2">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=3" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-7 p-2">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=4" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-7 p-2">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=5" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-7 p-2">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=6" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-7 p-2">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=7" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide col-12 col-sm-6 col-xl-7 p-2">
+              <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1000/400?random=8" alt="Static Random Image from https://picsum.photos/">
+            </div>
+            <div class="slide-placeholder col-12 col-sm-6 col-xl-2">&nbsp;</div>
+          </div>
+          <template type="controls">
+            <button rv-show="controls" class="btn btn-link carousel-control-prev" role="button" data-slide="prev" rv-on-click="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            <button rv-show="controls" class="btn btn-link carousel-control-next" role="button" data-slide="next" rv-on-click="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </button>
+          </template>
+          <template type="indicators">
+            <ol rv-show="indicators" class="carousel-indicators">
+              <li rv-each-slide="items" rv-class-active="slide.active" rv-on-click="goTo | args slide.index"></li>
+            </ol>
+          </template>
+        </bs4-slideshow>
+      </template>
+    </rv-example-tabs>
+  </template>
+</rv-bind-content>
+</section></section></section><bs4-scrollspy class="d-none d-lg-block py-3 side-scrollspy scrollbar-primary-on-hover scrollbar-y-auto scrollbar-x-hidden" rv-scrollbar-draggable="rv-scrollbar-draggable" header-parent-selector="#main-container" headers-start="2" headers-depth="4" offset="200" offset-bottom="80" scroll-offset="80"></bs4-scrollspy></div></div></div></div></div></div>

@@ -1,0 +1,11 @@
+@import '../../../../../demos/extras-touch-events/src/components/touch-events-example/touch-events-example.component';
+
+#tab-content-extras-touch-events-preview {
+  padding-top: 0;
+  padding-bottom: 0;
+  rv-touch-events-example .console, rv-touch-events-example .touch-zone {
+    @extend .scrollbar-primary;
+    height: 248px !important;
+    min-height: 248px !important;
+  }
+}

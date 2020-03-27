@@ -1,0 +1,52 @@
+include ../_includes/header
+| {{ content_for_index  }}
+.container
+  .row
+    .separator.col-12
+      h2 Why Riba.js?
+    section.flexible.col-12.col-md-6.my-3
+      include:markdown-it(html) ../../../doc/why/flexible.md
+    section.configurable.col-12.col-md-6.my-3
+      include:markdown-it(html) ../../../doc/why/configurable.md
+  .row
+    .separator.col-12
+      h2 Highlights
+    section.binders.col-12.col-md-6.my-3
+      include:markdown-it(html) ../../../doc/highlights/binders.md
+    section.formatters.col-12.col-md-6.my-3(rv-block)
+      include:markdown-it(html) ../../../doc/highlights/formatters.md
+    section.adapters.col-12.col-md-6.my-3
+      include:markdown-it(html) ../../../doc/highlights/adapters.md
+    section.web-components.col-12.col-md-6.my-3
+      include:markdown-it(html) ../../../doc/highlights/web-components.md
+  .row
+    .separator.col-12
+      h2 Example
+    section.example.col-12.my-3
+      include ../../../doc/demos/core-each-[item]
+section.author.py-5
+  .container
+    .row
+      .col-12
+        h2 Authors
+        p
+          | Pascal Garber by 
+          a(href="https://artandcode.studio/") Art+Code Studio
+          br
+          | Luiz Américo Pereira Câmara, author of 
+          a(href="https://blikblum.github.io/tinybind/") tinybind
+          br
+          | Michael Richards, original author of 
+          a(href="http://rivetsjs.com/") Rivets.js
+script(type='application/ld+json').
+  {
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "{{ shop.name }}",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "{{ shop.url }}/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    },
+    "url": "{{ shop.url }}{{ page.url }}"
+  }

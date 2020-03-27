@@ -1,0 +1,141 @@
+<div class="container py-5 page {{template|handleize}}" id="page-content-{{page.handle}}"><div class="row pt-5"><div class="col-12"><div class="row"><div class="col-12"><h1 class="page-title">{{ page.title }}</h1><div class="rte">{{ page.content }}</div><div class="content"><bs4-contents class="d-block d-lg-none top-contents" header-parent-selector="#main-container" headers-start="2" headers-depth="4" scroll-offset="80"></bs4-contents><section class="my-5"><h1>Shopify Module</h1>
+<h2>Install</h2>
+<pre><code class="language-bash">npm install --save @ribajs/shopify
+</code></pre>
+<h2>Regist</h2>
+<p>To regist the module include <code>import shopifyModule from '@ribajs/shopify';</code> in your <code>main.ts</code> file and regist the module with <code>riba.module.regist(shopifyModule);</code>:</p>
+<pre><code class="language-ts">import { Riba, Utils } from '@ribajs/core';
+import shopifyModule from '@ribajs/shopify';
+const riba = new Riba();
+const model = {};
+riba.module.regist(shopifyModule);
+Utils.domIsReady(() =&gt; {
+  riba.bind(document.body, model);
+});
+</code></pre>
+</section><section class="my-5" id="binders"><h2>Binders</h2><section class="my-5" id="shopify-img"><h3>shopify-img</h3><section><p>Loads an shopify image with the exact size for the current <code>img</code> element without the need to get the right size manually over the <code>img_url</code> filter / formatter. The image source path is set by the <code>srcset</code> and <code>sizes</code> attributes to make them responsive.</p>
+<p><em>You should prefer to set the <code>srcset</code> attribute server-site (with liquid) (but if you want to use the <code>shopify-img</code> binder anyway the <code>src</code> attribute should not be set server-site, as this causes problems for some browsers if the srcset attribute is set afterwards the <code>src</code> attribute) but if your images are generated anyway with riba e.g. within a <code>rv-each-item</code> binder then you can safely use the <code>shopify-img</code> binder.</em></p>
+<p><rv-bind-content class="pt-3"><template>
+<rv-example-tabs handle="shopify-img">
+<template type="single-html-file">
+<img
+  rv-shopify-img="'{{ settings.example_image | img_url: 'master' }}'"
+  lazyload="lazy"
+  class="img-fluid w-100"
+  alt="{{ settings.example_image.alt }}"
+/>
+</template>
+</rv-example-tabs>
+</template></rv-bind-content></p>
+</section></section></section><section class="my-5" id="components"><h2>Components</h2><section class="my-5" id="shopify-linklist"><h3>shopify-linklist</h3><section><p>Component to render a shopify linklist</p>
+<h4>Attributes</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linklist</td>
+<td>string</td>
+<td>The linklist as a json string</td>
+</tr>
+<tr>
+<td>handle</td>
+<td>string</td>
+<td>Sets the linklist by his name (see note below)</td>
+</tr>
+<tr>
+<td>pills</td>
+<td>boolean</td>
+<td>If the navigation should be displayed as pills</td>
+</tr>
+<tr>
+<td>vertical</td>
+<td>boolean</td>
+<td>If the navigation should be displayed as vertically</td>
+</tr>
+<tr>
+<td>collapseOnNewPage</td>
+<td>boolean</td>
+<td>Set this option to true if toggleable links should be automatically collapse when a page changes</td>
+</tr>
+<tr>
+<td>showOnActiveChild</td>
+<td>boolean</td>
+<td>Set this option to true if toggleable links should be automatically open when a child link is active</td>
+</tr>
+</tbody>
+</table>
+<p><em>Note: If you do not want to pass the linklist as a json string, you can also pass just the linklist handle string. This assumes, however, that the linklist is available as a global variable under <code>window.model.system.linklists[yourLinklistHandle]</code>.</em></p>
+<h4>Template Methods</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Arguments</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>toggle</td>
+<td>link</td>
+<td>Toggles a link</td>
+</tr>
+<tr>
+<td>collapse</td>
+<td>link</td>
+<td>Collapse a link</td>
+</tr>
+<tr>
+<td>collapseAll</td>
+<td></td>
+<td>Collapse all links</td>
+</tr>
+<tr>
+<td>show</td>
+<td>link</td>
+<td>Show a link</td>
+</tr>
+<tr>
+<td>showAll</td>
+<td></td>
+<td>Show all links</td>
+</tr>
+</tbody>
+</table>
+<h4>Collapseable links</h4>
+<p>If a link should be collapseable, <code>#collapse</code> must be entered as the URL for this link in the Shopify administration:</p>
+<img class="img-fluid img-thumbnail" src="{{ settings.shopify-linklist-collapse | img_url: 'master' }}" alt="shopify-linklist: Collapseable link" />
+<h4>Example</h4>
+<pre><code class="language-html">{% raw %}&lt;shopify-linklist linklist='{% include 'utils-json-linklist', linklist: linklists.main-menu %}'&gt;&lt;/shopify-linklist&gt;{% endraw %}
+</code></pre>
+</section></section></section><section class="my-5" id="snippets"><h2>Snippets</h2><section class="my-5" id="utils-json-linklists"><h3>utils-json-linklists.liquid</h3><section><p>Copy the snippets</p>
+<ul>
+<li><code>utils-json-link.liquid</code>,</li>
+<li><code>utils-json-links.liquid</code>,</li>
+<li><code>utils-json-linklist.liquid</code></li>
+<li>and <code>utils-json-linklists.liquid</code></li>
+</ul>
+<p>from <a href="https://github.com/ribajs/riba/tree/master/packages/shopify/src/snippets">@ribajs/shopify/src/snippets/</a> to your themes snippets directory to transform shopify linklists to a json string.</p>
+<pre><code class="language-html">{% raw %}&lt;script&gt;
+var linklists = {% include 'utils-json-linklists' %}
+// If the component should access the linklist by his handle
+// the linklist must be globally available as follows
+window.model = {
+  system: {
+    linklists: linklists
+  }
+};
+&lt;/script&gt;{% endraw %}
+</code></pre>
+</section></section><section class="my-5" id="utils-json-linklist"><h3>utils-json-linklist.liquid</h3><section><p>If you only want a specific linklist you can use <code>utils-json-linklist.liquid</code>:</p>
+<pre><code class="language-html">{% raw %}&lt;script&gt;
+var mainMenu = {% include 'utils-json-linklist', linklist: linklists.main-menu %};
+&lt;/script&gt;{% endraw %}
+</code></pre>
+</section></section></section><bs4-scrollspy class="d-none d-lg-block py-3 side-scrollspy scrollbar-primary-on-hover scrollbar-y-auto scrollbar-x-hidden" rv-scrollbar-draggable="rv-scrollbar-draggable" header-parent-selector="#main-container" headers-start="2" headers-depth="4" offset="200" offset-bottom="80" scroll-offset="80"></bs4-scrollspy></div></div></div></div></div></div>

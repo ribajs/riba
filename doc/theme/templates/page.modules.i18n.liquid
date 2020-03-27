@@ -1,0 +1,359 @@
+<div class="container py-5 page {{template|handleize}}" id="page-content-{{page.handle}}"><div class="row pt-5"><div class="col-12"><div class="row"><div class="col-12"><h1 class="page-title">{{ page.title }}</h1><div class="rte">{{ page.content }}</div><div class="content"><bs4-contents class="d-block d-lg-none top-contents" header-parent-selector="#main-container" headers-start="2" headers-depth="4" scroll-offset="80"></bs4-contents><section class="my-5" id="about"><h2>About</h2><section><p>The localisation module allows you to translate content on client side. This is especially useful if the used (CMS) system is not able to translate the content server side or if no hard reload should happen if the language was changed.</p>
+</section></section><section class="my-5" id="install"><h2>Install</h2><section><pre><code class="language-bash">npm install --save @ribajs/i18n
+</code></pre>
+<h3>Regist</h3>
+<p>To regist the module import <code>import i18nModule from '@ribajs/i18n';</code> and any <code>LocalesService</code> in your <code>main.ts</code> file and regist the module with <code>riba.module.regist(i18nModule(localesService));</code>:</p>
+<pre><code class="language-ts">import { coreModule, Riba, Utils } from '@ribajs/core';
+import { LocalesService } from '@ribajs/shopify-tda';
+import i18nModule from '@ribajs/i18n';
+const riba = new Riba();
+const localesService = new LocalesService();
+const model = {};
+riba.module.regist(coreModule);
+riba.module.regist(i18nModule(localesService));
+Utils.domIsReady(() =&gt; {
+  riba.bind(document.body, model);
+});
+</code></pre>
+<h3>Templates</h3>
+<p>The module recognizes the default language code using the <code>lang</code> attribute of the <code>html</code> element, so this attribute is required for the installation:</p>
+<pre><code class="language-html">&lt;!doctype html&gt;
+&lt;html lang=&quot;{{'html.lang.code' |t}}&quot;&gt;
+  &lt;head&gt;
+    ...
+  &lt;/head&gt;
+  &lt;body&gt;
+    ...
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+</section></section><section class="my-5" id="events"><h2>Events</h2><section><p>To subscribe events from the i18n module create a new instance of the <code>EventDispatcher</code> with <code>'i18n'</code> as his namespace:</p>
+<pre><code class="language-typescript">import { EventDispatcher } from '@ribajs/core';
+const event = new EventDispatcher('i18n');
+event.on('changed', () =&gt; {
+  console.debug('The language was changed');
+});
+event.on('ready', () =&gt; {
+  console.debug('All locales are loaded and initialized and the module is ready to use');
+});
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Arguments</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>changed</td>
+<td><code>langcode</code>, <code>initial</code></td>
+<td>The language was changed</td>
+</tr>
+<tr>
+<td>ready</td>
+<td><code>currentLangcode</code>, <code>translationNeeded</code></td>
+<td>All locales are loaded and initialized and the module is ready to use.</td>
+</tr>
+</tbody>
+</table>
+</section></section><section class="my-5" id="services"><h2>Services</h2><section class="my-5" id="locales-base-service"><h3>ALocalesService</h3><p>The <code>ALocalesService</code> is a abstract class extended from all locales services, a static LocalesService could look like this:</p>
+<pre><code class="language-typescript">import { ALocalesService } from '@ribajs/i18n';
+
+export class MyStaticLocalesService extends ALocalesService {
+
+  public static instances: {
+    [id: string]: MyStaticLocalesService;
+  } = {};
+
+  public static getInstance(id: string = 'main') {
+    return MyStaticLocalesService.instances[id];
+  }
+
+  /**
+   * The current setted langcode
+   */
+  protected currentLangcode?: string;
+
+  /**
+   * The default theme langcode before any language was choosed
+   */
+  protected initalLangcode?: string;
+
+  constructor(staticLocales: any, protected id?: string, doNotTranslateDefaultLanguage: boolean = false, showMissingTranslation: boolean = false) {
+    super(doNotTranslateDefaultLanguage, showMissingTranslation);
+    if (!id) {
+      id = 'main';
+    }
+
+    // Sets the static translations
+    this.locales = staticLocales;
+
+    // Return the singleton if available
+    if (MyStaticLocalesService.instances[id]) {
+      return MyStaticLocalesService.instances[id];
+    }
+
+    this.init();
+    MyStaticLocalesService.instances[id] = this;
+  }
+
+  /**
+   * Get object with all translations
+   * @param themeID
+   */
+  protected async getAll(themeID?: number) {
+    return this.locales;
+  }
+}
+</code></pre>
+</section><section class="my-5" id="locales-static-service"><h3>LocalesStaticService</h3><p>The LocalesStaticService can be used to integrate and define the translations directly in the source code:</p>
+<pre><code class="language-typescript">import { LocalesStaticService } from '@ribajs/i18n';
+
+// Your static locales
+const locales = {
+  de: {
+    examples: {
+      newsletter: {
+        description_html: 'Abonnieren Sie unseren Newsletter und erhalten Sie &lt;strong&gt;10% Rabatt&lt;/strong&gt; auf Ihren nächsten Einkauf.',
+        input_value: 'Unbekannt',
+        placeholder_last_name: 'Nachname',
+        title: 'Melde dich für den Newsletter an',
+      },
+    },
+  },
+  en: {
+    examples: {
+      newsletter: {
+        description_html: 'Subscribe to our newsletter and get &lt;strong&gt;10% off&lt;/strong&gt; your next purchase.',
+        input_value: 'Unknown',
+        placeholder_last_name: 'Surname',
+        title: 'Sign up for the newsletter',
+      },
+    },
+  },
+};
+
+const localesService = new LocalesStaticService(locales);
+</code></pre>
+<rv-bind-content><template><rv-example-tabs handle="bs4-tabs-tpl"><template title="main.ts" type="source"><pre><code class="language-typescript">import { coreModule, Riba, Utils } from &#39;@ribajs/core&#39;;
+import { i18nModule, LocalesStaticService } from &#39;@ribajs/i18n&#39;;
+import I18nStaticModule from &#39;./i18n-static.module&#39;;
+
+const locales = {
+  de: {
+    examples: {
+      i18n: {
+        switch_language: &#39;Klicke auf eine Sprache um sie zu ändern&#39;,
+      },
+      newsletter: {
+        description_html: &#39;Abonnieren Sie unseren Newsletter und erhalten Sie &lt;strong&gt;10% Rabatt&lt;/strong&gt; auf Ihren nächsten Einkauf.&#39;,
+        input_value: &#39;Unbekannt&#39;,
+        placeholder_last_name: &#39;Nachname&#39;,
+        title: &#39;Melde dich für den Newsletter an&#39;,
+      },
+    },
+  },
+  en: {
+    examples: {
+      i18n: {
+        switch_language: &#39;Click on a language to change it&#39;,
+      },
+      newsletter: {
+        description_html: &#39;Subscribe to our newsletter and get &lt;strong&gt;10% off&lt;/strong&gt; your next purchase.&#39;,
+        input_value: &#39;Unknown&#39;,
+        placeholder_last_name: &#39;Surname&#39;,
+        title: &#39;Sign up for the newsletter&#39;,
+      },
+    },
+  },
+};
+
+const riba = new Riba();
+const localesService = new LocalesStaticService(locales);
+const model = {};
+riba.module.regist(coreModule);
+riba.module.regist(i18nModule(localesService));
+riba.module.regist(I18nStaticModule);
+Utils.domIsReady(() =&gt; {
+  riba.bind(document.body, model);
+});
+</code></pre></template><template title="component.html" type="source"><pre><code class="language-html">&lt;i18n-switcher&gt;
+  &lt;p&gt;&lt;strong rv-i18n-text=&quot;&#39;examples.i18n.switch_language&#39;&quot;&gt;&lt;/strong&gt;&lt;/p&gt;
+  &lt;div class=&quot;nav-item&quot; rv-each-langcode=&quot;langcodes&quot;&gt;
+    &lt;button
+      class=&quot;btn btn-link text-uppercase&quot;
+      rv-text=&quot;langcode.code&quot;
+      rv-on-click=&quot;switch | args langcode&quot;
+      rv-class-active=&quot;langcode.active&quot;
+    &gt;&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/i18n-switcher&gt;
+
+&lt;h1 rv-i18n-text=&quot;&#39;examples.newsletter.title&#39;&quot;&gt;&lt;/h1&gt;
+&lt;p rv-i18n-html=&quot;&#39;examples.newsletter.description_html&#39;&quot;&gt;&lt;/p&gt;
+&lt;input type=&quot;text&quot; rv-i18n-value=&quot;&#39;examples.newsletter.input_value&#39;&quot; /&gt;
+&lt;input type=&quot;text&quot; rv-i18n-placeholder=&quot;&#39;examples.newsletter.placeholder_last_name&#39;&quot; /&gt;
+</code></pre></template><template title="component.ts" type="source"><pre><code class="language-typescript">import {
+  Component,
+} from &#39;@ribajs/core&#39;;
+
+import template from &#39;./i18n-static-example.component.html&#39;;
+
+export class I18nStaticExampleComponent extends Component {
+
+  public static tagName: string = &#39;rv-i18n-static-example&#39;;
+
+  protected autobind = true;
+
+  static get observedAttributes() {
+    return [];
+  }
+
+  protected scope = {};
+
+  constructor(element?: HTMLElement) {
+    super(element);
+  }
+
+  protected connectedCallback() {
+    super.connectedCallback();
+    this.init(I18nStaticExampleComponent.observedAttributes);
+  }
+
+  protected async init(observedAttributes: string[]) {
+    return super.init(observedAttributes)
+    .then((view) =&gt; {
+      return view;
+    });
+  }
+
+  protected requiredAttributes() {
+    return [];
+  }
+
+  protected template() {
+    return template;
+  }
+}
+</code></pre></template><template title="Preview" type="preview"><rv-i18n-static-example></rv-i18n-static-example></template></rv-example-tabs></template></rv-bind-content></section><section class="my-5" id="locales-rest-service"><h3>LocalesRestService</h3><p>The LocalesRestService can be used to get the translation json object with a REST API call:</p>
+<pre><code class="language-typescript">import { LocalesRestService } from '@ribajs/i18n';
+
+const url = 'https://localhost/api/locales'
+
+const localesService = new LocalesRestService(url);
+</code></pre>
+</section></section><section class="my-5" id="binders"><h2>Binders</h2><section class="my-5" id="i18n-type"><h3>i18n-[type]</h3><section><p>Gets the (current selected) translation of a keypath string from your locales object (over the TranslationService).
+The translation is set as <code>html</code>, <code>text</code> or <code>value</code> depending on the passed type, available types are <code>html</code>, <code>text</code> and <code>value</code>.
+If the type is not known, the translation is instead set as an attribute with the given name, a useful example for this could be the <code>placeholder</code> attribute.</p>
+<h3>i18n-text</h3>
+<rv-bind-content class="pt-3">
+  <template>
+    <rv-example-tabs class="pt-3" handle="i18n-text">
+      <template type="single-html-file">
+        <h5 rv-i18n-text="'examples.newsletter.title'"></h5>
+      </template>
+    </rv-example-tabs>
+  </template>
+</rv-bind-content>
+<h3>i18n-html</h3>
+<rv-bind-content class="pt-3">
+  <template>
+    <rv-example-tabs class="pt-3" handle="i18n-html">
+      <template type="single-html-file">
+        <p rv-i18n-html="'examples.newsletter.description_html'"></p>
+      </template>
+    </rv-example-tabs>
+  </template>
+</rv-bind-content>
+<h3>i18n-value</h3>
+<rv-bind-content class="pt-3">
+  <template>
+    <rv-example-tabs class="pt-3" handle="i18n-html">
+      <template type="single-html-file">
+        <input type="text" rv-i18n-value="'examples.newsletter.input_value'" />
+      </template>
+    </rv-example-tabs>
+  </template>
+</rv-bind-content>
+<h3>i18n-[attributeName]</h3>
+<rv-bind-content class="pt-3">
+  <template>
+    <rv-example-tabs class="pt-3" handle="i18n-html">
+      <template type="single-html-file">
+        <input type="text" rv-i18n-placeholder="'examples.newsletter.placeholder_last_name'" />
+      </template>
+    </rv-example-tabs>
+  </template>
+</rv-bind-content>
+</section></section></section><section class="my-5" id="components"><h2>Components</h2><section class="my-5" id="i18n-switcher-component"><h3>i18n-switcher</h3><p>Use this component to switch to another available language, this component does not have its own template, so you neet to set this as child elements of this component by yourself.</p>
+<h4>Types</h4>
+<pre><code class="language-typescript">export interface Langcode {
+  code: string;
+  active: boolean;
+}
+</code></pre>
+<h4>Template methods</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th style="text-align:center">Arguments</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>switch</td>
+<td style="text-align:center">langcode: Langcode</td>
+<td>Triggeres the toggle event</td>
+</tr>
+<tr>
+<td>toggle</td>
+<td style="text-align:center"></td>
+<td>Toggle to another language (only useful for two supported languages)</td>
+</tr>
+</tbody>
+</table>
+<h4>Template properties</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th style="text-align:center">Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>langcodes</td>
+<td style="text-align:center"><code>Langcode[]</code></td>
+<td>Array of founded langcodes from your locales object</td>
+</tr>
+<tr>
+<td>ready</td>
+<td style="text-align:center"><code>boolean</code></td>
+<td>Is <code>true</code> if the locales are initialized</td>
+</tr>
+</tbody>
+</table>
+<rv-bind-content class="pt-3">
+  <template>
+    <rv-example-tabs class="pt-3" handle="i18n-switcher">
+      <template type="single-html-file">
+        <i18n-switcher>
+          <div class="btn-group btn-group-toggle" rv-each-langcode="langcodes">
+            <button
+              class="btn btn-primary"
+              rv-text="langcode.code"
+              rv-on-click="switch | args langcode"
+              rv-class-active="langcode.active"
+            ></button>
+          </div>
+        </i18n-switcher>
+      </template>
+    </rv-example-tabs>
+  </template>
+</rv-bind-content>
+</section></section><bs4-scrollspy class="d-none d-lg-block py-3 side-scrollspy scrollbar-primary-on-hover scrollbar-y-auto scrollbar-x-hidden" rv-scrollbar-draggable="rv-scrollbar-draggable" header-parent-selector="#main-container" headers-start="2" headers-depth="4" offset="200" offset-bottom="80" scroll-offset="80"></bs4-scrollspy></div></div></div></div></div></div>

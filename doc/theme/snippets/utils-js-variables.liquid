@@ -1,0 +1,148 @@
+{% comment %}
+  * Dynamic Variables, can be changed each new request
+{% endcomment %}
+{% assign quote = '"' %}
+{% assign escapedQuote = '\"' %}
+<script>
+  window.model = window.model || {};
+  window.model.system = {};
+  {% comment %}
+   * Covert adhesive keys like 
+   *
+   *  products_freeshipping_color: #1084f6 , like products_freeshipping_enabled: true
+   *
+   * to:
+   * 
+   *  products: {
+   *    freeshipping: {
+   *      color: #1084f6,
+   *      enabled: true
+   *    }
+   *  }
+   *
+   * Used internally to convert the shopify theme settings to better usable javascript objects.
+  {% endcomment %}
+  var adhesiveKeyObjectToNestedObject = function (adhesiveKeyObject, separator) {
+    var nestedObject = {};
+    if(!separator) {
+      separator = '_';
+    }
+    for (var adhesiveKey in adhesiveKeyObject) {
+      // skip loop if the property is from prototype
+      if (!adhesiveKeyObject.hasOwnProperty(adhesiveKey)) {
+        continue;
+      }
+      var object = adhesiveKeyObject[adhesiveKey];
+      var keys = adhesiveKey.split(separator);
+      var childObject;
+      for (var i in keys) {
+        var key = keys[i];       
+        if(i <= 0) {
+          // back to root object
+          childObject = nestedObject;
+        }
+
+        // if there are more childs create tree element
+        if( Number(i) < keys.length - 1) {
+          if(typeof(childObject[key]) !== 'object') {
+            childObject[key] = {};
+          }
+          childObject = childObject[key];
+        } else {
+          // on the end set the value
+          childObject[key] = object;
+        }
+      }
+    }
+    return nestedObject;
+  };
+  {% comment %}
+  * Variables 
+  {% endcomment %}
+
+  {% comment %}
+  * Theme Settings
+  {% endcomment %}
+  window.model.system.themeSettings = adhesiveKeyObjectToNestedObject({{ settings | json }}, '_');
+  {% comment %}
+  /**
+   * Cart
+   * This is dynamic
+   */
+  // window.model.system.cart = window.cart || {{ cart | json }};
+  {% endcomment %}
+  window.model.system.linklists = {% include 'utils-json-linklists' %}; // {{ linklists | json }} not allowed for this object
+
+  {% comment %}
+  * Money / Currency
+  * Detect if amount is rendered with comma or dot separator
+  * @see https://help.shopify.com/themes/liquid/filters/money-filters
+  * @see https://help.shopify.com/manual/payment-settings/currency-formatting
+  {% endcomment %}
+  window.model.system.setShopifyCurrencyFormatter = function (moneyString) {
+
+    if(moneyString.indexOf('1,134.65') > -1) {
+      return moneyString.replace('1,134.65', '{% raw %}{{ amount }}{% endraw %}');
+    }
+    
+    if(moneyString.indexOf('1.134,65') > -1) {
+      return moneyString.replace('1.134,65', '{% raw %}{{ amount_with_comma_separator }}{% endraw %}');
+    }
+    
+    if(moneyString.indexOf('1,135') > -1) {
+      return moneyString.replace('1,135', '{% raw %}{{ amount_no_decimals }}{% endraw %}');
+    }
+    
+    if(moneyString.indexOf('1.135') > -1) {
+      return moneyString.replace('1.135', '{% raw %}{{ amount_no_decimals_with_comma_separator }}{% endraw %}');
+    }
+    
+    if(moneyString.indexOf('1 135') > -1) {
+      return moneyString.replace('1 135', '{% raw %}{{ amount_no_decimals_with_space_separator }}{% endraw %}');
+    }
+    
+    console.warn("No currency formatter found, set to default!", moneyString);
+    return '{% raw %}{{ amount }} EUR{% endraw %}';
+  }
+
+  {% if settings.money_with_currency %}
+    var moneyString = '{{ 113465 | money_with_currency }}';
+  {% else %}
+    var moneyString = '{{ 113465 | money }}';
+  {% endif %}
+
+  {% comment %}
+   * shop settings
+  {% endcomment %}
+  window.model.system.shopSettings = window.model.system.shopSettings || {};
+  
+  window.model.system.shopSettings.money_with_currency_format = {{ shop.money_with_currency_format | json }};
+  window.model.system.shopSettings.money_format = window.model.system.setShopifyCurrencyFormatter(moneyString);
+  window.model.system.shopSettings.moneyFormat = window.model.system.shopSettings.money_format;
+  window.model.system.shopSettings.moneyWithCurrencyFormat = window.model.system.shopSettings.money_with_currency_format;
+
+  window.model.system.shopSettings.collections_count = {{ shop.collections_count | json }};
+  window.model.system.shopSettings.currency = {{ shop.currency | json }};
+  window.model.system.shopSettings.description = {{ shop.description | json }};
+  window.model.system.shopSettings.domain = '{{ shop.domain }}';
+  window.model.system.shopSettings.email = {{ shop.email | json }};
+  window.model.system.shopSettings.enabled_payment_types = {{ shop.enabled_payment_types | json }};
+  window.model.system.shopSettings.metafields = {{ shop.metafields | json }};
+  window.model.system.shopSettings.name = {{ shop.name | json }};
+  window.model.system.shopSettings.permanent_domain = {{ shop.permanent_domain | json }};
+  window.model.system.shopSettings.products_count = {{ shop.products_count | json }};
+  window.model.system.shopSettings.types = {{ shop.types | json }};
+  window.model.system.shopSettings.url = {{ shop.url | json }};
+  window.model.system.shopSettings.secure_url = {{ shop.secure_url | json }};
+  window.model.system.shopSettings.vendors = {{ shop.vendors | json }};
+  window.model.system.shopSettings.locale = {{ shop.locale | json }};
+  {% comment %}
+   * assets
+   * TODO generate a list of assets
+  {% endcomment %}
+  window.model.system.assetsPath = {{ 'favicon.ico' | asset_url | replace: 'favicon.ico', '[fileName]' | json | }};
+  window.model.system.assetsPath = window.model.system.assetsPath.substring(0, window.model.system.assetsPath.indexOf('[fileName]'))
+  window.model.system.assets = window.model.system.assets || {};
+  window.model.system.assets['no-image.png'] = {{ 'no-image.png' | asset_url | json }};
+  window.model.system.assets['icon_heart_px.png'] = {{ 'icon_heart_px.png' | asset_url | json }};
+</script>

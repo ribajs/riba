@@ -1,0 +1,20 @@
+#tab-content-data-scroll-position-y-binder-preview {
+  padding: 0;
+  > div {
+    padding: 1em;
+    max-height: 250px;
+    transition: $transition-base;
+    &[data-scroll-position-y='top'] {
+      background-color: rgba($danger, $alpha: 0.5);
+      @extend .scrollbar-danger;
+    }
+    &[data-scroll-position-y='scrolled'] {
+      background-color: rgba($warning, $alpha: 0.5);
+      @extend .scrollbar-warning;
+    }
+    &[data-scroll-position-y='bottom'] {
+      background-color: rgba($info, $alpha: 0.5);
+      @extend .scrollbar-info;
+    }
+  }
+}

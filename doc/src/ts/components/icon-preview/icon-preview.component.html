@@ -1,0 +1,66 @@
+<h2 rv-text="name"></h2>
+
+<!-- Sizes -->
+<div class="row">
+  <section#sizes class="col-12">
+      <h3>Sizes</h3>
+      <div class="row">
+          <div class="col-4 col-md-2 col-xl-2 py-2" rv-each-size="sizes">
+              <div class="row">
+                  <div class="col-12 d-flex justify-content-center flex-row">
+                    <bs4-icon class='m-1' rv-src="src" rv-size="size" color='black'></bs4-icon>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-12 text-center" rv-text="size"></div>
+              </div>
+          </div>
+      </div>
+  </section>
+</div>
+
+<!-- Colors -->
+<div class="row">
+  <section#colors class="col-12">
+    <h3>Colors</h3>
+    <div class="row">
+      <div class="col-4 col-md-2 col-xl-2 py-2" rv-each-color="colors" rv-add-class="color | prepend 'example-color-'">
+        <div class="row">
+          <div class="col-12 d-flex justify-content-center flex-row">
+            <bs4-icon class='m-1' rv-src="src" size="32" rv-color="color"></bs4-icon>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 text-center" rv-text="color"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Directions -->
+<div class="row">
+  <section#directions class="col-12">
+    <h3>Directions</h3>
+    <div class="row">
+      <div class="col-4 col-md-2 col-xl-2 py-2" rv-each-direction="directions">
+        <div class="row">
+          <div class="col-12 d-flex justify-content-center flex-row">
+            <bs4-icon class='m-1' rv-src="src" size="32" rv-direction='direction'></bs4-icon>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 text-center" rv-text="direction"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Example -->
+<div class="row">
+  <section#directions class="col-12">
+    <h3>Example</h3>
+    <pre class="language-html"><code class="language-html" rv-html="example"></code></pre>
+  </section>
+</div>

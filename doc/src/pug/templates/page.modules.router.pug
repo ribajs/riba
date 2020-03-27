@@ -1,0 +1,49 @@
+extends ../_extends/generated-page.pug
+
+block content
+
+  section.my-5#about
+    h2 About
+    section
+      include:markdown-it(html) ../../../doc/reference/router/about.md
+
+  section.my-5#install
+    h2 Install
+    section
+      include:markdown-it(html) ../../../doc/reference/router/install.md
+
+  section.my-5#events
+    h2 Events
+    section
+      include:markdown-it(html) ../../../doc/reference/router/events.md
+
+  section.my-5#binders
+    h2 Binders
+
+    section#route-binder.my-5
+      h3 route
+      section
+        include:markdown-it(html) ../../../doc/reference/router/binders/route.md
+
+    section#route-class-classname-binder.my-5
+      h3 route-class-[classname]
+      section
+        include:markdown-it(html) ../../../doc/reference/router/binders/route-class-[classname].md
+
+    section#parent-route-class-classname-binder.my-5
+      h3 parent-route-class-[classname]
+      section
+        include:markdown-it(html) ../../../doc/reference/router/binders/parent-route-class-[classname].md
+
+    section#view-binder.my-5
+      h3 view
+      section
+        include:markdown-it(html) ../../../doc/reference/router/binders/view.md
+
+    section#view-static-binder.my-5
+      h3 view-static
+      section
+        include:markdown-it(html) ../../../doc/reference/router/binders/view-static.md
+
+  //- section#components.my-5
+  //-   h2 Components

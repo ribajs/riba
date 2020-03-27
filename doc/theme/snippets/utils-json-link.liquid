@@ -1,0 +1,34 @@
+{
+    "active": {{link.active | json}},
+    "child_active": {{link.child_active | json}},
+    "level": {{level | json}},
+    "levels": {{link.levels | json}},
+    {% if link.links %}
+        {% assign newlevel = level | plus: 1 %}
+        "links": {% include "utils-json-links", links: link.links, level: newlevel %},
+    {% endif %}
+    {% comment %} BlogDrop {% endcomment %}
+    {% if link.object.articles %}
+        "object": {% include "utils-json-blog", blog: link.object %},
+    {% comment %} PageDrop {% endcomment %}
+    {% elsif link.object.author %}
+        "object": {% include "utils-json-page", page: link.object %},
+    {% comment %} CollectionDrop {% endcomment %}
+    {% elsif link.object.all_products_count >= 0 %}
+        "object": {
+            "type": "collection",
+            "handle": {{link.object.handle | json}},
+        },
+    {% comment %} ProductDrop {% endcomment %}
+    {% elsif link.object.price >= 0 %}
+        "object": {
+            "type": "product",
+            "handle": {{link.object.handle | json}},
+        },
+    {% endif %}
+
+    "handle": {{link.title | handle | json}},
+    "title": {{link.title | json}},
+    "type": {{link.type | json}},
+    "url": {{link.url | json}}
+}

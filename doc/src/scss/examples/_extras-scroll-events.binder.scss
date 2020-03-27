@@ -1,0 +1,11 @@
+@import '../../../../../demos/extras-scroll-events/src/components/extras-scroll-events-example/extras-scroll-events-example.component';
+
+#tab-content-extras-scroll-events-preview {
+  padding-top: 0;
+  padding-bottom: 0;
+  rv-extras-scroll-events-example .console, rv-extras-scroll-events-example .touch-zone {
+    @extend .scrollbar-primary;
+    height: 400px !important;
+    max-height: 400px !important;
+  }
+}

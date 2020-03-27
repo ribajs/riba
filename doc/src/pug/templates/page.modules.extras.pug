@@ -1,0 +1,36 @@
+extends ../_extends/generated-page.pug
+
+block content
+
+  section.my-5
+    include:markdown-it(html) ../../../../extras/README.md
+
+  section.my-5#binders
+    h2 Binders
+
+    section.my-5#data-scroll-position-y-binder
+      h3 data-scroll-position-y
+      include:markdown-it(html) ../../../doc/reference/extras/binders/data-scroll-position-y.md
+
+    section.my-5#touch-events-binder
+      h3 touch-events
+      include:markdown-it(html) ../../../doc/reference/extras/binders/touch-events.md
+      include ../../../doc/demos/extras-touch-events
+
+    section.my-5#scroll-events-binder
+      h3 scroll-events
+      include:markdown-it(html) ../../../doc/reference/extras/binders/scroll-events.md
+      include ../../../doc/demos/extras-scroll-events
+
+  section.my-5#services
+    h2 Services
+
+    section.my-5#touch-events-service
+      h3 TouchEventsService
+      section
+        include:markdown-it(html) ../../../doc/reference/extras/services/touch-events-service.md
+
+    section.my-5#scroll-events-service
+      h3 ScrollEventsService
+      section
+        include:markdown-it(html) ../../../doc/reference/extras/services/scroll-events-service.md

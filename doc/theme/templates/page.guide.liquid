@@ -1,0 +1,342 @@
+<div class="container py-5 page {{template|handleize}}" id="page-content-{{page.handle}}"><div class="row pt-5"><div class="col-12"><div class="row"><div class="col-12"><h1 class="page-title">{{ page.title }}</h1><div class="rte">{{ page.content }}</div><div class="content"><bs4-contents class="d-block d-lg-none top-contents" header-parent-selector="#main-container" headers-start="2" headers-depth="4" scroll-offset="80"></bs4-contents><section class="my-5" id="install"><h2>Install</h2><p>To get started, you can either scaffold the project with the Riba CLI.</p>
+<p>To scaffold the project with the Riba CLI, run the following commands. This will create a new project directory, and populate the directory with the initial core Riba files and supporting modules, creating a conventional base structure for your project. Creating a new project with the Riba CLI is recommended for first-time users.</p>
+<pre><code class="language-bash">npm i -g @ribajs/cli
+riba new project-name
+</code></pre>
+<p>This will create the <code>project-name</code> directory, node modules and a few other boilerplate files will be installed, and a src/ directory will be created and populated with several core files.</p>
+</section><section id="file-structure"><h2>File Structure</h2><rv-file-tree><div class="item">src</div><div class="children"><div class="item">binders</div><div class="children"><div class="item">index.scss</div><div class="item">index.ts</div><div class="item">test-project-example.binder.scss</div><div class="item">test-project-example.binder.scss</div></div><div class="item">components</div><div class="children"><div class="item">index.scss</div><div class="item">index.ts</div><div class="item">test-project-example</div><div class="children"><div class="item">test-project-example.component.html</div><div class="item">test-project-example.component.scss</div><div class="item">test-project-example.component.ts</div></div></div><div class="item">formatters</div><div class="children"><div class="item">index.scss</div><div class="item">index.ts</div><div class="item">test-project-example.formatter.spec.ts</div><div class="item">test-project-example.formatter.ts</div></div><div class="item">project-name.module.ts</div><div class="item">main.ts</div><div class="item">main.scss</div><div class="item">index.html</div></div></rv-file-tree></section><section class="my-5" id="usage"><h2>Usage</h2><section class="my-4" id="templates"><h3>Templates</h3><p>Templates describe your UI in plain HTML. You can define them directly in the document, use template elements, custom elements or store and load them however you like. Just make sure you have a convenient way to reference your templates when you want to bind some data to them.</p>
+<pre><code class="language-html">&lt;section id=&quot;auction&quot;&gt;
+  &lt;h3&gt;{ auction.product.name }&lt;/h3&gt;
+  &lt;p&gt;Current bid: { auction.currentBid | money }&lt;/p&gt;
+  &lt;rv-aside rv-if=&quot;auction.timeLeft | lt 120&quot;&gt;
+    Hurry up! There is { auction.timeLeft | time } left.
+  &lt;/rv-aside&gt;
+&lt;/section&gt;
+</code></pre>
+<p>The important parts to note here are the attributes prefixed with <code>rv-</code> and portions of text wrapped in <code>{ ... }</code>. These are binding declarations and they are the sole way that riba ties data to your templates. The values of these declarations all follow the same minimal and expressive syntax.</p>
+<pre><code>(keypath | primitive) [formatters...]
+</code></pre>
+<p>Keypaths get observed and will recompute the binding when any intermediary key changes. A primitive can be a string, number, boolean, null or undefined.</p>
+<p><a href="#formatters">Formatters</a> can be piped to values using <code>|</code> and they follow a similarly minimal yet expressive syntax. <a href="#formatters-arguments">Formatter arguments</a> can be keypaths or primitives. Keypath arguments get observed and will recompute the binding when any intermediary key changes.</p>
+<pre><code>(formatter) [keypath | primitive...]
+</code></pre>
+</section><section class="my-4" id="binding"><h3>Binding</h3><p>Simply call <code>riba.bind</code> on a template element with some data that you would like to bind.</p>
+<pre><code class="language-typescript">import { Riba, coreModule } from '@ribajs/core';
+
+const riba = new Riba();
+const model = {};
+
+// Register modules
+riba.module.regist(coreModule);
+
+const view = riba.bind(document.getElementById(&quot;rv-app&quot;), model);
+</code></pre>
+<p><em>Every call to <code>riba.bind</code> returns a fully data-bound view that you should hold on to for later. You'll need it in order to unbind it's listeners using <code>view.unbind()</code>.</em></p>
+</section><section class="my-4" id="configuring"><h3>Configuring</h3><p>Use <code>riba.configure</code> to set the following configuration options for your app. Note that all configuration options can be overridden locally to a particular view if needed.</p>
+<pre><code class="language-typescript">riba.configure({
+
+  // Attribute prefix in templates
+  prefix: 'rv',
+
+  // Preload templates with initial data on bind
+  preloadData: true,
+
+  // Root sightglass interface for keypaths
+  rootInterface: '.',
+
+  // Template delimiters for text bindings
+  templateDelimiters: ['{', '}'],
+
+  // Removes binder attribute after the binder was bound
+  removeBinderAttributes: true,
+
+  // Stop binding on this node names
+  blockNodeNames: ['SCRIPT', 'STYLE', 'TEMPLATE', 'CODE'],
+
+  // Augment the event handler of the on-* binder
+  handler: function(target, event, binding) {
+    this.call(target, event, binding.view.models)
+  }
+
+})
+</code></pre>
+</section></section><section class="my-5" id="binders"><h2>Binders</h2><p>Binders are the sets of instructions that tell riba how to update the DOM when an observed property changes. riba.js comes bundled with a handful commonly-used binders for your conveneience. See the <a href="/docs/reference/">Binder Reference</a> to learn more about the built-in binders that are available out of the box.</p>
+<p>While you can accomplish most UI tasks with the built-in binders, it is highly encouraged to extend riba with your own binders that are specific to the needs of your application.</p>
+<section class="my-4" id="one-way-binders"><h3>One-way Binders</h3><p>One-way binders simply update the DOM when a model property changes (model-to-view only). Let's say we want a simple binder that updates an element's color when the model property changes. Here we can define a one-way <code>color</code> binder as a object with only a <code>routine</code> function. This function takes the element and the current value of the model property, which we will use to updates the element's color.</p>
+<p>You can generate a new binder with the Riba CLI.</p>
+<pre><code class="language-bash">riba generate binder color
+</code></pre>
+<p>This will generate the binder (and a <code>.spec.ts</code> file) in your <code>./src/binders</code> directory and updates your <code>./src/binders/index.ts</code> file.</p>
+<p>Than you can change the implementation like this:</p>
+<pre><code class="language-typescript">import { Binder } from '@ribajs/core';
+
+export const ColorBinder: Binder&lt;string&gt; = {
+  name: 'color',
+  routine(el: HTMLElement, value: string) {
+    el.style.color = value;
+  },
+};
+</code></pre>
+<p>If you use Riba CLI to generate the binder, you usually do not need to register the binder yourself because the CLI updates the <code>./src/binders/index.ts</code> for you.</p>
+<p>Alternatively, you can register the binder by calling <code>riba.module.binder.regist</code> with your new binder.</p>
+<pre><code class="language-typescript">import { Riba } from '@ribajs/core';
+import { ColorBinder } from './binders/color.binder';
+
+const riba = new Riba();
+riba.module.binder.regist(ColorBinder);
+</code></pre>
+<p>With the above binder defined, you can now utilize the <code>rv-color</code> declaration in your views.</p>
+<pre><code class="language-html">&lt;button rv-color=&quot;label.color&quot;&gt;Apply&lt;/button&gt;
+</code></pre>
+</section><section class="my-4" id="two-way-binders"><h3>Two-way Binders</h3><p>Two-way binders, like one-way binders, can update the DOM when a model property changes (model-to-view) but can also update the model when the user interacts with the DOM (view-to-model), such as updating a control input, clicking an element or interacting with a third-party widget.</p>
+<p>In order to update the model when the user interacts with the DOM, you need to tell Riba.js how to bind and unbind to that DOM element to set the value on the model. Instead of defining the binder with a single <code>routine</code> function, two-way binders are defined as an object containing a few extra functions.</p>
+<pre><code class="language-typescript">import { Binder } from '@ribajs/core';
+import $ from 'jquery';
+
+export const toggleBinder: Binder&lt;string&gt; = {
+  bind(el) {
+    adapter = this.config.adapters[this.key.interface]
+    model = this.model
+    keypath = this.keypath
+
+    this.callback = function() {
+      value = adapter.read(model, keypath)
+      adapter.publish(model, keypath, !value)
+    }
+
+    $(el).on('click', this.callback)
+  },
+
+  unbind(el) {
+    $(el).off('click', this.callback)
+  },
+
+  routine(el, value) {
+    $(el)[value ? 'addClass' : 'removeClass']('enabled')
+  }
+};
+</code></pre>
+</section><section class="my-4" id="api"><h3>API</h3><section><h4>binder.bind</h4>
+<p>This function will get called for this binding on the initial <code>view.bind()</code>. Use it to store some initial state on the binding, or to set up any event listeners on the element.</p>
+<h4>binder.unbind</h4>
+<p>This function will get called for this binding on <code>view.unbind()</code>. Use it to reset any state on the element that would have been changed from the routine getting called, or to unbind any event listeners on the element that you've set up in the <code>binder.bind</code> function.</p>
+<h4>binder.routine</h4>
+<p>The routine function is called when an observed attribute on the model changes and is used to update the DOM. When defining a one-way binder as a single function, it is actually the routine function that you're defining.</p>
+<h4>binder.publishes</h4>
+<p>Set this to true if you want view.publish() to call publish on these bindings.</p>
+<h4>binder.block</h4>
+<p>Blocks the current node and child nodes from being parsed (used for iteration binding as well as the if/unless binders).</p>
+<h4>binder.priority</h4>
+<p>Sets the priority of the binder to affect the order in which the binders are executed, binders with higher priority are applied first.</p>
+<h4>binder.name</h4>
+<p>The name of the binder, the name specified attribute name (with the prefix <code>rv-</code> by default) which the binder can be used with.</p>
+</section></section></section><section class="my-5" id="formatters"><h2>Formatters</h2><p>Formatters are functions that mutate the incoming and/or outgoing value of a binding. You can use them to format dates, numbers, currencies, etc. and because they work in a similar fashion to the Unix pipeline, the output of each feeds directly as input to the next one, so you can stack as many of them together as you like.</p>
+<section class="my-4" id="one-way-formatters"><h3>One-way formatters</h3><p>This is by far the most common and practical way to use formatters — simple read-only mutations to a value. Taking the dates example from above, we can define a <code>date</code> formatter that returns a human-friendly version of a date value.</p>
+<p>You can generate a new formatter with the Riba CLI.</p>
+<pre><code class="language-bash">riba generate formatter date
+</code></pre>
+<p>This will generate the formatter (and a <code>.spec.ts</code> file for tests) in your <code>./src/formatters</code> directory and updates your <code>./src/formatters/index.ts</code> file.</p>
+<p>Than you can change the implementation like this:</p>
+<pre><code class="language-typescript">import { Formatter } from '@ribajs/core';
+
+export const dateFormatter: Formatter = {
+  name: 'date',
+  read(value: Date) {
+    return moment(value).format('MMM DD, YYYY')
+  },
+};
+</code></pre>
+<p>If you use Riba CLI to generate the formatter, you usually do not need to register the formatter yourself because the CLI updates the <code>./src/formatters/index.ts</code> for you.</p>
+<p>Alternatively, you can register the formatter by calling <code>riba.module.binder.regist</code> with your new formatter.</p>
+<pre><code class="language-typescript">import { Riba } from '@ribajs/core';
+import { colorBinder } from './formatters/date.formatter';
+
+const riba = new Riba();
+riba.module.formatter.regist(dateFormatter);
+</code></pre>
+<p><em>You can also register multiple formatters at once by calling <code>riba.module.binder.regists</code>, this is useful when importing multiple formatters like <code>import * as formatters from './formatters';</code></em></p>
+<p>After you have regist your formatter, formatters are applied by piping them to binding declarations using <code>|</code> as a delimiter.</p>
+<pre><code class="language-html">&lt;span rv-text=&quot;event.startDate | date&quot;&gt;&lt;/span&gt;
+</code></pre>
+</section><section class="my-4" id="two-way-formatters"><h3>Two-way formatters</h3><p>Two-way formatters are useful when you want to store a value in a particular format, such as a unix epoch time or a cent value, but still let the user input the value in a different format.</p>
+<p>Instead of defining the formatter with the single <code>read</code> function, you define it as an object containing <code>read</code> and <code>publish</code> functions. When a formatter is defined only with a <code>read</code> function, riba assumes it to be in the read direction only. When the <code>read</code> and <code>publish</code> functions are defined, riba uses it's <code>read</code> and <code>publish</code> functions to effectively serialize and de-serialize the value.</p>
+<p>Using the cent value example from above, let's say we want to store a monetary value as cents but let the user input it in a dollar amount and automatically round to two decimal places when setting the value on the model. For this we can define a two-way <code>currency</code> formatter.</p>
+<pre><code class="language-typescript">import { Formatter } from '@ribajs/core';
+
+export const CurrencyFormatter: Formatter = {
+  name: 'currency',
+  read(value: number) {
+    return (value / 100).toFixed(2)
+  },
+  publish(value: string) {
+    return Math.round(parseFloat(value) * 100)
+  }
+};
+</code></pre>
+<p>You can then bind using this formatter with any one-way or two-way binder.</p>
+<pre><code class="language-html">&lt;input rv-value=&quot;item.price | currency&quot;&gt;
+</code></pre>
+<p>Note that you can also chain bidirectional formatters with any other formatters, and in any order. They read from left to right, and publish from right to left, skipping any read-only formatters when publishing the value back to the model.</p>
+</section><section class="my-4" id="formatters-arguments"><h3>Formatter arguments</h3><p>Formatters can accept any number of arguments in the form of keypaths or primitives. Keypath arguments get observed and will recompute the binding when any intermediary key changes. A primitive can be a string, number, boolean, null or undefined.</p>
+<pre><code class="language-html">&lt;span&gt;{ alarm.time | time user.timezone 'hh:mm' }&lt;/span&gt;
+</code></pre>
+<p>The value of each argument in the binding declaration will be evaluated and passed into the formatter function as an additional argument.</p>
+<pre><code class="language-typescript">import { Formatter } from '@ribajs/core';
+
+export const TimeFormatter: Formatter = {
+  name: 'time',
+  read(value: Date, timezone: string, format: string) {
+    return moment(value).tz(timezone).format(format)
+  }
+};
+</code></pre>
+</section></section><section class="my-5" id="components"><h2>Components</h2><section><p>Components let you define reusable views that can be used within any of your templates. For some perspective on where components fit into your templates in relation to binders; binders define custom attributes, while components define custom elements.</p>
+<h3>Based on Custom Elements</h3>
+<p>Unlike <a href="http://rivetsjs.com/docs/guide/#components">Rivets.js components</a> in Riba.js components following the <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements">custom elements specification</a>.</p>
+<h4>Backward Compatible</h4>
+<p>The components in Riba are having a additional small fallback implementation which makes it work also on browser that does not support custom elements. The fallback implementation has the advantage, that no large polyfills are needed.</p>
+<p>Usually, custom elements require the ES2015 class syntax but in Riba.js we found a way that custom elements also working with the prototype class syntax. Therefore you can convert your Riba project (e.g. with Babel) also for old browsers and your custom elements are still working with modern browsers.</p>
+<h3>Create a New Component</h3>
+<p>You can generate a new formatter with the Riba CLI.</p>
+<pre><code class="language-bash">riba generate component todo-item
+</code></pre>
+<p>This will create a new directory with a new component (and a <code>.spec.ts</code> file for tests) in your <code>./src/component</code> directory and updates your <code>./src/components/index.ts</code> file.</p>
+<p>A component object must define a <code>template</code> function, which returns the template for the component (this can be an HTML string or the actual element). It must also define an <code>initialize</code> function, which returns the scope object to bind the view with (this will likely be a controller / viewmodel / presenter).</p>
+<pre><code class="language-javascript">import {
+  Component,
+  Debug,
+} from '@ribajs/core';
+
+import template from './todo-item.component.html';
+
+interface Scope {
+  description?: string;
+}
+
+export class TodoItemComponent extends Component {
+
+  public static tagName: string = 'rv-todo-item';
+
+  protected autobind = true;
+
+  static get observedAttributes() {
+    return ['description'];
+  }
+
+  protected scope: Scope = {
+    hello: undefined,
+  };
+
+  constructor(element?: HTMLElement) {
+    super(element);
+    this.init(TodoItemComponent.observedAttributes);
+  }
+
+  protected async init(observedAttributes: string[]) {
+    return super.init(observedAttributes)
+    .then((view) =&gt; {
+      return view;
+    });
+  }
+
+  protected async beforeBind() {
+    await super.beforeBind();
+  }
+
+  protected async afterBind() {
+    await super.afterBind();
+  }
+
+  protected requiredAttributes() {
+    return [];
+  }
+
+  protected parsedAttributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
+    super.parsedAttributeChangedCallback(attributeName, oldValue, newValue, namespace);
+  }
+
+  // deconstructor
+  protected disconnectedCallback() {
+    super.disconnectedCallback();
+  }
+
+  protected template() {
+    // Only set the component template if there no childs already
+    if (this.el.hasChildNodes()) {
+      return null;
+    } else {
+      return template;
+    }
+  }
+}
+</code></pre>
+<p>To use the component inside of a template, simply use an element with the same tag name as the component's <code>tagName</code>. Unlike on binders, the attributes on the element will not evaluated as keypaths, the reason for this is that custom elements are internally regists with the native browser <code>customElements.define('rv-todo-item', TodoItemComponent);</code> method and no external values can be passed over it.</p>
+<pre><code class="language-html">&lt;rv-todo-item description=&quot;Buy cat food&quot;&gt;&lt;/rv-todo-item&gt;
+</code></pre>
+</section><section class="my-4" id="lifecycle-callbacks"><h3>Lifecycle callbacks</h3><section><p>This most method here are part of the official custom elements specification. Read more about this methods <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#Using_the_lifecycle_callbacks">here</a>.</p>
+<h3>connectedCallback</h3>
+<p>Invoked when the custom element is first connected to the document's DOM.</p>
+<h3>disconnectedCallback</h3>
+<p>Invoked each time the custom element is disconnected from the document's DOM.</p>
+<h3>adoptedCallback</h3>
+<p>Invoked when one of the custom element's attributes is added, removed, or changed.</p>
+<h3>attributeChangedCallback</h3>
+<p>Invoked each time one of the custom element's attributes is added, removed, or changed. Which attributes to notice change for is specified in a static get <code>observedAttributes</code> method.</p>
+<p>If you override this method you should always call the super method:</p>
+<pre><code class="language-typescript">protected attributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
+  super.attributeChangedCallback(attributeName, oldValue, newValue, namespace);
+  // Do here what ever you want
+}
+</code></pre>
+<p>The super method will automatically assign the attribute value to your model / scope, e.g. <code>&lt;my-custom-element option-width=&quot;500&quot;&gt;&lt;/my-custom-element&gt;</code> will automatically assign the attribute value to your model / scope <code>this.scope.optionWidth = 500;</code>, the attribute name is converted into camelCase.</p>
+<h3>parsedAttributeChangedCallback</h3>
+<p>Invoked after <code>attributeChangedCallback</code> was invoked, this callback method has the same parameters like <code>attributeChangedCallback</code> with the only difference that the attribute name was converted to camelCase. E.g. <code>option-width</code> would be converted to <code>optionWidth</code>.</p>
+</section></section></section><section class="my-5" id="adapters"><h2>Adapters</h2><p>riba is agnostic about the objects that it can subscribe to. This makes it very flexible as it can adapt to work with virtually any library or framework, but it also means that you need to tell riba <em>how</em> to subscribe to those objects. This is where adapters come in to play. This feature is driven by the observer pattern.</p>
+<p>Each adapter is defined to a unique interface (a single character) which is used to separate the keys in a keypath. The interfaces used in a keypath determine which adapter to use for each intermediary key.</p>
+<pre><code>user.address:city
+</code></pre>
+<p>The above keypath will use the <code>.</code> adapter to access the <code>address</code> key on the <code>user</code> object, and the <code>:</code> adapter to access the <code>city</code> key on the <code>address</code> object. If you can imagine for a second that <code>address</code> is just a normal property on the user object pointing to a Backbone model, but <code>city</code> is actually an attribute on that Backbone model, you can see how this kind of notation is actually very succint and expressive.</p>
+<p>riba comes with a default <code>.</code> adapter based on custom property getter and setter</p>
+<section class="my-4" id="the-built-in-adapter"><h3>The built-in adapter</h3><p>riba ships with a <code>.</code> adapter for subscribing to properties on plain JavaScript objects. The adapter is self-implemented using ES5 natives such as <code>Object.defineProperty</code>. In the future, this adapter will be implemented purely using <code>Object.observe</code> as soon as browser support permits.</p>
+<p>If you need to support non-ES5 browsers (&lt; IE 9), you can replace this adapter to use polyfills or with a third-party library that has the browser support you need. If you're only targetting Chrome Canary, feel free to replace it with an <code>Object.observe</code> adapter now and enter data binding bliss.</p>
+</section><section class="my-4" id="creating-an-adapter"><h3>Creating an adapter</h3><p>Adapters are defined on <code>riba.adapters</code> with the interface as the property name and the adapter object as the value. An adapter is just an object that responds to <code>observe</code>, <code>unobserve</code>, <code>get</code> and <code>set</code>.</p>
+<p>The following <code>:</code> adapter works for Backbone.js models / Stapes.js modules.</p>
+<pre><code class="language-javascript">riba.adapters[':'] = {
+  observe: function(obj, keypath, callback) {
+    obj.on('change:' + keypath, callback)
+  },
+  unobserve: function(obj, keypath, callback) {
+    obj.off('change:' + keypath, callback)
+  },
+  get: function(obj, keypath) {
+    return obj.get(keypath)
+  },
+  set: function(obj, keypath, value) {
+    obj.set(keypath, value)
+  }
+}
+</code></pre>
+</section></section><section class="my-5" id="iteration-binding"><h2>Iteration binding</h2><section class="my-4" id="iterate"><h3>Iterate</h3><p>Use the <code>rv-each-[item]</code> binder to have Riba.js automatically loop over items in an array and append bound instances of that element. Within that element you can bind to the iterated item as well as any contexts that are available in the parent view.</p>
+<pre><code class="language-html">&lt;ul&gt;
+  &lt;li rv-each-todo=&quot;list.todos&quot;&gt;
+    &lt;input type=&quot;checkbox&quot; rv-checked=&quot;todo.done&quot;&gt;
+    &lt;span&gt;{ todo.summary }&lt;/span&gt;
+  &lt;/li&gt;
+&lt;ul&gt;
+</code></pre>
+</section><section class="my-4" id="iteration-index"><h3>Iteration index</h3><p>To access the index of the current iteration use the syntax <code>%item%</code>, Where <code>item</code> is the name of the model you provided in <code>rv-each-[item]</code>.  You can also access the index of the iteration by using the key <code>index</code> but using this will access only the current iterations index. Note that when nesting <code>rv-each</code>'s the parent index is still accessible within the scope via the model name.</p>
+<pre><code class="language-html">&lt;ul&gt;
+  &lt;li rv-each-user=&quot;app.users&quot;&gt;
+    &lt;span&gt;User Index : { %user% }&lt;/span&gt;
+
+    &lt;ul&gt;
+        &lt;li rv-each-comment=&quot;user.comments&quot;&gt;
+            &lt;span&gt;Comment Index : { %comment% }&lt;/span&gt;
+
+            &lt;span&gt;User Index : { %user% }&lt;/span&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;ul&gt;
+</code></pre>
+</section></section><bs4-scrollspy class="d-none d-lg-block py-3 side-scrollspy scrollbar-primary-on-hover scrollbar-y-auto scrollbar-x-hidden" rv-scrollbar-draggable="rv-scrollbar-draggable" header-parent-selector="#main-container" headers-start="2" headers-depth="4" offset="200" offset-bottom="80" scroll-offset="80"></bs4-scrollspy></div></div></div></div></div></div>

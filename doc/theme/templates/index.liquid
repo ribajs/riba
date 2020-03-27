@@ -1,0 +1,151 @@
+<section class="header bg-primary text-light text-center py-5"><div class="container py-5"><div class="row"><div class="col"><p class="lead">Lightweight and powerful data binding + templating solution for building modern web applications.</p><p class="lead">The espiritual sucessor of <strong>Rivets.js</strong> rewritten in TypeScript.</p></div></div><div class="row"><div class="col-auto mx-auto"><pre class="language-bash"><code>$ npm install -g @ribajs/cli
+$ riba new project</code></pre></div></div></div></section>{{ content_for_index  }}<div class="container"><div class="row"><div class="separator col-12"><h2>Why Riba.js?</h2></div><section class="flexible col-12 col-md-6 my-3"><h3>Flexible</h3>
+<p>Riba.js is completely agnostic about your model / controller layer and works well with existing libraries that employ an event-driven model such as <a href="https://backbonejs.org/">Backbone.js</a> and <a href="http://hay.github.io/stapes/">Stapes.js</a>. It also ships with built-in support for plain JavaScript objects, so you can use Riba.js right away without needing a separate model or observables library.</p>
+</section><section class="configurable col-12 col-md-6 my-3"><h3>Configurable</h3>
+<p>From the event handlers to the template delimiters, the attribute prefixes to the preloading of data. It's all configurable and tunable at the application level as well as locally to individual views.</p>
+</section></div><div class="row"><div class="separator col-12"><h2>Highlights</h2></div><section class="binders col-12 col-md-6 my-3"><h3>Binders</h3>
+<pre><code class="language-html">&lt;input rv-value=&quot;item.summary&quot;&gt;
+</code></pre>
+<p>Describe how your underlying data is reflected in the DOM and vice-versa. All binders create a binding that is automatically updated when model data changes or when the user interacts with the DOM.</p>
+</section><section class="formatters col-12 col-md-6 my-3" rv-block="rv-block"><h3>Formatters</h3>
+<pre><code class="language-html">&lt;span&gt;{ item.due | fromNow | duration }&lt;/span&gt;
+</code></pre>
+<p>Format dates, numbers, currencies and implement logic gates and conversions. Formatters work in a similar fashion to the Unix pipeline, so you can stack as many of them together as you like.</p>
+</section><section class="adapters col-12 col-md-6 my-3"><h3>Adapters</h3>
+<pre><code class="language-html">&lt;select rv-value=&quot;user.address:city&quot;&gt;
+</code></pre>
+<p>Teach Riba.js how to observe and interact with different objects. Use . for plain object proterties and define a : adapter for Backbone model attributes. It's up to you. Adapters take care of observing and reading each key in a keypath</p>
+</section><section class="web-components col-12 col-md-6 my-3"><h3>Web Components</h3>
+<pre><code class="language-html">&lt;toggle-item on=&quot;item.complete&quot;&gt;&lt;/toggle-item&gt;
+</code></pre>
+<p>Define reusable views, instantiable as a custom element. Each web component gets its own isolated, augmentable scope and are based on the <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements">custom elements</a> browser standard.</p>
+</section></div><div class="row"><div class="separator col-12"><h2>Example</h2></div><section class="example col-12 my-3"><rv-bind-content><template><rv-example-tabs handle="each-item"><template title="component.html" type="source"><pre><code class="language-html">&lt;nav&gt;
+  &lt;button rv-on-click=&quot;push&quot;&gt;Push&lt;/button&gt;
+  &lt;button rv-on-click=&quot;pop&quot;&gt;Pop&lt;/button&gt;
+  &lt;button rv-on-click=&quot;shift&quot;&gt;Shift&lt;/button&gt;
+  &lt;button rv-on-click=&quot;unshift&quot;&gt;Unshift&lt;/button&gt;
+  &lt;button rv-on-click=&quot;splice&quot;&gt;Splice&lt;/button&gt;
+  &lt;button rv-on-click=&quot;sort&quot;&gt;Sort&lt;/button&gt;
+  &lt;button rv-on-click=&quot;reset&quot;&gt;Reset&lt;/button&gt;
+&lt;/nav&gt;
+&lt;section&gt;
+  &lt;div rv-each-item=&quot;items&quot;&gt;
+    &lt;div&gt;Item { %item% } / { item.name }&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+</code></pre></template><template title="component.ts" type="source"><pre><code class="language-typescript">import { Component } from &#39;@ribajs/core&#39;;
+import template from &#39;./each-item-example.component.html&#39;;
+
+export class EachItemExampleComponent extends Component {
+
+  public static tagName: string = &#39;rv-each-item-example&#39;;
+
+  protected scope: Scope = {
+    items: this.getItems(),
+    pop: this.pop,
+    push: this.push,
+    reset: this.reset,
+    shift: this.shift,
+    sort: this.sort,
+    splice: this.splice,
+    unshift: this.unshift,
+  };
+
+  constructor(element?: HTMLElement) {
+    super(element);
+  }
+
+  public push() {
+    this.scope.items.push({name: &#39;pushed&#39;});
+  }
+
+  public pop() {
+    this.scope.items.pop();
+  }
+
+  public shift() {
+    this.scope.items.shift();
+  }
+
+  public unshift() {
+    this.scope.items.unshift({name: &#39;shifted&#39;});
+  }
+
+  public splice() {
+    this.scope.items.splice(1, 1, {name: &#39;spliced1&#39;}, {name: &#39;spliced2&#39;});
+  }
+
+  public reset() {
+    this.scope.items = this.getItems();
+  }
+
+  public sort() {
+    this.scope.items.sort((a, b) =&gt; {
+      return (a.value || 0) - (b.value || 0);
+    });
+  }
+
+  protected connectedCallback() {
+    super.connectedCallback();
+    this.init([]);
+  }
+
+  protected getItems(): Item[] {
+    return [{name: &#39;x&#39;, value: 2}, {name: &#39;y&#39;, value: 1}, {name: &#39;z&#39;, value: 3}];
+  }
+
+  protected async init(observedAttributes: string[]) {
+    return super.init(observedAttributes)
+    .then((view) =&gt; {
+      return view;
+    });
+  }
+
+  protected template() {
+    return template;
+  }
+}
+
+interface Item {
+  name: string;
+  value?: number;
+}
+
+interface Scope {
+  items: Item[];
+  push: EachItemExampleComponent[&#39;push&#39;];
+  pop: EachItemExampleComponent[&#39;pop&#39;];
+  shift: EachItemExampleComponent[&#39;shift&#39;];
+  unshift: EachItemExampleComponent[&#39;unshift&#39;];
+  splice: EachItemExampleComponent[&#39;splice&#39;];
+  reset: EachItemExampleComponent[&#39;reset&#39;];
+  sort: EachItemExampleComponent[&#39;sort&#39;];
+}
+</code></pre></template><template title="index.html" type="source"><pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;each-star-example&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id=&quot;rv-app&quot;&gt;
+      &lt;rv-each-item-example&gt;&lt;/rv-each-item-example&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></template><template title="Info" type="info"><h1>each-item-example</h1>
+<pre><code class="language-bash">git clone --recurse-submodules https://github.com/ribajs/riba.git
+cd riba/examples/each-item
+npm install
+npm run start
+</code></pre>
+</template><template title="Preview" type="preview"><rv-each-item-example> </rv-each-item-example></template></rv-example-tabs></template></rv-bind-content></section></div></div><section class="author py-5"><div class="container"><div class="row"><div class="col-12"><h2>Authors</h2><p>Pascal Garber by <a href="https://artandcode.studio/">Art+Code Studio</a><br/>Luiz Américo Pereira Câmara, author of <a href="https://blikblum.github.io/tinybind/">tinybind</a><br/>Michael Richards, original author of <a href="http://rivetsjs.com/">Rivets.js</a></p></div></div></div></section><script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "WebSite",
+  "name": "{{ shop.name }}",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "{{ shop.url }}/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  },
+  "url": "{{ shop.url }}{{ page.url }}"
+}</script>

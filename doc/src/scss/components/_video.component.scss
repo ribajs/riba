@@ -1,0 +1,41 @@
+rv-video {
+  display: block;
+  color: $white;
+
+  .video-volume-high, .video-volume-mute, .video-default-controls-show {
+    position: absolute;
+    padding: 15px;
+    transition: opacity 300ms ease;
+    opacity: 0.7;
+    z-index: 1;
+    @include media-breakpoint-up(lg) {
+      opacity: 0;
+    }
+    &:hover {
+      color: $primary;
+    }
+  }
+  .video-volume-high, .video-volume-mute {
+    bottom: 0;
+    right: 30px;
+  }
+
+  .video-default-controls-show {
+    bottom: 0;
+    right: 0;
+    padding: 13px;
+    &.default-controls-visible {
+      top: 0;
+      bottom: auto;
+    }
+  }
+
+  &:hover {
+    .video-volume-high, .video-volume-mute, .video-default-controls-show  {
+      opacity: 0.7 !important;
+      @include media-breakpoint-up(lg) {
+        opacity: 0.7;
+      }
+    }
+  }
+}

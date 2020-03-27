@@ -1,0 +1,35 @@
+extends ../_extends/generated-page.pug
+
+block content
+
+  section.my-5
+    include:markdown-it(html) ../../../../shopify/README.md
+
+  section.my-5#binders
+    h2 Binders
+
+    section.my-5#shopify-img
+      h3 shopify-img
+      section
+        include:markdown-it(html) ../../../doc/reference/shopify/binders/shopify-img.md
+
+  section.my-5#components
+    h2 Components
+
+    section.my-5#shopify-linklist
+      h3 shopify-linklist
+      section
+        include:markdown-it(html) ../../../doc/reference/shopify/components/shopify-linklist.md
+
+  section.my-5#snippets
+    h2 Snippets
+
+    section.my-5#utils-json-linklists
+      h3 utils-json-linklists.liquid
+      section
+        include:markdown-it(html) ../../../doc/reference/shopify/snippets/utils-json-linklists.md
+
+    section.my-5#utils-json-linklist
+      h3 utils-json-linklist.liquid
+      section
+        include:markdown-it(html) ../../../doc/reference/shopify/snippets/utils-json-linklist.md

@@ -1,0 +1,13 @@
+rv-bind-content
+  template
+    rv-example-tabs(handle="extras-scroll-events")
+      template(title="main.ts", type="source")
+        include:prismjs(language = 'typescript') ../../../../demos/extras-scroll-events/src/main.ts
+      template(title="component.html", type="source")
+        include:prismjs(language = 'html') ../../../../demos/extras-scroll-events/src/components/extras-scroll-events-example/extras-scroll-events-example.component.html
+      template(title="component.ts", type="source")
+        include:prismjs(language = 'typescript') ../../../../demos/extras-scroll-events/src/components/extras-scroll-events-example/extras-scroll-events-example.component.ts
+      template(title="Preview", type="preview")
+        rv-extras-scroll-events-example
+      //- template(title="README.md")
+      //-   include:markdown-it(html) ../../../../demos/extras-scroll-events/README.md

@@ -1,0 +1,8 @@
+#tab-content-route-class-classname-preview, #tab-content-parent-route-class-classname-preview {
+  .nav-link {
+    &.active {
+      @extend .text-danger;
+      pointer-events: none;
+    }
+  }
+}
