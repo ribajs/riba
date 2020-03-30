@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "ESNEXT",
+    "target": "ESNext",
+    "moduleResolution": "node",
+    "typeRoots": ["./node_modules/@types", "./node_modules/@ribajs/types", "./src/types"],
+    "declaration": true,
+    "inlineSourceMap": true,
+    "noUnusedLocals": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "allowSyntheticDefaultImports": true,
+  }
+}

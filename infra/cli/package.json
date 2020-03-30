@@ -1,0 +1,62 @@
+{
+  "name": "@ribajs/cli",
+  "version": "1.8.0",
+  "description": "CLI tool for Riba applications 🍹",
+  "url": "https://github.com/ribajs/riba/tree/master/packages/cli",
+  "homepage": "https://ribajs.com/",
+  "bin": {
+    "riba": "dist/bin/riba.js"
+  },
+  "scripts": {
+    "build": "(npm run clean) && (npm run build:ts) && (chmod +x ./dist/bin/riba.js)",
+    "build:ts": "npm run lint && tsc",
+    "clean": "rm -rf ./dist",
+    "watch": "npm run build:ts -- --watch",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
+    "packages:link": "npm link @ribajs/core @ribajs/schematics",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pascal Garber <pascal@artandcode.studio>",
+  "license": "MIT",
+  "dependencies": {
+    "@angular-devkit/core": "^9.1.0",
+    "@angular-devkit/schematics": "^9.1.0",
+    "@angular-devkit/schematics-cli": "^0.901.0",
+    "@ribajs/core": "^1.8.0",
+    "@ribajs/schematics": "^1.8.0",
+    "@types/os-name": "^3.1.0",
+    "@yarnpkg/pnpify": "^2.0.0-rc.20",
+    "chalk": "^3.0.0",
+    "cli-table3": "^0.6.0",
+    "commander": "^5.0.0",
+    "dashify": "^2.0.0",
+    "debug": "^4.1.1",
+    "inquirer": "^7.1.0",
+    "node-emoji": "^1.10.0",
+    "ora": "^4.0.3",
+    "os-name": "^3.1.0",
+    "pascalcase": "^1.0.0",
+    "source-map-support": "^0.5.16",
+    "ts-loader": "^6.2.2"
+  },
+  "devDependencies": {
+    "@babel/runtime-corejs3": "^7.9.2",
+    "@types/dashify": "^1.0.0",
+    "@types/debug": "^4.1.5",
+    "@types/inquirer": "^6.5.0",
+    "@types/node": "^13.9.5",
+    "@types/node-emoji": "^1.8.1",
+    "@types/ora": "^3.2.0",
+    "@typescript-eslint/eslint-plugin": "^2.25.0",
+    "@typescript-eslint/parser": "^2.25.0",
+    "add": "^2.0.6",
+    "core-js": "^3.6.4",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "pnp-webpack-plugin": "^1.6.4",
+    "prettier": "^2.0.2",
+    "typescript": "^3.8.3",
+    "yarn": "^1.22.4"
+  }
+}

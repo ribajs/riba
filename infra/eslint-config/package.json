@@ -1,0 +1,48 @@
+{
+  "name": "@ribajs/eslint-config",
+  "description": "Default ESLint configuration for Riba.js projects",
+  "version": "1.8.0",
+  "author": "Pascal Garber <pascal@artandcode.studio>",
+  "contributors": [],
+  "url": "https://github.com/ribajs/riba/tree/master/infra/eslint",
+  "main": "index.js",
+  "module": "index.js",
+  "source": "index.js",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "index.js"
+  ],
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/ribajs/riba/blob/master/LICENSE"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ribajs/riba.git"
+  },
+  "keywords": [
+    "Art+Code Studio",
+    "Riba",
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin",
+    "prettier"
+  ],
+  "scripts": {},
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.25.0",
+    "@typescript-eslint/parser": "^2.25.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^2.0.2"
+  },
+  "bugs": {
+    "url": "https://github.com/ribajs/riba/issues"
+  },
+  "homepage": "https://github.com/ribajs/riba#readme"
+}

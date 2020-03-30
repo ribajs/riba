@@ -5,13 +5,16 @@
   "main": "src/index.html",
   "scripts": {
     "build": "webpack --env.production",
-    "build:dev": "npm run lint:ts && webpack --env.development",
+    "build:dev": "npm run lint && webpack --env.development",
     "start": "webpack-dev-server --env.development",
     "clear": "rm -rf ./dist",
-    "lint:ts": "eslint src --ext .js,.jsx,.ts,.tsx && tsc --noEmit",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
     "test": "jest",
-    "packages:link": "npm link @ribajs/bs4 @ribajs/core @ribajs/extras @ribajs/iconset"
+    "packages:npm:link": "npm link @ribajs/tsconfig @ribajs/eslint-config @ribajs/bs4 @ribajs/core @ribajs/extras @ribajs/iconset @ribajs/tsconfig"
   },
+  "files": [
+    "src"
+  ],
   "author": "",
   "license": "MIT",
   "devDependencies": {
@@ -26,9 +29,11 @@
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-typescript": "^7.9.0",
     "@babel/runtime-corejs3": "^7.9.2",
+    "@ribajs/eslint-config": "^1.8.0",
+    "@ribajs/tsconfig": "^1.8.0",
+    "@ribajs/types": "github:ribajs/types#master",
+    "@ribajs/webpack-config": "0.0.1",
     "@types/jest": "^25.1.4",
-    "@typescript-eslint/eslint-plugin": "^2.25.0",
-    "@typescript-eslint/parser": "^2.25.0",
     "autoprefixer": "^9.7.5",
     "babel-loader": "^8.1.0",
     "babel-plugin-array-includes": "^2.0.3",
@@ -37,18 +42,21 @@
     "css-loader": "^3.4.2",
     "eslint": "^6.8.0",
     "html-loader": "^1.0.0",
-    "html-webpack-plugin": "^4.0.2",
+    "html-webpack-plugin": "^4.0.3",
     "inspectpack": "^4.4.0",
-    "jest": "^25.2.3",
+    "jest": "^25.2.4",
     "jest-extended": "^0.11.5",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.1",
     "postcss-loader": "^3.0.0",
     "postcss-modules": "^1.5.0",
+    "prettier": "^2.0.2",
+    "pug-loader": "^2.4.0",
     "sass-loader": "^8.0.2",
-    "ts-jest": "^25.2.1",
+    "terser-webpack-plugin": "^2.3.5",
+    "ts-jest": "^25.3.0",
     "typescript": "^3.8.3",
-    "webpack": "^4.42.1",
+    "webpack": "^5.0.0-beta.13",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
   },
@@ -56,6 +64,25 @@
     "@ribajs/bs4": "^1.8.0",
     "@ribajs/core": "^1.8.0",
     "@ribajs/extras": "^1.8.0",
-    "@ribajs/iconset": "^1.8.0"
+    "@ribajs/iconset": "^1.8.0",
+    "@yarnpkg/pnpify": "^2.0.0-rc.20",
+    "bootstrap": "^4.4.1"
+  },
+  "resolutions": {
+    "@ribajs/bs4": "portal:../../packages/bs4",
+    "@ribajs/core": "portal:../../packages/core",
+    "@ribajs/extras": "portal:../../packages/extras",
+    "@ribajs/i18n": "portal:../../packages/i18n",
+    "@ribajs/iconset": "portal:../../packages/iconset",
+    "@ribajs/jquery": "portal:../../packages/jquery",
+    "@ribajs/moment": "portal:../../packages/moment",
+    "@ribajs/pdf": "portal:../../packages/pdf",
+    "@ribajs/photoswipe": "portal:../../packages/photoswipe",
+    "@ribajs/router": "portal:../../packages/router",
+    "@ribajs/shopify": "portal:../../packages/shopify",
+    "@ribajs/shopify-easdk": "portal:../../packages/shopify-easdk",
+    "@ribajs/shopify-tda": "portal:../../packages/shopify-tda",
+    "@ribajs/types": "portal:../../infra/types",
+    "@ribajs/eslint-config": "portal:../../infra/eslint-config"
   }
 }

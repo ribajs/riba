@@ -1,12 +1,9 @@
-import {
-  Component,
-} from '@ribajs/core';
+import { Component } from "@ribajs/core";
 
-import template from './slideshow-example.component.html';
+import template from "./slideshow-example.component.html";
 
 export class SlideshowExampleComponent extends Component {
-
-  public static tagName = 'rv-slideshow-example';
+  public static tagName = "rv-slideshow-example";
 
   protected autobind = true;
 
@@ -26,8 +23,7 @@ export class SlideshowExampleComponent extends Component {
   }
 
   protected async init(observedAttributes: string[]) {
-    return super.init(observedAttributes)
-    .then((view) => {
+    return super.init(observedAttributes).then((view) => {
       return view;
     });
   }
@@ -44,8 +40,18 @@ export class SlideshowExampleComponent extends Component {
     return [];
   }
 
-  protected parsedAttributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
-    super.parsedAttributeChangedCallback(attributeName, oldValue, newValue, namespace);
+  protected parsedAttributeChangedCallback(
+    attributeName: string,
+    oldValue: any,
+    newValue: any,
+    namespace: string | null
+  ) {
+    super.parsedAttributeChangedCallback(
+      attributeName,
+      oldValue,
+      newValue,
+      namespace
+    );
   }
 
   // deconstructor

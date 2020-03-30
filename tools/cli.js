@@ -111,7 +111,7 @@ const PACKAGES = [
 
   // Tools, helpers, docs
   {
-    path: 'packages/cli/',
+    path: 'infra/cli/',
     npm: '@ribajs/cli',
     available: true,
     isRibaModule: false,
@@ -119,7 +119,7 @@ const PACKAGES = [
     configure: false,
   },
   {
-    path: 'packages/schematics/',
+    path: 'infra/schematics/',
     npm: '@ribajs/schematics',
     available: true,
     isRibaModule: false,
@@ -127,7 +127,7 @@ const PACKAGES = [
     configure: false,
   },
   {
-    path: 'packages/doc/',
+    path: 'infra/doc/',
     npm: '@ribajs/doc',
     available: false,
     isRibaModule: false,
@@ -413,7 +413,7 @@ const processModules = (bump, publish, upgrade, install, link, linkDependencies,
   });
 
   // Schematics applications
-  processPackage('packages/schematics/src/lib/application/files/ts/', false, false, upgrade, false, false, false, false, false, false, false);
+  processPackage('infra/schematics/src/lib/application/files/ts/', false, false, upgrade, false, false, false, false, false, false, false);
 
   // root (do not bump this version because it is used as the main version for all other packages)
   processPackage('', false, false, upgrade, install, false, false, false, reinstall, false, false);
