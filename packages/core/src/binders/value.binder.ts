@@ -84,5 +84,5 @@ export const valueBinder: Binder<any> = {
     }
   },
 
-  getValue: Utils.getInputValue
+  getValue: Utils.getInputValue,
 };

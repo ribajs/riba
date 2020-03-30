@@ -163,8 +163,8 @@ describe("nested-each-*", () => {
       items: [
         { name: "Level 1 - 0", items: [{ val: 0 }, { val: 1 }] },
         { name: "Level 1 - 1", items: [{ val: 2 }, { val: 3 }] },
-        { name: "Level 1 - 2", items: [{ val: 4 }, { val: 5 }] }
-      ]
+        { name: "Level 1 - 2", items: [{ val: 4 }, { val: 5 }] },
+      ],
     };
   });
 

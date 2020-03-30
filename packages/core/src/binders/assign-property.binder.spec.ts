@@ -19,7 +19,7 @@ describe("riba.binders", () => {
     fragment.appendChild(element);
 
     model = {
-      value: "world"
+      value: "world",
     };
   });
 

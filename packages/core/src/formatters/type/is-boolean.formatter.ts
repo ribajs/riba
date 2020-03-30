@@ -6,5 +6,5 @@ import { Utils } from "../../services/utils";
  */
 export const isBooleanFormatter: Formatter = {
   name: "isBoolean",
-  read: Utils.isBoolean
+  read: Utils.isBoolean,
 };

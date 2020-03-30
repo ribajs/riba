@@ -7,5 +7,5 @@ export const disabledBinder: Binder<boolean> = {
   name: "disabled",
   routine(el: HTMLUnknownElement, value: boolean) {
     (el as HTMLButtonElement).disabled = !!value;
-  }
+  },
 };

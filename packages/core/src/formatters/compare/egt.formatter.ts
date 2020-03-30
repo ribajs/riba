@@ -7,5 +7,5 @@ export const egtFormatter: Formatter = {
   name: "egt",
   read(a: number, b: number) {
     return a >= b;
-  }
+  },
 };

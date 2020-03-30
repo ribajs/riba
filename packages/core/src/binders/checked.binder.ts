@@ -31,5 +31,5 @@ export const checkedBinder: Binder<string> = {
     } else {
       (el as HTMLInputElement).checked = !!value;
     }
-  }
+  },
 };

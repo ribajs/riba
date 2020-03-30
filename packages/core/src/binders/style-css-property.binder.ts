@@ -17,5 +17,5 @@ export const cssStarBinder: Binder<string> = {
     } else {
       (el.style as any)[propertyName] = value;
     }
-  }
+  },
 };

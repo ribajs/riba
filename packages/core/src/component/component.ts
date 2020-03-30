@@ -123,7 +123,7 @@ export abstract class Component extends FakeHTMLElement {
      * After all required and passed attributes are set we load the template and bind the component
      */
     if (this.ready()) {
-      return this.loadTemplate().then(template => {
+      return this.loadTemplate().then((template) => {
         if (this.autobind) {
           return this.bind();
         }
@@ -156,7 +156,7 @@ export abstract class Component extends FakeHTMLElement {
       const passed = this.attributeIsPassed(observedAttribute);
       this.observedAttributesToCheck[observedAttribute] = {
         passed,
-        initialized: false
+        initialized: false,
       };
     }
   }
@@ -232,8 +232,8 @@ export abstract class Component extends FakeHTMLElement {
         detail: {
           name,
           newValue,
-          namespace: null // TODO
-        }
+          namespace: null, // TODO
+        },
       })
     );
   }
@@ -243,7 +243,7 @@ export abstract class Component extends FakeHTMLElement {
    */
   protected eventHandler(self: Component): EventHandler {
     // IMPORTANT this must be a function and not a Arrow Functions
-    return function(
+    return function (
       this: EventHandler,
       context: Binding,
       event: Event,
@@ -262,7 +262,7 @@ export abstract class Component extends FakeHTMLElement {
       name: "call",
       read: (fn: (...args: any[]) => any, ...args: any[]) => {
         return fn.apply(self, args);
-      }
+      },
     };
   }
 
@@ -285,7 +285,7 @@ export abstract class Component extends FakeHTMLElement {
           fnArgs.push(binding);
           return fn.apply(self, fnArgs);
         };
-      }
+      },
     };
   }
 
@@ -401,13 +401,13 @@ export abstract class Component extends FakeHTMLElement {
 
     // if innerHTML is null this component uses the innerHTML which he already has!
     return Promise.resolve(this.template())
-      .then(template => {
+      .then((template) => {
         if (template !== null) {
           this.el.innerHTML = template;
         }
         return template;
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         this.templateLoaded = false;
         return error;
@@ -438,8 +438,8 @@ export abstract class Component extends FakeHTMLElement {
           handler: this.eventHandler(this),
           formatters: {
             call: this.callFormatterHandler(this),
-            args: this.argsFormatterHandler(this)
-          }
+            args: this.argsFormatterHandler(this),
+          },
         });
 
         this.view = new View(
@@ -456,7 +456,7 @@ export abstract class Component extends FakeHTMLElement {
       .then(() => {
         return this.afterBind();
       })
-      .catch(error => {
+      .catch((error) => {
         this.bound = false;
         console.error(error);
       });
@@ -504,8 +504,8 @@ export abstract class Component extends FakeHTMLElement {
     } else {
       if ((window as any).MutationObserver) {
         // use MutationObserver as fallback
-        this.attributeObserverFallback = new MutationObserver(mutations => {
-          mutations.forEach(mutation => {
+        this.attributeObserverFallback = new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
             if (mutation.type === "attributes") {
               if (mutation.attributeName) {
                 // if this attribute is a watched attribute
@@ -523,7 +523,7 @@ export abstract class Component extends FakeHTMLElement {
           });
         });
         this.attributeObserverFallback.observe(this.el, {
-          attributes: true
+          attributes: true,
         });
       } else {
         // use attribute change event as fallback for MutationObserver

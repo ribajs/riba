@@ -11,7 +11,7 @@ export const onEventBinder: Binder<eventHandlerFunction> = {
   bind() {
     if (!this.customData) {
       this.customData = {
-        handler: null
+        handler: null,
       };
     }
   },
@@ -48,5 +48,5 @@ export const onEventBinder: Binder<eventHandlerFunction> = {
         this.customData.handler(event);
       });
     }
-  }
+  },
 };

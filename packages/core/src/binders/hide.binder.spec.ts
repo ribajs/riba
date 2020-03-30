@@ -27,8 +27,8 @@ describe("riba.binders", () => {
         },
         publish: () => {
           /**/
-        }
-      } as unknown) as Adapters
+        },
+      } as unknown) as Adapters,
     });
 
     el = document.createElement("div");

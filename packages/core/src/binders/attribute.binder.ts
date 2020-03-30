@@ -11,7 +11,7 @@ export interface BinderAttributeChangedEvent {
 /**
  * Event handler to liste for publish binder event for two-way-binding in web components
  */
-const publishBinderChangeEventHandler = function(this: any, event: Event) {
+const publishBinderChangeEventHandler = function (this: any, event: Event) {
   const data = (event as CustomEvent).detail;
   const oldValue = this.observer.value();
   if (oldValue !== data.newValue) {
@@ -65,10 +65,10 @@ export const starBinder: Binder<string> = {
             name: this.type,
             oldValue,
             newValue,
-            namespace: null // TODO
-          }
+            namespace: null, // TODO
+          },
         } as BinderAttributeChangedEvent)
       );
     }
-  }
+  },
 };

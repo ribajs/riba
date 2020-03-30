@@ -3,7 +3,7 @@ import {
   AdapterFunction,
   Ref,
   ObserverSyncCallback,
-  RVArray
+  RVArray,
 } from "../interfaces";
 
 export class DotAdapter implements Adapter {
@@ -14,7 +14,7 @@ export class DotAdapter implements Adapter {
     "unshift",
     "sort",
     "reverse",
-    "splice"
+    "splice",
   ];
 
   public name = ".";
@@ -28,13 +28,13 @@ export class DotAdapter implements Adapter {
       const id = this.counter++;
 
       Object.defineProperty(obj, "__rv", {
-        value: id
+        value: id,
       });
     }
 
     if (!this.weakmap[obj.__rv]) {
       this.weakmap[obj.__rv] = {
-        callbacks: {}
+        callbacks: {},
       };
     }
 
@@ -57,7 +57,7 @@ export class DotAdapter implements Adapter {
     obj[fn] = (...args: any[]): AdapterFunction => {
       const response = original.apply(obj, args);
 
-      Object.keys(map.pointers).forEach(r => {
+      Object.keys(map.pointers).forEach((r) => {
         const k = map.pointers[r];
 
         if (weakmap[r]) {
@@ -82,7 +82,7 @@ export class DotAdapter implements Adapter {
       if (!map.pointers) {
         map.pointers = {};
 
-        DotAdapter.ARRAY_METHODS.forEach(fn => {
+        DotAdapter.ARRAY_METHODS.forEach((fn) => {
           this.stubFunction(obj, fn);
         });
       }
@@ -139,7 +139,7 @@ export class DotAdapter implements Adapter {
             return value;
           },
 
-          set: newValue => {
+          set: (newValue) => {
             if (newValue !== value) {
               this.unobserveMutations(value, obj.__rv, keypath);
               value = newValue;
@@ -157,7 +157,7 @@ export class DotAdapter implements Adapter {
                 this.observeMutations(newValue, obj.__rv, keypath);
               }
             }
-          }
+          },
         });
       }
     }

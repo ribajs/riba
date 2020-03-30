@@ -3,7 +3,7 @@ import {
   Binders,
   Formatters,
   Components,
-  RibaModule
+  RibaModule,
 } from "../interfaces";
 import { BindersService } from "./binder.service";
 import { ComponentService } from "./component.service";

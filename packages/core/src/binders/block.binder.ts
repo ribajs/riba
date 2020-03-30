@@ -21,5 +21,5 @@ export const blockBinder: Binder<Assign> = {
   block: true,
   routine() {
     /**/
-  }
+  },
 };

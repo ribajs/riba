@@ -6,5 +6,5 @@ export const prependFormatter = {
   name: "prepend",
   read(a: string, b: string) {
     return b + a;
-  }
+  },
 };

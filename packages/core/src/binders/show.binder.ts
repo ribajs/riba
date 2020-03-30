@@ -12,5 +12,5 @@ export const showBinder: Binder<boolean> = {
     } else {
       el.setAttribute("hidden", "true");
     }
-  }
+  },
 };

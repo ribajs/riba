@@ -5,5 +5,5 @@ export const matchFormatter = {
       return false;
     }
     return a.match(new RegExp(regexp, flags));
-  }
+  },
 };

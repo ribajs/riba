@@ -127,7 +127,7 @@ export class VideoComponent extends Component {
     play: this.play,
     pause: this.pause,
     togglePlay: this.togglePlay,
-    mp4Src: ""
+    mp4Src: "",
   };
 
   constructor(element?: HTMLElement) {
@@ -177,7 +177,7 @@ export class VideoComponent extends Component {
   }
 
   protected async init(observedAttributes: string[]) {
-    return super.init(observedAttributes).then(view => {
+    return super.init(observedAttributes).then((view) => {
       return view;
     });
   }

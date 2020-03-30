@@ -4,7 +4,7 @@ import {
   Binder,
   FormatterObservers,
   eventHandlerFunction,
-  ObserverSyncCallback
+  ObserverSyncCallback,
 } from "./interfaces";
 import { View } from "./view";
 import { Utils } from "./services/utils";
@@ -214,7 +214,7 @@ export class Binding {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const binding = this;
     const handler = binding.view.options.handler;
-    return ev => {
+    return (ev) => {
       if (!handler) {
         throw new Error("No handler defined in binding.view.options.handler");
       }
@@ -345,10 +345,10 @@ export class Binding {
       this.observer.unobserve();
     }
 
-    Object.keys(this.formatterObservers).forEach(fi => {
+    Object.keys(this.formatterObservers).forEach((fi) => {
       const args = this.formatterObservers[fi];
 
-      Object.keys(args).forEach(ai => {
+      Object.keys(args).forEach((ai) => {
         args[ai].unobserve();
       });
     });

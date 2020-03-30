@@ -26,7 +26,7 @@ describe("riba.formatters", () => {
       model = {
         fn: (arg1: string, arg2: string) => {
           return "" + arg1 + arg2;
-        }
+        },
       };
     });
 
@@ -46,7 +46,7 @@ describe("riba.formatters", () => {
         name: "foo",
         fn() {
           return this.name;
-        }
+        },
       };
       const el = document.createElement("div");
       el.setAttribute("rv-text", "obj.fn | call");

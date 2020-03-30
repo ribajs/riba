@@ -6,5 +6,5 @@ export const upcaseFormatter = {
   name: "upcase",
   read(str: string) {
     return str.toUpperCase();
-  }
+  },
 };

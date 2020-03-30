@@ -19,5 +19,5 @@ export const unlessBinder: Binder<boolean> = {
     return ifBinder.routine.call(this, el, !value);
   },
 
-  update: ifBinder.update
+  update: ifBinder.update,
 };

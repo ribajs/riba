@@ -6,5 +6,5 @@ export const debugFormatter = {
   ) {
     console[level](toPrint);
     return toPrint;
-  }
+  },
 };

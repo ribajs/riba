@@ -12,5 +12,5 @@ export const callFormatter: Formatter = {
   name: "call",
   read(fn: FormatterFuntionParam, ...args: any[]) {
     return fn.apply(this, args);
-  }
+  },
 };

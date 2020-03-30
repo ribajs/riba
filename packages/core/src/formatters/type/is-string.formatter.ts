@@ -7,5 +7,5 @@ export const isStringFormatter = {
   name: "isString",
   read(str: string) {
     return Utils.isString(str);
-  }
+  },
 };

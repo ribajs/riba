@@ -6,5 +6,5 @@ export const appendFormatter = {
   name: "append",
   read(a: string, b: string) {
     return a + b;
-  }
+  },
 };

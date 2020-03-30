@@ -3,7 +3,7 @@ import {
   Binder,
   Options,
   BindableElement,
-  TypeOfComponent
+  TypeOfComponent,
 } from "./interfaces";
 import { Binding } from "./binding";
 import { parseNode, parseDeclaration } from "./parsers";
@@ -31,7 +31,7 @@ export class View {
     name: "mustache-text",
     routine: (node: DataElement, value: string) => {
       node.data = value != null ? value : "";
-    }
+    },
   };
 
   public static bindingComparator = (a: Binding, b: Binding) => {
@@ -124,7 +124,7 @@ export class View {
    * Binds all of the current bindings for this view.
    */
   public bind() {
-    this.bindings.forEach(binding => {
+    this.bindings.forEach((binding) => {
       binding.bind();
     });
   }
@@ -134,10 +134,10 @@ export class View {
    */
   public unbind() {
     if (Array.isArray(this.bindings)) {
-      this.bindings.forEach(binding => {
+      this.bindings.forEach((binding) => {
         binding.unbind();
       });
-      this.webComponents.forEach(webcomponent => {
+      this.webComponents.forEach((webcomponent) => {
         webcomponent.disconnectedFallbackCallback();
       });
     }
@@ -149,7 +149,7 @@ export class View {
    * Syncs up the view with the model by running the routines on all bindings.
    */
   public sync() {
-    this.bindings.forEach(binding => {
+    this.bindings.forEach((binding) => {
       if (binding.sync) {
         binding.sync();
       }
@@ -160,7 +160,7 @@ export class View {
    * Publishes the input values from the view back to the model (reverse sync).
    */
   public publish() {
-    this.bindings.forEach(binding => {
+    this.bindings.forEach((binding) => {
       if (
         (binding as Binding).binder &&
         binding.publish &&
@@ -176,11 +176,11 @@ export class View {
    * @param models
    */
   public update(models: any = {}) {
-    Object.keys(models).forEach(key => {
+    Object.keys(models).forEach((key) => {
       this.models[key] = models[key];
     });
 
-    this.bindings.forEach(binding => {
+    this.bindings.forEach((binding) => {
       if ((binding as Binding).update) {
         (binding as Binding).update(models);
       }
@@ -378,7 +378,7 @@ export class View {
     console.warn(`Fallback for Webcomponent ${nodeName}`);
     const component = new COMPONENT(node, {
       fallback: true,
-      view: this
+      view: this,
     });
     this.webComponents.push(component);
   }
@@ -400,7 +400,7 @@ export class View {
     const component = window.customElements.get(nodeName) as Component;
     component.context = {
       fallback: false,
-      view: this
+      view: this,
     };
   }
 }

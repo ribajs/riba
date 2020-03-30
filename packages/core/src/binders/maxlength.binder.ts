@@ -17,5 +17,5 @@ export const maxlengthBinder: Binder<number> = {
     } else {
       (el as HTMLInputElement).removeAttribute("maxlength");
     }
-  }
+  },
 };

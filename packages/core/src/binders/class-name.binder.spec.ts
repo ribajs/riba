@@ -20,8 +20,8 @@ describe("riba.binders", () => {
 
     model = {
       class: {
-        hasMyClass: true
-      }
+        hasMyClass: true,
+      },
     };
   });
 

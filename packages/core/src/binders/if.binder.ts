@@ -67,5 +67,5 @@ export const ifBinder: Binder<boolean> = {
     if (this.customData.nested) {
       this.customData.nested.update(models);
     }
-  }
+  },
 };

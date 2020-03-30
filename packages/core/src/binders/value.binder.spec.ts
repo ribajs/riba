@@ -86,16 +86,16 @@ describe("riba.binders", () => {
       let options = new Array<any>();
       if (Array.isArray(optionValues)) {
         options = optionValues.map(createOptionEls);
-        options.forEach(option => {
+        options.forEach((option) => {
           elem.appendChild(option);
         });
       } else {
         // grouped
-        Object.keys(optionValues).forEach(group => {
+        Object.keys(optionValues).forEach((group) => {
           const optGroupEl = document.createElement("optgroup");
           optGroupEl.label = group;
           options = optionValues[group].map(createOptionEls);
-          options.forEach(option => {
+          options.forEach((option) => {
             optGroupEl.appendChild(option);
           });
           elem.appendChild(optGroupEl);
@@ -132,8 +132,8 @@ describe("riba.binders", () => {
           },
           publish: () => {
             /**/
-          }
-        } as unknown) as Adapters
+          },
+        } as unknown) as Adapters,
       });
 
       input = createInputElement("text");
@@ -172,11 +172,11 @@ describe("riba.binders", () => {
         selectMultipleEl = createSelectElement(true, ["d", "e", "f"]);
         groupedSelectEl = createSelectElement(false, {
           group1: ["a"],
-          group2: ["b", "c"]
+          group2: ["b", "c"],
         });
         groupedMultipleSelectEl = createSelectElement(true, {
           group1: ["a"],
-          group2: ["b", "c"]
+          group2: ["b", "c"],
         });
       });
 
@@ -190,10 +190,10 @@ describe("riba.binders", () => {
         (riba.binders.value as any).routine(selectMultipleEl, ["d", "f"]);
         const result = Array.prototype.slice
           .call(selectMultipleEl.children)
-          .filter(option => {
+          .filter((option) => {
             return option.selected;
           })
-          .map(option => {
+          .map((option) => {
             return option.value;
           });
 
@@ -209,14 +209,14 @@ describe("riba.binders", () => {
       it("sets the correct option on a select-multiple element", () => {
         (riba.binders.value as any).routine(groupedMultipleSelectEl, [
           "a",
-          "c"
+          "c",
         ]);
         const result = Array.prototype.slice
           .call(groupedMultipleSelectEl.options)
-          .filter(option => {
+          .filter((option) => {
             return option.selected;
           })
-          .map(option => {
+          .map((option) => {
             return option.value;
           });
 

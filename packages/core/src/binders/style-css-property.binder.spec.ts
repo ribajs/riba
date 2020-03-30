@@ -21,8 +21,8 @@ describe("riba.binders", () => {
     model = {
       style: {
         paddingTop: "100px",
-        backgroundColor: ""
-      }
+        backgroundColor: "",
+      },
     };
   });
 

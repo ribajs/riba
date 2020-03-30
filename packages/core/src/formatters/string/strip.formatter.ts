@@ -6,5 +6,5 @@ export const stripFormatter = {
   name: "strip",
   read(str: string) {
     return str.trim();
-  }
+  },
 };

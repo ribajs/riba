@@ -10,7 +10,7 @@ const coreModule: RibaModule = {
   binders,
   services,
   components,
-  adapters
+  adapters,
 };
 
 (window as any).coreModule = coreModule;

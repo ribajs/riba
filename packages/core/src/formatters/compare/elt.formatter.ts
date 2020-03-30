@@ -7,5 +7,5 @@ export const eltFormatter: Formatter = {
   name: "elt",
   read(a: number, b: number) {
     return a <= b;
-  }
+  },
 };

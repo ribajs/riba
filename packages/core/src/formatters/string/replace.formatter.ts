@@ -6,5 +6,5 @@ export const replaceFormatter = {
   name: "replace",
   read(str: string, value: string, replaceValue: string) {
     return str.replace(new RegExp(value, "g"), replaceValue);
-  }
+  },
 };

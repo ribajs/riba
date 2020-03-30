@@ -6,5 +6,5 @@ import { Utils } from "../../services/utils";
  */
 export const isArrayFormatter: Formatter = {
   name: "isArray",
-  read: Utils.isArray
+  read: Utils.isArray,
 };

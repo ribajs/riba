@@ -38,7 +38,7 @@ describe("Functional", () => {
         const attributes: { [keypath: string]: any } = {};
         attributes[keypath] = value;
         obj.set(attributes);
-      }
+      },
     };
 
     riba.adapters[adapter.name] = adapter;
@@ -46,7 +46,7 @@ describe("Functional", () => {
 
     data = new Data({
       foo: "bar",
-      items: [{ name: "a" }, { name: "b" }]
+      items: [{ name: "a" }, { name: "b" }],
     });
 
     bindData = { data };

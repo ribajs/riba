@@ -27,5 +27,5 @@ export const animateStarBinder: Binder<boolean> = {
       el.classList.remove(animateClassName + "-start");
       el.classList.add(animateClassName + "-done");
     }
-  }
+  },
 };

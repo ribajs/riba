@@ -6,5 +6,5 @@ import { Utils } from "../../services/utils";
  */
 export const isNumberFormatter: Formatter = {
   name: "isNumber",
-  read: Utils.isNumber
+  read: Utils.isNumber,
 };

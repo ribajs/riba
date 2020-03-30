@@ -75,5 +75,5 @@ export const dataScrollPositionYBinder: Binder<string> = {
         Utils.debounce(this.customData.onScroll.bind(this))
       );
     }
-  }
+  },
 };

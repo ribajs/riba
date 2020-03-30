@@ -13,7 +13,7 @@ export class HttpService {
   public static setRequestHeaderEachRequest(name: string, value: string) {
     this._requestHeadersEachRequest.push({
       name,
-      value
+      value,
     });
   }
 
@@ -197,9 +197,9 @@ export class HttpService {
         credentials: "same-origin",
         method,
         body,
-        headers
+        headers,
       })
-        .then(response => {
+        .then((response) => {
           if (
             typeof dataType === "string" &&
             (dataType === "json" || dataType.includes("json"))
@@ -208,7 +208,7 @@ export class HttpService {
           }
           return response.text();
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
           throw error;
         });

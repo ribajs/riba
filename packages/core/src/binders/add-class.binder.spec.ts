@@ -20,8 +20,8 @@ describe("riba.binders", () => {
 
     model = {
       class: {
-        add: "add-me"
-      }
+        add: "add-me",
+      },
     };
   });
 

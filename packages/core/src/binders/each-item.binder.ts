@@ -15,7 +15,7 @@ export const eachStarBinder: Binder<any[]> = {
     if (!this.marker) {
       this.marker = document.createComment(` riba: ${this.type} `);
       this.customData = {
-        iterated: [] as View[]
+        iterated: [] as View[],
       };
       if (!el.parentNode) {
         // console.warn('No parent node!');
@@ -142,7 +142,7 @@ export const eachStarBinder: Binder<any[]> = {
   update(models) {
     const data: any = {};
     // TODO: add test and fix if necessary
-    Object.keys(models).forEach(key => {
+    Object.keys(models).forEach((key) => {
       if (this.args === null) {
         throw new Error("args is null");
       }
@@ -154,5 +154,5 @@ export const eachStarBinder: Binder<any[]> = {
     this.customData.iterated.forEach((view: View) => {
       view.update(data);
     });
-  }
+  },
 };

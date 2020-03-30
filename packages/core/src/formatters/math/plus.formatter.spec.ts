@@ -26,7 +26,7 @@ describe("riba.formatters", () => {
 
     it("A number should be added to the value of the model correctly", () => {
       model.obj = {
-        value: 100
+        value: 100,
       };
       const el = document.createElement("div");
       el.setAttribute("rv-text", "obj.value | plus 200");

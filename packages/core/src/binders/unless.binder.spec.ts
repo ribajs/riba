@@ -26,8 +26,8 @@ describe("unless", () => {
     model = {
       data: {
         show: false,
-        count: 1
-      }
+        count: 1,
+      },
     };
   });
 
@@ -133,10 +133,10 @@ describe("unless", () => {
       scope: {
         error: {
           errors: {
-            email: "not a valid address"
-          }
-        }
-      }
+            email: "not a valid address",
+          },
+        },
+      },
     };
 
     const resetRootScope = jest.fn(() => {

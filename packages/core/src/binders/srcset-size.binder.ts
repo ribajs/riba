@@ -19,10 +19,10 @@ export const srcsetSizeBinder: Binder<string> = {
     } else {
       // Remove size from srcset attribute
       let sizes = srcset.split(",");
-      sizes = sizes.map(iterSize => iterSize.trim());
-      sizes = sizes.filter(iterSize => !iterSize.includes(size));
+      sizes = sizes.map((iterSize) => iterSize.trim());
+      sizes = sizes.filter((iterSize) => !iterSize.includes(size));
       srcset = sizes.join(", ") || "";
     }
     el.setAttribute("srcset", srcset);
-  }
+  },
 };

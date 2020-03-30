@@ -20,5 +20,5 @@ export const assignPropertyBinder: Binder<Assign> = {
     const obj: any = {};
     obj[propertyName] = value;
     return Utils.extend(false, this.view.models, obj);
-  }
+  },
 };

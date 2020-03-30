@@ -8,5 +8,5 @@ export const filledFormatter = {
   name: "filled",
   read(str: string) {
     return Utils.isString(str) && !emptyFormatter.read(str.replace(/\s/g, ""));
-  }
+  },
 };

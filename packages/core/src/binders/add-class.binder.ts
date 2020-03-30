@@ -19,7 +19,7 @@ export const addClassBinder: Binder<string> = {
 
   bind(el) {
     this.customData = {
-      staticClasses: el.className.split(" ")
+      staticClasses: el.className.split(" "),
     };
   },
 
@@ -36,5 +36,5 @@ export const addClassBinder: Binder<string> = {
       el.className = this.customData.staticClasses.join(" ");
     }
     el.className = el.className.trim();
-  }
+  },
 };

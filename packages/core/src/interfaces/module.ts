@@ -3,7 +3,7 @@ import {
   Formatters,
   Components,
   Services,
-  Adapters
+  Adapters,
 } from "../interfaces";
 
 export interface RibaModule {

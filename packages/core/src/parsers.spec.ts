@@ -13,7 +13,7 @@ describe("Parsers", () => {
         { type: 1, value: "user.name" },
         { type: 0, value: ", you have " },
         { type: 1, value: "user.messages.unread | length" },
-        { type: 0, value: " unread messages." }
+        { type: 0, value: " unread messages." },
       ];
 
       const results = riba.parseTemplate(template, ["{{", "}}"]);

@@ -133,7 +133,7 @@ export class Utils {
    * @param string
    */
   public static camelCase = (str: string) => {
-    return str.replace(/-([a-z0-9])/g, grouped => {
+    return str.replace(/-([a-z0-9])/g, (grouped) => {
       return grouped[1].toUpperCase();
     });
   };
@@ -501,7 +501,7 @@ export class Utils {
     );
     return {
       h,
-      w
+      w,
     };
   }
 
@@ -509,10 +509,10 @@ export class Utils {
     const tagsToReplace = {
       "&": "&amp;",
       "<": "&lt;",
-      ">": "&gt;"
+      ">": "&gt;",
     };
 
-    return str.replace(/[&<>]/g, tag => {
+    return str.replace(/[&<>]/g, (tag) => {
       return tagsToReplace[tag as "&" | "<" | ">"] || tag;
     });
   }
@@ -565,7 +565,7 @@ export class Utils {
     scrollElement.scroll({
       behavior,
       left,
-      top
+      top,
     });
   }
 

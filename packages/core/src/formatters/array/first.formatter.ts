@@ -7,5 +7,5 @@ export const firstFormatter = {
   name: "first",
   read(value: any | any[] | string) {
     return getFormatter.read(value, 0);
-  }
+  },
 };

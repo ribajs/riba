@@ -6,5 +6,5 @@ export const timesFormatter = {
   name: "times",
   read(a: string | number, b: string | number) {
     return Number(a) * Number(b);
-  }
+  },
 };

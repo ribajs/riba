@@ -4,7 +4,7 @@ import {
   Adapters,
   Root,
   Components,
-  Options
+  Options,
 } from "./interfaces";
 import { Utils } from "./services/utils";
 import { parseTemplate, parseType } from "./parsers";
@@ -117,7 +117,7 @@ export class Riba {
       return;
     }
 
-    Object.keys(options).forEach(option => {
+    Object.keys(options).forEach((option) => {
       const value = (options as any)[option];
       switch (option) {
         case "binders":
@@ -172,7 +172,7 @@ export class Riba {
       starBinders: {},
 
       // sightglass
-      rootInterface: {} as Root
+      rootInterface: {} as Root,
     };
 
     if (options) {
@@ -251,9 +251,11 @@ export class Riba {
 
     // get all starBinders from available binders
     if (viewOptions.binders) {
-      viewOptions.starBinders = Object.keys(viewOptions.binders).filter(key => {
-        return key.indexOf("*") >= 1; // Should start with *
-      });
+      viewOptions.starBinders = Object.keys(viewOptions.binders).filter(
+        (key) => {
+          return key.indexOf("*") >= 1; // Should start with *
+        }
+      );
     }
 
     return viewOptions as Options;

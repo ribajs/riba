@@ -4,7 +4,7 @@ import {
   Key,
   ObserverSyncCallback,
   Obj,
-  Options
+  Options,
 } from "./interfaces";
 import { Utils } from "./services/utils";
 
@@ -119,7 +119,7 @@ export class Observer {
 
     return {
       key: this.key,
-      tokens: this.tokens
+      tokens: this.tokens,
     };
   }
 

@@ -20,8 +20,8 @@ describe("riba.binders", () => {
 
     model = {
       class: {
-        remove: "remove-me"
-      }
+        remove: "remove-me",
+      },
     };
   });
 

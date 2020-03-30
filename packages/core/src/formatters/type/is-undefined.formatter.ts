@@ -6,5 +6,5 @@ import { Utils } from "../../services/utils";
  */
 export const isUndefinedFormatter: Formatter = {
   name: "isUndefined",
-  read: Utils.isUndefined
+  read: Utils.isUndefined,
 };

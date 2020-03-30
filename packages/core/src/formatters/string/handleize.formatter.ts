@@ -12,5 +12,5 @@ export const handleizeFormatter = {
     str = str.replace(/[^\w\s]/gi, ""); // http://stackoverflow.com/a/4374890
     str = downcaseFormatter.read(str);
     return str.replace(/ /g, "-");
-  }
+  },
 };

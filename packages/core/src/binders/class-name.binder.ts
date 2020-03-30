@@ -16,7 +16,7 @@ export const classStarBinder: Binder<boolean> = {
     if (this.args === null) {
       throw new Error("args is null");
     }
-    const classList = el.className.split(" ").filter(ele => ele !== "");
+    const classList = el.className.split(" ").filter((ele) => ele !== "");
     const arg = (this.args[0] as string).trim();
     const idx = classList.indexOf(arg);
     if (idx === -1) {
@@ -26,5 +26,5 @@ export const classStarBinder: Binder<boolean> = {
     } else if (!value) {
       el.className = classList.filter((_, i) => i !== idx).join(" ");
     }
-  }
+  },
 };

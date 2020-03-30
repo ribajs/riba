@@ -21,8 +21,8 @@ describe("riba.binders", () => {
     model = {
       value: "world",
       setMeToValue: {
-        value: "hey man!"
-      }
+        value: "hey man!",
+      },
     };
   });
 
@@ -32,7 +32,7 @@ describe("riba.binders", () => {
 
       expect(model).toEqual({
         value: "world",
-        setMeToValue: { value: "hey man!" }
+        setMeToValue: { value: "hey man!" },
       });
 
       riba.bind(fragment, model);
@@ -40,7 +40,7 @@ describe("riba.binders", () => {
       expect(model).toEqual({
         value: "world",
         newValue: "hello",
-        setMeToValue: { value: "hey man!" }
+        setMeToValue: { value: "hey man!" },
       });
     });
 
@@ -49,7 +49,7 @@ describe("riba.binders", () => {
 
       expect(model).toEqual({
         value: "world",
-        setMeToValue: { value: "hey man!" }
+        setMeToValue: { value: "hey man!" },
       });
 
       riba.bind(fragment, model);

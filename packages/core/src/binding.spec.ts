@@ -62,13 +62,13 @@ describe("riba.Binding", () => {
     beforeEach(() => {
       data = {
         name: "x",
-        items: []
+        items: [],
       };
       Object.defineProperty(data, "name", {
         enumerable: true,
         configurable: false,
         writable: true,
-        value: "y"
+        value: "y",
       });
       el.setAttribute("data-show", "obj.items.length");
     });
@@ -86,17 +86,17 @@ describe("riba.Binding", () => {
     beforeEach(() => {
       const awesomeFormatter = {
         name: "awesome",
-        read: value => "awesome " + value
+        read: (value) => "awesome " + value,
       } as Formatter;
 
       const totallyFormatter = {
         name: "totally",
-        read: (value, prefix) => prefix + " totally " + value
+        read: (value, prefix) => prefix + " totally " + value,
       } as Formatter;
 
       const placeholderFormatter = {
         name: "and",
-        read: (value, affix) => value + affix
+        read: (value, affix) => value + affix,
       } as Formatter;
 
       riba.module.formatter.regist(awesomeFormatter);
@@ -133,7 +133,7 @@ describe("riba.Binding", () => {
       expect(binding.formatters).toEqual([
         "awesome",
         `totally 'arg | with || pipes' 'and more args'`,
-        `and 'others formatters' with 'pi||pes'`
+        `and 'others formatters' with 'pi||pes'`,
       ]);
     });
   });
@@ -218,7 +218,7 @@ describe("riba.Binding", () => {
         name: "awesome",
         read(value: string) {
           return "awesome " + value;
-        }
+        },
       };
 
       if (binding.formatters) {
@@ -257,7 +257,7 @@ describe("riba.Binding", () => {
     let valueInput;
     it("applies a two-way read formatter to function same as a single-way", () => {
       const awesomeFormatter = {
-        read: value => "awesome " + value
+        read: (value) => "awesome " + value,
       } as Formatter;
 
       riba.module.formatter.regist(awesomeFormatter, "awesome");
@@ -277,7 +277,7 @@ describe("riba.Binding", () => {
     it(`should publish the value of a number input`, () => {
       // TODO remove any
       (riba.formatters.awesome as any) = {
-        publish: (value: string) => "awesome " + value
+        publish: (value: string) => "awesome " + value,
       };
 
       numberInput = document.createElement("input");
@@ -298,7 +298,7 @@ describe("riba.Binding", () => {
       // TODO remove any
       (riba.formatters.awesome as any) = {
         publish: (value: string) => "awesome " + value,
-        read: (value: string) => value + " is awesome"
+        read: (value: string) => value + " is awesome",
       };
 
       jest.spyOn(binding.binder, "routine");
@@ -336,7 +336,7 @@ describe("riba.Binding", () => {
         },
         read: (value, arg1, arg2) => {
           return value.replace(":" + arg1 + ":" + arg2, "");
-        }
+        },
       };
 
       valueInput = document.createElement("input");
@@ -348,11 +348,11 @@ describe("riba.Binding", () => {
 
       view = riba.bind(valueInput, {
         obj: {
-          name: "nothing"
+          name: "nothing",
         },
         config: {
-          age: 50
-        }
+          age: 50,
+        },
       });
 
       binding = view.bindings[0] as Binding;
@@ -376,7 +376,7 @@ describe("riba.Binding", () => {
         },
         read: (value: string, arg1: string, arg2: string) => {
           return value.replace(arg1, "").replace(arg2, "");
-        }
+        },
       };
 
       (riba.formatters.saveAsCase as Formatter) = {
@@ -386,7 +386,7 @@ describe("riba.Binding", () => {
         },
         read: (value, typeCase) => {
           return value[typeCase === "Upper" ? "toLowerCase" : "toUpperCase"]();
-        }
+        },
       };
 
       valueInput = document.createElement("input");
@@ -398,14 +398,14 @@ describe("riba.Binding", () => {
 
       view = riba.bind(valueInput, {
         obj: {
-          name: "nothing"
+          name: "nothing",
         },
         config: {
           paren: "(",
           square: "[",
           curly: "{",
-          typeCase: "Upper"
-        }
+          typeCase: "Upper",
+        },
       });
 
       binding = view.bindings[0] as Binding;
@@ -446,14 +446,14 @@ describe("riba.Binding", () => {
     it(`should apply read binders left to right, and write binders right to left`, () => {
       (riba.formatters.totally as Formatter) = {
         name: "totally",
-        publish: value => value + " totally",
-        read: value => value + " totally"
+        publish: (value) => value + " totally",
+        read: (value) => value + " totally",
       };
 
       (riba.formatters.awesome as Formatter) = {
         name: "awesome",
-        publish: value => value + " is awesome",
-        read: value => value + " is awesome"
+        publish: (value) => value + " is awesome",
+        read: (value) => value + " is awesome",
       };
 
       valueInput = document.createElement("input");
@@ -484,18 +484,18 @@ describe("riba.Binding", () => {
     it(`binders in a chain should be skipped if they're not there`, () => {
       (riba.formatters.totally as Formatter) = {
         name: "totally",
-        publish: value => value + " totally",
-        read: value => value + " totally"
+        publish: (value) => value + " totally",
+        read: (value) => value + " totally",
       };
 
       (riba.formatters.radical as Formatter) = {
         name: "radical",
-        publish: value => value + " is radical"
+        publish: (value) => value + " is radical",
       };
 
       (riba.formatters.awesome as Formatter) = {
         name: "awesome",
-        read: value => value + " is awesome"
+        read: (value) => value + " is awesome",
       };
 
       valueInput = document.createElement("input");
@@ -541,7 +541,7 @@ describe("riba.Binding", () => {
         name: "awesome",
         read(value) {
           return "awesome " + value;
-        }
+        },
       };
       if (!binding.formatters) {
         throw new Error("Formatters not set!");
@@ -559,7 +559,7 @@ describe("riba.Binding", () => {
           name: "awesome",
           read(value: string, prefix: string) {
             return prefix + " awesome " + value;
-          }
+          },
         };
 
         if (!binding.formatters) {
@@ -584,7 +584,7 @@ describe("riba.Binding", () => {
           name: "totally",
           read(value, prefix) {
             return prefix + " totally " + value;
-          }
+          },
         };
 
         if (!binding.formatters) {
@@ -611,7 +611,7 @@ describe("riba.Binding", () => {
     });
 
     it("binder.getValue() should have access to passed element", () => {
-      binding.binder.getValue = _el => {
+      binding.binder.getValue = (_el) => {
         return _el.dataset.foo;
       };
 
@@ -620,7 +620,7 @@ describe("riba.Binding", () => {
     });
 
     it("binder.getValue() should have access to binding", () => {
-      binding.binder.getValue = function() {
+      binding.binder.getValue = function () {
         return (this as any).foo;
       };
 
@@ -656,14 +656,14 @@ describe("Functional", () => {
         const attributes: { [keypath: string]: any } = {};
         attributes[keypath] = value;
         obj.set(attributes);
-      }
+      },
     };
     riba.module.adapter.regist(adapter);
     riba.configure({ preloadData: true });
 
     data = new Data({
       foo: "bar",
-      items: [{ name: "a" }, { name: "b" }]
+      items: [{ name: "a" }, { name: "b" }],
     });
 
     bindData = { data };
@@ -740,14 +740,14 @@ describe("Functional", () => {
           bind: () => mockA(),
           routine: () => {
             /**/
-          }
+          },
         };
         riba.binders.b = {
           name: "b",
           bind: () => mockB(),
           routine: () => {
             /**/
-          }
+          },
         };
 
         el.setAttribute("data-a", "data:foo");

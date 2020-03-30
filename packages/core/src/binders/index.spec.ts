@@ -9,7 +9,7 @@ export const customBinder: Binder<string> = {
   name: "custom-binder",
   routine(el: HTMLElement, value: string) {
     el.innerHTML = "received " + value;
-  }
+  },
 };
 
 describe("Custom binder with no attribute value", () => {

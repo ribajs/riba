@@ -16,5 +16,5 @@ export const digitsFormatter = {
     } else {
       return Number(num);
     }
-  }
+  },
 };

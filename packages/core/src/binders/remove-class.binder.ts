@@ -12,7 +12,7 @@ export const removeClassBinder: Binder<string> = {
   name: "remove-class",
   bind(el) {
     this.customData = {
-      staticClassesString: el.className
+      staticClassesString: el.className,
     };
   },
   routine(el: HTMLElement, value: string) {
@@ -20,5 +20,5 @@ export const removeClassBinder: Binder<string> = {
     el.className = this.customData.staticClassesString
       .replace(regex, "")
       .trim();
-  }
+  },
 };

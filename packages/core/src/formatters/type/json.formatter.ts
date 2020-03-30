@@ -10,5 +10,5 @@ export const jsonFormatter = {
       return result.replace(/'/g, `&#39;`);
     }
     return result;
-  }
+  },
 };

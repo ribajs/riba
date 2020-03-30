@@ -6,5 +6,5 @@ import { Utils } from "../../services/utils";
  */
 export const isDefinedFormatter: Formatter = {
   name: "isDefined",
-  read: Utils.isDefined
+  read: Utils.isDefined,
 };

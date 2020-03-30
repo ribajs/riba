@@ -20,5 +20,5 @@ export const assignBinder: Binder<Assign> = {
       return Utils.extend(false, this.view.models, value);
     }
     console.warn("Value must be an object or propertyName is required");
-  }
+  },
 };

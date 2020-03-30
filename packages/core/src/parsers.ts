@@ -76,7 +76,7 @@ export function parseTemplate(template: string, delimiters: string[]) {
       if (tokens) {
         tokens.push({
           type: TEXT,
-          value: template.slice(lastIndex)
+          value: template.slice(lastIndex),
         });
       }
 
@@ -86,7 +86,7 @@ export function parseTemplate(template: string, delimiters: string[]) {
       if (index > 0 && lastIndex < index) {
         tokens.push({
           type: TEXT,
-          value: template.slice(lastIndex, index)
+          value: template.slice(lastIndex, index),
         });
       }
 
@@ -102,7 +102,7 @@ export function parseTemplate(template: string, delimiters: string[]) {
         } else {
           tokens.push({
             type: TEXT,
-            value: substring
+            value: substring,
           });
         }
 
@@ -113,7 +113,7 @@ export function parseTemplate(template: string, delimiters: string[]) {
 
       tokens.push({
         type: BINDING,
-        value
+        value,
       });
 
       lastIndex = index + close.length;
@@ -216,6 +216,6 @@ export function parseDeclaration(declaration: string): ParsedDeclarations {
 
   return {
     keypath,
-    pipes
+    pipes,
   } as ParsedDeclarations;
 }

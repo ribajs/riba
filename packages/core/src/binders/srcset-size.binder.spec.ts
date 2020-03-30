@@ -20,7 +20,7 @@ describe("riba.binders", () => {
     model = {
       small: "//placehold.it/100x",
       middle: "//placehold.it/200x",
-      big: "//placehold.it/300x"
+      big: "//placehold.it/300x",
     };
   });
 

@@ -18,5 +18,5 @@ export const readonlyBinder: Binder<boolean> = {
     } else {
       (el as HTMLInputElement).removeAttribute("readonly");
     }
-  }
+  },
 };

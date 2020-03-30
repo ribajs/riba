@@ -12,5 +12,5 @@ export const hideBinder: Binder<boolean> = {
     } else {
       el.removeAttribute("hidden");
     }
-  }
+  },
 };

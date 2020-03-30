@@ -14,5 +14,5 @@ export const pluralizeFormatter = {
     } else {
       return plural;
     }
-  }
+  },
 };

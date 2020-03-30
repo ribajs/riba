@@ -9,7 +9,7 @@ export const templateBinder: Binder<string> = {
   name: "template",
   bind(el: HTMLUnknownElement) {
     this.customData = {
-      nested: new View(el, this.view.models, this.view.options)
+      nested: new View(el, this.view.models, this.view.options),
     };
   },
   routine(el: HTMLUnknownElement, value: string) {
@@ -23,5 +23,5 @@ export const templateBinder: Binder<string> = {
   },
   update(models) {
     this.customData.nested?.update(models);
-  }
+  },
 };
