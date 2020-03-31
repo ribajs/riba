@@ -1,0 +1,173 @@
+$bs4-slideshow-control-outsite-spacing: 80px !default;
+$bs4-slideshow-indicators-outsite-spacing: 50px !default;
+$bs4-slideshow-indicators-insite-spacing: 20px !default;
+
+bs4-slideshow {
+  display: block;
+  @extend .carousel !optional;
+
+  .slideshow-inner {
+    @extend .row;
+    @extend .flex-scrollbar-x-scroll;
+    @extend .scrollbar-invisible;
+
+    .slide-caption {
+      @extend .carousel-caption !optional;
+    }
+  }
+
+  .slideshow-controls {
+    color: inherit;
+    width: 50px;
+    padding: 0;
+    opacity: 1;
+
+    &.slideshow-control-prev, &.slideshow-control-next {
+      color: inherit;
+      &:hover, &:focus {
+        opacity: 1;
+        color: inherit;
+      }
+    }
+
+    @each $breakpoint in map-keys($grid-breakpoints) {
+      $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+      @include media-breakpoint-up($breakpoint) {
+        &.control#{$infix}-middle {
+          flex-direction: column;
+          justify-content: center;
+        }
+        &.control#{$infix}-bottom {
+          flex-direction: column;
+          justify-content: start;
+        }
+        &.control#{$infix}-top {
+          flex-direction: column;
+          justify-content: end;
+        }
+      }
+    }
+
+    &.slideshow-control-prev {
+      @extend .carousel-control-prev !optional;
+      left: 0; // default
+      @each $breakpoint in map-keys($grid-breakpoints) {
+        $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+        @include media-breakpoint-up($breakpoint) {
+          &.control#{$infix}-insite {
+            left: 0;
+          }
+          &.control#{$infix}-outsite {
+            left: -$bs4-slideshow-control-outsite-spacing;
+          }
+        }
+      }
+    }
+    &.slideshow-control-next {
+      @extend .carousel-control-next !optional;
+      right: 0; // default
+      @each $breakpoint in map-keys($grid-breakpoints) {
+        $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+        @include media-breakpoint-up($breakpoint) {
+          &.control#{$infix}-insite {
+            right: 0;
+          }
+          &.control#{$infix}-outsite {
+            right: -$bs4-slideshow-control-outsite-spacing;
+          }
+        }
+      }
+    }
+  
+    .slideshow-control-fallback-prev-icon {
+      @extend .carousel-control-next-icon !optional;
+    }
+    .slideshow-control-fallback-next-icon {
+      @extend .carousel-control-next-icon !optional;
+    }
+
+  }
+
+  // .slideshow-indicators {
+  //   @extend .carousel-indicators !optional;
+  // }
+
+  .slideshow-indicators {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 15;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin-right: $carousel-control-width;
+    margin-left: $carousel-control-width;
+    padding: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+    li {
+      flex: 0 1 auto;
+      margin-right: $carousel-indicator-spacer;
+      margin-left: $carousel-indicator-spacer;
+      cursor: pointer;
+    }
+
+
+    @each $breakpoint in map-keys($grid-breakpoints) {
+      $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+      @include media-breakpoint-up($breakpoint) {
+        &.indicators#{$infix}-bottom {
+          top: auto;
+          right: 0;
+          bottom:  $bs4-slideshow-indicators-insite-spacing;
+          left: 0;
+          &.indicators#{$infix}-insite {
+            bottom:  $bs4-slideshow-indicators-insite-spacing;
+          }
+          &.indicators#{$infix}-outsite {
+            bottom: -$bs4-slideshow-indicators-outsite-spacing;
+          }
+        }
+        &.indicators#{$infix}-top {
+          top: 0;
+          right: 0;
+          bottom: auto;
+          left:  $bs4-slideshow-indicators-insite-spacing;
+          &.indicators#{$infix}-insite {
+            top:  $bs4-slideshow-indicators-insite-spacing;
+          }
+          &.indicators#{$infix}-outsite {
+            top: -$bs4-slideshow-indicators-outsite-spacing;
+          }
+        }
+        &.indicators#{$infix}-right {
+          top: 0;
+          right:  $bs4-slideshow-indicators-insite-spacing;
+          bottom: 0;
+          left: auto;
+          &.indicators#{$infix}-insite {
+            right:  $bs4-slideshow-indicators-insite-spacing;
+          }
+          &.indicators#{$infix}-outsite {
+            right: -$bs4-slideshow-indicators-outsite-spacing;
+          }
+        }
+        &.indicators#{$infix}-left {
+          top: 0;
+          right: auto;
+          bottom: 0;
+          left:  $bs4-slideshow-indicators-insite-spacing;
+          &.indicators#{$infix}-insite {
+            left:  $bs4-slideshow-indicators-insite-spacing;
+          }
+          &.indicators#{$infix}-outsite {
+            left: -$bs4-slideshow-indicators-outsite-spacing;
+          }
+        }
+      }
+    }
+
+  }
+
+}

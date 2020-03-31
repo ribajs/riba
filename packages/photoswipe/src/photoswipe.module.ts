@@ -10,6 +10,8 @@ import * as formatters from './formatters';
 import * as services from './services';
 import * as components from './components';
 
+console.debug('components', components);
+
 export const photoswipeModule: RibaModule = {
   formatters,
   binders,

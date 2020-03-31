@@ -98,6 +98,14 @@ const PACKAGES = [
     isDemo: false,
     configure: true,
   },
+  {
+    path: 'packages/photoswipe/',
+    npm: '@ribajs/photoswipe',
+    available: true,
+    isRibaModule: true,
+    isDemo: false,
+    configure: true,
+  },
 
   // WIP Riba modules, not ready to publish
   {
@@ -130,6 +138,38 @@ const PACKAGES = [
     path: 'infra/doc/',
     npm: '@ribajs/doc',
     available: false,
+    isRibaModule: false,
+    isDemo: false,
+    configure: false,
+  },
+  {
+    path: 'infra/eslint-config/',
+    npm: '@ribajs/eslint-config',
+    available: true,
+    isRibaModule: false,
+    isDemo: false,
+    configure: false,
+  },
+  {
+    path: 'infra/tsconfig/',
+    npm: '@ribajs/tsconfig',
+    available: true,
+    isRibaModule: false,
+    isDemo: false,
+    configure: false,
+  },
+  {
+    path: 'infra/types/',
+    npm: '@ribajs/types',
+    available: true,
+    isRibaModule: false,
+    isDemo: false,
+    configure: false,
+  },
+  {
+    path: 'infra/webpack-config/',
+    npm: '@ribajs/webpack-config',
+    available: true,
     isRibaModule: false,
     isDemo: false,
     configure: false,

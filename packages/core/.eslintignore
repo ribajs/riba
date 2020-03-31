@@ -8,3 +8,5 @@ babel.config.js
 cssnano.config.js
 jest.config.js
 webpack.config.js
+
+**/*.spec.ts

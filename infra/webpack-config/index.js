@@ -4,10 +4,18 @@ const TerserPlugin = require("terser-webpack-plugin");
 const rootPath = process.cwd();
 const package = require(rootPath + "/package.json");
 
+const moduleFound = (name) => {
+  try {
+    return require.resolve(name)
+  } catch (error) {
+    return false;
+  }
+}
+
 var getCopyPluginConfig = function(config) {
   var copyPluginConfig = [];
 
-  if (package.dependencies['bootstrap'] && config.copyAssets.modules.bootstrap === true) {
+  if (package.dependencies['bootstrap'] && config.copyAssets.modules.bootstrap === true && moduleFound('bootstrap')) {
     // Copy bootstrap scss files. Note: `require.resolve('bootstrap')` resolves to `'bootstrap/dist/js/bootstrap.js'` because this is the main file in package.json
     var bootstrapConfig = {
       from: path.resolve(
@@ -20,7 +28,7 @@ var getCopyPluginConfig = function(config) {
     copyPluginConfig.push(bootstrapConfig);
   }
 
-  if (package.dependencies['@ribajs/bs4'] && config.copyAssets.modules['@ribajs/bs4'] === true) {
+  if (package.dependencies['@ribajs/bs4'] && config.copyAssets.modules['@ribajs/bs4'] === true && moduleFound('@ribajs/bs4')) {
     // Copy @ribajs/bs4 scss files
     var ribajsBs4Config = {
       from: path.dirname(require.resolve("@ribajs/bs4")) + "/**/*.scss",
@@ -31,7 +39,7 @@ var getCopyPluginConfig = function(config) {
     copyPluginConfig.push(ribajsBs4Config);
   }
 
-  if (package.dependencies['@ribajs/photoswipe'] && config.copyAssets.modules['@ribajs/photoswipe'] === true ) {
+  if (package.dependencies['@ribajs/photoswipe'] && config.copyAssets.modules['@ribajs/photoswipe'] === true && moduleFound('@ribajs/photoswipe')) {
     // Copy @ribajs/photoswipe scss files
     var ribajsPhotoswipeConfig = {
       from:
@@ -43,7 +51,7 @@ var getCopyPluginConfig = function(config) {
     copyPluginConfig.push(ribajsPhotoswipeConfig);
   }
 
-  if (package.dependencies['@ribajs/iconset'] && config.copyAssets.modules['@ribajs/iconset'] === true) {
+  if (package.dependencies['@ribajs/iconset'] && config.copyAssets.modules['@ribajs/iconset'] === true && moduleFound('@ribajs/iconset')) {
     // Copy iconset svg's
     var ribajsIconsetConfig = {
       from: path.resolve(

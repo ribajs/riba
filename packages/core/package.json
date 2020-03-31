@@ -35,10 +35,10 @@
   "scripts": {
     "test": "jest --config=jest.config.js",
     "test:watch": "jest --config=jest.config.js --watch",
-    "type-check": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
-    "build": "npm run type-check && tsc",
-    "build:ts": "npm run type-check",
-    "build:browser": "npm run type-check && npm run webpack:browser"
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
+    "build": "npm run lint && tsc",
+    "build:ts": "npm run lint",
+    "build:browser": "npm run lint && npm run webpack:browser"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -51,14 +51,23 @@
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-typescript": "^7.9.0",
     "@babel/runtime-corejs3": "^7.9.2",
+    "@ribajs/eslint-config": "^1.8.0",
+    "@ribajs/tsconfig": "^1.8.0",
+    "@types/core-js": "^2.5.3",
     "@types/jest": "^25.1.4",
     "@types/node": "^13.9.5",
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
+    "@typescript-eslint/parser": "^2.26.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-array-includes": "^2.0.3",
     "core-js": "^3.6.4",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
     "jest": "^25.2.4",
     "jest-config": "^25.2.4",
     "jest-extended": "^0.11.5",
+    "prettier": "^2.0.2",
     "source-map-support": "^0.5.16",
     "ts-jest": "^25.3.0",
     "typescript": "^3.8.3",
@@ -67,16 +76,14 @@
     "webpack-cli": "^3.3.11",
     "webpack-glob-entry": "^2.1.1"
   },
-  "dependencies": {
-    "@types/core-js": "^2.5.3",
-    "@typescript-eslint/eslint-plugin": "^2.25.0",
-    "@typescript-eslint/parser": "^2.25.0"
-  },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"
   },
   "homepage": "https://github.com/ribajs/riba#readme",
   "directories": {
     "lib": "lib"
+  },
+  "dependencies": {
+    "@yarnpkg/pnpify": "^2.0.0-rc.20"
   }
 }
