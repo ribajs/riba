@@ -3,60 +3,58 @@ const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 const rootPath = process.cwd();
 
+const package = require(rootPath + "/package.json");
+
 var getCopyPluginConfig = function(config) {
   var copyPluginConfig = [];
 
-  // Copy bootstrap scss files. Note: `require.resolve('bootstrap')` resolves to `'bootstrap/dist/js/bootstrap.js'` because this is the main file in package.json
-  var bootstrapConfig = {
-    from: path.resolve(
-      path.dirname(require.resolve("bootstrap")),
-      "../../scss"
-    ),
-    to: path.resolve(`${rootPath}/${config.copyAssets.foldername}/scss/vendors/bootstrap/`),
-    toType: "dir"
-  };
-
-  // Copy @ribajs/bs4 scss files
-  var ribajsBs4Config = {
-    from: path.dirname(require.resolve("@ribajs/bs4")) + "/**/*.scss",
-    to: path.resolve(`${rootPath}/${config.copyAssets.foldername}/scss/vendors/@ribajs/bs4`),
-    toType: "dir",
-    context: path.dirname(require.resolve("@ribajs/bs4"))
-  };
-
-  // Copy @ribajs/photoswipe scss files
-  var ribajsPhotoswipeConfig = {
-    from:
-      path.dirname(require.resolve("@ribajs/photoswipe")) + "/**/*.scss",
-    to: path.resolve(`${rootPath}/${config.copyAssets.foldername}/scss/vendors/@ribajs/photoswipe`),
-    toType: "dir",
-    context: path.dirname(require.resolve("@ribajs/photoswipe"))
-  };
-
-  // Copy iconset svg's
-  var ribajsIconsetConfig = {
-    from: path.resolve(
-      path.dirname(require.resolve("@ribajs/iconset")),
-      "svg"
-    ),
-    to: path.resolve(`${rootPath}/${config.copyAssets.foldername}/iconset/`),
-    toType: "dir",
-    context: path.dirname(require.resolve("@ribajs/iconset"))
-  };
-
-  if (config.copyAssets.modules.bootstrap === true) {
+  if (package.dependencies['bootstrap'] && config.copyAssets.modules.bootstrap === true) {
+    // Copy bootstrap scss files. Note: `require.resolve('bootstrap')` resolves to `'bootstrap/dist/js/bootstrap.js'` because this is the main file in package.json
+    var bootstrapConfig = {
+      from: path.resolve(
+        path.dirname(require.resolve("bootstrap")),
+        "../../scss"
+      ),
+      to: path.resolve(`${rootPath}/${config.copyAssets.foldername}/scss/vendors/bootstrap/`),
+      toType: "dir"
+    };
     copyPluginConfig.push(bootstrapConfig);
   }
 
-  if (config.copyAssets.modules['@ribajs/bs4'] === true) {
+  if (package.dependencies['@ribajs/bs4'] && config.copyAssets.modules['@ribajs/bs4'] === true) {
+    // Copy @ribajs/bs4 scss files
+    var ribajsBs4Config = {
+      from: path.dirname(require.resolve("@ribajs/bs4")) + "/**/*.scss",
+      to: path.resolve(`${rootPath}/${config.copyAssets.foldername}/scss/vendors/@ribajs/bs4`),
+      toType: "dir",
+      context: path.dirname(require.resolve("@ribajs/bs4"))
+    };
     copyPluginConfig.push(ribajsBs4Config);
   }
 
-  if (config.copyAssets.modules['@ribajs/photoswipe'] === true) {
+  if (package.dependencies['@ribajs/photoswipe'] && config.copyAssets.modules['@ribajs/photoswipe'] === true ) {
+    // Copy @ribajs/photoswipe scss files
+    var ribajsPhotoswipeConfig = {
+      from:
+        path.dirname(require.resolve("@ribajs/photoswipe")) + "/**/*.scss",
+      to: path.resolve(`${rootPath}/${config.copyAssets.foldername}/scss/vendors/@ribajs/photoswipe`),
+      toType: "dir",
+      context: path.dirname(require.resolve("@ribajs/photoswipe"))
+    };
     copyPluginConfig.push(ribajsPhotoswipeConfig);
   }
 
-  if (config.copyAssets.modules['@ribajs/iconset'] === true) {
+  if (package.dependencies['@ribajs/iconset'] && config.copyAssets.modules['@ribajs/iconset'] === true) {
+    // Copy iconset svg's
+    var ribajsIconsetConfig = {
+      from: path.resolve(
+        path.dirname(require.resolve("@ribajs/iconset")),
+        "svg"
+      ),
+      to: path.resolve(`${rootPath}/${config.copyAssets.foldername}/iconset/`),
+      toType: "dir",
+      context: path.dirname(require.resolve("@ribajs/iconset"))
+    };
     copyPluginConfig.push(ribajsIconsetConfig);
   }
 }
@@ -231,7 +229,14 @@ module.exports = config => {
         ],
         splitChunks: {
           automaticNameDelimiter: ".",
-          chunks: "all"
+          // TODO enable see https://webpack.js.org/migrate/5/
+          cacheGroups: {
+            commons: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendors',
+              chunks: 'all'
+            }
+          }
         }
       },
       // Change to your "entry-point".
@@ -240,7 +245,6 @@ module.exports = config => {
       mode: env.production ? "production" : "development",
       output: {
         filename: "[name].bundle.js",
-        chunkFilename: "[name].bundle.js",
         path: config.output.path,
       },
       resolve: {

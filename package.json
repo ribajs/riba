@@ -74,7 +74,8 @@
       "packages/*",
       "infra/eslint-config",
       "infra/types",
-      "infra/webpack-config"
+      "infra/webpack-config",
+      "infra/tsconfig"
     ]
   }
 }
