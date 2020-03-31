@@ -31,8 +31,8 @@
     "@babel/runtime-corejs3": "^7.9.2",
     "@ribajs/eslint-config": "^1.8.0",
     "@ribajs/tsconfig": "^1.8.0",
-    "@ribajs/types": "github:ribajs/types#master",
-    "@ribajs/webpack-config": "0.0.1",
+    "@ribajs/types": "github:ribajs/types#commit%3Ac13cf17b0ab58afa29b40c99f022b0b170c0318f",
+    "@ribajs/webpack-config": "^0.0.1",
     "@types/jest": "^25.1.4",
     "autoprefixer": "^9.7.5",
     "babel-loader": "^8.1.0",
@@ -42,7 +42,6 @@
     "css-loader": "^3.4.2",
     "eslint": "^6.8.0",
     "html-loader": "^1.0.0",
-    "html-webpack-plugin": "^4.0.3",
     "inspectpack": "^4.4.0",
     "jest": "^25.2.4",
     "jest-extended": "^0.11.5",
@@ -53,10 +52,8 @@
     "prettier": "^2.0.2",
     "pug-loader": "^2.4.0",
     "sass-loader": "^8.0.2",
-    "terser-webpack-plugin": "^2.3.5",
     "ts-jest": "^25.3.0",
     "typescript": "^3.8.3",
-    "webpack": "^5.0.0-beta.13",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
   },
@@ -66,7 +63,8 @@
     "@ribajs/extras": "^1.8.0",
     "@ribajs/iconset": "^1.8.0",
     "@yarnpkg/pnpify": "^2.0.0-rc.20",
-    "bootstrap": "^4.4.1"
+    "bootstrap": "^4.4.1",
+    "webpack": "next"
   },
   "resolutions": {
     "@ribajs/bs4": "portal:../../packages/bs4",
@@ -82,7 +80,9 @@
     "@ribajs/shopify": "portal:../../packages/shopify",
     "@ribajs/shopify-easdk": "portal:../../packages/shopify-easdk",
     "@ribajs/shopify-tda": "portal:../../packages/shopify-tda",
+    "@ribajs/eslint-config": "portal:../../infra/eslint-config",
     "@ribajs/types": "portal:../../infra/types",
-    "@ribajs/eslint-config": "portal:../../infra/eslint-config"
+    "@ribajs/webpack-config": "portal:../../infra/webpack-config",
+    "@ribajs/tsconfig": "portal:../../infra/tsconfig"
   }
 }

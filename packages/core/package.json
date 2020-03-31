@@ -11,6 +11,7 @@
   "main": "src/index.ts",
   "module": "src/index.ts",
   "source": "src/index.ts",
+  "sass": "scss/index.scss",
   "license": "MIT",
   "licenses": [
     {

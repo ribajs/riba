@@ -1,6 +1,3 @@
-[submodule "infra/types"]
-	path = infra/types
-	url = https://github.com/ribajs/types.git
 [submodule "infra/doc"]
 	path = infra/doc
 	url = https://github.com/ribajs/doc.git

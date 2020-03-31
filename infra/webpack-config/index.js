@@ -2,7 +2,6 @@
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 const rootPath = process.cwd();
-
 const package = require(rootPath + "/package.json");
 
 var getCopyPluginConfig = function(config) {
@@ -57,11 +56,13 @@ var getCopyPluginConfig = function(config) {
     };
     copyPluginConfig.push(ribajsIconsetConfig);
   }
+
+  return copyPluginConfig;
 }
 
 var getStyleLoaderRule = (config) => {
   var rule = {
-    test: /.scss$/,
+    test: /\.s[ac]ss$/i,
     use: []
   };
 
@@ -79,15 +80,18 @@ var getStyleLoaderRule = (config) => {
   }
 
   rule.use.push({
-    loader: 'css-loader'
+    loader: require.resolve('css-loader'),
+    options: {
+      url: false,
+    }
   });
 
   rule.use.push({
-    loader: 'postcss-loader'
+    loader: require.resolve('postcss-loader')
   });
   
   rule.use.push({
-    loader: 'sass-loader',
+    loader: require.resolve('sass-loader'),
     options: {
       webpackImporter: true
     }
@@ -104,14 +108,13 @@ module.exports = config => {
     {
       test: /\.(tsx?)|\.(js)$/,
       exclude: [/node_modules\/(?!@ribajs)/, /(bower_components)/],
-      loader: 'babel-loader',
       loader: require.resolve('babel-loader'),
     },
     // html templates
     {
       test: /\.html$/,
       use: [ {
-        loader: 'html-loader',
+        loader: require.resolve('html-loader'),
         options: {
           minimize: true
         }
@@ -121,7 +124,7 @@ module.exports = config => {
     {
       test: /\.pug$/,
       use: [ {
-        loader: 'pug-loader',
+        loader: require.resolve('pug-loader'),
         options: {
           minimize: true
         }
@@ -144,10 +147,40 @@ module.exports = config => {
       config.output = {
         path: path.resolve(rootPath, "assets/js")
       }
+
+      /**
+       * On October we use the build in sass compiler for the styles to make use of some october features like theme setting variables in the scss files,
+       * so we do not want to build the styles using webpack
+       */
       config.styles.build = false;
+  
       config.copyAssets = {
         enable: true,
-        foldername: 'assets',
+        foldername: 'src',
+        // Because we use october to compile the styles we copy the verndor styles to october
+        modules: {
+          "bootstrap": true,
+          "@ribajs/bs4": true,
+          "@ribajs/photoswipe": true,
+          "@ribajs/iconset": true,
+        }
+      }
+      break;
+    case 'shopify':
+      config.entry = [rootPath + '/src/scss/main.scss', rootPath + "/src/ts/main.ts"];
+      config.output = {
+        path: path.resolve(rootPath, "theme/assets/")
+      }
+  
+      config.styles.build = true;
+      config.styles.extract = true;
+  
+      config.copyAssets = {
+        enable: true,
+        foldername: 'src',
+        // Looks like there is a bug on webpack 5 + yarn 2 + sass-loader
+        // sass imports from modules like `@import "~bootstrap/scss/functions";` are working with NPM but not with Yarn's PnP feature.
+        // Until this is fixed we use a WORKAROUND by copy the scss files to the project
         modules: {
           "bootstrap": true,
           "@ribajs/bs4": true,
@@ -158,11 +191,28 @@ module.exports = config => {
       break;
     // E.g. used for demos 
     case 'local':
-      config.entry = [rootPath + '/src/main.scss', rootPath + '/src/main.ts'],
+      config.entry = [rootPath + '/src/scss/main.scss', rootPath + '/src/ts/main.ts'],
       config.output = {
         path: path.resolve(rootPath, 'dist/')
       };
+
+      config.styles.build = true;
       config.styles.extract = true;
+
+      config.copyAssets = {
+        enable: true,
+        foldername: 'src',
+        // Looks like there is a bug on webpack 5 + yarn 2 + sass-loader
+        // sass imports from modules like `@import "~bootstrap/scss/functions";` are working with NPM but not with Yarn's PnP feature.
+        // Until this is fixed we use a WORKAROUND by copy the scss files to the project
+        modules: {
+          "bootstrap": true,
+          "@ribajs/bs4": true,
+          "@ribajs/photoswipe": true,
+          "@ribajs/iconset": true,
+        }
+      }
+
       config.devServer = {
         host: '0.0.0.0',
         contentBase: './src',
@@ -170,7 +220,8 @@ module.exports = config => {
 
       const HtmlWebpackPlugin = require("html-webpack-plugin");
       plugins.push(new HtmlWebpackPlugin({
-        template: rootPath + "/src/index.html"
+        template: rootPath + "/src/index.html",
+        filename: "index.html"
       }));
 
       break;
@@ -194,7 +245,6 @@ module.exports = config => {
     const MiniCssExtractPlugin = require('mini-css-extract-plugin');
     plugins.push(new MiniCssExtractPlugin({
       filename: '[name].css',
-      chunkFilename: '[id].css',
     }));
   }
 
@@ -229,13 +279,21 @@ module.exports = config => {
         ],
         splitChunks: {
           automaticNameDelimiter: ".",
-          // TODO enable see https://webpack.js.org/migrate/5/
+          // TODO refactor see https://webpack.js.org/migrate/5/
+          automaticNameDelimiter: '.',
+          chunks: 'all',
           cacheGroups: {
             commons: {
               test: /[\\/]node_modules[\\/]/,
               name: 'vendors',
               chunks: 'all'
-            }
+            },
+            styles: {
+              name: 'styles',
+              test: /\.css$/,
+              chunks: 'all',
+              enforce: true,
+            },
           }
         }
       },
@@ -248,9 +306,11 @@ module.exports = config => {
         path: config.output.path,
       },
       resolve: {
-        modules: ["node_modules"],
-        extensions: [".ts", ".tsx", ".js", ".json"],
+        // modules: ["node_modules"],
+        extensions: [".ts", ".tsx", ".js", ".json", ".scss", ".pug", ".html"],
         symlinks: true,
+        alias: {
+        },
       },
       devServer: config.devServer,
       module: {
