@@ -48,10 +48,6 @@ class FullscreenService {
   }
 
   enter(el: HTMLElement) {
-    // disable close-on-scroll in fullscreen
-    // this._initalCloseOnScrollValue = this._options.closeOnScroll;
-    // this._options.closeOnScroll = false;
-
     if (this.enterK === "webkitRequestFullscreen") {
       el[this.enterK as "requestFullscreen"](
         (Element as any).ALLOW_KEYBOARD_INPUT
@@ -62,7 +58,6 @@ class FullscreenService {
   }
 
   exit() {
-    // this._options.closeOnScroll = _initalCloseOnScrollValue;
     return document[this.exitK as "exitFullscreen"]();
   }
 

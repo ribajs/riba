@@ -981,7 +981,7 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
       },
       exit: () => {
         this._options.closeOnScroll = this._initalCloseOnScrollValue;
-        return fullscreenApi.exit;
+        return fullscreenApi.exit();
       },
       isFullscreen: fullscreenApi.isFullscreen,
     };
