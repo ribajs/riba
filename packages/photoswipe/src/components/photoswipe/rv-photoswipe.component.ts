@@ -1,16 +1,11 @@
-import {
-  Component,
-} from '@ribajs/core';
+import { Component } from "@ribajs/core";
 
 import template from "./rv-photoswipe.component.html";
-
 import fullscreenTemplate from "./rv-photoswipe.fullscreen.component.html";
 
-import PhotoSwipe from 'photoswipe';
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
-import PhotoSwipeDefaultUI from 'photoswipe/dist/photoswipe-ui-default.js';
+import PhotoSwipe from "photoswipe";
+import PhotoSwipeUI from "../../services/photoswipe-ui.service";
+import { Options } from "../../types";
 
 interface Scope {
   // Properties
@@ -18,22 +13,33 @@ interface Scope {
   isFullscreen: boolean;
   isZoomed: boolean;
   zoomLevel: number;
-  // Attribute settings
-  openImageOnClick: boolean;
+
   // Methods
-  open: PhotoswipeComponent['open'];
-  openByIndex: PhotoswipeComponent['openByIndex'];
-  close: PhotoswipeComponent['close'];
-  next: PhotoswipeComponent['next'];
-  prev: PhotoswipeComponent['prev'];
-  toggleZoom: PhotoswipeComponent['openByIndex'];
-  toggleFullscreen: PhotoswipeComponent['toggleFullscreen'];
+  open: PhotoswipeComponent["open"];
+  openByIndex: PhotoswipeComponent["openByIndex"];
+  close: PhotoswipeComponent["close"];
+  next: PhotoswipeComponent["next"];
+  prev: PhotoswipeComponent["prev"];
+  toggleZoom: PhotoswipeComponent["openByIndex"];
+  toggleFullscreen: PhotoswipeComponent["toggleFullscreen"];
+
+  // Observed attributes
+  openImageOnClick: boolean;
+  fullscreenContainerSelector: string;
+  itemsSelector: string;
+
+  controlNextIconSrc: string;
+  controlPrevIconSrc: string;
+  controlCloseIconSrc: string;
+  controlZoomInIconSrc: string;
+  controlZoomOutIconSrc: string;
+  controlFullscreenOnIconSrc: string;
+  controlFullscreenOffIconSrc: string;
+  controlShareIconSrc: string;
 }
 
-
 export class PhotoswipeComponent extends Component {
-
-  public static tagName = 'rv-photoswipe';
+  public static tagName = "rv-photoswipe";
 
   protected autobind = true;
 
@@ -44,10 +50,10 @@ export class PhotoswipeComponent extends Component {
   protected images: HTMLImageElement[] = [];
 
   protected listeners = {
-    items: []
-  }
+    items: [],
+  };
 
-  protected options: PhotoSwipeDefaultUI.Options  = {
+  protected options: Options = {
     // optionName: 'option value'
     getThumbBoundsFn: this.getThumbBoundsFn.bind(this),
 
@@ -62,11 +68,23 @@ export class PhotoswipeComponent extends Component {
     preloaderEl: true,
 
     closeElClasses: [], // 'item', 'caption', 'zoom-wrap', 'ui', 'top-bar'
-
   };
 
   static get observedAttributes() {
-    return ['open-image-on-click'];
+    return [
+      "open-image-on-click",
+      "fullscreen-container-selector",
+      "items-selector",
+      // Icon sources
+      "control-next-icon-src",
+      "control-prev-icon-src",
+      "control-close-icon-src",
+      "control-zoom-in-icon-src",
+      "control-zoom-out-icon-src",
+      "control-fullscreen-on-icon-src",
+      "control-fullscreen-off-icon-src",
+      "control-share-icon-src",
+    ];
   }
 
   protected scope: Scope = {
@@ -75,8 +93,7 @@ export class PhotoswipeComponent extends Component {
     isFullscreen: false,
     isZoomed: false,
     zoomLevel: 0,
-    // Attribute settings
-    openImageOnClick: false,
+
     // Methods
     open: this.open,
     openByIndex: this.openByIndex,
@@ -85,13 +102,26 @@ export class PhotoswipeComponent extends Component {
     prev: this.prev,
     toggleZoom: this.toggleZoom,
     toggleFullscreen: this.toggleFullscreen,
+
+    // Observed attribute default values
+    openImageOnClick: false,
+    fullscreenContainerSelector: ".pswp",
+    itemsSelector: "img",
+
+    controlNextIconSrc: "",
+    controlPrevIconSrc: "",
+    controlCloseIconSrc: "",
+    controlZoomInIconSrc: "",
+    controlZoomOutIconSrc: "",
+    controlFullscreenOnIconSrc: "",
+    controlFullscreenOffIconSrc: "",
+    controlShareIconSrc: "",
   };
 
   constructor(element?: HTMLElement) {
     super(element);
-    console.debug('constructor', this);
+    console.debug("constructor", this);
   }
-
 
   protected connectedCallback() {
     super.connectedCallback();
@@ -103,39 +133,45 @@ export class PhotoswipeComponent extends Component {
   }
 
   protected getThumbBoundsFn(index: number) {
-    console.debug('[getThumbBoundsFn] index', index);
+    console.debug("[getThumbBoundsFn] index", index);
     if (!this.images) {
-      return {x: 0, y: 0, w: 0};
+      return { x: 0, y: 0, w: 0 };
     }
     // find thumbnail element
     const image = this.images[index];
-    console.debug('[getThumbBoundsFn] image', image);
+    console.debug("[getThumbBoundsFn] image", image);
     // get window scroll Y
-    const pageYScroll = window.pageYOffset || document.documentElement.scrollTop; 
+    const pageYScroll =
+      window.pageYOffset || document.documentElement.scrollTop;
     // optionally get horizontal scroll
     // get position of element relative to viewport
     const rect = image.getBoundingClientRect();
-    return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
+    return { x: rect.left, y: rect.top + pageYScroll, w: rect.width };
     // Good guide on how to get element coordinates:
     // http://javascript.info/tutorial/coordinates
   }
 
   protected async beforeBind() {
-    console.debug('beforeBind', this.scope);
+    console.debug("beforeBind", this.scope);
     return await super.beforeBind();
   }
 
-  // Before slides change
-  // (before the content is changed, but after navigation)
-  // Update UI here (like "1 of X" indicator)
+  // Event handlers
+
+  /**
+   * Before slides change before the content is changed, but after navigation)
+   * Update UI here (like "1 of X" indicator)
+   */
   protected onBeforeChange() {
-    console.debug('onBeforeChange', this.pswp?.currItem);
+    console.debug("onBeforeChange", this.pswp?.currItem);
   }
 
-  // After slides change
-  // (after content changed)
+  /**
+   * After slides change
+   * (after content changed)
+   */
   protected onAfterChange() {
-    console.debug('onAfterChange', this.pswp?.currItem);
+    console.debug("onAfterChange", this.pswp?.currItem);
   }
 
   /**
@@ -144,12 +180,14 @@ export class PhotoswipeComponent extends Component {
    * @param item slide object
    */
   protected onImageLoadComplete(index: number, item: PhotoSwipe.Item) {
-    console.debug('imageLoadComplete', index, item);
+    console.debug("imageLoadComplete", index, item);
   }
 
-  // Viewport size changed
+  /**
+   * Viewport size changed
+   */
   protected onResize() {
-    console.debug('onResize', this.pswp?.currItem);
+    console.debug("onResize", this.pswp?.currItem);
   }
 
   /**
@@ -160,58 +198,60 @@ export class PhotoswipeComponent extends Component {
    * @param item slide object
    */
   protected onGettingData(index: number, item: PhotoSwipe.Item) {
-    console.debug('onGettingData', index, item);
+    console.debug("onGettingData", index, item);
   }
 
   protected onMouseUsed() {
-    console.debug('onMouseUsed');
+    console.debug("onMouseUsed");
   }
 
   protected onInitialZoomIn() {
-    console.debug('onInitialZoomIn');
+    console.debug("onInitialZoomIn");
   }
 
   protected onInitialZoomInEnd() {
-    console.debug('onInitialZoomInEnd');
+    console.debug("onInitialZoomInEnd");
   }
 
   protected onInitialZoomOut() {
-    console.debug('onInitialZoomOut');
+    console.debug("onInitialZoomOut");
   }
 
   protected onInitialZoomOutEnd() {
-    console.debug('onInitialZoomOutEnd');
+    console.debug("onInitialZoomOutEnd");
   }
 
   protected onParseVerticalMargin() {
-    console.debug('onParseVerticalMargin');
+    console.debug("onParseVerticalMargin");
   }
 
   protected onUnbindEvents() {
-    console.debug('onUnbindEvents');
+    console.debug("onUnbindEvents");
   }
 
   protected onClose() {
-    console.debug('onClose');
+    console.debug("onClose");
   }
 
   protected onDestroy() {
-    console.debug('onDestroy');
+    console.debug("onDestroy");
   }
 
   protected onUpdateScrollOffset() {
-    console.debug('onUpdateScrollOffset');
+    console.debug("onUpdateScrollOffset");
   }
 
   /**
-   * 
+   *
    * @param e original event
    * @param isDown true = drag start, false = drag release
-   * @param preventObj 
+   * @param preventObj
    */
   protected onPreventDragEvent(e: Event, isDown: boolean, preventObj: any) {
-    console.debug('onPreventDragEvent', e, isDown);
+    console.debug("onPreventDragEvent", e, isDown, preventObj);
   }
+
+  // Scope methods
 
   public openByIndex(index: number) {
     return this.open(this.scope.items[index]);
@@ -230,25 +270,25 @@ export class PhotoswipeComponent extends Component {
   }
 
   public share() {
-    console.debug('share TODO');
+    console.debug("share TODO");
   }
 
   public toggleZoom() {
-    (this.pswp as any || null)?.toggleDesktopZoom();
+    this.pswp?.toggleDesktopZoom();
     this.scope.zoomLevel = this.pswp?.getZoomLevel() || 1;
     this.scope.isZoomed = this.scope.zoomLevel < 1;
-    console.debug('toggleZoom', this.scope.zoomLevel);
+    console.debug("toggleZoom", this.scope.zoomLevel);
   }
 
   public toggleFullscreen() {
-    const fullscrenAPI =  (this.pswp as any || null)?.ui.getFullscreenAPI();
-		if(fullscrenAPI.isFullscreen()) {
+    const fullscrenAPI = ((this.pswp as any) || null)?.ui.getFullscreenAPI();
+    if (fullscrenAPI.isFullscreen()) {
       fullscrenAPI.exit();
       this.scope.isFullscreen = false;
-		} else {
+    } else {
       fullscrenAPI.enter();
       this.scope.isFullscreen = true;
-		}
+    }
     (this.pswp?.ui as any).updateFullscreen();
   }
 
@@ -256,7 +296,7 @@ export class PhotoswipeComponent extends Component {
     const oldAnimationDuration = this.options.showAnimationDuration;
     this.options.showAnimationDuration = 0;
     this.open(item);
-    if(oldAnimationDuration) {
+    if (oldAnimationDuration) {
       this.options.showAnimationDuration = oldAnimationDuration;
     } else {
       delete this.options.showAnimationDuration;
@@ -264,26 +304,32 @@ export class PhotoswipeComponent extends Component {
   }
 
   public open(item: PhotoSwipe.Item) {
-    console.debug('open', item, this.scope.items);
+    console.debug("open", item, this.scope.items);
     if (!this.pswpElement) {
-      console.error('Element with selector ".pswp" not found');
+      console.error(
+        `Element with selector "${this.scope.fullscreenContainerSelector}" not found`
+      );
       return;
     }
     const index = this.scope.items.indexOf(item);
-    if(index >= 0)  {
+    if (index >= 0) {
       this.options.index = index;
 
       this.scope.isFullscreen = false;
       this.scope.isZoomed = false;
-      
-      this.pswp = new PhotoSwipe( this.pswpElement, PhotoSwipeDefaultUI, this.scope.items, this.options);
+
+      this.pswp = new PhotoSwipe(
+        this.pswpElement,
+        PhotoSwipeUI,
+        this.scope.items,
+        this.options
+      );
       this.addPswpEventListeners();
       this.pswp.init();
 
-        
       //add listener
     } else {
-      console.error("[rv-photoswipe] failed to get index of item ", item)
+      console.error("[rv-photoswipe] failed to get index of item ", item);
     }
   }
 
@@ -302,33 +348,51 @@ export class PhotoswipeComponent extends Component {
     // this.pswp?.listen('initialZoomOutEnd', this.onInitialZoomOutEnd.bind(this));
     // this.pswp?.listen('parseVerticalMargin', this.onParseVerticalMargin.bind(this));
     // this.pswp?.listen('onUnbindEvents', this.onUnbindEvents.bind(this));
-    this.pswp?.listen('close', this.onClose.bind(this));
-    this.pswp?.listen('destroy', this.onDestroy.bind(this));
+    this.pswp?.listen("close", this.onClose.bind(this));
+    this.pswp?.listen("destroy", this.onDestroy.bind(this));
     // this.pswp?.listen('updateScrollOffset', this.onUpdateScrollOffset.bind(this));
   }
 
   protected removeEventListeners() {
-    for(let i = 0; i <  this.images.length; i++) {
-      this.images[i].removeEventListener("click", this.openByIndex.bind(this, i))
-    }    
+    for (let i = 0; i < this.images.length; i++) {
+      this.images[i].removeEventListener(
+        "click",
+        this.openByIndex.bind(this, i)
+      );
+    }
   }
 
- 
   protected setItems() {
-    this.images = Array.from(this.el.querySelectorAll('img'));
-    
-    for(let i = 0; i <  this.images.length; i++) {
-      console.log( this.images[i]);
+    this.images = Array.from(
+      this.el.querySelectorAll(this.scope.itemsSelector)
+    );
+
+    for (let i = 0; i < this.images.length; i++) {
+      console.log(this.images[i]);
 
       if (this.scope.openImageOnClick) {
-         this.images[i].addEventListener("click", this.openByIndex.bind(this, i));
+        this.images[i].addEventListener(
+          "click",
+          this.openByIndex.bind(this, i)
+        );
       }
 
-      const src =  this.images[i].getAttribute("fs-src") || this.images[i].currentSrc ||  this.images[i].src;
-      const width =  this.images[i].getAttribute("fs-width") || this.images[i].width;
-      const height =  this.images[i].getAttribute("fs-height") || this.images[i].height;
-      if(!src || !width || !height) {
-        console.warn("[rv-photoswipe] image element found without src, width or height. Ignoring..");
+      const src =
+        this.images[i].dataset.fsSrc ||
+        this.images[i].currentSrc ||
+        this.images[i].src;
+      const width =
+        this.images[i].dataset.fsWidth ||
+        this.images[i].naturalWidth ||
+        this.images[i].width;
+      const height =
+        this.images[i].dataset.fsHeight ||
+        this.images[i].naturalHeight ||
+        this.images[i].height;
+      if (!src || !width || !height) {
+        console.warn(
+          "[rv-photoswipe] image element found without src, width or height. Ignoring.."
+        );
         continue;
       }
 
@@ -336,67 +400,72 @@ export class PhotoswipeComponent extends Component {
         src: src,
         msrc: this.images[i].currentSrc || this.images[i].src || src,
         w: Number(width),
-        h: Number(height)
+        h: Number(height),
       });
-      
     }
   }
 
   protected initFullscreenTemplate() {
-    this.pswpElement = this.el.querySelector<HTMLElement>('.pswp');
+    this.pswpElement = this.el.querySelector<HTMLElement>(
+      this.scope.fullscreenContainerSelector
+    );
   }
 
   protected async afterBind() {
-    console.debug('afterBind', this.scope);
+    console.debug("afterBind", this.scope);
     await super.afterBind();
 
     this.initFullscreenTemplate();
 
     this.setItems();
 
-    
-
     const hashData = this.parseHash();
-    if(hashData.pid && hashData.gid) {
+    if (hashData.pid && hashData.gid) {
       //Todo check for bounds
-      this.openWithoutAnimation(this.scope.items[(hashData.pid - 1)]);
+      this.openWithoutAnimation(this.scope.items[hashData.pid - 1]);
     }
-
   }
 
   protected parseHash() {
     const hash = window.location.hash.substring(1),
-      params: {gid?: number | string; pid?: number | string} = {};
+      params: { gid?: number; pid?: number } = {};
 
-      if (hash.length < 5) { // pid=1
-        return params;
-      }
-
-      const vars = hash.split('&');
-      for (let i = 0; i < vars.length; i++) {
-          if(!vars[i]) {
-              continue;
-          }
-          const pair = vars[i].split('=');  
-          if(pair.length < 2) {
-              continue;
-          }           
-          params[pair[0]] = pair[1];
-      }
-
-      if(params.gid && typeof(params.gid) === 'string') {
-        params.gid = parseInt(params.gid, 10);
-      }
-
+    if (hash.length < 5) {
+      // pid=1
       return params;
+    }
+
+    const vars = hash.split("&");
+    for (let i = 0; i < vars.length; i++) {
+      if (!vars[i]) {
+        continue;
+      }
+      const pair = vars[i].split("=");
+      if (pair.length < 2) {
+        continue;
+      }
+      params[pair[0] as "gid" | "pid"] = parseInt(pair[1], 10);
+    }
+
+    return params;
   }
 
   protected requiredAttributes() {
     return [];
   }
 
-  protected parsedAttributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
-    super.parsedAttributeChangedCallback(attributeName, oldValue, newValue, namespace);
+  protected parsedAttributeChangedCallback(
+    attributeName: string,
+    oldValue: any,
+    newValue: any,
+    namespace: string | null
+  ) {
+    super.parsedAttributeChangedCallback(
+      attributeName,
+      oldValue,
+      newValue,
+      namespace
+    );
   }
 
   // deconstructor
@@ -405,7 +474,7 @@ export class PhotoswipeComponent extends Component {
     this.removeEventListeners();
   }
 
-  protected template() {    
+  protected template() {
     // Only set the component template if there no childs already<rv-photswipe>serhsehsehjiu </>
     if (this.el.hasChildNodes()) {
       // console.debug('Do not use template, because element has child nodes');

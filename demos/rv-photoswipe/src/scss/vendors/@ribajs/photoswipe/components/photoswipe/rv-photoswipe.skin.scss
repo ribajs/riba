@@ -32,10 +32,12 @@
 	cursor: pointer;
 	overflow: visible;
 	-webkit-appearance: none;
-	display: block;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	border: 0;
 	padding: 0;
-	margin: 0;
+	margin: 10px;
 	float: right;
 	opacity: 0.75;
 	transition: opacity 0.2s;
@@ -515,6 +517,8 @@ a.pswp__share--download {
 	height: 44px;
 	width: 100%;
 	backdrop-filter: blur(2px);
+	// TODO sass variable
+	color: black;
 }
 
 .pswp__caption,

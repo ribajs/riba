@@ -21,8 +21,8 @@
     "url": "git+https://github.com/ribajs/riba.git"
   },
   "scripts": {
-    "test": "npm run type-check && jest --config=jest.config.js",
-    "type-check": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
+    "test": "npm run lint && jest --config=jest.config.js",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
     "build": "npm run build:module",
     "build:module": "tsc",
     "packages:link": "npm link @ribajs/core"
@@ -38,6 +38,8 @@
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-typescript": "^7.9.0",
     "@babel/runtime-corejs3": "^7.9.2",
+    "@ribajs/eslint-config": "workspace:infra/eslint-config",
+    "@ribajs/tsconfig": "workspace:infra/tsconfig",
     "@types/jest": "^25.1.4",
     "@typescript-eslint/eslint-plugin": "^2.25.0",
     "@typescript-eslint/parser": "^2.25.0",
@@ -45,8 +47,10 @@
     "babel-plugin-array-includes": "^2.0.3",
     "core-js": "^3.6.4",
     "eslint": "^6.8.0",
+    "eslint-plugin-prettier": "latest",
     "jest": "^25.2.4",
     "jest-extended": "^0.11.5",
+    "prettier": "^2.0.2",
     "ts-jest": "^25.3.0",
     "typescript": "^3.8.3",
     "webpack": "^4.42.1",
@@ -54,7 +58,6 @@
   },
   "dependencies": {
     "@ribajs/core": "^1.8.0",
-    "@types/photoswipe": "^4.1.0",
     "@yarnpkg/pnpify": "^2.0.0-rc.20",
     "photoswipe": "^4.1.3"
   },

@@ -34,6 +34,8 @@
     "@ribajs/types": "^1.8.3",
     "@ribajs/webpack-config": "^0.0.1",
     "@types/jest": "^25.1.4",
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
+    "@typescript-eslint/parser": "^2.26.0",
     "@yarnpkg/pnpify": "^2.0.0-rc.20",
     "autoprefixer": "^9.7.5",
     "babel-loader": "^8.1.0",

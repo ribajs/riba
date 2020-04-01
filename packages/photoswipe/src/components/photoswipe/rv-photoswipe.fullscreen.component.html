@@ -26,17 +26,15 @@
 
                 <div class="pswp__counter"></div>
 
-                <bs4-icon rv-hide="isZoomed" color="#000" rv-on-click="toggleZoom" class="pswp__button" src="/iconset/icon_plus.svg" title="Zoom in/out"></bs4-icon>
-                <bs4-icon rv-show="isZoomed" color="#000" rv-on-click="toggleZoom" class="pswp__button" src="/iconset/icon_minus-06.svg" title="Zoom in/out"></bs4-icon>
+                <bs4-icon rv-on-click="share" size="16" class="pswp__button" rv-src="controlShareIconSrc" title="Share"></bs4-icon>
 
-                <bs4-icon rv-hide="isFullscreen" color="#000" rv-on-click="toggleFullscreen" class="pswp__button" src="/iconset/icon_toggle-fullscreen-on.svg" title="Toggle fullscreen"></bs4-icon>
-                <bs4-icon rv-show="isFullscreen" color="#000" rv-on-click="toggleFullscreen" class="pswp__button" src="/iconset/icon_toggle-fullscreen-off.svg" title="Toggle fullscreen"></bs4-icon>
+                <bs4-icon rv-hide="isZoomed" size="32" rv-on-click="toggleZoom" class="pswp__button" rv-src="controlZoomInIconSrc" title="Zoom in"></bs4-icon>
+                <bs4-icon rv-show="isZoomed" size="32" rv-on-click="toggleZoom" class="pswp__button" rv-src="controlZoomOutIconSrc" title="Zoom out"></bs4-icon>
 
-                <bs4-icon rv-on-click="close" color="#000" class="pswp__button" src="/iconset/icon_close.svg" title="Close (Esc)"></bs4-icon> <!-- pwsp.close(); -->
+                <bs4-icon rv-hide="isFullscreen" size="32" rv-on-click="toggleFullscreen" class="pswp__button" rv-src="controlFullscreenOnIconSrc" title="Go to fullscreen"></bs4-icon>
+                <bs4-icon rv-show="isFullscreen" size="32" rv-on-click="toggleFullscreen" class="pswp__button" rv-src="controlFullscreenOffIconSrc" title="Leave fullscreen"></bs4-icon>
 
-                <!-- <bs4-icon rv-on-click="close" class="pswp__button" src="/iconset/icon_share.svg" title="Share"></bs4-icon> -->
-
-
+                <bs4-icon rv-on-click="close" size="32" class="pswp__button" rv-src="controlCloseIconSrc" title="Close (Esc)"></bs4-icon>
 
                 <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
                 <!-- element will get class pswp__preloader--active when preloader is running -->

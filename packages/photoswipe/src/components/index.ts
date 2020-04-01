@@ -1,1 +1,1 @@
-export * from './photoswipe/rv-photoswipe.component';
+export * from "./photoswipe/rv-photoswipe.component";
