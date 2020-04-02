@@ -10,3 +10,5 @@ export const jqueryModule: RibaModule = {
   services: {},
   components: {},
 };
+
+export default jqueryModule;

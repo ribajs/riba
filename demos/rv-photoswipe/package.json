@@ -7,6 +7,7 @@
     "build": "webpack --env.production",
     "build:dev": "npm run lint && webpack --env.development",
     "start": "webpack-dev-server --env.development",
+    "start:prod": "webpack-dev-server --env.production",
     "clear": "rm -rf ./dist",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
     "test": "jest",

@@ -16,5 +16,4 @@ const coreModule: RibaModule = {
 (window as any).coreModule = coreModule;
 
 export { coreModule };
-
 export default coreModule;
