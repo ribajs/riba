@@ -1,5 +1,6 @@
 import { ShareButtonData } from "./share-button-data";
 import { Item } from "./item";
+import * as PhotoSwipe from "photoswipe";
 
 /**
  * Options for the PhotoSwipe Default UI. Derived from http://photoswipe.com/documentation/options.html

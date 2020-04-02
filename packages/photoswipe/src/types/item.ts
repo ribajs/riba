@@ -1,3 +1,5 @@
+import * as PhotoSwipe from "photoswipe";
+
 /**
  * Extra properties that the Default UI accepts.
  */
