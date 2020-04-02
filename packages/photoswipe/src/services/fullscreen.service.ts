@@ -1,4 +1,4 @@
-class FullscreenService {
+export class FullscreenService {
   enterK:
     | "requestFullscreen"
     | "mozRequestFullScreen"
@@ -20,7 +20,9 @@ class FullscreenService {
     | "webkitfullscreenchange"
     | "MSFullscreenChange" = "fullscreenchange";
 
-  constructor() {
+  static instance?: FullscreenService;
+
+  protected constructor() {
     const dE = document.documentElement as HTMLElement & any;
     const tF = "fullscreenchange";
 
@@ -47,7 +49,28 @@ class FullscreenService {
     }
   }
 
-  enter(el: HTMLElement) {
+  public static getSingleton() {
+    if (FullscreenService.instance) {
+      return FullscreenService.instance;
+    }
+    FullscreenService.instance = new FullscreenService();
+    return FullscreenService.instance;
+  }
+
+  public static supported() {
+    const d = document as Document & any;
+    return !!(
+      d.exitFullscreen ||
+      d.mozCancelFullScreen ||
+      d.webkitExitFullscreen ||
+      d.msExitFullscreen
+    );
+  }
+
+  public enter(el?: HTMLElement) {
+    if (!el) {
+      el = document.body;
+    }
     if (this.enterK === "webkitRequestFullscreen") {
       el[this.enterK as "requestFullscreen"](
         (Element as any).ALLOW_KEYBOARD_INPUT
@@ -57,13 +80,20 @@ class FullscreenService {
     }
   }
 
-  exit() {
+  public exit() {
     return document[this.exitK as "exitFullscreen"]();
   }
 
-  isFullscreen() {
+  public isFullscreen() {
     return document[this.elementK as "fullscreenElement"];
   }
-}
 
-export const fullscreenApi = new FullscreenService();
+  public toggle(el?: HTMLElement) {
+    if (this.isFullscreen()) {
+      this.exit();
+      return;
+    } else {
+      this.enter(el);
+    }
+  }
+}

@@ -7,27 +7,21 @@
  * Built just using public methods/properties of PhotoSwipe.
  */
 
-import {
-  Item,
-  ShareButtonData,
-  Options,
-  UIElement,
-  FullscreenApi,
-} from "../types";
+import { Item, ShareButtonData, Options, UIElement } from "../types";
 import * as PhotoSwipe from "photoswipe";
 
-import { fullscreenApi } from "./fullscreen.service";
+import { FullscreenService } from "./fullscreen.service";
 
 export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
   _overlayUIUpdated = false;
   _controlsVisible = true;
-  _fullscrenAPI: FullscreenApi | null = null;
+  _fullscrenAPI: FullscreenService | null = null;
   _controls: any;
   _captionContainer: any;
   _fakeCaptionContainer: any;
   _indexIndicator: any;
-  _shareButton: any;
-  _shareModal: any;
+  _shareButton?: HTMLElement;
+  _shareModal?: HTMLElement;
   _shareModalHidden = true;
   _initalCloseOnScrollValue: any;
   _isIdle: any;
@@ -126,72 +120,10 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
       },
     },
     {
-      name: "share-modal",
-      option: "shareEl",
-      onInit: (el: HTMLElement) => {
-        this._shareModal = el;
-      },
-      onTap: () => {
-        this._toggleShareModal();
-      },
-    },
-    {
-      name: "button--share",
-      option: "shareEl",
-      onInit: (el: HTMLElement) => {
-        this._shareButton = el;
-      },
-      onTap: () => {
-        this._toggleShareModal();
-      },
-    },
-    {
-      name: "button--zoom",
-      option: "zoomEl",
-      onTap: () => {
-        this.pswp.toggleDesktopZoom();
-      },
-    },
-    {
       name: "counter",
       option: "counterEl",
       onInit: (el: HTMLElement) => {
         this._indexIndicator = el;
-      },
-    },
-    {
-      name: "button--close",
-      option: "closeEl",
-      onTap: () => {
-        this.pswp.close();
-      },
-    },
-    {
-      name: "button--arrow--left",
-      option: "arrowEl",
-      onTap: () => {
-        this.pswp.prev();
-      },
-    },
-    {
-      name: "button--arrow--right",
-      option: "arrowEl",
-      onTap: () => {
-        this.pswp.next();
-      },
-    },
-    {
-      name: "button--fs",
-      option: "fullscreenEl",
-      onTap: () => {
-        if (!this._fullscrenAPI) {
-          throw new Error("_fullscrenAPI is undefined");
-        }
-        if (this._fullscrenAPI.isFullscreen()) {
-          this._fullscrenAPI.exit();
-        } else {
-          this._fullscrenAPI.enter();
-        }
       },
     },
     {
@@ -285,126 +217,15 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
   }
 
   protected _toggleShareModalClass() {
+    if (!this._shareModal) {
+      console.error("Share modal element not found");
+      return;
+    }
     this._togglePswpClass(
       this._shareModal,
       "share-modal--hidden",
       this._shareModalHidden
     );
-  }
-
-  protected _toggleShareModal() {
-    this._shareModalHidden = !this._shareModalHidden;
-
-    if (!this._shareModalHidden) {
-      this._toggleShareModalClass();
-      setTimeout(() => {
-        if (!this._shareModalHidden) {
-          this.framework.addClass(
-            this._shareModal,
-            "pswp__share-modal--fade-in"
-          );
-        }
-      }, 30);
-    } else {
-      this.framework.removeClass(
-        this._shareModal,
-        "pswp__share-modal--fade-in"
-      );
-      setTimeout(() => {
-        if (this._shareModalHidden) {
-          this._toggleShareModalClass();
-        }
-      }, 300);
-    }
-
-    if (!this._shareModalHidden) {
-      this._updateShareURLs();
-    }
-    return false;
-  }
-
-  protected _openWindowPopup(e: Event) {
-    e = e || window.event;
-    const target = (e.target || e.srcElement) as HTMLAnchorElement | null;
-
-    this.pswp.shout("shareLinkClick", e, target);
-
-    if (!target || !target.href) {
-      return false;
-    }
-
-    if (target.hasAttribute("download")) {
-      return true;
-    }
-
-    window.open(
-      target.href,
-      "pswp_share",
-      "scrollbars=yes,resizable=yes,toolbar=no," +
-        "location=yes,width=550,height=420,top=100,left=" +
-        (window.screen ? Math.round(screen.width / 2 - 275) : 100)
-    );
-
-    if (!this._shareModalHidden) {
-      this._toggleShareModal();
-    }
-
-    return false;
-  }
-
-  protected _updateShareURLs() {
-    let shareButtonOut = "",
-      shareButtonData: ShareButtonData,
-      shareURL = "",
-      image_url = "",
-      page_url = "",
-      share_text = "";
-
-    if (!this._options.shareButtons) {
-      return;
-    }
-    for (let i = 0; i < this._options.shareButtons.length; i++) {
-      shareButtonData = this._options.shareButtons[i];
-
-      if (this._options.getImageURLForShare) {
-        image_url = this._options.getImageURLForShare(shareButtonData);
-      }
-
-      if (this._options.getPageURLForShare) {
-        page_url = this._options.getPageURLForShare(shareButtonData);
-      }
-
-      if (this._options.getTextForShare) {
-        share_text = this._options.getTextForShare(shareButtonData);
-      }
-
-      shareURL = shareButtonData.url
-        .replace("{{url}}", encodeURIComponent(page_url))
-        .replace("{{image_url}}", encodeURIComponent(image_url))
-        .replace("{{raw_image_url}}", image_url)
-        .replace("{{text}}", encodeURIComponent(share_text));
-
-      shareButtonOut +=
-        '<a href="' +
-        shareURL +
-        '" target="_blank" ' +
-        'class="pswp__share--' +
-        shareButtonData.id +
-        '"' +
-        (shareButtonData.download ? "download" : "") +
-        ">" +
-        shareButtonData.label +
-        "</a>";
-
-      if (this._options.parseShareButtonOut) {
-        shareButtonOut = this._options.parseShareButtonOut(
-          shareButtonData,
-          shareButtonOut
-        );
-      }
-    }
-    this._shareModal.children[0].innerHTML = shareButtonOut;
-    this._shareModal.children[0].onclick = this._openWindowPopup;
   }
 
   protected _hasCloseClass(target: HTMLElement) {
@@ -621,17 +442,9 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
 
           if (classAttr.indexOf("pswp__" + uiElement.name) > -1) {
             if (this._options[uiElement.option]) {
-              // if element is not disabled from options
-
-              this.framework.removeClass(item, "pswp__element--disabled");
-              if (uiElement.onInit) {
+              if (typeof uiElement.onInit === "function") {
                 uiElement.onInit(item);
               }
-
-              //item.style.display = 'block';
-            } else {
-              this.framework.addClass(item, "pswp__element--disabled");
-              //item.style.display = 'none';
             }
           }
         }
@@ -722,10 +535,6 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
 
     // unbind events for UI
     this._listen("unbindEvents", () => {
-      if (!this._shareModalHidden) {
-        this._toggleShareModal();
-      }
-
       if (this._idleInterval) {
         clearInterval(this._idleInterval);
       }
@@ -769,8 +578,8 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
         );
       }
 
-      if (this._shareModal) {
-        this._shareModal.children[0].onclick = null;
+      if (this._shareModal && this._shareModal.children[0]) {
+        (this._shareModal.children[0] as HTMLElement).onclick = null;
       }
       this.framework.removeClass(this._controls, "pswp__ui--over-close");
       this.framework.addClass(this._controls, "pswp__ui--hidden");
@@ -832,10 +641,6 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
       this._overlayUIUpdated = true;
     } else {
       this._overlayUIUpdated = false;
-    }
-
-    if (!this._shareModalHidden) {
-      this._toggleShareModal();
     }
 
     this._countNumItems();
@@ -959,16 +764,11 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
   }
 
   public supportsFullscreen() {
-    const d = document as Document & any;
-    return !!(
-      d.exitFullscreen ||
-      d.mozCancelFullScreen ||
-      d.webkitExitFullscreen ||
-      d.msExitFullscreen
-    );
+    return FullscreenService.supported();
   }
 
-  public getFullscreenAPI(): FullscreenApi {
+  public getFullscreenAPI(): FullscreenService {
+    const fullscreenApi = FullscreenService.getSingleton();
     return {
       enterK: fullscreenApi.enterK,
       exitK: fullscreenApi.exitK,
@@ -984,6 +784,14 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
         return fullscreenApi.exit();
       },
       isFullscreen: fullscreenApi.isFullscreen,
+      toggle: function (el: HTMLElement) {
+        if (this.isFullscreen()) {
+          this.exit();
+          return;
+        } else {
+          this.enter(el);
+        }
+      },
     };
   }
 }

@@ -373,7 +373,7 @@ declare namespace PhotoSwipe {
 /**
  * Base PhotoSwipe class. Derived from http://photoswipe.com/documentation/api.html
  */
-declare class PhotoSwipe<T extends PhotoSwipe.Options> {
+declare class PhotoSwipe<T extends PhotoSwipe.Options, UI = PhotoSwipe.UI<T>> {
   /**
    * Constructs a PhotoSwipe.
    *
@@ -450,7 +450,7 @@ declare class PhotoSwipe<T extends PhotoSwipe.Options> {
   /**
    * The ui instance constructed by PhotoSwipe.
    */
-  ui: PhotoSwipe.UI<T>;
+  ui: UI;
 
   /**
    * The background element (with class .pswp__bg).

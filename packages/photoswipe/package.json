@@ -57,6 +57,7 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
+    "@ribajs/bs4": "workspace:packages/bs4",
     "@ribajs/core": "^1.8.0",
     "@yarnpkg/pnpify": "^2.0.0-rc.20",
     "photoswipe": "^4.1.3"

@@ -22,6 +22,8 @@ export interface ShareButtonData {
    */
   url: string;
 
+  urlTemplate: string;
+
   /**
    * Whether this link is a direct download button or not.
    *

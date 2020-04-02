@@ -59,46 +59,6 @@
 	}
 }
 
-/* pswp__ui--over-close class it added when mouse is over element that should close gallery */
-.pswp__ui--over-close .pswp__button--close {
-	opacity: 1;
-}
-
-.pswp__button,
-.pswp__button--arrow--left:before,
-.pswp__button--arrow--right:before {
-	// background: url(#{$pswp__assets-path}default-skin.png) 0 0 no-repeat;
-	// background-size: 264px 88px;
-	// width: 44px;
-	// height: 44px;
-}
-
-@media (-webkit-min-device-pixel-ratio: 1.1),  (min-resolution: 105dpi), (min-resolution: 1.1dppx) {
-
-	/* Serve SVG sprite if browser supports SVG and resolution is more than 105dpi */
-    .pswp--svg .pswp__button,
-    .pswp--svg .pswp__button--arrow--left:before,
-	.pswp--svg .pswp__button--arrow--right:before {
-        // background-image: url(#{$pswp__assets-path}default-skin.svg);
-    }
-
-    .pswp--svg .pswp__button--arrow--left,
-	.pswp--svg .pswp__button--arrow--right {
-		background: none;
-	}
-}
-
-.pswp__button--close {
-	// background-position: 0 -44px;
-}
-
-.pswp__button--share {
-	// background-position: -44px -44px;
-}
-
-.pswp__button--fs {
-	display: none;
-}
 
 .pswp--supports-fs .pswp__button--fs {
 	display: block;
@@ -118,12 +78,6 @@
 	.toggle-fullscreen-off {
 	    display: inline-block;   
 	}
-}
-
-.pswp__button--zoom {
-	display: none;
-	// background-position: -88px 0;
-	
 }
 
 .pswp--zoom-allowed .pswp__button--zoom {
@@ -163,6 +117,8 @@
 	width: 70px;
 	height: 100px;
 	position: absolute;
+	padding: 5px;
+	background-color: rgba(0,0,0,0.3);
 }
 
 .pswp__button--arrow--left {
@@ -172,160 +128,6 @@
 .pswp__button--arrow--right {
 	right: 0;
 }
-
-.pswp__button--arrow--left:before,
-.pswp__button--arrow--right:before {
-	content: '';
-	top: 35px;
-	background-color: rgba(0,0,0,0.3);
-	height: 30px;
-	width: 32px;
-	position: absolute;
-}
-
-.pswp__button--arrow--left:before {
-	left: 6px;
-	background-position: -138px -44px;
-}
-
-.pswp__button--arrow--right:before {
-	right: 6px;
-	background-position: -94px -44px;
-}
-
-
-/*
-
-	2. Share modal/popup and links
-
- */
-
-.pswp__counter,
-.pswp__share-modal {
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	user-select: none;
-}
-
-.pswp__share-modal {
-	display: block;
-	background: rgba(0, 0, 0, 0.5);
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	padding: 10px;
-	position: absolute;
-	z-index: $pswp__root-z-index + 100;
-	opacity: 0;
-	transition: opacity 0.25s ease-out;
-	-webkit-backface-visibility: hidden;
-	will-change: opacity;
-}
-
-.pswp__share-modal--hidden {
-	display: none;
-}
-
-.pswp__share-tooltip {
-	z-index: $pswp__root-z-index + 120;
-	position: absolute;
-	background: #FFF;
-	top: 56px;
-	border-radius: 2px;
-	display: block;
-	width: auto;
-	right: 44px;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-	transform: translateY(6px);
-	transition: transform 0.25s;
-	-webkit-backface-visibility: hidden;
-	will-change: transform;
-
-	a {
-		display: block;
-		padding: 8px 12px;
-		color: #000;
-		text-decoration: none;
-		font-size: 14px;
-		line-height: 18px;
-
-		&:hover {
-			text-decoration: none;
-			color: #000;
-		}
-
-		
-		&:first-child {
-			/* round corners on the first/last list item */
-			border-radius: 2px 2px 0 0;
-		}
-		
-		&:last-child {
-			border-radius: 0 0 2px 2px;
-		}
-	}
-}
-
-.pswp__share-modal--fade-in {
-	opacity: 1;
-
-	.pswp__share-tooltip {
-		transform: translateY(0);
-	}
-}
-
-/* increase size of share links on touch devices */
-.pswp--touch .pswp__share-tooltip a {
-	padding: 16px 12px;
-}
-
-a.pswp__share--facebook {
-	&:before {
-		content: '';
-		display: block;
-		width: 0;
-		height: 0;
-		position: absolute;
-		top: -12px;
-		right: 15px;
-		border: 6px solid rgba(0, 0, 0, 0);
-		border-bottom-color: #FFF;
-		-webkit-pointer-events: none;
-		-moz-pointer-events: none;
-		pointer-events: none;
-	}
-
-	&:hover {
-		background: #3E5C9A;
-		color: #FFF;
-
-		&:before {
-			border-bottom-color: #3E5C9A;
-		}
-	}
-}
-
-a.pswp__share--twitter {
-	&:hover {
-		background: #55ACEE;
-		color: #FFF;
-	}
-}
-
-a.pswp__share--pinterest {
-	&:hover {
-		background: #CCC;
-		color: #CE272D;
-	}
-}
-
-a.pswp__share--download {
-	&:hover {
-		background: #DDD;
-	}
-}
-
 
 /*
 
@@ -585,10 +387,6 @@ a.pswp__share--download {
 	.pswp__counter {
 		display: none;
 	}
-}
-
-.pswp__element--disabled {
-	display: none !important;
 }
 
 @if $pswp__include-minimal-style == true {
