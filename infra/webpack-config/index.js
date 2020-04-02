@@ -164,7 +164,7 @@ module.exports = config => {
   
       config.copyAssets = {
         enable: true,
-        foldername: 'src',
+        foldername: 'assets',
         // Because we use october to compile the styles we copy the verndor styles to october
         modules: {
           "bootstrap": true,

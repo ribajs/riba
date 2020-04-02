@@ -71,17 +71,22 @@ export class FullscreenService {
     if (!el) {
       el = document.body;
     }
+    if (this.isFullscreen()) {
+      return;
+    }
     if (this.enterK === "webkitRequestFullscreen") {
       el[this.enterK as "requestFullscreen"](
         (Element as any).ALLOW_KEYBOARD_INPUT
       );
     } else {
-      return el[this.enterK as "requestFullscreen"]();
+      el[this.enterK as "requestFullscreen"]();
     }
   }
 
   public exit() {
-    return document[this.exitK as "exitFullscreen"]();
+    if (this.isFullscreen()) {
+      document[this.exitK as "exitFullscreen"]();
+    }
   }
 
   public isFullscreen() {

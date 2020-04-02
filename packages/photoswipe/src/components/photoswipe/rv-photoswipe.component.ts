@@ -579,11 +579,14 @@ export class PhotoswipeComponent extends Component {
   }
 
   protected initShareButton() {
-    this.shareDropdown = new DropdownService(
-      this.el.querySelector(".dropdown-toggle-share") as
-        | HTMLButtonElement
-        | HTMLAnchorElement
-    );
+    const dropDownButtonElement = this.el.querySelector(
+      ".dropdown-toggle-share"
+    ) as HTMLButtonElement | HTMLAnchorElement;
+    if (!dropDownButtonElement) {
+      console.warn('Element with selector ".dropdown-toggle-share" not found!');
+      return;
+    }
+    this.shareDropdown = new DropdownService();
   }
 
   protected initFullscreenTemplate() {
