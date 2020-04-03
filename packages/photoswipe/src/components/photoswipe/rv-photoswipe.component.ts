@@ -548,12 +548,12 @@ export class PhotoswipeComponent extends Component {
         this.images[i].src;
       const width =
         this.images[i].dataset.fsWidth ||
-        this.images[i].naturalWidth ||
-        this.images[i].width;
+        this.images[i].width ||
+        this.images[i].naturalWidth;
       const height =
         this.images[i].dataset.fsHeight ||
-        this.images[i].naturalHeight ||
-        this.images[i].height;
+        this.images[i].height ||
+        this.images[i].naturalHeight;
       if (!src || !width || !height) {
         console.warn(
           "[rv-photoswipe] image element found without src, width or height. Ignoring.."
