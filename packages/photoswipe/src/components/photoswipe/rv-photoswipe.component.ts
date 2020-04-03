@@ -13,6 +13,7 @@ interface Scope {
   items: PhotoSwipe.Item[];
   isFullscreen: boolean;
   isZoomed: boolean;
+  isZoomAllowed: boolean;
   zoomLevel: number;
   shareButtons: ShareButtonData[];
 
@@ -82,13 +83,8 @@ export class PhotoswipeComponent extends Component {
     getThumbBoundsFn: this.getThumbBoundsFn.bind(this),
 
     // Buttons/elements
-    closeEl: false,
     captionEl: false,
-    fullscreenEl: false,
-    zoomEl: false,
-    shareEl: true,
     counterEl: false,
-    arrowEl: false,
     preloaderEl: true,
 
     closeElClasses: [], // 'item', 'caption', 'zoom-wrap', 'ui', 'top-bar'
@@ -134,7 +130,10 @@ export class PhotoswipeComponent extends Component {
     items: [],
     isFullscreen: false,
     isZoomed: false,
+    isZoomAllowed: false,
     zoomLevel: 0,
+
+    // TODO move this to a custom share component
     shareButtons: [
       {
         id: "facebook",
@@ -212,7 +211,7 @@ export class PhotoswipeComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    console.debug("constructor", this);
+    // console.debug("constructor", this);
   }
 
   protected connectedCallback() {
@@ -256,7 +255,10 @@ export class PhotoswipeComponent extends Component {
    * (after content changed)
    */
   protected onAfterChange() {
-    // console.debug("onAfterChange", this.pswp?.currItem);
+    console.debug("onAfterChange", this.pswp?.currItem);
+    setTimeout(() => {
+      this.scope.isZoomAllowed = this.isZoomAllowed();
+    }, 0);
   }
 
   /**
@@ -273,6 +275,7 @@ export class PhotoswipeComponent extends Component {
    */
   protected onResize() {
     // console.debug("onResize", this.pswp?.currItem);
+    this.scope.isZoomAllowed = this.isZoomAllowed();
   }
 
   /**
@@ -289,19 +292,30 @@ export class PhotoswipeComponent extends Component {
   protected onMouseUsed() {
     // console.debug("onMouseUsed");
   }
-
+  /**
+   * Opening zoom in animation starting
+   */
   protected onInitialZoomIn() {
     // console.debug("onInitialZoomIn");
   }
 
+  /**
+   * Opening zoom in animation finished
+   */
   protected onInitialZoomInEnd() {
     // console.debug("onInitialZoomInEnd");
   }
 
+  /**
+   * Closing zoom out animation started
+   */
   protected onInitialZoomOut() {
     // console.debug("onInitialZoomOut");
   }
 
+  /**
+   * Closing zoom out animation finished
+   */
   protected onInitialZoomOutEnd() {
     // console.debug("onInitialZoomOutEnd");
   }
@@ -310,34 +324,78 @@ export class PhotoswipeComponent extends Component {
     // console.debug("onParseVerticalMargin");
   }
 
+  /**
+   * Gallery unbinds events
+   * (triggers before closing animation)
+   */
   protected onUnbindEvents() {
     // console.debug("onUnbindEvents");
     this.shareDropdown?.close();
   }
 
+  /**
+   * Gallery starts closing
+   */
   protected onClose() {
     // console.debug("onClose");
     this.pswp?.ui?.getFullscreenAPI()?.exit();
     this.shareDropdown?.close();
+    this.scope.isZoomAllowed = false;
   }
 
+  /**
+   * After gallery is closed and closing animation finished.
+   * lean up your stuff here.
+   */
   protected onDestroy() {
     // console.debug("onDestroy");
     this.shareDropdown?.close();
   }
 
+  /**
+   * Called when the page scrolls.
+   * The callback is passed an offset with properties {x: number, y: number}.
+   *
+   * PhotoSwipe uses the offset to determine the top-left of the template,
+   * which by default is the top-left of the viewport. When using modal: false,
+   * you should listen to this event (before calling .init()) and modify the offset
+   * with the template's getBoundingClientRect().
+   *
+   * Look at the "Implementing inline gallery display" FAQ section for more info.
+   */
   protected onUpdateScrollOffset() {
     // console.debug("onUpdateScrollOffset");
   }
 
   /**
-   *
+   * Allow to call preventDefault on down and up events
    * @param e original event
    * @param isDown true = drag start, false = drag release
    * @param preventObj
    */
-  protected onPreventDragEvent(/*e: Event, isDown: boolean, preventObj: any*/) {
+  protected onPreventDragEvent(e: Event, isDown: boolean, preventObj: any) {
     // console.debug("onPreventDragEvent", e, isDown, preventObj);
+
+    // e - original event
+    // isDown - true = drag start, false = drag release
+
+    // Line below will force e.preventDefault() on:
+    // touchstart/mousedown/pointerdown events
+    // as well as on:
+    // touchend/mouseup/pointerup events
+    preventObj.prevent = true;
+  }
+
+  /**
+   * Share link clicked
+   */
+  protected onShareLinkClick(/*event: Event, target: HTMLAnchorElement*/) {
+    // console.debug("onShareLinkClick");
+    // e - original click event
+    // target - link that was clicked
+    // If `target` has `href` attribute and
+    // does not have `download` attribute -
+    // share modal window will popup
   }
 
   // Scope methods
@@ -358,9 +416,8 @@ export class PhotoswipeComponent extends Component {
     this.pswp?.prev();
   }
 
+  // TODO move this to a custom share component
   public share() {
-    console.debug("share");
-    // this.pswp?.ui?.toggleShareModal();
     this.updateShareURLs();
     return this.shareDropdown?.toggle();
   }
@@ -423,6 +480,10 @@ export class PhotoswipeComponent extends Component {
       this.addPswpEventListeners();
       this.pswp.init();
 
+      this.scope.isZoomAllowed = this.isZoomAllowed();
+
+      console.debug("isZoomAllowed", this.scope.isZoomAllowed);
+
       //add listener
     } else {
       console.error("[rv-photoswipe] failed to get index of item ", item);
@@ -452,6 +513,11 @@ export class PhotoswipeComponent extends Component {
       "updateScrollOffset",
       this.onUpdateScrollOffset.bind(this)
     );
+    this.pswp?.listen("shareLinkClick", this.onShareLinkClick.bind(this));
+  }
+
+  protected isZoomAllowed() {
+    return !!this.pswpElement?.classList.contains("pswp--zoom-allowed");
   }
 
   protected removeEventListeners() {
@@ -467,8 +533,6 @@ export class PhotoswipeComponent extends Component {
     this.images = Array.from(
       this.el.querySelectorAll(this.scope.itemsSelector)
     );
-
-    console.debug("setItems ", this.scope.itemsSelector, this.images);
 
     for (let i = 0; i < this.images.length; i++) {
       if (this.scope.openImageOnClick) {
@@ -545,6 +609,7 @@ export class PhotoswipeComponent extends Component {
     }
   }
 
+  // TODO move this to a custom share component
   public openShareWindowPopup(
     binding: any,
     event: Event,

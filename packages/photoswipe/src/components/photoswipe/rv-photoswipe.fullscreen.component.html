@@ -20,45 +20,42 @@
         <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
         <div class="pswp__ui pswp__ui--hidden">
 
-            <div class="pswp__top-bar d-flex align-items-center justify-content-end">
+            <div class="pswp__top-bar">
 
-                <!--  Controls are self-explanatory. Order can be changed.-->
+                <div class="pswp__top-bar-left">
+                    <div class="pswp__counter"></div>
+                </div>
 
-                <div class="pswp__counter"></div>
-
-                <div class="dropdown" rv-if="controlShareIconShow">
-                    <bs4-icon rv-size="controlShareIconSize" rv-on-click="share" role="button" aria-haspopup="true" aria-expanded="false" id="dropdownShare" class="pswp__button dropdown-toggle-share" rv-src="controlShareIconSrc" title="Share"></bs4-icon>
-                    <div class="dropdown-menu" aria-labelledby="dropdownShare">
-                        <a rv-download="button.download" target="_blank" rv-each-button="shareButtons" rv-on-click="openShareWindowPopup" class="dropdown-item" rv-href="button.url" rv-html="button.label"></a>
+                <div class="pswp__top-bar-middle">
+                    <div class="pswp__caption">
+                        <div class="pswp__caption__center"></div>
                     </div>
                 </div>
 
-                <bs4-icon rv-hide="isZoomed" rv-size="controlZoomInIconSize" size="32" rv-on-click="toggleZoom" class="pswp__button" rv-if="controlZoomInIconShow" rv-src="controlZoomInIconSrc" title="Zoom in"></bs4-icon>
-                <bs4-icon rv-show="isZoomed" rv-size="controlZoomOutIconSize" rv-on-click="toggleZoom" class="pswp__button" rv-if="controlZoomOutIconShow" rv-src="controlZoomOutIconSrc" title="Zoom out"></bs4-icon>
 
-                <bs4-icon rv-hide="isFullscreen" rv-size="controlFullscreenOnIconSize" rv-on-click="toggleFullscreen" class="pswp__button" rv-if="controlFullscreenOnIconShow" rv-src="controlFullscreenOnIconSrc" title="Go to fullscreen"></bs4-icon>
-                <bs4-icon rv-show="isFullscreen" rv-size="controlFullscreenOffIconSize" rv-on-click="toggleFullscreen" class="pswp__button" rv-if="controlFullscreenOffIconShow" rv-src="controlFullscreenOffIconSrc" title="Leave fullscreen"></bs4-icon>
+                <div class="pswp__top-bar-right">
 
-                <bs4-icon rv-on-click="close" rv-size="controlCloseIconSize" class="pswp__button" rv-if="controlCloseIconShow" rv-src="controlCloseIconSrc" title="Close (Esc)"></bs4-icon>
-
-                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                      <div class="pswp__preloader__cut">
-                        <div class="pswp__preloader__donut"></div>
-                      </div>
+                    <div class="dropdown" rv-if="controlShareIconShow">
+                        <bs4-icon rv-size="controlShareIconSize" rv-on-click="share" role="button" aria-haspopup="true" aria-expanded="false" id="dropdownShare" class="pswp__button dropdown-toggle-share" rv-src="controlShareIconSrc" title="Share"></bs4-icon>
+                        <div class="dropdown-menu" aria-labelledby="dropdownShare">
+                            <a rv-download="button.download" target="_blank" rv-each-button="shareButtons" rv-on-click="openShareWindowPopup" class="dropdown-item" rv-href="button.url" rv-html="button.label"></a>
+                        </div>
                     </div>
+
+                    <bs4-icon rv-hide="isZoomed" rv-size="controlZoomInIconSize" size="32" rv-on-click="toggleZoom" class="pswp__button" rv-if="controlZoomInIconShow | and isZoomAllowed" rv-src="controlZoomInIconSrc" title="Zoom in"></bs4-icon>
+                    <bs4-icon rv-show="isZoomed" rv-size="controlZoomOutIconSize" rv-on-click="toggleZoom" class="pswp__button" rv-if="controlZoomOutIconShow | and isZoomAllowed" rv-src="controlZoomOutIconSrc" title="Zoom out"></bs4-icon>
+
+                    <bs4-icon rv-hide="isFullscreen" rv-size="controlFullscreenOnIconSize" rv-on-click="toggleFullscreen" class="pswp__button" rv-if="controlFullscreenOnIconShow" rv-src="controlFullscreenOnIconSrc" title="Go to fullscreen"></bs4-icon>
+                    <bs4-icon rv-show="isFullscreen" rv-size="controlFullscreenOffIconSize" rv-on-click="toggleFullscreen" class="pswp__button" rv-if="controlFullscreenOffIconShow" rv-src="controlFullscreenOffIconSrc" title="Leave fullscreen"></bs4-icon>
+
+                    <bs4-icon rv-on-click="close" rv-size="controlCloseIconSize" class="pswp__button" rv-if="controlCloseIconShow" rv-src="controlCloseIconSrc" title="Close (Esc)"></bs4-icon>
                 </div>
+
             </div>
 
-            <bs4-icon rv-size="controlPrevIconSize" rv-on-click="prev" direction="left" class="pswp__button pswp__button--arrow--left" rv-if="controlPrevIconShow" rv-src="controlPrevIconSrc" title="Previous (arrow left)"></bs4-icon>
+            <bs4-icon rv-size="controlPrevIconSize" rv-on-click="prev" direction="left" class="pswp__button pswp-control-prev" rv-if="controlPrevIconShow" rv-src="controlPrevIconSrc" title="Previous (arrow left)"></bs4-icon>
 
-            <bs4-icon rv-size="controlPrevIconSize" rv-on-click="next" direction="right" class="pswp__button pswp__button--arrow--right" rv-if="controlNextIconShow" rv-src="controlNextIconSrc" title="Next (arrow right)"></bs4-icon>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
+            <bs4-icon rv-size="controlPrevIconSize" rv-on-click="next" direction="right" class="pswp__button pswp-control-next" rv-if="controlNextIconShow" rv-src="controlNextIconSrc" title="Next (arrow right)"></bs4-icon>
 
         </div>
 

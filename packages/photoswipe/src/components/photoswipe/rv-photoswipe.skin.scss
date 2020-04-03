@@ -59,61 +59,12 @@
 	}
 }
 
-.pswp__button,
-.pswp__button--arrow--left:before,
-.pswp__button--arrow--right:before {
-	// background: url(#{$pswp__assets-path}default-skin.png) 0 0 no-repeat;
-	// background-size: 264px 88px;
-	// width: 44px;
-	// height: 44px;
-}
-
-@media (-webkit-min-device-pixel-ratio: 1.1),  (min-resolution: 105dpi), (min-resolution: 1.1dppx) {
-
-	/* Serve SVG sprite if browser supports SVG and resolution is more than 105dpi */
-    .pswp--svg .pswp__button,
-    .pswp--svg .pswp__button--arrow--left:before,
-	.pswp--svg .pswp__button--arrow--right:before {
-        // background-image: url(#{$pswp__assets-path}default-skin.svg);
-    }
-
-    .pswp--svg .pswp__button--arrow--left,
-	.pswp--svg .pswp__button--arrow--right {
-		background: none;
-	}
-}
-
-.pswp--zoom-allowed .pswp__button--zoom {
-	display: block;
-	.icon_zoom-out_alt {
-	    display: none;   
-	}
-}
-
-.pswp--zoomed-in .pswp__button--zoom {
-	// background-position: -132px 0;
-	.icon_zoom-out_alt {
-	    display: inline-block;   
-	}
-	.icon_zoom-in_alt {
-	    display: none;   
-	}
-}
-
-/* no arrows on touch screens */
-.pswp--touch {
-	.pswp__button--arrow--left,
-	.pswp__button--arrow--right {
-		visibility: hidden;		
-	}
-}
-
 /*
 	Arrow buttons hit area
 	(icon is added to :before pseudo-element)
 */
-.pswp__button--arrow--left,
-.pswp__button--arrow--right {
+.pswp-control-prev,
+.pswp-control-next {
 	background: none;
 	top: 50%;
 	margin-top: -50px;
@@ -121,16 +72,19 @@
 	height: 100px;
 	position: absolute;
 	padding: 5px;
-	background-color: rgba(0,0,0,0.3);
+	background-color: $pswp-control-prev-next-bg-color;
+	color: $pswp-control-prev-next-icons-color;
+	backdrop-filter: blur($pswp-control-prev-next-blur);
 }
 
-.pswp__button--arrow--left {
+.pswp-control-prev {
 	left: 0;
 }
 
-.pswp__button--arrow--right {
+.pswp-control-next {
 	right: 0;
 }
+
 
 /*
 
@@ -189,117 +143,6 @@
 	visibility: hidden;
 }
 
-
-/*
-
-	5. Loading indicator (preloader)
-
-	You can play with it here - http://codepen.io/dimsemenov/pen/yyBWoR
-
- */
-
-.pswp__preloader {
-	width: 44px;
-	height: 44px;
-	position: absolute;
-	top: 0;
-	left: 50%;
-	margin-left: -22px;
-	opacity: 0;
-	transition: opacity 0.25s ease-out; 
-	will-change: opacity;
-	direction: ltr;
-}
-
-.pswp__preloader__icn {
-	width: 20px;
-	height: 20px;
-	margin: 12px;
-}
-
-.pswp__preloader--active {
-	opacity: 1;
-
-	.pswp__preloader__icn {
-		/* We use .gif in browsers that don't support CSS animation */
-		background: url(#{$pswp__assets-path}preloader.gif) 0 0 no-repeat;
-	}
-}
-
-.pswp--css_animation {
-	.pswp__preloader--active {
-		opacity: 1;
-
-		.pswp__preloader__icn {
-			animation: clockwise 500ms linear infinite;
-		}
-
-		.pswp__preloader__donut {
-			animation: donut-rotate 1000ms cubic-bezier(.4,0,.22,1) infinite;
-		}
-	}
-	
-	.pswp__preloader__icn {
-		background: none;
-		opacity: 0.75;
-		width: 14px;
-		height: 14px;
-		position: absolute;
-		left: 15px;
-		top: 15px;
-		margin: 0;
-	}
-
-	
-	.pswp__preloader__cut {
-		/* 
-			The idea of animating inner circle is based on Polymer ("material") loading indicator 
-			 by Keanu Lee https://blog.keanulee.com/2014/10/20/the-tale-of-three-spinners.html
-		*/
-		position: relative;
-		width: 7px;
-		height: 14px;
-		overflow: hidden;
-	}
-
-	.pswp__preloader__donut {
-		box-sizing: border-box;
-		width: 14px;
-		height: 14px;
-		border: 2px solid #FFF;
-		border-radius: 50%;
-		border-left-color: transparent;
-		border-bottom-color: transparent;
-		position: absolute;
-		top: 0;
-		left: 0;
-		background: none;
-		margin: 0;
-	}
-}
-
-@media screen and (max-width: 1024px) {
-	.pswp__preloader {
-		position: relative;
-		left: auto;
-		top: auto;
-		margin: 0;
-		float: right;
-	}
-}
-
-@keyframes clockwise {
-  0% { transform: rotate(0deg) }
-  100% { transform: rotate(360deg) }
-}
-
-@keyframes donut-rotate {
-  0% { transform: rotate(0) }
-  50% { transform: rotate(-140deg) }
-  100% { transform: rotate(0) }
-}
-
-
 /*
 	
 	6. Additional styles
@@ -311,41 +154,49 @@
 	-webkit-font-smoothing: auto;
 	visibility: visible;
 	opacity: 1;
-	z-index: $pswp__root-z-index + 50;
+	z-index: $pswp-root-z-index + 50;
 }
 
 /* top black bar with buttons and "1 of X" indicator */
 .pswp__top-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
 	position: absolute;
 	left: 0;
 	top: 0;
 	height: 44px;
 	width: 100%;
-	backdrop-filter: blur(2px);
-	// TODO sass variable
-	color: black;
+	backdrop-filter: blur($pswp-top-bar-blur);
+	color: $pswp-top-bar-icons-color;
+	.pswp__top-bar-left, .pswp__top-bar-middle, .pswp__top-bar-right {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 }
 
 .pswp__caption,
 .pswp__top-bar,
-.pswp--has_mouse .pswp__button--arrow--left,
-.pswp--has_mouse .pswp__button--arrow--right {
+.pswp--has_mouse .pswp-control-prev,
+.pswp--has_mouse .pswp-control-next {
 	-webkit-backface-visibility: hidden; 
 	will-change: opacity;
-	transition: opacity $pswp__controls-transition-duration cubic-bezier(.4,0,.22,1);
+	transition: opacity $pswp-controls-transition-duration cubic-bezier(.4,0,.22,1);
 }
 
 /* pswp--has_mouse class is added only when two subsequent mousemove events occur */
 .pswp--has_mouse {
-	.pswp__button--arrow--left,
-	.pswp__button--arrow--right {
+	.pswp-control-prev,
+	.pswp-control-next {
 		visibility: visible;
 	}
 }
 
 .pswp__top-bar,
 .pswp__caption {
-	background-color: rgba(255,255,255,0.5);
+	background-color: $pswp-top-bar-bg-color;
 }
 
 /* pswp__ui--fit class is added when main image "fits" between top bar and bottom bar (caption) */
@@ -363,8 +214,8 @@
 		opacity: 0; 
 	}
 
-	.pswp__button--arrow--left,
-	.pswp__button--arrow--right {
+	.pswp-control-prev,
+	.pswp-control-next {
 		opacity: 0;
 	}
 }
@@ -376,8 +227,8 @@
 .pswp__ui--hidden {
 	.pswp__top-bar,
 	.pswp__caption,
-	.pswp__button--arrow--left,
-	.pswp__button--arrow--right {
+	.pswp-control-prev,
+	.pswp-control-next {
 		/* Force paint & create composition layer for controls. */
 		opacity: 0.001; 
 	}
@@ -385,14 +236,14 @@
 
 /* pswp__ui--one-slide class is added when there is just one item in gallery */
 .pswp__ui--one-slide {
-	.pswp__button--arrow--left,
-	.pswp__button--arrow--right,
+	.pswp-control-prev,
+	.pswp-control-next,
 	.pswp__counter {
 		display: none;
 	}
 }
 
-@if $pswp__include-minimal-style == true {
+@if $pswp-include-minimal-style == true {
 	.pswp--minimal--dark {
 		.pswp__top-bar {
 			background: none;

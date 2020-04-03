@@ -96,8 +96,8 @@ declare namespace PhotoSwipe {
      * .pswp__bg,
      * .pswp__caption,
      * .pswp__top-bar,
-     * .pswp--has_mouse .pswp__button--arrow--left,
-     * .pswp--has_mouse .pswp__button--arrow--right{
+     * .pswp--has_mouse .pswp-control-prev,
+     * .pswp--has_mouse .pswp-control-next{
      *     -webkit-transition: opacity 333ms cubic-bezier(.4,0,.22,1);
      *     transition: opacity 333ms cubic-bezier(.4,0,.22,1);
      * }

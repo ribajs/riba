@@ -7,10 +7,10 @@
  * Built just using public methods/properties of PhotoSwipe.
  */
 
-import { Item, ShareButtonData, Options, UIElement } from "../types";
+import { Item, Options, UIElement } from "../types";
 import * as PhotoSwipe from "photoswipe";
 
-import { FullscreenService } from "./fullscreen.service";
+import { FullscreenService } from "@ribajs/extras";
 
 export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
   _overlayUIUpdated = false;
@@ -26,9 +26,6 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
   _initalCloseOnScrollValue: any;
   _isIdle: any;
   _listen: PhotoSwipe<Options>["listen"];
-  _loadingIndicator: any;
-  _loadingIndicatorHidden = false;
-  _loadingIndicatorTimeout: any;
   _galleryHasOneSlide: any;
   _options: Options = {};
   _defaultUIOptions = {
@@ -36,7 +33,6 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
     closeElClasses: ["item", "caption", "zoom-wrap", "ui", "top-bar"],
     timeToIdle: 4000,
     timeToIdleOutside: 1000,
-    loadingIndicatorDelay: 1000, // 2s
 
     addCaptionHTMLFn: function (
       item: Item,
@@ -50,56 +46,13 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
       captionEl.children[0].innerHTML = item.title;
       return true;
     },
-
-    closeEl: true,
     captionEl: true,
-    fullscreenEl: true,
-    zoomEl: true,
-    shareEl: true,
     counterEl: true,
-    arrowEl: true,
-    preloaderEl: true,
 
     tapToClose: false,
     tapToToggleControls: true,
 
     clickToCloseNonZoomable: true,
-
-    shareButtons: [
-      {
-        id: "facebook",
-        label: "Share on Facebook",
-        url: "https://www.facebook.com/sharer/sharer.php?u={{url}}",
-      },
-      {
-        id: "twitter",
-        label: "Tweet",
-        url: "https://twitter.com/intent/tweet?text={{text}}&url={{url}}",
-      },
-      {
-        id: "pinterest",
-        label: "Pin it",
-        url:
-          "http://www.pinterest.com/pin/create/button/" +
-          "?url={{url}}&media={{image_url}}&description={{text}}",
-      },
-      {
-        id: "download",
-        label: "Download image",
-        url: "{{raw_image_url}}",
-        download: true,
-      },
-    ] as ShareButtonData[],
-
-    getImageURLForShare: (/* shareButtonData */) => {
-      return this.pswp.currItem.src || "";
-    },
-    getPageURLForShare: (/* shareButtonData */) => {
-      return window.location.href;
-    },
-    getTextForShare: (/* shareButtonData */) => {
-      return (this.pswp.currItem as Item).title || "";
-    },
 
     indexIndicatorSep: " / ",
     fitControlsWidth: 1200,
@@ -124,13 +77,6 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
       option: "counterEl",
       onInit: (el: HTMLElement) => {
         this._indexIndicator = el;
-      },
-    },
-    {
-      name: "preloader",
-      option: "preloaderEl",
-      onInit: (el: HTMLElement) => {
-        this._loadingIndicator = el;
       },
     },
   ] as UIElement[];
@@ -216,35 +162,6 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
     }
   }
 
-  protected _toggleShareModalClass() {
-    if (!this._shareModal) {
-      console.error("Share modal element not found");
-      return;
-    }
-    this._togglePswpClass(
-      this._shareModal,
-      "share-modal--hidden",
-      this._shareModalHidden
-    );
-  }
-
-  protected _hasCloseClass(target: HTMLElement) {
-    if (!this._options.closeElClasses) {
-      return false;
-    }
-    for (let i = 0; i < this._options.closeElClasses.length; i++) {
-      if (
-        this.framework.hasClass(
-          target,
-          "pswp__" + this._options.closeElClasses[i]
-        )
-      ) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   protected _onIdleMouseMove() {
     clearTimeout(this._idleTimer);
     this._idleIncrement = 0;
@@ -265,7 +182,7 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
   }
 
   protected _setupFullscreenAPI() {
-    if (this._options.fullscreenEl && !this.framework.features.isOldAndroid) {
+    if (!this.framework.features.isOldAndroid) {
       if (!this._fullscrenAPI) {
         this._fullscrenAPI = this.getFullscreenAPI();
       }
@@ -280,46 +197,6 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
       } else {
         this.framework.removeClass(this.pswp.template, "pswp--supports-fs");
       }
-    }
-  }
-
-  protected _setupLoadingIndicator() {
-    // Setup loading indicator
-    if (this._options.preloaderEl) {
-      this._toggleLoadingIndicator(true);
-
-      this._listen("beforeChange", () => {
-        clearTimeout(this._loadingIndicatorTimeout);
-
-        // display loading indicator with delay
-        this._loadingIndicatorTimeout = setTimeout(() => {
-          if (this.pswp.currItem && this.pswp.currItem.loading) {
-            if (
-              !this.pswp.allowProgressiveImg() ||
-              (this.pswp.currItem.img && !this.pswp.currItem.img.naturalWidth)
-            ) {
-              // show preloader if progressive loading is not enabled,
-              // or image width is not defined yet (because of slow connection)
-              this._toggleLoadingIndicator(false);
-              // items-controller.js function allowProgressiveImg
-            }
-          } else {
-            this._toggleLoadingIndicator(true); // hide preloader
-          }
-        }, this._options.loadingIndicatorDelay);
-      });
-      this._listen("imageLoadComplete", (index: number, item: Item) => {
-        if (this.pswp.currItem === item) {
-          this._toggleLoadingIndicator(true);
-        }
-      });
-    }
-  }
-
-  protected _toggleLoadingIndicator(hide: boolean) {
-    if (this._loadingIndicatorHidden !== hide) {
-      this._togglePswpClass(this._loadingIndicator, "preloader--active", !hide);
-      this._loadingIndicatorHidden = hide;
     }
   }
 
@@ -523,14 +400,6 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
         "pswpTap",
         this.onGlobalTap.bind(this)
       );
-
-      if (!this.pswp.likelyTouchDevice) {
-        this.framework.bind(
-          this.pswp.scrollWrap,
-          "mouseover",
-          this.onMouseOver.bind(this)
-        );
-      }
     });
 
     // unbind events for UI
@@ -546,11 +415,6 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
         this._onControlsTap
       );
       this.framework.unbind(this.pswp.scrollWrap, "pswpTap", this.onGlobalTap);
-      this.framework.unbind(
-        this.pswp.scrollWrap,
-        "mouseover",
-        this.onMouseOver
-      );
 
       if (this._fullscrenAPI) {
         this.framework.unbind(
@@ -581,7 +445,6 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
       if (this._shareModal && this._shareModal.children[0]) {
         (this._shareModal.children[0] as HTMLElement).onclick = null;
       }
-      this.framework.removeClass(this._controls, "pswp__ui--over-close");
       this.framework.addClass(this._controls, "pswp__ui--hidden");
       this.setIdle(false);
     });
@@ -602,17 +465,11 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
 
     this._setupUIElements();
 
-    if (this._options.shareEl && this._shareButton && this._shareModal) {
-      this._shareModalHidden = true;
-    }
-
     this._countNumItems();
 
     this._setupIdle();
 
     this._setupFullscreenAPI();
-
-    this._setupLoadingIndicator();
   }
 
   public setIdle(isIdle: boolean) {
@@ -690,12 +547,6 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
       (e as CustomEvent).detail.pointerType === "mouse" &&
       target
     ) {
-      // close gallery if clicked outside of the image
-      if (this._hasCloseClass(target)) {
-        this.pswp.close();
-        return;
-      }
-
       if (this.framework.hasClass(target, "pswp__img")) {
         if (
           this.pswp.getZoomLevel() === 1 &&
@@ -717,37 +568,7 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
           this.showControls();
         }
       }
-
-      // tap to close gallery
-      if (
-        this._options.tapToClose &&
-        target &&
-        (this.framework.hasClass(target, "pswp__img") ||
-          this._hasCloseClass(target))
-      ) {
-        this.pswp.close();
-        return;
-      }
     }
-  }
-
-  public onMouseOver(e: MouseEvent) {
-    e = e || window.event;
-    const target = (e?.target || e?.srcElement || null) as
-      | (HTMLElement & EventTarget)
-      | null;
-
-    if (!target) {
-      console.warn("Event target nt found!");
-      return;
-    }
-
-    // add class when mouse is over an element that should close the gallery
-    this._togglePswpClass(
-      this._controls,
-      "ui--over-close",
-      this._hasCloseClass(target)
-    );
   }
 
   public hideControls() {
