@@ -264,7 +264,7 @@ export class PhotoswipeComponent extends Component {
    * @param index index of a slide that was loaded
    * @param item slide object
    */
-  protected onImageLoadComplete(index: number, item: PhotoSwipe.Item) {
+  protected onImageLoadComplete(/*index: number, item: PhotoSwipe.Item*/) {
     // console.debug("imageLoadComplete", index, item);
   }
 
@@ -282,7 +282,7 @@ export class PhotoswipeComponent extends Component {
    * @param index index of a slide that was loaded
    * @param item slide object
    */
-  protected onGettingData(index: number, item: PhotoSwipe.Item) {
+  protected onGettingData(/*index: number, item: PhotoSwipe.Item*/) {
     // console.debug("onGettingData", index, item);
   }
 
@@ -468,9 +468,9 @@ export class PhotoswipeComponent extends Component {
       this.el.querySelectorAll(this.scope.itemsSelector)
     );
 
-    for (let i = 0; i < this.images.length; i++) {
-      console.log(this.images[i]);
+    console.debug("setItems ", this.scope.itemsSelector, this.images);
 
+    for (let i = 0; i < this.images.length; i++) {
       if (this.scope.openImageOnClick) {
         this.images[i].addEventListener(
           "click",
@@ -586,7 +586,7 @@ export class PhotoswipeComponent extends Component {
       console.warn('Element with selector ".dropdown-toggle-share" not found!');
       return;
     }
-    this.shareDropdown = new DropdownService();
+    this.shareDropdown = new DropdownService(dropDownButtonElement);
   }
 
   protected initFullscreenTemplate() {
@@ -599,11 +599,11 @@ export class PhotoswipeComponent extends Component {
     console.debug("afterBind", this.scope);
     await super.afterBind();
 
+    this.setItems();
+
     this.initFullscreenTemplate();
 
     this.initShareButton();
-
-    this.setItems();
 
     const hashData = this.parseHash();
     if (hashData.pid && hashData.gid) {
