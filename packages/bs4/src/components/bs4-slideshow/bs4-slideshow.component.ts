@@ -693,7 +693,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     if (!this.continuousAutoplayIntervalIndex) {
       // intervals are depending on the autoscrolling speed (autoplayVelocity)
       const intervalsTimeMs = this.scope.autoplayVelocity * 10000;
-      console.debug('intervalsTimeMs', intervalsTimeMs);
+      // console.debug('intervalsTimeMs', intervalsTimeMs);
       this.continuousAutoplayIntervalIndex = window.setInterval(this.onScrollend.bind(this), intervalsTimeMs);
     }
   }
@@ -901,7 +901,6 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     let prevIndex = currentIndex - this.scope.slidesToScroll;
 
     if (prevIndex < 0) {
-      console.debug('prevIndex', (this.slideElements.length - 1), prevIndex);
       prevIndex = (this.slideElements.length - 1) + (prevIndex + 1);
     }
 
