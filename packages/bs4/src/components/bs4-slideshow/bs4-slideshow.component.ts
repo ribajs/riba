@@ -371,6 +371,11 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     let top = 0;
     let left = 0;
 
+    if (!this.scope.items[index]) {
+      console.error(`Slide with index "${index}" not found!`, this.scope.items[index]);
+      return;
+    }
+
     if (this.scope.angle === 'vertical') {
       // Check if we do not need to slide
       if (this.scope.items[index].position.centerY === 0) {
@@ -896,16 +901,9 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     let prevIndex = currentIndex - this.scope.slidesToScroll;
 
     if (prevIndex < 0) {
-      prevIndex = (this.slideElements.length - 1) - prevIndex;
+      console.debug('prevIndex', (this.slideElements.length - 1), prevIndex);
+      prevIndex = (this.slideElements.length - 1) + (prevIndex + 1);
     }
-
-    // if (!this.isScrollableToIndex(prevIndex)) {
-    //   prevIndex--;
-    // }
-
-    // if (prevIndex < 0) {
-    //   prevIndex = (this.slideElements.length - 1) - prevIndex;
-    // }
 
     return this.goTo(prevIndex);
   }
