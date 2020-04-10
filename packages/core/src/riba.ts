@@ -9,7 +9,7 @@ import {
 import { Utils } from "./services/utils";
 import { parseTemplate, parseType } from "./parsers";
 import { Binding } from "./binding";
-import { starBinder } from "./binders/attribute.binder";
+import { attributeBinder } from "./binders/attribute.binder";
 
 import { View } from "./view";
 import { Observer } from "./observer";
@@ -20,7 +20,7 @@ export class Riba {
    * Sets the attribute on the element. If no binder above is matched it will fall
    * back to using this binder.
    */
-  public static fallbackBinder = starBinder;
+  public static fallbackBinder = attributeBinder;
 
   /**
    * Default event handler, calles the function defined in his binder
@@ -169,7 +169,7 @@ export class Riba {
       formatters: {} as Formatters,
 
       // other
-      starBinders: {},
+      attributeBinders: {},
 
       // sightglass
       rootInterface: {} as Root,
@@ -249,9 +249,9 @@ export class Riba {
       viewOptions.adapters
     );
 
-    // get all starBinders from available binders
+    // get all attributeBinders from available binders
     if (viewOptions.binders) {
-      viewOptions.starBinders = Object.keys(viewOptions.binders).filter(
+      viewOptions.attributeBinders = Object.keys(viewOptions.binders).filter(
         (key) => {
           return key.indexOf("*") >= 1; // Should start with *
         }

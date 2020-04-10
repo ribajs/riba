@@ -230,7 +230,7 @@ export class View {
     let block = this.options.blockNodeNames.includes(node.nodeName);
     const attributes = node.attributes;
     const bindInfos = [];
-    const starBinders = this.options.starBinders;
+    const attributeBinders = this.options.attributeBinders;
 
     // bind attribute binders if available
     if (attributes && this.options.binders) {
@@ -242,16 +242,16 @@ export class View {
         // if attribute starts with the binding prefix. E.g. rv
         if (attribute.name.indexOf(bindingPrefix) === 0) {
           nodeName = attribute.name.slice(bindingPrefix.length);
-          // if binder is not a starBinder binder should be setted
+          // if binder is not a attributeBinder binder should be setted
           if (this.options.binders[nodeName]) {
             binder = this.options.binders[nodeName];
           }
 
           if (binder === null) {
             // seems to be a star binder (because binder was not set)
-            // Check if any starBinder matchs
-            for (let k = 0; k < starBinders.length; k++) {
-              identifier = starBinders[k];
+            // Check if any attributeBinder matchs
+            for (let k = 0; k < attributeBinders.length; k++) {
+              identifier = attributeBinders[k];
               const regexp = new RegExp(`^${identifier.replace(/\*/g, ".+")}$`);
               if (regexp.test(nodeName)) {
                 binder = this.options.binders[identifier];

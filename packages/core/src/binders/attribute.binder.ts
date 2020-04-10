@@ -9,7 +9,7 @@ export interface BinderAttributeChangedEvent {
 }
 
 /**
- * Event handler to liste for publish binder event for two-way-binding in web components
+ * Event handler to losten for publish binder event for two-way-binding in web components
  */
 const publishBinderChangeEventHandler = function (this: any, event: Event) {
   const data = (event as CustomEvent).detail;
@@ -24,22 +24,22 @@ const publishBinderChangeEventHandler = function (this: any, event: Event) {
  * Sets the attribute on the element. If no binder above is matched it will fall
  * back to using this binder.
  */
-export const starBinder: Binder<string> = {
+export const attributeBinder: Binder<string> = {
   name: "*",
   bind(el) {
     // Listen for changes from web component
-    el.addEventListener(
-      "publish-binder-change:" + this.type,
-      publishBinderChangeEventHandler.bind(this)
-    );
+    // el.addEventListener(
+    //   "publish-binder-change:" + this.type,
+    //   publishBinderChangeEventHandler.bind(this)
+    // );
   },
 
   unbind() {
     delete this.customData;
-    this.el.removeEventListener(
-      "publish-binder-change",
-      publishBinderChangeEventHandler.bind(this)
-    );
+    // this.el.removeEventListener(
+    //   "publish-binder-change",
+    //   publishBinderChangeEventHandler.bind(this)
+    // );
   },
 
   routine(el: HTMLElement, newValue: string) {

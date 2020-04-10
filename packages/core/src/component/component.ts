@@ -22,6 +22,7 @@ export interface RibaComponentContext {
 export interface ObservedAttributeToCheck {
   initialized: boolean;
   passed: boolean;
+  isRiba: boolean;
 }
 
 export interface ObservedAttributesToCheck {
@@ -47,7 +48,7 @@ export abstract class Component extends FakeHTMLElement {
 
   protected riba?: Riba;
 
-  protected el: HTMLUnknownElement;
+  protected el: HTMLElement;
 
   protected abstract scope: any;
 
@@ -102,6 +103,7 @@ export abstract class Component extends FakeHTMLElement {
 
   protected async init(observedAttributes: string[]) {
     this.initAttributeObserver(observedAttributes);
+    this.initRibaAttributeObserver(observedAttributes);
 
     this.getPassedObservedAttributes(observedAttributes);
 
@@ -139,12 +141,7 @@ export abstract class Component extends FakeHTMLElement {
    * @param observedAttribute
    */
   protected attributeIsPassed(observedAttribute: string) {
-    // TODO this.riba is not defined on this time, so the TODO is get the fullPrefix from riba
-    const fullPrefix = this.riba ? this.riba.fullPrefix : "rv-";
-    return (
-      this.el.getAttribute(observedAttribute) !== null ||
-      this.el.getAttribute(fullPrefix + observedAttribute) !== null
-    );
+    return this.el.getAttribute(observedAttribute) !== null;
   }
 
   /**
@@ -154,9 +151,13 @@ export abstract class Component extends FakeHTMLElement {
   protected getPassedObservedAttributes(observedAttributes: string[]) {
     for (const observedAttribute of observedAttributes) {
       const passed = this.attributeIsPassed(observedAttribute);
+      // TODO this.riba is not defined on this time, so the TODO is get the fullPrefix from riba
+      const fullPrefix = this.riba ? this.riba.fullPrefix : "rv-";
+
       this.observedAttributesToCheck[observedAttribute] = {
         passed,
         initialized: false,
+        isRiba: this.el.hasAttribute(fullPrefix + observedAttribute),
       };
     }
   }
@@ -168,12 +169,16 @@ export abstract class Component extends FakeHTMLElement {
     let allInitialized = true;
     for (const key in this.observedAttributesToCheck) {
       if (this.observedAttributesToCheck[key]) {
-        if (this.observedAttributesToCheck[key].passed) {
+        if (
+          this.observedAttributesToCheck[key].passed ||
+          this.observedAttributesToCheck[key].isRiba
+        ) {
           allInitialized =
             allInitialized && this.observedAttributesToCheck[key].initialized;
         }
       }
     }
+    // console.debug("observedAttributesToCheck", this.observedAttributesToCheck);
     return allInitialized;
   }
 
@@ -226,17 +231,17 @@ export abstract class Component extends FakeHTMLElement {
   /**
    * Event handler to liste for publish binder event for two-way-binding in web components
    */
-  protected publish(name: string, newValue: any, namespace: string | null) {
-    this.el.dispatchEvent(
-      new CustomEvent("publish-binder-change:" + name, {
-        detail: {
-          name,
-          newValue,
-          namespace: null, // TODO
-        },
-      })
-    );
-  }
+  // protected publish(name: string, newValue: any, namespace: string | null) {
+  //   this.el.dispatchEvent(
+  //     new CustomEvent("publish-binder-change:" + name, {
+  //       detail: {
+  //         name,
+  //         newValue,
+  //         namespace: null, // TODO
+  //       },
+  //     })
+  //   );
+  // }
 
   /**
    * Returns an event handler for the bindings (most on-*) insite this component.
@@ -310,9 +315,11 @@ export abstract class Component extends FakeHTMLElement {
       this.attributeObserverFallback.disconnect();
     }
 
+    this.el.removeEventListener("parent" as any, this.onParentChanged);
+
     this.el.removeEventListener(
       "binder-changed",
-      this.BinderChangedEventHandler
+      this.binderChangedEventHandler
     );
   }
 
@@ -485,7 +492,7 @@ export abstract class Component extends FakeHTMLElement {
     // console.warn('afterBind', this.bound);
   }
 
-  private BinderChangedEventHandler(event: Event) {
+  private binderChangedEventHandler(event: Event) {
     const data = (event as CustomEvent).detail;
     this.attributeChangedCallback(
       data.name,
@@ -493,6 +500,32 @@ export abstract class Component extends FakeHTMLElement {
       data.oldValue,
       data.namespace
     );
+  }
+
+  private askForRibaParent() {
+    this.el.dispatchEvent(new CustomEvent("ask-for-parent"));
+  }
+
+  private onParentChanged(event: CustomEvent) {
+    // console.debug("onParentChanged", event.detail);
+    this.scope.$parent = event.detail;
+  }
+
+  private listenForRibaParent() {
+    this.el.addEventListener("parent" as any, this.onParentChanged.bind(this));
+  }
+
+  private initRibaAttributeObserver(observedAttributes: string[]) {
+    this.askForRibaParent();
+    this.listenForRibaParent();
+
+    // Riba removes the riba attributes, so we do not find any attribute
+    // const ribaFullPrefix = "rv-"; // TODO get affix from settings
+    // for (const observedAttribute of observedAttributes) {
+    //   if (this.el.hasAttribute(ribaFullPrefix + observedAttribute)) {
+    //     console.warn("TODO");
+    //   }
+    // }
   }
 
   /**
@@ -529,9 +562,8 @@ export abstract class Component extends FakeHTMLElement {
         // use attribute change event as fallback for MutationObserver
         this.el.addEventListener(
           "binder-changed",
-          this.BinderChangedEventHandler
+          this.binderChangedEventHandler
         );
-        // this.$el.on('binder-changed', this.BinderChangedEventHandler);
       }
 
       // call attributeChangedCallback for all already setted static attributes

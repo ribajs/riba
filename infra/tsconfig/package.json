@@ -31,7 +31,7 @@
   ],
   "scripts": {},
   "devDependencies": {
-    "@ribajs/types": "github:ribajs/types#master"
+    "@ribajs/types": "^1.8.3"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"
