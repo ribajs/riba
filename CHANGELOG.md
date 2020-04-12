@@ -20,6 +20,7 @@
       - `.ratio-[breakpoint]-[aspect-ratio-x]-[aspect-ratio-y]` with `.embed-responsive-[breakpoint]-[aspect-ratio-x]-[aspect-ratio-y]` (e.g. `.ratio-md-4-3` -> `.embed-responsive-md-4by3`)
     - And you should set the scss variable `$embed-responsive-aspect-ratios` to: `$embed-responsive-aspect-ratios: ((1 1),(3 2),(2 3),(2 1),(1 2),(4 3),(3 4),(16 9),(9 16),(10 3),(3 10),(17 10),(10 17),(14 9),(9 14),(21 9),(9 21));` to have all supported aspect ratios from before.
 - New bs4-carousel component
+- New bs4-toggle-item binder
 
 ### Photoswipe
 - New Photoswipe module

@@ -1,7 +1,20 @@
+/**
+ * This components is used to trigger a toggle event used in other components or parts of your project. This site itself uses the bs4-toggle-button to open or close the sidebar.
+ * @attribute "target-id" (Required) The id with which the toggle event is triggered
+ * @method toggle	 Triggeres the toggle event
+ * @property state Can be 'hidden' or something else
+ * @property isClosed Is true if the state is 'hidden'
+ * @property targetId Passed attribute value, see `target-id` attribute
+ */
+
 import {
   Component,
   EventDispatcher,
 } from '@ribajs/core';
+
+import {
+  TOGGLE_BUTTON,
+} from '../../constants';
 
 type State = 'undefined' | 'overlay-left' | 'overlay-right' | 'side-left' | 'side-right' | 'hidden';
 
@@ -17,6 +30,10 @@ export class Bs4ToggleButtonComponent extends Component {
 
   static get observedAttributes() {
     return ['target-id'];
+  }
+
+  protected requiredAttributes() {
+    return ['targetId'];
   }
 
   public static tagName = 'bs4-toggle-button';
@@ -37,15 +54,16 @@ export class Bs4ToggleButtonComponent extends Component {
   }
 
   public toggle() {
+    // console.debug('toggle', this.eventDispatcher);
     if (this.eventDispatcher) {
-      this.eventDispatcher.trigger('toggle', this.scope.targetId);
+      this.eventDispatcher.trigger(TOGGLE_BUTTON.eventNames.toggle, this.scope.targetId);
     }
   }
 
   protected async afterBind() {
     await super.afterBind();
     // Trigger init to trigger there current state of all the components that are connected to this component
-    return this.eventDispatcher?.trigger('init', this.scope.targetId);
+    return this.eventDispatcher?.trigger(TOGGLE_BUTTON.eventNames.init, this.scope.targetId);
   }
 
   protected connectedCallback() {
@@ -60,16 +78,12 @@ export class Bs4ToggleButtonComponent extends Component {
 
   protected initEventDispatcher(id: string) {
     if (this.eventDispatcher) {
-      this.eventDispatcher.off('toggled', this.onToggledEvent);
+      this.eventDispatcher.off(TOGGLE_BUTTON.eventNames.toggled, this.onToggledEvent);
     }
-    this.eventDispatcher = new EventDispatcher('bs4-toggle-button:' + id);
-    this.eventDispatcher.on('toggled', this.onToggledEvent.bind(this));
+    this.eventDispatcher = new EventDispatcher(TOGGLE_BUTTON.nsPrefix + id);
+    this.eventDispatcher.on(TOGGLE_BUTTON.eventNames.toggled, this.onToggledEvent.bind(this));
     // Triggered state triggered by `..trigger('init', ...`
-    this.eventDispatcher.on('state', this.onToggledEvent.bind(this));
-  }
-
-  protected requiredAttributes() {
-    return ['targetId'];
+    this.eventDispatcher.on(TOGGLE_BUTTON.eventNames.state, this.onToggledEvent.bind(this));
   }
 
   protected attributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
@@ -87,7 +101,7 @@ export class Bs4ToggleButtonComponent extends Component {
   protected disconnectedCallback() {
     super.disconnectedCallback();
     if (this.eventDispatcher) {
-      this.eventDispatcher.off('toggled', this.onToggledEvent);
+      this.eventDispatcher.off(TOGGLE_BUTTON.eventNames.toggled, this.onToggledEvent);
     }
   }
 
