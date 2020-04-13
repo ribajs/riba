@@ -10,7 +10,7 @@ import { Utils } from '../services/utils.service';
 export const expanOnUrlBinder: Binder<string> = {
   name: 'bs4-expan-on-url',
   routine(el: HTMLElement, url: string) {
-    const collapseService = new CollapseService(el, []);
+    const collapseService = new CollapseService(el, [], {toggle: false});
     const dispatcher = new EventDispatcher('main');
 
     const checkURL = (urlToCheck?: string) => {

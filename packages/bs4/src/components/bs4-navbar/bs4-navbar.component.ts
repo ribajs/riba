@@ -86,7 +86,7 @@ export class Bs4NavbarComponent extends Component {
 
     if (this.collapseElements) {
       for (const collapseElement of Array.from(this.collapseElements)) {
-        this.collapseServices.push(new CollapseService(collapseElement, []));
+        this.collapseServices.push(new CollapseService(collapseElement, [this.el], {toggle: false}));
       }
     }
 

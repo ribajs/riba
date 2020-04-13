@@ -65,14 +65,15 @@ export class CollapseService {
   _isTransitioning: boolean;
   _element: HTMLElement | null = null;
   _config: any;
-  /// _triggerArray: HTMLElement[] | null = null;
+  _triggerArray: HTMLElement[] | null = null;
   _selector: string | null = null;
   _parent: HTMLElement | null = null;
 
-  constructor(element: HTMLElement, toggleList: NodeListOf<HTMLElement> | HTMLElement[], config: Partial<Config> = {}) {
+  constructor(element: HTMLElement, triggerList: NodeListOf<HTMLElement> | HTMLElement[], config: Partial<Config> = {}) {
     this._isTransitioning = false
     this._element = element
     this._config = this._getConfig(config)
+    this._triggerArray = Array.from(triggerList);
     // this._triggerArray = Array.from(SelectorEngine.find(
     //   `${SELECTOR_DATA_TOGGLE}[href="#${element.id}"],` +
     //   `${SELECTOR_DATA_TOGGLE}[data-target="#${element.id}"]`
@@ -80,23 +81,23 @@ export class CollapseService {
 
     // const toggleList = SelectorEngine.find(SELECTOR_DATA_TOGGLE) as NodeListOf<HTMLElement>;
 
-    for (let i = 0, len = toggleList.length; i < len; i++) {
-      const elem = toggleList[i]
-      const selector = Utils.getSelectorFromElement(elem)
-      const filterElement = !selector ? [] : Array.from(SelectorEngine.find(selector))
-        .filter(foundElem => foundElem === element)
+    // for (let i = 0, len = toggleList.length; i < len; i++) {
+    //   const elem = toggleList[i]
+    //   const selector = Utils.getSelectorFromElement(elem)
+    //   const filterElement = !selector ? [] : Array.from(SelectorEngine.find(selector))
+    //     .filter(foundElem => foundElem === element)
 
-      if (selector !== null && filterElement.length) {
-        this._selector = selector
-        // this._triggerArray.push(elem)
-      }
-    }
+    //   if (selector !== null && filterElement.length) {
+    //     this._selector = selector
+    //     // this._triggerArray.push(elem)
+    //   }
+    // }
 
     this._parent = this._config.parent ? this._getParent() : null
 
     if (!this._config.parent) {
-      // this._addAriaAndCollapsedClass(this._element, this._triggerArray)
-      this._addAriaAndCollapsedClass(this._element, [])
+      this._addAriaAndCollapsedClass(this._element, this._triggerArray)
+      // this._addAriaAndCollapsedClass(this._element, [])
     }
 
     if (this._config.toggle) {
@@ -198,12 +199,12 @@ export class CollapseService {
 
     this._element.style[dimension] = '0'
 
-    // if (this._triggerArray?.length) {
-    //   this._triggerArray.forEach(element => {
-    //     element.classList.remove(CLASS_NAME_COLLAPSED)
-    //     element.setAttribute('aria-expanded', 'true')
-    //   })
-    // }
+    if (this._triggerArray?.length) {
+      this._triggerArray.forEach(element => {
+        element.classList.remove(CLASS_NAME_COLLAPSED)
+        element.setAttribute('aria-expanded', 'true')
+      })
+    }
 
     this.setTransitioning(true)
 
@@ -260,18 +261,18 @@ export class CollapseService {
     this._element.classList.add(CLASS_NAME_COLLAPSING)
     this._element.classList.remove(CLASS_NAME_COLLAPSE, CLASS_NAME_SHOW)
 
-    // const triggerArrayLength = this._triggerArray?.length
-    // if (triggerArrayLength && this._triggerArray && triggerArrayLength > 0) {
-    //   for (let i = 0; i < triggerArrayLength; i++) {
-    //     const trigger = this._triggerArray[i]
-    //     const elem = Utils.getElementFromSelector(trigger)
+    const triggerArrayLength = this._triggerArray?.length
+    if (triggerArrayLength && this._triggerArray && triggerArrayLength > 0) {
+      for (let i = 0; i < triggerArrayLength; i++) {
+        const trigger = this._triggerArray[i]
+        const elem = Utils.getElementFromSelector(trigger)
 
-    //     if (elem && !elem.classList.contains(CLASS_NAME_SHOW)) {
-    //       trigger.classList.add(CLASS_NAME_COLLAPSED)
-    //       trigger.setAttribute('aria-expanded', 'false')
-    //     }
-    //   }
-    // }
+        if (elem && !elem.classList.contains(CLASS_NAME_SHOW)) {
+          trigger.classList.add(CLASS_NAME_COLLAPSED)
+          trigger.setAttribute('aria-expanded', 'false')
+        }
+      }
+    }
 
     this.setTransitioning(true)
 
@@ -380,7 +381,7 @@ export class CollapseService {
 
   static collapseInterface(element: HTMLElement, config: string) {
     let data = Data.getData(element, DATA_KEY)
-    const _config = {
+    const _config: Config = {
       ...Default,
       ...element.dataset,
       ...typeof config === 'object' && config ? config : {}
@@ -391,7 +392,7 @@ export class CollapseService {
     }
 
     if (!data) {
-      data = new CollapseService(element, _config)
+      data = new CollapseService(element, [], _config)
     }
 
     if (typeof config === 'string') {

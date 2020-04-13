@@ -66,7 +66,7 @@ export class Bs4AccordionComponent extends TemplatesComponent {
     const target = this.el.querySelector<HTMLElement>(`[data-index="${index}"]`);
     if (target) {
       this.initItemEventListeners(item, target);
-      new CollapseService(target, []).hide();
+      new CollapseService(target, [this.el], {toggle: false}).hide();
     }
   }
 
@@ -75,12 +75,12 @@ export class Bs4AccordionComponent extends TemplatesComponent {
     const others = Array.from(this.el.querySelectorAll<HTMLElement>(`[data-index]:not([data-index="${index}"])`));
     if (others) {
       for (const other of others) {
-        new CollapseService(other, []).hide();
+        new CollapseService(other, [], {toggle: false}).hide();
       }
     }
     if (target) {
       this.initItemEventListeners(item, target);
-      new CollapseService(target, []).show();
+      new CollapseService(target, [], {toggle: false}).show();
     }
   }
 
@@ -89,12 +89,12 @@ export class Bs4AccordionComponent extends TemplatesComponent {
     const others = Array.from(this.el.querySelectorAll<HTMLElement>(`[data-index]:not([data-index="${index}"])`));
     if (others) {
       for (const other of others) {
-        new CollapseService(other, []).hide();
+        new CollapseService(other, [], {toggle: false}).hide();
       }
     }
     if (target) {
       this.initItemEventListeners(item, target);
-      new CollapseService(target, []).toggle();
+      new CollapseService(target, [], {toggle: false}).toggle();
     }
   }
 

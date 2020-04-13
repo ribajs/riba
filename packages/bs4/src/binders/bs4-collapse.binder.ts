@@ -14,7 +14,7 @@ export const collapseBinder: Binder<string> = {
     const collapseServices: CollapseService[] = [];
 
     targets.forEach((target) => {
-      collapseServices.push(new CollapseService(target, []));
+      collapseServices.push(new CollapseService(target, [], {toggle: false }));
     });
 
     const onStateChange = () => {
