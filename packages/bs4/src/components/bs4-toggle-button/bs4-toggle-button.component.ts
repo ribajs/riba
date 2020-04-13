@@ -16,12 +16,14 @@ import {
   TOGGLE_BUTTON,
 } from '../../constants';
 
-type State = 'undefined' | 'overlay-left' | 'overlay-right' | 'side-left' | 'side-right' | 'hidden' | 'visable';
+type State = 'undefined' | 'overlay-left' | 'overlay-right' | 'side-left' | 'side-right' | 'hidden' | 'added' | 'removed';
 
 interface Scope {
   targetId?: string;
   toggle: Bs4ToggleButtonComponent['toggle'];
   state: State;
+  isActive: boolean;
+  // depricated, use !isActive instead
   isClosed: boolean;
 }
 
@@ -46,6 +48,7 @@ export class Bs4ToggleButtonComponent extends Component {
     targetId: undefined,
     toggle: this.toggle,
     state: 'undefined',
+    isActive: true,
     isClosed: false,
   };
 
@@ -73,7 +76,8 @@ export class Bs4ToggleButtonComponent extends Component {
 
   protected onToggledEvent(state: State) {
     this.scope.state = state;
-    this.scope.isClosed = state === 'hidden';
+    this.scope.isActive = state !== 'hidden' && state !== 'removed';
+    this.scope.isClosed = !this.scope.isActive;
   }
 
   protected initEventDispatcher(id: string) {

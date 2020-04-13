@@ -1,11 +1,14 @@
 import { Binder } from '@ribajs/core';
 // import { CollapseService } from '../services/collapse.service';
-import { CollapseService, CLASS_NAME_COLLAPSED, EVENT_HIDDEN, EVENT_SHOWN } from '../services/collapse.service';
+import { CollapseService } from '../services/collapse.service';
 
+/**
+ * @deprecated
+ */
 export const collapseBinder: Binder<string> = {
   name: 'bs4-collapse',
   bind() {
-    /** */
+    console.warn('bs4-collapse is deprecated, use bs4-toggle-collapse-on-click instead.');
   },
   routine(el: HTMLElement, targetSelector: string) {
 
@@ -14,25 +17,7 @@ export const collapseBinder: Binder<string> = {
     const collapseServices: CollapseService[] = [];
 
     targets.forEach((target) => {
-      collapseServices.push(new CollapseService(target, [], {toggle: false }));
-    });
-
-    const onStateChange = () => {
-
-      collapseServices.forEach((collapseService) => {
-        if (collapseService.isCollapsed()) {
-          el.classList.add(CLASS_NAME_COLLAPSED);
-          el.setAttribute('aria-expanded', 'false');
-        } else {
-          el.classList.remove(CLASS_NAME_COLLAPSED);
-          el.setAttribute('aria-expanded', 'true');
-        }
-      });
-    };
-
-    targets.forEach((target) => {
-      target.addEventListener(EVENT_SHOWN, onStateChange.bind(this));
-      target.addEventListener(EVENT_HIDDEN, onStateChange.bind(this));
+      collapseServices.push(new CollapseService(target, [el], {toggle: false }));
     });
 
     el.addEventListener('click', (event) => {
@@ -41,7 +26,5 @@ export const collapseBinder: Binder<string> = {
         collapseService.toggle();
       });
     });
-
-    onStateChange();
   },
 };

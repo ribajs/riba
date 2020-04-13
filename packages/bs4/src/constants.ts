@@ -9,9 +9,16 @@ export const TOGGLE_BUTTON = {
   }
 };
 
-export const TOGGLE_ITEM = {
+export const TOGGLE_ATTRIBUTE = {
   elEventNames: {
-    show: 'show',
-    hide: 'hide',
+    removed: 'removed',
+    added: 'added',
+  }
+}
+
+export const TOGGLE_CLASS= {
+  elEventNames: {
+    removed: 'removed',
+    added: 'added',
   }
 }
