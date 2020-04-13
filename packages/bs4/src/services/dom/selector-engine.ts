@@ -22,11 +22,11 @@ class SelectorEngine {
   }
 
   public static find(selector: string, element = document.documentElement) {
-    return Element.prototype.querySelectorAll.call(element, selector)
+    return Element.prototype.querySelectorAll.call(element, selector) as NodeListOf<HTMLElement>
   }
 
   public static findOne(selector: string, element = document.documentElement) {
-    return Element.prototype.querySelector.call(element, selector)
+    return Element.prototype.querySelector.call(element, selector) as HTMLElement | null;
   }
 
   public static children(element: HTMLElement, selector: string) {

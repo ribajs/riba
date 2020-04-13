@@ -16,7 +16,7 @@ import {
   TOGGLE_BUTTON,
 } from '../../constants';
 
-type State = 'undefined' | 'overlay-left' | 'overlay-right' | 'side-left' | 'side-right' | 'hidden';
+type State = 'undefined' | 'overlay-left' | 'overlay-right' | 'side-left' | 'side-right' | 'hidden' | 'visable';
 
 interface Scope {
   targetId?: string;

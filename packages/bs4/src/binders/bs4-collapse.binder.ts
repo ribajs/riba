@@ -1,36 +1,45 @@
 import { Binder } from '@ribajs/core';
-import { CollapseService } from '../services/collapse.service';
+// import { CollapseService } from '../services/collapse.service';
+import { CollapseService, CLASS_NAME_COLLAPSED, EVENT_HIDDEN, EVENT_SHOWN } from '../services/collapse.service';
 
-/**
- *
- * @see https://getbootstrap.com/docs/4.1/components/collapse/
- */
 export const collapseBinder: Binder<string> = {
   name: 'bs4-collapse',
+  bind() {
+    /** */
+  },
   routine(el: HTMLElement, targetSelector: string) {
 
     const targets = el.querySelectorAll<HTMLElement>(targetSelector);
 
-    const collapseService = new CollapseService(targets);
+    const collapseServices: CollapseService[] = [];
+
+    targets.forEach((target) => {
+      collapseServices.push(new CollapseService(target, []));
+    });
 
     const onStateChange = () => {
-      if (collapseService.isCollapsed()) {
-        el.classList.add(CollapseService.CLASSNAME.COLLAPSED);
-        el.setAttribute('aria-expanded', 'false');
-      } else {
-        el.classList.remove(CollapseService.CLASSNAME.COLLAPSED);
-        el.setAttribute('aria-expanded', 'true');
-      }
+
+      collapseServices.forEach((collapseService) => {
+        if (collapseService.isCollapsed()) {
+          el.classList.add(CLASS_NAME_COLLAPSED);
+          el.setAttribute('aria-expanded', 'false');
+        } else {
+          el.classList.remove(CLASS_NAME_COLLAPSED);
+          el.setAttribute('aria-expanded', 'true');
+        }
+      });
     };
 
     targets.forEach((target) => {
-      target.addEventListener(CollapseService.EVENT.SHOWN, onStateChange.bind(this));
-      target.addEventListener(CollapseService.EVENT.HIDDEN, onStateChange.bind(this));
+      target.addEventListener(EVENT_SHOWN, onStateChange.bind(this));
+      target.addEventListener(EVENT_HIDDEN, onStateChange.bind(this));
     });
 
     el.addEventListener('click', (event) => {
       event.preventDefault();
-      collapseService.toggle();
+      collapseServices.forEach((collapseService) => {
+        collapseService.toggle();
+      });
     });
 
     onStateChange();

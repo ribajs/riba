@@ -1,5 +1,5 @@
 import { Component, EventDispatcher, Binder } from '@ribajs/core';
-import { CollapseService } from '../../services/collapse.service';
+import { CollapseService, EVENT_SHOWN, EVENT_HIDDEN, CLASS_NAME_COLLAPSED } from '../../services/collapse.service';
 
 export class Bs4NavbarComponent extends Component {
 
@@ -10,26 +10,33 @@ export class Bs4NavbarComponent extends Component {
     show: this.show,
     hide: this.hide,
     isCollapsed: true,
-    collapseSelector: '.navbar-collapse',
-    animated: true,
+    collapseSelector: '.navbar-collapse'
   };
 
-  protected collapse?: NodeListOf<HTMLElement>;
-  protected collapseService?: CollapseService;
+  protected collapseElements?: NodeListOf<HTMLElement>;
+  protected collapseServices: CollapseService[] = [];
   protected router?: EventDispatcher;
 
   static get observedAttributes() {
-    return ['collapse-selector', 'animated'];
+    return ['collapse-selector'];
   }
 
   constructor(element?: HTMLElement) {
     super(element);
   }
 
+  protected async afterBind() {
+    await super.afterBind();
+    this.hide();
+  }
+
+
   public toggle(context?: Binder<any>, event?: Event) {
-    if (this.collapseService) {
-      this.collapseService.toggle(this.scope.animated);
+
+    for (const collapseService of this.collapseServices) {
+      collapseService.toggle();
     }
+      
     if (event) {
       event.preventDefault();
       event.stopPropagation();
@@ -37,8 +44,8 @@ export class Bs4NavbarComponent extends Component {
   }
 
   public show(context?: Binder<any>, event?: Event) {
-    if (this.collapseService) {
-      this.collapseService.show(this.scope.animated);
+    for (const collapseService of this.collapseServices) {
+      collapseService.show();
     }
     if (event) {
       event.preventDefault();
@@ -47,8 +54,8 @@ export class Bs4NavbarComponent extends Component {
   }
 
   public hide(context?: Binder<any>, event?: Event) {
-    if (this.collapseService) {
-      this.collapseService.hide(this.scope.animated);
+    for (const collapseService of this.collapseServices) {
+      collapseService.hide();
     }
     if (event) {
       event.preventDefault();
@@ -72,30 +79,35 @@ export class Bs4NavbarComponent extends Component {
     // Remove old event listeners
     this.removeCollapseEventListeners();
 
-    this.collapse = this.el.querySelectorAll(this.scope.collapseSelector) || undefined;
+    this.collapseElements = this.el.querySelectorAll(this.scope.collapseSelector) || [];
 
     // Add new event listeners
     this.addCollapseEventListeners();
 
-    if (this.collapse && this.collapse.length > 0) {
-      this.collapseService = new CollapseService(this.collapse);
+    if (this.collapseElements) {
+      for (const collapseElement of Array.from(this.collapseElements)) {
+        this.collapseServices.push(new CollapseService(collapseElement, []));
+      }
     }
+
+    this.hide();
+
   }
 
   protected addCollapseEventListeners() {
-    if (this.collapse) {
-      this.collapse.forEach((collapse) => {
-        collapse.addEventListener(CollapseService.EVENT.SHOWN, this.onStateChange.bind(this));
-        collapse.addEventListener(CollapseService.EVENT.HIDDEN, this.onStateChange.bind(this));
+    if (this.collapseElements) {
+      this.collapseElements.forEach((collapseElement) => {
+        collapseElement.addEventListener(EVENT_SHOWN, this.onStateChange.bind(this));
+        collapseElement.addEventListener(EVENT_HIDDEN, this.onStateChange.bind(this));
       });
     }
   }
 
   protected removeCollapseEventListeners() {
-    if (this.collapse) {
-      this.collapse.forEach((collapse) => {
-        collapse.removeEventListener(CollapseService.EVENT.SHOWN, this.onStateChange.bind(this));
-        collapse.removeEventListener(CollapseService.EVENT.HIDDEN, this.onStateChange.bind(this));
+    if (this.collapseElements) {
+      this.collapseElements.forEach((collapseElement) => {
+        collapseElement.removeEventListener(EVENT_SHOWN, this.onStateChange.bind(this));
+        collapseElement.removeEventListener(EVENT_HIDDEN, this.onStateChange.bind(this));
       });
     }
   }
@@ -110,23 +122,19 @@ export class Bs4NavbarComponent extends Component {
 
   protected onStateChange() {
 
-    if (this.collapseService) {
-      this.scope.isCollapsed = this.collapseService.isCollapsed();
-    }
+    this.scope.isCollapsed = this.collapseServices[0].isCollapsed();
 
     if (this.scope.isCollapsed) {
-      this.el.classList.add(CollapseService.CLASSNAME.COLLAPSED);
+      this.el.classList.add(CLASS_NAME_COLLAPSED);
       this.el.setAttribute('aria-expanded', 'false');
     } else {
-      this.el.classList.remove(CollapseService.CLASSNAME.COLLAPSED);
+      this.el.classList.remove(CLASS_NAME_COLLAPSED);
       this.el.setAttribute('aria-expanded', 'true');
     }
   }
 
   protected onNewPageReady() {
-    if (this.collapseService) {
-      this.collapseService.hide(this.scope.animated);
-    }
+    this.hide();
   }
 
   protected parsedAttributeChangedCallback(attributeName: string | string[], oldValue: any, newValue: any, namespace: string | null) {

@@ -1,147 +1,410 @@
+/**
+ * --------------------------------------------------------------------------
+ * Bootstrap (v4.3.1): collapse.js
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * --------------------------------------------------------------------------
+ */
+
+import {
+  TRANSITION_END,
+  Utils,
+} from './utils.service'
+import EventHandler from './dom/event-handler'
+import SelectorEngine from './dom/selector-engine'
+import Data from './dom/data'
+
+export interface Config {
+  toggle: boolean;
+  parent: string | HTMLElement;
+}
 
 /**
- *
- * @see https://github.com/twbs/bootstrap/blob/v4-dev/js/src/collapse.js
+ * ------------------------------------------------------------------------
+ * Constants
+ * ------------------------------------------------------------------------
  */
+
+export const NAME = 'collapse'
+export const VERSION = '4.3.1'
+export const DATA_KEY = 'bs.collapse'
+export const EVENT_KEY = `.${DATA_KEY}`
+
+export const Default = {
+  toggle: true,
+  parent: ''
+}
+
+export const DefaultType = {
+  toggle: 'boolean',
+  parent: '(string|element)'
+}
+
+export const EVENT_SHOW = `show${EVENT_KEY}`
+export const EVENT_SHOWN = `shown${EVENT_KEY}`
+export const EVENT_HIDE = `hide${EVENT_KEY}`
+export const EVENT_HIDDEN = `hidden${EVENT_KEY}`
+
+export const CLASS_NAME_SHOW = 'show'
+export const CLASS_NAME_COLLAPSE = 'collapse'
+export const CLASS_NAME_COLLAPSING = 'collapsing'
+export const CLASS_NAME_COLLAPSED = 'collapsed'
+
+export const WIDTH = 'width'
+export const HEIGHT = 'height'
+
+export const SELECTOR_ACTIVES = '.show, .collapsing'
+// export const SELECTOR_DATA_TOGGLE = '[data-toggle="collapse"]'
+
+/**
+ * ------------------------------------------------------------------------
+ * Class Definition
+ * ------------------------------------------------------------------------
+ */
+
 export class CollapseService {
+  _isTransitioning: boolean;
+  _element: HTMLElement | null = null;
+  _config: any;
+  /// _triggerArray: HTMLElement[] | null = null;
+  _selector: string | null = null;
+  _parent: HTMLElement | null = null;
 
-  public static DATA_KEY            = 'bs.collapse';
-  public static EVENT_KEY           = `.${CollapseService.DATA_KEY}`;
-  public static DATA_API_KEY        = '.data-api';
+  constructor(element: HTMLElement, toggleList: NodeListOf<HTMLElement> | HTMLElement[], config: Partial<Config> = {}) {
+    this._isTransitioning = false
+    this._element = element
+    this._config = this._getConfig(config)
+    // this._triggerArray = Array.from(SelectorEngine.find(
+    //   `${SELECTOR_DATA_TOGGLE}[href="#${element.id}"],` +
+    //   `${SELECTOR_DATA_TOGGLE}[data-target="#${element.id}"]`
+    // )) as HTMLElement[];
 
-  public static EVENT = {
-    SHOW           : `show${CollapseService.EVENT_KEY}`,
-    SHOWN          : `shown${CollapseService.EVENT_KEY}`,
-    HIDE           : `hide${CollapseService.EVENT_KEY}`,
-    HIDDEN         : `hidden${CollapseService.EVENT_KEY}`,
-    CLICK_DATA_API : `click${CollapseService.EVENT_KEY}${CollapseService.DATA_API_KEY}`,
-  };
+    // const toggleList = SelectorEngine.find(SELECTOR_DATA_TOGGLE) as NodeListOf<HTMLElement>;
 
-  public static CLASSNAME = {
-    SHOW       : 'show',
-    COLLAPSE   : 'collapse', // hidden
-    COLLAPSING : 'collapsing', // animation
-    COLLAPSED  : 'collapsed', // Button / trigger element class if collapse element is collapsed
-  };
+    for (let i = 0, len = toggleList.length; i < len; i++) {
+      const elem = toggleList[i]
+      const selector = Utils.getSelectorFromElement(elem)
+      const filterElement = !selector ? [] : Array.from(SelectorEngine.find(selector))
+        .filter(foundElem => foundElem === element)
 
-  public static show(element: HTMLElement, animated = true) {
-    element.dispatchEvent(new Event(CollapseService.EVENT.SHOW));
-    if (animated) {
-      element.addEventListener('webkitTransitionEnd' as 'animationend', this.onShowTransitionEnd.bind(this, element), { once: true });
-      element.addEventListener('transitionend', this.onShowTransitionEnd.bind(this, element), { once: true });
-      element.classList.add(CollapseService.CLASSNAME.COLLAPSING);
-      element.classList.remove(CollapseService.CLASSNAME.COLLAPSE);
-      // Get and set height to start transition
-      setTimeout(() => {
-        // const duration = Utils.getTransitionDurationFromElement(element);
-        if (element.firstElementChild) {
-          const dimension = element.firstElementChild.getBoundingClientRect();
-          element.style.height = dimension.height + 'px';
-        } else {
-          element.style.height = 'auto';
-        }
-      });
-    } else {
-      this.onShowTransitionEnd(element);
+      if (selector !== null && filterElement.length) {
+        this._selector = selector
+        // this._triggerArray.push(elem)
+      }
     }
-  }
 
-  public static hide(element: HTMLElement, animated = true) {
-    element.dispatchEvent(new Event(CollapseService.EVENT.HIDE));
-    if (animated) {
-      element.addEventListener('webkitTransitionEnd' as 'animationend', this.onHideTransitionEnd.bind(this, element), { once: true });
-      element.addEventListener('transitionend', this.onHideTransitionEnd.bind(this, element), { once: true });
-      element.style.height = element.getBoundingClientRect().height + 'px' ;
-      setTimeout(() => {
-        element.classList.add(CollapseService.CLASSNAME.COLLAPSING);
-        element.classList.remove(CollapseService.CLASSNAME.COLLAPSE);
-        element.classList.remove(CollapseService.CLASSNAME.SHOW);
-        element.style.height = '0' ;
-      });
-    } else {
-      this.onHideTransitionEnd(element);
+    this._parent = this._config.parent ? this._getParent() : null
+
+    if (!this._config.parent) {
+      // this._addAriaAndCollapsedClass(this._element, this._triggerArray)
+      this._addAriaAndCollapsedClass(this._element, [])
     }
-  }
 
-  public static hideAll(elements: NodeListOf<HTMLElement> | Array<HTMLElement>) {
-    elements.forEach((element: HTMLElement) => {
-      this.hide(element);
-    });
-  }
-
-  public static isExpanded(element: HTMLElement) {
-    return element.classList.contains(CollapseService.CLASSNAME.SHOW);
-  }
-
-  public static isCollapsed(element: HTMLElement) {
-    return !this.isExpanded(element);
-  }
-
-  public static toggle(element: HTMLElement, animated = true) {
-    if (this.isCollapsed(element)) {
-      this.show(element, animated);
-    } else {
-      this.hide(element, animated);
+    if (this._config.toggle) {
+      this.toggle()
     }
+
+    Data.setData(element, DATA_KEY, this)
   }
 
-  protected static onShowTransitionEnd(element: HTMLElement) {
-    setTimeout(() => {
-      element.classList.add(CollapseService.CLASSNAME.COLLAPSE);
-      element.classList.add(CollapseService.CLASSNAME.SHOW);
-      element.classList.remove(CollapseService.CLASSNAME.COLLAPSING);
-      element.style.height = '';
-      element.dispatchEvent(new Event(CollapseService.EVENT.SHOWN));
-    });
+  // Getters
+
+  static get VERSION() {
+    return VERSION
   }
 
-  protected static onHideTransitionEnd(element: HTMLElement) {
-    setTimeout(() => {
-      element.classList.add(CollapseService.CLASSNAME.COLLAPSE);
-      element.classList.remove(CollapseService.CLASSNAME.COLLAPSING);
-      element.classList.remove(CollapseService.CLASSNAME.SHOW);
-      element.style.height = '';
-      element.dispatchEvent(new Event(CollapseService.EVENT.HIDDEN));
-    });
+  static get Default() {
+    return Default
   }
 
-  protected targets: NodeListOf<HTMLElement> | Array<HTMLElement>;
-
-  constructor(targets: NodeListOf<HTMLElement> | Array<HTMLElement>) {
-    this.targets = targets;
-  }
-
-  /**
-   * Show all
-   */
-  public show(animated = true) {
-    this.targets.forEach((target: HTMLElement) => {
-      CollapseService.show(target, animated);
-    });
-  }
-
-  /**
-   * Collapse / hide all
-   */
-  public hide(animated = true) {
-    this.targets.forEach((target: HTMLElement) => {
-      CollapseService.hide(target, animated);
-    });
-  }
+  // Public
 
   public isExpanded() {
-    return CollapseService.isExpanded(this.targets[0]);
+    return !!this._element?.classList.contains(CLASS_NAME_SHOW);
   }
 
   public isCollapsed() {
     return !this.isExpanded();
   }
 
-  public toggle(animated = true) {
-    if (this.isCollapsed()) {
-      this.show(animated);
+  toggle() {
+    if (this.isExpanded()) {
+      this.hide()
     } else {
-      this.hide(animated);
+      this.show()
     }
+  }
+
+  show() {
+
+    if (!this._element) {
+      console.warn('this._element not set!');
+      return;
+    }
+
+    if (this._isTransitioning ||
+      this._element.classList.contains(CLASS_NAME_SHOW)) {
+      return
+    }
+
+    let actives: HTMLElement[] | null = null;
+    let activesData: any;
+
+    if (this._parent) {
+      actives = Array.from(SelectorEngine.find(SELECTOR_ACTIVES, this._parent))
+        .filter(elem => {
+          if (typeof this._config.parent === 'string') {
+            return elem.getAttribute('data-parent') === this._config.parent
+          }
+
+          return elem.classList.contains(CLASS_NAME_COLLAPSE)
+        }) as HTMLElement[];
+
+      if (actives.length === 0) {
+        actives = null
+      }
+    }
+
+    const container = this._selector ? SelectorEngine.findOne(this._selector) : null;
+    if (actives) {
+      const tempActiveData = actives.filter(elem => container !== elem)
+      activesData = tempActiveData[0] ? Data.getData(tempActiveData[0], DATA_KEY) : null
+
+      if (activesData && activesData._isTransitioning) {
+        return
+      }
+    }
+
+    const startEvent = EventHandler.trigger(this._element, EVENT_SHOW)
+    if (startEvent.defaultPrevented) {
+      return
+    }
+
+    if (actives) {
+      actives.forEach(elemActive => {
+        if (container !== elemActive) {
+          CollapseService.collapseInterface(elemActive, 'hide')
+        }
+
+        if (!activesData) {
+          Data.setData(elemActive, DATA_KEY, null)
+        }
+      })
+    }
+
+    const dimension = this._getDimension()
+
+    this._element.classList.remove(CLASS_NAME_COLLAPSE)
+    this._element.classList.add(CLASS_NAME_COLLAPSING)
+
+    this._element.style[dimension] = '0'
+
+    // if (this._triggerArray?.length) {
+    //   this._triggerArray.forEach(element => {
+    //     element.classList.remove(CLASS_NAME_COLLAPSED)
+    //     element.setAttribute('aria-expanded', 'true')
+    //   })
+    // }
+
+    this.setTransitioning(true)
+
+    const complete = () => {
+
+      if (!this._element) {
+        console.warn('this._element not set!');
+        return;
+      }
+
+      this._element.classList.remove(CLASS_NAME_COLLAPSING)
+      this._element.classList.add(CLASS_NAME_COLLAPSE, CLASS_NAME_SHOW)
+
+      this._element.style[dimension] = ''
+
+      this.setTransitioning(false)
+
+      EventHandler.trigger(this._element, EVENT_SHOWN)
+    }
+
+    const capitalizedDimension = dimension[0].toUpperCase() + dimension.slice(1)
+    const scrollSize = `scroll${capitalizedDimension}` as 'scrollWidth' | 'scrollHeight';
+    const transitionDuration = Utils.getTransitionDurationFromElement(this._element)
+
+    EventHandler.one(this._element, TRANSITION_END, complete)
+
+    Utils.emulateTransitionEnd(this._element, transitionDuration)
+    this._element.style[dimension] = `${this._element[scrollSize]}px`
+  }
+
+  hide() {
+
+    if (!this._element) {
+      console.warn('this._element not set!');
+      return;
+    }
+
+    if (this._isTransitioning ||
+      !this._element.classList.contains(CLASS_NAME_SHOW)) {
+      return
+    }
+
+    const startEvent = EventHandler.trigger(this._element, EVENT_HIDE)
+    if (startEvent.defaultPrevented) {
+      return
+    }
+
+    const dimension = this._getDimension()
+
+    this._element.style[dimension] = `${this._element.getBoundingClientRect()[dimension]}px`
+
+    Utils.reflow(this._element)
+
+    this._element.classList.add(CLASS_NAME_COLLAPSING)
+    this._element.classList.remove(CLASS_NAME_COLLAPSE, CLASS_NAME_SHOW)
+
+    // const triggerArrayLength = this._triggerArray?.length
+    // if (triggerArrayLength && this._triggerArray && triggerArrayLength > 0) {
+    //   for (let i = 0; i < triggerArrayLength; i++) {
+    //     const trigger = this._triggerArray[i]
+    //     const elem = Utils.getElementFromSelector(trigger)
+
+    //     if (elem && !elem.classList.contains(CLASS_NAME_SHOW)) {
+    //       trigger.classList.add(CLASS_NAME_COLLAPSED)
+    //       trigger.setAttribute('aria-expanded', 'false')
+    //     }
+    //   }
+    // }
+
+    this.setTransitioning(true)
+
+    const complete = () => {
+      this.setTransitioning(false);
+      if (!this._element) {
+        console.warn('this._element not set!');
+        return;
+      }
+      this._element.classList.remove(CLASS_NAME_COLLAPSING)
+      this._element.classList.add(CLASS_NAME_COLLAPSE)
+      EventHandler.trigger(this._element, EVENT_HIDDEN)
+    }
+
+    this._element.style[dimension] = ''
+    const transitionDuration = Utils.getTransitionDurationFromElement(this._element)
+
+    EventHandler.one(this._element, TRANSITION_END, complete)
+    Utils.emulateTransitionEnd(this._element, transitionDuration)
+  }
+
+  setTransitioning(isTransitioning: boolean) {
+    this._isTransitioning = isTransitioning
+  }
+
+  dispose() {
+    if (this._element) {
+      Data.removeData(this._element, DATA_KEY);
+    }
+
+    this._config = null
+    this._parent = null
+    this._element = null
+    // this._triggerArray = null
+    this._isTransitioning = false
+  }
+
+  // Private
+
+  _getConfig(config: Partial<Config>): Config {
+    config = {
+      ...Default,
+      ...config
+    }
+    config.toggle = Boolean(config.toggle) // Coerce string values
+    Utils.typeCheckConfig(NAME, config, DefaultType)
+    return config as Config
+  }
+
+  _getDimension() {
+    const hasWidth = this._element ? this._element.classList.contains(WIDTH) : false;
+    return hasWidth ? WIDTH : HEIGHT
+  }
+
+  _getParent() {
+    let { parent } = this._config
+
+    if (Utils.isElement(parent)) {
+      // it's a jQuery object
+      if (typeof parent.jquery !== 'undefined' || typeof parent[0] !== 'undefined') {
+        parent = parent[0]
+      }
+    } else {
+      parent = SelectorEngine.findOne(parent)
+    }
+
+    // const selector = `${SELECTOR_DATA_TOGGLE}[data-parent="${parent}"]`
+    const selector = `[data-parent="${parent}"]`
+
+    SelectorEngine.find(selector, parent)
+      .forEach(element => {
+        const selected = Utils.getElementFromSelector(element)
+
+        if (selected) {
+          this._addAriaAndCollapsedClass(
+            selected,
+            [element]
+          )
+        } else {
+          console.warn();
+        }
+      })
+
+    return parent
+  }
+
+  _addAriaAndCollapsedClass(element: HTMLElement, triggerArray: HTMLElement[]) {
+    if (element) {
+      const isOpen = element.classList.contains(CLASS_NAME_SHOW)
+
+      if (triggerArray.length) {
+        triggerArray.forEach(elem => {
+          if (isOpen) {
+            elem.classList.remove(CLASS_NAME_COLLAPSED)
+          } else {
+            elem.classList.add(CLASS_NAME_COLLAPSED)
+          }
+
+          elem.setAttribute('aria-expanded', isOpen.toString())
+        })
+      }
+    }
+  }
+
+  // Static
+
+  static collapseInterface(element: HTMLElement, config: string) {
+    let data = Data.getData(element, DATA_KEY)
+    const _config = {
+      ...Default,
+      ...element.dataset,
+      ...typeof config === 'object' && config ? config : {}
+    }
+
+    if (!data && _config.toggle && /show|hide/.test(config)) {
+      _config.toggle = false
+    }
+
+    if (!data) {
+      data = new CollapseService(element, _config)
+    }
+
+    if (typeof config === 'string') {
+      if (typeof data[config] === 'undefined') {
+        throw new TypeError(`No method named "${config}"`)
+      }
+
+      data[config]()
+    }
+  }
+
+
+  static getInstance(element: HTMLElement) {
+    return Data.getData(element, DATA_KEY)
   }
 }

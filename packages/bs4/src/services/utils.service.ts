@@ -54,7 +54,7 @@ public static getSelector(element: HTMLElement) {
   public static getElementFromSelector(element: HTMLElement) {
     const selector = Utils.getSelector(element)
   
-    return selector ? document.querySelector(selector) : null
+    return (selector ? document.querySelector(selector) : null) as HTMLElement | null;
   }
   
   public static getTransitionDurationFromElement(element: HTMLElement) {

@@ -1,7 +1,7 @@
 import {
   handleizeFormatter,
 } from '@ribajs/core';
-import { CollapseService } from '../../services/collapse.service';
+import { CollapseService, EVENT_HIDE, EVENT_SHOW } from '../../services/collapse.service';
 
 import { TemplatesComponent } from '../templates/templates.component';
 
@@ -44,7 +44,7 @@ export class Bs4AccordionComponent extends TemplatesComponent {
     },
   ];
 
-  // protected collapseService?: CollapseService;
+  // protected collapseServices: CollapseService[] = [];
 
   static get observedAttributes() {
     return ['collapse-icon-src', 'collapse-icon-size'];
@@ -66,39 +66,43 @@ export class Bs4AccordionComponent extends TemplatesComponent {
     const target = this.el.querySelector<HTMLElement>(`[data-index="${index}"]`);
     if (target) {
       this.initItemEventListeners(item, target);
-      CollapseService.hide(target);
+      new CollapseService(target, []).hide();
     }
   }
 
   public show(item: AccordionItem, index: number) {
     const target = this.el.querySelector<HTMLElement>(`[data-index="${index}"]`);
-    const others = this.el.querySelectorAll<HTMLElement>(`[data-index]:not([data-index="${index}"])`);
+    const others = Array.from(this.el.querySelectorAll<HTMLElement>(`[data-index]:not([data-index="${index}"])`));
     if (others) {
-      CollapseService.hideAll(others);
+      for (const other of others) {
+        new CollapseService(other, []).hide();
+      }
     }
     if (target) {
       this.initItemEventListeners(item, target);
-      CollapseService.show(target);
+      new CollapseService(target, []).show();
     }
   }
 
   public toggle(item: AccordionItem, index: number) {
     const target = this.el.querySelector<HTMLElement>(`[data-index="${index}"]`);
-    const others = this.el.querySelectorAll<HTMLElement>(`[data-index]:not([data-index="${index}"])`);
+    const others = Array.from(this.el.querySelectorAll<HTMLElement>(`[data-index]:not([data-index="${index}"])`));
     if (others) {
-      CollapseService.hideAll(others);
+      for (const other of others) {
+        new CollapseService(other, []).hide();
+      }
     }
     if (target) {
       this.initItemEventListeners(item, target);
-      CollapseService.toggle(target);
+      new CollapseService(target, []).toggle();
     }
   }
 
   protected initItemEventListeners(item: AccordionItem, element: HTMLElement) {
-    element.removeEventListener(CollapseService.EVENT.HIDE, this.onHide.bind(this, element, item));
-    element.removeEventListener(CollapseService.EVENT.SHOW, this.onShow.bind(this, element, item));
-    element.addEventListener(CollapseService.EVENT.HIDE, this.onHide.bind(this, element, item), { once: true });
-    element.addEventListener(CollapseService.EVENT.SHOW, this.onShow.bind(this, element, item), { once: true });
+    element.removeEventListener(EVENT_HIDE, this.onHide.bind(this, element, item));
+    element.removeEventListener(EVENT_SHOW, this.onShow.bind(this, element, item));
+    element.addEventListener(EVENT_HIDE, this.onHide.bind(this, element, item), { once: true });
+    element.addEventListener(EVENT_SHOW, this.onShow.bind(this, element, item), { once: true });
   }
 
   protected getContentChildByIndex() {
@@ -161,7 +165,7 @@ export class Bs4AccordionComponent extends TemplatesComponent {
   }
 
   protected async afterBind() {
-    return await super.beforeBind();
+    return await super.afterBind();
   }
 
   protected requiredAttributes() {

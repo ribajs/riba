@@ -10,7 +10,7 @@ import { Utils } from '../services/utils.service';
 export const collapseOnUrlBinder: Binder<string> = {
   name: 'bs4-collapse-on-url',
   routine(el: HTMLElement, url: string) {
-    const collapseService = new CollapseService([this.el]);
+    const collapseService = new CollapseService(this.el, []);
     const dispatcher = new EventDispatcher('main');
 
     const checkURL = (urlToCheck?: string) => {
