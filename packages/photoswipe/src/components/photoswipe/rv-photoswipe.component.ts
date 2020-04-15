@@ -5,17 +5,17 @@ import fullscreenTemplate from "./rv-photoswipe.fullscreen.component.html";
 
 import PhotoSwipe from "photoswipe";
 import PhotoSwipeUI from "../../services/photoswipe-ui.service";
-import { Options, ShareButtonData, Item } from "../../types";
-import { DropdownService } from "../../../../bs4/src";
+import { Options, Item } from "../../types";
 
 interface Scope {
   // Properties
   items: PhotoSwipe.Item[];
+  /** Current item */
+  currItem?: PhotoSwipe.Item;
   isFullscreen: boolean;
   isZoomed: boolean;
   isZoomAllowed: boolean;
   zoomLevel: number;
-  shareButtons: ShareButtonData[];
 
   // Methods
   open: PhotoswipeComponent["open"];
@@ -25,8 +25,6 @@ interface Scope {
   prev: PhotoswipeComponent["prev"];
   toggleZoom: PhotoswipeComponent["openByIndex"];
   toggleFullscreen: PhotoswipeComponent["toggleFullscreen"];
-  share: PhotoswipeComponent["share"];
-  openShareWindowPopup: PhotoswipeComponent["openShareWindowPopup"];
 
   // Observed attributes
   openImageOnClick: boolean;
@@ -71,8 +69,6 @@ export class PhotoswipeComponent extends Component {
   protected pswpElement: HTMLElement | null = null;
 
   protected images: HTMLImageElement[] = [];
-
-  protected shareDropdown?: DropdownService;
 
   protected listeners = {
     items: [],
@@ -133,38 +129,6 @@ export class PhotoswipeComponent extends Component {
     isZoomAllowed: false,
     zoomLevel: 0,
 
-    // TODO move this to a custom share component
-    shareButtons: [
-      {
-        id: "facebook",
-        label: "Share on Facebook",
-        urlTemplate: "https://www.facebook.com/sharer/sharer.php?u={{url}}",
-        url: "",
-      },
-      {
-        id: "twitter",
-        label: "Tweet",
-        urlTemplate:
-          "https://twitter.com/intent/tweet?text={{text}}&url={{url}}",
-        url: "",
-      },
-      {
-        id: "pinterest",
-        label: "Pin it",
-        urlTemplate:
-          "http://www.pinterest.com/pin/create/button/" +
-          "?url={{url}}&media={{image_url}}&description={{text}}",
-        url: "",
-      },
-      {
-        id: "download",
-        label: "Download image",
-        urlTemplate: "{{raw_image_url}}",
-        url: "",
-        download: true,
-      },
-    ],
-
     // Methods
     open: this.open,
     openByIndex: this.openByIndex,
@@ -173,8 +137,6 @@ export class PhotoswipeComponent extends Component {
     prev: this.prev,
     toggleZoom: this.toggleZoom,
     toggleFullscreen: this.toggleFullscreen,
-    share: this.share,
-    openShareWindowPopup: this.openShareWindowPopup,
 
     // Observed attribute default values
     openImageOnClick: false,
@@ -239,6 +201,16 @@ export class PhotoswipeComponent extends Component {
     return await super.beforeBind();
   }
 
+  protected closeShare() {
+    const bs4ShareComponent = this.el.querySelector("bs4-share");
+    bs4ShareComponent?.dispatchEvent(new CustomEvent("close"));
+  }
+
+  protected openShare() {
+    const bs4ShareComponent = this.el.querySelector("bs4-share");
+    bs4ShareComponent?.dispatchEvent(new CustomEvent("open"));
+  }
+
   // Event handlers
 
   /**
@@ -247,7 +219,7 @@ export class PhotoswipeComponent extends Component {
    */
   protected onBeforeChange() {
     // console.debug("onBeforeChange", this.pswp?.currItem);
-    this.shareDropdown?.close();
+    this.closeShare();
   }
 
   /**
@@ -255,7 +227,8 @@ export class PhotoswipeComponent extends Component {
    * (after content changed)
    */
   protected onAfterChange() {
-    console.debug("onAfterChange", this.pswp?.currItem);
+    this.scope.currItem = this.pswp?.currItem;
+    // console.debug("onAfterChange", this.scope.currItem);
     setTimeout(() => {
       this.scope.isZoomAllowed = this.isZoomAllowed();
     }, 0);
@@ -330,7 +303,7 @@ export class PhotoswipeComponent extends Component {
    */
   protected onUnbindEvents() {
     // console.debug("onUnbindEvents");
-    this.shareDropdown?.close();
+    this.closeShare();
   }
 
   /**
@@ -339,7 +312,7 @@ export class PhotoswipeComponent extends Component {
   protected onClose() {
     // console.debug("onClose");
     this.pswp?.ui?.getFullscreenAPI()?.exit();
-    this.shareDropdown?.close();
+    this.closeShare();
     this.scope.isZoomAllowed = false;
   }
 
@@ -349,7 +322,7 @@ export class PhotoswipeComponent extends Component {
    */
   protected onDestroy() {
     // console.debug("onDestroy");
-    this.shareDropdown?.close();
+    this.closeShare();
   }
 
   /**
@@ -386,18 +359,6 @@ export class PhotoswipeComponent extends Component {
     preventObj.prevent = true;
   }
 
-  /**
-   * Share link clicked
-   */
-  protected onShareLinkClick(/*event: Event, target: HTMLAnchorElement*/) {
-    // console.debug("onShareLinkClick");
-    // e - original click event
-    // target - link that was clicked
-    // If `target` has `href` attribute and
-    // does not have `download` attribute -
-    // share modal window will popup
-  }
-
   // Scope methods
 
   public openByIndex(index: number) {
@@ -414,12 +375,6 @@ export class PhotoswipeComponent extends Component {
 
   public prev() {
     this.pswp?.prev();
-  }
-
-  // TODO move this to a custom share component
-  public share() {
-    this.updateShareURLs();
-    return this.shareDropdown?.toggle();
   }
 
   public toggleZoom() {
@@ -481,6 +436,7 @@ export class PhotoswipeComponent extends Component {
       this.pswp.init();
 
       this.scope.isZoomAllowed = this.isZoomAllowed();
+      this.scope.currItem = this.pswp?.currItem;
 
       console.debug("isZoomAllowed", this.scope.isZoomAllowed);
 
@@ -513,7 +469,6 @@ export class PhotoswipeComponent extends Component {
       "updateScrollOffset",
       this.onUpdateScrollOffset.bind(this)
     );
-    this.pswp?.listen("shareLinkClick", this.onShareLinkClick.bind(this));
   }
 
   protected isZoomAllowed() {
@@ -570,90 +525,6 @@ export class PhotoswipeComponent extends Component {
     }
   }
 
-  protected getImageURLForShare() {
-    return this.pswp?.currItem.src || "";
-  }
-
-  protected getPageURLForShare() {
-    return window.location.href;
-  }
-
-  protected getTextForShare() {
-    return (this.pswp?.currItem as Item).title || "";
-  }
-
-  protected updateShareURLs() {
-    let shareURL = "",
-      imageUrl = "",
-      pageUrl = "",
-      shareText = "";
-
-    for (let i = 0; i < this.scope.shareButtons.length; i++) {
-      imageUrl = this.getImageURLForShare();
-
-      if (this.getPageURLForShare) {
-        pageUrl = this.getPageURLForShare();
-      }
-
-      if (this.getTextForShare) {
-        shareText = this.getTextForShare();
-      }
-
-      shareURL = this.scope.shareButtons[i].urlTemplate
-        .replace("{{url}}", encodeURIComponent(pageUrl))
-        .replace("{{image_url}}", encodeURIComponent(imageUrl))
-        .replace("{{raw_image_url}}", imageUrl)
-        .replace("{{text}}", encodeURIComponent(shareText));
-
-      this.scope.shareButtons[i].url = shareURL;
-    }
-  }
-
-  // TODO move this to a custom share component
-  public openShareWindowPopup(
-    binding: any,
-    event: Event,
-    controller: any,
-    el: HTMLAnchorElement
-  ) {
-    this.pswp?.shout("shareLinkClick", event, el);
-
-    this.shareDropdown?.close();
-
-    if (!el || !el.href) {
-      console.error("No href attribute found");
-      return false;
-    }
-
-    if (el.hasAttribute("download")) {
-      return true;
-    }
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    window.open(
-      el.href,
-      "Share",
-      "scrollbars=yes,resizable=yes,toolbar=no," +
-        "location=yes,width=550,height=420,top=100,left=" +
-        (window.screen ? Math.round(screen.width / 2 - 275) : 100)
-    );
-
-    return false;
-  }
-
-  protected initShareButton() {
-    const dropDownButtonElement = this.el.querySelector(
-      ".dropdown-toggle-share"
-    ) as HTMLButtonElement | HTMLAnchorElement;
-    if (!dropDownButtonElement) {
-      console.warn('Element with selector ".dropdown-toggle-share" not found!');
-      return;
-    }
-    this.shareDropdown = new DropdownService(dropDownButtonElement);
-  }
-
   protected initFullscreenTemplate() {
     this.pswpElement = this.el.querySelector<HTMLElement>(
       this.scope.fullscreenContainerSelector
@@ -667,8 +538,6 @@ export class PhotoswipeComponent extends Component {
     this.setItems();
 
     this.initFullscreenTemplate();
-
-    this.initShareButton();
 
     const hashData = this.parseHash();
     if (hashData.pid && hashData.gid) {

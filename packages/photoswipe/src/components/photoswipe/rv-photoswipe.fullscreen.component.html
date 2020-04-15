@@ -34,13 +34,12 @@
 
 
                 <div class="pswp__top-bar-right">
-
-                    <div class="dropdown" rv-if="controlShareIconShow">
-                        <bs4-icon rv-size="controlShareIconSize" rv-on-click="share" role="button" aria-haspopup="true" aria-expanded="false" id="dropdownShare" class="pswp__button dropdown-toggle-share" rv-src="controlShareIconSrc" title="Share"></bs4-icon>
-                        <div class="dropdown-menu" aria-labelledby="dropdownShare">
-                            <a rv-download="button.download" target="_blank" rv-each-button="shareButtons" rv-on-click="openShareWindowPopup" class="dropdown-item" rv-href="button.url" rv-html="button.label"></a>
+                    
+                    <bs4-share rv-if="controlShareIconShow" class="pswp__button" rv-parent rv-title="currItem.title" rv-url="currItem.src" rv-media-url="currItem.src" text="Hey, did you checked out this nice image?" label="Share">
+                        <div class="share-label" rv-on-click="share">
+                            <bs4-icon class="share-label m-2" rv-size="$parent.controlShareIconSize" rv-src="$parent.controlShareIconSrc">
                         </div>
-                    </div>
+                    </bs4-share>
 
                     <bs4-icon rv-hide="isZoomed" rv-size="controlZoomInIconSize" size="32" rv-on-click="toggleZoom" class="pswp__button" rv-if="controlZoomInIconShow | and isZoomAllowed" rv-src="controlZoomInIconSrc" title="Zoom in"></bs4-icon>
                     <bs4-icon rv-show="isZoomed" rv-size="controlZoomOutIconSize" rv-on-click="toggleZoom" class="pswp__button" rv-if="controlZoomOutIconShow | and isZoomAllowed" rv-src="controlZoomOutIconSrc" title="Zoom out"></bs4-icon>
