@@ -10,7 +10,7 @@ export interface Scope {
   /** Page url to share */
   url: string;
   /** Url if you wish to share images, videos, etc  TODO implement this */
-  imediaUrl: "",
+  imediaUrl: "";
   label: string;
   labelTemplate: string;
   
@@ -22,6 +22,7 @@ export interface Scope {
   isDesktop: boolean;
   /** true if the browser supports native share */
   isNative: boolean;
+  dropdownId: string;
   /** 
    * Object with share urls like whatsapp, telegram, instagram etc used if the native share is noit available
    * Only used if the browser has not an native share support like on android and iOS
@@ -65,6 +66,8 @@ export class Bs4ShareComponent extends Component {
 
   protected dropdown?: DropdownService;
 
+  // Count of Bs4ShareComponent components
+  static count = 0;
 
   protected scope: Scope = {
     title: document.title,
@@ -73,11 +76,12 @@ export class Bs4ShareComponent extends Component {
     /** TODO */
     imediaUrl: "",
     label: "Share",
-    labelTemplate: labelTemplate,
+    labelTemplate,
     isAndroid: navigator.userAgent.match(/Android/i) !== null,
     isIos: navigator.userAgent.match(/iPhone|iPad|iPod/i) !== null,
     isDesktop: false,
     isNative: typeof navigator.share === "function",
+    dropdownId: "dropdownShare" + Bs4ShareComponent.count,
     shareItems: [
       {
         id: "facebook",
@@ -154,14 +158,15 @@ export class Bs4ShareComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    // console.debug('constructor', this);
+    console.debug('constructor', this.scope);
     this.init(Bs4ShareComponent.observedAttributes);
-    this.scope.isDesktop = !(this.scope.isIos || this.scope.isAndroid); // on those two support "mobile deep links", so HTTP based fallback for all others.
+    this.scope.isDesktop = !this.scope.isIos && !this.scope.isAndroid; // on those two support "mobile deep links", so HTTP based fallback for all others.
     this.addEventListeners();
+    Bs4ShareComponent.count++;
   }
 
   protected onExternalOpenEvent() {
-    this.dropdown?.open();
+    this.dropdown?.show();
   }
 
   protected onExternalCloseEvent() {
@@ -222,7 +227,7 @@ export class Bs4ShareComponent extends Component {
       ".dropdown-toggle-share"
     ) as HTMLButtonElement | HTMLAnchorElement;
     if (!dropDownButtonElement) {
-      console.warn('Element with selector ".dropdown-toggle-share" not found!');
+      console.warn('Element with selector ".dropdown-toggle-share" not found!', this.el);
       return;
     }
     this.dropdown = new DropdownService(dropDownButtonElement);
@@ -241,7 +246,7 @@ export class Bs4ShareComponent extends Component {
     controller: any,
     el: HTMLAnchorElement
   ) {
-    // console.debug('Open popup');
+    console.debug('Open popup');
 
     this.dropdown?.close();
 
@@ -272,10 +277,10 @@ export class Bs4ShareComponent extends Component {
   }
 
   public async share(context: any, event: Event): Promise<any> {
-    // console.debug('share', this.scope);
+    console.debug('share', this.scope);
     event.preventDefault();
     event.stopPropagation();
-    if (this.scope.isNative) {
+    if (this.scope.isNative && !this.scope.isDesktop) {
       return navigator
         .share({
           title: this.scope.title,
