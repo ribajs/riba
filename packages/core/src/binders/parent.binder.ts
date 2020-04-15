@@ -1,5 +1,4 @@
 import { Binder } from "../interfaces";
-import { Utils } from "../services/utils";
 
 export interface Assign {
   key: string;
@@ -21,7 +20,7 @@ export const parentBinder: Binder<Assign> = {
       this.binder.onAskForParent.bind(this, el),
       false
     );
-    this.binder.onAskForParent.call(this);
+    this.binder.onAskForParent.bind(this)(el);
   },
 
   unbind(el) {
@@ -32,9 +31,8 @@ export const parentBinder: Binder<Assign> = {
     );
   },
 
-  onAskForParent() {
-    this.el.dispatchEvent(
-      new CustomEvent("parent", { detail: this.view.models })
-    );
+  onAskForParent(el: HTMLElement) {
+    console.debug("onAskForParent", el, this.view.models);
+    el.dispatchEvent(new CustomEvent("parent", { detail: this.view.models }));
   },
 };

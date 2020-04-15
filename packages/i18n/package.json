@@ -34,6 +34,10 @@
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-typescript": "^7.9.0",
     "@babel/runtime-corejs3": "^7.9.2",
+    "@ribajs/eslint-config": "workspace:infra/eslint-config",
+    "@ribajs/tsconfig": "workspace:infra/tsconfig",
+    "@ribajs/webpack-config": "workspace:infra/webpack-config",
+    "@yarnpkg/pnpify": "^2.0.0-rc.20",
     "babel-loader": "^8.1.0",
     "babel-plugin-array-includes": "^2.0.3",
     "core-js": "^3.6.5",
@@ -43,6 +47,7 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
+    "@ribajs/bs4": "workspace:packages/bs4",
     "@ribajs/core": "^1.8.0"
   },
   "bugs": {

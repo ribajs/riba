@@ -507,7 +507,7 @@ export abstract class Component extends FakeHTMLElement {
   }
 
   private onParentChanged(event: CustomEvent) {
-    // console.debug("onParentChanged", event.detail);
+    console.debug("onParentChanged", event.detail);
     this.scope.$parent = event.detail;
   }
 
@@ -516,8 +516,8 @@ export abstract class Component extends FakeHTMLElement {
   }
 
   private initRibaAttributeObserver(observedAttributes: string[]) {
-    this.askForRibaParent();
     this.listenForRibaParent();
+    this.askForRibaParent();
 
     // Riba removes the riba attributes, so we do not find any attribute
     // const ribaFullPrefix = "rv-"; // TODO get affix from settings

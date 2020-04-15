@@ -1,20 +1,10 @@
 {
+  "extends": "@ribajs/tsconfig",
+  "files": [
+    "src/ts/index.ts"
+  ],
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "esnext",
-    "lib": ["es7", "dom"],
-    "moduleResolution": "node",
-    "typeRoots": ["./node_modules/@types", "./node_modules/@ribajs/core/src/types"],
     "outDir": "dist",
-    "declaration": true,
-    "inlineSourceMap": true,
-    "noUnusedLocals": true,
-    "esModuleInterop": true,
-    "strict": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "allowSyntheticDefaultImports": true
-  },
-  "include": ["src"],
-  "exclude": ["**/*.spec.ts"],
+    "typeRoots": ["./node_modules/@types", "./src/ts/types",  "./node_modules/@ribajs/core/src/types"]
+  }
 }
