@@ -12,57 +12,75 @@ const moduleFound = (name) => {
   }
 }
 
-var getCopyPluginConfig = function(config) {
-  var copyPluginConfig = [];
+const isModuleAvailable = (config, moduleName) => {
+  return package.dependencies[moduleName] && config.copyAssets.modules[moduleName] === true && moduleFound(moduleName);
+}
 
-  if (package.dependencies['bootstrap'] && config.copyAssets.modules.bootstrap === true && moduleFound('bootstrap')) {
-    // Copy bootstrap scss files. Note: `require.resolve('bootstrap')` resolves to `'bootstrap/dist/js/bootstrap.js'` because this is the main file in package.json
-    var bootstrapConfig = {
-      from: path.resolve(
-        path.dirname(require.resolve("bootstrap")),
-        "../../scss"
-      ),
-      to: path.resolve(`${rootPath}/${config.copyAssets.foldername}/scss/vendors/bootstrap/`),
-      toType: "dir"
-    };
-    copyPluginConfig.push(bootstrapConfig);
-  }
-
-  if (package.dependencies['@ribajs/bs4'] && config.copyAssets.modules['@ribajs/bs4'] === true && moduleFound('@ribajs/bs4')) {
-    // Copy @ribajs/bs4 scss files
-    var ribajsBs4Config = {
-      from: path.dirname(require.resolve("@ribajs/bs4")) + "/**/*.scss",
-      to: path.resolve(`${rootPath}/${config.copyAssets.foldername}/scss/vendors/@ribajs/bs4`),
-      toType: "dir",
-      context: path.dirname(require.resolve("@ribajs/bs4"))
-    };
-    copyPluginConfig.push(ribajsBs4Config);
-  }
-
-  if (package.dependencies['@ribajs/photoswipe'] && config.copyAssets.modules['@ribajs/photoswipe'] === true && moduleFound('@ribajs/photoswipe')) {
-    // Copy @ribajs/photoswipe scss files
-    var ribajsPhotoswipeConfig = {
+const getCopyPluginConfigForScssRibaModule = (config, moduleName) => {
+  if (isModuleAvailable(config, moduleName)) {
+    // Copy @ribajs/xyz scss files
+    var moduleConfig = {
       from:
-        path.dirname(require.resolve("@ribajs/photoswipe")) + "/**/*.scss",
-      to: path.resolve(`${rootPath}/${config.copyAssets.foldername}/scss/vendors/@ribajs/photoswipe`),
+        path.dirname(require.resolve(moduleName)) + "/**/*.scss",
+      to: path.resolve(`${rootPath}/${config.copyAssets.foldername}/scss/vendors/${moduleName}`),
       toType: "dir",
-      context: path.dirname(require.resolve("@ribajs/photoswipe"))
+      context: path.dirname(require.resolve(moduleName))
     };
-    copyPluginConfig.push(ribajsPhotoswipeConfig);
+    return moduleConfig;
   }
+  return null;
+}
 
-  if (package.dependencies['@ribajs/iconset'] && config.copyAssets.modules['@ribajs/iconset'] === true && moduleFound('@ribajs/iconset')) {
+const getCopyPluginConfigForIconsetRibaModule = (config, moduleName) => {
+  if (isModuleAvailable(config, moduleName)) {
     // Copy iconset svg's
-    var ribajsIconsetConfig = {
+    const moduleConfig = {
       from: path.resolve(
-        path.dirname(require.resolve("@ribajs/iconset")),
+        path.dirname(require.resolve(moduleName)),
         "svg"
       ),
       to: path.resolve(`${rootPath}/${config.copyAssets.foldername}/iconset/`),
       toType: "dir",
-      context: path.dirname(require.resolve("@ribajs/iconset"))
+      context: path.dirname(require.resolve(moduleName))
     };
-    copyPluginConfig.push(ribajsIconsetConfig);
+    return moduleConfig;
+  }
+  return null;
+}
+
+const getCopyPluginConfigForScssThirdPartyModule = (config, moduleName, scssPath) => {
+  if (isModuleAvailable(config, moduleName)) {
+    // Copy bootstrap scss files. Note: `require.resolve('bootstrap')` resolves to `'bootstrap/dist/js/bootstrap.js'` because this is the main file in package.json
+    const moduleConfig = {
+      from: path.resolve(
+        path.dirname(require.resolve(moduleName)),
+        scssPath
+      ),
+      to: path.resolve(`${rootPath}/${config.copyAssets.foldername}/scss/vendors/${moduleName}/`),
+      toType: "dir"
+    };
+    return moduleConfig;
+  }
+  return null;
+}
+
+var getCopyPluginConfig = (config) => {
+  var copyPluginConfig = [];
+
+  const copyRibaScssModules = ['@ribajs/bs4', '@ribajs/photoswipe', '@ribajs/i18n', '@ribajs/shopify', '@ribajs/shopify-tda', '@ribajs/shopify-easdk'];
+
+  for (const ribaScssModule of copyRibaScssModules) {
+    if (isModuleAvailable(config, ribaScssModule)) {
+      copyPluginConfig.push(getCopyPluginConfigForScssRibaModule(config, ribaScssModule));
+    }
+  }
+
+  if (isModuleAvailable(config, '@ribajs/iconset')) {
+    copyPluginConfig.push(getCopyPluginConfigForIconsetRibaModule(config, '@ribajs/iconset'));
+  }
+
+  if (isModuleAvailable(config, 'bootstrap')) {
+    copyPluginConfig.push(getCopyPluginConfigForScssThirdPartyModule(config, 'bootstrap', "../../scss"));
   }
 
   return copyPluginConfig;
@@ -171,6 +189,10 @@ module.exports = config => {
           "@ribajs/bs4": true,
           "@ribajs/photoswipe": true,
           "@ribajs/iconset": true,
+          "@ribajs/i18n": true,
+          "@ribajs/shopify": false,
+          "@ribajs/shopify-tda": false,
+          "@ribajs/shopify-easdk": false,
         }
       }
       break;
@@ -194,6 +216,10 @@ module.exports = config => {
           "@ribajs/bs4": true,
           "@ribajs/photoswipe": true,
           "@ribajs/iconset": true,
+          "@ribajs/i18n": true,
+          "@ribajs/shopify": true,
+          "@ribajs/shopify-tda": true,
+          "@ribajs/shopify-easdk": false,
         }
       }
       break;
@@ -218,6 +244,10 @@ module.exports = config => {
           "@ribajs/bs4": true,
           "@ribajs/photoswipe": true,
           "@ribajs/iconset": true,
+          "@ribajs/i18n": true,
+          "@ribajs/shopify": true,
+          "@ribajs/shopify-tda": true,
+          "@ribajs/shopify-easdk": true,
         }
       }
 
