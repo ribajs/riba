@@ -1,16 +1,15 @@
-import { Component } from "@ribajs/core";
+import { Component, Utils } from "@ribajs/core";
 import template from "./bs4-share.component.html";
 import labelTemplate from "./bs4-share.label.html";
-import { ShareItem } from "../../interfaces";
+import { ShareItem, ShareUrlType } from "../../interfaces";
 import { DropdownService } from "@ribajs/bs4";
 
 export interface Scope {
+  type: ShareUrlType;
   title: string;
   text: string;
   /** Page url to share */
   url: string;
-  /** Url if you wish to share images, videos, etc  TODO implement this */
-  imediaUrl: "";
   label: string;
   labelTemplate: string;
   
@@ -61,7 +60,7 @@ export class Bs4ShareComponent extends Component {
   public static tagName = "bs4-share";
 
   static get observedAttributes() {
-    return ["title", "text", "text-i18n", "url", "media-url", "label", "label-i18n"];
+    return ["type", "title", "text", "text-i18n", "url", "media-url", "label", "label-i18n"];
   }
 
   protected dropdown?: DropdownService;
@@ -69,100 +68,134 @@ export class Bs4ShareComponent extends Component {
   // Count of Bs4ShareComponent components
   static count = 0;
 
-  protected scope: Scope = {
-    title: document.title,
-    text: "Look at this! 🤩", // 👀
-    url: window.location.href,
-    /** TODO */
-    imediaUrl: "",
-    label: "Share",
-    labelTemplate,
-    isAndroid: navigator.userAgent.match(/Android/i) !== null,
-    isIos: navigator.userAgent.match(/iPhone|iPad|iPod/i) !== null,
-    isDesktop: false,
-    isNative: typeof navigator.share === "function",
-    dropdownId: "dropdownShare" + Bs4ShareComponent.count,
-    shareItems: [
+  protected scope: Scope;
+
+  constructor(element?: HTMLElement) {
+    super(element);
+    this.scope = this.getScopeDefaults();
+    
+    console.debug('constructor', this.scope);
+    this.init(Bs4ShareComponent.observedAttributes);
+    this.addEventListeners();
+    Bs4ShareComponent.count++;
+  }
+
+  protected getDefaultShareServices() {
+    const newLine = "%0A";
+    const shareItems: ShareItem[] = [
       {
         id: "facebook",
-        label: "Share on Facebook",
+        label: "Facebook",
+        // It is not possible to add a message on facebook sharer.php but with the Dialog API, see https://developers.facebook.com/docs/javascript/reference/FB.ui
         urlTemplate: "https://www.facebook.com/sharer/sharer.php?u={{url}}",
+        mediaUrlTemplate: "https://www.facebook.com/sharer/sharer.php?u={{media_url}}",
         type: 'popup',
         url: "",
-        enabled: true,
+        availableFor: ['page', 'image', 'video'],
       },
       {
         id: "twitter",
-        label: "Tweet",
+        label: "Twitter",
         urlTemplate:
           "https://twitter.com/intent/tweet?text={{text}}&url={{url}}",
+        mediaUrlTemplate: `https://twitter.com/intent/tweet?text={{text}}&url={{media_url}}${newLine}({{url}})`,
         url: "",
-        enabled: true,
+        availableFor: ['page', 'image', 'video'],
       },
       {
         id: "pinterest",
-        label: "Pin it",
+        label: "Pinterest",
         urlTemplate:
           "http://www.pinterest.com/pin/create/button/" +
-          "?url={{url}}&media={{image_url}}&description={{text}}",
-          type: 'popup',
+          "?url={{url}}&media={{media_url}}&description={{text}}",
+        type: 'popup',
         url: "",
-        enabled: true,
+
+        availableFor: ['image', 'video'],
       },
       {
         id: "whatsapp",
         label: "WhatsApp",
-        urlTemplate: "https://api.whatsapp.com/send?text={{text}}",
+        urlTemplate: `https://api.whatsapp.com/send?text={{text}}${newLine}${newLine}{{url}}`,
+        mediaUrlTemplate: `https://api.whatsapp.com/send?text={{text}}${newLine}${newLine}{{media_url}}${newLine}({{url}})`,
         type: 'popup',
         url: "",
-        enabled: true,
+        availableFor: ['page', 'image', 'video'],
       },
       {
         id: "telegram",
         label: "Telegram",
-        urlTemplate: "https://telegram.me/share/url?url={{url}}&text={{text}}",
+        urlTemplate: `https://telegram.me/share/url?url={{media_url}}&text={{text}}`,
+        mediaUrlTemplate: `https://telegram.me/share/url?url={{media_url}}&text={{text}}${newLine}({{url}})`,
         type: 'popup',
         url: "",
-        enabled: true,
+        availableFor: ['page', 'image', 'video'],
       },
       {
         id: "email",
         label: "Email",
-        urlTemplate: "mailto:?subject={{title}}&body={{text}}",
+        urlTemplate: `mailto:?subject={{title}}&body={{text}}${newLine}${newLine}{{url}}`,
+        mediaUrlTemplate: `mailto:?subject={{title}}&body={{text}}${newLine}${newLine}{{media_url}}${newLine}({{url}})`,
         type: 'href',
         url: "",
-        enabled: false,
+        availableFor: ['page', 'image', 'video'],
       },
-      {
-        id: "sms",
-        label: "SMS",
-        urlTemplate: "sms:?body={{text}}",
-        type: 'href',
-        url: "",
-        enabled: false,
-      },
+      // {
+      //   id: "sms",
+      //   label: "SMS",
+      //   urlTemplate: "sms:?body={{text}}",
+      //   type: 'href',
+      //   url: "",
+      //   canPassUrl: false,
+      //   availableFor: ['page', 'image', 'video'],
+      // },
       {
         id: "download",
         label: "Download image",
-        urlTemplate: "{{raw_image_url}}",
+        urlTemplate: "{{raw_media_url}}",
         type: 'download',
         url: "",
-        // TODO disabled until imediaUrl is impementated
-        enabled: false,
+        availableFor: ['image', 'video'],
       },
-    ],
-    // Methods
-    share: this.share,
-    shareOnService: this.shareOnService,
-  };
+    ];
+    return shareItems;
+  }
 
-  constructor(element?: HTMLElement) {
-    super(element);
-    console.debug('constructor', this.scope);
-    this.init(Bs4ShareComponent.observedAttributes);
-    this.scope.isDesktop = !this.scope.isIos && !this.scope.isAndroid; // on those two support "mobile deep links", so HTTP based fallback for all others.
-    this.addEventListeners();
-    Bs4ShareComponent.count++;
+  protected isIos() {
+    return navigator.userAgent.match(/iPhone|iPad|iPod/i) !== null;
+  }
+
+  protected isAndroid() {
+    return navigator.userAgent.match(/Android/i) !== null;
+  }
+
+  protected browserSupportsNativeShare() {
+    return typeof navigator.share === "function";
+  }
+
+  protected getScopeDefaults(): Scope {
+    const scope: Scope = {
+      type: 'page',
+      title: document.title,
+      text: "Look at this! 👀🤩",
+      url: window.location.href,
+      label: "Share",
+      labelTemplate,
+      isAndroid: this.isAndroid(),
+      isIos: this.isIos(),
+      isDesktop: false,
+      isNative: this.browserSupportsNativeShare(),
+      dropdownId: "dropdownShare" + Bs4ShareComponent.count,
+      shareItems: this.getDefaultShareServices(),
+      // Methods
+      share: this.share,
+      shareOnService: this.shareOnService,
+    }
+
+    // on those two support "mobile deep links", so HTTP based fallback for all others.
+    scope.isDesktop = !scope.isIos && !scope.isAndroid; 
+
+    return scope;
   }
 
   protected onExternalOpenEvent() {
@@ -188,38 +221,56 @@ export class Bs4ShareComponent extends Component {
     this.el.removeEventListener('close', this.onExternalOpenEvent.bind(this));
   }
 
-  protected getURLToShare() {
-    return encodeURIComponent(this.scope.url);
-  }
-
-  protected getPageURLForShare() {
+  protected getURLForShare() {
+    if (this.scope.type === 'page' && this.scope.url) {
+      return Utils.getUrl(this.scope.url);
+    }
     return window.location.href;
   }
 
-  protected getTextForShare() {
-    // return encodeURIComponent(`${this.scope.text}\n\n${this.scope.url}`);
-    return `${this.scope.text}\n\n${this.scope.url}`;
+  protected getMediaUrlForShare() {
+    if (this.scope.type !== 'page' && this.scope.url) {
+      return Utils.getUrl(this.scope.url);
+    }
+    return "";
   }
 
+  protected getTextForShare() {
+    return this.scope.text;
+  }
+
+  /**
+   * Currently only used for email
+   * @param appendUrl 
+   */
+  protected getTitleForShare() {
+    return this.scope.title;
+  }
 
   protected updateShareURLs() {
-    let shareURL = "",
-      imageUrl = "",
-      pageUrl = "",
-      shareText = "";
+    for (const shareItem of this.scope.shareItems) {
+      const url = this.getURLForShare();
+      const mediaUrl = this.getMediaUrlForShare();
+      const shareText = this.getTextForShare();
+      const shareTitle = this.getTitleForShare();
+      let urlTemplate = shareItem.urlTemplate;
+      
+      if (this.scope.type !== 'page' && shareItem.mediaUrlTemplate) {
+        urlTemplate = shareItem.mediaUrlTemplate;
+      }
 
-    for (let i = 0; i < this.scope.shareItems.length; i++) {
-      imageUrl = this.getURLToShare();
-      pageUrl = this.getPageURLForShare();
-      shareText = this.getTextForShare();
-      shareURL = this.scope.shareItems[i].urlTemplate
-        .replace("{{url}}", encodeURIComponent(pageUrl))
-        .replace("{{image_url}}", encodeURIComponent(imageUrl))
-        .replace("{{raw_image_url}}", imageUrl)
-        .replace("{{text}}", encodeURIComponent(shareText));
+      const shareURL = urlTemplate
+      .replace("{{url}}", encodeURIComponent(url))
+        .replace("{{url}}", encodeURIComponent(url))
+        .replace("{{media_url}}", encodeURIComponent(mediaUrl))
+        .replace("{{raw_media_url}}", mediaUrl)
+        .replace("{{text}}", encodeURIComponent(shareText))
+        .replace("{{title}}", encodeURIComponent(shareTitle));
 
-      this.scope.shareItems[i].url = shareURL;
+      shareItem.available = shareItem.availableFor.includes(this.scope.type);
+      shareItem.url = shareURL;
     }
+
   }
 
   protected initDropdown() {

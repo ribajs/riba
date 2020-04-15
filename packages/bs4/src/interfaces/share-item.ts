@@ -1,3 +1,5 @@
+export type ShareUrlType = 'page' | 'image' | 'video';
+
 export interface ShareItem {
     /**
      * An id for this share button entry. The share element associated with this entry will be classed with
@@ -26,11 +28,15 @@ export interface ShareItem {
      * Url string with placeholders to generate the url string above
      */
     urlTemplate: string;
+
+    mediaUrlTemplate?: string;
   
     /**
      * Whether this link is a direct download button or not.
      */
     type?: 'download' | 'popup' | 'href';
-  
-    enabled: boolean;
+
+    availableFor: ShareUrlType[];
+
+    available?: boolean;
   }

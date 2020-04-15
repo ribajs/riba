@@ -328,7 +328,7 @@ export class Utils {
   }
 
   /**
-   * Return the current url
+   * Return the current full url
    *
    * @return {string} currentUrl
    */
