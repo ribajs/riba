@@ -1,0 +1,8 @@
+<div class="dropdown">
+  <div class="dropdown-toggle-share" rv-template="labelTemplate"></div>
+  <div class="dropdown-menu" aria-labelledby="dropdownShare">
+    <a rv-each-item="shareItems" rv-show="item.enabled" rv-download="item.type | eq 'download'" rv-type="item.type" target="_blank" rv-on-click="shareOnService" class="dropdown-item" rv-href="item.url" rv-html="item.label"></a>
+  </div>
+</div>
+
+
