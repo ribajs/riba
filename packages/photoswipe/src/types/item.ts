@@ -8,4 +8,5 @@ export interface Item extends PhotoSwipe.Item {
    * The caption for this item.
    */
   title?: string;
+  element?: HTMLImageElement;
 }
