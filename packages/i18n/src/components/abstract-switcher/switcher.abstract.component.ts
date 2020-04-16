@@ -1,27 +1,22 @@
-import {
-  Component,
-  Binder,
-  View,
-} from '@ribajs/core';
-import { Langcode } from '../../interfaces';
-import { ALocalesService } from '../../services/locales-base.service';
+import { Component, Binder, View } from "@ribajs/core";
+import { Langcode } from "../../interfaces";
+import { ALocalesService } from "../../services/locales-base.service";
 
 export interface Scope {
   langcodes: Langcode[];
-  switch: AI18nSwitcherComponent['switch'];
-  toggle: AI18nSwitcherComponent['toggle'];
+  switch: AI18nSwitcherComponent["switch"];
+  toggle: AI18nSwitcherComponent["toggle"];
   ready: boolean;
 }
 
 export abstract class AI18nSwitcherComponent extends Component {
-
   protected abstract localesService: ALocalesService;
 
   protected scope = {
-    langcodes: <Langcode[]> [],
+    langcodes: [] as Langcode[],
     switch: this.switch,
     toggle: this.toggle,
-    ready: <boolean> false,
+    ready: false,
   };
 
   constructor(element?: HTMLElement) {
@@ -54,7 +49,7 @@ export abstract class AI18nSwitcherComponent extends Component {
       event.stopPropagation();
     }
     for (const i in this.scope.langcodes) {
-      if (this.scope.langcodes.hasOwnProperty(i)) {
+      if (Object.prototype.hasOwnProperty.call(this, i)) {
         if (this.scope.langcodes[i].active !== true) {
           this.setLangcode(this.scope.langcodes[i].code);
           return;
@@ -67,49 +62,53 @@ export abstract class AI18nSwitcherComponent extends Component {
     if (this.localesService.ready) {
       const langcode = this.localesService.getLangcode();
       if (langcode) {
-        return this.initLocales(langcode)
-        .then((langcodes) => {
+        return this.initLocales(langcode).then(() => {
           return super.init(observedAttributes);
         });
       }
     }
-    return new Promise<View | null | undefined>((resolve, reject) => {
-      this.localesService.event.on('ready', (langcode: string, translationNeeded: boolean) => {
-        this.initLocales(langcode)
-        .then((langcodes) => {
-          super.init(observedAttributes)
-          .then((view) => {
-            resolve(view);
+    return new Promise<View | null | undefined>((resolve) => {
+      this.localesService.event.on(
+        "ready",
+        (langcode: string, translationNeeded: boolean) => {
+          this.initLocales(langcode).then((langcodes) => {
+            super.init(observedAttributes).then((view) => {
+              resolve(view);
+            });
           });
-        });
-      });
+        }
+      );
     });
   }
 
   protected async initLocales(langcode: string) {
     // set avaible langcodes
-    return this.localesService.getAvailableLangcodes()
-    .then((langcodes) => {
-      this.scope.langcodes = langcodes;
-      // set active langcodes
-      this.scope.langcodes.forEach((langCode) => {
-        langCode.active = (langCode.code === langcode);
-      });
-      return this.scope.langcodes;
-    })
-    .then((langcodes) => {
-      this.localesService.event.on('changed', (changedLangcode: string, initial: boolean) => {
-        // Activate localcode and disable the other
+    return this.localesService
+      .getAvailableLangcodes()
+      .then((langcodes) => {
+        this.scope.langcodes = langcodes;
+        // set active langcodes
         this.scope.langcodes.forEach((langCode) => {
-          langCode.active = (langCode.code === changedLangcode);
+          langCode.active = langCode.code === langcode;
         });
+        return this.scope.langcodes;
+      })
+      .then((langcodes) => {
+        this.localesService.event.on(
+          "changed",
+          (changedLangcode: string, initial: boolean) => {
+            // Activate localcode and disable the other
+            this.scope.langcodes.forEach((langCode) => {
+              langCode.active = langCode.code === changedLangcode;
+            });
+          }
+        );
+        return langcodes;
+      })
+      .then((langcodes) => {
+        this.scope.ready = true;
+        return langcodes;
       });
-      return langcodes;
-    })
-    .then((langcodes) => {
-      this.scope.ready = true;
-      return langcodes;
-    });
   }
 
   protected setLangcode(langcode: string) {

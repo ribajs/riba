@@ -73,8 +73,11 @@ export class Bs4ShareComponent extends Component {
   constructor(element?: HTMLElement) {
     super(element);
     this.scope = this.getScopeDefaults();
+
+    this.context.debug = true;
+    this.context.color = 'blue';
     
-    console.debug('constructor', this.scope);
+    this.debug('constructor', this.scope);
     this.init(Bs4ShareComponent.observedAttributes);
     this.addEventListeners();
     Bs4ShareComponent.count++;

@@ -129,6 +129,12 @@ export class View {
       binding.bind();
     });
     this.webComponents.forEach((webcomponent) => {
+      webcomponent.context = {
+        fallback: !!this.options.forceComponentFallback,
+        view: this,
+        debug: false,
+      };
+
       webcomponent.connectedFallbackCallback();
     });
   }
@@ -346,7 +352,7 @@ export class View {
   ) {
     nodeName = nodeName || COMPONENT.tagName;
     // Fallback
-    if (!window.customElements) {
+    if (!window.customElements || this.options.forceComponentFallback) {
       this.registComponentFallback(node, COMPONENT, nodeName);
     } else {
       // if node.constructor is not HTMLElement and not HTMLUnknownElement, it was registed
@@ -383,7 +389,7 @@ export class View {
     const context: RibaComponentContext = {
       fallback: true,
       view: this,
-      debug: true,
+      debug: false,
     };
     const component = new COMPONENT(node);
     component.context = context;
@@ -396,7 +402,7 @@ export class View {
    * @param nodeName
    */
   protected registComponent(COMPONENT: TypeOfComponent, nodeName?: string) {
-    if (!window.customElements) {
+    if (!window.customElements || this.options.forceComponentFallback) {
       console.warn("customElements not supported by your browser! Do nothing.");
       return;
     }

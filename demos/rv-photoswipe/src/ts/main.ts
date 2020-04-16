@@ -5,6 +5,7 @@ import { photoswipeModule } from "@ribajs/photoswipe";
 import { PhotoswipeDemoModule } from "./photoswipe-demo.module";
 
 const riba = new Riba();
+riba.configure({ forceComponentFallback: false });
 const model = {};
 
 // Register modules

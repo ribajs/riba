@@ -27,12 +27,12 @@ export interface ObservedAttributesToCheck {
 export abstract class Component extends FakeHTMLElement {
   public static tagName: string;
 
-  protected _context?: RibaComponentContext;
+  protected _context: RibaComponentContext = {};
 
   /**
    * Context of this component, used for debugging
    */
-  public set context(_context: RibaComponentContext | undefined) {
+  public set context(_context: RibaComponentContext) {
     if (_context) {
       this._context = _context;
       if (this._context.debug) {
@@ -40,7 +40,7 @@ export abstract class Component extends FakeHTMLElement {
       }
     }
   }
-  public get context(): RibaComponentContext | undefined {
+  public get context(): RibaComponentContext {
     return this._context;
   }
 
@@ -88,7 +88,7 @@ export abstract class Component extends FakeHTMLElement {
   public remove() {
     if (this.el && this.el.parentElement) {
       this.el.parentElement.removeChild(this.el);
-      if (!(window as any).customElements) {
+      if (!(window as any).customElements || this._context?.fallback) {
         this.disconnectedFallbackCallback();
       }
     }
@@ -106,11 +106,11 @@ export abstract class Component extends FakeHTMLElement {
   protected abstract template(): Promise<string | null> | string | null;
 
   protected debug(...args: unknown[]) {
-    if (!this.context?.debug) {
+    if (!this.context.debug) {
       return;
     }
     if (typeof args[0] === "string") {
-      args[0] = `%c[${this.constructor.name}] ${args[0]}`;
+      args[0] = `%c${args[0]}`;
       args.splice(1, 0, `color: ${this.context.color};`);
     }
     console.debug(...args);
@@ -166,7 +166,7 @@ export abstract class Component extends FakeHTMLElement {
    * @param observedAttribute
    */
   protected attributeIsPassed(observedAttribute: string) {
-    return this.el.getAttribute(observedAttribute) !== null;
+    return this.el.hasAttribute(observedAttribute);
   }
 
   /**
@@ -220,12 +220,12 @@ export abstract class Component extends FakeHTMLElement {
     requiredAttributes.forEach((requiredAttribute: string) => {
       if (!this.scope[requiredAttribute] || !this.scope[requiredAttribute]) {
         this.debug(
-          `[${this.constructor.name}] Attribute ${requiredAttribute} not set: ${this.scope[requiredAttribute]}`
+          `Attribute ${requiredAttribute} not set: ${this.scope[requiredAttribute]}`
         );
         allDefined = false;
       } else {
         this.debug(
-          `[${this.constructor.name}] Attribute ${requiredAttribute} is defined: ${this.scope[requiredAttribute]}`
+          `Attribute ${requiredAttribute} is defined: ${this.scope[requiredAttribute]}`
         );
       }
     });
@@ -366,6 +366,7 @@ export abstract class Component extends FakeHTMLElement {
     newValue: any,
     namespace: string | null
   ) {
+    this.debug("attributeChangedCallback", attributeName, newValue);
     if (
       this.observedAttributesToCheck &&
       this.observedAttributesToCheck[attributeName]
@@ -379,6 +380,11 @@ export abstract class Component extends FakeHTMLElement {
 
     if (this.scope && this.scope[parsedAttributeName]) {
       oldValue = this.scope[parsedAttributeName];
+    }
+
+    // Stop if the value has not changed
+    if (this.scope[parsedAttributeName] === newValue) {
+      return;
     }
 
     // automatically inject observed attributes to view scope
@@ -558,11 +564,32 @@ export abstract class Component extends FakeHTMLElement {
   }
 
   /**
+   * Load all attributes and calls the attributeChangedCallback for each attribute.
+   * This method is used for fallback implementations, normally the browser calls the attributeChangedCallback for you
+   */
+  private loadAttributes(observedAttributes) {
+    const attributes = this.el.attributes;
+    for (const i in attributes) {
+      const attribute: Node = attributes[i];
+      const name = attribute.nodeName;
+      if (observedAttributes.indexOf(name) !== -1) {
+        const newValue = attribute.nodeValue;
+        this.attributeChangedCallback(name, undefined, newValue, null);
+      }
+    }
+  }
+
+  /**
    * Event handler to listen attribute change event as fallback for MutationObserver
    */
   private initAttributeObserver(observedAttributes: string[]) {
-    if ((window as any).customElements && !this.context?.fallback) {
+    if (
+      (window as any).customElements &&
+      !this.context.fallback &&
+      !(window as any).forceComponentFallback
+    ) {
       // use native implementaion
+      this.debug("initAttributeObserver: Use native implementaion");
     } else {
       if ((window as any).MutationObserver) {
         // use MutationObserver as fallback
@@ -587,23 +614,14 @@ export abstract class Component extends FakeHTMLElement {
         this.attributeObserverFallback.observe(this.el, {
           attributes: true,
         });
+        this.loadAttributes(observedAttributes);
       } else {
         // use attribute change event as fallback for MutationObserver
         this.el.addEventListener(
           "binder-changed",
           this.binderChangedEventHandler
         );
-      }
-
-      // call attributeChangedCallback for all already setted static attributes
-      const attributes = this.el.attributes;
-      for (const i in attributes) {
-        const attribute: Node = attributes[i];
-        const name = attribute.nodeName;
-        if (observedAttributes.indexOf(name) !== -1) {
-          const newValue = attribute.nodeValue;
-          this.attributeChangedCallback(name, null, newValue, null);
-        }
+        this.loadAttributes(observedAttributes);
       }
     }
   }
