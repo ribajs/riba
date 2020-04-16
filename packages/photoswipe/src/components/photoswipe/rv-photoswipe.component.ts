@@ -426,6 +426,10 @@ export class PhotoswipeComponent extends Component {
       this.scope.isFullscreen = false;
       this.scope.isZoomed = false;
 
+      if (item.element?.currentSrc) {
+        this.scope.items[index].msrc = item.element.currentSrc;
+      }
+
       this.pswp = new PhotoSwipe<Options, PhotoSwipeUI>(
         this.pswpElement,
         PhotoSwipeUI,
@@ -521,6 +525,7 @@ export class PhotoswipeComponent extends Component {
         msrc: this.images[i].currentSrc || this.images[i].src || src,
         w: Number(width),
         h: Number(height),
+        element: this.images[i],
       });
     }
   }
