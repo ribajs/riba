@@ -49,7 +49,7 @@ export abstract class AI18nSwitcherComponent extends Component {
       event.stopPropagation();
     }
     for (const i in this.scope.langcodes) {
-      if (Object.prototype.hasOwnProperty.call(this, i)) {
+      if (Object.prototype.hasOwnProperty.call(this.scope.langcodes, i)) {
         if (this.scope.langcodes[i].active !== true) {
           this.setLangcode(this.scope.langcodes[i].code);
           return;

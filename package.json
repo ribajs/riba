@@ -4,7 +4,6 @@
   "version": "1.8.0",
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [],
-  "private": false,
   "main": "src/index.ts",
   "url": "https://github.com/ribajs/riba",
   "license": "MIT",

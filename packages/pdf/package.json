@@ -56,7 +56,7 @@
   "dependencies": {
     "@ribajs/core": "^1.8.0",
     "pdf.js": "^0.1.0",
-    "pdfjs-dist": "^2.4.456"
+    "pdfjs-dist": "^2.3.200"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"
