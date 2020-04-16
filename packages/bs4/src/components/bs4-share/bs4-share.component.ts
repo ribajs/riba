@@ -367,7 +367,7 @@ export class Bs4ShareComponent extends Component {
   }
 
   protected requiredAttributes() {
-    return ["title", "text", "url", "label"];
+    return ["url"];
   }
 
   protected template() {
