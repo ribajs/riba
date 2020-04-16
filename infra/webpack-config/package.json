@@ -28,7 +28,7 @@
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.5.2",
     "html-loader": "^1.1.0",
-    "html-webpack-plugin": "https://github.com/fivethreeo/html-webpack-plugin#webpack5-act",
+    "html-webpack-plugin": "https://github.com/jantimon/html-webpack-plugin.git#master",
     "inspectpack": "^4.4.0",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.1",

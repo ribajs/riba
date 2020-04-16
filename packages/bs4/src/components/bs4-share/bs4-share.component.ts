@@ -60,7 +60,7 @@ export class Bs4ShareComponent extends Component {
   public static tagName = "bs4-share";
 
   static get observedAttributes() {
-    return ["type", "title", "text", "text-i18n", "url", "media-url", "label", "label-i18n"];
+    return ["type", "title", "text", "url", "media-url", "label"];
   }
 
   protected dropdown?: DropdownService;
