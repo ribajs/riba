@@ -32,7 +32,7 @@ export const parentBinder: Binder<Assign> = {
   },
 
   onAskForParent(el: HTMLElement) {
-    console.debug("onAskForParent", el, this.view.models);
+    // console.debug("onAskForParent", el, this.view.models);
     el.dispatchEvent(new CustomEvent("parent", { detail: this.view.models }));
   },
 };

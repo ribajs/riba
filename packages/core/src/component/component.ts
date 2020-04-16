@@ -5,7 +5,7 @@
  * @see https://developer.mozilla.org/de/docs/Web/Web_Components/Using_custom_elements
  */
 
-import { EventHandler, Formatter, RibaComponentContext } from "../interfaces";
+import { EventHandler, Formatter } from "../interfaces";
 import { View } from "../view";
 import { Riba } from "../riba";
 import { Binding } from "../binding";
@@ -27,22 +27,9 @@ export interface ObservedAttributesToCheck {
 export abstract class Component extends FakeHTMLElement {
   public static tagName: string;
 
-  protected _context: RibaComponentContext = {};
-
-  /**
-   * Context of this component, used for debugging
-   */
-  public set context(_context: RibaComponentContext) {
-    if (_context) {
-      this._context = _context;
-      if (this._context.debug) {
-        this._context.color = Utils.getRandomColor();
-      }
-    }
-  }
-  public get context(): RibaComponentContext {
-    return this._context;
-  }
+  public _debug = false;
+  public _color?: string;
+  public _fallback = false;
 
   protected view?: View;
 
@@ -71,6 +58,10 @@ export abstract class Component extends FakeHTMLElement {
   constructor(element?: HTMLUnknownElement) {
     super(element);
 
+    if (this._debug) {
+      this._color = Utils.getRandomColor();
+    }
+
     if (element) {
       this.el = element;
     } else if (window.customElements) {
@@ -88,14 +79,14 @@ export abstract class Component extends FakeHTMLElement {
   public remove() {
     if (this.el && this.el.parentElement) {
       this.el.parentElement.removeChild(this.el);
-      if (!(window as any).customElements || this._context?.fallback) {
+      if (!(window as any).customElements || this._fallback) {
         this.disconnectedFallbackCallback();
       }
     }
   }
 
   public connectedFallbackCallback() {
-    this.debug(`Called connectedFallbackCallback`, this.context);
+    this.debug(`Called connectedFallbackCallback`);
     this.connectedCallback();
   }
 
@@ -106,12 +97,17 @@ export abstract class Component extends FakeHTMLElement {
   protected abstract template(): Promise<string | null> | string | null;
 
   protected debug(...args: unknown[]) {
-    if (!this.context.debug) {
+    if (!this._debug) {
       return;
     }
     if (typeof args[0] === "string") {
-      args[0] = `%c[${this.constructor.name || this.el.tagName}] ${args[0]}`;
-      args.splice(1, 0, `color: ${this.context.color};`);
+      const name = this.constructor.name || this.el.tagName;
+      if (this._color) {
+        args[0] = `%c[${name}] ${args[0]}`;
+        args.splice(1, 0, `color: ${this._color};`);
+      } else {
+        args[0] = `[${name}] ${args[0]}`;
+      }
     }
     console.debug(...args);
   }
@@ -585,7 +581,7 @@ export abstract class Component extends FakeHTMLElement {
   private initAttributeObserver(observedAttributes: string[]) {
     if (
       (window as any).customElements &&
-      !this.context.fallback &&
+      !this._fallback &&
       !(window as any).forceComponentFallback
     ) {
       // use native implementaion

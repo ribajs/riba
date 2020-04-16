@@ -173,7 +173,7 @@ export class PhotoswipeComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    // console.debug("constructor", this);
+    // this.debug("constructor", this);
   }
 
   protected connectedCallback() {
@@ -197,7 +197,7 @@ export class PhotoswipeComponent extends Component {
   }
 
   protected async beforeBind() {
-    // console.debug("beforeBind", this.scope);
+    // this.debug("beforeBind", this.scope);
     return await super.beforeBind();
   }
 
@@ -218,7 +218,7 @@ export class PhotoswipeComponent extends Component {
    * Update UI here (like "1 of X" indicator)
    */
   protected onBeforeChange() {
-    // console.debug("onBeforeChange", this.pswp?.currItem);
+    // this.debug("onBeforeChange", this.pswp?.currItem);
     this.closeShare();
   }
 
@@ -228,7 +228,7 @@ export class PhotoswipeComponent extends Component {
    */
   protected onAfterChange() {
     this.scope.currItem = this.pswp?.currItem;
-    // console.debug("onAfterChange", this.scope.currItem);
+    // this.debug("onAfterChange", this.scope.currItem);
     setTimeout(() => {
       this.scope.isZoomAllowed = this.isZoomAllowed();
     }, 0);
@@ -240,14 +240,14 @@ export class PhotoswipeComponent extends Component {
    * @param item slide object
    */
   protected onImageLoadComplete(/*index: number, item: Item*/) {
-    // console.debug("imageLoadComplete", index, item);
+    // this.debug("imageLoadComplete", index, item);
   }
 
   /**
    * Viewport size changed
    */
   protected onResize() {
-    // console.debug("onResize", this.pswp?.currItem);
+    // this.debug("onResize", this.pswp?.currItem);
     this.scope.isZoomAllowed = this.isZoomAllowed();
   }
 
@@ -259,42 +259,42 @@ export class PhotoswipeComponent extends Component {
    * @param item slide object
    */
   protected onGettingData(/*index: number, item: Item*/) {
-    // console.debug("onGettingData", index, item);
+    // this.debug("onGettingData", index, item);
   }
 
   protected onMouseUsed() {
-    // console.debug("onMouseUsed");
+    // this.debug("onMouseUsed");
   }
   /**
    * Opening zoom in animation starting
    */
   protected onInitialZoomIn() {
-    // console.debug("onInitialZoomIn");
+    // this.debug("onInitialZoomIn");
   }
 
   /**
    * Opening zoom in animation finished
    */
   protected onInitialZoomInEnd() {
-    // console.debug("onInitialZoomInEnd");
+    // this.debug("onInitialZoomInEnd");
   }
 
   /**
    * Closing zoom out animation started
    */
   protected onInitialZoomOut() {
-    // console.debug("onInitialZoomOut");
+    // this.debug("onInitialZoomOut");
   }
 
   /**
    * Closing zoom out animation finished
    */
   protected onInitialZoomOutEnd() {
-    // console.debug("onInitialZoomOutEnd");
+    // this.debug("onInitialZoomOutEnd");
   }
 
   protected onParseVerticalMargin() {
-    // console.debug("onParseVerticalMargin");
+    // this.debug("onParseVerticalMargin");
   }
 
   /**
@@ -302,7 +302,7 @@ export class PhotoswipeComponent extends Component {
    * (triggers before closing animation)
    */
   protected onUnbindEvents() {
-    // console.debug("onUnbindEvents");
+    // this.debug("onUnbindEvents");
     this.closeShare();
   }
 
@@ -310,7 +310,7 @@ export class PhotoswipeComponent extends Component {
    * Gallery starts closing
    */
   protected onClose() {
-    // console.debug("onClose");
+    // this.debug("onClose");
     this.pswp?.ui?.getFullscreenAPI()?.exit();
     this.closeShare();
     this.scope.isZoomAllowed = false;
@@ -321,7 +321,7 @@ export class PhotoswipeComponent extends Component {
    * lean up your stuff here.
    */
   protected onDestroy() {
-    // console.debug("onDestroy");
+    // this.debug("onDestroy");
     this.closeShare();
   }
 
@@ -337,7 +337,7 @@ export class PhotoswipeComponent extends Component {
    * Look at the "Implementing inline gallery display" FAQ section for more info.
    */
   protected onUpdateScrollOffset() {
-    // console.debug("onUpdateScrollOffset");
+    // this.debug("onUpdateScrollOffset");
   }
 
   /**
@@ -347,7 +347,7 @@ export class PhotoswipeComponent extends Component {
    * @param preventObj
    */
   protected onPreventDragEvent(e: Event, isDown: boolean, preventObj: any) {
-    // console.debug("onPreventDragEvent", e, isDown, preventObj);
+    // this.debug("onPreventDragEvent", e, isDown, preventObj);
 
     // e - original event
     // isDown - true = drag start, false = drag release
@@ -381,7 +381,7 @@ export class PhotoswipeComponent extends Component {
     this.pswp?.toggleDesktopZoom();
     this.scope.zoomLevel = this.pswp?.getZoomLevel() || 1;
     this.scope.isZoomed = this.scope.zoomLevel < 1;
-    // console.debug("toggleZoom", this.scope.zoomLevel);
+    // this.debug("toggleZoom", this.scope.zoomLevel);
   }
 
   public toggleFullscreen() {
@@ -412,7 +412,7 @@ export class PhotoswipeComponent extends Component {
   }
 
   public open(item: Item) {
-    // console.debug("open", item, this.scope.items);
+    // this.debug("open", item, this.scope.items);
     if (!this.pswpElement) {
       console.error(
         `Element with selector "${this.scope.fullscreenContainerSelector}" not found`
@@ -442,7 +442,7 @@ export class PhotoswipeComponent extends Component {
       this.scope.isZoomAllowed = this.isZoomAllowed();
       this.scope.currItem = this.pswp?.currItem;
 
-      console.debug("isZoomAllowed", this.scope.isZoomAllowed);
+      this.debug("isZoomAllowed", this.scope.isZoomAllowed);
 
       //add listener
     } else {
@@ -537,7 +537,7 @@ export class PhotoswipeComponent extends Component {
   }
 
   protected async afterBind() {
-    console.debug("afterBind", this.scope);
+    // this.debug("afterBind", this.scope);
     await super.afterBind();
 
     this.setItems();

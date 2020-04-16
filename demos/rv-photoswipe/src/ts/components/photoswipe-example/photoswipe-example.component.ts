@@ -15,7 +15,7 @@ export class PhotoswipeExampleComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    console.debug("constructor", this);
+    this.debug("constructor", this);
   }
 
   protected connectedCallback() {
@@ -63,10 +63,10 @@ export class PhotoswipeExampleComponent extends Component {
   protected template() {
     // Only set the component template if there no childs already
     if (this.el.hasChildNodes()) {
-      // console.debug('Do not use template, because element has child nodes');
+      // this.debug('Do not use template, because element has child nodes');
       return null;
     } else {
-      // console.debug('Use template', template);
+      // this.debug('Use template', template);
       return template;
     }
   }

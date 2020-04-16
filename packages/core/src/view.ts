@@ -4,7 +4,6 @@ import {
   Options,
   BindableElement,
   TypeOfComponent,
-  RibaComponentContext,
 } from "./interfaces";
 import { Binding } from "./binding";
 import { parseNode, parseDeclaration } from "./parsers";
@@ -129,12 +128,7 @@ export class View {
       binding.bind();
     });
     this.webComponents.forEach((webcomponent) => {
-      webcomponent.context = {
-        fallback: !!this.options.forceComponentFallback,
-        view: this,
-        debug: false,
-      };
-
+      webcomponent._fallback = !!this.options.forceComponentFallback;
       webcomponent.connectedFallbackCallback();
     });
   }
@@ -386,13 +380,8 @@ export class View {
   ) {
     nodeName = nodeName || COMPONENT.tagName;
     console.warn(`Fallback for Webcomponent ${nodeName}`);
-    const context: RibaComponentContext = {
-      fallback: true,
-      view: this,
-      debug: false,
-    };
     const component = new COMPONENT(node);
-    component.context = context;
+    component._fallback = !!this.options.forceComponentFallback;
     this.webComponents.push(component);
   }
 

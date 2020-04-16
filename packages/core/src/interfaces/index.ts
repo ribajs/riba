@@ -5,7 +5,6 @@ export * from "./binder.wrapper";
 export * from "./binders";
 export * from "./binding";
 export * from "./binding";
-export * from "./component-context";
 export * from "./components";
 export * from "./formatter";
 export * from "./formatters";
