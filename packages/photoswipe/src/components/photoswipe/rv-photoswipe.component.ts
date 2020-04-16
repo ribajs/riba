@@ -9,9 +9,9 @@ import { Options, Item } from "../../types";
 
 interface Scope {
   // Properties
-  items: PhotoSwipe.Item[];
+  items: Item[];
   /** Current item */
-  currItem?: PhotoSwipe.Item;
+  currItem?: Item;
   isFullscreen: boolean;
   isZoomed: boolean;
   isZoomAllowed: boolean;
@@ -239,7 +239,7 @@ export class PhotoswipeComponent extends Component {
    * @param index index of a slide that was loaded
    * @param item slide object
    */
-  protected onImageLoadComplete(/*index: number, item: PhotoSwipe.Item*/) {
+  protected onImageLoadComplete(/*index: number, item: Item*/) {
     // console.debug("imageLoadComplete", index, item);
   }
 
@@ -258,7 +258,7 @@ export class PhotoswipeComponent extends Component {
    * @param index index of a slide that was loaded
    * @param item slide object
    */
-  protected onGettingData(/*index: number, item: PhotoSwipe.Item*/) {
+  protected onGettingData(/*index: number, item: Item*/) {
     // console.debug("onGettingData", index, item);
   }
 
@@ -400,7 +400,7 @@ export class PhotoswipeComponent extends Component {
     (this.pswp?.ui as any).updateFullscreen();
   }
 
-  public openWithoutAnimation(item: PhotoSwipe.Item) {
+  public openWithoutAnimation(item: Item) {
     const oldAnimationDuration = this.options.showAnimationDuration;
     this.options.showAnimationDuration = 0;
     this.open(item);
@@ -411,7 +411,7 @@ export class PhotoswipeComponent extends Component {
     }
   }
 
-  public open(item: PhotoSwipe.Item) {
+  public open(item: Item) {
     // console.debug("open", item, this.scope.items);
     if (!this.pswpElement) {
       console.error(
@@ -426,7 +426,7 @@ export class PhotoswipeComponent extends Component {
       this.scope.isFullscreen = false;
       this.scope.isZoomed = false;
 
-      this.pswp = new PhotoSwipe(
+      this.pswp = new PhotoSwipe<Options, PhotoSwipeUI>(
         this.pswpElement,
         PhotoSwipeUI,
         this.scope.items,

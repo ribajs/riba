@@ -332,9 +332,8 @@ declare namespace PhotoSwipe {
     modal?: boolean;
   }
 
-  export interface UIFramework {
-    [name: string]: any;
-  }
+  // TODO
+  export type UIFramework = any;
 
   /**
    * Base type for PhotoSwipe user interfaces.
@@ -362,18 +361,18 @@ declare namespace PhotoSwipe {
    *
    * var pswpWithMyUI = new PhotoSwipe<MyUIOptions>(element, MyUI, items, {foo: 1, bar: "abc"});
    */
-  export interface UI<T extends Options> {
-    /**
-     * Called by PhotoSwipe after it constructs the UI.
-     */
-    init: () => void;
-  }
+  // export interface UI<T extends Options> {
+  //   /**
+  //    * Called by PhotoSwipe after it constructs the UI.
+  //    */
+  //   init: () => void;
+  // }
 }
 
 /**
  * Base PhotoSwipe class. Derived from http://photoswipe.com/documentation/api.html
  */
-declare class PhotoSwipe<T extends PhotoSwipe.Options, UI = PhotoSwipe.UI<T>> {
+declare class PhotoSwipe<T extends PhotoSwipe.Options, UI> {
   /**
    * Constructs a PhotoSwipe.
    *
@@ -392,10 +391,7 @@ declare class PhotoSwipe<T extends PhotoSwipe.Options, UI = PhotoSwipe.UI<T>> {
   constructor(
     pswpElement: HTMLElement,
     uiConstructor:
-      | (new (
-          pswp: PhotoSwipe<T>,
-          framework: PhotoSwipe.UIFramework
-        ) => PhotoSwipe.UI<T>)
+      | (new (pswp: PhotoSwipe<T, UI>, framework: PhotoSwipe.UIFramework) => UI)
       | boolean,
     items: PhotoSwipe.Item[],
     options: T

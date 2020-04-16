@@ -2,7 +2,6 @@ export interface UIElement {
   name: string;
   option:
     | "captionEl"
-    | "shareEl"
     | "zoomEl"
     | "counterEl"
     | "closeEl"

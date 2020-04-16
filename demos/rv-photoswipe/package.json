@@ -45,6 +45,8 @@
     "core-js": "^3.6.4",
     "css-loader": "^3.4.2",
     "eslint": "^6.8.0",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-prettier": "latest",
     "html-loader": "^1.0.0",
     "inspectpack": "^4.4.0",
     "jest": "^25.2.4",
@@ -68,7 +70,6 @@
     "@ribajs/extras": "^1.8.0",
     "@ribajs/iconset": "^1.8.0",
     "@ribajs/photoswipe": "^0.0.1",
-    "@types/photoswipe": "^4.1.0",
     "bootstrap": "^4.4.1",
     "terser-webpack-plugin": "^2.3.5"
   },

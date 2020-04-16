@@ -3,6 +3,11 @@ $bs4-slideshow-indicators-outsite-spacing: 50px !default;
 $bs4-slideshow-indicators-insite-spacing: 20px !default;
 
 bs4-slideshow {
+
+  user-select: none;
+  -webkit-user-drag: none;
+  user-drag: none;
+
   display: block;
   @extend .carousel !optional;
 

@@ -12,7 +12,7 @@ import * as PhotoSwipe from "photoswipe";
 
 import { FullscreenService } from "@ribajs/extras";
 
-export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
+export class PhotoSwipeUI {
   _overlayUIUpdated = false;
   _controlsVisible = true;
   _fullscrenAPI: FullscreenService | null = null;
@@ -25,7 +25,7 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
   _shareModalHidden = true;
   _initalCloseOnScrollValue: any;
   _isIdle: any;
-  _listen: PhotoSwipe<Options>["listen"];
+  _listen: PhotoSwipe<Options, PhotoSwipeUI>["listen"];
   _galleryHasOneSlide: any;
   _options: Options = {};
   _defaultUIOptions = {
@@ -82,7 +82,7 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
   ] as UIElement[];
 
   constructor(
-    protected readonly pswp: PhotoSwipe<Options>,
+    protected readonly pswp: PhotoSwipe<Options, PhotoSwipeUI>,
     protected readonly framework: PhotoSwipe.UIFramework
   ) {
     this.pswp = pswp;
@@ -360,7 +360,7 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
     this._listen("beforeChange", this.update.bind(this));
 
     // toggle zoom on double-tap
-    this._listen("doubleTap", (point) => {
+    this._listen("doubleTap", (point: MouseEvent) => {
       const initialZoomLevel = this.pswp.currItem.initialZoomLevel || 1;
       if (this.pswp.getZoomLevel() !== initialZoomLevel) {
         this.pswp.zoomTo(initialZoomLevel, point, 333);
@@ -373,20 +373,29 @@ export class PhotoSwipeUI implements PhotoSwipe.UI<Options> {
     });
 
     // Allow text selection in caption
-    this._listen("preventDragEvent", (e, isDown, preventObj) => {
-      const t = (e.target || e.srcElement) as
-        | (EventTarget & HTMLElement)
-        | null;
-      if (
-        t &&
-        t.getAttribute("class") &&
-        e.type.indexOf("mouse") > -1 &&
-        (t.classList.contains("__caption") ||
-          /(SMALL|STRONG|EM)/i.test(t.tagName))
-      ) {
-        preventObj.prevent = false;
+    this._listen(
+      "preventDragEvent",
+      (
+        e: MouseEvent,
+        isDown: boolean,
+        preventObj: {
+          prevent: boolean;
+        }
+      ) => {
+        const t = (e.target || e.srcElement) as
+          | (EventTarget & HTMLElement)
+          | null;
+        if (
+          t &&
+          t.getAttribute("class") &&
+          e.type.indexOf("mouse") > -1 &&
+          (t.classList.contains("__caption") ||
+            /(SMALL|STRONG|EM)/i.test(t.tagName))
+        ) {
+          preventObj.prevent = false;
+        }
       }
-    });
+    );
 
     // bind events for UI
     this._listen("bindEvents", () => {

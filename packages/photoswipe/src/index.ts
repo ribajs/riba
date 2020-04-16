@@ -1,3 +1,4 @@
+import "./types/photoswipe/index";
 export * from "./services";
 export * from "./binders";
 export * from "./components";
