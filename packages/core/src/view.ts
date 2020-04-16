@@ -399,10 +399,6 @@ export class View {
     window.customElements.define(COMPONENT.tagName, COMPONENT as any); // TODO FIXME as CustomElementConstructor since TypeScript 3.8
     // TODO ?? call unbind (on unbind this view) of this component instance to unbind this view
     // (not disconnectedCallback / disconnectedFallbackCallback, this is automatically called from customElements)
-    const component = window.customElements.get(nodeName) as Component;
-    component.context = {
-      fallback: false,
-      view: this,
-    };
+    window.customElements.get(nodeName) as Component;
   }
 }
