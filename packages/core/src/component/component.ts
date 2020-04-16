@@ -5,7 +5,7 @@
  * @see https://developer.mozilla.org/de/docs/Web/Web_Components/Using_custom_elements
  */
 
-import { EventHandler, Formatter } from "../interfaces";
+import { EventHandler, Formatter, RibaComponentContext } from "../interfaces";
 import { View } from "../view";
 import { Riba } from "../riba";
 import { Binding } from "../binding";
@@ -13,11 +13,6 @@ import { Utils } from "../services/utils";
 import { FakeHTMLElement } from "./fake-html-element";
 
 export type TemplateFunction = () => Promise<string | null> | string | null;
-
-export interface RibaComponentContext {
-  fallback: boolean;
-  view: View;
-}
 
 export interface ObservedAttributeToCheck {
   initialized: boolean;
@@ -32,10 +27,22 @@ export interface ObservedAttributesToCheck {
 export abstract class Component extends FakeHTMLElement {
   public static tagName: string;
 
+  protected _context?: RibaComponentContext;
+
   /**
    * Context of this component, used for debugging
    */
-  public context?: RibaComponentContext;
+  public set context(_context: RibaComponentContext | undefined) {
+    if (_context) {
+      this._context = _context;
+      if (this._context.debug) {
+        this._context.color = Utils.getRandomColor();
+      }
+    }
+  }
+  public get context(): RibaComponentContext | undefined {
+    return this._context;
+  }
 
   protected view?: View;
 
@@ -61,9 +68,8 @@ export abstract class Component extends FakeHTMLElement {
 
   private attributeObserverFallback?: MutationObserver;
 
-  constructor(element?: HTMLUnknownElement, context?: RibaComponentContext) {
+  constructor(element?: HTMLUnknownElement) {
     super(element);
-    this.context = context;
 
     if (element) {
       this.el = element;
@@ -88,11 +94,27 @@ export abstract class Component extends FakeHTMLElement {
     }
   }
 
+  public connectedFallbackCallback() {
+    this.debug(`Called connectedFallbackCallback`, this.context);
+    this.connectedCallback();
+  }
+
   public disconnectedFallbackCallback() {
     this.disconnectedCallback();
   }
 
   protected abstract template(): Promise<string | null> | string | null;
+
+  protected debug(...args: unknown[]) {
+    if (!this.context?.debug) {
+      return;
+    }
+    if (typeof args[0] === "string") {
+      args[0] = `%c[${this.constructor.name}] ${args[0]}`;
+      args.splice(1, 0, `color: ${this.context.color};`);
+    }
+    console.debug(...args);
+  }
 
   /**
    * returns a list of attributes wich are required until the riba binding starts
@@ -132,7 +154,10 @@ export abstract class Component extends FakeHTMLElement {
         return null;
       });
     }
-    // console.warn('Not all required and passed attributes are set to load and bind the template', this.observedAttributesToCheck);
+    this.debug(
+      `Not all required and passed attributes are set to load and bind the template`,
+      this.observedAttributesToCheck
+    );
     return null;
   }
 
@@ -194,10 +219,14 @@ export abstract class Component extends FakeHTMLElement {
     const requiredAttributes = this.requiredAttributes();
     requiredAttributes.forEach((requiredAttribute: string) => {
       if (!this.scope[requiredAttribute] || !this.scope[requiredAttribute]) {
-        // console.warn(`Attribute ${requiredAttribute} not set: ${this.scope[requiredAttribute]}`);
+        this.debug(
+          `[${this.constructor.name}] Attribute ${requiredAttribute} not set: ${this.scope[requiredAttribute]}`
+        );
         allDefined = false;
       } else {
-        // console.warn(`Attribute ${requiredAttribute} is defined: ${this.scope[requiredAttribute]}`);
+        this.debug(
+          `[${this.constructor.name}] Attribute ${requiredAttribute} is defined: ${this.scope[requiredAttribute]}`
+        );
       }
     });
     return allDefined;
@@ -423,12 +452,12 @@ export abstract class Component extends FakeHTMLElement {
 
   protected async bind() {
     if (this.bound) {
-      // console.warn('component already bounded');
+      this.debug("component already bounded");
       return this.view;
     }
 
     if (!this.checkRequiredAttributes()) {
-      console.warn("not all required attributes are set for bind");
+      this.debug("Not all required attributes are set for bind");
       return;
     }
 
@@ -507,7 +536,7 @@ export abstract class Component extends FakeHTMLElement {
   }
 
   private onParentChanged(event: CustomEvent) {
-    console.debug("onParentChanged", event.detail);
+    this.debug("onParentChanged", event.detail);
     this.scope.$parent = event.detail;
   }
 
@@ -532,7 +561,7 @@ export abstract class Component extends FakeHTMLElement {
    * Event handler to listen attribute change event as fallback for MutationObserver
    */
   private initAttributeObserver(observedAttributes: string[]) {
-    if ((window as any).customElements) {
+    if ((window as any).customElements && !this.context?.fallback) {
       // use native implementaion
     } else {
       if ((window as any).MutationObserver) {

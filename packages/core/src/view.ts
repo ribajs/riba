@@ -4,6 +4,7 @@ import {
   Options,
   BindableElement,
   TypeOfComponent,
+  RibaComponentContext,
 } from "./interfaces";
 import { Binding } from "./binding";
 import { parseNode, parseDeclaration } from "./parsers";
@@ -126,6 +127,9 @@ export class View {
   public bind() {
     this.bindings.forEach((binding) => {
       binding.bind();
+    });
+    this.webComponents.forEach((webcomponent) => {
+      webcomponent.connectedFallbackCallback();
     });
   }
 
@@ -376,10 +380,13 @@ export class View {
   ) {
     nodeName = nodeName || COMPONENT.tagName;
     console.warn(`Fallback for Webcomponent ${nodeName}`);
-    const component = new COMPONENT(node, {
+    const context: RibaComponentContext = {
       fallback: true,
       view: this,
-    });
+      debug: true,
+    };
+    const component = new COMPONENT(node);
+    component.context = context;
     this.webComponents.push(component);
   }
 
