@@ -110,7 +110,7 @@ export abstract class Component extends FakeHTMLElement {
       return;
     }
     if (typeof args[0] === "string") {
-      args[0] = `%c${args[0]}`;
+      args[0] = `%c[${this.constructor.name || this.el.tagName}] ${args[0]}`;
       args.splice(1, 0, `color: ${this.context.color};`);
     }
     console.debug(...args);
@@ -567,7 +567,7 @@ export abstract class Component extends FakeHTMLElement {
    * Load all attributes and calls the attributeChangedCallback for each attribute.
    * This method is used for fallback implementations, normally the browser calls the attributeChangedCallback for you
    */
-  private loadAttributes(observedAttributes) {
+  private loadAttributes(observedAttributes: string[]) {
     const attributes = this.el.attributes;
     for (const i in attributes) {
       const attribute: Node = attributes[i];
