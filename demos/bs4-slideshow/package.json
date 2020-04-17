@@ -31,7 +31,6 @@
     "@babel/runtime-corejs3": "^7.9.2",
     "@ribajs/eslint-config": "^1.8.0",
     "@ribajs/tsconfig": "^1.8.0",
-    "@ribajs/types": "github:ribajs/types#commit%3Ac13cf17b0ab58afa29b40c99f022b0b170c0318f",
     "@ribajs/webpack-config": "^0.0.1",
     "@types/jest": "^25.1.4",
     "autoprefixer": "^9.7.5",

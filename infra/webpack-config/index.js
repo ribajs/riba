@@ -67,7 +67,7 @@ const getCopyPluginConfigForScssThirdPartyModule = (config, moduleName, scssPath
 var getCopyPluginConfig = (config) => {
   var copyPluginConfig = [];
 
-  const copyRibaScssModules = ['@ribajs/bs4', '@ribajs/photoswipe', '@ribajs/i18n', '@ribajs/shopify', '@ribajs/shopify-tda', '@ribajs/shopify-easdk'];
+  const copyRibaScssModules = ['@ribajs/bs4', '@ribajs/photoswipe', '@ribajs/i18n', '@ribajs/shopify', '@ribajs/shopify-tda', '@ribajs/shopify-easdk', '@ribajs/leaflet-map', '@ribajs/taggedimage'];
 
   for (const ribaScssModule of copyRibaScssModules) {
     if (isModuleAvailable(config, ribaScssModule)) {
