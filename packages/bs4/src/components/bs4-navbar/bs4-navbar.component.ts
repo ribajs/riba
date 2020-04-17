@@ -13,7 +13,7 @@ export class Bs4NavbarComponent extends Component {
     collapseSelector: '.navbar-collapse'
   };
 
-  protected collapseElements?: NodeListOf<HTMLElement>;
+  protected collapseElements: NodeListOf<HTMLElement> | HTMLElement[] = [];
   protected collapseServices: CollapseService[] = [];
   protected router?: EventDispatcher;
 
@@ -79,7 +79,7 @@ export class Bs4NavbarComponent extends Component {
     // Remove old event listeners
     this.removeCollapseEventListeners();
 
-    this.collapseElements = this.el.querySelectorAll(this.scope.collapseSelector) || [];
+    this.collapseElements = this.el.querySelectorAll<HTMLElement>(this.scope.collapseSelector) || [];
 
     // Add new event listeners
     this.addCollapseEventListeners();
@@ -122,7 +122,7 @@ export class Bs4NavbarComponent extends Component {
 
   protected onStateChange() {
 
-    this.scope.isCollapsed = this.collapseServices[0].isCollapsed();
+    this.scope.isCollapsed = !!this.collapseServices[0]?.isCollapsed();
 
     if (this.scope.isCollapsed) {
       this.el.classList.add(CLASS_NAME_COLLAPSED);
