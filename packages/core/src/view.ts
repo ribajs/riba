@@ -361,6 +361,7 @@ export class View {
         try {
           this.registComponent(COMPONENT, nodeName);
         } catch (error) {
+          console.error(error);
           this.registComponentFallback(node, COMPONENT, nodeName);
         }
       }
