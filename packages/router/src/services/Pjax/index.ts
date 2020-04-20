@@ -2,6 +2,7 @@ export * from './HistoryManager';
 export * from './Dom';
 export * from './Prefetch';
 
+import { getDataset } from '@ribajs/core';
 import { EventDispatcher, Utils, HttpService } from '@ribajs/core';
 
 import { BaseCache } from '../Cache';
@@ -441,13 +442,15 @@ class Pjax {
 
     currentStatus.namespace = Dom.getNamespace(container);
 
+    const dataset = getDataset(container);
+
     this.dispatcher.trigger('newPageReady',
       this.viewId,
       this.history.currentStatus(),
       this.history.prevStatus(),
       container,
       container.innerHTML,
-      container.dataset,
+      dataset,
       false, // true if this is the first time newPageReady is tiggered / true on initialisation
     );
   }
@@ -484,13 +487,15 @@ class Pjax {
       this.history.currentStatus(),
     );
 
+    const dataset = getDataset(container);
+
     this.dispatcher.trigger('newPageReady',
       this.viewId,
       this.history.currentStatus(),
       {},
       container,
       container.innerHTML,
-      container.dataset,
+      dataset,
       true, // true if this is the first time newPageReady is tiggered / true on initialisation
     );
 

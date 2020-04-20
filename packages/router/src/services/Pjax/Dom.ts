@@ -2,6 +2,7 @@ import { Response } from '../../interfaces/response';
 
 /**
  * Object that is going to deal with DOM parsing/manipulation
+ * TODO move to @ribajs/core dom utils
  */
 class Dom {
 
