@@ -17,7 +17,6 @@ export type TemplateFunction = () => Promise<string | null> | string | null;
 export interface ObservedAttributeToCheck {
   initialized: boolean;
   passed: boolean;
-  isRiba: boolean;
 }
 
 export interface ObservedAttributesToCheck {
@@ -172,13 +171,9 @@ export abstract class Component extends FakeHTMLElement {
   protected getPassedObservedAttributes(observedAttributes: string[]) {
     for (const observedAttribute of observedAttributes) {
       const passed = this.attributeIsPassed(observedAttribute);
-      // TODO this.riba is not defined on this time, so the TODO is get the fullPrefix from riba
-      const fullPrefix = this.riba ? this.riba.fullPrefix : "rv-";
-
       this.observedAttributesToCheck[observedAttribute] = {
         passed,
         initialized: false,
-        isRiba: this.el.hasAttribute(fullPrefix + observedAttribute),
       };
     }
   }
@@ -190,16 +185,13 @@ export abstract class Component extends FakeHTMLElement {
     let allInitialized = true;
     for (const key in this.observedAttributesToCheck) {
       if (this.observedAttributesToCheck[key]) {
-        if (
-          this.observedAttributesToCheck[key].passed ||
-          this.observedAttributesToCheck[key].isRiba
-        ) {
+        if (this.observedAttributesToCheck[key].passed) {
           allInitialized =
             allInitialized && this.observedAttributesToCheck[key].initialized;
         }
       }
     }
-    // console.debug("observedAttributesToCheck", this.observedAttributesToCheck);
+    this.debug("observedAttributesToCheck", this.observedAttributesToCheck);
     return allInitialized;
   }
 
@@ -378,11 +370,6 @@ export abstract class Component extends FakeHTMLElement {
       oldValue = this.scope[parsedAttributeName];
     }
 
-    // Stop if the value has not changed
-    if (this.scope[parsedAttributeName] === newValue) {
-      return;
-    }
-
     // automatically inject observed attributes to view scope
     this.scope[parsedAttributeName] = newValue;
 
@@ -426,12 +413,12 @@ export abstract class Component extends FakeHTMLElement {
 
   protected async loadTemplate() {
     if (this.templateLoaded) {
-      // console.warn('template already loaded');
+      this.debug("template already loaded");
       return null;
     }
 
     if (!this.checkRequiredAttributes()) {
-      // console.warn('not all required attributes are set to load the template');
+      this.debug("not all required attributes are set to load the template");
       return null;
     }
 
@@ -470,7 +457,7 @@ export abstract class Component extends FakeHTMLElement {
         if (!this.el) {
           throw new Error("this.el is not defined");
         }
-
+        this.debug("Start to bind Riba");
         this.riba = new Riba();
         const viewOptions = this.riba.getViewOptions({
           handler: this.eventHandler(this),

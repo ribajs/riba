@@ -96,7 +96,7 @@ export class Bs4NavbarComponent extends Component {
 
   protected addCollapseEventListeners() {
     if (this.collapseElements) {
-      this.collapseElements.forEach((collapseElement) => {
+      this.collapseElements.forEach((collapseElement: HTMLElement) => {
         collapseElement.addEventListener(EVENT_SHOWN, this.onStateChange.bind(this));
         collapseElement.addEventListener(EVENT_HIDDEN, this.onStateChange.bind(this));
       });
@@ -105,7 +105,7 @@ export class Bs4NavbarComponent extends Component {
 
   protected removeCollapseEventListeners() {
     if (this.collapseElements) {
-      this.collapseElements.forEach((collapseElement) => {
+      this.collapseElements.forEach((collapseElement: HTMLElement) => {
         collapseElement.removeEventListener(EVENT_SHOWN, this.onStateChange.bind(this));
         collapseElement.removeEventListener(EVENT_HIDDEN, this.onStateChange.bind(this));
       });

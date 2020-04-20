@@ -67,7 +67,7 @@ const getCopyPluginConfigForScssThirdPartyModule = (config, moduleName, scssPath
 var getCopyPluginConfig = (config) => {
   var copyPluginConfig = [];
 
-  const copyRibaScssModules = ['@ribajs/bs4', '@ribajs/photoswipe', '@ribajs/i18n', '@ribajs/shopify', '@ribajs/shopify-tda', '@ribajs/shopify-easdk', '@ribajs/leaflet-map', '@ribajs/taggedimage'];
+  const copyRibaScssModules = ['@ribajs/core', '@ribajs/bs4', '@ribajs/photoswipe', '@ribajs/i18n', '@ribajs/shopify', '@ribajs/shopify-tda', '@ribajs/shopify-easdk', '@ribajs/leaflet-map', '@ribajs/taggedimage'];
 
   for (const ribaScssModule of copyRibaScssModules) {
     if (isModuleAvailable(config, ribaScssModule)) {
@@ -186,6 +186,7 @@ module.exports = config => {
         // Because we use october to compile the styles we copy the verndor styles to october
         modules: {
           "bootstrap": true,
+          "@ribajs/core": true,
           "@ribajs/bs4": true,
           "@ribajs/photoswipe": true,
           "@ribajs/iconset": true,
@@ -213,6 +214,7 @@ module.exports = config => {
         // Until this is fixed we use a WORKAROUND by copy the scss files to the project
         modules: {
           "bootstrap": true,
+          "@ribajs/core": true,
           "@ribajs/bs4": true,
           "@ribajs/photoswipe": true,
           "@ribajs/iconset": true,
@@ -241,6 +243,7 @@ module.exports = config => {
         // Until this is fixed we use a WORKAROUND by copy the scss files to the project
         modules: {
           "bootstrap": true,
+          "@ribajs/core": true,
           "@ribajs/bs4": true,
           "@ribajs/photoswipe": true,
           "@ribajs/iconset": true,

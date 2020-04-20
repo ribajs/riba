@@ -60,7 +60,7 @@ export interface State {
  */
 export class ShopifyLinklistComponent extends Component {
 
-  public static tagName: string = 'shopify-linklist';
+  public static tagName = 'shopify-linklist';
 
   protected mainDispatcher = new EventDispatcher('main');
 
@@ -188,7 +188,7 @@ export class ShopifyLinklistComponent extends Component {
     }
   }
 
-  protected onNewPageReady(viewId: string, currentStatus: State, prevStatus: State, container: HTMLElement, newPageRawHTML: string, dataset: any, isFirstPageLoad: boolean) {
+  protected onNewPageReady(viewId: string, currentStatus: State /*, prevStatus: State, container: HTMLElement, newPageRawHTML: string, dataset: any, isFirstPageLoad: boolean */) {
     const url = currentStatus.url;
     if (this.scope.collapseOnNewPage) {
       this.collapseAll();
