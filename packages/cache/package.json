@@ -1,0 +1,43 @@
+{
+  "name": "@ribajs/cache",
+  "description": "Cache module of Riba.js",
+  "version": "1.8.0",
+  "author": "Pascal Garber <pascal@artandcode.studio>",
+  "contributors": [
+    "Michael Richards",
+    "Luiz Américo Pereira Câmara"
+  ],
+  "url": "https://github.com/ribajs/riba/tree/master/packages/cache",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "source": "src/index.ts",
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/ribajs/riba/blob/master/LICENSE"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ribajs/riba.git"
+  },
+  "keywords": [
+    "Art+Code Studio",
+    "Riba",
+    "Rivets",
+    "tinybind",
+    "SPA",
+    "TypeScript",
+    "Browser",
+    "Cache"
+  ],
+  "scripts": {
+  },
+  "devDependencies": {},
+  "bugs": {
+    "url": "https://github.com/ribajs/riba/issues"
+  },
+  "homepage": "https://github.com/ribajs/riba#readme",
+  "directories": {}
+}

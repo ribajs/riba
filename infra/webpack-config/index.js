@@ -1,90 +1,7 @@
-// https://github.com/Microsoft/TypeScript-Babel-Starter
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 const rootPath = process.cwd();
-const package = require(rootPath + "/package.json");
-
-const moduleFound = (name) => {
-  try {
-    return require.resolve(name)
-  } catch (error) {
-    return false;
-  }
-}
-
-const isModuleAvailable = (config, moduleName) => {
-  return package.dependencies[moduleName] && config.copyAssets.modules[moduleName] === true && moduleFound(moduleName);
-}
-
-const getCopyPluginConfigForScssRibaModule = (config, moduleName) => {
-  if (isModuleAvailable(config, moduleName)) {
-    // Copy @ribajs/xyz scss files
-    var moduleConfig = {
-      from:
-        path.dirname(require.resolve(moduleName)) + "/**/*.scss",
-      to: path.resolve(`${rootPath}/${config.copyAssets.foldername}/scss/vendors/${moduleName}`),
-      toType: "dir",
-      context: path.dirname(require.resolve(moduleName))
-    };
-    return moduleConfig;
-  }
-  return null;
-}
-
-const getCopyPluginConfigForIconsetRibaModule = (config, moduleName) => {
-  if (isModuleAvailable(config, moduleName)) {
-    // Copy iconset svg's
-    const moduleConfig = {
-      from: path.resolve(
-        path.dirname(require.resolve(moduleName)),
-        "svg"
-      ),
-      to: path.resolve(`${rootPath}/${config.copyAssets.foldername}/iconset/`),
-      toType: "dir",
-      context: path.dirname(require.resolve(moduleName))
-    };
-    return moduleConfig;
-  }
-  return null;
-}
-
-const getCopyPluginConfigForScssThirdPartyModule = (config, moduleName, scssPath) => {
-  if (isModuleAvailable(config, moduleName)) {
-    // Copy bootstrap scss files. Note: `require.resolve('bootstrap')` resolves to `'bootstrap/dist/js/bootstrap.js'` because this is the main file in package.json
-    const moduleConfig = {
-      from: path.resolve(
-        path.dirname(require.resolve(moduleName)),
-        scssPath
-      ),
-      to: path.resolve(`${rootPath}/${config.copyAssets.foldername}/scss/vendors/${moduleName}/`),
-      toType: "dir"
-    };
-    return moduleConfig;
-  }
-  return null;
-}
-
-var getCopyPluginConfig = (config) => {
-  var copyPluginConfig = [];
-
-  const copyRibaScssModules = ['@ribajs/core', '@ribajs/bs4', '@ribajs/photoswipe', '@ribajs/i18n', '@ribajs/shopify', '@ribajs/shopify-tda', '@ribajs/shopify-easdk', '@ribajs/leaflet-map', '@ribajs/taggedimage'];
-
-  for (const ribaScssModule of copyRibaScssModules) {
-    if (isModuleAvailable(config, ribaScssModule)) {
-      copyPluginConfig.push(getCopyPluginConfigForScssRibaModule(config, ribaScssModule));
-    }
-  }
-
-  if (isModuleAvailable(config, '@ribajs/iconset')) {
-    copyPluginConfig.push(getCopyPluginConfigForIconsetRibaModule(config, '@ribajs/iconset'));
-  }
-
-  if (isModuleAvailable(config, 'bootstrap')) {
-    copyPluginConfig.push(getCopyPluginConfigForScssThirdPartyModule(config, 'bootstrap', "../../scss"));
-  }
-
-  return copyPluginConfig;
-}
+const { getCopyPluginConfig, copy } = require('./copy');
 
 var getStyleLoaderRule = (config) => {
   var rule = {
@@ -273,8 +190,13 @@ module.exports = config => {
   if (config.copyAssets && config.copyAssets.enable === true) {
     // https://github.com/webpack-contrib/copy-webpack-plugin
     const CopyPlugin = require("copy-webpack-plugin");
-    var copyPluginConfig = getCopyPluginConfig(config);
-    plugins.push(new CopyPlugin(copyPluginConfig));
+    var copyPluginConfigs = getCopyPluginConfig(config);
+
+    // Copy the files before the build starts for the case the files are required for the build itself
+    copy(copyPluginConfigs);
+    plugins.push(new CopyPlugin(copyPluginConfigs));
+
+    // console.debug('copyPluginConfigs: ', copyPluginConfigs)
   }
 
   if (config.detectDuplicates === true) {
@@ -288,6 +210,8 @@ module.exports = config => {
       filename: '[name].css',
     }));
   }
+
+  // console.debug('Used plugins: ', plugins);
 
   if (config.styles.build === true) {
     rules.push(getStyleLoaderRule(config));
