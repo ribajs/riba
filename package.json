@@ -30,8 +30,8 @@
     "Browser"
   ],
   "scripts": {
-    "packages:test": "cd packages/core && npm run test && cd ../bs4 && npm run test",
-    "packages:type-check": "cd packages/core && npm run type-check && cd ../bs4 && npm run type-check",
+    "packages:test": "cd packages/core && yarn run test && cd ../bs4 && yarn run test",
+    "packages:lint": "cd packages/core && yarn run lint && cd ../bs4 && yarn run lint",
     "packages:bump": "node tools/cli.js bump",
     "packages:publish": "node tools/cli.js publish",
     "packages:upgrade": "yarn upgrade-interactive && yarn run packages:install",
@@ -49,30 +49,29 @@
   "devDependencies": {
     "@ribajs/eslint-config": "^1.8.0",
     "@ribajs/tsconfig": "^1.8.0",
-    "@typescript-eslint/eslint-plugin": "^2.28.0",
-    "@typescript-eslint/parser": "^2.28.0",
-    "@yarnpkg/pnpify": "^2.0.0-rc.20",
+    "@typescript-eslint/eslint-plugin": "^2.29.0",
+    "@typescript-eslint/parser": "^2.29.0",
+    "@yarnpkg/pnpify": "^2.0.0-rc.21",
     "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.1",
+    "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.3",
-    "prettier": "^2.0.4",
+    "prettier": "^2.0.5",
     "typescript": "^3.8.3"
   },
   "dependencies": {
     "chalk": "^4.0.0",
-    "commander": "^5.0.0",
+    "commander": "^5.1.0",
     "husky": "^4.2.5"
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run packages:test",
-      "pre-commit": "npm run packages:type-check"
+      "pre-push": "yarn run packages:test",
+      "pre-commit": "yarn run packages:lint"
     }
   },
   "workspaces": {
     "packages": [
       "packages/*",
-      "demos/*",
       "infra/eslint-config",
       "infra/types",
       "infra/webpack-config",

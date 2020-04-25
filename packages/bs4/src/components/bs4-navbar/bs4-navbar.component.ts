@@ -1,4 +1,4 @@
-import { Component, EventDispatcher, Binder } from '@ribajs/core';
+import { Component, EventDispatcher } from '@ribajs/core';
 import { CollapseService, EVENT_SHOWN, EVENT_HIDDEN, CLASS_NAME_COLLAPSED } from '../../services/collapse.service';
 
 export class Bs4NavbarComponent extends Component {
@@ -31,7 +31,7 @@ export class Bs4NavbarComponent extends Component {
   }
 
 
-  public toggle(context?: Binder<any>, event?: Event) {
+  public toggle(event?: Event) {
 
     for (const collapseService of this.collapseServices) {
       collapseService.toggle();
@@ -43,7 +43,7 @@ export class Bs4NavbarComponent extends Component {
     }
   }
 
-  public show(context?: Binder<any>, event?: Event) {
+  public show(event?: Event) {
     for (const collapseService of this.collapseServices) {
       collapseService.show();
     }
@@ -53,7 +53,7 @@ export class Bs4NavbarComponent extends Component {
     }
   }
 
-  public hide(context?: Binder<any>, event?: Event) {
+  public hide(event?: Event) {
     for (const collapseService of this.collapseServices) {
       collapseService.hide();
     }

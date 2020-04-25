@@ -233,6 +233,12 @@ export class CollapseService {
 
     Utils.emulateTransitionEnd(this._element, transitionDuration)
     this._element.style[dimension] = `${this._element[scrollSize]}px`
+
+    if (!this._config.parent && this._triggerArray) {
+      this._addAriaAndCollapsedClass(this._element, this._triggerArray, true)
+      // this._addAriaAndCollapsedClass(this._element, [])
+    }
+
   }
 
   hide() {
@@ -291,7 +297,12 @@ export class CollapseService {
     const transitionDuration = Utils.getTransitionDurationFromElement(this._element)
 
     EventHandler.one(this._element, TRANSITION_END, complete)
-    Utils.emulateTransitionEnd(this._element, transitionDuration)
+    Utils.emulateTransitionEnd(this._element, transitionDuration);
+
+    if (!this._config.parent && this._triggerArray) {
+      this._addAriaAndCollapsedClass(this._element, this._triggerArray, false)
+      // this._addAriaAndCollapsedClass(this._element, [])
+    }
   }
 
   setTransitioning(isTransitioning: boolean) {
@@ -359,9 +370,12 @@ export class CollapseService {
     return parent
   }
 
-  _addAriaAndCollapsedClass(element: HTMLElement, triggerArray: HTMLElement[]) {
+  _addAriaAndCollapsedClass(element: HTMLElement, triggerArray: HTMLElement[], isOpen?: boolean) {
+    console.debug('_addAriaAndCollapsedClass', element, triggerArray);
     if (element) {
-      const isOpen = element.classList.contains(CLASS_NAME_SHOW)
+      if (typeof isOpen !== 'boolean') {
+        isOpen = element.classList.contains(CLASS_NAME_SHOW)
+      }
 
       if (triggerArray.length) {
         triggerArray.forEach(elem => {
@@ -371,7 +385,7 @@ export class CollapseService {
             elem.classList.add(CLASS_NAME_COLLAPSED)
           }
 
-          elem.setAttribute('aria-expanded', isOpen.toString())
+          elem.setAttribute('aria-expanded', (!!isOpen).toString())
         })
       }
     }

@@ -34,9 +34,9 @@
     "Browser"
   ],
   "scripts": {
-    "test": "npm run clean && npm run type-check && jest --config=jest.config.js",
-    "type-check": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
-    "build": "npm run type-check && npm run build:module",
+    "test": "yarn run clean && yarn run lint && jest --config=jest.config.js",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
+    "build": "npm run lint && npm run build:module",
     "build:module": "tsc",
     "clean": "rm -rf ./dist ./lib",
     "packages:link": "npm link @ribajs/core @ribajs/extras"
@@ -48,22 +48,24 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.9.5",
     "@babel/plugin-proposal-optional-chaining": "^7.9.0",
     "@babel/plugin-syntax-export-default-from": "^7.8.3",
-    "@babel/plugin-transform-runtime": "^7.9.0",
+
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-typescript": "^7.9.0",
     "@babel/runtime-corejs3": "^7.9.2",
+    "@ribajs/tsconfig": "^1.8.0",
+    "@ribajs/types": "^1.8.3",
     "@types/jest": "^25.2.1",
-    "@typescript-eslint/eslint-plugin": "^2.28.0",
-    "@typescript-eslint/parser": "^2.28.0",
+    "@typescript-eslint/eslint-plugin": "^2.29.0",
+    "@typescript-eslint/parser": "^2.29.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-array-includes": "^2.0.3",
     "core-js": "^3.6.5",
     "eslint": "^6.8.0",
-    "jest": "^25.3.0",
+    "jest": "^25.4.0",
     "jest-extended": "^0.11.5",
-    "ts-jest": "^25.3.1",
+    "ts-jest": "^25.4.0",
     "typescript": "^3.8.3",
-    "webpack": "^4.42.1",
+    "webpack": "^5.0.0-beta.15",
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {

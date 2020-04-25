@@ -1,13 +1,15 @@
-import { Binder, TypeOfComponent } from '@ribajs/core';
-import { AI18nSwitcherComponent } from '../abstract-switcher/switcher.abstract.component';
-import { Langcode } from '../../interfaces';
-import { ALocalesService } from '../../services/locales-base.service';
+import { TypeOfComponent } from "@ribajs/core";
+import { AI18nSwitcherComponent } from "../abstract-switcher/switcher.abstract.component";
+import { Langcode } from "../../interfaces";
+import { ALocalesService } from "../../services/locales-base.service";
 
-export const i18nSwitcherComponentWrapper = (localesService: ALocalesService): TypeOfComponent<AI18nSwitcherComponent> => {
-
+export const i18nSwitcherComponentWrapper = (
+  localesService: ALocalesService
+): TypeOfComponent<AI18nSwitcherComponent> => {
   return class I18nSwitcherComponent extends AI18nSwitcherComponent {
+    public static tagName = "i18n-switcher";
 
-    public static tagName: string = 'i18n-switcher';
+    public _debug = false;
 
     static get observedAttributes() {
       return [];
@@ -16,10 +18,10 @@ export const i18nSwitcherComponentWrapper = (localesService: ALocalesService): T
     protected localesService = localesService;
 
     protected scope = {
-      langcodes: <Langcode[]> [],
+      langcodes: [] as Langcode[],
       switch: this.switch,
       toggle: this.toggle,
-      ready: <boolean> false,
+      ready: false,
     };
 
     constructor(element?: HTMLElement) {
@@ -32,8 +34,9 @@ export const i18nSwitcherComponentWrapper = (localesService: ALocalesService): T
      * @param langcode
      * @param event
      */
-    public switch(langcode: Langcode, context?: Binder<any>, event?: Event) {
-      return super.switch(langcode, context, event);
+    public switch(langcode: Langcode, event?: Event) {
+      this.debug("switch", langcode);
+      return super.switch(langcode, event);
     }
 
     /**
@@ -41,8 +44,8 @@ export const i18nSwitcherComponentWrapper = (localesService: ALocalesService): T
      * @param langcode
      * @param event
      */
-    public toggle(context?: Binder<any>, event?: Event) {
-      return super.toggle(context, event);
+    public toggle(event?: Event) {
+      return super.toggle(event);
     }
 
     protected setLangcode(langcode: string) {

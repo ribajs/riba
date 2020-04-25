@@ -19,6 +19,7 @@ export const toggleCollapseOnEventBinder: Binder<string> = {
   onEvent(event: Event) {
     const self = (this.binder || this) as Bs4CollapseOnEventBinder;
     event.preventDefault();
+    // console.debug('[toggleCollapseOnEventBinder] onEvent', self.collapseServices);
     self.collapseServices.forEach((collapseService) => {
       collapseService.toggle();
     });
@@ -39,9 +40,11 @@ export const toggleCollapseOnEventBinder: Binder<string> = {
     const self = (this.binder || this) as Bs4CollapseOnEventBinder;
     const eventName = this.args[0] as string;
 
+    self.targets = document.querySelectorAll<HTMLElement>(targetSelector);
 
-    self.targets = el.querySelectorAll<HTMLElement>(targetSelector);
-
+    if (self.targets.length <= 0) {
+      console.warn(`[toggleCollapseOnEventBinder] No element with selector "${targetSelector}" found.`);
+    }
 
     self.targets.forEach((target) => {
       self.collapseServices.push(new CollapseService(target, [el], {toggle: false }));

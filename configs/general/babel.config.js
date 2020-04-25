@@ -14,9 +14,10 @@ module.exports = {
   ],
   "plugins": [
     [
-      "@babel/plugin-transform-runtime", {
-        "corejs": 3
-      }
+      "@babel/plugin-transform-runtime",
+      {
+        regenerator: true,
+      },
     ],
     "@babel/plugin-syntax-export-default-from",
     "@babel/plugin-proposal-class-properties",

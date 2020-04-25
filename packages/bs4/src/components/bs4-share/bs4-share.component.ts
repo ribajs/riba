@@ -294,7 +294,6 @@ export class Bs4ShareComponent extends Component {
    * @param el 
    */
   public shareOnService(
-    binding: any,
     event: Event,
     controller: any,
     el: HTMLAnchorElement
@@ -329,7 +328,7 @@ export class Bs4ShareComponent extends Component {
     return false;
   }
 
-  public async share(context: any, event: Event): Promise<any> {
+  public async share(event: Event): Promise<any> {
     console.debug('share', this.scope);
     event.preventDefault();
     event.stopPropagation();

@@ -5,10 +5,12 @@
   "scripts": {},
   "author": "Pascal Garber <pascal@artandcode.studio",
   "license": "MIT",
+  "main": "index.d.ts",
   "files": [
     "LICENSE",
     "README.md",
-    "*.html/",
-    "*.pug/"
+    "index.d.ts",
+    "html.d.ts",
+    "pug.d.ts"
   ]
 }

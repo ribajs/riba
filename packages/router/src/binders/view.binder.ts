@@ -50,7 +50,7 @@ export const viewBinder: Binder<string> = {
         self.view.models.dataset = dataset; // = container.data();
       }
 
-      // TODO append on action append
+      // TODO append on action "append"
       self.customData.nested = new RivetsView(container, self.view.models, self.view.options);
       self.customData.nested.bind();
     };
@@ -107,6 +107,7 @@ export const viewBinder: Binder<string> = {
       this.customData.options.datasetToModel = Utils.isBoolean(this.customData.options.datasetToModel) ? this.customData.options.datasetToModel : true;
       this.customData.options.parseTitle = Utils.isBoolean(this.customData.options.parseTitle) ? this.customData.options.parseTitle : true;
       this.customData.options.changeBrowserUrl = Utils.isBoolean(this.customData.options.changeBrowserUrl) ? this.customData.options.changeBrowserUrl : true;
+      this.customData.options.prefetchLinks = Utils.isBoolean(this.customData.options.prefetchLinks) ? this.customData.options.prefetchLinks : true;
     } else {
       this.customData.options.containerSelector = this.customData.options.containerSelector || `#${this.customData.options.viewId} > *:first-child`;
       this.customData.options.scrollToTop = Utils.isBoolean(this.customData.options.scrollToTop) ? this.customData.options.scrollToTop : false;
@@ -116,9 +117,10 @@ export const viewBinder: Binder<string> = {
       this.customData.options.datasetToModel = Utils.isBoolean(this.customData.options.datasetToModel) ? this.customData.options.datasetToModel : false;
       this.customData.options.parseTitle = Utils.isBoolean(this.customData.options.parseTitle) ? this.customData.options.parseTitle : false;
       this.customData.options.changeBrowserUrl = Utils.isBoolean(this.customData.options.changeBrowserUrl) ? this.customData.options.changeBrowserUrl : false;
+      this.customData.options.prefetchLinks = Utils.isBoolean(this.customData.options.prefetchLinks) ? this.customData.options.prefetchLinks : false;
     }
 
-    this.customData.options.autoprefetchLinks = Utils.isBoolean(this.customData.options.autoprefetchLinks) ? this.customData.options.autoprefetchLinks : this.customData.options.listenAllLinks;
+    this.customData.options.prefetchLinks = Utils.isBoolean(this.customData.options.prefetchLinks) ? this.customData.options.prefetchLinks : true;
     this.customData.options.transition = this.customData.options.transition || new HideShowTransition(this.customData.options.action, this.customData.options.scrollToTop);
 
     this.customData.dispatcher = new EventDispatcher(this.customData.options.viewId);
@@ -141,7 +143,7 @@ export const viewBinder: Binder<string> = {
 
     const pjax = new Pjax(pjaxOptions);
     this.customData.prefetch = new Prefetch(this.customData.options.viewId);
-    this.customData.prefetch.init(this.customData.options.autoprefetchLinks);
+    this.customData.prefetch.init(pjaxOptions.prefetchLinks);
     pjax.start();
   },
 

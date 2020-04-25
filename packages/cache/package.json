@@ -32,9 +32,7 @@
     "Browser",
     "Cache"
   ],
-  "scripts": {
-  },
-  "devDependencies": {},
+  "scripts": {},
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"
   },

@@ -1,4 +1,4 @@
-import { Component, Binder } from '@ribajs/core';
+import { Component } from '@ribajs/core';
 import { DropdownService } from '../../services/dropdown.service';
 
 export class Bs4DropdownComponent extends Component {
@@ -19,7 +19,7 @@ export class Bs4DropdownComponent extends Component {
     super(element);
   }
 
-  public toggle(context: Binder<any>, event: Event) {
+  public toggle(event: Event) {
     event.preventDefault();
     event.stopPropagation();
     if (!this.dropdownService) {

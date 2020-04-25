@@ -1,7 +1,5 @@
 import { Riba } from "../index";
-
 import { blockBinder } from "./block.binder";
-
 import { dotAdapter } from "../adapters/dot.adapter";
 
 const riba = new Riba();

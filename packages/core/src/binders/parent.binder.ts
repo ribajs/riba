@@ -1,17 +1,12 @@
 import { Binder } from "../interfaces";
 
-export interface Assign {
-  key: string;
-  value: any;
-}
-
 /**
  * parent
  * Binds the parent scope to your component
  */
-export const parentBinder: Binder<Assign> = {
+export const parentBinder: Binder<any> = {
   name: "parent",
-  routine(el: HTMLElement, value: object) {
+  routine(/*el: HTMLElement, value: object*/) {
     /**/
   },
   bind(el) {

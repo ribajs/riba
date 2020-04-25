@@ -5,6 +5,7 @@
  * @see https://developer.mozilla.org/de/docs/Web/Web_Components/Using_custom_elements
  */
 
+import "../types/templates";
 import { EventHandler, Formatter } from "../interfaces";
 import { View } from "../view";
 import { Riba } from "../riba";
@@ -38,6 +39,8 @@ export abstract class Component extends FakeHTMLElement {
    * Used to check if all passed observedAttributes are initialized
    */
   protected observedAttributesToCheck: ObservedAttributesToCheck = {};
+
+  protected observedAttributes: string[] = [];
 
   protected riba?: Riba;
 
@@ -266,13 +269,12 @@ export abstract class Component extends FakeHTMLElement {
   protected eventHandler(self: Component): EventHandler {
     // IMPORTANT this must be a function and not a Arrow Functions
     return function (
-      this: EventHandler,
       context: Binding,
       event: Event,
       binding: Binding,
       el: HTMLElement
     ) {
-      this.call(self, context, event, binding.view.models, el);
+      this.call(self, event, binding.view.models, el);
     };
   }
 
@@ -332,12 +334,8 @@ export abstract class Component extends FakeHTMLElement {
       this.attributeObserverFallback.disconnect();
     }
 
-    this.el.removeEventListener("parent" as any, this.onParentChanged);
-
-    this.el.removeEventListener(
-      "binder-changed",
-      this.binderChangedEventHandler
-    );
+    this.removeEventListenerForRibaParent();
+    this.removeEventListenersForRibaAttributes(this.observedAttributes);
   }
 
   /**
@@ -510,18 +508,18 @@ export abstract class Component extends FakeHTMLElement {
     // console.warn('afterBind', this.bound);
   }
 
-  private binderChangedEventHandler(event: Event) {
-    const data = (event as CustomEvent).detail;
-    this.attributeChangedCallback(
-      data.name,
-      data.oldValue,
-      data.oldValue,
-      data.namespace
-    );
-  }
-
   private askForRibaParent() {
     this.el.dispatchEvent(new CustomEvent("ask-for-parent"));
+  }
+
+  private askForRibaAttribute(attrName: string) {
+    this.el.dispatchEvent(new CustomEvent("ask-for-attribute" + attrName));
+  }
+
+  private askForRibaAttributes(observedAttributes: string[]) {
+    for (const observedAttribute of observedAttributes) {
+      this.askForRibaAttribute(observedAttribute);
+    }
   }
 
   private onParentChanged(event: CustomEvent) {
@@ -529,21 +527,59 @@ export abstract class Component extends FakeHTMLElement {
     this.scope.$parent = event.detail;
   }
 
+  private onRibaAttributeChanged(event: CustomEvent) {
+    const data = (event as CustomEvent).detail;
+    const oldValue = this.scope[data.name];
+    this.attributeChangedCallback(
+      data.name,
+      oldValue,
+      data.newValue,
+      data.namespace
+    );
+  }
+
   private listenForRibaParent() {
     this.el.addEventListener("parent" as any, this.onParentChanged.bind(this));
   }
 
+  private removeEventListenerForRibaParent() {
+    this.el.removeEventListener(
+      "parent" as any,
+      this.onParentChanged.bind(this)
+    );
+  }
+
+  private listenForRibaAttribute(attrName: string) {
+    this.el.addEventListener(
+      ("attribute:" + attrName) as any,
+      this.onRibaAttributeChanged.bind(this)
+    );
+  }
+
+  private removeEventListenerForRibaAttribute(attrName: string) {
+    this.el.removeEventListener(
+      ("attribute:" + attrName) as any,
+      this.onRibaAttributeChanged.bind(this)
+    );
+  }
+
+  private listenForRibaAttributes(observedAttributes: string[]) {
+    for (const observedAttribute of observedAttributes) {
+      this.listenForRibaAttribute(observedAttribute);
+    }
+  }
+
+  private removeEventListenersForRibaAttributes(observedAttributes: string[]) {
+    for (const observedAttribute of observedAttributes) {
+      this.removeEventListenerForRibaAttribute(observedAttribute);
+    }
+  }
+
   private initRibaAttributeObserver(observedAttributes: string[]) {
     this.listenForRibaParent();
+    this.listenForRibaAttributes(observedAttributes);
     this.askForRibaParent();
-
-    // Riba removes the riba attributes, so we do not find any attribute
-    // const ribaFullPrefix = "rv-"; // TODO get affix from settings
-    // for (const observedAttribute of observedAttributes) {
-    //   if (this.el.hasAttribute(ribaFullPrefix + observedAttribute)) {
-    //     console.warn("TODO");
-    //   }
-    // }
+    this.askForRibaAttributes(observedAttributes);
   }
 
   /**
@@ -566,6 +602,7 @@ export abstract class Component extends FakeHTMLElement {
    * Event handler to listen attribute change event as fallback for MutationObserver
    */
   private initAttributeObserver(observedAttributes: string[]) {
+    this.observedAttributes = observedAttributes;
     if (
       (window as any).customElements &&
       !this._fallback &&
@@ -599,11 +636,6 @@ export abstract class Component extends FakeHTMLElement {
         });
         this.loadAttributes(observedAttributes);
       } else {
-        // use attribute change event as fallback for MutationObserver
-        this.el.addEventListener(
-          "binder-changed",
-          this.binderChangedEventHandler
-        );
         this.loadAttributes(observedAttributes);
       }
     }

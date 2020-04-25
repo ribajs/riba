@@ -10,7 +10,7 @@ class Dom {
    * Parse the responseText obtained from the fetch call
    * @see https://stackoverflow.com/a/41038197/1465919
    */
-  public static parseResponse(responseText: string, parseTitle: boolean, containerSelector: string, prefetchLinks: boolean = false): Response {
+  public static parseResponse(responseText: string, parseTitle: boolean, containerSelector: string, prefetchLinks: boolean = true): Response {
     let title = '';
     let prefetchLinkElements: NodeListOf<HTMLLinkElement> | Array<HTMLLinkElement> = [];
     const template = document.createElement('template') as HTMLTemplateElement;

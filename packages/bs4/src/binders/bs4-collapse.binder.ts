@@ -12,7 +12,7 @@ export const collapseBinder: Binder<string> = {
   },
   routine(el: HTMLElement, targetSelector: string) {
 
-    const targets = el.querySelectorAll<HTMLElement>(targetSelector);
+    const targets = document.querySelectorAll<HTMLElement>(targetSelector);
 
     const collapseServices: CollapseService[] = [];
 

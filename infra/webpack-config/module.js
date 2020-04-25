@@ -10,7 +10,7 @@ const moduleFound = (name) => {
 }
 
 const isModuleAvailable = (config, moduleName) => {
-  return package.dependencies[moduleName] && config.copyAssets.modules[moduleName] === true && moduleFound(moduleName);
+  return /*package.dependencies[moduleName] && */config.copyAssets.modules[moduleName] === true && moduleFound(moduleName);
 }
 
 module.exports.package = package;

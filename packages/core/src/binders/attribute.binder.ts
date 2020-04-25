@@ -14,7 +14,8 @@ export interface BinderAttributeChangedEvent {
  */
 export const attributeBinder: Binder<string> = {
   name: "*",
-  bind(el) {
+  bind(/*el*/) {
+    /**/
   },
 
   unbind() {
@@ -34,20 +35,6 @@ export const attributeBinder: Binder<string> = {
       }
     } else {
       el.removeAttribute(this.type);
-    }
-
-    if (oldValue !== newValue) {
-      // Fallback for MutationObserver and attributeChangedCallback: Trigger event to catch them in web components to call the attributeChangedCallback method
-      el.dispatchEvent(
-        new CustomEvent("binder-changed", {
-          detail: {
-            name: this.type,
-            oldValue,
-            newValue,
-            namespace: null, // TODO
-          },
-        } as BinderAttributeChangedEvent)
-      );
     }
   },
 };

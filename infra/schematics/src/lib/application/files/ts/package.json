@@ -21,7 +21,7 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.9.0",
     "@babel/plugin-proposal-optional-chaining": "^7.9.0",
     "@babel/plugin-syntax-export-default-from": "^7.8.3",
-    "@babel/plugin-transform-runtime": "^7.9.0",
+
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-typescript": "^7.9.0",
     "@babel/runtime-corejs3": "^7.9.2",
@@ -35,7 +35,7 @@
     "core-js": "^3.6.4",
     "css-loader": "^3.4.2",
     "html-loader": "^1.0.0",
-    "html-webpack-plugin": "^4.0.3",
+    "html-webpack-plugin": "^4.2.0",
     "inspectpack": "^4.4.0",
     "jest": "^25.2.4",
     "jest-extended": "^0.11.5",
@@ -46,7 +46,7 @@
     "ts-jest": "^25.3.0",
     "eslint": "^6.8.0",
     "typescript": "^3.8.3",
-    "webpack": "^4.42.1",
+    "webpack": "^5.0.0-beta.15",
     "webpack-cli": "^3.3.11",
     "mini-css-extract-plugin": "^0.9.0",
     "webpack-dev-server": "^3.10.3"

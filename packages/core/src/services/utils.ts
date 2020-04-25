@@ -25,7 +25,7 @@ export class Utils {
   }
 
   public static couldBeJson(str?: string | null) {
-    if (!str) {
+    if (!str || typeof str !== "string") {
       return false;
     }
     return str.startsWith("{") || str.startsWith("[");

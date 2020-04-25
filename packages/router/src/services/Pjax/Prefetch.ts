@@ -43,7 +43,7 @@ class Prefetch {
    * for the prefetch
    *
    */
-  public init(autobindLinks = false, preloadImages = true) {
+  public init(autobindLinks = false, preloadImages = false) {
     if (!window.history.pushState) {
       return false;
     }

@@ -1,4 +1,3 @@
-import "./types";
 export * from "./interfaces";
 export * from "./vendors";
 export * from "./services";

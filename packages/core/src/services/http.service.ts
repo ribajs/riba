@@ -159,7 +159,7 @@ export class HttpService {
     });
   }
 
-  public static fetch(
+  public static async fetch(
     url: string,
     method: "GET" | "POST" | "PUT" | "DELETE" = "GET",
     data: any = {},
@@ -200,22 +200,29 @@ export class HttpService {
         headers,
       })
         .then((response) => {
+          if (response.status >= 400) {
+            throw response;
+          }
           if (
             typeof dataType === "string" &&
             (dataType === "json" || dataType.includes("json"))
           ) {
-            return response.json();
+            try {
+              return response.json();
+            } catch (error) {
+              return response.text();
+            }
           }
           return response.text();
         })
         .catch((error) => {
-          console.error(error);
+          // console.error(error);
           throw error;
         });
     }
 
     // Fallback
-    return this.xhr(url, undefined, "GET", dataType, data);
+    return this.xhr(url, undefined, method, dataType, data);
   }
 
   /**

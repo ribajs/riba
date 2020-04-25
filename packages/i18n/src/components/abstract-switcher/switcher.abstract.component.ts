@@ -1,4 +1,4 @@
-import { Component, Binder, View } from "@ribajs/core";
+import { Component, View } from "@ribajs/core";
 import { Langcode } from "../../interfaces";
 import { ALocalesService } from "../../services/locales-base.service";
 
@@ -28,7 +28,7 @@ export abstract class AI18nSwitcherComponent extends Component {
    * @param langcode
    * @param event
    */
-  public switch(langcode: Langcode, context?: Binder<any>, event?: Event) {
+  public switch(langcode: Langcode, event?: Event) {
     if (event) {
       event.preventDefault();
       event.stopPropagation();
@@ -43,7 +43,7 @@ export abstract class AI18nSwitcherComponent extends Component {
    * @param langcode
    * @param event
    */
-  public toggle(context?: Binder<any>, event?: Event) {
+  public toggle(event?: Event) {
     if (event) {
       event.preventDefault();
       event.stopPropagation();

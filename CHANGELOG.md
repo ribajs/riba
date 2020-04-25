@@ -2,10 +2,28 @@
 
 ## Dev
 
+### Breaking changes
+
+- If you call a function from you template the first argument is not any more the binder:
+
+before:
+
+```ts
+public toggle(context?: Binder<any>, event?: Event) {
+```
+
+after:
+
+```ts
+public toggle(event?: Event) {
+```
+
 - Start working with yarn 2 workspaces
 
 ### Core
- - New parent binder to bind the parent scope to any custom element / web component
+
+- New parent binder to bind the parent scope to any custom element / web component
+- New component attribute binder to bind an attribute passed with rv-co-* to any custom element / web component without first converting it as an attribute
 
 ### BS4
 
@@ -25,6 +43,7 @@
 - New bs4-toggle-collapse-on-* binder
 
 ### Photoswipe
+
 - New Photoswipe module
 
 ## 1.8.0

@@ -5,7 +5,7 @@ export * from './Prefetch';
 import { getDataset } from '@ribajs/core';
 import { EventDispatcher, Utils, HttpService } from '@ribajs/core';
 
-import { BaseCache } from '../Cache';
+import { BaseCache } from '@ribajs/cache';
 import { HideShowTransition } from '../Transition';
 import { Transition, Response, PjaxOptions } from '../../interfaces';
 import { Dom } from './Dom';

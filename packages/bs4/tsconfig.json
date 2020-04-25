@@ -1,7 +1,7 @@
 {
   "extends": "@ribajs/tsconfig",
   "files": [
-    "src/ts/index.ts"
+    "src/index.ts"
   ],
   "compilerOptions": {
     "outDir": "dist",
