@@ -1,12 +1,8 @@
 // Original Bootstrap 4 Styles
 @import './vendors/bootstrap/bootstrap';
-
 // Bootstrap style extensions from @ribajs/bs4
 @import "./vendors/@ribajs/bs4/index";
-
-// @import './binders/index';
 @import '../ts/components/index';
-// @import './formatters/index';
 
 
 body {

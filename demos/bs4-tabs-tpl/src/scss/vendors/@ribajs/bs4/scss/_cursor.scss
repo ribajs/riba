@@ -1,0 +1,207 @@
+// The cursor indicates an alias of something is to be created
+.cursor-alias {
+  cursor: alias;
+}
+
+// The cursor indicates that something can be scrolled in any direction
+.cursor-all-scroll {
+  cursor: all-scroll;
+}
+
+// Default. The browser sets a cursor
+.cursor-auto {
+  cursor: auto;
+}
+
+// The cursor indicates that a cell (or set of cells) may be selected
+.cursor-cell {
+  cursor: cell;
+}
+
+// The cursor indicates that a context-menu is available
+.cursor-context-menu {
+  cursor: context-menu;
+}
+
+// The cursor indicates that the column can be resized horizontally
+.cursor-col-resize {
+  cursor: col-resize;
+}
+
+// The cursor indicates something is to be copied
+.cursor-copy {
+  cursor: copy;
+}
+
+// The cursor render as a crosshair
+.cursor-crosshair {
+  cursor: crosshair;
+}
+
+// The default cursor
+.cursor-default {
+  cursor: default;
+}
+
+// The cursor indicates that an edge of a box is to be moved right (east)
+.cursor-e-resize {
+  cursor: e-resize;
+}
+
+// Indicates a bidirectional resize cursor
+.cursor-ew-resize {
+  cursor: ew-resize;
+}
+
+// The cursor indicates that something can be grabbed
+.cursor-grab {
+  cursor: grab;
+}
+
+// 	The cursor indicates that something can be grabbed
+.cursor-grabbing {
+  cursor: grabbing;
+}
+
+// The cursor indicates that help is available
+.cursor-help {
+  cursor: help;
+}
+
+// 	The cursor indicates something is to be moved
+.cursor-move {
+  cursor: move;
+}
+
+// The cursor indicates that an edge of a box is to be moved up (north)
+.cursor-n-resize {
+  cursor: n-resize;
+}
+
+// The cursor indicates that an edge of a box is to be moved up and right (north/east)
+.cursor-ne-resize {
+  cursor: ne-resize;
+}
+
+// Indicates a bidirectional resize cursor
+.cursor-nesw-resize {
+  cursor: nesw-resize;
+}
+
+// Indicates a bidirectional resize cursor
+.cursor-ns-resize	{
+  cursor: ns-resize;
+}
+
+// The cursor indicates that an edge of a box is to be moved up and left (north/west)
+.cursor-nw-resize {
+  cursor: nw-resize;
+}
+
+// Indicates a bidirectional resize cursor
+.cursor-nwse-resize {
+  cursor: nwse-resize;
+}
+
+// The cursor indicates that the dragged item cannot be dropped here
+.cursor-no-drop {
+  cursor: no-drop;
+}
+
+// No cursor is rendered for the element
+.cursor-none {
+  cursor: none;
+}
+
+// The cursor indicates that the requested action will not be executed
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
+// The cursor is a pointer and indicates a link
+.cursor-pointer {
+  cursor: pointer;
+}
+
+// The cursor indicates that the program is busy (in progress)
+.cursor-progress {
+  cursor: progress;
+}
+
+// The cursor indicates that the row can be resized vertically
+.cursor-row-resize {
+  cursor: row-resize;
+}
+
+// The cursor indicates that an edge of a box is to be moved down (south)
+.cursor-s-resize {
+  cursor: s-resize;
+}
+
+// The cursor indicates that an edge of a box is to be moved down and right (south/east)
+.cursor-se-resize {
+  cursor: se-resize;
+}
+
+// The cursor indicates that an edge of a box is to be moved down and left (south/west)
+.cursor-sw-resize {
+  cursor: sw-resize;
+}
+
+// The cursor indicates text that may be selected
+.cursor-text {
+  cursor: text;
+}
+
+// The cursor indicates vertical-text that may be selected
+.cursor-vertical-text {
+  cursor: vertical-text;
+}
+
+// The cursor indicates that an edge of a box is to be moved left (west)
+.cursor-w-resize {
+  cursor: w-resize;
+}
+
+// The cursor indicates that the program is busy
+.cursor-wait {
+  cursor: wait;
+}
+
+// The cursor indicates that something can be zoomed in
+.cursor-zoom-in {
+  cursor: zoom-in;
+}
+
+// The cursor indicates that something can be zoomed out
+.cursor-zoom-out {
+  cursor: zoom-out;
+}
+
+// Sets this property to its default value. See https://www.w3schools.com/cssref/css_initial.asp
+.cursor-initial {
+  cursor: initial;
+}
+
+// Inherits this property from its parent element. See https://www.w3schools.com/cssref/css_inherit.asp
+.cursor-inherit {
+  cursor: inherit;
+}
+
+
+// Default pointer elements
+button, .btn, select, .custom-select, [href] {
+  cursor: pointer;
+}
+
+// Drag and drop / scrollbar-draggable / bs4-slideshow
+.draggable {
+  user-select: none;
+  @extend .cursor-grab;
+  &:active {
+    @extend .cursor-grabbing;
+  }
+  &img, img {
+    pointer-events: none;
+  }
+}

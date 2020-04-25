@@ -1,0 +1,26 @@
+<i18n-switcher>
+  <p><strong rv-i18n-text="'examples.i18n.switch_language'"></strong></p>
+  <div class="btn-group" role="group">
+    <button
+      type="button"
+      class="btn btn-secondary text-uppercase"
+      rv-each-langcode="langcodes"
+      rv-text="langcode.code"
+      rv-on-click="switch | args langcode"
+      rv-class-active="langcode.active"
+    >Left</button>
+  </div>
+</i18n-switcher>
+
+<div class="form-row my-5">
+  <div class="col-12">
+    <h1 rv-i18n-text="'examples.newsletter.title'"></h1>
+    <p rv-i18n-html="'examples.newsletter.description_html'"></p>
+  </div>
+  <div class="col">
+    <input type="text" class="form-control" rv-i18n-value="'examples.newsletter.input_value'" />
+  </div>
+  <div class="col">
+    <input type="text" class="form-control" rv-i18n-placeholder="'examples.newsletter.placeholder_last_name'" />
+  </div>
+</div>
