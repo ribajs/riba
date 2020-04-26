@@ -76,7 +76,7 @@ module.exports = config => {
   ];
 
   // config defaults
-  config.detectDuplicates = true;
+  config.detectDuplicates = false;
 
   config.styles = {
     build: true,

@@ -1,7 +1,8 @@
 import { Utils } from "./utils";
 
-interface Options {
+export interface HttpServiceOptions {
   crossDomain?: boolean;
+  cache?: 'default' | 'no-store' | 'reload' | 'no-cache' | 'force-cache' | 'only-if-cached';
 }
 
 export class HttpService {
@@ -34,16 +35,16 @@ export class HttpService {
    * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html).
    * @see https://api.jquery.com/jquery.post/
    */
-  public static async post(url: string, data?: any, dataType?: string) {
-    return this.fetch(url, "POST", data, dataType);
+  public static async post(url: string, data?: any, dataType?: string, headers: any = {}, options: HttpServiceOptions = {}) {
+    return this.fetch(url, "POST", data, dataType, headers, options);
   }
 
-  public static async delete(url: string, data?: any, dataType?: string) {
-    return this.fetch(url, "DELETE", data, dataType);
+  public static async delete(url: string, data?: any, dataType?: string, headers: any = {}, options: HttpServiceOptions = {}) {
+    return this.fetch(url, "DELETE", data, dataType, headers, options);
   }
 
-  public static async put(url: string, data?: any, dataType?: string) {
-    return this.fetch(url, "PUT", data, dataType);
+  public static async put(url: string, data?: any, dataType?: string, headers: any = {}, options: HttpServiceOptions = {}) {
+    return this.fetch(url, "PUT", data, dataType, headers, options);
   }
 
   /**
@@ -53,8 +54,8 @@ export class HttpService {
    * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html).
    * @see https://api.jquery.com/jquery.get/
    */
-  public static async get(url: string, data?: any, dataType?: string) {
-    return this.fetch(url, "GET", data, dataType);
+  public static async get(url: string, data?: any, dataType?: string, headers: any = {}, options: HttpServiceOptions = {}) {
+    return this.fetch(url, "GET", data, dataType, headers, options);
   }
 
   /**
@@ -165,7 +166,7 @@ export class HttpService {
     data: any = {},
     dataType?: string,
     headers: any = {},
-    options: Options = {}
+    options: HttpServiceOptions = {}
   ) {
     if (fetch) {
       let body;
@@ -181,6 +182,8 @@ export class HttpService {
         headers["X-Requested-With"] = "XMLHttpRequest";
       }
 
+      const cache = options.cache ? options.cache : 'default';
+
       if (method === "GET" && data) {
         url = url + "?" + new URLSearchParams(data);
       } else if (data) {
@@ -195,6 +198,7 @@ export class HttpService {
       // console.debug('headers', headers);
       return fetch(url, {
         credentials: "same-origin",
+        cache,
         method,
         body,
         headers,

@@ -17,13 +17,18 @@ class BaseCache<T = any> {
    *
    */
   public set(key: string, val: T) {
-    return this.data[key] = val;
+    this.data[key] = val;
+    console.debug('SET key: ',key);
+    console.debug('keys: ', Object.keys(this.data));
+    return this.data[key]
   }
 
   /**
    * Retrieve the data using the key
    */
   public get(key: string): T | undefined {
+    console.debug('GET key: ',key);
+    console.debug('keys: ', Object.keys(this.data));
     return this.data[key];
   }
 

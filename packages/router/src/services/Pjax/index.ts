@@ -3,7 +3,7 @@ export * from './Dom';
 export * from './Prefetch';
 
 import { getDataset } from '@ribajs/core';
-import { EventDispatcher, Utils, HttpService } from '@ribajs/core';
+import { EventDispatcher, Utils, HttpService, HttpServiceOptions } from '@ribajs/core';
 
 import { BaseCache } from '@ribajs/cache';
 import { HideShowTransition } from '../Transition';
@@ -40,25 +40,12 @@ class Pjax {
   /**
    * Determine if the link should be followed
    */
-  public static preventCheck(evt: Event, element?: HTMLAnchorElement, href?: string): boolean {
-    if (!window.history.pushState) {
-      return false;
-    }
-
+  protected static preventCheckUrl(href: string): boolean {
     /**
-     * Get href from element if href is not set
+     * Create fake html element
      */
-    if (!href && element) {
-      href = this.getHref(element);
-    }
-
-    /**
-     * Create fake html element if element is not set
-     */
-    if (href && !element) {
-      element = document.createElement('a');
-      element.setAttribute('href', href);
-    }
+    const element = document.createElement('a');
+    element.setAttribute('href', href);
 
     if (!element) {
       return false;
@@ -78,23 +65,39 @@ class Pjax {
       return false;
     }
 
-    // Middle click, cmd click and ctrl click
+    // Check if it's the same domain
+    if (window.location.protocol !== (element as HTMLAnchorElement).protocol || window.location.hostname !== (element as HTMLAnchorElement).hostname) {
+      return false;
+    }
+
+    // Check if the port is the same
+    if (Utils.getPort() !== Utils.getPort((element as HTMLAnchorElement).port)) {
+      return false;
+    }
+
+
+    return true;
+  }
+
+  /**
+   * Determine if the link should be followed
+   */
+  public static preventCheck(evt: Event, element: HTMLAnchorElement | HTMLLinkElement, href: string): boolean {
+    if (!window.history.pushState) {
+      return false;
+    }
+
+    if (!this.preventCheckUrl(href)) {
+      return false
+    }
+
+    // Middle click, cmd click, ctrl click or prefetch load event
     if ((evt && ((evt as any).which && (evt as any).which > 1) || (evt as any).metaKey || (evt as any).ctrlKey || (evt as any).shiftKey || (evt as any).altKey)) {
       return false;
     }
 
     // Ignore target with _blank target
     if (element.target && element.target === '_blank') {
-      return false;
-    }
-
-    // Check if it's the same domain
-    if (window.location.protocol !== element.protocol || window.location.hostname !== element.hostname) {
-      return false;
-    }
-
-    // Check if the port is the same
-    if (Utils.getPort() !== Utils.getPort(element.port)) {
       return false;
     }
 
@@ -114,7 +117,7 @@ class Pjax {
    * Get the .href parameter out of an element
    * and handle special cases (like xlink:href)
    */
-  public static getHref(el: HTMLAnchorElement | SVGAElement): string | undefined {
+  public static getHref(el: HTMLAnchorElement | SVGAElement | HTMLLinkElement): string | undefined {
     if (!el) {
       return undefined;
     }
@@ -174,6 +177,9 @@ class Pjax {
 
   protected containerSelector: string;
 
+  /**
+   * Finds elements in the head like <link rel="preload" href="..." as="fetch"> add them to the new head (and removes the old)
+   */
   protected prefetchLinks: boolean;
 
   /**
@@ -276,6 +282,31 @@ class Pjax {
     return this.transition || new HideShowTransition();
   }
 
+  /**
+   * Appends a prefetch link to the head and caches the result
+   */
+  protected prefetchLink(linkElement: HTMLLinkElement, head: HTMLHeadElement) {
+    const rel = linkElement.getAttribute('rel');
+    const href = Pjax.getHref(linkElement);
+    if (rel === 'router-preload' && href && this.cacheEnabled) {
+      const follow = Pjax.preventCheckUrl(href);
+      const cachedResponse = Pjax.cache.get(this.viewId + '_' + href);
+      if (follow) {
+        // Only append if not already cached
+        if (cachedResponse) {
+          return true;
+        }
+        // TODO wait for idle because we do not want to block the user
+        const response = this.loadResponse(href, true)
+        Pjax.cache.set(this.viewId + '_' + href, response);
+        console.debug('cached link', href);
+        return true;
+      }
+    }
+    // Append other types linke images
+    head.appendChild(linkElement);
+  }
+
  /**
   * Load an url, will start an fetch request or load from the cache will return the Container
   * Also puts the container to the DOM and sets the title (if this option is active)
@@ -285,6 +316,7 @@ class Pjax {
 
     return response
     .then((_response) => {
+      // console.debug('_response', _response);
       if (!this.wrapper) {
         throw new Error('[Pjax] you need a wrapper!');
       }
@@ -295,7 +327,7 @@ class Pjax {
       if (this.prefetchLinks === true && _response.prefetchLinks) {
         document.title = _response.title;
         const head = document.getElementsByTagName('head')[0];
-        const oldPrefetchLinkElements = head.querySelectorAll('link[href][rel="dns-prefetch"], link[href][rel="preconnect"], link[href][rel="prefetch"], link[href][rel="subresource"], link[href][rel="preload"]') as NodeListOf<HTMLLinkElement>;
+        const oldPrefetchLinkElements = head.querySelectorAll('link[href][rel="dns-prefetch"], link[href][rel="preconnect"], link[href][rel="prefetch"], link[href][rel="subresource"], link[href][rel="preload"], link[href][rel="router-preload"]') as NodeListOf<HTMLLinkElement>;
         // Remove the old prefetch link elements
         oldPrefetchLinkElements.forEach((linkElement: HTMLLinkElement) => {
           if (linkElement && linkElement.parentNode) {
@@ -304,7 +336,7 @@ class Pjax {
         });
         // Append the new prefetch link elements
         _response.prefetchLinks.forEach((linkElement: HTMLLinkElement) => {
-          head.appendChild(linkElement);
+          this.prefetchLink(linkElement, head);
         });
       }
 
@@ -321,11 +353,13 @@ class Pjax {
  /**
   * Load an url, will start an fetch request or load from the cache (and set it to the cache) and will return a `Response` pbject
   */
- public async loadResponse(url: string) {
+  public async loadResponse(url: string, forceCache = false ) {
+    // console.debug('loadResponse', url);
     let response = Pjax.cache.get(this.viewId + '_' + url);
 
     if (!response || !response.then) {
-      response = HttpService.get(url, undefined, 'html')
+      const options: HttpServiceOptions = forceCache ? { cache: 'force-cache'} : {};
+      response = HttpService.get(url, undefined, 'html', {}, options)
       .then((data: string) => {
         return Dom.parseResponse(data, this.parseTitle, this.containerSelector, this.prefetchLinks);
       });
@@ -377,21 +411,23 @@ class Pjax {
 
     // Go up in the nodelist until we
     // find something with an href
-    while (el && !Pjax.getHref(el)) {
+    while (el && !el.href) {
       el = (el.parentNode as HTMLAnchorElement);
     }
-
     const href = Pjax.getHref(el);
 
-    if (Pjax.preventCheck(evt, el, href)) {
+    if (!href) {
+      throw new Error('href is falsy');
+    }
+    const follow = Pjax.preventCheck(evt, el, href);
+
+    if (follow) {
       evt.stopPropagation();
       evt.preventDefault();
 
       this.dispatcher.trigger('linkClicked', el, evt);
 
-      if (!href) {
-        throw new Error('href is null');
-      }
+
 
       this.goTo(href);
     }
@@ -468,11 +504,30 @@ class Pjax {
     );
   }
 
+  protected cacheInitialContainer() {
+    const initalResponse = Dom.parseInitial(this.parseTitle, this.containerSelector, this.prefetchLinks);
+    const url = window.location.pathname;
+    if (this.cacheEnabled) {
+      Pjax.cache.set(this.viewId + '_' + url, Promise.resolve(initalResponse));
+    } else {
+      Pjax.cache.reset();
+    }
+    return initalResponse;
+  }
+
   /**
    * Init the events
    */
   protected init(wrapper: HTMLElement, listenAllLinks: boolean, listenPopstate: boolean) {
-    const container = Dom.getContainer(document.body, this.containerSelector);
+
+    const { container, prefetchLinks } = this.cacheInitialContainer();
+
+    // const container = Dom.getContainer(document.body, this.containerSelector);
+    const head = document.getElementsByTagName('head')[0];
+
+    prefetchLinks.forEach((linkElement: HTMLLinkElement) => {
+      this.prefetchLink(linkElement, head);
+    });
 
     this.wrapper = wrapper;
 

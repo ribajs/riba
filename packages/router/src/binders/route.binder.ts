@@ -116,15 +116,13 @@ export const routeBinder: Binder<string> = {
     el.addEventListener('click', this.customData.onClick.bind(this));
 
     if (!this.customData.options.newTab && !Utils.onRoute(this.customData.options.url)) {
-      el.addEventListener('mouseover', this.customData.onLinkEnter.bind(this), { passive: true });
-      el.addEventListener('touchstart', this.customData.onLinkEnter.bind(this), { passive: true });
+      this.customData.prefetch.initAnchor(el);
     }
 
     this.customData.checkURL.call(this, this.customData.options.url);
   },
   unbind(this: Binding, el: HTMLUnknownElement) {
-    el.removeEventListener('mouseover', this.customData.onLinkEnter.bind(this));
-    el.removeEventListener('touchstart', this.customData.onLinkEnter.bind(this));
+    this.customData.prefetch.deInitAnchor(el);
     el.removeEventListener('click', this.customData.onClick.bind(this));
   },
 };

@@ -6,6 +6,21 @@ import { Response } from '../../interfaces/response';
  */
 class Dom {
 
+  public static getPrefetchLinkElements(content: DocumentFragment | Document) {
+    // router-preload is a custom preloader
+    return content.querySelectorAll('link[href][rel="dns-prefetch"], link[href][rel="preconnect"], link[href][rel="prefetch"], link[href][rel="subresource"], link[href][rel="preload"], link[href][rel="router-preload"]') as NodeListOf<HTMLLinkElement>;
+  }
+
+  public static parseTitle(content: DocumentFragment | Document) {
+    let title = '';
+    // title = Dom.findHTMLTagContent('title', template.innerHTML) || '';
+    const titleElement = content.querySelector('title');
+    if (titleElement && titleElement.innerText) {
+      title = titleElement.innerText;
+    }
+    return title;
+  }
+
   /**
    * Parse the responseText obtained from the fetch call
    * @see https://stackoverflow.com/a/41038197/1465919
@@ -17,19 +32,40 @@ class Dom {
     template.innerHTML = responseText;
 
     if (parseTitle) {
-      // title = Dom.findHTMLTagContent('title', template.innerHTML) || '';
-      const titleElement = template.content.querySelector('title');
-      if (titleElement && titleElement.innerText) {
-        title = titleElement.innerText;
-      }
+      title = this.parseTitle(template.content);
     }
 
     if (prefetchLinks) {
-      prefetchLinkElements = template.content.querySelectorAll('link[href][rel="dns-prefetch"], link[href][rel="preconnect"], link[href][rel="prefetch"], link[href][rel="subresource"], link[href][rel="preload"]') as NodeListOf<HTMLLinkElement>;
+      prefetchLinkElements = this.getPrefetchLinkElements(template.content);
+    }
+
+    const container = this.getContainer(template, containerSelector);
+
+    return {
+      container,
+      title,
+      prefetchLinks: prefetchLinkElements,
+    };
+  }
+
+  /**
+   * Use this method only on the first page load
+   */
+  public static parseInitial(parseTitle: boolean, containerSelector: string, prefetchLinks: boolean = true) {
+    let title = '';
+    let prefetchLinkElements: NodeListOf<HTMLLinkElement> | Array<HTMLLinkElement> = [];
+    const container = this.getContainer(document, containerSelector);
+
+    if (parseTitle) {
+      title = this.parseTitle(document);
+    }
+
+    if (prefetchLinks) {
+      prefetchLinkElements = this.getPrefetchLinkElements(document);
     }
 
     return {
-      container: this.getContainer(template, containerSelector),
+      container,
       title,
       prefetchLinks: prefetchLinkElements,
     };
@@ -39,7 +75,7 @@ class Dom {
    * Get the container on the current DOM,
    * or from an Element passed via argument
    */
-  public static getContainer(element: HTMLTemplateElement | HTMLElement, containerSelector: string): HTMLElement {
+  public static getContainer(element: HTMLTemplateElement | HTMLElement | Document, containerSelector: string): HTMLElement {
 
     if (!element) {
       throw new Error('Barba.js: [getContainer] No element to get container from, maybe the DOM is not ready!');
@@ -77,7 +113,7 @@ class Dom {
   /**
    * Get container selector
    */
-  protected static parseContainer(newPage: HTMLTemplateElement | HTMLElement, containerSelector: string): HTMLElement  {
+  protected static parseContainer(newPage: HTMLTemplateElement | HTMLElement | Document, containerSelector: string): HTMLElement  {
     if (!newPage) {
       const error = new Error('New page not loaded!');
       console.error(error, newPage);
