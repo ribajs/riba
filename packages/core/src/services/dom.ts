@@ -1,4 +1,4 @@
-import { Utils } from "./utils";
+import { clone, parseJsonString } from "@ribajs/utils/src/type";
 
 /**
  * TODO move Dom utils here
@@ -23,14 +23,14 @@ export const parseAttribute = (attr?: string | null) => {
       value = attr;
     }
   } else {
-    const jsonString = Utils.parseJsonString(value);
+    const jsonString = parseJsonString(value);
     value = jsonString ? jsonString : value;
   }
   return value;
 };
 
 export const getDataset = (element: HTMLElement) => {
-  const dataset = Utils.clone(false, element.dataset);
+  const dataset = clone(false, element.dataset);
   for (const attr in dataset) {
     if (dataset[attr]) {
       dataset[attr] = parseAttribute(dataset[attr]);

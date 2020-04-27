@@ -10,7 +10,8 @@ import { EventHandler, Formatter } from "../interfaces";
 import { View } from "../view";
 import { Riba } from "../riba";
 import { Binding } from "../binding";
-import { Utils } from "../services/utils";
+import { parseJsonString, camelCase } from "@ribajs/utils/src/type";
+import { getRandomColor } from "@ribajs/utils/src/color";
 import { FakeHTMLElement } from "./fake-html-element";
 
 export type TemplateFunction = () => Promise<string | null> | string | null;
@@ -61,7 +62,7 @@ export abstract class Component extends FakeHTMLElement {
     super(element);
 
     if (this._debug) {
-      this._color = Utils.getRandomColor();
+      this._color = getRandomColor();
     }
 
     if (element) {
@@ -242,7 +243,7 @@ export abstract class Component extends FakeHTMLElement {
         value = attr;
       }
     } else {
-      const jsonString = Utils.parseJsonString(value);
+      const jsonString = parseJsonString(value);
       value = jsonString ? jsonString : value;
     }
     return value;
@@ -362,7 +363,7 @@ export abstract class Component extends FakeHTMLElement {
 
     newValue = this.parseAttribute(newValue);
 
-    const parsedAttributeName = Utils.camelCase(attributeName);
+    const parsedAttributeName = camelCase(attributeName);
 
     if (this.scope && this.scope[parsedAttributeName]) {
       oldValue = this.scope[parsedAttributeName];

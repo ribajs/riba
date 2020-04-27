@@ -1,8 +1,8 @@
 import {
   Component,
   EventDispatcher,
-  Utils,
 } from '@ribajs/core';
+import { getViewportDimensions } from '@ribajs/utils/src/dom';
 
 type State = 'overlay-left' | 'overlay-right' | 'side-left' | 'side-right' | 'hidden';
 
@@ -137,7 +137,7 @@ export class Bs4SidebarComponent extends Component {
   }
 
   public show() {
-    const vw = Utils.getViewportDimensions().w;
+    const vw = getViewportDimensions().w;
     if (vw < this.scope.overlayOnSlimmerThan) {
       this.scope.state = 'overlay-' + this.scope.position as State;
     } else {
@@ -233,7 +233,7 @@ export class Bs4SidebarComponent extends Component {
     if (this.scope.forceShowOnLocationPathnames.includes(window.location.pathname)) {
       return this.show();
     }
-    const vw = Utils.getViewportDimensions().w;
+    const vw = getViewportDimensions().w;
     if (this.scope.autoHideOnSlimmerThan > -1 && vw < this.scope.autoHideOnSlimmerThan) {
       return this.hide();
     }

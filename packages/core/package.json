@@ -83,5 +83,8 @@
   "homepage": "https://github.com/ribajs/riba#readme",
   "directories": {
     "lib": "lib"
+  },
+  "dependencies": {
+    "@ribajs/utils": "workspace:packages/utils"
   }
 }

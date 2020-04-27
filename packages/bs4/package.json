@@ -71,6 +71,7 @@
     "@ribajs/cache": "workspace:packages/cache",
     "@ribajs/core": "workspace:packages/core",
     "@ribajs/extras": "workspace:packages/extras",
+    "@ribajs/utils": "workspace:packages/utils",
     "bootstrap": "^4.4.1",
     "popper.js": "^1.16.1"
   },

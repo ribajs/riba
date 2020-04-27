@@ -1,5 +1,5 @@
 import { Binder } from "../interfaces";
-import { Utils } from "../services/utils";
+import { camelCase, extend } from "@ribajs/utils/src/type";
 
 export interface Assign {
   key: string;
@@ -16,9 +16,9 @@ export interface Assign {
 export const assignPropertyBinder: Binder<Assign> = {
   name: "assign-*",
   routine(el: HTMLElement, value: any) {
-    const propertyName = Utils.camelCase((this.args[0] as string).trim());
+    const propertyName = camelCase((this.args[0] as string).trim());
     const obj: any = {};
     obj[propertyName] = value;
-    return Utils.extend(false, this.view.models, obj);
+    return extend(false, this.view.models, obj);
   },
 };

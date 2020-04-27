@@ -1,4 +1,4 @@
-import { Utils } from "../../services/utils";
+import { getNumber } from "@ribajs/utils/src/type";
 
 /**
  * Parse a string to number / float
@@ -7,7 +7,7 @@ import { Utils } from "../../services/utils";
 export const numberFormatter = {
   name: "number",
   read(str: string, def: number) {
-    const num = Utils.getNumber(str);
+    const num = getNumber(str);
     // If default value is set return the default value if num is 0, null or undefined
     if (def) {
       return num ? num : def;

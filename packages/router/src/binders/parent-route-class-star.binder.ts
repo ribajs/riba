@@ -1,4 +1,5 @@
-import { Binder, Utils, EventDispatcher } from '@ribajs/core';
+import { Binder, EventDispatcher } from '@ribajs/core';
+import { onParentRoute } from '@ribajs/utils/src/url';
 
 export const parentRouteClassStarBinder: Binder<string> = {
   name: 'parent-route-class-*',
@@ -25,7 +26,7 @@ export const parentRouteClassStarBinder: Binder<string> = {
     }
     const onUrlChange = (urlToCheck?: string) => {
       if (urlToCheck) {
-        if (Utils.onParentRoute(urlToCheck)) {
+        if (onParentRoute(urlToCheck)) {
           el.classList.add(className);
           // check if element is radio input
           if (el.getAttribute('type') === 'radio') {

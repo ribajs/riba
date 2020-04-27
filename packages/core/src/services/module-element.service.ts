@@ -1,4 +1,4 @@
-import { Utils } from "./utils";
+import { isObject } from "@ribajs/utils/src/type";
 import { ModuleElementType } from "../interfaces/module-element-type";
 
 export type Element = any;
@@ -32,7 +32,7 @@ export abstract class ModuleElementService {
    * @param elements
    */
   public regists(elements: Elements): Elements {
-    if (!Utils.isObject(elements)) {
+    if (!isObject(elements)) {
       throw new Error("Elements to register must be an object of elements");
     }
     for (const key in elements) {

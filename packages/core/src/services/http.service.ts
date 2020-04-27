@@ -1,4 +1,4 @@
-import { Utils } from "./utils";
+import { concat } from "@ribajs/utils/src/type";
 
 export interface HttpServiceOptions {
   crossDomain?: boolean;
@@ -131,7 +131,6 @@ export class HttpService {
   /**
    * Start an XMLHttpRequest() and return a Promise
    *
-   * @memberOf Barba.Utils
    * @param url
    * @param xhrTimeout Time in millisecond after the xhr request goes in timeout
    */
@@ -205,7 +204,7 @@ export class HttpService {
         headers[header.name] = header.value;
       }
       if (dataType) {
-        headers = Utils.concat(headers, this.parseDataType(dataType));
+        headers = concat(headers, this.parseDataType(dataType));
       }
 
       if (!options.crossDomain && !headers["X-Requested-With"]) {

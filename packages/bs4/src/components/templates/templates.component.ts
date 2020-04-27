@@ -1,7 +1,10 @@
 import {
   Component,
-  Utils,
 } from '@ribajs/core';
+import {
+  camelCase,
+} from '@ribajs/utils/src/type';
+
 
 export type AttributeType = string; // 'string' | 'number' | 'boolean';
 
@@ -74,7 +77,7 @@ export abstract class TemplatesComponent extends Component {
         console.error(new Error(`template "${attribute.name}" attribute is required!`));
         return;
       }
-      attributes[Utils.camelCase(attribute.name)] = attrValue;
+      attributes[camelCase(attribute.name)] = attrValue;
     }
     return this.transformTemplateAttributes(attributes, index);
   }

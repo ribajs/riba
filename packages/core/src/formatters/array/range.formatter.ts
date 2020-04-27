@@ -1,4 +1,4 @@
-import { Utils } from "../../services/utils";
+import { isNumber } from "@ribajs/utils/src/type";
 
 /**
  * Array formatter to get a subarray from array
@@ -6,8 +6,8 @@ import { Utils } from "../../services/utils";
 export const rangeFormatter = {
   name: "range",
   read(arr: any[], start: number, end: number) {
-    start = Number(Utils.isNumber(start) ? start : 0);
-    end = Number(Utils.isNumber(end) ? end : arr.length - 1);
+    start = Number(isNumber(start) ? start : 0);
+    end = Number(isNumber(end) ? end : arr.length - 1);
     if (end > arr.length - 1) {
       end = arr.length - 1;
     }

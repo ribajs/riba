@@ -16,7 +16,7 @@ export class ShopifyProductService {
    * @param handle product handle
    */
   public static get(handle: string): Promise<ShopifyProduct> {
-    if (this.cache.hasOwnProperty(handle)) {
+    if (this.cache[handle]) {
       return new Promise((resolve) => {
         resolve(this.cache[handle]);
       });

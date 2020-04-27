@@ -1,4 +1,4 @@
-import { Utils } from "../../services/utils";
+import { isArray, isObject, getString } from "@ribajs/utils/src/type";
 
 /**
  * Parses a value to string
@@ -9,18 +9,18 @@ export const stringFormatter = {
   name: "string",
   read(value: any, def: string) {
     // If value is an array convert each value in array to string
-    if (Utils.isArray(value)) {
+    if (isArray(value)) {
       for (const i in value as Array<any>) {
         if (value[i]) {
-          value[i] = Utils.getString(value[i]);
+          value[i] = getString(value[i]);
         }
       }
-    } else if (Utils.isObject(value)) {
+    } else if (isObject(value)) {
       for (const key in value) {
-        value[key] = Utils.getString(value[key]);
+        value[key] = getString(value[key]);
       }
     } else {
-      value = Utils.getString(value);
+      value = getString(value);
     }
 
     // If default value is set return the default value if num is 0, null or undefined

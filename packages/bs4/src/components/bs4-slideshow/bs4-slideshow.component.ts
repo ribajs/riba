@@ -1,6 +1,6 @@
 import { TemplatesComponent } from '../templates/templates.component';
 
-import { Utils } from '@ribajs/core';
+import { clone, camelCase } from '@ribajs/utils/src/type';
 
 import { Dragscroll, DragscrollOptions, Autoscroll, AutoscrollOptions, Utils as ExtraUtils, ScrollPosition, ScrollEventsService } from '@ribajs/extras';
 
@@ -412,23 +412,23 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   }
 
   protected setOptions(dest: ResponsiveOptions | Options, source: ResponsiveOptions | Options) {
-    dest.slidesToScroll = typeof(source.slidesToScroll) !== 'undefined' ? Utils.clone(false, source.slidesToScroll) : dest.slidesToScroll;
-    dest.controls = typeof(source.controls) !== 'undefined' ? Utils.clone(false, source.controls) : dest.controls;
-    dest.controlsPosition = typeof(source.controlsPosition) !== 'undefined' ? Utils.clone(false, source.controlsPosition) : dest.controlsPosition;
-    dest.draggable = typeof(source.draggable) !== 'undefined' ? Utils.clone(false, source.draggable) : dest.draggable;
-    dest.autoplay = typeof(source.autoplay) !== 'undefined' ? Utils.clone(false, source.autoplay) : dest.autoplay;
-    dest.autoplayInterval = typeof(source.autoplayInterval) !== 'undefined' ? Utils.clone(false, source.autoplayInterval) : dest.autoplayInterval;
-    dest.autoplayVelocity = typeof(source.autoplayVelocity) !== 'undefined' ? Utils.clone(false, source.autoplayVelocity) : dest.autoplayVelocity;
-    dest.controlPrevIconSrc = typeof(source.controlPrevIconSrc) !== 'undefined' ? Utils.clone(false, source.controlPrevIconSrc) : dest.controlPrevIconSrc;
-    dest.controlNextIconSrc = typeof(source.controlNextIconSrc) !== 'undefined' ? Utils.clone(false, source.controlNextIconSrc) : dest.controlNextIconSrc;
-    dest.indicatorActiveIconSrc = typeof(source.indicatorActiveIconSrc) !== 'undefined' ? Utils.clone(false, source.indicatorActiveIconSrc) : dest.indicatorActiveIconSrc;
-    dest.indicatorInactiveIconSrc = typeof(source.indicatorInactiveIconSrc) !== 'undefined' ? Utils.clone(false, source.indicatorInactiveIconSrc) : dest.indicatorInactiveIconSrc;
-    dest.angle = typeof(source.angle) !== 'undefined' ? Utils.clone(false, source.angle) : dest.angle;
-    dest.pauseOnHover = typeof(source.pauseOnHover) !== 'undefined' ? Utils.clone(false, source.pauseOnHover) : dest.pauseOnHover;
-    dest.sticky = typeof(source.sticky) !== 'undefined' ? Utils.clone(false, source.sticky) : dest.sticky;
-    dest.indicators = typeof(source.indicators) !== 'undefined' ? Utils.clone(false, source.indicators) : dest.indicators;
-    dest.indicatorsPosition = typeof(source.indicatorsPosition) !== 'undefined' ? Utils.clone(false, source.indicatorsPosition) : dest.indicatorsPosition;
-    dest.pause = typeof(source.pause) !== 'undefined' ? Utils.clone(false, source.pause) : dest.pause;
+    dest.slidesToScroll = typeof(source.slidesToScroll) !== 'undefined' ? clone(false, source.slidesToScroll) : dest.slidesToScroll;
+    dest.controls = typeof(source.controls) !== 'undefined' ? clone(false, source.controls) : dest.controls;
+    dest.controlsPosition = typeof(source.controlsPosition) !== 'undefined' ? clone(false, source.controlsPosition) : dest.controlsPosition;
+    dest.draggable = typeof(source.draggable) !== 'undefined' ? clone(false, source.draggable) : dest.draggable;
+    dest.autoplay = typeof(source.autoplay) !== 'undefined' ? clone(false, source.autoplay) : dest.autoplay;
+    dest.autoplayInterval = typeof(source.autoplayInterval) !== 'undefined' ? clone(false, source.autoplayInterval) : dest.autoplayInterval;
+    dest.autoplayVelocity = typeof(source.autoplayVelocity) !== 'undefined' ? clone(false, source.autoplayVelocity) : dest.autoplayVelocity;
+    dest.controlPrevIconSrc = typeof(source.controlPrevIconSrc) !== 'undefined' ? clone(false, source.controlPrevIconSrc) : dest.controlPrevIconSrc;
+    dest.controlNextIconSrc = typeof(source.controlNextIconSrc) !== 'undefined' ? clone(false, source.controlNextIconSrc) : dest.controlNextIconSrc;
+    dest.indicatorActiveIconSrc = typeof(source.indicatorActiveIconSrc) !== 'undefined' ? clone(false, source.indicatorActiveIconSrc) : dest.indicatorActiveIconSrc;
+    dest.indicatorInactiveIconSrc = typeof(source.indicatorInactiveIconSrc) !== 'undefined' ? clone(false, source.indicatorInactiveIconSrc) : dest.indicatorInactiveIconSrc;
+    dest.angle = typeof(source.angle) !== 'undefined' ? clone(false, source.angle) : dest.angle;
+    dest.pauseOnHover = typeof(source.pauseOnHover) !== 'undefined' ? clone(false, source.pauseOnHover) : dest.pauseOnHover;
+    dest.sticky = typeof(source.sticky) !== 'undefined' ? clone(false, source.sticky) : dest.sticky;
+    dest.indicators = typeof(source.indicators) !== 'undefined' ? clone(false, source.indicators) : dest.indicators;
+    dest.indicatorsPosition = typeof(source.indicatorsPosition) !== 'undefined' ? clone(false, source.indicatorsPosition) : dest.indicatorsPosition;
+    dest.pause = typeof(source.pause) !== 'undefined' ? clone(false, source.pause) : dest.pause;
   }
 
   protected setOptionsIfUndefined(dest: ResponsiveOptions | Options, source: ResponsiveOptions | Options) {
@@ -988,7 +988,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     }
 
 
-    const parsedAttributeName = Utils.camelCase(attributeName);
+    const parsedAttributeName = camelCase(attributeName);
 
 
     if (responsiveScope && (responsiveScope as any)[parsedAttributeName]) {

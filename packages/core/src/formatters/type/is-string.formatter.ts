@@ -1,4 +1,4 @@
-import { Utils } from "../../services/utils";
+import { isString } from "@ribajs/utils/src/type";
 
 /**
  * Check if value is a string
@@ -6,6 +6,6 @@ import { Utils } from "../../services/utils";
 export const isStringFormatter = {
   name: "isString",
   read(str: string) {
-    return Utils.isString(str);
+    return isString(str);
   },
 };

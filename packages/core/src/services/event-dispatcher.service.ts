@@ -38,7 +38,6 @@ class EventDispatcher {
 
   /**
    * Creates an singleton instance of Dispatcher.
-   * @memberof Dispatcher
    */
   constructor(namespace = "main") {
     this.namespace = namespace;
@@ -54,9 +53,8 @@ class EventDispatcher {
   /**
    * Bind a callback to an event
    *
-   * @memberOf Barba.Dispatcher
-   * @param {string} eventName
-   * @param {EventCallback} function
+   * @param eventName
+   * @param function
    */
   public on(e: string, f: EventCallback) {
     this.events[e] = this.events[e] || [];
@@ -66,9 +64,8 @@ class EventDispatcher {
   /**
    * Unbind event
    *
-   * @memberOf Barba.Dispatcher
-   * @param {string} eventName
-   * @param {EventCallback} function
+   * @param eventName
+   * @param function
    */
   public off(e: string, f: EventCallback) {
     if (e in this.events === false) {
@@ -81,9 +78,8 @@ class EventDispatcher {
   /**
    * Fire the event running all the event associated to it
    *
-   * @memberOf Barba.Dispatcher
-   * @param  {string} eventName
-   * @param  {any[]} args
+   * @param eventName
+   * @param args
    */
   public trigger(e: string, ...args: any[]) {
     // e, ...args

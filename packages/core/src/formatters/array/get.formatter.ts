@@ -1,4 +1,4 @@
-import { Utils } from "../../services/utils";
+import { isObject, isArray, isString, isNumber } from "@ribajs/utils/src/type";
 
 /**
  * Get property of object or array
@@ -7,11 +7,11 @@ import { Utils } from "../../services/utils";
 export const getFormatter = {
   name: "get",
   read(value: any | any[] | string, key: string | number) {
-    if (Utils.isObject(value) || Utils.isArray(value)) {
+    if (isObject(value) || isArray(value)) {
       return value[key];
     }
-    if (Utils.isString(value)) {
-      if (Utils.isNumber(key)) {
+    if (isString(value)) {
+      if (isNumber(key)) {
         return (value as string).charAt(key as number);
       }
     }

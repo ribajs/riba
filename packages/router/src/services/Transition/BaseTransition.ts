@@ -1,4 +1,4 @@
-import { Utils } from '@ribajs/core';
+import { deferred } from "@ribajs/utils/src/control";
 import { Transition } from '../../interfaces/transition';
 
 /**
@@ -27,8 +27,8 @@ export abstract class BaseTransition implements Transition {
   public init(oldContainer: HTMLElement, newContainer: Promise<HTMLElement>): Promise<void> {
     this.oldContainer = oldContainer;
 
-    this.deferred = Utils.deferred();
-    const newContainerReady = Utils.deferred();
+    this.deferred = deferred();
+    const newContainerReady = deferred();
     this.newContainerLoading = newContainerReady.promise;
 
     this.start();

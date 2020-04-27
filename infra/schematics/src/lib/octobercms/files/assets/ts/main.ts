@@ -1,8 +1,8 @@
 import {
   Riba,
   coreModule,
-  Utils,
 } from '@ribajs/core';
+import { ready } from '@ribajs/utils/src/dom';
 import routerModule from '@ribajs/router';
 
 // import * as CustomBinders from './binders';
@@ -26,6 +26,6 @@ export class Main {
   }
 }
 
-Utils.domIsReady(() => {
+ready(() => {
   const main = new Main();
 });

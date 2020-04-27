@@ -1,5 +1,5 @@
 import { Binder } from "../interfaces";
-import { Utils } from "../services/utils";
+import { extend } from "@ribajs/utils/src/type";
 
 export interface Assign {
   key: string;
@@ -17,7 +17,7 @@ export const assignBinder: Binder<Assign> = {
   name: "assign",
   routine(el: HTMLElement, value: object) {
     if (typeof value === "object") {
-      return Utils.extend(false, this.view.models, value);
+      return extend(false, this.view.models, value);
     }
     console.warn("Value must be an object or propertyName is required");
   },

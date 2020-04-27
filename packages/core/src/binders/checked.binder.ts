@@ -1,5 +1,5 @@
 import { Binder } from "../interfaces";
-import { Utils } from "../services/utils";
+import { getString } from "@ribajs/utils/src/type";
 
 /**
  * checked
@@ -26,8 +26,7 @@ export const checkedBinder: Binder<string> = {
   routine(el: HTMLElement, value) {
     if ((el as HTMLInputElement).type === "radio") {
       (el as HTMLInputElement).checked =
-        Utils.getString((el as HTMLInputElement).value) ===
-        Utils.getString(value);
+        getString((el as HTMLInputElement).value) === getString(value);
     } else {
       (el as HTMLInputElement).checked = !!value;
     }

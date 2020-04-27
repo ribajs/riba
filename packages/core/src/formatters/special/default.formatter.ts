@@ -1,4 +1,4 @@
-import { Utils } from "../../services/utils";
+import { isString, isDefined } from "@ribajs/utils/src/type";
 
 /**
  * Sets a default value if the first value is not set
@@ -7,8 +7,8 @@ import { Utils } from "../../services/utils";
 export const defaultFormatter = {
   name: "default",
   read(value: any, defaultValue: any) {
-    if (Utils.isDefined(value)) {
-      if (Utils.isString(value)) {
+    if (isDefined(value)) {
+      if (isString(value)) {
         if (value.length > 0) {
           return value;
         } else {

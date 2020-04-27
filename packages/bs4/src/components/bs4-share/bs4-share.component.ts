@@ -1,4 +1,5 @@
-import { Component, Utils } from "@ribajs/core";
+import { Component } from "@ribajs/core";
+import { getUrl } from '@ribajs/utils/src/url';
 import template from "./bs4-share.component.html";
 import labelTemplate from "./bs4-share.label.html";
 import { ShareItem, ShareUrlType } from "../../interfaces";
@@ -225,14 +226,14 @@ export class Bs4ShareComponent extends Component {
 
   protected getURLForShare() {
     if (this.scope.type === 'page' && this.scope.url) {
-      return Utils.getUrl(this.scope.url);
+      return getUrl(this.scope.url);
     }
     return window.location.href;
   }
 
   protected getMediaUrlForShare() {
     if (this.scope.type !== 'page' && this.scope.url) {
-      return Utils.getUrl(this.scope.url);
+      return getUrl(this.scope.url);
     }
     return "";
   }

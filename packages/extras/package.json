@@ -52,7 +52,8 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "@ribajs/core": "workspace:packages/core"
+    "@ribajs/core": "workspace:packages/core",
+    "@ribajs/utils": "workspace:packages/utils"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

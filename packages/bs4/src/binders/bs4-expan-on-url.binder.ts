@@ -1,6 +1,6 @@
 import { Binder, EventDispatcher } from '@ribajs/core';
 import { CollapseService } from '../services/collapse.service';
-import { Utils } from '../services/utils.service';
+import { onRoute } from '@ribajs/utils/src/url';
 
 /**
  *
@@ -14,7 +14,7 @@ export const expanOnUrlBinder: Binder<string> = {
     const dispatcher = new EventDispatcher('main');
 
     const checkURL = (urlToCheck?: string) => {
-      if (urlToCheck && Utils.onRoute(urlToCheck)) {
+      if (urlToCheck && onRoute(urlToCheck)) {
         collapseService.show();
         return true;
       }

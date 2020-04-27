@@ -2,7 +2,10 @@ export * from './Dom';
 export * from './Prefetch';
 
 import { getDataset } from '@ribajs/core';
-import { EventDispatcher, Utils, HttpService, HttpServiceOptions } from '@ribajs/core';
+import { EventDispatcher, HttpService, HttpServiceOptions } from '@ribajs/core';
+import { cleanLink, getPort, normalizeUrl, getUrl } from "@ribajs/utils/src/url";
+import { isBoolean } from "@ribajs/utils/src/type";
+import { getElementFromEvent } from "@ribajs/utils/src/dom";
 
 import { BaseCache } from '@ribajs/cache';
 import { HideShowTransition } from '../Transition';
@@ -60,7 +63,7 @@ class Pjax {
     }
 
     // In case you're trying to load the same page
-    if (Utils.cleanLink(href) === Utils.cleanLink(location.href)) {
+    if (cleanLink(href) === cleanLink(location.href)) {
       return false;
     }
 
@@ -70,7 +73,7 @@ class Pjax {
     }
 
     // Check if the port is the same
-    if (Utils.getPort() !== Utils.getPort((element as HTMLAnchorElement).port)) {
+    if (getPort() !== getPort((element as HTMLAnchorElement).port)) {
       return false;
     }
 
@@ -210,11 +213,11 @@ class Pjax {
     instance.wrapper = instance.wrapper || wrapper;
     instance.containerSelector = instance.containerSelector || containerSelector;
 
-    instance.listenAllLinks = Utils.isBoolean(instance.listenAllLinks) ? instance.listenAllLinks : listenAllLinks;
-    instance.listenPopstate = Utils.isBoolean(instance.listenPopstate) ? instance.listenPopstate : listenPopstate;
-    instance.parseTitle = Utils.isBoolean(instance.parseTitle) ? instance.parseTitle : parseTitle;
-    instance.changeBrowserUrl = Utils.isBoolean(instance.changeBrowserUrl) ? instance.changeBrowserUrl : changeBrowserUrl;
-    instance.prefetchLinks = Utils.isBoolean(instance.prefetchLinks) ? instance.prefetchLinks : prefetchLinks;
+    instance.listenAllLinks = isBoolean(instance.listenAllLinks) ? instance.listenAllLinks : listenAllLinks;
+    instance.listenPopstate = isBoolean(instance.listenPopstate) ? instance.listenPopstate : listenPopstate;
+    instance.parseTitle = isBoolean(instance.parseTitle) ? instance.parseTitle : parseTitle;
+    instance.changeBrowserUrl = isBoolean(instance.changeBrowserUrl) ? instance.changeBrowserUrl : changeBrowserUrl;
+    instance.prefetchLinks = isBoolean(instance.prefetchLinks) ? instance.prefetchLinks : prefetchLinks;
 
     if (instance.wrapper) {
       instance.wrapper.setAttribute('aria-live', 'polite');
@@ -239,8 +242,8 @@ class Pjax {
   * Return the currentURL cleaned
   */
   public getCurrentUrl() {
-    return Utils.cleanLink(
-      Utils.getUrl(),
+    return cleanLink(
+      getUrl(),
     );
   }
 
@@ -283,7 +286,7 @@ class Pjax {
     let href = Pjax.getHref(linkElement);
     if (rel === 'router-preload' && href && this.cacheEnabled) {
       // normalize url, returns the relative url for internal urls and the full url for external urls
-      href = Utils.normalizeUrl(href)
+      href = normalizeUrl(href)
       const follow = Pjax.preventCheckUrl(href);
       const cachedResponse = Pjax.cache.get(href);
       if (follow) {
@@ -396,7 +399,7 @@ class Pjax {
 
   protected onLinkClickIntern(evt: Event) {
 
-    let el = Utils.getElementFromEvent(evt);
+    let el = getElementFromEvent(evt);
  
     while (el && !Pjax.getHref(el)) {
       el = (el.parentNode as HTMLAnchorElement); // TODO testme
@@ -423,7 +426,7 @@ class Pjax {
   public onLinkClick(evt: Event, el: HTMLAnchorElement, href: string) {
 
     // normalize url, returns the relative url for internal urls and the full url for external urls
-    href = Utils.normalizeUrl(href)
+    href = normalizeUrl(href)
 
     if (!href) {
       throw new Error('href is falsy');
@@ -450,7 +453,7 @@ class Pjax {
     }
 
     // normalize url, returns the relative url for internal urls and the full url for external urls
-    newUrl = Utils.normalizeUrl(newUrl);
+    newUrl = normalizeUrl(newUrl);
 
     this.history.add(newUrl);
 

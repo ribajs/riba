@@ -1,5 +1,5 @@
-import { Utils } from "../../services/utils";
 import { emptyFormatter } from "../array/empty.formatter";
+import { isString } from "@ribajs/utils/src/type";
 
 /**
  * Check if value is a string and not empty
@@ -7,6 +7,6 @@ import { emptyFormatter } from "../array/empty.formatter";
 export const filledFormatter = {
   name: "filled",
   read(str: string) {
-    return Utils.isString(str) && !emptyFormatter.read(str.replace(/\s/g, ""));
+    return isString(str) && !emptyFormatter.read(str.replace(/\s/g, ""));
   },
 };

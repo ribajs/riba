@@ -1,5 +1,7 @@
 import { Pjax, Prefetch } from '../services';
-import { Binding, Binder, EventDispatcher, Utils } from '@ribajs/core';
+import { Binding, Binder, EventDispatcher } from '@ribajs/core';
+import { isObject, isString, isBoolean } from '@ribajs/utils/src/type';
+import { onRoute, normalizeUrl } from '@ribajs/utils/src/url';
 
 export interface RouteOptions {
   url: string;
@@ -32,7 +34,7 @@ export const routeBinder: Binder<string> = {
         newTab: false,
       } as RouteOptions,
       onClick(this: Binding, event: Event) {
-        if (Utils.onRoute(this.customData.options.url)) {
+        if (onRoute(this.customData.options.url)) {
           // console.debug('already on this site');
         } else {
           if (this.customData.options.url) {
@@ -53,14 +55,14 @@ export const routeBinder: Binder<string> = {
   },
 
   routine(this: Binding, el: HTMLElement, optionsOrUrl?: string | RouteOptions) {
-    if (Utils.isString(optionsOrUrl)) {
+    if (isString(optionsOrUrl)) {
       this.customData.options.url = optionsOrUrl as string;
-    } else if (Utils.isObject(optionsOrUrl as RouteOptions)) {
+    } else if (isObject(optionsOrUrl as RouteOptions)) {
       this.customData.options = optionsOrUrl as RouteOptions;
     }
     this.customData.options.viewId = this.customData.options.viewId || 'main';
     this.customData.prefetch = new Prefetch(this.customData.options.viewId),
-    this.customData.options.removeAfterActivation = Utils.isBoolean(this.customData.options.removeAfterActivation) ? this.customData.options.removeAfterActivation : false;
+    this.customData.options.removeAfterActivation = isBoolean(this.customData.options.removeAfterActivation) ? this.customData.options.removeAfterActivation : false;
     this.customData.dispatcher = new EventDispatcher(this.customData.options.viewId);
 
     this.customData.options.newTab = false;
@@ -78,7 +80,7 @@ export const routeBinder: Binder<string> = {
     }
 
     // normalize url
-    this.customData.options.url = Utils.normalizeUrl(this.customData.options.url)
+    this.customData.options.url = normalizeUrl(this.customData.options.url)
 
 
     // set href if not set

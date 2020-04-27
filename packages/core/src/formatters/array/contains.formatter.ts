@@ -1,4 +1,4 @@
-import { Utils } from "../../services/utils";
+import { isString, isArray, isObject, isDefined } from "@ribajs/utils/src/type";
 
 /**
  * Returns true if an object, array or string contains an object, property or substring.
@@ -7,19 +7,19 @@ import { Utils } from "../../services/utils";
 export const containsFormatter = {
   name: "contains",
   read(value: string | any | any[], attr: string, search: string) {
-    if (Utils.isString(value)) {
+    if (isString(value)) {
       return value.indexOf(attr) > -1;
-    } else if (Utils.isArray(value)) {
-      if (Utils.isDefined(attr)) {
-        if (Utils.isDefined(search)) {
+    } else if (isArray(value)) {
+      if (isDefined(attr)) {
+        if (isDefined(search)) {
           return value[attr] === search;
         } else {
           return value.includes(attr);
         }
       }
-    } else if (Utils.isObject(value)) {
-      if (Utils.isDefined(attr)) {
-        if (Utils.isDefined(search)) {
+    } else if (isObject(value)) {
+      if (isDefined(attr)) {
+        if (isDefined(search)) {
           return value[attr] === search;
         } else {
           return Object.keys(value).includes(attr);

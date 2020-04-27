@@ -1,4 +1,4 @@
-import { Utils } from "../../services/utils";
+import { justDigits, isNumber } from "@ribajs/utils/src/type";
 
 /**
  * Just get the digits of a string, useful to remove px from css value
@@ -7,14 +7,9 @@ import { Utils } from "../../services/utils";
 export const digitsFormatter = {
   name: "digits",
   read(str: string) {
-    if (Utils.isNumber(str)) {
+    if (isNumber(str)) {
       return str;
     }
-    const num = str.replace(/[^-\d.]/g, "");
-    if (isNaN(Number(num))) {
-      return 0;
-    } else {
-      return Number(num);
-    }
+    return justDigits(str);
   },
 };

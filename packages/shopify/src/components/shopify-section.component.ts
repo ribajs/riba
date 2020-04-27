@@ -2,7 +2,7 @@ import { Component } from '@ribajs/core';
 
 export abstract class ShopifySectionComponent extends Component {
 
-  public static tagName: string = 'shopify-section';
+  public static tagName = 'shopify-section';
 
   protected abstract scope: any;
 

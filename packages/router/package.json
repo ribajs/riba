@@ -63,6 +63,7 @@
   "dependencies": {
     "@ribajs/cache": "workspace:packages/cache",
     "@ribajs/core": "workspace:packages/core",
-    "@ribajs/history": "workspace:packages/history"
+    "@ribajs/history": "workspace:packages/history",
+    "@ribajs/utils": "workspace:packages/utils"
   }
 }

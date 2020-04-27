@@ -1,4 +1,6 @@
-import { Binder, Utils } from '@ribajs/core';
+import { Binder } from '@ribajs/core';
+import { getViewportDimensions } from '@ribajs/utils/src/dom';
+
 import { imgUrlFormatter } from '../formatters/img-url.formatter';
 import './ResizeObserver.d';
 
@@ -12,7 +14,7 @@ const OVERWRITE_ORIGINAL_SRC = true;
  */
 export const shopifyImgBinder: Binder<string> = {
   name: 'shopify-img',
-  bind(el) {
+  bind(el: HTMLElement) {
     this.customData = {
       initialSrc: (el as HTMLImageElement).src,
       oldImageWidth: ((PX_OFFSET + 1) * -1),
@@ -26,7 +28,7 @@ export const shopifyImgBinder: Binder<string> = {
         if (!imgUrlFormatter.read) {
           throw new Error('Shopify imgUrlFormatter read method is missing!');
         }
-        const vw = Utils.getViewportDimensions().w;
+        const vw = getViewportDimensions().w;
         const filterScale = Math.round(window.devicePixelRatio || 1);
         const filterSize = width + 'x';
         const newSrc = imgUrlFormatter.read(this.customData.initialSrc, filterSize, filterScale, undefined, undefined, el);
@@ -74,7 +76,7 @@ export const shopifyImgBinder: Binder<string> = {
       this.customData.resizeObserver.unobserve(el);
     }
   },
-  routine(el, src) {
+  routine(el: HTMLElement, src: string) {
     if (!imgUrlFormatter.read) {
       throw new Error('Shopify imgUrlFormatter read method is missing!');
     }

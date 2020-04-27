@@ -1,4 +1,4 @@
-import { Utils } from "./services/utils";
+import { parseJsonString } from "@ribajs/utils/src/type";
 
 import { DataElement, View, TBlock } from "./view";
 
@@ -26,7 +26,7 @@ export function parseType(str?: string) {
   }
   if (QUOTED_STR.test(str)) {
     value = str.slice(1, -1);
-    const jsonString = Utils.parseJsonString(value);
+    const jsonString = parseJsonString(value);
     value = jsonString ? jsonString : value;
   } else if (str === "true") {
     value = true;
@@ -41,7 +41,7 @@ export function parseType(str?: string) {
   } else if (!isNaN(Number(str))) {
     value = Number(str);
   } else if (value.startsWith("{") || value.startsWith("[")) {
-    const jsonString = Utils.parseJsonString(value);
+    const jsonString = parseJsonString(value);
     value = jsonString ? jsonString : value;
   } else {
     type = KEYPATH;

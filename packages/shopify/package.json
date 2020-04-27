@@ -63,6 +63,8 @@
   },
   "dependencies": {
     "@ribajs/cache": "workspace:packages/cache",
-    "@ribajs/i18n": "workspace:packages/i18n"
+    "@ribajs/core": "workspace:packages/core",
+    "@ribajs/i18n": "workspace:packages/i18n",
+    "@ribajs/utils": "workspace:packages/utils"
   }
 }

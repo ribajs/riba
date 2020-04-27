@@ -6,7 +6,7 @@ import {
   Components,
   Options,
 } from "./interfaces";
-import { Utils } from "./services/utils";
+import { concat } from "@ribajs/utils/src/type";
 import { parseTemplate, parseType } from "./parsers";
 import { Binding } from "./binding";
 import { attributeBinder } from "./binders/attribute.binder";
@@ -123,16 +123,16 @@ export class Riba {
       const value = (options as any)[option];
       switch (option) {
         case "binders":
-          this.binders = Utils.concat(false, this.binders, value);
+          this.binders = concat(false, this.binders, value);
           break;
         case "formatters":
-          this.formatters = Utils.concat(false, this.formatters, value);
+          this.formatters = concat(false, this.formatters, value);
           break;
         case "components":
-          this.components = Utils.concat(false, this.components, value);
+          this.components = concat(false, this.components, value);
           break;
         case "adapters":
-          this.adapters = Utils.concat(false, this.adapters, value);
+          this.adapters = concat(false, this.adapters, value);
           break;
         case "prefix":
           this.prefix = value;
@@ -183,22 +183,18 @@ export class Riba {
     };
 
     if (options) {
-      viewOptions.binders = Utils.concat(
-        false,
-        viewOptions.binders,
-        options.binders
-      );
-      viewOptions.formatters = Utils.concat(
+      viewOptions.binders = concat(false, viewOptions.binders, options.binders);
+      viewOptions.formatters = concat(
         false,
         viewOptions.formatters,
         options.formatters
       );
-      viewOptions.components = Utils.concat(
+      viewOptions.components = concat(
         false,
         viewOptions.components,
         options.components
       );
-      viewOptions.adapters = Utils.concat(
+      viewOptions.adapters = concat(
         false,
         viewOptions.adapters,
         options.adapters
@@ -245,26 +241,18 @@ export class Riba {
     }
 
     // merge extensions
-    viewOptions.binders = Utils.concat(
-      false,
-      this.binders,
-      viewOptions.binders
-    );
-    viewOptions.formatters = Utils.concat(
+    viewOptions.binders = concat(false, this.binders, viewOptions.binders);
+    viewOptions.formatters = concat(
       false,
       this.formatters,
       viewOptions.formatters
     );
-    viewOptions.components = Utils.concat(
+    viewOptions.components = concat(
       false,
       this.components,
       viewOptions.components
     );
-    viewOptions.adapters = Utils.concat(
-      false,
-      this.adapters,
-      viewOptions.adapters
-    );
+    viewOptions.adapters = concat(false, this.adapters, viewOptions.adapters);
 
     // get all attributeBinders from available binders
     if (viewOptions.binders) {

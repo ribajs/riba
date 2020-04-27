@@ -1,5 +1,6 @@
 import { Binder } from "../interfaces";
-import { Utils } from "../services/utils";
+import { getInputValue } from "@ribajs/utils/src/dom";
+import { getString } from "@ribajs/utils/src/type";
 
 const getData = (el: HTMLElement) => {
   const customData: any = {};
@@ -70,12 +71,12 @@ export const valueBinder: Binder<any> = {
           el.dispatchEvent(new Event("change"));
         }
       } else if (el.getAttribute("contenteditable")) {
-        if (Utils.getString(value as string) !== oldValue) {
+        if (getString(value as string) !== oldValue) {
           el.innerHTML = value as string; // TODO write test for contenteditable
           el.dispatchEvent(new Event("change"));
         }
       } else {
-        if (Utils.getString(value as string) !== oldValue) {
+        if (getString(value as string) !== oldValue) {
           (el as HTMLInputElement).value =
             value != null ? (value as string) : "";
           el.dispatchEvent(new Event("change"));
@@ -84,5 +85,5 @@ export const valueBinder: Binder<any> = {
     }
   },
 
-  getValue: Utils.getInputValue,
+  getValue: getInputValue,
 };

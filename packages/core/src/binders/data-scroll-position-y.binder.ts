@@ -1,5 +1,5 @@
 import { Binder } from "../interfaces";
-import { Utils } from "../services/utils";
+import { debounce } from "@ribajs/utils/src/control";
 
 const DEFAULT_OFFSET = 10;
 
@@ -41,7 +41,7 @@ export const dataScrollPositionYBinder: Binder<string> = {
     if (this.customData.watchScrollOnElement) {
       this.customData.watchScrollOnElement.removeEventListener(
         "scroll",
-        Utils.debounce.bind(this, this.customData.onScroll.bind(this))
+        debounce.bind(this, this.customData.onScroll.bind(this))
       );
     }
 
@@ -59,7 +59,7 @@ export const dataScrollPositionYBinder: Binder<string> = {
       // console.debug('addEventListener', this.customData.watchScrollOnElement);
       this.customData.watchScrollOnElement.addEventListener(
         "scroll",
-        Utils.debounce(this.customData.onScroll.bind(this)),
+        debounce(this.customData.onScroll.bind(this)),
         { passive: true }
       );
     }
@@ -72,7 +72,7 @@ export const dataScrollPositionYBinder: Binder<string> = {
     if (this.customData.watchScrollOnElement) {
       this.customData.watchScrollOnElement.removeEventListener(
         "scroll",
-        Utils.debounce(this.customData.onScroll.bind(this))
+        debounce(this.customData.onScroll.bind(this))
       );
     }
   },

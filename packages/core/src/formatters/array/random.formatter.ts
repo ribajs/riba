@@ -1,4 +1,4 @@
-import { Utils } from "../../services/utils";
+import { isArray, isNumber } from "@ribajs/utils/src/type";
 
 /**
  * Gets back random value of array
@@ -14,13 +14,13 @@ export const randomFormatter = {
   name: "random",
   read(arrayOrMaxNumber: any, min = 0) {
     // If is array
-    if (Utils.isArray(arrayOrMaxNumber)) {
+    if (isArray(arrayOrMaxNumber)) {
       return arrayOrMaxNumber[
         Math.floor(Math.random() * arrayOrMaxNumber.length)
       ];
     }
     // If is number
-    if (Utils.isNumber(arrayOrMaxNumber)) {
+    if (isNumber(arrayOrMaxNumber)) {
       const max = arrayOrMaxNumber as number;
       return Math.floor(Math.random() * (max - min + 1) + min);
     }

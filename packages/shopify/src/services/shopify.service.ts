@@ -1,4 +1,4 @@
-import { Utils } from '@ribajs/core';
+import { isNumber } from '@ribajs/utils/src/type';
 
 /**
  * Custom version of shopify tools like api.jquery.js / option-selection.js
@@ -8,7 +8,7 @@ export class ShopifyService {
 
   public static formatMoneyWithDelimiters(num: number, precision = 2, thousands = ',', decimal = '.'): string {
 
-    if (!Utils.isNumber(num) || num === null) {
+    if (!isNumber(num) || num === null) {
       return '0';
     }
 
@@ -38,7 +38,7 @@ export class ShopifyService {
     }
   }
 
-  constructor(shopSettings?: any) {
+  constructor(/*shopSettings?: any*/) {
     if (ShopifyService.instance) {
       return ShopifyService.instance;
     }

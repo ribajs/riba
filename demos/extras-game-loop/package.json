@@ -78,6 +78,7 @@
     "@ribajs/eslint-config": "portal:../../infra/eslint-config",
     "@ribajs/types": "portal:../../infra/types",
     "@ribajs/webpack-config": "portal:../../infra/webpack-config",
-    "@ribajs/tsconfig": "portal:../../infra/tsconfig"
+    "@ribajs/tsconfig": "portal:../../infra/tsconfig",
+    "@ribajs/utils": "portal:../../infra/utils"
   }
 }

@@ -1,10 +1,10 @@
 import { Formatter } from "../../interfaces/formatter";
-import { Utils } from "../../services/utils";
+import { isDefined } from "@ribajs/utils/src/type";
 
 /**
  * Checks if value is defined
  */
 export const isDefinedFormatter: Formatter = {
   name: "isDefined",
-  read: Utils.isDefined,
+  read: isDefined,
 };

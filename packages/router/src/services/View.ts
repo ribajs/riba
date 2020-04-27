@@ -1,5 +1,6 @@
-import { EventDispatcher, Utils } from '@ribajs/core';
+import { EventDispatcher } from '@ribajs/core';
 import { State } from '@ribajs/history';
+import { extend } from "@ribajs/utils/src/type";
 
 /**
  * BaseView to be extended
@@ -19,7 +20,7 @@ abstract class BaseView {
    * Helper to extend the object
    */
   public extend(obj: object) {
-    return Utils.extend(false, this, obj);
+    return extend(false, this, obj);
   }
 
   /**

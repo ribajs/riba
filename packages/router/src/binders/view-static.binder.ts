@@ -1,4 +1,5 @@
-import { Binder, Utils, View as RivetsView, handleizeFormatter } from '@ribajs/core';
+import { Binder, View as RivetsView, handleizeFormatter } from '@ribajs/core';
+import { isObject } from '@ribajs/utils/src/type';
 import { Pjax, HideShowTransition } from '../services';
 
 /**
@@ -39,7 +40,7 @@ export const viewStaticBinder: Binder<string> = {
       _response.container.style.visibility = 'visible';
 
       // add the dateset to the model
-      if (!Utils.isObject(this.view.models)) {
+      if (!isObject(this.view.models)) {
         this.view.models = {};
       }
 

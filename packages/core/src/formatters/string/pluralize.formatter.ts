@@ -1,4 +1,4 @@
-import { Utils } from "../../services/utils";
+import { isArray } from "@ribajs/utils/src/type";
 
 export const pluralizeFormatter = {
   name: "pluralize",
@@ -6,7 +6,7 @@ export const pluralizeFormatter = {
     if (plural === null) {
       plural = singular + "s";
     }
-    if (Utils.isArray(input)) {
+    if (isArray(input)) {
       input = input.length;
     }
     if (input === 1) {

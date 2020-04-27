@@ -6,7 +6,7 @@ import {
   Obj,
   Options,
 } from "./interfaces";
-import { Utils } from "./services/utils";
+import { isObject, concat } from "@ribajs/utils/src/type";
 
 export class Observer {
   public static adapters: Adapters;
@@ -19,11 +19,7 @@ export class Observer {
     }
 
     if (options.adapters) {
-      Observer.adapters = Utils.concat(
-        false,
-        Observer.adapters,
-        options.adapters
-      );
+      Observer.adapters = concat(false, Observer.adapters, options.adapters);
       Observer.interfaces = Object.keys(Observer.adapters);
     }
 
@@ -80,7 +76,7 @@ export class Observer {
     this.tokens = parseResult.tokens;
     this.obj = this.getRootObject(obj);
     this.target = this.realize();
-    if (Utils.isObject(this.target)) {
+    if (isObject(this.target)) {
       this.set(true, this.key, this.target, this.callback);
     }
   }
@@ -135,7 +131,7 @@ export class Observer {
 
     for (let index = 0; index < this.tokens.length; index++) {
       token = this.tokens[index];
-      if (Utils.isObject(current)) {
+      if (isObject(current)) {
         if (typeof this.objectPath[index] !== "undefined") {
           prev = this.objectPath[index];
           if (current !== prev) {
@@ -172,11 +168,11 @@ export class Observer {
     let newValue;
     const next = this.realize();
     if (next !== this.target) {
-      if (Utils.isObject(this.target)) {
+      if (isObject(this.target)) {
         this.set(false, this.key, this.target, this.callback);
       }
 
-      if (Utils.isObject(next)) {
+      if (isObject(next)) {
         this.set(true, this.key, next, this.callback);
       }
 
@@ -196,7 +192,7 @@ export class Observer {
    * the full keypath is unreachable.
    */
   public value() {
-    if (Utils.isObject(this.target)) {
+    if (isObject(this.target)) {
       return this.get(this.key, this.target);
     }
   }
@@ -207,7 +203,7 @@ export class Observer {
    * @param value
    */
   public setValue(value: any) {
-    if (Utils.isObject(this.target)) {
+    if (isObject(this.target)) {
       Observer.adapters[this.key.i].set(this.target, this.key.path, value);
     }
   }
@@ -256,7 +252,7 @@ export class Observer {
       }
     }
 
-    if (Utils.isObject(this.target)) {
+    if (isObject(this.target)) {
       this.set(false, this.key, this.target, this.callback);
     }
   }

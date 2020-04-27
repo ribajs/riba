@@ -1,5 +1,6 @@
 import { Pjax } from './index';
-import { Utils } from '@ribajs/core';
+import { getElementFromEvent } from "@ribajs/utils/src/dom";
+import { normalizeUrl } from "@ribajs/utils/src/url";
 
 export interface PrefetchInstances {
   [key: string]: Prefetch;
@@ -95,7 +96,7 @@ class Prefetch {
       return;
     }
 
-    url = Utils.normalizeUrl(url);
+    url = normalizeUrl(url);
 
     const preventCheck = Pjax.preventCheck(evt, el, url);
 
@@ -115,7 +116,7 @@ class Prefetch {
    */
   protected onLinkEnterIntern(evt: Event) {
 
-    let el = Utils.getElementFromEvent(evt);
+    let el = getElementFromEvent(evt);
 
     if (!el) {
       throw new Error('HTML Element not set');

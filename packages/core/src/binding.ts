@@ -7,7 +7,8 @@ import {
   ObserverSyncCallback,
 } from "./interfaces";
 import { View } from "./view";
-import { Utils } from "./services/utils";
+import { isNumber } from "@ribajs/utils/src/type";
+import { getInputValue } from "@ribajs/utils/src/dom";
 
 /**
  *  A single binding between a model attribute and a DOM element.
@@ -384,7 +385,7 @@ export class Binding {
     if (typeof this.binder.getValue === "function") {
       return this.binder.getValue.call(this, el);
     } else {
-      return Utils.getInputValue(el);
+      return getInputValue(el);
     }
   }
 
@@ -420,7 +421,7 @@ export class Binding {
             if (index === splittedIdentifier.length - 1) {
               arg = argsString;
             }
-            if (Utils.isNumber(arg)) {
+            if (isNumber(arg)) {
               arg = Number(arg);
             }
             argsString = argsString.substring(

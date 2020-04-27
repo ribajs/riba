@@ -1,4 +1,5 @@
-import { Binder, Utils } from '@ribajs/core';
+import { Binder } from '@ribajs/core';
+import { scrollTo } from '@ribajs/utils/src/dom';
 
 export const scrollToOnEventBinder: Binder<string> = {
   name: 'scroll-to-on-*',
@@ -7,7 +8,7 @@ export const scrollToOnEventBinder: Binder<string> = {
     this.customData.onEvent = (event: Event) => {
       const offset = Number(el.dataset.offset || 0);
       const scrollElement = el.dataset.scrollElement ? document.querySelector(el.dataset.scrollElement) : window;
-      Utils.scrollTo(this.customData.target, offset, scrollElement);
+      scrollTo(this.customData.target, offset, scrollElement);
       event.preventDefault();
     };
     const eventName = this.args[0] as string;

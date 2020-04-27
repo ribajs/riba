@@ -1,6 +1,6 @@
 import { Bindable, Binder } from "../interfaces";
 import { View } from "../view";
-import { Utils } from "../services/utils";
+import { times } from "@ribajs/utils/src/control";
 
 /**
  * each-*
@@ -115,7 +115,7 @@ export const eachStarBinder: Binder<any[]> = {
     });
 
     if (this.customData.iterated.length > collection.length) {
-      Utils.times(this.customData.iterated.length - collection.length, () => {
+      times(this.customData.iterated.length - collection.length, () => {
         const view = this.customData.iterated.pop();
         view.unbind();
         if (!this.marker || !this.marker.parentNode) {

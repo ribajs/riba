@@ -281,7 +281,8 @@ export class ShopifyCartService {
     return promise;
   }
 
-  public static _getShippingRates(shippingAddress: ShopifyCustomerAddress, normalize: boolean = true): Promise<ShopifyShippingRates | ShopifyShippingRatesNormalized> {
+  public static _getShippingRates(shippingAddress: ShopifyCustomerAddress, normalize = true): Promise<ShopifyShippingRates | ShopifyShippingRatesNormalized> {
+    // eslint-disable-next-line @typescript-eslint/camelcase
     return HttpService.get(this.CART_GET_SHIPPING_RATES_URL, { shipping_address: shippingAddress }, 'json')
     .then((shippingRates: any) => {
       if (Utils.isObject(shippingRates) && Utils.isObject(shippingRates.shipping_rates)) {
@@ -300,7 +301,7 @@ export class ShopifyCartService {
    * @param shippingAddress TODO: /cart/shipping_rates.json?shipping_address[zip]=K1N 5T2&shipping_address[country]=Canada&shipping_address[province]=Ontario
    * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#get-shipping-rates
    */
-  public static getShippingRates(shippingAddress: ShopifyCustomerAddress, normalize: boolean = true, options: ShopifyCartRequestOptions = this.requestOptionDefaults): Promise<ShopifyShippingRates | ShopifyShippingRatesNormalized> {
+  public static getShippingRates(shippingAddress: ShopifyCustomerAddress, normalize = true, options: ShopifyCartRequestOptions = this.requestOptionDefaults): Promise<ShopifyShippingRates | ShopifyShippingRatesNormalized> {
     if (options.triggerOnStart) {
       this.triggerOnStart();
     }
@@ -331,7 +332,7 @@ export class ShopifyCartService {
     triggerOnChange: true,
   };
 
-  protected static waitForComplete: boolean = false;
+  protected static waitForComplete = false;
 
   /**
    * Trigger `ShopifyCart:request:complete`, if queue is already panding no noting (in this case we already looking for onIdle)

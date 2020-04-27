@@ -1,4 +1,5 @@
-import { Binder, Utils } from '@ribajs/core';
+import { Binder } from '@ribajs/core';
+import { debounce } from '@ribajs/utils/src/control';
 
 const DEFAULT_OFFSET = 10;
 
@@ -46,7 +47,7 @@ export const dataScrollPositionYBinder: Binder<string> = {
   routine(el: HTMLElement, elementSelector = 'window') {
     // Remove old scroll event
     if (this.customData.watchScrollOnElement) {
-      this.customData.watchScrollOnElement.removeEventListener('scroll', Utils.debounce.bind(this, this.customData.onScroll.bind(this)));
+      this.customData.watchScrollOnElement.removeEventListener('scroll', debounce.bind(this, this.customData.onScroll.bind(this)));
     }
 
     // Set new element to watch for the scroll event
@@ -61,7 +62,7 @@ export const dataScrollPositionYBinder: Binder<string> = {
     // Watch new element for scroll event
     if (this.customData.watchScrollOnElement) {
       // console.debug('addEventListener', this.customData.watchScrollOnElement);
-      this.customData.watchScrollOnElement.addEventListener('scroll', Utils.debounce(this.customData.onScroll.bind(this)), { passive: true });
+      this.customData.watchScrollOnElement.addEventListener('scroll', debounce(this.customData.onScroll.bind(this)), { passive: true });
     }
 
     this.customData.offsetTop = Number(this.el.dataset.offsetTop) || DEFAULT_OFFSET;
@@ -74,7 +75,7 @@ export const dataScrollPositionYBinder: Binder<string> = {
   unbind() {
     // Remove old scroll event
     if (this.customData.watchScrollOnElement) {
-      this.customData.watchScrollOnElement.removeEventListener('scroll', Utils.debounce(this.customData.onScroll.bind(this)));
+      this.customData.watchScrollOnElement.removeEventListener('scroll', debounce(this.customData.onScroll.bind(this)));
     }
   },
 };
