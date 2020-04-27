@@ -287,13 +287,10 @@ class Pjax {
       if (follow) {
         // Only append if not already cached
         if (cachedResponse) {
-          return true;
+          return cachedResponse;
         }
         // TODO wait for idle because we do not want to block the user
-        const response = this.loadResponse(href, true)
-        Pjax.cache.set(href, response);
-        console.debug('cached link', href);
-        return true;
+        return this.loadResponse(href, true);
       }
     }
     // Append other types linke images
@@ -406,6 +403,12 @@ class Pjax {
     while (el && !el.href) {
       el = (el.parentNode as HTMLAnchorElement);
     }
+
+    // Already managed by the rv-route binder
+    if (el.classList.contains('route') || el.hasAttribute('rv-route')) {
+      return false;
+    }
+
     const href = Pjax.getHref(el);
 
     if (!href) {

@@ -15,7 +15,6 @@ export interface CustomData {
   checkURL(this: Binding, urlToCheck?: string): boolean;
   onClick(this: Binding, event: Event): void;
   onNewPageReady(this: Binding): void;
-  onLinkEnter(this: Binding, event: Event): void;
 }
 
 /**
@@ -24,7 +23,8 @@ export interface CustomData {
 export const routeBinder: Binder<string> = {
   name: 'route',
 
-  bind(this: Binding) {
+  bind(this: Binding, el: HTMLElement) {
+    el.classList.add('route');
     this.customData = {
       dispatcher: undefined,
       options: {
@@ -60,11 +60,9 @@ export const routeBinder: Binder<string> = {
       },
       onNewPageReady(this: Binding) {
         this.customData.checkURL.call(this, this.customData.options.url);
-      },
-      onLinkEnter(this: Binding, event: Event) {
-        (this.customData as CustomData).prefetch.onLinkEnter(event, this.customData.options.url);
-      },
+      }
     } as CustomData;
+    el.addEventListener('click', this.customData.onClick.bind(this));
   },
 
   routine(this: Binding, el: HTMLElement, optionsOrUrl?: string | RouteOptions) {
@@ -92,37 +90,27 @@ export const routeBinder: Binder<string> = {
       this.customData.options.newTab = true;
     }
 
-    const location = Utils.getLocation();
-    const host = location.protocol + '//' + location.hostname;
-
     // normalize url
-    if (this.customData.options.url && Utils.isAbsoluteUrl(this.customData.options.url)) {
-      // if is an internal link
-      if (Utils.isInternalUrl(this.customData.options.url)) {
-        // get relative url
-        this.customData.options.url = this.customData.options.url.replace(host, '');
-      } else {
-        this.customData.options.newTab = true;
-      }
-    }
+    this.customData.options.url = Utils.normalizeUrl(this.customData.options.url)
+
 
     // set href if not set
     if (isAnkerHTMLElement && !el.getAttribute('href') && this.customData.options.url) {
       el.setAttribute('href', this.customData.options.url);
     }
 
+    this.customData.dispatcher.off('newPageReady', this.customData.onNewPageReady.bind(this));
     this.customData.dispatcher.on('newPageReady', this.customData.onNewPageReady.bind(this));
 
-    el.addEventListener('click', this.customData.onClick.bind(this));
-
-    if (!this.customData.options.newTab && !Utils.onRoute(this.customData.options.url)) {
-      this.customData.prefetch.initAnchor(el);
+    if (!this.customData.options.newTab) {
+      this.customData.prefetch.initBinder(el);
     }
 
     this.customData.checkURL.call(this, this.customData.options.url);
   },
   unbind(this: Binding, el: HTMLUnknownElement) {
-    this.customData.prefetch.deInitAnchor(el);
+    this.customData.prefetch.deInitBinder(el);
     el.removeEventListener('click', this.customData.onClick.bind(this));
+    this.customData.dispatcher.off('newPageReady', this.customData.onNewPageReady.bind(this));
   },
 };

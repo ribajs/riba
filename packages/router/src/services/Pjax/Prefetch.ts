@@ -57,18 +57,22 @@ class Prefetch {
     document.body.removeEventListener('touchstart', this.onLinkEnter.bind(this));
   }
 
-  public initAnchor(el: HTMLAnchorElement) {
+  /**
+   * This method is used from the rv-route binder
+   * @param el
+   */
+  public initBinder(el: HTMLAnchorElement) {
     if (!window.history.pushState) {
       return false;
     }
-    this.deInitAnchor(el);
-    el.addEventListener('mouseover', this.onLinkEnter.bind(this), { passive: true });
-    el.addEventListener('touchstart', this.onLinkEnter.bind(this), { passive: true });
+    this.deInitBinder(el);
+    el.addEventListener('mouseover', this.onLinkEnterBinder.bind(this), { passive: true });
+    el.addEventListener('touchstart', this.onLinkEnterBinder.bind(this), { passive: true });
   }
 
-  public deInitAnchor(el: HTMLAnchorElement) {
-    el.removeEventListener('mouseover', this.onLinkEnter.bind(this));
-    el.removeEventListener('touchstart', this.onLinkEnter.bind(this));
+  public deInitBinder(el: HTMLAnchorElement) {
+    el.removeEventListener('mouseover', this.onLinkEnterBinder.bind(this));
+    el.removeEventListener('touchstart', this.onLinkEnterBinder.bind(this));
   }
 
   protected async loadResponse(url: string) {
@@ -84,27 +88,42 @@ class Prefetch {
     }
   }
 
+  public onLinkEnterBinder(evt: Event, url?: string, el?: HTMLAnchorElement) {
+    return this.onLinkEnter(evt, url, el, true);
+  }
+
   /**
    * Callback for the mousehover/touchstart, please use the rv-route binder instead
    *
    */
-  public onLinkEnter(evt: Event, url?: string, el?: HTMLAnchorElement) {
+  public onLinkEnter(evt: Event, url?: string, el?: HTMLAnchorElement, fromRouteBinder?: boolean) {
+
+
+    if (!el && evt) {
+      el = ((evt as MouseEvent).relatedTarget as HTMLAnchorElement) || ((evt as any).fromElement as HTMLAnchorElement) || ((evt as Event).target as HTMLAnchorElement) || (evt as any).currentTarget;
+    }
+
+    if (!el) {
+      throw new Error('HTML Element not set');
+    }
+
+    if (el.classList.contains(this.ignoreClassLink)) {
+      return;
+    }
+
+    // Already managed by the rv-route binder
+    if (!fromRouteBinder && (el.classList.contains('route') || el.hasAttribute('rv-route'))) {
+      return;
+    }
 
     if (!url) {
+      url = Pjax.getHref(el);
+    }
 
-      if (!el && evt) {
-        el = ((evt as Event).target as HTMLAnchorElement) || (evt as any).currentTarget;
-      }
-
-
+    if (!url) {
       while (el && !Pjax.getHref(el)) {
         el = (el.parentNode as HTMLAnchorElement); // TODO testme
       }
-
-      if (!el || el.classList.contains(this.ignoreClassLink)) {
-        return;
-      }
-
       url = Pjax.getHref(el);
     }
 
@@ -113,19 +132,15 @@ class Prefetch {
       return;
     }
 
-    if (!el) {
-      throw new Error('HTML Element not set');
-    }
-
     const preventCheck = Pjax.preventCheck(evt, el, url);
 
     // Check if the link is eligible for Pjax
     if (url && preventCheck) {
       this.loadResponse(url);
     } else {
-      // if (!preventCheck) {
-      //   console.warn('preventCheck failed: ' + url, preventCheck);
-      // }
+      if (!preventCheck) {
+        console.warn('preventCheck failed: ' + url, preventCheck);
+      }
     }
   }
 }
