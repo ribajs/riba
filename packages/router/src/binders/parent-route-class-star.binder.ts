@@ -3,7 +3,7 @@ import { Binder, Utils, EventDispatcher } from '@ribajs/core';
 export const parentRouteClassStarBinder: Binder<string> = {
   name: 'parent-route-class-*',
 
-  bind(el: HTMLUnknownElement) {
+  bind(/*el: HTMLUnknownElement*/) {
     this.customData = {
       dispatcher: new EventDispatcher('main'),
     };
@@ -46,7 +46,7 @@ export const parentRouteClassStarBinder: Binder<string> = {
     onUrlChange(url);
   },
 
-  unbind(el: HTMLUnknownElement) {
+  unbind(/*el: HTMLUnknownElement*/) {
     // console.warn('routeClassStarBinder routine', el);
   },
 };

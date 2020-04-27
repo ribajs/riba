@@ -12,14 +12,14 @@ export class HideShowTransition extends BaseTransition implements Transition {
 
   protected scrollToTop: boolean;
 
-  constructor(action: 'replace' | 'append' = 'replace', scrollToTop: boolean = true) {
+  constructor(action: 'replace' | 'append' = 'replace', scrollToTop = true) {
     super(action);
     this.action = action;
     this.scrollToTop = scrollToTop;
   }
 
   public doScrollToTop() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       resolve(window.scrollTo({
         top: 0,
         behavior: 'smooth',

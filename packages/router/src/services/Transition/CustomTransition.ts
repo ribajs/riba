@@ -4,7 +4,7 @@ import { Transition } from '../../interfaces/transition';
 
 declare global {
   // tslint:disable: interface-name
-  interface Window { model: any; }
+  interface Window { model: any }
 }
 
 /**
@@ -16,7 +16,6 @@ declare global {
 class CustomTransition extends BaseTransition implements Transition {
 
   public init(oldContainer: HTMLElement, newContainer: Promise<HTMLElement>): Promise<void> {
-    const self = this;
 
     this.oldContainer = oldContainer;
     this.deferred = Utils.deferred();
@@ -26,7 +25,7 @@ class CustomTransition extends BaseTransition implements Transition {
     this.start();
 
     newContainer.then((_newContainer: HTMLElement) => {
-      self.newContainer = _newContainer;
+      this.newContainer = _newContainer;
       newContainerReady.resolve();
     });
 
@@ -40,7 +39,7 @@ class CustomTransition extends BaseTransition implements Transition {
     this.newContainerLoading.then(this.finish.bind(this));
   }
 
-  public finish(container: HTMLElement) {
+  public finish(/*container: HTMLElement*/) {
     document.body.scrollTop = 0;
     this.done();
   }

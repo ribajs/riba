@@ -1,4 +1,3 @@
-export * from './HistoryManager';
 export * from './Dom';
 export * from './Prefetch';
 
@@ -9,7 +8,7 @@ import { BaseCache } from '@ribajs/cache';
 import { HideShowTransition } from '../Transition';
 import { Transition, Response, PjaxOptions } from '../../interfaces';
 import { Dom } from './Dom';
-import { HistoryManager } from './HistoryManager';
+import { HistoryManager } from '@ribajs/history';
 
 export interface PjaxInstances {
   [key: string]: Pjax;
@@ -29,7 +28,7 @@ class Pjax {
 
   public static cache = new BaseCache<Promise<Response>>();
 
-  public static getInstance(id: string = 'main'): Pjax | undefined {
+  public static getInstance(id = 'main'): Pjax | undefined {
     const result = Pjax.instances[id];
     if (!result) {
       console.warn(`No pjax instance for viewId "${id}" found!`);
@@ -129,16 +128,8 @@ class Pjax {
     if (typeof(el.href) === 'string') {
       let href =  el.href;
 
-      // normalize url
-      if (href && Utils.isAbsoluteUrl(href)) {
-        const location = Utils.getLocation();
-        const host = location.protocol + '//' + location.hostname;
-        // if is not an external link
-        if (href.indexOf(host) === 0) {
-          // get relative href
-          href = href.replace(host, '');
-        }
-      }
+      // normalize url, returns the relative url for internal urls and the full url for external urls
+      href = Utils.normalizeUrl(href)
       return href;
     }
 
@@ -152,12 +143,12 @@ class Pjax {
  /**
   * Indicate wether or not use the cache
   */
-  public cacheEnabled: boolean = true;
+  public cacheEnabled = true;
 
  /**
   * Indicate if there is an animation in progress
   */
-  public transitionProgress: boolean = false;
+  public transitionProgress = false;
 
   protected listenAllLinks: boolean;
 
@@ -173,7 +164,7 @@ class Pjax {
 
   protected wrapper?: HTMLElement;
 
-  protected viewId: string;
+  protected viewId: string = 'main';
 
   protected containerSelector: string;
 
@@ -196,7 +187,9 @@ class Pjax {
     changeBrowserUrl = true,
     prefetchLinks = true,
   }: PjaxOptions) {
-    this.viewId = id;
+    if (id) {
+      this.viewId = id;
+    }
 
     let instance = this as Pjax;
 
@@ -290,7 +283,7 @@ class Pjax {
     const href = Pjax.getHref(linkElement);
     if (rel === 'router-preload' && href && this.cacheEnabled) {
       const follow = Pjax.preventCheckUrl(href);
-      const cachedResponse = Pjax.cache.get(this.viewId + '_' + href);
+      const cachedResponse = Pjax.cache.get(href);
       if (follow) {
         // Only append if not already cached
         if (cachedResponse) {
@@ -298,7 +291,7 @@ class Pjax {
         }
         // TODO wait for idle because we do not want to block the user
         const response = this.loadResponse(href, true)
-        Pjax.cache.set(this.viewId + '_' + href, response);
+        Pjax.cache.set(href, response);
         console.debug('cached link', href);
         return true;
       }
@@ -354,8 +347,7 @@ class Pjax {
   * Load an url, will start an fetch request or load from the cache (and set it to the cache) and will return a `Response` pbject
   */
   public async loadResponse(url: string, forceCache = false ) {
-    // console.debug('loadResponse', url);
-    let response = Pjax.cache.get(this.viewId + '_' + url);
+    let response = Pjax.cache.get(url);
 
     if (!response || !response.then) {
       const options: HttpServiceOptions = forceCache ? { cache: 'force-cache'} : {};
@@ -364,7 +356,7 @@ class Pjax {
         return Dom.parseResponse(data, this.parseTitle, this.containerSelector, this.prefetchLinks);
       });
       if (this.cacheEnabled) {
-        Pjax.cache.set(this.viewId + '_' + url, response);
+        Pjax.cache.set(url, response);
       } else {
         Pjax.cache.reset();
       }
@@ -442,6 +434,9 @@ class Pjax {
       return false;
     }
 
+    // normalize url, returns the relative url for internal urls and the full url for external urls
+    newUrl = Utils.normalizeUrl(newUrl);
+
     this.history.add(newUrl);
 
     const newContainer = this.load(newUrl);
@@ -504,11 +499,14 @@ class Pjax {
     );
   }
 
+  /** 
+   * Save's the current container in the cache like `Dom.parseResponse`
+   */
   protected cacheInitialContainer() {
     const initalResponse = Dom.parseInitial(this.parseTitle, this.containerSelector, this.prefetchLinks);
     const url = window.location.pathname;
     if (this.cacheEnabled) {
-      Pjax.cache.set(this.viewId + '_' + url, Promise.resolve(initalResponse));
+      Pjax.cache.set(url, Promise.resolve(initalResponse));
     } else {
       Pjax.cache.reset();
     }

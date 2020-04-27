@@ -32,20 +32,21 @@
     "Browser"
   ],
   "scripts": {
-    "type-check": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
     "build": "npm run build:module",
     "build:module": "tsc",
-    "packages:link": "npm link @ribajs/core"
+    "packages:npm:link": "npm link @ribajs/core"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.0",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-object-rest-spread": "^7.9.5",
-
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-typescript": "^7.9.0",
     "@babel/runtime-corejs3": "^7.9.2",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "^2.29.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-array-includes": "^2.0.3",
     "core-js": "^3.6.5",
@@ -55,7 +56,8 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "@ribajs/cache": "workspace:packages/cache",
-    "@ribajs/core": "^1.8.0"
+    "@ribajs/cache": "^1.8.0",
+    "@ribajs/core": "^1.8.0",
+    "@ribajs/history": "^1.8.0"
   }
 }

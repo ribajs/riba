@@ -8,7 +8,7 @@ export const viewStaticBinder: Binder<string> = {
   name: 'view-static',
   block: true,
 
-  bind(el: HTMLElement) {
+  bind(/*el: HTMLElement*/) {
     if (!this.customData) {
       this.customData = {
         nested: null,
@@ -18,7 +18,6 @@ export const viewStaticBinder: Binder<string> = {
 
   routine(el: HTMLElement, options: any) {
     const wrapper = el;
-    const self = this;
 
     // Set default options
     options = options || {};
@@ -40,21 +39,21 @@ export const viewStaticBinder: Binder<string> = {
       _response.container.style.visibility = 'visible';
 
       // add the dateset to the model
-      if (!Utils.isObject(self.view.models)) {
-        self.view.models = {};
+      if (!Utils.isObject(this.view.models)) {
+        this.view.models = {};
       }
 
-      // self.view.models.dataset = container.data();
-      if (self.customData.nested) {
-        self.customData.nested.unbind();
+      // this.view.models.dataset = container.data();
+      if (this.customData.nested) {
+        this.customData.nested.unbind();
       }
-      self.customData.nested = new RivetsView(_response.container, self.view.models, self.view.options);
-      self.customData.nested.bind();
+      this.customData.nested = new RivetsView(_response.container, this.view.models, this.view.options);
+      this.customData.nested.bind();
 
     });
   },
 
-  unbind(el: HTMLUnknownElement) {
+  unbind(/*el: HTMLUnknownElement*/) {
     if (this.customData.nested) {
       this.customData.nested.unbind();
     }

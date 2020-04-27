@@ -1,5 +1,5 @@
 import { EventDispatcher, Utils } from '@ribajs/core';
-import { State } from '../interfaces';
+import { State } from '@ribajs/history';
 
 /**
  * BaseView to be extended
@@ -29,28 +29,27 @@ abstract class BaseView {
    * container when the page is loaded.
    */
   public init() {
-    const self = this;
 
     this.dispatcher.on('initStateChange', (viewId: string, newStatus: State, oldStatus: State) => {
-      if (oldStatus && oldStatus.namespace === self.namespace) {
-        self.onLeave();
+      if (oldStatus && oldStatus.namespace === this.namespace) {
+        this.onLeave();
       }
     });
 
     this.dispatcher.on('newPageReady', (viewId: string, newStatus: State, oldStatus: State, container: HTMLElement, html: string, isInit: boolean) => {
-      self.container = container;
-      if (newStatus.namespace === self.namespace) {
-        self.onEnter();
+      this.container = container;
+      if (newStatus.namespace === this.namespace) {
+        this.onEnter();
       }
     });
 
     this.dispatcher.on('transitionCompleted', (viewId: string, newStatus: State, oldStatus: State) => {
-      if (newStatus.namespace === self.namespace) {
-        self.onEnterCompleted();
+      if (newStatus.namespace === this.namespace) {
+        this.onEnterCompleted();
       }
 
-      if (oldStatus && oldStatus.namespace === self.namespace) {
-        self.onLeaveCompleted();
+      if (oldStatus && oldStatus.namespace === this.namespace) {
+        this.onLeaveCompleted();
       }
     });
   }

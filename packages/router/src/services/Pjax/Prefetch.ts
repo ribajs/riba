@@ -9,7 +9,7 @@ export interface PrefetchInstances {
  */
 class Prefetch {
 
-  public static getInstance(id: string = 'main'): Prefetch | undefined {
+  public static getInstance(id = 'main'): Prefetch | undefined {
     const result = Prefetch.instances[id];
     if (!result) {
       console.warn(`No Pjax instance with id ${id} found!`);
@@ -72,7 +72,7 @@ class Prefetch {
   }
 
   protected async loadResponse(url: string) {
-    let response = Pjax.cache.get(this.viewId + '_' + url);
+    let response = Pjax.cache.get(url);
     if (!response) {
       const pjax = Pjax.getInstance(this.viewId);
       if (pjax) {

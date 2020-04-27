@@ -1,6 +1,8 @@
 import { Binder, EventDispatcher, Utils, View as RivetsView } from '@ribajs/core';
+import { State } from '@ribajs/history';
+
 import { Pjax, Prefetch, HideShowTransition } from '../services';
-import { State, PjaxOptions } from '../interfaces';
+import { PjaxOptions } from '../interfaces';
 
 /**
  * The main wrapper for the riba router
@@ -19,7 +21,6 @@ export const viewBinder: Binder<string> = {
   block: true,
 
   bind(el: Element) {
-    const self = this;
     if (!this.customData) {
       this.customData = {};
     }
@@ -27,38 +28,38 @@ export const viewBinder: Binder<string> = {
     this.customData.nested = this.customData.nested || null,
     this.customData.wrapper = this.customData.wrapper || el,
 
-    this.customData.onPageReady = (viewId: string, currentStatus: State, prevStatus: State, container: HTMLElement, newPageRawHTML: string, dataset: any, isInit: boolean) => {
+    this.customData.onPageReady = (viewId: string, currentStatus: State, prevStatus: State, container: HTMLElement, newPageRawHTML: string, dataset: any/*, isInit: boolean*/) => {
       // Only to anything if the viewID is eqal (in this way it is possible to have multiple views)
-      if (viewId !== self.customData.options.viewId) {
-        console.warn('not the right view', self.customData.options.viewId, viewId);
+      if (viewId !== this.customData.options.viewId) {
+        console.warn('not the right view', this.customData.options.viewId, viewId);
         return;
       }
 
       // unbind the old rivets view
-      if (self.customData.nested) {
-        if (self.customData.options.action === 'replace') {
-          self.customData.nested.unbind();
+      if (this.customData.nested) {
+        if (this.customData.options.action === 'replace') {
+          this.customData.nested.unbind();
         }
       }
 
       // add the dateset to the model
-      if (!Utils.isObject(self.view.models)) {
-        self.view.models = {};
+      if (!Utils.isObject(this.view.models)) {
+        this.view.models = {};
       }
 
-      if (self.customData.options.datasetToModel === true && Utils.isObject(dataset)) {
-        self.view.models.dataset = dataset; // = container.data();
+      if (this.customData.options.datasetToModel === true && Utils.isObject(dataset)) {
+        this.view.models.dataset = dataset; // = container.data();
       }
 
       // TODO append on action "append"
-      self.customData.nested = new RivetsView(container, self.view.models, self.view.options);
-      self.customData.nested.bind();
+      this.customData.nested = new RivetsView(container, this.view.models, this.view.options);
+      this.customData.nested.bind();
     };
 
     this.customData.onTransitionCompleted = (viewId: string) => {
 
       // Only to anything if the viewID is eqal (in this way it is possible to have multiple views)
-      if (viewId !== self.customData.options.viewId) {
+      if (viewId !== this.customData.options.viewId) {
         return;
       }
 

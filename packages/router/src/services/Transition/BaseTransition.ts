@@ -25,8 +25,6 @@ export abstract class BaseTransition implements Transition {
    *
    */
   public init(oldContainer: HTMLElement, newContainer: Promise<HTMLElement>): Promise<void> {
-    const self = this;
-
     this.oldContainer = oldContainer;
 
     this.deferred = Utils.deferred();
@@ -36,7 +34,7 @@ export abstract class BaseTransition implements Transition {
     this.start();
 
     newContainer.then((_newContainer: HTMLElement) => {
-      self.newContainer = _newContainer;
+      this.newContainer = _newContainer;
       newContainerReady.resolve();
     });
 

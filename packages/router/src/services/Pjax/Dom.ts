@@ -25,7 +25,7 @@ class Dom {
    * Parse the responseText obtained from the fetch call
    * @see https://stackoverflow.com/a/41038197/1465919
    */
-  public static parseResponse(responseText: string, parseTitle: boolean, containerSelector: string, prefetchLinks: boolean = true): Response {
+  public static parseResponse(responseText: string, parseTitle: boolean, containerSelector: string, prefetchLinks = true): Response {
     let title = '';
     let prefetchLinkElements: NodeListOf<HTMLLinkElement> | Array<HTMLLinkElement> = [];
     const template = document.createElement('template') as HTMLTemplateElement;
@@ -51,7 +51,7 @@ class Dom {
   /**
    * Use this method only on the first page load
    */
-  public static parseInitial(parseTitle: boolean, containerSelector: string, prefetchLinks: boolean = true) {
+  public static parseInitial(parseTitle: boolean, containerSelector: string, prefetchLinks = true) {
     let title = '';
     let prefetchLinkElements: NodeListOf<HTMLLinkElement> | Array<HTMLLinkElement> = [];
     const container = this.getContainer(document, containerSelector);
