@@ -22,7 +22,7 @@
   },
   "scripts": {
     "test": "npm run type-check && jest --config=jest.config.js",
-    "type-check": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
     "build": "npm run build:module",
     "build:module": "tsc"
   },
@@ -33,7 +33,6 @@
     "@babel/plugin-proposal-export-default-from": "^7.8.3",
     "@babel/plugin-proposal-object-rest-spread": "^7.9.5",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-typescript": "^7.9.0",
     "@babel/runtime-corejs3": "^7.9.2",
@@ -51,7 +50,7 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "@ribajs/core": "^1.8.0",
+    "@ribajs/cache": "workspace:packages/cache",
     "@types/jquery": "^3.3.35",
     "jquery": "^3.5.0"
   },

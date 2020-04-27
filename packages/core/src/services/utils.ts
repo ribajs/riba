@@ -309,11 +309,16 @@ export class Utils {
    * @see http://stackoverflow.com/a/736970/1465919
    *
    * @example
-   * var l = getLocation("http://example.com/path");
-   * console.debug(l.hostname)
-   * >> "example.com"
-   * console.debug(l.pathname)
-   * >> "/path"
+   * var l = getLocation("http://example.com:3000/pathname/?search=test#hash");
+   * =>
+   * l.protocol; // => "http:"
+   * l.host;     // => "example.com:3000"
+   * l.hostname; // => "example.com"
+   * l.port;     // => "3000"
+   * l.pathname; // => "/pathname/"
+   * l.hash;     // => "#hash"
+   * l.search;   // => "?search=test"
+   * l.origin;   // => "http://example.com:3000"
    */
   public static getLocation(url?: string): Location {
     if (!url) {
@@ -325,16 +330,16 @@ export class Utils {
   }
 
   /**
-   * If the webapps url is https://mysupersite.org and the url is https://mysupersite.org/subpage
-   * this method will return /subpage
-   * If the url is https://anothersite.org/subpage this method will return https://anothersite.org/subpage
+   * If the webapps url is https://mysupersite.org and the url is https://mysupersite.org/subpage?search=test
+   * this method will return /subpage?search=test
+   * If the url is https://anothersite.org/subpage?search=test this method will return https://anothersite.org/subpage?search=test
    * @param url
    */
   public static normalizeUrl(url: string): string {
     const checkLocation = Utils.getLocation(url);
     const hostname = Utils.getLocation().hostname;
     if (checkLocation.hostname === hostname) {
-      return checkLocation.pathname;
+      return checkLocation.pathname + checkLocation.search;
     } else {
       return Utils.getUrl(url);
     }
@@ -518,6 +523,7 @@ export class Utils {
     };
   }
 
+  // TODO move to Dom utils?
   public static escapeHtml(str: string) {
     const tagsToReplace = {
       "&": "&amp;",

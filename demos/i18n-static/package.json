@@ -10,7 +10,7 @@
     "clear": "rm -rf ./dist",
     "lint:ts": "eslint src --ext .js,.jsx,.ts,.tsx && tsc --noEmit",
     "test": "jest",
-    "packages:link": "npm @ribajs/core @ribajs/i18n"
+    "packages:npm:link": "npm @ribajs/core @ribajs/i18n"
   },
   "author": "",
   "license": "MIT",

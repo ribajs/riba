@@ -67,7 +67,7 @@ export const viewBinder: Binder<string> = {
       if (this.customData.options.scrollToAnchorHash && window.location.hash) {
         const scrollToMe = document.getElementById(window.location.hash.substr(1));
         if (scrollToMe) {
-          return new Promise((resolve, reject) => {
+          return new Promise((resolve) => {
             resolve(Utils.scrollTo(scrollToMe, 0, window));
           });
         }
@@ -148,7 +148,7 @@ export const viewBinder: Binder<string> = {
     pjax.start();
   },
 
-  unbind(el: HTMLUnknownElement) {
+  unbind(/*el: HTMLUnknownElement*/) {
     if (this.customData.dispatcher) {
       this.customData.dispatcher.off('newPageReady', this.customData.onPageReady);
       this.customData.dispatcher.off('transitionCompleted', this.customData.onTransitionCompleted);

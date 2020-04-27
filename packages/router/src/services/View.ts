@@ -36,7 +36,7 @@ abstract class BaseView {
       }
     });
 
-    this.dispatcher.on('newPageReady', (viewId: string, newStatus: State, oldStatus: State, container: HTMLElement, html: string, isInit: boolean) => {
+    this.dispatcher.on('newPageReady', (viewId: string, newStatus: State, oldStatus: State, container: HTMLElement/*, html: string, isInit: boolean*/) => {
       this.container = container;
       if (newStatus.namespace === this.namespace) {
         this.onEnter();

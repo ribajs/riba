@@ -39,7 +39,7 @@
     "build": "npm run lint && npm run build:module",
     "build:module": "tsc",
     "clean": "rm -rf ./dist ./lib",
-    "packages:link": "npm link @ribajs/core @ribajs/extras"
+    "packages:npm:link": "npm link @ribajs/core @ribajs/extras"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -48,12 +48,11 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.9.5",
     "@babel/plugin-proposal-optional-chaining": "^7.9.0",
     "@babel/plugin-syntax-export-default-from": "^7.8.3",
-
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-typescript": "^7.9.0",
     "@babel/runtime-corejs3": "^7.9.2",
-    "@ribajs/tsconfig": "^1.8.0",
-    "@ribajs/types": "^1.8.3",
+    "@ribajs/tsconfig": "workspace:infra/tsconfig",
+    "@ribajs/types": "workspace:infra/types",
     "@types/jest": "^25.2.1",
     "@typescript-eslint/eslint-plugin": "^2.29.0",
     "@typescript-eslint/parser": "^2.29.0",
@@ -69,8 +68,9 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "@ribajs/core": "^1.8.0",
-    "@ribajs/extras": "^1.8.0",
+    "@ribajs/cache": "workspace:packages/cache",
+    "@ribajs/core": "workspace:packages/core",
+    "@ribajs/extras": "workspace:packages/extras",
     "bootstrap": "^4.4.1",
     "popper.js": "^1.16.1"
   },

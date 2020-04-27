@@ -104,7 +104,7 @@ class Dom {
   /**
    * Put the container on the page
    */
-  public static putContainer(element: HTMLElement, wrapper: HTMLElement, appendChild: 'append' | 'replace' = 'replace') {
+  public static putContainer(element: HTMLElement, wrapper: HTMLElement) {
     element = element as HTMLElement;
     element.style.visibility = 'hidden';
     wrapper.appendChild(element);

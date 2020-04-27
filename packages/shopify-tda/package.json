@@ -21,7 +21,7 @@
     "url": "git+https://github.com/ribajs/riba.git"
   },
   "scripts": {
-    "type-check": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
     "build": "npm run build:module",
     "build:module": "tsc"
   },
@@ -30,7 +30,6 @@
     "@babel/core": "^7.9.0",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-object-rest-spread": "^7.9.5",
-
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-typescript": "^7.9.0",
     "@babel/runtime-corejs3": "^7.9.2",
@@ -43,9 +42,9 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "@ribajs/core": "^1.8.0",
-    "@ribajs/i18n": "^1.8.0",
-    "@ribajs/shopify": "^1.8.0"
+    "@ribajs/cache": "workspace:packages/cache",
+    "@ribajs/i18n": "workspace:packages/i18n",
+    "@ribajs/shopify": "workspace:packages/shopify"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

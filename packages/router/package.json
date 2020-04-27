@@ -45,19 +45,24 @@
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-typescript": "^7.9.0",
     "@babel/runtime-corejs3": "^7.9.2",
-    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/eslint-plugin": "^2.29.0",
+    "@typescript-eslint/experimental-utils": "^2.29.0",
     "@typescript-eslint/parser": "^2.29.0",
+    "@typescript-eslint/typescript-estree": "^2.29.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-array-includes": "^2.0.3",
     "core-js": "^3.6.5",
     "eslint": "^6.8.0",
+    "eslint-visitor-keys": "^1.1.0",
+    "regexpp": "^3.1.0",
+    "tsutils": "^3.17.1",
     "typescript": "^3.8.3",
     "webpack": "^5.0.0-beta.15",
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "@ribajs/cache": "^1.8.0",
-    "@ribajs/core": "^1.8.0",
-    "@ribajs/history": "^1.8.0"
+    "@ribajs/cache": "workspace:packages/cache",
+    "@ribajs/core": "workspace:packages/core",
+    "@ribajs/history": "workspace:packages/history"
   }
 }

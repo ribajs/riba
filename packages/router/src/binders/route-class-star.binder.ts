@@ -4,7 +4,7 @@ export const routeClassStarBinder: Binder<string> = {
 
   name: 'route-class-*',
 
-  bind(el: HTMLUnknownElement) {
+  bind(/*el: HTMLUnknownElement*/) {
     this.customData = {
       dispatcher: new EventDispatcher('main'),
     };
@@ -47,7 +47,7 @@ export const routeClassStarBinder: Binder<string> = {
     onUrlChange(url);
   },
 
-  unbind(el: HTMLUnknownElement) {
+  unbind(/*el: HTMLUnknownElement*/) {
     // console.warn('routeClassStarBinder routine', el);
   },
 };

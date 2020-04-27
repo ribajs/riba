@@ -164,7 +164,7 @@ class Pjax {
 
   protected wrapper?: HTMLElement;
 
-  protected viewId: string = 'main';
+  protected viewId = 'main';
 
   protected containerSelector: string;
 
@@ -355,7 +355,7 @@ class Pjax {
       .then((data: string) => {
         return Dom.parseResponse(data, this.parseTitle, this.containerSelector, this.prefetchLinks);
       });
-      if (this.cacheEnabled) {
+      if (this.cacheEnabled && response) {
         Pjax.cache.set(url, response);
       } else {
         Pjax.cache.reset();

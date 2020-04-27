@@ -2,6 +2,7 @@
   "name": "ribajs",
   "description": "Declarative data binding + templating solution.",
   "version": "1.8.0",
+  "private": true,
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [],
   "main": "src/index.ts",
