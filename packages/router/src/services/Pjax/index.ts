@@ -116,7 +116,7 @@ class Pjax {
    * Get the .href parameter out of an element
    * and handle special cases (like xlink:href)
    */
-  public static getHref(el: HTMLAnchorElement | SVGAElement | HTMLLinkElement): string | undefined {
+  public static getHref(el: HTMLAnchorElement | SVGAElement | HTMLLinkElement | HTMLUnknownElement): string | undefined {
     if (!el) {
       return undefined;
     }
@@ -125,11 +125,11 @@ class Pjax {
       return el.getAttribute('xlink:href') || undefined;
     }
 
-    if (typeof(el.href) === 'string') {
-      let href =  el.href;
-
-      // normalize url, returns the relative url for internal urls and the full url for external urls
-      href = Utils.normalizeUrl(href)
+    if (typeof((el as HTMLAnchorElement).href) === 'string' || (el.hasAttribute && el.hasAttribute('href'))) {
+      const href = (el as HTMLAnchorElement).href || el.getAttribute('href');
+      if (!href) {
+        throw new Error('href attribute not found!');
+      }
       return href;
     }
 
@@ -280,8 +280,10 @@ class Pjax {
    */
   protected prefetchLink(linkElement: HTMLLinkElement, head: HTMLHeadElement) {
     const rel = linkElement.getAttribute('rel');
-    const href = Pjax.getHref(linkElement);
+    let href = Pjax.getHref(linkElement);
     if (rel === 'router-preload' && href && this.cacheEnabled) {
+      // normalize url, returns the relative url for internal urls and the full url for external urls
+      href = Utils.normalizeUrl(href)
       const follow = Pjax.preventCheckUrl(href);
       const cachedResponse = Pjax.cache.get(href);
       if (follow) {
@@ -368,7 +370,7 @@ class Pjax {
     // you can also use the rv-router for this
     if (listenAllLinks) {
       document.addEventListener('click',
-        this.onLinkClick.bind(this),
+        this.onLinkClickIntern.bind(this),
       );
     }
 
@@ -382,34 +384,46 @@ class Pjax {
  /**
   * Force the browser to go to a certain url
   */
- protected forceGoTo(url: Location | string) {
-   console.warn('forceGoTo', url);
-   if (url && (url as Location).href) {
-    window.location = url as Location;
-   }
-   if (typeof url === 'string') {
-    window.location.href = url;
-   }
+  protected forceGoTo(url: Location | string) {
+    console.warn('forceGoTo', url);
+    if (url && (url as Location).href) {
+      window.location = url as Location;
+    }
+    if (typeof url === 'string') {
+      window.location.href = url;
+    }
   }
 
- /**
-  * Callback called from click event
-  */
- protected onLinkClick(evt: Event) {
-    let el: HTMLAnchorElement = ((evt as Event).target as HTMLAnchorElement );
+  protected onLinkClickIntern(evt: Event) {
 
-    // Go up in the nodelist until we
-    // find something with an href
-    while (el && !el.href) {
-      el = (el.parentNode as HTMLAnchorElement);
+    let el = Utils.getElementFromEvent(evt);
+ 
+    while (el && !Pjax.getHref(el)) {
+      el = (el.parentNode as HTMLAnchorElement); // TODO testme
     }
 
+    const href = Pjax.getHref(el);
+
+    if (!href) {
+      throw new Error(`Url is not defined, you can't cache the link without the url. Please make shure your element has the href attribute or pass the url directly to this function.`);
+    }
+    
     // Already managed by the rv-route binder
     if (el.classList.contains('route') || el.hasAttribute('rv-route')) {
       return false;
     }
 
-    const href = Pjax.getHref(el);
+    return this.onLinkClick(evt, el, href);
+
+  }
+
+ /**
+  * Callback called from click event
+  */
+  public onLinkClick(evt: Event, el: HTMLAnchorElement, href: string) {
+
+    // normalize url, returns the relative url for internal urls and the full url for external urls
+    href = Utils.normalizeUrl(href)
 
     if (!href) {
       throw new Error('href is falsy');
@@ -421,8 +435,6 @@ class Pjax {
       evt.preventDefault();
 
       this.dispatcher.trigger('linkClicked', el, evt);
-
-
 
       this.goTo(href);
     }
@@ -442,6 +454,7 @@ class Pjax {
 
     this.history.add(newUrl);
 
+    const oldContainer = Dom.getContainer(document, this.containerSelector);
     const newContainer = this.load(newUrl);
 
     const transition = this.getTransition();
@@ -455,7 +468,7 @@ class Pjax {
     );
 
     const transitionInstance = transition.init(
-      Dom.getContainer(document.body, this.containerSelector),
+      oldContainer,
       newContainer,
     );
 
@@ -502,31 +515,21 @@ class Pjax {
     );
   }
 
-  /** 
-   * Save's the current container in the cache like `Dom.parseResponse`
-   */
-  protected cacheInitialContainer() {
-    const initalResponse = Dom.parseInitial(this.parseTitle, this.containerSelector, this.prefetchLinks);
-    const url = window.location.pathname;
-    if (this.cacheEnabled) {
-      Pjax.cache.set(url, Promise.resolve(initalResponse));
-    } else {
-      Pjax.cache.reset();
-    }
-    return initalResponse;
-  }
-
   /**
    * Init the events
    */
   protected init(wrapper: HTMLElement, listenAllLinks: boolean, listenPopstate: boolean) {
 
-    const { container, prefetchLinks } = this.cacheInitialContainer();
+    const initalResponse = Dom.parseInitial(this.parseTitle, this.containerSelector, this.prefetchLinks);
+    const url = window.location.pathname;
+    if (this.cacheEnabled) {
+      Pjax.cache.set(url, Promise.resolve(initalResponse));
+    }
 
     // const container = Dom.getContainer(document.body, this.containerSelector);
     const head = document.getElementsByTagName('head')[0];
 
-    prefetchLinks.forEach((linkElement: HTMLLinkElement) => {
+    initalResponse.prefetchLinks.forEach((linkElement: HTMLLinkElement) => {
       this.prefetchLink(linkElement, head);
     });
 
@@ -534,7 +537,7 @@ class Pjax {
 
     this.history.add(
       this.getCurrentUrl(),
-      Dom.getNamespace(container),
+      Dom.getNamespace(initalResponse.container),
     );
 
     // Fire for the current view.
@@ -543,14 +546,14 @@ class Pjax {
       this.history.currentStatus(),
     );
 
-    const dataset = getDataset(container);
+    const dataset = getDataset(initalResponse.container);
 
     this.dispatcher.trigger('newPageReady',
       this.viewId,
       this.history.currentStatus(),
       {},
-      container,
-      container.innerHTML,
+      initalResponse.container,
+      initalResponse.container.innerHTML,
       dataset,
       true, // true if this is the first time newPageReady is tiggered / true on initialisation
     );

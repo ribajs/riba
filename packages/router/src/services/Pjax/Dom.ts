@@ -54,6 +54,10 @@ class Dom {
   public static parseInitial(parseTitle: boolean, containerSelector: string, prefetchLinks = true) {
     let title = '';
     let prefetchLinkElements: NodeListOf<HTMLLinkElement> | Array<HTMLLinkElement> = [];
+
+    const template = document.createElement('template') as HTMLTemplateElement;
+    template.innerHTML = document.body.innerHTML;
+
     const container = this.getContainer(document, containerSelector);
 
     if (parseTitle) {
@@ -65,7 +69,7 @@ class Dom {
     }
 
     return {
-      container,
+      container: container,
       title,
       prefetchLinks: prefetchLinkElements,
     };
@@ -119,6 +123,8 @@ class Dom {
       console.error(error, newPage);
       throw error;
     }
+
+    // console.debug('parseContainer', newPage);
 
     let result: HTMLElement | null;
 

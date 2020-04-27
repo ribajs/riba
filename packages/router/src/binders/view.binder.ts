@@ -31,7 +31,7 @@ export const viewBinder: Binder<string> = {
     this.customData.onPageReady = (viewId: string, currentStatus: State, prevStatus: State, container: HTMLElement, newPageRawHTML: string, dataset: any/*, isInit: boolean*/) => {
       // Only to anything if the viewID is eqal (in this way it is possible to have multiple views)
       if (viewId !== this.customData.options.viewId) {
-        console.warn('not the right view', this.customData.options.viewId, viewId);
+        console.warn('not the right view', this.customData.options.viewId, viewId, dataset);
         return;
       }
 

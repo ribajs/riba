@@ -1,4 +1,5 @@
 import { Pjax } from './index';
+import { Utils } from '@ribajs/core';
 
 export interface PrefetchInstances {
   [key: string]: Prefetch;
@@ -47,32 +48,32 @@ class Prefetch {
     }
     if (autobindLinks) {
       this.deInit();
-      document.body.addEventListener('mouseover', this.onLinkEnter.bind(this), { passive: true });
-      document.body.addEventListener('touchstart', this.onLinkEnter.bind(this), { passive: true });
+      document.body.addEventListener('mouseover', this.onLinkEnterIntern.bind(this), { passive: true });
+      document.body.addEventListener('touchstart', this.onLinkEnterIntern.bind(this), { passive: true });
     }
   }
 
   public deInit() {
-    document.body.removeEventListener('mouseover', this.onLinkEnter.bind(this));
-    document.body.removeEventListener('touchstart', this.onLinkEnter.bind(this));
+    document.body.removeEventListener('mouseover', this.onLinkEnterIntern.bind(this));
+    document.body.removeEventListener('touchstart', this.onLinkEnterIntern.bind(this));
   }
 
   /**
    * This method is used from the rv-route binder
    * @param el
    */
-  public initBinder(el: HTMLAnchorElement) {
+  public initBinder(el: HTMLAnchorElement, url: string) {
     if (!window.history.pushState) {
       return false;
     }
-    this.deInitBinder(el);
-    el.addEventListener('mouseover', this.onLinkEnterBinder.bind(this), { passive: true });
-    el.addEventListener('touchstart', this.onLinkEnterBinder.bind(this), { passive: true });
+    this.deInitBinder(el, url);
+    el.addEventListener('mouseover', this.onLinkEnter.bind(this, url, el), { passive: true });
+    el.addEventListener('touchstart', this.onLinkEnter.bind(this, url, el), { passive: true });
   }
 
-  public deInitBinder(el: HTMLAnchorElement) {
-    el.removeEventListener('mouseover', this.onLinkEnterBinder.bind(this));
-    el.removeEventListener('touchstart', this.onLinkEnterBinder.bind(this));
+  public deInitBinder(el: HTMLAnchorElement, url: string) {
+    el.removeEventListener('mouseover', this.onLinkEnter.bind(this, url, el));
+    el.removeEventListener('touchstart', this.onLinkEnter.bind(this, url, el));
   }
 
   protected async loadResponse(url: string) {
@@ -88,49 +89,13 @@ class Prefetch {
     }
   }
 
-  public onLinkEnterBinder(evt: Event, url?: string, el?: HTMLAnchorElement) {
-    return this.onLinkEnter(evt, url, el, true);
-  }
-
-  /**
-   * Callback for the mousehover/touchstart, please use the rv-route binder instead
-   *
-   */
-  public onLinkEnter(evt: Event, url?: string, el?: HTMLAnchorElement, fromRouteBinder?: boolean) {
-
-
-    if (!el && evt) {
-      el = ((evt as MouseEvent).relatedTarget as HTMLAnchorElement) || ((evt as any).fromElement as HTMLAnchorElement) || ((evt as Event).target as HTMLAnchorElement) || (evt as any).currentTarget;
-    }
-
-    if (!el) {
-      throw new Error('HTML Element not set');
-    }
+  public onLinkEnter(url: string, el: HTMLAnchorElement, evt: Event) {
 
     if (el.classList.contains(this.ignoreClassLink)) {
       return;
     }
 
-    // Already managed by the rv-route binder
-    if (!fromRouteBinder && (el.classList.contains('route') || el.hasAttribute('rv-route'))) {
-      return;
-    }
-
-    if (!url) {
-      url = Pjax.getHref(el);
-    }
-
-    if (!url) {
-      while (el && !Pjax.getHref(el)) {
-        el = (el.parentNode as HTMLAnchorElement); // TODO testme
-      }
-      url = Pjax.getHref(el);
-    }
-
-    if (!url) {
-      console.warn(`Url is not defined, you can't cache the link without the url. Please make shure your element has the href attribute or pass the url directly to this function.`);
-      return;
-    }
+    url = Utils.normalizeUrl(url);
 
     const preventCheck = Pjax.preventCheck(evt, el, url);
 
@@ -142,6 +107,45 @@ class Prefetch {
         console.warn('preventCheck failed: ' + url, preventCheck);
       }
     }
+  }
+
+  /**
+   * Callback for the mousehover/touchstart, please use the rv-route binder instead
+   *
+   */
+  protected onLinkEnterIntern(evt: Event) {
+
+    let el = Utils.getElementFromEvent(evt);
+
+    if (!el) {
+      throw new Error('HTML Element not set');
+    }
+
+    while (el && !Pjax.getHref(el)) {
+      el = (el.parentNode as HTMLAnchorElement); // TODO testme
+    }
+
+    if (!el) {
+      return;
+    }
+
+    const href = Pjax.getHref(el);
+
+    // console.debug('onLinkEnterIntern', evt, href, el);
+
+    // Already managed by the rv-route binder
+    if ((el.classList.contains('route') || el.hasAttribute('rv-route'))) {
+      // console.debug('ignore');
+      return;
+    }
+
+    if (!href) {
+      console.warn(`Url is not defined, you can't cache the link without the url. Please make shure your element has the href attribute or pass the url directly to this function.`, el);
+      return;
+    }
+
+    return this.onLinkEnter(href, el, evt);
+
   }
 }
 

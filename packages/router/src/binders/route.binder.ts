@@ -31,17 +31,7 @@ export const routeBinder: Binder<string> = {
         removeAfterActivation: false,
         newTab: false,
       } as RouteOptions,
-      checkURL(this: Binding, urlToCheck?: string) {
-        if (urlToCheck && Utils.onRoute(urlToCheck)) {
-          return true;
-        }
-        return false;
-      },
       onClick(this: Binding, event: Event) {
-        // Do not go to ref without pajax
-        if (this.el.tagName === 'A') {
-          event.preventDefault();
-        }
         if (Utils.onRoute(this.customData.options.url)) {
           // console.debug('already on this site');
         } else {
@@ -50,7 +40,7 @@ export const routeBinder: Binder<string> = {
             if (!pjax) {
               return;
             }
-            pjax.goTo(this.customData.options.url, this.customData.options.newTab);
+            pjax.onLinkClick(event, this.el as HTMLAnchorElement, this.customData.options.url);
           }
         }
         if (this.customData.options.removeAfterActivation && this.el && this.el.parentNode) {
@@ -58,9 +48,6 @@ export const routeBinder: Binder<string> = {
           this.el.parentNode.removeChild(this.el);
         }
       },
-      onNewPageReady(this: Binding) {
-        this.customData.checkURL.call(this, this.customData.options.url);
-      }
     } as CustomData;
     el.addEventListener('click', this.customData.onClick.bind(this));
   },
@@ -95,22 +82,19 @@ export const routeBinder: Binder<string> = {
 
 
     // set href if not set
-    if (isAnkerHTMLElement && !el.getAttribute('href') && this.customData.options.url) {
+    if (isAnkerHTMLElement && (!(el as HTMLAnchorElement).href || !el.getAttribute('href')) && this.customData.options.url) {
       el.setAttribute('href', this.customData.options.url);
+      (el as HTMLAnchorElement).href = this.customData.options.url;
     }
-
-    this.customData.dispatcher.off('newPageReady', this.customData.onNewPageReady.bind(this));
-    this.customData.dispatcher.on('newPageReady', this.customData.onNewPageReady.bind(this));
 
     if (!this.customData.options.newTab) {
-      this.customData.prefetch.initBinder(el);
+      this.customData.prefetch.initBinder(el, this.customData.options.url);
     }
 
-    this.customData.checkURL.call(this, this.customData.options.url);
+    // this.customData.checkURL.call(this, this.customData.options.url);
   },
   unbind(this: Binding, el: HTMLUnknownElement) {
-    this.customData.prefetch.deInitBinder(el);
+    this.customData.prefetch.deInitBinder(el, this.customData.options.url);
     el.removeEventListener('click', this.customData.onClick.bind(this));
-    this.customData.dispatcher.off('newPageReady', this.customData.onNewPageReady.bind(this));
   },
 };
