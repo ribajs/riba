@@ -18,8 +18,7 @@ class BaseCache<T = any> {
    */
   public set(key: string, val: T) {
     this.data[key] = val;
-    console.debug('SET key: ',key);
-    // console.debug('keys: ', Object.keys(this.data));
+    // console.debug('SET key: ',key);
     return this.data[key]
   }
 
@@ -27,8 +26,7 @@ class BaseCache<T = any> {
    * Retrieve the data using the key
    */
   public get(key: string): T | undefined {
-    console.debug('GET key: ',key);
-    // console.debug('keys: ', Object.keys(this.data));
+    // console.debug('GET key: ',key);
     return this.data[key];
   }
 

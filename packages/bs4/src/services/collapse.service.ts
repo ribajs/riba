@@ -371,7 +371,7 @@ export class CollapseService {
   }
 
   _addAriaAndCollapsedClass(element: HTMLElement, triggerArray: HTMLElement[], isOpen?: boolean) {
-    console.debug('_addAriaAndCollapsedClass', element, triggerArray);
+    // console.debug('_addAriaAndCollapsedClass', element, triggerArray);
     if (element) {
       if (typeof isOpen !== 'boolean') {
         isOpen = element.classList.contains(CLASS_NAME_SHOW)

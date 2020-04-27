@@ -588,6 +588,15 @@ export class Utils {
     });
   }
 
+  public static getElementFromEvent(event: Event | MouseEvent | TouchEvent) {
+    const el =
+      ((event as Event).target as HTMLAnchorElement) ||
+      ((event as any).currentTarget as HTMLAnchorElement) ||
+      ((event as MouseEvent).relatedTarget as HTMLAnchorElement) ||
+      ((event as any).fromElement as HTMLAnchorElement);
+    return el;
+  }
+
   /**
    * The debounce function receives our function as a parameter
    * @see https://css-tricks.com/styling-based-on-scroll-position/
