@@ -1,4 +1,5 @@
-import { Utils, EventDispatcher } from '@ribajs/core';
+import { EventDispatcher } from '@ribajs/core';
+import { clone } from '@ribajs/utils/src/type';
 import { Langcode, LocalPluralization, LocalVar } from '../interfaces';
 
 export abstract class ALocalesService {
@@ -42,7 +43,7 @@ export abstract class ALocalesService {
     // extract properties
     .then((locals) => {
       if (properties && properties.length) {
-        let local: any = Utils.clone(true, locals);
+        let local: any = clone(true, locals);
         for (const property of properties) {
           if (!property) {
             return;

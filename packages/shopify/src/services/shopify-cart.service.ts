@@ -1,4 +1,5 @@
-import { Utils, EventDispatcher, HttpService } from '@ribajs/core';
+import { EventDispatcher, HttpService } from '@ribajs/core';
+import { isObject, clone, getNumber } from '@ribajs/utils/src/type';
 import { PQueue } from './p-queue.service'; // https://github.com/sindresorhus/p-queue
 
 import {
@@ -285,7 +286,7 @@ export class ShopifyCartService {
     // eslint-disable-next-line @typescript-eslint/camelcase
     return HttpService.get(this.CART_GET_SHIPPING_RATES_URL, { shipping_address: shippingAddress }, 'json')
     .then((shippingRates: any) => {
-      if (Utils.isObject(shippingRates) && Utils.isObject(shippingRates.shipping_rates)) {
+      if (isObject(shippingRates) && isObject(shippingRates.shipping_rates)) {
         if (normalize) {
           return this.normalizeShippingRates(shippingRates.shipping_rates);
         }
@@ -380,9 +381,9 @@ export class ShopifyCartService {
     for (const i in shippingRates) {
       if (shippingRates[i]) {
         const shippingRate = shippingRates[i];
-        normalized[i] = Utils.clone(false, shippingRate) as ShopifyShippingRates;
+        normalized[i] = clone(false, shippingRate) as ShopifyShippingRates;
         if (normalized[i] && normalized[i].price) {
-          normalized[i].price = Utils.getNumber(normalized[i].price);
+          normalized[i].price = getNumber(normalized[i].price);
           if (normalized[i].price) {
             normalized[i].price *= 100;
           } else {

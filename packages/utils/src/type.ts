@@ -167,6 +167,12 @@ export const escapeHtml = (str: string) => {
   });
 }
 
+export const stripHtml = (html: string) => {
+  const tmp = document.createElement("DIV");
+  tmp.innerHTML = html;
+  return tmp.textContent || tmp.innerText || "";
+};
+
 /**
  * Returns a camel-cased version of the string. Used when translating an
  * element's attribute name into a property name for the component's scope.

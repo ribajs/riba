@@ -1,4 +1,5 @@
-import { Utils, Binder, BinderWrapper } from '@ribajs/core';
+import { Binder, BinderWrapper } from '@ribajs/core';
+import { concat } from '@ribajs/utils/src/type';
 import { ALocalesService } from '../../services/locales-base.service';
 
 // see star.binder.ts
@@ -62,14 +63,14 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
       this.customData.parseVars = (_el: HTMLElement) => {
         // parse templates to vars
         const newVars = this.customData.i18n.parseTemplateVars(_el);
-        this.customData.vars = Utils.concat(true, this.customData.vars, newVars);
+        this.customData.vars = concat(true, this.customData.vars, newVars);
         // if (Object.keys(this.customData.vars).length) {
         //   console.warn('parsed templates vars', this.customData.vars);
         // }
 
         // parse data attributes to vars
         // Vanilla works better than jquery data function?
-        this.customData.vars = Utils.concat(true, this.customData.vars, _el.dataset);
+        this.customData.vars = concat(true, this.customData.vars, _el.dataset);
         // if (Object.keys(this.customData.vars).length) {
         //   console.warn('parsed attribute vars', this.customData.vars);
         // }
@@ -133,7 +134,7 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
           const newVar: any = {};
           newVar[varName] = data.detail.newValue;
           // console.warn('binder-changed newVar', newVar);
-          this.customData.vars = Utils.concat(true, this.customData.vars, newVar);
+          this.customData.vars = concat(true, this.customData.vars, newVar);
           this.customData.translate();
         }
       };

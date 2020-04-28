@@ -1,4 +1,5 @@
-import { Binder, eventHandlerFunction, Utils } from '@ribajs/core';
+import { Binder, eventHandlerFunction } from '@ribajs/core';
+import { extend } from '@ribajs/utils/src/type';
 import { JQuery } from '../vendors/jquery.module';
 
 /**
@@ -42,13 +43,13 @@ export const onEventBinder: Binder<eventHandlerFunction> = {
 
     try {
       JQuery(el).on(eventName, (event, extraParameters = {}) => {
-        (event as any).data = Utils.extend(false, (event as any).data || {}, extraParameters);
+        (event as any).data = extend(false, (event as any).data || {}, extraParameters);
         return this.customData.handler(event);
       });
     } catch (error) {
       console.warn(error);
       JQuery(el).on(eventName, (event: JQuery.Event, extraParameters: any) => {
-        (event as any).data = Utils.extend(false, (event as any).data || {}, extraParameters);
+        (event as any).data = extend(false, (event as any).data || {}, extraParameters);
         return this.customData.handler(event);
       });
     }
