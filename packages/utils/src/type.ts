@@ -3,6 +3,7 @@ export const couldBeJson = (str?: string | null) => {
   if (!str || typeof str !== "string") {
     return false;
   }
+  str = str.trim();
   return str.startsWith("{") || str.startsWith("[");
 }
 
