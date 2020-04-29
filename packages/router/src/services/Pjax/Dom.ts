@@ -66,6 +66,7 @@ class Dom {
 
     if (prefetchLinks) {
       prefetchLinkElements = this.getPrefetchLinkElements(document);
+      // console.debug('prefetchLinks', prefetchLinkElements);
     }
 
     return {

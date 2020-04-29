@@ -281,12 +281,12 @@ class Pjax {
   /**
    * Appends a prefetch link to the head and caches the result
    */
-  protected prefetchLink(linkElement: HTMLLinkElement, head: HTMLHeadElement) {
+  protected prefetchLinkElement(linkElement: HTMLLinkElement, head: HTMLHeadElement) {
     const rel = linkElement.getAttribute('rel');
     let href = Pjax.getHref(linkElement);
     if (rel === 'router-preload' && href && this.cacheEnabled) {
       // normalize url, returns the relative url for internal urls and the full url for external urls
-      href = normalizeUrl(href)
+      href = normalizeUrl(href);
       const follow = Pjax.preventCheckUrl(href);
       const cachedResponse = Pjax.cache.get(href);
       if (follow) {
@@ -294,12 +294,40 @@ class Pjax {
         if (cachedResponse) {
           return cachedResponse;
         }
+        // console.debug('prefetch ', href);
         // TODO wait for idle because we do not want to block the user
         return this.loadResponse(href, true);
       }
     }
-    // Append other types linke images
+    // console.debug('append prefetch ', href);
+    // Append The link elements to the head for native prefetching by the browser
     head.appendChild(linkElement);
+  }
+
+  protected removePrefetchLinks(head: HTMLHeadElement) {
+    const removePrefetchLinkElements = head.querySelectorAll('link[href][rel="dns-prefetch"], link[href][rel="preconnect"], link[href][rel="prefetch"], link[href][rel="subresource"], link[href][rel="preload"], link[href][rel="router-preload"]') as NodeListOf<HTMLLinkElement>;
+    // Remove the old prefetch link elements
+    removePrefetchLinkElements.forEach((linkElement: HTMLLinkElement) => {
+      if (linkElement && linkElement.parentNode) {
+        linkElement.parentNode.removeChild(linkElement);
+      }
+    });
+  }
+
+  /**
+   * Replaces the prefetch links in the head with the new one.
+   * The custom link[href][rel="router-preload"] elements will be not readded to the head
+   * because we preload them with javascript, the others are preloaded by the browser
+   * because it has native support for them and for that they must exist in the head
+   * @param prefetchLinks
+   */
+  protected replacePrefetchLinkElements(prefetchLinks: NodeListOf<HTMLLinkElement> | HTMLLinkElement[]) {
+    const head = document.head || document.getElementsByTagName('head')[0];
+    this.removePrefetchLinks(head);
+
+    prefetchLinks.forEach((linkElement: HTMLLinkElement) => {
+      this.prefetchLinkElement(linkElement, head);
+    });
   }
 
  /**
@@ -320,19 +348,7 @@ class Pjax {
         document.title = _response.title;
       }
       if (this.prefetchLinks === true && _response.prefetchLinks) {
-        document.title = _response.title;
-        const head = document.getElementsByTagName('head')[0];
-        const oldPrefetchLinkElements = head.querySelectorAll('link[href][rel="dns-prefetch"], link[href][rel="preconnect"], link[href][rel="prefetch"], link[href][rel="subresource"], link[href][rel="preload"], link[href][rel="router-preload"]') as NodeListOf<HTMLLinkElement>;
-        // Remove the old prefetch link elements
-        oldPrefetchLinkElements.forEach((linkElement: HTMLLinkElement) => {
-          if (linkElement && linkElement.parentNode) {
-            linkElement.parentNode.removeChild(linkElement);
-          }
-        });
-        // Append the new prefetch link elements
-        _response.prefetchLinks.forEach((linkElement: HTMLLinkElement) => {
-          this.prefetchLink(linkElement, head);
-        });
+        this.replacePrefetchLinkElements(_response.prefetchLinks);
       }
 
       return _response.container;
@@ -529,12 +545,7 @@ class Pjax {
       Pjax.cache.set(url, Promise.resolve(initalResponse));
     }
 
-    // const container = Dom.getContainer(document.body, this.containerSelector);
-    const head = document.getElementsByTagName('head')[0];
-
-    initalResponse.prefetchLinks.forEach((linkElement: HTMLLinkElement) => {
-      this.prefetchLink(linkElement, head);
-    });
+    this.replacePrefetchLinkElements(initalResponse.prefetchLinks);
 
     this.wrapper = wrapper;
 
