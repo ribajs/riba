@@ -8,6 +8,7 @@ export { classStarBinder } from "./class-name.binder";
 export { componentAttributeBinder } from "./co-attribute.binder";
 export { cssStarBinder } from "./style-css-property.binder";
 export { enabledBinder } from "./enabled.binder";
+export { flexSortChildsBinder } from "./flex-sort-childs.binder";
 export { disabledBinder } from "./disabled.binder";
 export { maxlengthBinder } from "./maxlength.binder";
 export { onEventBinder } from "./on-event.binder";

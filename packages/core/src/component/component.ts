@@ -94,6 +94,7 @@ export abstract class Component extends FakeHTMLElement {
   }
 
   public disconnectedFallbackCallback() {
+    this.debug(`Called disconnectedFallbackCallback`);
     this.disconnectedCallback();
   }
 
@@ -154,8 +155,9 @@ export abstract class Component extends FakeHTMLElement {
       });
     }
     this.debug(
-      `Not all required and passed attributes are set to load and bind the template`,
-      this.observedAttributesToCheck
+      `Not all required or passed attributes are set to load and bind the template`,
+      this.observedAttributesToCheck,
+      this.scope
     );
     return null;
   }
@@ -174,11 +176,14 @@ export abstract class Component extends FakeHTMLElement {
    */
   protected getPassedObservedAttributes(observedAttributes: string[]) {
     for (const observedAttribute of observedAttributes) {
-      const passed = this.attributeIsPassed(observedAttribute);
-      this.observedAttributesToCheck[observedAttribute] = {
-        passed,
-        initialized: false,
-      };
+      this.observedAttributesToCheck[observedAttribute] =
+        this.observedAttributesToCheck[observedAttribute] || {};
+      const passed =
+        this.observedAttributesToCheck[observedAttribute].passed ||
+        this.attributeIsPassed(observedAttribute);
+      this.observedAttributesToCheck[observedAttribute].passed = passed;
+      this.observedAttributesToCheck[observedAttribute].initialized = !!this
+        .observedAttributesToCheck[observedAttribute].initialized;
     }
   }
 
@@ -327,9 +332,14 @@ export abstract class Component extends FakeHTMLElement {
    * Invoked when the custom element is disconnected from the document's DOM.
    */
   protected disconnectedCallback() {
-    if (this.view) {
-      this.view.unbind();
+    if (this.bound && this.view) {
+      // IMPORTANT FIXME, if we unbind the component then it will no longer work if it is retrieved from the cache and the connectedCallback is called
+      // because the riba attributes are removed. We need a solution for that, maybe we do not remove the attributes or we recreate the attributes
+      // See view bind / unbind methods for that.
+      // this.unbind();
     }
+
+    this.templateLoaded = false;
 
     if (this.attributeObserverFallback) {
       this.attributeObserverFallback.disconnect();
@@ -439,7 +449,7 @@ export abstract class Component extends FakeHTMLElement {
   }
 
   protected async bind() {
-    if (this.bound) {
+    if (this.bound === true) {
       this.debug("component already bounded");
       return this.view;
     }
@@ -490,6 +500,7 @@ export abstract class Component extends FakeHTMLElement {
 
   protected async unbind() {
     if (this.view) {
+      this.bound = false;
       this.view.unbind();
       delete this.view;
     }
@@ -603,6 +614,7 @@ export abstract class Component extends FakeHTMLElement {
    * Event handler to listen attribute change event as fallback for MutationObserver
    */
   private initAttributeObserver(observedAttributes: string[]) {
+    this.loadAttributes(observedAttributes);
     this.observedAttributes = observedAttributes;
     if (
       (window as any).customElements &&
@@ -635,9 +647,6 @@ export abstract class Component extends FakeHTMLElement {
         this.attributeObserverFallback.observe(this.el, {
           attributes: true,
         });
-        this.loadAttributes(observedAttributes);
-      } else {
-        this.loadAttributes(observedAttributes);
       }
     }
   }

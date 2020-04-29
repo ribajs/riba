@@ -5,7 +5,32 @@ import { scrollTo } from "@ribajs/utils/src/dom";
 import { State } from '@ribajs/history';
 
 import { Pjax, Prefetch, HideShowTransition } from '../services';
-import { PjaxOptions } from '../interfaces';
+import { PjaxOptions, Transition } from '../interfaces';
+
+interface Options {
+  viewId?: string;
+  action?: 'replace' | 'append';
+  containerSelector?: string;
+  scrollToTop?: boolean;
+  listenAllLinks?: boolean;
+  listenPopstate?: boolean;
+  scrollToAnchorHash?: boolean;
+  datasetToModel?: boolean;
+  parseTitle?: boolean;
+  changeBrowserUrl?: boolean;
+  prefetchLinks?: boolean;
+  transition: Transition;
+}
+
+export interface ViewBinder extends Binder<string> {
+  dispatcher?: EventDispatcher;
+  options: Partial<Options>;
+  wrapper?: HTMLElement;
+  nested: RivetsView | null;
+  prefetch?: Prefetch;
+  onPageReady(viewId: string, currentStatus: State, prevStatus: State, container: HTMLElement, newPageRawHTML: string, dataset: any, isInit: boolean): void;
+  onTransitionCompleted(viewId: string): void;
+}
 
 /**
  * The main wrapper for the riba router
@@ -19,64 +44,16 @@ import { PjaxOptions } from '../interfaces';
  *   </div>
  * ```
  */
-export const viewBinder: Binder<string> = {
+export const viewBinder: ViewBinder = {
   name: 'view',
   block: true,
+  options: {},
+  nested: null,
+  bind(el: HTMLElement) {
+    const self = (this.binder || this) as ViewBinder;
 
-  bind(el: Element) {
-    if (!this.customData) {
-      this.customData = {};
-    }
-
-    this.customData.nested = this.customData.nested || null,
-    this.customData.wrapper = this.customData.wrapper || el,
-
-    this.customData.onPageReady = (viewId: string, currentStatus: State, prevStatus: State, container: HTMLElement, newPageRawHTML: string, dataset: any/*, isInit: boolean*/) => {
-      // Only to anything if the viewID is eqal (in this way it is possible to have multiple views)
-      if (viewId !== this.customData.options.viewId) {
-        console.warn('not the right view', this.customData.options.viewId, viewId, dataset);
-        return;
-      }
-
-      // unbind the old rivets view
-      if (this.customData.nested) {
-        if (this.customData.options.action === 'replace') {
-          this.customData.nested.unbind();
-        }
-      }
-
-      // add the dateset to the model
-      if (!isObject(this.view.models)) {
-        this.view.models = {};
-      }
-
-      if (this.customData.options.datasetToModel === true && isObject(dataset)) {
-        this.view.models.dataset = dataset; // = container.data();
-      }
-
-      // TODO append on action "append"
-      this.customData.nested = new RivetsView(container, this.view.models, this.view.options);
-      this.customData.nested.bind();
-    };
-
-    this.customData.onTransitionCompleted = (viewId: string) => {
-
-      // Only to anything if the viewID is eqal (in this way it is possible to have multiple views)
-      if (viewId !== this.customData.options.viewId) {
-        return;
-      }
-
-      // scroll to Anchor of hash
-      if (this.customData.options.scrollToAnchorHash && window.location.hash) {
-        const scrollToMe = document.getElementById(window.location.hash.substr(1));
-        if (scrollToMe) {
-          return new Promise((resolve) => {
-            resolve(scrollTo(scrollToMe, 0, window));
-          });
-        }
-      }
-      return Promise.resolve();
-    };
+    self.nested = self.nested || null;
+    self.wrapper = self.wrapper || el;
 
     /*
     * Make the dispatcher available in the model to register event handlers.
@@ -96,71 +73,121 @@ export const viewBinder: Binder<string> = {
   },
 
   routine(el: HTMLUnknownElement, options: any) {
+    const self = (this.binder || this) as ViewBinder;
     // Set default options
-    this.customData.options = options || {};
+    self.options = options || {};
 
-    this.customData.options.viewId = this.customData.options.viewId || el.getAttribute('id') || 'main';
-    this.customData.options.action = this.customData.options.action || 'replace'; // replace / append
+    self.options.viewId = self.options.viewId || el.getAttribute('id') || 'main';
+    self.options.action = self.options.action || 'replace'; // replace / append
 
-    if (this.customData.options.viewId === 'main') {
-      this.customData.options.containerSelector = this.customData.options.containerSelector || '[data-namespace]';
-      this.customData.options.scrollToTop = isBoolean(this.customData.options.scrollToTop) ? this.customData.options.scrollToTop : true;
-      this.customData.options.listenAllLinks = isBoolean(this.customData.options.listenAllLinks) ? this.customData.options.listenAllLinks : true;
-      this.customData.options.listenPopstate = isBoolean(this.customData.options.listenPopstate) ? this.customData.options.listenPopstate : true;
-      this.customData.options.scrollToAnchorHash = isBoolean(this.customData.options.scrollToAnchorHash) ? this.customData.options.scrollToAnchorHash : true;
-      this.customData.options.datasetToModel = isBoolean(this.customData.options.datasetToModel) ? this.customData.options.datasetToModel : true;
-      this.customData.options.parseTitle = isBoolean(this.customData.options.parseTitle) ? this.customData.options.parseTitle : true;
-      this.customData.options.changeBrowserUrl = isBoolean(this.customData.options.changeBrowserUrl) ? this.customData.options.changeBrowserUrl : true;
-      this.customData.options.prefetchLinks = isBoolean(this.customData.options.prefetchLinks) ? this.customData.options.prefetchLinks : true;
+    if (self.options.viewId === 'main') {
+      self.options.containerSelector = self.options.containerSelector || '[data-namespace]';
+      self.options.scrollToTop = isBoolean(self.options.scrollToTop) ? self.options.scrollToTop : true;
+      self.options.listenAllLinks = isBoolean(self.options.listenAllLinks) ? self.options.listenAllLinks : true;
+      self.options.listenPopstate = isBoolean(self.options.listenPopstate) ? self.options.listenPopstate : true;
+      self.options.scrollToAnchorHash = isBoolean(self.options.scrollToAnchorHash) ? self.options.scrollToAnchorHash : true;
+      self.options.datasetToModel = isBoolean(self.options.datasetToModel) ? self.options.datasetToModel : true;
+      self.options.parseTitle = isBoolean(self.options.parseTitle) ? self.options.parseTitle : true;
+      self.options.changeBrowserUrl = isBoolean(self.options.changeBrowserUrl) ? self.options.changeBrowserUrl : true;
+      self.options.prefetchLinks = isBoolean(self.options.prefetchLinks) ? self.options.prefetchLinks : true;
     } else {
-      this.customData.options.containerSelector = this.customData.options.containerSelector || `#${this.customData.options.viewId} > *:first-child`;
-      this.customData.options.scrollToTop = isBoolean(this.customData.options.scrollToTop) ? this.customData.options.scrollToTop : false;
-      this.customData.options.listenAllLinks = isBoolean(this.customData.options.listenAllLinks) ? this.customData.options.listenAllLinks : false;
-      this.customData.options.listenPopstate = isBoolean(this.customData.options.listenPopstate) ? this.customData.options.listenPopstate : false;
-      this.customData.options.scrollToAnchorHash = isBoolean(this.customData.options.scrollToAnchorHash) ? this.customData.options.scrollToAnchorHash : false;
-      this.customData.options.datasetToModel = isBoolean(this.customData.options.datasetToModel) ? this.customData.options.datasetToModel : false;
-      this.customData.options.parseTitle = isBoolean(this.customData.options.parseTitle) ? this.customData.options.parseTitle : false;
-      this.customData.options.changeBrowserUrl = isBoolean(this.customData.options.changeBrowserUrl) ? this.customData.options.changeBrowserUrl : false;
-      this.customData.options.prefetchLinks = isBoolean(this.customData.options.prefetchLinks) ? this.customData.options.prefetchLinks : false;
+      self.options.containerSelector = self.options.containerSelector || `#${self.options.viewId} > *:first-child`;
+      self.options.scrollToTop = isBoolean(self.options.scrollToTop) ? self.options.scrollToTop : false;
+      self.options.listenAllLinks = isBoolean(self.options.listenAllLinks) ? self.options.listenAllLinks : false;
+      self.options.listenPopstate = isBoolean(self.options.listenPopstate) ? self.options.listenPopstate : false;
+      self.options.scrollToAnchorHash = isBoolean(self.options.scrollToAnchorHash) ? self.options.scrollToAnchorHash : false;
+      self.options.datasetToModel = isBoolean(self.options.datasetToModel) ? self.options.datasetToModel : false;
+      self.options.parseTitle = isBoolean(self.options.parseTitle) ? self.options.parseTitle : false;
+      self.options.changeBrowserUrl = isBoolean(self.options.changeBrowserUrl) ? self.options.changeBrowserUrl : false;
+      self.options.prefetchLinks = isBoolean(self.options.prefetchLinks) ? self.options.prefetchLinks : false;
     }
 
-    this.customData.options.prefetchLinks = isBoolean(this.customData.options.prefetchLinks) ? this.customData.options.prefetchLinks : true;
-    this.customData.options.transition = this.customData.options.transition || new HideShowTransition(this.customData.options.action, this.customData.options.scrollToTop);
+    self.options.prefetchLinks = isBoolean(self.options.prefetchLinks) ? self.options.prefetchLinks : true;
+    self.options.transition = self.options.transition || new HideShowTransition(self.options.action, self.options.scrollToTop);
 
-    this.customData.dispatcher = new EventDispatcher(this.customData.options.viewId);
-    this.customData.wrapper.setAttribute('id', this.customData.options.viewId);
+    self.dispatcher = new EventDispatcher(self.options.viewId);
+    self.wrapper?.setAttribute('id', self.options.viewId);
 
-    this.customData.dispatcher.on('newPageReady', this.customData.onPageReady);
-    this.customData.dispatcher.on('transitionCompleted', this.customData.onTransitionCompleted);
+    self.dispatcher.on('newPageReady', self.onPageReady.bind(this));
+    self.dispatcher.on('transitionCompleted', self.onTransitionCompleted.bind(this));
 
     const pjaxOptions: PjaxOptions = {
-      id: this.customData.options.viewId,
-      wrapper: this.customData.wrapper,
-      containerSelector: this.customData.options.containerSelector,
-      listenAllLinks: this.customData.options.listenAllLinks,
-      listenPopstate: this.customData.options.listenPopstate,
-      transition: this.customData.options.transition,
-      parseTitle: this.customData.options.parseTitle,
-      changeBrowserUrl: this.customData.options.changeBrowserUrl,
-      prefetchLinks: this.customData.options.prefetchLinks,
+      id: self.options.viewId,
+      wrapper: self.wrapper,
+      containerSelector: self.options.containerSelector,
+      listenAllLinks: !!self.options.listenAllLinks,
+      listenPopstate: !!self.options.listenPopstate,
+      transition: self.options.transition,
+      parseTitle: !!self.options.parseTitle,
+      changeBrowserUrl: !!self.options.changeBrowserUrl,
+      prefetchLinks: !!self.options.prefetchLinks,
     };
 
     const pjax = new Pjax(pjaxOptions);
-    this.customData.prefetch = new Prefetch(this.customData.options.viewId);
-    this.customData.prefetch.init(pjaxOptions.prefetchLinks);
+    self.prefetch = new Prefetch(self.options.viewId);
+    self.prefetch.init(pjaxOptions.prefetchLinks);
+    console.debug('self.options', self.options);
     pjax.start();
   },
 
   unbind(/*el: HTMLUnknownElement*/) {
-    if (this.customData.dispatcher) {
-      this.customData.dispatcher.off('newPageReady', this.customData.onPageReady);
-      this.customData.dispatcher.off('transitionCompleted', this.customData.onTransitionCompleted);
+    const self = (this.binder || this) as ViewBinder;
+    if (self.dispatcher) {
+      self.dispatcher.off('newPageReady', self.onPageReady.bind(this));
+      self.dispatcher.off('transitionCompleted', self.onTransitionCompleted.bind(this));
     }
 
-    if (this.customData && this.customData.nested !== null) {
-      this.customData.nested.unbind();
+    if (self.nested !== null) {
+      self.nested.unbind();
+      self.nested = null;
+    }
+  },
+
+  onPageReady(viewId: string, currentStatus: State, prevStatus: State, container: HTMLElement, newPageRawHTML: string, dataset: any/*, isInit: boolean*/) {
+    const self = (this.binder || this) as ViewBinder;
+    console.debug('onPageReady', self);
+    // Only to anything if the viewID is eqal (in this way it is possible to have multiple views)
+    if (viewId !== self.options.viewId) {
+      console.warn('not the right view', self.options.viewId, viewId, dataset);
+      return;
     }
 
-    delete this.customData;
+    // unbind the old rivets view
+    if (self.nested) {
+      if (self.options.action === 'replace') {
+        self.nested.unbind();
+      }
+    }
+
+    // add the dateset to the model
+    if (!isObject(this.view.models)) {
+      this.view.models = {};
+    }
+
+    if (self.options.datasetToModel === true && isObject(dataset)) {
+      this.view.models.dataset = dataset; // = container.data();
+    }
+
+    // TODO append on action "append"
+    self.nested = new RivetsView(container, this.view.models, this.view.options);
+    self.nested.bind();
+  },
+  onTransitionCompleted(viewId: string) {
+    const self = (this.binder || this) as ViewBinder;
+    // Only to anything if the viewID is eqal (in this way it is possible to have multiple views)
+    if (viewId !== self.options.viewId) {
+      return;
+    }
+
+    // scroll to Anchor of hash
+    if (self.options.scrollToAnchorHash && window.location.hash) {
+      const scrollToMe = document.getElementById(window.location.hash.substr(1));
+      if (scrollToMe) {
+        return new Promise((resolve) => {
+          resolve(scrollTo(scrollToMe, 0, window));
+        });
+      }
+    }
+    return Promise.resolve();
   },
 };

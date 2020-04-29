@@ -365,19 +365,15 @@ class Pjax {
   * Load an url, will start an fetch request or load from the cache (and set it to the cache) and will return a `Response` pbject
   */
   public async loadResponse(url: string, forceCache = false ) {
-    let response = Pjax.cache.get(url);
-
-    if (!response || !response.then) {
-      const options: HttpServiceOptions = forceCache ? { cache: 'force-cache'} : {};
-      response = HttpService.get(url, undefined, 'html', {}, options)
-      .then((data: string) => {
-        return Dom.parseResponse(data, this.parseTitle, this.containerSelector, this.prefetchLinks);
-      });
-      if (this.cacheEnabled && response) {
-        Pjax.cache.set(url, response);
-      } else {
-        Pjax.cache.reset();
-      }
+    const options: HttpServiceOptions = forceCache ? { cache: 'force-cache'} : {};
+    const response = HttpService.get(url, undefined, 'html', {}, options)
+    .then((data: string) => {
+      return Dom.parseResponse(data, this.parseTitle, this.containerSelector, this.prefetchLinks);
+    });
+    if (this.cacheEnabled && response) {
+      Pjax.cache.set(url, response);
+    } else {
+      Pjax.cache.reset();
     }
     return response;
   }
@@ -392,7 +388,7 @@ class Pjax {
         this.onLinkClickIntern.bind(this),
       );
     }
-
+    console.error('bindEvents listenPopstate: ', listenPopstate);
     if (listenPopstate) {
       window.addEventListener('popstate',
         this.onStateChange.bind(this),
@@ -463,7 +459,7 @@ class Pjax {
   * Method called after a 'popstate' or from .goTo()
   */
  protected onStateChange(event?: Event, newUrl: string = this.getCurrentUrl()) {
-
+    console.debug('on state change');
     if (this.changeBrowserUrl && this.history.currentStatus().url === newUrl) {
       return false;
     }
@@ -538,11 +534,17 @@ class Pjax {
    * Init the events
    */
   protected init(wrapper: HTMLElement, listenAllLinks: boolean, listenPopstate: boolean) {
-
+  
     const initalResponse = Dom.parseInitial(this.parseTitle, this.containerSelector, this.prefetchLinks);
+    console.debug('init');
     const url = window.location.pathname;
+    // Reload the current site with pajax to cache the inital page
     if (this.cacheEnabled) {
-      Pjax.cache.set(url, Promise.resolve(initalResponse));
+      const currentUrl = normalizeUrl(window.location.href)
+      if (!Pjax.cache.get(url)) {
+        const response = this.loadResponse(currentUrl);
+        console.debug('Cache initial ', response);
+      }
     }
 
     this.replacePrefetchLinkElements(initalResponse.prefetchLinks);

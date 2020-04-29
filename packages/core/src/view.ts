@@ -140,6 +140,10 @@ export class View {
     if (Array.isArray(this.bindings)) {
       this.bindings.forEach((binding) => {
         binding.unbind();
+        if (binding.el.setAttribute && this.options.removeBinderAttributes) {
+          // TODO reset attribute ?
+          // binding.el.setAttribute(attribute.name);
+        }
       });
       this.webComponents.forEach((webcomponent) => {
         webcomponent.disconnectedFallbackCallback();
@@ -273,7 +277,7 @@ export class View {
             }
           }
 
-          // if block is set childs not bound (the binder bound it by itself)
+          // if block is set, do not bind its childs (this means the binder bound it by itself)
           // and build binding directly (do not push it to bindInfos array)
           if (binder.block) {
             this.buildBinding(

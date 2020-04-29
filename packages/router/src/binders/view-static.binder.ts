@@ -32,6 +32,7 @@ export const viewStaticBinder: Binder<string> = {
 
     const pjax = new Pjax(options);
 
+    // TODO use prefetch.loadResponse to use the cache
     const response = pjax.loadResponse(options.url);
 
     response.then((_response) => {

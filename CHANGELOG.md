@@ -2,6 +2,15 @@
 
 ## Dev
 
+- Switched from npm to yarn 2
+- Switched from webpack 4 to webpack 5
+
+### Core
+
+- New parent binder to bind the parent scope to any custom element / web component
+- New component attribute binder to bind an attribute passed with rv-co-* to any custom element / web component without first converting it as an attribute
+- New flex-sort-childs binder
+
 ### Breaking changes
 
 - If you call a function from you template the first argument is not any more the binder:
@@ -17,13 +26,6 @@ after:
 ```ts
 public toggle(event?: Event) {
 ```
-
-- Start working with yarn 2 workspaces
-
-### Core
-
-- New parent binder to bind the parent scope to any custom element / web component
-- New component attribute binder to bind an attribute passed with rv-co-* to any custom element / web component without first converting it as an attribute
 
 ### BS4
 
