@@ -1548,7 +1548,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/eslint-config@^1.8.0, @ribajs/eslint-config@workspace:infra/eslint-config":
+"@ribajs/eslint-config@npm:^1.8.0":
+  version: 1.8.0
+  resolution: "@ribajs/eslint-config@npm:1.8.0"
+  checksum: d278665bdc69902f2153cfbc165226f54df37decec8eb5599d9b49b7273bc5c6603c9d931aaf9bfccb6387567f994595233285198d121638fb5e88c8551f8e52
+  languageName: node
+  linkType: hard
+
+"@ribajs/eslint-config@workspace:infra/eslint-config":
   version: 0.0.0-use.local
   resolution: "@ribajs/eslint-config@workspace:infra/eslint-config"
   dependencies:
@@ -1883,7 +1890,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/tsconfig@^1.8.0, @ribajs/tsconfig@workspace:infra/tsconfig":
+"@ribajs/tsconfig@npm:^1.8.0":
+  version: 1.8.0
+  resolution: "@ribajs/tsconfig@npm:1.8.0"
+  checksum: 1c88c00da4138074f8bb9958c5017762e5de1b6aa66693db67deb2eff2c177e29e9a5451f5c5cee566c4bdde602ace2444f6441167e46b0f2b94e8b26bd925b6
+  languageName: node
+  linkType: hard
+
+"@ribajs/tsconfig@workspace:infra/tsconfig":
   version: 0.0.0-use.local
   resolution: "@ribajs/tsconfig@workspace:infra/tsconfig"
   dependencies:

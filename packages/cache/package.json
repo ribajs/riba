@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/cache",
   "description": "Cache module of Riba.js",
-  "version": "1.9.0.alpha.0",
+  "version": "1.9.0-alpha.0",
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [
     "Michael Richards",
