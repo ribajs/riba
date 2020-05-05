@@ -66,7 +66,6 @@ class Dom {
 
     if (prefetchLinks) {
       prefetchLinkElements = this.getPrefetchLinkElements(document);
-      // console.debug('prefetchLinks', prefetchLinkElements);
     }
 
     return {
@@ -124,8 +123,6 @@ class Dom {
       console.error(error, newPage);
       throw error;
     }
-
-    // console.debug('parseContainer', newPage);
 
     let result: HTMLElement | null;
 

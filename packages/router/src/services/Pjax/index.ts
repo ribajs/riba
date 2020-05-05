@@ -288,18 +288,11 @@ class Pjax {
       // normalize url, returns the relative url for internal urls and the full url for external urls
       href = normalizeUrl(href);
       const follow = Pjax.preventCheckUrl(href);
-      const cachedResponse = Pjax.cache.get(href);
       if (follow) {
-        // Only append if not already cached
-        if (cachedResponse) {
-          return cachedResponse;
-        }
-        // console.debug('prefetch ', href);
         // TODO wait for idle because we do not want to block the user
-        return this.loadResponse(href, true);
+        return this.loadResponseCached(href, true);
       }
     }
-    // console.debug('append prefetch ', href);
     // Append The link elements to the head for native prefetching by the browser
     head.appendChild(linkElement);
   }
@@ -334,12 +327,11 @@ class Pjax {
   * Load an url, will start an fetch request or load from the cache will return the Container
   * Also puts the container to the DOM and sets the title (if this option is active)
   */
-  public async load(url: string): Promise<HTMLElement> {
-    const response = this.loadResponse(url);
+  public async loadCached(url: string): Promise<HTMLElement> {
+    const response = this.loadResponseCached(url);
 
     return response
     .then((_response) => {
-      // console.debug('_response', _response);
       if (!this.wrapper) {
         throw new Error('[Pjax] you need a wrapper!');
       }
@@ -364,7 +356,13 @@ class Pjax {
  /**
   * Load an url, will start an fetch request or load from the cache (and set it to the cache) and will return a `Response` pbject
   */
-  public async loadResponse(url: string, forceCache = false ) {
+  public async loadResponseCached(url: string, forceCache = false ) {
+    if (this.cacheEnabled) {
+      const cachedResponse = Pjax.cache.get(url);
+      if (cachedResponse && cachedResponse.then) {
+        return cachedResponse;
+      }
+    }
     const options: HttpServiceOptions = forceCache ? { cache: 'force-cache'} : {};
     const response = HttpService.get(url, undefined, 'html', {}, options)
     .then((data: string) => {
@@ -388,7 +386,6 @@ class Pjax {
         this.onLinkClickIntern.bind(this),
       );
     }
-    console.error('bindEvents listenPopstate: ', listenPopstate);
     if (listenPopstate) {
       window.addEventListener('popstate',
         this.onStateChange.bind(this),
@@ -459,7 +456,6 @@ class Pjax {
   * Method called after a 'popstate' or from .goTo()
   */
  protected onStateChange(event?: Event, newUrl: string = this.getCurrentUrl()) {
-    console.debug('on state change');
     if (this.changeBrowserUrl && this.history.currentStatus().url === newUrl) {
       return false;
     }
@@ -470,7 +466,7 @@ class Pjax {
     this.history.add(newUrl);
 
     const oldContainer = Dom.getContainer(document, this.containerSelector);
-    const newContainer = this.load(newUrl);
+    const newContainer = this.loadCached(newUrl);
 
     const transition = this.getTransition();
 
@@ -536,14 +532,12 @@ class Pjax {
   protected init(wrapper: HTMLElement, listenAllLinks: boolean, listenPopstate: boolean) {
   
     const initalResponse = Dom.parseInitial(this.parseTitle, this.containerSelector, this.prefetchLinks);
-    console.debug('init');
     const url = window.location.pathname;
     // Reload the current site with pajax to cache the inital page
     if (this.cacheEnabled) {
       const currentUrl = normalizeUrl(window.location.href)
       if (!Pjax.cache.get(url)) {
-        const response = this.loadResponse(currentUrl);
-        console.debug('Cache initial ', response);
+        this.loadResponseCached(currentUrl);
       }
     }
 

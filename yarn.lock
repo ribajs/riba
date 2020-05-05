@@ -1785,6 +1785,7 @@ __metadata:
     "@ribajs/cache": "workspace:packages/cache"
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/history": "workspace:packages/history"
+    "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
     "@typescript-eslint/eslint-plugin": ^2.29.0
     "@typescript-eslint/experimental-utils": ^2.29.0

@@ -2429,6 +2429,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@ribajs/cache", "workspace:packages/cache"],
             ["@ribajs/core", "workspace:packages/core"],
             ["@ribajs/history", "workspace:packages/history"],
+            ["@ribajs/tsconfig", "workspace:infra/tsconfig"],
             ["@ribajs/utils", "workspace:packages/utils"],
             ["@typescript-eslint/eslint-plugin", "virtual:481881dc1ff916db41efc89f72c7656e984a36517d164fcb05dafc2ede16235daaa6c743201e185f2163241fa5c34486b9bca04f087054e3aded0c951010f935#npm:2.30.0"],
             ["@typescript-eslint/experimental-utils", "virtual:e21e58e3b9f9b332ae3dbc9e1497c2eae8047a7536969e6c7be75955e030bb8b6bade711ffc5987533a38c9c7e2a2f8b289ee38d9f5acf2d8f5a49d9549d190d#npm:2.30.0"],

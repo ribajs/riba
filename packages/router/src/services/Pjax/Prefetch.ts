@@ -33,9 +33,11 @@ class Prefetch {
    * Creates an singleton instance of Prefetch.
    */
   constructor(readonly viewId: string) {
+    this.viewId = viewId;
     if (Prefetch.instances[this.viewId]) {
       return Prefetch.instances[this.viewId];
     }
+    Prefetch.instances[this.viewId] = this;
   }
 
   /**
@@ -77,22 +79,9 @@ class Prefetch {
     el.removeEventListener('touchstart', this.onLinkEnter.bind(this, url, el));
   }
 
-  protected async loadResponse(url: string) {
-    let response = Pjax.cache.get(url);
-    if (!response) {
-      const pjax = Pjax.getInstance(this.viewId);
-      if (pjax) {
-        // This method also caches the response
-        response = pjax.loadResponse(url);
-      } else {
-        console.warn(`No pjax instace for viewId "${this.viewId}" found!`);
-      }
-    }
-  }
-
   public onLinkEnter(url: string, el: HTMLAnchorElement, evt: Event) {
 
-    if (el.classList.contains(this.ignoreClassLink)) {
+    if (el.classList && el.classList.contains(this.ignoreClassLink)) {
       return;
     }
 
@@ -102,7 +91,12 @@ class Prefetch {
 
     // Check if the link is eligible for Pjax
     if (url && preventCheck) {
-      this.loadResponse(url);
+      const pjax = Pjax.getInstance(this.viewId);
+      if (pjax) {
+        pjax.loadResponseCached(url);
+      } else {
+        console.warn(`No pjax instace for viewId "${this.viewId}" found!`);
+      }
     } else {
       if (!preventCheck) {
         console.warn('preventCheck failed: ' + url, preventCheck);
@@ -132,11 +126,8 @@ class Prefetch {
 
     const href = Pjax.getHref(el);
 
-    // console.debug('onLinkEnterIntern', evt, href, el);
-
     // Already managed by the rv-route binder
     if ((el.classList.contains('route') || el.hasAttribute('rv-route'))) {
-      // console.debug('ignore');
       return;
     }
 

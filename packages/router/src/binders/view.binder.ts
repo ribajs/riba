@@ -126,7 +126,6 @@ export const viewBinder: ViewBinder = {
     const pjax = new Pjax(pjaxOptions);
     self.prefetch = new Prefetch(self.options.viewId);
     self.prefetch.init(pjaxOptions.prefetchLinks);
-    console.debug('self.options', self.options);
     pjax.start();
   },
 
@@ -145,7 +144,6 @@ export const viewBinder: ViewBinder = {
 
   onPageReady(viewId: string, currentStatus: State, prevStatus: State, container: HTMLElement, newPageRawHTML: string, dataset: any/*, isInit: boolean*/) {
     const self = (this.binder || this) as ViewBinder;
-    console.debug('onPageReady', self);
     // Only to anything if the viewID is eqal (in this way it is possible to have multiple views)
     if (viewId !== self.options.viewId) {
       console.warn('not the right view', self.options.viewId, viewId, dataset);
