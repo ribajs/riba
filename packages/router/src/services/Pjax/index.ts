@@ -414,7 +414,16 @@ class Pjax {
       el = (el.parentNode as HTMLAnchorElement); // TODO testme
     }
 
+    if (el.nodeName !== "A") {
+      return;
+    }
+
     const href = Pjax.getHref(el);
+
+    // Already managed by the rv-route binder
+    if ((el.classList.contains('route') || el.hasAttribute('rv-route'))) {
+      return;
+    }
 
     if (!href) {
       throw new Error(`Url is not defined, you can't cache the link without the url. Please make shure your element has the href attribute or pass the url directly to this function.`);
