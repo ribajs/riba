@@ -276,7 +276,7 @@ const publishPackage = (modulePath) => {
     return console.log(chalk.yellow(`\nSkipped because the current version has already been published`));
   }
   console.log(chalk.blue(`Publish module in ${modulePath}..`));
-  const command = 'npm publish --access public';
+  const command = 'yarn npm publish --access public';
   exec(command, {cwd: path.dirname(packagePath), stdio: 'inherit'});
 
 };

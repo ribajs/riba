@@ -124,6 +124,10 @@ class Prefetch {
       return;
     }
 
+    if (el.nodeName !== "A") {
+      return;
+    }
+
     const href = Pjax.getHref(el);
 
     // Already managed by the rv-route binder
