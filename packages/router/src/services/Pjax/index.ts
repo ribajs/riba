@@ -414,7 +414,7 @@ class Pjax {
       el = (el.parentNode as HTMLAnchorElement); // TODO testme
     }
 
-    if (el.nodeName !== "A") {
+    if (!el || el.nodeName !== "A") {
       return;
     }
 
