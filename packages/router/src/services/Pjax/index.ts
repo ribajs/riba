@@ -367,7 +367,12 @@ class Pjax {
     const response = HttpService.get(url, undefined, 'html', {}, options)
     .then((data: string) => {
       return Dom.parseResponse(data, this.parseTitle, this.containerSelector, this.prefetchLinks);
-    });
+    })
+    .catch((error) => {
+      console.error(error);
+      this.forceGoTo(url);
+      throw error;
+    })
     if (this.cacheEnabled && response) {
       Pjax.cache.set(url, response);
     } else {
@@ -396,7 +401,7 @@ class Pjax {
  /**
   * Force the browser to go to a certain url
   */
-  protected forceGoTo(url: Location | string) {
+  public forceGoTo(url: Location | string) {
     console.warn('forceGoTo', url);
     if (url && (url as Location).href) {
       window.location = url as Location;
@@ -464,13 +469,15 @@ class Pjax {
  /**
   * Method called after a 'popstate' or from .goTo()
   */
- protected onStateChange(event?: Event, newUrl: string = this.getCurrentUrl()) {
-    if (this.changeBrowserUrl && this.history.currentStatus().url === newUrl) {
-      return false;
-    }
-
+  protected onStateChange(event?: Event, newUrl: string = this.getCurrentUrl()) {
     // normalize url, returns the relative url for internal urls and the full url for external urls
     newUrl = normalizeUrl(newUrl);
+    const oldUrl = normalizeUrl(this.history.currentStatus().url);
+
+    if (this.changeBrowserUrl && oldUrl === newUrl) {
+      // console.debug('ignore');
+      return false;
+    }
 
     this.history.add(newUrl);
 
