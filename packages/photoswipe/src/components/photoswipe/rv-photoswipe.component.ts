@@ -64,6 +64,8 @@ export class PhotoswipeComponent extends Component {
 
   protected autobind = true;
 
+  public _debug = false;
+
   protected pswp?: PhotoSwipe<Options, PhotoSwipeUI>;
 
   protected pswpElement: HTMLElement | null = null;
@@ -321,7 +323,7 @@ export class PhotoswipeComponent extends Component {
    * lean up your stuff here.
    */
   protected onDestroy() {
-    // this.debug("onDestroy");
+    this.debug("onDestroy");
     this.closeShare();
   }
 
@@ -412,7 +414,7 @@ export class PhotoswipeComponent extends Component {
   }
 
   public open(item: Item) {
-    // this.debug("open", item, this.scope.items);
+    this.debug("open", item, this.scope.items);
     if (!this.pswpElement) {
       console.error(
         `Element with selector "${this.scope.fullscreenContainerSelector}" not found`
@@ -480,11 +482,13 @@ export class PhotoswipeComponent extends Component {
   }
 
   protected removeEventListeners() {
-    for (let i = 0; i < this.images.length; i++) {
-      this.images[i].removeEventListener(
-        "click",
-        this.openByIndex.bind(this, i)
-      );
+    if (this.scope.openImageOnClick) {
+      for (let i = 0; i < this.images.length; i++) {
+        this.images[i].removeEventListener(
+          "click",
+          this.openByIndex.bind(this, i)
+        );
+      }
     }
   }
 
@@ -595,7 +599,9 @@ export class PhotoswipeComponent extends Component {
 
   // deconstructor
   protected disconnectedCallback() {
+    this.debug("disconnectedCallback");
     super.disconnectedCallback();
+    // TODO should we call this method if the component is cached by the router?
     this.removeEventListeners();
   }
 

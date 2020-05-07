@@ -357,10 +357,14 @@ class Pjax {
   * Load an url, will start an fetch request or load from the cache (and set it to the cache) and will return a `Response` pbject
   */
   public async loadResponseCached(url: string, forceCache = false ) {
+    console.debug('loadResponseCached', url);
     if (this.cacheEnabled) {
       const cachedResponse = Pjax.cache.get(url);
       if (cachedResponse && cachedResponse.then) {
-        return cachedResponse;
+        return cachedResponse.then((response) => {
+          // console.debug('cachedResponse', response);
+          return response;
+        });
       }
     }
     const options: HttpServiceOptions = forceCache ? { cache: 'force-cache'} : {};

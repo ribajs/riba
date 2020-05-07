@@ -339,8 +339,6 @@ export abstract class Component extends FakeHTMLElement {
       // this.unbind();
     }
 
-    this.templateLoaded = false;
-
     if (this.attributeObserverFallback) {
       this.attributeObserverFallback.disconnect();
     }
@@ -421,7 +419,7 @@ export abstract class Component extends FakeHTMLElement {
   }
 
   protected async loadTemplate() {
-    if (this.templateLoaded) {
+    if (this.templateLoaded === true) {
       this.debug("template already loaded");
       return null;
     }
