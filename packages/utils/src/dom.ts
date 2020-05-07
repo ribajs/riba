@@ -117,6 +117,49 @@ export const getViewportDimensions = () => {
 }
 
 /**
+ * Select all of an contenteditable or input element
+ * @param element The element you want to select
+ */
+export const selectAll = (element: HTMLInputElement) => {
+  // need setTimeout for safari
+  setTimeout(() => {
+    if (typeof element.selectionStart !== "undefined") {
+      element.selectionStart = 0;
+      element.selectionEnd = 999;
+    }
+
+    if (typeof element.select === "function") {
+      element.select();
+    }
+
+    if (typeof element.setSelectionRange === "function") {
+      element.setSelectionRange(0, 999);
+    }
+
+    if (window.getSelection) {
+      const range = document.createRange();
+      range.selectNodeContents(element);
+      const selection = window.getSelection();
+      if (selection) {
+        selection.removeAllRanges();
+        selection.addRange(range);
+        selection.selectAllChildren(element);
+      }
+    }
+
+    if ((document as any).body.createTextRange) {
+      const range: any = (document.body as any).createTextRange(); // Creates TextRange object
+      range.moveToElementText(element); // sets Range
+      range.select(); // make selection.
+    }
+
+    if (document.execCommand) {
+      document.execCommand("selectAll", false, undefined);
+    }
+  }, 0);
+}
+
+/**
  * Cross-browser Document Ready check
  * @see https://www.competa.com/blog/cross-browser-document-ready-with-vanilla-javascript/
  * @param callback
