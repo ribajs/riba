@@ -3,9 +3,9 @@ import {
   Bs4ShareComponent,
   Scope as Bs4ShareScope,
 } from "@ribajs/bs4/src/components/bs4-share/bs4-share.component";
+import template from "@ribajs/bs4/src/components/bs4-share/bs4-share.component.html";
 import labelTemplate from "./share.label.html";
 import { ALocalesService } from "../../services/locales-base.service";
-// import { LocalesService } from "@ribajs/shopify-tda";
 
 interface Scope extends Bs4ShareScope {
   textI18n?: string;
@@ -35,6 +35,8 @@ export const i18nShareComponentWrapper = (
   return class I18nShareComponent extends Bs4ShareComponent {
     public static tagName = "i18n-share";
 
+    public _debug = true;
+
     static get observedAttributes() {
       return [
         ...Bs4ShareComponent.observedAttributes,
@@ -52,6 +54,11 @@ export const i18nShareComponentWrapper = (
       super(element);
       this.scope = this.getScopeDefaults();
       this.scope.labelTemplate = labelTemplate;
+      this.init(Bs4ShareComponent.observedAttributes);
+      this.addEventListeners();
+    }
+
+    protected connectedCallback() {
       this.init(Bs4ShareComponent.observedAttributes);
       this.addEventListeners();
     }
@@ -112,6 +119,16 @@ export const i18nShareComponentWrapper = (
 
     protected async afterBind() {
       await super.afterBind();
+    }
+
+    protected template() {
+      this.debug("template", this.el, this.el.hasChildNodes());
+      if (this.el && this.el.hasChildNodes()) {
+        // If a child is set, this is a custom label template
+        this.scope.labelTemplate = this.el.innerHTML;
+        this.debug("Custom label template: ", this.scope.labelTemplate);
+      }
+      return template;
     }
   };
 };

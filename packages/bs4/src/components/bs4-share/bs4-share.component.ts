@@ -29,6 +29,8 @@ export interface Scope {
    * */
   shareItems: ShareItem[];
 
+  dropdownDirection: 'up' |'down' | 'right' | 'left';
+
   // Methods
   shareOnService: Bs4ShareComponent["shareOnService"];
   share: Bs4ShareComponent["share"];
@@ -60,8 +62,10 @@ declare global {
 export class Bs4ShareComponent extends Component {
   public static tagName = "bs4-share";
 
+  public _debug = true;
+
   static get observedAttributes() {
-    return ["type", "title", "text", "url", "media-url", "label"];
+    return ["type", "title", "text", "url", "media-url", "label", "dropdown-direction"];
   }
 
   protected dropdown?: DropdownService;
@@ -74,12 +78,7 @@ export class Bs4ShareComponent extends Component {
   constructor(element?: HTMLElement) {
     super(element);
     this.scope = this.getScopeDefaults();
-
-    // this._debug = true;
-    
     this.debug('constructor', this.scope);
-    this.init(Bs4ShareComponent.observedAttributes);
-    this.addEventListeners();
     Bs4ShareComponent.count++;
   }
 
@@ -190,6 +189,7 @@ export class Bs4ShareComponent extends Component {
       isNative: this.browserSupportsNativeShare(),
       dropdownId: "dropdownShare" + Bs4ShareComponent.count,
       shareItems: this.getDefaultShareServices(),
+      dropdownDirection: 'down',
       // Methods
       share: this.share,
       shareOnService: this.shareOnService,
@@ -207,6 +207,12 @@ export class Bs4ShareComponent extends Component {
 
   protected onExternalCloseEvent() {
     this.dropdown?.close();
+  }
+
+  protected connectedCallback() {
+    super.connectedCallback();
+    this.init(Bs4ShareComponent.observedAttributes);
+    this.addEventListeners();
   }
 
   protected disconnectedCallback() {
@@ -370,10 +376,11 @@ export class Bs4ShareComponent extends Component {
   }
 
   protected template() {
+    this.debug('template', this.el, this.el.hasChildNodes());
     if (this.el && this.el.hasChildNodes()) {
       // If a child is set, this is a custom label template
       this.scope.labelTemplate = this.el.innerHTML;
-      // console.debug('Custom label template: ', this.el.innerHTML);
+      this.debug('Custom label template: ', this.scope.labelTemplate);
     }
     return template;
   }
