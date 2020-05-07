@@ -270,7 +270,6 @@ export class PhotoSwipeUI {
   }
 
   protected _setupHidingControlsDuringGestures() {
-    console.debug("_setupHidingControlsDuringGestures this", this);
     // Hide controls on vertical drag
     this._listen("onVerticalDrag", (now: number) => {
       if (this._controlsVisible && now < 0.95) {
