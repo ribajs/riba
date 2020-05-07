@@ -26,6 +26,19 @@ export const getInputValue = (el: HTMLElement) => {
   }
 }
 
+export const elementIsHidden = (el: HTMLElement) => {
+  return (
+    el.hasAttribute("hidden") ||
+    el.style.display === "none" ||
+    el.style.visibility === "hidden" ||
+    window.getComputedStyle(el).display === "none" ||
+    window.getComputedStyle(el).visibility === "hidden"
+  );
+}
+
+export const elementIsVisable = (el: HTMLElement) => {
+  return !elementIsHidden(el);
+}
 
 /**
  * Scrolls to an element by event and selector
