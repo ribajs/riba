@@ -333,9 +333,10 @@ export abstract class Component extends FakeHTMLElement {
    */
   protected disconnectedCallback() {
     if (this.bound && this.view) {
-      // IMPORTANT FIXME, if we unbind the component then it will no longer work if it is retrieved from the cache and the connectedCallback is called
+      // IMPORTANT ROUTE FIXME, if we unbind the component then it will no longer work if it is retrieved from the cache and the connectedCallback is called
       // because the riba attributes are removed. We need a solution for that, maybe we do not remove the attributes or we recreate the attributes
       // See view bind / unbind methods for that.
+      // only unbind if cache is not enabled?
       // this.unbind();
     }
 

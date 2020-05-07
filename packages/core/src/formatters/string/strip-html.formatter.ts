@@ -1,4 +1,4 @@
-/* tslint:disable:variable-name */
+import { stripHtml } from "@ribajs/utils/src/type";
 
 /**
  * Strips all HTML tags from a string.
@@ -7,8 +7,6 @@
 export const stripHtmlFormatter = {
   name: "stripHtml",
   read(html: string) {
-    const tmp = document.createElement("DIV");
-    tmp.innerHTML = html;
-    return tmp.textContent || tmp.innerText || "";
+    return stripHtml(html);
   },
 };

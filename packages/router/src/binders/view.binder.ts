@@ -153,7 +153,8 @@ export const viewBinder: ViewBinder = {
     // unbind the old rivets view
     if (self.nested) {
       if (self.options.action === 'replace') {
-        self.nested.unbind();
+        // IMPORTANT ROUTE FIXME only unbind if cache is not enabled?
+        // self.nested.unbind();
       }
     }
 

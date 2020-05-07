@@ -1,6 +1,6 @@
-import { Binder, BinderWrapper } from '@ribajs/core';
-import { concat } from '@ribajs/utils/src/type';
-import { ALocalesService } from '../../services/locales-base.service';
+import { Binder, BinderWrapper } from "@ribajs/core";
+import { concat } from "@ribajs/utils/src/type";
+import { ALocalesService } from "../../services/locales-base.service";
 
 // see star.binder.ts
 export interface BinderAttributeChangedEvent {
@@ -8,16 +8,18 @@ export interface BinderAttributeChangedEvent {
     name: string;
     oldValue: string;
     newValue: string;
-    namespace: null,
+    namespace: null;
   };
 }
 
 /**
  *
  */
-export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALocalesService) => {
+export const i18nStarBinderWrapper: BinderWrapper<string> = (
+  localesService: ALocalesService
+) => {
   return {
-    name: 'i18n-*',
+    name: "i18n-*",
     block: false,
     priority: 0,
     bind(el: HTMLUnknownElement) {
@@ -25,8 +27,11 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
         const customData: any = {};
         customData.type = (el as HTMLInputElement).type;
         customData.tagName = el.tagName;
-        customData.contenteditable = el.getAttribute('contenteditable') ? true : false;
-        customData.isRadio = customData.tagName === 'INPUT' && customData.type === 'radio';
+        customData.contenteditable = el.getAttribute("contenteditable")
+          ? true
+          : false;
+        customData.isRadio =
+          customData.tagName === "INPUT" && customData.type === "radio";
         return customData;
       };
       this.customData = getElementData();
@@ -39,16 +44,18 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
       this.customData.applyTranslation = (locale: string) => {
         if (!locale) {
           if (this.customData.i18n.showMissingTranslation) {
-            locale = `translation missing: "${this.customData.properties.join('.')}"`;
+            locale = `translation missing: "${this.customData.properties.join(
+              "."
+            )}"`;
           } else {
             return;
           }
         }
-        if (this.customData.attributeName === 'html') {
+        if (this.customData.attributeName === "html") {
           el.innerHTML = locale;
-        } else if (this.customData.attributeName === 'text') {
+        } else if (this.customData.attributeName === "text") {
           el.innerText = locale;
-        } else if (this.customData.attributeName === 'value') {
+        } else if (this.customData.attributeName === "value") {
           // TODO support also: https://github.com/JumpLinkNetwork/tinybind/blob/master/src/binders/basic/value.binder.ts#L51
           if (this.customData.contenteditable) {
             el.innerHTML = locale;
@@ -69,7 +76,6 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
         // }
 
         // parse data attributes to vars
-        // Vanilla works better than jquery data function?
         this.customData.vars = concat(true, this.customData.vars, _el.dataset);
         // if (Object.keys(this.customData.vars).length) {
         //   console.warn('parsed attribute vars', this.customData.vars);
@@ -90,46 +96,58 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
         if (!langcode) {
           langcode = this.customData.i18n.getLangcode();
           if (!langcode) {
-            console.error('Langcode is requred', langcode);
+            console.error("Langcode is requred", langcode);
             return;
           }
         }
 
         // translate by using the already translated language variable
         if (this.customData.langVars && this.customData.langVars[langcode]) {
-          return this.customData.applyTranslation(this.customData.langVars[langcode]);
+          return this.customData.applyTranslation(
+            this.customData.langVars[langcode]
+          );
         }
 
-        if (!this.customData.properties || this.customData.properties.length === 0) {
+        if (
+          !this.customData.properties ||
+          this.customData.properties.length === 0
+        ) {
           // get the default translation if available
           if (this.customData.langVars && this.customData.langVars.default) {
             // console.warn('Translate by default', this.customData.langVars.default);
-            return this.customData.applyTranslation(this.customData.langVars.default);
+            return this.customData.applyTranslation(
+              this.customData.langVars.default
+            );
           }
         }
 
         // translate by properies, e.g. de.cart.add
-        return this.customData.i18n.get([langcode, ...this.customData.properties], this.customData.vars)
-        .then((local: string) => {
-          if (local && typeof(local) === 'string') {
-            // console.warn('Translate by properties', [langcode, ...this.customData.properties], local);
-            return this.customData.applyTranslation(local);
-          }
-          // get the default translation if available
-          if (this.customData.langVars && this.customData.langVars.default) {
-            // console.warn('Translate by default as fallback', this.customData.langVars.default);
-            return this.customData.applyTranslation(this.customData.langVars.default);
-          }
+        return this.customData.i18n
+          .get([langcode, ...this.customData.properties], this.customData.vars)
+          .then((local: string) => {
+            if (local && typeof local === "string") {
+              // console.warn('Translate by properties', [langcode, ...this.customData.properties], local);
+              return this.customData.applyTranslation(local);
+            }
+            // get the default translation if available
+            if (this.customData.langVars && this.customData.langVars.default) {
+              // console.warn('Translate by default as fallback', this.customData.langVars.default);
+              return this.customData.applyTranslation(
+                this.customData.langVars.default
+              );
+            }
 
-          return this.customData.applyTranslation(null);
-        })
-        .catch((error: Error) => {
-          console.error(error);
-        });
+            return this.customData.applyTranslation(null);
+          })
+          .catch((error: Error) => {
+            console.error(error);
+          });
       };
 
-      this.customData.onAttributeChanged = (data: BinderAttributeChangedEvent) => {
-        if (data.detail.name.startsWith('data-')) {
+      this.customData.onAttributeChanged = (
+        data: BinderAttributeChangedEvent
+      ) => {
+        if (data.detail.name.startsWith("data-")) {
           const varName = data.detail.name.slice(5);
           const newVar: any = {};
           newVar[varName] = data.detail.newValue;
@@ -139,7 +157,10 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
         }
       };
 
-      this.customData.onLanguageChanged = (langcode: string, initial: boolean) => {
+      this.customData.onLanguageChanged = (
+        langcode: string,
+        initial: boolean
+      ) => {
         // Do not translate on inital language change, we use the ready event for this
         if (!initial) {
           this.customData.translate(langcode);
@@ -149,50 +170,74 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (localesService: ALo
       /**
        * Initial stuff wee need to do after the language service is ready
        */
-      this.customData.initOnReady = (langcode: string, translationNeeded: boolean) => {
+      this.customData.initOnReady = (
+        langcode: string,
+        translationNeeded: boolean
+      ) => {
         // Translate on translation service ready if needed
         if (translationNeeded) {
           this.customData.translate(langcode);
         }
 
         // Translate if language changes
-        this.customData.i18n.event.on('changed', this.customData.onLanguageChanged);
+        this.customData.i18n.event.on(
+          "changed",
+          this.customData.onLanguageChanged
+        );
 
         // Translate if binder attribute event is changed
-        el.addEventListener('binder-changed', this.customData.onAttributeChanged);
+        el.addEventListener(
+          "binder-changed",
+          this.customData.onAttributeChanged
+        );
       };
     },
 
     routine(el: HTMLElement, translateMePathString?: string) {
       if (this.customData.translateMePathString === null) {
-
         // if this is the first call of this function
         this.customData.translateMePathString = translateMePathString;
         if (translateMePathString) {
-          this.customData.properties = this.customData.translateMePathString.split('.');
+          this.customData.properties = this.customData.translateMePathString.split(
+            "."
+          );
         }
 
         this.customData.parseVars(el);
 
         // Translate if language is ready
         if (this.customData.i18n.ready) {
-          this.customData.initOnReady(this.customData.i18n.getLangcode(), this.customData.i18n.currentLangcode !== this.customData.i18n.initalLangcode || !localesService.doNotTranslateDefaultLanguage);
+          this.customData.initOnReady(
+            this.customData.i18n.getLangcode(),
+            this.customData.i18n.currentLangcode !==
+              this.customData.i18n.initalLangcode ||
+              !localesService.doNotTranslateDefaultLanguage
+          );
         } else {
-          this.customData.i18n.event.on('ready', this.customData.initOnReady);
+          this.customData.i18n.event.on("ready", this.customData.initOnReady);
         }
-      } else if (this.customData.translateMePathString !== translateMePathString) {
+      } else if (
+        this.customData.translateMePathString !== translateMePathString
+      ) {
         // If translate string was changed
         this.customData.translateMePathString = translateMePathString;
-        this.customData.properties = this.customData.translateMePathString.split('.');
+        this.customData.properties = this.customData.translateMePathString.split(
+          "."
+        );
         this.customData.parseVars(el);
         this.customData.translate();
       }
     },
 
     unbind() {
-      this.el.removeEventListener('binder-changed', this.customData.onAttributeChanged);
-      this.customData.i18n.event.off('changed', this.customData.onLanguageChanged);
+      this.el.removeEventListener(
+        "binder-changed",
+        this.customData.onAttributeChanged
+      );
+      this.customData.i18n.event.off(
+        "changed",
+        this.customData.onLanguageChanged
+      );
     },
-
   } as Binder<string>;
 };

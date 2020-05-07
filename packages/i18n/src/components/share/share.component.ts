@@ -35,7 +35,7 @@ export const i18nShareComponentWrapper = (
   return class I18nShareComponent extends Bs4ShareComponent {
     public static tagName = "i18n-share";
 
-    public _debug = true;
+    public _debug = false;
 
     static get observedAttributes() {
       return [
@@ -87,7 +87,7 @@ export const i18nShareComponentWrapper = (
       return this.localesService
         .get([langcode, ...value.split(".")])
         .then((locale: string) => {
-          // console.debug('changed local', local);
+          // this.debug('changed local', local);
           return locale;
         })
         .catch((error: Error) => {
@@ -96,7 +96,7 @@ export const i18nShareComponentWrapper = (
     }
 
     protected async beforeBind() {
-      // console.debug('beforeBind');
+      // this.debug('beforeBind');
       await super.beforeBind();
       const langcode = await this.initTranslate();
 

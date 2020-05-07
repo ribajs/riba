@@ -62,7 +62,7 @@ declare global {
 export class Bs4ShareComponent extends Component {
   public static tagName = "bs4-share";
 
-  public _debug = true;
+  public _debug = false;
 
   static get observedAttributes() {
     return ["type", "title", "text", "url", "media-url", "label", "dropdown-direction"];
@@ -305,7 +305,7 @@ export class Bs4ShareComponent extends Component {
     controller: any,
     el: HTMLAnchorElement
   ) {
-    console.debug('Open popup');
+    this.debug('Open popup');
 
     this.dropdown?.close();
 
@@ -322,7 +322,7 @@ export class Bs4ShareComponent extends Component {
     event.preventDefault();
     event.stopPropagation();
 
-    // console.debug('Open popup');
+    // this.debug('Open popup');
 
     window.open(
       el.href,
@@ -336,7 +336,7 @@ export class Bs4ShareComponent extends Component {
   }
 
   public async share(event: Event): Promise<any> {
-    console.debug('share', this.scope);
+    this.debug('share', this.scope);
     event.preventDefault();
     event.stopPropagation();
     if (this.scope.isNative && !this.scope.isDesktop) {
@@ -349,7 +349,7 @@ export class Bs4ShareComponent extends Component {
         .catch((error: DOMException) => {
           if (error.name === "AbortError") {
             // TODO show flash message
-            // console.debug(error.message);
+            // this.debug(error.message);
             return;
           }
           console.error(`Error ${error.name}: ${error.message}`, error);
@@ -362,13 +362,13 @@ export class Bs4ShareComponent extends Component {
 
   protected async beforeBind() {
     await super.beforeBind();
-    // console.debug('beforeBind');
+    // this.debug('beforeBind');
   }
 
   protected async afterBind() {
     await super.afterBind();
     this.initDropdown();
-    // console.debug('afterBind', this.scope);
+    // this.debug('afterBind', this.scope);
   }
 
   protected requiredAttributes() {
