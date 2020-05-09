@@ -104,12 +104,19 @@ export class LeafletMapComponent extends Component {
   protected template() {
     for(let el of this.el.children) {
       if(el.tagName === "MARKER") {
-        this.markers.push({
-          lat: el.getAttribute("lat"),
-          lng: el.getAttribute("lng"),
-          title: el.innerText,
-          openByDefault: el.hasAttribute("openByDefault") ? el.getAttribute("openByDefault") === "true" : true
-        });
+        var lat = el.getAttribute("lat"); 
+        var lng = el.getAttribute("lng");
+        var title = el.textContent;
+        if(lat != undefined && lng != undefined && title != undefined) {
+          this.markers.push({
+            lat: +lat,
+            lng: +lng,
+            title: title,
+            openByDefault: el.hasAttribute("openByDefault") ? el.getAttribute("openByDefault") === "true" : true
+          });
+        } else {
+          console.warn("marker without enough data found");
+        }
       }
     }
     return template;
