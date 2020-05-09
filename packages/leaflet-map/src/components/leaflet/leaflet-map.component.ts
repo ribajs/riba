@@ -69,15 +69,28 @@ export class LeafletMapComponent extends Component {
     await super.afterBind();
     var map = new L.Map("map").setView([this.scope.initialLat, this.scope.initialLng], this.scope.initialZoom);;
     
+    var defaultMarker = L.icon({
+      iconUrl: markerIcon,
+      shadowUrl: markerShadow,
+      iconSize: [25, 41],
+      iconAnchor: [14, 40],
+      popupAnchor: [-1, -41],
+      shadowSize: [25, 41],
+      shadowAnchor: [10, 40]
+
+  });
+
     L.tileLayer(this.scope.tileUrl, {
       attribution: this.scope.attribution
     }).addTo(map);
 
     for(let marker of this.markers) {
-      let leatfletMarker = L.marker([marker.lat, marker.lng])
+      let leatfletMarker = L.marker([marker.lat, marker.lng], {icon: defaultMarker})
       .addTo(map)
-      .bindPopup('Popup')
-      .openPopup();
+      .bindPopup(marker.title);
+      if(marker.openByDefault) {
+        leatfletMarker.openPopup();
+      }
     }
 
   }
@@ -94,8 +107,8 @@ export class LeafletMapComponent extends Component {
         this.markers.push({
           lat: el.getAttribute("lat"),
           lng: el.getAttribute("lng"),
-          title: el.getAttribute("title"),
-          openByDefault: el.getAttribute("openByDefault")
+          title: el.innerText,
+          openByDefault: el.hasAttribute("openByDefault") ? el.getAttribute("openByDefault") === "true" : true
         });
       }
     }

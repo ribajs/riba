@@ -59,10 +59,10 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-array-includes": "^2.0.3",
     "core-js": "^3.6.5",
-    "eslint": "^6.8.0",
+    "eslint": "^7.0.0",
     "jest": "^26.0.1",
     "jest-extended": "^0.11.5",
-    "ts-jest": "^25.5.0",
+    "ts-jest": "^25.5.1",
     "typescript": "^3.8.3",
     "webpack": "^5.0.0-beta.16",
     "webpack-cli": "^3.3.11"

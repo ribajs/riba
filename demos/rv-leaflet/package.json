@@ -30,6 +30,7 @@
     "@babel/plugin-transform-runtime": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-typescript": "^7.9.0",
+    "@babel/runtime": "^7.9.6",
     "@babel/runtime-corejs3": "^7.9.2",
     "@ribajs/eslint-config": "latest",
     "@ribajs/tsconfig": "latest",
@@ -63,7 +64,7 @@
     "terser-webpack-plugin": "^2.3.5",
     "ts-jest": "^25.3.0",
     "typescript": "^3.8.3",
-    "webpack": "5.0.0-beta.15",
+    "webpack": "5.0.0-beta.16",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
   },

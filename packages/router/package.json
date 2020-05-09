@@ -53,7 +53,7 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-array-includes": "^2.0.3",
     "core-js": "^3.6.5",
-    "eslint": "^6.8.0",
+    "eslint": "^7.0.0",
     "eslint-visitor-keys": "^1.1.0",
     "regexpp": "^3.1.0",
     "tsutils": "^3.17.1",
