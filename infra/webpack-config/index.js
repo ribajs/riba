@@ -118,6 +118,7 @@ module.exports = config => {
           "@ribajs/iconset": true,
           "@ribajs/i18n": true,
           "@ribajs/shopify": false,
+          "@ribajs/leaflet": true,
           "@ribajs/shopify-tda": false,
           "@ribajs/shopify-easdk": false,
         }
