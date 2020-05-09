@@ -1,0 +1,7 @@
+{
+  "extends": "@ribajs/tsconfig",
+  "compilerOptions": {
+    "outDir": "dist",
+    "typeRoots": ["./node_modules/@types", "./src/types"]
+  }
+}
