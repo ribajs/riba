@@ -189,9 +189,9 @@ export class View {
     });
 
     this.bindings.forEach((binding) => {
-      if ((binding as Binding).update) {
+      // if ((binding as Binding).update) {
         (binding as Binding).update(models);
-      }
+      // }
     });
   }
 

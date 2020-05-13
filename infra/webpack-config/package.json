@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/webpack-config",
-  "version": "0.0.1",
+  "version": "1.9.0-alpha.0",
   "description": "Default webpack configs used in Riba.js projects",
   "scripts": {},
   "main": "index.js",
@@ -36,7 +36,7 @@
     "sass-loader": "^8.0.2",
     "terser-webpack-plugin": "^3.0.1",
     "webpack": "^5.0.0-beta.16",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.11.0"
   },
   "devDependencies": {
     "glob": "^7.1.6"

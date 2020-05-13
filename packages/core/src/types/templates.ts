@@ -8,3 +8,8 @@ declare module "*.pug" {
   const pug: (locals?: any) => string;
   export default pug;
 }
+
+declare module "*.svg" {
+  const svg: string;
+  export default svg;
+}
