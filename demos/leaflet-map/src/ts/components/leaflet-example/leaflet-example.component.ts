@@ -15,7 +15,6 @@ export class LeafletExampleComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    console.debug("constructor", this);
   }
 
   protected connectedCallback() {

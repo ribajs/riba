@@ -32,3 +32,7 @@ lerna-debug.log*
 # Yarn
 .yarn/cache/
 .yarn/unplugged/
+
+
+/demos/*/src/iconset/
+/demos/*/src/scss/vendors
