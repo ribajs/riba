@@ -1,0 +1,26 @@
+// Original Bootstrap 4 Styles
+@import './vendors/bootstrap/bootstrap';
+
+// Bootstrap style extensions from Riba.js modules
+@import "./vendors/@ribajs/bs4/index";
+@import "./vendors/@ribajs/leaflet-map/index";
+
+// @import './binders/index';
+@import '../ts/components/index';
+// @import './formatters/index';
+
+
+body {
+  background-color: #6634db;
+  color: $light;
+  height: 100%;
+  width: 100%;
+}
+html {
+  height: 100%;
+  width: 100%;
+}
+
+h2 {
+  margin-bottom: 2em;
+}

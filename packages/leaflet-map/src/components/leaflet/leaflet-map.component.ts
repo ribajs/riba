@@ -25,9 +25,6 @@ export class LeafletMapComponent extends Component {
 
   protected autobind = true;
 
-  protected listeners = {
-  };
-
   protected markers: Marker[] = [];
 
   static get observedAttributes() {
@@ -67,7 +64,9 @@ export class LeafletMapComponent extends Component {
 
   protected async afterBind() {
     await super.afterBind();
-    var map = new L.Map("map").setView([this.scope.initialLat, this.scope.initialLng], this.scope.initialZoom);;
+    var mapId = 'map-'+Math.floor(Math.random() * 9999);
+    this.el.querySelector('.leaflet-map').id = mapId;
+    var map = new L.Map(mapId).setView([this.scope.initialLat, this.scope.initialLng], this.scope.initialZoom);;
     
     var defaultMarker = L.icon({
       iconUrl: markerIcon,
@@ -107,9 +106,9 @@ export class LeafletMapComponent extends Component {
         var lat = el.getAttribute("lat"); 
         var lng = el.getAttribute("lng");
         var title = el.textContent;
-        if(lat != undefined && lng != undefined && title != undefined) {
+        if(lat !== undefined && lng !== undefined && title !==   undefined) {
           this.markers.push({
-            lat: +lat,
+            lat: lat,
             lng: +lng,
             title: title,
             openByDefault: el.hasAttribute("openByDefault") ? el.getAttribute("openByDefault") === "true" : true
