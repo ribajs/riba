@@ -33,6 +33,8 @@ lerna-debug.log*
 .yarn/cache/
 .yarn/unplugged/
 
-
+# Demos
 /demos/*/src/iconset/
 /demos/*/src/scss/vendors
+/demos/*/.yarn/cache/
+/demos/*/.yarn/unplugged/
