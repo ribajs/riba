@@ -99,7 +99,7 @@ class Prefetch {
       }
     } else {
       if (!preventCheck) {
-        console.warn('preventCheck failed: ' + url, preventCheck);
+        // console.warn('preventCheck failed: ' + url, preventCheck);
       }
     }
   }

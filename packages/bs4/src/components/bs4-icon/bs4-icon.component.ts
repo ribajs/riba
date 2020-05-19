@@ -22,7 +22,7 @@ export class Bs4IconComponent extends Component {
 
     if (name === 'src') {
       if (!newValue) {
-        console.warn('The src attribute must have a value!');
+        console.warn('The src attribute must have a value!', this.scope);
         return '';
       }
       if (fetch) {
