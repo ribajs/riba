@@ -111,6 +111,7 @@ module.exports = config => {
           "@ribajs/shopify": false,
           "@ribajs/shopify-tda": false,
           "@ribajs/shopify-easdk": false,
+          "@ribajs/pdf": true,
         }
       }
       break;
@@ -139,6 +140,7 @@ module.exports = config => {
           "@ribajs/shopify": true,
           "@ribajs/shopify-tda": true,
           "@ribajs/shopify-easdk": false,
+          "@ribajs/pdf": true,
         }
       }
       break;
@@ -168,6 +170,7 @@ module.exports = config => {
           "@ribajs/shopify": true,
           "@ribajs/shopify-tda": true,
           "@ribajs/shopify-easdk": true,
+          "@ribajs/pdf": true,
         }
       }
 
@@ -192,11 +195,11 @@ module.exports = config => {
     const CopyPlugin = require("copy-webpack-plugin");
     var copyPluginConfigs = getCopyPluginConfig(config);
 
-    // Copy the files before the build starts for the case the files are required for the build itself
-    copy(copyPluginConfigs);
-    plugins.push(new CopyPlugin(copyPluginConfigs));
+    console.debug('copyPluginConfigs: ', copyPluginConfigs)
 
-    // console.debug('copyPluginConfigs: ', copyPluginConfigs)
+    // Copy the files before the build starts for the case the files are required for the build itself
+    copy(copyPluginConfigs.patterns);
+    plugins.push(new CopyPlugin(copyPluginConfigs));
   }
 
   if (config.detectDuplicates === true) {

@@ -24,7 +24,7 @@
     "@babel/preset-typescript": "^7.9.0",
     "@babel/runtime-corejs3": "^7.9.6",
     "babel-loader": "^8.1.0",
-    "copy-webpack-plugin": "^5.1.1",
+    "copy-webpack-plugin": "^6.0.1",
     "css-loader": "^3.5.3",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.3.0",
