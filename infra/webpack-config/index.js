@@ -63,6 +63,15 @@ module.exports = config => {
         }
       }]
     },
+    // image templates  
+    {
+      test: /\.(png|jpe?g|gif)$/i,
+      use: [
+        {
+          loader: 'file-loader',
+        },
+      ],
+    },
     // pug templates
     {
       test: /\.pug$/,
@@ -109,6 +118,7 @@ module.exports = config => {
           "@ribajs/iconset": true,
           "@ribajs/i18n": true,
           "@ribajs/shopify": false,
+          "@ribajs/leaflet-map": true,
           "@ribajs/shopify-tda": false,
           "@ribajs/shopify-easdk": false,
           "@ribajs/pdf": true,
@@ -141,6 +151,7 @@ module.exports = config => {
           "@ribajs/shopify-tda": true,
           "@ribajs/shopify-easdk": false,
           "@ribajs/pdf": true,
+          '@ribajs/leaflet-map': true,
         }
       }
       break;

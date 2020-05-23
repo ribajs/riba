@@ -1,6 +1,6 @@
 # compiled output
-/lib
 /dist
+/lib
 /node_modules
 /.cache
 # Logs
@@ -30,11 +30,8 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 # Yarn
+yarn.lock
+.pnp.js
 .yarn/cache/
 .yarn/unplugged/
-
-# Demos
-/demos/*/src/iconset/
-/demos/*/src/scss/vendors
-/demos/*/.yarn/cache/
-/demos/*/.yarn/unplugged/
+.yarn/build-state.yml
