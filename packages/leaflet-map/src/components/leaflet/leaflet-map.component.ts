@@ -88,7 +88,7 @@ export class LeafletMapComponent extends Component {
 
     for(let marker of this.markers) {
       var icon = this.defaultIcon;  
-      if(marker.icon !== undefined) {
+      if(marker.icon !== undefined && marker.icon !== null) {
         icon = this.icons[marker.icon]
       }
       let leatfletMarker = L.marker([marker.lat, marker.lng], {icon: icon})
@@ -111,13 +111,13 @@ export class LeafletMapComponent extends Component {
     for(let el of this.el.children) {
       if(el.tagName === "ICON") {
         var iconName = el.getAttribute("name"); 
-        var iconUrl = el.getAttribute("iconUrl");
-        var shadowUrl = el.getAttribute("shadowUrl");
-        var iconSize = el.getAttribute("iconSize"); 
-        var iconAnchor = el.getAttribute("iconAnchor");
-        var popupAnchor = el.getAttribute("popupAnchor");
-        var shadowSize = el.getAttribute("shadowSize");
-        var shadowAnchor = el.getAttribute("shadowAnchor");
+        var iconUrl = el.getAttribute("icon-url");
+        var shadowUrl = el.getAttribute("shadow-url");
+        var iconSize = el.getAttribute("icon-size"); 
+        var iconAnchor = el.getAttribute("icon-anchor");
+        var popupAnchor = el.getAttribute("popup-anchor");
+        var shadowSize = el.getAttribute("shadow-size");
+        var shadowAnchor = el.getAttribute("shadow-anchor");
         this.icons[iconName] = L.icon({
           iconUrl: iconUrl,
           shadowUrl: shadowUrl,
@@ -139,7 +139,7 @@ export class LeafletMapComponent extends Component {
             lng: +lng,
             title: title,
             icon: icon,
-            openByDefault: el.hasAttribute("openByDefault") ? el.getAttribute("openByDefault") === "true" : true
+            openByDefault: el.hasAttribute("open-by-default") ? el.getAttribute("open-by-default") === "true" : true
           });
         } else {
           console.warn("marker without enough data found");

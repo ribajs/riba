@@ -2106,6 +2106,7 @@ __metadata:
     babel-loader: ^8.1.0
     copy-webpack-plugin: ^5.1.1
     css-loader: ^3.5.3
+    file-loader: ^6.0.0
     glob: ^7.1.6
     html-loader: ^1.1.0
     html-webpack-plugin: ^4.3.0
@@ -6087,6 +6088,18 @@ __metadata:
   dependencies:
     flat-cache: ^2.0.1
   checksum: fde5e84886156caeadc05c2963a03e8f2b5645335f0022c24437f323f2d395505740e9d043ec1f8da7d8c26fb9fedddf241b9bb604b646f377ab0fb991ab9d8f
+  languageName: node
+  linkType: hard
+
+"file-loader@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "file-loader@npm:6.0.0"
+  dependencies:
+    loader-utils: ^2.0.0
+    schema-utils: ^2.6.5
+  peerDependencies:
+    webpack: ^4.0.0 || ^5.0.0
+  checksum: 8934fcd5e78cd57b0dad36de227af4f42edf18caff37beb08f0294d3d7841a8f2403d24ad7d4ac07f23baba990579506f10962b4e614fd3b5ab18a5889d90bd8
   languageName: node
   linkType: hard
 

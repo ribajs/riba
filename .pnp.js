@@ -2768,6 +2768,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["babel-loader", "virtual:4fb9e92356d60e66ab874eef396143a3af99713edba79353e0d10fa019e8be6f51d7737835523cafeeef44291097116133f9331753470cf8ce0e4f89be789aaf#npm:8.1.0"],
             ["copy-webpack-plugin", "virtual:9820ff2c59ee2ef9ad06b6e3ec372ec769172aaeaab293f033617a31188166bca05730403c319ea187a93e6d414834cfae89d84ac159c71d512fb96d88989f86#npm:5.1.1"],
             ["css-loader", "virtual:9820ff2c59ee2ef9ad06b6e3ec372ec769172aaeaab293f033617a31188166bca05730403c319ea187a93e6d414834cfae89d84ac159c71d512fb96d88989f86#npm:3.5.3"],
+            ["file-loader", "virtual:9820ff2c59ee2ef9ad06b6e3ec372ec769172aaeaab293f033617a31188166bca05730403c319ea187a93e6d414834cfae89d84ac159c71d512fb96d88989f86#npm:6.0.0"],
             ["glob", "npm:7.1.6"],
             ["html-loader", "virtual:9820ff2c59ee2ef9ad06b6e3ec372ec769172aaeaab293f033617a31188166bca05730403c319ea187a93e6d414834cfae89d84ac159c71d512fb96d88989f86#npm:1.1.0"],
             ["html-webpack-plugin", "virtual:9820ff2c59ee2ef9ad06b6e3ec372ec769172aaeaab293f033617a31188166bca05730403c319ea187a93e6d414834cfae89d84ac159c71d512fb96d88989f86#npm:4.3.0"],
@@ -7354,6 +7355,21 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["file-entry-cache", "npm:5.0.1"],
             ["flat-cache", "npm:2.0.1"]
+          ],
+          "linkType": "HARD"
+        }]
+      ]],
+      ["file-loader", [
+        ["virtual:9820ff2c59ee2ef9ad06b6e3ec372ec769172aaeaab293f033617a31188166bca05730403c319ea187a93e6d414834cfae89d84ac159c71d512fb96d88989f86#npm:6.0.0", {
+          "packageLocation": "./.yarn/$$virtual/file-loader-virtual-77e81a40d5/0/cache/file-loader-npm-6.0.0-56aa137384-1.zip/node_modules/file-loader/",
+          "packageDependencies": [
+            ["file-loader", "virtual:9820ff2c59ee2ef9ad06b6e3ec372ec769172aaeaab293f033617a31188166bca05730403c319ea187a93e6d414834cfae89d84ac159c71d512fb96d88989f86#npm:6.0.0"],
+            ["loader-utils", "npm:2.0.0"],
+            ["schema-utils", "npm:2.6.6"],
+            ["webpack", "npm:5.0.0-beta.16"]
+          ],
+          "packagePeers": [
+            "webpack"
           ],
           "linkType": "HARD"
         }]
