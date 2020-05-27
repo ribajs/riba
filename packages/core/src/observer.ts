@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import {
   Adapters,
   Root,
@@ -13,7 +14,7 @@ export class Observer {
   public static interfaces: string[] = [];
   public static rootInterface: Root;
 
-  public static updateOptions(options: Partial<Options>) {
+  public static updateOptions(options: Partial<Options>): void {
     if (!options.adapters) {
       throw new Error("adapters are required!");
     }
@@ -34,7 +35,7 @@ export class Observer {
    * Tokenizes the provided keypath string into interface + path tokens for the
    * observer to work with.
    */
-  public static tokenize(keypath: string, root: Root) {
+  public static tokenize(keypath: string, root: Root): any[] {
     const tokens: any[] = [];
     let current: Key = { i: root, path: "" };
     let index: number;

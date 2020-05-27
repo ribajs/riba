@@ -27,6 +27,7 @@
     "copy-webpack-plugin": "^6.0.1",
     "css-loader": "^3.5.3",
     "file-loader": "^6.0.0",
+    "glob": "^7.1.6",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.3.0",
     "inspectpack": "^4.4.0",
@@ -38,8 +39,5 @@
     "terser-webpack-plugin": "^3.0.1",
     "webpack": "^5.0.0-beta.16",
     "webpack-dev-server": "^3.11.0"
-  },
-  "devDependencies": {
-    "glob": "^7.1.6"
   }
 }

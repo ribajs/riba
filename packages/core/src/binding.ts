@@ -154,7 +154,7 @@ export class Binding {
    * Applies all the current formatters to the supplied value and returns the
    * formatted value.
    */
-  public formattedValue(value: any) {
+  public formattedValue(value: any): any {
     if (this.formatters === null) {
       throw new Error(`[${this.binder.name} formatters is null`);
     }

@@ -363,7 +363,7 @@ export class PhotoswipeComponent extends Component {
 
   // Scope methods
 
-  public openByIndex(index: number) {
+  public openByIndex(index: number): void {
     return this.open(this.scope.items[index]);
   }
 

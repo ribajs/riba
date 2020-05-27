@@ -1514,22 +1514,26 @@ __metadata:
     "@babel/runtime-corejs3": ^7.9.6
     "@ribajs/cache": "portal:packages/cache::locator=ribajs%40workspace%3A."
     "@ribajs/core": "portal:packages/core::locator=ribajs%40workspace%3A."
+    "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@ribajs/extras": "portal:packages/extras::locator=ribajs%40workspace%3A."
     "@ribajs/tsconfig": "portal:infra/tsconfig::locator=ribajs%40workspace%3A."
     "@ribajs/types": "portal:infra/types::locator=ribajs%40workspace%3A."
     "@ribajs/utils": "portal:packages/utils::locator=ribajs%40workspace%3A."
-    "@types/jest": ^25.2.1
-    "@typescript-eslint/eslint-plugin": ^2.33.0
-    "@typescript-eslint/parser": ^2.33.0
+    "@types/jest": ^25.2.3
+    "@typescript-eslint/eslint-plugin": ^3.0.2
+    "@typescript-eslint/parser": ^3.0.2
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     bootstrap: ^4.5.0
     core-js: ^3.6.5
-    eslint: ^7.0.0
+    eslint: ^7.1.0
+    eslint-config-prettier: ^6.11.0
+    eslint-plugin-prettier: ^3.1.3
     jest: ^26.0.1
     jest-extended: ^0.11.5
     popper.js: ^1.16.1
-    ts-jest: ^25.5.1
+    prettier: ^2.0.5
+    ts-jest: ^26.0.0
     typescript: ^3.9.2
     webpack: ^5.0.0-beta.16
     webpack-cli: ^3.3.11
@@ -1551,21 +1555,25 @@ __metadata:
     "@babel/runtime-corejs3": ^7.9.6
     "@ribajs/cache": "portal:packages/cache::locator=ribajs%40workspace%3A."
     "@ribajs/core": "portal:packages/core::locator=ribajs%40workspace%3A."
+    "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@ribajs/extras": "portal:packages/extras::locator=ribajs%40workspace%3A."
     "@ribajs/tsconfig": "portal:infra/tsconfig::locator=ribajs%40workspace%3A."
     "@ribajs/types": "portal:infra/types::locator=ribajs%40workspace%3A."
     "@ribajs/utils": "portal:packages/utils::locator=ribajs%40workspace%3A."
     "@types/jest": ^25.2.3
-    "@typescript-eslint/eslint-plugin": ^2.34.0
-    "@typescript-eslint/parser": ^2.34.0
+    "@typescript-eslint/eslint-plugin": ^3.0.2
+    "@typescript-eslint/parser": ^3.0.2
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     bootstrap: ^4.5.0
     core-js: ^3.6.5
-    eslint: ^7.0.0
+    eslint: ^7.1.0
+    eslint-config-prettier: ^6.11.0
+    eslint-plugin-prettier: ^3.1.3
     jest: ^26.0.1
     jest-extended: ^0.11.5
     popper.js: ^1.16.1
+    prettier: ^2.0.5
     ts-jest: ^26.0.0
     typescript: ^3.9.2
     webpack: ^5.0.0-beta.16
@@ -1576,12 +1584,28 @@ __metadata:
 "@ribajs/cache@portal:packages/cache::locator=ribajs%40workspace%3A.":
   version: 0.0.0-use.local
   resolution: "@ribajs/cache@portal:packages/cache::locator=ribajs%40workspace%3A."
+  dependencies:
+    "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
+    "@typescript-eslint/eslint-plugin": ^3.0.2
+    "@typescript-eslint/parser": ^3.0.2
+    eslint: ^7.1.0
+    eslint-config-prettier: ^6.11.0
+    eslint-plugin-prettier: ^3.1.3
+    prettier: ^2.0.5
   languageName: node
   linkType: soft
 
 "@ribajs/cache@workspace:packages/cache":
   version: 0.0.0-use.local
   resolution: "@ribajs/cache@workspace:packages/cache"
+  dependencies:
+    "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
+    "@typescript-eslint/eslint-plugin": ^3.0.2
+    "@typescript-eslint/parser": ^3.0.2
+    eslint: ^7.1.0
+    eslint-config-prettier: ^6.11.0
+    eslint-plugin-prettier: ^3.1.3
+    prettier: ^2.0.5
   languageName: unknown
   linkType: soft
 
@@ -1603,15 +1627,15 @@ __metadata:
     "@ribajs/types": "portal:infra/types::locator=ribajs%40workspace%3A."
     "@ribajs/utils": "portal:packages/utils::locator=ribajs%40workspace%3A."
     "@types/core-js": ^2.5.3
-    "@types/jest": ^25.2.1
+    "@types/jest": ^25.2.3
     "@types/node": ^14.0.1
-    "@typescript-eslint/eslint-plugin": ^2.33.0
-    "@typescript-eslint/parser": ^2.33.0
+    "@typescript-eslint/eslint-plugin": ^3.0.2
+    "@typescript-eslint/parser": ^3.0.2
     babel-jest: ^26.0.1
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     core-js: ^3.6.5
-    eslint: ^7.0.0
+    eslint: ^7.1.0
     eslint-config-prettier: ^6.11.0
     eslint-plugin-prettier: ^3.1.3
     jest: ^26.0.1
@@ -1619,7 +1643,7 @@ __metadata:
     jest-extended: ^0.11.5
     prettier: ^2.0.5
     source-map-support: ^0.5.19
-    ts-jest: ^25.5.1
+    ts-jest: ^26.0.0
     typescript: ^3.9.2
     uglifyjs-webpack-plugin: ^2.2.0
     webpack: ^5.0.0-beta.16
@@ -1648,13 +1672,13 @@ __metadata:
     "@types/core-js": ^2.5.3
     "@types/jest": ^25.2.3
     "@types/node": ^14.0.1
-    "@typescript-eslint/eslint-plugin": ^2.34.0
-    "@typescript-eslint/parser": ^2.34.0
+    "@typescript-eslint/eslint-plugin": ^3.0.2
+    "@typescript-eslint/parser": ^3.0.2
     babel-jest: ^26.0.1
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     core-js: ^3.6.5
-    eslint: ^7.0.0
+    eslint: ^7.1.0
     eslint-config-prettier: ^6.11.0
     eslint-plugin-prettier: ^3.1.3
     jest: ^26.0.1
@@ -1675,8 +1699,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/eslint-config@portal:infra/eslint-config::locator=ribajs%40workspace%3A."
   dependencies:
-    "@typescript-eslint/eslint-plugin": ^2.33.0
-    "@typescript-eslint/parser": ^2.33.0
+    "@typescript-eslint/eslint-plugin": ^2.34.0
+    "@typescript-eslint/experimental-utils": ^3.0.2
+    "@typescript-eslint/parser": ^2.34.0
     eslint: ^7.0.0
     eslint-config-prettier: ^6.11.0
     eslint-plugin-prettier: ^3.1.3
@@ -1690,6 +1715,7 @@ __metadata:
   resolution: "@ribajs/eslint-config@workspace:infra/eslint-config"
   dependencies:
     "@typescript-eslint/eslint-plugin": ^2.34.0
+    "@typescript-eslint/experimental-utils": ^3.0.2
     "@typescript-eslint/parser": ^2.34.0
     eslint: ^7.0.0
     eslint-config-prettier: ^6.11.0
@@ -1713,17 +1739,21 @@ __metadata:
     "@babel/preset-typescript": ^7.9.0
     "@babel/runtime-corejs3": ^7.9.6
     "@ribajs/core": "portal:packages/core::locator=ribajs%40workspace%3A."
+    "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@ribajs/utils": "portal:packages/utils::locator=ribajs%40workspace%3A."
-    "@types/jest": ^25.2.1
-    "@typescript-eslint/eslint-plugin": ^2.33.0
-    "@typescript-eslint/parser": ^2.33.0
+    "@types/jest": ^25.2.3
+    "@typescript-eslint/eslint-plugin": ^3.0.2
+    "@typescript-eslint/parser": ^3.0.2
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     core-js: ^3.6.5
-    eslint: ^7.0.0
+    eslint: ^7.1.0
+    eslint-config-prettier: ^6.11.0
+    eslint-plugin-prettier: ^3.1.3
     jest: ^26.0.1
     jest-extended: ^0.11.5
-    ts-jest: ^25.5.1
+    prettier: ^2.0.5
+    ts-jest: ^26.0.0
     typescript: ^3.9.2
     webpack: ^5.0.0-beta.16
     webpack-cli: ^3.3.11
@@ -1744,16 +1774,20 @@ __metadata:
     "@babel/preset-typescript": ^7.9.0
     "@babel/runtime-corejs3": ^7.9.6
     "@ribajs/core": "portal:packages/core::locator=ribajs%40workspace%3A."
+    "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@ribajs/utils": "portal:packages/utils::locator=ribajs%40workspace%3A."
     "@types/jest": ^25.2.3
-    "@typescript-eslint/eslint-plugin": ^2.34.0
-    "@typescript-eslint/parser": ^2.34.0
+    "@typescript-eslint/eslint-plugin": ^3.0.2
+    "@typescript-eslint/parser": ^3.0.2
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     core-js: ^3.6.5
-    eslint: ^7.0.0
+    eslint: ^7.1.0
+    eslint-config-prettier: ^6.11.0
+    eslint-plugin-prettier: ^3.1.3
     jest: ^26.0.1
     jest-extended: ^0.11.5
+    prettier: ^2.0.5
     ts-jest: ^26.0.0
     typescript: ^3.9.2
     webpack: ^5.0.0-beta.16
@@ -1789,10 +1823,15 @@ __metadata:
     "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@ribajs/tsconfig": "portal:infra/tsconfig::locator=ribajs%40workspace%3A."
     "@ribajs/webpack-config": "portal:infra/webpack-config::locator=ribajs%40workspace%3A."
+    "@typescript-eslint/eslint-plugin": ^3.0.2
+    "@typescript-eslint/parser": ^3.0.2
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     core-js: ^3.6.5
-    eslint: ^7.0.0
+    eslint: ^7.1.0
+    eslint-config-prettier: ^6.11.0
+    eslint-plugin-prettier: ^3.1.3
+    prettier: ^2.0.5
     typescript: ^3.9.2
     webpack: ^5.0.0-beta.16
     webpack-cli: ^3.3.11
@@ -1815,10 +1854,15 @@ __metadata:
     "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@ribajs/tsconfig": "portal:infra/tsconfig::locator=ribajs%40workspace%3A."
     "@ribajs/webpack-config": "portal:infra/webpack-config::locator=ribajs%40workspace%3A."
+    "@typescript-eslint/eslint-plugin": ^3.0.2
+    "@typescript-eslint/parser": ^3.0.2
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     core-js: ^3.6.5
-    eslint: ^7.0.0
+    eslint: ^7.1.0
+    eslint-config-prettier: ^6.11.0
+    eslint-plugin-prettier: ^3.1.3
+    prettier: ^2.0.5
     typescript: ^3.9.2
     webpack: ^5.0.0-beta.16
     webpack-cli: ^3.3.11
@@ -1854,16 +1898,20 @@ __metadata:
     "@babel/preset-typescript": ^7.9.0
     "@babel/runtime-corejs3": ^7.9.6
     "@ribajs/cache": "portal:packages/cache::locator=ribajs%40workspace%3A."
+    "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@types/jest": ^25.2.3
     "@types/jquery": ^3.3.38
-    "@typescript-eslint/eslint-plugin": ^2.34.0
-    "@typescript-eslint/parser": ^2.34.0
+    "@typescript-eslint/eslint-plugin": ^3.0.2
+    "@typescript-eslint/parser": ^3.0.2
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     core-js: ^3.6.5
-    eslint: ^7.0.0
+    eslint: ^7.1.0
+    eslint-config-prettier: ^6.11.0
+    eslint-plugin-prettier: ^3.1.3
     jest: ^26.0.1
     jquery: ^3.5.1
+    prettier: ^2.0.5
     ts-jest: ^26.0.0
     typescript: ^3.9.2
     webpack: ^5.0.0-beta.16
@@ -1885,20 +1933,21 @@ __metadata:
     "@babel/preset-env": ^7.9.6
     "@babel/preset-typescript": ^7.9.0
     "@babel/runtime-corejs3": ^7.9.6
-    "@ribajs/bs4": "workspace:packages/bs4"
-    "@ribajs/core": ^1.8.0
-    "@ribajs/eslint-config": "workspace:infra/eslint-config"
-    "@ribajs/extras": "workspace:packages/extras"
-    "@ribajs/tsconfig": "workspace:infra/tsconfig"
+    "@ribajs/bs4": "portal:packages/bs4::locator=ribajs%40workspace%3A."
+    "@ribajs/core": "portal:packages/core::locator=ribajs%40workspace%3A."
+    "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
+    "@ribajs/extras": "portal:packages/extras::locator=ribajs%40workspace%3A."
+    "@ribajs/tsconfig": "portal:infra/tsconfig::locator=ribajs%40workspace%3A."
     "@types/jest": ^25.2.1
     "@types/leaflet": ^1.5.12
-    "@typescript-eslint/eslint-plugin": ^2.31.0
-    "@typescript-eslint/parser": ^2.31.0
+    "@typescript-eslint/eslint-plugin": ^3.0.2
+    "@typescript-eslint/parser": ^3.0.2
     "@yarnpkg/pnpify": ^2.0.0-rc.22
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     core-js: ^3.6.5
-    eslint: ^7.0.0
+    eslint: ^7.1.0
+    eslint-config-prettier: ^6.11.0
     eslint-plugin-prettier: ^3.1.3
     jest: ^26.0.1
     jest-extended: ^0.11.5
@@ -1925,14 +1974,18 @@ __metadata:
     "@babel/preset-typescript": ^7.9.0
     "@babel/runtime-corejs3": ^7.9.6
     "@ribajs/core": "portal:packages/core::locator=ribajs%40workspace%3A."
+    "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@types/jest": ^25.2.3
-    "@typescript-eslint/eslint-plugin": ^2.34.0
-    "@typescript-eslint/parser": ^2.34.0
+    "@typescript-eslint/eslint-plugin": ^3.0.2
+    "@typescript-eslint/parser": ^3.0.2
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     core-js: ^3.6.5
-    eslint: ^7.0.0
+    eslint: ^7.1.0
+    eslint-config-prettier: ^6.11.0
+    eslint-plugin-prettier: ^3.1.3
     jest: ^26.0.1
+    prettier: ^2.0.5
     ts-jest: ^26.0.0
     typescript: ^3.9.2
     webpack: ^5.0.0-beta.16
@@ -1954,18 +2007,22 @@ __metadata:
     "@babel/preset-typescript": ^7.9.0
     "@babel/runtime-corejs3": ^7.9.6
     "@ribajs/cache": "portal:packages/cache::locator=ribajs%40workspace%3A."
+    "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@types/jest": ^25.2.3
     "@types/pdfjs-dist": ^2.1.4
-    "@typescript-eslint/eslint-plugin": ^2.34.0
-    "@typescript-eslint/parser": ^2.34.0
+    "@typescript-eslint/eslint-plugin": ^3.0.2
+    "@typescript-eslint/parser": ^3.0.2
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     core-js: ^3.6.5
-    eslint: ^7.0.0
+    eslint: ^7.1.0
+    eslint-config-prettier: ^6.11.0
+    eslint-plugin-prettier: ^3.1.3
     jest: ^26.0.1
     jest-extended: ^0.11.5
     pdf.js: ^0.1.0
-    pdfjs-dist: ^2.3.200
+    pdfjs-dist: ^2.4.456
+    prettier: ^2.0.5
     ts-jest: ^26.0.0
     typescript: ^3.9.2
     webpack: ^5.0.0-beta.16
@@ -1993,12 +2050,13 @@ __metadata:
     "@ribajs/extras": "portal:packages/extras::locator=ribajs%40workspace%3A."
     "@ribajs/tsconfig": "portal:infra/tsconfig::locator=ribajs%40workspace%3A."
     "@types/jest": ^25.2.3
-    "@typescript-eslint/eslint-plugin": ^2.34.0
-    "@typescript-eslint/parser": ^2.34.0
+    "@typescript-eslint/eslint-plugin": ^3.0.2
+    "@typescript-eslint/parser": ^3.0.2
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     core-js: ^3.6.5
-    eslint: ^7.0.0
+    eslint: ^7.1.0
+    eslint-config-prettier: ^6.11.0
     eslint-plugin-prettier: ^3.1.3
     jest: ^26.0.1
     jest-extended: ^0.11.5
@@ -2024,18 +2082,22 @@ __metadata:
     "@babel/runtime-corejs3": ^7.9.6
     "@ribajs/cache": "portal:packages/cache::locator=ribajs%40workspace%3A."
     "@ribajs/core": "portal:packages/core::locator=ribajs%40workspace%3A."
+    "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@ribajs/history": "portal:packages/history::locator=ribajs%40workspace%3A."
     "@ribajs/tsconfig": "portal:infra/tsconfig::locator=ribajs%40workspace%3A."
     "@ribajs/utils": "portal:packages/utils::locator=ribajs%40workspace%3A."
-    "@typescript-eslint/eslint-plugin": ^2.33.0
-    "@typescript-eslint/experimental-utils": ^2.33.0
-    "@typescript-eslint/parser": ^2.33.0
-    "@typescript-eslint/typescript-estree": ^2.33.0
+    "@typescript-eslint/eslint-plugin": ^3.0.2
+    "@typescript-eslint/experimental-utils": ^2.34.0
+    "@typescript-eslint/parser": ^3.0.2
+    "@typescript-eslint/typescript-estree": ^2.34.0
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     core-js: ^3.6.5
-    eslint: ^7.0.0
+    eslint: ^7.1.0
+    eslint-config-prettier: ^6.11.0
+    eslint-plugin-prettier: ^3.1.3
     eslint-visitor-keys: ^1.1.0
+    prettier: ^2.0.5
     regexpp: ^3.1.0
     tsutils: ^3.17.1
     typescript: ^3.9.2
@@ -2057,18 +2119,22 @@ __metadata:
     "@babel/runtime-corejs3": ^7.9.6
     "@ribajs/cache": "portal:packages/cache::locator=ribajs%40workspace%3A."
     "@ribajs/core": "portal:packages/core::locator=ribajs%40workspace%3A."
+    "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@ribajs/history": "portal:packages/history::locator=ribajs%40workspace%3A."
     "@ribajs/tsconfig": "portal:infra/tsconfig::locator=ribajs%40workspace%3A."
     "@ribajs/utils": "portal:packages/utils::locator=ribajs%40workspace%3A."
-    "@typescript-eslint/eslint-plugin": ^2.34.0
+    "@typescript-eslint/eslint-plugin": ^3.0.2
     "@typescript-eslint/experimental-utils": ^2.34.0
-    "@typescript-eslint/parser": ^2.34.0
+    "@typescript-eslint/parser": ^3.0.2
     "@typescript-eslint/typescript-estree": ^2.34.0
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     core-js: ^3.6.5
-    eslint: ^7.0.0
+    eslint: ^7.1.0
+    eslint-config-prettier: ^6.11.0
+    eslint-plugin-prettier: ^3.1.3
     eslint-visitor-keys: ^1.1.0
+    prettier: ^2.0.5
     regexpp: ^3.1.0
     tsutils: ^3.17.1
     typescript: ^3.9.2
@@ -2089,11 +2155,17 @@ __metadata:
     "@babel/preset-typescript": ^7.9.0
     "@babel/runtime-corejs3": ^7.9.6
     "@ribajs/cache": "portal:packages/cache::locator=ribajs%40workspace%3A."
+    "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@ribajs/router": "portal:packages/router::locator=ribajs%40workspace%3A."
+    "@typescript-eslint/eslint-plugin": ^3.0.2
+    "@typescript-eslint/parser": ^3.0.2
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     core-js: ^3.6.5
-    eslint: ^7.0.0
+    eslint: ^7.1.0
+    eslint-config-prettier: ^6.11.0
+    eslint-plugin-prettier: ^3.1.3
+    prettier: ^2.0.5
     typescript: ^3.9.2
     webpack: ^5.0.0-beta.16
     webpack-cli: ^3.3.11
@@ -2112,12 +2184,18 @@ __metadata:
     "@babel/preset-typescript": ^7.9.0
     "@babel/runtime-corejs3": ^7.9.6
     "@ribajs/cache": "portal:packages/cache::locator=ribajs%40workspace%3A."
+    "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@ribajs/i18n": "portal:packages/i18n::locator=ribajs%40workspace%3A."
     "@ribajs/shopify": "portal:packages/shopify::locator=ribajs%40workspace%3A."
+    "@typescript-eslint/eslint-plugin": ^3.0.2
+    "@typescript-eslint/parser": ^3.0.2
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     core-js: ^3.6.5
-    eslint: ^7.0.0
+    eslint: ^7.1.0
+    eslint-config-prettier: ^6.11.0
+    eslint-plugin-prettier: ^3.1.3
+    prettier: ^2.0.5
     typescript: ^3.9.2
     webpack: ^5.0.0-beta.16
     webpack-cli: ^3.3.11
@@ -2137,19 +2215,23 @@ __metadata:
     "@babel/runtime-corejs3": ^7.9.6
     "@ribajs/cache": "portal:packages/cache::locator=ribajs%40workspace%3A."
     "@ribajs/core": "portal:packages/core::locator=ribajs%40workspace%3A."
+    "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@ribajs/i18n": "portal:packages/i18n::locator=ribajs%40workspace%3A."
     "@ribajs/utils": "portal:packages/utils::locator=ribajs%40workspace%3A."
-    "@types/jest": ^25.2.1
+    "@types/jest": ^25.2.3
     "@types/node": ^14.0.1
-    "@typescript-eslint/eslint-plugin": ^2.33.0
-    "@typescript-eslint/parser": ^2.33.0
+    "@typescript-eslint/eslint-plugin": ^3.0.2
+    "@typescript-eslint/parser": ^3.0.2
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     core-js: ^3.6.5
-    eslint: ^7.0.0
+    eslint: ^7.1.0
+    eslint-config-prettier: ^6.11.0
+    eslint-plugin-prettier: ^3.1.3
     jest: ^26.0.1
     jest-extended: ^0.11.5
-    ts-jest: ^25.5.1
+    prettier: ^2.0.5
+    ts-jest: ^26.0.0
     typescript: ^3.9.2
     webpack: ^5.0.0-beta.16
     webpack-cli: ^3.3.11
@@ -2169,18 +2251,22 @@ __metadata:
     "@babel/runtime-corejs3": ^7.9.6
     "@ribajs/cache": "portal:packages/cache::locator=ribajs%40workspace%3A."
     "@ribajs/core": "portal:packages/core::locator=ribajs%40workspace%3A."
+    "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@ribajs/i18n": "portal:packages/i18n::locator=ribajs%40workspace%3A."
     "@ribajs/utils": "portal:packages/utils::locator=ribajs%40workspace%3A."
     "@types/jest": ^25.2.3
     "@types/node": ^14.0.1
-    "@typescript-eslint/eslint-plugin": ^2.34.0
-    "@typescript-eslint/parser": ^2.34.0
+    "@typescript-eslint/eslint-plugin": ^3.0.2
+    "@typescript-eslint/parser": ^3.0.2
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     core-js: ^3.6.5
-    eslint: ^7.0.0
+    eslint: ^7.1.0
+    eslint-config-prettier: ^6.11.0
+    eslint-plugin-prettier: ^3.1.3
     jest: ^26.0.1
     jest-extended: ^0.11.5
+    prettier: ^2.0.5
     ts-jest: ^26.0.0
     typescript: ^3.9.2
     webpack: ^5.0.0-beta.16
@@ -2242,8 +2328,9 @@ __metadata:
     "@babel/preset-typescript": ^7.9.0
     "@babel/runtime-corejs3": ^7.9.6
     babel-loader: ^8.1.0
-    copy-webpack-plugin: ^5.1.1
+    copy-webpack-plugin: ^6.0.1
     css-loader: ^3.5.3
+    file-loader: ^6.0.0
     glob: ^7.1.6
     html-loader: ^1.1.0
     html-webpack-plugin: ^4.3.0
@@ -2392,7 +2479,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/core-js@npm:^2.5.2, @types/core-js@npm:^2.5.3":
+"@types/core-js@npm:^2.5.3":
   version: 2.5.3
   resolution: "@types/core-js@npm:2.5.3"
   checksum: 78bd0a3429832a1fc0538abcb311cb4c1970ef1fd0637723cc2ec69038433fa948aa87280af6cdc9a6d5751806395bd4465ba2fb0f75aeed6069da820a9801a8
@@ -2683,7 +2770,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^2.33.0, @typescript-eslint/eslint-plugin@npm:^2.34.0":
+"@typescript-eslint/eslint-plugin@npm:^2.34.0":
   version: 2.34.0
   resolution: "@typescript-eslint/eslint-plugin@npm:2.34.0"
   dependencies:
@@ -2702,7 +2789,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/experimental-utils@npm:2.34.0, @typescript-eslint/experimental-utils@npm:^2.33.0, @typescript-eslint/experimental-utils@npm:^2.34.0":
+"@typescript-eslint/eslint-plugin@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "@typescript-eslint/eslint-plugin@npm:3.0.2"
+  dependencies:
+    "@typescript-eslint/experimental-utils": 3.0.2
+    functional-red-black-tree: ^1.0.1
+    regexpp: ^3.0.0
+    semver: ^7.3.2
+    tsutils: ^3.17.1
+  peerDependencies:
+    "@typescript-eslint/parser": ^3.0.0
+    eslint: ^5.0.0 || ^6.0.0 || ^7.0.0
+    typescript: "*"
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: c7e3de2092be0e0fcbc2c154ad5bb88c6d14402f0ec8dc3e8f632145d99f13d3f7554b546aeb68614594aa894a0d55ee3f615f65e7e5147144ca0f240dd7b466
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/experimental-utils@npm:2.34.0, @typescript-eslint/experimental-utils@npm:^2.34.0":
   version: 2.34.0
   resolution: "@typescript-eslint/experimental-utils@npm:2.34.0"
   dependencies:
@@ -2716,7 +2823,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^2.33.0, @typescript-eslint/parser@npm:^2.34.0":
+"@typescript-eslint/experimental-utils@npm:3.0.2, @typescript-eslint/experimental-utils@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "@typescript-eslint/experimental-utils@npm:3.0.2"
+  dependencies:
+    "@types/json-schema": ^7.0.3
+    "@typescript-eslint/typescript-estree": 3.0.2
+    eslint-scope: ^5.0.0
+    eslint-utils: ^2.0.0
+  peerDependencies:
+    eslint: "*"
+  checksum: 4bdbb1be105b2451b97bdd810305e9f72e6a37a3aa81cc94576327d650a19d044f14cd5be54c64f0e7a5637cc7159c773570865bdb796bb47915b74814aa2d18
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/parser@npm:^2.34.0":
   version: 2.34.0
   resolution: "@typescript-eslint/parser@npm:2.34.0"
   dependencies:
@@ -2734,7 +2855,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/typescript-estree@npm:2.34.0, @typescript-eslint/typescript-estree@npm:^2.33.0, @typescript-eslint/typescript-estree@npm:^2.34.0":
+"@typescript-eslint/parser@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "@typescript-eslint/parser@npm:3.0.2"
+  dependencies:
+    "@types/eslint-visitor-keys": ^1.0.0
+    "@typescript-eslint/experimental-utils": 3.0.2
+    "@typescript-eslint/typescript-estree": 3.0.2
+    eslint-visitor-keys: ^1.1.0
+  peerDependencies:
+    eslint: ^5.0.0 || ^6.0.0 || ^7.0.0
+    typescript: "*"
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 80b21568a11223145aa024e2f409286a0502b6f9bddc8366d4b2d2650cb828b75243dcd3c98bb0e926cb4c8e13efb9361745e5f8c01d02714b6346a16418b4ce
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/typescript-estree@npm:2.34.0, @typescript-eslint/typescript-estree@npm:^2.34.0":
   version: 2.34.0
   resolution: "@typescript-eslint/typescript-estree@npm:2.34.0"
   dependencies:
@@ -2751,6 +2890,26 @@ __metadata:
     typescript:
       optional: true
   checksum: a86157444f4cc8f1137c23b45b3edab660690ec53e152053f0b11ca823a214433832d4131263c42294b2e90cca88cdee458146a1c9b3aefc3a7a1030f83c532a
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/typescript-estree@npm:3.0.2":
+  version: 3.0.2
+  resolution: "@typescript-eslint/typescript-estree@npm:3.0.2"
+  dependencies:
+    debug: ^4.1.1
+    eslint-visitor-keys: ^1.1.0
+    glob: ^7.1.6
+    is-glob: ^4.0.1
+    lodash: ^4.17.15
+    semver: ^7.3.2
+    tsutils: ^3.17.1
+  peerDependencies:
+    typescript: "*"
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 4939522d83e038bfae278a302436c62a9925b9bf1a1bfb4bc27c1933958e13745e27129c914043c888dc908f93e34f888710b6f5c69d62bd94b9b759f1af6220
   languageName: node
   linkType: hard
 
@@ -3997,7 +4156,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cacache@npm:^12.0.2, cacache@npm:^12.0.3":
+"cacache@npm:^12.0.2":
   version: 12.0.4
   resolution: "cacache@npm:12.0.4"
   dependencies:
@@ -4756,28 +4915,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"copy-webpack-plugin@npm:^5.1.1":
-  version: 5.1.1
-  resolution: "copy-webpack-plugin@npm:5.1.1"
-  dependencies:
-    cacache: ^12.0.3
-    find-cache-dir: ^2.1.0
-    glob-parent: ^3.1.0
-    globby: ^7.1.1
-    is-glob: ^4.0.1
-    loader-utils: ^1.2.3
-    minimatch: ^3.0.4
-    normalize-path: ^3.0.0
-    p-limit: ^2.2.1
-    schema-utils: ^1.0.0
-    serialize-javascript: ^2.1.2
-    webpack-log: ^2.0.0
-  peerDependencies:
-    webpack: ^4.0.0 || ^5.0.0
-  checksum: fffa9e91f3f361cd06201460eb6c1d7e6812a784a485d2cf9448274988cc76f63b58168f18c940282eb54c1fbf852fd7702f405537a0d59cacb1bfe860b5bee3
-  languageName: node
-  linkType: hard
-
 "copy-webpack-plugin@npm:^6.0.1":
   version: 6.0.1
   resolution: "copy-webpack-plugin@npm:6.0.1"
@@ -5316,15 +5453,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dir-glob@npm:^2.0.0":
-  version: 2.2.2
-  resolution: "dir-glob@npm:2.2.2"
-  dependencies:
-    path-type: ^3.0.0
-  checksum: 7fd4f0b72d8215c8b5e70c767c7b21d260c722952f453487c8d312ee07d4638a0f1c85e2c3b578c7667c56054fae36bf8b83ad1c0a7e8fbc36b4c110782eb5a2
-  languageName: node
-  linkType: hard
-
 "dir-glob@npm:^3.0.1":
   version: 3.0.1
   resolution: "dir-glob@npm:3.0.1"
@@ -5839,6 +5967,52 @@ __metadata:
   bin:
     eslint: bin/eslint.js
   checksum: 94b878afd07c4aa14519a854564780afa29e7f4dd87544eb02a49c3b48d179a044c3462e9db86196fc76eee144013af14792950250cff68b32a0feeeecb0cb26
+  languageName: node
+  linkType: hard
+
+"eslint@npm:^7.1.0":
+  version: 7.1.0
+  resolution: "eslint@npm:7.1.0"
+  dependencies:
+    "@babel/code-frame": ^7.0.0
+    ajv: ^6.10.0
+    chalk: ^4.0.0
+    cross-spawn: ^7.0.2
+    debug: ^4.0.1
+    doctrine: ^3.0.0
+    eslint-scope: ^5.0.0
+    eslint-utils: ^2.0.0
+    eslint-visitor-keys: ^1.1.0
+    espree: ^7.0.0
+    esquery: ^1.2.0
+    esutils: ^2.0.2
+    file-entry-cache: ^5.0.1
+    functional-red-black-tree: ^1.0.1
+    glob-parent: ^5.0.0
+    globals: ^12.1.0
+    ignore: ^4.0.6
+    import-fresh: ^3.0.0
+    imurmurhash: ^0.1.4
+    inquirer: ^7.0.0
+    is-glob: ^4.0.0
+    js-yaml: ^3.13.1
+    json-stable-stringify-without-jsonify: ^1.0.1
+    levn: ^0.4.1
+    lodash: ^4.17.14
+    minimatch: ^3.0.4
+    natural-compare: ^1.4.0
+    optionator: ^0.9.1
+    progress: ^2.0.0
+    regexpp: ^3.1.0
+    semver: ^7.2.1
+    strip-ansi: ^6.0.0
+    strip-json-comments: ^3.1.0
+    table: ^5.2.3
+    text-table: ^0.2.0
+    v8-compile-cache: ^2.0.3
+  bin:
+    eslint: bin/eslint.js
+  checksum: efa1032a563f39339709cc6d227306fb6b1b049ef7dbaf3725253c6c82df482f8dd1ddaf931e5052efc97a9d7d3c7083fc3b5fc4e0e19ceca1d269373c55ffb6
   languageName: node
   linkType: hard
 
@@ -6934,20 +7108,6 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"globby@npm:^7.1.1":
-  version: 7.1.1
-  resolution: "globby@npm:7.1.1"
-  dependencies:
-    array-union: ^1.0.1
-    dir-glob: ^2.0.0
-    glob: ^7.1.2
-    ignore: ^3.3.5
-    pify: ^3.0.0
-    slash: ^1.0.0
-  checksum: fcafb7f1c47f60e790e8d604e35d8900423c524b5be123d918d9793ef691f51f2fe029eb495d5d3feb5375494a703b163f56d12a7a292665b5854f1a55d6b90d
-  languageName: node
-  linkType: hard
-
 "globule@npm:^1.0.0":
   version: 1.3.1
   resolution: "globule@npm:1.3.1"
@@ -7514,13 +7674,6 @@ fsevents@^2.1.2:
   version: 0.1.5
   resolution: "iferr@npm:0.1.5"
   checksum: cfa7f91cd44b26e2f49c6c47852523dfc0b0ac832fc5c9c3bfc59eaf0542fb2377be55534e75bf41946271f2d97978a19251df2828e452c8cba2f618a1a99017
-  languageName: node
-  linkType: hard
-
-"ignore@npm:^3.3.5":
-  version: 3.3.10
-  resolution: "ignore@npm:3.3.10"
-  checksum: 07c499676ace2f870cb49132c213f205c4b16fea48fb09d109cfe59292530a4f33180b1a006e6fe202eeca74e248df35b5374d11403f149fe0b7f6262cf01396
   languageName: node
   linkType: hard
 
@@ -10575,7 +10728,7 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"p-limit@npm:^2.0.0, p-limit@npm:^2.2.0, p-limit@npm:^2.2.1, p-limit@npm:^2.3.0":
+"p-limit@npm:^2.0.0, p-limit@npm:^2.2.0, p-limit@npm:^2.3.0":
   version: 2.3.0
   resolution: "p-limit@npm:2.3.0"
   dependencies:
@@ -10882,15 +11035,6 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"path-type@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "path-type@npm:3.0.0"
-  dependencies:
-    pify: ^3.0.0
-  checksum: d167c88ab4b3ef92d2d05e01e24e4d40f6a9fc77ffd4fb0d5e1f86c69cee232afe31b4e2153b9111b2d6b30f1697053ae613b67ecec4c12d022e78ae563930bb
-  languageName: node
-  linkType: hard
-
 "path-type@npm:^4.0.0":
   version: 4.0.0
   resolution: "path-type@npm:4.0.0"
@@ -10939,13 +11083,6 @@ fsevents@^2.1.2:
   version: 2.3.0
   resolution: "pify@npm:2.3.0"
   checksum: a673d605b68738f24debaa368c53051575bfe6b37c509389eba0aee0ace83613716002b0b1096756aec46ae47de30950bd08ba085efea8b32383301e36af0077
-  languageName: node
-  linkType: hard
-
-"pify@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "pify@npm:3.0.0"
-  checksum: f541f33af19872d2b3a40427c7b065369823c9a4e7ba92a8d7102b9cc2b89983418dac2dbd272ddfbc684963c84d6cd766e033dff83545b41414dff8c3c266d7
   languageName: node
   linkType: hard
 
@@ -12021,12 +12158,13 @@ fsevents@^2.1.2:
   dependencies:
     "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@ribajs/tsconfig": "portal:infra/tsconfig::locator=ribajs%40workspace%3A."
-    "@typescript-eslint/eslint-plugin": ^2.34.0
-    "@typescript-eslint/parser": ^2.34.0
+    "@typescript-eslint/eslint-plugin": ^3.0.2
+    "@typescript-eslint/experimental-utils": ^3.0.2
+    "@typescript-eslint/parser": ^3.0.2
     "@yarnpkg/pnpify": ^2.0.0-rc.22
     chalk: ^4.0.0
     commander: ^5.1.0
-    eslint: ^7.0.0
+    eslint: ^7.1.0
     eslint-config-prettier: ^6.11.0
     eslint-plugin-prettier: ^3.1.3
     husky: ^4.2.5
@@ -12274,7 +12412,7 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"semver@npm:2 || 3 || 4 || 5, semver@npm:^5.4.1, semver@npm:^5.5.0, semver@npm:^5.6.0, semver@npm:^5.7.1":
+"semver@npm:2 || 3 || 4 || 5, semver@npm:^5.4.1, semver@npm:^5.5.0, semver@npm:^5.5.1, semver@npm:^5.6.0, semver@npm:^5.7.1":
   version: 5.7.1
   resolution: "semver@npm:5.7.1"
   bin:
@@ -12344,13 +12482,6 @@ fsevents@^2.1.2:
   version: 1.9.1
   resolution: "serialize-javascript@npm:1.9.1"
   checksum: 33f0541a1414baf97a4a9145e9ba370667518cc54d1cf3708895a8fd0d564deb82df9b4b9433aca73786906a24eeeb78c19bf1339f9b6b863f8ccc88b4817d21
-  languageName: node
-  linkType: hard
-
-"serialize-javascript@npm:^2.1.2":
-  version: 2.1.2
-  resolution: "serialize-javascript@npm:2.1.2"
-  checksum: f0aac90c8b4b29ef134116ba4deaa9bd6b3eac9c22365567c263a9aae450b7db4e495884c07274fb317c469b407a61a569ba3dcc9a23e77a7540bb10a3df83f2
   languageName: node
   linkType: hard
 
@@ -12480,13 +12611,6 @@ fsevents@^2.1.2:
   version: 1.0.5
   resolution: "sisteransi@npm:1.0.5"
   checksum: 56c7fc2138b087b101c7de7a2ccf30a5a47f4b223e2588aa492ab83bf819ee23621322308ea61120711f24ce85dad8e3bb341becdd079fef566103722345a6e2
-  languageName: node
-  linkType: hard
-
-"slash@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "slash@npm:1.0.0"
-  checksum: 1b50156455171c79db7918dea660cb253bfb61b89dde47b37267f045effeb19b907a134644b7b00903e500545cea8704f605f1539fb3452c6e60c69cbf8d152a
   languageName: node
   linkType: hard
 
@@ -13689,6 +13813,16 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
+typescript@^3.8.3:
+  version: 3.9.3
+  resolution: "typescript@npm:3.9.3"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 4ed6809b539ad0a35d12e81f7765d94dfca65e33fe8d53ffef16a66e885017ae6e5ecb8efe21716e48c7a054afce1369e4e82d930245738f153a82dce2a1ebdf
+  languageName: node
+  linkType: hard
+
 typescript@^3.9.2:
   version: 3.9.2
   resolution: "typescript@npm:3.9.2"
@@ -13696,6 +13830,16 @@ typescript@^3.9.2:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: e2933460dc011a2a050a47ef32ca0f23452260856c181929767f70bc9fae06b8e5243751795d209d4ef9158e5356d729aed3ddecd64ee37ae05ee4f4399507f6
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@^3.8.3#builtin<compat/typescript>":
+  version: 3.9.3
+  resolution: "typescript@patch:typescript@npm%3A3.9.3#builtin<compat/typescript>::version=3.9.3&hash=226bd1"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: f855f6b590aa2a14d7f9101cb361e708437be8684076c561f0609d7fae71b36b0ab58f069b94048262b984c074d62c888f163e5bc5ff1e434414a765fa0be30f
   languageName: node
   linkType: hard
 

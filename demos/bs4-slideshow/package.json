@@ -34,13 +34,18 @@
     "@ribajs/tsconfig": "^1.8.0",
     "@ribajs/webpack-config": "^0.0.1",
     "@types/jest": "^25.2.1",
+    "@typescript-eslint/eslint-plugin": "^3.0.2",
+    "@typescript-eslint/experimental-utils": "^3.0.2",
+    "@typescript-eslint/parser": "^3.0.2",
     "autoprefixer": "^9.7.6",
     "babel-loader": "^8.1.0",
     "babel-plugin-array-includes": "^2.0.3",
     "babelify": "^10.0.0",
     "core-js": "^3.6.5",
     "css-loader": "^3.5.3",
-    "eslint": "^6.8.0",
+    "eslint": "^7.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.3",
     "html-loader": "^1.1.0",
     "inspectpack": "^4.4.0",
     "jest": "^25.4.0",
@@ -84,6 +89,9 @@
     "@ribajs/types": "portal:../../infra/types",
     "@ribajs/webpack-config": "portal:../../infra/webpack-config",
     "@ribajs/tsconfig": "portal:../../infra/tsconfig",
-    "@ribajs/utils": "portal:../../infra/utils"
+    "@ribajs/utils": "portal:../../packages/utils",
+    "@ribajs/cache": "portal:../../packages/cache",
+    "@ribajs/history": "portal:../../packages/history",
+    "@ribajs/leaflet-map": "portal:../../packages/leaflet-map"
   }
 }
