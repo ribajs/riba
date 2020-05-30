@@ -1700,8 +1700,13 @@ __metadata:
     "@ribajs/types": "portal:../../infra/types::locator=leaflet-example%40workspace%3A."
     "@ribajs/utils": "portal:../../packages/utils::locator=leaflet-example%40workspace%3A."
     "@types/jest": ^25.2.3
+<<<<<<< Updated upstream
     "@typescript-eslint/eslint-plugin": ^3.0.2
     "@typescript-eslint/parser": ^3.0.2
+=======
+    "@typescript-eslint/eslint-plugin": ^2.34.0
+    "@typescript-eslint/parser": ^2.34.0
+>>>>>>> Stashed changes
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     bootstrap: ^4.5.0
@@ -1712,7 +1717,10 @@ __metadata:
     jest: ^26.0.1
     jest-extended: ^0.11.5
     popper.js: ^1.16.1
+<<<<<<< Updated upstream
     prettier: ^2.0.5
+=======
+>>>>>>> Stashed changes
     ts-jest: ^26.0.0
     typescript: ^3.9.2
     webpack: ^5.0.0-beta.16
@@ -1754,8 +1762,13 @@ __metadata:
     "@types/core-js": ^2.5.3
     "@types/jest": ^25.2.3
     "@types/node": ^14.0.1
+<<<<<<< Updated upstream
     "@typescript-eslint/eslint-plugin": ^3.0.2
     "@typescript-eslint/parser": ^3.0.2
+=======
+    "@typescript-eslint/eslint-plugin": ^2.34.0
+    "@typescript-eslint/parser": ^2.34.0
+>>>>>>> Stashed changes
     babel-jest: ^26.0.1
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
@@ -1782,7 +1795,10 @@ __metadata:
   resolution: "@ribajs/eslint-config@portal:../../infra/eslint-config::locator=leaflet-example%40workspace%3A."
   dependencies:
     "@typescript-eslint/eslint-plugin": ^2.34.0
+<<<<<<< Updated upstream
     "@typescript-eslint/experimental-utils": ^3.0.2
+=======
+>>>>>>> Stashed changes
     "@typescript-eslint/parser": ^2.34.0
     eslint: ^7.0.0
     eslint-config-prettier: ^6.11.0
@@ -1809,8 +1825,13 @@ __metadata:
     "@ribajs/eslint-config": "portal:../../infra/eslint-config::locator=leaflet-example%40workspace%3A."
     "@ribajs/utils": "portal:../../packages/utils::locator=leaflet-example%40workspace%3A."
     "@types/jest": ^25.2.3
+<<<<<<< Updated upstream
     "@typescript-eslint/eslint-plugin": ^3.0.2
     "@typescript-eslint/parser": ^3.0.2
+=======
+    "@typescript-eslint/eslint-plugin": ^2.34.0
+    "@typescript-eslint/parser": ^2.34.0
+>>>>>>> Stashed changes
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     core-js: ^3.6.5
@@ -1819,7 +1840,10 @@ __metadata:
     eslint-plugin-prettier: ^3.1.3
     jest: ^26.0.1
     jest-extended: ^0.11.5
+<<<<<<< Updated upstream
     prettier: ^2.0.5
+=======
+>>>>>>> Stashed changes
     ts-jest: ^26.0.0
     typescript: ^3.9.2
     webpack: ^5.0.0-beta.16
@@ -2314,7 +2338,11 @@ __metadata:
   languageName: node
   linkType: hard
 
+<<<<<<< Updated upstream
 "@typescript-eslint/eslint-plugin@npm:^2.34.0":
+=======
+"@typescript-eslint/eslint-plugin@npm:^2.26.0, @typescript-eslint/eslint-plugin@npm:^2.31.0, @typescript-eslint/eslint-plugin@npm:^2.34.0":
+>>>>>>> Stashed changes
   version: 2.34.0
   resolution: "@typescript-eslint/eslint-plugin@npm:2.34.0"
   dependencies:
@@ -2367,6 +2395,7 @@ __metadata:
   languageName: node
   linkType: hard
 
+<<<<<<< Updated upstream
 "@typescript-eslint/experimental-utils@npm:3.0.2, @typescript-eslint/experimental-utils@npm:^3.0.2":
   version: 3.0.2
   resolution: "@typescript-eslint/experimental-utils@npm:3.0.2"
@@ -2382,6 +2411,9 @@ __metadata:
   linkType: hard
 
 "@typescript-eslint/parser@npm:^2.34.0":
+=======
+"@typescript-eslint/parser@npm:^2.26.0, @typescript-eslint/parser@npm:^2.31.0, @typescript-eslint/parser@npm:^2.34.0":
+>>>>>>> Stashed changes
   version: 2.34.0
   resolution: "@typescript-eslint/parser@npm:2.34.0"
   dependencies:

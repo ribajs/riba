@@ -87,6 +87,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:packages/shopify-tda"
       },
       {
+        "name": "@ribajs/tagged-image",
+        "reference": "workspace:packages/tagged-image"
+      },
+      {
         "name": "@ribajs/utils",
         "reference": "workspace:packages/utils"
       },
@@ -127,6 +131,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ["@ribajs/shopify", ["workspace:packages/shopify"]],
       ["@ribajs/shopify-easdk", ["workspace:packages/shopify-easdk"]],
       ["@ribajs/shopify-tda", ["workspace:packages/shopify-tda"]],
+      ["@ribajs/tagged-image", ["workspace:packages/tagged-image"]],
       ["@ribajs/tsconfig", ["workspace:infra/tsconfig"]],
       ["@ribajs/types", ["workspace:infra/types"]],
       ["@ribajs/utils", ["workspace:packages/utils"]],
@@ -246,6 +251,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       60,
       58,
       25,
+      24,
       23,
       22,
       19,
@@ -2931,6 +2937,47 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-prettier", "virtual:04fd72c6c054247c4ac0dd2e1dae4dda177427c096fa5f64074292499f7d98bc941b4307389bf16dbf972c79c80215ef202df0b7a3de284b81f3b825c0907ba7#npm:3.1.3"],
             ["prettier", "npm:2.0.5"],
             ["typescript", "patch:typescript@npm%3A3.9.2#builtin<compat/typescript>::version=3.9.2&hash=226bd1"],
+            ["webpack", "npm:5.0.0-beta.16"],
+            ["webpack-cli", "virtual:6b015e97d7bef27513b6b54f4a538ff2d43727bdf21d534c5d279bef171990dc94f3d71ae3e6ba973b9b07a6c0a7d9b4400b46ace56a69fc08d908c336a0027e#npm:3.3.11"]
+          ],
+          "linkType": "SOFT"
+        }]
+      ]],
+      ["@ribajs/tagged-image", [
+        ["workspace:packages/tagged-image", {
+          "packageLocation": "./packages/tagged-image/",
+          "packageDependencies": [
+            ["@ribajs/tagged-image", "workspace:packages/tagged-image"],
+            ["@babel/cli", "virtual:6b015e97d7bef27513b6b54f4a538ff2d43727bdf21d534c5d279bef171990dc94f3d71ae3e6ba973b9b07a6c0a7d9b4400b46ace56a69fc08d908c336a0027e#npm:7.8.4"],
+            ["@babel/core", "npm:7.9.6"],
+            ["@babel/plugin-proposal-class-properties", "virtual:6b015e97d7bef27513b6b54f4a538ff2d43727bdf21d534c5d279bef171990dc94f3d71ae3e6ba973b9b07a6c0a7d9b4400b46ace56a69fc08d908c336a0027e#npm:7.8.3"],
+            ["@babel/plugin-proposal-export-default-from", "virtual:bf148d6d6948653fa393194465cd6e58dedfdfe6373a4a56d0d3a191a4c33e25588f3115bed1b833b5ee979ff680e3e908108bb47cae70f276f09ad3bafad1c5#npm:7.8.3"],
+            ["@babel/plugin-proposal-object-rest-spread", "virtual:6b015e97d7bef27513b6b54f4a538ff2d43727bdf21d534c5d279bef171990dc94f3d71ae3e6ba973b9b07a6c0a7d9b4400b46ace56a69fc08d908c336a0027e#npm:7.9.6"],
+            ["@babel/plugin-syntax-dynamic-import", "virtual:c38c53a8cfcbf931bbcd2701f1b3f502fd2d6125fc7663c601d6a402eddc1b67ff84fc0951c9780a9607ce415acbbf6c674f3d1c3e76698d9ce78bfcfd11b928#npm:7.8.3"],
+            ["@babel/plugin-transform-runtime", "virtual:3ef0e48d7c6a11d016926dcea2a3bf66c9ee18e7fd3ed797945dadb3b44513560acdde2fcc8eb99f005ffdab1cf3f09cadcf328a2714462a38a8485e43189efd#npm:7.9.6"],
+            ["@babel/preset-env", "virtual:6b015e97d7bef27513b6b54f4a538ff2d43727bdf21d534c5d279bef171990dc94f3d71ae3e6ba973b9b07a6c0a7d9b4400b46ace56a69fc08d908c336a0027e#npm:7.9.6"],
+            ["@babel/preset-typescript", "virtual:6b015e97d7bef27513b6b54f4a538ff2d43727bdf21d534c5d279bef171990dc94f3d71ae3e6ba973b9b07a6c0a7d9b4400b46ace56a69fc08d908c336a0027e#npm:7.9.0"],
+            ["@babel/runtime-corejs3", "npm:7.9.6"],
+            ["@ribajs/bs4", "portal:packages/bs4::locator=ribajs%40workspace%3A."],
+            ["@ribajs/core", "portal:packages/core::locator=ribajs%40workspace%3A."],
+            ["@ribajs/eslint-config", "portal:infra/eslint-config::locator=ribajs%40workspace%3A."],
+            ["@ribajs/extras", "portal:packages/extras::locator=ribajs%40workspace%3A."],
+            ["@ribajs/tsconfig", "portal:infra/tsconfig::locator=ribajs%40workspace%3A."],
+            ["@types/jest", "npm:25.2.3"],
+            ["@typescript-eslint/eslint-plugin", "virtual:3ef0e48d7c6a11d016926dcea2a3bf66c9ee18e7fd3ed797945dadb3b44513560acdde2fcc8eb99f005ffdab1cf3f09cadcf328a2714462a38a8485e43189efd#npm:3.0.2"],
+            ["@typescript-eslint/parser", "virtual:3ef0e48d7c6a11d016926dcea2a3bf66c9ee18e7fd3ed797945dadb3b44513560acdde2fcc8eb99f005ffdab1cf3f09cadcf328a2714462a38a8485e43189efd#npm:3.0.2"],
+            ["@yarnpkg/pnpify", "virtual:3ef0e48d7c6a11d016926dcea2a3bf66c9ee18e7fd3ed797945dadb3b44513560acdde2fcc8eb99f005ffdab1cf3f09cadcf328a2714462a38a8485e43189efd#npm:2.0.0-rc.22"],
+            ["babel-loader", "virtual:6b015e97d7bef27513b6b54f4a538ff2d43727bdf21d534c5d279bef171990dc94f3d71ae3e6ba973b9b07a6c0a7d9b4400b46ace56a69fc08d908c336a0027e#npm:8.1.0"],
+            ["babel-plugin-array-includes", "npm:2.0.3"],
+            ["core-js", "npm:3.6.5"],
+            ["eslint", "npm:7.1.0"],
+            ["eslint-config-prettier", "virtual:04fd72c6c054247c4ac0dd2e1dae4dda177427c096fa5f64074292499f7d98bc941b4307389bf16dbf972c79c80215ef202df0b7a3de284b81f3b825c0907ba7#npm:6.11.0"],
+            ["eslint-plugin-prettier", "virtual:04fd72c6c054247c4ac0dd2e1dae4dda177427c096fa5f64074292499f7d98bc941b4307389bf16dbf972c79c80215ef202df0b7a3de284b81f3b825c0907ba7#npm:3.1.3"],
+            ["jest", "npm:26.0.1"],
+            ["jest-extended", "npm:0.11.5"],
+            ["prettier", "npm:2.0.5"],
+            ["ts-jest", "virtual:3ef0e48d7c6a11d016926dcea2a3bf66c9ee18e7fd3ed797945dadb3b44513560acdde2fcc8eb99f005ffdab1cf3f09cadcf328a2714462a38a8485e43189efd#npm:25.5.1"],
+            ["typescript", "patch:typescript@npm%3A3.9.3#builtin<compat/typescript>::version=3.9.3&hash=226bd1"],
             ["webpack", "npm:5.0.0-beta.16"],
             ["webpack-cli", "virtual:6b015e97d7bef27513b6b54f4a538ff2d43727bdf21d534c5d279bef171990dc94f3d71ae3e6ba973b9b07a6c0a7d9b4400b46ace56a69fc08d908c336a0027e#npm:3.3.11"]
           ],

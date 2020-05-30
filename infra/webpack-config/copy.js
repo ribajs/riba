@@ -78,7 +78,7 @@ const getCopyPluginConfig = (config) => {
     "@ribajs/shopify-tda",
     "@ribajs/shopify-easdk",
     "@ribajs/leaflet-map",
-    "@ribajs/taggedimage",
+    "@ribajs/tagged-image",
     "@ribajs/pdf",
   ];
 
