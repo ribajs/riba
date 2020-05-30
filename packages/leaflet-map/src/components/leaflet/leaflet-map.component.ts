@@ -134,7 +134,7 @@ export class LeafletMapComponent extends Component {
         const lng = el.getAttribute("lng");
         const icon = el.getAttribute("icon");
         const title = el.textContent;
-        if (lat != null && lng != null && title != null && icon != null) {
+        if (lat != null && lng != null && title != null) {
           this.markers.push({
             lat: +lat,
             lng: +lng,
