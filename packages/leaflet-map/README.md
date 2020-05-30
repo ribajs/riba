@@ -12,7 +12,7 @@ To regist the module include `import leafletModule from '@ribajs/leaflet-map';` 
 
 ```ts
 import { Riba, coreModule, Utils } from '@ribajs/core';
-import { JQuery, leafletModule } from '@ribajs/leaflet-map';
+import { leafletModule } from '@ribajs/leaflet-map';
 const riba = new Riba();
 const model = {};
 riba.module.regist(coreModule);

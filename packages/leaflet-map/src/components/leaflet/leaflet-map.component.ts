@@ -27,7 +27,7 @@ export class LeafletMapComponent extends Component {
   protected autobind = true;
 
   protected markers: Marker[] = [];
-  protected icons: any[] = [];
+  protected icons: { [key: string]: L.Icon } = {};
 
   protected defaultIcon: any = L.icon({
     iconUrl: markerIcon,
@@ -36,7 +36,7 @@ export class LeafletMapComponent extends Component {
     iconAnchor: [14, 40],
     popupAnchor: [-1, -41],
     shadowSize: [25, 41],
-    shadowAnchor: [10, 40]
+    shadowAnchor: [10, 40],
   });
 
   static get observedAttributes() {
@@ -45,7 +45,7 @@ export class LeafletMapComponent extends Component {
       "initial-lng",
       "initial-zoom",
       "tile-url",
-      "attribution"
+      "attribution",
     ];
   }
 
@@ -54,7 +54,8 @@ export class LeafletMapComponent extends Component {
     initialLng: 8.710849,
     initialZoom: 13,
     tileUrl: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-    attribution: "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors"
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   };
 
   constructor(element?: HTMLElement) {
@@ -76,31 +77,28 @@ export class LeafletMapComponent extends Component {
 
   protected async afterBind() {
     await super.afterBind();
-    var mapId = 'map-'+Math.floor(Math.random() * 9999);
-    this.el.querySelector('.leaflet-map').id = mapId;
-    var map = new L.Map(mapId).setView([this.scope.initialLat, this.scope.initialLng], this.scope.initialZoom);;
-    
+    const mapId = "map-" + Math.floor(Math.random() * 9999);
+    this.el.querySelector(".leaflet-map").id = mapId;
+    const map = new L.Map(mapId).setView([this.scope.initialLat, this.scope.initialLng], this.scope.initialZoom);
 
 
     L.tileLayer(this.scope.tileUrl, {
-      attribution: this.scope.attribution
+      attribution: this.scope.attribution,
     }).addTo(map);
 
-    for(let marker of this.markers) {
-      var icon = this.defaultIcon;  
-      if(marker.icon !== undefined && marker.icon !== null) {
-        icon = this.icons[marker.icon]
+    for (const marker of this.markers) {
+      let leafletMarker;
+      if (marker.icon !== undefined && marker.icon !== null) {
+        leafletMarker = L.marker([marker.lat, marker.lng], { icon: this.icons[marker.icon] });
+      } else {
+        leafletMarker = L.marker([marker.lat, marker.lng]);
       }
-      let leatfletMarker = L.marker([marker.lat, marker.lng], {icon: icon})
-      .addTo(map)
-      .bindPopup(marker.title);
-      if(marker.openByDefault) {
-        leatfletMarker.openPopup();
+      leafletMarker.addTo(map).bindPopup(marker.title);
+      if (marker.openByDefault) {
+        leafletMarker.openPopup();
       }
     }
-
   }
-
 
   // deconstructor
   protected disconnectedCallback() {
@@ -108,34 +106,37 @@ export class LeafletMapComponent extends Component {
   }
 
   protected template() {
-    for(let el of this.el.children) {
-      if(el.tagName === "ICON") {
-        var iconName = el.getAttribute("name"); 
-        var iconUrl = el.getAttribute("icon-url");
-        var shadowUrl = el.getAttribute("shadow-url");
-        var iconSize = el.getAttribute("icon-size"); 
-        var iconAnchor = el.getAttribute("icon-anchor");
-        var popupAnchor = el.getAttribute("popup-anchor");
-        var shadowSize = el.getAttribute("shadow-size");
-        var shadowAnchor = el.getAttribute("shadow-anchor");
-        this.icons[iconName] = L.icon({
-          iconUrl: iconUrl,
-          shadowUrl: shadowUrl,
-          iconSize: iconSize.replace(" ", "").split(","),
-          iconAnchor: iconAnchor.replace(" ", "").split(","),
-          popupAnchor: popupAnchor.replace(" ", "").split(","),
-          shadowSize: shadowSize.replace(" ", "").split(","),
-          shadowAnchor: shadowAnchor.replace(" ", "").split(",")
-        });    
+    for (const el of this.el.children) {
+      if (el.tagName === "ICON") {
+        const iconName = el.getAttribute("name");
+        const iconUrl = el.getAttribute("icon-url");
+        const shadowUrl = el.getAttribute("shadow-url");
+        const iconSize = el.getAttribute("icon-size");
+        const iconAnchor = el.getAttribute("icon-anchor");
+        const popupAnchor = el.getAttribute("popup-anchor");
+        const shadowSize = el.getAttribute("shadow-size");
+        const shadowAnchor = el.getAttribute("shadow-anchor");
+        if (iconName && iconUrl && shadowUrl && iconSize && iconAnchor && popupAnchor && shadowSize && shadowAnchor) {
+          this.icons[iconName] = L.icon({
+            iconUrl: iconUrl,
+            shadowUrl: shadowUrl,
+            iconSize: iconSize.replace(" ", "").split(","),
+            iconAnchor: iconAnchor.replace(" ", "").split(","),
+            popupAnchor: popupAnchor.replace(" ", "").split(","),
+            shadowSize: shadowSize.replace(" ", "").split(","),
+            shadowAnchor: shadowAnchor.replace(" ", "").split(",")
+          });
+        }
       }
-      if(el.tagName === "MARKER") {
-        var lat = el.getAttribute("lat"); 
-        var lng = el.getAttribute("lng");
-        var icon = el.getAttribute("icon");
-        var title = el.textContent;
-        if(lat !== undefined && lng !== undefined && title !== undefined) {
+
+      if (el.tagName === "MARKER") {
+        const lat = el.getAttribute("lat");
+        const lng = el.getAttribute("lng");
+        const icon = el.getAttribute("icon");
+        const title = el.textContent;
+        if (lat != null && lng != null && title != null && icon != null) {
           this.markers.push({
-            lat: lat,
+            lat: +lat,
             lng: +lng,
             title: title,
             icon: icon,
