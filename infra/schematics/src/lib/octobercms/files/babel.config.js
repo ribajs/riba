@@ -1,4 +1,5 @@
 // iMPORTANT do not use .babelrc: https://github.com/babel/babel/issues/8711#issuecomment-421918023
+/* eslint-disable no-undef */
 module.exports = {
   "presets": [
     [

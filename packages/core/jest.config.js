@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 module.exports = {
   testEnvironment: "jsdom",
   moduleFileExtensions: ["ts", "tsx", "js", "json"],
@@ -11,11 +12,12 @@ module.exports = {
     "!**/vendor/**",
   ],
   coverageReporters: ["json", "lcov"],
-  setupFilesAfterEnv: ["jest-extended"],
+  setupFilesAfterEnv: [require.resolve("jest-extended")],
   globals: {
     "ts-jest": {
       babelConfig: true,
-      tsConfig: 'tsconfig.spec.json'
+      packageJson: "./package.json",
+      tsConfig: "./tsconfig.spec.json",
     },
   },
 };

@@ -207,6 +207,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/helper-module-imports@npm:^7.10.1":
+  version: 7.10.1
+  resolution: "@babel/helper-module-imports@npm:7.10.1"
+  dependencies:
+    "@babel/types": ^7.10.1
+  checksum: 8726c8a5f6a5c99963db463048c408669f42c4774509c70140d86a62b4aca48a5a40e06dd4626801b2218839e54dcc0c54543e86bf870a7109db3d8532c02950
+  languageName: node
+  linkType: hard
+
 "@babel/helper-module-imports@npm:^7.8.3":
   version: 7.8.3
   resolution: "@babel/helper-module-imports@npm:7.8.3"
@@ -244,6 +253,13 @@ __metadata:
   version: 7.8.3
   resolution: "@babel/helper-plugin-utils@npm:7.8.3"
   checksum: cfcd5cec63d22b10dde61a92b5c2283540b149286c1506b002c023057e17de0cdb6ff94e2428b7d0330cb63a3229f2b07b67bc532bd4c9a3097c9a09be8b516d
+  languageName: node
+  linkType: hard
+
+"@babel/helper-plugin-utils@npm:^7.10.1":
+  version: 7.10.1
+  resolution: "@babel/helper-plugin-utils@npm:7.10.1"
+  checksum: ee97947fc7371b842c002844e5ba6701d6dc41d636e64e25589129a9098727abf5ddc219d15445f585ec0fdc30232168ebe5effc9cb29a84136a2b34e3381cc6
   languageName: node
   linkType: hard
 
@@ -297,6 +313,13 @@ __metadata:
   dependencies:
     "@babel/types": ^7.8.3
   checksum: 20b0dc2498a17df1c71599c13c439fc9bb8fb987d5e47679f7dd88f723447afd76b02048f68755dc8c2032eb6860ef8a540ecf4145c01e7eddac38ac954c9f28
+  languageName: node
+  linkType: hard
+
+"@babel/helper-validator-identifier@npm:^7.10.1":
+  version: 7.10.1
+  resolution: "@babel/helper-validator-identifier@npm:7.10.1"
+  checksum: 90f3a2714a77ce1547276d5e1514a2b79e06706f401434e2f3af387a94b1dacf1c578014debc79c9ba41d47bab43bd580a30fb3970aa934d1f27bc03ea8f81e2
   languageName: node
   linkType: hard
 
@@ -937,6 +960,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/plugin-transform-runtime@npm:^7.10.1":
+  version: 7.10.1
+  resolution: "@babel/plugin-transform-runtime@npm:7.10.1"
+  dependencies:
+    "@babel/helper-module-imports": ^7.10.1
+    "@babel/helper-plugin-utils": ^7.10.1
+    resolve: ^1.8.1
+    semver: ^5.5.1
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 23ca13c2d75d17b593a985f0a0635538a67dce82460db99c91edc9d946d190a51fec49da8e9647d4c223788ce9bfa84a401e2322f7561525965f71be1a8104c0
+  languageName: node
+  linkType: hard
+
 "@babel/plugin-transform-runtime@npm:^7.9.6":
   version: 7.9.6
   resolution: "@babel/plugin-transform-runtime@npm:7.9.6"
@@ -1130,6 +1167,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime-corejs3@npm:^7.10.2":
+  version: 7.10.2
+  resolution: "@babel/runtime-corejs3@npm:7.10.2"
+  dependencies:
+    core-js-pure: ^3.0.0
+    regenerator-runtime: ^0.13.4
+  checksum: 0bc8aac022e39040887c4cd086b9aac14bdd5df211e4e14693ffcd0be11cf7f4a11c838cf5e6a2512115989b8455047e13b4d0c4efa6636a941d54374ad42517
+  languageName: node
+  linkType: hard
+
 "@babel/runtime-corejs3@npm:^7.9.6":
   version: 7.9.6
   resolution: "@babel/runtime-corejs3@npm:7.9.6"
@@ -1137,6 +1184,15 @@ __metadata:
     core-js-pure: ^3.0.0
     regenerator-runtime: ^0.13.4
   checksum: e99db4ec7d451f6895d47bd32802f6e9ba8a86ff3e09992ae6e78b33748f5bf4923a2ef6247c408c8fff92109b5e89e155d337b6ac95591a1c2fe00f62671e90
+  languageName: node
+  linkType: hard
+
+"@babel/runtime@npm:^7.10.2":
+  version: 7.10.2
+  resolution: "@babel/runtime@npm:7.10.2"
+  dependencies:
+    regenerator-runtime: ^0.13.4
+  checksum: f12e4b7f5dd67465bfdf75c9b8e38ff273fce73d056308b25094f85831d0b2504dc3ba0a5a79a44e2468b369bcfd4d24ff9428d50ffc8923649cb4e1174f739f
   languageName: node
   linkType: hard
 
@@ -1185,6 +1241,17 @@ __metadata:
     lodash: ^4.17.13
     to-fast-properties: ^2.0.0
   checksum: 6da06b7b357a5d2afde9bf44774f547d1ba23c1a5012a714763d0c8253bb98d952f10cc1eeb522c8e87bc88ae8eabeb1957824fc2beb3942402a47b4f2195a35
+  languageName: node
+  linkType: hard
+
+"@babel/types@npm:^7.10.1":
+  version: 7.10.2
+  resolution: "@babel/types@npm:7.10.2"
+  dependencies:
+    "@babel/helper-validator-identifier": ^7.10.1
+    lodash: ^4.17.13
+    to-fast-properties: ^2.0.0
+  checksum: 9d168f8d83f4333d723e396181966bc535ec7ea4972e5b0e39a54e3bfb5a082b1b26b13eb8a9ad5d89f7cfa6473875cc91d2a1d13bd792a4072086efcd444840
   languageName: node
   linkType: hard
 
@@ -1509,9 +1576,11 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.9.6
     "@babel/plugin-proposal-optional-chaining": ^7.9.0
     "@babel/plugin-syntax-export-default-from": ^7.8.3
+    "@babel/plugin-transform-runtime": ^7.10.1
     "@babel/preset-env": ^7.9.6
     "@babel/preset-typescript": ^7.9.0
-    "@babel/runtime-corejs3": ^7.9.6
+    "@babel/runtime": ^7.10.2
+    "@babel/runtime-corejs3": ^7.10.2
     "@ribajs/cache": "portal:packages/cache::locator=ribajs%40workspace%3A."
     "@ribajs/core": "portal:packages/core::locator=ribajs%40workspace%3A."
     "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
@@ -1522,6 +1591,7 @@ __metadata:
     "@types/jest": ^25.2.3
     "@typescript-eslint/eslint-plugin": ^3.0.2
     "@typescript-eslint/parser": ^3.0.2
+    babel-jest: ^26.0.1
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     bootstrap: ^4.5.0
@@ -1550,9 +1620,11 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.9.6
     "@babel/plugin-proposal-optional-chaining": ^7.9.0
     "@babel/plugin-syntax-export-default-from": ^7.8.3
+    "@babel/plugin-transform-runtime": ^7.10.1
     "@babel/preset-env": ^7.9.6
     "@babel/preset-typescript": ^7.9.0
-    "@babel/runtime-corejs3": ^7.9.6
+    "@babel/runtime": ^7.10.2
+    "@babel/runtime-corejs3": ^7.10.2
     "@ribajs/cache": "portal:packages/cache::locator=ribajs%40workspace%3A."
     "@ribajs/core": "portal:packages/core::locator=ribajs%40workspace%3A."
     "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
@@ -1563,6 +1635,7 @@ __metadata:
     "@types/jest": ^25.2.3
     "@typescript-eslint/eslint-plugin": ^3.0.2
     "@typescript-eslint/parser": ^3.0.2
+    babel-jest: ^26.0.1
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     bootstrap: ^4.5.0
@@ -1619,9 +1692,10 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.9.6
     "@babel/plugin-proposal-optional-chaining": ^7.9.0
     "@babel/plugin-syntax-export-default-from": ^7.8.3
+    "@babel/plugin-transform-runtime": ^7.10.1
     "@babel/preset-env": ^7.9.6
     "@babel/preset-typescript": ^7.9.0
-    "@babel/runtime-corejs3": ^7.9.6
+    "@babel/runtime-corejs3": ^7.10.2
     "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@ribajs/tsconfig": "portal:infra/tsconfig::locator=ribajs%40workspace%3A."
     "@ribajs/types": "portal:infra/types::locator=ribajs%40workspace%3A."
@@ -1631,7 +1705,6 @@ __metadata:
     "@types/node": ^14.0.1
     "@typescript-eslint/eslint-plugin": ^3.0.2
     "@typescript-eslint/parser": ^3.0.2
-    babel-jest: ^26.0.1
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     core-js: ^3.6.5
@@ -1662,9 +1735,10 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.9.6
     "@babel/plugin-proposal-optional-chaining": ^7.9.0
     "@babel/plugin-syntax-export-default-from": ^7.8.3
+    "@babel/plugin-transform-runtime": ^7.10.1
     "@babel/preset-env": ^7.9.6
     "@babel/preset-typescript": ^7.9.0
-    "@babel/runtime-corejs3": ^7.9.6
+    "@babel/runtime-corejs3": ^7.10.2
     "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@ribajs/tsconfig": "portal:infra/tsconfig::locator=ribajs%40workspace%3A."
     "@ribajs/types": "portal:infra/types::locator=ribajs%40workspace%3A."
@@ -2187,6 +2261,7 @@ __metadata:
     "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@ribajs/i18n": "portal:packages/i18n::locator=ribajs%40workspace%3A."
     "@ribajs/shopify": "portal:packages/shopify::locator=ribajs%40workspace%3A."
+    "@ribajs/tsconfig": "portal:infra/tsconfig::locator=ribajs%40workspace%3A."
     "@typescript-eslint/eslint-plugin": ^3.0.2
     "@typescript-eslint/parser": ^3.0.2
     babel-loader: ^8.1.0
@@ -2305,12 +2380,16 @@ __metadata:
 "@ribajs/utils@portal:packages/utils::locator=ribajs%40workspace%3A.":
   version: 0.0.0-use.local
   resolution: "@ribajs/utils@portal:packages/utils::locator=ribajs%40workspace%3A."
+  dependencies:
+    "@babel/runtime-corejs3": ^7.10.2
   languageName: node
   linkType: soft
 
 "@ribajs/utils@workspace:packages/utils":
   version: 0.0.0-use.local
   resolution: "@ribajs/utils@workspace:packages/utils"
+  dependencies:
+    "@babel/runtime-corejs3": ^7.10.2
   languageName: unknown
   linkType: soft
 

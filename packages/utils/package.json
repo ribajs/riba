@@ -37,5 +37,8 @@
     "url": "https://github.com/ribajs/riba/issues"
   },
   "homepage": "https://github.com/ribajs/riba#readme",
-  "directories": {}
+  "directories": {},
+  "devDependencies": {
+    "@babel/runtime-corejs3": "^7.10.2"
+  }
 }
