@@ -2,7 +2,7 @@ module.exports = {
   testEnvironment: "jsdom",
   moduleFileExtensions: ["ts", "tsx", "js", "json"],
   transform: {
-    "^.+\\.tsx?$": "ts-jest",
+    "^.+\\.tsx?$": require.resolve("ts-jest"),
   },
   testRegex: "/src/.*\\.(test|spec).(ts|tsx)$",
   collectCoverageFrom: [

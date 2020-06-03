@@ -7,7 +7,7 @@ module.exports = {
         "json"
     ],
     "transform": {
-        "^.+\\.tsx?$": "ts-jest"
+        "^.+\\.tsx?$": require.resolve("ts-jest")
     },
     "testRegex": "/src/.*\\.(test|spec).(ts|tsx|js)$",
     "collectCoverageFrom": [
