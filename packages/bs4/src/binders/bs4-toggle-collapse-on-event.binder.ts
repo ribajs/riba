@@ -1,7 +1,6 @@
-import { Binder } from '@ribajs/core';
+import { Binder } from "@ribajs/core";
 // import { CollapseService } from '../services/collapse.service';
-import { CollapseService } from '../services/collapse.service';
-
+import { CollapseService } from "../services/collapse.service";
 
 export interface Bs4CollapseOnEventBinder extends Binder<boolean> {
   onEvent: (event: Event) => void;
@@ -10,10 +9,10 @@ export interface Bs4CollapseOnEventBinder extends Binder<boolean> {
 }
 
 /**
- * 
+ *
  */
 export const toggleCollapseOnEventBinder: Binder<string> = {
-  name: 'bs4-toggle-collapse-on-*',
+  name: "bs4-toggle-collapse-on-*",
   collapseServices: [] as CollapseService[],
   targets: null,
   onEvent(event: Event) {
@@ -33,7 +32,6 @@ export const toggleCollapseOnEventBinder: Binder<string> = {
     this.el.removeEventListener(eventName, self.onEvent.bind(this));
   },
   routine(el: HTMLElement, targetSelector: string) {
-
     if (this.args === null) {
       throw new Error("args is null");
     }
@@ -43,11 +41,15 @@ export const toggleCollapseOnEventBinder: Binder<string> = {
     self.targets = document.querySelectorAll<HTMLElement>(targetSelector);
 
     if (self.targets.length <= 0) {
-      console.warn(`[toggleCollapseOnEventBinder] No element with selector "${targetSelector}" found.`);
+      console.warn(
+        `[toggleCollapseOnEventBinder] No element with selector "${targetSelector}" found.`
+      );
     }
 
     self.targets.forEach((target) => {
-      self.collapseServices.push(new CollapseService(target, [el], {toggle: false }));
+      self.collapseServices.push(
+        new CollapseService(target, [el], { toggle: false })
+      );
     });
 
     el.addEventListener(eventName, self.onEvent.bind(this));

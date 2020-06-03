@@ -1,8 +1,8 @@
-import { handleizeFormatter } from '@ribajs/core';
-import templateHorizontal from './bs4-tabs-horizontal.component.html';
-import templateVertical from './bs4-tabs-vertical.component.html';
+import { handleizeFormatter } from "@ribajs/core";
+import templateHorizontal from "./bs4-tabs-horizontal.component.html";
+import templateVertical from "./bs4-tabs-vertical.component.html";
 
-import { TemplatesComponent } from '../templates/templates.component';
+import { TemplatesComponent } from "../templates/templates.component";
 
 export interface Tab {
   title: string;
@@ -15,36 +15,35 @@ export interface Tab {
 
 export interface Scope {
   items: Tab[];
-  activate: Bs4TabsComponent['activate'];
-  deactivate: Bs4TabsComponent['activate'];
-  deactivateAll: Bs4TabsComponent['deactivateAll'];
+  activate: Bs4TabsComponent["activate"];
+  deactivate: Bs4TabsComponent["activate"];
+  deactivateAll: Bs4TabsComponent["deactivateAll"];
   optionTabsAutoHeight: boolean;
-  optionTabsAngle: 'vertical' | 'horizontal';
+  optionTabsAngle: "vertical" | "horizontal";
 }
 
 export class Bs4TabsComponent extends TemplatesComponent {
-
-  public static tagName = 'bs4-tabs';
+  public static tagName = "bs4-tabs";
 
   protected templateAttributes = [
     {
-      name: 'title',
+      name: "title",
       required: true,
     },
     {
-      name: 'handle',
+      name: "handle",
       required: false,
     },
     {
-      name: 'type',
+      name: "type",
       required: false,
     },
     {
-      name: 'active',
+      name: "active",
       required: false,
     },
     {
-      name: 'index',
+      name: "index",
       required: false,
     },
   ];
@@ -53,9 +52,9 @@ export class Bs4TabsComponent extends TemplatesComponent {
     items: new Array<Tab>(),
     activate: this.activate,
     deactivate: this.deactivate,
-    deactivateAll:this.deactivateAll,
+    deactivateAll: this.deactivateAll,
     optionTabsAutoHeight: false,
-    optionTabsAngle: 'horizontal',
+    optionTabsAngle: "horizontal",
   };
 
   protected tabs?: NodeListOf<Element>;
@@ -64,28 +63,68 @@ export class Bs4TabsComponent extends TemplatesComponent {
 
   static get observedAttributes() {
     return [
-      'option-tabs-auto-height',
-      'option-tabs-angle',
-      'tab-0-title', 'tab-0-content', 'tab-0-handle',
-      'tab-1-title', 'tab-1-content', 'tab-1-handle',
-      'tab-2-title', 'tab-2-content', 'tab-2-handle',
-      'tab-3-title', 'tab-3-content', 'tab-3-handle',
-      'tab-4-title', 'tab-4-content', 'tab-4-handle',
-      'tab-5-title', 'tab-5-content', 'tab-5-handle',
-      'tab-6-title', 'tab-6-content', 'tab-6-handle',
-      'tab-7-title', 'tab-7-content', 'tab-7-handle',
-      'tab-8-title', 'tab-8-content', 'tab-8-handle',
-      'tab-9-title', 'tab-9-content', 'tab-9-handle',
-      'tab-10-title', 'tab-10-content', 'tab-10-handle',
-      'tab-11-title', 'tab-11-content', 'tab-11-handle',
-      'tab-12-title', 'tab-12-content', 'tab-12-handle',
-      'tab-13-title', 'tab-13-content', 'tab-13-handle',
-      'tab-14-title', 'tab-14-content', 'tab-14-handle',
-      'tab-15-title', 'tab-15-content', 'tab-15-handle',
-      'tab-16-title', 'tab-16-content', 'tab-16-handle',
-      'tab-17-title', 'tab-17-content', 'tab-17-handle',
-      'tab-18-title', 'tab-18-content', 'tab-18-handle',
-      'tab-19-title', 'tab-19-content', 'tab-19-handle',
+      "option-tabs-auto-height",
+      "option-tabs-angle",
+      "tab-0-title",
+      "tab-0-content",
+      "tab-0-handle",
+      "tab-1-title",
+      "tab-1-content",
+      "tab-1-handle",
+      "tab-2-title",
+      "tab-2-content",
+      "tab-2-handle",
+      "tab-3-title",
+      "tab-3-content",
+      "tab-3-handle",
+      "tab-4-title",
+      "tab-4-content",
+      "tab-4-handle",
+      "tab-5-title",
+      "tab-5-content",
+      "tab-5-handle",
+      "tab-6-title",
+      "tab-6-content",
+      "tab-6-handle",
+      "tab-7-title",
+      "tab-7-content",
+      "tab-7-handle",
+      "tab-8-title",
+      "tab-8-content",
+      "tab-8-handle",
+      "tab-9-title",
+      "tab-9-content",
+      "tab-9-handle",
+      "tab-10-title",
+      "tab-10-content",
+      "tab-10-handle",
+      "tab-11-title",
+      "tab-11-content",
+      "tab-11-handle",
+      "tab-12-title",
+      "tab-12-content",
+      "tab-12-handle",
+      "tab-13-title",
+      "tab-13-content",
+      "tab-13-handle",
+      "tab-14-title",
+      "tab-14-content",
+      "tab-14-handle",
+      "tab-15-title",
+      "tab-15-content",
+      "tab-15-handle",
+      "tab-16-title",
+      "tab-16-content",
+      "tab-16-handle",
+      "tab-17-title",
+      "tab-17-content",
+      "tab-17-handle",
+      "tab-18-title",
+      "tab-18-content",
+      "tab-18-handle",
+      "tab-19-title",
+      "tab-19-content",
+      "tab-19-handle",
     ];
   }
 
@@ -108,24 +147,24 @@ export class Bs4TabsComponent extends TemplatesComponent {
       return;
     }
     this.tabPanes.forEach((tabPane) => {
-      if (!(tabPane as unknown as HTMLElement).style) {
+      if (!((tabPane as unknown) as HTMLElement).style) {
         return;
       }
-      (tabPane as unknown as HTMLElement).style.height = 'auto';
-      (tabPane as unknown as HTMLElement).style.display = 'block';
-      const height = (tabPane as unknown as HTMLElement).offsetHeight || 0;
+      ((tabPane as unknown) as HTMLElement).style.height = "auto";
+      ((tabPane as unknown) as HTMLElement).style.display = "block";
+      const height = ((tabPane as unknown) as HTMLElement).offsetHeight || 0;
       if (height > heigest) {
         heigest = height;
       }
     });
     this.tabPanes.forEach((tabPane) => {
-      if (!(tabPane as unknown as HTMLElement).style) {
+      if (!((tabPane as unknown) as HTMLElement).style) {
         return;
       }
       // Reset display style property
-      (tabPane as unknown as HTMLElement).style.display = '';
+      ((tabPane as unknown) as HTMLElement).style.display = "";
       if (heigest > 0) {
-        (tabPane as unknown as HTMLElement).style.height = heigest + 'px';
+        ((tabPane as unknown) as HTMLElement).style.height = heigest + "px";
       }
     });
   }
@@ -152,7 +191,10 @@ export class Bs4TabsComponent extends TemplatesComponent {
 
     const firstTabContentChild = this.getTabContentChildByIndex(tab.index);
     if (firstTabContentChild) {
-      this.triggerVisibilityChangedForElement(firstTabContentChild as Element, tab.active);
+      this.triggerVisibilityChangedForElement(
+        firstTabContentChild as Element,
+        tab.active
+      );
     }
 
     if (event) {
@@ -167,19 +209,28 @@ export class Bs4TabsComponent extends TemplatesComponent {
   }
 
   protected getTabContentChildByIndex(index: number) {
-    return this.el.querySelector(`.tab-content .tab-pane:nth-child(${index + 1}) > *`) || undefined;
+    return (
+      this.el.querySelector(
+        `.tab-content .tab-pane:nth-child(${index + 1}) > *`
+      ) || undefined
+    );
   }
 
   /**
    * Trigger `visibility-changed` for components that need to update if visibility changes.
    * E.g. this event is used the bs4-slideshow component
-   * @param element 
-   * @param visibile 
+   * @param element
+   * @param visibile
    */
-  protected triggerVisibilityChangedForElement(element: Element, visibile: boolean) {
+  protected triggerVisibilityChangedForElement(
+    element: Element,
+    visibile: boolean
+  ) {
     setTimeout(() => {
       // Use this event to update any custom element when it becomes visibile
-      element.dispatchEvent(new CustomEvent('visibility-changed', {detail: {visibile}}));
+      element.dispatchEvent(
+        new CustomEvent("visibility-changed", { detail: { visibile } })
+      );
     }, 200);
   }
 
@@ -193,12 +244,18 @@ export class Bs4TabsComponent extends TemplatesComponent {
   protected setElements() {
     this.tabs = this.el.querySelectorAll('[role="tab"]');
     this.tabPanes = this.el.querySelectorAll('[role="tabpanel"]');
-    this.scrollable = this.el.querySelector('[scrollable]');
+    this.scrollable = this.el.querySelector("[scrollable]");
   }
 
   protected resizeTabsArray(newSize: number) {
     while (newSize > this.scope.items.length) {
-      this.scope.items.push({handle: '', title: '', content: '', active: false, index: this.scope.items.length - 1});
+      this.scope.items.push({
+        handle: "",
+        title: "",
+        content: "",
+        active: false,
+        index: this.scope.items.length - 1,
+      });
     }
   }
 
@@ -209,7 +266,8 @@ export class Bs4TabsComponent extends TemplatesComponent {
     }
     if (this.scrollable) {
       const tabScrollPosition = curTab.getBoundingClientRect();
-      const scrollLeftTo = this.scrollable.scrollLeft || 0 + tabScrollPosition.left;
+      const scrollLeftTo =
+        this.scrollable.scrollLeft || 0 + tabScrollPosition.left;
       // TODO animate
       // this.scrollable.animate({ scrollLeft: scrollLeftTo}, 'slow');
       this.scrollable.scrollLeft = scrollLeftTo;
@@ -225,33 +283,38 @@ export class Bs4TabsComponent extends TemplatesComponent {
     this.setElements();
 
     if (this.tabs) {
-      this.tabs.forEach(((tab) => {
-        tab.removeEventListener('shown.bs.tab', this.onTabShownEventHandler);
-        tab.addEventListener('shown.bs.tab', this.onTabShownEventHandler);
-      }));
+      this.tabs.forEach((tab) => {
+        tab.removeEventListener("shown.bs.tab", this.onTabShownEventHandler);
+        tab.addEventListener("shown.bs.tab", this.onTabShownEventHandler);
+      });
     }
 
     if (this.scope.optionTabsAutoHeight) {
-      window.removeEventListener('resize', this.onResizeEventHandler.bind(this));
-      window.addEventListener('resize', this.onResizeEventHandler.bind(this));
+      window.removeEventListener(
+        "resize",
+        this.onResizeEventHandler.bind(this)
+      );
+      window.addEventListener("resize", this.onResizeEventHandler.bind(this));
       this.setHeight();
     }
   }
 
   protected addTabByAttribute(attributeName: string, newValue: string) {
-    const index = Number(attributeName.replace(/[^0-9]/g, ''));
+    const index = Number(attributeName.replace(/[^0-9]/g, ""));
     if (index >= this.scope.items.length) {
       this.resizeTabsArray(index + 1);
     }
     this.scope.items[index].index = index;
-    if (attributeName.endsWith('Content')) {
+    if (attributeName.endsWith("Content")) {
       this.scope.items[index].content = newValue;
     }
-    if (attributeName.endsWith('Title')) {
+    if (attributeName.endsWith("Title")) {
       this.scope.items[index].title = newValue;
-      this.scope.items[index].handle = this.scope.items[index].handle || handleizeFormatter.read(this.scope.items[index].title);
+      this.scope.items[index].handle =
+        this.scope.items[index].handle ||
+        handleizeFormatter.read(this.scope.items[index].title);
     }
-    if (attributeName.endsWith('Handle')) {
+    if (attributeName.endsWith("Handle")) {
       this.scope.items[index].handle = newValue;
     }
 
@@ -276,9 +339,19 @@ export class Bs4TabsComponent extends TemplatesComponent {
     return attributes;
   }
 
-  protected parsedAttributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
-    super.parsedAttributeChangedCallback(attributeName, oldValue, newValue, namespace);
-    if (attributeName.startsWith('tab')) {
+  protected parsedAttributeChangedCallback(
+    attributeName: string,
+    oldValue: any,
+    newValue: any,
+    namespace: string | null
+  ) {
+    super.parsedAttributeChangedCallback(
+      attributeName,
+      oldValue,
+      newValue,
+      namespace
+    );
+    if (attributeName.startsWith("tab")) {
       this.addTabByAttribute(attributeName, newValue);
       this.initTabs();
     }
@@ -296,7 +369,7 @@ export class Bs4TabsComponent extends TemplatesComponent {
   protected template() {
     // Only set the component template if there no childs or the childs are templates
     if (!this.el.hasChildNodes() || this.hasOnlyTemplateChilds()) {
-      if (this.scope.optionTabsAngle === 'horizontal') {
+      if (this.scope.optionTabsAngle === "horizontal") {
         return templateHorizontal;
       } else {
         return templateVertical;

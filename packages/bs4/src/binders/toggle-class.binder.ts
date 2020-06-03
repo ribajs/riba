@@ -1,8 +1,8 @@
-import { Binder, EventDispatcher } from '@ribajs/core';
+import { Binder, EventDispatcher } from "@ribajs/core";
 
 export interface Bs4ToggleClass extends Binder<boolean> {
   toggleButtonEvents: EventDispatcher | null;
-  state: 'removed' | 'added';
+  state: "removed" | "added";
   triggerState: () => void;
   onToggle: () => void;
   toggle: (el: HTMLElement) => void;
@@ -10,9 +10,7 @@ export interface Bs4ToggleClass extends Binder<boolean> {
   add: (el: HTMLElement) => void;
 }
 
-import {
-  TOGGLE_BUTTON, TOGGLE_CLASS,
-} from '../constants';
+import { TOGGLE_BUTTON, TOGGLE_CLASS } from "../constants";
 
 /**
  * Adds / removes the class on click on the bs4-toggle-button with the same id
@@ -22,12 +20,15 @@ import {
  * * `on`
  */
 export const toggleClassBinder: Binder<string> = {
-  name: 'bs4-toggle-class-*',
+  name: "bs4-toggle-class-*",
   toggleButtonEvents: null,
-  state: 'off',
+  state: "off",
   triggerState() {
     const self = (this.binder || this) as Bs4ToggleClass;
-    self.toggleButtonEvents?.trigger(TOGGLE_BUTTON.eventNames.state, self.state);
+    self.toggleButtonEvents?.trigger(
+      TOGGLE_BUTTON.eventNames.state,
+      self.state
+    );
   },
   onToggle() {
     const self = (this.binder || this) as Bs4ToggleClass;
@@ -36,7 +37,7 @@ export const toggleClassBinder: Binder<string> = {
   },
   toggle(el: HTMLElement) {
     const self = (this.binder || this) as Bs4ToggleClass;
-    if (self.state === 'removed') {
+    if (self.state === "removed") {
       self.add.bind(this)(el);
     } else {
       self.remove.bind(this)(el);
@@ -46,29 +47,43 @@ export const toggleClassBinder: Binder<string> = {
     const self = (this.binder || this) as Bs4ToggleClass;
     const className = this.args[0] as string;
     el.classList.remove(className);
-    self.state = 'removed'
-    el.dispatchEvent(new CustomEvent(TOGGLE_CLASS.elEventNames.removed, {detail: {className}}));
+    self.state = "removed";
+    el.dispatchEvent(
+      new CustomEvent(TOGGLE_CLASS.elEventNames.removed, {
+        detail: { className },
+      })
+    );
     self.triggerState();
   },
   add(el: HTMLElement) {
     const self = (this.binder || this) as Bs4ToggleClass;
     const className = this.args[0] as string;
-    
+
     el.classList.add(className, className);
-    self.state = 'added';
-    el.dispatchEvent(new CustomEvent(TOGGLE_CLASS.elEventNames.added, {detail: {className}}));
+    self.state = "added";
+    el.dispatchEvent(
+      new CustomEvent(TOGGLE_CLASS.elEventNames.added, {
+        detail: { className },
+      })
+    );
     self.triggerState();
   },
   bind(el) {
     const self = (this.binder || this) as Bs4ToggleClass;
     const className = this.args[0] as string;
-    self.state = el.classList.contains(className) ? 'added' : 'removed'
+    self.state = el.classList.contains(className) ? "added" : "removed";
   },
 
   unbind() {
     const self = (this.binder || this) as Bs4ToggleClass;
-    self.toggleButtonEvents?.off(TOGGLE_BUTTON.eventNames.toggle, self.onToggle.bind(this));
-    self.toggleButtonEvents?.off(TOGGLE_BUTTON.eventNames.init, self.triggerState.bind(this));
+    self.toggleButtonEvents?.off(
+      TOGGLE_BUTTON.eventNames.toggle,
+      self.onToggle.bind(this)
+    );
+    self.toggleButtonEvents?.off(
+      TOGGLE_BUTTON.eventNames.init,
+      self.triggerState.bind(this)
+    );
   },
 
   routine(el: HTMLElement, newId: string) {
@@ -76,16 +91,29 @@ export const toggleClassBinder: Binder<string> = {
     const self = (this.binder || this) as Bs4ToggleClass;
     let toggleButton = self.toggleButtonEvents;
     if (oldId && toggleButton) {
-      toggleButton.off(TOGGLE_BUTTON.eventNames.toggle, self.onToggle.bind(this));
-      toggleButton.off(TOGGLE_BUTTON.eventNames.init, self.triggerState.bind(this));
+      toggleButton.off(
+        TOGGLE_BUTTON.eventNames.toggle,
+        self.onToggle.bind(this)
+      );
+      toggleButton.off(
+        TOGGLE_BUTTON.eventNames.init,
+        self.triggerState.bind(this)
+      );
     }
 
-    if(!self.toggleButtonEvents) {
-      self.toggleButtonEvents = new EventDispatcher(TOGGLE_BUTTON.nsPrefix + newId);
+    if (!self.toggleButtonEvents) {
+      self.toggleButtonEvents = new EventDispatcher(
+        TOGGLE_BUTTON.nsPrefix + newId
+      );
       toggleButton = self.toggleButtonEvents as EventDispatcher;
-      toggleButton.on(TOGGLE_BUTTON.eventNames.toggle, self.onToggle.bind(this));
-      toggleButton.on(TOGGLE_BUTTON.eventNames.init, self.triggerState.bind(this));
+      toggleButton.on(
+        TOGGLE_BUTTON.eventNames.toggle,
+        self.onToggle.bind(this)
+      );
+      toggleButton.on(
+        TOGGLE_BUTTON.eventNames.init,
+        self.triggerState.bind(this)
+      );
     }
-    
   },
 };

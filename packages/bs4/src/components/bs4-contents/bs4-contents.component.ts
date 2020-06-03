@@ -1,6 +1,6 @@
-import { Component } from '@ribajs/core';
+import { Component } from "@ribajs/core";
 
-import template from './bs4-contents.component.html';
+import template from "./bs4-contents.component.html";
 
 export interface Anchor {
   element: HTMLHeadingElement;
@@ -41,15 +41,21 @@ export interface Scope {
 }
 
 export class Bs4ContentsComponent extends Component {
-
-  public static tagName = 'bs4-contents';
+  public static tagName = "bs4-contents";
 
   protected autobind = true;
 
   protected wrapperElement?: Element;
 
   static get observedAttributes() {
-    return ['headers-start', 'headers-depth', 'find-header-id-depth', 'header-parent-selector', 'scroll-offset', 'scroll-element'];
+    return [
+      "headers-start",
+      "headers-depth",
+      "find-header-id-depth",
+      "header-parent-selector",
+      "scroll-offset",
+      "scroll-element",
+    ];
   }
 
   protected scope: Scope = {
@@ -70,7 +76,10 @@ export class Bs4ContentsComponent extends Component {
     this.init(Bs4ContentsComponent.observedAttributes);
   }
 
-  protected getIdFromElementOrParent(element: HTMLElement, depth = 1): string | null {
+  protected getIdFromElementOrParent(
+    element: HTMLElement,
+    depth = 1
+  ): string | null {
     if (element.id) {
       return element.id;
     }
@@ -82,8 +91,15 @@ export class Bs4ContentsComponent extends Component {
     return null;
   }
 
-  protected pushHeaders(wrapperElement: Element, headersStart: number, headersDepth: number, pushTo: Anchor[]) {
-    const headerElements = wrapperElement.querySelectorAll('h' + headersStart) as NodeListOf<HTMLHeadingElement>;
+  protected pushHeaders(
+    wrapperElement: Element,
+    headersStart: number,
+    headersDepth: number,
+    pushTo: Anchor[]
+  ) {
+    const headerElements = wrapperElement.querySelectorAll(
+      "h" + headersStart
+    ) as NodeListOf<HTMLHeadingElement>;
     headerElements.forEach((headerElement) => {
       const id = this.getIdFromElementOrParent(headerElement);
       if (!id) {
@@ -91,12 +107,17 @@ export class Bs4ContentsComponent extends Component {
       }
       pushTo.push({
         element: headerElement,
-        href: '#' + id,
+        href: "#" + id,
         title: headerElement.innerHTML,
         childs: [],
       });
       if (headerElement.parentElement && headersDepth >= headersStart + 1) {
-        this.pushHeaders(headerElement.parentElement, headersStart + 1, headersDepth, pushTo[pushTo.length - 1].childs);
+        this.pushHeaders(
+          headerElement.parentElement,
+          headersStart + 1,
+          headersDepth,
+          pushTo[pushTo.length - 1].childs
+        );
       }
     });
   }
@@ -107,23 +128,43 @@ export class Bs4ContentsComponent extends Component {
 
   protected async afterBind() {
     await super.afterBind();
-    if (this.scope.headerParentSelector && this.scope.headersStart && this.scope.headersDepth) {
-      this.wrapperElement = document.querySelector(this.scope.headerParentSelector) || undefined;
+    if (
+      this.scope.headerParentSelector &&
+      this.scope.headersStart &&
+      this.scope.headersDepth
+    ) {
+      this.wrapperElement =
+        document.querySelector(this.scope.headerParentSelector) || undefined;
       this.scope.anchors = [];
       if (!this.wrapperElement) {
-        console.error('No wrapper element found!');
+        console.error("No wrapper element found!");
         return;
       }
-      this.pushHeaders(this.wrapperElement, this.scope.headersStart, this.scope.headersDepth, this.scope.anchors);
+      this.pushHeaders(
+        this.wrapperElement,
+        this.scope.headersStart,
+        this.scope.headersDepth,
+        this.scope.anchors
+      );
     }
   }
 
   protected requiredAttributes() {
-    return ['headersStart', 'headersDepth', 'headerParentSelector'];
+    return ["headersStart", "headersDepth", "headerParentSelector"];
   }
 
-  protected attributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
-    super.attributeChangedCallback(attributeName, oldValue, newValue, namespace);
+  protected attributeChangedCallback(
+    attributeName: string,
+    oldValue: any,
+    newValue: any,
+    namespace: string | null
+  ) {
+    super.attributeChangedCallback(
+      attributeName,
+      oldValue,
+      newValue,
+      namespace
+    );
   }
 
   // deconstructor
