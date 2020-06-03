@@ -194,6 +194,7 @@ module.exports = (config) => {
           "@ribajs/leaflet-map": true,
           "@ribajs/shopify-tda": true,
           "@ribajs/shopify-easdk": true,
+          "@ribajs/leaflet-map": true,
           "@ribajs/pdf": true,
         },
       };
