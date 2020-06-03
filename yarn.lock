@@ -2661,6 +2661,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/utils@portal:packages/utils::locator=ribajs%40workspace%3A."
   dependencies:
+    "@babel/runtime": ^7.10.2
     "@babel/runtime-corejs3": ^7.10.2
     babel-jest: ^26.0.1
   languageName: node

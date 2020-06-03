@@ -3455,6 +3455,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/utils/",
           "packageDependencies": [
             ["@ribajs/utils", "portal:packages/utils::locator=ribajs%40workspace%3A."],
+            ["@babel/runtime", "npm:7.10.2"],
             ["@babel/runtime-corejs3", "npm:7.10.2"],
             ["babel-jest", "virtual:04fd72c6c054247c4ac0dd2e1dae4dda177427c096fa5f64074292499f7d98bc941b4307389bf16dbf972c79c80215ef202df0b7a3de284b81f3b825c0907ba7#npm:26.0.1"]
           ],

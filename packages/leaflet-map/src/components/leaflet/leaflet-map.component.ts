@@ -1,11 +1,13 @@
 import { Component } from "@ribajs/core";
-
+import { isNumber, justDigits } from "@ribajs/utils/src/type";
 import template from "./leaflet-map.component.html";
-import * as L from "leaflet";
+import * as Leaflet from "leaflet";
+import { PointTuple, IconOptions } from "leaflet";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 
 interface Scope {
+  mapSelector: string;
   initialLat: number;
   initialLng: number;
   initialZoom: number;
@@ -27,9 +29,9 @@ export class LeafletMapComponent extends Component {
   protected autobind = true;
 
   protected markers: Marker[] = [];
-  protected icons: { [key: string]: L.Icon } = {};
+  protected icons: { [key: string]: Leaflet.Icon } = {};
 
-  protected defaultIcon: any = L.icon({
+  protected defaultIcon: any = Leaflet.icon({
     iconUrl: markerIcon,
     shadowUrl: markerShadow,
     iconSize: [25, 41],
@@ -41,6 +43,7 @@ export class LeafletMapComponent extends Component {
 
   static get observedAttributes() {
     return [
+      "map-selector",
       "initial-lat",
       "initial-lng",
       "initial-zoom",
@@ -50,6 +53,7 @@ export class LeafletMapComponent extends Component {
   }
 
   protected scope: Scope = {
+    mapSelector: ".leaflet-map",
     initialLat: 53.872654,
     initialLng: 8.710849,
     initialZoom: 13,
@@ -78,20 +82,26 @@ export class LeafletMapComponent extends Component {
   protected async afterBind() {
     await super.afterBind();
     const mapId = "map-" + Math.floor(Math.random() * 9999);
-    this.el.querySelector(".leaflet-map").id = mapId;
-    const map = new L.Map(mapId).setView([this.scope.initialLat, this.scope.initialLng], this.scope.initialZoom);
+    const mapElement = this.el.querySelector(this.scope.mapSelector);
+    if (mapElement) {
+      mapElement.id = mapId;
+    } else {
+      console.warn(`No element with selector "${this.scope.mapSelector}" found!`);
+    }
+    
+    const map = new Leaflet.Map(mapId).setView([this.scope.initialLat, this.scope.initialLng], this.scope.initialZoom);
 
 
-    L.tileLayer(this.scope.tileUrl, {
+    Leaflet.tileLayer(this.scope.tileUrl, {
       attribution: this.scope.attribution,
     }).addTo(map);
 
     for (const marker of this.markers) {
       let leafletMarker;
       if (marker.icon !== undefined && marker.icon !== null) {
-        leafletMarker = L.marker([marker.lat, marker.lng], { icon: this.icons[marker.icon] });
+        leafletMarker = Leaflet.marker([marker.lat, marker.lng], { icon: this.icons[marker.icon] });
       } else {
-        leafletMarker = L.marker([marker.lat, marker.lng]);
+        leafletMarker = Leaflet.marker([marker.lat, marker.lng]);
       }
       leafletMarker.addTo(map).bindPopup(marker.title);
       if (marker.openByDefault) {
@@ -105,34 +115,68 @@ export class LeafletMapComponent extends Component {
     super.disconnectedCallback();
   }
 
+  protected convertStringToPointTuple(str: string): PointTuple | undefined {
+    const stringArr = str.replace(" ", "").split(",");
+    if (stringArr.length !== 2) {
+      console.warn(`Can't convert "${str}" to a PointTuple`);
+      return undefined;
+    }
+    const numberArr = stringArr.map((str: string) => {
+      if (isNumber(str)) {
+        return justDigits(str);
+      }
+      console.warn(`Can't convert "${str}" to a number`);
+      return undefined;
+    });
+
+    return numberArr as PointTuple;
+  }
+
   protected template() {
     for (const el of this.el.children) {
       if (el.tagName === "ICON") {
         const iconName = el.getAttribute("name");
         const iconUrl = el.getAttribute("icon-url");
         const shadowUrl = el.getAttribute("shadow-url");
-        const iconSize = el.getAttribute("icon-size");
-        const iconAnchor = el.getAttribute("icon-anchor");
-        const popupAnchor = el.getAttribute("popup-anchor");
-        const shadowSize = el.getAttribute("shadow-size");
-        const shadowAnchor = el.getAttribute("shadow-anchor");
-        if (iconName && iconUrl && shadowUrl && iconSize && iconAnchor && popupAnchor && shadowSize && shadowAnchor) {
-          this.icons[iconName] = L.icon({
-            iconUrl: iconUrl,
-            shadowUrl: shadowUrl,
-            iconSize: iconSize.replace(" ", "").split(","),
-            iconAnchor: iconAnchor.replace(" ", "").split(","),
-            popupAnchor: popupAnchor.replace(" ", "").split(","),
-            shadowSize: shadowSize.replace(" ", "").split(","),
-            shadowAnchor: shadowAnchor.replace(" ", "").split(",")
-          });
+        const iconSizeAttr = el.getAttribute("icon-size");
+        const iconAnchorAttr = el.getAttribute("icon-anchor");
+        const popupAnchorAttr = el.getAttribute("popup-anchor");
+        const shadowSizeAttr = el.getAttribute("shadow-size");
+        const shadowAnchorAttr = el.getAttribute("shadow-anchor");
+        if (iconName && iconUrl && shadowUrl) {
+          const iconOptions: IconOptions = {
+            iconUrl,
+            shadowUrl,
+          }
+
+          if (iconSizeAttr) {
+            iconOptions.iconSize = this.convertStringToPointTuple(iconSizeAttr);
+          }
+
+          if (iconAnchorAttr) {
+            iconOptions.iconAnchor = this.convertStringToPointTuple(iconAnchorAttr);
+          }
+
+          if (popupAnchorAttr) {
+            iconOptions.popupAnchor = this.convertStringToPointTuple(popupAnchorAttr);
+          }
+
+          if (shadowSizeAttr) {
+            iconOptions.shadowSize = this.convertStringToPointTuple(shadowSizeAttr);
+          }
+
+          if (shadowAnchorAttr) {
+            iconOptions.shadowSize = this.convertStringToPointTuple(shadowAnchorAttr);
+          }
+
+          this.icons[iconName] = Leaflet.icon(iconOptions);
         }
       }
 
       if (el.tagName === "MARKER") {
         const lat = el.getAttribute("lat");
         const lng = el.getAttribute("lng");
-        const icon = el.getAttribute("icon");
+        const icon = el.getAttribute("icon") || undefined;
         const title = el.textContent;
         if (lat != null && lng != null && title != null) {
           this.markers.push({
