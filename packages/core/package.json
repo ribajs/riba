@@ -50,6 +50,7 @@
     "@babel/plugin-transform-runtime": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-typescript": "^7.10.1",
+    "@babel/runtime": "^7.10.2",
     "@babel/runtime-corejs3": "^7.10.2",
     "@ribajs/eslint-config": "workspace:infra/eslint-config",
     "@ribajs/tsconfig": "workspace:infra/tsconfig",

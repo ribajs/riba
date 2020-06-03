@@ -39,6 +39,8 @@
   "homepage": "https://github.com/ribajs/riba#readme",
   "directories": {},
   "devDependencies": {
-    "@babel/runtime-corejs3": "^7.10.2"
+    "@babel/runtime": "^7.10.2",
+    "@babel/runtime-corejs3": "^7.10.2",
+    "babel-jest": "^26.0.1"
   }
 }
