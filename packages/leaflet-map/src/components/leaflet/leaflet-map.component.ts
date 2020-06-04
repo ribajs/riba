@@ -11,6 +11,7 @@ interface Scope {
   initialZoom: number;
   tileUrl: string;
   attribution: string;
+  assetsDir: string;
 }
 
 interface Marker {
@@ -20,7 +21,6 @@ interface Marker {
   icon?: string;
   openByDefault: boolean;
 }
-
 export class LeafletMapComponent extends Component {
   public static tagName = "leaflet-map";
 
@@ -31,7 +31,7 @@ export class LeafletMapComponent extends Component {
   private map?: Leaflet.Map;
 
   static get observedAttributes() {
-    return ["map-selector", "initial-lat", "initial-lng", "initial-zoom", "tile-url", "attribution"];
+    return ["map-selector", "initial-lat", "initial-lng", "initial-zoom", "tile-url", "attribution", "assets-dir"];
   }
 
   protected scope: Scope = {
@@ -39,6 +39,7 @@ export class LeafletMapComponent extends Component {
     initialLat: 53.872654,
     initialLng: 8.710849,
     initialZoom: 13,
+    assetsDir: "/images/vendors/leaflet/images/",
     tileUrl: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   };
@@ -63,7 +64,7 @@ export class LeafletMapComponent extends Component {
   protected async afterBind() {
     await super.afterBind();
 
-    Leaflet.Icon.Default.imagePath = "images/vendors/leaflet/images/";
+    Leaflet.Icon.Default.imagePath = this.scope.assetsDir;
 
     const mapId = "map-" + Math.floor(Math.random() * 9999);
     const mapElement = this.el.querySelector(this.scope.mapSelector);
@@ -107,6 +108,7 @@ export class LeafletMapComponent extends Component {
     dispatcher.on("visibility-changed", () => {
       if (this.map) {
         this.map.invalidateSize();
+        console.log("visiblity changed");
       }
     });
   }
