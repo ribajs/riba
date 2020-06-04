@@ -1,24 +1,21 @@
-import {
-  Component,
-} from '@ribajs/core';
+import { Component } from "@ribajs/core";
 
 interface Scope {
   animationClass: string;
-  onClick: Bs4ButtonComponent['onClick'];
+  onClick: Bs4ButtonComponent["onClick"];
 }
 
 export class Bs4ButtonComponent extends Component {
-
-  public static tagName = 'bs4-button';
+  public static tagName = "bs4-button";
 
   protected autobind = true;
 
   static get observedAttributes() {
-    return ['animation-class'];
+    return ["animation-class"];
   }
 
   protected scope: Scope = {
-    animationClass: 'btn-animation-start',
+    animationClass: "btn-animation-start",
     onClick: this.onClick,
   };
 
@@ -55,13 +52,21 @@ export class Bs4ButtonComponent extends Component {
   }
 
   protected async init(observedAttributes: string[]) {
-    return super.init(observedAttributes)
-    .then((view) => {
-      this.el.addEventListener('webkitAnimationStart' as 'animationstart', this.onStartAnimation.bind(this));
-      this.el.addEventListener('animationstart', this.onStartAnimation.bind(this));
-      this.el.addEventListener('webkitAnimationEnd' as 'animationend', this.onEndAnimation.bind(this));
-      this.el.addEventListener('animationend', this.onEndAnimation.bind(this));
-      this.el.addEventListener('click', this.onClick.bind(this));
+    return super.init(observedAttributes).then((view) => {
+      this.el.addEventListener(
+        "webkitAnimationStart" as "animationstart",
+        this.onStartAnimation.bind(this)
+      );
+      this.el.addEventListener(
+        "animationstart",
+        this.onStartAnimation.bind(this)
+      );
+      this.el.addEventListener(
+        "webkitAnimationEnd" as "animationend",
+        this.onEndAnimation.bind(this)
+      );
+      this.el.addEventListener("animationend", this.onEndAnimation.bind(this));
+      this.el.addEventListener("click", this.onClick.bind(this));
       return view;
     });
   }
@@ -80,18 +85,37 @@ export class Bs4ButtonComponent extends Component {
     return [];
   }
 
-  protected parsedAttributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
-    super.parsedAttributeChangedCallback(attributeName, oldValue, newValue, namespace);
+  protected parsedAttributeChangedCallback(
+    attributeName: string,
+    oldValue: any,
+    newValue: any,
+    namespace: string | null
+  ) {
+    super.parsedAttributeChangedCallback(
+      attributeName,
+      oldValue,
+      newValue,
+      namespace
+    );
   }
 
   // deconstructor
   protected disconnectedCallback() {
     super.disconnectedCallback();
-    this.el.removeEventListener('webkitAnimationStart' as 'animationstart', this.onStartAnimation.bind(this));
-    this.el.removeEventListener('animationstart', this.onStartAnimation.bind(this));
-    this.el.removeEventListener('webkitAnimationEnd' as 'animationend', this.onEndAnimation.bind(this));
-    this.el.removeEventListener('animationend', this.onEndAnimation.bind(this));
-    this.el.removeEventListener('click', this.onClick.bind(this));
+    this.el.removeEventListener(
+      "webkitAnimationStart" as "animationstart",
+      this.onStartAnimation.bind(this)
+    );
+    this.el.removeEventListener(
+      "animationstart",
+      this.onStartAnimation.bind(this)
+    );
+    this.el.removeEventListener(
+      "webkitAnimationEnd" as "animationend",
+      this.onEndAnimation.bind(this)
+    );
+    this.el.removeEventListener("animationend", this.onEndAnimation.bind(this));
+    this.el.removeEventListener("click", this.onClick.bind(this));
   }
 
   protected template() {

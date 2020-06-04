@@ -1,10 +1,12 @@
-import {
-  Component,
-  EventDispatcher,
-} from '@ribajs/core';
-import { getViewportDimensions } from '@ribajs/utils/src/dom';
+import { Component, EventDispatcher } from "@ribajs/core";
+import { getViewportDimensions } from "@ribajs/utils/src/dom";
 
-type State = 'overlay-left' | 'overlay-right' | 'side-left' | 'side-right' | 'hidden';
+type State =
+  | "overlay-left"
+  | "overlay-right"
+  | "side-left"
+  | "side-right"
+  | "hidden";
 
 interface Scope {
   /**
@@ -28,7 +30,7 @@ interface Scope {
   /**
    * The sidebar can be positioned `right` or `left`
    */
-  position: 'left' | 'right';
+  position: "left" | "right";
   /**
    * Auto show the sidebar if the viewport width is wider than this value
    */
@@ -58,20 +60,19 @@ interface Scope {
   /**
    * Hides / closes the sidebar
    */
-  hide: Bs4SidebarComponent['hide'];
+  hide: Bs4SidebarComponent["hide"];
   /**
    * Shows / opens the sidebar
    */
-  show: Bs4SidebarComponent['show'];
+  show: Bs4SidebarComponent["show"];
   /**
    * Toggles (closes or opens) the sidebar
    */
-  toggle: Bs4SidebarComponent['toggle'];
+  toggle: Bs4SidebarComponent["toggle"];
 }
 
 export class Bs4SidebarComponent extends Component {
-
-  public static tagName = 'bs4-sidebar';
+  public static tagName = "bs4-sidebar";
 
   protected style?: CSSStyleDeclaration;
 
@@ -79,33 +80,32 @@ export class Bs4SidebarComponent extends Component {
 
   static get observedAttributes() {
     return [
-      'id',
-      'container-selector',
-      'position',
-      'width',
-      'auto-show-on-wider-than',
-      'auto-hide-on-slimmer-than',
-      'force-hide-on-location-pathnames',
-      'force-show-on-location-pathnames',
-      'overlay-on-slimmer-than',
-      'watch-new-page-ready-event',
+      "id",
+      "container-selector",
+      "position",
+      "width",
+      "auto-show-on-wider-than",
+      "auto-hide-on-slimmer-than",
+      "force-hide-on-location-pathnames",
+      "force-show-on-location-pathnames",
+      "overlay-on-slimmer-than",
+      "watch-new-page-ready-event",
     ];
   }
 
   protected toggleButtonEvents?: EventDispatcher;
 
-  protected routerEvents = new EventDispatcher('main');
+  protected routerEvents = new EventDispatcher("main");
 
   protected scope: Scope = {
-
     // template properties
     containerSelector: undefined,
-    state: 'hidden',
+    state: "hidden",
     id: undefined,
-    width: '250px',
+    width: "250px",
 
     // Options
-    position: 'left',
+    position: "left",
     autoShowOnWiderThan: 1199,
     autoHideOnSlimmerThan: 1200,
     watchNewPageReadyEvent: true,
@@ -132,22 +132,22 @@ export class Bs4SidebarComponent extends Component {
   }
 
   public hide() {
-    this.scope.state = 'hidden';
+    this.scope.state = "hidden";
     this.onStateChange();
   }
 
   public show() {
     const vw = getViewportDimensions().w;
     if (vw < this.scope.overlayOnSlimmerThan) {
-      this.scope.state = 'overlay-' + this.scope.position as State;
+      this.scope.state = ("overlay-" + this.scope.position) as State;
     } else {
-      this.scope.state = 'side-' + this.scope.position as State;
+      this.scope.state = ("side-" + this.scope.position) as State;
     }
     this.onStateChange();
   }
 
   public toggle() {
-    if (this.scope.state === 'hidden') {
+    if (this.scope.state === "hidden") {
       this.show();
     } else {
       this.hide();
@@ -158,7 +158,11 @@ export class Bs4SidebarComponent extends Component {
     super.connectedCallback();
     this.init(Bs4SidebarComponent.observedAttributes);
     this.style = window.getComputedStyle(this.el);
-    window.addEventListener('resize', this.onEnviromentChanges.bind(this), false);
+    window.addEventListener(
+      "resize",
+      this.onEnviromentChanges.bind(this),
+      false
+    );
     // inital
     this.onEnviromentChanges();
   }
@@ -169,75 +173,96 @@ export class Bs4SidebarComponent extends Component {
 
   protected initToggleButtonEventDispatcher() {
     if (this.toggleButtonEvents) {
-      this.toggleButtonEvents.off('toggle', this.onToggle.bind(this));
-      this.toggleButtonEvents.off('init', this.triggerState.bind(this));
+      this.toggleButtonEvents.off("toggle", this.onToggle.bind(this));
+      this.toggleButtonEvents.off("init", this.triggerState.bind(this));
     }
-    this.toggleButtonEvents = new EventDispatcher('bs4-toggle-button:' + this.scope.id);
-    this.toggleButtonEvents.on('toggle', this.onToggle.bind(this));
-    this.toggleButtonEvents.on('init', this.triggerState.bind(this));
+    this.toggleButtonEvents = new EventDispatcher(
+      "bs4-toggle-button:" + this.scope.id
+    );
+    this.toggleButtonEvents.on("toggle", this.onToggle.bind(this));
+    this.toggleButtonEvents.on("init", this.triggerState.bind(this));
   }
 
   protected initRouterEventDispatcher() {
     if (this.scope.watchNewPageReadyEvent) {
-      this.routerEvents.on('newPageReady', this.onEnviromentChanges.bind(this));
+      this.routerEvents.on("newPageReady", this.onEnviromentChanges.bind(this));
     }
   }
 
   protected onHidden() {
     this.setContainersStyle();
-    const translateX = this.scope.position === 'left' ? '-100%' : '100%';
-    this.el.setAttribute('style', `transform:translateX(${translateX});width:${this.scope.width};`);
+    const translateX = this.scope.position === "left" ? "-100%" : "100%";
+    this.el.setAttribute(
+      "style",
+      `transform:translateX(${translateX});width:${this.scope.width};`
+    );
   }
 
   protected onSide(directon: State) {
-    this.setContainersStyle(undefined, '', directon);
-    this.el.setAttribute('style', `transform:translateX(0);width:${this.scope.width};`);
+    this.setContainersStyle(undefined, "", directon);
+    this.el.setAttribute(
+      "style",
+      `transform:translateX(0);width:${this.scope.width};`
+    );
   }
 
   protected onOverlay(directon: State) {
-    this.setContainersStyle(undefined, '', directon);
-    this.el.setAttribute('style', `transform:translateX(0);width:${this.scope.width};`);
+    this.setContainersStyle(undefined, "", directon);
+    this.el.setAttribute(
+      "style",
+      `transform:translateX(0);width:${this.scope.width};`
+    );
   }
 
   protected triggerState() {
-    this.toggleButtonEvents?.trigger('state', this.scope.state);
+    this.toggleButtonEvents?.trigger("state", this.scope.state);
   }
 
   protected onStateChange() {
     switch (this.scope.state) {
-      case 'side-left':
-      case 'side-right':
+      case "side-left":
+      case "side-right":
         this.onSide(this.scope.state);
         break;
-        case 'overlay-left':
-        case 'overlay-right':
-          this.onOverlay(this.scope.state);
-          break;
+      case "overlay-left":
+      case "overlay-right":
+        this.onOverlay(this.scope.state);
+        break;
       default:
         this.onHidden();
         break;
     }
     if (this.toggleButtonEvents) {
-      this.toggleButtonEvents.trigger('toggled', this.scope.state);
+      this.toggleButtonEvents.trigger("toggled", this.scope.state);
     }
   }
 
   protected get width() {
-    return this.el.offsetWidth ? this.el.offsetWidth + 'px' : this.scope.width;
+    return this.el.offsetWidth ? this.el.offsetWidth + "px" : this.scope.width;
   }
 
   protected setStateByEnviroment() {
-    if (this.scope.forceHideOnLocationPathnames.includes(window.location.pathname)) {
+    if (
+      this.scope.forceHideOnLocationPathnames.includes(window.location.pathname)
+    ) {
       return this.hide();
     }
-    if (this.scope.forceShowOnLocationPathnames.includes(window.location.pathname)) {
+    if (
+      this.scope.forceShowOnLocationPathnames.includes(window.location.pathname)
+    ) {
       return this.show();
     }
     const vw = getViewportDimensions().w;
-    if (this.scope.autoHideOnSlimmerThan > -1 && vw < this.scope.autoHideOnSlimmerThan) {
+    if (
+      this.scope.autoHideOnSlimmerThan > -1 &&
+      vw < this.scope.autoHideOnSlimmerThan
+    ) {
       return this.hide();
     }
-    if (this.scope.autoShowOnWiderThan > -1 && vw > this.scope.autoShowOnWiderThan) {
+    if (
+      this.scope.autoShowOnWiderThan > -1 &&
+      vw > this.scope.autoShowOnWiderThan
+    ) {
       return this.show();
     }
   }
@@ -250,7 +275,11 @@ export class Bs4SidebarComponent extends Component {
   }
 
   protected getContainers() {
-    return this.scope.containerSelector ? document.querySelectorAll<HTMLUnknownElement>(this.scope.containerSelector) : undefined;
+    return this.scope.containerSelector
+      ? document.querySelectorAll<HTMLUnknownElement>(
+          this.scope.containerSelector
+        )
+      : undefined;
   }
 
   protected initContainers() {
@@ -258,7 +287,11 @@ export class Bs4SidebarComponent extends Component {
     this.setContainersStyle(containers);
   }
 
-  protected setContainersStyle(containers?: NodeListOf<HTMLUnknownElement>, style?: string, move?: State) {
+  protected setContainersStyle(
+    containers?: NodeListOf<HTMLUnknownElement>,
+    style?: string,
+    move?: State
+  ) {
     if (!containers) {
       containers = this.getContainers();
     }
@@ -276,28 +309,32 @@ export class Bs4SidebarComponent extends Component {
    * @param style
    * @param move
    */
-  protected setContainerStyle(container: HTMLUnknownElement, style = '', move?: State) {
+  protected setContainerStyle(
+    container: HTMLUnknownElement,
+    style = "",
+    move?: State
+  ) {
     if (move) {
       const width = this.width;
       const conStyle = window.getComputedStyle(container);
       switch (move) {
-        case 'side-left':
+        case "side-left":
           switch (conStyle.position) {
-            case 'fixed':
-              style += 'left:' + width;
+            case "fixed":
+              style += "left:" + width;
               break;
             default:
-              style += 'margin-left:' + width;
+              style += "margin-left:" + width;
               break;
           }
           break;
-        case 'side-right':
+        case "side-right":
           switch (conStyle.position) {
-            case 'fixed':
-              style += 'right:' + width;
+            case "fixed":
+              style += "right:" + width;
               break;
             default:
-              style += 'margin-right:' + width;
+              style += "margin-right:" + width;
               break;
           }
           break;
@@ -305,7 +342,10 @@ export class Bs4SidebarComponent extends Component {
           break;
       }
     }
-    return container.setAttribute('style', `transition:${this.style ? this.style.transition : ''};${style}`);
+    return container.setAttribute(
+      "style",
+      `transition:${this.style ? this.style.transition : ""};${style}`
+    );
   }
 
   protected async beforeBind() {
@@ -320,15 +360,25 @@ export class Bs4SidebarComponent extends Component {
   }
 
   protected requiredAttributes() {
-    return ['id'];
+    return ["id"];
   }
 
-  protected parsedAttributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
-    super.parsedAttributeChangedCallback(attributeName, oldValue, newValue, namespace);
-    if (attributeName === 'containerSelector') {
+  protected parsedAttributeChangedCallback(
+    attributeName: string,
+    oldValue: any,
+    newValue: any,
+    namespace: string | null
+  ) {
+    super.parsedAttributeChangedCallback(
+      attributeName,
+      oldValue,
+      newValue,
+      namespace
+    );
+    if (attributeName === "containerSelector") {
       this.initContainers();
     }
-    if (attributeName === 'id') {
+    if (attributeName === "id") {
       this.initToggleButtonEventDispatcher();
     }
   }
@@ -336,16 +386,22 @@ export class Bs4SidebarComponent extends Component {
   // deconstructor
   protected disconnectedCallback() {
     super.disconnectedCallback();
-    this.toggleButtonEvents?.off('init', this.triggerState.bind(this));
-    this.toggleButtonEvents?.off('toggle', this.onToggle.bind(this));
-    this.toggleButtonEvents?.off('init', this.triggerState.bind(this));
-    this.routerEvents.off('newPageReady', this.onEnviromentChanges.bind(this));
-    window.removeEventListener('resize', this.onEnviromentChanges.bind(this), false);
+    this.toggleButtonEvents?.off("init", this.triggerState.bind(this));
+    this.toggleButtonEvents?.off("toggle", this.onToggle.bind(this));
+    this.toggleButtonEvents?.off("init", this.triggerState.bind(this));
+    this.routerEvents.off("newPageReady", this.onEnviromentChanges.bind(this));
+    window.removeEventListener(
+      "resize",
+      this.onEnviromentChanges.bind(this),
+      false
+    );
   }
 
   protected template() {
     if (!this.el.hasChildNodes()) {
-      console.warn('No child elements found, this component as no template so you need to define your own as child of this component.');
+      console.warn(
+        "No child elements found, this component as no template so you need to define your own as child of this component."
+      );
     }
     return null;
   }

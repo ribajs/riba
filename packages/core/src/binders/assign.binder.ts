@@ -15,7 +15,7 @@ export interface Assign {
  */
 export const assignBinder: Binder<Assign> = {
   name: "assign",
-  routine(el: HTMLElement, value: object) {
+  routine(el: HTMLElement, value: any) {
     if (typeof value === "object") {
       return extend(false, this.view.models, value);
     }

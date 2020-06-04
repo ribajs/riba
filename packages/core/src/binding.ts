@@ -396,7 +396,7 @@ export class Binding {
       !(regexp.test(type) && type.split("-")[0] === identifier.split("-")[0])
     ) {
       if (identifier !== "*") {
-        console.error("Nodename not matchs the identifier,", identifier, type);
+        // console.error("Nodename not matchs the identifier,", identifier, type);
       }
     }
 

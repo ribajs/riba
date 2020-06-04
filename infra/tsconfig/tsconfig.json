@@ -3,7 +3,6 @@
     "module": "ESNEXT",
     "target": "ESNext",
     "moduleResolution": "node",
-    "typeRoots": ["./node_modules/@types", "./node_modules/@ribajs/types", "./node_modules/@ribajs/photoswipe/src/types", "./src/types"],
     "declaration": true,
     "inlineSourceMap": true,
     "noUnusedLocals": true,

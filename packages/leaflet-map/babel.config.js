@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 module.exports = {
   presets: [
     [
@@ -10,7 +11,7 @@ module.exports = {
       "@babel/preset-env",
       {
         corejs: 3,
-        useBuiltIns: "entry", // or "usage"
+        useBuiltIns: "entry",
       },
     ],
   ],
@@ -18,7 +19,7 @@ module.exports = {
     [
       "@babel/plugin-transform-runtime",
       {
-        corejs: 3,
+        regenerator: true,
       },
     ],
     "@babel/plugin-syntax-export-default-from",

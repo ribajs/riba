@@ -1,12 +1,12 @@
-import { Binder } from '@ribajs/core';
-import { debounce } from '@ribajs/utils/src/control';
+import { Binder } from "@ribajs/core";
+import { debounce } from "@ribajs/utils/src/control";
 
 /**
  * scrollspy-class
  * @see https://getbootstrap.com/docs/4.1/components/scrollspy/
  */
 export const scrollspyClassBinder: Binder<string> = {
-  name: 'bs4-scrollspy-*',
+  name: "bs4-scrollspy-*",
   bind(el: HTMLElement) {
     this.customData = {};
     /**
@@ -14,7 +14,7 @@ export const scrollspyClassBinder: Binder<string> = {
      * @param elem The element
      * @return Returns true if element is in the viewport
      */
-    this.customData.isInViewport = (elem: Element ): boolean => {
+    this.customData.isInViewport = (elem: Element): boolean => {
       if (!elem) {
         return false;
       }
@@ -22,7 +22,8 @@ export const scrollspyClassBinder: Binder<string> = {
       this.customData.offsetTop = Number(el.dataset.offset || 0);
       this.customData.offsetBottom = Number(el.dataset.offsetBottom || 0);
       return (
-        distance.top + distance.height >= this.customData.offsetBottom && distance.bottom - distance.height <= this.customData.offsetTop
+        distance.top + distance.height >= this.customData.offsetBottom &&
+        distance.bottom - distance.height <= this.customData.offsetTop
       );
     };
 
@@ -44,25 +45,32 @@ export const scrollspyClassBinder: Binder<string> = {
 
       if (this.customData.isInViewport(target)) {
         el.classList.add(className);
-        if ((el as HTMLInputElement).type === 'radio') {
+        if ((el as HTMLInputElement).type === "radio") {
           (el as HTMLInputElement).checked = true;
         }
       } else {
         el.classList.remove(className);
-        if ((el as HTMLInputElement).type === 'radio') {
+        if ((el as HTMLInputElement).type === "radio") {
           (el as HTMLInputElement).checked = false;
         }
       }
     };
-    window.addEventListener('scroll', debounce(this.customData.onScroll.bind(this)), { passive: true });
+    window.addEventListener(
+      "scroll",
+      debounce(this.customData.onScroll.bind(this)),
+      { passive: true }
+    );
     this.customData.onScroll();
   },
   routine(el: HTMLElement, targetSelector: string) {
-    const nativeIDTargetSelector = targetSelector.replace('#', '');
+    const nativeIDTargetSelector = targetSelector.replace("#", "");
     this.customData.target = document.getElementById(nativeIDTargetSelector);
     this.customData.className = this.args[0] as string;
   },
   unbind() {
-    window.removeEventListener('scroll', debounce(this.customData.onScroll.bind(this)));
+    window.removeEventListener(
+      "scroll",
+      debounce(this.customData.onScroll.bind(this))
+    );
   },
 };
