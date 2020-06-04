@@ -60,6 +60,7 @@
     "postcss-modules": "^2.0.0",
     "prettier": "^2.0.5",
     "pug-loader": "^2.4.0",
+    "resolve-url-loader": "^3.1.1",
     "sass-loader": "^8.0.2",
     "terser-webpack-plugin": "^3.0.3",
     "ts-jest": "^26.1.0",
@@ -74,7 +75,8 @@
     "@ribajs/extras": "^1.9.0-alpha.0",
     "@ribajs/iconset": "^1.9.0-alpha.0",
     "@ribajs/leaflet-map": "^1.9.0-alpha.0",
-    "bootstrap": "^4.5.0"
+    "bootstrap": "^4.5.0",
+    "leaflet": "^1.6.0"
   },
   "resolutions": {
     "@ribajs/bs4": "portal:../../packages/bs4",

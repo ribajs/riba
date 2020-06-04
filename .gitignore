@@ -30,12 +30,18 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/pnpify/
+
 # Yarn
-.yarn/cache/
-.yarn/unplugged/
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+.pnp.*
 
 # Demos
 /demos/*/src/iconset/
-/demos/*/src/scss/vendors
-/demos/*/.yarn/cache/
-/demos/*/.yarn/unplugged/
+/demos/*/src/scss/vendors/
+/demos/*/src/images/vendors/
+/demos/*/.yarn/*
+/demos/*/.pnp.*
+!/demos/*/.yarn/releases/
+!/demos/*/.yarn/plugins/

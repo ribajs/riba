@@ -28,7 +28,7 @@ var getStyleLoaderRule = (config) => {
   rule.use.push({
     loader: require.resolve("css-loader"),
     options: {
-      url: false,
+      url: true,
     },
   });
 
@@ -125,6 +125,8 @@ module.exports = (config) => {
           "@ribajs/i18n": true,
           "@ribajs/shopify": false,
           "@ribajs/leaflet-map": true,
+          leaflet: true,
+          "@ribajs/tagged-image": true,
           "@ribajs/shopify-tda": false,
           "@ribajs/shopify-easdk": false,
           "@ribajs/pdf": true,
@@ -132,10 +134,7 @@ module.exports = (config) => {
       };
       break;
     case "shopify":
-      config.entry = [
-        rootPath + "/src/scss/main.scss",
-        rootPath + "/src/ts/main.ts",
-      ];
+      config.entry = [rootPath + "/src/scss/main.scss", rootPath + "/src/ts/main.ts"];
       config.output = {
         path: path.resolve(rootPath, "theme/assets/"),
       };
@@ -158,18 +157,17 @@ module.exports = (config) => {
           "@ribajs/i18n": true,
           "@ribajs/shopify": true,
           "@ribajs/leaflet-map": true,
+          "@ribajs/tagged-image": true,
           "@ribajs/shopify-tda": true,
           "@ribajs/shopify-easdk": false,
           "@ribajs/pdf": true,
+          leaflet: true,
         },
       };
       break;
     // E.g. used for demos
     case "local":
-      (config.entry = [
-        rootPath + "/src/scss/main.scss",
-        rootPath + "/src/ts/main.ts",
-      ]),
+      (config.entry = [rootPath + "/src/scss/main.scss", rootPath + "/src/ts/main.ts"]),
         (config.output = {
           path: path.resolve(rootPath, "dist/"),
         });
@@ -193,8 +191,10 @@ module.exports = (config) => {
           "@ribajs/shopify": true,
           "@ribajs/leaflet-map": true,
           "@ribajs/shopify-tda": true,
+          "@ribajs/tagged-image": true,
           "@ribajs/shopify-easdk": true,
           "@ribajs/pdf": true,
+          leaflet: true,
         },
       };
 

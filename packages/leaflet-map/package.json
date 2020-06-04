@@ -61,6 +61,7 @@
     "@ribajs/bs4": "workspace:packages/bs4",
     "@ribajs/core": "^1.8.0",
     "@ribajs/extras": "workspace:packages/extras",
+    "@ribajs/utils": "workspace:packages/utils",
     "@types/leaflet": "^1.5.12",
     "@yarnpkg/pnpify": "^2.0.0-rc.22",
     "leaflet": "^1.6.0"

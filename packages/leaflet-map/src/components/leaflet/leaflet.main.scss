@@ -1,20 +1,27 @@
 /* required styles */
 
-.leaflet-pane, .leaflet-tile, .leaflet-marker-icon, .leaflet-marker-shadow, .leaflet-tile-container {
+.leaflet-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-container {
   position: absolute;
   left: 0;
   top: 0;
 }
 
 .leaflet-pane > {
-  svg, canvas {
+  svg,
+  canvas {
     position: absolute;
     left: 0;
     top: 0;
   }
 }
 
-.leaflet-zoom-box, .leaflet-image-layer, .leaflet-layer {
+.leaflet-zoom-box,
+.leaflet-image-layer,
+.leaflet-layer {
   position: absolute;
   left: 0;
   top: 0;
@@ -24,7 +31,9 @@
   overflow: hidden;
 }
 
-.leaflet-tile, .leaflet-marker-icon, .leaflet-marker-shadow {
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
@@ -53,7 +62,8 @@
 
 /* hack that prevents hw layers "stretching" when loading new tiles */
 
-.leaflet-marker-icon, .leaflet-marker-shadow {
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
   display: block;
 }
 
@@ -61,7 +71,12 @@
 /* .leaflet-container img: map is broken in FF if you have max-width: 100% on tiles */
 
 .leaflet-container {
-  .leaflet-overlay-pane svg, .leaflet-marker-pane img, .leaflet-shadow-pane img, .leaflet-tile-pane img, img.leaflet-image-layer, .leaflet-tile {
+  .leaflet-overlay-pane svg,
+  .leaflet-marker-pane img,
+  .leaflet-shadow-pane img,
+  .leaflet-tile-pane img,
+  img.leaflet-image-layer,
+  .leaflet-tile {
     max-width: none !important;
     max-height: none !important;
   }
@@ -174,7 +189,8 @@
   pointer-events: auto;
 }
 
-.leaflet-top, .leaflet-bottom {
+.leaflet-top,
+.leaflet-bottom {
   position: absolute;
   z-index: 1000;
   pointer-events: none;
@@ -291,7 +307,8 @@
   }
 }
 
-.leaflet-popup-pane, .leaflet-control {
+.leaflet-popup-pane,
+.leaflet-control {
   cursor: auto;
 }
 
@@ -320,11 +337,18 @@
 
 /* marker & overlays interactivity */
 
-.leaflet-marker-icon, .leaflet-marker-shadow, .leaflet-image-layer, .leaflet-pane > svg path, .leaflet-tile-container {
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-image-layer,
+.leaflet-pane > svg path,
+.leaflet-tile-container {
   pointer-events: none;
 }
 
-.leaflet-marker-icon.leaflet-interactive, .leaflet-image-layer.leaflet-interactive, .leaflet-pane > svg path.leaflet-interactive, svg.leaflet-image-layer.leaflet-interactive path {
+.leaflet-marker-icon.leaflet-interactive,
+.leaflet-image-layer.leaflet-interactive,
+.leaflet-pane > svg path.leaflet-interactive,
+svg.leaflet-image-layer.leaflet-interactive path {
   pointer-events: visiblePainted;
 
   /* IE 9-10 doesn't have auto */
@@ -338,7 +362,7 @@
   outline: 0;
 
   a {
-    color: #0078A8;
+    color: #0078a8;
 
     &.leaflet-active {
       outline: 2px solid orange;
@@ -439,13 +463,15 @@
 
 /* zoom control */
 
-.leaflet-control-zoom-in, .leaflet-control-zoom-out {
-  font: bold 18px 'Lucida Console', Monaco, monospace;
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  font: bold 18px "Lucida Console", Monaco, monospace;
   text-indent: 1px;
 }
 
 .leaflet-touch {
-  .leaflet-control-zoom-in, .leaflet-control-zoom-out {
+  .leaflet-control-zoom-in,
+  .leaflet-control-zoom-out {
     font-size: 22px;
   }
 }
@@ -459,13 +485,13 @@
 }
 
 .leaflet-control-layers-toggle {
-  background-image: url(images/layers.png);
+  background-image: url("~leaflet/dist/images/layers.png");
   width: 36px;
   height: 36px;
 }
 
 .leaflet-retina .leaflet-control-layers-toggle {
-  background-image: url(images/layers-2x.png);
+  background-image: url("~leaflet/dist/images/layers-2x.png");
   background-size: 26px 26px;
 }
 
@@ -517,10 +543,6 @@
 
 /* Default icon URLs */
 
-.leaflet-default-icon-path {
-  background-image: url(images/marker-icon.png);
-}
-
 /* attribution and scale controls */
 
 .leaflet-container .leaflet-control-attribution {
@@ -529,7 +551,8 @@
   margin: 0;
 }
 
-.leaflet-control-attribution, .leaflet-control-scale-line {
+.leaflet-control-attribution,
+.leaflet-control-scale-line {
   padding: 0 5px;
   color: #333;
 }
@@ -543,7 +566,8 @@
 }
 
 .leaflet-container {
-  .leaflet-control-attribution, .leaflet-control-scale {
+  .leaflet-control-attribution,
+  .leaflet-control-scale {
     font-size: 11px;
   }
 }
@@ -581,11 +605,14 @@
 }
 
 .leaflet-touch {
-  .leaflet-control-attribution, .leaflet-control-layers, .leaflet-bar {
+  .leaflet-control-attribution,
+  .leaflet-control-layers,
+  .leaflet-bar {
     box-shadow: none;
   }
 
-  .leaflet-control-layers, .leaflet-bar {
+  .leaflet-control-layers,
+  .leaflet-bar {
     border: 2px solid rgba(0, 0, 0, 0.2);
     background-clip: padding-box;
   }
@@ -635,7 +662,8 @@
   transform: rotate(45deg);
 }
 
-.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
   background: white;
   color: #333;
   box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
@@ -683,7 +711,10 @@
     margin-top: -1px;
   }
 
-  .leaflet-control-zoom, .leaflet-control-layers, .leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  .leaflet-control-zoom,
+  .leaflet-control-layers,
+  .leaflet-popup-content-wrapper,
+  .leaflet-popup-tip {
     border: 1px solid #999;
   }
 }
@@ -719,7 +750,10 @@
   }
 }
 
-.leaflet-tooltip-top:before, .leaflet-tooltip-bottom:before, .leaflet-tooltip-left:before, .leaflet-tooltip-right:before {
+.leaflet-tooltip-top:before,
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
   position: absolute;
   pointer-events: none;
   border: 6px solid transparent;
@@ -765,7 +799,8 @@
   margin-left: 6px;
 }
 
-.leaflet-tooltip-left:before, .leaflet-tooltip-right:before {
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
   top: 50%;
   margin-top: -6px;
 }
