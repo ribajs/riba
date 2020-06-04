@@ -28,7 +28,7 @@ export class LeafletMapComponent extends Component {
 
   protected markers: Marker[] = [];
   protected icons: { [key: string]: Leaflet.Icon } = {};
-  private map: Leaflet.Map;
+  private map?: Leaflet.Map;
 
   static get observedAttributes() {
     return ["map-selector", "initial-lat", "initial-lng", "initial-zoom", "tile-url", "attribution"];
@@ -105,8 +105,9 @@ export class LeafletMapComponent extends Component {
   protected registerEventListener() {
     const dispatcher = new EventDispatcher("main");
     dispatcher.on("visibility-changed", () => {
-      this.map.invalidateSize();
-      console.log("visiblity changed");
+      if (this.map) {
+        this.map.invalidateSize();
+      }
     });
   }
 
