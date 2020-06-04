@@ -62,6 +62,9 @@ export class LeafletMapComponent extends Component {
 
   protected async afterBind() {
     await super.afterBind();
+
+    Leaflet.Icon.Default.imagePath = "images/vendors/leaflet/images/";
+
     const mapId = "map-" + Math.floor(Math.random() * 9999);
     const mapElement = this.el.querySelector(this.scope.mapSelector);
     if (mapElement) {
