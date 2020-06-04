@@ -1,6 +1,9 @@
-import { Bs4ContentsComponent, Scope as Bs4ContentsComponentScope } from '../bs4-contents/bs4-contents.component';
+import {
+  Bs4ContentsComponent,
+  Scope as Bs4ContentsComponentScope,
+} from "../bs4-contents/bs4-contents.component";
 
-import template from './bs4-scrollspy.component.html';
+import template from "./bs4-scrollspy.component.html";
 
 export interface Anchor {
   element: HTMLHeadingElement;
@@ -21,15 +24,22 @@ export interface Scope extends Bs4ContentsComponentScope {
 }
 
 export class Bs4ScrollspyComponent extends Bs4ContentsComponent {
-
-  public static tagName =   'bs4-scrollspy';
+  public static tagName = "bs4-scrollspy";
 
   protected autobind = true;
 
   protected wrapperElement?: Element;
 
   static get observedAttributes() {
-    return ['headers-start', 'headers-depth', 'find-header-id-depth', 'header-parent-selector', 'offset', 'offset-bottom', 'scroll-offset'];
+    return [
+      "headers-start",
+      "headers-depth",
+      "find-header-id-depth",
+      "header-parent-selector",
+      "offset",
+      "offset-bottom",
+      "scroll-offset",
+    ];
   }
 
   protected scope: Scope = {
@@ -53,7 +63,7 @@ export class Bs4ScrollspyComponent extends Bs4ContentsComponent {
   }
 
   protected requiredAttributes() {
-    return ['headersStart', 'headersDepth', 'headerParentSelector'];
+    return ["headersStart", "headersDepth", "headerParentSelector"];
   }
 
   protected template() {

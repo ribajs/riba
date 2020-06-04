@@ -1,1 +1,1 @@
-export type CarouselDirection = 'next' | 'prev' | 'left' | 'right';
+export type CarouselDirection = "next" | "prev" | "left" | "right";

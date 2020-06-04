@@ -6,6 +6,7 @@
  */
 
 import "../types/templates";
+import "../types/files";
 import { EventHandler, Formatter } from "../interfaces";
 import { View } from "../view";
 import { Riba } from "../riba";

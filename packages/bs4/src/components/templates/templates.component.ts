@@ -1,10 +1,5 @@
-import {
-  Component,
-} from '@ribajs/core';
-import {
-  camelCase,
-} from '@ribajs/utils/src/type';
-
+import { Component } from "@ribajs/core";
+import { camelCase } from "@ribajs/utils/src/type";
 
 export type AttributeType = string; // 'string' | 'number' | 'boolean';
 
@@ -21,7 +16,6 @@ export interface Scope {
 }
 
 export abstract class TemplatesComponent extends Component {
-
   protected templateAttributes: TemplateAttributes = [];
 
   protected templateReady = false;
@@ -44,15 +38,19 @@ export abstract class TemplatesComponent extends Component {
    * @param name Attribute name
    * @param value Attribute value
    */
-  protected transformTemplateAttribute(name: string, value: any, type?: AttributeType) {
+  protected transformTemplateAttribute(
+    name: string,
+    value: any,
+    type?: AttributeType
+  ) {
     switch (type) {
-      case 'number':
+      case "number":
         value = Number(value);
         break;
-      case 'boolean':
-        value = value === 'true';
+      case "boolean":
+        value = value === "true";
         break;
-      case 'string':
+      case "string":
       default:
         break;
     }
@@ -72,9 +70,14 @@ export abstract class TemplatesComponent extends Component {
   protected getTemplateAttributes(tpl: HTMLTemplateElement, index: number) {
     const attributes: any = {};
     for (const attribute of this.templateAttributes) {
-      const attrValue = this.transformTemplateAttribute(attribute.name, tpl.getAttribute(attribute.name));
+      const attrValue = this.transformTemplateAttribute(
+        attribute.name,
+        tpl.getAttribute(attribute.name)
+      );
       if (attribute.required && !attrValue) {
-        console.error(new Error(`template "${attribute.name}" attribute is required!`));
+        console.error(
+          new Error(`template "${attribute.name}" attribute is required!`)
+        );
         return;
       }
       attributes[camelCase(attribute.name)] = attrValue;
@@ -85,21 +88,21 @@ export abstract class TemplatesComponent extends Component {
   protected addItemByTemplate(tpl: HTMLTemplateElement, index: number) {
     const attributes = this.getTemplateAttributes(tpl, index);
     const content = tpl.innerHTML;
-    this.scope.items.push({...attributes, content});
+    this.scope.items.push({ ...attributes, content });
   }
 
   protected addItemsByTemplate() {
-    const templates = this.el.querySelectorAll<HTMLTemplateElement>('template');
+    const templates = this.el.querySelectorAll<HTMLTemplateElement>("template");
     for (let index = 0; index < templates.length; index++) {
       const tpl = templates[index];
-      
+
       this.addItemByTemplate(tpl, index);
     }
     this.templateReady = true;
   }
 
   protected removeTemplates() {
-    const templates = this.el.querySelectorAll<HTMLTemplateElement>('template');
+    const templates = this.el.querySelectorAll<HTMLTemplateElement>("template");
     for (let index = 0; index < templates.length; index++) {
       const tpl = templates[index];
       this.el.removeChild(tpl);
@@ -110,7 +113,9 @@ export abstract class TemplatesComponent extends Component {
     let allAreTemplates = true;
     for (let index = 0; index < this.el.childNodes.length; index++) {
       const child = this.el.childNodes[index];
-      allAreTemplates = allAreTemplates && (child.nodeName === 'TEMPLATE' || child.nodeName === '#text');
+      allAreTemplates =
+        allAreTemplates &&
+        (child.nodeName === "TEMPLATE" || child.nodeName === "#text");
     }
     return allAreTemplates;
   }

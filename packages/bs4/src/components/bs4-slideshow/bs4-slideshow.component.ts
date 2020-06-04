@@ -1,24 +1,46 @@
-import { TemplatesComponent } from '../templates/templates.component';
+import { TemplatesComponent } from "../templates/templates.component";
 
-import { clone, camelCase } from '@ribajs/utils/src/type';
+import { clone, camelCase } from "@ribajs/utils/src/type";
 
-import { Dragscroll, DragscrollOptions, Autoscroll, AutoscrollOptions, Utils as ExtraUtils, ScrollPosition, ScrollEventsService } from '@ribajs/extras';
+import {
+  Dragscroll,
+  DragscrollOptions,
+  Autoscroll,
+  AutoscrollOptions,
+  Utils as ExtraUtils,
+  ScrollPosition,
+  ScrollEventsService,
+} from "@ribajs/extras";
 
-import templateSlides from './bs4-slideshow-slides.component.html';
+import templateSlides from "./bs4-slideshow-slides.component.html";
 
-import templateControls from './bs4-slideshow-controls.component.html';
+import templateControls from "./bs4-slideshow-controls.component.html";
 
-import templateIndicators from './bs4-slideshow-indicators.component.html';
+import templateIndicators from "./bs4-slideshow-indicators.component.html";
 
-const SLIDESHOW_INNER_SELECTOR = '.slideshow-inner';
+const SLIDESHOW_INNER_SELECTOR = ".slideshow-inner";
 
 const SLIDES_SELECTOR = `${SLIDESHOW_INNER_SELECTOR} > .slide`;
 
-export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type Breakpoint = "xs" | "sm" | "md" | "lg" | "xl";
 
-export type ControlsPosition = 'insite-middle' | 'insite-bottom' | 'insite-top' | 'outsite-middle' | 'outsite-bottom' | 'outsite-top';
+export type ControlsPosition =
+  | "insite-middle"
+  | "insite-bottom"
+  | "insite-top"
+  | "outsite-middle"
+  | "outsite-bottom"
+  | "outsite-top";
 
-export type IndicatorsPosition = 'insite-bottom' | 'insite-top' | 'insite-right' | 'insite-left' | 'outsite-bottom' | 'outsite-top' | 'outsite-right' | 'outsite-left';
+export type IndicatorsPosition =
+  | "insite-bottom"
+  | "insite-top"
+  | "insite-right"
+  | "insite-left"
+  | "outsite-bottom"
+  | "outsite-top"
+  | "outsite-right"
+  | "outsite-left";
 
 export interface Position extends DOMRect {
   centerX: number;
@@ -41,7 +63,7 @@ export interface ResponsiveOptions extends Partial<Options> {
 }
 
 export interface Options {
- /** Show controls */
+  /** Show controls */
   controls: boolean;
   /** Position of the controls */
   controlsPosition: ControlsPosition;
@@ -72,7 +94,7 @@ export interface Options {
   /** Icon source url for the active indicator */
   indicatorActiveIconSrc: string;
   /** Slide angle, can be vertical or horizontal */
-  angle: 'vertical' | 'horizontal';
+  angle: "vertical" | "horizontal";
   /** Pause on autoplay (with interval) */
   pause: boolean;
 
@@ -85,22 +107,23 @@ export interface Options {
 }
 
 export interface Scope extends Options {
-  next: Bs4SlideshowComponent['next'];
-  prev: Bs4SlideshowComponent['prev'];
-  goTo: Bs4SlideshowComponent['goTo'];
+  next: Bs4SlideshowComponent["next"];
+  prev: Bs4SlideshowComponent["prev"];
+  goTo: Bs4SlideshowComponent["goTo"];
   controlsPositionClass: string;
   indicatorsPositionClass: string;
   items: Slide[];
 }
 
 export class Bs4SlideshowComponent extends TemplatesComponent {
-
   protected get slideshowInner() {
     if (!this._slideshowInner) {
       this._slideshowInner = this.el.querySelector(SLIDESHOW_INNER_SELECTOR);
     }
     if (!this._slideshowInner) {
-      throw new Error(`Child element with selecto ${SLIDESHOW_INNER_SELECTOR} not found!`);
+      throw new Error(
+        `Child element with selecto ${SLIDESHOW_INNER_SELECTOR} not found!`
+      );
     }
     return this._slideshowInner;
   }
@@ -110,157 +133,161 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       this._slideElements = this.el.querySelectorAll(SLIDES_SELECTOR);
     }
     if (!this._slideElements) {
-      throw new Error(`Child element with selecto ${SLIDES_SELECTOR} not found!`);
+      throw new Error(
+        `Child element with selecto ${SLIDES_SELECTOR} not found!`
+      );
     }
     return this._slideElements;
   }
 
   protected get controlsElements() {
     if (!this._controlsElements) {
-      this._controlsElements = this.el.querySelectorAll('.slideshow-control-prev, .slideshow-control-next');
+      this._controlsElements = this.el.querySelectorAll(
+        ".slideshow-control-prev, .slideshow-control-next"
+      );
     }
     return this._controlsElements;
   }
 
   protected get indicatorsElement() {
     if (!this._indicatorsElement) {
-      this._indicatorsElement = this.el.querySelector('.slideshow-indicators');
+      this._indicatorsElement = this.el.querySelector(".slideshow-indicators");
     }
     return this._indicatorsElement;
   }
 
   static get observedAttributes() {
     return [
-      'min-width',
-      'slides-to-show',
-      'slides-to-scroll',
-      'controls',
-      'controls-position',
-      'draggable',
-      'autoplay',
-      'autoplay-interval',
-      'autoplay-velocity',
-      'control-prev-icon-src',
-      'control-next-icon-src',
-      'indicator-inactive-icon-src',
-      'indicator-active-icon-src',
-      'angle',
-      'set-active-slide',
-      'pause-on-hover',
-      'sticky',
-      'indicators',
-      'indicators-position',
-      'pause',
+      "min-width",
+      "slides-to-show",
+      "slides-to-scroll",
+      "controls",
+      "controls-position",
+      "draggable",
+      "autoplay",
+      "autoplay-interval",
+      "autoplay-velocity",
+      "control-prev-icon-src",
+      "control-next-icon-src",
+      "indicator-inactive-icon-src",
+      "indicator-active-icon-src",
+      "angle",
+      "set-active-slide",
+      "pause-on-hover",
+      "sticky",
+      "indicators",
+      "indicators-position",
+      "pause",
 
-      'sm-min-width',
-      'sm-slides-to-show',
-      'sm-slides-to-scroll',
-      'sm-controls',
-      'sm-controls-position',
-      'sm-draggable',
-      'sm-autoplay',
-      'sm-autoplay-interval',
-      'sm-autoplay-velocity',
-      'sm-control-prev-icon-src',
-      'sm-control-next-icon-src',
-      'sm-indicator-inactive-icon-src',
-      'sm-indicator-active-icon-src',
-      'sm-angle',
-      'sm-set-active-slide',
-      'sm-pause-on-hover',
-      'sm-sticky',
-      'sm-indicators',
-      'sm-indicators-position',
-      'sm-pause',
+      "sm-min-width",
+      "sm-slides-to-show",
+      "sm-slides-to-scroll",
+      "sm-controls",
+      "sm-controls-position",
+      "sm-draggable",
+      "sm-autoplay",
+      "sm-autoplay-interval",
+      "sm-autoplay-velocity",
+      "sm-control-prev-icon-src",
+      "sm-control-next-icon-src",
+      "sm-indicator-inactive-icon-src",
+      "sm-indicator-active-icon-src",
+      "sm-angle",
+      "sm-set-active-slide",
+      "sm-pause-on-hover",
+      "sm-sticky",
+      "sm-indicators",
+      "sm-indicators-position",
+      "sm-pause",
 
-      'md-min-width',
-      'md-slides-to-show',
-      'md-slides-to-scroll',
-      'md-controls',
-      'md-controls-position',
-      'md-draggable',
-      'md-autoplay',
-      'md-autoplay-interval',
-      'md-autoplay-velocity',
-      'md-control-prev-icon-src',
-      'md-control-next-icon-src',
-      'md-indicator-inactive-icon-src',
-      'md-indicator-active-icon-src',
-      'md-angle',
-      'md-set-active-slide',
-      'md-pause-on-hover',
-      'md-sticky',
-      'md-indicators',
-      'sm-indicators-position',
-      'md-pause',
+      "md-min-width",
+      "md-slides-to-show",
+      "md-slides-to-scroll",
+      "md-controls",
+      "md-controls-position",
+      "md-draggable",
+      "md-autoplay",
+      "md-autoplay-interval",
+      "md-autoplay-velocity",
+      "md-control-prev-icon-src",
+      "md-control-next-icon-src",
+      "md-indicator-inactive-icon-src",
+      "md-indicator-active-icon-src",
+      "md-angle",
+      "md-set-active-slide",
+      "md-pause-on-hover",
+      "md-sticky",
+      "md-indicators",
+      "sm-indicators-position",
+      "md-pause",
 
-      'lg-min-width',
-      'lg-slides-to-show',
-      'lg-slides-to-scroll',
-      'lg-controls',
-      'lg-controls-position',
-      'lg-draggable',
-      'lg-autoplay',
-      'lg-autoplay-interval',
-      'lg-autoplay-velocity',
-      'lg-control-prev-icon-src',
-      'lg-control-next-icon-src',
-      'lg-indicator-inactive-icon-src',
-      'lg-indicator-active-icon-src',
-      'lg-angle',
-      'lg-set-active-slide',
-      'lg-pause-on-hover',
-      'lg-sticky',
-      'lg-indicators',
-      'lg-indicators-position',
-      'lg-pause',
+      "lg-min-width",
+      "lg-slides-to-show",
+      "lg-slides-to-scroll",
+      "lg-controls",
+      "lg-controls-position",
+      "lg-draggable",
+      "lg-autoplay",
+      "lg-autoplay-interval",
+      "lg-autoplay-velocity",
+      "lg-control-prev-icon-src",
+      "lg-control-next-icon-src",
+      "lg-indicator-inactive-icon-src",
+      "lg-indicator-active-icon-src",
+      "lg-angle",
+      "lg-set-active-slide",
+      "lg-pause-on-hover",
+      "lg-sticky",
+      "lg-indicators",
+      "lg-indicators-position",
+      "lg-pause",
 
-      'xl-min-width',
-      'xl-slides-to-show',
-      'xl-slides-to-scroll',
-      'xl-controls',
-      'xl-controls-position',
-      'xl-draggable',
-      'xl-autoplay',
-      'xl-autoplay-interval',
-      'xl-autoplay-velocity',
-      'xl-control-prev-icon-src',
-      'xl-control-next-icon-src',
-      'xl-indicator-inactive-icon-src',
-      'xl-indicator-active-icon-src',
-      'xl-angle',
-      'xl-set-active-slide',
-      'xl-pause-on-hover',
-      'xl-sticky',
-      'xl-indicators',
-      'xl-indicators-position',
-      'xl-pause',
+      "xl-min-width",
+      "xl-slides-to-show",
+      "xl-slides-to-scroll",
+      "xl-controls",
+      "xl-controls-position",
+      "xl-draggable",
+      "xl-autoplay",
+      "xl-autoplay-interval",
+      "xl-autoplay-velocity",
+      "xl-control-prev-icon-src",
+      "xl-control-next-icon-src",
+      "xl-indicator-inactive-icon-src",
+      "xl-indicator-active-icon-src",
+      "xl-angle",
+      "xl-set-active-slide",
+      "xl-pause-on-hover",
+      "xl-sticky",
+      "xl-indicators",
+      "xl-indicators-position",
+      "xl-pause",
     ];
   }
 
-  public static tagName = 'bs4-slideshow';
+  public static tagName = "bs4-slideshow";
 
   protected templateAttributes = [
     {
-      name: 'class',
+      name: "class",
       required: false,
     },
     {
-      name: 'handle',
+      name: "handle",
       required: false,
     },
     {
-      name: 'type',
+      name: "type",
       required: true,
     },
     {
-      name: 'active',
-      type: 'boolean',
+      name: "active",
+      type: "boolean",
       required: false,
     },
     {
-      name: 'index',
-      type: 'number',
+      name: "index",
+      type: "number",
       required: false,
     },
   ];
@@ -290,11 +317,11 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   protected continuousAutoplayIntervalIndex: number | null = null;
 
   protected resumeTimer: number | null = null;
-  
+
   /**
    * Current breakpoint
    */
-  protected breakpoint: Breakpoint = 'xs';
+  protected breakpoint: Breakpoint = "xs";
 
   protected scope: Scope = {
     // Template methods
@@ -306,21 +333,21 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     // Options
     slidesToScroll: 1,
     controls: true,
-    controlsPosition: 'insite-middle',
+    controlsPosition: "insite-middle",
     pauseOnHover: true,
     sticky: false,
     indicators: true,
-    indicatorsPosition: 'insite-bottom',
+    indicatorsPosition: "insite-bottom",
     pause: false,
     draggable: true,
     autoplay: false,
     autoplayInterval: 0,
     autoplayVelocity: 0.8,
-    controlPrevIconSrc: '',
-    controlNextIconSrc: '',
-    indicatorActiveIconSrc: '',
-    indicatorInactiveIconSrc: '',
-    angle: 'horizontal',
+    controlPrevIconSrc: "",
+    controlNextIconSrc: "",
+    indicatorActiveIconSrc: "",
+    indicatorInactiveIconSrc: "",
+    angle: "horizontal",
 
     // Responsive options
     xs: {
@@ -340,8 +367,8 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     },
 
     // Classes
-    controlsPositionClass: '',
-    indicatorsPositionClass: '',
+    controlsPositionClass: "",
+    indicatorsPositionClass: "",
   };
 
   constructor(element?: HTMLElement) {
@@ -364,7 +391,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   /**
    * Go to slide by index
-   * @param index 
+   * @param index
    */
   public goTo(index: number) {
     this.setSlidePositions();
@@ -372,37 +399,44 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     let left = 0;
 
     if (!this.scope.items[index]) {
-      console.error(`Slide with index "${index}" not found!`, this.scope.items[index]);
+      console.error(
+        `Slide with index "${index}" not found!`,
+        this.scope.items[index]
+      );
       return;
     }
 
-    if (this.scope.angle === 'vertical') {
+    if (this.scope.angle === "vertical") {
       // Check if we do not need to slide
       if (this.scope.items[index].position.centerY === 0) {
         // We do not need to scroll
         return;
       }
-      top = this.slideshowInner.scrollTop + this.scope.items[index].position.centerY;
+      top =
+        this.slideshowInner.scrollTop +
+        this.scope.items[index].position.centerY;
     } else {
       // Check if we do not need to slide
       if (this.scope.items[index].position.centerX === 0) {
         // We do not need to scroll
         return;
       }
-      left = this.slideshowInner.scrollLeft + this.scope.items[index].position.centerX;
+      left =
+        this.slideshowInner.scrollLeft +
+        this.scope.items[index].position.centerX;
     }
 
     // TODO new scrollservice based on https://pawelgrzybek.com/page-scroll-in-vanilla-javascript/
     if (this.slideElements[index]) {
       // if is is window to scroll
-      if (typeof(this.slideshowInner.scroll) === 'function') {
+      if (typeof this.slideshowInner.scroll === "function") {
         this.slideshowInner.scroll({
-          behavior: 'smooth',
+          behavior: "smooth",
           left,
           top,
         });
       } else {
-        if (this.scope.angle === 'vertical') {
+        if (this.scope.angle === "vertical") {
           this.slideshowInner.scrollTop = top;
         } else {
           this.slideshowInner.scrollLeft = left;
@@ -411,44 +445,138 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     }
   }
 
-  protected setOptions(dest: ResponsiveOptions | Options, source: ResponsiveOptions | Options) {
-    dest.slidesToScroll = typeof(source.slidesToScroll) !== 'undefined' ? clone(false, source.slidesToScroll) : dest.slidesToScroll;
-    dest.controls = typeof(source.controls) !== 'undefined' ? clone(false, source.controls) : dest.controls;
-    dest.controlsPosition = typeof(source.controlsPosition) !== 'undefined' ? clone(false, source.controlsPosition) : dest.controlsPosition;
-    dest.draggable = typeof(source.draggable) !== 'undefined' ? clone(false, source.draggable) : dest.draggable;
-    dest.autoplay = typeof(source.autoplay) !== 'undefined' ? clone(false, source.autoplay) : dest.autoplay;
-    dest.autoplayInterval = typeof(source.autoplayInterval) !== 'undefined' ? clone(false, source.autoplayInterval) : dest.autoplayInterval;
-    dest.autoplayVelocity = typeof(source.autoplayVelocity) !== 'undefined' ? clone(false, source.autoplayVelocity) : dest.autoplayVelocity;
-    dest.controlPrevIconSrc = typeof(source.controlPrevIconSrc) !== 'undefined' ? clone(false, source.controlPrevIconSrc) : dest.controlPrevIconSrc;
-    dest.controlNextIconSrc = typeof(source.controlNextIconSrc) !== 'undefined' ? clone(false, source.controlNextIconSrc) : dest.controlNextIconSrc;
-    dest.indicatorActiveIconSrc = typeof(source.indicatorActiveIconSrc) !== 'undefined' ? clone(false, source.indicatorActiveIconSrc) : dest.indicatorActiveIconSrc;
-    dest.indicatorInactiveIconSrc = typeof(source.indicatorInactiveIconSrc) !== 'undefined' ? clone(false, source.indicatorInactiveIconSrc) : dest.indicatorInactiveIconSrc;
-    dest.angle = typeof(source.angle) !== 'undefined' ? clone(false, source.angle) : dest.angle;
-    dest.pauseOnHover = typeof(source.pauseOnHover) !== 'undefined' ? clone(false, source.pauseOnHover) : dest.pauseOnHover;
-    dest.sticky = typeof(source.sticky) !== 'undefined' ? clone(false, source.sticky) : dest.sticky;
-    dest.indicators = typeof(source.indicators) !== 'undefined' ? clone(false, source.indicators) : dest.indicators;
-    dest.indicatorsPosition = typeof(source.indicatorsPosition) !== 'undefined' ? clone(false, source.indicatorsPosition) : dest.indicatorsPosition;
-    dest.pause = typeof(source.pause) !== 'undefined' ? clone(false, source.pause) : dest.pause;
+  protected setOptions(
+    dest: ResponsiveOptions | Options,
+    source: ResponsiveOptions | Options
+  ) {
+    dest.slidesToScroll =
+      typeof source.slidesToScroll !== "undefined"
+        ? clone(false, source.slidesToScroll)
+        : dest.slidesToScroll;
+    dest.controls =
+      typeof source.controls !== "undefined"
+        ? clone(false, source.controls)
+        : dest.controls;
+    dest.controlsPosition =
+      typeof source.controlsPosition !== "undefined"
+        ? clone(false, source.controlsPosition)
+        : dest.controlsPosition;
+    dest.draggable =
+      typeof source.draggable !== "undefined"
+        ? clone(false, source.draggable)
+        : dest.draggable;
+    dest.autoplay =
+      typeof source.autoplay !== "undefined"
+        ? clone(false, source.autoplay)
+        : dest.autoplay;
+    dest.autoplayInterval =
+      typeof source.autoplayInterval !== "undefined"
+        ? clone(false, source.autoplayInterval)
+        : dest.autoplayInterval;
+    dest.autoplayVelocity =
+      typeof source.autoplayVelocity !== "undefined"
+        ? clone(false, source.autoplayVelocity)
+        : dest.autoplayVelocity;
+    dest.controlPrevIconSrc =
+      typeof source.controlPrevIconSrc !== "undefined"
+        ? clone(false, source.controlPrevIconSrc)
+        : dest.controlPrevIconSrc;
+    dest.controlNextIconSrc =
+      typeof source.controlNextIconSrc !== "undefined"
+        ? clone(false, source.controlNextIconSrc)
+        : dest.controlNextIconSrc;
+    dest.indicatorActiveIconSrc =
+      typeof source.indicatorActiveIconSrc !== "undefined"
+        ? clone(false, source.indicatorActiveIconSrc)
+        : dest.indicatorActiveIconSrc;
+    dest.indicatorInactiveIconSrc =
+      typeof source.indicatorInactiveIconSrc !== "undefined"
+        ? clone(false, source.indicatorInactiveIconSrc)
+        : dest.indicatorInactiveIconSrc;
+    dest.angle =
+      typeof source.angle !== "undefined"
+        ? clone(false, source.angle)
+        : dest.angle;
+    dest.pauseOnHover =
+      typeof source.pauseOnHover !== "undefined"
+        ? clone(false, source.pauseOnHover)
+        : dest.pauseOnHover;
+    dest.sticky =
+      typeof source.sticky !== "undefined"
+        ? clone(false, source.sticky)
+        : dest.sticky;
+    dest.indicators =
+      typeof source.indicators !== "undefined"
+        ? clone(false, source.indicators)
+        : dest.indicators;
+    dest.indicatorsPosition =
+      typeof source.indicatorsPosition !== "undefined"
+        ? clone(false, source.indicatorsPosition)
+        : dest.indicatorsPosition;
+    dest.pause =
+      typeof source.pause !== "undefined"
+        ? clone(false, source.pause)
+        : dest.pause;
   }
 
-  protected setOptionsIfUndefined(dest: ResponsiveOptions | Options, source: ResponsiveOptions | Options) {
-    dest.slidesToScroll = typeof(dest.slidesToScroll) === 'undefined' ? source.slidesToScroll : dest.slidesToScroll;
-    dest.controls = typeof(dest.controls) === 'undefined' ? source.controls : dest.controls;
-    dest.controlsPosition = typeof(dest.controlsPosition) === 'undefined' ? source.controlsPosition : dest.controlsPosition;
-    dest.draggable = typeof(dest.draggable) === 'undefined' ? source.draggable : dest.draggable;
-    dest.autoplay = typeof(dest.autoplay) === 'undefined' ? source.autoplay : dest.autoplay;
-    dest.autoplayInterval = typeof(dest.autoplayInterval) === 'undefined' ? source.autoplayInterval : dest.autoplayInterval;
-    dest.autoplayVelocity = typeof(dest.autoplayVelocity) === 'undefined' ? source.autoplayVelocity : dest.autoplayVelocity;
-    dest.controlPrevIconSrc = typeof(dest.controlPrevIconSrc) === 'undefined' ? source.controlPrevIconSrc : dest.controlPrevIconSrc;
-    dest.controlNextIconSrc = typeof(dest.controlNextIconSrc) === 'undefined' ? source.controlNextIconSrc : dest.controlNextIconSrc;
-    dest.indicatorActiveIconSrc = typeof(dest.indicatorActiveIconSrc) === 'undefined' ? source.indicatorActiveIconSrc : dest.indicatorActiveIconSrc;
-    dest.indicatorInactiveIconSrc = typeof(dest.indicatorInactiveIconSrc) === 'undefined' ? source.indicatorInactiveIconSrc : dest.indicatorInactiveIconSrc;
-    dest.angle = typeof(dest.angle) === 'undefined' ? source.angle : dest.angle;
-    dest.pauseOnHover = typeof(dest.pauseOnHover) === 'undefined' ? source.pauseOnHover : dest.pauseOnHover;
-    dest.sticky = typeof(dest.sticky) === 'undefined' ? source.sticky : dest.sticky;
-    dest.indicators = typeof(dest.indicators) === 'undefined' ? source.indicators : dest.indicators;
-    dest.indicatorsPosition = typeof(dest.indicatorsPosition) === 'undefined' ? source.indicatorsPosition : dest.indicatorsPosition;
-    dest.pause = typeof(dest.pause) === 'undefined' ? source.pause : dest.pause;
+  protected setOptionsIfUndefined(
+    dest: ResponsiveOptions | Options,
+    source: ResponsiveOptions | Options
+  ) {
+    dest.slidesToScroll =
+      typeof dest.slidesToScroll === "undefined"
+        ? source.slidesToScroll
+        : dest.slidesToScroll;
+    dest.controls =
+      typeof dest.controls === "undefined" ? source.controls : dest.controls;
+    dest.controlsPosition =
+      typeof dest.controlsPosition === "undefined"
+        ? source.controlsPosition
+        : dest.controlsPosition;
+    dest.draggable =
+      typeof dest.draggable === "undefined" ? source.draggable : dest.draggable;
+    dest.autoplay =
+      typeof dest.autoplay === "undefined" ? source.autoplay : dest.autoplay;
+    dest.autoplayInterval =
+      typeof dest.autoplayInterval === "undefined"
+        ? source.autoplayInterval
+        : dest.autoplayInterval;
+    dest.autoplayVelocity =
+      typeof dest.autoplayVelocity === "undefined"
+        ? source.autoplayVelocity
+        : dest.autoplayVelocity;
+    dest.controlPrevIconSrc =
+      typeof dest.controlPrevIconSrc === "undefined"
+        ? source.controlPrevIconSrc
+        : dest.controlPrevIconSrc;
+    dest.controlNextIconSrc =
+      typeof dest.controlNextIconSrc === "undefined"
+        ? source.controlNextIconSrc
+        : dest.controlNextIconSrc;
+    dest.indicatorActiveIconSrc =
+      typeof dest.indicatorActiveIconSrc === "undefined"
+        ? source.indicatorActiveIconSrc
+        : dest.indicatorActiveIconSrc;
+    dest.indicatorInactiveIconSrc =
+      typeof dest.indicatorInactiveIconSrc === "undefined"
+        ? source.indicatorInactiveIconSrc
+        : dest.indicatorInactiveIconSrc;
+    dest.angle = typeof dest.angle === "undefined" ? source.angle : dest.angle;
+    dest.pauseOnHover =
+      typeof dest.pauseOnHover === "undefined"
+        ? source.pauseOnHover
+        : dest.pauseOnHover;
+    dest.sticky =
+      typeof dest.sticky === "undefined" ? source.sticky : dest.sticky;
+    dest.indicators =
+      typeof dest.indicators === "undefined"
+        ? source.indicators
+        : dest.indicators;
+    dest.indicatorsPosition =
+      typeof dest.indicatorsPosition === "undefined"
+        ? source.indicatorsPosition
+        : dest.indicatorsPosition;
+    dest.pause = typeof dest.pause === "undefined" ? source.pause : dest.pause;
   }
 
   protected initResponsiveOptions() {
@@ -462,23 +590,41 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   }
 
   protected setControlsOptions() {
-
-    const xsControlsPosition = this.scope.xs.controlsPosition?.split('-') as ControlsPosition[];
-    const smControlsPosition = this.scope.sm.controlsPosition?.split('-') as ControlsPosition[];
-    const mdControlsPosition = this.scope.md.controlsPosition?.split('-') as ControlsPosition[];
-    const lgControlsPosition = this.scope.lg.controlsPosition?.split('-') as ControlsPosition[];
-    const xlControlsPosition = this.scope.xl.controlsPosition?.split('-') as ControlsPosition[];
+    const xsControlsPosition = this.scope.xs.controlsPosition?.split(
+      "-"
+    ) as ControlsPosition[];
+    const smControlsPosition = this.scope.sm.controlsPosition?.split(
+      "-"
+    ) as ControlsPosition[];
+    const mdControlsPosition = this.scope.md.controlsPosition?.split(
+      "-"
+    ) as ControlsPosition[];
+    const lgControlsPosition = this.scope.lg.controlsPosition?.split(
+      "-"
+    ) as ControlsPosition[];
+    const xlControlsPosition = this.scope.xl.controlsPosition?.split(
+      "-"
+    ) as ControlsPosition[];
 
     this.scope.controlsPositionClass = `control-${xsControlsPosition[0]} control-${xsControlsPosition[1]} control-sm-${smControlsPosition[0]} control-sm-${smControlsPosition[1]} control-md-${mdControlsPosition[0]} control-md-${mdControlsPosition[1]} control-lg-${lgControlsPosition[0]} control-lg-${lgControlsPosition[1]} control-xl-${xlControlsPosition[0]} control-xl-${xlControlsPosition[1]}`;
   }
 
   protected setIndicatorsOptions() {
-
-    const xsIndicatorsPosition = this.scope.xs.indicatorsPosition?.split('-') as IndicatorsPosition[];
-    const smIndicatorsPosition = this.scope.sm.indicatorsPosition?.split('-') as IndicatorsPosition[];
-    const mdIndicatorsPosition = this.scope.md.indicatorsPosition?.split('-') as IndicatorsPosition[];
-    const lgIndicatorsPosition = this.scope.lg.indicatorsPosition?.split('-') as IndicatorsPosition[];
-    const xlIndicatorsPosition = this.scope.xl.indicatorsPosition?.split('-') as IndicatorsPosition[];
+    const xsIndicatorsPosition = this.scope.xs.indicatorsPosition?.split(
+      "-"
+    ) as IndicatorsPosition[];
+    const smIndicatorsPosition = this.scope.sm.indicatorsPosition?.split(
+      "-"
+    ) as IndicatorsPosition[];
+    const mdIndicatorsPosition = this.scope.md.indicatorsPosition?.split(
+      "-"
+    ) as IndicatorsPosition[];
+    const lgIndicatorsPosition = this.scope.lg.indicatorsPosition?.split(
+      "-"
+    ) as IndicatorsPosition[];
+    const xlIndicatorsPosition = this.scope.xl.indicatorsPosition?.split(
+      "-"
+    ) as IndicatorsPosition[];
 
     this.scope.indicatorsPositionClass = `indicators-${xsIndicatorsPosition[0]} indicators-${xsIndicatorsPosition[1]} indicators-sm-${smIndicatorsPosition[0]} indicators-sm-${smIndicatorsPosition[1]} indicators-md-${mdIndicatorsPosition[0]} indicators-md-${mdIndicatorsPosition[1]} indicators-lg-${lgIndicatorsPosition[0]} indicators-lg-${lgIndicatorsPosition[1]} indicators-xl-${xlIndicatorsPosition[0]} indicators-xl-${xlIndicatorsPosition[1]}`;
   }
@@ -488,22 +634,22 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     const size = window.innerWidth;
     // XS
     if (size >= this.scope.xs.minWidth && size < this.scope.sm.minWidth) {
-      return 'xs';
+      return "xs";
     }
     // SM
     if (size >= this.scope.sm.minWidth && size < this.scope.md.minWidth) {
-      return 'sm';
+      return "sm";
     }
     // MD
     if (size >= this.scope.md.minWidth && size < this.scope.lg.minWidth) {
-      return 'md';
+      return "md";
     }
     // LG
     if (size >= this.scope.lg.minWidth && size < this.scope.xl.minWidth) {
-      return 'lg';
+      return "lg";
     }
     // XL
-    return 'xl';
+    return "xl";
   }
 
   protected setOptionsByBreakpoint(breakpoint: Breakpoint) {
@@ -598,29 +744,64 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   }
 
   protected addEventListeners() {
-    window.addEventListener('resize', this.onResize.bind(this), {passive: true});
+    window.addEventListener("resize", this.onResize.bind(this), {
+      passive: true,
+    });
 
     // Custom event triggered by some parent components when this component changes his visibility, e.g. triggered in the bs4-tabs component
-    this.el.addEventListener('visibility-changed' as any, this.onVisibilityChanged.bind(this));
+    this.el.addEventListener(
+      "visibility-changed" as any,
+      this.onVisibilityChanged.bind(this)
+    );
 
-    this.slideshowInner.addEventListener('scroll', this.onScroll.bind(this), { passive: true});
-    this.slideshowInner.addEventListener('scrollended', this.onScrollend.bind(this), {passive: true});
+    this.slideshowInner.addEventListener("scroll", this.onScroll.bind(this), {
+      passive: true,
+    });
+    this.slideshowInner.addEventListener(
+      "scrollended",
+      this.onScrollend.bind(this),
+      { passive: true }
+    );
 
-    this.el.addEventListener('mouseenter', this.onMouseIn.bind(this), {passive: true});
-    this.el.addEventListener('mouseover', this.onMouseIn.bind(this), {passive: true});
-    this.el.addEventListener('focusin', this.onMouseIn.bind(this), {passive: true});
-    this.el.addEventListener('touchstart', this.onMouseIn.bind(this), {passive: true});
+    this.el.addEventListener("mouseenter", this.onMouseIn.bind(this), {
+      passive: true,
+    });
+    this.el.addEventListener("mouseover", this.onMouseIn.bind(this), {
+      passive: true,
+    });
+    this.el.addEventListener("focusin", this.onMouseIn.bind(this), {
+      passive: true,
+    });
+    this.el.addEventListener("touchstart", this.onMouseIn.bind(this), {
+      passive: true,
+    });
 
-    this.el.addEventListener('mouseout', this.onMouseOut.bind(this), {passive: true});
-    this.el.addEventListener('mouseleave', this.onMouseOut.bind(this), {passive: true});
-    this.el.addEventListener('focusout', this.onMouseOut.bind(this), {passive: true});
+    this.el.addEventListener("mouseout", this.onMouseOut.bind(this), {
+      passive: true,
+    });
+    this.el.addEventListener("mouseleave", this.onMouseOut.bind(this), {
+      passive: true,
+    });
+    this.el.addEventListener("focusout", this.onMouseOut.bind(this), {
+      passive: true,
+    });
 
-    this.el.addEventListener('mouseup', this.onMouseUp.bind(this), {passive: true});
-    this.el.addEventListener('touchend', this.onMouseUp.bind(this), {passive: true});
-    this.el.addEventListener('scroll', this.onMouseUp.bind(this), {passive: true});
-    this.el.addEventListener('scrollend', this.onMouseUp.bind(this), {passive: true});
+    this.el.addEventListener("mouseup", this.onMouseUp.bind(this), {
+      passive: true,
+    });
+    this.el.addEventListener("touchend", this.onMouseUp.bind(this), {
+      passive: true,
+    });
+    this.el.addEventListener("scroll", this.onMouseUp.bind(this), {
+      passive: true,
+    });
+    this.el.addEventListener("scrollend", this.onMouseUp.bind(this), {
+      passive: true,
+    });
     // See ScrollEventsService for this event
-    this.el.addEventListener('scrollended', this.onMouseUp.bind(this), {passive: true});
+    this.el.addEventListener("scrollended", this.onMouseUp.bind(this), {
+      passive: true,
+    });
 
     // inital
     this.onResize();
@@ -629,21 +810,27 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   }
 
   protected removeEventListeners() {
-    window.removeEventListener('resize', this.onResize.bind(this));
+    window.removeEventListener("resize", this.onResize.bind(this));
 
-    this.el.removeEventListener('visibility-changed' as any, this.onVisibilityChanged.bind(this));
+    this.el.removeEventListener(
+      "visibility-changed" as any,
+      this.onVisibilityChanged.bind(this)
+    );
 
-    this.slideshowInner.removeEventListener('scroll', this.onScroll.bind(this));
-    this.slideshowInner.removeEventListener('scrollended', this.onScrollend.bind(this));
+    this.slideshowInner.removeEventListener("scroll", this.onScroll.bind(this));
+    this.slideshowInner.removeEventListener(
+      "scrollended",
+      this.onScrollend.bind(this)
+    );
 
-    this.el.removeEventListener('mouseenter', this.onMouseIn.bind(this));
-    this.el.removeEventListener('mouseover', this.onMouseIn.bind(this));
-    this.el.removeEventListener('focusin', this.onMouseIn.bind(this));
-    this.el.removeEventListener('touchstart', this.onMouseIn.bind(this));
+    this.el.removeEventListener("mouseenter", this.onMouseIn.bind(this));
+    this.el.removeEventListener("mouseover", this.onMouseIn.bind(this));
+    this.el.removeEventListener("focusin", this.onMouseIn.bind(this));
+    this.el.removeEventListener("touchstart", this.onMouseIn.bind(this));
 
-    this.el.removeEventListener('mouseout', this.onMouseOut.bind(this));
-    this.el.removeEventListener('mouseleave', this.onMouseOut.bind(this));
-    this.el.removeEventListener('focusout', this.onMouseOut.bind(this));
+    this.el.removeEventListener("mouseout", this.onMouseOut.bind(this));
+    this.el.removeEventListener("mouseleave", this.onMouseOut.bind(this));
+    this.el.removeEventListener("focusout", this.onMouseOut.bind(this));
   }
 
   protected async beforeBind() {
@@ -659,22 +846,23 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   }
 
   protected initSlideshowInner() {
-
     this.initSlideshowInnerSlides();
 
     this.scrollEventsService = new ScrollEventsService(this.slideshowInner);
-
   }
 
   protected enableDesktopDragscroll() {
     if (!this.dragscrollService) {
-      const dragscrollOptions: DragscrollOptions = {detectGlobalMove: true};
-      this.dragscrollService = new Dragscroll(this.slideshowInner, dragscrollOptions);
+      const dragscrollOptions: DragscrollOptions = { detectGlobalMove: true };
+      this.dragscrollService = new Dragscroll(
+        this.slideshowInner,
+        dragscrollOptions
+      );
     }
   }
 
   protected disableDesktopDragscroll() {
-    if (this.dragscrollService ) {
+    if (this.dragscrollService) {
       this.dragscrollService.destroy();
       this.dragscrollService = undefined;
     }
@@ -687,14 +875,20 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
         angle: this.scope.angle,
         pauseOnHover: this.scope.pauseOnHover,
       };
-      this.continuousAutoplayService = new Autoscroll(this.slideshowInner, autoscrollOptions);
+      this.continuousAutoplayService = new Autoscroll(
+        this.slideshowInner,
+        autoscrollOptions
+      );
     }
     // on continuous autoplay the scrollended event is never triggered, so call this method all `intervalsTimeMs` milliseconds as a WORKAROUND
     if (!this.continuousAutoplayIntervalIndex) {
       // intervals are depending on the autoscrolling speed (autoplayVelocity)
       const intervalsTimeMs = this.scope.autoplayVelocity * 10000;
       // console.debug('intervalsTimeMs', intervalsTimeMs);
-      this.continuousAutoplayIntervalIndex = window.setInterval(this.onScrollend.bind(this), intervalsTimeMs);
+      this.continuousAutoplayIntervalIndex = window.setInterval(
+        this.onScrollend.bind(this),
+        intervalsTimeMs
+      );
     }
   }
 
@@ -726,7 +920,6 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     }
   }
 
-
   protected disableAutoplay() {
     this.disableIntervalAutoplay();
     this.disableContinuousAutoplay();
@@ -743,22 +936,21 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   protected initSlideshowInnerSlides() {
     if (!this.slideElements) {
-      throw new Error('No slides found!');
+      throw new Error("No slides found!");
     }
 
     // If slides not added by template
     if (this.scope.items.length === 0) {
       this.addItemsByChilds();
     }
-
   }
 
   protected transformTemplateAttributes(attributes: any, index: number) {
     attributes = super.transformTemplateAttributes(attributes, index);
     attributes.handle = attributes.handle || index.toString();
     attributes.index = index;
-    attributes.class = attributes.class || '';
-    attributes.class += ' slide';
+    attributes.class = attributes.class || "";
+    attributes.class += " slide";
     return attributes;
   }
 
@@ -770,13 +962,13 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     const attributes = this.getTemplateAttributes(tpl, index);
     const content = tpl.innerHTML;
     if (attributes.type) {
-      if (attributes.type === 'slide') {
-        this.scope.items.push({...attributes, content});
+      if (attributes.type === "slide") {
+        this.scope.items.push({ ...attributes, content });
       }
-      if (attributes.type === 'controls') {
+      if (attributes.type === "controls") {
         this.templateControls = content;
       }
-      if (attributes.type === 'indicators') {
+      if (attributes.type === "indicators") {
         this.templateIndicators = content;
       }
     }
@@ -791,14 +983,21 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       return;
     }
     this.slideElements.forEach((slideElement, index) => {
-      const handle = slideElement.getAttribute('handle') || slideElement.getAttribute('id') || index.toString();
-      slideElement.setAttribute('index', index.toString());
+      const handle =
+        slideElement.getAttribute("handle") ||
+        slideElement.getAttribute("id") ||
+        index.toString();
+      slideElement.setAttribute("index", index.toString());
       const attributes = {
         handle,
         active: false,
         content: slideElement.innerHTML,
         index,
-        position: {...slideElement.getBoundingClientRect(), centerY: 0, centerX: 0},
+        position: {
+          ...slideElement.getBoundingClientRect(),
+          centerY: 0,
+          centerX: 0,
+        },
       };
       this.scope.items.push(attributes);
     });
@@ -824,11 +1023,19 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     if (this.scope.items.length <= 0) {
       return -1;
     }
-    let nearZero = Math.abs(this.scope.angle === 'vertical' ? this.scope.items[0].position.centerY : this.scope.items[0].position.centerX);
+    let nearZero = Math.abs(
+      this.scope.angle === "vertical"
+        ? this.scope.items[0].position.centerY
+        : this.scope.items[0].position.centerX
+    );
     let minIndex = 0;
 
     for (let i = 1; i < this.scope.items.length; i++) {
-      const position = Math.abs(this.scope.angle === 'vertical' ? this.scope.items[i].position.centerY : this.scope.items[i].position.centerX);
+      const position = Math.abs(
+        this.scope.angle === "vertical"
+          ? this.scope.items[i].position.centerY
+          : this.scope.items[i].position.centerX
+      );
       nearZero = this.getCurrentClosestNumber(0, position, nearZero);
       if (nearZero === position) {
         minIndex = i;
@@ -846,8 +1053,11 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
         if (this.scope.items[index]) {
           this.scope.items[index].active = false;
         }
-        if (this.slideElements[index] && this.slideElements[index].classList.remove) {
-          this.slideElements[index].classList.remove('active');
+        if (
+          this.slideElements[index] &&
+          this.slideElements[index].classList.remove
+        ) {
+          this.slideElements[index].classList.remove("active");
         }
       }
     }
@@ -861,7 +1071,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     }
     this.scope.items[index].active = true;
     if (this.slideElements && this.slideElements[index].classList.add) {
-      this.slideElements[index].classList.add('active');
+      this.slideElements[index].classList.add("active");
     }
     return index;
   }
@@ -870,8 +1080,16 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     if (!this.scope.items[index]) {
       return false;
     }
-    const maxScrollTo = this.scope.angle === 'vertical' ? this.getScrollPosition().maxY : this.getScrollPosition().maxX;
-    const scrollTo = this.scope.angle === 'vertical' ? this.slideshowInner.scrollTop + this.scope.items[index].position.centerY : this.slideshowInner.scrollLeft + this.scope.items[index].position.centerX;
+    const maxScrollTo =
+      this.scope.angle === "vertical"
+        ? this.getScrollPosition().maxY
+        : this.getScrollPosition().maxX;
+    const scrollTo =
+      this.scope.angle === "vertical"
+        ? this.slideshowInner.scrollTop +
+          this.scope.items[index].position.centerY
+        : this.slideshowInner.scrollLeft +
+          this.scope.items[index].position.centerX;
     return scrollTo <= maxScrollTo && scrollTo >= 0;
   }
 
@@ -901,7 +1119,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     let prevIndex = currentIndex - this.scope.slidesToScroll;
 
     if (prevIndex < 0) {
-      prevIndex = (this.slideElements.length - 1) + (prevIndex + 1);
+      prevIndex = this.slideElements.length - 1 + (prevIndex + 1);
     }
 
     return this.goTo(prevIndex);
@@ -915,7 +1133,9 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   protected setSlidePositions() {
     if (this.scope.items.length !== this.slideElements?.length) {
-      console.warn(`The slide objects must be the same size as the slide elements! ${this.scope.items.length} !== ${this.slideElements?.length}`);
+      console.warn(
+        `The slide objects must be the same size as the slide elements! ${this.scope.items.length} !== ${this.slideElements?.length}`
+      );
       return;
     }
     const mainBoundingClient = this.slideshowInner.getBoundingClientRect();
@@ -938,9 +1158,9 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
         top: rect.top,
         toJSON: rect.toJSON,
         // 0 if element is in the middle / center
-        centerY: (rect.y + (rect.height / 2)) - mainBoundingClient.height / 2,
+        centerY: rect.y + rect.height / 2 - mainBoundingClient.height / 2,
         // 0 if element is in the middle / center
-        centerX: (rect.x + (rect.width / 2)) - mainBoundingClient.width / 2,
+        centerX: rect.x + rect.width / 2 - mainBoundingClient.width / 2,
       };
     }
   }
@@ -957,39 +1177,44 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
    * @param newValue
    * @param namespace
    */
-  protected attributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
-
-    let optionForSize: Breakpoint = 'xs';
+  protected attributeChangedCallback(
+    attributeName: string,
+    oldValue: any,
+    newValue: any,
+    namespace: string | null
+  ) {
+    let optionForSize: Breakpoint = "xs";
 
     let responsiveScope: ResponsiveOptions | Options = this.scope;
 
-    if (this.observedAttributesToCheck && this.observedAttributesToCheck[attributeName]) {
+    if (
+      this.observedAttributesToCheck &&
+      this.observedAttributesToCheck[attributeName]
+    ) {
       this.observedAttributesToCheck[attributeName].initialized = true;
     }
 
     newValue = this.parseAttribute(newValue);
 
-    if (attributeName.startsWith('sm-')) {
-      optionForSize = 'sm';
+    if (attributeName.startsWith("sm-")) {
+      optionForSize = "sm";
       responsiveScope = this.scope.sm;
       attributeName = attributeName.slice(3);
-    } else if (attributeName.startsWith('md-')) {
-      optionForSize = 'md';
+    } else if (attributeName.startsWith("md-")) {
+      optionForSize = "md";
       responsiveScope = this.scope.md;
       attributeName = attributeName.slice(3);
-    } else if (attributeName.startsWith('lg-')) {
-      optionForSize = 'lg';
+    } else if (attributeName.startsWith("lg-")) {
+      optionForSize = "lg";
       responsiveScope = this.scope.lg;
       attributeName = attributeName.slice(3);
-    } else if (attributeName.startsWith('xl-')) {
-      optionForSize = 'xl';
+    } else if (attributeName.startsWith("xl-")) {
+      optionForSize = "xl";
       responsiveScope = this.scope.xl;
       attributeName = attributeName.slice(3);
     }
 
-
     const parsedAttributeName = camelCase(attributeName);
-
 
     if (responsiveScope && (responsiveScope as any)[parsedAttributeName]) {
       oldValue = (responsiveScope as any)[parsedAttributeName];
@@ -999,7 +1224,12 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     (responsiveScope as any)[parsedAttributeName] = newValue;
 
     // call custom attribute changed callback with parsed values
-    this.parsedAttributeChangedCallback(optionForSize + parsedAttributeName, oldValue, newValue, namespace);
+    this.parsedAttributeChangedCallback(
+      optionForSize + parsedAttributeName,
+      oldValue,
+      newValue,
+      namespace
+    );
 
     this.bindIfReady();
   }
@@ -1011,8 +1241,18 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
    * @param newValue
    * @param namespace
    */
-  protected parsedAttributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
-    return super.parsedAttributeChangedCallback(attributeName, oldValue, newValue, namespace);
+  protected parsedAttributeChangedCallback(
+    attributeName: string,
+    oldValue: any,
+    newValue: any,
+    namespace: string | null
+  ) {
+    return super.parsedAttributeChangedCallback(
+      attributeName,
+      oldValue,
+      newValue,
+      namespace
+    );
   }
 
   // deconstructor

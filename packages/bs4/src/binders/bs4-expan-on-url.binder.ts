@@ -1,6 +1,6 @@
-import { Binder, EventDispatcher } from '@ribajs/core';
-import { CollapseService } from '../services/collapse.service';
-import { onRoute } from '@ribajs/utils/src/url';
+import { Binder, EventDispatcher } from "@ribajs/core";
+import { CollapseService } from "../services/collapse.service";
+import { onRoute } from "@ribajs/utils/src/url";
 
 /**
  *
@@ -8,10 +8,10 @@ import { onRoute } from '@ribajs/utils/src/url';
  * @see https://github.com/twbs/bootstrap/blob/v4-dev/js/src/collapse.js
  */
 export const expanOnUrlBinder: Binder<string> = {
-  name: 'bs4-expan-on-url',
+  name: "bs4-expan-on-url",
   routine(el: HTMLElement, url: string) {
-    const collapseService = new CollapseService(el, [], {toggle: false});
-    const dispatcher = new EventDispatcher('main');
+    const collapseService = new CollapseService(el, [], { toggle: false });
+    const dispatcher = new EventDispatcher("main");
 
     const checkURL = (urlToCheck?: string) => {
       if (urlToCheck && onRoute(urlToCheck)) {
@@ -22,7 +22,7 @@ export const expanOnUrlBinder: Binder<string> = {
       return false;
     };
 
-    dispatcher.on('newPageReady', () => checkURL(url));
+    dispatcher.on("newPageReady", () => checkURL(url));
 
     checkURL(url);
   },

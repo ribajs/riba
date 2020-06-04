@@ -11,7 +11,7 @@ const getCopyPluginConfigForScssRibaModule = (config, moduleName) => {
   if (isModuleAvailable(config, moduleName)) {
     // Copy @ribajs/xyz scss files
     var moduleConfig = {
-      from: path.dirname(require.resolve(moduleName)) + "**/*.scss",
+      from: path.dirname(require.resolve(moduleName)) + "/**/*.scss",
       to: path.resolve(
         `${rootPath}/${config.copyAssets.foldername}/scss/vendors/${moduleName}`
       ),

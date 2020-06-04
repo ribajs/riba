@@ -1,33 +1,41 @@
-import { Component } from '@ribajs/core';
-import CarouselService from '../../services/carousel.service';
-import { CarouselOption } from '../../interfaces'
+import { Component } from "@ribajs/core";
+import CarouselService from "../../services/carousel.service";
+import { CarouselOption } from "../../interfaces";
 
 export interface Scope {
   // Properties
-  interval: CarouselOption['interval'];
-  keyboard: CarouselOption['keyboard'];
-  slide: CarouselOption['slide'];
-  pauseOn: CarouselOption['pause'];
-  wrap: CarouselOption['wrap'];
-  touch: CarouselOption['touch'];
-  ride: CarouselOption['ride']; // TODO
+  interval: CarouselOption["interval"];
+  keyboard: CarouselOption["keyboard"];
+  slide: CarouselOption["slide"];
+  pauseOn: CarouselOption["pause"];
+  wrap: CarouselOption["wrap"];
+  touch: CarouselOption["touch"];
+  ride: CarouselOption["ride"]; // TODO
   fade: boolean;
   // Methods
-  next: Bs4CarouselComponent['next'];
-  nextWhenVisible: Bs4CarouselComponent['nextWhenVisible'];
-  prev: Bs4CarouselComponent['prev'];
-  pause: Bs4CarouselComponent['pause'];
-  cycle: Bs4CarouselComponent['cycle'];
-  to: Bs4CarouselComponent['to'];
-  dispose: Bs4CarouselComponent['dispose'];
+  next: Bs4CarouselComponent["next"];
+  nextWhenVisible: Bs4CarouselComponent["nextWhenVisible"];
+  prev: Bs4CarouselComponent["prev"];
+  pause: Bs4CarouselComponent["pause"];
+  cycle: Bs4CarouselComponent["cycle"];
+  to: Bs4CarouselComponent["to"];
+  dispose: Bs4CarouselComponent["dispose"];
 }
 
 export class Bs4CarouselComponent extends Component {
-
-  public static tagName = 'bs4-carousel';
+  public static tagName = "bs4-carousel";
 
   static get observedAttributes() {
-    return ['interval', 'keyboard', 'slide', 'pauseOn', 'wrap', 'touch', 'ride', 'fade'];
+    return [
+      "interval",
+      "keyboard",
+      "slide",
+      "pauseOn",
+      "wrap",
+      "touch",
+      "ride",
+      "fade",
+    ];
   }
 
   protected requiredAttributes() {
@@ -64,7 +72,7 @@ export class Bs4CarouselComponent extends Component {
 
   protected async beforeBind() {
     await super.beforeBind();
-    this.el.classList.add('carousel', 'slide');
+    this.el.classList.add("carousel", "slide");
   }
 
   protected async afterBind() {
@@ -75,10 +83,10 @@ export class Bs4CarouselComponent extends Component {
       slide: this.scope.slide,
       pause: this.scope.pauseOn,
       wrap: this.scope.wrap,
-      touch: this.scope.touch, 
+      touch: this.scope.touch,
     });
     if (this.scope.fade) {
-      this.el.classList.add('carousel-fade');
+      this.el.classList.add("carousel-fade");
     }
     // TODO make this configurateable?
     this.carouselService.cycle();
@@ -126,7 +134,12 @@ export class Bs4CarouselComponent extends Component {
     }
   }
 
-  public attributeChangedCallback(name: string, oldValue: any, newValue: any, namespace: string | null) {
+  public attributeChangedCallback(
+    name: string,
+    oldValue: any,
+    newValue: any,
+    namespace: string | null
+  ) {
     super.attributeChangedCallback(name, oldValue, newValue, namespace);
   }
 
