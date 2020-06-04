@@ -21,6 +21,7 @@ export { htmlBinder } from "./html.binder";
 export { hideBinder } from "./hide.binder";
 export { showBinder } from "./show.binder";
 export { textBinder } from "./text.binder";
+export { toggleOnEventBinder } from "./toggle-on-event.binder";
 export { attributeBinder } from "./attribute.binder";
 export { srcsetSizeBinder } from "./srcset-size.binder";
 export { templateBinder } from "./template.binder";

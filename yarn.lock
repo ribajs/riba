@@ -2742,6 +2742,7 @@ __metadata:
     node-sass: ^4.14.1
     postcss-loader: ^3.0.0
     pug-loader: ^2.4.0
+    resolve-url-loader: ^3.1.1
     sass-loader: ^8.0.2
     terser-webpack-plugin: ^3.0.3
     webpack: ^5.0.0-beta.16
@@ -2774,6 +2775,7 @@ __metadata:
     node-sass: ^4.14.1
     postcss-loader: ^3.0.0
     pug-loader: ^2.4.0
+    resolve-url-loader: ^3.1.1
     sass-loader: ^8.0.2
     terser-webpack-plugin: ^3.0.3
     webpack: ^5.0.0-beta.16
@@ -3621,6 +3623,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"adjust-sourcemap-loader@npm:2.0.0":
+  version: 2.0.0
+  resolution: "adjust-sourcemap-loader@npm:2.0.0"
+  dependencies:
+    assert: 1.4.1
+    camelcase: 5.0.0
+    loader-utils: 1.2.3
+    object-path: 0.11.4
+    regex-parser: 2.2.10
+  checksum: 860c4ce3b652a13f474d24f229892f8e04df3f1f6d65a2b1b38f934d06b3f91091f99291eea4c9539a22b85157ee54ccc2b82f5221e72adf63b5c3147f5ba735
+  languageName: node
+  linkType: hard
+
 "aggregate-error@npm:^3.0.0":
   version: 3.0.1
   resolution: "aggregate-error@npm:3.0.1"
@@ -3859,6 +3874,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"arity-n@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "arity-n@npm:1.0.4"
+  checksum: bd6500d29ad285c0d5ef9a6e0bc822311fd9f2b501d3b84085d6ad17c2a69decde2c6fe46a57b241409b5749e8992a77d0366ff25fbf4a25519908c1bb07c226
+  languageName: node
+  linkType: hard
+
 "arr-diff@npm:^1.0.1":
   version: 1.1.0
   resolution: "arr-diff@npm:1.1.0"
@@ -4037,6 +4059,15 @@ __metadata:
   version: 1.0.0
   resolution: "assert-plus@npm:1.0.0"
   checksum: 0dbcfb92c233e31f58bc2dd4109728e961eef044dc31b8f85f2b7bd2b0435fc32312258de4e7d9ad07d641aef663b3336d071ad2aa31fdf0686848315cc67f26
+  languageName: node
+  linkType: hard
+
+"assert@npm:1.4.1":
+  version: 1.4.1
+  resolution: "assert@npm:1.4.1"
+  dependencies:
+    util: 0.10.3
+  checksum: 969eea2ef5da5347fa15a09cdc81368b8f22726192318e1236b2c2a658ead5912d44b95c8d1254d64d80f420c9d61abe62f2c6eb08ceb84560f3cb87c874a767
   languageName: node
   linkType: hard
 
@@ -4660,6 +4691,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"camelcase@npm:5.0.0":
+  version: 5.0.0
+  resolution: "camelcase@npm:5.0.0"
+  checksum: f96733b11c205054e9709d5afeaf1d3e7df870a06d379eecb8252d9e6c4fa8582ea945d2c9e8f5fc269b6c8ca02cdd0724dd18f50a740d44cd8505bae8408963
+  languageName: node
+  linkType: hard
+
+"camelcase@npm:5.3.1, camelcase@npm:^5.0.0, camelcase@npm:^5.3.1":
+  version: 5.3.1
+  resolution: "camelcase@npm:5.3.1"
+  checksum: 58f271afe62d5396a5a2d28cbbeb3520732763d3c005e295225d48a58408d44575bf92475cd828f597790725f1be43aa08e623b65bdffb5619f16fb402773bb6
+  languageName: node
+  linkType: hard
+
 "camelcase@npm:^2.0.0":
   version: 2.1.1
   resolution: "camelcase@npm:2.1.1"
@@ -4671,13 +4716,6 @@ __metadata:
   version: 3.0.0
   resolution: "camelcase@npm:3.0.0"
   checksum: ac3291a361c444200a6dc579b4a0f2045ef457ac49d46b4af5190e6a0f74a50804638a36b30579f47b04b65a38c920027ff35bfbc1da49a25ae041538922f2af
-  languageName: node
-  linkType: hard
-
-"camelcase@npm:^5.0.0, camelcase@npm:^5.3.1":
-  version: 5.3.1
-  resolution: "camelcase@npm:5.3.1"
-  checksum: 58f271afe62d5396a5a2d28cbbeb3520732763d3c005e295225d48a58408d44575bf92475cd828f597790725f1be43aa08e623b65bdffb5619f16fb402773bb6
   languageName: node
   linkType: hard
 
@@ -5127,6 +5165,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"compose-function@npm:3.0.3":
+  version: 3.0.3
+  resolution: "compose-function@npm:3.0.3"
+  dependencies:
+    arity-n: ^1.0.4
+  checksum: 233ea675ba182428c0754a888c4dca3973d5327ca3b1eba9f4311b444e2a67d44ebdcf70c46f850d619a0dd4b6da12aa831aa887897a2fdf26a92762ee0d203c
+  languageName: node
+  linkType: hard
+
 "compressible@npm:~2.0.16":
   version: 2.0.18
   resolution: "compressible@npm:2.0.18"
@@ -5200,12 +5247,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"convert-source-map@npm:^1.1.0, convert-source-map@npm:^1.4.0, convert-source-map@npm:^1.5.0, convert-source-map@npm:^1.6.0, convert-source-map@npm:^1.7.0":
+"convert-source-map@npm:1.7.0, convert-source-map@npm:^1.1.0, convert-source-map@npm:^1.4.0, convert-source-map@npm:^1.5.0, convert-source-map@npm:^1.6.0, convert-source-map@npm:^1.7.0":
   version: 1.7.0
   resolution: "convert-source-map@npm:1.7.0"
   dependencies:
     safe-buffer: ~5.1.1
   checksum: 50c6138f75db8a63d5bdbdfa56ffa632179d02944c7c6c7e8b37f8ce9bacabc5f2999cadf76baea3a8ed2225f3cd780b6eb772d8601fb81ebc0130862d130f89
+  languageName: node
+  linkType: hard
+
+"convert-source-map@npm:^0.3.3":
+  version: 0.3.5
+  resolution: "convert-source-map@npm:0.3.5"
+  checksum: 0d5ae5a9cd2905b6b745547b6c23b801c57eca108d29fd3ad2c16b437ed4e576e3b3de922da439c77abbd525e6f65334f11c8242fb0e7aa044c2128523c089d0
   languageName: node
   linkType: hard
 
@@ -5450,6 +5504,18 @@ __metadata:
   version: 3.2.1
   resolution: "css-what@npm:3.2.1"
   checksum: 361d8e94d417198ba7f5d8260efe47d74b6662c5f418cd33770ced8c6de6d9840dd0cfa99df5824a9a8f57b2db5224773e3267753e9a20a3ae98c21be679efe1
+  languageName: node
+  linkType: hard
+
+"css@npm:^2.0.0":
+  version: 2.2.4
+  resolution: "css@npm:2.2.4"
+  dependencies:
+    inherits: ^2.0.3
+    source-map: ^0.6.1
+    source-map-resolve: ^0.5.2
+    urix: ^0.1.0
+  checksum: bdcfdef44b986db4443dc48492a4a4b5a5222b7cc6862864ef97b31ee378b391230bc57b367ade6bce25a8b45189f294993ddf2a8628daa5edfc0a3a6523f84b
   languageName: node
   linkType: hard
 
@@ -6139,7 +6205,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"es6-iterator@npm:^2.0.1, es6-iterator@npm:^2.0.3, es6-iterator@npm:~2.0.3":
+"es6-iterator@npm:2.0.3, es6-iterator@npm:^2.0.1, es6-iterator@npm:^2.0.3, es6-iterator@npm:~2.0.3":
   version: 2.0.3
   resolution: "es6-iterator@npm:2.0.3"
   dependencies:
@@ -8116,6 +8182,13 @@ fsevents@^2.1.2:
   version: 2.0.4
   resolution: "inherits@npm:2.0.4"
   checksum: d11734fde3095ce63e83a4be33779c8597b0c95edec3efcadf9a78a9312a520028e25acb2d126656005791550f9f2e17de3ea6abeb026fa24627401e5e174d6c
+  languageName: node
+  linkType: hard
+
+"inherits@npm:2.0.1":
+  version: 2.0.1
+  resolution: "inherits@npm:2.0.1"
+  checksum: fa738e30f8ad65959715d5ba699b78fed43c6d36bd972d6b8dabac43c45f3157aa0dde6bc4b2898c274e825868e13fb64084518b44ea632d9ca20e5eadfbc87e
   languageName: node
   linkType: hard
 
@@ -10742,6 +10815,13 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
+"object-path@npm:0.11.4":
+  version: 0.11.4
+  resolution: "object-path@npm:0.11.4"
+  checksum: ee0bcc738072dc9d2aba36423d36f2aaeb9930b1f8564feb3bc95d06543458b55e63ad579d1a0169d8e03f817009f6166946b3bc8c22b5e2d2336334f6bfbd12
+  languageName: node
+  linkType: hard
+
 "object-visit@npm:^1.0.0":
   version: 1.0.1
   resolution: "object-visit@npm:1.0.1"
@@ -11608,6 +11688,17 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
+"postcss@npm:7.0.21":
+  version: 7.0.21
+  resolution: "postcss@npm:7.0.21"
+  dependencies:
+    chalk: ^2.4.2
+    source-map: ^0.6.1
+    supports-color: ^6.1.0
+  checksum: 418b07f6af25dd7665622f90767cffd590cd92137a7aad2898bccf712441450a3489f9f92f61741e69a3b2f990a346ffc0d74a1ce950c94da71080da14949074
+  languageName: node
+  linkType: hard
+
 "postcss@npm:^7.0.0, postcss@npm:^7.0.14, postcss@npm:^7.0.16, postcss@npm:^7.0.27, postcss@npm:^7.0.5, postcss@npm:^7.0.6":
   version: 7.0.30
   resolution: "postcss@npm:7.0.30"
@@ -12120,6 +12211,13 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
+"regex-parser@npm:2.2.10":
+  version: 2.2.10
+  resolution: "regex-parser@npm:2.2.10"
+  checksum: 298613f1b9ef879bb2effb445d61f803413969986b25389c645a10c56467dd914abdacd8b3e2eed1243e6cd72859d873d36d9a2ad20f52e12f7055e8ecd0ebdd
+  languageName: node
+  linkType: hard
+
 "regexp.prototype.flags@npm:^1.2.0":
   version: 1.3.0
   resolution: "regexp.prototype.flags@npm:1.3.0"
@@ -12403,6 +12501,24 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
+"resolve-url-loader@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "resolve-url-loader@npm:3.1.1"
+  dependencies:
+    adjust-sourcemap-loader: 2.0.0
+    camelcase: 5.3.1
+    compose-function: 3.0.3
+    convert-source-map: 1.7.0
+    es6-iterator: 2.0.3
+    loader-utils: 1.2.3
+    postcss: 7.0.21
+    rework: 1.0.1
+    rework-visit: 1.0.0
+    source-map: 0.6.1
+  checksum: 187013a8096ddd9ae7344dcffd65e88ba618207279d9345fc9380b2d2e02c3b09653ca93d515f9137d26927784a5e12794d48676c6ef19ee4dfa116798f53af8
+  languageName: node
+  linkType: hard
+
 "resolve-url@npm:^0.2.1":
   version: 0.2.1
   resolution: "resolve-url@npm:0.2.1"
@@ -12465,6 +12581,23 @@ fsevents@^2.1.2:
   version: 1.0.4
   resolution: "reusify@npm:1.0.4"
   checksum: 73f05f896cdefea23f5dddb6d30e50fef159ec77f3a239547cff990956e2e70b9f2d6090180fc98f25a3af912bce2544d7cb246d4fa067524c5bcf02f3ac314b
+  languageName: node
+  linkType: hard
+
+"rework-visit@npm:1.0.0":
+  version: 1.0.0
+  resolution: "rework-visit@npm:1.0.0"
+  checksum: c8b84f56e3cb12c1c077a0dc7a4b95ed743546c2d5a57d5a356d23dd933ff7b1d7a59cb56811d8f62965ecaac4215741cd714d09b58f6613449dc78d4d85fc20
+  languageName: node
+  linkType: hard
+
+"rework@npm:1.0.1":
+  version: 1.0.1
+  resolution: "rework@npm:1.0.1"
+  dependencies:
+    convert-source-map: ^0.3.3
+    css: ^2.0.0
+  checksum: 0315174be8a403a8c6792c5c40c80e6b0157d223b87b0889e14a02a8c3062646a681ec4d8ac8aa4c4431c941aaef0e0e2c8c0da170bfff83c456eb121f0603cc
   languageName: node
   linkType: hard
 
@@ -13054,7 +13187,7 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"source-map-resolve@npm:^0.5.0":
+"source-map-resolve@npm:^0.5.0, source-map-resolve@npm:^0.5.2":
   version: 0.5.3
   resolution: "source-map-resolve@npm:0.5.3"
   dependencies:
@@ -13084,6 +13217,13 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
+"source-map@npm:0.6.1, source-map@npm:^0.6.0, source-map@npm:^0.6.1, source-map@npm:~0.6.0, source-map@npm:~0.6.1":
+  version: 0.6.1
+  resolution: "source-map@npm:0.6.1"
+  checksum: fa17f30e37dfa8d8065fc98e8c51ae80d7050055f90dbd40e8644269bda04707386180c4c43af7104a29af56109663e994ccbc2cf766af01e915285c7f93cc40
+  languageName: node
+  linkType: hard
+
 "source-map@npm:^0.4.2":
   version: 0.4.4
   resolution: "source-map@npm:0.4.4"
@@ -13097,13 +13237,6 @@ fsevents@^2.1.2:
   version: 0.5.7
   resolution: "source-map@npm:0.5.7"
   checksum: 692efad3884fd7ff69fb1087fce61e3bdb14d21458a391cf856c3ddd01fece42dd8be6677042589733a50d783eecc3821769cb08986efb0d2d15cc8aaa2f911d
-  languageName: node
-  linkType: hard
-
-"source-map@npm:^0.6.0, source-map@npm:^0.6.1, source-map@npm:~0.6.0, source-map@npm:~0.6.1":
-  version: 0.6.1
-  resolution: "source-map@npm:0.6.1"
-  checksum: fa17f30e37dfa8d8065fc98e8c51ae80d7050055f90dbd40e8644269bda04707386180c4c43af7104a29af56109663e994ccbc2cf766af01e915285c7f93cc40
   languageName: node
   linkType: hard
 
@@ -14405,6 +14538,15 @@ fsevents@^2.1.2:
     define-properties: ^1.1.2
     object.getownpropertydescriptors: ^2.0.3
   checksum: 749a412502972bad49a38d12c70144a8c49cbf752ee17471a83f0aa4a8a942a4bfaf195f5554d7a255e3a34615ae6b51969da8524a577c001a4b50985ea13964
+  languageName: node
+  linkType: hard
+
+"util@npm:0.10.3":
+  version: 0.10.3
+  resolution: "util@npm:0.10.3"
+  dependencies:
+    inherits: 2.0.1
+  checksum: c6a11fd9964c5454eab8d156225ab1b906de2c9e9a53bf3202cf15806f925289ad3993df9c13eaa3f0f2ada0ef5210ee4b3b76f74b3e50027a0736aafcf3176b
   languageName: node
   linkType: hard
 
