@@ -39,8 +39,8 @@ lerna-debug.log*
 
 # Demos
 /demos/*/src/iconset/
-/demos/*/src/scss/vendors
-/demos/*/src/images/vendors
+/demos/*/src/scss/vendors/
+/demos/*/src/images/vendors/
 /demos/*/.yarn/*
 /demos/*/.pnp.*
 !/demos/*/.yarn/releases/
