@@ -107,7 +107,6 @@ export class LeafletMapComponent extends Component {
     dispatcher.on("visibility-changed", () => {
       if (this.map) {
         this.map.invalidateSize();
-        console.log("visiblity changed");
       }
     });
   }
