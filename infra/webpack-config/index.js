@@ -28,12 +28,8 @@ var getStyleLoaderRule = (config) => {
   rule.use.push({
     loader: require.resolve("css-loader"),
     options: {
-      url: false,
+      url: true,
     },
-  });
-
-  rule.use.push({
-    loader: require.resolve("resolve-url-loader"),
   });
 
   rule.use.push({
@@ -44,7 +40,6 @@ var getStyleLoaderRule = (config) => {
     loader: require.resolve("sass-loader"),
     options: {
       webpackImporter: true,
-      sourceMap: true,
     },
   });
   return rule;

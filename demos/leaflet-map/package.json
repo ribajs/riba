@@ -75,7 +75,8 @@
     "@ribajs/extras": "^1.9.0-alpha.0",
     "@ribajs/iconset": "^1.9.0-alpha.0",
     "@ribajs/leaflet-map": "^1.9.0-alpha.0",
-    "bootstrap": "^4.5.0"
+    "bootstrap": "^4.5.0",
+    "leaflet": "^1.6.0"
   },
   "resolutions": {
     "@ribajs/bs4": "portal:../../packages/bs4",
