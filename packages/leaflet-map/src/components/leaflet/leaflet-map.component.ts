@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, EventDispatcher } from "@ribajs/core";
 import { isNumber, justDigits } from "@ribajs/utils/src/type";
 import template from "./leaflet-map.component.html";
 import * as Leaflet from "leaflet";
@@ -30,6 +30,7 @@ export class LeafletMapComponent extends Component {
 
   protected markers: Marker[] = [];
   protected icons: { [key: string]: Leaflet.Icon } = {};
+  private map: Leaflet.Map;
 
   protected defaultIcon: any = Leaflet.icon({
     iconUrl: markerIcon,
@@ -80,39 +81,56 @@ export class LeafletMapComponent extends Component {
   }
 
   protected async afterBind() {
+    console.log(markerIcon);
     await super.afterBind();
     const mapId = "map-" + Math.floor(Math.random() * 9999);
     const mapElement = this.el.querySelector(this.scope.mapSelector);
     if (mapElement) {
       mapElement.id = mapId;
     } else {
-      console.warn(`No element with selector "${this.scope.mapSelector}" found!`);
+      console.warn(
+        `No element with selector "${this.scope.mapSelector}" found!`
+      );
     }
-    
-    const map = new Leaflet.Map(mapId).setView([this.scope.initialLat, this.scope.initialLng], this.scope.initialZoom);
 
+    this.map = new Leaflet.Map(mapId).setView(
+      [this.scope.initialLat, this.scope.initialLng],
+      this.scope.initialZoom
+    );
 
     Leaflet.tileLayer(this.scope.tileUrl, {
       attribution: this.scope.attribution,
-    }).addTo(map);
+    }).addTo(this.map);
 
     for (const marker of this.markers) {
       let leafletMarker;
       if (marker.icon !== undefined && marker.icon !== null) {
-        leafletMarker = Leaflet.marker([marker.lat, marker.lng], { icon: this.icons[marker.icon] });
+        leafletMarker = Leaflet.marker([marker.lat, marker.lng], {
+          icon: this.icons[marker.icon],
+        });
       } else {
         leafletMarker = Leaflet.marker([marker.lat, marker.lng]);
       }
-      leafletMarker.addTo(map).bindPopup(marker.title);
+      leafletMarker.addTo(this.map).bindPopup(marker.title);
       if (marker.openByDefault) {
         leafletMarker.openPopup();
       }
     }
+
+    this.registerEventListener();
   }
 
   // deconstructor
   protected disconnectedCallback() {
     super.disconnectedCallback();
+  }
+
+  protected registerEventListener() {
+    const dispatcher = new EventDispatcher("main");
+    dispatcher.on("visibility-changed", () => {
+      this.map.invalidateSize();
+      console.log("visiblity changed");
+    });
   }
 
   protected convertStringToPointTuple(str: string): PointTuple | undefined {
@@ -147,26 +165,34 @@ export class LeafletMapComponent extends Component {
           const iconOptions: IconOptions = {
             iconUrl,
             shadowUrl,
-          }
+          };
 
           if (iconSizeAttr) {
             iconOptions.iconSize = this.convertStringToPointTuple(iconSizeAttr);
           }
 
           if (iconAnchorAttr) {
-            iconOptions.iconAnchor = this.convertStringToPointTuple(iconAnchorAttr);
+            iconOptions.iconAnchor = this.convertStringToPointTuple(
+              iconAnchorAttr
+            );
           }
 
           if (popupAnchorAttr) {
-            iconOptions.popupAnchor = this.convertStringToPointTuple(popupAnchorAttr);
+            iconOptions.popupAnchor = this.convertStringToPointTuple(
+              popupAnchorAttr
+            );
           }
 
           if (shadowSizeAttr) {
-            iconOptions.shadowSize = this.convertStringToPointTuple(shadowSizeAttr);
+            iconOptions.shadowSize = this.convertStringToPointTuple(
+              shadowSizeAttr
+            );
           }
 
           if (shadowAnchorAttr) {
-            iconOptions.shadowSize = this.convertStringToPointTuple(shadowAnchorAttr);
+            iconOptions.shadowSize = this.convertStringToPointTuple(
+              shadowAnchorAttr
+            );
           }
 
           this.icons[iconName] = Leaflet.icon(iconOptions);
@@ -184,7 +210,9 @@ export class LeafletMapComponent extends Component {
             lng: +lng,
             title: title,
             icon: icon,
-            openByDefault: el.hasAttribute("open-by-default") ? el.getAttribute("open-by-default") === "true" : true
+            openByDefault: el.hasAttribute("open-by-default")
+              ? el.getAttribute("open-by-default") === "true"
+              : true,
           });
         } else {
           console.warn("marker without enough data found");

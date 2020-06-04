@@ -59,6 +59,19 @@ export class Bs4IconComponent extends Component {
       }
     }
 
+    if (name === "title") {
+      const title = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "title"
+      );
+      title.textContent = newValue;
+
+      const svg = this.el.firstElementChild;
+      if (svg) {
+        svg.appendChild(title);
+      }
+    }
+
     if (name === "color") {
       if (newValue.indexOf(",") !== -1) {
         newValue = newValue.split(",");

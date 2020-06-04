@@ -33,6 +33,10 @@ var getStyleLoaderRule = (config) => {
   });
 
   rule.use.push({
+    loader: require.resolve("resolve-url-loader"),
+  });
+
+  rule.use.push({
     loader: require.resolve("postcss-loader"),
   });
 
@@ -40,6 +44,7 @@ var getStyleLoaderRule = (config) => {
     loader: require.resolve("sass-loader"),
     options: {
       webpackImporter: true,
+      sourceMap: true,
     },
   });
   return rule;
@@ -125,6 +130,7 @@ module.exports = (config) => {
           "@ribajs/i18n": true,
           "@ribajs/shopify": false,
           "@ribajs/leaflet-map": true,
+          leaflet: true,
           "@ribajs/tagged-image": true,
           "@ribajs/shopify-tda": false,
           "@ribajs/shopify-easdk": false,
@@ -133,10 +139,7 @@ module.exports = (config) => {
       };
       break;
     case "shopify":
-      config.entry = [
-        rootPath + "/src/scss/main.scss",
-        rootPath + "/src/ts/main.ts",
-      ];
+      config.entry = [rootPath + "/src/scss/main.scss", rootPath + "/src/ts/main.ts"];
       config.output = {
         path: path.resolve(rootPath, "theme/assets/"),
       };
@@ -163,15 +166,13 @@ module.exports = (config) => {
           "@ribajs/shopify-tda": true,
           "@ribajs/shopify-easdk": false,
           "@ribajs/pdf": true,
+          leaflet: true,
         },
       };
       break;
     // E.g. used for demos
     case "local":
-      (config.entry = [
-        rootPath + "/src/scss/main.scss",
-        rootPath + "/src/ts/main.ts",
-      ]),
+      (config.entry = [rootPath + "/src/scss/main.scss", rootPath + "/src/ts/main.ts"]),
         (config.output = {
           path: path.resolve(rootPath, "dist/"),
         });
@@ -198,6 +199,7 @@ module.exports = (config) => {
           "@ribajs/tagged-image": true,
           "@ribajs/shopify-easdk": true,
           "@ribajs/pdf": true,
+          leaflet: true,
         },
       };
 
