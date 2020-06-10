@@ -72,7 +72,7 @@ export class Bs4AccordionComponent extends TemplatesComponent {
   public show(item: AccordionItem, index: number) {
     const target = this.el.querySelector<HTMLElement>(`[data-index="${index}"]`);
     const others = Array.from(this.el.querySelectorAll<HTMLElement>(`[data-index]:not([data-index="${index}"])`));
-    if (others) {
+    if (others && this.scope.showOnlyOne) {
       for (const other of others) {
         new CollapseService(other, [], { toggle: false }).hide();
       }
