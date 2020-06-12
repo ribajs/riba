@@ -1,15 +1,15 @@
-import { Binder, EventDispatcher, View as RivetsView } from '@ribajs/core';
+import { Binder, EventDispatcher, View as RivetsView } from "@ribajs/core";
 import { isBoolean, isObject } from "@ribajs/utils/src/type";
 import { scrollTo } from "@ribajs/utils/src/dom";
 
-import { State } from '@ribajs/history';
+import { State } from "@ribajs/history";
 
-import { Pjax, Prefetch, HideShowTransition } from '../services';
-import { PjaxOptions, Transition } from '../interfaces';
+import { Pjax, Prefetch, HideShowTransition } from "../services";
+import { PjaxOptions, Transition } from "../interfaces";
 
 interface Options {
   viewId?: string;
-  action?: 'replace' | 'append';
+  action?: "replace" | "append";
   containerSelector?: string;
   scrollToTop?: boolean;
   listenAllLinks?: boolean;
@@ -28,7 +28,15 @@ export interface ViewBinder extends Binder<string> {
   wrapper?: HTMLElement;
   nested: RivetsView | null;
   prefetch?: Prefetch;
-  onPageReady(viewId: string, currentStatus: State, prevStatus: State, container: HTMLElement, newPageRawHTML: string, dataset: any, isInit: boolean): void;
+  onPageReady(
+    viewId: string,
+    currentStatus: State,
+    prevStatus: State,
+    container: HTMLElement,
+    newPageRawHTML: string,
+    dataset: any,
+    isInit: boolean
+  ): void;
   onTransitionCompleted(viewId: string): void;
 }
 
@@ -45,7 +53,7 @@ export interface ViewBinder extends Binder<string> {
  * ```
  */
 export const viewBinder: ViewBinder = {
-  name: 'view',
+  name: "view",
   block: true,
   options: {},
   nested: null,
@@ -56,19 +64,19 @@ export const viewBinder: ViewBinder = {
     self.wrapper = self.wrapper || el;
 
     /*
-    * Make the dispatcher available in the model to register event handlers.
-    *
-    * I.e., if we have initialized rivets/riba with:
-    *
-    *  `rivets.bind(document.body, model)`,
-    *
-    * then we can register event handlers for the Barba router dispatcher like this:
-    *
-    *  `model.routerDispatcher.on('newPageReady', ...);`
-    *  `model.routerDispatcher.on('transitionCompleted', ...);`
-    * ...etc.
-    *
-    */
+     * Make the dispatcher available in the model to register event handlers.
+     *
+     * I.e., if we have initialized rivets/riba with:
+     *
+     *  `rivets.bind(document.body, model)`,
+     *
+     * then we can register event handlers for the Barba router dispatcher like this:
+     *
+     *  `model.routerDispatcher.on('newPageReady', ...);`
+     *  `model.routerDispatcher.on('transitionCompleted', ...);`
+     * ...etc.
+     *
+     */
     // this.view.models.routerDispatcher = dispatcher;
   },
 
@@ -77,39 +85,86 @@ export const viewBinder: ViewBinder = {
     // Set default options
     self.options = options || {};
 
-    self.options.viewId = self.options.viewId || el.getAttribute('id') || 'main';
-    self.options.action = self.options.action || 'replace'; // replace / append
+    self.options.viewId =
+      self.options.viewId || el.getAttribute("id") || "main";
+    self.options.action = self.options.action || "replace"; // replace / append
 
-    if (self.options.viewId === 'main') {
-      self.options.containerSelector = self.options.containerSelector || '[data-namespace]';
-      self.options.scrollToTop = isBoolean(self.options.scrollToTop) ? self.options.scrollToTop : true;
-      self.options.listenAllLinks = isBoolean(self.options.listenAllLinks) ? self.options.listenAllLinks : true;
-      self.options.listenPopstate = isBoolean(self.options.listenPopstate) ? self.options.listenPopstate : true;
-      self.options.scrollToAnchorHash = isBoolean(self.options.scrollToAnchorHash) ? self.options.scrollToAnchorHash : true;
-      self.options.datasetToModel = isBoolean(self.options.datasetToModel) ? self.options.datasetToModel : true;
-      self.options.parseTitle = isBoolean(self.options.parseTitle) ? self.options.parseTitle : true;
-      self.options.changeBrowserUrl = isBoolean(self.options.changeBrowserUrl) ? self.options.changeBrowserUrl : true;
-      self.options.prefetchLinks = isBoolean(self.options.prefetchLinks) ? self.options.prefetchLinks : true;
+    if (self.options.viewId === "main") {
+      self.options.containerSelector =
+        self.options.containerSelector || "[data-namespace]";
+      self.options.scrollToTop = isBoolean(self.options.scrollToTop)
+        ? self.options.scrollToTop
+        : true;
+      self.options.listenAllLinks = isBoolean(self.options.listenAllLinks)
+        ? self.options.listenAllLinks
+        : true;
+      self.options.listenPopstate = isBoolean(self.options.listenPopstate)
+        ? self.options.listenPopstate
+        : true;
+      self.options.scrollToAnchorHash = isBoolean(
+        self.options.scrollToAnchorHash
+      )
+        ? self.options.scrollToAnchorHash
+        : true;
+      self.options.datasetToModel = isBoolean(self.options.datasetToModel)
+        ? self.options.datasetToModel
+        : true;
+      self.options.parseTitle = isBoolean(self.options.parseTitle)
+        ? self.options.parseTitle
+        : true;
+      self.options.changeBrowserUrl = isBoolean(self.options.changeBrowserUrl)
+        ? self.options.changeBrowserUrl
+        : true;
+      self.options.prefetchLinks = isBoolean(self.options.prefetchLinks)
+        ? self.options.prefetchLinks
+        : true;
     } else {
-      self.options.containerSelector = self.options.containerSelector || `#${self.options.viewId} > *:first-child`;
-      self.options.scrollToTop = isBoolean(self.options.scrollToTop) ? self.options.scrollToTop : false;
-      self.options.listenAllLinks = isBoolean(self.options.listenAllLinks) ? self.options.listenAllLinks : false;
-      self.options.listenPopstate = isBoolean(self.options.listenPopstate) ? self.options.listenPopstate : false;
-      self.options.scrollToAnchorHash = isBoolean(self.options.scrollToAnchorHash) ? self.options.scrollToAnchorHash : false;
-      self.options.datasetToModel = isBoolean(self.options.datasetToModel) ? self.options.datasetToModel : false;
-      self.options.parseTitle = isBoolean(self.options.parseTitle) ? self.options.parseTitle : false;
-      self.options.changeBrowserUrl = isBoolean(self.options.changeBrowserUrl) ? self.options.changeBrowserUrl : false;
-      self.options.prefetchLinks = isBoolean(self.options.prefetchLinks) ? self.options.prefetchLinks : false;
+      self.options.containerSelector =
+        self.options.containerSelector ||
+        `#${self.options.viewId} > *:first-child`;
+      self.options.scrollToTop = isBoolean(self.options.scrollToTop)
+        ? self.options.scrollToTop
+        : false;
+      self.options.listenAllLinks = isBoolean(self.options.listenAllLinks)
+        ? self.options.listenAllLinks
+        : false;
+      self.options.listenPopstate = isBoolean(self.options.listenPopstate)
+        ? self.options.listenPopstate
+        : false;
+      self.options.scrollToAnchorHash = isBoolean(
+        self.options.scrollToAnchorHash
+      )
+        ? self.options.scrollToAnchorHash
+        : false;
+      self.options.datasetToModel = isBoolean(self.options.datasetToModel)
+        ? self.options.datasetToModel
+        : false;
+      self.options.parseTitle = isBoolean(self.options.parseTitle)
+        ? self.options.parseTitle
+        : false;
+      self.options.changeBrowserUrl = isBoolean(self.options.changeBrowserUrl)
+        ? self.options.changeBrowserUrl
+        : false;
+      self.options.prefetchLinks = isBoolean(self.options.prefetchLinks)
+        ? self.options.prefetchLinks
+        : false;
     }
 
-    self.options.prefetchLinks = isBoolean(self.options.prefetchLinks) ? self.options.prefetchLinks : true;
-    self.options.transition = self.options.transition || new HideShowTransition(self.options.action, self.options.scrollToTop);
+    self.options.prefetchLinks = isBoolean(self.options.prefetchLinks)
+      ? self.options.prefetchLinks
+      : true;
+    self.options.transition =
+      self.options.transition ||
+      new HideShowTransition(self.options.action, self.options.scrollToTop);
 
     self.dispatcher = new EventDispatcher(self.options.viewId);
-    self.wrapper?.setAttribute('id', self.options.viewId);
+    self.wrapper?.setAttribute("id", self.options.viewId);
 
-    self.dispatcher.on('newPageReady', self.onPageReady.bind(this));
-    self.dispatcher.on('transitionCompleted', self.onTransitionCompleted.bind(this));
+    self.dispatcher.on("newPageReady", self.onPageReady.bind(this));
+    self.dispatcher.on(
+      "transitionCompleted",
+      self.onTransitionCompleted.bind(this)
+    );
 
     const pjaxOptions: PjaxOptions = {
       id: self.options.viewId,
@@ -132,8 +187,11 @@ export const viewBinder: ViewBinder = {
   unbind(/*el: HTMLUnknownElement*/) {
     const self = (this.binder || this) as ViewBinder;
     if (self.dispatcher) {
-      self.dispatcher.off('newPageReady', self.onPageReady.bind(this));
-      self.dispatcher.off('transitionCompleted', self.onTransitionCompleted.bind(this));
+      self.dispatcher.off("newPageReady", self.onPageReady.bind(this));
+      self.dispatcher.off(
+        "transitionCompleted",
+        self.onTransitionCompleted.bind(this)
+      );
     }
 
     if (self.nested !== null) {
@@ -142,17 +200,24 @@ export const viewBinder: ViewBinder = {
     }
   },
 
-  onPageReady(viewId: string, currentStatus: State, prevStatus: State, container: HTMLElement, newPageRawHTML: string, dataset: any/*, isInit: boolean*/) {
+  onPageReady(
+    viewId: string,
+    currentStatus: State,
+    prevStatus: State,
+    container: HTMLElement,
+    newPageRawHTML: string,
+    dataset: any /*, isInit: boolean*/
+  ) {
     const self = (this.binder || this) as ViewBinder;
     // Only to anything if the viewID is eqal (in this way it is possible to have multiple views)
     if (viewId !== self.options.viewId) {
-      console.warn('not the right view', self.options.viewId, viewId, dataset);
+      console.warn("not the right view", self.options.viewId, viewId, dataset);
       return;
     }
 
     // unbind the old rivets view
     if (self.nested) {
-      if (self.options.action === 'replace') {
+      if (self.options.action === "replace") {
         // IMPORTANT ROUTE FIXME only unbind if cache is not enabled?
         // self.nested.unbind();
       }
@@ -168,7 +233,11 @@ export const viewBinder: ViewBinder = {
     }
 
     // TODO append on action "append"
-    self.nested = new RivetsView(container, this.view.models, this.view.options);
+    self.nested = new RivetsView(
+      container,
+      this.view.models,
+      this.view.options
+    );
     self.nested.bind();
   },
   onTransitionCompleted(viewId: string) {
@@ -180,7 +249,9 @@ export const viewBinder: ViewBinder = {
 
     // scroll to Anchor of hash
     if (self.options.scrollToAnchorHash && window.location.hash) {
-      const scrollToMe = document.getElementById(window.location.hash.substr(1));
+      const scrollToMe = document.getElementById(
+        window.location.hash.substr(1)
+      );
       if (scrollToMe) {
         return new Promise((resolve) => {
           resolve(scrollTo(scrollToMe, 0, window));

@@ -1,4 +1,5 @@
 import { TemplatesComponent } from "../templates/templates.component";
+import { EventDispatcher } from "@ribajs/core";
 
 import { clone, camelCase } from "@ribajs/utils/src/type";
 
@@ -317,6 +318,8 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   protected continuousAutoplayIntervalIndex: number | null = null;
 
   protected resumeTimer: number | null = null;
+
+  protected routerEvents?: EventDispatcher;
 
   /**
    * Current breakpoint
@@ -669,10 +672,11 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   }
 
   protected onBreakpointChanges() {
+    console.debug("onBreakpointChanges");
     this.setOptionsByBreakpoint(this.breakpoint);
   }
 
-  protected onResize() {
+  protected onViewChanges() {
     const newBreakpoint = this.getBreakpoint();
     if (newBreakpoint !== this.breakpoint) {
       this.breakpoint = newBreakpoint;
@@ -744,7 +748,13 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   }
 
   protected addEventListeners() {
-    window.addEventListener("resize", this.onResize.bind(this), {
+    if (!this.routerEvents) {
+      this.routerEvents = new EventDispatcher("main");
+    }
+
+    this.routerEvents.on("newPageReady", this.onBreakpointChanges.bind(this));
+
+    window.addEventListener("resize", this.onViewChanges.bind(this), {
       passive: true,
     });
 
@@ -804,13 +814,13 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     });
 
     // inital
-    this.onResize();
+    this.onViewChanges();
     // this.onScroll();
     this.onScrollend();
   }
 
   protected removeEventListeners() {
-    window.removeEventListener("resize", this.onResize.bind(this));
+    window.removeEventListener("resize", this.onViewChanges.bind(this));
 
     this.el.removeEventListener(
       "visibility-changed" as any,
@@ -841,7 +851,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     await super.afterBind();
     this.initSlideshowInner();
     this.initResponsiveOptions();
-    this.removeEventListeners();
+    // this.removeEventListeners();
     this.addEventListeners();
   }
 

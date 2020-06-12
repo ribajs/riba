@@ -19,7 +19,7 @@ export class Bs4NavbarComponent extends Component {
 
   protected collapseElements: NodeListOf<HTMLElement> | HTMLElement[] = [];
   protected collapseServices: CollapseService[] = [];
-  protected router?: EventDispatcher;
+  protected routerEvents?: EventDispatcher;
 
   static get observedAttributes() {
     return ["collapse-selector"];
@@ -67,8 +67,8 @@ export class Bs4NavbarComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.router = new EventDispatcher("main");
-    this.router.on("newPageReady", this.onNewPageReady.bind(this));
+    this.routerEvents = new EventDispatcher("main");
+    this.routerEvents.on("newPageReady", this.onNewPageReady.bind(this));
 
     this.setCollapseElement();
 
@@ -131,8 +131,8 @@ export class Bs4NavbarComponent extends Component {
   protected disconnectedCallback() {
     super.disconnectedCallback();
     this.removeCollapseEventListeners();
-    if (this.router) {
-      this.router.off("newPageReady", this.onNewPageReady);
+    if (this.routerEvents) {
+      this.routerEvents.off("newPageReady", this.onNewPageReady);
     }
   }
 

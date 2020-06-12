@@ -1,17 +1,22 @@
-export * from './Dom';
-export * from './Prefetch';
+export * from "./Dom";
+export * from "./Prefetch";
 
-import { getDataset } from '@ribajs/core';
-import { EventDispatcher, HttpService, HttpServiceOptions } from '@ribajs/core';
-import { cleanLink, getPort, normalizeUrl, getUrl } from "@ribajs/utils/src/url";
+import { getDataset } from "@ribajs/core";
+import { EventDispatcher, HttpService, HttpServiceOptions } from "@ribajs/core";
+import {
+  cleanLink,
+  getPort,
+  normalizeUrl,
+  getUrl,
+} from "@ribajs/utils/src/url";
 import { isBoolean } from "@ribajs/utils/src/type";
 import { getElementFromEvent } from "@ribajs/utils/src/dom";
 
-import { BaseCache } from '@ribajs/cache';
-import { HideShowTransition } from '../Transition';
-import { Transition, Response, PjaxOptions } from '../../interfaces';
-import { Dom } from './Dom';
-import { HistoryManager } from '@ribajs/history';
+import { BaseCache } from "@ribajs/cache";
+import { HideShowTransition } from "../Transition";
+import { Transition, Response, PjaxOptions } from "../../interfaces";
+import { Dom } from "./Dom";
+import { HistoryManager } from "@ribajs/history";
 
 export interface PjaxInstances {
   [key: string]: Pjax;
@@ -23,15 +28,14 @@ export interface PjaxInstances {
  * @borrows Dom as Dom
  */
 class Pjax {
-
   /**
    * Class name used to ignore links
    */
-  public static ignoreClassLink = 'no-barba';
+  public static ignoreClassLink = "no-barba";
 
   public static cache = new BaseCache<Promise<Response>>();
 
-  public static getInstance(id = 'main'): Pjax | undefined {
+  public static getInstance(id = "main"): Pjax | undefined {
     const result = Pjax.instances[id];
     if (!result) {
       console.warn(`No pjax instance for viewId "${id}" found!`);
@@ -46,8 +50,8 @@ class Pjax {
     /**
      * Create fake html element
      */
-    const element = document.createElement('a');
-    element.setAttribute('href', href);
+    const element = document.createElement("a");
+    element.setAttribute("href", href);
 
     if (!element) {
       return false;
@@ -58,7 +62,7 @@ class Pjax {
     }
 
     // Ignore case when a hash is being tacked on the current URL
-    if (href.indexOf('#') > -1) {
+    if (href.indexOf("#") > -1) {
       return false;
     }
 
@@ -68,7 +72,10 @@ class Pjax {
     }
 
     // Check if it's the same domain
-    if (window.location.protocol !== (element as HTMLAnchorElement).protocol || window.location.hostname !== (element as HTMLAnchorElement).hostname) {
+    if (
+      window.location.protocol !== (element as HTMLAnchorElement).protocol ||
+      window.location.hostname !== (element as HTMLAnchorElement).hostname
+    ) {
       return false;
     }
 
@@ -77,34 +84,46 @@ class Pjax {
       return false;
     }
 
-
     return true;
   }
 
   /**
    * Determine if the link should be followed
    */
-  public static preventCheck(evt: Event, element: HTMLAnchorElement | HTMLLinkElement, href: string): boolean {
+  public static preventCheck(
+    evt: Event,
+    element: HTMLAnchorElement | HTMLLinkElement,
+    href: string
+  ): boolean {
     if (!window.history.pushState) {
       return false;
     }
 
     if (!this.preventCheckUrl(href)) {
-      return false
+      return false;
     }
 
     // Middle click, cmd click, ctrl click or prefetch load event
-    if ((evt && ((evt as any).which && (evt as any).which > 1) || (evt as any).metaKey || (evt as any).ctrlKey || (evt as any).shiftKey || (evt as any).altKey)) {
+    if (
+      (evt && (evt as any).which && (evt as any).which > 1) ||
+      (evt as any).metaKey ||
+      (evt as any).ctrlKey ||
+      (evt as any).shiftKey ||
+      (evt as any).altKey
+    ) {
       return false;
     }
 
     // Ignore target with _blank target
-    if (element.target && element.target === '_blank') {
+    if (element.target && element.target === "_blank") {
       return false;
     }
 
     // Ignore case where there is download attribute
-    if (element.getAttribute && typeof element.getAttribute('download') === 'string') {
+    if (
+      element.getAttribute &&
+      typeof element.getAttribute("download") === "string"
+    ) {
       return false;
     }
 
@@ -119,19 +138,24 @@ class Pjax {
    * Get the .href parameter out of an element
    * and handle special cases (like xlink:href)
    */
-  public static getHref(el: HTMLAnchorElement | SVGAElement | HTMLLinkElement | HTMLUnknownElement): string | undefined {
+  public static getHref(
+    el: HTMLAnchorElement | SVGAElement | HTMLLinkElement | HTMLUnknownElement
+  ): string | undefined {
     if (!el) {
       return undefined;
     }
 
-    if (el.getAttribute && typeof el.getAttribute('xlink:href') === 'string') {
-      return el.getAttribute('xlink:href') || undefined;
+    if (el.getAttribute && typeof el.getAttribute("xlink:href") === "string") {
+      return el.getAttribute("xlink:href") || undefined;
     }
 
-    if (typeof((el as HTMLAnchorElement).href) === 'string' || (el.hasAttribute && el.hasAttribute('href'))) {
-      const href = (el as HTMLAnchorElement).href || el.getAttribute('href');
+    if (
+      typeof (el as HTMLAnchorElement).href === "string" ||
+      (el.hasAttribute && el.hasAttribute("href"))
+    ) {
+      const href = (el as HTMLAnchorElement).href || el.getAttribute("href");
       if (!href) {
-        throw new Error('href attribute not found!');
+        throw new Error("href attribute not found!");
       }
       return href;
     }
@@ -143,14 +167,14 @@ class Pjax {
 
   public history = new HistoryManager();
 
- /**
-  * Indicate wether or not use the cache
-  */
+  /**
+   * Indicate wether or not use the cache
+   */
   public cacheEnabled = true;
 
- /**
-  * Indicate if there is an animation in progress
-  */
+  /**
+   * Indicate if there is an animation in progress
+   */
   public transitionProgress = false;
 
   protected listenAllLinks: boolean;
@@ -167,7 +191,7 @@ class Pjax {
 
   protected wrapper?: HTMLElement;
 
-  protected viewId = 'main';
+  protected viewId = "main";
 
   protected containerSelector: string;
 
@@ -182,7 +206,7 @@ class Pjax {
   constructor({
     id,
     wrapper,
-    containerSelector = '[data-namespace]',
+    containerSelector = "[data-namespace]",
     listenAllLinks = false,
     listenPopstate = true,
     transition = new HideShowTransition(),
@@ -211,25 +235,36 @@ class Pjax {
 
     instance.transition = instance.transition || transition;
     instance.wrapper = instance.wrapper || wrapper;
-    instance.containerSelector = instance.containerSelector || containerSelector;
+    instance.containerSelector =
+      instance.containerSelector || containerSelector;
 
-    instance.listenAllLinks = isBoolean(instance.listenAllLinks) ? instance.listenAllLinks : listenAllLinks;
-    instance.listenPopstate = isBoolean(instance.listenPopstate) ? instance.listenPopstate : listenPopstate;
-    instance.parseTitle = isBoolean(instance.parseTitle) ? instance.parseTitle : parseTitle;
-    instance.changeBrowserUrl = isBoolean(instance.changeBrowserUrl) ? instance.changeBrowserUrl : changeBrowserUrl;
-    instance.prefetchLinks = isBoolean(instance.prefetchLinks) ? instance.prefetchLinks : prefetchLinks;
+    instance.listenAllLinks = isBoolean(instance.listenAllLinks)
+      ? instance.listenAllLinks
+      : listenAllLinks;
+    instance.listenPopstate = isBoolean(instance.listenPopstate)
+      ? instance.listenPopstate
+      : listenPopstate;
+    instance.parseTitle = isBoolean(instance.parseTitle)
+      ? instance.parseTitle
+      : parseTitle;
+    instance.changeBrowserUrl = isBoolean(instance.changeBrowserUrl)
+      ? instance.changeBrowserUrl
+      : changeBrowserUrl;
+    instance.prefetchLinks = isBoolean(instance.prefetchLinks)
+      ? instance.prefetchLinks
+      : prefetchLinks;
 
     if (instance.wrapper) {
-      instance.wrapper.setAttribute('aria-live', 'polite');
+      instance.wrapper.setAttribute("aria-live", "polite");
     }
 
     Pjax.instances[this.viewId] = instance;
     return Pjax.instances[this.viewId];
   }
 
- /**
-  * Function to be called to start Pjax
-  */
+  /**
+   * Function to be called to start Pjax
+   */
   public start() {
     if (this.wrapper) {
       this.init(this.wrapper, this.listenAllLinks, this.listenPopstate);
@@ -238,13 +273,11 @@ class Pjax {
     }
   }
 
- /**
-  * Return the currentURL cleaned
-  */
+  /**
+   * Return the currentURL cleaned
+   */
   public getCurrentUrl() {
-    return cleanLink(
-      getUrl(),
-    );
+    return cleanLink(getUrl());
   }
 
   /**
@@ -252,16 +285,16 @@ class Pjax {
    */
   public goTo(url: string, newTab = false) {
     if (newTab) {
-      const win = window.open(url, '_blank');
+      const win = window.open(url, "_blank");
       if (win) {
         return win.focus();
       }
       return false;
     }
 
-    if (url.indexOf('http') !== 0) {
+    if (url.indexOf("http") !== 0) {
       if (this.changeBrowserUrl) {
-        window.history.pushState(null, '', url);
+        window.history.pushState(null, "", url);
       }
       return this.onStateChange(undefined, url);
     }
@@ -270,9 +303,9 @@ class Pjax {
     this.forceGoTo(url);
   }
 
- /**
-  * Return a transition object
-  */
+  /**
+   * Return a transition object
+   */
   public getTransition(): Transition {
     // User customizable
     return this.transition || new HideShowTransition();
@@ -281,10 +314,13 @@ class Pjax {
   /**
    * Appends a prefetch link to the head and caches the result
    */
-  protected prefetchLinkElement(linkElement: HTMLLinkElement, head: HTMLHeadElement) {
-    const rel = linkElement.getAttribute('rel');
+  protected prefetchLinkElement(
+    linkElement: HTMLLinkElement,
+    head: HTMLHeadElement
+  ) {
+    const rel = linkElement.getAttribute("rel");
     let href = Pjax.getHref(linkElement);
-    if (rel === 'router-preload' && href && this.cacheEnabled) {
+    if (rel === "router-preload" && href && this.cacheEnabled) {
       // normalize url, returns the relative url for internal urls and the full url for external urls
       href = normalizeUrl(href);
       const follow = Pjax.preventCheckUrl(href);
@@ -298,7 +334,9 @@ class Pjax {
   }
 
   protected removePrefetchLinks(head: HTMLHeadElement) {
-    const removePrefetchLinkElements = head.querySelectorAll('link[href][rel="dns-prefetch"], link[href][rel="preconnect"], link[href][rel="prefetch"], link[href][rel="subresource"], link[href][rel="preload"], link[href][rel="router-preload"]') as NodeListOf<HTMLLinkElement>;
+    const removePrefetchLinkElements = head.querySelectorAll(
+      'link[href][rel="dns-prefetch"], link[href][rel="preconnect"], link[href][rel="prefetch"], link[href][rel="subresource"], link[href][rel="preload"], link[href][rel="router-preload"]'
+    ) as NodeListOf<HTMLLinkElement>;
     // Remove the old prefetch link elements
     removePrefetchLinkElements.forEach((linkElement: HTMLLinkElement) => {
       if (linkElement && linkElement.parentNode) {
@@ -314,8 +352,10 @@ class Pjax {
    * because it has native support for them and for that they must exist in the head
    * @param prefetchLinks
    */
-  protected replacePrefetchLinkElements(prefetchLinks: NodeListOf<HTMLLinkElement> | HTMLLinkElement[]) {
-    const head = document.head || document.getElementsByTagName('head')[0];
+  protected replacePrefetchLinkElements(
+    prefetchLinks: NodeListOf<HTMLLinkElement> | HTMLLinkElement[]
+  ) {
+    const head = document.head || document.getElementsByTagName("head")[0];
     this.removePrefetchLinks(head);
 
     prefetchLinks.forEach((linkElement: HTMLLinkElement) => {
@@ -323,40 +363,40 @@ class Pjax {
     });
   }
 
- /**
-  * Load an url, will start an fetch request or load from the cache will return the Container
-  * Also puts the container to the DOM and sets the title (if this option is active)
-  */
+  /**
+   * Load an url, will start an fetch request or load from the cache will return the Container
+   * Also puts the container to the DOM and sets the title (if this option is active)
+   */
   public async loadCached(url: string): Promise<HTMLElement> {
     const response = this.loadResponseCached(url);
 
     return response
-    .then((_response) => {
-      if (!this.wrapper) {
-        throw new Error('[Pjax] you need a wrapper!');
-      }
-      Dom.putContainer(_response.container, this.wrapper);
-      if (this.parseTitle === true && _response.title) {
-        document.title = _response.title;
-      }
-      if (this.prefetchLinks === true && _response.prefetchLinks) {
-        this.replacePrefetchLinkElements(_response.prefetchLinks);
-      }
+      .then((_response) => {
+        if (!this.wrapper) {
+          throw new Error("[Pjax] you need a wrapper!");
+        }
+        Dom.putContainer(_response.container, this.wrapper);
+        if (this.parseTitle === true && _response.title) {
+          document.title = _response.title;
+        }
+        if (this.prefetchLinks === true && _response.prefetchLinks) {
+          this.replacePrefetchLinkElements(_response.prefetchLinks);
+        }
 
-      return _response.container;
-    })
-    .catch((error: any) => {
-      console.error(error);
-      // Something went wrong (timeout, 404, 505...)
-      this.forceGoTo(url);
-      throw error;
-    });
+        return _response.container;
+      })
+      .catch((error: any) => {
+        console.error(error);
+        // Something went wrong (timeout, 404, 505...)
+        this.forceGoTo(url);
+        throw error;
+      });
   }
 
- /**
-  * Load an url, will start an fetch request or load from the cache (and set it to the cache) and will return a `Response` pbject
-  */
-  public async loadResponseCached(url: string, forceCache = false ) {
+  /**
+   * Load an url, will start an fetch request or load from the cache (and set it to the cache) and will return a `Response` pbject
+   */
+  public async loadResponseCached(url: string, forceCache = false) {
     if (this.cacheEnabled) {
       const cachedResponse = Pjax.cache.get(url);
       if (cachedResponse && cachedResponse.then) {
@@ -366,16 +406,23 @@ class Pjax {
         });
       }
     }
-    const options: HttpServiceOptions = forceCache ? { cache: 'force-cache'} : {};
-    const response = HttpService.get(url, undefined, 'html', {}, options)
-    .then((data: string) => {
-      return Dom.parseResponse(data, this.parseTitle, this.containerSelector, this.prefetchLinks);
-    })
-    .catch((error) => {
-      console.error(error);
-      this.forceGoTo(url);
-      throw error;
-    })
+    const options: HttpServiceOptions = forceCache
+      ? { cache: "force-cache" }
+      : {};
+    const response = HttpService.get(url, undefined, "html", {}, options)
+      .then((data: string) => {
+        return Dom.parseResponse(
+          data,
+          this.parseTitle,
+          this.containerSelector,
+          this.prefetchLinks
+        );
+      })
+      .catch((error) => {
+        console.error(error);
+        this.forceGoTo(url);
+        throw error;
+      });
     if (this.cacheEnabled && response) {
       Pjax.cache.set(url, response);
     } else {
@@ -384,42 +431,37 @@ class Pjax {
     return response;
   }
 
- /**
-  * Attach the eventlisteners
-  */
- protected bindEvents(listenAllLinks: boolean, listenPopstate: boolean) {
+  /**
+   * Attach the eventlisteners
+   */
+  protected bindEvents(listenAllLinks: boolean, listenPopstate: boolean) {
     // you can also use the rv-router for this
     if (listenAllLinks) {
-      document.addEventListener('click',
-        this.onLinkClickIntern.bind(this),
-      );
+      document.addEventListener("click", this.onLinkClickIntern.bind(this));
     }
     if (listenPopstate) {
-      window.addEventListener('popstate',
-        this.onStateChange.bind(this),
-      );
+      window.addEventListener("popstate", this.onStateChange.bind(this));
     }
   }
 
- /**
-  * Force the browser to go to a certain url
-  */
+  /**
+   * Force the browser to go to a certain url
+   */
   public forceGoTo(url: Location | string) {
-    console.warn('forceGoTo', url);
+    console.warn("forceGoTo", url);
     if (url && (url as Location).href) {
       window.location = url as Location;
     }
-    if (typeof url === 'string') {
+    if (typeof url === "string") {
       window.location.href = url;
     }
   }
 
   protected onLinkClickIntern(evt: Event) {
-
     let el = getElementFromEvent(evt);
- 
+
     while (el && !Pjax.getHref(el)) {
-      el = (el.parentNode as HTMLAnchorElement); // TODO testme
+      el = el.parentNode as HTMLAnchorElement; // TODO testme
     }
 
     if (!el || el.nodeName !== "A") {
@@ -429,33 +471,33 @@ class Pjax {
     const href = Pjax.getHref(el);
 
     // Already managed by the rv-route binder
-    if ((el.classList.contains('route') || el.hasAttribute('rv-route'))) {
+    if (el.classList.contains("route") || el.hasAttribute("rv-route")) {
       return;
     }
 
     if (!href) {
-      throw new Error(`Url is not defined, you can't cache the link without the url. Please make shure your element has the href attribute or pass the url directly to this function.`);
+      throw new Error(
+        `Url is not defined, you can't cache the link without the url. Please make shure your element has the href attribute or pass the url directly to this function.`
+      );
     }
-    
+
     // Already managed by the rv-route binder
-    if (el.classList.contains('route') || el.hasAttribute('rv-route')) {
+    if (el.classList.contains("route") || el.hasAttribute("rv-route")) {
       return false;
     }
 
     return this.onLinkClick(evt, el, href);
-
   }
 
- /**
-  * Callback called from click event
-  */
+  /**
+   * Callback called from click event
+   */
   public onLinkClick(evt: Event, el: HTMLAnchorElement, href: string) {
-
     // normalize url, returns the relative url for internal urls and the full url for external urls
-    href = normalizeUrl(href)
+    href = normalizeUrl(href);
 
     if (!href) {
-      throw new Error('href is falsy');
+      throw new Error("href is falsy");
     }
     const follow = Pjax.preventCheck(evt, el, href);
 
@@ -463,16 +505,19 @@ class Pjax {
       evt.stopPropagation();
       evt.preventDefault();
 
-      this.dispatcher.trigger('linkClicked', el, evt);
+      this.dispatcher.trigger("linkClicked", el, evt);
 
       this.goTo(href);
     }
   }
 
- /**
-  * Method called after a 'popstate' or from .goTo()
-  */
-  protected onStateChange(event?: Event, newUrl: string = this.getCurrentUrl()) {
+  /**
+   * Method called after a 'popstate' or from .goTo()
+   */
+  protected onStateChange(
+    event?: Event,
+    newUrl: string = this.getCurrentUrl()
+  ) {
     // normalize url, returns the relative url for internal urls and the full url for external urls
     newUrl = normalizeUrl(newUrl);
     const oldUrl = normalizeUrl(this.history.currentStatus().url);
@@ -491,70 +536,73 @@ class Pjax {
 
     this.transitionProgress = true;
 
-    this.dispatcher.trigger('initStateChange',
+    this.dispatcher.trigger(
+      "initStateChange",
       this.viewId,
       this.history.currentStatus(),
-      this.history.prevStatus(),
+      this.history.prevStatus()
     );
 
-    const transitionInstance = transition.init(
-      oldContainer,
-      newContainer,
-    );
+    const transitionInstance = transition.init(oldContainer, newContainer);
 
-    newContainer.then(
-      this.onNewContainerLoaded.bind(this),
-    );
+    newContainer.then(this.onNewContainerLoaded.bind(this));
 
-    transitionInstance.then(
-      this.onTransitionEnd.bind(this),
-    );
+    transitionInstance.then(this.onTransitionEnd.bind(this));
   }
 
- /**
-  * Function called as soon the new container is ready
-  */
- protected onNewContainerLoaded(container: HTMLElement) {
+  /**
+   * Function called as soon the new container is ready
+   */
+  protected onNewContainerLoaded(container: HTMLElement) {
     const currentStatus = this.history.currentStatus();
 
     currentStatus.namespace = Dom.getNamespace(container);
 
     const dataset = getDataset(container);
 
-    this.dispatcher.trigger('newPageReady',
+    this.dispatcher.trigger(
+      "newPageReady",
       this.viewId,
       this.history.currentStatus(),
       this.history.prevStatus(),
       container,
       container.innerHTML,
       dataset,
-      false, // true if this is the first time newPageReady is tiggered / true on initialisation
+      false // true if this is the first time newPageReady is tiggered / true on initialisation
     );
   }
 
- /**
-  * Function called as soon the transition is finished
-  */
+  /**
+   * Function called as soon the transition is finished
+   */
   protected onTransitionEnd() {
     this.transitionProgress = false;
 
-    this.dispatcher.trigger('transitionCompleted',
+    this.dispatcher.trigger(
+      "transitionCompleted",
       this.viewId,
       this.history.currentStatus(),
-      this.history.prevStatus(),
+      this.history.prevStatus()
     );
   }
 
   /**
    * Init the events
    */
-  protected init(wrapper: HTMLElement, listenAllLinks: boolean, listenPopstate: boolean) {
-  
-    const initalResponse = Dom.parseInitial(this.parseTitle, this.containerSelector, this.prefetchLinks);
+  protected init(
+    wrapper: HTMLElement,
+    listenAllLinks: boolean,
+    listenPopstate: boolean
+  ) {
+    const initalResponse = Dom.parseInitial(
+      this.parseTitle,
+      this.containerSelector,
+      this.prefetchLinks
+    );
     const url = window.location.pathname;
     // Reload the current site with pajax to cache the inital page
     if (this.cacheEnabled) {
-      const currentUrl = normalizeUrl(window.location.href)
+      const currentUrl = normalizeUrl(window.location.href);
       if (!Pjax.cache.get(url)) {
         this.loadResponseCached(currentUrl);
       }
@@ -566,30 +614,33 @@ class Pjax {
 
     this.history.add(
       this.getCurrentUrl(),
-      Dom.getNamespace(initalResponse.container),
+      Dom.getNamespace(initalResponse.container)
     );
 
     // Fire for the current view.
-    this.dispatcher.trigger('initStateChange',
+    this.dispatcher.trigger(
+      "initStateChange",
       this.viewId,
-      this.history.currentStatus(),
+      this.history.currentStatus()
     );
 
     const dataset = getDataset(initalResponse.container);
 
-    this.dispatcher.trigger('newPageReady',
+    this.dispatcher.trigger(
+      "newPageReady",
       this.viewId,
       this.history.currentStatus(),
       {},
       initalResponse.container,
       initalResponse.container.innerHTML,
       dataset,
-      true, // true if this is the first time newPageReady is tiggered / true on initialisation
+      true // true if this is the first time newPageReady is tiggered / true on initialisation
     );
 
-    this.dispatcher.trigger('transitionCompleted',
+    this.dispatcher.trigger(
+      "transitionCompleted",
       this.viewId,
-      this.history.currentStatus(),
+      this.history.currentStatus()
     );
 
     this.bindEvents(listenAllLinks, listenPopstate);
