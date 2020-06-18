@@ -1,7 +1,4 @@
-import {
-  Bs4ContentsComponent,
-  Scope as Bs4ContentsComponentScope,
-} from "../bs4-contents/bs4-contents.component";
+import { Bs4ContentsComponent, Scope as Bs4ContentsComponentScope } from "../bs4-contents/bs4-contents.component";
 
 import template from "./bs4-form.component.html";
 import { stripHtml } from "@ribajs/utils/src/type";
@@ -23,8 +20,6 @@ export class Bs4FormComponent extends Bs4ContentsComponent {
   public static tagName = "bs4-form";
 
   protected autobind = true;
-
-  protected wrapperElement?: Element;
 
   static get observedAttributes() {
     return [];
@@ -50,39 +45,30 @@ export class Bs4FormComponent extends Bs4ContentsComponent {
     this.init(Bs4FormComponent.observedAttributes);
   }
 
-  protected afterBind() {
-    console.log(this.scope);
-  }
-
   protected requiredAttributes() {
     return [];
   }
 
   public onSubmit(event: Event) {
-    console.debug("send", this.scope, event);
     for (const key in this.scope.form.fields) {
       if (this.scope.form.fields[key]) {
         this.scope.form.fields[key] = stripHtml(this.scope.form.fields[key]);
       }
     }
 
-    // stop native submit
-    event.preventDefault();
-    event.stopPropagation();
-
     if (!this.form) {
-      console.debug("No form found");
+      console.warn("No form found");
       return false;
     }
 
     this.validate(this.form, this.scope.form);
 
-    if (this.scope.form.valid) {
-      //this.form.submit();
-    } else {
-      console.debug("form not valid", this.scope);
+    if (!this.scope.form.valid) {
+      console.info("form not valid", this.scope);
+      // stop native submit
+      event.preventDefault();
+      event.stopPropagation();
     }
-    return false;
   }
   protected validate(form: HTMLFormElement, validationScope: ValidationObject) {
     validationScope.valid = form.checkValidity();
