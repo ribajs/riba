@@ -1,5 +1,9 @@
 import { handleizeFormatter } from "@ribajs/core";
-import { CollapseService, EVENT_HIDE, EVENT_SHOW } from "../../services/collapse.service";
+import {
+  CollapseService,
+  EVENT_HIDE,
+  EVENT_SHOW,
+} from "../../services/collapse.service";
 
 import { TemplatesComponent } from "../templates/templates.component";
 
@@ -9,7 +13,15 @@ interface AccordionItem {
   title: string;
   content: string;
   show: boolean;
-  iconDirection: "left" | "left-up" | "up" | "up-right" | "right" | "right-down" | "down" | "down-left";
+  iconDirection:
+    | "left"
+    | "left-up"
+    | "up"
+    | "up-right"
+    | "right"
+    | "right-down"
+    | "down"
+    | "down-left";
 }
 
 interface Scope {
@@ -62,7 +74,9 @@ export class Bs4AccordionComponent extends TemplatesComponent {
   }
 
   public hide(item: AccordionItem, index: number) {
-    const target = this.el.querySelector<HTMLElement>(`[data-index="${index}"]`);
+    const target = this.el.querySelector<HTMLElement>(
+      `[data-index="${index}"]`
+    );
     if (target) {
       this.initItemEventListeners(item, target);
       new CollapseService(target, [this.el], { toggle: false }).hide();
@@ -70,8 +84,14 @@ export class Bs4AccordionComponent extends TemplatesComponent {
   }
 
   public show(item: AccordionItem, index: number) {
-    const target = this.el.querySelector<HTMLElement>(`[data-index="${index}"]`);
-    const others = Array.from(this.el.querySelectorAll<HTMLElement>(`[data-index]:not([data-index="${index}"])`));
+    const target = this.el.querySelector<HTMLElement>(
+      `[data-index="${index}"]`
+    );
+    const others = Array.from(
+      this.el.querySelectorAll<HTMLElement>(
+        `[data-index]:not([data-index="${index}"])`
+      )
+    );
     if (others && this.scope.showOnlyOne) {
       for (const other of others) {
         new CollapseService(other, [], { toggle: false }).hide();
@@ -84,8 +104,14 @@ export class Bs4AccordionComponent extends TemplatesComponent {
   }
 
   public toggle(item: AccordionItem, index: number) {
-    const target = this.el.querySelector<HTMLElement>(`[data-index="${index}"]`);
-    const others = Array.from(this.el.querySelectorAll<HTMLElement>(`[data-index]:not([data-index="${index}"])`));
+    const target = this.el.querySelector<HTMLElement>(
+      `[data-index="${index}"]`
+    );
+    const others = Array.from(
+      this.el.querySelectorAll<HTMLElement>(
+        `[data-index]:not([data-index="${index}"])`
+      )
+    );
     if (others && this.scope.showOnlyOne) {
       for (const other of others) {
         new CollapseService(other, [], { toggle: false }).hide();
@@ -98,10 +124,24 @@ export class Bs4AccordionComponent extends TemplatesComponent {
   }
 
   protected initItemEventListeners(item: AccordionItem, element: HTMLElement) {
-    element.removeEventListener(EVENT_HIDE, this.onHide.bind(this, element, item));
-    element.removeEventListener(EVENT_SHOW, this.onShow.bind(this, element, item));
-    element.addEventListener(EVENT_HIDE, this.onHide.bind(this, element, item), { once: true });
-    element.addEventListener(EVENT_SHOW, this.onShow.bind(this, element, item), { once: true });
+    element.removeEventListener(
+      EVENT_HIDE,
+      this.onHide.bind(this, element, item)
+    );
+    element.removeEventListener(
+      EVENT_SHOW,
+      this.onShow.bind(this, element, item)
+    );
+    element.addEventListener(
+      EVENT_HIDE,
+      this.onHide.bind(this, element, item),
+      { once: true }
+    );
+    element.addEventListener(
+      EVENT_SHOW,
+      this.onShow.bind(this, element, item),
+      { once: true }
+    );
   }
 
   protected getContentChildByIndex() {
@@ -127,9 +167,11 @@ export class Bs4AccordionComponent extends TemplatesComponent {
   }
 
   protected transformTemplateAttributes(attributes: any) {
-    attributes.handle = attributes.handle || handleizeFormatter.read(attributes.title);
+    attributes.handle =
+      attributes.handle || handleizeFormatter.read(attributes.title);
     attributes.show = !!attributes.show;
-    attributes.iconDirection = attributes.iconDirection || attributes.show ? "up" : "down";
+    attributes.iconDirection =
+      attributes.iconDirection || attributes.show ? "up" : "down";
 
     return attributes;
   }
@@ -140,10 +182,15 @@ export class Bs4AccordionComponent extends TemplatesComponent {
    * @param element
    * @param visibile
    */
-  protected triggerVisibilityChangedForElement(element: Element, visibile: boolean) {
+  protected triggerVisibilityChangedForElement(
+    element: Element,
+    visibile: boolean
+  ) {
     setTimeout(() => {
       // Use this event to update any custom element when it becomes visibile
-      element.dispatchEvent(new CustomEvent("visibility-changed", { detail: { visibile } }));
+      element.dispatchEvent(
+        new CustomEvent("visibility-changed", { detail: { visibile } })
+      );
     }, 200);
   }
 
@@ -170,8 +217,18 @@ export class Bs4AccordionComponent extends TemplatesComponent {
     return [];
   }
 
-  protected parsedAttributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
-    super.parsedAttributeChangedCallback(attributeName, oldValue, newValue, namespace);
+  protected parsedAttributeChangedCallback(
+    attributeName: string,
+    oldValue: any,
+    newValue: any,
+    namespace: string | null
+  ) {
+    super.parsedAttributeChangedCallback(
+      attributeName,
+      oldValue,
+      newValue,
+      namespace
+    );
   }
 
   // deconstructor
