@@ -31,10 +31,12 @@ lerna-debug.log*
 !.vscode/extensions.json
 !.vscode/pnpify/
 
-# Yarn
+# Yarn not using Zero-Installs see https://next.yarnpkg.com/advanced/qa#which-files-should-be-gitignored
 .yarn/*
 !.yarn/releases
 !.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
 .pnp.*
 
 # Demos
