@@ -88,7 +88,7 @@ export class ToastService {
 
   // Public
 
-  show() {
+  public show() {
     const showEvent = EventHandler.trigger(this._element, EVENT_SHOW);
 
     if (showEvent.defaultPrevented) {
@@ -130,7 +130,7 @@ export class ToastService {
     }
   }
 
-  hide() {
+  public hide() {
     if (!this._element.classList.contains(CLASS_NAME_SHOW)) {
       return;
     }
@@ -162,7 +162,7 @@ export class ToastService {
     }
   }
 
-  dispose() {
+  public dispose() {
     if (this._timeout) {
       clearTimeout(this._timeout);
     }
@@ -181,7 +181,7 @@ export class ToastService {
 
   // Private
 
-  _getConfig(config: any) {
+  protected _getConfig(config: any) {
     config = {
       ...Default,
       ...(this._element?.dataset || {}),
@@ -193,7 +193,7 @@ export class ToastService {
     return config;
   }
 
-  _setListeners() {
+  protected _setListeners() {
     if (!this._element) {
       return;
     }
