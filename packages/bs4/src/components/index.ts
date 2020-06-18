@@ -11,3 +11,4 @@ export { Bs4SlideshowComponent } from "./bs4-slideshow/bs4-slideshow.component";
 export { Bs4ToggleButtonComponent } from "./bs4-toggle-button/bs4-toggle-button.component";
 export { Bs4NavbarComponent } from "./bs4-navbar/bs4-navbar.component";
 export { Bs4TabsComponent } from "./bs4-tabs/bs4-tabs.component";
+export { Bs4FormComponent } from "./bs4-form/bs4-form.component";
