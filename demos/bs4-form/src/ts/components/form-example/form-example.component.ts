@@ -1,29 +1,44 @@
-import { Component } from "@ribajs/core";
+import { Component, EventDispatcher } from "@ribajs/core";
 
 import template from "./form-example.component.html";
+
+interface Scope {
+  testToast: FormExampleComponent["testToast"];
+  inputValue: string;
+}
 
 export class FormExampleComponent extends Component {
   public static tagName = "rv-form-example";
 
   protected autobind = true;
+  protected eventDispatcher?: EventDispatcher;
 
   static get observedAttributes() {
     return [];
   }
 
-  protected scope = {};
+  protected scope: Scope = {
+    testToast: this.testToast,
+    inputValue: "Eine Nachricht",
+  };
 
   constructor(element?: HTMLElement) {
     super(element);
+    this.eventDispatcher = new EventDispatcher("toast");
   }
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init(FormExampleComponent.observedAttributes);
+    super.init(FormExampleComponent.observedAttributes);
   }
 
   protected requiredAttributes() {
     return [];
+  }
+
+  public testToast() {
+    console.log("test");
+    this.eventDispatcher.trigger("showToast", this.scope.inputValue);
   }
 
   protected template() {
