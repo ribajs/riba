@@ -1,7 +1,7 @@
 import { Pjax, Prefetch } from '../services';
 import { Binding, Binder, EventDispatcher } from '@ribajs/core';
 import { isObject, isString, isBoolean } from '@ribajs/utils/src/type';
-import { onRoute, normalizeUrl } from '@ribajs/utils/src/url';
+import { onRoute, normalizeUrl, isExternalUrl } from '@ribajs/utils/src/url';
 
 export interface RouteOptions {
   url: string;
@@ -34,11 +34,18 @@ export const routeBinder: Binder<string> = {
         newTab: false,
       } as RouteOptions,
       onClick(this: Binding, event: Event) {
+        // console.log(this.customData.options.url);
+        const pjax = Pjax.getInstance(this.customData.options.viewId);
         if (onRoute(this.customData.options.url)) {
-          // console.debug('already on this site');
+          console.debug('already on this site');
+        }else if( isExternalUrl(this.customData.options.url) ) {
+          // console.debug('check');
+          if (!pjax) {
+            return;
+          }
+          pjax.goTo( this.customData.options.url )
         } else {
           if (this.customData.options.url) {
-            const pjax = Pjax.getInstance(this.customData.options.viewId);
             if (!pjax) {
               return;
             }
