@@ -18,6 +18,9 @@ export interface Scope {
   successToastChannel: string;
   successToastMessage: string;
   successToastTitle?: string;
+  disableSubmitUntilChange: boolean;
+  submitDisabled: boolean;
+  clearOnSubmit: boolean;
 }
 
 export class Bs4FormComponent extends Component {
@@ -26,7 +29,13 @@ export class Bs4FormComponent extends Component {
   protected autobind = true;
 
   static get observedAttributes() {
-    return ["showToast", "toastChannel"];
+    return [
+      "show-success-toast",
+      "success-toast-channel",
+      "success-toast-message",
+      "success-toast-title",
+      "disable-submit-until-change",
+    ];
   }
 
   protected formEl: HTMLFormElement | null = null;
@@ -37,10 +46,17 @@ export class Bs4FormComponent extends Component {
       valid: false,
       error: undefined,
     },
+
+    //only used when form is not submitted. (e.g. october ajax api)
     showSuccessToast: false,
     successToastChannel: "toast",
-    successToastTitle: "Meldung",
-    successToastMessage: "Erfolgreich abgeschickt!",
+    successToastTitle: "Notice",
+    successToastMessage: "Submitted.",
+
+    disableSubmitUntilChange: true,
+    clearOnSubmit: false,
+
+    submitDisabled: false,
     onSubmit: this.onSubmit,
   };
 
@@ -51,6 +67,12 @@ export class Bs4FormComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     this.init(Bs4FormComponent.observedAttributes);
+
+    if (this.scope.disableSubmitUntilChange) {
+      this.el.addEventListener("input", () => {
+        this.scope.submitDisabled = false;
+      });
+    }
   }
 
   protected requiredAttributes() {
@@ -79,20 +101,27 @@ export class Bs4FormComponent extends Component {
       return;
     }
 
+    //debug, remove once deployed
     event.preventDefault();
     event.stopPropagation();
+
+    if (this.scope.clearOnSubmit) {
+      //todo
+    } else if (this.scope.disableSubmitUntilChange) {
+      this.scope.submitDisabled = true;
+    }
 
     //show notification
     if (this.scope.showSuccessToast) {
       const toast: Toast = {
-        message: "Formular erfolgreich abgeschickt!",
-        title: "Meldung",
+        message: this.scope.successToastMessage,
+        title: this.scope.successToastTitle,
         delay: 10000,
       };
       const eventDispatcher = new EventDispatcher(
         this.scope.successToastChannel
       );
-      eventDispatcher.trigger("showToast", toast);
+      eventDispatcher.trigger("show-toast", toast);
     }
   }
 

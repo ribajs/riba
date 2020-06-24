@@ -1,10 +1,8 @@
 import { Component, EventDispatcher } from "@ribajs/core";
-import { Toast } from "@ribajs/bs4/src/interfaces";
 import template from "./form-example.component.html";
 
 interface Scope {
-  testToast: FormExampleComponent["testToast"];
-  inputValue: string;
+
 }
 
 export class FormExampleComponent extends Component {
@@ -18,8 +16,6 @@ export class FormExampleComponent extends Component {
   }
 
   protected scope: Scope = {
-    testToast: this.testToast,
-    inputValue: "Eine Nachricht",
   };
 
   constructor(element?: HTMLElement) {
@@ -33,10 +29,6 @@ export class FormExampleComponent extends Component {
 
   protected requiredAttributes() {
     return [];
-  }
-
-  public testToast() {
-    console.log("test");
   }
 
   protected template() {

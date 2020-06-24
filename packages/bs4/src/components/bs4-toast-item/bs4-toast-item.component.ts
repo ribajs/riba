@@ -3,10 +3,15 @@ import { Component } from "@ribajs/core";
 import template from "./bs4-toast-item.component.html";
 import { Toast } from "../../interfaces";
 import { ToastService } from "../../services";
+import { Scope as Bs4ToastContainerScope } from "../bs4-toast-container/bs4-toast-container.component";
 
 interface Scope {
   iconUrl?: string;
   toast?: Toast;
+  onHide: Bs4ToastItemComponent["onHide"];
+  onDismiss: Bs4ToastItemComponent["onDismiss"];
+  index: number;
+  $parent?: any;
 }
 
 export class Bs4ToastItemComponent extends Component {
@@ -15,11 +20,21 @@ export class Bs4ToastItemComponent extends Component {
   public _debug = true;
   protected autobind = true;
 
+  protected toastService?: ToastService;
+
   static get observedAttributes() {
-    return ["toast", "icon-url"];
+    return ["toast", "icon-url", "index"];
   }
 
-  protected scope: Scope = {};
+  protected requiredAttributes() {
+    return ["toast"];
+  }
+
+  protected scope: Scope = {
+    onHide: this.onHide,
+    index: -1,
+    onDismiss: this.onDismiss,
+  };
 
   constructor(element?: HTMLElement) {
     super(element);
@@ -36,7 +51,7 @@ export class Bs4ToastItemComponent extends Component {
     const toast = this.scope.toast;
     const toastEl = this.el.firstElementChild as HTMLElement | null;
     if (toast && toastEl) {
-      const toastService: ToastService = new ToastService(toastEl, {
+      this.toastService = new ToastService(toastEl, {
         delay: toast.delay ? toast.delay : ToastService.Default.delay,
         autohide: toast.autoHide
           ? toast.autoHide
@@ -47,20 +62,31 @@ export class Bs4ToastItemComponent extends Component {
       });
 
       //show toast using the toastservice
-      toastService.show();
-
-      //remove toast from dom once shown
-      toastEl.addEventListener("hidden.bs.toast", () => {
-        //todo notify parent that I don't want to be shown anymore
-        console.log("removed element");
-      });
+      this.toastService.show();
     }
   }
 
-  protected requiredAttributes() {
-    return ["toast"];
+  //can be called if toast should be removed
+  public onDismiss() {
+    this.toastService?.hide();
   }
 
+  //remove toast from dom once shown
+  public onHide(event: Event, el: HTMLElement) {
+    const toastContainer: Bs4ToastContainerScope | null =
+      this.scope.$parent?.$parent || null;
+    if (
+      typeof toastContainer?.onToastItemHide === "function" &&
+      this.scope.toast
+    ) {
+      toastContainer.onToastItemHide(
+        event,
+        el,
+        this.scope.index,
+        this.scope.toast
+      );
+    }
+  }
   protected template() {
     return template;
   }

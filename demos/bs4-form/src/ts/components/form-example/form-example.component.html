@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <section class="col-12 mb-5">
-    <bs4-form>
+    <bs4-form show-success-toast="true" success-toast-channel="formular" success-toast-message="Erfolgreich abgeschickt!" success-toast-title="Nachricht">
       <form rv-on-submit="onSubmit"  action="/action_page.php" method="get"> 
         <div class="form-row">
           <div class="col-md-4 mb-3">
@@ -65,16 +65,12 @@
             </div>
           </div>
         </div>
-        <button class="btn btn-primary"  type="submit">Submit form</button>
+        <button class="btn btn-primary" rv-disabled="submitDisabled" type="submit">Submit form</button>
       <form>
     </bs4-form>
     </section>
 
   </div>
 </div>
-<input rv-value="inputValue" type="text">
-<button rv-on-click="testToast">
-TestButton
-</button>
-<bs4-toast-container icon-url="./../../../icon.svg">
+<bs4-toast-container channel-name="formular" icon-url="./../../../icon.svg">
 </bs4-toast-container>
