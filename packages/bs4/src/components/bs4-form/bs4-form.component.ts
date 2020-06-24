@@ -1,5 +1,5 @@
-import { Component } from "@ribajs/core";
-
+import { Component, EventDispatcher } from "@ribajs/core";
+import Toast from "@ribajs/bs4/src/interfaces";
 import template from "./bs4-form.component.html";
 import { stripHtml } from "@ribajs/utils/src/type";
 
@@ -14,6 +14,10 @@ export interface ValidationObject {
 export interface Scope {
   form: ValidationObject;
   onSubmit: Bs4FormComponent["onSubmit"];
+  showSuccessToast: boolean;
+  successToastChannel: string;
+  successToastMessage: string;
+  successToastTitle?: string;
 }
 
 export class Bs4FormComponent extends Component {
@@ -22,7 +26,7 @@ export class Bs4FormComponent extends Component {
   protected autobind = true;
 
   static get observedAttributes() {
-    return [];
+    return ["showToast", "toastChannel"];
   }
 
   protected formEl: HTMLFormElement | null = null;
@@ -33,6 +37,10 @@ export class Bs4FormComponent extends Component {
       valid: false,
       error: undefined,
     },
+    showSuccessToast: false,
+    successToastChannel: "toast",
+    successToastTitle: "Meldung",
+    successToastMessage: "Erfolgreich abgeschickt!",
     onSubmit: this.onSubmit,
   };
 
@@ -68,12 +76,33 @@ export class Bs4FormComponent extends Component {
       // stop native submit
       event.preventDefault();
       event.stopPropagation();
+      return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    //show notification
+    if (this.scope.showSuccessToast) {
+      const toast: Toast = {
+        message: "Formular erfolgreich abgeschickt!",
+        title: "Meldung",
+        delay: 10000,
+      };
+      const eventDispatcher = new EventDispatcher(
+        this.scope.successToastChannel
+      );
+      eventDispatcher.trigger("showToast", toast);
     }
   }
+
   protected validate(form: HTMLFormElement, validationScope: ValidationObject) {
     validationScope.valid = form.checkValidity();
     validationScope.error = form.validationMessage;
-    form.classList.add("was-validated");
+    //only show validation if we want to give a hint to the user that something is wrong
+    if (!validationScope.valid) {
+      form.classList.add("was-validated");
+    }
   }
 
   protected template() {

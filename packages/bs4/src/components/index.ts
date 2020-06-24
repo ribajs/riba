@@ -12,4 +12,5 @@ export { Bs4ToggleButtonComponent } from "./bs4-toggle-button/bs4-toggle-button.
 export { Bs4NavbarComponent } from "./bs4-navbar/bs4-navbar.component";
 export { Bs4TabsComponent } from "./bs4-tabs/bs4-tabs.component";
 export { Bs4FormComponent } from "./bs4-form/bs4-form.component";
-export { Bs4ToastContainerComponent } from "./bs4-toastcontainer/bs4-toastcontainer.component";
+export { Bs4ToastContainerComponent } from "./bs4-toast-container/bs4-toast-container.component";
+export { Bs4ToastItemComponent } from "./bs4-toast-item/bs4-toast-item.component";

@@ -1,5 +1,5 @@
 import { Component, EventDispatcher } from "@ribajs/core";
-
+import { Toast } from "@ribajs/bs4/src/interfaces";
 import template from "./form-example.component.html";
 
 interface Scope {
@@ -11,7 +11,7 @@ export class FormExampleComponent extends Component {
   public static tagName = "rv-form-example";
 
   protected autobind = true;
-  protected eventDispatcher?: EventDispatcher;
+  protected eventDispatcher: EventDispatcher = new EventDispatcher("toast");
 
   static get observedAttributes() {
     return [];
@@ -24,7 +24,6 @@ export class FormExampleComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    this.eventDispatcher = new EventDispatcher("toast");
   }
 
   protected connectedCallback() {
@@ -38,7 +37,6 @@ export class FormExampleComponent extends Component {
 
   public testToast() {
     console.log("test");
-    this.eventDispatcher.trigger("showToast", this.scope.inputValue);
   }
 
   protected template() {
