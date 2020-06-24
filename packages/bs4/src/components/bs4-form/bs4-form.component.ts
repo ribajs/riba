@@ -20,7 +20,6 @@ export interface Scope {
   successToastTitle?: string;
   disableSubmitUntilChange: boolean;
   submitDisabled: boolean;
-  clearOnSubmit: boolean;
 }
 
 export class Bs4FormComponent extends Component {
@@ -29,13 +28,7 @@ export class Bs4FormComponent extends Component {
   protected autobind = true;
 
   static get observedAttributes() {
-    return [
-      "show-success-toast",
-      "success-toast-channel",
-      "success-toast-message",
-      "success-toast-title",
-      "disable-submit-until-change",
-    ];
+    return ["show-success-toast", "success-toast-channel", "success-toast-message", "success-toast-title", "disable-submit-until-change"];
   }
 
   protected formEl: HTMLFormElement | null = null;
@@ -53,8 +46,7 @@ export class Bs4FormComponent extends Component {
     successToastTitle: "Notice",
     successToastMessage: "Submitted.",
 
-    disableSubmitUntilChange: true,
-    clearOnSubmit: false,
+    disableSubmitUntilChange: false,
 
     submitDisabled: false,
     onSubmit: this.onSubmit,
@@ -101,13 +93,7 @@ export class Bs4FormComponent extends Component {
       return;
     }
 
-    //debug, remove once deployed
-    event.preventDefault();
-    event.stopPropagation();
-
-    if (this.scope.clearOnSubmit) {
-      //todo
-    } else if (this.scope.disableSubmitUntilChange) {
+    if (this.scope.disableSubmitUntilChange) {
       this.scope.submitDisabled = true;
     }
 
@@ -118,9 +104,7 @@ export class Bs4FormComponent extends Component {
         title: this.scope.successToastTitle,
         delay: 10000,
       };
-      const eventDispatcher = new EventDispatcher(
-        this.scope.successToastChannel
-      );
+      const eventDispatcher = new EventDispatcher(this.scope.successToastChannel);
       eventDispatcher.trigger("show-toast", toast);
     }
   }
