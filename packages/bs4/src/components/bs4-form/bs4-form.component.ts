@@ -28,7 +28,13 @@ export class Bs4FormComponent extends Component {
   protected autobind = true;
 
   static get observedAttributes() {
-    return ["show-success-toast", "success-toast-channel", "success-toast-message", "success-toast-title", "disable-submit-until-change"];
+    return [
+      "show-success-toast",
+      "success-toast-channel",
+      "success-toast-message",
+      "success-toast-title",
+      "disable-submit-until-change",
+    ];
   }
 
   protected formEl: HTMLFormElement | null = null;
@@ -92,7 +98,9 @@ export class Bs4FormComponent extends Component {
       event.stopPropagation();
       return;
     }
+  }
 
+  public submittedSuccessfully() {
     if (this.scope.disableSubmitUntilChange) {
       this.scope.submitDisabled = true;
     }
@@ -104,7 +112,9 @@ export class Bs4FormComponent extends Component {
         title: this.scope.successToastTitle,
         delay: 10000,
       };
-      const eventDispatcher = new EventDispatcher(this.scope.successToastChannel);
+      const eventDispatcher = new EventDispatcher(
+        this.scope.successToastChannel
+      );
       eventDispatcher.trigger("show-toast", toast);
     }
   }
