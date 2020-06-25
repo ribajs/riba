@@ -1,5 +1,5 @@
-import { Component } from "@ribajs/core";
-
+import { Component, EventDispatcher } from "@ribajs/core";
+import Toast from "@ribajs/bs4/src/interfaces";
 import template from "./bs4-form.component.html";
 import { stripHtml } from "@ribajs/utils/src/type";
 
@@ -14,6 +14,12 @@ export interface ValidationObject {
 export interface Scope {
   form: ValidationObject;
   onSubmit: Bs4FormComponent["onSubmit"];
+  showSuccessToast: boolean;
+  successToastChannel: string;
+  successToastMessage: string;
+  successToastTitle?: string;
+  disableSubmitUntilChange: boolean;
+  submitDisabled: boolean;
 }
 
 export class Bs4FormComponent extends Component {
@@ -22,7 +28,13 @@ export class Bs4FormComponent extends Component {
   protected autobind = true;
 
   static get observedAttributes() {
-    return [];
+    return [
+      "show-success-toast",
+      "success-toast-channel",
+      "success-toast-message",
+      "success-toast-title",
+      "disable-submit-until-change",
+    ];
   }
 
   protected formEl: HTMLFormElement | null = null;
@@ -33,6 +45,16 @@ export class Bs4FormComponent extends Component {
       valid: false,
       error: undefined,
     },
+
+    //only used when form is not submitted. (e.g. october ajax api)
+    showSuccessToast: false,
+    successToastChannel: "toast",
+    successToastTitle: "Notice",
+    successToastMessage: "Submitted.",
+
+    disableSubmitUntilChange: false,
+
+    submitDisabled: false,
     onSubmit: this.onSubmit,
   };
 
@@ -43,6 +65,12 @@ export class Bs4FormComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     this.init(Bs4FormComponent.observedAttributes);
+
+    if (this.scope.disableSubmitUntilChange) {
+      this.el.addEventListener("input", () => {
+        this.scope.submitDisabled = false;
+      });
+    }
   }
 
   protected requiredAttributes() {
@@ -68,12 +96,36 @@ export class Bs4FormComponent extends Component {
       // stop native submit
       event.preventDefault();
       event.stopPropagation();
+      return;
     }
   }
+
+  public submittedSuccessfully() {
+    if (this.scope.disableSubmitUntilChange) {
+      this.scope.submitDisabled = true;
+    }
+
+    //show notification
+    if (this.scope.showSuccessToast) {
+      const toast: Toast = {
+        message: this.scope.successToastMessage,
+        title: this.scope.successToastTitle,
+        delay: 10000,
+      };
+      const eventDispatcher = new EventDispatcher(
+        this.scope.successToastChannel
+      );
+      eventDispatcher.trigger("show-toast", toast);
+    }
+  }
+
   protected validate(form: HTMLFormElement, validationScope: ValidationObject) {
     validationScope.valid = form.checkValidity();
     validationScope.error = form.validationMessage;
-    form.classList.add("was-validated");
+    //only show validation if we want to give a hint to the user that something is wrong
+    if (!validationScope.valid) {
+      form.classList.add("was-validated");
+    }
   }
 
   protected template() {

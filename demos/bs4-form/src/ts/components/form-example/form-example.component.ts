@@ -1,17 +1,22 @@
-import { Component } from "@ribajs/core";
-
+import { Component, EventDispatcher } from "@ribajs/core";
 import template from "./form-example.component.html";
+
+interface Scope {
+
+}
 
 export class FormExampleComponent extends Component {
   public static tagName = "rv-form-example";
 
   protected autobind = true;
+  protected eventDispatcher: EventDispatcher = new EventDispatcher("toast");
 
   static get observedAttributes() {
     return [];
   }
 
-  protected scope = {};
+  protected scope: Scope = {
+  };
 
   constructor(element?: HTMLElement) {
     super(element);
@@ -19,7 +24,7 @@ export class FormExampleComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init(FormExampleComponent.observedAttributes);
+    super.init(FormExampleComponent.observedAttributes);
   }
 
   protected requiredAttributes() {
