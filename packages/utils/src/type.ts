@@ -4,7 +4,7 @@ export const couldBeJson = (str?: string | null) => {
     return false;
   }
   str = str.trim();
-  return str.startsWith("{") || str.startsWith("[");
+  return str.charAt(0) === "{" || str.charAt(0) === "[";
 }
 
 /**
@@ -49,8 +49,8 @@ export const isObject = (obj: object) => {
  * Parse value to string or return undefined if value is null
  * @param value
  */
-export const getString = (value: string) => {
-  return value != null ? value.toString() : undefined;
+export const getString = (value: string | boolean | number) => {
+  return value ? value.toString() : undefined;
 }
 
 /**

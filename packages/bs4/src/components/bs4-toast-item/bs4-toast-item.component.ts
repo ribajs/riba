@@ -17,7 +17,7 @@ interface Scope {
 export class Bs4ToastItemComponent extends Component {
   public static tagName = "bs4-toast-item";
 
-  public _debug = true;
+  public _debug = false;
   protected autobind = true;
 
   protected toastService?: ToastService;

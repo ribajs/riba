@@ -2,18 +2,6 @@ import { Binder } from "../interfaces";
 import { getInputValue } from "@ribajs/utils/src/dom";
 import { getString } from "@ribajs/utils/src/type";
 
-const getData = (el: HTMLElement) => {
-  const customData: any = {};
-  customData.type = (el as HTMLInputElement).type;
-  customData.tagName = el.tagName;
-  customData.contenteditable = el.getAttribute("contenteditable")
-    ? true
-    : false;
-  customData.isRadio =
-    customData.tagName === "INPUT" && customData.type === "radio";
-  return customData;
-};
-
 /**
  * Sets the element's value. Also sets the model property when the input changes
  * (two-way binder).
@@ -23,43 +11,60 @@ export const valueBinder: Binder<any> = {
   publishes: true,
   priority: 3000,
 
-  bind(el: HTMLElement) {
-    if (!this.customData) {
-      this.customData = getData(el);
+  onChange() {
+    this.publish();
+  },
+
+  setCustomData(el: HTMLElement) {
+    if (this.customData.tagName) {
+      return;
     }
-    if (!this.customData.isRadio) {
-      this.customData.event =
+
+    this.customData = {};
+    this.customData.publshInitalRoutine = true;
+    this.customData.type = (el as HTMLInputElement).type;
+    this.customData.tagName = el.tagName;
+    this.customData.contenteditable = el.getAttribute("contenteditable")
+      ? true
+      : false;
+    this.customData.isRadio =
+      this.customData.tagName === "INPUT" && this.customData.type === "radio";
+    this.customData.selectMultiple =
+      (el as HTMLSelectElement).type === "select-multiple";
+
+    // TODO checkme
+    if (this.customData.isRadio) {
+      this.customData.changeEvents = "change input keyup paste blur focus";
+    } else {
+      this.customData.changeEvents =
         el.getAttribute("event-name") ||
         (el.tagName === "SELECT" ? "change" : "input");
-      // eslint-disable-next-line @typescript-eslint/no-this-alias
-      const self = this;
-      if (!this.customData.callback) {
-        this.customData.callback = () => {
-          self.publish();
-        };
-      }
+    }
+  },
 
-      if (!this.customData.event) {
-        this.customData.event = "change input keyup paste blur focus";
-      }
-
-      el.addEventListener(this.customData.event, this.customData.callback);
+  bind(el: HTMLElement) {
+    this.binder.setCustomData.call(this, el);
+    if (!this.customData.isRadio) {
+      el.addEventListener(
+        this.customData.changeEvents,
+        this.binder.onChange.bind(this)
+      );
     }
   },
 
   unbind(el: HTMLUnknownElement) {
-    el.removeEventListener(this.customData.event, this.customData.callback);
+    el.removeEventListener(
+      this.customData.changeEvents,
+      this.binder.onChange.bind(this)
+    );
   },
 
   routine(el: HTMLElement | HTMLSelectElement, value: string | string[]) {
     const oldValue = this.getValue(el);
-    if (!this.customData) {
-      this.customData = getData(el);
-    }
     if (this.customData.isRadio) {
       el.setAttribute("value", value as string);
     } else {
-      if ((el as HTMLSelectElement).type === "select-multiple") {
+      if (this.customData.selectMultiple) {
         if (Array.isArray(value)) {
           for (let i = 0; i < (el as HTMLSelectElement).options.length; i++) {
             const option = (el as HTMLSelectElement).options[
@@ -70,18 +75,24 @@ export const valueBinder: Binder<any> = {
           // TODO check if the value was really changed
           el.dispatchEvent(new Event("change"));
         }
-      } else if (el.getAttribute("contenteditable")) {
-        if (getString(value as string) !== oldValue) {
+      } else if (this.customData.contenteditable) {
+        value = getString(value as string) || value;
+        if (value !== oldValue) {
           el.innerHTML = value as string; // TODO write test for contenteditable
           el.dispatchEvent(new Event("change"));
         }
       } else {
-        if (getString(value as string) !== oldValue) {
+        value = getString(value as string) || value;
+        if (value !== oldValue) {
           (el as HTMLInputElement).value =
             value != null ? (value as string) : "";
           el.dispatchEvent(new Event("change"));
         }
       }
+    }
+    if (this.customData.publshInitalRoutine) {
+      this.publish();
+      this.customData.publshInitalRoutine = false;
     }
   },
 

@@ -1,15 +1,6 @@
 import { concat } from "@ribajs/utils/src/type";
-
-export interface HttpServiceOptions {
-  crossDomain?: boolean;
-  cache?:
-    | "default"
-    | "no-store"
-    | "reload"
-    | "no-cache"
-    | "force-cache"
-    | "only-if-cached";
-}
+import { HttpMethod } from "../interfaces/http-method";
+import { HttpServiceOptions } from "../interfaces/http-service-options";
 
 export class HttpService {
   /**
@@ -137,7 +128,7 @@ export class HttpService {
   public static xhr(
     url: string,
     xhrTimeout = 5000,
-    method: "GET" | "POST" | "PUT" | "DELETE" = "GET",
+    method: HttpMethod = "GET",
     dataType?: string,
     data?: any
   ): Promise<string | any> {
@@ -191,7 +182,7 @@ export class HttpService {
 
   public static async fetch(
     url: string,
-    method: "GET" | "POST" | "PUT" | "DELETE" = "GET",
+    method: HttpMethod = "GET",
     data: any = {},
     dataType?: string,
     headers: any = {},
@@ -222,9 +213,10 @@ export class HttpService {
           body = JSON.stringify(data);
         }
       }
-      // console.debug('method', method);
-      // console.debug('body', body);
-      // console.debug('headers', headers);
+      console.debug("url", url);
+      console.debug("method", method);
+      console.debug("body", body);
+      console.debug("headers", headers);
       return fetch(url, {
         credentials: "same-origin",
         cache,
@@ -238,7 +230,8 @@ export class HttpService {
           }
           if (
             typeof dataType === "string" &&
-            (dataType === "json" || dataType.includes("json"))
+            (dataType === "json" || dataType.includes("json")) &&
+            typeof response.json === "function"
           ) {
             try {
               return response.json();

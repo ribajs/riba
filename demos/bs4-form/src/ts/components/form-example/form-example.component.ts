@@ -1,10 +1,6 @@
 import { Component, EventDispatcher } from "@ribajs/core";
 import template from "./form-example.component.html";
 
-interface Scope {
-
-}
-
 export class FormExampleComponent extends Component {
   public static tagName = "rv-form-example";
 
@@ -15,8 +11,7 @@ export class FormExampleComponent extends Component {
     return [];
   }
 
-  protected scope: Scope = {
-  };
+  protected scope = {};
 
   constructor(element?: HTMLElement) {
     super(element);
