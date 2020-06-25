@@ -1,3 +1,4 @@
+export const MAX_UID = 1000
 
 /**
  *
@@ -225,5 +226,12 @@ export const loadScript = async (src: string, id: string, async: boolean) => {
     };
     document.getElementsByTagName("head")[0].appendChild(script);
   });
+}
 
+export const getUID = (prefix: string): string => {
+  do {
+    prefix += ~~(Math.random() * MAX_UID); // "~~" acts like a faster Math.floor() here
+  } while (document.getElementById(prefix));
+
+  return prefix;
 }

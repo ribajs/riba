@@ -1,6 +1,6 @@
 import { Component, EventDispatcher } from "@ribajs/core";
 import { isNumber, justDigits } from "@ribajs/utils/src/type";
-import { getUID } from "@ribajs/utils/src/id";
+import { getUID } from "@ribajs/utils/src/dom";
 import template from "./leaflet-map.component.html";
 import * as Leaflet from "leaflet";
 import { PointTuple, IconOptions } from "leaflet";

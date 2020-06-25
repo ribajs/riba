@@ -1,6 +1,5 @@
 import { Component } from "@ribajs/core";
-import { loadScript } from "@ribajs/utils/src/dom";
-import { getUID } from "@ribajs/utils/src/id";
+import { loadScript, getUID } from "@ribajs/utils/src/dom";
 
 interface Scope {
   src: string;
