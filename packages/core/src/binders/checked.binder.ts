@@ -10,19 +10,14 @@ export const checkedBinder: Binder<string | boolean> = {
   name: "checked",
   publishes: true,
   priority: 2000,
-  publshInitalRoutine: true,
-
-  onChange() {
-    this.publish();
-  },
 
   bind(el) {
-    el.addEventListener("change", this.binder.onChange.bind(this), false);
+    el.addEventListener("change", this.publish);
     (el as HTMLInputElement).checked = !!(el as HTMLInputElement).checked;
   },
 
   unbind(el) {
-    el.removeEventListener("change", this.binder.onChange.bind(this), false);
+    el.removeEventListener("change", this.publish);
   },
 
   routine(el: HTMLElement, value) {
@@ -30,12 +25,7 @@ export const checkedBinder: Binder<string | boolean> = {
       (el as HTMLInputElement).checked =
         getString((el as HTMLInputElement).value) === getString(value);
     } else {
-      (el as HTMLInputElement).checked =
-        value === true || (value as string) === "true";
-    }
-    if (this.binder.publshInitalRoutine) {
-      this.publish();
-      this.binder.publshInitalRoutine = false;
+      (el as HTMLInputElement).checked = !!value;
     }
   },
 

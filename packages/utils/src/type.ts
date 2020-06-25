@@ -49,8 +49,8 @@ export const isObject = (obj: object) => {
  * Parse value to string or return undefined if value is null
  * @param value
  */
-export const getString = (value: string | boolean | number) => {
-  return value ? value.toString() : undefined;
+export const getString = (value: any) => {
+  return value?.toString ? value.toString() : undefined;
 }
 
 /**

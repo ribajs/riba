@@ -103,14 +103,14 @@ describe("riba.binders", () => {
 
     describe('with a radio input with value="false"', () => {
       describe("and a truthy value", () => {
-        it("checks the radio input", () => {
+        it("unchecks the radio input", () => {
           (riba.binders.checked as any).routine(falseRadioInput, true);
           expect(falseRadioInput.checked).toEqual(false);
         });
       });
 
       describe("with a falsey value", () => {
-        it("unchecks the radio input", () => {
+        it("checks the radio input", () => {
           (riba.binders.checked as any).routine(falseRadioInput, false);
           expect(falseRadioInput.checked).toEqual(true);
         });
