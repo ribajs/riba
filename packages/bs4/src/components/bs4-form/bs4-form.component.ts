@@ -171,7 +171,6 @@ export class Bs4FormComponent extends Component {
       submitSettings.type
     )
       .then((res) => {
-        console.debug("res", res);
         this.onSuccessSubmit(res);
       })
       .catch((err) => {

@@ -17,7 +17,7 @@ interface Scope {
 export class Bs4ToastItemComponent extends Component {
   public static tagName = "bs4-toast-item";
 
-  public _debug = false;
+  public _debug = true;
   protected autobind = true;
 
   protected toastService?: ToastService;
@@ -47,7 +47,7 @@ export class Bs4ToastItemComponent extends Component {
 
   protected async afterBind() {
     super.afterBind();
-    //construct toast service
+    // construct toast service
     const toast = this.scope.toast;
     const toastEl = this.el.firstElementChild as HTMLElement | null;
     if (toast && toastEl) {
@@ -61,17 +61,17 @@ export class Bs4ToastItemComponent extends Component {
           : ToastService.Default.animation,
       });
 
-      //show toast using the toastservice
+      // show toast using the toastservice
       this.toastService.show();
     }
   }
 
-  //can be called if toast should be removed
+  // can be called if toast should be removed
   public onDismiss() {
     this.toastService?.hide();
   }
 
-  //remove toast from dom once shown
+  // remove toast from dom once shown
   public onHide(event: Event, el: HTMLElement) {
     const toastContainer: Bs4ToastContainerScope | null =
       this.scope.$parent?.$parent || null;

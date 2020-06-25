@@ -3,7 +3,8 @@ import { ToastBinderData } from "@ribajs/bs4/src/interfaces";
 
 export const showToastOnEventBinder: Binder<ToastBinderData> = {
   name: "show-toast-on-*",
-  onEvent(/*event: Event*/) {
+  onEvent(/*event: CustomEvent*/) {
+    // console.debug("[show-toast-on-*] event.detail:", event.detail);
     const toastData: ToastBinderData = this.customData.toastData;
     const toastDispatcher = new EventDispatcher(toastData.channel || "toast");
     toastDispatcher.trigger("show-toast", toastData);

@@ -7,16 +7,16 @@ import { Binder } from "../interfaces";
 export const componentAttributeBinder: Binder<any> = {
   name: "co-*",
   routine(el: HTMLElement, value: any) {
-    this.binder.triggerAttributeValue.bind(this)(el, value);
+    this.binder.triggerAttributeValue.call(this, el, value);
   },
   bind(el) {
     const attrName = (this.args[0] as string).trim();
+    const eventName = "ask-for-attribute:" + attrName;
     el.addEventListener(
-      ("ask-for-attribute:" + attrName) as any,
+      eventName as any,
       this.binder.onAskForAttributeValue.bind(this, el),
       false
     );
-    // this.binder.triggerAttributeValue.bind(this)(el, undefined);
   },
 
   unbind(el) {
@@ -30,18 +30,22 @@ export const componentAttributeBinder: Binder<any> = {
 
   onAskForAttributeValue(el: HTMLElement) {
     if (this.getValue) {
-      const value = (this as any).getValue(el);
-      this.triggerAttributeValue(el, value);
+      const attrName = (this.args[0] as string).trim();
+      this.binder.triggerAttributeValue.call(
+        this,
+        el,
+        this.view.models[attrName]
+      );
     } else {
-      console.warn("this.getValue is not defined");
+      console.warn("[componentAttributeBinder] this.getValue is not defined");
     }
   },
 
   triggerAttributeValue(el: HTMLElement, value: any) {
-    // console.debug("triggerAttributeValue", el, this.view.models);
     const attrName = (this.args[0] as string).trim();
+    const eventName = "attribute:" + attrName;
     el.dispatchEvent(
-      new CustomEvent("attribute:" + attrName, {
+      new CustomEvent(eventName, {
         detail: {
           name: attrName,
           oldValue: undefined,

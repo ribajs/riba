@@ -90,12 +90,12 @@ export abstract class Component extends FakeHTMLElement {
   }
 
   public connectedFallbackCallback() {
-    this.debug(`Called connectedFallbackCallback`);
+    // this.debug(`Called connectedFallbackCallback`);
     this.connectedCallback();
   }
 
   public disconnectedFallbackCallback() {
-    this.debug(`Called disconnectedFallbackCallback`);
+    // this.debug(`Called disconnectedFallbackCallback`);
     this.disconnectedCallback();
   }
 
@@ -201,7 +201,7 @@ export abstract class Component extends FakeHTMLElement {
         }
       }
     }
-    this.debug("observedAttributesToCheck", this.observedAttributesToCheck);
+    // this.debug("observedAttributesToCheck", this.observedAttributesToCheck);
     return allInitialized;
   }
 
@@ -217,14 +217,15 @@ export abstract class Component extends FakeHTMLElement {
     const requiredAttributes = this.requiredAttributes();
     requiredAttributes.forEach((requiredAttribute: string) => {
       if (!this.scope[requiredAttribute] || !this.scope[requiredAttribute]) {
-        this.debug(
-          `Attribute ${requiredAttribute} not set: ${this.scope[requiredAttribute]}`
-        );
+        // this.debug(
+        //   `Attribute ${requiredAttribute} not set: ${this.scope[requiredAttribute]}`
+        // );
         allDefined = false;
       } else {
-        this.debug(
-          `Attribute ${requiredAttribute} is defined: ${this.scope[requiredAttribute]}`
-        );
+        // this.debug(
+        //   `Attribute ${requiredAttribute} is defined: `,
+        //   this.scope[requiredAttribute]
+        // );
       }
     });
     return allDefined;
@@ -363,7 +364,7 @@ export abstract class Component extends FakeHTMLElement {
     newValue: any,
     namespace: string | null
   ) {
-    this.debug("attributeChangedCallback", attributeName, newValue);
+    // this.debug("attributeChangedCallback", attributeName, newValue);
     if (
       this.observedAttributesToCheck &&
       this.observedAttributesToCheck[attributeName]
@@ -422,12 +423,12 @@ export abstract class Component extends FakeHTMLElement {
 
   protected async loadTemplate() {
     if (this.templateLoaded === true) {
-      this.debug("template already loaded");
+      // this.debug("template already loaded");
       return null;
     }
 
     if (!this.checkRequiredAttributes()) {
-      this.debug("not all required attributes are set to load the template");
+      this.debug("Not all required attributes are set to load the template");
       return null;
     }
 
@@ -450,7 +451,7 @@ export abstract class Component extends FakeHTMLElement {
 
   protected async bind() {
     if (this.bound === true) {
-      this.debug("component already bounded");
+      // this.debug("component already bounded");
       return this.view;
     }
 
@@ -525,7 +526,9 @@ export abstract class Component extends FakeHTMLElement {
   }
 
   private askForRibaAttribute(attrName: string) {
-    this.el.dispatchEvent(new CustomEvent("ask-for-attribute" + attrName));
+    const eventName = "ask-for-attribute:" + attrName;
+    // this.debug("Trigger " + eventName);
+    this.el.dispatchEvent(new CustomEvent(eventName));
   }
 
   private askForRibaAttributes(observedAttributes: string[]) {
@@ -535,12 +538,13 @@ export abstract class Component extends FakeHTMLElement {
   }
 
   private onParentChanged(event: CustomEvent) {
-    this.debug("onParentChanged", event.detail);
+    // this.debug("onParentChanged", event.detail);
     this.scope.$parent = event.detail;
   }
 
   private onRibaAttributeChanged(event: CustomEvent) {
     const data = (event as CustomEvent).detail;
+    // this.debug("onRibaAttributeChanged", data);
     const oldValue = this.scope[data.name];
     this.attributeChangedCallback(
       data.name,
@@ -562,8 +566,10 @@ export abstract class Component extends FakeHTMLElement {
   }
 
   private listenForRibaAttribute(attrName: string) {
+    const eventName = "attribute:" + attrName;
+    // this.debug("Listen for " + eventName);
     this.el.addEventListener(
-      ("attribute:" + attrName) as any,
+      eventName as any,
       this.onRibaAttributeChanged.bind(this)
     );
   }
@@ -622,7 +628,7 @@ export abstract class Component extends FakeHTMLElement {
       !(window as any).forceComponentFallback
     ) {
       // use native implementaion
-      this.debug("initAttributeObserver: Use native implementaion");
+      // this.debug("initAttributeObserver: Use native implementaion");
     } else {
       if ((window as any).MutationObserver) {
         // use MutationObserver as fallback
