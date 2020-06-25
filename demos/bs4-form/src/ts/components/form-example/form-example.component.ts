@@ -1,12 +1,10 @@
 import { Component } from "@ribajs/core";
-
 import template from "./form-example.component.html";
 
 export class FormExampleComponent extends Component {
   public static tagName = "rv-form-example";
 
   protected autobind = true;
-
   static get observedAttributes() {
     return [];
   }
@@ -19,7 +17,7 @@ export class FormExampleComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init(FormExampleComponent.observedAttributes);
+    super.init(FormExampleComponent.observedAttributes);
   }
 
   protected requiredAttributes() {

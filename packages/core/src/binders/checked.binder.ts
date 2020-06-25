@@ -6,21 +6,18 @@ import { getString } from "@ribajs/utils/src/type";
  * Checks a checkbox or radio input when the value is true. Also sets the model
  * property when the input is checked or unchecked (two-way binder).
  */
-export const checkedBinder: Binder<string> = {
+export const checkedBinder: Binder<string | boolean> = {
   name: "checked",
   publishes: true,
   priority: 2000,
 
   bind(el) {
-    this.customData = {};
-    this.customData.onChange = () => {
-      this.publish();
-    };
-    el.addEventListener("change", this.customData.onChange, false);
+    el.addEventListener("change", this.publish);
+    (el as HTMLInputElement).checked = !!(el as HTMLInputElement).checked;
   },
 
   unbind(el) {
-    el.removeEventListener("change", this.customData.onChange, false);
+    el.removeEventListener("change", this.publish);
   },
 
   routine(el: HTMLElement, value) {
@@ -30,5 +27,9 @@ export const checkedBinder: Binder<string> = {
     } else {
       (el as HTMLInputElement).checked = !!value;
     }
+  },
+
+  getValue(el) {
+    return !!(el as HTMLInputElement).checked;
   },
 };

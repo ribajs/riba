@@ -1,3 +1,4 @@
+export const MAX_UID = 1000
 
 /**
  *
@@ -186,4 +187,51 @@ export const ready = (callback: () => void) => {
     document.addEventListener("DOMContentLoaded", checkReady);
   }
   checkReady();
+}
+
+export const loadScript = async (src: string, id: string, async: boolean) => {
+  return new Promise((resolve, reject) => {
+    if (document.getElementById(id)) {
+      console.warn("script already loaded, do nothing.");
+      resolve();
+    }
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.id = id;
+    script.src = src;
+    if (async) {
+      script.async = true;
+    }
+    // IE
+    if ((script as any).readyState) {
+      (script as any).onreadystatechange = function () {
+        if (
+          (script as any).readyState === "loaded" ||
+          (script as any).readyState === "complete"
+        ) {
+          (script as any).onreadystatechange = null;
+          resolve();
+        }
+      };
+    }
+    // Other browsers
+    script.onload = function () {
+      resolve();
+    };
+    script.onerror = function (...args) {
+      const error = new Error("Error on load script " + script.src);
+      console.error(error);
+      console.error(...args);
+      reject(error);
+    };
+    document.getElementsByTagName("head")[0].appendChild(script);
+  });
+}
+
+export const getUID = (prefix: string): string => {
+  do {
+    prefix += ~~(Math.random() * MAX_UID); // "~~" acts like a faster Math.floor() here
+  } while (document.getElementById(prefix));
+
+  return prefix;
 }

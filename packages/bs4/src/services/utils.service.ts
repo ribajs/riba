@@ -1,6 +1,5 @@
 import { Utils as RibaUtils } from "@ribajs/core";
 
-export const MAX_UID = 1000000;
 export const MILLISECONDS_MULTIPLIER = 1000;
 export const TRANSITION_END = "transitionend";
 
@@ -16,14 +15,6 @@ export class Utils extends RibaUtils {
   public static toType(obj: any) {
     const matches = {}.toString.call(obj).match(/\s([a-z]+)/i);
     return matches ? matches[1].toLowerCase() : null;
-  }
-
-  public static getUID(prefix: string) {
-    do {
-      prefix += ~~(Math.random() * MAX_UID); // "~~" acts like a faster Math.floor() here
-    } while (document.getElementById(prefix));
-
-    return prefix;
   }
 
   public static getSelector(element: HTMLElement) {

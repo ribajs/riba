@@ -23,6 +23,10 @@ export const valueBinder: Binder<any> = {
   publishes: true,
   priority: 3000,
 
+  onChange() {
+    this.publish();
+  },
+
   bind(el: HTMLElement) {
     if (!this.customData) {
       this.customData = getData(el);
@@ -33,8 +37,8 @@ export const valueBinder: Binder<any> = {
         (el.tagName === "SELECT" ? "change" : "input");
       // eslint-disable-next-line @typescript-eslint/no-this-alias
       const self = this;
-      if (!this.customData.callback) {
-        this.customData.callback = () => {
+      if (!this.customData.onChange) {
+        this.customData.onChange = () => {
           self.publish();
         };
       }
@@ -43,12 +47,12 @@ export const valueBinder: Binder<any> = {
         this.customData.event = "change input keyup paste blur focus";
       }
 
-      el.addEventListener(this.customData.event, this.customData.callback);
+      el.addEventListener(this.customData.event, this.customData.onChange);
     }
   },
 
   unbind(el: HTMLUnknownElement) {
-    el.removeEventListener(this.customData.event, this.customData.callback);
+    el.removeEventListener(this.customData.event, this.customData.onChange);
   },
 
   routine(el: HTMLElement | HTMLSelectElement, value: string | string[]) {

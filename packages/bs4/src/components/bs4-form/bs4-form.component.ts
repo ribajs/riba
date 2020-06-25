@@ -1,19 +1,54 @@
-import { Component } from "@ribajs/core";
-
+import { Component, HttpService, HttpMethod, HttpDataType } from "@ribajs/core";
 import template from "./bs4-form.component.html";
-import { stripHtml } from "@ribajs/utils/src/type";
+import { stripHtml, camelCase } from "@ribajs/utils/src/type";
+import { getInputValue } from "@ribajs/utils/src/dom";
 
 export interface ValidationObject {
   fields: {
-    [name: string]: string;
+    [name: string]: string | boolean | string[];
   };
   valid: boolean;
   error?: string;
 }
 
+export interface SubmitSettings {
+  action: string;
+  method: HttpMethod;
+  type: HttpDataType;
+}
+
 export interface Scope {
   form: ValidationObject;
   onSubmit: Bs4FormComponent["onSubmit"];
+
+  disableSubmitUntilChange: boolean;
+  submitDisabled: boolean;
+  /**
+   * Set this to `true` to submit the form using ajax.
+   * Set this to `false` to use the default submit request with a page reload
+   */
+  useAjax: boolean;
+  /**
+   * Used for the ajax submit request. Default is "form" but can also be "script" | "json" | "xml" | "text" | "html" | "form".
+   */
+  ajaxRequestType: HttpDataType;
+  /**
+   * Submitted data for the ajax submit.
+   *
+   * Set this tp `true` if you do not want to use `rv-value` on your form elements,
+   * in this case the property name is in this case the property name is determined from the name attribute:
+   *
+   * @example
+   *   `<input name="given-name">` -> `scope.form.fields.givenName
+   *
+   * Set this to `false` if you if you want to use the rv-value binder,
+   * in this case the property name may be different from the name attribute:
+   * @example
+   *  `<input name="given-name" rv-value="form.fields.name | default 'Zelda'">`
+   *
+   **/
+  autoSetFormData: boolean;
+  stripHtml: boolean;
 }
 
 export class Bs4FormComponent extends Component {
@@ -22,7 +57,13 @@ export class Bs4FormComponent extends Component {
   protected autobind = true;
 
   static get observedAttributes() {
-    return [];
+    return [
+      "disable-submit-until-change",
+      "use-ajax",
+      "ajax-request-type",
+      "auto-set-form-data",
+      "strip-html",
+    ];
   }
 
   protected formEl: HTMLFormElement | null = null;
@@ -33,7 +74,16 @@ export class Bs4FormComponent extends Component {
       valid: false,
       error: undefined,
     },
+
+    disableSubmitUntilChange: false,
+
+    submitDisabled: false,
     onSubmit: this.onSubmit,
+
+    useAjax: true,
+    ajaxRequestType: "form",
+    autoSetFormData: true,
+    stripHtml: true,
   };
 
   constructor(element?: HTMLElement) {
@@ -43,22 +93,46 @@ export class Bs4FormComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     this.init(Bs4FormComponent.observedAttributes);
+
+    if (this.scope.disableSubmitUntilChange) {
+      this.el.addEventListener("input", () => {
+        this.scope.submitDisabled = false;
+      });
+    }
   }
 
   protected requiredAttributes() {
     return [];
   }
 
-  public onSubmit(event: Event) {
+  protected async afterBind() {
+    super.afterBind();
+  }
+
+  protected stripHtml() {
     for (const key in this.scope.form.fields) {
-      if (this.scope.form.fields[key]) {
-        this.scope.form.fields[key] = stripHtml(this.scope.form.fields[key]);
+      if (
+        this.scope.form.fields[key] &&
+        typeof this.scope.form.fields[key] === "string"
+      ) {
+        this.scope.form.fields[key] = stripHtml(
+          this.scope.form.fields[key] as string
+        );
       }
     }
+  }
 
+  public onSubmit(event: Event) {
     if (!this.formEl) {
       console.warn("No form found");
       return false;
+    }
+
+    if (this.scope.autoSetFormData) {
+      this.getFormValues();
+    }
+    if (this.scope.stripHtml) {
+      this.stripHtml();
     }
 
     this.validate(this.formEl, this.scope.form);
@@ -68,27 +142,114 @@ export class Bs4FormComponent extends Component {
       // stop native submit
       event.preventDefault();
       event.stopPropagation();
+      return;
+    }
+
+    if (this.scope.useAjax) {
+      // stop native submit because we submit the data using javascript
+      event.preventDefault();
+      event.stopPropagation();
+
+      this.ajaxSubmit();
     }
   }
+
+  /**
+   * TODO Not tested in the wild, may need to be adjusted. Also the error handling is untested
+   */
+  protected ajaxSubmit() {
+    const submitSettings = this.getSubmitSettings();
+    if (!submitSettings) {
+      console.warn("Can't get submit settings");
+      return;
+    }
+    // This method is untested in the wild
+    HttpService.fetch(
+      submitSettings.action,
+      submitSettings.method,
+      this.scope.form.fields,
+      submitSettings.type
+    )
+      .then((res) => {
+        this.onSuccessSubmit(res);
+      })
+      .catch((err) => {
+        console.error(err);
+        this.onErrorSubmit(err);
+      });
+  }
+
+  protected getSubmitSettings() {
+    if (!this.formEl) {
+      console.warn("No form found");
+      return null;
+    }
+
+    const action = this.formEl.action;
+    const method = this.formEl.method;
+
+    const settings: SubmitSettings = {
+      action,
+      method: method.toUpperCase() as HttpMethod,
+      type: this.scope.ajaxRequestType,
+    };
+
+    return settings;
+  }
+
+  protected onErrorSubmit(err?: Error) {
+    this.el.dispatchEvent(
+      new CustomEvent("submit-error", {
+        detail: { response: err, success: true, error: false },
+      })
+    );
+  }
+
+  protected onSuccessSubmit(response?: any) {
+    if (this.scope.disableSubmitUntilChange) {
+      this.scope.submitDisabled = true;
+    }
+
+    this.el.dispatchEvent(
+      new CustomEvent("submit-success", {
+        detail: { response, success: true, error: false },
+      })
+    );
+  }
+
   protected validate(form: HTMLFormElement, validationScope: ValidationObject) {
     validationScope.valid = form.checkValidity();
     validationScope.error = form.validationMessage;
-    form.classList.add("was-validated");
+    // only show validation if we want to give a hint to the user that something is wrong
+    if (!validationScope.valid) {
+      form.classList.add("was-validated");
+    }
+  }
+
+  protected getFormValues() {
+    if (!this.formEl) {
+      console.warn("No form found");
+      return null;
+    }
+    this.formEl.querySelectorAll("input").forEach((element) => {
+      this.scope.form.fields[camelCase(element.name)] = getInputValue(element);
+    });
+  }
+
+  protected initForm() {
+    const formEl = this.el.querySelector("form");
+    if (formEl && formEl.length > 0) {
+      this.formEl = formEl;
+      this.formEl.classList.add("needs-validation");
+      this.formEl.setAttribute("novalidate", "");
+    } else {
+      console.warn("bs4 form without children found");
+    }
   }
 
   protected template() {
     if (this.el.hasChildNodes()) {
-      const formEl = this.el.querySelector("form");
-      if (formEl && formEl.length > 0) {
-        this.formEl = formEl;
-        this.formEl.classList.add("needs-validation");
-        this.formEl.setAttribute("novalidate", "");
-        this.formEl.querySelectorAll("input").forEach((element) => {
-          this.scope.form.fields[element.name] = element.type;
-        });
-      } else {
-        console.warn("bs4 form without children found");
-      }
+      this.initForm();
       return null;
     } else {
       return template;
