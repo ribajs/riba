@@ -1,5 +1,6 @@
 import { Component, EventDispatcher } from "@ribajs/core";
 import { isNumber, justDigits } from "@ribajs/utils/src/type";
+import { getUID } from "@ribajs/utils/src/id";
 import template from "./leaflet-map.component.html";
 import * as Leaflet from "leaflet";
 import { PointTuple, IconOptions } from "leaflet";
@@ -31,7 +32,15 @@ export class LeafletMapComponent extends Component {
   private map?: Leaflet.Map;
 
   static get observedAttributes() {
-    return ["map-selector", "initial-lat", "initial-lng", "initial-zoom", "tile-url", "attribution", "assets-dir"];
+    return [
+      "map-selector",
+      "initial-lat",
+      "initial-lng",
+      "initial-zoom",
+      "tile-url",
+      "attribution",
+      "assets-dir",
+    ];
   }
 
   protected scope: Scope = {
@@ -41,7 +50,8 @@ export class LeafletMapComponent extends Component {
     initialZoom: 13,
     assetsDir: "/images/vendors/leaflet/images/",
     tileUrl: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   };
 
   constructor(element?: HTMLElement) {
@@ -66,15 +76,20 @@ export class LeafletMapComponent extends Component {
 
     Leaflet.Icon.Default.imagePath = this.scope.assetsDir;
 
-    const mapId = "map-" + Math.floor(Math.random() * 9999);
+    const mapId = getUID("map-");
     const mapElement = this.el.querySelector(this.scope.mapSelector);
     if (mapElement) {
       mapElement.id = mapId;
     } else {
-      console.warn(`No element with selector "${this.scope.mapSelector}" found!`);
+      console.warn(
+        `No element with selector "${this.scope.mapSelector}" found!`
+      );
     }
 
-    this.map = new Leaflet.Map(mapId).setView([this.scope.initialLat, this.scope.initialLng], this.scope.initialZoom);
+    this.map = new Leaflet.Map(mapId).setView(
+      [this.scope.initialLat, this.scope.initialLng],
+      this.scope.initialZoom
+    );
 
     Leaflet.tileLayer(this.scope.tileUrl, {
       attribution: this.scope.attribution,
@@ -131,7 +146,7 @@ export class LeafletMapComponent extends Component {
   }
 
   protected template() {
-    for (const el of this.el.children) {
+    for (const el of Array.from(this.el.children)) {
       if (el.tagName === "ICON") {
         const iconName = el.getAttribute("name");
         const iconUrl = el.getAttribute("icon-url");
@@ -152,19 +167,27 @@ export class LeafletMapComponent extends Component {
           }
 
           if (iconAnchorAttr) {
-            iconOptions.iconAnchor = this.convertStringToPointTuple(iconAnchorAttr);
+            iconOptions.iconAnchor = this.convertStringToPointTuple(
+              iconAnchorAttr
+            );
           }
 
           if (popupAnchorAttr) {
-            iconOptions.popupAnchor = this.convertStringToPointTuple(popupAnchorAttr);
+            iconOptions.popupAnchor = this.convertStringToPointTuple(
+              popupAnchorAttr
+            );
           }
 
           if (shadowSizeAttr) {
-            iconOptions.shadowSize = this.convertStringToPointTuple(shadowSizeAttr);
+            iconOptions.shadowSize = this.convertStringToPointTuple(
+              shadowSizeAttr
+            );
           }
 
           if (shadowAnchorAttr) {
-            iconOptions.shadowSize = this.convertStringToPointTuple(shadowAnchorAttr);
+            iconOptions.shadowSize = this.convertStringToPointTuple(
+              shadowAnchorAttr
+            );
           }
 
           this.icons[iconName] = Leaflet.icon(iconOptions);
@@ -182,7 +205,9 @@ export class LeafletMapComponent extends Component {
             lng: +lng,
             title: title,
             icon: icon,
-            openByDefault: el.hasAttribute("open-by-default") ? el.getAttribute("open-by-default") === "true" : true,
+            openByDefault: el.hasAttribute("open-by-default")
+              ? el.getAttribute("open-by-default") === "true"
+              : true,
           });
         } else {
           console.warn("marker without enough data found");

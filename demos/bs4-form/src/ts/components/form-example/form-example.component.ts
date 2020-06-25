@@ -1,12 +1,10 @@
-import { Component, EventDispatcher } from "@ribajs/core";
+import { Component } from "@ribajs/core";
 import template from "./form-example.component.html";
 
 export class FormExampleComponent extends Component {
   public static tagName = "rv-form-example";
 
   protected autobind = true;
-  protected eventDispatcher: EventDispatcher = new EventDispatcher("toast");
-
   static get observedAttributes() {
     return [];
   }

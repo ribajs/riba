@@ -148,12 +148,14 @@ export abstract class Component extends FakeHTMLElement {
      * After all required and passed attributes are set we load the template and bind the component
      */
     if (this.ready()) {
-      return this.loadTemplate().then((template) => {
-        if (this.autobind) {
-          return this.bind();
-        }
-        return null;
-      });
+      await this.beforeTemplate();
+      const template = await this.loadTemplate();
+      await this.afterTemplate(template);
+      if (this.autobind) {
+        await this.bind();
+      }
+      await this.onReady();
+      return;
     }
     this.debug(
       `Not all required or passed attributes are set to load and bind the template`,
@@ -421,7 +423,7 @@ export abstract class Component extends FakeHTMLElement {
     // console.warn('adoptedCallback called', oldDocument, newDocument);
   }
 
-  protected async loadTemplate() {
+  protected async loadTemplate(): Promise<string | null> {
     if (this.templateLoaded === true) {
       // this.debug("template already loaded");
       return null;
@@ -514,11 +516,23 @@ export abstract class Component extends FakeHTMLElement {
   }
 
   protected async beforeBind(): Promise<any> {
-    // console.warn('beforeBind', this.bound);
+    // this.debug('beforeBind', this.bound);
   }
 
   protected async afterBind(): Promise<any> {
-    // console.warn('afterBind', this.bound);
+    // this.debug('afterBind', this.bound);
+  }
+
+  protected async beforeTemplate(): Promise<any> {
+    // this.debug('beforeTemplate');
+  }
+
+  protected async afterTemplate(template: string | null): Promise<any> {
+    // this.debug('afterTemplate', template);
+  }
+
+  protected async onReady(): Promise<any> {
+    // this.debug('onReady', this.bound);
   }
 
   private askForRibaParent() {

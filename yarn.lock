@@ -2871,6 +2871,7 @@ __metadata:
   dependencies:
     "@babel/runtime": ^7.10.3
     "@babel/runtime-corejs3": ^7.10.3
+    "@ribajs/tsconfig": "portal:infra/tsconfig::locator=ribajs%40workspace%3A."
     babel-jest: ^26.1.0
   languageName: unknown
   linkType: soft

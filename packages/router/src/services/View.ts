@@ -1,5 +1,5 @@
-import { EventDispatcher } from '@ribajs/core';
-import { State } from '@ribajs/history';
+import { EventDispatcher } from "@ribajs/core";
+import { State } from "@ribajs/history";
 import { extend } from "@ribajs/utils/src/type";
 
 /**
@@ -19,7 +19,7 @@ abstract class BaseView {
   /**
    * Helper to extend the object
    */
-  public extend(obj: object) {
+  public extend(obj: any) {
     return extend(false, this, obj);
   }
 
@@ -30,36 +30,46 @@ abstract class BaseView {
    * container when the page is loaded.
    */
   public init() {
-
-    this.dispatcher.on('initStateChange', (viewId: string, newStatus: State, oldStatus: State) => {
-      if (oldStatus && oldStatus.namespace === this.namespace) {
-        this.onLeave();
+    this.dispatcher.on(
+      "initStateChange",
+      (viewId: string, newStatus: State, oldStatus: State) => {
+        if (oldStatus && oldStatus.namespace === this.namespace) {
+          this.onLeave();
+        }
       }
-    });
+    );
 
-    this.dispatcher.on('newPageReady', (viewId: string, newStatus: State, oldStatus: State, container: HTMLElement/*, html: string, isInit: boolean*/) => {
+    this.dispatcher.on("newPageReady", (
+      viewId: string,
+      newStatus: State,
+      oldStatus: State,
+      container: HTMLElement /*, html: string, isInit: boolean*/
+    ) => {
       this.container = container;
       if (newStatus.namespace === this.namespace) {
         this.onEnter();
       }
     });
 
-    this.dispatcher.on('transitionCompleted', (viewId: string, newStatus: State, oldStatus: State) => {
-      if (newStatus.namespace === this.namespace) {
-        this.onEnterCompleted();
-      }
+    this.dispatcher.on(
+      "transitionCompleted",
+      (viewId: string, newStatus: State, oldStatus: State) => {
+        if (newStatus.namespace === this.namespace) {
+          this.onEnterCompleted();
+        }
 
-      if (oldStatus && oldStatus.namespace === this.namespace) {
-        this.onLeaveCompleted();
+        if (oldStatus && oldStatus.namespace === this.namespace) {
+          this.onLeaveCompleted();
+        }
       }
-    });
+    );
   }
 
- /**
-  * This function will be fired when the container
-  * is ready and attached to the DOM.
-  */
- protected abstract onEnter(): any;
+  /**
+   * This function will be fired when the container
+   * is ready and attached to the DOM.
+   */
+  protected abstract onEnter(): any;
 
   /**
    * This function will be fired when the transition
