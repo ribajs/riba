@@ -9,3 +9,7 @@ export interface Toast {
   animation?: boolean;
   toastService?: ToastService;
 }
+
+export interface ToastBinderData extends Toast {
+  channel?: string;
+}

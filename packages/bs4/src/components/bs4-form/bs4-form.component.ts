@@ -1,11 +1,4 @@
-import {
-  Component,
-  EventDispatcher,
-  HttpService,
-  HttpMethod,
-  HttpDataType,
-} from "@ribajs/core";
-import { Toast } from "@ribajs/bs4/src/interfaces";
+import { Component, HttpService, HttpMethod, HttpDataType } from "@ribajs/core";
 import template from "./bs4-form.component.html";
 import { stripHtml, camelCase } from "@ribajs/utils/src/type";
 import { getInputValue } from "@ribajs/utils/src/dom";
@@ -28,12 +21,6 @@ export interface Scope {
   form: ValidationObject;
   onSubmit: Bs4FormComponent["onSubmit"];
 
-  showToast: boolean;
-  toastChannel: string;
-  successToastMessage: string;
-  successToastTitle?: string;
-  errorToastMessage: string;
-  errorToastTitle?: string;
   disableSubmitUntilChange: boolean;
   submitDisabled: boolean;
   /**
@@ -71,12 +58,6 @@ export class Bs4FormComponent extends Component {
 
   static get observedAttributes() {
     return [
-      "show-toast",
-      "toast-channel",
-      "success-toast-message",
-      "success-toast-title",
-      "error-toast-message",
-      "error-toast-title",
       "disable-submit-until-change",
       "use-ajax",
       "ajax-request-type",
@@ -87,22 +68,12 @@ export class Bs4FormComponent extends Component {
 
   protected formEl: HTMLFormElement | null = null;
 
-  protected toastDispatcher?: EventDispatcher;
-
   protected scope: Scope = {
     form: {
       fields: {},
       valid: false,
       error: undefined,
     },
-
-    //only used when form is not submitted. (e.g. october ajax api)
-    showToast: false,
-    toastChannel: "toast",
-    successToastTitle: "Notice",
-    successToastMessage: "Submitted.",
-    errorToastTitle: "Error",
-    errorToastMessage: "Transmission error.",
 
     disableSubmitUntilChange: false,
 
@@ -136,7 +107,6 @@ export class Bs4FormComponent extends Component {
 
   protected async afterBind() {
     super.afterBind();
-    this.toastDispatcher = new EventDispatcher(this.scope.toastChannel);
   }
 
   protected stripHtml() {
@@ -234,17 +204,6 @@ export class Bs4FormComponent extends Component {
         detail: { response: err, success: true, error: false },
       })
     );
-
-    // show notification
-    if (this.scope.showToast) {
-      const toast: Toast = {
-        message: this.scope.errorToastMessage,
-        title: this.scope.errorToastTitle,
-        delay: 10000,
-      };
-      this.toastDispatcher?.trigger("show-toast", toast);
-      console.debug("onErrorSubmit", toast, this.scope);
-    }
   }
 
   protected onSuccessSubmit(response?: any) {
@@ -257,16 +216,6 @@ export class Bs4FormComponent extends Component {
         detail: { response, success: true, error: false },
       })
     );
-
-    // show notification
-    if (this.scope.showToast) {
-      const toast: Toast = {
-        message: this.scope.successToastMessage,
-        title: this.scope.successToastTitle,
-        delay: 10000,
-      };
-      this.toastDispatcher?.trigger("show-toast", toast);
-    }
   }
 
   protected validate(form: HTMLFormElement, validationScope: ValidationObject) {

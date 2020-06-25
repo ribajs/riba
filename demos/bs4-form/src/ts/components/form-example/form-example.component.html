@@ -4,7 +4,13 @@
 <div class="container-fluid">
   <div class="row">
     <section class="col-12 mb-5">
-      <bs4-form show-toast="true" toast-channel="formular" success-toast-message="Contact form sent successfully!" success-toast-title="Message" error-toast-message="Contact form could not be sent!" error-toast-title="Error" use-ajax="true" ajax-request-type="form" auto-set-form-data="false">
+      <bs4-form
+        rv-show-toast-on-submit-success="{'message': 'Contact form sent successfully!', 'title': 'Message', 'channel': 'formular'}"
+        rv-show-toast-on-submit-error="{'message': 'Contact form could not be sent!', 'title': 'Error', 'channel': 'formular'}"
+        use-ajax="true"
+        ajax-request-type="form"
+        auto-set-form-data="false"
+      >
         <form rv-on-submit="onSubmit" action="/" method="get"> 
           <div class="form-row">
             <div class="col-md-4 mb-3">
