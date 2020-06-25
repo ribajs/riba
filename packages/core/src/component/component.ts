@@ -284,6 +284,14 @@ export abstract class Component extends FakeHTMLElement {
       binding: Binding,
       el: HTMLElement
     ) {
+      if (!this || !this.call) {
+        const error = new Error(
+          `[rv-${binding.type}="${binding.keypath}"] Event handler "${binding.keypath}" not found!"`
+        );
+        console.error(binding, el);
+        throw error;
+      }
+
       this.call(self, event, binding.view.models, el);
     };
   }
@@ -516,11 +524,11 @@ export abstract class Component extends FakeHTMLElement {
   }
 
   protected async beforeBind(): Promise<any> {
-    // this.debug('beforeBind', this.bound);
+    this.debug("beforeBind", this.scope);
   }
 
   protected async afterBind(): Promise<any> {
-    // this.debug('afterBind', this.bound);
+    this.debug("afterBind", this.scope);
   }
 
   protected async beforeTemplate(): Promise<any> {

@@ -101,7 +101,7 @@ export class Bs4FormComponent extends Component {
     }
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 

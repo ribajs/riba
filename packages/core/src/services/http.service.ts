@@ -213,10 +213,10 @@ export class HttpService {
           body = JSON.stringify(data);
         }
       }
-      console.debug("url", url);
-      console.debug("method", method);
-      console.debug("body", body);
-      console.debug("headers", headers);
+      // console.debug("url", url);
+      // console.debug("method", method);
+      // console.debug("body", body);
+      // console.debug("headers", headers);
       return fetch(url, {
         credentials: "same-origin",
         cache,

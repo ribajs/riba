@@ -13,13 +13,14 @@ export class LoadScriptComponent extends Component {
   protected autobind = false;
 
   static get observedAttributes() {
-    return ["src", "id", "async"];
+    return ["src", "id", "async", "defer"];
   }
 
   protected scope: Scope = {
     src: "",
     id: "",
     async: true,
+    defer: true,
   };
 
   constructor(element?: HTMLElement) {

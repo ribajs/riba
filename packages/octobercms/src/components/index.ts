@@ -1,0 +1,1 @@
+export { OcFormComponent } from "./oc-form/oc-form.component";

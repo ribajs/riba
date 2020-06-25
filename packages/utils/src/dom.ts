@@ -189,7 +189,7 @@ export const ready = (callback: () => void) => {
   checkReady();
 }
 
-export const loadScript = async (src: string, id: string, async: boolean) => {
+export const loadScript = async (src: string, id: string, async: boolean = true, defer: boolean = true) => {
   return new Promise((resolve, reject) => {
     if (document.getElementById(id)) {
       console.warn("script already loaded, do nothing.");
@@ -201,6 +201,9 @@ export const loadScript = async (src: string, id: string, async: boolean) => {
     script.src = src;
     if (async) {
       script.async = true;
+    }
+    if (defer) {
+      script.defer = true;
     }
     // IE
     if ((script as any).readyState) {
