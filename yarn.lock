@@ -2555,9 +2555,11 @@ __metadata:
     "@babel/preset-typescript": ^7.10.1
     "@babel/runtime-corejs3": ^7.10.3
     "@ribajs/bs4": "portal:packages/bs4::locator=ribajs%40workspace%3A."
+    "@ribajs/core": "portal:packages/core::locator=ribajs%40workspace%3A."
     "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@ribajs/jquery": "portal:packages/jquery::locator=ribajs%40workspace%3A."
     "@ribajs/tsconfig": "portal:infra/tsconfig::locator=ribajs%40workspace%3A."
+    "@ribajs/utils": "portal:packages/utils::locator=ribajs%40workspace%3A."
     "@types/jest": ^26.0.3
     "@typescript-eslint/eslint-plugin": ^3.4.0
     "@typescript-eslint/parser": ^3.4.0

@@ -1,7 +1,7 @@
 import { Component, HttpService, HttpMethod, HttpDataType } from "@ribajs/core";
 import template from "./bs4-form.component.html";
 import { stripHtml, camelCase } from "@ribajs/utils/src/type";
-import { getInputValue } from "@ribajs/utils/src/dom";
+import { getInputValue, getUID } from "@ribajs/utils/src/dom";
 
 export interface ValidationObject {
   fields: {
@@ -18,6 +18,7 @@ export interface SubmitSettings {
 }
 
 export interface Scope {
+  id: string;
   form: ValidationObject;
   onSubmit: Bs4FormComponent["onSubmit"];
 
@@ -58,6 +59,7 @@ export class Bs4FormComponent extends Component {
 
   static get observedAttributes() {
     return [
+      "id",
       "disable-submit-until-change",
       "use-ajax",
       "ajax-request-type",
@@ -68,23 +70,30 @@ export class Bs4FormComponent extends Component {
 
   protected formEl: HTMLFormElement | null = null;
 
-  protected scope: Scope = {
-    form: {
-      fields: {},
-      valid: false,
-      error: undefined,
-    },
+  protected getDefaultScope(): Scope {
+    const scope: Scope = {
+      id: getUID("form"),
 
-    disableSubmitUntilChange: false,
+      form: {
+        fields: {},
+        valid: false,
+        error: undefined,
+      },
 
-    submitDisabled: false,
-    onSubmit: this.onSubmit,
+      disableSubmitUntilChange: false,
 
-    useAjax: true,
-    ajaxRequestType: "form",
-    autoSetFormData: true,
-    stripHtml: true,
-  };
+      submitDisabled: false,
+      onSubmit: this.onSubmit,
+
+      useAjax: true,
+      ajaxRequestType: "form",
+      autoSetFormData: true,
+      stripHtml: true,
+    };
+    return scope;
+  }
+
+  protected scope: Scope = this.getDefaultScope();
 
   constructor(element?: HTMLElement) {
     super(element);
@@ -93,7 +102,10 @@ export class Bs4FormComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     this.init(Bs4FormComponent.observedAttributes);
+    this.addEventListeners();
+  }
 
+  protected addEventListeners() {
     if (this.scope.disableSubmitUntilChange) {
       this.el.addEventListener("input", () => {
         this.scope.submitDisabled = false;
@@ -103,6 +115,11 @@ export class Bs4FormComponent extends Component {
 
   protected requiredAttributes(): string[] {
     return [];
+  }
+
+  protected async beforeBind() {
+    super.beforeBind();
+    this.el.id = this.scope.id;
   }
 
   protected async afterBind() {
@@ -123,6 +140,7 @@ export class Bs4FormComponent extends Component {
   }
 
   public onSubmit(event: Event) {
+    // this.debug("onSubmit", event, this.scope);
     if (!this.formEl) {
       console.warn("No form found");
       return false;
@@ -198,6 +216,7 @@ export class Bs4FormComponent extends Component {
   }
 
   protected onErrorSubmit(err?: Error) {
+    this.debug("onSuccessSubmit");
     this.el.dispatchEvent(
       new CustomEvent("submit-error", {
         detail: { response: err, success: true, error: false },
@@ -206,6 +225,7 @@ export class Bs4FormComponent extends Component {
   }
 
   protected onSuccessSubmit(response?: any) {
+    this.debug("onSuccessSubmit");
     if (this.scope.disableSubmitUntilChange) {
       this.scope.submitDisabled = true;
     }

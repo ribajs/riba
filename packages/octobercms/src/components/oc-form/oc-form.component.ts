@@ -7,7 +7,7 @@ export interface Scope extends Bs4FormScope {
 export class OcFormComponent extends Bs4FormComponent {
   public static tagName = "oc-form";
 
-  public _debug = true;
+  public _debug = false;
 
   static get observedAttributes() {
     return [...Bs4FormComponent.observedAttributes, "october-handler"];
@@ -19,49 +19,22 @@ export class OcFormComponent extends Bs4FormComponent {
     return requiredAttributes;
   }
 
-  protected scope: Scope = {
-    form: {
-      fields: {},
-      valid: false,
-      error: undefined,
-    },
+  protected getDefaultScope(): Scope {
+    const scope = super.getDefaultScope() as Partial<Scope>;
+    scope.octoberHandler = "";
+    return scope as Scope;
+  }
 
-    disableSubmitUntilChange: false,
-
-    submitDisabled: false,
-    onSubmit: this.onSubmit,
-
-    useAjax: true,
-    ajaxRequestType: "form",
-    autoSetFormData: true,
-    stripHtml: true,
-
-    octoberHandler: "",
-  };
-  
-  // constructor(element?: HTMLElement) {
-  //   super(element);
-  // }
+  protected scope: Scope = this.getDefaultScope();
 
   protected connectedCallback() {
     this.debug("connectedCallback");
-    super.connectedCallback();
     this.init(OcFormComponent.observedAttributes);
-
-    if (this.scope.disableSubmitUntilChange) {
-      this.el.addEventListener("input", () => {
-        this.scope.submitDisabled = false;
-      });
-    }
+    this.addEventListeners();
   }
 
-
-  // public onSubmit(event: Event) {
-  //   this.debug("onSubmit", this.scope);
-  //   return super.onSubmit(event);
-  // }
-
   protected ajaxSubmit() {
+    this.debug("ajaxSubmit", this.scope.octoberHandler);
     const submitSettings = this.getSubmitSettings();
     if (!submitSettings) {
       console.warn("Can't get submit settings");
@@ -70,19 +43,21 @@ export class OcFormComponent extends Bs4FormComponent {
 
     if (!this.formEl) {
       console.warn("No form found");
-      return false;
+      return;
     }
 
-    (window.jQuery(this.formEl) as any).request(this.scope.octoberHandler, {
-      success: (data: any) => {
-        this.debug("ajaxSubmit success", data);
-        this.onSuccessSubmit(data);
-      },
-      error: (err: Error) => {
-        console.error(err);
-        this.onErrorSubmit(err);
-      }
+    // See October CMS JavaScript API: https://octobercms.com/docs/ajax/javascript-api
+    const $form = window.jQuery(this.formEl);
+    ($form as any).request(this.scope.octoberHandler);
+
+    // See October CMS JavaScript API AJAX handlers: https://octobercms.com/docs/ajax/handlers
+    $form.one("ajaxSuccess", (event: JQuery.Event, context: any, data: any, statusText: string, jqXHR: any) => {
+      this.onSuccessSubmit(data);
     });
+    $form.one("ajaxError", (event: JQuery.Event, context: any, data: any, statusText: string, jqXHR: any) => {
+      this.onErrorSubmit(new Error(statusText));
+    });
+
   }
 
 }

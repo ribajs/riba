@@ -5,6 +5,7 @@ interface Scope {
   src: string;
   id: string;
   async: boolean;
+  defer: boolean;
 }
 
 export class LoadScriptComponent extends Component {
