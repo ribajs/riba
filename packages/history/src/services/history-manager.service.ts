@@ -1,15 +1,14 @@
-import { State } from '../types/state';
+import { State } from "../types/state";
 /**
  * HistoryManager helps to keep track of the navigation
  */
 export class HistoryManager {
-
   private static instance: HistoryManager;
 
   /**
    * Keep track of the status in historic order
    */
-  private readonly history: State[] = new Array();
+  private readonly history: State[] = [];
 
   constructor() {
     if (HistoryManager.instance) {
@@ -49,5 +48,4 @@ export class HistoryManager {
       url,
     });
   }
-
 }

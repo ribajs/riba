@@ -1,7 +1,9 @@
 # don't ever lint node_modules
-node_modules
+node_modules/*
 # don't lint build output (make sure it's set to your correct build folder name)
-dist
+dist/*
+packages/*/dist/*
+packages/*/lib/*
 
 # Ignore config files
 babel.config.js
@@ -9,4 +11,5 @@ cssnano.config.js
 jest.config.js
 webpack.config.js
 
-src/lib/*/files
+**/*.spec.ts
+infra/schematics/**

@@ -1,8 +1,8 @@
-import { Utils as ExtraUtils } from '../utils.service';
-import { Position } from '../../types';
+import { Utils as ExtraUtils } from "../utils.service";
+import { Position } from "../../types";
 
 // import { ScrollEventsService } from './scroll-events.service';
-import { BaseTouchEventsService } from './base-touch-events.service';
+import { BaseTouchEventsService } from "./base-touch-events.service";
 
 /**
  * Vanilla version of jQuery Mobile Events
@@ -41,10 +41,10 @@ export interface Settings {
 
   touchCapable: boolean;
 
-  startevent: Array<'touchstart' | 'mousedown'>;
-  endevent: Array<'touchend' | 'touchcancel' | 'mouseup'>;
-  moveevent: Array<'touchmove' | 'mousemove'>;
-  tapevent: Array<'tap' | 'click'>;
+  startevent: Array<"touchstart" | "mousedown">;
+  endevent: Array<"touchend" | "touchcancel" | "mouseup">;
+  moveevent: Array<"touchmove" | "mousemove">;
+  tapevent: Array<"tap" | "click">;
 }
 
 export interface Offset {
@@ -66,7 +66,6 @@ export enum TouchType {
 }
 
 export class TouchEventsService extends BaseTouchEventsService {
-
   // GETTERS:
 
   public get isTouchCapable() {
@@ -96,34 +95,43 @@ export class TouchEventsService extends BaseTouchEventsService {
   // SETTERS:
 
   /** Set the X threshold of swipe events */
-  public set swipeThresholdX( threshold: number ) {
-    if ( typeof threshold !== 'number' ) { throw new Error('Threshold parameter must be a type of number'); }
+  public set swipeThresholdX(threshold: number) {
+    if (typeof threshold !== "number") {
+      throw new Error("Threshold parameter must be a type of number");
+    }
     this.settings.swipeHThreshold = threshold;
   }
 
   /** Set the Y threshold of swipe events */
-  public set swipeThresholdY( threshold: number ) {
-    if ( typeof threshold !== 'number' ) { throw new Error('Threshold parameter must be a type of number'); }
+  public set swipeThresholdY(threshold: number) {
+    if (typeof threshold !== "number") {
+      throw new Error("Threshold parameter must be a type of number");
+    }
     this.settings.swipeVThreshold = threshold;
   }
 
   /** Set the double tap interval */
-  public set doubleTapInt( interval: number ) {
-    if ( typeof interval !== 'number' ) { throw new Error('Interval parameter must be a type of number'); }
+  public set doubleTapInt(interval: number) {
+    if (typeof interval !== "number") {
+      throw new Error("Interval parameter must be a type of number");
+    }
     this.settings.doubletapInterval = interval;
   }
 
   /** Set the taphold threshold */
-  public set tapHoldThreshold( threshold: number ) {
-    if ( typeof threshold !== 'number' ) { throw new Error('Threshold parameter must be a type of number'); }
+  public set tapHoldThreshold(threshold: number) {
+    if (typeof threshold !== "number") {
+      throw new Error("Threshold parameter must be a type of number");
+    }
     this.settings.tapholdThreshold = threshold;
   }
 
   /** Set the pixel range for tapas */
-  public set tapRange( range: number ) {
-    if ( typeof range !== 'number' ) { throw new Error('Ranger parameter must be a type of number'); }
-    this.
-    settings.tapPixelRange = range;
+  public set tapRange(range: number) {
+    if (typeof range !== "number") {
+      throw new Error("Ranger parameter must be a type of number");
+    }
+    this.settings.tapPixelRange = range;
   }
 
   // PROPERTIES:
@@ -197,28 +205,33 @@ export class TouchEventsService extends BaseTouchEventsService {
 
   // protected scrollEvents: ScrollEventsService;
 
-  constructor(el: HTMLElement, settings: Settings = {
-    tapPixelRange: 5,
-    swipeHThreshold: 50,
-    swipeVThreshold: 50,
-    tapholdThreshold: 750,
-    doubletapInterval: 500,
-    shakeThreshold: 15,
-    touchCapable: ('ontouchstart' in window),
+  constructor(
+    el: HTMLElement,
+    settings: Settings = {
+      tapPixelRange: 5,
+      swipeHThreshold: 50,
+      swipeVThreshold: 50,
+      tapholdThreshold: 750,
+      doubletapInterval: 500,
+      shakeThreshold: 15,
+      touchCapable: "ontouchstart" in window,
 
-    startevent:  ['touchstart'],
-    endevent:    ['touchend'],
-    moveevent:   ['touchmove'],
-    tapevent:    ['tap'],
-  }) {
+      startevent: ["touchstart"],
+      endevent: ["touchend"],
+      moveevent: ["touchmove"],
+      tapevent: ["tap"],
+    }
+  ) {
     super(el);
     this.el = el;
 
     // Set settings by device type (if device is touch capable)
-    settings.startevent = settings.touchCapable ? ['touchstart'] : ['mousedown'];
-    settings.endevent = settings.touchCapable ? ['touchend'] : ['mouseup'];
-    settings.moveevent = settings.touchCapable ? ['touchmove'] : ['mousemove'];
-    settings.tapevent = settings.touchCapable ? ['tap'] : ['click'];
+    settings.startevent = settings.touchCapable
+      ? ["touchstart"]
+      : ["mousedown"];
+    settings.endevent = settings.touchCapable ? ["touchend"] : ["mouseup"];
+    settings.moveevent = settings.touchCapable ? ["touchmove"] : ["mousemove"];
+    settings.tapevent = settings.touchCapable ? ["tap"] : ["click"];
 
     this.settings = settings;
 
@@ -247,24 +260,45 @@ export class TouchEventsService extends BaseTouchEventsService {
 
   // HELPER METHODS:
 
-  protected getSwipeDir(startPosition: Position, endPosition: Position, hThreshold: number = this.settings.swipeHThreshold, vThreshold: number = this.settings.swipeVThreshold) {
-    let swipeDir = '';
-    if (startPosition.y > endPosition.y && (startPosition.y - endPosition.y > vThreshold)) {
-      swipeDir = 'swipeup';
+  protected getSwipeDir(
+    startPosition: Position,
+    endPosition: Position,
+    hThreshold: number = this.settings.swipeHThreshold,
+    vThreshold: number = this.settings.swipeVThreshold
+  ) {
+    let swipeDir = "";
+    if (
+      startPosition.y > endPosition.y &&
+      startPosition.y - endPosition.y > vThreshold
+    ) {
+      swipeDir = "swipeup";
     }
-    if (startPosition.x < endPosition.x && (endPosition.x - startPosition.x > hThreshold)) {
-      swipeDir = 'swiperight';
+    if (
+      startPosition.x < endPosition.x &&
+      endPosition.x - startPosition.x > hThreshold
+    ) {
+      swipeDir = "swiperight";
     }
-    if (startPosition.y < endPosition.y && (endPosition.y - startPosition.y > vThreshold)) {
-      swipeDir = 'swipedown';
+    if (
+      startPosition.y < endPosition.y &&
+      endPosition.y - startPosition.y > vThreshold
+    ) {
+      swipeDir = "swipedown";
     }
-    if (startPosition.x > endPosition.x && (startPosition.x - endPosition.x > hThreshold)) {
-      swipeDir = 'swipeleft';
+    if (
+      startPosition.x > endPosition.x &&
+      startPosition.x - endPosition.x > hThreshold
+    ) {
+      swipeDir = "swipeleft";
     }
     return swipeDir;
   }
 
-  protected getPostion(event: TouchEvent | MouseEvent, type: TouchType = TouchType.DEFAULT, index = 0): Position {
+  protected getPostion(
+    event: TouchEvent | MouseEvent,
+    type: TouchType = TouchType.DEFAULT,
+    index = 0
+  ): Position {
     let touchesTypes: TouchList;
     switch (type) {
       case TouchType.CHANGED:
@@ -278,13 +312,21 @@ export class TouchEventsService extends BaseTouchEventsService {
         break;
     }
     const position = {
-      x: (this.settings.touchCapable) ? touchesTypes[index].pageX : (event as MouseEvent).pageX,
-      y: (this.settings.touchCapable) ? touchesTypes[index].pageY : (event as MouseEvent).pageY,
+      x: this.settings.touchCapable
+        ? touchesTypes[index].pageX
+        : (event as MouseEvent).pageX,
+      y: this.settings.touchCapable
+        ? touchesTypes[index].pageY
+        : (event as MouseEvent).pageY,
     };
     return position;
   }
 
-  protected getOffset(event: TouchEvent | MouseEvent, type: TouchType = TouchType.DEFAULT, index = 0): Offset {
+  protected getOffset(
+    event: TouchEvent | MouseEvent,
+    type: TouchType = TouchType.DEFAULT,
+    index = 0
+  ): Offset {
     const boundingClientRect = this.el.getBoundingClientRect();
     let touchesTypes: TouchList;
     switch (type) {
@@ -299,33 +341,62 @@ export class TouchEventsService extends BaseTouchEventsService {
         break;
     }
     const offset = {
-      x: (this.settings.touchCapable) ? Math.round(touchesTypes[index].pageX - (boundingClientRect ? boundingClientRect.left : 0)) : Math.round((event as any as MouseEvent).pageX - (boundingClientRect ? boundingClientRect.left : 0)),
-      y: (this.settings.touchCapable) ? Math.round(touchesTypes[index].pageY - (boundingClientRect ? boundingClientRect.top : 0)) : Math.round((event as any as MouseEvent).pageY - (boundingClientRect ? boundingClientRect.top : 0)),
+      x: this.settings.touchCapable
+        ? Math.round(
+            touchesTypes[index].pageX -
+              (boundingClientRect ? boundingClientRect.left : 0)
+          )
+        : Math.round(
+            ((event as any) as MouseEvent).pageX -
+              (boundingClientRect ? boundingClientRect.left : 0)
+          ),
+      y: this.settings.touchCapable
+        ? Math.round(
+            touchesTypes[index].pageY -
+              (boundingClientRect ? boundingClientRect.top : 0)
+          )
+        : Math.round(
+            ((event as any) as MouseEvent).pageY -
+              (boundingClientRect ? boundingClientRect.top : 0)
+          ),
     };
     return offset;
   }
 
-  protected getTouchData(event: TouchEvent | MouseEvent, withIndex = false, positionType = TouchType.DEFAULT, offsetType = TouchType.CHANGED): TouchData {
+  protected getTouchData(
+    event: TouchEvent | MouseEvent,
+    withIndex = false,
+    positionType = TouchType.DEFAULT,
+    offsetType = TouchType.CHANGED
+  ): TouchData {
     const touchData: TouchData = {
       position: this.getPostion(event, positionType),
       offset: this.getOffset(event, offsetType),
       time: Date.now(),
     };
     if (withIndex) {
-      touchData.index = ExtraUtils.getElementIndex(event.target as Element | null);
+      touchData.index = ExtraUtils.getElementIndex(
+        event.target as Element | null
+      );
     }
     return touchData;
   }
 
   protected addEventListeners() {
     for (const eventName of this.settings.startevent) {
-      this.el.addEventListener<any>(eventName, this.onStartEvent.bind(this), {passive: true});
+      this.el.addEventListener<any>(eventName, this.onStartEvent.bind(this), {
+        passive: true,
+      });
     }
     for (const eventName of this.settings.moveevent) {
-      this.el.addEventListener<any>(eventName, this.onMoveEvent.bind(this), {passive: true});
+      this.el.addEventListener<any>(eventName, this.onMoveEvent.bind(this), {
+        passive: true,
+      });
     }
     for (const eventName of this.settings.endevent) {
-      this.el.addEventListener<any>(eventName, this.onEndEvent.bind(this), {passive: true});
+      this.el.addEventListener<any>(eventName, this.onEndEvent.bind(this), {
+        passive: true,
+      });
     }
   }
 
@@ -345,7 +416,12 @@ export class TouchEventsService extends BaseTouchEventsService {
     // For `doubletap`
     this.doubletapped = false;
     if (!this.firstTap) {
-      this.firstTap = this.getTouchData(event, true, TouchType.DEFAULT, TouchType.CHANGED);
+      this.firstTap = this.getTouchData(
+        event,
+        true,
+        TouchType.DEFAULT,
+        TouchType.CHANGED
+      );
     }
 
     // For `tap`, `swipe`
@@ -355,7 +431,12 @@ export class TouchEventsService extends BaseTouchEventsService {
     // For `swipe`
     this.originalCoord = this.getPostion(event, TouchType.TARGET);
     this.finalCoord = this.getPostion(event, TouchType.TARGET);
-    this.startEvnt = this.getTouchData(event, false, TouchType.DEFAULT, TouchType.CHANGED);
+    this.startEvnt = this.getTouchData(
+      event,
+      false,
+      TouchType.DEFAULT,
+      TouchType.CHANGED
+    );
 
     this.tapstart(event);
     this.taphold(event);
@@ -392,19 +473,31 @@ export class TouchEventsService extends BaseTouchEventsService {
 
   /** tapstart Event */
   protected tapstart(event: TouchEvent | MouseEvent) {
-    this.triggerCustomEvent('tapstart', event, this.getTouchData(event, false, TouchType.DEFAULT, TouchType.CHANGED));
+    this.triggerCustomEvent(
+      "tapstart",
+      event,
+      this.getTouchData(event, false, TouchType.DEFAULT, TouchType.CHANGED)
+    );
     return true;
   }
 
   /** tapmove Event */
   protected tapmove(event: TouchEvent | MouseEvent) {
-    this.triggerCustomEvent('tapmove', event, this.getTouchData(event, false, TouchType.DEFAULT, TouchType.CHANGED));
+    this.triggerCustomEvent(
+      "tapmove",
+      event,
+      this.getTouchData(event, false, TouchType.DEFAULT, TouchType.CHANGED)
+    );
     return true;
   }
 
   /** tapend Event */
   protected tapend(event: TouchEvent | MouseEvent) {
-    this.triggerCustomEvent('tapend', event, this.getTouchData(event, false, TouchType.CHANGED, TouchType.CHANGED));
+    this.triggerCustomEvent(
+      "tapend",
+      event,
+      this.getTouchData(event, false, TouchType.CHANGED, TouchType.CHANGED)
+    );
     return true;
   }
 
@@ -418,44 +511,56 @@ export class TouchEventsService extends BaseTouchEventsService {
 
       // helded?
       if (
-        (
-          this.startPosition.x === this.endPosition.x
-          &&
-          this.startPosition.y === this.endPosition.y
-        )
-        ||
-        (
-          diffPosition.x >= -this.settings.tapPixelRange
-          &&
-          diffPosition.x <= this.settings.tapPixelRange
-          &&
-          diffPosition.y >= -this.settings.tapPixelRange
-          &&
-          diffPosition.y <= this.settings.tapPixelRange
-        )
+        (this.startPosition.x === this.endPosition.x &&
+          this.startPosition.y === this.endPosition.y) ||
+        (diffPosition.x >= -this.settings.tapPixelRange &&
+          diffPosition.x <= this.settings.tapPixelRange &&
+          diffPosition.y >= -this.settings.tapPixelRange &&
+          diffPosition.y <= this.settings.tapPixelRange)
       ) {
         this.tapheld = true;
         const endTime = Date.now();
         const duration = endTime - this.startTime;
-        const touchesLength: number = ((event as TouchEvent).targetTouches) ? (event as TouchEvent).targetTouches.length : 1;
+        const touchesLength: number = (event as TouchEvent).targetTouches
+          ? (event as TouchEvent).targetTouches.length
+          : 1;
         const touches = new Array<Partial<TouchData>>();
 
         for (let i = 0; i < touchesLength; i++) {
           const elOffset = this.el.getBoundingClientRect();
           const touch = {
             position: {
-              x: (this.settings.touchCapable) ? (event as TouchEvent).changedTouches[i].pageX : (event as MouseEvent).pageX,
-              y: (this.settings.touchCapable) ? (event as TouchEvent).changedTouches[i].pageY : (event as MouseEvent).pageY,
+              x: this.settings.touchCapable
+                ? (event as TouchEvent).changedTouches[i].pageX
+                : (event as MouseEvent).pageX,
+              y: this.settings.touchCapable
+                ? (event as TouchEvent).changedTouches[i].pageY
+                : (event as MouseEvent).pageY,
             },
             offset: {
-              x: (this.settings.touchCapable) ? Math.round((event as TouchEvent).changedTouches[i].pageX - (elOffset ? elOffset.left : 0)) : Math.round((event as MouseEvent).pageX - (elOffset ? elOffset.left : 0)),
-              y: (this.settings.touchCapable) ? Math.round((event as TouchEvent).changedTouches[i].pageY - (elOffset ? elOffset.top : 0)) : Math.round((event as MouseEvent).pageY - (elOffset ? elOffset.top : 0)),
+              x: this.settings.touchCapable
+                ? Math.round(
+                    (event as TouchEvent).changedTouches[i].pageX -
+                      (elOffset ? elOffset.left : 0)
+                  )
+                : Math.round(
+                    (event as MouseEvent).pageX - (elOffset ? elOffset.left : 0)
+                  ),
+              y: this.settings.touchCapable
+                ? Math.round(
+                    (event as TouchEvent).changedTouches[i].pageY -
+                      (elOffset ? elOffset.top : 0)
+                  )
+                : Math.round(
+                    (event as MouseEvent).pageY - (elOffset ? elOffset.top : 0)
+                  ),
             },
           };
 
           touches.push(touch);
         }
-        const eventName = (touchesLength > 1) ? 'taphold' + touchesLength : 'taphold';
+        const eventName =
+          touchesLength > 1 ? "taphold" + touchesLength : "taphold";
 
         const touchData = {
           touches,
@@ -465,7 +570,6 @@ export class TouchEventsService extends BaseTouchEventsService {
 
         this.triggerCustomEvent(eventName, event, touchData);
       }
-
     }, this.settings.tapholdThreshold);
 
     return true;
@@ -481,26 +585,27 @@ export class TouchEventsService extends BaseTouchEventsService {
     }
 
     if (
-      delta < this.settings.doubletapInterval
-      &&
-      delta > 100
-      &&
-      (
-        this.firstTap
-        &&
-        ExtraUtils.getElementIndex(event.target as Element | null) === this.firstTap.index
-      )
+      delta < this.settings.doubletapInterval &&
+      delta > 100 &&
+      this.firstTap &&
+      ExtraUtils.getElementIndex(event.target as Element | null) ===
+        this.firstTap.index
     ) {
       this.doubletapped = true;
       window.clearTimeout(this.tapTimer);
-      const lastTap: TouchData = this.getTouchData(event, true, TouchType.CHANGED, TouchType.CHANGED);
+      const lastTap: TouchData = this.getTouchData(
+        event,
+        true,
+        TouchType.CHANGED,
+        TouchType.CHANGED
+      );
       const touchData = {
         firstTap: this.firstTap,
         secondTap: lastTap,
         interval: lastTap.time - this.firstTap.time,
       };
       if (!this.cooling) {
-        this.triggerCustomEvent('doubletap', event, touchData);
+        this.triggerCustomEvent("doubletap", event, touchData);
         this.firstTap = null;
       }
       this.cooling = true;
@@ -508,10 +613,14 @@ export class TouchEventsService extends BaseTouchEventsService {
         this.cooling = false;
       }, this.settings.doubletapInterval);
     } else {
-      this.actionTimer = window.setTimeout(() => {
-        this.firstTap = null;
-        window.clearTimeout(this.actionTimer);
-      }, this.settings.doubletapInterval, [event]);
+      this.actionTimer = window.setTimeout(
+        () => {
+          this.firstTap = null;
+          window.clearTimeout(this.actionTimer);
+        },
+        this.settings.doubletapInterval,
+        [event]
+      );
     }
     this.lastTouch = now;
   }
@@ -527,37 +636,25 @@ export class TouchEventsService extends BaseTouchEventsService {
         y: this.startPosition.y - this.endPosition.y,
       };
       if (
-        !this.doubletapped
-        &&
-        !this.tapheld
-        &&
-        (
-          (
-            (
-              this.startPosition.x === this.endPosition.x
-            )
-            &&
-            (
-              this.startPosition.y === this.endPosition.y
-            )
-          )
-          ||
-          (
-            diffPosition.x >= -this.settings.tapPixelRange
-            &&
-            diffPosition.x <= this.settings.tapPixelRange
-            &&
-            diffPosition.y >= -this.settings.tapPixelRange
-            &&
-            diffPosition.y <= this.settings.tapPixelRange
-          )
-        )
+        !this.doubletapped &&
+        !this.tapheld &&
+        ((this.startPosition.x === this.endPosition.x &&
+          this.startPosition.y === this.endPosition.y) ||
+          (diffPosition.x >= -this.settings.tapPixelRange &&
+            diffPosition.x <= this.settings.tapPixelRange &&
+            diffPosition.y >= -this.settings.tapPixelRange &&
+            diffPosition.y <= this.settings.tapPixelRange))
       ) {
-        const touchData: TouchData = this.getTouchData(event, false, TouchType.CHANGED, TouchType.CHANGED);
+        const touchData: TouchData = this.getTouchData(
+          event,
+          false,
+          TouchType.CHANGED,
+          TouchType.CHANGED
+        );
 
         // Was it a taphold?
-        if ((touchData.time - this.startTime) < this.settings.tapholdThreshold) {
-          this.triggerCustomEvent('singletap', event, touchData);
+        if (touchData.time - this.startTime < this.settings.tapholdThreshold) {
+          this.triggerCustomEvent("singletap", event, touchData);
         }
       }
     }, this.settings.doubletapInterval);
@@ -571,43 +668,48 @@ export class TouchEventsService extends BaseTouchEventsService {
     };
 
     if (
-      this.tapStarted
-      &&
-      (
-        (Date.now() - this.startTime) < this.settings.tapholdThreshold
-      )
-      &&
-      (
-        (
-          this.startPosition.x === this.endPosition.x
-          &&
-          this.startPosition.y === this.endPosition.y
-        )
-        ||
-        (
-          diffPosition.x >= -this.settings.tapPixelRange
-          &&
-          diffPosition.x <= this.settings.tapPixelRange
-          &&
-          diffPosition.y >= -this.settings.tapPixelRange
-          &&
-          diffPosition.y <= this.settings.tapPixelRange
-        )
-      )
+      this.tapStarted &&
+      Date.now() - this.startTime < this.settings.tapholdThreshold &&
+      ((this.startPosition.x === this.endPosition.x &&
+        this.startPosition.y === this.endPosition.y) ||
+        (diffPosition.x >= -this.settings.tapPixelRange &&
+          diffPosition.x <= this.settings.tapPixelRange &&
+          diffPosition.y >= -this.settings.tapPixelRange &&
+          diffPosition.y <= this.settings.tapPixelRange))
     ) {
-      const touchesLength: number = ((event as TouchEvent).targetTouches) ? (event as TouchEvent).targetTouches.length : 1;
+      const touchesLength: number = (event as TouchEvent).targetTouches
+        ? (event as TouchEvent).targetTouches.length
+        : 1;
       const touches = new Array<Partial<TouchData>>();
 
       for (let i = 0; i < touchesLength; i++) {
         const elOffset = this.el.getBoundingClientRect();
         const touch = {
           position: {
-            x: (this.settings.touchCapable) ? (event as TouchEvent).changedTouches[i].pageX : (event as MouseEvent).pageX,
-            y: (this.settings.touchCapable) ? (event as TouchEvent).changedTouches[i].pageY : (event as MouseEvent).pageY,
+            x: this.settings.touchCapable
+              ? (event as TouchEvent).changedTouches[i].pageX
+              : (event as MouseEvent).pageX,
+            y: this.settings.touchCapable
+              ? (event as TouchEvent).changedTouches[i].pageY
+              : (event as MouseEvent).pageY,
           },
           offset: {
-            x: (this.settings.touchCapable) ? Math.round((event as TouchEvent).changedTouches[i].pageX - (elOffset ? elOffset.left : 0)) : Math.round((event as MouseEvent).pageX - (elOffset ? elOffset.left : 0)),
-            y: (this.settings.touchCapable) ? Math.round((event as TouchEvent).changedTouches[i].pageY - (elOffset ? elOffset.top : 0)) : Math.round((event as MouseEvent).pageY - (elOffset ? elOffset.top : 0)),
+            x: this.settings.touchCapable
+              ? Math.round(
+                  (event as TouchEvent).changedTouches[i].pageX -
+                    (elOffset ? elOffset.left : 0)
+                )
+              : Math.round(
+                  (event as MouseEvent).pageX - (elOffset ? elOffset.left : 0)
+                ),
+            y: this.settings.touchCapable
+              ? Math.round(
+                  (event as TouchEvent).changedTouches[i].pageY -
+                    (elOffset ? elOffset.top : 0)
+                )
+              : Math.round(
+                  (event as MouseEvent).pageY - (elOffset ? elOffset.top : 0)
+                ),
           },
         };
 
@@ -619,7 +721,7 @@ export class TouchEventsService extends BaseTouchEventsService {
         time: Date.now(),
       };
 
-      const eventName = (touchesLength > 1) ? 'tap' + touchesLength : 'tap';
+      const eventName = touchesLength > 1 ? "tap" + touchesLength : "tap";
       this.triggerCustomEvent(eventName, event, touchData);
     }
   }
@@ -640,7 +742,12 @@ export class TouchEventsService extends BaseTouchEventsService {
       this.finalCoord.y = 0;
       this.swipeStarted = false;
 
-      const endEvnt: TouchData = this.getTouchData(event, false, TouchType.DEFAULT, TouchType.CHANGED);
+      const endEvnt: TouchData = this.getTouchData(
+        event,
+        false,
+        TouchType.DEFAULT,
+        TouchType.CHANGED
+      );
 
       // Calculate the swipe amount (normalized):
       const xAmount = Math.abs(this.startEvnt.position.x - endEvnt.position.x);
@@ -649,13 +756,13 @@ export class TouchEventsService extends BaseTouchEventsService {
       const touchData = {
         startEvnt: this.startEvnt,
         endEvnt,
-        direction: swipeDir.replace('swipe', ''),
+        direction: swipeDir.replace("swipe", ""),
         xAmount,
         yAmount,
         duration: endEvnt.time - this.startEvnt.time,
       };
       this.hasSwiped = true;
-      this.triggerCustomEvent('swipe', event, touchData);
+      this.triggerCustomEvent("swipe", event, touchData);
       this.triggerCustomEvent(swipeDir, event, touchData);
     }
   }
@@ -665,9 +772,17 @@ export class TouchEventsService extends BaseTouchEventsService {
    * (similar `touchEnd` method in jquery touch events)
    */
   protected swipeend(event: TouchEvent | MouseEvent) {
-    const endEvnt: TouchData = this.getTouchData(event, false, TouchType.CHANGED, TouchType.CHANGED);
+    const endEvnt: TouchData = this.getTouchData(
+      event,
+      false,
+      TouchType.CHANGED,
+      TouchType.CHANGED
+    );
     if (this.hasSwiped && this.startEvnt) {
-      const swipeDir = this.getSwipeDir(this.startEvnt.position, endEvnt.position);
+      const swipeDir = this.getSwipeDir(
+        this.startEvnt.position,
+        endEvnt.position
+      );
 
       // Calculate the swipe amount (normalized):
       const xAmount = Math.abs(this.startEvnt.position.x - endEvnt.position.x);
@@ -676,14 +791,12 @@ export class TouchEventsService extends BaseTouchEventsService {
       const touchData = {
         startEvnt: this.startEvnt,
         endEvnt,
-        direction: swipeDir.replace('swipe', ''),
+        direction: swipeDir.replace("swipe", ""),
         xAmount,
         yAmount,
         duration: endEvnt.time - this.startEvnt.time,
       };
-      this.triggerCustomEvent('swipeend', event, touchData);
+      this.triggerCustomEvent("swipeend", event, touchData);
     }
   }
-
-
 }

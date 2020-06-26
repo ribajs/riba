@@ -1,5 +1,5 @@
-import { Component, EventDispatcher } from '@ribajs/core';
-import template from './shopify-linklist.component.html';
+import { Component, EventDispatcher } from "@ribajs/core";
+import template from "./shopify-linklist.component.html";
 
 export interface LinklistLink {
   active: boolean;
@@ -43,11 +43,11 @@ export interface Scope {
   showOnActiveChild: boolean;
 
   // Methods
-  toggle: ShopifyLinklistComponent['toggle'];
-  collapse: ShopifyLinklistComponent['collapse'];
-  collapseAll: ShopifyLinklistComponent['collapseAll'];
-  show: ShopifyLinklistComponent['show'];
-  showAll: ShopifyLinklistComponent['showAll'];
+  toggle: ShopifyLinklistComponent["toggle"];
+  collapse: ShopifyLinklistComponent["collapse"];
+  collapseAll: ShopifyLinklistComponent["collapseAll"];
+  show: ShopifyLinklistComponent["show"];
+  showAll: ShopifyLinklistComponent["showAll"];
 }
 
 export interface State {
@@ -59,15 +59,22 @@ export interface State {
  * shopify-filter
  */
 export class ShopifyLinklistComponent extends Component {
+  public static tagName = "shopify-linklist";
 
-  public static tagName = 'shopify-linklist';
-
-  protected mainDispatcher = new EventDispatcher('main');
+  protected mainDispatcher = new EventDispatcher("main");
 
   protected autobind = true;
 
   static get observedAttributes() {
-    return ['linklist', 'handle', 'name', 'pills', 'vertical', 'collapse-on-new-page', 'show-on-child-url'];
+    return [
+      "linklist",
+      "handle",
+      "name",
+      "pills",
+      "vertical",
+      "collapse-on-new-page",
+      "show-on-child-url",
+    ];
   }
 
   protected scope: Scope = {
@@ -86,8 +93,10 @@ export class ShopifyLinklistComponent extends Component {
 
   constructor(element?: HTMLElement, observedAttributes?: string[]) {
     super(element);
-    this.mainDispatcher.on('newPageReady', this.onNewPageReady.bind(this));
-    this.init(observedAttributes || ShopifyLinklistComponent.observedAttributes);
+    this.mainDispatcher.on("newPageReady", this.onNewPageReady.bind(this));
+    this.init(
+      observedAttributes || ShopifyLinklistComponent.observedAttributes
+    );
   }
 
   public toggle(link: LinklistLink) {
@@ -137,21 +146,33 @@ export class ShopifyLinklistComponent extends Component {
     }
   }
 
-  public attributeChangedCallback(name: string, oldValue: any, newValue: any, namespace: string | null) {
+  public attributeChangedCallback(
+    name: string,
+    oldValue: any,
+    newValue: any,
+    namespace: string | null
+  ) {
     // injects the changed attributes to scope
     super.attributeChangedCallback(name, oldValue, newValue, namespace);
 
     // set linklist by handle
-    if (name === 'handle' || name === 'name') {
-      if ((window as any).model && (window as any).model.system && (window as any).model.system.linklists && (window as any).model.system.linklists[newValue]) {
+    if (name === "handle" || name === "name") {
+      if (
+        (window as any).model &&
+        (window as any).model.system &&
+        (window as any).model.system.linklists &&
+        (window as any).model.system.linklists[newValue]
+      ) {
         this.scope.linklist = (window as any).model.system.linklists[newValue];
       } else {
-        throw new Error(`Linklist not found! \nNote: The linklist must be available under "window.model.system.linklists['${newValue}']" to set it using his handle.`);
+        throw new Error(
+          `Linklist not found! \nNote: The linklist must be available under "window.model.system.linklists['${newValue}']" to set it using his handle.`
+        );
       }
     }
 
-    if (name === 'linklist') {
-      if (typeof(newValue) === 'object') {
+    if (name === "linklist") {
+      if (typeof newValue === "object") {
         // if object is in form of "main-menu": {...}
         if (Object.keys(newValue).length === 1) {
           newValue = newValue[Object.keys(newValue)[0]];
@@ -188,7 +209,10 @@ export class ShopifyLinklistComponent extends Component {
     }
   }
 
-  protected onNewPageReady(viewId: string, currentStatus: State /*, prevStatus: State, container: HTMLElement, newPageRawHTML: string, dataset: any, isFirstPageLoad: boolean */) {
+  protected onNewPageReady(
+    viewId: string,
+    currentStatus: State /*, prevStatus: State, container: HTMLElement, newPageRawHTML: string, dataset: any, isFirstPageLoad: boolean */
+  ) {
     const url = currentStatus.url;
     if (this.scope.collapseOnNewPage) {
       this.collapseAll();
@@ -216,7 +240,7 @@ export class ShopifyLinklistComponent extends Component {
    */
   protected transformLinks(links: LinklistLink[]) {
     for (const link of links) {
-      if (link.url === '#collapse') {
+      if (link.url === "#collapse") {
         link.collapseable = true;
         link.collapsed = true;
       } else {
@@ -230,7 +254,7 @@ export class ShopifyLinklistComponent extends Component {
   }
 
   protected requiredAttributes() {
-    return ['linklist'];
+    return ["linklist"];
   }
 
   /**

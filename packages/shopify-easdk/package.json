@@ -49,6 +49,7 @@
   },
   "dependencies": {
     "@ribajs/cache": "workspace:packages/cache",
+    "@ribajs/core": "workspace:packages/core",
     "@ribajs/router": "workspace:packages/router"
   },
   "bugs": {

@@ -51,7 +51,8 @@
   },
   "dependencies": {
     "@ribajs/bs4": "workspace:packages/bs4",
-    "@ribajs/core": "workspace:packages/core"
+    "@ribajs/core": "workspace:packages/core",
+    "@ribajs/utils": "workspace:packages/utils"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

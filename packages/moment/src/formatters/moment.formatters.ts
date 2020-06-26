@@ -1,4 +1,3 @@
-
 // Date formatters
 // @see https://github.com/matthieuriolo/rivetsjs-stdlib/blob/master/src/rivetsstdlib.js
 

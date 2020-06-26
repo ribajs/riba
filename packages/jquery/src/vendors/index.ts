@@ -1,1 +1,1 @@
-export * from './jquery.module';
+export * from "./jquery.module";

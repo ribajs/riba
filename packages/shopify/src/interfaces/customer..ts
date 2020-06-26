@@ -1,5 +1,5 @@
-import { ShopifyCustomerAddress } from './address';
-import { ShopifyOrder } from './order';
+import { ShopifyCustomerAddress } from "./address";
+import { ShopifyOrder } from "./order";
 
 /**
  * The customer object

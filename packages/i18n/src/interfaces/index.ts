@@ -1,2 +1,2 @@
-export * from './langcode';
-export * from './local-var';
+export * from "./langcode";
+export * from "./local-var";

@@ -15,7 +15,7 @@ export const getUrlParameter = (name: string, url: string) => {
     return "";
   }
   return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
+};
 
 /**
  * get location object ofpath or address bar
@@ -40,7 +40,7 @@ export const getLocation = (url?: string): Location => {
   const l = document.createElement("a");
   l.href = url;
   return (l as any) as Location;
-}
+};
 
 /**
  * If the webapps url is https://mysupersite.org and the url is https://mysupersite.org/subpage?search=test
@@ -56,7 +56,7 @@ export const normalizeUrl = (url: string): string => {
   } else {
     return getUrl(url);
   }
-}
+};
 
 /**
  * Return the current full url
@@ -72,7 +72,7 @@ export const getUrl = (url?: string): string => {
     location.pathname +
     location.search
   );
-}
+};
 
 /**
  * Check if we are on the route
@@ -114,7 +114,7 @@ export const onParentRoute = (checkUrl?: string) => {
  */
 export const cleanLink = (url: string): string => {
   return url.replace(/#.*/, "");
-}
+};
 
 /**
  * Return the port number normalized, eventually you can pass a string to be normalized.
@@ -137,7 +137,7 @@ export const getPort = (p?: string, url?: string) => {
   if (protocol === "https:") {
     return 443;
   }
-}
+};
 
 /**
  * Test if url is absolute or relative
@@ -154,7 +154,7 @@ export const isAbsoluteUrl = (url: string) => {
     url.startsWith("tel:") ||
     url.startsWith("fax:");
   return isAbsolute;
-}
+};
 
 export const isExternalUrl = (absoluteUrl: string) => {
   if (isAbsoluteUrl(absoluteUrl)) {
@@ -173,21 +173,19 @@ export const isInternalUrl = (url: string) => {
   return !isExternalUrl(url);
 };
 
-
-
 /**
  * Get hash from address bar or url if set
  */
 export const getHash = (url?: string) => {
   return getLocation(url).hash;
-}
+};
 
 /**
  * Change hash from address bar
  */
 export const updateHash = (hash: string) => {
   return (window.location.hash = hash);
-}
+};
 
 /**
  * Remove hash from address bar
@@ -198,4 +196,4 @@ export const removeHash = () => {
     document.title,
     window.location.pathname + window.location.search
   );
-}
+};

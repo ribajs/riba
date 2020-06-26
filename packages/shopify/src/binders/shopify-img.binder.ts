@@ -1,8 +1,8 @@
-import { Binder } from '@ribajs/core';
-import { getViewportDimensions } from '@ribajs/utils/src/dom';
+import { Binder } from "@ribajs/core";
+import { getViewportDimensions } from "@ribajs/utils/src/dom";
 
-import { imgUrlFormatter } from '../formatters/img-url.formatter';
-import './ResizeObserver.d';
+import { imgUrlFormatter } from "../formatters/img-url.formatter";
+import "./ResizeObserver.d";
 
 const PX_OFFSET = 10;
 const OVERWRITE_ORIGINAL_SRC = true;
@@ -13,11 +13,11 @@ const OVERWRITE_ORIGINAL_SRC = true;
  * The image source path is set by the `srcset` and `sizes` attributes to make them responsive.
  */
 export const shopifyImgBinder: Binder<string> = {
-  name: 'shopify-img',
+  name: "shopify-img",
   bind(el: HTMLElement) {
     this.customData = {
       initialSrc: (el as HTMLImageElement).src,
-      oldImageWidth: ((PX_OFFSET + 1) * -1),
+      oldImageWidth: (PX_OFFSET + 1) * -1,
       setSrcset: (width: number) => {
         // Max width
         if (width > 5760) {
@@ -26,21 +26,28 @@ export const shopifyImgBinder: Binder<string> = {
         let currentSrcset = (el as HTMLImageElement).srcset;
         let currentSizes = (el as HTMLImageElement).sizes;
         if (!imgUrlFormatter.read) {
-          throw new Error('Shopify imgUrlFormatter read method is missing!');
+          throw new Error("Shopify imgUrlFormatter read method is missing!");
         }
         const vw = getViewportDimensions().w;
         const filterScale = Math.round(window.devicePixelRatio || 1);
-        const filterSize = width + 'x';
-        const newSrc = imgUrlFormatter.read(this.customData.initialSrc, filterSize, filterScale, undefined, undefined, el);
-        if (typeof(currentSrcset) === 'string' && currentSrcset.length > 0) {
-          currentSrcset = currentSrcset + ', ';
+        const filterSize = width + "x";
+        const newSrc = imgUrlFormatter.read(
+          this.customData.initialSrc,
+          filterSize,
+          filterScale,
+          undefined,
+          undefined,
+          el
+        );
+        if (typeof currentSrcset === "string" && currentSrcset.length > 0) {
+          currentSrcset = currentSrcset + ", ";
         } else {
-          currentSrcset = '';
+          currentSrcset = "";
         }
-        if (typeof(currentSizes) === 'string' && currentSizes.length > 0) {
-          currentSizes = currentSizes + ', ';
+        if (typeof currentSizes === "string" && currentSizes.length > 0) {
+          currentSizes = currentSizes + ", ";
         } else {
-          currentSizes = '';
+          currentSizes = "";
         }
         const newSrcset = `${currentSrcset}${newSrc} ${width}w`;
         const newSizes = `${currentSizes} (width: ${vw}px) ${width}px`;
@@ -53,7 +60,11 @@ export const shopifyImgBinder: Binder<string> = {
       onResize: () => {
         const currentImageWidth = el.offsetWidth;
         const currentSrcset = (el as HTMLImageElement).srcset;
-        if (this.customData.oldImageWidth + PX_OFFSET < currentImageWidth && currentImageWidth > 0 && !currentSrcset.includes(`${currentImageWidth}w`)) {
+        if (
+          this.customData.oldImageWidth + PX_OFFSET < currentImageWidth &&
+          currentImageWidth > 0 &&
+          !currentSrcset.includes(`${currentImageWidth}w`)
+        ) {
           this.customData.setSrcset(currentImageWidth);
           this.customData.oldImageWidth = currentImageWidth;
         }
@@ -61,30 +72,36 @@ export const shopifyImgBinder: Binder<string> = {
     };
     if ((window as any).ResizeObserver) {
       this.customData.resizeObserver = new ResizeObserver((entries) => {
-        entries.forEach((entry) => {
+        entries.forEach((/*entry*/) => {
           this.customData.onResize();
         });
       });
       this.customData.resizeObserver.observe(el);
     } else {
-      window.addEventListener('resize', this.customData.onResize.bind(this));
+      window.addEventListener("resize", this.customData.onResize.bind(this));
     }
   },
   unbind(el: HTMLElement) {
-    window.removeEventListener('resize', this.customData.onResize.bind(this));
-    if (this.customData.resizeObserver && this.customData.resizeObserver.unobserve) {
+    window.removeEventListener("resize", this.customData.onResize.bind(this));
+    if (
+      this.customData.resizeObserver &&
+      this.customData.resizeObserver.unobserve
+    ) {
       this.customData.resizeObserver.unobserve(el);
     }
   },
   routine(el: HTMLElement, src: string) {
     if (!imgUrlFormatter.read) {
-      throw new Error('Shopify imgUrlFormatter read method is missing!');
+      throw new Error("Shopify imgUrlFormatter read method is missing!");
     }
     if (src) {
       this.customData.onResize();
       setTimeout(this.customData.onResize, 200);
       // Set src attribute if it is not set statically
-      if (typeof(this.customData.initialSrc) !== 'string' || this.customData.initialSrc.length <= 0) {
+      if (
+        typeof this.customData.initialSrc !== "string" ||
+        this.customData.initialSrc.length <= 0
+      ) {
         this.customData.initialSrc = src;
         (el as HTMLImageElement).src = src;
       }

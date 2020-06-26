@@ -55,6 +55,7 @@
   },
   "dependencies": {
     "@ribajs/cache": "workspace:packages/cache",
+    "@ribajs/core": "workspace:packages/core",
     "@types/jquery": "^3.5.0",
     "jquery": "^3.5.1"
   },

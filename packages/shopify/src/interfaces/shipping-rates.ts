@@ -6,7 +6,7 @@ export interface ShopifyShippingRate {
   name: string;
   price: string;
   delivery_date: string | null; // Date?
-  source: 'shopify' | string;
+  source: "shopify" | string;
 }
 
 /**
@@ -22,7 +22,7 @@ export interface ShopifyShippingRateNormalized {
   name: string;
   price: number;
   delivery_date: string | null; // Date?
-  source: 'shopify' | string;
+  source: "shopify" | string;
 }
 
 /**

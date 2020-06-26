@@ -2,11 +2,10 @@
  * BaseCache it's a simple static cache
  */
 class BaseCache<T = any> {
-
   /**
    * The Object that keeps all the key value information
    */
-  public data: {[key: string]: T};
+  public data: { [key: string]: T };
 
   constructor() {
     this.data = {};
@@ -19,7 +18,7 @@ class BaseCache<T = any> {
   public set(key: string, val: T) {
     this.data[key] = val;
     // console.debug('SET key: ',key);
-    return this.data[key]
+    return this.data[key];
   }
 
   /**

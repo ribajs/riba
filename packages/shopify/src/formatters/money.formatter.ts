@@ -1,5 +1,5 @@
-import { Formatter } from '@ribajs/core';
-import { ShopifyService } from '../services/shopify.service';
+import { Formatter } from "@ribajs/core";
+import { ShopifyService } from "../services/shopify.service";
 
 /**
  * Formats the price based on the shop's HTML with currency setting (if the format is not overwritten by passing a format parameter).
@@ -12,19 +12,19 @@ import { ShopifyService } from '../services/shopify.service';
  * @see https://help.shopify.com/en/themes/liquid/filters/money-filters
  */
 export const moneyFormatter: Formatter = {
-  name: 'money',
+  name: "money",
   read(cents: string | number, format?: string) {
-    let value = '';
+    let value = "";
     const placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
     const formatString = format || this.moneyFormat;
 
     if (!formatString) {
       console.warn(`Can't parse format: ${formatString}`);
-      return '0';
+      return "0";
     }
 
-    if (typeof cents === 'string') {
-      cents = cents.replace('.', '');
+    if (typeof cents === "string") {
+      cents = cents.replace(".", "");
       // cents to float number
       cents = parseFloat(cents.toString());
     }
@@ -33,23 +33,23 @@ export const moneyFormatter: Formatter = {
 
     if (matchedFormat !== null && matchedFormat.length >= 1) {
       switch (matchedFormat[1]) {
-        case 'amount':
+        case "amount":
           value = ShopifyService.formatMoneyWithDelimiters(cents, 2);
           break;
-        case 'amount_no_decimals':
+        case "amount_no_decimals":
           value = ShopifyService.formatMoneyWithDelimiters(cents, 0);
           break;
-        case 'amount_with_comma_separator':
-          value = ShopifyService.formatMoneyWithDelimiters(cents, 2, '.', ',');
+        case "amount_with_comma_separator":
+          value = ShopifyService.formatMoneyWithDelimiters(cents, 2, ".", ",");
           break;
-        case 'amount_no_decimals_with_comma_separator':
-          value = ShopifyService.formatMoneyWithDelimiters(cents, 0, '.', ',');
+        case "amount_no_decimals_with_comma_separator":
+          value = ShopifyService.formatMoneyWithDelimiters(cents, 0, ".", ",");
           break;
       }
       return formatString.replace(placeholderRegex, value);
     }
 
     console.warn(`Can't parse format: ${formatString}`);
-    return '0';
+    return "0";
   },
 };

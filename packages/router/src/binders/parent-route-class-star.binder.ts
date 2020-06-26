@@ -1,12 +1,12 @@
-import { Binder, EventDispatcher } from '@ribajs/core';
-import { onParentRoute } from '@ribajs/utils/src/url';
+import { Binder, EventDispatcher } from "@ribajs/core";
+import { onParentRoute } from "@ribajs/utils/src/url";
 
 export const parentRouteClassStarBinder: Binder<string> = {
-  name: 'parent-route-class-*',
+  name: "parent-route-class-*",
 
   bind(/*el: HTMLUnknownElement*/) {
     this.customData = {
-      dispatcher: new EventDispatcher('main'),
+      dispatcher: new EventDispatcher("main"),
     };
   },
 
@@ -16,10 +16,10 @@ export const parentRouteClassStarBinder: Binder<string> = {
    * @param url Url to compare with the current location
    */
   routine(el: HTMLElement, url: string) {
-    const className = this.args[0].toString() || 'active';
-    const isAnkerHTMLElement = el.tagName === 'A';
+    const className = this.args[0].toString() || "active";
+    const isAnkerHTMLElement = el.tagName === "A";
     if (!url && isAnkerHTMLElement) {
-      const href = el.getAttribute('href');
+      const href = el.getAttribute("href");
       if (href) {
         url = href;
       }
@@ -29,21 +29,21 @@ export const parentRouteClassStarBinder: Binder<string> = {
         if (onParentRoute(urlToCheck)) {
           el.classList.add(className);
           // check if element is radio input
-          if (el.getAttribute('type') === 'radio') {
+          if (el.getAttribute("type") === "radio") {
             (el as HTMLInputElement).checked = true;
           }
           return true;
         } else {
           el.classList.remove(className);
           // uncheck if element is radio input
-          if (el.getAttribute('type') === 'radio') {
+          if (el.getAttribute("type") === "radio") {
             (el as HTMLInputElement).checked = false;
           }
         }
       }
       return false;
     };
-    this.customData.dispatcher.on('newPageReady', () => onUrlChange(url));
+    this.customData.dispatcher.on("newPageReady", () => onUrlChange(url));
     onUrlChange(url);
   },
 

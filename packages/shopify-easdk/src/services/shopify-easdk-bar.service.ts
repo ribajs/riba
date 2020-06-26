@@ -1,38 +1,36 @@
-
 import {
   EASDK,
-  EASDKWrapper,
+  // EASDKWrapper,
   BarConfig,
-  Bar,
+  // Bar,
   BarWrapper,
   LoadingStateWrapper,
-  Config,
+  // Config,
   PaginationConfig,
   ButtonConfig,
   ButtonsConfig,
-  ButtonCallback,
-  Modal,
-  ModalWrapper,
-  ModalInit,
-  ModalAlertOptions,
-  ModalConfirmOptions,
-  ModalInputOptions,
-  ProductPickerOptions,
-  ProductPickerCallback,
-  User,
-  UserData,
-  ReceiveMessage,
-  ShopifyApp,
-} from '../interfaces/shopify-easdk';
+  // ButtonCallback,
+  // Modal,
+  // ModalWrapper,
+  // ModalInit,
+  // ModalAlertOptions,
+  // ModalConfirmOptions,
+  // ModalInputOptions,
+  // ProductPickerOptions,
+  // ProductPickerCallback,
+  // User,
+  // UserData,
+  // ReceiveMessage,
+  // ShopifyApp,
+} from "../interfaces/shopify-easdk";
 
-import { EventDispatcher } from '@ribajs/core';
+import { EventDispatcher } from "@ribajs/core";
 
-import { State } from '@ribajs/router';
+import { State } from "@ribajs/router";
 
-import { WrapperService } from './wrapper.service';
+import { WrapperService } from "./wrapper.service";
 
 export class BarWrapperService extends WrapperService implements BarWrapper {
-
   /**
    * Singleton instace
    */
@@ -80,13 +78,11 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
    * @type {boolean>}
    * @memberof BarWrapperService
    */
-  public showFallbackBar: boolean = false;
+  public showFallbackBar = false;
 
-  protected route = new EventDispatcher('main');
+  protected route = new EventDispatcher("main");
 
-  constructor(
-    shopifyApp?: EASDK,
-  ) {
+  constructor(shopifyApp?: EASDK) {
     super(shopifyApp);
     if (BarWrapperService.instance) {
       return BarWrapperService.instance;
@@ -106,7 +102,7 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
     this.title = config.title;
     this.icon = config.icon;
     this.pagination = config.pagination;
-    this.event.trigger('bar:initialize', this.useFallback(false), {
+    this.event.trigger("bar:initialize", this.useFallback(false), {
       buttons: this.buttons,
       breadcrumb: this.breadcrumb,
       title: this.title,
@@ -126,7 +122,7 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
     const showFallbackBar = this.useFallback(forceFallback);
     if (this.showFallbackBar !== showFallbackBar) {
       this.showFallbackBar = showFallbackBar;
-      this.event.trigger('bar:setShowFallbackBar', this.showFallbackBar);
+      this.event.trigger("bar:setShowFallbackBar", this.showFallbackBar);
     }
   }
 
@@ -139,15 +135,15 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
    * @returns {void}
    * @memberof BarWrapperService
    */
-  public loadingOn(forceFallback: boolean = false): void {
+  public loadingOn(forceFallback = false): void {
     if (this.loading.on !== true) {
       const fallback = this.useFallback(forceFallback);
       this.loading = {
         on: true,
       };
-      console.debug('loadingOn', fallback, this.loading);
-      this.event.trigger('bar:loading', fallback, this.loading);
-      this.event.trigger('bar:loadingOn', fallback, this.loading);
+      console.debug("loadingOn", fallback, this.loading);
+      this.event.trigger("bar:loading", fallback, this.loading);
+      this.event.trigger("bar:loadingOn", fallback, this.loading);
       return this.shopifyApp.Bar.loadingOn();
     }
   }
@@ -162,9 +158,9 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
         on: false,
       };
       const fallback = this.useFallback(false);
-      console.debug('loadingOff', fallback);
-      this.event.trigger('bar:loading', fallback, this.loading);
-      this.event.trigger('bar:loadingOff', fallback, this.loading);
+      console.debug("loadingOff", fallback);
+      this.event.trigger("bar:loading", fallback, this.loading);
+      this.event.trigger("bar:loadingOff", fallback, this.loading);
       return this.shopifyApp.Bar.loadingOff();
     }
   }
@@ -176,23 +172,37 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
    * @param forceFallback
    * @memberof BarWrapperService
    */
-  public autoLoading(forceFallback: boolean = false) {
-    this.route.on('newPageReady', (viewId: string, currentStatus: State, prevStatus: State, container: HTMLElement, newPageRawHTML: string, dataset: any, isFirstPageLoad: boolean) => {
-      this.loadingOff();
-    });
+  public autoLoading(forceFallback = false) {
+    this.route.on(
+      "newPageReady",
+      (
+        // viewId: string,
+        // currentStatus: State,
+        // prevStatus: State,
+        // container: HTMLElement,
+        // newPageRawHTML: string,
+        // dataset: any,
+        // isFirstPageLoad: boolean
+      ) => {
+        this.loadingOff();
+      }
+    );
 
-    this.route.on('initStateChange', (viewId: string, currentStatus: State, prevStatus: State) => {
-      this.loadingOn(forceFallback);
-    });
+    this.route.on(
+      "initStateChange",
+      (/*viewId: string, currentStatus: State, prevStatus: State*/) => {
+        this.loadingOn(forceFallback);
+      }
+    );
   }
 
   /**
    * Manually set the title string in the top bar. See shopifyApp.Bar.initialize().
    */
-  public setTitle(title: string = ''): void {
+  public setTitle(title = ""): void {
     if (this.title !== title) {
       this.title = title; // for the fallback
-      this.event.trigger('bar:setTitle', this.useFallback(false), this.title);
+      this.event.trigger("bar:setTitle", this.useFallback(false), this.title);
       return this.shopifyApp.Bar.setTitle(title);
     }
   }
@@ -201,19 +211,30 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
    * Automatically set the title on route change, needs the title property in rbia route dataset
    */
   public autoTitle(formatter?: (title: string) => Promise<string>) {
-    this.route.on('newPageReady', (viewId: string, currentStatus: State, prevStatus: State, container: HTMLElement, newPageRawHTML: string, dataset: any, isFirstPageLoad: boolean) => {
-      if (formatter) {
-        formatter(dataset.title)
-        .then((title) => {
-          this.setTitle(title);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-      } else {
-        this.setTitle(dataset.title);
+    this.route.on(
+      "newPageReady",
+      (
+        viewId: string,
+        currentStatus: State,
+        prevStatus: State,
+        container: HTMLElement,
+        newPageRawHTML: string,
+        dataset: any,
+        // isFirstPageLoad: boolean
+      ) => {
+        if (formatter) {
+          formatter(dataset.title)
+            .then((title) => {
+              this.setTitle(title);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        } else {
+          this.setTitle(dataset.title);
+        }
       }
-    });
+    );
   }
 
   /**
@@ -223,7 +244,7 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
   public setIcon(icon: string): void {
     if (this.icon !== icon) {
       this.icon = icon;
-      this.event.trigger('bar:setIcon', this.useFallback(false), this.icon);
+      this.event.trigger("bar:setIcon", this.useFallback(false), this.icon);
       return this.shopifyApp.Bar.setIcon(this.icon);
     }
   }
@@ -231,10 +252,21 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
   /**
    * Automatically set the icon on route change, needs the icon property in rbia route dataset
    */
-  public autoIcon(forceFallback: boolean = false) {
-    this.route.on('newPageReady', (viewId: string, currentStatus: State, prevStatus: State, container: HTMLElement, newPageRawHTML: string, dataset: any, isFirstPageLoad: boolean) => {
-      this.setTitle(dataset.icon);
-    });
+  public autoIcon(/*forceFallback = false*/) {
+    this.route.on(
+      "newPageReady",
+      (
+        viewId: string,
+        currentStatus: State,
+        prevStatus: State,
+        container: HTMLElement,
+        newPageRawHTML: string,
+        dataset: any,
+        // isFirstPageLoad: boolean
+      ) => {
+        this.setTitle(dataset.icon);
+      }
+    );
   }
 
   /**
@@ -243,7 +275,11 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
   public setPagination(config?: PaginationConfig): void {
     if (this.pagination !== config) {
       this.pagination = config;
-      this.event.trigger('bar:setPagination', this.useFallback(false), this.pagination);
+      this.event.trigger(
+        "bar:setPagination",
+        this.useFallback(false),
+        this.pagination
+      );
       this.shopifyApp.Bar.setPagination(config);
     }
   }
@@ -257,9 +293,12 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
   public setBreadcrumb(config?: ButtonConfig) {
     if (this.breadcrumb !== config) {
       this.breadcrumb = config;
-      this.event.trigger('bar:setBreadcrumb', this.useFallback(false), this.breadcrumb);
+      this.event.trigger(
+        "bar:setBreadcrumb",
+        this.useFallback(false),
+        this.breadcrumb
+      );
       return this.shopifyApp.Bar.setBreadcrumb(config);
     }
   }
-
 }

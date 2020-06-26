@@ -31,8 +31,9 @@
     "Browser"
   ],
   "scripts": {
-    "packages:test": "cd packages/core && yarn run test && cd ../bs4 && yarn run test",
-    "packages:lint": "cd packages/core && yarn run lint && cd ../bs4 && yarn run lint",
+    "test": "jest --config=jest.config.js",
+    "test:watch": "jest --config=jest.config.js --watch",
+    "lint": "eslint packages/ --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
     "packages:bump": "node tools/cli.js bump",
     "packages:publish": "node tools/cli.js publish",
     "packages:upgrade": "yarn upgrade-interactive && yarn run packages:install",
@@ -48,19 +49,45 @@
     "packages:configure:demos": "node tools/cli.js configure-demos"
   },
   "devDependencies": {
+    "@babel/cli": "^7.10.3",
+    "@babel/core": "^7.10.3",
+    "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.10.3",
+    "@babel/plugin-proposal-optional-chaining": "^7.10.3",
+    "@babel/plugin-syntax-export-default-from": "^7.10.1",
+    "@babel/plugin-transform-runtime": "^7.10.3",
+    "@babel/preset-env": "^7.10.3",
+    "@babel/preset-typescript": "^7.10.1",
     "@babel/runtime": "^7.10.3",
+    "@babel/runtime-corejs3": "^7.10.3",
     "@ribajs/eslint-config": "workspace:infra/eslint-config",
-    "@ribajs/tsconfig": "^1.9.0-alpha.0",
+    "@ribajs/tsconfig": "workspace:infra/tsconfig",
+    "@ribajs/types": "workspace:infra/types",
+    "@types/core-js": "^2.5.3",
+    "@types/jest": "^26.0.3",
+    "@types/node": "^14.0.14",
     "@typescript-eslint/eslint-plugin": "^3.4.0",
     "@typescript-eslint/experimental-utils": "^3.4.0",
     "@typescript-eslint/parser": "^3.4.0",
     "@yarnpkg/pnpify": "^2.0.0-rc.25",
     "babel-jest": "^26.1.0",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-array-includes": "^2.0.3",
+    "core-js": "^3.6.5",
     "eslint": "^7.3.1",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "jest": "^26.1.0",
+    "jest-config": "^26.1.0",
+    "jest-extended": "^0.11.5",
     "prettier": "^2.0.5",
-    "typescript": "^3.9.5"
+    "source-map-support": "^0.5.19",
+    "ts-jest": "^26.1.1",
+    "typescript": "^3.9.5",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^5.0.0-beta.18",
+    "webpack-cli": "^3.3.12",
+    "webpack-glob-entry": "^2.1.1"
   },
   "dependencies": {
     "chalk": "^4.1.0",
@@ -69,8 +96,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "yarn run packages:test",
-      "pre-commit": "yarn run packages:lint"
+      "pre-push": "yarn run test",
+      "disabled: pre-commit": "yarn run lint"
     }
   },
   "workspaces": {

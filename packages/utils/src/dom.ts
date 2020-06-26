@@ -1,4 +1,4 @@
-export const MAX_UID = 1000
+export const MAX_UID = 1000;
 
 /**
  *
@@ -25,7 +25,7 @@ export const getInputValue = (el: HTMLElement) => {
   } else {
     return (el as HTMLInputElement).value;
   }
-}
+};
 
 export const elementIsHidden = (el: HTMLElement) => {
   return (
@@ -35,11 +35,11 @@ export const elementIsHidden = (el: HTMLElement) => {
     window.getComputedStyle(el).display === "none" ||
     window.getComputedStyle(el).visibility === "hidden"
   );
-}
+};
 
 export const elementIsVisable = (el: HTMLElement) => {
   return !elementIsHidden(el);
-}
+};
 
 /**
  * Scrolls to an element by event and selector
@@ -91,7 +91,7 @@ export const scrollTo = (
     left,
     top,
   });
-}
+};
 
 export const getElementFromEvent = (event: Event | MouseEvent | TouchEvent) => {
   const el =
@@ -100,7 +100,7 @@ export const getElementFromEvent = (event: Event | MouseEvent | TouchEvent) => {
     ((event as MouseEvent).relatedTarget as HTMLAnchorElement) ||
     ((event as any).fromElement as HTMLAnchorElement);
   return el;
-}
+};
 
 export const getViewportDimensions = () => {
   const w = Math.max(
@@ -115,7 +115,7 @@ export const getViewportDimensions = () => {
     h,
     w,
   };
-}
+};
 
 /**
  * Select all of an contenteditable or input element
@@ -158,7 +158,7 @@ export const selectAll = (element: HTMLInputElement) => {
       document.execCommand("selectAll", false, undefined);
     }
   }, 0);
-}
+};
 
 /**
  * Cross-browser Document Ready check
@@ -187,9 +187,14 @@ export const ready = (callback: () => void) => {
     document.addEventListener("DOMContentLoaded", checkReady);
   }
   checkReady();
-}
+};
 
-export const loadScript = async (src: string, id: string, async: boolean = true, defer: boolean = true) => {
+export const loadScript = async (
+  src: string,
+  id: string,
+  async = true,
+  defer = true
+) => {
   return new Promise((resolve, reject) => {
     if (document.getElementById(id)) {
       console.warn("script already loaded, do nothing.");
@@ -229,7 +234,7 @@ export const loadScript = async (src: string, id: string, async: boolean = true,
     };
     document.getElementsByTagName("head")[0].appendChild(script);
   });
-}
+};
 
 export const getUID = (prefix: string): string => {
   do {
@@ -237,4 +242,4 @@ export const getUID = (prefix: string): string => {
   } while (document.getElementById(prefix));
 
   return prefix;
-}
+};

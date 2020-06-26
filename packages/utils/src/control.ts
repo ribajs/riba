@@ -1,10 +1,10 @@
-import { Deferred } from './types'
+import { Deferred } from "./types";
 
 export const times = (n: number, cb: () => void) => {
   for (let i = 0; i < n; i++) {
     cb();
   }
-}
+};
 
 /**
  * Return a new "Deferred" object
@@ -20,7 +20,7 @@ export const deferred = () => {
   });
   obj.promise = prom;
   return obj as Deferred;
-}
+};
 
 /**
  * The debounce function receives our function as a parameter

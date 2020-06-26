@@ -1,4 +1,4 @@
-import { EventDispatcher } from '@ribajs/core';
+import { EventDispatcher } from "@ribajs/core";
 
 export interface GameloopOptions {
   maxFPS?: number;
@@ -9,8 +9,7 @@ export interface GameloopOptions {
  * @see https://isaacsukin.com/news/2015/01/detailed-explanation-javascript-game-loops-and-timing#fps-control
  */
 export class Gameloop {
-
-  public static events = new EventDispatcher('gameloop');
+  public static events = new EventDispatcher("gameloop");
 
   public static maxFPS = 60;
 
@@ -19,9 +18,8 @@ export class Gameloop {
   }
 
   public static startLoop(options: GameloopOptions = {}) {
-
     this.setOptions(options);
-  
+
     if (!this.loopStarted) {
       this.loopStarted = true;
       window.requestAnimationFrame(this.loop.bind(this));
@@ -46,7 +44,8 @@ export class Gameloop {
   protected static frameID = 0;
 
   protected static setOptions(options: GameloopOptions) {
-    this.maxFPS = typeof(options.maxFPS) === 'number' ? options.maxFPS : this.maxFPS;
+    this.maxFPS =
+      typeof options.maxFPS === "number" ? options.maxFPS : this.maxFPS;
   }
 
   /**
@@ -54,9 +53,8 @@ export class Gameloop {
    * @param timestamp
    */
   protected static loop(timestamp: number) {
-
     // Throttle the frame rate.
-    if (timestamp < this.lastFrameTimeMs + (1000 / this.maxFPS)) {
+    if (timestamp < this.lastFrameTimeMs + 1000 / this.maxFPS) {
       this.frameID = requestAnimationFrame(this.loop.bind(this));
       return;
     }
@@ -93,19 +91,19 @@ export class Gameloop {
   }
 
   protected static begin(timestamp: number, delta: number) {
-    this.events.trigger('begin', timestamp, delta);
+    this.events.trigger("begin", timestamp, delta);
   }
 
   protected static render(interp: number) {
-    this.events.trigger('render', interp);
+    this.events.trigger("render", interp);
   }
 
   protected static update(delta: number) {
-    this.events.trigger('update', delta);
+    this.events.trigger("update", delta);
   }
 
   protected static end(delta: number) {
-    this.events.trigger('end', delta);
+    this.events.trigger("end", delta);
   }
 
   protected static panic() {
@@ -115,5 +113,4 @@ export class Gameloop {
   constructor(options: GameloopOptions = {}) {
     Gameloop.setOptions(options);
   }
-
 }

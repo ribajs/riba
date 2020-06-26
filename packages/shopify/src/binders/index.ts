@@ -1,1 +1,1 @@
-export { shopifyImgBinder } from './shopify-img.binder';
+export { shopifyImgBinder } from "./shopify-img.binder";

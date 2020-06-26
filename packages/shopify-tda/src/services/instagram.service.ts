@@ -1,9 +1,9 @@
-import { HttpService } from '@ribajs/core';
-import { BaseService } from './base.service';
+import { HttpService } from "@ribajs/core";
+import { BaseService } from "./base.service";
 
 export interface InstagramMediaData {
   media_url: string;
-  media_type: 'VIDEO' | 'IMAGE' | 'CAROUSEL_ALBUM';
+  media_type: "VIDEO" | "IMAGE" | "CAROUSEL_ALBUM";
   caption: string;
   id: string;
   comments_count: number;
@@ -31,8 +31,7 @@ export interface InstagramResponse {
 }
 
 export class InstagramService {
-
-  public static baseUrl = BaseService.baseUrl + '/instagram/api';
+  public static baseUrl = BaseService.baseUrl + "/instagram/api";
 
   public static async loadMedia(instagramId: string, limit = 0) {
     const url = `${this.baseUrl}/media/${instagramId}`;
@@ -46,5 +45,4 @@ export class InstagramService {
 
     return HttpService.getJSON(url, data);
   }
-
 }

@@ -1,6 +1,4 @@
-import {
-  Component,
-} from '@ribajs/core';
+import { Component } from "@ribajs/core";
 
 import {
   BarConfig,
@@ -10,9 +8,9 @@ import {
   ButtonsConfig,
   PaginationConfig,
   ButtonConfig,
-} from '../../index';
+} from "../../index";
 
-import pugTemplate from './bar.component.pug';
+import pugTemplate from "./bar.component.pug";
 
 interface Scope extends BarConfig {
   /**
@@ -51,11 +49,18 @@ interface Scope extends BarConfig {
 }
 
 export class BarComponent extends Component {
-
-  public static tagName: string = 'rv-shopify-easdk-bar';
+  public static tagName = "rv-shopify-easdk-bar";
 
   static get observedAttributes() {
-    return ['buttons', 'title', 'icon', 'pagination', 'breadcrumb', 'loading', 'show-fallback-bar'];
+    return [
+      "buttons",
+      "title",
+      "icon",
+      "pagination",
+      "breadcrumb",
+      "loading",
+      "show-fallback-bar",
+    ];
   }
 
   protected bar: BarWrapper = new shopifyEasdkModule.services.BarWrapperService();
@@ -71,74 +76,84 @@ export class BarComponent extends Component {
   }
 
   protected listenForConfigChanges() {
-
-    this.bar.event.on('bar:setShowFallbackBar', (showFallbackBar: boolean) => {
+    this.bar.event.on("bar:setShowFallbackBar", (showFallbackBar: boolean) => {
       this.scope.showFallbackBar = showFallbackBar;
     });
 
-    this.bar.event.on('bar:initialize', (fallback: boolean, config: BarConfig) => {
-      if (this.scope.buttons !== config.buttons) {
-        this.scope.buttons = config.buttons;
+    this.bar.event.on(
+      "bar:initialize",
+      (fallback: boolean, config: BarConfig) => {
+        if (this.scope.buttons !== config.buttons) {
+          this.scope.buttons = config.buttons;
+        }
+        if (this.scope.breadcrumb !== config.breadcrumb) {
+          this.scope.breadcrumb = config.breadcrumb;
+        }
+        if (this.scope.title !== config.title) {
+          this.scope.title = config.title;
+        }
+        if (this.scope.icon !== config.icon) {
+          this.scope.icon = config.icon;
+        }
+        if (this.scope.pagination !== config.pagination) {
+          this.scope.pagination = config.pagination;
+        }
+        console.debug("bar:initialize", fallback, config);
       }
-      if (this.scope.breadcrumb !== config.breadcrumb) {
-        this.scope.breadcrumb = config.breadcrumb;
-      }
-      if (this.scope.title !== config.title) {
-        this.scope.title = config.title;
-      }
-      if (this.scope.icon !== config.icon) {
-        this.scope.icon = config.icon;
-      }
-      if (this.scope.pagination !== config.pagination) {
-        this.scope.pagination = config.pagination;
-      }
-      console.debug('bar:initialize', fallback, config);
-    });
+    );
 
-    this.bar.event.on('bar:setTitle', (fallback: boolean, title: string) => {
+    this.bar.event.on("bar:setTitle", (fallback: boolean, title: string) => {
       if (this.scope.title !== title) {
         this.scope.title = title;
       }
-      console.debug('bar:setTitle', fallback, title);
+      console.debug("bar:setTitle", fallback, title);
     });
 
-    this.bar.event.on('bar:loading', (fallback: boolean, loading: LoadingStateWrapper) => {
-      if (this.scope.loading !== loading.on) {
-        this.scope.loading = loading.on;
+    this.bar.event.on(
+      "bar:loading",
+      (fallback: boolean, loading: LoadingStateWrapper) => {
+        if (this.scope.loading !== loading.on) {
+          this.scope.loading = loading.on;
+        }
+        console.debug("bar:loading", fallback, loading);
       }
-      console.debug('bar:loading', fallback, loading);
-    });
+    );
 
-    this.bar.event.on('bar:setPagination', (fallback: boolean, pagination?: PaginationConfig) => {
-      if (this.scope.pagination !== pagination) {
-        this.scope.pagination = pagination;
+    this.bar.event.on(
+      "bar:setPagination",
+      (fallback: boolean, pagination?: PaginationConfig) => {
+        if (this.scope.pagination !== pagination) {
+          this.scope.pagination = pagination;
+        }
+        console.debug("bar:setPagination", fallback, pagination);
       }
-      console.debug('bar:setPagination', fallback, pagination);
-    });
+    );
 
-    this.bar.event.on('bar:setBreadcrumb', (fallback: boolean, breadcrumb?: ButtonConfig) => {
-      if (this.scope.breadcrumb !== breadcrumb) {
-        this.scope.breadcrumb = breadcrumb;
+    this.bar.event.on(
+      "bar:setBreadcrumb",
+      (fallback: boolean, breadcrumb?: ButtonConfig) => {
+        if (this.scope.breadcrumb !== breadcrumb) {
+          this.scope.breadcrumb = breadcrumb;
+        }
+        console.debug("bar:setBreadcrumb", fallback, breadcrumb);
       }
-      console.debug('bar:setBreadcrumb', fallback, breadcrumb);
-    });
-
+    );
   }
 
   protected async beforeBind() {
     await super.beforeBind();
-    this.scope.buttons =  this.bar.buttons;
-    this.scope.breadcrumb =  this.bar.breadcrumb;
-    this.scope.title =  this.bar.title;
-    this.scope.icon =  this.bar.icon;
-    this.scope.pagination =  this.bar.pagination;
-    this.scope.showFallbackBar =  this.bar.showFallbackBar;
-    console.debug('beforeBind');
+    this.scope.buttons = this.bar.buttons;
+    this.scope.breadcrumb = this.bar.breadcrumb;
+    this.scope.title = this.bar.title;
+    this.scope.icon = this.bar.icon;
+    this.scope.pagination = this.bar.pagination;
+    this.scope.showFallbackBar = this.bar.showFallbackBar;
+    console.debug("beforeBind");
   }
 
   protected async afterBind() {
     await super.afterBind();
-    console.debug('afterBind', this.scope);
+    console.debug("afterBind", this.scope);
   }
 
   protected requiredAttributes() {
@@ -150,30 +165,40 @@ export class BarComponent extends Component {
     super.disconnectedCallback();
   }
 
-  protected attributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
-    super.attributeChangedCallback(attributeName, oldValue, newValue, namespace);
+  protected attributeChangedCallback(
+    attributeName: string,
+    oldValue: any,
+    newValue: any,
+    namespace: string | null
+  ) {
+    super.attributeChangedCallback(
+      attributeName,
+      oldValue,
+      newValue,
+      namespace
+    );
 
-    if (attributeName === 'buttons') {
+    if (attributeName === "buttons") {
       this.bar.initialize(this.scope);
     }
 
-    if (attributeName === 'title') {
+    if (attributeName === "title") {
       this.bar.setTitle(this.scope.title);
     }
 
-    if (attributeName === 'title' && this.scope.icon) {
+    if (attributeName === "title" && this.scope.icon) {
       this.bar.setIcon(this.scope.icon);
     }
 
-    if (attributeName === 'pagination') {
+    if (attributeName === "pagination") {
       this.bar.setPagination(this.scope.pagination);
     }
 
-    if (attributeName === 'breadcrumb') {
+    if (attributeName === "breadcrumb") {
       this.bar.setBreadcrumb(this.scope.breadcrumb);
     }
 
-    if (attributeName === 'loading') {
+    if (attributeName === "loading") {
       if (this.scope.loading) {
         this.bar.loadingOn();
       } else {
@@ -181,7 +206,7 @@ export class BarComponent extends Component {
       }
     }
 
-    if (attributeName === 'show-fallback-bar') {
+    if (attributeName === "show-fallback-bar") {
       this.bar.setShowFallbackBar(this.scope.showFallbackBar);
     }
   }
@@ -190,11 +215,11 @@ export class BarComponent extends Component {
     let template: string | null = null;
     // Only set the component template if there no childs already
     if (this.el.hasChildNodes()) {
-      console.debug('Do not template, because element has child nodes');
+      console.debug("Do not template, because element has child nodes");
       return template;
     } else {
       template = pugTemplate(this.scope);
-      console.debug('Use template', template);
+      console.debug("Use template", template);
       return template;
     }
   }

@@ -1,13 +1,12 @@
-import { Binder, EventDispatcher } from '@ribajs/core';
-import { onRoute } from '@ribajs/utils/src/url';
+import { Binder, EventDispatcher } from "@ribajs/core";
+import { onRoute } from "@ribajs/utils/src/url";
 
 export const routeClassStarBinder: Binder<string> = {
-
-  name: 'route-class-*',
+  name: "route-class-*",
 
   bind(/*el: HTMLUnknownElement*/) {
     this.customData = {
-      dispatcher: new EventDispatcher('main'),
+      dispatcher: new EventDispatcher("main"),
     };
   },
 
@@ -17,10 +16,10 @@ export const routeClassStarBinder: Binder<string> = {
    * @param url Url to compare with the current location
    */
   routine(el: HTMLElement, url: string) {
-    const className = this.args[0].toString() || 'active';
-    const isAnkerHTMLElement = el.tagName === 'A';
+    const className = this.args[0].toString() || "active";
+    const isAnkerHTMLElement = el.tagName === "A";
     if (!url && isAnkerHTMLElement) {
-      const href = el.getAttribute('href');
+      const href = el.getAttribute("href");
       if (href) {
         url = href;
       }
@@ -30,21 +29,21 @@ export const routeClassStarBinder: Binder<string> = {
         if (onRoute(urlToCheck)) {
           el.classList.add(className);
           // check if element is radio input
-          if (el.getAttribute('type') === 'radio') {
+          if (el.getAttribute("type") === "radio") {
             (el as HTMLInputElement).checked = true;
           }
           return true;
         } else {
           el.classList.remove(className);
           // uncheck if element is radio input
-          if (el.getAttribute('type') === 'radio') {
+          if (el.getAttribute("type") === "radio") {
             (el as HTMLInputElement).checked = false;
           }
         }
       }
       return false;
     };
-    this.customData.dispatcher.on('newPageReady', () => onUrlChange(url));
+    this.customData.dispatcher.on("newPageReady", () => onUrlChange(url));
     onUrlChange(url);
   },
 

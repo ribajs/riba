@@ -1,4 +1,7 @@
-import { Bs4FormComponent, Scope as Bs4FormScope } from "@ribajs/bs4/src/components/bs4-form/bs4-form.component";
+import {
+  Bs4FormComponent,
+  Scope as Bs4FormScope,
+} from "@ribajs/bs4/src/components/bs4-form/bs4-form.component";
 
 export interface Scope extends Bs4FormScope {
   octoberHandler: string;
@@ -51,13 +54,29 @@ export class OcFormComponent extends Bs4FormComponent {
     ($form as any).request(this.scope.octoberHandler);
 
     // See October CMS JavaScript API AJAX handlers: https://octobercms.com/docs/ajax/handlers
-    $form.one("ajaxSuccess", (event: JQuery.Event, context: any, data: any, statusText: string, jqXHR: any) => {
-      this.onSuccessSubmit(data);
-    });
-    $form.one("ajaxError", (event: JQuery.Event, context: any, data: any, statusText: string, jqXHR: any) => {
-      this.onErrorSubmit(new Error(statusText));
-    });
-
+    $form.one(
+      "ajaxSuccess",
+      (
+        event: JQuery.Event,
+        context: any,
+        data: any,
+        // statusText: string,
+        // jqXHR: any
+      ) => {
+        this.onSuccessSubmit(data);
+      }
+    );
+    $form.one(
+      "ajaxError",
+      (
+        event: JQuery.Event,
+        context: any,
+        data: any,
+        statusText: string,
+        // jqXHR: any
+      ) => {
+        this.onErrorSubmit(new Error(statusText));
+      }
+    );
   }
-
 }

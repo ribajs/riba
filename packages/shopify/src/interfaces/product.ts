@@ -1,4 +1,4 @@
-import { ShopifyImage } from './image';
+import { ShopifyImage } from "./image";
 
 export declare interface ShopifyProductImage extends ShopifyImage {
   position: number;
@@ -7,10 +7,10 @@ export declare interface ShopifyProductImage extends ShopifyImage {
 }
 
 export declare enum ShopifyProductWeightUnit {
-  GRAMS = 'g',
-  KILOGRAMS = 'kg',
-  OUNCES = 'oz',
-  POUNDS = 'lb',
+  GRAMS = "g",
+  KILOGRAMS = "kg",
+  OUNCES = "oz",
+  POUNDS = "lb",
 }
 
 export declare interface ShopifyProductVariant {
@@ -22,7 +22,7 @@ export declare interface ShopifyProductVariant {
   fulfillment_service?: string;
   grams?: number;
   id: number;
-  inventory_management: string | 'shopify';
+  inventory_management: string | "shopify";
   inventory_policy?: string;
   inventory_quantity?: number;
   option1: string | null;

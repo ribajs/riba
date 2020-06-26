@@ -1,4 +1,4 @@
-import { FormFields } from './form-fields';;
+import { FormFields } from "./form-fields";
 
 export interface FormGroup {
   name?: string;

@@ -1,5 +1,5 @@
-import { ShopifyCustomer } from './customer.';
-import { ShopifyDiscount } from './discount';
+import { ShopifyCustomer } from "./customer.";
+import { ShopifyDiscount } from "./discount";
 
 export interface ShopifyOrderCustomAttributes {
   [key: string]: string;
@@ -23,7 +23,11 @@ export interface ShopifyOrder {
    * * customer changed/cancelled order
    * * other.
    */
-  cancel_reason: 'items unavailable' | 'fraudulent order' | 'customer changed/cancelled order' | 'other';
+  cancel_reason:
+    | "items unavailable"
+    | "fraudulent order"
+    | "customer changed/cancelled order"
+    | "other";
   /** Returns the translated output of an order's order.cancel_reason. */
   cancel_reason_label: string;
   /** Returns the timestamp of when an order was created. Use the date filter to format the timestamp. */
@@ -46,7 +50,14 @@ export interface ShopifyOrder {
    * * `partially_refunded`
    * * `voided`
    */
-  financial_status: 'pending' | 'authorized' | 'paid' | 'partially_paid' | 'refunded' | 'partially_refunded' | 'voided';
+  financial_status:
+    | "pending"
+    | "authorized"
+    | "paid"
+    | "partially_paid"
+    | "refunded"
+    | "partially_refunded"
+    | "voided";
   /** Returns the translated output of an order's financial_status. */
   financial_status_label: string;
   /** Returns the fulfillment status of an order. */

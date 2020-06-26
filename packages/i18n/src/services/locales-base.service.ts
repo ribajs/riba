@@ -247,7 +247,7 @@ export abstract class ALocalesService {
         }
         return availableLangcodes;
       })
-      .then((availableLangcodes) => {
+      .then((/*availableLangcodes*/) => {
         this._ready = true;
         // If the current langcode is not the inital langcode then translation is needed
         const translationNeeded =

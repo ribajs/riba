@@ -1,8 +1,8 @@
-import { Binder } from '@ribajs/core';
-import { ScrollEventsService } from '../services/touch-events/scroll-events.service';
+import { Binder } from "@ribajs/core";
+import { ScrollEventsService } from "../services/touch-events/scroll-events.service";
 
 export const scrollEventsBinder: Binder<string> = {
-  name: 'scroll-events',
+  name: "scroll-events",
   bind(el) {
     if (!this.customData) {
       this.customData = {};
@@ -15,6 +15,6 @@ export const scrollEventsBinder: Binder<string> = {
     }
   },
   routine() {
-   // nothing
+    // nothing
   },
 };

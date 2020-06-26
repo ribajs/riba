@@ -1,8 +1,8 @@
-import { Binder } from '@ribajs/core';
-import { TouchEventsService } from '../services/touch-events/touch-events.service';
+import { Binder } from "@ribajs/core";
+import { TouchEventsService } from "../services/touch-events/touch-events.service";
 
 export const touchEventsBinder: Binder<string> = {
-  name: 'touch-events',
+  name: "touch-events",
   bind(el) {
     if (!this.customData) {
       this.customData = {};
@@ -15,6 +15,6 @@ export const touchEventsBinder: Binder<string> = {
     }
   },
   routine() {
-   // nothing
+    // nothing
   },
 };

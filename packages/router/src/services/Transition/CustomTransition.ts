@@ -1,10 +1,12 @@
 import { deferred } from "@ribajs/utils/src/control";
-import { BaseTransition } from './BaseTransition';
-import { Transition } from '../../interfaces/transition';
+import { BaseTransition } from "./BaseTransition";
+import { Transition } from "../../interfaces/transition";
 
 declare global {
   // tslint:disable: interface-name
-  interface Window { model: any }
+  interface Window {
+    model: any;
+  }
 }
 
 /**
@@ -14,9 +16,10 @@ declare global {
  * @private
  */
 class CustomTransition extends BaseTransition implements Transition {
-
-  public init(oldContainer: HTMLElement, newContainer: Promise<HTMLElement>): Promise<void> {
-
+  public init(
+    oldContainer: HTMLElement,
+    newContainer: Promise<HTMLElement>
+  ): Promise<void> {
     this.oldContainer = oldContainer;
     this.deferred = deferred();
     const newContainerReady = deferred();
@@ -34,7 +37,7 @@ class CustomTransition extends BaseTransition implements Transition {
 
   public start() {
     if (!this.newContainerLoading) {
-      throw new Error('this.newContainerLoading is not set');
+      throw new Error("this.newContainerLoading is not set");
     }
     this.newContainerLoading.then(this.finish.bind(this));
   }
@@ -43,7 +46,6 @@ class CustomTransition extends BaseTransition implements Transition {
     document.body.scrollTop = 0;
     this.done();
   }
-
 }
 
 export { CustomTransition };

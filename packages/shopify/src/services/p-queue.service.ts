@@ -1,9 +1,8 @@
 // https://github.com/sindresorhus/p-queue
 
-import { PriorityQueue } from './priority-queue.service';
+import { PriorityQueue } from "./priority-queue.service";
 
 export class PQueue {
-
   public queue = new PriorityQueue(); // eslint-disable-line new-cap
 
   private _carryoverConcurrencyCount: number;
@@ -23,29 +22,55 @@ export class PQueue {
   private _resolveIdle: () => any;
 
   constructor(options: any) {
-    options = Object.assign({
-      carryoverConcurrencyCount: false,
-      intervalCap: Infinity,
-      interval: 0,
-      concurrency: Infinity,
-      autoStart: true,
-      queueClass: PriorityQueue,
-    }, options);
+    options = Object.assign(
+      {
+        carryoverConcurrencyCount: false,
+        intervalCap: Infinity,
+        interval: 0,
+        concurrency: Infinity,
+        autoStart: true,
+        queueClass: PriorityQueue,
+      },
+      options
+    );
 
-    if (!(typeof options.concurrency === 'number' && options.concurrency >= 1)) {
-      throw new TypeError(`Expected \`concurrency\` to be a number from 1 and up, got \`${options.concurrency}\` (${typeof options.concurrency})`);
+    if (
+      !(typeof options.concurrency === "number" && options.concurrency >= 1)
+    ) {
+      throw new TypeError(
+        `Expected \`concurrency\` to be a number from 1 and up, got \`${
+          options.concurrency
+        }\` (${typeof options.concurrency})`
+      );
     }
 
-    if (!(typeof options.intervalCap === 'number' && options.intervalCap >= 1)) {
-      throw new TypeError(`Expected \`intervalCap\` to be a number from 1 and up, got \`${options.intervalCap}\` (${typeof options.intervalCap})`);
+    if (
+      !(typeof options.intervalCap === "number" && options.intervalCap >= 1)
+    ) {
+      throw new TypeError(
+        `Expected \`intervalCap\` to be a number from 1 and up, got \`${
+          options.intervalCap
+        }\` (${typeof options.intervalCap})`
+      );
     }
 
-    if (!(typeof options.interval === 'number' && Number.isFinite(options.interval) && options.interval >= 0)) {
-      throw new TypeError(`Expected \`interval\` to be a finite number >= 0, got \`${options.interval}\` (${typeof options.interval})`);
+    if (
+      !(
+        typeof options.interval === "number" &&
+        Number.isFinite(options.interval) &&
+        options.interval >= 0
+      )
+    ) {
+      throw new TypeError(
+        `Expected \`interval\` to be a finite number >= 0, got \`${
+          options.interval
+        }\` (${typeof options.interval})`
+      );
     }
 
     this._carryoverConcurrencyCount = options.carryoverConcurrencyCount;
-    this._isIntervalIgnored = options.intervalCap === Infinity || options.interval === 0;
+    this._isIntervalIgnored =
+      options.intervalCap === Infinity || options.interval === 0;
     this._intervalCount = 0;
     this._intervalCap = options.intervalCap;
     this._interval = options.interval;
@@ -57,8 +82,8 @@ export class PQueue {
     this._pendingCount = 0;
     this._concurrency = options.concurrency;
     this._isPaused = options.autoStart === false;
-    this._resolveEmpty = () => { }; // tslint:disable-line
-    this._resolveIdle = () => { }; // tslint:disable-line
+    this._resolveEmpty = () => {}; // eslint-disable-line
+    this._resolveIdle = () => {}; // eslint-disable-line
   }
 
   public add(fn: any, options?: any): Promise<any> {
@@ -76,7 +101,7 @@ export class PQueue {
             (err) => {
               reject(err);
               this._next();
-            },
+            }
           );
         } catch (err) {
           reject(err);
@@ -99,7 +124,7 @@ export class PQueue {
     }
 
     this._isPaused = false;
-    while (this._tryToStartAnother()) { } // tslint:disable-line
+    while (this._tryToStartAnother()) {} // eslint-disable-line
   }
 
   public pause() {
@@ -140,8 +165,8 @@ export class PQueue {
     });
   }
 
-  // private _resolveEmpty = () => { }; // tslint:disable-line
-  // private _resolveIdle = () => { }; // tslint:disable-line
+  // private _resolveEmpty = () => { }; // eslint-disable-line
+  // private _resolveIdle = () => { }; // eslint-disable-line
 
   get _doesIntervalAllowAnother() {
     return this._isIntervalIgnored || this._intervalCount < this._intervalCap;
@@ -158,11 +183,11 @@ export class PQueue {
 
   private _resolvePromises() {
     this._resolveEmpty();
-    this._resolveEmpty = () => { }; // tslint:disable-line
+    this._resolveEmpty = () => {}; // eslint-disable-line
 
     if (this._pendingCount === 0) {
       this._resolveIdle();
-      this._resolveIdle = () => { }; // tslint:disable-line
+      this._resolveIdle = () => {}; // eslint-disable-line
     }
   }
 
@@ -175,13 +200,15 @@ export class PQueue {
   private _intervalPaused() {
     const now = Date.now();
 
-    if (typeof(this._intervalId) === undefined) {
+    if (typeof this._intervalId === undefined) {
       const delay = this._intervalEnd - now;
       if (delay < 0) {
         // Act as the interval was done
         // We don't need to resume it here,
         // because it'll be resumed on line 160
-        this._intervalCount = (this._carryoverConcurrencyCount) ? this._pendingCount : 0;
+        this._intervalCount = this._carryoverConcurrencyCount
+          ? this._pendingCount
+          : 0;
       } else {
         // Act as the interval is pending
         if (this._timeoutId === null) {
@@ -237,8 +264,10 @@ export class PQueue {
       this._intervalId = undefined;
     }
 
-    this._intervalCount = (this._carryoverConcurrencyCount) ? this._pendingCount : 0;
-    while (this._tryToStartAnother()) { } // tslint:disable-line
+    this._intervalCount = this._carryoverConcurrencyCount
+      ? this._pendingCount
+      : 0;
+    while (this._tryToStartAnother()) {} // eslint-disable-line
   }
 
   get size() {
