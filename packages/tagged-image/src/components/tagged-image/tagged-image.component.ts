@@ -44,7 +44,6 @@ export class TaggedImageComponent extends Component {
 
   protected async afterBind() {
     await super.afterBind();
-    
   }
 
   // deconstructor
@@ -53,10 +52,10 @@ export class TaggedImageComponent extends Component {
   }
 
   protected template() {
-    for (const el of this.el.children) {
-      if (el.tagName === "ICON") {
-      }
-    }
+    // for (const el of this.el.children) {
+    //   if (el.tagName === "ICON") {
+    //   }
+    // }
     return template;
   }
 }

@@ -20,7 +20,6 @@ export function lowerBound(array: any, value: any, comp: any) {
 }
 
 export class PriorityQueue {
-
   private _queue: Array<any>;
 
   constructor() {
@@ -28,9 +27,12 @@ export class PriorityQueue {
   }
 
   public enqueue(run: any, options: any) {
-    options = Object.assign({
-      priority: 0,
-    }, options);
+    options = Object.assign(
+      {
+        priority: 0,
+      },
+      options
+    );
 
     const element = { priority: options.priority, run };
 
@@ -39,7 +41,11 @@ export class PriorityQueue {
       return;
     }
 
-    const index = lowerBound(this._queue, element, (a: any, b: any) => b.priority - a.priority);
+    const index = lowerBound(
+      this._queue,
+      element,
+      (a: any, b: any) => b.priority - a.priority
+    );
     this._queue.splice(index, 0, element);
   }
 

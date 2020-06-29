@@ -1,6 +1,6 @@
-export * from './img-url.formatter';
-export * from './money.formatter';
-export * from './money-with-currency.formatter';
+export * from "./img-url.formatter";
+export * from "./money.formatter";
+export * from "./money-with-currency.formatter";
 
 // Add Shopify-specific formatters for Rivets.js.
 // export const money = (value, currency) => {

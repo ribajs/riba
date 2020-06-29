@@ -1,16 +1,12 @@
-import { HttpService } from '@ribajs/core';
+import { HttpService } from "@ribajs/core";
 
-import {
-  ShopifyProduct,
-  ShopifyProductVariant,
-} from '../interfaces';
+import { ShopifyProduct, ShopifyProductVariant } from "../interfaces";
 
 export interface ProductsCache {
   [handle: string]: ShopifyProduct;
 }
 
 export class ShopifyProductService {
-
   /**
    * Get product object by handle
    * @param handle product handle
@@ -21,11 +17,12 @@ export class ShopifyProductService {
         resolve(this.cache[handle]);
       });
     } else {
-      return HttpService.getJSON(`/products/${handle}.js`)
-      .then((product: ShopifyProduct) => {
-        this.cache[handle] = product;
-        return this.cache[handle];
-      });
+      return HttpService.getJSON(`/products/${handle}.js`).then(
+        (product: ShopifyProduct) => {
+          this.cache[handle] = product;
+          return this.cache[handle];
+        }
+      );
     }
   }
 
@@ -35,7 +32,10 @@ export class ShopifyProductService {
    * @param optionValues
    * @return Returns true if the option values fitting to the variant
    */
-  public static fitsVariantOptions(variant: ShopifyProductVariant, optionValues: string[])  {
+  public static fitsVariantOptions(
+    variant: ShopifyProductVariant,
+    optionValues: string[]
+  ) {
     let fit = true;
     // position0 is the option index starting on 0
     for (const position0 in optionValues) {
@@ -51,7 +51,10 @@ export class ShopifyProductService {
    * Get product variant of (selected) option values
    * @param optionValues (selected) option values
    */
-  public static getVariantOfOptions(product: ShopifyProduct, optionValues: string[]) {
+  public static getVariantOfOptions(
+    product: ShopifyProduct,
+    optionValues: string[]
+  ) {
     let result: ShopifyProductVariant | null = null;
     if (product) {
       for (const i in product.variants) {
@@ -106,8 +109,7 @@ export class ShopifyProductService {
    */
   public static prepair(product: ShopifyProduct) {
     // remove protocol
-    product.featured_image
-    .replace(/(^\w+:|^)\/\//, '//');
+    product.featured_image.replace(/(^\w+:|^)\/\//, "//");
 
     // all option names to lower case
     for (const option of product.options) {
@@ -118,5 +120,4 @@ export class ShopifyProductService {
   }
 
   protected static cache: ProductsCache = {};
-
 }

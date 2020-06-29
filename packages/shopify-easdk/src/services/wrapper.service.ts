@@ -1,32 +1,31 @@
-import { Utils, EventDispatcher } from '@ribajs/core';
+import { EventDispatcher } from "@ribajs/core";
 
 import {
   EASDK,
-  EASDKWrapper,
-  BarConfig,
-  Bar,
-  BarWrapper,
-  LoadingStateWrapper,
-  Config,
-  PaginationConfig,
-  ButtonConfig,
-  ButtonCallback,
-  Modal,
-  ModalWrapper,
-  ModalInit,
-  ModalAlertOptions,
-  ModalConfirmOptions,
-  ModalInputOptions,
-  ProductPickerOptions,
-  ProductPickerCallback,
-  User,
-  UserData,
-  ReceiveMessage,
+  // EASDKWrapper,
+  // BarConfig,
+  // Bar,
+  // BarWrapper,
+  // LoadingStateWrapper,
+  // Config,
+  // PaginationConfig,
+  // ButtonConfig,
+  // ButtonCallback,
+  // Modal,
+  // ModalWrapper,
+  // ModalInit,
+  // ModalAlertOptions,
+  // ModalConfirmOptions,
+  // ModalInputOptions,
+  // ProductPickerOptions,
+  // ProductPickerCallback,
+  // User,
+  // UserData,
+  // ReceiveMessage,
   ShopifyApp,
-} from '../interfaces/shopify-easdk';
+} from "../interfaces/shopify-easdk";
 
 export class WrapperService {
-
   public static inIframe() {
     try {
       return window.self !== window.top;
@@ -41,13 +40,11 @@ export class WrapperService {
     See https://help.shopify.com/en/api/embedded-apps/embedded-app-sdk for more informations.`,
   };
 
-  public event = new EventDispatcher('shopify-easdk');
+  public event = new EventDispatcher("shopify-easdk");
 
   protected shopifyApp: EASDK;
 
-  constructor(
-    shopifyApp?: EASDK,
-  ) {
+  constructor(shopifyApp?: EASDK) {
     if (!shopifyApp && !ShopifyApp) {
       throw new Error(WrapperService.ERRORS.EASDK_NOT_FOUND);
     }

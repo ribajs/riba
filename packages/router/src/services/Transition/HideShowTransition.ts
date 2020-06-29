@@ -1,5 +1,5 @@
-import { BaseTransition } from './BaseTransition';
-import { Transition } from '../../interfaces/transition';
+import { BaseTransition } from "./BaseTransition";
+import { Transition } from "../../interfaces/transition";
 
 /**
  * Basic Transition object, wait for the new Container to be ready,
@@ -8,11 +8,11 @@ import { Transition } from '../../interfaces/transition';
  * @private
  */
 export class HideShowTransition extends BaseTransition implements Transition {
-  protected action: 'replace' | 'append';
+  protected action: "replace" | "append";
 
   protected scrollToTop: boolean;
 
-  constructor(action: 'replace' | 'append' = 'replace', scrollToTop = true) {
+  constructor(action: "replace" | "append" = "replace", scrollToTop = true) {
     super(action);
     this.action = action;
     this.scrollToTop = scrollToTop;
@@ -20,16 +20,18 @@ export class HideShowTransition extends BaseTransition implements Transition {
 
   public doScrollToTop() {
     return new Promise((resolve) => {
-      resolve(window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      }));
+      resolve(
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        })
+      );
     });
   }
 
   public start() {
     if (!this.newContainerLoading) {
-      throw new Error('this.newContainerLoading is not set');
+      throw new Error("this.newContainerLoading is not set");
     }
     if (this.scrollToTop) {
       this.doScrollToTop();

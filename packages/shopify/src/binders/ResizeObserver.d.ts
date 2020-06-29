@@ -49,7 +49,10 @@ declare class ResizeObserver {
    * An options object allowing you to set options for the observation.
    * Currently this only has one possible option that can be set.
    */
-  public observe: (target: Element, options?: ResizeObserverObserveOptions) => void;
+  public observe: (
+    target: Element,
+    options?: ResizeObserverObserveOptions
+  ) => void;
 
   /**
    * The **unobserve()** method of the
@@ -121,7 +124,7 @@ interface ResizeObserverObserveOptions {
    *
    * @default "content-box"
    */
-  box?: 'content-box' | 'border-box';
+  box?: "content-box" | "border-box";
 }
 
 /**
@@ -166,7 +169,7 @@ interface ResizeObserverObserveOptions {
  */
 type ResizeObserverCallback = (
   entries: ResizeObserverEntry[],
-  observer: ResizeObserver,
+  observer: ResizeObserver
 ) => void;
 
 /**

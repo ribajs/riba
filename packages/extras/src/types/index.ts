@@ -1,2 +1,2 @@
-export * from './position';
-export * from './scroll-position';
+export * from "./position";
+export * from "./scroll-position";

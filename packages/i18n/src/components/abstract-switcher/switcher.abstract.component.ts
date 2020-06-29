@@ -1,4 +1,4 @@
-import { Component, View } from "@ribajs/core";
+import { Component } from "@ribajs/core";
 import { Langcode } from "../../interfaces";
 import { ALocalesService } from "../../services/locales-base.service";
 
@@ -67,17 +67,16 @@ export abstract class AI18nSwitcherComponent extends Component {
         });
       }
     }
-    return new Promise<View | null | undefined>((resolve) => {
-      this.localesService.event.on(
-        "ready",
-        (langcode: string, translationNeeded: boolean) => {
-          this.initLocales(langcode).then((langcodes) => {
-            super.init(observedAttributes).then((view) => {
-              resolve(view);
-            });
+    return new Promise<undefined | null>((resolve) => {
+      this.localesService.event.on("ready", (
+        langcode: string /*, translationNeeded: boolean*/
+      ) => {
+        return this.initLocales(langcode).then((/*langcodes*/) => {
+          return super.init(observedAttributes).then((view) => {
+            resolve(view);
           });
-        }
-      );
+        });
+      });
     });
   }
 
@@ -94,15 +93,14 @@ export abstract class AI18nSwitcherComponent extends Component {
         return this.scope.langcodes;
       })
       .then((langcodes) => {
-        this.localesService.event.on(
-          "changed",
-          (changedLangcode: string, initial: boolean) => {
-            // Activate localcode and disable the other
-            this.scope.langcodes.forEach((langCode) => {
-              langCode.active = langCode.code === changedLangcode;
-            });
-          }
-        );
+        this.localesService.event.on("changed", (
+          changedLangcode: string /*, initial: boolean*/
+        ) => {
+          // Activate localcode and disable the other
+          this.scope.langcodes.forEach((langCode) => {
+            langCode.active = langCode.code === changedLangcode;
+          });
+        });
         return langcodes;
       })
       .then((langcodes) => {

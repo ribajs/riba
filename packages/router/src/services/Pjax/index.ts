@@ -501,7 +501,7 @@ class Pjax {
     }
     const follow = Pjax.preventCheck(evt, el, href);
 
-    console.log(follow,href)
+    console.log(follow, href);
 
     if (follow) {
       evt.stopPropagation();

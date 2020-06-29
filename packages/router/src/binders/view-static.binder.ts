@@ -1,12 +1,12 @@
-import { Binder, View as RivetsView, handleizeFormatter } from '@ribajs/core';
-import { isObject } from '@ribajs/utils/src/type';
-import { Pjax, HideShowTransition } from '../services';
+import { Binder, View as RivetsView, handleizeFormatter } from "@ribajs/core";
+import { isObject } from "@ribajs/utils/src/type";
+import { Pjax, HideShowTransition } from "../services";
 
 /**
  * Loads a url with pjax and show them insite the element this binder is used on
  */
 export const viewStaticBinder: Binder<string> = {
-  name: 'view-static',
+  name: "view-static",
   block: true,
 
   bind(/*el: HTMLElement*/) {
@@ -26,8 +26,11 @@ export const viewStaticBinder: Binder<string> = {
     options.listenPopstate = false;
     options.parseTitle = false;
     options.transition = options.transition || new HideShowTransition();
-    options.viewId = options.viewId || el.getAttribute('id') || handleizeFormatter.read(options.url);
-    options.containerSelector = options.containerSelector || '[data-namespace]';
+    options.viewId =
+      options.viewId ||
+      el.getAttribute("id") ||
+      handleizeFormatter.read(options.url);
+    options.containerSelector = options.containerSelector || "[data-namespace]";
     options.changeBrowserUrl = false;
 
     const pjax = new Pjax(options);
@@ -38,7 +41,7 @@ export const viewStaticBinder: Binder<string> = {
     response.then((_response) => {
       wrapper.replaceWith(_response.container);
 
-      _response.container.style.visibility = 'visible';
+      _response.container.style.visibility = "visible";
 
       // add the dateset to the model
       if (!isObject(this.view.models)) {
@@ -49,9 +52,12 @@ export const viewStaticBinder: Binder<string> = {
       if (this.customData.nested) {
         this.customData.nested.unbind();
       }
-      this.customData.nested = new RivetsView(_response.container, this.view.models, this.view.options);
+      this.customData.nested = new RivetsView(
+        _response.container,
+        this.view.models,
+        this.view.options
+      );
       this.customData.nested.bind();
-
     });
   },
 

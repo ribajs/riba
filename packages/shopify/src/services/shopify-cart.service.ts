@@ -72,7 +72,7 @@ export class ShopifyCartService {
 
   public static _get(): Promise<ShopifyCartObject> {
     if (ShopifyCartService.cart !== null) {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve /*, reject*/) => {
         setTimeout(() => {
           if (ShopifyCartService.cart !== null) {
             return resolve(ShopifyCartService.cart);

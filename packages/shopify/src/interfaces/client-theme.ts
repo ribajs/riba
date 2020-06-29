@@ -1,8 +1,8 @@
 export interface ClientTheme {
-  handle: 'null';
+  handle: "null";
   id: number;
   name: string;
-  role: 'main' | 'unpublished' | 'demo';
+  role: "main" | "unpublished" | "demo";
   style: {
     handle: null;
     id: null;

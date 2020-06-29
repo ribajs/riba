@@ -3,49 +3,49 @@
 
 /* tslint:disable:member-ordering variable-name */
 
-import { Utils, EventDispatcher } from '@ribajs/core';
+import { EventDispatcher } from "@ribajs/core";
 
 import {
   EASDK,
   EASDKWrapper,
-  BarConfig,
-  Bar,
-  BarWrapper,
+  // BarConfig,
+  // Bar,
+  // BarWrapper,
   LoadingStateWrapper,
   Config,
   PaginationConfig,
   ButtonConfig,
-  ButtonCallback,
-  Modal,
-  ModalWrapper,
-  ModalInit,
-  ModalAlertOptions,
-  ModalConfirmOptions,
-  ModalInputOptions,
-  ProductPickerOptions,
-  ProductPickerCallback,
-  User,
-  UserData,
+  // ButtonCallback,
+  // Modal,
+  // ModalWrapper,
+  // ModalInit,
+  // ModalAlertOptions,
+  // ModalConfirmOptions,
+  // ModalInputOptions,
+  // ProductPickerOptions,
+  // ProductPickerCallback,
+  // User,
+  // UserData,
   ReceiveMessage,
-  ShopifyApp,
-} from '../interfaces/shopify-easdk';
+  // ShopifyApp,
+} from "../interfaces/shopify-easdk";
 
-import { WrapperService } from './wrapper.service';
-import { BarWrapperService } from './shopify-easdk-bar.service';
-import { ModalWrapperService } from './shopify-easdk-modal.service';
-import { UserWrapperService } from './shopify-easdk-user.service';
+import { WrapperService } from "./wrapper.service";
+import { BarWrapperService } from "./shopify-easdk-bar.service";
+import { ModalWrapperService } from "./shopify-easdk-modal.service";
+import { UserWrapperService } from "./shopify-easdk-user.service";
 
 // import { AlertComponent } from './alert/alert.component';
 // import { ConfirmComponent } from './confirm/confirm.component';
 // import { OpenComponent } from './open/open.component';
 
-export class EASDKWrapperService extends WrapperService implements EASDKWrapper {
-
+export class EASDKWrapperService extends WrapperService
+  implements EASDKWrapper {
   public static instance?: EASDKWrapperService;
 
-  public event = new EventDispatcher('shopify-easdk');
+  public event = new EventDispatcher("shopify-easdk");
 
-  protected config: Config = {shopOrigin: '', apiKey: ''};
+  protected config: Config = { shopOrigin: "", apiKey: "" };
 
   protected message?: ReceiveMessage;
 
@@ -53,9 +53,7 @@ export class EASDKWrapperService extends WrapperService implements EASDKWrapper 
   public Modal: ModalWrapperService;
   public User: UserWrapperService;
 
-  constructor(
-    shopifyApp?: EASDK,
-  ) {
+  constructor(shopifyApp?: EASDK) {
     super(shopifyApp);
     this.Bar = new BarWrapperService(this.shopifyApp);
     this.Modal = new ModalWrapperService(this.shopifyApp);
@@ -73,51 +71,69 @@ export class EASDKWrapperService extends WrapperService implements EASDKWrapper 
    * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
    */
   protected listenForMessage() {
-    window.addEventListener('message', (event) => {
-      let data = {};
-      let message = '';
-      try {
-        const _data = JSON.parse(event.data);
-        data = _data.data;
-        message = _data.message;
-      } catch (error) {
-        console.debug('Error on parse message data', error);
+    window.addEventListener(
+      "message",
+      (event) => {
+        let data = {};
+        let message = "";
+        try {
+          const _data = JSON.parse(event.data);
+          data = _data.data;
+          message = _data.message;
+        } catch (error) {
+          console.debug("Error on parse message data", error);
+        }
+        this.message = {
+          message,
+          data,
+        };
+        console.debug("Receive message:", event, message, data);
+      },
+      false
+    );
+
+    this.event.on(
+      "bar:loading",
+      (fallback: boolean, loading: LoadingStateWrapper) => {
+        console.debug("bar:loading", fallback, loading);
       }
-      this.message = {
-        message,
-        data,
-      };
-      console.debug('Receive message:', event, message, data);
-    }, false);
+    );
 
-    this.event.on('bar:loading', (fallback: boolean, loading: LoadingStateWrapper) => {
-      console.debug('bar:loading', fallback, loading);
+    this.event.on(
+      "bar:loadingOn",
+      (fallback: boolean, loading: LoadingStateWrapper) => {
+        console.debug("bar:loadingOn", fallback, loading);
+      }
+    );
+
+    this.event.on(
+      "bar:loadingOff",
+      (fallback: boolean, loading: LoadingStateWrapper) => {
+        console.debug("bar:loadingOff", fallback, loading);
+      }
+    );
+
+    this.event.on("bar:setTitle", (fallback: boolean, title: string) => {
+      console.debug("bar:setTitle", fallback, title);
     });
 
-    this.event.on('bar:loadingOn', (fallback: boolean, loading: LoadingStateWrapper) => {
-      console.debug('bar:loadingOn', fallback, loading);
+    this.event.on("bar:setIcon", (fallback: boolean, icon: string) => {
+      console.debug("bar:setIcon", fallback, icon);
     });
 
-    this.event.on('bar:loadingOff', (fallback: boolean, loading: LoadingStateWrapper) => {
-      console.debug('bar:loadingOff', fallback, loading);
-    });
+    this.event.on(
+      "bar:setPagination",
+      (fallback: boolean, config: PaginationConfig) => {
+        console.debug("bar:setPagination", fallback, config);
+      }
+    );
 
-    this.event.on('bar:setTitle', (fallback: boolean, title: string) => {
-      console.debug('bar:setTitle', fallback, title);
-    });
-
-    this.event.on('bar:setIcon', (fallback: boolean, icon: string) => {
-      console.debug('bar:setIcon', fallback, icon);
-    });
-
-    this.event.on('bar:setPagination', (fallback: boolean, config: PaginationConfig) => {
-      console.debug('bar:setPagination', fallback, config);
-    });
-
-    this.event.on('bar:setBreadcrumb', (fallback: boolean, config: ButtonConfig) => {
-      console.debug('bar:setBreadcrumb', fallback, config);
-    });
-
+    this.event.on(
+      "bar:setBreadcrumb",
+      (fallback: boolean, config: ButtonConfig) => {
+        console.debug("bar:setBreadcrumb", fallback, config);
+      }
+    );
   }
 
   /**
@@ -166,8 +182,8 @@ export class EASDKWrapperService extends WrapperService implements EASDKWrapper 
    * @param forceFallback Force the fallback mode which is used if you are not in the shopify iframe
    * @memberof EASDKWrapperService
    */
-  public flashNotice(message: string, forceFallback: boolean = false): void {
-    this.event.trigger('flashNotice', message, forceFallback);
+  public flashNotice(message: string, forceFallback = false): void {
+    this.event.trigger("flashNotice", message, forceFallback);
     return this.shopifyApp.flashNotice(message);
   }
 
@@ -183,8 +199,8 @@ export class EASDKWrapperService extends WrapperService implements EASDKWrapper 
    * @returns {void}
    * @memberof EASDKWrapperService
    */
-  public flashError(message: string, forceFallback: boolean = false): void {
-    this.event.trigger('flashError', message, forceFallback);
+  public flashError(message: string, forceFallback = false): void {
+    this.event.trigger("flashError", message, forceFallback);
     return this.shopifyApp.flashError(message);
   }
 
@@ -197,16 +213,16 @@ export class EASDKWrapperService extends WrapperService implements EASDKWrapper 
    * @returns {void}
    * @memberof EASDKWrapperService
    */
-  public redirect(path: string, forceFallback: boolean = false): void {
-    console.debug('redirect', path);
+  public redirect(path: string, forceFallback = false): void {
+    console.debug("redirect", path);
     if (this.useFallback(forceFallback)) {
       const config = this.config;
       if (!config.shopOrigin || config.shopOrigin.length <= 0) {
-        console.error('You need to call the init function first!');
+        console.error("You need to call the init function first!");
         return;
       }
-      const href = config.shopOrigin + '/admin' + path;
-      console.debug('redirect in fallbackmode to', href);
+      const href = config.shopOrigin + "/admin" + path;
+      console.debug("redirect in fallbackmode to", href);
       window.location.href = href;
     } else {
       return this.shopifyApp.redirect(path);

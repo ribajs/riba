@@ -1,4 +1,4 @@
-import { Transition } from './transition';
+import { Transition } from "./transition";
 
 export interface PjaxOptions {
   id: string;

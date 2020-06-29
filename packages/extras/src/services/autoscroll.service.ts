@@ -1,8 +1,8 @@
-import { Utils as ExtraUtils } from './utils.service';
-import { Gameloop } from './gameloop.service';
+import { Utils as ExtraUtils } from "./utils.service";
+import { Gameloop } from "./gameloop.service";
 
 export interface AutoscrollOptions {
-  angle?: 'vertical' | 'horizontal';
+  angle?: "vertical" | "horizontal";
   direction?: 1 | -1;
   velocity?: number;
   width?: string;
@@ -10,8 +10,7 @@ export interface AutoscrollOptions {
 }
 
 export class Autoscroll {
-
-  protected touchCapable = ('ontouchstart' in window);
+  protected touchCapable = "ontouchstart" in window;
 
   protected direction = 1;
 
@@ -29,7 +28,7 @@ export class Autoscroll {
 
   protected lastMove = 0;
 
-  protected angle: 'horizontal' | 'vertical' = 'horizontal';
+  protected angle: "horizontal" | "vertical" = "horizontal";
 
   protected pauseOnHover = true;
 
@@ -41,12 +40,17 @@ export class Autoscroll {
     this.direction = this.options.direction || this.direction;
     this.velocity = this.options.velocity || this.velocity;
     this.angle = this.options.angle || this.angle;
-    this.pauseOnHover = typeof(this.options.pauseOnHover) === 'boolean' ? this.options.pauseOnHover : this.pauseOnHover;
+    this.pauseOnHover =
+      typeof this.options.pauseOnHover === "boolean"
+        ? this.options.pauseOnHover
+        : this.pauseOnHover;
 
     this.limit = this.getLimit(this.el);
     this.move = this.getPosition();
 
-    window.addEventListener('resize', this.onResize.bind(this), {passive: true});
+    window.addEventListener("resize", this.onResize.bind(this), {
+      passive: true,
+    });
 
     if (this.direction === -1) {
       // start right
@@ -56,30 +60,58 @@ export class Autoscroll {
       this.el.scrollLeft = 0;
     }
 
-    this.el.addEventListener('mouseenter', this.onMouseIn.bind(this), {passive: true});
-    this.el.addEventListener('mouseover', this.onMouseIn.bind(this), {passive: true});
-    this.el.addEventListener('focusin', this.onMouseIn.bind(this), {passive: true});
-    this.el.addEventListener('touchstart', this.onMouseIn.bind(this), {passive: true});
+    this.el.addEventListener("mouseenter", this.onMouseIn.bind(this), {
+      passive: true,
+    });
+    this.el.addEventListener("mouseover", this.onMouseIn.bind(this), {
+      passive: true,
+    });
+    this.el.addEventListener("focusin", this.onMouseIn.bind(this), {
+      passive: true,
+    });
+    this.el.addEventListener("touchstart", this.onMouseIn.bind(this), {
+      passive: true,
+    });
 
-    this.el.addEventListener('mouseleave', this.onMouseOut.bind(this), {passive: true});
-    this.el.addEventListener('focusout', this.onMouseOut.bind(this), {passive: true});
+    this.el.addEventListener("mouseleave", this.onMouseOut.bind(this), {
+      passive: true,
+    });
+    this.el.addEventListener("focusout", this.onMouseOut.bind(this), {
+      passive: true,
+    });
 
-    this.el.addEventListener('mouseup', this.onMouseUp.bind(this), {passive: true});
-    this.el.addEventListener('touchend', this.onMouseUp.bind(this), {passive: true});
-    
+    this.el.addEventListener("mouseup", this.onMouseUp.bind(this), {
+      passive: true,
+    });
+    this.el.addEventListener("touchend", this.onMouseUp.bind(this), {
+      passive: true,
+    });
+
     if (this.touchCapable) {
-      this.el.addEventListener('scroll', this.onMouseUp.bind(this), {passive: true});
-      this.el.addEventListener('scrollend', this.onMouseUp.bind(this), {passive: true});
+      this.el.addEventListener("scroll", this.onMouseUp.bind(this), {
+        passive: true,
+      });
+      this.el.addEventListener("scrollend", this.onMouseUp.bind(this), {
+        passive: true,
+      });
       // See ScrollEventsService for "scrollended" event
-      this.el.addEventListener('scrollended', this.onMouseUp.bind(this), {passive: true});
+      this.el.addEventListener("scrollended", this.onMouseUp.bind(this), {
+        passive: true,
+      });
     } else {
-      this.el.addEventListener('scroll', this.onScroll.bind(this), {passive: true});
-      this.el.addEventListener('scrollend', this.onScroll.bind(this), {passive: true});
-      this.el.addEventListener('scrollended', this.onScroll.bind(this), {passive: true});
+      this.el.addEventListener("scroll", this.onScroll.bind(this), {
+        passive: true,
+      });
+      this.el.addEventListener("scrollend", this.onScroll.bind(this), {
+        passive: true,
+      });
+      this.el.addEventListener("scrollended", this.onScroll.bind(this), {
+        passive: true,
+      });
     }
 
-    Gameloop.events.on('render', this.render.bind(this));
-    Gameloop.events.on('update', this.updateMove.bind(this));
+    Gameloop.events.on("render", this.render.bind(this));
+    Gameloop.events.on("update", this.updateMove.bind(this));
 
     Gameloop.startLoop({ maxFPS: 60 });
   }
@@ -97,7 +129,7 @@ export class Autoscroll {
   }
 
   public pause() {
-    this.el.style.scrollBehavior = '';
+    this.el.style.scrollBehavior = "";
     this._pause = true;
   }
 
@@ -113,36 +145,36 @@ export class Autoscroll {
       this.setPosition();
       this._pause = false;
       // Disable smooth scrolling on autoscroll if set
-      this.el.style.scrollBehavior = 'auto';
+      this.el.style.scrollBehavior = "auto";
     }, delay);
   }
 
   protected removeEventListeners() {
-    window.removeEventListener('resize', this.onResize.bind(this));
+    window.removeEventListener("resize", this.onResize.bind(this));
 
-    this.el.removeEventListener('mouseenter', this.onMouseIn.bind(this));
-    this.el.removeEventListener('mouseover', this.onMouseIn.bind(this));
-    this.el.removeEventListener('focusin', this.onMouseIn.bind(this));
-    this.el.removeEventListener('touchstart', this.onMouseIn.bind(this));
+    this.el.removeEventListener("mouseenter", this.onMouseIn.bind(this));
+    this.el.removeEventListener("mouseover", this.onMouseIn.bind(this));
+    this.el.removeEventListener("focusin", this.onMouseIn.bind(this));
+    this.el.removeEventListener("touchstart", this.onMouseIn.bind(this));
 
-    this.el.removeEventListener('mouseleave', this.onMouseOut.bind(this));
-    this.el.removeEventListener('focusout', this.onMouseOut.bind(this));
+    this.el.removeEventListener("mouseleave", this.onMouseOut.bind(this));
+    this.el.removeEventListener("focusout", this.onMouseOut.bind(this));
 
-    this.el.removeEventListener('mouseup', this.onMouseUp.bind(this));
-    this.el.removeEventListener('touchend', this.onMouseUp.bind(this));
+    this.el.removeEventListener("mouseup", this.onMouseUp.bind(this));
+    this.el.removeEventListener("touchend", this.onMouseUp.bind(this));
 
     if (this.touchCapable) {
-      this.el.removeEventListener('scroll', this.onMouseUp.bind(this));
-      this.el.removeEventListener('scrollend', this.onMouseUp.bind(this));
-      this.el.removeEventListener('scrollended', this.onMouseUp.bind(this));
+      this.el.removeEventListener("scroll", this.onMouseUp.bind(this));
+      this.el.removeEventListener("scrollend", this.onMouseUp.bind(this));
+      this.el.removeEventListener("scrollended", this.onMouseUp.bind(this));
     } else {
-      this.el.removeEventListener('scroll', this.onScroll.bind(this));
-      this.el.removeEventListener('scrollend', this.onScroll.bind(this));
-      this.el.removeEventListener('scrollended', this.onScroll.bind(this));
+      this.el.removeEventListener("scroll", this.onScroll.bind(this));
+      this.el.removeEventListener("scrollend", this.onScroll.bind(this));
+      this.el.removeEventListener("scrollended", this.onScroll.bind(this));
     }
 
-    Gameloop.events.off('render', this.render.bind(this));
-    Gameloop.events.off('update', this.updateMove.bind(this));
+    Gameloop.events.off("render", this.render.bind(this));
+    Gameloop.events.off("update", this.updateMove.bind(this));
   }
 
   protected onMouseIn() {
@@ -176,7 +208,9 @@ export class Autoscroll {
   }
 
   protected getPosition() {
-    return (this.angle === 'vertical' ? this.el.scrollTop : this.el.scrollLeft) || 0;
+    return (
+      (this.angle === "vertical" ? this.el.scrollTop : this.el.scrollLeft) || 0
+    );
   }
 
   protected setPosition() {
@@ -184,7 +218,9 @@ export class Autoscroll {
   }
 
   protected getLimit(el: HTMLElement) {
-    return this.angle === 'vertical' ? ExtraUtils.getScrollPosition(el).maxY : ExtraUtils.getScrollPosition(el).maxX;
+    return this.angle === "vertical"
+      ? ExtraUtils.getScrollPosition(el).maxY
+      : ExtraUtils.getScrollPosition(el).maxX;
   }
 
   /**
@@ -197,7 +233,7 @@ export class Autoscroll {
    * is not working here for some reasion
    * like it works in the demos/extras-game-loop demo or here:
    * https://isaacsukin.com/news/2015/01/detailed-explanation-javascript-game-loops-and-timing
-   * 
+   *
    * Without this the scrollbar scrolls smooth, need to find out why.
    */
   protected render() {
@@ -214,7 +250,7 @@ export class Autoscroll {
     }
 
     this.lastMove = this.move;
-    const append = ((this.velocity * this.direction) * delta);
+    const append = this.velocity * this.direction * delta;
     this.move += append;
 
     // Switch directions if we go too far
@@ -228,11 +264,10 @@ export class Autoscroll {
   }
 
   protected scroll(move: number) {
-    if (this.angle === 'vertical') {
+    if (this.angle === "vertical") {
       this.el.scrollTop = move;
     } else {
       this.el.scrollLeft = move;
     }
   }
-
 }

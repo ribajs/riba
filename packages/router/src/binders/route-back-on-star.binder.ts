@@ -1,4 +1,4 @@
-import { Binder, eventHandlerFunction } from '@ribajs/core';
+import { Binder, eventHandlerFunction } from "@ribajs/core";
 
 export const goBack = () => {
   window.history.back();
@@ -8,8 +8,7 @@ export const goBack = () => {
  * Calls `window.history.back()` an event.
  */
 export const routeBackOnStarBinder: Binder<eventHandlerFunction> = {
-
-  name: 'route-back-on-*',
+  name: "route-back-on-*",
   priority: 3000,
 
   bind(/*el: HTMLElement*/) {
@@ -20,10 +19,9 @@ export const routeBackOnStarBinder: Binder<eventHandlerFunction> = {
     el.removeEventListener(this.args[0] as string, goBack);
   },
 
-  routine(el: HTMLElement/*, options: any*/) {
-
+  routine(el: HTMLElement /*, options: any*/) {
     if (this.args === null) {
-      throw new Error('args is null');
+      throw new Error("args is null");
     }
     // const eventName = this.args[0] as string;
     el.removeEventListener(this.args[0] as string, goBack);

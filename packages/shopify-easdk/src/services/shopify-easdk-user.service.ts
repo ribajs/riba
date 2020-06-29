@@ -1,38 +1,35 @@
 import {
   EASDK,
-  EASDKWrapper,
-  BarConfig,
-  Bar,
-  BarWrapper,
-  LoadingStateWrapper,
-  Config,
-  PaginationConfig,
-  ButtonConfig,
-  ButtonCallback,
-  Modal,
-  ModalWrapper,
-  ModalInit,
-  ModalAlertOptions,
-  ModalConfirmOptions,
-  ModalInputOptions,
-  ProductPickerOptions,
-  ProductPickerCallback,
+  // EASDKWrapper,
+  // BarConfig,
+  // Bar,
+  // BarWrapper,
+  // LoadingStateWrapper,
+  // Config,
+  // PaginationConfig,
+  // ButtonConfig,
+  // ButtonCallback,
+  // Modal,
+  // ModalWrapper,
+  // ModalInit,
+  // ModalAlertOptions,
+  // ModalConfirmOptions,
+  // ModalInputOptions,
+  // ProductPickerOptions,
+  // ProductPickerCallback,
   User,
   UserData,
-  ReceiveMessage,
-  ShopifyApp,
-} from '../interfaces/shopify-easdk';
+  // ReceiveMessage,
+  // ShopifyApp,
+} from "../interfaces/shopify-easdk";
 
-import { WrapperService } from './wrapper.service';
+import { WrapperService } from "./wrapper.service";
 
 export class UserWrapperService extends WrapperService implements User {
-
   // Singleton instace
   public static instance?: UserWrapperService;
 
-  constructor(
-    shopifyApp?: EASDK,
-  ) {
+  constructor(shopifyApp?: EASDK) {
     super(shopifyApp);
     if (UserWrapperService.instance) {
       return UserWrapperService.instance;

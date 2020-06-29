@@ -1,4 +1,4 @@
-import { Formatter } from '@ribajs/core';
+import { Formatter } from "@ribajs/core";
 
 /**
  * Return a resized shopify image URL
@@ -11,16 +11,23 @@ import { Formatter } from '@ribajs/core';
  * @param extension
  */
 export const imgUrlFormatter: Formatter = {
-  name: 'img_url',
-  read(url: string, size: string, scale?: number, crop?: string, extension?: string, element?: HTMLImageElement) {
+  name: "img_url",
+  read(
+    url: string,
+    size: string,
+    scale?: number,
+    crop?: string,
+    extension?: string
+    // element?: HTMLImageElement
+  ) {
     try {
-      if (size === 'original' || size === 'master') {
+      if (size === "original" || size === "master") {
         return url;
       }
       if (scale && scale !== 1) {
-        size += '@' + scale + 'x';
+        size += "@" + scale + "x";
       }
-      const result = url.match(/(.*\/[\w\-\_\.]+)\.(\w{2,4})/);
+      const result = url.match(/(.*\/[\w\-_.]+)\.(\w{2,4})/);
 
       if (!result || !result[1] || !result[2]) {
         throw new Error(`Can't match url ${url}`);
@@ -28,7 +35,7 @@ export const imgUrlFormatter: Formatter = {
 
       const path = result[1];
       extension = extension || result[2];
-      return path + '_' + size + '.' + extension;
+      return path + "_" + size + "." + extension;
     } catch (error) {
       console.error(error);
       return url;

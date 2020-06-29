@@ -1,3 +1,3 @@
-export * from './CustomTransition';
-export * from './BaseTransition';
-export * from './HideShowTransition';
+export * from "./CustomTransition";
+export * from "./BaseTransition";
+export * from "./HideShowTransition";

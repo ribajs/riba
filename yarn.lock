@@ -2139,8 +2139,6 @@ __metadata:
     "@types/core-js": ^2.5.3
     "@types/jest": ^26.0.3
     "@types/node": ^14.0.14
-    "@typescript-eslint/eslint-plugin": ^3.4.0
-    "@typescript-eslint/parser": ^3.4.0
     babel-jest: ^26.1.0
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
@@ -2184,8 +2182,6 @@ __metadata:
     "@types/core-js": ^2.5.3
     "@types/jest": ^26.0.3
     "@types/node": ^14.0.14
-    "@typescript-eslint/eslint-plugin": ^3.4.0
-    "@typescript-eslint/parser": ^3.4.0
     babel-jest: ^26.1.0
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
@@ -2334,6 +2330,7 @@ __metadata:
     "@ribajs/core": "portal:packages/core::locator=ribajs%40workspace%3A."
     "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@ribajs/tsconfig": "portal:infra/tsconfig::locator=ribajs%40workspace%3A."
+    "@ribajs/utils": "portal:packages/utils::locator=ribajs%40workspace%3A."
     "@ribajs/webpack-config": "portal:infra/webpack-config::locator=ribajs%40workspace%3A."
     "@typescript-eslint/eslint-plugin": ^3.4.0
     "@typescript-eslint/parser": ^3.4.0
@@ -2365,6 +2362,7 @@ __metadata:
     "@ribajs/core": "portal:packages/core::locator=ribajs%40workspace%3A."
     "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@ribajs/tsconfig": "portal:infra/tsconfig::locator=ribajs%40workspace%3A."
+    "@ribajs/utils": "portal:packages/utils::locator=ribajs%40workspace%3A."
     "@ribajs/webpack-config": "portal:infra/webpack-config::locator=ribajs%40workspace%3A."
     "@typescript-eslint/eslint-plugin": ^3.4.0
     "@typescript-eslint/parser": ^3.4.0
@@ -2410,6 +2408,7 @@ __metadata:
     "@babel/preset-typescript": ^7.10.1
     "@babel/runtime-corejs3": ^7.10.3
     "@ribajs/cache": "portal:packages/cache::locator=ribajs%40workspace%3A."
+    "@ribajs/core": "portal:packages/core::locator=ribajs%40workspace%3A."
     "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@types/jest": ^26.0.3
     "@types/jquery": ^3.5.0
@@ -2445,6 +2444,7 @@ __metadata:
     "@babel/preset-typescript": ^7.10.1
     "@babel/runtime-corejs3": ^7.10.3
     "@ribajs/cache": "portal:packages/cache::locator=ribajs%40workspace%3A."
+    "@ribajs/core": "portal:packages/core::locator=ribajs%40workspace%3A."
     "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@types/jest": ^26.0.3
     "@types/jquery": ^3.5.0
@@ -2741,6 +2741,7 @@ __metadata:
     "@babel/preset-typescript": ^7.10.1
     "@babel/runtime-corejs3": ^7.10.3
     "@ribajs/cache": "portal:packages/cache::locator=ribajs%40workspace%3A."
+    "@ribajs/core": "portal:packages/core::locator=ribajs%40workspace%3A."
     "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@ribajs/router": "portal:packages/router::locator=ribajs%40workspace%3A."
     "@typescript-eslint/eslint-plugin": ^3.4.0
@@ -2770,6 +2771,7 @@ __metadata:
     "@babel/preset-typescript": ^7.10.1
     "@babel/runtime-corejs3": ^7.10.3
     "@ribajs/cache": "portal:packages/cache::locator=ribajs%40workspace%3A."
+    "@ribajs/core": "portal:packages/core::locator=ribajs%40workspace%3A."
     "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@ribajs/i18n": "portal:packages/i18n::locator=ribajs%40workspace%3A."
     "@ribajs/shopify": "portal:packages/shopify::locator=ribajs%40workspace%3A."
@@ -12745,22 +12747,48 @@ fsevents@^2.1.2:
   version: 0.0.0-use.local
   resolution: "ribajs@workspace:."
   dependencies:
+    "@babel/cli": ^7.10.3
+    "@babel/core": ^7.10.3
+    "@babel/plugin-proposal-class-properties": ^7.10.1
+    "@babel/plugin-proposal-object-rest-spread": ^7.10.3
+    "@babel/plugin-proposal-optional-chaining": ^7.10.3
+    "@babel/plugin-syntax-export-default-from": ^7.10.1
+    "@babel/plugin-transform-runtime": ^7.10.3
+    "@babel/preset-env": ^7.10.3
+    "@babel/preset-typescript": ^7.10.1
     "@babel/runtime": ^7.10.3
+    "@babel/runtime-corejs3": ^7.10.3
     "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@ribajs/tsconfig": "portal:infra/tsconfig::locator=ribajs%40workspace%3A."
+    "@ribajs/types": "portal:infra/types::locator=ribajs%40workspace%3A."
+    "@types/core-js": ^2.5.3
+    "@types/jest": ^26.0.3
+    "@types/node": ^14.0.14
     "@typescript-eslint/eslint-plugin": ^3.4.0
     "@typescript-eslint/experimental-utils": ^3.4.0
     "@typescript-eslint/parser": ^3.4.0
     "@yarnpkg/pnpify": ^2.0.0-rc.25
     babel-jest: ^26.1.0
+    babel-loader: ^8.1.0
+    babel-plugin-array-includes: ^2.0.3
     chalk: ^4.1.0
     commander: ^5.1.0
+    core-js: ^3.6.5
     eslint: ^7.3.1
     eslint-config-prettier: ^6.11.0
     eslint-plugin-prettier: ^3.1.4
     husky: ^4.2.5
+    jest: ^26.1.0
+    jest-config: ^26.1.0
+    jest-extended: ^0.11.5
     prettier: ^2.0.5
+    source-map-support: ^0.5.19
+    ts-jest: ^26.1.1
     typescript: ^3.9.5
+    uglifyjs-webpack-plugin: ^2.2.0
+    webpack: ^5.0.0-beta.18
+    webpack-cli: ^3.3.12
+    webpack-glob-entry: ^2.1.1
   languageName: unknown
   linkType: soft
 

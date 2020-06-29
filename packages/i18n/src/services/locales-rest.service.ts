@@ -1,11 +1,10 @@
-import { HttpService } from '@ribajs/core';
-import { ALocalesService } from './locales-base.service';
+import { HttpService } from "@ribajs/core";
+import { ALocalesService } from "./locales-base.service";
 
 /**
  * LocalesRestService get locales object from url
  */
 export class LocalesRestService extends ALocalesService {
-
   public static instances: {
     [url: string]: LocalesRestService;
   } = {};
@@ -26,7 +25,11 @@ export class LocalesRestService extends ALocalesService {
    */
   protected initalLangcode?: string;
 
-  constructor(protected url: string, doNotTranslateDefaultLanguage: boolean = false, showMissingTranslation: boolean = false) {
+  constructor(
+    protected url: string,
+    doNotTranslateDefaultLanguage = false,
+    showMissingTranslation = false
+  ) {
     super(doNotTranslateDefaultLanguage, showMissingTranslation);
 
     this.url = url;
@@ -62,11 +65,9 @@ export class LocalesRestService extends ALocalesService {
     if (this.locales[url]) {
       return this.locales[url];
     }
-    return HttpService.getJSON(url)
-    .then((locales: any) => {
+    return HttpService.getJSON(url).then((locales: any) => {
       this.locales[url as string] = locales;
       return this.locales[url as string];
     });
   }
-
 }

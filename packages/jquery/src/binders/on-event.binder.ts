@@ -1,12 +1,12 @@
-import { Binder, eventHandlerFunction } from '@ribajs/core';
-import { extend } from '@ribajs/utils/src/type';
-import { JQuery } from '../vendors/jquery.module';
+import { Binder, eventHandlerFunction } from "@ribajs/core";
+import { extend } from "@ribajs/utils/src/type";
+import { JQuery } from "../vendors/jquery.module";
 
 /**
  * Binds an event handler on the element.
  */
 export const onEventBinder: Binder<eventHandlerFunction> = {
-  name: 'on-*',
+  name: "on-*",
   function: true,
   priority: 1000,
 
@@ -21,7 +21,7 @@ export const onEventBinder: Binder<eventHandlerFunction> = {
   unbind(el: HTMLElement) {
     if (this.customData.handler) {
       if (this.args === null) {
-        throw new Error('args is null');
+        throw new Error("args is null");
       }
       const eventName = this.args[0] as string;
       JQuery(el).off(eventName, this.customData.handler);
@@ -29,9 +29,8 @@ export const onEventBinder: Binder<eventHandlerFunction> = {
   },
 
   routine(el: HTMLElement, value: eventHandlerFunction) {
-
     if (this.args === null) {
-      throw new Error('args is null');
+      throw new Error("args is null");
     }
     const eventName = this.args[0] as string;
 
@@ -43,13 +42,21 @@ export const onEventBinder: Binder<eventHandlerFunction> = {
 
     try {
       JQuery(el).on(eventName, (event, extraParameters = {}) => {
-        (event as any).data = extend(false, (event as any).data || {}, extraParameters);
+        (event as any).data = extend(
+          false,
+          (event as any).data || {},
+          extraParameters
+        );
         return this.customData.handler(event);
       });
     } catch (error) {
       console.warn(error);
       JQuery(el).on(eventName, (event: JQuery.Event, extraParameters: any) => {
-        (event as any).data = extend(false, (event as any).data || {}, extraParameters);
+        (event as any).data = extend(
+          false,
+          (event as any).data || {},
+          extraParameters
+        );
         return this.customData.handler(event);
       });
     }
