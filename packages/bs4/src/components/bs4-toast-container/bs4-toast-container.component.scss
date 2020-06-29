@@ -19,6 +19,7 @@ bs4-toast-container {
     bottom: $container-spacing-y;
   }
   .absolute-center {
+    right: 50%;
     transform: translate(50%, 0);
   }
 }
