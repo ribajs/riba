@@ -9,6 +9,9 @@ bs4-toast-item {
   .toast-success {
     @extend .alert-success;
   }
+  .toast-danger {
+    @extend .alert-danger;
+  }
   .toast-dark {
     @extend .alert-dark;
   }
