@@ -1,3 +1,24 @@
 .toast-item-container {
   position: fixed;
 }
+
+$container-margin-x: 30px;
+$container-margin-y: 30px;
+
+bs4-toast-container {
+  .absolute-left {
+    left: $container-margin-x;
+  }
+  .absolute-right {
+    right: $container-margin-x;
+  }
+  .absolute-top {
+    top: $container-margin-y;
+  }
+  .absolute-bottom {
+    bottom: $container-margin-y;
+  }
+  .absolute-center {
+    transform: translate(50%, 0);
+  }
+}

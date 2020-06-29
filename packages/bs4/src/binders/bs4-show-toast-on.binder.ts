@@ -5,6 +5,7 @@ export const showToastOnEventBinder: Binder<ToastBinderData> = {
   name: "show-toast-on-*",
   onEvent(event: CustomEvent) {
     console.debug("[show-toast-on-*] event.detail:", event.detail);
+    this.customData.toastData.$event = event;
     const toastData: ToastBinderData = this.customData.toastData;
     const toastDispatcher = new EventDispatcher(toastData.channel || "toast");
     toastDispatcher.trigger("show-toast", toastData);

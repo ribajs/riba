@@ -48,16 +48,23 @@ export class OcFormComponent extends Bs4FormComponent {
 
     // See October CMS JavaScript API: https://octobercms.com/docs/ajax/javascript-api
     const $form = window.jQuery(this.formEl);
-    ($form as any).request(this.scope.octoberHandler);
+    ($form as any).request(this.scope.octoberHandler, {
+      error: (jqXHR: any, statusText: string, error: any) => {
+        console.error(jqXHR, statusText, error);
+        if (jqXHR.responseJSON?.error) {
+          this.onErrorSubmit(jqXHR.responseJSON.error, jqXHR.responseJSON.error, jqXHR);
+        } else {
+          this.onErrorSubmit(statusText, statusText, jqXHR);
+        }
+      },
+    });
 
     // See October CMS JavaScript API AJAX handlers: https://octobercms.com/docs/ajax/handlers
-    $form.one("ajaxSuccess", (event: JQuery.Event, context: any, data: any, statusText: string, jqXHR: any) => {
-      this.onSuccessSubmit(data);
+    $form.one("ajaxSuccess", (event: JQuery.Event, context: any, body: any, statusText: string, jqXHR: any) => {
+      this.onSuccessSubmit(statusText, body.result, jqXHR);
     });
-    $form.one("ajaxError", (event: JQuery.Event, context: any, data: any, statusText: string, jqXHR: any) => {
-      this.onErrorSubmit(new Error(statusText));
+    $form.one("ajaxError", (event: JQuery.Event, context: any, message: string, statusText: string, jqXHR: any) => {
+      this.onErrorSubmit(statusText, message, jqXHR);
     });
-
   }
-
 }

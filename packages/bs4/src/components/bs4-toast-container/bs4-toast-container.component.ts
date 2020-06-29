@@ -1,11 +1,11 @@
 import { Component, EventDispatcher } from "@ribajs/core";
 
 import template from "./bs4-toast-container.component.html";
-import { Toast } from "../../interfaces";
+import { Toast, ToastBinderData } from "../../interfaces";
 
 export interface Scope {
   iconUrl?: string;
-  positionStyle: string;
+  positionClass: string;
   toasts: Toast[];
   channelName: string;
   onToastItemHide: Bs4ToastContainerComponent["onToastItemHide"];
@@ -19,12 +19,12 @@ export class Bs4ToastContainerComponent extends Component {
   protected eventDispatcher?: EventDispatcher;
 
   static get observedAttributes() {
-    return ["icon-url", "position-style", "channel-name"];
+    return ["icon-url", "position-class", "channel-name"];
   }
 
   protected scope: Scope = {
     toasts: [],
-    positionStyle: "bottom: 20px; right: 20px;",
+    positionClass: "absolute-bottom absolute-center",
     channelName: "toast",
     onToastItemHide: this.onToastItemHide,
   };
@@ -39,7 +39,7 @@ export class Bs4ToastContainerComponent extends Component {
 
     //add event dispatcher to listen for toast notifications
     this.eventDispatcher = new EventDispatcher(this.scope.channelName);
-    this.eventDispatcher.on("show-toast", (toast: Toast) => {
+    this.eventDispatcher.on("show-toast", (toast: Toast | ToastBinderData) => {
       this.scope.toasts.push(toast);
     });
   }

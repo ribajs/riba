@@ -226,7 +226,11 @@ export class HttpService {
       })
         .then((response) => {
           if (response.status >= 400) {
-            throw response;
+            try {
+              throw response.json();
+            } catch (error) {
+              throw response.text();
+            }
           }
           if (
             typeof dataType === "string" &&

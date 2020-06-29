@@ -1,17 +1,18 @@
 import { Component } from "@ribajs/core";
 
 import template from "./bs4-toast-item.component.html";
-import { Toast } from "../../interfaces";
+import { Toast, ToastBinderData } from "../../interfaces";
 import { ToastService } from "../../services";
 import { Scope as Bs4ToastContainerScope } from "../bs4-toast-container/bs4-toast-container.component";
 
 interface Scope {
   iconUrl?: string;
-  toast?: Toast;
+  toast?: Toast | ToastBinderData;
   onHide: Bs4ToastItemComponent["onHide"];
   onDismiss: Bs4ToastItemComponent["onDismiss"];
   index: number;
   $parent?: any;
+  $event?: CustomEvent;
 }
 
 export class Bs4ToastItemComponent extends Component {

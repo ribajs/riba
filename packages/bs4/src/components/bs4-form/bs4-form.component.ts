@@ -189,11 +189,16 @@ export class Bs4FormComponent extends Component {
       submitSettings.type
     )
       .then((res) => {
-        this.onSuccessSubmit(res);
+        if (Number(res.status) >= 400) {
+          // TODO generate message by status
+          this.onErrorSubmit(res.status, res.body.message, res.body);
+        }
+        this.onSuccessSubmit(res.status, res.body.message, res.body);
       })
       .catch((err) => {
         console.error(err);
-        this.onErrorSubmit(err);
+        //
+        this.onErrorSubmit(err.status, err.body.message, err.body);
       });
   }
 
@@ -215,16 +220,16 @@ export class Bs4FormComponent extends Component {
     return settings;
   }
 
-  protected onErrorSubmit(err?: Error) {
-    this.debug("onSuccessSubmit");
+  protected onErrorSubmit(status: string, message: string, response: any) {
+    this.debug("onErrorSubmit");
     this.el.dispatchEvent(
       new CustomEvent("submit-error", {
-        detail: { response: err, success: true, error: false },
+        detail: { status, message: message, response },
       })
     );
   }
 
-  protected onSuccessSubmit(response?: any) {
+  protected onSuccessSubmit(status: string, message: string, response: any) {
     this.debug("onSuccessSubmit");
     if (this.scope.disableSubmitUntilChange) {
       this.scope.submitDisabled = true;
@@ -232,7 +237,7 @@ export class Bs4FormComponent extends Component {
 
     this.el.dispatchEvent(
       new CustomEvent("submit-success", {
-        detail: { response, success: true, error: false },
+        detail: { status, message: message, response },
       })
     );
   }
