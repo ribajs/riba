@@ -1,4 +1,7 @@
-import { Bs4FormComponent, Scope as Bs4FormScope } from "@ribajs/bs4/src/components/bs4-form/bs4-form.component";
+import {
+  Bs4FormComponent,
+  Scope as Bs4FormScope,
+} from "@ribajs/bs4/src/components/bs4-form/bs4-form.component";
 
 export interface Scope extends Bs4FormScope {
   octoberHandler: string;
@@ -52,7 +55,11 @@ export class OcFormComponent extends Bs4FormComponent {
       error: (jqXHR: any, statusText: string, error: any) => {
         console.error(jqXHR, statusText, error);
         if (jqXHR.responseJSON?.error) {
-          this.onErrorSubmit(jqXHR.responseJSON.error, jqXHR.responseJSON.error, jqXHR);
+          this.onErrorSubmit(
+            jqXHR.responseJSON.error,
+            jqXHR.responseJSON.error,
+            jqXHR
+          );
         } else {
           this.onErrorSubmit(statusText, statusText, jqXHR);
         }
@@ -60,11 +67,29 @@ export class OcFormComponent extends Bs4FormComponent {
     });
 
     // See October CMS JavaScript API AJAX handlers: https://octobercms.com/docs/ajax/handlers
-    $form.one("ajaxSuccess", (event: JQuery.Event, context: any, body: any, statusText: string, jqXHR: any) => {
-      this.onSuccessSubmit(statusText, body.result, jqXHR);
-    });
-    $form.one("ajaxError", (event: JQuery.Event, context: any, message: string, statusText: string, jqXHR: any) => {
-      this.onErrorSubmit(statusText, message, jqXHR);
-    });
+    $form.one(
+      "ajaxSuccess",
+      (
+        event: JQuery.Event,
+        context: any,
+        body: any,
+        statusText: string,
+        jqXHR: any
+      ) => {
+        this.onSuccessSubmit(statusText, body.result, jqXHR);
+      }
+    );
+    $form.one(
+      "ajaxError",
+      (
+        event: JQuery.Event,
+        context: any,
+        message: string,
+        statusText: string,
+        jqXHR: any
+      ) => {
+        this.onErrorSubmit(statusText, message, jqXHR);
+      }
+    );
   }
 }

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 /**
  * Ported TypeScrit version of https://raw.githubusercontent.com/dimsemenov/PhotoSwipe/master/src/js/ui/photoswipe-ui-default.js
  *
@@ -259,7 +258,7 @@ export class PhotoSwipeUI {
           this._onMouseLeaveWindow.bind(this)
         );
 
-        this._idleInterval = setInterval(() => {
+        this._idleInterval = window.setInterval(() => {
           this._idleIncrement++;
           if (this._idleIncrement === 2) {
             this.setIdle(true);
