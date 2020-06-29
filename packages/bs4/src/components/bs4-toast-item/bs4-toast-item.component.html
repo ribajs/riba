@@ -1,4 +1,4 @@
-<div rv-show="toast" class="toast my-1" role="alert" aria-live="assertive" aria-atomic="true" rv-on-hidden.bs.toast="onHide">
+<div rv-show="toast" class="toast my-1" rv-add-class="toast.contextualClass | prepend 'toast-'" role="alert" aria-live="assertive" aria-atomic="true" rv-on-hidden.bs.toast="onHide">
   <div class="toast-header" rv-show="toast.title">
     <img id="toastImage" rv-if="iconUrl" rv-src="iconUrl" class="rounded mr-2" alt="toast icon">
     <strong class="mr-auto" rv-text="toast.title"></strong>
@@ -6,5 +6,5 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="toast-body" rv-text="toast.message"></div>
+  <div class="toast-body" rv-template="toast.message"></div>
 </div>

@@ -8,8 +8,10 @@ export interface Toast {
   autoHide?: boolean;
   animation?: boolean;
   toastService?: ToastService;
+  contextualClass?: string;
 }
 
 export interface ToastBinderData extends Toast {
   channel?: string;
+  $event?: CustomEvent;
 }
