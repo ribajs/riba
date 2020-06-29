@@ -2,21 +2,21 @@
   position: fixed;
 }
 
-$container-margin-x: 30px;
-$container-margin-y: 30px;
+$container-spacing-x: 30px;
+$container-spacing-y: 30px;
 
 bs4-toast-container {
   .absolute-left {
-    left: $container-margin-x;
+    left: $container-spacing-x;
   }
   .absolute-right {
-    right: $container-margin-x;
+    right: $container-spacing-x;
   }
   .absolute-top {
-    top: $container-margin-y;
+    top: $container-spacing-y;
   }
   .absolute-bottom {
-    bottom: $container-margin-y;
+    bottom: $container-spacing-y;
   }
   .absolute-center {
     transform: translate(50%, 0);
