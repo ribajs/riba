@@ -56,7 +56,7 @@ export class HCaptchaFormComponent extends OcFormComponent {
       hcaptchaTabindex: 0,
       hcaptchaCallback: "onHCaptchaSubmit",
       // hcaptchaExpiredCallback: "onHCaptchaExpired",
-      // hcaptchaErrorCallback: "onHCaptchaError",
+      hcaptchaErrorCallback: "onHCaptchaError",
       hcaptchaContainerSelector: ".h-captcha-container",
     };
 
@@ -79,8 +79,13 @@ export class HCaptchaFormComponent extends OcFormComponent {
 
   protected ajaxSubmit() {
     this.debug("ajaxSubmit", "octoberHandler", this.scope.octoberHandler, "widgetID", this.widgetID);
-    this.scope.submitDisabled = true;
-    (window as any).hcaptcha.execute(this.widgetID);
+
+    if (this.scope.hcaptchaSize === "invisible") {
+      this.scope.submitDisabled = true;
+      (window as any).hcaptcha.execute(this.widgetID);
+    } else {
+      return super.ajaxSubmit();
+    }
   }
 
   protected onHCaptchaLoaded() {
@@ -127,10 +132,13 @@ export class HCaptchaFormComponent extends OcFormComponent {
 
   protected initHCaptcha() {
     // Set this to the global window object to make it callable by hCaptcha
+
     (window as any)[this.scope.hcaptchaCallback] = (token: string) => {
-      this.debug(`[${this.scope.hcaptchaCallback}]`, token, this);
-      // Trigger the default ajaxSubmit of Bs4FormComponent
-      return super.ajaxSubmit();
+      if (this.scope.hcaptchaSize === "invisible") {
+        this.debug(`[${this.scope.hcaptchaCallback}]`, token, this);
+        // Trigger the default ajaxSubmit of Bs4FormComponent
+        return super.ajaxSubmit();
+      }
     };
 
     // Set this to the global window object to make it callable by hCaptcha
@@ -156,16 +164,9 @@ export class HCaptchaFormComponent extends OcFormComponent {
 
   protected connectedCallback() {
     this.debug("connectedCallback");
-    super.connectedCallback();
     this.init(HCaptchaFormComponent.observedAttributes);
-
-    if (this.scope.disableSubmitUntilChange) {
-      this.el.addEventListener("input", () => {
-        this.scope.submitDisabled = false;
-      });
-    }
-
     this.initHCaptcha();
+    this.addEventListeners();
   }
 
   protected requiredAttributes(): string[] {

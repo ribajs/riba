@@ -58,14 +58,7 @@ export class Bs4FormComponent extends Component {
   protected autobind = true;
 
   static get observedAttributes() {
-    return [
-      "id",
-      "disable-submit-until-change",
-      "use-ajax",
-      "ajax-request-type",
-      "auto-set-form-data",
-      "strip-html",
-    ];
+    return ["id", "disable-submit-until-change", "use-ajax", "ajax-request-type", "auto-set-form-data", "strip-html"];
   }
 
   protected formEl: HTMLFormElement | null = null;
@@ -128,13 +121,8 @@ export class Bs4FormComponent extends Component {
 
   protected stripHtml() {
     for (const key in this.scope.form.fields) {
-      if (
-        this.scope.form.fields[key] &&
-        typeof this.scope.form.fields[key] === "string"
-      ) {
-        this.scope.form.fields[key] = stripHtml(
-          this.scope.form.fields[key] as string
-        );
+      if (this.scope.form.fields[key] && typeof this.scope.form.fields[key] === "string") {
+        this.scope.form.fields[key] = stripHtml(this.scope.form.fields[key] as string);
       }
     }
   }
@@ -182,12 +170,7 @@ export class Bs4FormComponent extends Component {
       return;
     }
     // This method is untested in the wild
-    HttpService.fetch(
-      submitSettings.action,
-      submitSettings.method,
-      this.scope.form.fields,
-      submitSettings.type
-    )
+    HttpService.fetch(submitSettings.action, submitSettings.method, this.scope.form.fields, submitSettings.type)
       .then((res) => {
         if (Number(res.status) >= 400) {
           // TODO generate message by status
@@ -247,6 +230,7 @@ export class Bs4FormComponent extends Component {
     validationScope.error = form.validationMessage;
     // only show validation if we want to give a hint to the user that something is wrong
     if (!validationScope.valid) {
+      this.el.dispatchEvent(new CustomEvent("validation-error"));
       form.classList.add("was-validated");
     }
   }
