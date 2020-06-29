@@ -14,4 +14,5 @@ export interface Toast {
 export interface ToastBinderData extends Toast {
   channel?: string;
   $event?: CustomEvent;
+  $context?: any;
 }
