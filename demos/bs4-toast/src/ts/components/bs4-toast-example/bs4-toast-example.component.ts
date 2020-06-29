@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, EventDispatcher } from "@ribajs/core";
 import template from "./bs4-toast-example.component.html";
 
 export class Bs4ToastExampleComponent extends Component {
@@ -9,7 +9,18 @@ export class Bs4ToastExampleComponent extends Component {
     return [];
   }
 
-  protected scope = {};
+  protected scope = {
+    showToast: this.showToast,
+    message: "",
+    title: "",
+    fromComponent: {
+      message: "Message example",
+      title: "Title example",
+      contextualClass: "primary",
+      channel: "toast-right",
+      delay: 1000,
+    },
+  };
 
   constructor(element?: HTMLElement) {
     super(element);
@@ -18,6 +29,19 @@ export class Bs4ToastExampleComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     super.init(Bs4ToastExampleComponent.observedAttributes);
+  }
+
+  public showToast(event: Event) {
+    this.scope.fromComponent.delay = Number(this.scope.fromComponent.delay);
+    const toastDispatcher = new EventDispatcher(
+      this.scope.fromComponent.channel
+    );
+
+    toastDispatcher.trigger("show-toast", {
+      ...this.scope.fromComponent,
+      $event: event,
+      $context: this.scope,
+    });
   }
 
   protected requiredAttributes() {

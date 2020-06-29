@@ -6,11 +6,23 @@ bs4-toast-item {
   .toast-primary {
     @extend .alert-primary;
   }
+  .toast-secondary {
+    @extend .alert-secondary;
+  }
   .toast-success {
     @extend .alert-success;
   }
   .toast-danger {
     @extend .alert-danger;
+  }
+  .toast-warning {
+    @extend .alert-warning;
+  }
+  .toast-info {
+    @extend .alert-info;
+  }
+  .toast-light {
+    @extend .alert-light;
   }
   .toast-dark {
     @extend .alert-dark;
