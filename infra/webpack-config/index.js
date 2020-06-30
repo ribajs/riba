@@ -40,6 +40,8 @@ var getStyleLoaderRule = (config) => {
     loader: require.resolve("sass-loader"),
     options: {
       webpackImporter: true,
+      // Use dart-sass in combination of yarn berry pnp, see: https://github.com/webpack-contrib/sass-loader/issues/802
+      implementation: require("dart-sass"),
     },
   });
   return rule;
@@ -134,7 +136,10 @@ module.exports = (config) => {
       };
       break;
     case "shopify":
-      config.entry = [rootPath + "/src/scss/main.scss", rootPath + "/src/ts/main.ts"];
+      config.entry = [
+        rootPath + "/src/scss/main.scss",
+        rootPath + "/src/ts/main.ts",
+      ];
       config.output = {
         path: path.resolve(rootPath, "theme/assets/"),
       };
@@ -167,7 +172,10 @@ module.exports = (config) => {
       break;
     // E.g. used for demos
     case "local":
-      (config.entry = [rootPath + "/src/scss/main.scss", rootPath + "/src/ts/main.ts"]),
+      (config.entry = [
+        rootPath + "/src/scss/main.scss",
+        rootPath + "/src/ts/main.ts",
+      ]),
         (config.output = {
           path: path.resolve(rootPath, "dist/"),
         });

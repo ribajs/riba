@@ -127,6 +127,9 @@
 .scrollbar-x-auto {
   overflow-x: auto;
   max-width: 100%;
+  &.row {
+    max-width: initial;
+  }
 }
 
 .scrollbar-y-auto {
@@ -135,14 +138,16 @@
 }
 
 .scrollbar-auto {
-  max-width: 100%;
-  max-height: 100%;
-  overflow: auto;
+  @extend .scrollbar-x-auto;
+  @extend .scrollbar-y-auto;
 }
 
 .scrollbar-x-visible {
   overflow-x: visible;
   max-width: 100%;
+  &.row {
+    max-width: initial;
+  }
 }
 
 .scrollbar-y-visible {

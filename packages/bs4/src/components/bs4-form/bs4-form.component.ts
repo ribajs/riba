@@ -58,7 +58,14 @@ export class Bs4FormComponent extends Component {
   protected autobind = true;
 
   static get observedAttributes() {
-    return ["id", "disable-submit-until-change", "use-ajax", "ajax-request-type", "auto-set-form-data", "strip-html"];
+    return [
+      "id",
+      "disable-submit-until-change",
+      "use-ajax",
+      "ajax-request-type",
+      "auto-set-form-data",
+      "strip-html",
+    ];
   }
 
   protected formEl: HTMLFormElement | null = null;
@@ -121,8 +128,13 @@ export class Bs4FormComponent extends Component {
 
   protected stripHtml() {
     for (const key in this.scope.form.fields) {
-      if (this.scope.form.fields[key] && typeof this.scope.form.fields[key] === "string") {
-        this.scope.form.fields[key] = stripHtml(this.scope.form.fields[key] as string);
+      if (
+        this.scope.form.fields[key] &&
+        typeof this.scope.form.fields[key] === "string"
+      ) {
+        this.scope.form.fields[key] = stripHtml(
+          this.scope.form.fields[key] as string
+        );
       }
     }
   }
@@ -170,13 +182,19 @@ export class Bs4FormComponent extends Component {
       return;
     }
     // This method is untested in the wild
-    HttpService.fetch(submitSettings.action, submitSettings.method, this.scope.form.fields, submitSettings.type)
+    HttpService.fetch(
+      submitSettings.action,
+      submitSettings.method,
+      this.scope.form.fields,
+      submitSettings.type
+    )
       .then((res) => {
+        const message = res.body && res.body.message ? res.body.message : "";
         if (Number(res.status) >= 400) {
           // TODO generate message by status
-          this.onErrorSubmit(res.status, res.body.message, res.body);
+          this.onErrorSubmit(res.status, message, res.body);
         }
-        this.onSuccessSubmit(res.status, res.body.message, res.body);
+        this.onSuccessSubmit(res.status, message, res.body);
       })
       .catch((err) => {
         console.error(err);

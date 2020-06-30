@@ -3271,7 +3271,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"anymatch@npm:^3.0.3":
+"anymatch@npm:^3.0.3, anymatch@npm:~3.1.1":
   version: 3.1.1
   resolution: "anymatch@npm:3.1.1"
   dependencies:
@@ -3817,6 +3817,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"binary-extensions@npm:^2.0.0":
+  version: 2.1.0
+  resolution: "binary-extensions@npm:2.1.0"
+  checksum: 4ccb882902237f41fe20b618ce2d61f4b232e6f3d741d8f81388b7c48a968d22625f29942db7ca8968f5eba42396dd65fc962939e3ea26db68e62794b32f6143
+  languageName: node
+  linkType: hard
+
 "bindings@npm:^1.5.0":
   version: 1.5.0
   resolution: "bindings@npm:1.5.0"
@@ -3919,7 +3926,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"braces@npm:^3.0.1":
+"braces@npm:^3.0.1, braces@npm:~3.0.2":
   version: 3.0.2
   resolution: "braces@npm:3.0.2"
   dependencies:
@@ -3994,6 +4001,7 @@ __metadata:
     bootstrap: ^4.5.0
     core-js: ^3.6.5
     css-loader: ^3.6.0
+    dart-sass: ^1.25.0
     eslint: ^7.3.1
     eslint-config-prettier: ^6.11.0
     eslint-plugin-prettier: ^3.1.4
@@ -4002,7 +4010,6 @@ __metadata:
     jest: ^26.1.0
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^0.9.0
-    node-sass: ^4.14.1
     postcss-loader: ^3.0.0
     postcss-modules: ^3.1.0
     prettier: ^2.0.5
@@ -4311,6 +4318,25 @@ __metadata:
   version: 1.0.2
   resolution: "char-regex@npm:1.0.2"
   checksum: cac68108b9f66a9387d2fbeb9be5aac0ced2923c094a67dcdc6ccb4a54545dc30634880e03c74dde2bcd5699be6c05533b6cbc4376ee8e7c899bfa870d7779bd
+  languageName: node
+  linkType: hard
+
+"chokidar@npm:>=2.0.0 <4.0.0":
+  version: 3.4.0
+  resolution: "chokidar@npm:3.4.0"
+  dependencies:
+    anymatch: ~3.1.1
+    braces: ~3.0.2
+    fsevents: ~2.1.2
+    glob-parent: ~5.1.0
+    is-binary-path: ~2.1.0
+    is-glob: ~4.0.1
+    normalize-path: ~3.0.0
+    readdirp: ~3.4.0
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  checksum: 2c7d302cd2e7f3ce16efcdf3d4bfc6e588a0491bb1382a1202a85af3a5070b8df98208480bdd9e89aaaebbe0fb5cefe6895ddd794fa53a0aa7b7ff8c2208ce46
   languageName: node
   linkType: hard
 
@@ -5053,6 +5079,17 @@ __metadata:
     es5-ext: ^0.10.50
     type: ^1.0.1
   checksum: 5d8c519c6be1300447a9fdf0625842a1770da258e932af3b1564c306999ec7aabb5eb1ef99b9b1892fe2dea3583c177f8bc9245411c83fc3812ac2bae3ebdda7
+  languageName: node
+  linkType: hard
+
+"dart-sass@npm:^1.25.0":
+  version: 1.25.0
+  resolution: "dart-sass@npm:1.25.0"
+  dependencies:
+    chokidar: ">=2.0.0 <4.0.0"
+  bin:
+    dart-sass: sass.js
+  checksum: f93ee44247b47b8bf7a4e3056f45fc3150637d1b8f2206080e5f560601f317a463c656ddba12e4bbb71d5ebdc3b19c2519abeaa61c44a4ee300529d85ea51355
   languageName: node
   linkType: hard
 
@@ -6615,7 +6652,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-fsevents@^2.1.2:
+"fsevents@^2.1.2, fsevents@~2.1.2":
   version: 2.1.3
   resolution: "fsevents@npm:2.1.3"
   dependencies:
@@ -6636,7 +6673,7 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"fsevents@patch:fsevents@^2.1.2#builtin<compat/fsevents>":
+"fsevents@patch:fsevents@^2.1.2#builtin<compat/fsevents>, fsevents@patch:fsevents@~2.1.2#builtin<compat/fsevents>":
   version: 2.1.3
   resolution: "fsevents@patch:fsevents@npm%3A2.1.3#builtin<compat/fsevents>::version=2.1.3&hash=e8cd9e"
   dependencies:
@@ -6791,7 +6828,7 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"glob-parent@npm:^5.0.0, glob-parent@npm:^5.1.0, glob-parent@npm:^5.1.1":
+"glob-parent@npm:^5.0.0, glob-parent@npm:^5.1.0, glob-parent@npm:^5.1.1, glob-parent@npm:~5.1.0":
   version: 5.1.1
   resolution: "glob-parent@npm:5.1.1"
   dependencies:
@@ -7874,6 +7911,15 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
+"is-binary-path@npm:~2.1.0":
+  version: 2.1.0
+  resolution: "is-binary-path@npm:2.1.0"
+  dependencies:
+    binary-extensions: ^2.0.0
+  checksum: 8cbcb16234e0934f93596df28387beb65d7ebba40fe8d974afcb22bde607e060a9a19eff5c153fbd24cd6fad7a66b7685ca6db514b42aff1a05bc594848eec14
+  languageName: node
+  linkType: hard
+
 "is-buffer@npm:^1.1.5":
   version: 1.1.6
   resolution: "is-buffer@npm:1.1.6"
@@ -8022,7 +8068,7 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"is-glob@npm:^4.0.0, is-glob@npm:^4.0.1":
+"is-glob@npm:^4.0.0, is-glob@npm:^4.0.1, is-glob@npm:~4.0.1":
   version: 4.0.1
   resolution: "is-glob@npm:4.0.1"
   dependencies:
@@ -10134,7 +10180,7 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"normalize-path@npm:^3.0.0":
+"normalize-path@npm:^3.0.0, normalize-path@npm:~3.0.0":
   version: 3.0.0
   resolution: "normalize-path@npm:3.0.0"
   checksum: 73bb886e24509977706086359ee2b822b8a21bea96376f41332797a9a0c0ef5107f610584c90532bdd9206c54d7bfecbb55c34261f33e05dbb3603a45e78c54b
@@ -11626,6 +11672,15 @@ fsevents@^2.1.2:
     micromatch: ^3.1.10
     readable-stream: ^2.0.2
   checksum: 7f737f2414b8cc61420694829ec9e4778c5bec5ee1ca265a1e8cc905d12370068c58dc21d15dae16984e3ae3d37d16447abf075a0edb708d2899ecc934195a58
+  languageName: node
+  linkType: hard
+
+"readdirp@npm:~3.4.0":
+  version: 3.4.0
+  resolution: "readdirp@npm:3.4.0"
+  dependencies:
+    picomatch: ^2.2.1
+  checksum: cb4921902e08048649e95fc34daa4b4d90747448176f9d5522d6f37c6b11c67bd7e5318b39bfd8fdfb14fe5b572ece665aadf358fe0c9b98aa606cb76f3b1c0a
   languageName: node
   linkType: hard
 

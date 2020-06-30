@@ -1,8 +1,8 @@
 // Original Bootstrap 4 Styles
-@import './vendors/bootstrap/bootstrap';
+@import '~bootstrap/scss/bootstrap';
 
 // Bootstrap style extensions from Riba.js modules
-@import "./vendors/@ribajs/tagged-image/index";
+@import '~@ribajs/tagged-image/src/index';
 
 // @import './binders/index';
 @import '../ts/components/index';

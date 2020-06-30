@@ -1,5 +1,5 @@
-@import './vendors/bootstrap/bootstrap';
-@import './vendors/@ribajs/bs4/index';
+@import '~bootstrap/scss/bootstrap';
+@import '~@ribajs/bs4/src/index';
 @import '../ts/components/index';
 
 body {

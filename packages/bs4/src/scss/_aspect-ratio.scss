@@ -57,7 +57,8 @@
     $embed-responsive-aspect-ratio-x: nth($embed-responsive-aspect-ratio, 1);
     $embed-responsive-aspect-ratio-y: nth($embed-responsive-aspect-ratio, 2);
     @include media-breakpoint-up($breakpoint) {
-      &.embed-responsive-bg#{$infix}-#{$embed-responsive-aspect-ratio-x}by#{$embed-responsive-aspect-ratio-y} {
+      // TODO TESTME
+      .embed-responsive-bg#{$infix}-#{$embed-responsive-aspect-ratio-x}by#{$embed-responsive-aspect-ratio-y} {
         padding-top: percentage($embed-responsive-aspect-ratio-y / $embed-responsive-aspect-ratio-x);
       }
     }

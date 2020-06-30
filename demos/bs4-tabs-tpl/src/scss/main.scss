@@ -1,5 +1,5 @@
-@import './vendors/bootstrap/bootstrap';
+@import '~bootstrap/scss/bootstrap';
 // Bootstrap style extensions from @ribajs/bs4
-@import "./vendors/@ribajs/bs4/index";
+@import '~@ribajs/bs4/src/index';
 @import '../ts/components/index';
 
