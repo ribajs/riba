@@ -16,9 +16,9 @@ export class Bs4ToastExampleComponent extends Component {
     fromComponent: {
       message: "Message example",
       title: "Title example",
-      contextualClass: "primary",
+      contextualClass: "default",
       channel: "toast-right",
-      delay: 1000,
+      delay: 10000,
     },
   };
 

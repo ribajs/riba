@@ -27,7 +27,8 @@
         <div class="form-group col-md-4">
           <label>Title</label>
           <select class="form-control custom-select" rv-value="fromComponent.contextualClass">
-            <option selected value="primary">Primary</option>
+            <option selected value="default">Default</option>
+            <option value="primary">Primary</option>
             <option value="secondary">Secondary</option>
             <option value="success">Success</option>
             <option value="danger">Danger</option>
@@ -93,7 +94,7 @@
       <div class="form-row">
 
         <div class="col-md-4 mb-2">
-          <button class="btn btn-danger" rv-show-toast-on-click="{ 'message': 'Pointer type: <strong>{ toast.$event.pointerType }</strong>', 'title': 'Event type: { toast.$event.type }', 'contextualClass': 'info', 'delay': 10000 }" type="button">Info toast</button>
+          <button class="btn btn-info" rv-show-toast-on-click="{ 'message': 'Pointer type: <strong>{ toast.$event.pointerType }</strong>', 'title': 'Event type: { toast.$event.type }', 'contextualClass': 'info', 'delay': 10000 }" type="button">Info toast</button>
         </div>
       
       </div>
