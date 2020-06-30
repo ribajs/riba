@@ -1,30 +1,48 @@
-.toast {
-  min-width: 250px;
+@mixin toast-variant($background, $border, $color) {
+  color: $color;
+  @include gradient-bg($background);
+  border-color: $border;
+
+  hr {
+    border-top-color: darken($border, 5%);
+  }
+
+  .alert-link {
+    color: darken($color, 10%);
+  }
 }
 
-bs4-toast-item {
-  .toast-primary {
-    @extend .alert-primary;
-  }
-  .toast-secondary {
-    @extend .alert-secondary;
-  }
-  .toast-success {
-    @extend .alert-success;
-  }
-  .toast-danger {
-    @extend .alert-danger;
-  }
-  .toast-warning {
-    @extend .alert-warning;
-  }
-  .toast-info {
-    @extend .alert-info;
-  }
-  .toast-light {
-    @extend .alert-light;
-  }
-  .toast-dark {
-    @extend .alert-dark;
+
+$toast-border-level:                $alert-border-level !default; // default is -9
+$toast-opacity:                     0.6 !default;
+
+$toast-body-bg-level:               $alert-bg-level !default; // default is -10
+$toast-body-color-level:            $alert-color-level !default; // default is 6
+
+$toast-header-bg-level:             $alert-bg-level + 2 !default;
+$toast-header-color-level:          $alert-color-level +2 !default;
+
+.toast {
+  min-width: 250px;
+  @each $color, $value in $theme-colors {
+    &.toast-#{$color} {
+      
+      $toast-border-color: theme-color-level($color, $toast-border-level);
+
+      $toast-body-bg: rgba(theme-color-level($color, $toast-body-bg-level), $toast-opacity);
+      $toast-body-color: theme-color-level($color, $toast-body-color-level);
+
+      $toast-header-bg: rgba(theme-color-level($color, $toast-header-bg-level), $toast-opacity);
+      $toast-header-color: theme-color-level($color, $toast-header-color-level);
+
+      @include toast-variant($toast-body-bg, $toast-border-color, $toast-body-color);
+      .toast-header {
+        @include toast-variant($toast-header-bg, $toast-border-color, $toast-header-color);
+        .close {
+          opacity: 1;
+          color: $toast-header-color;
+        }
+      }
+    }
   }
 }
