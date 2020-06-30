@@ -2,21 +2,21 @@
   position: fixed;
 }
 
-$container-spacing-x: 30px;
-$container-spacing-y: 30px;
+$toast-container-spacing-x: 30px !default;
+$toast-container-spacing-y: 30px !default;
 
 bs4-toast-container {
   .absolute-left {
-    left: $container-spacing-x;
+    left: $toast-container-spacing-x;
   }
   .absolute-right {
-    right: $container-spacing-x;
+    right: $toast-container-spacing-x;
   }
   .absolute-top {
-    top: $container-spacing-y;
+    top: $toast-container-spacing-y;
   }
   .absolute-bottom {
-    bottom: $container-spacing-y;
+    bottom: $toast-container-spacing-y;
   }
   .absolute-center {
     right: 50%;
