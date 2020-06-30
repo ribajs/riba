@@ -43,6 +43,8 @@ lerna-debug.log*
 
 # Demos
 /demos/*/src/iconset/
+/demos/*/.cache/
+/demos/*/dist/
 /demos/*/src/scss/vendors/
 /demos/*/src/images/vendors/
 /demos/*/.yarn/*
