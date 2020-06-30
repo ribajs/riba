@@ -12,7 +12,7 @@
   }
 }
 
-
+$toast-min-width:                   250px;
 $toast-border-level:                $alert-border-level !default; // default is -9
 $toast-opacity:                     0.6 !default;
 
@@ -23,7 +23,7 @@ $toast-header-bg-level:             $alert-bg-level + 2 !default;
 $toast-header-color-level:          $alert-color-level +2 !default;
 
 .toast {
-  min-width: 250px;
+  min-width: $toast-min-width;
   @each $color, $value in $theme-colors {
     &.toast-#{$color} {
       
