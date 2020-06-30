@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
-const ribawWebpackConfig = require("@ribajs/webpack-config");
-const webpackConfig = ribawWebpackConfig({ template: "local" });
+const ribaWebpackConfig = require("@ribajs/webpack-config");
+const webpackConfig = ribaWebpackConfig({ template: "local" });
 module.exports = webpackConfig;

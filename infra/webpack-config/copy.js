@@ -8,7 +8,7 @@ const glob = require("glob");
 const rootPath = process.cwd();
 
 const getCopyPluginConfigForScssRibaModule = (config, moduleName) => {
-  if (isModuleAvailable(config, moduleName)) {
+  if (isModuleAvailable(moduleName)) {
     // Copy @ribajs/xyz scss files
     var moduleConfig = {
       from: path.dirname(require.resolve(moduleName)) + "/**/*.scss",
@@ -24,7 +24,7 @@ const getCopyPluginConfigForScssRibaModule = (config, moduleName) => {
 };
 
 const getCopyPluginConfigForImages = (config, moduleName) => {
-  if (isModuleAvailable(config, moduleName)) {
+  if (isModuleAvailable(moduleName)) {
     // Copy @ribajs/xyz scss files
     var moduleConfig = {
       from: path.dirname(require.resolve(moduleName)) + "/**/*.png",
@@ -40,7 +40,7 @@ const getCopyPluginConfigForImages = (config, moduleName) => {
 };
 
 const getCopyPluginConfigForIconsetRibaModule = (config, moduleName) => {
-  if (isModuleAvailable(config, moduleName)) {
+  if (isModuleAvailable(moduleName)) {
     // Copy iconset svg's
     const moduleConfig = {
       from: path.resolve(
@@ -62,7 +62,7 @@ const getCopyPluginConfigForScssThirdPartyModule = (
   scssPath,
   glob
 ) => {
-  if (isModuleAvailable(config, moduleName)) {
+  if (isModuleAvailable(moduleName)) {
     // Copy bootstrap scss files. Note: `require.resolve('bootstrap')` resolves to `'bootstrap/dist/js/bootstrap.js'` because this is the main file in package.json
     const moduleConfig = {
       from: path.join(
@@ -99,24 +99,24 @@ const getCopyPluginConfig = (config) => {
   ];
 
   for (const ribaScssModule of copyRibaScssModules) {
-    if (isModuleAvailable(config, ribaScssModule)) {
+    if (isModuleAvailable(ribaScssModule)) {
       patterns.push(
         getCopyPluginConfigForScssRibaModule(config, ribaScssModule)
       );
     }
   }
 
-  if (isModuleAvailable(config, "@ribajs/iconset")) {
+  if (isModuleAvailable("@ribajs/iconset")) {
     patterns.push(
       getCopyPluginConfigForIconsetRibaModule(config, "@ribajs/iconset")
     );
   }
 
-  if (isModuleAvailable(config, "leaflet")) {
+  if (isModuleAvailable("leaflet")) {
     patterns.push(getCopyPluginConfigForImages(config, "leaflet"));
   }
 
-  if (isModuleAvailable(config, "bootstrap")) {
+  if (isModuleAvailable("bootstrap")) {
     patterns.push(
       getCopyPluginConfigForScssThirdPartyModule(
         config,

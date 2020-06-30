@@ -1,24 +1,14 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
-const rootPath = process.cwd();
-const package = require(rootPath + "/package.json");
 
-const moduleFound = (name) => {
+// FIXME module is not resolved if the project wich use this config is in the riba workscape
+const isModuleAvailable = (moduleName) => {
   try {
-    return require.resolve(name);
+    return require.resolve(moduleName);
   } catch (error) {
+    // console.warn(error);
     return false;
   }
 };
 
-const isModuleAvailable = (config, moduleName) => {
-  return (
-    /*package.dependencies[moduleName] && */ config.copyAssets.modules[
-      moduleName
-    ] === true && moduleFound(moduleName)
-  );
-};
-
-module.exports.package = package;
-module.exports.moduleFound = moduleFound;
 module.exports.isModuleAvailable = isModuleAvailable;

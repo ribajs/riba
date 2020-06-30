@@ -117,22 +117,6 @@ module.exports = (config) => {
       config.copyAssets = {
         enable: true,
         foldername: "assets",
-        // Because we use october to compile the styles we copy the verndor styles to october
-        modules: {
-          bootstrap: true,
-          "@ribajs/core": true,
-          "@ribajs/bs4": true,
-          "@ribajs/photoswipe": true,
-          "@ribajs/iconset": true,
-          "@ribajs/i18n": true,
-          "@ribajs/shopify": false,
-          "@ribajs/leaflet-map": true,
-          leaflet: true,
-          "@ribajs/tagged-image": true,
-          "@ribajs/shopify-tda": false,
-          "@ribajs/shopify-easdk": false,
-          "@ribajs/pdf": true,
-        },
       };
       break;
     case "shopify":
@@ -150,24 +134,6 @@ module.exports = (config) => {
       config.copyAssets = {
         enable: true,
         foldername: "src",
-        // Looks like there is a bug on webpack 5 + yarn 2 + sass-loader
-        // sass imports from modules like `@import "~bootstrap/scss/functions";` are working with NPM but not with Yarn's PnP feature.
-        // Until this is fixed we use a WORKAROUND by copy the scss files to the project
-        modules: {
-          bootstrap: true,
-          "@ribajs/core": true,
-          "@ribajs/bs4": true,
-          "@ribajs/photoswipe": true,
-          "@ribajs/iconset": true,
-          "@ribajs/i18n": true,
-          "@ribajs/shopify": true,
-          "@ribajs/leaflet-map": true,
-          "@ribajs/tagged-image": true,
-          "@ribajs/shopify-tda": true,
-          "@ribajs/shopify-easdk": false,
-          "@ribajs/pdf": true,
-          leaflet: true,
-        },
       };
       break;
     // E.g. used for demos
@@ -184,26 +150,8 @@ module.exports = (config) => {
       config.styles.extract = true;
 
       config.copyAssets = {
-        enable: true,
+        enable: false,
         foldername: "src",
-        // Looks like there is a bug on webpack 5 + yarn 2 + sass-loader
-        // sass imports from modules like `@import "~bootstrap/scss/functions";` are working with NPM but not with Yarn's PnP feature.
-        // Until this is fixed we use a WORKAROUND by copy the scss files to the project
-        modules: {
-          bootstrap: true,
-          "@ribajs/core": true,
-          "@ribajs/bs4": true,
-          "@ribajs/photoswipe": true,
-          "@ribajs/iconset": true,
-          "@ribajs/i18n": true,
-          "@ribajs/shopify": true,
-          "@ribajs/leaflet-map": true,
-          "@ribajs/shopify-tda": true,
-          "@ribajs/tagged-image": true,
-          "@ribajs/shopify-easdk": true,
-          "@ribajs/pdf": true,
-          leaflet: true,
-        },
       };
 
       config.devServer = {
@@ -225,15 +173,19 @@ module.exports = (config) => {
   }
 
   if (config.copyAssets && config.copyAssets.enable === true) {
-    // https://github.com/webpack-contrib/copy-webpack-plugin
-    const CopyPlugin = require("copy-webpack-plugin");
+    console.debug("config: ", config);
+
     var copyPluginConfigs = getCopyPluginConfig(config);
 
     console.debug("copyPluginConfigs: ", copyPluginConfigs);
 
-    // Copy the files before the build starts for the case the files are required for the build itself
-    copy(copyPluginConfigs.patterns);
-    plugins.push(new CopyPlugin(copyPluginConfigs));
+    if (copyPluginConfigs.patterns && copyPluginConfigs.patterns.length > 0) {
+      // https://github.com/webpack-contrib/copy-webpack-plugin
+      const CopyPlugin = require("copy-webpack-plugin");
+      // Copy the files before the build starts for the case the files are required for the build itself
+      copy(copyPluginConfigs.patterns);
+      plugins.push(new CopyPlugin(copyPluginConfigs));
+    }
   }
 
   if (config.detectDuplicates === true) {
@@ -309,7 +261,6 @@ module.exports = (config) => {
         path: config.output.path,
       },
       resolve: {
-        // modules: ["node_modules"],
         extensions: [".ts", ".tsx", ".js", ".json", ".scss", ".pug", ".html"],
         symlinks: true,
         alias: {},
