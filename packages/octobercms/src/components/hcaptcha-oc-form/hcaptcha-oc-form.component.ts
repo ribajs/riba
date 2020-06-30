@@ -1,4 +1,7 @@
-import { OcFormComponent, Scope as OcFormScope } from "@ribajs/octobercms/src/components/oc-form/oc-form.component";
+import {
+  OcFormComponent,
+  Scope as OcFormScope,
+} from "@ribajs/octobercms/src/components/oc-form/oc-form.component";
 import { loadScript, getUID } from "@ribajs/utils/src/dom";
 
 export interface Scope extends OcFormScope {
@@ -78,7 +81,13 @@ export class HCaptchaFormComponent extends OcFormComponent {
   }
 
   protected ajaxSubmit() {
-    this.debug("ajaxSubmit", "octoberHandler", this.scope.octoberHandler, "widgetID", this.widgetID);
+    this.debug(
+      "ajaxSubmit",
+      "octoberHandler",
+      this.scope.octoberHandler,
+      "widgetID",
+      this.widgetID
+    );
 
     if (this.scope.hcaptchaSize === "invisible") {
       this.scope.submitDisabled = true;
@@ -91,9 +100,13 @@ export class HCaptchaFormComponent extends OcFormComponent {
   protected onHCaptchaLoaded() {
     this.debug("onHCaptchaLoaded");
     const params = this.getHCaptchaParams();
-    const container = this.el.querySelector(this.scope.hcaptchaContainerSelector);
+    const container = this.el.querySelector(
+      this.scope.hcaptchaContainerSelector
+    );
     if (!container) {
-      console.warn(`HCaptcha container element with selector "${this.scope.hcaptchaContainerSelector}" not found!`);
+      console.warn(
+        `HCaptcha container element with selector "${this.scope.hcaptchaContainerSelector}" not found!`
+      );
       return;
     }
     this.widgetID = (window as any).hcaptcha.render(container, params);
@@ -112,7 +125,8 @@ export class HCaptchaFormComponent extends OcFormComponent {
       searchQuery.onload = this.scope.hcaptchaOnload;
     }
 
-    const hcaptchaSrc = this.scope.hcaptchaSrc + "?" + new URLSearchParams(searchQuery);
+    const hcaptchaSrc =
+      this.scope.hcaptchaSrc + "?" + new URLSearchParams(searchQuery);
 
     return hcaptchaSrc;
   }
@@ -170,7 +184,15 @@ export class HCaptchaFormComponent extends OcFormComponent {
   }
 
   protected requiredAttributes(): string[] {
-    return [...super.requiredAttributes(), "hcaptchaSrc", "hcaptchaHl", "hcaptchaRender", "hcaptchaSitekey", "hcaptchaSize", "hcaptchaCallback"];
+    return [
+      ...super.requiredAttributes(),
+      "hcaptchaSrc",
+      "hcaptchaHl",
+      "hcaptchaRender",
+      "hcaptchaSitekey",
+      "hcaptchaSize",
+      "hcaptchaCallback",
+    ];
   }
 
   // protected template() {
