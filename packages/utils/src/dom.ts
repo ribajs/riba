@@ -195,21 +195,27 @@ export const loadScript = async (
   async = true,
   defer = true
 ) => {
-  return new Promise((resolve, reject) => {
-    if (document.getElementById(id)) {
+  return new Promise<HTMLScriptElement>((resolve, reject) => {
+    let script = document.getElementById(id) as HTMLScriptElement | null;
+    if (script) {
       console.warn("script already loaded, do nothing.");
-      resolve();
+      if (script.hasAttribute("loaded")) {
+        return resolve(script);
+      }
+    } else {
+      script = document.createElement("script");
+      script.type = "text/javascript";
+      script.id = id;
+      script.src = src;
+      if (async) {
+        script.async = true;
+      }
+      if (defer) {
+        script.defer = true;
+      }
+      document.getElementsByTagName("head")[0].appendChild(script);
     }
-    const script = document.createElement("script");
-    script.type = "text/javascript";
-    script.id = id;
-    script.src = src;
-    if (async) {
-      script.async = true;
-    }
-    if (defer) {
-      script.defer = true;
-    }
+
     // IE
     if ((script as any).readyState) {
       (script as any).onreadystatechange = function () {
@@ -218,21 +224,23 @@ export const loadScript = async (
           (script as any).readyState === "complete"
         ) {
           (script as any).onreadystatechange = null;
-          resolve();
+          resolve(script as HTMLScriptElement);
         }
       };
     }
     // Other browsers
     script.onload = function () {
-      resolve();
+      resolve(script as HTMLScriptElement);
     };
     script.onerror = function (...args) {
-      const error = new Error("Error on load script " + script.src);
+      const error = new Error("Error on load script " + script?.src);
       console.error(error);
       console.error(...args);
       reject(error);
     };
-    document.getElementsByTagName("head")[0].appendChild(script);
+  }).then((script) => {
+    script?.setAttribute("loaded", "true");
+    return script;
   });
 };
 

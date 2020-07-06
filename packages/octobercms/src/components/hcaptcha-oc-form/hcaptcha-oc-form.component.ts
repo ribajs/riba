@@ -23,7 +23,7 @@ export interface Scope extends OcFormScope {
 export class HCaptchaFormComponent extends OcFormComponent {
   public static tagName = "hcaptcha-oc-form";
 
-  public _debug = false;
+  public _debug = true;
   protected autobind = true;
 
   protected widgetID?: string;
@@ -98,7 +98,7 @@ export class HCaptchaFormComponent extends OcFormComponent {
   }
 
   protected onHCaptchaLoaded() {
-    this.debug("onHCaptchaLoaded");
+    this.debug("onHCaptchaLoaded", window.hcaptcha);
     const params = this.getHCaptchaParams();
     const container = this.el.querySelector(
       this.scope.hcaptchaContainerSelector
@@ -169,11 +169,18 @@ export class HCaptchaFormComponent extends OcFormComponent {
 
     this.debug("hcaptchaSrc", hcaptchaSrc);
 
-    loadScript(hcaptchaSrc, "hcaptcha-src", true, true)
-      .then(this.onHCaptchaLoaded.bind(this))
-      .catch((err: Error) => {
-        console.error(`Error on load HCaptcha from "${hcaptchaSrc}"`, err);
-      });
+    if (window.hcaptcha) {
+      this.onHCaptchaLoaded();
+    } else {
+      loadScript(hcaptchaSrc, "hcaptcha-src", true, true)
+        .then(this.onHCaptchaLoaded.bind(this))
+        .catch((err: Error) => {
+          if (window.hcaptcha) {
+            return window.hcaptcha;
+          }
+          console.error(`Error on load HCaptcha from "${hcaptchaSrc}"`, err);
+        });
+    }
   }
 
   protected connectedCallback() {
