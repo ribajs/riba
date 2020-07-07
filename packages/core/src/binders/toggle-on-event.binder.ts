@@ -6,12 +6,12 @@ import { Binder } from "../interfaces";
 export const toggleOnEventBinder: Binder<string> = {
   name: "toggle-on-*",
   function: true,
-  propertyKey: null as string | null,
 
   bind() {
     if (!this.customData) {
       this.customData = {
         handler: null,
+        propertyKey: null as string | null,
       };
     }
   },
@@ -27,9 +27,9 @@ export const toggleOnEventBinder: Binder<string> = {
   },
 
   toggle() {
-    if (this.binder.propertyKey) {
-      this.view.models[this.binder.propertyKey] = !this.view.models[
-        this.binder.propertyKey
+    if (this.customData.propertyKey) {
+      this.view.models[this.customData.propertyKey] = !this.view.models[
+        this.customData.propertyKey
       ];
     }
   },
@@ -38,7 +38,7 @@ export const toggleOnEventBinder: Binder<string> = {
     if (this.args === null) {
       throw new Error("args is null");
     }
-    this.binder.propertyKey = propertyKey;
+    this.customData.propertyKey = propertyKey;
     const eventName = this.args[0] as string;
     const passive = this.el.dataset.passive === "true"; // data-passive="true"
     el.addEventListener(eventName, this.binder.toggle.bind(this), { passive });
