@@ -3,3 +3,4 @@ export { touchEventsBinder } from "./touch-events.binder";
 export { scrollEventsBinder } from "./scroll-events.binder";
 export { autoscrollBinder } from "./scrollbar-autoscroll.binder";
 export { scrollbarDraggableBinder } from "./scrollbar-draggable.binder";
+export { syncElementPropertyBinder } from "./sync-element-property.binder";
