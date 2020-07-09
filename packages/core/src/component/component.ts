@@ -303,6 +303,13 @@ export abstract class Component extends FakeHTMLElement {
     return {
       name: "call",
       read: (fn: (...args: any[]) => any, ...args: any[]) => {
+        if (!fn) {
+          console.error(
+            `[${self.el.tagName}] Can not use "call" formatter: fn is undefined! Arguments: `,
+            args
+          );
+          throw new Error("TypeError: fn is undefined");
+        }
         return fn.apply(self, args);
       },
     };

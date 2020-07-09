@@ -20,7 +20,7 @@ export const getInputValue = (el: HTMLElement) => {
     }
 
     return results;
-  } else if (el.getAttribute("contenteditable")) {
+  } else if (el.hasAttribute("contenteditable")) {
     return el.innerHTML; // TODO write test for contenteditable
   } else {
     return (el as HTMLInputElement).value;
@@ -195,7 +195,7 @@ export const loadScript = async (
   async = true,
   defer = true
 ) => {
-  return new Promise<HTMLScriptElement>((resolve, reject) => {
+  const script = await new Promise<HTMLScriptElement>((resolve, reject) => {
     let script = document.getElementById(id) as HTMLScriptElement | null;
     if (script) {
       console.warn("script already loaded, do nothing.");
@@ -228,6 +228,7 @@ export const loadScript = async (
         }
       };
     }
+
     // Other browsers
     script.onload = function () {
       resolve(script as HTMLScriptElement);
@@ -238,10 +239,10 @@ export const loadScript = async (
       console.error(...args);
       reject(error);
     };
-  }).then((script) => {
-    script?.setAttribute("loaded", "true");
-    return script;
   });
+
+  script.setAttribute("loaded", "true");
+  return script;
 };
 
 export const getUID = (prefix: string): string => {

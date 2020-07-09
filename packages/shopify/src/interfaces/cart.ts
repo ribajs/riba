@@ -32,7 +32,6 @@ export interface ShopifyCartLineItem {
   grams: number;
   vendor: string;
   properties: null | any;
-  variant_id: number;
   gift_card: boolean;
   url: string;
   image: string;
@@ -41,6 +40,8 @@ export interface ShopifyCartLineItem {
   product_title: string;
   product_description: string;
   product_type: string;
+  product_id: number;
   variant_title: string;
   variant_options: Array<string>;
+  variant_id: number;
 }

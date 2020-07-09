@@ -38,7 +38,7 @@ export class Riba {
       const error = new Error(
         `[rv-${binding.type}="${binding.keypath}"] Event handler "${binding.keypath}" not found!"`
       );
-      console.error(binding, el);
+      console.error(error, binding, el, binding.view.models);
       throw error;
     }
     this.call(context, ev, binding.view.models, el);

@@ -159,7 +159,7 @@ export class HttpService {
         return reject(new Error("xhr: Timeout exceeded"));
       };
 
-      req.open("GET", url);
+      req.open(method, url);
       req.timeout = xhrTimeout;
 
       // headers
@@ -226,11 +226,7 @@ export class HttpService {
       })
         .then((response) => {
           if (response.status >= 400) {
-            try {
-              throw response.json();
-            } catch (error) {
-              throw response.text();
-            }
+            throw response;
           }
           if (
             typeof dataType === "string" &&

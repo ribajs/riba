@@ -200,7 +200,7 @@ export class View {
    * binding declaration.
    */
   public build() {
-    this.bindings = [];
+    this.bindings = []; // this.bindings || [];
 
     if (!this.options.templateDelimiters) {
       throw new Error("templateDelimiters required");
