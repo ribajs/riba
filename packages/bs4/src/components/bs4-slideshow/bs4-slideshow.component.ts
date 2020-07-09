@@ -672,7 +672,6 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   }
 
   protected onBreakpointChanges() {
-    console.debug("onBreakpointChanges");
     this.setOptionsByBreakpoint(this.breakpoint);
   }
 

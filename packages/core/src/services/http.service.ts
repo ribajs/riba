@@ -85,7 +85,7 @@ export class HttpService {
    */
   public static parseDataType(dataType: string) {
     const headers: { "Content-Type"?: string; Accept?: string } = {};
-    let contentType = "multipart/form-data";
+    let contentType = "application/x-www-form-urlencoded";
     let accept = "*/*";
     switch (dataType) {
       case "script":
@@ -108,8 +108,11 @@ export class HttpService {
         accept = "text/html";
         break;
       case "form":
-        contentType = "multipart/form-data";
+        contentType = "application/x-www-form-urlencoded";
         break;
+      /*case "multi-form":
+        contentType = "multipart/form-data";
+        break;*/
     }
     if (contentType) {
       headers["Content-Type"] = contentType;
