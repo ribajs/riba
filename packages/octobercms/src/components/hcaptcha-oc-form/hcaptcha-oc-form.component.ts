@@ -30,7 +30,7 @@ export interface Scope extends OcFormScope {
 export class HCaptchaFormComponent extends OcFormComponent {
   public static tagName = "hcaptcha-oc-form";
 
-  public _debug = false;
+  public _debug = true;
   protected autobind = true;
 
   protected widgetID?: string;
@@ -82,18 +82,20 @@ export class HCaptchaFormComponent extends OcFormComponent {
     this.init(HCaptchaFormComponent.observedAttributes);
   }
 
-  public onSubmit(event: Event) {
-    this.debug("onSubmit", this.scope);
-    return super.onSubmit(event);
+  public onSubmit(event: Event, el: HTMLButtonElement) {
+    this.debug("onSubmit", this.scope, event, el);
+    return super.onSubmit(event, el);
   }
 
-  protected ajaxSubmit() {
+  protected ajaxSubmit(event?: Event, el?: HTMLButtonElement) {
     this.debug(
       "ajaxSubmit",
       "octoberHandler",
       this.scope.octoberHandler,
       "widgetID",
-      this.widgetID
+      this.widgetID,
+      event,
+      el
     );
 
     if (this.scope.hcaptchaSize === "invisible") {

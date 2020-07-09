@@ -1,12 +1,14 @@
 import { Component, HttpService, HttpMethod, HttpDataType } from "@ribajs/core";
 import template from "./bs4-form.component.html";
-import { stripHtml, camelCase } from "@ribajs/utils/src/type";
-import { getInputValue, getUID } from "@ribajs/utils/src/dom";
+import { stripHtml } from "@ribajs/utils/src/type";
+import { getUID } from "@ribajs/utils/src/dom";
 
 export interface ValidationObject {
-  fields: {
-    [name: string]: string | boolean | string[];
-  };
+  fields:
+    | {
+        [name: string]: string | boolean | string[];
+      }
+    | FormData;
   valid: boolean;
   error?: string;
 }
@@ -14,6 +16,7 @@ export interface ValidationObject {
 export interface SubmitSettings {
   action: string;
   method: HttpMethod;
+  target?: string;
   type: HttpDataType;
 }
 
@@ -54,7 +57,7 @@ export interface Scope {
 
 export class Bs4FormComponent extends Component {
   public static tagName = "bs4-form";
-
+  public _debug = true;
   protected autobind = true;
 
   static get observedAttributes() {
@@ -129,18 +132,18 @@ export class Bs4FormComponent extends Component {
   protected stripHtml() {
     for (const key in this.scope.form.fields) {
       if (
-        this.scope.form.fields[key] &&
-        typeof this.scope.form.fields[key] === "string"
+        (this.scope.form.fields as any)[key] &&
+        typeof (this.scope.form.fields as any)[key] === "string"
       ) {
-        this.scope.form.fields[key] = stripHtml(
-          this.scope.form.fields[key] as string
+        (this.scope.form.fields as any)[key] = stripHtml(
+          (this.scope.form.fields as any)[key] as string
         );
       }
     }
   }
 
-  public onSubmit(event: Event) {
-    // this.debug("onSubmit", event, this.scope);
+  public onSubmit(event: Event, el: HTMLButtonElement) {
+    this.debug("onSubmit", event, el);
     if (!this.formEl) {
       console.warn("No form found");
       return false;
@@ -149,6 +152,7 @@ export class Bs4FormComponent extends Component {
     if (this.scope.autoSetFormData) {
       this.getFormValues();
     }
+
     if (this.scope.stripHtml) {
       this.stripHtml();
     }
@@ -163,29 +167,38 @@ export class Bs4FormComponent extends Component {
       return;
     }
 
+    const submitSettings = this.getSubmitSettings(event);
+    if (submitSettings?.target === "_blank") {
+      return true;
+    }
+
     if (this.scope.useAjax) {
       // stop native submit because we submit the data using javascript
       event.preventDefault();
       event.stopPropagation();
 
-      this.ajaxSubmit();
+      this.ajaxSubmit(event, el);
     }
   }
 
   /**
    * TODO Not tested in the wild, may need to be adjusted. Also the error handling is untested
    */
-  protected ajaxSubmit() {
-    const submitSettings = this.getSubmitSettings();
+  protected ajaxSubmit(event?: Event, el?: HTMLButtonElement) {
+    this.debug("onSubmit", event, el, this.scope);
+    const submitSettings = this.getSubmitSettings(event);
     if (!submitSettings) {
       console.warn("Can't get submit settings");
       return;
     }
+
+    const data = this.getFormValues();
+
     // This method is untested in the wild
     HttpService.fetch(
       submitSettings.action,
       submitSettings.method,
-      this.scope.form.fields,
+      data,
       submitSettings.type
     )
       .then((res) => {
@@ -203,18 +216,32 @@ export class Bs4FormComponent extends Component {
       });
   }
 
-  protected getSubmitSettings() {
+  protected getSubmitSettings(event?: Event) {
     if (!this.formEl) {
       console.warn("No form found");
       return null;
     }
 
-    const action = this.formEl.action;
-    const method = this.formEl.method;
+    let action = this.formEl.action;
+    let method = this.formEl.method;
+    let target = this.formEl.method;
+
+    // Overwrite action by formaction attribute: <button type="submit" formaction="/foobar">
+
+    // TODO submitter from vanilla event
+
+    // If this is a jquery event
+    if ((event as any)?.originalEvent?.submitter) {
+      const submitter = (event as any)?.originalEvent?.submitter;
+      action = submitter?.formAction || action;
+      method = submitter?.formMethod || method;
+      target = submitter?.formTarget || target;
+    }
 
     const settings: SubmitSettings = {
       action,
       method: method.toUpperCase() as HttpMethod,
+      target,
       type: this.scope.ajaxRequestType,
     };
 
@@ -258,9 +285,11 @@ export class Bs4FormComponent extends Component {
       console.warn("No form found");
       return null;
     }
-    this.formEl.querySelectorAll("input").forEach((element) => {
-      this.scope.form.fields[camelCase(element.name)] = getInputValue(element);
-    });
+    // this.formEl.querySelectorAll("input").forEach((element) => {
+    //   this.scope.form.fields[camelCase(element.name)] = getInputValue(element);
+    // });
+    this.scope.form.fields = new FormData(this.formEl);
+    return this.scope.form.fields;
   }
 
   protected initForm() {

@@ -18,7 +18,7 @@ export class OcFormComponent extends Bs4FormComponent {
 
   protected requiredAttributes(): string[] {
     const requiredAttributes = super.requiredAttributes();
-    requiredAttributes.push("octoberHandler");
+    // requiredAttributes.push("octoberHandler");
     return requiredAttributes;
   }
 
@@ -36,9 +36,13 @@ export class OcFormComponent extends Bs4FormComponent {
     this.addEventListeners();
   }
 
-  protected ajaxSubmit() {
+  protected ajaxSubmit(event?: Event, el?: HTMLButtonElement) {
+    if (!this.scope.octoberHandler) {
+      return super.ajaxSubmit(event, el);
+    }
+
     this.debug("ajaxSubmit", this.scope.octoberHandler);
-    const submitSettings = this.getSubmitSettings();
+    const submitSettings = this.getSubmitSettings(event);
     if (!submitSettings) {
       console.warn("Can't get submit settings");
       return;
