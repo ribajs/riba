@@ -52,6 +52,7 @@ export class OcFormComponent extends Bs4FormComponent {
     // See October CMS JavaScript API: https://octobercms.com/docs/ajax/javascript-api
     const $form = window.jQuery(this.formEl);
     ($form as any).request(this.scope.octoberHandler, {
+      url: submitSettings.action,
       error: (jqXHR: any, statusText: string, error: any) => {
         console.error(jqXHR, statusText, error);
         if (jqXHR.responseJSON?.error) {

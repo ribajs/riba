@@ -4,6 +4,13 @@ import {
 } from "@ribajs/octobercms/src/components/oc-form/oc-form.component";
 import { loadScript, getUID } from "@ribajs/utils/src/dom";
 
+declare global {
+  interface Window {
+    // Allow any custom property in Window
+    [key: string]: any;
+  }
+}
+
 export interface Scope extends OcFormScope {
   hcaptchaSrc: string;
   hcaptchaHl: string;
@@ -23,7 +30,7 @@ export interface Scope extends OcFormScope {
 export class HCaptchaFormComponent extends OcFormComponent {
   public static tagName = "hcaptcha-oc-form";
 
-  public _debug = true;
+  public _debug = false;
   protected autobind = true;
 
   protected widgetID?: string;
@@ -91,7 +98,7 @@ export class HCaptchaFormComponent extends OcFormComponent {
 
     if (this.scope.hcaptchaSize === "invisible") {
       this.scope.submitDisabled = true;
-      (window as any).hcaptcha.execute(this.widgetID);
+      window.hcaptcha.execute(this.widgetID);
     } else {
       return super.ajaxSubmit();
     }
@@ -109,7 +116,7 @@ export class HCaptchaFormComponent extends OcFormComponent {
       );
       return;
     }
-    this.widgetID = (window as any).hcaptcha.render(container, params);
+    this.widgetID = window.hcaptcha.render(container, params);
     this.debug("widgetID", this.widgetID);
   }
 
@@ -144,24 +151,30 @@ export class HCaptchaFormComponent extends OcFormComponent {
     };
   }
 
+  protected hcaptchaComplete(): boolean {
+    return true;
+  }
+
   protected initHCaptcha() {
     // Set this to the global window object to make it callable by hCaptcha
 
-    (window as any)[this.scope.hcaptchaCallback] = (token: string) => {
+    window[this.scope.hcaptchaCallback] = (token: string) => {
       if (this.scope.hcaptchaSize === "invisible") {
         this.debug(`[${this.scope.hcaptchaCallback}]`, token, this);
         // Trigger the default ajaxSubmit of Bs4FormComponent
-        return super.ajaxSubmit();
+        if (this.hcaptchaComplete()) {
+          return super.ajaxSubmit();
+        }
       }
     };
 
     // Set this to the global window object to make it callable by hCaptcha
-    (window as any).onHCaptchaExpired = (token: string) => {
+    window.onHCaptchaExpired = (token: string) => {
       this.debug("[onHCaptchaExpired]", token, this);
     };
 
     // Set this to the global window object to make it callable by hCaptcha
-    (window as any).onHCaptchaError = (error: Error) => {
+    window.onHCaptchaError = (error: Error) => {
       this.debug("[onHCaptchaError]", error, this);
     };
 
