@@ -53,13 +53,13 @@
     "prettier": "^2.0.5",
     "ts-jest": "^26.1.1",
     "typescript": "^3.9.6",
-    "webpack": "^5.0.0-beta.21",
+    "webpack": "^5.0.0-beta.22",
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
     "@ribajs/cache": "workspace:packages/cache",
     "pdf.js": "^0.1.0",
-    "pdfjs-dist": "^2.4.456"
+    "pdfjs-dist": "^2.5.207"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

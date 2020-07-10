@@ -62,7 +62,7 @@
     "prettier": "^2.0.5",
     "ts-jest": "^26.1.1",
     "typescript": "^3.9.6",
-    "webpack": "^5.0.0-beta.21",
+    "webpack": "^5.0.0-beta.22",
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {

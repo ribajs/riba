@@ -54,14 +54,14 @@
     "prettier": "^2.0.5",
     "ts-jest": "^26.1.1",
     "typescript": "^3.9.6",
-    "webpack": "^5.0.0-beta.21",
+    "webpack": "^5.0.0-beta.22",
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
     "@ribajs/bs4": "workspace:packages/bs4",
     "@ribajs/core": "^1.8.0",
     "@ribajs/extras": "workspace:packages/extras",
-    "@yarnpkg/pnpify": "^2.0.0-rc.25"
+    "@yarnpkg/pnpify": "^2.1.0"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"
