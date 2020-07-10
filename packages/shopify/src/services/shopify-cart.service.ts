@@ -70,6 +70,15 @@ export class ShopifyCartService {
     return promise;
   }
 
+  public static refresh(): Promise<ShopifyCartObject> {
+    return HttpService.get(this.CART_GET_URL, {}, "json").then(
+      (cart: ShopifyCartObject) => {
+        ShopifyCartService.cart = cart;
+        return cart;
+      }
+    );
+  }
+
   public static _get(): Promise<ShopifyCartObject> {
     if (ShopifyCartService.cart !== null) {
       return new Promise((resolve /*, reject*/) => {
@@ -82,12 +91,7 @@ export class ShopifyCartService {
         }, 0);
       });
     }
-    return HttpService.get(this.CART_GET_URL, {}, "json").then(
-      (cart: ShopifyCartObject) => {
-        ShopifyCartService.cart = cart;
-        return cart;
-      }
-    );
+    return ShopifyCartService.refresh();
   }
 
   /**

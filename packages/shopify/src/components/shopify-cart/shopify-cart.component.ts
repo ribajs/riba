@@ -185,8 +185,8 @@ export class ShopifyCartComponent extends Component {
 
   protected async afterBind() {
     this.debug("afterBind", this.scope);
-    if (!this.scope.cart) {
-      this.scope.cart = await ShopifyCartService.get();
+    if (!this.cart) {
+      this.cart = await ShopifyCartService.get();
     }
   }
 

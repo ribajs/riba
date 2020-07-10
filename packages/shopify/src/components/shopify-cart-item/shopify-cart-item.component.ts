@@ -2,7 +2,6 @@ import { Component } from "@ribajs/core";
 import { ShopifyCartLineItem, ShopifyCartObject } from "../../interfaces";
 import { ShopifyCartService } from "../../services";
 import template from "./shopify-cart-item.component.html";
-import { TouchEventsService } from "../../../../extras/src";
 
 export interface Scope {
   id: ShopifyCartLineItem["id"];
@@ -207,6 +206,11 @@ export class ShopifyCartItemComponent extends Component {
   }
 
   protected async beforeBind() {
+    // const cart = await ShopifyCartService.get();
+  }
+
+  protected async afterBind() {
+    this.debug("afterBind", this.scope);
     ShopifyCartService.shopifyCartEventDispatcher.on(
       "ShopifyCart:request:start",
       () => {
@@ -223,13 +227,6 @@ export class ShopifyCartItemComponent extends Component {
         return cart;
       }
     );
-  }
-
-  protected async afterBind() {
-    this.debug("afterBind", this.scope);
-    return ShopifyCartService.get().catch((error: Error) => {
-      console.error(error);
-    });
   }
 
   protected template() {
