@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/webpack-config",
-  "version": "1.9.0-alpha.0",
+  "version": "1.9.0-alpha.1",
   "description": "Default webpack configs used in Riba.js projects",
   "scripts": {},
   "main": "index.js",

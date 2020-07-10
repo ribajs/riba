@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/i18n",
   "description": "Internationalization module for Riba.js",
-  "version": "1.9.0-alpha.0",
+  "version": "1.9.0-alpha.1",
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "url": "https://github.com/ribajs/riba/tree/master/packages/i18n",
   "homepage": "https://github.com/ribajs/riba#readme",

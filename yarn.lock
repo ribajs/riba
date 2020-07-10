@@ -1877,7 +1877,7 @@ __metadata:
     "@types/jest": ^26.0.4
     "@typescript-eslint/eslint-plugin": ^3.6.0
     "@typescript-eslint/parser": ^3.6.0
-    "@yarnpkg/pnpify": ^2.0.0-rc.25
+    "@yarnpkg/pnpify": ^2.1.0
     babel-jest: ^26.1.0
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
@@ -1892,7 +1892,7 @@ __metadata:
     prettier: ^2.0.5
     ts-jest: ^26.1.1
     typescript: ^3.9.6
-    webpack: ^5.0.0-beta.21
+    webpack: ^5.0.0-beta.22
     webpack-cli: ^3.3.12
   languageName: node
   linkType: soft
@@ -2007,7 +2007,7 @@ __metadata:
     ts-jest: ^26.1.1
     typescript: ^3.9.6
     uglifyjs-webpack-plugin: ^2.2.0
-    webpack: ^5.0.0-beta.21
+    webpack: ^5.0.0-beta.22
     webpack-cli: ^3.3.12
     webpack-glob-entry: ^2.1.1
   languageName: node
@@ -2116,7 +2116,7 @@ __metadata:
     prettier: ^2.0.5
     ts-jest: ^26.1.1
     typescript: ^3.9.6
-    webpack: ^5.0.0-beta.21
+    webpack: ^5.0.0-beta.22
     webpack-cli: ^3.3.12
   languageName: node
   linkType: soft
@@ -2195,7 +2195,7 @@ __metadata:
     eslint-plugin-prettier: ^3.1.4
     prettier: ^2.0.5
     typescript: ^3.9.6
-    webpack: ^5.0.0-beta.21
+    webpack: ^5.0.0-beta.22
     webpack-cli: ^3.3.12
   languageName: node
   linkType: soft
@@ -2278,7 +2278,7 @@ __metadata:
     prettier: ^2.0.5
     ts-jest: ^26.1.1
     typescript: ^3.9.6
-    webpack: ^5.0.0-beta.21
+    webpack: ^5.0.0-beta.22
     webpack-cli: ^3.3.12
   languageName: node
   linkType: soft
@@ -2540,7 +2540,7 @@ __metadata:
     regexpp: ^3.1.0
     tsutils: ^3.17.1
     typescript: ^3.9.6
-    webpack: ^5.0.0-beta.21
+    webpack: ^5.0.0-beta.22
     webpack-cli: ^3.3.12
   languageName: node
   linkType: soft
@@ -2675,7 +2675,7 @@ __metadata:
     prettier: ^2.0.5
     ts-jest: ^26.1.1
     typescript: ^3.9.6
-    webpack: ^5.0.0-beta.21
+    webpack: ^5.0.0-beta.22
     webpack-cli: ^3.3.12
   languageName: node
   linkType: soft
@@ -2826,7 +2826,7 @@ __metadata:
     resolve-url-loader: ^3.1.1
     sass-loader: ^9.0.2
     terser-webpack-plugin: ^3.0.6
-    webpack: ^5.0.0-beta.21
+    webpack: ^5.0.0-beta.22
     webpack-dev-server: ^3.11.0
   languageName: node
   linkType: soft
@@ -3550,40 +3550,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/core@npm:^2.0.0-rc.30":
-  version: 2.0.0-rc.30
-  resolution: "@yarnpkg/core@npm:2.0.0-rc.30"
-  dependencies:
-    "@yarnpkg/fslib": ^2.0.0-rc.22
-    "@yarnpkg/json-proxy": ^2.0.0-rc.9
-    "@yarnpkg/libzip": ^2.0.0-rc.13
-    "@yarnpkg/parsers": ^2.0.0-rc.13
-    "@yarnpkg/pnp": ^2.0.0-rc.23
-    "@yarnpkg/shell": ^2.0.0-rc.13
-    camelcase: ^5.3.1
-    chalk: ^3.0.0
-    clipanion: ^2.4.1
-    cross-spawn: 7.0.3
-    diff: ^4.0.1
-    globby: ^10.0.1
-    got: ^11.1.3
-    is-ci: ^2.0.0
-    json-file-plus: ^3.3.1
-    logic-solver: ^2.0.1
-    micromatch: ^4.0.2
-    mkdirp: ^0.5.1
-    p-limit: ^2.2.0
-    pluralize: ^7.0.0
-    pretty-bytes: ^5.1.0
-    semver: ^7.1.2
-    stream-to-promise: ^2.2.0
-    tar: ^4.4.6
-    tslib: ^1.13.0
-    tunnel: ^0.0.6
-  checksum: 00459ca5af18b9043f997cf6bb4bd927fe09673d12621e0adfccc08193e62d2276e8473bef85b1f59f39481bfb1d9eaccc23fd71c55dc203d3ce06104a354d7c
-  languageName: node
-  linkType: hard
-
 "@yarnpkg/core@npm:^2.1.0":
   version: 2.1.1
   resolution: "@yarnpkg/core@npm:2.1.1"
@@ -3619,16 +3585,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/fslib@npm:^2.0.0-rc.22":
-  version: 2.0.0-rc.22
-  resolution: "@yarnpkg/fslib@npm:2.0.0-rc.22"
-  dependencies:
-    "@yarnpkg/libzip": ^2.0.0-rc.13
-    tslib: ^1.13.0
-  checksum: b190b82ed522f8d837f90805bf15977e17731d156b54a2b4bbb2e0d2581a4068c904152657302f5d5cba3f80ebd77938306a127f58a70781dba51d7eada60e88
-  languageName: node
-  linkType: hard
-
 "@yarnpkg/fslib@npm:^2.1.0":
   version: 2.1.0
   resolution: "@yarnpkg/fslib@npm:2.1.0"
@@ -3636,16 +3592,6 @@ __metadata:
     "@yarnpkg/libzip": ^2.1.0
     tslib: ^1.13.0
   checksum: a7173f24adfe696864ef2a13afb3ca9f1ce7a544218f21d60727e7c3bb3008a92ca45b9b2684096cfc01c305c3d429f4a6501fc442beb1f6a024efcaedf8588f
-  languageName: node
-  linkType: hard
-
-"@yarnpkg/json-proxy@npm:^2.0.0-rc.9":
-  version: 2.0.0-rc.9
-  resolution: "@yarnpkg/json-proxy@npm:2.0.0-rc.9"
-  dependencies:
-    "@yarnpkg/fslib": ^2.0.0-rc.22
-    tslib: ^1.13.0
-  checksum: abf4a90f0345ae1eecdba33b37f1d196ca3e8556e3c5d8f2191573eca3f52c8baa5e5c8af067948b96d064a765d323e95193ab04d71aeb3671bec166c5f67812
   languageName: node
   linkType: hard
 
@@ -3659,16 +3605,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/libzip@npm:^2.0.0-rc.13":
-  version: 2.0.0-rc.13
-  resolution: "@yarnpkg/libzip@npm:2.0.0-rc.13"
-  dependencies:
-    "@types/emscripten": ^1.38.0
-    tslib: ^1.13.0
-  checksum: ff27cd707e807cdae911d389a0cc73cd8b4e3b7eb6d984e229ae6ab70f56194f92f1a265cf2eb4bab3182fbbbd7fb02ff02c6f523689a4571eaa4efbc51f10d0
-  languageName: node
-  linkType: hard
-
 "@yarnpkg/libzip@npm:^2.1.0":
   version: 2.1.0
   resolution: "@yarnpkg/libzip@npm:2.1.0"
@@ -3676,16 +3612,6 @@ __metadata:
     "@types/emscripten": ^1.38.0
     tslib: ^1.13.0
   checksum: 4026f95701d18b57e7d44ed50b5b6cfc80cf26fee197549ac4b54e813d5c11708d5be408ba4d5bed3577bf630282d13cd0cdb356e6eba2e96fb26cdbfcd5b64e
-  languageName: node
-  linkType: hard
-
-"@yarnpkg/parsers@npm:^2.0.0-rc.13":
-  version: 2.0.0-rc.13
-  resolution: "@yarnpkg/parsers@npm:2.0.0-rc.13"
-  dependencies:
-    js-yaml: ^3.10.0
-    tslib: ^1.13.0
-  checksum: 2a55ad971c2ab9ef0feba751caee8b16b272fad85e8b18b8265fea03d218be4c1f3753b4eab0bd429ed006da5789a8a832cefe81d3ed478bc9c2886039ac2cb9
   languageName: node
   linkType: hard
 
@@ -3699,17 +3625,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/pnp@npm:^2.0.0-rc.23":
-  version: 2.0.0-rc.23
-  resolution: "@yarnpkg/pnp@npm:2.0.0-rc.23"
-  dependencies:
-    "@types/node": ^13.7.0
-    "@yarnpkg/fslib": ^2.0.0-rc.22
-    tslib: ^1.13.0
-  checksum: 8484ef93239f73d2eaf3c9a0c2a76e37b2fbc8a0a01a2b932f830e52fdb45e7d780875cf84cdb11cdd4d0ebca80ab2540ff3fcc7037906f08cd7cac8736fb7c6
-  languageName: node
-  linkType: hard
-
 "@yarnpkg/pnp@npm:^2.1.0":
   version: 2.1.0
   resolution: "@yarnpkg/pnp@npm:2.1.0"
@@ -3718,32 +3633,6 @@ __metadata:
     "@yarnpkg/fslib": ^2.1.0
     tslib: ^1.13.0
   checksum: 2fa107a00486a13bb240fcfc077b222fe3f99ece4c3871bd63e73d4b530f8de62558e18b83c2ce05b31a60f51aa155e8ae9a9f73c3a1f4c5c7d15e47f29ccdef
-  languageName: node
-  linkType: hard
-
-"@yarnpkg/pnpify@npm:^2.0.0-rc.25":
-  version: 2.0.0-rc.25
-  resolution: "@yarnpkg/pnpify@npm:2.0.0-rc.25"
-  dependencies:
-    "@yarnpkg/core": ^2.0.0-rc.30
-    "@yarnpkg/fslib": ^2.0.0-rc.22
-    "@yarnpkg/parsers": ^2.0.0-rc.13
-    chalk: ^3.0.0
-    clipanion: ^2.4.1
-    comment-json: ^2.2.0
-    lodash: ^4.17.15
-    tslib: ^1.13.0
-  peerDependencies:
-    eslint: "*"
-    typescript: "*"
-  peerDependenciesMeta:
-    eslint:
-      optional: true
-    typescript:
-      optional: true
-  bin:
-    pnpify: ./lib/cli.js
-  checksum: 10d2ff0e4ac5f8725969e4db3657de16b024b73e9b5d2177b2a0bc5ebbf148dd4647e4d1f778324ab848572aabee4e5191ffb4dde171c40e032ceddd4f1c889c
   languageName: node
   linkType: hard
 
@@ -3770,23 +3659,6 @@ __metadata:
   bin:
     pnpify: ./lib/cli.js
   checksum: 9b6f2c4cfa24bc137e799640bc75213f6e7f0df8832dbb107b6b1ff1eb4c6871f45fc5d47e7f19bcf608040e72d742ed36695317716eb53f89dc323efa1ae1c9
-  languageName: node
-  linkType: hard
-
-"@yarnpkg/shell@npm:^2.0.0-rc.13":
-  version: 2.0.0-rc.13
-  resolution: "@yarnpkg/shell@npm:2.0.0-rc.13"
-  dependencies:
-    "@yarnpkg/fslib": ^2.0.0-rc.22
-    "@yarnpkg/parsers": ^2.0.0-rc.13
-    clipanion: ^2.4.1
-    cross-spawn: 7.0.3
-    fast-glob: ^3.2.2
-    stream-buffers: ^3.0.2
-    tslib: ^1.13.0
-  bin:
-    shell: ./lib/cli.js
-  checksum: ebbf4fdfb0e3e6c67c9ac7a41d6129177489b0cd1d7ed20c7cb08cec0b494f98c1e3a7b8d86761723d7ba6fa85ab287d395d56d5e195d4148321c49402a292ed
   languageName: node
   linkType: hard
 
@@ -5144,7 +5016,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clipanion@npm:^2.4.1, clipanion@npm:^2.4.2":
+"clipanion@npm:^2.4.2":
   version: 2.4.2
   resolution: "clipanion@npm:2.4.2"
   checksum: d83f4f70c7806d676e1edaae331983591150b390fc60b3ed858e8cad5e0e7cab6557b65dd7e26fb9b02e84b08cb9cdac2be9379ec3ec91f38a0225f58b19777f
@@ -6348,16 +6220,6 @@ __metadata:
   dependencies:
     once: ~1.3.0
   checksum: 61824530b1288ab60001ef8bfc522173f941074e40743a32a9dd75ca3e11bfb2cc02eacf6c10aca01d88642822b99c2b4cd667b793ba586777083f9783816e1e
-  languageName: node
-  linkType: hard
-
-"enhanced-resolve@npm:5.0.0-beta.7":
-  version: 5.0.0-beta.7
-  resolution: "enhanced-resolve@npm:5.0.0-beta.7"
-  dependencies:
-    graceful-fs: ^4.2.0
-    tapable: ^2.0.0-beta.10
-  checksum: c803b7430709c637ff530c266b107b18c983ed1b0c4adbaea4ad393bd238bd3a99bfb76925e4a0ee5037d22d236dca63d6e2c03326db96f901fceeba7321e72a
   languageName: node
   linkType: hard
 
@@ -15048,38 +14910,6 @@ typescript@^3.9.6:
     source-list-map: ^2.0.0
     source-map: ~0.6.1
   checksum: 60deda67f1bf32980f22e1c9c7fc6e41fc6999a0e04eaa4f480914c892b955c96914a72e898f6f1dfc92671f8239f99767257ff8ae1b23d8cabe898797b5fdb5
-  languageName: node
-  linkType: hard
-
-"webpack@npm:5.0.0-beta.21, webpack@npm:^5.0.0-beta.21":
-  version: 5.0.0-beta.21
-  resolution: "webpack@npm:5.0.0-beta.21"
-  dependencies:
-    "@types/estree": ^0.0.45
-    "@webassemblyjs/ast": 1.9.0
-    "@webassemblyjs/helper-module-context": 1.9.0
-    "@webassemblyjs/wasm-edit": 1.9.0
-    "@webassemblyjs/wasm-parser": 1.9.0
-    acorn: ^7.3.0
-    chrome-trace-event: ^1.0.2
-    enhanced-resolve: 5.0.0-beta.7
-    eslint-scope: ^5.0.0
-    events: ^3.0.0
-    glob-to-regexp: ^0.4.1
-    graceful-fs: ^4.1.15
-    json-parse-better-errors: ^1.0.2
-    loader-runner: ^4.0.0
-    mime-types: ^2.1.26
-    neo-async: ^2.6.1
-    pkg-dir: ^4.2.0
-    schema-utils: ^2.5.0
-    tapable: ^2.0.0-beta.10
-    terser-webpack-plugin: ^3.0.2
-    watchpack: 2.0.0-beta.13
-    webpack-sources: 2.0.0-beta.8
-  bin:
-    webpack: bin/webpack.js
-  checksum: ebd7abbfb4bf628528dfcf4b7e4f317a0e26410dd475e048d047dd2d14b2d8eec813e8754a804aac6e50828b8aa49adad749583369b305cf86eb8a3039bb0d0f
   languageName: node
   linkType: hard
 

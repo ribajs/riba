@@ -1,6 +1,6 @@
 {
   "name": "leaflet-example",
-  "version": "1.9.0-alpha.0",
+  "version": "1.9.0-alpha.1",
   "description": "",
   "main": "src/index.html",
   "scripts": {
@@ -70,11 +70,11 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "@ribajs/bs4": "^1.9.0-alpha.0",
-    "@ribajs/core": "^1.9.0-alpha.0",
-    "@ribajs/extras": "^1.9.0-alpha.0",
-    "@ribajs/iconset": "^1.9.0-alpha.0",
-    "@ribajs/leaflet-map": "^1.9.0-alpha.0",
+    "@ribajs/bs4": "^1.9.0-alpha.1",
+    "@ribajs/core": "^1.9.0-alpha.1",
+    "@ribajs/extras": "^1.9.0-alpha.1",
+    "@ribajs/iconset": "^1.9.0-alpha.1",
+    "@ribajs/leaflet-map": "^1.9.0-alpha.1",
     "bootstrap": "^4.5.0",
     "leaflet": "^1.6.0"
   },

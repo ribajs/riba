@@ -1,6 +1,6 @@
 {
   "name": "each-star-example",
-  "version": "1.9.0-alpha.0",
+  "version": "1.9.0-alpha.1",
   "description": "",
   "main": "src/main.ts",
   "scripts": {
@@ -29,7 +29,7 @@
     "@babel/runtime-corejs3": "^7.10.4",
     "@ribajs/eslint-config": "^1.8.0",
     "@ribajs/tsconfig": "^1.8.0",
-    "@ribajs/webpack-config": "^1.9.0-alpha.0",
+    "@ribajs/webpack-config": "^1.9.0-alpha.1",
     "@types/jest": "^26.0.3",
     "@typescript-eslint/eslint-plugin": "^3.5.0",
     "@typescript-eslint/experimental-utils": "^3.5.0",

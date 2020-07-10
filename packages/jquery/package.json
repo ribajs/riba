@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/jquery",
   "description": "JQuery module for Riba.js",
-  "version": "1.9.0-alpha.0",
+  "version": "1.9.0-alpha.1",
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [],
   "url": "https://github.com/ribajs/riba/tree/master/packages/jquery",
