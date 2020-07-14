@@ -39,7 +39,7 @@
     "@types/jest": "^26.0.0",
     "@typescript-eslint/eslint-plugin": "^3.3.0",
     "@typescript-eslint/parser": "^3.3.0",
-    "@yarnpkg/pnpify": "^2.0.0-rc.25",
+    "@yarnpkg/pnpify": "^2.1.0",
     "autoprefixer": "^9.8.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-array-includes": "^2.0.3",
@@ -65,7 +65,7 @@
     "terser-webpack-plugin": "^3.0.6",
     "ts-jest": "^26.1.0",
     "typescript": "^3.9.5",
-    "webpack": "^5.0.0-beta.18",
+    "webpack": "^5.0.0-beta.22",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   },

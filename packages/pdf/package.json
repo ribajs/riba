@@ -40,8 +40,8 @@
     "@ribajs/eslint-config": "workspace:infra/eslint-config",
     "@types/jest": "^26.0.4",
     "@types/pdfjs-dist": "^2.1.4",
-    "@typescript-eslint/eslint-plugin": "^3.6.0",
-    "@typescript-eslint/parser": "^3.6.0",
+    "@typescript-eslint/eslint-plugin": "^3.6.1",
+    "@typescript-eslint/parser": "^3.6.1",
     "babel-loader": "^8.1.0",
     "babel-plugin-array-includes": "^2.0.3",
     "core-js": "^3.6.5",
@@ -51,7 +51,7 @@
     "jest": "^26.1.0",
     "jest-extended": "^0.11.5",
     "prettier": "^2.0.5",
-    "ts-jest": "^26.1.1",
+    "ts-jest": "^26.1.2",
     "typescript": "^3.9.6",
     "webpack": "^5.0.0-beta.22",
     "webpack-cli": "^3.3.12"
@@ -59,7 +59,7 @@
   "dependencies": {
     "@ribajs/cache": "workspace:packages/cache",
     "pdf.js": "^0.1.0",
-    "pdfjs-dist": "^2.5.207"
+    "pdfjs-dist": "^2.4.456"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"
