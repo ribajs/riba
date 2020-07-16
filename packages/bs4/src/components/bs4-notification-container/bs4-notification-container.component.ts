@@ -1,18 +1,18 @@
 import { Component, EventDispatcher } from "@ribajs/core";
 
-import template from "./bs4-toast-container.component.html";
-import { Toast, ToastBinderData } from "../../interfaces";
+import template from "./bs4-notification-container.component.html";
+import { Notification } from "../../interfaces";
 
 export interface Scope {
   iconUrl?: string;
   positionClass: string;
-  toasts: Toast[];
+  notifications: Notification[];
   channelName: string;
-  onToastItemHide: Bs4ToastContainerComponent["onToastItemHide"];
+  onItemHide: Bs4NotificationContainerComponent["onItemHide"];
 }
 
-export class Bs4ToastContainerComponent extends Component {
-  public static tagName = "bs4-toast-container";
+export class Bs4NotificationContainerComponent extends Component {
+  public static tagName = "bs4-notification-container";
 
   protected autobind = true;
 
@@ -23,10 +23,10 @@ export class Bs4ToastContainerComponent extends Component {
   }
 
   protected scope: Scope = {
-    toasts: [],
+    notifications: [],
     positionClass: "absolute-bottom absolute-center",
     channelName: "toast",
-    onToastItemHide: this.onToastItemHide,
+    onItemHide: this.onItemHide,
   };
 
   constructor(element?: HTMLElement) {
@@ -35,27 +35,30 @@ export class Bs4ToastContainerComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init(Bs4ToastContainerComponent.observedAttributes);
+    this.init(Bs4NotificationContainerComponent.observedAttributes);
 
     //add event dispatcher to listen for toast notifications
     this.eventDispatcher = new EventDispatcher(this.scope.channelName);
-    this.eventDispatcher.on("show-toast", (toast: Toast | ToastBinderData) => {
-      this.scope.toasts.push(toast);
-    });
+    this.eventDispatcher.on(
+      "show-notification",
+      (notification: Notification) => {
+        this.scope.notifications.push(notification);
+      }
+    );
   }
 
-  //called by child if toast item wants to be removed
-  public onToastItemHide(
+  //called by child if notification item wants to be removed
+  public onItemHide(
     this: Scope,
     event: Event,
     el: HTMLElement,
     index: number,
-    toast: Toast
+    notification: Notification
   ) {
     if (index > -1) {
-      this.toasts.splice(index, 1);
+      this.notifications.splice(index, 1);
     } else {
-      console.warn("Toast not found", toast);
+      console.warn("Toast not found", notification);
     }
   }
 

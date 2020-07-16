@@ -130,13 +130,65 @@
     </section>
   </div>
 
+  <div class="row">
+    <section class="col-12 mb-5">
+
+      <h2 class="mb-2">Other notifications</h2>
+
+      <div class="form-row">
+
+        <div class="form-group col-md-4">
+          <label>Message</label>
+          <input type="text" class="form-control" placeholder="Message" name="message" rv-value="fromComponent.message">
+        </div>
+
+        <div class="form-group col-md-4">
+          <label>Title</label>
+          <input type="text" class="form-control" placeholder="Title" name="title" rv-value="fromComponent.title">
+        </div>
+
+        <div class="form-group col-md-4">
+          <label>Title</label>
+          <select class="form-control custom-select" rv-value="fromComponent.contextualClass">
+            <option selected value="default">Default</option>
+            <option value="primary">Primary</option>
+            <option value="secondary">Secondary</option>
+            <option value="success">Success</option>
+            <option value="danger">Danger</option>
+            <option value="warning">Warning</option>
+            <option value="info">Info</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label>Channel</label>
+          <select class="form-control custom-select" rv-value="fromComponent.channel">
+            <option selected>Type</option>
+            <option value="toast">toast</option>
+            <option value="toast-left-with-icon">toast-left-with-icon</option>
+            <option value="toast-right">toast-right</option>
+          </select>
+        </div>
+
+        <div class="col-12">
+          <button rv-class="'btn btn-' | append fromComponent.contextualClass" rv-on-click="showModal" type="button">Trigger component modal</button>
+        </div>
+
+      </div>
+
+    </section>
+  </div>
+
+
 </div>
 
-<bs4-toast-container>
-</bs4-toast-container>
+<bs4-notification-container>
+</bs4-notification-container>
 
-<bs4-toast-container channel-name="toast-left-with-icon" icon-url="./../../../icon.svg" position-class="absolute-bottom absolute-left">
-</bs4-toast-container>
+<bs4-notification-container channel-name="toast-left-with-icon" icon-url="./../../../icon.svg" position-class="absolute-bottom absolute-left">
+</bs4-notification-container>
 
-<bs4-toast-container channel-name="toast-right" position-class="absolute-bottom absolute-right">
-</bs4-toast-container>
+<bs4-notification-container channel-name="toast-right" position-class="absolute-bottom absolute-right">
+</bs4-notification-container>

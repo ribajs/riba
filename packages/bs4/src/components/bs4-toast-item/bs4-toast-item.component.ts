@@ -1,13 +1,13 @@
 import { Component } from "@ribajs/core";
 
 import template from "./bs4-toast-item.component.html";
-import { Toast, ToastBinderData } from "../../interfaces";
+import { Toast } from "../../interfaces";
 import { ToastService } from "../../services";
-import { Scope as Bs4ToastContainerScope } from "../bs4-toast-container/bs4-toast-container.component";
+import { Scope as Bs4NotificationContainerScope } from "../bs4-notification-container/bs4-notification-container.component";
 
 interface Scope {
   iconUrl?: string;
-  toast?: Toast | ToastBinderData;
+  toast?: Toast;
   onHide: Bs4ToastItemComponent["onHide"];
   onDismiss: Bs4ToastItemComponent["onDismiss"];
   index: number;
@@ -18,7 +18,7 @@ interface Scope {
 export class Bs4ToastItemComponent extends Component {
   public static tagName = "bs4-toast-item";
 
-  public _debug = false;
+  public _debug = true;
   protected autobind = true;
 
   protected toastService?: ToastService;
@@ -35,6 +35,7 @@ export class Bs4ToastItemComponent extends Component {
     onHide: this.onHide,
     index: -1,
     onDismiss: this.onDismiss,
+    toast: undefined,
   };
 
   constructor(element?: HTMLElement) {
@@ -48,18 +49,15 @@ export class Bs4ToastItemComponent extends Component {
 
   protected async afterBind() {
     super.afterBind();
+
     // construct toast service
     const toast = this.scope.toast;
     const toastEl = this.el.firstElementChild as HTMLElement | null;
     if (toast && toastEl) {
       this.toastService = new ToastService(toastEl, {
         delay: toast.delay ? toast.delay : ToastService.Default.delay,
-        autohide: toast.autoHide
-          ? toast.autoHide
-          : ToastService.Default.autohide,
-        animation: toast.animation
-          ? toast.animation
-          : ToastService.Default.animation,
+        autohide: toast.autoHide ? toast.autoHide : ToastService.Default.autohide,
+        animation: toast.animation ? toast.animation : ToastService.Default.animation,
       });
 
       // show toast using the toastservice
@@ -74,18 +72,9 @@ export class Bs4ToastItemComponent extends Component {
 
   // remove toast from dom once shown
   public onHide(event: Event, el: HTMLElement) {
-    const toastContainer: Bs4ToastContainerScope | null =
-      this.scope.$parent?.$parent || null;
-    if (
-      typeof toastContainer?.onToastItemHide === "function" &&
-      this.scope.toast
-    ) {
-      toastContainer.onToastItemHide(
-        event,
-        el,
-        this.scope.index,
-        this.scope.toast
-      );
+    const toastContainer: Bs4NotificationContainerScope | null = this.scope.$parent?.$parent || null;
+    if (typeof toastContainer?.onItemHide === "function" && this.scope.toast) {
+      toastContainer.onItemHide(event, el, this.scope.index, this.scope.toast);
     }
   }
   protected template() {

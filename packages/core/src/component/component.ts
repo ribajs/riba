@@ -555,6 +555,7 @@ export abstract class Component extends FakeHTMLElement {
   }
 
   private askForRibaAttribute(attrName: string) {
+    //TODO Fix if co-* has different keypath as attribute name
     const eventName = "ask-for-attribute:" + attrName;
     // this.debug("Trigger " + eventName);
     this.el.dispatchEvent(new CustomEvent(eventName));
@@ -573,7 +574,7 @@ export abstract class Component extends FakeHTMLElement {
 
   private onRibaAttributeChanged(event: CustomEvent) {
     const data = (event as CustomEvent).detail;
-    // this.debug("onRibaAttributeChanged", data);
+    this.debug("onRibaAttributeChanged", data);
     const oldValue = this.scope[data.name];
     this.attributeChangedCallback(
       data.name,
@@ -596,7 +597,7 @@ export abstract class Component extends FakeHTMLElement {
 
   private listenForRibaAttribute(attrName: string) {
     const eventName = "attribute:" + attrName;
-    // this.debug("Listen for " + eventName);
+    this.debug("Listen for " + eventName);
     this.el.addEventListener(
       eventName as any,
       this.onRibaAttributeChanged.bind(this)

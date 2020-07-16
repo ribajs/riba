@@ -1,8 +1,9 @@
 import { Component, EventDispatcher } from "@ribajs/core";
-import template from "./bs4-toast-example.component.html";
+import template from "./bs4-notifications-example.component.html";
+import { Toast, Modal } from "../../../../../../packages/bs4/src/interfaces";
 
-export class Bs4ToastExampleComponent extends Component {
-  public static tagName = "bs4-toast-example";
+export class Bs4NotificationsExampleComponent extends Component {
+  public static tagName = "bs4-notifications-example";
 
   protected autobind = true;
   static get observedAttributes() {
@@ -11,6 +12,7 @@ export class Bs4ToastExampleComponent extends Component {
 
   protected scope = {
     showToast: this.showToast,
+    showModal: this.showModal,
     message: "",
     title: "",
     fromComponent: {
@@ -28,20 +30,28 @@ export class Bs4ToastExampleComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    super.init(Bs4ToastExampleComponent.observedAttributes);
+    super.init(Bs4NotificationsExampleComponent.observedAttributes);
   }
 
   public showToast(event: Event) {
     this.scope.fromComponent.delay = Number(this.scope.fromComponent.delay);
-    const toastDispatcher = new EventDispatcher(
-      this.scope.fromComponent.channel
-    );
-
-    toastDispatcher.trigger("show-toast", {
+    const toastDispatcher = new EventDispatcher(this.scope.fromComponent.channel);
+    const toast: Toast = new Toast({
       ...this.scope.fromComponent,
-      $event: event,
+      $event: event as CustomEvent, //@JumpLink geht das mit dem as so?
       $context: this.scope,
     });
+    toastDispatcher.trigger("show-notification", toast);
+  }
+
+  public showModal(event: Event) {
+    const toastDispatcher = new EventDispatcher(this.scope.fromComponent.channel);
+    const modal: Modal = new Modal({
+      message: " hi",
+      $event: event as CustomEvent, //@JumpLink geht das mit dem as so?
+      $context: this.scope,
+    });
+    toastDispatcher.trigger("show-notification", modal);
   }
 
   protected requiredAttributes() {

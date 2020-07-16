@@ -5,7 +5,7 @@
 $toast-container-spacing-x: 30px !default;
 $toast-container-spacing-y: 30px !default;
 
-bs4-toast-container {
+.toast-container {
   .absolute-left {
     left: $toast-container-spacing-x;
   }

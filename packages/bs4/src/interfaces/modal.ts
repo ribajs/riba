@@ -1,13 +1,13 @@
-import { ToastService } from "../services";
 import { Notification } from "./notification";
+import ModalService from "../services/modal.service";
 
-export class Toast extends Notification {
+export class Modal extends Notification {
   message: string;
   iconUrl?: string;
   delay?: number;
   autoHide?: boolean;
   animation?: boolean;
-  toastService?: ToastService;
+  modalService?: ModalService;
   contextualClass?: string;
 
   constructor({
@@ -17,7 +17,7 @@ export class Toast extends Notification {
     delay,
     autoHide,
     animation,
-    toastService,
+    modalService,
     contextualClass,
     channel,
     $event,
@@ -29,19 +29,19 @@ export class Toast extends Notification {
     delay?: number;
     autoHide?: boolean;
     animation?: boolean;
-    toastService?: ToastService;
+    modalService?: ModalService;
     contextualClass?: string;
     channel?: string;
     $event?: CustomEvent;
     $context?: any;
   }) {
-    super("toast", title);
+    super("modal", title);
     this.message = message;
     this.iconUrl = iconUrl;
     this.delay = delay;
     this.autoHide = autoHide;
     this.animation = animation;
-    this.toastService = toastService;
+    this.modalService = modalService;
     this.contextualClass = contextualClass;
     this.channel = channel;
     this.$event = $event;
