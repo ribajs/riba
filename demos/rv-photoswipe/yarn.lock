@@ -13,16 +13,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/cli@npm:^7.10.4":
-  version: 7.10.4
-  resolution: "@babel/cli@npm:7.10.4"
+"@babel/cli@npm:^7.10.5":
+  version: 7.10.5
+  resolution: "@babel/cli@npm:7.10.5"
   dependencies:
     chokidar: ^2.1.8
     commander: ^4.0.1
     convert-source-map: ^1.1.0
     fs-readdir-recursive: ^1.1.0
     glob: ^7.0.0
-    lodash: ^4.17.13
+    lodash: ^4.17.19
     make-dir: ^2.1.0
     slash: ^2.0.0
     source-map: ^0.5.0
@@ -34,7 +34,7 @@ __metadata:
   bin:
     babel: ./bin/babel.js
     babel-external-helpers: ./bin/babel-external-helpers.js
-  checksum: d4e6c60f3c8381b2d3dde7cd2d96db5f94c0450a24b250308ed78689a51f42236ab2832c3083d20ba011d81c25530e731af2082388016e9b174dbb774316fb11
+  checksum: 828abcef512a019d5336b37068ed3d4aca076cb23178a8e15d4e9a871b30500d7cbd73a5b50ffad21a959909cc478e3e8e7adb3da5a67ff7c717dc4c0a28a960
   languageName: node
   linkType: hard
 
@@ -58,7 +58,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.1.0, @babel/core@npm:^7.10.4, @babel/core@npm:^7.7.5":
+"@babel/core@npm:^7.1.0, @babel/core@npm:^7.7.5":
   version: 7.10.4
   resolution: "@babel/core@npm:7.10.4"
   dependencies:
@@ -82,6 +82,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/core@npm:^7.10.5":
+  version: 7.10.5
+  resolution: "@babel/core@npm:7.10.5"
+  dependencies:
+    "@babel/code-frame": ^7.10.4
+    "@babel/generator": ^7.10.5
+    "@babel/helper-module-transforms": ^7.10.5
+    "@babel/helpers": ^7.10.4
+    "@babel/parser": ^7.10.5
+    "@babel/template": ^7.10.4
+    "@babel/traverse": ^7.10.5
+    "@babel/types": ^7.10.5
+    convert-source-map: ^1.7.0
+    debug: ^4.1.0
+    gensync: ^1.0.0-beta.1
+    json5: ^2.1.2
+    lodash: ^4.17.19
+    resolve: ^1.3.2
+    semver: ^5.4.1
+    source-map: ^0.5.0
+  checksum: f1c1e473ea83171fdb5a7804e5b07ac15e136534ef4a627cdb6b4621f639b1f1cd938f0fd7b535a18802cb83723c5c53b5e6725b95cea13ac9234780a379fcd1
+  languageName: node
+  linkType: hard
+
 "@babel/generator@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/generator@npm:7.10.4"
@@ -91,6 +115,17 @@ __metadata:
     lodash: ^4.17.13
     source-map: ^0.5.0
   checksum: efe9203d3d2fc7884c51535c0182d24f304682887fb859281ad7784ffea0f8dcb6b443bcf8a35408b600d34a3dc47ea14e6df8fa0ccc4ac707372224d38d092d
+  languageName: node
+  linkType: hard
+
+"@babel/generator@npm:^7.10.5":
+  version: 7.10.5
+  resolution: "@babel/generator@npm:7.10.5"
+  dependencies:
+    "@babel/types": ^7.10.5
+    jsesc: ^2.5.1
+    source-map: ^0.5.0
+  checksum: d3d5661a4411fb8a9c2d854a54a6a4f48ff458562cca24fed0d5260e975e715e8c0731e7ed0bd743617913195ff1bc94c1e6c5bf65f2971b836ad87aa3944d36
   languageName: node
   linkType: hard
 
@@ -240,6 +275,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/helper-module-transforms@npm:^7.10.5":
+  version: 7.10.5
+  resolution: "@babel/helper-module-transforms@npm:7.10.5"
+  dependencies:
+    "@babel/helper-module-imports": ^7.10.4
+    "@babel/helper-replace-supers": ^7.10.4
+    "@babel/helper-simple-access": ^7.10.4
+    "@babel/helper-split-export-declaration": ^7.10.4
+    "@babel/template": ^7.10.4
+    "@babel/types": ^7.10.5
+    lodash: ^4.17.19
+  checksum: 3f51f8c26d3cc1562f321151b11c568bd113b160831be9aa79c27fae17811bd067166c1e33d5dd13741f010e80bf7b27d2eb2ef3bf7e53d99fad49421c1736ef
+  languageName: node
+  linkType: hard
+
 "@babel/helper-optimise-call-expression@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/helper-optimise-call-expression@npm:7.10.4"
@@ -356,6 +406,15 @@ __metadata:
   bin:
     parser: ./bin/babel-parser.js
   checksum: 5b7a8eeb4fba94ebdf1d96510435bae349ce72d84c35c710afc02d6636cffe8f209a1aa0b42a3cc115240e6af60f178f75b4ec204eef94497d1230bf52a01c43
+  languageName: node
+  linkType: hard
+
+"@babel/parser@npm:^7.10.5":
+  version: 7.10.5
+  resolution: "@babel/parser@npm:7.10.5"
+  bin:
+    parser: ./bin/babel-parser.js
+  checksum: 6d4b6d42161680eef8b69c0ede5dbbbc7d8817e82a010a4b66ebcf9491281640aedcd72034bee4082c81b2ad415c2950a7cfbcd5a1122526fd89cc04498f1f5d
   languageName: node
   linkType: hard
 
@@ -969,9 +1028,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-runtime@npm:^7.10.4":
-  version: 7.10.4
-  resolution: "@babel/plugin-transform-runtime@npm:7.10.4"
+"@babel/plugin-transform-runtime@npm:^7.10.5":
+  version: 7.10.5
+  resolution: "@babel/plugin-transform-runtime@npm:7.10.5"
   dependencies:
     "@babel/helper-module-imports": ^7.10.4
     "@babel/helper-plugin-utils": ^7.10.4
@@ -979,7 +1038,7 @@ __metadata:
     semver: ^5.5.1
   peerDependencies:
     "@babel/core": ^7.0.0-0
-  checksum: ad2ba64bb057b3cf891d04583b2cc7af8cc75ef2a1de19477209f0e7a6801b3aabfe6ef2fedf4da8540fa3ba6b292ef4741ad7d55861aec4cc6150944aa79598
+  checksum: 7869d1bdb2d5b5098b10704f7e0c57203d1eb611eba834f6b0e0e7e10cd3247c64643bcc5a216523c3abc1dd0e676e206cea7dc81b241d6bde990d882a654c19
   languageName: node
   linkType: hard
 
@@ -1177,17 +1236,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime-corejs3@npm:^7.10.4":
-  version: 7.10.4
-  resolution: "@babel/runtime-corejs3@npm:7.10.4"
+"@babel/runtime-corejs3@npm:^7.10.5":
+  version: 7.10.5
+  resolution: "@babel/runtime-corejs3@npm:7.10.5"
   dependencies:
     core-js-pure: ^3.0.0
     regenerator-runtime: ^0.13.4
-  checksum: 77f7c0ab78bcb55e6d2abd8740cfb850c30b81fac5dd0a52b4bcd38d6d4831467288f803af8b5e0a139d7a05405ebe51a790bef929ce8e343b5b385ff230c07f
+  checksum: 91f8fbbffaf1cc62989ff5cb7d1807148d3a7c18e97b7739216237367854f7e6d89de49c9f5a6255a8cbb8c4294020c5672e8c4d2714ebe939635909c9d26c2f
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.10.4, @babel/runtime@npm:^7.8.4":
+"@babel/runtime@npm:^7.10.5":
+  version: 7.10.5
+  resolution: "@babel/runtime@npm:7.10.5"
+  dependencies:
+    regenerator-runtime: ^0.13.4
+  checksum: 3cb9117b40f968ddb80de67a17de395da2fec1a68b2db9515d919ddf83fca83364601e1ef8bdaa131d79695300841bedcdc0678e3b6abdf8cb1a5d556e35dafd
+  languageName: node
+  linkType: hard
+
+"@babel/runtime@npm:^7.8.4":
   version: 7.10.4
   resolution: "@babel/runtime@npm:7.10.4"
   dependencies:
@@ -1224,6 +1292,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/traverse@npm:^7.10.5":
+  version: 7.10.5
+  resolution: "@babel/traverse@npm:7.10.5"
+  dependencies:
+    "@babel/code-frame": ^7.10.4
+    "@babel/generator": ^7.10.5
+    "@babel/helper-function-name": ^7.10.4
+    "@babel/helper-split-export-declaration": ^7.10.4
+    "@babel/parser": ^7.10.5
+    "@babel/types": ^7.10.5
+    debug: ^4.1.0
+    globals: ^11.1.0
+    lodash: ^4.17.19
+  checksum: 1f989932016d0f3f351248a3bbf41659f545c60a68bd25668c8c7b04a52340171766e6aab500a513fa8d0f6155d9d95aaafe54a2f47860833b4546f05d441d29
+  languageName: node
+  linkType: hard
+
 "@babel/types@npm:^7.0.0, @babel/types@npm:^7.10.4, @babel/types@npm:^7.3.0, @babel/types@npm:^7.3.3, @babel/types@npm:^7.4.4":
   version: 7.10.4
   resolution: "@babel/types@npm:7.10.4"
@@ -1232,6 +1317,17 @@ __metadata:
     lodash: ^4.17.13
     to-fast-properties: ^2.0.0
   checksum: fe38dec645344f96d745ecf54b455ac070d33d09abbe957a0ce29bedcd96b1b24b616308ad6f9b303d2dd52805320ef2eb2e9bd1d12068a2c1441943ceed190f
+  languageName: node
+  linkType: hard
+
+"@babel/types@npm:^7.10.5":
+  version: 7.10.5
+  resolution: "@babel/types@npm:7.10.5"
+  dependencies:
+    "@babel/helper-validator-identifier": ^7.10.4
+    lodash: ^4.17.19
+    to-fast-properties: ^2.0.0
+  checksum: edf9fb669dd8adcb739af8e5cdea6f0611934163e74617950bc9ea7ae20e89c1c28731f157d1fadbf535a5948fa66c67efc1cc6b5132a46c2f315f34f2048c7d
   languageName: node
   linkType: hard
 
@@ -1560,17 +1656,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/bs4@portal:../../packages/bs4::locator=rv-photoswipe%40workspace%3A."
   dependencies:
-    "@babel/cli": ^7.10.4
-    "@babel/core": ^7.10.4
+    "@babel/cli": ^7.10.5
+    "@babel/core": ^7.10.5
     "@babel/plugin-proposal-class-properties": ^7.10.4
     "@babel/plugin-proposal-object-rest-spread": ^7.10.4
     "@babel/plugin-proposal-optional-chaining": ^7.10.4
     "@babel/plugin-syntax-export-default-from": ^7.10.4
-    "@babel/plugin-transform-runtime": ^7.10.4
+    "@babel/plugin-transform-runtime": ^7.10.5
     "@babel/preset-env": ^7.10.4
     "@babel/preset-typescript": ^7.10.4
-    "@babel/runtime": ^7.10.4
-    "@babel/runtime-corejs3": ^7.10.4
+    "@babel/runtime": ^7.10.5
+    "@babel/runtime-corejs3": ^7.10.5
     "@ribajs/cache": "portal:../../packages/cache::locator=rv-photoswipe%40workspace%3A."
     "@ribajs/core": "portal:../../packages/core::locator=rv-photoswipe%40workspace%3A."
     "@ribajs/eslint-config": "portal:../../infra/eslint-config::locator=rv-photoswipe%40workspace%3A."
@@ -1594,8 +1690,8 @@ __metadata:
     jest-extended: ^0.11.5
     popper.js: ^1.16.1
     prettier: ^2.0.5
-    ts-jest: ^26.1.2
-    typescript: ^3.9.6
+    ts-jest: ^26.1.3
+    typescript: ^3.9.7
     webpack: ^5.0.0-beta.22
     webpack-cli: ^3.3.12
   languageName: node
@@ -1619,17 +1715,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/core@portal:../../packages/core::locator=rv-photoswipe%40workspace%3A."
   dependencies:
-    "@babel/cli": ^7.10.4
-    "@babel/core": ^7.10.4
+    "@babel/cli": ^7.10.5
+    "@babel/core": ^7.10.5
     "@babel/plugin-proposal-class-properties": ^7.10.4
     "@babel/plugin-proposal-object-rest-spread": ^7.10.4
     "@babel/plugin-proposal-optional-chaining": ^7.10.4
     "@babel/plugin-syntax-export-default-from": ^7.10.4
-    "@babel/plugin-transform-runtime": ^7.10.4
+    "@babel/plugin-transform-runtime": ^7.10.5
     "@babel/preset-env": ^7.10.4
     "@babel/preset-typescript": ^7.10.4
-    "@babel/runtime": ^7.10.4
-    "@babel/runtime-corejs3": ^7.10.4
+    "@babel/runtime": ^7.10.5
+    "@babel/runtime-corejs3": ^7.10.5
     "@ribajs/eslint-config": "portal:../../infra/eslint-config::locator=rv-photoswipe%40workspace%3A."
     "@ribajs/tsconfig": "portal:../../infra/tsconfig::locator=rv-photoswipe%40workspace%3A."
     "@ribajs/types": "portal:../../infra/types::locator=rv-photoswipe%40workspace%3A."
@@ -1649,8 +1745,8 @@ __metadata:
     jest-extended: ^0.11.5
     prettier: ^2.0.5
     source-map-support: ^0.5.19
-    ts-jest: ^26.1.2
-    typescript: ^3.9.6
+    ts-jest: ^26.1.3
+    typescript: ^3.9.7
     uglifyjs-webpack-plugin: ^2.2.0
     webpack: ^5.0.0-beta.22
     webpack-cli: ^3.3.12
@@ -1669,7 +1765,7 @@ __metadata:
     eslint-config-prettier: ^6.11.0
     eslint-plugin-prettier: ^3.1.4
     prettier: ^2.0.5
-    typescript: ^3.9.6
+    typescript: ^3.9.7
   languageName: node
   linkType: soft
 
@@ -1677,15 +1773,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/extras@portal:../../packages/extras::locator=rv-photoswipe%40workspace%3A."
   dependencies:
-    "@babel/cli": ^7.10.4
-    "@babel/core": ^7.10.4
+    "@babel/cli": ^7.10.5
+    "@babel/core": ^7.10.5
     "@babel/plugin-proposal-class-properties": ^7.10.4
     "@babel/plugin-proposal-export-default-from": ^7.10.4
     "@babel/plugin-proposal-object-rest-spread": ^7.10.4
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
     "@babel/preset-env": ^7.10.4
     "@babel/preset-typescript": ^7.10.4
-    "@babel/runtime-corejs3": ^7.10.4
+    "@babel/runtime-corejs3": ^7.10.5
     "@ribajs/core": "portal:../../packages/core::locator=rv-photoswipe%40workspace%3A."
     "@ribajs/eslint-config": "portal:../../infra/eslint-config::locator=rv-photoswipe%40workspace%3A."
     "@ribajs/utils": "portal:../../packages/utils::locator=rv-photoswipe%40workspace%3A."
@@ -1701,8 +1797,8 @@ __metadata:
     jest: ^26.1.0
     jest-extended: ^0.11.5
     prettier: ^2.0.5
-    ts-jest: ^26.1.2
-    typescript: ^3.9.6
+    ts-jest: ^26.1.3
+    typescript: ^3.9.7
     webpack: ^5.0.0-beta.22
     webpack-cli: ^3.3.12
   languageName: node
@@ -1712,7 +1808,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/iconset@portal:../../packages/iconset::locator=rv-photoswipe%40workspace%3A."
   dependencies:
-    "@babel/runtime-corejs3": ^7.10.4
+    "@babel/runtime-corejs3": ^7.10.5
     core-js: ^3.6.5
     gulp: ^4.0.2
     gulp-clean: ^0.4.0
@@ -1727,21 +1823,22 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/photoswipe@portal:../../packages/photoswipe::locator=rv-photoswipe%40workspace%3A."
   dependencies:
-    "@babel/cli": ^7.10.4
-    "@babel/core": ^7.10.4
+    "@babel/cli": ^7.10.5
+    "@babel/core": ^7.10.5
     "@babel/plugin-proposal-class-properties": ^7.10.4
     "@babel/plugin-proposal-export-default-from": ^7.10.4
     "@babel/plugin-proposal-object-rest-spread": ^7.10.4
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
     "@babel/preset-env": ^7.10.4
     "@babel/preset-typescript": ^7.10.4
-    "@babel/runtime-corejs3": ^7.10.4
+    "@babel/runtime-corejs3": ^7.10.5
     "@ribajs/bs4": "portal:../../packages/bs4::locator=rv-photoswipe%40workspace%3A."
     "@ribajs/cache": "portal:../../packages/cache::locator=rv-photoswipe%40workspace%3A."
     "@ribajs/core": "portal:../../packages/core::locator=rv-photoswipe%40workspace%3A."
     "@ribajs/eslint-config": "portal:../../infra/eslint-config::locator=rv-photoswipe%40workspace%3A."
     "@ribajs/extras": "portal:../../packages/extras::locator=rv-photoswipe%40workspace%3A."
     "@ribajs/tsconfig": "portal:../../infra/tsconfig::locator=rv-photoswipe%40workspace%3A."
+    "@ribajs/utils": "portal:../../packages/utils::locator=rv-photoswipe%40workspace%3A."
     "@types/jest": ^26.0.4
     "@typescript-eslint/eslint-plugin": ^3.6.1
     "@typescript-eslint/parser": ^3.6.1
@@ -1755,8 +1852,8 @@ __metadata:
     jest-extended: ^0.11.5
     photoswipe: ^4.1.3
     prettier: ^2.0.5
-    ts-jest: ^26.1.2
-    typescript: ^3.9.6
+    ts-jest: ^26.1.3
+    typescript: ^3.9.7
     webpack: ^5.0.0-beta.22
     webpack-cli: ^3.3.12
   languageName: node
@@ -1780,8 +1877,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/utils@portal:../../packages/utils::locator=rv-photoswipe%40workspace%3A."
   dependencies:
-    "@babel/runtime": ^7.10.4
-    "@babel/runtime-corejs3": ^7.10.4
+    "@babel/runtime": ^7.10.5
+    "@babel/runtime-corejs3": ^7.10.5
     "@ribajs/tsconfig": "portal:../../infra/tsconfig::locator=rv-photoswipe%40workspace%3A."
     babel-jest: ^26.1.0
   languageName: node
@@ -1791,7 +1888,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/webpack-config@portal:../../infra/webpack-config::locator=rv-photoswipe%40workspace%3A."
   dependencies:
-    "@babel/core": ^7.10.4
+    "@babel/core": ^7.10.5
     babel-loader: ^8.1.0
     copy-webpack-plugin: ^6.0.3
     css-loader: ^3.6.0
@@ -1807,7 +1904,7 @@ __metadata:
     pug-loader: ^2.4.0
     resolve-url-loader: ^3.1.1
     sass-loader: ^9.0.2
-    terser-webpack-plugin: ^3.0.6
+    terser-webpack-plugin: ^3.0.7
     webpack: ^5.0.0-beta.22
     webpack-dev-server: ^3.11.0
   languageName: node
@@ -3601,7 +3698,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cacache@npm:^15.0.4":
+"cacache@npm:^15.0.4, cacache@npm:^15.0.5":
   version: 15.0.5
   resolution: "cacache@npm:15.0.5"
   dependencies:
@@ -8754,7 +8851,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.0.0, lodash@npm:^4.17.11, lodash@npm:^4.17.13, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:~4.17.10":
+"lodash@npm:^4.0.0, lodash@npm:^4.17.11, lodash@npm:^4.17.13, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:~4.17.10":
   version: 4.17.19
   resolution: "lodash@npm:4.17.19"
   checksum: 2f5b422542ebab06941adce1b9ba44aa4515fce15f90f715c521f4fcde26dfb8c08a6b4f402de566b60ff2a5b88a22b0791287d0a35b6fc54a2f3801a8a43c89
@@ -9953,7 +10050,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"p-limit@npm:^3.0.1":
+"p-limit@npm:^3.0.1, p-limit@npm:^3.0.2":
   version: 3.0.2
   resolution: "p-limit@npm:3.0.2"
   dependencies:
@@ -11455,18 +11552,18 @@ fsevents@^1.2.7:
   version: 0.0.0-use.local
   resolution: "rv-photoswipe@workspace:."
   dependencies:
-    "@babel/cli": ^7.10.4
-    "@babel/core": ^7.10.4
+    "@babel/cli": ^7.10.5
+    "@babel/core": ^7.10.5
     "@babel/plugin-proposal-class-properties": ^7.10.4
     "@babel/plugin-proposal-export-default-from": ^7.10.4
     "@babel/plugin-proposal-object-rest-spread": ^7.10.4
     "@babel/plugin-proposal-optional-chaining": ^7.10.4
     "@babel/plugin-syntax-export-default-from": ^7.10.4
-    "@babel/plugin-transform-runtime": ^7.10.4
+    "@babel/plugin-transform-runtime": ^7.10.5
     "@babel/preset-env": ^7.10.4
     "@babel/preset-typescript": ^7.10.4
-    "@babel/runtime": ^7.10.4
-    "@babel/runtime-corejs3": ^7.10.4
+    "@babel/runtime": ^7.10.5
+    "@babel/runtime-corejs3": ^7.10.5
     "@ribajs/bs4": "portal:../../packages/bs4::locator=rv-photoswipe%40workspace%3A."
     "@ribajs/core": "portal:../../packages/core::locator=rv-photoswipe%40workspace%3A."
     "@ribajs/eslint-config": "portal:../../infra/eslint-config::locator=rv-photoswipe%40workspace%3A."
@@ -11475,6 +11572,7 @@ fsevents@^1.2.7:
     "@ribajs/photoswipe": "portal:../../packages/photoswipe::locator=rv-photoswipe%40workspace%3A."
     "@ribajs/tsconfig": "portal:../../infra/tsconfig::locator=rv-photoswipe%40workspace%3A."
     "@ribajs/types": "portal:../../infra/types::locator=rv-photoswipe%40workspace%3A."
+    "@ribajs/utils": "portal:../../packages/utils::locator=rv-photoswipe%40workspace%3A."
     "@ribajs/webpack-config": "portal:../../infra/webpack-config::locator=rv-photoswipe%40workspace%3A."
     "@types/jest": ^26.0.4
     "@typescript-eslint/eslint-plugin": ^3.6.1
@@ -11504,9 +11602,9 @@ fsevents@^1.2.7:
     prettier: ^2.0.5
     pug-loader: ^2.4.0
     sass-loader: ^9.0.2
-    terser-webpack-plugin: ^3.0.6
-    ts-jest: ^26.1.2
-    typescript: ^3.9.6
+    terser-webpack-plugin: ^3.0.7
+    ts-jest: ^26.1.3
+    typescript: ^3.9.7
     webpack: ^5.0.0-beta.22
     webpack-cli: ^3.3.12
     webpack-dev-server: ^3.11.0
@@ -12616,7 +12714,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"terser-webpack-plugin@npm:^3.0.2, terser-webpack-plugin@npm:^3.0.6":
+"terser-webpack-plugin@npm:^3.0.2":
   version: 3.0.6
   resolution: "terser-webpack-plugin@npm:3.0.6"
   dependencies:
@@ -12632,6 +12730,25 @@ fsevents@^1.2.7:
   peerDependencies:
     webpack: ^4.0.0 || ^5.0.0
   checksum: 982a4bc92834586d2f586e87f3eb75a3dee7fd17138b4073d42a7b7f123f3b82677080967891de84f52874236ca8a9f825a5b6cfe5a8cbc7f5f9b5d8498c95de
+  languageName: node
+  linkType: hard
+
+"terser-webpack-plugin@npm:^3.0.7":
+  version: 3.0.7
+  resolution: "terser-webpack-plugin@npm:3.0.7"
+  dependencies:
+    cacache: ^15.0.5
+    find-cache-dir: ^3.3.1
+    jest-worker: ^26.1.0
+    p-limit: ^3.0.2
+    schema-utils: ^2.6.6
+    serialize-javascript: ^4.0.0
+    source-map: ^0.6.1
+    terser: ^4.8.0
+    webpack-sources: ^1.4.3
+  peerDependencies:
+    webpack: ^4.0.0 || ^5.0.0
+  checksum: 90879e30ef0b9a0564706d1882db6ffcc07d9c6391873e684e195f5b4a60b31378485feb9fa309d3978a9d24aae9ee6571a25ab06a886426e3ba43d366505d64
   languageName: node
   linkType: hard
 
@@ -12852,9 +12969,9 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:^26.1.2":
-  version: 26.1.2
-  resolution: "ts-jest@npm:26.1.2"
+"ts-jest@npm:^26.1.3":
+  version: 26.1.3
+  resolution: "ts-jest@npm:26.1.3"
   dependencies:
     bs-logger: 0.x
     buffer-from: 1.x
@@ -12871,7 +12988,7 @@ fsevents@^1.2.7:
     typescript: ">=3.8 <4.0"
   bin:
     ts-jest: cli.js
-  checksum: 0932e07f2cab19188f79f4cda60aab8213ab721f0f398580fec2544b80e93be0525b9c5625777aa8a0dadc1f55b9947b1f0e179b6ca0dbfda549509c5cbf2489
+  checksum: ed1bad546aba5970ce2e9e5ba80adebd888a4fb16b120e078b1083a0510d1b158a3f3d39ee33c49ca538ef10ba0e3233205366554713263a5fe45c669a757b05
   languageName: node
   linkType: hard
 
@@ -13002,23 +13119,23 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-typescript@^3.9.6:
-  version: 3.9.6
-  resolution: "typescript@npm:3.9.6"
+typescript@^3.9.7:
+  version: 3.9.7
+  resolution: "typescript@npm:3.9.7"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: a39929ff0547cf7249abde6225c50f5c139554b04b94db4b34aa3229efac6e5815dffbbb16cde4594ef4e78601fdc64ade683bf7fdf3ed5bde6f34167f6b4aad
+  checksum: ebbb7512d05816cdb48ab396cf0c69444857d7e84e4fe28caadd2c9407f0c7df696992a02f6cbc24732680f4b8d0a67d6122a2136415bb925eca844fbf23e297
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^3.9.6#builtin<compat/typescript>":
-  version: 3.9.6
-  resolution: "typescript@patch:typescript@npm%3A3.9.6#builtin<compat/typescript>::version=3.9.6&hash=226bd1"
+"typescript@patch:typescript@^3.9.7#builtin<compat/typescript>":
+  version: 3.9.7
+  resolution: "typescript@patch:typescript@npm%3A3.9.7#builtin<compat/typescript>::version=3.9.7&hash=226bd1"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 25585222cfc24e0e484d5ec0b52d44291d7baee8d68f7f1e73a459c7e22c09b785143ce1363013654f10280a09aebc7eac2db5dedd5a54fc1adf013ca80fee49
+  checksum: 9eeb9c03837f2d09b097498e2b1be0c25ab07b82fe1ebb246139c8b5ea054ff5978a9733070438a4870a8f50429af31fc6d3abc2de4937ebe2351da8a37a4457
   languageName: node
   linkType: hard
 
