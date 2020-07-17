@@ -15,6 +15,7 @@ export class Bs4NotificationContainerComponent extends Component {
   public static tagName = "bs4-notification-container";
 
   protected autobind = true;
+  public _debug = true;
 
   protected eventDispatcher?: EventDispatcher;
 
@@ -36,15 +37,6 @@ export class Bs4NotificationContainerComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     this.init(Bs4NotificationContainerComponent.observedAttributes);
-
-    //add event dispatcher to listen for toast notifications
-    this.eventDispatcher = new EventDispatcher(this.scope.channelName);
-    this.eventDispatcher.on(
-      "show-notification",
-      (notification: Notification) => {
-        this.scope.notifications.push(notification);
-      }
-    );
   }
 
   //called by child if notification item wants to be removed
@@ -64,6 +56,20 @@ export class Bs4NotificationContainerComponent extends Component {
 
   protected async afterBind() {
     super.afterBind();
+    //add event dispatcher to listen for toast notifications
+    this.eventDispatcher = new EventDispatcher(this.scope.channelName);
+    console.log("afterbind scope", this.scope);
+    this.eventDispatcher.on(
+      "show-notification",
+      (notification: Notification) => {
+        console.log(
+          "received notification container",
+          this.scope,
+          notification
+        );
+        this.scope.notifications.push(notification);
+      }
+    );
   }
 
   protected requiredAttributes() {
@@ -71,6 +77,10 @@ export class Bs4NotificationContainerComponent extends Component {
   }
 
   protected template() {
-    return template;
+    // Only set the component template if there no childs or the childs are templates
+    if (!this.el.hasChildNodes()) {
+      return template;
+    }
+    return null;
   }
 }

@@ -3,5 +3,24 @@
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "eslint.nodePath": ".yarn/sdks",
   "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
-  "typescript.enablePromptUseWorkspaceTsdk": true
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#49c19a",
+    "activityBar.activeBorder": "#9541be",
+    "activityBar.background": "#49c19a",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#9541be",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "statusBar.background": "#37a07e",
+    "statusBar.border": "#37a07e",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#49c19a",
+    "titleBar.activeBackground": "#37a07e",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.border": "#37a07e",
+    "titleBar.inactiveBackground": "#37a07e99",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#37a07e"
 }

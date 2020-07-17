@@ -56,8 +56,12 @@ export class Bs4ToastItemComponent extends Component {
     if (toast && toastEl) {
       this.toastService = new ToastService(toastEl, {
         delay: toast.delay ? toast.delay : ToastService.Default.delay,
-        autohide: toast.autoHide ? toast.autoHide : ToastService.Default.autohide,
-        animation: toast.animation ? toast.animation : ToastService.Default.animation,
+        autohide: toast.autoHide
+          ? toast.autoHide
+          : ToastService.Default.autohide,
+        animation: toast.animation
+          ? toast.animation
+          : ToastService.Default.animation,
       });
 
       // show toast using the toastservice
@@ -72,7 +76,8 @@ export class Bs4ToastItemComponent extends Component {
 
   // remove toast from dom once shown
   public onHide(event: Event, el: HTMLElement) {
-    const toastContainer: Bs4NotificationContainerScope | null = this.scope.$parent?.$parent || null;
+    const toastContainer: Bs4NotificationContainerScope | null =
+      this.scope.$parent?.$parent || null;
     if (typeof toastContainer?.onItemHide === "function" && this.scope.toast) {
       toastContainer.onItemHide(event, el, this.scope.index, this.scope.toast);
     }
