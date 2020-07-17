@@ -1,7 +1,7 @@
 import { handleizeFormatter } from "@ribajs/core";
 import templateHorizontal from "./bs4-tabs-horizontal.component.html";
 import templateVertical from "./bs4-tabs-vertical.component.html";
-
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { TemplatesComponent } from "../templates/templates.component";
 
 export interface Tab {
@@ -368,7 +368,7 @@ export class Bs4TabsComponent extends TemplatesComponent {
 
   protected template() {
     // Only set the component template if there no childs or the childs are templates
-    if (!this.el.hasChildNodes() || this.hasOnlyTemplateChilds()) {
+    if (!hasChildNodesTrim(this.el) || this.hasOnlyTemplateChilds()) {
       if (this.scope.optionTabsAngle === "horizontal") {
         return templateHorizontal;
       } else {

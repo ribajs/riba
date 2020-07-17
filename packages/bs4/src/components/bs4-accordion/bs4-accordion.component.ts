@@ -4,7 +4,7 @@ import {
   EVENT_HIDE,
   EVENT_SHOW,
 } from "../../services/collapse.service";
-
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { TemplatesComponent } from "../templates/templates.component";
 
 import template from "./bs4-accordion.component.html";
@@ -238,7 +238,7 @@ export class Bs4AccordionComponent extends TemplatesComponent {
 
   protected template() {
     // Only set the component template if there no childs or the childs are templates
-    if (!this.el.hasChildNodes() || this.hasOnlyTemplateChilds()) {
+    if (!hasChildNodesTrim(this.el) || this.hasOnlyTemplateChilds()) {
       return template;
     } else {
       return null;

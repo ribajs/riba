@@ -7,7 +7,7 @@ import {
   ShopifyShippingRatesNormalized,
 } from "../../interfaces";
 import { ShopifyCartService } from "../../services";
-import { getInputValue } from "@ribajs/utils/src/dom";
+import { getInputValue, hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./shopify-cart.component.html";
 
 export interface Scope {
@@ -192,7 +192,7 @@ export class ShopifyCartComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       return null;
     } else {
       return template;

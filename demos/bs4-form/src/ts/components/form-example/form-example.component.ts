@@ -1,5 +1,6 @@
 import { Component } from "@ribajs/core";
 import template from "./form-example.component.html";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 
 export class FormExampleComponent extends Component {
   public static tagName = "rv-form-example";
@@ -26,7 +27,7 @@ export class FormExampleComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       // console.debug('Do not use template, because element has child nodes');
       return null;
     } else {

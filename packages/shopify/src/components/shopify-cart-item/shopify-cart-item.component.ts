@@ -1,4 +1,5 @@
 import { Component } from "@ribajs/core";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { ShopifyCartLineItem, ShopifyCartObject } from "../../interfaces";
 import { ShopifyCartService } from "../../services";
 import template from "./shopify-cart-item.component.html";
@@ -231,7 +232,7 @@ export class ShopifyCartItemComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       return null;
     } else {
       return template;

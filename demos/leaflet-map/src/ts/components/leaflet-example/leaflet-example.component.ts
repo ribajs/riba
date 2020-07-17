@@ -1,5 +1,5 @@
 import { Component } from "@ribajs/core";
-
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./leaflet-example.component.html";
 
 export class LeafletExampleComponent extends Component {
@@ -61,7 +61,7 @@ export class LeafletExampleComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       // console.debug('Do not use template, because element has child nodes');
       return null;
     } else {

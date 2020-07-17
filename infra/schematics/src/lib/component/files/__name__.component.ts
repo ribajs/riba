@@ -1,6 +1,7 @@
 import {
   Component,
 } from '@ribajs/core';
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 
 <% if (templateEngine === 'pug') { %>import pugTemplate from './<%= name %>.component.pug';<% } %><% if (templateEngine === 'html') { %>import template from './<%= name %>.component.html';<% } %>
 
@@ -64,7 +65,7 @@ export class <%= classify(name) %>Component extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       console.debug('Do not use template, because element has child nodes');
       return null;
     } else {

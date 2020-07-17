@@ -78,10 +78,10 @@ export class Bs4ModalItemComponent extends Component {
     const notificationContainer: Bs4NotificationContainerScope | null =
       this.scope.$parent?.$parent || null;
     if (
-      typeof notificationContainer?.onModalItemHide === "function" &&
+      typeof notificationContainer?.onItemHide === "function" &&
       this.scope.modal
     ) {
-      notificationContainer.onModalItemHide(
+      notificationContainer.onItemHide(
         event,
         el,
         this.scope.index,

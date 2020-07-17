@@ -1,5 +1,5 @@
 import { Component, EventDispatcher } from "@ribajs/core";
-
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./bs4-notification-container.component.html";
 import { Notification } from "../../interfaces";
 
@@ -17,7 +17,7 @@ export class Bs4NotificationContainerComponent extends Component {
   protected autobind = true;
   public _debug = true;
 
-  protected eventDispatcher?: EventDispatcher;
+  protected notificationDispatcher?: EventDispatcher;
 
   static get observedAttributes() {
     return ["icon-url", "position-class", "channel-name"];
@@ -39,7 +39,7 @@ export class Bs4NotificationContainerComponent extends Component {
     this.init(Bs4NotificationContainerComponent.observedAttributes);
   }
 
-  //called by child if notification item wants to be removed
+  // Called by child if notification item wants to be removed
   public onItemHide(
     this: Scope,
     event: Event,
@@ -50,20 +50,19 @@ export class Bs4NotificationContainerComponent extends Component {
     if (index > -1) {
       this.notifications.splice(index, 1);
     } else {
-      console.warn("Toast not found", notification);
+      console.warn("Notification not found", notification);
     }
   }
 
   protected async afterBind() {
     super.afterBind();
-    //add event dispatcher to listen for toast notifications
-    this.eventDispatcher = new EventDispatcher(this.scope.channelName);
-    console.log("afterbind scope", this.scope);
-    this.eventDispatcher.on(
+    // Add event dispatcher to listen for toast notifications
+    this.notificationDispatcher = new EventDispatcher(this.scope.channelName);
+    this.notificationDispatcher.on(
       "show-notification",
       (notification: Notification) => {
-        console.log(
-          "received notification container",
+        this.debug(
+          "Received notification container on " + this.scope.channelName,
           this.scope,
           notification
         );
@@ -78,7 +77,7 @@ export class Bs4NotificationContainerComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs or the childs are templates
-    if (!this.el.hasChildNodes()) {
+    if (!hasChildNodesTrim(this.el)) {
       return template;
     }
     return null;

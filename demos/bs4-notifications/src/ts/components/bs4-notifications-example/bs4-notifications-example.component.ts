@@ -1,4 +1,5 @@
 import { Component, EventDispatcher } from "@ribajs/core";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./bs4-notifications-example.component.html";
 import { Toast, Modal } from "../../../../../../packages/bs4/src/interfaces";
 
@@ -33,25 +34,29 @@ export class Bs4NotificationsExampleComponent extends Component {
     super.init(Bs4NotificationsExampleComponent.observedAttributes);
   }
 
-  public showToast(event: Event) {
+  public showToast(event: CustomEvent) {
     this.scope.fromComponent.delay = Number(this.scope.fromComponent.delay);
-    const toastDispatcher = new EventDispatcher(this.scope.fromComponent.channel);
+    const notificationDispatcher = new EventDispatcher(
+      this.scope.fromComponent.channel
+    );
     const toast: Toast = new Toast({
       ...this.scope.fromComponent,
-      $event: event as CustomEvent, //@JumpLink geht das mit dem as so?
+      $event: event,
       $context: this.scope,
     });
-    toastDispatcher.trigger("show-notification", toast);
+    notificationDispatcher.trigger("show-notification", toast);
   }
 
-  public showModal(event: Event) {
-    const toastDispatcher = new EventDispatcher(this.scope.fromComponent.channel);
+  public showModal(event: CustomEvent) {
+    const notificationDispatcher = new EventDispatcher(
+      this.scope.fromComponent.channel
+    );
     const modal: Modal = new Modal({
       message: " hi",
-      $event: event as CustomEvent, //@JumpLink geht das mit dem as so?
+      $event: event,
       $context: this.scope,
     });
-    toastDispatcher.trigger("show-notification", modal);
+    notificationDispatcher.trigger("show-notification", modal);
   }
 
   protected requiredAttributes() {
@@ -60,7 +65,7 @@ export class Bs4NotificationsExampleComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       // console.debug('Do not use template, because element has child nodes');
       return null;
     } else {

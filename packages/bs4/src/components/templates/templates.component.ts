@@ -1,5 +1,6 @@
 import { Component } from "@ribajs/core";
 import { camelCase } from "@ribajs/utils/src/type";
+// import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 
 export type AttributeType = string; // 'string' | 'number' | 'boolean';
 
@@ -122,7 +123,7 @@ export abstract class TemplatesComponent extends Component {
 
   // protected template() {
   //   // Only set the component template if there no childs or the childs are templates
-  //   if (!this.el.hasChildNodes() || this.hasOnlyTemplateChilds()) {
+  //   if (!hasChildNodesTrim(this.el) || this.hasOnlyTemplateChilds()) {
   //     return template;
   //   } else {
   //     return null;

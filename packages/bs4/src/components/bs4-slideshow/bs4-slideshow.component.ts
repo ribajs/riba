@@ -1,6 +1,6 @@
 import { TemplatesComponent } from "../templates/templates.component";
 import { EventDispatcher } from "@ribajs/core";
-
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { clone, camelCase } from "@ribajs/utils/src/type";
 
 import {
@@ -1275,7 +1275,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   protected template() {
     // Only set the component template if there no childs or the childs are templates
-    if (!this.el.hasChildNodes() || this.hasOnlyTemplateChilds()) {
+    if (!hasChildNodesTrim(this.el) || this.hasOnlyTemplateChilds()) {
       // ('Full template!', this.templateIndicators);
       return templateSlides + this.templateControls + this.templateIndicators;
     } else {

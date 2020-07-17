@@ -1,5 +1,5 @@
 import { Component } from "@ribajs/core";
-
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./rv-photoswipe.component.html";
 import fullscreenTemplate from "./rv-photoswipe.fullscreen.component.html";
 
@@ -607,7 +607,7 @@ export class PhotoswipeComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already<rv-photswipe>serhsehsehjiu </>
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       return (this.el as HTMLElement).innerHTML + fullscreenTemplate;
     } else {
       return template + fullscreenTemplate;

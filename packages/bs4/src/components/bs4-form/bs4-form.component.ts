@@ -1,7 +1,7 @@
 import { Component, HttpService, HttpMethod, HttpDataType } from "@ribajs/core";
 import template from "./bs4-form.component.html";
 import { stripHtml } from "@ribajs/utils/src/type";
-import { getUID } from "@ribajs/utils/src/dom";
+import { getUID, hasChildNodesTrim } from "@ribajs/utils/src/dom";
 
 export interface ValidationObject {
   fields:
@@ -304,7 +304,7 @@ export class Bs4FormComponent extends Component {
   }
 
   protected template() {
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       this.initForm();
       return null;
     } else {

@@ -9,8 +9,10 @@ export const showToastOnEventBinder: Binder<Toast> = {
     this.customData.toastData.$context = this.view.models;
     console.debug(this.customData.toastData);
     const toastData: Toast = new Toast(this.customData.toastData);
-    const toastDispatcher = new EventDispatcher(toastData.channel || "toast");
-    toastDispatcher.trigger("show-notification", toastData);
+    const notificationDispatcher = new EventDispatcher(
+      toastData.channel || "toast"
+    );
+    notificationDispatcher.trigger("show-notification", toastData);
   },
   bind(el: HTMLUnknownElement) {
     this.customData = {};

@@ -1,11 +1,8 @@
-import {
-  Component,
-} from '@ribajs/core';
-
-import template from './extras-scroll-events-example.component.html';
+import { Component } from "@ribajs/core";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import template from "./extras-scroll-events-example.component.html";
 
 export class ExtrasScrollEventsExampleComponent extends Component {
-
   public static tagName = "rv-extras-scroll-events-example";
 
   protected autobind = true;
@@ -29,8 +26,9 @@ export class ExtrasScrollEventsExampleComponent extends Component {
       if (detail && detail.position) {
         html += `<span class="detail">(x: ${detail.position.x} y: ${detail.position.y} maxX: ${detail.position.maxX} maxY: ${detail.position.maxY})</span>`;
       }
-      html += '<span class="time">' + new Date().toLocaleTimeString() + '</span></p>';
-      this.consoleElement.insertAdjacentHTML('afterbegin', html);
+      html +=
+        '<span class="time">' + new Date().toLocaleTimeString() + "</span></p>";
+      this.consoleElement.insertAdjacentHTML("afterbegin", html);
     }
   }
 
@@ -40,16 +38,15 @@ export class ExtrasScrollEventsExampleComponent extends Component {
   }
 
   protected async beforeBind() {
-    return super.beforeBind()
-    .then(() => {
-      this.consoleElement = this.el.querySelector('.console');
-      this.touchZoneElement = this.el.querySelector('.touch-zone');
+    return super.beforeBind().then(() => {
+      this.consoleElement = this.el.querySelector(".console");
+      this.touchZoneElement = this.el.querySelector(".touch-zone");
     });
   }
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       return null;
     } else {
       return template;
