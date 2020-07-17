@@ -1,12 +1,34 @@
 import { Notification } from "./notification";
-import ModalService from "../services/modal.service";
+import { ModalService, Config } from "../services/modal.service";
 
-export class Modal extends Notification {
+export interface Button {
+  /**
+   * The text displayed in the button.
+   */
+  label: string;
+
+  /**
+   * Method in the scope wich should be called when the button is clicked
+   */
+  action?: string;
+
+  /**
+   * Bootstrap button class e.g. btn-primary, btn-secondary, btn-success, btn-outline-primary, btn-outline-secondary, btn-lg and so on...
+   */
+  class?: string;
+}
+
+export class Modal extends Notification implements Config {
   message: string;
   iconUrl?: string;
-  delay?: number;
-  autoHide?: boolean;
-  animation?: boolean;
+
+  focus?: boolean;
+  keyboard?: boolean;
+  backdrop?: boolean | "static";
+  show?: boolean;
+
+  buttons: Button[] = [];
+
   modalService?: ModalService;
   contextualClass?: string;
 
@@ -14,9 +36,14 @@ export class Modal extends Notification {
     title,
     message,
     iconUrl,
-    delay,
-    autoHide,
-    animation,
+
+    focus,
+    keyboard,
+    backdrop,
+    show,
+
+    buttons,
+
     modalService,
     contextualClass,
     channel,
@@ -26,9 +53,14 @@ export class Modal extends Notification {
     title?: string;
     message: string;
     iconUrl?: string;
-    delay?: number;
-    autoHide?: boolean;
-    animation?: boolean;
+
+    focus?: boolean;
+    keyboard?: boolean;
+    backdrop?: boolean | "static";
+    show?: boolean;
+
+    buttons?: Button[];
+
     modalService?: ModalService;
     contextualClass?: string;
     channel?: string;
@@ -38,9 +70,14 @@ export class Modal extends Notification {
     super("modal", title);
     this.message = message;
     this.iconUrl = iconUrl;
-    this.delay = delay;
-    this.autoHide = autoHide;
-    this.animation = animation;
+
+    this.focus = focus;
+    this.keyboard = keyboard;
+    this.backdrop = backdrop;
+    this.show = show;
+
+    this.buttons = buttons || [];
+
     this.modalService = modalService;
     this.contextualClass = contextualClass;
     this.channel = channel;

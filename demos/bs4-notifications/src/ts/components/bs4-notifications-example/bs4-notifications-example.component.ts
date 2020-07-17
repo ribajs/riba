@@ -19,7 +19,7 @@ export class Bs4NotificationsExampleComponent extends Component {
     fromComponent: {
       message: "Message example",
       title: "Title example",
-      contextualClass: "default",
+      contextualClass: "warning",
       channel: "toast-right",
       delay: 10000,
     },
@@ -52,7 +52,7 @@ export class Bs4NotificationsExampleComponent extends Component {
       this.scope.fromComponent.channel
     );
     const modal: Modal = new Modal({
-      message: " hi",
+      ...this.scope.fromComponent,
       $event: event,
       $context: this.scope,
     });

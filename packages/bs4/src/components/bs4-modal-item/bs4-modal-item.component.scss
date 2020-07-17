@@ -1,46 +1,38 @@
-@mixin toast-variant($background, $border, $color) {
+@mixin modal-variant($background, $border, $color) {
   color: $color;
   @include gradient-bg($background);
   border-color: $border;
-
-  hr {
-    border-top-color: darken($border, 5%);
-  }
-
-  .alert-link {
-    color: darken($color, 10%);
-  }
 }
 
-$toast-min-width:                   250px;
-$toast-border-level:                $alert-border-level !default; // default is -9
-$toast-opacity:                     0.6 !default;
+$modal-border-level:                $alert-border-level !default; // default is -9
+$modal-opacity:                     0.6 !default;
 
-$toast-body-bg-level:               $alert-bg-level !default; // default is -10
-$toast-body-color-level:            $alert-color-level !default; // default is 6
+$modal-body-bg-level:               $alert-bg-level !default; // default is -10
+$modal-body-color-level:            $alert-color-level !default; // default is 6
 
-$toast-header-bg-level:             $alert-bg-level + 2 !default;
-$toast-header-color-level:          $alert-color-level +2 !default;
+$modal-header-bg-level:             $alert-bg-level + 2 !default;
+$modal-header-color-level:          $alert-color-level +2 !default;
 
-.toast {
-  min-width: $toast-min-width;
+.modal {
   @each $color, $value in $theme-colors {
-    &.toast-#{$color} {
+    &.modal-#{$color} {
       
-      $toast-border-color: theme-color-level($color, $toast-border-level);
+      $modal-border-color: theme-color-level($color, $modal-border-level);
 
-      $toast-body-bg: rgba(theme-color-level($color, $toast-body-bg-level), $toast-opacity);
-      $toast-body-color: theme-color-level($color, $toast-body-color-level);
+      $modal-body-bg: rgba(theme-color-level($color, $modal-body-bg-level), $modal-opacity);
+      $modal-body-color: theme-color-level($color, $modal-body-color-level);
 
-      $toast-header-bg: rgba(theme-color-level($color, $toast-header-bg-level), $toast-opacity);
-      $toast-header-color: theme-color-level($color, $toast-header-color-level);
+      $modal-header-bg: rgba(theme-color-level($color, $modal-header-bg-level), $modal-opacity);
+      $modal-header-color: theme-color-level($color, $modal-header-color-level);
 
-      @include toast-variant($toast-body-bg, $toast-border-color, $toast-body-color);
-      .toast-header {
-        @include toast-variant($toast-header-bg, $toast-border-color, $toast-header-color);
+      .modal-body {
+        @include modal-variant($modal-body-bg, $modal-border-color, $modal-body-color);
+      }
+      .modal-header, .modal-footer {
+        @include modal-variant($modal-header-bg, $modal-border-color, $modal-header-color);
         .close {
           opacity: 1;
-          color: $toast-header-color;
+          color: $modal-header-color;
         }
       }
     }

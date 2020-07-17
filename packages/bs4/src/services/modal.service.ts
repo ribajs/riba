@@ -14,10 +14,10 @@ import EventHandler from "./dom/event-handler";
 import SelectorEngine from "./dom/selector-engine";
 
 export interface Config {
-  focus: boolean;
-  keyboard: boolean;
-  backdrop: boolean | "static";
-  show: boolean;
+  focus?: boolean;
+  keyboard?: boolean;
+  backdrop?: boolean | "static";
+  show?: boolean;
 }
 
 /**
@@ -32,45 +32,44 @@ const DATA_KEY = "bs.modal";
 const EVENT_KEY = `.${DATA_KEY}`;
 const ESCAPE_KEY = "Escape";
 
-const Default: Config = {
+export const Default: Config = {
   backdrop: true,
   keyboard: true,
   focus: true,
   show: true,
 };
 
-const DefaultType = {
+export const DefaultType = {
   backdrop: "(boolean|string)",
   keyboard: "boolean",
   focus: "boolean",
   show: "boolean",
 };
 
-const EVENT_HIDE = `hide${EVENT_KEY}`;
-const EVENT_HIDE_PREVENTED = `hidePrevented${EVENT_KEY}`;
-const EVENT_HIDDEN = `hidden${EVENT_KEY}`;
-const EVENT_SHOW = `show${EVENT_KEY}`;
-const EVENT_SHOWN = `shown${EVENT_KEY}`;
-const EVENT_FOCUSIN = `focusin${EVENT_KEY}`;
-const EVENT_RESIZE = `resize${EVENT_KEY}`;
-const EVENT_CLICK_DISMISS = `click.dismiss${EVENT_KEY}`;
-const EVENT_KEYDOWN_DISMISS = `keydown.dismiss${EVENT_KEY}`;
-const EVENT_MOUSEUP_DISMISS = `mouseup.dismiss${EVENT_KEY}`;
-const EVENT_MOUSEDOWN_DISMISS = `mousedown.dismiss${EVENT_KEY}`;
+export const EVENT_HIDE = `hide${EVENT_KEY}`;
+export const EVENT_HIDE_PREVENTED = `hidePrevented${EVENT_KEY}`;
+export const EVENT_HIDDEN = `hidden${EVENT_KEY}`;
+export const EVENT_SHOW = `show${EVENT_KEY}`;
+export const EVENT_SHOWN = `shown${EVENT_KEY}`;
+export const EVENT_FOCUSIN = `focusin${EVENT_KEY}`;
+export const EVENT_RESIZE = `resize${EVENT_KEY}`;
+export const EVENT_CLICK_DISMISS = `click.dismiss${EVENT_KEY}`;
+export const EVENT_KEYDOWN_DISMISS = `keydown.dismiss${EVENT_KEY}`;
+export const EVENT_MOUSEUP_DISMISS = `mouseup.dismiss${EVENT_KEY}`;
+export const EVENT_MOUSEDOWN_DISMISS = `mousedown.dismiss${EVENT_KEY}`;
 
-const CLASS_NAME_SCROLLBAR_MEASURER = "modal-scrollbar-measure";
-const CLASS_NAME_BACKDROP = "modal-backdrop";
-const CLASS_NAME_OPEN = "modal-open";
-const CLASS_NAME_FADE = "fade";
-const CLASS_NAME_SHOW = "show";
-const CLASS_NAME_STATIC = "modal-static";
+export const CLASS_NAME_SCROLLBAR_MEASURER = "modal-scrollbar-measure";
+export const CLASS_NAME_BACKDROP = "modal-backdrop";
+export const CLASS_NAME_OPEN = "modal-open";
+export const CLASS_NAME_FADE = "fade";
+export const CLASS_NAME_SHOW = "show";
+export const CLASS_NAME_STATIC = "modal-static";
 
-const SELECTOR_DIALOG = ".modal-dialog";
-const SELECTOR_MODAL_BODY = ".modal-body";
-const SELECTOR_DATA_DISMISS = '[data-dismiss="modal"]';
-const SELECTOR_FIXED_CONTENT =
+export const SELECTOR_DIALOG = ".modal-dialog";
+export const SELECTOR_MODAL_BODY = ".modal-body";
+export const SELECTOR_FIXED_CONTENT =
   ".fixed-top, .fixed-bottom, .is-fixed, .sticky-top";
-const SELECTOR_STICKY_CONTENT = ".sticky-top";
+export const SELECTOR_STICKY_CONTENT = ".sticky-top";
 
 /**
  * ------------------------------------------------------------------------
@@ -78,7 +77,7 @@ const SELECTOR_STICKY_CONTENT = ".sticky-top";
  * ------------------------------------------------------------------------
  */
 
-class ModalService {
+export class ModalService {
   protected _config: Config;
   _element: HTMLElement;
   _dialog: HTMLElement | null;
@@ -113,11 +112,11 @@ class ModalService {
 
   // Public
 
-  toggle(relatedTarget: HTMLElement) {
+  toggle(relatedTarget?: HTMLElement) {
     return this._isShown ? this.hide() : this.show(relatedTarget);
   }
 
-  show(relatedTarget: HTMLElement) {
+  show(relatedTarget?: HTMLElement) {
     if (this._isShown || this._isTransitioning) {
       return;
     }
@@ -254,7 +253,7 @@ class ModalService {
     return config;
   }
 
-  _showElement(relatedTarget: HTMLElement) {
+  _showElement(relatedTarget?: HTMLElement) {
     const transition = this._element.classList.contains(CLASS_NAME_FADE);
     const modalBody = this._dialog
       ? SelectorEngine.findOne(SELECTOR_MODAL_BODY, this._dialog)
