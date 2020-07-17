@@ -3,31 +3,31 @@
  */
 class EventHandler {
   public static on<T>(
-    element: HTMLElement,
+    element: HTMLElement | Document | Window,
     eventName: string,
-    handler: (e: T) => void
+    handler: EventListenerOrEventListenerObject
   ) {
     return element.addEventListener(eventName as any, handler, {});
   }
 
   public static one<T>(
-    element: HTMLElement,
+    element: HTMLElement | Document | Window,
     eventName: string,
-    handler: (e: T) => void
+    handler: EventListenerOrEventListenerObject
   ) {
     return element.addEventListener(eventName as any, handler, { once: true });
   }
 
   public static off<T>(
-    element: HTMLElement,
+    element: HTMLElement | Document | Window,
     originalTypeEvent: string,
-    handler: (e: T) => void
+    handler: EventListenerOrEventListenerObject
   ) {
     return element.removeEventListener(originalTypeEvent as any, handler);
   }
 
   public static trigger<T = any>(
-    element: HTMLElement,
+    element: HTMLElement | Document | Window,
     eventName: string,
     extraParameters: any = {}
   ) {
