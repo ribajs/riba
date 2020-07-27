@@ -198,7 +198,6 @@ export class VideoComponent extends Component {
 
     if (this.scope.autoplayMediaQuery) {
       //autoplay-media-query attribute
-      console.log("media query", this.scope.autoplayMediaQuery);
       const mediaQueryList = window.matchMedia(this.scope.autoplayMediaQuery);
       mediaQueryList.addEventListener(
         "change",
@@ -216,7 +215,6 @@ export class VideoComponent extends Component {
    * Loads the media and checks if the autoplay-on-min-buffer is set
    */
   public autoplay() {
-    console.log("autoplay");
     if (this.scope.autoplayOnMinBuffer) {
       this.video.addEventListener("progress", this.onVideoProgress.bind(this));
       this.video.addEventListener(
@@ -238,7 +236,6 @@ export class VideoComponent extends Component {
    * Forces autoplay without checking for the autoplay-on-min-buffer event
    */
   public forceAutoplay() {
-    console.log("force autoplay");
     if (!this.alreadyStartedPlaying) {
       this.alreadyStartedPlaying = true;
       this.video.muted = true; //video is required to be muted if autoplay video is supposed to autoplay
