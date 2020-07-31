@@ -19,7 +19,7 @@ interface Scope {
   togglePlay: VideoComponent["togglePlay"];
 
   // custom
-  /** If the user will pass the mp4 source for some reason */
+  /** If the user will pass the video source for some reason */
   videoSrc?: string;
   autoplayOnMinBuffer: number;
   autoplayMediaQuery: string;
