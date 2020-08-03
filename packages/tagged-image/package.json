@@ -59,7 +59,7 @@
   },
   "dependencies": {
     "@ribajs/bs4": "workspace:packages/bs4",
-    "@ribajs/core": "^1.9.0-alpha.1",
+    "@ribajs/core": "^1.9.0-alpha.2",
     "@ribajs/extras": "workspace:packages/extras",
     "@yarnpkg/pnpify": "^2.1.0"
   },

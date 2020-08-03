@@ -27,8 +27,8 @@
     "@babel/preset-typescript": "^7.10.4",
     "@babel/runtime": "^7.10.5",
     "@babel/runtime-corejs3": "^7.10.5",
-    "@ribajs/eslint-config": "^1.9.0-alpha.1",
-    "@ribajs/tsconfig": "^1.9.0-alpha.1",
+    "@ribajs/eslint-config": "^1.9.0-alpha.2",
+    "@ribajs/tsconfig": "^1.9.0-alpha.2",
     "@ribajs/webpack-config": "^0.0.1",
     "@types/jest": "^26.0.4",
     "@typescript-eslint/eslint-plugin": "^3.6.1",
@@ -64,10 +64,10 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "@ribajs/bs4": "^1.9.0-alpha.1",
-    "@ribajs/core": "^1.9.0-alpha.1",
-    "@ribajs/i18n": "^1.9.0-alpha.1",
-    "@ribajs/utils": "^1.9.0-alpha.1"
+    "@ribajs/bs4": "^1.9.0-alpha.2",
+    "@ribajs/core": "^1.9.0-alpha.2",
+    "@ribajs/i18n": "^1.9.0-alpha.2",
+    "@ribajs/utils": "^1.9.0-alpha.2"
   },
   "resolutions": {
     "@ribajs/bs4": "portal:../../packages/bs4",
