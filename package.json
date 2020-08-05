@@ -31,6 +31,7 @@
     "Browser"
   ],
   "scripts": {
+    "reinstall": "YARN_CHECKSUM_BEHAVIOR=update yarn install",
     "test": "jest --config=jest.config.js",
     "test:watch": "jest --config=jest.config.js --watch",
     "lint": "eslint packages/ --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
