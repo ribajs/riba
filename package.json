@@ -98,7 +98,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "yarn run test",
+      "disabled: pre-push": "yarn run test",
       "disabled: pre-commit": "yarn run lint"
     }
   },
