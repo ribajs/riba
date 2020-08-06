@@ -63,16 +63,25 @@ const mapData = (() => {
   };
 })();
 
-class Data {
-  public static setData(instance: HTMLElement, key: string, data: any) {
-    mapData.set(instance, key, data);
-  }
-  public static getData(instance: HTMLElement, key: string) {
-    return mapData.get(instance, key);
-  }
-  public static removeData(instance: HTMLElement, key: string) {
-    mapData.delete(instance, key);
-  }
+export const setData = (instance: HTMLElement, key: string, data: any) => {
+  mapData.set(instance, key, data);
+};
+
+export const getData = (instance: HTMLElement, key: string) => {
+  return mapData.get(instance, key);
+};
+
+export const removeData = (instance: HTMLElement, key: string) => {
+  mapData.delete(instance, key);
+};
+
+/**
+ * @deprecated Import the methods directly instead of this class
+ */
+export class Data {
+  public static setData = setData;
+  public static getData = getData;
+  public static removeData = removeData;
 }
 
 export default Data;

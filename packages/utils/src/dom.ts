@@ -116,6 +116,8 @@ export const getElementFromEvent = (event: Event | MouseEvent | TouchEvent) => {
     ((event as Event).target as HTMLAnchorElement) ||
     ((event as any).currentTarget as HTMLAnchorElement) ||
     ((event as MouseEvent).relatedTarget as HTMLAnchorElement) ||
+    // JQuery event
+    ((event as any).delegateTarget as HTMLUnknownElement) ||
     ((event as any).fromElement as HTMLAnchorElement);
   return el;
 };

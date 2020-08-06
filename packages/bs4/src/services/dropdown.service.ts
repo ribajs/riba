@@ -1,10 +1,10 @@
 import Popper from "popper.js"; // /dist/umd/popper
-import { Utils } from "./utils.service";
+import { isElement, typeCheckConfig } from "./utils.service";
 /**
  * --------------------------------------------------------------------------
  * Bootstrap (v4.1.3): dropdown.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * @see https://raw.githubusercontent.com/twbs/bootstrap/v4-dev/js/src/dropdown.js
+ * @see https://github.com/twbs/bootstrap/blob/main/js/src/dropdown.js
  * --------------------------------------------------------------------------
  */
 
@@ -257,7 +257,7 @@ export class DropdownService {
 
       if (this._config.reference === "parent") {
         referenceElement = parent as HTMLElement;
-      } else if (Utils.isElement(this._config.reference)) {
+      } else if (isElement(this._config.reference)) {
         referenceElement = this._config.reference;
 
         // Check if it's jQuery element
@@ -344,7 +344,7 @@ export class DropdownService {
       ...config,
     };
 
-    Utils.typeCheckConfig(NAME, config, DropdownService.DefaultType);
+    typeCheckConfig(NAME, config, DropdownService.DefaultType);
 
     return config;
   }

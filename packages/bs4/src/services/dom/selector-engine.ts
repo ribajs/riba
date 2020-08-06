@@ -14,78 +14,98 @@ import { Utils } from "../utils.service";
  * ------------------------------------------------------------------------
  */
 
-const NODE_TEXT = 3;
+export const NODE_TEXT = 3;
 
-class SelectorEngine {
-  public static matches(
-    element: HTMLElement | (Node & ParentNode),
-    selector: string
+export const matches = (
+  element: HTMLElement | (Node & ParentNode),
+  selector: string
+) => {
+  return Element.prototype.matches.call(element, selector);
+};
+
+export const find = (selector: string, element = document.documentElement) => {
+  return Element.prototype.querySelectorAll.call(
+    element,
+    selector
+  ) as NodeListOf<HTMLElement>;
+};
+
+export const findOne = (
+  selector: string,
+  element = document.documentElement
+) => {
+  return Element.prototype.querySelector.call(
+    element,
+    selector
+  ) as HTMLElement | null;
+};
+
+export const children = (element: HTMLElement, selector: string) => {
+  const children = Utils.makeArray(element.children);
+  return children.filter((child) => matches(child, selector));
+};
+
+export const parents = (element: HTMLElement, selector: string) => {
+  const parents = [];
+
+  let ancestor = element.parentNode;
+
+  while (
+    ancestor &&
+    ancestor.nodeType === Node.ELEMENT_NODE &&
+    ancestor.nodeType !== NODE_TEXT
   ) {
-    return Element.prototype.matches.call(element, selector);
-  }
-
-  public static find(selector: string, element = document.documentElement) {
-    return Element.prototype.querySelectorAll.call(
-      element,
-      selector
-    ) as NodeListOf<HTMLElement>;
-  }
-
-  public static findOne(selector: string, element = document.documentElement) {
-    return Element.prototype.querySelector.call(
-      element,
-      selector
-    ) as HTMLElement | null;
-  }
-
-  public static children(element: HTMLElement, selector: string) {
-    const children = Utils.makeArray(element.children);
-    return children.filter((child) => this.matches(child, selector));
-  }
-
-  public static parents(element: HTMLElement, selector: string) {
-    const parents = [];
-
-    let ancestor = element.parentNode;
-
-    while (
-      ancestor &&
-      ancestor.nodeType === Node.ELEMENT_NODE &&
-      ancestor.nodeType !== NODE_TEXT
-    ) {
-      if (this.matches(ancestor, selector)) {
-        parents.push(ancestor);
-      }
-
-      ancestor = ancestor.parentNode;
+    if (matches(ancestor, selector)) {
+      parents.push(ancestor);
     }
 
-    return parents;
+    ancestor = ancestor.parentNode;
   }
 
-  public static closest(element: HTMLElement, selector: string) {
-    return Element.prototype.closest.call(element, selector);
-  }
+  return parents;
+};
 
-  public static prev(element: HTMLElement, selector: string) {
-    const siblings = [];
+export const closest = (element: HTMLElement, selector: string) => {
+  return Element.prototype.closest.call(element, selector);
+};
 
-    let previous = element.previousSibling;
+export const prev = (element: HTMLElement, selector: string) => {
+  const siblings = [];
 
-    while (
-      previous &&
-      previous.nodeType === Node.ELEMENT_NODE &&
-      previous.nodeType !== NODE_TEXT
-    ) {
-      if (this.matches(previous as HTMLElement, selector)) {
-        siblings.push(previous);
-      }
+  let previous = element.previousSibling;
 
-      previous = previous.previousSibling;
+  while (
+    previous &&
+    previous.nodeType === Node.ELEMENT_NODE &&
+    previous.nodeType !== NODE_TEXT
+  ) {
+    if (matches(previous as HTMLElement, selector)) {
+      siblings.push(previous);
     }
 
-    return siblings;
+    previous = previous.previousSibling;
   }
+
+  return siblings;
+};
+
+/**
+ * @deprecated Import the methods directly instead of this class
+ */
+export class SelectorEngine {
+  public static matches = matches;
+
+  public static find = find;
+
+  public static findOne = findOne;
+
+  public static children = children;
+
+  public static parents = parents;
+
+  public static closest = closest;
+
+  public static prev = prev;
 }
 
 export default SelectorEngine;
