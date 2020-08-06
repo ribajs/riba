@@ -28,6 +28,8 @@ var getStyleLoaderRule = (config) => {
   rule.use.push({
     loader: require.resolve("css-loader"),
     options: {
+      // Set this to true to resolve scss modules like `@import '~bootstrap/scss/bootstrap';`
+      // Set this to false if you do not want resolve font urls like `src: url(webfont_ProximaNova-Sbold.woff) format('woff');`
       url: true,
     },
   });
@@ -40,7 +42,7 @@ var getStyleLoaderRule = (config) => {
     loader: require.resolve("sass-loader"),
     options: {
       webpackImporter: true,
-      // Use dart-sass in combination of yarn berry pnp, see: https://github.com/webpack-contrib/sass-loader/issues/802
+      // Use dart-sass in combination of yarn 2 pnp, see: https://github.com/webpack-contrib/sass-loader/issues/802
       implementation: require("dart-sass"),
     },
   });

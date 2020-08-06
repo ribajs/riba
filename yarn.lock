@@ -1638,7 +1638,7 @@ __metadata:
     babel-jest: ^26.2.2
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
-    bootstrap: ^4.5.1
+    bootstrap: ^4.5.2
     core-js: ^3.6.5
     eslint: ^7.6.0
     eslint-config-prettier: ^6.11.0
@@ -1683,7 +1683,7 @@ __metadata:
     babel-jest: ^26.2.2
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
-    bootstrap: ^4.5.1
+    bootstrap: ^4.5.2
     core-js: ^3.6.5
     eslint: ^7.6.0
     eslint-config-prettier: ^6.11.0
@@ -2020,6 +2020,7 @@ __metadata:
     "@ribajs/cache": "portal:packages/cache::locator=ribajs%40workspace%3A."
     "@ribajs/core": "portal:packages/core::locator=ribajs%40workspace%3A."
     "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
+    "@ribajs/utils": "portal:packages/utils::locator=ribajs%40workspace%3A."
     "@types/jest": ^26.0.9
     "@types/jquery": ^3.5.1
     "@typescript-eslint/eslint-plugin": ^3.8.0
@@ -2056,6 +2057,7 @@ __metadata:
     "@ribajs/cache": "portal:packages/cache::locator=ribajs%40workspace%3A."
     "@ribajs/core": "portal:packages/core::locator=ribajs%40workspace%3A."
     "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
+    "@ribajs/utils": "portal:packages/utils::locator=ribajs%40workspace%3A."
     "@types/jest": ^26.0.9
     "@types/jquery": ^3.5.1
     "@typescript-eslint/eslint-plugin": ^3.8.0
@@ -2203,7 +2205,9 @@ __metadata:
     "@babel/preset-typescript": ^7.10.4
     "@babel/runtime-corejs3": ^7.11.2
     "@ribajs/cache": "portal:packages/cache::locator=ribajs%40workspace%3A."
+    "@ribajs/core": "portal:packages/core::locator=ribajs%40workspace%3A."
     "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
+    "@ribajs/utils": "portal:packages/utils::locator=ribajs%40workspace%3A."
     "@types/jest": ^26.0.9
     "@types/pdfjs-dist": ^2.1.5
     "@typescript-eslint/eslint-plugin": ^3.8.0
@@ -2217,7 +2221,7 @@ __metadata:
     jest: ^26.2.2
     jest-extended: ^0.11.5
     pdf.js: ^0.1.0
-    pdfjs-dist: ^2.4.456
+    pdfjs-dist: ^2.5.207
     prettier: ^2.0.5
     ts-jest: ^26.1.4
     typescript: ^3.9.7
@@ -2571,7 +2575,7 @@ __metadata:
     "@babel/core": ^7.11.1
     babel-loader: ^8.1.0
     copy-webpack-plugin: ^6.0.3
-    css-loader: ^4.2.0
+    css-loader: ^4.2.1
     dart-sass: ^1.25.0
     file-loader: ^6.0.0
     glob: ^7.1.6
@@ -2584,7 +2588,7 @@ __metadata:
     pug-loader: ^2.4.0
     resolve-url-loader: ^3.1.1
     sass-loader: ^9.0.3
-    terser-webpack-plugin: ^4.0.0
+    terser-webpack-plugin: ^3.0.7
     webpack: ^5.0.0-beta.22
     webpack-dev-server: ^3.11.0
   languageName: node
@@ -2597,7 +2601,7 @@ __metadata:
     "@babel/core": ^7.11.1
     babel-loader: ^8.1.0
     copy-webpack-plugin: ^6.0.3
-    css-loader: ^4.2.0
+    css-loader: ^4.2.1
     dart-sass: ^1.25.0
     file-loader: ^6.0.0
     glob: ^7.1.6
@@ -2610,7 +2614,7 @@ __metadata:
     pug-loader: ^2.4.0
     resolve-url-loader: ^3.1.1
     sass-loader: ^9.0.3
-    terser-webpack-plugin: ^4.0.0
+    terser-webpack-plugin: ^3.0.7
     webpack: ^5.0.0-beta.22
     webpack-dev-server: ^3.11.0
   languageName: unknown
@@ -4280,13 +4284,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bootstrap@npm:^4.5.1":
-  version: 4.5.1
-  resolution: "bootstrap@npm:4.5.1"
+"bootstrap@npm:^4.5.2":
+  version: 4.5.2
+  resolution: "bootstrap@npm:4.5.2"
   peerDependencies:
     jquery: 1.9.1 - 3
     popper.js: ^1.16.1
-  checksum: 85e57b98b388e19f72d3cc80bb423f1325316d6f414275c04bed8b1500859bff3e8e5b899d2c39065bdff3f46dfd309b33a7cef9afc818e8cca23acc56978ad9
+  checksum: 78bf71aaccb24996d7c11654067e5de3cc510f67e6a1e390c740b57a7699850d45b756652964a87dbbb6c67617d6d28888f72be67d3c56ce2bf60040c305dd59
   languageName: node
   linkType: hard
 
@@ -5251,9 +5255,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-loader@npm:^4.2.0":
-  version: 4.2.0
-  resolution: "css-loader@npm:4.2.0"
+"css-loader@npm:^4.2.1":
+  version: 4.2.1
+  resolution: "css-loader@npm:4.2.1"
   dependencies:
     camelcase: ^6.0.0
     cssesc: ^3.0.0
@@ -5270,7 +5274,7 @@ __metadata:
     semver: ^7.3.2
   peerDependencies:
     webpack: ^4.27.0 || ^5.0.0
-  checksum: f985d2f4b5b7428cbd7fe2620886e19fa2f95f45a7345f410721e3b5e477989031dc8d945c040e1316d09d95bbd62512560cf83e12811c8c7a4de300979ba5d5
+  checksum: 25e14eaf3fd1f6fa53740d424cd8ce00bef45a69f8bb0e7237364323aa57ac1369200fe16acd53b4cbcf4123faa7e99978ecc462e9db3679db1101fffa598533
   languageName: node
   linkType: hard
 
@@ -11149,7 +11153,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"pdfjs-dist@npm:^2.4.456":
+"pdfjs-dist@npm:^2.5.207":
   version: 2.5.207
   resolution: "pdfjs-dist@npm:2.5.207"
   checksum: c9241de17d42988c7da61c4300366800f7eb0f8734ead3d1f9337abec0186c83e87398a1d4371c39ec94080400a58151a422ae4cba2d44866f48b92aad4c70d5
@@ -13494,7 +13498,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"terser-webpack-plugin@npm:^3.0.2":
+"terser-webpack-plugin@npm:^3.0.2, terser-webpack-plugin@npm:^3.0.7":
   version: 3.1.0
   resolution: "terser-webpack-plugin@npm:3.1.0"
   dependencies:
@@ -13513,25 +13517,6 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"terser-webpack-plugin@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "terser-webpack-plugin@npm:4.0.0"
-  dependencies:
-    cacache: ^15.0.5
-    find-cache-dir: ^3.3.1
-    jest-worker: ^26.2.1
-    p-limit: ^3.0.2
-    schema-utils: ^2.6.6
-    serialize-javascript: ^4.0.0
-    source-map: ^0.6.1
-    terser: ^5.0.0
-    webpack-sources: ^1.4.3
-  peerDependencies:
-    webpack: ^4.0.0 || ^5.0.0
-  checksum: ad87162d38b982fb3370e8610078d11257519c40e3af4f8a1641b17de6429e2e9bc8d4822f3fc7bb95415dc781ccc00a73bc2131846a6ee26366a246714a8b08
-  languageName: node
-  linkType: hard
-
 "terser@npm:^4.6.3, terser@npm:^4.8.0":
   version: 4.8.0
   resolution: "terser@npm:4.8.0"
@@ -13542,19 +13527,6 @@ fsevents@^1.2.7:
   bin:
     terser: bin/terser
   checksum: ee6806a720c14abb3a7d4abd6d077aee3e12313515a466e56aa59d24ebfa9fc2abdbb9de6852db7b358003f7443a0e895ddab3fca919d015e831e51a0d030db2
-  languageName: node
-  linkType: hard
-
-"terser@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "terser@npm:5.0.0"
-  dependencies:
-    commander: ^2.20.0
-    source-map: ~0.6.1
-    source-map-support: ~0.5.12
-  bin:
-    terser: bin/terser
-  checksum: 2b2981117684810850d5f943bdb6144e7564d832f1705f7a9532a2b6738abb44a5b2fcba4f6536ff82ad158e514d1a72ed055844977f90be0d47d889a7333ed9
   languageName: node
   linkType: hard
 

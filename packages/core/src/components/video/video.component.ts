@@ -29,7 +29,8 @@ export class VideoComponent extends Component {
   public static tagName = "rv-video";
 
   protected autobind = true;
-  private alreadyStartedPlaying = false;
+  protected alreadyStartedPlaying = false;
+  protected wasPaused = false;
 
   static get observedAttributes() {
     return ["video-src", "autoplay-on-min-buffer", "autoplay-media-query"];
@@ -122,8 +123,8 @@ export class VideoComponent extends Component {
     currentTime: this.currentTime,
 
     videoSrc: undefined,
-    autoplayOnMinBuffer: undefined,
-    autoplayMediaQuery: undefined,
+    autoplayOnMinBuffer: 0,
+    autoplayMediaQuery: "",
     /**
      * @readonly
      */
@@ -183,12 +184,12 @@ export class VideoComponent extends Component {
     this.init(VideoComponent.observedAttributes);
   }
 
-  protected afterBind() {
-    super.afterBind();
+  protected async afterBind() {
+    await super.afterBind();
 
     //video-src attribute
     if (this.scope.videoSrc) {
-      let sourceElement = this.video.querySelector("source")[0];
+      let sourceElement = this.video.querySelector("source");
       if (!sourceElement) {
         sourceElement = document.createElement("source");
         this.video.appendChild(sourceElement);

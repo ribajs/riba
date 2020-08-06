@@ -80,7 +80,7 @@
     "@ribajs/core": "workspace:packages/core",
     "@ribajs/extras": "workspace:packages/extras",
     "@ribajs/utils": "workspace:packages/utils",
-    "bootstrap": "^4.5.1",
+    "bootstrap": "^4.5.2",
     "popper.js": "^1.16.1"
   },
   "bugs": {

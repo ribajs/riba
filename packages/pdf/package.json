@@ -58,8 +58,10 @@
   },
   "dependencies": {
     "@ribajs/cache": "workspace:packages/cache",
+    "@ribajs/core": "workspace:packages/core",
+    "@ribajs/utils": "workspace:packages/utils",
     "pdf.js": "^0.1.0",
-    "pdfjs-dist": "^2.4.456"
+    "pdfjs-dist": "^2.5.207"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

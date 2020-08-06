@@ -2054,7 +2054,7 @@ __metadata:
     babel-jest: ^26.2.2
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
-    bootstrap: ^4.5.1
+    bootstrap: ^4.5.2
     core-js: ^3.6.5
     eslint: ^7.6.0
     eslint-config-prettier: ^6.11.0
@@ -2263,7 +2263,7 @@ __metadata:
     "@babel/core": ^7.11.1
     babel-loader: ^8.1.0
     copy-webpack-plugin: ^6.0.3
-    css-loader: ^4.2.0
+    css-loader: ^4.2.1
     dart-sass: ^1.25.0
     file-loader: ^6.0.0
     glob: ^7.1.6
@@ -2276,7 +2276,7 @@ __metadata:
     pug-loader: ^2.4.0
     resolve-url-loader: ^3.1.1
     sass-loader: ^9.0.3
-    terser-webpack-plugin: ^4.0.0
+    terser-webpack-plugin: "npm:3.0.7"
     webpack: "npm:5.0.0-beta.22"
     webpack-dev-server: ^3.11.0
   languageName: node
@@ -3936,6 +3936,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bootstrap@npm:^4.5.2":
+  version: 4.5.2
+  resolution: "bootstrap@npm:4.5.2"
+  peerDependencies:
+    jquery: 1.9.1 - 3
+    popper.js: ^1.16.1
+  checksum: 78bf71aaccb24996d7c11654067e5de3cc510f67e6a1e390c740b57a7699850d45b756652964a87dbbb6c67617d6d28888f72be67d3c56ce2bf60040c305dd59
+  languageName: node
+  linkType: hard
+
 "brace-expansion@npm:^1.1.7":
   version: 1.1.11
   resolution: "brace-expansion@npm:1.1.11"
@@ -4919,6 +4929,29 @@ __metadata:
   peerDependencies:
     webpack: ^4.27.0 || ^5.0.0
   checksum: f985d2f4b5b7428cbd7fe2620886e19fa2f95f45a7345f410721e3b5e477989031dc8d945c040e1316d09d95bbd62512560cf83e12811c8c7a4de300979ba5d5
+  languageName: node
+  linkType: hard
+
+"css-loader@npm:^4.2.1":
+  version: 4.2.1
+  resolution: "css-loader@npm:4.2.1"
+  dependencies:
+    camelcase: ^6.0.0
+    cssesc: ^3.0.0
+    icss-utils: ^4.1.1
+    loader-utils: ^2.0.0
+    normalize-path: ^3.0.0
+    postcss: ^7.0.32
+    postcss-modules-extract-imports: ^2.0.0
+    postcss-modules-local-by-default: ^3.0.3
+    postcss-modules-scope: ^2.2.0
+    postcss-modules-values: ^3.0.0
+    postcss-value-parser: ^4.1.0
+    schema-utils: ^2.7.0
+    semver: ^7.3.2
+  peerDependencies:
+    webpack: ^4.27.0 || ^5.0.0
+  checksum: 25e14eaf3fd1f6fa53740d424cd8ce00bef45a69f8bb0e7237364323aa57ac1369200fe16acd53b4cbcf4123faa7e99978ecc462e9db3679db1101fffa598533
   languageName: node
   linkType: hard
 
@@ -8822,17 +8855,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"jest-worker@npm:^26.0.0":
-  version: 26.0.0
-  resolution: "jest-worker@npm:26.0.0"
-  dependencies:
-    merge-stream: ^2.0.0
-    supports-color: ^7.0.0
-  checksum: d63d47f8d822097a4a28182ac92654bd2eff099e2041a60cf619358c9c21c4ffbb384412a8bfd51a1c6e9ea3832968c1963cf22bcd8c07ded870c38217636b35
-  languageName: node
-  linkType: hard
-
-"jest-worker@npm:^26.2.1":
+"jest-worker@npm:^26.1.0, jest-worker@npm:^26.2.1":
   version: 26.2.1
   resolution: "jest-worker@npm:26.2.1"
   dependencies:
@@ -13159,7 +13182,7 @@ fsevents@^1.2.7:
     prettier: ^2.0.5
     pug-loader: ^2.4.0
     sass-loader: ^9.0.3
-    terser-webpack-plugin: ^4.0.0
+    terser-webpack-plugin: "npm:3.0.7"
     ts-jest: ^26.1.4
     typescript: ^3.9.7
     webpack: "npm:5.0.0-beta.22"
@@ -13232,14 +13255,14 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"terser-webpack-plugin@npm:^3.0.2":
-  version: 3.0.6
-  resolution: "terser-webpack-plugin@npm:3.0.6"
+"terser-webpack-plugin@npm:3.0.7":
+  version: 3.0.7
+  resolution: "terser-webpack-plugin@npm:3.0.7"
   dependencies:
-    cacache: ^15.0.4
+    cacache: ^15.0.5
     find-cache-dir: ^3.3.1
-    jest-worker: ^26.0.0
-    p-limit: ^3.0.1
+    jest-worker: ^26.1.0
+    p-limit: ^3.0.2
     schema-utils: ^2.6.6
     serialize-javascript: ^4.0.0
     source-map: ^0.6.1
@@ -13247,26 +13270,7 @@ fsevents@^1.2.7:
     webpack-sources: ^1.4.3
   peerDependencies:
     webpack: ^4.0.0 || ^5.0.0
-  checksum: 982a4bc92834586d2f586e87f3eb75a3dee7fd17138b4073d42a7b7f123f3b82677080967891de84f52874236ca8a9f825a5b6cfe5a8cbc7f5f9b5d8498c95de
-  languageName: node
-  linkType: hard
-
-"terser-webpack-plugin@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "terser-webpack-plugin@npm:4.0.0"
-  dependencies:
-    cacache: ^15.0.5
-    find-cache-dir: ^3.3.1
-    jest-worker: ^26.2.1
-    p-limit: ^3.0.2
-    schema-utils: ^2.6.6
-    serialize-javascript: ^4.0.0
-    source-map: ^0.6.1
-    terser: ^5.0.0
-    webpack-sources: ^1.4.3
-  peerDependencies:
-    webpack: ^4.0.0 || ^5.0.0
-  checksum: ad87162d38b982fb3370e8610078d11257519c40e3af4f8a1641b17de6429e2e9bc8d4822f3fc7bb95415dc781ccc00a73bc2131846a6ee26366a246714a8b08
+  checksum: 90879e30ef0b9a0564706d1882db6ffcc07d9c6391873e684e195f5b4a60b31378485feb9fa309d3978a9d24aae9ee6571a25ab06a886426e3ba43d366505d64
   languageName: node
   linkType: hard
 
@@ -13280,19 +13284,6 @@ fsevents@^1.2.7:
   bin:
     terser: bin/terser
   checksum: ee6806a720c14abb3a7d4abd6d077aee3e12313515a466e56aa59d24ebfa9fc2abdbb9de6852db7b358003f7443a0e895ddab3fca919d015e831e51a0d030db2
-  languageName: node
-  linkType: hard
-
-"terser@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "terser@npm:5.0.0"
-  dependencies:
-    commander: ^2.20.0
-    source-map: ~0.6.1
-    source-map-support: ~0.5.12
-  bin:
-    terser: bin/terser
-  checksum: 2b2981117684810850d5f943bdb6144e7564d832f1705f7a9532a2b6738abb44a5b2fcba4f6536ff82ad158e514d1a72ed055844977f90be0d47d889a7333ed9
   languageName: node
   linkType: hard
 
@@ -14272,7 +14263,7 @@ typescript@^3.9.7:
     pkg-dir: ^4.2.0
     schema-utils: ^2.5.0
     tapable: ^2.0.0-beta.10
-    terser-webpack-plugin: ^3.0.2
+    terser-webpack-plugin: "npm:3.0.7"
     watchpack: 2.0.0-beta.13
     webpack-sources: 2.0.0-beta.8
   bin:
