@@ -65,7 +65,7 @@ export const SELECTOR_CONTENT = ".popover-body";
  * ------------------------------------------------------------------------
  */
 
-export class Popover extends TooltipService {
+export class PopoverService extends TooltipService {
   // Getters
 
   static get VERSION() {
