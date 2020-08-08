@@ -144,5 +144,3 @@ export class PopoverService extends TooltipService {
     return getData(element, DATA_KEY);
   }
 }
-
-export default Popover;
