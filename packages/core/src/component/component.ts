@@ -14,6 +14,7 @@ import { Binding } from "../binding";
 import { parseJsonString, camelCase } from "@ribajs/utils/src/type";
 import { getRandomColor } from "@ribajs/utils/src/color";
 import { FakeHTMLElement } from "./fake-html-element";
+import { isHTMLElement } from "../services/dom";
 
 export type TemplateFunction = () => Promise<string | null> | string | null;
 
@@ -99,7 +100,11 @@ export abstract class Component extends FakeHTMLElement {
     this.disconnectedCallback();
   }
 
-  protected abstract template(): Promise<string | null> | string | null;
+  protected abstract template():
+    | HTMLElement
+    | string
+    | null
+    | Promise<HTMLElement | string | null>;
 
   protected debug(...args: unknown[]) {
     if (!this._debug) {
@@ -454,8 +459,11 @@ export abstract class Component extends FakeHTMLElement {
     // if innerHTML is null this component uses the innerHTML which he already has!
     return Promise.resolve(this.template())
       .then((template) => {
-        if (template !== null) {
-          this.el.innerHTML = template;
+        if (isHTMLElement(template)) {
+          this.el.innerHTML = "";
+          this.el.appendChild(template as HTMLElement);
+        } else if (template !== null) {
+          this.el.innerHTML = template as string;
         }
         return template;
       })
