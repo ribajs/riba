@@ -8,7 +8,7 @@
 
 import { getData } from "./dom/data";
 import { findOne } from "./dom/selector-engine";
-import { TooltipService, ConfigContentFn } from "./tooltip.service";
+import { ConfigContentFn, TooltipService } from "./tooltip.service";
 
 /**
  * ------------------------------------------------------------------------
@@ -18,12 +18,12 @@ import { TooltipService, ConfigContentFn } from "./tooltip.service";
 
 const NAME = "popover";
 const VERSION = "5.0.0-alpha1";
-export const DATA_KEY = "bs.popover";
-export const EVENT_KEY = `.${DATA_KEY}`;
-export const CLASS_PREFIX = "bs-popover";
-export const BSCLS_PREFIX_REGEX = new RegExp(`(^|\\s)${CLASS_PREFIX}\\S+`, "g");
+const DATA_KEY = "bs.popover";
+const EVENT_KEY = `.${DATA_KEY}`;
+const CLASS_PREFIX = "bs-popover";
+const BSCLS_PREFIX_REGEX = new RegExp(`(^|\\s)${CLASS_PREFIX}\\S+`, "g");
 
-export const Default = {
+const Default = {
   ...TooltipService.Default,
   placement: "right",
   trigger: "click",
@@ -32,15 +32,16 @@ export const Default = {
     '<div class="popover" role="tooltip">' +
     '<div class="popover-arrow"></div>' +
     '<h3 class="popover-header"></h3>' +
-    '<div class="popover-body"></div></div>',
+    '<div class="popover-body"></div>' +
+    "</div>",
 };
 
-export const DefaultType = {
+const DefaultType = {
   ...TooltipService.DefaultType,
   content: "(string|element|function)",
 };
 
-export const Event = {
+const Event = {
   HIDE: `hide${EVENT_KEY}`,
   HIDDEN: `hidden${EVENT_KEY}`,
   SHOW: `show${EVENT_KEY}`,
@@ -53,11 +54,11 @@ export const Event = {
   MOUSELEAVE: `mouseleave${EVENT_KEY}`,
 };
 
-export const CLASS_NAME_FADE = "fade";
-export const CLASS_NAME_SHOW = "show";
+const CLASS_NAME_FADE = "fade";
+const CLASS_NAME_SHOW = "show";
 
-export const SELECTOR_TITLE = ".popover-header";
-export const SELECTOR_CONTENT = ".popover-body";
+const SELECTOR_TITLE = ".popover-header";
+const SELECTOR_CONTENT = ".popover-body";
 
 /**
  * ------------------------------------------------------------------------
@@ -66,6 +67,26 @@ export const SELECTOR_CONTENT = ".popover-body";
  */
 
 export class PopoverService extends TooltipService {
+  // Export constants defined above as static members of the service class, to avoid name collisions in the global namespace.
+  static readonly CONSTANTS: { [key: string]: any } = {
+    NAME,
+    VERSION,
+    DATA_KEY,
+    EVENT_KEY,
+    CLASS_PREFIX,
+    BSCLS_PREFIX_REGEX,
+
+    Default,
+    DefaultType,
+    Event,
+
+    CLASS_NAME_FADE,
+    CLASS_NAME_SHOW,
+
+    SELECTOR_TITLE,
+    SELECTOR_CONTENT,
+  };
+
   // Getters
 
   static get VERSION() {
