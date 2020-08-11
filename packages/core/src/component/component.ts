@@ -14,8 +14,13 @@ import { Binding } from "../binding";
 import { parseJsonString, camelCase } from "@ribajs/utils/src/type";
 import { getRandomColor } from "@ribajs/utils/src/color";
 import { FakeHTMLElement } from "./fake-html-element";
+import { isHTMLElement } from "../services/dom";
 
-export type TemplateFunction = () => Promise<string | null> | string | null;
+export type TemplateFunction = () =>
+  | Promise<HTMLElement | string | null>
+  | HTMLElement
+  | string
+  | null;
 
 export interface ObservedAttributeToCheck {
   initialized: boolean;
@@ -53,7 +58,7 @@ export abstract class Component extends FakeHTMLElement {
   protected bound = false;
 
   /**
-   * If true the component will automatically bind the component to riba if all required attributes are setted
+   * If true the component will automatically bind the component to riba if all required attributes are set.
    */
   protected autobind = true;
 
@@ -99,7 +104,11 @@ export abstract class Component extends FakeHTMLElement {
     this.disconnectedCallback();
   }
 
-  protected abstract template(): Promise<string | null> | string | null;
+  protected abstract template():
+    | HTMLElement
+    | string
+    | null
+    | Promise<HTMLElement | string | null>;
 
   protected debug(...args: unknown[]) {
     if (!this._debug) {
@@ -166,7 +175,7 @@ export abstract class Component extends FakeHTMLElement {
   }
 
   /**
-   * Check if the attribute (e.g. `src`) is passed to this custom element also checks if the attribute was passed with riba (e.g. `rv-src`)
+   * Check if the attribute (e.g. `src`) is passed to this custom element
    * @param observedAttribute
    */
   protected attributeIsPassed(observedAttribute: string) {
@@ -194,17 +203,9 @@ export abstract class Component extends FakeHTMLElement {
    * Checks if all passed observed attributes are initialized
    */
   protected allPassedObservedAttributesAreInitialized() {
-    let allInitialized = true;
-    for (const key in this.observedAttributesToCheck) {
-      if (this.observedAttributesToCheck[key]) {
-        if (this.observedAttributesToCheck[key].passed) {
-          allInitialized =
-            allInitialized && this.observedAttributesToCheck[key].initialized;
-        }
-      }
-    }
-    // this.debug("observedAttributesToCheck", this.observedAttributesToCheck);
-    return allInitialized;
+    return !Object.keys(this.observedAttributesToCheck).some(
+      (key) => !this.observedAttributesToCheck[key].initialized
+    );
   }
 
   /**
@@ -215,22 +216,9 @@ export abstract class Component extends FakeHTMLElement {
    * So define required attriutes and the view is ony bind the first time after all this attributes are transmitted.
    */
   protected checkRequiredAttributes() {
-    let allDefined = true;
-    const requiredAttributes = this.requiredAttributes();
-    requiredAttributes.forEach((requiredAttribute: string) => {
-      if (!this.scope[requiredAttribute] || !this.scope[requiredAttribute]) {
-        // this.debug(
-        //   `Attribute ${requiredAttribute} not set: ${this.scope[requiredAttribute]}`
-        // );
-        allDefined = false;
-      } else {
-        // this.debug(
-        //   `Attribute ${requiredAttribute} is defined: `,
-        //   this.scope[requiredAttribute]
-        // );
-      }
-    });
-    return allDefined;
+    return !this.requiredAttributes().some(
+      (requiredAttribute) => !this.scope[requiredAttribute]
+    );
   }
 
   protected parseAttribute(attr: string | null) {
@@ -274,7 +262,7 @@ export abstract class Component extends FakeHTMLElement {
   // }
 
   /**
-   * Returns an event handler for the bindings (most on-*) insite this component.
+   * Returns an event handler for the bindings (most on-*) inside this component.
    */
   protected eventHandler(self: Component): EventHandler {
     // IMPORTANT this must be a function and not a Arrow Functions
@@ -438,7 +426,7 @@ export abstract class Component extends FakeHTMLElement {
     // console.warn('adoptedCallback called', oldDocument, newDocument);
   }
 
-  protected async loadTemplate(): Promise<string | null> {
+  protected async loadTemplate(): Promise<HTMLElement | string | null> {
     if (this.templateLoaded === true) {
       // this.debug("template already loaded");
       return null;
@@ -454,21 +442,25 @@ export abstract class Component extends FakeHTMLElement {
     // if innerHTML is null this component uses the innerHTML which he already has!
     return Promise.resolve(this.template())
       .then((template) => {
-        if (template !== null) {
-          this.el.innerHTML = template;
+        if (isHTMLElement(template)) {
+          this.el.innerHTML = "";
+          this.el.appendChild(template as HTMLElement);
+        } else if (template !== null) {
+          this.el.innerHTML = template as string;
         }
+
         return template;
       })
       .catch((error) => {
         console.error(error);
         this.templateLoaded = false;
-        return error;
+        return null;
       });
   }
 
   protected async bind() {
     if (this.bound === true) {
-      // this.debug("component already bounded");
+      // this.debug("component already bound");
       return this.view;
     }
 
@@ -542,7 +534,9 @@ export abstract class Component extends FakeHTMLElement {
     // this.debug('beforeTemplate');
   }
 
-  protected async afterTemplate(template: string | null): Promise<any> {
+  protected async afterTemplate(
+    template: HTMLElement | string | null
+  ): Promise<any> {
     // this.debug('afterTemplate', template);
   }
 
