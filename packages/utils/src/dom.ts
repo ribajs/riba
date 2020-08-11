@@ -224,24 +224,25 @@ export const loadScript = async (
           (script as any).readyState === "complete"
         ) {
           (script as any).onreadystatechange = null;
+          script?.setAttribute("loaded", "true");
           resolve(script as HTMLScriptElement);
         }
       };
     }
 
     // Other browsers
-    script.onload = function () {
+    script.addEventListener("load", () => {
+      script?.setAttribute("loaded", "true");
       resolve(script as HTMLScriptElement);
-    };
-    script.onerror = function (...args) {
+    });
+    script.addEventListener("error", (...args) => {
       const error = new Error("Error on load script " + script?.src);
       console.error(error);
       console.error(...args);
       reject(error);
-    };
+    });
   });
 
-  script.setAttribute("loaded", "true");
   return script;
 };
 
