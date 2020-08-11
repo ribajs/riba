@@ -189,6 +189,8 @@ export const camelCase = (str: string) => {
  * @param target An object that will receive the new properties
  * @param objects The objects containing additional properties to merge in.
  * @see http://www.damirscorner.com/blog/posts/20180216-VariableNumberOfArgumentsInTypescript.html
+ * Copied from here:
+ * @see https://gomakethings.com/merging-objects-with-vanilla-javascript/
  */
 export const extend = (
   deep: boolean,
@@ -198,7 +200,7 @@ export const extend = (
   // Merge the object into the extended object
   const merge = (obj: any) => {
     for (const prop in obj) {
-      if (obj[prop]) {
+      if (obj.hasOwnProperty[prop]) {
         if (
           deep &&
           Object.prototype.toString.call(obj[prop]) === "[object Object]"
@@ -226,6 +228,8 @@ export const extend = (
  * @param deep If true, the merge becomes recursive (aka. deep copy).
  * @param object1 An first object containing properties to concat.
  * @param object2 The second object containing properties to concat.
+ *
+ * FIXME: This is actually just the same as extend with only two objects. Redundant.
  */
 export const concat = (deep: boolean, object1?: any, object2?: any): any => {
   object1 = extend(deep, object1 || {}, object1 || {}, object2 || {});
@@ -239,7 +243,11 @@ export const concat = (deep: boolean, object1?: any, object2?: any): any => {
  */
 export const clone = (deep: boolean, val: any) => {
   if (isArray(val)) {
-    return val.slice();
+    if (deep) {
+      return val.map((x) => clone(true, x));
+    } else {
+      return val.slice();
+    }
   }
   if (isObject(val)) {
     return extend(deep, {}, val);
