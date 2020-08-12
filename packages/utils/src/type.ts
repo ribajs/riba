@@ -200,7 +200,8 @@ export const extend = (
   // Merge the object into the extended object
   const merge = (obj: any) => {
     for (const prop in obj) {
-      if (obj.hasOwnProperty[prop]) {
+      // eslint-disable-next-line no-prototype-builtins
+      if (obj.hasOwnProperty(prop)) {
         if (
           deep &&
           Object.prototype.toString.call(obj[prop]) === "[object Object]"
@@ -232,7 +233,7 @@ export const extend = (
  * FIXME: This is actually just the same as extend with only two objects. Redundant.
  */
 export const concat = (deep: boolean, object1?: any, object2?: any): any => {
-  object1 = extend(deep, object1 || {}, object1 || {}, object2 || {});
+  object1 = extend(deep, object1 || {}, object2 || {});
   return object1;
 };
 
@@ -241,10 +242,10 @@ export const concat = (deep: boolean, object1?: any, object2?: any): any => {
  * @param deep If true, the merge becomes recursive (aka. deep copy).
  * @param val The value(s) to clone
  */
-export const clone = (deep: boolean, val: any) => {
+export const clone: any = (deep: boolean, val: any) => {
   if (isArray(val)) {
     if (deep) {
-      return val.map((x) => clone(true, x));
+      return (val as any[]).map((x) => clone(true, x));
     } else {
       return val.slice();
     }
