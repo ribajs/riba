@@ -230,7 +230,7 @@ export const extend = (
  * @param object1 An first object containing properties to concat.
  * @param object2 The second object containing properties to concat.
  *
- * FIXME: This is actually just the same as extend with only two objects. Redundant.
+ * Note: This is actually just the same as extend with only two objects. Redundant.
  */
 export const concat = (deep: boolean, object1?: any, object2?: any): any => {
   object1 = extend(deep, object1 || {}, object2 || {});

@@ -3,8 +3,6 @@ import { ready } from "@ribajs/utils/src/dom";
 /**
  * Just a class with some helpful functions
  *
- * TODO: Should we add all utils from other files to this class? Or just export every function by itself?
- *
  * @export
  * @class Utils
  */
