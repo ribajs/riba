@@ -67,21 +67,20 @@ export abstract class TemplatesComponent extends Component {
     return attributes;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected getTemplateAttributes(tpl: HTMLTemplateElement, index: number) {
     const attributes: any = {};
     for (const attribute of this.templateAttributes) {
       const attrValue = tpl.getAttribute(attribute.name);
-      if (typeof attrValue !== "string") {
+      if (typeof attrValue !== "string" && attribute.required) {
         console.error(
           new Error(`template "${attribute.name}" attribute is required!`)
         );
-        return;
+      } else {
+        attributes[camelCase(attribute.name)] = this.transformTemplateAttribute(
+          attribute.name,
+          tpl.getAttribute(attribute.name)
+        );
       }
-      attributes[camelCase(attribute.name)] = this.transformTemplateAttribute(
-        attribute.name,
-        tpl.getAttribute(attribute.name)
-      );
     }
     return this.transformTemplateAttributes(attributes, index);
   }
