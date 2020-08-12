@@ -187,15 +187,17 @@ export abstract class Component extends FakeHTMLElement {
    * @param observedAttributes
    */
   protected getPassedObservedAttributes(observedAttributes: string[]) {
+    const oa2c = this.observedAttributesToCheck;
     for (const observedAttribute of observedAttributes) {
-      this.observedAttributesToCheck[observedAttribute] =
-        this.observedAttributesToCheck[observedAttribute] || {};
-      const passed =
-        this.observedAttributesToCheck[observedAttribute].passed ||
-        this.attributeIsPassed(observedAttribute);
-      this.observedAttributesToCheck[observedAttribute].passed = passed;
-      this.observedAttributesToCheck[observedAttribute].initialized = !!this
-        .observedAttributesToCheck[observedAttribute].initialized;
+      if (!oa2c[observedAttribute]) {
+        oa2c[observedAttribute] = { passed: false, initialized: false };
+      } else {
+        if (!oa2c[observedAttribute].passed) {
+          oa2c[observedAttribute].passed = this.attributeIsPassed(
+            observedAttribute
+          );
+        }
+      }
     }
   }
 
@@ -204,7 +206,7 @@ export abstract class Component extends FakeHTMLElement {
    */
   protected allPassedObservedAttributesAreInitialized() {
     return !Object.keys(this.observedAttributesToCheck).some(
-      (key) => !this.observedAttributesToCheck[key].initialized
+      (key) => !this.observedAttributesToCheck[key]?.initialized
     );
   }
 
@@ -217,7 +219,8 @@ export abstract class Component extends FakeHTMLElement {
    */
   protected checkRequiredAttributes() {
     return !this.requiredAttributes().some(
-      (requiredAttribute) => !this.scope[requiredAttribute]
+      // eslint-disable-next-line no-prototype-builtins
+      (requiredAttribute) => !this.scope.hasOwnProperty(requiredAttribute)
     );
   }
 
