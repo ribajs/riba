@@ -71,17 +71,17 @@ export abstract class TemplatesComponent extends Component {
   protected getTemplateAttributes(tpl: HTMLTemplateElement, index: number) {
     const attributes: any = {};
     for (const attribute of this.templateAttributes) {
-      const attrValue = this.transformTemplateAttribute(
-        attribute.name,
-        tpl.getAttribute(attribute.name)
-      );
-      if (attribute.required && !attrValue) {
+      const attrValue = tpl.getAttribute(attribute.name);
+      if (typeof attrValue !== "string") {
         console.error(
           new Error(`template "${attribute.name}" attribute is required!`)
         );
         return;
       }
-      attributes[camelCase(attribute.name)] = attrValue;
+      attributes[camelCase(attribute.name)] = this.transformTemplateAttribute(
+        attribute.name,
+        tpl.getAttribute(attribute.name)
+      );
     }
     return this.transformTemplateAttributes(attributes, index);
   }
@@ -111,14 +111,9 @@ export abstract class TemplatesComponent extends Component {
   }
 
   protected hasOnlyTemplateChilds() {
-    let allAreTemplates = true;
-    for (let index = 0; index < this.el.childNodes.length; index++) {
-      const child = this.el.childNodes[index];
-      allAreTemplates =
-        allAreTemplates &&
-        (child.nodeName === "TEMPLATE" || child.nodeName === "#text");
-    }
-    return allAreTemplates;
+    return !Array.from(this.el.childNodes).some(
+      (child) => child.nodeName !== "TEMPLATE" && child.nodeName !== "#text"
+    );
   }
 
   // protected template() {
