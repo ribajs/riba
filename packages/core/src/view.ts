@@ -35,12 +35,8 @@ export class View {
   };
 
   public static bindingComparator = (a: Binding, b: Binding) => {
-    const aPriority = (a as Binding).binder
-      ? ((a as Binding).binder as Binder<any>).priority || 0
-      : 0;
-    const bPriority = (b as Binding).binder
-      ? ((b as Binding).binder as Binder<any>).priority || 0
-      : 0;
+    const aPriority = a.binder?.binding || 0;
+    const bPriority = b.binder?.priority || 0;
     return bPriority - aPriority;
   };
 
@@ -56,9 +52,9 @@ export class View {
     anchorEl: HTMLElement | Node | null
   ) {
     const template = binding.el.cloneNode(true);
-    const view = new View(template as Node, models, binding.view.options);
+    const view = new View(template, models, binding.view.options);
     view.bind();
-    if (!binding || !binding.marker || binding.marker.parentNode === null) {
+    if (!binding?.marker?.parentNode) {
       console.warn("[View]: No parent node for binding!");
     } else {
       binding.marker.parentNode.insertBefore(template, anchorEl);
@@ -169,11 +165,7 @@ export class View {
    */
   public publish() {
     this.bindings.forEach((binding) => {
-      if (
-        (binding as Binding).binder &&
-        binding.publish &&
-        ((binding as Binding).binder as Binder<any>).publishes
-      ) {
+      if (binding.binder && binding.publish && binding.binder.publishes) {
         binding.publish();
       }
     });
@@ -188,11 +180,11 @@ export class View {
       this.models[key] = models[key];
     });
 
-    this.bindings.forEach((binding) => {
+    for (const binding of this.bindings) {
       // if ((binding as Binding).update) {
-      (binding as Binding).update(models);
+      binding.update(models);
       // }
-    });
+    }
   }
 
   /**
@@ -339,7 +331,7 @@ export class View {
     const keypath = parsedDeclaration.keypath;
     const pipes = parsedDeclaration.pipes;
     this.bindings.push(
-      new Binding(this as View, node, type, keypath, binder, pipes, identifier)
+      new Binding(this, node, type, keypath, binder, pipes, identifier)
     );
   }
 
