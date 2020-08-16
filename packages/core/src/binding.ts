@@ -7,7 +7,6 @@ import {
   ObserverSyncCallback,
 } from "./interfaces";
 import { View } from "./view";
-import { isNumber } from "@ribajs/utils/src/type";
 import { getInputValue } from "@ribajs/utils/src/dom";
 
 /**
@@ -389,49 +388,9 @@ export class Binding {
     }
   }
 
-  private getStarArguments(identifier: string, type: string) {
-    const args = new Array<string | number>();
-    const regexp = new RegExp(`^${identifier.replace(/\*/g, ".+")}$`);
-    if (
-      !(regexp.test(type) && type.split("-")[0] === identifier.split("-")[0])
-    ) {
-      if (identifier !== "*") {
-        // console.error("Nodename not matchs the identifier,", identifier, type);
-      }
-    }
-
-    const splittedIdentifier = identifier.split("*");
-    // splittedIdentifier.pop();
-    if (splittedIdentifier.length > 0) {
-      // how many stars has the identifier?
-      const starCount = splittedIdentifier.length - 1;
-      if (starCount <= 1) {
-        args.push(type.slice(identifier.length - 1));
-      } else {
-        /**
-         * On more than one star this is a multi star binder
-         * We split the identifier on each star and use the identifier pieces as a serperator
-         */
-        const subIdentifier = splittedIdentifier[0];
-        let argsString = type.slice(subIdentifier.length);
-        splittedIdentifier.forEach((separator, index) => {
-          if (index > 0) {
-            let arg: string | number = argsString.split(separator)[0];
-            // the rest of the string
-            if (index === splittedIdentifier.length - 1) {
-              arg = argsString;
-            }
-            if (isNumber(arg)) {
-              arg = Number(arg);
-            }
-            argsString = argsString.substring(
-              argsString.indexOf(separator) + 1
-            );
-            args.push(arg);
-          }
-        });
-      }
-    }
-    return args;
+  private getStarArguments(identifier: string, type: string): string[] {
+    const regexp = new RegExp(`^${identifier.replace(/\*/g, "(.+)")}$`);
+    const match = type.match(regexp);
+    return (match && match.slice(1)) || [];
   }
 }
