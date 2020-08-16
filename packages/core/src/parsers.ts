@@ -94,7 +94,7 @@ export function parseTemplate(template: string, delimiters: string[]) {
       index = template.indexOf(close, lastIndex);
 
       if (index < 0) {
-        const substring = template.slice(lastIndex - close.length);
+        const substring = template.slice(lastIndex - open.length);
         const lastToken = tokens[tokens.length - 1];
 
         if (lastToken && lastToken.type === TEXT) {
