@@ -6,7 +6,6 @@ import {
   Components,
   Options,
 } from "./interfaces";
-import { concat } from "@ribajs/utils/src/type";
 import { parseTemplate, parseType } from "./parsers";
 import { Binding } from "./binding";
 import { attributeBinder } from "./binders/attribute.binder";
