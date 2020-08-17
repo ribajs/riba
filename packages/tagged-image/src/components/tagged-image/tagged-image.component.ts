@@ -1,9 +1,21 @@
 import { Component } from "@ribajs/core";
+// import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { TooltipService, PopoverService } from "@ribajs/bs4";
 
-import template from "./tagged-image.component.html";
+interface Tag {
+  title: string;
+  content: string | HTMLElement;
+  position: {
+    x: number;
+    y: number;
+  };
+  popup?: TooltipService | PopoverService;
+}
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Scope {
-  imageUrl: string;
+  src: string;
+  tags: Tag[];
 }
 
 export class TaggedImageComponent extends Component {
@@ -12,15 +24,53 @@ export class TaggedImageComponent extends Component {
   protected autobind = true;
 
   static get observedAttributes() {
-    return ["image-url"];
+    return ["src"];
   }
 
-  protected scope: Scope = {
-    imageUrl: "",
-  };
+  protected scope: Scope;
 
   constructor(element?: HTMLElement) {
     super(element);
+    const scope = (this.scope = {
+      src: "",
+      tags: [] as any[],
+    });
+    for (const t of Array.from(this.el.querySelectorAll("tag"))) {
+      const tag = t as HTMLElement;
+
+      const title = tag.getAttribute("title") || "";
+      const content = tag.innerHTML;
+
+      const x = ((v) => (isNaN(v) ? Math.random() : v))(
+        parseFloat(tag.getAttribute("x") || "")
+      );
+      const y = ((v) => (isNaN(v) ? Math.random() : v))(
+        parseFloat(tag.getAttribute("y") || "")
+      );
+
+      tag.style.left = x * 100 + "%";
+      tag.style.top = y * 100 + "%";
+
+      // const tooltipType = tag.getAttribute("type") || this.el.getAttribute("tooltip-type");
+
+      const popup = new PopoverService(tag, {
+        ...PopoverService.Default,
+        title,
+        content,
+      });
+
+      const tagData = {
+        title,
+        content,
+        position: { x, y },
+        popup,
+      };
+      scope.tags.push(tagData);
+    }
+    this.scope = scope;
+    const img = document.createElement("img");
+    img.setAttribute("rv-src", "src");
+    this.el.appendChild(img);
   }
 
   protected connectedCallback() {
@@ -45,7 +95,12 @@ export class TaggedImageComponent extends Component {
     super.disconnectedCallback();
   }
 
+  protected hasOnlyTagChildren() {
+    return !Array.from(this.el.childNodes).some(
+      (child) => child.nodeName !== "TAG" && child.nodeName !== "#text"
+    );
+  }
   protected template() {
-    return template;
+    return null;
   }
 }

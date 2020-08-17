@@ -4,8 +4,8 @@ import { extrasModule } from "@ribajs/extras";
 import { taggedImageModule } from "@ribajs/tagged-image";
 import { TaggedImageDemoModule } from "./taggedimage-demo.module";
 
-const riba = new Riba();
-const model = {};
+const riba = ((window as any).riba = new Riba());
+const model = ((window as any).model = {});
 
 // Register modules
 riba.module.regist(coreModule);
