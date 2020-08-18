@@ -145,4 +145,4 @@ export class PopoverService extends TooltipService {
   }
 }
 
-export default Popover;
+export default PopoverService;
