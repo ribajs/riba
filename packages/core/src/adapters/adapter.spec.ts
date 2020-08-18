@@ -1,4 +1,5 @@
-import { Riba, Adapter } from "../index";
+import { Riba } from "../riba";
+import { Adapter, ObserverSyncCallback } from "../interfaces";
 
 import { dotAdapter } from "../adapters/dot.adapter";
 
@@ -25,16 +26,16 @@ describe("Functional", () => {
     riba.prefix = "data";
     adapter = {
       name: ":",
-      observe: (obj, keypath, callback) => {
+      observe: (obj: any, keypath: string, callback: ObserverSyncCallback) => {
         obj.on(keypath, callback);
       },
-      unobserve: (obj, keypath, callback) => {
+      unobserve: (obj: any, keypath: string, callback: ObserverSyncCallback) => {
         obj.off(keypath, callback);
       },
-      get: (obj, keypath) => {
+      get: (obj:any, keypath: string) => {
         return obj.get(keypath);
       },
-      set: (obj, keypath, value) => {
+      set: (obj: any, keypath: string, value: any) => {
         const attributes: { [keypath: string]: any } = {};
         attributes[keypath] = value;
         obj.set(attributes);
