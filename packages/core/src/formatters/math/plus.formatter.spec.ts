@@ -1,4 +1,4 @@
-import { Riba } from "../../index";
+import { Riba } from "../../riba";
 
 import { dotAdapter } from "../../adapters/dot.adapter";
 

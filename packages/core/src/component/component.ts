@@ -359,7 +359,7 @@ export abstract class Component extends FakeHTMLElement {
 
   /**
    * Default custom Element method
-   * Invoked when the custom element is moved to a new document.
+   * Invoked when one of the custom element's attributes is added, removed, or changed.
    * @param attributeName
    * @param oldValue
    * @param newValue
