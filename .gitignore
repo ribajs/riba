@@ -33,6 +33,15 @@ lerna-debug.log*
 !.vscode/extensions.json
 !.vscode/pnpify/
 
+/infra/*/.vscode/*
+!/infra/*/.vscode/settings.json
+!/infra/*/.vscode/tasks.json
+!/infra/*/.vscode/launch.json
+!/infra/*/.vscode/extensions.json
+!/infra/*/.vscode/pnpify/
+
+
+
 # Yarn not using Zero-Installs see https://next.yarnpkg.com/advanced/qa#which-files-should-be-gitignored
 .yarn/*
 !.yarn/releases
@@ -40,6 +49,13 @@ lerna-debug.log*
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
+
+/infra/*/.yarn!
+!/infra/*/.yarn/releases
+!/infra/*/.yarn/plugins
+!/infra/*/.yarn/sdks
+!/infra/*/.yarn/versions
+
 
 # Demos
 /demos/*/src/iconset/

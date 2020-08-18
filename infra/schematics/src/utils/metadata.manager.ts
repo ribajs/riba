@@ -85,7 +85,7 @@ export class MetadataManager {
 
   private getSourceNodes(sourceFile: SourceFile): Node[] {
     const nodes: Node[] = [sourceFile];
-    const result = [];
+    const result: Node[] = [];
     while (nodes.length > 0) {
       const node = nodes.shift();
       if (node) {

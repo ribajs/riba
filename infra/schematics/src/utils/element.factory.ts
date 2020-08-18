@@ -27,13 +27,13 @@ export class ElementFactory {
 
   public target: ElementOptions;
 
-  protected debug = Debug('binder:factory');
+  protected debug: debug.Debugger = Debug('binder:factory');
 
   constructor(protected options: ElementOptions) {
     this.target = this.getTarget(options);
   }
 
-  public generate() {
+  public generate(): any {
     this.debug('generate');
     return (context: SchematicContext) => {
       if (!this.target.path) {
