@@ -205,7 +205,9 @@ export abstract class Component extends FakeHTMLElement {
    */
   protected allPassedObservedAttributesAreInitialized() {
     return !Object.keys(this.observedAttributesToCheck).some(
-      (key) => !this.observedAttributesToCheck[key]?.initialized
+      (key) =>
+        this.observedAttributesToCheck[key]?.passed &&
+        !this.observedAttributesToCheck[key]?.initialized
     );
   }
 
