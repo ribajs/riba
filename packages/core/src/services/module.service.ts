@@ -19,6 +19,9 @@ export class ModulesService {
   /**
    *
    * @param binders;
+   * @param components;
+   * @param formatters;
+   * @param adapters;
    */
   constructor(
     binders: Binders<any>,
@@ -32,10 +35,6 @@ export class ModulesService {
     this.adapter = new AdapterService(adapters);
   }
 
-  /**
-   * Regist a set of binders
-   * @param binders
-   */
   public regist(module: RibaModule) {
     if (module.binders) {
       this.binder.regists(module.binders);

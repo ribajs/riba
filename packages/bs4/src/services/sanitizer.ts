@@ -105,7 +105,7 @@ export const DefaultAllowlist = {
 export function sanitizeHtml(
   unsafeHtml: string,
   allowList: AllowList,
-  sanitizeFn?: (unsafeHtml: string) => void
+  sanitizeFn?: (unsafeHtml: string) => string
 ) {
   if (!unsafeHtml.length) {
     return unsafeHtml;

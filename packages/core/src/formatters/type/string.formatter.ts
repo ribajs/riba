@@ -1,4 +1,4 @@
-import { isArray, isObject, getString } from "@ribajs/utils/src/type";
+import { isObject, getString } from "@ribajs/utils/src/type";
 
 /**
  * Parses a value to string
@@ -9,7 +9,7 @@ export const stringFormatter = {
   name: "string",
   read(value: any, def: string) {
     // If value is an array convert each value in array to string
-    if (isArray(value)) {
+    if (Array.isArray(value)) {
       for (const i in value as Array<any>) {
         if (value[i]) {
           value[i] = getString(value[i]);
