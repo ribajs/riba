@@ -33,13 +33,13 @@ export type ConfigContentFn = (el: HTMLElement) => string;
 
 export interface Config {
   animation: boolean;
-  template: string;
-  trigger: string;
-  title?: string | ConfigTitleFn;
   delay: number | { show: number; hide: number };
-  html?: string;
-  selector?: string;
+  html: boolean;
   placement: string | ConfigPlacementFn;
+  selector?: string;
+  template: string;
+  title: string | ConfigTitleFn;
+  trigger: string;
   offset: number | ConfigOffsetFn;
   container?: Element; // TODO,
   fallbackPlacement: "flip";
@@ -59,23 +59,23 @@ export interface Config {
 
 const NAME = "tooltip";
 const VERSION = "5.0.0-alpha1";
-export const DATA_KEY = "bs.tooltip";
-export const EVENT_KEY = `.${DATA_KEY}`;
-export const CLASS_PREFIX = "bs-tooltip";
-export const BSCLS_PREFIX_REGEX = new RegExp(`(^|\\s)${CLASS_PREFIX}\\S+`, "g");
-export const DISALLOWED_ATTRIBUTES = ["sanitize", "allowList", "sanitizeFn"];
+const DATA_KEY = "bs.tooltip";
+const EVENT_KEY = `.${DATA_KEY}`;
+const CLASS_PREFIX = "bs-tooltip";
+const BSCLS_PREFIX_REGEX = new RegExp(`(^|\\s)${CLASS_PREFIX}\\S+`, "g");
+const DISALLOWED_ATTRIBUTES = ["sanitize", "allowList", "sanitizeFn"];
 
-export const DefaultType = {
+const DefaultType = {
   animation: "boolean",
   template: "string",
   title: "(string|element|function)",
   trigger: "string",
   delay: "(number|object)",
   html: "boolean",
-  selector: "(string|boolean)",
+  selector: "(string|boolean|undefined)",
   placement: "(string|function)",
   offset: "(number|string|function)",
-  container: "(string|element|boolean)",
+  container: "(string|element|boolean|undefined)",
   fallbackPlacement: "(string|array)",
   boundary: "(string|element)",
   sanitize: "boolean",
@@ -84,7 +84,7 @@ export const DefaultType = {
   popperConfig: "(null|object)",
 };
 
-export const AttachmentMap = {
+const AttachmentMap = {
   AUTO: "auto",
   TOP: "top",
   RIGHT: "right",
@@ -92,20 +92,20 @@ export const AttachmentMap = {
   LEFT: "left",
 };
 
-export const Default: Config = {
+const Default: Config = {
   animation: true,
+  container: undefined,
+  delay: 0,
+  html: false,
+  placement: "top",
+  selector: undefined,
   template:
     '<div class="tooltip" role="tooltip">' +
     '<div class="tooltip-arrow"></div>' +
     '<div class="tooltip-inner"></div></div>',
+  title: "",
   trigger: "hover focus",
-  title: undefined,
-  delay: 0,
-  html: undefined,
-  selector: undefined,
-  placement: "top",
   offset: 0,
-  container: undefined,
   fallbackPlacement: "flip",
   boundary: "scrollParent",
   sanitize: true,
@@ -114,7 +114,7 @@ export const Default: Config = {
   popperConfig: null,
 };
 
-export const Event = {
+const Event = {
   HIDE: `hide${EVENT_KEY}`,
   HIDDEN: `hidden${EVENT_KEY}`,
   SHOW: `show${EVENT_KEY}`,
@@ -127,19 +127,19 @@ export const Event = {
   MOUSELEAVE: `mouseleave${EVENT_KEY}`,
 };
 
-export const CLASS_NAME_FADE = "fade";
-export const CLASS_NAME_MODAL = "modal";
-export const CLASS_NAME_SHOW = "show";
+const CLASS_NAME_FADE = "fade";
+const CLASS_NAME_MODAL = "modal";
+const CLASS_NAME_SHOW = "show";
 
-export const HOVER_STATE_SHOW = "show";
-export const HOVER_STATE_OUT = "out";
+const HOVER_STATE_SHOW = "show";
+const HOVER_STATE_OUT = "out";
 
-export const SELECTOR_TOOLTIP_INNER = ".tooltip-inner";
+const SELECTOR_TOOLTIP_INNER = ".tooltip-inner";
 
-export const TRIGGER_HOVER = "hover";
-export const TRIGGER_FOCUS = "focus";
-export const TRIGGER_CLICK = "click";
-export const TRIGGER_MANUAL = "manual";
+const TRIGGER_HOVER = "hover";
+const TRIGGER_FOCUS = "focus";
+const TRIGGER_CLICK = "click";
+const TRIGGER_MANUAL = "manual";
 
 /**
  * ------------------------------------------------------------------------
@@ -148,6 +148,34 @@ export const TRIGGER_MANUAL = "manual";
  */
 
 export class TooltipService {
+  static readonly CONSTANTS: { [key: string]: any } = {
+    NAME,
+    VERSION,
+    DATA_KEY,
+    EVENT_KEY,
+    CLASS_PREFIX,
+    BSCLS_PREFIX_REGEX,
+    DISALLOWED_ATTRIBUTES,
+
+    DefaultType,
+    AttachmentMap,
+    Default,
+    Event,
+
+    CLASS_NAME_FADE,
+    CLASS_NAME_MODAL,
+    CLASS_NAME_SHOW,
+
+    HOVER_STATE_SHOW,
+    HOVER_STATE_OUT,
+
+    SELECTOR_TOOLTIP_INNER,
+
+    TRIGGER_HOVER,
+    TRIGGER_FOCUS,
+    TRIGGER_CLICK,
+    TRIGGER_MANUAL,
+  };
   private _isEnabled = true;
   private _timeout = 0;
   private _hoverState = "";
@@ -427,7 +455,7 @@ export class TooltipService {
     return Boolean(this.getTitle());
   }
 
-  getTipElement() {
+  getTipElement(): HTMLElement {
     if (this.tip) {
       return this.tip;
     }
@@ -461,41 +489,36 @@ export class TooltipService {
       return;
     }
 
-    if (content && typeof content !== "string" && isElement(content)) {
+    if (typeof content === "object" && content !== null && isElement(content)) {
       if ((content as any).jquery) {
         content = (content as any)[0];
       }
 
+      content = content as Element;
+
       // content is a DOM node or a jQuery
       if (this.config.html) {
-        if ((content as Element | null)?.parentNode !== element) {
+        if (content.parentNode !== element) {
           element.innerHTML = "";
-          element.appendChild(content as Node);
+          element.appendChild(content);
         }
-      } else if (content && (content as Element).textContent) {
-        element.textContent = (content as Element).textContent;
+      } else {
+        element.textContent = content.textContent;
       }
 
       return;
     }
 
-    if (this.config.html) {
-      if (this.config.sanitize && typeof content === "string") {
-        content =
-          sanitizeHtml(
-            content,
-            this.config.allowList,
-            this.config.sanitizeFn || undefined
-          ) || null;
-      }
-      if (element?.innerHTML && typeof content === "string") {
-        (element as Element).innerHTML = content;
-      }
-    } else {
-      if (element?.innerHTML && typeof content === "string") {
-        (element as Element).innerHTML = content;
-      }
+    content = content as string;
+
+    if (this.config.html && this.config.sanitize) {
+      content = sanitizeHtml(
+        content,
+        this.config.allowList,
+        this.config.sanitizeFn || undefined
+      );
     }
+    element.innerHTML = content;
   }
 
   getTitle() {
@@ -505,7 +528,7 @@ export class TooltipService {
       title =
         typeof this.config.title === "function"
           ? (this.config.title as ConfigTitleFn)(this.element)
-          : this.config.title || null;
+          : this.config.title;
     }
 
     return title;
@@ -595,24 +618,27 @@ export class TooltipService {
   _setListeners() {
     const triggers = this.config.trigger.split(" ");
 
+    /*
+      TODO: TooltipService.Event.[...] constants replaced here with standard events.
+      How are the TooltipService.Events made to work as event names in Bootstrap, and should we use the same way?
+    */
     triggers.forEach((trigger) => {
       if (trigger === "click") {
         EventHandler.on(
           this.element,
-          TooltipService.Event.CLICK,
+          "click", // TooltipService.Event.CLICK,
           // this.config.selector,
           (event: Event) => this.toggle(event)
         );
       } else if (trigger !== TRIGGER_MANUAL) {
         const eventIn =
           trigger === TRIGGER_HOVER
-            ? TooltipService.Event.MOUSEENTER
-            : TooltipService.Event.FOCUSIN;
+            ? "mouseover" // TooltipService.Event.MOUSEENTER
+            : "focus"; // TooltipService.Event.FOCUSIN;
         const eventOut =
           trigger === TRIGGER_HOVER
-            ? TooltipService.Event.MOUSELEAVE
-            : TooltipService.Event.FOCUSOUT;
-
+            ? "mouseout" // TooltipService.Event.MOUSELEAVE
+            : "blur"; // TooltipService.Event.FOCUSOUT;
         EventHandler.on(
           this.element,
           eventIn /*, this.config.selector*/,

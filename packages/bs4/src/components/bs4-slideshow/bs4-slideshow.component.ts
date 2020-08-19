@@ -1180,7 +1180,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   /**
    * Default custom Element method
-   * Invoked when the custom element is moved to a new document.
+   * Invoked when an attribute on the custom element changes.
    * @param attributeName
    * @param oldValue
    * @param newValue

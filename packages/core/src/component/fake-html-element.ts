@@ -1,5 +1,5 @@
 /**
- * This fake html element makes it possible to use custom elements with prodotype classes for backward compatibility on old browsers
+ * This fake html element makes it possible to use custom elements with prototype classes for backward compatibility on old browsers
  */
 class FakeHTMLElement /*implements HTMLElement*/ {
   // tslint:disable-next-line

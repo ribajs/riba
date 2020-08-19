@@ -1,9 +1,4 @@
-import {
-  isString,
-  parseJsonString,
-  isObject,
-  isArray,
-} from "@ribajs/utils/src/type";
+import { isString, parseJsonString, isObject } from "@ribajs/utils/src/type";
 
 /**
  * parse json string to object
@@ -14,7 +9,10 @@ export const parseFormatter = {
   read(jsonString: string) {
     if (isString(jsonString)) {
       return parseJsonString(jsonString);
-    } else if (isObject(jsonString as any) || isArray(jsonString as any)) {
+    } else if (
+      isObject(jsonString as any) ||
+      Array.isArray(jsonString as any)
+    ) {
       console.warn(
         "[parseFormatter] You do not need to parse the value because since it already been parsed"
       );

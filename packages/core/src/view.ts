@@ -9,8 +9,6 @@ import { Binding } from "./binding";
 import { parseNode, parseDeclaration } from "./parsers";
 import { Component } from "./component";
 
-export type TBlock = boolean;
-
 /**
  * TODO Check if there is an official interface which fits better here
  */
@@ -22,8 +20,6 @@ export interface DataElement extends HTMLUnknownElement {
  * A collection of bindings built from a set of parent nodes.
  */
 export class View {
-  public static DECLARATION_SPLIT = /((?:'[^']*')*(?:(?:[^|']*(?:'[^']*')+[^|']*)+|[^|]+))|^$/g;
-
   /**
    * Binder for mustache style `{model.property}` text Binders
    */
@@ -35,17 +31,13 @@ export class View {
   };
 
   public static bindingComparator = (a: Binding, b: Binding) => {
-    const aPriority = (a as Binding).binder
-      ? ((a as Binding).binder as Binder<any>).priority || 0
-      : 0;
-    const bPriority = (b as Binding).binder
-      ? ((b as Binding).binder as Binder<any>).priority || 0
-      : 0;
+    const aPriority = a.binder?.priority || 0;
+    const bPriority = b.binder?.priority || 0;
     return bPriority - aPriority;
   };
 
   /**
-   * Helper function to Create a new view insite of a binding
+   * Helper function to create a new view inside of a binding
    * @param bindin
    * @param models
    * @param anchorEl
@@ -56,9 +48,9 @@ export class View {
     anchorEl: HTMLElement | Node | null
   ) {
     const template = binding.el.cloneNode(true);
-    const view = new View(template as Node, models, binding.view.options);
+    const view = new View(template, models, binding.view.options);
     view.bind();
-    if (!binding || !binding.marker || binding.marker.parentNode === null) {
+    if (!binding?.marker?.parentNode) {
       console.warn("[View]: No parent node for binding!");
     } else {
       binding.marker.parentNode.insertBefore(template, anchorEl);
@@ -169,11 +161,7 @@ export class View {
    */
   public publish() {
     this.bindings.forEach((binding) => {
-      if (
-        (binding as Binding).binder &&
-        binding.publish &&
-        ((binding as Binding).binder as Binder<any>).publishes
-      ) {
+      if (binding.binder && binding.publish && binding.binder.publishes) {
         binding.publish();
       }
     });
@@ -188,11 +176,11 @@ export class View {
       this.models[key] = models[key];
     });
 
-    this.bindings.forEach((binding) => {
+    for (const binding of this.bindings) {
       // if ((binding as Binding).update) {
-      (binding as Binding).update(models);
+      binding.update(models);
       // }
-    });
+    }
   }
 
   /**
@@ -221,7 +209,7 @@ export class View {
     this.bindings.sort(View.bindingComparator);
   }
 
-  public traverse(node: BindableElement): TBlock {
+  public traverse(node: BindableElement): boolean {
     let bindingPrefix;
     if (this.options.fullPrefix) {
       bindingPrefix = this.options.fullPrefix;
@@ -276,7 +264,6 @@ export class View {
               binder = Riba.fallbackBinder;
             }
           }
-
           // if block is set, do not bind its childs (this means the binder bound it by itself)
           // and build binding directly (do not push it to bindInfos array)
           if (binder.block) {
@@ -313,14 +300,10 @@ export class View {
     }
 
     // bind components
-    if (!block) {
+    if (!block && !node._bound && this.options.components) {
       const nodeName = node.nodeName.toLowerCase();
-      if (
-        this.options.components &&
-        this.options.components[nodeName] &&
-        !node._bound
-      ) {
-        const COMPONENT = this.options.components[nodeName];
+      const COMPONENT = this.options.components[nodeName];
+      if (COMPONENT) {
         this.registComponentWithFallback(node, COMPONENT, nodeName);
         block = true;
       }
@@ -339,7 +322,7 @@ export class View {
     const keypath = parsedDeclaration.keypath;
     const pipes = parsedDeclaration.pipes;
     this.bindings.push(
-      new Binding(this as View, node, type, keypath, binder, pipes, identifier)
+      new Binding(this, node, type, keypath, binder, pipes, identifier)
     );
   }
 

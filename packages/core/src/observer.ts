@@ -7,7 +7,7 @@ import {
   Obj,
   Options,
 } from "./interfaces";
-import { isObject, concat } from "@ribajs/utils/src/type";
+import { isObject } from "@ribajs/utils/src/type";
 
 export class Observer {
   public static adapters: Adapters;
@@ -20,7 +20,7 @@ export class Observer {
     }
 
     if (options.adapters) {
-      Observer.adapters = concat(false, Observer.adapters, options.adapters);
+      Observer.adapters = { ...Observer.adapters, ...options.adapters };
       Observer.interfaces = Object.keys(Observer.adapters);
     }
 

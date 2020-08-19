@@ -6,7 +6,6 @@ import {
   Components,
   Options,
 } from "./interfaces";
-import { concat } from "@ribajs/utils/src/type";
 import { parseTemplate, parseType } from "./parsers";
 import { Binding } from "./binding";
 import { attributeBinder } from "./binders/attribute.binder";
@@ -126,20 +125,19 @@ export class Riba {
       return;
     }
 
-    Object.keys(options).forEach((option) => {
-      const value = (options as any)[option];
+    for (const [option, value] of Object.entries(options)) {
       switch (option) {
         case "binders":
-          this.binders = concat(false, this.binders, value);
+          this.binders = { ...this.binders, ...value };
           break;
         case "formatters":
-          this.formatters = concat(false, this.formatters, value);
+          this.formatters = { ...this.formatters, ...value };
           break;
         case "components":
-          this.components = concat(false, this.components, value);
+          this.components = { ...this.components, ...value };
           break;
         case "adapters":
-          this.adapters = concat(false, this.adapters, value);
+          this.adapters = { ...this.adapters, ...value };
           break;
         case "prefix":
           this.prefix = value;
@@ -169,7 +167,7 @@ export class Riba {
           console.warn("Option not supported", option, value);
           break;
       }
-    });
+    }
   }
 
   public getViewOptions(options?: Partial<Options>) {
@@ -190,46 +188,35 @@ export class Riba {
     };
 
     if (options) {
-      viewOptions.binders = concat(false, viewOptions.binders, options.binders);
-      viewOptions.formatters = concat(
-        false,
-        viewOptions.formatters,
-        options.formatters
-      );
-      viewOptions.components = concat(
-        false,
-        viewOptions.components,
-        options.components
-      );
-      viewOptions.adapters = concat(
-        false,
-        viewOptions.adapters,
-        options.adapters
-      );
+      viewOptions.binders = { ...viewOptions.binders, ...options.binders };
+      viewOptions.formatters = {
+        ...viewOptions.formatters,
+        ...options.formatters,
+      };
+      viewOptions.components = {
+        ...viewOptions.components,
+        ...options.components,
+      };
+      viewOptions.adapters = {
+        ...viewOptions.adapters,
+        ...options.adapters,
+      };
     }
 
-    viewOptions.prefix =
-      options && options.prefix ? options.prefix : this.prefix;
-    viewOptions.fullPrefix = viewOptions.prefix
-      ? viewOptions.prefix + "-"
-      : this.fullPrefix;
+    viewOptions.prefix = (options && options.prefix) || this.prefix;
+    viewOptions.fullPrefix =
+      (viewOptions.prefix && viewOptions.prefix + "-") || this.fullPrefix;
 
     viewOptions.templateDelimiters =
-      options && options.templateDelimiters
-        ? options.templateDelimiters
-        : this.templateDelimiters;
+      (options && options.templateDelimiters) || this.templateDelimiters;
     viewOptions.rootInterface =
-      options && options.rootInterface
-        ? options.rootInterface
-        : this.rootInterface;
+      (options && options.rootInterface) || this.rootInterface;
     viewOptions.removeBinderAttributes =
       options && typeof options.removeBinderAttributes === "boolean"
         ? options.removeBinderAttributes
         : this.removeBinderAttributes;
     viewOptions.blockNodeNames =
-      options && options.blockNodeNames
-        ? options.blockNodeNames
-        : this.blockNodeNames;
+      (options && options.blockNodeNames) || this.blockNodeNames;
     viewOptions.preloadData =
       options && typeof options.preloadData === "boolean"
         ? options.preloadData
@@ -238,8 +225,7 @@ export class Riba {
       options && typeof options.forceComponentFallback === "boolean"
         ? options.forceComponentFallback
         : this.forceComponentFallback;
-    viewOptions.handler =
-      options && options.handler ? options.handler : Riba.handler;
+    viewOptions.handler = (options && options.handler) || Riba.handler;
 
     // WORKAROUND for FakeHTMLElement
     if (viewOptions.forceComponentFallback) {
@@ -248,25 +234,15 @@ export class Riba {
     }
 
     // merge extensions
-    viewOptions.binders = concat(false, this.binders, viewOptions.binders);
-    viewOptions.formatters = concat(
-      false,
-      this.formatters,
-      viewOptions.formatters
-    );
-    viewOptions.components = concat(
-      false,
-      this.components,
-      viewOptions.components
-    );
-    viewOptions.adapters = concat(false, this.adapters, viewOptions.adapters);
+    viewOptions.binders = { ...this.binders, ...viewOptions.binders };
+    viewOptions.formatters = { ...this.formatters, ...viewOptions.formatters };
+    viewOptions.components = { ...this.components, ...viewOptions.components };
+    viewOptions.adapters = { ...this.adapters, ...viewOptions.adapters };
 
     // get all attributeBinders from available binders
     if (viewOptions.binders) {
       viewOptions.attributeBinders = Object.keys(viewOptions.binders).filter(
-        (key) => {
-          return key.indexOf("*") >= 1; // Should start with *
-        }
+        (key) => key.indexOf("*") >= 1 // Should contain, but not start with, *
       );
     }
 
@@ -283,7 +259,7 @@ export class Riba {
   ) {
     const viewOptions: Options = this.getViewOptions(options);
 
-    models = models || new Object(null);
+    models = models || Object.create(null);
     Observer.updateOptions(viewOptions);
 
     const view = new View(el, models, viewOptions);
