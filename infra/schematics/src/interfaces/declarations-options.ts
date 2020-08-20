@@ -1,4 +1,4 @@
-import { Path } from '@angular-devkit/core';
+import { Path } from "@angular-devkit/core";
 
 export interface DeclarationOptions {
   flat?: boolean;

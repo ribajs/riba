@@ -54,7 +54,10 @@ export class GenerateCommand extends AbstractCommand {
           options.push({ name: "sourceRoot", value: command.sourceRoot });
 
           const inputs: CommandInput[] = [];
-          inputs.push({ name: "schematic", value: schematic!.name });
+          if (!schematic?.name) {
+            throw new Error("schematic.name must be defined!");
+          }
+          inputs.push({ name: "schematic", value: schematic?.name });
           inputs.push({ name: "name", value: name });
           inputs.push({ name: "path", value: path });
 

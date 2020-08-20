@@ -42,12 +42,12 @@ export class NewAction extends AbstractAction {
     await this.setDefaults(inputs, options);
 
     const projectDirectory = dasherize(
-      this.getInput(inputs, "name")!.value as string
+      this.getInput(inputs, "name")?.value as string
     );
-    const isDryRunEnabled = this.getInput(options, "dry-run")!.value;
-    const shouldSkipInstall = this.getInput(options, "skip-install")!.value;
-    const shouldSkipGit = this.getInput(options, "skip-git")!.value;
-    const shouldSkipExamples = this.getInput(options, "skip-examples")!.value;
+    const isDryRunEnabled = this.getInput(options, "dry-run")?.value;
+    const shouldSkipInstall = this.getInput(options, "skip-install")?.value;
+    const shouldSkipGit = this.getInput(options, "skip-git")?.value;
+    const shouldSkipExamples = this.getInput(options, "skip-examples")?.value;
 
     await this.askForMissingInformation(inputs);
 
@@ -78,7 +78,7 @@ export class NewAction extends AbstractAction {
 
     const prompt: PromptModule = createPromptModule();
     const nameCommandInput = this.getInput(inputs, "name");
-    if (!nameCommandInput!.value) {
+    if (!nameCommandInput?.value) {
       const message = messages.QUESTION_NAME_OF_NEW_PROJECT;
       const questions = [generateInput("name", message)("riba-app")];
       const answers: Answers = await prompt(
@@ -271,8 +271,8 @@ export class NewAction extends AbstractAction {
     dryRunMode: boolean,
     installDirectory: string
   ) {
-    const inputPackageManager = this.getInput(options, "package-manager")!
-      .value;
+    const inputPackageManager = this.getInput(options, "package-manager")
+      ?.value;
 
     let packageManager: AbstractPackageManager;
     if (dryRunMode) {

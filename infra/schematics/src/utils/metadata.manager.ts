@@ -14,8 +14,8 @@ import {
   SourceFile,
   StringLiteral,
   SyntaxKind,
-} from 'typescript';
-import { DeclarationOptions } from '../interfaces';
+} from "typescript";
+import { DeclarationOptions } from "../interfaces";
 
 export class MetadataManager {
   constructor(private content: string) {}
@@ -23,30 +23,36 @@ export class MetadataManager {
   public insert(
     metadata: string,
     symbol: string,
-    staticOptions?: DeclarationOptions['staticOptions'],
+    staticOptions?: DeclarationOptions["staticOptions"]
   ): string {
-    const source: SourceFile = createSourceFile('filename.ts', this.content, ScriptTarget.ES2017);
+    const source: SourceFile = createSourceFile(
+      "filename.ts",
+      this.content,
+      ScriptTarget.ES2017
+    );
     const decoratorNodes: Node[] = this.getDecoratorMetadata(source);
     const node: Node = decoratorNodes[0];
-    const properties = node ? (node as ObjectLiteralExpression).properties : null;
+    const properties = node
+      ? (node as ObjectLiteralExpression).properties
+      : null;
     let matchingProperties = new Array<ObjectLiteralElement>();
     if (properties) {
       matchingProperties = properties
-      .filter((prop) => prop.kind === SyntaxKind.PropertyAssignment)
-      .filter((prop) => {
-        const name = prop.name;
-        if (!name) {
-          return false;
-        }
-        switch (name.kind) {
-          case SyntaxKind.Identifier:
-            return (name as Identifier).getText(source) === metadata;
-          case SyntaxKind.StringLiteral:
-            return (name as StringLiteral).text === metadata;
-          default:
+        .filter((prop) => prop.kind === SyntaxKind.PropertyAssignment)
+        .filter((prop) => {
+          const name = prop.name;
+          if (!name) {
             return false;
-        }
-      });
+          }
+          switch (name.kind) {
+            case SyntaxKind.Identifier:
+              return (name as Identifier).getText(source) === metadata;
+            case SyntaxKind.StringLiteral:
+              return (name as StringLiteral).text === metadata;
+            default:
+              return false;
+          }
+        });
     }
 
     symbol = this.mergeSymbolAndExpr(symbol, staticOptions);
@@ -57,13 +63,27 @@ export class MetadataManager {
       const expr = node as ObjectLiteralExpression;
       if (!expr || !expr.properties || expr.properties.length === 0) {
         addBlankLinesIfDynamic();
-        return this.insertMetadataToEmptyModuleDecorator(expr, metadata, symbol);
+        return this.insertMetadataToEmptyModuleDecorator(
+          expr,
+          metadata,
+          symbol
+        );
       } else {
         addBlankLinesIfDynamic();
-        return this.insertNewMetadataToDecorator(expr, source, metadata, symbol);
+        return this.insertNewMetadataToDecorator(
+          expr,
+          source,
+          metadata,
+          symbol
+        );
       }
     } else {
-      return this.insertSymbolToMetadata(source, matchingProperties, symbol, staticOptions);
+      return this.insertSymbolToMetadata(
+        source,
+        matchingProperties,
+        symbol,
+        staticOptions
+      );
     }
   }
 
@@ -72,13 +92,13 @@ export class MetadataManager {
       .filter(
         (node) =>
           node.kind === SyntaxKind.Decorator &&
-          (node as Decorator).expression.kind === SyntaxKind.CallExpression,
+          (node as Decorator).expression.kind === SyntaxKind.CallExpression
       )
       .map((node) => (node as Decorator).expression as CallExpression)
       .filter(
         (expr) =>
           expr.arguments[0] &&
-          expr.arguments[0].kind === SyntaxKind.ObjectLiteralExpression,
+          expr.arguments[0].kind === SyntaxKind.ObjectLiteralExpression
       )
       .map((expr) => expr.arguments[0] as ObjectLiteralExpression);
   }
@@ -101,24 +121,24 @@ export class MetadataManager {
   private insertMetadataToEmptyModuleDecorator(
     expr: ObjectLiteralExpression,
     metadata: string,
-    symbol: string,
+    symbol: string
   ): string {
     const position = expr.getEnd() - 1;
     const toInsert = `  ${metadata}: [${symbol}]`;
-    return this.content.split('').reduce((content, char, index) => {
+    return this.content.split("").reduce((content, char, index) => {
       if (index === position) {
         return `${content}\n${toInsert}\n${char}`;
       } else {
         return `${content}${char}`;
       }
-    }, '');
+    }, "");
   }
 
   private insertNewMetadataToDecorator(
     expr: ObjectLiteralExpression,
     source: SourceFile,
     metadata: string,
-    symbol: string,
+    symbol: string
   ): string {
     const node = expr.properties[expr.properties.length - 1];
     const position = node.getEnd();
@@ -130,20 +150,20 @@ export class MetadataManager {
     } else {
       toInsert = `, ${metadata}: [${symbol}]`;
     }
-    return this.content.split('').reduce((content, char, index) => {
+    return this.content.split("").reduce((content, char, index) => {
       if (index === position) {
         return `${content}${toInsert}${char}`;
       } else {
         return `${content}${char}`;
       }
-    }, '');
+    }, "");
   }
 
   private insertSymbolToMetadata(
     source: SourceFile,
     matchingProperties: ObjectLiteralElement[],
     symbol: string,
-    staticOptions?: DeclarationOptions['staticOptions'],
+    staticOptions?: DeclarationOptions["staticOptions"]
   ): string {
     const assignment = matchingProperties[0] as PropertyAssignment;
     let node: Node | NodeArray<Expression>;
@@ -154,9 +174,9 @@ export class MetadataManager {
       node = arrLiteral.elements;
     }
     if (Array.isArray(node)) {
-      const nodeArray = (node as {}) as Node[];
+      const nodeArray = node as Node[];
       const symbolsArray = nodeArray.map((childNode) =>
-        childNode.getText(source),
+        childNode.getText(source)
       );
       if (symbolsArray.includes(symbol)) {
         return this.content;
@@ -181,27 +201,27 @@ export class MetadataManager {
         toInsert = `, ${symbol}`;
       }
     }
-    return this.content.split('').reduce((content, char, index) => {
+    return this.content.split("").reduce((content, char, index) => {
       if (index === position) {
         return `${content}${toInsert}${char}`;
       } else {
         return `${content}${char}`;
       }
-    }, '');
+    }, "");
   }
 
   private mergeSymbolAndExpr(
     symbol: string,
-    staticOptions?: DeclarationOptions['staticOptions'],
+    staticOptions?: DeclarationOptions["staticOptions"]
   ): string {
     if (!staticOptions) {
       return symbol;
     }
     const spacing = 6;
     let options = JSON.stringify(staticOptions.value, null, spacing);
-    options = options.replace(/"([^(")"]+)":/g, '$1:');
+    options = options.replace(/"([^(")"]+)":/g, "$1:");
     options = options.replace(/"/g, `'`);
-    options = options.slice(0, options.length - 1) + '    }';
+    options = options.slice(0, options.length - 1) + "    }";
     symbol += `.${staticOptions.name}(${options})`;
     return symbol;
   }

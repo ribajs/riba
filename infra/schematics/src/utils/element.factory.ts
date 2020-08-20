@@ -1,8 +1,4 @@
-import {
-  join,
-  Path,
-  strings,
-} from '@angular-devkit/core';
+import { join, Path, strings } from "@angular-devkit/core";
 import {
   apply,
   filter,
@@ -13,36 +9,36 @@ import {
   template,
   Tree,
   url,
-} from '@angular-devkit/schematics';
-import { debug as Debug } from 'debug';
-import 'source-map-support/register';
-import { isNullOrUndefined } from 'util';
-import { DeclarationOptions, ElementOptions, Location } from '../interfaces';
-import { DEFAULT_LANGUAGE, DEFAULT_STYLE_LANGUAGE } from '../lib/defaults';
-import { ExportDeclarator } from './export.declarator';
-import { IndexFinder } from './index.finder';
-import { NameParser } from './name.parser';
+} from "@angular-devkit/schematics";
+import { debug as Debug } from "debug";
+import "source-map-support/register";
+import { isNullOrUndefined } from "util";
+import { DeclarationOptions, ElementOptions, Location } from "../interfaces";
+import { DEFAULT_LANGUAGE, DEFAULT_STYLE_LANGUAGE } from "../lib/defaults";
+import { ExportDeclarator } from "./export.declarator";
+import { IndexFinder } from "./index.finder";
+import { NameParser } from "./name.parser";
 
 export class ElementFactory {
-
   public target: ElementOptions;
 
-  protected debug: debug.Debugger = Debug('binder:factory');
+  protected debug: debug.Debugger = Debug("binder:factory");
 
   constructor(protected options: ElementOptions) {
     this.target = this.getTarget(options);
   }
 
+  // TODO remove any
   public generate(): any {
-    this.debug('generate');
+    this.debug("generate");
     return (context: SchematicContext) => {
       if (!this.target.path) {
-        throw new Error('options.path not found!');
+        throw new Error("options.path not found!");
       }
-      const templatesPath = url('./files');
+      const templatesPath = url("./files");
       return apply(templatesPath, [
         this.templateFilesFilter(this.target),
-        template({...strings, ...this.target}),
+        template({ ...strings, ...this.target }),
         move(this.target.path),
       ])(context);
     };
@@ -70,7 +66,11 @@ export class ElementFactory {
       const declarator: ExportDeclarator = new ExportDeclarator();
       tree.overwrite(
         index,
-        declarator.declareScript(content, this.target as DeclarationOptions, index),
+        declarator.declareScript(
+          content,
+          this.target as DeclarationOptions,
+          index
+        )
       );
       return tree;
     };
@@ -98,7 +98,11 @@ export class ElementFactory {
       const declarator: ExportDeclarator = new ExportDeclarator();
       tree.overwrite(
         index,
-        declarator.declareStyle(content, this.target as DeclarationOptions, index),
+        declarator.declareStyle(
+          content,
+          this.target as DeclarationOptions,
+          index
+        )
       );
       return tree;
     };
@@ -108,20 +112,26 @@ export class ElementFactory {
     const target: ElementOptions = Object.assign({}, source);
 
     if (isNullOrUndefined(target.name)) {
-      throw new SchematicsException('Option (name) is required.');
+      throw new SchematicsException("Option (name) is required.");
     }
 
     const location: Location = new NameParser().parse(target);
 
     target.name = strings.dasherize(location.name);
     target.path = strings.dasherize(location.path);
-    target.language = target.language !== undefined ? target.language : DEFAULT_LANGUAGE;
-    target.styleLanguage = target.styleLanguage !== undefined ? target.styleLanguage : DEFAULT_STYLE_LANGUAGE;
+    target.language =
+      target.language !== undefined ? target.language : DEFAULT_LANGUAGE;
+    target.styleLanguage =
+      target.styleLanguage !== undefined
+        ? target.styleLanguage
+        : DEFAULT_STYLE_LANGUAGE;
 
-    target.path = target.flat ? target.path : join(target.path as Path, target.name);
+    target.path = target.flat
+      ? target.path
+      : join(target.path as Path, target.name);
 
-    this.debug('location name: ' + location.name);
-    this.debug('target path: ' + target.path);
+    this.debug("location name: " + location.name);
+    this.debug("target path: " + target.path);
 
     return target;
   }
@@ -131,27 +141,27 @@ export class ElementFactory {
    */
   protected templateFilesFilter(options: ElementOptions): Rule {
     return filter((path) => {
-      this.debug('templateFilesFilter path: ' + path);
+      this.debug("templateFilesFilter path: " + path);
       if (options.templateEngine) {
-        if (options.templateEngine === 'html' && path.endsWith('.pug')) {
+        if (options.templateEngine === "html" && path.endsWith(".pug")) {
           return false;
         }
-        if (options.templateEngine === 'pug' && path.endsWith('.html')) {
+        if (options.templateEngine === "pug" && path.endsWith(".html")) {
           return false;
         }
       }
       if (options.styleLanguage) {
-        if (options.styleLanguage === 'scss' && path.endsWith('.css')) {
+        if (options.styleLanguage === "scss" && path.endsWith(".css")) {
           return false;
         }
       }
-      if (options.language === 'js' && path.endsWith('.ts')) {
+      if (options.language === "js" && path.endsWith(".ts")) {
         return false;
       }
-      if (options.language === 'ts' && path.endsWith('.js')) {
+      if (options.language === "ts" && path.endsWith(".js")) {
         return false;
       }
-      if (!options.spec && path.endsWith('.spec.ts')) {
+      if (!options.spec && path.endsWith(".spec.ts")) {
         return false;
       }
       return true;

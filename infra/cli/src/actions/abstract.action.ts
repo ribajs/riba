@@ -5,7 +5,7 @@ import {
 import { ConfigurationLoader } from "../lib/configuration/index";
 import { FileSystemReader } from "../lib/readers/index";
 
-export abstract class AbstractAction {  
+export abstract class AbstractAction {
   public abstract async handle(
     inputs?: CommandInput[],
     options?: CommandInput[],
@@ -22,7 +22,7 @@ export abstract class AbstractAction {
   }
 
   protected setInput(
-    inputs: CommandInput[], 
+    inputs: CommandInput[],
     name: string,
     value: string | boolean
   ) {

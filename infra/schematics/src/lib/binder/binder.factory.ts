@@ -5,13 +5,13 @@ import {
   Rule,
   SchematicContext,
   Tree,
-} from '@angular-devkit/schematics';
-import { ElementOptions } from '../../interfaces';
-import { ElementFactory } from '../../utils/element.factory';
-import { mergeSourceRoot } from '../../utils/source-root.helpers';
+} from "@angular-devkit/schematics";
+import { ElementOptions } from "../../interfaces";
+import { ElementFactory } from "../../utils/element.factory";
+import { mergeSourceRoot } from "../../utils/source-root.helpers";
 
-const ELEMENT_METADATA = 'binders';
-const ELEMENT_TYPE = 'binder';
+const ELEMENT_METADATA = "binders";
+const ELEMENT_TYPE = "binder";
 
 export function main(options: ElementOptions): Rule {
   options.metadata = options.metadata || ELEMENT_METADATA;

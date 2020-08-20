@@ -22,7 +22,7 @@ export interface ApplicationOptions {
   /**
    * Style sheet language
    */
-  styleLanguage?: 'css' | 'scss';
+  styleLanguage?: "css" | "scss";
   /**
    * Root directory of your source files
    */
@@ -34,7 +34,7 @@ export interface ApplicationOptions {
   /**
    * The used package manager.
    */
-  packageManager?: 'npm' | 'yarn';
+  packageManager?: "npm" | "yarn";
   /**
    * The Nest included production dependencies (comma separated values).
    */

@@ -1,6 +1,6 @@
-import { join, Path, PathFragment } from '@angular-devkit/core';
-import { DirEntry, Tree } from '@angular-devkit/schematics';
-import { FindOptions } from '../interfaces';
+import { join, Path, PathFragment } from "@angular-devkit/core";
+import { DirEntry, Tree } from "@angular-devkit/schematics";
+import { FindOptions } from "../interfaces";
 
 export class IndexFinder {
   constructor(private tree: Tree) {}
@@ -11,7 +11,11 @@ export class IndexFinder {
     return this.findInOrCreate(options, generatedDirectory, false);
   }
 
-  private findInOrCreate(options: FindOptions, directory: DirEntry, createIfNotFound: boolean): Path | null {
+  private findInOrCreate(
+    options: FindOptions,
+    directory: DirEntry,
+    createIfNotFound: boolean
+  ): Path | null {
     if (!directory) {
       return null;
     }
@@ -29,15 +33,16 @@ export class IndexFinder {
 
     // otherwise create an index file if createIfNotFound is ture
     const newIndexFilePath = join(directory.path, `index.${options.language}`);
-    this.tree.create(newIndexFilePath, '');
+    this.tree.create(newIndexFilePath, "");
     return newIndexFilePath;
-
   }
 
   private findIn(options: FindOptions, directory: DirEntry) {
-    const indexFilename: PathFragment | undefined = directory.subfiles.find((filename) => {
-      return new RegExp(`index.${options.language}`, 's').test(filename);
-    });
+    const indexFilename: PathFragment | undefined = directory.subfiles.find(
+      (filename) => {
+        return new RegExp(`index.${options.language}`, "s").test(filename);
+      }
+    );
     return indexFilename;
   }
 }

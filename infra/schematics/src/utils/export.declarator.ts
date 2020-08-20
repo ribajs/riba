@@ -1,16 +1,20 @@
-import { capitalize, classify } from '@angular-devkit/core/src/utils/strings';
-import { Path } from '@angular-devkit/core';
-import { ScriptExportDeclarator } from './script-export.declarator';
-import { StyleExportDeclarator } from './style-export.declarator';
-import { DeclarationOptions } from '../interfaces';
+import { capitalize, classify } from "@angular-devkit/core/src/utils/strings";
+import { Path } from "@angular-devkit/core";
+import { ScriptExportDeclarator } from "./script-export.declarator";
+import { StyleExportDeclarator } from "./style-export.declarator";
+import { DeclarationOptions } from "../interfaces";
 
 export class ExportDeclarator {
   constructor(
     private scriptExports: ScriptExportDeclarator = new ScriptExportDeclarator(),
-    private styleExports: StyleExportDeclarator = new StyleExportDeclarator(),
+    private styleExports: StyleExportDeclarator = new StyleExportDeclarator()
   ) {}
 
-  public declareScript(content: string, options: DeclarationOptions, index: Path): string {
+  public declareScript(
+    content: string,
+    options: DeclarationOptions,
+    index: Path
+  ): string {
     options = this.computeSymbol(options);
     content = this.scriptExports.declare(content, options, index);
     /**
@@ -27,7 +31,11 @@ export class ExportDeclarator {
     return content;
   }
 
-  public declareStyle(content: string, options: DeclarationOptions, index: Path): string {
+  public declareStyle(
+    content: string,
+    options: DeclarationOptions,
+    index: Path
+  ): string {
     options = this.computeSymbol(options);
     content = this.styleExports.declare(content, options, index);
     return content;

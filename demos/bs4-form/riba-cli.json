@@ -1,7 +1,7 @@
 {
   "language": "ts",
   "collection": "@ribajs/schematics",
-  "sourceRoot": "src",
+  "sourceRoot": "src/ts",
   "templateEngine": "html",
   "styleLanguage": "scss",
   "component": {

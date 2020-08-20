@@ -1,4 +1,5 @@
 import * as Color from "../ui/colors";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const version = require("../../../package.json").version;
 const ver = Color.setString.yellow(`v${version}`);
 
