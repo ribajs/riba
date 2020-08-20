@@ -51,7 +51,7 @@ export class ShopifyCartComponent extends Component {
     };
   }
 
-  protected set cart(cart: any) {
+  protected set cart(cart: ShopifyCartObject | null) {
     // TODO check if cart values are changed
     this.scope.cart = cart;
 
@@ -70,7 +70,7 @@ export class ShopifyCartComponent extends Component {
     }
   }
 
-  protected get cart() {
+  protected get cart(): ShopifyCartObject | null {
     return this.scope.cart || null;
   }
 
