@@ -1,13 +1,14 @@
-import { Riba, valueBinder } from '@ribajs/core';
+import { Riba } from '../../../core/src/riba';
+import { valueBinder } from '../../../core/src/binders/value.binder';
 
 import {
     onEventBinder,
 } from './on-event.binder';
 
-const riba = new Riba();
-riba.module.binder.regists([onEventBinder, valueBinder]);
-
 describe('riba.binders', () => {
+    const riba = new Riba();
+    riba.module.binder.regists([onEventBinder, valueBinder]);
+
     let element: HTMLInputElement;
     let fragment: DocumentFragment;
     let model: any = {};

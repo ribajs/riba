@@ -1,6 +1,8 @@
 import "jest-extended";
 
-import { Riba, View, Binding } from "./index";
+import { Riba } from "./riba";
+import { Binding } from "./binding";
+import { View } from "./view";
 
 import { Data } from "../spec/lib/moch.data";
 
@@ -539,7 +541,7 @@ describe("riba.Binding", () => {
       }
       view.options.formatters.awesome = {
         name: "awesome",
-        read(value) {
+        read(value: string) {
           return "awesome " + value;
         },
       };
@@ -582,7 +584,7 @@ describe("riba.Binding", () => {
         }
         view.options.formatters.totally = {
           name: "totally",
-          read(value, prefix) {
+          read(value: string, prefix: string) {
             return prefix + " totally " + value;
           },
         };
@@ -611,7 +613,7 @@ describe("riba.Binding", () => {
     });
 
     it("binder.getValue() should have access to passed element", () => {
-      binding.binder.getValue = (_el) => {
+      binding.binder.getValue = (_el: HTMLElement) => {
         return _el.dataset.foo;
       };
 

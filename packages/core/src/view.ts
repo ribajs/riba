@@ -31,7 +31,7 @@ export class View {
   };
 
   public static bindingComparator = (a: Binding, b: Binding) => {
-    const aPriority = a.binder?.binding || 0;
+    const aPriority = a.binder?.priority || 0;
     const bPriority = b.binder?.priority || 0;
     return bPriority - aPriority;
   };

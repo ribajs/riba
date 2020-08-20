@@ -204,8 +204,10 @@ export abstract class Component extends FakeHTMLElement {
    * Checks if all passed observed attributes are initialized
    */
   protected allPassedObservedAttributesAreInitialized() {
-    return !Object.keys(this.observedAttributesToCheck).some(
-      (key) => !this.observedAttributesToCheck[key]?.initialized
+    return Object.keys(this.observedAttributesToCheck).every(
+      (key) =>
+        !this.observedAttributesToCheck[key]?.passed ||
+        this.observedAttributesToCheck[key]?.initialized
     );
   }
 
@@ -217,9 +219,9 @@ export abstract class Component extends FakeHTMLElement {
    * So define required attriutes and the view is ony bind the first time after all this attributes are transmitted.
    */
   protected checkRequiredAttributes() {
-    return !this.requiredAttributes().some(
+    return this.requiredAttributes().every(
       // eslint-disable-next-line no-prototype-builtins
-      (requiredAttribute) => !this.scope.hasOwnProperty(requiredAttribute)
+      (requiredAttribute) => this.scope.hasOwnProperty(requiredAttribute)
     );
   }
 
@@ -359,7 +361,7 @@ export abstract class Component extends FakeHTMLElement {
 
   /**
    * Default custom Element method
-   * Invoked when the custom element is moved to a new document.
+   * Invoked when one of the custom element's attributes is added, removed, or changed.
    * @param attributeName
    * @param oldValue
    * @param newValue

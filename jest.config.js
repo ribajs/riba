@@ -6,10 +6,9 @@ module.exports = {
     "^.+\\.tsx?$": require.resolve("ts-jest"),
   },
   testRegex: "/src/.*\\.(test|spec).(ts|tsx)$",
-  collectCoverageFrom: [
-    "src/**/*.{tsx,ts}",
-    "!**/node_modules/**",
-    "!**/vendor/**",
+  testPathIgnorePatterns: [
+    "infra/schematics/src/lib/*",
+    "node_modules/"
   ],
   coverageReporters: ["json", "lcov"],
   setupFilesAfterEnv: [require.resolve("jest-extended")],
