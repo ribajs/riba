@@ -1,0 +1,17 @@
+// Original Bootstrap 4 Styles
+@import "~bootstrap/scss/bootstrap";
+
+// @import './binders/index';
+@import "../ts/components/index";
+@import "~@ribajs/content-slider/src/index";
+// @import './formatters/index';
+
+body {
+  height: 100%;
+  width: 100%;
+  background: black;
+}
+html {
+  height: 100%;
+  width: 100%;
+}
