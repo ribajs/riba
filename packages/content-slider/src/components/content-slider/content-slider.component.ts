@@ -55,7 +55,7 @@ export class ContentSliderComponent extends Component {
   protected async afterBind() {
     await super.afterBind();
     console.debug("afterBind", this.scope);
-    const children = this.el.querySelector("#vanilla_js_slider")?.children;
+    const children = this.el.querySelector(".content-slider")?.children;
     if (children) {
       this.scope.elementCount = children.length;
     }
@@ -94,7 +94,7 @@ export class ContentSliderComponent extends Component {
       .querySelector(".vanilla_js_active")
       ?.classList.remove("vanilla_js_active");
     this.el
-      .querySelector("#vanilla_js_slider")
+      .querySelector(".content-slider")
       ?.children[this.scope.currentElement + 1].classList.add(
         "vanilla_js_active"
       );
@@ -112,24 +112,28 @@ export class ContentSliderComponent extends Component {
       .querySelector(".vanilla_js_active")
       ?.classList.remove("vanilla_js_active");
     this.el
-      .querySelector("#vanilla_js_slider")
+      .querySelector(".content-slider")
       ?.children[this.scope.currentElement - 1].classList.add(
         "vanilla_js_active"
       );
     this.scope.currentElement--;
     console.log("previous", this.scope.currentElement);
+    console.log("check 1 2 3 ");
     this.updateContent();
   }
 
   public updateContent() {
-    (this.el.querySelector(
-      "#vanilla_js_slider"
-    ) as HTMLElement).style.transform =
-      "translateX(calc(" + this.scope.currentElement + " * calc(-100% / 4)))";
+    (this.el.querySelector(".content-slider") as HTMLElement).style.transform =
+      "translateX(calc(calc(" +
+      this.scope.currentElement +
+      " * -20vw) - calc(" +
+      this.scope.currentElement +
+      " * 1vw))";
 
     this.scope.currentContent = this.el.querySelector(
-      "#vanilla_js_slider"
+      ".content-sliderls"
     )?.children[this.scope.currentElement].children[0].innerHTML;
+    //console.log("translateX(calc(calc(" + this.scope.currentElement + " * -20vw) - calc(" + this.scope.currentElement + " * 1vw))");
   }
 
   protected template() {
