@@ -117,8 +117,8 @@ export class ContentSliderComponent extends Component {
         "vanilla_js_active"
       );
     this.scope.currentElement--;
-    console.log("previous", this.scope.currentElement);git push
-    console.log("check 1 2 3 ");
+    console.log("previous", this.scope.currentElement);
+    console.log("check 1 2 3 4 ");
     this.updateContent();
   }
 
