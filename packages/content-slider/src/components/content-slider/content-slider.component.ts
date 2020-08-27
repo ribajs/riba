@@ -3,8 +3,7 @@ import { Component } from "@ribajs/core";
 import template from "./content-slider.component.html";
 
 interface Scope {
-  hello?: string;
-  currentElement: number;
+  currentIndex: number;
   currentPosition: number;
   previous: ContentSliderComponent["previous"];
   next: ContentSliderComponent["next"];
@@ -29,8 +28,7 @@ export class ContentSliderComponent extends Component {
   }
 
   protected scope: Scope = {
-    hello: undefined,
-    currentElement: 0,
+    currentIndex: 0,
     currentPosition: 0,
     previous: this.previous,
     next: this.next,
@@ -53,31 +51,20 @@ export class ContentSliderComponent extends Component {
     return this.init(ContentSliderComponent.observedAttributes);
   }
 
-  protected async init(observedAttributes: string[]) {
-    return super.init(observedAttributes).then((view) => {
-      return view;
-    });
-  }
-
-  protected async beforeBind() {
-    await super.beforeBind();
-    this.debug("beforeBind", this.scope);
-  }
-
   protected initItems() {
     const items = this.el.querySelectorAll(".content-slider-item");
     if (!items) {
       throw new Error("No required items found!");
     }
     this.scope.elementCount = items.length;
-    this.scope.currentElement = 0;
+    this.scope.currentIndex = 0;
 
     for (let i = 0; i < this.scope.elementCount; i++) {
       const item = items[i];
       this.setInactiveClasses(item);
     }
 
-    this.goTo(this.scope.currentElement);
+    this.goTo(this.scope.currentIndex);
   }
 
   protected async afterBind() {
@@ -158,12 +145,12 @@ export class ContentSliderComponent extends Component {
   }
 
   public next() {
-    const newActiveIndex = this.scope.currentElement + 1;
+    const newActiveIndex = this.scope.currentIndex + 1;
     this.goTo(newActiveIndex);
   }
 
   public previous() {
-    const newActiveIndex = this.scope.currentElement - 1;
+    const newActiveIndex = this.scope.currentIndex - 1;
     this.goTo(newActiveIndex);
   }
 
@@ -191,8 +178,7 @@ export class ContentSliderComponent extends Component {
       console.warn("No new active item found!");
     }
 
-    this.scope.currentElement = newActiveIndex;
-    console.log("previous", this.scope.currentElement);
+    this.scope.currentIndex = newActiveIndex;
     this.updateContent();
   }
 
@@ -206,9 +192,6 @@ export class ContentSliderComponent extends Component {
       this.el
         .querySelector(".content-slider-item:not(.active)")
         ?.getBoundingClientRect().width || 0;
-
-    console.log("activeItemWidth", this.scope.activeItemWidth);
-    console.log("inactiveItemWidth", this.scope.inactiveItemWidth);
   }
 
   protected getTranslateXForIndex(positionIndex: number) {
@@ -236,27 +219,19 @@ export class ContentSliderComponent extends Component {
   }
 
   public updateContent() {
-    console.log(this.scope.currentElement);
+    console.log(this.scope.currentIndex);
 
     if (!this.contentSliderEl) {
       throw new Error("Missing element with selector .content-slider!");
     }
 
-    // (this.el.querySelector(".content-slider") as HTMLElement).style.transform =
-    //   "translateX(calc(calc(" +
-    //   this.scope.currentElement +
-    //   " * -20%) - calc(" +
-    //   this.scope.currentElement +
-    //   " * 20%)))";
-
-    const x = this.getTranslateXForIndex(this.scope.currentElement);
+    const x = this.getTranslateXForIndex(this.scope.currentIndex);
 
     this.contentSliderEl.style.transform = `translateX(-${x}px)`;
 
     this.scope.currentContent = this.getItemElementByIndex(
-      this.scope.currentElement
+      this.scope.currentIndex
     ).children[0].innerHTML;
-    //console.log("translateX(calc(calc(" + this.scope.currentElement + " * -20vw) - calc(" + this.scope.currentElement + " * 1vw))");
   }
 
   protected template() {
