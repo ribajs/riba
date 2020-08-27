@@ -1,59 +1,113 @@
-<br>
-<div class="content-slider-container">
-        
-    <div class="content-slider-buttons" style='position:absolute; z-index: 100000'>
-        <button id="previous" rv-on-click="previous" id="prev" rv-disabled='currentElement | eq 0'> &lt; </button>
-        <button id="next" rv-on-click="next" id="next" rv-disabled="currentElement | plus 1 | eq elementCount"> &gt; </button>
+    
+
+<div class="row">
+    <div class="content-slider-buttons">
+        <button class="previous" rv-on-click="previous" rv-disabled='currentElement | eq 0'> &lt; </button>
+        <button class="next" rv-on-click="next" rv-disabled="currentElement | plus 1 | eq elementCount"> &gt; </button>
     </div>
+    <div class="content-slider-capture col" rv-html="currentContent"></div>
+    <div class="content-slider-container col-12">
+        <div class="content-slider row flex-nowrap align-items-end">
 
-    <div class="content-slider">
-
-        <div class="content-slider-active">
-            <img class="_embed-responsive-item" src="https://scontent.xx.fbcdn.net/v/t1.0-9/s720x720/118282407_3227537077294743_5263850460302516085_n.jpg?_nc_cat=110&_nc_sid=b386c4&_nc_ohc=u3EZQaK6UVUAX-H-w43&_nc_ht=scontent.xx&tp=7&oh=99061f7ce34fa738477c117ac815b3c7&oe=5F6B79F8">
-            <aside>
-                <p>
-                    21.12.2020 17:00:00-20:00:00<br>
-                    Super Duper Public TEST Event No.2<br>
-                    Super Duper Public TEST Event No.2<br>
-                    <a href="https://facebook.com/events/892663447913817" target="_blank">open on facebook </a>
-                </p>
-            </aside>
+            <div class="content-slider-item d-flex justify-content-center align-items-end">
+                <aside class="item-capture">
+                    <p>
+                        21.12.2020 17:00:00-20:00:00<br>
+                        Super Duper Public TEST Event No.2<br>
+                        Super Duper Public TEST Event No.2<br>
+                        <a href="https://facebook.com/events/892663447913817" target="_blank">open on facebook </a>
+                    </p>
+                </aside>
+                <img src="https://picsum.photos/1600/900">
+            </div>
+            <div class="content-slider-item d-flex justify-content-center align-items-end">
+                <aside class="item-capture">
+                    <p>
+                        21.12.2020 17:00:00-20:00:00<br>
+                        Super Duper Public TEST Event No.3<br>
+                        This is the Event Description<br>
+                        <a href="https://facebook.com/events/338292463830803" target="_blank">open on facebook </a>
+                    </p>
+                </aside>
+                <img src="https://picsum.photos/900/1600">
+            </div>
+            <div class="content-slider-item d-flex justify-content-center align-items-end">
+                <aside class="item-capture">
+                    <p>
+                        23.07.2020 0:00:00-0:00:00<br>
+                        Super Duper Event Tomorrow !<br>
+                        This is teh super duper tomorrow event desciption ! Awesome isn't it ?!<br>
+                        <a href="https://facebook.com/events/581423275833639" target="_blank">open on facebook </a>
+                    </p>
+                </aside>
+                <img src="https://picsum.photos/2000/1000">
+            </div>
+            <div class="content-slider-item d-flex justify-content-center align-items-end">
+                <aside class="item-capture">
+                    <p>
+                        21.07.2020 17:00:00-20:00:00<br>
+                        Super Duper Public TEST Event No.1<br>
+                        Super Duper Public TEST Event No.1 ends on 21 July<br>
+                        <a href="https://facebook.com/events/812527975947375" target="_blank">open on facebook </a>
+                    </p>
+                </aside>
+                <img src="https://picsum.photos/1000/2000">
+            </div>
+            <div class="content-slider-item d-flex justify-content-center align-items-end">
+                <aside class="item-capture">
+                    <p>
+                        21.07.2020 17:00:00-20:00:00<br>
+                        Super Duper Public TEST Event No.4<br>
+                        Super Duper Public TEST Event No.4 ends on 21 July<br>
+                        <a href="https://facebook.com/events/812527975947375" target="_blank">open on facebook </a>
+                    </p>
+                </aside>
+                <img src="https://picsum.photos/1000/1000">
+            </div>
+            <div class="content-slider-item d-flex justify-content-center align-items-end">
+                <aside class="item-capture">
+                    <p>
+                        21.07.2020 17:00:00-20:00:00<br>
+                        Super Duper Public TEST Event No.5<br>
+                        Super Duper Public TEST Event No.5 ends on 21 July<br>
+                        <a href="https://facebook.com/events/812527975947375" target="_blank">open on facebook </a>
+                    </p>
+                </aside>
+                <img src="https://picsum.photos/200/300">
+            </div>
+            <div class="content-slider-item d-flex justify-content-center align-items-end">
+                <aside class="item-capture">
+                    <p>
+                        21.07.2020 17:00:00-20:00:00<br>
+                        Super Duper Public TEST Event No.6<br>
+                        Super Duper Public TEST Event No.6 ends on 21 July<br>
+                        <a href="https://facebook.com/events/812527975947375" target="_blank">open on facebook </a>
+                    </p>
+                </aside>
+                <img src="https://picsum.photos/1200/1800">
+            </div>
+            <div class="content-slider-item d-flex justify-content-center align-items-end">
+                <aside class="item-capture">
+                    <p>
+                        21.07.2020 17:00:00-20:00:00<br>
+                        Super Duper Public TEST Event No.7<br>
+                        Super Duper Public TEST Event No.7 ends on 21 July<br>
+                        <a href="https://facebook.com/events/812527975947375" target="_blank">open on facebook </a>
+                    </p>
+                </aside>
+                <img src="https://picsum.photos/900/600">
+            </div>
+            <div class="content-slider-item d-flex justify-content-center align-items-end">
+                <aside class="item-capture">
+                    <p>
+                        21.07.2020 17:00:00-20:00:00<br>
+                        Super Duper Public TEST Event No.8<br>
+                        Super Duper Public TEST Event No.8 ends on 21 July<br>
+                        <a href="https://facebook.com/events/812527975947375" target="_blank">open on facebook </a>
+                    </p>
+                </aside>
+                <img src="https://picsum.photos/3000/4000">
+            </div>
         </div>
-        <div class="">
-            <img class="_embed-responsive-item" src="https://scontent.xx.fbcdn.net/v/t1.0-9/s720x720/118265696_3230280290353755_4258728521690333310_o.jpg?_nc_cat=102&_nc_sid=b386c4&_nc_ohc=nrDkZHn1yrMAX-PU5BI&_nc_ht=scontent.xx&tp=7&oh=2693f94bef66d384ff2313f50011343b&oe=5F6BC669">
-            <aside>
-                <p>
-                    21.12.2020 17:00:00-20:00:00<br>
-                    Super Duper Public TEST Event No.3<br>
-                    This is the Event Description<br>
-                    <a href="https://facebook.com/events/338292463830803" target="_blank">open on facebook </a>
-                </p>
-            </aside>
-        </div>
-        <div class="">
-            <img class="_embed-responsive-item" src="https://scontent.xx.fbcdn.net/v/t1.0-9/s720x720/118254682_3227540803961037_1792264334697712113_o.jpg?_nc_cat=111&_nc_sid=b386c4&_nc_ohc=CDeBrPtsbQ4AX8_m-dm&_nc_ht=scontent.xx&tp=7&oh=2ebb2431eb9e12449380355fd97634ee&oe=5F6B5C7D">
-            <aside>
-                <p>
-                    23.07.2020 0:00:00-0:00:00<br>
-                    Super Duper Event Tomorrow !<br>
-                    This is teh super duper tomorrow event desciption ! Awesome isn't it ?!<br>
-                    <a href="https://facebook.com/events/581423275833639" target="_blank">open on facebook </a>
-                </p>
-            </aside>
-        </div>
-        <div class="">
-            <img class="_embed-responsive-item" src="https://scontent.xx.fbcdn.net/v/t1.0-0/p180x540/118300817_3227543750627409_1182248381296831906_o.jpg?_nc_cat=104&_nc_sid=b386c4&_nc_ohc=TnBZgtUjTY0AX_WK_3-&_nc_ht=scontent.xx&tp=6&oh=8f322c46a3a2193edf087e7c4fa2a859&oe=5F6B417E">
-            <aside>
-                <p>
-                    21.07.2020 17:00:00-20:00:00<br>
-                    Super Duper Public TEST Event No.1<br>
-                    Super Duper Public TEST Event No.1 ends on 21 July<br>
-                    <a href="https://facebook.com/events/812527975947375" target="_blank">open on facebook </a>
-                </p>
-            </aside>
-        </div>
-
-    </div>
-
- 
+     </div>
 </div>

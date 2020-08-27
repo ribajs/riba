@@ -1,58 +1,57 @@
-.content-slider-container
-{
-  .content-slider-buttons
-  {
-    //margin-top: 500px;
-    #previous
-    {
-      
+$content-slider-height: 500px;
+$capture-height: 200px;
+
+content-slider {
+  height: $content-slider-height;
+  min-height: $content-slider-height;
+
+  .content-slider-buttons, .content-slider-capture {
+    position: relative;
+    height: $content-slider-height;
+    top: $content-slider-height;
+  }
+  .content-slider-buttons {
+    z-index: 1;
+    .previous, .next {
+      position: absolute;
+      top: 50%;
     }
-    #next
-    {
-      //margin-left:2vw;
+    .previous {
+      left: 0;
+    }
+    .next {
+      right: 0;
     }
   }
-  .content-slider{
-    display:inline-flex;
-    align-items: flex-end;
-    height: 90vh;
-    transition: transform 0.2s ease-in-out;
-    div
-    {
-      aside
-      {
-        //transition: all 0.2s ease-in-out;
-        //display:none;
-        opacity:0;
-      }
-    }
-    img {
-      width: 20vw;
-      height: 60vh;
-      object-fit: contain;
-      background-color: antiquewhite;
-      transition: all 0.2s ease-in-out;
-      margin: 0 1vw;
-    }
-    .content-slider-active
-    {
-      img {
-        background-color: red;
-        width: 30vw;
-        max-width: 30vw;
-        height: 84vh;
-        margin-left: 0;
-      }
-      aside
-      {
-        //transition: all 0.2s ease-in-out;
-        transform: translate(103%, -993%);
-        //display:block;
-        opacity:1;
-      }
 
+  .content-slider-container {
+    overflow: hidden;
+    .content-slider {
+      overflow: visible;
+      transition: transform 0.2s ease-in-out;
+        max-height: $content-slider-height;
+        height: $content-slider-height;
+      .content-slider-item {
+        background-color: antiquewhite;
+        transition: all 0.2s ease-in-out;
+        &.active {
+          background-color: red;
+          height: $content-slider-height;
+        }
+        &:not(.active) {
+          height: $content-slider-height - $capture-height;
+        }
+        img {
+          width: 100%;
+          max-width: 100%;
+          height: auto;
+          max-height: 100%;
+          object-fit: contain;        
+        }
+        .item-capture {
+          display: none;
+        }
+      }
     }
-    
   }
-
 }
