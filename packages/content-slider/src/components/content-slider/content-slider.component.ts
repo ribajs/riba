@@ -91,12 +91,12 @@ export class ContentSliderComponent extends Component {
     }
 
     this.el
-      .querySelector(".vanilla_js_active")
-      ?.classList.remove("vanilla_js_active");
+      .querySelector(".content-slider-active")
+      ?.classList.remove("content-slider-active");
     this.el
       .querySelector(".content-slider")
       ?.children[this.scope.currentElement + 1].classList.add(
-        "vanilla_js_active"
+        "content-slider-active"
       );
     this.scope.currentElement++;
     console.log("next", this.scope.currentElement);
@@ -109,26 +109,27 @@ export class ContentSliderComponent extends Component {
     }
 
     this.el
-      .querySelector(".vanilla_js_active")
-      ?.classList.remove("vanilla_js_active");
+      .querySelector(".content-slider-active")
+      ?.classList.remove("content-slider-active");
     this.el
       .querySelector(".content-slider")
       ?.children[this.scope.currentElement - 1].classList.add(
-        "vanilla_js_active"
+        "content-slider-active"
       );
     this.scope.currentElement--;
     console.log("previous", this.scope.currentElement);
-    console.log("check 1 2 3 4 5");
     this.updateContent();
   }
 
   public updateContent() {
+    console.log(this.scope.currentElement);
+
     (this.el.querySelector(".content-slider") as HTMLElement).style.transform =
       "translateX(calc(calc(" +
       this.scope.currentElement +
       " * -20vw) - calc(" +
       this.scope.currentElement +
-      " * 1vw))";
+      " * 2vw)))";
 
     this.scope.currentContent = this.el.querySelector(
       ".content-sliderls"
@@ -147,3 +148,7 @@ export class ContentSliderComponent extends Component {
     }
   }
 }
+
+/*
+translateX(calc( calc(0 * -20vw) - calc( this.scope.currentElement * 2vw)));
+*/
