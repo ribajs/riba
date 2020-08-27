@@ -7,30 +7,7 @@
                     <div style='position:absolute; z-index: 100000'>
                         <button rv-on-click="previous" id="prev" rv-disabled='currentElement | eq 0'> &lt; </button><button rv-on-click="next" id="next" rv-disabled="currentElement | plus 1 | eq elementCount"> &gt; </button>
                     </div>
-                  
-                    <style>
-                        .content-slider{
-                            display:inline-flex;
-                            align-items: flex-end;
-                            height: 90vh;
-                            transition: transform 0.2s ease-in-out;
-                        }
-                        .content-slider img {
-                            width: 20vw;
-                            height: 60vh;
-                            object-fit: contain;
-                            background-color: antiquewhite;
-                            transition: all 0.2s ease-in-out;
-                            margin: 0 1vw;
-                        }
-                        .content-slider .content-slider-active img {
-                            background-color: red;
-                            width: 30vw;
-                            max-width: 30vw;
-                            height: 90vh;
-                            margin-left: 0;
-                        }
-                    </style>
+
                     <div class="content-slider">
                         <div class="content-slider-active">
                             <aside style="display:none">
