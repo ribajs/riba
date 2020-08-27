@@ -1,7 +1,6 @@
 import { Component } from "@ribajs/core";
 
 import template from "./content-slider.component.html";
-import buttonsTemplate from "./content-slider-buttons.component.html";
 
 interface Scope {
   hello?: string;
