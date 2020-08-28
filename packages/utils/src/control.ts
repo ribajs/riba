@@ -60,7 +60,7 @@ export const throttle = (fn: (...params: any) => any, wait = 100) => {
   return (...params) => {
     if (timerId === null) {
       timerId = window.setTimeout(() => {
-        fn.apply(this, params);
+        fn(...params);
         timerId = null;
       }, wait);
     }

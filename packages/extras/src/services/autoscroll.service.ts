@@ -1,5 +1,6 @@
 import { Utils as ExtraUtils } from "./utils.service";
 import { Gameloop } from "./gameloop.service";
+import { throttle, debounce } from "@ribajs/utils/src/control";
 
 export interface AutoscrollOptions {
   angle?: "vertical" | "horizontal";
@@ -192,12 +193,18 @@ export class Autoscroll {
   }
 
   protected onResize() {
-    this.limit = this.getLimit(this.el);
-    this.resume(200);
+    throttle(() => {
+      this.limit = this.getLimit(this.el);
+      this.resume(200);
+    })();
   }
 
   protected onScroll() {
-    this.stopResumeTimeout();
+    throttle(() => {
+      debounce(() => {
+        this.stopResumeTimeout();
+      })();
+    })();
   }
 
   protected stopResumeTimeout() {

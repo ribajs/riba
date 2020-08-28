@@ -69,18 +69,15 @@ export class ContentSliderComponent extends Component {
   }
 
   protected onResize() {
-    this.debug("onResize");
-    this.getItemWidths();
-    this.updateContent();
+    throttle(() => {
+      this.debug("onResize");
+      this.getItemWidths();
+      this.updateContent();
+    })();
   }
 
   protected initEventListeners() {
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        this.onResize();
-      })
-    );
+    window.addEventListener("resize", this.onResize.bind(this));
   }
 
   protected async afterBind() {

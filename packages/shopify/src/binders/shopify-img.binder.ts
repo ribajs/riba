@@ -1,6 +1,6 @@
 import { Binder } from "@ribajs/core";
 import { getViewportDimensions } from "@ribajs/utils/src/dom";
-
+import { throttle } from "@ribajs/utils/src/control";
 import { imgUrlFormatter } from "../formatters/img-url.formatter";
 import "./ResizeObserver.d";
 
@@ -58,16 +58,18 @@ export const shopifyImgBinder: Binder<string> = {
         }
       },
       onResize: () => {
-        const currentImageWidth = el.offsetWidth;
-        const currentSrcset = (el as HTMLImageElement).srcset;
-        if (
-          this.customData.oldImageWidth + PX_OFFSET < currentImageWidth &&
-          currentImageWidth > 0 &&
-          !currentSrcset.includes(`${currentImageWidth}w`)
-        ) {
-          this.customData.setSrcset(currentImageWidth);
-          this.customData.oldImageWidth = currentImageWidth;
-        }
+        throttle(() => {
+          const currentImageWidth = el.offsetWidth;
+          const currentSrcset = (el as HTMLImageElement).srcset;
+          if (
+            this.customData.oldImageWidth + PX_OFFSET < currentImageWidth &&
+            currentImageWidth > 0 &&
+            !currentSrcset.includes(`${currentImageWidth}w`)
+          ) {
+            this.customData.setSrcset(currentImageWidth);
+            this.customData.oldImageWidth = currentImageWidth;
+          }
+        })();
       },
     };
     if ((window as any).ResizeObserver) {

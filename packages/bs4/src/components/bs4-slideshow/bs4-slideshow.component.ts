@@ -2,6 +2,7 @@ import { TemplatesComponent } from "../templates/templates.component";
 import { EventDispatcher } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { clone, camelCase } from "@ribajs/utils/src/type";
+import { throttle, debounce } from "@ribajs/utils/src/control";
 
 import {
   Dragscroll,
@@ -676,16 +677,19 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   }
 
   protected onViewChanges() {
-    const newBreakpoint = this.getBreakpoint();
-    if (newBreakpoint !== this.breakpoint) {
-      this.breakpoint = newBreakpoint;
-      this.onBreakpointChanges();
-    }
-    this.setSlidePositions();
-    const index = this.setCenteredSlideActive();
-    if (this.scope.sticky) {
-      this.goTo(index);
-    }
+    throttle(() => {
+      console.debug("onViewChanges");
+      const newBreakpoint = this.getBreakpoint();
+      if (newBreakpoint !== this.breakpoint) {
+        this.breakpoint = newBreakpoint;
+        this.onBreakpointChanges();
+      }
+      this.setSlidePositions();
+      const index = this.setCenteredSlideActive();
+      if (this.scope.sticky) {
+        this.goTo(index);
+      }
+    })();
   }
 
   protected onVisibilityChanged(event: CustomEvent) {
@@ -696,9 +700,13 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   }
 
   protected onScroll() {
-    // this.setSlidePositions();
-    // this.setCenteredSlideActive();
-    this.resume(1000);
+    throttle(() => {
+      debounce(() => {
+        // this.setSlidePositions();
+        // this.setCenteredSlideActive();
+        this.resume(1000);
+      })();
+    })();
   }
 
   protected onScrollend() {
@@ -721,7 +729,11 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   }
 
   protected onMouseUp() {
-    this.resume(1000);
+    throttle(() => {
+      debounce(() => {
+        this.resume(1000);
+      })();
+    })();
   }
 
   /** Resume if this method was not called up for [delay] milliseconds */
@@ -753,9 +765,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
     this.routerEvents.on("newPageReady", this.onBreakpointChanges.bind(this));
 
-    window.addEventListener("resize", this.onViewChanges.bind(this), {
-      passive: true,
-    });
+    window.addEventListener("resize", this.onViewChanges.bind(this));
 
     // Custom event triggered by some parent components when this component changes his visibility, e.g. triggered in the bs4-tabs component
     this.el.addEventListener(
@@ -819,7 +829,8 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   }
 
   protected removeEventListeners() {
-    window.removeEventListener("resize", this.onViewChanges.bind(this));
+    // TODO is this removing other throttled resize event listeners?
+    window.removeEventListener("resize", this.onViewChanges(this));
 
     this.el.removeEventListener(
       "visibility-changed" as any,
