@@ -1,4 +1,5 @@
 import { Utils } from "./utils.service";
+import { throttle } from "@ribajs/utils/src/control";
 
 export interface DragscrollOptions {
   detectGlobalMove?: boolean;
@@ -33,7 +34,12 @@ export class Dragscroll {
       passive: true,
     });
 
-    window.addEventListener("resize", this.checkDraggable.bind(this));
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        this.checkDraggable.bind(this);
+      })()
+    );
 
     // Use global move if your element does not use the full width / height
     if (this.options.detectGlobalMove) {

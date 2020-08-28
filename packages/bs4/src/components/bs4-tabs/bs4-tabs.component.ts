@@ -3,6 +3,7 @@ import templateHorizontal from "./bs4-tabs-horizontal.component.html";
 import templateVertical from "./bs4-tabs-vertical.component.html";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { TemplatesComponent } from "../templates/templates.component";
+import { throttle } from "@ribajs/utils/src/control";
 
 export interface Tab {
   title: string;
@@ -289,13 +290,14 @@ export class Bs4TabsComponent extends TemplatesComponent {
       });
     }
 
+    const onResize = () => {
+      throttle(this.onResizeEventHandler.bind(this))();
+    };
+
     if (this.scope.optionTabsAutoHeight) {
-      window.removeEventListener(
-        "resize",
-        this.onResizeEventHandler.bind(this)
-      );
-      window.addEventListener("resize", this.onResizeEventHandler.bind(this));
-      this.setHeight();
+      window.removeEventListener("resize", onResize);
+      window.addEventListener("resize", onResize);
+      this.onResizeEventHandler();
     }
   }
 
