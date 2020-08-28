@@ -52,25 +52,11 @@ export class PdfFormFieldsComponent extends Component {
   }
 
   protected async afterBind() {
-    console.debug("afterBind", this.scope);
+    this.debug("afterBind", this.scope);
   }
 
   protected requiredAttributes() {
     return ["src"];
-  }
-
-  protected parsedAttributeChangedCallback(
-    attributeName: string,
-    oldValue: any,
-    newValue: any,
-    namespace: string | null
-  ) {
-    super.parsedAttributeChangedCallback(
-      attributeName,
-      oldValue,
-      newValue,
-      namespace
-    );
   }
 
   // deconstructor
@@ -81,7 +67,7 @@ export class PdfFormFieldsComponent extends Component {
   protected template() {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this.el)) {
-      console.debug("Do not use template, because element has child nodes");
+      this.debug("Do not use template, because element has child nodes");
       return null;
     } else {
       return template;

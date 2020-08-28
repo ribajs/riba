@@ -28,30 +28,8 @@ export class TaggedImageExampleComponent extends Component {
     });
   }
 
-  protected async beforeBind() {
-    await super.beforeBind();
-  }
-
-  protected async afterBind() {
-    await super.afterBind();
-  }
-
   protected requiredAttributes() {
     return [];
-  }
-
-  protected parsedAttributeChangedCallback(
-    attributeName: string,
-    oldValue: any,
-    newValue: any,
-    namespace: string | null
-  ) {
-    super.parsedAttributeChangedCallback(
-      attributeName,
-      oldValue,
-      newValue,
-      namespace
-    );
   }
 
   // deconstructor
