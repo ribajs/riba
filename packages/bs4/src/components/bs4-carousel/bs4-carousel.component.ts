@@ -134,15 +134,6 @@ export class Bs4CarouselComponent extends Component {
     }
   }
 
-  public attributeChangedCallback(
-    name: string,
-    oldValue: any,
-    newValue: any,
-    namespace: string | null
-  ) {
-    super.attributeChangedCallback(name, oldValue, newValue, namespace);
-  }
-
   protected connectedCallback() {
     super.connectedCallback();
   }

@@ -122,10 +122,6 @@ export class Bs4ContentsComponent extends Component {
     });
   }
 
-  protected async beforeBind() {
-    await super.beforeBind();
-  }
-
   protected async afterBind() {
     await super.afterBind();
     if (
