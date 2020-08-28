@@ -2,5 +2,5 @@
 module.exports = {
   root: true,
   extends: ["@ribajs"],
-  ignorePatterns: ["**/*.bundle.js", "src/lib/*/files/*"],
+  ignorePatterns: ["**/*.bundle.js", "src/lib/**/files/*", "**/__name__.*"],
 };
