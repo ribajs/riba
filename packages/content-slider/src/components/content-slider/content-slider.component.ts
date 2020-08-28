@@ -24,7 +24,7 @@ export class ContentSliderComponent extends Component {
   protected contentSliderEl: HTMLElement | null = null;
 
   static get observedAttributes() {
-    return [];
+    return ["active-class", "active-column-classes", "inactive-column-classes"];
   }
 
   protected scope: Scope = {
@@ -88,17 +88,22 @@ export class ContentSliderComponent extends Component {
     this.initItems();
   }
 
-  protected requiredAttributes() {
-    return [];
-  }
-
-  protected parsedAttributeChangedCallback(
+  protected attributeChangedCallback(
     attributeName: string,
     oldValue: any,
     newValue: any,
     namespace: string | null
   ) {
-    return super.parsedAttributeChangedCallback(
+    //E.g. transform "col-2 col-md-4" to ["col-2", "col-md-4"]
+    if (
+      attributeName === "active-column-classes" ||
+      attributeName === "inactive-column-classes"
+    ) {
+      if (newValue === "string") {
+        newValue = newValue.split(" ");
+      }
+    }
+    return super.attributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
@@ -106,9 +111,8 @@ export class ContentSliderComponent extends Component {
     );
   }
 
-  // deconstructor
-  protected disconnectedCallback() {
-    return super.disconnectedCallback();
+  protected requiredAttributes() {
+    return [];
   }
 
   protected getItemElementByIndex(index: number) {
@@ -237,7 +241,7 @@ export class ContentSliderComponent extends Component {
   protected template() {
     // Only set the component template if there no childs already
     if (this.el.hasChildNodes()) {
-      this.debug("Do not use template, because element has child nodes");
+      this.debug("Don't use the template, because element has child nodes");
       return null;
     } else {
       this.debug("Use template", template);
