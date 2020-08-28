@@ -24,7 +24,10 @@ export const deferred = () => {
 
 /**
  * The debounce function receives our function as a parameter
+ * It is recommended to use this method for scroll events, but the event should still be passive
+ * This method uses uses internaly the requestAnimationFrame method
  * @see https://css-tricks.com/styling-based-on-scroll-position/
+ * @see https://www.telerik.com/blogs/debouncing-and-throttling-in-javascript
  */
 export const debounce = (fn: (...params: any) => any) => {
   // This holds the requestAnimationFrame reference, so we can cancel it if we wish
@@ -42,5 +45,24 @@ export const debounce = (fn: (...params: any) => any) => {
       // Call our function and pass any params we received
       fn(...params);
     });
+  };
+};
+
+/**
+ * The throttle function receives our function as a parameter
+ * It is recommended to use this method for resize events
+ * Throttling is a technique in which, no matter how many times the user fires the event, the attached function will be executed only once in a given time interval.
+ * @see https://www.telerik.com/blogs/debouncing-and-throttling-in-javascript
+ * @see https://gist.github.com/peduarte/969217eac456538789e8fac8f45143b4
+ */
+export const throttle = (fn: (...params: any) => any, wait = 100) => {
+  let timerId: number | null = null;
+  return (...params) => {
+    if (timerId === null) {
+      timerId = window.setTimeout(() => {
+        fn.apply(this, params);
+        timerId = null;
+      }, wait);
+    }
   };
 };

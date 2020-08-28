@@ -1,4 +1,5 @@
 import { Component } from "@ribajs/core";
+import { throttle } from "@ribajs/utils/src/control";
 
 import template from "./content-slider.component.html";
 
@@ -67,6 +68,21 @@ export class ContentSliderComponent extends Component {
     this.goTo(this.scope.currentIndex);
   }
 
+  protected onResize() {
+    this.debug("onResize");
+    this.getItemWidths();
+    this.updateContent();
+  }
+
+  protected initEventListeners() {
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        this.onResize();
+      })
+    );
+  }
+
   protected async afterBind() {
     await super.afterBind();
     this.debug("afterBind", this.scope);
@@ -86,6 +102,7 @@ export class ContentSliderComponent extends Component {
     }
 
     this.initItems();
+    this.initEventListeners();
   }
 
   protected attributeChangedCallback(
@@ -164,6 +181,8 @@ export class ContentSliderComponent extends Component {
       return;
     }
 
+    this.debug("goTo");
+
     this.getItemWidths();
 
     const oldActiveItem = this.el.querySelector(".active");
@@ -173,8 +192,6 @@ export class ContentSliderComponent extends Component {
     } else {
       console.warn("No old active item found!");
     }
-
-    newActiveItem.classList.add("active");
 
     if (newActiveItem) {
       this.setActiveClasses(newActiveItem);
@@ -196,34 +213,20 @@ export class ContentSliderComponent extends Component {
       this.el
         .querySelector(".content-slider-item:not(.active)")
         ?.getBoundingClientRect().width || 0;
+
+    this.debug("getItemWidths activeItemWidth: ", this.scope.activeItemWidth);
+    this.debug(
+      "getItemWidths inactiveItemWidth: ",
+      this.scope.inactiveItemWidth
+    );
   }
 
   protected getTranslateXForIndex(positionIndex: number) {
-    this.scope.activeItemWidth =
-      this.el
-        .querySelector(".content-slider-item.active")
-        ?.getBoundingClientRect().width || 0;
-
-    this.scope.inactiveItemWidth =
-      this.el
-        .querySelector(".content-slider-item:not(.active)")
-        ?.getBoundingClientRect().width || 0;
-
-    if (positionIndex <= 0) {
-      return 0;
-    } else if (positionIndex === 1) {
-      return this.scope.activeItemWidth;
-    } else if (positionIndex > 1) {
-      return (
-        this.scope.activeItemWidth +
-        this.scope.inactiveItemWidth * (positionIndex - 1)
-      );
-    }
-    return 0;
+    return this.scope.inactiveItemWidth * positionIndex;
   }
 
   public updateContent() {
-    console.log(this.scope.currentIndex);
+    this.debug("updateContent", this.scope.currentIndex);
 
     if (!this.contentSliderEl) {
       throw new Error("Missing element with selector .content-slider!");

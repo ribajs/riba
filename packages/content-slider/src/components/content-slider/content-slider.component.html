@@ -2,8 +2,8 @@
 
 <div class="row">
     <div class="content-slider-buttons">
-        <button class="previous" rv-on-click="previous" rv-disabled='currentElement | eq 0'> &lt; </button>
-        <button class="next" rv-on-click="next" rv-disabled="currentElement | plus 1 | eq elementCount"> &gt; </button>
+        <button class="previous" rv-on-click="previous" rv-disabled='currentIndex | eq 0'> &lt; </button>
+        <button class="next" rv-on-click="next" rv-disabled="currentIndex | plus 1 | eq elementCount"> &gt; </button>
     </div>
     <div class="content-slider-capture col" rv-html="currentContent"></div>
     <div class="content-slider-container col-12">
