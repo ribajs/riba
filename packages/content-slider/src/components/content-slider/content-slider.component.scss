@@ -6,15 +6,18 @@ content-slider {
   min-height: $content-slider-height;
 
   .content-slider-buttons, .content-slider-capture {
-    position: relative;
+    // position: relative;
     height: $content-slider-height;
-    top: $content-slider-height;
+    // top: $content-slider-height;
+    margin-top: -$content-slider-height;
   }
   .content-slider-buttons {
     z-index: 1;
+    pointer-events: none;
     .previous, .next {
       position: absolute;
       top: 50%;
+      pointer-events: all;
     }
     .previous {
       left: 0;
@@ -22,6 +25,10 @@ content-slider {
     .next {
       right: 0;
     }
+  }
+  .content-slider-capture {
+    max-height: $capture-height;
+    overflow-y: auto;
   }
 
   .content-slider-container {
