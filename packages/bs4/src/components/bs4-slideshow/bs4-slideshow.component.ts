@@ -830,7 +830,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   protected removeEventListeners() {
     // TODO is this removing other throttled resize event listeners?
-    window.removeEventListener("resize", this.onViewChanges(this));
+    window.removeEventListener("resize", this.onViewChanges.bind(this));
 
     this.el.removeEventListener(
       "visibility-changed" as any,
