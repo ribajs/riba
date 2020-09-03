@@ -57,7 +57,7 @@ export interface Scope {
 
 export class Bs4FormComponent extends Component {
   public static tagName = "bs4-form";
-  public _debug = true;
+  public _debug = false;
   protected autobind = true;
 
   static get observedAttributes() {

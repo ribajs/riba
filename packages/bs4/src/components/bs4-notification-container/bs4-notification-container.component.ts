@@ -15,7 +15,7 @@ export class Bs4NotificationContainerComponent extends Component {
   public static tagName = "bs4-notification-container";
 
   protected autobind = true;
-  public _debug = true;
+  public _debug = false;
 
   protected notificationDispatcher?: EventDispatcher;
 
