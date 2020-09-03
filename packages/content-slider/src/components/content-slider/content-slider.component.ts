@@ -6,6 +6,8 @@ import template from "./content-slider.component.html";
 interface Scope {
   currentIndex: number;
   currentPosition: number;
+  offset: string;
+  transform: string;
   previous: ContentSliderComponent["previous"];
   next: ContentSliderComponent["next"];
   elementCount: number;
@@ -22,15 +24,20 @@ export class ContentSliderComponent extends Component {
 
   protected autobind = true;
 
-  protected contentSliderEl: HTMLElement | null = null;
-
   static get observedAttributes() {
-    return ["active-class", "active-column-classes", "inactive-column-classes"];
+    return [
+      "active-class",
+      "active-column-classes",
+      "inactive-column-classes",
+      "offset",
+    ];
   }
 
   protected scope: Scope = {
     currentIndex: 0,
     currentPosition: 0,
+    offset: "100px",
+    transform: "translateX(0)",
     previous: this.previous,
     next: this.next,
     elementCount: 0,
@@ -53,7 +60,7 @@ export class ContentSliderComponent extends Component {
   }
 
   protected initItems() {
-    const items = this.el.querySelectorAll(".content-slider-item");
+    const items = this.el.querySelectorAll(".item");
     if (!items) {
       throw new Error("No required items found!");
     }
@@ -83,16 +90,8 @@ export class ContentSliderComponent extends Component {
   protected async afterBind() {
     await super.afterBind();
     this.debug("afterBind", this.scope);
-    this.contentSliderEl = this.el.querySelector<HTMLElement>(
-      ".content-slider"
-    );
-    if (!this.contentSliderEl) {
-      throw new Error("Missing element with selector .content-slider!");
-    }
 
-    const contentInfoOffsetEl = this.el.querySelector<HTMLElement>(
-      ".content-slider-buttons"
-    );
+    const contentInfoOffsetEl = this.el.querySelector<HTMLElement>(".controls");
     if (contentInfoOffsetEl) {
       contentInfoOffsetEl.classList.add;
       this.addClasses(contentInfoOffsetEl, this.scope.activeColumnClasses);
@@ -130,7 +129,7 @@ export class ContentSliderComponent extends Component {
   }
 
   protected getItemElementByIndex(index: number) {
-    return this.el.querySelectorAll(".content-slider-item")?.item(index);
+    return this.el.querySelectorAll(".item")?.item(index);
   }
 
   protected addClasses(el: Element, classes: string[]) {
@@ -202,14 +201,11 @@ export class ContentSliderComponent extends Component {
 
   protected getItemWidths() {
     this.scope.activeItemWidth =
-      this.el
-        .querySelector(".content-slider-item.active")
-        ?.getBoundingClientRect().width || 0;
+      this.el.querySelector(".item.active")?.getBoundingClientRect().width || 0;
 
     this.scope.inactiveItemWidth =
-      this.el
-        .querySelector(".content-slider-item:not(.active)")
-        ?.getBoundingClientRect().width || 0;
+      this.el.querySelector(".item:not(.active)")?.getBoundingClientRect()
+        .width || 0;
 
     this.debug("getItemWidths activeItemWidth: ", this.scope.activeItemWidth);
     this.debug(
@@ -225,13 +221,9 @@ export class ContentSliderComponent extends Component {
   public updateContent() {
     this.debug("updateContent", this.scope.currentIndex);
 
-    if (!this.contentSliderEl) {
-      throw new Error("Missing element with selector .content-slider!");
-    }
-
     const x = this.getTranslateXForIndex(this.scope.currentIndex);
 
-    this.contentSliderEl.style.transform = `translateX(-${x}px)`;
+    this.scope.transform = `translateX(-${x}px)`;
 
     this.scope.currentContent = this.getItemElementByIndex(
       this.scope.currentIndex

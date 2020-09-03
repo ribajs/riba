@@ -1,17 +1,16 @@
-$content-slider-height: 500px;
-$capture-height: 200px;
+$content-slider-height: 800px;
+$capture-height: 300px;
+$active-item-additional-height: 30px;
 
 content-slider {
   height: $content-slider-height;
   min-height: $content-slider-height;
 
-  .content-slider-buttons, .content-slider-capture {
-    // position: relative;
+  .controls, .capture {
     height: $content-slider-height;
-    // top: $content-slider-height;
     margin-top: -$content-slider-height;
   }
-  .content-slider-buttons {
+  .controls {
     z-index: 1;
     pointer-events: none;
     .previous, .next {
@@ -26,24 +25,27 @@ content-slider {
       right: 0;
     }
   }
-  .content-slider-capture {
+  .capture {
     max-height: $capture-height;
     overflow-y: auto;
   }
 
-  .content-slider-container {
-    overflow: hidden;
-    .content-slider {
-      overflow: visible;
+  .wrapper {
+    overflow-x: hidden;
+    .slider {
+      overflow-x: visible;
       transition: transform 0.2s ease-in-out;
-        max-height: $content-slider-height;
-        height: $content-slider-height;
-      .content-slider-item {
-        background-color: antiquewhite;
+      max-height: $content-slider-height;
+      height: $content-slider-height;
+      .item {
+        // background-color: antiquewhite;
         transition: all 0.2s ease-in-out;
         &.active {
-          background-color: red;
-          height: $content-slider-height;
+          // background-color: red;
+          height: $content-slider-height + $active-item-additional-height;
+          // transform: scale(1.1);
+          margin-bottom: -$active-item-additional-height;
+          z-index: 1;
         }
         &:not(.active) {
           height: $content-slider-height - $capture-height;
