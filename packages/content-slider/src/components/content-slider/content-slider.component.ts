@@ -64,16 +64,16 @@ export class ContentSliderComponent extends TemplatesComponent {
     activeClass: "active",
     activeColumnClasses: [
       "col-10",
-      "col-sm-8",
+      "col-sm-10",
       "col-md-6",
       "col-lg-5",
       "col-xl-4",
     ],
     inactiveColumnClasses: [
       "col-6",
-      "col-sm-5",
-      "col-md-4",
-      "col-lg-3",
+      "col-sm-6",
+      "col-md-2",
+      "col-lg-2",
       "col-xl-2",
     ],
   };

@@ -4,7 +4,6 @@
     <div class="wrapper py-5 col-12">
         <div class="slider row flex-nowrap align-items-end" rv-style-transform="transform">
             <div rv-each-item="items" class="item d-flex justify-content-center align-items-end" rv-on-click="goTo | args item.index">
-                <aside class="item-capture" rv-template="item.content"></aside>
                 <img rv-src="item.imageSrc">
             </div>
         </div>
