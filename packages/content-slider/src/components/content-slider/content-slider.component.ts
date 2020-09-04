@@ -1,17 +1,25 @@
-import { Component } from "@ribajs/core";
+import { TemplatesComponent } from "@ribajs/core";
 import { throttle } from "@ribajs/utils/src/control";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 
 import template from "./content-slider.component.html";
 
+export interface SlideItem {
+  /** Template content is the item capture */
+  content: string;
+  imageSrc: string;
+  active: boolean;
+  index: number;
+}
+
 interface Scope {
+  items: SlideItem[];
   currentIndex: number;
-  currentPosition: number;
-  offset: string;
+  activeItem: SlideItem | null;
   transform: string;
   previous: ContentSliderComponent["previous"];
   next: ContentSliderComponent["next"];
-  elementCount: number;
-  currentContent: string;
+  goTo: ContentSliderComponent["goTo"];
   activeItemWidth: number;
   inactiveItemWidth: number;
   activeClass: string;
@@ -19,34 +27,55 @@ interface Scope {
   inactiveColumnClasses: string[];
 }
 
-export class ContentSliderComponent extends Component {
+export class ContentSliderComponent extends TemplatesComponent {
   public static tagName = "content-slider";
 
   protected autobind = true;
 
+  protected templateAttributes = [
+    {
+      name: "image-src",
+      required: true,
+    },
+    {
+      name: "active",
+      required: false,
+    },
+    {
+      name: "index",
+      required: false,
+    },
+  ];
+
   static get observedAttributes() {
-    return [
-      "active-class",
-      "active-column-classes",
-      "inactive-column-classes",
-      "offset",
-    ];
+    return ["active-class", "active-column-classes", "inactive-column-classes"];
   }
 
   protected scope: Scope = {
+    items: [],
     currentIndex: 0,
-    currentPosition: 0,
-    offset: "100px",
+    activeItem: null,
     transform: "translateX(0)",
     previous: this.previous,
     next: this.next,
-    elementCount: 0,
-    currentContent: "",
+    goTo: this.goTo,
     activeItemWidth: 0,
     inactiveItemWidth: 0,
     activeClass: "active",
-    activeColumnClasses: ["col-8", "col-md-4"],
-    inactiveColumnClasses: ["col-4", "col-md-2"],
+    activeColumnClasses: [
+      "col-10",
+      "col-sm-8",
+      "col-md-6",
+      "col-lg-5",
+      "col-xl-4",
+    ],
+    inactiveColumnClasses: [
+      "col-6",
+      "col-sm-5",
+      "col-md-4",
+      "col-lg-3",
+      "col-xl-2",
+    ],
   };
 
   constructor(element?: HTMLElement) {
@@ -64,10 +93,10 @@ export class ContentSliderComponent extends Component {
     if (!items) {
       throw new Error("No required items found!");
     }
-    this.scope.elementCount = items.length;
-    this.scope.currentIndex = 0;
 
-    for (let i = 0; i < this.scope.elementCount; i++) {
+    this.setActiveItem(0);
+
+    for (let i = 0; i < this.scope.items.length; i++) {
       const item = items[i];
       this.setInactiveClasses(item);
     }
@@ -79,7 +108,7 @@ export class ContentSliderComponent extends Component {
     throttle(() => {
       this.debug("onResize");
       this.getItemWidths();
-      this.updateContent();
+      this.update();
     })();
   }
 
@@ -112,7 +141,7 @@ export class ContentSliderComponent extends Component {
       attributeName === "active-column-classes" ||
       attributeName === "inactive-column-classes"
     ) {
-      if (newValue === "string") {
+      if (typeof newValue === "string") {
         newValue = newValue.split(" ");
       }
     }
@@ -195,17 +224,29 @@ export class ContentSliderComponent extends Component {
       console.warn("No new active item found!");
     }
 
-    this.scope.currentIndex = newActiveIndex;
-    this.updateContent();
+    this.setActiveItem(newActiveIndex);
+    this.update();
+  }
+
+  protected setActiveItem(index: number) {
+    if (this.scope.activeItem) {
+      this.scope.activeItem.active = false;
+    }
+    this.scope.currentIndex = index;
+    this.scope.activeItem = this.scope.items[this.scope.currentIndex];
+    this.scope.activeItem.active = true;
   }
 
   protected getItemWidths() {
     this.scope.activeItemWidth =
-      this.el.querySelector(".item.active")?.getBoundingClientRect().width || 0;
+      this.el
+        .querySelector(`.item.${this.scope.activeClass}`)
+        ?.getBoundingClientRect().width || 0;
 
     this.scope.inactiveItemWidth =
-      this.el.querySelector(".item:not(.active)")?.getBoundingClientRect()
-        .width || 0;
+      this.el
+        .querySelector(`.item:not(.${this.scope.activeClass})`)
+        ?.getBoundingClientRect().width || 0;
 
     this.debug("getItemWidths activeItemWidth: ", this.scope.activeItemWidth);
     this.debug(
@@ -218,26 +259,22 @@ export class ContentSliderComponent extends Component {
     return this.scope.inactiveItemWidth * positionIndex;
   }
 
-  public updateContent() {
-    this.debug("updateContent", this.scope.currentIndex);
+  public update() {
+    this.debug("update", this.scope.currentIndex);
 
     const x = this.getTranslateXForIndex(this.scope.currentIndex);
 
     this.scope.transform = `translateX(-${x}px)`;
-
-    this.scope.currentContent = this.getItemElementByIndex(
-      this.scope.currentIndex
-    ).children[0].innerHTML;
   }
 
   protected template() {
-    // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
-      this.debug("Don't use the template, because element has child nodes");
-      return null;
-    } else {
+    // Only set the component template if there no childs or the childs are templates
+    if (!hasChildNodesTrim(this.el) || this.hasOnlyTemplateChilds()) {
       this.debug("Use template", template);
       return template;
+    } else {
+      this.debug("Don't use the template, because element has child nodes");
+      return null;
     }
   }
 }

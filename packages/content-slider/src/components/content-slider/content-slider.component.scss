@@ -1,6 +1,7 @@
 $content-slider-height: 800px;
 $capture-height: 300px;
 $active-item-additional-height: 30px;
+$content-slider-offset: 50px;
 
 content-slider {
   height: $content-slider-height;
@@ -32,6 +33,9 @@ content-slider {
 
   .wrapper {
     overflow-x: hidden;
+    .slider, .overlay {
+      padding-left: $content-slider-offset;
+    }
     .slider {
       overflow-x: visible;
       transition: transform 0.2s ease-in-out;
@@ -43,7 +47,6 @@ content-slider {
         &.active {
           // background-color: red;
           height: $content-slider-height + $active-item-additional-height;
-          // transform: scale(1.1);
           margin-bottom: -$active-item-additional-height;
           z-index: 1;
         }
