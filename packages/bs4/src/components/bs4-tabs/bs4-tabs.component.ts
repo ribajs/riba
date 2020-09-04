@@ -332,6 +332,9 @@ export class Bs4TabsComponent extends TemplatesComponent {
     }
   }
 
+  /**
+   * Extends TemplatesComponent.transformTemplateAttributes to set the handle by the title if no handle is set
+   */
   protected transformTemplateAttributes(attributes: any, index: number) {
     attributes = super.transformTemplateAttributes(attributes, index);
     if (!attributes.handle && attributes.title) {
