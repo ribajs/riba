@@ -10,8 +10,8 @@
 
         <div class="overlay row">
             <div class="controls">
-                <button class="btn btn-outline-dark rounded-circle previous" rv-on-click="previous" rv-disabled='currentIndex | eq 0'> &lt; </button>
-                <button class="btn btn-outline-dark rounded-circle next" rv-on-click="next" rv-disabled="currentIndex | plus 1 | eq items.length"> &gt; </button>
+                <button class="btn btn-outline-dark rounded-circle previous" rv-on-click="previous" rv-disabled='index | eq 0'> &lt; </button>
+                <button class="btn btn-outline-dark rounded-circle next" rv-on-click="next" rv-disabled="index | plus 1 | eq items.length"> &gt; </button>
             </div>
             <div class="capture col scrollbar-dark" rv-html="activeItem.content"></div>
         </div>

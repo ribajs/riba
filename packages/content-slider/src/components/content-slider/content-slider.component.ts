@@ -14,7 +14,8 @@ export interface SlideItem {
 
 interface Scope {
   items: SlideItem[];
-  currentIndex: number;
+  itemsInitialized: boolean;
+  index: number;
   activeItem: SlideItem | null;
   transform: string;
   previous: ContentSliderComponent["previous"];
@@ -48,12 +49,19 @@ export class ContentSliderComponent extends TemplatesComponent {
   ];
 
   static get observedAttributes() {
-    return ["active-class", "active-column-classes", "inactive-column-classes"];
+    return [
+      "active-class",
+      "active-column-classes",
+      "inactive-column-classes",
+      /** Current / start index, by default 0. You can also change this attribute from outsite to change the current active item */
+      "index",
+    ];
   }
 
   protected scope: Scope = {
     items: [],
-    currentIndex: 0,
+    itemsInitialized: false,
+    index: 0,
     activeItem: null,
     transform: "translateX(0)",
     previous: this.previous,
@@ -89,19 +97,31 @@ export class ContentSliderComponent extends TemplatesComponent {
   }
 
   protected initItems() {
-    const items = this.el.querySelectorAll(".item");
-    if (!items) {
+    const itemElements = this.el.querySelectorAll(".item");
+    if (!itemElements) {
       throw new Error("No required items found!");
     }
 
-    this.setActiveItem(0);
+    this.debug(
+      "initItems",
+      "elements: ",
+      itemElements,
+      "objects: ",
+      this.scope.items
+    );
 
     for (let i = 0; i < this.scope.items.length; i++) {
-      const item = items[i];
-      this.setInactiveClasses(item);
+      const itemEl = itemElements[i];
+      this.setInactiveClasses(itemEl);
     }
 
-    this.goTo(this.scope.currentIndex);
+    this.setActiveItem(this.scope.index);
+    const activeItemEl = this.getItemElementByIndex(this.scope.index);
+    this.setActiveClasses(activeItemEl);
+
+    this.scope.itemsInitialized = true;
+
+    this.goTo(this.scope.index);
   }
 
   protected onResize() {
@@ -145,12 +165,16 @@ export class ContentSliderComponent extends TemplatesComponent {
         newValue = newValue.split(" ");
       }
     }
-    return super.attributeChangedCallback(
+    super.attributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
       namespace
     );
+
+    if (attributeName === "index" && this.scope.itemsInitialized) {
+      this.goTo(this.scope.index);
+    }
   }
 
   protected requiredAttributes() {
@@ -191,26 +215,19 @@ export class ContentSliderComponent extends TemplatesComponent {
   }
 
   public next() {
-    const newActiveIndex = this.scope.currentIndex + 1;
+    const newActiveIndex = this.scope.index + 1;
     this.goTo(newActiveIndex);
   }
 
   public previous() {
-    const newActiveIndex = this.scope.currentIndex - 1;
+    const newActiveIndex = this.scope.index - 1;
     this.goTo(newActiveIndex);
   }
 
   public goTo(newActiveIndex: number) {
-    if (!this.el && this.el !== null) {
-      console.error("Component is not ready!");
-      return;
-    }
-
     this.debug("goTo");
-
     this.getItemWidths();
-
-    const oldActiveItem = this.el.querySelector(".active");
+    const oldActiveItem = this.el.querySelector(`.${this.scope.activeClass}`);
     const newActiveItem = this.getItemElementByIndex(newActiveIndex);
     if (oldActiveItem) {
       this.setInactiveClasses(oldActiveItem);
@@ -232,8 +249,8 @@ export class ContentSliderComponent extends TemplatesComponent {
     if (this.scope.activeItem) {
       this.scope.activeItem.active = false;
     }
-    this.scope.currentIndex = index;
-    this.scope.activeItem = this.scope.items[this.scope.currentIndex];
+    this.scope.index = index;
+    this.scope.activeItem = this.scope.items[this.scope.index];
     this.scope.activeItem.active = true;
   }
 
@@ -260,9 +277,9 @@ export class ContentSliderComponent extends TemplatesComponent {
   }
 
   public update() {
-    this.debug("update", this.scope.currentIndex);
+    this.debug("update", this.scope.index);
 
-    const x = this.getTranslateXForIndex(this.scope.currentIndex);
+    const x = this.getTranslateXForIndex(this.scope.index);
 
     this.scope.transform = `translateX(-${x}px)`;
   }
