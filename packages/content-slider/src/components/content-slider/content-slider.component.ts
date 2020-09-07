@@ -98,7 +98,7 @@ export class ContentSliderComponent extends TemplatesComponent {
 
   protected initItems() {
     const itemElements = this.el.querySelectorAll(".item");
-    if (!itemElements) {
+    if (!itemElements || !itemElements.length) {
       throw new Error("No required items found!");
     }
 
