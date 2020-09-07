@@ -13,18 +13,17 @@ export interface SlideItem {
 }
 
 interface Scope {
+  // States
   items: SlideItem[];
-  itemsInitialized: boolean;
   /** Current / start index, by default 0. You can also change this attribute from outsite to change the current active item */
   index: number;
   activeItem: SlideItem | null;
   transform: string;
-  prev: ContentSliderComponent["prev"];
-  next: ContentSliderComponent["next"];
-  goTo: ContentSliderComponent["goTo"];
   activeItemWidth: number;
   inactiveItemWidth: number;
   activeClass: string;
+
+  // Options
   activeColumnClasses: string[];
   inactiveColumnClasses: string[];
   /** Show controls */
@@ -35,6 +34,11 @@ interface Scope {
   controlNextIconSrc: string;
   /** next or prev control button classes */
   controlsButtonClasses: string;
+
+  // Methods
+  prev: ContentSliderComponent["prev"];
+  next: ContentSliderComponent["next"];
+  goTo: ContentSliderComponent["goTo"];
 }
 
 export class ContentSliderComponent extends TemplatesComponent {
@@ -71,16 +75,15 @@ export class ContentSliderComponent extends TemplatesComponent {
   }
 
   protected scope: Scope = {
+    // States
     items: [],
-    itemsInitialized: false,
     index: 0,
     activeItem: null,
     transform: "translateX(0)",
-    prev: this.prev,
-    next: this.next,
-    goTo: this.goTo,
     activeItemWidth: 0,
     inactiveItemWidth: 0,
+
+    // Options
     activeClass: "active",
     activeColumnClasses: [
       "col-10",
@@ -100,6 +103,11 @@ export class ContentSliderComponent extends TemplatesComponent {
     controlPrevIconSrc: "",
     controlNextIconSrc: "",
     controlsButtonClasses: "btn btn-outline-dark rounded-circle",
+
+    // Methods
+    prev: this.prev,
+    next: this.next,
+    goTo: this.goTo,
   };
 
   constructor(element?: HTMLElement) {
@@ -118,24 +126,10 @@ export class ContentSliderComponent extends TemplatesComponent {
       throw new Error("No required items found!");
     }
 
-    this.debug(
-      "initItems",
-      "elements: ",
-      itemElements,
-      "objects: ",
-      this.scope.items
-    );
-
     for (let i = 0; i < this.scope.items.length; i++) {
       const itemEl = itemElements[i];
       this.setInactiveClasses(itemEl);
     }
-
-    this.setActiveItem(this.scope.index);
-    const activeItemEl = this.getItemElementByIndex(this.scope.index);
-    this.setActiveClasses(activeItemEl);
-
-    this.scope.itemsInitialized = true;
 
     this.goTo(this.scope.index);
 
@@ -194,7 +188,7 @@ export class ContentSliderComponent extends TemplatesComponent {
       namespace
     );
 
-    if (attributeName === "index" && this.scope.itemsInitialized) {
+    if (attributeName === "index") {
       this.goTo(this.scope.index);
     }
   }
@@ -260,13 +254,13 @@ export class ContentSliderComponent extends TemplatesComponent {
     if (oldActiveItem) {
       this.setInactiveClasses(oldActiveItem);
     } else {
-      console.warn("No old active item found!");
+      this.debug("No old active item found!");
     }
 
     if (newActiveItem) {
       this.setActiveClasses(newActiveItem);
     } else {
-      console.warn("No new active item found!");
+      this.debug("No new active item found!");
     }
 
     this.setActiveItem(newActiveIndex);
@@ -278,8 +272,10 @@ export class ContentSliderComponent extends TemplatesComponent {
       this.scope.activeItem.active = false;
     }
     this.scope.index = index;
-    this.scope.activeItem = this.scope.items[this.scope.index];
-    this.scope.activeItem.active = true;
+    this.scope.activeItem = this.scope.items[this.scope.index] || null;
+    if (this.scope.activeItem) {
+      this.scope.activeItem.active = true;
+    }
   }
 
   protected getItemWidths() {
