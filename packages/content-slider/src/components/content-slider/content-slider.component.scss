@@ -101,7 +101,9 @@ content-slider {
           width: 100%;
           max-width: 100%;
           max-height: 100%;
-          object-fit: contain;        
+          object-fit: contain;
+          user-select: none;
+          pointer-events: none;
         }
         .item-capture {
           display: none;
@@ -129,6 +131,7 @@ content-slider {
       }
       .capture {
         overflow-y: auto;
+        user-select: none;
       }
     }
   }

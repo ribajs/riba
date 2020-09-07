@@ -1,16 +1,16 @@
     
 
 <div class="row">
-    <div class="wrapper py-5 col-12">
+    <div class="wrapper py-5 col-12" rv-touch-events rv-on-swipeleft="next" rv-on-swiperight="previous">
         <div class="slider row flex-nowrap align-items-end" rv-style-transform="transform">
-            <div rv-each-item="items" class="item d-flex justify-content-center align-items-end" rv-on-click="goTo | args item.index">
-                <img rv-src="item.imageSrc">
+            <div rv-each-item="items" class="item d-flex justify-content-center align-items-end"  rv-touch-events rv-on-tap="goTo | args item.index">
+                <img rv-src="item.imageSrc" draggable="false">
             </div>
         </div>
 
         <div class="overlay row">
             <div class="controls">
-                <button class="btn btn-outline-dark rounded-circle previous" rv-on-click="previous" rv-disabled='index | eq 0'> &lt; </button>
+                <button class="btn btn-outline-dark rounded-circle previous"rv-on-click="previous" rv-disabled='index | eq 0'> &lt; </button>
                 <button class="btn btn-outline-dark rounded-circle next" rv-on-click="next" rv-disabled="index | plus 1 | eq items.length"> &gt; </button>
             </div>
             <div class="capture col scrollbar-dark" rv-html="activeItem.content"></div>

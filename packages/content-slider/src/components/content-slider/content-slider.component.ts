@@ -221,12 +221,18 @@ export class ContentSliderComponent extends TemplatesComponent {
   }
 
   public next() {
-    const newActiveIndex = this.scope.index + 1;
+    let newActiveIndex = this.scope.index + 1;
+    if (newActiveIndex > this.scope.items.length - 1) {
+      newActiveIndex = 0;
+    }
     this.goTo(newActiveIndex);
   }
 
   public previous() {
-    const newActiveIndex = this.scope.index - 1;
+    let newActiveIndex = this.scope.index - 1;
+    if (newActiveIndex < 0) {
+      newActiveIndex = this.scope.items.length - 1;
+    }
     this.goTo(newActiveIndex);
   }
 
