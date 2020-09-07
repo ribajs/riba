@@ -117,12 +117,12 @@ content-slider {
       .controls {
         z-index: 1;
         pointer-events: none;
-        .previous, .next {
+        .prev, .next {
           position: absolute;
           top: 50%;
           pointer-events: all;
         }
-        .previous {
+        .prev {
           left: 0;
         }
         .next {

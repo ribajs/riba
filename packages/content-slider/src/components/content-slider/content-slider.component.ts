@@ -15,10 +15,11 @@ export interface SlideItem {
 interface Scope {
   items: SlideItem[];
   itemsInitialized: boolean;
+  /** Current / start index, by default 0. You can also change this attribute from outsite to change the current active item */
   index: number;
   activeItem: SlideItem | null;
   transform: string;
-  previous: ContentSliderComponent["previous"];
+  prev: ContentSliderComponent["prev"];
   next: ContentSliderComponent["next"];
   goTo: ContentSliderComponent["goTo"];
   activeItemWidth: number;
@@ -26,6 +27,14 @@ interface Scope {
   activeClass: string;
   activeColumnClasses: string[];
   inactiveColumnClasses: string[];
+  /** Show controls */
+  controls: boolean;
+  /** Icon source url for the prev slide icon button */
+  controlPrevIconSrc: string;
+  /** Icon source url for the next slide icon button */
+  controlNextIconSrc: string;
+  /** next or prev control button classes */
+  controlsButtonClasses: string;
 }
 
 export class ContentSliderComponent extends TemplatesComponent {
@@ -53,8 +62,11 @@ export class ContentSliderComponent extends TemplatesComponent {
       "active-class",
       "active-column-classes",
       "inactive-column-classes",
-      /** Current / start index, by default 0. You can also change this attribute from outsite to change the current active item */
       "index",
+      "controls",
+      "control-prev-icon-src",
+      "control-next-icon-src",
+      "controls-button-classes",
     ];
   }
 
@@ -64,7 +76,7 @@ export class ContentSliderComponent extends TemplatesComponent {
     index: 0,
     activeItem: null,
     transform: "translateX(0)",
-    previous: this.previous,
+    prev: this.prev,
     next: this.next,
     goTo: this.goTo,
     activeItemWidth: 0,
@@ -84,6 +96,10 @@ export class ContentSliderComponent extends TemplatesComponent {
       "col-lg-2",
       "col-xl-2",
     ],
+    controls: true,
+    controlPrevIconSrc: "",
+    controlNextIconSrc: "",
+    controlsButtonClasses: "btn btn-outline-dark rounded-circle",
   };
 
   constructor(element?: HTMLElement) {
@@ -228,7 +244,7 @@ export class ContentSliderComponent extends TemplatesComponent {
     this.goTo(newActiveIndex);
   }
 
-  public previous() {
+  public prev() {
     let newActiveIndex = this.scope.index - 1;
     if (newActiveIndex < 0) {
       newActiveIndex = this.scope.items.length - 1;
