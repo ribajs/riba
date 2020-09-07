@@ -1,13 +1,13 @@
 $content-slider-snes-height: 400px;
 $content-slider-snes-sm-height: 400px;
-$content-slider-snes-md-height: 600px;
-$content-slider-snes-lg-height: 600px;
+$content-slider-snes-md-height: 400px;
+$content-slider-snes-lg-height: 400px;
 $content-slider-snes-xl-height: 400px;
 
 $content-slider-snes-capture-height: 150px;
 $content-slider-snes-capture-sm-height: 150px;
-$content-slider-snes-capture-md-height: 200px;
-$content-slider-snes-capture-lg-height: 175px;
+$content-slider-snes-capture-md-height: 250px;
+$content-slider-snes-capture-lg-height: 200px;
 $content-slider-snes-capture-xl-height: 200px;
 
 @function content-slider-snes-breakpoint-height($breakpoint) {
