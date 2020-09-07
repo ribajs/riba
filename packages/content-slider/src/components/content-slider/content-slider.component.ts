@@ -122,6 +122,12 @@ export class ContentSliderComponent extends TemplatesComponent {
     this.scope.itemsInitialized = true;
 
     this.goTo(this.scope.index);
+
+    // WORKAROUND FIXME
+    this.onResize();
+    setTimeout(() => {
+      this.onResize();
+    }, 500);
   }
 
   protected onResize() {
