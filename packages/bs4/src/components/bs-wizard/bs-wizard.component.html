@@ -1,0 +1,9 @@
+<div class="toast-container">
+  <div aria-live="polite" aria-atomic="true" class="toast-item-container" rv-add-class="positionClass">
+    <div rv-each-toast="notifications" >
+      <div rv-if="toast.type | eq 'toast'">
+        <bs4-toast-item rv-index="%toast%" rv-parent rv-icon-url="iconUrl" rv-co-toast="toast"></bs4-toast-item>
+      </div>
+    </div>
+  </div>
+</div>
