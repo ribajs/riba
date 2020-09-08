@@ -1,4 +1,4 @@
-import { TemplatesComponent } from "@ribajs/core";
+import { TemplatesComponent } from "@ribajs/core/src/components/templates/templates.component";
 import { throttle } from "@ribajs/utils/src/control";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 
