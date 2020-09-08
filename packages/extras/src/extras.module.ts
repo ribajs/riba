@@ -10,5 +10,3 @@ export const extrasModule: RibaModule = {
   services,
   components: {},
 };
-
-export default extrasModule;

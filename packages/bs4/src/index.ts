@@ -5,4 +5,4 @@ export * from "./components";
 export * from "./interfaces";
 // export * from './interfaces/interfaces';
 export * from "./constants";
-export * from "./bs4.module";
+export { bs4Module } from "./bs4.module";

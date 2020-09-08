@@ -36,6 +36,9 @@ export class ModulesService {
   }
 
   public regist(module: RibaModule) {
+    if (!module) {
+      throw new Error("The Riba module is falsy!");
+    }
     if (module.binders) {
       this.binder.regists(module.binders);
     }
