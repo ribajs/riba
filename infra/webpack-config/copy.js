@@ -96,6 +96,7 @@ const getCopyPluginConfig = (config) => {
     "@ribajs/leaflet-map",
     "@ribajs/tagged-image",
     "@ribajs/pdf",
+    "@ribajs/content-slider",
   ];
 
   for (const ribaScssModule of copyRibaScssModules) {
