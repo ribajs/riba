@@ -298,8 +298,8 @@ export class DropdownService {
 
   public dispose() {
     this._element.removeAttribute("data-" + DATA_KEY);
-    delete this._element;
-    delete this._menu;
+    // delete this._element;
+    // delete this._menu;
     if (this._popper !== null) {
       this._popper.destroy();
       this._popper = null;
