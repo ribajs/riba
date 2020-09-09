@@ -27,6 +27,7 @@ export interface Scope {
   variantTitle?: ShopifyCartLineItem["variant_title"];
   variantOptions?: ShopifyCartLineItem["variant_options"];
   variantId: ShopifyCartLineItem["variant_id"];
+  key?: ShopifyCartLineItem["key"];
 
   remove: ShopifyCartItemComponent["remove"];
   increase: ShopifyCartItemComponent["increase"];
@@ -63,6 +64,7 @@ export class ShopifyCartItemComponent extends Component {
       "variant-title",
       "variant-options",
       "variant-id",
+      "key",
     ];
   }
 
@@ -192,6 +194,7 @@ export class ShopifyCartItemComponent extends Component {
     this.scope.variantTitle = item.variant_title;
     this.scope.variantOptions = item.variant_options;
     // this.scope.variantId = item.variant_id;
+    this.scope.key = item.key;
 
     if (this.scope.quantity === 0) {
       super.remove(); // Remove element
