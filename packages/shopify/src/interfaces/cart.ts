@@ -22,11 +22,16 @@ export interface ShopifyCartAddError {
   description: string;
 }
 
+/**
+ * See https://shopify.dev/docs/themes/liquid/reference/objects/line_item/
+ */
 export interface ShopifyCartLineItem {
   id: number;
   title: string;
   price: number;
   line_price: number;
+  /** Not official property, but can be set by yourself in liquid using `{% for item in cart.items %}{% assign line_number = forloop.index %}{% endfor %}` */
+  line_number?: string;
   quantity: number;
   sku: string | null;
   grams: number;
@@ -35,6 +40,8 @@ export interface ShopifyCartLineItem {
   gift_card: boolean;
   url: string;
   image: string;
+  /** Returns the line item key, a unique identifier for the line item. The line item key is constructed from the line item's variant ID plus a hash of the line item's properties, even if the item has no additional properties. */
+  key: string;
   handle: string;
   requires_shipping: boolean;
   product_title: string;

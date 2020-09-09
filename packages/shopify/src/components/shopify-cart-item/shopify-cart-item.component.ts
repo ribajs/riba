@@ -168,7 +168,7 @@ export class ShopifyCartItemComponent extends Component {
       return;
     }
 
-    this.debug('update item from cart');
+    this.debug("update item from cart");
 
     // this.scope.id = item.id;
     this.scope.title = item.title;
