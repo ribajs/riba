@@ -9,6 +9,7 @@ export interface Scope {
   title?: ShopifyCartLineItem["title"];
   price?: ShopifyCartLineItem["id"];
   linePrice?: ShopifyCartLineItem["line_price"];
+  lineNumber?: ShopifyCartLineItem["line_number"];
   quantity: ShopifyCartLineItem["quantity"];
   sku?: ShopifyCartLineItem["sku"];
   grams?: ShopifyCartLineItem["grams"];
@@ -44,6 +45,7 @@ export class ShopifyCartItemComponent extends Component {
       "title",
       "price",
       "line-price",
+      "line-number",
       "quantity",
       "sku",
       "grams",
@@ -166,10 +168,13 @@ export class ShopifyCartItemComponent extends Component {
       return;
     }
 
+    this.debug('update item from cart');
+
     // this.scope.id = item.id;
     this.scope.title = item.title;
     this.scope.price = item.price;
     this.scope.linePrice = item.line_price;
+    this.scope.lineNumber = item.line_number;
     this.scope.quantity = item.quantity;
     this.scope.sku = item.sku;
     this.scope.grams = item.grams;
@@ -228,6 +233,9 @@ export class ShopifyCartItemComponent extends Component {
         return cart;
       }
     );
+
+    const cart = await ShopifyCartService.get();
+    this.onCartUpdate(cart);
   }
 
   protected template() {
