@@ -204,11 +204,20 @@ export class ShopifyCartItemComponent extends Component {
 
   protected getItemFromCart(cart: ShopifyCartObject) {
     for (const item of cart.items) {
-      if (
-        item.id === this.scope.id &&
-        item.variant_id === this.scope.variantId
-      ) {
-        return item;
+      // Compare key
+      if (item.key && this.scope.key) {
+        if (
+          item.key === this.scope.key ) {
+          return item;
+        }
+      } else {
+        // Compare id and variantId
+        if (
+          item.id === this.scope.id &&
+          item.variant_id === this.scope.variantId
+        ) {
+          return item;
+        }
       }
     }
     return null;
