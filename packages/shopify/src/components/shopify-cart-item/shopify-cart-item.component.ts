@@ -206,8 +206,7 @@ export class ShopifyCartItemComponent extends Component {
     for (const item of cart.items) {
       // Compare key
       if (item.key && this.scope.key) {
-        if (
-          item.key === this.scope.key ) {
+        if (item.key === this.scope.key) {
           return item;
         }
       } else {
