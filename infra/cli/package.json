@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/cli",
-  "version": "1.9.0-alpha.8",
+  "version": "1.9.0-alpha.9",
   "description": "CLI tool for Riba applications 🍹",
   "url": "https://github.com/ribajs/riba/tree/master/packages/cli",
   "homepage": "https://ribajs.com/",

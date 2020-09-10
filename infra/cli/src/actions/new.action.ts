@@ -139,7 +139,7 @@ export class NewAction extends AbstractAction {
     inputs: CommandInput[],
     options: CommandInput[]
   ) {
-    console.log("generateExampleFiles");
+    console.log("Generate examples..");
 
     const projectNameInput = this.getInput(inputs, "name");
     if (!projectNameInput || typeof projectNameInput.value !== "string") {

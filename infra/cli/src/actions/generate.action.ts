@@ -15,9 +15,10 @@ export class GenerateAction extends AbstractAction {
 
   public async handle(inputs: CommandInput[], options: CommandInput[]) {
     // If the generate was triggered by ne new action the project is set
-    const project = dasherize(
-      this.getInput(inputs, "project")?.value as string
-    ) as string | undefined;
+    let project = this.getInput(inputs, "project")?.value as string | undefined;
+    if (typeof project === "string") {
+      project = dasherize(project);
+    }
 
     await this.setDefaults(inputs, options, project);
     await this.generateFiles(this.concatOptions([inputs, options]));
@@ -35,9 +36,6 @@ export class GenerateAction extends AbstractAction {
     const configuration: Configuration = await this.loadConfiguration(
       projectDirectory
     );
-
-    console.debug("inputs", inputs);
-    console.debug("options", options);
 
     this.setDefaultInput(options, "language", configuration.language);
     this.setDefaultInput(options, "sourceRoot", configuration.sourceRoot);
@@ -114,7 +112,6 @@ export class GenerateAction extends AbstractAction {
     schematicInput: CommandInput
   ) {
     const sourceRootOption = this.getInput(options, "sourceRoot");
-    console.debug("setPathInput", sourceRootOption);
     if (!sourceRootOption || typeof sourceRootOption.value !== "string") {
       throw new Error("sourceRoot not found!");
     }
