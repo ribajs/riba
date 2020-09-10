@@ -1,5 +1,4 @@
-// Date formatters
-// @see https://github.com/matthieuriolo/rivetsjs-stdlib/blob/master/src/rivetsstdlib.js
+// Date formatters from https://github.com/matthieuriolo/rivetsjs-stdlib
 
 export { DateFormatter } from "./date.formatter";
 export { TimeFormatter } from "./time.formatter";
