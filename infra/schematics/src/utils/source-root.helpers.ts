@@ -1,6 +1,6 @@
 import { join, normalize } from "@angular-devkit/core";
 import { Rule, Tree } from "@angular-devkit/schematics";
-import { DEFAULT_PATH_NAME } from "../lib/defaults";
+import { DEFAULT_SOURCE_ROOT } from "../lib/defaults";
 
 export function isInRootDirectory(
   host: Tree,
@@ -15,16 +15,19 @@ export function mergeSourceRoot<
 >(options: T): Rule {
   return (host: Tree) => {
     const isInRoot = isInRootDirectory(host, ["tsconfig.json", "package.json"]);
+
     if (!isInRoot) {
       return host;
     }
-    const defaultSourceRoot =
-      options.sourceRoot !== undefined ? options.sourceRoot : DEFAULT_PATH_NAME;
+    const sourceRoot =
+      options.sourceRoot !== undefined
+        ? options.sourceRoot
+        : DEFAULT_SOURCE_ROOT;
 
     options.path =
       options.path !== undefined
-        ? join(normalize(defaultSourceRoot), options.path)
-        : normalize(defaultSourceRoot);
+        ? join(normalize(sourceRoot), options.path)
+        : normalize(sourceRoot);
     return host;
   };
 }

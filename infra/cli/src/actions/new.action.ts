@@ -39,11 +39,12 @@ export class NewAction extends AbstractAction {
   private debug = Debug("actions:new");
 
   public async handle(inputs: CommandInput[], options: CommandInput[]) {
-    await this.setDefaults(inputs, options);
-
     const projectDirectory = dasherize(
       this.getInput(inputs, "name")?.value as string
-    );
+    ) as string;
+
+    await this.setDefaults(inputs, options, projectDirectory);
+
     const isDryRunEnabled = this.getInput(options, "dry-run")?.value;
     const shouldSkipInstall = this.getInput(options, "skip-install")?.value;
     const shouldSkipGit = this.getInput(options, "skip-git")?.value;
@@ -99,8 +100,12 @@ export class NewAction extends AbstractAction {
     );
   }
 
-  protected async setDefaults(inputs: CommandInput[], options: CommandInput[]) {
-    const configuration = await this.loadConfiguration();
+  protected async setDefaults(
+    inputs: CommandInput[],
+    options: CommandInput[],
+    projectDirectory?: string
+  ) {
+    const configuration = await this.loadConfiguration(projectDirectory);
     this.setDefaultInput(options, "language", configuration.language);
     this.setDefaultInput(options, "sourceRoot", configuration.sourceRoot);
     this.setDefaultInput(options, "collection", configuration.collection);
@@ -198,15 +203,19 @@ export class NewAction extends AbstractAction {
     generateAction: GenerateAction,
     schematic: string
   ) {
-    const configuration = await this.loadConfiguration();
+    const configuration = await this.loadConfiguration(name);
 
     const clonedInputs = this.deepCopyInput(inputs);
     const clonedOptions = this.deepCopyInput(options);
 
     // options
 
-    const sourceRootInput = this.getInput(clonedOptions, "sourceRoot");
-    if (!sourceRootInput || typeof sourceRootInput.value !== "string") {
+    const sourceRootOption = this.setInput(
+      clonedOptions,
+      "sourceRoot",
+      configuration.sourceRoot
+    );
+    if (!sourceRootOption || typeof sourceRootOption.value !== "string") {
       throw new Error("Unable to find a source root for this configuration!");
     }
 
@@ -215,6 +224,12 @@ export class NewAction extends AbstractAction {
     const schematicInput = this.setInput(clonedInputs, "schematic", schematic);
     if (!schematicInput || typeof schematicInput.value !== "string") {
       throw new Error("Schematic not set!");
+    }
+
+    // Set project to load the project config to generate examples based on the project config
+    const projectInput = this.setInput(clonedInputs, "project", name);
+    if (!projectInput || typeof projectInput.value !== "string") {
+      throw new Error("Unable to set project!");
     }
 
     const nameInput = this.setInput(clonedInputs, "name", name + "-example");
@@ -344,7 +359,7 @@ export class NewAction extends AbstractAction {
     emptyLine();
     yellow(`Thanks for installing Riba ${emojis.WORKER}`);
     dim("We are always looking for interesting jobs");
-    dim("or for help to maintain this package.");
+    dim("or for help to maintain this project.");
     emptyLine();
     emptyLine();
     this.print()(

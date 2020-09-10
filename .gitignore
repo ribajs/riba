@@ -1,6 +1,7 @@
 # compiled output
 /lib
-/dist/*
+/dist
+/infra/*/dist/*
 /packages/*/dist/*
 /packages/*/lib/*
 /node_modules

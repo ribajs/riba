@@ -13,7 +13,7 @@ export class <%= classify(name) %>Component extends Component {
 
   public static tagName: string = 'rv-<%= name %>';
 
-  protected _debug = true;
+  public _debug = true;
 
   protected autobind = true;
 

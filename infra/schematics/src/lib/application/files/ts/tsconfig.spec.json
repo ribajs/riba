@@ -1,0 +1,9 @@
+{
+  "extends": "@ribajs/tsconfig",
+  "compilerOptions": {
+    "outDir": "dist",
+    "allowJs": true,
+    "module": "commonjs",
+    "types": ["jest"]
+  }
+}
