@@ -1,7 +1,20 @@
 <moment-timer time="10 Sep 2020 18:00:00">
-    <div rv-if="countdownRunning">
-        <span>{ remainingHours }</span>
-        <span>{ remainingMinutes }</span>
-        <span>{ remainingSeconds }</span>
+    <div class="time-container" rv-if="countdownRunning">
+        <div class="time-block">
+            <span class="time">{ remainingDays }</span>
+            <span class="legend">Days</span>
+        </div>
+        <div class="time-block">
+            <span class="time">{ remainingHours }</span>
+            <span class="legend">Hours</span>
+        </div>
+        <div class="time-block">
+            <span class="time">{ remainingMinutes }</span>
+            <span class="legend">Minutes</span>
+        </div>
+        <div class="time-block">
+            <span class="time">{ remainingSeconds }</span>
+            <span class="legend">Seconds</span>
+        </div>
     </div>
 </moment-timer>

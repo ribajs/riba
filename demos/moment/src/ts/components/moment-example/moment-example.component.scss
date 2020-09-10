@@ -1,19 +1,31 @@
 moment-timer {
-  div {
+  .time-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
     width: 100%;
-    span {
+    .time-block {
       background-color: white;
       height: 100px;
       width: 100px;
       display: inline-block;
-      font-size: 50px;
-      line-height: 100px;
+
       margin: 0 5px;
-      text-align: center;
+      .time {
+        font-size: 50px;
+        line-height: 100px;
+        display: block;
+        text-align: center;
+      }
+      .legend {
+        position: absolute;
+        margin-top: 5px;
+        width: 100px;
+        text-align: center;
+        color: white;
+        text-transform: uppercase;
+      }
     }
   }
 }
