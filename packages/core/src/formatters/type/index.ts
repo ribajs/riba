@@ -14,3 +14,4 @@ export { toStringFormatter } from "./to-string.formatter";
 export { toDecimalFormatter } from "./to-decimal.formatter";
 export { toFloatFormatter } from "./to-float.formatter";
 export { toIntegerFormatter } from "./to-integer.formatter";
+export { toNumberFormatter } from "../type/to-number.formatter";
