@@ -1,18 +1,20 @@
 import { Formatter } from "@ribajs/core";
-import { Duration } from "moment";
+import { Duration, Moment } from "moment";
 
 /**
- * As with the other formatters for durations, the hours formatter gets the hours (0 - 23).
+ * Gets the hour.
+ * @see https://momentjs.com/docs/#/get-set/minute/
  * @see https://momentjs.com/docs/#/durations/hours/
  */
 export const HoursFormatter: Formatter = {
   name: "hours",
   /**
-   * As with the other formatters for durations, the hours formatter gets the hours (0 - 23).
+   * Gets the hour.
+   * @see https://momentjs.com/docs/#/get-set/minute/
    * @see https://momentjs.com/docs/#/durations/hours/
-   * @param duration
+   * @param target can be a moment object or a duration
    */
-  read(duration: Duration) {
-    return duration.hours();
+  read(target: Moment | Duration) {
+    return target.hours();
   },
 };
