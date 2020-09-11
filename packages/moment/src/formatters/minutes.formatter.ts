@@ -1,18 +1,20 @@
 import { Formatter } from "@ribajs/core";
-import { Duration } from "moment";
+import { Duration, Moment } from "moment";
 
 /**
- * As with the other formatters for durations, the minutes formatter gets the minutes (0 - 59).
+ * Gets the minutes.
+ * @see https://momentjs.com/docs/#/get-set/minute/
  * @see https://momentjs.com/docs/#/durations/minutes/
  */
 export const MinutesFormatter: Formatter = {
   name: "minutes",
   /**
-   * As with the other formatters for durations, the minutes formatter gets the minutes (0 - 59).
+   * Gets the minutes.
+   * @see https://momentjs.com/docs/#/get-set/minute/
    * @see https://momentjs.com/docs/#/durations/minutes/
-   * @param duration
+   * @param target can be a moment object or a duration
    */
-  read(duration: Duration) {
-    return duration.minutes();
+  read(target: Moment | Duration) {
+    return target.minutes();
   },
 };

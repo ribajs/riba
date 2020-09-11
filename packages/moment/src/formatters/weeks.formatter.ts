@@ -1,18 +1,20 @@
 import { Formatter } from "@ribajs/core";
-import { Duration } from "moment";
+import { Duration, Moment } from "moment";
 
 /**
- * As with the other formatters for durations, the weeks formatter gets the weeks (0 - 4).
+ * Gets the week of the year.
+ * @see https://momentjs.com/docs/#/get-set/iso-week/
  * @see https://momentjs.com/docs/#/durations/weeks/
  */
 export const WeeksFormatter: Formatter = {
   name: "weeks",
   /**
-   * As with the other formatters for durations, the weeks formatter gets the weeks (0 - 4).
+   * Gets the week of the year.
+   * @see https://momentjs.com/docs/#/get-set/iso-week/
    * @see https://momentjs.com/docs/#/durations/weeks/
-   * @param duration
+   * @param target can be a moment object or a duration
    */
-  read(duration: Duration) {
-    return duration.weeks();
+  read(target: Moment | Duration) {
+    return target.weeks();
   },
 };

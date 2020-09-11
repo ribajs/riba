@@ -1,18 +1,20 @@
 import { Formatter } from "@ribajs/core";
-import { Duration } from "moment";
+import { Duration, Moment } from "moment";
 
 /**
- * As with the other formatters for durations, the days formatter gets the days (0 - 30).
+ * Gets or sets the day of the week.
+ * @see https://momentjs.com/docs/#/get-set/date/
  * @see https://momentjs.com/docs/#/durations/days/
  */
 export const DaysFormatter: Formatter = {
   name: "days",
   /**
-   * As with the other formatters for durations, the days formatter gets the days (0 - 30).
+   * Gets or sets the day of the week.
+   * @see https://momentjs.com/docs/#/get-set/date/
    * @see https://momentjs.com/docs/#/durations/days/
    * @param duration
    */
-  read(duration: Duration) {
-    return duration.days();
+  read(target: Moment | Duration) {
+    return target.days();
   },
 };

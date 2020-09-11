@@ -1,18 +1,20 @@
 import { Formatter } from "@ribajs/core";
-import { Duration } from "moment";
+import { Duration, Moment } from "moment";
 
 /**
- * As with the other formatters for durations, the years formatter gets the years.
+ * Gets the years.
+ * @see https://momentjs.com/docs/#/get-set/year/
  * @see https://momentjs.com/docs/#/durations/years/
  */
 export const YearsFormatter: Formatter = {
   name: "years",
   /**
-   * As with the other formatters for durations, the years formatter gets the years.
+   * Gets the years.
+   * @see https://momentjs.com/docs/#/get-set/year/
    * @see https://momentjs.com/docs/#/durations/years/
-   * @param duration
+   * @param target can be a moment object or a duration
    */
-  read(duration: Duration) {
-    return duration.years();
+  read(target: Moment | Duration) {
+    return target.years();
   },
 };
