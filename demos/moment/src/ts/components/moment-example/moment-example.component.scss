@@ -1,30 +1,33 @@
-moment-timer {
-  .time-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    .time-block {
-      background-color: white;
-      height: 100px;
-      width: 100px;
-      display: inline-block;
-
-      margin: 0 5px;
-      .time {
-        font-size: 50px;
-        line-height: 100px;
-        display: block;
-        text-align: center;
-      }
-      .legend {
-        position: absolute;
-        margin-top: 5px;
+moment-example {
+  h1, h2, h3, p, .legend {
+    color: white;
+  }
+  moment-timer {
+    .time-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      .time-block {
+        background-color: white;
+        height: 100px;
         width: 100px;
-        text-align: center;
-        color: white;
-        text-transform: uppercase;
+        display: inline-block;
+
+        margin: 0 5px 30px 0;
+        .time {
+          font-size: 50px;
+          line-height: 100px;
+          display: block;
+          text-align: center;
+        }
+        .legend {
+          position: absolute;
+          margin-top: 5px;
+          width: 100px;
+          text-align: center;
+          text-transform: uppercase;
+        }
       }
     }
   }

@@ -22,19 +22,8 @@ export class MomentExampleComponent extends Component {
     this.init(MomentExampleComponent.observedAttributes);
   }
 
-  protected async init(observedAttributes: string[]) {
-    return super.init(observedAttributes).then((view) => {
-      return view;
-    });
-  }
-
   protected requiredAttributes() {
     return [];
-  }
-
-  // deconstructor
-  protected disconnectedCallback() {
-    super.disconnectedCallback();
   }
 
   protected template() {

@@ -2,6 +2,8 @@ import { Component } from "@ribajs/core";
 
 interface Scope {
   time: string;
+
+  countdownYears: boolean;
   countdownDays: boolean;
   countdownHours: boolean;
   countdownMinutes: boolean;
@@ -9,6 +11,7 @@ interface Scope {
 
   countdownRunning: boolean;
 
+  remainingYears: number;
   remainingDays: number;
   remainingHours: number;
   remainingMinutes: number;
@@ -27,6 +30,7 @@ export class TimerComponent extends Component {
   static get observedAttributes() {
     return [
       "time",
+      "countdown-years",
       "countdown-days",
       "countdown-hours",
       "countdown-minutes",
@@ -39,6 +43,7 @@ export class TimerComponent extends Component {
   }
 
   protected scope: Scope = {
+    countdownYears: false,
     countdownDays: true,
     countdownHours: true,
     countdownMinutes: true,
@@ -46,6 +51,7 @@ export class TimerComponent extends Component {
 
     countdownRunning: true,
 
+    remainingYears: 0,
     remainingDays: 0,
     remainingHours: 0,
     remainingMinutes: 0,
@@ -86,35 +92,53 @@ export class TimerComponent extends Component {
       return;
     }
 
-    if (this.scope.countdownDays) {
-      if (this.isDaysLastUnit()) {
-        this.scope.remainingDays = Math.ceil(remainingSeconds / (24 * 60 * 60));
+    const secsOfMinute = 60;
+    const secsOfHour = 60 * secsOfMinute;
+    const secsOfDay = 24 * secsOfHour;
+    const secsOfYear = 365 * secsOfDay;
+
+    // TODO leap year (Schaltjahr)
+    if (this.scope.countdownYears) {
+      if (this.isYearsLastUnit()) {
+        this.scope.remainingYears = Math.ceil(remainingSeconds / secsOfYear);
         return;
       } else {
-        this.scope.remainingDays = Math.floor(
-          remainingSeconds / (24 * 60 * 60)
-        );
-        remainingSeconds -= this.scope.remainingDays * 24 * 60 * 60;
+        this.scope.remainingYears = Math.floor(remainingSeconds / secsOfYear);
+        remainingSeconds -= this.scope.remainingYears * secsOfYear;
+      }
+    }
+
+    if (this.scope.countdownDays) {
+      if (this.isDaysLastUnit()) {
+        this.scope.remainingDays = Math.ceil(remainingSeconds / secsOfDay);
+        return;
+      } else {
+        this.scope.remainingDays = Math.floor(remainingSeconds / secsOfDay);
+        remainingSeconds -= this.scope.remainingDays * secsOfDay;
       }
     }
 
     if (this.scope.countdownHours) {
       if (this.isHoursLastUnit()) {
-        this.scope.remainingHours = Math.ceil(remainingSeconds / (60 * 60));
+        this.scope.remainingHours = Math.ceil(remainingSeconds / secsOfHour);
         return;
       } else {
-        this.scope.remainingHours = Math.floor(remainingSeconds / (60 * 60));
-        remainingSeconds -= this.scope.remainingHours * 60 * 60;
+        this.scope.remainingHours = Math.floor(remainingSeconds / secsOfHour);
+        remainingSeconds -= this.scope.remainingHours * secsOfHour;
       }
     }
 
     if (this.scope.countdownMinutes) {
       if (this.isMinutesLastUnit()) {
-        this.scope.remainingMinutes = Math.ceil(remainingSeconds / 60);
+        this.scope.remainingMinutes = Math.ceil(
+          remainingSeconds / secsOfMinute
+        );
         return;
       } else {
-        this.scope.remainingMinutes = Math.floor(remainingSeconds / 60);
-        remainingSeconds -= this.scope.remainingMinutes * 60;
+        this.scope.remainingMinutes = Math.floor(
+          remainingSeconds / secsOfMinute
+        );
+        remainingSeconds -= this.scope.remainingMinutes * secsOfMinute;
       }
     }
 
@@ -132,6 +156,15 @@ export class TimerComponent extends Component {
   protected getRemainingSeconds(): number {
     return Math.ceil(
       (Date.parse(this.scope.time) - new Date().getTime()) / 1000
+    );
+  }
+
+  protected isYearsLastUnit(): boolean {
+    return (
+      this.scope.countdownYears == false &&
+      this.scope.countdownHours == false &&
+      this.scope.countdownMinutes == false &&
+      this.scope.countdownSeconds == false
     );
   }
 

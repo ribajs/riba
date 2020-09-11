@@ -1,18 +1,24 @@
-<moment-timer time="10 Sep 2020 18:00:00">
+<h2>Components</h2>
+<h3>Timer</h3>
+<moment-timer time="10 Sep 2022 18:00:00" countdown-years="true">
     <div class="time-container" rv-if="countdownRunning">
-        <div class="time-block">
+        <div class="time-block" rv-if="countdownYears">
+            <span class="time">{ remainingYears }</span>
+            <span class="legend">Years</span>
+        </div>
+        <div class="time-block" rv-if="countdownDays">
             <span class="time">{ remainingDays }</span>
             <span class="legend">Days</span>
         </div>
-        <div class="time-block">
+        <div class="time-block" rv-if="countdownHours">
             <span class="time">{ remainingHours }</span>
             <span class="legend">Hours</span>
         </div>
-        <div class="time-block">
+        <div class="time-block" rv-if="countdownMinutes">
             <span class="time">{ remainingMinutes }</span>
             <span class="legend">Minutes</span>
         </div>
-        <div class="time-block">
+        <div class="time-block" rv-if="countdownSeconds">
             <span class="time">{ remainingSeconds }</span>
             <span class="legend">Seconds</span>
         </div>
