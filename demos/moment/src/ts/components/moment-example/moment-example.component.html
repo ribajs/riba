@@ -144,23 +144,23 @@
 <moment-timer rv-time="futureDate | toISOString" countdown-years="true">
     <div class="time-container" rv-if="countdownRunning">
         <div class="time-block" rv-if="countdownYears">
-            <span class="time">{ remainingYears }</span>
+            <span class="time">{ remainingYears | numberFormat 0 "," "" 2 }</span>
             <span class="legend">Years</span>
         </div>
         <div class="time-block" rv-if="countdownDays">
-            <span class="time">{ remainingDays }</span>
+            <span class="time">{ remainingDays | numberFormat 0 "," "" 2 }</span>
             <span class="legend">Days</span>
         </div>
         <div class="time-block" rv-if="countdownHours">
-            <span class="time">{ remainingHours }</span>
+            <span class="time">{ remainingHours | numberFormat 0 "," "" 2 }</span>
             <span class="legend">Hours</span>
         </div>
         <div class="time-block" rv-if="countdownMinutes">
-            <span class="time">{ remainingMinutes }</span>
+            <span class="time">{ remainingMinutes | numberFormat 0 "," "" 2 }</span>
             <span class="legend">Minutes</span>
         </div>
         <div class="time-block" rv-if="countdownSeconds">
-            <span class="time">{ remainingSeconds }</span>
+            <span class="time">{ remainingSeconds | numberFormat 0 "," "" 2 }</span>
             <span class="legend">Seconds</span>
         </div>
     </div>
