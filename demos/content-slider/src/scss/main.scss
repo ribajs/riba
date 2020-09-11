@@ -1,10 +1,13 @@
 // Original Bootstrap 4 Styles
 @import "~bootstrap/scss/bootstrap";
 
-// @import './binders/index';
-@import "../ts/components/index";
+// Riba modules
+@import '~@ribajs/core/src/index';
 @import '~@ribajs/bs4/src/index';
 @import "~@ribajs/content-slider/src/index";
+
+// @import './binders/index';
+@import "../ts/components/index";
 // @import './formatters/index';
 
 body {

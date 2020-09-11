@@ -1,3 +1,3 @@
-import momentModule from "./moment.module";
-
-export * from "./moment.module";
+export * from "./formatters";
+export * from "./components";
+export { momentModule } from "./moment.module";

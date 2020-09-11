@@ -1,3 +1,4 @@
+import { dasherize } from "@angular-devkit/core/src/utils/strings";
 import chalk from "chalk";
 import { CommandInput, Configuration } from "../interfaces";
 import { AbstractAction } from "./abstract.action";
@@ -13,17 +14,28 @@ export class GenerateAction extends AbstractAction {
   }
 
   public async handle(inputs: CommandInput[], options: CommandInput[]) {
-    await this.setDefaults(inputs, options);
+    // If the generate was triggered by ne new action the project is set
+    let project = this.getInput(inputs, "project")?.value as string | undefined;
+    if (typeof project === "string") {
+      project = dasherize(project);
+    }
+
+    await this.setDefaults(inputs, options, project);
     await this.generateFiles(this.concatOptions([inputs, options]));
   }
 
-  protected async setDefaults(inputs: CommandInput[], options: CommandInput[]) {
+  protected async setDefaults(
+    inputs: CommandInput[],
+    options: CommandInput[],
+    projectDirectory?: string
+  ) {
     const schematicInput = this.getInput(inputs, "schematic");
     if (!schematicInput || typeof schematicInput.value !== "string") {
       throw new Error("Unable to find a schematic for this configuration");
     }
-
-    const configuration: Configuration = await this.loadConfiguration();
+    const configuration: Configuration = await this.loadConfiguration(
+      projectDirectory
+    );
 
     this.setDefaultInput(options, "language", configuration.language);
     this.setDefaultInput(options, "sourceRoot", configuration.sourceRoot);
