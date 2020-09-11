@@ -1,7 +1,4 @@
 moment-example {
-  h1, h2, h3, p, .legend {
-    color: white;
-  }
   moment-timer {
     .time-container {
       display: flex;
@@ -9,7 +6,8 @@ moment-example {
       align-items: center;
       width: 100%;
       .time-block {
-        background-color: white;
+        background-color: #6f6f6f;
+        color: white;
         height: 100px;
         width: 100px;
         display: inline-block;

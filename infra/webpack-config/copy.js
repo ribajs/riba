@@ -83,7 +83,6 @@ const getCopyPluginConfigForScssThirdPartyModule = (
 
 const getCopyPluginConfig = (config) => {
   var patterns = [];
-  // var options = {};
 
   const copyRibaScssModules = [
     "@ribajs/core",
@@ -94,6 +93,7 @@ const getCopyPluginConfig = (config) => {
     "@ribajs/shopify-tda",
     "@ribajs/shopify-easdk",
     "@ribajs/leaflet-map",
+    "@ribajs/moment",
     "@ribajs/tagged-image",
     "@ribajs/pdf",
     "@ribajs/content-slider",
@@ -128,7 +128,7 @@ const getCopyPluginConfig = (config) => {
     );
   }
 
-  return { patterns /*, options*/ };
+  return { patterns };
 };
 
 // Copy the files before the build starts for the case the files are required for the build itself

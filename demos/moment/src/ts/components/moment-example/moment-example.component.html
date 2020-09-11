@@ -1,5 +1,142 @@
-<span rv-assign-past-date="'2019-09-15T15:00:00.000Z' | toMoment "></span>
-<span rv-assign-future-date="'2022-09-10T16:00:00.000Z' | toMoment "></span>
+<h2>Formatters</h2>
+
+<h3>toMoment</h3>
+
+<p>
+    For this demo we assign two new variable to the model called <code>pastDate</code> and <code>futureDate</code>:<br />
+    <code>rv-assign-past-date="'2019-09-15T15:00:00.000Z' | toMoment"</code><br />
+    <code>rv-assign-future-date="'2022-09-10T16:00:00.000Z' | toMoment"</code><br />
+    <span rv-assign-past-date="'2019-09-15T15:00:00.000Z' | toMoment"></span>
+    <span rv-assign-future-date="'2022-09-10T16:00:00.000Z' | toMoment"></span>
+</p>
+
+<p>
+    Now we can work with this variables, e.g. to convert <code>pastDate</code> to a vanilla date:
+</p>
+
+<p>
+    <code>{ pastDate | toDate }</code><br />
+    <span>{ pastDate | toDate }</span>
+</p>
+
+<h3>dateFormat</h3>
+<p>
+    <code>{ futureDate | dateFormat 'LLLL' }</code><br />
+    <span>{ futureDate | dateFormat 'LLLL' }</span>
+</p>
+
+<p>
+    <code>{ pastDate | dateFormat 'LLLL' }</code><br />
+    <span>{ pastDate | dateFormat 'LLLL' }</span>
+</p>
+
+<p>
+    <code>{ futureDate | dateFormat 'HH:mm:ss' }</code><br />
+    <span>{ futureDate | dateFormat 'HH:mm:ss' }</span>
+</p>
+
+<h3>duration</h3>
+
+<p>
+    We assign a new variable to the model called <code>examleDuration</code> using <code>rv-assign-examle-duration="pastDate | duration futureDate</code> to use them in the next examples
+</p>
+
+<h4>humanize</h4>
+<p>
+    <code><span rv-assign-examle-duration="pastDate | duration futureDate">{ examleDuration | humanize }</span></code><br />
+    <span rv-assign-examle-duration="pastDate | duration futureDate">{ examleDuration | humanize }</span>
+</p>
+
+<h4>asMilliseconds</h4>
+<p>
+    <code>{ examleDuration | asMilliseconds } milliseconds</code><br />
+    <span>{ examleDuration | asMilliseconds } milliseconds</span>
+</p>
+
+<h4>asSeconds</h4>
+<p>
+    <code>{ examleDuration | asSeconds } seconds</code><br />
+    <span>{ examleDuration | asSeconds } seconds</span>
+</p>
+
+<h4>asMinutes</h4>
+<p>
+    <code>{ examleDuration | asMinutes } minutes</code><br />
+    <span>{ examleDuration | asMinutes } minutes</span>
+</p>
+
+<h4>asHours</h4>
+<p>
+    <code>{ examleDuration | asHours } hours</code><br />
+    <span>{ examleDuration | asHours } hours</span>
+</p>
+
+<h4>asDays</h4>
+<p>
+    <code>{ examleDuration | asDays | numberFormat } days</code><br />
+    <span>{ examleDuration | asDays | numberFormat } days</span>
+</p>
+
+<h4>asMonths</h4>
+<p>
+    <code>{ examleDuration | asMonths | numberFormat } months</code><br />
+    <span>{ examleDuration | asMonths | numberFormat } months</span>
+</p>
+
+<h4>asYears</h4>
+<p>
+    <code>{ examleDuration | asYears | numberFormat } years</code><br />
+    <span>{ examleDuration | asYears | numberFormat } years</span>
+</p>
+
+<h4>years, months, weeks, days, hours, minutes, seconds and milliseconds</h4>
+<p>
+    <code>
+        The duration is
+        { examleDuration | years } years,
+        { examleDuration | months } months,
+        { examleDuration | weeks } weeks,
+        { examleDuration | days } days,
+        { examleDuration | hours } hours,
+        { examleDuration | minutes } minutes,
+        { examleDuration | seconds } seconds
+        and { examleDuration | milliseconds } milliseconds
+    </code><br />
+
+    <span>
+        The duration is
+        { examleDuration | years } years,
+        { examleDuration | months } months,
+        { examleDuration | weeks } weeks,
+        { examleDuration | days } days,
+        { examleDuration | hours } hours,
+        { examleDuration | minutes } minutes,
+        { examleDuration | seconds } seconds
+        and { examleDuration | milliseconds } milliseconds
+    </span>
+</p>
+
+
+<h3>toISOString</h3>
+
+<p>
+    <code>{ pastDate | toISOString }</code><br />
+    <span>{ pastDate | toISOString }</span>
+</p>
+
+<h3>toDate</h3>
+
+<p>
+    <code>{ pastDate | toDate }</code><br />
+    <span>{ pastDate | toDate }</span>
+</p>
+
+<h3>toTimestamp</h3>
+
+<p>
+    <code>{ pastDate | toTimestamp }</code><br />
+    <span>{ pastDate | toTimestamp }</span>
+</p>
 
 <h2>Components</h2>
 <h3>Timer</h3>
@@ -28,85 +165,3 @@
         </div>
     </div>
 </moment-timer>
-
-<h2>Formatters</h2>
-
-<h3>dateFormat</h3>
-<p>
-    <code rv-block>{ futureDate | dateFormat 'LLLL' }</code>: <br />
-    <span>{ futureDate | dateFormat 'LLLL' }</span>
-</p>
-
-<p>
-    <code rv-block>{ pastDate | dateFormat 'LLLL' }</code>: <br />
-    <span>{ pastDate | dateFormat 'LLLL' }</span>
-</p>
-
-<p>
-    <code rv-block>{ futureDate | dateFormat 'HH:mm:ss' }</code>: <br />
-    <span>{ futureDate | dateFormat 'HH:mm:ss' }</span>
-</p>
-
-<h3>duration</h3>
-<p>
-    <code rv-block>{ pastDate | duration futureDate | asMilliseconds | numberFormat  } milliseconds</code>: <br />
-    <span>{ pastDate | duration futureDate | asMilliseconds | numberFormat  } milliseconds</span>
-</p>
-
-<p>
-    <code rv-block>{ pastDate | duration futureDate | asSeconds | numberFormat  } seconds</code>: <br />
-    <span>{ pastDate | duration futureDate | asSeconds | numberFormat  } seconds</span>
-</p>
-
-<p>
-    <code rv-block>{ pastDate | duration futureDate | asMinutes | numberFormat  } minutes</code>: <br />
-    <span>{ pastDate | duration futureDate | asMinutes | numberFormat  } minutes</span>
-</p>
-
-<p>
-    <code rv-block>{ pastDate | duration futureDate | asHours | numberFormat  } hours</code>: <br />
-    <span>{ pastDate | duration futureDate | asHours| numberFormat } hours</span>
-</p>
-
-<p>
-    <code rv-block>{ pastDate | duration futureDate | asDays | numberFormat } days</code>: <br />
-    <span>{ pastDate | duration futureDate | asDays | numberFormat } days</span>
-</p>
-
-<p>
-    <code rv-block>{ pastDate | duration futureDate | asMonths | numberFormat } months</code>: <br />
-    <span>{ pastDate | duration futureDate | asMonths | numberFormat } months</span>
-</p>
-
-<p>
-    <code rv-block>{ pastDate | duration futureDate | asYears | numberFormat } years</code>: <br />
-    <span>{ pastDate | duration futureDate | asYears | numberFormat } years</span>
-</p>
-
-<h3>toISOString</h3>
-
-<p>
-    <code rv-block>{ pastDate | toISOString }</code>: <br />
-    <span>{ pastDate | toISOString }</span>
-</p>
-
-<h3>toDate</h3>
-
-<p>
-    <code rv-block>{ pastDate | toDate }</code>: <br />
-    <span>{ pastDate | toDate }</span>
-</p>
-
-<h3>toTimestamp</h3>
-
-<p>
-    <code rv-block>{ pastDate | toTimestamp }</code>: <br />
-    <span>{ pastDate | toTimestamp }</span>
-</p>
-
-<h3>toMoment</h3>
-
-<p>
-    <code rv-block>{ pastDate | toDate | toMoment | formatDate }</code>: <br />
-    <span>{ pastDate | toMoment }</span>
-</p>
