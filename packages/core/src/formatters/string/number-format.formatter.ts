@@ -7,6 +7,8 @@ import { isIntegerFormatter } from "../type/is-integer.formatter";
 const DEFAULT_DECIMAL_SEPARATOR = ".";
 const DEFAULT_THOUSAND_SEPARATOR = "'";
 const DEFAULT_PRECISION = 2;
+const DEFAULT_NUMBER_PADDING = 0;
+const DEFAULT_NUMBER_PADDING_SYMBOL = "0";
 
 /**
  * Returns a formatted version of the target as string.
@@ -18,6 +20,7 @@ export const numberFormatFormatter: Formatter = {
    * Returns a formatted version of the target as string.
    * The number will always be rounded after the DIN 1333 (1.55 => 1.6 and -1.55 => -1.6)
    * @param target
+   * @param numberPadding (default: 0)
    * @param precision (default: 2)
    * @param decimalSeparator (default: ".")
    * @param thousandSeparator (default: "'")
@@ -26,7 +29,9 @@ export const numberFormatFormatter: Formatter = {
     target: number,
     precision = DEFAULT_PRECISION,
     decimalSeparator = DEFAULT_DECIMAL_SEPARATOR,
-    thousandSeparator = DEFAULT_THOUSAND_SEPARATOR
+    thousandSeparator = DEFAULT_THOUSAND_SEPARATOR,
+    numberPadding = DEFAULT_NUMBER_PADDING,
+    numberPaddingSymbol = DEFAULT_NUMBER_PADDING_SYMBOL
   ) {
     if (!toDecimalFormatter.read) {
       throw new Error("toDecimalFormatter must have a read function");
@@ -58,12 +63,16 @@ export const numberFormatFormatter: Formatter = {
     const ret = retStr.split(".");
     if (ret.length == 2) {
       return (
-        ret[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousandSeparator) +
+        ret[0]
+          .replace(/\B(?=(\d{3})+(?!\d))/g, thousandSeparator)
+          .padStart(numberPadding, numberPaddingSymbol) +
         decimalSeparator +
         ret[1]
       );
     }
 
-    return ret[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousandSeparator);
+    return ret[0]
+      .replace(/\B(?=(\d{3})+(?!\d))/g, thousandSeparator)
+      .padStart(numberPadding, numberPaddingSymbol);
   },
 };
