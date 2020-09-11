@@ -1,8 +1,8 @@
 import { Riba, textBinder } from '@ribajs/core';
-import { DatetimeFormatter } from './datetime.formatter';
+import { AsSecondsFormatter } from './as-seconds.formatter';
 
 const riba = new Riba();
-riba.module.formatter.regist(DatetimeFormatter);
+riba.module.formatter.regist(AsSecondsFormatter);
 riba.module.binder.regist(textBinder);
 
 interface Model {
@@ -13,7 +13,7 @@ interface Model {
 
 describe('riba.formatters', () => {
 
-  describe('datetime', () => {
+  describe('as-seconds', () => {
     let model: Model = {};
 
     beforeEach(() => {
@@ -25,9 +25,9 @@ describe('riba.formatters', () => {
         value: 'Hello World',
       };
       const el = document.createElement('div');
-      el.setAttribute('rv-text', 'obj.value | datetime "!"');
+      el.setAttribute('rv-text', 'obj.value | as-seconds "!"');
       riba.bind(el, model);
-      expect(el.textContent).toEqual('Hello World from datetime <strong>formatter</strong> !');
+      expect(el.textContent).toEqual('Hello World from as-seconds <strong>formatter</strong> !');
     });
   });
 });
