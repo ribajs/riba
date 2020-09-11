@@ -20,7 +20,6 @@ export const numberFormatFormatter: Formatter = {
    * Returns a formatted version of the target as string.
    * The number will always be rounded after the DIN 1333 (1.55 => 1.6 and -1.55 => -1.6)
    * @param target
-   * @param numberPadding (default: 0)
    * @param precision (default: 2)
    * @param decimalSeparator (default: ".")
    * @param thousandSeparator (default: "'")
@@ -29,9 +28,7 @@ export const numberFormatFormatter: Formatter = {
     target: number,
     precision = DEFAULT_PRECISION,
     decimalSeparator = DEFAULT_DECIMAL_SEPARATOR,
-    thousandSeparator = DEFAULT_THOUSAND_SEPARATOR,
-    numberPadding = DEFAULT_NUMBER_PADDING,
-    numberPaddingSymbol = DEFAULT_NUMBER_PADDING_SYMBOL
+    thousandSeparator = DEFAULT_THOUSAND_SEPARATOR
   ) {
     if (!toDecimalFormatter.read) {
       throw new Error("toDecimalFormatter must have a read function");
@@ -63,16 +60,12 @@ export const numberFormatFormatter: Formatter = {
     const ret = retStr.split(".");
     if (ret.length == 2) {
       return (
-        ret[0]
-          .replace(/\B(?=(\d{3})+(?!\d))/g, thousandSeparator)
-          .padStart(numberPadding, numberPaddingSymbol) +
+        ret[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousandSeparator) +
         decimalSeparator +
         ret[1]
       );
     }
 
-    return ret[0]
-      .replace(/\B(?=(\d{3})+(?!\d))/g, thousandSeparator)
-      .padStart(numberPadding, numberPaddingSymbol);
+    return ret[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousandSeparator);
   },
 };
