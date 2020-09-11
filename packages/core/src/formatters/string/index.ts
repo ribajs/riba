@@ -4,6 +4,7 @@ export { downcaseFormatter } from "./downcase.formatter";
 export { filledFormatter } from "./filled.formatter";
 export { handleizeFormatter } from "./handleize.formatter";
 export { matchFormatter } from "./match.formatter";
+export { numberFormatFormatter } from "./number-format.formatter";
 export { pluralizeFormatter } from "./pluralize.formatter";
 export { prependFormatter } from "./prepend.formatter";
 export { upcaseFormatter } from "./upcase.formatter";
