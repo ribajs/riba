@@ -7,8 +7,6 @@ import { isIntegerFormatter } from "../type/is-integer.formatter";
 const DEFAULT_DECIMAL_SEPARATOR = ".";
 const DEFAULT_THOUSAND_SEPARATOR = "'";
 const DEFAULT_PRECISION = 2;
-const DEFAULT_NUMBER_PADDING = 0;
-const DEFAULT_NUMBER_PADDING_SYMBOL = "0";
 
 /**
  * Returns a formatted version of the target as string.
