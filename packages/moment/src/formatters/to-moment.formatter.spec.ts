@@ -1,7 +1,8 @@
-import { Riba, textBinder } from '@ribajs/core';
+import { Riba, textBinder, dotAdapter } from '@ribajs/core';
 import { ToMomentFormatter } from './to-moment.formatter';
 
 const riba = new Riba();
+riba.module.adapter.regist(dotAdapter);
 riba.module.formatter.regist(ToMomentFormatter);
 riba.module.binder.regist(textBinder);
 

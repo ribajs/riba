@@ -1,7 +1,8 @@
-import { Riba, textBinder } from '@ribajs/core';
+import { Riba, textBinder, dotAdapter } from '@ribajs/core';
 import { MonthsFormatter } from './months.formatter';
 
 const riba = new Riba();
+riba.module.adapter.regist(dotAdapter);
 riba.module.formatter.regist(MonthsFormatter);
 riba.module.binder.regist(textBinder);
 

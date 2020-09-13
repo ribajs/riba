@@ -1,7 +1,8 @@
-import { Riba, textBinder } from '@ribajs/core';
+import { Riba, textBinder, dotAdapter } from '@ribajs/core';
 import { DurationFormatter } from './duration.formatter';
 
 const riba = new Riba();
+riba.module.adapter.regist(dotAdapter);
 riba.module.formatter.regist(DurationFormatter);
 riba.module.binder.regist(textBinder);
 

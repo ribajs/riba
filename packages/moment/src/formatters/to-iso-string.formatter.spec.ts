@@ -1,7 +1,8 @@
-import { Riba, textBinder } from '@ribajs/core';
+import { Riba, textBinder, dotAdapter } from '@ribajs/core';
 import { ToISOStringFormatter } from './to-iso-string.formatter';
 
 const riba = new Riba();
+riba.module.adapter.regist(dotAdapter);
 riba.module.formatter.regist(ToISOStringFormatter);
 riba.module.binder.regist(textBinder);
 
