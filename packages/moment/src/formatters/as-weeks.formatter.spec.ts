@@ -14,7 +14,7 @@ interface Model {
 
 describe('riba.formatters', () => {
 
-  describe('as-weeks', () => {
+  describe('asWeeks', () => {
     let model: Model = {};
 
     beforeEach(() => {
@@ -26,9 +26,9 @@ describe('riba.formatters', () => {
         value: 'Hello World',
       };
       const el = document.createElement('div');
-      el.setAttribute('rv-text', 'obj.value | as-weeks "!"');
+      el.setAttribute('rv-text', 'obj.value | asWeeks "!"');
       riba.bind(el, model);
-      expect(el.textContent).toEqual('Hello World from as-weeks <strong>formatter</strong> !');
+      expect(el.textContent).toEqual('Hello World from asWeeks <strong>formatter</strong> !');
     });
   });
 });

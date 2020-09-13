@@ -14,7 +14,7 @@ interface Model {
 
 describe('riba.formatters', () => {
 
-  describe('as-seconds', () => {
+  describe('asSeconds', () => {
     let model: Model = {};
 
     beforeEach(() => {
@@ -26,9 +26,9 @@ describe('riba.formatters', () => {
         value: 'Hello World',
       };
       const el = document.createElement('div');
-      el.setAttribute('rv-text', 'obj.value | as-seconds "!"');
+      el.setAttribute('rv-text', 'obj.value | asSeconds "!"');
       riba.bind(el, model);
-      expect(el.textContent).toEqual('Hello World from as-seconds <strong>formatter</strong> !');
+      expect(el.textContent).toEqual('Hello World from asSeconds <strong>formatter</strong> !');
     });
   });
 });
