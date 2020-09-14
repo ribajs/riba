@@ -9,28 +9,21 @@ riba.module.formatter.regist(ToMomentFormatter);
 riba.module.binder.regist(textBinder);
 
 interface Model {
-  obj?: {
-    value: MomentInput;
-  };
+  value: MomentInput;
 }
 
 describe('riba.formatters', () => {
 
   describe('to-moment', () => {
-    let model: Model = {};
-
-    beforeEach(() => {
-      model = {};
-    });
+    let model: Model = {
+      value: new Date(),
+    };
 
     it('The "toMoment" formatter should give the same value as the "moment()" function', () => {
-      model.obj = {
-        value: new Date(),
-      };
       const el = document.createElement('div');
-      el.setAttribute('rv-text', 'obj.value | toMoment');
+      el.setAttribute('rv-text', 'value | toMoment');
       riba.bind(el, model);
-      expect(el.textContent).toEqual(moment(model.obj.value));
+      expect(el.textContent).toEqual(moment(model.value).toString());
     });
   });
 });
