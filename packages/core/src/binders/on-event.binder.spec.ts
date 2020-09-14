@@ -40,11 +40,7 @@ describe("riba.binders", () => {
 
       // Simulates the click
       element.click();
-
-      // Expect events to have been handled at next tick
-      setTimeout(() => {
-        expect(model.onClick).toHaveBeenCalled();
-      }, 0);
+      expect(model.onClick).toHaveBeenCalled();
     });
 
     it("on-change: Watch's the change event", () => {
@@ -65,12 +61,9 @@ describe("riba.binders", () => {
       model.value = "this should trigger the change event!";
       blurAll(); // Focus out all focused elements
 
-      // Expect events to have been handled at next tick
-      setTimeout(() => {
-        expect(model.onChange).toHaveBeenCalled();
-        expect(model.onFocus).toHaveBeenCalled();
-        expect(model.onFocusout).toHaveBeenCalled();
-      }, 0);
+      expect(model.onChange).toHaveBeenCalled();
+      expect(model.onFocus).toHaveBeenCalled();
+      expect(model.onFocusout).toHaveBeenCalled();
     });
   });
 });
