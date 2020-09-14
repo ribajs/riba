@@ -2,6 +2,14 @@ import { Component } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./taggedimage-example.component.html";
 
+interface Scope {
+  fadeshowImages: {
+    src: string;
+    srcset: string;
+    title: string;
+  }[];
+}
+
 export class TaggedImageExampleComponent extends Component {
   public static tagName = "taggedimage-example";
 
@@ -11,7 +19,15 @@ export class TaggedImageExampleComponent extends Component {
     return [];
   }
 
-  protected scope = {};
+  protected scope: Scope = {
+    fadeshowImages: [1, 2, 3, 4, 5].map((n) => ({
+      src: `../../../images/shotokan-karate-${n}.jpg`,
+      srcset: [800, 1000, 1200, 1400, 1600, 1920]
+        .map((w) => `../../../images/shotokan-karate-${n}-${w}.jpg ${w}w`)
+        .join("\n"),
+      title: `Image ${n}`,
+    })),
+  };
 
   constructor(element?: HTMLElement) {
     super(element);

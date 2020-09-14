@@ -2662,22 +2662,22 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/webpack-config@portal:../../infra/webpack-config::locator=taggedimage-example%40workspace%3A."
   dependencies:
-    "@babel/core": ^7.11.1
+    "@babel/core": ^7.11.6
     babel-loader: ^8.1.0
-    copy-webpack-plugin: ^6.0.3
-    css-loader: ^4.2.1
+    copy-webpack-plugin: ^6.1.0
+    css-loader: ^4.2.2
     dart-sass: ^1.25.0
-    file-loader: ^6.0.0
+    file-loader: ^6.1.0
     glob: ^7.1.6
-    html-loader: ^1.2.0
-    html-webpack-plugin: ^4.3.0
+    html-loader: ^1.3.0
+    html-webpack-plugin: ^4.4.1
     inspectpack: ^4.5.2
-    mini-css-extract-plugin: ^0.10.0
+    mini-css-extract-plugin: ^0.9.0
     node-sass: ^4.14.1
     postcss-loader: ^3.0.0
     pug-loader: ^2.4.0
     resolve-url-loader: ^3.1.1
-    sass-loader: ^9.0.3
+    sass-loader: ^10.0.2
     terser-webpack-plugin: "npm:3.0.7"
     webpack: "npm:5.0.0-beta.22"
     webpack-dev-server: ^3.11.0
@@ -5524,7 +5524,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"copy-webpack-plugin@npm:^6.0.3":
+"copy-webpack-plugin@npm:^6.1.0":
   version: 6.1.0
   resolution: "copy-webpack-plugin@npm:6.1.0"
   dependencies:
@@ -5645,7 +5645,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-loader@npm:^4.2.1":
+"css-loader@npm:^4.2.2":
   version: 4.3.0
   resolution: "css-loader@npm:4.3.0"
   dependencies:
@@ -7124,6 +7124,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"file-loader@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "file-loader@npm:6.1.0"
+  dependencies:
+    loader-utils: ^2.0.0
+    schema-utils: ^2.7.1
+  peerDependencies:
+    webpack: ^4.0.0 || ^5.0.0
+  checksum: 0806a57d33e01bcb38b179065464ba13d0e0a321ef84647979fde8afa81145999c0a2626430fb2e1067b89c176cbdbdbf934bbf08e0a730e11f1d449c56aed61
+  languageName: node
+  linkType: hard
+
 "file-uri-to-path@npm:1.0.0":
   version: 1.0.0
   resolution: "file-uri-to-path@npm:1.0.0"
@@ -7468,7 +7480,7 @@ fsevents@^1.2.7:
   dependencies:
     bindings: ^1.5.0
     nan: ^2.12.1
-  checksum: aa10bae7245bfe87da8092951152eaddf60347c2c69660188bd36a8c228b9efb383ff8808677ef99ca747e23f783a8acca2ba902939ab49d011da29860ede372
+  checksum: 879e607a94b41d482b4fe01defba67e9745a0b7a7838d904de852053f1e74c0f4410f6c584b16c6886cfc5cdf7312e44e4a4826832270041eec364ad3a83cabd
   languageName: node
   linkType: hard
 
@@ -7477,7 +7489,7 @@ fsevents@^1.2.7:
   resolution: "fsevents@patch:fsevents@npm%3A2.1.3#builtin<compat/fsevents>::version=2.1.3&hash=e8cd9e"
   dependencies:
     node-gyp: latest
-  checksum: e8e06b3e0a5837e7be62b820f790371c0e0961b68ef6a1959c825533cce92d1d4559dead9a63dbf5c8baa288552c3fb76a36fe58fc9b4466a08479f52f3832e4
+  checksum: 84919a1ed067df4bbd1b70958ce43fc55129202fba00ef4f6d3f4a6e40761340de4ec76df53c75ff2ae6cbcd35fa498285282832119d0b51c4938ebf481b051d
   languageName: node
   linkType: hard
 
@@ -8163,7 +8175,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"html-loader@npm:^1.2.0":
+"html-loader@npm:^1.3.0":
   version: 1.3.0
   resolution: "html-loader@npm:1.3.0"
   dependencies:
@@ -8194,7 +8206,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"html-webpack-plugin@npm:^4.3.0":
+"html-webpack-plugin@npm:^4.4.1":
   version: 4.4.1
   resolution: "html-webpack-plugin@npm:4.4.1"
   dependencies:
@@ -10380,6 +10392,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"klona@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "klona@npm:2.0.3"
+  checksum: 5af5b033b6c9b8574443cdb7ca38bf5c7d881be924e8aaab719a499c815e3e9d131bd7b579439cd3dcf81f5be1277b9e417e9cede8ceab34890a4a9bb105bad7
+  languageName: node
+  linkType: hard
+
 "last-run@npm:^1.1.0":
   version: 1.1.1
   resolution: "last-run@npm:1.1.1"
@@ -10923,20 +10942,6 @@ fsevents@^1.2.7:
   version: 3.1.0
   resolution: "mimic-response@npm:3.1.0"
   checksum: 0888f06a6fc3ddf1a115bc007117ee0a5975488476ddf607bc22ab284235298ace898cfd50c1a58c5d081d1dcc57d9ca6ba6dad0ac9c85f35a626f15bc2278ec
-  languageName: node
-  linkType: hard
-
-"mini-css-extract-plugin@npm:^0.10.0":
-  version: 0.10.1
-  resolution: "mini-css-extract-plugin@npm:0.10.1"
-  dependencies:
-    loader-utils: ^1.1.0
-    normalize-url: 1.9.1
-    schema-utils: ^1.0.0
-    webpack-sources: ^1.1.0
-  peerDependencies:
-    webpack: ^4.4.0 || ^5.0.0
-  checksum: 8158fb5628802775b14d7cf6e3cfcbeb9893800c16e1ade99514534179431da8221a3d50c3f0dd29007d7870b04330abe62baccd63efffbd7a3cd7952eccb5c3
   languageName: node
   linkType: hard
 
@@ -13279,7 +13284,7 @@ fsevents@^1.2.7:
   resolution: "resolve@patch:resolve@npm%3A1.17.0#builtin<compat/resolve>::version=1.17.0&hash=8fccd0"
   dependencies:
     path-parse: ^1.0.6
-  checksum: 886952612a0e5f5a7e13ebff688e898ba8afd6b27e82a92db9bcf11f69d88c30d054e0728dfc566c202907345f2f3f1e64d5adce33c1e9891c8b217bc87a4a2b
+  checksum: 88c57a90be3c6fdf578cbc49f867a53351fbf7ad1d5e3cc8923a731faaf17699925bff6a1c9b68d8cd1259a2dcb79cb55ae77703cee6d6b0ba10a8c7b7890000
   languageName: node
   linkType: hard
 
@@ -13439,6 +13444,31 @@ fsevents@^1.2.7:
   bin:
     sassgraph: bin/sassgraph
   checksum: 42ffe15a4f85d16053e039a93fb3cb434ece3e36304a19b476a9cc147eaf82801d2574e90655594320ffc2f407d1381c419c3159c94bcd8848951abdac88e4dd
+  languageName: node
+  linkType: hard
+
+"sass-loader@npm:^10.0.2":
+  version: 10.0.2
+  resolution: "sass-loader@npm:10.0.2"
+  dependencies:
+    klona: ^2.0.3
+    loader-utils: ^2.0.0
+    neo-async: ^2.6.2
+    schema-utils: ^2.7.1
+    semver: ^7.3.2
+  peerDependencies:
+    fibers: ">= 3.1.0"
+    node-sass: ^4.0.0
+    sass: ^1.3.0
+    webpack: ^4.36.0 || ^5.0.0
+  peerDependenciesMeta:
+    fibers:
+      optional: true
+    node-sass:
+      optional: true
+    sass:
+      optional: true
+  checksum: 24d0258667141b0d61445c84c37e0b62877f7efde73be46f456c163384b550f5dfde4c0e31901910fdff780b8a9f4d8265e85221bd14726008ebc826b736b175
   languageName: node
   linkType: hard
 
@@ -15000,7 +15030,7 @@ typescript@^4.0.2:
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 9eeb9c03837f2d09b097498e2b1be0c25ab07b82fe1ebb246139c8b5ea054ff5978a9733070438a4870a8f50429af31fc6d3abc2de4937ebe2351da8a37a4457
+  checksum: 798fd394cfe71c7fb0287cc335d753b4938b204453e884d6686b68b621f44c79564ca7839ac10453ca10b42242ed2b4c23e1a84a9fa72d78ef10a4a765adcc4f
   languageName: node
   linkType: hard
 
@@ -15010,7 +15040,7 @@ typescript@^4.0.2:
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 7008ea4a188762d10f646e53d2db430e51f992cc72b61a1eb4bba2d0e33071a17d3fef7e0e85cbe659b6692d21a1cb03b5d2951ce16b86717420505fad54d41b
+  checksum: 7f8fa9370b88b85182eb6d40ac179a6672befe387364f8d8e6df6947250d65f1258d48726a5342f9a04e3871c545fed4e4bcbef6bb0137f554dcd098a4532d79
   languageName: node
   linkType: hard
 
