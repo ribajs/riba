@@ -1,5 +1,6 @@
 import { Riba, textBinder, dotAdapter } from '@ribajs/core';
 import { HumanizeFormatter } from './humanize.formatter';
+import { Duration, duration } from 'moment';
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
@@ -8,7 +9,7 @@ riba.module.binder.regist(textBinder);
 
 interface Model {
   obj?: {
-    value: string;
+    value: Duration;
   };
 }
 
@@ -21,14 +22,14 @@ describe('riba.formatters', () => {
       model = {};
     });
 
-    it('The example string should be added to the value of the model', () => {
+    it('The "humanize" formatter should give the same value as the "duration.humanize" method', () => {
       model.obj = {
-        value: 'Hello World',
+        value: duration(133337, 'seconds'),
       };
       const el = document.createElement('div');
-      el.setAttribute('rv-text', 'obj.value | humanize "!"');
+      el.setAttribute('rv-text', 'obj.value | humanize');
       riba.bind(el, model);
-      expect(el.textContent).toEqual('Hello World from humanize <strong>formatter</strong> !');
+      expect(el.textContent).toEqual(model.obj.value.humanize());
     });
   });
 });

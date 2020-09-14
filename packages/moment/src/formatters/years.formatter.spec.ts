@@ -1,5 +1,7 @@
 import { Riba, textBinder, dotAdapter } from '@ribajs/core';
 import { YearsFormatter } from './years.formatter';
+import { Moment, Duration, duration } from 'moment';
+import moment from 'moment';
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
@@ -8,7 +10,8 @@ riba.module.binder.regist(textBinder);
 
 interface Model {
   obj?: {
-    value: string;
+    moment: Moment;
+    duration: Duration;
   };
 }
 
@@ -21,14 +24,21 @@ describe('riba.formatters', () => {
       model = {};
     });
 
-    it('The example string should be added to the value of the model', () => {
+    it('The "years" formatter should give the same value as the "moment.years" or "duration.years" methods', () => {
       model.obj = {
-        value: 'Hello World',
+        moment: moment(),
+        duration: duration(13337, 'seconds'),
       };
       const el = document.createElement('div');
-      el.setAttribute('rv-text', 'obj.value | years "!"');
+      const elMoment = document.createElement('div');
+      const elDuration = document.createElement('div');
+      elMoment.setAttribute('rv-text', 'obj.moment | years');
+      elDuration.setAttribute('rv-text', 'obj.duration | years');
+      el.appendChild(elMoment);
+      el.appendChild(elDuration);
       riba.bind(el, model);
-      expect(el.textContent).toEqual('Hello World from years <strong>formatter</strong> !');
+      expect(elMoment.textContent).toEqual(model.obj.moment.years().toString());
+      expect(elDuration.textContent).toEqual(model.obj.duration.years().toString());
     });
   });
 });

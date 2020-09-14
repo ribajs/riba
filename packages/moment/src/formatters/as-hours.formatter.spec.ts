@@ -1,5 +1,6 @@
 import { Riba, textBinder, dotAdapter } from '@ribajs/core';
 import { AsHoursFormatter } from './as-hours.formatter';
+import { duration, Duration } from "moment";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
@@ -7,28 +8,19 @@ riba.module.formatter.regist(AsHoursFormatter);
 riba.module.binder.regist(textBinder);
 
 interface Model {
-  obj?: {
-    value: string;
-  };
+  duration: Duration,
 }
 
 describe('riba.formatters', () => {
 
   describe('asHours', () => {
-    let model: Model = {};
+    let model: Model = { duration: duration(13337, 'seconds') };
 
-    beforeEach(() => {
-      model = {};
-    });
-
-    it('The example string should be added to the value of the model', () => {
-      model.obj = {
-        value: 'Hello World',
-      };
+    it('The "asHours" formatter should give the same value as the "duration.asHours" method', () => {
       const el = document.createElement('div');
-      el.setAttribute('rv-text', 'obj.value | asHours "!"');
+      el.setAttribute('rv-text', 'duration | asHours');
       riba.bind(el, model);
-      expect(el.textContent).toEqual('Hello World from asHours <strong>formatter</strong> !');
+      expect(el.textContent).toEqual(model.duration.asHours().toString());
     });
   });
 });
