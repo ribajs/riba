@@ -92,6 +92,8 @@ export class TimerComponent extends Component {
       return;
     }
 
+    this.scope.countdownRunning = true;
+
     const secsOfMinute = 60;
     const secsOfHour = 60 * secsOfMinute;
     const secsOfDay = 24 * secsOfHour;
@@ -187,7 +189,9 @@ export class TimerComponent extends Component {
   }
 
   protected startCountdownInterval() {
-    //call function immediatly to
+    this.scope.countdownRunning = false;
+
+    //call function immediatly to remove initial delay
     this.updateCountdown();
     //create interval and save id to clear later to prevent resource leaking
     this.updateIntervalId = setInterval(() => {
@@ -196,6 +200,7 @@ export class TimerComponent extends Component {
   }
 
   protected cancelCountdownInterval() {
+    this.scope.countdownRunning = false;
     if (this.updateIntervalId) clearInterval(this.updateIntervalId);
     this.updateIntervalId = undefined;
   }
