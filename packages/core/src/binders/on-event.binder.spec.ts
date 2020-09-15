@@ -12,21 +12,19 @@ riba.module.binder.regists([onEventBinder, valueBinder]);
 
 describe("riba.binders", () => {
   let element: HTMLInputElement;
-  let fragment: DocumentFragment;
   let model: any = {};
 
   const blurAll = () => {
     const tmp = document.createElement("input");
-    fragment.appendChild(tmp);
+    document.body.appendChild(tmp);
     tmp.focus();
-    fragment.removeChild(tmp);
+    document.body.removeChild(tmp);
   };
 
   beforeEach(() => {
-    fragment = document.createDocumentFragment();
     element = document.createElement("input");
     element.setAttribute("type", "text");
-    fragment.appendChild(element);
+    document.body.appendChild(element);
 
     model = {};
   });
@@ -36,7 +34,7 @@ describe("riba.binders", () => {
       element.className = "foobar remove-me";
       model.onClick = jest.fn();
       element.setAttribute("rv-on-click", "onClick");
-      riba.bind(fragment, model);
+      riba.bind(document.body, model);
 
       // Simulates the click
       element.click();
@@ -54,7 +52,7 @@ describe("riba.binders", () => {
       element.setAttribute("rv-on-blur", "onFocusout");
       element.setAttribute("rv-value", "value");
 
-      riba.bind(fragment, model);
+      riba.bind(document.body, model);
 
       // Trigger the change event
       element.focus();

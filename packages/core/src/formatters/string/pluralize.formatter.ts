@@ -1,6 +1,7 @@
+import { Formatter } from "../../interfaces";
 import { isArray } from "@ribajs/utils/src/type";
 
-export const pluralizeFormatter = {
+export const pluralizeFormatter: Formatter = {
   name: "pluralize",
   read(input: any, singular: string, plural: string) {
     if (plural === null) {

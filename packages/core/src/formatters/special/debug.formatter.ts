@@ -1,4 +1,6 @@
-export const debugFormatter = {
+import { Formatter } from "@ribajs/core";
+
+export const debugFormatter: Formatter = {
   name: "debug",
   read(
     toPrint: any,

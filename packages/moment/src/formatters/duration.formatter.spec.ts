@@ -1,33 +1,31 @@
-import { Riba, textBinder } from '@ribajs/core';
+import { Riba, textBinder, dotAdapter } from '@ribajs/core';
 import { DurationFormatter } from './duration.formatter';
+import { MomentInput } from 'moment';
+import moment from 'moment';
 
 const riba = new Riba();
+riba.module.adapter.regist(dotAdapter);
 riba.module.formatter.regist(DurationFormatter);
 riba.module.binder.regist(textBinder);
 
 interface Model {
-  obj?: {
-    value: string;
-  };
+  startAt: MomentInput;
+  endAt: MomentInput;
 }
 
 describe('riba.formatters', () => {
 
   describe('duration', () => {
-    let model: Model = {};
+    let model: Model = {
+      startAt: new Date(),
+      endAt: new Date(),
+    };
 
-    beforeEach(() => {
-      model = {};
-    });
-
-    it('The example string should be added to the value of the model', () => {
-      model.obj = {
-        value: 'Hello World',
-      };
+    it('The "duration" formatter should give the same value as the "moment.diff" method', () => {
       const el = document.createElement('div');
-      el.setAttribute('rv-text', 'obj.value | duration "!"');
+      el.setAttribute('rv-text', 'startAt | duration endAt');
       riba.bind(el, model);
-      expect(el.textContent).toEqual('Hello World from duration <strong>formatter</strong> !');
+      expect(el.textContent).toEqual(moment.duration(moment(model.endAt).diff(model.startAt)).toString());
     });
   });
 });

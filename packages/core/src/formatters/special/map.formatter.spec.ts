@@ -1,33 +1,27 @@
-import { Riba, textBinder } from '@ribajs/core';
+import { Riba, textBinder, dotAdapter } from '@ribajs/core';
 import { MapFormatter } from './map.formatter';
 
 const riba = new Riba();
+riba.module.adapter.regist(dotAdapter);
 riba.module.formatter.regist(MapFormatter);
 riba.module.binder.regist(textBinder);
 
 interface Model {
-  obj?: {
-    value: string;
-  };
+  Math: Math;
+  value: 10;
+  method: 'sin';
 }
 
 describe('riba.formatters', () => {
 
   describe('map', () => {
-    let model: Model = {};
-
-    beforeEach(() => {
-      model = {};
-    });
+    let model: Model = { Math, value: 10, method: 'sin' };
 
     it('The example string should be added to the value of the model', () => {
-      model.obj = {
-        value: 'Hello World',
-      };
       const el = document.createElement('div');
-      el.setAttribute('rv-text', 'obj.value | map "!"');
+      el.setAttribute('rv-text', 'value | map Math method');
       riba.bind(el, model);
-      expect(el.textContent).toEqual('Hello World from map <strong>formatter</strong> !');
+      expect(el.textContent).toEqual(Math.sin(10).toString());
     });
   });
 });

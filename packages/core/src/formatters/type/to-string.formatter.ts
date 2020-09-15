@@ -5,8 +5,8 @@ import { isObject, getString } from "@ribajs/utils/src/type";
  * @param value The value you want to parse to string
  * @param def Default value if value is undefined
  */
-export const stringFormatter = {
-  name: "string",
+export const toStringFormatter = {
+  name: "toString",
   read(value: any, def: string) {
     // If value is an array convert each value in array to string
     if (Array.isArray(value)) {
