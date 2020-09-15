@@ -1,9 +1,11 @@
-import { handleizeFormatter } from "@ribajs/core";
+import { handleizeFormatter, FormatterFn } from "@ribajs/core";
 import templateHorizontal from "./bs4-tabs-horizontal.component.html";
 import templateVertical from "./bs4-tabs-vertical.component.html";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { TemplatesComponent } from "../templates/templates.component";
 import { throttle } from "@ribajs/utils/src/control";
+
+const handleize = handleizeFormatter.read as FormatterFn;
 
 export interface Tab {
   title: string;
@@ -314,7 +316,7 @@ export class Bs4TabsComponent extends TemplatesComponent {
       this.scope.items[index].title = newValue;
       this.scope.items[index].handle =
         this.scope.items[index].handle ||
-        handleizeFormatter.read(this.scope.items[index].title);
+        handleize(this.scope.items[index].title);
     }
     if (attributeName.endsWith("Handle")) {
       this.scope.items[index].handle = newValue;
@@ -338,7 +340,7 @@ export class Bs4TabsComponent extends TemplatesComponent {
   protected transformTemplateAttributes(attributes: any, index: number) {
     attributes = super.transformTemplateAttributes(attributes, index);
     if (!attributes.handle && attributes.title) {
-      attributes.handle = handleizeFormatter.read(attributes.title);
+      attributes.handle = handleize(attributes.title);
     }
     attributes.active = attributes.active || false;
     return attributes;
