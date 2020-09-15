@@ -13,7 +13,7 @@ interface Model {
 
 describe('riba.formatters', () => {
 
-  describe('<%= name %>', () => {
+  describe('<%= camelize(name) formatter %>', () => {
     let model: Model = {};
 
     beforeEach(() => {
@@ -25,9 +25,9 @@ describe('riba.formatters', () => {
         value: 'Hello World',
       };
       const el = document.createElement('div');
-      el.setAttribute('rv-text', 'obj.value | <%= name %> "!"');
+      el.setAttribute('rv-text', 'obj.value | <%= camelize(name) %> "!"');
       riba.bind(el, model);
-      expect(el.textContent).toEqual('Hello World from <%= name %> <strong>formatter</strong> !');
+      expect(el.textContent).toEqual('Hello World from <%= camelize(name) %> <strong>formatter</strong> !');
     });
   });
 });

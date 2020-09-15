@@ -10,6 +10,7 @@ export { isStringFormatter } from "./is-string.formatter";
 export { isUndefinedFormatter } from "./is-undefined.formatter";
 export { jsonFormatter } from "./json.formatter";
 export { parseFormatter } from "./parse.formatter";
+export { stringFormatter } from "./string.formatter";
 export { toStringFormatter } from "./to-string.formatter";
 export { toDecimalFormatter } from "./to-decimal.formatter";
 export { toFloatFormatter } from "./to-float.formatter";
