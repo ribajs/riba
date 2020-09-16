@@ -10216,18 +10216,17 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-
-"mini-css-extract-plugin@npm:^0.10.0":
-  version: 0.10.1
-  resolution: "mini-css-extract-plugin@npm:0.10.1"
+"mini-css-extract-plugin@npm:^0.9.0":
+  version: 0.9.0
+  resolution: "mini-css-extract-plugin@npm:0.9.0"
   dependencies:
     loader-utils: ^1.1.0
     normalize-url: 1.9.1
     schema-utils: ^1.0.0
     webpack-sources: ^1.1.0
   peerDependencies:
-    webpack: ^4.4.0 || ^5.0.0
-  checksum: 8158fb5628802775b14d7cf6e3cfcbeb9893800c16e1ade99514534179431da8221a3d50c3f0dd29007d7870b04330abe62baccd63efffbd7a3cd7952eccb5c3
+    webpack: ^4.4.0
+  checksum: c59578fec37f176e43d75c53fe0843157dc6f34c28c3fdc37b1e38f0087c2ea6dbae2b6ef9c65818a35eeb5a97099471092fb0034a48e35593843484808a1cc7
   languageName: node
   linkType: hard
 
