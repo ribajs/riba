@@ -1,15 +1,13 @@
-<!--
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 px-0">
-      <bs4-carousel rv-parent class="carousel slide carousel-fade" interval="999999999">
+      <bs4-carousel rv-parent class="carousel slide carousel-fade" interval="3333">
         <div class="carousel-inner">
-              
-          <div rv-each-image="$parent.fadeshowImages" class="carousel-item" rv-class-active="index | eq 0">
+          <div rv-parent rv-each-image="fadeshowImages" class="carousel-item" rv-class-active="%image% | eq 0">
             <div class="embed-responsive embed-responsive-100vh">
-              <img 
+              <tagged-image rv-parent
               loading="lazy" 
-              class="lazy embed-responsive-item" 
+              class="lazy embed-responsive-item"
               rv-src="image.src" 
               rv-srcset="image.srcset"
               sizes="(max-height: 500px) 800px,
@@ -20,6 +18,8 @@
                       1920px,
               "
               >
+                <tag rv-each-tag="$parent.image.tags" rv-x="tag.x" rv-y="tag.y" rv-title="'hello ' | append %tag%">content { %tag% }</tag>
+              </tagged-image>
             </div>
             <div class="carousel-caption carousel-caption-center d-flex">
               <h2 class="font-weight-bold m-0 text-shadow">
@@ -34,9 +34,8 @@
     </div>    
   </div>
 </div>
--->
-
-<tagged-image src="../../../images/shotokan-karate-cuxhaven-3-1920.jpg">
+<div class="p-3"></div>
+<tagged-image src="../../../images/Hamburg-Hbf-HDR.jpg">
   <tag x="0.5" y="0.5" title="hello1">content1</tag>
   <tag title="hello2">content2</tag>
   <tag title="hello3">content3</tag>

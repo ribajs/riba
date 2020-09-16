@@ -3,10 +3,15 @@ import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./taggedimage-example.component.html";
 
 interface Scope {
+  name: string;
   fadeshowImages: {
     src: string;
     srcset: string;
     title: string;
+    tags: {
+      x: number;
+      y: number;
+    }[];
   }[];
 }
 
@@ -20,12 +25,18 @@ export class TaggedImageExampleComponent extends Component {
   }
 
   protected scope: Scope = {
+    name: "hello",
     fadeshowImages: [1, 2, 3, 4, 5].map((n) => ({
-      src: `../../../images/shotokan-karate-${n}.jpg`,
+      src: `../../../images/shotokan-karate-cuxhaven-${n}.jpg`,
       srcset: [800, 1000, 1200, 1400, 1600, 1920]
-        .map((w) => `../../../images/shotokan-karate-${n}-${w}.jpg ${w}w`)
+        .map(
+          (w) => `../../../images/shotokan-karate-cuxhaven-${n}-${w}.jpg ${w}w`
+        )
         .join("\n"),
       title: `Image ${n}`,
+      tags: Array(7)
+        .fill(null)
+        .map(() => ({ x: Math.random(), y: Math.random() })),
     })),
   };
 
