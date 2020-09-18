@@ -17,7 +17,7 @@ var getStyleLoaderRule = (config) => {
     rule.use.push({
       loader: MiniCssExtractPlugin.loader,
       options: {
-        // only enable hot in development
+        // only enable hot reloading in development
         hmr: process.env.NODE_ENV === "development",
         // if hmr does not work, this is a forceful method.
         reloadAll: true,
