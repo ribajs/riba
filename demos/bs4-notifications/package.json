@@ -66,11 +66,11 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "@ribajs/bs4": "^1.9.0-alpha.2",
-    "@ribajs/core": "^1.9.0-alpha.2",
-    "@ribajs/extras": "^1.9.0-alpha.2",
-    "@ribajs/iconset": "^1.9.0-alpha.2",
-    "@ribajs/utils": "^1.9.0-alpha.2",
+    "@ribajs/bs4": "^1.9.0-alpha.10",
+    "@ribajs/core": "^1.9.0-alpha.10",
+    "@ribajs/extras": "^1.9.0-alpha.10",
+    "@ribajs/iconset": "^1.9.0-alpha.10",
+    "@ribajs/utils": "^1.9.0-alpha.10",
     "bootstrap": "^4.5.0"
   },
   "resolutions": {

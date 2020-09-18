@@ -32,10 +32,10 @@
     "@babel/preset-typescript": "^7.10.4",
     "@babel/runtime": "^7.11.2",
     "@babel/runtime-corejs3": "^7.11.2",
-    "@ribajs/eslint-config": "^1.9.0-alpha.2",
-    "@ribajs/tsconfig": "^1.9.0-alpha.2",
+    "@ribajs/eslint-config": "^1.9.0-alpha.10",
+    "@ribajs/tsconfig": "^1.9.0-alpha.10",
     "@ribajs/types": "^1.8.3",
-    "@ribajs/webpack-config": "^1.9.0-alpha.2",
+    "@ribajs/webpack-config": "^1.9.0-alpha.10",
     "@types/jest": "^26.0.9",
     "@typescript-eslint/eslint-plugin": "^3.8.0",
     "@typescript-eslint/parser": "^3.8.0",
@@ -69,12 +69,12 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "@ribajs/bs4": "^1.9.0-alpha.2",
-    "@ribajs/core": "^1.9.0-alpha.2",
-    "@ribajs/extras": "^1.9.0-alpha.2",
-    "@ribajs/iconset": "^1.9.0-alpha.2",
-    "@ribajs/tagged-image": "^1.9.0-alpha.2",
-    "@ribajs/utils": "^1.9.0-alpha.2",
+    "@ribajs/bs4": "^1.9.0-alpha.10",
+    "@ribajs/core": "^1.9.0-alpha.10",
+    "@ribajs/extras": "^1.9.0-alpha.10",
+    "@ribajs/iconset": "^1.9.0-alpha.10",
+    "@ribajs/tagged-image": "^1.9.0-alpha.10",
+    "@ribajs/utils": "^1.9.0-alpha.10",
     "bootstrap": "^4.5.1"
   },
   "resolutions": {
