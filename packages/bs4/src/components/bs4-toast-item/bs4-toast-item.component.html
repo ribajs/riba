@@ -1,8 +1,8 @@
-<div rv-show="toast" class="toast my-1" rv-add-class="toast.contextualClass | prepend 'toast-'" role="alert" aria-live="assertive" aria-atomic="true" rv-on-hidden.bs.toast="onHide">
+<div class="toast my-1" rv-add-class="toast.contextualClass | prepend 'toast-'" role="alert" aria-live="assertive" aria-atomic="true">
   <div class="toast-header" rv-show="toast.title">
     <img id="toastImage" rv-if="iconUrl" rv-src="iconUrl" class="rounded mr-2" alt="toast icon">
     <strong class="mr-auto" rv-template="toast.title"></strong>
-    <button type="button" class="ml-2 mb-1 close" rv-on-click="onDismiss" aria-label="Close">
+    <button type="button" class="ml-2 mb-1 close" rv-on-click="dismiss" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>

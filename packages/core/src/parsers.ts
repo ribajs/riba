@@ -1,6 +1,6 @@
 import { parseJsonString } from "@ribajs/utils/src/type";
 
-import { DataElement, View, TBlock } from "./view";
+import { DataElement, View } from "./view";
 
 /**
  * Used also in parsers.parseType
@@ -94,7 +94,7 @@ export function parseTemplate(template: string, delimiters: string[]) {
       index = template.indexOf(close, lastIndex);
 
       if (index < 0) {
-        const substring = template.slice(lastIndex - close.length);
+        const substring = template.slice(lastIndex - open.length);
         const lastToken = tokens[tokens.length - 1];
 
         if (lastToken && lastToken.type === TEXT) {
@@ -129,11 +129,10 @@ export function parseNode(
   templateDelimiters: Array<string>
 ) {
   /** If true stop / block the parseNode  recursion */
-  let block: TBlock = false;
+  let blockRecursion = false;
 
   node = node as DataElement;
-  // if node.nodeType === 3 === Node.TEXT_NODE
-  if (node.nodeType === 3) {
+  if (node.nodeType === Node.TEXT_NODE) {
     let tokens = null;
 
     // TODO why check data?
@@ -148,7 +147,7 @@ export function parseNode(
         if (node.parentNode) {
           node.parentNode.insertBefore(text, node);
         }
-        if (token.type === 1) {
+        if (token.type === BINDING) {
           // TODO fix any
           view.buildBinding(
             text as any,
@@ -163,14 +162,12 @@ export function parseNode(
         node.parentNode.removeChild(node);
       }
     }
-    block = true;
-    // if node.nodeType === 1 === Node.ELEMENT_NODE
-  } else if (node.nodeType === 1) {
+    blockRecursion = true;
+  } else if (node.nodeType === Node.ELEMENT_NODE) {
     // traverse binds attributes
-    block = view.traverse(node);
+    blockRecursion = view.traverse(node);
   }
-
-  if (!block) {
+  if (!blockRecursion) {
     if (node.childNodes && node.childNodes.length > 0) {
       for (let i = 0; i < node.childNodes.length; i++) {
         const childNode = node.childNodes[i];

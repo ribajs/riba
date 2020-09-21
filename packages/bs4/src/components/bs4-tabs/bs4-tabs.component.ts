@@ -1,8 +1,11 @@
-import { handleizeFormatter } from "@ribajs/core";
+import { handleizeFormatter, FormatterFn } from "@ribajs/core";
 import templateHorizontal from "./bs4-tabs-horizontal.component.html";
 import templateVertical from "./bs4-tabs-vertical.component.html";
-
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { TemplatesComponent } from "../templates/templates.component";
+import { throttle } from "@ribajs/utils/src/control";
+
+const handleize = handleizeFormatter.read as FormatterFn;
 
 export interface Tab {
   title: string;
@@ -289,13 +292,14 @@ export class Bs4TabsComponent extends TemplatesComponent {
       });
     }
 
+    const onResize = () => {
+      throttle(this.onResizeEventHandler.bind(this))();
+    };
+
     if (this.scope.optionTabsAutoHeight) {
-      window.removeEventListener(
-        "resize",
-        this.onResizeEventHandler.bind(this)
-      );
-      window.addEventListener("resize", this.onResizeEventHandler.bind(this));
-      this.setHeight();
+      window.removeEventListener("resize", onResize);
+      window.addEventListener("resize", onResize);
+      this.onResizeEventHandler();
     }
   }
 
@@ -312,7 +316,7 @@ export class Bs4TabsComponent extends TemplatesComponent {
       this.scope.items[index].title = newValue;
       this.scope.items[index].handle =
         this.scope.items[index].handle ||
-        handleizeFormatter.read(this.scope.items[index].title);
+        handleize(this.scope.items[index].title);
     }
     if (attributeName.endsWith("Handle")) {
       this.scope.items[index].handle = newValue;
@@ -330,10 +334,13 @@ export class Bs4TabsComponent extends TemplatesComponent {
     }
   }
 
+  /**
+   * Extends TemplatesComponent.transformTemplateAttributes to set the handle by the title if no handle is set
+   */
   protected transformTemplateAttributes(attributes: any, index: number) {
     attributes = super.transformTemplateAttributes(attributes, index);
     if (!attributes.handle && attributes.title) {
-      attributes.handle = handleizeFormatter.read(attributes.title);
+      attributes.handle = handleize(attributes.title);
     }
     attributes.active = attributes.active || false;
     return attributes;
@@ -368,7 +375,7 @@ export class Bs4TabsComponent extends TemplatesComponent {
 
   protected template() {
     // Only set the component template if there no childs or the childs are templates
-    if (!this.el.hasChildNodes() || this.hasOnlyTemplateChilds()) {
+    if (!hasChildNodesTrim(this.el) || this.hasOnlyTemplateChilds()) {
       if (this.scope.optionTabsAngle === "horizontal") {
         return templateHorizontal;
       } else {

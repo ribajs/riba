@@ -22,7 +22,7 @@ export interface ElementOptions {
   /**
    * Application language.
    */
-  language?: 'ts' | 'js';
+  language?: "ts" | "js";
   /**
    * The source root path
    */
@@ -38,9 +38,9 @@ export interface ElementOptions {
   /**
    * Which template engine the component should use.
    */
-  templateEngine?: 'html' | 'pug';
+  templateEngine?: "html" | "pug";
   /**
    * Which style engine the component should use.
    */
-  styleLanguage?: 'scss';
+  styleLanguage?: "scss";
 }

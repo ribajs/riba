@@ -1,7 +1,7 @@
 import { ready } from "@ribajs/utils/src/dom";
 
 /**
- * Just an Class with some helpful functions
+ * Just a class with some helpful functions
  *
  * @export
  * @class Utils
@@ -14,7 +14,7 @@ export class Utils {
    */
   public static domIsReady(callback: () => void) {
     console.warn(
-      "Utils.domIsReady is depricated, use import { ready } from '@ribajs/utils/src/dom' instead"
+      "Utils.domIsReady is deprecated, use import { ready } from '@ribajs/utils/src/dom' instead"
     );
     return ready(callback);
   }

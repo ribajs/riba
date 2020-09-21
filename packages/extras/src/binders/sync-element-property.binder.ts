@@ -1,4 +1,5 @@
 import { Binder } from "@ribajs/core";
+import { throttle } from "@ribajs/utils/src/control";
 
 /**
  * Binds an event handler on the element.
@@ -10,30 +11,16 @@ export const syncElementPropertyBinder: Binder<string> = {
   priority: 1000,
 
   bind() {
-    if (!this.customData) {
-      this.customData = {
-        handler: null,
-      };
-    }
+    /**/
   },
 
-  unbind(el: HTMLElement) {
-    if (this.customData.handler) {
-      if (this.args === null) {
-        throw new Error("args is null");
-      }
-      const eventName = this.args[0] as string;
-      el.removeEventListener(eventName, this.customData.handler);
-    }
+  unbind(/*el: HTMLElement*/) {
+    /**/
   },
 
   routine(el: HTMLElement, value: string) {
     if (this.args === null) {
       throw new Error("args is null");
-    }
-
-    if (this.customData.handler) {
-      window.removeEventListener("resize", this.customData.handler);
     }
 
     const propertyName = this.args[0] as string;
@@ -42,15 +29,21 @@ export const syncElementPropertyBinder: Binder<string> = {
       switch (propertyName) {
         case "height":
           el.style.height = elementToSync.clientHeight + "px";
-          window.addEventListener("resize", () => {
-            el.style.height = elementToSync.clientHeight + "px";
-          });
+          window.addEventListener(
+            "resize",
+            throttle(() => {
+              el.style.height = elementToSync.clientHeight + "px";
+            })
+          );
           break;
         case "width":
           el.style.width = elementToSync.clientWidth + "px";
-          window.addEventListener("resize", () => {
-            el.style.width = elementToSync.clientWidth + "px";
-          });
+          window.addEventListener(
+            "resize",
+            throttle(() => {
+              el.style.width = elementToSync.clientWidth + "px";
+            })
+          );
           break;
         default:
           console.warn(

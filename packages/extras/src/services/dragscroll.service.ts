@@ -1,4 +1,5 @@
 import { Utils } from "./utils.service";
+import { throttle } from "@ribajs/utils/src/control";
 
 export interface DragscrollOptions {
   detectGlobalMove?: boolean;
@@ -72,12 +73,12 @@ export class Dragscroll {
   }
 
   public checkDraggable() {
-    if (Utils.isScrollable(this.el)) {
-      this.el.classList.add("draggable");
-      return true;
-    }
-    this.el.classList.remove("draggable");
-    return false;
+    return throttle(() => {
+      if (Utils.isScrollable(this.el)) {
+        this.el.classList.add("draggable");
+      }
+      this.el.classList.remove("draggable");
+    })();
   }
 
   protected onMouseDown<EventListener>(e: MouseEvent) {

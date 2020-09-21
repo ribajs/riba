@@ -197,7 +197,7 @@ class CarouselService {
     }
 
     if (this._config && this._config.interval && !this._isPaused) {
-      this._interval = setInterval(
+      this._interval = window.setInterval(
         (document.visibilityState ? this.nextWhenVisible : this.next).bind(
           this
         ),
@@ -288,21 +288,17 @@ class CarouselService {
 
   _addEventListeners() {
     if (this._config.keyboard) {
-      EventHandler.on<KeyboardEvent>(this._element, Event.KEYDOWN, (event) =>
-        this._keydown(event)
+      EventHandler.on(this._element, Event.KEYDOWN, (event) =>
+        this._keydown(event as KeyboardEvent)
       );
     }
 
     if (this._config.pause === "hover") {
-      EventHandler.on(
-        this._element,
-        Event.MOUSEENTER,
-        (event: TouchEvent & MouseEvent & PointerEvent) => this.pause(event)
+      EventHandler.on(this._element, Event.MOUSEENTER, (event: Event) =>
+        this.pause(event as TouchEvent & MouseEvent & PointerEvent)
       );
-      EventHandler.on(
-        this._element,
-        Event.MOUSELEAVE,
-        (event: TouchEvent & MouseEvent & PointerEvent) => this.cycle(event)
+      EventHandler.on(this._element, Event.MOUSELEAVE, (event: Event) =>
+        this.cycle(event)
       );
     }
 
@@ -365,42 +361,29 @@ class CarouselService {
     Utils.makeArray(
       SelectorEngine.find(Selector.ITEM_IMG, this._element)
     ).forEach((itemImg) => {
-      EventHandler.on(
-        itemImg,
-        Event.DRAG_START,
-        (event: TouchEvent & MouseEvent & PointerEvent) =>
-          event.preventDefault()
+      EventHandler.on(itemImg, Event.DRAG_START, (event: Event) =>
+        event.preventDefault()
       );
     });
 
     if (this._pointerEvent) {
-      EventHandler.on(
-        this._element,
-        Event.POINTERDOWN,
-        (event: TouchEvent & MouseEvent & PointerEvent) => start(event)
+      EventHandler.on(this._element, Event.POINTERDOWN, (event: Event) =>
+        start(event as TouchEvent & MouseEvent & PointerEvent)
       );
-      EventHandler.on(
-        this._element,
-        Event.POINTERUP,
-        (event: TouchEvent & MouseEvent & PointerEvent) => end(event)
+      EventHandler.on(this._element, Event.POINTERUP, (event: Event) =>
+        end(event as TouchEvent & MouseEvent & PointerEvent)
       );
 
       this._element.classList.add(ClassName.POINTER_EVENT);
     } else {
-      EventHandler.on(
-        this._element,
-        Event.TOUCHSTART,
-        (event: TouchEvent & MouseEvent & PointerEvent) => start(event)
+      EventHandler.on(this._element, Event.TOUCHSTART, (event: Event) =>
+        start(event as TouchEvent & MouseEvent & PointerEvent)
       );
-      EventHandler.on(
-        this._element,
-        Event.TOUCHMOVE,
-        (event: TouchEvent & MouseEvent & PointerEvent) => move(event)
+      EventHandler.on(this._element, Event.TOUCHMOVE, (event: Event) =>
+        move(event as TouchEvent & MouseEvent & PointerEvent)
       );
-      EventHandler.on(
-        this._element,
-        Event.TOUCHEND,
-        (event: TouchEvent & MouseEvent & PointerEvent) => end(event)
+      EventHandler.on(this._element, Event.TOUCHEND, (event: Event) =>
+        end(event as TouchEvent & MouseEvent & PointerEvent)
       );
     }
   }

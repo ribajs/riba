@@ -4,8 +4,9 @@ import {
 } from "../interfaces/index";
 import { ConfigurationLoader } from "../lib/configuration/index";
 import { FileSystemReader } from "../lib/readers/index";
+import { join } from "path";
 
-export abstract class AbstractAction {  
+export abstract class AbstractAction {
   public abstract async handle(
     inputs?: CommandInput[],
     options?: CommandInput[],
@@ -22,7 +23,7 @@ export abstract class AbstractAction {
   }
 
   protected setInput(
-    inputs: CommandInput[], 
+    inputs: CommandInput[],
     name: string,
     value: string | boolean
   ) {
@@ -72,9 +73,13 @@ export abstract class AbstractAction {
     return result;
   }
 
-  protected async loadConfiguration() {
+  protected async loadConfiguration(projectDirectory?: string) {
+    let path = process.cwd();
+    if (projectDirectory) {
+      path = join(path, projectDirectory);
+    }
     const loader: IConfigurationLoader = new ConfigurationLoader(
-      new FileSystemReader(process.cwd())
+      new FileSystemReader(path)
     );
     return loader.load();
   }

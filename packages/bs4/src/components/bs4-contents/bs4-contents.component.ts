@@ -1,5 +1,5 @@
 import { Component } from "@ribajs/core";
-
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./bs4-contents.component.html";
 
 export interface Anchor {
@@ -122,10 +122,6 @@ export class Bs4ContentsComponent extends Component {
     });
   }
 
-  protected async beforeBind() {
-    await super.beforeBind();
-  }
-
   protected async afterBind() {
     await super.afterBind();
     if (
@@ -175,7 +171,7 @@ export class Bs4ContentsComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       return null;
     } else {
       return template;

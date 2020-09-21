@@ -1,0 +1,196 @@
+$content-slider-height: 800px !default;
+$content-slider-sm-height: 800px !default;
+$content-slider-md-height: 600px !default;
+$content-slider-lg-height: 600px !default;
+$content-slider-xl-height: 800px !default;
+
+$content-slider-capture-height: 300px !default;
+$content-slider-capture-sm-height: 300px !default;
+$content-slider-capture-md-height: 400px !default;
+$content-slider-capture-lg-height: 350px !default;
+$content-slider-capture-xl-height: 400px !default;
+
+$content-slider-active-item-margin-bottom: 30px !default;
+$content-slider-active-item-sm-margin-bottom: 30px !default;
+$content-slider-active-item-md-margin-bottom: 30px !default;
+$content-slider-active-item-lg-margin-bottom: 30px !default;
+$content-slider-active-item-xl-margin-bottom: 30px !default;
+
+$content-slider-offset: 50px !default;
+$content-slider-sm-offset: 50px !default;
+$content-slider-md-offset: 50px !default;
+$content-slider-lg-offset: 50px !default;
+$content-slider-xl-offset: 50px !default;
+
+@function content-slider-breakpoint-height($breakpoint) {
+  @if $breakpoint == xl {
+    @return $content-slider-xl-height;
+  } @else if $breakpoint == lg {
+    @return $content-slider-lg-height;
+  } @else if $breakpoint == md {
+    @return $content-slider-md-height;
+  } @else if $breakpoint == sm {
+    @return $content-slider-sm-height;
+  } @else if $breakpoint == xs {
+    @return $content-slider-height;
+  }
+  @return $content-slider-height;
+}
+
+@function content-slider-capture-breakpoint-height($breakpoint) {
+  @if $breakpoint == xl {
+    @return $content-slider-capture-xl-height;
+  } @else if $breakpoint == lg {
+    @return $content-slider-capture-lg-height;
+  } @else if $breakpoint == md {
+    @return $content-slider-capture-md-height;
+  } @else if $breakpoint == sm {
+    @return $content-slider-capture-sm-height;
+  } @else if $breakpoint == xs {
+    @return $content-slider-capture-height;
+  }
+  @return $content-slider-capture-height;
+}
+
+@function content-slider-active-item-breakpoint-margin-bottom($breakpoint) {
+  @if $breakpoint == xl {
+    @return $content-slider-active-item-xl-margin-bottom;
+  } @else if $breakpoint == lg {
+    @return $content-slider-active-item-lg-margin-bottom;
+  } @else if $breakpoint == md {
+    @return $content-slider-active-item-md-margin-bottom;
+  } @else if $breakpoint == sm {
+    @return $content-slider-active-item-sm-margin-bottom;
+  } @else if $breakpoint == xs {
+    @return $content-slider-active-item-margin-bottom;
+  }
+  @return $content-slider-active-item-margin-bottom;
+}
+
+@function content-slider-breakpoint-offset($breakpoint) {
+  @if $breakpoint == xl {
+    @return $content-slider-xl-offset;
+  } @else if $breakpoint == lg {
+    @return $content-slider-lg-offset;
+  } @else if $breakpoint == md {
+    @return $content-slider-md-offset;
+  } @else if $breakpoint == sm {
+    @return $content-slider-sm-offset;
+  } @else if $breakpoint == xs {
+    @return $content-slider-offset;
+  }
+  @return $content-slider-offset;
+}
+
+content-slider {
+  .wrapper {
+    overflow-x: hidden;
+    .slider {
+      overflow-x: visible;
+      transition: transform 0.2s ease-in-out;
+      .item {
+        // background-color: antiquewhite;
+        transition: all 0.2s ease-in-out;
+        
+        &.active {
+          // background-color: red;
+          z-index: 1;
+        }
+        
+        img {
+          width: 100%;
+          max-width: 100%;
+          max-height: 100%;
+          object-fit: contain;
+          user-select: none;
+          pointer-events: none;
+        }
+        .item-capture {
+          display: none;
+        }
+      }
+    }
+    .overlay {
+      .controls, .capture {
+        height: 100%;
+      }
+      .controls {
+        z-index: 1;
+        pointer-events: none;
+        .prev, .next {
+          position: absolute;
+          top: 50%;
+          pointer-events: all;
+        }
+        .prev {
+          left: 0;
+        }
+        .next {
+          right: 0;
+        }
+      }
+      .capture {
+        overflow-y: auto;
+        user-select: none;
+      }
+    }
+  }
+}
+
+// Responsive sizes
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $content-slider-cur-height: content-slider-breakpoint-height($breakpoint);
+    $content-slider-capture-cur-height: content-slider-capture-breakpoint-height($breakpoint);
+    $content-slider-active-item-cur-margin-bottom: content-slider-active-item-breakpoint-margin-bottom($breakpoint);
+    $content-slider-cur-offset: content-slider-breakpoint-offset($breakpoint);
+
+    content-slider {
+      // content: $breakpoint; // For debugging
+      height: $content-slider-cur-height;
+      min-height: $content-slider-cur-height;
+      .wrapper {
+        .slider, .overlay {
+          padding-left: $content-slider-cur-offset;
+        }
+        .slider {
+          max-height: $content-slider-cur-height;
+          height: $content-slider-cur-height;
+          .item {
+            &.active {
+              height: $content-slider-cur-height + $content-slider-active-item-cur-margin-bottom;
+              margin-bottom: -$content-slider-active-item-cur-margin-bottom;
+            }
+            &:not(.active) {
+              height: $content-slider-cur-height - $content-slider-capture-cur-height;
+            }
+          }
+        }
+        .overlay {
+          height: $content-slider-cur-height;
+          @if $breakpoint == sm {
+            margin-top: $content-slider-active-item-cur-margin-bottom;
+            .controls {
+              display: none;
+            }
+          } @else if $breakpoint == xs {
+            margin-top: $content-slider-active-item-cur-margin-bottom;
+            .controls {
+              display: none;
+            }
+          } @else {
+            margin-top: -$content-slider-cur-height;
+            .controls {
+              display: flex;
+            }
+            .capture {
+              max-height: $content-slider-capture-cur-height;
+            }
+          }
+
+        }
+      }
+    }
+  }
+}
+

@@ -1,4 +1,4 @@
-import { Riba } from "../index";
+import { Riba } from "../riba";
 import { blockBinder } from "./block.binder";
 import { dotAdapter } from "../adapters/dot.adapter";
 

@@ -4,9 +4,13 @@
     <title><%= name %></title>
   </head>
   <body>
-    <div id="rv-<%= name %>">
-      <rv-<%= name %>-example hello="Hello World!"></rv-<%= name %>-example>
-      <p rv-<%= name %>-example="'Hello' | <%= name %>-example 'and'"></p>
+    <div class="container" id="rv-<%= name %>">
+      <div class="row">
+        <div class="col-12 my-5">
+          <rv-<%= name %>-example hello="Hello World!"></rv-<%= name %>-example>
+          <p rv-<%= name %>-example="'Hello' | <%= name %>-example 'and'"></p>
+        </div>
+      </div>
     </div>
   </body>
 </html>

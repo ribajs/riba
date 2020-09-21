@@ -19,17 +19,21 @@ interface Scope {
   togglePlay: VideoComponent["togglePlay"];
 
   // custom
-  /** If the user will pass the mp4 source for some reason */
-  mp4Src?: string;
+  /** If the user will pass the video source for some reason */
+  videoSrc?: string;
+  autoplayOnMinBuffer: number;
+  autoplayMediaQuery: string;
 }
 
 export class VideoComponent extends Component {
   public static tagName = "rv-video";
 
   protected autobind = true;
+  protected alreadyStartedPlaying = false;
+  protected wasPaused = false;
 
   static get observedAttributes() {
-    return ["mp4-src"];
+    return ["video-src", "autoplay-on-min-buffer", "autoplay-media-query"];
   }
 
   public get muted() {
@@ -117,6 +121,10 @@ export class VideoComponent extends Component {
     loop: this.loop,
     controls: this.controls,
     currentTime: this.currentTime,
+
+    videoSrc: undefined,
+    autoplayOnMinBuffer: 0,
+    autoplayMediaQuery: "",
     /**
      * @readonly
      */
@@ -127,7 +135,6 @@ export class VideoComponent extends Component {
     play: this.play,
     pause: this.pause,
     togglePlay: this.togglePlay,
-    mp4Src: "",
   };
 
   constructor(element?: HTMLElement) {
@@ -173,8 +180,113 @@ export class VideoComponent extends Component {
     this.scope.controls = this.video.controls;
     this.scope.currentTime = this.video.currentTime;
     this.scope.paused = this.video.paused;
+
     this.init(VideoComponent.observedAttributes);
   }
+
+  protected async afterBind() {
+    await super.afterBind();
+
+    //video-src attribute
+    if (this.scope.videoSrc) {
+      let sourceElement = this.video.querySelector("source");
+      if (!sourceElement) {
+        sourceElement = document.createElement("source");
+        this.video.appendChild(sourceElement);
+      }
+      sourceElement.setAttribute("src", this.scope.videoSrc);
+    }
+
+    if (this.scope.autoplayMediaQuery) {
+      //autoplay-media-query attribute
+      const mediaQueryList = window.matchMedia(this.scope.autoplayMediaQuery);
+      mediaQueryList.addEventListener(
+        "change",
+        this.onMediaQueryListEvent.bind(this)
+      );
+      if (mediaQueryList.matches) {
+        this.autoplay();
+      }
+    } else if (this.scope.autoplayOnMinBuffer) {
+      //autoplay-on-min-buffer attribute
+      this.autoplay();
+    }
+  }
+  /**
+   * Loads the media and checks if the autoplay-on-min-buffer is set
+   */
+  public autoplay() {
+    if (this.scope.autoplayOnMinBuffer) {
+      this.video.addEventListener("progress", this.onVideoProgress.bind(this));
+      this.video.addEventListener(
+        "canplaythrough",
+        this.forceAutoplay.bind(this) //trust browser more than ourselves
+      );
+      this.forceLoad();
+    } else {
+      this.forceAutoplay();
+    }
+  }
+
+  public forceLoad() {
+    this.video.setAttribute("preload", "auto");
+    this.video.load();
+  }
+
+  /**
+   * Forces autoplay without checking for the autoplay-on-min-buffer event
+   */
+  public forceAutoplay() {
+    if (!this.alreadyStartedPlaying) {
+      this.alreadyStartedPlaying = true;
+      this.video.muted = true; //video is required to be muted if autoplay video is supposed to autoplay
+      this.forceLoad();
+      this.video.play();
+    }
+  }
+
+  /*********************
+   * Event listener start
+   *********************/
+  private onMediaQueryListEvent(event: MediaQueryListEvent) {
+    if (event.matches) {
+      //if mediaquery matches, play video or start autoplay
+      if (this.alreadyStartedPlaying) {
+        if (!this.wasPaused) {
+          this.play();
+        }
+      } else {
+        this.autoplay();
+      }
+    } else {
+      //if mediaquery stops matching, pause video if not already paused
+      this.wasPaused = this.video.paused;
+      this.pause();
+    }
+  }
+
+  private onVideoProgress() {
+    if (this.alreadyStartedPlaying) return;
+    if (isNaN(this.video.duration)) {
+      console.warn("Video duration is NaN");
+      return;
+    }
+
+    //calculate already buffered amount
+    let bufferedAmount = 0;
+    for (let i = 0; i < this.video.buffered.length; i++) {
+      bufferedAmount +=
+        this.video.buffered.end(i) - this.video.buffered.start(i);
+    }
+
+    //if buffered amount is over given percentage in scope, force autoplay
+    if (bufferedAmount / this.video.duration > this.scope.autoplayOnMinBuffer) {
+      this.forceAutoplay();
+    }
+  }
+  /*********************
+   * Event listener end
+   *********************/
 
   protected async init(observedAttributes: string[]) {
     return super.init(observedAttributes).then((view) => {

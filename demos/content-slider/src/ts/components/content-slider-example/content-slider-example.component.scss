@@ -1,0 +1,100 @@
+$content-slider-snes-height: 400px;
+$content-slider-snes-sm-height: 400px;
+$content-slider-snes-md-height: 400px;
+$content-slider-snes-lg-height: 400px;
+$content-slider-snes-xl-height: 400px;
+
+$content-slider-snes-capture-height: 150px;
+$content-slider-snes-capture-sm-height: 150px;
+$content-slider-snes-capture-md-height: 250px;
+$content-slider-snes-capture-lg-height: 200px;
+$content-slider-snes-capture-xl-height: 200px;
+
+@function content-slider-snes-breakpoint-height($breakpoint) {
+  @if $breakpoint == xl {
+    @return $content-slider-snes-xl-height;
+  } @else if $breakpoint == lg {
+    @return $content-slider-snes-lg-height;
+  } @else if $breakpoint == md {
+    @return $content-slider-snes-md-height;
+  } @else if $breakpoint == sm {
+    @return $content-slider-snes-sm-height;
+  } @else if $breakpoint == xs {
+    @return $content-slider-snes-height;
+  }
+  @return $content-slider-snes-height;
+}
+
+@function content-slider-snes-capture-breakpoint-height($breakpoint) {
+  @if $breakpoint == xl {
+    @return $content-slider-snes-capture-xl-height;
+  } @else if $breakpoint == lg {
+    @return $content-slider-snes-capture-lg-height;
+  } @else if $breakpoint == md {
+    @return $content-slider-snes-capture-md-height;
+  } @else if $breakpoint == sm {
+    @return $content-slider-snes-capture-sm-height;
+  } @else if $breakpoint == xs {
+    @return $content-slider-snes-capture-height;
+  }
+  @return $content-slider-snes-capture-height;
+}
+
+content-slider-example {
+
+  // Responsive sizes
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    @include media-breakpoint-up($breakpoint) {
+      $content-slider-cur-height: content-slider-snes-breakpoint-height($breakpoint);
+      $content-slider-capture-cur-height: content-slider-snes-capture-breakpoint-height($breakpoint);
+      $content-slider-active-item-cur-margin-bottom: 0;
+
+      content-slider.snes {
+        // content: $breakpoint; // For debugging
+        height: $content-slider-cur-height;
+        min-height: $content-slider-cur-height;
+        .wrapper {
+          .slider {
+            max-height: $content-slider-cur-height;
+            height: $content-slider-cur-height;
+            .item {
+              &.active {
+                height: $content-slider-cur-height + $content-slider-active-item-cur-margin-bottom;
+                margin-bottom: -$content-slider-active-item-cur-margin-bottom;
+              }
+              &:not(.active) {
+                height: $content-slider-cur-height - $content-slider-capture-cur-height;
+              }
+            }
+          }
+          .overlay {
+            height: $content-slider-cur-height;
+            @if $breakpoint == sm {
+              margin-top: $content-slider-active-item-cur-margin-bottom;
+              .controls {
+                display: none;
+              }
+            } @else if $breakpoint == xs {
+              margin-top: $content-slider-active-item-cur-margin-bottom;
+              .controls {
+                display: none;
+              }
+            } @else {
+              margin-top: -$content-slider-cur-height;
+              .controls {
+                display: flex;
+              }
+              .capture {
+                max-height: $content-slider-capture-cur-height;
+              }
+            }
+
+          }
+        }
+      }
+    }
+  }
+
+}
+
+

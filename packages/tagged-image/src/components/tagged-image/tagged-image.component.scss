@@ -1,3 +1,30 @@
-@import './tagged-image.variables';
+tagged-image {
+  .anchor {
+    width: 0;
+    height: 0;
+    padding: 5px;
+    background-color: black;
+    border-radius: 5px;
+    position: absolute;
+    top: 58%;
+    left: 54.3%;
+    transform: translate(-5px, -5px);  
+    cursor: pointer;
+    transition: all ease-in-out 0.1s;
+    &:hover {
+      transform: translate(-20px, -20px);
+      padding: 20px;
+      border-radius: 20px;
+    }
+  }
+  
+  .image-container {
+    position: relative;
+  }
 
-test {}
+  img {
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+}

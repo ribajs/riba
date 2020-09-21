@@ -1,4 +1,4 @@
-// Fork of https://raw.githubusercontent.com/twbs/bootstrap/main/js/src/toast.js
+// Fork of https://github.com/twbs/bootstrap/blob/main/js/src/toast.js
 
 /**
  * --------------------------------------------------------------------------
@@ -181,7 +181,7 @@ export class ToastService {
 
   // Private
 
-  protected _getConfig(config: any) {
+  protected _getConfig(config: Config): Config {
     config = {
       ...Default,
       ...(this._element?.dataset || {}),

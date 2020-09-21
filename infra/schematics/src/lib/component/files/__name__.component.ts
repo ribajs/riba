@@ -1,16 +1,19 @@
 import {
   Component,
 } from '@ribajs/core';
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 
 <% if (templateEngine === 'pug') { %>import pugTemplate from './<%= name %>.component.pug';<% } %><% if (templateEngine === 'html') { %>import template from './<%= name %>.component.html';<% } %>
 
 interface Scope {
-  hello?: string;
+  hello: string;
 }
 
 export class <%= classify(name) %>Component extends Component {
 
   public static tagName: string = 'rv-<%= name %>';
+
+  public _debug = true;
 
   protected autobind = true;
 
@@ -19,12 +22,12 @@ export class <%= classify(name) %>Component extends Component {
   }
 
   protected scope: Scope = {
-    hello: undefined,
+    hello: '',
   };
 
   constructor(element?: HTMLElement) {
     super(element);
-    console.debug('constructor', this);
+    this.debug('constructor', this);
   }
 
   protected connectedCallback() {
@@ -41,16 +44,30 @@ export class <%= classify(name) %>Component extends Component {
 
   protected async beforeBind() {
     await super.beforeBind();
-    console.debug('beforeBind', this.scope);
+    this.debug('beforeBind', this.scope);
   }
 
   protected async afterBind() {
     await super.afterBind();
-    console.debug('afterBind', this.scope);
+    this.debug('afterBind', this.scope);
   }
 
   protected requiredAttributes() {
     return [];
+  }
+
+  protected attributeChangedCallback(
+    attributeName: string,
+    oldValue: any,
+    newValue: any,
+    namespace: string | null
+  ) {
+    return super.attributeChangedCallback(
+      attributeName,
+      oldValue,
+      newValue,
+      namespace
+    );
   }
 
   protected parsedAttributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
@@ -64,11 +81,11 @@ export class <%= classify(name) %>Component extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
-      console.debug('Do not use template, because element has child nodes');
+    if (hasChildNodesTrim(this.el)) {
+      this.debug('Do not use template, because element has child nodes');
       return null;
     } else {
-      <% if (templateEngine === 'pug') { %>const template = pugTemplate(this.scope);<% } %>console.debug('Use template', template);
+      <% if (templateEngine === 'pug') { %>const template = pugTemplate(this.scope);<% } %>this.debug('Use template', template);
       return template;
     }
   }

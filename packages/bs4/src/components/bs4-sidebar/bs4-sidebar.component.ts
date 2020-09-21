@@ -1,5 +1,8 @@
 import { Component, EventDispatcher } from "@ribajs/core";
-import { getViewportDimensions } from "@ribajs/utils/src/dom";
+import {
+  getViewportDimensions,
+  hasChildNodesTrim,
+} from "@ribajs/utils/src/dom";
 
 type State =
   | "overlay-left"
@@ -398,7 +401,7 @@ export class Bs4SidebarComponent extends Component {
   }
 
   protected template() {
-    if (!this.el.hasChildNodes()) {
+    if (!hasChildNodesTrim(this.el)) {
       console.warn(
         "No child elements found, this component as no template so you need to define your own as child of this component."
       );

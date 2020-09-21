@@ -12,17 +12,11 @@ export class TaggedImageComponent extends Component {
   protected autobind = true;
 
   static get observedAttributes() {
-    return [
-      "image-url",
-      "initial-lng",
-      "initial-zoom",
-      "tile-url",
-      "attribution",
-    ];
+    return ["image-url"];
   }
 
   protected scope: Scope = {
-    imageUrl: "abc",
+    imageUrl: "",
   };
 
   constructor(element?: HTMLElement) {
@@ -43,7 +37,7 @@ export class TaggedImageComponent extends Component {
   }
 
   protected async afterBind() {
-    await super.afterBind();
+    return await super.afterBind();
   }
 
   // deconstructor
@@ -52,10 +46,6 @@ export class TaggedImageComponent extends Component {
   }
 
   protected template() {
-    // for (const el of this.el.children) {
-    //   if (el.tagName === "ICON") {
-    //   }
-    // }
     return template;
   }
 }

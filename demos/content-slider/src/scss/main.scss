@@ -1,0 +1,20 @@
+// Original Bootstrap 4 Styles
+@import "~bootstrap/scss/bootstrap";
+
+// Riba modules
+@import '~@ribajs/core/src/index';
+@import '~@ribajs/bs4/src/index';
+@import "~@ribajs/content-slider/src/index";
+
+// @import './binders/index';
+@import "../ts/components/index";
+// @import './formatters/index';
+
+body {
+  height: 100%;
+  width: 100%;
+}
+html {
+  height: 100%;
+  width: 100%;
+}

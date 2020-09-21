@@ -1,13 +1,13 @@
 import { Component } from "@ribajs/core";
-
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import {
   BarConfig,
   BarWrapper,
-  shopifyEasdkModule,
   LoadingStateWrapper,
   ButtonsConfig,
   PaginationConfig,
   ButtonConfig,
+  BarWrapperService,
 } from "../../index";
 
 import pugTemplate from "./bar.component.pug";
@@ -63,7 +63,7 @@ export class BarComponent extends Component {
     ];
   }
 
-  protected bar: BarWrapper = new shopifyEasdkModule.services.BarWrapperService();
+  protected bar: BarWrapper = new BarWrapperService();
 
   protected scope: Scope = {
     showFallbackBar: false,
@@ -214,7 +214,7 @@ export class BarComponent extends Component {
   protected template() {
     let template: string | null = null;
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       console.debug("Do not template, because element has child nodes");
       return template;
     } else {

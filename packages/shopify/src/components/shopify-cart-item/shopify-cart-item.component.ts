@@ -1,14 +1,15 @@
 import { Component } from "@ribajs/core";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { ShopifyCartLineItem, ShopifyCartObject } from "../../interfaces";
 import { ShopifyCartService } from "../../services";
 import template from "./shopify-cart-item.component.html";
-import { TouchEventsService } from "../../../../extras/src";
 
 export interface Scope {
   id: ShopifyCartLineItem["id"];
   title?: ShopifyCartLineItem["title"];
   price?: ShopifyCartLineItem["id"];
   linePrice?: ShopifyCartLineItem["line_price"];
+  lineNumber?: ShopifyCartLineItem["line_number"];
   quantity: ShopifyCartLineItem["quantity"];
   sku?: ShopifyCartLineItem["sku"];
   grams?: ShopifyCartLineItem["grams"];
@@ -26,6 +27,7 @@ export interface Scope {
   variantTitle?: ShopifyCartLineItem["variant_title"];
   variantOptions?: ShopifyCartLineItem["variant_options"];
   variantId: ShopifyCartLineItem["variant_id"];
+  key?: ShopifyCartLineItem["key"];
 
   remove: ShopifyCartItemComponent["remove"];
   increase: ShopifyCartItemComponent["increase"];
@@ -44,6 +46,7 @@ export class ShopifyCartItemComponent extends Component {
       "title",
       "price",
       "line-price",
+      "line-number",
       "quantity",
       "sku",
       "grams",
@@ -61,6 +64,7 @@ export class ShopifyCartItemComponent extends Component {
       "variant-title",
       "variant-options",
       "variant-id",
+      "key",
     ];
   }
 
@@ -166,10 +170,13 @@ export class ShopifyCartItemComponent extends Component {
       return;
     }
 
+    this.debug("update item from cart");
+
     // this.scope.id = item.id;
     this.scope.title = item.title;
     this.scope.price = item.price;
     this.scope.linePrice = item.line_price;
+    this.scope.lineNumber = item.line_number;
     this.scope.quantity = item.quantity;
     this.scope.sku = item.sku;
     this.scope.grams = item.grams;
@@ -187,6 +194,7 @@ export class ShopifyCartItemComponent extends Component {
     this.scope.variantTitle = item.variant_title;
     this.scope.variantOptions = item.variant_options;
     // this.scope.variantId = item.variant_id;
+    this.scope.key = item.key;
 
     if (this.scope.quantity === 0) {
       super.remove(); // Remove element
@@ -196,17 +204,30 @@ export class ShopifyCartItemComponent extends Component {
 
   protected getItemFromCart(cart: ShopifyCartObject) {
     for (const item of cart.items) {
-      if (
-        item.id === this.scope.id &&
-        item.variant_id === this.scope.variantId
-      ) {
-        return item;
+      // Compare key
+      if (item.key && this.scope.key) {
+        if (item.key === this.scope.key) {
+          return item;
+        }
+      } else {
+        // Compare id and variantId
+        if (
+          item.id === this.scope.id &&
+          item.variant_id === this.scope.variantId
+        ) {
+          return item;
+        }
       }
     }
     return null;
   }
 
   protected async beforeBind() {
+    // const cart = await ShopifyCartService.get();
+  }
+
+  protected async afterBind() {
+    this.debug("afterBind", this.scope);
     ShopifyCartService.shopifyCartEventDispatcher.on(
       "ShopifyCart:request:start",
       () => {
@@ -223,18 +244,14 @@ export class ShopifyCartItemComponent extends Component {
         return cart;
       }
     );
-  }
 
-  protected async afterBind() {
-    this.debug("afterBind", this.scope);
-    return ShopifyCartService.get().catch((error: Error) => {
-      console.error(error);
-    });
+    const cart = await ShopifyCartService.get();
+    this.onCartUpdate(cart);
   }
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       return null;
     } else {
       return template;

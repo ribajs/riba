@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable no-undef */
 // https://github.com/Microsoft/TypeScript-Babel-Starter
-const path = require('path');
-const TerserPlugin = require('terser-webpack-plugin');
+const path = require("path");
+const TerserPlugin = require("terser-webpack-plugin");
 const { DuplicatesPlugin } = require("inspectpack/plugin");
 
 /**
@@ -16,51 +18,53 @@ class ConsoleNotifierPlugin {
   }
 
   apply(compiler) {
-    compiler.plugin('done', this.compilationDone.bind(this));
+    compiler.plugin("done", this.compilationDone.bind(this));
   }
 }
 
-module.exports = env => {
+module.exports = (env) => {
   return {
     optimization: {
-      minimizer: [new TerserPlugin({
-        sourceMap: !env.production,
-        terserOptions: {
-          ecma: undefined,
-          warnings: true,
-          parse: {},
-          compress: {},
-          mangle: true, // Note `mangle.properties` is `false` by default.
-          module: false,
-          output: {
-            comments: false,
+      minimizer: [
+        new TerserPlugin({
+          sourceMap: !env.production,
+          terserOptions: {
+            ecma: undefined,
+            warnings: true,
+            parse: {},
+            compress: {},
+            mangle: true, // Note `mangle.properties` is `false` by default.
+            module: false,
+            output: {
+              comments: false,
+            },
+            toplevel: false,
+            nameCache: null,
+            ie8: false,
+            keep_classnames: undefined,
+            keep_fnames: false,
+            safari10: true,
           },
-          toplevel: false,
-          nameCache: null,
-          ie8: false,
-          keep_classnames: undefined,
-          keep_fnames: false,
-          safari10: true,
-        },
-      })],
+        }),
+      ],
       splitChunks: {
-        automaticNameDelimiter: '.',
-        chunks: 'all'
+        automaticNameDelimiter: ".",
+        chunks: "all",
       },
     },
     // Change to your "entry-point".
-    entry: ['./assets/ts/main.ts'],
-    devtool: env.production ? '' : 'inline-source-map',
-    mode: env.production ? 'production' : 'development',
+    entry: ["./assets/ts/main.ts"],
+    devtool: env.production ? "" : "inline-source-map",
+    mode: env.production ? "production" : "development",
     output: {
-      filename: '[name].bundle.js',
-      chunkFilename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'assets/js')
+      filename: "[name].bundle.js",
+      chunkFilename: "[name].bundle.js",
+      path: path.resolve(__dirname, "assets/js"),
     },
     resolve: {
-      modules: ['node_modules'],
-      extensions: ['.ts', '.tsx', '.js', '.json'],
-      symlinks: true
+      modules: ["node_modules"],
+      extensions: [".ts", ".tsx", ".js", ".json"],
+      symlinks: true,
     },
     module: {
       rules: [
@@ -68,33 +72,34 @@ module.exports = env => {
         {
           test: /\.(tsx?)|\.(js)$/,
           exclude: [/node_modules\/(?!@ribajs)/, /(bower_components)/],
-          loader: 'babel-loader',
+          loader: "babel-loader",
         },
         // html templates
         {
           test: /\.html$/,
-          use: [ {
-            loader: 'html-loader',
-            options: {
-              minimize: true
-            }
-          }]
+          use: [
+            {
+              loader: "html-loader",
+              options: {
+                minimize: true,
+              },
+            },
+          ],
         },
         // pug templates
         {
           test: /\.pug$/,
-          use: [ {
-            loader: 'pug-loader',
-            options: {
-              minimize: true
-            }
-          }]
-        }
-      ]
+          use: [
+            {
+              loader: "pug-loader",
+              options: {
+                minimize: true,
+              },
+            },
+          ],
+        },
+      ],
     },
-    plugins:  [
-      new ConsoleNotifierPlugin(),
-      new DuplicatesPlugin(),
-    ],
+    plugins: [new ConsoleNotifierPlugin(), new DuplicatesPlugin()],
   };
 };

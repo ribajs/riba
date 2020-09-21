@@ -1,6 +1,24 @@
 export const MAX_UID = 1000;
 
 /**
+ * Calls el.hasChildNodes but ignores empty strings, the default hasChildNodes would return ture on `<div> </div>`.
+ * Very useful to check within a component if the component has set child elements to load or overwrite the component template
+ * @param el
+ */
+export const hasChildNodesTrim = (el: HTMLUnknownElement) => {
+  if (!el.hasChildNodes()) {
+    return false;
+  }
+  const childNodes = el.childNodes;
+  if (childNodes.length === 1 && childNodes[0].nodeType === 3) {
+    if (!childNodes[0].nodeValue || childNodes[0].nodeValue?.trim() === "") {
+      return false;
+    }
+  }
+  return true;
+};
+
+/**
  *
  */
 export const getInputValue = (el: HTMLElement) => {
@@ -98,6 +116,8 @@ export const getElementFromEvent = (event: Event | MouseEvent | TouchEvent) => {
     ((event as Event).target as HTMLAnchorElement) ||
     ((event as any).currentTarget as HTMLAnchorElement) ||
     ((event as MouseEvent).relatedTarget as HTMLAnchorElement) ||
+    // JQuery event
+    ((event as any).delegateTarget as HTMLUnknownElement) ||
     ((event as any).fromElement as HTMLAnchorElement);
   return el;
 };

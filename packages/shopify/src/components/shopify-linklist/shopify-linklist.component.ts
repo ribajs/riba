@@ -1,4 +1,5 @@
 import { Component, EventDispatcher } from "@ribajs/core";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./shopify-linklist.component.html";
 
 export interface LinklistLink {
@@ -261,7 +262,7 @@ export class ShopifyLinklistComponent extends Component {
    * Only set the component template if there no childs already
    */
   protected template() {
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       return null;
     } else {
       return template;

@@ -30,7 +30,7 @@ export interface Scope extends OcFormScope {
 export class HCaptchaFormComponent extends OcFormComponent {
   public static tagName = "hcaptcha-oc-form";
 
-  public _debug = true;
+  public _debug = false;
   protected autobind = true;
 
   protected widgetID?: string;

@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/cache",
   "description": "Cache module of Riba.js",
-  "version": "1.9.0-alpha.0",
+  "version": "1.9.0-alpha.10",
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [
     "Michael Richards",
@@ -40,11 +40,11 @@
   "directories": {},
   "devDependencies": {
     "@ribajs/eslint-config": "workspace:infra/eslint-config",
-    "@typescript-eslint/eslint-plugin": "^3.6.0",
-    "@typescript-eslint/parser": "^3.6.0",
-    "eslint": "^7.4.0",
+    "@typescript-eslint/eslint-plugin": "^3.10.1",
+    "@typescript-eslint/parser": "^3.10.1",
+    "eslint": "^7.8.1",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "prettier": "^2.0.5"
+    "prettier": "^2.1.1"
   }
 }

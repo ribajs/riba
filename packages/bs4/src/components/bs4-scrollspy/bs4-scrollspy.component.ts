@@ -2,7 +2,7 @@ import {
   Bs4ContentsComponent,
   Scope as Bs4ContentsComponentScope,
 } from "../bs4-contents/bs4-contents.component";
-
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./bs4-scrollspy.component.html";
 
 export interface Anchor {
@@ -68,7 +68,7 @@ export class Bs4ScrollspyComponent extends Bs4ContentsComponent {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       return null;
     } else {
       return template;

@@ -4,6 +4,7 @@ import template from "./bs4-share.component.html";
 import labelTemplate from "./bs4-share.label.html";
 import { ShareItem, ShareUrlType } from "../../interfaces";
 import { DropdownService } from "@ribajs/bs4";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 
 export interface Scope {
   type: ShareUrlType;
@@ -386,8 +387,8 @@ export class Bs4ShareComponent extends Component {
   }
 
   protected template() {
-    this.debug("template", this.el, this.el.hasChildNodes());
-    if (this.el && this.el.hasChildNodes()) {
+    this.debug("template", this.el, hasChildNodesTrim(this.el));
+    if (this.el && hasChildNodesTrim(this.el)) {
       // If a child is set, this is a custom label template
       this.scope.labelTemplate = this.el.innerHTML;
       this.debug("Custom label template: ", this.scope.labelTemplate);

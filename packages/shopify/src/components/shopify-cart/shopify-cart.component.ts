@@ -7,7 +7,7 @@ import {
   ShopifyShippingRatesNormalized,
 } from "../../interfaces";
 import { ShopifyCartService } from "../../services";
-import { getInputValue } from "@ribajs/utils/src/dom";
+import { getInputValue, hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./shopify-cart.component.html";
 
 export interface Scope {
@@ -51,7 +51,7 @@ export class ShopifyCartComponent extends Component {
     };
   }
 
-  protected set cart(cart: any) {
+  protected set cart(cart: ShopifyCartObject | null) {
     // TODO check if cart values are changed
     this.scope.cart = cart;
 
@@ -70,7 +70,7 @@ export class ShopifyCartComponent extends Component {
     }
   }
 
-  protected get cart() {
+  protected get cart(): ShopifyCartObject | null {
     return this.scope.cart || null;
   }
 
@@ -185,14 +185,14 @@ export class ShopifyCartComponent extends Component {
 
   protected async afterBind() {
     this.debug("afterBind", this.scope);
-    if (!this.scope.cart) {
-      this.scope.cart = await ShopifyCartService.get();
+    if (!this.cart) {
+      this.cart = await ShopifyCartService.get();
     }
   }
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       return null;
     } else {
       return template;

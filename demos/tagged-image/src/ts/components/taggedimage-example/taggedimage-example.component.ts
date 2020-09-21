@@ -1,5 +1,5 @@
 import { Component } from "@ribajs/core";
-
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./taggedimage-example.component.html";
 
 export class TaggedImageExampleComponent extends Component {
@@ -28,30 +28,8 @@ export class TaggedImageExampleComponent extends Component {
     });
   }
 
-  protected async beforeBind() {
-    await super.beforeBind();
-  }
-
-  protected async afterBind() {
-    await super.afterBind();
-  }
-
   protected requiredAttributes() {
     return [];
-  }
-
-  protected parsedAttributeChangedCallback(
-    attributeName: string,
-    oldValue: any,
-    newValue: any,
-    namespace: string | null
-  ) {
-    super.parsedAttributeChangedCallback(
-      attributeName,
-      oldValue,
-      newValue,
-      namespace
-    );
   }
 
   // deconstructor
@@ -61,7 +39,7 @@ export class TaggedImageExampleComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       // console.debug('Do not use template, because element has child nodes');
       return null;
     } else {

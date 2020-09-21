@@ -8,7 +8,7 @@
  */
 
 import { Component, EventDispatcher } from "@ribajs/core";
-
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { TOGGLE_BUTTON } from "../../constants";
 
 type State =
@@ -150,7 +150,7 @@ export class Bs4ToggleButtonComponent extends Component {
   }
 
   protected template() {
-    if (!this.el.hasChildNodes()) {
+    if (!hasChildNodesTrim(this.el)) {
       console.warn(
         "No child elements found, this component as no template so you need to define your own as child of this component."
       );

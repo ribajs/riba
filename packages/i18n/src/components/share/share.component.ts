@@ -1,4 +1,5 @@
 import { TypeOfComponent } from "@ribajs/core";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import {
   Bs4ShareComponent,
   Scope as Bs4ShareScope,
@@ -13,16 +14,16 @@ interface Scope extends Bs4ShareScope {
   serviceLabelI18n?: string;
 }
 
-interface NavigatorShareParam {
-  url: string;
-  text: string;
-  title: string;
-}
+// interface NavigatorShareParam extends ShareData {
+//   url: string;
+//   text: string;
+//   title: string;
+// }
 
 declare global {
   // tslint:disable: interface-name
   interface Navigator {
-    share: (data: NavigatorShareParam) => Promise<any>;
+    share: (data?: ShareData) => Promise<void>;
   }
 }
 
@@ -122,8 +123,8 @@ export const i18nShareComponentWrapper = (
     }
 
     protected template() {
-      this.debug("template", this.el, this.el.hasChildNodes());
-      if (this.el && this.el.hasChildNodes()) {
+      this.debug("template", this.el, hasChildNodesTrim(this.el));
+      if (this.el && hasChildNodesTrim(this.el)) {
         // If a child is set, this is a custom label template
         this.scope.labelTemplate = this.el.innerHTML;
         this.debug("Custom label template: ", this.scope.labelTemplate);

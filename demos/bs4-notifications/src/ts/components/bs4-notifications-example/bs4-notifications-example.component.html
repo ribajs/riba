@@ -1,0 +1,192 @@
+<div class="container">
+
+  <div class="row">
+    <section class="col-12 mb-5">
+
+      <h2 class="mb-2">Toast from component</h2>
+
+      <p>And of course you can also trigger the toast in your component (see bs4-toast-example.component.ts)</p>
+
+      <div class="form-row">
+
+        <div class="form-group col-md-4">
+          <label>Message</label>
+          <input type="text" class="form-control" placeholder="Message" name="message" rv-value="fromComponent.message">
+        </div>
+
+        <div class="form-group col-md-4">
+          <label>Title</label>
+          <input type="text" class="form-control" placeholder="Title" name="title" rv-value="fromComponent.title">
+        </div>
+
+        <div class="form-group col-md-4">
+          <label>Delay</label>
+          <input type="number" class="form-control" name="title" rv-value="fromComponent.delay">
+        </div>
+
+        <div class="form-group col-md-4">
+          <label>Brand color</label>
+          <select class="form-control custom-select" rv-value="fromComponent.contextualClass">
+            <option value="default">Default</option>
+            <option value="primary">Primary</option>
+            <option value="secondary">Secondary</option>
+            <option value="success">Success</option>
+            <option value="danger">Danger</option>
+            <option selected value="warning">Warning</option>
+            <option value="info">Info</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label>Channel</label>
+          <select class="form-control custom-select" rv-value="fromComponent.channel">
+            <option value="toast">toast</option>
+            <option value="toast-left-with-icon">toast-left-with-icon</option>
+            <option value="toast-right">toast-right</option>
+          </select>
+        </div>
+
+        <div class="col-12">
+          <button rv-class="'btn btn-' | append fromComponent.contextualClass" rv-on-click="showToast" type="button">Trigger component toast</button>
+        </div>
+
+      </div>
+
+    </section>
+  </div>
+
+  <div class="row">
+    <section class="col-12 mb-5">
+
+      <h2 class="mb-2">Toast via rv-show-toast-on-[event] binder</h2>
+
+      <p>You can trigger the toast using the show-toast-on-[event] binder:</p>
+
+      <div class="form-row">
+
+        <div class="col-md-4 mb-2">
+          <button class="btn btn-primary" rv-show-toast-on-click="{ 'message': 'Hello from rv-show-toast-on-[event]', 'title': 'Message', 'contextualClass': 'primary', 'delay': 10000, 'channel': 'toast-left-with-icon' }" type="button">Primary icon toast</button>
+        </div>
+
+        <div class="col-md-4 mb-2">
+          <button class="btn btn-success" rv-show-toast-on-click="{ 'message': 'Hello from rv-show-toast-on-[event]', 'title': 'Message', 'contextualClass': 'success', 'delay': 10000 }" type="button">Success toast</button>
+        </div>
+
+        <div class="col-md-4 mb-2">
+          <button class="btn btn-danger" rv-show-toast-on-click="{ 'message': 'Hello from rv-show-toast-on-[event]', 'title': 'Message', 'contextualClass': 'danger', 'delay': 10000 }" type="button">Danger toast</button>
+        </div>
+      
+      </div>
+
+    </section>
+  </div>
+
+  <div class="row">
+    <section class="col-12 mb-5">
+
+      <h3 class="mb-2">With $event</h3>
+
+      <p>And you can access the event object by <code>$event</code> (useful if your event contains additional information in the <code>detail</code> property):</p>
+
+      <div class="form-row">
+
+        <div class="col-md-4 mb-2">
+          <button class="btn btn-info" rv-show-toast-on-click="{ 'message': 'Pointer type: <strong>{ toast.$event.pointerType }</strong>', 'title': 'Event type: { toast.$event.type }', 'contextualClass': 'info', 'delay': 10000 }" type="button">Info toast</button>
+        </div>
+      
+      </div>
+
+    </section>
+  </div>
+
+  <div class="row">
+    <section class="col-12 mb-5">
+
+      <h3 lass="mb-2">With $context</h3>
+
+      <p>And also the <code>$context</code> (wich is the scope where the toast was triggered):</p>
+
+      <div class="form-row">
+
+        <div class="form-group col-md-4">
+          <label>Message</label>
+          <input type="text" class="form-control" placeholder="Message" name="message" rv-value="message">
+        </div>
+
+        <div class="form-group col-md-4">
+          <label>Title</label>
+          <input type="text" class="form-control" placeholder="Title" name="title" rv-value="title">
+        </div>
+
+        <div class="col-12">
+          <button class="btn btn-primary" rv-show-toast-on-click="{ 'message': '{ toast.$context.message }', 'title': '{ toast.$context.title }', 'delay': 10000 }" type="button">Trigger toast</button>
+        </div>
+
+      </div>
+
+    </section>
+  </div>
+
+  <div class="row">
+    <section class="col-12 mb-5">
+
+      <h2 class="mb-2">Other notifications</h2>
+
+      <div class="form-row">
+
+        <div class="form-group col-md-4">
+          <label>Message</label>
+          <input type="text" class="form-control" placeholder="Message" name="message" rv-value="fromComponent.message">
+        </div>
+
+        <div class="form-group col-md-4">
+          <label>Title</label>
+          <input type="text" class="form-control" placeholder="Title" name="title" rv-value="fromComponent.title">
+        </div>
+
+        <div class="form-group col-md-4">
+          <label>Brand color</label>
+          <select class="form-control custom-select" rv-value="fromComponent.contextualClass">
+            <option selected value="default">Default</option>
+            <option value="primary">Primary</option>
+            <option value="secondary">Secondary</option>
+            <option value="success">Success</option>
+            <option value="danger">Danger</option>
+            <option value="warning">Warning</option>
+            <option value="info">Info</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label>Channel</label>
+          <select class="form-control custom-select" rv-value="fromComponent.channel">
+            <option value="toast">toast</option>
+            <option value="toast-left-with-icon">toast-left-with-icon</option>
+            <option value="toast-right">toast-right</option>
+          </select>
+        </div>
+
+        <div class="col-12">
+          <button rv-class="'btn btn-' | append fromComponent.contextualClass" rv-on-click="showModal" type="button">Trigger component modal</button>
+        </div>
+
+      </div>
+
+    </section>
+  </div>
+
+
+</div>
+
+<bs4-notification-container>
+</bs4-notification-container>
+
+<bs4-notification-container channel-name="toast-left-with-icon" icon-url="./../../../icon.svg" position-class="absolute-bottom absolute-left">
+</bs4-notification-container>
+
+<bs4-notification-container channel-name="toast-right" position-class="absolute-bottom absolute-right">
+</bs4-notification-container>

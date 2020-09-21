@@ -1,0 +1,14 @@
+<div class="toast-container">
+  <div aria-live="polite" aria-atomic="true" class="toast-item-container" rv-add-class="positionClass">
+    <div rv-each-toast="notifications" >
+      <div rv-if="toast.type | eq 'toast'">
+        <bs4-toast-item rv-index="%toast%" rv-parent rv-icon-url="iconUrl" rv-co-toast="toast"></bs4-toast-item>
+      </div>
+    </div>
+  </div>
+</div>
+<div rv-each-modal="notifications">
+  <div rv-if="modal.type | eq 'modal'">
+    <bs4-modal-item rv-index="%modal%" rv-parent rv-icon-url="iconUrl" rv-co-modal="modal"></bs4-modal-item>
+  </div>
+</div>

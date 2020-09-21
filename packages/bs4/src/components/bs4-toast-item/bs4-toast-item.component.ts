@@ -1,15 +1,16 @@
 import { Component } from "@ribajs/core";
 
 import template from "./bs4-toast-item.component.html";
-import { Toast, ToastBinderData } from "../../interfaces";
-import { ToastService } from "../../services";
-import { Scope as Bs4ToastContainerScope } from "../bs4-toast-container/bs4-toast-container.component";
+import { Toast } from "../../interfaces";
+import { ToastService, EVENT_HIDDEN } from "../../services/toast.service";
+import { Scope as Bs4NotificationContainerScope } from "../bs4-notification-container/bs4-notification-container.component";
+import { getElementFromEvent } from "@ribajs/utils/src/dom";
 
 interface Scope {
   iconUrl?: string;
-  toast?: Toast | ToastBinderData;
-  onHide: Bs4ToastItemComponent["onHide"];
-  onDismiss: Bs4ToastItemComponent["onDismiss"];
+  toast?: Toast;
+  onHidden: Bs4ToastItemComponent["onHidden"];
+  dismiss: Bs4ToastItemComponent["dismiss"];
   index: number;
   $parent?: any;
   $event?: CustomEvent;
@@ -32,9 +33,10 @@ export class Bs4ToastItemComponent extends Component {
   }
 
   protected scope: Scope = {
-    onHide: this.onHide,
+    onHidden: this.onHidden,
     index: -1,
-    onDismiss: this.onDismiss,
+    dismiss: this.dismiss,
+    toast: undefined,
   };
 
   constructor(element?: HTMLElement) {
@@ -48,18 +50,29 @@ export class Bs4ToastItemComponent extends Component {
 
   protected async afterBind() {
     super.afterBind();
-    // construct toast service
+    this.initToastService();
+  }
+
+  protected initToastService() {
     const toast = this.scope.toast;
     const toastEl = this.el.firstElementChild as HTMLElement | null;
     if (toast && toastEl) {
       this.toastService = new ToastService(toastEl, {
-        delay: toast.delay ? toast.delay : ToastService.Default.delay,
-        autohide: toast.autoHide
-          ? toast.autoHide
-          : ToastService.Default.autohide,
-        animation: toast.animation
-          ? toast.animation
-          : ToastService.Default.animation,
+        delay:
+          toast.delay !== undefined ? toast.delay : ToastService.Default.delay,
+        autohide:
+          toast.autoHide !== undefined
+            ? toast.autoHide
+            : ToastService.Default.autohide,
+        animation:
+          toast.animation !== undefined
+            ? toast.animation
+            : ToastService.Default.animation,
+      });
+
+      // Call onHidden on hidden event once
+      toastEl.addEventListener(EVENT_HIDDEN, this.onHidden.bind(this), {
+        once: true,
       });
 
       // show toast using the toastservice
@@ -68,24 +81,19 @@ export class Bs4ToastItemComponent extends Component {
   }
 
   // can be called if toast should be removed
-  public onDismiss() {
+  public dismiss() {
     this.toastService?.hide();
   }
 
   // remove toast from dom once shown
-  public onHide(event: Event, el: HTMLElement) {
-    const toastContainer: Bs4ToastContainerScope | null =
+  public onHidden(event: Event, el?: HTMLElement) {
+    if (!el) {
+      el = getElementFromEvent(event);
+    }
+    const toastContainer: Bs4NotificationContainerScope | null =
       this.scope.$parent?.$parent || null;
-    if (
-      typeof toastContainer?.onToastItemHide === "function" &&
-      this.scope.toast
-    ) {
-      toastContainer.onToastItemHide(
-        event,
-        el,
-        this.scope.index,
-        this.scope.toast
-      );
+    if (typeof toastContainer?.onItemHide === "function" && this.scope.toast) {
+      toastContainer.onItemHide(event, el, this.scope.index, this.scope.toast);
     }
   }
   protected template() {
