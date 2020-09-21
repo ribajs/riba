@@ -1,4 +1,25 @@
 <div class="container-fluid">
+  <div class="row py-1">
+    <div class="col-4"></div>
+    <div class="col-4">
+      <tagged-image rv-parent
+        loading="lazy" 
+        class="lazy embed-responsive-item"
+        rv-src="fadeshowImages.0.src" 
+        rv-srcset="fadeshowImages.0.srcset"
+        sizes="(max-height: 500px) 800px,
+                (max-height: 600px) 1000px,
+                (max-height: 700px) 1200px,
+                (max-height: 800px) 1400px,
+                (max-height: 900px) 1600px,
+                1920px,
+        "
+        >
+        <tag rv-each-tag="fadeshowImages.0.tags" rv-x="tag.x" rv-y="tag.y" rv-title="'hello ' | append %tag%">content { %tag% }</tag>
+      </tagged-image>
+    </div>
+    <div class="col-4"></div>
+  </div>
   <div class="row">
     <div class="col-12 px-0">
       <bs4-carousel rv-parent class="carousel slide carousel-fade" interval="3333">

@@ -34,9 +34,10 @@ export class TaggedImageExampleComponent extends Component {
         )
         .join("\n"),
       title: `Image ${n}`,
-      tags: Array(7)
-        .fill(null)
-        .map(() => ({ x: Math.random(), y: Math.random() })),
+      tags: [1, 2, 3, 4, 5, 6, 7].map(() => ({
+        x: Math.random(),
+        y: Math.random(),
+      })),
     })),
   };
 
