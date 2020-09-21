@@ -1,6 +1,7 @@
 import { Pjax } from "./index";
 import { getElementFromEvent } from "@ribajs/utils/src/dom";
 import { normalizeUrl } from "@ribajs/utils/src/url";
+import { IGNORE_CLASS_PREFETCH, ROUTE_ERROR_CLASS } from "../../constants";
 
 export interface PrefetchInstances {
   [key: string]: Prefetch;
@@ -20,13 +21,6 @@ class Prefetch {
 
   /** singleton instance */
   protected static instances: PrefetchInstances = {};
-
-  /**
-   * Class name used to ignore prefetch on links
-   *
-   * @default
-   */
-  public ignoreClassLink = "no-barba-prefetch";
 
   /**
    * Creates an singleton instance of Prefetch.
@@ -97,7 +91,11 @@ class Prefetch {
   }
 
   public onLinkEnter(url: string, el: HTMLAnchorElement, evt: Event) {
-    if (el.classList && el.classList.contains(this.ignoreClassLink)) {
+    if (
+      el.classList &&
+      (el.classList.contains(IGNORE_CLASS_PREFETCH) ||
+        el.classList.contains(ROUTE_ERROR_CLASS))
+    ) {
       return;
     }
 
@@ -109,9 +107,13 @@ class Prefetch {
     if (url && preventCheck) {
       const pjax = Pjax.getInstance(this.viewId);
       if (pjax) {
-        pjax.loadResponseCached(url);
+        pjax.loadResponseCached(url, false, false).catch((error) => {
+          el.classList.add(ROUTE_ERROR_CLASS);
+          console.error(error);
+        });
       } else {
         console.warn(`No pjax instace for viewId "${this.viewId}" found!`);
+        el.classList.add(ROUTE_ERROR_CLASS);
       }
     } else {
       if (!preventCheck) {

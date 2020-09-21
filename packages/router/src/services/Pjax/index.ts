@@ -17,6 +17,7 @@ import { HideShowTransition } from "../Transition";
 import { Transition, Response, PjaxOptions } from "../../interfaces";
 import { Dom } from "./Dom";
 import { HistoryManager } from "@ribajs/history";
+import { ROUTE_ERROR_CLASS, IGNORE_CLASS_LINK } from "../../constants";
 
 export interface PjaxInstances {
   [key: string]: Pjax;
@@ -28,11 +29,6 @@ export interface PjaxInstances {
  * @borrows Dom as Dom
  */
 class Pjax {
-  /**
-   * Class name used to ignore links
-   */
-  public static ignoreClassLink = "no-barba";
-
   public static cache = new BaseCache<Promise<Response>>();
 
   public static getInstance(id = "main"): Pjax | undefined {
@@ -127,7 +123,7 @@ class Pjax {
       return false;
     }
 
-    if (element.classList.contains(this.ignoreClassLink)) {
+    if (element.classList.contains(IGNORE_CLASS_LINK)) {
       return false;
     }
 
@@ -320,13 +316,21 @@ class Pjax {
   ) {
     const rel = linkElement.getAttribute("rel");
     let href = Pjax.getHref(linkElement);
-    if (rel === "router-preload" && href && this.cacheEnabled) {
+    if (
+      rel === "router-preload" &&
+      href &&
+      this.cacheEnabled &&
+      !linkElement.classList.contains(ROUTE_ERROR_CLASS)
+    ) {
       // normalize url, returns the relative url for internal urls and the full url for external urls
       href = normalizeUrl(href);
       const follow = Pjax.preventCheckUrl(href);
       if (follow) {
         // TODO wait for idle because we do not want to block the user
-        return this.loadResponseCached(href, true);
+        return this.loadResponseCached(href, true, false).catch((error) => {
+          linkElement.classList.add(ROUTE_ERROR_CLASS);
+          console.error(error);
+        });
       }
     }
     // Append The link elements to the head for native prefetching by the browser
@@ -364,11 +368,11 @@ class Pjax {
   }
 
   /**
-   * Load an url, will start an fetch request or load from the cache will return the Container
+   * Load an url, will start an fetch request or load the response from the cache and returns the container
    * Also puts the container to the DOM and sets the title (if this option is active)
    */
   public async loadCached(url: string): Promise<HTMLElement> {
-    const response = this.loadResponseCached(url);
+    const response = this.loadResponseCached(url, false, true);
 
     return response
       .then((_response) => {
@@ -394,9 +398,16 @@ class Pjax {
   }
 
   /**
-   * Load an url, will start an fetch request or load from the cache (and set it to the cache) and will return a `Response` pbject
+   * Load an url, will start an fetch request or load from the cache (and set it to the cache) and will return a `Response` object
+   * @param url Url to get from cache or to make the request for
+   * @param forceCache Foce to use the browser build in cache, for more information see `force-cache` on https://developer.mozilla.org/en-US/docs/Web/API/Request/cache
+   * @param fallback If there is an error, make a normal browser request and reload the page you should not use this on prefetching urls
    */
-  public async loadResponseCached(url: string, forceCache = false) {
+  public async loadResponseCached(
+    url: string,
+    forceCache = false,
+    fallback = true
+  ) {
     if (this.cacheEnabled) {
       const cachedResponse = Pjax.cache.get(url);
       if (cachedResponse && cachedResponse.then) {
@@ -420,7 +431,9 @@ class Pjax {
       })
       .catch((error) => {
         console.error(error);
-        this.forceGoTo(url);
+        if (fallback) {
+          this.forceGoTo(url);
+        }
         throw error;
       });
     if (this.cacheEnabled && response) {
@@ -604,7 +617,7 @@ class Pjax {
     if (this.cacheEnabled) {
       const currentUrl = normalizeUrl(window.location.href);
       if (!Pjax.cache.get(url)) {
-        this.loadResponseCached(currentUrl);
+        this.loadResponseCached(currentUrl, false, false);
       }
     }
 
