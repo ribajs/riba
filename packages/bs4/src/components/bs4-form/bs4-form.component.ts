@@ -192,13 +192,15 @@ export class Bs4FormComponent extends Component {
       return;
     }
 
-    const data = this.getFormValues();
+    if (this.scope.autoSetFormData) {
+      this.getFormValues();
+    }
 
     // This method is untested in the wild
     HttpService.fetch(
       submitSettings.action,
       submitSettings.method,
-      data,
+      this.scope.form.fields,
       submitSettings.type
     )
       .then((res) => {

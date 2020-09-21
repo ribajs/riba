@@ -64,13 +64,11 @@ export class HCaptchaFormComponent extends OcFormComponent {
       hcaptchaSize: "invisible",
       hcaptchaTheme: "light",
       hcaptchaTabindex: 0,
-      hcaptchaCallback: "onHCaptchaSubmit",
+      hcaptchaCallback: getUID("onHCaptchaSubmit"),
       // hcaptchaExpiredCallback: "onHCaptchaExpired",
       hcaptchaErrorCallback: "onHCaptchaError",
       hcaptchaContainerSelector: ".h-captcha-container",
     };
-
-    scope.hcaptchaCallback = getUID(scope.hcaptchaCallback);
 
     return scope;
   }
@@ -95,6 +93,7 @@ export class HCaptchaFormComponent extends OcFormComponent {
       "widgetID",
       this.widgetID,
       event,
+      this.scope.hcaptchaCallback,
       el
     );
 
@@ -119,7 +118,7 @@ export class HCaptchaFormComponent extends OcFormComponent {
       return;
     }
     this.widgetID = window.hcaptcha.render(container, params);
-    this.debug("widgetID", this.widgetID);
+    this.debug("widgetID", this.widgetID, this.getHCaptchaParams);
   }
 
   protected getHCaptchaSrc() {
