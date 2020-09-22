@@ -6,7 +6,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 const rootPath = process.cwd();
 const { getCopyPluginConfig, copy } = require("./copy");
 
-var getStyleLoaderRule = (config) => {
+var getStyleLoaderRule = (config = {}) => {
   var rule = {
     test: /\.s[ac]ss$/i,
     use: [],
@@ -18,7 +18,7 @@ var getStyleLoaderRule = (config) => {
       loader: MiniCssExtractPlugin.loader,
       options: {
         // only enable hot reloading in development
-        hmr: process.env.NODE_ENV === "development",
+        hmr: !config.production,
         // if hmr does not work, this is a forceful method.
         reloadAll: true,
       },
@@ -49,168 +49,182 @@ var getStyleLoaderRule = (config) => {
   return rule;
 };
 
-module.exports = (config) => {
-  var plugins = [];
+module.exports = (config = {}) => {
+  return (env = {}) => {
+    env.production =
+      config.production ||
+      (env && env.production) ||
+      process.env.NODE_ENV === "production";
+    env.development = !env.production;
+    config.production = env.production;
 
-  var rules = [
-    // typescript and javascript
-    {
-      test: /\.(tsx?)|\.(js)$/,
-      exclude: [/node_modules\/(?!@ribajs)/, /(bower_components)/],
-      loader: require.resolve("babel-loader"),
-    },
-    // html templates
-    {
-      test: /\.html$/,
-      use: [
-        {
-          loader: require.resolve("html-loader"),
-          options: {
-            minimize: true,
+    var plugins = [];
+
+    var rules = [
+      // typescript and javascript
+      {
+        test: /\.(tsx?)|\.(js)$/,
+        exclude: [/node_modules\/(?!@ribajs)/, /(bower_components)/],
+        loader: require.resolve("babel-loader"),
+      },
+      // html templates
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: require.resolve("html-loader"),
+            options: {
+              minimize: true,
+            },
           },
-        },
-      ],
-    },
-    // image templates
-    {
-      test: /\.(png|jpe?g|gif)$/i,
-      use: [
-        {
-          loader: "file-loader",
-        },
-      ],
-    },
-    // pug templates
-    {
-      test: /\.pug$/,
-      use: [
-        {
-          loader: require.resolve("pug-loader"),
-          options: {
-            minimize: true,
+        ],
+      },
+      // image templates
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: "file-loader",
           },
-        },
-      ],
-    },
-  ];
+        ],
+      },
+      // pug templates
+      {
+        test: /\.pug$/,
+        use: [
+          {
+            loader: require.resolve("pug-loader"),
+            options: {
+              minimize: true,
+            },
+          },
+        ],
+      },
+    ];
 
-  // config defaults
-  config.detectDuplicates = false;
+    // config defaults
+    config.detectDuplicates = config.detectDuplicates || false;
 
-  config.styles = {
-    build: true,
-    extract: true,
-  };
+    config.styles = config.styles || {
+      build: true,
+      extract: true,
+    };
 
-  // config defaults for config templates
-  switch (config.template.toLowerCase()) {
-    case "octobercms":
-      config.entry = [rootPath + "/assets/ts/main.ts"];
-      config.output = {
-        path: path.resolve(rootPath, "assets/js"),
-      };
+    // config defaults for config templates
+    switch (config.template.toLowerCase()) {
+      case "octobercms":
+        config.entry = config.entry || [rootPath + "/assets/ts/main.ts"];
+        config.output = config.output || {
+          path: path.resolve(rootPath, "assets/js"),
+          filename: "[name].bundle.js",
+        };
 
-      /**
-       * On October we use the build in sass compiler for the styles to make use of some october features like theme setting variables in the scss files,
-       * so we do not want to build the styles using webpack
-       */
-      config.styles.build = false;
+        /**
+         * On October we use the build in sass compiler for the styles to make use of some october features like theme setting variables in the scss files,
+         * so we do not want to build the styles using webpack
+         */
+        config.styles.build = false;
 
-      config.copyAssets = {
-        enable: true,
-        foldername: "assets",
-      };
-      break;
-    case "shopify":
-      config.entry = [
-        rootPath + "/src/scss/main.scss",
-        rootPath + "/src/ts/main.ts",
-      ];
-      config.output = {
-        path: path.resolve(rootPath, "theme/assets/"),
-      };
+        config.copyAssets = config.copyAssets || {
+          enable: true,
+          images: true,
+          scss: true,
+          iconset: true,
+          foldername: "assets",
+        };
+        break;
+      case "shopify":
+        config.entry = config.entry || [
+          rootPath + "/src/scss/main.scss",
+          rootPath + "/src/ts/main.ts",
+        ];
+        config.output = config.output || {
+          path: path.resolve(rootPath, "theme/assets/"),
+          filename: "[name].bundle.js",
+        };
 
-      config.styles.build = true;
-      config.styles.extract = true;
+        config.styles.build = true;
+        config.styles.extract = true;
 
-      config.copyAssets = {
-        enable: true,
-        foldername: "src",
-      };
-      break;
-    // E.g. used for demos
-    case "local":
-      (config.entry = [
-        rootPath + "/src/scss/main.scss",
-        rootPath + "/src/ts/main.ts",
-      ]),
-        (config.output = {
+        config.copyAssets = config.copyAssets || {
+          enable: true,
+          images: true,
+          scss: true,
+          iconset: true,
+          foldername: "src",
+        };
+        break;
+      // E.g. used for demos
+      case "local":
+        config.entry = config.entry || [
+          rootPath + "/src/scss/main.scss",
+          rootPath + "/src/ts/main.ts",
+        ];
+        config.output = config.output || {
           path: path.resolve(rootPath, "dist/"),
-        });
+          filename: "[name].bundle.js",
+        };
 
-      config.styles.build = true;
-      config.styles.extract = true;
+        config.styles.build = true;
+        config.styles.extract = true;
 
-      config.copyAssets = {
-        enable: false,
-        foldername: "src",
-      };
+        config.copyAssets = config.copyAssets || {
+          enable: false,
+          images: true,
+          scss: false,
+          iconset: true,
+          foldername: "src",
+        };
 
-      config.devServer = {
-        host: "0.0.0.0",
-        contentBase: "./src",
-      };
+        config.devServer = {
+          host: "0.0.0.0",
+          contentBase: "./src",
+        };
 
-      const HtmlWebpackPlugin = require("html-webpack-plugin");
+        const HtmlWebpackPlugin = require("html-webpack-plugin");
+        plugins.push(
+          new HtmlWebpackPlugin({
+            template: rootPath + "/src/index.html",
+            filename: "index.html",
+          })
+        );
+
+        break;
+      default:
+        break;
+    }
+
+    if (config.copyAssets && config.copyAssets.enable === true) {
+      var copyPluginConfigs = getCopyPluginConfig(config);
+      if (copyPluginConfigs.patterns && copyPluginConfigs.patterns.length > 0) {
+        // https://github.com/webpack-contrib/copy-webpack-plugin
+        const CopyPlugin = require("copy-webpack-plugin");
+        // Copy the files before the build starts for the case the files are required for the build itself
+        copy(copyPluginConfigs.patterns);
+        plugins.push(new CopyPlugin(copyPluginConfigs));
+      }
+    }
+
+    if (config.detectDuplicates === true) {
+      const { DuplicatesPlugin } = require("inspectpack/plugin");
+      plugins.push(new DuplicatesPlugin());
+    }
+
+    if (config.styles.extract === true) {
+      const MiniCssExtractPlugin = require("mini-css-extract-plugin");
       plugins.push(
-        new HtmlWebpackPlugin({
-          template: rootPath + "/src/index.html",
-          filename: "index.html",
+        new MiniCssExtractPlugin({
+          filename: "[name].css",
         })
       );
-
-      break;
-    default:
-      break;
-  }
-
-  if (config.copyAssets && config.copyAssets.enable === true) {
-    console.debug("config: ", config);
-
-    var copyPluginConfigs = getCopyPluginConfig(config);
-
-    console.debug("copyPluginConfigs: ", copyPluginConfigs);
-
-    if (copyPluginConfigs.patterns && copyPluginConfigs.patterns.length > 0) {
-      // https://github.com/webpack-contrib/copy-webpack-plugin
-      const CopyPlugin = require("copy-webpack-plugin");
-      // Copy the files before the build starts for the case the files are required for the build itself
-      copy(copyPluginConfigs.patterns);
-      plugins.push(new CopyPlugin(copyPluginConfigs));
     }
-  }
 
-  if (config.detectDuplicates === true) {
-    const { DuplicatesPlugin } = require("inspectpack/plugin");
-    plugins.push(new DuplicatesPlugin());
-  }
+    // console.debug('Used plugins: ', plugins);
 
-  if (config.styles.extract === true) {
-    const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-    plugins.push(
-      new MiniCssExtractPlugin({
-        filename: "[name].css",
-      })
-    );
-  }
+    if (config.styles.build === true) {
+      rules.push(getStyleLoaderRule(config));
+    }
 
-  // console.debug('Used plugins: ', plugins);
-
-  if (config.styles.build === true) {
-    rules.push(getStyleLoaderRule(config));
-  }
-
-  return (env) => {
     return {
       optimization: {
         minimizer: [
@@ -258,10 +272,7 @@ module.exports = (config) => {
       entry: config.entry,
       devtool: env.production ? undefined : "inline-source-map",
       mode: env.production ? "production" : "development",
-      output: {
-        filename: "[name].bundle.js",
-        path: config.output.path,
-      },
+      output: config.output,
       resolve: {
         extensions: [".ts", ".tsx", ".js", ".json", ".scss", ".pug", ".html"],
         symlinks: true,
