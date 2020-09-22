@@ -678,7 +678,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   protected onViewChanges() {
     throttle(() => {
-      console.debug("onViewChanges");
+      this.debug("onViewChanges");
       const newBreakpoint = this.getBreakpoint();
       if (newBreakpoint !== this.breakpoint) {
         this.breakpoint = newBreakpoint;
@@ -904,7 +904,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     if (!this.continuousAutoplayIntervalIndex) {
       // intervals are depending on the autoscrolling speed (autoplayVelocity)
       const intervalsTimeMs = this.scope.autoplayVelocity * 10000;
-      // console.debug('intervalsTimeMs', intervalsTimeMs);
+      // this.debug('intervalsTimeMs', intervalsTimeMs);
       this.continuousAutoplayIntervalIndex = window.setInterval(
         this.onScrollend.bind(this),
         intervalsTimeMs
@@ -1290,7 +1290,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       // ('Full template!', this.templateIndicators);
       return templateSlides + this.templateControls + this.templateIndicators;
     } else {
-      // console.debug('Append to template!');
+      // this.debug('Append to template!');
       // Prepend control elements if no custom control elements in template are found
       if (this.controlsElements.length <= 0) {
         this.el.innerHTML += this.templateControls;

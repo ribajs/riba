@@ -151,6 +151,7 @@ class Pjax {
     ) {
       const href = (el as HTMLAnchorElement).href || el.getAttribute("href");
       if (!href) {
+        console.error("href attribute not found for element: ", el);
         throw new Error("href attribute not found!");
       }
       return href;
