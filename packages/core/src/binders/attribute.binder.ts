@@ -32,9 +32,21 @@ export const attributeBinder: Binder<string> = {
     if (newValue != null) {
       if (oldValue !== newValue) {
         el.setAttribute(this.type, newValue);
+        el.dispatchEvent(
+          // E.g. Event used in BinderAttributeChangedEvent
+          new CustomEvent("binder-changed", {
+            detail: { name: this.type, newValue, oldValue },
+          })
+        );
       }
     } else {
       el.removeAttribute(this.type);
+      el.dispatchEvent(
+        // E.g. Event used in BinderAttributeChangedEvent
+        new CustomEvent("binder-changed", {
+          detail: { name: this.type, newValue, oldValue },
+        })
+      );
     }
   },
 };
