@@ -51,12 +51,13 @@ var getStyleLoaderRule = (config = {}) => {
 
 module.exports = (config = {}) => {
   return (env = {}) => {
-    env.production =
-      config.production ||
-      (env && env.production) ||
-      process.env.NODE_ENV === "production";
-    env.development = !env.production;
+    env.development =
+      config.development ||
+      (env && env.development) ||
+      process.env.NODE_ENV === "development";
+    env.production = !env.development;
     config.production = env.production;
+    config.development = env.development;
 
     var plugins = [];
 
