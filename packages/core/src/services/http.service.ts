@@ -13,6 +13,12 @@ export class HttpService {
       name,
       value,
     });
+    // console.debug(
+    //   "[HttpService] setRequestHeaderEachRequest",
+    //   name,
+    //   value,
+    //   this._requestHeadersEachRequest
+    // );
   }
 
   /**
@@ -197,8 +203,9 @@ export class HttpService {
       for (const header of this._requestHeadersEachRequest) {
         headers[header.name] = header.value;
       }
+
       if (dataType) {
-        headers = concat(headers, this.parseDataType(dataType));
+        headers = concat(false, headers, this.parseDataType(dataType));
       }
 
       if (!options.crossDomain && !headers["X-Requested-With"]) {
@@ -219,7 +226,11 @@ export class HttpService {
       // console.debug("[HttpService] url", url);
       // console.debug("[HttpService] method", method);
       // console.debug("[HttpService] body", body);
-      // console.debug("[HttpService] headers", headers);
+      // console.debug(
+      //   "[HttpService] headers",
+      //   headers,
+      //   this._requestHeadersEachRequest
+      // );
       return fetch(url, {
         credentials: "same-origin",
         cache,
