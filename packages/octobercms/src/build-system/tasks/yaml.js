@@ -19,4 +19,4 @@ gulp_1.task("merge-with-october-yml", function mergeOctoberYamlTask() {
         .pipe(merge_october_yaml_1.mergeOctoberFormFields("./build/bundle.yml"))
         .pipe(gulp_1.dest("./"));
 });
-gulp_1.task("build-yml", gulp_1.series("build-yml", "merge-yml", "merge-with-october-yml"));
+gulp_1.task("build-scss-and-yml", gulp_1.series("build-yml", "merge-yml", "merge-with-october-yml"));
