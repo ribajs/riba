@@ -24,7 +24,7 @@
     "test": "npm run lint && jest --config=jest.config.js",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
     "build": "npm run build:module",
-    "build:gulp": "tsc src/build-system/tasks/yaml.ts --outDir dist/",
+    "build:gulp": "tsc src/build-system/tasks/yaml.ts --outDir dist/ --moduleResolution node",
     "build:module": "tsc",
     "packages:npm:link": "npm link @ribajs/core"
   },
