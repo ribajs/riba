@@ -1,4 +1,4 @@
-import { handleizeFormatter } from "@ribajs/core";
+import { handleizeFormatter, FormatterFn } from "@ribajs/core";
 import {
   CollapseService,
   EVENT_HIDE,
@@ -8,6 +8,8 @@ import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { TemplatesComponent } from "../templates/templates.component";
 
 import template from "./bs4-accordion.component.html";
+
+const handleize = handleizeFormatter.read as FormatterFn;
 
 interface AccordionItem {
   title: string;
@@ -167,8 +169,7 @@ export class Bs4AccordionComponent extends TemplatesComponent {
   }
 
   protected transformTemplateAttributes(attributes: any) {
-    attributes.handle =
-      attributes.handle || handleizeFormatter.read(attributes.title);
+    attributes.handle = attributes.handle || handleize(attributes.title);
     attributes.show = !!attributes.show;
     attributes.iconDirection =
       attributes.iconDirection || attributes.show ? "up" : "down";

@@ -57,7 +57,7 @@ export const debounce = (fn: (...params: any) => any) => {
  */
 export const throttle = (fn: (...params: any) => any, wait = 100) => {
   let timerId: number | null = null;
-  return (...params) => {
+  return (...params: any[]) => {
     if (timerId === null) {
       timerId = window.setTimeout(() => {
         fn(...params);

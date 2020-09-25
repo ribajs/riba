@@ -27,14 +27,16 @@ export class TaggedImageComponent extends Component {
     return ["src"];
   }
 
-  protected scope: Scope;
+  protected scope: Scope = {
+    src: "",
+    tags: [],
+  };
 
   constructor(element?: HTMLElement) {
     super(element);
-    const scope = (this.scope = {
-      src: "",
-      tags: [] as any[],
-    });
+  }
+
+  protected setTags() {
     for (const t of Array.from(this.el.querySelectorAll("tag"))) {
       const tag = t as HTMLElement;
 
@@ -65,9 +67,11 @@ export class TaggedImageComponent extends Component {
         position: { x, y },
         popup,
       };
-      scope.tags.push(tagData);
+      this.scope.tags.push(tagData);
     }
-    this.scope = scope;
+  }
+
+  protected setImage() {
     const img = document.createElement("img");
     img.setAttribute("rv-src", "src");
     this.el.appendChild(img);
@@ -75,6 +79,8 @@ export class TaggedImageComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
+    this.setTags();
+    this.setImage();
     this.init(TaggedImageComponent.observedAttributes);
   }
 
@@ -87,6 +93,44 @@ export class TaggedImageComponent extends Component {
   }
 
   protected async afterBind() {
+    const img = document.createElement("img");
+    img.className = "lazy embed-responsive-item";
+    img.setAttribute("src", this.el.getAttribute("src") || "");
+    img.setAttribute("srcset", this.el.getAttribute("srcset") || "");
+    img.setAttribute("sizes", this.el.getAttribute("sizes") || "");
+    this.el.appendChild(img);
+    for (const t of Array.from(this.el.querySelectorAll("tag"))) {
+      const tag = t as HTMLElement;
+
+      const title = tag.getAttribute("title") || "";
+      const content = tag.innerHTML;
+
+      const x = ((v) => (isNaN(v) ? Math.random() : v))(
+        parseFloat(tag.getAttribute("x") || "")
+      );
+      const y = ((v) => (isNaN(v) ? Math.random() : v))(
+        parseFloat(tag.getAttribute("y") || "")
+      );
+
+      tag.style.left = x * 100 + "%";
+      tag.style.top = y * 100 + "%";
+
+      // const tooltipType = tag.getAttribute("type") || this.el.getAttribute("tooltip-type");
+
+      const popup = new PopoverService(tag, {
+        ...PopoverService.Default,
+        title,
+        content,
+      });
+
+      const tagData = {
+        title,
+        content,
+        position: { x, y },
+        popup,
+      };
+      this.scope.tags.push(tagData);
+    }
     return await super.afterBind();
   }
 
@@ -95,11 +139,6 @@ export class TaggedImageComponent extends Component {
     super.disconnectedCallback();
   }
 
-  protected hasOnlyTagChildren() {
-    return !Array.from(this.el.childNodes).some(
-      (child) => child.nodeName !== "TAG" && child.nodeName !== "#text"
-    );
-  }
   protected template() {
     return null;
   }

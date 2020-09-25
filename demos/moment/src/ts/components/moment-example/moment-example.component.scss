@@ -1,0 +1,33 @@
+moment-example {
+  moment-timer {
+    .time-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      .time-block {
+        background-color: #6f6f6f;
+        color: white;
+        height: 100px;
+        width: 100px;
+        display: inline-block;
+
+        margin: 0 5px 30px 0;
+        .time {
+          font-size: 50px;
+          line-height: 100px;
+          display: block;
+          text-align: center;
+        }
+        .legend {
+          position: absolute;
+          margin-top: 5px;
+          width: 100px;
+          text-align: center;
+          color: black;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+}

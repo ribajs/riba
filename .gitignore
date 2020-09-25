@@ -1,6 +1,7 @@
 # compiled output
 /lib
-/dist/*
+/dist
+/infra/*/dist/*
 /packages/*/dist/*
 /packages/*/lib/*
 /node_modules
@@ -25,6 +26,7 @@ lerna-debug.log*
 *.launch
 .settings/
 *.sublime-workspace
+
 # IDE - VSCode
 .vscode/*
 !.vscode/settings.json

@@ -69,10 +69,11 @@
   },
   "dependencies": {
     "@babel/runtime-corejs2": "^7.7.2",
-    "@ribajs/bs4": "^1.6.1",
-    "@ribajs/core": "^1.6.1",
-    "@ribajs/iconset": "^1.6.1",
-    "@ribajs/router": "^1.6.1",
+    "@ribajs/bs4": "^1.9.0-alpha.10",
+    "@ribajs/core": "^1.9.0-alpha.10",
+    "@ribajs/utils": "^1.9.0-alpha.10",
+    "@ribajs/iconset": "^1.9.0-alpha.10",
+    "@ribajs/router": "^1.9.0-alpha.10",
     "bootstrap": "^4.3.1"
   }
 }

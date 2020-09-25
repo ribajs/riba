@@ -14,5 +14,3 @@ export const i18nModule = (
     services,
   };
 };
-
-export default i18nModule;

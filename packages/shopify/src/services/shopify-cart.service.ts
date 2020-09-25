@@ -61,7 +61,7 @@ export class ShopifyCartService {
           ) as any;
         })
         .catch((jqxhr: any) => {
-          return jqxhr.responseJSON as ShopifyCartAddError;
+          throw jqxhr.responseJSON as ShopifyCartAddError;
         });
     });
     if (options.triggerOnComplete) {
@@ -253,7 +253,9 @@ export class ShopifyCartService {
   }
 
   /**
-   * If you use Line Item Properties you may end up with several items in the cart that share the same variant ID. How do you update the quantity of an item in the cart that has specific line item properties? Once you have identified the 1-based index of the item in the cart, you can use the line property instead of id like so:
+   * If you use Line Item Properties you may end up with several items in the cart that share the same variant ID.
+   * How do you update the quantity of an item in the cart that has specific line item properties?
+   * Once you have identified the 1-based index of the item in the cart, you can use the line property instead of id.
    * @param line -based index of the item in the cart
    * @param quantity Quantity
    * @param properties Additional properties

@@ -14,7 +14,8 @@ import {
   DEFAULT_DESCRIPTION,
   DEFAULT_LANGUAGE,
   DEFAULT_VERSION,
-} from "../defaults";
+  DEFAULT_SOURCE_ROOT,
+} from "./defaults";
 
 function transform(options: ApplicationOptions): ApplicationOptions {
   const target: ApplicationOptions = Object.assign({}, options);
@@ -26,6 +27,15 @@ function transform(options: ApplicationOptions): ApplicationOptions {
   target.language = target.language ? target.language : DEFAULT_LANGUAGE;
   target.name = strings.dasherize(target.name);
   target.version = target.version ? target.version : DEFAULT_VERSION;
+
+  // TODO
+  // target.sourceRoot = target.sourceRoot
+  //   ? target.sourceRoot
+  //   : DEFAULT_SOURCE_ROOT;
+  target.sourceRoot = DEFAULT_SOURCE_ROOT;
+
+  console.debug("target.sourceRoot", target.sourceRoot);
+  console.debug("DEFAULT_SOURCE_ROOT", DEFAULT_SOURCE_ROOT);
 
   target.packageManager = target.packageManager ? target.packageManager : "npm";
   target.dependencies = target.dependencies ? target.dependencies : "";

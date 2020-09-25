@@ -9,6 +9,7 @@ export interface Scope {
   title?: ShopifyCartLineItem["title"];
   price?: ShopifyCartLineItem["id"];
   linePrice?: ShopifyCartLineItem["line_price"];
+  lineNumber?: ShopifyCartLineItem["line_number"];
   quantity: ShopifyCartLineItem["quantity"];
   sku?: ShopifyCartLineItem["sku"];
   grams?: ShopifyCartLineItem["grams"];
@@ -26,6 +27,7 @@ export interface Scope {
   variantTitle?: ShopifyCartLineItem["variant_title"];
   variantOptions?: ShopifyCartLineItem["variant_options"];
   variantId: ShopifyCartLineItem["variant_id"];
+  key?: ShopifyCartLineItem["key"];
 
   remove: ShopifyCartItemComponent["remove"];
   increase: ShopifyCartItemComponent["increase"];
@@ -44,6 +46,7 @@ export class ShopifyCartItemComponent extends Component {
       "title",
       "price",
       "line-price",
+      "line-number",
       "quantity",
       "sku",
       "grams",
@@ -61,6 +64,7 @@ export class ShopifyCartItemComponent extends Component {
       "variant-title",
       "variant-options",
       "variant-id",
+      "key",
     ];
   }
 
@@ -166,10 +170,13 @@ export class ShopifyCartItemComponent extends Component {
       return;
     }
 
+    this.debug("update item from cart");
+
     // this.scope.id = item.id;
     this.scope.title = item.title;
     this.scope.price = item.price;
     this.scope.linePrice = item.line_price;
+    this.scope.lineNumber = item.line_number;
     this.scope.quantity = item.quantity;
     this.scope.sku = item.sku;
     this.scope.grams = item.grams;
@@ -187,6 +194,7 @@ export class ShopifyCartItemComponent extends Component {
     this.scope.variantTitle = item.variant_title;
     this.scope.variantOptions = item.variant_options;
     // this.scope.variantId = item.variant_id;
+    this.scope.key = item.key;
 
     if (this.scope.quantity === 0) {
       super.remove(); // Remove element
@@ -196,11 +204,19 @@ export class ShopifyCartItemComponent extends Component {
 
   protected getItemFromCart(cart: ShopifyCartObject) {
     for (const item of cart.items) {
-      if (
-        item.id === this.scope.id &&
-        item.variant_id === this.scope.variantId
-      ) {
-        return item;
+      // Compare key
+      if (item.key && this.scope.key) {
+        if (item.key === this.scope.key) {
+          return item;
+        }
+      } else {
+        // Compare id and variantId
+        if (
+          item.id === this.scope.id &&
+          item.variant_id === this.scope.variantId
+        ) {
+          return item;
+        }
       }
     }
     return null;
@@ -228,6 +244,9 @@ export class ShopifyCartItemComponent extends Component {
         return cart;
       }
     );
+
+    const cart = await ShopifyCartService.get();
+    this.onCartUpdate(cart);
   }
 
   protected template() {

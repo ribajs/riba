@@ -136,6 +136,7 @@ export class Bs4CarouselComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
+    super.init(Bs4CarouselComponent.observedAttributes);
   }
 
   protected template() {

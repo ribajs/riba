@@ -29,7 +29,9 @@ const getCopyPluginConfigForImages = (config, moduleName) => {
     var moduleConfig = {
       from: path.dirname(require.resolve(moduleName)) + "/**/*.png",
       to: path.resolve(
-        `${rootPath}/${config.copyAssets.foldername}/images/vendors/${moduleName}`
+        rootPath,
+        config.copyAssets.foldername,
+        `images/vendors/${moduleName}`
       ),
       toType: "dir",
       context: path.dirname(require.resolve(moduleName)),
@@ -47,7 +49,7 @@ const getCopyPluginConfigForIconsetRibaModule = (config, moduleName) => {
         path.dirname(require.resolve(moduleName)),
         "svg/*.svg"
       ),
-      to: path.resolve(`${rootPath}/${config.copyAssets.foldername}/iconset/`),
+      to: path.resolve(rootPath, config.copyAssets.foldername, `iconset`),
       toType: "dir",
       context: path.dirname(require.resolve(moduleName)),
     };
@@ -71,7 +73,10 @@ const getCopyPluginConfigForScssThirdPartyModule = (
         glob
       ),
       to: path.resolve(
-        `${rootPath}/${config.copyAssets.foldername}/scss/vendors/${moduleName}/`
+        rootPath,
+        config.copyAssets.foldername,
+        `scss/vendors`,
+        moduleName
       ),
       toType: "dir",
       context: path.join(path.dirname(require.resolve(moduleName)), scssPath),
@@ -83,7 +88,6 @@ const getCopyPluginConfigForScssThirdPartyModule = (
 
 const getCopyPluginConfig = (config) => {
   var patterns = [];
-  // var options = {};
 
   const copyRibaScssModules = [
     "@ribajs/core",
@@ -94,29 +98,33 @@ const getCopyPluginConfig = (config) => {
     "@ribajs/shopify-tda",
     "@ribajs/shopify-easdk",
     "@ribajs/leaflet-map",
+    "@ribajs/moment",
     "@ribajs/tagged-image",
     "@ribajs/pdf",
+    "@ribajs/content-slider",
   ];
 
-  for (const ribaScssModule of copyRibaScssModules) {
-    if (isModuleAvailable(ribaScssModule)) {
-      patterns.push(
-        getCopyPluginConfigForScssRibaModule(config, ribaScssModule)
-      );
+  if (config.copyAssets.scss) {
+    for (const ribaScssModule of copyRibaScssModules) {
+      if (isModuleAvailable(ribaScssModule)) {
+        patterns.push(
+          getCopyPluginConfigForScssRibaModule(config, ribaScssModule)
+        );
+      }
     }
   }
 
-  if (isModuleAvailable("@ribajs/iconset")) {
+  if (config.copyAssets.iconset && isModuleAvailable("@ribajs/iconset")) {
     patterns.push(
       getCopyPluginConfigForIconsetRibaModule(config, "@ribajs/iconset")
     );
   }
 
-  if (isModuleAvailable("leaflet")) {
+  if (config.copyAssets.images && isModuleAvailable("leaflet")) {
     patterns.push(getCopyPluginConfigForImages(config, "leaflet"));
   }
 
-  if (isModuleAvailable("bootstrap")) {
+  if (config.copyAssets.scss && isModuleAvailable("bootstrap")) {
     patterns.push(
       getCopyPluginConfigForScssThirdPartyModule(
         config,
@@ -127,7 +135,7 @@ const getCopyPluginConfig = (config) => {
     );
   }
 
-  return { patterns /*, options*/ };
+  return { patterns };
 };
 
 // Copy the files before the build starts for the case the files are required for the build itself

@@ -4,8 +4,8 @@
  */
 export const jsonFormatter = {
   name: "json",
-  read(object: any, replaceSingleQuate = true) {
-    const result = JSON.stringify(object);
+  read(object: any, space = 2, replaceSingleQuate = true) {
+    const result = JSON.stringify(object, null, space);
     if (replaceSingleQuate && result) {
       return result.replace(/'/g, `&#39;`);
     }

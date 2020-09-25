@@ -34,12 +34,7 @@ export class Dragscroll {
       passive: true,
     });
 
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        this.checkDraggable.bind(this);
-      })()
-    );
+    window.addEventListener("resize", this.checkDraggable.bind(this));
 
     // Use global move if your element does not use the full width / height
     if (this.options.detectGlobalMove) {
@@ -78,12 +73,12 @@ export class Dragscroll {
   }
 
   public checkDraggable() {
-    if (Utils.isScrollable(this.el)) {
-      this.el.classList.add("draggable");
-      return true;
-    }
-    this.el.classList.remove("draggable");
-    return false;
+    return throttle(() => {
+      if (Utils.isScrollable(this.el)) {
+        this.el.classList.add("draggable");
+      }
+      this.el.classList.remove("draggable");
+    })();
   }
 
   protected onMouseDown<EventListener>(e: MouseEvent) {

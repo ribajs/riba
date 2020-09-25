@@ -41,7 +41,7 @@
     "sourceRoot": {
       "type": "string",
       "description": "Root directory of your source files",
-      "default": "src"
+      "default": "src/ts"
     },
     "collection": {
       "type": "string",
