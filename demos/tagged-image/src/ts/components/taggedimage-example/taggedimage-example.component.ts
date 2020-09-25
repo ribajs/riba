@@ -30,7 +30,7 @@ export class TaggedImageExampleComponent extends Component {
       src: `../../../images/shotokan-karate-cuxhaven-${n}.jpg`,
       srcset: [800, 1000, 1200, 1400, 1600, 1920]
         .map(
-          (w) => `../../../images/shotokan-karate-cuxhaven-${n}-${w}.jpg ${w}w`
+          (w) => `../../../images/shotokan-karate-cuxhaven-${n}-${w}.jpg ${w}w,`
         )
         .join("\n"),
       title: `Image ${n}`,
