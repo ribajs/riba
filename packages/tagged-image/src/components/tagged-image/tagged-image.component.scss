@@ -19,7 +19,6 @@ tagged-image {
     z-index: 1333333338;
     width: $tagged-image-tag-full-size;
     height: $tagged-image-tag-full-size;
-    background-color: red;
     position: absolute;
     cursor: pointer;
     &::before {
@@ -41,7 +40,7 @@ tagged-image {
     &:hover {
       &::before {
         transform: translate(-($tagged-image-tag-full-size / 2), -($tagged-image-tag-full-size / 2));
-        padding: 20px;
+        padding: $tagged-image-tag-full-size / 2;
       }
     }
   }

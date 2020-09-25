@@ -1,6 +1,5 @@
 import { Component } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import { PopoverService } from "@ribajs/bs4";
 import template from "./tagged-image.component.html";
 
 interface Tag {
@@ -57,19 +56,12 @@ export class TaggedImageComponent extends Component {
         parseFloat(tagEl.getAttribute("y") || "")
       );
 
-      const popup = new PopoverService(tagEl, {
-        ...PopoverService.Default,
-        title,
-        content,
-      });
-
       const tagData = {
         title,
         content,
         x,
         y,
         el: tagEl,
-        popup,
       };
       this.scope.tags.push(tagData);
     }
