@@ -11,8 +11,6 @@ interface Tag {
   };
   popup?: TooltipService | PopoverService;
 }
-
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Scope {
   src: string;
   tags: Tag[];
@@ -22,6 +20,7 @@ export class TaggedImageComponent extends Component {
   public static tagName = "tagged-image";
 
   protected autobind = true;
+  public _debug = true;
 
   static get observedAttributes() {
     return ["src"];
@@ -36,7 +35,7 @@ export class TaggedImageComponent extends Component {
     super(element);
   }
 
-  protected setTags() {
+  protected initTags() {
     for (const t of Array.from(this.el.querySelectorAll("tag"))) {
       const tag = t as HTMLElement;
 
@@ -79,8 +78,6 @@ export class TaggedImageComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.setTags();
-    this.setImage();
     this.init(TaggedImageComponent.observedAttributes);
   }
 
@@ -89,49 +86,13 @@ export class TaggedImageComponent extends Component {
   }
 
   protected async beforeBind() {
-    return await super.beforeBind();
+    await super.beforeBind();
+    this.initTags();
+    this.setImage();
   }
 
   protected async afterBind() {
-    const img = document.createElement("img");
-    img.className = "lazy embed-responsive-item";
-    img.setAttribute("src", this.el.getAttribute("src") || "");
-    img.setAttribute("srcset", this.el.getAttribute("srcset") || "");
-    img.setAttribute("sizes", this.el.getAttribute("sizes") || "");
-    this.el.appendChild(img);
-    for (const t of Array.from(this.el.querySelectorAll("tag"))) {
-      const tag = t as HTMLElement;
-
-      const title = tag.getAttribute("title") || "";
-      const content = tag.innerHTML;
-
-      const x = ((v) => (isNaN(v) ? Math.random() : v))(
-        parseFloat(tag.getAttribute("x") || "")
-      );
-      const y = ((v) => (isNaN(v) ? Math.random() : v))(
-        parseFloat(tag.getAttribute("y") || "")
-      );
-
-      tag.style.left = x * 100 + "%";
-      tag.style.top = y * 100 + "%";
-
-      // const tooltipType = tag.getAttribute("type") || this.el.getAttribute("tooltip-type");
-
-      const popup = new PopoverService(tag, {
-        ...PopoverService.Default,
-        title,
-        content,
-      });
-
-      const tagData = {
-        title,
-        content,
-        position: { x, y },
-        popup,
-      };
-      this.scope.tags.push(tagData);
-    }
-    return await super.afterBind();
+    await super.afterBind();
   }
 
   // deconstructor
