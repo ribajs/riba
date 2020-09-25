@@ -61,6 +61,7 @@
     "@ribajs/bs4": "workspace:packages/bs4",
     "@ribajs/core": "workspace:packages/core",
     "@ribajs/extras": "workspace:packages/extras",
+    "@ribajs/utils": "workspace:packages/utils",
     "@yarnpkg/pnpify": "^2.2.1"
   },
   "bugs": {

@@ -1,16 +1,17 @@
 import { Component } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import { TooltipService, PopoverService } from "@ribajs/bs4";
+import { PopoverService } from "@ribajs/bs4";
 import template from "./tagged-image.component.html";
 
 interface Tag {
   title: string;
   content: string | HTMLElement;
-  position: {
-    x: number;
-    y: number;
-  };
-  popup?: TooltipService | PopoverService;
+  x: number;
+  y: number;
+  index?: number;
+  left?: string;
+  top?: string;
+  el?: HTMLElement;
 }
 interface Scope {
   src: string;
@@ -27,7 +28,7 @@ export class TaggedImageComponent extends Component {
   public _debug = true;
 
   static get observedAttributes() {
-    return ["src", "sizes", "srcset", "alt"];
+    return ["src", "sizes", "srcset", "alt", "tags"];
   }
 
   protected scope: Scope = {
@@ -42,26 +43,21 @@ export class TaggedImageComponent extends Component {
     super(element);
   }
 
-  protected initTags() {
-    for (const t of Array.from(this.el.querySelectorAll("tag"))) {
-      const tag = t as HTMLElement;
-
-      const title = tag.getAttribute("title") || "";
-      const content = tag.innerHTML;
+  protected parseChildTags() {
+    for (const tagEl of Array.from(
+      this.el.querySelectorAll("tag") as NodeListOf<HTMLElement>
+    )) {
+      const title = tagEl.getAttribute("title") || "";
+      const content = tagEl.innerHTML;
 
       const x = ((v) => (isNaN(v) ? Math.random() : v))(
-        parseFloat(tag.getAttribute("x") || "")
+        parseFloat(tagEl.getAttribute("x") || "")
       );
       const y = ((v) => (isNaN(v) ? Math.random() : v))(
-        parseFloat(tag.getAttribute("y") || "")
+        parseFloat(tagEl.getAttribute("y") || "")
       );
 
-      tag.style.left = x * 100 + "%";
-      tag.style.top = y * 100 + "%";
-
-      // const tooltipType = tag.getAttribute("type") || this.el.getAttribute("tooltip-type");
-
-      const popup = new PopoverService(tag, {
+      const popup = new PopoverService(tagEl, {
         ...PopoverService.Default,
         title,
         content,
@@ -70,20 +66,27 @@ export class TaggedImageComponent extends Component {
       const tagData = {
         title,
         content,
-        position: { x, y },
+        x,
+        y,
+        el: tagEl,
         popup,
       };
       this.scope.tags.push(tagData);
     }
   }
 
+  protected initTags() {
+    for (const [index, tag] of this.scope.tags.entries()) {
+      tag.left = tag.x * 100 + "%";
+      tag.top = tag.y * 100 + "%";
+      tag.index = index;
+    }
+    this.debug("initTags", this.scope.tags);
+  }
+
   protected connectedCallback() {
     super.connectedCallback();
     this.init(TaggedImageComponent.observedAttributes);
-  }
-
-  protected async init(observedAttributes: string[]) {
-    return super.init(observedAttributes);
   }
 
   protected async beforeBind() {
@@ -95,13 +98,10 @@ export class TaggedImageComponent extends Component {
     await super.afterBind();
   }
 
-  // deconstructor
-  protected disconnectedCallback() {
-    super.disconnectedCallback();
-  }
-
   protected template() {
-    this.el.innerHTML += template;
-    return null;
+    if (hasChildNodesTrim(this.el)) {
+      this.parseChildTags();
+    }
+    return template;
   }
 }

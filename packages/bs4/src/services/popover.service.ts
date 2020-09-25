@@ -30,7 +30,7 @@ const Default = {
   content: "",
   template:
     '<div class="popover" role="tooltip">' +
-    '<div class="popover-arrow"></div>' +
+    '<div class="popover-arrow arrow"></div>' +
     '<h3 class="popover-header"></h3>' +
     '<div class="popover-body"></div></div>',
 };
@@ -126,12 +126,14 @@ export class PopoverService extends TooltipService {
     return Boolean(this.getTitle() || this._getContent());
   }
 
-  setContent() {
+  setContent(content?: string | ConfigContentFn) {
     const tip = this.getTipElement();
 
     // we use append for html objects to maintain js events
     this.setElementContent(findOne(SELECTOR_TITLE, tip), this.getTitle());
-    let content = this._getContent();
+    if (!content) {
+      content = this._getContent();
+    }
     if (typeof content === "function") {
       content = (content as ConfigContentFn)(this.element);
     }
