@@ -2,7 +2,7 @@
   <div class="row py-1">
     <div class="col-4"></div>
     <div class="col-4">
-      <tagged-image rv-parent
+      <tagged-image
         loading="lazy" 
         class="lazy embed-responsive-item"
         rv-src="fadeshowImages.0.src" 
@@ -14,8 +14,8 @@
                 (max-height: 900px) 1600px,
                 1920px,
         "
+        rv-tags="fadeshowImages.0.tags | json 0"
         >
-        <tag rv-each-tag="fadeshowImages.0.tags" rv-x="tag.x" rv-y="tag.y" rv-title="'hello ' | append %tag%">content { %tag% }</tag>
       </tagged-image>
     </div>
     <div class="col-4"></div>
@@ -48,9 +48,7 @@
               </h2>
             </div>
           </div>
-
         </div>
-
       </bs4-carousel>
     </div>    
   </div>
