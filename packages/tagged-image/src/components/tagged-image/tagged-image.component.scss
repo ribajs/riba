@@ -19,6 +19,7 @@ tagged-image {
     z-index: 1333333338;
     width: $tagged-image-tag-full-size;
     height: $tagged-image-tag-full-size;
+    transform: translate(-($tagged-image-tag-full-size / 2), -($tagged-image-tag-full-size / 2));
     position: absolute;
     cursor: pointer;
     &::before {
@@ -32,14 +33,12 @@ tagged-image {
       background-color: #23de00;
       border-radius: 100%;
       position: absolute;
-      transform: translate(-($tagged-image-tag-small-size / 2), -($tagged-image-tag-small-size / 2));
-      left: $tagged-image-tag-full-size / 2;
-      top: $tagged-image-tag-full-size / 2;
+      transform: translate(($tagged-image-tag-full-size / 2)-($tagged-image-tag-small-size / 2), ($tagged-image-tag-full-size / 2)-($tagged-image-tag-small-size / 2));
       transition: all ease-in-out 0.1s;
     }
     &:hover {
       &::before {
-        transform: translate(-($tagged-image-tag-full-size / 2), -($tagged-image-tag-full-size / 2));
+        transform: translate(0, 0);
         padding: $tagged-image-tag-full-size / 2;
       }
     }
