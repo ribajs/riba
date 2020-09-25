@@ -16,40 +16,17 @@ import {
   typeCheckConfig,
 } from "./utils.service";
 import { getUID, getElementFromEvent } from "@ribajs/utils/src/dom";
-import { DefaultAllowlist, AllowList, sanitizeHtml } from "./sanitizer";
+import { DefaultAllowlist, sanitizeHtml } from "./sanitizer";
 import Data from "./dom/data";
 import EventHandler from "./dom/event-handler";
 import Manipulator from "./dom/manipulator";
 import Popper from "popper.js";
 import { findOne } from "./dom/selector-engine";
-
-export type ConfigOffsetFn = (
-  offsets: any /*TODO*/,
-  el: HTMLElement
-) => number[];
-export type ConfigPlacementFn = (el1: HTMLElement, el2: HTMLElement) => string;
-export type ConfigTitleFn = (el: HTMLElement) => string;
-export type ConfigContentFn = (el: HTMLElement) => string;
-
-export interface Config {
-  animation: boolean;
-  delay: number | { show: number; hide: number };
-  html: boolean;
-  placement: string | ConfigPlacementFn;
-  selector?: string;
-  template: string;
-  title: string | ConfigTitleFn;
-  trigger: string;
-  offset: number | ConfigOffsetFn;
-  container?: Element; // TODO,
-  fallbackPlacement: "flip";
-  boundary: "scrollParent";
-  sanitize: boolean;
-  sanitizeFn: null;
-  allowList: AllowList;
-  popperConfig: null | any; // TODO
-  content?: string | ConfigContentFn;
-}
+import {
+  TooltipOptions,
+  TooltipTitleFn,
+  TooltipOffsetFn,
+} from "./../interfaces/tooltip-options";
 
 /**
  * ------------------------------------------------------------------------
@@ -92,7 +69,7 @@ const AttachmentMap = {
   LEFT: "left",
 };
 
-const Default: Config = {
+const Default: TooltipOptions = {
   animation: true,
   container: undefined,
   delay: 0,
@@ -101,7 +78,7 @@ const Default: Config = {
   selector: undefined,
   template:
     '<div class="tooltip" role="tooltip">' +
-    '<div class="tooltip-arrow"></div>' +
+    '<div class="tooltip-arrow arrow"></div>' +
     '<div class="tooltip-inner"></div></div>',
   title: "",
   trigger: "hover focus",
@@ -183,10 +160,13 @@ export class TooltipService {
   private _popper: null | Popper = null;
 
   protected element: HTMLElement | HTMLUnknownElement;
-  protected config: Config;
+  protected config: TooltipOptions;
   protected tip: null | HTMLElement = null;
 
-  constructor(element: HTMLElement | HTMLUnknownElement, config: Config) {
+  constructor(
+    element: HTMLElement | HTMLUnknownElement,
+    config: TooltipOptions
+  ) {
     if (typeof Popper === "undefined") {
       throw new TypeError(
         "Bootstrap's tooltips require Popper.js (https://popper.js.org)"
@@ -527,7 +507,7 @@ export class TooltipService {
     if (!title) {
       title =
         typeof this.config.title === "function"
-          ? (this.config.title as ConfigTitleFn)(this.element)
+          ? (this.config.title as TooltipTitleFn)(this.element)
           : this.config.title;
     }
 
@@ -576,7 +556,7 @@ export class TooltipService {
       offset.fn = (data: any) => {
         data.offsets = {
           ...data.offsets,
-          ...((this.config.offset as ConfigOffsetFn)(
+          ...((this.config.offset as TooltipOffsetFn)(
             data.offsets,
             this.element
           ) || {}),
@@ -780,7 +760,7 @@ export class TooltipService {
     return false;
   }
 
-  _getConfig(config: Config) {
+  _getConfig(config: TooltipOptions) {
     const dataAttributes = Manipulator.getDataAttributes(this.element);
 
     Object.keys(dataAttributes).forEach((dataAttr) => {
@@ -832,8 +812,8 @@ export class TooltipService {
     return config;
   }
 
-  _getDelegateConfig(): Config {
-    const config: Partial<Config> = {};
+  _getDelegateConfig(): TooltipOptions {
+    const config: Partial<TooltipOptions> = {};
 
     if (this.config) {
       for (const key in this.config) {
@@ -846,7 +826,7 @@ export class TooltipService {
       }
     }
 
-    return config as Config;
+    return config as TooltipOptions;
   }
 
   _cleanTipClass() {
