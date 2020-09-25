@@ -35,8 +35,11 @@ export class TaggedImageExampleComponent extends Component {
         .join("\n"),
       title: `Image ${n}`,
       tags: [1, 2, 3, 4, 5, 6, 7].map((n) => ({
-        title: `Title tag ${n}`,
-        content: `Content tag ${n}`,
+        popover: {
+          title: `Title tag ${n}`,
+          content: `Content tag ${n}`,
+        },
+
         x: Math.random(),
         y: Math.random(),
       })),

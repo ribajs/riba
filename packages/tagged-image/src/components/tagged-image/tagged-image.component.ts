@@ -58,7 +58,6 @@ export class TaggedImageComponent extends Component {
 
       const tagData = {
         popover: {
-          ...PopoverService.Default,
           title,
           content,
         },
