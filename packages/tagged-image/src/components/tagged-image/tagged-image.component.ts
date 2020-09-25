@@ -1,6 +1,7 @@
 import { Component } from "@ribajs/core";
-// import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { TooltipService, PopoverService } from "@ribajs/bs4";
+import template from "./tagged-image.component.html";
 
 interface Tag {
   title: string;
@@ -13,6 +14,9 @@ interface Tag {
 }
 interface Scope {
   src: string;
+  srcset: string;
+  sizes: string;
+  alt: string;
   tags: Tag[];
 }
 
@@ -23,11 +27,14 @@ export class TaggedImageComponent extends Component {
   public _debug = true;
 
   static get observedAttributes() {
-    return ["src"];
+    return ["src", "sizes", "srcset", "alt"];
   }
 
   protected scope: Scope = {
     src: "",
+    srcset: "",
+    sizes: "",
+    alt: "",
     tags: [],
   };
 
@@ -70,12 +77,6 @@ export class TaggedImageComponent extends Component {
     }
   }
 
-  protected setImage() {
-    const img = document.createElement("img");
-    img.setAttribute("rv-src", "src");
-    this.el.appendChild(img);
-  }
-
   protected connectedCallback() {
     super.connectedCallback();
     this.init(TaggedImageComponent.observedAttributes);
@@ -88,7 +89,6 @@ export class TaggedImageComponent extends Component {
   protected async beforeBind() {
     await super.beforeBind();
     this.initTags();
-    this.setImage();
   }
 
   protected async afterBind() {
@@ -101,6 +101,7 @@ export class TaggedImageComponent extends Component {
   }
 
   protected template() {
+    this.el.innerHTML += template;
     return null;
   }
 }
