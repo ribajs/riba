@@ -1,5 +1,5 @@
 import { Component } from "@ribajs/core";
-import { PopoverService, PopoverOptions } from "@ribajs/bs4";
+import { PopoverOptions } from "@ribajs/bs4";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./tagged-image.component.html";
 
@@ -9,7 +9,7 @@ interface Tag {
   index?: number;
   left?: string;
   top?: string;
-  popover: PopoverOptions;
+  popover: Partial<PopoverOptions>;
   el?: HTMLElement;
 }
 interface Scope {
@@ -60,6 +60,7 @@ export class TaggedImageComponent extends Component {
         popover: {
           title,
           content,
+          html: true,
         },
         x,
         y,
