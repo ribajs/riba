@@ -1,6 +1,6 @@
 /** Type definition for html-loader */
 declare module "*.html" {
-  const content: string;
+  const htmlContent: string;
   export default htmlContent;
 }
 /** Type definition for pug-loader: https://github.com/pugjs/pug-loader */
