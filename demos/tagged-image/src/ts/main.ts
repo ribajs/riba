@@ -4,8 +4,15 @@ import { extrasModule } from "@ribajs/extras";
 import { taggedImageModule } from "@ribajs/tagged-image";
 import { TaggedImageDemoModule } from "./taggedimage-demo.module";
 
-const riba = ((window as any).riba = new Riba());
-const model = ((window as any).model = {});
+declare global {
+  interface Window {
+    riba: Riba;
+    model: any;
+  }
+}
+
+const riba = (window.riba = new Riba());
+const model = (window.model = window.model || {});
 
 // Register modules
 riba.module.regist(coreModule);
