@@ -33,6 +33,8 @@ export const trigger = <T = any>(
 ) => {
   const event = new CustomEvent<T>(eventName, {
     detail: extraParameters,
+    bubbles: true,
+    cancelable: true,
   });
   element.dispatchEvent(event);
   return event;
