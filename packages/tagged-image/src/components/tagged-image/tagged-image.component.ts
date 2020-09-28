@@ -18,6 +18,9 @@ interface Scope {
   sizes: string;
   alt: string;
   tags: Tag[];
+  fillContainerOptions: (
+    options: Partial<PopoverOptions>
+  ) => Partial<PopoverOptions>;
 }
 
 export class TaggedImageComponent extends Component {
@@ -36,6 +39,9 @@ export class TaggedImageComponent extends Component {
     sizes: "",
     alt: "",
     tags: [],
+    fillContainerOptions: (options: Partial<PopoverOptions>) => {
+      return { ...options, container: this.el };
+    },
   };
 
   constructor(element?: HTMLElement) {
@@ -61,6 +67,7 @@ export class TaggedImageComponent extends Component {
           title,
           content,
           html: true,
+          container: this.el,
         },
         x,
         y,
