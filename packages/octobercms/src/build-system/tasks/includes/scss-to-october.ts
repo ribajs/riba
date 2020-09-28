@@ -1,7 +1,7 @@
 import * as Stream from "stream";
 import * as Path from "path";
 import * as yaml from "js-yaml";
-
+import * as fs from "fs";
 import * as rgbRegex from "rgb-regex";
 import * as hexRegex from "hex-color-regex";
 
@@ -51,13 +51,17 @@ function scssToOctoberYml() {
       }
 
       //dump
-      file.contents = Buffer.from(
-        yaml.safeDump(variables, {
-          styles: {
-            "!!null": "canonical", // dump null as ~
-          },
-        })
-      );
+      if (Object.keys(variables).length === 0) {
+        file.contents = Buffer.from('');
+      } else {
+        file.contents = Buffer.from(
+          yaml.safeDump(variables, {
+            styles: {
+              "!!null": "canonical", // dump null as ~
+            },
+          })
+        );
+      }
       console.log("\n### OUTPUT ###\n");
       console.log(file.contents.toString());
     }

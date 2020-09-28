@@ -54,11 +54,16 @@ function scssToOctoberYml() {
                 }
             }
             //dump
-            file.contents = Buffer.from(yaml.safeDump(variables, {
-                styles: {
-                    "!!null": "canonical"
-                }
-            }));
+            if (Object.keys(variables).length === 0) {
+                file.contents = Buffer.from('');
+            }
+            else {
+                file.contents = Buffer.from(yaml.safeDump(variables, {
+                    styles: {
+                        "!!null": "canonical"
+                    }
+                }));
+            }
             console.log("\n### OUTPUT ###\n");
             console.log(file.contents.toString());
         }
