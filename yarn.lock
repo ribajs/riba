@@ -2558,6 +2558,7 @@ __metadata:
     "@ribajs/eslint-config": "portal:infra/eslint-config::locator=ribajs%40workspace%3A."
     "@ribajs/extras": "portal:packages/extras::locator=ribajs%40workspace%3A."
     "@ribajs/tsconfig": "portal:infra/tsconfig::locator=ribajs%40workspace%3A."
+    "@ribajs/utils": "portal:packages/utils::locator=ribajs%40workspace%3A."
     "@types/jest": ^26.0.13
     "@typescript-eslint/eslint-plugin": ^3.10.1
     "@typescript-eslint/parser": ^3.10.1
@@ -2645,10 +2646,11 @@ __metadata:
     mini-css-extract-plugin: ^0.9.0
     node-sass: ^4.14.1
     postcss-loader: ^3.0.0
+    pug: ^3.0.0
     pug-loader: ^2.4.0
     resolve-url-loader: ^3.1.1
     sass-loader: ^10.0.2
-    terser-webpack-plugin: ^3.0.7
+    terser-webpack-plugin: ^3.0.6
     webpack: ^5.0.0-beta.22
     webpack-dev-server: ^3.11.0
   languageName: node
@@ -2675,7 +2677,7 @@ __metadata:
     pug-loader: ^2.4.0
     resolve-url-loader: ^3.1.1
     sass-loader: ^10.0.2
-    terser-webpack-plugin: ^3.0.7
+    terser-webpack-plugin: ^3.0.6
     webpack: ^5.0.0-beta.22
     webpack-dev-server: ^3.11.0
   languageName: unknown
@@ -7175,7 +7177,7 @@ fsevents@^1.2.7:
   dependencies:
     bindings: ^1.5.0
     nan: ^2.12.1
-  checksum: 879e607a94b41d482b4fe01defba67e9745a0b7a7838d904de852053f1e74c0f4410f6c584b16c6886cfc5cdf7312e44e4a4826832270041eec364ad3a83cabd
+  checksum: aa10bae7245bfe87da8092951152eaddf60347c2c69660188bd36a8c228b9efb383ff8808677ef99ca747e23f783a8acca2ba902939ab49d011da29860ede372
   languageName: node
   linkType: hard
 
@@ -7184,7 +7186,7 @@ fsevents@^1.2.7:
   resolution: "fsevents@patch:fsevents@npm%3A2.1.3#builtin<compat/fsevents>::version=2.1.3&hash=e8cd9e"
   dependencies:
     node-gyp: latest
-  checksum: 84919a1ed067df4bbd1b70958ce43fc55129202fba00ef4f6d3f4a6e40761340de4ec76df53c75ff2ae6cbcd35fa498285282832119d0b51c4938ebf481b051d
+  checksum: e8e06b3e0a5837e7be62b820f790371c0e0961b68ef6a1959c825533cce92d1d4559dead9a63dbf5c8baa288552c3fb76a36fe58fc9b4466a08479f52f3832e4
   languageName: node
   linkType: hard
 
@@ -12577,7 +12579,7 @@ fsevents@^1.2.7:
   resolution: "resolve@patch:resolve@npm%3A1.17.0#builtin<compat/resolve>::version=1.17.0&hash=8fccd0"
   dependencies:
     path-parse: ^1.0.6
-  checksum: 88c57a90be3c6fdf578cbc49f867a53351fbf7ad1d5e3cc8923a731faaf17699925bff6a1c9b68d8cd1259a2dcb79cb55ae77703cee6d6b0ba10a8c7b7890000
+  checksum: 886952612a0e5f5a7e13ebff688e898ba8afd6b27e82a92db9bcf11f69d88c30d054e0728dfc566c202907345f2f3f1e64d5adce33c1e9891c8b217bc87a4a2b
   languageName: node
   linkType: hard
 
@@ -13819,7 +13821,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"terser-webpack-plugin@npm:^3.0.7":
+"terser-webpack-plugin@npm:^3.0.6":
   version: 3.1.0
   resolution: "terser-webpack-plugin@npm:3.1.0"
   dependencies:
@@ -14261,7 +14263,7 @@ typescript@^4.0.2:
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 7f8fa9370b88b85182eb6d40ac179a6672befe387364f8d8e6df6947250d65f1258d48726a5342f9a04e3871c545fed4e4bcbef6bb0137f554dcd098a4532d79
+  checksum: 7008ea4a188762d10f646e53d2db430e51f992cc72b61a1eb4bba2d0e33071a17d3fef7e0e85cbe659b6692d21a1cb03b5d2951ce16b86717420505fad54d41b
   languageName: node
   linkType: hard
 

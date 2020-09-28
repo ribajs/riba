@@ -8,7 +8,12 @@
 
 import { getData } from "./dom/data";
 import { findOne } from "./dom/selector-engine";
-import { TooltipService, ConfigContentFn } from "./tooltip.service";
+import { TooltipService } from "./tooltip.service";
+import {
+  TooltipContentFn,
+  PopoverOptions,
+  TooltipOptions,
+} from "../interfaces";
 
 /**
  * ------------------------------------------------------------------------
@@ -23,14 +28,14 @@ const EVENT_KEY = `.${DATA_KEY}`;
 const CLASS_PREFIX = "bs-popover";
 const BSCLS_PREFIX_REGEX = new RegExp(`(^|\\s)${CLASS_PREFIX}\\S+`, "g");
 
-const Default = {
+const Default: PopoverOptions = {
   ...TooltipService.Default,
   placement: "right",
   trigger: "click",
   content: "",
   template:
     '<div class="popover" role="tooltip">' +
-    '<div class="popover-arrow"></div>' +
+    '<div class="popover-arrow arrow"></div>' +
     '<h3 class="popover-header"></h3>' +
     '<div class="popover-body"></div></div>',
 };
@@ -92,7 +97,7 @@ export class PopoverService extends TooltipService {
     return VERSION;
   }
 
-  static get Default() {
+  static get Default(): PopoverOptions {
     return Default;
   }
 
@@ -117,8 +122,11 @@ export class PopoverService extends TooltipService {
   }
 
   // Overrides
-  constructor(element: HTMLElement | HTMLUnknownElement, config: any) {
-    super(element, config);
+  constructor(
+    element: HTMLElement | HTMLUnknownElement,
+    config: Partial<PopoverOptions>
+  ) {
+    super(element, config as TooltipOptions);
     element.style.backgroundColor = "#ffff00";
   }
 
@@ -126,14 +134,16 @@ export class PopoverService extends TooltipService {
     return Boolean(this.getTitle() || this._getContent());
   }
 
-  setContent() {
+  setContent(content?: string | TooltipContentFn) {
     const tip = this.getTipElement();
 
     // we use append for html objects to maintain js events
     this.setElementContent(findOne(SELECTOR_TITLE, tip), this.getTitle());
-    let content = this._getContent();
+    if (!content) {
+      content = this._getContent();
+    }
     if (typeof content === "function") {
-      content = (content as ConfigContentFn)(this.element);
+      content = (content as TooltipContentFn)(this.element);
     }
 
     if (content) {
@@ -161,6 +171,12 @@ export class PopoverService extends TooltipService {
         .map((token) => token.trim())
         .forEach((tClass) => tip.classList.remove(tClass));
     }
+  }
+
+  _getPopperConfig(attachment: string) {
+    const config = super._getPopperConfig(attachment);
+    config.modifiers.arrow.element = `.${PopoverService.NAME}-arrow`;
+    return config;
   }
 
   // Static

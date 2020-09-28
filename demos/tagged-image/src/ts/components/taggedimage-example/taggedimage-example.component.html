@@ -1,5 +1,72 @@
+<div class="container-fluid">
+  <div class="row py-1">
+    <div class="col-4"></div>
+    <div class="col-4">
+      <tagged-image
+        loading="lazy" 
+        class="lazy embed-responsive-item"
+        rv-src="fadeshowImages.0.src" 
+        rv-srcset="fadeshowImages.0.srcset"
+        sizes="(max-height: 500px) 800px,
+                (max-height: 600px) 1000px,
+                (max-height: 700px) 1200px,
+                (max-height: 800px) 1400px,
+                (max-height: 900px) 1600px,
+                1920px,
+        "
+        rv-tags="fadeshowImages.0.tags | json 0"
+        >
+      </tagged-image>
+    </div>
+    <div class="col-4"></div>
+  </div>
 
+  <div class="row">
+    <div class="col-12 px-0">
+      <bs4-carousel rv-parent class="carousel slide carousel-fade" interval="10000">
+        <div class="carousel-inner">
+          <div rv-each-image="fadeshowImages" class="carousel-item" rv-class-active="%image% | eq 0">
+            <div class="embed-responsive embed-responsive-100vh">
+              <tagged-image
+              loading="lazy" 
+              class="lazy embed-responsive-item"
+              rv-src="image.src" 
+              rv-srcset="image.srcset"
+              rv-tags="image.tags | json 0"
+              sizes="(max-height: 500px) 800px,
+                      (max-height: 600px) 1000px,
+                      (max-height: 700px) 1200px,
+                      (max-height: 800px) 1400px,
+                      (max-height: 900px) 1600px,
+                      1920px,
+              "
+              ></tagged-image>
+            </div>
+            <div class="carousel-caption carousel-caption-center d-flex">
+              <h2 class="font-weight-bold m-0 text-shadow">
+                  { image.title }
+              </h2>
+            </div>
+          </div>
+        </div>
+      </bs4-carousel>
+    </div>    
+  </div>
 
-<tagged-image image-url="../../../Hamburg-Hbf-HDR.jpg">
-  <anchor x="15" y="20"></anchor>
-</tagged-image>
+  <div class="p-3"></div>
+  <tagged-image src="../../../images/Hamburg-Hbf-HDR.jpg">
+    <tag x="0.5" y="0.5" title="hello1">content1</tag>
+    <tag title="hello2">content2</tag>
+    <tag title="hello3">content3</tag>
+    <tag x="0.25" y="0.75" title="hello4">content4</tag>
+    <tag title="hello5">content5</tag>
+    <tag title="hello6">content6</tag>
+    <tag x="0.75" y="0.25" title="hello7">content7</tag>
+    <tag title="hello8">content8</tag>
+    <tag title="hello9">content9</tag>
+    <tag x="0.5" y="0.01" title="helloTop">Top</tag>
+    <tag x="0.5" y="0.99" title="helloBottom">Bottom</tag>
+    <tag x="0.01" y="0.5" title="helloLeft">Left</tag>
+    <tag x="0.99" y="0.5" title="helloRight">Right</tag>
+  </tagged-image>
+</div>

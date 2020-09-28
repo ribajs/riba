@@ -1,30 +1,46 @@
+$tagged-image-tag-full-size: 40px;
+$tagged-image-tag-small-size: 10px;
+
 tagged-image {
-  .anchor {
-    width: 0;
-    height: 0;
-    padding: 5px;
-    background-color: black;
-    border-radius: 5px;
-    position: absolute;
-    top: 58%;
-    left: 54.3%;
-    transform: translate(-5px, -5px);  
-    cursor: pointer;
-    transition: all ease-in-out 0.1s;
-    &:hover {
-      transform: translate(-20px, -20px);
-      padding: 20px;
-      border-radius: 20px;
-    }
-  }
-  
-  .image-container {
-    position: relative;
-  }
+  overflow: visible;
+  position: relative;
+  display: inline-block;
+  height: auto;
 
   img {
     width: 100%;
     top: 0;
     left: 0;
+  }
+
+  tag {
+    visibility: hidden;
+    box-sizing: border-box;
+    z-index: 1333333338;
+    width: $tagged-image-tag-full-size;
+    height: $tagged-image-tag-full-size;
+    transform: translate(-($tagged-image-tag-full-size / 2), -($tagged-image-tag-full-size / 2));
+    position: absolute;
+    cursor: pointer;
+    &::before {
+      visibility: visible;
+      content: '\200b'; // zero-width whitespace, just to fill it with emptiness
+      box-sizing: content-box;
+      z-index: 1333333337;
+      width: 0;
+      height: 0;
+      padding: $tagged-image-tag-small-size / 2;
+      background-color: #23de00;
+      border-radius: 100%;
+      position: absolute;
+      transform: translate(($tagged-image-tag-full-size / 2)-($tagged-image-tag-small-size / 2), ($tagged-image-tag-full-size / 2)-($tagged-image-tag-small-size / 2));
+      transition: all ease-in-out 0.1s;
+    }
+    &:hover {
+      &::before {
+        transform: translate(0, 0);
+        padding: $tagged-image-tag-full-size / 2;
+      }
+    }
   }
 }

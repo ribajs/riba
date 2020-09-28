@@ -72,7 +72,10 @@ class EventDispatcher {
       return;
     }
 
-    this.events[e].splice(this.events[e].indexOf(f), 1);
+    const idx = this.events[e].indexOf(f);
+    if (idx !== -1) {
+      this.events[e].splice(idx, 1);
+    }
   }
 
   /**
