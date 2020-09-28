@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/schematics",
-  "version": "1.9.0-alpha.11",
+  "version": "1.9.0-beta.0",
   "description": "Riba schematics for the cli",
   "main": "index.js",
   "publishConfig": {
@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "@babel/runtime-corejs3": "^7.11.2",
-    "@ribajs/eslint-config": "1.9.0-alpha.10",
+    "@ribajs/eslint-config": "1.9.0-beta.0",
     "@types/debug": "^4.1.5",
     "@types/jest": "^26.0.10",
     "@types/node": "^14.6.0",

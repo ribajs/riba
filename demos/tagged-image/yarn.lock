@@ -2247,6 +2247,7 @@ __metadata:
     "@ribajs/eslint-config": "portal:../../infra/eslint-config::locator=taggedimage-example%40workspace%3A."
     "@ribajs/extras": "portal:../../packages/extras::locator=taggedimage-example%40workspace%3A."
     "@ribajs/tsconfig": "portal:../../infra/tsconfig::locator=taggedimage-example%40workspace%3A."
+    "@ribajs/utils": "portal:../../packages/utils::locator=taggedimage-example%40workspace%3A."
     "@types/jest": ^26.0.13
     "@typescript-eslint/eslint-plugin": ^3.10.1
     "@typescript-eslint/parser": ^3.10.1

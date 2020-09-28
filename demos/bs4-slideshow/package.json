@@ -1,6 +1,6 @@
 {
   "name": "bs4-slideshow",
-  "version": "1.9.0-alpha.11",
+  "version": "1.9.0-beta.0",
   "description": "",
   "main": "src/index.html",
   "scripts": {
@@ -30,9 +30,9 @@
     "@babel/preset-typescript": "^7.10.4",
     "@babel/runtime": "^7.10.5",
     "@babel/runtime-corejs3": "^7.10.5",
-    "@ribajs/eslint-config": "^1.9.0-alpha.10",
-    "@ribajs/tsconfig": "^1.9.0-alpha.10",
-    "@ribajs/webpack-config": "^1.9.0-alpha.10",
+    "@ribajs/eslint-config": "^1.9.0-beta.0",
+    "@ribajs/tsconfig": "^1.9.0-beta.0",
+    "@ribajs/webpack-config": "^1.9.0-beta.0",
     "@types/jest": "^26.0.4",
     "@typescript-eslint/eslint-plugin": "^3.6.1",
     "@typescript-eslint/experimental-utils": "^3.6.1",
@@ -65,11 +65,11 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "@ribajs/bs4": "^1.9.0-alpha.10",
-    "@ribajs/core": "^1.9.0-alpha.10",
-    "@ribajs/extras": "^1.9.0-alpha.10",
-    "@ribajs/iconset": "^1.9.0-alpha.10",
-    "@ribajs/utils": "^1.9.0-alpha.10",
+    "@ribajs/bs4": "^1.9.0-beta.0",
+    "@ribajs/core": "^1.9.0-beta.0",
+    "@ribajs/extras": "^1.9.0-beta.0",
+    "@ribajs/iconset": "^1.9.0-beta.0",
+    "@ribajs/utils": "^1.9.0-beta.0",
     "bootstrap": "^4.5.0"
   },
   "resolutions": {
