@@ -3,13 +3,17 @@ import { PopoverOptions } from "@ribajs/bs4";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./tagged-image.component.html";
 
+interface Options {
+  popoverOptions: Partial<PopoverOptions>;
+  multiPopover: boolean;
+}
 interface Tag {
   x: number;
   y: number;
   index?: number;
   left?: string;
   top?: string;
-  popover: Partial<PopoverOptions>;
+  popoverOptions: Partial<PopoverOptions>;
   el?: HTMLElement;
 }
 interface Scope {
@@ -17,12 +21,13 @@ interface Scope {
   srcset: string;
   sizes: string;
   alt: string;
+  options: Options;
   tags: Tag[];
   fillPopoverOptions: (
     options: Partial<PopoverOptions>
   ) => Partial<PopoverOptions>;
-  onPopupBound: EventListener;
-  onPopupShown: EventListener;
+  onPopoverBound: EventListener;
+  onPopoverShown: EventListener;
 }
 
 export class TaggedImageComponent extends Component {
@@ -32,7 +37,12 @@ export class TaggedImageComponent extends Component {
   public _debug = true;
 
   static get observedAttributes() {
-    return ["src", "sizes", "srcset", "alt", "tags", "popover-options"];
+    return ["src", "sizes", "srcset", "alt", "tags", "options"];
+  }
+
+  constructor(element?: HTMLElement) {
+    super(element);
+    this.scope.options.popoverOptions.container = this.el;
   }
 
   protected scope: Scope = {
@@ -41,11 +51,19 @@ export class TaggedImageComponent extends Component {
     sizes: "",
     alt: "",
     tags: [],
-    fillPopoverOptions: (options: Partial<PopoverOptions>) => {
-      return { ...this.popoverOptions, ...options };
+    options: {
+      popoverOptions: {}, // set container = this.el in constructor
+      multiPopover: false,
     },
-    onPopupBound: (event: Event) => {
-      const boundIndexAttr = (event.target! as HTMLElement).getAttribute(
+    fillPopoverOptions: (options: Partial<PopoverOptions>) => {
+      return { ...this.scope.options.popoverOptions, ...options };
+    },
+    onPopoverBound: (event: Event) => {
+      /*
+       *  We get the anchor `el` for each tag here, after they have been bound in the rv-each,
+       *  so we can trigger events on them later.
+       */
+      const boundIndexAttr = (event.target as HTMLElement).getAttribute(
         "index"
       );
       if (boundIndexAttr === null) {
@@ -64,7 +82,12 @@ export class TaggedImageComponent extends Component {
         );
       }
     },
-    onPopupShown: (event: Event) => {
+    onPopoverShown: (event: Event) => {
+      // If we allow multiPopover, we don't need to hide anything.
+      if (this.scope.options.multiPopover) {
+        return;
+      }
+      // Hide all the other popovers.
       for (const tag of this.scope.tags) {
         if (tag.el !== event.target) {
           tag.el?.dispatchEvent(new CustomEvent("trigger-hide"));
@@ -73,14 +96,8 @@ export class TaggedImageComponent extends Component {
     },
   };
 
-  protected popoverOptions: Partial<PopoverOptions> = {};
-
-  constructor(element?: HTMLElement) {
-    super(element);
-    this.popoverOptions.container = this.el;
-  }
-
   protected parseChildTags() {
+    this.debug(`parseChildTags()`);
     for (const tagEl of Array.from(
       this.el.querySelectorAll("tag") as NodeListOf<HTMLElement>
     )) {
@@ -95,15 +112,14 @@ export class TaggedImageComponent extends Component {
       );
 
       const tagData = {
-        popover: {
+        popoverOptions: {
           title,
           content,
           html: true,
-          ...this.popoverOptions,
+          ...this.scope.options.popoverOptions,
         },
         x,
         y,
-        el: tagEl,
       };
       this.scope.tags.push(tagData);
     }
@@ -115,7 +131,6 @@ export class TaggedImageComponent extends Component {
       tag.top = tag.y * 100 + "%";
       tag.index = index;
     }
-    this.debug("initTags", this.scope.tags);
   }
 
   protected connectedCallback() {

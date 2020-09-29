@@ -1,6 +1,7 @@
 import { Component } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./taggedimage-example.component.html";
+import { PopoverOptions } from "@ribajs/bs4";
 
 interface Scope {
   name: string;
@@ -11,6 +12,7 @@ interface Scope {
     tags: {
       x: number;
       y: number;
+      popoverOptions: Partial<PopoverOptions>;
     }[];
   }[];
 }
@@ -35,7 +37,7 @@ export class TaggedImageExampleComponent extends Component {
         .join("\n"),
       title: `Image ${n}`,
       tags: [1, 2, 3, 4, 5, 6, 7].map((n) => ({
-        popover: {
+        popoverOptions: {
           title: `Title tag ${n}`,
           content: `Content tag ${n}`,
         },
