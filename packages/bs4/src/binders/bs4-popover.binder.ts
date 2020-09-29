@@ -58,11 +58,12 @@ export const popoverBinder: Binder<string> = {
       }
     }
 
-    this.customData.listeners = [];
+    this.customData.listeners = Object.create(null);
     for (const methodName of methodNames) {
+      const trigger = `trigger-${methodName}`;
       const listener = (popover[methodName] as any).bind(popover);
-      this.el.addEventListener(`trigger-${methodName}`, listener);
-      this.customData.listeners.push(listener);
+      this.el.addEventListener(trigger, listener);
+      this.customData.listeners[trigger] = listener;
     }
   },
 
