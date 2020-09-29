@@ -18,9 +18,11 @@ interface Scope {
   sizes: string;
   alt: string;
   tags: Tag[];
-  fillContainerOptions: (
+  fillPopoverOptions: (
     options: Partial<PopoverOptions>
   ) => Partial<PopoverOptions>;
+  onPopupBound: EventListener;
+  onPopupShown: EventListener;
 }
 
 export class TaggedImageComponent extends Component {
@@ -30,7 +32,7 @@ export class TaggedImageComponent extends Component {
   public _debug = true;
 
   static get observedAttributes() {
-    return ["src", "sizes", "srcset", "alt", "tags"];
+    return ["src", "sizes", "srcset", "alt", "tags", "popover-options"];
   }
 
   protected scope: Scope = {
@@ -39,13 +41,43 @@ export class TaggedImageComponent extends Component {
     sizes: "",
     alt: "",
     tags: [],
-    fillContainerOptions: (options: Partial<PopoverOptions>) => {
-      return { ...options, container: this.el };
+    fillPopoverOptions: (options: Partial<PopoverOptions>) => {
+      return { ...this.popoverOptions, ...options };
+    },
+    onPopupBound: (event: Event) => {
+      const boundIndexAttr = (event.target! as HTMLElement).getAttribute(
+        "index"
+      );
+      if (boundIndexAttr === null) {
+        throw new Error("popup bound on no index");
+      }
+      const boundIndex = parseInt(boundIndexAttr);
+      if (isNaN(boundIndex)) {
+        throw new Error(`boundIndex "${boundIndexAttr}" is not a number!`);
+      }
+      const foundTag = this.scope.tags.find((tag) => tag.index === boundIndex);
+      if (foundTag) {
+        foundTag.el = event.target as HTMLElement;
+      } else {
+        throw new Error(
+          `Tag with index (${boundIndex}, "${boundIndexAttr}") not found`
+        );
+      }
+    },
+    onPopupShown: (event: Event) => {
+      for (const tag of this.scope.tags) {
+        if (tag.el !== event.target) {
+          tag.el?.dispatchEvent(new CustomEvent("trigger-hide"));
+        }
+      }
     },
   };
 
+  protected popoverOptions: Partial<PopoverOptions> = {};
+
   constructor(element?: HTMLElement) {
     super(element);
+    this.popoverOptions.container = this.el;
   }
 
   protected parseChildTags() {
@@ -67,7 +99,7 @@ export class TaggedImageComponent extends Component {
           title,
           content,
           html: true,
-          container: this.el,
+          ...this.popoverOptions,
         },
         x,
         y,

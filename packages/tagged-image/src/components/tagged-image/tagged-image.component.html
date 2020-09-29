@@ -1,2 +1,11 @@
 <img rv-src="src" rv-srcset="srcset" rv-sizes="sizes" rv-alt="alt">
-<tag rv-each-tag="tags" rv-index="tag.index" rv-style-left="tag.left" rv-style-top="tag.top" rv-bs4-popover="fillContainerOptions | call tag.popover"></tag>
+<tag
+  rv-each-tag="tags"
+  rv-index="tag.index"
+  rv-style-left="tag.left"
+  rv-style-top="tag.top"
+  rv-bs4-popover="fillPopoverOptions | call tag.popover"
+  rv-on-bound.bs.popover="onPopupBound"
+  rv-on-shown.bs.popover="onPopupShown"
+>
+</tag>

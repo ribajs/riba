@@ -66,6 +66,14 @@ export const popoverBinder: Binder<string> = {
     }
   },
 
+  bind(el: HTMLElement) {
+    // inform ancestors that this popover was bound
+    // Event name in same style as the other popover CustomEvents from Bootstrap
+    el.dispatchEvent(
+      new CustomEvent("bound.bs.popover", { bubbles: true, cancelable: true })
+    );
+  },
+
   unbind() {
     // destroy Popover if it already exists
     if (this.customData.popover) {
