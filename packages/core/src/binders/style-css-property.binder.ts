@@ -12,10 +12,13 @@ export const cssStarBinder: Binder<string> = {
   name: "style-*",
   routine(el: HTMLElement, value: string) {
     const propertyName = this.args[0];
+    // if (this.args.length >= 2) {
+    console.error(`THIS FUCKING ARGS:`, this.args, value);
+    //}
     if (value === null || value === undefined || value === "") {
       (el.style as any).removeProperty(propertyName);
     } else {
-      (el.style as any)[propertyName] = value;
+      (el.style as any).setProperty(propertyName, value);
     }
   },
 };
