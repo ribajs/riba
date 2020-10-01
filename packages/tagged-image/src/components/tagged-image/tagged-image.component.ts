@@ -1,3 +1,5 @@
+import { extend } from "@ribajs/utils";
+
 import { Component } from "@ribajs/core";
 import { PopoverOptions } from "@ribajs/bs4";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
@@ -7,6 +9,10 @@ interface Options {
   popoverOptions: Partial<PopoverOptions>;
   multiPopover: boolean;
 }
+
+/*
+ * TODO: make tag an own component to encapsulate attributes?
+ */
 interface Tag {
   x: number;
   y: number;
@@ -15,6 +21,17 @@ interface Tag {
   top?: string;
   popoverOptions: Partial<PopoverOptions>;
   el?: HTMLElement;
+  /*
+   * TODO: Currently using this "hack" here to style the tag::before pseudo-selector:
+   * https://stackoverflow.com/a/40179718/7048200
+   * Maybe there are better solutions?
+   * Also think about scoped styles in case of custom elements support? Could be nice for the future.
+   */
+  shape?: string; // "circle" | "square"; // for border radius 100% or 0
+  color?: string; // names for bootstrap theme colors or any CSS color expression
+  borderRadius?: string; // CSS string
+  smallSize: string; // CSS string
+  fullSize: string; // CSS string
 }
 interface Scope {
   src: string;
@@ -111,6 +128,11 @@ export class TaggedImageComponent extends Component {
         parseFloat(tagEl.getAttribute("y") || "")
       );
 
+      const shape = tagEl.getAttribute("shape") || undefined;
+      const color = tagEl.getAttribute("color") || undefined;
+      const borderRadius = tagEl.getAttribute("border-radius") || undefined;
+      const fullSize = tagEl.getAttribute("full-size") || undefined;
+      const smallSize = tagEl.getAttribute("small-size") || undefined;
       const tagData = {
         popoverOptions: {
           title,
@@ -120,6 +142,11 @@ export class TaggedImageComponent extends Component {
         },
         x,
         y,
+        shape,
+        color,
+        borderRadius,
+        fullSize,
+        smallSize,
       };
       this.scope.tags.push(tagData);
     }
@@ -136,6 +163,21 @@ export class TaggedImageComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     this.init(TaggedImageComponent.observedAttributes);
+  }
+
+  protected parsedAttributeChangedCallback(
+    attributeName: string,
+    oldValue: any,
+    newValue: any
+  ) {
+    if (attributeName === "options") {
+      // before the component is bound, we just want to extend the default options
+      if (this.bound) {
+        this.scope.options = newValue;
+      } else {
+        this.scope.options = extend(true, oldValue, newValue);
+      }
+    }
   }
 
   protected async beforeBind() {

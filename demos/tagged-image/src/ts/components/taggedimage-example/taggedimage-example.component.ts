@@ -15,6 +15,7 @@ interface Scope {
       popoverOptions: Partial<PopoverOptions>;
     }[];
   }[];
+  reshape: (tags: any[]) => any[];
 }
 
 export class TaggedImageExampleComponent extends Component {
@@ -46,6 +47,14 @@ export class TaggedImageExampleComponent extends Component {
         y: Math.random(),
       })),
     })),
+    reshape: (tags) =>
+      tags.map((tag) => ({
+        ...tag,
+        borderRadius: Math.random() * 70 + "%",
+        color: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(
+          Math.random() * 255
+        )}, ${Math.floor(Math.random() * 255)}, ${Math.random() / 3 + 2 / 3})`,
+      })),
   };
 
   constructor(element?: HTMLElement) {
