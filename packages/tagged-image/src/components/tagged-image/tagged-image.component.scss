@@ -34,6 +34,7 @@ tagged-image {
     position: absolute;
     cursor: pointer;
     &::before {
+      z-index: 10;
       visibility: visible;
       content: '\200b'; // zero-width whitespace, just to fill it with emptiness
       box-sizing: content-box;
@@ -51,7 +52,7 @@ tagged-image {
 
       transition: all ease-in-out 0.1s;
     }
-    &:hover {
+    &:hover, &.active {
       &::before {
         transform: translate(0, 0);
         padding: calc(var(--tag-full-size) / 2);

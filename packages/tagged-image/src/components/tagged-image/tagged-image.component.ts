@@ -30,8 +30,8 @@ interface Tag {
   shape?: string; // "circle" | "square"; // for border radius 100% or 0
   color?: string; // names for bootstrap theme colors or any CSS color expression
   borderRadius?: string; // CSS string
-  smallSize: string; // CSS string
-  fullSize: string; // CSS string
+  smallSize?: string; // CSS string
+  fullSize?: string; // CSS string
 }
 interface Scope {
   src: string;
@@ -45,6 +45,7 @@ interface Scope {
   ) => Partial<PopoverOptions>;
   onPopoverBound: EventListener;
   onPopoverShown: EventListener;
+  onPopoverHidden: EventListener;
 }
 
 export class TaggedImageComponent extends Component {
@@ -100,15 +101,23 @@ export class TaggedImageComponent extends Component {
       }
     },
     onPopoverShown: (event: Event) => {
-      // If we allow multiPopover, we don't need to hide anything.
-      if (this.scope.options.multiPopover) {
-        return;
-      }
-      // Hide all the other popovers.
       for (const tag of this.scope.tags) {
-        if (tag.el !== event.target) {
-          tag.el?.dispatchEvent(new CustomEvent("trigger-hide"));
+        if (tag.el === event.target) {
+          // Set shown popover's anchor as active.
+          tag.el.classList.add("active");
+        } else {
+          // Hide all other popovers and remove active class from other tags if multiPopover option is false.
+          if (!this.scope.options.multiPopover) {
+            tag.el?.classList.remove("active");
+            tag.el?.dispatchEvent(new CustomEvent("trigger-hide"));
+          }
         }
+      }
+    },
+    onPopoverHidden: (event: Event) => {
+      const found = this.scope.tags.find((tag) => tag.el === event.target);
+      if (found) {
+        found.el?.classList.remove("active");
       }
     },
   };
