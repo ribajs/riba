@@ -54,6 +54,10 @@ export class TaggedImageExampleComponent extends Component {
         color: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(
           Math.random() * 255
         )}, ${Math.floor(Math.random() * 255)}, ${Math.random() / 3 + 2 / 3})`,
+        ...((size) => ({
+          smallSize: Math.floor(size * (0.25 + Math.random() / 3)) + "px",
+          fullSize: size + "px",
+        }))(24 + Math.floor(Math.random() * 50)),
       })),
   };
 
