@@ -21,8 +21,8 @@ function scssToOctoberYml() {
       //split scss file into lines, only lines including octoberyml: {} will be converted to a configuration option
       const lines = file.contents.toString().split(/(?:\r\n|\r|\n)/g);
 
-      const commentPattern = / {0,}\$(.{1,}): {0,}(.*?) {0,}(!default)? {0,}; {0,}\/{2} {0,}octoberyml: {0,}(\{ {0,}.{0,} {0,}\})/i;
-      const spacerPattern = / {0,}\/{2} {0,}octoberyml: {0,}(\{ {0,}.{0,} {0,}\})/i;
+      const commentPattern = /^ {0,}\$(.{1,}): {0,}(.*?) {0,}(!default)? {0,}; {0,}\/{2} {0,}octoberyml: {0,}(\{ {0,}.{0,} {0,}\})$/i;
+      const spacerPattern = /^ {0,}\/{2} {0,}octoberyml: {0,}(\{ {0,}.{0,} {0,}\})$/i;
 
       const variables: any = {};
 
@@ -48,19 +48,20 @@ function scssToOctoberYml() {
             assetVar: variableName,
             ...options,
           };
-        }
-        match = line.match(spacerPattern);
-        if (match != null) {
-          let options: any = {};
-          options.type = "section";
-          try {
-            options = { ...options, ...looseJsonParse(match[4]) };
-          } catch (e) {
-            throw new Error("invalid options string: " + options);
+        } else {
+          match = line.match(spacerPattern);
+          if (match != null) {
+            let options: any = {};
+            options.type = "section";
+            try {
+              options = { ...options, ...looseJsonParse(match[1]) };
+            } catch (e) {
+              throw new Error("invalid options string: " + options);
+            }
+            variables[Math.random().toString(36).substring(7)] = {
+              ...options,
+            };
           }
-          variables[Math.random().toString(36).substring(7)] = {
-            ...options,
-          };
         }
       }
 

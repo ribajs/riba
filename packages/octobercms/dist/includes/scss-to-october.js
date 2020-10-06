@@ -29,8 +29,8 @@ function scssToOctoberYml() {
                     ".yml"; //change path ext to .yml
             //split scss file into lines, only lines including octoberyml: {} will be converted to a configuration option
             var lines = file.contents.toString().split(/(?:\r\n|\r|\n)/g);
-            var commentPattern = / {0,}\$(.{1,}): {0,}(.*?) {0,}(!default)? {0,}; {0,}\/{2} {0,}octoberyml: {0,}(\{ {0,}.{0,} {0,}\})/i;
-            var spacerPattern = / {0,}\/{2} {0,}octoberyml: {0,}(\{ {0,}.{0,} {0,}\})/i;
+            var commentPattern = /^ {0,}\$(.{1,}): {0,}(.*?) {0,}(!default)? {0,}; {0,}\/{2} {0,}octoberyml: {0,}(\{ {0,}.{0,} {0,}\})$/i;
+            var spacerPattern = /^ {0,}\/{2} {0,}octoberyml: {0,}(\{ {0,}.{0,} {0,}\})$/i;
             var variables = {};
             for (var _i = 0, lines_1 = lines; _i < lines_1.length; _i++) {
                 var line = lines_1[_i];
@@ -53,17 +53,19 @@ function scssToOctoberYml() {
                     }
                     variables[sanatizedVariableName] = __assign({ "default": defaultValue, assetVar: variableName }, options);
                 }
-                match = line.match(spacerPattern);
-                if (match != null) {
-                    var options = {};
-                    options.type = "section";
-                    try {
-                        options = __assign(__assign({}, options), looseJsonParse(match[4]));
+                else {
+                    match = line.match(spacerPattern);
+                    if (match != null) {
+                        var options = {};
+                        options.type = "section";
+                        try {
+                            options = __assign(__assign({}, options), looseJsonParse(match[1]));
+                        }
+                        catch (e) {
+                            throw new Error("invalid options string: " + options);
+                        }
+                        variables[Math.random().toString(36).substring(7)] = __assign({}, options);
                     }
-                    catch (e) {
-                        throw new Error("invalid options string: " + options);
-                    }
-                    variables[Math.random().toString(36).substring(7)] = __assign({}, options);
                 }
             }
             //dump
