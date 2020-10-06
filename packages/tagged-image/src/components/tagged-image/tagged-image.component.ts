@@ -38,6 +38,7 @@ interface Scope {
   srcset: string;
   sizes: string;
   alt: string;
+  lazyload: string;
   options: Options;
   tags: Tag[];
   fillPopoverOptions: (
@@ -55,7 +56,7 @@ export class TaggedImageComponent extends Component {
   public _debug = true;
 
   static get observedAttributes() {
-    return ["src", "sizes", "srcset", "alt", "tags", "options"];
+    return ["src", "sizes", "srcset", "alt", "lazyload", "tags", "options"];
   }
 
   constructor(element?: HTMLElement) {
@@ -68,6 +69,7 @@ export class TaggedImageComponent extends Component {
     srcset: "",
     sizes: "",
     alt: "",
+    lazyload: "",
     tags: [],
     options: {
       popoverOptions: {}, // set container = this.el in constructor
