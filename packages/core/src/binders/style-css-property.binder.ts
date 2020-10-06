@@ -15,7 +15,7 @@ export const cssStarBinder: Binder<string> = {
     if (value === null || value === undefined || value === "") {
       (el.style as any).removeProperty(propertyName);
     } else {
-      (el.style as any)[propertyName] = value;
+      (el.style as any).setProperty(propertyName, value);
     }
   },
 };

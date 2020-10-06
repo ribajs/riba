@@ -258,3 +258,23 @@ export const clone = (deep: boolean, val: any): any => {
   }
   return val;
 };
+
+// Get the class "that"
+/**
+ *
+ * @param that
+ */
+export const classOf = (that: any) => {
+  return that.constructor;
+};
+
+/**
+ * TODO: Would like to do it with class parameter T for the parent class:
+ *
+   export function classOf<T = any>(that: T) {
+     return that.constructor as typeof T;
+   };
+ *
+ * but getting TypeScript error:
+ * Property 'constructor' does not exist on type 'T'.
+ */

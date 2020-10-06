@@ -15,7 +15,9 @@ import {
   noop,
   typeCheckConfig,
 } from "./utils.service";
-import { getUID, getElementFromEvent } from "@ribajs/utils/src/dom";
+
+import { classOf, getUID, getElementFromEvent } from "@ribajs/utils";
+
 import { DefaultAllowlist, sanitizeHtml } from "./sanitizer";
 import Data from "./dom/data";
 import EventHandler from "./dom/event-handler";
@@ -292,7 +294,7 @@ export class TooltipService {
     if (this.isWithContent() && this._isEnabled) {
       const showEvent = EventHandler.trigger(
         this.element,
-        TooltipService.Event.SHOW
+        classOf(this).Event.SHOW
       );
       const shadowRoot = findShadowRoot(this.element);
       const isInTheDom =
@@ -331,7 +333,7 @@ export class TooltipService {
         container?.appendChild(tip);
       }
 
-      EventHandler.trigger(this.element, TooltipService.Event.INSERTED);
+      EventHandler.trigger(this.element, classOf(this).Event.INSERTED);
 
       this._popper = new Popper(
         this.element,
@@ -358,8 +360,7 @@ export class TooltipService {
 
         const prevHoverState = this._hoverState;
         this._hoverState = "";
-
-        EventHandler.trigger(this.element, TooltipService.Event.SHOWN);
+        EventHandler.trigger(this.element, classOf(this).Event.SHOWN);
 
         if (prevHoverState === HOVER_STATE_OUT) {
           this._leave(undefined, this);
@@ -385,13 +386,13 @@ export class TooltipService {
 
       this._cleanTipClass();
       this.element.removeAttribute("aria-describedby");
-      EventHandler.trigger(this.element, TooltipService.Event.HIDDEN);
+      EventHandler.trigger(this.element, classOf(this).Event.HIDDEN);
       this._popper?.destroy();
     };
 
     const hideEvent = EventHandler.trigger(
       this.element,
-      TooltipService.Event.HIDE
+      classOf(this).Event.HIDE
     );
     if (hideEvent.defaultPrevented) {
       return;

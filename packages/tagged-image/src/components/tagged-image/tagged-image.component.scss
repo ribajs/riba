@@ -1,5 +1,8 @@
-$tagged-image-tag-full-size: 40px;
-$tagged-image-tag-small-size: 10px;
+$tagged-image-tag-full-size: 40px !default;
+$tagged-image-tag-small-size: $tagged-image-tag-full-size / 4 !default;
+$tagged-image-tag-color: #23de00 !default;
+$tagged-image-border-radius: 0 !default;
+
 
 tagged-image {
   overflow: visible;
@@ -14,33 +17,80 @@ tagged-image {
   }
 
   tag {
+    --tag-color: #{$tagged-image-tag-color};
+    --tag-full-size: #{$tagged-image-tag-full-size};
+    --tag-small-size: #{$tagged-image-tag-small-size};
+    --tag-border-radius: 100%;
     visibility: hidden;
     box-sizing: border-box;
-    z-index: 1333333338;
-    width: $tagged-image-tag-full-size;
-    height: $tagged-image-tag-full-size;
-    transform: translate(-($tagged-image-tag-full-size / 2), -($tagged-image-tag-full-size / 2));
+    width: var(--tag-full-size);
+    height: var(--tag-full-size);
+
+    transform: translate(
+      calc(-0.5 * var(--tag-full-size)),
+      calc(-0.5 * var(--tag-full-size))
+    );
+
     position: absolute;
     cursor: pointer;
     &::before {
+      z-index: 10;
       visibility: visible;
       content: '\200b'; // zero-width whitespace, just to fill it with emptiness
       box-sizing: content-box;
-      z-index: 1333333337;
       width: 0;
       height: 0;
-      padding: $tagged-image-tag-small-size / 2;
-      background-color: #23de00;
-      border-radius: 100%;
+      border-radius: var(--tag-border-radius);
+      padding: calc(var(--tag-small-size) / 2);
+      background-color: var(--tag-color);
       position: absolute;
-      transform: translate(($tagged-image-tag-full-size / 2)-($tagged-image-tag-small-size / 2), ($tagged-image-tag-full-size / 2)-($tagged-image-tag-small-size / 2));
+
+      transform: translate(
+        calc(calc(var(--tag-full-size) - var(--tag-small-size)) / 2),
+        calc(calc(var(--tag-full-size) - var(--tag-small-size)) / 2),
+      );
+
       transition: all ease-in-out 0.1s;
     }
-    &:hover {
+    &:hover, &.active {
       &::before {
         transform: translate(0, 0);
-        padding: $tagged-image-tag-full-size / 2;
+        padding: calc(var(--tag-full-size) / 2);
       }
     }
+
+    /*
+     * The --tag-color, --tag-border-radius and other CSS custom properties are set as
+     * inline styles in the component template.
+     * This is a workaround, as long as CSS3 attr() is not supported by browsers (maybe until 2040)
+     * In CSS3 one could just do:
+     *   background-color: attr(tag-color);
+     */
+    &[color] {
+      &::before {
+        background-color: var(--tag-color);
+      }
+    }
+    // recognize bootstrap theme colors
+    @each $color, $value in $theme-colors {
+      &[color="#{$color}"] {
+        &::before {
+          background-color: theme-color($color);
+        }
+      }
+    }
+
+    // special shape cases for border-radius 0 or 100% (100% = circle is default in the component)
+    &[shape="circle"] {
+      &::before {
+        border-radius: 100%;
+      }
+    }
+    &[shape="square"] {
+      &::before {
+        border-radius: 0;
+      }
+    }
+
   }
 }
