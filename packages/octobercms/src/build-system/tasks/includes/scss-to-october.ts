@@ -22,11 +22,12 @@ function scssToOctoberYml() {
       const lines = file.contents.toString().split(/(?:\r\n|\r|\n)/g);
 
       const commentPattern = / {0,}\$(.{1,}): {0,}(.*?) {0,}(!default)? {0,}; {0,}\/{2} {0,}octoberyml: {0,}(\{ {0,}.{0,} {0,}\})/i;
+      const spacerPattern = / {0,}\/{2} {0,}octoberyml: {0,}(\{ {0,}.{0,} {0,}\})/i;
 
       const variables: any = {};
 
       for (const line of lines) {
-        const match = line.match(commentPattern);
+        let match = line.match(commentPattern);
         if (match != null) {
           const variableName = match[1];
           const sanatizedVariableName = variableName.replace(/-/g, "_");
@@ -48,11 +49,24 @@ function scssToOctoberYml() {
             ...options,
           };
         }
+        match = line.match(spacerPattern);
+        if (match != null) {
+          let options: any = {};
+          options.type = "section";
+          try {
+            options = { ...options, ...looseJsonParse(match[4]) };
+          } catch (e) {
+            throw new Error("invalid options string: " + options);
+          }
+          variables[Math.random().toString(36).substring(7)] = {
+            ...options,
+          };
+        }
       }
 
       //dump
       if (Object.keys(variables).length === 0) {
-        file.contents = Buffer.from('');
+        file.contents = Buffer.from("");
       } else {
         file.contents = Buffer.from(
           yaml.safeDump(variables, {
