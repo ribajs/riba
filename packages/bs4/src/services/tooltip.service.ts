@@ -15,7 +15,9 @@ import {
   noop,
   typeCheckConfig,
 } from "./utils.service";
-import { getUID, getElementFromEvent } from "@ribajs/utils/src/dom";
+
+import { classOf, getUID, getElementFromEvent } from "@ribajs/utils";
+
 import { DefaultAllowlist, sanitizeHtml } from "./sanitizer";
 import Data from "./dom/data";
 import EventHandler from "./dom/event-handler";
@@ -123,11 +125,6 @@ const TRIGGER_MANUAL = "manual";
  * Class Definition
  * ------------------------------------------------------------------------
  */
-
-// Get the class of "this" in methods of TooltipService. (It could be TooltipService or the derived PopoverService.)
-const classOf = (that: TooltipService) => {
-  return that.constructor as typeof TooltipService;
-};
 
 export class TooltipService {
   static readonly CONSTANTS: { [key: string]: any } = {

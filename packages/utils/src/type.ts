@@ -258,3 +258,8 @@ export const clone = (deep: boolean, val: any): any => {
   }
   return val;
 };
+
+// Get the class "that"
+export const classOf = (that: any) => {
+  return that.constructor;
+};
