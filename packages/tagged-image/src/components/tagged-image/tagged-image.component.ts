@@ -39,6 +39,7 @@ interface Scope {
   sizes: string;
   alt: string;
   lazyload: string;
+  debug: boolean;
   options: Options;
   tags: Tag[];
   fillPopoverOptions: (
@@ -47,6 +48,7 @@ interface Scope {
   onPopoverBound: EventListener;
   onPopoverShown: EventListener;
   onPopoverHidden: EventListener;
+  onClick: EventListener;
 }
 
 export class TaggedImageComponent extends Component {
@@ -56,21 +58,42 @@ export class TaggedImageComponent extends Component {
   public _debug = true;
 
   static get observedAttributes() {
-    return ["src", "sizes", "srcset", "alt", "lazyload", "tags", "options"];
+    return [
+      "src",
+      "sizes",
+      "srcset",
+      "alt",
+      "lazyload",
+      "tags",
+      "options",
+      "debug",
+    ];
   }
 
   constructor(element?: HTMLElement) {
     super(element);
     this.scope.options.popoverOptions.container = this.el;
+    this.el.addEventListener("click", this.scope.onClick);
   }
 
   protected scope: Scope = {
+    debug: false,
     src: "",
     srcset: "",
     sizes: "",
     alt: "",
     lazyload: "",
     tags: [],
+    onClick: (e: Event) => {
+      if (this.scope.debug) {
+        // adapted from here: https://stackoverflow.com/a/42111623/7048200
+        // TODO: avoid using "as any"
+        const rect = (e.target as HTMLElement).getBoundingClientRect();
+        const x = ((e as any).clientX - rect.left) / (rect.right - rect.left); //x position within the element.
+        const y = ((e as any).clientY - rect.top) / (rect.bottom - rect.top); //y position within the element.
+        console.log("Left? : " + x + " ; Top? : " + y + ".");
+      }
+    },
     options: {
       popoverOptions: {}, // set container = this.el in constructor
       multiPopover: false,
