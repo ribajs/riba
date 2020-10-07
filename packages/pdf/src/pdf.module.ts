@@ -4,11 +4,11 @@ import * as formatters from "./formatters";
 import * as services from "./services";
 import * as components from "./components";
 
-export const pdfModule: RibaModule = {
+const pdfModule: RibaModule = {
   formatters,
   binders,
   services,
   components,
 };
 
-export default pdfModule;
+export { pdfModule };

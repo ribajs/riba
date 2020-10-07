@@ -39,7 +39,8 @@ import { UserWrapperService } from "./shopify-easdk-user.service";
 // import { ConfirmComponent } from './confirm/confirm.component';
 // import { OpenComponent } from './open/open.component';
 
-export class EASDKWrapperService extends WrapperService
+export class EASDKWrapperService
+  extends WrapperService
   implements EASDKWrapper {
   public static instance?: EASDKWrapperService;
 

@@ -623,5 +623,3 @@ export class PhotoSwipeUI {
     };
   }
 }
-
-export default PhotoSwipeUI;

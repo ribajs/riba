@@ -161,7 +161,7 @@ export class View {
    */
   public publish() {
     this.bindings.forEach((binding) => {
-      if (binding.binder && binding.publish && binding.binder.publishes) {
+      if (binding.binder && binding.binder.publishes && binding.publish) {
         binding.publish();
       }
     });

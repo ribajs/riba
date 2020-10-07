@@ -25,7 +25,8 @@ import {
 
 import { WrapperService } from "./wrapper.service";
 
-export class ModalWrapperService extends WrapperService
+export class ModalWrapperService
+  extends WrapperService
   implements ModalWrapper {
   // Singleton instace
   public static instance?: ModalWrapperService;

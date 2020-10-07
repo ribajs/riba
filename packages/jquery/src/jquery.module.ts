@@ -4,11 +4,11 @@ import * as binders from "./binders";
 // import * as services from './services';
 // import * as components from './components';
 
-export const jqueryModule: RibaModule = {
+const jqueryModule: RibaModule = {
   formatters: {},
   binders,
   services: {},
   components: {},
 };
 
-export default jqueryModule;
+export { jqueryModule };

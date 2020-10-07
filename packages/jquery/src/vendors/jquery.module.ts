@@ -10,5 +10,4 @@ declare global {
 window.$ = JQuery;
 window.jQuery = JQuery;
 
-export default JQuery;
 export { JQuery };

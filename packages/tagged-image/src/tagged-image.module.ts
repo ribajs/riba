@@ -4,9 +4,11 @@ import * as formatters from "./formatters";
 import * as services from "./services";
 import * as components from "./components";
 
-export const taggedImageModule: RibaModule = {
+const taggedImageModule: RibaModule = {
   formatters,
   binders,
   services,
   components,
 };
+
+export { taggedImageModule };

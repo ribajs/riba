@@ -151,7 +151,8 @@ export class HttpService {
               (dataType === "json" || dataType.includes("json"))
             ) {
               try {
-                resolve(JSON.parse(req.responseText));
+                const responseText = JSON.parse(req.responseText);
+                resolve(responseText);
               } catch (error) {
                 // If json can't be parsed
                 return resolve(req.responseText);

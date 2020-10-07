@@ -4,11 +4,11 @@ import * as components from "./components";
 // import * as binders from './binders';
 import * as services from "./services";
 
-export const shopifyEasdkModule: RibaModule = {
+const shopifyEasdkModule: RibaModule = {
   formatters: {},
   binders: {},
   services,
   components,
 };
 
-export default shopifyEasdkModule;
+export { shopifyEasdkModule };
