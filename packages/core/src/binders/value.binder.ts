@@ -43,16 +43,22 @@ export const valueBinder: Binder<any> = {
         };
       }
 
-      if (!this.customData.event) {
-        this.customData.event = "change input keyup paste blur focus";
-      }
-
-      el.addEventListener(this.customData.event, this.customData.onChange);
+      el.addEventListener("change", this.customData.onChange, false);
+      el.addEventListener("input", this.customData.onChange, false);
+      el.addEventListener("keyup", this.customData.onChange, false);
+      el.addEventListener("paste", this.customData.onChange, false);
+      el.addEventListener("blur", this.customData.onChange, false);
+      el.addEventListener("focus", this.customData.onChange, false);
     }
   },
 
   unbind(el: HTMLUnknownElement) {
-    el.removeEventListener(this.customData.event, this.customData.onChange);
+    el.removeEventListener("change", this.customData.onChange);
+    el.removeEventListener("input", this.customData.onChange);
+    el.removeEventListener("keyup", this.customData.onChange);
+    el.removeEventListener("paste", this.customData.onChange);
+    el.removeEventListener("blur", this.customData.onChange);
+    el.removeEventListener("focus", this.customData.onChange);
   },
 
   routine(el: HTMLElement | HTMLSelectElement, value: string | string[]) {
