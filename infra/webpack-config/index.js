@@ -111,6 +111,10 @@ module.exports = (config = {}) => {
       extract: true,
     };
 
+    config.scripts = config.scripts || {
+      minimize: false, // config.production disabled until terser works with webpack 5 and yarn 2
+    };
+
     // config defaults for config templates
     switch (config.template.toLowerCase()) {
       case "octobercms":
@@ -195,6 +199,19 @@ module.exports = (config = {}) => {
         break;
     }
 
+    var terser;
+    if (config.scripts.minimize) {
+      terser = new TerserPlugin({
+        sourceMap: !env.production,
+        terserOptions: {
+          format: {
+            comments: false,
+          },
+          safari10: true,
+        },
+      });
+    }
+
     if (config.copyAssets && config.copyAssets.enable === true) {
       var copyPluginConfigs = getCopyPluginConfig(config);
       if (copyPluginConfigs.patterns && copyPluginConfigs.patterns.length > 0) {
@@ -228,28 +245,8 @@ module.exports = (config = {}) => {
 
     return {
       optimization: {
-        minimizer: [
-          new TerserPlugin({
-            sourceMap: !env.production,
-            terserOptions: {
-              ecma: undefined,
-              warnings: true,
-              parse: {},
-              compress: {},
-              mangle: true, // Note `mangle.properties` is `false` by default.
-              module: false,
-              output: {
-                comments: false,
-              },
-              toplevel: false,
-              nameCache: null,
-              ie8: false,
-              keep_classnames: undefined,
-              keep_fnames: false,
-              safari10: true,
-            },
-          }),
-        ],
+        minimize: config.scripts.minimize,
+        minimizer: config.scripts.minimize ? [terser] : [],
         splitChunks: {
           // TODO refactor see https://webpack.js.org/migrate/5/
           automaticNameDelimiter: ".",
@@ -278,6 +275,7 @@ module.exports = (config = {}) => {
         extensions: [".ts", ".tsx", ".js", ".json", ".scss", ".pug", ".html"],
         symlinks: true,
         alias: {},
+        plugins: [],
       },
       devServer: config.devServer,
       module: {
