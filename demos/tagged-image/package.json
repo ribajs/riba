@@ -96,6 +96,7 @@
     "@ribajs/shopify": "portal:../../packages/shopify",
     "@ribajs/shopify-easdk": "portal:../../packages/shopify-easdk",
     "@ribajs/shopify-tda": "portal:../../packages/shopify-tda",
+    "@ribajs/tagged-image": "portal:../../packages/tagged-image",
     "@ribajs/eslint-config": "portal:../../infra/eslint-config",
     "@ribajs/types": "portal:../../infra/types",
     "@ribajs/webpack-config": "portal:../../infra/webpack-config",
