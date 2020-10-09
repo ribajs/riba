@@ -3,6 +3,7 @@ import { extend } from "@ribajs/utils";
 import { Component } from "@ribajs/core";
 import { PopoverOptions } from "@ribajs/bs4";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { TaggedImageTag as Tag } from "../../interfaces";
 import template from "./tagged-image.component.html";
 
 interface Options {
@@ -10,29 +11,6 @@ interface Options {
   multiPopover: boolean;
 }
 
-/*
- * TODO: make tag an own component to encapsulate attributes?
- */
-interface Tag {
-  x: number;
-  y: number;
-  index?: number;
-  left?: string;
-  top?: string;
-  popoverOptions: Partial<PopoverOptions>;
-  el?: HTMLElement;
-  /*
-   * TODO: Currently using this "hack" here to style the tag::before pseudo-selector:
-   * https://stackoverflow.com/a/40179718/7048200
-   * Maybe there are better solutions?
-   * Also think about scoped styles in case of custom elements support? Could be nice for the future.
-   */
-  shape?: string; // "circle" | "square"; // for border radius 100% or 0
-  color?: string; // names for bootstrap theme colors or any CSS color expression
-  borderRadius?: string; // CSS string
-  smallSize?: string; // CSS string
-  fullSize?: string; // CSS string
-}
 interface Scope {
   src: string;
   srcset: string;
