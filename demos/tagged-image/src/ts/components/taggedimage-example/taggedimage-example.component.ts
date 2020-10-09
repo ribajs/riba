@@ -2,6 +2,7 @@ import { Component } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./taggedimage-example.component.html";
 import { PopoverOptions } from "@ribajs/bs4";
+import { Tag } from "@ribajs/tagged-image";
 
 interface Scope {
   name: string;
@@ -9,13 +10,8 @@ interface Scope {
     src: string;
     srcset: string;
     title: string;
-    tags: {
-      x: number;
-      y: number;
-      popoverOptions: Partial<PopoverOptions>;
-    }[];
+    tags: Tag[];
   }[];
-  reshape: (tags: any[]) => any[];
 }
 
 export class TaggedImageExampleComponent extends Component {
@@ -45,20 +41,22 @@ export class TaggedImageExampleComponent extends Component {
 
         x: Math.random(),
         y: Math.random(),
-      })),
-    })),
-    reshape: (tags) =>
-      tags.map((tag) => ({
-        ...tag,
+
         borderRadius: Math.random() * 70 + "%",
-        color: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(
-          Math.random() * 255
-        )}, ${Math.floor(Math.random() * 255)}, ${Math.random() / 3 + 2 / 3})`,
+
+        color: ((r, g, b, a) => `rgba(${r}, ${g}, ${b}, ${a})`)(
+          Math.floor(Math.random() * 255),
+          Math.floor(Math.random() * 255),
+          Math.floor(Math.random() * 255),
+          Math.random()
+        ),
+
         ...((size) => ({
           smallSize: Math.floor(size * (0.25 + Math.random() / 3)) + "px",
           fullSize: size + "px",
         }))(24 + Math.floor(Math.random() * 50)),
       })),
+    })),
   };
 
   constructor(element?: HTMLElement) {

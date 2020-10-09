@@ -189,6 +189,10 @@ export class TaggedImageComponent extends Component {
       } else {
         this.scope.options = extend(true, oldValue, newValue);
       }
+      const po = this.scope.options.popoverOptions;
+      if (typeof po.container === "string") {
+        po.container = document.querySelector(po.container) || undefined;
+      }
     }
   }
 
