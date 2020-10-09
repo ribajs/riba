@@ -2,5 +2,6 @@ bs4-share {
   display: inline-block;
   .share-label {
     @extend .cursor-pointer;
+    display: inline-block;
   }
 }
