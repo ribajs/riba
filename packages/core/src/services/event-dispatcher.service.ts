@@ -67,14 +67,17 @@ class EventDispatcher {
    * @param eventName
    * @param function
    */
-  public off(e: string, f: EventCallback) {
+  public off(e: string, f?: EventCallback) {
     if (e in this.events === false) {
       return;
     }
-
-    const idx = this.events[e].indexOf(f);
-    if (idx !== -1) {
-      this.events[e].splice(idx, 1);
+    if (f !== undefined) {
+      const idx = this.events[e].indexOf(f);
+      if (idx !== -1) {
+        this.events[e].splice(idx, 1);
+      }
+    } else {
+      this.events[e] = [];
     }
   }
 

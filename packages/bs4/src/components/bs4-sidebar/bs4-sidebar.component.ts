@@ -176,8 +176,8 @@ export class Bs4SidebarComponent extends Component {
 
   protected initToggleButtonEventDispatcher() {
     if (this.toggleButtonEvents) {
-      this.toggleButtonEvents.off("toggle", this.onToggle.bind(this));
-      this.toggleButtonEvents.off("init", this.triggerState.bind(this));
+      this.toggleButtonEvents.off("toggle");
+      this.toggleButtonEvents.off("init");
     }
     this.toggleButtonEvents = new EventDispatcher(
       "bs4-toggle-button:" + this.scope.id
