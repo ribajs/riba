@@ -7,8 +7,9 @@ import { TaggedImageTag as Tag } from "../../interfaces";
 import template from "./tagged-image.component.html";
 
 interface Options {
-  popoverOptions: Partial<PopoverOptions>;
-  multiPopover: boolean;
+  popoverOptions?: Partial<PopoverOptions>;
+  tagOptions?: Partial<Tag>;
+  multiPopover?: boolean;
 }
 
 interface Scope {
@@ -50,7 +51,7 @@ export class TaggedImageComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    this.scope.options.popoverOptions.container = this.el;
+    this.scope.options.popoverOptions!.container = this.el;
     this.el.addEventListener("click", this.scope.onClick);
   }
 
@@ -146,6 +147,7 @@ export class TaggedImageComponent extends Component {
       const fullSize = tagEl.getAttribute("full-size") || undefined;
       const smallSize = tagEl.getAttribute("small-size") || undefined;
       const tagData = {
+        ...this.scope.options.tagOptions,
         popoverOptions: {
           title,
           content,
