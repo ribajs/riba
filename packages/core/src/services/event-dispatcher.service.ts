@@ -1,7 +1,12 @@
 type EventCallback = (...args: any[]) => any;
+type BoundEventCallback = {
+  function: EventCallback;
+  originalFunction: EventCallback;
+  thisConext: any;
+};
 
 interface Events {
-  [eventName: string]: EventCallback[];
+  [eventName: string]: (EventCallback | BoundEventCallback)[];
 }
 
 export interface EventDispatcherInstances {
@@ -55,24 +60,49 @@ class EventDispatcher {
    *
    * @param eventName
    * @param function
+   * @param thisContext
    */
-  public on(e: string, f: EventCallback) {
+  public on(e: string, f: EventCallback, thisContext?: any) {
     this.events[e] = this.events[e] || [];
-    this.events[e].push(f);
+    if (typeof thisContext !== "undefined") {
+      this.events[e].push({
+        function: f.bind(thisContext),
+        originalFunction: f,
+        thisConext: thisContext,
+      });
+    } else {
+      this.events[e].push(f);
+    }
   }
 
   /**
+   * TODO unbind all instead of first one
    * Unbind event
    *
    * @param eventName
    * @param function
    */
-  public off(e: string, f?: EventCallback) {
+  public off(e: string, f?: EventCallback, thisContext?: any) {
     if (e in this.events === false) {
       return;
     }
     if (f !== undefined) {
-      const idx = this.events[e].indexOf(f);
+      let idx = this.events[e].indexOf(f);
+      for (let i = 0; i < this.events[e].length; i++) {
+        const curEvent: any = this.events[e][i];
+        if (curEvent.originalFunction && curEvent.thisContext) {
+          if (typeof thisContext !== "undefined") {
+            if (curEvent.thisContext !== thisContext) {
+              continue;
+            }
+          }
+          if (curEvent.originalFunction !== f) {
+            continue;
+          }
+          idx = i;
+          break;
+        }
+      }
       if (idx !== -1) {
         this.events[e].splice(idx, 1);
       }
@@ -94,7 +124,11 @@ class EventDispatcher {
     }
 
     for (let i = 0; i < this.events[e].length; i++) {
-      this.events[e][i].apply(this, args);
+      if (this.events[e][i].boundFunction) {
+        this.events[e][i].boundFunction.apply(this, args);
+      } else {
+        this.events[e][i].apply(this, args);
+      }
     }
   }
 }
