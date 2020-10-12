@@ -32,10 +32,6 @@ export const onEventBinder: Binder<eventHandlerFunction> = {
     }
     const eventName = this.args[0] as string;
 
-    if (this.customData.handler) {
-      el.removeEventListener(eventName, this.customData.handler);
-    }
-
     this.customData.handler = this.eventHandler(value, el);
 
     const passive = this.el.dataset.passive === "true"; // data-passive="true"
