@@ -62,16 +62,16 @@ class EventDispatcher {
    * @param function
    * @param thisContext
    */
-  public on(e: string, f: EventCallback, thisContext?: any) {
-    this.events[e] = this.events[e] || [];
+  public on(eventName: string, cb: EventCallback, thisContext?: any) {
+    this.events[eventName] = this.events[eventName] || [];
     if (typeof thisContext !== "undefined") {
-      this.events[e].push({
-        function: f.bind(thisContext),
-        originalFunction: f,
+      this.events[eventName].push({
+        function: cb.bind(thisContext),
+        originalFunction: cb,
         thisConext: thisContext,
       });
     } else {
-      this.events[e].push(f);
+      this.events[eventName].push(cb);
     }
   }
 
@@ -82,21 +82,21 @@ class EventDispatcher {
    * @param eventName
    * @param function
    */
-  public off(e: string, f?: EventCallback, thisContext?: any) {
-    if (e in this.events === false) {
+  public off(eventName: string, cb?: EventCallback, thisContext?: any) {
+    if (eventName in this.events === false) {
       return;
     }
-    if (f !== undefined) {
-      let idx = this.events[e].indexOf(f);
-      for (let i = 0; i < this.events[e].length; i++) {
-        const curEvent: any = this.events[e][i];
+    if (cb !== undefined) {
+      let idx = this.events[eventName].indexOf(cb);
+      for (let i = 0; i < this.events[eventName].length; i++) {
+        const curEvent: any = this.events[eventName][i];
         if (curEvent.originalFunction && curEvent.thisContext) {
           if (typeof thisContext !== "undefined") {
             if (curEvent.thisContext !== thisContext) {
               continue;
             }
           }
-          if (curEvent.originalFunction !== f) {
+          if (curEvent.originalFunction !== cb) {
             continue;
           }
           idx = i;
@@ -104,10 +104,10 @@ class EventDispatcher {
         }
       }
       if (idx !== -1) {
-        this.events[e].splice(idx, 1);
+        this.events[eventName].splice(idx, 1);
       }
     } else {
-      this.events[e] = [];
+      this.events[eventName] = [];
     }
   }
 
@@ -117,17 +117,20 @@ class EventDispatcher {
    * @param eventName
    * @param args
    */
-  public trigger(e: string, ...args: any[]) {
+  public trigger(eventName: string, ...args: any[]) {
     // e, ...args
-    if (e in this.events === false) {
+    if (eventName in this.events === false) {
       return;
     }
 
-    for (let i = 0; i < this.events[e].length; i++) {
-      if ((this.events[e][i] as BoundEventCallback).function) {
-        (this.events[e][i] as BoundEventCallback).function.apply(this, args);
+    for (let i = 0; i < this.events[eventName].length; i++) {
+      if ((this.events[eventName][i] as BoundEventCallback).function) {
+        (this.events[eventName][i] as BoundEventCallback).function.apply(
+          this,
+          args
+        );
       } else {
-        (this.events[e][i] as EventCallback).apply(this, args);
+        (this.events[eventName][i] as EventCallback).apply(this, args);
       }
     }
   }
