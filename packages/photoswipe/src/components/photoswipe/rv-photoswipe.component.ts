@@ -4,7 +4,7 @@ import template from "./rv-photoswipe.component.html";
 import fullscreenTemplate from "./rv-photoswipe.fullscreen.component.html";
 
 import PhotoSwipe from "photoswipe";
-import PhotoSwipeUI from "../../services/photoswipe-ui.service";
+import { PhotoSwipeUI } from "../../services/photoswipe-ui.service";
 import { Options, Item } from "../../types";
 
 interface Scope {

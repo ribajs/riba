@@ -81,17 +81,17 @@ export class Dragscroll {
     })();
   }
 
-  protected onMouseDown<EventListener>(e: MouseEvent) {
+  protected onMouseDown(e: MouseEvent) {
     this.pushed = true;
     this.lastClientX = e.clientX;
     this.lastClientY = e.clientY;
   }
 
-  protected onMouseUp<EventListener>() {
+  protected onMouseUp() {
     this.pushed = false;
   }
 
-  protected onMouseMove<EventListener>(e: MouseEvent) {
+  protected onMouseMove(e: MouseEvent) {
     let newScrollX = 0;
     let newScrollY = 0;
     if (this.pushed) {

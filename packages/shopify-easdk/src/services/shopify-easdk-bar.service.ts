@@ -173,17 +173,15 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
    * @memberof BarWrapperService
    */
   public autoLoading(forceFallback = false) {
-    this.route.on(
-      "newPageReady",
-      (
-        // viewId: string,
-        // currentStatus: State,
-        // prevStatus: State,
-        // container: HTMLElement,
-        // newPageRawHTML: string,
-        // dataset: any,
-        // isFirstPageLoad: boolean
-      ) => {
+    this.route.on("newPageReady", () =>
+      // viewId: string,
+      // currentStatus: State,
+      // prevStatus: State,
+      // container: HTMLElement,
+      // newPageRawHTML: string,
+      // dataset: any,
+      // isFirstPageLoad: boolean
+      {
         this.loadingOff();
       }
     );
@@ -219,7 +217,7 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
         prevStatus: State,
         container: HTMLElement,
         newPageRawHTML: string,
-        dataset: any,
+        dataset: any
         // isFirstPageLoad: boolean
       ) => {
         if (formatter) {
@@ -261,7 +259,7 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
         prevStatus: State,
         container: HTMLElement,
         newPageRawHTML: string,
-        dataset: any,
+        dataset: any
         // isFirstPageLoad: boolean
       ) => {
         this.setTitle(dataset.icon);

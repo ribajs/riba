@@ -1,10 +1,10 @@
 {
-  "extends": "@ribajs/tsconfig",
+  "extends": "@tsconfig/node14",
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": "build-system/dist",
     "types": ["jest"]
   },
-  "include": ["src/**/*"],
+  "include": ["build-system/src/**/*"],
   "exclude": [
     "node_modules",
     "**/*.d.ts"

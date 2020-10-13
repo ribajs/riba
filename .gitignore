@@ -1,9 +1,9 @@
 # compiled output
 /lib
 /dist
-/infra/*/dist/*
-/packages/*/dist/*
-/packages/*/lib/*
+/infra/*/dist
+/packages/*/dist
+/demos/*/dist
 /node_modules
 /.cache
 # Logs
@@ -42,8 +42,6 @@ lerna-debug.log*
 !/infra/*/.vscode/extensions.json
 !/infra/*/.vscode/pnpify/
 
-
-
 # Yarn not using Zero-Installs see https://next.yarnpkg.com/advanced/qa#which-files-should-be-gitignored
 .yarn/*
 !.yarn/releases
@@ -58,11 +56,9 @@ lerna-debug.log*
 !/infra/*/.yarn/sdks
 !/infra/*/.yarn/versions
 
-
 # Demos
 /demos/*/src/iconset/
 /demos/*/.cache/
-/demos/*/dist/
 /demos/*/src/scss/vendors/
 /demos/*/src/images/vendors/
 /demos/*/.yarn/*

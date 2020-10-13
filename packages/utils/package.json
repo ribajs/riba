@@ -32,7 +32,11 @@
     "Browser",
     "Utils"
   ],
-  "scripts": {},
+  "scripts": {
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
+    "build": "npm run lint && tsc",
+    "build:ts": "npm run lint"
+  },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"
   },
@@ -41,7 +45,11 @@
   "devDependencies": {
     "@babel/runtime": "^7.11.2",
     "@babel/runtime-corejs3": "^7.11.2",
+    "@ribajs/eslint-config": "workspace:infra/eslint-config",
     "@ribajs/tsconfig": "workspace:infra/tsconfig",
-    "babel-jest": "^26.5.2"
+    "@types/jest": "^26.0.14",
+    "babel-jest": "^26.5.2",
+    "eslint": "^7.11.0",
+    "typescript": "^4.0.3"
   }
 }

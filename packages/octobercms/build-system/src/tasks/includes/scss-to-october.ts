@@ -1,9 +1,9 @@
 import * as Stream from "stream";
 import * as Path from "path";
 import * as yaml from "js-yaml";
-import * as fs from "fs";
+import "../../types/rgb-regex/index";
 import * as rgbRegex from "rgb-regex";
-import * as hexRegex from "hex-color-regex";
+import hexRegex = require("hex-color-regex");
 
 function scssToOctoberYml() {
   const stream = new Stream.Transform({ objectMode: true });
@@ -86,15 +86,17 @@ function scssToOctoberYml() {
   return stream;
 }
 
-//from https://developer.mozilla.org/
-function looseJsonParse(obj) {
+/**
+ * @see https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/eval
+ * @param obj
+ */
+function looseJsonParse(obj: any) {
   return Function('"use strict";return (' + obj + ")")(); //@reviewer, don't use Function? alternative would be JSON.parse()
 }
 
 function isColor(strColor: string) {
   return (
-    rgbRegex({ exact: true }).test(strColor) ||
-    hexRegex({ exact: true }).test(strColor)
+    rgbRegex({ exact: true }).test(strColor) || hexRegex({}).test(strColor)
   );
 }
 

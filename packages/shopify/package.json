@@ -47,6 +47,7 @@
     "@babel/preset-typescript": "^7.10.4",
     "@babel/runtime-corejs3": "^7.11.2",
     "@ribajs/eslint-config": "workspace:infra/eslint-config",
+    "@ribajs/tsconfig": "workspace:infra/tsconfig",
     "@types/jest": "^26.0.14",
     "@types/node": "^14.11.8",
     "@typescript-eslint/eslint-plugin": "^4.4.1",

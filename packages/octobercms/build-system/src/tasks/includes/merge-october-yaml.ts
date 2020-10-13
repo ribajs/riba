@@ -2,8 +2,8 @@ import * as Stream from "stream";
 import * as yaml from "js-yaml";
 import * as fs from "fs";
 
-function mergeOctoberFormFields(obj) {
-  if (!obj) throw new Error("Argument required");
+function mergeOctoberFormFields(path: string) {
+  if (!path) throw new Error("Argument required");
 
   const stream = new Stream.Transform({ objectMode: true });
 
@@ -13,7 +13,7 @@ function mergeOctoberFormFields(obj) {
     if (file.isBuffer()) {
       const input = yaml.load(file.contents.toString());
 
-      const toMerge = yaml.load(fs.readFileSync(obj).toString());
+      const toMerge = yaml.load(fs.readFileSync(path).toString());
       if (input.form.tabs.fields) {
         input.form.tabs.fields = { ...input.form.tabs.fields, ...toMerge };
       } else {
