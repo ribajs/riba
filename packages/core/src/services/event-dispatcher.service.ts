@@ -58,8 +58,8 @@ export class EventDispatcher {
     this.events[eventName] = this.events[eventName] || [];
     if (typeof thisContext !== "undefined") {
       this.events[eventName].push({
-        function: cb.bind(thisContext),
-        originalFunction: cb,
+        cb: cb.bind(thisContext),
+        orgCb: cb,
         thisConext: thisContext,
       });
     } else {
@@ -116,11 +116,8 @@ export class EventDispatcher {
     }
 
     for (let i = 0; i < this.events[eventName].length; i++) {
-      if (this.events[eventName][i]) {
-        (this.events[eventName][i] as BoundEventCallback).function.apply(
-          this,
-          args
-        );
+      if ((this.events[eventName][i] as BoundEventCallback | undefined)?.cb) {
+        (this.events[eventName][i] as BoundEventCallback).cb.apply(this, args);
       } else {
         (this.events[eventName][i] as EventCallback).apply(this, args);
       }

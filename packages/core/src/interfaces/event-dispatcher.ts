@@ -3,8 +3,8 @@ import type { EventDispatcher } from "../services/event-dispatcher.service";
 export type EventCallback = (...args: any[]) => any;
 
 export type BoundEventCallback = {
-  function: EventCallback;
-  originalFunction: EventCallback;
+  cb: EventCallback;
+  orgCb: EventCallback;
   thisConext: any;
 };
 
