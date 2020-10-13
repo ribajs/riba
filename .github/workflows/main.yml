@@ -7,7 +7,7 @@ on: # rebuild any PRs and main branch changes
       - '*'
 jobs:
   build: # make sure build/ci work properly
-    runs-on: ubuntu-latest
+    runs-on: tutorbookapp/github-action@master # use this fork until it is merged: https://github.com/cypress-io/circleci-orb/issues/312
     steps:
       - uses: actions/checkout@v2
       - run: |
