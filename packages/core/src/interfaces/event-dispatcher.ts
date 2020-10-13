@@ -5,7 +5,7 @@ export type EventCallback = (...args: any[]) => any;
 export type BoundEventCallback = {
   cb: EventCallback;
   orgCb: EventCallback;
-  thisConext: any;
+  thisContext: any;
 };
 
 export interface Events {

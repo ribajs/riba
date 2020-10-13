@@ -60,7 +60,7 @@ export class EventDispatcher {
       this.events[eventName].push({
         cb: cb.bind(thisContext),
         orgCb: cb,
-        thisConext: thisContext,
+        thisContext,
       });
     } else {
       this.events[eventName].push(cb);
@@ -81,14 +81,14 @@ export class EventDispatcher {
     if (cb !== undefined) {
       let idx = this.events[eventName].indexOf(cb);
       for (let i = 0; i < this.events[eventName].length; i++) {
-        const curEvent: any = this.events[eventName][i];
-        if (curEvent.originalFunction && curEvent.thisContext) {
+        const curEvent = this.events[eventName][i] as BoundEventCallback;
+        if (curEvent.orgCb && curEvent.thisContext) {
           if (typeof thisContext !== "undefined") {
             if (curEvent.thisContext !== thisContext) {
               continue;
             }
           }
-          if (curEvent.originalFunction !== cb) {
+          if (curEvent.orgCb !== cb) {
             continue;
           }
           idx = i;
