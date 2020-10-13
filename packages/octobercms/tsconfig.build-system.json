@@ -1,0 +1,12 @@
+{
+  "extends": "@tsconfig/node14",
+  "compilerOptions": {
+    "outDir": "build-system/dist",
+    "types": ["jest"]
+  },
+  "include": ["build-system/src/**/*"],
+  "exclude": [
+    "node_modules",
+    "**/*.d.ts"
+  ]
+}

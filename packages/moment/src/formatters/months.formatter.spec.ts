@@ -37,7 +37,7 @@ describe('riba.formatters', () => {
       el.appendChild(elMoment);
       el.appendChild(elDuration);
       riba.bind(el, model);
-      expect(elMoment.textContent).toEqual(model.obj.moment.months().toString());
+      expect(elMoment.textContent).toEqual(model.obj.moment.month().toString());
       expect(elDuration.textContent).toEqual(model.obj.duration.months().toString());
     });
   });

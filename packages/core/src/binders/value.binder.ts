@@ -14,6 +14,8 @@ const getData = (el: HTMLElement) => {
   return customData;
 };
 
+const DEFAULT_EVENTS = "change input paste blur focus";
+
 /**
  * Sets the element's value. Also sets the model property when the input changes
  * (two-way binder).
@@ -32,9 +34,7 @@ export const valueBinder: Binder<any> = {
       this.customData = getData(el);
     }
     if (!this.customData.isRadio) {
-      this.customData.event =
-        el.getAttribute("event-name") ||
-        (el.tagName === "SELECT" ? "change" : "input");
+      this.customData.event = el.getAttribute("event-name") || DEFAULT_EVENTS;
       // eslint-disable-next-line @typescript-eslint/no-this-alias
       const self = this;
       if (!this.customData.onChange) {
@@ -43,26 +43,41 @@ export const valueBinder: Binder<any> = {
         };
       }
 
-      el.addEventListener("change", this.customData.onChange, false);
-      el.addEventListener("input", this.customData.onChange, false);
-      el.addEventListener("keyup", this.customData.onChange, false);
-      el.addEventListener("paste", this.customData.onChange, false);
-      el.addEventListener("blur", this.customData.onChange, false);
-      el.addEventListener("focus", this.customData.onChange, false);
+      const events = (this.customData.event as string).split(" ");
+      for (const event of events) {
+        el.addEventListener(event.trim(), this.customData.onChange, false);
+      }
     }
   },
 
   unbind(el: HTMLUnknownElement) {
-    el.removeEventListener("change", this.customData.onChange);
-    el.removeEventListener("input", this.customData.onChange);
-    el.removeEventListener("keyup", this.customData.onChange);
-    el.removeEventListener("paste", this.customData.onChange);
-    el.removeEventListener("blur", this.customData.onChange);
-    el.removeEventListener("focus", this.customData.onChange);
+    const events = this.customData.event.split(" ");
+    for (const event in events) {
+      el.removeEventListener(event.trim(), this.customData.onChange);
+    }
   },
 
-  routine(el: HTMLElement | HTMLSelectElement, value: string | string[]) {
-    const oldValue = this.getValue(el);
+  routine(el: HTMLElement | HTMLSelectElement, value?: string | string[]) {
+    let oldValue = this.getValue(el);
+    if (!Array.isArray(value)) {
+      if (value != null) {
+        value = getString(value);
+      } else {
+        value = "";
+      }
+    }
+    if (!Array.isArray(oldValue)) {
+      if (oldValue != null) {
+        oldValue = getString(oldValue);
+      } else {
+        oldValue = "";
+      }
+    }
+    if (oldValue === value) {
+      // nothing changed
+      return;
+    }
+
     if (!this.customData) {
       this.customData = getData(el);
     }
@@ -77,20 +92,11 @@ export const valueBinder: Binder<any> = {
             ] as HTMLOptionElement;
             option.selected = value.indexOf(option.value) > -1;
           }
-          // TODO check if the value was really changed
-          el.dispatchEvent(new Event("change"));
         }
       } else if (el.getAttribute("contenteditable")) {
-        if (getString(value as string) !== oldValue) {
-          el.innerHTML = value as string; // TODO write test for contenteditable
-          el.dispatchEvent(new Event("change"));
-        }
+        el.innerHTML = value as string; // TODO write test for contenteditable
       } else {
-        if (getString(value as string) !== oldValue) {
-          (el as HTMLInputElement).value =
-            value != null ? (value as string) : "";
-          el.dispatchEvent(new Event("change"));
-        }
+        (el as HTMLInputElement).value = value as string;
       }
     }
   },

@@ -1,5 +1,6 @@
 // see https://github.com/freewind-demos/typescript--pdf-js--webwork-embed-all-in-single-html-demo/blob/master/entry.ts
 import * as PDFJS from "pdfjs-dist";
+
 import "pdfjs-dist/build/pdf.worker";
 
 import { FormFields, FormGroup } from "../types";
@@ -19,15 +20,15 @@ export class PdfService {
   ): Promise<FormGroup[]> {
     const pdfDocumentProxy = await PDFJS.getDocument(url).promise;
 
-    const pdfPageProxies: PDFJS.PDFPageProxy[] = [];
+    const pdfPageProxies: any[] = [];
     let pdfAnnotations: FormFields[] = [];
 
-    for (var i = 1; i <= pdfDocumentProxy.numPages; i++) {
+    for (let i = 1; i <= pdfDocumentProxy.numPages; i++) {
       const pdfPageProxy = await pdfDocumentProxy.getPage(i);
       pdfPageProxies.push(pdfPageProxy);
     }
 
-    for (var i = 0; i < pdfPageProxies.length; i++) {
+    for (let i = 0; i < pdfPageProxies.length; i++) {
       const pdfAnnotationsbyPage = ((await pdfPageProxies[
         i
       ].getAnnotations()) as unknown) as FormFields[];

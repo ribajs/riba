@@ -32,10 +32,21 @@
     "Browser",
     "History"
   ],
-  "scripts": {},
+  "scripts": {
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
+    "build": "npm run lint && tsc",
+    "build:ts": "npm run lint"
+  },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"
   },
   "homepage": "https://github.com/ribajs/riba#readme",
-  "directories": {}
+  "directories": {},
+  "devDependencies": {
+    "@ribajs/eslint-config": "workspace:infra/eslint-config",
+    "@ribajs/tsconfig": "workspace:infra/tsconfig",
+    "@types/jest": "^26.0.14",
+    "eslint": "^7.11.0",
+    "typescript": "^4.0.3"
+  }
 }

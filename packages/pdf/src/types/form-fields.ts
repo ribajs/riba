@@ -1,4 +1,4 @@
-import { PDFAnnotationData } from "pdfjs-dist";
+// import { PDFAnnotationData } from "pdfjs-dist";
 
 export interface SelectField {
   exportValue: string;
@@ -14,7 +14,7 @@ export interface CustomGroupedRadioButton {
 }
 
 // TODO move to PDFJS.PDFAnnotationData
-export interface FormFields extends PDFAnnotationData {
+export interface FormFields /*extends PDFAnnotationData*/ {
   // Original
   borderStyle: any;
   id: string;

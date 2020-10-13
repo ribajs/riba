@@ -15,6 +15,8 @@ export const YearsFormatter: Formatter = {
    * @param target can be a moment object or a duration
    */
   read(target: Moment | Duration) {
-    return target.years();
+    return typeof (target as Moment).year === "function"
+      ? (target as Moment).year()
+      : (target as Duration).years();
   },
 };
