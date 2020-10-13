@@ -36,7 +36,7 @@
     "@typescript-eslint/eslint-plugin": "^4.1.0",
     "@typescript-eslint/parser": "^4.1.0",
     "@yarnpkg/pnpify": "^2.2.1",
-    "autoprefixer": "^9.8.6",
+    "postcss-preset-env": "^6.7.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-array-includes": "^2.0.3",
     "babelify": "^10.0.0",

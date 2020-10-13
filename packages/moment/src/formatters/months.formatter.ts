@@ -1,5 +1,5 @@
 import { Formatter } from "@ribajs/core";
-import { Duration } from "moment";
+import { Duration, Moment } from "moment";
 
 /**
  * As with the other formatters for durations, the months formatter gets the months (0 - 11).
@@ -12,7 +12,9 @@ export const MonthsFormatter: Formatter = {
    * @see https://momentjs.com/docs/#/durations/months/
    * @param duration
    */
-  read(duration: Duration) {
-    return duration.months();
+  read(target: Moment | Duration) {
+    return typeof (target as Moment).month === "function"
+      ? (target as Moment).month()
+      : (target as Duration).months();
   },
 };
