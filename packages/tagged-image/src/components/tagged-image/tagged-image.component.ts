@@ -13,6 +13,7 @@ interface Options {
 }
 
 interface Scope {
+  class: string;
   src: string;
   srcset: string;
   sizes: string;
@@ -38,6 +39,7 @@ export class TaggedImageComponent extends Component {
 
   static get observedAttributes() {
     return [
+      "class",
       "src",
       "sizes",
       "srcset",
@@ -192,7 +194,6 @@ export class TaggedImageComponent extends Component {
   }
 
   protected connectedCallback() {
-    console.log("connectedCallback()");
     super.connectedCallback();
     this.init(TaggedImageComponent.observedAttributes);
   }
