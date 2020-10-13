@@ -52,7 +52,7 @@ export class EventDispatcher {
    *
    * @param eventName
    * @param function
-   * @param thisContext
+   * @param thisContext IMPORTANT; cb CANNOT BE arrow function, use function() {} instead
    */
   public on(eventName: string, cb: EventCallback, thisContext?: any) {
     this.events[eventName] = this.events[eventName] || [];
@@ -79,8 +79,7 @@ export class EventDispatcher {
       return;
     }
     if (cb !== undefined) {
-      let idx = this.events[eventName].indexOf(cb);
-      for (let i = 0; i < this.events[eventName].length; i++) {
+      for (let i = this.events[eventName].length - 1; i >= 0; i--) {
         const curEvent = this.events[eventName][i] as BoundEventCallback;
         if (curEvent.orgCb && curEvent.thisContext) {
           if (typeof thisContext !== "undefined") {
@@ -91,12 +90,8 @@ export class EventDispatcher {
           if (curEvent.orgCb !== cb) {
             continue;
           }
-          idx = i;
-          break;
+          this.events[eventName].splice(i, 1);
         }
-      }
-      if (idx !== -1) {
-        this.events[eventName].splice(idx, 1);
       }
     } else {
       this.events[eventName] = [];
