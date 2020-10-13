@@ -4,7 +4,7 @@
     "outDir": "dist",
     "types": ["jest", "jquery"]
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "build-system/types"],
   "exclude": [
     "node_modules",
     "build-system/**/*",
