@@ -1,24 +1,16 @@
-type EventCallback = (...args: any[]) => any;
-type BoundEventCallback = {
-  function: EventCallback;
-  originalFunction: EventCallback;
-  thisConext: any;
-};
-
-interface Events {
-  [eventName: string]: (EventCallback | BoundEventCallback)[];
-}
-
-export interface EventDispatcherInstances {
-  [key: string]: EventDispatcher;
-}
+import {
+  EventDispatcherInstances,
+  Events,
+  EventCallback,
+  BoundEventCallback,
+} from "../interfaces/event-dispatcher";
 
 /**
  * Little Dispatcher inspired by MicroEvent.js
  *
  * @type {object}
  */
-class EventDispatcher {
+export class EventDispatcher {
   public static instances: EventDispatcherInstances = {};
 
   public static getInstance(namespace: string) {
@@ -124,7 +116,7 @@ class EventDispatcher {
     }
 
     for (let i = 0; i < this.events[eventName].length; i++) {
-      if ((this.events[eventName][i] as BoundEventCallback).function) {
+      if (this.events[eventName][i]) {
         (this.events[eventName][i] as BoundEventCallback).function.apply(
           this,
           args
@@ -135,5 +127,3 @@ class EventDispatcher {
     }
   }
 }
-
-export { EventDispatcher };

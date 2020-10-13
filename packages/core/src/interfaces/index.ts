@@ -6,6 +6,7 @@ export * from "./binders";
 export * from "./binding";
 export * from "./binding";
 export * from "./components";
+export * from "./event-dispatcher";
 export * from "./formatter";
 export * from "./formatters";
 export * from "./http-data-type";
