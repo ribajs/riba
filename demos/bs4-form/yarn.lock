@@ -636,7 +636,6 @@ __metadata:
   checksum: 5b7a8eeb4fba94ebdf1d96510435bae349ce72d84c35c710afc02d6636cffe8f209a1aa0b42a3cc115240e6af60f178f75b4ec204eef94497d1230bf52a01c43
   languageName: node
   linkType: hard
-
 "@babel/parser@npm:^7.11.5, @babel/parser@npm:^7.6.0, @babel/parser@npm:^7.9.6":
   version: 7.11.5
   resolution: "@babel/parser@npm:7.11.5"
@@ -4196,6 +4195,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"babel-walk@npm:3.0.0-canary-5":
+  version: 3.0.0-canary-5
+  resolution: "babel-walk@npm:3.0.0-canary-5"
+  dependencies:
+    "@babel/types": ^7.9.6
+  checksum: 3d5b9bb9e75fa1830a66c5ef87f7d5fb6858c00952a72d6948d945ce2872f5ff530601756aa90091f559bcb0775d3030f5e39694033c94f3b51d397c183c5ec9
+  languageName: node
+  linkType: hard
+
 "babelify@npm:^10.0.0":
   version: 10.0.0
   resolution: "babelify@npm:10.0.0"
@@ -7414,7 +7422,7 @@ fsevents@^1.2.7:
     nan: ^2.12.1
     node-gyp: latest
     node-pre-gyp: "*"
-  checksum: 9d877c7a9146d9f8c794168b9267e501809737921098a50a936a4dc5766b73040546624e6f9db157a37be43b1288a4f821f5589d18b49ffb38d926f30af42732
+  checksum: 018cd172a5520edefa2890a74d2ed26b0cb8d7da09e0162ab3f638b66175444b6b9d3635ce25edb5a210af2ec7cfca915744924e648a7a4c6a6ede9172534835
   languageName: node
   linkType: hard
 
@@ -10098,7 +10106,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"jest-worker@npm:^26.3.0":
+"jest-worker@npm:^26.2.1, jest-worker@npm:^26.3.0":
   version: 26.3.0
   resolution: "jest-worker@npm:26.3.0"
   dependencies:
