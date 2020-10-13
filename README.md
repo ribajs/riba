@@ -1,6 +1,6 @@
 # Riba.js
 
-Riba.js is the espiritual sucessor of Rivets.js, a lightweight data binding and templating system that facilitates building data-driven views. It is agnostic about every aspect of a front-end MV(C|VM|P) stack, making it easy to introduce it into your current workflow or to use it as part of your own custom front-end stack comprised of other libraries.
+Riba.js is a fork of Rivets.js, a lightweight data binding and templating system that facilitates building data-driven views. It is agnostic about every aspect of a front-end MV(C|VM|P) stack, making it easy to introduce it into your current workflow or to use it as part of your own custom front-end stack comprised of other libraries.
 
 ## Documentation
 
@@ -19,7 +19,7 @@ git clone --recurse-submodules https://github.com/ribajs/riba.git
 ### Bug Reporting
 
 1. Ensure the bug can be reproduced on the latest master.
-2. Open an issue on GitHub and include an isolated [JSFiddle](http://jsfiddle.net/) demonstration of the bug. The more information you provide, the easier it will be to validate and fix.
+2. (optional) Submit a new demo oriented on the existing demos based on the existing demos to illustrate the problem
 
 ### Pull Requests
 
