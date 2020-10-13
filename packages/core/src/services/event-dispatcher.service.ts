@@ -53,7 +53,7 @@ export class EventDispatcher {
    * @param eventName
    * @param cb function to call, if an event with eventName is triggered
    * @param thisContext optional, if a thisContext is supplied, the callback function is bound to the given thisContext
-   * 
+   *
    * IMPORTANT; cb CANNOT BE arrow function if a thisContext is used, use function() {} instead
    */
   public on(eventName: string, cb: EventCallback, thisContext?: any) {
@@ -73,7 +73,7 @@ export class EventDispatcher {
    * Unbind event
    *
    * @param eventName Name of the event
-   * @param callback optional, if a callback is supplied, only event listeners using the supplied callback function will be removed
+   * @param cb optional, if a callback is supplied, only event listeners using the supplied callback function will be removed
    * @param thisContext optional, if a callback is supplied, only event listeners using the supplied thisContext will be removed
    */
   public off(eventName: string, cb?: EventCallback, thisContext?: any) {
