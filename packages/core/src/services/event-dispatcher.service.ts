@@ -51,8 +51,10 @@ export class EventDispatcher {
    * Bind a callback to an event
    *
    * @param eventName
-   * @param function
-   * @param thisContext IMPORTANT; cb CANNOT BE arrow function, use function() {} instead
+   * @param cb function to call, if an event with eventName is triggered
+   * @param thisContext optional, if a thisContext is supplied, the callback function is bound to the given thisContext
+   * 
+   * IMPORTANT; cb CANNOT BE arrow function if a thisContext is used, use function() {} instead
    */
   public on(eventName: string, cb: EventCallback, thisContext?: any) {
     this.events[eventName] = this.events[eventName] || [];
@@ -68,11 +70,11 @@ export class EventDispatcher {
   }
 
   /**
-   * TODO unbind all instead of first one
    * Unbind event
    *
-   * @param eventName
-   * @param function
+   * @param eventName Name of the event
+   * @param callback optional, if a callback is supplied, only event listeners using the supplied callback function will be removed
+   * @param thisContext optional, if a callback is supplied, only event listeners using the supplied thisContext will be removed
    */
   public off(eventName: string, cb?: EventCallback, thisContext?: any) {
     if (eventName in this.events === false) {
