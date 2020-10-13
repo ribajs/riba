@@ -7,8 +7,8 @@ import { TaggedImageTag as Tag } from "../../interfaces";
 import template from "./tagged-image.component.html";
 
 interface Options {
-  popoverOptions?: Partial<PopoverOptions>;
-  tagOptions?: Partial<Tag>;
+  popoverOptions: Partial<PopoverOptions>;
+  tagOptions: Partial<Tag>;
   multiPopover?: boolean;
 }
 
@@ -51,7 +51,7 @@ export class TaggedImageComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    this.scope.options.popoverOptions!.container = this.el;
+    this.scope.options.popoverOptions.container = this.el;
     this.el.addEventListener("click", this.scope.onClick);
   }
 
@@ -70,12 +70,13 @@ export class TaggedImageComponent extends Component {
         const rect = (e.target as HTMLElement).getBoundingClientRect();
         const x = ((e as any).clientX - rect.left) / (rect.right - rect.left); //x position within the element.
         const y = ((e as any).clientY - rect.top) / (rect.bottom - rect.top); //y position within the element.
-        console.log("Left? : " + x + " ; Top? : " + y + ".");
+        console.log("Left: " + x + " ; Top: " + y);
       }
     },
     options: {
       popoverOptions: {}, // set container = this.el in constructor
       multiPopover: false,
+      tagOptions: {},
     },
     fillPopoverOptions: (options: Partial<PopoverOptions>) => {
       return { ...this.scope.options.popoverOptions, ...options };
@@ -167,14 +168,31 @@ export class TaggedImageComponent extends Component {
   }
 
   protected initTags() {
+    console.log("initTags()");
     for (const [index, tag] of this.scope.tags.entries()) {
+      tag.index = index;
       tag.left = tag.x * 100 + "%";
       tag.top = tag.y * 100 + "%";
-      tag.index = index;
+      /**
+       * This does not work, because TypeScript makes JavaScript impotent:
+      
+      for (const key: keyof Tag of ["color", "borderRadius", "smallSize", "fullSize", "shape"]) {
+        tag[key] = tag[key] || this.scope.options.tagOptions[key];
+      }
+
+       * @see https://github.com/microsoft/TypeScript/issues/32375 (works as intended)
+       *
+       */
+      const scopeTagOptions = this.scope.options.tagOptions;
+      tag.shape = tag.shape || scopeTagOptions.shape;
+      tag.borderRadius = tag.borderRadius || scopeTagOptions.borderRadius;
+      tag.smallSize = tag.smallSize || scopeTagOptions.smallSize;
+      tag.fullSize = tag.fullSize || scopeTagOptions.fullSize;
     }
   }
 
   protected connectedCallback() {
+    console.log("connectedCallback()");
     super.connectedCallback();
     this.init(TaggedImageComponent.observedAttributes);
   }
@@ -192,7 +210,7 @@ export class TaggedImageComponent extends Component {
         this.scope.options = extend(true, oldValue, newValue);
       }
       const po = this.scope.options.popoverOptions;
-      if (typeof po.container === "string") {
+      if (po && typeof po.container === "string") {
         po.container = document.querySelector(po.container) || undefined;
       }
     }
