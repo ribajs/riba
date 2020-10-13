@@ -124,10 +124,10 @@ class EventDispatcher {
     }
 
     for (let i = 0; i < this.events[e].length; i++) {
-      if (this.events[e][i].boundFunction) {
-        this.events[e][i].boundFunction.apply(this, args);
+      if ((this.events[e][i] as BoundEventCallback).function) {
+        (this.events[e][i] as BoundEventCallback).function.apply(this, args);
       } else {
-        this.events[e][i].apply(this, args);
+        (this.events[e][i] as EventCallback).apply(this, args);
       }
     }
   }
