@@ -58,6 +58,7 @@ export class TaggedImageComponent extends Component {
   }
 
   protected scope: Scope = {
+    class: "",
     debug: false,
     src: "",
     srcset: "",
@@ -170,7 +171,6 @@ export class TaggedImageComponent extends Component {
   }
 
   protected initTags() {
-    console.log("initTags()");
     for (const [index, tag] of this.scope.tags.entries()) {
       tag.index = index;
       tag.left = tag.x * 100 + "%";
@@ -190,6 +190,7 @@ export class TaggedImageComponent extends Component {
       tag.borderRadius = tag.borderRadius || scopeTagOptions.borderRadius;
       tag.smallSize = tag.smallSize || scopeTagOptions.smallSize;
       tag.fullSize = tag.fullSize || scopeTagOptions.fullSize;
+      tag.color = tag.color || scopeTagOptions.color;
     }
   }
 
