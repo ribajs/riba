@@ -1,19 +1,16 @@
-type EventCallback = (...args: any[]) => any;
-
-interface Events {
-  [eventName: string]: EventCallback[];
-}
-
-export interface EventDispatcherInstances {
-  [key: string]: EventDispatcher;
-}
+import {
+  EventDispatcherInstances,
+  Events,
+  EventCallback,
+  BoundEventCallback,
+} from "../interfaces/event-dispatcher";
 
 /**
  * Little Dispatcher inspired by MicroEvent.js
  *
  * @type {object}
  */
-class EventDispatcher {
+export class EventDispatcher {
   public static instances: EventDispatcherInstances = {};
 
   public static getInstance(namespace: string) {
@@ -54,30 +51,52 @@ class EventDispatcher {
    * Bind a callback to an event
    *
    * @param eventName
-   * @param function
+   * @param cb function to call, if an event with eventName is triggered
+   * @param thisContext optional, if a thisContext is supplied, the callback function is bound to the given thisContext
+   *
+   * IMPORTANT; cb CANNOT BE arrow function if a thisContext is used, use function() {} instead
    */
-  public on(e: string, f: EventCallback) {
-    this.events[e] = this.events[e] || [];
-    this.events[e].push(f);
+  public on(eventName: string, cb: EventCallback, thisContext?: any) {
+    this.events[eventName] = this.events[eventName] || [];
+    if (typeof thisContext !== "undefined") {
+      this.events[eventName].push({
+        cb: cb.bind(thisContext),
+        orgCb: cb,
+        thisContext,
+      });
+    } else {
+      this.events[eventName].push(cb);
+    }
   }
 
   /**
    * Unbind event
    *
-   * @param eventName
-   * @param function
+   * @param eventName Name of the event
+   * @param cb optional, if a callback is supplied, only event listeners using the supplied callback function will be removed
+   * @param thisContext optional, if a callback is supplied, only event listeners using the supplied thisContext will be removed
    */
-  public off(e: string, f?: EventCallback) {
-    if (e in this.events === false) {
+  public off(eventName: string, cb?: EventCallback, thisContext?: any) {
+    if (eventName in this.events === false) {
       return;
     }
-    if (f !== undefined) {
-      const idx = this.events[e].indexOf(f);
-      if (idx !== -1) {
-        this.events[e].splice(idx, 1);
+    if (cb !== undefined) {
+      for (let i = this.events[eventName].length - 1; i >= 0; i--) {
+        const curEvent = this.events[eventName][i] as BoundEventCallback;
+        if (curEvent.orgCb && curEvent.thisContext) {
+          if (typeof thisContext !== "undefined") {
+            if (curEvent.thisContext !== thisContext) {
+              continue;
+            }
+          }
+          if (curEvent.orgCb !== cb) {
+            continue;
+          }
+          this.events[eventName].splice(i, 1);
+        }
       }
     } else {
-      this.events[e] = [];
+      this.events[eventName] = [];
     }
   }
 
@@ -87,16 +106,18 @@ class EventDispatcher {
    * @param eventName
    * @param args
    */
-  public trigger(e: string, ...args: any[]) {
+  public trigger(eventName: string, ...args: any[]) {
     // e, ...args
-    if (e in this.events === false) {
+    if (eventName in this.events === false) {
       return;
     }
 
-    for (let i = 0; i < this.events[e].length; i++) {
-      this.events[e][i].apply(this, args);
+    for (let i = 0; i < this.events[eventName].length; i++) {
+      if ((this.events[eventName][i] as BoundEventCallback | undefined)?.cb) {
+        (this.events[eventName][i] as BoundEventCallback).cb.apply(this, args);
+      } else {
+        (this.events[eventName][i] as EventCallback).apply(this, args);
+      }
     }
   }
 }
-
-export { EventDispatcher };
