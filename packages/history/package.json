@@ -38,6 +38,10 @@
     "build:ts": "npm run lint",
     "clean": "rm -rf ./dist ./lib"
   },
+  "files": [
+    "/src",
+    "/dist"
+  ],
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"
   },

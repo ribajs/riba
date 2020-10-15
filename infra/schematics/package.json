@@ -20,6 +20,10 @@
     "clean": "rm -rf dist",
     "lint:src": "eslint src --ext .js,.jsx,.ts,.tsx --fix"
   },
+  "files": [
+    "/src",
+    "/dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:ribajs/riba.git"

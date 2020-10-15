@@ -41,6 +41,10 @@
     "clean": "rm -rf ./dist ./lib",
     "packages:npm:link": "npm link @ribajs/core @ribajs/extras"
   },
+  "files": [
+    "/src",
+    "/dist"
+  ],
   "devDependencies": {
     "@babel/cli": "^7.11.6",
     "@babel/core": "^7.11.6",

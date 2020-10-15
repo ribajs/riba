@@ -16,6 +16,10 @@
     "packages:npm:link": "npm link @ribajs/core @ribajs/schematics",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "/src",
+    "/dist"
+  ],
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "license": "MIT",
   "dependencies": {
