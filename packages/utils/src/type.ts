@@ -166,6 +166,40 @@ export const escapeHtml = (str: string) => {
   });
 };
 
+/**
+ * Remove all special chars from a string
+ * @see https://stackoverflow.com/a/11090301/1465919
+ * @param str
+ */
+const withoutSpecialChars = (str: string) => {
+  // str = str.replace(/[^\w\s]/gi, ""); // http://stackoverflow.com/a/4374890
+  str = str.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}[\]\\/]/gi, "");
+  return str;
+};
+
+/**
+ * Removes multiple tabs, newlines, etc from a string
+ * @param str
+ */
+const withoutMultiWhitespace = (str: string) => {
+  str = str.replace(/\s\s+/g, " ");
+  return str;
+};
+
+/**
+ * Formats a string into a handle.
+ * E.g. '100% M & Ms!!!' -> 100-m-ms
+ * @see https://help.shopify.com/themes/liquid/filters/string-filters#handle-handleize
+ */
+export const handleize = (str: string) => {
+  str = str.trim();
+  str = withoutMultiWhitespace(str);
+  str = withoutSpecialChars(str);
+  str = str.toLowerCase();
+  str = str.replace(/ /g, "-");
+  return str;
+};
+
 export const stripHtml = (html: string) => {
   const tmp = document.createElement("DIV");
   tmp.innerHTML = html;
