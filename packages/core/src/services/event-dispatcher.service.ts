@@ -116,9 +116,9 @@ export class EventDispatcher {
 
     for (let i = 0; i < this.events[eventName].length; i++) {
       if ((this.events[eventName][i] as BoundEventCallback | undefined)?.cb) {
-        (this.events[eventName][i] as BoundEventCallback).cb.apply(this, args);
+        (this.events[eventName][i] as BoundEventCallback).cb(...args);
       } else {
-        (this.events[eventName][i] as EventCallback).apply(this, args);
+        (this.events[eventName][i] as EventCallback)(...args);
       }
     }
   }
