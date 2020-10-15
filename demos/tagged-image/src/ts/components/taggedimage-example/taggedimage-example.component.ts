@@ -12,6 +12,7 @@ interface Scope {
     title: string;
     tags: Tag[];
   }[];
+  responsiveTags: Tag[];
 }
 
 export class TaggedImageExampleComponent extends Component {
@@ -25,6 +26,21 @@ export class TaggedImageExampleComponent extends Component {
 
   protected scope: Scope = {
     name: "hello",
+    responsiveTags: [0, 1, 2, 3, 4, 5].reduce(
+      (a, n) => [
+        ...a,
+        ...[0, 1, 2, 3, 4, 5].map((m) => ({
+          x: n * 0.2,
+          y: m * 0.2,
+          color: `rgb(${n * 50}, ${m * 50}, 0)`,
+          popoverOptions: {
+            title: `(${n}, ${m})`,
+            content: `(${n}, ${m})`,
+          },
+        })),
+      ],
+      []
+    ),
     fadeshowImages: [1, 2, 3, 4, 5].map((n) => ({
       src: `../../../images/shotokan-karate-cuxhaven-${n}.jpg`,
       srcset: [800, 1000, 1200, 1400, 1600, 1920]

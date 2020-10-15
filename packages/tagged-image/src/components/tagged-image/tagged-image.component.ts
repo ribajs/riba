@@ -5,7 +5,7 @@ import { PopoverOptions } from "@ribajs/bs4";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { TaggedImageTag as Tag } from "../../interfaces";
 import template from "./tagged-image.component.html";
-import { throttle, debounce } from "@ribajs/utils/src/control";
+import { debounce } from "@ribajs/utils/src/control";
 
 interface Options {
   popoverOptions: Partial<PopoverOptions>;
@@ -19,7 +19,7 @@ interface Scope {
   srcset: string;
   sizes: string;
   alt: string;
-  lazyload: string;
+  loading: string;
   debug: boolean;
   options: Options;
   tags: Tag[];
@@ -45,7 +45,7 @@ export class TaggedImageComponent extends Component {
       "sizes",
       "srcset",
       "alt",
-      "lazyload",
+      "loading",
       "tags",
       "options",
       "debug",
@@ -58,6 +58,7 @@ export class TaggedImageComponent extends Component {
     super(element);
     this.scope.options.popoverOptions.container = this.el;
     this.el.addEventListener("click", this.scope.onClick);
+    this.updateTagPositions = debounce(this.updateTagPositions.bind(this));
   }
 
   protected scope: Scope = {
@@ -67,7 +68,7 @@ export class TaggedImageComponent extends Component {
     srcset: "",
     sizes: "",
     alt: "",
-    lazyload: "",
+    loading: "",
     tags: [],
     onClick: (e: Event) => {
       if (this.scope.debug) {
@@ -174,20 +175,32 @@ export class TaggedImageComponent extends Component {
   }
 
   protected updateTagPositions() {
-    // window.getComputedStyle(img).getPropertyValue('object-position')
-    console.log("updateTagPositions");
+    /*
+     * Currently working for object-fit: cover, contain or fill, and object-position: 50% 50% (default)
+     * TODO: make this work for all CSS values of "object-position" and "object-fit"!
+     */
     const img = this.image as HTMLImageElement;
-    const widthRatio = img.naturalWidth / img.width;
-    const heightRatio = img.naturalHeight / img.height;
     const { width, height, naturalWidth, naturalHeight } = img;
-    console.log([`width: ${width}`, `height: ${height}`, `naturalWidth: ${naturalWidth}`, `naturalHeight: ${naturalHeight}`, `widthRatio: ${widthRatio}`, `heightRatio: ${heightRatio}`].join('\n'));
-    for (const tag of this.scope.tags) {
-      if (widthRatio > heightRatio) {
+    const wRatio = naturalWidth / width;
+    const hRatio = naturalHeight / height;
+    const fit = window.getComputedStyle(img).getPropertyValue("object-fit");
+    if (
+      (fit === "cover" && wRatio > hRatio) ||
+      (fit === "contain" && hRatio > wRatio)
+    ) {
+      for (const tag of this.scope.tags) {
         tag.top = tag.y * 100 + "%";
-        tag.left = (widthRatio * (tag.x -0.5) + 0.5) * 100 + "%";
-      } else {
+        tag.left = ((wRatio / hRatio) * (tag.x - 0.5) + 0.5) * 100 + "%";
+      }
+    } else if (fit === "cover" || fit === "contain") {
+      for (const tag of this.scope.tags) {
         tag.left = tag.x * 100 + "%";
-        tag.top = (heightRatio * (tag.y - 0.5) + 0.5) * 100 + "%";
+        tag.top = ((hRatio / wRatio) * (tag.y - 0.5) + 0.5) * 100 + "%";
+      }
+    } else {
+      for (const tag of this.scope.tags) {
+        tag.left = tag.x * 100 + "%";
+        tag.top = tag.y * 100 + "%";
       }
     }
   }
@@ -234,13 +247,27 @@ export class TaggedImageComponent extends Component {
     this.image.addEventListener("load", () => {
       this.updateTagPositions();
     });
-    window.addEventListener("resize", debounce(() => this.updateTagPositions()));
+    window.addEventListener("resize", this.updateTagPositions);
     this.initTags();
     await super.beforeBind();
   }
 
+  /**
+   * Pass down all attributes starting with "img-" to the <img>-Tag, i.e. "img-style" will become style attribute on image.
+   */
+  protected passImageAttributes() {
+    const img = this.image as HTMLImageElement;
+    const attrs = this.el.attributes;
+    for (let i = attrs.length - 1; i >= 0; i--) {
+      if (attrs[i].name.startsWith("img-")) {
+        img.setAttribute(attrs[i].name.substr(4), attrs[i].value);
+      }
+    }
+  }
+
   protected async afterBind() {
     await super.afterBind();
+    this.passImageAttributes();
   }
 
   protected template() {

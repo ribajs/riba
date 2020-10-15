@@ -1,5 +1,43 @@
 <div class="container-fluid">
+    <div class="row py-4">
+    <div class="col-12">
+      <h3 class="text-center">Responsive Grid Cover</h3>
+      <div class="embed-responsive embed-responsive-100vh">
+        <tagged-image class="embed-responsive-item fit-cover" rv-tags="responsiveTags | json 0" src="../../../images/grid.png">
+        </tagged-image>
+      </div>
+    </div>
+  </div>
 
+  <div class="row py-4">
+    <div class="col-12">
+      <h3 class="text-center">Responsive Grid Contain</h3>
+      <div class="embed-responsive embed-responsive-100vh">
+        <tagged-image class="embed-responsive-item fit-contain" rv-tags="responsiveTags | json 0" src="../../../images/grid.png">
+        </tagged-image>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row py-4">
+    <div class="col-12">
+      <h3 class="text-center">Unresponsive Grid</h3>
+        <tagged-image rv-tags="responsiveTags | json 0" src="../../../images/grid.png">
+        </tagged-image>
+    </div>
+  </div>
+
+  <div class="row py-4">
+    <div class="col-12">
+      <h3 class="text-center">Unresponsive Grid distorted</h3>
+        <tagged-image style="width: 50%; height:30%" rv-tags="responsiveTags | json 0" src="../../../images/grid.png">
+        </tagged-image>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
   <div class="row pb-4">
     <div class="col-5"></div>
     <div class="col-2">
@@ -157,6 +195,5 @@
         </div>
       </bs4-slideshow>
     </section>
-
   </div>
 </div>

@@ -12,8 +12,33 @@ tagged-image {
 
   img {
     width: 100%;
+    height: 100%;
     top: 0;
     left: 0;
+    right: 0;
+    bottom: 0;
+    vertical-align: middle;
+  }
+  &.embed-responsive-item img {
+    object-fit: cover;
+  }
+  &.fit-contain img {
+    object-fit: contain !important;
+  }
+  &.fit-cover img {
+    object-fit: cover !important;
+  }
+  &.fit-initial img {
+    object-fit: initial !important;
+  }
+  &.fit-fill img {
+    object-fit: fill !important;
+  }
+  &.fit-scale-down img {
+    object-fit: scale-down !important;
+  }
+  &.fit-none img {
+    object-fit: none !important;
   }
 
   tag {
