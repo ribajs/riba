@@ -2,7 +2,9 @@ import { Riba, coreModule } from "./index";
 
 declare global {
   interface Window {
+    Riba: typeof Riba;
     riba: Riba;
+    coreModule: typeof coreModule;
   }
 }
 
@@ -12,7 +14,9 @@ const riba = new Riba();
 // regist formatters
 riba.module.regist(coreModule);
 
-(window as any).riba = riba;
+window.Riba = Riba;
+window.riba = riba;
+window.coreModule = coreModule;
 
 export { Riba, coreModule, riba };
 export default riba;
