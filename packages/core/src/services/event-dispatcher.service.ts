@@ -13,7 +13,7 @@ import {
 export class EventDispatcher {
   public static instances: EventDispatcherInstances = {};
 
-  public static getInstance(namespace: string) {
+  public static getInstance(namespace = "main"): EventDispatcher {
     const result = EventDispatcher.instances[namespace];
     if (!result) {
       return new this(namespace);
@@ -29,10 +29,10 @@ export class EventDispatcher {
    */
   private events: Events = {};
 
-  private _namespace: string;
+  private _namespace = "anonymous";
 
   public get namespace(): string {
-    return this._namespace || "anonymous";
+    return this._namespace;
   }
 
   /**
@@ -46,7 +46,6 @@ export class EventDispatcher {
       this._namespace = namespace;
       EventDispatcher.instances[namespace] = this;
       return EventDispatcher.instances[namespace];
-      this._namespace = namespace;
     }
   }
 
