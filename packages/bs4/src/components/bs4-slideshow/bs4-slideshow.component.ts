@@ -320,7 +320,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   protected resumeTimer: number | null = null;
 
-  protected routerEvents?: EventDispatcher;
+  protected routerEvents = new EventDispatcher("main");
 
   /**
    * Current breakpoint
@@ -377,6 +377,13 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   constructor(element?: HTMLElement) {
     super(element);
+    // set event listeners to the this-bound version once, so we can easily pass them to DOM event handlers and remove them again later
+    this.onViewChanges = this.onViewChanges.bind(this);
+    this.onVisibilityChanged = this.onVisibilityChanged.bind(this);
+    this.onScroll = this.onScroll.bind(this);
+    this.onScrollend = this.onScrollend.bind(this);
+    this.onMouseIn = this.onMouseIn.bind(this);
+    this.onMouseOut = this.onMouseOut.bind(this);
   }
 
   /**
@@ -759,68 +766,31 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   }
 
   protected addEventListeners() {
-    if (!this.routerEvents) {
-      this.routerEvents = new EventDispatcher("main");
-    }
+    this.routerEvents.on("newPageReady", this.onBreakpointChanges, this);
 
-    this.routerEvents.on("newPageReady", this.onBreakpointChanges.bind(this));
-
-    window.addEventListener("resize", this.onViewChanges.bind(this));
+    window.addEventListener("resize", this.onViewChanges);
 
     // Custom event triggered by some parent components when this component changes his visibility, e.g. triggered in the bs4-tabs component
-    this.el.addEventListener(
-      "visibility-changed" as any,
-      this.onVisibilityChanged.bind(this)
-    );
+    this.el.addEventListener("visibility-changed" as any, this.onVisibilityChanged);
 
-    this.slideshowInner.addEventListener("scroll", this.onScroll.bind(this), {
-      passive: true,
-    });
-    this.slideshowInner.addEventListener(
-      "scrollended",
-      this.onScrollend.bind(this),
-      { passive: true }
-    );
+    this.slideshowInner.addEventListener("scroll", this.onScroll, { passive: true });
+    this.slideshowInner.addEventListener("scrollended", this.onScrollend, { passive: true });
 
-    this.el.addEventListener("mouseenter", this.onMouseIn.bind(this), {
-      passive: true,
-    });
-    this.el.addEventListener("mouseover", this.onMouseIn.bind(this), {
-      passive: true,
-    });
-    this.el.addEventListener("focusin", this.onMouseIn.bind(this), {
-      passive: true,
-    });
-    this.el.addEventListener("touchstart", this.onMouseIn.bind(this), {
-      passive: true,
-    });
+    this.el.addEventListener("mouseenter", this.onMouseIn, { passive: true });
+    this.el.addEventListener("mouseover", this.onMouseIn, { passive: true });
+    this.el.addEventListener("focusin", this.onMouseIn, { passive: true });
+    this.el.addEventListener("touchstart", this.onMouseIn, { passive: true });
 
-    this.el.addEventListener("mouseout", this.onMouseOut.bind(this), {
-      passive: true,
-    });
-    this.el.addEventListener("mouseleave", this.onMouseOut.bind(this), {
-      passive: true,
-    });
-    this.el.addEventListener("focusout", this.onMouseOut.bind(this), {
-      passive: true,
-    });
+    this.el.addEventListener("mouseout", this.onMouseOut, { passive: true });
+    this.el.addEventListener("mouseleave", this.onMouseOut, { passive: true });
+    this.el.addEventListener("focusout", this.onMouseOut, { passive: true });
 
-    this.el.addEventListener("mouseup", this.onMouseUp.bind(this), {
-      passive: true,
-    });
-    this.el.addEventListener("touchend", this.onMouseUp.bind(this), {
-      passive: true,
-    });
-    this.el.addEventListener("scroll", this.onMouseUp.bind(this), {
-      passive: true,
-    });
-    this.el.addEventListener("scrollend", this.onMouseUp.bind(this), {
-      passive: true,
-    });
+    this.el.addEventListener("mouseup", this.onMouseUp, { passive: true });
+    this.el.addEventListener("touchend", this.onMouseUp, { passive: true });
+    this.el.addEventListener("scroll", this.onMouseUp, { passive: true });
+    this.el.addEventListener("scrollend", this.onMouseUp, { passive: true });
     // See ScrollEventsService for this event
-    this.el.addEventListener("scrollended", this.onMouseUp.bind(this), {
-      passive: true,
-    });
+    this.el.addEventListener("scrollended", this.onMouseUp, { passive: true });
 
     // inital
     this.onViewChanges();
@@ -829,28 +799,31 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   }
 
   protected removeEventListeners() {
-    // TODO is this removing other throttled resize event listeners?
-    window.removeEventListener("resize", this.onViewChanges.bind(this));
+    this.routerEvents.off("newPageReady", this.onBreakpointChanges, this);
 
-    this.el.removeEventListener(
-      "visibility-changed" as any,
-      this.onVisibilityChanged.bind(this)
-    );
+    window.removeEventListener("resize", this.onViewChanges);
 
-    this.slideshowInner.removeEventListener("scroll", this.onScroll.bind(this));
-    this.slideshowInner.removeEventListener(
-      "scrollended",
-      this.onScrollend.bind(this)
-    );
+    this.el.removeEventListener("visibility-changed" as any, this.onVisibilityChanged);
 
-    this.el.removeEventListener("mouseenter", this.onMouseIn.bind(this));
-    this.el.removeEventListener("mouseover", this.onMouseIn.bind(this));
-    this.el.removeEventListener("focusin", this.onMouseIn.bind(this));
-    this.el.removeEventListener("touchstart", this.onMouseIn.bind(this));
+    this.slideshowInner.removeEventListener("scroll", this.onScroll);
+    this.slideshowInner.removeEventListener( "scrollended", this.onScrollend);
 
-    this.el.removeEventListener("mouseout", this.onMouseOut.bind(this));
-    this.el.removeEventListener("mouseleave", this.onMouseOut.bind(this));
-    this.el.removeEventListener("focusout", this.onMouseOut.bind(this));
+    this.el.removeEventListener("mouseenter", this.onMouseIn);
+    this.el.removeEventListener("mouseover", this.onMouseIn);
+    this.el.removeEventListener("focusin", this.onMouseIn);
+    this.el.removeEventListener("touchstart", this.onMouseIn);
+
+    this.el.removeEventListener("mouseout", this.onMouseOut);
+    this.el.removeEventListener("mouseleave", this.onMouseOut);
+    this.el.removeEventListener("focusout", this.onMouseOut);
+
+    this.el.removeEventListener("mouseup", this.onMouseUp);
+    this.el.removeEventListener("touchend", this.onMouseUp);
+    this.el.removeEventListener("scroll", this.onMouseUp);
+    this.el.removeEventListener("scrollend", this.onMouseUp);
+    // See ScrollEventsService for this event
+    this.el.removeEventListener("scrollended", this.onMouseUp);
+
   }
 
   protected async beforeBind() {

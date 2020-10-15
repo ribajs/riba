@@ -30,6 +30,7 @@ export class LeafletMapComponent extends Component {
   protected markers: Marker[] = [];
   protected icons: { [key: string]: Leaflet.Icon } = {};
   private map?: Leaflet.Map;
+  private events: EventDispatcher = new EventDispatcher();
 
   static get observedAttributes() {
     return [
@@ -116,16 +117,18 @@ export class LeafletMapComponent extends Component {
   // deconstructor
   protected disconnectedCallback() {
     super.disconnectedCallback();
+    this.events.off("visibility-changed", this.onVisibilityChanged, this);
+  }
+
+  protected onVisibilityChanged() {
+    if (this.map) {
+      this.map.invalidateSize();
+      console.log("visiblity changed");
+    }
   }
 
   protected registerEventListener() {
-    const dispatcher = new EventDispatcher("main");
-    dispatcher.on("visibility-changed", () => {
-      if (this.map) {
-        this.map.invalidateSize();
-        console.log("visiblity changed");
-      }
-    });
+    this.events.on("visibility-changed", this.onVisibilityChanged, this);
   }
 
   protected convertStringToPointTuple(str: string): PointTuple | undefined {

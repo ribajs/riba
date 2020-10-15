@@ -78,11 +78,13 @@ export const toggleClassBinder: Binder<string> = {
     const self = (this.binder || this) as Bs4ToggleClass;
     self.toggleButtonEvents?.off(
       TOGGLE_BUTTON.eventNames.toggle,
-      self.onToggle.bind(this)
+      self.onToggle,
+      self
     );
     self.toggleButtonEvents?.off(
       TOGGLE_BUTTON.eventNames.init,
-      self.triggerState.bind(this)
+      self.triggerState,
+      self
     );
   },
 
@@ -93,11 +95,13 @@ export const toggleClassBinder: Binder<string> = {
     if (oldId && toggleButton) {
       toggleButton.off(
         TOGGLE_BUTTON.eventNames.toggle,
-        self.onToggle.bind(this)
+        self.onToggle,
+        this
       );
       toggleButton.off(
         TOGGLE_BUTTON.eventNames.init,
-        self.triggerState.bind(this)
+        self.triggerState,
+        this
       );
     }
 
@@ -108,11 +112,13 @@ export const toggleClassBinder: Binder<string> = {
       toggleButton = self.toggleButtonEvents as EventDispatcher;
       toggleButton.on(
         TOGGLE_BUTTON.eventNames.toggle,
-        self.onToggle.bind(this)
+        self.onToggle,
+        this
       );
       toggleButton.on(
         TOGGLE_BUTTON.eventNames.init,
-        self.triggerState.bind(this)
+        self.triggerState,
+        this
       );
     }
   },

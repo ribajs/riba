@@ -54,21 +54,29 @@ export class Bs4NotificationContainerComponent extends Component {
     }
   }
 
+  protected onShowNotification(notification: Notification) {
+    this.debug(
+      "Received notification container on " + this.scope.channelName,
+      this.scope,
+      notification
+    );
+    this.scope.notifications.push(notification);
+  }
+
   protected async afterBind() {
     super.afterBind();
     // Add event dispatcher to listen for toast notifications
     this.notificationDispatcher = new EventDispatcher(this.scope.channelName);
     this.notificationDispatcher.on(
       "show-notification",
-      (notification: Notification) => {
-        this.debug(
-          "Received notification container on " + this.scope.channelName,
-          this.scope,
-          notification
-        );
-        this.scope.notifications.push(notification);
-      }
+      this.onShowNotification,
+      this
     );
+  }
+
+  protected disconnectedCallback() {
+    super.disconnectedCallback();
+    (this.notificationDispatcher as EventDispatcher).off("show-notification", this.onShowNotification, this);
   }
 
   protected requiredAttributes() {

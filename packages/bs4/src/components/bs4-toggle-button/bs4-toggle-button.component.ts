@@ -92,18 +92,21 @@ export class Bs4ToggleButtonComponent extends Component {
     if (this.eventDispatcher) {
       this.eventDispatcher.off(
         TOGGLE_BUTTON.eventNames.toggled,
-        this.onToggledEvent
+        this.onToggledEvent,
+        this
       );
     }
     this.eventDispatcher = new EventDispatcher(TOGGLE_BUTTON.nsPrefix + id);
     this.eventDispatcher.on(
       TOGGLE_BUTTON.eventNames.toggled,
-      this.onToggledEvent.bind(this)
+      this.onToggledEvent,
+      this
     );
     // Triggered state triggered by `..trigger('init', ...`
     this.eventDispatcher.on(
       TOGGLE_BUTTON.eventNames.state,
-      this.onToggledEvent.bind(this)
+      this.onToggledEvent,
+      this
     );
   }
 
@@ -144,7 +147,8 @@ export class Bs4ToggleButtonComponent extends Component {
     if (this.eventDispatcher) {
       this.eventDispatcher.off(
         TOGGLE_BUTTON.eventNames.toggled,
-        this.onToggledEvent
+        this.onToggledEvent,
+        this
       );
     }
   }

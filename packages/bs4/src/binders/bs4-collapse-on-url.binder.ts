@@ -9,19 +9,29 @@ import { onRoute } from "@ribajs/utils/src/url";
  */
 export const collapseOnUrlBinder: Binder<string> = {
   name: "bs4-collapse-on-url",
+  bind(el: HTMLElement) {
+    this.customData = {
+      dispatcher: EventDispatcher.getInstance("main"),
+      collapseService: new CollapseService(el, [], { toggle: false }),
+    };
+  },
+  unbind() {
+    if (this.customData.checkURL) {
+      this.customData.dispatcher.on("newPageReady", this.customData.checkURL);
+    }
+  },
   routine(el: HTMLElement, url: string) {
-    const collapseService = new CollapseService(this.el, [], { toggle: false });
-    const dispatcher = new EventDispatcher("main");
-
-    const checkURL = (urlToCheck?: string) => {
-      if (urlToCheck && onRoute(urlToCheck)) {
-        collapseService.hide();
+    if (this.customData.checkURL) {
+      this.customData.dispatcher.on("newPageReady", this.customData.checkURL);
+    }
+    this.customData.checkURL = () => {
+      if (url && onRoute(url)) {
+        this.customData.collapseService.hide();
         return true;
       }
       // collapseService.show();
       return false;
     };
-
-    dispatcher.on("newPageReady", () => checkURL(url));
+    this.customData.dispatcher.on("newPageReady", this.customData.checkURL);
   },
 };

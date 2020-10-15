@@ -226,27 +226,48 @@ export class ShopifyCartItemComponent extends Component {
     // const cart = await ShopifyCartService.get();
   }
 
+  protected onCartRequestStart() {
+    this.scope.pending = true;
+  }
+
+  protected onCartRequestComplete(cart: ShopifyCartObject) {
+    this.debug("ShopifyCart:request:complete", cart);
+    this.onCartUpdate(cart);
+    this.scope.pending = false;
+    return cart;
+  }
+
   protected async afterBind() {
     this.debug("afterBind", this.scope);
     ShopifyCartService.shopifyCartEventDispatcher.on(
       "ShopifyCart:request:start",
-      () => {
-        this.scope.pending = true;
-      }
+      this.onCartRequestStart,
+      this
     );
 
     ShopifyCartService.shopifyCartEventDispatcher.on(
       "ShopifyCart:request:complete",
-      (cart: ShopifyCartObject) => {
-        this.debug("ShopifyCart:request:complete", cart);
-        this.onCartUpdate(cart);
-        this.scope.pending = false;
-        return cart;
-      }
+      this.onCartRequestComplete,
+      this
     );
 
     const cart = await ShopifyCartService.get();
     this.onCartUpdate(cart);
+  }
+
+  protected disconnectedCallback() {
+    super.disconnectedCallback();
+    ShopifyCartService.shopifyCartEventDispatcher.off(
+      "ShopifyCart:request:start",
+      this.onCartRequestStart,
+      this
+    );
+
+    ShopifyCartService.shopifyCartEventDispatcher.off(
+      "ShopifyCart:request:complete",
+      this.onCartRequestComplete,
+      this
+    );
   }
 
   protected template() {

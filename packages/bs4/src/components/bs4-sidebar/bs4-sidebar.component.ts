@@ -161,13 +161,15 @@ export class Bs4SidebarComponent extends Component {
     super.connectedCallback();
     this.init(Bs4SidebarComponent.observedAttributes);
     this.style = window.getComputedStyle(this.el);
+    // assign this to bound version, so we can remove window EventListener later without problem
+    this.onEnvironmentChanges = this.onEnvironmentChanges.bind(this);
     window.addEventListener(
       "resize",
-      this.onEnviromentChanges.bind(this),
+      this.onEnvironmentChanges,
       false
     );
     // inital
-    this.onEnviromentChanges();
+    this.onEnvironmentChanges();
   }
 
   protected onToggle() {
@@ -182,13 +184,13 @@ export class Bs4SidebarComponent extends Component {
     this.toggleButtonEvents = new EventDispatcher(
       "bs4-toggle-button:" + this.scope.id
     );
-    this.toggleButtonEvents.on("toggle", this.onToggle.bind(this));
-    this.toggleButtonEvents.on("init", this.triggerState.bind(this));
+    this.toggleButtonEvents.on("toggle", this.onToggle, this);
+    this.toggleButtonEvents.on("init", this.triggerState, this);
   }
 
   protected initRouterEventDispatcher() {
     if (this.scope.watchNewPageReadyEvent) {
-      this.routerEvents.on("newPageReady", this.onEnviromentChanges.bind(this));
+      this.routerEvents.on("newPageReady", this.onEnvironmentChanges, this);
     }
   }
 
@@ -273,7 +275,7 @@ export class Bs4SidebarComponent extends Component {
   /**
    * If vieport size changes, location url changes or something else
    */
-  protected onEnviromentChanges() {
+  protected onEnvironmentChanges() {
     this.setStateByEnviroment();
   }
 
@@ -354,12 +356,12 @@ export class Bs4SidebarComponent extends Component {
   protected async beforeBind() {
     await super.beforeBind();
     this.initRouterEventDispatcher();
-    return this.onEnviromentChanges();
+    return this.onEnvironmentChanges();
   }
 
   protected async afterBind() {
     await super.afterBind();
-    return this.onEnviromentChanges();
+    return this.onEnvironmentChanges();
   }
 
   protected requiredAttributes() {
@@ -392,10 +394,10 @@ export class Bs4SidebarComponent extends Component {
     this.toggleButtonEvents?.off("init", this.triggerState.bind(this));
     this.toggleButtonEvents?.off("toggle", this.onToggle.bind(this));
     this.toggleButtonEvents?.off("init", this.triggerState.bind(this));
-    this.routerEvents.off("newPageReady", this.onEnviromentChanges.bind(this));
+    this.routerEvents.off("newPageReady", this.onEnvironmentChanges, this);
     window.removeEventListener(
       "resize",
-      this.onEnviromentChanges.bind(this),
+      this.onEnvironmentChanges,
       false
     );
   }

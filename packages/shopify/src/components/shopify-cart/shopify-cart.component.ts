@@ -164,22 +164,43 @@ export class ShopifyCartComponent extends Component {
     return item;
   }
 
+  protected onCartRequestStart() {
+    this.scope.pending = true;
+  }
+
+  protected onCartRequestComplete(cart: ShopifyCartObject) {
+    if (cart) {
+      this.cart = cart;
+    }
+    this.scope.pending = false;
+  }
+
   protected async beforeBind() {
     ShopifyCartService.shopifyCartEventDispatcher.on(
       "ShopifyCart:request:start",
-      () => {
-        this.scope.pending = true;
-      }
+      this.onCartRequestStart,
+      this
     );
 
     ShopifyCartService.shopifyCartEventDispatcher.on(
       "ShopifyCart:request:complete",
-      (cart: ShopifyCartObject) => {
-        if (cart) {
-          this.cart = cart;
-        }
-        this.scope.pending = false;
-      }
+      this.onCartRequestComplete,
+      this
+    );
+  }
+
+  protected disconnectedCallback() {
+    super.disconnectedCallback()
+    ShopifyCartService.shopifyCartEventDispatcher.off(
+      "ShopifyCart:request:start",
+      this.onCartRequestStart,
+      this
+    );
+
+    ShopifyCartService.shopifyCartEventDispatcher.off(
+      "ShopifyCart:request:complete",
+      this.onCartRequestComplete,
+      this
     );
   }
 

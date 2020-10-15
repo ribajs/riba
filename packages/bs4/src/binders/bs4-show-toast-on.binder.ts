@@ -17,7 +17,9 @@ export const showToastOnEventBinder: Binder<Toast> = {
   bind(el: HTMLUnknownElement) {
     this.customData = {};
     const eventName = this.args[0] as string;
-    el.addEventListener(eventName, this.binder.onEvent.bind(this));
+    // assign onEvent to bound version so we can remove the DOM Element listener later without problems
+    this.binder.onEvent = this.binder.onEvent.bind(this);
+    el.addEventListener(eventName, this.binder.onEvent);
   },
   routine(el: HTMLUnknownElement, toastData: Toast) {
     if (this.args === null) {
@@ -27,6 +29,6 @@ export const showToastOnEventBinder: Binder<Toast> = {
   },
   unbind(el: HTMLElement) {
     const eventName = this.args[0] as string;
-    el.removeEventListener(eventName, this.binder.onEvent.bind(this));
+    el.removeEventListener(eventName, this.binder.onEvent);
   },
 };

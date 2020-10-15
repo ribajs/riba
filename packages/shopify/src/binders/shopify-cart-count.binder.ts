@@ -9,17 +9,31 @@ export const shopifyCartCountBinder: Binder<void> = {
   name: "shopify-cart-count",
 
   bind(el: HTMLElement) {
-    ShopifyCartService.shopifyCartEventDispatcher.on(
-      "ShopifyCart:request:complete",
-      (cart: ShopifyCartObject) => {
+    this.customData = {
+      onCartRequestComplete: (cart: ShopifyCartObject) => {
+        el.textContent = String(cart.item_count);
+      },
+      onCartRequestChanged: (cart: ShopifyCartObject) => {
         el.textContent = String(cart.item_count);
       }
+    }
+    ShopifyCartService.shopifyCartEventDispatcher.on(
+      "ShopifyCart:request:complete",
+      this.customData.onCartRequestComplete,
     );
     ShopifyCartService.shopifyCartEventDispatcher.on(
       "ShopifyCart:request:changed",
-      (cart: ShopifyCartObject) => {
-        el.textContent = String(cart.item_count);
-      }
+      this.customData.onCartRequestChanged,
+    );
+  },
+
+  unbind(el: HTMLElement) {
+    ShopifyCartService.shopifyCartEventDispatcher.off(
+      "ShopifyCart:request:complete",
+      this.customData.onCartRequestComplete,
+    );ShopifyCartService.shopifyCartEventDispatcher.off(
+      "ShopifyCart:request:changed",
+      this.customData.onCartRequestChanged,
     );
   },
 

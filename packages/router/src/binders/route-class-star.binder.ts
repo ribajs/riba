@@ -24,9 +24,12 @@ export const routeClassStarBinder: Binder<string> = {
         url = href;
       }
     }
-    const onUrlChange = (urlToCheck?: string) => {
-      if (urlToCheck) {
-        if (onRoute(urlToCheck)) {
+    if (this.customData.onUrlChange) {
+      this.customData.dispatcher.off("newPageReady", this.customData.onUrlChange);
+    }
+    this.customData.onUrlChange = () => {
+      if (url) {
+        if (onRoute(url)) {
           el.classList.add(className);
           // check if element is radio input
           if (el.getAttribute("type") === "radio") {
@@ -43,11 +46,14 @@ export const routeClassStarBinder: Binder<string> = {
       }
       return false;
     };
-    this.customData.dispatcher.on("newPageReady", () => onUrlChange(url));
-    onUrlChange(url);
+    this.customData.dispatcher.on("newPageReady", this.customData.onUrlChange);
+    this.customData.onUrlChange();
   },
 
   unbind(/*el: HTMLUnknownElement*/) {
     // console.warn('routeClassStarBinder routine', el);
+    if (this.customData.onUrlChange) {
+      this.customData.dispatcher.off("newPageReady", this.customData.onUrlChange);
+    }
   },
 };
