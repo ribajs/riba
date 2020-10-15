@@ -1931,9 +1931,6 @@ __metadata:
     resolve-url-loader: ^3.1.1
     sass-loader: ^10.0.3
     terser-webpack-plugin: ^5.0.0
-    webpack-dev-server: ^3.11.0
-  peerDependencies:
-    webpack: "*"
   languageName: node
   linkType: soft
 
@@ -4039,7 +4036,7 @@ __metadata:
     typescript: ^4.0.3
     webpack: ^5.1.1
     webpack-cli: ^4.0.0
-    webpack-dev-server: ^3.11.0
+    webpack-dev-server: "npm:3.11.0"
   languageName: unknown
   linkType: soft
 
@@ -15874,7 +15871,7 @@ typescript@^4.0.3:
   languageName: node
   linkType: hard
 
-"webpack-dev-server@npm:^3.11.0":
+"webpack-dev-server@npm:3.11.0":
   version: 3.11.0
   resolution: "webpack-dev-server@npm:3.11.0"
   dependencies:

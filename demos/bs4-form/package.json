@@ -74,6 +74,7 @@
     "bootstrap": "^4.5.2"
   },
   "resolutions": {
+    "webpack-dev-server": "3.11.0",
     "@ribajs/bs4": "portal:../../packages/bs4",
     "@ribajs/core": "portal:../../packages/core",
     "@ribajs/extras": "portal:../../packages/extras",
