@@ -17,12 +17,12 @@ export const collapseOnUrlBinder: Binder<string> = {
   },
   unbind() {
     if (this.customData.checkURL) {
-      this.customData.dispatcher.on("newPageReady", this.customData.checkURL);
+      this.customData.dispatcher.off("newPageReady", this.customData.checkURL);
     }
   },
   routine(el: HTMLElement, url: string) {
     if (this.customData.checkURL) {
-      this.customData.dispatcher.on("newPageReady", this.customData.checkURL);
+      this.customData.dispatcher.off("newPageReady", this.customData.checkURL);
     }
     this.customData.checkURL = () => {
       if (url && onRoute(url)) {
