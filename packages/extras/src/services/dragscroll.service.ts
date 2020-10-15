@@ -73,11 +73,13 @@ export class Dragscroll {
   }
 
   public checkDraggable() {
+    console.debug("checkDraggable");
     return throttle(() => {
       if (Utils.isScrollable(this.el)) {
         this.el.classList.add("draggable");
+      } else {
+        this.el.classList.remove("draggable");
       }
-      this.el.classList.remove("draggable");
     })();
   }
 
