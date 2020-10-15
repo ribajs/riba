@@ -5,6 +5,7 @@ import { PopoverOptions } from "@ribajs/bs4";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { TaggedImageTag as Tag } from "../../interfaces";
 import template from "./tagged-image.component.html";
+import { throttle, debounce } from "@ribajs/utils/src/control";
 
 interface Options {
   popoverOptions: Partial<PopoverOptions>;
@@ -50,6 +51,8 @@ export class TaggedImageComponent extends Component {
       "debug",
     ];
   }
+
+  image?: HTMLImageElement;
 
   constructor(element?: HTMLElement) {
     super(element);
@@ -170,21 +173,29 @@ export class TaggedImageComponent extends Component {
     }
   }
 
+  protected updateTagPositions() {
+    // window.getComputedStyle(img).getPropertyValue('object-position')
+    console.log("updateTagPositions");
+    const img = this.image as HTMLImageElement;
+    const widthRatio = img.naturalWidth / img.width;
+    const heightRatio = img.naturalHeight / img.height;
+    const { width, height, naturalWidth, naturalHeight } = img;
+    console.log([`width: ${width}`, `height: ${height}`, `naturalWidth: ${naturalWidth}`, `naturalHeight: ${naturalHeight}`, `widthRatio: ${widthRatio}`, `heightRatio: ${heightRatio}`].join('\n'));
+    for (const tag of this.scope.tags) {
+      if (widthRatio > heightRatio) {
+        tag.top = tag.y * 100 + "%";
+        tag.left = (widthRatio * (tag.x -0.5) + 0.5) * 100 + "%";
+      } else {
+        tag.left = tag.x * 100 + "%";
+        tag.top = (heightRatio * (tag.y - 0.5) + 0.5) * 100 + "%";
+      }
+    }
+  }
+
   protected initTags() {
+    console.log("initTags()");
     for (const [index, tag] of this.scope.tags.entries()) {
       tag.index = index;
-      tag.left = tag.x * 100 + "%";
-      tag.top = tag.y * 100 + "%";
-      /**
-       * This does not work, because TypeScript makes JavaScript impotent:
-      
-      for (const key: keyof Tag of ["color", "borderRadius", "smallSize", "fullSize", "shape"]) {
-        tag[key] = tag[key] || this.scope.options.tagOptions[key];
-      }
-
-       * @see https://github.com/microsoft/TypeScript/issues/32375 (works as intended)
-       *
-       */
       const scopeTagOptions = this.scope.options.tagOptions;
       tag.shape = tag.shape || scopeTagOptions.shape;
       tag.borderRadius = tag.borderRadius || scopeTagOptions.borderRadius;
@@ -219,8 +230,13 @@ export class TaggedImageComponent extends Component {
   }
 
   protected async beforeBind() {
-    await super.beforeBind();
+    this.image = this.el.querySelector("img") as HTMLImageElement;
+    this.image.addEventListener("load", () => {
+      this.updateTagPositions();
+    });
+    window.addEventListener("resize", debounce(() => this.updateTagPositions()));
     this.initTags();
+    await super.beforeBind();
   }
 
   protected async afterBind() {
