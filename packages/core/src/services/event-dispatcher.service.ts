@@ -70,7 +70,6 @@ export class EventDispatcher {
       this.events[eventName].push(cb);
     }
   }
-
   /**
    * Unbind event
    *
@@ -83,18 +82,19 @@ export class EventDispatcher {
       return;
     }
     if (cb !== undefined) {
-      for (let i = this.events[eventName].length - 1; i >= 0; i--) {
-        const curEvent = this.events[eventName][i] as BoundEventCallback;
-        if (curEvent.orgCb && curEvent.thisContext) {
-          if (typeof thisContext !== "undefined") {
-            if (curEvent.thisContext !== thisContext) {
-              continue;
-            }
+      if (thisContext !== undefined) {
+        for (let i = this.events[eventName].length - 1; i >= 0; i--) {
+          const curEvent = this.events[eventName][i] as BoundEventCallback;
+          if (curEvent.orgCb === cb && curEvent.thisContext === thisContext) {
+            this.events[eventName].splice(i, 1);
           }
-          if (curEvent.orgCb !== cb) {
-            continue;
+        }
+      } else {
+        for (let i = this.events[eventName].length - 1; i >= 0; i--) {
+          const curEvent = this.events[eventName][i] as EventCallback;
+          if (curEvent === cb) {
+            this.events[eventName].splice(i, 1);
           }
-          this.events[eventName].splice(i, 1);
         }
       }
     } else {
