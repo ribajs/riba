@@ -1,0 +1,3 @@
+undecided:
+  - "@ribajs/eslint-config"
+  - "@ribajs/tsconfig"
