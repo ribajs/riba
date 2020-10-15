@@ -73,11 +73,15 @@ export class EventDispatcher {
   /**
    * Unbind event
    *
-   * @param eventName Name of the event
+   * @param eventName optional, Name of the event; if name not supplied all event listeners for all events will be removed
    * @param cb optional, if a callback is supplied, only event listeners using the supplied callback function will be removed
    * @param thisContext optional, if a callback is supplied, only event listeners using the supplied thisContext will be removed
    */
-  public off(eventName: string, cb?: EventCallback, thisContext?: any) {
+  public off(eventName?: string, cb?: EventCallback, thisContext?: any) {
+    if (eventName === undefined) {
+      this.events = {};
+      return;
+    }
     if (eventName in this.events === false) {
       return;
     }
