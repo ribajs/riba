@@ -35,15 +35,15 @@
     "/dist"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.11.6",
-    "@babel/core": "^7.11.6",
+    "@babel/cli": "^7.12.0",
+    "@babel/core": "^7.12.0",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/plugin-proposal-export-default-from": "^7.10.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/preset-env": "^7.11.5",
-    "@babel/preset-typescript": "^7.10.4",
-    "@babel/runtime-corejs3": "^7.11.2",
+    "@babel/preset-env": "^7.12.0",
+    "@babel/preset-typescript": "^7.12.0",
+    "@babel/runtime-corejs3": "^7.12.0",
     "@ribajs/eslint-config": "workspace:infra/eslint-config",
     "@ribajs/tsconfig": "workspace:infra/tsconfig",
     "@tsconfig/node14": "^1.0.0",
@@ -64,22 +64,22 @@
     "gulp": "^4.0.2",
     "gulp-yaml-merge": "^2.0.0",
     "hex-color-regex": "^1.1.0",
-    "jest": "^26.4.2",
+    "jest": "^26.5.3",
     "jest-extended": "^0.11.5",
     "js-yaml": "^3.14.0",
     "prettier": "^2.1.2",
     "rgb-regex": "^1.0.1",
     "ts-jest": "^26.4.1",
     "typescript": "^4.0.3",
-    "webpack": "^5.0.0-beta.22",
-    "webpack-cli": "^3.3.12"
+    "webpack": "^5.1.2",
+    "webpack-cli": "^4.0.0"
   },
   "dependencies": {
     "@ribajs/bs4": "workspace:packages/bs4",
     "@ribajs/core": "workspace:packages/core",
     "@ribajs/jquery": "workspace:packages/jquery",
     "@ribajs/utils": "workspace:packages/utils",
-    "@yarnpkg/pnpify": "^2.3.2"
+    "@yarnpkg/pnpify": "^2.3.3"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

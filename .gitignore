@@ -57,12 +57,14 @@ lerna-debug.log*
 !/infra/*/.yarn/sdks
 !/infra/*/.yarn/versions
 
+/demos/*/.yarn/*
+!/demos/*/.yarn/releases
+!/demos/*/.yarn/plugins
+!/demos/*/.yarn/sdks
+!/demos/*/.yarn/versions
+
 # Demos
 /demos/*/src/iconset/
 /demos/*/.cache/
 /demos/*/src/scss/vendors/
 /demos/*/src/images/vendors/
-/demos/*/.yarn/*
-/demos/*/.pnp.*
-!/demos/*/.yarn/releases/
-!/demos/*/.yarn/plugins/

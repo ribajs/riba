@@ -34,8 +34,6 @@
 .leaflet-tile,
 .leaflet-marker-icon,
 .leaflet-marker-shadow {
-  -webkit-user-select: none;
-  -moz-user-select: none;
   user-select: none;
   -webkit-user-drag: none;
 }
@@ -56,7 +54,7 @@
   .leaflet-tile-container {
     width: 1600px;
     height: 1600px;
-    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
   }
 }
 
@@ -82,19 +80,15 @@
   }
 
   &.leaflet-touch-zoom {
-    -ms-touch-action: pan-x pan-y;
     touch-action: pan-x pan-y;
   }
 
   &.leaflet-touch-drag {
-    -ms-touch-action: pinch-zoom;
-
     /* Fallback for FF which doesn't support pinch-zoom */
     touch-action: none;
     touch-action: pinch-zoom;
 
     &.leaflet-touch-zoom {
-      -ms-touch-action: none;
       touch-action: none;
     }
   }
@@ -118,7 +112,6 @@
 .leaflet-zoom-box {
   width: 0;
   height: 0;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
   z-index: 800;
 }
@@ -126,7 +119,7 @@
 /* workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=888319 */
 
 .leaflet-overlay-pane svg {
-  -moz-user-select: none;
+  user-select: none;
 }
 
 .leaflet-pane {
@@ -246,8 +239,6 @@
 
   .leaflet-popup {
     opacity: 0;
-    -webkit-transition: opacity 0.2s linear;
-    -moz-transition: opacity 0.2s linear;
     transition: opacity 0.2s linear;
   }
 
@@ -257,29 +248,21 @@
 }
 
 .leaflet-zoom-animated {
-  -webkit-transform-origin: 0 0;
-  -ms-transform-origin: 0 0;
   transform-origin: 0 0;
 }
 
 .leaflet-zoom-anim {
   .leaflet-zoom-animated {
     will-change: transform;
-    -webkit-transition: -webkit-transform 0.25s cubic-bezier(0, 0, 0.25, 1);
-    -moz-transition: -moz-transform 0.25s cubic-bezier(0, 0, 0.25, 1);
     transition: transform 0.25s cubic-bezier(0, 0, 0.25, 1);
   }
 
   .leaflet-tile {
-    -webkit-transition: none;
-    -moz-transition: none;
     transition: none;
   }
 }
 
 .leaflet-pan-anim .leaflet-tile {
-  -webkit-transition: none;
-  -moz-transition: none;
   transition: none;
 }
 
@@ -294,8 +277,6 @@
 }
 
 .leaflet-grab {
-  cursor: -webkit-grab;
-  cursor: -moz-grab;
   cursor: grab;
 }
 
@@ -315,22 +296,16 @@
 .leaflet-dragging {
   .leaflet-grab {
     cursor: move;
-    cursor: -webkit-grabbing;
-    cursor: -moz-grabbing;
     cursor: grabbing;
 
     .leaflet-interactive {
       cursor: move;
-      cursor: -webkit-grabbing;
-      cursor: -moz-grabbing;
       cursor: grabbing;
     }
   }
 
   .leaflet-marker-draggable {
     cursor: move;
-    cursor: -webkit-grabbing;
-    cursor: -moz-grabbing;
     cursor: grabbing;
   }
 }
@@ -485,13 +460,15 @@ svg.leaflet-image-layer.leaflet-interactive path {
 }
 
 .leaflet-control-layers-toggle {
-  background-image: url("~leaflet/dist/images/layers.png");
+  // FIXME
+  // background-image: url("~leaflet/dist/images/layers.png");
   width: 36px;
   height: 36px;
 }
 
 .leaflet-retina .leaflet-control-layers-toggle {
-  background-image: url("~leaflet/dist/images/layers-2x.png");
+  // FIXME
+  // background-image: url("~leaflet/dist/images/layers-2x.png");
   background-size: 26px 26px;
 }
 
@@ -737,9 +714,6 @@ svg.leaflet-image-layer.leaflet-interactive path {
   border-radius: 3px;
   color: #222;
   white-space: nowrap;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   pointer-events: none;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
