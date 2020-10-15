@@ -4,11 +4,9 @@ import { RibaModule } from "@ribajs/core";
 import * as services from "./services";
 // import * as components from './components';
 
-const shopifyTDAModule = <RibaModule>{
+export const shopifyTDAModule = <RibaModule>{
   binders: {},
   services,
   formatters: {},
   components: {},
 };
-
-export { shopifyTDAModule };

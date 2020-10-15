@@ -4,11 +4,9 @@ import * as formatters from "./formatters";
 import * as services from "./services";
 import * as components from "./components";
 
-const photoswipeModule: RibaModule = {
+export const photoswipeModule: RibaModule = {
   formatters,
   binders,
   services,
   components,
 };
-
-export { photoswipeModule };

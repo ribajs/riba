@@ -5,14 +5,10 @@ import * as services from "./services";
 import * as components from "./components";
 import * as adapters from "./adapters";
 
-const coreModule: RibaModule = {
+export const coreModule: RibaModule = {
   formatters,
   binders,
   services,
   components,
   adapters,
 };
-
-(window as any).coreModule = coreModule;
-
-export { coreModule };

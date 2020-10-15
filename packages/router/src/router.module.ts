@@ -3,11 +3,9 @@ import * as binders from "./binders";
 import * as components from "./components";
 import * as services from "./services";
 
-const routerModule = {
+export const routerModule = {
   binders,
   components,
   services,
   formatters: {},
 } as RibaModule;
-
-export { routerModule };
