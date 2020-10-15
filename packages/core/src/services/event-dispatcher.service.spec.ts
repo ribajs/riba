@@ -74,7 +74,7 @@ describe("riba.core", () => {
     });
 
 
-    it("All event listeners for a given event name and handler should only be removed if only the event name is supplied to 'off()'", () => {
+    it("All event listeners for a given event name should only be removed if only the event name is supplied to 'off()'", () => {
       let value: any = 1;
       const thisContext = { value: 7452 };
       const thatContext = { value: 666 };
@@ -96,7 +96,7 @@ describe("riba.core", () => {
       expect(value).toBe(1);
     });
     
-    it("All event listeners for all events should be removed no arguments are supplied to 'off()'", () => {
+    it("All event listeners for all events should be removed if no arguments are supplied to 'off()'", () => {
       let value1: any = 1;
       let value2: any = 2;
       let value3: any = 3;
