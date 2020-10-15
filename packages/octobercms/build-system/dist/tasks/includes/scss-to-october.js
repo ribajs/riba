@@ -18,13 +18,16 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.scssToOctoberYml = void 0;
 const Stream = __importStar(require("stream"));
 const Path = __importStar(require("path"));
 const yaml = __importStar(require("js-yaml"));
 require("../../types/index");
-const rgbRegex = __importStar(require("rgb-regex"));
+const rgb_regex_1 = __importDefault(require("rgb-regex"));
 const hexRegex = require("hex-color-regex");
 function scssToOctoberYml() {
     const stream = new Stream.Transform({ objectMode: true });
@@ -109,5 +112,5 @@ function looseJsonParse(obj) {
     return Function('"use strict";return (' + obj + ")")(); //@reviewer, don't use Function? alternative would be JSON.parse()
 }
 function isColor(strColor) {
-    return (rgbRegex({ exact: true }).test(strColor) || hexRegex({}).test(strColor));
+    return (rgb_regex_1.default({ exact: true }).test(strColor) || hexRegex({}).test(strColor));
 }
