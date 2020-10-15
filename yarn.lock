@@ -1740,7 +1740,7 @@ __metadata:
     prettier: ^2.1.2
     ts-jest: ^26.4.1
     typescript: ^4.0.3
-    webpack: ^5.1.1
+    webpack: ^5.1.2
     webpack-cli: ^4.0.0
   languageName: node
   linkType: soft
@@ -1901,7 +1901,7 @@ __metadata:
     ts-jest: ^26.4.1
     typescript: ^4.0.3
     uglifyjs-webpack-plugin: ^2.2.0
-    webpack: ^5.1.1
+    webpack: ^5.1.2
     webpack-cli: ^4.0.0
     webpack-glob-entry: ^2.1.1
   languageName: node
@@ -2011,7 +2011,7 @@ __metadata:
     prettier: ^2.1.2
     ts-jest: ^26.4.1
     typescript: ^4.0.3
-    webpack: ^5.1.1
+    webpack: ^5.1.2
     webpack-cli: ^4.0.0
   languageName: node
   linkType: soft
@@ -2104,7 +2104,7 @@ __metadata:
     eslint-plugin-prettier: ^3.1.4
     prettier: ^2.1.2
     typescript: ^4.0.3
-    webpack: ^5.1.1
+    webpack: ^5.1.2
     webpack-cli: ^4.0.0
   languageName: node
   linkType: soft
@@ -2190,7 +2190,7 @@ __metadata:
     prettier: ^2.1.2
     ts-jest: ^26.4.1
     typescript: ^4.0.3
-    webpack: ^5.1.1
+    webpack: ^5.1.2
     webpack-cli: ^4.0.0
   languageName: node
   linkType: soft
@@ -2475,7 +2475,7 @@ __metadata:
     regexpp: ^3.1.0
     tsutils: ^3.17.1
     typescript: ^4.0.3
-    webpack: ^5.1.1
+    webpack: ^5.1.2
     webpack-cli: ^4.0.0
   languageName: node
   linkType: soft
@@ -2616,7 +2616,7 @@ __metadata:
     prettier: ^2.1.2
     ts-jest: ^26.4.1
     typescript: ^4.0.3
-    webpack: ^5.1.1
+    webpack: ^5.1.2
     webpack-cli: ^4.0.0
   languageName: node
   linkType: soft
@@ -14079,6 +14079,7 @@ fsevents@^1.2.7:
     "@babel/preset-typescript": ^7.12.0
     "@babel/runtime": ^7.12.0
     "@babel/runtime-corejs3": ^7.12.0
+    "@babel/types": ^7.12.0
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/types": "workspace:infra/types"
@@ -16562,45 +16563,6 @@ typescript@^4.0.3:
     source-list-map: ^2.0.1
     source-map: ^0.6.1
   checksum: fde296d7e3603afab2d832dec6b0d76ad4dcf2f2b9b0a06da92bdde7004cf62fad685cdda84a57abe5c97f975b529cc9a35e7a419c2c9b56074bcbdcad15036a
-  languageName: node
-  linkType: hard
-
-"webpack@npm:^5.1.1":
-  version: 5.1.1
-  resolution: "webpack@npm:5.1.1"
-  dependencies:
-    "@types/eslint-scope": ^3.7.0
-    "@types/estree": ^0.0.45
-    "@webassemblyjs/ast": 1.9.0
-    "@webassemblyjs/helper-module-context": 1.9.0
-    "@webassemblyjs/wasm-edit": 1.9.0
-    "@webassemblyjs/wasm-parser": 1.9.0
-    acorn: ^8.0.3
-    browserslist: ^4.14.3
-    chrome-trace-event: ^1.0.2
-    enhanced-resolve: ^5.2.0
-    eslint-scope: ^5.1.0
-    events: ^3.2.0
-    glob-to-regexp: ^0.4.1
-    graceful-fs: ^4.2.4
-    json-parse-better-errors: ^1.0.2
-    loader-runner: ^4.1.0
-    mime-types: ^2.1.27
-    neo-async: ^2.6.2
-    pkg-dir: ^4.2.0
-    schema-utils: ^3.0.0
-    tapable: ^2.0.0
-    terser-webpack-plugin: ^5.0.0
-    watchpack: ^2.0.0
-    webpack-sources: ^2.0.1
-  peerDependencies:
-    webpack-cli: "*"
-  peerDependenciesMeta:
-    webpack-cli:
-      optional: true
-  bin:
-    webpack: ./bin/webpack.js
-  checksum: 3c1b02fd990496be7e497b19399d2ba1ecbf7317709225d099dc3fde3cbac57c12946464c89fdb5c78656d03623405daedd4cf7aba49b6a53cc9c93aa0600710
   languageName: node
   linkType: hard
 
