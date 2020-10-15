@@ -2237,7 +2237,7 @@ __metadata:
     "@types/jest": ^26.0.14
     "@typescript-eslint/eslint-plugin": ^4.4.1
     "@typescript-eslint/parser": ^4.4.1
-    "@yarnpkg/pnpify": ^2.3.2
+    "@yarnpkg/pnpify": ^2.3.3
     babel-jest: ^26.5.2
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
@@ -2252,7 +2252,7 @@ __metadata:
     prettier: ^2.1.2
     ts-jest: ^26.4.1
     typescript: ^4.0.3
-    webpack: ^5.1.1
+    webpack: ^5.1.2
     webpack-cli: ^4.0.0
   languageName: node
   linkType: soft
@@ -2311,7 +2311,7 @@ __metadata:
     ts-jest: ^26.4.1
     typescript: ^4.0.3
     uglifyjs-webpack-plugin: ^2.2.0
-    webpack: ^5.1.1
+    webpack: ^5.1.2
     webpack-cli: ^4.0.0
     webpack-glob-entry: ^2.1.1
   languageName: node
@@ -2363,7 +2363,7 @@ __metadata:
     prettier: ^2.1.2
     ts-jest: ^26.4.1
     typescript: ^4.0.3
-    webpack: ^5.1.1
+    webpack: ^5.1.2
     webpack-cli: ^4.0.0
   languageName: node
   linkType: soft
@@ -2417,7 +2417,7 @@ __metadata:
   resolution: "@ribajs/webpack-config@portal:../../infra/webpack-config::locator=bs4-slideshow%40workspace%3A."
   dependencies:
     "@babel/core": ^7.12.0
-    "@yarnpkg/pnpify": ^2.3.2
+    "@yarnpkg/pnpify": ^2.3.3
     babel-loader: ^8.1.0
     copy-webpack-plugin: ^6.2.1
     css-loader: ^5.0.0
@@ -3426,7 +3426,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/pnpify@npm:^2.3.2, @yarnpkg/pnpify@npm:^2.3.3":
+"@yarnpkg/pnpify@npm:^2.3.3":
   version: 2.3.3
   resolution: "@yarnpkg/pnpify@npm:2.3.3"
   dependencies:
@@ -4671,7 +4671,7 @@ __metadata:
     "@typescript-eslint/experimental-utils": ^4.4.1
     "@typescript-eslint/parser": ^4.4.1
     "@yarnpkg/plugin-node-modules": ^2.2.2
-    "@yarnpkg/pnpify": ^2.3.2
+    "@yarnpkg/pnpify": ^2.3.3
     babel-jest: ^26.5.2
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
@@ -4695,7 +4695,7 @@ __metadata:
     pug-loader: ^2.4.0
     sass-loader: ^10.0.3
     typescript: ^4.0.3
-    webpack: ^5.1.1
+    webpack: ^5.1.2
     webpack-cli: ^4.0.0
     webpack-dev-server: ^3.11.0
   languageName: unknown
@@ -17093,9 +17093,9 @@ typescript@^4.0.3:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.1.1":
-  version: 5.1.1
-  resolution: "webpack@npm:5.1.1"
+"webpack@npm:^5.1.2":
+  version: 5.1.2
+  resolution: "webpack@npm:5.1.2"
   dependencies:
     "@types/eslint-scope": ^3.7.0
     "@types/estree": ^0.0.45
@@ -17121,14 +17121,12 @@ typescript@^4.0.3:
     terser-webpack-plugin: ^5.0.0
     watchpack: ^2.0.0
     webpack-sources: ^2.0.1
-  peerDependencies:
-    webpack-cli: "*"
   peerDependenciesMeta:
     webpack-cli:
       optional: true
   bin:
     webpack: ./bin/webpack.js
-  checksum: 3c1b02fd990496be7e497b19399d2ba1ecbf7317709225d099dc3fde3cbac57c12946464c89fdb5c78656d03623405daedd4cf7aba49b6a53cc9c93aa0600710
+  checksum: 4d7d7a2511df2892db3010b0cb74f869d05acd7920ea90b391d19bf7fceeb75451dc345005b48c20bedf7c0370396066a10e7895447d76eb60190d848cb8b743
   languageName: node
   linkType: hard
 

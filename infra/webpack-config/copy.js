@@ -90,18 +90,19 @@ const getCopyPluginConfig = (config) => {
   var patterns = [];
 
   const copyRibaScssModules = [
-    "@ribajs/core",
     "@ribajs/bs4",
-    "@ribajs/photoswipe",
+    "@ribajs/content-slider",
+    "@ribajs/core",
     "@ribajs/i18n",
-    "@ribajs/shopify",
-    "@ribajs/shopify-tda",
-    "@ribajs/shopify-easdk",
     "@ribajs/leaflet-map",
     "@ribajs/moment",
-    "@ribajs/tagged-image",
+    "@ribajs/octobercms",
     "@ribajs/pdf",
-    "@ribajs/content-slider",
+    "@ribajs/photoswipe",
+    "@ribajs/shopify",
+    "@ribajs/shopify-easdk",
+    "@ribajs/shopify-tda",
+    "@ribajs/tagged-image",
   ];
 
   if (config.copyAssets.scss) {
