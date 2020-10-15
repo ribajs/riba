@@ -22,7 +22,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const gulp_1 = require("gulp");
 const scss_to_october_1 = require("./includes/scss-to-october");
 const merge_october_yaml_1 = require("./includes/merge-october-yaml");
-require("../types/gulp-yaml-merge/index");
+require("../types/index");
 const yamlMerge = __importStar(require("gulp-yaml-merge"));
 gulp_1.task("build-yml", function buildExampleYmlFromScss() {
     return gulp_1.src("./assets/**/*.scss")

@@ -23,7 +23,7 @@ exports.scssToOctoberYml = void 0;
 const Stream = __importStar(require("stream"));
 const Path = __importStar(require("path"));
 const yaml = __importStar(require("js-yaml"));
-require("../../types/rgb-regex/index");
+require("../types/index");
 const rgbRegex = __importStar(require("rgb-regex"));
 const hexRegex = require("hex-color-regex");
 function scssToOctoberYml() {

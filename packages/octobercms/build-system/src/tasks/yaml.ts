@@ -1,7 +1,7 @@
 import { src, dest, series, task } from "gulp";
 import { scssToOctoberYml } from "./includes/scss-to-october";
 import { mergeOctoberFormFields } from "./includes/merge-october-yaml";
-import "../types/gulp-yaml-merge/index";
+import "../types/index";
 import * as yamlMerge from "gulp-yaml-merge";
 
 task("build-yml", function buildExampleYmlFromScss() {
