@@ -9,16 +9,16 @@ describe("riba.core", () => {
       eventDispatcher = new EventDispatcher();
     });
 
-    it("The event dispatcher should call a simple function on all event listeners if trigger function is called", (done) => {
+    it("The event dispatcher should call a simple function on all event listeners if trigger function is called", () => {
       let listener1 = jest.fn();
       let listener2 = jest.fn();
       let listener3 = jest.fn();
-      eventDispatcher.on("test1", () => listener1);
-      eventDispatcher.on("test2", () => listener1);
-      eventDispatcher.on("test2", () => listener2);
-      eventDispatcher.on("test3", () => listener1);
-      eventDispatcher.on("test3", () => listener2);
-      eventDispatcher.on("test3", () => listener3);
+      eventDispatcher.on("test1", listener1);
+      eventDispatcher.on("test2", listener1);
+      eventDispatcher.on("test2", listener2);
+      eventDispatcher.on("test3", listener1);
+      eventDispatcher.on("test3", listener2);
+      eventDispatcher.on("test3", listener3);
       eventDispatcher.trigger("test1");
       eventDispatcher.trigger("test2");
       eventDispatcher.trigger("test3");
@@ -51,22 +51,26 @@ describe("riba.core", () => {
     it("The event listener should only be removed according to supplied arguments", () => {
       let value: any = 1;
       let thisContext = { value: 7452 }
-      let testFunction = function(this: {value: number}) {
-        value = this.value;
+      const obj = {
+        value: 42,
+        testFunction: function(this: {value: number}) {
+          value = this.value;
+        }
       };
-      eventDispatcher.on("test1", testFunction, thisContext);
-      eventDispatcher.off("test1", testFunction, { number: 7452})
+      eventDispatcher.on("test1", obj.testFunction, thisContext);
+      eventDispatcher.off("test1", obj.testFunction, { number: 7452})
       eventDispatcher.trigger("test1");
       expect(value).toBe(7452); //test if testFunction is still active
       
       value = undefined;
-      eventDispatcher.off("test1", testFunction, thisContext);
+      eventDispatcher.off("test1", obj.testFunction, thisContext);
       expect(value).toBe(undefined); //test if testFunction is removed
 
-      eventDispatcher.on("test1", testFunction, thisContext);
-      eventDispatcher.off("test1", testFunction)
+      eventDispatcher.on("test1", obj.testFunction, thisContext);
+      eventDispatcher.on("test1", obj.testFunction, obj);
+      eventDispatcher.off("test1", obj.testFunction, thisContext);
       eventDispatcher.trigger("test1");
-      expect(value).toBe(undefined); //test if testFunction is removed
+      expect(value).toBe(42); //test if testFunction is removed
     });
 
 
