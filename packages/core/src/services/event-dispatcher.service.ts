@@ -16,9 +16,7 @@ export class EventDispatcher {
   public static getInstance(namespace: string) {
     const result = EventDispatcher.instances[namespace];
     if (!result) {
-      throw new Error(
-        `No EventDispatcher instance with namespace ${namespace} found!`
-      );
+      return new this(namespace);
     }
     return result;
   }
@@ -31,20 +29,25 @@ export class EventDispatcher {
    */
   private events: Events = {};
 
-  private namespace: string;
+  private _namespace: string;
+
+  public get namespace(): string {
+    return this._namespace || "anonymous";
+  }
 
   /**
    * Creates an singleton instance of Dispatcher.
    */
-  constructor(namespace = "main") {
-    this.namespace = namespace;
-
-    if (EventDispatcher.instances[this.namespace]) {
-      return EventDispatcher.instances[this.namespace];
+  constructor(namespace?: string) {
+    if (namespace) {
+      if (EventDispatcher.instances[namespace]) {
+        return EventDispatcher.instances[namespace];
+      }
+      this._namespace = namespace;
+      EventDispatcher.instances[namespace] = this;
+      return EventDispatcher.instances[namespace];
+      this._namespace = namespace;
     }
-
-    EventDispatcher.instances[this.namespace] = this;
-    return EventDispatcher.instances[this.namespace];
   }
 
   /**
