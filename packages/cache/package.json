@@ -35,7 +35,8 @@
   "scripts": {
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
     "build": "npm run lint && npm run build:module",
-    "build:module": "tsc"
+    "build:module": "tsc",
+    "clean": "rm -rf ./dist ./lib"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

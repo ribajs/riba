@@ -6,8 +6,8 @@
   "contributors": [],
   "url": "https://github.com/ribajs/riba/tree/master/packages/iconset",
   "homepage": "https://ribajs.com/",
-  "main": "dest/svg.json",
-  "module": "dest/svg.json",
+  "main": "dist/svg.json",
+  "module": "dist/svg.json",
   "license": "MIT",
   "licenses": [
     {
@@ -43,7 +43,8 @@
     "build:png:64": "gulp build:png:64",
     "build:png:128": "gulp build:png:128",
     "build:png:256": "gulp build:png:256",
-    "clean:svg": "gulp clean:svg"
+    "clean:svg": "gulp clean:svg",
+    "clean": "echo 'Do not clean the iconset by default because we want to hold the build image files in the repo'"
   },
   "devDependencies": {
     "@babel/runtime-corejs3": "^7.11.2",

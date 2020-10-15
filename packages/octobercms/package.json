@@ -26,7 +26,8 @@
     "build": "npm run lint && npm run build:module && npm run build:build-system",
     "build:build-system": "tsc --project tsconfig.build-system.json",
     "build:module": "tsc",
-    "packages:npm:link": "npm link @ribajs/core"
+    "packages:npm:link": "npm link @ribajs/core",
+    "clean": "rm -rf ./dist ./lib"
   },
   "devDependencies": {
     "@babel/cli": "^7.11.6",

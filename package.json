@@ -36,6 +36,7 @@
     "test:watch": "jest --config=jest.config.js --watch",
     "lint": "yarn workspaces foreach run lint",
     "build": "yarn workspaces foreach run build",
+    "clean": "yarn workspaces foreach run clean",
     "packages:bump": "node tools/cli.js bump",
     "packages:publish": "node tools/cli.js publish",
     "packages:upgrade": "yarn upgrade-interactive && yarn run packages:install",

@@ -8,7 +8,7 @@ const filelist = require("gulp-filelist");
 const svgSource = "src/svg/*.svg";
 
 gulp.task("clean:svg", () => {
-  return gulp.src("./dest/svg/*").pipe(clean());
+  return gulp.src("./dist/svg/*").pipe(clean());
 });
 
 gulp.task("build:svg", () => {
@@ -16,21 +16,21 @@ gulp.task("build:svg", () => {
     .src(svgSource)
     .pipe(debug())
     .pipe(svg())
-    .pipe(gulp.dest("./dest/svg"));
+    .pipe(gulp.dest("./dist/svg"));
 });
 
 gulp.task("build:filelist:svg", () => {
   return gulp
     .src(svgSource)
     .pipe(filelist("svg.json", { flatten: true, removeExtensions: true }))
-    .pipe(gulp.dest("dest"));
+    .pipe(gulp.dest("dist"));
 });
 
 gulp.task("build:filelist:png", () => {
   return gulp
-    .src("dest/png/*.png")
+    .src("dist/png/*.png")
     .pipe(filelist("png.json", { flatten: true, removeExtensions: true }))
-    .pipe(gulp.dest("dest"));
+    .pipe(gulp.dest("dist"));
 });
 
 gulp.task(
@@ -45,7 +45,7 @@ gulp.task("build:png:8", () => {
     .pipe(exec("echo <%= file.basename %>"))
     .pipe(
       exec(
-        'mkdir -p dest/png && inkscape -z -e dest/png/<%= file.basename.replace(".svg", "")  %>_<%= options.size %>.png -w <%= options.size %> -h <%= options.size %> <%= file.path %>',
+        'mkdir -p dist/png && inkscape -z -e dist/png/<%= file.basename.replace(".svg", "")  %>_<%= options.size %>.png -w <%= options.size %> -h <%= options.size %> <%= file.path %>',
         options
       )
     )
@@ -59,7 +59,7 @@ gulp.task("build:png:16", () => {
     .pipe(exec("echo <%= file.basename %>"))
     .pipe(
       exec(
-        'mkdir -p dest/png && inkscape -z -e dest/png/<%= file.basename.replace(".svg", "")  %>_<%= options.size %>.png -w <%= options.size %> -h <%= options.size %> <%= file.path %>',
+        'mkdir -p dist/png && inkscape -z -e dist/png/<%= file.basename.replace(".svg", "")  %>_<%= options.size %>.png -w <%= options.size %> -h <%= options.size %> <%= file.path %>',
         options
       )
     )
@@ -73,7 +73,7 @@ gulp.task("build:png:32", () => {
     .pipe(exec("echo <%= file.basename %>"))
     .pipe(
       exec(
-        'mkdir -p dest/png && inkscape -z -e dest/png/<%= file.basename.replace(".svg", "")  %>_<%= options.size %>.png -w <%= options.size %> -h <%= options.size %> <%= file.path %>',
+        'mkdir -p dist/png && inkscape -z -e dist/png/<%= file.basename.replace(".svg", "")  %>_<%= options.size %>.png -w <%= options.size %> -h <%= options.size %> <%= file.path %>',
         options
       )
     )
@@ -87,7 +87,7 @@ gulp.task("build:png:64", () => {
     .pipe(exec("echo <%= file.basename %>"))
     .pipe(
       exec(
-        'mkdir -p dest/png && inkscape -z -e dest/png/<%= file.basename.replace(".svg", "")  %>_<%= options.size %>.png -w <%= options.size %> -h <%= options.size %> <%= file.path %>',
+        'mkdir -p dist/png && inkscape -z -e dist/png/<%= file.basename.replace(".svg", "")  %>_<%= options.size %>.png -w <%= options.size %> -h <%= options.size %> <%= file.path %>',
         options
       )
     )
@@ -101,7 +101,7 @@ gulp.task("build:png:128", () => {
     .pipe(exec("echo <%= file.basename %>"))
     .pipe(
       exec(
-        'mkdir -p dest/png && inkscape -z -e dest/png/<%= file.basename.replace(".svg", "")  %>_<%= options.size %>.png -w <%= options.size %> -h <%= options.size %> <%= file.path %>',
+        'mkdir -p dist/png && inkscape -z -e dist/png/<%= file.basename.replace(".svg", "")  %>_<%= options.size %>.png -w <%= options.size %> -h <%= options.size %> <%= file.path %>',
         options
       )
     )
@@ -115,7 +115,7 @@ gulp.task("build:png:256", () => {
     .pipe(exec("echo <%= file.basename %>"))
     .pipe(
       exec(
-        'mkdir -p dest/png && inkscape -z -e dest/png/<%= file.basename.replace(".svg", "")  %>_<%= options.size %>.png -w <%= options.size %> -h <%= options.size %> <%= file.path %>',
+        'mkdir -p dist/png && inkscape -z -e dist/png/<%= file.basename.replace(".svg", "")  %>_<%= options.size %>.png -w <%= options.size %> -h <%= options.size %> <%= file.path %>',
         options
       )
     )

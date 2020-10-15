@@ -3,6 +3,7 @@
 /dist
 /infra/*/dist
 /packages/*/dist
+!packages/iconset/dist
 /demos/*/dist
 /node_modules
 /.cache
