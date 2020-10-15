@@ -3,25 +3,21 @@
 /* eslint-disable no-undef */
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
+// Alternative: const CssExtractPlugin = require("mini-css-extract-plugin");
+const CssExtractPlugin = require("extract-css-chunks-webpack-plugin");
 const rootPath = process.cwd();
 const { getCopyPluginConfig, copy } = require("./copy");
 
 var getStyleLoaderRule = (config = {}) => {
   var rule = {
-    test: /\.s[ac]ss$/i,
+    test: /\.(sa|sc|c)ss$/,
     use: [],
   };
 
   if (config.styles.extract === true) {
-    const MiniCssExtractPlugin = require("mini-css-extract-plugin");
     rule.use.push({
-      loader: MiniCssExtractPlugin.loader,
-      options: {
-        // only enable hot reloading in development
-        hmr: !config.production,
-        // if hmr does not work, this is a forceful method.
-        reloadAll: true,
-      },
+      loader: CssExtractPlugin.loader,
+      options: {},
     });
   }
 
@@ -112,7 +108,7 @@ module.exports = (config = {}) => {
     };
 
     config.scripts = config.scripts || {
-      minimize: false, // config.production disabled until terser works with webpack 5 and yarn 2
+      minimize: config.production, // config.production disabled until terser works with webpack 5 and yarn 2
     };
 
     // config defaults for config templates
@@ -202,7 +198,6 @@ module.exports = (config = {}) => {
     var terser;
     if (config.scripts.minimize) {
       terser = new TerserPlugin({
-        sourceMap: !env.production,
         terserOptions: {
           format: {
             comments: false,
@@ -229,9 +224,8 @@ module.exports = (config = {}) => {
     }
 
     if (config.styles.extract === true) {
-      const MiniCssExtractPlugin = require("mini-css-extract-plugin");
       plugins.push(
-        new MiniCssExtractPlugin({
+        new CssExtractPlugin({
           filename: "[name].css",
         })
       );

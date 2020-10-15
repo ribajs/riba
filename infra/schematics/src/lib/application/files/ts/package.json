@@ -4,9 +4,9 @@
   "description": "<%= description %>",
   "main": "index.html",
   "scripts": {
-    "build": "webpack --env.production",
-    "build:dev": "npm run lint && webpack --env.development",
-    "start": "webpack-dev-server --env.development",
+    "build": "webpack --progress --color --env production",
+    "build:dev": "npm run lint && webpack --progress --color --env development",
+    "start": "webpack serve --progress --color --env development",
     "start:prod": "webpack-dev-server --env.production",
     "clear": "rm -rf ./dist",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
@@ -51,7 +51,7 @@
     "inspectpack": "^4.5.2",
     "jest": "^26.4.2",
     "jest-extended": "^0.11.5",
-    "mini-css-extract-plugin": "^0.9.0",
+    "mini-css-extract-plugin": "^1.0.0",
     "postcss-loader": "^4.0.1",
     "postcss-modules": "^3.2.2",
     "prettier": "^2.1.1",
@@ -59,8 +59,8 @@
     "sass-loader": "^10.0.2",
     "ts-jest": "^26.3.0",
     "typescript": "^4.0.2",
-    "webpack": "^5.0.0-beta.22",
-    "webpack-cli": "^3.3.12",
+    "webpack": "^5.1.1",
+    "webpack-cli": "^4.0.0",
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
@@ -68,8 +68,5 @@
     "@ribajs/utils": "^1.9.0-beta.0",
     "@ribajs/bs4": "^1.9.0-beta.0",
     "bootstrap": "^4.5.2"
-  },
-  "resolutions": {
-    "webpack": "5.0.0-beta.22"
   }
 }
