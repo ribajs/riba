@@ -13,12 +13,10 @@ import {
 export class EventDispatcher {
   public static instances: EventDispatcherInstances = {};
 
-  public static getInstance(namespace: string) {
+  public static getInstance(namespace = "main"): EventDispatcher {
     const result = EventDispatcher.instances[namespace];
     if (!result) {
-      throw new Error(
-        `No EventDispatcher instance with namespace ${namespace} found!`
-      );
+      return new this(namespace);
     }
     return result;
   }
@@ -31,20 +29,24 @@ export class EventDispatcher {
    */
   private events: Events = {};
 
-  private namespace: string;
+  private _namespace = "anonymous";
+
+  public get namespace(): string {
+    return this._namespace;
+  }
 
   /**
    * Creates an singleton instance of Dispatcher.
    */
-  constructor(namespace = "main") {
-    this.namespace = namespace;
-
-    if (EventDispatcher.instances[this.namespace]) {
-      return EventDispatcher.instances[this.namespace];
+  constructor(namespace?: string) {
+    if (namespace) {
+      if (EventDispatcher.instances[namespace]) {
+        return EventDispatcher.instances[namespace];
+      }
+      this._namespace = namespace;
+      EventDispatcher.instances[namespace] = this;
+      return EventDispatcher.instances[namespace];
     }
-
-    EventDispatcher.instances[this.namespace] = this;
-    return EventDispatcher.instances[this.namespace];
   }
 
   /**
@@ -68,31 +70,35 @@ export class EventDispatcher {
       this.events[eventName].push(cb);
     }
   }
-
   /**
    * Unbind event
    *
-   * @param eventName Name of the event
+   * @param eventName optional, Name of the event; if name not supplied all event listeners for all events will be removed
    * @param cb optional, if a callback is supplied, only event listeners using the supplied callback function will be removed
    * @param thisContext optional, if a callback is supplied, only event listeners using the supplied thisContext will be removed
    */
-  public off(eventName: string, cb?: EventCallback, thisContext?: any) {
+  public off(eventName?: string, cb?: EventCallback, thisContext?: any) {
+    if (eventName === undefined) {
+      this.events = {};
+      return;
+    }
     if (eventName in this.events === false) {
       return;
     }
     if (cb !== undefined) {
-      for (let i = this.events[eventName].length - 1; i >= 0; i--) {
-        const curEvent = this.events[eventName][i] as BoundEventCallback;
-        if (curEvent.orgCb && curEvent.thisContext) {
-          if (typeof thisContext !== "undefined") {
-            if (curEvent.thisContext !== thisContext) {
-              continue;
-            }
+      if (thisContext !== undefined) {
+        for (let i = this.events[eventName].length - 1; i >= 0; i--) {
+          const curEvent = this.events[eventName][i] as BoundEventCallback;
+          if (curEvent.orgCb === cb && curEvent.thisContext === thisContext) {
+            this.events[eventName].splice(i, 1);
           }
-          if (curEvent.orgCb !== cb) {
-            continue;
+        }
+      } else {
+        for (let i = this.events[eventName].length - 1; i >= 0; i--) {
+          const curEvent = this.events[eventName][i] as EventCallback;
+          if (curEvent === cb) {
+            this.events[eventName].splice(i, 1);
           }
-          this.events[eventName].splice(i, 1);
         }
       }
     } else {
@@ -114,9 +120,9 @@ export class EventDispatcher {
 
     for (let i = 0; i < this.events[eventName].length; i++) {
       if ((this.events[eventName][i] as BoundEventCallback | undefined)?.cb) {
-        (this.events[eventName][i] as BoundEventCallback).cb.apply(this, args);
+        (this.events[eventName][i] as BoundEventCallback).cb(...args);
       } else {
-        (this.events[eventName][i] as EventCallback).apply(this, args);
+        (this.events[eventName][i] as EventCallback)(...args);
       }
     }
   }
