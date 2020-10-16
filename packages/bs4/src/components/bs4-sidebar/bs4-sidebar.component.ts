@@ -163,11 +163,7 @@ export class Bs4SidebarComponent extends Component {
     this.style = window.getComputedStyle(this.el);
     // assign this to bound version, so we can remove window EventListener later without problem
     this.onEnvironmentChanges = this.onEnvironmentChanges.bind(this);
-    window.addEventListener(
-      "resize",
-      this.onEnvironmentChanges,
-      false
-    );
+    window.addEventListener("resize", this.onEnvironmentChanges, false);
     // inital
     this.onEnvironmentChanges();
   }
@@ -395,11 +391,7 @@ export class Bs4SidebarComponent extends Component {
     this.toggleButtonEvents?.off("toggle", this.onToggle.bind(this));
     this.toggleButtonEvents?.off("init", this.triggerState.bind(this));
     this.routerEvents.off("newPageReady", this.onEnvironmentChanges, this);
-    window.removeEventListener(
-      "resize",
-      this.onEnvironmentChanges,
-      false
-    );
+    window.removeEventListener("resize", this.onEnvironmentChanges, false);
   }
 
   protected template() {

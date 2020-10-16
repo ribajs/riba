@@ -2702,7 +2702,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/tsconfig@portal:infra/tsconfig::locator=ribajs%40workspace%3A."
   dependencies:
-    "@ribajs/types": ^1.9.0-beta.1
+    "@ribajs/types": ^1.9.0-beta.2
   languageName: node
   linkType: soft
 
@@ -2710,7 +2710,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/tsconfig@workspace:infra/tsconfig"
   dependencies:
-    "@ribajs/types": ^1.9.0-beta.1
+    "@ribajs/types": ^1.9.0-beta.2
   languageName: unknown
   linkType: soft
 

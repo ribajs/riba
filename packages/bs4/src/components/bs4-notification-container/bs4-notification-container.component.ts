@@ -76,7 +76,11 @@ export class Bs4NotificationContainerComponent extends Component {
 
   protected disconnectedCallback() {
     super.disconnectedCallback();
-    (this.notificationDispatcher as EventDispatcher).off("show-notification", this.onShowNotification, this);
+    (this.notificationDispatcher as EventDispatcher).off(
+      "show-notification",
+      this.onShowNotification,
+      this
+    );
   }
 
   protected requiredAttributes() {

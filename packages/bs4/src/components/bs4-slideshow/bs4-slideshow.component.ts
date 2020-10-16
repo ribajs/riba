@@ -771,10 +771,17 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     window.addEventListener("resize", this.onViewChanges);
 
     // Custom event triggered by some parent components when this component changes his visibility, e.g. triggered in the bs4-tabs component
-    this.el.addEventListener("visibility-changed" as any, this.onVisibilityChanged);
+    this.el.addEventListener(
+      "visibility-changed" as any,
+      this.onVisibilityChanged
+    );
 
-    this.slideshowInner.addEventListener("scroll", this.onScroll, { passive: true });
-    this.slideshowInner.addEventListener("scrollended", this.onScrollend, { passive: true });
+    this.slideshowInner.addEventListener("scroll", this.onScroll, {
+      passive: true,
+    });
+    this.slideshowInner.addEventListener("scrollended", this.onScrollend, {
+      passive: true,
+    });
 
     this.el.addEventListener("mouseenter", this.onMouseIn, { passive: true });
     this.el.addEventListener("mouseover", this.onMouseIn, { passive: true });
@@ -803,10 +810,13 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
     window.removeEventListener("resize", this.onViewChanges);
 
-    this.el.removeEventListener("visibility-changed" as any, this.onVisibilityChanged);
+    this.el.removeEventListener(
+      "visibility-changed" as any,
+      this.onVisibilityChanged
+    );
 
     this.slideshowInner.removeEventListener("scroll", this.onScroll);
-    this.slideshowInner.removeEventListener( "scrollended", this.onScrollend);
+    this.slideshowInner.removeEventListener("scrollended", this.onScrollend);
 
     this.el.removeEventListener("mouseenter", this.onMouseIn);
     this.el.removeEventListener("mouseover", this.onMouseIn);
@@ -823,7 +833,6 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     this.el.removeEventListener("scrollend", this.onMouseUp);
     // See ScrollEventsService for this event
     this.el.removeEventListener("scrollended", this.onMouseUp);
-
   }
 
   protected async beforeBind() {

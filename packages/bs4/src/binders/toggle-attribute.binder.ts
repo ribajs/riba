@@ -93,16 +93,8 @@ export const toggleAttributeBinder: Binder<string> = {
     const self = (this.binder || this) as Bs4ToggleAttribute;
     let toggleButton = self.toggleButtonEvents;
     if (oldId && toggleButton) {
-      toggleButton.off(
-        TOGGLE_BUTTON.eventNames.toggle,
-        self.onToggle,
-        self
-      );
-      toggleButton.off(
-        TOGGLE_BUTTON.eventNames.init,
-        self.triggerState,
-        self
-      );
+      toggleButton.off(TOGGLE_BUTTON.eventNames.toggle, self.onToggle, self);
+      toggleButton.off(TOGGLE_BUTTON.eventNames.init, self.triggerState, self);
     }
 
     if (!self.toggleButtonEvents) {
@@ -110,16 +102,8 @@ export const toggleAttributeBinder: Binder<string> = {
         TOGGLE_BUTTON.nsPrefix + newId
       );
       toggleButton = self.toggleButtonEvents as EventDispatcher;
-      toggleButton.on(
-        TOGGLE_BUTTON.eventNames.toggle,
-        self.onToggle,
-        self
-      );
-      toggleButton.on(
-        TOGGLE_BUTTON.eventNames.init,
-        self.triggerState,
-        self
-      );
+      toggleButton.on(TOGGLE_BUTTON.eventNames.toggle, self.onToggle, self);
+      toggleButton.on(TOGGLE_BUTTON.eventNames.init, self.triggerState, self);
     }
   },
 };
