@@ -19,7 +19,7 @@ git clone --recurse-submodules https://github.com/ribajs/riba.git
 ### Bug Reporting
 
 1. Ensure the bug can be reproduced on the latest master.
-2. (optional) Submit a new demo oriented on the existing demos based on the existing demos to illustrate the problem
+2. (optional) Submit a new demo oriented on the existing demos to illustrate the problem
 
 ### Pull Requests
 
