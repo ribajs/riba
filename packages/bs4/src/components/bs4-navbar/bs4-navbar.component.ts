@@ -27,6 +27,7 @@ export class Bs4NavbarComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
+    this.onStateChange = this.onStateChange.bind(this);
   }
 
   protected async afterBind() {
@@ -68,7 +69,7 @@ export class Bs4NavbarComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     this.routerEvents = new EventDispatcher("main");
-    this.routerEvents.on("newPageReady", this.onNewPageReady.bind(this));
+    this.routerEvents.on("newPageReady", this.onNewPageReady, this);
 
     this.setCollapseElement();
 
@@ -103,11 +104,11 @@ export class Bs4NavbarComponent extends Component {
       this.collapseElements.forEach((collapseElement: HTMLElement) => {
         collapseElement.addEventListener(
           EVENT_SHOWN,
-          this.onStateChange.bind(this)
+          this.onStateChange
         );
         collapseElement.addEventListener(
           EVENT_HIDDEN,
-          this.onStateChange.bind(this)
+          this.onStateChange
         );
       });
     }
@@ -132,7 +133,7 @@ export class Bs4NavbarComponent extends Component {
     super.disconnectedCallback();
     this.removeCollapseEventListeners();
     if (this.routerEvents) {
-      this.routerEvents.off("newPageReady", this.onNewPageReady);
+      this.routerEvents.off("newPageReady", this.onNewPageReady, this);
     }
   }
 
