@@ -1,15 +1,53 @@
 <div class="container-fluid">
+    <div class="row py-4">
+    <div class="col-12">
+      <h3 class="text-center">Responsive Grid Cover</h3>
+      <div class="embed-responsive embed-responsive-100vh">
+        <tagged-image class="embed-responsive-item fit-cover" rv-tags="responsiveTags | json 0" img-src="../../../images/grid.png">
+        </tagged-image>
+      </div>
+    </div>
+  </div>
 
+  <div class="row py-4">
+    <div class="col-12">
+      <h3 class="text-center">Responsive Grid Contain</h3>
+      <div class="embed-responsive embed-responsive-100vh">
+        <tagged-image class="embed-responsive-item fit-contain" rv-tags="responsiveTags | json 0" img-src="../../../images/grid.png">
+        </tagged-image>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row py-4">
+    <div class="col-12">
+      <h3 class="text-center">Unresponsive Grid</h3>
+        <tagged-image rv-tags="responsiveTags | json 0" img-src="../../../images/grid.png">
+        </tagged-image>
+    </div>
+  </div>
+
+  <div class="row py-4">
+    <div class="col-12">
+      <h3 class="text-center">Unresponsive Grid distorted</h3>
+        <tagged-image style="width: 50%; height:30%" rv-tags="responsiveTags | json 0" img-src="../../../images/grid.png">
+        </tagged-image>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
   <div class="row pb-4">
     <div class="col-5"></div>
     <div class="col-2">
       <h3>Defaults</h3>
       <tagged-image
-        loading="lazy" 
-        class="lazy embed-responsive-item"
-        rv-src="fadeshowImages.0.src" 
-        rv-srcset="fadeshowImages.0.srcset"
-        sizes="(max-height: 500px) 800px,
+        rv-loading="lazy"
+        class="embed-responsive-item"
+        rv-img-src="fadeshowImages.0.src"
+        rv-img-srcset="fadeshowImages.0.srcset"
+        img-sizes="(max-height: 500px) 800px,
                 (max-height: 600px) 1000px,
                 (max-height: 700px) 1200px,
                 (max-height: 800px) 1400px,
@@ -34,11 +72,11 @@
     <div class="col-4">
       <h3>Bootstrap Colors</h3>
       <tagged-image
-        loading="lazy" 
+        loading="lazy"
         class="lazy embed-responsive-item"
-        rv-src="fadeshowImages.0.src" 
-        rv-srcset="fadeshowImages.0.srcset"
-        sizes="(max-height: 500px) 800px,
+        rv-img-src="fadeshowImages.0.src"
+        rv-img-srcset="fadeshowImages.0.srcset"
+        img-sizes="(max-height: 500px) 800px,
                 (max-height: 600px) 1000px,
                 (max-height: 700px) 1200px,
                 (max-height: 800px) 1400px,
@@ -61,7 +99,7 @@
   <div class="row py-4">
     <div class="col-12">
       <h3 class="text-center">CSS colors, different shapes and Multi-Popover</h3>
-      <tagged-image src="../../../images/Hamburg-Hbf-HDR.jpg" options="{ 'multiPopover': true }" debug="true" rv-tags="fadeshowImages.0.tags | json 0">
+      <tagged-image img-src="../../../images/Hamburg-Hbf-HDR.jpg" options="{ 'multiPopover': true }" debug="true" rv-tags="fadeshowImages.0.tags | json 0">
         <tag title="Red: rgba(255, 0, 0, 1)" color="rgba(255, 0, 0, 1)">Red: rgba(255, 0, 0, 1)</tag>
         <tag title="Red: #ff0000" color="#ff0000" border-radius="50%">Red: #ff0000</tag>
         <tag title="Red: red" color="red" border-radius="0">Red: red</tag>
@@ -95,12 +133,12 @@
           <div rv-each-image="fadeshowImages" class="carousel-item" rv-class-active="%image% | eq 0">
             <div class="embed-responsive embed-responsive-100vh">
               <tagged-image
-              loading="lazy" 
+              loading="lazy"
               class="lazy embed-responsive-item"
-              rv-src="image.src" 
-              rv-srcset="image.srcset"
+              rv-img-src="image.src"
+              rv-img-srcset="image.srcset"
               rv-tags="image.tags | json 0"
-              sizes="(max-height: 500px) 800px,
+              img-sizes="(max-height: 500px) 800px,
                       (max-height: 600px) 1000px,
                       (max-height: 700px) 1200px,
                       (max-height: 800px) 1400px,
@@ -117,7 +155,7 @@
           </div>
         </div>
       </bs4-carousel>
-    </div>    
+    </div>
   </div>
 </div>
 
@@ -130,33 +168,32 @@
         <div class="slideshow-inner">
           <div class="slide-placeholder col-4">&nbsp;</div>
           <div class="slide col-4">
-            <tagged-image options="{'popoverOptions': {'container': 'body'}}" lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1500/600?random=1" alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></tagged-image>
+            <tagged-image options="{'popoverOptions': {'container': 'body'}}" img-loading="lazy" class="img-fluid w-100" img-src="https://picsum.photos/1500/600?random=1" img-alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></tagged-image>
           </div>
           <div class="slide col-4">
-            <tagged-image options="{'popoverOptions': {'container': 'body'}}" lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1500/600?random=2" alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></tagged-image>
+            <tagged-image options="{'popoverOptions': {'container': 'body'}}" img-loading="lazy" class="img-fluid w-100" img-src="https://picsum.photos/1500/600?random=2" img-alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></tagged-image>
           </div>
           <div class="slide col-4">
-            <tagged-image options="{'popoverOptions': {'container': 'body'}}" lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1500/600?random=3" alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></tagged-image>
+            <tagged-image options="{'popoverOptions': {'container': 'body'}}" img-loading="lazy" class="img-fluid w-100" img-src="https://picsum.photos/1500/600?random=3" img-alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></tagged-image>
           </div>
           <div class="slide col-4">
-            <tagged-image options="{'popoverOptions': {'container': 'body'}}" lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1500/600?random=4" alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></tagged-image>
+            <tagged-image options="{'popoverOptions': {'container': 'body'}}" img-loading="lazy" class="img-fluid w-100" img-src="https://picsum.photos/1500/600?random=4" img-alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></tagged-image>
           </div>
           <div class="slide col-4">
-            <tagged-image options="{'popoverOptions': {'container': 'body'}}" lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1500/600?random=5" alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></tagged-image>
+            <tagged-image options="{'popoverOptions': {'container': 'body'}}" img-loading="lazy" class="img-fluid w-100" img-src="https://picsum.photos/1500/600?random=5" img-alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></tagged-image>
           </div>
           <div class="slide col-4">
-            <tagged-image options="{'popoverOptions': {'container': 'body'}}" lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1500/600?random=6" alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></tagged-image>
+            <tagged-image options="{'popoverOptions': {'container': 'body'}}" img-loading="lazy" class="img-fluid w-100" img-src="https://picsum.photos/1500/600?random=6" img-alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></tagged-image>
           </div>
           <div class="slide col-4">
-            <tagged-image options="{'popoverOptions': {'container': 'body'}}" lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1500/600?random=7" alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></tagged-image>
+            <tagged-image options="{'popoverOptions': {'container': 'body'}}" img-loading="lazy" class="img-fluid w-100" img-src="https://picsum.photos/1500/600?random=7" img-alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></tagged-image>
           </div>
           <div class="slide col-4">
-            <tagged-image options="{'popoverOptions': {'container': 'body'}}" lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1500/600?random=8" alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></tagged-image>
+            <tagged-image options="{'popoverOptions': {'container': 'body'}}" img-loading="lazy" class="img-fluid w-100" img-src="https://picsum.photos/1500/600?random=8" img-alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></tagged-image>
           </div>
           <div class="slide-placeholder col-4">&nbsp;</div>
         </div>
       </bs4-slideshow>
     </section>
-
   </div>
 </div>
