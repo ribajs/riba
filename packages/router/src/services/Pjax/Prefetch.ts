@@ -31,6 +31,7 @@ class Prefetch {
       return Prefetch.instances[this.viewId];
     }
     Prefetch.instances[this.viewId] = this;
+    this.onLinkEnterIntern = this.onLinkEnterIntern.bind(this);
   }
 
   /**
