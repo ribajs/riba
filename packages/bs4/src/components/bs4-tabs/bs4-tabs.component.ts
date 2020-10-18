@@ -133,6 +133,7 @@ export class Bs4TabsComponent extends TemplatesComponent {
 
   constructor(element?: HTMLElement) {
     super(element);
+    this.onResizeEventHandler = throttle(this.setHeight.bind(this));
   }
 
   /**
@@ -199,10 +200,6 @@ export class Bs4TabsComponent extends TemplatesComponent {
         tab.active
       );
     }
-
-    if (event) {
-      event.preventDefault();
-    }
   }
 
   protected activateFirstTab() {
@@ -242,6 +239,15 @@ export class Bs4TabsComponent extends TemplatesComponent {
     this.initTabs();
     this.activateFirstTab();
     this.init(Bs4TabsComponent.observedAttributes);
+  }
+
+  protected disconnectedCallback() {
+    if (this.tabs) {
+      this.tabs.forEach((tab) => {
+        tab.removeEventListener("shown.bs.tab", this.onTabShownEventHandler);
+      });
+    }
+    window.removeEventListener("resize", this.onResizeEventHandler);
   }
 
   protected setElements() {
@@ -292,14 +298,10 @@ export class Bs4TabsComponent extends TemplatesComponent {
       });
     }
 
-    const onResize = () => {
-      throttle(this.onResizeEventHandler.bind(this))();
-    };
-
     if (this.scope.optionTabsAutoHeight) {
-      window.removeEventListener("resize", onResize);
-      window.addEventListener("resize", onResize);
-      this.onResizeEventHandler();
+      window.removeEventListener("resize", this.onResizeEventHandler);
+      window.addEventListener("resize", this.onResizeEventHandler);
+      this.setHeight();
     }
   }
 

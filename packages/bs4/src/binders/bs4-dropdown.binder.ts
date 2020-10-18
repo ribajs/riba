@@ -7,22 +7,32 @@ import { DropdownService } from "../services/dropdown.service";
  */
 export const dropdownBinder: Binder<string> = {
   name: "bs4-",
+  bind(el: HTMLElement) {
+    this.customData = {
+      toggler:
+        (el.classList.contains("dropdown-toggle")
+          ? el
+          : el.querySelector(".dropdown-toggle")) || el,
+    };
+  },
   routine(el: HTMLElement, option: any = {}) {
-    let toggler: HTMLButtonElement;
-    if (el.classList.contains("dropdown-toggle")) {
-      toggler = el as HTMLButtonElement;
-    } else {
-      toggler = el.querySelector(".dropdown-toggle") as HTMLButtonElement;
+    if (this.customData.dropdownService) {
+      this.customData.dropdownService.dispose();
+      this.customData.toggler.removeEventListener(
+        "click",
+        this.customData.dropdownService.toggle
+      );
     }
-
-    if (!toggler) {
-      toggler = el as HTMLButtonElement;
-    }
-
-    const dropdownService = new DropdownService(toggler, option);
-
-    toggler.addEventListener("click", () => {
-      dropdownService.toggle();
-    });
+    this.customData.dropdownService = new DropdownService(
+      this.customData.toggler,
+      option
+    );
+    this.customData.dropdownService.toggle = this.customData.dropdownService.toggle.bind(
+      this.customData.dropdownService
+    );
+    this.customData.toggler.addEventListener(
+      "click",
+      this.customData.dropdownService.toggle
+    );
   },
 };

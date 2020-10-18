@@ -33,9 +33,9 @@ export class Bs4ModalItemComponent extends Component {
   }
 
   protected scope: Scope = {
-    onHidden: this.onHidden,
+    onHidden: this.onHidden.bind(this),
     index: -1,
-    dismiss: this.dismiss,
+    dismiss: this.dismiss.bind(this),
   };
 
   constructor(element?: HTMLElement) {
@@ -71,7 +71,7 @@ export class Bs4ModalItemComponent extends Component {
       });
 
       // Call onHidden on hidden event once
-      modalEl.addEventListener(EVENT_HIDDEN, this.onHidden.bind(this), {
+      modalEl.addEventListener(EVENT_HIDDEN, this.scope.onHidden, {
         once: true,
       });
 

@@ -89,6 +89,8 @@ export class Bs4ShareComponent extends Component {
     this.scope = this.getScopeDefaults();
     this.debug("constructor", this.scope);
     Bs4ShareComponent.count++;
+    this.onExternalOpenEvent = this.onExternalOpenEvent.bind(this);
+    this.onExternalCloseEvent = this.onExternalCloseEvent.bind(this);
   }
 
   protected getDefaultShareServices() {
@@ -231,13 +233,13 @@ export class Bs4ShareComponent extends Component {
   }
 
   protected addEventListeners() {
-    this.el.addEventListener("open", this.onExternalOpenEvent.bind(this));
-    this.el.addEventListener("close", this.onExternalCloseEvent.bind(this));
+    this.el.addEventListener("open", this.onExternalOpenEvent);
+    this.el.addEventListener("close", this.onExternalCloseEvent);
   }
 
   protected removeEventListeners() {
-    this.el.removeEventListener("open", this.onExternalOpenEvent.bind(this));
-    this.el.removeEventListener("close", this.onExternalOpenEvent.bind(this));
+    this.el.removeEventListener("open", this.onExternalOpenEvent);
+    this.el.removeEventListener("close", this.onExternalOpenEvent);
   }
 
   protected getURLForShare() {

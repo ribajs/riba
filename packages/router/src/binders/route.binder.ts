@@ -66,7 +66,8 @@ export const routeBinder: Binder<string> = {
         }
       },
     } as CustomData;
-    el.addEventListener("click", this.customData.onClick.bind(this));
+    this.customData.onClick = this.customData.onClick.bind(this);
+    el.addEventListener("click", this.customData.onClick);
   },
 
   routine(
@@ -125,6 +126,6 @@ export const routeBinder: Binder<string> = {
   },
   unbind(this: Binding, el: HTMLUnknownElement) {
     this.customData.prefetch.deInitBinder(el, this.customData.options.url);
-    el.removeEventListener("click", this.customData.onClick.bind(this));
+    el.removeEventListener("click", this.customData.onClick);
   },
 };

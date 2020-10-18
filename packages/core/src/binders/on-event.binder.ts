@@ -32,17 +32,22 @@ export const onEventBinder: Binder<eventHandlerFunction> = {
     }
     const eventName = this.args[0] as string;
 
-    this.customData.handler = this.eventHandler(value, el);
-
-    const passive = this.el.dataset.passive === "true"; // data-passive="true"
-
-    try {
-      el.addEventListener(eventName, this.customData.handler, { passive });
-    } catch (error) {
-      console.warn(error);
-      el.addEventListener(eventName, (event: Event) => {
-        this.customData.handler(event);
-      });
+    // see https://github.com/microsoft/TypeScript/issues/32912
+    const options: AddEventListenerOptions & EventListenerOptions = {
+      passive: this.el.dataset.passive === "true", // data-passive="true"
+    };
+    if (this.customData.handler) {
+      el.removeEventListener(
+        // must use as any here, because TypeScript is stupid as of version 4.0.3
+        eventName as any,
+        this.customData.handler,
+        options
+      );
     }
+    this.customData.handler = this.eventHandler(value, el).bind(
+      this.customData
+    );
+
+    el.addEventListener(eventName, this.customData.handler, options);
   },
 };

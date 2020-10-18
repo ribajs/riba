@@ -486,7 +486,7 @@ export class PhotoswipeComponent extends Component {
       for (let i = 0; i < this.images.length; i++) {
         this.images[i].removeEventListener(
           "click",
-          this.openByIndex.bind(this, i)
+          (this.images[i] as any)._rv_click_listener
         );
       }
     }
@@ -499,9 +499,13 @@ export class PhotoswipeComponent extends Component {
 
     for (let i = 0; i < this.images.length; i++) {
       if (this.scope.openImageOnClick) {
+        (this.images[i] as any)._rv_click_listener = this.openByIndex.bind(
+          this,
+          i
+        );
         this.images[i].addEventListener(
           "click",
-          this.openByIndex.bind(this, i)
+          (this.images[i] as any)._rv_click_listener
         );
       }
 

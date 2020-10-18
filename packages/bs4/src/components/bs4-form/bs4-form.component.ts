@@ -100,6 +100,7 @@ export class Bs4FormComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
+    this.enableSubmit = this.enableSubmit.bind(this);
   }
 
   protected connectedCallback() {
@@ -110,10 +111,16 @@ export class Bs4FormComponent extends Component {
 
   protected addEventListeners() {
     if (this.scope.disableSubmitUntilChange) {
-      this.el.addEventListener("input", () => {
-        this.scope.submitDisabled = false;
-      });
+      this.el.addEventListener("input", this.enableSubmit);
     }
+  }
+
+  protected removeEventListeners() {
+    this.el.removeEventListener("input", this.enableSubmit);
+  }
+
+  private enableSubmit() {
+    this.scope.submitDisabled = false;
   }
 
   protected requiredAttributes(): string[] {

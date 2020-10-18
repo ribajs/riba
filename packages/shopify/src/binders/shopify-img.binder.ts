@@ -57,20 +57,18 @@ export const shopifyImgBinder: Binder<string> = {
           (el as HTMLImageElement).src = newSrc;
         }
       },
-      onResize: () => {
-        throttle(() => {
-          const currentImageWidth = el.offsetWidth;
-          const currentSrcset = (el as HTMLImageElement).srcset;
-          if (
-            this.customData.oldImageWidth + PX_OFFSET < currentImageWidth &&
-            currentImageWidth > 0 &&
-            !currentSrcset.includes(`${currentImageWidth}w`)
-          ) {
-            this.customData.setSrcset(currentImageWidth);
-            this.customData.oldImageWidth = currentImageWidth;
-          }
-        })();
-      },
+      onResize: throttle(() => {
+        const currentImageWidth = el.offsetWidth;
+        const currentSrcset = (el as HTMLImageElement).srcset;
+        if (
+          this.customData.oldImageWidth + PX_OFFSET < currentImageWidth &&
+          currentImageWidth > 0 &&
+          !currentSrcset.includes(`${currentImageWidth}w`)
+        ) {
+          this.customData.setSrcset(currentImageWidth);
+          this.customData.oldImageWidth = currentImageWidth;
+        }
+      }),
     };
     if ((window as any).ResizeObserver) {
       this.customData.resizeObserver = new ResizeObserver((entries) => {
@@ -80,11 +78,11 @@ export const shopifyImgBinder: Binder<string> = {
       });
       this.customData.resizeObserver.observe(el);
     } else {
-      window.addEventListener("resize", this.customData.onResize.bind(this));
+      window.addEventListener("resize", this.customData.onResize);
     }
   },
   unbind(el: HTMLElement) {
-    window.removeEventListener("resize", this.customData.onResize.bind(this));
+    window.removeEventListener("resize", this.customData.onResize);
     if (
       this.customData.resizeObserver &&
       this.customData.resizeObserver.unobserve

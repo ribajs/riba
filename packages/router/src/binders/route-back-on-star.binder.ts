@@ -11,8 +11,8 @@ export const routeBackOnStarBinder: Binder<eventHandlerFunction> = {
   name: "route-back-on-*",
   priority: 3000,
 
-  bind(/*el: HTMLElement*/) {
-    // noting
+  bind() {
+    this.customData = {};
   },
 
   unbind(el: HTMLElement) {
@@ -23,8 +23,10 @@ export const routeBackOnStarBinder: Binder<eventHandlerFunction> = {
     if (this.args === null) {
       throw new Error("args is null");
     }
-    // const eventName = this.args[0] as string;
-    el.removeEventListener(this.args[0] as string, goBack);
+    if (this.customData.eventName) {
+      el.removeEventListener(this.customData.eventName, goBack);
+    }
+    this.customData.eventName = this.args[0] as string;
     el.addEventListener(this.args[0] as string, goBack);
   },
 };

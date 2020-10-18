@@ -9,9 +9,18 @@ import { CarouselClassName } from "../interfaces/carousel-class-name";
  * --------------------------------------------------------------------------
  */
 
-import { TRANSITION_END, Utils } from "./utils.service";
+import {
+  TRANSITION_END,
+  typeCheckConfig,
+  makeArray,
+  reflow,
+  getTransitionDurationFromElement,
+  emulateTransitionEnd,
+  isVisible,
+  triggerTransitionEnd,
+} from "./utils.service";
 import EventHandler from "./dom/event-handler";
-import SelectorEngine from "./dom/selector-engine";
+import { findOne, find } from "./dom/selector-engine";
 
 /**
  * ------------------------------------------------------------------------
@@ -101,47 +110,35 @@ const PointerType = {
  * ------------------------------------------------------------------------
  */
 class CarouselService {
-  private _items: HTMLElement[] | null = null;
-  private _interval: number | null = null;
-  private _activeElement: HTMLElement | null = null;
-  private _isPaused = false;
-  private _isSliding = false;
+  private items: HTMLElement[] | null = null;
+  private interval: number | null = null;
+  private activeElement: HTMLElement | null = null;
+  private isPaused = false;
+  private isSliding = false;
 
-  private _config: CarouselOption;
-  private _element: HTMLElement;
-  private _indicatorsElement: HTMLElement | null;
-  private _touchSupported: boolean;
-  private _pointerEvent: boolean;
+  private config: CarouselOption;
+  private element: HTMLElement;
+  private indicatorsElement: HTMLElement | null;
+  private touchSupported: boolean;
+  private pointerEvent: boolean;
 
   public touchTimeout: number | null = null;
   public touchStartX = 0;
   public touchDeltaX = 0;
 
   constructor(element: HTMLElement, config: CarouselOption) {
-    this._items = null;
-    this._interval = null;
-    this._activeElement = null;
-    this._isPaused = false;
-    this._isSliding = false;
-    this.touchTimeout = null;
-    this.touchStartX = 0;
-    this.touchDeltaX = 0;
-
-    this._config = this._getConfig(config);
-    this._element = element;
-    this._indicatorsElement =
-      (SelectorEngine.findOne(
-        Selector.INDICATORS,
-        this._element
-      ) as HTMLElement) || null;
-    this._touchSupported =
+    this.config = this.getConfig(config);
+    this.element = element;
+    this.indicatorsElement =
+      (findOne(Selector.INDICATORS, this.element) as HTMLElement) || null;
+    this.touchSupported =
       "ontouchstart" in document.documentElement ||
       navigator.maxTouchPoints > 0;
-    this._pointerEvent = Boolean(window.PointerEvent || window.MSPointerEvent);
+    this.pointerEvent = !!(window.PointerEvent || window.MSPointerEvent);
 
     console.debug("CarouselService", this);
 
-    this._addEventListeners();
+    this.addEventListeners();
   }
 
   // Getters
@@ -153,79 +150,76 @@ class CarouselService {
   // Public
 
   next() {
-    if (!this._isSliding) {
-      this._slide(Direction.NEXT);
+    if (!this.isSliding) {
+      this.slide(Direction.NEXT);
     }
   }
 
   nextWhenVisible() {
     // Don't call next when the page isn't visible
     // or the carousel or its parent isn't visible
-    if (!document.hidden && Utils.isVisible(this._element)) {
+    if (!document.hidden && isVisible(this.element)) {
       this.next();
     }
   }
 
   prev() {
-    if (!this._isSliding) {
-      this._slide(Direction.PREV);
+    if (!this.isSliding) {
+      this.slide(Direction.PREV);
     }
   }
 
-  pause(event?: (TouchEvent & MouseEvent & PointerEvent) | boolean) {
+  pause(event?: Event) {
     if (!event) {
-      this._isPaused = true;
+      this.isPaused = true;
     }
 
-    if (SelectorEngine.findOne(Selector.NEXT_PREV, this._element)) {
-      Utils.triggerTransitionEnd(this._element);
+    if (findOne(Selector.NEXT_PREV, this.element)) {
+      triggerTransitionEnd(this.element);
       this.cycle(true);
     }
 
-    clearInterval(this._interval || undefined);
-    this._interval = null;
+    clearInterval(this.interval || undefined);
+    this.interval = null;
   }
 
   cycle(event?: Event | (TouchEvent & MouseEvent & PointerEvent) | boolean) {
     if (!event) {
-      this._isPaused = false;
+      this.isPaused = false;
     }
 
-    if (this._interval) {
-      clearInterval(this._interval);
-      this._interval = null;
+    if (this.interval) {
+      clearInterval(this.interval);
+      this.interval = null;
     }
 
-    if (this._config && this._config.interval && !this._isPaused) {
-      this._interval = window.setInterval(
+    if (this.config && this.config.interval && !this.isPaused) {
+      this.interval = window.setInterval(
         (document.visibilityState ? this.nextWhenVisible : this.next).bind(
           this
         ),
-        this._config.interval
+        this.config.interval
       );
     }
   }
 
   to(index: number) {
-    if (this._items === null) {
+    if (this.items === null) {
       throw new Error("No items found!");
     }
-    this._activeElement =
-      (SelectorEngine.findOne(
-        Selector.ACTIVE_ITEM,
-        this._element
-      ) as HTMLElement) || null;
-    if (this._activeElement === null) {
+    this.activeElement =
+      (findOne(Selector.ACTIVE_ITEM, this.element) as HTMLElement) || null;
+    if (this.activeElement === null) {
       throw new Error("Active element not found!");
     }
-    const activeIndex = this._getItemIndex(this._activeElement);
+    const activeIndex = this.getItemIndex(this.activeElement);
 
-    if (index > this._items.length - 1 || index < 0) {
+    if (index > this.items.length - 1 || index < 0) {
       return;
     }
 
-    if (this._isSliding) {
-      EventHandler.one(this._element, Event.SLID, () => this.to(index));
+    if (this.isSliding) {
+      EventHandler.one(this.element, Event.SLID, () => this.to(index));
       return;
     }
 
@@ -238,33 +232,27 @@ class CarouselService {
     const direction: CarouselDirection =
       index > activeIndex ? Direction.NEXT : Direction.PREV;
 
-    this._slide(direction, this._items[index]);
+    this.slide(direction, this.items[index]);
   }
 
   dispose() {
-    // EventHandler.off(this._element, EVENT_KEY)
-    // this._items = null
-    // this._config = null
-    // this._element = null
-    // this._interval = null
-    // this._isPaused = null
-    // this._isSliding = null
-    // this._activeElement = null
-    // this._indicatorsElement = null
+    this.removeEventListeners();
+    clearTimeout(this.touchTimeout || undefined);
+    clearInterval(this.interval || undefined);
   }
 
   // Private
 
-  _getConfig(config: CarouselOption) {
+  private getConfig(config: CarouselOption) {
     config = {
       ...Default,
       ...config,
     } as CarouselOption;
-    Utils.typeCheckConfig(NAME, config, DefaultType);
+    typeCheckConfig(NAME, config, DefaultType);
     return config;
   }
 
-  _handleSwipe() {
+  private handleSwipe() {
     const absDeltax = Math.abs(this.touchDeltaX);
 
     if (absDeltax <= SWIPE_THRESHOLD) {
@@ -286,109 +274,132 @@ class CarouselService {
     }
   }
 
-  _addEventListeners() {
-    if (this._config.keyboard) {
-      EventHandler.on(this._element, Event.KEYDOWN, (event) =>
-        this._keydown(event as KeyboardEvent)
-      );
+  private addEventListeners() {
+    this.keydown = this.keydown.bind(this);
+    this.pause = this.pause.bind(this);
+    this.cycle = this.cycle.bind(this);
+    if (this.config.keyboard) {
+      EventHandler.on(this.element, Event.KEYDOWN, this.keydown);
     }
 
-    if (this._config.pause === "hover") {
-      EventHandler.on(this._element, Event.MOUSEENTER, (event: Event) =>
-        this.pause(event as TouchEvent & MouseEvent & PointerEvent)
-      );
-      EventHandler.on(this._element, Event.MOUSELEAVE, (event: Event) =>
-        this.cycle(event)
-      );
+    if (this.config.pause === "hover") {
+      EventHandler.on(this.element, Event.MOUSEENTER, this.pause);
+      EventHandler.on(this.element, Event.MOUSELEAVE, this.cycle);
     }
 
-    if (this._config.touch && this._touchSupported) {
-      this._addTouchEventListeners();
+    if (this.config.touch && this.touchSupported) {
+      this.addTouchEventListeners();
     }
   }
 
-  _addTouchEventListeners() {
-    const start = (event: TouchEvent & MouseEvent & PointerEvent) => {
-      if (
-        this._pointerEvent &&
-        PointerType[event.pointerType.toUpperCase() as "TOUCH" | "PEN"]
-      ) {
-        this.touchStartX = event.clientX;
-      } else if (!this._pointerEvent) {
-        this.touchStartX = event.touches[0].clientX;
-      }
-    };
-
-    const move = (event: TouchEvent & MouseEvent & PointerEvent) => {
-      // ensure swiping with one touch and not pinching
-      if (event.touches && event.touches.length > 1) {
-        this.touchDeltaX = 0;
-      } else {
-        this.touchDeltaX = event.touches[0].clientX - this.touchStartX;
-      }
-    };
-
-    const end = (event: TouchEvent & MouseEvent & PointerEvent) => {
-      if (
-        this._pointerEvent &&
-        PointerType[event.pointerType.toUpperCase() as "TOUCH" | "PEN"]
-      ) {
-        this.touchDeltaX = event.clientX - this.touchStartX;
-      }
-
-      this._handleSwipe();
-      if (this._config.pause === "hover") {
-        // If it's a touch-enabled device, mouseenter/leave are fired as
-        // part of the mouse compatibility events on first tap - the carousel
-        // would stop cycling until user tapped out of it;
-        // here, we listen for touchend, explicitly pause the carousel
-        // (as if it's the second time we tap on it, mouseenter compat event
-        // is NOT fired) and after a timeout (to allow for mouse compatibility
-        // events to fire) we explicitly restart cycling
-
-        this.pause();
-        if (this.touchTimeout) {
-          clearTimeout(this.touchTimeout);
-        }
-
-        this.touchTimeout = setTimeout(
-          (event: TouchEvent & MouseEvent & PointerEvent) => this.cycle(event),
-          TOUCHEVENT_COMPAT_WAIT + (this._config.interval || 0)
-        );
-      }
-    };
-
-    Utils.makeArray(
-      SelectorEngine.find(Selector.ITEM_IMG, this._element)
-    ).forEach((itemImg) => {
-      EventHandler.on(itemImg, Event.DRAG_START, (event: Event) =>
-        event.preventDefault()
-      );
+  private addTouchEventListeners() {
+    this.onTouchStart = this.onTouchStart.bind(this);
+    this.onTouchMove = this.onTouchMove.bind(this);
+    this.onTouchEnd = this.onTouchEnd.bind(this);
+    makeArray(find(Selector.ITEM_IMG, this.element)).forEach((itemImg) => {
+      EventHandler.on(itemImg, Event.DRAG_START, this.preventDrag);
     });
 
-    if (this._pointerEvent) {
-      EventHandler.on(this._element, Event.POINTERDOWN, (event: Event) =>
-        start(event as TouchEvent & MouseEvent & PointerEvent)
-      );
-      EventHandler.on(this._element, Event.POINTERUP, (event: Event) =>
-        end(event as TouchEvent & MouseEvent & PointerEvent)
-      );
+    if (this.pointerEvent) {
+      EventHandler.on(this.element, Event.POINTERDOWN, this.onTouchStart);
+      EventHandler.on(this.element, Event.POINTERUP, this.onTouchEnd);
 
-      this._element.classList.add(ClassName.POINTER_EVENT);
+      this.element.classList.add(ClassName.POINTER_EVENT);
     } else {
-      EventHandler.on(this._element, Event.TOUCHSTART, (event: Event) =>
-        start(event as TouchEvent & MouseEvent & PointerEvent)
-      );
-      EventHandler.on(this._element, Event.TOUCHMOVE, (event: Event) =>
-        move(event as TouchEvent & MouseEvent & PointerEvent)
-      );
-      EventHandler.on(this._element, Event.TOUCHEND, (event: Event) =>
-        end(event as TouchEvent & MouseEvent & PointerEvent)
+      EventHandler.on(this.element, Event.TOUCHSTART, this.onTouchStart);
+      EventHandler.on(this.element, Event.TOUCHMOVE, this.onTouchMove);
+      EventHandler.on(this.element, Event.TOUCHEND, this.onTouchEnd);
+    }
+  }
+
+  private removeEventListeners() {
+    if (this.config.keyboard) {
+      EventHandler.off(this.element, Event.KEYDOWN, this.keydown);
+    }
+
+    if (this.config.pause === "hover") {
+      EventHandler.off(this.element, Event.MOUSEENTER, this.pause);
+      EventHandler.off(this.element, Event.MOUSELEAVE, this.cycle);
+    }
+
+    this.removeTouchEventListeners();
+  }
+
+  private removeTouchEventListeners() {
+    makeArray(find(Selector.ITEM_IMG, this.element)).forEach((itemImg) => {
+      EventHandler.off(itemImg, Event.DRAG_START, this.preventDrag);
+    });
+    if (this.pointerEvent) {
+      EventHandler.off(this.element, Event.POINTERDOWN, this.onTouchStart);
+      EventHandler.off(this.element, Event.POINTERUP, this.onTouchEnd);
+
+      this.element.classList.add(ClassName.POINTER_EVENT);
+    } else {
+      EventHandler.off(this.element, Event.TOUCHSTART, this.onTouchStart);
+      EventHandler.off(this.element, Event.TOUCHMOVE, this.onTouchMove);
+      EventHandler.off(this.element, Event.TOUCHEND, this.onTouchEnd);
+    }
+  }
+
+  private onTouchStart(e: Event) {
+    const event = e as TouchEvent & MouseEvent & PointerEvent;
+    if (
+      this.pointerEvent &&
+      PointerType[event.pointerType.toUpperCase() as "TOUCH" | "PEN"]
+    ) {
+      this.touchStartX = event.clientX;
+    } else if (!this.pointerEvent) {
+      this.touchStartX = event.touches[0].clientX;
+    }
+  }
+
+  private onTouchMove(e: Event) {
+    const event = e as TouchEvent & MouseEvent & PointerEvent;
+    // ensure swiping with one touch and not pinching
+    if (event.touches && event.touches.length > 1) {
+      this.touchDeltaX = 0;
+    } else {
+      this.touchDeltaX = event.touches[0].clientX - this.touchStartX;
+    }
+  }
+
+  private onTouchEnd(e: Event) {
+    const event = e as TouchEvent & MouseEvent & PointerEvent;
+    if (
+      this.pointerEvent &&
+      PointerType[event.pointerType.toUpperCase() as "TOUCH" | "PEN"]
+    ) {
+      this.touchDeltaX = event.clientX - this.touchStartX;
+    }
+
+    this.handleSwipe();
+    if (this.config.pause === "hover") {
+      // If it's a touch-enabled device, mouseenter/leave are fired as
+      // part of the mouse compatibility events on first tap - the carousel
+      // would stop cycling until user tapped out of it;
+      // here, we listen for touchend, explicitly pause the carousel
+      // (as if it's the second time we tap on it, mouseenter compat event
+      // is NOT fired) and after a timeout (to allow for mouse compatibility
+      // events to fire) we explicitly restart cycling
+
+      this.pause();
+      if (this.touchTimeout) {
+        clearTimeout(this.touchTimeout);
+      }
+
+      this.touchTimeout = setTimeout(
+        (event: TouchEvent & MouseEvent & PointerEvent) => this.cycle(event),
+        TOUCHEVENT_COMPAT_WAIT + (this.config.interval || 0)
       );
     }
   }
 
-  _keydown(event: KeyboardEvent) {
+  private preventDrag(event: Event) {
+    event.preventDefault();
+  }
+
+  private keydown(e: Event) {
+    const event = e as KeyboardEvent;
     if (
       (event.target as any)?.tagName &&
       /input|textarea/i.test((event.target as any).tagName)
@@ -409,63 +420,55 @@ class CarouselService {
     }
   }
 
-  _getItemIndex(element?: HTMLElement) {
+  private getItemIndex(element?: HTMLElement) {
     if (!element) {
       return -1;
     }
-    this._items =
+    this.items =
       element && element.parentNode
-        ? Utils.makeArray(
-            SelectorEngine.find(
-              Selector.ITEM,
-              element.parentNode as HTMLElement
-            )
-          )
+        ? makeArray(find(Selector.ITEM, element.parentNode as HTMLElement))
         : [];
 
-    return this._items.indexOf(element);
+    return this.items.indexOf(element);
   }
 
-  _getItemByDirection(
+  private getItemByDirection(
     direction: CarouselDirection,
     activeElement: HTMLElement
   ) {
-    if (this._items === null) {
+    if (this.items === null) {
       throw new Error("No items found!");
     }
     const isNextDirection = direction === Direction.NEXT;
     const isPrevDirection = direction === Direction.PREV;
-    const activeIndex = this._getItemIndex(activeElement);
-    const lastItemIndex = this._items.length - 1;
+    const activeIndex = this.getItemIndex(activeElement);
+    const lastItemIndex = this.items.length - 1;
     const isGoingToWrap =
       (isPrevDirection && activeIndex === 0) ||
       (isNextDirection && activeIndex === lastItemIndex);
 
-    if (isGoingToWrap && !this._config.wrap) {
+    if (isGoingToWrap && !this.config.wrap) {
       return activeElement;
     }
 
     const delta = direction === Direction.PREV ? -1 : 1;
-    const itemIndex = (activeIndex + delta) % this._items.length;
+    const itemIndex = (activeIndex + delta) % this.items.length;
 
     return itemIndex === -1
-      ? this._items[this._items.length - 1]
-      : this._items[itemIndex];
+      ? this.items[this.items.length - 1]
+      : this.items[itemIndex];
   }
 
-  _triggerSlideEvent(
+  private triggerSlideEvent(
     relatedTarget: HTMLElement,
     eventDirectionName: CarouselDirection
   ) {
-    const targetIndex = this._getItemIndex(relatedTarget);
-    const fromIndex = this._getItemIndex(
-      (SelectorEngine.findOne(
-        Selector.ACTIVE_ITEM,
-        this._element
-      ) as HTMLElement) || null
+    const targetIndex = this.getItemIndex(relatedTarget);
+    const fromIndex = this.getItemIndex(
+      (findOne(Selector.ACTIVE_ITEM, this.element) as HTMLElement) || null
     );
 
-    return EventHandler.trigger(this._element, Event.SLIDE, {
+    return EventHandler.trigger(this.element, Event.SLIDE, {
       relatedTarget,
       direction: eventDirectionName,
       from: fromIndex,
@@ -473,18 +476,15 @@ class CarouselService {
     });
   }
 
-  _setActiveIndicatorElement(element: HTMLElement) {
-    if (this._indicatorsElement) {
-      const indicators = SelectorEngine.find(
-        Selector.ACTIVE,
-        this._indicatorsElement
-      );
+  private setActiveIndicatorElement(element: HTMLElement) {
+    if (this.indicatorsElement) {
+      const indicators = find(Selector.ACTIVE, this.indicatorsElement);
       for (let i = 0; i < indicators.length; i++) {
         indicators[i].classList.remove(ClassName.ACTIVE);
       }
 
-      const nextIndicator = this._indicatorsElement.children[
-        this._getItemIndex(element)
+      const nextIndicator = this.indicatorsElement.children[
+        this.getItemIndex(element)
       ];
 
       if (nextIndicator) {
@@ -493,22 +493,21 @@ class CarouselService {
     }
   }
 
-  _slide(direction: CarouselDirection, element?: HTMLElement) {
-    const activeElement = SelectorEngine.findOne(
-      Selector.ACTIVE_ITEM,
-      this._element
-    ) as HTMLElement | undefined;
-    const activeElementIndex = this._getItemIndex(activeElement);
+  private slide(direction: CarouselDirection, element?: HTMLElement) {
+    const activeElement = findOne(Selector.ACTIVE_ITEM, this.element) as
+      | HTMLElement
+      | undefined;
+    const activeElementIndex = this.getItemIndex(activeElement);
     const nextElement =
       element ||
-      (activeElement && this._getItemByDirection(direction, activeElement));
+      (activeElement && this.getItemByDirection(direction, activeElement));
 
     if (!nextElement) {
       throw new Error("Next element not found!");
     }
 
-    const nextElementIndex = this._getItemIndex(nextElement);
-    const isCycling = Boolean(this._interval);
+    const nextElementIndex = this.getItemIndex(nextElement);
+    const isCycling = Boolean(this.interval);
 
     let directionalClassName: CarouselClassName;
     let orderClassName: CarouselClassName;
@@ -525,11 +524,11 @@ class CarouselService {
     }
 
     if (nextElement && nextElement.classList.contains(ClassName.ACTIVE)) {
-      this._isSliding = false;
+      this.isSliding = false;
       return;
     }
 
-    const slideEvent = this._triggerSlideEvent(nextElement, eventDirectionName);
+    const slideEvent = this.triggerSlideEvent(nextElement, eventDirectionName);
     if (slideEvent.defaultPrevented) {
       return;
     }
@@ -539,18 +538,18 @@ class CarouselService {
       return;
     }
 
-    this._isSliding = true;
+    this.isSliding = true;
 
     if (isCycling) {
       this.pause();
     }
 
-    this._setActiveIndicatorElement(nextElement);
+    this.setActiveIndicatorElement(nextElement);
 
-    if (this._element.classList.contains(ClassName.SLIDE)) {
+    if (this.element.classList.contains(ClassName.SLIDE)) {
       nextElement.classList.add(orderClassName);
 
-      Utils.reflow(nextElement);
+      reflow(nextElement);
 
       activeElement.classList.add(directionalClassName);
       nextElement.classList.add(directionalClassName);
@@ -560,15 +559,15 @@ class CarouselService {
         10
       );
       if (nextElementInterval) {
-        this._config.defaultInterval =
-          this._config.defaultInterval || this._config.interval;
-        this._config.interval = nextElementInterval;
+        this.config.defaultInterval =
+          this.config.defaultInterval || this.config.interval;
+        this.config.interval = nextElementInterval;
       } else {
-        this._config.interval =
-          this._config.defaultInterval || this._config.interval;
+        this.config.interval =
+          this.config.defaultInterval || this.config.interval;
       }
 
-      const transitionDuration = Utils.getTransitionDurationFromElement(
+      const transitionDuration = getTransitionDurationFromElement(
         activeElement
       );
 
@@ -581,10 +580,10 @@ class CarouselService {
         activeElement.classList.remove(orderClassName);
         activeElement.classList.remove(directionalClassName);
 
-        this._isSliding = false;
+        this.isSliding = false;
 
         setTimeout(() => {
-          EventHandler.trigger(this._element, Event.SLID, {
+          EventHandler.trigger(this.element, Event.SLID, {
             relatedTarget: nextElement,
             direction: eventDirectionName,
             from: activeElementIndex,
@@ -593,13 +592,13 @@ class CarouselService {
         }, 0);
       });
 
-      Utils.emulateTransitionEnd(activeElement, transitionDuration);
+      emulateTransitionEnd(activeElement, transitionDuration);
     } else {
       activeElement.classList.remove(ClassName.ACTIVE);
       nextElement.classList.add(ClassName.ACTIVE);
 
-      this._isSliding = false;
-      EventHandler.trigger(this._element, Event.SLID, {
+      this.isSliding = false;
+      EventHandler.trigger(this.element, Event.SLID, {
         relatedTarget: nextElement,
         direction: eventDirectionName,
         from: activeElementIndex,

@@ -141,15 +141,22 @@ export class ContentSliderComponent extends TemplatesComponent {
   }
 
   protected onResize() {
-    throttle(() => {
-      this.debug("onResize");
-      this.getItemWidths();
-      this.update();
-    })();
+    this.debug("onResize");
+    this.getItemWidths();
+    this.update();
   }
 
   protected initEventListeners() {
-    window.addEventListener("resize", this.onResize.bind(this));
+    this.onResize = throttle(this.onResize.bind(this));
+    window.addEventListener("resize", this.onResize);
+  }
+
+  protected removeEventListeners() {
+    window.removeEventListener("resize", this.onResize);
+  }
+
+  protected disconnectedCallback() {
+    this.removeEventListeners();
   }
 
   protected async afterBind() {

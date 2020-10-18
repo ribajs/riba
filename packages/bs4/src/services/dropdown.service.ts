@@ -144,7 +144,7 @@ export class DropdownService {
       );
     }
 
-    const parent = DropdownService._getParentFromElement(triggerCloseElement);
+    const parent = triggerCloseElement.parentElement;
 
     if (parent && parent.classList.contains(CLASSNAME.SHOW)) {
       parent.classList.remove(CLASSNAME.SHOW);
@@ -156,13 +156,6 @@ export class DropdownService {
 
   public static _clearMenus() {
     return this.closeAll();
-  }
-
-  public static _getParentFromElement(element: Element) {
-    if (!element.parentElement) {
-      throw new Error("Parent element not found!");
-    }
-    return element.parentElement;
   }
 
   private _element: HTMLButtonElement | HTMLAnchorElement;
@@ -177,9 +170,8 @@ export class DropdownService {
     this._config = this._getConfig(config);
     this._menu = this._getMenuElement();
     this._inNavbar = this._detectNavbar();
-    this.clouseOnClickOutsite(
-      DropdownService._getParentFromElement(this._element)
-    );
+    this.outsideClickListener = this.outsideClickListener.bind(this);
+    this.closeOnClickOutside();
   }
 
   // Public
@@ -193,7 +185,7 @@ export class DropdownService {
       relatedTarget: this._element,
     };
 
-    const parent = DropdownService._getParentFromElement(this._element);
+    const parent = this._element.parentElement;
 
     if (!this._menu.classList.contains(CLASSNAME.SHOW)) {
       this._menu.classList.add(CLASSNAME.SHOW);
@@ -215,7 +207,7 @@ export class DropdownService {
       return;
     }
 
-    const parent = DropdownService._getParentFromElement(this._element);
+    const parent = this._element.parentElement;
     const isActive = this._menu.classList.contains(CLASSNAME.SHOW);
 
     DropdownService._clearMenus();
@@ -236,10 +228,6 @@ export class DropdownService {
         return;
       }
     }
-
-    this.clouseOnClickOutsite(
-      DropdownService._getParentFromElement(this._element)
-    );
 
     // Disable totally Popper.js for Dropdown in Navbar
     if (!this._inNavbar) {
@@ -279,10 +267,6 @@ export class DropdownService {
       );
     }
 
-    this.clouseOnClickOutsite(
-      DropdownService._getParentFromElement(this._element)
-    );
-
     this._element.focus();
     this._element.setAttribute("aria-expanded", "true");
 
@@ -304,6 +288,7 @@ export class DropdownService {
       this._popper.destroy();
       this._popper = null;
     }
+    document.removeEventListener("click", this.outsideClickListener);
   }
 
   public update() {
@@ -315,14 +300,12 @@ export class DropdownService {
 
   // Private
 
-  private outsideClickListener(element: Element, event: Event) {
+  private outsideClickListener(event: Event) {
     const target = event.target || event.srcElement || event.currentTarget;
-    if (target && !element.contains(target as Node)) {
+    const parent = this._element.parentElement as Element;
+    if (target && !parent.contains(target as Node)) {
       this.close();
-      document.removeEventListener(
-        "click",
-        this.outsideClickListener.bind(this, element)
-      );
+      document.removeEventListener("click", this.outsideClickListener);
     }
   }
 
@@ -330,11 +313,10 @@ export class DropdownService {
    * @see https://stackoverflow.com/questions/152975/how-do-i-detect-a-click-outside-an-element
    * @param selector
    */
-  private clouseOnClickOutsite(element: Element) {
-    document.addEventListener(
-      "click",
-      this.outsideClickListener.bind(this, element)
-    );
+  private closeOnClickOutside() {
+    if (this._element.parentElement) {
+      document.addEventListener("click", this.outsideClickListener);
+    }
   }
 
   private _getConfig(config?: any) {
@@ -351,7 +333,7 @@ export class DropdownService {
 
   private _getMenuElement() {
     if (!this._menu) {
-      const parent = DropdownService._getParentFromElement(this._element);
+      const parent = this._element.parentElement;
       if (parent) {
         const menu = parent.querySelector(SELECTOR.MENU);
         if (!menu) {

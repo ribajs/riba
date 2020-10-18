@@ -17,8 +17,7 @@ export class Bs4NavbarComponent extends Component {
     collapseSelector: ".navbar-collapse",
   };
 
-  protected collapseElements: NodeListOf<HTMLElement> | HTMLElement[] = [];
-  protected collapseServices: CollapseService[] = [];
+  protected collapseTargets: Map<HTMLElement, CollapseService> = new Map();
   protected routerEvents?: EventDispatcher;
 
   static get observedAttributes() {
@@ -36,7 +35,7 @@ export class Bs4NavbarComponent extends Component {
   }
 
   public toggle(event?: Event) {
-    for (const collapseService of this.collapseServices) {
+    for (const collapseService of this.collapseTargets.values()) {
       collapseService.toggle();
     }
 
@@ -47,7 +46,7 @@ export class Bs4NavbarComponent extends Component {
   }
 
   public show(event?: Event) {
-    for (const collapseService of this.collapseServices) {
+    for (const collapseService of this.collapseTargets.values()) {
       collapseService.show();
     }
     if (event) {
@@ -57,7 +56,7 @@ export class Bs4NavbarComponent extends Component {
   }
 
   public hide(event?: Event) {
-    for (const collapseService of this.collapseServices) {
+    for (const collapseService of this.collapseTargets.values()) {
       collapseService.hide();
     }
     if (event) {
@@ -79,60 +78,61 @@ export class Bs4NavbarComponent extends Component {
   }
 
   protected setCollapseElement() {
-    // Remove old event listeners
-    this.removeCollapseEventListeners();
+    const collapseElements = Array.from(
+      this.el.querySelectorAll<HTMLElement>(this.scope.collapseSelector) || []
+    );
 
-    this.collapseElements =
-      this.el.querySelectorAll<HTMLElement>(this.scope.collapseSelector) || [];
+    // remove old collapse targets
+    for (const collapseElement of this.collapseTargets.keys()) {
+      if (!collapseElements.find((ce) => ce === collapseElement)) {
+        this.disposeCollapseTarget(collapseElement);
+      }
+    }
 
-    // Add new event listeners
-    this.addCollapseEventListeners();
-
-    if (this.collapseElements) {
-      for (const collapseElement of Array.from(this.collapseElements)) {
-        this.collapseServices.push(
+    // add new collapse targets
+    for (const collapseElement of collapseElements) {
+      if (!this.collapseTargets.has(collapseElement)) {
+        this.collapseTargets.set(
+          collapseElement,
           new CollapseService(collapseElement, [this.el], { toggle: false })
         );
+        collapseElement.addEventListener(EVENT_SHOWN, this.onStateChange);
+        collapseElement.addEventListener(EVENT_HIDDEN, this.onStateChange);
       }
     }
 
     this.hide();
   }
 
-  protected addCollapseEventListeners() {
-    if (this.collapseElements) {
-      this.collapseElements.forEach((collapseElement: HTMLElement) => {
-        collapseElement.addEventListener(EVENT_SHOWN, this.onStateChange);
-        collapseElement.addEventListener(EVENT_HIDDEN, this.onStateChange);
-      });
+  protected disposeCollapseTargets() {
+    for (const collapseElement of this.collapseTargets.keys()) {
+      this.disposeCollapseTarget(collapseElement);
     }
   }
 
-  protected removeCollapseEventListeners() {
-    if (this.collapseElements) {
-      this.collapseElements.forEach((collapseElement: HTMLElement) => {
-        collapseElement.removeEventListener(
-          EVENT_SHOWN,
-          this.onStateChange.bind(this)
-        );
-        collapseElement.removeEventListener(
-          EVENT_HIDDEN,
-          this.onStateChange.bind(this)
-        );
-      });
+  protected disposeCollapseTarget(collapseElement: HTMLElement) {
+    const collapseService = this.collapseTargets.get(collapseElement);
+    if (collapseService) {
+      collapseService.dispose();
     }
+    this.collapseTargets.delete(collapseElement);
+    collapseElement.removeEventListener(EVENT_SHOWN, this.onStateChange);
+    collapseElement.removeEventListener(EVENT_HIDDEN, this.onStateChange);
   }
 
   protected disconnectedCallback() {
     super.disconnectedCallback();
-    this.removeCollapseEventListeners();
+    this.disposeCollapseTargets();
     if (this.routerEvents) {
       this.routerEvents.off("newPageReady", this.onNewPageReady, this);
     }
   }
 
   protected onStateChange() {
-    this.scope.isCollapsed = !!this.collapseServices[0]?.isCollapsed();
+    this.scope.isCollapsed = this.collapseTargets
+      .entries()
+      .next()
+      .value[0]?.isCollapsed();
 
     if (this.scope.isCollapsed) {
       this.el.classList.add(CLASS_NAME_COLLAPSED);

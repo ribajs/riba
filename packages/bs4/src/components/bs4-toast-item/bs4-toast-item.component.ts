@@ -33,9 +33,9 @@ export class Bs4ToastItemComponent extends Component {
   }
 
   protected scope: Scope = {
-    onHidden: this.onHidden,
+    onHidden: this.onHidden.bind(this),
     index: -1,
-    dismiss: this.dismiss,
+    dismiss: this.dismiss.bind(this),
     toast: undefined,
   };
 
@@ -71,7 +71,7 @@ export class Bs4ToastItemComponent extends Component {
       });
 
       // Call onHidden on hidden event once
-      toastEl.addEventListener(EVENT_HIDDEN, this.onHidden.bind(this), {
+      toastEl.addEventListener(EVENT_HIDDEN, this.scope.onHidden, {
         once: true,
       });
 

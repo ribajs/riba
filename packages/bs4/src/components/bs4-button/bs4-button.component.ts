@@ -16,7 +16,7 @@ export class Bs4ButtonComponent extends Component {
 
   protected scope: Scope = {
     animationClass: "btn-animation-start",
-    onClick: this.onClick,
+    onClick: this.onClick.bind(this),
   };
 
   constructor(element?: HTMLElement) {
@@ -53,20 +53,19 @@ export class Bs4ButtonComponent extends Component {
 
   protected async init(observedAttributes: string[]) {
     return super.init(observedAttributes).then((view) => {
+      this.onStartAnimation = this.onStartAnimation.bind(this);
       this.el.addEventListener(
         "webkitAnimationStart" as "animationstart",
-        this.onStartAnimation.bind(this)
+        this.onStartAnimation
       );
-      this.el.addEventListener(
-        "animationstart",
-        this.onStartAnimation.bind(this)
-      );
+      this.el.addEventListener("animationstart", this.onStartAnimation);
+      this.onEndAnimation = this.onEndAnimation.bind(this);
       this.el.addEventListener(
         "webkitAnimationEnd" as "animationend",
-        this.onEndAnimation.bind(this)
+        this.onEndAnimation
       );
-      this.el.addEventListener("animationend", this.onEndAnimation.bind(this));
-      this.el.addEventListener("click", this.onClick.bind(this));
+      this.el.addEventListener("animationend", this.onEndAnimation);
+      this.el.addEventListener("click", this.scope.onClick);
       return view;
     });
   }
@@ -104,18 +103,15 @@ export class Bs4ButtonComponent extends Component {
     super.disconnectedCallback();
     this.el.removeEventListener(
       "webkitAnimationStart" as "animationstart",
-      this.onStartAnimation.bind(this)
+      this.onStartAnimation
     );
-    this.el.removeEventListener(
-      "animationstart",
-      this.onStartAnimation.bind(this)
-    );
+    this.el.removeEventListener("animationstart", this.onStartAnimation);
     this.el.removeEventListener(
       "webkitAnimationEnd" as "animationend",
-      this.onEndAnimation.bind(this)
+      this.onEndAnimation
     );
-    this.el.removeEventListener("animationend", this.onEndAnimation.bind(this));
-    this.el.removeEventListener("click", this.onClick.bind(this));
+    this.el.removeEventListener("animationend", this.onEndAnimation);
+    this.el.removeEventListener("click", this.scope.onClick);
   }
 
   protected template() {
