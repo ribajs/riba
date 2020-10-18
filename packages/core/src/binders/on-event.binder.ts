@@ -9,11 +9,9 @@ export const onEventBinder: Binder<eventHandlerFunction> = {
   priority: 1000,
 
   bind() {
-    if (!this.customData) {
-      this.customData = {
-        handler: null,
-      };
-    }
+    this.customData = {
+      handler: null,
+    };
   },
 
   unbind(el: HTMLElement) {

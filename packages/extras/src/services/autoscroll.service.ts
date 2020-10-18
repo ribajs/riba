@@ -49,7 +49,7 @@ export class Autoscroll {
     this.limit = this.getLimit(this.el);
     this.move = this.getPosition();
 
-    window.addEventListener("resize", this.onResize.bind(this), {
+    window.addEventListener("resize", this.onResize, {
       passive: true,
     });
 
@@ -61,58 +61,64 @@ export class Autoscroll {
       this.el.scrollLeft = 0;
     }
 
-    this.el.addEventListener("mouseenter", this.onMouseIn.bind(this), {
+    this.onMouseIn = this.onMouseIn.bind(this);
+    this.onMouseOut = this.onMouseOut.bind(this);
+    this.onMouseUp = this.onMouseUp.bind(this);
+    this.onScroll = this.onScroll.bind(this);
+    this.render = this.render.bind(this);
+    this.updateMove = this.updateMove.bind(this);
+    this.el.addEventListener("mouseenter", this.onMouseIn, {
       passive: true,
     });
-    this.el.addEventListener("mouseover", this.onMouseIn.bind(this), {
+    this.el.addEventListener("mouseover", this.onMouseIn, {
       passive: true,
     });
-    this.el.addEventListener("focusin", this.onMouseIn.bind(this), {
+    this.el.addEventListener("focusin", this.onMouseIn, {
       passive: true,
     });
-    this.el.addEventListener("touchstart", this.onMouseIn.bind(this), {
+    this.el.addEventListener("touchstart", this.onMouseIn, {
       passive: true,
     });
 
-    this.el.addEventListener("mouseleave", this.onMouseOut.bind(this), {
+    this.el.addEventListener("mouseleave", this.onMouseOut, {
       passive: true,
     });
-    this.el.addEventListener("focusout", this.onMouseOut.bind(this), {
+    this.el.addEventListener("focusout", this.onMouseOut, {
       passive: true,
     });
 
-    this.el.addEventListener("mouseup", this.onMouseUp.bind(this), {
+    this.el.addEventListener("mouseup", this.onMouseUp, {
       passive: true,
     });
-    this.el.addEventListener("touchend", this.onMouseUp.bind(this), {
+    this.el.addEventListener("touchend", this.onMouseUp, {
       passive: true,
     });
 
     if (this.touchCapable) {
-      this.el.addEventListener("scroll", this.onMouseUp.bind(this), {
+      this.el.addEventListener("scroll", this.onMouseUp, {
         passive: true,
       });
-      this.el.addEventListener("scrollend", this.onMouseUp.bind(this), {
+      this.el.addEventListener("scrollend", this.onMouseUp, {
         passive: true,
       });
       // See ScrollEventsService for "scrollended" event
-      this.el.addEventListener("scrollended", this.onMouseUp.bind(this), {
+      this.el.addEventListener("scrollended", this.onMouseUp, {
         passive: true,
       });
     } else {
-      this.el.addEventListener("scroll", this.onScroll.bind(this), {
+      this.el.addEventListener("scroll", this.onScroll, {
         passive: true,
       });
-      this.el.addEventListener("scrollend", this.onScroll.bind(this), {
+      this.el.addEventListener("scrollend", this.onScroll, {
         passive: true,
       });
-      this.el.addEventListener("scrollended", this.onScroll.bind(this), {
+      this.el.addEventListener("scrollended", this.onScroll, {
         passive: true,
       });
     }
 
-    Gameloop.events.on("render", this.render.bind(this));
-    Gameloop.events.on("update", this.updateMove.bind(this));
+    Gameloop.events.on("render", this.render);
+    Gameloop.events.on("update", this.updateMove);
 
     Gameloop.startLoop({ maxFPS: 60 });
   }
@@ -151,31 +157,31 @@ export class Autoscroll {
   }
 
   protected removeEventListeners() {
-    window.removeEventListener("resize", this.onResize.bind(this));
+    window.removeEventListener("resize", this.onResize);
 
-    this.el.removeEventListener("mouseenter", this.onMouseIn.bind(this));
-    this.el.removeEventListener("mouseover", this.onMouseIn.bind(this));
-    this.el.removeEventListener("focusin", this.onMouseIn.bind(this));
-    this.el.removeEventListener("touchstart", this.onMouseIn.bind(this));
+    this.el.removeEventListener("mouseenter", this.onMouseIn);
+    this.el.removeEventListener("mouseover", this.onMouseIn);
+    this.el.removeEventListener("focusin", this.onMouseIn);
+    this.el.removeEventListener("touchstart", this.onMouseIn);
 
-    this.el.removeEventListener("mouseleave", this.onMouseOut.bind(this));
-    this.el.removeEventListener("focusout", this.onMouseOut.bind(this));
+    this.el.removeEventListener("mouseleave", this.onMouseOut);
+    this.el.removeEventListener("focusout", this.onMouseOut);
 
-    this.el.removeEventListener("mouseup", this.onMouseUp.bind(this));
-    this.el.removeEventListener("touchend", this.onMouseUp.bind(this));
+    this.el.removeEventListener("mouseup", this.onMouseUp);
+    this.el.removeEventListener("touchend", this.onMouseUp);
 
     if (this.touchCapable) {
-      this.el.removeEventListener("scroll", this.onMouseUp.bind(this));
-      this.el.removeEventListener("scrollend", this.onMouseUp.bind(this));
-      this.el.removeEventListener("scrollended", this.onMouseUp.bind(this));
+      this.el.removeEventListener("scroll", this.onMouseUp);
+      this.el.removeEventListener("scrollend", this.onMouseUp);
+      this.el.removeEventListener("scrollended", this.onMouseUp);
     } else {
-      this.el.removeEventListener("scroll", this.onScroll.bind(this));
-      this.el.removeEventListener("scrollend", this.onScroll.bind(this));
-      this.el.removeEventListener("scrollended", this.onScroll.bind(this));
+      this.el.removeEventListener("scroll", this.onScroll);
+      this.el.removeEventListener("scrollend", this.onScroll);
+      this.el.removeEventListener("scrollended", this.onScroll);
     }
 
-    Gameloop.events.off("render", this.render.bind(this));
-    Gameloop.events.off("update", this.updateMove.bind(this));
+    Gameloop.events.off("render", this.render);
+    Gameloop.events.off("update", this.updateMove);
   }
 
   protected onMouseIn() {

@@ -236,7 +236,9 @@ export class TouchEventsService extends BaseTouchEventsService {
     this.settings = settings;
 
     // this.scrollEvents = new ScrollEventsService(this.el);
-
+    this.onStartEvent = this.onStartEvent.bind(this);
+    this.onMoveEvent = this.onMoveEvent.bind(this);
+    this.onEndEvent = this.onEndEvent.bind(this);
     this.addEventListeners();
   }
 
@@ -247,13 +249,13 @@ export class TouchEventsService extends BaseTouchEventsService {
 
   protected removeEventListeners() {
     for (const eventName of this.settings.startevent) {
-      this.el.removeEventListener<any>(eventName, this.onStartEvent.bind(this));
+      this.el.removeEventListener<any>(eventName, this.onStartEvent);
     }
     for (const eventName of this.settings.moveevent) {
-      this.el.removeEventListener<any>(eventName, this.onMoveEvent.bind(this));
+      this.el.removeEventListener<any>(eventName, this.onMoveEvent);
     }
     for (const eventName of this.settings.endevent) {
-      this.el.removeEventListener<any>(eventName, this.onEndEvent.bind(this));
+      this.el.removeEventListener<any>(eventName, this.onEndEvent);
     }
     // this.scrollEvents.destroy();
   }
@@ -384,17 +386,17 @@ export class TouchEventsService extends BaseTouchEventsService {
 
   protected addEventListeners() {
     for (const eventName of this.settings.startevent) {
-      this.el.addEventListener<any>(eventName, this.onStartEvent.bind(this), {
+      this.el.addEventListener<any>(eventName, this.onStartEvent, {
         passive: true,
       });
     }
     for (const eventName of this.settings.moveevent) {
-      this.el.addEventListener<any>(eventName, this.onMoveEvent.bind(this), {
+      this.el.addEventListener<any>(eventName, this.onMoveEvent, {
         passive: true,
       });
     }
     for (const eventName of this.settings.endevent) {
-      this.el.addEventListener<any>(eventName, this.onEndEvent.bind(this), {
+      this.el.addEventListener<any>(eventName, this.onEndEvent, {
         passive: true,
       });
     }

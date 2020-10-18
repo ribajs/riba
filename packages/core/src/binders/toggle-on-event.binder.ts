@@ -5,15 +5,22 @@ import { Binder } from "../interfaces";
  */
 export const toggleOnEventBinder: Binder<string> = {
   name: "toggle-on-*",
-  function: true,
 
-  bind() {
-    if (!this.customData) {
-      this.customData = {
-        handler: null,
-        propertyKey: null as string | null,
-      };
-    }
+  bind(el) {
+    this.customData = {
+      handler: null,
+      propertyKey: null as string | null,
+      toggle: () => {
+        if (this.customData.propertyKey) {
+          this.view.models[this.customData.propertyKey] = !this.view.models[
+            this.customData.propertyKey
+          ];
+        }
+      },
+    };
+    const eventName = this.args[0] as string;
+    const passive = this.el.dataset.passive === "true"; // data-passive="true"
+    el.addEventListener(eventName, this.customData.toggle, { passive });
   },
 
   unbind(el: HTMLElement) {
@@ -22,15 +29,7 @@ export const toggleOnEventBinder: Binder<string> = {
         throw new Error("args is null");
       }
       const eventName = this.args[0] as string;
-      el.removeEventListener(eventName, this.binder.toggle);
-    }
-  },
-
-  toggle() {
-    if (this.customData.propertyKey) {
-      this.view.models[this.customData.propertyKey] = !this.view.models[
-        this.customData.propertyKey
-      ];
+      el.removeEventListener(eventName, this.customData.toggle);
     }
   },
 
@@ -39,8 +38,5 @@ export const toggleOnEventBinder: Binder<string> = {
       throw new Error("args is null");
     }
     this.customData.propertyKey = propertyKey;
-    const eventName = this.args[0] as string;
-    const passive = this.el.dataset.passive === "true"; // data-passive="true"
-    el.addEventListener(eventName, this.binder.toggle.bind(this), { passive });
   },
 };

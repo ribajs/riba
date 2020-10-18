@@ -29,36 +29,37 @@ export class Dragscroll {
       return this;
     }
 
-    el.removeEventListener("mousedown", this.onMouseDown.bind(this), false);
-    el.addEventListener("mousedown", this.onMouseDown.bind(this), {
+    this.onMouseDown = this.onMouseDown.bind(this);
+    this.onMouseUp = this.onMouseUp.bind(this);
+    this.onMouseMove = this.onMouseMove.bind(this);
+    this.checkDraggable = this.checkDraggable.bind(this);
+
+    el.removeEventListener("mousedown", this.onMouseDown);
+    el.addEventListener("mousedown", this.onMouseDown, {
       passive: true,
     });
 
-    window.addEventListener("resize", this.checkDraggable.bind(this));
+    window.addEventListener("resize", this.checkDraggable);
 
     // Use global move if your element does not use the full width / height
     if (this.options.detectGlobalMove) {
-      window.removeEventListener("mouseup", this.onMouseUp.bind(this), false);
-      window.removeEventListener(
-        "mousemove",
-        this.onMouseMove.bind(this),
-        false
-      );
+      window.removeEventListener("mouseup", this.onMouseUp);
+      window.removeEventListener("mousemove", this.onMouseMove);
 
-      window.addEventListener("mouseup", this.onMouseUp.bind(this), {
+      window.addEventListener("mouseup", this.onMouseUp, {
         passive: true,
       });
-      window.addEventListener("mousemove", this.onMouseMove.bind(this), {
+      window.addEventListener("mousemove", this.onMouseMove, {
         passive: true,
       });
     } else {
-      el.removeEventListener("mouseup", this.onMouseUp.bind(this), false);
-      el.removeEventListener("mousemove", this.onMouseMove.bind(this), false);
+      el.removeEventListener("mouseup", this.onMouseUp);
+      el.removeEventListener("mousemove", this.onMouseMove);
 
-      el.addEventListener("mouseup", this.onMouseUp.bind(this), {
+      el.addEventListener("mouseup", this.onMouseUp, {
         passive: true,
       });
-      el.addEventListener("mousemove", this.onMouseMove.bind(this), {
+      el.addEventListener("mousemove", this.onMouseMove, {
         passive: true,
       });
     }
@@ -113,16 +114,8 @@ export class Dragscroll {
 
   protected removeEventListeners() {
     window.removeEventListener("resize", this.checkDraggable);
-    this.el.removeEventListener(
-      "mousedown",
-      this.onMouseDown.bind(this),
-      false
-    );
-    this.el.removeEventListener("mouseup", this.onMouseUp.bind(this), false);
-    this.el.removeEventListener(
-      "mousemove",
-      this.onMouseMove.bind(this),
-      false
-    );
+    this.el.removeEventListener("mousedown", this.onMouseDown);
+    this.el.removeEventListener("mouseup", this.onMouseUp);
+    this.el.removeEventListener("mousemove", this.onMouseMove);
   }
 }

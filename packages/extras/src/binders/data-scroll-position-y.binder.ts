@@ -18,37 +18,36 @@ export const dataScrollPositionYBinder: Binder<string> = {
   name: "data-scroll-position-y",
   customData: {},
   bind() {
-    if (!this.customData) {
-      this.customData = {};
-    }
-    this.customData.onScroll = () => {
-      if (this.customData.elementSelector === "window") {
-        const element = this.customData.watchScrollOnElement as Window;
-        if (element.scrollY <= 0 + this.customData.offsetTop) {
-          this.el.dataset.scrollPositionY = "top";
-        } else if (
-          element.innerHeight +
-            element.pageYOffset +
-            this.customData.offsetBottom >=
-          document.body.offsetHeight
-        ) {
-          this.el.dataset.scrollPositionY = "bottom";
+    this.customData = {
+      onScroll: debounce(() => {
+        if (this.customData.elementSelector === "window") {
+          const element = this.customData.watchScrollOnElement as Window;
+          if (element.scrollY <= 0 + this.customData.offsetTop) {
+            this.el.dataset.scrollPositionY = "top";
+          } else if (
+            element.innerHeight +
+              element.pageYOffset +
+              this.customData.offsetBottom >=
+            document.body.offsetHeight
+          ) {
+            this.el.dataset.scrollPositionY = "bottom";
+          } else {
+            this.el.dataset.scrollPositionY = "scrolled";
+          }
         } else {
-          this.el.dataset.scrollPositionY = "scrolled";
+          const element = this.customData.watchScrollOnElement as HTMLElement;
+          if (element.scrollTop <= 0 + this.customData.offsetTop) {
+            this.el.dataset.scrollPositionY = "top";
+          } else if (
+            element.scrollTop + this.customData.offsetBottom >=
+            element.scrollHeight - element.clientHeight
+          ) {
+            this.el.dataset.scrollPositionY = "bottom";
+          } else {
+            this.el.dataset.scrollPositionY = "scrolled";
+          }
         }
-      } else {
-        const element = this.customData.watchScrollOnElement as HTMLElement;
-        if (element.scrollTop <= 0 + this.customData.offsetTop) {
-          this.el.dataset.scrollPositionY = "top";
-        } else if (
-          element.scrollTop + this.customData.offsetBottom >=
-          element.scrollHeight - element.clientHeight
-        ) {
-          this.el.dataset.scrollPositionY = "bottom";
-        } else {
-          this.el.dataset.scrollPositionY = "scrolled";
-        }
-      }
+      }).bind(this),
     };
   },
   routine(el: HTMLElement, elementSelector = "window") {
@@ -56,7 +55,7 @@ export const dataScrollPositionYBinder: Binder<string> = {
     if (this.customData.watchScrollOnElement) {
       this.customData.watchScrollOnElement.removeEventListener(
         "scroll",
-        debounce.bind(this, this.customData.onScroll.bind(this))
+        this.customData.onScroll
       );
     }
 
@@ -76,7 +75,7 @@ export const dataScrollPositionYBinder: Binder<string> = {
       // console.debug('addEventListener', this.customData.watchScrollOnElement);
       this.customData.watchScrollOnElement.addEventListener(
         "scroll",
-        debounce(this.customData.onScroll.bind(this)),
+        this.customData.onScroll,
         { passive: true }
       );
     }
@@ -95,7 +94,7 @@ export const dataScrollPositionYBinder: Binder<string> = {
     if (this.customData.watchScrollOnElement) {
       this.customData.watchScrollOnElement.removeEventListener(
         "scroll",
-        debounce(this.customData.onScroll.bind(this))
+        this.customData.onScroll
       );
     }
   },

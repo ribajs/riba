@@ -13,35 +13,16 @@ export const checkedBinder: Binder<string | boolean> = {
   publishes: true,
   priority: 2000,
 
-  onChange() {
-    this.publish();
-  },
-
   bind(el) {
-    const self = this;
-    this.customData = this.customData || {};
+    this.customData = {
+      onChange: this.publish.bind(this),
+    };
 
-    if (!this.customData.onChange) {
-      this.customData.onChange = () => {
-        self.publish();
-      };
-    }
-
-    el.addEventListener("change", this.customData.onChange, false);
-    // el.addEventListener("click", this.customData.onChange, false);
-    // el.addEventListener("input", this.customData.onChange, false);
-    // el.addEventListener("focus", this.customData.onChange, false);
-    // el.addEventListener("blur", this.customData.onChange, false);
-
-    (el as HTMLInputElement).checked = !!(el as HTMLInputElement).checked;
+    el.addEventListener("change", this.customData.onChange);
   },
 
   unbind(el) {
     el.removeEventListener(this.customData.event, this.customData.onChange);
-    // el.addEventListener("click", this.customData.onChange);
-    // el.addEventListener("input", this.customData.onChange);
-    // el.addEventListener("focus", this.customData.onChange);
-    // el.addEventListener("blur", this.customData.onChange);
   },
 
   routine(el: HTMLElement, newValue) {

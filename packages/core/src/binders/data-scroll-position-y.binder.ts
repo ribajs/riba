@@ -21,7 +21,7 @@ export const dataScrollPositionYBinder: Binder<string> = {
       this.customData = {};
     }
     this.customData.offset = Number(this.el.dataset.offset) || DEFAULT_OFFSET;
-    this.customData.onScroll = () => {
+    this.customData.onScroll = debounce(() => {
       const element = this.customData.watchScrollOnElement as Window;
       if (element.scrollY <= 0 + this.customData.offset) {
         this.el.dataset.scrollPositionY = "top";
@@ -34,14 +34,14 @@ export const dataScrollPositionYBinder: Binder<string> = {
       } else {
         this.el.dataset.scrollPositionY = "scrolled";
       }
-    };
+    }).bind(this);
   },
   routine(el: HTMLUnknownElement, elementSelector = "window") {
     // Remove old scroll event
     if (this.customData.watchScrollOnElement) {
       this.customData.watchScrollOnElement.removeEventListener(
         "scroll",
-        debounce.bind(this, this.customData.onScroll.bind(this))
+        this.customData.onScroll
       );
     }
 
@@ -59,7 +59,7 @@ export const dataScrollPositionYBinder: Binder<string> = {
       // console.debug('addEventListener', this.customData.watchScrollOnElement);
       this.customData.watchScrollOnElement.addEventListener(
         "scroll",
-        debounce(this.customData.onScroll.bind(this)),
+        this.customData.onScroll,
         { passive: true }
       );
     }
@@ -72,7 +72,7 @@ export const dataScrollPositionYBinder: Binder<string> = {
     if (this.customData.watchScrollOnElement) {
       this.customData.watchScrollOnElement.removeEventListener(
         "scroll",
-        debounce(this.customData.onScroll.bind(this))
+        this.customData.onScroll
       );
     }
   },

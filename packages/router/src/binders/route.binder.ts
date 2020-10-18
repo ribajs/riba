@@ -81,12 +81,7 @@ export const routeBinder: Binder<string> = {
       this.customData.options = optionsOrUrl as RouteOptions;
     }
     this.customData.options.viewId = this.customData.options.viewId || "main";
-    (this.customData.prefetch = new Prefetch(this.customData.options.viewId)),
-      (this.customData.options.removeAfterActivation = isBoolean(
-        this.customData.options.removeAfterActivation
-      )
-        ? this.customData.options.removeAfterActivation
-        : false);
+    this.customData.prefetch = new Prefetch(this.customData.options.viewId);
     this.customData.dispatcher = new EventDispatcher(
       this.customData.options.viewId
     );

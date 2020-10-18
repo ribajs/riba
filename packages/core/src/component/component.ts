@@ -79,6 +79,8 @@ export abstract class Component extends FakeHTMLElement {
         `element is required on browsers without custom elements support`
       );
     }
+    this.onParentChanged = this.onParentChanged.bind(this);
+    this.onRibaAttributeChanged = this.onRibaAttributeChanged.bind(this);
   }
 
   /**
@@ -583,29 +585,23 @@ export abstract class Component extends FakeHTMLElement {
   }
 
   private listenForRibaParent() {
-    this.el.addEventListener("parent" as any, this.onParentChanged.bind(this));
+    this.el.addEventListener("parent" as any, this.onParentChanged);
   }
 
   private removeEventListenerForRibaParent() {
-    this.el.removeEventListener(
-      "parent" as any,
-      this.onParentChanged.bind(this)
-    );
+    this.el.removeEventListener("parent" as any, this.onParentChanged);
   }
 
   private listenForRibaAttribute(attrName: string) {
     const eventName = "attribute:" + attrName;
     this.debug("Listen for " + eventName);
-    this.el.addEventListener(
-      eventName as any,
-      this.onRibaAttributeChanged.bind(this)
-    );
+    this.el.addEventListener(eventName as any, this.onRibaAttributeChanged);
   }
 
   private removeEventListenerForRibaAttribute(attrName: string) {
     this.el.removeEventListener(
       ("attribute:" + attrName) as any,
-      this.onRibaAttributeChanged.bind(this)
+      this.onRibaAttributeChanged
     );
   }
 

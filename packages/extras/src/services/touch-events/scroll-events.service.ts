@@ -18,6 +18,7 @@ export class ScrollEventsService extends BaseTouchEventsService {
     this._scrollEvent = this.touchCapable
       ? ["touchmove", "scrollend", "scroll"]
       : ["scroll", "scrollend"];
+    this.onScrollEvent = this.onScrollEvent.bind(this);
     this.addEventListeners();
   }
 
@@ -31,16 +32,13 @@ export class ScrollEventsService extends BaseTouchEventsService {
 
   protected removeEventListeners() {
     for (const eventName of this._scrollEvent) {
-      this.el.removeEventListener<any>(
-        eventName,
-        this.onScrollEvent.bind(this)
-      );
+      this.el.removeEventListener<any>(eventName, this.onScrollEvent);
     }
   }
 
   protected addEventListeners() {
     for (const eventName of this._scrollEvent) {
-      this.el.addEventListener<any>(eventName, this.onScrollEvent.bind(this), {
+      this.el.addEventListener<any>(eventName, this.onScrollEvent, {
         passive: true,
       });
     }

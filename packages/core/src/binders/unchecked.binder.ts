@@ -1,4 +1,5 @@
 import { Binder } from "../interfaces";
+import { getInputValue } from "@ribajs/utils/src/dom";
 import { getString } from "@ribajs/utils/src/type";
 
 /**
@@ -13,11 +14,16 @@ export const uncheckedBinder: Binder<string> = {
   priority: 2000,
 
   bind(el) {
-    el.addEventListener("change", this.publish);
+    this.customData = {
+      onChange: () => {
+        this.publish.bind(this);
+      },
+    };
+    el.addEventListener("change", this.customData.onChange);
   },
 
   unbind(el) {
-    el.removeEventListener("change", this.publish);
+    el.removeEventListener("change", this.customData.onChange);
   },
 
   routine(el: HTMLElement, value) {
@@ -28,4 +34,6 @@ export const uncheckedBinder: Binder<string> = {
       (el as HTMLInputElement).checked = !value;
     }
   },
+
+  getValue: getInputValue,
 };

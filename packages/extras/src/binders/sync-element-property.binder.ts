@@ -11,39 +11,53 @@ export const syncElementPropertyBinder: Binder<string> = {
   priority: 1000,
 
   bind() {
-    /**/
+    this.customData = {
+      syncWidth: throttle(() => {
+        this.el.style.width = this.customData.elToSync.clientWidth + "px";
+      }),
+      syncHeight: throttle(() => {
+        this.el.style.height = this.customData.elToSync.clientHeight + "px";
+      }),
+    };
   },
 
   unbind(/*el: HTMLElement*/) {
-    /**/
+    const propertyName = this.args[0] as string;
+    if (this.customData.elToSync) {
+      this.customData.elToSync.removeEventListener(
+        "resize",
+        propertyName === "width"
+          ? this.customData.syncWidth
+          : this.customData.syncHeight
+      );
+    }
   },
 
   routine(el: HTMLElement, value: string) {
     if (this.args === null) {
       throw new Error("args is null");
     }
-
     const propertyName = this.args[0] as string;
+
+    if (this.customData.elToSync) {
+      this.customData.elToSync.removeEventListener(
+        "resize",
+        propertyName === "width"
+          ? this.customData.syncWidth
+          : this.customData.syncHeight
+      );
+    }
     const elementToSync = document.getElementById(value);
     if (elementToSync) {
+      this.customData.elToSync = elementToSync;
       switch (propertyName) {
         case "height":
           el.style.height = elementToSync.clientHeight + "px";
-          window.addEventListener(
-            "resize",
-            throttle(() => {
-              el.style.height = elementToSync.clientHeight + "px";
-            })
-          );
+          window.addEventListener("resize", this.customData.syncHeight);
           break;
         case "width":
           el.style.width = elementToSync.clientWidth + "px";
-          window.addEventListener(
-            "resize",
-            throttle(() => {
-              el.style.width = elementToSync.clientWidth + "px";
-            })
-          );
+          window.addEventListener("resize", this.customData.syncWidth);
           break;
         default:
           console.warn(

@@ -10,24 +10,26 @@ export const parentBinder: Binder<any> = {
     /**/
   },
   bind(el) {
+    this.customData = {
+      onAskForParent: () => {
+        el.dispatchEvent(
+          new CustomEvent("parent", { detail: this.view.models })
+        );
+      },
+    };
     el.addEventListener(
       "ask-for-parent" as any,
-      this.binder.onAskForParent.bind(this, el),
+      this.customData.onAskForParent,
       false
     );
-    this.binder.onAskForParent.bind(this)(el);
+    this.binder.onAskForParent();
   },
 
   unbind(el) {
     el.removeEventListener(
       "ask-for-parent" as any,
-      this.binder.onAskForParent,
+      this.customData.onAskForParent,
       false
     );
-  },
-
-  onAskForParent(el: HTMLElement) {
-    // console.debug("onAskForParent", el, this.view.models);
-    el.dispatchEvent(new CustomEvent("parent", { detail: this.view.models }));
   },
 };

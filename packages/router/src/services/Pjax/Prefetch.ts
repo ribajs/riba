@@ -44,28 +44,18 @@ class Prefetch {
     }
     if (autobindLinks) {
       this.deInit();
-      document.body.addEventListener(
-        "mouseover",
-        this.onLinkEnterIntern.bind(this),
-        { passive: true }
-      );
-      document.body.addEventListener(
-        "touchstart",
-        this.onLinkEnterIntern.bind(this),
-        { passive: true }
-      );
+      document.body.addEventListener("mouseover", this.onLinkEnterIntern, {
+        passive: true,
+      });
+      document.body.addEventListener("touchstart", this.onLinkEnterIntern, {
+        passive: true,
+      });
     }
   }
 
   public deInit() {
-    document.body.removeEventListener(
-      "mouseover",
-      this.onLinkEnterIntern.bind(this)
-    );
-    document.body.removeEventListener(
-      "touchstart",
-      this.onLinkEnterIntern.bind(this)
-    );
+    document.body.removeEventListener("mouseover", this.onLinkEnterIntern);
+    document.body.removeEventListener("touchstart", this.onLinkEnterIntern);
   }
 
   /**
