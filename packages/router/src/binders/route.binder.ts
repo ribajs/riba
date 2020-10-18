@@ -1,6 +1,6 @@
 import { Pjax, Prefetch } from "../services";
 import { Binding, Binder, EventDispatcher } from "@ribajs/core";
-import { isObject, isString, isBoolean } from "@ribajs/utils/src/type";
+import { isObject, isString } from "@ribajs/utils/src/type";
 import { onRoute, normalizeUrl, isExternalUrl } from "@ribajs/utils/src/url";
 
 export interface RouteOptions {
