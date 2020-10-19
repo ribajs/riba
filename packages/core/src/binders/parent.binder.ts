@@ -22,7 +22,7 @@ export const parentBinder: Binder<any> = {
       this.customData.onAskForParent,
       false
     );
-    this.binder.onAskForParent();
+    this.customData.onAskForParent();
   },
 
   unbind(el) {
