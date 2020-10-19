@@ -124,6 +124,8 @@ export class Bs4SidebarComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
+    // assign this to bound version, so we can remove window EventListener later without problem
+    this.onEnvironmentChanges = this.onEnvironmentChanges.bind(this);
   }
 
   public setState(state: State) {
@@ -161,26 +163,20 @@ export class Bs4SidebarComponent extends Component {
     super.connectedCallback();
     this.init(Bs4SidebarComponent.observedAttributes);
     this.style = window.getComputedStyle(this.el);
-    // assign this to bound version, so we can remove window EventListener later without problem
-    this.onEnvironmentChanges = this.onEnvironmentChanges.bind(this);
     window.addEventListener("resize", this.onEnvironmentChanges, false);
     // inital
     this.onEnvironmentChanges();
   }
 
-  protected onToggle() {
-    this.toggle();
-  }
-
   protected initToggleButtonEventDispatcher() {
     if (this.toggleButtonEvents) {
-      this.toggleButtonEvents.off("toggle");
-      this.toggleButtonEvents.off("init");
+      this.toggleButtonEvents.off("toggle", this.toggle, this);
+      this.toggleButtonEvents.off("init", this.triggerState, this);
     }
     this.toggleButtonEvents = new EventDispatcher(
       "bs4-toggle-button:" + this.scope.id
     );
-    this.toggleButtonEvents.on("toggle", this.onToggle, this);
+    this.toggleButtonEvents.on("toggle", this.toggle, this);
     this.toggleButtonEvents.on("init", this.triggerState, this);
   }
 
@@ -387,9 +383,8 @@ export class Bs4SidebarComponent extends Component {
   // deconstructor
   protected disconnectedCallback() {
     super.disconnectedCallback();
-    this.toggleButtonEvents?.off("init", this.triggerState.bind(this));
-    this.toggleButtonEvents?.off("toggle", this.onToggle.bind(this));
-    this.toggleButtonEvents?.off("init", this.triggerState.bind(this));
+    this.toggleButtonEvents?.off("init", this.triggerState, this);
+    this.toggleButtonEvents?.off("toggle", this.toggle, this);
     this.routerEvents.off("newPageReady", this.onEnvironmentChanges, this);
     window.removeEventListener("resize", this.onEnvironmentChanges, false);
   }
