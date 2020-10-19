@@ -1,8 +1,7 @@
 import { Component } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import template from "./taggedimage-example.component.html";
-import { PopoverOptions } from "@ribajs/bs4";
-import { Tag } from "@ribajs/tagged-image";
+import template from "./bs4-taggedimage-example.component.html";
+import { PopoverOptions, TaggedImageTag as Tag } from "@ribajs/bs4";
 
 interface Scope {
   name: string;
@@ -15,8 +14,8 @@ interface Scope {
   responsiveTags: Tag[];
 }
 
-export class TaggedImageExampleComponent extends Component {
-  public static tagName = "taggedimage-example";
+export class Bs4TaggedImageExampleComponent extends Component {
+  public static tagName = "bs4-taggedimage-example";
 
   protected autobind = true;
 
@@ -81,7 +80,7 @@ export class TaggedImageExampleComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init(TaggedImageExampleComponent.observedAttributes);
+    this.init(Bs4TaggedImageExampleComponent.observedAttributes);
   }
 
   protected requiredAttributes() {

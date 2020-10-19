@@ -15,3 +15,4 @@ export { Bs4FormComponent } from "./bs4-form/bs4-form.component";
 export { Bs4NotificationContainerComponent } from "./bs4-notification-container/bs4-notification-container.component";
 export { Bs4ToastItemComponent } from "./bs4-toast-item/bs4-toast-item.component";
 export { Bs4ModalItemComponent } from "./bs4-modal-item/bs4-modal-item.component";
+export { Bs4TaggedImageComponent } from "./bs4-tagged-image/bs4-tagged-image.component";

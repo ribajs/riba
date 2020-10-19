@@ -1,5 +1,5 @@
 {
-  "name": "taggedimage-example",
+  "name": "bs4-taggedimage-example",
   "version": "1.9.0-beta.2",
   "description": "",
   "main": "src/index.html",
@@ -74,7 +74,6 @@
     "@ribajs/core": "^1.9.0-beta.2",
     "@ribajs/extras": "^1.9.0-beta.2",
     "@ribajs/iconset": "^1.9.0-beta.2",
-    "@ribajs/tagged-image": "^1.9.0-beta.2",
     "@ribajs/utils": "^1.9.0-beta.2",
     "bootstrap": "^4.5.3"
   },
@@ -88,7 +87,6 @@
     "@ribajs/moment": "portal:../../packages/moment",
     "@ribajs/pdf": "portal:../../packages/pdf",
     "@ribajs/leaflet-map": "portal:../../packages/leaflet-map",
-    "@ribajs/tagged-image": "portal:../../packages/tagged-image",
     "@ribajs/router": "portal:../../packages/router",
     "@ribajs/shopify": "portal:../../packages/shopify",
     "@ribajs/shopify-easdk": "portal:../../packages/shopify-easdk",

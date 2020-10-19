@@ -1,8 +1,7 @@
 import { bs4Module } from "@ribajs/bs4";
 import { coreModule, Riba } from "@ribajs/core";
 import { extrasModule } from "@ribajs/extras";
-import { taggedImageModule } from "@ribajs/tagged-image";
-import { TaggedImageDemoModule } from "./taggedimage-demo.module";
+import { Bs4TaggedImageDemoModule } from "./bs4-taggedimage-demo.module";
 
 declare global {
   interface Window {
@@ -18,7 +17,6 @@ const model = (window.model = window.model || {});
 riba.module.regist(coreModule);
 riba.module.regist(bs4Module);
 riba.module.regist(extrasModule);
-riba.module.regist(taggedImageModule);
-riba.module.regist(TaggedImageDemoModule);
+riba.module.regist(Bs4TaggedImageDemoModule);
 
 riba.bind(document.body, model);

@@ -132,7 +132,6 @@
     "@ribajs/shopify": "portal:packages/shopify",
     "@ribajs/shopify-easdk": "portal:packages/shopify-easdk",
     "@ribajs/shopify-tda": "portal:packages/shopify-tda",
-    "@ribajs/tagged-image": "portal:packages/tagged-image",
     "@ribajs/utils": "portal:packages/utils",
     "@ribajs/doc": "portal:infra/doc",
     "@ribajs/eslint-config": "portal:infra/eslint-config",

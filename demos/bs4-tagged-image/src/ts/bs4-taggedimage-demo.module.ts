@@ -3,11 +3,11 @@ import { RibaModule } from "@ribajs/core";
 import * as components from "./components";
 // import * as formatters from './formatters';
 
-export const TaggedImageDemoModule: RibaModule = {
+export const Bs4TaggedImageDemoModule: RibaModule = {
   binders: {},
   components,
   formatters: {},
   services: {},
 };
 
-export default TaggedImageDemoModule;
+export default Bs4TaggedImageDemoModule;

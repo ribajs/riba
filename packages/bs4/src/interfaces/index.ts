@@ -8,3 +8,4 @@ export * from "./popover-options";
 export * from "./share-item";
 export * from "./toast";
 export * from "./tooltip-options";
+export * from "./tagged-image-tag";

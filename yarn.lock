@@ -2658,46 +2658,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/tagged-image@workspace:packages/tagged-image":
-  version: 0.0.0-use.local
-  resolution: "@ribajs/tagged-image@workspace:packages/tagged-image"
-  dependencies:
-    "@babel/cli": ^7.12.0
-    "@babel/core": ^7.12.0
-    "@babel/plugin-proposal-class-properties": ^7.10.4
-    "@babel/plugin-proposal-export-default-from": ^7.10.4
-    "@babel/plugin-proposal-object-rest-spread": ^7.11.0
-    "@babel/plugin-syntax-dynamic-import": ^7.8.3
-    "@babel/plugin-transform-runtime": ^7.12.0
-    "@babel/preset-env": ^7.12.0
-    "@babel/preset-typescript": ^7.12.0
-    "@babel/runtime-corejs3": ^7.12.0
-    "@ribajs/bs4": "workspace:packages/bs4"
-    "@ribajs/core": "workspace:packages/core"
-    "@ribajs/eslint-config": "workspace:infra/eslint-config"
-    "@ribajs/extras": "workspace:packages/extras"
-    "@ribajs/tsconfig": "workspace:infra/tsconfig"
-    "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.14
-    "@typescript-eslint/eslint-plugin": ^4.4.1
-    "@typescript-eslint/parser": ^4.4.1
-    "@yarnpkg/pnpify": ^2.3.3
-    babel-loader: ^8.1.0
-    babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.6.5
-    eslint: ^7.11.0
-    eslint-config-prettier: ^6.12.0
-    eslint-plugin-prettier: ^3.1.4
-    jest: ^26.5.3
-    jest-extended: ^0.11.5
-    prettier: ^2.1.2
-    ts-jest: ^26.4.1
-    typescript: ^4.0.3
-    webpack: ^5.1.2
-    webpack-cli: ^4.0.0
-  languageName: unknown
-  linkType: soft
-
 "@ribajs/tsconfig@portal:infra/tsconfig::locator=ribajs%40workspace%3A.":
   version: 0.0.0-use.local
   resolution: "@ribajs/tsconfig@portal:infra/tsconfig::locator=ribajs%40workspace%3A."

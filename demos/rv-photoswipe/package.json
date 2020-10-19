@@ -102,7 +102,6 @@
     "@ribajs/utils": "portal:../../packages/utils",
     "@ribajs/history": "portal:../../packages/history",
     "@ribajs/leaflet-map": "portal:../../packages/leaflet-map",
-    "@ribajs/tagged-image": "portal:../../packages/tagged-image",
     "@ribajs/content-slider": "portal:../../packages/content-slider",
     "@ribajs/octobercms": "portal:../../packages/octobercms"
   }

@@ -101,7 +101,6 @@
     "@ribajs/history": "portal:../../packages/history",
     "@ribajs/photoswipe": "portal:../../packages/photoswipe",
     "@ribajs/utils": "portal:../../packages/utils",
-    "@ribajs/tagged-image": "portal:../../packages/tagged-image",
     "@ribajs/content-slider": "portal:../../packages/content-slider",
     "@ribajs/octobercms": "portal:../../packages/octobercms"
   }
