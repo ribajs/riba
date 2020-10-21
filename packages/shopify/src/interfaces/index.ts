@@ -3,6 +3,8 @@ export * from "./cart";
 export * from "./customer.";
 export * from "./discount";
 export * from "./order";
+export * from "./linklist-link";
+export * from "./linklist";
 export * from "./metafield";
 export * from "./product";
 export * from "./image";
