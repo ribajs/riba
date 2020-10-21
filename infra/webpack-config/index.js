@@ -21,12 +21,26 @@ var getStyleLoaderRule = (config = {}) => {
     });
   }
 
+  if (
+    config.styles.resolveUrl === "onlyImports" ||
+    config.styles.resolveUrl === "notForAssets"
+  ) {
+    config.styles.resolveUrl = (url /*, resourcePath*/) => {
+      // Ignore assets
+      if (/\.(gif|jpe?g|tiff?|png|svg|webp|bmp)$/i.test(url)) {
+        return false;
+      }
+      // Enabled for all other file extensions
+      return true;
+    };
+  }
+
   rule.use.push({
     loader: require.resolve("css-loader"),
     options: {
       // Set this to true to resolve scss modules like `@import '~bootstrap/scss/bootstrap';`
-      // Set this to false if you do not want resolve font urls like `src: url(webfont_ProximaNova-Sbold.woff) format('woff');`
-      url: true,
+      // Set this to false if you do not want to resolve font urls like `src: url(webfont_ProximaNova-Sbold.woff) format('woff');`
+      url: config.styles.resolveUrl,
     },
   });
 
@@ -105,6 +119,7 @@ module.exports = (config = {}) => {
     config.styles = config.styles || {
       build: true,
       extract: true,
+      resolveUrl: true,
     };
 
     config.scripts = config.scripts || {
@@ -146,6 +161,11 @@ module.exports = (config = {}) => {
 
         config.styles.build = true;
         config.styles.extract = true;
+        /**
+         * @param {string} url
+         * @param {string} resourcePath path to css file
+         */
+        config.styles.resolveUrl = "onlyImports";
 
         config.copyAssets = config.copyAssets || {
           enable: true,
