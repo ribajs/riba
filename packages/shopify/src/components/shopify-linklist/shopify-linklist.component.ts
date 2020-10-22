@@ -2,29 +2,7 @@ import { Component, EventDispatcher } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./shopify-linklist.component.html";
 
-export interface LinklistLink {
-  active: boolean;
-  child_active: boolean;
-  handle: string;
-  level: number;
-  levels: number;
-  links: LinklistLink[];
-  title: string;
-  type: string;
-  url: string;
-
-  // custom
-  collapseable?: boolean;
-  collapsed?: boolean;
-}
-
-export interface Linklist {
-  handle: string;
-  id: string | null;
-  levels: number;
-  links: LinklistLink[];
-  title: string;
-}
+import { Linklist, LinklistLink } from "./../../interfaces";
 
 export interface Scope {
   // Properties
