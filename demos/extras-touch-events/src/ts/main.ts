@@ -1,6 +1,6 @@
-import { coreModule, Riba } from '@ribajs/core';
-import { extrasModule } from '@ribajs/extras';
-import { touchEventsModule } from './touch-events.module';
+import { coreModule, Riba } from "@ribajs/core";
+import { extrasModule } from "@ribajs/extras";
+import { touchEventsModule } from "./touch-events.module";
 
 const riba = new Riba();
 const model = {};
