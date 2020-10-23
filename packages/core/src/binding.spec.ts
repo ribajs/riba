@@ -3,21 +3,13 @@ import "jest-extended";
 import { Riba } from "./riba";
 import { Binding } from "./binding";
 import { View } from "./view";
-
 import { Data } from "../spec/lib/moch.data";
-
 import { dotAdapter } from "./adapters/dot.adapter";
-
 import { textBinder } from "./binders/text.binder";
-
 import { htmlBinder } from "./binders/html.binder";
-
 import { valueBinder } from "./binders/value.binder";
-
 import { eachStarBinder } from "./binders/each-item.binder";
-
 import { addClassBinder } from "./binders/add-class.binder";
-
 import { Formatter, Adapter } from "./interfaces";
 
 const riba = new Riba();

@@ -11,9 +11,10 @@ module.exports = {
     "\\.pnp\\.[^\\\/]+$"
   ],
   testPathIgnorePatterns: [
-    "/infra/schematics/dist/lib/*",
-    "/infra/schematics/src/lib/*",
-    "/node_modules/"
+    "/infra/schematics/dist/lib/",
+    "/infra/schematics/src/lib/",
+    "/node_modules/",
+    "/packages/*/dist/"
   ],
   coverageReporters: ["json", "lcov"],
   setupFilesAfterEnv: [require.resolve("jest-extended")],
