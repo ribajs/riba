@@ -1,11 +1,12 @@
 # compiled output
-/lib
-/dist
-/infra/*/dist
-/packages/*/dist
-!packages/iconset/dist
+/lib/
+/dist/
+/infra/*/dist/
+/packages/*/dist/
+!packages/iconset/dist/
 /demos/*/dist
-/node_modules
+/examples/*/dist
+node_modules/
 /.cache
 # Logs
 logs
@@ -62,6 +63,12 @@ lerna-debug.log*
 !/demos/*/.yarn/plugins
 !/demos/*/.yarn/sdks
 !/demos/*/.yarn/versions
+
+/examples/*/.yarn/*
+!/examples/*/.yarn/releases
+!/examples/*/.yarn/plugins
+!/examples/*/.yarn/sdks
+!/examples/*/.yarn/versions
 
 # Demos
 /demos/*/src/iconset/

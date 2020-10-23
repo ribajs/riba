@@ -1,0 +1,12 @@
+{
+  "extends": "@ribajs/tsconfig",
+  "compilerOptions": {
+    "outDir": "dist",
+    "types": ["jest", "node"]
+  },
+  "exclude": [
+    "node_modules",
+    "**/*.d.ts",
+  ],
+  "files": ["src/ts/renderer/renderer.ts"]
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'unsafe-inline' 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'unsafe-inline' 'self'">
+    <title>Riba Electron Example</title>
+  </head>
+  <body>
+    <bs4-sidebar id="example-sidebar" container-selector="#example-sidebar-container" position="right" class="p-3">
+      <div rv-show="isActive" rv-on-click="hide" class="d-flex justify-content-center">
+        <!-- <bs4-icon src="icon_close.svg" size="32"></bs4-icon> -->
+      </div>
+      <p class="text-center">Hello World!</p>
+    </bs4-sidebar>
+    <div id="example-sidebar-container">
+      <bs4-toggle-button target-id="example-sidebar" class="d-flex justify-content-center">
+        <div rv-hide="isActive" rv-on-click="toggle">
+          <!-- <bs4-icon src="icon_menu.svg" size="32"></bs4-icon> -->
+        </div>
+        <div rv-show="isActive" rv-on-click="toggle">
+          <!-- <bs4-icon src="icon_close.svg" size="32"></bs4-icon> -->
+        </div>
+      </bs4-toggle-button>
+      <section>
+        <h1>Hello World!</h1>
+        We are using Node.js <span id="node-version"></span>,
+        Chromium <span id="chrome-version"></span>,
+        and Electron <span id="electron-version"></span>.
+      </section>
+    </div>
+  </body>
+</html>

@@ -178,8 +178,8 @@ module.exports = (config = {}) => {
       // E.g. used for demos
       case "local":
         config.entry = config.entry || [
-          rootPath + "/src/scss/main.scss",
-          rootPath + "/src/ts/main.ts",
+          path.resolve(rootPath, "src/scss/main.scss"),
+          path.resolve(rootPath, "src/ts/main.ts"),
         ];
         config.output = config.output || {
           path: path.resolve(rootPath, "dist/"),
@@ -257,7 +257,7 @@ module.exports = (config = {}) => {
       rules.push(getStyleLoaderRule(config));
     }
 
-    return {
+    const webpackConfig = {
       optimization: {
         minimize: config.scripts.minimize,
         minimizer: config.scripts.minimize ? [terser] : [],
@@ -297,5 +297,11 @@ module.exports = (config = {}) => {
       },
       plugins: plugins,
     };
+
+    if (config.target) {
+      webpackConfig.target = config.target;
+    }
+
+    return webpackConfig;
   };
 };
