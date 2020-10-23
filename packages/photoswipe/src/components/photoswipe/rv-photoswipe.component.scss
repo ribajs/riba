@@ -4,4 +4,18 @@
 
 rv-photoswipe {
   display: block;
+  .dropdown-toggle-share {
+    // remove bootstrap arrow
+    &:after {
+      border: none;
+      content: none;
+      margin: 0;
+    }
+    .share-label {
+      @extend .cursor-pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 }

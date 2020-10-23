@@ -181,7 +181,7 @@
 .pswp__top-bar,
 .pswp--has_mouse .pswp-control-prev,
 .pswp--has_mouse .pswp-control-next {
-	-webkit-backface-visibility: hidden; 
+	backface-visibility: hidden; 
 	will-change: opacity;
 	transition: opacity $pswp-controls-transition-duration cubic-bezier(.4,0,.22,1);
 }
