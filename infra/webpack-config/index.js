@@ -2,11 +2,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
 const path = require("path");
-const TerserPlugin = require("terser-webpack-plugin");
-// Alternative: const CssExtractPlugin = require("mini-css-extract-plugin");
-const CssExtractPlugin = require("extract-css-chunks-webpack-plugin");
 const rootPath = process.cwd();
-const { getCopyPluginConfig, copy } = require("./copy");
 
 var getStyleLoaderRule = (config = {}) => {
   var rule = {
@@ -16,7 +12,7 @@ var getStyleLoaderRule = (config = {}) => {
 
   if (config.styles.extract === true) {
     rule.use.push({
-      loader: CssExtractPlugin.loader,
+      loader: config.CssExtractPlugin.loader,
       options: {},
     });
   }
@@ -35,8 +31,17 @@ var getStyleLoaderRule = (config = {}) => {
     };
   }
 
+  config.cssLoaderPath = config.cssLoaderPath || require.resolve("css-loader");
+  config.postcssLoaderPath =
+    config.postcssLoaderPath || require.resolve("postcss-loader");
+  config.sassLoaderPath =
+    config.sassLoaderPath || require.resolve("sass-loader");
+  // Use dart-sass by default for yarn 2 pnp support, see: https://github.com/webpack-contrib/sass-loader/issues/802
+  config.styles.SassImplementation =
+    config.styles.SassImplementation || require("dart-sass");
+
   rule.use.push({
-    loader: require.resolve("css-loader"),
+    loader: config.cssLoaderPath,
     options: {
       // Set this to true to resolve scss modules like `@import '~bootstrap/scss/bootstrap';`
       // Set this to false if you do not want to resolve font urls like `src: url(webfont_ProximaNova-Sbold.woff) format('woff');`
@@ -45,21 +50,34 @@ var getStyleLoaderRule = (config = {}) => {
   });
 
   rule.use.push({
-    loader: require.resolve("postcss-loader"),
+    loader: config.postcssLoaderPath,
   });
 
   rule.use.push({
-    loader: require.resolve("sass-loader"),
+    loader: config.sassLoaderPath,
     options: {
       webpackImporter: true,
-      // Use dart-sass in combination of yarn 2 pnp, see: https://github.com/webpack-contrib/sass-loader/issues/802
-      implementation: require("dart-sass"),
+      implementation: config.styles.SassImplementation,
     },
   });
   return rule;
 };
 
 module.exports = (config = {}) => {
+  // Modules you can overwrite
+  config.TerserPlugin = config.TerserPlugin || require("terser-webpack-plugin");
+  config.CssExtractPlugin =
+    config.CssExtractPlugin || require("extract-css-chunks-webpack-plugin"); // Alternative: require("mini-css-extract-plugin");
+  config.babelLoaderPath =
+    config.babelLoaderPath || require.resolve("babel-loader");
+  config.htmlLoaderPath =
+    config.htmlLoaderPath || require.resolve("html-loader");
+  config.fileLoaderPath =
+    config.fileLoaderPath || require.resolve("file-loader");
+  config.fileLoaderPath =
+    config.fileLoaderPath || require.resolve("file-loader");
+  config.pugLoaderPath = config.pugLoaderPath || require.resolve("pug-loader");
+
   return (env = {}) => {
     env.development =
       config.development ||
@@ -76,14 +94,14 @@ module.exports = (config = {}) => {
       {
         test: /\.(tsx?)|\.(js)$/,
         exclude: [/node_modules\/(?!@ribajs)/, /(bower_components)/],
-        loader: require.resolve("babel-loader"),
+        loader: config.babelLoaderPath,
       },
       // html templates
       {
         test: /\.html$/,
         use: [
           {
-            loader: require.resolve("html-loader"),
+            loader: config.htmlLoaderPath,
             options: {
               minimize: true,
             },
@@ -95,7 +113,7 @@ module.exports = (config = {}) => {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
-            loader: "file-loader",
+            loader: config.fileLoaderPath,
           },
         ],
       },
@@ -104,7 +122,7 @@ module.exports = (config = {}) => {
         test: /\.pug$/,
         use: [
           {
-            loader: require.resolve("pug-loader"),
+            loader: config.pugLoaderPath,
             options: {
               minimize: true,
             },
@@ -217,7 +235,7 @@ module.exports = (config = {}) => {
 
     var terser;
     if (config.scripts.minimize) {
-      terser = new TerserPlugin({
+      terser = new config.TerserPlugin({
         terserOptions: {
           format: {
             comments: false,
@@ -228,13 +246,14 @@ module.exports = (config = {}) => {
     }
 
     if (config.copyAssets && config.copyAssets.enable === true) {
+      const { getCopyPluginConfig, copy } = require("./copy");
       var copyPluginConfigs = getCopyPluginConfig(config);
       if (copyPluginConfigs.patterns && copyPluginConfigs.patterns.length > 0) {
         // https://github.com/webpack-contrib/copy-webpack-plugin
-        const CopyPlugin = require("copy-webpack-plugin");
+        config.CopyPlugin = config.CopyPlugin || require("copy-webpack-plugin");
         // Copy the files before the build starts for the case the files are required for the build itself
         copy(copyPluginConfigs.patterns);
-        plugins.push(new CopyPlugin(copyPluginConfigs));
+        plugins.push(new config.CopyPlugin(copyPluginConfigs));
       }
     }
 
@@ -245,7 +264,7 @@ module.exports = (config = {}) => {
 
     if (config.styles.extract === true) {
       plugins.push(
-        new CssExtractPlugin({
+        new config.CssExtractPlugin({
           filename: "[name].css",
         })
       );
@@ -261,7 +280,7 @@ module.exports = (config = {}) => {
       optimization: {
         minimize: config.scripts.minimize,
         minimizer: config.scripts.minimize ? [terser] : [],
-        splitChunks: {
+        splitChunks: config.splitChunks || {
           // TODO refactor see https://webpack.js.org/migrate/5/
           automaticNameDelimiter: ".",
           chunks: "all",
