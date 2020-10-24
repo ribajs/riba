@@ -1,13 +1,15 @@
+// Needed for yarn 2 pnp support, see https://github.com/electron/electron/issues/22472#issuecomment-670971605
+process.env.NODE_OPTIONS = undefined;
+
 // Modules to control application life and create native browser window
 import { app, BrowserWindow, ipcMain } from "electron";
 import * as path from "path";
-import fs from "fs";
+import { promises as fs } from "fs";
 
 let mainWindow: BrowserWindow;
 
 function createWindow() {
-  const preloadPath = path.join(__dirname, "preload.bundle.js");
-  console.debug("preloadPath", preloadPath);
+  const preloadPath = path.join(__dirname, "preload.js");
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 800,
@@ -16,7 +18,7 @@ function createWindow() {
       nodeIntegration: false, // is default value after Electron v5
       contextIsolation: true, // protect against prototype pollution
       enableRemoteModule: false, // turn off remote
-      // preload: path.join(__dirname, "preload.bundle.js"),
+      preload: preloadPath,
     },
   });
 
@@ -24,7 +26,7 @@ function createWindow() {
   mainWindow.loadFile("index.html");
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools();
 }
 
 // This method will be called when Electron has finished
@@ -50,13 +52,18 @@ app.on("window-all-closed", function () {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
-
 // https://stackoverflow.com/a/59814127/1465919
-ipcMain.on("toMain", (event, args) => {
-  // fs.readFile("path/to/file", (error, data) => {
-    // Do something with file contents
+ipcMain.on("main/versions", async (/*event, data*/) => {
+  const pkg = JSON.parse(
+    await fs.readFile(path.resolve(__dirname, "../package.json"), "utf8")
+  );
+  const riba = pkg.dependencies["@ribajs/core"].replace("^", "");
+  // Send result back to renderer process
+  mainWindow.webContents.send("main/versions", { ...process.versions, riba });
+});
 
-    // Send result back to renderer process
-    mainWindow.webContents.send("fromMain", {test: 'test'});
-  // });
+ipcMain.on("main/hello", (event, data) => {
+  console.log(data);
+  // Send result back to renderer process
+  mainWindow.webContents.send("main/hello", { answer: "hello :)" });
 });

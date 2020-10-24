@@ -8,27 +8,30 @@
     <title>Riba Electron Example</title>
   </head>
   <body>
-    <bs4-sidebar id="example-sidebar" container-selector="#example-sidebar-container" position="right" class="p-3">
+    <bs4-sidebar class="bg-primary" id="sidebar" container-selector="#sidebar-container" position="right" class="p-3">
       <div rv-show="isActive" rv-on-click="hide" class="d-flex justify-content-center">
-        <!-- <bs4-icon src="icon_close.svg" size="32"></bs4-icon> -->
+        <bs4-icon src="./iconset/svg/icon_close.svg" size="32"></bs4-icon>
       </div>
       <p class="text-center">Hello World!</p>
     </bs4-sidebar>
-    <div id="example-sidebar-container">
-      <bs4-toggle-button target-id="example-sidebar" class="d-flex justify-content-center">
+    <div id="sidebar-container">
+      <bs4-toggle-button target-id="sidebar" class="d-flex justify-content-end">
         <div rv-hide="isActive" rv-on-click="toggle">
-          <!-- <bs4-icon src="icon_menu.svg" size="32"></bs4-icon> -->
+          <bs4-icon src="./iconset/svg/icon_menu.svg" size="32"></bs4-icon> 
         </div>
         <div rv-show="isActive" rv-on-click="toggle">
-          <!-- <bs4-icon src="icon_close.svg" size="32"></bs4-icon> -->
+          <bs4-icon src="./iconset/svg/icon_close.svg" size="32"></bs4-icon>
         </div>
       </bs4-toggle-button>
-      <section>
-        <h1>Hello World!</h1>
-        We are using Node.js <span id="node-version"></span>,
-        Chromium <span id="chrome-version"></span>,
-        and Electron <span id="electron-version"></span>.
-      </section>
+      <!-- Main content here -->
+      <div class="container">
+        <section class="row">
+          <div class="col-12">
+            <h1>Hello World!</h1>
+            <el-version></el-version>
+          </div>
+        </section>
+      </div>
     </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 {
   "name": "ribajs",
   "description": "Declarative data binding + templating solution.",
-  "version": "1.9.0-beta.3",
+  "version": "1.9.0-beta.5",
   "private": true,
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [],
@@ -41,19 +41,7 @@
     "bump:patch": "yarn version patch && yarn workspaces foreach version patch",
     "bump:minor": "yarn version minor && yarn workspaces foreach version minor",
     "bump:major": "yarn version major && yarn workspaces foreach version major",
-    "publish": "yarn workspaces foreach npm publish --tolerate-republish --tag latest --access public",
-    "packages:bump": "node tools/cli.js bump",
-    "packages:publish": "node tools/cli.js publish",
-    "packages:upgrade": "yarn upgrade-interactive && yarn run packages:install",
-    "packages:npm:upgrade": "node tools/cli.js upgrade && npm run packages:install && npm run packages:npm:link",
-    "packages:install": "yarn install",
-    "packages:npm:install": "node tools/cli.js install",
-    "packages:npm:reinstall": "node tools/cli.js reinstall",
-    "packages:npm:link": "node tools/cli.js link",
-    "packages:npm:build": "node tools/cli.js build",
-    "packages:configure": "npm run packages:configure:modules && npm run packages:configure:demos",
-    "packages:configure:modules": "node tools/cli.js configure-modules",
-    "packages:configure:demos": "node tools/cli.js configure-demos"
+    "publish": "yarn run build && yarn workspaces foreach npm publish --tolerate-republish --tag latest --access public"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.1",

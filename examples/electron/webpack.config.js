@@ -1,92 +1,62 @@
-const path = require('path');
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
+const RibaWebpackConfig = require("@ribajs/webpack-config");
+const { createConfigurator } = require("electron-webpack");
+
+const path = require("path");
 const rootPath = process.cwd();
-const nodeExternals = require('webpack-node-externals');
+
+const sourceMapSupportModulPath = path.dirname(
+  require.resolve("webpack-node-externals/package.json")
+);
+console.log("sourceMapSupportModulPath", sourceMapSupportModulPath);
 
 // Renderer
-const RibaWebpackConfig = require('@ribajs/webpack-config');
+
 const ribaWebpackConfig = RibaWebpackConfig({
-  template: 'local',
-  target: 'electron-renderer',
+  template: "local",
+  // Wait for bugfix: https://github.com/webpack/webpack/pull/10765
+  // target: 'electron-renderer',
   entry: {
     renderer: [
       path.resolve(rootPath, "src/scss/renderer.scss"),
       path.resolve(rootPath, "src/ts/renderer/renderer.ts"),
-    ]
+    ],
   },
   output: {
     path: path.resolve(rootPath, "dist/"),
-    filename: "[name].bundle.js",
-  }
+    filename: "renderer.js",
+  },
+  // We do not split the bundle on electron
+  splitChunks: {},
+  // TODO resolve assets with webpack or https://webpack.electron.build/using-static-assets
+  copyAssets: {
+    enable: true,
+    iconset: true,
+    foldername: "dist",
+  },
 });
 
 // Main
-const mainWebpackConfig = (env = {}) => {
-  return {
-    devtool: "inline-source-map",
-    target: "electron-main",
-    externals: [
-      nodeExternals(),
-    ],
-    entry: {
-      main: "./src/ts/main/main.ts",
-    },
-    output: {
-      path: path.resolve(__dirname, './dist'),
-      filename: "[name].bundle.js" 
-    },
-    resolve: {
-      extensions: [".ts", ".tsx", ".js"],
-      symlinks: true,
-    },
-    module: {
-      rules: [
-        { 
-          test: /\.tsx?$/,
-          loader: require.resolve("ts-loader"),
-          options: {
-            configFile: 'tsconfig.electron.json'
-          }
-        }
-      ]
-    }
-  }
+const mainWebpackConfig = async (env = {}) => {
+  env.configuration = {
+    projectDir: rootPath,
+  };
+  const entry = {
+    main: "./src/ts/main/main.ts",
+    preload: "./src/ts/main/preload.ts",
+  };
+
+  const electronMainWebpackConigurator = await createConfigurator("main", env);
+  const electronMainWebpackConfig = await electronMainWebpackConigurator.configure(
+    entry,
+    env
+  );
+  electronMainWebpackConfig.devtool = "inline-source-map";
+  electronMainWebpackConfig.output.path = path.resolve(rootPath, "dist");
+
+  // console.debug('electronMainWebpackConfig', electronMainWebpackConfig, 'rules', electronMainWebpackConfig.module.rules);
+  return electronMainWebpackConfig;
 };
 
-const preloadWebpackConfig = (env = {}) => {
-  return {
-    devtool: "inline-source-map",
-    target: "electron-preload",
-    externals: [
-      nodeExternals(),
-    ],
-    entry: {
-      preload: "./src/ts/preload/preload.ts",
-    },
-    output: {
-      path: path.resolve(__dirname, './dist'),
-      filename: "[name].bundle.js" 
-    },
-    resolve: {
-      extensions: [".ts", ".tsx", ".js"],
-      symlinks: true,
-    },
-    module: {
-      rules: [
-        { 
-          test: /\.tsx?$/,
-          loader: require.resolve("ts-loader"),
-          options: {
-            configFile: 'tsconfig.electron.json'
-          }
-        }
-      ]
-    }
-  }
-};
-
-
-module.exports = [
-  preloadWebpackConfig,
-  ribaWebpackConfig,
-  mainWebpackConfig,
-];
+module.exports = [ribaWebpackConfig, mainWebpackConfig];
