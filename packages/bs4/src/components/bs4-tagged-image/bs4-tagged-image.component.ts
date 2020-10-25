@@ -20,6 +20,7 @@ interface Scope {
   fillPopoverOptions: (
     options: Partial<PopoverOptions>
   ) => Partial<PopoverOptions>;
+  triggerOnFocus: (options: Partial<PopoverOptions>) => any;
   onPopoverBound: EventListener;
   onPopoverShown: EventListener;
   onPopoverHidden: EventListener;
@@ -51,7 +52,14 @@ export class Bs4TaggedImageComponent extends Component {
       tagOptions: {},
     },
     fillPopoverOptions: (options: Partial<PopoverOptions>) => {
-      return { ...this.scope.options.popoverOptions, ...options };
+      return {
+        ...this.scope.options.popoverOptions,
+        ...this.scope.options.tagOptions.popoverOptions,
+        ...options,
+      };
+    },
+    triggerOnFocus: (options: Partial<PopoverOptions>) => {
+      return this.scope.fillPopoverOptions(options).trigger ? 0 : null;
     },
     onClick: this.onClick.bind(this),
     onPopoverBound: this.onPopoverBound.bind(this),
@@ -151,12 +159,11 @@ export class Bs4TaggedImageComponent extends Component {
       const smallSize = tagEl.getAttribute("small-size") || undefined;
       const tagData = {
         ...this.scope.options.tagOptions,
-        popoverOptions: {
+        popoverOptions: this.scope.fillPopoverOptions({
           title,
           content,
           html: true,
-          ...this.scope.options.popoverOptions,
-        },
+        }),
         x,
         y,
         shape,
@@ -170,9 +177,9 @@ export class Bs4TaggedImageComponent extends Component {
   }
 
   protected initTags() {
+    const scopeTagOptions = this.scope.options.tagOptions;
     for (const [index, tag] of this.scope.tags.entries()) {
       tag.index = index;
-      const scopeTagOptions = this.scope.options.tagOptions;
       tag.shape = tag.shape || scopeTagOptions.shape;
       tag.borderRadius = tag.borderRadius || scopeTagOptions.borderRadius;
       tag.smallSize = tag.smallSize || scopeTagOptions.smallSize;

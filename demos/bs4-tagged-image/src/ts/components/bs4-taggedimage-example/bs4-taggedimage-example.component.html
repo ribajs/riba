@@ -3,7 +3,7 @@
     <div class="col-12">
       <h3 class="text-center">Responsive Grid Cover</h3>
       <div class="embed-responsive embed-responsive-100vh">
-        <bs4-tagged-image class="embed-responsive-item fit-cover" rv-tags="responsiveTags | json 0" img-src="../../../images/grid.png">
+        <bs4-tagged-image options="{'popoverOptions': {'trigger': 'click'}}" class="embed-responsive-item fit-cover" rv-tags="responsiveTags | json 0" img-src="../../../images/grid.png">
         </bs4-tagged-image>
       </div>
     </div>
@@ -11,9 +11,9 @@
 
   <div class="row py-4">
     <div class="col-12">
-      <h3 class="text-center">Responsive Grid Contain</h3>
+      <h3 class="text-center">Responsive Grid Contain (trigger: hover)</h3>
       <div class="embed-responsive embed-responsive-100vh">
-        <bs4-tagged-image class="embed-responsive-item fit-contain" rv-tags="responsiveTags | json 0" img-src="../../../images/grid.png">
+        <bs4-tagged-image options="{'popoverOptions': {'trigger': 'hover'}}" class="embed-responsive-item fit-contain" rv-tags="responsiveTags | json 0" img-src="../../../images/grid.png">
         </bs4-tagged-image>
       </div>
     </div>
@@ -22,8 +22,8 @@
 
   <div class="row py-4">
     <div class="col-12">
-      <h3 class="text-center">Unresponsive Grid</h3>
-        <bs4-tagged-image rv-tags="responsiveTags | json 0" img-src="../../../images/grid.png">
+      <h3 class="text-center">Unresponsive Grid (trigger: focus)</h3>
+        <bs4-tagged-image options="{'popoverOptions': {'trigger': 'focus'}}" rv-tags="responsiveTags | json 0" img-src="../../../images/grid.png">
         </bs4-tagged-image>
     </div>
   </div>
