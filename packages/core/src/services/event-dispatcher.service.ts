@@ -106,34 +106,39 @@ export class EventDispatcher {
       this.eventsOnce = {};
       return;
     }
-    if (eventName in this.events === false) {
-      return;
-    }
     if (cb !== undefined) {
       if (thisContext !== undefined) {
-        for (const [i, event] of this.events[eventName].entries()) {
-          const curEvent = event as BoundEventCallback;
-          if (curEvent.orgCb === cb && curEvent.thisContext === thisContext) {
-            this.events[eventName].splice(i, 1);
+        if (eventName in this.events) {
+          for (const [i, event] of this.events[eventName].entries()) {
+            const curEvent = event as BoundEventCallback;
+            if (curEvent.orgCb === cb && curEvent.thisContext === thisContext) {
+              this.events[eventName].splice(i, 1);
+            }
           }
         }
-        for (const [i, event] of this.eventsOnce[eventName].entries()) {
-          const curEvent = event as BoundEventCallback;
-          if (curEvent.orgCb === cb && curEvent.thisContext === thisContext) {
-            this.eventsOnce[eventName].splice(i, 1);
+        if (eventName in this.eventsOnce) {
+          for (const [i, event] of this.eventsOnce[eventName].entries()) {
+            const curEvent = event as BoundEventCallback;
+            if (curEvent.orgCb === cb && curEvent.thisContext === thisContext) {
+              this.eventsOnce[eventName].splice(i, 1);
+            }
           }
         }
       } else {
-        for (const [i, event] of this.events[eventName].entries()) {
-          const curEvent = event as EventCallback;
-          if (curEvent === cb) {
-            this.events[eventName].splice(i, 1);
+        if (eventName in this.events) {
+          for (const [i, event] of this.events[eventName].entries()) {
+            const curEvent = event as EventCallback;
+            if (curEvent === cb) {
+              this.events[eventName].splice(i, 1);
+            }
           }
         }
-        for (const [i, event] of this.eventsOnce[eventName].entries()) {
-          const curEvent = event as EventCallback;
-          if (curEvent === cb) {
-            this.eventsOnce[eventName].splice(i, 1);
+        if (eventName in this.eventsOnce) {
+          for (const [i, event] of this.eventsOnce[eventName].entries()) {
+            const curEvent = event as EventCallback;
+            if (curEvent === cb) {
+              this.eventsOnce[eventName].splice(i, 1);
+            }
           }
         }
       }
@@ -150,26 +155,24 @@ export class EventDispatcher {
    * @param args
    */
   public trigger(eventName: string, ...args: any[]) {
-    // e, ...args
-    if (eventName in this.events === false) {
-      return;
-    }
-
-    for (const event of this.events[eventName]) {
-      if ((event as BoundEventCallback | undefined)?.cb) {
-        (event as BoundEventCallback).cb(...args);
-      } else {
-        (event as EventCallback)(...args);
+    if (eventName in this.events) {
+      for (const event of this.events[eventName]) {
+        if ((event as BoundEventCallback | undefined)?.cb) {
+          (event as BoundEventCallback).cb(...args);
+        } else {
+          (event as EventCallback)(...args);
+        }
       }
     }
-
-    for (const [i, event] of this.eventsOnce[eventName].entries()) {
-      if ((event as BoundEventCallback | undefined)?.cb) {
-        (event as BoundEventCallback).cb(...args);
-        this.eventsOnce[eventName].splice(i, 1);
-      } else {
-        (event as EventCallback)(...args);
-        this.eventsOnce[eventName].splice(i, 1);
+    if (eventName in this.eventsOnce) {
+      for (const [i, event] of this.eventsOnce[eventName].entries()) {
+        if ((event as BoundEventCallback | undefined)?.cb) {
+          (event as BoundEventCallback).cb(...args);
+          this.eventsOnce[eventName].splice(i, 1);
+        } else {
+          (event as EventCallback)(...args);
+          this.eventsOnce[eventName].splice(i, 1);
+        }
       }
     }
   }
