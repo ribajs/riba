@@ -28,6 +28,7 @@ export class EventDispatcher {
    * @type {object}
    */
   private events: Events = {};
+  private eventsOnce: Events = {};
 
   private _namespace = "anonymous";
 
@@ -50,10 +51,32 @@ export class EventDispatcher {
   }
 
   /**
+   * Bind a one-time callback to an event
+   *
+   * @param eventName
+   * @param cb function to call when an event with eventName is triggered
+   * @param thisContext optional, if a thisContext is supplied, the callback function is bound to the given thisContext
+   *
+   * IMPORTANT; cb CANNOT BE arrow function if a thisContext is used, use function() {} instead
+   */
+  public once(eventName: string, cb: EventCallback, thisContext?: any) {
+    this.eventsOnce[eventName] = this.eventsOnce[eventName] || [];
+    if (typeof thisContext !== "undefined") {
+      this.eventsOnce[eventName].push({
+        cb: cb.bind(thisContext),
+        orgCb: cb,
+        thisContext,
+      });
+    } else {
+      this.eventsOnce[eventName].push(cb);
+    }
+  }
+
+  /**
    * Bind a callback to an event
    *
    * @param eventName
-   * @param cb function to call, if an event with eventName is triggered
+   * @param cb function to call when an event with eventName is triggered
    * @param thisContext optional, if a thisContext is supplied, the callback function is bound to the given thisContext
    *
    * IMPORTANT; cb CANNOT BE arrow function if a thisContext is used, use function() {} instead
@@ -80,6 +103,7 @@ export class EventDispatcher {
   public off(eventName?: string, cb?: EventCallback, thisContext?: any) {
     if (eventName === undefined) {
       this.events = {};
+      this.eventsOnce = {};
       return;
     }
     if (eventName in this.events === false) {
@@ -87,22 +111,35 @@ export class EventDispatcher {
     }
     if (cb !== undefined) {
       if (thisContext !== undefined) {
-        for (let i = this.events[eventName].length - 1; i >= 0; i--) {
-          const curEvent = this.events[eventName][i] as BoundEventCallback;
+        for (const [i, event] of this.events[eventName].entries()) {
+          const curEvent = event as BoundEventCallback;
           if (curEvent.orgCb === cb && curEvent.thisContext === thisContext) {
             this.events[eventName].splice(i, 1);
           }
         }
+        for (const [i, event] of this.eventsOnce[eventName].entries()) {
+          const curEvent = event as BoundEventCallback;
+          if (curEvent.orgCb === cb && curEvent.thisContext === thisContext) {
+            this.eventsOnce[eventName].splice(i, 1);
+          }
+        }
       } else {
-        for (let i = this.events[eventName].length - 1; i >= 0; i--) {
-          const curEvent = this.events[eventName][i] as EventCallback;
+        for (const [i, event] of this.events[eventName].entries()) {
+          const curEvent = event as EventCallback;
           if (curEvent === cb) {
             this.events[eventName].splice(i, 1);
+          }
+        }
+        for (const [i, event] of this.eventsOnce[eventName].entries()) {
+          const curEvent = event as EventCallback;
+          if (curEvent === cb) {
+            this.eventsOnce[eventName].splice(i, 1);
           }
         }
       }
     } else {
       this.events[eventName] = [];
+      this.eventsOnce[eventName] = [];
     }
   }
 
@@ -118,11 +155,21 @@ export class EventDispatcher {
       return;
     }
 
-    for (let i = 0; i < this.events[eventName].length; i++) {
-      if ((this.events[eventName][i] as BoundEventCallback | undefined)?.cb) {
-        (this.events[eventName][i] as BoundEventCallback).cb(...args);
+    for (const event of this.events[eventName]) {
+      if ((event as BoundEventCallback | undefined)?.cb) {
+        (event as BoundEventCallback).cb(...args);
       } else {
-        (this.events[eventName][i] as EventCallback)(...args);
+        (event as EventCallback)(...args);
+      }
+    }
+
+    for (const [i, event] of this.eventsOnce[eventName].entries()) {
+      if ((event as BoundEventCallback | undefined)?.cb) {
+        (event as BoundEventCallback).cb(...args);
+        this.eventsOnce[eventName].splice(i, 1);
+      } else {
+        (event as EventCallback)(...args);
+        this.eventsOnce[eventName].splice(i, 1);
       }
     }
   }
