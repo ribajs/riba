@@ -130,9 +130,9 @@ export class Bs4NavbarComponent extends Component {
 
   protected onStateChange() {
     this.scope.isCollapsed = this.collapseTargets
-      .entries()
+      .values()
       .next()
-      .value[0]?.isCollapsed();
+      .value?.isCollapsed();
 
     if (this.scope.isCollapsed) {
       this.el.classList.add(CLASS_NAME_COLLAPSED);
