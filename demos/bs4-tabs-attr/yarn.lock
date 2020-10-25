@@ -2385,7 +2385,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/tsconfig@portal:../../infra/tsconfig::locator=bs4-tabs-attr%40workspace%3A."
   dependencies:
-    "@ribajs/types": ^1.9.0-beta.2
+    "@ribajs/types": ^1.9.0-beta.3
   languageName: node
   linkType: soft
 

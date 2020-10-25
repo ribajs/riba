@@ -2,7 +2,7 @@
   "extends": "@ribajs/tsconfig",
   "compilerOptions": {
     "outDir": "dist",
-    "types": ["jest"]
+    "types": ["jest", "webpack-env"]
   },
   "exclude": [
     "node_modules",

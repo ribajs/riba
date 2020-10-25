@@ -15,6 +15,11 @@ var getStyleLoaderRule = (config = {}) => {
       loader: config.CssExtractPlugin.loader,
       options: {},
     });
+  } else {
+    config.styleLoaderPath = config.cssLoaderPath || require.resolve("style-loader");
+    rule.use.push({
+      loader: config.styleLoaderPath,
+    });
   }
 
   if (
@@ -39,6 +44,7 @@ var getStyleLoaderRule = (config = {}) => {
   // Use dart-sass by default for yarn 2 pnp support, see: https://github.com/webpack-contrib/sass-loader/issues/802
   config.styles.SassImplementation =
     config.styles.SassImplementation || require("dart-sass");
+
 
   rule.use.push({
     loader: config.cssLoaderPath,
@@ -67,7 +73,7 @@ module.exports = (config = {}) => {
   // Modules you can overwrite
   config.TerserPlugin = config.TerserPlugin || require("terser-webpack-plugin");
   config.CssExtractPlugin =
-    config.CssExtractPlugin || require("extract-css-chunks-webpack-plugin"); // Alternative: require("mini-css-extract-plugin");
+    config.CssExtractPlugin || require("mini-css-extract-plugin");
   config.babelLoaderPath =
     config.babelLoaderPath || require.resolve("babel-loader");
   config.htmlLoaderPath =

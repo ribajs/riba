@@ -20,3 +20,10 @@ riba.module.regist(extrasModule);
 riba.module.regist(Bs4TaggedImageDemoModule);
 
 riba.bind(document.body, model);
+
+// Webpack HMR
+console.log("module.hot", module.hot);
+if(module.hot) {
+	module.hot.accept();
+	console.log("HMR..");
+}
