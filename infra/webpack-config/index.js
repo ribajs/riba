@@ -215,9 +215,10 @@ module.exports = (config = {}) => {
           foldername: "src",
         };
 
-        config.devServer = {
+        config.devServer = config.devServer || {
           host: "0.0.0.0",
           contentBase: "./src",
+          hot: true,
         };
 
         const HtmlWebpackPlugin = require("html-webpack-plugin");
