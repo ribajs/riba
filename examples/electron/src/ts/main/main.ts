@@ -5,35 +5,52 @@ process.env.NODE_OPTIONS = undefined;
 import { app, BrowserWindow, ipcMain } from "electron";
 import * as path from "path";
 import { promises as fs } from "fs";
+import pkgDir from "pkg-dir";
 
+const isDevelopment = process.env.NODE_ENV !== "production";
 let mainWindow: BrowserWindow;
 
-function createWindow() {
-  const preloadPath = path.join(__dirname, "preload.js");
+async function createWindow() {
+  const rootDir = await pkgDir(__dirname);
+  const preloadPath = path.join(rootDir || __dirname, "dist", "preload.js");
+
+  console.log("preloadPath", preloadPath);
+
+  const webPreferences = {
+    nodeIntegration: false, // is default value after Electron v5
+    contextIsolation: true, // protect against prototype pollution
+    enableRemoteModule: false, // turn off remote
+    preload: preloadPath,
+  };
+
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    webPreferences: {
-      nodeIntegration: false, // is default value after Electron v5
-      contextIsolation: true, // protect against prototype pollution
-      enableRemoteModule: false, // turn off remote
-      preload: preloadPath,
-    },
+    webPreferences: webPreferences,
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile("index.html");
+  if (isDevelopment) {
+    mainWindow.loadURL(
+      // TODO `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`
+      `http://localhost:8080`
+    );
+  } else {
+    mainWindow.loadFile("index.html");
+  }
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  if (isDevelopment) {
+    mainWindow.webContents.openDevTools();
+  }
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.whenReady().then(() => {
-  createWindow();
+app.whenReady().then(async () => {
+  await createWindow();
 
   app.on("activate", function () {
     // On macOS it's common to re-create a window in the app when the
@@ -54,10 +71,15 @@ app.on("window-all-closed", function () {
 
 // https://stackoverflow.com/a/59814127/1465919
 ipcMain.on("main/versions", async (/*event, data*/) => {
-  const pkg = JSON.parse(
-    await fs.readFile(path.resolve(__dirname, "../package.json"), "utf8")
-  );
-  const riba = pkg.dependencies["@ribajs/core"].replace("^", "");
+  let riba = "";
+  const rootDir = await pkgDir(__dirname);
+  if (rootDir) {
+    const pkg = JSON.parse(
+      await fs.readFile(path.resolve(rootDir, "package.json"), "utf8")
+    );
+    riba = pkg.dependencies["@ribajs/core"].replace("^", "");
+  }
+
   // Send result back to renderer process
   mainWindow.webContents.send("main/versions", { ...process.versions, riba });
 });

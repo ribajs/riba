@@ -8,11 +8,11 @@
     <title>Riba Electron Example</title>
   </head>
   <body>
-    <bs4-sidebar class="bg-primary" id="sidebar" container-selector="#sidebar-container" position="right" class="p-3">
+    <bs4-sidebar class="bg-primary p-3" id="sidebar" container-selector="#sidebar-container" position="right">
       <div rv-show="isActive" rv-on-click="hide" class="d-flex justify-content-center">
         <bs4-icon src="./iconset/svg/icon_close.svg" size="32"></bs4-icon>
       </div>
-      <p class="text-center">Hello World!</p>
+      <p class="text-center">Hello from sidebar</p>
     </bs4-sidebar>
     <div id="sidebar-container">
       <bs4-toggle-button target-id="sidebar" class="d-flex justify-content-end">
