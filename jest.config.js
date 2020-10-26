@@ -31,6 +31,7 @@ module.exports = {
     'ts-jest': {
       babelConfig: './babel.config.js',
       tsconfig: './tsconfig.spec.json',
+      isolatedModules: true
     },
   },
   preset: 'ts-jest',
