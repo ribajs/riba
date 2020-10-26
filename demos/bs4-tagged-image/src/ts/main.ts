@@ -1,3 +1,5 @@
+import "../scss/main.scss";
+
 import { bs4Module } from "@ribajs/bs4";
 import { coreModule, Riba } from "@ribajs/core";
 import { extrasModule } from "@ribajs/extras";
@@ -20,8 +22,3 @@ riba.module.regist(extrasModule);
 riba.module.regist(Bs4TaggedImageDemoModule);
 
 riba.bind(document.body, model);
-
-// Webpack HMR
-if ((window as any)?.module?.hot?.accept) {
-  (window as any).module.hot.accept();
-}

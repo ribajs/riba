@@ -3,7 +3,7 @@
 /* eslint-disable no-undef */
 const path = require("path");
 const rootPath = process.cwd();
-const webpack = require("webpack");
+// const webpack = require("webpack");
 
 var getStyleLoaderRule = (config = {}) => {
   var rule = {
@@ -147,7 +147,7 @@ module.exports = (config = {}) => {
 
     config.styles = config.styles || {
       build: true,
-      extract: true,
+      extract: false,
       resolveUrl: true,
     };
 
@@ -188,8 +188,6 @@ module.exports = (config = {}) => {
           filename: "[name].bundle.js",
         };
 
-        config.styles.build = true;
-        config.styles.extract = true;
         /**
          * @param {string} url
          * @param {string} resourcePath path to css file
@@ -215,9 +213,6 @@ module.exports = (config = {}) => {
           filename: "[name].bundle.js",
         };
 
-        config.styles.build = true;
-        config.styles.extract = true;
-
         config.copyAssets = config.copyAssets || {
           enable: false,
           images: true,
@@ -229,12 +224,12 @@ module.exports = (config = {}) => {
         config.devServer = config.devServer || {
           port: 8080,
           host: "0.0.0.0",
-          contentBase: path.resolve(rootPath, "src"),
+          contentBase: [
+            path.resolve(rootPath, "src"),
+            path.resolve(rootPath, "dist"),
+          ],
           hot: true,
           inline: true,
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          },
         };
 
         const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -285,11 +280,12 @@ module.exports = (config = {}) => {
           filename: "[name].css",
         })
       );
-      if (config.development) {
-        console.debug("Use HotModuleReplacementPlugin");
-        plugins.push(new webpack.HotModuleReplacementPlugin());
-      }
     }
+
+    // if (config.development) {
+    //   console.debug("Use HotModuleReplacementPlugin");
+    //   plugins.push(new webpack.HotModuleReplacementPlugin());
+    // }
 
     // console.debug('Used plugins: ', plugins);
 

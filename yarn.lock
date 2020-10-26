@@ -2929,6 +2929,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@ribajs/webpack-serve@workspace:infra/webpack-serve":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/webpack-serve@workspace:infra/webpack-serve"
+  dependencies:
+    "@ribajs/webpack-config": ^1.9.0-beta.3
+  bin:
+    webpack-serve: index.js
+  languageName: unknown
+  linkType: soft
+
 "@sindresorhus/is@npm:^3.1.1":
   version: 3.1.2
   resolution: "@sindresorhus/is@npm:3.1.2"

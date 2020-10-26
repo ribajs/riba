@@ -2302,6 +2302,16 @@ __metadata:
   languageName: node
   linkType: soft
 
+"@ribajs/webpack-serve@portal:../../infra/webpack-serve::locator=bs4-taggedimage-example%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/webpack-serve@portal:../../infra/webpack-serve::locator=bs4-taggedimage-example%40workspace%3A."
+  dependencies:
+    "@ribajs/webpack-config": ^1.9.0-beta.3
+  bin:
+    webpack-serve: index.js
+  languageName: node
+  linkType: soft
+
 "@sindresorhus/is@npm:^2.1.1":
   version: 2.1.1
   resolution: "@sindresorhus/is@npm:2.1.1"
@@ -4324,6 +4334,7 @@ __metadata:
     "@ribajs/types": ^1.9.0-beta.3
     "@ribajs/utils": ^1.9.0-beta.3
     "@ribajs/webpack-config": ^1.9.0-beta.3
+    "@ribajs/webpack-serve": ^1.9.0-beta.3
     "@types/jest": ^26.0.15
     "@types/node": ^14.14.3
     "@types/webpack-env": ^1.15.3
