@@ -1,16 +1,16 @@
 {
   "name": "@ribajs/types",
-  "version": "1.9.0-beta.3",
+  "version": "1.9.0-beta.3b",
   "description": "Default typescript types used in Riba.js projects",
   "scripts": {},
   "author": "Pascal Garber <pascal@artandcode.studio",
   "license": "MIT",
-  "main": "index.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "files": [
     "LICENSE",
     "README.md",
     "index.d.ts",
-    "html.d.ts",
-    "pug.d.ts"
+    "index.js"
   ]
 }

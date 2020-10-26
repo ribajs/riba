@@ -4,9 +4,7 @@
  *
  * @see https://developer.mozilla.org/de/docs/Web/Web_Components/Using_custom_elements
  */
-
-import "../types/templates";
-import "../types/files";
+import "@ribajs/types";
 import { EventHandler, Formatter } from "../interfaces";
 import { View } from "../view";
 import { Riba } from "../riba";

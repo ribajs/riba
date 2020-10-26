@@ -1,5 +1,3 @@
-
-// Unable to require `.d.ts` file: https://github.com/software-mansion/react-native-screens/issues/469
 import "jest-extended";
 
 import { Riba, Binding, View } from "./index";

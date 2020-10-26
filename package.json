@@ -34,6 +34,7 @@
     "reinstall": "YARN_CHECKSUM_BEHAVIOR=update yarn install",
     "test": "jest --config=jest.config.js",
     "test:watch": "jest --config=jest.config.js --watch",
+    "test:clear": "jest --config=jest.config.js --clearCache",
     "lint": "yarn workspaces foreach run lint",
     "build": "yarn workspaces foreach run build",
     "clean": "yarn workspaces foreach run clean",

@@ -2,8 +2,7 @@
   "extends": "@ribajs/tsconfig",
   "compilerOptions": {
     "outDir": "dist",
-    "types": ["jest"],
-    "preserveSymlinks": true,
+    "types": ["jest"]
   },
   "exclude": [
     "node_modules",

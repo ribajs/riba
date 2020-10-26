@@ -32,7 +32,7 @@
     "Browser"
   ],
   "scripts": {
-    "test": "npm run type-check && jest --config=jest.config.js",
+    "test": "npm run lint && jest --config=jest.config.js",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
     "build": "npm run build:module",
     "build:module": "tsc",

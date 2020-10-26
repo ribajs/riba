@@ -18,6 +18,7 @@ if (window.customElements && !(window as any).forceComponentFallback) {
     });
   } catch (error) {
     console.error(error);
+    // throw error;
   }
 
   Object.setPrototypeOf(FakeHTMLElement, HTMLElement);

@@ -6,7 +6,3 @@ export interface Extensions {
   components?: Components;
   adapters?: Adapters;
 }
-
-
-
-

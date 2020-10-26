@@ -21,7 +21,7 @@ module.exports = {
   setupFilesAfterEnv: [require.resolve("jest-extended")],
   globals: {
     "ts-jest": {
-      babelConfig: true,
+      babelConfig: './babel.config.js',
       packageJson: "./package.json",
       tsConfig: "./tsconfig.spec.json",
     },
