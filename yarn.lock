@@ -4561,7 +4561,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-jest@npm:^26.6.1":
+"babel-jest@npm:^26.5.2, babel-jest@npm:^26.6.1":
   version: 26.6.1
   resolution: "babel-jest@npm:26.6.1"
   dependencies:
@@ -9393,7 +9393,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"jest-config@npm:^26.6.1":
+"jest-config@npm:^26.5.3, jest-config@npm:^26.6.1":
   version: 26.6.1
   resolution: "jest-config@npm:26.6.1"
   dependencies:
@@ -13319,7 +13319,7 @@ resolve@^1.18.1:
     "@typescript-eslint/experimental-utils": ^4.5.0
     "@typescript-eslint/parser": ^4.5.0
     "@yarnpkg/pnpify": ^2.3.3
-    babel-jest: ^26.6.1
+    babel-jest: ^26.5.2
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     chalk: ^4.1.0
@@ -13331,11 +13331,11 @@ resolve@^1.18.1:
     eslint-plugin-prettier: ^3.1.4
     husky: ^4.3.0
     jest: ^26.5.3
-    jest-config: ^26.6.1
+    jest-config: ^26.5.3
     jest-extended: ^0.11.5
     prettier: ^2.1.2
     source-map-support: ^0.5.19
-    ts-jest: ^26.4.2
+    ts-jest: ^26.4.1
     typescript: ^4.0.3
     uglifyjs-webpack-plugin: ^2.2.0
     webpack-glob-entry: ^2.1.1
@@ -14824,7 +14824,7 @@ resolve@^1.18.1:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:^26.4.2":
+"ts-jest@npm:^26.4.1, ts-jest@npm:^26.4.2":
   version: 26.4.2
   resolution: "ts-jest@npm:26.4.2"
   dependencies:
