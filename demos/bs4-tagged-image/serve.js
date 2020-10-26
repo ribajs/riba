@@ -1,2 +1,1 @@
-const serve = require("@ribajs/webpack-config/serve");
-serve({ template: "local" });
+require("@ribajs/webpack-config/serve");
