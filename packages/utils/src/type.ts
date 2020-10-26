@@ -171,7 +171,7 @@ export const escapeHtml = (str: string) => {
  * @see https://stackoverflow.com/a/11090301/1465919
  * @param str
  */
-const withoutSpecialChars = (str: string) => {
+export const withoutSpecialChars = (str: string) => {
   // str = str.replace(/[^\w\s]/gi, ""); // http://stackoverflow.com/a/4374890
   str = str.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}[\]\\/]/gi, "");
   return str;
@@ -181,7 +181,7 @@ const withoutSpecialChars = (str: string) => {
  * Removes multiple tabs, newlines, etc from a string
  * @param str
  */
-const withoutMultiWhitespace = (str: string) => {
+export const withoutMultiWhitespace = (str: string) => {
   str = str.replace(/\s\s+/g, " ");
   return str;
 };
@@ -294,7 +294,7 @@ export const clone = (deep: boolean, val: any): any => {
 };
 
 /**
- * // Get the class "that"
+ * Get the class "that"
  * @param that
  */
 export const classOf = (that: any) => {

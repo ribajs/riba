@@ -1,5 +1,3 @@
-import "jest-extended";
-
 import { Riba, Binding, View } from "./index";
 import { Data } from "../spec/lib/moch.data";
 import { dotAdapter } from "./adapters/dot.adapter";

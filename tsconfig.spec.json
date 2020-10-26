@@ -5,6 +5,6 @@
     "allowJs": true,
     "preserveSymlinks": true,
     "module": "commonjs",
-    "types": ["jest"]
+    "types": ["jest", "jest-extended"]
   }
 }
