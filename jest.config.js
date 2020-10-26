@@ -2,6 +2,7 @@
 module.exports = {
   testEnvironment: "jsdom",
   moduleFileExtensions: ["ts", "tsx", "js", "json"],
+  resetModules: true,
   transform: {
     "^.+\\.tsx?$": require.resolve("ts-jest"),
   },

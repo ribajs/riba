@@ -51,7 +51,7 @@
     "@ribajs/eslint-config": "workspace:infra/eslint-config",
     "@ribajs/tsconfig": "workspace:infra/tsconfig",
     "@types/jest": "^26.0.15",
-    "eslint": "^7.11.0",
+    "eslint": "^7.12.0",
     "typescript": "^4.0.3"
   }
 }
