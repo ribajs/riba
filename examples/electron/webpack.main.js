@@ -23,7 +23,7 @@ const mainWpConfig = async (env = {}) => {
   // Remove wp 5 incompatible options
   delete mainWpConfig.optimization.namedModules;
 
-  console.debug("mainWpConfig", mainWpConfig);
+  // console.debug("mainWpConfig", mainWpConfig);
   return mainWpConfig;
 };
 

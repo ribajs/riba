@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /* eslint-disable no-case-declarations */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
@@ -6,16 +7,18 @@ const webpack = require("webpack");
 const WDS = require("webpack-dev-server");
 const rootPath = process.cwd();
 
-const start = () => {
+const start = async () => {
   let webpackConfig;
   try {
-    webpackConfig = require(path.resolve(rootPath, "webpack.config.js"))({
+    webpackConfig = await require(path.resolve(rootPath, "webpack.config.js"))({
       production: false,
       development: true,
     });
     console.debug("Use webpack config");
   } catch (error) {
-    webpackConfig = require("./index")({ template: "local" })({
+    webpackConfig = await require("@ribajs/webpack-config")({
+      template: "local",
+    })({
       production: false,
       development: true,
     });
