@@ -1,22 +1,25 @@
 import { Riba, Binding, View } from "./index";
 import { Data } from "../spec/lib/moch.data";
-import { dotAdapter } from "./adapters/dot.adapter";
-import { textBinder } from "./binders/text.binder";
-import { htmlBinder } from "./binders/html.binder";
-import { valueBinder } from "./binders/value.binder";
-import { eachStarBinder } from "./binders/each-item.binder";
-import { addClassBinder } from "./binders/add-class.binder";
+import { dotAdapter } from "./adapters";
+import {
+  textBinder,
+  htmlBinder,
+  valueBinder,
+  eachStarBinder,
+  addClassBinder
+} from "./binders";
 import { Formatter, Adapter } from "./interfaces";
 
-const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.binder.regist(textBinder);
-riba.module.binder.regist(htmlBinder);
-riba.module.binder.regist(valueBinder);
-riba.module.binder.regist(eachStarBinder);
-riba.module.binder.regist(addClassBinder);
-
 describe("riba.Binding", () => {
+
+  const riba = new Riba();
+  riba.module.adapter.regist(dotAdapter);
+  riba.module.binder.regist(textBinder);
+  riba.module.binder.regist(htmlBinder);
+  riba.module.binder.regist(valueBinder);
+  riba.module.binder.regist(eachStarBinder);
+  riba.module.binder.regist(addClassBinder);
+
   let model: object;
   let el: HTMLElement;
   let view: View;
@@ -621,6 +624,15 @@ describe("riba.Binding", () => {
 });
 
 describe("Functional", () => {
+
+  const riba = new Riba();
+  riba.module.adapter.regist(dotAdapter);
+  riba.module.binder.regist(textBinder);
+  riba.module.binder.regist(htmlBinder);
+  riba.module.binder.regist(valueBinder);
+  riba.module.binder.regist(eachStarBinder);
+  riba.module.binder.regist(addClassBinder);
+
   let data: Data;
   let bindData: { data: Data };
   let el: HTMLUnknownElement;
