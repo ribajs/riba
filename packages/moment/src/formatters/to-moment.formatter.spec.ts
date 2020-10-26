@@ -1,6 +1,5 @@
 import { Riba, textBinder, dotAdapter } from '@ribajs/core';
 import { ToMomentFormatter } from './to-moment.formatter';
-import { MomentInput } from 'moment';
 import moment from 'moment';
 
 const riba = new Riba();
@@ -9,7 +8,7 @@ riba.module.formatter.regist(ToMomentFormatter);
 riba.module.binder.regist(textBinder);
 
 interface Model {
-  value: MomentInput;
+  value: moment.MomentInput;
 }
 
 describe('riba.formatters', () => {

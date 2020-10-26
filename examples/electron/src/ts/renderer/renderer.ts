@@ -7,7 +7,7 @@ import * as CustomComponents from "./components";
 
 import { AppApiService } from "./services";
 
-import type { App } from "./interfaces";
+import { App } from "./interfaces";
 declare global {
   interface Window {
     app: App;

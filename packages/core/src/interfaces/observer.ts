@@ -12,6 +12,4 @@ export interface Observers {
   [key: string]: Observer;
 }
 
-export type Obj = any;
-
 export type Root = any;

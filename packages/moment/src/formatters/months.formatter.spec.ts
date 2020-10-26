@@ -1,6 +1,5 @@
 import { Riba, textBinder, dotAdapter } from '@ribajs/core';
 import { MonthsFormatter } from './months.formatter';
-import { Moment, Duration, duration } from 'moment';
 import moment from 'moment';
 
 const riba = new Riba();
@@ -10,8 +9,8 @@ riba.module.binder.regist(textBinder);
 
 interface Model {
   obj?: {
-    moment: Moment;
-    duration: Duration;
+    moment: moment.Moment;
+    duration: moment.Duration;
   };
 }
 
@@ -27,7 +26,7 @@ describe('riba.formatters', () => {
     it('The "months" formatter should give the same values as the "moment.months" and "duration.months" methods', () => {
       model.obj = {
         moment: moment(),
-        duration: duration(13337, 'seconds'),
+        duration: moment.duration(13337, 'seconds'),
       };
       const el = document.createElement('div');
       const elMoment = document.createElement('div');
