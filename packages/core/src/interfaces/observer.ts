@@ -13,3 +13,4 @@ export interface Observers {
 }
 
 export type Root = any;
+export type Obj = any;
