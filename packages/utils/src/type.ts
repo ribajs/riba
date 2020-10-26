@@ -293,9 +293,8 @@ export const clone = (deep: boolean, val: any): any => {
   return val;
 };
 
-// Get the class "that"
 /**
- *
+ * // Get the class "that"
  * @param that
  */
 export const classOf = (that: any) => {

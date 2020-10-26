@@ -18,4 +18,4 @@ export * from "./module";
 export * from "./observer";
 export * from "./options";
 export * from "./services";
-export * from "./type";
+export * from "./type-of";
