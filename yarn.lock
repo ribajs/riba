@@ -9919,7 +9919,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"jest@npm:^26.6.1":
+"jest@npm:^26.5.3, jest@npm:^26.6.1":
   version: 26.6.1
   resolution: "jest@npm:26.6.1"
   dependencies:
@@ -13330,7 +13330,7 @@ resolve@^1.18.1:
     eslint-config-prettier: ^6.14.0
     eslint-plugin-prettier: ^3.1.4
     husky: ^4.3.0
-    jest: ^26.6.1
+    jest: ^26.5.3
     jest-config: ^26.6.1
     jest-extended: ^0.11.5
     prettier: ^2.1.2
