@@ -22,8 +22,6 @@ riba.module.regist(Bs4TaggedImageDemoModule);
 riba.bind(document.body, model);
 
 // Webpack HMR
-console.log("module.hot", module.hot);
-if(module.hot) {
-	module.hot.accept();
-	console.log("HMR..");
+if ((window as any)?.module?.hot?.accept) {
+  (window as any).module.hot.accept();
 }

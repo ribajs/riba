@@ -1,10 +1,8 @@
 import { Component } from "@ribajs/core";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./bs4-taggedimage-example.component.html";
-import { PopoverOptions, TaggedImageTag as Tag } from "@ribajs/bs4";
+import { TaggedImageTag as Tag } from "@ribajs/bs4";
 
 interface Scope {
-  name: string;
   fadeshowImages: {
     src: string;
     srcset: string;
@@ -23,24 +21,25 @@ export class Bs4TaggedImageExampleComponent extends Component {
     return [];
   }
 
-  protected scope: Scope = {
-    name: "hello",
-    responsiveTags: [0, 1, 2, 3, 4, 5].reduce(
-      (a, n) => [
-        ...a,
-        ...[0, 1, 2, 3, 4, 5].map((m) => ({
-          x: n * 0.2,
-          y: m * 0.2,
-          color: `rgb(${n * 50}, ${m * 50}, 0)`,
-          popoverOptions: {
-            title: `(${n}, ${m})`,
-            content: `(${n}, ${m})`,
-          },
-        })),
-      ],
-      []
-    ),
-    fadeshowImages: [1, 2, 3, 4, 5].map((n) => ({
+  protected getResponsiveTags() {
+    const cb = (a: Tag[], n: number): Tag[] => [
+      ...a,
+      ...[0, 1, 2, 3, 4, 5].map((m) => ({
+        x: n * 0.2,
+        y: m * 0.2,
+        color: `rgb(${n * 50}, ${m * 50}, 0)`,
+        popoverOptions: {
+          title: `(${n}, ${m})`,
+          content: `(${n}, ${m})`,
+        },
+      })),
+    ];
+
+    return [0, 1, 2, 3, 4, 5].reduce(cb, []);
+  }
+
+  protected getFadeshowImageTags() {
+    return [1, 2, 3, 4, 5].map((n) => ({
       src: `../../../images/shotokan-karate-cuxhaven-${n}.jpg`,
       srcset: [800, 1000, 1200, 1400, 1600, 1920]
         .map(
@@ -71,7 +70,12 @@ export class Bs4TaggedImageExampleComponent extends Component {
           fullSize: size + "px",
         }))(24 + Math.floor(Math.random() * 50)),
       })),
-    })),
+    }));
+  }
+
+  protected scope: Scope = {
+    responsiveTags: this.getResponsiveTags(),
+    fadeshowImages: this.getFadeshowImageTags(),
   };
 
   constructor(element?: HTMLElement) {
@@ -83,23 +87,7 @@ export class Bs4TaggedImageExampleComponent extends Component {
     this.init(Bs4TaggedImageExampleComponent.observedAttributes);
   }
 
-  protected requiredAttributes() {
-    return [];
-  }
-
-  // deconstructor
-  protected disconnectedCallback() {
-    super.disconnectedCallback();
-  }
-
   protected template() {
-    // Only set the component template if there no childs already
-    if (hasChildNodesTrim(this.el)) {
-      // console.debug('Do not use template, because element has child nodes');
-      return null;
-    } else {
-      // console.debug('Use template', template);
-      return template;
-    }
+    return template;
   }
 }

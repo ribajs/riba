@@ -5,14 +5,11 @@
   "main": "src/index.html",
   "scripts": {
     "build": "npm run lint && webpack --progress --color --env production",
-    "webpack:version": "webpack --version",
     "build:dev": "npm run lint && webpack --progress --color --env development",
-    "start": "webpack serve --progress --color --env development",
-    "start:prod": "webpack-dev-server --env.production",
+    "start": "npm run lint && node serve",
     "clear": "rm -rf ./dist",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
-    "test": "jest",
-    "packages:npm:link": "npm link @ribajs/webpack-config @ribajs/tsconfig @ribajs/eslint-config @ribajs/bs4 @ribajs/core @ribajs/extras @ribajs/iconset @ribajs/photoswipe"
+    "test": "jest"
   },
   "files": [
     "src"
@@ -37,7 +34,7 @@
     "@ribajs/types": "^1.9.0-beta.3",
     "@ribajs/webpack-config": "^1.9.0-beta.3",
     "@types/jest": "^26.0.15",
-    "@types/node": "^14.14.2",
+    "@types/node": "^14.14.3",
     "@types/webpack-env": "^1.15.3",
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",

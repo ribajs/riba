@@ -3,6 +3,7 @@
 /* eslint-disable no-undef */
 const path = require("path");
 const rootPath = process.cwd();
+const webpack = require("webpack");
 
 var getStyleLoaderRule = (config = {}) => {
   var rule = {
@@ -16,7 +17,8 @@ var getStyleLoaderRule = (config = {}) => {
       options: {},
     });
   } else {
-    config.styleLoaderPath = config.cssLoaderPath || require.resolve("style-loader");
+    config.styleLoaderPath =
+      config.cssLoaderPath || require.resolve("style-loader");
     rule.use.push({
       loader: config.styleLoaderPath,
     });
@@ -44,7 +46,6 @@ var getStyleLoaderRule = (config = {}) => {
   // Use dart-sass by default for yarn 2 pnp support, see: https://github.com/webpack-contrib/sass-loader/issues/802
   config.styles.SassImplementation =
     config.styles.SassImplementation || require("dart-sass");
-
 
   rule.use.push({
     loader: config.cssLoaderPath,
@@ -89,6 +90,10 @@ module.exports = (config = {}) => {
       config.development ||
       (env && env.development) ||
       process.env.NODE_ENV === "development";
+
+    if (typeof env.production === "boolean") {
+      env.development = !env.production;
+    }
     env.production = !env.development;
     config.production = env.production;
     config.development = env.development;
@@ -222,15 +227,20 @@ module.exports = (config = {}) => {
         };
 
         config.devServer = config.devServer || {
+          port: 8080,
           host: "0.0.0.0",
-          contentBase: "./src",
+          contentBase: path.resolve(rootPath, "src"),
           hot: true,
+          inline: true,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
         };
 
         const HtmlWebpackPlugin = require("html-webpack-plugin");
         plugins.push(
           new HtmlWebpackPlugin({
-            template: rootPath + "/src/index.html",
+            template: path.resolve(rootPath, "src/index.html"),
             filename: "index.html",
           })
         );
@@ -275,6 +285,10 @@ module.exports = (config = {}) => {
           filename: "[name].css",
         })
       );
+      if (config.development) {
+        console.debug("Use HotModuleReplacementPlugin");
+        plugins.push(new webpack.HotModuleReplacementPlugin());
+      }
     }
 
     // console.debug('Used plugins: ', plugins);

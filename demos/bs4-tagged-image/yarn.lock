@@ -1718,24 +1718,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/eslintrc@npm:^0.1.3":
-  version: 0.1.3
-  resolution: "@eslint/eslintrc@npm:0.1.3"
-  dependencies:
-    ajv: ^6.12.4
-    debug: ^4.1.1
-    espree: ^7.3.0
-    globals: ^12.1.0
-    ignore: ^4.0.6
-    import-fresh: ^3.2.1
-    js-yaml: ^3.13.1
-    lodash: ^4.17.19
-    minimatch: ^3.0.4
-    strip-json-comments: ^3.1.1
-  checksum: e9c5eaa5e706bcedbba6e7e1a2bc85faa7e3a9edbe71375e07240d1b6540fbb88d907bd5e5841b42c2a7a9683dcf031ea052c447c3c9d81ba4d0b74f0dd67e5f
-  languageName: node
-  linkType: hard
-
 "@eslint/eslintrc@npm:^0.2.0":
   version: 0.2.0
   resolution: "@eslint/eslintrc@npm:0.2.0"
@@ -2121,7 +2103,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     bootstrap: ^4.5.3
     core-js: ^3.6.5
-    eslint: ^7.11.0
+    eslint: ^7.12.0
     eslint-config-prettier: ^6.14.0
     eslint-plugin-prettier: ^3.1.4
     jest: ^26.6.1
@@ -2144,7 +2126,7 @@ __metadata:
     "@types/jest": ^26.0.15
     "@typescript-eslint/eslint-plugin": ^4.5.0
     "@typescript-eslint/parser": ^4.5.0
-    eslint: ^7.11.0
+    eslint: ^7.12.0
     eslint-config-prettier: ^6.14.0
     eslint-plugin-prettier: ^3.1.4
     prettier: ^2.1.2
@@ -2173,12 +2155,12 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@types/core-js": ^2.5.4
     "@types/jest": ^26.0.15
-    "@types/node": ^14.14.2
+    "@types/node": ^14.14.3
     babel-jest: ^26.6.1
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     core-js: ^3.6.5
-    eslint: ^7.11.0
+    eslint: ^7.12.0
     eslint-config-prettier: ^6.14.0
     eslint-plugin-prettier: ^3.1.4
     jest: ^26.6.1
@@ -2202,7 +2184,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^4.5.0
     "@typescript-eslint/experimental-utils": ^4.5.0
     "@typescript-eslint/parser": ^4.5.0
-    eslint: ^7.11.0
+    eslint: ^7.12.0
     eslint-config-prettier: ^6.14.0
     eslint-plugin-prettier: ^3.1.4
     prettier: ^2.1.2
@@ -2233,7 +2215,7 @@ __metadata:
     babel-loader: ^8.1.0
     babel-plugin-array-includes: ^2.0.3
     core-js: ^3.6.5
-    eslint: ^7.11.0
+    eslint: ^7.12.0
     eslint-config-prettier: ^6.14.0
     eslint-plugin-prettier: ^3.1.4
     jest: ^26.6.1
@@ -2285,7 +2267,7 @@ __metadata:
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@types/jest": ^26.0.15
     babel-jest: ^26.6.1
-    eslint: ^7.11.0
+    eslint: ^7.12.0
     typescript: ^4.0.3
   languageName: node
   linkType: soft
@@ -2306,16 +2288,16 @@ __metadata:
     html-loader: ^1.3.2
     html-webpack-plugin: ^4.5.0
     inspectpack: ^4.5.2
-    mini-css-extract-plugin: ^1.1.2
+    mini-css-extract-plugin: ^1.2.0
     node-sass: ^4.14.1
-    postcss: ^8.1.3
+    postcss: ^8.1.4
     postcss-loader: ^4.0.4
     pug: ^3.0.0
     pug-loader: ^2.4.0
     resolve-url-loader: ^3.1.2
     sass-loader: ^10.0.4
     style-loader: ^2.0.0
-    terser-webpack-plugin: ^5.0.0
+    terser-webpack-plugin: ^5.0.1
     webpack-dev-server: ^3.11.0
   languageName: node
   linkType: soft
@@ -2603,10 +2585,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^14.14.2":
-  version: 14.14.2
-  resolution: "@types/node@npm:14.14.2"
-  checksum: e6ad786008ec81e010525beb09067f31cc55a3a02120a7e383e21309c1422a0d4a56059c1da46716509e36dbd4d2c607790f3fd715275a09b9f3ffb2cf3b243e
+"@types/node@npm:^14.14.3":
+  version: 14.14.3
+  resolution: "@types/node@npm:14.14.3"
+  checksum: f77a69dfc0edb74007883f339636f7d79b891219389311ff6d756a966ca1025557c84c68643f738e897385d2e57e9124cc8261fcf080d378398ab60babaffd57
   languageName: node
   linkType: hard
 
@@ -4343,7 +4325,7 @@ __metadata:
     "@ribajs/utils": ^1.9.0-beta.3
     "@ribajs/webpack-config": ^1.9.0-beta.3
     "@types/jest": ^26.0.15
-    "@types/node": ^14.14.2
+    "@types/node": ^14.14.3
     "@types/webpack-env": ^1.15.3
     "@typescript-eslint/eslint-plugin": ^4.5.0
     "@typescript-eslint/parser": ^4.5.0
@@ -6341,53 +6323,6 @@ __metadata:
   version: 2.0.0
   resolution: "eslint-visitor-keys@npm:2.0.0"
   checksum: 429dabdcab3c1cf5e65d44843afc513398d4ee32a37f93edc93bb5ba59a12b78fa67d87ff23c752c170b5e4f9085050f45b3c036cdfb23d40a724f2614048140
-  languageName: node
-  linkType: hard
-
-"eslint@npm:^7.11.0":
-  version: 7.11.0
-  resolution: "eslint@npm:7.11.0"
-  dependencies:
-    "@babel/code-frame": ^7.0.0
-    "@eslint/eslintrc": ^0.1.3
-    ajv: ^6.10.0
-    chalk: ^4.0.0
-    cross-spawn: ^7.0.2
-    debug: ^4.0.1
-    doctrine: ^3.0.0
-    enquirer: ^2.3.5
-    eslint-scope: ^5.1.1
-    eslint-utils: ^2.1.0
-    eslint-visitor-keys: ^2.0.0
-    espree: ^7.3.0
-    esquery: ^1.2.0
-    esutils: ^2.0.2
-    file-entry-cache: ^5.0.1
-    functional-red-black-tree: ^1.0.1
-    glob-parent: ^5.0.0
-    globals: ^12.1.0
-    ignore: ^4.0.6
-    import-fresh: ^3.0.0
-    imurmurhash: ^0.1.4
-    is-glob: ^4.0.0
-    js-yaml: ^3.13.1
-    json-stable-stringify-without-jsonify: ^1.0.1
-    levn: ^0.4.1
-    lodash: ^4.17.19
-    minimatch: ^3.0.4
-    natural-compare: ^1.4.0
-    optionator: ^0.9.1
-    progress: ^2.0.0
-    regexpp: ^3.1.0
-    semver: ^7.2.1
-    strip-ansi: ^6.0.0
-    strip-json-comments: ^3.1.0
-    table: ^5.2.3
-    text-table: ^0.2.0
-    v8-compile-cache: ^2.0.3
-  bin:
-    eslint: bin/eslint.js
-  checksum: 45ef6dc7b31684ca0f383ed9c6224e763197e1d49745542f4440e37286c947973388a6a7ebbf103eeee91ddb4af2652c5d22718f4130bfbbf4bd16a04103f82a
   languageName: node
   linkType: hard
 
@@ -10342,19 +10277,6 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"mini-css-extract-plugin@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "mini-css-extract-plugin@npm:1.1.2"
-  dependencies:
-    loader-utils: ^2.0.0
-    schema-utils: ^3.0.0
-    webpack-sources: ^1.1.0
-  peerDependencies:
-    webpack: ^4.4.0 || ^5.0.0
-  checksum: 67566a5d980f9b1dedcb79759f43fd3790bf618d01f982349f29998b47f6c5c74a53ebe59087f71dd0ff42452f7003a4e5fc0652ff6b009ab45a8e0f48fea366
-  languageName: node
-  linkType: hard
-
 "mini-css-extract-plugin@npm:^1.2.0":
   version: 1.2.0
   resolution: "mini-css-extract-plugin@npm:1.2.0"
@@ -12217,18 +12139,6 @@ fsevents@^1.2.7:
     nanoid: ^3.1.12
     source-map: ^0.6.1
   checksum: 9bdc9e51369ee35831589f0cfffcb996ed2b50aa23e54e3cf849c74361c17e7f7c1df3e0b993392818ede40f0731c458be134901ce9438bd38223e38781f52f5
-  languageName: node
-  linkType: hard
-
-"postcss@npm:^8.1.3":
-  version: 8.1.3
-  resolution: "postcss@npm:8.1.3"
-  dependencies:
-    colorette: ^1.2.1
-    line-column: ^1.0.2
-    nanoid: ^3.1.15
-    source-map: ^0.6.1
-  checksum: e3f256c7e860ad7f52fbb8b377970cc2fea62e30815f46317af51c0fd62bb666440eed8be0221679b22776a9a289dd604011d13c0a945965bd75b1e28a3852c0
   languageName: node
   linkType: hard
 
