@@ -7,12 +7,10 @@
     "build": "npm run lint && webpack --progress --color --env production",
     "webpack:version": "webpack --version",
     "build:dev": "npm run lint && webpack --progress --color --env development",
-    "start": "webpack serve --progress --color --env development",
-    "start:prod": "webpack-dev-server --env.production",
+    "start": "npm run lint && webpack-serve",
     "clear": "rm -rf ./dist",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
-    "test": "jest",
-    "packages:npm:link": "npm link @ribajs/webpack-config @ribajs/tsconfig @ribajs/eslint-config @ribajs/bs4 @ribajs/core @ribajs/extras @ribajs/iconset @ribajs/photoswipe"
+    "test": "jest"
   },
   "files": [
     "src"
@@ -32,10 +30,10 @@
     "@babel/preset-typescript": "^7.12.1",
     "@babel/runtime": "^7.12.1",
     "@babel/runtime-corejs3": "^7.12.1",
-    "@ribajs/eslint-config": "^1.9.0-beta.2",
-    "@ribajs/tsconfig": "^1.9.0-beta.2",
-    "@ribajs/types": "^1.9.0-beta.2",
-    "@ribajs/webpack-config": "^1.9.0-beta.2",
+    "@ribajs/eslint-config": "^1.9.0-beta.3",
+    "@ribajs/tsconfig": "^1.9.0-beta.3",
+    "@ribajs/types": "^1.9.0-beta.3",
+    "@ribajs/webpack-config": "^1.9.0-beta.3",
     "@types/jest": "^26.0.15",
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
@@ -46,7 +44,7 @@
     "core-js": "^3.6.5",
     "css-loader": "^5.0.0",
     "dart-sass": "^1.25.0",
-    "eslint": "^7.11.0",
+    "eslint": "^7.12.0",
     "eslint-config-prettier": "^6.14.0",
     "eslint-plugin-prettier": "^3.1.4",
     "file-loader": "^6.1.1",
@@ -54,7 +52,7 @@
     "inspectpack": "^4.5.2",
     "jest": "^26.6.1",
     "jest-extended": "^0.11.5",
-    "mini-css-extract-plugin": "^1.1.2",
+    "mini-css-extract-plugin": "^1.2.0",
     "postcss-loader": "^4.0.4",
     "postcss-modules": "^3.2.2",
     "postcss-preset-env": "^6.7.0",
@@ -68,12 +66,13 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "@ribajs/bs4": "^1.9.0-beta.2",
-    "@ribajs/content-slider": "^1.9.0-beta.2",
-    "@ribajs/core": "^1.9.0-beta.2",
-    "@ribajs/extras": "^1.9.0-beta.2",
-    "@ribajs/iconset": "^1.9.0-beta.2",
-    "@ribajs/utils": "^1.9.0-beta.2",
+    "@ribajs/bs4": "^1.9.0-beta.3",
+    "@ribajs/content-slider": "^1.9.0-beta.3",
+    "@ribajs/core": "^1.9.0-beta.3",
+    "@ribajs/extras": "^1.9.0-beta.3",
+    "@ribajs/iconset": "^1.9.0-beta.3",
+    "@ribajs/utils": "^1.9.0-beta.3",
+    "@ribajs/webpack-serve": "^1.9.0-beta.4",
     "bootstrap": "^4.5.3"
   },
   "resolutions": {
@@ -99,6 +98,7 @@
     "@ribajs/photoswipe": "portal:../../packages/photoswipe",
     "@ribajs/content-slider": "portal:../../packages/content-slider",
     "@ribajs/utils": "portal:../../packages/utils",
-    "@ribajs/octobercms": "portal:../../packages/octobercms"
+    "@ribajs/octobercms": "portal:../../packages/octobercms",
+    "@ribajs/webpack-serve": "portal:../../infra/webpack-serve"
   }
 }

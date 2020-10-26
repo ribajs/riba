@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run lint && webpack --progress --color --env production",
     "build:dev": "npm run lint && webpack --progress --color --env development",
-    "start": "webpack serve --progress --color --env development",
+    "start": "npm run lint && webpack-serve",
     "clear": "rm -rf ./dist",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
     "test": "jest"
@@ -69,6 +69,7 @@
     "@ribajs/extras": "^1.9.0-beta.2",
     "@ribajs/iconset": "^1.9.0-beta.2",
     "@ribajs/utils": "^1.9.0-beta.2",
+    "@ribajs/webpack-serve": "^1.9.0-beta.4",
     "@yarnpkg/plugin-node-modules": "^2.2.2",
     "bootstrap": "^4.5.3"
   },
@@ -97,6 +98,7 @@
     "@ribajs/history": "portal:../../packages/history",
     "@ribajs/leaflet-map": "portal:../../packages/leaflet-map",
     "@ribajs/content-slider": "portal:../../packages/content-slider",
-    "@ribajs/octobercms": "portal:../../packages/octobercms"
+    "@ribajs/octobercms": "portal:../../packages/octobercms",
+    "@ribajs/webpack-serve": "portal:../../infra/webpack-serve"
   }
 }
