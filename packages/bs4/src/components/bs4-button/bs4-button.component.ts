@@ -1,8 +1,10 @@
-import { Component } from "@ribajs/core";
+import { Component, EventDispatcher } from "@ribajs/core";
 
 interface Scope {
+  action: string;
+  namespace: string;
   animationClass: string;
-  onClick: Bs4ButtonComponent["onClick"];
+  //onClick: Bs4ButtonComponent["onClick"];
 }
 
 export class Bs4ButtonComponent extends Component {
@@ -10,28 +12,42 @@ export class Bs4ButtonComponent extends Component {
 
   protected autobind = true;
 
+  protected eventDispatcher?: EventDispatcher;
+
   static get observedAttributes() {
-    return ["animation-class"];
+    return ["action", "namespace", "animation-class"];
   }
 
   protected scope: Scope = {
+    action: "undefined",
+    namespace: "undefined",
     animationClass: "btn-animation-start",
-    onClick: this.onClick.bind(this),
+    //onClick: this.onClick.bind(this),
   };
 
   constructor(element?: HTMLElement) {
     super(element);
     // console.debug('constructor', this);
+    this.triggerEvent = this.triggerEvent.bind(this);
+    console.debug("constructor");
   }
 
-  public onClick() {
-    // console.debug('onClick');
-    this.startAnimation();
-  }
+  // public onClick() {
+  //   // console.debug('onClick');
+  //   this.startAnimation();
+  // }
 
   protected connectedCallback() {
     super.connectedCallback();
+    console.debug("connectedCallback");
     this.init(Bs4ButtonComponent.observedAttributes);
+    this.eventDispatcher = EventDispatcher.getInstance(this.scope.namespace);
+    this.el.addEventListener("click", this.triggerEvent);
+  }
+
+  triggerEvent() {
+    //console.debug("triggerEvent", this.scope);
+    this.eventDispatcher?.trigger(this.scope.action);
   }
 
   protected startAnimation() {
@@ -65,7 +81,7 @@ export class Bs4ButtonComponent extends Component {
         this.onEndAnimation
       );
       this.el.addEventListener("animationend", this.onEndAnimation);
-      this.el.addEventListener("click", this.scope.onClick);
+      // this.el.addEventListener("click", this.scope.onClick);
       return view;
     });
   }
@@ -111,7 +127,8 @@ export class Bs4ButtonComponent extends Component {
       this.onEndAnimation
     );
     this.el.removeEventListener("animationend", this.onEndAnimation);
-    this.el.removeEventListener("click", this.scope.onClick);
+    //this.el.removeEventListener("click", this.scope.onClick);
+    this.el.removeEventListener("click", this.triggerEvent);
   }
 
   protected template() {
