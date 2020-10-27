@@ -1,0 +1,13 @@
+// Original Bootstrap 4 Styles
+@import '~bootstrap/scss/bootstrap';
+// Bootstrap style extensions from @ribajs/bs4
+@import '~@ribajs/bs4/src/index';
+@import '../ts/components/index';
+
+
+body {
+}
+
+h2 {
+  margin-bottom: 2em;
+}

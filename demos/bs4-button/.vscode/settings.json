@@ -1,0 +1,27 @@
+{
+  "eslint.nodePath": ".yarn/sdks",
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true
+  },
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#6f2a8d",
+    "activityBar.activeBorder": "#191307",
+    "activityBar.background": "#6f2a8d",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#191307",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "statusBar.background": "#501e66",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#6f2a8d",
+    "titleBar.activeBackground": "#501e66",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#501e6699",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#501e66"
+}
