@@ -1,6 +1,7 @@
 import { Component, EventDispatcher } from "@ribajs/core";
 
 interface Scope {
+  target: string;
   action: string;
   namespace: string;
   animationClass: string;
@@ -15,10 +16,11 @@ export class Bs4ButtonComponent extends Component {
   protected eventDispatcher?: EventDispatcher;
 
   static get observedAttributes() {
-    return ["action", "namespace", "animation-class"];
+    return ["target", "action", "namespace", "animation-class"];
   }
 
   protected scope: Scope = {
+    target: "undefined",
     action: "undefined",
     namespace: "undefined",
     animationClass: "btn-animation-start",
