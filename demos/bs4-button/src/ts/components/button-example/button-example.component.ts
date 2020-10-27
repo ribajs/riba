@@ -12,7 +12,7 @@ export class ButtonExampleComponent extends Component {
 
   protected scope = {};
 
-  protected eventDispatcher?: EventDispatcher[];
+  protected eventDispatcher?: EventDispatcher;
 
   constructor(element?: HTMLElement) {
     super(element);
@@ -21,15 +21,16 @@ export class ButtonExampleComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     super.init(ButtonExampleComponent.observedAttributes);
-    this.eventDispatcher = [];
-    this.eventDispatcher["button-test"] = new EventDispatcher("button-test");
-    this.eventDispatcher["button-test"].on("test-click", this.testClick);
-    this.eventDispatcher["button-test"].on("toggle", this.toggle);
 
-    // eslint-disable-next-line prettier/prettier
-    this.eventDispatcher["another-namespace"] = new EventDispatcher("another-namespace");
-    this.eventDispatcher["another-namespace"].on("open-url", this.openURL);
+    this.eventDispatcher = EventDispatcher.getInstance("button-test");
+    this.eventDispatcher.on("test-click", this.testClick);
+    this.eventDispatcher.on("toggle", this.toggle);
+
+    this.eventDispatcher = EventDispatcher.getInstance("another-namespace");
+    this.eventDispatcher.on("open-url", this.openURL);
+
     //console.debug("ButtonExampleComponent scope", this.scope);
+    
   }
 
   protected testClick() {
@@ -37,7 +38,7 @@ export class ButtonExampleComponent extends Component {
   }
 
   protected toggle() {
-    console.log("toggle");
+    console.log("toggle sidehbar here");
   }
 
   protected openURL() {
