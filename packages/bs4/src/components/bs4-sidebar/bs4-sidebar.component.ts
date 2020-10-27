@@ -152,6 +152,7 @@ export class Bs4SidebarComponent extends Component {
   }
 
   public toggle() {
+    console.debug("toggle");
     if (this.scope.state === "hidden") {
       this.show();
     } else {
@@ -174,6 +175,10 @@ export class Bs4SidebarComponent extends Component {
       this.toggleButtonEvents.off("init", this.triggerState, this);
     }
     this.toggleButtonEvents = new EventDispatcher(
+      "bs4-toggle-button:" + this.scope.id
+    );
+    console.log(
+      "initToggleButtonEventDispatcher",
       "bs4-toggle-button:" + this.scope.id
     );
     this.toggleButtonEvents.on("toggle", this.toggle, this);

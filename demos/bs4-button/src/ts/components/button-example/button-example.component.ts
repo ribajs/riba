@@ -24,11 +24,15 @@ export class ButtonExampleComponent extends Component {
     this.eventDispatcher = [];
     this.eventDispatcher["button-test"] = new EventDispatcher("button-test");
     this.eventDispatcher["button-test"].on("test-click", this.testClick);
-    this.eventDispatcher["button-test"].on("toggle", this.toggle);
+    //this.eventDispatcher["button-test"].on("toggle", this.toggle);
 
     // eslint-disable-next-line prettier/prettier
     this.eventDispatcher["another-namespace"] = new EventDispatcher("another-namespace");
     this.eventDispatcher["another-namespace"].on("open-url", this.openURL);
+
+    // eslint-disable-next-line prettier/prettier
+    this.eventDispatcher["bs4-toggle-button:main-sidebar"] = new EventDispatcher("bs4-toggle-button:main-sidebar");
+
     //console.debug("ButtonExampleComponent scope", this.scope);
   }
 
@@ -38,6 +42,7 @@ export class ButtonExampleComponent extends Component {
 
   protected toggle() {
     console.log("toggle");
+    this.eventDispatcher["bs4-toggle-button:main-sidebar"].trigger('toggle');
   }
 
   protected openURL() {
