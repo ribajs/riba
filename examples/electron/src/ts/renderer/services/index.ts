@@ -1,1 +1,1 @@
-export * from "./app-api.service";
+export {};

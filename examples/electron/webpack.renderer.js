@@ -8,8 +8,6 @@ const RibaWebpackConfig = async (env = {}) => {
   const rootPath = await pkgDir(__dirname);
   const ribaWebpackConfig = RibaWebpackConfigurator({
     template: "local",
-    // Wait for bugfix: https://github.com/webpack/webpack/pull/10765
-    // target: 'electron-renderer',
     entry: {
       renderer: [
         path.resolve(rootPath, "src/scss/renderer.scss"),
@@ -17,8 +15,9 @@ const RibaWebpackConfig = async (env = {}) => {
       ],
     },
     output: {
-      path: path.resolve(rootPath, "dist/"),
+      path: path.resolve(rootPath, "dist/renderer"),
       filename: "renderer.js",
+      publicPath: "/",
     },
     // We do not split the bundle on electron
     splitChunks: {},
@@ -26,14 +25,19 @@ const RibaWebpackConfig = async (env = {}) => {
     copyAssets: {
       enable: true,
       iconset: true,
-      foldername: "dist",
+      foldername: "dist/renderer",
     },
   })(env);
 
   ribaWebpackConfig.devServer = {
-    host: "0.0.0.0",
+    host: "localhost",
+    port: 3001,
     contentBase: "./src",
     hot: true,
+    inline: true,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
   };
 
   return ribaWebpackConfig;
