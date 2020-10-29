@@ -1,4 +1,4 @@
-import { createApp, App } from "vue";
+import { createApp, App, Component, WritableComputedOptions } from "vue";
 import { BasicComponent } from "@ribajs/core";
 
 export abstract class VueComponent extends BasicComponent {
@@ -10,6 +10,8 @@ export abstract class VueComponent extends BasicComponent {
    * If true the component will automatically bind the component to riba if all required attributes are set.
    */
   protected autobind = true;
+
+  protected abstract methods: any;
 
   constructor(element?: HTMLUnknownElement) {
     super(element);
@@ -51,6 +53,22 @@ export abstract class VueComponent extends BasicComponent {
 
   protected async afterBind(): Promise<any> {
     this.debug("afterBind", this.scope);
+  }
+
+  protected beforeMount() {
+    this.debug("beforeMount", this.scope);
+  }
+
+  protected beforeUnmount() {
+    this.debug("beforeUnmount", this.scope);
+  }
+
+  protected beforeCreate() {
+    this.debug("beforeCreate", this.scope);
+  }
+
+  protected beforeUpdate() {
+    this.debug("beforeUpdate", this.scope);
   }
 
   /**
@@ -120,30 +138,53 @@ export abstract class VueComponent extends BasicComponent {
 
     this.bound = true;
 
-    await this.beforeBind()
-      .then(() => {
-        if (!this.el) {
-          throw new Error("this.el is not defined");
-        }
-        this.debug("Start to bind Vue");
-        const ComponentOptions = {
-          data: () => {
-            return this.scope;
-          },
-        };
-        this.vue = createApp(ComponentOptions);
-        this.vue.mount(this.el);
-        return this.vue;
-      })
-      .then(() => {
-        return this.afterBind();
-      })
-      .catch((error) => {
-        this.bound = false;
-        console.error(error);
-      });
+    if (!this.el) {
+      throw new Error("this.el is not defined");
+    }
+    this.debug("Start to bind Vue");
+
+    await this.beforeBind();
+
+    const VueOptions: Component<
+      any,
+      any,
+      any,
+      Record<string, WritableComputedOptions<any>>
+    > = {
+      data: () => {
+        return this.scope;
+      },
+      props: this.observedAttributes,
+      methods: this.methods,
+      beforeMount: this.beforeMount.bind(this),
+      beforeUnmount: this.beforeUnmount.bind(this),
+      beforeCreate: this.beforeCreate.bind(this),
+      beforeUpdate: this.beforeUpdate.bind(this),
+      name: VueComponent.tagName,
+      watch: this.getAttributeWatchOption(),
+    };
+    this.vue = createApp(VueOptions);
+    this.vue.mount(this.el);
+
+    await this.afterBind();
 
     return this.vue;
+  }
+
+  // Untested
+  protected getAttributeWatchOption() {
+    const watch: any = {};
+    for (const observedAttribute of this.observedAttributes) {
+      watch[observedAttribute] = (newValue: any, oldValue: any) => {
+        return this.attributeChangedCallback(
+          observedAttribute,
+          newValue,
+          oldValue,
+          null
+        );
+      };
+    }
+    return watch;
   }
 
   protected async unbind() {

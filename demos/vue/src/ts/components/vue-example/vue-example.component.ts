@@ -1,22 +1,16 @@
-import { VueComponent } from "@ribajs/vue";
+import { Component } from "@ribajs/core";
 import template from "./vue-example.component.html";
 
-interface Scope {
-  message: string;
-}
-
-export class VueExampleComponent extends VueComponent {
+export class VueExampleComponent extends Component {
   public static tagName = "vue-example";
 
-  public _debug = true;
+  protected autobind = true;
 
   static get observedAttributes() {
-    return ["message"];
+    return [];
   }
 
-  protected scope: Scope = {
-    message: "",
-  };
+  protected scope = {};
 
   constructor(element?: HTMLElement) {
     super(element);
@@ -24,7 +18,11 @@ export class VueExampleComponent extends VueComponent {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init([]);
+    this.init(VueExampleComponent.observedAttributes);
+  }
+
+  protected requiredAttributes() {
+    return [];
   }
 
   protected template() {
