@@ -58,7 +58,7 @@ export abstract class AI18nSwitcherComponent extends Component {
     }
   }
 
-  protected async init(observedAttributes: string[]) {
+  protected async init(observedAttributes: string[]): Promise<void> {
     if (this.localesService.ready) {
       const langcode = this.localesService.getLangcode();
       if (langcode) {
@@ -67,13 +67,13 @@ export abstract class AI18nSwitcherComponent extends Component {
         });
       }
     }
-    return new Promise<undefined | null>((resolve) => {
+    return new Promise<void>((resolve) => {
       this.localesService.event.on("ready", (
         langcode: string /*, translationNeeded: boolean*/
       ) => {
         return this.initLocales(langcode).then((/*langcodes*/) => {
-          return super.init(observedAttributes).then((view) => {
-            resolve(view);
+          return super.init(observedAttributes).then(() => {
+            resolve();
           });
         });
       });
