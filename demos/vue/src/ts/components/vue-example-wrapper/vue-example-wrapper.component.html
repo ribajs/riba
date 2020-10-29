@@ -1,0 +1,13 @@
+<div>
+  <vue-app rv-co-message="message">
+    <p>Message: {{ message }}</p>
+    <input type="text" v-model="message">
+    <v-increase></v-increase>
+  </vue-app>
+
+  <div class="riba">
+    <p>Message: { message }</p>
+    <input type="text" rv-value="message">
+    <rv-increase></rv-increase>
+  </div>
+</div>

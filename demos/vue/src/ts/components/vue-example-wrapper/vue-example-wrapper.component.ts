@@ -1,8 +1,8 @@
 import { Component } from "@ribajs/core";
-import template from "./vue-example.component.html";
+import template from "./vue-example-wrapper.component.html";
 
-export class VueExampleComponent extends Component {
-  public static tagName = "vue-example";
+export class VueExampleWrapperComponent extends Component {
+  public static tagName = "vue-example-wrapper";
 
   protected autobind = true;
 
@@ -10,7 +10,9 @@ export class VueExampleComponent extends Component {
     return [];
   }
 
-  protected scope = {};
+  protected scope = {
+    message: "Message from Riba.js to Vue.js and back",
+  };
 
   constructor(element?: HTMLElement) {
     super(element);
@@ -18,7 +20,7 @@ export class VueExampleComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init(VueExampleComponent.observedAttributes);
+    this.init(VueExampleWrapperComponent.observedAttributes);
   }
 
   protected requiredAttributes() {

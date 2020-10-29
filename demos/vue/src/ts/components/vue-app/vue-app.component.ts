@@ -1,13 +1,13 @@
 import { VueComponent } from "@ribajs/vue";
 
-import Increase from "./v-increase.vue";
+import Increase from "../vue-increase/vue-increase.vue";
 
 export class VueAppComponent extends VueComponent {
   public static tagName = "vue-app";
   protected autobind = true;
   public _debug = true;
 
-  static observedAttributes = [];
+  static observedAttributes = ["message"];
 
   // Methods to use in the template
   protected methods = {};

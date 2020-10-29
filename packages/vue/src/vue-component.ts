@@ -1,8 +1,16 @@
-import { createApp, App, Component, WritableComputedOptions } from "vue";
+import {
+  createApp,
+  App,
+  Component,
+  WritableComputedOptions,
+  ComponentPublicInstance,
+} from "vue";
 import { BasicComponent } from "@ribajs/core";
 
 export abstract class VueComponent extends BasicComponent {
   protected vue?: App;
+
+  protected vueVm?: ComponentPublicInstance;
 
   protected bound = false;
 
@@ -125,6 +133,19 @@ export abstract class VueComponent extends BasicComponent {
     this.bindIfReady();
   }
 
+  protected parsedAttributeChangedCallback(
+    attributeName: string,
+    oldValue: any,
+    newValue: any,
+    namespace: string | null
+  ) {
+    this.debug('parsedAttributeChangedCallback', attributeName, oldValue, newValue, this.scope, this.vueVm);
+    if (this.vueVm) {
+      this.vueVm.$forceUpdate(); // [attributeName] = newValue;
+    }
+    
+  }
+
   protected async bind() {
     if (this.bound === true) {
       // this.debug("component already bound");
@@ -164,7 +185,7 @@ export abstract class VueComponent extends BasicComponent {
       watch: this.getAttributeWatchOption(),
     };
     this.vue = createApp(VueOptions);
-    this.vue.mount(this.el);
+    this.vueVm = this.vue.mount(this.el);
 
     await this.afterBind();
 
@@ -176,10 +197,11 @@ export abstract class VueComponent extends BasicComponent {
     const watch: any = {};
     for (const observedAttribute of this.observedAttributes) {
       watch[observedAttribute] = (newValue: any, oldValue: any) => {
+        this.debug("watch", observedAttribute, newValue, oldValue);
         return this.attributeChangedCallback(
           observedAttribute,
-          newValue,
           oldValue,
+          newValue,
           null
         );
       };

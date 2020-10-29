@@ -270,6 +270,15 @@ export abstract class BasicComponent extends FakeHTMLElement {
 
     newValue = this.parseAttribute(newValue);
 
+    if (oldValue !== newValue) {
+      this.notifyRibaAttributeChanged(
+        attributeName,
+        oldValue,
+        newValue,
+        namespace
+      );
+    }
+
     const parsedAttributeName = camelCase(attributeName);
 
     if (this.scope && this.scope[parsedAttributeName]) {
@@ -296,7 +305,7 @@ export abstract class BasicComponent extends FakeHTMLElement {
    * @param namespace
    */
   protected parsedAttributeChangedCallback(
-    attributeNames: string | string[],
+    attributeName: string,
     oldValue: any,
     newValue: any,
     namespace: string | null
@@ -361,6 +370,32 @@ export abstract class BasicComponent extends FakeHTMLElement {
     // this.debug('onReady', this.bound);
   }
 
+  /**
+   * This is for the rv-co-attribute binder
+   * TODO only notify attributes wich are passed as rv-co-*="*"
+   * @param attrName
+   * @param oldValue
+   * @param newValue
+   * @param namespace
+   */
+  protected notifyRibaAttributeChanged(
+    attrName: string,
+    oldValue: any,
+    newValue: any,
+    namespace: any
+  ) {
+    this.el.dispatchEvent(
+      new CustomEvent("notify-attribute-change:" + attrName, {
+        detail: {
+          name: attrName,
+          oldValue,
+          newValue,
+          namespace,
+        },
+      })
+    );
+  }
+
   protected askForRibaParent() {
     this.el.dispatchEvent(new CustomEvent("ask-for-parent"));
   }
@@ -416,6 +451,11 @@ export abstract class BasicComponent extends FakeHTMLElement {
     );
   }
 
+  /**
+   * This is for the co-attribute-binder
+   * TODO only watch for attributes passed as rv-co-* and not all
+   * @param observedAttributes
+   */
   protected listenForRibaAttributes(observedAttributes: string[]) {
     for (const observedAttribute of observedAttributes) {
       this.listenForRibaAttribute(observedAttribute);
