@@ -5,8 +5,6 @@ import { extrasModule } from "@ribajs/extras";
 
 import * as CustomComponents from "./components";
 
-import { AppApiService } from "./services";
-
 import { App } from "./interfaces";
 declare global {
   interface Window {
@@ -27,8 +25,4 @@ riba.module.component.regists(CustomComponents);
 
 ready(async () => {
   riba.bind(document.body, model);
-
-  const app = new AppApiService();
-  const helloResponse = await app.request("main/hello", "Say hello");
-  console.log("api hello response: ", helloResponse);
 });

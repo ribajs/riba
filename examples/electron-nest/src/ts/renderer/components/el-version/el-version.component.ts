@@ -1,6 +1,5 @@
-import { Component } from "@ribajs/core";
+import { Component, HttpService } from "@ribajs/core";
 import template from "./el-version.component.html";
-import { AppApiService } from "../../services";
 
 interface Scope {
   versions: {
@@ -15,7 +14,6 @@ export class ElVersionComponent extends Component {
   public static tagName = "el-version";
   public _debug = true;
   protected autobind = true;
-  protected app = new AppApiService();
 
   static get observedAttributes() {
     return [];
@@ -37,7 +35,9 @@ export class ElVersionComponent extends Component {
 
   protected async beforeBind() {
     await super.beforeBind();
-    this.scope.versions = await this.app.request("main/versions");
+    this.scope.versions = await HttpService.getJSON(
+      "http://localhost:3000/versions"
+    );
     this.debug("beforeBind", this.scope);
   }
 

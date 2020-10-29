@@ -1,17 +1,4 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "declaration": true,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "es2017",
-    "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true,
-    "types": ["webpack-env", "jest", "node"]
-  },
+  "extends": "electron-webpack/tsconfig-base.json",
   "files": ["src/ts/main/main.ts"]
 }
