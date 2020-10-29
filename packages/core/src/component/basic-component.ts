@@ -1,16 +1,14 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /**
- * This implementation of components replaces the old components of rivets following the Web Components v1 specs
+ * Autoparse custom element attributes and add fallback support for browser with no native custom element support
  *
  * @see https://developer.mozilla.org/de/docs/Web/Web_Components/Using_custom_elements
  */
 import "@ribajs/types";
-import { EventHandler, Formatter } from "../interfaces";
+import { EventHandler, ObservedAttributesToCheck } from "../interfaces";
 import { Binding } from "../binding";
 import { parseJsonString, camelCase } from "@ribajs/utils/src/type";
 import { getRandomColor } from "@ribajs/utils/src/color";
 import { FakeHTMLElement } from "./fake-html-element";
-import { ObservedAttributesToCheck } from "../interfaces";
 
 export abstract class BasicComponent extends FakeHTMLElement {
   public static tagName: string;
@@ -220,48 +218,6 @@ export abstract class BasicComponent extends FakeHTMLElement {
   }
 
   /**
-   * Extra call formatter to avoid the "this" context problem
-   */
-  protected callFormatterHandler(self: this): any {
-    return {
-      name: "call",
-      read: (fn: (...args: any[]) => any, ...args: any[]) => {
-        if (!fn) {
-          console.error(
-            `[${self.el.tagName}] Can not use "call" formatter: fn is undefined! Arguments: `,
-            args
-          );
-          throw new Error("TypeError: fn is undefined");
-        }
-        return fn.apply(self, args);
-      },
-    };
-  }
-
-  /**
-   * Extra args formatter to avoid the "this" context problem
-   *
-   * Sets arguments to a function without directly call them
-   * @param fn The function you wish to call
-   * @param args the parameters you wish to call the function with
-   */
-  protected argsFormatterHandler(self: this): Formatter {
-    return {
-      name: "args",
-      read: (fn: (...args: any[]) => any, ...fnArgs: any[]) => {
-        return (event: Event, scope: any, el: HTMLElement, binding: any) => {
-          // append the event handler args to passed args
-          fnArgs.push(event);
-          fnArgs.push(scope);
-          fnArgs.push(el);
-          fnArgs.push(binding);
-          return fn.apply(self, fnArgs);
-        };
-      },
-    };
-  }
-
-  /**
    * Default custom Element method
    * Invoked when the custom element is first connected to the document's DOM.
    */
@@ -389,14 +345,6 @@ export abstract class BasicComponent extends FakeHTMLElement {
         this.templateLoaded = false;
         return null;
       });
-  }
-
-  protected async beforeBind(): Promise<any> {
-    this.debug("beforeBind", this.scope);
-  }
-
-  protected async afterBind(): Promise<any> {
-    this.debug("afterBind", this.scope);
   }
 
   protected async beforeTemplate(): Promise<any> {

@@ -1,10 +1,6 @@
-import { Component } from "../component";
-import { TypeOf } from "./type-of";
+import { BasicComponent } from "../component";
+import { TypeOfComponent } from "./type-of-component";
 
-export interface TypeOfComponent<T = Component> extends TypeOf<T> {
-  tagName: string;
-}
-
-export interface Components {
-  [name: string]: TypeOfComponent;
+export interface Components<T = BasicComponent> {
+  [name: string]: TypeOfComponent<T>;
 }

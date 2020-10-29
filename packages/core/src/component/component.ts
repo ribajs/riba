@@ -1,13 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /**
  * This implementation of components replaces the old components of rivets following the Web Components v1 specs
  *
  * @see https://developer.mozilla.org/de/docs/Web/Web_Components/Using_custom_elements
  */
-import "@ribajs/types";
 import { View } from "../view";
 import { Riba } from "../riba";
 import { BasicComponent } from "./basic-component";
+import { Formatter } from "../interfaces";
 
 export abstract class Component extends BasicComponent {
   protected view?: View;
@@ -115,6 +114,48 @@ export abstract class Component extends BasicComponent {
     );
 
     this.bindIfReady();
+  }
+
+  /**
+   * Extra call formatter to avoid the "this" context problem
+   */
+  protected callFormatterHandler(self: this): any {
+    return {
+      name: "call",
+      read: (fn: (...args: any[]) => any, ...args: any[]) => {
+        if (!fn) {
+          console.error(
+            `[${self.el.tagName}] Can not use "call" formatter: fn is undefined! Arguments: `,
+            args
+          );
+          throw new Error("TypeError: fn is undefined");
+        }
+        return fn.apply(self, args);
+      },
+    };
+  }
+
+  /**
+   * Extra args formatter to avoid the "this" context problem
+   *
+   * Sets arguments to a function without directly call them
+   * @param fn The function you wish to call
+   * @param args the parameters you wish to call the function with
+   */
+  protected argsFormatterHandler(self: this): Formatter {
+    return {
+      name: "args",
+      read: (fn: (...args: any[]) => any, ...fnArgs: any[]) => {
+        return (event: Event, scope: any, el: HTMLElement, binding: any) => {
+          // append the event handler args to passed args
+          fnArgs.push(event);
+          fnArgs.push(scope);
+          fnArgs.push(el);
+          fnArgs.push(binding);
+          return fn.apply(self, fnArgs);
+        };
+      },
+    };
   }
 
   protected async bind() {

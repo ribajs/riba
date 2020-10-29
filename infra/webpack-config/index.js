@@ -2,7 +2,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
 const path = require("path");
-const rootPath = process.cwd();
+const pkgDir = require('pkg-dir');
+const rootPath = pkgDir.sync(process.cwd());
 // const webpack = require("webpack");
 
 var getStyleLoaderRule = (config = {}) => {

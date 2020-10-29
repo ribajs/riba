@@ -5,7 +5,10 @@
 const path = require("path");
 const webpack = require("webpack");
 const WDS = require("webpack-dev-server");
-const rootPath = process.cwd();
+const pkgDir = require('pkg-dir');
+const rootPath = pkgDir.sync(process.cwd());
+
+console.debug('rootPath', rootPath)
 
 const start = async () => {
   let webpackConfig;
@@ -16,6 +19,7 @@ const start = async () => {
     });
     console.debug("Use webpack config");
   } catch (error) {
+    console.warn(error);
     webpackConfig = await require("@ribajs/webpack-config")({
       template: "local",
     })({

@@ -1,9 +1,8 @@
-import { Component } from '@ribajs/core';
-import template from './each-item-example.component.html';
+import { Component } from "@ribajs/core";
+import template from "./each-item-example.component.html";
 
 export class EachItemExampleComponent extends Component {
-
-  public static tagName: string = 'rv-each-item-example';
+  public static tagName = "rv-each-item-example";
 
   protected scope: Scope = {
     items: this.getItems(),
@@ -21,7 +20,7 @@ export class EachItemExampleComponent extends Component {
   }
 
   public push() {
-    this.scope.items.push({name: 'pushed'});
+    this.scope.items.push({ name: "pushed" });
   }
 
   public pop() {
@@ -33,11 +32,11 @@ export class EachItemExampleComponent extends Component {
   }
 
   public unshift() {
-    this.scope.items.unshift({name: 'shifted'});
+    this.scope.items.unshift({ name: "shifted" });
   }
 
   public splice() {
-    this.scope.items.splice(1, 1, {name: 'spliced1'}, {name: 'spliced2'});
+    this.scope.items.splice(1, 1, { name: "spliced1" }, { name: "spliced2" });
   }
 
   public reset() {
@@ -56,12 +55,15 @@ export class EachItemExampleComponent extends Component {
   }
 
   protected getItems(): Item[] {
-    return [{name: 'x', value: 2}, {name: 'y', value: 1}, {name: 'z', value: 3}];
+    return [
+      { name: "x", value: 2 },
+      { name: "y", value: 1 },
+      { name: "z", value: 3 },
+    ];
   }
 
   protected async init(observedAttributes: string[]) {
-    return super.init(observedAttributes)
-    .then((view) => {
+    return super.init(observedAttributes).then((view) => {
       return view;
     });
   }
@@ -78,11 +80,11 @@ interface Item {
 
 interface Scope {
   items: Item[];
-  push: EachItemExampleComponent['push'];
-  pop: EachItemExampleComponent['pop'];
-  shift: EachItemExampleComponent['shift'];
-  unshift: EachItemExampleComponent['unshift'];
-  splice: EachItemExampleComponent['splice'];
-  reset: EachItemExampleComponent['reset'];
-  sort: EachItemExampleComponent['sort'];
+  push: EachItemExampleComponent["push"];
+  pop: EachItemExampleComponent["pop"];
+  shift: EachItemExampleComponent["shift"];
+  unshift: EachItemExampleComponent["unshift"];
+  splice: EachItemExampleComponent["splice"];
+  reset: EachItemExampleComponent["reset"];
+  sort: EachItemExampleComponent["sort"];
 }
