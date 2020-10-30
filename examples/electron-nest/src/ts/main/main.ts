@@ -1,9 +1,15 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { NestFactory } from "@nestjs/core";
+
+import {
+  NestExpressApplication,
+  ExpressAdapter,
+} from "@nestjs/platform-express";
+import * as Express from "express";
 import { AppModule } from "./app.module";
-import { app } from "electron";
+import { app as electron } from "electron";
 import { MainWindow } from "./window/main-window";
-import { hmrServer } from "./hmr";
+import { webpackServer } from "./webpack-server";
 
 declare global {
   const CONFIG: any;
@@ -13,25 +19,37 @@ declare global {
   };
 }
 
-console.debug("CONFIG", CONFIG);
-console.debug("ENV", ENV);
-
 async function bootstrap() {
   // This method will be called when Electron has finished
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
-  await app.whenReady();
+  await electron.whenReady();
 
-  const server = await NestFactory.create(AppModule.forRoot());
-  server.enableCors();
-
-  let devServer;
+  let express: Express.Express;
+  let devServer: any;
 
   if (ENV.development) {
-    devServer = await hmrServer();
+    devServer = await webpackServer();
+    express = devServer.app;
+  } else {
+    express = Express();
   }
 
-  await server.listen(3000);
+  const nest = await NestFactory.create<NestExpressApplication>(
+    AppModule.forRoot(),
+    new ExpressAdapter(express)
+  );
+
+  nest.enableCors();
+
+  if (devServer) {
+    devServer.listen(3000, "localhost");
+    nest.init();
+  } else {
+    express.listen(3000, "localhost");
+    nest.init();
+    // await nest.listen(3000, "localhost");
+  }
 
   MainWindow.getInstance();
 
@@ -47,11 +65,10 @@ async function bootstrap() {
   // Quit when all windows are closed, except on macOS. There, it's common
   // for applications and their menu bar to stay active until the user quits
   // explicitly with Cmd + Q.
-  app.on("window-all-closed", function () {
+  electron.on("window-all-closed", function () {
     if (process.platform !== "darwin") {
-      app.quit();
-      server.close();
-      devServer?.close();
+      electron.quit();
+      nest.close();
     }
   });
 

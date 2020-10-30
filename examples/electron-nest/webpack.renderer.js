@@ -31,7 +31,7 @@ const RibaWebpackConfig = async (env = {}) => {
 
   ribaWebpackConfig.devServer = {
     host: "localhost",
-    port: 3001,
+    port: 3000,
     contentBase: "./src",
     hot: true,
     inline: true,

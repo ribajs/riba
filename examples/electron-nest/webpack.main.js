@@ -55,7 +55,10 @@ module.exports = async (env) => {
         paths: [/\.js$/, /\.d\.ts$/],
       }),
       new ForkTsCheckerWebpackPlugin({
-        tslint: true,
+        eslint: {
+          enabled: true,
+          files: "./src/**/*.{ts,tsx}",
+        },
       }),
       new webpack.DefinePlugin({
         CONFIG: JSON.stringify(config), // https://www.npmjs.com/package/config

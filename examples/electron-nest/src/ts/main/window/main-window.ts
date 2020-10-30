@@ -17,12 +17,10 @@ export class MainWindow extends BrowserWindow {
     super(MainWindow.options);
 
     if (ENV.development) {
-      this.loadURL("http://localhost:3001/index.html");
       // Open the DevTools.
       this.webContents.openDevTools();
-    } else {
-      this.loadURL("http://localhost:3000/index.html");
     }
+    this.loadURL("http://localhost:3000/index.html");
 
     MainWindow.instance = this;
   }
