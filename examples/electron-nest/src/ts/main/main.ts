@@ -27,6 +27,7 @@ async function bootstrap() {
 
   let express: Express.Express;
   let devServer: any;
+  let prodServer: any;
 
   if (ENV.development) {
     devServer = await webpackServer();
@@ -46,19 +47,28 @@ async function bootstrap() {
     devServer.listen(3000, "localhost");
     nest.init();
   } else {
-    express.listen(3000, "localhost");
+    prodServer = express.listen(3000, "localhost");
     nest.init();
     // await nest.listen(3000, "localhost");
   }
 
   MainWindow.getInstance();
 
+  // Server side HMR
+  // We just restart the app here but you can also do more
+  // Example: https://dorp.io/posts/webpack-express-hmr/
   if (module.hot) {
     module.hot.accept();
     module.hot.dispose(() => {
-      // app.quit();
-      // server.close();
-      // devServer?.close();
+      console.debug("Restart..");
+      if (prodServer) {
+        prodServer.close();
+      }
+      if (devServer) {
+        devServer.close();
+      }
+      electron.relaunch();
+      electron.exit();
     });
   }
 
