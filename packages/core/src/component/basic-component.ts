@@ -109,7 +109,7 @@ export abstract class BasicComponent extends FakeHTMLElement {
 
   public reload(clazz: TypeOfComponent) {
     console.log("reload");
-    Object.setPrototypeOf(this.el, clazz.prototype);
+    Object.setPrototypeOf(this, clazz.prototype);
     this.el.parentElement?.replaceChild(this.el, this.el);
   }
 

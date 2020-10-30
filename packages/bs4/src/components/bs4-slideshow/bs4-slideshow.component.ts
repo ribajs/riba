@@ -379,7 +379,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   constructor(element?: HTMLElement) {
     super(element);
 
-    console.log("test!!");
+    console.log("test!!!!!");
 
     if (module?.hot) {
       this.initHMR(module, Bs4SlideshowComponent);
