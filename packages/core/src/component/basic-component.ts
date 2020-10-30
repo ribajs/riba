@@ -63,7 +63,7 @@ export abstract class BasicComponent extends FakeHTMLElement {
    * Init HMR support
    * @see https://webpack.js.org/api/hot-module-replacement/
    */
-  protected initHMR(module: NodeModule, clazz: TypeOfComponent) {
+  protected initHMR(module: NodeModule, updatedClass: TypeOfComponent) {
     if (module?.hot) {
       console.debug("HMR mode detected");
       module?.hot?.accept();
@@ -75,7 +75,7 @@ export abstract class BasicComponent extends FakeHTMLElement {
       this.onHMRStatusChanged = this._onHMRStatusChanged.bind(
         this,
         module,
-        clazz
+        updatedClass
       );
       module.hot.addStatusHandler(this.onHMRStatusChanged);
     }
@@ -83,14 +83,15 @@ export abstract class BasicComponent extends FakeHTMLElement {
 
   protected _onHMRStatusChanged(
     module: NodeModule,
-    clazz: TypeOfComponent,
+    updatedClass: TypeOfComponent,
     status: HMRStatus | string
   ) {
     console.debug("HMR status changed: " + status);
     module?.hot?.accept();
     if (status === "apply") {
       console.debug("HMR reload..");
-      this.reload(clazz);
+      this.patch(updatedClass);
+      this.reload();
       // this.connectedCallback();
     }
   }
@@ -107,9 +108,29 @@ export abstract class BasicComponent extends FakeHTMLElement {
     }
   }
 
-  public reload(clazz: TypeOfComponent) {
+  /**
+   * see https://github.com/vegarringdal/custom-elements-hmr-polyfill/blob/master/src/package/polyfill/patch.ts
+   * @param updatedClass
+   */
+  protected patch(updatedClass: TypeOfComponent) {
+    const BLACKLISTED_PATCH_METHODS = ["observedAttributes"];
+    const probNames = Object.getOwnPropertyNames(updatedClass).filter(
+      (propName) => BLACKLISTED_PATCH_METHODS.indexOf(propName) === -1
+    );
+    for (const propName of probNames) {
+      const propertyDescriptor = Object.getOwnPropertyDescriptor(
+        updatedClass,
+        propName
+      );
+      if (propertyDescriptor) {
+        Object.defineProperty(this, propName, propertyDescriptor);
+      }
+    }
+    // Object.setPrototypeOf(this, updatedClass.prototype);
+  }
+
+  public reload() {
     console.log("reload");
-    Object.setPrototypeOf(this, clazz.prototype);
     this.el.parentElement?.replaceChild(this.el, this.el);
   }
 
