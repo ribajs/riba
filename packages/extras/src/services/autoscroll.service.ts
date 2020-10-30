@@ -49,10 +49,6 @@ export class Autoscroll {
     this.limit = this.getLimit(this.el);
     this.move = this.getPosition();
 
-    window.addEventListener("resize", this.onResize, {
-      passive: true,
-    });
-
     if (this.direction === -1) {
       // start right
       this.el.scrollLeft = this.limit;
@@ -61,12 +57,57 @@ export class Autoscroll {
       this.el.scrollLeft = 0;
     }
 
+    this.addEventListeners();
+
+    Gameloop.startLoop({ maxFPS: 60 });
+  }
+
+  /**
+   * @note this is not the gameloop update method!
+   */
+  public update() {
+    this.limit = this.getLimit(this.el);
+    this.setPosition();
+  }
+
+  public destroy() {
+    this.removeEventListeners();
+  }
+
+  public pause() {
+    this.el.style.scrollBehavior = "";
+    this._pause = true;
+  }
+
+  /** Resume autoscrolling if this method was not called up for [delay] milliseconds */
+  public resume(delay = 0) {
+    if (!this._pause) {
+      return;
+    }
+
+    this.stopResumeTimeout();
+
+    this.resumeTimer = window.setTimeout(() => {
+      this.setPosition();
+      this._pause = false;
+      // Disable smooth scrolling on autoscroll if set
+      this.el.style.scrollBehavior = "auto";
+    }, delay);
+  }
+
+  protected addEventListeners() {
+    this.onResize = this.onResize.bind(this);
     this.onMouseIn = this.onMouseIn.bind(this);
     this.onMouseOut = this.onMouseOut.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
     this.onScroll = this.onScroll.bind(this);
     this.render = this.render.bind(this);
     this.updateMove = this.updateMove.bind(this);
+
+    window.addEventListener("resize", this.onResize, {
+      passive: true,
+    });
+
     this.el.addEventListener("mouseenter", this.onMouseIn, {
       passive: true,
     });
@@ -119,41 +160,6 @@ export class Autoscroll {
 
     Gameloop.events.on("render", this.render);
     Gameloop.events.on("update", this.updateMove);
-
-    Gameloop.startLoop({ maxFPS: 60 });
-  }
-
-  /**
-   * @note this is not the gameloop update method!
-   */
-  public update() {
-    this.limit = this.getLimit(this.el);
-    this.setPosition();
-  }
-
-  public destroy() {
-    this.removeEventListeners();
-  }
-
-  public pause() {
-    this.el.style.scrollBehavior = "";
-    this._pause = true;
-  }
-
-  /** Resume autoscrolling if this method was not called up for [delay] milliseconds */
-  public resume(delay = 0) {
-    if (!this._pause) {
-      return;
-    }
-
-    this.stopResumeTimeout();
-
-    this.resumeTimer = window.setTimeout(() => {
-      this.setPosition();
-      this._pause = false;
-      // Disable smooth scrolling on autoscroll if set
-      this.el.style.scrollBehavior = "auto";
-    }, delay);
   }
 
   protected removeEventListeners() {
