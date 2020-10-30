@@ -379,12 +379,6 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   constructor(element?: HTMLElement) {
     super(element);
 
-    console.log("test!!!!!");
-
-    if (module?.hot) {
-      this.initHMR(module, Bs4SlideshowComponent);
-    }
-
     // set event listeners to the this-bound version once, so we can easily pass them to DOM event handlers and remove them again later
     this.onViewChanges = this.onViewChanges.bind(this);
     this.onVisibilityChanged = this.onVisibilityChanged.bind(this);
@@ -770,6 +764,9 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   protected connectedCallback() {
     super.connectedCallback();
+    if (module?.hot) {
+      this.initHMR(module, Bs4SlideshowComponent);
+    }
     return this.init(Bs4SlideshowComponent.observedAttributes);
   }
 
