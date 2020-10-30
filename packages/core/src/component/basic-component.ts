@@ -4,7 +4,12 @@
  * @see https://developer.mozilla.org/de/docs/Web/Web_Components/Using_custom_elements
  */
 import "@ribajs/types";
-import { EventHandler, ObservedAttributesToCheck } from "../interfaces";
+import {
+  EventHandler,
+  ObservedAttributesToCheck,
+  HMRStatus,
+  TypeOfComponent,
+} from "../interfaces";
 import { Binding } from "../binding";
 import { parseJsonString, camelCase } from "@ribajs/utils/src/type";
 import { getRandomColor } from "@ribajs/utils/src/color";
@@ -32,6 +37,8 @@ export abstract class BasicComponent extends FakeHTMLElement {
 
   protected attributeObserverFallback?: MutationObserver;
 
+  protected onHMRStatusChanged?: (status: HMRStatus | string) => void;
+
   constructor(element?: HTMLUnknownElement) {
     super(element);
 
@@ -53,6 +60,42 @@ export abstract class BasicComponent extends FakeHTMLElement {
   }
 
   /**
+   * Init HMR support
+   * @see https://webpack.js.org/api/hot-module-replacement/
+   */
+  protected initHMR(module: NodeModule, clazz: TypeOfComponent) {
+    if (module?.hot) {
+      console.debug("HMR mode detected");
+      module?.hot?.accept();
+      // Remove the old status changed listener if defined
+      if (this.onHMRStatusChanged) {
+        module.hot.removeStatusHandler(this.onHMRStatusChanged);
+      }
+
+      this.onHMRStatusChanged = this._onHMRStatusChanged.bind(
+        this,
+        module,
+        clazz
+      );
+      module.hot.addStatusHandler(this.onHMRStatusChanged);
+    }
+  }
+
+  protected _onHMRStatusChanged(
+    module: NodeModule,
+    clazz: TypeOfComponent,
+    status: HMRStatus | string
+  ) {
+    console.debug("HMR status changed: " + status);
+    module?.hot?.accept();
+    if (status === "apply") {
+      console.debug("HMR reload..");
+      this.reload(clazz);
+      // this.connectedCallback();
+    }
+  }
+
+  /**
    * Remove this custom element
    */
   public remove() {
@@ -62,6 +105,12 @@ export abstract class BasicComponent extends FakeHTMLElement {
         this.disconnectedFallbackCallback();
       }
     }
+  }
+
+  public reload(clazz: TypeOfComponent) {
+    console.log("reload");
+    Object.setPrototypeOf(this.el, clazz.prototype);
+    this.el.parentElement?.replaceChild(this.el, this.el);
   }
 
   public connectedFallbackCallback() {
@@ -223,6 +272,7 @@ export abstract class BasicComponent extends FakeHTMLElement {
    */
   protected connectedCallback() {
     // console.warn('connectedCallback called');
+    console.log("connectedCallback");
   }
 
   /**
@@ -230,6 +280,7 @@ export abstract class BasicComponent extends FakeHTMLElement {
    * Invoked when the custom element is disconnected from the document's DOM.
    */
   protected disconnectedCallback() {
+    console.log("disconnectedCallback");
     // if (this.bound && this.view) {
     //   // IMPORTANT ROUTE FIXME, if we unbind the component then it will no longer work if it is retrieved from the cache and the connectedCallback is called
     //   // because the riba attributes are removed. We need a solution for that, maybe we do not remove the attributes or we recreate the attributes
