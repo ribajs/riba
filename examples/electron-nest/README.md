@@ -23,6 +23,12 @@ npm run build && npm run start
 npm run watch
 ```
 
+## How it works
+
+### Server side HMR
+
+Normally it is recommended to use the [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) + [webpack-hot-middleware](https://github.com/webpack-contrib/webpack-hot-middleware), but we use the [webpack-dev-server](https://github.com/webpack/webpack-dev-server) together with Nest.js. This has the advantage that all plugins and loaders defined in the webpack config work out of the box.
+
 ## See also
 
 * [dorp.io/posts/webpack-express-hmr](https://dorp.io/posts/webpack-express-hmr/) Tutorial to learn how you can use HMR with Express.js
