@@ -310,7 +310,13 @@ export abstract class BasicComponent extends FakeHTMLElement {
     newValue: any,
     namespace: string | null
   ) {
-    // console.warn('parsedAttributeChangedCallback called', attributeNames, oldValue, newValue, namespace);
+    this.debug(
+      "parsedAttributeChangedCallback called",
+      attributeName,
+      oldValue,
+      newValue,
+      namespace
+    );
   }
 
   /**
@@ -321,7 +327,7 @@ export abstract class BasicComponent extends FakeHTMLElement {
    * @param newDocument
    */
   protected adoptedCallback(oldDocument: Document, newDocument: Document) {
-    // console.warn('adoptedCallback called', oldDocument, newDocument);
+    this.debug("adoptedCallback called", oldDocument, newDocument);
   }
 
   protected async loadTemplate(): Promise<HTMLElement | string | null> {
@@ -363,7 +369,7 @@ export abstract class BasicComponent extends FakeHTMLElement {
   protected async afterTemplate(
     template: HTMLElement | string | null
   ): Promise<any> {
-    // this.debug('afterTemplate', template);
+    this.debug("afterTemplate", template);
   }
 
   protected async onReady(): Promise<any> {

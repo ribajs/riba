@@ -55,11 +55,10 @@ export const i18nShareComponentWrapper = (
       super(element);
       this.scope = this.getScopeDefaults();
       this.scope.labelTemplate = labelTemplate;
-      this.init(Bs4ShareComponent.observedAttributes);
-      this.addEventListeners();
     }
 
     protected connectedCallback() {
+      super.connectedCallback();
       this.init(Bs4ShareComponent.observedAttributes);
       this.addEventListeners();
     }

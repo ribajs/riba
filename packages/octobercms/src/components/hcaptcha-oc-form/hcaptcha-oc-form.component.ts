@@ -77,7 +77,6 @@ export class HCaptchaFormComponent extends OcFormComponent {
 
   constructor(element?: HTMLElement) {
     super(element);
-    this.init(HCaptchaFormComponent.observedAttributes);
   }
 
   public onSubmit(event: Event, el: HTMLButtonElement) {
@@ -198,6 +197,7 @@ export class HCaptchaFormComponent extends OcFormComponent {
   }
 
   protected connectedCallback() {
+    super.connectedCallback();
     this.debug("connectedCallback");
     this.init(HCaptchaFormComponent.observedAttributes);
     this.initHCaptcha();

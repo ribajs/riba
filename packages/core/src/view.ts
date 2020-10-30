@@ -339,7 +339,7 @@ export class View {
       // if node.constructor is not HTMLElement and not HTMLUnknownElement, it was registed
       // @see https://stackoverflow.com/questions/27334365/how-to-get-list-of-registered-custom-elements
       if (
-        nodeName && customElements.get(nodeName) ||
+        (nodeName && customElements.get(nodeName)) ||
         (node.constructor !== HTMLElement &&
           node.constructor !== HTMLUnknownElement)
       ) {

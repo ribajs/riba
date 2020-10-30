@@ -26,6 +26,10 @@ export const i18nSwitcherComponentWrapper = (
 
     constructor(element?: HTMLElement) {
       super(element);
+    }
+
+    protected connectedCallback() {
+      super.connectedCallback();
       this.init(I18nSwitcherComponent.observedAttributes);
     }
 

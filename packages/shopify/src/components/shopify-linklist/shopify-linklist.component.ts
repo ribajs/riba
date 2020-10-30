@@ -73,9 +73,11 @@ export class ShopifyLinklistComponent extends Component {
   constructor(element?: HTMLElement, observedAttributes?: string[]) {
     super(element);
     this.mainDispatcher.on("newPageReady", this.onNewPageReady, this);
-    this.init(
-      observedAttributes || ShopifyLinklistComponent.observedAttributes
-    );
+  }
+
+  protected connectedCallback() {
+    super.connectedCallback();
+    this.init(ShopifyLinklistComponent.observedAttributes);
   }
 
   protected disconnectedCallback() {
