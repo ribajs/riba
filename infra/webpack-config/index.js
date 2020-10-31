@@ -3,7 +3,7 @@
 /* eslint-disable no-undef */
 const webpack = require("webpack");
 const path = require("path");
-const pkgDir = require('pkg-dir');
+const pkgDir = require("pkg-dir");
 const rootPath = pkgDir.sync(process.cwd());
 
 var getStyleLoaderRule = (config = {}) => {
@@ -104,8 +104,16 @@ module.exports = (config = {}) => {
       alias: {},
       plugins: [],
     };
-    config.resolve.extensions = config.resolve.extensions || [".ts", ".tsx", ".js", ".json", ".scss", ".pug", ".html"];
-    config.resolve.alias 
+    config.resolve.extensions = config.resolve.extensions || [
+      ".ts",
+      ".tsx",
+      ".js",
+      ".json",
+      ".scss",
+      ".pug",
+      ".html",
+    ];
+    config.resolve.alias = config.resolve.alias || {};
     config.resolve.symlinks = true;
 
     config.plugins = config.plugins || [];
@@ -151,7 +159,7 @@ module.exports = (config = {}) => {
             },
           },
         ],
-      },
+      }
     );
 
     // config defaults
@@ -309,7 +317,6 @@ module.exports = (config = {}) => {
     config.define = config.define || {};
     config.define.ENV = JSON.stringify(env);
     config.plugins.push(new webpack.DefinePlugin(config.define));
-
 
     config.optimization = config.optimization || {
       minimize: config.scripts.minimize,
