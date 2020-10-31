@@ -62,25 +62,33 @@ async function bootstrap() {
   if (module.hot) {
     module.hot.accept();
     module.hot.dispose(() => {
-      console.debug("Restart..");
-      if (prodServer) {
-        prodServer.close();
-      }
-      if (devServer) {
-        devServer.close();
-      }
-      electron.relaunch();
-      electron.exit();
+      restart();
     });
   }
+
+  const quit = () => {
+    console.log("Quit..");
+    if (prodServer) {
+      prodServer.close();
+    }
+    if (devServer) {
+      devServer.close();
+    }
+    electron.exit();
+  };
+
+  const restart = () => {
+    console.debug("Restart..");
+    electron.relaunch();
+    quit();
+  };
 
   // Quit when all windows are closed, except on macOS. There, it's common
   // for applications and their menu bar to stay active until the user quits
   // explicitly with Cmd + Q.
   electron.on("window-all-closed", function () {
     if (process.platform !== "darwin") {
-      electron.quit();
-      nest.close();
+      quit();
     }
   });
 
