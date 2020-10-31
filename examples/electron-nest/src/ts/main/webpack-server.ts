@@ -3,9 +3,10 @@ import * as webpack from "webpack";
 import * as WDS from "webpack-dev-server";
 import * as WebpackConfig from "../../../webpack.renderer.js";
 
-export const webpackServer = async () => {
+export const webpackServer = async (port: number) => {
   const webpackConfig = await WebpackConfig(ENV);
-  // console.debug(webpackConfig);
+
+  webpackConfig.devServer.port = port;
 
   WDS.addDevServerEntrypoints(
     webpackConfig,

@@ -10,6 +10,7 @@ import { AppModule } from "./app.module";
 import { app as electron } from "electron";
 import { MainWindow } from "./window/main-window";
 import { webpackServer } from "./webpack-server";
+import * as getPort from "get-port";
 
 declare global {
   const CONFIG: any;
@@ -25,12 +26,13 @@ async function bootstrap() {
   // Some APIs can only be used after this event occurs.
   await electron.whenReady();
 
+  const port = await getPort({ port: 3333 });
   let express: Express.Express;
   let devServer: any;
   let prodServer: any;
 
   if (ENV.development) {
-    devServer = await webpackServer();
+    devServer = await webpackServer(port);
     express = devServer.app;
   } else {
     express = Express();
@@ -44,15 +46,15 @@ async function bootstrap() {
   nest.enableCors();
 
   if (devServer) {
-    devServer.listen(3000, "localhost");
+    devServer.listen(port, "localhost");
     nest.init();
   } else {
-    prodServer = express.listen(3000, "localhost");
+    prodServer = express.listen(port, "localhost");
     nest.init();
-    // await nest.listen(3000, "localhost");
   }
 
-  MainWindow.getInstance();
+  const mainWin = MainWindow.getInstance();
+  mainWin.loadPort(port);
 
   // Server side HMR
   // We just restart the app here but you can also do more
@@ -82,6 +84,6 @@ async function bootstrap() {
     }
   });
 
-  console.log("App listening on http://localhost:3000\n");
+  console.log(`Electron listening on http://localhost:${port}\n`);
 }
 bootstrap();

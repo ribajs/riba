@@ -1,7 +1,7 @@
 import { BrowserWindow, BrowserWindowConstructorOptions } from "electron";
 
 export class MainWindow extends BrowserWindow {
-  private static instance?: BrowserWindow;
+  private static instance?: MainWindow;
 
   private static options: BrowserWindowConstructorOptions = {
     width: 800,
@@ -20,9 +20,12 @@ export class MainWindow extends BrowserWindow {
       // Open the DevTools.
       this.webContents.openDevTools();
     }
-    this.loadURL("http://localhost:3000/index.html");
 
     MainWindow.instance = this;
+  }
+
+  public loadPort(port: number) {
+    this.loadURL(`http://localhost:${port}/index.html`);
   }
 
   public static getInstance() {

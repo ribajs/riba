@@ -35,9 +35,8 @@ export class ElVersionComponent extends Component {
 
   protected async beforeBind() {
     await super.beforeBind();
-    this.scope.versions = await HttpService.getJSON(
-      "http://localhost:3000/versions"
-    );
+    const baseUrl = `${window.location.protocol}//${window.location.hostname}:${window.location.port}`;
+    this.scope.versions = await HttpService.getJSON(`${baseUrl}/versions`);
     this.debug("beforeBind", this.scope);
   }
 
