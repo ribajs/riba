@@ -2058,6 +2058,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.12.1
     "@babel/preset-env": ^7.12.1
     "@babel/preset-typescript": ^7.12.1
+    "@babel/runtime": ^7.12.1
     "@babel/runtime-corejs3": ^7.12.1
     "@ribajs/bs4": "workspace:packages/bs4"
     "@ribajs/core": "workspace:packages/core"
@@ -3455,6 +3456,7 @@ __metadata:
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
     "@babel/preset-env": ^7.12.1
     "@babel/preset-typescript": ^7.12.1
+    "@babel/runtime": ^7.12.1
     "@babel/runtime-corejs3": ^7.12.1
     "@ribajs/cache": "workspace:packages/cache"
     "@ribajs/core": "workspace:packages/core"
@@ -3494,6 +3496,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.12.1
     "@babel/preset-env": ^7.12.1
     "@babel/preset-typescript": ^7.12.1
+    "@babel/runtime": ^7.12.1
     "@babel/runtime-corejs3": ^7.12.1
     "@ribajs/bs4": "workspace:packages/bs4"
     "@ribajs/core": "workspace:packages/core"
@@ -3536,6 +3539,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.12.1
     "@babel/preset-env": ^7.12.1
     "@babel/preset-typescript": ^7.12.1
+    "@babel/runtime": ^7.12.1
     "@babel/runtime-corejs3": ^7.12.1
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
@@ -3573,6 +3577,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.12.1
     "@babel/preset-env": ^7.12.1
     "@babel/preset-typescript": ^7.12.1
+    "@babel/runtime": ^7.12.1
     "@babel/runtime-corejs3": ^7.12.1
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
@@ -3609,6 +3614,7 @@ __metadata:
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
     "@babel/preset-env": ^7.12.1
     "@babel/preset-typescript": ^7.12.1
+    "@babel/runtime": ^7.12.1
     "@babel/runtime-corejs3": ^7.12.1
     "@ribajs/bs4": "workspace:packages/bs4"
     "@ribajs/core": "workspace:packages/core"
@@ -3659,6 +3665,7 @@ __metadata:
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
     "@babel/preset-env": ^7.12.1
     "@babel/preset-typescript": ^7.12.1
+    "@babel/runtime": ^7.12.1
     "@babel/runtime-corejs3": ^7.12.1
     "@ribajs/cache": "workspace:packages/cache"
     "@ribajs/core": "workspace:packages/core"
@@ -3699,6 +3706,7 @@ __metadata:
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
     "@babel/preset-env": ^7.12.1
     "@babel/preset-typescript": ^7.12.1
+    "@babel/runtime": ^7.12.1
     "@babel/runtime-corejs3": ^7.12.1
     "@ribajs/bs4": "workspace:packages/bs4"
     "@ribajs/cache": "workspace:packages/cache"
@@ -3739,6 +3747,7 @@ __metadata:
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
     "@babel/preset-env": ^7.12.1
     "@babel/preset-typescript": ^7.12.1
+    "@babel/runtime": ^7.12.1
     "@babel/runtime-corejs3": ^7.12.1
     "@ribajs/bs4": "workspace:packages/bs4"
     "@ribajs/cache": "workspace:packages/cache"
@@ -3777,6 +3786,7 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.12.1
     "@babel/preset-env": ^7.12.1
     "@babel/preset-typescript": ^7.12.1
+    "@babel/runtime": ^7.12.1
     "@babel/runtime-corejs3": ^7.12.1
     "@ribajs/cache": "workspace:packages/cache"
     "@ribajs/core": "workspace:packages/core"
@@ -3815,6 +3825,7 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.12.1
     "@babel/preset-env": ^7.12.1
     "@babel/preset-typescript": ^7.12.1
+    "@babel/runtime": ^7.12.1
     "@babel/runtime-corejs3": ^7.12.1
     "@ribajs/cache": "workspace:packages/cache"
     "@ribajs/core": "workspace:packages/core"
@@ -3853,6 +3864,7 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.12.1
     "@babel/preset-env": ^7.12.1
     "@babel/preset-typescript": ^7.12.1
+    "@babel/runtime": ^7.12.1
     "@babel/runtime-corejs3": ^7.12.1
     "@ribajs/cache": "workspace:packages/cache"
     "@ribajs/core": "workspace:packages/core"
@@ -3886,6 +3898,7 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.12.1
     "@babel/preset-env": ^7.12.1
     "@babel/preset-typescript": ^7.12.1
+    "@babel/runtime": ^7.12.1
     "@babel/runtime-corejs3": ^7.12.1
     "@ribajs/cache": "workspace:packages/cache"
     "@ribajs/core": "workspace:packages/core"
@@ -3919,6 +3932,7 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.12.1
     "@babel/preset-env": ^7.12.1
     "@babel/preset-typescript": ^7.12.1
+    "@babel/runtime": ^7.12.1
     "@babel/runtime-corejs3": ^7.12.1
     "@ribajs/cache": "workspace:packages/cache"
     "@ribajs/core": "workspace:packages/core"
@@ -3956,6 +3970,7 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.12.1
     "@babel/preset-env": ^7.12.1
     "@babel/preset-typescript": ^7.12.1
+    "@babel/runtime": ^7.12.1
     "@babel/runtime-corejs3": ^7.12.1
     "@ribajs/cache": "workspace:packages/cache"
     "@ribajs/core": "workspace:packages/core"
@@ -4045,6 +4060,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/vue@workspace:packages/vue"
   dependencies:
+    "@babel/runtime": ^7.12.1
     "@ribajs/core": "workspace:packages/core"
     vue: ^3.0.2
   languageName: unknown

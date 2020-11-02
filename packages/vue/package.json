@@ -9,5 +9,8 @@
   "dependencies": {
     "@ribajs/core": "workspace:packages/core",
     "vue": "^3.0.2"
+  },
+  "devDependencies": {
+    "@babel/runtime": "^7.12.1"
   }
 }
