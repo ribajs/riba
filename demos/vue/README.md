@@ -1,4 +1,4 @@
-# riba-vue-example
+# riba vue mix demo
 
 This demo demonstrates how you can use Vue.js in Riba.
 Yes you heard right, it is possible to use Vue.js within Riba.js.
@@ -19,6 +19,6 @@ The [vue-app](https://github.com/ribajs/riba/tree/master/demos/vue/src/ts/compon
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git
 cd riba/demos/vue
-npm install
-npm run start
+yarn install
+yarn run start
 ```
