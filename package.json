@@ -90,7 +90,6 @@
     "source-map-support": "^0.5.19",
     "ts-jest": "^26.4.3",
     "typescript": "^4.0.5",
-    "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack-glob-entry": "^2.1.1"
   },
   "husky": {
@@ -102,6 +101,7 @@
   "workspaces": {
     "packages": [
       "packages/*",
+      "demos/*",
       "infra/eslint-config",
       "infra/types",
       "infra/webpack-config",

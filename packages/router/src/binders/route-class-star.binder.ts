@@ -25,7 +25,10 @@ export const routeClassStarBinder: Binder<string> = {
       }
     }
     if (this.customData.onUrlChange) {
-      this.customData.dispatcher.off("newPageReady", this.customData.onUrlChange);
+      this.customData.dispatcher.off(
+        "newPageReady",
+        this.customData.onUrlChange
+      );
     }
     this.customData.onUrlChange = () => {
       if (url) {
@@ -53,7 +56,10 @@ export const routeClassStarBinder: Binder<string> = {
   unbind(/*el: HTMLUnknownElement*/) {
     // console.warn('routeClassStarBinder routine', el);
     if (this.customData.onUrlChange) {
-      this.customData.dispatcher.off("newPageReady", this.customData.onUrlChange);
+      this.customData.dispatcher.off(
+        "newPageReady",
+        this.customData.onUrlChange
+      );
     }
   },
 };

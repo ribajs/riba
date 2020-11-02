@@ -1,12 +1,9 @@
-import {
-  Component,
-} from '@ribajs/core';
+import { Component } from "@ribajs/core";
 
-import template from './i18n-static-example.component.html';
+import template from "./i18n-static-example.component.html";
 
 export class I18nStaticExampleComponent extends Component {
-
-  public static tagName: string = 'rv-i18n-static-example';
+  public static tagName = "rv-i18n-static-example";
 
   protected autobind = true;
 
@@ -26,8 +23,7 @@ export class I18nStaticExampleComponent extends Component {
   }
 
   protected async init(observedAttributes: string[]) {
-    return super.init(observedAttributes)
-    .then((view) => {
+    return super.init(observedAttributes).then((view) => {
       return view;
     });
   }

@@ -1,6 +1,6 @@
-import { bs4Module } from '@ribajs/bs4';
-import { coreModule, Riba } from '@ribajs/core';
-import { Bs4TabsAttrModule } from './bs4-tabs-attr.module';
+import { bs4Module } from "@ribajs/bs4";
+import { coreModule, Riba } from "@ribajs/core";
+import { Bs4TabsAttrModule } from "./bs4-tabs-attr.module";
 
 const riba = new Riba();
 const model = {};
