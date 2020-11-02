@@ -101,6 +101,7 @@
     "packages": [
       "packages/*",
       "demos/*",
+      "!demos/vue",
       "infra/eslint-config",
       "infra/types",
       "infra/webpack-config",
