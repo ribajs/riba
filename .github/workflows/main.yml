@@ -10,10 +10,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          yarn install
+        yarn install
       - run: |
         yarn run lint
       - run: |
-          yarn run test
+        yarn run test
       - run: |
-          yarn run build
+        yarn run build
