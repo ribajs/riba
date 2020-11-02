@@ -8,7 +8,7 @@
     "build:dev": "npm run lint && webpack --env.development",
     "start": "npm run lint && webpack-serve",
     "clear": "rm -rf ./dist",
-    "lint": "eslint .src/ --ext .js,.jsx,.ts,.tsx && tsc --noEmit",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx && tsc --noEmit",
     "test": "jest",
     "packages:npm:link": "npm link @ribajs/bs4 @ribajs/core @ribajs/extras"
   },
