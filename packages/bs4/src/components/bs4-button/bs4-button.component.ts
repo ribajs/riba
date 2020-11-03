@@ -48,7 +48,7 @@ export class Bs4ButtonComponent extends Component {
   }
 
   triggerEvent() {
-    //console.debug("triggerEvent", this.scope);
+    console.debug("triggerEvent", this.scope);
     this.eventDispatcher?.trigger(this.scope.action);
   }
 
