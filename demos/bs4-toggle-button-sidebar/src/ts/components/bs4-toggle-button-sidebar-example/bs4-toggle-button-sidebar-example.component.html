@@ -2,16 +2,14 @@
   <div class="row">
 
     <section class="col-6 mb-5">
-      <bs4-sidebar id="main-sidebar" position="right" state="hidden"> <!--sollte die dann "nicht" angezeigt werden ? -->
+      <bs4-sidebar id="main-sidebar" position="right">
         <h1>I am the right Sidebar</h1>
       </bs4-sidebar>
-
- 
     </section>
 
 
     <section class="col-6 mb-5">
-      <bs4-toggle-button isActive=false target-id="main-sidebar" class="p-3">
+      <bs4-toggle-button state="hidden" isActive="false" target-id="main-sidebar" class="p-3">
         <button rv-on-click="toggle" class="btn btn-warning">
           Click to toggle the main sidebar 
           <span rv-hide="isActive">(Inactive)</span>
