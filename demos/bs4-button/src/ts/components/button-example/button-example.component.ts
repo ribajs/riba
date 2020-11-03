@@ -29,7 +29,7 @@ export class ButtonExampleComponent extends Component {
 
   protected toggle() {
     console.log("toggle");
-    this.eventDispatcher["bs4-toggle-button:main-sidebar"].trigger('toggle');
+    this.sidebarEventDispatcher?.trigger('toggle');
   }
 
   protected requiredAttributes() {
