@@ -1,5 +1,5 @@
 import { Component } from "@ribajs/core";
-import template from "./form-example.component.html";
+import template from "./bs4-toggle-button-sidebar-example.component.html";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 
 export class BS4ToggleButtonSidebarExampleComponent extends Component {
