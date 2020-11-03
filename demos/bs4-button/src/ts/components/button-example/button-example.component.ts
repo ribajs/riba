@@ -12,7 +12,8 @@ export class ButtonExampleComponent extends Component {
 
   protected scope = {};
 
-  protected eventDispatcher?: EventDispatcher[];
+  protected eventDispatcher?: EventDispatcher;
+  protected sidebarEventDispatcher?: EventDispatcher;
 
   constructor(element?: HTMLElement) {
     super(element);
@@ -21,32 +22,14 @@ export class ButtonExampleComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     super.init(ButtonExampleComponent.observedAttributes);
-    this.eventDispatcher = [];
-    this.eventDispatcher["button-test"] = new EventDispatcher("button-test");
-    this.eventDispatcher["button-test"].on("test-click", this.testClick);
-    //this.eventDispatcher["button-test"].on("toggle", this.toggle);
-
-    // eslint-disable-next-line prettier/prettier
-    this.eventDispatcher["another-namespace"] = new EventDispatcher("another-namespace");
-    this.eventDispatcher["another-namespace"].on("open-url", this.openURL);
-
-    // eslint-disable-next-line prettier/prettier
-    this.eventDispatcher["bs4-toggle-button:main-sidebar"] = new EventDispatcher("bs4-toggle-button:main-sidebar");
-
-    //console.debug("ButtonExampleComponent scope", this.scope);
-  }
-
-  protected testClick() {
-    console.log("test click");
+    this.sidebarEventDispatcher = new EventDispatcher("main-sidebar");
+    this.eventDispatcher = new EventDispatcher("button-test");
+    this.eventDispatcher.on("toggle", this.toggle);
   }
 
   protected toggle() {
     console.log("toggle");
     this.eventDispatcher["bs4-toggle-button:main-sidebar"].trigger('toggle');
-  }
-
-  protected openURL() {
-    console.log("open url");
   }
 
   protected requiredAttributes() {
