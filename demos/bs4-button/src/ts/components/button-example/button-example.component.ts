@@ -21,14 +21,6 @@ export class ButtonExampleComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     super.init(ButtonExampleComponent.observedAttributes);
-
-    this.eventDispatcher = new EventDispatcher("main-sidebar");
-    this.eventDispatcher.on("click", this.toggle);
-  }
-
-  protected toggle() {
-    console.log("toggle");
-    this.eventDispatcher?.trigger("toggle");
   }
 
   protected requiredAttributes() {
