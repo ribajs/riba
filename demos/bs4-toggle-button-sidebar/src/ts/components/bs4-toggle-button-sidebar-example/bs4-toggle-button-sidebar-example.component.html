@@ -1,0 +1,17 @@
+<div class="container-fluid">
+  <div class="row">
+    <section class="col-12 mb-5">
+      <bs4-toggle-button target-id="main-sidebar" class="p-3">
+        <button rv-on-click="toggle" class="btn btn-warning">
+          Click to toggle the main sidebar <span rv-hide="isActive">(Inactive)</span><span rv-show="isActive">(Active)</span>
+        </button>
+      </bs4-toggle-button>
+      <bs4-toggle-button target-id="example-sidebar" class="p-3">
+        <button rv-on-click="toggle" class="btn btn-info">
+          Click to toggle the sidebar in the example below <span rv-hide="isActive">(Inactive)</span><span rv-show="isActive">(Active)</span>
+        </button>
+        <p class="m-3"><em>Before you click on this button, make sure that the preview of the sidebar component example is open.</em></p>
+      </bs4-toggle-button> 
+    </section>
+  </div>
+</div>
