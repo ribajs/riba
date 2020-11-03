@@ -13,7 +13,6 @@ export class ButtonExampleComponent extends Component {
   protected scope = {};
 
   protected eventDispatcher?: EventDispatcher;
-  protected sidebarEventDispatcher?: EventDispatcher;
 
   constructor(element?: HTMLElement) {
     super(element);
@@ -22,14 +21,14 @@ export class ButtonExampleComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     super.init(ButtonExampleComponent.observedAttributes);
-    this.sidebarEventDispatcher = new EventDispatcher("main-sidebar");
-    this.eventDispatcher = new EventDispatcher("button-test");
-    this.eventDispatcher.on("toggle", this.toggle);
+
+    this.eventDispatcher = new EventDispatcher("main-sidebar");
+    this.eventDispatcher.on("click", this.toggle);
   }
 
   protected toggle() {
     console.log("toggle");
-    this.sidebarEventDispatcher?.trigger('toggle');
+    this.eventDispatcher?.trigger("toggle");
   }
 
   protected requiredAttributes() {
