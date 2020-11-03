@@ -2524,6 +2524,66 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@ribajs/demo-bs4-toggle-button-sidebar@workspace:demos/bs4-toggle-button-sidebar":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/demo-bs4-toggle-button-sidebar@workspace:demos/bs4-toggle-button-sidebar"
+  dependencies:
+    "@babel/cli": ^7.12.1
+    "@babel/core": ^7.12.3
+    "@babel/plugin-proposal-class-properties": ^7.12.1
+    "@babel/plugin-proposal-export-default-from": ^7.12.1
+    "@babel/plugin-proposal-object-rest-spread": ^7.12.1
+    "@babel/plugin-proposal-optional-chaining": ^7.12.1
+    "@babel/plugin-syntax-export-default-from": ^7.12.1
+    "@babel/plugin-transform-runtime": ^7.12.1
+    "@babel/preset-env": ^7.12.1
+    "@babel/preset-typescript": ^7.12.1
+    "@babel/runtime": ^7.12.1
+    "@babel/runtime-corejs3": ^7.12.1
+    "@ribajs/bs4": "workspace:packages/bs4"
+    "@ribajs/core": "workspace:packages/core"
+    "@ribajs/eslint-config": "workspace:infra/eslint-config"
+    "@ribajs/extras": "workspace:packages/extras"
+    "@ribajs/iconset": "workspace:packages/iconset"
+    "@ribajs/tsconfig": "workspace:infra/tsconfig"
+    "@ribajs/utils": "workspace:packages/utils"
+    "@ribajs/webpack-config": "workspace:infra/webpack-config"
+    "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
+    "@types/jest": ^26.0.15
+    "@typescript-eslint/eslint-plugin": ^4.6.0
+    "@typescript-eslint/experimental-utils": ^4.6.0
+    "@typescript-eslint/parser": ^4.6.0
+    "@yarnpkg/pnpify": ^2.3.3
+    babel-jest: ^26.6.1
+    babel-loader: ^8.1.0
+    babel-plugin-array-includes: ^2.0.3
+    babelify: ^10.0.0
+    bootstrap: ^4.5.3
+    core-js: ^3.6.5
+    css-loader: ^5.0.0
+    dart-sass: ^1.25.0
+    eslint: ^7.12.1
+    eslint-config-prettier: ^6.15.0
+    eslint-plugin-prettier: ^3.1.4
+    html-loader: ^1.3.2
+    inspectpack: ^4.5.2
+    jest: ^26.6.1
+    jest-extended: ^0.11.5
+    mini-css-extract-plugin: ^1.2.1
+    postcss: ^8.1.4
+    postcss-loader: ^4.0.4
+    postcss-modules: ^3.2.2
+    postcss-preset-env: ^6.7.0
+    prettier: ^2.1.2
+    pug-loader: ^2.4.0
+    sass-loader: ^10.0.4
+    typescript: ^4.0.5
+    webpack: ^5.3.2
+    webpack-cli: ^4.1.0
+    webpack-dev-server: ^3.11.0
+  languageName: unknown
+  linkType: soft
+
 "@ribajs/demo-content-slider@workspace:demos/content-slider":
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-content-slider@workspace:demos/content-slider"
@@ -3112,68 +3172,6 @@ __metadata:
     terser-webpack-plugin: ^5.0.3
     ts-jest: ^26.4.3
     typescript: ^4.0.5
-    webpack: ^5.3.2
-    webpack-cli: ^4.1.0
-    webpack-dev-server: ^3.11.0
-  languageName: unknown
-  linkType: soft
-
-"@ribajs/demo-vue@workspace:demos/vue":
-  version: 0.0.0-use.local
-  resolution: "@ribajs/demo-vue@workspace:demos/vue"
-  dependencies:
-    "@babel/cli": ^7.12.1
-    "@babel/core": ^7.12.3
-    "@babel/plugin-proposal-class-properties": ^7.12.1
-    "@babel/plugin-proposal-export-default-from": ^7.12.1
-    "@babel/plugin-proposal-object-rest-spread": ^7.12.1
-    "@babel/plugin-proposal-optional-chaining": ^7.12.1
-    "@babel/plugin-syntax-export-default-from": ^7.12.1
-    "@babel/plugin-transform-runtime": ^7.12.1
-    "@babel/preset-env": ^7.12.1
-    "@babel/preset-typescript": ^7.12.1
-    "@babel/runtime": ^7.12.1
-    "@babel/runtime-corejs3": ^7.12.1
-    "@ribajs/core": "workspace:packages/core"
-    "@ribajs/eslint-config": "workspace:infra/eslint-config"
-    "@ribajs/tsconfig": "workspace:infra/tsconfig"
-    "@ribajs/utils": "workspace:packages/utils"
-    "@ribajs/vue": "workspace:packages/vue"
-    "@ribajs/webpack-config": "workspace:infra/webpack-config"
-    "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.15
-    "@typescript-eslint/eslint-plugin": ^4.6.0
-    "@typescript-eslint/experimental-utils": ^4.6.0
-    "@typescript-eslint/parser": ^4.6.0
-    "@vue/compiler-sfc": ^3.0.2
-    "@webpack-cli/serve": ^1.0.1
-    "@yarnpkg/pnpify": ^2.3.3
-    babel-jest: ^26.6.1
-    babel-loader: ^8.1.0
-    babel-plugin-array-includes: ^2.0.3
-    babelify: ^10.0.0
-    core-js: ^3.6.5
-    css-loader: ^5.0.0
-    dart-sass: ^1.25.0
-    eslint: ^7.12.1
-    eslint-config-prettier: ^6.15.0
-    eslint-plugin-prettier: ^3.1.4
-    html-loader: ^1.3.2
-    html-webpack-plugin: ^4.5.0
-    inspectpack: ^4.5.2
-    jest: ^26.6.1
-    jest-extended: ^0.11.5
-    mini-css-extract-plugin: ^1.2.1
-    postcss-loader: ^4.0.4
-    postcss-modules: ^3.2.2
-    postcss-preset-env: ^6.7.0
-    prettier: ^2.1.2
-    sass-loader: ^10.0.4
-    terser-webpack-plugin: ^5.0.3
-    ts-jest: ^26.4.3
-    typescript: ^4.0.5
-    vue: next
-    vue-loader: next
     webpack: ^5.3.2
     webpack-cli: ^4.1.0
     webpack-dev-server: ^3.11.0
@@ -5226,42 +5224,6 @@ __metadata:
     "@vue/compiler-core": 3.0.2
     "@vue/shared": 3.0.2
   checksum: e896825941ec232d91ac96f3c2c8b86cc69874bd5a69d87dd319bd05006454ca086be1499e87f579c36db0b742c07c4495f8ed1908fedc62fd225e7854f8b2b5
-  languageName: node
-  linkType: hard
-
-"@vue/compiler-sfc@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "@vue/compiler-sfc@npm:3.0.2"
-  dependencies:
-    "@babel/parser": ^7.12.0
-    "@babel/types": ^7.12.0
-    "@vue/compiler-core": 3.0.2
-    "@vue/compiler-dom": 3.0.2
-    "@vue/compiler-ssr": 3.0.2
-    "@vue/shared": 3.0.2
-    consolidate: ^0.16.0
-    estree-walker: ^2.0.1
-    hash-sum: ^2.0.0
-    lru-cache: ^5.1.1
-    magic-string: ^0.25.7
-    merge-source-map: ^1.1.0
-    postcss: ^7.0.32
-    postcss-modules: ^3.2.2
-    postcss-selector-parser: ^6.0.4
-    source-map: ^0.6.1
-  peerDependencies:
-    vue: 3.0.2
-  checksum: f82769687c6f1713b21d9c91e1b0e7d445f6e816f7bbc36e4982ebc4de6c9f29bde9c2b221854a3bb109ca99ab9757f930b54fab8fceb01cf7de6c2c93889df6
-  languageName: node
-  linkType: hard
-
-"@vue/compiler-ssr@npm:3.0.2":
-  version: 3.0.2
-  resolution: "@vue/compiler-ssr@npm:3.0.2"
-  dependencies:
-    "@vue/compiler-dom": 3.0.2
-    "@vue/shared": 3.0.2
-  checksum: 5e4be02971eb9680d9c9888f45629d9374211211bc1f463d181947f9894462d2c3c9bee463be98d50f6d82545d9519968452632139d89605045bc2a70b1eb6e4
   languageName: node
   linkType: hard
 
@@ -7744,15 +7706,6 @@ __metadata:
   version: 1.1.0
   resolution: "console-control-strings@npm:1.1.0"
   checksum: 58a404d951bf270494fb91e136cf064652c1208ccedac23e4da24e6a3a3933998f302cadc45cbf6582a007a4aa44dab944e84056b24e3b1964e9a28aeedf76c9
-  languageName: node
-  linkType: hard
-
-"consolidate@npm:^0.16.0":
-  version: 0.16.0
-  resolution: "consolidate@npm:0.16.0"
-  dependencies:
-    bluebird: ^3.7.2
-  checksum: b75f222ef398c055a1ce17117d3803887db75aa076c3053b4aa1c3d9cded1191026b9848b5eefe492e2d7b1496844aef249a3a902e20b3034963a5b32ed3a105
   languageName: node
   linkType: hard
 
@@ -10728,13 +10681,6 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"hash-sum@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "hash-sum@npm:2.0.0"
-  checksum: 9d833f05e8b9cb318ff0154c3864b0d2aaf4bd675a4b65377fb4d12eed13505423deb45e85b484affd71da3d3c8b8fe30e83bf81ca9a1dd6f3523043d9281e34
-  languageName: node
-  linkType: hard
-
 "he@npm:^1.2.0":
   version: 1.2.0
   resolution: "he@npm:1.2.0"
@@ -13130,15 +13076,6 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"magic-string@npm:^0.25.7":
-  version: 0.25.7
-  resolution: "magic-string@npm:0.25.7"
-  dependencies:
-    sourcemap-codec: ^1.4.4
-  checksum: 4b70c13eb21c6f1c54bf7fb029748dc44d6bfcd3c59e5deeda060eecc38df6144b91d10fb7a3cf6156fadab1a68f83d69a189df20ca5f6bd088bf0196ea8f039
-  languageName: node
-  linkType: hard
-
 "make-dir@npm:^2.0.0, make-dir@npm:^2.1.0":
   version: 2.1.0
   resolution: "make-dir@npm:2.1.0"
@@ -13287,15 +13224,6 @@ fsevents@^1.2.7:
   version: 1.0.1
   resolution: "merge-descriptors@npm:1.0.1"
   checksum: 2d2a09eaac840a7ceac7a13b44b7c8abf3ecccd93a609c3525d8290cb5d814336cc7c0b1dd485ae3bc471ed354eeefb153475ce2e1604ccdf79eebe74021c192
-  languageName: node
-  linkType: hard
-
-"merge-source-map@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "merge-source-map@npm:1.1.0"
-  dependencies:
-    source-map: ^0.6.1
-  checksum: fc9701ad15e346905a52e5d2618730ec785e54c7938dd914885ccfea35ec1e34b3ea1a6a893952ad61d3884233bc6f79a0fe3ce20f00becd493b251f8e73aead
   languageName: node
   linkType: hard
 
@@ -17328,13 +17256,6 @@ resolve@^1.18.1:
   languageName: node
   linkType: hard
 
-"sourcemap-codec@npm:^1.4.4":
-  version: 1.4.8
-  resolution: "sourcemap-codec@npm:1.4.8"
-  checksum: 4d56d1232a45af813606d1755f11e7ae6b3542c615a7e3f904382f0134a9412ba8d090e83749254d78449eafdfcc62d5158b8f35e6241480b51b74b5c46b99f9
-  languageName: node
-  linkType: hard
-
 "sparkles@npm:^1.0.0":
   version: 1.0.1
   resolution: "sparkles@npm:1.0.1"
@@ -18907,18 +18828,7 @@ typescript@^4.0.5:
   languageName: node
   linkType: hard
 
-"vue-loader@npm:next":
-  version: 16.0.0-beta.9
-  resolution: "vue-loader@npm:16.0.0-beta.9"
-  dependencies:
-    chalk: ^4.1.0
-    hash-sum: ^2.0.0
-    loader-utils: ^2.0.0
-  checksum: 06cd8066897b55df8f8feba2e6a37c748fedd54fc4f3fe6989526be098e5534d5576b4ac374a1eba9cbcd58807bc381725b37e0abf45140ad0fe0a195bf42821
-  languageName: node
-  linkType: hard
-
-"vue@npm:^3.0.2, vue@npm:next":
+"vue@npm:^3.0.2":
   version: 3.0.2
   resolution: "vue@npm:3.0.2"
   dependencies:
