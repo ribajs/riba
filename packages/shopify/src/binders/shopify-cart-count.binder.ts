@@ -15,25 +15,26 @@ export const shopifyCartCountBinder: Binder<void> = {
       },
       onCartRequestChanged: (cart: ShopifyCartObject) => {
         el.textContent = String(cart.item_count);
-      }
-    }
+      },
+    };
     ShopifyCartService.shopifyCartEventDispatcher.on(
       "ShopifyCart:request:complete",
-      this.customData.onCartRequestComplete,
+      this.customData.onCartRequestComplete
     );
     ShopifyCartService.shopifyCartEventDispatcher.on(
       "ShopifyCart:request:changed",
-      this.customData.onCartRequestChanged,
+      this.customData.onCartRequestChanged
     );
   },
 
-  unbind(el: HTMLElement) {
+  unbind(/*el: HTMLElement*/) {
     ShopifyCartService.shopifyCartEventDispatcher.off(
       "ShopifyCart:request:complete",
-      this.customData.onCartRequestComplete,
-    );ShopifyCartService.shopifyCartEventDispatcher.off(
+      this.customData.onCartRequestComplete
+    );
+    ShopifyCartService.shopifyCartEventDispatcher.off(
       "ShopifyCart:request:changed",
-      this.customData.onCartRequestChanged,
+      this.customData.onCartRequestChanged
     );
   },
 

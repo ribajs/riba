@@ -148,7 +148,7 @@ export class Bs4NavbarComponent extends Component {
   }
 
   protected parsedAttributeChangedCallback(
-    attributeName: string | string[],
+    attributeName: string,
     oldValue: any,
     newValue: any,
     namespace: string | null

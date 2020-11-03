@@ -1,12 +1,9 @@
-import {
-  Component,
-} from '@ribajs/core';
+import { Component } from "@ribajs/core";
 
-import template from './bs4-tabs-attr-example.component.html';
+import template from "./bs4-tabs-attr-example.component.html";
 
 export class Bs4TabsAttrExampleComponent extends Component {
-
-  public static tagName: string = 'rv-bs4-tabs-attr-example';
+  public static tagName = "rv-bs4-tabs-attr-example";
 
   protected scope = {};
 

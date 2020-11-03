@@ -1,0 +1,16 @@
+{
+  "name": "@ribajs/vue",
+  "description": "Vue module for Riba.js to use Vue.js in web components compatible with Riba components",
+  "version": "1.9.0-beta.3",
+  "author": "Pascal Garber <pascal@artandcode.studio>",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "source": "src/index.ts",
+  "dependencies": {
+    "@ribajs/core": "workspace:packages/core",
+    "vue": "^3.0.2"
+  },
+  "devDependencies": {
+    "@babel/runtime": "^7.12.1"
+  }
+}

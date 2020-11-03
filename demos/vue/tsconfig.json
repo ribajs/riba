@@ -1,0 +1,10 @@
+{
+  "extends": "@ribajs/tsconfig",
+  "compilerOptions": {
+    "outDir": "dist"
+  },
+  "exclude": [
+    "node_modules",
+    "**/*.d.ts"
+  ]
+}

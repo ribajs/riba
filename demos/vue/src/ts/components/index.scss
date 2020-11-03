@@ -1,0 +1,12 @@
+@import './riba-increase/riba-increase.component';
+@import './vue-app/vue-app.component';
+@import './vue-example-wrapper/vue-example-wrapper.component';
+
+body {
+    background-color: #2b2525;
+    color: white;
+}
+
+input {
+    width: 500px;
+}

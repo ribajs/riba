@@ -1,1 +1,1 @@
-export { ExtrasGameLoopExampleComponent } from './extras-game-loop-example/extras-game-loop-example.component';
+export { ExtrasGameLoopExampleComponent } from "./extras-game-loop-example/extras-game-loop-example.component";

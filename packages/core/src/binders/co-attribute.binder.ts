@@ -13,7 +13,8 @@ export const componentAttributeBinder: Binder<any> = {
   },
   bind(el) {
     const keyPath = this.keypath as string;
-    const eventName = "ask-for-attribute:" + keyPath;
+    const askEventName = "ask-for-attribute:" + keyPath;
+    const notifyEventName = "notify-attribute-change:" + keyPath;
     this.customData = {
       onAskForAttributeValue: () => {
         this.binder.triggerAttributeValue.call(
@@ -22,11 +23,21 @@ export const componentAttributeBinder: Binder<any> = {
           this.view.models[keyPath]
         );
       },
+      onNotifyNewAttributeValue: (event: CustomEvent<any>) => {
+        if (this.view.models[keyPath] !== event.detail.newValue) {
+          this.view.models[keyPath] = event.detail.newValue;
+        }
+      },
     };
-    console.debug("bind eventName", eventName);
+    console.debug("bind eventName", askEventName);
     el.addEventListener(
-      eventName as any,
+      askEventName as any,
       this.customData.onAskForAttributeValue,
+      false
+    );
+    el.addEventListener(
+      notifyEventName as any,
+      this.customData.onNotifyNewAttributeValue,
       false
     );
   },
@@ -37,6 +48,11 @@ export const componentAttributeBinder: Binder<any> = {
     el.removeEventListener(
       ("ask-for-attribute:" + keyPath) as any,
       this.customData.onAskForAttributeValue,
+      false
+    );
+    el.removeEventListener(
+      "notify-attribute-change:" + keyPath,
+      this.customData.onNotifyNewAttributeValue,
       false
     );
   },

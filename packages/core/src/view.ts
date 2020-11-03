@@ -7,7 +7,7 @@ import {
 } from "./interfaces";
 import { Binding } from "./binding";
 import { parseNode, parseDeclaration } from "./parsers";
-import { Component } from "./component";
+import { BasicComponent, Component } from "./component";
 
 /**
  * TODO Check if there is an official interface which fits better here
@@ -62,7 +62,7 @@ export class View {
   public models: any;
   public options: Options;
   public bindings: Array<Binding> = [];
-  public webComponents: Array<Component> = [];
+  public webComponents: Array<Component | BasicComponent> = [];
   // public componentView: View | null = null;
 
   /**
@@ -339,7 +339,7 @@ export class View {
       // if node.constructor is not HTMLElement and not HTMLUnknownElement, it was registed
       // @see https://stackoverflow.com/questions/27334365/how-to-get-list-of-registered-custom-elements
       if (
-        customElements.get(nodeName) ||
+        (nodeName && customElements.get(nodeName)) ||
         (node.constructor !== HTMLElement &&
           node.constructor !== HTMLUnknownElement)
       ) {
@@ -383,10 +383,10 @@ export class View {
       console.warn("customElements not supported by your browser! Do nothing.");
       return;
     }
-    nodeName = nodeName || COMPONENT.tagName;
+    const resolveNodeName = nodeName || COMPONENT.tagName;
     window.customElements.define(COMPONENT.tagName, COMPONENT as any); // TODO FIXME as CustomElementConstructor since TypeScript 3.8
     // TODO ?? call unbind (on unbind this view) of this component instance to unbind this view
     // (not disconnectedCallback / disconnectedFallbackCallback, this is automatically called from customElements)
-    window.customElements.get(nodeName) as Component;
+    window.customElements.get(resolveNodeName) as Component;
   }
 }

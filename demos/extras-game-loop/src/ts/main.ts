@@ -1,6 +1,6 @@
-import { coreModule, Riba } from '@ribajs/core';
+import { coreModule, Riba } from "@ribajs/core";
 
-import { ExtrasGameLoopModule } from './extras-game-loop.module';
+import { ExtrasGameLoopModule } from "./extras-game-loop.module";
 
 const riba = new Riba();
 const model = {};

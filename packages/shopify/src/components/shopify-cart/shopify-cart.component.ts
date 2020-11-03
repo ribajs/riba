@@ -190,7 +190,7 @@ export class ShopifyCartComponent extends Component {
   }
 
   protected disconnectedCallback() {
-    super.disconnectedCallback()
+    super.disconnectedCallback();
     ShopifyCartService.shopifyCartEventDispatcher.off(
       "ShopifyCart:request:start",
       this.onCartRequestStart,

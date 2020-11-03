@@ -71,8 +71,12 @@ export class BarComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    this.init(BarComponent.observedAttributes);
     this.listenForConfigChanges();
+  }
+
+  protected connectedCallback() {
+    super.connectedCallback();
+    this.init(BarComponent.observedAttributes);
   }
 
   protected listenForConfigChanges() {

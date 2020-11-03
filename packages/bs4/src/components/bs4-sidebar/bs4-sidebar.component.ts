@@ -3,6 +3,7 @@ import {
   getViewportDimensions,
   hasChildNodesTrim,
 } from "@ribajs/utils/src/dom";
+import { TOGGLE_BUTTON } from "../../constants";
 
 type State =
   | "overlay-left"
@@ -96,7 +97,7 @@ export class Bs4SidebarComponent extends Component {
     ];
   }
 
-  protected toggleButtonEvents?: EventDispatcher;
+  protected eventDispatcher?: EventDispatcher;
 
   protected routerEvents = new EventDispatcher("main");
 
@@ -170,19 +171,27 @@ export class Bs4SidebarComponent extends Component {
   }
 
   protected initToggleButtonEventDispatcher() {
-    if (this.toggleButtonEvents) {
-      this.toggleButtonEvents.off("toggle", this.toggle, this);
-      this.toggleButtonEvents.off("init", this.triggerState, this);
+    if (this.eventDispatcher) {
+      this.eventDispatcher.off(
+        TOGGLE_BUTTON.eventNames.toggle,
+        this.toggle,
+        this
+      );
+      this.eventDispatcher.off(
+        TOGGLE_BUTTON.eventNames.init,
+        this.triggerState,
+        this
+      );
     }
-    this.toggleButtonEvents = new EventDispatcher(
-      "bs4-toggle-button:" + this.scope.id
+    this.eventDispatcher = new EventDispatcher(
+      TOGGLE_BUTTON.nsPrefix + this.scope.id
     );
-    console.log(
-      "initToggleButtonEventDispatcher",
-      "bs4-toggle-button:" + this.scope.id
+    this.eventDispatcher.on(TOGGLE_BUTTON.eventNames.toggle, this.toggle, this);
+    this.eventDispatcher.on(
+      TOGGLE_BUTTON.eventNames.init,
+      this.triggerState,
+      this
     );
-    this.toggleButtonEvents.on("toggle", this.toggle, this);
-    this.toggleButtonEvents.on("init", this.triggerState, this);
   }
 
   protected initRouterEventDispatcher() {
@@ -217,7 +226,7 @@ export class Bs4SidebarComponent extends Component {
   }
 
   protected triggerState() {
-    this.toggleButtonEvents?.trigger("state", this.scope.state);
+    this.eventDispatcher?.trigger("state", this.scope.state);
   }
 
   protected onStateChange() {
@@ -234,8 +243,11 @@ export class Bs4SidebarComponent extends Component {
         this.onHidden();
         break;
     }
-    if (this.toggleButtonEvents) {
-      this.toggleButtonEvents.trigger("toggled", this.scope.state);
+    if (this.eventDispatcher) {
+      this.eventDispatcher.trigger(
+        TOGGLE_BUTTON.eventNames.toggled,
+        this.scope.state
+      );
     }
   }
 
@@ -388,8 +400,16 @@ export class Bs4SidebarComponent extends Component {
   // deconstructor
   protected disconnectedCallback() {
     super.disconnectedCallback();
-    this.toggleButtonEvents?.off("init", this.triggerState, this);
-    this.toggleButtonEvents?.off("toggle", this.toggle, this);
+    this.eventDispatcher?.off(
+      TOGGLE_BUTTON.eventNames.init,
+      this.triggerState,
+      this
+    );
+    this.eventDispatcher?.off(
+      TOGGLE_BUTTON.eventNames.toggle,
+      this.toggle,
+      this
+    );
     this.routerEvents.off("newPageReady", this.onEnvironmentChanges, this);
     window.removeEventListener("resize", this.onEnvironmentChanges, false);
   }

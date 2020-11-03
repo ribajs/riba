@@ -1,8 +1,8 @@
-# each-item-example
+# core each-item binder demo
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git
-cd riba/examples/each-item
-npm install
-npm run start
+cd riba/demos/core-each-item
+yarn install
+yarn run start
 ```

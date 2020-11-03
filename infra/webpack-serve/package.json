@@ -15,6 +15,12 @@
     "index.js"
   ],
   "dependencies": {
-    "@ribajs/webpack-config": "^1.9.0-beta.3"
+    "@ribajs/webpack-config": "^1.9.0-beta.3",
+    "get-port": "^5.1.1",
+    "pkg-dir": "^5.0.0",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "peerDependencies": {
+    "webpack": "^5.3.2"
   }
 }

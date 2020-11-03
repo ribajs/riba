@@ -1,9 +1,10 @@
 /* eslint-disable no-case-declarations */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
+const webpack = require("webpack");
 const path = require("path");
-const rootPath = process.cwd();
-// const webpack = require("webpack");
+const pkgDir = require("pkg-dir");
+const rootPath = pkgDir.sync(process.cwd());
 
 var getStyleLoaderRule = (config = {}) => {
   var rule = {
@@ -98,9 +99,28 @@ module.exports = (config = {}) => {
     config.production = env.production;
     config.development = env.development;
 
-    var plugins = [];
+    config.resolve = config.resolve || {
+      symlinks: true,
+      alias: {},
+      plugins: [],
+    };
+    config.resolve.extensions = config.resolve.extensions || [
+      ".ts",
+      ".tsx",
+      ".js",
+      ".json",
+      ".scss",
+      ".pug",
+      ".html",
+    ];
+    config.resolve.alias = config.resolve.alias || {};
+    config.resolve.symlinks = true;
 
-    var rules = [
+    config.plugins = config.plugins || [];
+
+    config.rules = config.rules || [];
+
+    config.rules.push(
       // typescript and javascript
       {
         test: /\.(tsx?)|\.(js)$/,
@@ -139,8 +159,8 @@ module.exports = (config = {}) => {
             },
           },
         ],
-      },
-    ];
+      }
+    );
 
     // config defaults
     config.detectDuplicates = config.detectDuplicates || false;
@@ -233,7 +253,7 @@ module.exports = (config = {}) => {
         };
 
         const HtmlWebpackPlugin = require("html-webpack-plugin");
-        plugins.push(
+        config.plugins.push(
           new HtmlWebpackPlugin({
             template: path.resolve(rootPath, "src/index.html"),
             filename: "index.html",
@@ -265,17 +285,17 @@ module.exports = (config = {}) => {
         config.CopyPlugin = config.CopyPlugin || require("copy-webpack-plugin");
         // Copy the files before the build starts for the case the files are required for the build itself
         copy(copyPluginConfigs.patterns);
-        plugins.push(new config.CopyPlugin(copyPluginConfigs));
+        config.plugins.push(new config.CopyPlugin(copyPluginConfigs));
       }
     }
 
     if (config.detectDuplicates === true) {
       const { DuplicatesPlugin } = require("inspectpack/plugin");
-      plugins.push(new DuplicatesPlugin());
+      config.plugins.push(new DuplicatesPlugin());
     }
 
     if (config.styles.extract === true) {
-      plugins.push(
+      config.plugins.push(
         new config.CssExtractPlugin({
           filename: "[name].css",
         })
@@ -284,54 +304,55 @@ module.exports = (config = {}) => {
 
     // if (config.development) {
     //   console.debug("Use HotModuleReplacementPlugin");
-    //   plugins.push(new webpack.HotModuleReplacementPlugin());
+    //   config.plugins.push(new webpack.HotModuleReplacementPlugin());
     // }
 
-    // console.debug('Used plugins: ', plugins);
+    // console.debug('Used plugins: ', config.plugins);
 
     if (config.styles.build === true) {
-      rules.push(getStyleLoaderRule(config));
+      config.rules.push(getStyleLoaderRule(config));
     }
 
-    const webpackConfig = {
-      optimization: {
-        minimize: config.scripts.minimize,
-        minimizer: config.scripts.minimize ? [terser] : [],
-        splitChunks: config.splitChunks || {
-          // TODO refactor see https://webpack.js.org/migrate/5/
-          automaticNameDelimiter: ".",
-          chunks: "all",
-          cacheGroups: {
-            commons: {
-              test: /[\\/]node_modules[\\/]/,
-              name: "vendors",
-              chunks: "all",
-            },
-            styles: {
-              name: "styles",
-              test: /\.css$/,
-              chunks: "all",
-              enforce: true,
-            },
+    // Define plugin
+    config.define = config.define || {};
+    config.define.ENV = JSON.stringify(env);
+    config.plugins.push(new webpack.DefinePlugin(config.define));
+
+    config.optimization = config.optimization || {
+      minimize: config.scripts.minimize,
+      minimizer: config.scripts.minimize ? [terser] : [],
+      splitChunks: config.splitChunks || {
+        // TODO refactor see https://webpack.js.org/migrate/5/
+        automaticNameDelimiter: ".",
+        chunks: "all",
+        cacheGroups: {
+          commons: {
+            test: /[\\/]node_modules[\\/]/,
+            name: "vendors",
+            chunks: "all",
+          },
+          styles: {
+            name: "styles",
+            test: /\.css$/,
+            chunks: "all",
+            enforce: true,
           },
         },
       },
-      // Change to your "entry-point".
+    };
+
+    const webpackConfig = {
+      optimization: config.optimization,
       entry: config.entry,
       devtool: env.production ? undefined : "inline-source-map",
       mode: env.production ? "production" : "development",
       output: config.output,
-      resolve: {
-        extensions: [".ts", ".tsx", ".js", ".json", ".scss", ".pug", ".html"],
-        symlinks: true,
-        alias: {},
-        plugins: [],
-      },
+      resolve: config.resolve,
       devServer: config.devServer,
       module: {
-        rules: rules,
+        rules: config.rules,
       },
-      plugins: plugins,
+      plugins: config.plugins,
     };
 
     if (config.target) {
