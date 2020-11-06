@@ -1,0 +1,29 @@
+@keyframes invalid-flashing-border {
+  0%   { border-color: $input-border-color; }
+  50% { border-color: $form-feedback-invalid-color; }
+  100% { border-color: $input-border-color; }
+}
+
+@keyframes invalid-flashing-label {
+  0%   { color: $custom-control-label-color; }
+  50% { color: $form-feedback-invalid-color; }
+  100% { color: $custom-control-label-color; }
+}
+
+// Example on https://hypnosezentrum-cux.de/kontakt/fragebogen
+.was-validated {
+  .invalid-flashing-animation {
+    &.form-control:invalid {
+      animation: invalid-flashing-border 1s linear infinite;
+    }
+
+    &.custom-control-input:invalid {
+      ~ .custom-control-label {
+        animation: invalid-flashing-label 1s linear infinite;
+        &::before {
+          animation: invalid-flashing-border 1s linear infinite;
+        }
+      }
+    }
+  }
+}

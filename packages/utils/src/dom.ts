@@ -138,6 +138,22 @@ export const getViewportDimensions = () => {
 };
 
 /**
+ * Determine if an element is in the viewport
+ * @param elem The element
+ * @return Returns true if element is in the viewport
+ */
+export const isInViewport = (elem: Element, offsetTop = 0, offsetBottom = 0) => {
+  if (!elem) {
+    return false;
+  }
+  const distance = elem.getBoundingClientRect();
+  return (
+    distance.top + distance.height >= offsetBottom &&
+    distance.bottom - distance.height <= offsetTop
+  );
+};
+
+/**
  * Select all of an contenteditable or input element
  * @param element The element you want to select
  */

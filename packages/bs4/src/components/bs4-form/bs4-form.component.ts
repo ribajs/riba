@@ -2,6 +2,7 @@ import { Component, HttpService, HttpMethod, HttpDataType } from "@ribajs/core";
 import template from "./bs4-form.component.html";
 import { stripHtml } from "@ribajs/utils/src/type";
 import { getUID, hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { scrollTo, getViewportDimensions } from "@ribajs/utils/src/dom";
 
 export interface ValidationObject {
   fields:
@@ -53,6 +54,8 @@ export interface Scope {
    **/
   autoSetFormData: boolean;
   stripHtml: boolean;
+  scrollToInvalidElement: true,
+  animateInvalidElement: true,
 }
 
 export class Bs4FormComponent extends Component {
@@ -68,6 +71,8 @@ export class Bs4FormComponent extends Component {
       "ajax-request-type",
       "auto-set-form-data",
       "strip-html",
+      "scroll-invalid-element",
+      "animate-invalid-element",
     ];
   }
 
@@ -92,6 +97,8 @@ export class Bs4FormComponent extends Component {
       ajaxRequestType: "form",
       autoSetFormData: true,
       stripHtml: true,
+      scrollToInvalidElement: true,
+      animateInvalidElement: true,
     };
     return scope;
   }
@@ -167,10 +174,7 @@ export class Bs4FormComponent extends Component {
     this.validate(this.formEl, this.scope.form);
 
     if (!this.scope.form.valid) {
-      console.info("form not valid", this.scope);
-      // stop native submit
-      event.preventDefault();
-      event.stopPropagation();
+      this.onInvalidForm(event);      
       return;
     }
 
@@ -255,6 +259,41 @@ export class Bs4FormComponent extends Component {
     };
 
     return settings;
+  }
+
+  protected onInvalidForm(event: Event) {
+    console.info("form not valid", this.scope);
+    // stop native submit
+    event.preventDefault();
+    event.stopPropagation();
+    if (!this.formEl) {
+      console.warn("No form found");
+      return null;
+    }
+    const invalidElements = this.formEl.querySelectorAll<HTMLElement>(':invalid');
+    if (invalidElements && invalidElements.length) {
+      const invalidElement = invalidElements[0];
+      if (this.scope.scrollToInvalidElement) {
+        this.scrollToElement(invalidElement);
+      }
+      if (this.scope.animateInvalidElement) {
+        this.scrollToElement(invalidElement);
+      }
+    }
+  }
+
+  protected scrollToElement(invalidElement: HTMLElement) {
+      const vp = getViewportDimensions();
+      const offset = vp.h / 2;
+      scrollTo(invalidElement, offset, window);
+      this.animateInvalidElement(invalidElement);
+  }
+
+  protected animateInvalidElement(invalidElement: HTMLElement, endsOn = 3000) {
+    invalidElement.classList.add('invalid-flashing-animation');
+    setTimeout(() => {
+      invalidElement.classList.remove('invalid-flashing-animation');
+    }, endsOn)
   }
 
   protected onErrorSubmit(status: string, message: string, response: any) {

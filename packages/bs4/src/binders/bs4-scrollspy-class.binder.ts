@@ -1,5 +1,6 @@
 import { Binder } from "@ribajs/core";
 import { debounce } from "@ribajs/utils/src/control";
+import { isInViewport } from "@ribajs/utils/src/dom";
 
 /**
  * scrollspy-class
@@ -46,13 +47,9 @@ export const scrollspyClassBinder: Binder<string> = {
         if (!elem) {
           return false;
         }
-        const distance = elem.getBoundingClientRect();
-        this.customData.offsetTop = Number(el.dataset.offset || 0);
-        this.customData.offsetBottom = Number(el.dataset.offsetBottom || 0);
-        return (
-          distance.top + distance.height >= this.customData.offsetBottom &&
-          distance.bottom - distance.height <= this.customData.offsetTop
-        );
+        const offsetTop = Number(el.dataset.offset || 0);
+        const offsetBottom = Number(el.dataset.offsetBottom || 0);
+        return isInViewport(elem, offsetTop, offsetBottom);
       },
     };
     this.customData.isInViewport = this.customData.isInViewport.bind(this);
