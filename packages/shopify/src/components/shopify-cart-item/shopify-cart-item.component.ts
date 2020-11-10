@@ -223,6 +223,7 @@ export class ShopifyCartItemComponent extends Component {
   }
 
   protected async beforeBind() {
+    await super.beforeBind();
     // const cart = await ShopifyCartService.get();
   }
 
@@ -238,6 +239,7 @@ export class ShopifyCartItemComponent extends Component {
   }
 
   protected async afterBind() {
+    await super.afterBind();
     this.debug("afterBind", this.scope);
     ShopifyCartService.shopifyCartEventDispatcher.on(
       "ShopifyCart:request:start",

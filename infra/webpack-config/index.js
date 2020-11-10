@@ -139,9 +139,9 @@ module.exports = (config = {}) => {
           },
         ],
       },
-      // image templates
+      // image templates and other assets
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpe?g|gif|ttf)$/i,
         use: [
           {
             loader: config.fileLoaderPath,

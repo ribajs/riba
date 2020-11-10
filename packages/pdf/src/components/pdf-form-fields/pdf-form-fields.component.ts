@@ -46,12 +46,14 @@ export class PdfFormFieldsComponent extends Component {
   }
 
   protected async beforeBind() {
+    await super.beforeBind();
     this.pdfService = new PdfService(this.scope.workerSrc);
     const pdfForms = await this.pdfService.getPdfAnnotations(this.scope.src);
     this.scope.forms = pdfForms;
   }
 
   protected async afterBind() {
+    await super.afterBind();
     this.debug("afterBind", this.scope);
   }
 

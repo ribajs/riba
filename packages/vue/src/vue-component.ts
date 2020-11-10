@@ -139,11 +139,17 @@ export abstract class VueComponent extends BasicComponent {
     newValue: any,
     namespace: string | null
   ) {
-    this.debug('parsedAttributeChangedCallback', attributeName, oldValue, newValue, this.scope, this.vueVm);
+    this.debug(
+      "parsedAttributeChangedCallback",
+      attributeName,
+      oldValue,
+      newValue,
+      this.scope,
+      this.vueVm
+    );
     if (this.vueVm) {
       this.vueVm.$forceUpdate(); // [attributeName] = newValue;
     }
-    
   }
 
   protected async bind() {

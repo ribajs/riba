@@ -1,7 +1,7 @@
 import { Component, EventDispatcher } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./bs4-notifications-example.component.html";
-import { Toast, Modal } from "../../../../../../packages/bs4/src/interfaces";
+import { Toast, Modal } from "@ribajs/bs4";
 
 export class Bs4NotificationsExampleComponent extends Component {
   public static tagName = "bs4-notifications-example";
