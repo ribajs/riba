@@ -208,10 +208,34 @@ export class Bs4TaggedImageComponent extends Component {
     if (this.scope.debug) {
       // adapted from here: https://stackoverflow.com/a/42111623/7048200
       // TODO: avoid using "as any"
-      const rect = (e.target as HTMLElement).getBoundingClientRect();
-      const x = ((e as any).clientX - rect.left) / (rect.right - rect.left); //x position within the element.
-      const y = ((e as any).clientY - rect.top) / (rect.bottom - rect.top); //y position within the element.
-      console.log("Left: " + x + " ; Top: " + y);
+      const img = this.image as HTMLImageElement;
+      const {
+        clientTop,
+        clientLeft,
+        width,
+        height,
+        naturalWidth,
+        naturalHeight,
+      } = img;
+      const { clientX, clientY } = e as any;
+      let x = clientX - clientLeft;
+      let y = clientY - clientTop;
+      const wRatio = width / naturalWidth;
+      const hRatio = height / naturalHeight;
+      let actualWidth = width;
+      let actualHeight = height;
+      if (wRatio < hRatio) {
+        // left, right cut off
+        actualWidth = (width * hRatio) / wRatio;
+        x += (actualWidth - width) / 2;
+      } else if (hRatio < wRatio) {
+        // left, right cut off
+        actualHeight = (height * wRatio) / hRatio;
+        y += (actualHeight - height) / 2;
+      }
+      x *= 100 / actualWidth;
+      y *= 100 / actualHeight;
+      console.log({ x, y });
     }
   }
   onPopoverBound(event: Event) {
