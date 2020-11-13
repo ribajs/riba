@@ -22,7 +22,7 @@ function scssToOctoberYml() {
       const lines = file.contents.toString().split(/(?:\r\n|\r|\n)/g);
 
       const commentPattern = /^\s*\$(.+?):\s*(.*?)\s*(!default)?\s*;\s*\/\/\s*octoberyml:\s*(\{\s*.*\s*\})$/i;
-      const spacerPattern = /^\s*\/\/\s*octoberyml:\s*(.+)\s*(\{\s*.*\s*\})$/i;
+      const spacerPattern = /^\s*\/\/\s*octoberyml:\s*(\w+)\s*(\{\s*.*\s*\})$/i;
 
       const variables: any = {};
 
