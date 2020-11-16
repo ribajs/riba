@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
 const webpack = require("webpack");
-const { existsSync } = require("fs");
 const { path, rootPath, findDir, findFile } = require("./path");
 
 var getStyleLoaderRule = (config = {}) => {
@@ -14,7 +13,9 @@ var getStyleLoaderRule = (config = {}) => {
   if (config.styles.extract === true) {
     rule.use.push({
       loader: config.CssExtractPlugin.loader,
-      options: {},
+      options: {
+        publicPath: config.styles.distPath,
+      },
     });
   } else {
     config.styleLoaderPath =
@@ -56,9 +57,15 @@ var getStyleLoaderRule = (config = {}) => {
     },
   });
 
-  rule.use.push({
-    loader: config.postcssLoaderPath,
-  });
+  if (config.postcssOptions) {
+    rule.use.push({
+      loader: config.postcssLoaderPath,
+      options: {
+        postcssOptions: config.postcssOptions,
+        sourceMap: config.development,
+      },
+    });
+  }
 
   rule.use.push({
     loader: config.sassLoaderPath,
@@ -99,6 +106,8 @@ module.exports = (config = {}) => {
     env.production = !env.development;
     config.production = env.production;
     config.development = env.development;
+
+    config.distPath = config.distPath || path.resolve(rootPath, "dist");
 
     // TypeScript source path
     if (typeof config.tsSourceDir === "undefined") {
@@ -174,7 +183,7 @@ module.exports = (config = {}) => {
       config.forkTsCheckerConfig = config.forkTsCheckerConfig || {};
       // Disable eslint with config.forkTsCheckerConfig.eslint = false;
       if (typeof config.forkTsCheckerConfig.eslint === "undefined") {
-        const eslintConfig = findFile(config.scssSourceDir, [
+        const eslintConfig = findFile(rootPath, [
           ".eslintrc.js",
           "../.eslintrc.js",
           "../../.eslintrc.js",
@@ -190,6 +199,23 @@ module.exports = (config = {}) => {
             files: config.tsSourceDir + "/**/*.{ts,tsx,js,jsx}",
           };
         }
+      }
+    }
+
+    // postCSS config path
+    if (typeof config.postcssOptions === "undefined") {
+      const postcssConfigPath = findFile(rootPath, [
+        "postcss.config.js",
+        "../postcss.config.js",
+        "../../postcss.config.js",
+      ]);
+
+      if (postcssConfigPath) {
+        console.debug(
+          "Enable PostCSS because a eslint config file was found in " +
+            postcssConfigPath
+        );
+        config.postcssOptions = require(postcssConfigPath);
       }
     }
 
@@ -277,8 +303,9 @@ module.exports = (config = {}) => {
 
     config.styles = config.styles || {
       build: true,
-      extract: false,
+      extract: env.production,
       resolveUrl: true,
+      distPath: config.distPath,
     };
 
     config.scripts = config.scripts || {
@@ -339,7 +366,7 @@ module.exports = (config = {}) => {
           config.tsIndexPath,
         ];
         config.output = config.output || {
-          path: path.resolve(rootPath, "dist/"),
+          path: config.distPath,
           filename: "[name].bundle.js",
         };
 
@@ -354,10 +381,7 @@ module.exports = (config = {}) => {
         config.devServer = config.devServer || {
           port: 8080,
           host: "0.0.0.0",
-          contentBase: [
-            path.resolve(rootPath, "src"),
-            path.resolve(rootPath, "dist"),
-          ],
+          contentBase: [path.resolve(rootPath, "src"), config.distPath],
           hot: true,
           inline: true,
         };
@@ -390,14 +414,20 @@ module.exports = (config = {}) => {
     }
 
     if (config.copyAssets && config.copyAssets.enable === true) {
-      const { getCopyPluginConfig, copy } = require("./copy");
-      var copyPluginConfigs = getCopyPluginConfig(config);
-      if (copyPluginConfigs.patterns && copyPluginConfigs.patterns.length > 0) {
+      const { getCopyPluginPatterns, copy } = require("./copy");
+      config.copyPluginConfig = config.copyPluginConfig || {};
+      config.copyPluginConfig.patterns =
+        config.copyPluginConfig.patterns || getCopyPluginPatterns(config);
+      console.log("config.copyPluginConfig", config.copyPluginConfig);
+      if (
+        config.copyPluginConfig.patterns &&
+        config.copyPluginConfig.patterns.length > 0
+      ) {
         // https://github.com/webpack-contrib/copy-webpack-plugin
         config.CopyPlugin = config.CopyPlugin || require("copy-webpack-plugin");
         // Copy the files before the build starts for the case the files are required for the build itself
-        copy(copyPluginConfigs.patterns);
-        config.plugins.push(new config.CopyPlugin(copyPluginConfigs));
+        copy(config.copyPluginConfig.patterns);
+        config.plugins.push(new config.CopyPlugin(config.copyPluginConfig));
       }
     }
 

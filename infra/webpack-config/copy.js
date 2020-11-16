@@ -86,8 +86,8 @@ const getCopyPluginConfigForScssThirdPartyModule = (
   return null;
 };
 
-const getCopyPluginConfig = (config) => {
-  var patterns = [];
+const getCopyPluginPatterns = (config) => {
+  const patterns = config.copyAssets.patterns || [];
 
   const copyRibaScssModules = [
     "@ribajs/bs4",
@@ -136,18 +136,18 @@ const getCopyPluginConfig = (config) => {
     );
   }
 
-  return { patterns };
+  return patterns;
 };
 
 // Copy the files before the build starts for the case the files are required for the build itself
 const copy = (copyPluginPatterns) => {
-  for (const copyPluginConfig of copyPluginPatterns) {
-    files = glob.sync(copyPluginConfig.from);
+  for (const pattern of copyPluginPatterns) {
+    files = glob.sync(pattern.from);
     for (const file of files) {
-      const context = copyPluginConfig.context;
+      const context = pattern.context;
       // const appendDestPath = file.replace(context, "");
       const appendDestPath = path.relative(context, file);
-      const dest = path.join(copyPluginConfig.to, appendDestPath);
+      const dest = path.join(pattern.to, appendDestPath);
       fs.mkdirSync(path.dirname(dest), { recursive: true });
       console.debug("\ncopy file from: " + file);
       console.debug("copy file to: " + dest);
@@ -158,5 +158,5 @@ const copy = (copyPluginPatterns) => {
   }
 };
 
-module.exports.getCopyPluginConfig = getCopyPluginConfig;
+module.exports.getCopyPluginPatterns = getCopyPluginPatterns;
 module.exports.copy = copy;
