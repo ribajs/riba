@@ -54,8 +54,8 @@ export interface Scope {
    **/
   autoSetFormData: boolean;
   stripHtml: boolean;
-  scrollToInvalidElement: true,
-  animateInvalidElement: true,
+  scrollToInvalidElement: true;
+  animateInvalidElement: true;
 }
 
 export class Bs4FormComponent extends Component {
@@ -174,7 +174,7 @@ export class Bs4FormComponent extends Component {
     this.validate(this.formEl, this.scope.form);
 
     if (!this.scope.form.valid) {
-      this.onInvalidForm(event);      
+      this.onInvalidForm(event);
       return;
     }
 
@@ -270,7 +270,9 @@ export class Bs4FormComponent extends Component {
       console.warn("No form found");
       return null;
     }
-    const invalidElements = this.formEl.querySelectorAll<HTMLElement>(':invalid');
+    const invalidElements = this.formEl.querySelectorAll<HTMLElement>(
+      ":invalid"
+    );
     if (invalidElements && invalidElements.length) {
       const invalidElement = invalidElements[0];
       if (this.scope.scrollToInvalidElement) {
@@ -283,17 +285,17 @@ export class Bs4FormComponent extends Component {
   }
 
   protected scrollToElement(invalidElement: HTMLElement) {
-      const vp = getViewportDimensions();
-      const offset = vp.h / 2;
-      scrollTo(invalidElement, offset, window);
-      this.animateInvalidElement(invalidElement);
+    const vp = getViewportDimensions();
+    const offset = vp.h / 2;
+    scrollTo(invalidElement, offset, window);
+    this.animateInvalidElement(invalidElement);
   }
 
   protected animateInvalidElement(invalidElement: HTMLElement, endsOn = 3000) {
-    invalidElement.classList.add('invalid-flashing-animation');
+    invalidElement.classList.add("invalid-flashing-animation");
     setTimeout(() => {
-      invalidElement.classList.remove('invalid-flashing-animation');
-    }, endsOn)
+      invalidElement.classList.remove("invalid-flashing-animation");
+    }, endsOn);
   }
 
   protected onErrorSubmit(status: string, message: string, response: any) {

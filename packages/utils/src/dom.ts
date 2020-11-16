@@ -142,7 +142,11 @@ export const getViewportDimensions = () => {
  * @param elem The element
  * @return Returns true if element is in the viewport
  */
-export const isInViewport = (elem: Element, offsetTop = 0, offsetBottom = 0) => {
+export const isInViewport = (
+  elem: Element,
+  offsetTop = 0,
+  offsetBottom = 0
+) => {
   if (!elem) {
     return false;
   }

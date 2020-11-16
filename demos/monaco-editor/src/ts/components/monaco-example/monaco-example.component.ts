@@ -13,7 +13,7 @@ export class MonacoExampleComponent extends Component {
 
   protected scope = {
     article: {
-      title: "PinePhone: What You Need to Know About This Linux Phone",
+      title: "How to use the monaco-editor from VSCode in Riba.js",
       body_html: "",
     },
     save: this.save,
@@ -24,7 +24,7 @@ export class MonacoExampleComponent extends Component {
   }
 
   public save() {
-    console.log("Clicked save!");
+    console.log("Save html content: ", this.scope.article.body_html);
   }
 
   protected connectedCallback() {
