@@ -74,6 +74,8 @@ var getStyleLoaderRule = (config = {}) => {
 module.exports = (config = {}) => {
   // Modules you can overwrite
   config.TerserPlugin = config.TerserPlugin || require("terser-webpack-plugin");
+  config.ForkTsCheckerPlugin =
+    config.ForkTsCheckerPlugin || require("fork-ts-checker-webpack-plugin");
   config.CssExtractPlugin =
     config.CssExtractPlugin || require("mini-css-extract-plugin");
   config.babelLoaderPath =
@@ -312,6 +314,9 @@ module.exports = (config = {}) => {
     if (config.styles.build === true) {
       config.rules.push(getStyleLoaderRule(config));
     }
+
+    // TS Checker
+    config.plugins.push(new config.ForkTsCheckerPlugin());
 
     // Define plugin
     config.define = config.define || {};
