@@ -2,10 +2,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
 const webpack = require("webpack");
-const path = require("path");
-const pkgDir = require("pkg-dir");
 const { existsSync } = require("fs");
-const rootPath = pkgDir.sync(process.cwd());
+const { path, rootPath, findDir, findFile } = require("./path");
 
 var getStyleLoaderRule = (config = {}) => {
   var rule = {
@@ -102,101 +100,86 @@ module.exports = (config = {}) => {
     config.production = env.production;
     config.development = env.development;
 
-    {
-      // Set config.tsSourcePath if its undefined
-      if (typeof config.tsSourcePath === "undefined") {
-        const tsSourceSearchPaths = [
-          path.resolve(rootPath, "/assets/ts"), // OctoberCMS
-          path.resolve(rootPath, "src/ts"),
-          path.resolve(rootPath, "src/scripts"),
-          path.resolve(rootPath, "src/ts"),
-          path.resolve(rootPath, "ts"),
-          path.resolve(rootPath, "scripts"),
-        ];
-        for (const tsPath of tsSourceSearchPaths) {
-          if (!config.tsSourcePath && existsSync(tsPath)) {
-            config.tsSourcePath = tsPath;
-            console.debug("Set config.tsSourcePath to: " + config.tsSourcePath);
-          }
-        }
+    // TypeScript source path
+    if (typeof config.tsSourceDir === "undefined") {
+      config.tsSourceDir = findDir([
+        path.resolve(rootPath, "/assets/ts"), // OctoberCMS
+        path.resolve(rootPath, "src/ts"),
+        path.resolve(rootPath, "src/scripts"),
+        path.resolve(rootPath, "src/ts"),
+        path.resolve(rootPath, "ts"),
+        path.resolve(rootPath, "scripts"),
+      ]);
+      if (config.tsSourceDir) {
+        console.debug("Set config.tsSourceDir to: " + config.tsSourceDir);
       }
     }
 
-    {
-      // Set config.scssSourcePath if its undefined
-      if (typeof config.scssSourcePath === "undefined") {
-        const tsSourceSearchPaths = [
-          path.resolve(rootPath, "src/scss"),
-          path.resolve(rootPath, "src/styles"),
-          path.resolve(rootPath, "scss"),
-          path.resolve(rootPath, "styles"),
-        ];
-        for (const tsPath of tsSourceSearchPaths) {
-          if (!config.scssSourcePath && existsSync(tsPath)) {
-            config.scssSourcePath = tsPath;
-            console.debug(
-              "Set config.scssSourcePath to: " + config.scssSourcePath
-            );
-          }
-        }
+    // SCSS source path
+    if (typeof config.scssSourceDir === "undefined") {
+      config.scssSourceDir = findDir([
+        path.resolve(rootPath, "src/scss"),
+        path.resolve(rootPath, "src/styles"),
+        path.resolve(rootPath, "scss"),
+        path.resolve(rootPath, "styles"),
+      ]);
+      if (config.scssSourceDir) {
+        console.debug("Set config.scssSourceDir to: " + config.scssSourceDir);
       }
     }
 
-    {
-      // Set typescript main index path if its undefined
-      if (typeof config.tsIndexPath === "undefined" && config.tsSourcePath) {
-        const tsMainSearchPaths = [
-          path.resolve(config.tsSourcePath, "main.ts"),
-          path.resolve(config.tsSourcePath, "index.ts"),
-        ];
-        for (const mainTsPath of tsMainSearchPaths) {
-          if (!config.tsIndexPath && existsSync(mainTsPath)) {
-            config.tsIndexPath = mainTsPath;
-            console.debug("Set config.tsIndexPath to: " + config.tsIndexPath);
-          }
-        }
+    // HTML / PUG source path
+    if (typeof config.htmlSourceDir === "undefined") {
+      config.htmlSourceDir = findDir([
+        path.resolve(rootPath, "src/html"),
+        path.resolve(rootPath, "src/templates"),
+        path.resolve(rootPath, "src/views"),
+        path.resolve(rootPath, "html"),
+        path.resolve(rootPath, "templates"),
+        path.resolve(rootPath, "views"),
+        path.resolve(rootPath, "src/index.html"),
+        path.resolve(rootPath, "index.html"),
+      ]);
+      if (config.htmlSourceDir) {
+        console.debug("Set config.htmlSourceDir to: " + config.htmlSourceDir);
       }
     }
 
-    {
-      // Set SCSS main index path if its undefined
-      if (
-        typeof config.scssIndexPath === "undefined" &&
-        config.scssSourcePath
-      ) {
-        const scssMainSearchPaths = [
-          path.resolve(config.scssSourcePath, "main.scss"),
-          path.resolve(config.scssSourcePath, "index.scss"),
-          path.resolve(config.scssSourcePath, "app.scss"),
-          path.resolve(config.scssSourcePath, "theme.scss"),
-        ];
-        for (const mainScssPath of scssMainSearchPaths) {
-          if (!config.scssIndexPath && existsSync(mainScssPath)) {
-            config.scssIndexPath = mainScssPath;
-            console.debug(
-              "Set config.scssIndexPath to: " + config.scssIndexPath
-            );
-          }
-        }
+    // TypeScript main file
+    if (typeof config.tsIndexPath === "undefined" && config.tsSourceDir) {
+      config.tsIndexPath = findFile(config.tsSourceDir, [
+        "main.ts",
+        "index.ts",
+      ]);
+      if (config.tsIndexPath) {
+        console.debug("Set config.tsIndexPath to: " + config.tsIndexPath);
       }
     }
 
-    // TS Fork Checker
+    // SCSS main file
+    if (typeof config.scssIndexPath === "undefined" && config.scssSourceDir) {
+      config.scssIndexPath = findFile(config.scssSourceDir, [
+        "main.scss",
+        "index.scss",
+        "app.scss",
+        "theme.scss",
+      ]);
+      if (config.scssIndexPath) {
+        console.debug("Set config.scssIndexPath to: " + config.scssIndexPath);
+      }
+    }
+
+    // ESLint path and Fork Ts Checker
     {
       config.forkTsCheckerConfig = config.forkTsCheckerConfig || {};
       // Disable eslint with config.forkTsCheckerConfig.eslint = false;
       if (typeof config.forkTsCheckerConfig.eslint === "undefined") {
-        const eslintSearchPath = [
-          path.resolve(rootPath, ".eslintrc.js"),
-          path.resolve(rootPath, "..", ".eslintrc.js"),
-          path.resolve(rootPath, "..", "..", ".eslintrc.js"),
-        ];
-        let eslintConfig = "";
-        for (const eslintPath of eslintSearchPath) {
-          if (!eslintConfig && existsSync(eslintPath)) {
-            eslintConfig = eslintPath;
-          }
-        }
+        const eslintConfig = findFile(config.scssSourceDir, [
+          ".eslintrc.js",
+          "../.eslintrc.js",
+          "../../.eslintrc.js",
+        ]);
+
         if (eslintConfig) {
           console.debug(
             "Enable ESLint because a eslint config file was found in " +
@@ -204,9 +187,25 @@ module.exports = (config = {}) => {
           );
           // TODO set src path in config
           config.forkTsCheckerConfig.eslint = {
-            files: config.tsSourcePath + "/**/*.{ts,tsx,js,jsx}",
+            files: config.tsSourceDir + "/**/*.{ts,tsx,js,jsx}",
           };
         }
+      }
+    }
+
+    // HTML main file for HtmlWebpackPlugin
+    if (typeof config.htmlIndexPath === "undefined" && config.htmlSourceDir) {
+      config.htmlIndexPath = findFile(config.htmlSourceDir, ["index.html"]);
+      if (config.htmlIndexPath) {
+        console.debug("Set config.htmlIndexPath to: " + config.htmlIndexPath);
+      }
+    }
+
+    // Main PUG file
+    if (typeof config.pugIndexPath === "undefined" && config.pugSourcePath) {
+      config.pugSourcePath = findFile(config.htmlSourceDir, ["index.pug"]);
+      if (config.pugSourcePath) {
+        console.debug("Set config.pugSourcePath to: " + config.pugSourcePath);
       }
     }
 
@@ -363,13 +362,15 @@ module.exports = (config = {}) => {
           inline: true,
         };
 
-        const HtmlWebpackPlugin = require("html-webpack-plugin");
-        config.plugins.push(
-          new HtmlWebpackPlugin({
-            template: path.resolve(rootPath, "src/index.html"),
-            filename: "index.html",
-          })
-        );
+        if (config.htmlIndexPath) {
+          const HtmlWebpackPlugin = require("html-webpack-plugin");
+          config.plugins.push(
+            new HtmlWebpackPlugin({
+              template: config.htmlIndexPath,
+              filename: "index.html",
+            })
+          );
+        }
 
         break;
       default:
