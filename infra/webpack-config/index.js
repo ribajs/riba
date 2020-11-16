@@ -4,6 +4,7 @@
 const webpack = require("webpack");
 const path = require("path");
 const pkgDir = require("pkg-dir");
+const { existsSync } = require("fs");
 const rootPath = pkgDir.sync(process.cwd());
 
 var getStyleLoaderRule = (config = {}) => {
@@ -46,7 +47,7 @@ var getStyleLoaderRule = (config = {}) => {
     config.sassLoaderPath || require.resolve("sass-loader");
   // Use dart-sass by default for yarn 2 pnp support, see: https://github.com/webpack-contrib/sass-loader/issues/802
   config.styles.SassImplementation =
-    config.styles.SassImplementation || require("dart-sass");
+    config.styles.SassImplementation || require("sass");
 
   rule.use.push({
     loader: config.cssLoaderPath,
@@ -100,6 +101,114 @@ module.exports = (config = {}) => {
     env.production = !env.development;
     config.production = env.production;
     config.development = env.development;
+
+    {
+      // Set config.tsSourcePath if its undefined
+      if (typeof config.tsSourcePath === "undefined") {
+        const tsSourceSearchPaths = [
+          path.resolve(rootPath, "/assets/ts"), // OctoberCMS
+          path.resolve(rootPath, "src/ts"),
+          path.resolve(rootPath, "src/scripts"),
+          path.resolve(rootPath, "src/ts"),
+          path.resolve(rootPath, "ts"),
+          path.resolve(rootPath, "scripts"),
+        ];
+        for (const tsPath of tsSourceSearchPaths) {
+          if (!config.tsSourcePath && existsSync(tsPath)) {
+            config.tsSourcePath = tsPath;
+            console.debug("Set config.tsSourcePath to: " + config.tsSourcePath);
+          }
+        }
+      }
+    }
+
+    {
+      // Set config.scssSourcePath if its undefined
+      if (typeof config.scssSourcePath === "undefined") {
+        const tsSourceSearchPaths = [
+          path.resolve(rootPath, "src/scss"),
+          path.resolve(rootPath, "src/styles"),
+          path.resolve(rootPath, "scss"),
+          path.resolve(rootPath, "styles"),
+        ];
+        for (const tsPath of tsSourceSearchPaths) {
+          if (!config.scssSourcePath && existsSync(tsPath)) {
+            config.scssSourcePath = tsPath;
+            console.debug(
+              "Set config.scssSourcePath to: " + config.scssSourcePath
+            );
+          }
+        }
+      }
+    }
+
+    {
+      // Set typescript main index path if its undefined
+      if (typeof config.tsIndexPath === "undefined" && config.tsSourcePath) {
+        const tsMainSearchPaths = [
+          path.resolve(config.tsSourcePath, "main.ts"),
+          path.resolve(config.tsSourcePath, "index.ts"),
+        ];
+        for (const mainTsPath of tsMainSearchPaths) {
+          if (!config.tsIndexPath && existsSync(mainTsPath)) {
+            config.tsIndexPath = mainTsPath;
+            console.debug("Set config.tsIndexPath to: " + config.tsIndexPath);
+          }
+        }
+      }
+    }
+
+    {
+      // Set SCSS main index path if its undefined
+      if (
+        typeof config.scssIndexPath === "undefined" &&
+        config.scssSourcePath
+      ) {
+        const scssMainSearchPaths = [
+          path.resolve(config.scssSourcePath, "main.scss"),
+          path.resolve(config.scssSourcePath, "index.scss"),
+          path.resolve(config.scssSourcePath, "app.scss"),
+          path.resolve(config.scssSourcePath, "theme.scss"),
+        ];
+        for (const mainScssPath of scssMainSearchPaths) {
+          if (!config.scssIndexPath && existsSync(mainScssPath)) {
+            config.scssIndexPath = mainScssPath;
+            console.debug(
+              "Set config.scssIndexPath to: " + config.scssIndexPath
+            );
+          }
+        }
+      }
+    }
+
+    // TS Fork Checker
+    {
+      config.forkTsCheckerConfig = config.forkTsCheckerConfig || {};
+      // Disable eslint with config.forkTsCheckerConfig.eslint = false;
+      if (typeof config.forkTsCheckerConfig.eslint === "undefined") {
+        const eslintSearchPath = [
+          path.resolve(rootPath, ".eslintrc.js"),
+          path.resolve(rootPath, "..", ".eslintrc.js"),
+          path.resolve(rootPath, "..", "..", ".eslintrc.js"),
+        ];
+        let eslintConfig = "";
+        for (const eslintPath of eslintSearchPath) {
+          if (!eslintConfig && existsSync(eslintPath)) {
+            eslintConfig = eslintPath;
+          }
+        }
+        if (eslintConfig) {
+          console.debug(
+            "Enable ESLint because a eslint config file was found in " +
+              eslintConfig
+          );
+          // TODO set src path in config
+          config.forkTsCheckerConfig.eslint = {
+            files: config.tsSourcePath + "/**/*.{ts,tsx,js,jsx}",
+          };
+        }
+      }
+    }
 
     config.resolve = config.resolve || {
       symlinks: true,
@@ -180,7 +289,7 @@ module.exports = (config = {}) => {
     // config defaults for config templates
     switch (config.template.toLowerCase()) {
       case "octobercms":
-        config.entry = config.entry || [rootPath + "/assets/ts/main.ts"];
+        config.entry = config.entry || [config.tsIndexPath];
         config.output = config.output || {
           path: path.resolve(rootPath, "assets/js"),
           filename: "[name].bundle.js",
@@ -202,8 +311,8 @@ module.exports = (config = {}) => {
         break;
       case "shopify":
         config.entry = config.entry || [
-          rootPath + "/src/scss/main.scss",
-          rootPath + "/src/ts/main.ts",
+          config.scssIndexPath,
+          config.tsIndexPath,
         ];
         config.output = config.output || {
           path: path.resolve(rootPath, "theme/assets/"),
@@ -227,8 +336,8 @@ module.exports = (config = {}) => {
       // E.g. used for demos
       case "local":
         config.entry = config.entry || [
-          path.resolve(rootPath, "src/scss/main.scss"),
-          path.resolve(rootPath, "src/ts/main.ts"),
+          config.scssIndexPath,
+          config.tsIndexPath,
         ];
         config.output = config.output || {
           path: path.resolve(rootPath, "dist/"),
@@ -315,13 +424,19 @@ module.exports = (config = {}) => {
       config.rules.push(getStyleLoaderRule(config));
     }
 
-    // TS Checker
-    config.plugins.push(new config.ForkTsCheckerPlugin());
+    // TS Fork Checker
+    if (config.forkTsCheckerConfig) {
+      config.plugins.push(
+        new config.ForkTsCheckerPlugin(config.forkTsCheckerConfig)
+      );
+    }
 
     // Define plugin
-    config.define = config.define || {};
-    config.define.ENV = JSON.stringify(env);
-    config.plugins.push(new webpack.DefinePlugin(config.define));
+    {
+      config.define = config.define || {};
+      config.define.ENV = JSON.stringify(env);
+      config.plugins.push(new webpack.DefinePlugin(config.define));
+    }
 
     config.optimization = config.optimization || {
       minimize: config.scripts.minimize,
