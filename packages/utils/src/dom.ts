@@ -293,3 +293,20 @@ export const getUID = (prefix: string): string => {
 
   return prefix;
 };
+
+/**
+ * Detects if dom element is custom element or native / default html element
+ * @see https://stackoverflow.com/a/47737765/1465919
+ * @param element The element you want to test
+ */
+export const isCustomElement = (
+  element: HTMLUnknownElement,
+  mustBeRegistred = false
+) => {
+  // A custom element's name is required to contain a -, whereas an HTML-defined element will not. So:
+  const isCustomElement = element.tagName.includes("-");
+  if (isCustomElement && mustBeRegistred && customElements) {
+    return !!customElements.get(element.tagName.toLocaleLowerCase());
+  }
+  return isCustomElement;
+};
