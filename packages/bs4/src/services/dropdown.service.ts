@@ -52,7 +52,7 @@ export const CLASSNAME = {
 };
 
 export const SELECTOR = {
-  DATA_TOGGLE: "bs4-dropdown .dropdown-toggle",
+  DATA_TOGGLE: ".dropdown-toggle",
   FORM_CHILD: ".dropdown form",
   MENU: ".dropdown-menu",
   NAVBAR_NAV: ".navbar-nav",
