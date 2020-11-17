@@ -4,7 +4,7 @@ import { HttpServiceOptions } from "../interfaces/http-service-options";
 
 export class HttpService {
   /**
-   * Set header for each xhr and jquery request
+   * Set header for each request
    * @param name Header name
    * @param value Hander value
    */
@@ -138,7 +138,7 @@ export class HttpService {
   ) {
     if (!fetch) {
       return console.error(
-        "Your browser does not support the fetch API, use xhr instead or install a  polyfill for fetch,"
+        "Your browser does not support the fetch API, use xhr instead or install a polyfill."
       );
     }
     let body;
