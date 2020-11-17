@@ -128,68 +128,6 @@ export class HttpService {
     return headers;
   }
 
-  /**
-   * Start an XMLHttpRequest() and return a Promise
-   *
-   * @param url
-   * @param xhrTimeout Time in millisecond after the xhr request goes in timeout
-   */
-  public static xhr(
-    url: string,
-    xhrTimeout = 5000,
-    method: HttpMethod = "GET",
-    dataType?: string,
-    data?: any
-  ): Promise<string | any> {
-    return new Promise((resolve, reject) => {
-      const req = new XMLHttpRequest();
-      req.onreadystatechange = () => {
-        if (req.readyState === 4) {
-          if (req.status === 200) {
-            if (
-              typeof dataType === "string" &&
-              (dataType === "json" || dataType.includes("json"))
-            ) {
-              try {
-                const responseText = JSON.parse(req.responseText);
-                resolve(responseText);
-              } catch (error) {
-                // If json can't be parsed
-                return resolve(req.responseText);
-              }
-            }
-            return resolve(req.responseText);
-          } else {
-            return reject(req);
-          }
-        }
-      };
-
-      req.ontimeout = () => {
-        return reject(new Error("xhr: Timeout exceeded"));
-      };
-
-      req.open(method, url);
-      req.timeout = xhrTimeout;
-
-      // headers
-      for (const header of this._requestHeadersEachRequest) {
-        req.setRequestHeader(header.name, header.value);
-      }
-      if (dataType) {
-        const dataTypeHeader = this.parseDataType(dataType);
-        if (dataTypeHeader["Content-Type"]) {
-          req.setRequestHeader("Content-Type", dataTypeHeader["Content-Type"]);
-        }
-        if (dataTypeHeader.Accept) {
-          req.setRequestHeader("Accept", dataTypeHeader.Accept);
-        }
-      }
-
-      req.send(method !== "GET" && data ? JSON.stringify(data) : data);
-    });
-  }
-
   public static async fetch(
     url: string,
     method: HttpMethod = "GET",
@@ -198,72 +136,76 @@ export class HttpService {
     headers: any = {},
     options: HttpServiceOptions = {}
   ) {
-    if (fetch) {
-      let body;
-      // headers
-      for (const header of this._requestHeadersEachRequest) {
-        headers[header.name] = header.value;
-      }
-
-      if (dataType) {
-        headers = concat(false, headers, this.parseDataType(dataType));
-      }
-
-      if (!options.crossDomain && !headers["X-Requested-With"]) {
-        headers["X-Requested-With"] = "XMLHttpRequest";
-      }
-
-      const cache = options.cache ? options.cache : "default";
-
-      if (method === "GET" && data) {
-        url = url + "?" + new URLSearchParams(data);
-      } else if (data) {
-        if (dataType === "form") {
-          body = new URLSearchParams(data);
-        } else {
-          body = JSON.stringify(data);
-        }
-      }
-      // console.debug("[HttpService] url", url);
-      // console.debug("[HttpService] method", method);
-      // console.debug("[HttpService] body", body);
-      // console.debug(
-      //   "[HttpService] headers",
-      //   headers,
-      //   this._requestHeadersEachRequest
-      // );
-      return fetch(url, {
-        credentials: "same-origin",
-        cache,
-        method,
-        body,
-        headers,
-      })
-        .then((response) => {
-          if (response.status >= 400) {
-            throw response;
-          }
-          if (
-            typeof dataType === "string" &&
-            (dataType === "json" || dataType.includes("json")) &&
-            typeof response.json === "function"
-          ) {
-            try {
-              return response.json();
-            } catch (error) {
-              return response.text();
-            }
-          }
-          return response.text();
-        })
-        .catch((error) => {
-          // console.error(error);
-          throw error;
-        });
+    if (!fetch) {
+      return console.error(
+        "Your browser does not support the fetch API, use xhr instead or install a  polyfill for fetch,"
+      );
+    }
+    let body;
+    // headers
+    for (const header of this._requestHeadersEachRequest) {
+      headers[header.name] = header.value;
     }
 
-    // Fallback
-    return this.xhr(url, undefined, method, dataType, data);
+    if (dataType) {
+      headers = concat(false, headers, this.parseDataType(dataType));
+    }
+
+    if (!options.crossDomain && !headers["X-Requested-With"]) {
+      headers["X-Requested-With"] = "XMLHttpRequest";
+    }
+
+    const cache = options.cache ? options.cache : "default";
+
+    if (method === "GET" && data) {
+      const queryStr = new URLSearchParams(data).toString();
+      if (queryStr) {
+        const seperator = url.includes("?") ? "&" : "?";
+        url = url + seperator + new URLSearchParams(data).toString();
+      }
+    } else if (data) {
+      if (dataType === "form") {
+        body = new URLSearchParams(data);
+      } else {
+        body = JSON.stringify(data);
+      }
+    }
+    // console.debug("[HttpService] url", url);
+    // console.debug("[HttpService] method", method);
+    // console.debug("[HttpService] body", body);
+    // console.debug(
+    //   "[HttpService] headers",
+    //   headers,
+    //   this._requestHeadersEachRequest
+    // );
+    return fetch(url, {
+      credentials: "same-origin",
+      cache,
+      method,
+      body,
+      headers,
+    })
+      .then((response) => {
+        if (response.status >= 400) {
+          throw response;
+        }
+        if (
+          typeof dataType === "string" &&
+          (dataType === "json" || dataType.includes("json")) &&
+          typeof response.json === "function"
+        ) {
+          try {
+            return response.json();
+          } catch (error) {
+            return response.text();
+          }
+        }
+        return response.text();
+      })
+      .catch((error) => {
+        // console.error(error);
+        throw error;
+      });
   }
 
   /**

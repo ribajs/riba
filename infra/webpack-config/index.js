@@ -418,7 +418,6 @@ module.exports = (config = {}) => {
       config.copyPluginConfig = config.copyPluginConfig || {};
       config.copyPluginConfig.patterns =
         config.copyPluginConfig.patterns || getCopyPluginPatterns(config);
-      console.log("config.copyPluginConfig", config.copyPluginConfig);
       if (
         config.copyPluginConfig.patterns &&
         config.copyPluginConfig.patterns.length > 0
