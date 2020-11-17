@@ -303,7 +303,7 @@ module.exports = (config = {}) => {
 
     config.styles = config.styles || {
       build: true,
-      extract: env.production,
+      extract: true,
       resolveUrl: true,
       distPath: config.distPath,
     };
@@ -436,18 +436,13 @@ module.exports = (config = {}) => {
       config.plugins.push(new DuplicatesPlugin());
     }
 
-    if (config.styles.extract === true) {
+    if (config.styles.build === true && config.styles.extract === true) {
       config.plugins.push(
         new config.CssExtractPlugin({
           filename: "[name].css",
         })
       );
     }
-
-    // if (config.development) {
-    //   console.debug("Use HotModuleReplacementPlugin");
-    //   config.plugins.push(new webpack.HotModuleReplacementPlugin());
-    // }
 
     // console.debug('Used plugins: ', config.plugins);
 
