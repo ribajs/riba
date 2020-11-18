@@ -1,6 +1,6 @@
-import { Component } from "@ribajs/core";
+import { BasicComponent } from "@ribajs/core";
 
-export class Bs4IconComponent extends Component {
+export class Bs4IconComponent extends BasicComponent {
   public static tagName = "bs4-icon";
 
   static get observedAttributes() {
@@ -8,8 +8,6 @@ export class Bs4IconComponent extends Component {
   }
 
   protected scope: any = {};
-
-  protected autobind = false;
 
   constructor(element?: HTMLElement) {
     super(element);
