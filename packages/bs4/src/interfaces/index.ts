@@ -1,6 +1,7 @@
 export * from "./carousel-class-name";
 export * from "./carousel-direction";
 export * from "./carousel-option";
+export * from "./color-picker-options";
 export * from "./modal";
 export * from "./notification";
 export * from "./placement";

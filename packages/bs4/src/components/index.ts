@@ -2,6 +2,7 @@ export { Bs4DropdownComponent } from "./bs4-dropdown/bs4-dropdown.component";
 export { Bs4AccordionComponent } from "./bs4-accordion/bs4-accordion.component";
 export { Bs4ButtonComponent } from "./bs4-button/bs4-button.component";
 export { Bs4CarouselComponent } from "./bs4-carousel/bs4-carousel.component";
+export { Bs4ColorPickerComponent } from "./bs4-colorpicker/bs4-colorpicker.component";
 export { Bs4ContentsComponent } from "./bs4-contents/bs4-contents.component";
 export { Bs4IconComponent } from "./bs4-icon/bs4-icon.component";
 export { Bs4ScrollspyComponent } from "./bs4-scrollspy/bs4-scrollspy.component";
