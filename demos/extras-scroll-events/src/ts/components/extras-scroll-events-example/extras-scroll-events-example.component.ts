@@ -38,10 +38,9 @@ export class ExtrasScrollEventsExampleComponent extends Component {
   }
 
   protected async beforeBind() {
-    return super.beforeBind().then(() => {
-      this.consoleElement = this.el.querySelector(".console");
-      this.touchZoneElement = this.el.querySelector(".touch-zone");
-    });
+    await super.beforeBind();
+    this.consoleElement = this.el.querySelector(".console");
+    this.touchZoneElement = this.el.querySelector(".touch-zone");
   }
 
   protected template() {

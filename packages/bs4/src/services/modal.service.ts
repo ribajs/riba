@@ -7,7 +7,13 @@
  * --------------------------------------------------------------------------
  */
 
-import { Utils, TRANSITION_END } from "./utils.service";
+import {
+  getTransitionDurationFromElement,
+  emulateTransitionEnd,
+  TRANSITION_END,
+  typeCheckConfig,
+  reflow,
+} from "./utils";
 import Data from "./dom/data";
 import EventHandler from "./dom/event-handler";
 // import Manipulator from "./dom/manipulator";
@@ -200,13 +206,13 @@ export class ModalService {
     // EventHandler.off(this._dialog, EVENT_MOUSEDOWN_DISMISS); TODO
 
     if (transition) {
-      const transitionDuration = Utils.getTransitionDurationFromElement(
+      const transitionDuration = getTransitionDurationFromElement(
         this._element
       );
 
       EventHandler.one(this._element, TRANSITION_END, (/*event*/) =>
         this._hideModal(/*event*/));
-      Utils.emulateTransitionEnd(this._element, transitionDuration);
+      emulateTransitionEnd(this._element, transitionDuration);
     } else {
       this._hideModal();
     }
@@ -249,7 +255,7 @@ export class ModalService {
       ...Default,
       ...config,
     };
-    Utils.typeCheckConfig(NAME, config, DefaultType);
+    typeCheckConfig(NAME, config, DefaultType);
     return config;
   }
 
@@ -278,7 +284,7 @@ export class ModalService {
     }
 
     if (transition) {
-      Utils.reflow(this._element);
+      reflow(this._element);
     }
 
     this._element.classList.add(CLASS_NAME_SHOW);
@@ -304,12 +310,10 @@ export class ModalService {
         return;
       }
 
-      const transitionDuration = Utils.getTransitionDurationFromElement(
-        this._dialog
-      );
+      const transitionDuration = getTransitionDurationFromElement(this._dialog);
 
       EventHandler.one(this._dialog, TRANSITION_END, transitionComplete);
-      Utils.emulateTransitionEnd(this._dialog, transitionDuration);
+      emulateTransitionEnd(this._dialog, transitionDuration);
     } else {
       transitionComplete();
     }
@@ -410,7 +414,7 @@ export class ModalService {
       });
 
       if (animate) {
-        Utils.reflow(this._backdrop);
+        reflow(this._backdrop);
       }
 
       this._backdrop.classList.add(CLASS_NAME_SHOW);
@@ -420,12 +424,12 @@ export class ModalService {
         return;
       }
 
-      const backdropTransitionDuration = Utils.getTransitionDurationFromElement(
+      const backdropTransitionDuration = getTransitionDurationFromElement(
         this._backdrop
       );
 
       EventHandler.one(this._backdrop, TRANSITION_END, callback);
-      Utils.emulateTransitionEnd(this._backdrop, backdropTransitionDuration);
+      emulateTransitionEnd(this._backdrop, backdropTransitionDuration);
     } else if (!this._isShown && this._backdrop) {
       this._backdrop.classList.remove(CLASS_NAME_SHOW);
 
@@ -435,11 +439,11 @@ export class ModalService {
       };
 
       if (this._element.classList.contains(CLASS_NAME_FADE)) {
-        const backdropTransitionDuration = Utils.getTransitionDurationFromElement(
+        const backdropTransitionDuration = getTransitionDurationFromElement(
           this._backdrop
         );
         EventHandler.one(this._backdrop, TRANSITION_END, callbackRemove);
-        Utils.emulateTransitionEnd(this._backdrop, backdropTransitionDuration);
+        emulateTransitionEnd(this._backdrop, backdropTransitionDuration);
       } else {
         callbackRemove();
       }
@@ -472,7 +476,7 @@ export class ModalService {
 
       this._element.classList.add(CLASS_NAME_STATIC);
 
-      const modalTransitionDuration = Utils.getTransitionDurationFromElement(
+      const modalTransitionDuration = getTransitionDurationFromElement(
         this._dialog
       );
 
@@ -482,13 +486,13 @@ export class ModalService {
           EventHandler.one(this._element, TRANSITION_END, () => {
             this._element.style.overflowY = "";
           });
-          Utils.emulateTransitionEnd(this._element, modalTransitionDuration);
+          emulateTransitionEnd(this._element, modalTransitionDuration);
         }
       };
 
       EventHandler.off(this._element, TRANSITION_END, onTransitionEnd);
       EventHandler.one(this._element, TRANSITION_END, onTransitionEnd);
-      Utils.emulateTransitionEnd(this._element, modalTransitionDuration);
+      emulateTransitionEnd(this._element, modalTransitionDuration);
       this._element.focus();
     } else {
       this.hide();

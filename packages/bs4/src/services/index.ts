@@ -8,4 +8,4 @@ export * from "./popover.service";
 export * from "./sanitizer";
 export { ToastService } from "./toast.service";
 export { TooltipService } from "./tooltip.service";
-export * from "./utils.service";
+export * from "./utils";

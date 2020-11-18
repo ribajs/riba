@@ -1,5 +1,5 @@
 import Popper from "popper.js"; // /dist/umd/popper
-import { isElement, typeCheckConfig } from "./utils.service";
+import { isElement, typeCheckConfig } from "./utils";
 /**
  * --------------------------------------------------------------------------
  * Bootstrap (v4.1.3): dropdown.js

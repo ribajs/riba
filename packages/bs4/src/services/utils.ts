@@ -1,4 +1,5 @@
-import { Utils as RibaUtils } from "@ribajs/core";
+// @see https://github.com/twbs/bootstrap/blob/master/js/src/util/index.js
+
 export const MILLISECONDS_MULTIPLIER = 1000;
 export const TRANSITION_END = "transitionend";
 
@@ -24,7 +25,7 @@ export const getSelector = (element: HTMLElement) => {
 };
 
 export const getSelectorFromElement = (element: HTMLElement) => {
-  const selector = Utils.getSelector(element);
+  const selector = getSelector(element);
 
   if (selector) {
     return document.querySelector(selector) ? selector : null;
@@ -34,7 +35,7 @@ export const getSelectorFromElement = (element: HTMLElement) => {
 };
 
 export const getElementFromSelector = (element: HTMLElement) => {
-  const selector = Utils.getSelector(element);
+  const selector = getSelector(element);
 
   return (selector
     ? document.querySelector(selector)
@@ -95,7 +96,7 @@ export const emulateTransitionEnd = (
   element.addEventListener(TRANSITION_END, listener);
   setTimeout(() => {
     if (!called) {
-      Utils.triggerTransitionEnd(element);
+      triggerTransitionEnd(element);
     }
   }, emulatedDuration);
 };
@@ -115,8 +116,7 @@ export const typeCheckConfig = (
     if (Object.prototype.hasOwnProperty.call(configTypes, property)) {
       const expectedTypes = configTypes[property];
       const value = config[property];
-      const valueType =
-        value && Utils.isElement(value) ? "element" : Utils.toType(value);
+      const valueType = value && isElement(value) ? "element" : toType(value);
 
       if (!valueType || !new RegExp(expectedTypes).test(valueType)) {
         throw new Error(
@@ -184,7 +184,7 @@ export const findShadowRoot = (
     return null;
   }
 
-  return Utils.findShadowRoot(element.parentNode);
+  return findShadowRoot(element.parentNode);
 };
 
 export const noop = () => {
@@ -206,39 +206,3 @@ export const getjQuery = () => {
 
   return null;
 };
-
-/**
- * @deprecated Import the methods directly instead of this Utils class
- * @see https://github.com/twbs/bootstrap/blob/master/js/src/util/index.js
- */
-export class Utils extends RibaUtils {
-  public static toType = toType;
-
-  public static getSelector = getSelector;
-
-  public static getSelectorFromElement = getSelectorFromElement;
-
-  public static getElementFromSelector = getElementFromSelector;
-
-  public static getTransitionDurationFromElement = getTransitionDurationFromElement;
-
-  public static triggerTransitionEnd = triggerTransitionEnd;
-
-  public static isElement = isElement;
-
-  public static emulateTransitionEnd = emulateTransitionEnd;
-
-  public static typeCheckConfig = typeCheckConfig;
-
-  public static makeArray = makeArray;
-
-  public static isVisible = isVisible;
-
-  public static findShadowRoot = findShadowRoot;
-
-  public static noop = noop;
-
-  public static reflow = reflow;
-
-  public static getjQuery = getjQuery;
-}

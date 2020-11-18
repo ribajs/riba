@@ -18,7 +18,7 @@ import {
   emulateTransitionEnd,
   isVisible,
   triggerTransitionEnd,
-} from "./utils.service";
+} from "./utils";
 import EventHandler from "./dom/event-handler";
 import { findOne, find } from "./dom/selector-engine";
 

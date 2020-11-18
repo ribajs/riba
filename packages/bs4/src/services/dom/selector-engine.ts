@@ -6,7 +6,7 @@
  * --------------------------------------------------------------------------
  */
 
-import { Utils } from "../utils.service";
+import { makeArray } from "../utils";
 
 /**
  * ------------------------------------------------------------------------
@@ -41,7 +41,7 @@ export const findOne = (
 };
 
 export const children = (element: HTMLElement, selector: string) => {
-  const children = Utils.makeArray(element.children);
+  const children = makeArray(element.children);
   return children.filter((child) => matches(child, selector));
 };
 

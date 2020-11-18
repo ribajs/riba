@@ -14,7 +14,7 @@ import {
   isElement,
   noop,
   typeCheckConfig,
-} from "./utils.service";
+} from "./utils";
 
 import { classOf, getUID, getElementFromEvent } from "@ribajs/utils";
 

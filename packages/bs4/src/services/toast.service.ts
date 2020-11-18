@@ -7,7 +7,13 @@
  * --------------------------------------------------------------------------
  */
 
-import { Utils, TRANSITION_END } from "./utils.service";
+import {
+  reflow,
+  getTransitionDurationFromElement,
+  TRANSITION_END,
+  emulateTransitionEnd,
+  typeCheckConfig,
+} from "./utils";
 import Data from "./dom/data";
 import EventHandler from "./dom/event-handler";
 
@@ -116,15 +122,15 @@ export class ToastService {
     };
 
     this._element.classList.remove(CLASS_NAME_HIDE);
-    Utils.reflow(this._element);
+    reflow(this._element);
     this._element.classList.add(CLASS_NAME_SHOWING);
     if (this._config.animation) {
-      const transitionDuration = Utils.getTransitionDurationFromElement(
+      const transitionDuration = getTransitionDurationFromElement(
         this._element
       );
 
       EventHandler.one(this._element, TRANSITION_END, complete);
-      Utils.emulateTransitionEnd(this._element, transitionDuration);
+      emulateTransitionEnd(this._element, transitionDuration);
     } else {
       complete();
     }
@@ -151,12 +157,12 @@ export class ToastService {
 
     this._element.classList.remove(CLASS_NAME_SHOW);
     if (this._config.animation) {
-      const transitionDuration = Utils.getTransitionDurationFromElement(
+      const transitionDuration = getTransitionDurationFromElement(
         this._element
       );
 
       EventHandler.one(this._element, TRANSITION_END, complete);
-      Utils.emulateTransitionEnd(this._element, transitionDuration);
+      emulateTransitionEnd(this._element, transitionDuration);
     } else {
       complete();
     }
@@ -188,7 +194,7 @@ export class ToastService {
       ...(typeof config === "object" && config ? config : {}),
     };
 
-    Utils.typeCheckConfig(NAME, config, ToastService.DefaultType);
+    typeCheckConfig(NAME, config, ToastService.DefaultType);
 
     return config;
   }

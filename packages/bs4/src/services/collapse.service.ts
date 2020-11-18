@@ -5,7 +5,15 @@
  * --------------------------------------------------------------------------
  */
 
-import { TRANSITION_END, Utils } from "./utils.service";
+import {
+  TRANSITION_END,
+  getTransitionDurationFromElement,
+  emulateTransitionEnd,
+  reflow,
+  getElementFromSelector,
+  typeCheckConfig,
+  isElement,
+} from "./utils";
 import EventHandler from "./dom/event-handler";
 import SelectorEngine from "./dom/selector-engine";
 import Data from "./dom/data";
@@ -84,7 +92,7 @@ export class CollapseService {
 
     // for (let i = 0, len = toggleList.length; i < len; i++) {
     //   const elem = toggleList[i]
-    //   const selector = Utils.getSelectorFromElement(elem)
+    //   const selector = getSelectorFromElement(elem)
     //   const filterElement = !selector ? [] : Array.from(SelectorEngine.find(selector))
     //     .filter(foundElem => foundElem === element)
 
@@ -236,13 +244,11 @@ export class CollapseService {
     const scrollSize = `scroll${capitalizedDimension}` as
       | "scrollWidth"
       | "scrollHeight";
-    const transitionDuration = Utils.getTransitionDurationFromElement(
-      this._element
-    );
+    const transitionDuration = getTransitionDurationFromElement(this._element);
 
     EventHandler.one(this._element, TRANSITION_END, complete);
 
-    Utils.emulateTransitionEnd(this._element, transitionDuration);
+    emulateTransitionEnd(this._element, transitionDuration);
     this._element.style[dimension] = `${this._element[scrollSize]}px`;
 
     if (!this._config.parent && this._triggerArray) {
@@ -275,7 +281,7 @@ export class CollapseService {
       this._element.getBoundingClientRect()[dimension]
     }px`;
 
-    Utils.reflow(this._element);
+    reflow(this._element);
 
     this._element.classList.add(CLASS_NAME_COLLAPSING);
     this._element.classList.remove(CLASS_NAME_COLLAPSE, CLASS_NAME_SHOW);
@@ -284,7 +290,7 @@ export class CollapseService {
     if (triggerArrayLength && this._triggerArray && triggerArrayLength > 0) {
       for (let i = 0; i < triggerArrayLength; i++) {
         const trigger = this._triggerArray[i];
-        const elem = Utils.getElementFromSelector(trigger);
+        const elem = getElementFromSelector(trigger);
 
         if (elem && !elem.classList.contains(CLASS_NAME_SHOW)) {
           trigger.classList.add(CLASS_NAME_COLLAPSED);
@@ -307,12 +313,10 @@ export class CollapseService {
     };
 
     this._element.style[dimension] = "";
-    const transitionDuration = Utils.getTransitionDurationFromElement(
-      this._element
-    );
+    const transitionDuration = getTransitionDurationFromElement(this._element);
 
     EventHandler.one(this._element, TRANSITION_END, complete);
-    Utils.emulateTransitionEnd(this._element, transitionDuration);
+    emulateTransitionEnd(this._element, transitionDuration);
 
     if (!this._config.parent && this._triggerArray) {
       this._addAriaAndCollapsedClass(this._element, this._triggerArray, false);
@@ -344,7 +348,7 @@ export class CollapseService {
       ...config,
     };
     config.toggle = Boolean(config.toggle); // Coerce string values
-    Utils.typeCheckConfig(NAME, config, DefaultType);
+    typeCheckConfig(NAME, config, DefaultType);
     return config as Config;
   }
 
@@ -358,7 +362,7 @@ export class CollapseService {
   _getParent() {
     let { parent } = this._config;
 
-    if (Utils.isElement(parent)) {
+    if (isElement(parent)) {
       // it's a jQuery object
       if (
         typeof parent.jquery !== "undefined" ||
@@ -374,7 +378,7 @@ export class CollapseService {
     const selector = `[data-parent="${parent}"]`;
 
     SelectorEngine.find(selector, parent).forEach((element) => {
-      const selected = Utils.getElementFromSelector(element);
+      const selected = getElementFromSelector(element);
 
       if (selected) {
         this._addAriaAndCollapsedClass(selected, [element]);

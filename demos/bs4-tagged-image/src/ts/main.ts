@@ -5,7 +5,7 @@ import { coreModule, Riba } from "@ribajs/core";
 import { extrasModule } from "@ribajs/extras";
 import { Bs4TaggedImageDemoModule } from "./bs4-taggedimage-demo.module";
 
-declare global {
+ global {
   interface Window {
     riba: Riba;
     model: any;
