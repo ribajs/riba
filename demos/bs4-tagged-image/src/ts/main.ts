@@ -5,15 +5,8 @@ import { coreModule, Riba } from "@ribajs/core";
 import { extrasModule } from "@ribajs/extras";
 import { Bs4TaggedImageDemoModule } from "./bs4-taggedimage-demo.module";
 
- global {
-  interface Window {
-    riba: Riba;
-    model: any;
-  }
-}
-
-const riba = (window.riba = new Riba());
-const model = (window.model = window.model || {});
+const riba = new Riba();
+const model = {};
 
 // Register modules
 riba.module.regist(coreModule);
