@@ -1,8 +1,10 @@
 import { Module, DynamicModule } from "@nestjs/common";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
+import { MainWindow } from "./window/main-window";
 import { ServeStaticModule } from "@nestjs/serve-static";
 import { join } from "path";
+import { Config, Env } from "../typings";
 
 @Module({
   imports: [],
@@ -10,11 +12,11 @@ import { join } from "path";
   providers: [AppService],
 })
 export class AppModule {
-  static forRoot(/*entities = [], options?*/): DynamicModule {
+  static forRoot(env: Env, config: Config): DynamicModule {
     const imports = [];
 
     // We only use the ServeStaticModule on production because we use webpack on development for HMR in the renderer
-    if (ENV.production) {
+    if (env.production) {
       imports.push(
         ServeStaticModule.forRoot({
           rootPath: join(__dirname, "..", "renderer"),
@@ -24,7 +26,17 @@ export class AppModule {
     return {
       module: AppModule,
       imports,
-      providers: [],
+      providers: [
+        {
+          provide: "CONFIG",
+          useValue: config,
+        },
+        {
+          provide: "ENV",
+          useValue: env,
+        },
+        MainWindow,
+      ],
       exports: [],
     };
   }

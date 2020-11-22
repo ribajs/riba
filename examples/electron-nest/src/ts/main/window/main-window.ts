@@ -1,7 +1,10 @@
+import { Injectable, Inject } from "@nestjs/common";
 import { BrowserWindow, BrowserWindowConstructorOptions } from "electron";
+import { Config, Env } from "../../typings";
 
+@Injectable()
 export class MainWindow extends BrowserWindow {
-  private static instance?: MainWindow;
+  private _port = 0;
 
   private static options: BrowserWindowConstructorOptions = {
     width: 800,
@@ -13,7 +16,16 @@ export class MainWindow extends BrowserWindow {
     },
   };
 
-  private constructor() {
+  public set port(port: number) {
+    this.loadURL(`http://localhost:${port}/index.html`);
+    this._port = port;
+  }
+
+  public get port() {
+    return this._port;
+  }
+
+  constructor(@Inject("ENV") env: Env, @Inject("CONFIG") config: Config) {
     super(MainWindow.options);
 
     if (ENV.development) {
@@ -21,17 +33,6 @@ export class MainWindow extends BrowserWindow {
       this.webContents.openDevTools();
     }
 
-    MainWindow.instance = this;
-  }
-
-  public loadPort(port: number) {
-    this.loadURL(`http://localhost:${port}/index.html`);
-  }
-
-  public static getInstance() {
-    if (MainWindow.instance) {
-      return MainWindow.instance;
-    }
-    return new MainWindow();
+    this.port = config.port;
   }
 }

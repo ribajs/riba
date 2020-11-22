@@ -2,14 +2,12 @@ import { coreModule, Riba } from "@ribajs/core";
 import { ready } from "@ribajs/utils/src/dom";
 import { bs4Module } from "@ribajs/bs4";
 import { extrasModule } from "@ribajs/extras";
-
 import * as CustomComponents from "./components";
+import { Config, Env } from "../typings";
 
-import { App } from "./interfaces";
 declare global {
-  interface Window {
-    app: App;
-  }
+  const CONFIG: Config;
+  const ENV: Env;
 }
 
 const riba = new Riba();

@@ -8,53 +8,42 @@ import {
 import * as Express from "express";
 import { AppModule } from "./app.module";
 import { app as electron } from "electron";
-import { MainWindow } from "./window/main-window";
 import { webpackServer } from "./webpack-server";
 import * as getPort from "get-port";
+import { Config, Env } from "../typings";
 
-declare global {
-  const CONFIG: any;
-  const ENV: {
-    production: boolean;
-    development: boolean;
-  };
-}
-
-async function bootstrap() {
+async function bootstrap(env: Env, config: Config) {
   // This method will be called when Electron has finished
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
   await electron.whenReady();
 
-  const port = await getPort({ port: 3333 });
+  config.port = await getPort({ port: config.port });
   let express: Express.Express;
   let devServer: any;
   let prodServer: any;
 
-  if (ENV.development) {
-    devServer = await webpackServer(port);
+  if (env.development) {
+    devServer = await webpackServer(config.port);
     express = devServer.app;
   } else {
     express = Express();
   }
 
   const nest = await NestFactory.create<NestExpressApplication>(
-    AppModule.forRoot(),
+    AppModule.forRoot(env, config),
     new ExpressAdapter(express)
   );
 
   nest.enableCors();
 
   if (devServer) {
-    devServer.listen(port, "localhost");
+    devServer.listen(config.port, "localhost");
     nest.init();
   } else {
-    prodServer = express.listen(port, "localhost");
+    prodServer = express.listen(config.port, "localhost");
     nest.init();
   }
-
-  const mainWin = MainWindow.getInstance();
-  mainWin.loadPort(port);
 
   // Server side HMR
   // We just restart the app here but you can also do more
@@ -92,6 +81,12 @@ async function bootstrap() {
     }
   });
 
-  console.log(`Electron listening on http://localhost:${port}\n`);
+  console.log(`Electron listening on http://localhost:${config.port}\n`);
 }
-bootstrap();
+
+declare global {
+  const CONFIG: Config;
+  const ENV: Env;
+}
+
+bootstrap(ENV, CONFIG);
