@@ -120,6 +120,7 @@
     "@ribajs/cache": "workspace:packages/cache",
     "@ribajs/core": "workspace:packages/core",
     "@ribajs/i18n": "workspace:packages/i18n",
+    "@ribajs/router": "workspace:packages/router",
     "@ribajs/utils": "workspace:packages/utils"
   },
   "peerDependencies": {

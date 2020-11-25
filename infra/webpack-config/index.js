@@ -31,7 +31,7 @@ var getStyleLoaderRule = (config = {}) => {
   ) {
     config.styles.resolveUrl = (url /*, resourcePath*/) => {
       // Ignore assets
-      if (/\.(gif|jpe?g|tiff?|png|svg|webp|bmp)$/i.test(url)) {
+      if (/\.(gif|jpe?g|tiff?|png|svg|webp|bmp|ttf)$/i.test(url)) {
         return false;
       }
       // Enabled for all other file extensions
@@ -354,7 +354,7 @@ module.exports = (config = {}) => {
         config.copyAssets = config.copyAssets || {
           enable: true,
           images: true,
-          scss: true,
+          scss: false,
           iconset: true,
           foldername: "src",
         };

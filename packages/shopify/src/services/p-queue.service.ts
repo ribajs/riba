@@ -141,7 +141,7 @@ export class PQueue {
       return Promise.resolve();
     }
 
-    return new Promise((resolve) => {
+    return new Promise<void>((resolve) => {
       const existingResolve = this._resolveEmpty;
       this._resolveEmpty = () => {
         existingResolve();
@@ -150,7 +150,7 @@ export class PQueue {
     });
   }
 
-  public onIdle(): Promise<any> {
+  public onIdle(): Promise<void> {
     // Instantly resolve if none pending and if nothing else is queued
     if (this._pendingCount === 0 && this.queue.size === 0) {
       return Promise.resolve();

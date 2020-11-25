@@ -1,8 +1,8 @@
 import { Component, EventDispatcher } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import template from "./shopify-linklist.component.html";
+import template from "./linklist.component.html";
 
-import { Linklist, LinklistLink } from "./../../interfaces";
+import { Linklist, LinklistLink } from "../../interfaces";
 
 export interface Scope {
   // Properties

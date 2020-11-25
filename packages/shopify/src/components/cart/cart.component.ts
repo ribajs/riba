@@ -8,7 +8,7 @@ import {
 } from "../../interfaces";
 import { ShopifyCartService } from "../../services";
 import { getInputValue, hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import template from "./shopify-cart.component.html";
+import template from "./cart.component.html";
 
 export interface Scope {
   cart: ShopifyCartObject | null;

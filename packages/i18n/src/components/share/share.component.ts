@@ -64,7 +64,7 @@ export const i18nShareComponentWrapper = (
     }
 
     protected async initTranslate() {
-      return new Promise<string>((resolve) => {
+      return new Promise<string | undefined>((resolve) => {
         this.localesService.event.on("changed", async (langcode: string) => {
           return resolve(langcode);
         });
@@ -100,13 +100,13 @@ export const i18nShareComponentWrapper = (
       await super.beforeBind();
       const langcode = await this.initTranslate();
 
-      if (this.scope.textI18n) {
+      if (this.scope.textI18n && langcode) {
         this.scope.text =
           (await this.translate(langcode, this.scope.textI18n)) ||
           this.scope.text;
       }
 
-      if (this.scope.serviceLabelI18n) {
+      if (this.scope.serviceLabelI18n && langcode) {
         for (const shareItem of this.scope.shareItems) {
           shareItem.label =
             (await this.translate(

@@ -2,7 +2,7 @@ import { Component } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { ShopifyCartLineItem, ShopifyCartObject } from "../../interfaces";
 import { ShopifyCartService } from "../../services";
-import template from "./shopify-cart-item.component.html";
+import template from "./cart-item.component.html";
 
 export interface Scope {
   id: ShopifyCartLineItem["id"];
@@ -38,7 +38,7 @@ export interface Scope {
 }
 
 export class ShopifyCartItemComponent extends Component {
-  public static tagName = "shopify-cart";
+  public static tagName = "shopify-cart-item";
 
   static get observedAttributes() {
     return [
