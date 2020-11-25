@@ -1,5 +1,6 @@
 import { Component } from "@ribajs/core";
 import template from "./login-form.component.html";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 
 export interface ValidationRule {
   required: boolean;
@@ -245,7 +246,7 @@ export class ShopifyLoginFormComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el && this.el.hasChildNodes()) {
+    if (this.el && hasChildNodesTrim(this.el)) {
       return null;
     } else {
       return template;

@@ -1,4 +1,5 @@
 import { Component, HttpService } from "@ribajs/core";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./addresses-form.component.html";
 
 // TODO move to general validation component class we can extend from
@@ -177,7 +178,7 @@ export class ShopifyAddressesComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el && this.el.hasChildNodes()) {
+    if (this.el && hasChildNodesTrim(this.el)) {
       return null;
     } else {
       return template;

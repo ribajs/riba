@@ -1,6 +1,6 @@
 import { Component } from "@ribajs/core";
 import * as monaco from "monaco-editor";
-
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import pugTemplate from "./monaco-editor.component.pug";
 
 interface Scope {
@@ -268,9 +268,8 @@ export class MonacoEditorComponent extends Component {
   protected template() {
     let template: string | null = null;
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
-      this.debug("Do not template, because element has child nodes");
-      return template;
+    if (this.el && hasChildNodesTrim(this.el)) {
+      return null;
     } else {
       template = pugTemplate(this.scope);
       this.debug("Use template", template);

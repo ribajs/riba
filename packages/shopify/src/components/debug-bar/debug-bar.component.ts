@@ -1,5 +1,5 @@
 import { Component } from "@ribajs/core";
-import { elementIsVisable } from "@ribajs/utils/src/dom";
+import { elementIsVisable, hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./debug-bar.component.html";
 
 export class ShopifyDebugBarComponent extends Component {
@@ -100,7 +100,7 @@ export class ShopifyDebugBarComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el && this.el.hasChildNodes()) {
+    if (this.el && hasChildNodesTrim(this.el)) {
       return null;
     } else {
       return template;

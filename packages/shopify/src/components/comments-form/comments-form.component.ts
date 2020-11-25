@@ -1,4 +1,5 @@
 import { Component } from "@ribajs/core";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./comments-form.component.html";
 
 export interface ValidationRule {
@@ -135,7 +136,7 @@ export class ShopifyCommentsFormComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el && this.el.hasChildNodes()) {
+    if (this.el && hasChildNodesTrim(this.el)) {
       return null;
     } else {
       return template;

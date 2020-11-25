@@ -1,6 +1,6 @@
 import { Component } from "@ribajs/core";
 import template from "./contact-form.component.html";
-import { selectAll } from "@ribajs/utils/src/dom";
+import { selectAll, hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { stripHtml } from "@ribajs/utils/src/type";
 
 // TODO move to general validation component class we can extend from
@@ -112,7 +112,7 @@ export class ShopifyContactFormComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el && this.el.hasChildNodes()) {
+    if (this.el && hasChildNodesTrim(this.el)) {
       return null;
     } else {
       return template;
