@@ -75,6 +75,7 @@
   },
   "dependencies": {
     "@ribajs/core": "workspace:packages/core",
+    "@ribajs/utils": "workspace:packages/utils",
     "monaco-editor": "^0.21.2"
   },
   "bugs": {

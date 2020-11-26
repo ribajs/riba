@@ -1,26 +1,7 @@
-rv-debug-bar {
+shopify-debug-bar {
   position: fixed;
   top: 70px;
   right: 30px;
   color: $danger;
   @extend .font-silkscreen;
-}
-
-#admin-bar-iframe {
-  // display: none;
-}
-
-#preview-bar-iframe {
-  // display: none;
-  // position: fixed;
-  // bottom: 0px;
-  // left: 0px;
-  // z-index: 2147483647;
-  // width: 100%;
-  // border: none;
-  // box-shadow: rgba(0, 0, 0, 0.2) 0px -1px 3px;
-  // overflow: hidden;
-  // transform: translateY(0px);
-  // transition: transform 300ms ease 0s;
-  // height: 60px;
 }
