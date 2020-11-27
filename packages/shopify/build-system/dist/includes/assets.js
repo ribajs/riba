@@ -15,11 +15,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateOrCreate = exports.list = void 0;
 const shopify_admin_api_1 = require("shopify-admin-api");
 const gulp_util_1 = __importDefault(require("gulp-util"));
-const type_1 = require("@ribajs/utils/src/type");
+const utilities_1 = require("./utilities");
 const list = (themeConfig) => __awaiter(void 0, void 0, void 0, function* () {
     const assets = new shopify_admin_api_1.Assets(themeConfig.store, themeConfig.password);
     const themeId = Number(themeConfig.theme_id);
-    if (!type_1.isNumber(themeId)) {
+    if (!utilities_1.isNumber(themeId)) {
         throw new Error(`"theme_id" property in theme config must be a number, but is "${themeConfig.theme_id}"`);
     }
     const assetsList = yield assets.list(themeId);
@@ -30,7 +30,7 @@ const updateOrCreate = (themeConfig, extAssetsConfig) => __awaiter(void 0, void 
     const assets = new shopify_admin_api_1.Assets(themeConfig.store, themeConfig.password);
     let asset = null;
     const themeId = Number(themeConfig.theme_id);
-    if (!type_1.isNumber(themeId)) {
+    if (!utilities_1.isNumber(themeId)) {
         throw new Error(`"theme_id" property in theme config must be a number, but is "${themeConfig.theme_id}"`);
     }
     try {

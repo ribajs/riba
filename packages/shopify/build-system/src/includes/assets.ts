@@ -1,7 +1,7 @@
 import { ExternalAssetsConfig, ThemeConfig } from "../types";
 import { Assets, Models } from "shopify-admin-api";
 import gutil from "gulp-util";
-import { isNumber } from "@ribajs/utils/src/type";
+import { isNumber } from "./utilities";
 
 export const list = async (themeConfig: ThemeConfig) => {
   const assets = new Assets(themeConfig.store, themeConfig.password);

@@ -33,7 +33,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * Custom version of https://raw.githubusercontent.com/Shopify/slate/0.x/packages/slate-tools/src/tasks/deploy-utils.js
+ * Custom version of https://raw.githubusercontent.com/Shopify/slate/0.x/packages/slate-tools/src/tasks/deploy-js
  */
 const gulp_1 = __importDefault(require("gulp"));
 const fs_1 = __importDefault(require("fs"));
@@ -42,7 +42,7 @@ const open_1 = __importDefault(require("open"));
 const yaml = __importStar(require("js-yaml"));
 const themekit = __importStar(require("@shopify/themekit"));
 const config_1 = require("./includes/config");
-const utilities_1 = __importDefault(require("./includes/utilities"));
+const utilities_1 = require("./includes/utilities");
 const messages_1 = __importDefault(require("./includes/messages"));
 /**
  * simple promise factory wrapper for deploys
@@ -110,7 +110,7 @@ gulp_1.default.task("validate:id", () => __awaiter(void 0, void 0, void 0, funct
         }
         promises.push(factory);
     });
-    return utilities_1.default.promiseSeries(promises).catch((result) => {
+    return utilities_1.promiseSeries(promises).catch((result) => {
         // stop process to prevent deploy defaulting to published theme
         messages_1.default.invalidThemeId(result.themeId, result.environment);
         return process.exit(2);
@@ -130,7 +130,7 @@ gulp_1.default.task("deploy:replace", () => __awaiter(void 0, void 0, void 0, fu
         }
         promises.push(factory);
     });
-    return utilities_1.default.promiseSeries(promises).then(() => {
+    return utilities_1.promiseSeries(promises).then(() => {
         return messages_1.default.allDeploysComplete();
     });
 }));
@@ -150,7 +150,7 @@ gulp_1.default.task("open:admin", () => __awaiter(void 0, void 0, void 0, functi
         }
         promises.push(factory);
     });
-    return utilities_1.default.promiseSeries(promises);
+    return utilities_1.promiseSeries(promises);
 }));
 /**
  * Opens the Zip file in the file browser

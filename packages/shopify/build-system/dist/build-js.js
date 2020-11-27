@@ -14,7 +14,7 @@ const gulp_sourcemaps_1 = __importDefault(require("gulp-sourcemaps"));
 const gulp_include_1 = __importDefault(require("gulp-include"));
 const gulp_util_1 = __importDefault(require("gulp-util"));
 const config_1 = require("./includes/config");
-const utilities_1 = __importDefault(require("./includes/utilities"));
+const utilities_1 = require("./includes/utilities");
 const messages_1 = __importDefault(require("./includes/messages"));
 /**
  * By default slate do not minify the theme.js but we did
@@ -29,7 +29,7 @@ function processThemeJs() {
             `!${config_1.config.roots.vendorJs}`,
             `!${config_1.config.sharedCode.roots.vendorJs}`,
         ], { allowEmpty: true })
-            .pipe(gulp_plumber_1.default(utilities_1.default.errorHandler))
+            .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
             .pipe(gulp_include_1.default({
             includePaths: [config_1.config.roots.jsPath, config_1.config.sharedCode.roots.jsPath],
         }))
@@ -44,7 +44,7 @@ function processThemeJs() {
             `!${config_1.config.roots.vendorJs}`,
             `!${config_1.config.sharedCode.roots.vendorJs}`,
         ], { allowEmpty: true })
-            .pipe(gulp_plumber_1.default(utilities_1.default.errorHandler))
+            .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
             .pipe(gulp_sourcemaps_1.default.init())
             .pipe(gulp_include_1.default({
             includePaths: [config_1.config.roots.jsPath, config_1.config.sharedCode.roots.jsPath],
@@ -61,7 +61,7 @@ function processVendorJs() {
             .src([config_1.config.roots.vendorJs, config_1.config.sharedCode.roots.vendorJs], {
             allowEmpty: true,
         })
-            .pipe(gulp_plumber_1.default(utilities_1.default.errorHandler))
+            .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
             .pipe(gulp_include_1.default())
             .pipe(gulp_terser_1.default())
             .pipe(gulp_1.default.dest(config_1.config.dist.assets));
@@ -71,7 +71,7 @@ function processVendorJs() {
             .src([config_1.config.roots.vendorJs, config_1.config.sharedCode.roots.vendorJs], {
             allowEmpty: true,
         })
-            .pipe(gulp_plumber_1.default(utilities_1.default.errorHandler))
+            .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
             .pipe(gulp_sourcemaps_1.default.init())
             .pipe(gulp_include_1.default())
             .pipe(gulp_terser_1.default())

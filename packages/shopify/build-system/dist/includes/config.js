@@ -14,7 +14,7 @@ const find_root_1 = __importDefault(require("find-root"));
 const gulp_util_1 = __importDefault(require("gulp-util"));
 const js_yaml_1 = __importDefault(require("js-yaml"));
 const fs_1 = __importDefault(require("fs"));
-const utilities_1 = __importDefault(require("./utilities"));
+const utilities_1 = require("./utilities");
 const themeRoot = find_root_1.default(process.cwd());
 let sharedCodeRoot = path_1.default.resolve(__dirname, "../../../");
 /**
@@ -151,7 +151,7 @@ exports.config = {
     },
     plugins: {
         cheerio: {
-            run: utilities_1.default.processSvg,
+            run: utilities_1.processSvg,
         },
         svgmin: {
             plugins: [

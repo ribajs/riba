@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getShop = exports.getAsset = void 0;
 const shopify_admin_api_1 = require("shopify-admin-api");
-const type_1 = require("@ribajs/utils/src/type");
+const utilities_1 = require("./utilities");
 /**
  * Download files from the theme
  * @param themeConfig
@@ -20,7 +20,7 @@ const type_1 = require("@ribajs/utils/src/type");
 const getAsset = (themeConfig, key) => __awaiter(void 0, void 0, void 0, function* () {
     const assets = new shopify_admin_api_1.Assets(themeConfig.store, themeConfig.password);
     const themeId = Number(themeConfig.theme_id);
-    if (!type_1.isNumber(themeId)) {
+    if (!utilities_1.isNumber(themeId)) {
         throw new Error(`"theme_id" property in theme config must be a number, but is "${themeConfig.theme_id}"`);
     }
     const settingsData = yield assets.get(themeId, key);

@@ -9,7 +9,7 @@ import findRoot from "find-root";
 import gutil from "gulp-util";
 import yaml from "js-yaml";
 import fs from "fs";
-import utilities from "./utilities";
+import { processSvg } from "./utilities";
 
 const themeRoot = findRoot(process.cwd());
 let sharedCodeRoot = path.resolve(__dirname, "../../../");
@@ -162,7 +162,7 @@ export const config = {
 
   plugins: {
     cheerio: {
-      run: utilities.processSvg,
+      run: processSvg,
     },
     svgmin: {
       plugins: [

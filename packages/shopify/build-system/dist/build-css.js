@@ -10,7 +10,7 @@ const path_1 = __importDefault(require("path"));
 const gulp_cssimport_1 = __importDefault(require("gulp-cssimport"));
 const gulp_ext_replace_1 = __importDefault(require("gulp-ext-replace"));
 const config_1 = require("./includes/config");
-const utilities_1 = __importDefault(require("./includes/utilities"));
+const utilities_1 = require("./includes/utilities");
 const messages_1 = __importDefault(require("./includes/messages"));
 /**
  * Concatenate css via gulp-cssimport and copys to the `/dist` folder
@@ -23,7 +23,7 @@ const processCss = () => {
     messages_1.default.logProcessFiles("build:css");
     return (gulp_1.default
         .src([config_1.config.roots.css, config_1.config.sharedCode.roots.css])
-        .pipe(gulp_plumber_1.default(utilities_1.default.errorHandler))
+        .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
         .pipe(gulp_cssimport_1.default({
         includePaths: [
             path_1.default.resolve(__dirname, "../../src/ts"),

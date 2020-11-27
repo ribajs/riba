@@ -10,7 +10,7 @@ import include from "gulp-include";
 import gutil from "gulp-util";
 
 import { config } from "./includes/config";
-import utils from "./includes/utilities";
+import { errorHandler } from "./includes/utilities";
 import messages from "./includes/messages";
 
 /**
@@ -29,7 +29,7 @@ function processThemeJs() {
         ],
         { allowEmpty: true }
       )
-      .pipe(plumber(utils.errorHandler))
+      .pipe(plumber(errorHandler))
       .pipe(
         include({
           includePaths: [config.roots.jsPath, config.sharedCode.roots.jsPath],
@@ -48,7 +48,7 @@ function processThemeJs() {
         ],
         { allowEmpty: true }
       )
-      .pipe(plumber(utils.errorHandler))
+      .pipe(plumber(errorHandler))
       .pipe(sourcemaps.init())
       .pipe(
         include({
@@ -68,7 +68,7 @@ function processVendorJs() {
       .src([config.roots.vendorJs, config.sharedCode.roots.vendorJs], {
         allowEmpty: true,
       })
-      .pipe(plumber(utils.errorHandler))
+      .pipe(plumber(errorHandler))
       .pipe(include())
       .pipe(terser())
       .pipe(gulp.dest(config.dist.assets));
@@ -77,7 +77,7 @@ function processVendorJs() {
       .src([config.roots.vendorJs, config.sharedCode.roots.vendorJs], {
         allowEmpty: true,
       })
-      .pipe(plumber(utils.errorHandler))
+      .pipe(plumber(errorHandler))
       .pipe(sourcemaps.init())
       .pipe(include())
       .pipe(terser())

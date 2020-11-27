@@ -6,7 +6,7 @@ import cssimport from "gulp-cssimport";
 import extReplace from "gulp-ext-replace";
 
 import { config } from "./includes/config";
-import utils from "./includes/utilities";
+import { errorHandler } from "./includes/utilities";
 import messages from "./includes/messages";
 
 /**
@@ -22,7 +22,7 @@ const processCss = () => {
   return (
     gulp
       .src([config.roots.css, config.sharedCode.roots.css])
-      .pipe(plumber(utils.errorHandler))
+      .pipe(plumber(errorHandler))
       .pipe(
         cssimport({
           includePaths: [

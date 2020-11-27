@@ -12,13 +12,13 @@ const chokidar_1 = __importDefault(require("chokidar"));
 const gulp_size_1 = __importDefault(require("gulp-size"));
 const gulp_rename_1 = __importDefault(require("gulp-rename"));
 const config_1 = require("./includes/config");
-const utilities_1 = __importDefault(require("./includes/utilities"));
+const utilities_1 = require("./includes/utilities");
 const messages_1 = __importDefault(require("./includes/messages"));
 const processConfig = (file) => {
     messages_1.default.logProcessFiles("build:config");
     return gulp_1.default
         .src(file, { allowEmpty: true })
-        .pipe(gulp_plumber_1.default(utilities_1.default.errorHandler))
+        .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
         .pipe(gulp_size_1.default({
         showFiles: true,
         pretty: true,

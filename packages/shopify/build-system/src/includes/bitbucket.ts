@@ -1,6 +1,6 @@
 import { config, getYamlConfig } from "./config";
 import { Bitbucket } from "bitbucket";
-import utilities from "./utilities";
+import { asnycTimeout } from "./utilities";
 import { ReleaseConfig } from "../types";
 import messages from "./messages";
 import FormData from "form-data";
@@ -70,7 +70,7 @@ export const uploadFile = async (filePath: string) => {
 
   // WORKAROUND
   console.log("Wait 3 seconds...");
-  await utilities.asnycTimeout(3000);
+  await asnycTimeout(3000);
 
   return result;
 };

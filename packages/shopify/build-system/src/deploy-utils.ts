@@ -1,7 +1,7 @@
 /* eslint-disable no-sync,no-process-env */
 
 /**
- * Custom version of https://raw.githubusercontent.com/Shopify/slate/0.x/packages/slate-tools/src/tasks/deploy-utils.js
+ * Custom version of https://raw.githubusercontent.com/Shopify/slate/0.x/packages/slate-tools/src/tasks/deploy-js
  */
 
 import gulp from "gulp";
@@ -13,7 +13,7 @@ import { ThemeConfigByEnv, ThemeConfig } from "./types";
 import * as themekit from "@shopify/themekit";
 
 import { config } from "./includes/config";
-import utils from "./includes/utilities";
+import { promiseSeries } from "./includes/utilities";
 import messages from "./includes/messages";
 
 /**
@@ -95,7 +95,7 @@ gulp.task("validate:id", async () => {
     promises.push(factory);
   });
 
-  return utils.promiseSeries(promises).catch((result) => {
+  return promiseSeries(promises).catch((result) => {
     // stop process to prevent deploy defaulting to published theme
     messages.invalidThemeId(result.themeId, result.environment);
     return process.exit(2);
@@ -120,7 +120,7 @@ gulp.task("deploy:replace", async () => {
     promises.push(factory);
   });
 
-  return utils.promiseSeries(promises).then(() => {
+  return promiseSeries(promises).then(() => {
     return messages.allDeploysComplete();
   });
 });
@@ -144,7 +144,7 @@ gulp.task("open:admin", async () => {
     promises.push(factory);
   });
 
-  return utils.promiseSeries(promises);
+  return promiseSeries(promises);
 });
 
 /**

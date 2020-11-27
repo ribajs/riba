@@ -13,7 +13,11 @@ import extReplace from "gulp-ext-replace";
 import gutil from "gulp-util";
 
 import { config } from "./includes/config";
-import utils from "./includes/utilities";
+import {
+  errorHandler,
+  createEventCache,
+  processCache,
+} from "./includes/utilities";
 import messages from "./includes/messages";
 
 /**
@@ -28,7 +32,7 @@ function processIcons(files: string[]) {
   messages.logProcessFiles("build:svg");
   return gulp
     .src(files)
-    .pipe(plumber(utils.errorHandler))
+    .pipe(plumber(errorHandler))
     .pipe(svgmin(config.plugins.svgmin))
     .pipe(cheerio(config.plugins.cheerio))
     .pipe(extReplace(".liquid"))
@@ -62,7 +66,7 @@ function removeIcons(files: string[]) {
 
   return gulp
     .src(mapFiles)
-    .pipe(plumber(utils.errorHandler))
+    .pipe(plumber(errorHandler))
     .pipe(vinylPaths(del))
     .pipe(
       size({
@@ -91,7 +95,7 @@ gulp.task("build:svg", () => {
  * @static
  */
 gulp.task("watch:svg", () => {
-  const cache = utils.createEventCache();
+  const cache = createEventCache();
 
   return chokidar
     .watch([config.src.icons, config.sharedCode.src.icons], {
@@ -100,6 +104,6 @@ gulp.task("watch:svg", () => {
     .on("all", (event, path) => {
       messages.logFileEvent(event, path);
       cache.addEvent(event, path);
-      utils.processCache(cache, processIcons, removeIcons);
+      processCache(cache, processIcons, removeIcons);
     });
 });

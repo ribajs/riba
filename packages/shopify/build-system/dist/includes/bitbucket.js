@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getDownloadFileUrlAlternate = exports.getDownloadFileUrl = exports.uploadFile = exports.uploadFileExists = void 0;
 const config_1 = require("./config");
 const bitbucket_1 = require("bitbucket");
-const utilities_1 = __importDefault(require("./utilities"));
+const utilities_1 = require("./utilities");
 const messages_1 = __importDefault(require("./messages"));
 const form_data_1 = __importDefault(require("form-data"));
 const fs_1 = __importDefault(require("fs"));
@@ -69,7 +69,7 @@ const uploadFile = (filePath) => __awaiter(void 0, void 0, void 0, function* () 
     });
     // WORKAROUND
     console.log("Wait 3 seconds...");
-    yield utilities_1.default.asnycTimeout(3000);
+    yield utilities_1.asnycTimeout(3000);
     return result;
 });
 exports.uploadFile = uploadFile;

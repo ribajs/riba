@@ -9,7 +9,11 @@ import del from "del";
 import size from "gulp-size";
 
 import { config } from "./includes/config";
-import utils from "./includes/utilities";
+import {
+  errorHandler,
+  createEventCache,
+  processCache,
+} from "./includes/utilities";
 import messages from "./includes/messages";
 
 const assetsPaths = [
@@ -43,7 +47,7 @@ const processAssetsTheme = (files: string[]) => {
   messages.logProcessFiles("build:assets");
   return gulp
     .src(files, { base: config.src.root })
-    .pipe(plumber(utils.errorHandler))
+    .pipe(plumber(errorHandler))
     .pipe(
       size({
         showFiles: true,
@@ -57,7 +61,7 @@ const processAssetsSharedCode = (files: string[]) => {
   messages.logProcessFiles("build:assets:shared-code");
   return gulp
     .src(files, { base: config.sharedCode.src.root })
-    .pipe(plumber(utils.errorHandler))
+    .pipe(plumber(errorHandler))
     .pipe(
       size({
         showFiles: true,
@@ -86,7 +90,7 @@ async function removeAssets(files: string[]) {
 
   return gulp
     .src(mapFiles)
-    .pipe(plumber(utils.errorHandler))
+    .pipe(plumber(errorHandler))
     .pipe(vinylPaths(del))
     .pipe(
       size({
@@ -119,7 +123,7 @@ gulp.task("build:assets:shared-code", () => {
  * @static
  */
 gulp.task("watch:assets", () => {
-  const eventCache = utils.createEventCache();
+  const eventCache = createEventCache();
 
   return chokidar
     .watch(assetsPaths, {
@@ -129,12 +133,12 @@ gulp.task("watch:assets", () => {
     .on("all", (event, path) => {
       messages.logFileEvent(event, path);
       eventCache.addEvent(event, path);
-      utils.processCache(eventCache, processAssetsTheme, removeAssets);
+      processCache(eventCache, processAssetsTheme, removeAssets);
     });
 });
 
 gulp.task("watch:assets:shared-code", () => {
-  const eventCache = utils.createEventCache();
+  const eventCache = createEventCache();
 
   return chokidar
     .watch(assetsPathsSharedCode, {
@@ -144,6 +148,6 @@ gulp.task("watch:assets:shared-code", () => {
     .on("all", (event, path) => {
       messages.logFileEvent(event, path);
       eventCache.addEvent(event, path);
-      utils.processCache(eventCache, processAssetsSharedCode, removeAssets);
+      processCache(eventCache, processAssetsSharedCode, removeAssets);
     });
 });

@@ -22,7 +22,7 @@ const vinyl_paths_1 = __importDefault(require("vinyl-paths"));
 const del_1 = __importDefault(require("del"));
 const gulp_size_1 = __importDefault(require("gulp-size"));
 const config_1 = require("./includes/config");
-const utilities_1 = __importDefault(require("./includes/utilities"));
+const utilities_1 = require("./includes/utilities");
 const messages_1 = __importDefault(require("./includes/messages"));
 const assetsPaths = [
     config_1.config.src.assets,
@@ -53,7 +53,7 @@ const processAssetsTheme = (files) => {
     messages_1.default.logProcessFiles("build:assets");
     return gulp_1.default
         .src(files, { base: config_1.config.src.root })
-        .pipe(gulp_plumber_1.default(utilities_1.default.errorHandler))
+        .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
         .pipe(gulp_size_1.default({
         showFiles: true,
         pretty: true,
@@ -64,7 +64,7 @@ const processAssetsSharedCode = (files) => {
     messages_1.default.logProcessFiles("build:assets:shared-code");
     return gulp_1.default
         .src(files, { base: config_1.config.sharedCode.src.root })
-        .pipe(gulp_plumber_1.default(utilities_1.default.errorHandler))
+        .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
         .pipe(gulp_size_1.default({
         showFiles: true,
         pretty: true,
@@ -89,7 +89,7 @@ function removeAssets(files) {
         });
         return gulp_1.default
             .src(mapFiles)
-            .pipe(gulp_plumber_1.default(utilities_1.default.errorHandler))
+            .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
             .pipe(vinyl_paths_1.default(del_1.default))
             .pipe(gulp_size_1.default({
             showFiles: true,
@@ -118,7 +118,7 @@ gulp_1.default.task("build:assets:shared-code", () => {
  * @static
  */
 gulp_1.default.task("watch:assets", () => {
-    const eventCache = utilities_1.default.createEventCache();
+    const eventCache = utilities_1.createEventCache();
     return chokidar_1.default
         .watch(assetsPaths, {
         ignored: /(^|[/\\])\../,
@@ -127,11 +127,11 @@ gulp_1.default.task("watch:assets", () => {
         .on("all", (event, path) => {
         messages_1.default.logFileEvent(event, path);
         eventCache.addEvent(event, path);
-        utilities_1.default.processCache(eventCache, processAssetsTheme, removeAssets);
+        utilities_1.processCache(eventCache, processAssetsTheme, removeAssets);
     });
 });
 gulp_1.default.task("watch:assets:shared-code", () => {
-    const eventCache = utilities_1.default.createEventCache();
+    const eventCache = utilities_1.createEventCache();
     return chokidar_1.default
         .watch(assetsPathsSharedCode, {
         ignored: /(^|[/\\])\../,
@@ -140,7 +140,7 @@ gulp_1.default.task("watch:assets:shared-code", () => {
         .on("all", (event, path) => {
         messages_1.default.logFileEvent(event, path);
         eventCache.addEvent(event, path);
-        utilities_1.default.processCache(eventCache, processAssetsSharedCode, removeAssets);
+        utilities_1.processCache(eventCache, processAssetsSharedCode, removeAssets);
     });
 });
 //# sourceMappingURL=build-assets.js.map

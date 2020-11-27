@@ -1,6 +1,6 @@
 import { Assets, Shops, Options } from "shopify-admin-api";
 import { ThemeConfig } from "../types";
-import { isNumber } from "@ribajs/utils/src/type";
+import { isNumber } from "./utilities";
 
 /**
  * Download files from the theme
