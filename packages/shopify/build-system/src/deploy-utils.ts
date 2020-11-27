@@ -32,7 +32,7 @@ async function deploy(env: string) {
       },
       { cwd: config.dist.root }
     )
-    .catch((err: string) => {
+    .catch((err: Error) => {
       messages.logTransferFailed(err);
     });
 }

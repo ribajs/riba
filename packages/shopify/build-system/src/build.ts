@@ -2,9 +2,6 @@ import gulp from "gulp";
 import "./output";
 require("./build-assets");
 require("./build-config");
-require("./build-css");
-require("./build-js");
-require("./build-postalcodes");
 require("./build-svg");
 require("./build-utils");
 require("./build-wp");
@@ -15,11 +12,8 @@ gulp.task(
     "clean",
     gulp.parallel(
       "build:wp",
-      "build:js",
-      "build:vendor-js",
-      "build:css",
       "build:assets",
-      "build:assets:shared-code",
+      "build:assets:riba-shopify",
       "build:svg"
     )
   )
@@ -41,11 +35,8 @@ gulp.task(
     "clean",
     gulp.parallel(
       "build:wp",
-      "build:js",
-      "build:vendor-js",
-      "build:css",
       "build:assets",
-      "build:assets:shared-code",
+      "build:assets:riba-shopify",
       "build:config",
       "build:svg"
     ),

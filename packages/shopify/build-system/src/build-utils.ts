@@ -1,7 +1,3 @@
-/**
- * Custom version of https://github.com/Shopify/slate/blob/0.x/packages/slate-tools/src/tasks/build-js
- */
-
 import gulp from "gulp";
 import del from "del";
 import zip from "gulp-zip";

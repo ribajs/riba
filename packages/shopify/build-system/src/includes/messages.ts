@@ -61,7 +61,7 @@ const messages = {
     );
   },
 
-  logTransferFailed: (errMsg: string) => {
+  logTransferFailed: (errMsg: Error) => {
     gutil.log(
       "Transfer Failed:",
       gutil.colors.yellow(

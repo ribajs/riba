@@ -7,6 +7,7 @@ const gulp_1 = __importDefault(require("gulp"));
 require("./output");
 require("./build");
 require("./watchers");
+require("./lint-locales");
 /**
  * Does a full (re)build followed by a full deploy, cleaning existing files on
  * the remote server and replacing them with the full set of files pushed to
@@ -28,7 +29,7 @@ gulp_1.default.task("deploy", gulp_1.default.series("validate:id", "build", "dep
  * @static
  */
 gulp_1.default.task("deploy:manual", gulp_1.default.series("zip", "open:admin", "open:zip"));
-gulp_1.default.task("lint", gulp_1.default.series("lint:ts", "lint:js", "lint:locales"));
+gulp_1.default.task("lint", gulp_1.default.series("lint:locales"));
 /**
  * Runs translation tests on each file using @shopify/theme-lint
  *
@@ -46,9 +47,7 @@ gulp_1.default.task("test", gulp_1.default.series("lint:locales"));
  * @memberof slate-cli.tasks.watch
  * @static
  */
-gulp_1.default.task("watch", gulp_1.default.series("validate:id", "build:config", gulp_1.default.parallel("watch:src", "watch:dist")
-// "watch:dist-config"
-));
+gulp_1.default.task("watch", gulp_1.default.series("validate:id", "build:config", gulp_1.default.parallel("watch:src", "watch:dist")));
 /**
  * Default function.  Starts watchers & (optionally) syncs browsers for
  * live-reload type development testing {@link slate-cli}
@@ -59,4 +58,4 @@ gulp_1.default.task("watch", gulp_1.default.series("validate:id", "build:config"
  * @static
  */
 gulp_1.default.task("default", gulp_1.default.series("deploy", "watch"));
-//# sourceMappingURL=main.js.map
+//# sourceMappingURL=index.js.map

@@ -55,7 +55,7 @@ function removeIcons(files) {
         gulp_util_1.default.log("remove icon: " + file);
         const distFile = file
             .replace("src/icons", "dist/snippets")
-            .replace(config_1.config.sharedCode.root, config_1.config.dist.root);
+            .replace(config_1.config.ribaShopify.root, config_1.config.dist.root);
         const snippetFile = distFile.replace(".svg", ".liquid");
         return snippetFile;
     });
@@ -76,7 +76,7 @@ function removeIcons(files) {
  * @static
  */
 gulp_1.default.task("build:svg", () => {
-    return processIcons([config_1.config.src.icons, config_1.config.sharedCode.src.icons]);
+    return processIcons([config_1.config.src.icons, config_1.config.ribaShopify.src.icons]);
 });
 /**
  * Watches source svg icons for changes...
@@ -88,7 +88,7 @@ gulp_1.default.task("build:svg", () => {
 gulp_1.default.task("watch:svg", () => {
     const cache = utilities_1.createEventCache();
     return chokidar_1.default
-        .watch([config_1.config.src.icons, config_1.config.sharedCode.src.icons], {
+        .watch([config_1.config.src.icons, config_1.config.ribaShopify.src.icons], {
         ignoreInitial: true,
     })
         .on("all", (event, path) => {

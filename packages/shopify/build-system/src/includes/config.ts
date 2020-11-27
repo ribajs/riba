@@ -4,7 +4,7 @@
 
 import path from "path";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const logger = require("debug")("slate-tools");
+const logger = require("debug")("@ribajs/shopify");
 import findRoot from "find-root";
 import gutil from "gulp-util";
 import yaml from "js-yaml";
@@ -12,7 +12,7 @@ import fs from "fs";
 import { processSvg } from "./utilities";
 
 const themeRoot = findRoot(process.cwd());
-let sharedCodeRoot = path.resolve(__dirname, "../../../");
+let ribaShopifyRoot = path.resolve(__dirname, "../../../");
 
 /**
  * You can pass a custom config filename with `--config=config.deploy.yml` eg with npm run deploy:prod -- --config=config.deploy.yml
@@ -40,11 +40,13 @@ try {
 if (
   pkg &&
   pkg.resolutions &&
-  pkg.resolutions["shared-code"] &&
-  pkg.resolutions["shared-code"].includes("portal:")
+  pkg.resolutions["@ribajs/shopify"] &&
+  pkg.resolutions["@ribajs/shopify"].includes("portal:")
 ) {
-  const sharedCodeRPath = pkg.resolutions["shared-code"].split("portal:")[1];
-  sharedCodeRoot = path.resolve(themeRoot, sharedCodeRPath);
+  const ribaShopifyRPath = pkg.resolutions["@ribajs/shopify"].split(
+    "portal:"
+  )[1];
+  ribaShopifyRoot = path.resolve(themeRoot, ribaShopifyRPath);
 }
 
 /**
@@ -65,11 +67,10 @@ if (
  * @summary Configuring slate-cli
  *  @prop {String} environment - development | staging | production
  *  @prop {String} tkconfig - path to themekit config file
- *  @prop {String} scssLintConfig - path to scss-lint config file
  *  @prop {String} deployLog - path to deploy log file
  *  @prop {String} src - globs (multi-filename matching patterns) for various source files
  *  @prop {Object} dist - paths to relevant folder locations in the distributable directory
- *  @prop {Object} roots - array of "root" (entry point) JS & CSS files
+ *  @prop {Object} roots - array of "root" (entry point) JS
  *  @prop {Object} plugins - configuration objects passed to various plugins used in the task interface
  */
 export const config = {
@@ -89,14 +90,7 @@ export const config = {
 
   src: {
     root: "src/",
-    jsPath: "src/scripts/",
-    js: "src/scripts/**/*.{js,js.liquid}",
-    tsPath: "src/ts/",
-    vendorJs: "src/scripts/vendor/*.js",
     json: "src/**/*.json",
-    css: "src/styles/**/*.{css,scss,scss.liquid}",
-    cssLint: "src/styles/**/*.{css,scss}",
-    vendorCss: "src/styles/vendor/*.{css,scss}",
     assets: "src/assets/**/*",
     icons: "src/icons/**/*.svg",
     templates: "src/templates/**/*",
@@ -105,58 +99,31 @@ export const config = {
     locales: "src/locales/*",
     config: "src/config/*",
     layout: "src/layout/*",
-
-    // TypeScript
-    ts: "ts/",
-    mainTs: "src/ts/main.ts",
-    checkoutTs: "src/ts/checkout.ts",
   },
 
   dist: {
-    root: "dist/",
-    assets: "dist/assets/",
-    snippets: "dist/snippets/",
-    sections: "dist/sections/",
-    layout: "dist/layout/",
-    templates: "dist/templates/",
-    locales: "dist/locales/",
+    root: "theme/",
+    assets: "theme/assets/",
+    snippets: "theme/snippets/",
+    sections: "theme/sections/",
+    layout: "theme/layout/",
+    templates: "theme/templates/",
+    locales: "theme/locales/",
   },
 
-  roots: {
-    js: "src/scripts/*.{js,js.liquid}",
-    jsPath: path.resolve(themeRoot, "src/scripts/"),
-    vendorJs: "src/scripts/vendor.js",
-    ts: "src/ts/**/*.ts",
-    css: "src/styles/*.{css,scss}",
-  },
-
-  sharedCode: {
-    root: sharedCodeRoot,
+  ribaShopify: {
+    root: ribaShopifyRoot,
     src: {
-      root: path.resolve(sharedCodeRoot, "src/"),
-      js: path.resolve(sharedCodeRoot, "src/js/") + "/**/*.{js,js.liquid}",
-      vendorJs: path.resolve(sharedCodeRoot, "src/js/") + "/vendor/*.js",
-      ts: path.resolve(sharedCodeRoot, "src/ts/") + "/**/*.ts",
-      json: path.resolve(sharedCodeRoot, "src/") + "/**/*.json",
-      css:
-        path.resolve(sharedCodeRoot, "src/styles/") +
-        "/**/*.{css,scss,scss.liquid}",
-      cssLint: path.resolve(sharedCodeRoot, "src/styles/") + "/**/*.{css,scss}",
-      assets: path.resolve(sharedCodeRoot, "src/assets/") + "/**/*",
-      icons: path.resolve(sharedCodeRoot, "src/icons/") + "/**/*.svg",
-      templates: path.resolve(sharedCodeRoot, "src/templates/") + "/**/*",
-      snippets: path.resolve(sharedCodeRoot, "src/snippets/") + "/*",
-      sections: path.resolve(sharedCodeRoot, "src/sections/") + "/*",
-      locales: path.resolve(sharedCodeRoot, "src/locales/") + "/*",
-      config: path.resolve(sharedCodeRoot, "src/config/") + "/*",
-      layout: path.resolve(sharedCodeRoot, "src/layout/") + "/*",
-    },
-    roots: {
-      js: path.resolve(sharedCodeRoot, "src/js/") + "/*.{js,js.liquid}",
-      jsPath: path.resolve(sharedCodeRoot, "src/js/"),
-      vendorJs: path.resolve(sharedCodeRoot, "src/js/vendor.js"),
-      css: path.resolve(sharedCodeRoot, "src/styles/") + "/*.{css,scss}",
-      cssPath: path.resolve(sharedCodeRoot, "src/styles/"),
+      root: path.resolve(ribaShopifyRoot, "src/"),
+      json: path.resolve(ribaShopifyRoot, "src/") + "/**/*.json",
+      assets: path.resolve(ribaShopifyRoot, "src/assets/") + "/**/*",
+      icons: path.resolve(ribaShopifyRoot, "src/icons/") + "/**/*.svg",
+      templates: path.resolve(ribaShopifyRoot, "src/templates/") + "/**/*",
+      snippets: path.resolve(ribaShopifyRoot, "src/snippets/") + "/*",
+      sections: path.resolve(ribaShopifyRoot, "src/sections/") + "/*",
+      locales: path.resolve(ribaShopifyRoot, "src/locales/") + "/*",
+      config: path.resolve(ribaShopifyRoot, "src/config/") + "/*",
+      layout: path.resolve(ribaShopifyRoot, "src/layout/") + "/*",
     },
   },
 
@@ -175,7 +142,7 @@ export const config = {
 };
 
 /**
- * Try to get the config.deploy.yml from root of the shopify theme, otherwise try to get this file from the root of shared-code
+ * Try to get the config.deploy.yml from root of the shopify theme, otherwise try to get this file from the root of riba-shopify
  * @param configName
  */
 export const getYamlConfig = (configName: string) => {
@@ -190,7 +157,7 @@ export const getYamlConfig = (configName: string) => {
     console.warn(error);
     const shopifyConfigs = yaml.safeLoad(
       // eslint-disable-next-line @typescript-eslint/no-var-requires
-      require(path.resolve(config.sharedCode.root, configName))
+      require(path.resolve(config.ribaShopify.root, configName))
     );
     return shopifyConfigs;
   }

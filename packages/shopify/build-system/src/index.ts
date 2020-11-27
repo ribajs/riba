@@ -2,6 +2,7 @@ import gulp from "gulp";
 import "./output";
 import "./build";
 require("./watchers");
+require("./lint-locales");
 
 /**
  * Does a full (re)build followed by a full deploy, cleaning existing files on
@@ -26,7 +27,7 @@ gulp.task("deploy", gulp.series("validate:id", "build", "deploy:replace"));
  */
 gulp.task("deploy:manual", gulp.series("zip", "open:admin", "open:zip"));
 
-gulp.task("lint", gulp.series("lint:ts", "lint:js", "lint:locales"));
+gulp.task("lint", gulp.series("lint:locales"));
 
 /**
  * Runs translation tests on each file using @shopify/theme-lint
@@ -52,7 +53,6 @@ gulp.task(
     "validate:id",
     "build:config",
     gulp.parallel("watch:src", "watch:dist")
-    // "watch:dist-config"
   )
 );
 

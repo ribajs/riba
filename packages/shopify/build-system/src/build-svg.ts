@@ -59,7 +59,7 @@ function removeIcons(files: string[]) {
     gutil.log("remove icon: " + file);
     const distFile = file
       .replace("src/icons", "dist/snippets")
-      .replace(config.sharedCode.root, config.dist.root);
+      .replace(config.ribaShopify.root, config.dist.root);
     const snippetFile = distFile.replace(".svg", ".liquid");
     return snippetFile;
   });
@@ -84,7 +84,7 @@ function removeIcons(files: string[]) {
  * @static
  */
 gulp.task("build:svg", () => {
-  return processIcons([config.src.icons, config.sharedCode.src.icons]);
+  return processIcons([config.src.icons, config.ribaShopify.src.icons]);
 });
 
 /**
@@ -98,7 +98,7 @@ gulp.task("watch:svg", () => {
   const cache = createEventCache();
 
   return chokidar
-    .watch([config.src.icons, config.sharedCode.src.icons], {
+    .watch([config.src.icons, config.ribaShopify.src.icons], {
       ignoreInitial: true,
     })
     .on("all", (event, path) => {

@@ -33,14 +33,14 @@ const assetsPaths = [
     config_1.config.src.config,
     config_1.config.src.layout,
 ];
-const assetsPathsSharedCode = [
-    config_1.config.sharedCode.src.assets,
-    config_1.config.sharedCode.src.templates,
-    config_1.config.sharedCode.src.sections,
-    config_1.config.sharedCode.src.snippets,
-    config_1.config.sharedCode.src.locales,
-    config_1.config.sharedCode.src.config,
-    config_1.config.sharedCode.src.layout,
+const assetsPathsribaShopify = [
+    config_1.config.ribaShopify.src.assets,
+    config_1.config.ribaShopify.src.templates,
+    config_1.config.ribaShopify.src.sections,
+    config_1.config.ribaShopify.src.snippets,
+    config_1.config.ribaShopify.src.locales,
+    config_1.config.ribaShopify.src.config,
+    config_1.config.ribaShopify.src.layout,
 ];
 /**
  * Copies assets to the `/dist` directory
@@ -60,10 +60,10 @@ const processAssetsTheme = (files) => {
     }))
         .pipe(gulp_1.default.dest(config_1.config.dist.root));
 };
-const processAssetsSharedCode = (files) => {
-    messages_1.default.logProcessFiles("build:assets:shared-code");
+const processAssetsribaShopify = (files) => {
+    messages_1.default.logProcessFiles("build:assets:riba-shopify");
     return gulp_1.default
-        .src(files, { base: config_1.config.sharedCode.src.root })
+        .src(files, { base: config_1.config.ribaShopify.src.root })
         .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
         .pipe(gulp_size_1.default({
         showFiles: true,
@@ -84,7 +84,7 @@ function removeAssets(files) {
         const mapFiles = files.map((file) => {
             const distFile = file
                 .replace(config_1.config.src.root, config_1.config.dist.root)
-                .replace(config_1.config.sharedCode.src.root, config_1.config.dist.root);
+                .replace(config_1.config.ribaShopify.src.root, config_1.config.dist.root);
             return distFile;
         });
         return gulp_1.default
@@ -107,8 +107,8 @@ function removeAssets(files) {
 gulp_1.default.task("build:assets", () => {
     return processAssetsTheme(assetsPaths);
 });
-gulp_1.default.task("build:assets:shared-code", () => {
-    return processAssetsSharedCode(assetsPathsSharedCode);
+gulp_1.default.task("build:assets:riba-shopify", () => {
+    return processAssetsribaShopify(assetsPathsribaShopify);
 });
 /**
  * Watches assets in the `/src` directory
@@ -130,17 +130,17 @@ gulp_1.default.task("watch:assets", () => {
         utilities_1.processCache(eventCache, processAssetsTheme, removeAssets);
     });
 });
-gulp_1.default.task("watch:assets:shared-code", () => {
+gulp_1.default.task("watch:assets:riba-shopify", () => {
     const eventCache = utilities_1.createEventCache();
     return chokidar_1.default
-        .watch(assetsPathsSharedCode, {
+        .watch(assetsPathsribaShopify, {
         ignored: /(^|[/\\])\../,
         ignoreInitial: true,
     })
         .on("all", (event, path) => {
         messages_1.default.logFileEvent(event, path);
         eventCache.addEvent(event, path);
-        utilities_1.processCache(eventCache, processAssetsSharedCode, removeAssets);
+        utilities_1.processCache(eventCache, processAssetsribaShopify, removeAssets);
     });
 });
 //# sourceMappingURL=build-assets.js.map

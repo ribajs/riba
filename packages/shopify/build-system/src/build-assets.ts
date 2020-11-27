@@ -26,14 +26,14 @@ const assetsPaths = [
   config.src.layout,
 ];
 
-const assetsPathsSharedCode = [
-  config.sharedCode.src.assets,
-  config.sharedCode.src.templates,
-  config.sharedCode.src.sections,
-  config.sharedCode.src.snippets,
-  config.sharedCode.src.locales,
-  config.sharedCode.src.config,
-  config.sharedCode.src.layout,
+const assetsPathsribaShopify = [
+  config.ribaShopify.src.assets,
+  config.ribaShopify.src.templates,
+  config.ribaShopify.src.sections,
+  config.ribaShopify.src.snippets,
+  config.ribaShopify.src.locales,
+  config.ribaShopify.src.config,
+  config.ribaShopify.src.layout,
 ];
 
 /**
@@ -57,10 +57,10 @@ const processAssetsTheme = (files: string[]) => {
     .pipe(gulp.dest(config.dist.root));
 };
 
-const processAssetsSharedCode = (files: string[]) => {
-  messages.logProcessFiles("build:assets:shared-code");
+const processAssetsribaShopify = (files: string[]) => {
+  messages.logProcessFiles("build:assets:riba-shopify");
   return gulp
-    .src(files, { base: config.sharedCode.src.root })
+    .src(files, { base: config.ribaShopify.src.root })
     .pipe(plumber(errorHandler))
     .pipe(
       size({
@@ -84,7 +84,7 @@ async function removeAssets(files: string[]) {
   const mapFiles = files.map((file) => {
     const distFile = file
       .replace(config.src.root, config.dist.root)
-      .replace(config.sharedCode.src.root, config.dist.root);
+      .replace(config.ribaShopify.src.root, config.dist.root);
     return distFile;
   });
 
@@ -111,8 +111,8 @@ gulp.task("build:assets", () => {
   return processAssetsTheme(assetsPaths);
 });
 
-gulp.task("build:assets:shared-code", () => {
-  return processAssetsSharedCode(assetsPathsSharedCode);
+gulp.task("build:assets:riba-shopify", () => {
+  return processAssetsribaShopify(assetsPathsribaShopify);
 });
 
 /**
@@ -137,17 +137,17 @@ gulp.task("watch:assets", () => {
     });
 });
 
-gulp.task("watch:assets:shared-code", () => {
+gulp.task("watch:assets:riba-shopify", () => {
   const eventCache = createEventCache();
 
   return chokidar
-    .watch(assetsPathsSharedCode, {
+    .watch(assetsPathsribaShopify, {
       ignored: /(^|[/\\])\../,
       ignoreInitial: true,
     })
     .on("all", (event, path) => {
       messages.logFileEvent(event, path);
       eventCache.addEvent(event, path);
-      processCache(eventCache, processAssetsSharedCode, removeAssets);
+      processCache(eventCache, processAssetsribaShopify, removeAssets);
     });
 });

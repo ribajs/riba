@@ -45,8 +45,6 @@ exports.asyncSleep = asyncSleep;
 /**
  * Handles the output for any errors that might have been captured
  * during the build and zip Gulp tasks.
- *
- * @memberof slate-cli.utilities
  */
 const outputErrors = () => {
     if (!errors.length) {
@@ -125,9 +123,8 @@ exports.processSvg = processSvg;
  * Factory for creating an event cache - used with a short debounce to batch any
  * file changes that occur in rapid succession during Watch tasks.
  *
- * @memberof slate-cli.utilities
- * @param {Object} options
- * @returns {eventCache} see type definition for more robust documentation
+ * @param options
+ * @returns See type definition for more robust documentation
  */
 const createEventCache = (options = {}) => {
     lodash_1.default.defaults((options = options || {}), {
@@ -150,8 +147,8 @@ const createEventCache = (options = {}) => {
         /**
          * Pushes events to upload & remove caches for later batch deployment
          *
-         * @param event - chokidar event type - only cares about `(add|change|unlink)`
-         * @param path - relative path to file passed via event
+         * @param event Chokidar event type - only cares about `(add|change|unlink)`
+         * @param path Relative path to file passed via event
          */
         addEvent: function (event, path) {
             lodash_1.default.each(options.changeEvents, (eventType) => {
