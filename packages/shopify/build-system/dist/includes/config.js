@@ -14,6 +14,7 @@ const find_root_1 = __importDefault(require("find-root"));
 const gulp_util_1 = __importDefault(require("gulp-util"));
 const js_yaml_1 = __importDefault(require("js-yaml"));
 const fs_1 = __importDefault(require("fs"));
+const utilities_1 = __importDefault(require("./utilities"));
 const themeRoot = find_root_1.default(process.cwd());
 let sharedCodeRoot = path_1.default.resolve(__dirname, "../../../");
 /**
@@ -150,7 +151,7 @@ exports.config = {
     },
     plugins: {
         cheerio: {
-            run: require("./utilities.js").processSvg,
+            run: utilities_1.default.processSvg,
         },
         svgmin: {
             plugins: [
@@ -165,7 +166,7 @@ exports.config = {
  * Try to get the config.deploy.yml from root of the shopify theme, otherwise try to get this file from the root of shared-code
  * @param configName
  */
-exports.getYamlConfig = (configName) => {
+const getYamlConfig = (configName) => {
     try {
         const data = fs_1.default.readFileSync(path_1.default.resolve(exports.config.themeRoot, configName), "utf8");
         const shopifyConfigs = js_yaml_1.default.safeLoad(data);
@@ -173,16 +174,21 @@ exports.getYamlConfig = (configName) => {
     }
     catch (error) {
         console.warn(error);
-        const shopifyConfigs = js_yaml_1.default.safeLoad(require(path_1.default.resolve(exports.config.sharedCode.root, configName)));
+        const shopifyConfigs = js_yaml_1.default.safeLoad(
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        require(path_1.default.resolve(exports.config.sharedCode.root, configName)));
         return shopifyConfigs;
     }
 };
-exports.getReleaseZipFilename = (envKey) => {
+exports.getYamlConfig = getYamlConfig;
+const getReleaseZipFilename = (envKey) => {
     return `${envKey}_${exports.config.packageJson.name}_${exports.config.packageJson.version}.zip`;
 };
-exports.getReleaseName = () => {
+exports.getReleaseZipFilename = getReleaseZipFilename;
+const getReleaseName = () => {
     const version = exports.config.packageJson.version;
     const name = exports.config.packageJson.name;
     return `${name} | ${version}`;
 };
+exports.getReleaseName = getReleaseName;
 //# sourceMappingURL=config.js.map

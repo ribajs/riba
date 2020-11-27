@@ -8,6 +8,7 @@ import { debug as Debug } from "debug";
 
 import { config, getYamlConfig } from "./includes/config";
 import messages from "./includes/messages";
+import { ThemeConfigByEnv, ThemeConfig } from "./types";
 
 const debug = Debug("slate-tools:deploy");
 const browserSync = createBrowserSync();
@@ -29,11 +30,11 @@ gulp.task("deploy:sync-init", () => {
   }
 
   const devScript = fs.readFileSync(devScriptPath);
-  const tkConfig: any = getYamlConfig(config.tkConfig);
+  const tkConfig = getYamlConfig(config.tkConfig) as ThemeConfigByEnv;
   const queryStringComponents: string[] = [];
   const environment = config.environment.split(/\s*,\s*|\s+/)[0];
 
-  const envObj = tkConfig[environment];
+  const envObj: ThemeConfig = tkConfig[environment];
   let proxyTarget = `https://${envObj.store}`;
 
   // break theme preview cache by always setting a preview parameter

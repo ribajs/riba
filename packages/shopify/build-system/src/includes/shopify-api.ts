@@ -1,5 +1,6 @@
 import { Assets, Shops, Options } from "shopify-admin-api";
 import { ThemeConfig } from "../types";
+import { isNumber } from "@ribajs/utils/src/type";
 
 /**
  * Download files from the theme
@@ -8,7 +9,13 @@ import { ThemeConfig } from "../types";
  */
 export const getAsset = async (themeConfig: ThemeConfig, key: string) => {
   const assets = new Assets(themeConfig.store, themeConfig.password);
-  const settingsData = await assets.get(themeConfig.theme_id, key);
+  const themeId = Number(themeConfig.theme_id);
+  if (!isNumber(themeId)) {
+    throw new Error(
+      `"theme_id" property in theme config must be a number, but is "${themeConfig.theme_id}"`
+    );
+  }
+  const settingsData = await assets.get(themeId, key);
   return settingsData;
 };
 

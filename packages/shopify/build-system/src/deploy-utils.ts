@@ -5,14 +5,12 @@
  */
 
 import gulp from "gulp";
-// import BPromise from "bluebird";
 import fs from "fs";
 import gutil from "gulp-util";
 import open from "open";
-// const open = BPromise.promisify(_open);
 import * as yaml from "js-yaml";
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const themekit = require("@shopify/themekit"); // TODO convert to import
+import { ThemeConfigByEnv, ThemeConfig } from "./types";
+import * as themekit from "@shopify/themekit";
 
 import { config } from "./includes/config";
 import utils from "./includes/utilities";
@@ -20,9 +18,7 @@ import messages from "./includes/messages";
 
 /**
  * simple promise factory wrapper for deploys
- * @param env - the environment to deploy to
- * @returns {Promise}
- * @private
+ * @param env The environment to deploy to
  */
 async function deploy(env: string) {
   gutil.log(`themekit cwd to: ${config.dist.root}`);
@@ -43,9 +39,7 @@ async function deploy(env: string) {
 
 /**
  * Validate theme_id used for the environment
- * @param {Object} - settings of theme_id and environment
- * @returns {Promise}
- * @private
+ * @param settings Settings of theme_id and environment
  */
 function validateId(settings: { themeId: any; environment: any }) {
   return new Promise<void>((resolve, reject) => {
@@ -66,9 +60,6 @@ function validateId(settings: { themeId: any; environment: any }) {
 
 /**
  * Validate the config.yml theme_id is an integer or "live"
- * @function validate:id
- * @memberof slate-cli.tasks.watch, slate-cli.tasks.deploy
- * @private
  */
 gulp.task("validate:id", async () => {
   let file;
@@ -85,8 +76,8 @@ gulp.task("validate:id", async () => {
     return process.exit(2);
   }
 
-  const tkConfig = yaml.safeLoad(file);
-  let envObj;
+  const tkConfig = yaml.safeLoad(file) as ThemeConfigByEnv;
+  let envObj: ThemeConfig;
 
   const environments = config.environment.split(/\s*,\s*|\s+/);
   const promises: (() => Promise<unknown>)[] = [];
@@ -113,10 +104,6 @@ gulp.task("validate:id", async () => {
 
 /**
  * Replace your existing theme using ThemeKit.
- *
- * @function deploy:replace
- * @memberof slate-cli.tasks.deploy
- * @static
  */
 gulp.task("deploy:replace", async () => {
   gutil.log(`environments ${config.environment}`);
@@ -140,15 +127,11 @@ gulp.task("deploy:replace", async () => {
 
 /**
  * Opens the Store in the default browser (for manual upgrade/deployment)
- *
- * @function open:admin
- * @memberof slate-cli.tasks.deploy
- * @static
  */
 gulp.task("open:admin", async () => {
   const file = fs.readFileSync(config.tkConfig, "utf8");
-  const tkConfig = yaml.safeLoad(file);
-  let envObj;
+  const tkConfig = yaml.safeLoad(file) as ThemeConfigByEnv;
+  let envObj: ThemeConfig;
 
   const environments = config.environment.split(/\s*,\s*|\s+/);
   const promises: (() => Promise<unknown>)[] = [];
@@ -166,10 +149,6 @@ gulp.task("open:admin", async () => {
 
 /**
  * Opens the Zip file in the file browser
- *
- * @function open:zip
- * @memberof slate-cli.tasks.deploy
- * @static
  */
 gulp.task("open:zip", () => {
   return open("upload");

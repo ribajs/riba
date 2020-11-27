@@ -9,6 +9,7 @@ import findRoot from "find-root";
 import gutil from "gulp-util";
 import yaml from "js-yaml";
 import fs from "fs";
+import utilities from "./utilities";
 
 const themeRoot = findRoot(process.cwd());
 let sharedCodeRoot = path.resolve(__dirname, "../../../");
@@ -161,7 +162,7 @@ export const config = {
 
   plugins: {
     cheerio: {
-      run: require("./utilities.js").processSvg,
+      run: utilities.processSvg,
     },
     svgmin: {
       plugins: [
@@ -188,6 +189,7 @@ export const getYamlConfig = (configName: string) => {
   } catch (error) {
     console.warn(error);
     const shopifyConfigs = yaml.safeLoad(
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
       require(path.resolve(config.sharedCode.root, configName))
     );
     return shopifyConfigs;

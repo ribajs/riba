@@ -1,5 +1,24 @@
 "use strict";
 /* eslint-disable no-sync,no-process-env */
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -17,21 +36,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Custom version of https://raw.githubusercontent.com/Shopify/slate/0.x/packages/slate-tools/src/tasks/deploy-utils.js
  */
 const gulp_1 = __importDefault(require("gulp"));
-// import BPromise from "bluebird";
 const fs_1 = __importDefault(require("fs"));
 const gulp_util_1 = __importDefault(require("gulp-util"));
 const open_1 = __importDefault(require("open"));
-// const open = BPromise.promisify(_open);
-const yaml = require("js-yaml");
-const themekit = require("@shopify/themekit");
+const yaml = __importStar(require("js-yaml"));
+const themekit = __importStar(require("@shopify/themekit"));
 const config_1 = require("./includes/config");
 const utilities_1 = __importDefault(require("./includes/utilities"));
 const messages_1 = __importDefault(require("./includes/messages"));
 /**
  * simple promise factory wrapper for deploys
- * @param env - the environment to deploy to
- * @returns {Promise}
- * @private
+ * @param env The environment to deploy to
  */
 function deploy(env) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -48,9 +63,7 @@ function deploy(env) {
 }
 /**
  * Validate theme_id used for the environment
- * @param {Object} - settings of theme_id and environment
- * @returns {Promise}
- * @private
+ * @param settings Settings of theme_id and environment
  */
 function validateId(settings) {
     return new Promise((resolve, reject) => {
@@ -69,9 +82,6 @@ function validateId(settings) {
 }
 /**
  * Validate the config.yml theme_id is an integer or "live"
- * @function validate:id
- * @memberof slate-cli.tasks.watch, slate-cli.tasks.deploy
- * @private
  */
 gulp_1.default.task("validate:id", () => __awaiter(void 0, void 0, void 0, function* () {
     let file;
@@ -108,10 +118,6 @@ gulp_1.default.task("validate:id", () => __awaiter(void 0, void 0, void 0, funct
 }));
 /**
  * Replace your existing theme using ThemeKit.
- *
- * @function deploy:replace
- * @memberof slate-cli.tasks.deploy
- * @static
  */
 gulp_1.default.task("deploy:replace", () => __awaiter(void 0, void 0, void 0, function* () {
     gulp_util_1.default.log(`environments ${config_1.config.environment}`);
@@ -130,10 +136,6 @@ gulp_1.default.task("deploy:replace", () => __awaiter(void 0, void 0, void 0, fu
 }));
 /**
  * Opens the Store in the default browser (for manual upgrade/deployment)
- *
- * @function open:admin
- * @memberof slate-cli.tasks.deploy
- * @static
  */
 gulp_1.default.task("open:admin", () => __awaiter(void 0, void 0, void 0, function* () {
     const file = fs_1.default.readFileSync(config_1.config.tkConfig, "utf8");
@@ -152,10 +154,6 @@ gulp_1.default.task("open:admin", () => __awaiter(void 0, void 0, void 0, functi
 }));
 /**
  * Opens the Zip file in the file browser
- *
- * @function open:zip
- * @memberof slate-cli.tasks.deploy
- * @static
  */
 gulp_1.default.task("open:zip", () => {
     return open_1.default("upload");

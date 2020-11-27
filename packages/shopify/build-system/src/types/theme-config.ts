@@ -1,6 +1,6 @@
 export interface ThemeConfig {
   password: string;
-  theme_id: number;
+  theme_id: number | string;
   store: string;
   timeout?: string;
   ignore_files?: string[];
