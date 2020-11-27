@@ -10,8 +10,9 @@ import fs from "fs";
 import gutil from "gulp-util";
 import open from "open";
 // const open = BPromise.promisify(_open);
-const yaml = require("js-yaml");
-const themekit = require("@shopify/themekit");
+import * as yaml from "js-yaml";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const themekit = require("@shopify/themekit"); // TODO convert to import
 
 import { config } from "./includes/config";
 import utils from "./includes/utilities";
@@ -47,7 +48,7 @@ async function deploy(env: string) {
  * @private
  */
 function validateId(settings: { themeId: any; environment: any }) {
-  return new Promise((resolve, reject) => {
+  return new Promise<void>((resolve, reject) => {
     // Only string allowed is "live"
     if (settings.themeId === "live") {
       resolve();
