@@ -112,7 +112,7 @@ module.exports = (config = {}) => {
     // TypeScript source path
     if (typeof config.tsSourceDir === "undefined") {
       config.tsSourceDir = findDir([
-        path.resolve(rootPath, "/assets/ts"), // OctoberCMS
+        path.resolve(rootPath, "assets/ts"), // OctoberCMS
         path.resolve(rootPath, "src/ts"),
         path.resolve(rootPath, "src/scripts"),
         path.resolve(rootPath, "src/ts"),
