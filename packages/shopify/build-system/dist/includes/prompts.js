@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.promptYesNo = exports.promptInput = void 0;
 const prompt_1 = __importDefault(require("prompt"));
 const messages_1 = __importDefault(require("./messages"));
-exports.promptInput = (description, defaultName, name = "value", color = "default") => __awaiter(void 0, void 0, void 0, function* () {
+const promptInput = (description, defaultName, name = "value", color = "default") => __awaiter(void 0, void 0, void 0, function* () {
     description = messages_1.default.colorize(description, color);
     const property = {
         name,
@@ -38,7 +38,8 @@ exports.promptInput = (description, defaultName, name = "value", color = "defaul
         return value;
     });
 });
-exports.promptYesNo = (description = "Are you sure?", color = "default") => __awaiter(void 0, void 0, void 0, function* () {
+exports.promptInput = promptInput;
+const promptYesNo = (description = "Are you sure?", color = "default") => __awaiter(void 0, void 0, void 0, function* () {
     description = messages_1.default.colorize(description, color);
     const property = {
         name: "yesno",
@@ -62,4 +63,5 @@ exports.promptYesNo = (description = "Are you sure?", color = "default") => __aw
         return value;
     });
 });
+exports.promptYesNo = promptYesNo;
 //# sourceMappingURL=prompts.js.map

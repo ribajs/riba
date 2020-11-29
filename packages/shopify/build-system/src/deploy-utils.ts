@@ -1,27 +1,24 @@
 /* eslint-disable no-sync,no-process-env */
 
 /**
- * Custom version of https://raw.githubusercontent.com/Shopify/slate/0.x/packages/slate-tools/src/tasks/deploy-utils.js
+ * Custom version of https://raw.githubusercontent.com/Shopify/slate/0.x/packages/slate-tools/src/tasks/deploy-js
  */
 
 import gulp from "gulp";
-// import BPromise from "bluebird";
 import fs from "fs";
 import gutil from "gulp-util";
 import open from "open";
-// const open = BPromise.promisify(_open);
-const yaml = require("js-yaml");
-const themekit = require("@shopify/themekit");
+import * as yaml from "js-yaml";
+import { ThemeConfigByEnv, ThemeConfig } from "./types";
+import * as themekit from "@shopify/themekit";
 
 import { config } from "./includes/config";
-import utils from "./includes/utilities";
+import { promiseSeries } from "./includes/utilities";
 import messages from "./includes/messages";
 
 /**
  * simple promise factory wrapper for deploys
- * @param env - the environment to deploy to
- * @returns {Promise}
- * @private
+ * @param env The environment to deploy to
  */
 async function deploy(env: string) {
   gutil.log(`themekit cwd to: ${config.dist.root}`);
@@ -35,19 +32,17 @@ async function deploy(env: string) {
       },
       { cwd: config.dist.root }
     )
-    .catch((err: string) => {
+    .catch((err: Error) => {
       messages.logTransferFailed(err);
     });
 }
 
 /**
  * Validate theme_id used for the environment
- * @param {Object} - settings of theme_id and environment
- * @returns {Promise}
- * @private
+ * @param settings Settings of theme_id and environment
  */
 function validateId(settings: { themeId: any; environment: any }) {
-  return new Promise((resolve, reject) => {
+  return new Promise<void>((resolve, reject) => {
     // Only string allowed is "live"
     if (settings.themeId === "live") {
       resolve();
@@ -65,9 +60,6 @@ function validateId(settings: { themeId: any; environment: any }) {
 
 /**
  * Validate the config.yml theme_id is an integer or "live"
- * @function validate:id
- * @memberof slate-cli.tasks.watch, slate-cli.tasks.deploy
- * @private
  */
 gulp.task("validate:id", async () => {
   let file;
@@ -84,8 +76,8 @@ gulp.task("validate:id", async () => {
     return process.exit(2);
   }
 
-  const tkConfig = yaml.safeLoad(file);
-  let envObj;
+  const tkConfig = yaml.safeLoad(file) as ThemeConfigByEnv;
+  let envObj: ThemeConfig;
 
   const environments = config.environment.split(/\s*,\s*|\s+/);
   const promises: (() => Promise<unknown>)[] = [];
@@ -103,7 +95,7 @@ gulp.task("validate:id", async () => {
     promises.push(factory);
   });
 
-  return utils.promiseSeries(promises).catch((result) => {
+  return promiseSeries(promises).catch((result) => {
     // stop process to prevent deploy defaulting to published theme
     messages.invalidThemeId(result.themeId, result.environment);
     return process.exit(2);
@@ -112,10 +104,6 @@ gulp.task("validate:id", async () => {
 
 /**
  * Replace your existing theme using ThemeKit.
- *
- * @function deploy:replace
- * @memberof slate-cli.tasks.deploy
- * @static
  */
 gulp.task("deploy:replace", async () => {
   gutil.log(`environments ${config.environment}`);
@@ -132,22 +120,18 @@ gulp.task("deploy:replace", async () => {
     promises.push(factory);
   });
 
-  return utils.promiseSeries(promises).then(() => {
+  return promiseSeries(promises).then(() => {
     return messages.allDeploysComplete();
   });
 });
 
 /**
  * Opens the Store in the default browser (for manual upgrade/deployment)
- *
- * @function open:admin
- * @memberof slate-cli.tasks.deploy
- * @static
  */
 gulp.task("open:admin", async () => {
   const file = fs.readFileSync(config.tkConfig, "utf8");
-  const tkConfig = yaml.safeLoad(file);
-  let envObj;
+  const tkConfig = yaml.safeLoad(file) as ThemeConfigByEnv;
+  let envObj: ThemeConfig;
 
   const environments = config.environment.split(/\s*,\s*|\s+/);
   const promises: (() => Promise<unknown>)[] = [];
@@ -160,15 +144,11 @@ gulp.task("open:admin", async () => {
     promises.push(factory);
   });
 
-  return utils.promiseSeries(promises);
+  return promiseSeries(promises);
 });
 
 /**
  * Opens the Zip file in the file browser
- *
- * @function open:zip
- * @memberof slate-cli.tasks.deploy
- * @static
  */
 gulp.task("open:zip", () => {
   return open("upload");

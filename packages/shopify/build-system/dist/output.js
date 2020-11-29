@@ -13,13 +13,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const gulp_1 = __importDefault(require("gulp"));
-const utilities_1 = __importDefault(require("./includes/utilities"));
-// const utils = require("./includes/utilities.js");
+const utilities_1 = require("./includes/utilities");
 /**
  * Handles the error summary at the end if there are errors to output.
  * This task will only be run for the build and zip tasks.
  */
 gulp_1.default.task("output:errors", () => __awaiter(void 0, void 0, void 0, function* () {
-    return utilities_1.default.outputErrors();
+    return utilities_1.outputErrors();
 }));
 //# sourceMappingURL=output.js.map

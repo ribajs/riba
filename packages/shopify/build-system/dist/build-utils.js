@@ -1,7 +1,4 @@
 "use strict";
-/**
- * Custom version of https://github.com/Shopify/slate/blob/0.x/packages/slate-tools/src/tasks/build-utils.js
- */
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -21,7 +18,7 @@ const gulp_zip_1 = __importDefault(require("gulp-zip"));
 const gulp_size_1 = __importDefault(require("gulp-size"));
 const gulp_plumber_1 = __importDefault(require("gulp-plumber"));
 const config_1 = require("./includes/config");
-const utilities_1 = __importDefault(require("./includes/utilities"));
+const utilities_1 = require("./includes/utilities");
 /**
  * Clean up build dirs/files whenever doing a full/clean (re)build.
  *
@@ -44,7 +41,7 @@ gulp_1.default.task("compress", () => {
     const ignoreConfig = `!${config_1.config.dist.root}config.yml`;
     return gulp_1.default
         .src([distFiles, ignoreConfig])
-        .pipe(gulp_plumber_1.default(utilities_1.default.errorHandler))
+        .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
         .pipe(gulp_zip_1.default(`${config_1.config.packageJson.name}_${config_1.config.packageJson.version}.zip` ||
         "theme.zip"))
         .pipe(gulp_size_1.default({ showFiles: true, pretty: true }))

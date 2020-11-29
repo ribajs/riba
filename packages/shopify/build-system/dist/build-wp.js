@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+/* eslint-disable @typescript-eslint/no-var-requires */
 const gulp_1 = __importDefault(require("gulp"));
 const path_1 = __importDefault(require("path"));
 const webpack_1 = __importDefault(require("webpack"));
@@ -27,9 +28,8 @@ catch (error) {
 }
 gulp_1.default.task("build:wp:main", () => {
     messages_1.default.logProcessFiles("build:wp:main");
-    // console.debug("webpackConfig", webpackConfig);
     return gulp_1.default
-        .src([config_1.config.src.mainTs])
+        .src(webpackConfig.entry.main)
         .pipe(webpack_stream_1.default(webpackConfig, webpack_1.default))
         .pipe(gulp_1.default.dest(config_1.config.dist.assets));
 });
@@ -37,7 +37,7 @@ gulp_1.default.task("watch:wp:main", () => {
     messages_1.default.logProcessFiles("watch:wp:main");
     webpackConfig.watch = true;
     return gulp_1.default
-        .src(config_1.config.src.mainTs)
+        .src(webpackConfig.entry.main)
         .pipe(webpack_stream_1.default(webpackConfig, webpack_1.default))
         .pipe(gulp_1.default.dest(config_1.config.dist.assets));
 });
@@ -45,7 +45,7 @@ gulp_1.default.task("build:wp:checkout", () => {
     messages_1.default.logProcessFiles("build:wp:checkout");
     // console.debug("webpackConfig", webpackConfig);
     return gulp_1.default
-        .src([config_1.config.src.checkoutTs])
+        .src(webpackCheckoutConfig.entry.checkout)
         .pipe(webpack_stream_1.default(webpackCheckoutConfig, webpack_1.default))
         .pipe(gulp_1.default.dest(config_1.config.dist.assets));
 });
@@ -53,7 +53,7 @@ gulp_1.default.task("watch:wp:checkout", () => {
     messages_1.default.logProcessFiles("watch:wp:checkout");
     webpackCheckoutConfig.watch = true;
     return gulp_1.default
-        .src(config_1.config.src.checkoutTs)
+        .src(webpackCheckoutConfig.entry.checkout)
         .pipe(webpack_stream_1.default(webpackCheckoutConfig, webpack_1.default))
         .pipe(gulp_1.default.dest(config_1.config.dist.assets));
 });

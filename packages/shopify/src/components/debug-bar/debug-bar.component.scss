@@ -1,0 +1,7 @@
+shopify-debug-bar {
+  position: fixed;
+  top: 70px;
+  right: 30px;
+  color: $danger;
+  @extend .font-silkscreen;
+}

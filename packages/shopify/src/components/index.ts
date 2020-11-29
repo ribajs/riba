@@ -1,4 +1,12 @@
 // export * from './shopify-section.component';
-export { ShopifyCartComponent } from "./shopify-cart/shopify-cart.component";
-export { ShopifyCartItemComponent } from "./shopify-cart-item/shopify-cart-item.component";
-export { ShopifyLinklistComponent } from "./shopify-linklist/shopify-linklist.component";
+export { ShopifyAddressesComponent } from "./addresses-form/addresses-form.component";
+export { ShopifyCartComponent } from "./cart/cart.component";
+export { ShopifyCartButtonComponent } from "./cart-button/cart-button.component";
+export { ShopifyCartItemComponent } from "./cart-item/cart-item.component";
+export { ShopifyCommentsFormComponent } from "./comments-form/comments-form.component";
+export { ShopifyContactFormComponent } from "./contact-form/contact-form.component";
+export { ShopifyDebugBarComponent } from "./debug-bar/debug-bar.component";
+export { ShopifyLinklistComponent } from "./linklist/linklist.component";
+export { ShopifyLoginFormComponent } from "./login-form/login-form.component";
+export { ShopifyProductComponent } from "./product/product.component";
+export { ShopifyProductItemComponent } from "./product-item/product-item.component";

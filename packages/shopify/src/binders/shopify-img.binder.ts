@@ -2,7 +2,7 @@ import { Binder } from "@ribajs/core";
 import { getViewportDimensions } from "@ribajs/utils/src/dom";
 import { throttle } from "@ribajs/utils/src/control";
 import { imgUrlFormatter } from "../formatters/img-url.formatter";
-import "./ResizeObserver.d";
+import "../typings/resize-observer";
 
 const PX_OFFSET = 10;
 const OVERWRITE_ORIGINAL_SRC = true;
@@ -70,7 +70,7 @@ export const shopifyImgBinder: Binder<string> = {
         }
       }),
     };
-    if ((window as any).ResizeObserver) {
+    if (ResizeObserver) {
       this.customData.resizeObserver = new ResizeObserver((entries) => {
         entries.forEach((/*entry*/) => {
           this.customData.onResize();

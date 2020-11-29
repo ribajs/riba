@@ -8,7 +8,7 @@ import size from "gulp-size";
 import rename from "gulp-rename";
 
 import { config } from "./includes/config";
-import utils from "./includes/utilities";
+import { errorHandler } from "./includes/utilities";
 import messages from "./includes/messages";
 
 const processConfig = (file: string) => {
@@ -16,7 +16,7 @@ const processConfig = (file: string) => {
 
   return gulp
     .src(file, { allowEmpty: true })
-    .pipe(plumber(utils.errorHandler))
+    .pipe(plumber(errorHandler))
     .pipe(
       size({
         showFiles: true,

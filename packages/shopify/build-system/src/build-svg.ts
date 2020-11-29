@@ -13,7 +13,11 @@ import extReplace from "gulp-ext-replace";
 import gutil from "gulp-util";
 
 import { config } from "./includes/config";
-import utils from "./includes/utilities";
+import {
+  errorHandler,
+  createEventCache,
+  processCache,
+} from "./includes/utilities";
 import messages from "./includes/messages";
 
 /**
@@ -28,7 +32,7 @@ function processIcons(files: string[]) {
   messages.logProcessFiles("build:svg");
   return gulp
     .src(files)
-    .pipe(plumber(utils.errorHandler))
+    .pipe(plumber(errorHandler))
     .pipe(svgmin(config.plugins.svgmin))
     .pipe(cheerio(config.plugins.cheerio))
     .pipe(extReplace(".liquid"))
@@ -55,14 +59,14 @@ function removeIcons(files: string[]) {
     gutil.log("remove icon: " + file);
     const distFile = file
       .replace("src/icons", "dist/snippets")
-      .replace(config.sharedCode.root, config.dist.root);
+      .replace(config.ribaShopify.root, config.dist.root);
     const snippetFile = distFile.replace(".svg", ".liquid");
     return snippetFile;
   });
 
   return gulp
     .src(mapFiles)
-    .pipe(plumber(utils.errorHandler))
+    .pipe(plumber(errorHandler))
     .pipe(vinylPaths(del))
     .pipe(
       size({
@@ -80,7 +84,7 @@ function removeIcons(files: string[]) {
  * @static
  */
 gulp.task("build:svg", () => {
-  return processIcons([config.src.icons, config.sharedCode.src.icons]);
+  return processIcons([config.src.icons, config.ribaShopify.src.icons]);
 });
 
 /**
@@ -91,15 +95,15 @@ gulp.task("build:svg", () => {
  * @static
  */
 gulp.task("watch:svg", () => {
-  const cache = utils.createEventCache();
+  const cache = createEventCache();
 
   return chokidar
-    .watch([config.src.icons, config.sharedCode.src.icons], {
+    .watch([config.src.icons, config.ribaShopify.src.icons], {
       ignoreInitial: true,
     })
     .on("all", (event, path) => {
       messages.logFileEvent(event, path);
       cache.addEvent(event, path);
-      utils.processCache(cache, processIcons, removeIcons);
+      processCache(cache, processIcons, removeIcons);
     });
 });

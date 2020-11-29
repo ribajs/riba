@@ -15,13 +15,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getDownloadFileUrlAlternate = exports.getDownloadFileUrl = exports.uploadFile = exports.uploadFileExists = void 0;
 const config_1 = require("./config");
 const bitbucket_1 = require("bitbucket");
-const utilities_1 = __importDefault(require("./utilities"));
+const utilities_1 = require("./utilities");
 const messages_1 = __importDefault(require("./messages"));
 const form_data_1 = __importDefault(require("form-data"));
 const fs_1 = __importDefault(require("fs"));
 const got_1 = __importDefault(require("got"));
 const path_1 = __importDefault(require("path"));
-exports.uploadFileExists = (filename) => __awaiter(void 0, void 0, void 0, function* () {
+const uploadFileExists = (filename) => __awaiter(void 0, void 0, void 0, function* () {
     const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
     const username = releaseConfig.bitbucket.username;
     const password = releaseConfig.bitbucket.password;
@@ -41,7 +41,8 @@ exports.uploadFileExists = (filename) => __awaiter(void 0, void 0, void 0, funct
     // TODO implement pagination?
     return files.data.values.some((e) => e.name === filename);
 });
-exports.uploadFile = (filePath) => __awaiter(void 0, void 0, void 0, function* () {
+exports.uploadFileExists = uploadFileExists;
+const uploadFile = (filePath) => __awaiter(void 0, void 0, void 0, function* () {
     const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
     const username = releaseConfig.bitbucket.username;
     const password = releaseConfig.bitbucket.password;
@@ -68,14 +69,15 @@ exports.uploadFile = (filePath) => __awaiter(void 0, void 0, void 0, function* (
     });
     // WORKAROUND
     console.log("Wait 3 seconds...");
-    yield utilities_1.default.asnycTimeout(3000);
+    yield utilities_1.asnycTimeout(3000);
     return result;
 });
+exports.uploadFile = uploadFile;
 /**
  * Note: You need write access to the repo to use ` bitbucket.repositories.getDownload` wich is used in this method
  * @param filename
  */
-exports.getDownloadFileUrl = (filename) => __awaiter(void 0, void 0, void 0, function* () {
+const getDownloadFileUrl = (filename) => __awaiter(void 0, void 0, void 0, function* () {
     const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
     const username = releaseConfig.bitbucket.username;
     const password = releaseConfig.bitbucket.password;
@@ -100,11 +102,12 @@ exports.getDownloadFileUrl = (filename) => __awaiter(void 0, void 0, void 0, fun
         return value.url;
     });
 });
+exports.getDownloadFileUrl = getDownloadFileUrl;
 /**
  * Alternative version of `getDownloadFileUrl` where less bitbucket rights are needed
  * @param filename
  */
-exports.getDownloadFileUrlAlternate = (filename) => __awaiter(void 0, void 0, void 0, function* () {
+const getDownloadFileUrlAlternate = (filename) => __awaiter(void 0, void 0, void 0, function* () {
     const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
     const username = releaseConfig.bitbucket.username;
     const password = releaseConfig.bitbucket.password;
@@ -117,4 +120,5 @@ exports.getDownloadFileUrlAlternate = (filename) => __awaiter(void 0, void 0, vo
         return result.url;
     });
 });
+exports.getDownloadFileUrlAlternate = getDownloadFileUrlAlternate;
 //# sourceMappingURL=bitbucket.js.map

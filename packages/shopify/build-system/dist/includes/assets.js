@@ -15,16 +15,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateOrCreate = exports.list = void 0;
 const shopify_admin_api_1 = require("shopify-admin-api");
 const gulp_util_1 = __importDefault(require("gulp-util"));
-exports.list = (themeConfig) => __awaiter(void 0, void 0, void 0, function* () {
+const utilities_1 = require("./utilities");
+const list = (themeConfig) => __awaiter(void 0, void 0, void 0, function* () {
     const assets = new shopify_admin_api_1.Assets(themeConfig.store, themeConfig.password);
-    const assetsList = yield assets.list(themeConfig.theme_id);
+    const themeId = Number(themeConfig.theme_id);
+    if (!utilities_1.isNumber(themeId)) {
+        throw new Error(`"theme_id" property in theme config must be a number, but is "${themeConfig.theme_id}"`);
+    }
+    const assetsList = yield assets.list(themeId);
     return assetsList;
 });
-exports.updateOrCreate = (themeConfig, extAssetsConfig) => __awaiter(void 0, void 0, void 0, function* () {
+exports.list = list;
+const updateOrCreate = (themeConfig, extAssetsConfig) => __awaiter(void 0, void 0, void 0, function* () {
     const assets = new shopify_admin_api_1.Assets(themeConfig.store, themeConfig.password);
     let asset = null;
+    const themeId = Number(themeConfig.theme_id);
+    if (!utilities_1.isNumber(themeId)) {
+        throw new Error(`"theme_id" property in theme config must be a number, but is "${themeConfig.theme_id}"`);
+    }
     try {
-        asset = yield assets.get(themeConfig.theme_id, extAssetsConfig.key);
+        asset = yield assets.get(themeId, extAssetsConfig.key);
     }
     catch (error) {
         // If not found
@@ -41,10 +51,11 @@ exports.updateOrCreate = (themeConfig, extAssetsConfig) => __awaiter(void 0, voi
     else {
         gulp_util_1.default.log(`Create asset tag: ${extAssetsConfig.key}`);
     }
-    asset = yield assets.update(themeConfig.theme_id, {
+    asset = yield assets.update(themeId, {
         key: extAssetsConfig.key,
         src: extAssetsConfig.src,
     });
     return asset;
 });
+exports.updateOrCreate = updateOrCreate;
 //# sourceMappingURL=assets.js.map

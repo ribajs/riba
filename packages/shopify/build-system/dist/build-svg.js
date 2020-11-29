@@ -17,7 +17,7 @@ const gulp_cheerio_1 = __importDefault(require("gulp-cheerio"));
 const gulp_ext_replace_1 = __importDefault(require("gulp-ext-replace"));
 const gulp_util_1 = __importDefault(require("gulp-util"));
 const config_1 = require("./includes/config");
-const utilities_1 = __importDefault(require("./includes/utilities"));
+const utilities_1 = require("./includes/utilities");
 const messages_1 = __importDefault(require("./includes/messages"));
 /**
  * Processing for SVGs prior to deployment - adds accessibility markup, and converts
@@ -31,7 +31,7 @@ function processIcons(files) {
     messages_1.default.logProcessFiles("build:svg");
     return gulp_1.default
         .src(files)
-        .pipe(gulp_plumber_1.default(utilities_1.default.errorHandler))
+        .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
         .pipe(gulp_svgmin_1.default(config_1.config.plugins.svgmin))
         .pipe(gulp_cheerio_1.default(config_1.config.plugins.cheerio))
         .pipe(gulp_ext_replace_1.default(".liquid"))
@@ -55,13 +55,13 @@ function removeIcons(files) {
         gulp_util_1.default.log("remove icon: " + file);
         const distFile = file
             .replace("src/icons", "dist/snippets")
-            .replace(config_1.config.sharedCode.root, config_1.config.dist.root);
+            .replace(config_1.config.ribaShopify.root, config_1.config.dist.root);
         const snippetFile = distFile.replace(".svg", ".liquid");
         return snippetFile;
     });
     return gulp_1.default
         .src(mapFiles)
-        .pipe(gulp_plumber_1.default(utilities_1.default.errorHandler))
+        .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
         .pipe(vinyl_paths_1.default(del_1.default))
         .pipe(gulp_size_1.default({
         showFiles: true,
@@ -76,7 +76,7 @@ function removeIcons(files) {
  * @static
  */
 gulp_1.default.task("build:svg", () => {
-    return processIcons([config_1.config.src.icons, config_1.config.sharedCode.src.icons]);
+    return processIcons([config_1.config.src.icons, config_1.config.ribaShopify.src.icons]);
 });
 /**
  * Watches source svg icons for changes...
@@ -86,15 +86,15 @@ gulp_1.default.task("build:svg", () => {
  * @static
  */
 gulp_1.default.task("watch:svg", () => {
-    const cache = utilities_1.default.createEventCache();
+    const cache = utilities_1.createEventCache();
     return chokidar_1.default
-        .watch([config_1.config.src.icons, config_1.config.sharedCode.src.icons], {
+        .watch([config_1.config.src.icons, config_1.config.ribaShopify.src.icons], {
         ignoreInitial: true,
     })
         .on("all", (event, path) => {
         messages_1.default.logFileEvent(event, path);
         cache.addEvent(event, path);
-        utilities_1.default.processCache(cache, processIcons, removeIcons);
+        utilities_1.processCache(cache, processIcons, removeIcons);
     });
 });
 //# sourceMappingURL=build-svg.js.map

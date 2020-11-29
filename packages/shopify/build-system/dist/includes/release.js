@@ -18,7 +18,7 @@ const fs_1 = require("fs");
 const archiver_1 = __importDefault(require("archiver"));
 const path_1 = __importDefault(require("path"));
 const gulp_util_1 = __importDefault(require("gulp-util"));
-exports.compressForStore = (envKey, settingsData, zipFilename) => __awaiter(void 0, void 0, void 0, function* () {
+const compressForStore = (envKey, settingsData, zipFilename) => __awaiter(void 0, void 0, void 0, function* () {
     yield fs_1.promises.mkdir(config_1.config.upload, { recursive: true });
     if (!zipFilename) {
         zipFilename = config_1.getReleaseZipFilename(envKey);
@@ -54,4 +54,5 @@ exports.compressForStore = (envKey, settingsData, zipFilename) => __awaiter(void
     yield archive.finalize();
     return zipPath;
 });
+exports.compressForStore = compressForStore;
 //# sourceMappingURL=release.js.map

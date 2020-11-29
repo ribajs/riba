@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import gulp from "gulp";
 import path from "path";
 import webpack from "webpack";
@@ -31,9 +32,8 @@ try {
 
 gulp.task("build:wp:main", () => {
   messages.logProcessFiles("build:wp:main");
-  // console.debug("webpackConfig", webpackConfig);
   return gulp
-    .src([config.src.mainTs])
+    .src(webpackConfig.entry.main)
     .pipe(gulpWebpack(webpackConfig, webpack as any))
     .pipe(gulp.dest(config.dist.assets));
 });
@@ -42,7 +42,7 @@ gulp.task("watch:wp:main", () => {
   messages.logProcessFiles("watch:wp:main");
   webpackConfig.watch = true;
   return gulp
-    .src(config.src.mainTs)
+    .src(webpackConfig.entry.main)
     .pipe(gulpWebpack(webpackConfig, webpack as any))
     .pipe(gulp.dest(config.dist.assets));
 });
@@ -51,7 +51,7 @@ gulp.task("build:wp:checkout", () => {
   messages.logProcessFiles("build:wp:checkout");
   // console.debug("webpackConfig", webpackConfig);
   return gulp
-    .src([config.src.checkoutTs])
+    .src(webpackCheckoutConfig.entry.checkout)
     .pipe(gulpWebpack(webpackCheckoutConfig, webpack as any))
     .pipe(gulp.dest(config.dist.assets));
 });
@@ -60,7 +60,7 @@ gulp.task("watch:wp:checkout", () => {
   messages.logProcessFiles("watch:wp:checkout");
   webpackCheckoutConfig.watch = true;
   return gulp
-    .src(config.src.checkoutTs)
+    .src(webpackCheckoutConfig.entry.checkout)
     .pipe(gulpWebpack(webpackCheckoutConfig, webpack as any))
     .pipe(gulp.dest(config.dist.assets));
 });

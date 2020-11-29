@@ -15,12 +15,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteAll = exports.updateOrCreate = exports.list = void 0;
 const shopify_admin_api_1 = require("shopify-admin-api");
 const gulp_util_1 = __importDefault(require("gulp-util"));
-exports.list = (themeConfig) => __awaiter(void 0, void 0, void 0, function* () {
+const list = (themeConfig) => __awaiter(void 0, void 0, void 0, function* () {
     const scriptTags = new shopify_admin_api_1.ScriptTags(themeConfig.store, themeConfig.password);
     const scriptTagList = yield scriptTags.list();
     return scriptTagList;
 });
-exports.updateOrCreate = (themeConfig, scriptTagsConfig) => __awaiter(void 0, void 0, void 0, function* () {
+exports.list = list;
+const updateOrCreate = (themeConfig, scriptTagsConfig) => __awaiter(void 0, void 0, void 0, function* () {
     const scriptTags = new shopify_admin_api_1.ScriptTags(themeConfig.store, themeConfig.password);
     const scriptTagList = yield scriptTags.list();
     let existingScriptTag = null;
@@ -42,7 +43,8 @@ exports.updateOrCreate = (themeConfig, scriptTagsConfig) => __awaiter(void 0, vo
         scriptTag: yield scriptTags.create(scriptTagsConfig),
     };
 });
-exports.deleteAll = (themeConfig) => __awaiter(void 0, void 0, void 0, function* () {
+exports.updateOrCreate = updateOrCreate;
+const deleteAll = (themeConfig) => __awaiter(void 0, void 0, void 0, function* () {
     const scriptTags = new shopify_admin_api_1.ScriptTags(themeConfig.store, themeConfig.password);
     const scriptTagList = yield scriptTags.list();
     const results = [];
@@ -52,4 +54,5 @@ exports.deleteAll = (themeConfig) => __awaiter(void 0, void 0, void 0, function*
     }
     return results;
 });
+exports.deleteAll = deleteAll;
 //# sourceMappingURL=script-tags.js.map

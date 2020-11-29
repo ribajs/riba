@@ -218,7 +218,7 @@ export abstract class ALocalesService {
   /**
    * Get file with all languages
    */
-  protected abstract async getAll(): Promise<any>;
+  protected abstract getAll(): Promise<any>;
 
   protected async init() {
     this.initalLangcode = this.getHTMLLangcode();
