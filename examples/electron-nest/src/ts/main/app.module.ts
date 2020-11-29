@@ -1,14 +1,15 @@
 import { Module, DynamicModule } from "@nestjs/common";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
-import { MainWindow } from "./window/main-window";
+import { MainWindow } from "./main-window/main-window";
 import { ServeStaticModule } from "@nestjs/serve-static";
 import { join } from "path";
 import { Config, Env } from "../typings";
+import { MainWindowController } from "./main-window/main-window.controller";
 
 @Module({
   imports: [],
-  controllers: [AppController],
+  controllers: [AppController, MainWindowController],
   providers: [AppService],
 })
 export class AppModule {
