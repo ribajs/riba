@@ -133,10 +133,15 @@ exports.config = {
 /**
  * Try to get the config.deploy.yml from root of the shopify theme, otherwise try to get this file from the root of riba-shopify
  * @param configName
+ * @returns The config content or null if the config file not exists
  */
 const getYamlConfig = (configName) => {
+    const filePath = path_1.default.resolve(exports.config.themeRoot, configName);
+    if (!fs_1.default.existsSync(filePath)) {
+        return null;
+    }
     try {
-        const data = fs_1.default.readFileSync(path_1.default.resolve(exports.config.themeRoot, configName), "utf8");
+        const data = fs_1.default.readFileSync(filePath, "utf8");
         const shopifyConfigs = js_yaml_1.default.safeLoad(data);
         return shopifyConfigs;
     }

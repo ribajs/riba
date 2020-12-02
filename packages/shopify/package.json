@@ -117,6 +117,7 @@
     "typescript": "^4.1.2"
   },
   "dependencies": {
+    "@octokit/rest": "^18.0.10",
     "@ribajs/cache": "workspace:packages/cache",
     "@ribajs/core": "workspace:packages/core",
     "@ribajs/i18n": "workspace:packages/i18n",

@@ -7,11 +7,13 @@ import FormData from "form-data";
 import fs from "fs";
 import got from "got";
 import path from "path";
+import gutil from "gulp-util";
 
 export const uploadFileExists = async (filename: string) => {
   const releaseConfig: ReleaseConfig = getYamlConfig(
     config.releaseConfig
   ) as ReleaseConfig;
+
   const username = releaseConfig.bitbucket.username;
   const password = releaseConfig.bitbucket.password;
   const repo_slug = releaseConfig.bitbucket.repo_slug;
@@ -36,6 +38,7 @@ export const uploadFile = async (filePath: string) => {
   const releaseConfig: ReleaseConfig = getYamlConfig(
     config.releaseConfig
   ) as ReleaseConfig;
+
   const username = releaseConfig.bitbucket.username;
   const password = releaseConfig.bitbucket.password;
   const repo_slug = releaseConfig.bitbucket.repo_slug;
@@ -83,6 +86,7 @@ export const getDownloadFileUrl = async (filename: string): Promise<string> => {
   const releaseConfig: ReleaseConfig = getYamlConfig(
     config.releaseConfig
   ) as ReleaseConfig;
+
   const username = releaseConfig.bitbucket.username;
   const password = releaseConfig.bitbucket.password;
   const repo_slug = releaseConfig.bitbucket.repo_slug;
@@ -94,17 +98,24 @@ export const getDownloadFileUrl = async (filename: string): Promise<string> => {
     },
   });
   console.log("filename", filename);
-  return bitbucket.repositories
-    .getDownload({
+
+  let url: string;
+
+  try {
+    const result = await bitbucket.repositories.getDownload({
       repo_slug,
       workspace,
       filename,
-    })
-    .then((value) => {
-      console.log("bitbucket.repositories.getDownload");
-      console.log(value);
-      return value.url;
     });
+    url = result.url;
+  } catch (error) {
+    url = await getDownloadFileUrlAlternate(filename);
+  }
+
+  console.log("bitbucket.repositories.getDownload");
+  console.log(url);
+
+  return url;
 };
 
 /**
@@ -117,6 +128,12 @@ export const getDownloadFileUrlAlternate = async (
   const releaseConfig: ReleaseConfig = getYamlConfig(
     config.releaseConfig
   ) as ReleaseConfig;
+
+  if (!releaseConfig) {
+    gutil.log(`Skip get download url`);
+    return null;
+  }
+
   const username = releaseConfig.bitbucket.username;
   const password = releaseConfig.bitbucket.password;
   const repo_slug = releaseConfig.bitbucket.repo_slug;

@@ -13,11 +13,7 @@ import {
   print as printTheme,
   remove as deleteTheme,
 } from "./includes/theme";
-import {
-  uploadFile,
-  getDownloadFileUrl,
-  getDownloadFileUrlAlternate,
-} from "./includes/bitbucket";
+import { uploadFile, getDownloadFileUrl } from "./includes/upload";
 import { getAsset, getShop } from "./includes/shopify-api";
 import { promises as fs } from "fs";
 import yaml from "js-yaml";
@@ -162,18 +158,13 @@ gulp.task("deploy:zips", async () => {
   const themeName = (global as any).themeName || getReleaseName();
   for (const envKey in deployConfig) {
     const filename = getReleaseZipFilename(envKey);
-    let src: string;
-    try {
-      src = await getDownloadFileUrlAlternate(filename);
-    } catch (error) {
-      console.warn(error);
-      try {
-        src = await getDownloadFileUrl(filename);
-      } catch (error) {
-        console.error(error);
-        throw error;
-      }
+    const src = await getDownloadFileUrl(filename);
+
+    if (!src) {
+      gutil.log(`Skip deoloy zip`);
+      return null;
     }
+
     const zipFilename = path.basename(src).split("?")[0];
     gutil.log(zipFilename);
     gutil.log(

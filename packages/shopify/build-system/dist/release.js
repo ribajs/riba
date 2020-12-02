@@ -140,6 +140,10 @@ gulp_1.default.task("deploy:zips", () => __awaiter(void 0, void 0, void 0, funct
                 throw error;
             }
         }
+        if (!src) {
+            gulp_util_1.default.log(`Skip deoloy zip`);
+            return null;
+        }
         const zipFilename = path_1.default.basename(src).split("?")[0];
         gulp_util_1.default.log(zipFilename);
         gulp_util_1.default.log(`[${envKey}] Deploy "${zipFilename}" as "${themeName}" on "${deployConfig[envKey].store}"...`);

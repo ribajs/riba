@@ -21,8 +21,13 @@ const form_data_1 = __importDefault(require("form-data"));
 const fs_1 = __importDefault(require("fs"));
 const got_1 = __importDefault(require("got"));
 const path_1 = __importDefault(require("path"));
+const gulp_util_1 = __importDefault(require("gulp-util"));
 const uploadFileExists = (filename) => __awaiter(void 0, void 0, void 0, function* () {
     const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
+    if (!releaseConfig) {
+        gulp_util_1.default.log(`Skip upload check`);
+        return null;
+    }
     const username = releaseConfig.bitbucket.username;
     const password = releaseConfig.bitbucket.password;
     const repo_slug = releaseConfig.bitbucket.repo_slug;
@@ -44,6 +49,10 @@ const uploadFileExists = (filename) => __awaiter(void 0, void 0, void 0, functio
 exports.uploadFileExists = uploadFileExists;
 const uploadFile = (filePath) => __awaiter(void 0, void 0, void 0, function* () {
     const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
+    if (!releaseConfig) {
+        gulp_util_1.default.log(`The config file "${filePath}" does not exist, skip upload`);
+        return null;
+    }
     const username = releaseConfig.bitbucket.username;
     const password = releaseConfig.bitbucket.password;
     const repo_slug = releaseConfig.bitbucket.repo_slug;
@@ -79,6 +88,10 @@ exports.uploadFile = uploadFile;
  */
 const getDownloadFileUrl = (filename) => __awaiter(void 0, void 0, void 0, function* () {
     const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
+    if (!releaseConfig) {
+        gulp_util_1.default.log(`Skip get download url`);
+        return null;
+    }
     const username = releaseConfig.bitbucket.username;
     const password = releaseConfig.bitbucket.password;
     const repo_slug = releaseConfig.bitbucket.repo_slug;
@@ -109,6 +122,10 @@ exports.getDownloadFileUrl = getDownloadFileUrl;
  */
 const getDownloadFileUrlAlternate = (filename) => __awaiter(void 0, void 0, void 0, function* () {
     const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
+    if (!releaseConfig) {
+        gulp_util_1.default.log(`Skip get download url`);
+        return null;
+    }
     const username = releaseConfig.bitbucket.username;
     const password = releaseConfig.bitbucket.password;
     const repo_slug = releaseConfig.bitbucket.repo_slug;
