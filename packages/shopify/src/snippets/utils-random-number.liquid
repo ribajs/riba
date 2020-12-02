@@ -1,0 +1,14 @@
+{% comment %}
+ @see https://www.131-studio.com/blogs/shopify-conversion/generate-random-numbers-using-liquid-shopify
+{% endcomment %}
+{% unless min %}
+  {% assign min = 0 %}
+{% endunless %}
+
+{% unless max %}
+  {% assign max = 1000000 %}
+{% endunless %}
+
+{% assign diff = max | minus: min %}
+
+{% assign randomNumber = "now" | date: "%N" | modulo: diff | plus: min %}

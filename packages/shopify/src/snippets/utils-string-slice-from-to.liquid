@@ -1,0 +1,12 @@
+{% include 'utilities-string-indexof', char: from %}
+{% assign start = result %}
+{% include 'utilities-string-indexof', char: to %}
+{% assign end = result | plus: 1 %}
+
+{% assign removeMe = string | slice: start, end %}
+
+{% if start > -1 and end > -1 %}
+  {% assign result = string | remove_first: removeMe %}
+{% else %}
+  {% assign result = string %}
+{% endif %}
