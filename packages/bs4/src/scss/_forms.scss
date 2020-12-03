@@ -46,7 +46,7 @@
       color: rgba($value, .7);
     }
     &:disabled {
-      color: $input-disabled-color;
+      color: rgba($value, .7);
     }
     @include autofill($value);
   }
