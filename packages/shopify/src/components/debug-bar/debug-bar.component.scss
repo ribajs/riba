@@ -3,5 +3,5 @@ shopify-debug-bar {
   top: 70px;
   right: 30px;
   color: $danger;
-  @extend .font-silkscreen;
+  @extend .font-silkscreen !optional;
 }

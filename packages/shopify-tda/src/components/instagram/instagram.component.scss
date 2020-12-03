@@ -1,6 +1,6 @@
 shopify-tda-instagram {
-  @extend .font-size-sm;
-  .embed-responsive{
+  @extend .font-size-sm !optional;
+  .embed-responsive {
     .embed-responsive-item {
       transform: scale(1);
       transition: 0.3s all ease;
