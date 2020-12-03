@@ -1,6 +1,6 @@
-{% comment %}
+{%- comment -%}
     Dynamic Variables, can be changed each new request
-{% endcomment %}
+{%- endcomment -%}
 
 <script>
 
@@ -8,12 +8,12 @@
 
   window.model.system = {};
 
-  {% assign quote = '"' %}
-  {% assign escapedQuote = '\"' %}
+  {%- assign quote = '"' -%}
+  {%- assign escapedQuote = '\"' -%}
 
-  {% if includeThemeSettings %}
+  {%- if includeThemeSettings -%}
 
-    /**
+    {%- comment -%}
     * Covert adhesive keys like 
     *
     *  products_freeshipping_color: #1084f6 , like products_freeshipping_enabled: true
@@ -28,7 +28,7 @@
     *  }
     *
     * Used internally to convert the shopify theme settings to better usable javascript objects.
-    */
+    {%- endcomment -%}
     var adhesiveKeyObjectToNestedObject = function (adhesiveKeyObject, separator) {
       var nestedObject = {};
       if(!separator) {
@@ -69,24 +69,24 @@
     */
     window.model.system.themeSettings = adhesiveKeyObjectToNestedObject({{ settings | json }}, '_');
 
-  {% endif %}
+  {%- endif -%}
 
-  /**
-   * Cart
-   * This is dynamic
-   */
-  // window.model.system.cart = window.cart || {{ cart | json }};
+  {%- comment -%}
+    {{ customer | json }} is not allowed but we have our own implementation
+  {%- endcomment -%}
+  window.model.system.customer = {% render 'utils-json-customer' %};
 
-  window.model.system.customer = {% render 'utils-json-customer' %}; // {{ customer | json }} not allowed for this object
-  
-  window.model.system.linklists = {% render 'utils-json-linklists' %}; // {{ linklists | json }} not allowed for this object
+  {%- comment -%}
+    {{ linklists | json }} is not allowed but we have our own implementation
+  {%- endcomment -%}
+  window.model.system.linklists = {% include 'utils-json-linklists' %};
 
-  /**
+  {%- comment -%}
   * Money / Currency
   * Detect if amount is rendered with comma or dot separator
   * @see https://help.shopify.com/themes/liquid/filters/money-filters
   * @see https://help.shopify.com/manual/payment-settings/currency-formatting
-  */
+  {%- endcomment -%}
   window.model.system.setShopifyCurrencyFormatter = function (moneyString) {
 
     if(moneyString.indexOf('1,134.65') > -1) {
@@ -113,16 +113,15 @@
     return '{% raw %}{{ amount }} EUR{% endraw %}';
   }
 
-  {% if settings.money_with_currency %}
+  {%- if settings.money_with_currency -%}
     var moneyString = '{{ 113465 | money_with_currency }}';
-  {% else %}
+  {%- else -%}
     var moneyString = '{{ 113465 | money }}';
-  {% endif %}
+  {%- endif -%}
 
-
-  /**
+  {%- comment -%}
    * shop settings
-   */
+  {%- endcomment -%}
   window.model.system.shopSettings = window.model.system.shopSettings || {};
   
   window.model.system.shopSettings.money_with_currency_format = {{ shop.money_with_currency_format | json }};
@@ -146,15 +145,12 @@
   window.model.system.shopSettings.vendors = {{ shop.vendors | json }};
   window.model.system.shopSettings.locale = {{ shop.locale | json }};
 
-  /**
+  {%- comment -%}
    * assets
    * TODO generate a list of assets
-   */
+  {%- endcomment -%}
   window.model.system.assetsPath = {{ 'favicon.ico' | asset_url | replace: 'favicon.ico', '[fileName]' | json | }};
   window.model.system.assetsPath = window.model.system.assetsPath.substring(0, window.model.system.assetsPath.indexOf('[fileName]'))
   window.model.system.assets = window.model.system.assets || {};
   window.model.system.assets['no-image.png'] = {{ 'no-image.png' | asset_url | json }};
-  window.model.system.assets['icon_heart_px.png'] = {{ 'icon_heart_px.png' | asset_url | json }};
-
-
 </script>
