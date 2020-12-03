@@ -2027,6 +2027,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@octokit/core@npm:^3.2.4":
+  version: 3.2.4
+  resolution: "@octokit/core@npm:3.2.4"
+  dependencies:
+    "@octokit/auth-token": ^2.4.4
+    "@octokit/graphql": ^4.5.8
+    "@octokit/request": ^5.4.12
+    "@octokit/types": ^6.0.3
+    before-after-hook: ^2.1.0
+    universal-user-agent: ^6.0.0
+  checksum: fb76c14bfdd934daa00f2d015a2d7af41ead2c50fe7359fa8283a140f833a28a6a23d2b3c541dc92d06aa69aea34d4c3d3aeea2eb8628bdaf899b19693f235c9
+  languageName: node
+  linkType: hard
+
 "@octokit/endpoint@npm:^6.0.1":
   version: 6.0.10
   resolution: "@octokit/endpoint@npm:6.0.10"
@@ -2056,6 +2070,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@octokit/openapi-types@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@octokit/openapi-types@npm:2.0.0"
+  checksum: 5dba467708d45cd43979da80c9229d9b102368ef2cd68d546811bc61f3fc84bf412fb8b619ab776fc60db33b5e4997047128e7b0676c5a86f22c6d0db4220859
+  languageName: node
+  linkType: hard
+
 "@octokit/plugin-paginate-rest@npm:^2.6.2":
   version: 2.6.2
   resolution: "@octokit/plugin-paginate-rest@npm:2.6.2"
@@ -2076,13 +2097,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/plugin-rest-endpoint-methods@npm:4.3.1, @octokit/plugin-rest-endpoint-methods@npm:^4.3.1":
+"@octokit/plugin-rest-endpoint-methods@npm:4.3.1":
   version: 4.3.1
   resolution: "@octokit/plugin-rest-endpoint-methods@npm:4.3.1"
   dependencies:
     "@octokit/types": ^6.0.3
     deprecation: ^2.3.1
   checksum: 0745f132f3ce346c955bb5f8dfcb80fda32e4537d26d4efaa72c4b6dcfab4dca37b13cb9c4713a6b18203b69ded43ac4bfc294aa6564591c5e2be1bf5c5faca0
+  languageName: node
+  linkType: hard
+
+"@octokit/plugin-rest-endpoint-methods@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "@octokit/plugin-rest-endpoint-methods@npm:4.4.0"
+  dependencies:
+    "@octokit/types": ^6.1.0
+    deprecation: ^2.3.1
+  checksum: 2b13acc93be805b412ee088a8fcb5cf08cff53c8b972bd6aa896f85aacfce47bda25313e170c0bade40fc74202f06c58c0ff53f14178c3bd5ba2b87b63a207b7
   languageName: node
   linkType: hard
 
@@ -2158,6 +2189,16 @@ __metadata:
     "@octokit/openapi-types": ^1.2.0
     "@types/node": ">= 8"
   checksum: e78afc0edaec6c6fd25195f8e974534127d7a1bd597ea397db248594da3c86776921ff86d8d998e8efe42405b8286888fb51030c358d2f40b4af0ade859aad50
+  languageName: node
+  linkType: hard
+
+"@octokit/types@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "@octokit/types@npm:6.1.0"
+  dependencies:
+    "@octokit/openapi-types": ^2.0.0
+    "@types/node": ">= 8"
+  checksum: 10769939039deecfff864f1a29438ff977eb8fbc96b4636199d7af570b83d2742f79e7199001cfc752a29d626f853d4866b70b1985adb7aef92609804dcbfc9e
   languageName: node
   linkType: hard
 
@@ -2725,7 +2766,7 @@ __metadata:
     "@ribajs/types": "workspace:infra/types"
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
-    "@ribajs/webpack-serve": ^1.9.0-beta.3
+    "@ribajs/webpack-serve": ^1.9.0-beta.5
     "@types/jest": ^26.0.16
     "@types/node": ^14.14.10
     "@types/webpack-env": ^1.16.0
@@ -4398,8 +4439,8 @@ __metadata:
     "@babel/preset-typescript": ^7.12.7
     "@babel/runtime": ^7.12.5
     "@babel/runtime-corejs3": ^7.12.5
-    "@octokit/core": ^3.2.3
-    "@octokit/plugin-rest-endpoint-methods": ^4.3.1
+    "@octokit/core": ^3.2.4
+    "@octokit/plugin-rest-endpoint-methods": ^4.4.0
     "@octokit/request": ^5.4.12
     "@octokit/rest": ^18.0.11
     "@ribajs/cache": "workspace:packages/cache"
@@ -4502,8 +4543,8 @@ __metadata:
     "@babel/preset-typescript": ^7.12.7
     "@babel/runtime": ^7.12.5
     "@babel/runtime-corejs3": ^7.12.5
-    "@octokit/core": ^3.2.3
-    "@octokit/plugin-rest-endpoint-methods": ^4.3.1
+    "@octokit/core": ^3.2.4
+    "@octokit/plugin-rest-endpoint-methods": ^4.4.0
     "@octokit/request": ^5.4.12
     "@octokit/rest": ^18.0.11
     "@ribajs/cache": "workspace:packages/cache"
@@ -4598,7 +4639,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/tsconfig@portal:infra/tsconfig::locator=ribajs%40workspace%3A."
   dependencies:
-    "@ribajs/types": ^1.9.0-beta.3
+    "@ribajs/types": ^1.9.0-beta.4
   languageName: node
   linkType: soft
 
@@ -4606,7 +4647,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/tsconfig@workspace:infra/tsconfig"
   dependencies:
-    "@ribajs/types": ^1.9.0-beta.3
+    "@ribajs/types": ^1.9.0-beta.4
   languageName: unknown
   linkType: soft
 
@@ -4728,11 +4769,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/webpack-serve@^1.9.0-beta.3, @ribajs/webpack-serve@workspace:infra/webpack-serve":
+"@ribajs/webpack-serve@^1.9.0-beta.5, @ribajs/webpack-serve@workspace:infra/webpack-serve":
   version: 0.0.0-use.local
   resolution: "@ribajs/webpack-serve@workspace:infra/webpack-serve"
   dependencies:
-    "@ribajs/webpack-config": ^1.9.0-beta.3
+    "@ribajs/webpack-config": ^1.9.0-beta.5
     get-port: ^5.1.1
     pkg-dir: ^5.0.0
     webpack-dev-server: ^3.11.0
