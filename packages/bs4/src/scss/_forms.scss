@@ -1,0 +1,149 @@
+/**
+ * Set custom Autocomplete background color in Chrome
+ * (not working with transparent background colors)
+ */
+ @mixin autofill-color($color, $bg-color) {
+  &:-webkit-autofill {
+    -webkit-text-fill-color: $color;
+    box-shadow: 0 0 0px 1000px $bg-color inset;
+    transition: none;   
+    &:hover, 
+    &:focus {
+      -webkit-text-fill-color: $color;
+      box-shadow: 0 0 0px 1000px $bg-color inset;
+      transition: none;
+    }
+  }
+}
+
+/**
+ * Remove Autocomplete styles in Chrome
+ * with a trick that the autofill chrome default backgound-color is set after 5000 seconds
+ * (Also working with transparent background colors)
+ */
+ @mixin autofill($color) {
+  &:-webkit-autofill {
+    -webkit-text-fill-color: $color;
+    transition: background-color 50000s ease-in-out 0s;
+   
+    &:hover, 
+    &:focus {
+      -webkit-text-fill-color: $color;
+      transition: background-color 50000s ease-in-out 0s;
+     
+    }
+  }
+}
+
+
+/**
+ * Custom input colors
+ */
+@each $color, $value in $theme-colors {
+  .form-control.form-control-#{$color} {
+    color: $value;
+    &::placeholder {
+      color: rgba($value, .7);
+    }
+    &:disabled {
+      color: $input-disabled-color;
+    }
+    @include autofill($value);
+  }
+  .was-validated {
+    .form-control.form-control-#{$color} {
+      &:invalid, &.is-invalid {
+        color: $form-feedback-invalid-color;
+        @include autofill($form-feedback-invalid-color);
+        &::placeholder {
+          color: $form-feedback-invalid-color;
+        }
+        &:focus {
+          box-shadow: none;
+        }
+      }
+      &:valid, &.is-valid {
+        color: $form-feedback-valid-color;
+        @include autofill($form-feedback-valid-color);
+        &::placeholder {
+          color: $form-feedback-valid-color;
+        }
+        &:focus {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Customization on bootstaps default form-control
+ */
+.form-control {
+  @include autofill($input-color);
+
+  /**
+   * Input without borders
+   */
+  &.form-control-text {
+    border: none;
+    padding: 0;
+    height: auto;
+    background: transparent;
+    @include autofill($input-color);
+  }
+}
+
+/**
+ * Custom select colors
+ */
+@each $color, $value in $theme-colors {
+  .custom-select.custom-select-#{$color} {
+    color: $value;
+    &::placeholder {
+      color: rgba($value, .7);
+    }
+    @include autofill($value);
+  }
+}
+
+/**
+ * Customization on bootstaps default custom-select
+ */
+ .custom-select {
+  @include autofill($input-color);
+
+  /**
+   * Input without borders
+   */
+  &.custom-select-text {
+    border: none;
+    padding: 0;
+    height: auto
+  }
+}
+
+/**
+ * Custom switch colors
+ */
+ @each $color, $value in $theme-colors {
+  .custom-switch.custom-switch-#{$color} {
+    .custom-control-label {  
+      &::before {
+        border-color: $value;
+      }
+      &::after {
+        background-color: $value;
+      }
+    }
+
+    .custom-control-input:checked ~ .custom-control-label {
+      &::before {
+        background-color: $value;
+      }
+      &::after {
+        background-color: $custom-control-indicator-bg;
+      }
+    }
+  }
+}

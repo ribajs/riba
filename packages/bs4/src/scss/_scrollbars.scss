@@ -1,257 +1,263 @@
-.scrollbar-default {
-  &::-webkit-scrollbar, &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-track {
-    all: initial !important;
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+  @include media-breakpoint-up($breakpoint) {
+    .scrollbar#{$infix}-default {
+      &::-webkit-scrollbar, &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-track {
+        all: initial !important;
+      }
+      scrollbar-face-color: initial !important;
+      scrollbar-track-color: initial !important;
+    }
+
+    .scrollbar#{$infix}-black {
+      @include scrollbars(.5em, $black, transparent);
+    }
+
+    .scrollbar#{$infix}-primary {
+      @include scrollbars(.5em, theme-color(primary), transparent);
+    }
+
+    .scrollbar#{$infix}-secondary {
+      @include scrollbars(.5em, theme-color(secondary), transparent);
+    }
+
+    .scrollbar#{$infix}-success {
+      @include scrollbars(.5em, theme-color(success), transparent);
+    }
+
+    .scrollbar#{$infix}-danger {
+      @include scrollbars(.5em, theme-color(danger), transparent);
+    }
+
+    .scrollbar#{$infix}-warning {
+      @include scrollbars(.5em, theme-color(warning), transparent);
+    }
+
+    .scrollbar#{$infix}-info {
+      @include scrollbars(.5em, theme-color(info), transparent);
+    }
+
+    .scrollbar#{$infix}-light {
+      @include scrollbars(.5em, theme-color(light), transparent);
+    }
+
+    .scrollbar#{$infix}-dark {
+      @include scrollbars(.5em, theme-color(dark), transparent);
+    }
+
+    .scrollbar#{$infix}-white {
+      @include scrollbars(.5em, $white, transparent);
+    }
+
+    .scrollbar#{$infix}-invisible {
+      @include scrollbars(0, transparent, transparent);
+      -ms-overflow-style: none; /* IE 11 */
+      scrollbar-width: none; /* Firefox 64 */
+    }
+
+
+    .scrollbar#{$infix}-black-on-hover {
+      @extend .scrollbar#{$infix}-invisible;
+      &:hover {
+        @extend .scrollbar#{$infix}-black;
+      }
+    }
+
+    .scrollbar#{$infix}-primary-on-hover {
+      @extend .scrollbar#{$infix}-invisible;
+      &:hover {
+        @extend .scrollbar#{$infix}-primary;
+      }
+    }
+
+    .scrollbar#{$infix}-secondary-on-hover {
+      @extend .scrollbar#{$infix}-invisible;
+      &:hover {
+        @extend .scrollbar#{$infix}-secondary;
+      }
+    }
+
+    .scrollbar#{$infix}-success-on-hover {
+      @extend .scrollbar#{$infix}-invisible;
+      &:hover {
+        @extend .scrollbar#{$infix}-success;
+      }
+    }
+
+    .scrollbar#{$infix}-danger-on-hover {
+      @extend .scrollbar#{$infix}-invisible;
+      &:hover {
+        @extend .scrollbar#{$infix}-danger;
+      }
+    }
+
+    .scrollbar#{$infix}-warning-on-hover {
+      @extend .scrollbar#{$infix}-invisible;
+      &:hover {
+        @extend .scrollbar#{$infix}-warning;
+      }
+    }
+
+    .scrollbar#{$infix}-info-on-hover {
+      @extend .scrollbar#{$infix}-invisible;
+      &:hover {
+        @extend .scrollbar#{$infix}-info;
+      }
+    }
+
+    .scrollbar#{$infix}-light-on-hover {
+      @extend .scrollbar#{$infix}-invisible;
+      &:hover {
+        @extend .scrollbar#{$infix}-light;
+      }
+    }
+
+    .scrollbar#{$infix}-dark-on-hover {
+      @extend .scrollbar#{$infix}-invisible;
+      &:hover {
+        @extend .scrollbar#{$infix}-dark;
+      }
+    }
+
+    .scrollbar#{$infix}-white-on-hover {
+      @extend .scrollbar#{$infix}-invisible;
+      &:hover {
+        @extend .scrollbar#{$infix}-white;
+      }
+    }
+
+
+    .scrollbar#{$infix}-x-auto {
+      overflow-x: auto;
+      max-width: 100%;
+      &.row {
+        max-width: initial;
+      }
+    }
+
+    .scrollbar#{$infix}-y-auto {
+      overflow-y: auto;
+      max-height: 100%;
+    }
+
+    .scrollbar#{$infix}-auto {
+      @extend .scrollbar#{$infix}-x-auto;
+      @extend .scrollbar#{$infix}-y-auto;
+    }
+
+    .scrollbar#{$infix}-x-visible {
+      overflow-x: visible;
+      max-width: 100%;
+      &.row {
+        max-width: initial;
+      }
+    }
+
+    .scrollbar#{$infix}-y-visible {
+      overflow-y: visible;
+      max-height: 100%;
+    }
+
+    .scrollbar#{$infix}-visible {
+      @extend .scrollbar#{$infix}-x-visible;
+      @extend .scrollbar#{$infix}-y-visible;
+    }
+
+
+    .scrollbar#{$infix}-x-hidden {
+      overflow-x: hidden;
+    }
+
+    .scrollbar#{$infix}-y-hidden {
+      overflow-y: hidden;
+    }
+
+    .scrollbar#{$infix}-hidden {
+      overflow: hidden;
+    }
+
+
+    .scrollbar#{$infix}-x-scroll {
+      overflow-x: scroll;
+    }
+
+    .scrollbar#{$infix}-y-scroll {
+      overflow-y: scroll;
+    }
+
+    .scrollbar#{$infix}-scroll {
+      overflow: scroll;
+    }
+
+
+    .flex-scrollbar#{$infix}-y-auto {
+      flex-wrap: nowrap;
+      white-space: nowrap;
+      @extend .scrollbar#{$infix}-y-auto;
+    }
+
+    .flex-scrollbar#{$infix}-x-auto {
+      flex-wrap: nowrap;
+      white-space: nowrap;
+      @extend .scrollbar#{$infix}-x-auto;
+    }
+
+    .flex-scrollbar#{$infix}-auto {
+      @extend .flex-scrollbar-x-auto;
+      @extend .flex-scrollbar-y-auto;
+    }
+
+    .flex-scrollbar#{$infix}-y-visible {
+      flex-wrap: nowrap;
+      white-space: nowrap;
+      @extend .scrollbar#{$infix}-y-visible;
+    }
+
+    .flex-scrollbar#{$infix}-x-visible {
+      flex-wrap: nowrap;
+      white-space: nowrap;
+      @extend .scrollbar#{$infix}-x-visible;
+    }
+
+
+    .flex-scrollbar#{$infix}-y-scroll {
+      flex-wrap: nowrap;
+      white-space: nowrap;
+      @extend .scrollbar#{$infix}-y-scroll;
+    }
+
+    .flex-scrollbar#{$infix}-x-scroll {
+      flex-wrap: nowrap;
+      white-space: nowrap;
+      @extend .scrollbar#{$infix}-x-scroll;
+    }
+
+    .flex-scrollbar#{$infix}-scroll {
+      @extend .flex-scrollbar-x-scroll;
+      @extend .flex-scrollbar-y-scroll;
+    }
+
+
+    .scrollbar#{$infix}-x-visible-on-hover {
+      @extend .scrollbar#{$infix}-invisible;
+      &:hover {
+        overflow-x: visible !important;
+        margin-bottom: 0px !important;
+      }
+    }
+
+    .scrollbar#{$infix}-y-visible-on-hover {
+      @extend .scrollbar#{$infix}-invisible;
+      &:hover {
+        overflow-y: visible !important;
+        margin-right: 0px !important;
+      }
+    }
+
+    .scrollbar#{$infix}-visible-on-hover {
+      @extend .scrollbar#{$infix}-x-visible-on-hover;
+      @extend .scrollbar#{$infix}-y-visible-on-hover;
+    }
   }
-  scrollbar-face-color: initial !important;
-  scrollbar-track-color: initial !important;
-}
-
-.scrollbar-black {
-  @include scrollbars(.5em, $black, transparent);
-}
-
-.scrollbar-primary {
-  @include scrollbars(.5em, theme-color(primary), transparent);
-}
-
-.scrollbar-secondary {
-  @include scrollbars(.5em, theme-color(secondary), transparent);
-}
-
-.scrollbar-success {
-  @include scrollbars(.5em, theme-color(success), transparent);
-}
-
-.scrollbar-danger {
-  @include scrollbars(.5em, theme-color(danger), transparent);
-}
-
-.scrollbar-warning {
-  @include scrollbars(.5em, theme-color(warning), transparent);
-}
-
-.scrollbar-info {
-  @include scrollbars(.5em, theme-color(info), transparent);
-}
-
-.scrollbar-light {
-  @include scrollbars(.5em, theme-color(light), transparent);
-}
-
-.scrollbar-dark {
-  @include scrollbars(.5em, theme-color(dark), transparent);
-}
-
-.scrollbar-white {
-  @include scrollbars(.5em, $white, transparent);
-}
-
-.scrollbar-invisible {
-  @include scrollbars(0, transparent, transparent);
-  -ms-overflow-style: none; /* IE 11 */
-  scrollbar-width: none; /* Firefox 64 */
-}
-
-
-.scrollbar-black-on-hover {
-  @extend .scrollbar-invisible;
-  &:hover {
-    @extend .scrollbar-black;
-  }
-}
-
-.scrollbar-primary-on-hover {
-  @extend .scrollbar-invisible;
-  &:hover {
-    @extend .scrollbar-primary;
-  }
-}
-
-.scrollbar-secondary-on-hover {
-  @extend .scrollbar-invisible;
-  &:hover {
-    @extend .scrollbar-secondary;
-  }
-}
-
-.scrollbar-success-on-hover {
-  @extend .scrollbar-invisible;
-  &:hover {
-    @extend .scrollbar-success;
-  }
-}
-
-.scrollbar-danger-on-hover {
-  @extend .scrollbar-invisible;
-  &:hover {
-    @extend .scrollbar-danger;
-  }
-}
-
-.scrollbar-warning-on-hover {
-  @extend .scrollbar-invisible;
-  &:hover {
-    @extend .scrollbar-warning;
-  }
-}
-
-.scrollbar-info-on-hover {
-  @extend .scrollbar-invisible;
-  &:hover {
-    @extend .scrollbar-info;
-  }
-}
-
-.scrollbar-light-on-hover {
-  @extend .scrollbar-invisible;
-  &:hover {
-    @extend .scrollbar-light;
-  }
-}
-
-.scrollbar-dark-on-hover {
-  @extend .scrollbar-invisible;
-  &:hover {
-    @extend .scrollbar-dark;
-  }
-}
-
-.scrollbar-white-on-hover {
-  @extend .scrollbar-invisible;
-  &:hover {
-    @extend .scrollbar-white;
-  }
-}
-
-
-.scrollbar-x-auto {
-  overflow-x: auto;
-  max-width: 100%;
-  &.row {
-    max-width: initial;
-  }
-}
-
-.scrollbar-y-auto {
-  overflow-y: auto;
-  max-height: 100%;
-}
-
-.scrollbar-auto {
-  @extend .scrollbar-x-auto;
-  @extend .scrollbar-y-auto;
-}
-
-.scrollbar-x-visible {
-  overflow-x: visible;
-  max-width: 100%;
-  &.row {
-    max-width: initial;
-  }
-}
-
-.scrollbar-y-visible {
-  overflow-y: visible;
-  max-height: 100%;
-}
-
-.scrollbar-visible {
-  @extend .scrollbar-x-visible;
-  @extend .scrollbar-y-visible;
-}
-
-
-.scrollbar-x-hidden {
-  overflow-x: hidden;
-}
-
-.scrollbar-y-hidden {
-  overflow-y: hidden;
-}
-
-.scrollbar-hidden {
-  overflow: hidden;
-}
-
-
-.scrollbar-x-scroll {
-  overflow-x: scroll;
-}
-
-.scrollbar-y-scroll {
-  overflow-y: scroll;
-}
-
-.scrollbar-scroll {
-  overflow: scroll;
-}
-
-
-.flex-scrollbar-y-auto {
-  flex-wrap: nowrap;
-  white-space: nowrap;
-  @extend .scrollbar-y-auto;
-}
-
-.flex-scrollbar-x-auto {
-  flex-wrap: nowrap;
-  white-space: nowrap;
-  @extend .scrollbar-x-auto;
-}
-
-.flex-scrollbar-auto {
-  @extend .flex-scrollbar-x-auto;
-  @extend .flex-scrollbar-y-auto;
-}
-
-.flex-scrollbar-y-visible {
-  flex-wrap: nowrap;
-  white-space: nowrap;
-  @extend .scrollbar-y-visible;
-}
-
-.flex-scrollbar-x-visible {
-  flex-wrap: nowrap;
-  white-space: nowrap;
-  @extend .scrollbar-x-visible;
-}
-
-
-.flex-scrollbar-y-scroll {
-  flex-wrap: nowrap;
-  white-space: nowrap;
-  @extend .scrollbar-y-scroll;
-}
-
-.flex-scrollbar-x-scroll {
-  flex-wrap: nowrap;
-  white-space: nowrap;
-  @extend .scrollbar-x-scroll;
-}
-
-.flex-scrollbar-scroll {
-  @extend .flex-scrollbar-x-scroll;
-  @extend .flex-scrollbar-y-scroll;
-}
-
-
-.scrollbar-x-visible-on-hover {
-  @extend .scrollbar-invisible;
-  &:hover {
-    overflow-x: visible !important;
-    margin-bottom: 0px !important;
-  }
-}
-
-.scrollbar-y-visible-on-hover {
-  @extend .scrollbar-invisible;
-  &:hover {
-    overflow-y: visible !important;
-    margin-right: 0px !important;
-  }
-}
-
-.scrollbar-visible-on-hover {
-  @extend .scrollbar-x-visible-on-hover;
-  @extend .scrollbar-y-visible-on-hover;
 }
