@@ -37,7 +37,11 @@ export abstract class ALocalesService {
    * @param properties properties, e.g. `['de', 'form', 'newsletter', 'label']`
    * @param force Set this to true if you want to force the request also if the service is not ready, you should use this only one the time
    */
-  public async get(properties?: string[], vars?: LocalVar, force = false) {
+  public async get(
+    properties?: string[],
+    vars?: LocalVar,
+    force = false
+  ): Promise<string> {
     if (!this.ready && !force) {
       throw new Error("not ready");
     }
@@ -49,7 +53,7 @@ export abstract class ALocalesService {
             let local: any = clone(true, locals);
             for (const property of properties) {
               if (!property) {
-                return;
+                return null;
               }
               if (local[property]) {
                 local = local[property];
