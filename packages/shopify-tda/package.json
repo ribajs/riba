@@ -59,7 +59,9 @@
     "@ribajs/cache": "workspace:packages/cache",
     "@ribajs/core": "workspace:packages/core",
     "@ribajs/i18n": "workspace:packages/i18n",
-    "@ribajs/shopify": "workspace:packages/shopify"
+    "@ribajs/router": "workspace:packages/router",
+    "@ribajs/shopify": "workspace:packages/shopify",
+    "@ribajs/utils": "workspace:packages/utils"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

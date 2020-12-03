@@ -10,3 +10,4 @@ export { ShopifyLinklistComponent } from "./linklist/linklist.component";
 export { ShopifyLoginFormComponent } from "./login-form/login-form.component";
 export { ShopifyProductComponent } from "./product/product.component";
 export { ShopifyProductItemComponent } from "./product-item/product-item.component";
+export { ShopifyProductScrollbarComponent } from "./product-scrollbar/product-scrollbar.component";

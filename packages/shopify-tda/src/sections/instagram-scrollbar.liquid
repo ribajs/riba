@@ -1,0 +1,85 @@
+<shopify-tda-instagram-scrollbar
+  instagram-id="{{section.settings.instagram_id}}"
+  open-links="{{section.settings.open-links}}"
+  limit="{{section.settings.limit}}"
+  open-url="{{section.settings.open-url}}"
+  class="d-block container-fluid"
+  style="background-color: #4D3A40;"
+  >
+  <div class="row title-row scrollbar-invisible scrollbar-x-hidden scrollbar-y-hidden">
+    <div
+      class="col-auto title-col text-nowrap"
+      rv-show="media.data | size | gt 0"
+      style="padding-right: 16%; padding-left: 16%; color: #000000;"
+      rv-i18n-text="'sections.instagram-scrollbar.title'"
+    >
+      {{'title'|t}}
+    </div>
+  </div>
+  <div class="row flex-nowrap scrollbar-invisible scrollbar-x-auto" rv-scrollbar-draggable="" rv-on-scroll="onScroll">
+    <div class="col-7 col-md-5 px-0 embed-responsive embed-responsive-1by1 lazy cursor-pointer" rv-each-image="media.data" rv-add-class="image.media_type" rv-data-url="image.permalink" rv-touch-events rv-on-tap="onTap">
+      
+      {% comment %} IMAGE {% endcomment %}
+      <img lazyload="lazy" class="embed-responsive-item" rv-if="image.media_type | eq 'IMAGE'" rv-src="image.media_url" rv-alt="image.caption">
+
+      {% comment %} CAROUSEL_ALBUM {% endcomment %}
+      <img lazyload="lazy" class="embed-responsive-item" rv-if="image.media_type | eq 'CAROUSEL_ALBUM'" rv-src="image.media_url" rv-alt="image.caption">
+      
+      {% comment %} VIDEO {% endcomment %}
+      <video class="embed-responsive-item" rv-if="image.media_type | eq 'VIDEO'" autoplay muted loop preload>
+        <source rv-src="image.media_url" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+  </div>
+</shopify-tda-instagram-scrollbar>
+
+{% schema %}
+  {
+    "name": "Instagram Scrollbar",
+    "class": "instagram-scrollbar",
+    "settings": [
+      {
+        "type": "text",
+        "id": "instagram_id",
+        "label": "Instagram ID"
+      },
+      {
+        "type":      "checkbox",
+        "id":        "open-links",
+        "label":     "Go to Instagram on tab",
+        "default":   false
+      },
+      {
+        "type":      "url",
+        "id":        "open-url",
+        "label":     "Go to Page on tab"
+      },
+      {
+        "type":      "range",
+        "id":        "limit",
+        "label":     "Limit",
+        "min":       3,
+        "max":       30,
+        "default":   9
+      }
+    ],
+    "blocks": [],
+    "presets": [
+      {
+        "category": "Sozial Content",
+        "name": "Instagram Scrollbar",
+        "blocks": []
+      }
+    ],
+    "locales": {
+      "en": {
+        "title": "#ART+CODE STUDIO HIGHLIGHTS"
+      },
+      "de": {
+        "title": "#ART+CODE STUDIO HIGHLIGHTS"
+      }
+    }
+  }
+{% endschema %}

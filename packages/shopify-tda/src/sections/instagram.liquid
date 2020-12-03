@@ -1,0 +1,61 @@
+<shopify-tda-instagram
+  instagram-id="{{section.settings.instagram_id}}"
+  open-links="{{section.settings.open-links}}"
+  limit="{{section.settings.limit}}"
+  >
+  <div class="row">
+    <div class="col-12 col-sm-4 px-0 embed-responsive embed-responsive-1by1 lazy" rv-each-image="media.data" rv-add-class="image.media_type" rv-data-url="image.permalink" rv-touch-events rv-on-tap="onTap">
+      {% comment %} IMAGE {% endcomment %}
+      <img lazyload="lazy" class="embed-responsive-item" rv-if="image.media_type | eq 'IMAGE'" rv-src="image.media_url" rv-src="image.media_url" rv-alt="image.caption">
+
+      {% comment %} CAROUSEL_ALBUM {% endcomment %}
+      <img lazyload="lazy" class="embed-responsive-item" rv-if="image.media_type | eq 'CAROUSEL_ALBUM'" rv-src="image.media_url" rv-src="image.media_url" rv-alt="image.caption">
+      
+      {% comment %} VIDEO {% endcomment %}
+      <video class="embed-responsive-item" rv-if="image.media_type | eq 'VIDEO'" autoplay muted loop preload>
+        <source rv-src="image.media_url" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      {% comment %} hover info {% endcomment %}
+      <div class="embed-responsive-item caption d-none d-md-flex align-items-center" rv-text="image.caption">
+      </div>
+    </div>
+  </div>
+</shopify-tda-instagram>
+
+{% schema %}
+  {
+    "name": "Instagram Grid",
+    "class": "instagram",
+    "settings": [
+      {
+        "type": "text",
+        "id": "instagram_id",
+        "label": "Instagram ID"
+      },
+      {
+        "type":      "checkbox",
+        "id":        "open-links",
+        "label":     "Go to Instagram on tab",
+        "default":   true
+      },
+      {
+        "type":      "range",
+        "id":        "limit",
+        "label":     "Limit",
+        "min":       10,
+        "max":       100,
+        "default":   60
+      }
+    ],
+    "blocks": [],
+    "presets": [
+      {
+        "category": "Custom Content",
+        "name": "Instagram Grid",
+        "blocks": []
+      }
+    ]
+  }
+{% endschema %}

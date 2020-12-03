@@ -89,7 +89,7 @@ deploy = function async(cmd, files, env) {
  * @memberof slate-cli.tasks.watch
  * @static
  */
-gulp_1.default.task("watch:src", gulp_1.default.parallel("watch:assets", "watch:assets:riba-shopify", "watch:config", "watch:svg", "watch:wp"));
+gulp_1.default.task("watch:src", gulp_1.default.parallel("watch:assets", "watch:assets:riba-shopify", "watch:assets:riba-shopify-tda", "watch:config", "watch:svg", "watch:wp"));
 /**
  * Watches for changes in the `./dist` folder and passes event data to the
  * `cache` via {@link pushToCache}. A debounced {@link deployStatus} is also

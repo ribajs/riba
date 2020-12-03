@@ -95,6 +95,7 @@ gulp.task(
   gulp.parallel(
     "watch:assets",
     "watch:assets:riba-shopify",
+    "watch:assets:riba-shopify-tda",
     "watch:config",
     "watch:svg",
     "watch:wp"

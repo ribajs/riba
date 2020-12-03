@@ -5,6 +5,7 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getReleaseName = exports.getReleaseZipFilename = exports.getYamlConfig = exports.config = void 0;
 const path_1 = __importDefault(require("path"));
@@ -17,6 +18,7 @@ const fs_1 = __importDefault(require("fs"));
 const utilities_1 = require("./utilities");
 const themeRoot = find_root_1.default(process.cwd());
 let ribaShopifyRoot = path_1.default.resolve(__dirname, "../../../");
+let ribaShopifyTdaRoot = null;
 /**
  * You can pass a custom config filename with `--config=config.deploy.yml` eg with npm run deploy:prod -- --config=config.deploy.yml
  */
@@ -37,13 +39,23 @@ try {
 catch (err) {
     logger(err);
 }
-// Get relative path of shared code
-if (pkg &&
-    pkg.resolutions &&
-    pkg.resolutions["@ribajs/shopify"] &&
-    pkg.resolutions["@ribajs/shopify"].includes("portal:")) {
-    const ribaShopifyRPath = pkg.resolutions["@ribajs/shopify"].split("portal:")[1];
-    ribaShopifyRoot = path_1.default.resolve(themeRoot, ribaShopifyRPath);
+// Get relative path of @ribajs/shopify
+if ((pkg === null || pkg === void 0 ? void 0 : pkg.dependencies) && (pkg === null || pkg === void 0 ? void 0 : pkg.dependencies["@ribajs/shopify"])) {
+    const ribaShopifyPath = require.resolve("@ribajs/shopify");
+    ribaShopifyRoot = path_1.default.resolve(themeRoot, ribaShopifyPath);
+}
+if ((pkg === null || pkg === void 0 ? void 0 : pkg.resolutions) && ((_a = pkg === null || pkg === void 0 ? void 0 : pkg.resolutions["@ribajs/shopify"]) === null || _a === void 0 ? void 0 : _a.includes("portal:"))) {
+    const ribaShopifyPath = pkg.resolutions["@ribajs/shopify"].split("portal:")[1];
+    ribaShopifyRoot = path_1.default.resolve(themeRoot, ribaShopifyPath);
+}
+// Get relative path of @ribajs/shopify-tda
+if ((pkg === null || pkg === void 0 ? void 0 : pkg.dependencies) && (pkg === null || pkg === void 0 ? void 0 : pkg.dependencies["@ribajs/shopify-tda"])) {
+    const ribaShopifyTdaPath = require.resolve("@ribajs/shopify-tda");
+    ribaShopifyTdaRoot = path_1.default.resolve(themeRoot, ribaShopifyTdaPath);
+}
+if ((pkg === null || pkg === void 0 ? void 0 : pkg.resolutions) && ((_b = pkg === null || pkg === void 0 ? void 0 : pkg.resolutions["@ribajs/shopify-tda"]) === null || _b === void 0 ? void 0 : _b.includes("portal:"))) {
+    const ribaShopifyTdaPath = pkg.resolutions["@ribajs/shopify-tda"].split("portal:")[1];
+    ribaShopifyTdaRoot = path_1.default.resolve(themeRoot, ribaShopifyTdaPath);
 }
 /**
  * slate-cli configuration object
@@ -115,6 +127,39 @@ exports.config = {
             locales: path_1.default.resolve(ribaShopifyRoot, "src/locales/") + "/*",
             config: path_1.default.resolve(ribaShopifyRoot, "src/config/") + "/*",
             layout: path_1.default.resolve(ribaShopifyRoot, "src/layout/") + "/*",
+        },
+    },
+    ribaShopifyTda: {
+        root: ribaShopifyTdaRoot,
+        src: {
+            root: ribaShopifyTdaRoot ? path_1.default.resolve(ribaShopifyTdaRoot, "src/") : "",
+            json: ribaShopifyTdaRoot
+                ? path_1.default.resolve(ribaShopifyTdaRoot, "src/") + "/**/*.json"
+                : "",
+            assets: ribaShopifyTdaRoot
+                ? path_1.default.resolve(ribaShopifyTdaRoot, "src/assets/") + "/**/*"
+                : "",
+            icons: ribaShopifyTdaRoot
+                ? path_1.default.resolve(ribaShopifyTdaRoot, "src/icons/") + "/**/*.svg"
+                : "",
+            templates: ribaShopifyTdaRoot
+                ? path_1.default.resolve(ribaShopifyTdaRoot, "src/templates/") + "/**/*"
+                : "",
+            snippets: ribaShopifyTdaRoot
+                ? path_1.default.resolve(ribaShopifyTdaRoot, "src/snippets/") + "/*"
+                : "",
+            sections: ribaShopifyTdaRoot
+                ? path_1.default.resolve(ribaShopifyTdaRoot, "src/sections/") + "/*"
+                : "",
+            locales: ribaShopifyTdaRoot
+                ? path_1.default.resolve(ribaShopifyTdaRoot, "src/locales/") + "/*"
+                : "",
+            config: ribaShopifyTdaRoot
+                ? path_1.default.resolve(ribaShopifyTdaRoot, "src/config/") + "/*"
+                : "",
+            layout: ribaShopifyTdaRoot
+                ? path_1.default.resolve(ribaShopifyTdaRoot, "src/layout/") + "/*"
+                : "",
         },
     },
     plugins: {

@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Custom version of https://github.com/Shopify/slate/blob/0.x/packages/slate-tools/src/tasks/build-assets.js
@@ -33,7 +34,7 @@ const assetsPaths = [
     config_1.config.src.config,
     config_1.config.src.layout,
 ];
-const assetsPathsribaShopify = [
+const assetsPathsRibaShopify = [
     config_1.config.ribaShopify.src.assets,
     config_1.config.ribaShopify.src.templates,
     config_1.config.ribaShopify.src.sections,
@@ -42,6 +43,10 @@ const assetsPathsribaShopify = [
     config_1.config.ribaShopify.src.config,
     config_1.config.ribaShopify.src.layout,
 ];
+const assetsPathsRibaShopifyTda = [];
+if ((_a = config_1.config.ribaShopifyTda) === null || _a === void 0 ? void 0 : _a.root) {
+    assetsPathsRibaShopifyTda.push(config_1.config.ribaShopifyTda.src.assets, config_1.config.ribaShopifyTda.src.templates, config_1.config.ribaShopifyTda.src.sections, config_1.config.ribaShopifyTda.src.snippets, config_1.config.ribaShopifyTda.src.locales, config_1.config.ribaShopifyTda.src.config, config_1.config.ribaShopifyTda.src.layout);
+}
 /**
  * Copies assets to the `/dist` directory
  *
@@ -60,10 +65,21 @@ const processAssetsTheme = (files) => {
     }))
         .pipe(gulp_1.default.dest(config_1.config.dist.root));
 };
-const processAssetsribaShopify = (files) => {
+const processAssetsRibaShopify = (files) => {
     messages_1.default.logProcessFiles("build:assets:riba-shopify");
     return gulp_1.default
         .src(files, { base: config_1.config.ribaShopify.src.root })
+        .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
+        .pipe(gulp_size_1.default({
+        showFiles: true,
+        pretty: true,
+    }))
+        .pipe(gulp_1.default.dest(config_1.config.dist.root));
+};
+const processAssetsRibaShopifyTda = (files) => {
+    messages_1.default.logProcessFiles("build:assets:riba-shopify-tda");
+    return gulp_1.default
+        .src(files, { base: config_1.config.ribaShopifyTda.src.root })
         .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
         .pipe(gulp_size_1.default({
         showFiles: true,
@@ -108,7 +124,10 @@ gulp_1.default.task("build:assets", () => {
     return processAssetsTheme(assetsPaths);
 });
 gulp_1.default.task("build:assets:riba-shopify", () => {
-    return processAssetsribaShopify(assetsPathsribaShopify);
+    return processAssetsRibaShopify(assetsPathsRibaShopify);
+});
+gulp_1.default.task("build:assets:riba-shopify-tda", () => {
+    return processAssetsRibaShopifyTda(assetsPathsRibaShopifyTda);
 });
 /**
  * Watches assets in the `/src` directory
@@ -133,14 +152,27 @@ gulp_1.default.task("watch:assets", () => {
 gulp_1.default.task("watch:assets:riba-shopify", () => {
     const eventCache = utilities_1.createEventCache();
     return chokidar_1.default
-        .watch(assetsPathsribaShopify, {
+        .watch(assetsPathsRibaShopify, {
         ignored: /(^|[/\\])\../,
         ignoreInitial: true,
     })
         .on("all", (event, path) => {
         messages_1.default.logFileEvent(event, path);
         eventCache.addEvent(event, path);
-        utilities_1.processCache(eventCache, processAssetsribaShopify, removeAssets);
+        utilities_1.processCache(eventCache, processAssetsRibaShopify, removeAssets);
+    });
+});
+gulp_1.default.task("watch:assets:riba-shopify-tda", () => {
+    const eventCache = utilities_1.createEventCache();
+    return chokidar_1.default
+        .watch(assetsPathsRibaShopifyTda, {
+        ignored: /(^|[/\\])\../,
+        ignoreInitial: true,
+    })
+        .on("all", (event, path) => {
+        messages_1.default.logFileEvent(event, path);
+        eventCache.addEvent(event, path);
+        utilities_1.processCache(eventCache, processAssetsRibaShopifyTda, removeAssets);
     });
 });
 //# sourceMappingURL=build-assets.js.map

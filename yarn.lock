@@ -4366,8 +4366,10 @@ __metadata:
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/i18n": "workspace:packages/i18n"
+    "@ribajs/router": "workspace:packages/router"
     "@ribajs/shopify": "workspace:packages/shopify"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
+    "@ribajs/utils": "workspace:packages/utils"
     "@types/jest": ^26.0.16
     "@typescript-eslint/eslint-plugin": ^4.9.0
     "@typescript-eslint/parser": ^4.9.0

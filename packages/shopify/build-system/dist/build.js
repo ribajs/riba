@@ -10,7 +10,7 @@ require("./build-config");
 require("./build-svg");
 require("./build-utils");
 require("./build-wp");
-gulp_1.default.task("build:zip", gulp_1.default.series("clean", gulp_1.default.parallel("build:wp", "build:assets", "build:assets:riba-shopify", "build:svg")));
+gulp_1.default.task("build:zip", gulp_1.default.series("clean", gulp_1.default.parallel("build:wp", "build:assets", "build:assets:riba-shopify", "build:assets:riba-shopify-tda", "build:svg")));
 /**
  * Does a full clean/rebuild of your theme and creates a `.zip` compatible with
  * shopify.
@@ -20,5 +20,5 @@ gulp_1.default.task("build:zip", gulp_1.default.series("clean", gulp_1.default.p
  * @static
  */
 gulp_1.default.task("zip", gulp_1.default.series("build:zip", "compress", "output:errors"));
-gulp_1.default.task("build", gulp_1.default.series("clean", gulp_1.default.parallel("build:wp", "build:assets", "build:assets:riba-shopify", "build:config", "build:svg"), "output:errors"));
+gulp_1.default.task("build", gulp_1.default.series("clean", gulp_1.default.parallel("build:wp", "build:assets", "build:assets:riba-shopify", "build:assets:riba-shopify-tda", "build:config", "build:svg"), "output:errors"));
 //# sourceMappingURL=build.js.map
