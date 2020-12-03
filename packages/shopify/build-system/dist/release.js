@@ -58,7 +58,7 @@ gulp_1.default.task("backup:locale", () => __awaiter(void 0, void 0, void 0, fun
             const themeConfig = liveConfigs[envKey];
             const shopData = yield shopify_api_1.getShop(themeConfig);
             const locale = shopData.primary_locale;
-            console.log(`[${envKey}] locale: ${locale}`);
+            gulp_util_1.default.log(`[${envKey}] locale: ${locale}`);
             let localeData = {};
             let localeFilename = `${locale}.json`;
             try {
@@ -127,7 +127,7 @@ gulp_1.default.task("deploy:zips", () => __awaiter(void 0, void 0, void 0, funct
         const filename = config_1.getReleaseZipFilename(envKey);
         const src = yield upload_1.getDownloadFileUrl(filename);
         if (!src) {
-            gulp_util_1.default.log(`Skip deoloy zip`);
+            gulp_util_1.default.log(gulp_util_1.default.colors.yellow(`Skip deploy zip`));
             return null;
         }
         const zipFilename = path_1.default.basename(src).split("?")[0];

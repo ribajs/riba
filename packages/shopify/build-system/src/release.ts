@@ -64,7 +64,7 @@ gulp.task("backup:locale", async () => {
       const themeConfig = liveConfigs[envKey];
       const shopData = await getShop(themeConfig);
       const locale = shopData.primary_locale;
-      console.log(`[${envKey}] locale: ${locale}`);
+      gutil.log(`[${envKey}] locale: ${locale}`);
       let localeData: any = {};
       let localeFilename = `${locale}.json`;
       try {
@@ -160,7 +160,7 @@ gulp.task("deploy:zips", async () => {
     const src = await getDownloadFileUrl(filename);
 
     if (!src) {
-      gutil.log(`Skip deoloy zip`);
+      gutil.log(gutil.colors.yellow(`Skip deploy zip`));
       return null;
     }
 

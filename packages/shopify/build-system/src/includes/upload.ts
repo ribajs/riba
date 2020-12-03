@@ -16,15 +16,16 @@ export const uploadFile = async (filePath: string) => {
     return bithucket.uploadFile(filePath);
   }
 
-  if (releaseConfig?.github) {
-    return github.uploadFile(filePath);
-  }
+  // WAIT FOR FIX https://github.com/octokit/plugin-rest-endpoint-methods.js/issues/207
+  // if (releaseConfig?.github) {
+  //   return github.uploadFile(filePath);
+  // }
 
   gutil.log(
     gutil.colors.yellow(
       `The config file "${config.releaseConfig}" does not exist or is invalid, skip upload!\n` +
-        `Please upload the theme file "${filename}" by hand to shopify.\n` +
-        `If you want to automatically upload the file to deploy it in Shopify then create this config file in the root of you project.`
+        `Please upload the theme file "${filename}" by hand to Shopify.\n` +
+        `If you want to automatically deploy the theme to Shopify create / fix the config file in the root of you project.`
     )
   );
 
@@ -42,12 +43,15 @@ export const getDownloadFileUrl = async (
     return bithucket.getDownloadFileUrl(filename);
   }
 
-  if (releaseConfig?.github) {
-    return github.getDownloadFileUrl(filename);
-  }
+  // WAIT FOR FIX https://github.com/octokit/plugin-rest-endpoint-methods.js/issues/207
+  // if (releaseConfig?.github) {
+  //   return github.getDownloadFileUrl(filename);
+  // }
 
   gutil.log(
-    `The config file "${config.releaseConfig}" does not exist or is invalid, skip get download url!`
+    gutil.colors.yellow(
+      `The config file "${config.releaseConfig}" does not exist or is invalid, skip get download url!`
+    )
   );
 
   return null;
