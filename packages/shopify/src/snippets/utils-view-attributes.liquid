@@ -2,9 +2,9 @@
   {% assign template = 'no-barba' %}
 {% endif %}
 
-data-title="{% include 'utils-get-title' %}"
-data-namespace="{% include 'utils-get-namespace' %}"
-data-template='{% include 'utils-json-template' %}'
+data-title="{% render 'utils-get-title' %}"
+data-namespace="{% render 'utils-get-namespace' %}"
+data-template='{% render 'utils-json-template' %}'
 
 
 {% comment %} Handle {% endcomment %}
@@ -26,7 +26,7 @@ data-template='{% include 'utils-json-template' %}'
 {% endif %}
 
 {% if parsePage and page %}
-  data-page='{% include 'utils-json-page' %}'
+  data-page='{% render 'utils-json-page' %}'
 {% endif %}
 
 {% if parseCollection and collection %}
@@ -94,9 +94,9 @@ Use the Shopify Ajax API to get the cart
 {% endcomment %}
 
 {% if parseBlog and blog %}
-  data-blog='{% include 'utils-json-blog' with blog %}'
+  data-blog='{% render 'utils-json-blog' with blog %}'
 {% endif %}
 
 {% if parseArticle and article %}
-  data-article='{% include 'utils-json-article' with article %}'
+  data-article='{% render 'utils-json-article' with article %}'
 {% endif %}

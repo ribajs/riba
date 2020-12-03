@@ -247,3 +247,8 @@ gulp.task(
     "themes:list:youngest"
   )
 );
+
+gulp.task(
+  "release:zip",
+  gulp.series("theme:name", "build", "build:zips", "deploy:zips")
+);

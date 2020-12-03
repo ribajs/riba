@@ -1,7 +1,7 @@
 {% capture linklistsJsonString %}
 {
     {% for linklist in linklists %}
-        {{linklist.handle | json}}: {% include 'utils-json-linklist', linklist: linklist %}{% if forloop.last != true %},{% endif %}
+        {{linklist.handle | json}}: {% render 'utils-json-linklist', linklist: linklist %}{% if forloop.last != true %},{% endif %}
     {% endfor %}
 }
 {% endcapture %}{{ linklistsJsonString | strip_newlines | strip | replace: "'", "&#39;" }}

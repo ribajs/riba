@@ -174,4 +174,5 @@ gulp_1.default.task("theme:name", () => __awaiter(void 0, void 0, void 0, functi
     return global.themeName;
 }));
 gulp_1.default.task("release:new", gulp_1.default.series("theme:name", "theme:delete-oldest-on-limit", "generate:config:live", "backup:locale", "backup:settings_data", "build", "build:zips", "upload:zips", "deploy:zips", "themes:list:youngest"));
+gulp_1.default.task("release:zip", gulp_1.default.series("theme:name", "build", "build:zips", "deploy:zips"));
 //# sourceMappingURL=release.js.map

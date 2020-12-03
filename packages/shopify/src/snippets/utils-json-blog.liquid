@@ -1,11 +1,11 @@
 {% capture blogJsonString %}
   {
     {% if blog %}
-      "all_tags": {% include 'utils-json-tags', tags: blog.all_tags %},
+      "all_tags": {% render 'utils-json-tags', tags: blog.all_tags %},
       {% if full %}
         "articles": [
           {% for article in blog.articles %}
-            {% include 'utils-json-article' %}{% if forloop.last != true %},{% endif %}
+            {% render 'utils-json-article' %}{% if forloop.last != true %},{% endif %}
             {% comment %} {{article.handle | json}} {% endcomment %}
           {% endfor %}
         ],
@@ -17,7 +17,7 @@
       "moderated": {{blog.moderated? | json}},
       "next_article": {{blog.next_article  | json}},
       "previous_article": {{blog.previous_article | json}},
-      "tags": {% include 'utils-json-tags', tags: blog.tags %},
+      "tags": {% render 'utils-json-tags', tags: blog.tags %},
       "title": {{blog.title  | json}},
       "url": {{blog.url | json}}
     {% endif %}

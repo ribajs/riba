@@ -5,7 +5,7 @@
   See docu for address object: https://shopify.dev/docs/liquid/reference/objects/address
 
   Usage:
-  `{% include 'utils-json-address', address: checkout.shipping_address %}`
+  `{% render 'utils-json-address', address: checkout.shipping_address %}`
 {% endcomment %}
 {%- capture jsonAddress -%}
   {

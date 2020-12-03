@@ -5,14 +5,14 @@
     "levels": {{link.levels | json}},
     {% if link.links %}
         {% assign newlevel = level | plus: 1 %}
-        "links": {% include "utils-json-links", links: link.links, level: newlevel %},
+        "links": {% render "utils-json-links", links: link.links, level: newlevel %},
     {% endif %}
     {% comment %} BlogDrop {% endcomment %}
     {% if link.object.articles %}
-        "object": {% include "utils-json-blog", blog: link.object %},
+        "object": {% render "utils-json-blog", blog: link.object %},
     {% comment %} PageDrop {% endcomment %}
     {% elsif link.object.author %}
-        "object": {% include "utils-json-page", page: link.object %},
+        "object": {% render "utils-json-page", page: link.object %},
     {% comment %} CollectionDrop {% endcomment %}
     {% elsif link.object.all_products_count >= 0 %}
         "object": {

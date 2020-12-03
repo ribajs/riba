@@ -11,65 +11,65 @@
   {% assign quote = '"' %}
   {% assign escapedQuote = '\"' %}
 
-  /**
-   * Covert adhesive keys like 
-   *
-   *  products_freeshipping_color: #1084f6 , like products_freeshipping_enabled: true
-   *
-   * to:
-   * 
-   *  products: {
-   *    freeshipping: {
-   *      color: #1084f6,
-   *      enabled: true
-   *    }
-   *  }
-   *
-   * Used internally to convert the shopify theme settings to better usable javascript objects.
-   */
-  var adhesiveKeyObjectToNestedObject = function (adhesiveKeyObject, separator) {
-    var nestedObject = {};
-    if(!separator) {
-      separator = '_';
-    }
-    for (var adhesiveKey in adhesiveKeyObject) {
-      // skip loop if the property is from prototype
-      if (!adhesiveKeyObject.hasOwnProperty(adhesiveKey)) {
-        continue;
-      }
-      var object = adhesiveKeyObject[adhesiveKey];
-      var keys = adhesiveKey.split(separator);
-      var childObject;
-      for (var i in keys) {
-        var key = keys[i];       
-        if(i <= 0) {
-          // back to root object
-          childObject = nestedObject;
-        }
+  {% if includeThemeSettings %}
 
-        // if there are more childs create tree element
-        if( Number(i) < keys.length - 1) {
-          if(typeof(childObject[key]) !== 'object') {
-            childObject[key] = {};
+    /**
+    * Covert adhesive keys like 
+    *
+    *  products_freeshipping_color: #1084f6 , like products_freeshipping_enabled: true
+    *
+    * to:
+    * 
+    *  products: {
+    *    freeshipping: {
+    *      color: #1084f6,
+    *      enabled: true
+    *    }
+    *  }
+    *
+    * Used internally to convert the shopify theme settings to better usable javascript objects.
+    */
+    var adhesiveKeyObjectToNestedObject = function (adhesiveKeyObject, separator) {
+      var nestedObject = {};
+      if(!separator) {
+        separator = '_';
+      }
+      for (var adhesiveKey in adhesiveKeyObject) {
+        // skip loop if the property is from prototype
+        if (!adhesiveKeyObject.hasOwnProperty(adhesiveKey)) {
+          continue;
+        }
+        var object = adhesiveKeyObject[adhesiveKey];
+        var keys = adhesiveKey.split(separator);
+        var childObject;
+        for (var i in keys) {
+          var key = keys[i];       
+          if(i <= 0) {
+            // back to root object
+            childObject = nestedObject;
           }
-          childObject = childObject[key];
-        } else {
-          // on the end set the value
-          childObject[key] = object;
+
+          // if there are more childs create tree element
+          if( Number(i) < keys.length - 1) {
+            if(typeof(childObject[key]) !== 'object') {
+              childObject[key] = {};
+            }
+            childObject = childObject[key];
+          } else {
+            // on the end set the value
+            childObject[key] = object;
+          }
         }
       }
-    }
-    return nestedObject;
-  };
+      return nestedObject;
+    };
 
-  /**
-  * Variables 
-  */
+    /**
+    * Theme Settings
+    */
+    window.model.system.themeSettings = adhesiveKeyObjectToNestedObject({{ settings | json }}, '_');
 
-  /**
-  * Theme Settings
-  */
-  window.model.system.themeSettings = adhesiveKeyObjectToNestedObject({{ settings | json }}, '_');
+  {% endif %}
 
   /**
    * Cart
@@ -77,9 +77,9 @@
    */
   // window.model.system.cart = window.cart || {{ cart | json }};
 
-  window.model.system.customer = {% include 'utils-json-customer' %}; // {{ customer | json }} not allowed for this object
+  window.model.system.customer = {% render 'utils-json-customer' %}; // {{ customer | json }} not allowed for this object
   
-  window.model.system.linklists = {% include 'utils-json-linklists' %}; // {{ linklists | json }} not allowed for this object
+  window.model.system.linklists = {% render 'utils-json-linklists' %}; // {{ linklists | json }} not allowed for this object
 
   /**
   * Money / Currency
