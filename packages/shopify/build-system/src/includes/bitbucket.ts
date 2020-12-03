@@ -53,6 +53,9 @@ export const uploadFile = async (filePath: string) => {
       "warning"
     );
   }
+
+  gutil.log(`Upload ${filename} to bitbucket...`);
+
   const bitbucket = new Bitbucket({
     auth: {
       username,
@@ -97,7 +100,6 @@ export const getDownloadFileUrl = async (filename: string): Promise<string> => {
       password,
     },
   });
-  console.log("filename", filename);
 
   let url: string;
 

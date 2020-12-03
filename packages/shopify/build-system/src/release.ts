@@ -144,7 +144,6 @@ gulp.task("upload:zips", async () => {
         config.upload,
         getReleaseZipFilename(envKey)
       );
-      gutil.log(`[${envKey}] Upload ${zipFilePath} to bitbucket...`);
       await uploadFile(zipFilePath);
     }
   }

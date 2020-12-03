@@ -19,7 +19,7 @@ const prompts_1 = require("./includes/prompts");
 const theme_1 = require("./includes/theme");
 const messages_1 = __importDefault(require("./includes/messages"));
 const theme_2 = require("./includes/theme");
-const bitbucket_1 = require("./includes/bitbucket");
+const upload_1 = require("./includes/upload");
 const shopify_api_1 = require("./includes/shopify-api");
 const fs_1 = require("fs");
 const js_yaml_1 = __importDefault(require("js-yaml"));
@@ -115,8 +115,7 @@ gulp_1.default.task("upload:zips", () => __awaiter(void 0, void 0, void 0, funct
     for (const envKey in baseConfig) {
         if (baseConfig[envKey]) {
             const zipFilePath = path_1.default.resolve(config_1.config.upload, config_1.getReleaseZipFilename(envKey));
-            gulp_util_1.default.log(`[${envKey}] Upload ${zipFilePath} to bitbucket...`);
-            yield bitbucket_1.uploadFile(zipFilePath);
+            yield upload_1.uploadFile(zipFilePath);
         }
     }
 }));
@@ -126,20 +125,7 @@ gulp_1.default.task("deploy:zips", () => __awaiter(void 0, void 0, void 0, funct
     const themeName = global.themeName || config_1.getReleaseName();
     for (const envKey in deployConfig) {
         const filename = config_1.getReleaseZipFilename(envKey);
-        let src;
-        try {
-            src = yield bitbucket_1.getDownloadFileUrlAlternate(filename);
-        }
-        catch (error) {
-            console.warn(error);
-            try {
-                src = yield bitbucket_1.getDownloadFileUrl(filename);
-            }
-            catch (error) {
-                console.error(error);
-                throw error;
-            }
-        }
+        const src = yield upload_1.getDownloadFileUrl(filename);
         if (!src) {
             gulp_util_1.default.log(`Skip deoloy zip`);
             return null;

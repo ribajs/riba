@@ -24,10 +24,6 @@ const path_1 = __importDefault(require("path"));
 const gulp_util_1 = __importDefault(require("gulp-util"));
 const uploadFileExists = (filename) => __awaiter(void 0, void 0, void 0, function* () {
     const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
-    if (!releaseConfig) {
-        gulp_util_1.default.log(`Skip upload check`);
-        return null;
-    }
     const username = releaseConfig.bitbucket.username;
     const password = releaseConfig.bitbucket.password;
     const repo_slug = releaseConfig.bitbucket.repo_slug;
@@ -49,10 +45,6 @@ const uploadFileExists = (filename) => __awaiter(void 0, void 0, void 0, functio
 exports.uploadFileExists = uploadFileExists;
 const uploadFile = (filePath) => __awaiter(void 0, void 0, void 0, function* () {
     const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
-    if (!releaseConfig) {
-        gulp_util_1.default.log(`The config file "${filePath}" does not exist, skip upload`);
-        return null;
-    }
     const username = releaseConfig.bitbucket.username;
     const password = releaseConfig.bitbucket.password;
     const repo_slug = releaseConfig.bitbucket.repo_slug;
@@ -62,6 +54,7 @@ const uploadFile = (filePath) => __awaiter(void 0, void 0, void 0, function* () 
     if (exists) {
         console.warn(messages_1.default.colorize(`The file "${filename}" already exists on bitbucket, normally the file will be overwritten, but if there are problems delete the file in bithucket and try it again`), "warning");
     }
+    gulp_util_1.default.log(`Upload ${filename} to bitbucket...`);
     const bitbucket = new bitbucket_1.Bitbucket({
         auth: {
             username,
@@ -88,10 +81,6 @@ exports.uploadFile = uploadFile;
  */
 const getDownloadFileUrl = (filename) => __awaiter(void 0, void 0, void 0, function* () {
     const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
-    if (!releaseConfig) {
-        gulp_util_1.default.log(`Skip get download url`);
-        return null;
-    }
     const username = releaseConfig.bitbucket.username;
     const password = releaseConfig.bitbucket.password;
     const repo_slug = releaseConfig.bitbucket.repo_slug;
@@ -102,18 +91,21 @@ const getDownloadFileUrl = (filename) => __awaiter(void 0, void 0, void 0, funct
             password,
         },
     });
-    console.log("filename", filename);
-    return bitbucket.repositories
-        .getDownload({
-        repo_slug,
-        workspace,
-        filename,
-    })
-        .then((value) => {
-        console.log("bitbucket.repositories.getDownload");
-        console.log(value);
-        return value.url;
-    });
+    let url;
+    try {
+        const result = yield bitbucket.repositories.getDownload({
+            repo_slug,
+            workspace,
+            filename,
+        });
+        url = result.url;
+    }
+    catch (error) {
+        url = yield exports.getDownloadFileUrlAlternate(filename);
+    }
+    console.log("bitbucket.repositories.getDownload");
+    console.log(url);
+    return url;
 });
 exports.getDownloadFileUrl = getDownloadFileUrl;
 /**

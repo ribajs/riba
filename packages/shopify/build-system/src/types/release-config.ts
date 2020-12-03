@@ -6,9 +6,9 @@ export interface ReleaseConfig {
     repo_slug: string;
   };
   github?: {
+    token: string;
     org?: string;
     owner?: string;
-    password: string;
     type: string;
     repo: string;
   };
