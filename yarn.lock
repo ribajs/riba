@@ -2107,6 +2107,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@octokit/plugin-rest-endpoint-methods@npm:4.4.1, @octokit/plugin-rest-endpoint-methods@npm:^4.4.1":
+  version: 4.4.1
+  resolution: "@octokit/plugin-rest-endpoint-methods@npm:4.4.1"
+  dependencies:
+    "@octokit/types": ^6.1.0
+    deprecation: ^2.3.1
+  peerDependencies:
+    "@octokit/core": ">=3"
+  checksum: a19bca83c674aa217cd57063b9b39f140dcc0c55698bf7bae33618098909d32a6ea7cb20729436467e8d0b6b80cc5a98930f984366bd9b05ac1c0eb53b2e13a8
+  languageName: node
+  linkType: hard
+
 "@octokit/plugin-rest-endpoint-methods@npm:^4.4.0":
   version: 4.4.0
   resolution: "@octokit/plugin-rest-endpoint-methods@npm:4.4.0"
@@ -2169,6 +2181,18 @@ __metadata:
     "@octokit/plugin-request-log": ^1.0.2
     "@octokit/plugin-rest-endpoint-methods": 4.3.1
   checksum: 4643e1a72682e66db0ab1b9fa77d93db31245cb81da90378fa3ef0ba1df91a82bf5fffd6fbc000823a8aee652707e62cc6b83b4349670c2b8dbb3637fcbaace8
+  languageName: node
+  linkType: hard
+
+"@octokit/rest@npm:^18.0.12":
+  version: 18.0.12
+  resolution: "@octokit/rest@npm:18.0.12"
+  dependencies:
+    "@octokit/core": ^3.2.3
+    "@octokit/plugin-paginate-rest": ^2.6.2
+    "@octokit/plugin-request-log": ^1.0.2
+    "@octokit/plugin-rest-endpoint-methods": 4.4.1
+  checksum: 79219bff3e21a216cab5c883ed843e99d9ff1d5b12992e11feb6650a13763c6b1651580e05ce40d1ab52f4c5ae91895081688f39ec7d67979077aeaad401f546
   languageName: node
   linkType: hard
 
@@ -2500,7 +2524,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.3.1
-    postcss: ^8.1.13
+    postcss: ^8.1.14
     postcss-loader: ^4.1.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -2560,7 +2584,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.3.1
-    postcss: ^8.1.13
+    postcss: ^8.1.14
     postcss-loader: ^4.1.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -2789,7 +2813,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.3.1
-    postcss: ^8.1.13
+    postcss: ^8.1.14
     postcss-loader: ^4.1.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -2912,7 +2936,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.3.1
-    postcss: ^8.1.13
+    postcss: ^8.1.14
     postcss-loader: ^4.1.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -3316,7 +3340,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.3.1
-    postcss: ^8.1.13
+    postcss: ^8.1.14
     postcss-loader: ^4.1.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -4544,9 +4568,9 @@ __metadata:
     "@babel/runtime": ^7.12.5
     "@babel/runtime-corejs3": ^7.12.5
     "@octokit/core": ^3.2.4
-    "@octokit/plugin-rest-endpoint-methods": ^4.4.0
+    "@octokit/plugin-rest-endpoint-methods": ^4.4.1
     "@octokit/request": ^5.4.12
-    "@octokit/rest": ^18.0.11
+    "@octokit/rest": ^18.0.12
     "@ribajs/cache": "workspace:packages/cache"
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
@@ -4746,7 +4770,7 @@ __metadata:
     copy-webpack-plugin: ^6.3.2
     css-loader: ^5.0.1
     file-loader: ^6.2.0
-    fork-ts-checker-webpack-plugin: ^6.0.4
+    fork-ts-checker-webpack-plugin: ^6.0.5
     glob: ^7.1.6
     html-loader: ^1.3.2
     html-webpack-plugin: ^4.5.0
@@ -4754,7 +4778,7 @@ __metadata:
     mini-css-extract-plugin: ^1.3.1
     node-sass: ^5.0.0
     pkg-dir: ^5.0.0
-    postcss: ^8.1.13
+    postcss: ^8.1.14
     postcss-loader: ^4.1.0
     pug: ^3.0.0
     pug-loader: ^2.4.0
@@ -10642,6 +10666,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fork-ts-checker-webpack-plugin@npm:^6.0.5":
+  version: 6.0.5
+  resolution: "fork-ts-checker-webpack-plugin@npm:6.0.5"
+  dependencies:
+    "@babel/code-frame": ^7.8.3
+    "@types/json-schema": ^7.0.5
+    chalk: ^4.1.0
+    chokidar: ^3.4.2
+    cosmiconfig: ^6.0.0
+    deepmerge: ^4.2.2
+    fs-extra: ^9.0.0
+    memfs: ^3.1.2
+    minimatch: ^3.0.4
+    schema-utils: 2.7.0
+    semver: ^7.3.2
+    tapable: ^1.0.0
+  checksum: aa065403714e448cd4bcad323d7e982c823e02aa2749876639b21d5a3275513470d9adc0ee8f67095c1666742d68958858264dcecbb20de64fcadd9393c58310
+  languageName: node
+  linkType: hard
+
 "form-data@npm:^2.5.0":
   version: 2.5.1
   resolution: "form-data@npm:2.5.1"
@@ -16089,6 +16133,17 @@ fsevents@^1.2.7:
     source-map: ^0.6.1
     vfile-location: ^3.2.0
   checksum: 6c51aa29034ade2024cc4c60ab95d03cfaad77b468c9f6a9cf18920e9c3ce92b46b77579ae95f88cecc2c775772d4743ccebda2b1bd129c8a4fe9c71eb7f76df
+  languageName: node
+  linkType: hard
+
+"postcss@npm:^8.1.14":
+  version: 8.1.14
+  resolution: "postcss@npm:8.1.14"
+  dependencies:
+    colorette: ^1.2.1
+    nanoid: ^3.1.20
+    source-map: ^0.6.1
+  checksum: 1d28f12c6f18306f5bc374b3d9f360eded798ea9d893a7873cf40005b737464a610f7aa850fc6bb0db14ab3e2eadb99710009c827160f2d13ce5251414510edd
   languageName: node
   linkType: hard
 

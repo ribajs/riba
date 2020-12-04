@@ -16,10 +16,9 @@ export const uploadFile = async (filePath: string) => {
     return bithucket.uploadFile(filePath);
   }
 
-  // WAIT FOR FIX https://github.com/octokit/plugin-rest-endpoint-methods.js/issues/207
-  // if (releaseConfig?.github) {
-  //   return github.uploadFile(filePath);
-  // }
+  if (releaseConfig?.github) {
+    return github.uploadFile(filePath);
+  }
 
   gutil.log(
     gutil.colors.yellow(
@@ -43,10 +42,9 @@ export const getDownloadFileUrl = async (
     return bithucket.getDownloadFileUrl(filename);
   }
 
-  // WAIT FOR FIX https://github.com/octokit/plugin-rest-endpoint-methods.js/issues/207
-  // if (releaseConfig?.github) {
-  //   return github.getDownloadFileUrl(filename);
-  // }
+  if (releaseConfig?.github) {
+    return github.getDownloadFileUrl(filename);
+  }
 
   gutil.log(
     gutil.colors.yellow(

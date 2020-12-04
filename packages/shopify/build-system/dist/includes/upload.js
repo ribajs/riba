@@ -36,16 +36,16 @@ const gulp_util_1 = __importDefault(require("gulp-util"));
 const path_1 = __importDefault(require("path"));
 const config_1 = require("./config");
 const bithucket = __importStar(require("./bitbucket"));
+const github = __importStar(require("./github"));
 const uploadFile = (filePath) => __awaiter(void 0, void 0, void 0, function* () {
     const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
     const filename = path_1.default.basename(filePath);
     if (releaseConfig === null || releaseConfig === void 0 ? void 0 : releaseConfig.bitbucket) {
         return bithucket.uploadFile(filePath);
     }
-    // WAIT FOR FIX https://github.com/octokit/plugin-rest-endpoint-methods.js/issues/207
-    // if (releaseConfig?.github) {
-    //   return github.uploadFile(filePath);
-    // }
+    if (releaseConfig === null || releaseConfig === void 0 ? void 0 : releaseConfig.github) {
+        return github.uploadFile(filePath);
+    }
     gulp_util_1.default.log(gulp_util_1.default.colors.yellow(`The config file "${config_1.config.releaseConfig}" does not exist or is invalid, skip upload!\n` +
         `Please upload the theme file "${filename}" by hand to Shopify.\n` +
         `If you want to automatically deploy the theme to Shopify create / fix the config file in the root of you project.`));
@@ -57,10 +57,9 @@ const getDownloadFileUrl = (filename) => __awaiter(void 0, void 0, void 0, funct
     if (releaseConfig === null || releaseConfig === void 0 ? void 0 : releaseConfig.bitbucket) {
         return bithucket.getDownloadFileUrl(filename);
     }
-    // WAIT FOR FIX https://github.com/octokit/plugin-rest-endpoint-methods.js/issues/207
-    // if (releaseConfig?.github) {
-    //   return github.getDownloadFileUrl(filename);
-    // }
+    if (releaseConfig === null || releaseConfig === void 0 ? void 0 : releaseConfig.github) {
+        return github.getDownloadFileUrl(filename);
+    }
     gulp_util_1.default.log(gulp_util_1.default.colors.yellow(`The config file "${config_1.config.releaseConfig}" does not exist or is invalid, skip get download url!`));
     return null;
 });

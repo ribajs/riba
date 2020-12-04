@@ -14,11 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getDownloadFileUrl = exports.uploadFile = exports.createRelease = exports.getRelease = void 0;
 const gulp_util_1 = __importDefault(require("gulp-util"));
-// WAIT FOR FIX https://github.com/octokit/plugin-rest-endpoint-methods.js/issues/207
-// import { Octokit } from "@octokit/rest";
-// import path from "path";
-// import { config, getYamlConfig } from "./config";
-// import { ReleaseConfig } from "../types";
+const rest_1 = require("@octokit/rest");
+const path_1 = __importDefault(require("path"));
+const config_1 = require("./config");
 /**
  * Get a release by tag name
  * Get a published release with the specified tag.
@@ -26,22 +24,17 @@ const gulp_util_1 = __importDefault(require("gulp-util"));
  * @param filename
  */
 const getRelease = (filename) => __awaiter(void 0, void 0, void 0, function* () {
-    gulp_util_1.default.log("TODO getRelease", filename);
-    return null;
-    // WAIT FOR FIX https://github.com/octokit/plugin-rest-endpoint-methods.js/issues/207
-    // const releaseConfig: ReleaseConfig = getYamlConfig(
-    //   config.releaseConfig
-    // ) as ReleaseConfig;
-    // const octokit = new Octokit({
-    //   auth: releaseConfig.github.token,
-    // });
-    // const release = await octokit.repos.getReleaseByTag({
-    //   owner: releaseConfig.github.org || releaseConfig.github.owner,
-    //   repo: releaseConfig.github.repo,
-    //   tag: filename,
-    // });
-    // gutil.log("getRelease", release);
-    // return release;
+    const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
+    const octokit = new rest_1.Octokit({
+        auth: releaseConfig.github.token,
+    });
+    const release = yield octokit.repos.getReleaseByTag({
+        owner: releaseConfig.github.org || releaseConfig.github.owner,
+        repo: releaseConfig.github.repo,
+        tag: filename,
+    });
+    gulp_util_1.default.log("getRelease", release);
+    return release;
 });
 exports.getRelease = getRelease;
 /**
@@ -51,60 +44,51 @@ exports.getRelease = getRelease;
  * @param filename
  */
 const createRelease = (filename) => __awaiter(void 0, void 0, void 0, function* () {
-    gulp_util_1.default.log("TODO getRelease", filename);
-    return null;
-    // const releaseConfig: ReleaseConfig = getYamlConfig(
-    //   config.releaseConfig
-    // ) as ReleaseConfig;
-    // const octokit = new Octokit({
-    //   auth: releaseConfig.github.token,
-    // });
-    // let isPrerelease = false;
-    // if (
-    //   filename.endsWith("dev.zip") ||
-    //   filename.endsWith("beta.zip") ||
-    //   filename.endsWith("alpha.zip") ||
-    //   filename.endsWith("rc.zip") ||
-    //   filename.endsWith("prerelease.zip")
-    // ) {
-    //   isPrerelease = true;
-    // }
-    // const release = await octokit.repos.createRelease({
-    //   owner: releaseConfig.github.org || releaseConfig.github.owner,
-    //   repo: releaseConfig.github.repo,
-    //   name: filename,
-    //   tag_name: filename,
-    //   prerelease: isPrerelease,
-    // });
-    // gutil.log("createRelease", release);
-    // return release;
+    const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
+    const octokit = new rest_1.Octokit({
+        auth: releaseConfig.github.token,
+    });
+    let isPrerelease = false;
+    if (filename.endsWith("dev.zip") ||
+        filename.endsWith("beta.zip") ||
+        filename.endsWith("alpha.zip") ||
+        filename.endsWith("rc.zip") ||
+        filename.endsWith("prerelease.zip")) {
+        isPrerelease = true;
+    }
+    const release = yield octokit.repos.createRelease({
+        owner: releaseConfig.github.org || releaseConfig.github.owner,
+        repo: releaseConfig.github.repo,
+        name: filename,
+        tag_name: filename,
+        prerelease: isPrerelease,
+    });
+    gulp_util_1.default.log("createRelease", release);
+    return release;
 });
 exports.createRelease = createRelease;
 const uploadFile = (filePath) => __awaiter(void 0, void 0, void 0, function* () {
-    gulp_util_1.default.log("TODO uploadFile", filePath);
-    return null;
-    // const releaseConfig: ReleaseConfig = getYamlConfig(
-    //   config.releaseConfig
-    // ) as ReleaseConfig;
-    // const octokit = new Octokit({
-    //   auth: releaseConfig.github.token,
-    // });
-    // const filename = path.basename(filePath);
-    // const existingRelease = await getRelease(filename);
-    // gutil.log(`Upload ${filename} to github...`);
-    // let releaseID: number;
-    // if (existingRelease) {
-    //   releaseID = existingRelease.data.id;
-    // } else {
-    //   const newRelease = await createRelease(filename);
-    //   releaseID = newRelease.data.id;
-    // }
-    // octokit.repos.uploadReleaseAsset({
-    //   owner: releaseConfig.github.org || releaseConfig.github.owner,
-    //   repo: releaseConfig.github.repo,
-    //   release_id: releaseID,
-    //   data: filePath,
-    // });
+    const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
+    const octokit = new rest_1.Octokit({
+        auth: releaseConfig.github.token,
+    });
+    const filename = path_1.default.basename(filePath);
+    const existingRelease = yield exports.getRelease(filename);
+    gulp_util_1.default.log(`Upload ${filename} to github...`);
+    let releaseID;
+    if (existingRelease) {
+        releaseID = existingRelease.data.id;
+    }
+    else {
+        const newRelease = yield exports.createRelease(filename);
+        releaseID = newRelease.data.id;
+    }
+    return octokit.repos.uploadReleaseAsset({
+        owner: releaseConfig.github.org || releaseConfig.github.owner,
+        repo: releaseConfig.github.repo,
+        release_id: releaseID,
+        data: filePath,
+    });
 });
 exports.uploadFile = uploadFile;
 const getDownloadFileUrl = (filename) => __awaiter(void 0, void 0, void 0, function* () {
