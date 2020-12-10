@@ -30,10 +30,7 @@ module.exports.getDependencies = (config = {}) => {
   config.styles.SassImplementation =
     config.styles.SassImplementation || require("sass");
 
-  if (
-    config.copyAssets && config.copyAssets.enable === true &&
-    config.copyPluginConfig && config.copyPluginConfig.patterns && config.copyPluginConfig.patterns.length
-  ) {
+  if (config.copyAssets && config.copyAssets.enable === true) {
     // https://github.com/webpack-contrib/copy-webpack-plugin
     config.CopyPlugin = config.CopyPlugin || require("copy-webpack-plugin");
   }

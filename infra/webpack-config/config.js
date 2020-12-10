@@ -86,10 +86,12 @@ module.exports.getConfig = (config = {}, env = {}) => {
     config.copyPluginConfig = config.copyPluginConfig || {};
     config.copyPluginConfig.patterns =
       config.copyPluginConfig.patterns || getCopyPluginPatterns(config);
-    if (config.copyPluginConfig?.patterns?.length && config.CopyPlugin) {
+    if (config.copyPluginConfig.patterns.length && config.CopyPlugin) {
       // Copy the files before the build starts for the case the files are required for the build itself
       copy(config.copyPluginConfig.patterns);
-      config.plugins.push(new config.CopyPlugin(config.copyPluginConfig));
+      if (config.CopyPlugin) {
+        config.plugins.push(new config.CopyPlugin(config.copyPluginConfig));
+      }
     }
   }
 
