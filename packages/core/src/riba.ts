@@ -85,8 +85,6 @@ export class Riba {
   /** Default attribute full prefix. */
   private _fullPrefix = "rv-";
 
-  private forceComponentFallback = false;
-
   set prefix(value) {
     this._prefix = value;
     this._fullPrefix = value + "-";
@@ -160,9 +158,6 @@ export class Riba {
         case "blockNodeNames":
           this.blockNodeNames = value;
           break;
-        case "forceComponentFallback":
-          this.forceComponentFallback = value;
-          break;
         default:
           console.warn("Option not supported", option, value);
           break;
@@ -183,8 +178,6 @@ export class Riba {
 
       // sightglass
       rootInterface: {} as Root,
-
-      forceComponentFallback: false,
     };
 
     if (options) {
@@ -221,17 +214,7 @@ export class Riba {
       options && typeof options.preloadData === "boolean"
         ? options.preloadData
         : this.preloadData;
-    viewOptions.forceComponentFallback =
-      options && typeof options.forceComponentFallback === "boolean"
-        ? options.forceComponentFallback
-        : this.forceComponentFallback;
     viewOptions.handler = (options && options.handler) || Riba.handler;
-
-    // WORKAROUND for FakeHTMLElement
-    if (viewOptions.forceComponentFallback) {
-      (window as any).forceComponentFallback =
-        viewOptions.forceComponentFallback;
-    }
 
     // merge extensions
     viewOptions.binders = { ...this.binders, ...viewOptions.binders };

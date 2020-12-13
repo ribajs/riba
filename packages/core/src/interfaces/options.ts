@@ -27,6 +27,4 @@ export interface Options extends Extensions {
 
   /** Stop binding on this node types */
   blockNodeNames: Array<string>;
-
-  forceComponentFallback?: boolean;
 }

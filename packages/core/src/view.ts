@@ -119,10 +119,6 @@ export class View {
     this.bindings.forEach((binding) => {
       binding.bind();
     });
-    this.webComponents.forEach((webcomponent) => {
-      webcomponent._fallback = !!this.options.forceComponentFallback;
-      webcomponent.connectedFallbackCallback();
-    });
   }
 
   /**
@@ -136,9 +132,6 @@ export class View {
           // TODO reset attribute ?
           // binding.el.setAttribute(attribute.name);
         }
-      });
-      this.webComponents.forEach((webcomponent) => {
-        webcomponent.disconnectedFallbackCallback();
       });
     }
 
@@ -332,45 +325,21 @@ export class View {
     nodeName?: string
   ) {
     nodeName = nodeName || COMPONENT.tagName;
-    // Fallback
-    if (!window.customElements || this.options.forceComponentFallback) {
-      this.registComponentFallback(node, COMPONENT, nodeName);
+    // if node.constructor is not HTMLElement and not HTMLUnknownElement, it was registed
+    // @see https://stackoverflow.com/questions/27334365/how-to-get-list-of-registered-custom-elements
+    if (
+      (nodeName && customElements.get(nodeName)) ||
+      (node.constructor !== HTMLElement &&
+        node.constructor !== HTMLUnknownElement)
+    ) {
+      // console.warn(`Web component already defined`, node.constructor);
     } else {
-      // if node.constructor is not HTMLElement and not HTMLUnknownElement, it was registed
-      // @see https://stackoverflow.com/questions/27334365/how-to-get-list-of-registered-custom-elements
-      if (
-        (nodeName && customElements.get(nodeName)) ||
-        (node.constructor !== HTMLElement &&
-          node.constructor !== HTMLUnknownElement)
-      ) {
-        // console.warn(`Web component already defined`, node.constructor);
-      } else {
-        try {
-          this.registComponent(COMPONENT, nodeName);
-        } catch (error) {
-          console.error(error);
-          this.registComponentFallback(node, COMPONENT, nodeName);
-        }
+      try {
+        this.registComponent(COMPONENT, nodeName);
+      } catch (error) {
+        console.error(error);
       }
     }
-  }
-
-  /**
-   * Regist a custom element using the fallback logic for browsers that cannot native use custom elements.
-   * @param node
-   * @param COMPONENT
-   * @param nodeName
-   */
-  protected registComponentFallback(
-    node: Node,
-    COMPONENT: TypeOfComponent,
-    nodeName?: string
-  ) {
-    nodeName = nodeName || COMPONENT.tagName;
-    console.warn(`Fallback for Webcomponent ${nodeName}`);
-    const component = new COMPONENT(node);
-    component._fallback = !!this.options.forceComponentFallback;
-    this.webComponents.push(component);
   }
 
   /**
@@ -379,14 +348,11 @@ export class View {
    * @param nodeName
    */
   protected registComponent(COMPONENT: TypeOfComponent, nodeName?: string) {
-    if (!window.customElements || this.options.forceComponentFallback) {
-      console.warn("customElements not supported by your browser! Do nothing.");
-      return;
+    if (!window.customElements) {
+      throw new Error("customElements not supported by your browser!");
     }
     const resolveNodeName = nodeName || COMPONENT.tagName;
-    window.customElements.define(COMPONENT.tagName, COMPONENT as any); // TODO FIXME as CustomElementConstructor since TypeScript 3.8
-    // TODO ?? call unbind (on unbind this view) of this component instance to unbind this view
-    // (not disconnectedCallback / disconnectedFallbackCallback, this is automatically called from customElements)
+    window.customElements.define(COMPONENT.tagName, COMPONENT);
     window.customElements.get(resolveNodeName) as Component;
   }
 }

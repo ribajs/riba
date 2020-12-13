@@ -70,7 +70,7 @@ module.exports.getConfig = (config = {}, env = {}) => {
         format: {
           comments: false,
         },
-        safari10: true,
+        // safari10: true,
       },
     });
   }

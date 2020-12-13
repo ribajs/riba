@@ -1,5 +1,2 @@
-ie 11
-safari 10
-chrome 52
-edge 16
-firefox 59
+defaults
+not IE 11

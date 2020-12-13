@@ -78,7 +78,7 @@ interface Scope {
 export class Bs4SidebarComponent extends Component {
   public static tagName = "bs4-sidebar";
 
-  protected style?: CSSStyleDeclaration;
+  protected computedStyle?: CSSStyleDeclaration;
 
   protected autobind = true;
 
@@ -163,7 +163,7 @@ export class Bs4SidebarComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     this.init(Bs4SidebarComponent.observedAttributes);
-    this.style = window.getComputedStyle(this.el);
+    this.computedStyle = window.getComputedStyle(this.el);
     window.addEventListener("resize", this.onEnvironmentChanges, false);
     // inital
     this.onEnvironmentChanges();
@@ -357,7 +357,9 @@ export class Bs4SidebarComponent extends Component {
     }
     return container.setAttribute(
       "style",
-      `transition:${this.style ? this.style.transition : ""};${style}`
+      `transition:${
+        this.computedStyle ? this.computedStyle.transition : ""
+      };${style}`
     );
   }
 

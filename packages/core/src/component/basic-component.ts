@@ -1,5 +1,5 @@
 /**
- * Autoparse custom element attributes and add fallback support for browser with no native custom element support
+ * Autoparse custom element attributes
  *
  * @see https://developer.mozilla.org/de/docs/Web/Web_Components/Using_custom_elements
  */
@@ -8,14 +8,12 @@ import { EventHandler, ObservedAttributesToCheck } from "../interfaces";
 import { Binding } from "../binding";
 import { parseJsonString, camelCase } from "@ribajs/utils/src/type";
 import { getRandomColor } from "@ribajs/utils/src/color";
-import { FakeHTMLElement } from "./fake-html-element";
 
-export abstract class BasicComponent extends FakeHTMLElement {
+export abstract class BasicComponent extends HTMLElement {
   public static tagName: string;
 
   public _debug = false;
   public _color?: string;
-  public _fallback = false;
 
   protected templateLoaded = false;
 
@@ -26,14 +24,15 @@ export abstract class BasicComponent extends FakeHTMLElement {
 
   protected observedAttributes: string[] = [];
 
+  /**
+   * @depricated Use this instead
+   */
   protected el: HTMLElement;
 
   protected abstract scope: any;
 
-  protected attributeObserverFallback?: MutationObserver;
-
   constructor(element?: HTMLUnknownElement) {
-    super(element);
+    super();
 
     if (this._debug) {
       this._color = getRandomColor();
@@ -58,20 +57,7 @@ export abstract class BasicComponent extends FakeHTMLElement {
   public remove() {
     if (this.el && this.el.parentElement) {
       this.el.parentElement.removeChild(this.el);
-      if (!(window as any).customElements || this._fallback) {
-        this.disconnectedFallbackCallback();
-      }
     }
-  }
-
-  public connectedFallbackCallback() {
-    // this.debug(`Called connectedFallbackCallback`);
-    this.connectedCallback();
-  }
-
-  public disconnectedFallbackCallback() {
-    // this.debug(`Called disconnectedFallbackCallback`);
-    this.disconnectedCallback();
   }
 
   protected abstract template():
@@ -104,7 +90,7 @@ export abstract class BasicComponent extends FakeHTMLElement {
   }
 
   protected async init(observedAttributes: string[]) {
-    this.initAttributeObserver(observedAttributes);
+    this.loadAttributes(observedAttributes);
     this.initRibaAttributeObserver(observedAttributes);
     this.getPassedObservedAttributes(observedAttributes);
     return;
@@ -237,10 +223,6 @@ export abstract class BasicComponent extends FakeHTMLElement {
     //   // only unbind if cache is not enabled?
     //   this.unbind();
     // }
-
-    if (this.attributeObserverFallback) {
-      this.attributeObserverFallback.disconnect();
-    }
 
     this.removeEventListenerForRibaParent();
     this.removeEventListenersForRibaAttributes(this.observedAttributes);
@@ -485,7 +467,7 @@ export abstract class BasicComponent extends FakeHTMLElement {
 
   /**
    * Load all attributes and calls the attributeChangedCallback for each attribute.
-   * This method is used for fallback implementations, normally the browser calls the attributeChangedCallback for you
+   * Please note: Brmally the browser calls the attributeChangedCallback for you
    */
   protected loadAttributes(observedAttributes: string[]) {
     const attributes = this.el.attributes;
@@ -495,47 +477,6 @@ export abstract class BasicComponent extends FakeHTMLElement {
       if (observedAttributes.indexOf(name) !== -1) {
         const newValue = attribute.nodeValue;
         this.attributeChangedCallback(name, undefined, newValue, null);
-      }
-    }
-  }
-
-  /**
-   * Event handler to listen attribute change event as fallback for MutationObserver
-   */
-  protected initAttributeObserver(observedAttributes: string[]) {
-    this.loadAttributes(observedAttributes);
-    this.observedAttributes = observedAttributes;
-    if (
-      (window as any).customElements &&
-      !this._fallback &&
-      !(window as any).forceComponentFallback
-    ) {
-      // use native implementaion
-      // this.debug("initAttributeObserver: Use native implementaion");
-    } else {
-      if ((window as any).MutationObserver) {
-        // use MutationObserver as fallback
-        this.attributeObserverFallback = new MutationObserver((mutations) => {
-          mutations.forEach((mutation) => {
-            if (mutation.type === "attributes") {
-              if (mutation.attributeName) {
-                // if this attribute is a watched attribute
-                if (observedAttributes.indexOf(mutation.attributeName) !== -1) {
-                  const newValue = this.el.getAttribute(mutation.attributeName);
-                  this.attributeChangedCallback(
-                    mutation.attributeName,
-                    mutation.oldValue,
-                    newValue,
-                    mutation.attributeNamespace
-                  );
-                }
-              }
-            }
-          });
-        });
-        this.attributeObserverFallback.observe(this.el, {
-          attributes: true,
-        });
       }
     }
   }
