@@ -3,11 +3,11 @@ import { RibaModule } from "@ribajs/core";
 import * as components from "./components";
 // import * as formatters from './formatters';
 
-export const SlideshowModule: RibaModule = {
+export const SlideshowDemoModule: RibaModule = {
   binders: {},
   components,
   formatters: {},
   services: {},
 };
 
-export default SlideshowModule;
+export default SlideshowDemoModule;
