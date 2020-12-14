@@ -1,0 +1,4 @@
+name: Demo Theme
+viewEngine: pug
+assetsDir: assets
+viewsDir: templates

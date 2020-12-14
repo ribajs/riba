@@ -1,0 +1,14 @@
+{
+  "extends": "@ribajs/tsconfig",
+  "files": [
+    "scripts/main.ts"
+  ],
+  "compilerOptions": {
+    "outDir": "dist",
+    "typeRoots": ["node_modules/@types", "scripts/types"]
+  },
+  "exclude": [
+    "node_modules",
+    "**/*.d.ts",
+  ]
+}

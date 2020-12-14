@@ -63,7 +63,7 @@ export const i18nShareComponentWrapper = (
       this.addEventListeners();
     }
 
-    protected async initTranslate() {
+    protected async initI18n() {
       return new Promise<string | undefined>((resolve) => {
         this.localesService.event.on("changed", async (langcode: string) => {
           return resolve(langcode);
@@ -79,7 +79,7 @@ export const i18nShareComponentWrapper = (
       });
     }
 
-    protected async translate(langcode: string, value: string) {
+    protected async i18n(langcode: string, value: string) {
       if (!value) {
         return;
       }
@@ -98,18 +98,18 @@ export const i18nShareComponentWrapper = (
     protected async beforeBind() {
       // this.debug('beforeBind');
       await super.beforeBind();
-      const langcode = await this.initTranslate();
+      const langcode = await this.initI18n();
 
       if (this.scope.textI18n && langcode) {
         this.scope.text =
-          (await this.translate(langcode, this.scope.textI18n)) ||
+          (await this.i18n(langcode, this.scope.textI18n)) ||
           this.scope.text;
       }
 
       if (this.scope.serviceLabelI18n && langcode) {
         for (const shareItem of this.scope.shareItems) {
           shareItem.label =
-            (await this.translate(
+            (await this.i18n(
               langcode,
               this.scope.serviceLabelI18n + "." + shareItem.id
             )) || shareItem.label;
