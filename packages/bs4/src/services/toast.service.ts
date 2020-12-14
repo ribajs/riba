@@ -115,9 +115,11 @@ export class ToastService {
       EventHandler.trigger(this._element, EVENT_SHOWN);
 
       if (this._config.autohide) {
-        this._timeout = setTimeout(() => {
-          this.hide();
-        }, this._config.delay);
+        this._timeout = Number(
+          setTimeout(() => {
+            this.hide();
+          }, this._config.delay)
+        );
       }
     };
 

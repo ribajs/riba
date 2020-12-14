@@ -387,9 +387,11 @@ class CarouselService {
         clearTimeout(this.touchTimeout);
       }
 
-      this.touchTimeout = setTimeout(
-        (event: TouchEvent & MouseEvent & PointerEvent) => this.cycle(event),
-        TOUCHEVENT_COMPAT_WAIT + (this.config.interval || 0)
+      this.touchTimeout = Number(
+        setTimeout(
+          (event: TouchEvent & MouseEvent & PointerEvent) => this.cycle(event),
+          TOUCHEVENT_COMPAT_WAIT + (this.config.interval || 0)
+        )
       );
     }
   }
