@@ -320,12 +320,16 @@ export class Bs4FormComponent extends Component {
     );
   }
 
-  protected validate(form: HTMLFormElement, validationScope: ValidationObject) {
+  protected validate(
+    form: HTMLFormElement,
+    validationScope: ValidationObject,
+    errorEventName = "validation-error"
+  ) {
     validationScope.valid = form.checkValidity();
     validationScope.error = form.validationMessage;
     // only show validation if we want to give a hint to the user that something is wrong
     if (!validationScope.valid) {
-      this.el.dispatchEvent(new CustomEvent("validation-error"));
+      this.el.dispatchEvent(new CustomEvent(errorEventName));
       form.classList.add("was-validated");
     }
   }
