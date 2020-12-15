@@ -1,5 +1,6 @@
 .toast-item-container {
   position: fixed;
+  z-index: $zindex-fixed;
 }
 
 $toast-container-spacing-x: 30px !default;
