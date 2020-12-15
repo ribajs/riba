@@ -1,4 +1,6 @@
-import { Riba, coreModule } from "@ribajs/core";
+// import "@ribajs/ssr/src/polyfills";
+import { SSRModule } from "@ribajs/ssr";
+import { Riba, View, coreModule } from "@ribajs/core";
 // import { ready } from "@ribajs/utils/src/dom";
 // import { i18nModule, LocalesStaticService } from "@ribajs/i18n";
 
@@ -8,18 +10,36 @@ import * as binders from "./binders";
 import * as formatters from "./formatters";
 // TODO import locales from "../locales";
 
-const model = {};
-const riba = new Riba();
+declare global {
+  interface Window {
+    model: any;
+    riba: Riba;
+    view: View;
+  }
+}
+
+window.model = window.model || {};
+window.riba = new Riba();
 
 // Regist custom components
-riba.module.regist({
+window.riba.module.regist({
   components: pageComponents,
   binders,
   formatters,
 });
 
 // Regist modules
-riba.module.regist(coreModule);
+window.riba.module.regist(coreModule);
 // this.riba.module.regist(i18nModule(this.localesService));
+window.riba.module.regist(SSRModule);
 
-riba.bind(document.body, model);
+console.log("Hello from Riba");
+
+window.view = window.riba.bind(document.body, window.model);
+
+// WORKAROUND / FIXME view.traverse method seems not to be working in jsdom / happy-dom
+window.view.registComponents();
+
+document.body.setAttribute("works", ":)");
+
+console.log("Bind done");

@@ -26,27 +26,22 @@ export class PageController {
    */
   @Get()
   async index(@Res() res: Response) {
-    const data = {
+    const variables = {
       ...this.global.get(),
       ...this.page.get('index'),
     };
-    const render = promisify<string>(
-      res.render.bind(res, 'ssr-page-component', data),
-    );
-    let layout = await render();
-    layout = await this.ssr.transformLayout(layout, 'index');
-
     try {
-      const template = await this.ssr.render(layout);
-      this.log.debug('template: ' + template);
+      const page = await this.ssr.render({
+        dom: 'happy-dom',
+        placeholderPageTag: 'page-component',
+        layoutPath: 'page-component.pug',
+        pageTag: 'index-page',
+        variables,
+      });
+      res.send(page);
     } catch (error) {
       console.error(error);
+      return res.status(500).json(error);
     }
-
-    // this.log.debug('data: ' + JSON.stringify(data));
-    this.log.debug('layout: ' + layout);
-
-    // return template;
-    return res.send(layout);
   }
 }

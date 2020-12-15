@@ -3,16 +3,18 @@ import { PageComponent } from "@ribajs/ssr";
 import template from "./index.page-component.html";
 
 export interface Scope {
-  foo: string;
+  title: string;
+  content: string;
 }
 
 export class IndexPageComponent extends PageComponent {
   public static tagName = "index-page";
-  public _debug = false;
+  public _debug = true;
   protected autobind = true;
 
   scope: Scope = {
-    foo: "bar",
+    title: "Hello from ssr",
+    content: "When you can see this, ssr works :)",
   };
 
   static get observedAttributes() {

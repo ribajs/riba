@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ConfigService, ConfigModule } from '@nestjs/config';
 
-import { moduleConfig } from './config';
+import { appConfig, themeConfig } from './config/config';
 import { ThemeModule } from './theme/theme.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [moduleConfig],
+      load: [appConfig, themeConfig],
     }),
     ThemeModule,
   ],

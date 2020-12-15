@@ -5,7 +5,8 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 import { resolve } from 'path';
 import findRoot = require('find-root');
-import { ThemeConfig } from './types';
+import { ThemeConfig } from '../types';
+import { registerAs } from '@nestjs/config';
 
 const THEME_ACTIVE = process.env.THEME_ACTIVE || 'nest-riba-ssr-theme';
 const ROOT = findRoot(process.cwd());
@@ -50,8 +51,14 @@ export const session = {
   },
 };
 
-export const moduleConfig = () => ({
-  app,
-  theme,
-  session,
-});
+export const appConfig = registerAs('app', () => ({
+  ...app,
+}));
+
+export const themeConfig = registerAs('theme', () => ({
+  ...theme,
+}));
+
+export const sessionConfig = registerAs('session', () => ({
+  ...theme,
+}));

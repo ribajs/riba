@@ -3,8 +3,7 @@
   "version": "1.9.0-beta.4",
   "dependencies": {
     "@ribajs/core": "workspace:packages/core",
-    "jsdom": "^16.4.0",
-    "punycode": "^2.1.1"
+    "@ungap/custom-elements": "^0.1.10"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",

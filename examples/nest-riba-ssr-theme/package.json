@@ -71,7 +71,7 @@
     "@ribajs/i18n": "workspace:packages/i18n",
     "@ribajs/iconset": "workspace:packages/iconset",
     "@ribajs/router": "workspace:packages/router",
-    "@ribajs/ssr": "workspace:infra/ssr",
+    "@ribajs/ssr": "workspace:packages/ssr",
     "@ribajs/utils": "workspace:packages/utils",
     "assert": "^2.0.0",
     "bootstrap": "^4.5.3",

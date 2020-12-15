@@ -9,7 +9,7 @@ import * as cookieParser from 'cookie-parser';
 import * as expressSession from 'express-session';
 
 import { AppModule } from './app.module';
-import * as config from './config';
+import * as config from './config/config';
 
 async function bootstrap() {
   const console = new Logger('bootstrap');

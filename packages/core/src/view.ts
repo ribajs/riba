@@ -8,6 +8,7 @@ import {
 import { Binding } from "./binding";
 import { parseNode, parseDeclaration } from "./parsers";
 import { BasicComponent, Component } from "./component";
+import { isCustomElement } from "@ribajs/utils/src/dom";
 
 /**
  * TODO Check if there is an official interface which fits better here
@@ -297,7 +298,11 @@ export class View {
       const nodeName = node.nodeName.toLowerCase();
       const COMPONENT = this.options.components[nodeName];
       if (COMPONENT) {
-        this.registComponentWithFallback(node, COMPONENT, nodeName);
+        // this.registComponentWithFallback(node, COMPONENT, nodeName);
+        this.registComponent(COMPONENT, nodeName);
+        block = true;
+      } else if (isCustomElement(node)) {
+        // Also block unknown custom elements
         block = true;
       }
     }
@@ -319,40 +324,21 @@ export class View {
     );
   }
 
-  protected registComponentWithFallback(
-    node: Node,
-    COMPONENT: TypeOfComponent,
-    nodeName?: string
-  ) {
-    nodeName = nodeName || COMPONENT.tagName;
-    // if node.constructor is not HTMLElement and not HTMLUnknownElement, it was registed
-    // @see https://stackoverflow.com/questions/27334365/how-to-get-list-of-registered-custom-elements
-    if (
-      (nodeName && customElements.get(nodeName)) ||
-      (node.constructor !== HTMLElement &&
-        node.constructor !== HTMLUnknownElement)
-    ) {
-      // console.warn(`Web component already defined`, node.constructor);
-    } else {
-      try {
-        this.registComponent(COMPONENT, nodeName);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  }
-
   /**
    * Regist a custom element using the native customElements feature.
    * @param COMPONENT
    * @param nodeName
    */
   protected registComponent(COMPONENT: TypeOfComponent, nodeName?: string) {
-    if (!window.customElements) {
+    if (!customElements) {
+      console.error("customElements not supported by your browser!");
       throw new Error("customElements not supported by your browser!");
     }
+
     const resolveNodeName = nodeName || COMPONENT.tagName;
-    window.customElements.define(COMPONENT.tagName, COMPONENT);
-    window.customElements.get(resolveNodeName) as Component;
+    if (!customElements.get(resolveNodeName)) {
+      customElements.define(COMPONENT.tagName, COMPONENT);
+      console.debug(`New custom element "${resolveNodeName}" defined.`);
+    }
   }
 }

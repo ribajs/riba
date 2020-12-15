@@ -329,7 +329,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
 
       break;
     case "ssr":
-      config.entry = config.entry || [config.scssIndexPath, config.tsIndexPath];
+      config.entry = config.entry || [config.tsIndexPath];
       config.output = config.output || {
         path: config.distPath,
         filename: "[name].bundle.js",
@@ -349,26 +349,26 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
       config.forkTsCheckerConfig.typescript.configFile = "tsconfig.ssr.json";
 
       // Node externals
-      config.externalsPresets = config.externalsPresets || { node: true }; // in order to ignore built-in modules like path, fs, etc.
+      // config.externalsPresets = config.externalsPresets || { node: true }; // in order to ignore built-in modules like path, fs, etc.
 
       // JSDOM pollyfills
-      config.resolve = config.resolve || {};
-      config.resolve.fallback = config.resolve.fallback || {
-        punycode: require.resolve("punycode/"),
-        util: require.resolve("util/"),
-        assert: require.resolve("assert/"),
-        events: require.resolve("events/"),
-        https: require.resolve("https-browserify"),
-        http: require.resolve("stream-http"),
-        url: require.resolve("url/"),
-        crypto: require.resolve("crypto-browserify"),
-        stream: require.resolve("stream-browserify"),
-        buffer: require.resolve("buffer/"),
-        zlib: require.resolve("browserify-zlib"),
-        querystring: require.resolve("querystring-es3"),
-        path: require.resolve("path-browserify"),
-        string_decoder: require.resolve("string_decoder/"),
-      };
+      // config.resolve = config.resolve || {};
+      // config.resolve.fallback = config.resolve.fallback || {
+      //   punycode: require.resolve("punycode/"),
+      //   util: require.resolve("util/"),
+      //   assert: require.resolve("assert/"),
+      //   events: require.resolve("events/"),
+      //   https: require.resolve("https-browserify"),
+      //   http: require.resolve("stream-http"),
+      //   url: require.resolve("url/"),
+      //   crypto: require.resolve("crypto-browserify"),
+      //   stream: require.resolve("stream-browserify"),
+      //   buffer: require.resolve("buffer/"),
+      //   zlib: require.resolve("browserify-zlib"),
+      //   querystring: require.resolve("querystring-es3"),
+      //   path: require.resolve("path-browserify"),
+      //   string_decoder: require.resolve("string_decoder/"),
+      // };
 
       break;
     default:
