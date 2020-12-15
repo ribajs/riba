@@ -81,7 +81,7 @@ module.exports.getConfig = (config = {}, env = {}) => {
       config.optimizationminimizer || terser ? [terser] : [];
   }
 
-  if (config.copyAssets?.enable === true) {
+  if (config.copyAssets && config.copyAssets.enable === true) {
     const { getCopyPluginPatterns, copy } = require("./copy");
     config.copyPluginConfig = config.copyPluginConfig || {};
     config.copyPluginConfig.patterns =
