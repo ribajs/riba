@@ -23,7 +23,7 @@ const config = {
   tsSourceDir: scripts,
   scssSourceDir: styles,
   tsIndexPath: mainTs,
-  scssIntedPath: mainScss,
+  scssIndexPath: mainScss,
   output: {
     path: assets,
     filename: "[name].bundle.js",

@@ -47,6 +47,10 @@ module.exports.getDependencies = (config = {}) => {
           config.HtmlWebpackPlugin || require("html-webpack-plugin");
       }
       break;
+    case "ssr":
+      config.nodeExternalsPlugin =
+        config.nodeExternalsPlugin || require("webpack-node-externals");
+      break;
   }
 
   return config;

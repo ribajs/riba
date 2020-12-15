@@ -21,13 +21,17 @@ module.exports.getConfig = (config = {}, env = {}) => {
       break;
   }
 
+  // Babel
   config.rules.push(
     // typescript and javascript
     {
       test: /\.(tsx?)|\.(js)$/,
       exclude: [/node_modules\/(?!@ribajs)/, /(bower_components)/],
       loader: config.babelLoaderPath,
-    },
+    }
+  );
+
+  config.rules.push(
     // html templates
     {
       test: /\.html$/,
@@ -129,6 +133,15 @@ module.exports.getConfig = (config = {}, env = {}) => {
     config.define = config.define || {};
     config.define.ENV = JSON.stringify(env);
     config.plugins.push(new config.DefinePlugin(config.define));
+  }
+
+  if (config.nodeExternalsPlugin) {
+    config.externals = config.externals || [
+      // in order to ignore all modules in node_modules folder
+      config.nodeExternalsPlugin({
+        allowlist: ["webpack/hot/poll?100", /^module_name\/ribajs\/.*/],
+      }),
+    ];
   }
 
   return config;

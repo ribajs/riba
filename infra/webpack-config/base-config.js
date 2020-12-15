@@ -69,10 +69,13 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
 
   // TypeScript main file
   if (typeof config.tsIndexPath === "undefined" && config.tsSourceDir) {
-    let searchFor = ["main.ts", "index.ts"];
+    let searchFor = ["main.ts", "csr.ts", "app.ts", "index.ts"];
     switch (config.template) {
       case "shopify-checkout":
         searchFor = ["checkout.ts"];
+        break;
+      case "ssr":
+        searchFor = ["ssr.ts"];
         break;
     }
 
@@ -192,6 +195,13 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
     minimize: config.production, // config.production disabled until terser works with webpack 5 and yarn 2
   };
 
+  let commonsName = "vendors";
+  switch (config.template) {
+    case "shopify-checkout":
+      commonsName = "vendors-checkout";
+      break;
+  }
+
   config.optimization = config.optimization || {
     minimize: config.scripts.minimize,
     splitChunks: config.splitChunks || {
@@ -201,10 +211,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
       cacheGroups: {
         commons: {
           test: /[\\/]node_modules[\\/]/,
-          name:
-            config.template === "shopify-checkout"
-              ? "vendors-checkout"
-              : "vendors",
+          name: commonsName,
           chunks: "all",
         },
         styles: {
@@ -318,6 +325,49 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
         contentBase: [path.resolve(rootPath, "src"), config.distPath],
         hot: true,
         inline: true,
+      };
+
+      break;
+    case "ssr":
+      config.entry = config.entry || [config.scssIndexPath, config.tsIndexPath];
+      config.output = config.output || {
+        path: config.distPath,
+        filename: "[name].bundle.js",
+      };
+
+      config.copyAssets = config.copyAssets || {
+        enable: false,
+        images: false,
+        scss: false,
+        iconset: false,
+        foldername: "src",
+      };
+
+      config.forkTsCheckerConfig.typescript =
+        config.forkTsCheckerConfig.typescript || {};
+
+      config.forkTsCheckerConfig.typescript.configFile = "tsconfig.ssr.json";
+
+      // Node externals
+      config.externalsPresets = config.externalsPresets || { node: true }; // in order to ignore built-in modules like path, fs, etc.
+
+      // JSDOM pollyfills
+      config.resolve = config.resolve || {};
+      config.resolve.fallback = config.resolve.fallback || {
+        punycode: require.resolve("punycode/"),
+        util: require.resolve("util/"),
+        assert: require.resolve("assert/"),
+        events: require.resolve("events/"),
+        https: require.resolve("https-browserify"),
+        http: require.resolve("stream-http"),
+        url: require.resolve("url/"),
+        crypto: require.resolve("crypto-browserify"),
+        stream: require.resolve("stream-browserify"),
+        buffer: require.resolve("buffer/"),
+        zlib: require.resolve("browserify-zlib"),
+        querystring: require.resolve("querystring-es3"),
+        path: require.resolve("path-browserify"),
+        string_decoder: require.resolve("string_decoder/"),
       };
 
       break;

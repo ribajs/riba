@@ -1,0 +1,17 @@
+{
+  "name": "@ribajs/ssr",
+  "version": "1.9.0-beta.4",
+  "dependencies": {
+    "@ribajs/core": "workspace:packages/core",
+    "jsdom": "^16.4.0",
+    "punycode": "^2.1.1"
+  },
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "source": "src/index.ts",
+  "devDependencies": {
+    "@babel/runtime": "^7.12.5",
+    "@babel/runtime-corejs3": "^7.12.5",
+    "@types/node": "^14.14.13"
+  }
+}

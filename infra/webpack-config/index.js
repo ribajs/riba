@@ -21,6 +21,10 @@ module.exports = (config = {}) => {
       mode: env.production ? "production" : "development",
       output: config.output,
       resolve: config.resolve,
+      externalsPresets: config.externalsPresets
+        ? config.externalsPresets
+        : undefined,
+      externals: config.externals ? config.externals : undefined,
       devServer: config.devServer,
       module: {
         rules: config.rules,
