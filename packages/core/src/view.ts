@@ -301,8 +301,9 @@ export class View {
         // this.registComponentWithFallback(node, COMPONENT, nodeName);
         this.registComponent(COMPONENT, nodeName);
         block = true;
-      } else if (isCustomElement(node)) {
-        // Also block unknown custom elements
+      }
+      // Also block unknown custom elements except page components
+      else if (isCustomElement(node) && !nodeName.endsWith("-page")) {
         block = true;
       }
     }
