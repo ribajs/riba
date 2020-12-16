@@ -2,3 +2,4 @@ name: Demo Theme
 viewEngine: pug
 assetsDir: assets
 viewsDir: templates
+pageCoponentsDir: scripts/pages

@@ -5,6 +5,7 @@ import template from "./index.page-component.html";
 export interface Scope {
   title: string;
   content: string;
+  obj: any;
 }
 
 export class IndexPageComponent extends PageComponent {
@@ -15,7 +16,13 @@ export class IndexPageComponent extends PageComponent {
   scope: Scope = {
     title: "Hello from ssr",
     content: "When you can see this, ssr works :)",
+    obj: {
+      foo: "bar",
+      note: "This is an example to test the json formatter",
+    },
   };
+
+  routes = [];
 
   static get observedAttributes() {
     return [];

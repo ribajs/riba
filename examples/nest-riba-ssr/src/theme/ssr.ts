@@ -6,11 +6,30 @@ import { ConfigService } from '@nestjs/config';
 import { resolve, extname } from 'path';
 import * as renderEngine from 'consolidate';
 import { promises as fs } from 'fs';
-// import type { TypeOfComponent, Component, PageComponent } from '@ribajs/ssr';
+import type {
+  TypeOfComponent,
+  PageComponentAfterBindEventData,
+} from '@ribajs/ssr';
+import type { Riba, View } from '@ribajs/core/src';
+import { EventDispatcher } from './event-dispatcher.service';
+interface RenderResult {
+  html: string;
+  css?: string[];
+  component: {
+    tagName: string;
+  };
+}
 
 @Injectable()
 export class Ssr {
   constructor(protected config: ConfigService) {}
+
+  // TODO different shared context for each site?
+  getSharedContext() {
+    return {
+      ssrEvents: EventDispatcher.getInstance('ssr'),
+    };
+  }
 
   getTemplateEingine(templatePath: string) {
     const ext = extname(templatePath);
@@ -74,7 +93,8 @@ export class Ssr {
     return result;
   }
 
-  async renderWithJSDom(layout: string) {
+  async renderWithJSDom(layout: string, componentTagName: string) {
+    const sharedContext = this.getSharedContext();
     const virtualConsole = new VirtualConsole();
     virtualConsole.sendTo(console);
 
@@ -84,42 +104,73 @@ export class Ssr {
       includeNodeLocations: true,
     });
 
-    return new Promise<string>((resolve, reject) => {
-      dom.window.document.addEventListener('DOMContentLoaded', async () => {
-        console.debug('DOMContentLoaded');
-        const { vendors, main } = await this.readSsrScripts();
-        const script = new Script(vendors + ' ' + main);
-        const vmContext = dom.getInternalVMContext();
-        console.debug('Execute scripts...');
-        try {
-          script.runInContext(vmContext);
-          // dom.window.eval(scriptSource);
-        } catch (error) {
-          reject(error);
-        }
+    const { vendors, main } = await this.readSsrScripts();
+    const script = new Script(vendors + ' ' + main, {
+      filename: 'vender-main.js',
+    });
 
-        console.debug('Wait for custom element...');
-        await dom.window.customElements.whenDefined('index-page');
+    // Set shared context here
+    const vmContext = dom.getInternalVMContext();
+    vmContext.window.ssrEvents = sharedContext.ssrEvents;
 
-        // console.debug('Riba', dom.window.riba);
+    console.debug('Execute scripts...');
+    script.runInContext(vmContext);
 
-        console.debug('Scripts executed!');
-        const html = dom.serialize();
-        resolve(html);
-      });
+    console.debug('Wait for custom element...');
+    await dom.window.customElements.whenDefined('index-page');
+
+    const riba: Riba = (dom.window as any).riba;
+    const view: View = (dom.window as any).view;
+
+    const component: TypeOfComponent | null =
+      riba.components[componentTagName] ||
+      view.options.components[componentTagName] ||
+      null;
+
+    console.debug('Scripts executed!');
+    return new Promise<RenderResult>((resolve, reject) => {
+      sharedContext.ssrEvents.once(
+        'PageComponent:afterBind',
+        (afterBindData: PageComponentAfterBindEventData) => {
+          const html = dom.serialize();
+          const result: RenderResult = {
+            component: afterBindData,
+            html: html,
+          };
+
+          // WORKAROUND
+          result.component.tagName =
+            result.component.tagName || component.tagName || componentTagName;
+
+          console.debug('result', result);
+          return resolve(result);
+        },
+      );
       dom.window.addEventListener('error', (event: Event) => {
         console.error(event);
-        reject(event);
+        return reject(event);
       });
     });
   }
 
-  async renderWithHappyDom(layout: string) {
+  async renderWithHappyDom(layout: string, componentTagName: string) {
     const context = new HappyDOMContext();
+    const sharedContext = this.getSharedContext();
+    const window = (context as any).window; // TODO window is private, make pr for this
+
+    // Set shared context here
+    window.ssrEvents = sharedContext.ssrEvents;
+
     const { vendors, main } = await this.readSsrScripts();
-    const vendorsScript = new Script(vendors);
-    const mainScript = new Script(main);
-    const result = await context.render({
+    const vendorsScript = new Script(vendors, {
+      filename: 'vendor.bundle.js',
+    });
+    const mainScript = new Script(main, {
+      filename: 'main.bundle.js',
+    });
+
+    // Do not use await here because we want to run the next method after we get the promise result
+    const ssrResultPromise = context.render({
       html: layout,
       scripts: [vendorsScript, mainScript],
       customElements: {
@@ -129,26 +180,70 @@ export class Ssr {
         addCSSToHead: false,
       },
     });
-    return result.html;
+
+    const result = await new Promise<RenderResult>((resolve, reject) => {
+      sharedContext.ssrEvents.once(
+        'PageComponent:afterBind',
+        async (afterBindData: PageComponentAfterBindEventData) => {
+          const ssrResult = await ssrResultPromise;
+          const riba: Riba = window.riba;
+          const view: View = window.view;
+
+          const component: TypeOfComponent | null =
+            riba.components[componentTagName] ||
+            view.options.components[componentTagName] ||
+            null;
+
+          const result: RenderResult = {
+            component: {
+              tagName: component.tagName,
+            },
+
+            html: ssrResult.html,
+            css: ssrResult.css,
+          };
+
+          // WORKAROUND
+          result.component.tagName =
+            result.component.tagName || component.tagName || componentTagName;
+
+          result.component = {
+            ...result.component,
+            ...afterBindData,
+          };
+
+          console.debug('result', result);
+          return resolve(result);
+        },
+      );
+
+      window.addEventListener('error', (event: Event) => {
+        console.error(event);
+        return reject(event);
+      });
+    });
+
+    return result;
   }
 
-  async render(opt: {
-    layoutPath: string;
+  async renderComponent(opt: {
+    templatePath: string;
     placeholderPageTag: string;
-    pageTag: string;
-    dom: 'jsdom' | 'happy-dom';
+    pageComponentPath: string;
+    componentTagName: string;
+    engine: 'jsdom' | 'happy-dom';
     variables: any;
-  }) {
-    let layout = await this.renderTemplate(opt.layoutPath, opt.variables);
+  }): Promise<RenderResult> {
+    let layout = await this.renderTemplate(opt.templatePath, opt.variables);
     layout = await this.transformLayout(
       layout,
       opt.placeholderPageTag,
-      opt.pageTag,
+      opt.componentTagName,
     );
-    const template =
-      opt.dom === 'jsdom'
-        ? await this.renderWithJSDom(layout)
-        : await this.renderWithHappyDom(layout);
-    return template;
+    const renderData =
+      opt.engine === 'jsdom'
+        ? await this.renderWithJSDom(layout, opt.componentTagName)
+        : await this.renderWithHappyDom(layout, opt.componentTagName);
+    return renderData;
   }
 }

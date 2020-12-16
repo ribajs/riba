@@ -141,6 +141,14 @@
         "signature": "89bf2b7a601b73ea4311eda9c41f86a58994fec1bee3b87c4a14d68d9adcdcbd",
         "affectsGlobalScope": true
       },
+      "../../../packages/ssr/src/types/page-component-after-bind-event-data.ts": {
+        "version": "3b77a368be93d35ebd29bac821784cb7c65286b1970e4f40b42247c8fbfa6679",
+        "affectsGlobalScope": false
+      },
+      "../../../packages/ssr/src/types/index.ts": {
+        "version": "b8f3dcae059bd2392813746ab1aa8de9d5f2d6cd5528969518844ed7227d3798",
+        "affectsGlobalScope": false
+      },
       "../../../packages/utils/src/type.ts": {
         "version": "94be268248c8c63af9d5114b0b7c138720cf917e2b9df30d20002667def8ff9f",
         "affectsGlobalScope": false
@@ -223,7 +231,7 @@
         "affectsGlobalScope": false
       },
       "../../../packages/core/src/view.ts": {
-        "version": "f69df611b6c973592840c196a5391453c80709bb1faba43437ba355e4a1f0971",
+        "version": "2993f1a45b7c9850e0d65aa8787279cff1fcecc616d772ad89805fab4df333ec",
         "affectsGlobalScope": false
       },
       "../../../packages/core/src/parsers.ts": {
@@ -250,24 +258,24 @@
         "version": "69fc3f7db6dec1e06dee626a1e5c45e1ce97c686060233411cbcb728394afa7b",
         "affectsGlobalScope": false
       },
-      "../../../packages/core/src/interfaces/type-of.ts": {
-        "version": "ba1ff1845e048882609fd5b6661d0e7060109378001cc1f2328f289c31a74bf9",
-        "affectsGlobalScope": false
-      },
-      "../../../packages/core/src/interfaces/type-of-component.ts": {
-        "version": "a7c1d7cea77b926ad15aa5589bcada2f1c085ce623d3bc1057c929d8731a4cd7",
-        "affectsGlobalScope": false
-      },
-      "../../../packages/core/src/interfaces/components.ts": {
-        "version": "450f005969cb966634b76bda65911719e55f5655b44a53117edd353ac5844be9",
+      "../../../packages/core/src/interfaces/event-dispatcher.ts": {
+        "version": "d2b16de9fbd05f051c368971733f514c3ecd3965e2aa7ea7f66289d8fd678964",
         "affectsGlobalScope": false
       },
       "../../../packages/core/src/services/event-dispatcher.service.ts": {
         "version": "4a337a2e2d3d29dafd1a23fbd6d9a6a55715e75203e8a9c2d591cd0f7956e35f",
         "affectsGlobalScope": false
       },
-      "../../../packages/core/src/interfaces/event-dispatcher.ts": {
-        "version": "d2b16de9fbd05f051c368971733f514c3ecd3965e2aa7ea7f66289d8fd678964",
+      "../../../packages/core/src/interfaces/type-of.ts": {
+        "version": "ba1ff1845e048882609fd5b6661d0e7060109378001cc1f2328f289c31a74bf9",
+        "affectsGlobalScope": false
+      },
+      "../../../packages/core/src/interfaces/type-of-component.ts": {
+        "version": "d5f35aaaa974a1481d936ac5339137c9d9275e11cd6cc00f36a6f72f704a1f23",
+        "affectsGlobalScope": false
+      },
+      "../../../packages/core/src/interfaces/components.ts": {
+        "version": "4bca002fe30735ddafa85fd9695907a7a8d707c5fa6956ce65b016175eadf430",
         "affectsGlobalScope": false
       },
       "../../../packages/core/src/interfaces/event-handler.ts": {
@@ -799,7 +807,7 @@
         "affectsGlobalScope": false
       },
       "../../../packages/ssr/src/page-component.ts": {
-        "version": "82e7eba5dc9c7f2b0d3df37f834c965b0c0246c70f49a3d05da13dce556a467d",
+        "version": "3ef9c0e8091e933306edcecf5da77cc62622a4443d80f3f6334fc79007049efb",
         "affectsGlobalScope": false
       },
       "../../../packages/ssr/src/binders/view.ts": {
@@ -823,16 +831,16 @@
         "affectsGlobalScope": false
       },
       "../../../packages/ssr/src/ssr.module.ts": {
-        "version": "137a95045accdbda622cfe0a6133490ff67e5e70ee447c6da512bb543b3f6846",
-        "affectsGlobalScope": false
+        "version": "c873678f8db3b7a4082103e7a27168341055e10af5eeb273585744d4297ba812",
+        "affectsGlobalScope": true
       },
       "../../../packages/ssr/src/index.ts": {
-        "version": "acc31b05eea1bcd4c9416cb07ef1f72c91b628221b22c3200bee051835181005",
+        "version": "0a3132cfdfff8ea774cb3f00bb47d389dd4934b9112da62bf74b4fa0a9edeadc",
         "affectsGlobalScope": false
       },
       "../scripts/pages/index/index.page-component.ts": {
-        "version": "eb55a9aa6624c096b939e4a7591029389fb784f146517d8be0472a9018865282",
-        "signature": "73ffde7e0095c1a5fbb2aaa8f595da25af276c232c89c56467cb02aac5d44688",
+        "version": "5169adbfbe673c50ddc2f0a7ae20f4f0a1f4c2bea4b4372fee52ad576f267eaf",
+        "signature": "9b40d6f39707ea35a5f5d5a70e779f9472632997819e713626edb3a25e8d47be",
         "affectsGlobalScope": false
       },
       "../scripts/pages/index.ts": {
@@ -1778,7 +1786,8 @@
       ],
       "../../../packages/core/src/interfaces/components.ts": [
         "../../../packages/core/src/component/index.ts",
-        "../../../packages/core/src/interfaces/type-of-component.ts"
+        "../../../packages/core/src/interfaces/type-of-component.ts",
+        "../../../packages/ssr/src/index.ts"
       ],
       "../../../packages/core/src/interfaces/event-dispatcher.ts": [
         "../../../packages/core/src/services/event-dispatcher.service.ts"
@@ -1834,7 +1843,9 @@
       ],
       "../../../packages/core/src/interfaces/type-of-component.ts": [
         "../../../packages/core/src/component/index.ts",
-        "../../../packages/core/src/interfaces/type-of.ts"
+        "../../../packages/core/src/interfaces/type-of.ts",
+        "../../../packages/core/src/services/event-dispatcher.service.ts",
+        "../../../packages/ssr/src/index.ts"
       ],
       "../../../packages/core/src/observer.ts": [
         "../../../packages/core/src/interfaces/index.ts",
@@ -1922,7 +1933,8 @@
       "../../../packages/ssr/src/index.ts": [
         "../../../packages/core/src/index.ts",
         "../../../packages/ssr/src/page-component.ts",
-        "../../../packages/ssr/src/ssr.module.ts"
+        "../../../packages/ssr/src/ssr.module.ts",
+        "../../../packages/ssr/src/types/index.ts"
       ],
       "../../../packages/ssr/src/page-component.ts": [
         "../../../packages/core/src/index.ts"
@@ -1933,6 +1945,9 @@
         "../../../packages/ssr/src/components/index.ts",
         "../../../packages/ssr/src/formatters/index.ts",
         "../../../packages/ssr/src/services/index.ts"
+      ],
+      "../../../packages/ssr/src/types/index.ts": [
+        "../../../packages/ssr/src/types/page-component-after-bind-event-data.ts"
       ],
       "../../../packages/utils/src/control.ts": [
         "../../../packages/utils/src/types/index.ts"
@@ -2366,12 +2381,20 @@
       "../../../packages/ssr/src/page-component.ts",
       "../../../packages/ssr/src/services/index.ts",
       "../../../packages/ssr/src/ssr.module.ts",
+      "../../../packages/ssr/src/types/index.ts",
+      "../../../packages/ssr/src/types/page-component-after-bind-event-data.ts",
       "../../../packages/utils/src/color.ts",
       "../../../packages/utils/src/control.ts",
       "../../../packages/utils/src/dom.ts",
       "../../../packages/utils/src/type.ts",
       "../../../packages/utils/src/types/deferred.ts",
       "../../../packages/utils/src/types/index.ts"
+    ],
+    "affectedFilesPendingEmit": [
+      [
+        "../scripts/ssr.ts",
+        0
+      ]
     ]
   },
   "version": "4.1.3"

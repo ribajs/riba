@@ -28,6 +28,7 @@ export const theme: ThemeConfig = {
   active: THEME_ACTIVE,
   assetsDir: resolve(THEME_DIR, THEME.assetsDir),
   viewsDir: resolve(THEME_DIR, THEME.viewsDir),
+  pageCoponentsDir: resolve(THEME_DIR, THEME.pageCoponentsDir),
 };
 
 /**

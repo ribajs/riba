@@ -1,5 +1,4 @@
-import { Get, Controller, Render, Param, Res, Logger } from '@nestjs/common';
-import { promisify } from 'util';
+import { Get, Controller, Res, Logger } from '@nestjs/common';
 import type { Response } from 'express';
 
 import { GlobalService } from '../global/global.service';
@@ -30,17 +29,19 @@ export class PageController {
       ...this.global.get(),
       ...this.page.get('index'),
     };
+    this.log.debug('PageController');
     try {
-      const page = await this.ssr.render({
-        dom: 'happy-dom',
+      const page = await this.ssr.renderComponent({
+        engine: 'happy-dom',
         placeholderPageTag: 'page-component',
-        layoutPath: 'page-component.pug',
-        pageTag: 'index-page',
+        templatePath: 'page-component.pug',
+        pageComponentPath: 'index/index.page-component.ts',
+        componentTagName: 'index-page',
         variables,
       });
-      res.send(page);
+      return res.send(page.html);
     } catch (error) {
-      console.error(error);
+      this.log.error(error);
       return res.status(500).json(error);
     }
   }

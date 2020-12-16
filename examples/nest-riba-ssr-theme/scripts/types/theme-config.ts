@@ -4,4 +4,5 @@ export interface ThemeConfig {
   viewEngine: "pug" | "twig" | "liquid";
   assetsDir: string;
   viewsDir: string;
+  pageCoponentsDir: string;
 }
