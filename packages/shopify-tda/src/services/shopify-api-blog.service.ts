@@ -1,6 +1,6 @@
-import { HttpService } from '@ribajs/core';
-import { ITheme } from '../interfaces/shopify-api/theme';
-import { BaseApiService } from './base.service';
+import { HttpService } from "@ribajs/core";
+import { Blog } from "../interfaces/shopify-api/blog";
+import { BaseApiService } from "./base.service";
 
 export class ShopifyApiBlogsService extends BaseApiService {
   public static instance?: ShopifyApiBlogsService;
@@ -24,8 +24,8 @@ export class ShopifyApiBlogsService extends BaseApiService {
    * List blogs
    */
   public async list() {
-    const blogs = await HttpService.getJSON<ITheme[]>(`${this.baseUrl}`);
-    console.debug('[ShopifyApiBlogsService] blogs', blogs);
+    const blogs = await HttpService.getJSON<Blog[]>(`${this.baseUrl}`);
+    console.debug("[ShopifyApiBlogsService] blogs", blogs);
     return blogs;
   }
 }
