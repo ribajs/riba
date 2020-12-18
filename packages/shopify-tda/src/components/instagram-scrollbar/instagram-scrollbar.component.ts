@@ -1,11 +1,12 @@
 import { Component } from "@ribajs/core";
 import { Pjax } from "@ribajs/router";
 import { getViewportDimensions } from "@ribajs/utils/src/dom";
+import type {
+  InstagramMediaData,
+} from "../../interfaces/instagram-api";
 import {
-  InstagramMedia,
-  InstagramResponse,
-  InstagramService,
-} from "@ribajs/shopify-tda";
+  InstagramApiService,
+} from "../../services/instagram-api.service";
 import template from "./instagram-scrollbar.component.html";
 
 export interface Scope {
@@ -15,7 +16,7 @@ export interface Scope {
   limit: number;
   onScroll: ShopifyTdaInstagramScrollbarComponent["onScroll"];
   onTap: ShopifyTdaInstagramScrollbarComponent["onTap"];
-  media?: InstagramMedia;
+  media?: InstagramMediaData[];
 }
 
 export class ShopifyTdaInstagramScrollbarComponent extends Component {
@@ -35,7 +36,9 @@ export class ShopifyTdaInstagramScrollbarComponent extends Component {
     media: undefined,
   };
 
-  private scollWith: HTMLElement | null = null;
+  protected scollWith: HTMLElement | null = null;
+
+  protected instagram = InstagramApiService.getSingleton();
 
   constructor(element?: HTMLElement) {
     super(element);
@@ -96,22 +99,23 @@ export class ShopifyTdaInstagramScrollbarComponent extends Component {
       return;
     }
     const width =
-      (getViewportDimensions().w / 3) * this.scope.media.data.length;
+      (getViewportDimensions().w / 3) * this.scope.media.length;
     return width;
   }
 
-  protected loadMedia() {
+  protected async loadMedia() {
     if (!this.scope.instagramId) {
       throw new Error("instagram id is required!");
     }
-    InstagramService.loadMedia(this.scope.instagramId, this.scope.limit)
-      .then((response: InstagramResponse) => {
+    try {
+      const response = await this.instagram.media(this.scope.instagramId, this.scope.limit);
+      if (response) {
         this.scope.media = response.media;
         console.debug("response", response);
-      })
-      .catch((error) => {
-        console.debug(`Error: Can't load instagram media`, error);
-      });
+      }
+    } catch (error) {
+      console.debug(`Error: Can't load instagram media`, error);
+    }
   }
 
   protected async beforeBind() {

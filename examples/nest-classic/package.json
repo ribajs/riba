@@ -21,10 +21,10 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@nestjs/common": "^7.6.1",
+    "@nestjs/common": "^7.6.3",
     "@nestjs/config": "^0.6.1",
-    "@nestjs/core": "^7.6.1",
-    "@nestjs/platform-express": "^7.6.1",
+    "@nestjs/core": "^7.6.3",
+    "@nestjs/platform-express": "^7.6.3",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -41,7 +41,7 @@
   "devDependencies": {
     "@nestjs/cli": "^7.5.4",
     "@nestjs/schematics": "^7.2.5",
-    "@nestjs/testing": "^7.6.1",
+    "@nestjs/testing": "^7.6.3",
     "@types/cookie-parser": "^1.4.2",
     "@types/express-session": "^1.17.3",
     "@types/jest": "^26.0.19",

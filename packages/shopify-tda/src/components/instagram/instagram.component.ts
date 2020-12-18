@@ -2,13 +2,12 @@ import { Component } from "@ribajs/core";
 import { Pjax } from "@ribajs/router";
 import template from "./instagram.component.html";
 import {
-  InstagramMedia,
-  InstagramResponse,
-  InstagramService,
+  InstagramMediaData,
+  InstagramApiService,
 } from "@ribajs/shopify-tda";
 
 export interface Scope {
-  media?: InstagramMedia;
+  media: InstagramMediaData[];
   instagramId?: string;
   openLinks: boolean;
   limit: number;
@@ -18,6 +17,8 @@ export interface Scope {
 export class ShopifyTdaInstagramComponent extends Component {
   public static tagName = "shopify-tda-instagram";
 
+  protected instagram: InstagramApiService;
+
   public _debug = false;
 
   static get observedAttributes() {
@@ -25,7 +26,7 @@ export class ShopifyTdaInstagramComponent extends Component {
   }
 
   protected scope: Scope = {
-    media: undefined,
+    media: [],
     openLinks: false,
     limit: 0,
     instagramId: undefined,
@@ -34,6 +35,7 @@ export class ShopifyTdaInstagramComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
+    this.instagram = InstagramApiService.getSingleton();
   }
 
   protected connectedCallback() {
@@ -62,10 +64,11 @@ export class ShopifyTdaInstagramComponent extends Component {
     if (!this.scope.instagramId) {
       return Promise.reject();
     }
-    InstagramService.loadMedia(this.scope.instagramId, this.scope.limit)
-      .then((response: InstagramResponse) => {
-        this.scope.media = response.media;
-        // console.debug('response', response);
+    this.instagram.media(this.scope.instagramId, this.scope.limit)
+      .then((response) => {
+        if (response) {
+          this.scope.media = response.media || [];
+        }
       })
       .catch((error: Error) => {
         console.debug(`Error: Can't load instagram media`, error);

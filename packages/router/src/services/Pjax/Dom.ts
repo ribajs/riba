@@ -69,8 +69,8 @@ class Dom {
       | NodeListOf<HTMLLinkElement>
       | Array<HTMLLinkElement> = [];
 
-    const template = document.createElement("template") as HTMLTemplateElement;
-    template.innerHTML = document.body.innerHTML;
+    // const template = document.createElement("template") as HTMLTemplateElement;
+    // template.innerHTML = document.body.innerHTML;
 
     const container = this.getContainer(document, containerSelector);
 

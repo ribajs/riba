@@ -310,3 +310,33 @@ export const isCustomElement = (
   }
   return isCustomElement;
 };
+
+/**
+ * Creating a new DOM element from an HTML string
+ * @param html representing a single element
+ * @example
+ * ```js
+ *   const td = htmlToElement("<td>foo</td>");
+ *   const div = htmlToElement("<div><span>nested</span> <span>stuff</span></div>");
+ * ```
+ */
+export const htmlToElement = (html: string) => {
+  const template = document.createElement("template");
+  html = html.trim(); // Never return a text node of whitespace as the result
+  template.innerHTML = html;
+  return template.content.firstChild;
+};
+
+/**
+ * Creating a new DOM elements from an HTML string
+ * @param html representing any number of sibling elements
+ * @example
+ * ```js
+ *   var rows = htmlToElements('<tr><td>foo</td></tr><tr><td>bar</td></tr>');
+ * ```
+ */
+export const htmlToElements = (html: string) => {
+  const template = document.createElement("template");
+  template.innerHTML = html;
+  return template.content.childNodes;
+};

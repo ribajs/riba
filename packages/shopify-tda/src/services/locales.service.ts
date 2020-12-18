@@ -1,16 +1,17 @@
 import { LocalesRestService } from "@ribajs/i18n";
-import { BaseService } from "./base.service";
+import { BASE_HOST_URL } from '../constants/index';
 
 export class LocalesService extends LocalesRestService {
   public static instance: LocalesService;
   public static getInstance() {
     return this.instance;
   }
-  constructor(
+  protected constructor(
+    baseUrl = BASE_HOST_URL,
     doNotTranslateDefaultLanguage = false,
     showMissingTranslation = false
   ) {
-    let url = `${BaseService.baseUrl}/shopify/api/themes/${
+    let url = `${baseUrl}/shopify/api/themes/${
       (window as any).Shopify.theme.id
     }/locales`;
     if ((window as any).Shopify.shop) {
@@ -21,5 +22,17 @@ export class LocalesService extends LocalesRestService {
       return LocalesService.instance;
     }
     LocalesService.instance = this;
+  }
+
+  public static getSingleton(
+    baseUrl = BASE_HOST_URL,
+    doNotTranslateDefaultLanguage = false,
+    showMissingTranslation = false
+  ) {
+    if (LocalesService.instance) {
+      return LocalesService.instance;
+    }
+    LocalesService.instance = new LocalesService(baseUrl, doNotTranslateDefaultLanguage, showMissingTranslation);
+    return LocalesService.instance;
   }
 }

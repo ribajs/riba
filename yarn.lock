@@ -1709,9 +1709,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/common@npm:^7.6.1":
-  version: 7.6.1
-  resolution: "@nestjs/common@npm:7.6.1"
+"@nestjs/common@npm:^7.6.3":
+  version: 7.6.3
+  resolution: "@nestjs/common@npm:7.6.3"
   dependencies:
     axios: 0.21.0
     iterare: 1.2.1
@@ -1730,7 +1730,7 @@ __metadata:
       optional: true
     class-validator:
       optional: true
-  checksum: 58362fd8a001c3000d76c4433e3de2aac7f2e32b3aca2c42fc33b4c784fdd3bb1b74abc3f731760f5d4140590ec53a451db6ef486bc0cfca3c25d27d0a0c67ed
+  checksum: c6e8ac2cc8dd3d0c4e03d3e1d3677887d8b6a3af38e2ac0959563e0bcd97afb88852242e883e4b406fdb7d21e13c53df06ce46c9c90ed539fbf91e5c61e486d0
   languageName: node
   linkType: hard
 
@@ -1752,9 +1752,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/core@npm:^7.6.1":
-  version: 7.6.1
-  resolution: "@nestjs/core@npm:7.6.1"
+"@nestjs/core@npm:^7.6.3":
+  version: 7.6.3
+  resolution: "@nestjs/core@npm:7.6.3"
   dependencies:
     "@nuxtjs/opencollective": 0.3.2
     fast-safe-stringify: 2.0.7
@@ -1777,13 +1777,13 @@ __metadata:
       optional: true
     "@nestjs/websockets":
       optional: true
-  checksum: 924a8200dbe5ce0d408f5213c9c05c746faec45effd001b9f6a68e12e6321822a226d9682e2e3a3c892cc781ce5da4a2fbbf22262b93eb9ec5207bd3c314df59
+  checksum: c29f4afd32f4ef3f01eacbca56849c1b8e4d8fb8a71df30fd63b68f874aca3814e1eaef9ad630283c800b6b55c48190c28114d2a8a6c1916e8bac752d3cf58c4
   languageName: node
   linkType: hard
 
-"@nestjs/platform-express@npm:^7.6.1":
-  version: 7.6.1
-  resolution: "@nestjs/platform-express@npm:7.6.1"
+"@nestjs/platform-express@npm:^7.6.3":
+  version: 7.6.3
+  resolution: "@nestjs/platform-express@npm:7.6.3"
   dependencies:
     body-parser: 1.19.0
     cors: 2.8.5
@@ -1793,7 +1793,7 @@ __metadata:
   peerDependencies:
     "@nestjs/common": ^7.0.0
     "@nestjs/core": ^7.0.0
-  checksum: 7f6940f4c079b7c7531cdcccdf240a7ad7ff2d2e513152b8cef99ccb04bb1a99816a5badeb9cb42a748bcc368af13ef547f5300942e9c0f98bb995a90f8fd1e0
+  checksum: 6f2f6adef97d2e96273e107ae4e3e6bd0911e54d56ab3559c2d6ecb8e454b5c7e37344db0ea7689f3822ec090dbb35949ef2210dc2df13b223ef74d77d7fa891
   languageName: node
   linkType: hard
 
@@ -1811,9 +1811,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/testing@npm:^7.6.1":
-  version: 7.6.1
-  resolution: "@nestjs/testing@npm:7.6.1"
+"@nestjs/testing@npm:^7.6.3":
+  version: 7.6.3
+  resolution: "@nestjs/testing@npm:7.6.3"
   dependencies:
     optional: 0.1.4
     tslib: 2.0.3
@@ -1827,7 +1827,7 @@ __metadata:
       optional: true
     "@nestjs/platform-express":
       optional: true
-  checksum: 468bd27e8321d1c12da06f40143d2505365a89db83995d97f37850ff1990a63c9f4d597d734c6debadee0c8bb21c378d7f812ebeacfb7060274727ad9e375a24
+  checksum: d5e1d1752bf07c85e4b7be5c608575e5cc20ee6dd72a61d96c3867314660536b3cb172ba2395cec3805ee25a40c78d9473579c0277bc47de974127196b09ca5d
   languageName: node
   linkType: hard
 
@@ -2078,7 +2078,7 @@ __metadata:
     prettier: 2.1.2
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
   languageName: unknown
   linkType: soft
@@ -2144,7 +2144,7 @@ __metadata:
     prettier: 2.1.2
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
   languageName: unknown
   linkType: soft
@@ -2196,7 +2196,7 @@ __metadata:
     ts-jest: ^26.4.4
     typescript: ^4.1.3
     uglifyjs-webpack-plugin: ^2.2.0
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
     webpack-glob-entry: ^2.1.1
   languageName: unknown
@@ -2255,7 +2255,7 @@ __metadata:
     pug-loader: ^2.4.0
     sass-loader: ^10.1.0
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
     webpack-dev-server: ^3.11.0
   languageName: unknown
@@ -2315,7 +2315,7 @@ __metadata:
     pug-loader: ^2.4.0
     sass-loader: ^10.1.0
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
     webpack-dev-server: ^3.11.0
   languageName: unknown
@@ -2374,7 +2374,7 @@ __metadata:
     pug-loader: ^2.4.0
     sass-loader: ^10.1.0
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
     webpack-dev-server: ^3.11.0
   languageName: unknown
@@ -2429,7 +2429,7 @@ __metadata:
     terser-webpack-plugin: ^5.0.3
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
     webpack-dev-server: ^3.11.0
   languageName: unknown
@@ -2482,7 +2482,7 @@ __metadata:
     sass-loader: ^10.1.0
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
     webpack-dev-server: ^3.11.0
   languageName: unknown
@@ -2547,7 +2547,7 @@ __metadata:
     terser-webpack-plugin: ^5.0.3
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
     webpack-dev-server: ^3.11.0
   languageName: unknown
@@ -2607,7 +2607,7 @@ __metadata:
     pug-loader: ^2.4.0
     sass-loader: ^10.1.0
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
     webpack-dev-server: ^3.11.0
   languageName: unknown
@@ -2667,7 +2667,7 @@ __metadata:
     pug-loader: ^2.4.0
     sass-loader: ^10.1.0
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
     webpack-dev-server: ^3.11.0
   languageName: unknown
@@ -2728,7 +2728,7 @@ __metadata:
     sass-loader: ^10.1.0
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
     webpack-dev-server: ^3.11.0
   languageName: unknown
@@ -2786,7 +2786,7 @@ __metadata:
     terser-webpack-plugin: ^5.0.3
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
     webpack-dev-server: ^3.11.0
   languageName: unknown
@@ -2839,7 +2839,7 @@ __metadata:
     terser-webpack-plugin: ^5.0.3
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
     webpack-dev-server: ^3.11.0
   languageName: unknown
@@ -2894,7 +2894,7 @@ __metadata:
     terser-webpack-plugin: ^5.0.3
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
     webpack-dev-server: ^3.11.0
   languageName: unknown
@@ -2953,7 +2953,7 @@ __metadata:
     terser-webpack-plugin: ^5.0.3
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
     webpack-dev-server: ^3.11.0
   languageName: unknown
@@ -3012,7 +3012,7 @@ __metadata:
     terser-webpack-plugin: ^5.0.3
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
     webpack-dev-server: ^3.11.0
   languageName: unknown
@@ -3071,7 +3071,7 @@ __metadata:
     pug-loader: ^2.4.0
     sass-loader: ^10.1.0
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
     webpack-dev-server: ^3.11.0
   languageName: unknown
@@ -3135,7 +3135,7 @@ __metadata:
     terser-webpack-plugin: ^5.0.3
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
     webpack-dev-server: ^3.11.0
   languageName: unknown
@@ -3195,7 +3195,7 @@ __metadata:
     terser-webpack-plugin: ^5.0.3
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
     webpack-dev-server: ^3.11.0
   languageName: unknown
@@ -3259,7 +3259,7 @@ __metadata:
     terser-webpack-plugin: ^5.0.3
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
     webpack-dev-server: ^3.11.0
   languageName: unknown
@@ -3323,7 +3323,7 @@ __metadata:
     terser-webpack-plugin: ^5.0.3
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
     webpack-dev-server: ^3.11.0
   languageName: unknown
@@ -3384,7 +3384,7 @@ __metadata:
     terser-webpack-plugin: ^5.0.3
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
     webpack-dev-server: ^3.11.0
   languageName: unknown
@@ -3394,9 +3394,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/eslint-config@portal:infra/eslint-config::locator=ribajs%40workspace%3A."
   dependencies:
-    "@typescript-eslint/eslint-plugin": ^4.9.1
-    "@typescript-eslint/experimental-utils": ^4.9.1
-    "@typescript-eslint/parser": ^4.9.1
+    "@typescript-eslint/eslint-plugin": ^4.10.0
+    "@typescript-eslint/experimental-utils": ^4.10.0
+    "@typescript-eslint/parser": ^4.10.0
     eslint: ^7.15.0
     eslint-config-prettier: ^7.0.0
     eslint-plugin-prettier: ^3.3.0
@@ -3470,7 +3470,7 @@ __metadata:
     style-loader: ^2.0.0
     terser-webpack-plugin: ^5.0.3
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
   languageName: unknown
   linkType: soft
@@ -3480,12 +3480,12 @@ __metadata:
   resolution: "@ribajs/examples-nest-classic@workspace:examples/nest-classic"
   dependencies:
     "@nestjs/cli": ^7.5.4
-    "@nestjs/common": ^7.6.1
+    "@nestjs/common": ^7.6.3
     "@nestjs/config": ^0.6.1
-    "@nestjs/core": ^7.6.1
-    "@nestjs/platform-express": ^7.6.1
+    "@nestjs/core": ^7.6.3
+    "@nestjs/platform-express": ^7.6.3
     "@nestjs/schematics": ^7.2.5
-    "@nestjs/testing": ^7.6.1
+    "@nestjs/testing": ^7.6.3
     "@types/cookie-parser": ^1.4.2
     "@types/express-session": ^1.17.3
     "@types/jest": ^26.0.19
@@ -3585,7 +3585,7 @@ __metadata:
     typescript: ^4.1.3
     url: ^0.11.0
     util: ^0.12.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
     webpack-node-externals: ^2.5.2
   languageName: unknown
@@ -3597,12 +3597,12 @@ __metadata:
   dependencies:
     "@happy-dom/server-rendering": ^2.1.2
     "@nestjs/cli": ^7.5.4
-    "@nestjs/common": ^7.6.1
+    "@nestjs/common": ^7.6.3
     "@nestjs/config": ^0.6.1
-    "@nestjs/core": ^7.6.1
-    "@nestjs/platform-express": ^7.6.1
+    "@nestjs/core": ^7.6.3
+    "@nestjs/platform-express": ^7.6.3
     "@nestjs/schematics": ^7.2.5
-    "@nestjs/testing": ^7.6.1
+    "@nestjs/testing": ^7.6.3
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/ssr": "workspace:packages/ssr"
     "@types/consolidate": ^0.14.0
@@ -3686,7 +3686,7 @@ __metadata:
     prettier: 2.1.2
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
   languageName: unknown
   linkType: soft
@@ -3750,7 +3750,7 @@ __metadata:
     eslint-plugin-prettier: ^3.3.0
     prettier: 2.1.2
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
   languageName: unknown
   linkType: soft
@@ -3822,7 +3822,7 @@ __metadata:
     prettier: 2.1.2
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
   languageName: unknown
   linkType: soft
@@ -3865,7 +3865,7 @@ __metadata:
     prettier: 2.1.2
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
   languageName: unknown
   linkType: soft
@@ -3912,7 +3912,7 @@ __metadata:
     prettier: 2.1.2
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
   languageName: unknown
   linkType: soft
@@ -3951,7 +3951,7 @@ __metadata:
     prettier: 2.1.2
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
   languageName: unknown
   linkType: soft
@@ -4002,7 +4002,7 @@ __metadata:
     rgb-regex: ^1.0.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
   languageName: unknown
   linkType: soft
@@ -4043,7 +4043,7 @@ __metadata:
     prettier: 2.1.2
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
   languageName: unknown
   linkType: soft
@@ -4097,7 +4097,7 @@ __metadata:
     prettier: 2.1.2
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
   languageName: unknown
   linkType: soft
@@ -4147,7 +4147,7 @@ __metadata:
     regexpp: ^3.1.0
     tsutils: ^3.17.1
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
   languageName: unknown
   linkType: soft
@@ -4181,7 +4181,7 @@ __metadata:
     eslint-plugin-prettier: ^3.3.0
     prettier: 2.1.2
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
   languageName: unknown
   linkType: soft
@@ -4207,6 +4207,7 @@ __metadata:
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
     "@types/jest": ^26.0.19
+    "@types/socket.io-client": 1.4.34
     "@typescript-eslint/eslint-plugin": ^4.10.0
     "@typescript-eslint/parser": ^4.10.0
     babel-loader: ^8.2.2
@@ -4216,8 +4217,9 @@ __metadata:
     eslint-config-prettier: ^7.0.0
     eslint-plugin-prettier: ^3.3.0
     prettier: 2.1.2
+    socket.io-client: 2.3.1
     typescript: ^4.1.3
-    webpack: ^5.10.3
+    webpack: ^5.11.0
     webpack-cli: ^4.2.0
   languageName: unknown
   linkType: soft
@@ -4436,7 +4438,7 @@ __metadata:
     copy-webpack-plugin: ^7.0.0
     css-loader: ^5.0.1
     file-loader: ^6.2.0
-    fork-ts-checker-webpack-plugin: ^6.0.6
+    fork-ts-checker-webpack-plugin: ^6.0.7
     glob: ^7.1.6
     html-loader: ^1.3.2
     html-webpack-plugin: ^4.5.0
@@ -5291,7 +5293,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/socket.io-client@npm:^1.4.34":
+"@types/socket.io-client@npm:1.4.34, @types/socket.io-client@npm:^1.4.34":
   version: 1.4.34
   resolution: "@types/socket.io-client@npm:1.4.34"
   checksum: 50b19bdca4d04e72f407b2577aa7ee9fdf5dddf722041c7c652a95b0d1bbf5da692aaa7cba294b1da8b563fb4d72a66b5a6d34831b005abb71f84775f1ba0515
@@ -5499,7 +5501,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^4.10.0, @typescript-eslint/eslint-plugin@npm:^4.9.1":
+"@typescript-eslint/eslint-plugin@npm:^4.10.0":
   version: 4.10.0
   resolution: "@typescript-eslint/eslint-plugin@npm:4.10.0"
   dependencies:
@@ -5520,7 +5522,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/experimental-utils@npm:4.10.0, @typescript-eslint/experimental-utils@npm:^4.10.0, @typescript-eslint/experimental-utils@npm:^4.9.1":
+"@typescript-eslint/experimental-utils@npm:4.10.0, @typescript-eslint/experimental-utils@npm:^4.10.0":
   version: 4.10.0
   resolution: "@typescript-eslint/experimental-utils@npm:4.10.0"
   dependencies:
@@ -5536,7 +5538,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^4.10.0, @typescript-eslint/parser@npm:^4.9.1":
+"@typescript-eslint/parser@npm:^4.10.0":
   version: 4.10.0
   resolution: "@typescript-eslint/parser@npm:4.10.0"
   dependencies:
@@ -11035,7 +11037,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fork-ts-checker-webpack-plugin@npm:^6.0.6, fork-ts-checker-webpack-plugin@npm:^6.0.7":
+"fork-ts-checker-webpack-plugin@npm:^6.0.7":
   version: 6.0.7
   resolution: "fork-ts-checker-webpack-plugin@npm:6.0.7"
   dependencies:
@@ -17973,9 +17975,9 @@ fsevents@~2.1.2:
     "@babel/runtime": ^7.12.5
     "@babel/runtime-corejs3": ^7.12.5
     "@babel/types": ^7.12.11
-    "@nestjs/common": ^7.6.1
-    "@nestjs/core": ^7.6.1
-    "@nestjs/testing": ^7.6.1
+    "@nestjs/common": ^7.6.3
+    "@nestjs/core": ^7.6.3
+    "@nestjs/testing": ^7.6.3
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/types": "workspace:infra/types"
@@ -18688,7 +18690,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"socket.io-client@npm:^2.0.4":
+"socket.io-client@npm:2.3.1, socket.io-client@npm:^2.0.4":
   version: 2.3.1
   resolution: "socket.io-client@npm:2.3.1"
   dependencies:
@@ -21116,9 +21118,9 @@ typescript@^4.1.3:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.10.3":
-  version: 5.10.3
-  resolution: "webpack@npm:5.10.3"
+"webpack@npm:^5.11.0":
+  version: 5.11.0
+  resolution: "webpack@npm:5.11.0"
   dependencies:
     "@types/eslint-scope": ^3.7.0
     "@types/estree": ^0.0.45
@@ -21149,7 +21151,7 @@ typescript@^4.1.3:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: 1f3ea088013cbc9da1bf8fe664a7ada73f6c53ab515ac7481b9fc6418c600d11d81530f2e88b84bf2f1481b6b9001e050c4022c005d174ec6904bea5c5e6c6d3
+  checksum: 573cdf80bd1cc2ef27a6abbf47b132898a6cd8b1514e7884a4788c521f307dd8c287888a36a40f8402cba5555a553d5a681c7932fed23b654bd922152117691a
   languageName: node
   linkType: hard
 

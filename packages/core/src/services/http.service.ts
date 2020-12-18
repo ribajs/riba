@@ -27,8 +27,8 @@ export class HttpService {
    * @param data A plain object or string that is sent to the server with the request.
    * @see https://api.jquery.com/jquery.getjson/
    */
-  public static async getJSON(url: string, data?: any) {
-    return this.fetch(url, "GET", data, "json");
+  public static async getJSON<T = any>(url: string, data?: any) {
+    return this.fetch<T>(url, "GET", data, "json");
   }
 
   /**
@@ -128,14 +128,14 @@ export class HttpService {
     return headers;
   }
 
-  public static async fetch(
+  public static async fetch<T=any>(
     url: string,
     method: HttpMethod = "GET",
     data: any = {},
     dataType?: string,
     headers: any = {},
     options: HttpServiceOptions = {}
-  ) {
+  ): Promise<T | void> {
     if (!fetch) {
       return console.error(
         "Your browser does not support the fetch API, use xhr instead or install a polyfill."
