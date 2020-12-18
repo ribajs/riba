@@ -92,7 +92,7 @@ export class Bs4ToastItemComponent extends Component {
     }
     const toastContainer: Bs4NotificationContainerScope | null =
       this.scope.$parent?.$parent || null;
-    if (typeof toastContainer?.onItemHide === "function" && this.scope.toast) {
+    if (typeof toastContainer?.onItemHide === "function" && this.scope.toast && el) {
       toastContainer.onItemHide(event, el, this.scope.index, this.scope.toast);
     }
   }

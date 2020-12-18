@@ -88,7 +88,7 @@ class Pjax {
    */
   public static preventCheck(
     evt: Event,
-    element: HTMLAnchorElement | HTMLLinkElement,
+    element: HTMLAnchorElement | HTMLLinkElement | HTMLUnknownElement,
     href: string
   ): boolean {
     if (!window.history.pushState) {
@@ -111,7 +111,7 @@ class Pjax {
     }
 
     // Ignore target with _blank target
-    if (element.target && element.target === "_blank") {
+    if ((element as HTMLAnchorElement).target && (element as HTMLAnchorElement).target === "_blank") {
       return false;
     }
 
@@ -500,7 +500,7 @@ class Pjax {
       return false;
     }
 
-    return this.onLinkClick(evt, el, href);
+    return this.onLinkClick(evt, el as HTMLAnchorElement, href);
   }
 
   /**

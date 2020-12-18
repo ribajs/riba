@@ -131,7 +131,7 @@ export class ShopifyTdaInstagramScrollbarComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el && this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       return null;
     } else {
       return template;
