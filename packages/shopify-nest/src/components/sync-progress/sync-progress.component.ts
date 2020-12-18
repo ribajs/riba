@@ -1,7 +1,7 @@
 import { Component } from "@ribajs/core";
 import Debug from "debug";
 import pugTemplate from "./sync-progress.component.pug";
-
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { ShopifyApiSyncService } from "../../services/shopify-api-sync.service";
 import { SyncProgress, SyncOptions } from "../../interfaces/shopify-sync";
 
@@ -253,7 +253,7 @@ export class ShopifyNestSyncProgressComponent extends Component {
   protected template() {
     let template: string | null = null;
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       this.debug("Do not template, because element has child nodes");
       return template;
     } else {

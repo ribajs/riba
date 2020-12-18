@@ -1,5 +1,6 @@
 import { Component } from "@ribajs/core";
 import Debug from "debug";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import pugTemplate from "./socket-event-card.component.pug";
 
 interface Scope {
@@ -80,7 +81,7 @@ export class ShopifyNestSocketEventCardComponent extends Component {
   protected template() {
     let template: string | null = null;
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       this.debug("Do not template, because element has child nodes");
       return template;
     } else {

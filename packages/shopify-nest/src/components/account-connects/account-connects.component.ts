@@ -1,40 +1,40 @@
-import { Component, HttpService } from '@ribajs/core';
+import { Component, HttpService } from "@ribajs/core";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import Debug from "debug";
 
-import Debug from 'debug';
+import pugTemplate from "./account-connects.component.pug";
 
-import pugTemplate from './account-connects.component.pug';
+import { ShopifyConnect } from "../../interfaces/shopify-connect/connect";
+import { FacebookConnect } from "../../interfaces/facebook-connect/connect";
+import { FbUserPictureData } from "@ribajs/shopify-tda";
+import { AuthService } from "../../services/auth.service";
 
-import { ShopifyConnect } from '../../interfaces/shopify-connect/connect';
-import { FacebookConnect } from '../../interfaces/facebook-connect/connect';
-import { FbUserPictureData } from '@ribajs/shopify-tda';
-import { AuthService } from '../../services/auth.service';
-
-import { EASDKWrapperService } from '@ribajs/shopify-easdk';
+import { EASDKWrapperService } from "@ribajs/shopify-easdk";
 
 interface Scope {
   myshopify_domain?: string;
-  type?: 'shopify' | 'facebook' | 'vimeo';
+  type?: "shopify" | "facebook" | "vimeo";
   avatarUrl?: string;
   isConnected: boolean;
   account?: ShopifyConnect | FacebookConnect;
   locales: any;
-  connect: ShopifyNestAccountConnectsComponent['connect'];
-  disconnect: ShopifyNestAccountConnectsComponent['disconnect'];
-  logout: ShopifyNestAccountConnectsComponent['logout'];
+  connect: ShopifyNestAccountConnectsComponent["connect"];
+  disconnect: ShopifyNestAccountConnectsComponent["disconnect"];
+  logout: ShopifyNestAccountConnectsComponent["logout"];
   inIframe: boolean;
 }
 
 declare const shop: string;
 
 export class ShopifyNestAccountConnectsComponent extends Component {
-  public static tagName = 'shopify-nest-account-connects';
+  public static tagName = "shopify-nest-account-connects";
 
   static get observedAttributes() {
-    return ['type'];
+    return ["type"];
   }
 
   protected debug = Debug(
-    'component:' + ShopifyNestAccountConnectsComponent.tagName,
+    "component:" + ShopifyNestAccountConnectsComponent.tagName
   );
   protected authService = new AuthService();
 
@@ -45,9 +45,9 @@ export class ShopifyNestAccountConnectsComponent extends Component {
     type: undefined,
     avatarUrl: undefined,
     locales: {
-      title: 'components.accountConnects.{type}.title',
-      info: 'components.accountConnects.{type}.info',
-      notConnected: 'components.accountConnects.{type}.notConnected',
+      title: "components.accountConnects.{type}.title",
+      info: "components.accountConnects.{type}.info",
+      notConnected: "components.accountConnects.{type}.notConnected",
     },
     connect: this.connect,
     disconnect: this.disconnect,
@@ -57,7 +57,7 @@ export class ShopifyNestAccountConnectsComponent extends Component {
 
   constructor(element?: HTMLElement) {
     super(element);
-    this.debug('constructor', this);
+    this.debug("constructor", this);
   }
 
   protected connectedCallback() {
@@ -66,19 +66,19 @@ export class ShopifyNestAccountConnectsComponent extends Component {
   }
 
   public connect() {
-    this.debug('connect');
+    this.debug("connect");
     if (!this.scope.type) {
-      throw new Error('Type attribute is required on this component');
+      throw new Error("Type attribute is required on this component");
     }
     return this.authService.connect(
       this.scope.type,
-      this.scope.myshopify_domain,
+      this.scope.myshopify_domain
     );
   }
 
   public disconnect() {
     if (!this.scope.type) {
-      throw new Error('Type attribute is required on this component');
+      throw new Error("Type attribute is required on this component");
     }
     if (!this.scope.account) {
       throw new Error("You can't disconnect an account that does not exist");
@@ -98,46 +98,46 @@ export class ShopifyNestAccountConnectsComponent extends Component {
    * Logout from app
    */
   public logout() {
-    this.debug('logout');
+    this.debug("logout");
     return this.authService.logout();
   }
 
   protected async getAvatarUrl() {
-    if (this.scope.type === 'shopify') {
-      return '/images/shopify.svg';
+    if (this.scope.type === "shopify") {
+      return "/images/shopify.svg";
     }
 
-    if (this.scope.type === 'facebook') {
+    if (this.scope.type === "facebook") {
       return HttpService.getJSON(`/facebook/api/user/picture?type=normal`).then(
         (picture: FbUserPictureData) => {
-          this.debug('getAvatarUrl');
+          this.debug("getAvatarUrl");
           return picture.url;
-        },
+        }
       );
     }
   }
 
   protected async isShopifyConnected() {
     if (!this.scope.type) {
-      throw new Error('Type attribute is required on this component');
+      throw new Error("Type attribute is required on this component");
     }
     return this.authService.connected(this.scope.type);
   }
 
   protected async beforeBind() {
-    this.debug('beforeBind');
+    this.debug("beforeBind");
 
     this.scope.locales.title = this.scope.locales.title.replace(
-      '{type}',
-      this.scope.type,
+      "{type}",
+      this.scope.type
     );
     this.scope.locales.info = this.scope.locales.info.replace(
-      '{type}',
-      this.scope.type,
+      "{type}",
+      this.scope.type
     );
     this.scope.locales.notConnected = this.scope.locales.notConnected.replace(
-      '{type}',
-      this.scope.type,
+      "{type}",
+      this.scope.type
     );
 
     return this.isShopifyConnected()
@@ -146,7 +146,7 @@ export class ShopifyNestAccountConnectsComponent extends Component {
           this.scope.isConnected = true;
           this.scope.account = account;
         }
-        this.debug('account', account);
+        this.debug("account", account);
         return account;
       })
       .then(async () => {
@@ -166,7 +166,7 @@ export class ShopifyNestAccountConnectsComponent extends Component {
          * @see https://developers.facebook.com/docs/graph-api/using-graph-api/error-handling/
          */
         if (
-          this.scope.type === 'facebook' &&
+          this.scope.type === "facebook" &&
           error.responseJSON &&
           error.responseJSON.code === 190
         ) {
@@ -179,11 +179,11 @@ export class ShopifyNestAccountConnectsComponent extends Component {
 
   protected async afterBind() {
     await super.afterBind();
-    this.debug('afterBind', this.scope);
+    this.debug("afterBind", this.scope);
   }
 
   protected requiredAttributes() {
-    return ['type'];
+    return ["type"];
   }
 
   protected disconnectedCallback() {
@@ -193,12 +193,12 @@ export class ShopifyNestAccountConnectsComponent extends Component {
   protected template() {
     let template: string | null = null;
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
-      this.debug('Do not template, because element has child nodes');
+    if (hasChildNodesTrim(this.el)) {
+      this.debug("Do not template, because element has child nodes");
       return template;
     } else {
       template = pugTemplate(this.scope);
-      this.debug('Use template', template);
+      this.debug("Use template", template);
       return template;
     }
   }

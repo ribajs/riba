@@ -111,14 +111,16 @@ export const scrollTo = (
   });
 };
 
-export const getElementFromEvent = (event: Event | MouseEvent | TouchEvent) => {
+export const getElementFromEvent = <T = HTMLAnchorElement | HTMLUnknownElement>(
+  event: Event | MouseEvent | TouchEvent
+) => {
   const el =
-    ((event as Event).target as HTMLAnchorElement) ||
-    ((event as any).currentTarget as HTMLAnchorElement) ||
-    ((event as MouseEvent).relatedTarget as HTMLAnchorElement) ||
+    ((event as Event).target as T | null) ||
+    ((event as any).currentTarget as T | null) ||
+    ((event as MouseEvent).relatedTarget as T | null) ||
     // JQuery event
-    ((event as any).delegateTarget as HTMLUnknownElement) ||
-    ((event as any).fromElement as HTMLAnchorElement);
+    ((event as any).delegateTarget as T) ||
+    ((event as any).fromElement as T);
   return el;
 };
 

@@ -2,10 +2,11 @@ export { ShopifyNestAccountConnectsComponent } from "./account-connects/account-
 export { ShopifyNestApiExplorerFacebookComponent } from "./api-explorer-facebook/api-explorer-facebook.component";
 export { ShopifyNestApiExplorerInstagramComponent } from "./api-explorer-instagram/api-explorer-instagram.component";
 export { ShopifyNestApiExplorerShopifyComponent } from "./api-explorer-shopify/api-explorer-shopify.component";
-export { ShopifyNestSyncProgressComponent } from "./sync-progress/sync-progress.component";
 export { ShopifyNestApiSocketExplorerComponent } from "./api-socket-explorer/api-socket-explorer.component";
-export { ShopifyNestSocketEventCardComponent } from "./socket-event-card/socket-event-card.component";
 export { ShopifyNestContentBlogArticleComponent } from "./content-article/content-article.component";
 export { ShopifyNestContentBlogArticlesComponent } from "./content-articles/content-articles.component";
 export { ShopifyNestContentBlogsComponent } from "./content-blogs/content-blogs.component";
+export { ShopifyNestPermissionsComponent } from "./permissions/permissions.component";
 export { ShopifyNestPlansComponent } from "./plans/plans.component";
+export { ShopifyNestSocketEventCardComponent } from "./socket-event-card/socket-event-card.component";
+export { ShopifyNestSyncProgressComponent } from "./sync-progress/sync-progress.component";

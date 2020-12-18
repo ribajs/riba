@@ -1,9 +1,8 @@
 import Debug from "debug";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { ShopifyNestContentComponent } from "../content/content.component";
-
 import { ShopifyApiArticleService } from "../../services/shopify-api-article.service";
 import { Article } from "@ribajs/shopify-tda";
-
 import pugTemplate from "./content-article.component.pug";
 
 export interface Scope {
@@ -136,7 +135,7 @@ export class ShopifyNestContentBlogArticleComponent extends ShopifyNestContentCo
   protected template() {
     let template: string | null = null;
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       this.debug("Do not template, because element has child nodes");
       return template;
     } else {

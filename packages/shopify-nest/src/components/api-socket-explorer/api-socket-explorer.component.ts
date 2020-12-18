@@ -1,8 +1,7 @@
 import { Component } from "@ribajs/core";
-import { htmlToElement } from "@ribajs/utils/src/dom";
+import { htmlToElement, hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import Debug from "debug";
 import { LocalesStaticService } from "@ribajs/i18n";
-
 import { Product } from "@ribajs/shopify-tda";
 import { WebhooksService } from "../../services/webhooks.service";
 import { ShopifyApiProductService } from "../../services/shopify-api-product.service";
@@ -794,7 +793,7 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
   protected template() {
     let template: string | null = null;
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       this.debug("Do not template, because element has child nodes");
       return template;
     } else {

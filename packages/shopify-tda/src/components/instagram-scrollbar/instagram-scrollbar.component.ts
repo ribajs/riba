@@ -1,12 +1,11 @@
 import { Component } from "@ribajs/core";
 import { Pjax } from "@ribajs/router";
-import { getViewportDimensions } from "@ribajs/utils/src/dom";
-import type {
-  InstagramMediaData,
-} from "../../interfaces/instagram-api";
 import {
-  InstagramApiService,
-} from "../../services/instagram-api.service";
+  getViewportDimensions,
+  hasChildNodesTrim,
+} from "@ribajs/utils/src/dom";
+import type { InstagramMediaData } from "../../interfaces/instagram-api";
+import { InstagramApiService } from "../../services/instagram-api.service";
 import template from "./instagram-scrollbar.component.html";
 
 export interface Scope {
@@ -98,8 +97,7 @@ export class ShopifyTdaInstagramScrollbarComponent extends Component {
     if (!this.scope.media) {
       return;
     }
-    const width =
-      (getViewportDimensions().w / 3) * this.scope.media.length;
+    const width = (getViewportDimensions().w / 3) * this.scope.media.length;
     return width;
   }
 
@@ -108,7 +106,10 @@ export class ShopifyTdaInstagramScrollbarComponent extends Component {
       throw new Error("instagram id is required!");
     }
     try {
-      const response = await this.instagram.media(this.scope.instagramId, this.scope.limit);
+      const response = await this.instagram.media(
+        this.scope.instagramId,
+        this.scope.limit
+      );
       if (response) {
         this.scope.media = response.media;
         console.debug("response", response);

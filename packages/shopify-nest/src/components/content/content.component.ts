@@ -1,4 +1,5 @@
 import { Component } from "@ribajs/core";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import Debug from "debug";
 import pugTemplate from "./content.component.pug";
 
@@ -54,7 +55,7 @@ export abstract class ShopifyNestContentComponent extends Component {
   protected template() {
     let template: string | null = null;
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       this.debug("Do not template, because element has child nodes");
       return template;
     } else {

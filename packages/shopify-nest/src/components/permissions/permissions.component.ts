@@ -1,9 +1,26 @@
 import { Component } from "@ribajs/core";
+import { getElementFromEvent, hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import Debug from "debug";
-import pugTemplate from "./plans.component.pug";
+import { ACCESS_SCOPES } from "../../constants";
+import pugTemplate from "./permissions.component.pug";
+
+interface AccessScopeItem {
+  value: string;
+  action: "write" | "read";
+  checked: boolean;
+}
+
+interface AccessScopes {
+  [groupKey: string]: {
+    items: AccessScopeItem[];
+    // placeholder
+    info: any;
+  };
+}
 
 interface Scope {
-  hello: string;
+  accessScopes: AccessScopes;
+  toggleAll: ShopifyNestPermissionsComponent["toggleAll"];
 }
 
 export class ShopifyNestPermissionsComponent extends Component {
@@ -18,12 +35,47 @@ export class ShopifyNestPermissionsComponent extends Component {
   );
 
   protected scope: Scope = {
-    hello: "world",
+    accessScopes: {},
+    toggleAll: this.toggleAll,
   };
 
   constructor(element?: HTMLElement) {
     super(element);
     this.debug("constructor", this);
+    this.debug(this.scope.accessScopes);
+  }
+
+  public toggleAll(event: Event) {
+    const el = getElementFromEvent<HTMLInputElement>(event);
+    const checked = el.checked;
+    for (const key in this.scope.accessScopes) {
+      if (Object.prototype.hasOwnProperty.call(this.scope.accessScopes, key)) {
+        const accessScopeObj = this.scope.accessScopes[key];
+        for (const accessScope of accessScopeObj.items) {
+          accessScope.checked = checked;
+        }
+      }
+    }
+  }
+
+  protected groupAccessScopes() {
+    for (const ACCESS_SCOPE of ACCESS_SCOPES) {
+      const groupKey = ACCESS_SCOPE.replace(/^(read_|write_)/i, "");
+      this.scope.accessScopes[groupKey] = this.scope.accessScopes[groupKey] || {
+        items: [],
+        i18n: {
+          desc: `shopify.accessScopes.${groupKey}`,
+        },
+      };
+
+      if (ACCESS_SCOPE.endsWith(groupKey)) {
+        this.scope.accessScopes[groupKey].items.push({
+          value: ACCESS_SCOPE,
+          action: ACCESS_SCOPE.replace("_" + groupKey, "") as "read" | "write",
+          checked: false,
+        });
+      }
+    }
   }
 
   protected connectedCallback() {
@@ -34,6 +86,7 @@ export class ShopifyNestPermissionsComponent extends Component {
   protected async beforeBind() {
     this.debug("beforeBind");
     await super.beforeBind();
+    this.groupAccessScopes();
   }
 
   protected async afterBind() {
@@ -52,7 +105,7 @@ export class ShopifyNestPermissionsComponent extends Component {
   protected template() {
     let template: string | null = null;
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       this.debug("Do not template, because element has child nodes");
       return template;
     } else {

@@ -1,1 +1,16 @@
-section.row
+.row
+  .col-12.col-md-8.col-xl-6.mx-auto
+    .row.my-3
+      .col-auto.text-center.mx-auto.mt-3
+        h1 Access scopes
+        p Toggle which access scopes you wish to grant permission for in the app.
+        .scopes-list.text-center
+          .custom-control.custom-switch.custom-switch-primary
+            input(type="checkbox" class="custom-control-input" id="scope-all" value="" rv-on-change="toggleAll")
+            label(class="custom-control-label" for="scope-all") select all
+    .row.my-3
+      .col-6.col-md-4.offset-md-2.my-3(rv-each-group="accessScopes")
+        h4 { %group% }
+        .custom-control.custom-switch.custom-switch-primary(rv-each-scope="group.items")
+          input(type="checkbox" class="custom-control-input" name="scope" rv-id="'scope-' | append scope.value" rv-value="scope.value" rv-checked="scope.checked")
+          label(class="custom-control-label" rv-for="'scope-' | append scope.value") { scope.action }

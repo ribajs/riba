@@ -1,5 +1,5 @@
 import { Component, HttpService } from "@ribajs/core";
-import { isNumber, concat } from "@ribajs/utils";
+import { isNumber, concat, hasChildNodesTrim } from "@ribajs/utils";
 import Debug from "debug";
 
 import { DropdownService } from "@ribajs/bs4";
@@ -424,7 +424,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
   protected template() {
     let template: string | null = null;
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       this.debug("Do not template, because element has child nodes");
       return template;
     } else {

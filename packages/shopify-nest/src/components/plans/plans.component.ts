@@ -1,7 +1,7 @@
 import { Component, HttpService } from "@ribajs/core";
 import Debug from "debug";
 import pugTemplate from "./plans.component.pug";
-
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { RecurringCharge } from "../../interfaces/shopify-api/recurring_charge";
 import { Plan } from "../../interfaces/plan";
 
@@ -98,7 +98,7 @@ export class ShopifyNestPlansComponent extends Component {
   protected template() {
     let template: string | null = null;
     // Only set the component template if there no childs already
-    if (this.el.hasChildNodes()) {
+    if (hasChildNodesTrim(this.el)) {
       this.debug("Do not template, because element has child nodes");
       return template;
     } else {
