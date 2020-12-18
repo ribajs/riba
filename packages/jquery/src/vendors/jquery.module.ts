@@ -7,7 +7,8 @@ declare global {
   }
 }
 
-window.$ = JQuery;
-window.jQuery = JQuery;
+// Only set JQuery zp window if it is not already set
+window.$ = window.$ || JQuery;
+window.jQuery = window.jQuery || JQuery;
 
 export { JQuery };
