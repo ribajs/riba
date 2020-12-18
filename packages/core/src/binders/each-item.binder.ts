@@ -42,24 +42,49 @@ export const eachStarBinder: Binder<any[]> = {
     if (this.args === null) {
       throw new Error("args is null");
     }
+    let isObject = false;
     const modelName = this.args[0] as string;
     collection = collection || [];
 
-    // TODO support object keys to iterate over
+    // Transform object to array to iterate over
+    if (
+      !Array.isArray(collection) &&
+      typeof collection === "object" &&
+      collection !== null
+    ) {
+      console.debug("original collection", collection);
+      collection = Object.entries(collection).map(([key, value]) => {
+        return { key, value };
+      });
+      isObject = true;
+      console.debug("converted collection", collection);
+    }
+
     if (!Array.isArray(collection)) {
       throw new Error(
-        "each-" + modelName + " needs an array to iterate over, but it is"
+        "each-" +
+          modelName +
+          " needs an array or object to iterate over, but it is " +
+          typeof collection
       );
     }
 
-    // if index name is seted by `index-property` use this name, otherwise `%[modelName]%`
+    // if index name is set by `index-property` use this name, otherwise `%[modelName]%`
     const indexProp =
       el.getAttribute("index-property") || this.getIterationAlias(modelName);
 
     collection.forEach((model, index) => {
       const scope: any = { $parent: this.view.models };
-      scope[indexProp] = index;
-      scope[modelName] = model;
+      // Is object transformed to array
+      if (isObject) {
+        scope[indexProp] = model.key;
+        scope[modelName] = model.value;
+      }
+      // Is Array
+      else {
+        scope[indexProp] = index;
+        scope[modelName] = model;
+      }
       let view = this.customData.iterated[index];
 
       if (!view) {
