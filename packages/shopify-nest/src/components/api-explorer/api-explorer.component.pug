@@ -1,0 +1,69 @@
+.card.monaco-editor-card
+  .card-body
+    .card-text.px-3
+      .row
+        //- Left site (description, dropdown for api list)
+        .col-12.col-md-4
+          .row
+            .col-12
+              .dropdown
+                button.btn.btn-outline-light.w-100.text-truncate.dropdown-toggle(rv-bs4-dropdown="")
+                  span(rv-text="currentSelectApi.label | or currentSelectApi.url")
+                .dropdown-menu.dropdown-menu-dark.scrollbar-y-auto.scrollbar-primary
+                  div(rv-each-api="apiList")
+                    .dropdown-item.cursor-pointer(rv-on-click="selectApi | args api")
+                      span.text-primary(rv-text="api.label | or api.url")
+                      span.badge.badge-primary.mx-1(rv-each-role="api.roles" rv-i18n-text="'components.apiExplorer.roles.' | append role | append '.label'")
+                      br
+                      small(rv-i18n-text="api.short_desc")
+            //- Description
+            .col-12
+              p.text-primary.pt-3(rv-i18n-text="currentSelectApi.short_desc")
+            //- Roles
+            .col-12
+              span.badge.badge-primary.mx-1(rv-each-role="currentSelectApi.roles" rv-i18n-text="'components.apiExplorer.roles.' | append role | append '.label'", rv-bs4-tooltip="'components.apiExplorer.roles.' | append role | append '.info' | t langcode")
+            //- Queries
+            .col-12.pt-3(rv-show="currentQueries | size | gt 0")
+              p.text-primary(rv-i18n-text="'components.apiExplorer.query.title'")
+              .custom-control.custom-checkbox(rv-each-query="currentQueries")
+                input.custom-control-input(type="checkbox" rv-id="query.name" rv-checked="query.active")
+                label.custom-control-label.text-primary(rv-text="query.name" rv-for="query.name")
+        //- Right site (api input filed and result)
+        .col-12.col-md-8
+          .row
+            //- freestyle api input field
+            .col-12.mb-3.input-group(rv-show="currentSelectApi.freestyle")
+              input.form-control.form-control-light.form-control-freestyle(type='text', rv-value="currentUrl" rv-i18n-placeholder="'components.apiExplorer.input.placeholder'" rv-i18n-aria-label="'components.apiExplorer.input.placeholder'")
+              .input-group-append
+                button.btn.btn-outline-light(type="button", rv-i18n-text="'components.apiExplorer.send'", rv-on-click="send")
+            //- api dropdowns for dynamic params
+            .col-12.mb-3.input-group(rv-hide="currentSelectApi.freestyle")
+              .form-control.form-control-light.form-control-readonly.d-flex.flex-row.align-items-center.text-primary
+                .d-flex.flex-row.align-items-center(rv-each-param="currentParams")
+                  span: | /
+                  //- Dynamic param
+                  .dropdown(rv-show="param.dynamic")
+                    button.btn.btn-sm.py-0.btn-outline-light.dropdown-toggle.dropdown-api-param.text-truncate(rv-bs4-dropdown="" rv-enabled="param.dependenciesResolved | and param.values.length" rv-text="param.value | or param.name")
+                    .dropdown-menu.dropdown-menu-dark.scrollbar-y-auto.scrollbar-primary
+                      div(rv-each-value="param.values")
+                        .dropdown-item.cursor-pointer(rv-on-click="selectApiParamValue | args self param value")
+                          span(rv-text="value")
+                  //- Static param
+                  span(rv-hide="param.dynamic" rv-text="param.name")
+                //- Query params
+                .d-flex.flex-row.align-items-center(rv-each-query="currentQueries", rv-show="query.active")
+                  span(rv-show="%query% | eq 0"): | ?
+                  span(rv-show="%query% | gt 0"): | &amp;
+                  span: | {query.name}=
+                  span.dropdown(rv-show="query.type | eq 'dropdown'")
+                    button.btn.btn-sm.py-0.btn-outline-light.dropdown-toggle.dropdown-api-query.text-truncate(rv-bs4-dropdown="" rv-enabled="query.dependenciesResolved | and query.values.length" rv-text="query.value | or query.name")
+                    .dropdown-menu.dropdown-menu-dark.scrollbar-y-auto.scrollbar-primary
+                      div(rv-each-value="query.values")
+                        .dropdown-item.cursor-pointer(rv-on-click="selectApiQueryValue | args self query value")
+                            span(rv-text="value")
+                  input.form-control.form-control-primary.form-control-text(rv-hide="query.type | eq 'dropdown'" rv-type="query.type" rv-value="query.value")
+              .input-group-append
+                button.btn.btn-outline-light(type="button", rv-i18n-text="'components.apiExplorer.edit'", rv-on-click="selectFreestyleApi")
+                button.btn.btn-outline-light(type="button", rv-i18n-text="'components.apiExplorer.send'", rv-on-click="send")
+            .col-12
+              .monaco-editor(style="height: 300px;")

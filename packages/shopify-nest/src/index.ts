@@ -4,4 +4,4 @@ export * from "./formatters";
 export * from "./interfaces";
 export * from "./components";
 export * from "./services";
-export * from "./shopify-tda.module";
+export * from "./shopify-nest.module";

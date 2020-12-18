@@ -1,0 +1,41 @@
+.card.monaco-editor-card {
+  background-color: $dark;
+  max-width: 100%;
+  .card-text, .card-title {
+    color: $orange;
+  }
+  .form-control.form-control-light {
+    background-color: transparent;
+    color: $orange;
+    border-color: #6d6d6d;
+    &:focus {
+      border-color: $input-focus-border-color;
+    }
+    // Freestyle input form
+    &.form-control-freestyle {
+
+    }
+    // Readonly input form
+    &.form-control-readonly {
+
+    }
+  }
+  .btn.btn-outline-light {
+    border-color: #6d6d6d;
+    color: $gray-400;
+    &:hover, &:focus {
+      background-color: #323435;
+    }
+  }
+}
+
+shopify-nest-api-explorer {
+  .dropdown-api-param, .dropdown-api-query {
+    max-width: 100px;
+  }
+  .form-control-text {
+    width: 40px;
+  }
+}
+
+

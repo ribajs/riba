@@ -1,0 +1,16 @@
+shopify-nest-socket-event-card {
+  &.col-auto {
+    width: 50vw;
+  }
+  .monaco-editor-card {
+    monaco-editor {
+      height: 300px;
+    }
+    bs4-icon.close {
+      position: absolute;
+      right: 0;
+      top: 0;
+      color: $orange;
+    }
+  }
+}

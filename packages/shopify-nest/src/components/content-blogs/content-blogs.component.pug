@@ -1,0 +1,14 @@
+section.row
+  .col-12
+    .card
+      .card-body
+        .card-text
+          table.table
+            thead
+              tr
+                th.border-top-0 Blog
+                th.border-top-0 Comments
+            tbody
+              tr(rv-each-blog="blogs")
+                td: a(rv-href="blog.href" rv-text="blog.title")
+                td(rv-text="blog.commentable")

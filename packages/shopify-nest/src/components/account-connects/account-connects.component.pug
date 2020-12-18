@@ -1,0 +1,42 @@
+section.row
+  .col-12.col-md-4
+    h2.my-3(rv-i18n-text="locales.title")
+    p.text-muted(rv-i18n-text="locales.info")
+  .col-12.col-md-8
+    .card
+      //- Connected Card
+      .card-body(rv-show="isConnected")
+        .card-text
+          p.d-flex.align-items-center
+            bs4-icon.mr-3(rv-src="avatarUrl" size="50")
+            if type === 'shopify'
+              | {account.shop.name}
+            else
+              | {account.displayName} ({account.facebookID})
+          p.m-1.badge.badge-primary(rv-each-role="account.roles" rv-text="role")
+        if type === 'facebook'
+          button.btn.btn-link.btn-facebook-connect(rv-show="inIframe | not | and type | eq 'shopify'" rv-on-click="logout")
+            bs4-icon.btn-facebook-icon(src="/images/facebook-connect.svg" size="24")
+            .label(rv-i18n-text="'components.accountConnects.facebook.logout'")
+          button.btn.btn-link.btn-facebook-connect(rv-hide="type | eq 'shopify'" rv-on-click="disconnect")
+            bs4-icon.btn-facebook-icon(src="/images/facebook-connect.svg" size="24")
+            .label(rv-i18n-text="'components.accountConnects.facebook.disconnect'")
+        else
+          button.btn.btn-link.card-link(rv-show="inIframe | not | and type | eq 'shopify'" rv-on-click="logout" rv-i18n-text="'components.accountConnects.logout'")
+          button.btn.btn-link.card-link(rv-hide="type | eq 'shopify'" rv-on-click="disconnect" rv-i18n-text="'components.accountConnects.disconnect'")
+      //- NOT Connected Card
+      .card-body(rv-hide="isConnected")
+        .card-text
+            p(rv-i18n-text="locales.notConnected")
+            if type === 'shopify'
+              form(action="/shopify/auth")
+                .input-group
+                  input.form-control(type="text", name="shop", placeholder="your-shop.myshopify.com" rv-value="myshopify_domain")
+                  .input-group-append
+                    input.btn.btn-outline-primary(type="submit", rv-i18n-value="'components.accountConnects.connect'")
+        if type === 'facebook'
+          button.btn.btn-link.btn-facebook-connect(rv-on-click="connect")
+            bs4-icon.btn-facebook-icon(src="/images/facebook-connect.svg" size="24")
+            .label(rv-i18n-text="'components.accountConnects.facebook.connect'")
+        else
+          button.btn.btn-link.card-link(rv-on-click="connect" rv-i18n-text="'components.accountConnects.connect'")

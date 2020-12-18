@@ -1,0 +1,13 @@
+section.row
+  .col-12
+    .card
+      .card-body
+        .card-text
+          .form-group
+            label(for="title") Title
+            input(type="title" class="form-control" id="title" placeholder="e.g. Blog about your latest products or deals" rv-value="article.title")
+          .form-group
+            label(for="content") Content
+            monaco-editor(id="content-editor" language="html" rv-data-value="article.body_html", format-document="true", read-only="false", automatic-layout="true")
+    hr
+    button.btn.btn-primary(text="button", rv-on-click="save") Save

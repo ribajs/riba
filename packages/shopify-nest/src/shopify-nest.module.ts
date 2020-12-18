@@ -4,7 +4,7 @@ import * as formatters from "./formatters";
 import * as services from "./services";
 import * as components from "./components";
 
-export const shopifyTDAModule = <RibaModule>{
+export const shopifyNestModule = <RibaModule>{
   binders,
   services,
   formatters,

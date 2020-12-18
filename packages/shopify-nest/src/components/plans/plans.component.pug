@@ -1,0 +1,39 @@
+section.row
+  .col-12.col-md-4
+    h2.my-3(rv-i18n-text="'components.plans.title'")
+    p.text-muted(rv-i18n-text="'components.plans.info'")
+  .col-12.col-md-8
+    if hasActive
+      //- Active plan
+      .card
+        .card-body
+          .card-title.d-flex.justify-content-between
+            div
+              h2(rv-i18n-text="'components.plans.plan'")
+              span(rv-i18n-text="active.name | handleize | prepend 'components.plans.name.'")
+            div
+              h2(rv-i18n-text="'components.plans.activated_on'")
+              span(rv-text="active.activated_on")
+            div
+              h2(rv-i18n-text="'components.plans.price'")
+              span(rv-i18n-html="'components.plans.price_html'" rv-data-price="active.price")
+          p.card-text
+            span(rv-show="active.trial_days | gt 0" rv-i18n-html="'components.plans.trial.ends_on'" rv-data-date="active.trial_ends_on")
+    else
+      //- If no plan is active
+      .row
+        .col-12(rv-each-plan="plans")
+          .card
+            .card-body
+              .card-title.d-flex.justify-content-between
+                div
+                  h2(rv-i18n-text="'components.plans.plan'")
+                  span(rv-i18n-text="plan.name | handleize | prepend 'components.plans.name.'")
+                div
+                  h2(rv-i18n-text="'components.plans.trial.days'")
+                  span(rv-i18n-text="'components.plans.trial.days_html'" rv-data-days="plan.trial_days")
+                div
+                  h2(rv-i18n-text="'components.plans.price'")
+                  span(rv-i18n-html="'components.plans.price_html'" rv-data-price="plan.price")
+              p.card-text
+              button.btn.btn-link.card-link(rv-on-click="activate | args plan" rv-i18n-text="'components.plans.activate'")

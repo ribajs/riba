@@ -1,0 +1,20 @@
+section.row
+  .col-12
+    .card
+      .card-body
+        .card-text
+          table.table
+            thead
+              tr
+                th.border-top-0
+                th.border-top-0 Title
+                th.border-top-0 Blog
+                th.border-top-0 Author
+                th.border-top-0 Date
+            tbody
+              tr(rv-each-article="articles")
+                td: img(class="img-fluid" rv-src="article.image.src" rv-show="article.image.src" width="100")
+                td: a(rv-href="article.href" rv-text="article.title")
+                td(rv-text="article.blog_id")
+                td(rv-text="article.user_id")
+                td(rv-text="article.created_at")

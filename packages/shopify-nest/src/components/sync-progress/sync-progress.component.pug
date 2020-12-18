@@ -1,0 +1,60 @@
+section.row
+  .col-12.col-md-4
+    h2.my-3(rv-i18n-text="'components.SyncProgress.title'")
+    p.text-muted(rv-i18n-html="'components.SyncProgress.info_html'")
+  .col-12.col-md-8
+    .card
+      .card-body(rv-hide="progress.state")
+        .card-text
+          p.d-flex.align-items-center(rv-i18n-text="'components.SyncProgress.sync.need'")
+        button.btn.btn-link.card-link(rv-on-click="start" rv-i18n-text="'components.SyncProgress.sync.start'")
+      .card-body(rv-show="progress.state | eq 'success'")
+        .card-text
+          p.d-flex.align-items-center(rv-i18n-text="'components.SyncProgress.sync.success'")
+        button.btn.btn-link.card-link(rv-on-click="restart" rv-i18n-text="'components.SyncProgress.sync.restart'")
+      .card-body(rv-show="progress.state | eq 'failed'")
+        .card-text
+          p.d-flex.align-items-center(rv-i18n-text="'components.SyncProgress.sync.failed'")
+          p.d-flex.align-items-center(rv-show="progress.lastError | filled")
+            span.mr-2(rv-i18n-text="'components.SyncProgress.sync.error_message'")
+            span.text-danger(rv-html="progress.lastError")
+        button.btn.btn-link.card-link(rv-on-click="restart" rv-i18n-text="'components.SyncProgress.sync.restart'")
+      .card-body(rv-show="progress.state | eq 'cancelled'")
+        .card-text
+          p.d-flex.align-items-center(rv-i18n-text="'components.SyncProgress.sync.cancelled'")
+          p.d-flex.align-items-center(rv-show="progress.lastError | filled")
+            span.mr-2(rv-i18n-text="'components.SyncProgress.sync.error_message'")
+            span.text-danger(rv-html="progress.lastError")
+        button.btn.btn-link.card-link(rv-on-click="restart" rv-i18n-text="'components.SyncProgress.sync.restart'")
+      .card-body(rv-show="progress.state | eq 'running'")
+        .card-text
+          p.d-flex.align-items-center(rv-i18n-text="'components.SyncProgress.sync.running'")
+          //- products
+          p.d-flex.align-items-center(rv-show="progress.products.lastId")
+            span.mr-2(rv-i18n-text="'components.SyncProgress.sync.products'")
+            span(rv-html="progress.products.info")
+          //- orders
+          p.d-flex.align-items-center(rv-show="progress.orders.lastId")
+            span.mr-2(rv-i18n-text="'components.SyncProgress.sync.orders'")
+            span(rv-html="progress.orders.info")
+          //- pages
+          p.d-flex.align-items-center(rv-show="progress.pages.lastId")
+            span.mr-2(rv-i18n-text="'components.SyncProgress.sync.pages'")
+            span(rv-html="progress.pages.info")
+          //- customCollections
+          p.d-flex.align-items-center(rv-show="progress.customCollections.lastId")
+            span.mr-2(rv-i18n-text="'components.SyncProgress.sync.customCollections'")
+            span(rv-html="progress.customCollections.info")
+          //- smartCollections
+          p.d-flex.align-items-center(rv-show="progress.smartCollections.lastId")
+            span.mr-2(rv-i18n-text="'components.SyncProgress.sync.smartCollections'")
+            span(rv-html="progress.smartCollections.info")
+        button.btn.btn-link.card-link(rv-on-click="cancel" rv-i18n-text="'components.SyncProgress.sync.cancel'")
+      .card-body(rv-show="progress.state | eq 'starting'")
+        .card-text
+          p.d-flex.align-items-center(rv-i18n-text="'components.SyncProgress.sync.starting'")
+        button.btn.btn-link.card-link(rv-on-click="cancel" disabled rv-i18n-text="'components.SyncProgress.sync.cancel'")
+      .card-body(rv-show="progress.state | eq 'ending'")
+        .card-text
+          p.d-flex.align-items-center(rv-i18n-text="'components.SyncProgress.sync.ending'")
+        button.btn.btn-link.card-link(rv-on-click="start" disabled rv-i18n-text="'components.SyncProgress.sync.start'")
