@@ -7,8 +7,8 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 import { resolve } from 'path';
 import findRoot = require('find-root');
-import { ThemeConfig } from '../types';
 import { registerAs } from '@nestjs/config';
+import { ThemeConfig } from '@ribajs/ssr';
 
 // TODO move this to theme module
 const parseConfigFile = <T>(configPath: string) => {
@@ -56,7 +56,7 @@ export const theme: ThemeConfig = {
   active: THEME_ACTIVE,
   assetsDir: resolve(THEME_DIR, THEME.assetsDir),
   viewsDir: resolve(THEME_DIR, THEME.viewsDir),
-  pageCoponentsDir: resolve(THEME_DIR, THEME.pageCoponentsDir),
+  pageComponentsDir: resolve(THEME_DIR, THEME.pageComponentsDir),
 };
 
 /**
