@@ -4,7 +4,7 @@ block content
   .container.container-md.py-5.my-5.text-center
     .row
       .col-12
-        h1= page.title
+        h1(rv-html="title")
     section.row
       .col-12
-        div= page.content
+        div(rv-html="content")

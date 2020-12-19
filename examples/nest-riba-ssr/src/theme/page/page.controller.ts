@@ -3,7 +3,7 @@ import type { Response } from 'express';
 
 import { GlobalService } from '../global/global.service';
 import { PageService } from './page.service';
-import { Ssr } from '../ssr';
+import { Ssr } from '../ssr.service';
 
 /**
  * Renders home

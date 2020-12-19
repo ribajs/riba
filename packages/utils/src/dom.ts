@@ -115,9 +115,9 @@ export const getElementFromEvent = <T = HTMLAnchorElement | HTMLUnknownElement>(
   event: Event | MouseEvent | TouchEvent
 ) => {
   const el =
-    ((event as Event).target as T | null) ||
+    (((event as Event).target as unknown) as T | null) ||
     ((event as any).currentTarget as T | null) ||
-    ((event as MouseEvent).relatedTarget as T | null) ||
+    (((event as MouseEvent).relatedTarget as unknown) as T | null) ||
     // JQuery event
     ((event as any).delegateTarget as T) ||
     ((event as any).fromElement as T);

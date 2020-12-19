@@ -5,24 +5,19 @@ import pugTemplate from "./index.page-component.pug";
 export interface Scope {
   title: string;
   content: string;
-  obj: any;
 }
 
-export class IndexPageComponent extends PageComponent {
-  public static tagName = "index-page";
+export class PagesPageComponent extends PageComponent {
+  public static tagName = "pages-page";
   public _debug = true;
   protected autobind = true;
 
   scope: Scope = {
-    title: "Hello from ssr",
-    content: "When you can see this, ssr works :)",
-    obj: {
-      foo: "bar",
-      note: "This is an example to test the json formatter",
-    },
+    title: "About",
+    content: "<p>We are cool!</a>",
   };
 
-  routes = [""]; // index
+  routes = ["/pages/:handle"];
 
   static get observedAttributes() {
     return [];
@@ -34,7 +29,7 @@ export class IndexPageComponent extends PageComponent {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init(IndexPageComponent.observedAttributes);
+    this.init(PagesPageComponent.observedAttributes);
   }
 
   protected requiredAttributes(): string[] {

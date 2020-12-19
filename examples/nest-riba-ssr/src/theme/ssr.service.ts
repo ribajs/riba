@@ -31,7 +31,7 @@ export class Ssr {
     };
   }
 
-  getTemplateEingine(templatePath: string) {
+  getTemplateEngine(templatePath: string) {
     const ext = extname(templatePath);
     const def = this.config.get('theme.viewEngine');
     const detected = ext?.substring(1) || def; // Removes the dot of the file extension
@@ -85,8 +85,8 @@ export class Ssr {
       templatePath += '.' + this.config.get('theme.viewEngine');
     }
     const viewsDir: string = this.config.get('theme.viewsDir');
-    const eingine = this.getTemplateEingine(templatePath);
-    const result = await renderEngine[eingine](
+    const engine = this.getTemplateEngine(templatePath);
+    const result = await renderEngine[engine](
       resolve(viewsDir, templatePath),
       variables,
     );
