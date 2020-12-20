@@ -31,7 +31,6 @@ const findFile = (rootDir, searchForFiles) => {
 };
 
 module.exports = {
-  path,
   rootPath,
   findDir,
   findFile,

@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { path, rootPath, findDir, findFile } = require("./path");
+const { resolve, rootPath, findDir, findFile } = require("./path");
 
 module.exports.getBaseConfig = (config = {}, env = {}) => {
   env.development =
@@ -20,17 +20,17 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
     config.template = config.template.toLowerCase();
   }
 
-  config.distPath = config.distPath || path.resolve(rootPath, "dist");
+  config.distPath = config.distPath || resolve(rootPath, "dist");
 
   // TypeScript source path
   if (typeof config.tsSourceDir === "undefined") {
     config.tsSourceDir = findDir([
-      path.resolve(rootPath, "assets/ts"), // OctoberCMS
-      path.resolve(rootPath, "src/ts"),
-      path.resolve(rootPath, "src/scripts"),
-      path.resolve(rootPath, "src/ts"),
-      path.resolve(rootPath, "ts"),
-      path.resolve(rootPath, "scripts"),
+      resolve(rootPath, "assets/ts"), // OctoberCMS
+      resolve(rootPath, "src/ts"),
+      resolve(rootPath, "src/scripts"),
+      resolve(rootPath, "src/ts"),
+      resolve(rootPath, "ts"),
+      resolve(rootPath, "scripts"),
     ]);
     if (config.tsSourceDir) {
       console.debug("Set config.tsSourceDir to: " + config.tsSourceDir);
@@ -40,10 +40,10 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
   // SCSS source path
   if (typeof config.scssSourceDir === "undefined") {
     config.scssSourceDir = findDir([
-      path.resolve(rootPath, "src/scss"),
-      path.resolve(rootPath, "src/styles"),
-      path.resolve(rootPath, "scss"),
-      path.resolve(rootPath, "styles"),
+      resolve(rootPath, "src/scss"),
+      resolve(rootPath, "src/styles"),
+      resolve(rootPath, "scss"),
+      resolve(rootPath, "styles"),
     ]);
     if (config.scssSourceDir) {
       console.debug("Set config.scssSourceDir to: " + config.scssSourceDir);
@@ -53,14 +53,14 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
   // HTML / PUG source path
   if (typeof config.templateDir === "undefined") {
     config.templateDir = findDir([
-      path.resolve(rootPath, "src/html"),
-      path.resolve(rootPath, "src/templates"),
-      path.resolve(rootPath, "src/views"),
-      path.resolve(rootPath, "html"),
-      path.resolve(rootPath, "templates"),
-      path.resolve(rootPath, "views"),
-      path.resolve(rootPath, "src/index.html"),
-      path.resolve(rootPath, "index.html"),
+      resolve(rootPath, "src/html"),
+      resolve(rootPath, "src/templates"),
+      resolve(rootPath, "src/views"),
+      resolve(rootPath, "html"),
+      resolve(rootPath, "templates"),
+      resolve(rootPath, "views"),
+      resolve(rootPath, "src/index.html"),
+      resolve(rootPath, "index.html"),
     ]);
     if (config.templateDir) {
       console.debug("Set config.templateDir to: " + config.templateDir);
@@ -149,19 +149,20 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
     config.htmlTemplatePaths = config.htmlTemplatePaths || [];
     const htmlIndex = findFile(config.templateDir, ["index.html"]);
     if (htmlIndex) {
-      config.htmlTemplatePaths.push(htmlIndex)
+      config.htmlTemplatePaths.push(htmlIndex);
     }
     if (config.htmlTemplatePaths) {
-      console.debug("Set config.htmlTemplatePaths to: " + config.htmlTemplatePaths);
+      console.debug(
+        "Set config.htmlTemplatePaths to: " + config.htmlTemplatePaths
+      );
     }
   }
 
   // Main PUG file(s)
   if (typeof config.pugTemplatePaths === "undefined" && config.pugSourcePath) {
-
     const pugIndex = findFile(config.templateDir, ["index.pug"]);
     if (pugIndex) {
-      config.pugTemplatePaths.push(pugIndex)
+      config.pugTemplatePaths.push(pugIndex);
     }
     if (config.pugSourcePath) {
       console.debug("Set config.pugSourcePath to: " + config.pugSourcePath);
@@ -237,7 +238,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
     case "octobercms":
       config.entry = config.entry || [config.tsIndexPath];
       config.output = config.output || {
-        path: path.resolve(rootPath, "assets/js"),
+        path: resolve(rootPath, "assets/js"),
         filename: "[name].bundle.js",
       };
 
@@ -265,7 +266,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
         config.entry.main.push(config.tsIndexPath);
       }
       config.output = config.output || {
-        path: path.resolve(rootPath, "theme/assets/"),
+        path: resolve(rootPath, "theme/assets/"),
         filename: "[name].bundle.js",
       };
 
@@ -293,7 +294,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
         config.entry.checkout.push(config.tsIndexPath);
       }
       config.output = config.output || {
-        path: path.resolve(rootPath, "theme/assets/"),
+        path: resolve(rootPath, "theme/assets/"),
         filename: "[name].bundle.js",
       };
 
@@ -330,7 +331,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
       config.devServer = config.devServer || {
         port: 8080,
         host: "0.0.0.0",
-        contentBase: [path.resolve(rootPath, "src"), config.distPath],
+        contentBase: [resolve(rootPath, "src"), config.distPath],
         hot: true,
         inline: true,
       };
