@@ -164,7 +164,7 @@ export function parseNode(
     }
     blockRecursion = true;
   } else if (node.nodeType === Node.ELEMENT_NODE) {
-    // traverse binds attributes
+    // traverse binds attributes and components
     blockRecursion = view.traverse(node);
   }
   if (!blockRecursion) {

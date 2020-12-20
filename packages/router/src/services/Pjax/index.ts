@@ -111,7 +111,10 @@ class Pjax {
     }
 
     // Ignore target with _blank target
-    if ((element as HTMLAnchorElement).target && (element as HTMLAnchorElement).target === "_blank") {
+    if (
+      (element as HTMLAnchorElement).target &&
+      (element as HTMLAnchorElement).target === "_blank"
+    ) {
       return false;
     }
 

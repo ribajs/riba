@@ -1,32 +1,15 @@
-import { Binder, EventDispatcher, View as RivetsView } from "@ribajs/core";
+import { Binder, EventDispatcher, View } from "@ribajs/core";
 import { isBoolean, isObject } from "@ribajs/utils/src/type";
 import { scrollTo } from "@ribajs/utils/src/dom";
-
 import { State } from "@ribajs/history";
-
+import { RouterBinderViewOptions, PjaxOptions } from "../interfaces";
 import { Pjax, Prefetch, HideShowTransition } from "../services";
-import { PjaxOptions, Transition } from "../interfaces";
-
-interface Options {
-  viewId?: string;
-  action?: "replace" | "append";
-  containerSelector?: string;
-  scrollToTop?: boolean;
-  listenAllLinks?: boolean;
-  listenPopstate?: boolean;
-  scrollToAnchorHash?: boolean;
-  datasetToModel?: boolean;
-  parseTitle?: boolean;
-  changeBrowserUrl?: boolean;
-  prefetchLinks?: boolean;
-  transition: Transition;
-}
 
 export interface ViewBinder extends Binder<string> {
   dispatcher?: EventDispatcher;
-  options: Partial<Options>;
+  options: Partial<RouterBinderViewOptions>;
   wrapper?: HTMLElement;
-  nested: RivetsView | null;
+  nested: View | null;
   prefetch?: Prefetch;
   onPageReady(
     viewId: string,
@@ -51,6 +34,7 @@ export interface ViewBinder extends Binder<string> {
  *     </div>
  *   </div>
  * ```
+ * @deprecated Use router-view component instead
  */
 export const viewBinder: ViewBinder = {
   name: "view",
@@ -78,6 +62,10 @@ export const viewBinder: ViewBinder = {
      *
      */
     // this.view.models.routerDispatcher = dispatcher;
+
+    console.warn(
+      "The viewBinder is depricated, use the router-view component instead!"
+    );
   },
 
   routine(el: HTMLUnknownElement, options: any) {
@@ -160,11 +148,8 @@ export const viewBinder: ViewBinder = {
     self.dispatcher = new EventDispatcher(self.options.viewId);
     self.wrapper?.setAttribute("id", self.options.viewId);
 
-    self.dispatcher.on("newPageReady", self.onPageReady.bind(this));
-    self.dispatcher.on(
-      "transitionCompleted",
-      self.onTransitionCompleted.bind(this)
-    );
+    self.dispatcher.on("newPageReady", self.onPageReady, this);
+    self.dispatcher.on("transitionCompleted", self.onTransitionCompleted, this);
 
     const pjaxOptions: PjaxOptions = {
       id: self.options.viewId,
@@ -187,10 +172,11 @@ export const viewBinder: ViewBinder = {
   unbind(/*el: HTMLUnknownElement*/) {
     const self = (this.binder || this) as ViewBinder;
     if (self.dispatcher) {
-      self.dispatcher.off("newPageReady", self.onPageReady.bind(this));
+      self.dispatcher.off("newPageReady", self.onPageReady, this);
       self.dispatcher.off(
         "transitionCompleted",
-        self.onTransitionCompleted.bind(this)
+        self.onTransitionCompleted,
+        this
       );
     }
 
@@ -215,7 +201,7 @@ export const viewBinder: ViewBinder = {
       return;
     }
 
-    // unbind the old rivets view
+    // unbind the old riba view
     if (self.nested) {
       if (self.options.action === "replace") {
         // IMPORTANT ROUTE FIXME only unbind if cache is not enabled?
@@ -223,7 +209,7 @@ export const viewBinder: ViewBinder = {
       }
     }
 
-    // add the dateset to the model
+    // add the dataset to the model
     if (!isObject(this.view.models)) {
       this.view.models = {};
     }
@@ -233,11 +219,7 @@ export const viewBinder: ViewBinder = {
     }
 
     // TODO append on action "append"
-    self.nested = new RivetsView(
-      container,
-      this.view.models,
-      this.view.options
-    );
+    self.nested = new View(container, this.view.models, this.view.options);
     self.nested.bind();
   },
   onTransitionCompleted(viewId: string) {

@@ -8,8 +8,8 @@ interface Scope {
   defer: boolean;
 }
 
-export class LoadScriptComponent extends Component {
-  public static tagName = "load-script";
+export class RouterLoadScriptComponent extends Component {
+  public static tagName = "router-load-script";
 
   protected autobind = false;
 
@@ -30,7 +30,7 @@ export class LoadScriptComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    super.init(LoadScriptComponent.observedAttributes);
+    super.init(RouterLoadScriptComponent.observedAttributes);
   }
 
   protected async onReady() {

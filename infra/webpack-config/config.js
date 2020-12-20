@@ -17,7 +17,6 @@ module.exports.getConfig = (config = {}, env = {}) => {
             })
           );
         }
-
       }
 
       break;

@@ -9,7 +9,7 @@ import { BasicComponent } from "./basic-component";
 import { Formatter } from "../interfaces";
 
 export abstract class Component extends BasicComponent {
-  protected view?: View;
+  protected view: View | null = null;
 
   protected riba?: Riba;
 
@@ -178,23 +178,11 @@ export abstract class Component extends BasicComponent {
         }
         this.debug("Start to bind Riba");
         this.riba = new Riba();
-        const viewOptions = this.riba.getViewOptions({
-          handler: this.eventHandler(this),
-          formatters: {
-            call: this.callFormatterHandler(this),
-            args: this.argsFormatterHandler(this),
-          },
-        });
-
-        this.view = new View(
-          (Array.prototype.slice.call(
-            this.el.childNodes
-          ) as unknown) as NodeListOf<ChildNode>,
-          this.scope,
-          viewOptions
-        );
-        this.scope = this.view.models;
-        this.view.bind();
+        this.view = this.getView();
+        if (this.view) {
+          this.scope = this.view.models;
+          this.view.bind();
+        }
         return this.view;
       })
       .then(() => {
@@ -208,11 +196,37 @@ export abstract class Component extends BasicComponent {
     return this.view;
   }
 
+  protected getView() // elements?:
+  //   | HTMLCollection
+  //   | HTMLElement
+  //   | Node
+  //   | NodeListOf<ChildNode>
+  //   | HTMLUnknownElement[]
+  {
+    const viewOptions = this.riba?.getViewOptions({
+      handler: this.eventHandler(this),
+      formatters: {
+        call: this.callFormatterHandler(this),
+        args: this.argsFormatterHandler(this),
+      },
+    });
+
+    if (viewOptions) {
+      const view = new View(
+        Array.prototype.slice.call(this.childNodes),
+        this.scope,
+        viewOptions
+      );
+      return view;
+    }
+    return null;
+  }
+
   protected async unbind() {
     if (this.view) {
       this.bound = false;
       this.view.unbind();
-      delete this.view;
+      this.view = null;
     }
   }
 
