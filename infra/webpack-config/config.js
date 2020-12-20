@@ -1,19 +1,23 @@
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { getStyleLoaderRule } = require("./style");
+const { basename } = require("path");
 
 module.exports.getConfig = (config = {}, env = {}) => {
   // config defaults for config templates
   switch (config.template.toLowerCase()) {
     // E.g. used for demos
     case "local":
-      if (config.htmlIndexPath && config.HtmlWebpackPlugin) {
-        config.plugins.push(
-          new config.HtmlWebpackPlugin({
-            template: config.htmlIndexPath,
-            filename: "index.html",
-          })
-        );
+      if (Array.isArray(config.htmlTemplatePaths) && config.HtmlWebpackPlugin) {
+        for (const htmlTemplatePath of config.htmlTemplatePaths) {
+          config.plugins.push(
+            new config.HtmlWebpackPlugin({
+              template: htmlTemplatePath,
+              filename: basename(htmlTemplatePath),
+            })
+          );
+        }
+
       }
 
       break;

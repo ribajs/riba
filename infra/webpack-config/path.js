@@ -1,7 +1,7 @@
 /* eslint-disable no-case-declarations */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
-const path = require("path");
+const { resolve, dirname } = require("path");
 const pkgDir = require("pkg-dir");
 const rootPath = pkgDir.sync(process.cwd());
 const { existsSync, lstatSync } = require("fs");
@@ -11,7 +11,7 @@ const findDir = (searchPaths) => {
   for (let searchPath of searchPaths) {
     if (!result && existsSync(searchPath)) {
       if (!lstatSync(searchPath).isDirectory()) {
-        searchPath = path.dirname(searchPath);
+        searchPath = dirname(searchPath);
       }
       result = searchPath;
     }
@@ -22,7 +22,7 @@ const findDir = (searchPaths) => {
 const findFile = (rootDir, searchForFiles) => {
   let result = null;
   for (let searchPath of searchForFiles) {
-    searchPath = path.resolve(rootDir, searchPath);
+    searchPath = resolve(rootDir, searchPath);
     if (!result && existsSync(searchPath) && lstatSync(searchPath).isFile()) {
       result = searchPath;
     }
@@ -35,4 +35,6 @@ module.exports = {
   rootPath,
   findDir,
   findFile,
+  resolve,
+  dirname,
 };

@@ -51,8 +51,8 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
   }
 
   // HTML / PUG source path
-  if (typeof config.htmlSourceDir === "undefined") {
-    config.htmlSourceDir = findDir([
+  if (typeof config.templateDir === "undefined") {
+    config.templateDir = findDir([
       path.resolve(rootPath, "src/html"),
       path.resolve(rootPath, "src/templates"),
       path.resolve(rootPath, "src/views"),
@@ -62,8 +62,8 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
       path.resolve(rootPath, "src/index.html"),
       path.resolve(rootPath, "index.html"),
     ]);
-    if (config.htmlSourceDir) {
-      console.debug("Set config.htmlSourceDir to: " + config.htmlSourceDir);
+    if (config.templateDir) {
+      console.debug("Set config.templateDir to: " + config.templateDir);
     }
   }
 
@@ -144,17 +144,25 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
     }
   }
 
-  // HTML main file for HtmlWebpackPlugin
-  if (typeof config.htmlIndexPath === "undefined" && config.htmlSourceDir) {
-    config.htmlIndexPath = findFile(config.htmlSourceDir, ["index.html"]);
-    if (config.htmlIndexPath) {
-      console.debug("Set config.htmlIndexPath to: " + config.htmlIndexPath);
+  // HTML main file(s) for HtmlWebpackPlugin
+  if (typeof config.htmlTemplatePaths === "undefined" && config.templateDir) {
+    config.htmlTemplatePaths = config.htmlTemplatePaths || [];
+    const htmlIndex = findFile(config.templateDir, ["index.html"]);
+    if (htmlIndex) {
+      config.htmlTemplatePaths.push(htmlIndex)
+    }
+    if (config.htmlTemplatePaths) {
+      console.debug("Set config.htmlTemplatePaths to: " + config.htmlTemplatePaths);
     }
   }
 
-  // Main PUG file
-  if (typeof config.pugIndexPath === "undefined" && config.pugSourcePath) {
-    config.pugSourcePath = findFile(config.htmlSourceDir, ["index.pug"]);
+  // Main PUG file(s)
+  if (typeof config.pugTemplatePaths === "undefined" && config.pugSourcePath) {
+
+    const pugIndex = findFile(config.templateDir, ["index.pug"]);
+    if (pugIndex) {
+      config.pugTemplatePaths.push(pugIndex)
+    }
     if (config.pugSourcePath) {
       console.debug("Set config.pugSourcePath to: " + config.pugSourcePath);
     }
@@ -347,29 +355,6 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
         config.forkTsCheckerConfig.typescript || {};
 
       config.forkTsCheckerConfig.typescript.configFile = "tsconfig.ssr.json";
-
-      // Node externals
-      // config.externalsPresets = config.externalsPresets || { node: true }; // in order to ignore built-in modules like path, fs, etc.
-
-      // JSDOM pollyfills
-      // config.resolve = config.resolve || {};
-      // config.resolve.fallback = config.resolve.fallback || {
-      //   punycode: require.resolve("punycode/"),
-      //   util: require.resolve("util/"),
-      //   assert: require.resolve("assert/"),
-      //   events: require.resolve("events/"),
-      //   https: require.resolve("https-browserify"),
-      //   http: require.resolve("stream-http"),
-      //   url: require.resolve("url/"),
-      //   crypto: require.resolve("crypto-browserify"),
-      //   stream: require.resolve("stream-browserify"),
-      //   buffer: require.resolve("buffer/"),
-      //   zlib: require.resolve("browserify-zlib"),
-      //   querystring: require.resolve("querystring-es3"),
-      //   path: require.resolve("path-browserify"),
-      //   string_decoder: require.resolve("string_decoder/"),
-      // };
-
       break;
     default:
       break;

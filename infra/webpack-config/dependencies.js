@@ -42,7 +42,7 @@ module.exports.getDependencies = (config = {}) => {
 
   switch (config.template.toLowerCase()) {
     case "local":
-      if (config.htmlIndexPath) {
+      if (Array.isArray(config.htmlTemplatePaths)) {
         config.HtmlWebpackPlugin =
           config.HtmlWebpackPlugin || require("html-webpack-plugin");
       }
