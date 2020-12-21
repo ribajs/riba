@@ -12,5 +12,5 @@
       .col-6.col-md-4.offset-md-2.my-3(rv-each-group="accessScopes")
         h4 { %group% }
         .custom-control.custom-switch.custom-switch-primary(rv-each-scope="group.items")
-          input(type="checkbox" class="custom-control-input" name="scope" rv-id="'scope-' | append scope.value" rv-value="scope.value" rv-checked="scope.checked")
+          input(type="checkbox" class="custom-control-input" name="scope" rv-id="'scope-' | append scope.value" rv-value="scope.value" rv-checked="scope.checked" rv-disabled="disabled")
           label(class="custom-control-label" rv-for="'scope-' | append scope.value") { scope.action }
