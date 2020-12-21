@@ -8,6 +8,7 @@ interface AccessScopeItem {
   value: string;
   action: "write" | "read";
   checked: boolean;
+  disabled: boolean;
 }
 
 interface AccessScopes {
@@ -19,6 +20,7 @@ interface AccessScopes {
 }
 
 interface Scope {
+  defaultScopes: string[];
   accessScopes: AccessScopes;
   toggleAll: ShopifyNestPermissionsComponent["toggleAll"];
 }
@@ -27,7 +29,7 @@ export class ShopifyNestPermissionsComponent extends Component {
   public static tagName = "shopify-nest-permissions";
 
   static get observedAttributes() {
-    return [];
+    return ["default-scopes"];
   }
 
   protected debug = Debug(
@@ -35,6 +37,7 @@ export class ShopifyNestPermissionsComponent extends Component {
   );
 
   protected scope: Scope = {
+    defaultScopes: [],
     accessScopes: {},
     toggleAll: this.toggleAll,
   };
@@ -52,7 +55,9 @@ export class ShopifyNestPermissionsComponent extends Component {
       if (Object.prototype.hasOwnProperty.call(this.scope.accessScopes, key)) {
         const accessScopeObj = this.scope.accessScopes[key];
         for (const accessScope of accessScopeObj.items) {
-          accessScope.checked = checked;
+          if (!accessScope.disabled) {
+            accessScope.checked = checked;
+          }
         }
       }
     }
@@ -72,7 +77,8 @@ export class ShopifyNestPermissionsComponent extends Component {
         this.scope.accessScopes[groupKey].items.push({
           value: ACCESS_SCOPE,
           action: ACCESS_SCOPE.replace("_" + groupKey, "") as "read" | "write",
-          checked: false,
+          checked: this.scope.defaultScopes.indexOf(ACCESS_SCOPE) !== -1,
+          disabled: this.scope.defaultScopes.indexOf(ACCESS_SCOPE) !== -1,
         });
       }
     }
