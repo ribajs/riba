@@ -128,6 +128,7 @@
  */
  @each $color, $value in $theme-colors {
   .custom-switch.custom-switch-#{$color} {
+    // Inactive
     .custom-control-label {  
       &::before {
         border-color: $value;
@@ -137,6 +138,17 @@
       }
     }
 
+    // Inactive and disabled
+    .custom-control-input:disabled {
+      &::before {
+        border-color: rgba( $value, .7);
+      }
+      &::after {
+        background-color: rgba( $value, .7);
+      }
+    }
+
+    // Active
     .custom-control-input:checked ~ .custom-control-label {
       &::before {
         background-color: $value;
@@ -145,5 +157,16 @@
         background-color: $custom-control-indicator-bg;
       }
     }
+
+    // Active and disabled
+    .custom-control-input:checked:disabled ~ .custom-control-label {
+      &::before {
+        background-color: rgba( $value, .7);
+      }
+      &::after {
+        background-color: rgba( $custom-control-indicator-bg, .7)
+      }
+    }
+
   }
 }
