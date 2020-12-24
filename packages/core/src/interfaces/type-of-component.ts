@@ -1,5 +1,5 @@
 import type { BasicComponent, Component } from "../component";
-import type { EventDispatcher } from "../services/event-dispatcher.service";
+import type { EventDispatcher } from "@ribajs/events/src";
 import type { TypeOf } from "./type-of";
 import type { PageComponent } from "@ribajs/ssr";
 

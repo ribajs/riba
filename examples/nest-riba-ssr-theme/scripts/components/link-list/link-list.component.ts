@@ -21,8 +21,16 @@ export class LinkListComponent extends Component {
         url: "/",
       },
       {
-        label: "About",
-        url: "/pages/about",
+        label: "Cool",
+        url: "/pages/cool",
+      },
+      {
+        label: "Nice",
+        url: "/pages/nice",
+      },
+      {
+        label: "Different",
+        url: "/pages/different",
       },
     ],
   };

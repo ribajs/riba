@@ -6,7 +6,7 @@ import { Riba, View, coreModule } from "@ribajs/core";
 
 // Own
 import * as pageComponents from "./pages";
-import * as components from "./components/ssr";
+import { LinkListComponent } from "./components/link-list/link-list.component";
 import * as binders from "./binders";
 import * as formatters from "./formatters";
 // import locales from "./locales";
@@ -24,7 +24,7 @@ window.riba = new Riba();
 
 // Regist custom components
 window.riba.module.regist({
-  components: { ...pageComponents, ...components },
+  components: { ...pageComponents, LinkListComponent },
   binders,
   formatters,
 });

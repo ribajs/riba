@@ -26,8 +26,8 @@ export class IndexPageComponent extends PageComponent {
     return [];
   }
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {

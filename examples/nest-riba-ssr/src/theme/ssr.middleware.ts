@@ -21,28 +21,15 @@ export class SsrMiddleware implements NestMiddleware {
 
     this.log.debug(`Route found: ${JSON.stringify(routeSettings)}`);
 
-    const tplVariables = {
-      ctx: {
-        // See https://expressjs.com/de/api.html#req
-        app: req.app,
-        baseUrl: req.baseUrl,
-        route: {
-          path: req.route.path,
-        },
-        query: req.query,
-        params: req.params,
-        method: req.method,
-        cookies: req.cookies,
-      },
-    };
+    const sharedContext = await this.ssr.getSharedContext(req);
 
     this.log.debug('Template variables:');
-    this.log.debug(tplVariables);
+    this.log.debug(sharedContext);
 
     try {
       const page = await this.ssr.renderComponent({
         componentTagName: routeSettings.component,
-        tplVariables,
+        sharedContext,
       });
       this.log.debug(`page: ${JSON.stringify(page)}`);
       return res.send(page.html);

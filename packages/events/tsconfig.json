@@ -2,8 +2,9 @@
   "extends": "@ribajs/tsconfig",
   "compilerOptions": {
     "outDir": "dist",
-    "types": ["jest"]
+    "module": "commonjs"
   },
+  "files": ["src/index.ts"],
   "include": ["src/**/*"],
   "exclude": [
     "node_modules",

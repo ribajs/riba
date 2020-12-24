@@ -27,6 +27,7 @@
     "@nestjs/core": "^7.6.3",
     "@nestjs/platform-express": "^7.6.3",
     "@ribajs/core": "workspace:packages/core",
+    "@ribajs/events": "workspace:packages/events",
     "@ribajs/ssr": "workspace:packages/ssr",
     "@types/consolidate": "^0.14.0",
     "@types/express": "^4.17.9",

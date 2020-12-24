@@ -5,6 +5,7 @@ import pugTemplate from "./pages.component.pug";
 export interface Scope {
   title: string;
   content: string;
+  params: PagesPageComponent["ctx"]["params"];
 }
 
 export class PagesPageComponent extends PageComponent {
@@ -14,15 +15,17 @@ export class PagesPageComponent extends PageComponent {
 
   scope: Scope = {
     title: "About",
-    content: "<p>We are cool!</a>",
+    content: "<p>We are {params.handle}!</a>",
+    params: {},
   };
 
   static get observedAttributes() {
     return [];
   }
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
+    this.scope.params = this.ctx.params;
   }
 
   protected connectedCallback() {

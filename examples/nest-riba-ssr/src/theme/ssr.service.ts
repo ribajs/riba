@@ -6,13 +6,15 @@ import { ConfigService } from '@nestjs/config';
 import { ThemeConfig } from '@ribajs/ssr';
 import { resolve, extname } from 'path';
 import * as consolidate from 'consolidate';
+import type { Request } from 'express';
 import { promises as fs } from 'fs';
 import type {
   TypeOfComponent,
   PageComponentAfterBindEventData,
+  SharedContext,
 } from '@ribajs/ssr';
 import type { Riba, View } from '@ribajs/core/src';
-import { EventDispatcher } from './event-dispatcher.service';
+import { EventDispatcher } from '@ribajs/events';
 interface RenderResult {
   html: string;
   css?: string[];
@@ -29,11 +31,34 @@ export class SsrService {
     this.theme = config.get<ThemeConfig>('theme');
   }
 
-  // TODO different shared context for each site?
-  getSharedContext() {
-    return {
-      ssrEvents: EventDispatcher.getInstance('ssr'),
+  async getSharedContext(req: Request) {
+    const sharedContext: SharedContext = {
+      events: EventDispatcher.getInstance('ssr'),
+      ctx: {
+        // See https://expressjs.com/de/api.html#req
+        app: req.app,
+        baseUrl: req.baseUrl,
+        body: req.body,
+        cookies: req.cookies,
+        fresh: req.fresh,
+        hostname: req.hostname,
+        ip: req.ip,
+        ips: req.ips,
+        method: req.method,
+        originalUrl: req.originalUrl,
+        params: req.params,
+        path: req.path,
+        protocol: req.protocol,
+        query: req.query,
+        route: req.route,
+        secure: req.secure,
+        signedCookies: req.signedCookies,
+        stale: req.stale,
+        subdomains: req.subdomains,
+        xhr: req.xhr,
+      },
     };
+    return sharedContext;
   }
 
   getTemplateEngine(templatePath: string) {
@@ -110,8 +135,11 @@ export class SsrService {
     }
   }
 
-  async renderWithJSDom(layout: string, componentTagName: string) {
-    const sharedContext = this.getSharedContext();
+  async renderWithJSDom(
+    layout: string,
+    componentTagName: string,
+    sharedContext: SharedContext,
+  ) {
     const virtualConsole = new VirtualConsole();
     virtualConsole.sendTo(console);
 
@@ -128,8 +156,8 @@ export class SsrService {
 
     // Set shared context here
     const vmContext = dom.getInternalVMContext();
-    vmContext.window.ssrEvents = sharedContext.ssrEvents;
-
+    const window: Window = vmContext.window;
+    window.ssr = sharedContext;
     this.log.debug('Execute scripts...');
     script.runInContext(vmContext);
 
@@ -146,7 +174,7 @@ export class SsrService {
 
     this.log.debug('Scripts executed!');
     return new Promise<RenderResult>((resolve, reject) => {
-      sharedContext.ssrEvents.once(
+      sharedContext.events.once(
         'PageComponent:afterBind',
         (afterBindData: PageComponentAfterBindEventData) => {
           const html = dom.serialize();
@@ -170,13 +198,16 @@ export class SsrService {
     });
   }
 
-  async renderWithHappyDom(layout: string, componentTagName: string) {
+  async renderWithHappyDom(
+    layout: string,
+    componentTagName: string,
+    sharedContext: SharedContext,
+  ) {
     const context = new HappyDOMContext();
-    const sharedContext = this.getSharedContext();
     const window = (context as any).window; // TODO window is private, make pr for this
 
     // Set shared context here
-    window.ssrEvents = sharedContext.ssrEvents;
+    window.ssr = sharedContext;
 
     const { vendors, main } = await this.readSsrScripts();
     const vendorsScript = new Script(vendors, {
@@ -199,7 +230,7 @@ export class SsrService {
     });
 
     const result = await new Promise<RenderResult>((resolve, reject) => {
-      sharedContext.ssrEvents.once(
+      sharedContext.events.once(
         'PageComponent:afterBind',
         async (afterBindData: PageComponentAfterBindEventData) => {
           const ssrResult = await ssrResultPromise;
@@ -248,13 +279,13 @@ export class SsrService {
     rootTag = 'ssr-root-page',
     componentTagName,
     engine,
-    tplVariables,
+    sharedContext,
   }: {
     template?: string;
     rootTag?: string;
     componentTagName: string;
     engine?: 'jsdom' | 'happy-dom';
-    tplVariables: any;
+    sharedContext: SharedContext;
   }): Promise<RenderResult> {
     if (!rootTag) {
       rootTag = this.theme.ssr.rootTag || 'ssr-root-page';
@@ -268,14 +299,18 @@ export class SsrService {
     this.log.debug(`rootTag: ${rootTag}`);
     this.log.debug(`engine: ${engine}`);
     this.log.debug(`template: ${template}`);
-    let layout = await this.renderTemplate(template, tplVariables);
+    let layout = await this.renderTemplate(template, sharedContext);
     // this.log.debug(`layout: ${layout}`);
     layout = await this.transformLayout(layout, rootTag, componentTagName);
     // this.log.debug(`layout (transformed): ${layout}`);
     const renderData =
       engine === 'jsdom'
-        ? await this.renderWithJSDom(layout, componentTagName)
-        : await this.renderWithHappyDom(layout, componentTagName);
+        ? await this.renderWithJSDom(layout, componentTagName, sharedContext)
+        : await this.renderWithHappyDom(
+            layout,
+            componentTagName,
+            sharedContext,
+          );
     return renderData;
   }
 }
