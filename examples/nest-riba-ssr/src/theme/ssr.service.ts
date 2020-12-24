@@ -33,7 +33,7 @@ export class SsrService {
 
   async getSharedContext(req: Request) {
     const sharedContext: SharedContext = {
-      events: EventDispatcher.getInstance('ssr'),
+      events: EventDispatcher.getInstance('ssr') as any, // TODO
       ctx: {
         // See https://expressjs.com/de/api.html#req
         app: req.app,
