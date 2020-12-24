@@ -1,6 +1,6 @@
 import { PageComponent } from "@ribajs/ssr";
 
-import pugTemplate from "./index.page-component.pug";
+import pugTemplate from "./index.component.pug";
 
 export interface Scope {
   title: string;
@@ -21,8 +21,6 @@ export class IndexPageComponent extends PageComponent {
       note: "This is an example to test the json formatter",
     },
   };
-
-  routes = [""]; // index
 
   static get observedAttributes() {
     return [];

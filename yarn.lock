@@ -4449,7 +4449,6 @@ __metadata:
     "@babel/runtime-corejs3": ^7.12.5
     "@ribajs/core": "workspace:packages/core"
     "@types/node": ^14.14.14
-    "@ungap/custom-elements": ^0.1.10
   languageName: unknown
   linkType: soft
 
@@ -5680,13 +5679,6 @@ __metadata:
     "@typescript-eslint/types": 4.10.0
     eslint-visitor-keys: ^2.0.0
   checksum: e8d8057632a4aa5595769da14d41a19cbc4a6c02539e5c882b218b2f347445a397f9ef28ffc8b9eefa4d271bed39aa9e3adb182416840f1c73ecf59a0abac876
-  languageName: node
-  linkType: hard
-
-"@ungap/custom-elements@npm:^0.1.10":
-  version: 0.1.10
-  resolution: "@ungap/custom-elements@npm:0.1.10"
-  checksum: 67a16743a0ca4de457e634b95a937504b565713e3c95be2a8ccdfb84e422969b3720d71621d79a5b7a30bbf0360d2fc2fe744d04952da4e9d1324df7bd9f8746
   languageName: node
   linkType: hard
 

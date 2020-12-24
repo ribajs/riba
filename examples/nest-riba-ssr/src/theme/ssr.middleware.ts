@@ -1,16 +1,61 @@
-import { Injectable, NestMiddleware } from '@nestjs/common';
+import { Injectable, NestMiddleware, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ThemeConfig } from '@ribajs/ssr';
+import { SsrService } from './ssr.service';
+import type { Request, Response, NextFunction } from 'express';
 
 @Injectable()
 export class SsrMiddleware implements NestMiddleware {
   theme: ThemeConfig;
-  constructor(protected config: ConfigService) {
+  log = new Logger(this.constructor.name);
+  constructor(protected config: ConfigService, protected ssr: SsrService) {
     this.theme = this.config.get<ThemeConfig>('theme');
   }
-  use(req: any, res: any, next: () => void) {
-    console.log('SsrMiddleware req.route', req.route.path)
-    // Start ssr here
-    next();
+  async use(req: Request, res: Response, next: NextFunction) {
+    this.log.debug('SsrMiddleware req.route', req.route.path);
+    const routeSettings = this.getRouteSettingsByRoute(req.route.path);
+
+    if (!routeSettings) {
+      return next();
+    }
+
+    this.log.debug(`Route found: ${JSON.stringify(routeSettings)}`);
+
+    const tplVariables = {
+      ctx: {
+        // See https://expressjs.com/de/api.html#req
+        app: req.app,
+        baseUrl: req.baseUrl,
+        route: {
+          path: req.route.path,
+        },
+        query: req.query,
+        params: req.params,
+        method: req.method,
+        cookies: req.cookies,
+      },
+    };
+
+    this.log.debug('Template variables:');
+    this.log.debug(tplVariables);
+
+    try {
+      const page = await this.ssr.renderComponent({
+        componentTagName: routeSettings.component,
+        tplVariables,
+      });
+      this.log.debug(`page: ${JSON.stringify(page)}`);
+      return res.send(page.html);
+    } catch (error) {
+      this.log.error('Error on render component');
+      console.error(error);
+      return res.status(500).json(error);
+    }
+  }
+
+  protected getRouteSettingsByRoute(routePath: string) {
+    return this.theme.routes.find((route) => {
+      return route.path.includes(routePath);
+    });
   }
 }

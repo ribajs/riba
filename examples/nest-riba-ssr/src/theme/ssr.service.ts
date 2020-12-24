@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { VirtualConsole, JSDOM } from 'jsdom';
 import { HappyDOMContext } from '@happy-dom/server-rendering';
 import { Script } from 'vm';
 import { ConfigService } from '@nestjs/config';
+import { ThemeConfig } from '@ribajs/ssr';
 import { resolve, extname } from 'path';
-import * as renderEngine from 'consolidate';
+import * as consolidate from 'consolidate';
 import { promises as fs } from 'fs';
 import type {
   TypeOfComponent,
@@ -21,8 +22,12 @@ interface RenderResult {
 }
 
 @Injectable()
-export class Ssr {
-  constructor(protected config: ConfigService) {}
+export class SsrService {
+  log = new Logger(this.constructor.name);
+  theme: ThemeConfig;
+  constructor(config: ConfigService) {
+    this.theme = config.get<ThemeConfig>('theme');
+  }
 
   // TODO different shared context for each site?
   getSharedContext() {
@@ -33,11 +38,19 @@ export class Ssr {
 
   getTemplateEngine(templatePath: string) {
     const ext = extname(templatePath);
-    const def = this.config.get('theme.viewEngine');
+    const def = this.theme.viewEngine;
     const detected = ext?.substring(1) || def; // Removes the dot of the file extension
     if (detected !== def) {
-      console.warn(
+      this.log.warn(
         `Detected template engine is not the default: "${detected}" (Default: "${def}")'`,
+      );
+    }
+
+    try {
+      require.resolve(detected);
+    } catch (error) {
+      console.error(
+        `Template engine not installed, try to run "yarn add ${detected}"`,
       );
     }
 
@@ -47,27 +60,23 @@ export class Ssr {
   /**
    *
    * @param layout Layout content string
-   * @param placeholderPageTag The placeholder tag, will be replaces by the page component tag
+   * @param rootTag The placeholder tag, will be replaces by the page component tag
    * @param pageTag The page compontent tag to replace the placeholder tag
    */
-  async transformLayout(
-    layout: string,
-    placeholderPageTag: string,
-    pageTag: string,
-  ) {
-    layout = layout.replace(new RegExp(placeholderPageTag, 'gi'), pageTag);
+  async transformLayout(layout: string, rootTag: string, pageTag: string) {
+    layout = layout.replace(new RegExp(rootTag, 'gi'), pageTag);
     return layout;
   }
 
   async readSsrScripts() {
-    const assetsPath = this.config.get<string>('theme.assetsDir');
+    const assetsPath = this.theme.assetsDir;
     const vendorPath = resolve(assetsPath, 'ssr', 'vendors.bundle.js');
     const mainPath = resolve(assetsPath, 'ssr', 'main.bundle.js');
     console.debug('vendorPath', vendorPath);
     console.debug('mainPath', mainPath);
     const vendors = await fs.readFile(vendorPath, 'utf8');
     const main = await fs.readFile(mainPath, 'utf8');
-    console.debug('Scripts readed!');
+    this.log.debug('Scripts readed!');
 
     return {
       vendors,
@@ -82,15 +91,23 @@ export class Ssr {
    */
   async renderTemplate(templatePath: string, variables: any) {
     if (!extname(templatePath)) {
-      templatePath += '.' + this.config.get('theme.viewEngine');
+      templatePath += '.' + this.theme.viewEngine;
     }
-    const viewsDir: string = this.config.get('theme.viewsDir');
-    const engine = this.getTemplateEngine(templatePath);
-    const result = await renderEngine[engine](
-      resolve(viewsDir, templatePath),
-      variables,
-    );
-    return result;
+    const viewsDir: string = this.theme.viewsDir;
+    const tplEngine = this.getTemplateEngine(templatePath);
+    templatePath = resolve(viewsDir, templatePath);
+    this.log.debug(`Template engine: ${tplEngine}, path: ${templatePath}`);
+    try {
+      const result = await consolidate[tplEngine](
+        resolve(viewsDir, templatePath),
+        variables,
+      );
+      return result;
+    } catch (error) {
+      this.log.error('Error on render template');
+      console.error(error);
+      throw error;
+    }
   }
 
   async renderWithJSDom(layout: string, componentTagName: string) {
@@ -113,10 +130,10 @@ export class Ssr {
     const vmContext = dom.getInternalVMContext();
     vmContext.window.ssrEvents = sharedContext.ssrEvents;
 
-    console.debug('Execute scripts...');
+    this.log.debug('Execute scripts...');
     script.runInContext(vmContext);
 
-    console.debug('Wait for custom element...');
+    this.log.debug('Wait for custom element...');
     await dom.window.customElements.whenDefined('index-page');
 
     const riba: Riba = (dom.window as any).riba;
@@ -127,7 +144,7 @@ export class Ssr {
       view.options.components[componentTagName] ||
       null;
 
-    console.debug('Scripts executed!');
+    this.log.debug('Scripts executed!');
     return new Promise<RenderResult>((resolve, reject) => {
       sharedContext.ssrEvents.once(
         'PageComponent:afterBind',
@@ -142,7 +159,7 @@ export class Ssr {
           result.component.tagName =
             result.component.tagName || component.tagName || componentTagName;
 
-          console.debug('result', result);
+          this.log.debug(`result: ${JSON.stringify(result)}`);
           return resolve(result);
         },
       );
@@ -212,7 +229,7 @@ export class Ssr {
             ...afterBindData,
           };
 
-          console.debug('result', result);
+          this.log.debug(`result: ${result}`);
           return resolve(result);
         },
       );
@@ -226,24 +243,39 @@ export class Ssr {
     return result;
   }
 
-  async renderComponent(opt: {
-    templatePath: string;
-    placeholderPageTag: string;
-    pageComponentPath: string;
+  async renderComponent({
+    template,
+    rootTag = 'ssr-root-page',
+    componentTagName,
+    engine,
+    tplVariables,
+  }: {
+    template?: string;
+    rootTag?: string;
     componentTagName: string;
-    engine: 'jsdom' | 'happy-dom';
-    variables: any;
+    engine?: 'jsdom' | 'happy-dom';
+    tplVariables: any;
   }): Promise<RenderResult> {
-    let layout = await this.renderTemplate(opt.templatePath, opt.variables);
-    layout = await this.transformLayout(
-      layout,
-      opt.placeholderPageTag,
-      opt.componentTagName,
-    );
+    if (!rootTag) {
+      rootTag = this.theme.ssr.rootTag || 'ssr-root-page';
+    }
+    if (!engine) {
+      engine = this.theme.ssr.engine || 'jsdom';
+    }
+    if (!template) {
+      template = this.theme.ssr.template || 'page-component.pug';
+    }
+    this.log.debug(`rootTag: ${rootTag}`);
+    this.log.debug(`engine: ${engine}`);
+    this.log.debug(`template: ${template}`);
+    let layout = await this.renderTemplate(template, tplVariables);
+    // this.log.debug(`layout: ${layout}`);
+    layout = await this.transformLayout(layout, rootTag, componentTagName);
+    // this.log.debug(`layout (transformed): ${layout}`);
     const renderData =
-      opt.engine === 'jsdom'
-        ? await this.renderWithJSDom(layout, opt.componentTagName)
-        : await this.renderWithHappyDom(layout, opt.componentTagName);
+      engine === 'jsdom'
+        ? await this.renderWithJSDom(layout, componentTagName)
+        : await this.renderWithHappyDom(layout, componentTagName);
     return renderData;
   }
 }

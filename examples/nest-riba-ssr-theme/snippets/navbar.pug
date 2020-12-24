@@ -10,9 +10,8 @@ bs4-navbar.navbar.navbar-main.fixed-top.navbar-dark.bg-primary
             li.nav-item.d-flex.align-items-center
               bs4-icon(src="/iconset/svg/icon_close.svg" size="32" rv-show="isActive" rv-on-click="toggle")
       //- Right
-      .col-auto.d-flex.align-items-center
+      link-list.col-auto.d-flex.align-items-center
         //- Only on desktop
         ul.nav.d-none.d-lg-flex
-          each item in linkList.main.items
-            li.nav.d-flex
-              a.nav-link.text-light(href=item.url)= item.label
+          li.nav.d-flex(rv-each-item="items")
+            a.nav-link.text-light(rv-href="item.url") { item.label }

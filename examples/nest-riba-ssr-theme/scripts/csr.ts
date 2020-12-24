@@ -5,7 +5,7 @@ import { i18nModule, LocalesStaticService } from "@ribajs/i18n";
 import { bs4Module } from "@ribajs/bs4";
 
 // Own
-import * as components from "./components";
+import * as components from "./components/csr";
 import * as binders from "./binders";
 import * as formatters from "./formatters";
 import locales from "./locales";

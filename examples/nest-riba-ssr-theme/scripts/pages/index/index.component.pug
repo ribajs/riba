@@ -1,0 +1,9 @@
+.container-fluid.py-5.my-5.text-center
+  .row
+    .col-12
+      h1(rv-html='title')
+  section.row
+    .col-12
+      p(rv-html='content')
+  rv-logger(rv-log-me='content')
+  rv-logger(rv-log-me='obj | json')

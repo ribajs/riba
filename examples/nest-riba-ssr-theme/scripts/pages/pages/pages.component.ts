@@ -1,6 +1,6 @@
 import { PageComponent } from "@ribajs/ssr";
 
-import pugTemplate from "./index.page-component.pug";
+import pugTemplate from "./pages.component.pug";
 
 export interface Scope {
   title: string;
@@ -16,8 +16,6 @@ export class PagesPageComponent extends PageComponent {
     title: "About",
     content: "<p>We are cool!</a>",
   };
-
-  routes = ["/pages/:handle"];
 
   static get observedAttributes() {
     return [];

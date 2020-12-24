@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { transpileModule, CompilerOptions, ModuleKind } from "typescript";
-import { Script } from 'vm'
+import { transpileModule, CompilerOptions, ModuleKind } from 'typescript';
+import { Script } from 'vm';
 import * as YAML from 'yaml';
 import fs = require('fs');
 import * as dotenv from 'dotenv';
@@ -16,13 +16,13 @@ const parseConfigFile = <T>(configPath: string) => {
   if (configPath.endsWith('.ts')) {
     const tSource = fs.readFileSync(configPath, 'utf8');
     const compilerOptions: CompilerOptions = {
-      module: ModuleKind.CommonJS
-    }
+      module: ModuleKind.CommonJS,
+    };
     const context = {
       exports: {
-        themeConfig: {}
+        themeConfig: {},
       },
-      require
+      require,
     };
     const jSource = transpileModule(tSource, { compilerOptions }).outputText;
     const script = new Script(jSource);
@@ -31,18 +31,18 @@ const parseConfigFile = <T>(configPath: string) => {
   }
   // Parse yaml config file
   if (configPath.endsWith('.yaml')) {
-    const result: T = YAML.parse(
-      fs.readFileSync(configPath, 'utf8'),
-    );
+    const result: T = YAML.parse(fs.readFileSync(configPath, 'utf8'));
     return result;
   }
-}
+};
 
 const THEME_ACTIVE = process.env.THEME_ACTIVE || 'nest-riba-ssr-theme';
 const ROOT = findRoot(process.cwd());
 const PACKAGES = resolve(ROOT, '..');
 const THEME_DIR = resolve(PACKAGES, THEME_ACTIVE);
-const THEME = parseConfigFile<ThemeConfig>(resolve(THEME_DIR, 'config', 'theme.ts'));
+const THEME = parseConfigFile<ThemeConfig>(
+  resolve(THEME_DIR, 'config', 'theme.ts'),
+);
 
 export const app = {
   root: ROOT,

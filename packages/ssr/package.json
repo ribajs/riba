@@ -2,8 +2,7 @@
   "name": "@ribajs/ssr",
   "version": "1.9.0-beta.4",
   "dependencies": {
-    "@ribajs/core": "workspace:packages/core",
-    "@ungap/custom-elements": "^0.1.10"
+    "@ribajs/core": "workspace:packages/core"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",

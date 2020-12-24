@@ -7,9 +7,10 @@ export const themeConfig: ThemeConfig = {
   viewsDir: "templates",
   pageComponentsDir: "scripts/pages",
   ssr: {
-    engine: 'happy-dom'
+    engine: "happy-dom",
+    rootTag: "ssr-root-page",
+    template: "page-component.pug",
   },
-  // TODO use https://vaadin.com/router?
   routes: [
     {
       path: ["/"],
