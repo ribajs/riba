@@ -1,4 +1,5 @@
-import { Component, EventDispatcher } from "@ribajs/core";
+import { Component } from "@ribajs/core";
+import { EventDispatcher } from "@ribajs/events";
 import template from "./iconset-example.component.html";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import Color from "@sphinxxxx/color-conversion";

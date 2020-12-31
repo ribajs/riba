@@ -69,6 +69,7 @@
   "dependencies": {
     "@ribajs/bs4": "workspace:packages/bs4",
     "@ribajs/core": "workspace:packages/core",
+    "@ribajs/events": "workspace:packages/events",
     "@ribajs/extras": "workspace:packages/extras",
     "@ribajs/iconset": "workspace:packages/iconset",
     "@ribajs/utils": "workspace:packages/utils",
