@@ -11,5 +11,9 @@ export * from "./parsers";
 export * from "./riba";
 export * from "./view";
 export * from "./core.module";
-// TODO remove?
-export * from "@ribajs/events/src";
+
+/**
+ * TODO remove this export
+ * @deprecated Use the @ribajs/events module directly
+ */
+export * from "@ribajs/events";

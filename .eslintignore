@@ -13,3 +13,5 @@ webpack.config.js
 
 **/*.spec.ts
 infra/schematics/**
+
+**/*.js

@@ -2551,6 +2551,7 @@ __metadata:
     "@ribajs/bs4": "workspace:packages/bs4"
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
+    "@ribajs/events": "workspace:packages/events"
     "@ribajs/extras": "workspace:packages/extras"
     "@ribajs/iconset": "workspace:packages/iconset"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
@@ -3016,6 +3017,7 @@ __metadata:
     "@ribajs/bs4": "workspace:packages/bs4"
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
+    "@ribajs/events": "workspace:packages/events"
     "@ribajs/iconset": "workspace:packages/iconset"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
@@ -4292,6 +4294,7 @@ __metadata:
   dependencies:
     "@ribajs/cache": "workspace:packages/cache"
     "@ribajs/core": "workspace:packages/core"
+    "@ribajs/events": "workspace:packages/events"
     "@ribajs/i18n": "workspace:packages/i18n"
     "@ribajs/router": "workspace:packages/router"
     "@ribajs/shopify": "workspace:packages/shopify"
