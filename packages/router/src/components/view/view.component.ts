@@ -22,7 +22,7 @@ export class RouterViewComponent extends Component {
       "scroll-to-top",
       "listen-all-links",
       "listen-popstate",
-      "scroll-to-ancho-hash",
+      "scroll-to-anchor-hash",
       "parse-title",
       "change-browser-url",
       "prefetch-links",
