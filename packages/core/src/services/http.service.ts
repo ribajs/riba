@@ -128,7 +128,7 @@ export class HttpService {
     return headers;
   }
 
-  public static async fetch<T=any>(
+  public static async fetch<T = any>(
     url: string,
     method: HttpMethod = "GET",
     data: any = {},

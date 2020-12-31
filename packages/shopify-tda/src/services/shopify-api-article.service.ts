@@ -1,6 +1,6 @@
-import { HttpService } from '@ribajs/core';
-import { Article } from '../interfaces/shopify-api';
-import { BaseApiService } from './base.service';
+import { HttpService } from "@ribajs/core";
+import { Article } from "../interfaces/shopify-api";
+import { BaseApiService } from "./base.service";
 
 export class ShopifyApiArticleService extends BaseApiService {
   public static instance?: ShopifyApiArticleService;
@@ -27,9 +27,9 @@ export class ShopifyApiArticleService extends BaseApiService {
   public async list(blogId: number) {
     return HttpService.getJSON(`${this.baseUrl}/${blogId}/articles`).then(
       (articles: Article[]) => {
-        console.debug('[ShopifyApiArticleService] articles', articles);
+        console.debug("[ShopifyApiArticleService] articles", articles);
         return articles;
-      },
+      }
     );
   }
 
@@ -40,11 +40,10 @@ export class ShopifyApiArticleService extends BaseApiService {
    */
   public async get(blogId: number, articleId: number) {
     return HttpService.getJSON(
-      `${this.baseUrl}/${blogId}/articles/${articleId}`,
+      `${this.baseUrl}/${blogId}/articles/${articleId}`
     ).then((article: Article) => {
-      console.debug('[ShopifyApiArticleService] get article', article);
+      console.debug("[ShopifyApiArticleService] get article", article);
       return article;
     });
   }
-
 }

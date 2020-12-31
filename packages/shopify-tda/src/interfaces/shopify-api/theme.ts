@@ -1,4 +1,4 @@
-import { ShopifyObject } from './base';
+import { ShopifyObject } from "./base";
 
 export interface ITheme extends ShopifyObject {
   /**
@@ -19,7 +19,7 @@ export interface ITheme extends ShopifyObject {
    * * unpublished: The theme is unpublished. Customers can't see it.
    * * demo: The theme is installed on the store as a demo. The theme can't be published until the merchant buys the full version.
    */
-  role: 'main' | 'unpublished' | 'demo';
+  role: "main" | "unpublished" | "demo";
   /**
    * A unique identifier applied to Shopify-made themes that are installed from the Shopify Theme Store Theme Store. Not all themes available in the Theme Store are developed by Shopify. Returns null if the store's theme isn't made by Shopify, or if it wasn't installed from the Theme Store.
    */

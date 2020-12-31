@@ -1,16 +1,16 @@
-import { HttpService } from '@ribajs/core';
+import { HttpService } from "@ribajs/core";
 import {
   ShopifyApiProductService as _ShopifyApiProductService,
   Product,
-} from '@ribajs/shopify-tda';
+} from "@ribajs/shopify-tda";
 
-import type { ProductUpdateCreate } from '../interfaces/shopify-api/product-update-create';
+import type { ProductUpdateCreate } from "../interfaces/shopify-api/product-update-create";
 
 export class ShopifyApiProductService extends _ShopifyApiProductService {
   public static instance?: ShopifyApiProductService;
 
   protected constructor() {
-    super('/');
+    super("/");
   }
 
   public static getSingleton() {
@@ -27,8 +27,8 @@ export class ShopifyApiProductService extends _ShopifyApiProductService {
    */
   public async create(product: ProductUpdateCreate) {
     const url = `${this.baseUrl}`;
-    return HttpService.post(url, product, 'json').then((prod: Product) => {
-      console.debug('[ShopifyApiProductService] product', prod);
+    return HttpService.post(url, product, "json").then((prod: Product) => {
+      console.debug("[ShopifyApiProductService] product", prod);
       return prod;
     });
   }
@@ -39,8 +39,8 @@ export class ShopifyApiProductService extends _ShopifyApiProductService {
    */
   public async update(id: number, product: ProductUpdateCreate) {
     const url = `${this.baseUrl}/${id}`;
-    return HttpService.put(url, product, 'json').then((prod: Product) => {
-      console.debug('[ShopifyApiProductService] update product result', prod);
+    return HttpService.put(url, product, "json").then((prod: Product) => {
+      console.debug("[ShopifyApiProductService] update product result", prod);
       return prod;
     });
   }
@@ -51,14 +51,14 @@ export class ShopifyApiProductService extends _ShopifyApiProductService {
    */
   public async delete(id: number) {
     const url = `${this.baseUrl}/${id}`;
-    return HttpService.delete(url, {}, 'json').then(
+    return HttpService.delete(url, {}, "json").then(
       (result: { id: number }) => {
         console.debug(
-          '[ShopifyApiProductService] delete product result',
-          result,
+          "[ShopifyApiProductService] delete product result",
+          result
         );
         return result;
-      },
+      }
     );
   }
 }

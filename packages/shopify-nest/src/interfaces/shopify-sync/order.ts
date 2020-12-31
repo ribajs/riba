@@ -13,6 +13,6 @@ export interface OrderSyncProgress {
   createdAt: Date;
   updatedAt: Date;
   error: string | null;
-  state: 'running' | 'failed' | 'cancelled' | 'success';
+  state: "running" | "failed" | "cancelled" | "success";
   continuedFromPrevious?: number;
 }

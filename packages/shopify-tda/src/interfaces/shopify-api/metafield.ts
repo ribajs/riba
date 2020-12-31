@@ -1,4 +1,4 @@
-import { ShopifyObject } from './base';
+import { ShopifyObject } from "./base";
 
 export interface Metafield extends ShopifyObject {
   /**
@@ -24,7 +24,7 @@ export interface Metafield extends ShopifyObject {
   /**
    * States whether the information in the value is stored as a 'string' or 'integer.'
    */
-  value_type: 'string' | 'integer';
+  value_type: "string" | "integer";
 
   /**
    * Container for a set of metadata. Namespaces help distinguish between metadata you created and metadata created by another individual with a similar namespace (maximum of 20 characters).

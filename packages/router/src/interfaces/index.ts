@@ -1,4 +1,4 @@
 export * from "./pjax-options";
 export * from "./response";
 export * from "./transition";
-export * from "./view-options"
+export * from "./view-options";

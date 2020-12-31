@@ -1,5 +1,5 @@
-import { Roles } from './role';
-import { ShopifyShop } from '../shopify-api/shop';
+import { Roles } from "./role";
+import { ShopifyShop } from "../shopify-api/shop";
 
 export interface ShopifyConnect {
   _id: string;

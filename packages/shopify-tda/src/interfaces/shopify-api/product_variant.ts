@@ -1,4 +1,4 @@
-import { ShopifyObject } from './base';
+import { ShopifyObject } from "./base";
 
 /**
  * A list of product variant objects, each one representing a slightly different version of the product.

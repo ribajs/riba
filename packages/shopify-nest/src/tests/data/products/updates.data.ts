@@ -1,4 +1,4 @@
-import type { ProductUpdateCreate } from '../../../interfaces/shopify-api/product-update-create';
+import type { ProductUpdateCreate } from "../../../interfaces/shopify-api/product-update-create";
 
 const products: ProductUpdateCreate[] = [
   /**
@@ -6,7 +6,7 @@ const products: ProductUpdateCreate[] = [
    */
   {
     id: 632910392,
-    title: 'New product title',
+    title: "New product title",
   },
   /**
    * Update a product's tags
@@ -35,7 +35,7 @@ const products: ProductUpdateCreate[] = [
         id: 562641783,
       },
       {
-        src: 'http://example.com/rails_logo.gif',
+        src: "http://example.com/rails_logo.gif",
       },
     ],
   },
@@ -80,12 +80,12 @@ const products: ProductUpdateCreate[] = [
    */
   {
     id: 632910392,
-    title: 'Updated Product Title',
+    title: "Updated Product Title",
     variants: [
       {
         id: 808950810,
-        price: '2000.00',
-        sku: 'Updating the Product SKU',
+        price: "2000.00",
+        sku: "Updating the Product SKU",
       },
       {
         id: 49148385,
@@ -103,8 +103,8 @@ const products: ProductUpdateCreate[] = [
    */
   {
     id: 632910392,
-    metafields_global_title_tag: 'Brand new title',
-    metafields_global_description_tag: 'Brand new description',
+    metafields_global_title_tag: "Brand new title",
+    metafields_global_description_tag: "Brand new description",
   },
   /**
    * Show a hidden product by changing the published attribute to true
@@ -127,10 +127,10 @@ const products: ProductUpdateCreate[] = [
     id: 632910392,
     metafields: [
       {
-        key: 'new',
-        value: 'newvalue',
-        value_type: 'string',
-        namespace: 'global',
+        key: "new",
+        value: "newvalue",
+        value_type: "string",
+        namespace: "global",
       },
     ],
   },

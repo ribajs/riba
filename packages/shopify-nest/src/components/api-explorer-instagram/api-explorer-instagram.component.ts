@@ -1,56 +1,56 @@
-import Debug from 'debug';
+import Debug from "debug";
 import {
   ShopifyNestApiExplorerComponent,
   APIParam,
   APIListItem,
   Scope,
-} from '../api-explorer/api-explorer.component';
+} from "../api-explorer/api-explorer.component";
 
-import { InstagramApiService } from '../../services/instagram-api.service';
+import { InstagramApiService } from "../../services/instagram-api.service";
 
 export class ShopifyNestApiExplorerInstagramComponent extends ShopifyNestApiExplorerComponent {
-  public static tagName = 'shopify-nest-api-explorer-instagram';
+  public static tagName = "shopify-nest-api-explorer-instagram";
 
   protected apiService = InstagramApiService.getSingleton();
 
   protected apiList: APIListItem[] = [
     {
       // Freestyle
-      label: 'Freestyle',
-      url: '/instagram/api/user/accounts',
-      short_desc: 'components.apiExplorer.freestyle.short_desc',
+      label: "Freestyle",
+      url: "/instagram/api/user/accounts",
+      short_desc: "components.apiExplorer.freestyle.short_desc",
       freestyle: true,
     },
     {
       // Recive your facebook user
-      label: '/instagram/api/user',
-      url: '/instagram/api/user',
-      short_desc: 'components.apiExplorer.instagram.user.short_desc',
-      roles: ['shopify-staff-member'],
+      label: "/instagram/api/user",
+      url: "/instagram/api/user",
+      short_desc: "components.apiExplorer.instagram.user.short_desc",
+      roles: ["shopify-staff-member"],
     },
     {
       // Recive a list of your instagram accounts
-      label: '/instagram/api/user/accounts',
-      url: '/instagram/api/user/accounts',
-      short_desc: 'components.apiExplorer.instagram.user.accounts.short_desc',
-      roles: ['shopify-staff-member'],
+      label: "/instagram/api/user/accounts",
+      url: "/instagram/api/user/accounts",
+      short_desc: "components.apiExplorer.instagram.user.accounts.short_desc",
+      roles: ["shopify-staff-member"],
     },
     {
       // Recive a list of your instagram media
-      label: '/instagram/api/media/:instagramBusinessAccountID',
-      url: '/instagram/api/media/:instagramBusinessAccountID?limit=0',
-      short_desc: 'components.apiExplorer.instagram.media.short_desc',
+      label: "/instagram/api/media/:instagramBusinessAccountID",
+      url: "/instagram/api/media/:instagramBusinessAccountID?limit=0",
+      short_desc: "components.apiExplorer.instagram.media.short_desc",
       roles: [],
     },
   ];
 
   protected scope: Scope = {
-    langcode: 'en',
+    langcode: "en",
     self: this,
-    result: '',
+    result: "",
     currentParams: [],
     currentQueries: [],
-    currentUrl: '',
+    currentUrl: "",
     currentSelectApi: this.apiList[0],
     send: this.send,
     apiList: this.apiList,
@@ -65,22 +65,22 @@ export class ShopifyNestApiExplorerInstagramComponent extends ShopifyNestApiExpl
   }
 
   protected debug = Debug(
-    'component:' + ShopifyNestApiExplorerInstagramComponent.tagName,
+    "component:" + ShopifyNestApiExplorerInstagramComponent.tagName
   );
   constructor(element?: HTMLElement) {
     super(element);
   }
 
   protected async loadParamValues(param: APIParam) {
-    this.debug('loadParamValues', param);
+    this.debug("loadParamValues", param);
     if (!param.dependenciesResolved) {
       this.debug(
-        `Dependencies for this parameter '${param.name}' not resolved`,
+        `Dependencies for this parameter '${param.name}' not resolved`
       );
       return;
     }
     switch (param.name) {
-      case 'instagramBusinessAccountID':
+      case "instagramBusinessAccountID":
         return this.loadInstagramBusinessAccountIDParamValues();
         break;
     }
@@ -102,10 +102,10 @@ export class ShopifyNestApiExplorerInstagramComponent extends ShopifyNestApiExpl
   }
 
   protected async loadQueryValues(query: APIParam) {
-    this.debug('loadParamValues', query);
+    this.debug("loadParamValues", query);
     switch (query.name) {
-      case 'limit':
-        query.type = 'number';
+      case "limit":
+        query.type = "number";
         query.value = 0;
         break;
         break;

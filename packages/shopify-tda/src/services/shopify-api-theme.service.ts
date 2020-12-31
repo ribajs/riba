@@ -1,8 +1,8 @@
-import { HttpService } from '@ribajs/core';
-import { ITheme } from '../interfaces/shopify-api/theme';
-import { Asset } from '../interfaces/shopify-api/asset';
-import { AssetLocale } from '../interfaces/shopify-api/asset-locale';
-import { BaseApiService } from './base.service';
+import { HttpService } from "@ribajs/core";
+import { ITheme } from "../interfaces/shopify-api/theme";
+import { Asset } from "../interfaces/shopify-api/asset";
+import { AssetLocale } from "../interfaces/shopify-api/asset-locale";
+import { BaseApiService } from "./base.service";
 
 export class ShopifyApiThemesService extends BaseApiService {
   public static instance?: ShopifyApiThemesService;
@@ -28,19 +28,19 @@ export class ShopifyApiThemesService extends BaseApiService {
   public async list() {
     return HttpService.getJSON(`/shopify/api/themes`).then(
       (themes: ITheme[]) => {
-        console.debug('[ShopifyApiThemesService] themes', themes);
+        console.debug("[ShopifyApiThemesService] themes", themes);
         return themes;
-      },
+      }
     );
   }
 
   public async locales(id: string | number, propertyPath?: string) {
     let url = `/shopify/api/themes/${id}/locales`;
     if (propertyPath) {
-      url += '/' + propertyPath;
+      url += "/" + propertyPath;
     }
     return HttpService.getJSON(url).then((locales: any) => {
-      console.debug('[ShopifyApiThemesService] locales', locales);
+      console.debug("[ShopifyApiThemesService] locales", locales);
       return locales;
     });
   }
@@ -48,10 +48,10 @@ export class ShopifyApiThemesService extends BaseApiService {
   public async assets(id: string | number, key?: string) {
     let url = `/shopify/api/themes/${id}/assets`;
     if (key) {
-      url += '/' + key;
+      url += "/" + key;
     }
     return HttpService.getJSON(url).then((assets: Asset[]) => {
-      console.debug('[ShopifyApiThemesService] assets', assets);
+      console.debug("[ShopifyApiThemesService] assets", assets);
       return assets;
     });
   }
@@ -59,9 +59,9 @@ export class ShopifyApiThemesService extends BaseApiService {
   public async assetLocalesList(id: string | number) {
     return HttpService.getJSON(`/shopify/api/themes/${id}/locales/list`).then(
       (assets: AssetLocale[]) => {
-        console.debug('[ShopifyApiThemesService] assets', assets);
+        console.debug("[ShopifyApiThemesService] assets", assets);
         return assets;
-      },
+      }
     );
   }
 }

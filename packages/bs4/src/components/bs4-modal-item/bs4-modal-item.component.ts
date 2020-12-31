@@ -94,7 +94,8 @@ export class Bs4ModalItemComponent extends Component {
       this.scope.$parent?.$parent || null;
     if (
       typeof notificationContainer?.onItemHide === "function" &&
-      this.scope.modal && el
+      this.scope.modal &&
+      el
     ) {
       notificationContainer.onItemHide(
         event,

@@ -81,7 +81,11 @@ class Prefetch {
     el.removeEventListener("touchstart", this.onLinkEnter.bind(this, url, el));
   }
 
-  public onLinkEnter(url: string, el: HTMLAnchorElement | HTMLUnknownElement, evt: Event) {
+  public onLinkEnter(
+    url: string,
+    el: HTMLAnchorElement | HTMLUnknownElement,
+    evt: Event
+  ) {
     if (
       el.classList &&
       (el.classList.contains(IGNORE_CLASS_PREFETCH) ||

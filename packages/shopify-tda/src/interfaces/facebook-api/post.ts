@@ -1,11 +1,11 @@
-import { FbPaging } from './base';
+import { FbPaging } from "./base";
 
 export interface IFbDescriptionTagsData {
   id: string;
   length: number;
   name: string;
   offset: number;
-  type: 'page';
+  type: "page";
 }
 
 export interface IFbAttachmentsData {
@@ -23,11 +23,11 @@ export interface IFbAttachmentsData {
     };
     title: string;
     type:
-      | 'photo'
-      | 'video_inline'
-      | 'profile_media'
-      | 'video_direct_response'
-      | 'share';
+      | "photo"
+      | "video_inline"
+      | "profile_media"
+      | "video_direct_response"
+      | "share";
     url: string;
   };
 }

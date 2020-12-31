@@ -1,13 +1,13 @@
-import Debug from 'debug';
-import { ShopifyApiBlogsService as _ShopifyApiBlogsService } from '@ribajs/shopify-tda';
+import Debug from "debug";
+import { ShopifyApiBlogsService as _ShopifyApiBlogsService } from "@ribajs/shopify-tda";
 
 export class ShopifyApiBlogsService extends _ShopifyApiBlogsService {
   public static instance?: ShopifyApiBlogsService;
 
-  protected debug = Debug('services:ShopifyApiBlogsService');
+  protected debug = Debug("services:ShopifyApiBlogsService");
 
   protected constructor() {
-    super('/');
+    super("/");
   }
 
   public static getSingleton() {

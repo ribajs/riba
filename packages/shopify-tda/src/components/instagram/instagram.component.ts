@@ -1,10 +1,7 @@
 import { Component } from "@ribajs/core";
 import { Pjax } from "@ribajs/router";
 import template from "./instagram.component.html";
-import {
-  InstagramMediaData,
-  InstagramApiService,
-} from "@ribajs/shopify-tda";
+import { InstagramMediaData, InstagramApiService } from "@ribajs/shopify-tda";
 
 export interface Scope {
   media: InstagramMediaData[];
@@ -64,7 +61,8 @@ export class ShopifyTdaInstagramComponent extends Component {
     if (!this.scope.instagramId) {
       return Promise.reject();
     }
-    this.instagram.media(this.scope.instagramId, this.scope.limit)
+    this.instagram
+      .media(this.scope.instagramId, this.scope.limit)
       .then((response) => {
         if (response) {
           this.scope.media = response.media || [];

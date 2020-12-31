@@ -1,4 +1,4 @@
-import { ShopifyObject } from '@ribajs/shopify-tda';
+import { ShopifyObject } from "@ribajs/shopify-tda";
 
 /**
  * Represents a one-time application charge or a recurring subscription charge.
@@ -33,12 +33,12 @@ export interface Charge extends ShopifyObject {
    * The status of the charge.
    */
   status?:
-    | 'pending'
-    | 'accepted'
-    | 'active'
-    | 'cancelled'
-    | 'declined'
-    | 'expired';
+    | "pending"
+    | "accepted"
+    | "active"
+    | "cancelled"
+    | "declined"
+    | "expired";
 
   /**
    * Whether or not the application charge is a test transaction.

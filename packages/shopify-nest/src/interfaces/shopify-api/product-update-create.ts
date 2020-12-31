@@ -3,8 +3,8 @@ import type {
   ProductImage,
   ProductOption,
   ProductVariant,
-} from '@ribajs/shopify-tda';
-import type { MetafieldUpdateCreate } from './metafield-update-create';
+} from "@ribajs/shopify-tda";
+import type { MetafieldUpdateCreate } from "./metafield-update-create";
 
 export interface ProductUpdateCreate extends Partial<ShopifyObject> {
   /**

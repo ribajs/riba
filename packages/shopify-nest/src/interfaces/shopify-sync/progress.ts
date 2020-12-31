@@ -1,6 +1,6 @@
-import { OrderSyncProgress } from './order';
-import { ProductSyncProgress } from './product';
-import { SyncOptions } from './options';
+import { OrderSyncProgress } from "./order";
+import { ProductSyncProgress } from "./product";
+import { SyncOptions } from "./options";
 
 export interface SyncProgress {
   shop: string;
@@ -9,6 +9,6 @@ export interface SyncProgress {
   products?: ProductSyncProgress;
   createdAt: Date;
   updatedAt: Date;
-  state: 'running' | 'failed' | 'cancelled' | 'success' | 'starting' | 'ending';
+  state: "running" | "failed" | "cancelled" | "success" | "starting" | "ending";
   lastError: string | null;
 }

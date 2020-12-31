@@ -1,4 +1,4 @@
-import { ShopifyObject } from './base';
+import { ShopifyObject } from "./base";
 
 export interface ProductImage extends ShopifyObject {
   /**

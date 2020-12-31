@@ -1,1 +1,1 @@
-export type BlogCommentable = 'no' | 'moderate' | 'yes' | string;
+export type BlogCommentable = "no" | "moderate" | "yes" | string;

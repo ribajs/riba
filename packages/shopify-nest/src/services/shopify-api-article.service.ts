@@ -1,17 +1,17 @@
-import { HttpService } from '@ribajs/core';
-import Debug from 'debug';
+import { HttpService } from "@ribajs/core";
+import Debug from "debug";
 import {
   Article,
   ShopifyApiArticleService as _ShopifyApiArticleService,
-} from '@ribajs/shopify-tda';
+} from "@ribajs/shopify-tda";
 
 export class ShopifyApiArticleService extends _ShopifyApiArticleService {
   public static instance?: ShopifyApiArticleService;
 
-  protected debug = Debug('services:ShopifyApiArticleService');
+  protected debug = Debug("services:ShopifyApiArticleService");
 
   protected constructor() {
-    super('/');
+    super("/");
   }
 
   public static getSingleton() {
@@ -31,9 +31,9 @@ export class ShopifyApiArticleService extends _ShopifyApiArticleService {
     return HttpService.put(
       `/shopify/api/blogs/${blogId}/articles/${articleId}`,
       article,
-      'json',
+      "json"
     ).then((result: any) => {
-      this.debug('update article', result);
+      this.debug("update article", result);
       return article;
     });
   }

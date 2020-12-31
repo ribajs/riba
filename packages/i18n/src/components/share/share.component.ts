@@ -102,8 +102,7 @@ export const i18nShareComponentWrapper = (
 
       if (this.scope.textI18n && langcode) {
         this.scope.text =
-          (await this.i18n(langcode, this.scope.textI18n)) ||
-          this.scope.text;
+          (await this.i18n(langcode, this.scope.textI18n)) || this.scope.text;
       }
 
       if (this.scope.serviceLabelI18n && langcode) {

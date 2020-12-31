@@ -196,13 +196,8 @@ export abstract class Component extends BasicComponent {
     return this.view;
   }
 
-  protected getView() // elements?:
-  //   | HTMLCollection
-  //   | HTMLElement
-  //   | Node
-  //   | NodeListOf<ChildNode>
-  //   | HTMLUnknownElement[]
-  {
+  protected getView() {
+    //   | HTMLUnknownElement[] //   | NodeListOf<ChildNode> //   | Node //   | HTMLElement //   | HTMLCollection // elements?:
     const viewOptions = this.riba?.getViewOptions({
       handler: this.eventHandler(this),
       formatters: {

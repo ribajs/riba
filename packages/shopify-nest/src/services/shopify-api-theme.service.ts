@@ -1,10 +1,10 @@
-import { ShopifyApiThemesService as _ShopifyApiThemesService } from '@ribajs/shopify-tda';
+import { ShopifyApiThemesService as _ShopifyApiThemesService } from "@ribajs/shopify-tda";
 
 export class ShopifyApiThemesService extends _ShopifyApiThemesService {
   public static instance?: ShopifyApiThemesService;
 
   protected constructor() {
-    super('/');
+    super("/");
   }
 
   public static getSingleton() {
