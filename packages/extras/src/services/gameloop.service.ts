@@ -1,4 +1,4 @@
-import { EventDispatcher } from "@ribajs/core";
+import { EventDispatcher } from "@ribajs/events";
 
 export interface GameloopOptions {
   maxFPS?: number;

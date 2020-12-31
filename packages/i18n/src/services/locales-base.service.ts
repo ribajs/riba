@@ -1,4 +1,4 @@
-import { EventDispatcher } from "@ribajs/core";
+import { EventDispatcher } from "@ribajs/events";
 import { clone } from "@ribajs/utils/src/type";
 import { Langcode, LocalPluralization, LocalVar } from "../interfaces";
 

@@ -1,8 +1,8 @@
 export * from "./Dom";
 export * from "./Prefetch";
 
-import { getDataset } from "@ribajs/core";
-import { EventDispatcher, HttpService, HttpServiceOptions } from "@ribajs/core";
+import { EventDispatcher } from "@ribajs/events";
+import { getDataset, HttpService, HttpServiceOptions } from "@ribajs/core";
 import {
   cleanLink,
   getPort,

@@ -1,4 +1,4 @@
-import { EventDispatcher } from '@ribajs/core';
+import { EventDispatcher } from '@ribajs/events';
 import Debug from 'debug';
 import { io, Socket } from '@ribajs/shopify-tda';
 

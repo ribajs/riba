@@ -24,7 +24,7 @@ import {
   // ShopifyApp,
 } from "../interfaces/shopify-easdk";
 
-import { EventDispatcher } from "@ribajs/core";
+import { EventDispatcher } from "@ribajs/events";
 
 import { State } from "@ribajs/router";
 
