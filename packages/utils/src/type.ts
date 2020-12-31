@@ -209,12 +209,21 @@ export const stripHtml = (html: string) => {
 /**
  * Returns a camel-cased version of the string. Used when translating an
  * element's attribute name into a property name for the component's scope.
- * @param string
+ * @param str
  */
 export const camelCase = (str: string) => {
   return str.replace(/-([a-z0-9])/g, (grouped) => {
     return grouped[1].toUpperCase();
   });
+};
+
+/**
+ * Uppercases the first letter of a string
+ * @param str
+ */
+export const capitalize = (str: string) => {
+  if (typeof str !== "string") return "";
+  return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
 /**

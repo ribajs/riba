@@ -1,5 +1,6 @@
 // string formatters
 export { appendFormatter } from "./append.formatter";
+export { capitalizeFormatter } from "./capitalize.formatter";
 export { downcaseFormatter } from "./downcase.formatter";
 export { filledFormatter } from "./filled.formatter";
 export { handleizeFormatter } from "./handleize.formatter";

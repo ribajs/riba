@@ -14,7 +14,7 @@ export class PagesPageComponent extends PageComponent {
   protected autobind = true;
 
   scope: Scope = {
-    title: "About",
+    title: "{params.handle | capitalize}",
     content: "<p>We are {params.handle}!</a>",
     params: {},
   };

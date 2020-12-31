@@ -291,7 +291,7 @@ export class SsrService {
       rootTag = this.theme.ssr.rootTag || 'ssr-root-page';
     }
     if (!engine) {
-      engine = this.theme.ssr.engine || 'jsdom';
+      engine = this.theme.ssr.engine || 'happy-dom';
     }
     if (!template) {
       template = this.theme.ssr.template || 'page-component.pug';
