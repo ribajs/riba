@@ -162,7 +162,9 @@ export class PhotoSwipeUI {
   }
 
   protected _onIdleMouseMove() {
-    clearTimeout(this._idleTimer);
+    if (this._idleTimer) {
+      clearTimeout(this._idleTimer);
+    }
     this._idleIncrement = 0;
     if (this._isIdle) {
       this.setIdle(false);
@@ -173,7 +175,9 @@ export class PhotoSwipeUI {
     e = e ? e : window.event;
     const from = (e as MouseEvent)?.relatedTarget || (e as any)?.toElement;
     if (!from || from.nodeName === "HTML") {
-      clearTimeout(this._idleTimer);
+      if (this._idleTimer) {
+        clearTimeout(this._idleTimer);
+      }
       this._idleTimer = setTimeout(() => {
         this.setIdle(true);
       }, this._options.timeToIdleOutside);

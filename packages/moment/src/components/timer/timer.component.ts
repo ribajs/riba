@@ -194,14 +194,14 @@ export class TimerComponent extends Component {
     //call function immediatly to remove initial delay
     this.updateCountdown();
     //create interval and save id to clear later to prevent resource leaking
-    this.updateIntervalId = setInterval(() => {
+    this.updateIntervalId = window.setInterval(() => {
       this.updateCountdown();
     }, 1000);
   }
 
   protected cancelCountdownInterval() {
     this.scope.countdownRunning = false;
-    if (this.updateIntervalId) clearInterval(this.updateIntervalId);
+    if (this.updateIntervalId) window.clearInterval(this.updateIntervalId);
     this.updateIntervalId = undefined;
   }
 
