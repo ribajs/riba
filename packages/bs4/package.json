@@ -82,6 +82,7 @@
   "dependencies": {
     "@ribajs/cache": "workspace:packages/cache",
     "@ribajs/core": "workspace:packages/core",
+    "@ribajs/events": "workspace:packages/events",
     "@ribajs/extras": "workspace:packages/extras",
     "@ribajs/utils": "workspace:packages/utils",
     "@sphinxxxx/color-conversion": "^2.2.2",

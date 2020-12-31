@@ -14,6 +14,7 @@
   "dependencies": {
     "@ribajs/bs4": "workspace:packages/bs4",
     "@ribajs/core": "workspace:packages/core",
+    "@ribajs/events": "workspace:packages/events",
     "@ribajs/i18n": "workspace:packages/i18n",
     "@ribajs/shopify-easdk": "workspace:packages/shopify-easdk",
     "@ribajs/shopify-tda": "workspace:packages/shopify-tda",

@@ -64,6 +64,7 @@
   },
   "dependencies": {
     "@ribajs/core": "workspace:packages/core",
+    "@ribajs/events": "workspace:packages/events",
     "@ribajs/utils": "workspace:packages/utils"
   },
   "bugs": {
