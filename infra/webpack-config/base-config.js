@@ -314,7 +314,15 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
       break;
     // E.g. used for demos
     case "local":
-      config.entry = config.entry || [config.scssIndexPath, config.tsIndexPath];
+      if (!config.entry) {
+        config.entry = [];
+        if (config.scssIndexPath) {
+          config.entry.push(config.scssIndexPath);
+        }
+        if (config.tsIndexPath) {
+          config.entry.push(config.tsIndexPath);
+        }
+      }
       config.output = config.output || {
         path: config.distPath,
         filename: "[name].bundle.js",
