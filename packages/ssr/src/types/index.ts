@@ -1,3 +1,4 @@
+export * from "./html-head";
 export * from "./page-component-after-bind-event-data";
 export * from "./render-engine";
 export * from "./route";

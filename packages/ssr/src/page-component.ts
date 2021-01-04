@@ -1,10 +1,31 @@
 import { Component } from "@ribajs/core";
 import type { SharedContext } from "@ribajs/ssr";
 import type { EventDispatcher } from "@ribajs/events";
-import type { PageComponentAfterBindEventData } from "./types/page-component-after-bind-event-data";
+import type { PageComponentAfterBindEventData, SsrHtmlHead } from "./types";
+
 export abstract class PageComponent extends Component {
   protected events: EventDispatcher;
   protected ctx: SharedContext["ctx"];
+
+  /**
+   * Overwrite / add tags in the html head like the page title
+   *
+   * TODO add support for more head tags
+   * TODO add support for set title in happy-dom: https://github.com/capricorn86/happy-dom/blob/master/packages/happy-dom/src/nodes/document/Document.ts
+   */
+  protected head: SsrHtmlHead = {};
+
+  constructor() {
+    super();
+    this.ctx = window.ssr.ctx;
+    this.events = window.ssr.events;
+  }
+
+  protected setHtmlHead() {
+    if (this.head.title) {
+      document.title = this.head.title;
+    }
+  }
 
   protected getBindEventData() {
     const data: PageComponentAfterBindEventData = {
@@ -15,15 +36,10 @@ export abstract class PageComponent extends Component {
     return data;
   }
 
-  constructor() {
-    super();
-    this.ctx = window.ssr.ctx;
-    this.events = window.ssr.events;
-  }
-
   protected async afterBind() {
     await super.afterBind();
     const data = this.getBindEventData();
+    this.setHtmlHead();
     this.events.trigger("PageComponent:afterBind", data);
   }
 

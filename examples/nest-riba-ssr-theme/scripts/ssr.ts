@@ -44,5 +44,3 @@ window.view = window.riba.bind(document.body, window.model);
 window.view.registComponents();
 
 document.body.setAttribute("works", ":)");
-
-console.log("Bind done");

@@ -145,6 +145,10 @@
         "version": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
         "affectsGlobalScope": false
       },
+      "../../../packages/ssr/src/types/html-head.ts": {
+        "version": "f151c8b203832381671376a2cbd043063feec5fbdaa87f61a8dd94bd78d3ffde",
+        "affectsGlobalScope": false
+      },
       "../../../packages/utils/src/type.ts": {
         "version": "e5fa0e095b43a262dfb3e045f7eebcbb1b788d8e103469e7abe52ebad633b54e",
         "affectsGlobalScope": false
@@ -227,7 +231,7 @@
         "affectsGlobalScope": false
       },
       "../../../packages/core/src/view.ts": {
-        "version": "2993f1a45b7c9850e0d65aa8787279cff1fcecc616d772ad89805fab4df333ec",
+        "version": "057d3a7cad36bbebcff38c220b013a3abf7dcf70a7b6bbd22688567feabdafc5",
         "affectsGlobalScope": false
       },
       "../../../packages/core/src/parsers.ts": {
@@ -824,11 +828,15 @@
         "affectsGlobalScope": false
       },
       "../../../packages/ssr/src/page-component.ts": {
-        "version": "791cd5c220b1a3fd091366e6db053c6e2a81f3abc8c27910d634c83ba5a3b8f3",
+        "version": "7d101e860597a29545ecd2c6298b2f9d81504a51450cfb4c55170bd12fdcba2b",
         "affectsGlobalScope": false
       },
       "../../../packages/ssr/src/types/page-component-after-bind-event-data.ts": {
-        "version": "894d76daa69e8af59ccfcb4d7278b9fbfb45e5543a45c38dc5c600a84debcd20",
+        "version": "39601fcc821ca0b7b2f17c5f7ef7b2ed47479c1d4f69e1a4615080799c583d01",
+        "affectsGlobalScope": false
+      },
+      "../../../packages/ssr/src/types/render-engine.ts": {
+        "version": "a18b9bdcba17449104bc77b4334f1102b8b43b2e3e7918f28fd11650bef23915",
         "affectsGlobalScope": false
       },
       "../../../packages/ssr/src/types/route.ts": {
@@ -1119,11 +1127,11 @@
         "affectsGlobalScope": false
       },
       "../../../packages/ssr/src/types/theme-config.ts": {
-        "version": "75466b68db8c713626b2588da8b4edba548017eb262c33c3c66406f73fb0c16a",
+        "version": "02c01b3394d54c183323b9b56c8a2427410a1b9a1111e3fb8a4310501b43d21d",
         "affectsGlobalScope": false
       },
       "../../../packages/ssr/src/types/index.ts": {
-        "version": "734cd4948fc32069e877c93210e52e4520723236c60a49dc6419554bf36a3ea8",
+        "version": "7fa2a594a113206246878bb6f0d07b76d283e1a2be6b73b0d60f17f3533ccfc6",
         "affectsGlobalScope": false
       },
       "../../../packages/ssr/src/types/global.ts": {
@@ -1155,12 +1163,12 @@
         "affectsGlobalScope": false
       },
       "../scripts/pages/index/index.component.ts": {
-        "version": "632031cdb5ff15cdb75c2d7ff9410cd0df9394179cf202e4e21d7c2bd049ab9c",
-        "signature": "695ca513c1c789abdf5cedffcc42b49af4b1ec43c2c5c793d602049610b85f6b",
+        "version": "4a8463aa14307ca0e4306ad15cb034ed6c68d6d800cffa454d8b4cc48ea6233c",
+        "signature": "06d4a7860172ae94124b91d3d023b3b4e2a8c4cc9031095fedcb9e2f1bc6d823",
         "affectsGlobalScope": false
       },
       "../scripts/pages/pages/pages.component.ts": {
-        "version": "ed452836165d48ff01609105436e3203f98e2743149a386182db7dcbf48fcfab",
+        "version": "5a21b47c198408b99b28d9c4557d15f4c4554e4e7d51275ef96d95bc2a5854bb",
         "signature": "e2ee75fe66644abcfeec7f5b21a67e9527b74d3ad751dda2e20659bfa8c1084d",
         "affectsGlobalScope": false
       },
@@ -1185,7 +1193,7 @@
         "affectsGlobalScope": false
       },
       "../scripts/ssr.ts": {
-        "version": "63f3bfad150cdec89f7904e5036cf7281cab0eeeaaa2fa12ee032bbb34f9c1a1",
+        "version": "3dce99db6d05059a92430de529105f2806e4e8d13701e3d95619eb13a295f900",
         "signature": "6545df124d8611f9024fa94fb0eb8e8b9b6a7fcecda12a30818bc8c99a4d5515",
         "affectsGlobalScope": true
       }
@@ -2076,7 +2084,7 @@
         "../../../packages/core/src/index.ts",
         "../../../packages/events/dist/types/index.d.ts",
         "../../../packages/ssr/src/index.ts",
-        "../../../packages/ssr/src/types/page-component-after-bind-event-data.ts"
+        "../../../packages/ssr/src/types/index.ts"
       ],
       "../../../packages/ssr/src/ssr.module.ts": [
         "../../../packages/core/src/index.ts",
@@ -2090,7 +2098,9 @@
         "../../../packages/ssr/src/types/shared-context.ts"
       ],
       "../../../packages/ssr/src/types/index.ts": [
+        "../../../packages/ssr/src/types/html-head.ts",
         "../../../packages/ssr/src/types/page-component-after-bind-event-data.ts",
+        "../../../packages/ssr/src/types/render-engine.ts",
         "../../../packages/ssr/src/types/route.ts",
         "../../../packages/ssr/src/types/shared-context.ts",
         "../../../packages/ssr/src/types/template-engines.ts",
@@ -2104,6 +2114,7 @@
         "../../../packages/events/dist/types/index.d.ts"
       ],
       "../../../packages/ssr/src/types/theme-config.ts": [
+        "../../../packages/ssr/src/types/render-engine.ts",
         "../../../packages/ssr/src/types/route.ts",
         "../../../packages/ssr/src/types/template-engines.ts"
       ],
@@ -2605,8 +2616,10 @@
       "../../../packages/ssr/src/services/index.ts",
       "../../../packages/ssr/src/ssr.module.ts",
       "../../../packages/ssr/src/types/global.ts",
+      "../../../packages/ssr/src/types/html-head.ts",
       "../../../packages/ssr/src/types/index.ts",
       "../../../packages/ssr/src/types/page-component-after-bind-event-data.ts",
+      "../../../packages/ssr/src/types/render-engine.ts",
       "../../../packages/ssr/src/types/route.ts",
       "../../../packages/ssr/src/types/shared-context.ts",
       "../../../packages/ssr/src/types/template-engines.ts",

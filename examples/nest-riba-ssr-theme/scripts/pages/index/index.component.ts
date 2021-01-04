@@ -13,6 +13,10 @@ export class IndexPageComponent extends PageComponent {
   public _debug = true;
   protected autobind = true;
 
+  protected head = {
+    title: "You are on home",
+  };
+
   scope: Scope = {
     title: "Hello from ssr",
     content: "When you can see this, ssr works :)",

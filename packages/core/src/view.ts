@@ -339,7 +339,6 @@ export class View {
     const resolveNodeName = nodeName || COMPONENT.tagName;
     if (!customElements.get(resolveNodeName)) {
       customElements.define(COMPONENT.tagName, COMPONENT);
-      console.debug(`New custom element "${resolveNodeName}" defined.`);
     }
   }
 }

@@ -285,7 +285,7 @@ export class SsrService {
       this.log.warn(`Ignore unknown render engine "${engine}"`);
     }
     if (!engine) {
-      engine = this.theme.ssr.engine || 'happy-dom';
+      engine = this.theme.ssr.engine || 'jsdom';
     }
     if (!template) {
       template = this.theme.ssr.template || 'page-component.pug';
