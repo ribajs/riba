@@ -1,4 +1,5 @@
-import { HttpService, EventDispatcher } from "@ribajs/core";
+import { HttpService } from
+import { EventDispatcher } from "@ribajs/events";
 import { Product } from "./../interfaces/shopify-api";
 import { io, Socket } from "../dependencies/socket-io-client";
 import { BaseApiService } from "./base.service";

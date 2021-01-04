@@ -7,7 +7,8 @@
  * @property targetId Passed attribute value, see `target-id` attribute
  */
 
-import { Component, EventDispatcher } from "@ribajs/core";
+import { Component } from "@ribajs/core";
+import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { TOGGLE_BUTTON } from "../../constants";
 

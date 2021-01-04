@@ -1,4 +1,5 @@
-import { Binder, EventDispatcher } from "@ribajs/core";
+import { Binder } from "@ribajs/core";
+import { EventDispatcher } from "@ribajs/events";
 import { onParentRoute } from "@ribajs/utils/src/url";
 
 export const parentRouteClassStarBinder: Binder<string> = {

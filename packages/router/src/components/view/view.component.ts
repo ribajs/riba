@@ -1,4 +1,5 @@
-import { Component, EventDispatcher, View } from "@ribajs/core";
+import { Component, View } from "@ribajs/core";
+import { EventDispatcher } from "@ribajs/events";
 import { scrollTo } from "@ribajs/utils/src/dom";
 import { State } from "@ribajs/history";
 import { Pjax, Prefetch, HideShowTransition } from "../../services";

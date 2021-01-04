@@ -1,4 +1,5 @@
-import { Binder, EventDispatcher } from "@ribajs/core";
+import { Binder } from "@ribajs/core";
+import { EventDispatcher } from "@ribajs/events";
 
 export interface Bs4ToggleClass extends Binder<boolean> {
   toggleButtonEvents: EventDispatcher | null;

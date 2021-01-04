@@ -1,4 +1,5 @@
-import { Binder, EventDispatcher, View } from "@ribajs/core";
+import { Binder, View } from "@ribajs/core";
+import { EventDispatcher } from "@ribajs/events";
 import { isBoolean, isObject } from "@ribajs/utils/src/type";
 import { scrollTo } from "@ribajs/utils/src/dom";
 import { State } from "@ribajs/history";

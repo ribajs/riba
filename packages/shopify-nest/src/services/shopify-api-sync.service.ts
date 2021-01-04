@@ -1,4 +1,5 @@
-import { HttpService, EventDispatcher } from "@ribajs/core";
+import { HttpService } from "@ribajs/core";
+import { EventDispatcher } from "@ribajs/events";
 import Debug from "debug";
 import { SyncOptions, SyncProgress } from "../interfaces/shopify-sync";
 import { io, Socket } from "@ribajs/shopify-tda";
@@ -103,7 +104,7 @@ export class ShopifyApiSyncService extends EventDispatcher {
 
   public async get() {
     return HttpService.getJSON(this.baseUrl + "/latest").then(
-      (progress: SyncProgress) => {
+      (progress: SyncProgress | null) => {
         this.debug("Last progress", progress);
         return progress;
       }
