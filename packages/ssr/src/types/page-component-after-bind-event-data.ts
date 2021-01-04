@@ -1,5 +1,7 @@
+import { PageComponent } from "../page-component";
+
 export interface PageComponentAfterBindEventData {
   tagName: string;
-  routes?: string[];
+  component: PageComponent;
   scope: any;
 }

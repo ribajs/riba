@@ -97,16 +97,16 @@
     }
   },
   "workspaces": [
-      "packages/*",
-      "demos/*",
-      "!demos/vue",
-      "infra/*",
-      "!infra/cli",
-      "!infra/doc",
-      "!infra/schematics",
-      "examples/*",
-      "!examples/electron",
-      "!examples/electron-nest"
+    "packages/*",
+    "demos/*",
+    "!demos/vue",
+    "infra/*",
+    "!infra/cli",
+    "!infra/doc",
+    "!infra/schematics",
+    "examples/*",
+    "!examples/electron",
+    "!examples/electron-nest"
   ],
   "dependenciesMeta": {
     "prettier": {

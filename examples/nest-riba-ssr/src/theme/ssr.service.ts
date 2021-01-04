@@ -9,19 +9,12 @@ import * as consolidate from 'consolidate';
 import type { Request } from 'express';
 import { promises as fs } from 'fs';
 import type {
-  TypeOfComponent,
   PageComponentAfterBindEventData,
   SharedContext,
+  RenderEngine,
 } from '@ribajs/ssr';
-import type { Riba, View } from '@ribajs/core/src';
+import type { RenderResult } from '../types';
 import { EventDispatcher } from '@ribajs/events';
-interface RenderResult {
-  html: string;
-  css?: string[];
-  component: {
-    tagName: string;
-  };
-}
 
 @Injectable()
 export class SsrService {
@@ -29,6 +22,18 @@ export class SsrService {
   theme: ThemeConfig;
   constructor(config: ConfigService) {
     this.theme = config.get<ThemeConfig>('theme');
+  }
+
+  isRenderEngineValid(engine: RenderEngine) {
+    switch (engine) {
+      case 'happy-dom':
+        return true;
+      case 'jsdom':
+        return true;
+      default:
+        return false;
+        break;
+    }
   }
 
   async getSharedContext(req: Request) {
@@ -135,6 +140,14 @@ export class SsrService {
     }
   }
 
+  /**
+   * Start ssr using jsdom
+   * @see https://github.com/jsdom/jsdom
+   *
+   * @param layout
+   * @param componentTagName
+   * @param sharedContext Shared context injected to window object of the fake browser enviromnent
+   */
   async renderWithJSDom(
     layout: string,
     componentTagName: string,
@@ -162,15 +175,7 @@ export class SsrService {
     script.runInContext(vmContext);
 
     this.log.debug('Wait for custom element...');
-    await dom.window.customElements.whenDefined('index-page');
-
-    const riba: Riba = (dom.window as any).riba;
-    const view: View = (dom.window as any).view;
-
-    const component: TypeOfComponent | null =
-      riba.components[componentTagName] ||
-      view.options.components[componentTagName] ||
-      null;
+    // await dom.window.customElements.whenDefined(componentTagName);
 
     this.log.debug('Scripts executed!');
     return new Promise<RenderResult>((resolve, reject) => {
@@ -178,16 +183,13 @@ export class SsrService {
         'PageComponent:afterBind',
         (afterBindData: PageComponentAfterBindEventData) => {
           const html = dom.serialize();
+
           const result: RenderResult = {
-            component: afterBindData,
+            ...afterBindData,
             html: html,
+            css: [],
           };
 
-          // WORKAROUND
-          result.component.tagName =
-            result.component.tagName || component.tagName || componentTagName;
-
-          this.log.debug(`result: ${JSON.stringify(result)}`);
           return resolve(result);
         },
       );
@@ -198,6 +200,14 @@ export class SsrService {
     });
   }
 
+  /**
+   * Start ssr using happy-dom
+   * @see https://github.com/capricorn86/happy-dom
+   *
+   * @param layout
+   * @param componentTagName
+   * @param sharedContext Shared context injected to window object of the fake browser enviromnent
+   */
   async renderWithHappyDom(
     layout: string,
     componentTagName: string,
@@ -234,33 +244,13 @@ export class SsrService {
         'PageComponent:afterBind',
         async (afterBindData: PageComponentAfterBindEventData) => {
           const ssrResult = await ssrResultPromise;
-          const riba: Riba = window.riba;
-          const view: View = window.view;
-
-          const component: TypeOfComponent | null =
-            riba.components[componentTagName] ||
-            view.options.components[componentTagName] ||
-            null;
 
           const result: RenderResult = {
-            component: {
-              tagName: component.tagName,
-            },
-
+            ...afterBindData,
             html: ssrResult.html,
             css: ssrResult.css,
           };
 
-          // WORKAROUND
-          result.component.tagName =
-            result.component.tagName || component.tagName || componentTagName;
-
-          result.component = {
-            ...result.component,
-            ...afterBindData,
-          };
-
-          this.log.debug(`result: ${result}`);
           return resolve(result);
         },
       );
@@ -284,11 +274,15 @@ export class SsrService {
     template?: string;
     rootTag?: string;
     componentTagName: string;
-    engine?: 'jsdom' | 'happy-dom';
+    engine?: RenderEngine;
     sharedContext: SharedContext;
   }): Promise<RenderResult> {
     if (!rootTag) {
       rootTag = this.theme.ssr.rootTag || 'ssr-root-page';
+    }
+
+    if (engine && !this.isRenderEngineValid(engine)) {
+      this.log.warn(`Ignore unknown render engine "${engine}"`);
     }
     if (!engine) {
       engine = this.theme.ssr.engine || 'happy-dom';

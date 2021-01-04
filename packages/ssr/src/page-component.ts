@@ -1,14 +1,16 @@
 import { Component } from "@ribajs/core";
 import type { SharedContext } from "@ribajs/ssr";
 import type { EventDispatcher } from "@ribajs/events";
+import type { PageComponentAfterBindEventData } from "./types/page-component-after-bind-event-data";
 export abstract class PageComponent extends Component {
   protected events: EventDispatcher;
   protected ctx: SharedContext["ctx"];
 
-  protected getEventData() {
-    const data = {
+  protected getBindEventData() {
+    const data: PageComponentAfterBindEventData = {
       tagName: this.tagName.toLocaleLowerCase(),
       scope: this.scope,
+      component: this,
     };
     return data;
   }
@@ -21,13 +23,13 @@ export abstract class PageComponent extends Component {
 
   protected async afterBind() {
     await super.afterBind();
-    const data = this.getEventData();
+    const data = this.getBindEventData();
     this.events.trigger("PageComponent:afterBind", data);
   }
 
   protected async beforeBind() {
     await super.beforeBind();
-    const data = this.getEventData();
+    const data = this.getBindEventData();
     this.events.trigger("PageComponent:beforeBind", data);
   }
 }

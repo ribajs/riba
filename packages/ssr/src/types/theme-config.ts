@@ -1,5 +1,6 @@
 import type { Route } from "./route";
 import type { SupportedTemplateEngines } from "./template-engines";
+import type { RenderEngine } from "./render-engine";
 
 export interface ThemeConfig {
   name: string;
@@ -8,7 +9,7 @@ export interface ThemeConfig {
   assetsDir: string;
   viewsDir: string;
   ssr: {
-    engine?: "jsdom" | "happy-dom";
+    engine?: RenderEngine;
     rootTag?: string;
     template?: string;
   };

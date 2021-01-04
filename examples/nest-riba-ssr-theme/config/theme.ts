@@ -7,7 +7,7 @@ export const themeConfig: ThemeConfig = {
   viewsDir: "templates",
   pageComponentsDir: "scripts/pages",
   ssr: {
-    engine: "happy-dom", // "jsdom" "happy-dom",
+    engine: "happy-dom",
     rootTag: "ssr-root-page",
     template: "page-component.pug",
   },
