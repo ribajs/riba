@@ -96,26 +96,18 @@
       "disabled: pre-commit": "yarn run lint"
     }
   },
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ],
-    "demos": [
+  "workspaces": [
+      "packages/*",
       "demos/*",
-      "!demos/vue"
-    ],
-    "infra": [
+      "!demos/vue",
       "infra/*",
       "!infra/cli",
       "!infra/doc",
-      "!infra/schematics"
-    ],
-    "examples": [
+      "!infra/schematics",
       "examples/*",
       "!examples/electron",
       "!examples/electron-nest"
-    ]
-  },
+  ],
   "dependenciesMeta": {
     "prettier": {
       "unplugged": true
