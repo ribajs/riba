@@ -57,24 +57,24 @@
     "@babel/runtime": "^7.12.5",
     "@babel/runtime-corejs3": "^7.12.5",
     "@babel/types": "^7.12.12",
-    "@nestjs/common": "^7.6.3",
-    "@nestjs/core": "^7.6.3",
-    "@nestjs/testing": "^7.6.3",
+    "@nestjs/common": "^7.6.5",
+    "@nestjs/core": "^7.6.5",
+    "@nestjs/testing": "^7.6.5",
     "@ribajs/eslint-config": "workspace:infra/eslint-config",
     "@ribajs/tsconfig": "workspace:infra/tsconfig",
     "@ribajs/types": "workspace:infra/types",
     "@types/core-js": "^2.5.4",
     "@types/jest": "^26.0.19",
-    "@typescript-eslint/eslint-plugin": "^4.11.1",
-    "@typescript-eslint/experimental-utils": "^4.11.1",
-    "@typescript-eslint/parser": "^4.11.1",
+    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/experimental-utils": "^4.12.0",
+    "@typescript-eslint/parser": "^4.12.0",
     "@yarnpkg/pnpify": "^2.4.0",
     "babel-jest": "^26.6.3",
     "babel-loader": "^8.2.2",
     "babel-plugin-array-includes": "^2.0.3",
-    "core-js": "^3.8.1",
+    "core-js": "^3.8.2",
     "dart-sass": "^1.25.0",
-    "eslint": "^7.16.0",
+    "eslint": "^7.17.0",
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-prettier": "^3.3.0",
     "husky": "^4.3.6",
@@ -96,18 +96,26 @@
       "disabled: pre-commit": "yarn run lint"
     }
   },
-  "workspaces": [
-    "packages/*",
-    "demos/*",
-    "!demos/vue",
-    "infra/*",
-    "!infra/cli",
-    "!infra/doc",
-    "!infra/schematics",
-    "examples/*",
-    "!examples/electron",
-    "!examples/electron-nest"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "demos": [
+      "demos/*",
+      "!demos/vue"
+    ],
+    "infra": [
+      "infra/*",
+      "!infra/cli",
+      "!infra/doc",
+      "!infra/schematics"
+    ],
+    "examples": [
+      "examples/*",
+      "!examples/electron",
+      "!examples/electron-nest"
+    ]
+  },
   "dependenciesMeta": {
     "prettier": {
       "unplugged": true

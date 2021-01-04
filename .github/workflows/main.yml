@@ -9,11 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+         node-version: '14'
       - run: |
           yarn install
-      # TODO fix ENOMEM
-      # - run: |
-      #     yarn run lint
+      - run: |
+          yarn run lint
       - run: |
           yarn run test
       - run: |
