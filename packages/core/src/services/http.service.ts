@@ -178,34 +178,28 @@ export class HttpService {
     //   headers,
     //   this._requestHeadersEachRequest
     // );
-    return fetch(url, {
+    const response = await fetch(url, {
       credentials: "same-origin",
       cache,
       method,
       body,
       headers,
-    })
-      .then((response) => {
-        if (response.status >= 400) {
-          throw response;
-        }
-        if (
-          typeof dataType === "string" &&
-          (dataType === "json" || dataType.includes("json")) &&
-          typeof response.json === "function"
-        ) {
-          try {
-            return response.json();
-          } catch (error) {
-            return response.text();
-          }
-        }
-        return response.text();
-      })
-      .catch((error) => {
-        // console.error(error);
-        throw error;
-      });
+    });
+    if (response.status >= 400) {
+      throw response;
+    }
+    const text = await response.text();
+    if (
+      typeof dataType === "string" &&
+      dataType.includes("json")
+    ) {
+      try {
+        return JSON.parse(text);
+      } catch (error) {
+        return text as any;
+      }
+    }
+    return text as any;
   }
 
   /**
