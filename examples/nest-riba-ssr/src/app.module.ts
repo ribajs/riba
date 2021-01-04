@@ -1,15 +1,15 @@
 import { Module } from '@nestjs/common';
 import { ConfigService, ConfigModule } from '@nestjs/config';
 
-import { appConfig, themeConfig } from './config/config';
-import { ThemeModule } from './theme/theme.module';
+import { appConfig, theme } from './config/config';
+import { ThemeModule } from '@ribajs/nest-ssr';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [appConfig, themeConfig],
+      load: [appConfig],
     }),
-    ThemeModule,
+    ThemeModule.forRoot(theme),
   ],
   controllers: [],
   providers: [ConfigService],

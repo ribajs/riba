@@ -44,14 +44,6 @@ async function bootstrap() {
    */
   app.use(session);
 
-  /**
-   * Set template engine
-   */
-  app.setViewEngine(config.theme.viewEngine);
-
-  app.useStaticAssets(config.theme.assetsDir);
-  app.setBaseViewsDir(config.theme.viewsDir);
-
   await app.listen(config.app.port);
 
   console.debug(`Start app on localhost:${config.app.port}`);

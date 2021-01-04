@@ -13,7 +13,7 @@ import type {
   SharedContext,
   RenderEngine,
 } from '@ribajs/ssr';
-import type { RenderResult } from '../types';
+import type { RenderResult } from './types';
 import { EventDispatcher } from '@ribajs/events';
 
 @Injectable()

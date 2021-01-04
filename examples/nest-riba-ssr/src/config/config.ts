@@ -1,48 +1,14 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-import { transpileModule, CompilerOptions, ModuleKind } from 'typescript';
-import { Script } from 'vm';
-import * as YAML from 'yaml';
-import fs = require('fs');
 import * as dotenv from 'dotenv';
 dotenv.config();
 import { resolve } from 'path';
 import findRoot = require('find-root');
 import { registerAs } from '@nestjs/config';
-import { ThemeConfig } from '@ribajs/ssr';
-
-// TODO move this to theme module
-const parseConfigFile = <T>(configPath: string) => {
-  // Transpile typescript config file
-  if (configPath.endsWith('.ts')) {
-    const tSource = fs.readFileSync(configPath, 'utf8');
-    const compilerOptions: CompilerOptions = {
-      module: ModuleKind.CommonJS,
-    };
-    const context = {
-      exports: {
-        themeConfig: {},
-      },
-      require,
-    };
-    const jSource = transpileModule(tSource, { compilerOptions }).outputText;
-    const script = new Script(jSource);
-    script.runInNewContext(context);
-    return context.exports.themeConfig as T;
-  }
-  // Parse yaml config file
-  if (configPath.endsWith('.yaml')) {
-    const result: T = YAML.parse(fs.readFileSync(configPath, 'utf8'));
-    return result;
-  }
-};
+import { NestThemeConfig } from '@ribajs/nest-ssr';
 
 const THEME_ACTIVE = process.env.THEME_ACTIVE || 'nest-riba-ssr-theme';
 const ROOT = findRoot(process.cwd());
 const PACKAGES = resolve(ROOT, '..');
 const THEME_DIR = resolve(PACKAGES, THEME_ACTIVE);
-const THEME = parseConfigFile<ThemeConfig>(
-  resolve(THEME_DIR, 'config', 'theme.ts'),
-);
 
 export const app = {
   root: ROOT,
@@ -51,12 +17,9 @@ export const app = {
     process.env.NODE_ENV === 'development' ? 'development' : 'production',
 };
 
-export const theme: ThemeConfig = {
-  ...THEME,
+export const theme: NestThemeConfig = {
   active: THEME_ACTIVE,
-  assetsDir: resolve(THEME_DIR, THEME.assetsDir),
-  viewsDir: resolve(THEME_DIR, THEME.viewsDir),
-  pageComponentsDir: resolve(THEME_DIR, THEME.pageComponentsDir),
+  themeDir: THEME_DIR,
 };
 
 /**
@@ -82,12 +45,4 @@ export const session = {
 
 export const appConfig = registerAs('app', () => ({
   ...app,
-}));
-
-export const themeConfig = registerAs('theme', () => ({
-  ...theme,
-}));
-
-export const sessionConfig = registerAs('session', () => ({
-  ...theme,
 }));
