@@ -30,14 +30,15 @@
     "Browser"
   ],
   "scripts": {
+    "workspace-foreach": "yarn node workflow/workspace-foreach.js",
     "reinstall": "YARN_CHECKSUM_BEHAVIOR=update yarn install",
     "test": "jest --config=jest.config.js",
     "test:watch": "jest --config=jest.config.js --watch",
     "test:clear": "jest --config=jest.config.js --clearCache",
     "test:migrate": "ts-jest config:migrate jest.config.js",
-    "lint": "yarn node workspace-foreach.js lint",
-    "build": "yarn node workspace-foreach.js build",
-    "clean": "yarn node workspace-foreach.js clean",
+    "lint": "yarn workspace-foreach lint",
+    "build": "yarn workspace-foreach build",
+    "clean": "yarn workspace-foreach clean",
     "bump:prerelease": "yarn version prerelease && yarn workspaces foreach version prerelease",
     "bump:patch": "yarn version patch && yarn workspaces foreach version patch",
     "bump:minor": "yarn version minor && yarn workspaces foreach version minor",
