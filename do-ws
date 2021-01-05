@@ -1,0 +1,6 @@
+#!/bin/bash
+
+pushd "$1" >/dev/null 2>&1
+yarn run "$2"
+popd >/dev/null 2>&1
+
