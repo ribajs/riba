@@ -16,6 +16,8 @@ jobs:
           yarn install
       - run: |
           yarn run lint
+        env:
+          NODE_OPTIONS: '--max-old-space-size=4096'
       - run: |
           yarn run test
       - run: |
