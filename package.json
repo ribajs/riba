@@ -35,7 +35,7 @@
     "test:watch": "jest --config=jest.config.js --watch",
     "test:clear": "jest --config=jest.config.js --clearCache",
     "test:migrate": "ts-jest config:migrate jest.config.js",
-    "lint": "yarn workspace @ribajs/examples-nest-riba-ssr-theme lint",
+    "lint": "yarn workspaces foreach -v run lint",
     "build": "yarn workspaces foreach run build",
     "clean": "yarn workspaces foreach run clean",
     "bump:prerelease": "yarn version prerelease && yarn workspaces foreach version prerelease",
