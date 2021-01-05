@@ -141,6 +141,7 @@
     "@ribajs/nest-ssr": "portal:backend/nest-ssr"
   },
   "dependencies": {
+    "glob": "^7.1.6",
     "pug": "^3.0.0"
   }
 }
