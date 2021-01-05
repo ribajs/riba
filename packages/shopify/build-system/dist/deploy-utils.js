@@ -95,7 +95,7 @@ gulp_1.default.task("validate:id", () => __awaiter(void 0, void 0, void 0, funct
         messages_1.default.configError();
         return process.exit(2);
     }
-    const tkConfig = yaml.safeLoad(file);
+    const tkConfig = yaml.load(file);
     let envObj;
     const environments = config_1.config.environment.split(/\s*,\s*|\s+/);
     const promises = [];
@@ -139,7 +139,7 @@ gulp_1.default.task("deploy:replace", () => __awaiter(void 0, void 0, void 0, fu
  */
 gulp_1.default.task("open:admin", () => __awaiter(void 0, void 0, void 0, function* () {
     const file = fs_1.default.readFileSync(config_1.config.tkConfig, "utf8");
-    const tkConfig = yaml.safeLoad(file);
+    const tkConfig = yaml.load(file);
     let envObj;
     const environments = config_1.config.environment.split(/\s*,\s*|\s+/);
     const promises = [];

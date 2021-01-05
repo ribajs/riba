@@ -76,7 +76,7 @@ gulp.task("validate:id", async () => {
     return process.exit(2);
   }
 
-  const tkConfig = yaml.safeLoad(file) as ThemeConfigByEnv;
+  const tkConfig = yaml.load(file) as ThemeConfigByEnv;
   let envObj: ThemeConfig;
 
   const environments = config.environment.split(/\s*,\s*|\s+/);
@@ -130,7 +130,7 @@ gulp.task("deploy:replace", async () => {
  */
 gulp.task("open:admin", async () => {
   const file = fs.readFileSync(config.tkConfig, "utf8");
-  const tkConfig = yaml.safeLoad(file) as ThemeConfigByEnv;
+  const tkConfig = yaml.load(file) as ThemeConfigByEnv;
   let envObj: ThemeConfig;
 
   const environments = config.environment.split(/\s*,\s*|\s+/);
