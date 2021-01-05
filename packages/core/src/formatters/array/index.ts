@@ -9,3 +9,4 @@ export { randomFormatter } from "./random.formatter";
 export { rangeFormatter } from "./range.formatter";
 export { setFormatter } from "./set.formatter";
 export { sizeFormatter } from "./size.formatter";
+export { overlapsFormatter } from "./overlaps.formatter";
