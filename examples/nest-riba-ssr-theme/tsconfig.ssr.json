@@ -3,6 +3,7 @@
     "./scripts/ssr.ts"
   ],
   "compilerOptions": {
+    "diagnostics": true,
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,

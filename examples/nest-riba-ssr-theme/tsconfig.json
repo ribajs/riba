@@ -4,6 +4,7 @@
     "./scripts/csr.ts"
   ],
   "compilerOptions": {
+    "diagnostics": true,
     "outDir": "assets",
     "typeRoots": ["node_modules/@types", "types"],
     "types": ["node"],
