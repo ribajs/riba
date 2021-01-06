@@ -12,6 +12,17 @@ console.log('ignore', ignore);
   for (const [i, dir] of dirs.entries()) {
     results.push(await new Promise((resolve) => {
       console.log(dir);
+      let pkg;
+      try {
+        pkg = require(`../${dir}/package.json`);
+      } catch (error) {
+        console.warn(`Package ${dir} has no package.json. Skipping...`);
+        return resolve({dir, code: 0});
+      }
+      if (!pkg.scripts || !pkg.scripts[process.argv[2]]) {
+        console.warn(`Package ${dir}: command ${process.argv[2]} not found. Skipping...`);
+        return resolve({dir, code: 0});
+      }
       const cmd = `workflow/do-ws`;
       const args = [dir, process.argv[2]];
       console.log(`foreach (${i+1}/${dirs.length}):`, ...args);
@@ -30,7 +41,7 @@ console.log('ignore', ignore);
   }
   const errors = results.filter(({code}) => code !== 0);
   if (errors.length > 0) {
-    for (e of errors) {
+    for (error of errors) {
       console.error(`${error.dir} ${error.cmd} failed with code`, code);
     }
     process.exit(1);
