@@ -12,7 +12,12 @@ import { SsrService } from './ssr.service';
 import { SsrMiddleware } from './ssr.middleware';
 import type { ThemeConfig } from '@ribajs/ssr';
 import type { NestThemeConfig, FullThemeConfig } from './types';
-import { loadConfig } from './helper/config';
+import {
+  loadConfig,
+  validateThemeConfig,
+  validateNestThemeConfig,
+  validateFullThemeConfig,
+} from './helper/config';
 import { resolve } from 'path';
 
 @Module({
@@ -44,10 +49,14 @@ export class ThemeModule {
   }
 
   static forRoot(nestThemeConfig: NestThemeConfig): DynamicModule {
-    // TODO also check yaml
-    const activeThemeConfig = loadConfig<ThemeConfig>(
-      resolve(nestThemeConfig.themeDir, 'config', 'theme.ts'),
-    );
+    const basePath = resolve(nestThemeConfig.themeDir, 'config');
+    const activeThemeConfig = loadConfig<ThemeConfig>([
+      resolve(basePath, 'theme.ts'),
+      resolve(basePath, 'theme.yaml'),
+    ]);
+
+    validateThemeConfig(activeThemeConfig);
+    validateNestThemeConfig(nestThemeConfig);
 
     const fullThemeConfig: FullThemeConfig = {
       ...activeThemeConfig,
@@ -56,9 +65,11 @@ export class ThemeModule {
       viewsDir: resolve(nestThemeConfig.themeDir, activeThemeConfig.viewsDir),
       pageComponentsDir: resolve(
         nestThemeConfig.themeDir,
-        activeThemeConfig.pageComponentsDir,
+        activeThemeConfig.pageComponentsDir || '',
       ),
     };
+
+    validateFullThemeConfig(fullThemeConfig);
 
     return {
       imports: [
@@ -80,10 +91,12 @@ export class ThemeModule {
   configure(consumer: MiddlewareConsumer) {
     // Dynamic routes
     const theme = this.config.get<ThemeConfig>('theme');
-    for (const route of theme.routes) {
-      consumer
-        .apply(SsrMiddleware)
-        .forRoutes({ path: route.path[0], method: RequestMethod.GET });
+    if (theme.routes) {
+      for (const route of theme.routes) {
+        consumer
+          .apply(SsrMiddleware)
+          .forRoutes({ path: route.path[0], method: RequestMethod.GET });
+      }
     }
   }
 }

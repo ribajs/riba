@@ -31,8 +31,15 @@ let ThemeModule = ThemeModule_1 = class ThemeModule {
         express.setBaseViewsDir(fullThemeConfig.viewsDir);
     }
     static forRoot(nestThemeConfig) {
-        const activeThemeConfig = config_2.loadConfig(path_1.resolve(nestThemeConfig.themeDir, 'config', 'theme.ts'));
-        const fullThemeConfig = Object.assign(Object.assign(Object.assign({}, activeThemeConfig), nestThemeConfig), { assetsDir: path_1.resolve(nestThemeConfig.themeDir, activeThemeConfig.assetsDir), viewsDir: path_1.resolve(nestThemeConfig.themeDir, activeThemeConfig.viewsDir), pageComponentsDir: path_1.resolve(nestThemeConfig.themeDir, activeThemeConfig.pageComponentsDir) });
+        const basePath = path_1.resolve(nestThemeConfig.themeDir, 'config');
+        const activeThemeConfig = config_2.loadConfig([
+            path_1.resolve(basePath, 'theme.ts'),
+            path_1.resolve(basePath, 'theme.yaml'),
+        ]);
+        config_2.validateThemeConfig(activeThemeConfig);
+        config_2.validateNestThemeConfig(nestThemeConfig);
+        const fullThemeConfig = Object.assign(Object.assign(Object.assign({}, activeThemeConfig), nestThemeConfig), { assetsDir: path_1.resolve(nestThemeConfig.themeDir, activeThemeConfig.assetsDir), viewsDir: path_1.resolve(nestThemeConfig.themeDir, activeThemeConfig.viewsDir), pageComponentsDir: path_1.resolve(nestThemeConfig.themeDir, activeThemeConfig.pageComponentsDir || '') });
+        config_2.validateFullThemeConfig(fullThemeConfig);
         return {
             imports: [
                 config_1.ConfigModule.forRoot({
@@ -47,10 +54,12 @@ let ThemeModule = ThemeModule_1 = class ThemeModule {
     }
     configure(consumer) {
         const theme = this.config.get('theme');
-        for (const route of theme.routes) {
-            consumer
-                .apply(ssr_middleware_1.SsrMiddleware)
-                .forRoutes({ path: route.path[0], method: common_1.RequestMethod.GET });
+        if (theme.routes) {
+            for (const route of theme.routes) {
+                consumer
+                    .apply(ssr_middleware_1.SsrMiddleware)
+                    .forRoutes({ path: route.path[0], method: common_1.RequestMethod.GET });
+            }
         }
     }
 };

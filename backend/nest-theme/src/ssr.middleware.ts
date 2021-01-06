@@ -1,15 +1,16 @@
 import { Injectable, NestMiddleware, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import type { ThemeConfig, RenderEngine } from '@ribajs/ssr';
+import type { NestThemeConfig } from '@ribajs/nest-theme';
+import type { RenderEngine } from '@ribajs/ssr';
 import { SsrService } from './ssr.service';
 import type { Request, Response, NextFunction } from 'express';
 
 @Injectable()
 export class SsrMiddleware implements NestMiddleware {
-  theme: ThemeConfig;
+  theme: NestThemeConfig;
   log = new Logger(this.constructor.name);
   constructor(protected config: ConfigService, protected ssr: SsrService) {
-    this.theme = this.config.get<ThemeConfig>('theme');
+    this.theme = this.config.get<NestThemeConfig>('theme');
   }
   async use(req: Request, res: Response, next: NextFunction) {
     this.log.debug('SsrMiddleware req.route', req.route.path);
