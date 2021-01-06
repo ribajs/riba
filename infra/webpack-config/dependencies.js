@@ -7,6 +7,10 @@ module.exports.getDependencies = (config = {}) => {
   // Modules you can overwrite
   config.DefinePlugin = config.DefinePlugin || webpack.DefinePlugin;
   config.TerserPlugin = config.TerserPlugin || require("terser-webpack-plugin");
+
+  // https://github.com/nuxt-contrib/webpackbar
+  config.ProgressBarPlugin = config.ProgressBarPlugin || require('webpackbar');
+
   config.ForkTsCheckerPlugin =
     config.ForkTsCheckerPlugin || require("fork-ts-checker-webpack-plugin");
   config.CssExtractPlugin =
@@ -30,11 +34,10 @@ module.exports.getDependencies = (config = {}) => {
   config.styles.SassImplementation =
     config.styles.SassImplementation || require("sass");
 
+  // https://github.com/webpack-contrib/copy-webpack-plugin
   if (config.copyAssets && config.copyAssets.enable === true) {
-    // https://github.com/webpack-contrib/copy-webpack-plugin
     config.CopyPlugin = config.CopyPlugin || require("copy-webpack-plugin");
   }
-
   if (config.detectDuplicates === true) {
     config.DuplicatesPlugin =
       config.DuplicatesPlugin || require("inspectpack/plugin").DuplicatesPlugin;

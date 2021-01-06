@@ -138,6 +138,11 @@ module.exports.getConfig = (config = {}, env = {}) => {
     config.plugins.push(new config.DefinePlugin(config.define));
   }
 
+  // ProgressBar plugin
+  if (config.ProgressBarPlugin) {
+    config.plugins.push(new config.ProgressBarPlugin());
+  }
+
   if (config.nodeExternalsPlugin) {
     config.externals = config.externals || [
       // in order to ignore all modules in node_modules folder

@@ -38,7 +38,8 @@
     "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^5.0.3",
     "webpack-dev-server": "^3.11.1",
-    "webpack-node-externals": "^2.5.2"
+    "webpack-node-externals": "^2.5.2",
+    "webpackbar": "^5.0.0-3"
   },
   "peerDependencies": {
     "assert": "^2.0.0",
