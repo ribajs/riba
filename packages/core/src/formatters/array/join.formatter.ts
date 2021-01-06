@@ -1,6 +1,5 @@
 /**
- * Returns true if an object, array or string contains an object, property or substring.
- * @see https://gist.github.com/der-On/cdafe908847e2b882691
+ * Joins value with a given delimeter
  */
 export const joinFormatter = {
   name: "join",
