@@ -1,5 +1,5 @@
 /**
- * Returns true if an object, array or string contains an object, property or substring.
+ * Returns true if an array overlaps with another array.
  * @see https://gist.github.com/der-On/cdafe908847e2b882691
  */
 export const overlapsFormatter = {
