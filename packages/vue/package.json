@@ -8,7 +8,7 @@
   "source": "src/index.ts",
   "dependencies": {
     "@ribajs/core": "workspace:packages/core",
-    "vue": "^3.0.5"
+    "vue": "^2.6.12"
   },
   "devDependencies": {
     "@babel/runtime": "^7.12.5"
