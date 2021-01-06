@@ -2097,16 +2097,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/plugin-rest-endpoint-methods@npm:4.3.1":
-  version: 4.3.1
-  resolution: "@octokit/plugin-rest-endpoint-methods@npm:4.3.1"
-  dependencies:
-    "@octokit/types": ^6.0.3
-    deprecation: ^2.3.1
-  checksum: 0745f132f3ce346c955bb5f8dfcb80fda32e4537d26d4efaa72c4b6dcfab4dca37b13cb9c4713a6b18203b69ded43ac4bfc294aa6564591c5e2be1bf5c5faca0
-  languageName: node
-  linkType: hard
-
 "@octokit/plugin-rest-endpoint-methods@npm:4.4.1, @octokit/plugin-rest-endpoint-methods@npm:^4.4.1":
   version: 4.4.1
   resolution: "@octokit/plugin-rest-endpoint-methods@npm:4.4.1"
@@ -2116,16 +2106,6 @@ __metadata:
   peerDependencies:
     "@octokit/core": ">=3"
   checksum: a19bca83c674aa217cd57063b9b39f140dcc0c55698bf7bae33618098909d32a6ea7cb20729436467e8d0b6b80cc5a98930f984366bd9b05ac1c0eb53b2e13a8
-  languageName: node
-  linkType: hard
-
-"@octokit/plugin-rest-endpoint-methods@npm:^4.4.0":
-  version: 4.4.0
-  resolution: "@octokit/plugin-rest-endpoint-methods@npm:4.4.0"
-  dependencies:
-    "@octokit/types": ^6.1.0
-    deprecation: ^2.3.1
-  checksum: 2b13acc93be805b412ee088a8fcb5cf08cff53c8b972bd6aa896f85aacfce47bda25313e170c0bade40fc74202f06c58c0ff53f14178c3bd5ba2b87b63a207b7
   languageName: node
   linkType: hard
 
@@ -2169,18 +2149,6 @@ __metadata:
     once: ^1.4.0
     universal-user-agent: ^6.0.0
   checksum: 7a98c8c7f91671f25f9211e071e881d31e8a4e7f1078954b71374b1b5923001eb979f4c511bc25dde1632143c09586c85de67ba1ab1268ee663db5dfa4d48ef5
-  languageName: node
-  linkType: hard
-
-"@octokit/rest@npm:^18.0.11":
-  version: 18.0.11
-  resolution: "@octokit/rest@npm:18.0.11"
-  dependencies:
-    "@octokit/core": ^3.2.3
-    "@octokit/plugin-paginate-rest": ^2.6.2
-    "@octokit/plugin-request-log": ^1.0.2
-    "@octokit/plugin-rest-endpoint-methods": 4.3.1
-  checksum: 4643e1a72682e66db0ab1b9fa77d93db31245cb81da90378fa3ef0ba1df91a82bf5fffd6fbc000823a8aee652707e62cc6b83b4349670c2b8dbb3637fcbaace8
   languageName: node
   linkType: hard
 
@@ -2790,7 +2758,7 @@ __metadata:
     "@ribajs/types": "workspace:infra/types"
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
-    "@ribajs/webpack-serve": ^1.9.0-beta.5
+    "@ribajs/webpack-serve": ^1.9.0
     "@types/jest": ^26.0.16
     "@types/node": ^14.14.10
     "@types/webpack-env": ^1.16.0
@@ -4464,9 +4432,9 @@ __metadata:
     "@babel/runtime": ^7.12.5
     "@babel/runtime-corejs3": ^7.12.5
     "@octokit/core": ^3.2.4
-    "@octokit/plugin-rest-endpoint-methods": ^4.4.0
+    "@octokit/plugin-rest-endpoint-methods": ^4.4.1
     "@octokit/request": ^5.4.12
-    "@octokit/rest": ^18.0.11
+    "@octokit/rest": ^18.0.12
     "@ribajs/cache": "workspace:packages/cache"
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
@@ -4663,7 +4631,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/tsconfig@portal:infra/tsconfig::locator=ribajs%40workspace%3A."
   dependencies:
-    "@ribajs/types": ^1.9.0-beta.4
+    "@ribajs/types": ^1.9.0
   languageName: node
   linkType: soft
 
@@ -4671,7 +4639,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/tsconfig@workspace:infra/tsconfig"
   dependencies:
-    "@ribajs/types": ^1.9.0-beta.4
+    "@ribajs/types": ^1.9.0
   languageName: unknown
   linkType: soft
 
@@ -4737,7 +4705,7 @@ __metadata:
     copy-webpack-plugin: ^6.3.2
     css-loader: ^5.0.1
     file-loader: ^6.2.0
-    fork-ts-checker-webpack-plugin: ^6.0.4
+    fork-ts-checker-webpack-plugin: ^6.0.5
     glob: ^7.1.6
     html-loader: ^1.3.2
     html-webpack-plugin: ^4.5.0
@@ -4745,7 +4713,7 @@ __metadata:
     mini-css-extract-plugin: ^1.3.1
     node-sass: ^5.0.0
     pkg-dir: ^5.0.0
-    postcss: ^8.1.13
+    postcss: ^8.1.14
     postcss-loader: ^4.1.0
     pug: ^3.0.0
     pug-loader: ^2.4.0
@@ -4793,11 +4761,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/webpack-serve@^1.9.0-beta.5, @ribajs/webpack-serve@workspace:infra/webpack-serve":
+"@ribajs/webpack-serve@^1.9.0, @ribajs/webpack-serve@workspace:infra/webpack-serve":
   version: 0.0.0-use.local
   resolution: "@ribajs/webpack-serve@workspace:infra/webpack-serve"
   dependencies:
-    "@ribajs/webpack-config": ^1.9.0-beta.5
+    "@ribajs/webpack-config": ^1.9.0
     get-port: ^5.1.1
     pkg-dir: ^5.0.0
     webpack-dev-server: ^3.11.0
@@ -10646,26 +10614,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fork-ts-checker-webpack-plugin@npm:^6.0.4":
-  version: 6.0.4
-  resolution: "fork-ts-checker-webpack-plugin@npm:6.0.4"
-  dependencies:
-    "@babel/code-frame": ^7.8.3
-    "@types/json-schema": ^7.0.5
-    chalk: ^4.1.0
-    chokidar: ^3.4.2
-    cosmiconfig: ^6.0.0
-    deepmerge: ^4.2.2
-    fs-extra: ^9.0.0
-    memfs: ^3.1.2
-    minimatch: ^3.0.4
-    schema-utils: 2.7.0
-    semver: ^7.3.2
-    tapable: ^1.0.0
-  checksum: fa6a5ea7243695b88f5788054b30f4ae84bf7966902794969ca089d72ea5e00c93f0991de08719c8ae1ec57d47b880735bc5359369344c469c31d544ad670f81
-  languageName: node
-  linkType: hard
-
 "fork-ts-checker-webpack-plugin@npm:^6.0.5":
   version: 6.0.5
   resolution: "fork-ts-checker-webpack-plugin@npm:6.0.5"
@@ -16124,18 +16072,6 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.1.13":
-  version: 8.1.13
-  resolution: "postcss@npm:8.1.13"
-  dependencies:
-    colorette: ^1.2.1
-    nanoid: ^3.1.20
-    source-map: ^0.6.1
-    vfile-location: ^3.2.0
-  checksum: 6c51aa29034ade2024cc4c60ab95d03cfaad77b468c9f6a9cf18920e9c3ce92b46b77579ae95f88cecc2c775772d4743ccebda2b1bd129c8a4fe9c71eb7f76df
-  languageName: node
-  linkType: hard
-
 "postcss@npm:^8.1.14":
   version: 8.1.14
   resolution: "postcss@npm:8.1.14"
@@ -19667,13 +19603,6 @@ typescript@^4.1.2:
     core-util-is: 1.0.2
     extsprintf: ^1.2.0
   checksum: 38ea80312cb42e5e8b4ac562d108d675b2354a79f8f125d363671f692657461b9181fd26f4fc9acdca433f8afee099cb78058806e1303e6b15b8fb022affba94
-  languageName: node
-  linkType: hard
-
-"vfile-location@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "vfile-location@npm:3.2.0"
-  checksum: 4102f03560826baf456ad16ad3a83e745d62380e2f90c5ae9452a4cc093102f9355332f5f18699d660ed0cfecd526416032d6d6ea06e53c45823e23c80691ac0
   languageName: node
   linkType: hard
 

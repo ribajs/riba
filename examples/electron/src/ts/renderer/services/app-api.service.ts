@@ -8,7 +8,7 @@ export class AppApiService {
   }
 
   async request(url: string, body?: any) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       this.onceResponse(url, (response) => {
         // TODO implement timeout?
         resolve(response);
@@ -33,11 +33,7 @@ export class AppApiService {
     return this.event.off("response-" + url, cb, thisContext);
   }
 
-  protected onceResponse(
-    url: string,
-    cb: (...args: any) => void,
-    thisContext: any = this
-  ) {
+  protected onceResponse(url: string, cb: (...args: any) => void) {
     const _cb = (data: any) => {
       cb(data);
       return this.offResponse(url, _cb);
