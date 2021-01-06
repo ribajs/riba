@@ -42,7 +42,7 @@ console.log('ignore', ignore);
   const errors = results.filter(({code}) => code !== 0);
   if (errors.length > 0) {
     for (error of errors) {
-      console.error(`${error.dir} ${error.cmd} failed with code`, code);
+      console.error(`${error.dir} ${error.cmd} failed with code`, error.code);
     }
     process.exit(1);
   }
