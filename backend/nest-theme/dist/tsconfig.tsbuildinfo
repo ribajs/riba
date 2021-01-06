@@ -376,7 +376,7 @@
         "affectsGlobalScope": false
       },
       "../../../packages/core/src/services/http.service.ts": {
-        "version": "b41c30c90bd15d93727936024e3e731d34851e46e3666e2df7710b2134d29da0",
+        "version": "18c3b91bbb963365b958cc4de6231c9e57b02dc4139c6fd9e145521bdfed65b6",
         "affectsGlobalScope": false
       },
       "../../../packages/core/src/services/utils.ts": {

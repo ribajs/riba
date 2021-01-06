@@ -4632,7 +4632,7 @@ __metadata:
     eslint-visitor-keys: ^2.0.0
     prettier: 2.2.1
     regexpp: ^3.1.0
-    tsutils: ^3.18.0
+    tsutils: ^3.19.0
     typescript: ^4.1.3
     webpack: ^5.11.1
     webpack-cli: ^4.3.1
@@ -4725,7 +4725,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@types/debug": ^4.1.5
     "@types/node": ^14.14.20
-    debug: ^4.3.1
+    debug: ^4.3.2
     monaco-editor: ^0.21.2
     typescript: ^4.1.3
   languageName: unknown
@@ -9788,7 +9788,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:^4.0.1, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1":
+"debug@npm:^4.0.1, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.2":
   version: 4.3.2
   resolution: "debug@npm:4.3.2"
   dependencies:
@@ -20775,6 +20775,17 @@ fsevents@~2.3.1:
   peerDependencies:
     typescript: ">=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta"
   checksum: 5494dab884058e0b6c20d740c752eb99b54db85430ffa02e77114be1d603cbb455de19802c1e0a1b147ae8c398275fbf184578728588eb2d45b8f1e68c89d24c
+  languageName: node
+  linkType: hard
+
+"tsutils@npm:^3.19.0":
+  version: 3.19.0
+  resolution: "tsutils@npm:3.19.0"
+  dependencies:
+    tslib: ^1.8.1
+  peerDependencies:
+    typescript: ">=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta"
+  checksum: 39f744520462a870e66b44442e26a144c1dc8a640c938a7da3260a531fa15285612bca4243538eb470d83f7200a328fb93f6ef4ca880c21a40365f2299076f90
   languageName: node
   linkType: hard
 
