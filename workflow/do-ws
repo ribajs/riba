@@ -2,5 +2,6 @@
 
 pushd "$1" >/dev/null 2>&1
 yarn run "$2"
+status=$?
 popd >/dev/null 2>&1
-
+exit $status
