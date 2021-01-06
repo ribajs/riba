@@ -33,7 +33,7 @@ gulp_1.default.task("generate:config:live", () => __awaiter(void 0, void 0, void
     gulp_util_1.default.log(`Load ${baseConfig} as base config file for store and password...`);
     const liveConfigs = yield theme_2.generateEnvLiveThemeConfig(baseConfig);
     const configPath = path_1.default.resolve(config_1.config.themeRoot, targetConfig);
-    const yamlConfig = js_yaml_1.default.safeDump(liveConfigs);
+    const yamlConfig = js_yaml_1.default.dump(liveConfigs);
     gulp_util_1.default.log(`Write "${targetConfig}" to ${configPath}...`);
     return fs_1.promises.writeFile(configPath, yamlConfig);
 }));
@@ -43,7 +43,7 @@ gulp_1.default.task("generate:config:deploy", () => __awaiter(void 0, void 0, vo
     gulp_util_1.default.log(`Load ${baseConfig} as base config file for store and password...`);
     const liveConfigs = yield theme_2.generateEnvYoungestThemeConfig(baseConfig);
     const configPath = path_1.default.resolve(config_1.config.themeRoot, targetConfig);
-    const yamlConfig = js_yaml_1.default.safeDump(liveConfigs);
+    const yamlConfig = js_yaml_1.default.dump(liveConfigs);
     gulp_util_1.default.log(`Overwrite "${targetConfig}" to ${configPath}...`);
     return fs_1.promises.writeFile(configPath, yamlConfig);
 }));

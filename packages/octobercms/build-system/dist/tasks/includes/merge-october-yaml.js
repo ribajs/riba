@@ -31,18 +31,20 @@ function mergeOctoberFormFields(path) {
         const file = originalFile.clone({ contents: false });
         file.path = "theme.yaml";
         if (file.isBuffer()) {
-            const input = yaml.load(file.contents.toString());
-            const toMerge = yaml.load(fs.readFileSync(path).toString());
-            if (input.form.tabs.fields) {
+            const input = yaml.load(file.contents.toString()); // TODO
+            const toMerge = yaml.load(fs.readFileSync(path).toString()); // TODO
+            if (input?.form?.tabs) {
+                if (input.form.tabs.fields) {
+                    input.form.tabs.fields = { ...input.form.tabs.fields, ...toMerge };
+                }
+                else {
+                    input.form.tabs.fields = { ...toMerge };
+                }
                 input.form.tabs.fields = { ...input.form.tabs.fields, ...toMerge };
             }
-            else {
-                input.form.tabs.fields = { ...toMerge };
-            }
-            input.form.tabs.fields = { ...input.form.tabs.fields, ...toMerge };
             console.log(toMerge);
             //dump
-            file.contents = Buffer.from(yaml.safeDump(input, {
+            file.contents = Buffer.from(yaml.dump(input, {
                 styles: {
                     "!!null": "canonical",
                 },

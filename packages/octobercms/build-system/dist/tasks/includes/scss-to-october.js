@@ -90,7 +90,7 @@ function scssToOctoberYml() {
                 file.contents = Buffer.from("");
             }
             else {
-                file.contents = Buffer.from(yaml.safeDump(variables, {
+                file.contents = Buffer.from(yaml.dump(variables, {
                     styles: {
                         "!!null": "canonical",
                     },

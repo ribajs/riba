@@ -189,10 +189,7 @@ export class HttpService {
       throw response;
     }
     const text = await response.text();
-    if (
-      typeof dataType === "string" &&
-      dataType.includes("json")
-    ) {
+    if (typeof dataType === "string" && dataType.includes("json")) {
       try {
         return JSON.parse(text);
       } catch (error) {

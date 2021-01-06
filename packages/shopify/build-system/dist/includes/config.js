@@ -187,12 +187,12 @@ const getYamlConfig = (configName) => {
     }
     try {
         const data = fs_1.default.readFileSync(filePath, "utf8");
-        const shopifyConfigs = js_yaml_1.default.safeLoad(data);
+        const shopifyConfigs = js_yaml_1.default.load(data);
         return shopifyConfigs;
     }
     catch (error) {
         console.warn(error);
-        const shopifyConfigs = js_yaml_1.default.safeLoad(
+        const shopifyConfigs = js_yaml_1.default.load(
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         require(path_1.default.resolve(exports.config.ribaShopify.root, configName)));
         return shopifyConfigs;
