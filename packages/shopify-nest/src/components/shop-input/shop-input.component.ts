@@ -3,6 +3,10 @@ import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import Debug from "debug";
 import pugTemplate from "./shop-input.component.pug";
 
+interface Scope {
+  shop: string;
+}
+
 export class ShopifyNestShopInputComponent extends Component {
   public static tagName = "shopify-nest-shop-input";
 
@@ -12,7 +16,9 @@ export class ShopifyNestShopInputComponent extends Component {
 
   protected debug = Debug("component:" + ShopifyNestShopInputComponent.tagName);
 
-  protected scope = {};
+  protected scope: Scope = {
+    shop: "",
+  };
 
   constructor(element?: HTMLElement) {
     super(element);
@@ -21,32 +27,6 @@ export class ShopifyNestShopInputComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     return this.init(ShopifyNestShopInputComponent.observedAttributes);
-  }
-
-  protected requiredAttributes() {
-    return [];
-  }
-
-  protected async beforeBind() {
-    this.debug("beforeBind");
-    await super.beforeBind();
-  }
-
-  protected async afterBind() {
-    await super.afterBind();
-    this.debug("afterBind", this.scope);
-    const input = this.querySelector("input") as HTMLInputElement;
-    const appendix = this.querySelector(
-      ".shop-input-append-placeholder"
-    ) as HTMLSpanElement;
-    input.addEventListener("input", () => {
-      console.log("appendix:", input.value);
-      appendix.innerHTML = input.value;
-    });
-  }
-
-  protected disconnectedCallback() {
-    super.disconnectedCallback();
   }
 
   protected template() {

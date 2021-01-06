@@ -5,7 +5,7 @@
   color: transparent;
 }
 
-.shop-input-append-placeholder::after {
+.shop-input-append-placeholder.appendix::after {
   content: attr(data-append);
   pointer-events: none;
   color: grey;
