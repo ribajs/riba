@@ -2,7 +2,7 @@
   "extends": "@tsconfig/node14",
   "compilerOptions": {
     "outDir": "build-system/dist",
-    "types": ["jest"]
+    "types": ["jest", "node"]
   },
   "include": ["build-system/src/**/*"],
   "exclude": [

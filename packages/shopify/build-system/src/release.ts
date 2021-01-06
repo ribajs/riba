@@ -34,7 +34,7 @@ gulp.task("generate:config:live", async () => {
   gutil.log(`Load ${baseConfig} as base config file for store and password...`);
   const liveConfigs = await generateEnvLiveThemeConfig(baseConfig);
   const configPath = path.resolve(config.themeRoot, targetConfig);
-  const yamlConfig = yaml.safeDump(liveConfigs);
+  const yamlConfig = yaml.dump(liveConfigs);
   gutil.log(`Write "${targetConfig}" to ${configPath}...`);
   return fs.writeFile(configPath, yamlConfig);
 });
@@ -45,7 +45,7 @@ gulp.task("generate:config:deploy", async () => {
   gutil.log(`Load ${baseConfig} as base config file for store and password...`);
   const liveConfigs = await generateEnvYoungestThemeConfig(baseConfig);
   const configPath = path.resolve(config.themeRoot, targetConfig);
-  const yamlConfig = yaml.safeDump(liveConfigs);
+  const yamlConfig = yaml.dump(liveConfigs);
   gutil.log(`Overwrite "${targetConfig}" to ${configPath}...`);
   return fs.writeFile(configPath, yamlConfig);
 });

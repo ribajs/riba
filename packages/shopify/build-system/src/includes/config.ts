@@ -205,11 +205,11 @@ export const getYamlConfig = (configName: string) => {
   }
   try {
     const data = fs.readFileSync(filePath, "utf8");
-    const shopifyConfigs = yaml.safeLoad(data);
+    const shopifyConfigs = yaml.load(data);
     return shopifyConfigs;
   } catch (error) {
     console.warn(error);
-    const shopifyConfigs = yaml.safeLoad(
+    const shopifyConfigs = yaml.load(
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       require(path.resolve(config.ribaShopify.root, configName))
     );
