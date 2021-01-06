@@ -2590,7 +2590,7 @@ __metadata:
     "@ribajs/types": "workspace:infra/types"
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
-    "@ribajs/webpack-serve": ^1.9.0-beta.5
+    "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
     "@types/jest": ^26.0.19
     "@types/node": ^14.14.17
     "@types/webpack-env": ^1.16.0
@@ -3559,6 +3559,25 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@ribajs/events@portal:packages/events::locator=ribajs%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/events@portal:packages/events::locator=ribajs%40workspace%3A."
+  dependencies:
+    "@babel/runtime": ^7.12.5
+    "@babel/runtime-corejs3": ^7.12.5
+    "@ribajs/tsconfig": "workspace:infra/tsconfig"
+    "@types/jest": ^26.0.19
+    "@types/node": ^14.14.19
+    babel-jest: ^26.6.3
+    eslint: ^7.17.0
+    jest: ^26.6.3
+    jest-config: ^26.6.3
+    jest-extended: ^0.11.5
+    ts-jest: ^26.4.4
+    typescript: ^4.1.3
+  languageName: node
+  linkType: soft
+
 "@ribajs/events@workspace:packages/events":
   version: 0.0.0-use.local
   resolution: "@ribajs/events@workspace:packages/events"
@@ -4291,7 +4310,6 @@ __metadata:
     supertest: ^6.0.1
     tinyliquid: ^0.2.34
     ts-jest: ^26.4.4
-    ts-loader: ^8.0.13
     ts-node: ^9.1.1
     tsconfig-paths: ^3.9.0
     twig: ^1.15.4
@@ -5006,7 +5024,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/tsconfig@portal:infra/tsconfig::locator=ribajs%40workspace%3A."
   dependencies:
-    "@ribajs/types": ^1.9.0-beta.4
+    "@ribajs/types": ^1.9.0
   languageName: node
   linkType: soft
 
@@ -5014,7 +5032,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/tsconfig@workspace:infra/tsconfig"
   dependencies:
-    "@ribajs/types": ^1.9.0-beta.4
+    "@ribajs/types": ^1.9.0
   languageName: unknown
   linkType: soft
 
@@ -5166,11 +5184,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/webpack-serve@^1.9.0-beta.5, @ribajs/webpack-serve@workspace:infra/webpack-serve":
+"@ribajs/webpack-serve@workspace:infra/webpack-serve":
   version: 0.0.0-use.local
   resolution: "@ribajs/webpack-serve@workspace:infra/webpack-serve"
   dependencies:
-    "@ribajs/webpack-config": ^1.9.0-beta.5
+    "@ribajs/webpack-config": ^1.9.0
     get-port: ^5.1.1
     pkg-dir: ^5.0.0
     webpack-dev-server: ^3.11.1
@@ -18854,6 +18872,7 @@ fsevents@~2.1.2:
     eslint: ^7.17.0
     eslint-config-prettier: ^7.1.0
     eslint-plugin-prettier: ^3.3.0
+    glob: ^7.1.6
     husky: ^4.3.6
     jest: ^26.6.3
     jest-config: ^26.6.3

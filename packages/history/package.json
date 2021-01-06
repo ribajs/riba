@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/history",
   "description": "History module of Riba.js",
-  "version": "1.9.0-beta.4",
+  "version": "1.9.0",
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [
     "Michael Richards",

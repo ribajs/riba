@@ -1,7 +1,7 @@
 {
-  "name": "hypnose-october-theme",
-  "version": "1.6.1",
-  "description": "Hypnose OctoberCMS Theme",
+  "name": "riba-october-theme",
+  "version": "1.9.0",
+  "description": "Riba.js OctoberCMS Theme",
   "main": "assets/ts/main.ts",
   "typings": "assets/ts/types",
   "scripts": {
@@ -68,11 +68,11 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "@ribajs/bs4": "^1.9.0-beta.2",
-    "@ribajs/core": "^1.9.0-beta.2",
-    "@ribajs/utils": "^1.9.0-beta.2",
-    "@ribajs/iconset": "^1.9.0-beta.2",
-    "@ribajs/router": "^1.9.0-beta.2",
+    "@ribajs/bs4": "^1.9.0",
+    "@ribajs/core": "^1.9.0",
+    "@ribajs/utils": "^1.9.0",
+    "@ribajs/iconset": "^1.9.0",
+    "@ribajs/router": "^1.9.0",
     "bootstrap": "^4.3.1"
   }
 }

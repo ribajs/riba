@@ -1,8 +1,9 @@
 {
   "name": "@ribajs/demo-extras-touch-events",
-  "version": "1.9.0-beta.4",
+  "version": "1.9.0",
   "description": "",
   "main": "index.html",
+  "private": true,
   "scripts": {
     "build": "npm run lint &&  webpack --progress --color --env production",
     "build:dev": "npm run lint && webpack --env.development",
