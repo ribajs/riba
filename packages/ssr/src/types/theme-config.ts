@@ -6,11 +6,11 @@ export interface ThemeConfig {
   viewEngine: SupportedTemplateEngines;
   assetsDir: string;
   viewsDir: string;
-  ssr: {
+  ssr?: {
     engine?: RenderEngine;
     rootTag?: string;
     template?: string;
   };
-  pageComponentsDir: string;
-  routes: Route[];
+  pageComponentsDir?: string;
+  routes?: Route[];
 }
