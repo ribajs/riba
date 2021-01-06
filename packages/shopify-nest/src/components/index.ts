@@ -10,3 +10,4 @@ export { ShopifyNestPermissionsComponent } from "./permissions/permissions.compo
 export { ShopifyNestPlansComponent } from "./plans/plans.component";
 export { ShopifyNestSocketEventCardComponent } from "./socket-event-card/socket-event-card.component";
 export { ShopifyNestSyncProgressComponent } from "./sync-progress/sync-progress.component";
+export { ShopifyNestShopInputComponent } from "./shop-input/shop-input.component";

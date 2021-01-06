@@ -1,0 +1,12 @@
+.shop-input-append-placeholder {
+  position: absolute;
+  display: inline-block;
+  pointer-events: none;
+  color: transparent;
+}
+
+.shop-input-append-placeholder::after {
+  content: attr(data-append);
+  pointer-events: none;
+  color: grey;
+}
