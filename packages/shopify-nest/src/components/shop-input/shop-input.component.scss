@@ -1,11 +1,14 @@
-.shop-input-append-placeholder {
+.shop-input-appendix {
+  pointer-events: none;
   position: absolute;
   display: inline-block;
   pointer-events: none;
   color: transparent;
+  background: transparent;
+  border: 2px solid transparent;
 }
 
-.shop-input-append-placeholder.appendix::after {
+.shop-input-appendix::after {
   content: attr(data-append);
   pointer-events: none;
   color: grey;
