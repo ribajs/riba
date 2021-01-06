@@ -3782,7 +3782,7 @@ __metadata:
     "@nestjs/testing": ^7.6.3
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/events": "workspace:packages/events"
-    "@ribajs/nest-ssr": "workspace:backend/nest-ssr"
+    "@ribajs/nest-theme": "workspace:backend/nest-theme"
     "@ribajs/ssr": "workspace:packages/ssr"
     "@types/consolidate": ^0.14.0
     "@types/cookie-parser": ^1.4.2
@@ -4265,9 +4265,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/nest-ssr@portal:backend/nest-ssr::locator=ribajs%40workspace%3A.":
+"@ribajs/nest-theme@portal:backend/nest-theme::locator=ribajs%40workspace%3A.":
   version: 0.0.0-use.local
-  resolution: "@ribajs/nest-ssr@portal:backend/nest-ssr::locator=ribajs%40workspace%3A."
+  resolution: "@ribajs/nest-theme@portal:backend/nest-theme::locator=ribajs%40workspace%3A."
   dependencies:
     "@happy-dom/server-rendering": ^2.1.3
     "@nestjs/cli": ^7.5.4
@@ -4319,9 +4319,9 @@ __metadata:
   languageName: node
   linkType: soft
 
-"@ribajs/nest-ssr@workspace:backend/nest-ssr":
+"@ribajs/nest-theme@workspace:backend/nest-theme":
   version: 0.0.0-use.local
-  resolution: "@ribajs/nest-ssr@workspace:backend/nest-ssr"
+  resolution: "@ribajs/nest-theme@workspace:backend/nest-theme"
   dependencies:
     "@happy-dom/server-rendering": ^2.1.3
     "@nestjs/cli": ^7.5.4

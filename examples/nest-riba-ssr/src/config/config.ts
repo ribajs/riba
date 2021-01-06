@@ -3,7 +3,7 @@ dotenv.config();
 import { resolve } from 'path';
 import findRoot = require('find-root');
 import { registerAs } from '@nestjs/config';
-import { NestThemeConfig } from '@ribajs/nest-ssr';
+import { NestThemeConfig } from '@ribajs/nest-theme';
 
 const THEME_ACTIVE = process.env.THEME_ACTIVE || 'nest-riba-ssr-theme';
 const ROOT = findRoot(process.cwd());

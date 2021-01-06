@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/examples-nest-riba-ssr",
-  "version": "1.9.0-beta.4",
+  "version": "1.9.0",
   "description": "",
   "author": "Art+Code Studio (Pascal Garber) <pascal@artandcode.studio>",
   "license": "MIT",
@@ -28,7 +28,7 @@
     "@nestjs/platform-express": "^7.6.3",
     "@ribajs/core": "workspace:packages/core",
     "@ribajs/events": "workspace:packages/events",
-    "@ribajs/nest-ssr": "workspace:backend/nest-ssr",
+    "@ribajs/nest-theme": "workspace:backend/nest-theme",
     "@ribajs/ssr": "workspace:packages/ssr",
     "@types/consolidate": "^0.14.0",
     "@types/express": "^4.17.9",

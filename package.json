@@ -140,7 +140,7 @@
     "@ribajs/types": "portal:infra/types",
     "@ribajs/webpack-config": "portal:infra/webpack-config",
     "@ribajs/tsconfig": "portal:infra/tsconfig",
-    "@ribajs/nest-ssr": "portal:backend/nest-ssr"
+    "@ribajs/nest-theme": "portal:backend/nest-theme"
   },
   "dependencies": {
     "glob": "^7.1.6",
