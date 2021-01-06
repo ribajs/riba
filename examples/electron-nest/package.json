@@ -3,6 +3,7 @@
   "version": "1.9.0-beta.4",
   "description": "",
   "main": "dist/index.js",
+  "private": true,
   "scripts": {
     "prebuild:main": "rimraf dist",
     "build:riba": "webpack --progress --color --env production --config webpack.renderer.js",
