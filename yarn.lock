@@ -5024,7 +5024,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/tsconfig@portal:infra/tsconfig::locator=ribajs%40workspace%3A."
   dependencies:
-    "@ribajs/types": ^1.9.0
+    "@ribajs/types": "workspace:infra/types"
   languageName: node
   linkType: soft
 
@@ -5032,7 +5032,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/tsconfig@workspace:infra/tsconfig"
   dependencies:
-    "@ribajs/types": ^1.9.0
+    "@ribajs/types": "workspace:infra/types"
   languageName: unknown
   linkType: soft
 
@@ -5188,7 +5188,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/webpack-serve@workspace:infra/webpack-serve"
   dependencies:
-    "@ribajs/webpack-config": ^1.9.0
+    "@ribajs/webpack-config": "workspace:infra/webpack-config"
     get-port: ^5.1.1
     pkg-dir: ^5.0.0
     webpack-dev-server: ^3.11.1

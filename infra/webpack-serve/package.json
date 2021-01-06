@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/webpack-serve",
-  "version": "1.9.0",
+  "version": "2.0.0-alpha.0",
   "description": "Simple webpack serve script",
   "scripts": {},
   "bin": "index.js",
@@ -15,7 +15,7 @@
     "index.js"
   ],
   "dependencies": {
-    "@ribajs/webpack-config": "^1.9.0",
+    "@ribajs/webpack-config": "workspace:infra/webpack-config",
     "get-port": "^5.1.1",
     "pkg-dir": "^5.0.0",
     "webpack-dev-server": "^3.11.1"

@@ -1,7 +1,7 @@
 {
   "name": "ribajs",
   "description": "Declarative data binding + templating solution.",
-  "version": "1.9.0",
+  "version": "2.0.0-alpha.0",
   "private": true,
   "author": "Art+Code Studio (Pascal Garber) <pascal@artandcode.studio>",
   "contributors": [],
@@ -40,11 +40,12 @@
     "lint": "yarn workspace-foreach lint",
     "build": "yarn workspace-foreach build",
     "clean": "yarn workspace-foreach clean",
-    "bump:prerelease": "yarn version prerelease && yarn workspaces foreach version prerelease",
-    "bump:patch": "yarn version patch && yarn workspaces foreach version patch",
-    "bump:minor": "yarn version minor && yarn workspaces foreach version minor",
-    "bump:major": "yarn version major && yarn workspaces foreach version major",
-    "publish": "yarn run build && yarn workspaces foreach npm publish --tolerate-republish --tag latest --access public"
+    "bump:prerelease": "yarn workspaces foreach version prerelease",
+    "bump:patch": "yarn workspaces foreach version patch",
+    "bump:minor": "yarn workspaces foreach version minor",
+    "bump:major": "yarn workspaces foreach version major",
+    "publish:next": "yarn run build && yarn workspaces foreach npm publish --tolerate-republish --tag next --access public",
+    "publish:latest": "yarn run build && yarn workspaces foreach npm publish --tolerate-republish --tag latest --access public"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.10",
