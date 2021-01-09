@@ -297,14 +297,20 @@ export class SsrService {
     // this.log.debug(`layout: ${layout}`);
     layout = await this.transformLayout(layout, rootTag, componentTagName);
     // this.log.debug(`layout (transformed): ${layout}`);
-    const renderData =
-      engine === 'jsdom'
-        ? await this.renderWithJSDom(layout, componentTagName, sharedContext)
-        : await this.renderWithHappyDom(
-            layout,
-            componentTagName,
-            sharedContext,
-          );
-    return renderData;
+    try {
+      const renderData =
+        engine === 'jsdom'
+          ? await this.renderWithJSDom(layout, componentTagName, sharedContext)
+          : await this.renderWithHappyDom(
+              layout,
+              componentTagName,
+              sharedContext,
+            );
+      return renderData;
+    } catch (error) {
+      this.log.error(`Error on render component with ${engine}`);
+      console.error(error);
+      throw error;
+    }
   }
 }

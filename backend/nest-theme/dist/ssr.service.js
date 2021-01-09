@@ -197,10 +197,17 @@ let SsrService = class SsrService {
         this.log.debug(`template: ${template}`);
         let layout = await this.renderTemplate(template, sharedContext);
         layout = await this.transformLayout(layout, rootTag, componentTagName);
-        const renderData = engine === 'jsdom'
-            ? await this.renderWithJSDom(layout, componentTagName, sharedContext)
-            : await this.renderWithHappyDom(layout, componentTagName, sharedContext);
-        return renderData;
+        try {
+            const renderData = engine === 'jsdom'
+                ? await this.renderWithJSDom(layout, componentTagName, sharedContext)
+                : await this.renderWithHappyDom(layout, componentTagName, sharedContext);
+            return renderData;
+        }
+        catch (error) {
+            this.log.error(`Error on render component with ${engine}`);
+            console.error(error);
+            throw error;
+        }
     }
 };
 SsrService = __decorate([

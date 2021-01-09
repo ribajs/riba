@@ -55,6 +55,7 @@ export const validateFullThemeConfig = (fullThemeConfig: FullThemeConfig) => {
 
 /**
  * Loads a pure TypeScript or yaml config file
+ * TODO replace with config module in riba-nest-projects
  * @param configPath
  */
 export const loadConfig = <T>(searchConfigPaths: string[]) => {

@@ -66,6 +66,7 @@
     "@ribajs/i18n": "workspace:packages/i18n",
     "@ribajs/iconset": "workspace:packages/iconset",
     "@ribajs/router": "workspace:packages/router",
+    "@ribajs/types": "workspace:infra/types",
     "@ribajs/utils": "workspace:packages/utils",
     "bootstrap": "^4.5.3"
   }

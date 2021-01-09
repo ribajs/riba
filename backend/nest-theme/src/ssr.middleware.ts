@@ -1,16 +1,16 @@
 import { Injectable, NestMiddleware, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import type { NestThemeConfig } from '@ribajs/nest-theme';
+import type { FullThemeConfig } from './types/theme-config';
 import type { RenderEngine } from '@ribajs/ssr';
 import { SsrService } from './ssr.service';
 import type { Request, Response, NextFunction } from 'express';
 
 @Injectable()
 export class SsrMiddleware implements NestMiddleware {
-  theme: NestThemeConfig;
+  theme: FullThemeConfig;
   log = new Logger(this.constructor.name);
   constructor(protected config: ConfigService, protected ssr: SsrService) {
-    this.theme = this.config.get<NestThemeConfig>('theme');
+    this.theme = this.config.get<FullThemeConfig>('theme');
   }
   async use(req: Request, res: Response, next: NextFunction) {
     this.log.debug('SsrMiddleware req.route', req.route.path);
@@ -43,8 +43,6 @@ export class SsrMiddleware implements NestMiddleware {
       // this.log.debug(`page: ${page.html}`);
       return res.send(page.html);
     } catch (error) {
-      this.log.error('Error on render component');
-      console.error(error);
       return res.status(500).json(error);
     }
   }

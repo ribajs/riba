@@ -41,8 +41,6 @@ let SsrMiddleware = class SsrMiddleware {
             return res.send(page.html);
         }
         catch (error) {
-            this.log.error('Error on render component');
-            console.error(error);
             return res.status(500).json(error);
         }
     }

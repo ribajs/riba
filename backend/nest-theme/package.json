@@ -6,7 +6,8 @@
   "license": "MIT",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "npm run lint && tsc -p tsconfig.json",
+    "prebuild": "rimraf dist",
+    "build": "npm run prebuild && npm run lint && tsc -p tsconfig.json",
     "clear": "rm -rf dist",
     "watch": "npm run build -- --watch",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --ignore-pattern '*.spec.ts' --fix && npm run typecheck",
@@ -32,14 +33,15 @@
     "find-root": "^1.1.0",
     "happy-dom": "^2.1.5",
     "jsdom": "^16.4.0",
-    "pug": "^3.0.0",
     "reflect-metadata": "^0.1.13",
-    "rimraf": "^3.0.2",
     "rxjs": "^6.6.3",
-    "tinyliquid": "^0.2.34",
-    "twig": "^1.15.4",
     "whatwg-encoding": "^1.0.5",
     "yaml": "next"
+  },
+  "peerDependencies": {
+    "pug": "^3.0.0",
+    "tinyliquid": "^0.2.34",
+    "twig": "^1.15.4"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.5.4",
@@ -57,6 +59,7 @@
     "eslint-plugin-prettier": "^3.3.1",
     "jest": "^26.6.3",
     "prettier": "2.2.1",
+    "rimraf": "^3.0.2",
     "supertest": "^6.0.1",
     "ts-jest": "^26.4.4",
     "ts-node": "^9.1.1",

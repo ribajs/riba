@@ -6,6 +6,10 @@ Riba.js is a fork of Rivets.js, a lightweight data binding and templating system
 
 You found the documentation source files on [github.com/ribajs/doc](https://github.com/ribajs/doc/tree/master/doc) or rendered on [ribajs.com](https://ribajs.com/).
 
+## Yarn 2
+
+We are using yarn 2 to build and release Riba, so to test the demos please use yarn 2.
+
 ## Contributing
 
 ### Clone

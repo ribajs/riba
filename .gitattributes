@@ -1,2 +1,2 @@
-# https://stackoverflow.com/a/57333493/1465919
+# See https://martin.beryllium.net/2019/08/02/automatically-resolve-npm-package-lock-conflicts-using-git/
 yarn.lock merge=theirs
