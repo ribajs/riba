@@ -4426,47 +4426,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/pdf@workspace:packages/pdf":
-  version: 0.0.0-use.local
-  resolution: "@ribajs/pdf@workspace:packages/pdf"
-  dependencies:
-    "@babel/cli": ^7.12.10
-    "@babel/core": ^7.12.10
-    "@babel/plugin-proposal-class-properties": ^7.12.1
-    "@babel/plugin-proposal-export-default-from": ^7.12.1
-    "@babel/plugin-proposal-object-rest-spread": ^7.12.1
-    "@babel/plugin-syntax-dynamic-import": ^7.8.3
-    "@babel/preset-env": ^7.12.11
-    "@babel/preset-typescript": ^7.12.7
-    "@babel/runtime": ^7.12.5
-    "@babel/runtime-corejs3": ^7.12.5
-    "@ribajs/cache": "workspace:packages/cache"
-    "@ribajs/core": "workspace:packages/core"
-    "@ribajs/eslint-config": "workspace:infra/eslint-config"
-    "@ribajs/tsconfig": "workspace:infra/tsconfig"
-    "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.20
-    "@types/pdfjs-dist": ^2.1.7
-    "@typescript-eslint/eslint-plugin": ^4.12.0
-    "@typescript-eslint/parser": ^4.12.0
-    babel-loader: ^8.2.2
-    babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.8.2
-    eslint: ^7.17.0
-    eslint-config-prettier: ^7.1.0
-    eslint-plugin-prettier: ^3.3.1
-    jest: ^26.6.3
-    jest-extended: ^0.11.5
-    pdf.js: ^0.1.0
-    pdfjs-dist: ^2.6.347
-    prettier: 2.2.1
-    ts-jest: ^26.4.4
-    typescript: ^4.1.3
-    webpack: ^5.12.3
-    webpack-cli: ^4.3.1
-  languageName: unknown
-  linkType: soft
-
 "@ribajs/photoswipe@portal:packages/photoswipe::locator=ribajs%40workspace%3A.":
   version: 0.0.0-use.local
   resolution: "@ribajs/photoswipe@portal:packages/photoswipe::locator=ribajs%40workspace%3A."
@@ -5877,13 +5836,6 @@ __metadata:
   version: 5.0.3
   resolution: "@types/parse5@npm:5.0.3"
   checksum: 62b6ad696aeee22dc26bba2039bfb55773caf7cd705cb1b226a7107c187422782e6759ca6de54f9d1a299f335c2b99973774c9436a378f57927f36619570dc1d
-  languageName: node
-  linkType: hard
-
-"@types/pdfjs-dist@npm:^2.1.7":
-  version: 2.1.7
-  resolution: "@types/pdfjs-dist@npm:2.1.7"
-  checksum: ea39ddd1d03de49d525b413da03a38414d1c3f78bd6b201ca92ce748f36296c7f149aa453dfd1dc2df28405e0629bda9c79529b3c7d84c9f84f631dbe2a33e8a
   languageName: node
   linkType: hard
 
@@ -8799,16 +8751,6 @@ __metadata:
   version: 1.1.0
   resolution: "code-point-at@npm:1.1.0"
   checksum: 7d9837296e0f1c00239c88542f5a3e0bad11e45d3d0e8d9d097901fe54722dd5d2c006969077a287be8648a202c43f74e096f17552cbd897568308fba7b87ac0
-  languageName: node
-  linkType: hard
-
-"coffee-script@npm:latest":
-  version: 1.12.7
-  resolution: "coffee-script@npm:1.12.7"
-  bin:
-    cake: ./bin/cake
-    coffee: ./bin/coffee
-  checksum: f515c08a6d39649be5ad292ca4ccfe20eab39870be060b35bc519da95c871de739b0fc2bf203b88036c985aa2c57bdfba9a95937fe83f016a48bf736de1f5987
   languageName: node
   linkType: hard
 
@@ -16661,22 +16603,6 @@ fsevents@~2.3.1:
     safe-buffer: ^5.0.1
     sha.js: ^2.4.8
   checksum: 780dd6d50e750d302651638ff1edfe899d3a345e702f6c36fbdbdef3cfefd12d3d76698565022f4cd97d3f8ced5098f4ae2fdd067d3e1fca2849a70eb60e7620
-  languageName: node
-  linkType: hard
-
-"pdf.js@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "pdf.js@npm:0.1.0"
-  dependencies:
-    coffee-script: latest
-  checksum: 45a333d61b2ec8c2a6761de44aa1f5cf59f4d37ef10574603659da93c2932ca753f233fe562dc234f10cdb53385cca96855ada14e8c5fcbf3cebac4be4bdf9e1
-  languageName: node
-  linkType: hard
-
-"pdfjs-dist@npm:^2.6.347":
-  version: 2.6.347
-  resolution: "pdfjs-dist@npm:2.6.347"
-  checksum: 64007e9fce35be3d9e8a2d106bdcd350cd71df4f4fe99a94adbdb4ee662ce1e84abfe0feff38d6cfa94fa79a291cfe96f1efd874e8417c52d7ab753d2046bf26
   languageName: node
   linkType: hard
 
