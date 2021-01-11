@@ -218,16 +218,25 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
       automaticNameDelimiter: ".",
       chunks: "all",
       cacheGroups: {
-        commons: {
+        defaultVendors: {
           test: /[\\/]node_modules[\\/]/,
           name: commonsName,
           chunks: "all",
+          reuseExistingChunk: true
         },
         styles: {
           name: "styles",
           test: /\.css$/,
           chunks: "all",
           enforce: true,
+          reuseExistingChunk: true
+        },
+        templates: {
+          name: "templates",
+          test: /\.[html|pug]$/,
+          chunks: "all",
+          enforce: true,
+          reuseExistingChunk: true
         },
       },
     },
@@ -364,6 +373,9 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
         config.forkTsCheckerConfig.typescript || {};
 
       config.forkTsCheckerConfig.typescript.configFile = "tsconfig.ssr.json";
+
+      // Disable chunks for ssr builds
+      config.optimization.splitChunks = {};
       break;
     default:
       break;
