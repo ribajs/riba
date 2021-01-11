@@ -151,7 +151,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
     if (htmlIndex) {
       config.htmlTemplatePaths.push(htmlIndex);
     }
-    if (config.htmlTemplatePaths) {
+    if (Array.isArray(config.htmlTemplatePaths) && config.htmlTemplatePaths.length) {
       console.debug(
         "Set config.htmlTemplatePaths to: " + config.htmlTemplatePaths
       );
