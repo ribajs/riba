@@ -1398,16 +1398,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@happy-dom/server-rendering@npm:^2.1.5":
-  version: 2.1.5
-  resolution: "@happy-dom/server-rendering@npm:2.1.5"
+"@happy-dom/server-rendering@npm:^2.1.6":
+  version: 2.1.6
+  resolution: "@happy-dom/server-rendering@npm:2.1.6"
   dependencies:
     css-tree: ^1.0.0-alpha.29
-    happy-dom: ^2.1.5
+    happy-dom: ^2.1.6
     he: ^1.1.1
     memory-fs: ^0.5.0
     webpack: ^4.41.2
-  checksum: 108572e4561a8629aca080eca7708e7da91c27c4b4995a53024d0b14afb8f26e6ca91cc85ad1159e4d88fc9357f8539925a5f474a5d6bf2bf55c0b3ca2acdf98
+  checksum: 0d317b7508aa31a0496fb8fd5cdc7d7416a47c6ba2876e28d8cbff43d2fb3ec83ebe6d8f6fe6da1f88b78075d2b9435dcee5189c38fb38684a31ee6ec93cd0d2
   languageName: node
   linkType: hard
 
@@ -2052,7 +2052,7 @@ __metadata:
     "@ribajs/types": "workspace:infra/types"
     "@ribajs/utils": "workspace:packages/utils"
     "@sphinxxxx/color-conversion": ^2.2.2
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -2070,7 +2070,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: node
   linkType: soft
@@ -2099,7 +2099,7 @@ __metadata:
     "@ribajs/types": "workspace:infra/types"
     "@ribajs/utils": "workspace:packages/utils"
     "@sphinxxxx/color-conversion": ^2.2.2
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -2117,7 +2117,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: unknown
   linkType: soft
@@ -2130,7 +2130,7 @@ __metadata:
     "@babel/runtime-corejs3": ^7.12.5
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     eslint: ^7.17.0
@@ -2149,7 +2149,7 @@ __metadata:
     "@babel/runtime-corejs3": ^7.12.5
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     eslint: ^7.17.0
@@ -2181,7 +2181,7 @@ __metadata:
     "@ribajs/extras": "workspace:packages/extras"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -2196,7 +2196,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: unknown
   linkType: soft
@@ -2223,7 +2223,7 @@ __metadata:
     "@ribajs/types": "workspace:infra/types"
     "@ribajs/utils": "workspace:packages/utils"
     "@types/core-js": ^2.5.4
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@types/node": ^14.14.20
     babel-jest: ^26.6.3
     babel-loader: ^8.2.2
@@ -2240,7 +2240,7 @@ __metadata:
     ts-jest: ^26.4.4
     typescript: ^4.1.3
     uglifyjs-webpack-plugin: ^2.2.0
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-glob-entry: ^2.1.1
   languageName: node
@@ -2268,7 +2268,7 @@ __metadata:
     "@ribajs/types": "workspace:infra/types"
     "@ribajs/utils": "workspace:packages/utils"
     "@types/core-js": ^2.5.4
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@types/node": ^14.14.20
     babel-jest: ^26.6.3
     babel-loader: ^8.2.2
@@ -2285,7 +2285,7 @@ __metadata:
     ts-jest: ^26.4.4
     typescript: ^4.1.3
     uglifyjs-webpack-plugin: ^2.2.0
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-glob-entry: ^2.1.1
   languageName: unknown
@@ -2315,7 +2315,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/experimental-utils": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
@@ -2336,15 +2336,15 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.3.3
-    postcss: ^8.2.2
+    postcss: ^8.2.4
     postcss-loader: ^4.1.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
     prettier: 2.2.1
     pug-loader: ^2.4.0
-    sass-loader: ^10.1.0
+    sass-loader: ^10.1.1
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-dev-server: ^3.11.1
   languageName: unknown
@@ -2375,7 +2375,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/experimental-utils": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
@@ -2396,15 +2396,15 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.3.3
-    postcss: ^8.2.2
+    postcss: ^8.2.4
     postcss-loader: ^4.1.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
     prettier: 2.2.1
     pug-loader: ^2.4.0
-    sass-loader: ^10.1.0
+    sass-loader: ^10.1.1
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-dev-server: ^3.11.1
   languageName: unknown
@@ -2435,7 +2435,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/experimental-utils": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
@@ -2461,9 +2461,9 @@ __metadata:
     postcss-preset-env: ^6.7.0
     prettier: 2.2.1
     pug-loader: ^2.4.0
-    sass-loader: ^10.1.0
+    sass-loader: ^10.1.1
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-dev-server: ^3.11.1
   languageName: unknown
@@ -2491,7 +2491,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -2514,11 +2514,11 @@ __metadata:
     postcss-loader: ^4.1.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
-    sass-loader: ^10.1.0
-    terser-webpack-plugin: ^5.0.3
+    sass-loader: ^10.1.1
+    terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-dev-server: ^3.11.1
   languageName: unknown
@@ -2546,7 +2546,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -2568,10 +2568,10 @@ __metadata:
     postcss-loader: ^4.1.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
-    sass-loader: ^10.1.0
+    sass-loader: ^10.1.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-dev-server: ^3.11.1
   languageName: unknown
@@ -2603,7 +2603,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@types/node": ^14.14.20
     "@types/webpack-env": ^1.16.0
     "@typescript-eslint/eslint-plugin": ^4.12.0
@@ -2625,18 +2625,18 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.3.3
-    postcss: ^8.2.2
+    postcss: ^8.2.4
     postcss-loader: ^4.1.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
     prettier: 2.2.1
     pug-loader: ^2.4.0
-    sass-loader: ^10.1.0
+    sass-loader: ^10.1.1
     style-loader: ^2.0.0
-    terser-webpack-plugin: ^5.0.3
+    terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-dev-server: ^3.11.1
   languageName: unknown
@@ -2668,7 +2668,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/experimental-utils": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
@@ -2695,9 +2695,9 @@ __metadata:
     postcss-preset-env: ^6.7.0
     prettier: 2.2.1
     pug-loader: ^2.4.0
-    sass-loader: ^10.1.0
+    sass-loader: ^10.1.1
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-dev-server: ^3.11.1
   languageName: unknown
@@ -2728,7 +2728,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/experimental-utils": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
@@ -2749,15 +2749,15 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.3.3
-    postcss: ^8.2.2
+    postcss: ^8.2.4
     postcss-loader: ^4.1.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
     prettier: 2.2.1
     pug-loader: ^2.4.0
-    sass-loader: ^10.1.0
+    sass-loader: ^10.1.1
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-dev-server: ^3.11.1
   languageName: unknown
@@ -2790,7 +2790,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -2815,10 +2815,10 @@ __metadata:
     postcss-preset-env: ^6.7.0
     prettier: 2.2.1
     pug-loader: ^2.4.0
-    sass-loader: ^10.1.0
+    sass-loader: ^10.1.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-dev-server: ^3.11.1
   languageName: unknown
@@ -2846,7 +2846,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/experimental-utils": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
@@ -2872,11 +2872,11 @@ __metadata:
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
     prettier: 2.2.1
-    sass-loader: ^10.1.0
-    terser-webpack-plugin: ^5.0.3
+    sass-loader: ^10.1.1
+    terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-dev-server: ^3.11.1
   languageName: unknown
@@ -2904,7 +2904,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -2925,11 +2925,11 @@ __metadata:
     postcss-loader: ^4.1.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
-    sass-loader: ^10.1.0
-    terser-webpack-plugin: ^5.0.3
+    sass-loader: ^10.1.1
+    terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-dev-server: ^3.11.1
   languageName: unknown
@@ -2958,7 +2958,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -2980,11 +2980,11 @@ __metadata:
     postcss-loader: ^4.1.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
-    sass-loader: ^10.1.0
-    terser-webpack-plugin: ^5.0.3
+    sass-loader: ^10.1.1
+    terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-dev-server: ^3.11.1
   languageName: unknown
@@ -3014,7 +3014,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -3039,11 +3039,11 @@ __metadata:
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
     prettier: 2.2.1
-    sass-loader: ^10.1.0
-    terser-webpack-plugin: ^5.0.3
+    sass-loader: ^10.1.1
+    terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-dev-server: ^3.11.1
   languageName: unknown
@@ -3073,7 +3073,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -3098,11 +3098,11 @@ __metadata:
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
     prettier: 2.2.1
-    sass-loader: ^10.1.0
-    terser-webpack-plugin: ^5.0.3
+    sass-loader: ^10.1.1
+    terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-dev-server: ^3.11.1
   languageName: unknown
@@ -3133,7 +3133,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/experimental-utils": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
@@ -3154,15 +3154,15 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.3.3
-    postcss: ^8.2.2
+    postcss: ^8.2.4
     postcss-loader: ^4.1.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
     prettier: 2.2.1
     pug-loader: ^2.4.0
-    sass-loader: ^10.1.0
+    sass-loader: ^10.1.1
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-dev-server: ^3.11.1
   languageName: unknown
@@ -3195,7 +3195,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -3222,11 +3222,11 @@ __metadata:
     prettier: 2.2.1
     pug-loader: ^2.4.0
     resolve-url-loader: ^3.1.2
-    sass-loader: ^10.1.0
-    terser-webpack-plugin: ^5.0.3
+    sass-loader: ^10.1.1
+    terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-dev-server: ^3.11.1
   languageName: unknown
@@ -3257,7 +3257,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -3282,11 +3282,11 @@ __metadata:
     postcss-preset-env: ^6.7.0
     prettier: 2.2.1
     pug-loader: ^2.4.0
-    sass-loader: ^10.1.0
-    terser-webpack-plugin: ^5.0.3
+    sass-loader: ^10.1.1
+    terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-dev-server: ^3.11.1
   languageName: unknown
@@ -3317,7 +3317,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -3342,11 +3342,11 @@ __metadata:
     postcss-preset-env: ^6.7.0
     prettier: 2.2.1
     pug-loader: ^2.4.0
-    sass-loader: ^10.1.0
-    terser-webpack-plugin: ^5.0.3
+    sass-loader: ^10.1.1
+    terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-dev-server: ^3.11.1
   languageName: unknown
@@ -3379,7 +3379,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -3406,11 +3406,11 @@ __metadata:
     postcss-preset-env: ^6.7.0
     prettier: 2.2.1
     pug-loader: ^2.4.0
-    sass-loader: ^10.1.0
-    terser-webpack-plugin: ^5.0.3
+    sass-loader: ^10.1.1
+    terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-dev-server: ^3.11.1
   languageName: unknown
@@ -3443,7 +3443,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/experimental-utils": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
@@ -3470,11 +3470,11 @@ __metadata:
     postcss-preset-env: ^6.7.0
     prettier: 2.2.1
     pug-loader: ^2.4.0
-    sass-loader: ^10.1.0
-    terser-webpack-plugin: ^5.0.3
+    sass-loader: ^10.1.1
+    terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-dev-server: ^3.11.1
   languageName: unknown
@@ -3506,7 +3506,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -3531,11 +3531,11 @@ __metadata:
     postcss-preset-env: ^6.7.0
     prettier: 2.2.1
     pug-loader: ^2.4.0
-    sass-loader: ^10.1.0
-    terser-webpack-plugin: ^5.0.3
+    sass-loader: ^10.1.1
+    terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-dev-server: ^3.11.1
   languageName: unknown
@@ -3578,7 +3578,7 @@ __metadata:
     "@babel/runtime": ^7.12.5
     "@babel/runtime-corejs3": ^7.12.5
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@types/node": ^14.14.20
     babel-jest: ^26.6.3
     eslint: ^7.17.0
@@ -3597,7 +3597,7 @@ __metadata:
     "@babel/runtime": ^7.12.5
     "@babel/runtime-corejs3": ^7.12.5
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@types/node": ^14.14.20
     babel-jest: ^26.6.3
     eslint: ^7.17.0
@@ -3633,6 +3633,7 @@ __metadata:
     "@ribajs/iconset": "workspace:packages/iconset"
     "@ribajs/router": "workspace:packages/router"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
+    "@ribajs/types": "workspace:infra/types"
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra//webpack-config"
     "@types/component-emitter": ^1.2.10
@@ -3650,16 +3651,16 @@ __metadata:
     eslint-config-prettier: ^7.1.0
     eslint-plugin-prettier: ^3.3.1
     file-loader: ^6.2.0
-    fork-ts-checker-webpack-plugin: ^6.0.8
+    fork-ts-checker-webpack-plugin: ^6.1.0
     html-loader: ^1.3.2
     prettier: 2.2.1
     pug: ^3.0.0
     pug-loader: ^2.4.0
-    sass: ^1.32.0
+    sass: ^1.32.2
     style-loader: ^2.0.0
-    terser-webpack-plugin: ^5.0.3
+    terser-webpack-plugin: ^5.1.1
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: unknown
   linkType: soft
@@ -3677,7 +3678,7 @@ __metadata:
     "@nestjs/testing": ^7.6.5
     "@types/cookie-parser": ^1.4.2
     "@types/express-session": ^1.17.3
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@types/node": ^14.14.20
     "@types/supertest": ^2.0.10
     "@typescript-eslint/eslint-plugin": ^4.12.0
@@ -3733,6 +3734,7 @@ __metadata:
     "@ribajs/router": "workspace:packages/router"
     "@ribajs/ssr": "workspace:packages/ssr"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
+    "@ribajs/types": "workspace:infra/types"
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@types/component-emitter": ^1.2.10
@@ -3743,38 +3745,24 @@ __metadata:
     "@typescript-eslint/experimental-utils": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     "@typescript-eslint/typescript-estree": ^4.12.0
-    assert: ^2.0.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     bootstrap: ^4.5.3
-    browserify-zlib: ^0.2.0
-    buffer: ^6.0.3
-    crypto-browserify: ^3.12.0
     css-loader: ^5.0.1
     eslint: ^7.17.0
     eslint-config-prettier: ^7.1.0
     eslint-plugin-prettier: ^3.3.1
-    events: ^3.2.0
     file-loader: ^6.2.0
-    fork-ts-checker-webpack-plugin: ^6.0.8
+    fork-ts-checker-webpack-plugin: ^6.1.0
     html-loader: ^1.3.2
-    https-browserify: ^1.0.0
-    path-browserify: ^1.0.1
     prettier: 2.2.1
     pug: ^3.0.0
     pug-loader: ^2.4.0
-    punycode: ^2.1.1
-    querystring-es3: ^0.2.1
-    sass: ^1.32.0
-    stream-browserify: ^3.0.0
-    stream-http: ^3.1.1
-    string_decoder: ^1.3.0
+    sass: ^1.32.2
     style-loader: ^2.0.0
-    terser-webpack-plugin: ^5.0.3
+    terser-webpack-plugin: ^5.1.1
     typescript: ^4.1.3
-    url: ^0.11.0
-    util: ^0.12.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
     webpack-node-externals: ^2.5.2
   languageName: unknown
@@ -3784,7 +3772,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/examples-nest-riba-ssr@workspace:examples/nest-riba-ssr"
   dependencies:
-    "@happy-dom/server-rendering": ^2.1.5
+    "@happy-dom/server-rendering": ^2.1.6
     "@nestjs/cli": ^7.5.4
     "@nestjs/common": ^7.6.5
     "@nestjs/config": ^0.6.1
@@ -3800,7 +3788,7 @@ __metadata:
     "@types/cookie-parser": ^1.4.2
     "@types/express": ^4.17.9
     "@types/express-session": ^1.17.3
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@types/jsdom": ^16.2.5
     "@types/node": ^14.14.20
     "@types/supertest": ^2.0.10
@@ -3815,7 +3803,7 @@ __metadata:
     express: ^4.17.1
     express-session: ^1.17.1
     find-root: ^1.1.0
-    happy-dom: ^2.1.5
+    happy-dom: ^2.1.6
     jest: ^26.6.3
     jsdom: ^16.4.0
     prettier: 2.2.1
@@ -3855,7 +3843,7 @@ __metadata:
     "@ribajs/events": "workspace:packages/events"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     babel-loader: ^8.2.2
@@ -3869,7 +3857,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: node
   linkType: soft
@@ -3893,7 +3881,7 @@ __metadata:
     "@ribajs/events": "workspace:packages/events"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     babel-loader: ^8.2.2
@@ -3907,7 +3895,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: unknown
   linkType: soft
@@ -3920,7 +3908,7 @@ __metadata:
     "@babel/runtime-corejs3": ^7.12.5
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     eslint: ^7.17.0
     typescript: ^4.1.3
   languageName: node
@@ -3934,7 +3922,7 @@ __metadata:
     "@babel/runtime-corejs3": ^7.12.5
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     eslint: ^7.17.0
     typescript: ^4.1.3
   languageName: unknown
@@ -3959,7 +3947,7 @@ __metadata:
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     babel-loader: ^8.2.2
@@ -3970,7 +3958,7 @@ __metadata:
     eslint-plugin-prettier: ^3.3.1
     prettier: 2.2.1
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: node
   linkType: soft
@@ -3994,7 +3982,7 @@ __metadata:
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     babel-loader: ^8.2.2
@@ -4005,7 +3993,7 @@ __metadata:
     eslint-plugin-prettier: ^3.3.1
     prettier: 2.2.1
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: unknown
   linkType: soft
@@ -4059,7 +4047,7 @@ __metadata:
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@types/jquery": ^3.5.5
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
@@ -4074,7 +4062,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: node
   linkType: soft
@@ -4098,7 +4086,7 @@ __metadata:
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@types/jquery": ^3.5.5
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
@@ -4113,7 +4101,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: unknown
   linkType: soft
@@ -4140,7 +4128,7 @@ __metadata:
     "@ribajs/extras": "workspace:packages/extras"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@types/leaflet": ^1.5.19
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
@@ -4157,7 +4145,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: unknown
   linkType: soft
@@ -4180,7 +4168,7 @@ __metadata:
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     babel-loader: ^8.2.2
@@ -4195,7 +4183,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: node
   linkType: soft
@@ -4218,7 +4206,7 @@ __metadata:
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     babel-loader: ^8.2.2
@@ -4233,7 +4221,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: unknown
   linkType: soft
@@ -4257,7 +4245,7 @@ __metadata:
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     babel-loader: ^8.2.2
@@ -4272,7 +4260,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: unknown
   linkType: soft
@@ -4281,7 +4269,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/nest-theme@portal:backend/nest-theme::locator=ribajs%40workspace%3A."
   dependencies:
-    "@happy-dom/server-rendering": ^2.1.5
+    "@happy-dom/server-rendering": ^2.1.6
     "@nestjs/cli": ^7.5.4
     "@nestjs/common": ^7.6.5
     "@nestjs/config": ^0.6.1
@@ -4296,7 +4284,7 @@ __metadata:
     "@types/cookie-parser": ^1.4.2
     "@types/express": ^4.17.9
     "@types/express-session": ^1.17.3
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@types/jsdom": ^16.2.5
     "@types/node": ^14.14.20
     "@types/supertest": ^2.0.10
@@ -4311,7 +4299,7 @@ __metadata:
     express: ^4.17.1
     express-session: ^1.17.1
     find-root: ^1.1.0
-    happy-dom: ^2.1.5
+    happy-dom: ^2.1.6
     jest: ^26.6.3
     jsdom: ^16.4.0
     prettier: 2.2.1
@@ -4336,7 +4324,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/nest-theme@workspace:backend/nest-theme"
   dependencies:
-    "@happy-dom/server-rendering": ^2.1.5
+    "@happy-dom/server-rendering": ^2.1.6
     "@nestjs/cli": ^7.5.4
     "@nestjs/common": ^7.6.5
     "@nestjs/config": ^0.6.1
@@ -4351,7 +4339,7 @@ __metadata:
     "@types/cookie-parser": ^1.4.2
     "@types/express": ^4.17.9
     "@types/express-session": ^1.17.3
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@types/jsdom": ^16.2.5
     "@types/node": ^14.14.20
     "@types/supertest": ^2.0.10
@@ -4366,7 +4354,7 @@ __metadata:
     express: ^4.17.1
     express-session: ^1.17.1
     find-root: ^1.1.0
-    happy-dom: ^2.1.5
+    happy-dom: ^2.1.6
     jest: ^26.6.3
     jsdom: ^16.4.0
     prettier: 2.2.1
@@ -4408,9 +4396,9 @@ __metadata:
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
     "@tsconfig/node14": ^1.0.0
-    "@types/gulp": ^4.0.7
+    "@types/gulp": ^4.0.8
     "@types/hex-color-regex": ^1.1.0
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@types/jquery": ^3.5.5
     "@types/js-yaml": ^4.0.0
     "@types/node": ^14.14.20
@@ -4433,7 +4421,7 @@ __metadata:
     rgb-regex: ^1.0.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: unknown
   linkType: soft
@@ -4457,7 +4445,7 @@ __metadata:
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@types/pdfjs-dist": ^2.1.7
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
@@ -4474,7 +4462,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: unknown
   linkType: soft
@@ -4500,7 +4488,7 @@ __metadata:
     "@ribajs/extras": "workspace:packages/extras"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     babel-loader: ^8.2.2
@@ -4515,7 +4503,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: node
   linkType: soft
@@ -4541,7 +4529,7 @@ __metadata:
     "@ribajs/extras": "workspace:packages/extras"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     babel-loader: ^8.2.2
@@ -4556,7 +4544,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.4.4
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: unknown
   linkType: soft
@@ -4580,7 +4568,7 @@ __metadata:
     "@ribajs/history": "workspace:packages/history"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/experimental-utils": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
@@ -4594,9 +4582,9 @@ __metadata:
     eslint-visitor-keys: ^2.0.0
     prettier: 2.2.1
     regexpp: ^3.1.0
-    tsutils: ^3.19.0
+    tsutils: ^3.19.1
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: node
   linkType: soft
@@ -4620,7 +4608,7 @@ __metadata:
     "@ribajs/history": "workspace:packages/history"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/experimental-utils": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
@@ -4634,9 +4622,9 @@ __metadata:
     eslint-visitor-keys: ^2.0.0
     prettier: 2.2.1
     regexpp: ^3.1.0
-    tsutils: ^3.19.0
+    tsutils: ^3.19.1
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: unknown
   linkType: soft
@@ -4660,7 +4648,7 @@ __metadata:
     "@ribajs/router": "workspace:packages/router"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     babel-loader: ^8.2.2
@@ -4671,7 +4659,7 @@ __metadata:
     eslint-plugin-prettier: ^3.3.1
     prettier: 2.2.1
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: node
   linkType: soft
@@ -4695,7 +4683,7 @@ __metadata:
     "@ribajs/router": "workspace:packages/router"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
     babel-loader: ^8.2.2
@@ -4706,7 +4694,7 @@ __metadata:
     eslint-plugin-prettier: ^3.3.1
     prettier: 2.2.1
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: unknown
   linkType: soft
@@ -4754,7 +4742,7 @@ __metadata:
     "@ribajs/shopify": "workspace:packages/shopify"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@types/socket.io-client": 1.4.34
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
@@ -4767,7 +4755,7 @@ __metadata:
     prettier: 2.2.1
     socket.io-client: 2.4.0
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: node
   linkType: soft
@@ -4793,7 +4781,7 @@ __metadata:
     "@ribajs/shopify": "workspace:packages/shopify"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@types/socket.io-client": 1.4.34
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
@@ -4806,7 +4794,7 @@ __metadata:
     prettier: 2.2.1
     socket.io-client: 2.4.0
     typescript: ^4.1.3
-    webpack: ^5.11.1
+    webpack: ^5.12.3
     webpack-cli: ^4.3.1
   languageName: unknown
   linkType: soft
@@ -4842,7 +4830,7 @@ __metadata:
     "@types/browser-sync": ^2.26.1
     "@types/debug": ^4.1.5
     "@types/find-root": ^1.1.2
-    "@types/gulp": ^4.0.7
+    "@types/gulp": ^4.0.8
     "@types/gulp-cheerio": ^0.0.33
     "@types/gulp-plumber": ^0.0.32
     "@types/gulp-rename": ^2.0.0
@@ -4852,7 +4840,7 @@ __metadata:
     "@types/gulp-terser": ^1.2.1
     "@types/gulp-util": ^3.0.35
     "@types/gulp-zip": ^4.0.1
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@types/js-yaml": ^4.0.0
     "@types/lodash": ^4.14.167
     "@types/node": ^14.14.20
@@ -4865,7 +4853,7 @@ __metadata:
     "@types/webpack-stream": ^3.2.11
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
-    archiver: ^5.1.0
+    archiver: ^5.2.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     bitbucket: ^2.4.2
@@ -4887,7 +4875,7 @@ __metadata:
     js-yaml: ^4.0.0
     lodash: ^4.17.20
     moment: ^2.29.1
-    open: ^7.3.0
+    open: ^7.3.1
     prettier: 2.2.1
     prompt: ^1.1.0
     shopify-admin-api: ^2.16.3
@@ -4947,7 +4935,7 @@ __metadata:
     "@types/browser-sync": ^2.26.1
     "@types/debug": ^4.1.5
     "@types/find-root": ^1.1.2
-    "@types/gulp": ^4.0.7
+    "@types/gulp": ^4.0.8
     "@types/gulp-cheerio": ^0.0.33
     "@types/gulp-plumber": ^0.0.32
     "@types/gulp-rename": ^2.0.0
@@ -4957,7 +4945,7 @@ __metadata:
     "@types/gulp-terser": ^1.2.1
     "@types/gulp-util": ^3.0.35
     "@types/gulp-zip": ^4.0.1
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@types/js-yaml": ^4.0.0
     "@types/lodash": ^4.14.167
     "@types/node": ^14.14.20
@@ -4970,7 +4958,7 @@ __metadata:
     "@types/webpack-stream": ^3.2.11
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
-    archiver: ^5.1.0
+    archiver: ^5.2.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     bitbucket: ^2.4.2
@@ -4992,7 +4980,7 @@ __metadata:
     js-yaml: ^4.0.0
     lodash: ^4.17.20
     moment: ^2.29.1
-    open: ^7.3.0
+    open: ^7.3.1
     prettier: 2.2.1
     prompt: ^1.1.0
     shopify-admin-api: ^2.16.3
@@ -5070,7 +5058,7 @@ __metadata:
     "@babel/runtime-corejs3": ^7.12.5
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     babel-jest: ^26.6.3
     eslint: ^7.17.0
     typescript: ^4.1.3
@@ -5085,7 +5073,7 @@ __metadata:
     "@babel/runtime-corejs3": ^7.12.5
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     babel-jest: ^26.6.3
     eslint: ^7.17.0
     typescript: ^4.1.3
@@ -5112,7 +5100,7 @@ __metadata:
     copy-webpack-plugin: ^7.0.0
     css-loader: ^5.0.1
     file-loader: ^6.2.0
-    fork-ts-checker-webpack-plugin: ^6.0.8
+    fork-ts-checker-webpack-plugin: ^6.1.0
     glob: ^7.1.6
     html-loader: ^1.3.2
     html-webpack-plugin: ^4.5.1
@@ -5120,15 +5108,15 @@ __metadata:
     mini-css-extract-plugin: ^1.3.3
     node-sass: ^5.0.0
     pkg-dir: ^5.0.0
-    postcss: ^8.2.2
+    postcss: ^8.2.4
     postcss-loader: ^4.1.0
     pug: ^3.0.0
     pug-loader: ^2.4.0
     resolve-url-loader: ^3.1.2
-    sass: ^1.32.0
-    sass-loader: ^10.1.0
+    sass: ^1.32.2
+    sass-loader: ^10.1.1
     style-loader: ^2.0.0
-    terser-webpack-plugin: ^5.0.3
+    terser-webpack-plugin: ^5.1.1
     webpack-dev-server: ^3.11.1
     webpack-node-externals: ^2.5.2
     webpackbar: ^5.0.0-3
@@ -5161,7 +5149,7 @@ __metadata:
     copy-webpack-plugin: ^7.0.0
     css-loader: ^5.0.1
     file-loader: ^6.2.0
-    fork-ts-checker-webpack-plugin: ^6.0.8
+    fork-ts-checker-webpack-plugin: ^6.1.0
     glob: ^7.1.6
     html-loader: ^1.3.2
     html-webpack-plugin: ^4.5.1
@@ -5169,15 +5157,15 @@ __metadata:
     mini-css-extract-plugin: ^1.3.3
     node-sass: ^5.0.0
     pkg-dir: ^5.0.0
-    postcss: ^8.2.2
+    postcss: ^8.2.4
     postcss-loader: ^4.1.0
     pug: ^3.0.0
     pug-loader: ^2.4.0
     resolve-url-loader: ^3.1.2
-    sass: ^1.32.0
-    sass-loader: ^10.1.0
+    sass: ^1.32.2
+    sass-loader: ^10.1.1
     style-loader: ^2.0.0
-    terser-webpack-plugin: ^5.0.3
+    terser-webpack-plugin: ^5.1.1
     webpack-dev-server: ^3.11.1
     webpack-node-externals: ^2.5.2
     webpackbar: ^5.0.0-3
@@ -5519,15 +5507,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express@npm:4.17.8":
-  version: 4.17.8
-  resolution: "@types/express@npm:4.17.8"
+"@types/express@npm:*, @types/express@npm:^4.17.9":
+  version: 4.17.9
+  resolution: "@types/express@npm:4.17.9"
   dependencies:
     "@types/body-parser": "*"
     "@types/express-serve-static-core": "*"
     "@types/qs": "*"
     "@types/serve-static": "*"
-  checksum: 9220ef3cb010faea3f77f85453b0ef3bd41e70003ac7d0ea2b7611ac9c36184995256cc61a7bb205f80a3bc51006cf7ccb29a0186c0d1fe0c0582946a0e65e7a
+  checksum: 80cd74784e9b40495b683b6b285be58bd7515f3b86923a72483fb8a6dec15ef159e651c460a215e9ad4e9620deec7345020fe33535c4eb12d81152b74b0278d0
   languageName: node
   linkType: hard
 
@@ -5665,14 +5653,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/gulp@npm:^4.0.7":
-  version: 4.0.7
-  resolution: "@types/gulp@npm:4.0.7"
+"@types/gulp@npm:^4.0.8":
+  version: 4.0.8
+  resolution: "@types/gulp@npm:4.0.8"
   dependencies:
     "@types/undertaker": "*"
     "@types/vinyl-fs": "*"
     chokidar: ^3.3.1
-  checksum: 9f57d7d9a09169c59b98e4af164d6bc30aa0ff46419d244198718d80b503ccd55d4b5318b39892f7f9da25424cf54ed1148e25309f3db0afceb9f00fb49d37c6
+  checksum: 75062292369343b86d37927038f8e38a0d3b437f55f05a8d1b315c2211ab61cedf2ceba35c2621b94aa8b6dadc52003da488cb347ca1c87a0dddbead9ab73f95
   languageName: node
   linkType: hard
 
@@ -5732,13 +5720,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:26.x, @types/jest@npm:^26.0.19":
+"@types/jest@npm:26.x":
   version: 26.0.19
   resolution: "@types/jest@npm:26.0.19"
   dependencies:
     jest-diff: ^26.0.0
     pretty-format: ^26.0.0
   checksum: 98c8daaf89ca79823461818c1c22d337354e250a135e0314ba1a49e615620c8e2f54c5b900ba8554bf853919c97538f9a38b5af00cea83fd715ee2e6d75e04b8
+  languageName: node
+  linkType: hard
+
+"@types/jest@npm:^26.0.20":
+  version: 26.0.20
+  resolution: "@types/jest@npm:26.0.20"
+  dependencies:
+    jest-diff: ^26.0.0
+    pretty-format: ^26.0.0
+  checksum: 221e39c7c9ce8d71ae4b2ba6abeef1a5b04f1cd96419b9fbbb65534bef4c4215b650561183073dcf47584ff1888d1f4fa7d2af2a38492b7feb9a3bfdcd24c44f
   languageName: node
   linkType: hard
 
@@ -5838,21 +5836,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>= 8":
-  version: 14.14.14
-  resolution: "@types/node@npm:14.14.14"
-  checksum: dea8d257d49d68c65dafa6ebde9453bb61b67febc92ed8d7e38fce8b95f18d32ccffb3ab37021f9be8d1e5c65cd59cdb7dd8981d9b89b2be103b3012aee09fcf
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^13.7.0":
-  version: 13.13.36
-  resolution: "@types/node@npm:13.13.36"
-  checksum: 6051625e34ce7b3eac64802629503f18e3930c3330fbb13128dea6ef0a87322df1ad30dcfd3bda3ff849dd18152f7038fb472a373f26e186966a7bdd50eae3c4
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^14.14.20":
+"@types/node@npm:latest":
   version: 14.14.20
   resolution: "@types/node@npm:14.14.20"
   checksum: 84a9fd73de978967723f951173ff4d07dca259941d3e37c7a3dbb236c09b3f2294bb2098678a806afe6fd6cac39a7d0a1d399f602378c951bd5d01ede535d570
@@ -6291,6 +6275,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@webassemblyjs/ast@npm:1.11.0":
+  version: 1.11.0
+  resolution: "@webassemblyjs/ast@npm:1.11.0"
+  dependencies:
+    "@webassemblyjs/helper-numbers": 1.11.0
+    "@webassemblyjs/helper-wasm-bytecode": 1.11.0
+  checksum: fc26bf2c831c472535eb45b21931c2118d3037cd132b4837accf41a3a2e3501a5a894389b79fd80106af936c574be164a1af42219e66237de96a617690aecfcf
+  languageName: node
+  linkType: hard
+
 "@webassemblyjs/ast@npm:1.9.0":
   version: 1.9.0
   resolution: "@webassemblyjs/ast@npm:1.9.0"
@@ -6302,14 +6296,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webassemblyjs/ast@npm:1.9.1":
-  version: 1.9.1
-  resolution: "@webassemblyjs/ast@npm:1.9.1"
-  dependencies:
-    "@webassemblyjs/helper-module-context": 1.9.1
-    "@webassemblyjs/helper-wasm-bytecode": 1.9.1
-    "@webassemblyjs/wast-parser": 1.9.1
-  checksum: d2bb54b4f32be4596d21403059cdadf366aad2c3735cb6f2973c1c7dadef58ca61a0f832bd2f6ae23c676e62d0d0ed1d2cbec29e43c7f21067795cca14d4dc28
+"@webassemblyjs/floating-point-hex-parser@npm:1.11.0":
+  version: 1.11.0
+  resolution: "@webassemblyjs/floating-point-hex-parser@npm:1.11.0"
+  checksum: ae591c9e961f14510ea599c6aa08b9a728cc23e7ba19bd8383bf23b695035c5bbeb5f25dba34ad2fba441eb39beebe0d1aa6e83ead4a19a78120449ab3a56ef0
   languageName: node
   linkType: hard
 
@@ -6320,10 +6310,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webassemblyjs/floating-point-hex-parser@npm:1.9.1":
-  version: 1.9.1
-  resolution: "@webassemblyjs/floating-point-hex-parser@npm:1.9.1"
-  checksum: fc9ee5780a1e1416e22a920879f8f34841c06f112df25f9fedad3d349ecd8e26c699bbb58fa1db505ef4a205c7fc41e729b6d715d9f161290e62d8ab23d92db4
+"@webassemblyjs/helper-api-error@npm:1.11.0":
+  version: 1.11.0
+  resolution: "@webassemblyjs/helper-api-error@npm:1.11.0"
+  checksum: 6a2c533780e63d79df33a2f455d0bcfbbbd0543da4f5e845eb6f7f7d68debf124a6e3c5d50888cc2eb4c251d90f77e6203498fff3177e8eb03e5175bae37a956
   languageName: node
   linkType: hard
 
@@ -6334,10 +6324,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webassemblyjs/helper-api-error@npm:1.9.1":
-  version: 1.9.1
-  resolution: "@webassemblyjs/helper-api-error@npm:1.9.1"
-  checksum: 3244e86c67551e5fdbd809dc6418731924e178bc5c1e361e8e229d1d20c584c6be0c7aa212e3c6363ad922bf66dfb3fbc9860b1fca9addde8a1772d522e3a4e2
+"@webassemblyjs/helper-buffer@npm:1.11.0":
+  version: 1.11.0
+  resolution: "@webassemblyjs/helper-buffer@npm:1.11.0"
+  checksum: 9303e0eaa4a1ab63fa1c8be95b6777499440946c4213846672cca4bb4657674d6c4a05cdfdfc8c0b22e885c830abdbcd9132ca1b869f3f41c244aacec3a4013e
   languageName: node
   linkType: hard
 
@@ -6345,13 +6335,6 @@ __metadata:
   version: 1.9.0
   resolution: "@webassemblyjs/helper-buffer@npm:1.9.0"
   checksum: 94bcf27ccf4e5cfcdb92f89bb1e80a973656cab5d19e67eb61a8b5c9cf4ce060616e3afc3d900f6cffa2fc9746a4ad7be75fa448c06af4d4103e507584149a78
-  languageName: node
-  linkType: hard
-
-"@webassemblyjs/helper-buffer@npm:1.9.1":
-  version: 1.9.1
-  resolution: "@webassemblyjs/helper-buffer@npm:1.9.1"
-  checksum: 3f29b8fa34652b975123752dcfe4e86bc475caf7f36db42b853c7504afed7d8b16d5a2d6fe6e8ee76b243b43c910cf5e92c44356f6a18e6c322df19ef7670911
   languageName: node
   linkType: hard
 
@@ -6364,26 +6347,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webassemblyjs/helper-code-frame@npm:1.9.1":
-  version: 1.9.1
-  resolution: "@webassemblyjs/helper-code-frame@npm:1.9.1"
-  dependencies:
-    "@webassemblyjs/wast-printer": 1.9.1
-  checksum: b533f1817761f5c15c8eb9d5eb3eb304d522ad73267045fe5f0d2dbdb223a22c6c1615120db5861e9fb0526fcddb36d13694e57c2aa14f135db68995b62c15a0
-  languageName: node
-  linkType: hard
-
 "@webassemblyjs/helper-fsm@npm:1.9.0":
   version: 1.9.0
   resolution: "@webassemblyjs/helper-fsm@npm:1.9.0"
   checksum: 3181e69c16aad1267fd471283b797e86f5e0b26abfddf1d0d2ddef8a758f486cd2482887ec317ecbb5c421aa1d11dea17a06e92c59ea9bd38513204e6c7b8f3d
-  languageName: node
-  linkType: hard
-
-"@webassemblyjs/helper-fsm@npm:1.9.1":
-  version: 1.9.1
-  resolution: "@webassemblyjs/helper-fsm@npm:1.9.1"
-  checksum: ff717cfa8200ca853e572d2fd0218eda7cacc5fbe1e0cb51be579af381ebe786e14ae54b37be815b348ac48183ab3c00384b866cc6ec66c8f4d89fa09413dea4
   languageName: node
   linkType: hard
 
@@ -6396,12 +6363,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webassemblyjs/helper-module-context@npm:1.9.1":
-  version: 1.9.1
-  resolution: "@webassemblyjs/helper-module-context@npm:1.9.1"
+"@webassemblyjs/helper-numbers@npm:1.11.0":
+  version: 1.11.0
+  resolution: "@webassemblyjs/helper-numbers@npm:1.11.0"
   dependencies:
-    "@webassemblyjs/ast": 1.9.1
-  checksum: 1ee952876a07e87939eaa5f00be2c7a6b7c5dbaf5d42e9f96e3b36ab2b4c8f8dd5779fb8efdd31f765276d369e4c992095b03f53f435357ca9dd4e139441853b
+    "@webassemblyjs/floating-point-hex-parser": 1.11.0
+    "@webassemblyjs/helper-api-error": 1.11.0
+    "@xtuc/long": 4.2.2
+  checksum: 58c29d37f9d6c5eaa1feb6af7ab7282cb35d1c9eaa95406c64942507ac11de1a975082fc825556e73b9ed5cdecb8aa22020559028ae45d5b3d42a7f2a6773881
+  languageName: node
+  linkType: hard
+
+"@webassemblyjs/helper-wasm-bytecode@npm:1.11.0":
+  version: 1.11.0
+  resolution: "@webassemblyjs/helper-wasm-bytecode@npm:1.11.0"
+  checksum: 5bcd67b430c6b39a25fe8904cc2f832ebfef7e2da17a84326553e2b69dde7aa6bc486380f4fa0d01f17f966fff93ac3b6523ffad79e4b8661eb6ddf7f9182e88
   languageName: node
   linkType: hard
 
@@ -6412,10 +6388,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webassemblyjs/helper-wasm-bytecode@npm:1.9.1":
-  version: 1.9.1
-  resolution: "@webassemblyjs/helper-wasm-bytecode@npm:1.9.1"
-  checksum: 1902efd9863af9785ea72a6faa6e13f08a77952723f07650b8115602e98eecdfa6761c0c01ff5ef84dc0f03bc7fdd816760018de7e91a1bd8ec9e53385ff1c7d
+"@webassemblyjs/helper-wasm-section@npm:1.11.0":
+  version: 1.11.0
+  resolution: "@webassemblyjs/helper-wasm-section@npm:1.11.0"
+  dependencies:
+    "@webassemblyjs/ast": 1.11.0
+    "@webassemblyjs/helper-buffer": 1.11.0
+    "@webassemblyjs/helper-wasm-bytecode": 1.11.0
+    "@webassemblyjs/wasm-gen": 1.11.0
+  checksum: ad4dd37c2b88ad2f7b53e5e9c04a1ce75eace4fd05b117a5459ebf9b8bd4f417ec6837c8b448481da95cad14d48413b937072146fee79796d1c86ec0cc32339d
   languageName: node
   linkType: hard
 
@@ -6431,15 +6412,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webassemblyjs/helper-wasm-section@npm:1.9.1":
-  version: 1.9.1
-  resolution: "@webassemblyjs/helper-wasm-section@npm:1.9.1"
+"@webassemblyjs/ieee754@npm:1.11.0":
+  version: 1.11.0
+  resolution: "@webassemblyjs/ieee754@npm:1.11.0"
   dependencies:
-    "@webassemblyjs/ast": 1.9.1
-    "@webassemblyjs/helper-buffer": 1.9.1
-    "@webassemblyjs/helper-wasm-bytecode": 1.9.1
-    "@webassemblyjs/wasm-gen": 1.9.1
-  checksum: 235e0344ce7a2911588d739f1939ee901efb8b25f54a32a69201dccec7d4479c47b9a26217645472b6e496ad5d85d269cb60102c624c5b441d95c591b8e84c7a
+    "@xtuc/ieee754": ^1.2.0
+  checksum: 7f282b7ab0754d89ad42f224de34622309e67a4869fc016b51fc8931ce0443a7bab289d5a59c683a9197fdaa60849e26cd68d2b36492af28b9d89139fda3c6c3
   languageName: node
   linkType: hard
 
@@ -6452,12 +6430,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webassemblyjs/ieee754@npm:1.9.1":
-  version: 1.9.1
-  resolution: "@webassemblyjs/ieee754@npm:1.9.1"
+"@webassemblyjs/leb128@npm:1.11.0":
+  version: 1.11.0
+  resolution: "@webassemblyjs/leb128@npm:1.11.0"
   dependencies:
-    "@xtuc/ieee754": ^1.2.0
-  checksum: dffd70d68220edfcdd11928ef20c4166ee8706baa7892793c7a245e8c51086747e7847882b23a63161388531090525e4412155d191ee6ad3d0816eacad14a572
+    "@xtuc/long": 4.2.2
+  checksum: d101b817361498a92697ddf9432bcde12bb52924d2494fad8bddd79ce6386f0c81275f014905b0342edd61d3b2a5b97e044b91f023fab9b44b0e00f8f794b888
   languageName: node
   linkType: hard
 
@@ -6470,12 +6448,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webassemblyjs/leb128@npm:1.9.1":
-  version: 1.9.1
-  resolution: "@webassemblyjs/leb128@npm:1.9.1"
-  dependencies:
-    "@xtuc/long": 4.2.2
-  checksum: 737e63b429e398b90a97af148864c7d32553fcf90cc14a497c87184c3233a1540a6fe3ecbd8d64d82f1f301396500c9805d380ae04d89708470ca57c4ffcaac1
+"@webassemblyjs/utf8@npm:1.11.0":
+  version: 1.11.0
+  resolution: "@webassemblyjs/utf8@npm:1.11.0"
+  checksum: 772caa33fe900043a0dcf1cb4a6cc82a3359460a9de1df7dd9aaf736fcade80e678d939ca8e23063eccd17e44c0184769899874fe8d8f787e56318d462dcb83e
   languageName: node
   linkType: hard
 
@@ -6486,10 +6462,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webassemblyjs/utf8@npm:1.9.1":
-  version: 1.9.1
-  resolution: "@webassemblyjs/utf8@npm:1.9.1"
-  checksum: 17ea013083026df33c0414964ab722becd3217842ad0332182d4605d2f0a51e9b12717accebecfc3c163035ec97c2f13571406f1b1a997a1969422d8c5a9c029
+"@webassemblyjs/wasm-edit@npm:1.11.0":
+  version: 1.11.0
+  resolution: "@webassemblyjs/wasm-edit@npm:1.11.0"
+  dependencies:
+    "@webassemblyjs/ast": 1.11.0
+    "@webassemblyjs/helper-buffer": 1.11.0
+    "@webassemblyjs/helper-wasm-bytecode": 1.11.0
+    "@webassemblyjs/helper-wasm-section": 1.11.0
+    "@webassemblyjs/wasm-gen": 1.11.0
+    "@webassemblyjs/wasm-opt": 1.11.0
+    "@webassemblyjs/wasm-parser": 1.11.0
+    "@webassemblyjs/wast-printer": 1.11.0
+  checksum: 3d83a925a54270fbc443a9606375b63469fc938e8af0ddd2516c98c2dd52d3113345a9ce1c8c42b524ee1301c45124685377a6dd764b56628cf5563e484fee0f
   languageName: node
   linkType: hard
 
@@ -6509,19 +6494,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webassemblyjs/wasm-edit@npm:1.9.1":
-  version: 1.9.1
-  resolution: "@webassemblyjs/wasm-edit@npm:1.9.1"
+"@webassemblyjs/wasm-gen@npm:1.11.0":
+  version: 1.11.0
+  resolution: "@webassemblyjs/wasm-gen@npm:1.11.0"
   dependencies:
-    "@webassemblyjs/ast": 1.9.1
-    "@webassemblyjs/helper-buffer": 1.9.1
-    "@webassemblyjs/helper-wasm-bytecode": 1.9.1
-    "@webassemblyjs/helper-wasm-section": 1.9.1
-    "@webassemblyjs/wasm-gen": 1.9.1
-    "@webassemblyjs/wasm-opt": 1.9.1
-    "@webassemblyjs/wasm-parser": 1.9.1
-    "@webassemblyjs/wast-printer": 1.9.1
-  checksum: 7348088939358e78bc0a7636485d8faf5f8faed423dc9b7f8cd364b8b2043e4dd3b3bb9b4c59efad57a78a6ac2e8d499e97ecb57b9ada4e353dc305a5399e735
+    "@webassemblyjs/ast": 1.11.0
+    "@webassemblyjs/helper-wasm-bytecode": 1.11.0
+    "@webassemblyjs/ieee754": 1.11.0
+    "@webassemblyjs/leb128": 1.11.0
+    "@webassemblyjs/utf8": 1.11.0
+  checksum: 3886702e589f8c19a34b7778837e2928da730291d1b19bae4fe2954dd8bf28ae5e1574880346762b788445a096c3b6a94c244d38ef66823a76c8f7a8d989c8e1
   languageName: node
   linkType: hard
 
@@ -6538,16 +6520,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webassemblyjs/wasm-gen@npm:1.9.1":
-  version: 1.9.1
-  resolution: "@webassemblyjs/wasm-gen@npm:1.9.1"
+"@webassemblyjs/wasm-opt@npm:1.11.0":
+  version: 1.11.0
+  resolution: "@webassemblyjs/wasm-opt@npm:1.11.0"
   dependencies:
-    "@webassemblyjs/ast": 1.9.1
-    "@webassemblyjs/helper-wasm-bytecode": 1.9.1
-    "@webassemblyjs/ieee754": 1.9.1
-    "@webassemblyjs/leb128": 1.9.1
-    "@webassemblyjs/utf8": 1.9.1
-  checksum: acfb3dc6d27e136c3b517ae010a5c36ac143eecbdc326393e7f1006a50a66c332054d67355092f1e3900db6a20e82d208d7ffe4ddbb7d4c55225f96342054998
+    "@webassemblyjs/ast": 1.11.0
+    "@webassemblyjs/helper-buffer": 1.11.0
+    "@webassemblyjs/wasm-gen": 1.11.0
+    "@webassemblyjs/wasm-parser": 1.11.0
+  checksum: 8e2757994c07c4534f5f747da54919a37777ec0f97bc6a9a53739d87408346fa1464e1932f66d671091c51e3a983977e31be464568ad6e06762ec2c052eeda0c
   languageName: node
   linkType: hard
 
@@ -6563,15 +6544,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webassemblyjs/wasm-opt@npm:1.9.1":
-  version: 1.9.1
-  resolution: "@webassemblyjs/wasm-opt@npm:1.9.1"
+"@webassemblyjs/wasm-parser@npm:1.11.0":
+  version: 1.11.0
+  resolution: "@webassemblyjs/wasm-parser@npm:1.11.0"
   dependencies:
-    "@webassemblyjs/ast": 1.9.1
-    "@webassemblyjs/helper-buffer": 1.9.1
-    "@webassemblyjs/wasm-gen": 1.9.1
-    "@webassemblyjs/wasm-parser": 1.9.1
-  checksum: 44687846e65f29587ed0cad3b1f5c9ce262dbdfa9eba6cd30b21284d2bcf0b8f4a216264dbae62ef8dbb2059ef025a8d59745972dfc7df067faad6778fe0abf6
+    "@webassemblyjs/ast": 1.11.0
+    "@webassemblyjs/helper-api-error": 1.11.0
+    "@webassemblyjs/helper-wasm-bytecode": 1.11.0
+    "@webassemblyjs/ieee754": 1.11.0
+    "@webassemblyjs/leb128": 1.11.0
+    "@webassemblyjs/utf8": 1.11.0
+  checksum: 12bfbb25b96630a1e44570cb71db33c368d0b86ccb56d2f80951217f7e072da894eef4512302e2f4155793acd2cf510d36af2b71aac672e94c64752d96cd3e97
   languageName: node
   linkType: hard
 
@@ -6589,20 +6572,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webassemblyjs/wasm-parser@npm:1.9.1":
-  version: 1.9.1
-  resolution: "@webassemblyjs/wasm-parser@npm:1.9.1"
-  dependencies:
-    "@webassemblyjs/ast": 1.9.1
-    "@webassemblyjs/helper-api-error": 1.9.1
-    "@webassemblyjs/helper-wasm-bytecode": 1.9.1
-    "@webassemblyjs/ieee754": 1.9.1
-    "@webassemblyjs/leb128": 1.9.1
-    "@webassemblyjs/utf8": 1.9.1
-  checksum: 65a448850ff8dd23e4150cf27d8647c037f2c70ac8c8bdec2c48f1c3ef22cfc70769c67c700311f6067d7441053b8c7a0422afa240ed69f9e0615335ad397881
-  languageName: node
-  linkType: hard
-
 "@webassemblyjs/wast-parser@npm:1.9.0":
   version: 1.9.0
   resolution: "@webassemblyjs/wast-parser@npm:1.9.0"
@@ -6617,17 +6586,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webassemblyjs/wast-parser@npm:1.9.1":
-  version: 1.9.1
-  resolution: "@webassemblyjs/wast-parser@npm:1.9.1"
+"@webassemblyjs/wast-printer@npm:1.11.0":
+  version: 1.11.0
+  resolution: "@webassemblyjs/wast-printer@npm:1.11.0"
   dependencies:
-    "@webassemblyjs/ast": 1.9.1
-    "@webassemblyjs/floating-point-hex-parser": 1.9.1
-    "@webassemblyjs/helper-api-error": 1.9.1
-    "@webassemblyjs/helper-code-frame": 1.9.1
-    "@webassemblyjs/helper-fsm": 1.9.1
+    "@webassemblyjs/ast": 1.11.0
     "@xtuc/long": 4.2.2
-  checksum: 67b3e5219cf820058e8cc28daa37f00aa146a0ed1f08ad2cd8b20c6d0a8913b9cc6af49e5c4de72a7c77b3ab45df27990f6256fbfb84c7d8fac4bffe8725b059
+  checksum: 06eafb92cb347400f3a025102ad8f605fab706c8a89b4ecabedfe6d06854370e7f38304fd5b345bafa1c9c5de988318eb69b2252e9c67edacea8709d2e966dca
   languageName: node
   linkType: hard
 
@@ -6639,17 +6604,6 @@ __metadata:
     "@webassemblyjs/wast-parser": 1.9.0
     "@xtuc/long": 4.2.2
   checksum: 9f013b27e28b60cb215011079a15c94d1a7b0784eb3b59ec4936f8c0635ecdb58875c6809485cff814e01df170f02c18676cf782826795dc08553b98e69c1049
-  languageName: node
-  linkType: hard
-
-"@webassemblyjs/wast-printer@npm:1.9.1":
-  version: 1.9.1
-  resolution: "@webassemblyjs/wast-printer@npm:1.9.1"
-  dependencies:
-    "@webassemblyjs/ast": 1.9.1
-    "@webassemblyjs/wast-parser": 1.9.1
-    "@xtuc/long": 4.2.2
-  checksum: 58f032ad7b104230287ff5b947f67d4065c2d5dd80f42404d9986d87d23e3d95de6bf7a21ce59a427ae9bf80c218f06987af77f6bf2b87b3069e735746799500
   languageName: node
   linkType: hard
 
@@ -7161,9 +7115,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"archiver@npm:^5.1.0":
-  version: 5.1.0
-  resolution: "archiver@npm:5.1.0"
+"archiver@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "archiver@npm:5.2.0"
   dependencies:
     archiver-utils: ^2.1.0
     async: ^3.2.0
@@ -7172,7 +7126,7 @@ __metadata:
     readdir-glob: ^1.0.0
     tar-stream: ^2.1.4
     zip-stream: ^4.0.4
-  checksum: 55cc33a4fa566a3c7cc68df7755904cde0dbd96c771393146b78c7a386b6138630243d4c176a079c93953ccb838ff84dbc0cf890f2748c3c9ad321755905ac7b
+  checksum: 4de8f6dd90dfbab163b4895f8d1e41b00c65d84eb618d3b0c3156ec5270fa044cd17ae9ad0713739a47f3e6663704541b9ccb689d70b368a8fe6b8ae65ef89ce
   languageName: node
   linkType: hard
 
@@ -7283,13 +7237,6 @@ __metadata:
   version: 1.0.1
   resolution: "array-each@npm:1.0.1"
   checksum: 59a456f95151c1c4bdf02550ef455cd86cf1fff44f0ce3e5559caa9550a7663dd147f9bda58bff85756a5454da4e136282396391aedec1f19793f143910c6272
-  languageName: node
-  linkType: hard
-
-"array-filter@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "array-filter@npm:1.0.0"
-  checksum: e0edbae5296e6904f369b5ad2919e932b6aa4ac525951b8713f4379183bbeb2f73c3e788dca1104b95c5ed919c430ba0a4b036dfb32be492665ba5213e80791c
   languageName: node
   linkType: hard
 
@@ -7447,18 +7394,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"assert@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "assert@npm:2.0.0"
-  dependencies:
-    es6-object-assign: ^1.1.0
-    is-nan: ^1.2.1
-    object-is: ^1.0.1
-    util: ^0.12.0
-  checksum: c3593bcc4c63c1e6fd3b62a7c788cf7337118d79b827d79b0ed60e596d4968b80b2f8aa8e41bc5742621596bd60aa9de62ea166d85a584a6db177d7087e907f3
-  languageName: node
-  linkType: hard
-
 "assign-symbols@npm:^1.0.0":
   version: 1.0.0
   resolution: "assign-symbols@npm:1.0.0"
@@ -7596,15 +7531,6 @@ __metadata:
   bin:
     autoprefixer: bin/autoprefixer
   checksum: b406d8047a97fcc39c9c6d208fd6f1974e5957800461d9a79457a3ecaca2c0ea090bd06f30c8653f48f751c31115c63a80502ff8c9a6bb7b8a5a5063021827d4
-  languageName: node
-  linkType: hard
-
-"available-typed-arrays@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "available-typed-arrays@npm:1.0.2"
-  dependencies:
-    array-filter: ^1.0.0
-  checksum: 1f01d36fa3f25a06fd00968a1bc32fa75e5b56268828be5a7c6d0bdf37be0d7517d1b9aa5f1a6d2626725cb59708e280c5a9cf9a1b4d86f5e571d48168904061
   languageName: node
   linkType: hard
 
@@ -8309,16 +8235,6 @@ __metadata:
     base64-js: ^1.3.1
     ieee754: ^1.1.13
   checksum: 1750ac396eb36e0157ff5299509723ac0681338ef6cd40b039bc86d59c8b9a9494e99db992836eb6d637de0b270b53ec1a62d4a1c9faeaa51468cc340e553984
-  languageName: node
-  linkType: hard
-
-"buffer@npm:^6.0.3":
-  version: 6.0.3
-  resolution: "buffer@npm:6.0.3"
-  dependencies:
-    base64-js: ^1.3.1
-    ieee754: ^1.2.1
-  checksum: a8cf6a58571dc7c43b24ab821ad4c72222d9040775f49fd143a30fad45f33ec0a8e0d572ca80d589ad4f8b4715aa012c029dc2b925dc95467f135c2d13d7abfb
   languageName: node
   linkType: hard
 
@@ -9483,7 +9399,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"crypto-browserify@npm:^3.11.0, crypto-browserify@npm:^3.12.0":
+"crypto-browserify@npm:^3.11.0":
   version: 3.12.0
   resolution: "crypto-browserify@npm:3.12.0"
   dependencies:
@@ -10698,13 +10614,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"es6-object-assign@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "es6-object-assign@npm:1.1.0"
-  checksum: 18f01190b46b15a5fd6275dfc37c1c10bb331be4e392362785f63a141aa33edd0d8fbd2d5150c4b0a524aa14b8c4f825a559274cbc765bce59331e015923b4d8
-  languageName: node
-  linkType: hard
-
 "es6-promise@npm:^4.2.5":
   version: 4.2.8
   resolution: "es6-promise@npm:4.2.8"
@@ -11538,12 +11447,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"find-versions@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "find-versions@npm:3.2.0"
+"find-versions@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "find-versions@npm:4.0.0"
   dependencies:
-    semver-regex: ^2.0.0
-  checksum: 2ddc16b4265184e2b7ab68bfd9d84835178fef4193abd957ebe328e0de98e8ca3b31e2a19201c1c8308e24786faa295aab46c0bc21fa89440e2a1bc8174987f0
+    semver-regex: ^3.1.2
+  checksum: 05174128349e522f0746cc343a509f2ce1c8c765e24968ff2ac6f82fda4e4c680f5f71c6a781ce28406d19addc32a205116ac14ee83cb2e336635dd803f56cbd
   languageName: node
   linkType: hard
 
@@ -11660,13 +11569,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"foreach@npm:^2.0.5":
-  version: 2.0.5
-  resolution: "foreach@npm:2.0.5"
-  checksum: 890d6c3dec185be6b1f7a94003d67d1b36a068fd7ac5a89f92818c3459d7d43e040a0b228a632e2e50d8a5aa804da6a5d27258ccbc1b7b724fe39eea3834f240
-  languageName: node
-  linkType: hard
-
 "foreachasync@npm:^3.0.0":
   version: 3.0.0
   resolution: "foreachasync@npm:3.0.0"
@@ -11701,9 +11603,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fork-ts-checker-webpack-plugin@npm:^6.0.8":
-  version: 6.0.8
-  resolution: "fork-ts-checker-webpack-plugin@npm:6.0.8"
+"fork-ts-checker-webpack-plugin@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "fork-ts-checker-webpack-plugin@npm:6.1.0"
   dependencies:
     "@babel/code-frame": ^7.8.3
     "@types/json-schema": ^7.0.5
@@ -11717,7 +11619,7 @@ __metadata:
     schema-utils: 2.7.0
     semver: ^7.3.2
     tapable: ^1.0.0
-  checksum: d9240f7aba9da4072920d1ae551e752b29404df57f8415bcd436d79ad6eaba928f39175a1140cbaaf9430364749498c0a98598031e37701037f06928be4bcff9
+  checksum: 34785a8c0506b8bc0a0da5adfc95dc785e209de85a63f9924c8a47ef743cea5bd481e8d196323e13e671e86e571f34ab98423ff8f5bd3a349da2e8087bb78dc9
   languageName: node
   linkType: hard
 
@@ -12440,15 +12342,15 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"happy-dom@npm:^2.1.5":
-  version: 2.1.5
-  resolution: "happy-dom@npm:2.1.5"
+"happy-dom@npm:^2.1.6":
+  version: 2.1.6
+  resolution: "happy-dom@npm:2.1.6"
   dependencies:
     he: ^1.1.1
     node-fetch: ^2.6.1
     whatwg-encoding: ^1.0.5
     whatwg-mimetype: ^2.3.0
-  checksum: 69a38faef3fa827cb42c42b9dd7da3d4e6a8fad8aa929ad3745063070be113379a58458b37c149d5bc59eef39551d73d618dcf2936b6d2c6e8827b9f19e00940
+  checksum: 89f466ac1a30de391b5aa1d05f36c536721759a480a9157de64d5684c62858d863aa3de9464dc936628a1ab25e259fbababfdd9854622a02f342c536a788ace4
   languageName: node
   linkType: hard
 
@@ -12888,24 +12790,24 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"husky@npm:^4.3.6":
-  version: 4.3.6
-  resolution: "husky@npm:4.3.6"
+"husky@npm:^4.3.7":
+  version: 4.3.7
+  resolution: "husky@npm:4.3.7"
   dependencies:
     chalk: ^4.0.0
     ci-info: ^2.0.0
     compare-versions: ^3.6.0
     cosmiconfig: ^7.0.0
-    find-versions: ^3.2.0
+    find-versions: ^4.0.0
     opencollective-postinstall: ^2.0.2
-    pkg-dir: ^4.2.0
+    pkg-dir: ^5.0.0
     please-upgrade-node: ^3.2.0
     slash: ^3.0.0
     which-pm-runs: ^1.0.0
   bin:
     husky-run: bin/run.js
     husky-upgrade: lib/upgrader/bin.js
-  checksum: 3c8708887822c93094c4af22608df00a3bdd74784172d13cd08c5d1ed3e7a602f6016bce9982de206f060661f1ea801362edf5658c18fc4a3866d605c47ecaf9
+  checksum: 799b1484e47f868760a612d8578f0bc2cf8848a55719ad00bfbd6bec3d094afaca024631949157390a05616a1c83242c3d917f33c049d9161f7af3ec313b6870
   languageName: node
   linkType: hard
 
@@ -12941,7 +12843,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"ieee754@npm:^1.1.13, ieee754@npm:^1.1.4, ieee754@npm:^1.2.1":
+"ieee754@npm:^1.1.13, ieee754@npm:^1.1.4":
   version: 1.2.1
   resolution: "ieee754@npm:1.2.1"
   checksum: 6c1cfab995ecab3b0dbb6cfb7e192686eb02f0f8e788f2d962e1fc02e2d5ab38a85e06d417221f136bd029663a77cdb920d99605d68d3730a05597dd7910426a
@@ -13064,7 +12966,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"inherits@npm:2, inherits@npm:2.0.4, inherits@npm:^2.0.1, inherits@npm:^2.0.3, inherits@npm:^2.0.4, inherits@npm:~2.0.1, inherits@npm:~2.0.3, inherits@npm:~2.0.4":
+"inherits@npm:2, inherits@npm:2.0.4, inherits@npm:^2.0.1, inherits@npm:^2.0.3, inherits@npm:^2.0.4, inherits@npm:~2.0.1, inherits@npm:~2.0.3":
   version: 2.0.4
   resolution: "inherits@npm:2.0.4"
   checksum: 98426da247ddfc3dcd7d7daedd90c3ca32d5b08deca08949726f12d49232aef94772a07b36cf4ff833e105ae2ef931777f6de4a6dd8245a216b9299ad4a50bea
@@ -13444,13 +13346,6 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"is-generator-function@npm:^1.0.7":
-  version: 1.0.8
-  resolution: "is-generator-function@npm:1.0.8"
-  checksum: 1aa2b83ca5ca750d7acb1701476aea6a01e277ab71610e01fc69ee3fbb7d050c753a5d74ece25f3f1e6c9eef1d1c42c1681be3b5c1174f183110bc0ca565677a
-  languageName: node
-  linkType: hard
-
 "is-glob@npm:^3.1.0":
   version: 3.1.0
   resolution: "is-glob@npm:3.1.0"
@@ -13473,16 +13368,6 @@ fsevents@~2.3.1:
   version: 1.0.0
   resolution: "is-interactive@npm:1.0.0"
   checksum: d79b435e5134ccd60dfe035117b1cddd5c5100e90b2d33428adfe1667e26f0114cc1bc7b3ff84a1b107de8ef27f155e3ecc3bb08c0e502a15c66300b4a45d9e5
-  languageName: node
-  linkType: hard
-
-"is-nan@npm:^1.2.1":
-  version: 1.3.2
-  resolution: "is-nan@npm:1.3.2"
-  dependencies:
-    call-bind: ^1.0.0
-    define-properties: ^1.1.3
-  checksum: 258ecdd2c149c4e073a3c7dff0ee1316950509d9a507c6f8e8ccce8c4ef73e9f29cdf7836cc1037bbbada283ac9fe189c0451016a9aca6c27eb12eaa900452f8
   languageName: node
   linkType: hard
 
@@ -13653,19 +13538,6 @@ fsevents@~2.3.1:
   dependencies:
     has-symbols: ^1.0.1
   checksum: 753aa0cf95069387521b110c6646df4e0b5cce76cf604521c26b4f5d30a997a95036ed5930c0cca9e850ac6fccb04de551cc95aab71df471ee88e04ed1a96f21
-  languageName: node
-  linkType: hard
-
-"is-typed-array@npm:^1.1.3":
-  version: 1.1.4
-  resolution: "is-typed-array@npm:1.1.4"
-  dependencies:
-    available-typed-arrays: ^1.0.2
-    call-bind: ^1.0.0
-    es-abstract: ^1.18.0-next.1
-    foreach: ^2.0.5
-    has-symbols: ^1.0.1
-  checksum: 51038a52afa7808b09999c68882701427ade09beaa9dd35831b40c8a03e66f0e0469e56528c5ef934e4d222d8d467b6ccc1ac3043a03247e73c8e27e4656e139
   languageName: node
   linkType: hard
 
@@ -14829,6 +14701,13 @@ fsevents@~2.3.1:
   version: 4.1.0
   resolution: "loader-runner@npm:4.1.0"
   checksum: 2b964f3484249acc18f1c28e35aee284ed698a73e9f1913bc045761ad0af3a61b403e22ce170e4cc8bdcea87fddb6a34b42e9f88a023758e635d5276c75dd8c4
+  languageName: node
+  linkType: hard
+
+"loader-runner@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "loader-runner@npm:4.2.0"
+  checksum: e8b103ae98d589d9f5444b51053cc8ec48d8d6d9c1d0f845fd6d25ada769c68f22c5031a58ba95faf9a561eb95607a38005ac37339e1e4e37105467193d2b290
   languageName: node
   linkType: hard
 
@@ -16213,13 +16092,23 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"open@npm:*, open@npm:^7.3.0":
+"open@npm:*":
   version: 7.3.0
   resolution: "open@npm:7.3.0"
   dependencies:
     is-docker: ^2.0.0
     is-wsl: ^2.1.1
   checksum: a212fc9cf619a1386b9440b925e72c447b32c9e59b978f86260e99dab2c218c758bc83f9d657a58d1210b65ab5dba77045240d36e71721074926b1e896092db6
+  languageName: node
+  linkType: hard
+
+"open@npm:^7.3.1":
+  version: 7.3.1
+  resolution: "open@npm:7.3.1"
+  dependencies:
+    is-docker: ^2.0.0
+    is-wsl: ^2.1.1
+  checksum: 102d5ee88467663ee9d5883b3487e3cac147cc8e39128029978c54b8f9c3e868e8e65aba88fbc2444ee98787b217554559019678793631203c1d87474caecb7e
   languageName: node
   linkType: hard
 
@@ -16396,7 +16285,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"p-limit@npm:^3.0.2":
+"p-limit@npm:^3.0.2, p-limit@npm:^3.1.0":
   version: 3.1.0
   resolution: "p-limit@npm:3.1.0"
   dependencies:
@@ -16646,13 +16535,6 @@ fsevents@~2.3.1:
   version: 0.0.1
   resolution: "path-browserify@npm:0.0.1"
   checksum: b7be4bcc030b6cca2f2093d776af57d508a781afb7a72bb2214e93559a57d9265c23f5ded45ae74f25ffe1dfaed98281685f86e1210cd3b68b85a3a217c45922
-  languageName: node
-  linkType: hard
-
-"path-browserify@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "path-browserify@npm:1.0.1"
-  checksum: 45bb7389177dfe5cba5d1ee9589e578c8272ac330c00d388343845199c1d30227ca8d59bb3a15618e478673fcfa2fb7a5ad2bfcc1083d442a61a3a71aecd7dd6
   languageName: node
   linkType: hard
 
@@ -17463,14 +17345,14 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.2.2":
-  version: 8.2.2
-  resolution: "postcss@npm:8.2.2"
+"postcss@npm:^8.2.4":
+  version: 8.2.4
+  resolution: "postcss@npm:8.2.4"
   dependencies:
     colorette: ^1.2.1
     nanoid: ^3.1.20
     source-map: ^0.6.1
-  checksum: c661b093d245ef8e3b0340958f672e3abeb89627afa7064771dafafa49c80742f0b6e05c55ee5ab14aa1da2095aebfd69325778df8a90d4e41fdf685a76993f2
+  checksum: fb06b52d515c6768f5e372b3cec3d902cc0f37dd5128657739ab524ccc155655a6b2adf2f44cf670ad38cbccddae79d72d21093aecd1a7b023609ef548d71d6d
   languageName: node
   linkType: hard
 
@@ -17940,7 +17822,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"querystring-es3@npm:^0.2.0, querystring-es3@npm:^0.2.1":
+"querystring-es3@npm:^0.2.0":
   version: 0.2.1
   resolution: "querystring-es3@npm:0.2.1"
   checksum: 3c388906aa5644e55cdbede78f99a4d05a6e36a45b06929ad8713a2020a5cefeb6ec23adaa27584d968cf658e5d237b5e216f5e48930d040cd6b810679714741
@@ -18119,7 +18001,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"readable-stream@npm:2 || 3, readable-stream@npm:3, readable-stream@npm:^3.0.6, readable-stream@npm:^3.1.1, readable-stream@npm:^3.4.0, readable-stream@npm:^3.5.0, readable-stream@npm:^3.6.0":
+"readable-stream@npm:2 || 3, readable-stream@npm:3, readable-stream@npm:^3.0.6, readable-stream@npm:^3.1.1, readable-stream@npm:^3.4.0, readable-stream@npm:^3.6.0":
   version: 3.6.0
   resolution: "readable-stream@npm:3.6.0"
   dependencies:
@@ -18687,7 +18569,7 @@ fsevents@~2.3.1:
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/types": "workspace:infra/types"
     "@types/core-js": ^2.5.4
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/experimental-utils": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
@@ -18701,7 +18583,7 @@ fsevents@~2.3.1:
     eslint-config-prettier: ^7.1.0
     eslint-plugin-prettier: ^3.3.1
     glob: ^7.1.6
-    husky: ^4.3.6
+    husky: ^4.3.7
     jest: ^26.6.3
     jest-config: ^26.6.3
     jest-extended: ^0.11.5
@@ -18877,9 +18759,9 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"sass-loader@npm:^10.1.0":
-  version: 10.1.0
-  resolution: "sass-loader@npm:10.1.0"
+"sass-loader@npm:^10.1.1":
+  version: 10.1.1
+  resolution: "sass-loader@npm:10.1.1"
   dependencies:
     klona: ^2.0.4
     loader-utils: ^2.0.0
@@ -18898,18 +18780,18 @@ fsevents@~2.3.1:
       optional: true
     sass:
       optional: true
-  checksum: f443dad79ba982462ff69a860207324c9f19e122c59f03b0608557a4aa7ec2158e6172059c6d8ae4fe5bad0182c3b0434904571b3a36e8ec5e0c44a7610bcebb
+  checksum: 725245f0259453fcc51c4a1012c484dda1340ebb10b9c461e2b3b4408105f5426ad5613282ad0861c1f32744533d8a584450b11daf42aa1237b04287f01223d4
   languageName: node
   linkType: hard
 
-"sass@npm:^1.32.0":
-  version: 1.32.0
-  resolution: "sass@npm:1.32.0"
+"sass@npm:^1.32.2":
+  version: 1.32.2
+  resolution: "sass@npm:1.32.2"
   dependencies:
     chokidar: ">=2.0.0 <4.0.0"
   bin:
     sass: sass.js
-  checksum: 3d18acd93805431e32061484007b9fd1cc2f216f629f2f33bd97fabcbd875d3d62a1d717a5de226f24d27247b485edbd9cd4cd1d7ef653326f7b5de2b928d35f
+  checksum: 4e5b89eb673aa1b4d2f805ee6e352e40b296ebbcf528cd25fbb90f3d3e6ecd6fd0b9b7f6ef94190e39cb0b18d3942e30b08396246e45509500750c1879a295bd
   languageName: node
   linkType: hard
 
@@ -19015,10 +18897,10 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"semver-regex@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "semver-regex@npm:2.0.0"
-  checksum: 9b96cc8bd559c1d46968b334ccc88115a2d9d2f7a2125d6838471114ed0c52057e77aae760fbe4932aee06687584733b32aed6d2c9654b2db33e383bfb8f26ce
+"semver-regex@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "semver-regex@npm:3.1.2"
+  checksum: 6a83740f3fc24379629be068e677c71c57e0d9df4977eb56d863f26a7830b85f14d9f1af71ca3a84df9ac70fcd9ce8821466064f5652ffa0dc343b50ded86698
   languageName: node
   linkType: hard
 
@@ -19781,16 +19663,6 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"stream-browserify@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "stream-browserify@npm:3.0.0"
-  dependencies:
-    inherits: ~2.0.4
-    readable-stream: ^3.5.0
-  checksum: 55fb0c30082a87f7e42f1c093ad7aee42c942864edf11ac911e6e89d5be9877ba32fd20569f6bfb489dabd71b63d3264bec349463294abc270fba42bedd6ca22
-  languageName: node
-  linkType: hard
-
 "stream-buffers@npm:^3.0.2":
   version: 3.0.2
   resolution: "stream-buffers@npm:3.0.2"
@@ -19825,18 +19697,6 @@ fsevents@~2.3.1:
     to-arraybuffer: ^1.0.0
     xtend: ^4.0.0
   checksum: 7ef9e10567b1a49d6c05730427280ef7623a6b407df3981d5d14d30d56225c4d64857d7473ab8eca93dbcaaf897e4f4fda8b5b482cf26255e26f1a31d696c1b8
-  languageName: node
-  linkType: hard
-
-"stream-http@npm:^3.1.1":
-  version: 3.1.1
-  resolution: "stream-http@npm:3.1.1"
-  dependencies:
-    builtin-status-codes: ^3.0.0
-    inherits: ^2.0.4
-    readable-stream: ^3.6.0
-    xtend: ^4.0.2
-  checksum: 59334d615fdd774d1a8ac73ed5f348986c96ebfc0c3679a162a37838f07839ba3607e3e1a042ea78a1d920a8cf2c3ccacbb91ff9538975e9dfdcadae2ca7eb42
   languageName: node
   linkType: hard
 
@@ -19966,7 +19826,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"string_decoder@npm:^1.0.0, string_decoder@npm:^1.1.1, string_decoder@npm:^1.3.0":
+"string_decoder@npm:^1.0.0, string_decoder@npm:^1.1.1":
   version: 1.3.0
   resolution: "string_decoder@npm:1.3.0"
   dependencies:
@@ -20354,6 +20214,22 @@ fsevents@~2.3.1:
   peerDependencies:
     webpack: ^5.1.0
   checksum: e71ae79f550095f1e33330b696f860ed6f704d5ad5c6e06a2a4e4db577c758007874459f8b67a4608285ca7c58c6fc3718482be51762f88fa20dbd6101ce700c
+  languageName: node
+  linkType: hard
+
+"terser-webpack-plugin@npm:^5.1.1":
+  version: 5.1.1
+  resolution: "terser-webpack-plugin@npm:5.1.1"
+  dependencies:
+    jest-worker: ^26.6.2
+    p-limit: ^3.1.0
+    schema-utils: ^3.0.0
+    serialize-javascript: ^5.0.1
+    source-map: ^0.6.1
+    terser: ^5.5.1
+  peerDependencies:
+    webpack: ^5.1.0
+  checksum: 8364e53f34764f94aa5c7e74c506d36e130e63cbe91e84cc3f176d712cbc2d3127be8267c88395523e6e39dd45e759704335dc17efab27489a05d9fa148bf05d
   languageName: node
   linkType: hard
 
@@ -20794,14 +20670,14 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"tsutils@npm:^3.19.0":
-  version: 3.19.0
-  resolution: "tsutils@npm:3.19.0"
+"tsutils@npm:^3.19.1":
+  version: 3.19.1
+  resolution: "tsutils@npm:3.19.1"
   dependencies:
     tslib: ^1.8.1
   peerDependencies:
     typescript: ">=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta"
-  checksum: 39f744520462a870e66b44442e26a144c1dc8a640c938a7da3260a531fa15285612bca4243538eb470d83f7200a328fb93f6ef4ca880c21a40365f2299076f90
+  checksum: 410d9931359db7a2bb974260b59789f2cf587f3e90bfb4c012747bdbcbb07fff18782c626c5ff71e792e5be3ab91f50176b5cdf419f4ffcffba8e288266261bf
   languageName: node
   linkType: hard
 
@@ -21296,20 +21172,6 @@ typescript@^4.1.3:
   dependencies:
     inherits: 2.0.3
   checksum: f05afc3d9a284eff28017d8bd474d56fbd27e7a5ad81f44720341b02ae5554ac9c06d0d08034aaf537d56116624232123054e58ec3873133144bda3b521de9ef
-  languageName: node
-  linkType: hard
-
-"util@npm:^0.12.0, util@npm:^0.12.3":
-  version: 0.12.3
-  resolution: "util@npm:0.12.3"
-  dependencies:
-    inherits: ^2.0.3
-    is-arguments: ^1.0.4
-    is-generator-function: ^1.0.7
-    is-typed-array: ^1.1.3
-    safe-buffer: ^5.1.2
-    which-typed-array: ^1.1.2
-  checksum: 684f2f586db12c86b2c2800e5d4963fe2e95a85ece1e52f25344e54c29d62e985c716ec53b817970121e0ea47f99a971299998848e35a5d1c5953e182852d6fe
   languageName: node
   linkType: hard
 
@@ -21838,16 +21700,15 @@ typescript@^4.1.3:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.11.1":
-  version: 5.11.1
-  resolution: "webpack@npm:5.11.1"
+"webpack@npm:^5.12.3":
+  version: 5.12.3
+  resolution: "webpack@npm:5.12.3"
   dependencies:
     "@types/eslint-scope": ^3.7.0
     "@types/estree": ^0.0.45
-    "@webassemblyjs/ast": 1.9.1
-    "@webassemblyjs/helper-module-context": 1.9.1
-    "@webassemblyjs/wasm-edit": 1.9.1
-    "@webassemblyjs/wasm-parser": 1.9.1
+    "@webassemblyjs/ast": 1.11.0
+    "@webassemblyjs/wasm-edit": 1.11.0
+    "@webassemblyjs/wasm-parser": 1.11.0
     acorn: ^8.0.4
     browserslist: ^4.14.5
     chrome-trace-event: ^1.0.2
@@ -21857,13 +21718,13 @@ typescript@^4.1.3:
     glob-to-regexp: ^0.4.1
     graceful-fs: ^4.2.4
     json-parse-better-errors: ^1.0.2
-    loader-runner: ^4.1.0
+    loader-runner: ^4.2.0
     mime-types: ^2.1.27
     neo-async: ^2.6.2
     pkg-dir: ^5.0.0
     schema-utils: ^3.0.0
     tapable: ^2.1.1
-    terser-webpack-plugin: ^5.0.3
+    terser-webpack-plugin: ^5.1.1
     watchpack: ^2.0.0
     webpack-sources: ^2.1.1
   peerDependenciesMeta:
@@ -21871,7 +21732,7 @@ typescript@^4.1.3:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: c3130daeaa37c5acde0e8d75462d41914349522f8c85d20e7da669aa7997eb3ba3b051d3f25fc2c7ff76e87c8dab25f09a791fbad66c696e09cb2dd0fbcda0ad
+  checksum: 13cf14fc114b1c984a7ad3f6f8db79d3980f4e366c174a57a7d2d497b09d26df5061e91e54465b55df2819340b1ec8a83e648d1016c52880e02d8a468de8875a
   languageName: node
   linkType: hard
 
@@ -21956,21 +21817,6 @@ typescript@^4.1.3:
   version: 1.0.0
   resolution: "which-pm-runs@npm:1.0.0"
   checksum: 0bb79a782e98955afec8f35a3ae95c4711fdd3d0743772ee98211da67c2421fdd4c92c95c93532cc0b4dcc085d8e27f3ad2f8a9173cb632692379bd3d2818821
-  languageName: node
-  linkType: hard
-
-"which-typed-array@npm:^1.1.2":
-  version: 1.1.4
-  resolution: "which-typed-array@npm:1.1.4"
-  dependencies:
-    available-typed-arrays: ^1.0.2
-    call-bind: ^1.0.0
-    es-abstract: ^1.18.0-next.1
-    foreach: ^2.0.5
-    function-bind: ^1.1.1
-    has-symbols: ^1.0.1
-    is-typed-array: ^1.1.3
-  checksum: aa89770be09f62f8836f2334080513f8de82ec6e9a503eb9b8867775ac47db72c0a75ac8ac7e5f71825a7b8e5eb6ef0b65dd66cea54709cf73f2ae81b722d5ec
   languageName: node
   linkType: hard
 
@@ -22198,7 +22044,7 @@ typescript@^4.1.3:
   languageName: node
   linkType: hard
 
-"xtend@npm:>=4.0.0 <4.1.0-0, xtend@npm:^4.0.0, xtend@npm:^4.0.2, xtend@npm:~4.0.0, xtend@npm:~4.0.1":
+"xtend@npm:>=4.0.0 <4.1.0-0, xtend@npm:^4.0.0, xtend@npm:~4.0.0, xtend@npm:~4.0.1":
   version: 4.0.2
   resolution: "xtend@npm:4.0.2"
   checksum: 37ee522a3e9fb9b143a400c30b21dc122aa8c9c9411c6afae1005a4617dc20a21765c114d544e37a6bb60c2733dd8ee0a44ed9e80d884ac78cccd30b5e0ab0da
