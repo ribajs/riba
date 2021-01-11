@@ -12,13 +12,10 @@ export declare class SsrService {
     getSharedContext(req: Request): Promise<SharedContext>;
     getTemplateEngine(templatePath: string): string;
     transformLayout(layout: string, rootTag: string, pageTag: string): Promise<string>;
-    readSsrScripts(): Promise<{
-        vendors: string;
-        main: string;
-    }>;
+    readSsrScripts(filenames: string[]): Promise<Map<string, string>>;
     renderTemplate(templatePath: string, variables: any): Promise<any>;
-    renderWithJSDom(layout: string, componentTagName: string, sharedContext: SharedContext): Promise<RenderResult>;
-    renderWithHappyDom(layout: string, componentTagName: string, sharedContext: SharedContext): Promise<RenderResult>;
+    renderWithJSDom(layout: string, componentTagName: string, sharedContext: SharedContext, scriptFilenames?: string[]): Promise<RenderResult>;
+    renderWithHappyDom(layout: string, componentTagName: string, sharedContext: SharedContext, scriptFilenames?: string[]): Promise<RenderResult>;
     renderComponent({ template, rootTag, componentTagName, engine, sharedContext, }: {
         template?: string;
         rootTag?: string;

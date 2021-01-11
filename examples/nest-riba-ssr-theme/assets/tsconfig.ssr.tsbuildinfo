@@ -360,7 +360,7 @@
         "affectsGlobalScope": false
       },
       "../../../packages/core/src/services/http.service.ts": {
-        "version": "b41c30c90bd15d93727936024e3e731d34851e46e3666e2df7710b2134d29da0",
+        "version": "18c3b91bbb963365b958cc4de6231c9e57b02dc4139c6fd9e145521bdfed65b6",
         "affectsGlobalScope": false
       },
       "../../../packages/core/src/services/utils.ts": {
@@ -1135,7 +1135,7 @@
         "affectsGlobalScope": false
       },
       "../../../packages/ssr/src/types/theme-config.ts": {
-        "version": "2d1dd745395e9b3dcd4695235a0d2cae09a50c2297588b487400fbf0b0461d6f",
+        "version": "aec20fbb05e908f37d98ddb4ecc5b5fa496401875039299b1e18f4da29feeb04",
         "affectsGlobalScope": false
       },
       "../../../packages/ssr/src/types/index.ts": {

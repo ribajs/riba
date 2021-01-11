@@ -98,20 +98,19 @@ export class SsrService {
     return layout;
   }
 
-  async readSsrScripts() {
-    const assetsPath = this.theme.assetsDir;
-    const vendorPath = resolve(assetsPath, 'ssr', 'vendors.bundle.js');
-    const mainPath = resolve(assetsPath, 'ssr', 'main.bundle.js');
-    console.debug('vendorPath', vendorPath);
-    console.debug('mainPath', mainPath);
-    const vendors = await fs.readFile(vendorPath, 'utf8');
-    const main = await fs.readFile(mainPath, 'utf8');
-    this.log.debug('Scripts readed!');
+  async readSsrScripts(filenames: string[]) {
+    const scripts = new Map<string, string>();
+    const assetsDir = this.theme.assetsDir;
+    const scriptsDir = resolve(assetsDir, 'ssr');
+    for (const filename of filenames) {
+      const scriptPath = resolve(scriptsDir, filename);
+      console.debug('scriptPath', scriptPath);
+      const scriptSource = await fs.readFile(scriptPath, 'utf8');
+      this.log.debug('Scripts readed!');
+      scripts.set(filename, scriptSource);
+    }
 
-    return {
-      vendors,
-      main,
-    };
+    return scripts;
   }
 
   /**
@@ -152,6 +151,7 @@ export class SsrService {
     layout: string,
     componentTagName: string,
     sharedContext: SharedContext,
+    scriptFilenames = ['main.bundle.js'],
   ) {
     const virtualConsole = new VirtualConsole();
     virtualConsole.sendTo(console);
@@ -162,17 +162,23 @@ export class SsrService {
       includeNodeLocations: true,
     });
 
-    const { vendors, main } = await this.readSsrScripts();
-    const script = new Script(vendors + ' ' + main, {
-      filename: 'vender-main.js',
-    });
+    const scriptSources = await this.readSsrScripts(scriptFilenames);
+    const scripts: Script[] = [];
+    for (const [filename, scriptSource] of scriptSources) {
+      const script = new Script(scriptSource, {
+        filename,
+      });
+      scripts.push(script);
+    }
 
     // Set shared context here
     const vmContext = dom.getInternalVMContext();
     const window: Window = vmContext.window;
     window.ssr = sharedContext;
     this.log.debug('Execute scripts...');
-    script.runInContext(vmContext);
+    for (const script of scripts) {
+      await script.runInContext(vmContext);
+    }
 
     this.log.debug('Wait for custom element...');
     // await dom.window.customElements.whenDefined(componentTagName);
@@ -212,6 +218,7 @@ export class SsrService {
     layout: string,
     componentTagName: string,
     sharedContext: SharedContext,
+    scriptFilenames = ['main.bundle.js'],
   ) {
     const context = new HappyDOMContext();
     const window = (context as any).window; // TODO window is private, make pr for this
@@ -219,18 +226,19 @@ export class SsrService {
     // Set shared context here
     window.ssr = sharedContext;
 
-    const { vendors, main } = await this.readSsrScripts();
-    const vendorsScript = new Script(vendors, {
-      filename: 'vendor.bundle.js',
-    });
-    const mainScript = new Script(main, {
-      filename: 'main.bundle.js',
-    });
+    const scriptSources = await this.readSsrScripts(scriptFilenames);
+    const scripts: Script[] = [];
+    for (const [filename, scriptSource] of scriptSources) {
+      const script = new Script(scriptSource, {
+        filename,
+      });
+      scripts.push(script);
+    }
 
     // Do not use await here because we want to run the next method after we get the promise result
     const ssrResultPromise = context.render({
       html: layout,
-      scripts: [vendorsScript, mainScript],
+      scripts,
       customElements: {
         openShadowRoots: false,
         extractCSS: false,

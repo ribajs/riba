@@ -82,19 +82,18 @@ let SsrService = class SsrService {
         layout = layout.replace(new RegExp(rootTag, 'gi'), pageTag);
         return layout;
     }
-    async readSsrScripts() {
-        const assetsPath = this.theme.assetsDir;
-        const vendorPath = path_1.resolve(assetsPath, 'ssr', 'vendors.bundle.js');
-        const mainPath = path_1.resolve(assetsPath, 'ssr', 'main.bundle.js');
-        console.debug('vendorPath', vendorPath);
-        console.debug('mainPath', mainPath);
-        const vendors = await fs_1.promises.readFile(vendorPath, 'utf8');
-        const main = await fs_1.promises.readFile(mainPath, 'utf8');
-        this.log.debug('Scripts readed!');
-        return {
-            vendors,
-            main,
-        };
+    async readSsrScripts(filenames) {
+        const scripts = new Map();
+        const assetsDir = this.theme.assetsDir;
+        const scriptsDir = path_1.resolve(assetsDir, 'ssr');
+        for (const filename of filenames) {
+            const scriptPath = path_1.resolve(scriptsDir, filename);
+            console.debug('scriptPath', scriptPath);
+            const scriptSource = await fs_1.promises.readFile(scriptPath, 'utf8');
+            this.log.debug('Scripts readed!');
+            scripts.set(filename, scriptSource);
+        }
+        return scripts;
     }
     async renderTemplate(templatePath, variables) {
         if (!path_1.extname(templatePath)) {
@@ -114,7 +113,7 @@ let SsrService = class SsrService {
             throw error;
         }
     }
-    async renderWithJSDom(layout, componentTagName, sharedContext) {
+    async renderWithJSDom(layout, componentTagName, sharedContext, scriptFilenames = ['main.bundle.js']) {
         const virtualConsole = new jsdom_1.VirtualConsole();
         virtualConsole.sendTo(console);
         const dom = new jsdom_1.JSDOM(layout, {
@@ -122,15 +121,21 @@ let SsrService = class SsrService {
             runScripts: 'outside-only',
             includeNodeLocations: true,
         });
-        const { vendors, main } = await this.readSsrScripts();
-        const script = new vm_1.Script(vendors + ' ' + main, {
-            filename: 'vender-main.js',
-        });
+        const scriptSources = await this.readSsrScripts(scriptFilenames);
+        const scripts = [];
+        for (const [filename, scriptSource] of scriptSources) {
+            const script = new vm_1.Script(scriptSource, {
+                filename,
+            });
+            scripts.push(script);
+        }
         const vmContext = dom.getInternalVMContext();
         const window = vmContext.window;
         window.ssr = sharedContext;
         this.log.debug('Execute scripts...');
-        script.runInContext(vmContext);
+        for (const script of scripts) {
+            await script.runInContext(vmContext);
+        }
         this.log.debug('Wait for custom element...');
         this.log.debug('Scripts executed!');
         return new Promise((resolve, reject) => {
@@ -145,20 +150,21 @@ let SsrService = class SsrService {
             });
         });
     }
-    async renderWithHappyDom(layout, componentTagName, sharedContext) {
+    async renderWithHappyDom(layout, componentTagName, sharedContext, scriptFilenames = ['main.bundle.js']) {
         const context = new server_rendering_1.HappyDOMContext();
         const window = context.window;
         window.ssr = sharedContext;
-        const { vendors, main } = await this.readSsrScripts();
-        const vendorsScript = new vm_1.Script(vendors, {
-            filename: 'vendor.bundle.js',
-        });
-        const mainScript = new vm_1.Script(main, {
-            filename: 'main.bundle.js',
-        });
+        const scriptSources = await this.readSsrScripts(scriptFilenames);
+        const scripts = [];
+        for (const [filename, scriptSource] of scriptSources) {
+            const script = new vm_1.Script(scriptSource, {
+                filename,
+            });
+            scripts.push(script);
+        }
         const ssrResultPromise = context.render({
             html: layout,
-            scripts: [vendorsScript, mainScript],
+            scripts,
             customElements: {
                 openShadowRoots: false,
                 extractCSS: false,
