@@ -13,3 +13,7 @@
   pointer-events: none;
   color: grey;
 }
+
+.submitted .shop-input-appendix::after {
+  content: '';
+}

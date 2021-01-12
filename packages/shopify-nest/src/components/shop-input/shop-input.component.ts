@@ -5,6 +5,7 @@ import pugTemplate from "./shop-input.component.pug";
 
 interface Scope {
   shop: string;
+  submitted: boolean;
 }
 
 export class ShopifyNestShopInputComponent extends Component {
@@ -18,6 +19,7 @@ export class ShopifyNestShopInputComponent extends Component {
 
   protected scope: Scope = {
     shop: "",
+    submitted: false,
   };
 
   constructor(element?: HTMLElement) {
@@ -26,6 +28,16 @@ export class ShopifyNestShopInputComponent extends Component {
   }
   protected connectedCallback() {
     super.connectedCallback();
+    let form = this.el;
+    while (form.tagName !== "FORM") {
+      form = form.parentElement as HTMLElement;
+    }
+    form.addEventListener("submit", () => {
+      this.scope.submitted = true;
+      (this.el as HTMLInputElement).value += ".myshopify.com";
+      this.scope.submitted = true;
+      return true;
+    });
     return this.init(ShopifyNestShopInputComponent.observedAttributes);
   }
 
