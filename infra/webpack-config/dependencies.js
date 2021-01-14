@@ -41,7 +41,7 @@ module.exports.getDependencies = (config = {}) => {
     config.styles.SassImplementation || require("sass");
 
   // Graphql loader https://www.npmjs.com/package/@graphql-tools/webpack-loader
-  config.gqlLoaderPath =  config.gqlLoaderPath || require.resolve("@graphql-tools/webpack-loader");
+  config.gqlLoaderPath =  config.gqlLoaderPath || require.resolve('raw-loader'); // require.resolve("@graphql-tools/webpack-loader");
 
   // https://github.com/webpack-contrib/copy-webpack-plugin
   if (config.copyAssets && config.copyAssets.enable === true) {

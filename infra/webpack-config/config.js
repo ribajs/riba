@@ -71,7 +71,7 @@ module.exports.getConfig = (config = {}, env = {}) => {
     // GraphQL
     {
       test: /\.(graphql|gql)$/,
-      use: require.resolve('raw-loader'),
+      use: config.gqlLoaderPath,
       // exclude: /node_modules/,
       // loader: config.gqlLoaderPath,
       // options: {
