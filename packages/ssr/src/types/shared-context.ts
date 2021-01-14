@@ -7,6 +7,9 @@ interface ExpressRoute extends Partial<Request["route"]> {
 
 export interface SharedContext {
   events: EventDispatcher;
+  env: {
+    [key: string]: string;
+  };
   ctx: {
     // See https://expressjs.com/de/api.html#req
     app: Request["app"];

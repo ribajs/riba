@@ -186,8 +186,8 @@
         "affectsGlobalScope": false
       },
       "../../../infra/types/index.d.ts": {
-        "version": "b401e53e2b008f3ed45a044bdf1d3412ee00dcc9e6a42c4713d5a9fd4626bbbf",
-        "signature": "b401e53e2b008f3ed45a044bdf1d3412ee00dcc9e6a42c4713d5a9fd4626bbbf",
+        "version": "8e86d1b18024ea763e150db89df27f85129d4006e45d393df02ffa6a35fa8228",
+        "signature": "8e86d1b18024ea763e150db89df27f85129d4006e45d393df02ffa6a35fa8228",
         "affectsGlobalScope": false
       },
       "../../../packages/utils/src/color.ts": {
@@ -836,7 +836,7 @@
         "affectsGlobalScope": false
       },
       "../../../packages/ssr/src/page-component.ts": {
-        "version": "5bd703fc30c8265676e9f155ac43dd5ef96006b38b625b1f0c82802135c99d64",
+        "version": "78d24b8ddef23c2cd3a55d6396ca8e4631720ec0b6a1096d76b674c99a8261d1",
         "affectsGlobalScope": false
       },
       "../../../packages/ssr/src/types/page-component-after-bind-event-data.ts": {
@@ -1096,9 +1096,9 @@
         "signature": "c236451df6139a965bb9b8fba15a43a8bebf4400ca589998e2bdc5e1291fa0f9",
         "affectsGlobalScope": false
       },
-      "../../../.yarn/cache/@types-express-serve-static-core-npm-4.17.17-7991258b35-97a4f64b61.zip/node_modules/@types/express-serve-static-core/index.d.ts": {
-        "version": "ae8d1b919cc922283c52b0c5a3404ef4ffd9eeda1202254b6295e4a87acb8fee",
-        "signature": "ae8d1b919cc922283c52b0c5a3404ef4ffd9eeda1202254b6295e4a87acb8fee",
+      "../../../.yarn/cache/@types-express-serve-static-core-npm-4.17.18-3a96b13167-329d5ded5c.zip/node_modules/@types/express-serve-static-core/index.d.ts": {
+        "version": "1630272009eb17f1577a172cce36619460d96a6df7ad24153897f7836e19f992",
+        "signature": "1630272009eb17f1577a172cce36619460d96a6df7ad24153897f7836e19f992",
         "affectsGlobalScope": true
       },
       "../../../.yarn/cache/@types-mime-npm-2.0.3-809d6f0e0f-6df548a912.zip/node_modules/@types/mime/index.d.ts": {
@@ -1121,13 +1121,13 @@
         "signature": "ebddbd167c2fabd0151f50e5df94ca6d845149c47521280d8867afe3429dd078",
         "affectsGlobalScope": false
       },
-      "../../../.yarn/cache/@types-express-npm-4.17.9-7895807ac2-80cd74784e.zip/node_modules/@types/express/index.d.ts": {
-        "version": "924732dfbdfd120ee07cf733c7c65018f24ce9ddf06ed9ccf3cad8fdc2e33585",
-        "signature": "924732dfbdfd120ee07cf733c7c65018f24ce9ddf06ed9ccf3cad8fdc2e33585",
+      "../../../.yarn/cache/@types-express-npm-4.17.11-1b3f17f056-2818120a0f.zip/node_modules/@types/express/index.d.ts": {
+        "version": "3b05c396564e51753e921e1cc4aae1cf7cd9be53c891cf2e81fa29f11c0bd373",
+        "signature": "3b05c396564e51753e921e1cc4aae1cf7cd9be53c891cf2e81fa29f11c0bd373",
         "affectsGlobalScope": false
       },
       "../../../packages/ssr/src/types/shared-context.ts": {
-        "version": "2fd463b73536a6a2fb1dbe5312ca3399c71bee772ffd497ebdc73074c05b9d7c",
+        "version": "11a031ebade4b0b2a5e266f82f62e0d5b16c6e81733b5352b5ecc15528a8f3ce",
         "affectsGlobalScope": false
       },
       "../../../packages/ssr/src/types/template-engines.ts": {
@@ -1222,12 +1222,13 @@
       "types": [
         "node"
       ],
-      "sourceMap": true,
+      "sourceMap": false,
       "outDir": "./",
       "incremental": true,
       "baseUrl": "../scripts",
-      "project": "../tsconfig.ssr.json",
-      "noEmit": true,
+      "skipLibCheck": true,
+      "inlineSourceMap": false,
+      "declarationMap": false,
       "configFilePath": "../tsconfig.ssr.json"
     },
     "referencedMap": {
@@ -1240,13 +1241,13 @@
         "../../../.yarn/cache/@types-node-npm-14.14.20-60a93b1d39-84a9fd73de.zip/node_modules/@types/node/http.d.ts",
         "../../../.yarn/cache/@types-node-npm-14.14.20-60a93b1d39-84a9fd73de.zip/node_modules/@types/node/index.d.ts"
       ],
-      "../../../.yarn/cache/@types-express-npm-4.17.9-7895807ac2-80cd74784e.zip/node_modules/@types/express/index.d.ts": [
+      "../../../.yarn/cache/@types-express-npm-4.17.11-1b3f17f056-2818120a0f.zip/node_modules/@types/express/index.d.ts": [
         "../../../.yarn/cache/@types-body-parser-npm-1.19.0-3ca4d08a60-4576f3fde5.zip/node_modules/@types/body-parser/index.d.ts",
-        "../../../.yarn/cache/@types-express-serve-static-core-npm-4.17.17-7991258b35-97a4f64b61.zip/node_modules/@types/express-serve-static-core/index.d.ts",
+        "../../../.yarn/cache/@types-express-serve-static-core-npm-4.17.18-3a96b13167-329d5ded5c.zip/node_modules/@types/express-serve-static-core/index.d.ts",
         "../../../.yarn/cache/@types-qs-npm-6.9.5-98e83ee762-afe4721a80.zip/node_modules/@types/qs/index.d.ts",
         "../../../.yarn/cache/@types-serve-static-npm-1.13.8-c8cbed794a-39db4c0f0f.zip/node_modules/@types/serve-static/index.d.ts"
       ],
-      "../../../.yarn/cache/@types-express-serve-static-core-npm-4.17.17-7991258b35-97a4f64b61.zip/node_modules/@types/express-serve-static-core/index.d.ts": [
+      "../../../.yarn/cache/@types-express-serve-static-core-npm-4.17.18-3a96b13167-329d5ded5c.zip/node_modules/@types/express-serve-static-core/index.d.ts": [
         "../../../.yarn/cache/@types-node-npm-14.14.20-60a93b1d39-84a9fd73de.zip/node_modules/@types/node/events.d.ts",
         "../../../.yarn/cache/@types-node-npm-14.14.20-60a93b1d39-84a9fd73de.zip/node_modules/@types/node/http.d.ts",
         "../../../.yarn/cache/@types-node-npm-14.14.20-60a93b1d39-84a9fd73de.zip/node_modules/@types/node/index.d.ts",
@@ -2119,7 +2120,7 @@
         "../../../packages/ssr/src/page-component.ts"
       ],
       "../../../packages/ssr/src/types/shared-context.ts": [
-        "../../../.yarn/cache/@types-express-npm-4.17.9-7895807ac2-80cd74784e.zip/node_modules/@types/express/index.d.ts",
+        "../../../.yarn/cache/@types-express-npm-4.17.11-1b3f17f056-2818120a0f.zip/node_modules/@types/express/index.d.ts",
         "../../../packages/events/dist/types/index.d.ts"
       ],
       "../../../packages/ssr/src/types/theme-config.ts": [
@@ -2144,13 +2145,13 @@
         "../../../.yarn/cache/@types-node-npm-14.14.14-83cbbb70d3-dea8d257d4.zip/node_modules/@types/node/http.d.ts",
         "../../../.yarn/cache/@types-node-npm-14.14.14-83cbbb70d3-dea8d257d4.zip/node_modules/@types/node/index.d.ts"
       ],
-      "../../../.yarn/cache/@types-express-npm-4.17.9-7895807ac2-80cd74784e.zip/node_modules/@types/express/index.d.ts": [
+      "../../../.yarn/cache/@types-express-npm-4.17.11-1b3f17f056-2818120a0f.zip/node_modules/@types/express/index.d.ts": [
         "../../../.yarn/cache/@types-body-parser-npm-1.19.0-3ca4d08a60-4576f3fde5.zip/node_modules/@types/body-parser/index.d.ts",
-        "../../../.yarn/cache/@types-express-serve-static-core-npm-4.17.17-7991258b35-97a4f64b61.zip/node_modules/@types/express-serve-static-core/index.d.ts",
+        "../../../.yarn/cache/@types-express-serve-static-core-npm-4.17.18-3a96b13167-329d5ded5c.zip/node_modules/@types/express-serve-static-core/index.d.ts",
         "../../../.yarn/cache/@types-qs-npm-6.9.5-98e83ee762-afe4721a80.zip/node_modules/@types/qs/index.d.ts",
         "../../../.yarn/cache/@types-serve-static-npm-1.13.8-c8cbed794a-39db4c0f0f.zip/node_modules/@types/serve-static/index.d.ts"
       ],
-      "../../../.yarn/cache/@types-express-serve-static-core-npm-4.17.17-7991258b35-97a4f64b61.zip/node_modules/@types/express-serve-static-core/index.d.ts": [
+      "../../../.yarn/cache/@types-express-serve-static-core-npm-4.17.18-3a96b13167-329d5ded5c.zip/node_modules/@types/express-serve-static-core/index.d.ts": [
         "../../../.yarn/cache/@types-node-npm-14.14.20-60a93b1d39-84a9fd73de.zip/node_modules/@types/node/events.d.ts",
         "../../../.yarn/cache/@types-node-npm-14.14.20-60a93b1d39-84a9fd73de.zip/node_modules/@types/node/http.d.ts",
         "../../../.yarn/cache/@types-node-npm-14.14.20-60a93b1d39-84a9fd73de.zip/node_modules/@types/node/index.d.ts",
@@ -2366,8 +2367,8 @@
     "semanticDiagnosticsPerFile": [
       "../../../.yarn/cache/@types-body-parser-npm-1.19.0-3ca4d08a60-4576f3fde5.zip/node_modules/@types/body-parser/index.d.ts",
       "../../../.yarn/cache/@types-connect-npm-3.4.34-39e4f7bb55-6f712a0408.zip/node_modules/@types/connect/index.d.ts",
-      "../../../.yarn/cache/@types-express-npm-4.17.9-7895807ac2-80cd74784e.zip/node_modules/@types/express/index.d.ts",
-      "../../../.yarn/cache/@types-express-serve-static-core-npm-4.17.17-7991258b35-97a4f64b61.zip/node_modules/@types/express-serve-static-core/index.d.ts",
+      "../../../.yarn/cache/@types-express-npm-4.17.11-1b3f17f056-2818120a0f.zip/node_modules/@types/express/index.d.ts",
+      "../../../.yarn/cache/@types-express-serve-static-core-npm-4.17.18-3a96b13167-329d5ded5c.zip/node_modules/@types/express-serve-static-core/index.d.ts",
       "../../../.yarn/cache/@types-mime-npm-2.0.3-809d6f0e0f-6df548a912.zip/node_modules/@types/mime/index.d.ts",
       "../../../.yarn/cache/@types-node-npm-14.14.20-60a93b1d39-84a9fd73de.zip/node_modules/@types/node/assert.d.ts",
       "../../../.yarn/cache/@types-node-npm-14.14.20-60a93b1d39-84a9fd73de.zip/node_modules/@types/node/async_hooks.d.ts",

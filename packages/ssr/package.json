@@ -4,7 +4,7 @@
   "dependencies": {
     "@ribajs/core": "workspace:packages/core",
     "@ribajs/events": "workspace:packages/events",
-    "@types/express": "^4.17.9"
+    "@types/express": "^4.17.11"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",

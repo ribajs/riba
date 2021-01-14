@@ -1,3 +1,5 @@
+// import type { RequestDocument } from "graphql-request/dist/types";
+
 /** Type definition for html-loader */
 declare module "*.html" {
   const html: string;
@@ -27,6 +29,16 @@ declare module "*.scss" {
 declare module "*.css" {
   const css: string;
   export default css;
+}
+
+declare module "*.gql" {
+  const schema: any; // RequestDocument;
+  export default schema;
+}
+
+declare module "*.graphql" {
+  const schema: any; // RequestDocument;
+  export default schema;
 }
 
 // Used by bs4 module

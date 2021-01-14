@@ -6,6 +6,7 @@ import type { PageComponentAfterBindEventData, SsrHtmlHead } from "./types";
 export abstract class PageComponent extends Component {
   protected events: EventDispatcher;
   protected ctx: SharedContext["ctx"];
+  protected env: SharedContext["env"];
 
   /**
    * Overwrite / add tags in the html head like the page title
@@ -18,6 +19,7 @@ export abstract class PageComponent extends Component {
   constructor() {
     super();
     this.ctx = window.ssr.ctx;
+    this.env = window.ssr.env;
     this.events = window.ssr.events;
   }
 

@@ -68,9 +68,9 @@
     "@ribajs/types": "workspace:infra/types",
     "@types/core-js": "^2.5.4",
     "@types/jest": "^26.0.20",
-    "@typescript-eslint/eslint-plugin": "^4.12.0",
-    "@typescript-eslint/experimental-utils": "^4.12.0",
-    "@typescript-eslint/parser": "^4.12.0",
+    "@typescript-eslint/eslint-plugin": "^4.13.0",
+    "@typescript-eslint/experimental-utils": "^4.13.0",
+    "@typescript-eslint/parser": "^4.13.0",
     "@yarnpkg/pnpify": "^2.4.0",
     "babel-jest": "^26.6.3",
     "babel-loader": "^8.2.2",
@@ -111,6 +111,7 @@
     }
   },
   "resolutions": {
+    "@types/express-serve-static-core": "latest",
     "@types/node": "latest",
     "@ribajs/bs4": "portal:packages/bs4",
     "@ribajs/cache": "portal:packages/cache",
@@ -122,7 +123,6 @@
     "@ribajs/iconset": "portal:packages/iconset",
     "@ribajs/jquery": "portal:packages/jquery",
     "@ribajs/moment": "portal:packages/moment",
-    "@ribajs/pdf": "portal:packages/pdf",
     "@ribajs/photoswipe": "portal:packages/photoswipe",
     "@ribajs/router": "portal:packages/router",
     "@ribajs/shopify": "portal:packages/shopify",

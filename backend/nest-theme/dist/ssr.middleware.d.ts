@@ -9,6 +9,6 @@ export declare class SsrMiddleware implements NestMiddleware {
     theme: FullThemeConfig;
     log: Logger;
     constructor(config: ConfigService, ssr: SsrService);
-    use(req: Request, res: Response, next: NextFunction): Promise<void | Response<any>>;
+    use(req: Request, res: Response, next: NextFunction): Promise<void | Response<any, Record<string, any>>>;
     protected getRouteSettingsByRoute(routePath: string): import("@ribajs/ssr").Route;
 }

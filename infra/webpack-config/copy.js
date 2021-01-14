@@ -97,7 +97,6 @@ const getCopyPluginPatterns = (config) => {
     "@ribajs/leaflet-map",
     "@ribajs/moment",
     "@ribajs/octobercms",
-    "@ribajs/pdf",
     "@ribajs/photoswipe",
     "@ribajs/shopify",
     "@ribajs/shopify-easdk",

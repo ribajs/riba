@@ -101,7 +101,6 @@
     "@ribajs/iconset": "portal:../../packages/iconset",
     "@ribajs/jquery": "portal:../../packages/jquery",
     "@ribajs/moment": "portal:../../packages/moment",
-    "@ribajs/pdf": "portal:../../packages/pdf",
     "@ribajs/photoswipe": "portal:../../packages/photoswipe",
     "@ribajs/router": "portal:../../packages/router",
     "@ribajs/shopify": "portal:../../packages/shopify",

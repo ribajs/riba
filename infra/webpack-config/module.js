@@ -6,7 +6,7 @@ const isModuleAvailable = (moduleName) => {
   try {
     return require.resolve(moduleName);
   } catch (error) {
-    // console.warn(error);
+    console.warn(error);
     return false;
   }
 };

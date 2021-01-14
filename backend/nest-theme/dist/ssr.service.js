@@ -60,6 +60,7 @@ let SsrService = class SsrService {
                 subdomains: req.subdomains,
                 xhr: req.xhr,
             },
+            env: process.env,
         };
         return sharedContext;
     }
