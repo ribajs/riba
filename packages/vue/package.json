@@ -11,6 +11,6 @@
     "vue": "^2.6.12"
   },
   "devDependencies": {
-    "@babel/runtime": "^7.12.5"
+    "@babel/runtime": "^7.12.13"
   }
 }

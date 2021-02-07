@@ -37,10 +37,11 @@ let SsrMiddleware = class SsrMiddleware {
                 sharedContext,
                 engine: forceEngine,
             });
-            this.log.debug(`Render page component: ${routeSettings.component}`);
+            this.log.debug(`Rendered page component: ${routeSettings.component}`);
             return res.send(page.html);
         }
         catch (error) {
+            console.error(error);
             return res.status(500).json(error);
         }
     }

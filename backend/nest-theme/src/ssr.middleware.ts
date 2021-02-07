@@ -39,10 +39,11 @@ export class SsrMiddleware implements NestMiddleware {
         sharedContext,
         engine: forceEngine,
       });
-      this.log.debug(`Render page component: ${routeSettings.component}`);
+      this.log.debug(`Rendered page component: ${routeSettings.component}`);
       // this.log.debug(`page: ${page.html}`);
       return res.send(page.html);
     } catch (error) {
+      console.error(error);
       return res.status(500).json(error);
     }
   }

@@ -92,7 +92,7 @@ export class SsrService {
    *
    * @param layout Layout content string
    * @param rootTag The placeholder tag, will be replaces by the page component tag
-   * @param pageTag The page compontent tag to replace the placeholder tag
+   * @param pageTag The page component tag to replace the placeholder tag
    */
   async transformLayout(layout: string, rootTag: string, pageTag: string) {
     layout = layout.replace(new RegExp(rootTag, 'gi'), pageTag);
@@ -107,7 +107,7 @@ export class SsrService {
       const scriptPath = resolve(scriptsDir, filename);
       console.debug('scriptPath', scriptPath);
       const scriptSource = await fs.readFile(scriptPath, 'utf8');
-      this.log.debug('Scripts readed!');
+      this.log.debug('Scripts loaded!');
       scripts.set(filename, scriptSource);
     }
 
@@ -146,7 +146,7 @@ export class SsrService {
    *
    * @param layout
    * @param componentTagName
-   * @param sharedContext Shared context injected to window object of the fake browser enviromnent
+   * @param sharedContext Shared context injected to window object of the fake browser environment
    */
   async renderWithJSDom(
     layout: string,
@@ -213,7 +213,7 @@ export class SsrService {
    *
    * @param layout
    * @param componentTagName
-   * @param sharedContext Shared context injected to window object of the fake browser enviromnent
+   * @param sharedContext Shared context injected to window object of the fake browser environment
    */
   async renderWithHappyDom(
     layout: string,
