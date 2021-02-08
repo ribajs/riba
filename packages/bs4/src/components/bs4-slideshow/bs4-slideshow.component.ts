@@ -73,19 +73,19 @@ export interface Options {
   indicators: boolean;
   /** Position of the indicators */
   indicatorsPosition: IndicatorsPosition;
-  /** Pauses autoscolling on hover or focus */
+  /** Pauses auto scoll on hover or focus */
   pauseOnHover: boolean;
   /** number of slides to be scrolled by clicking on the controls */
   slidesToScroll: number;
   /** Autoscroll to the nearest slide after manual scroll or dragscroll */
   sticky: boolean;
-  /** Slides are dragable on desktop browsers */
-  draggable: boolean;
+  /** Slides are draggable on desktop browsers */
+  drag: boolean;
   /** Enables autoplay continuously or with interval */
   autoplay: boolean;
   /** Pause between autoscroll, 0 for continuously autoscrolling */
   autoplayInterval: number;
-  /** Scrollspeed for continuously autoscrolling */
+  /** Scroll speed for continuously autoscrolling */
   autoplayVelocity: number;
   /** Icon source url for the prev slide icon button */
   controlPrevIconSrc: string;
@@ -136,7 +136,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     }
     if (!this._slideElements) {
       throw new Error(
-        `Child element with selecto ${SLIDES_SELECTOR} not found!`
+        `Child element with selector ${SLIDES_SELECTOR} not found!`
       );
     }
     return this._slideElements;
@@ -165,7 +165,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       "slides-to-scroll",
       "controls",
       "controls-position",
-      "draggable",
+      "drag",
       "autoplay",
       "autoplay-interval",
       "autoplay-velocity",
@@ -186,7 +186,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       "sm-slides-to-scroll",
       "sm-controls",
       "sm-controls-position",
-      "sm-draggable",
+      "sm-drag",
       "sm-autoplay",
       "sm-autoplay-interval",
       "sm-autoplay-velocity",
@@ -207,7 +207,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       "md-slides-to-scroll",
       "md-controls",
       "md-controls-position",
-      "md-draggable",
+      "md-drag",
       "md-autoplay",
       "md-autoplay-interval",
       "md-autoplay-velocity",
@@ -228,7 +228,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       "lg-slides-to-scroll",
       "lg-controls",
       "lg-controls-position",
-      "lg-draggable",
+      "lg-drag",
       "lg-autoplay",
       "lg-autoplay-interval",
       "lg-autoplay-velocity",
@@ -249,7 +249,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       "xl-slides-to-scroll",
       "xl-controls",
       "xl-controls-position",
-      "xl-draggable",
+      "xl-drag",
       "xl-autoplay",
       "xl-autoplay-interval",
       "xl-autoplay-velocity",
@@ -343,7 +343,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     indicators: true,
     indicatorsPosition: "insite-bottom",
     pause: false,
-    draggable: true,
+    drag: true,
     autoplay: false,
     autoplayInterval: 0,
     autoplayVelocity: 0.8,
@@ -437,7 +437,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
         this.scope.items[index].position.centerX;
     }
 
-    // TODO new scrollservice based on https://pawelgrzybek.com/page-scroll-in-vanilla-javascript/
+    // TODO new scroll service based on https://pawelgrzybek.com/page-scroll-in-vanilla-javascript/
     if (this.slideElements[index]) {
       // if is is window to scroll
       if (typeof this.slideshowInner.scroll === "function") {
@@ -472,10 +472,10 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       typeof source.controlsPosition !== "undefined"
         ? clone(false, source.controlsPosition)
         : dest.controlsPosition;
-    dest.draggable =
-      typeof source.draggable !== "undefined"
-        ? clone(false, source.draggable)
-        : dest.draggable;
+    dest.drag =
+      typeof source.drag !== "undefined"
+        ? clone(false, source.drag)
+        : dest.drag;
     dest.autoplay =
       typeof source.autoplay !== "undefined"
         ? clone(false, source.autoplay)
@@ -544,8 +544,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       typeof dest.controlsPosition === "undefined"
         ? source.controlsPosition
         : dest.controlsPosition;
-    dest.draggable =
-      typeof dest.draggable === "undefined" ? source.draggable : dest.draggable;
+    dest.drag = typeof dest.drag === "undefined" ? source.drag : dest.drag;
     dest.autoplay =
       typeof dest.autoplay === "undefined" ? source.autoplay : dest.autoplay;
     dest.autoplayInterval =
@@ -670,7 +669,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     } else {
       this.disableAutoplay();
     }
-    if (this.scope.draggable) {
+    if (this.scope.drag) {
       this.enableDesktopDragscroll();
     } else {
       this.disableDesktopDragscroll();

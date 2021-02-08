@@ -88,7 +88,7 @@ export class Bs4CarouselComponent extends Component {
     if (this.scope.fade) {
       this.el.classList.add("carousel-fade");
     }
-    // TODO make this configurateable?
+    // TODO make this configurable?
     this.carouselService.cycle();
   }
 
