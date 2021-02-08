@@ -1,5 +1,6 @@
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { TemplateVars } from './types/template-vars';
 import { ThemeConfig } from '@ribajs/ssr';
 import type { Request } from 'express';
 import type { SharedContext, RenderEngine } from '@ribajs/ssr';
@@ -9,7 +10,7 @@ export declare class SsrService {
     theme: ThemeConfig;
     constructor(config: ConfigService);
     isRenderEngineValid(engine: RenderEngine): boolean;
-    getSharedContext(req: Request): Promise<SharedContext>;
+    getSharedContext(req: Request, templateVars: TemplateVars): Promise<SharedContext>;
     getTemplateEngine(templatePath: string): string;
     transformLayout(layout: string, rootTag: string, pageTag: string): Promise<string>;
     readSsrScripts(filenames: string[]): Promise<Map<string, string>>;

@@ -35,7 +35,7 @@ let SsrService = class SsrService {
                 break;
         }
     }
-    async getSharedContext(req) {
+    async getSharedContext(req, templateVars) {
         const sharedContext = {
             events: events_1.EventDispatcher.getInstance('ssr'),
             ctx: {
@@ -61,6 +61,7 @@ let SsrService = class SsrService {
                 xhr: req.xhr,
             },
             env: process.env,
+            templateVars: templateVars.get(),
         };
         return sharedContext;
     }
@@ -91,7 +92,7 @@ let SsrService = class SsrService {
             const scriptPath = path_1.resolve(scriptsDir, filename);
             console.debug('scriptPath', scriptPath);
             const scriptSource = await fs_1.promises.readFile(scriptPath, 'utf8');
-            this.log.debug('Scripts readed!');
+            this.log.debug('Scripts loaded!');
             scripts.set(filename, scriptSource);
         }
         return scripts;

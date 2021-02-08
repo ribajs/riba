@@ -3,6 +3,7 @@ import { VirtualConsole, JSDOM } from 'jsdom';
 import { HappyDOMContext } from '@happy-dom/server-rendering';
 import { Script } from 'vm';
 import { ConfigService } from '@nestjs/config';
+import { TemplateVars } from './types/template-vars';
 import { ThemeConfig } from '@ribajs/ssr';
 import { resolve, extname } from 'path';
 import * as consolidate from 'consolidate';
@@ -36,7 +37,7 @@ export class SsrService {
     }
   }
 
-  async getSharedContext(req: Request) {
+  async getSharedContext(req: Request, templateVars: TemplateVars) {
     const sharedContext: SharedContext = {
       events: EventDispatcher.getInstance('ssr') as any, // TODO
       ctx: {
@@ -63,6 +64,7 @@ export class SsrService {
         xhr: req.xhr,
       },
       env: process.env,
+      templateVars: templateVars.get(),
     };
     return sharedContext;
   }

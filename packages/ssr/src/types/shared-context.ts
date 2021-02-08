@@ -10,6 +10,7 @@ export interface SharedContext {
   env: {
     [key: string]: string;
   };
+  templateVars: any;
   ctx: {
     // See https://expressjs.com/de/api.html#req
     app: Request["app"];

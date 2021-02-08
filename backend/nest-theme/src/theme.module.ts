@@ -10,6 +10,7 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 
 import { SsrService } from './ssr.service';
 import { SsrMiddleware } from './ssr.middleware';
+import { EmptyTemplateVars } from './empty-template-vars';
 import type { ThemeConfig } from '@ribajs/ssr';
 import type { NestThemeConfig, FullThemeConfig } from './types';
 import {
@@ -61,6 +62,7 @@ export class ThemeModule {
     const fullThemeConfig: FullThemeConfig = {
       ...activeThemeConfig,
       ...nestThemeConfig,
+      templateVars: nestThemeConfig.templateVars || new EmptyTemplateVars(),
       assetsDir: resolve(nestThemeConfig.themeDir, activeThemeConfig.assetsDir),
       viewsDir: resolve(nestThemeConfig.themeDir, activeThemeConfig.viewsDir),
       pageComponentsDir: resolve(

@@ -26,7 +26,7 @@ let SsrMiddleware = class SsrMiddleware {
         if (!routeSettings) {
             return next();
         }
-        const sharedContext = await this.ssr.getSharedContext(req);
+        const sharedContext = await this.ssr.getSharedContext(req, this.theme.templateVars);
         const forceEngine = req.query['force-engine'] || undefined;
         if (forceEngine) {
             this.log.debug(`Force render engine: ${forceEngine}`);

@@ -22,7 +22,10 @@ export class SsrMiddleware implements NestMiddleware {
 
     // this.log.debug(`Route found: ${JSON.stringify(routeSettings)}`);
 
-    const sharedContext = await this.ssr.getSharedContext(req);
+    const sharedContext = await this.ssr.getSharedContext(
+      req,
+      this.theme.templateVars,
+    );
 
     // this.log.debug('Template variables:');
     // this.log.debug(sharedContext);
