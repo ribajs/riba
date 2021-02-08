@@ -27,4 +27,7 @@ export interface Options extends Extensions {
 
   /** Stop binding on this node types */
   blockNodeNames: Array<string>;
+
+  /** Block unknown custom elements which are not registered in Riba */
+  blockUnknownCustomElements: boolean;
 }

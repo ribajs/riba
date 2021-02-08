@@ -39,7 +39,7 @@ export class View {
 
   /**
    * Helper function to create a new view inside of a binding
-   * @param bindin
+   * @param binding
    * @param models
    * @param anchorEl
    */
@@ -105,7 +105,7 @@ export class View {
   public registComponents() {
     for (const nodeName in this.options.components) {
       if (this.options.components[nodeName]) {
-        // Not already registred?
+        // Not already registered?
         if (!customElements.get(nodeName)) {
           const COMPONENT = this.options.components[nodeName];
           this.registComponent(COMPONENT, nodeName);
@@ -209,6 +209,9 @@ export class View {
       bindingPrefix = this.options.fullPrefix;
     } else {
       // TODO FIXME
+      console.error(
+        "If you do not see this message you can remove the else part"
+      );
       bindingPrefix = this.options.prefix + "-";
     }
 
@@ -232,14 +235,14 @@ export class View {
         // if attribute starts with the binding prefix. E.g. rv
         if (attribute.name.indexOf(bindingPrefix) === 0) {
           nodeName = attribute.name.slice(bindingPrefix.length);
-          // if binder is not a attributeBinder binder should be setted
+          // if binder is not a attributeBinder binder should be set
           if (this.options.binders[nodeName]) {
             binder = this.options.binders[nodeName];
           }
 
           if (binder === null) {
             // seems to be a star binder (because binder was not set)
-            // Check if any attributeBinder matchs
+            // Check if any attributeBinder match's
             for (let k = 0; k < attributeBinders.length; k++) {
               identifier = attributeBinders[k];
               const regexp = new RegExp(`^${identifier.replace(/\*/g, ".+")}$`);
@@ -258,7 +261,7 @@ export class View {
               binder = Riba.fallbackBinder;
             }
           }
-          // if block is set, do not bind its childs (this means the binder bound it by itself)
+          // if block is set, do not bind its child's (this means the binder bound it by itself)
           // and build binding directly (do not push it to bindInfos array)
           if (binder.block) {
             this.buildBinding(
@@ -303,7 +306,11 @@ export class View {
         block = true;
       }
       // Also block unknown custom elements except page components
-      else if (isCustomElement(node) && !nodeName.endsWith("-page")) {
+      else if (
+        this.options.blockUnknownCustomElements &&
+        isCustomElement(node) &&
+        !nodeName.endsWith("-page")
+      ) {
         block = true;
       }
     }
@@ -326,7 +333,7 @@ export class View {
   }
 
   /**
-   * Regist a custom element using the native customElements feature.
+   * Register a custom element using the native customElements feature.
    * @param COMPONENT
    * @param nodeName
    */

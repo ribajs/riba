@@ -79,6 +79,8 @@ export class Riba {
   /** Stop binding on this node types */
   public blockNodeNames = ["SCRIPT", "STYLE", "TEMPLATE", "CODE"];
 
+  public blockUnknownCustomElements = true;
+
   /** Default attribute prefix. */
   private _prefix = "rv";
 
@@ -157,6 +159,9 @@ export class Riba {
           break;
         case "blockNodeNames":
           this.blockNodeNames = value;
+          break;
+        case "blockUnknownCustomElements":
+          this.blockUnknownCustomElements = Boolean(value);
           break;
         default:
           console.warn("Option not supported", option, value);

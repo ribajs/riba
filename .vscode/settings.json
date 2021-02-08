@@ -26,15 +26,22 @@
     "titleBar.inactiveForeground": "#e7e7e799"
   },
   "cSpell.words": [
+    "Autoscroll",
     "Garber",
+    "Scrollend",
+    "autobind",
+    "autoscrolling",
     "corejs",
+    "dragscroll",
     "easdk",
     "iconset",
+    "keypath",
     "nestjs",
     "nodir",
     "octobercms",
     "photoswipe",
     "prebuild",
+    "regist",
     "ribajs",
     "tinyliquid",
     "typecheck"
