@@ -137,7 +137,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
 
     if (postcssConfigPath) {
       console.debug(
-        "Enable PostCSS because a eslint config file was found in " +
+        "Enable PostCSS because a postcss config file was found in " +
           postcssConfigPath
       );
       config.postcssOptions = require(postcssConfigPath);
