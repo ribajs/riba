@@ -21,6 +21,7 @@ export abstract class PageComponent extends Component {
     this.ctx = window.ssr.ctx;
     this.env = window.ssr.env;
     this.events = window.ssr.events;
+    this.events.trigger("PageComponent:constructor", this.getBindEventData());
   }
 
   protected setHtmlHead() {
