@@ -1,5 +1,5 @@
 /**
- * Autoparse custom element attributes
+ * Auto parse custom element attributes
  *
  * @see https://developer.mozilla.org/de/docs/Web/Web_Components/Using_custom_elements
  */
@@ -25,7 +25,7 @@ export abstract class BasicComponent extends HTMLElement {
   protected observedAttributes: string[] = [];
 
   /**
-   * @depricated Use this instead
+   * @deprecated Use `this` instead
    */
   protected el: HTMLElement;
 
@@ -83,7 +83,7 @@ export abstract class BasicComponent extends HTMLElement {
   }
 
   /**
-   * returns a list of attributes wich are required until the riba binding starts
+   * returns a list of attributes which are required until the riba binding starts
    */
   protected requiredAttributes(): string[] {
     return [];
@@ -144,9 +144,9 @@ export abstract class BasicComponent extends HTMLElement {
   /**
    * Required attributes before the view is bound
    *
-   * The attributeChangedCallback is called for each attribute wich updates the riba view each time
+   * The attributeChangedCallback is called for each attribute which updates the riba view each time
    * which can have a big impact on performance or required attributes are not yet available which can lead to errors.
-   * So define required attriutes and the view is ony bind the first time after all this attributes are transmitted.
+   * So define required attributes and the view is ony bind the first time after all this attributes are transmitted.
    */
   protected checkRequiredAttributes() {
     return this.requiredAttributes().every(
@@ -360,7 +360,7 @@ export abstract class BasicComponent extends HTMLElement {
 
   /**
    * This is for the rv-co-attribute binder
-   * TODO only notify attributes wich are passed as rv-co-*="*"
+   * TODO only notify attributes which are passed as rv-co-*="*"
    * @param attrName
    * @param oldValue
    * @param newValue
@@ -467,7 +467,7 @@ export abstract class BasicComponent extends HTMLElement {
 
   /**
    * Load all attributes and calls the attributeChangedCallback for each attribute.
-   * Please note: Brmally the browser calls the attributeChangedCallback for you
+   * Please note: Normally the browser calls the attributeChangedCallback for you
    */
   protected loadAttributes(observedAttributes: string[]) {
     const attributes = this.el.attributes;

@@ -371,8 +371,8 @@ export class Bs4SidebarComponent extends Component {
   }
 
   protected async afterBind() {
-    await super.afterBind();
     return this.onEnvironmentChanges();
+    await super.afterBind();
   }
 
   protected requiredAttributes() {

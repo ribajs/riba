@@ -14,7 +14,7 @@ abstract class BaseView {
 
   protected container?: HTMLElement;
 
-  private dispatcher = new EventDispatcher();
+  private dispatcher = EventDispatcher.getInstance();
 
   /**
    * Helper to extend the object

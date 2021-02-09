@@ -74,8 +74,6 @@ export class LeafletMapComponent extends Component {
   }
 
   protected async afterBind() {
-    await super.afterBind();
-
     Leaflet.Icon.Default.imagePath = this.scope.assetsDir;
 
     const mapId = getUID("map-");
@@ -113,9 +111,10 @@ export class LeafletMapComponent extends Component {
     }
 
     this.registerEventListener();
+    await super.afterBind();
   }
 
-  // deconstructor
+  // deconstruction
   protected disconnectedCallback() {
     super.disconnectedCallback();
     this.events.off("visibility-changed", this.onVisibilityChanged, this);

@@ -31,8 +31,8 @@ export class Bs4NavbarComponent extends Component {
   }
 
   protected async afterBind() {
-    await super.afterBind();
     this.hide();
+    await super.afterBind();
   }
 
   public toggle(event?: Event) {

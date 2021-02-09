@@ -546,19 +546,19 @@ class Pjax {
 
     this.history.add(newUrl);
 
-    const oldContainer = Dom.getContainer(document, this.containerSelector);
-    const newContainer = this.loadCached(newUrl);
-
-    const transition = this.getTransition();
-
-    this.transitionProgress = true;
-
     this.dispatcher.trigger(
       "initStateChange",
       this.viewId,
       this.history.currentStatus(),
       this.history.prevStatus()
     );
+
+    const oldContainer = Dom.getContainer(document, this.containerSelector);
+    const newContainer = this.loadCached(newUrl);
+
+    const transition = this.getTransition();
+
+    this.transitionProgress = true;
 
     const transitionInstance = transition.init(oldContainer, newContainer);
 

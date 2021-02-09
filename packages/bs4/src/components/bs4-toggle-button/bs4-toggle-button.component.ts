@@ -70,12 +70,12 @@ export class Bs4ToggleButtonComponent extends Component {
   }
 
   protected async afterBind() {
-    await super.afterBind();
     // Trigger init to trigger there current state of all the components that are connected to this component
-    return this.eventDispatcher?.trigger(
+    this.eventDispatcher?.trigger(
       TOGGLE_BUTTON.eventNames.init,
       this.scope.targetId
     );
+    await super.afterBind();
   }
 
   protected connectedCallback() {

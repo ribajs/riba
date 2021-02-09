@@ -7,13 +7,15 @@ import { View } from "../view";
 import { Riba } from "../riba";
 import { BasicComponent } from "./basic-component";
 import { Formatter } from "../interfaces";
+import { EventDispatcher } from "@ribajs/events";
+import { getUID } from "@ribajs/utils/src/dom";
+import type { ComponentLifecycleEventData } from "../interfaces";
 
 export abstract class Component extends BasicComponent {
   protected view: View | null = null;
-
   protected riba?: Riba;
-
   protected bound = false;
+  protected lifecycleEvents = EventDispatcher.getInstance("lifecycle");
 
   /**
    * If true the component will automatically bind the component to riba if all required attributes are set.
@@ -22,6 +24,13 @@ export abstract class Component extends BasicComponent {
 
   constructor(element?: HTMLUnknownElement) {
     super(element);
+    if (!this.id) {
+      this.id = getUID(this.tagName + "-");
+    }
+    this.lifecycleEvents.trigger(
+      "Component:constructor",
+      this.getLifecycleEventData()
+    );
   }
 
   protected async init(observedAttributes: string[]) {
@@ -55,15 +64,33 @@ export abstract class Component extends BasicComponent {
   }
 
   protected async beforeBind(): Promise<any> {
-    this.debug("beforeBind", this.scope);
+    // this.debug("beforeBind", this.scope);
+    this.lifecycleEvents.trigger(
+      "Component:beforeBind",
+      this.getLifecycleEventData()
+    );
   }
 
   protected async afterBind(): Promise<any> {
-    this.debug("afterBind", this.scope);
+    // this.debug("afterBind", this.scope);
+    this.lifecycleEvents.trigger(
+      "Component:afterBind",
+      this.getLifecycleEventData()
+    );
+  }
+
+  protected getLifecycleEventData() {
+    const data: ComponentLifecycleEventData = {
+      tagName: this.tagName.toLocaleLowerCase(),
+      // scope: this.scope,
+      // component: this,
+      id: this.id,
+    };
+    return data;
   }
 
   /**
-   * Event handler to liste for publish binder event for two-way-binding in web components
+   * Event handler to listen for publish binder event for two-way-binding in web components
    */
   // protected publish(name: string, newValue: any, namespace: string | null) {
   //   this.el.dispatchEvent(
@@ -82,6 +109,7 @@ export abstract class Component extends BasicComponent {
    * Invoked when the custom element is disconnected from the document's DOM.
    */
   protected disconnectedCallback() {
+    super.disconnectedCallback();
     // IMPORTANT ROUTE FIXME, if we unbind the component then it will no longer work if it is retrieved from the cache and the connectedCallback is called
     // because the riba attributes are removed. We need a solution for that, maybe we do not remove the attributes or we recreate the attributes
     // See view bind / unbind methods for that.
@@ -89,7 +117,22 @@ export abstract class Component extends BasicComponent {
     // if (this.bound && this.view) {
     //   this.unbind();
     // }
-    super.disconnectedCallback();
+    this.lifecycleEvents.trigger(
+      "Component:disconnected",
+      this.getLifecycleEventData()
+    );
+  }
+
+  /**
+   * Default custom Element method
+   * Invoked when the custom element is first connected to the document's DOM.
+   */
+  protected connectedCallback() {
+    super.connectedCallback();
+    this.lifecycleEvents.trigger(
+      "Component:connected",
+      this.getLifecycleEventData()
+    );
   }
 
   /**

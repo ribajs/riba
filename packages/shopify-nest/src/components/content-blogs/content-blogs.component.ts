@@ -71,8 +71,8 @@ export class ShopifyNestContentBlogsComponent extends ShopifyNestContentComponen
   }
 
   protected async afterBind() {
-    await super.afterBind();
     this.debug("afterBind", this.scope);
+    await super.afterBind();
   }
 
   protected requiredAttributes() {

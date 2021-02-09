@@ -135,12 +135,12 @@ export class Bs4FormComponent extends Component {
   }
 
   protected async beforeBind() {
-    super.beforeBind();
+    await super.beforeBind();
     this.el.id = this.scope.id;
   }
 
   protected async afterBind() {
-    super.afterBind();
+    await super.afterBind();
   }
 
   protected stripHtml() {

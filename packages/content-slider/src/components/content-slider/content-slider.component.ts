@@ -160,7 +160,6 @@ export class ContentSliderComponent extends TemplatesComponent {
   }
 
   protected async afterBind() {
-    await super.afterBind();
     this.debug("afterBind", this.scope);
 
     const contentInfoOffsetEl = this.el.querySelector<HTMLElement>(".controls");
@@ -171,6 +170,7 @@ export class ContentSliderComponent extends TemplatesComponent {
 
     this.initItems();
     this.initEventListeners();
+    await super.afterBind();
   }
 
   protected attributeChangedCallback(

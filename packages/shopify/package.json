@@ -124,6 +124,7 @@
     "@ribajs/i18n": "workspace:packages/i18n",
     "@ribajs/router": "workspace:packages/router",
     "@ribajs/utils": "workspace:packages/utils",
+    "@types/undertaker": "^1.2.6",
     "bitbucket": "^2.4.2",
     "form-data": "^3.0.0",
     "got": "^11.8.1"

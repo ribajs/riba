@@ -65,7 +65,6 @@ export class Bs4NotificationContainerComponent extends Component {
   }
 
   protected async afterBind() {
-    super.afterBind();
     // Add event dispatcher to listen for toast notifications
     this.notificationDispatcher = new EventDispatcher(this.scope.channelName);
     this.notificationDispatcher.on(
@@ -73,6 +72,7 @@ export class Bs4NotificationContainerComponent extends Component {
       this.onShowNotification,
       this
     );
+    await super.afterBind();
   }
 
   protected disconnectedCallback() {

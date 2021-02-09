@@ -119,8 +119,8 @@ export class Bs4TaggedImageComponent extends Component {
   }
 
   protected async afterBind() {
-    await super.afterBind();
     this.passImageAttributes();
+    await super.afterBind();
   }
 
   protected connectedCallback() {

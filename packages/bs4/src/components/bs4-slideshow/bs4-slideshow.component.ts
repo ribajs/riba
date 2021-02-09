@@ -835,15 +835,15 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   }
 
   protected async beforeBind() {
-    return super.beforeBind();
+    return await super.beforeBind();
   }
 
   protected async afterBind() {
-    await super.afterBind();
     this.initSlideshowInner();
     this.initResponsiveOptions();
     // this.removeEventListeners();
     this.addEventListeners();
+    await super.afterBind();
   }
 
   protected initSlideshowInner() {

@@ -1,6 +1,6 @@
 {
   "name": "ribajs",
-  "description": "Declarative data binding + templating solution.",
+  "description": "Declarative data binding + template solution.",
   "version": "2.0.0-alpha.0",
   "private": true,
   "author": "Art+Code Studio (Pascal Garber) <pascal@artandcode.studio>",

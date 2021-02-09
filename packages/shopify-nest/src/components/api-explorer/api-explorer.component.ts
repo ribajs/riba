@@ -391,8 +391,8 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
   }
 
   protected async afterBind() {
-    await super.afterBind();
     this.debug("afterBind", this.scope);
+    await super.afterBind();
   }
 
   protected requiredAttributes() {

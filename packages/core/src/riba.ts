@@ -13,6 +13,7 @@ import { attributeBinder } from "./binders/attribute.binder";
 import { View } from "./view";
 import { Observer } from "./observer";
 import { ModulesService } from "./services/module.service";
+import { LifecycleService } from "./services/lifecycle.service";
 
 export class Riba {
   /**
@@ -22,7 +23,7 @@ export class Riba {
   public static fallbackBinder = attributeBinder;
 
   /**
-   * Default event handler, calles the function defined in his binder
+   * Default event handler, calls the function defined in his binder
    * @see Binding.eventHandler
    * @param el The element the event was triggered from
    */
@@ -47,6 +48,8 @@ export class Riba {
   private static instance: Riba;
 
   public module: ModulesService;
+
+  public lifecycle = LifecycleService.getInstance();
 
   /** Global binders */
   public binders: Binders<any> = {};

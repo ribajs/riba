@@ -31,6 +31,7 @@
     "Scrollend",
     "autobind",
     "autoscrolling",
+    "builtins",
     "corejs",
     "dragscroll",
     "easdk",
@@ -40,10 +41,14 @@
     "nodir",
     "octobercms",
     "photoswipe",
+    "pnpify",
     "prebuild",
     "regist",
     "ribajs",
+    "sightglass",
+    "tinybind",
     "tinyliquid",
-    "typecheck"
+    "typecheck",
+    "yarnpkg"
   ]
 }

@@ -76,7 +76,6 @@ export class Bs4CarouselComponent extends Component {
   }
 
   protected async afterBind() {
-    await super.afterBind();
     this.carouselService = new CarouselService(this.el, {
       interval: this.scope.interval,
       keyboard: this.scope.keyboard,
@@ -90,6 +89,7 @@ export class Bs4CarouselComponent extends Component {
     }
     // TODO make this configurable?
     this.carouselService.cycle();
+    await super.afterBind();
   }
 
   public next() {

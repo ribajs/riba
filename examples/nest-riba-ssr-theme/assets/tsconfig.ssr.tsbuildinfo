@@ -186,8 +186,8 @@
         "affectsGlobalScope": false
       },
       "../../../infra/types/index.d.ts": {
-        "version": "8e86d1b18024ea763e150db89df27f85129d4006e45d393df02ffa6a35fa8228",
-        "signature": "8e86d1b18024ea763e150db89df27f85129d4006e45d393df02ffa6a35fa8228",
+        "version": "6b9ed29c6e632382127eacacab67b7e89dd7ede7329ca5ff0319568bc26920f6",
+        "signature": "6b9ed29c6e632382127eacacab67b7e89dd7ede7329ca5ff0319568bc26920f6",
         "affectsGlobalScope": false
       },
       "../../../packages/utils/src/color.ts": {
@@ -223,7 +223,7 @@
         "affectsGlobalScope": false
       },
       "../../../packages/core/src/riba.ts": {
-        "version": "1355ecc2509bd42f035253326bca7618e19c320b8ab4a91c22f98908cec20472",
+        "version": "c42f93779b748f47784c9ae903cbb7a5d4c60086e5d3a306d2aa5c832ec87a83",
         "affectsGlobalScope": false
       },
       "../../../packages/utils/src/dom.ts": {
@@ -231,7 +231,7 @@
         "affectsGlobalScope": false
       },
       "../../../packages/core/src/view.ts": {
-        "version": "057d3a7cad36bbebcff38c220b013a3abf7dcf70a7b6bbd22688567feabdafc5",
+        "version": "8eec6d86ea84e74734cc50dda5e0d2c22fab731ac204f7de75c75ad4cac13712",
         "affectsGlobalScope": false
       },
       "../../../packages/core/src/parsers.ts": {
@@ -336,7 +336,7 @@
         "affectsGlobalScope": false
       },
       "../../../packages/core/src/interfaces/options.ts": {
-        "version": "a267a2bd5fff52a5dd656c9984f6734d91c5c646c4640168cd1383e699c252c1",
+        "version": "d695bdddcd069a2295dc37f20e655bd5fad7d6168dca87698ae86fc500e0e772",
         "affectsGlobalScope": false
       },
       "../../../packages/core/src/interfaces/services.ts": {
@@ -836,7 +836,7 @@
         "affectsGlobalScope": false
       },
       "../../../packages/ssr/src/page-component.ts": {
-        "version": "78d24b8ddef23c2cd3a55d6396ca8e4631720ec0b6a1096d76b674c99a8261d1",
+        "version": "351991c7ddf6e4df84a00a39838508ee8e4d0b175bf7f31c70b845377194c351",
         "affectsGlobalScope": false
       },
       "../../../packages/ssr/src/types/page-component-after-bind-event-data.ts": {
@@ -1127,7 +1127,7 @@
         "affectsGlobalScope": false
       },
       "../../../packages/ssr/src/types/shared-context.ts": {
-        "version": "11a031ebade4b0b2a5e266f82f62e0d5b16c6e81733b5352b5ecc15528a8f3ce",
+        "version": "8569e115aea3e2ed066c76bfd0f759da87807c947767a8562b0f6d7bef1894d7",
         "affectsGlobalScope": false
       },
       "../../../packages/ssr/src/types/template-engines.ts": {

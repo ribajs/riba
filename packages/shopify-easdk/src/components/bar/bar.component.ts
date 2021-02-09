@@ -156,8 +156,8 @@ export class BarComponent extends Component {
   }
 
   protected async afterBind() {
-    await super.afterBind();
     console.debug("afterBind", this.scope);
+    await super.afterBind();
   }
 
   protected requiredAttributes() {

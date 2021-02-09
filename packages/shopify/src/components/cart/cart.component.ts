@@ -206,11 +206,11 @@ export class ShopifyCartComponent extends Component {
   }
 
   protected async afterBind() {
-    await super.afterBind();
     this.debug("afterBind", this.scope);
     if (!this.cart) {
       this.cart = await ShopifyCartService.get();
     }
+    await super.afterBind();
   }
 
   protected template() {

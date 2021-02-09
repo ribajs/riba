@@ -10,7 +10,7 @@ import * as consolidate from 'consolidate';
 import type { Request } from 'express';
 import { promises as fs } from 'fs';
 import type {
-  PageComponentAfterBindEventData,
+  ComponentLifecycleEventData,
   SharedContext,
   RenderEngine,
 } from '@ribajs/ssr';
@@ -189,12 +189,12 @@ export class SsrService {
     this.log.debug('Scripts executed!');
     return new Promise<RenderResult>((resolve, reject) => {
       sharedContext.events.once(
-        'PageComponent:afterBind',
-        (afterBindData: PageComponentAfterBindEventData) => {
+        'ready',
+        (lifecycleEventData: ComponentLifecycleEventData) => {
           const html = dom.serialize();
 
           const result: RenderResult = {
-            ...afterBindData,
+            ...lifecycleEventData,
             html: html,
             css: [],
           };
@@ -252,12 +252,12 @@ export class SsrService {
 
     const result = await new Promise<RenderResult>((resolve, reject) => {
       sharedContext.events.once(
-        'PageComponent:afterBind',
-        async (afterBindData: PageComponentAfterBindEventData) => {
+        'ready',
+        async (lifecycleEventData: ComponentLifecycleEventData) => {
           const ssrResult = await ssrResultPromise;
 
           const result: RenderResult = {
-            ...afterBindData,
+            ...lifecycleEventData,
             html: ssrResult.html,
             css: ssrResult.css,
           };

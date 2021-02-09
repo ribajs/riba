@@ -49,8 +49,8 @@ export class Bs4ToastItemComponent extends Component {
   }
 
   protected async afterBind() {
-    super.afterBind();
     this.initToastService();
+    await super.afterBind();
   }
 
   protected initToastService() {

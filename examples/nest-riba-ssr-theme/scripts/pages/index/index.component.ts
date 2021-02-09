@@ -44,11 +44,11 @@ export class IndexPageComponent extends PageComponent {
   }
 
   protected async beforeBind() {
-    super.beforeBind();
+    await super.beforeBind();
   }
 
   protected async afterBind() {
-    super.afterBind();
+    await super.afterBind();
   }
 
   protected template() {

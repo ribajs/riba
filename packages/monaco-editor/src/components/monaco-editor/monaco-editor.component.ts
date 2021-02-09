@@ -135,8 +135,8 @@ export class MonacoEditorComponent extends Component {
   }
 
   protected async afterBind() {
-    await super.afterBind();
     this.createEditor(this.scope.dataValue);
+    await super.afterBind();
   }
 
   protected createEditor(value: any) {

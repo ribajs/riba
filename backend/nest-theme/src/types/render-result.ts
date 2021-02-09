@@ -1,6 +1,6 @@
-import type { PageComponentAfterBindEventData } from '@ribajs/ssr';
+import type { ComponentLifecycleEventData } from '@ribajs/ssr';
 
-export interface RenderResult extends PageComponentAfterBindEventData {
+export interface RenderResult extends ComponentLifecycleEventData {
   html: string;
   css?: string[];
 }

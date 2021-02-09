@@ -2,13 +2,13 @@ import { Binder } from "../interfaces";
 
 /**
  * parent
- * Passses a riba model / scope value to your component without first converting it as an attribute
+ * Pass a riba model / scope value to your component without first converting it as an attribute
  */
 export const componentAttributeBinder: Binder<any> = {
   name: "co-*",
   routine(el: HTMLElement, value: any) {
-    console.debug("componentAttributeBinder routine this", this);
-    console.debug("componentAttributeBinder routine value", value);
+    // console.debug("componentAttributeBinder routine this", this);
+    // console.debug("componentAttributeBinder routine value", value);
     this.binder.triggerAttributeValue.call(this, el, value);
   },
   bind(el) {
@@ -29,7 +29,7 @@ export const componentAttributeBinder: Binder<any> = {
         }
       },
     };
-    console.debug("bind eventName", askEventName);
+    // console.debug("bind eventName", askEventName);
     el.addEventListener(
       askEventName as any,
       this.customData.onAskForAttributeValue,
@@ -60,8 +60,8 @@ export const componentAttributeBinder: Binder<any> = {
   triggerAttributeValue(el: HTMLElement, value: any) {
     const attrName = (this.args[0] as string).trim();
     const eventName = "attribute:" + attrName;
-    console.debug("triggerAttributeValue newValue", value);
-    console.debug("triggerAttributeValue eventName", eventName);
+    // console.debug("triggerAttributeValue newValue", value);
+    // console.debug("triggerAttributeValue eventName", eventName);
     el.dispatchEvent(
       new CustomEvent(eventName, {
         detail: {

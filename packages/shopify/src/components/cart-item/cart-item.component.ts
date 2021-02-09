@@ -239,7 +239,6 @@ export class ShopifyCartItemComponent extends Component {
   }
 
   protected async afterBind() {
-    await super.afterBind();
     this.debug("afterBind", this.scope);
     ShopifyCartService.shopifyCartEventDispatcher.on(
       "ShopifyCart:request:start",
@@ -255,6 +254,7 @@ export class ShopifyCartItemComponent extends Component {
 
     const cart = await ShopifyCartService.get();
     this.onCartUpdate(cart);
+    await super.afterBind();
   }
 
   protected disconnectedCallback() {

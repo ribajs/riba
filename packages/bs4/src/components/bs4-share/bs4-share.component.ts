@@ -379,9 +379,9 @@ export class Bs4ShareComponent extends Component {
   }
 
   protected async afterBind() {
-    await super.afterBind();
     this.initDropdown();
     // this.debug('afterBind', this.scope);
+    await super.afterBind();
   }
 
   protected requiredAttributes() {

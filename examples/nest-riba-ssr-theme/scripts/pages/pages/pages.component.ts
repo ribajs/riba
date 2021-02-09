@@ -38,12 +38,12 @@ export class PagesPageComponent extends PageComponent {
   }
 
   protected async beforeBind() {
-    super.beforeBind();
+    await super.beforeBind();
     this.head.title = "You are " + this.ctx.params.handle;
   }
 
   protected async afterBind() {
-    super.afterBind();
+    await super.afterBind();
   }
 
   protected template() {

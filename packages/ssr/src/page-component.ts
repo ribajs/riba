@@ -1,10 +1,10 @@
 import { Component } from "@ribajs/core";
 import type { SharedContext } from "@ribajs/ssr";
-import type { EventDispatcher } from "@ribajs/events";
-import type { PageComponentAfterBindEventData, SsrHtmlHead } from "./types";
+import type { SsrHtmlHead } from "./types";
+import { EventDispatcher } from "@ribajs/events";
 
 export abstract class PageComponent extends Component {
-  protected events: EventDispatcher;
+  protected lifecycleEvents = EventDispatcher.getInstance("lifecycle");
   protected ctx: SharedContext["ctx"];
   protected env: SharedContext["env"];
 
@@ -20,8 +20,6 @@ export abstract class PageComponent extends Component {
     super();
     this.ctx = window.ssr.ctx;
     this.env = window.ssr.env;
-    this.events = window.ssr.events;
-    this.events.trigger("PageComponent:constructor", this.getBindEventData());
   }
 
   protected setHtmlHead() {
@@ -30,25 +28,25 @@ export abstract class PageComponent extends Component {
     }
   }
 
-  protected getBindEventData() {
-    const data: PageComponentAfterBindEventData = {
-      tagName: this.tagName.toLocaleLowerCase(),
-      scope: this.scope,
-      component: this,
-    };
-    return data;
+  protected connectedCallback() {
+    super.connectedCallback();
+    this.lifecycleEvents.trigger(
+      "Component:connected",
+      this.getLifecycleEventData()
+    );
   }
 
-  protected async afterBind() {
-    await super.afterBind();
-    const data = this.getBindEventData();
-    this.setHtmlHead();
-    this.events.trigger("PageComponent:afterBind", data);
+  protected disconnectedCallback() {
+    super.disconnectedCallback();
   }
 
   protected async beforeBind() {
     await super.beforeBind();
-    const data = this.getBindEventData();
-    this.events.trigger("PageComponent:beforeBind", data);
+    this.setHtmlHead();
+  }
+
+  protected async afterBind() {
+    this.setHtmlHead();
+    await super.afterBind();
   }
 }

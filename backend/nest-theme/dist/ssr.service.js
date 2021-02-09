@@ -141,7 +141,7 @@ let SsrService = class SsrService {
         this.log.debug('Wait for custom element...');
         this.log.debug('Scripts executed!');
         return new Promise((resolve, reject) => {
-            sharedContext.events.once('PageComponent:afterBind', (afterBindData) => {
+            sharedContext.events.once('ready', (afterBindData) => {
                 const html = dom.serialize();
                 const result = Object.assign(Object.assign({}, afterBindData), { html: html, css: [] });
                 return resolve(result);
@@ -175,7 +175,7 @@ let SsrService = class SsrService {
             },
         });
         const result = await new Promise((resolve, reject) => {
-            sharedContext.events.once('PageComponent:afterBind', async (afterBindData) => {
+            sharedContext.events.once('ready', async (afterBindData) => {
                 const ssrResult = await ssrResultPromise;
                 const result = Object.assign(Object.assign({}, afterBindData), { html: ssrResult.html, css: ssrResult.css });
                 return resolve(result);

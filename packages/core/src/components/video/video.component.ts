@@ -185,9 +185,7 @@ export class VideoComponent extends Component {
   }
 
   protected async afterBind() {
-    await super.afterBind();
-
-    //video-src attribute
+    // video-src attribute
     if (this.scope.videoSrc) {
       let sourceElement = this.video.querySelector("source");
       if (!sourceElement) {
@@ -198,7 +196,7 @@ export class VideoComponent extends Component {
     }
 
     if (this.scope.autoplayMediaQuery) {
-      //autoplay-media-query attribute
+      // autoplay-media-query attribute
       const mediaQueryList = window.matchMedia(this.scope.autoplayMediaQuery);
       mediaQueryList.addEventListener(
         "change",
@@ -208,9 +206,10 @@ export class VideoComponent extends Component {
         this.autoplay();
       }
     } else if (this.scope.autoplayOnMinBuffer) {
-      //autoplay-on-min-buffer attribute
+      // autoplay-on-min-buffer attribute
       this.autoplay();
     }
+    await super.afterBind();
   }
   /**
    * Loads the media and checks if the autoplay-on-min-buffer is set

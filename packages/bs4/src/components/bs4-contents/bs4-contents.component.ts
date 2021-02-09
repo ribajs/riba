@@ -123,7 +123,6 @@ export class Bs4ContentsComponent extends Component {
   }
 
   protected async afterBind() {
-    await super.afterBind();
     if (
       this.scope.headerParentSelector &&
       this.scope.headersStart &&
@@ -143,6 +142,7 @@ export class Bs4ContentsComponent extends Component {
         this.scope.anchors
       );
     }
+    await super.afterBind();
   }
 
   protected requiredAttributes() {

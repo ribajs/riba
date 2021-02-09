@@ -48,8 +48,8 @@ export class Bs4ModalItemComponent extends Component {
   }
 
   protected async afterBind() {
-    super.afterBind();
     this.initModalService();
+    await super.afterBind();
   }
 
   protected initModalService() {
