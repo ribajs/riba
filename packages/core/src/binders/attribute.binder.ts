@@ -1,4 +1,5 @@
-import { Binder } from "../interfaces";
+import { jsonFormatter } from "../formatters/type/json.formatter";
+import type { Binder } from "../interfaces";
 export interface BinderAttributeChangedEvent {
   detail: {
     name: string;
@@ -22,20 +23,44 @@ export const attributeBinder: Binder<string> = {
     delete this.customData;
   },
 
-  routine(el: HTMLElement, newValue: string) {
+  routine(el: HTMLElement, newValue: any) {
     if (!this.type) {
       throw new Error("Can't set attribute of " + this.type);
     }
 
     const oldValue = el.getAttribute(this.type);
+    let newValueFormatted: any;
+    switch (typeof newValue) {
+      case "string":
+        newValueFormatted = newValue;
+        break;
+      case "number":
+        newValueFormatted = newValue;
+        break;
+      case "boolean":
+        newValueFormatted = newValue;
+        break;
+      case "object":
+        if (newValue === null) {
+          newValue = null;
+        } else {
+          newValueFormatted = jsonFormatter.read(newValue, 0);
+        }
+        break;
+      default:
+        newValueFormatted = newValue;
+        break;
+    }
 
-    if (newValue != null) {
-      if (oldValue !== newValue) {
-        el.setAttribute(this.type, newValue);
+    if (newValueFormatted != null) {
+      if (
+        String(oldValue).toString() !== String(newValueFormatted).toString()
+      ) {
+        el.setAttribute(this.type, newValueFormatted);
         el.dispatchEvent(
           // E.g. Event used in BinderAttributeChangedEvent
           new CustomEvent("binder-changed", {
-            detail: { name: this.type, newValue, oldValue },
+            detail: { name: this.type, newValueFormatted, oldValue },
           })
         );
       }
@@ -44,7 +69,7 @@ export const attributeBinder: Binder<string> = {
       el.dispatchEvent(
         // E.g. Event used in BinderAttributeChangedEvent
         new CustomEvent("binder-changed", {
-          detail: { name: this.type, newValue, oldValue },
+          detail: { name: this.type, newValueFormatted, oldValue },
         })
       );
     }
