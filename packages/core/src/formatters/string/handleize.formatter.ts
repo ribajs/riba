@@ -9,6 +9,10 @@ import { handleize } from "@ribajs/utils/src/type";
 export const handleizeFormatter: Formatter = {
   name: "handleize",
   read(str: string) {
+    if (!str) {
+      console.warn("[handleizeFormatter] str is not set");
+      return "";
+    }
     return handleize(str);
   },
 };

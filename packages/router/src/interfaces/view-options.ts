@@ -25,6 +25,7 @@ export interface RouterViewOptions {
   listenAllLinks: boolean;
   listenPopstate: boolean;
   scrollToAnchorHash: boolean;
+  datasetToModel?: boolean;
   parseTitle: boolean;
   changeBrowserUrl: boolean;
   prefetchLinks: boolean;

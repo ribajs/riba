@@ -5,7 +5,9 @@ import { State } from "@ribajs/history";
 import { Pjax, Prefetch, HideShowTransition } from "../../services";
 import type { RouterViewOptions, PjaxOptions } from "../../interfaces";
 
-export type Scope = RouterViewOptions;
+export interface Scope extends RouterViewOptions {
+  dataset: any;
+}
 
 export class RouterViewComponent extends Component {
   public static tagName = "router-view";
@@ -24,6 +26,7 @@ export class RouterViewComponent extends Component {
       "listen-all-links",
       "listen-popstate",
       "scroll-to-anchor-hash",
+      "dataset-to-model",
       "parse-title",
       "change-browser-url",
       "prefetch-links",
@@ -37,10 +40,12 @@ export class RouterViewComponent extends Component {
     listenAllLinks: true,
     listenPopstate: true,
     scrollToAnchorHash: true,
+    datasetToModel: true,
     parseTitle: true,
     changeBrowserUrl: true,
     prefetchLinks: true,
     transition: new HideShowTransition("replace", true),
+    dataset: {},
   };
 
   constructor(element?: HTMLElement) {
@@ -102,7 +107,11 @@ export class RouterViewComponent extends Component {
     dataset: any,
     isInit: boolean
   ) {
-    // Ignore on first page request
+    if (this.scope.datasetToModel) {
+      this.scope.dataset = dataset;
+    }
+
+    // Ignore rest on first page requests
     if (isInit) {
       return;
     }
