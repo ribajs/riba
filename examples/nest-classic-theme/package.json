@@ -68,6 +68,7 @@
     "@ribajs/router": "workspace:packages/router",
     "@ribajs/types": "workspace:infra/types",
     "@ribajs/utils": "workspace:packages/utils",
-    "bootstrap": "^4.6.0"
+    "bootstrap": "^4.6.0",
+    "leaflet": "^1.7.1"
   }
 }
