@@ -9,7 +9,7 @@ export class ShopifyApiProductService extends BaseApiService {
 
   protected baseUrl: string;
 
-  protected socket?: typeof Socket;
+  protected socket?: Socket;
   protected events = new EventDispatcher("shopify-api-product-service");
   public on: EventDispatcher["on"];
   public once: EventDispatcher["once"];

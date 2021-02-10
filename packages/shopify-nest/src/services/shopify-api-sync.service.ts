@@ -10,7 +10,7 @@ export class ShopifyApiSyncService extends EventDispatcher {
 
   protected debug = Debug("services:ShopifyApiSyncService");
   protected baseUrl = `/shopify/sync`;
-  protected socket?: typeof Socket;
+  protected socket?: Socket;
   protected host: string;
 
   /**

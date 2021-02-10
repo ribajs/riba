@@ -5,7 +5,7 @@ import { io, Socket } from "@ribajs/shopify-tda";
 export class WebhooksService extends EventDispatcher {
   public static instance?: WebhooksService;
 
-  protected socket?: typeof Socket;
+  protected socket?: Socket;
   protected debug = Debug("services:WebhooksService");
   constructor(
     protected readonly host = window.location.protocol +

@@ -5069,6 +5069,7 @@ __metadata:
     "@types/debug": ^4.1.5
     "@types/node": ^14.14.25
     debug: ^4.3.2
+    eslint: ^7.19.0
     monaco-editor: ^0.22.3
     typescript: ^4.1.4
   languageName: unknown
@@ -5183,7 +5184,6 @@ __metadata:
     "@types/browser-sync": ^2.26.1
     "@types/debug": ^4.1.5
     "@types/find-root": ^1.1.2
-    "@types/gulp": ^4.0.8
     "@types/gulp-cheerio": ^0.0.33
     "@types/gulp-plumber": ^0.0.32
     "@types/gulp-rename": ^2.0.0
