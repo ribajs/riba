@@ -23,7 +23,7 @@ export class ShopifyApiProductService extends BaseApiService {
 
     console.debug("[ShopifyApiProductService] constructor");
     this.socket = io({
-      path: "/socket.io${this.baseUrl}",
+      path: `/socket.io/shopify/api/products`,
       transports: ["websocket", "polling"],
     });
     this.socket?.on("connect", () => {
