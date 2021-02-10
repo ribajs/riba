@@ -16,8 +16,8 @@ export class ShopifyApiProductService extends BaseApiService {
 
   protected constructor(host?: string) {
     super(host);
-    this.on = this.events.on;
-    this.once = this.events.once;
+    this.on = this.events.on.bind(this.events);
+    this.once = this.events.once.bind(this.events);
 
     this.baseUrl = `${this.host}/shopify/api/products`;
 
