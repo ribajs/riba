@@ -28,25 +28,21 @@ export abstract class PageComponent extends Component {
     }
   }
 
-  protected connectedCallback() {
-    super.connectedCallback();
-    this.lifecycleEvents.trigger(
-      "Component:connected",
-      this.getLifecycleEventData()
-    );
-  }
+  // protected connectedCallback() {
+  //   super.connectedCallback();
+  // }
 
-  protected disconnectedCallback() {
-    super.disconnectedCallback();
-  }
+  // protected disconnectedCallback() {
+  //   super.disconnectedCallback();
+  // }
 
-  protected async beforeBind() {
-    await super.beforeBind();
-    this.setHtmlHead();
-  }
+  // protected async beforeBind() {
+  //   await super.beforeBind();
+  //   this.setHtmlHead();
+  // }
 
-  protected async afterBind() {
-    this.setHtmlHead();
-    await super.afterBind();
-  }
+  // protected async afterBind() {
+  //   this.setHtmlHead();
+  //   await super.afterBind();
+  // }
 }

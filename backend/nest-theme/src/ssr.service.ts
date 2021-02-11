@@ -307,7 +307,7 @@ export class SsrService {
     let layout = await this.renderTemplate(template, sharedContext);
     // this.log.debug(`layout: ${layout}`);
     layout = await this.transformLayout(layout, rootTag, componentTagName);
-    // this.log.debug(`layout (transformed): ${layout}`);
+    this.log.debug(`layout (transformed): ${layout}`);
     try {
       const renderData =
         engine === 'jsdom'

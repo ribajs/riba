@@ -10,7 +10,9 @@ import type {
  */
 export class LifecycleService {
   public events = EventDispatcher.getInstance("lifecycle");
+  public timeoutDelay = 3000;
   protected routerEvents = EventDispatcher.getInstance();
+  protected timeout: number | null = null;
   protected static instance: LifecycleService;
 
   protected components: {
@@ -19,6 +21,7 @@ export class LifecycleService {
 
   protected constructor() {
     this.addEventListeners();
+    this.reset();
     LifecycleService.instance = this;
   }
 
@@ -90,12 +93,30 @@ export class LifecycleService {
       }
     }
     if (allBound) {
-      this.events.trigger("ComponentLifecycle:allBound", this.components);
-      console.debug("[ComponentLifecycle] All components bound!");
+      this.onAllBound();
     }
+  }
+
+  protected onAllBound() {
+    if (this.timeout) {
+      window.clearTimeout(this.timeout);
+    }
+    this.events.trigger("ComponentLifecycle:allBound", this.components);
+    console.debug("[ComponentLifecycle] All components bound!");
+  }
+
+  protected onTimeout() {
+    this.events.trigger("ComponentLifecycle:timeout", this.components);
+    console.error(
+      "[ComponentLifecycle] Timeout! Make sure you call the super.connectedCallback and super.afterBind methods exactly one time in all your components."
+    );
   }
 
   protected reset() {
     this.components = {};
+    this.timeout = window.setTimeout(
+      this.onTimeout.bind(this),
+      this.timeoutDelay
+    );
   }
 }

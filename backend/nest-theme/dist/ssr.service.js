@@ -141,9 +141,9 @@ let SsrService = class SsrService {
         this.log.debug('Wait for custom element...');
         this.log.debug('Scripts executed!');
         return new Promise((resolve, reject) => {
-            sharedContext.events.once('ready', (afterBindData) => {
+            sharedContext.events.once('ready', (lifecycleEventData) => {
                 const html = dom.serialize();
-                const result = Object.assign(Object.assign({}, afterBindData), { html: html, css: [] });
+                const result = Object.assign(Object.assign({}, lifecycleEventData), { html: html, css: [] });
                 return resolve(result);
             });
             dom.window.addEventListener('error', (event) => {
@@ -175,9 +175,9 @@ let SsrService = class SsrService {
             },
         });
         const result = await new Promise((resolve, reject) => {
-            sharedContext.events.once('ready', async (afterBindData) => {
+            sharedContext.events.once('ready', async (lifecycleEventData) => {
                 const ssrResult = await ssrResultPromise;
-                const result = Object.assign(Object.assign({}, afterBindData), { html: ssrResult.html, css: ssrResult.css });
+                const result = Object.assign(Object.assign({}, lifecycleEventData), { html: ssrResult.html, css: ssrResult.css });
                 return resolve(result);
             });
             window.addEventListener('error', (event) => {
@@ -205,6 +205,7 @@ let SsrService = class SsrService {
         this.log.debug(`template: ${template}`);
         let layout = await this.renderTemplate(template, sharedContext);
         layout = await this.transformLayout(layout, rootTag, componentTagName);
+        this.log.debug(`layout (transformed): ${layout}`);
         try {
             const renderData = engine === 'jsdom'
                 ? await this.renderWithJSDom(layout, componentTagName, sharedContext)
