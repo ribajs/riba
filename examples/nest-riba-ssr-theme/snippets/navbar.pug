@@ -13,5 +13,5 @@ bs4-navbar.navbar.navbar-main.fixed-top.navbar-dark.bg-primary
       link-list.col-auto.d-flex.align-items-center
         //- Only on desktop
         ul.nav.d-none.d-lg-flex
-          li.nav.d-flex(rv-each-item="items")
-            a.nav-link.text-light(rv-href="item.url") { item.label }
+          li.nav.d-flex(ssr-rv-each-item="items")
+            a.nav-link.text-light(ssr-rv-href="item.url") { item.label }

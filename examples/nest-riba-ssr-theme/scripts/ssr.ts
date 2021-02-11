@@ -19,28 +19,37 @@ declare global {
   }
 }
 
-window.model = window.model || {};
-window.riba = new Riba();
+window.model = window.model || window.ssr.templateVars || {};
+
+const riba = new Riba();
+
+// These Riba settings are necessary for the ssr
+riba.configure({ prefix: "ssr-rv", blockUnknownCustomElements: false });
 
 // Regist custom components
-window.riba.module.regist({
+riba.module.regist({
   components: { ...pageComponents, LinkListComponent },
   binders,
   formatters,
 });
 
 // const localesService = new LocalesStaticService(locales, undefined, false);
-// window.riba.module.regist(i18nModule(localesService));
+// riba.module.regist(i18nModule(localesService));
 
 // Regist modules
-window.riba.module.regist(coreModule);
-window.riba.module.regist(SSRModule);
+riba.module.regist(coreModule);
+riba.module.regist(SSRModule);
 
 console.log("Hello from Riba");
 
-window.view = window.riba.bind(document.body, window.model);
+// After all components are bound wie trigger the ssr ready event,
+// as soon as this event is triggered the ssr rendering will be done returns the rendered html
+riba.lifecycle.events.on("ComponentLifecycle:allBound", () => {
+  console.debug("ready!");
+  window.ssr.events.trigger("ready");
+});
+
+const view = riba.bind(document.body, window.model);
 
 // WORKAROUND / FIXME view.traverse method seems not to be working in jsdom / happy-dom
-window.view.registComponents();
-
-document.body.setAttribute("works", ":)");
+view.registComponents();

@@ -2533,6 +2533,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@ribajs/content-slider@npm:*":
+  version: 1.9.0
+  resolution: "@ribajs/content-slider@npm:1.9.0"
+  dependencies:
+    "@ribajs/bs4": 1.9.0
+    "@ribajs/core": 1.9.0
+    "@ribajs/extras": 1.9.0
+    "@ribajs/utils": 1.9.0
+    "@yarnpkg/pnpify": ^2.4.0
+  checksum: 3d5679e8a9fe72fe6a05a18148fd7b02e7878f4cffb1a258477ce7b749e9b4f509107986c741f6cfad6e8fdaeef7a557279c7e0cc065f7a772a087145c255057
+  languageName: node
+  linkType: hard
+
 "@ribajs/content-slider@workspace:packages/content-slider":
   version: 0.0.0-use.local
   resolution: "@ribajs/content-slider@workspace:packages/content-slider"
@@ -4479,6 +4492,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@ribajs/leaflet-map@npm:*":
+  version: 1.9.0
+  resolution: "@ribajs/leaflet-map@npm:1.9.0"
+  dependencies:
+    "@ribajs/bs4": 1.9.0
+    "@ribajs/core": 1.9.0
+    "@ribajs/extras": 1.9.0
+    "@ribajs/utils": 1.9.0
+    "@types/leaflet": ^1.5.19
+    "@yarnpkg/pnpify": ^2.4.0
+    leaflet: ^1.7.1
+  checksum: 3fa05c14250ba643ce50c42c9aa5b982aa091c5913ea20a088296e1710d91dafe4dfce33a120d7442b6fa850c74c7e0a5696d43ba8097f25799ca2e49b36ca68
+  languageName: node
+  linkType: hard
+
 "@ribajs/leaflet-map@workspace:packages/leaflet-map":
   version: 0.0.0-use.local
   resolution: "@ribajs/leaflet-map@workspace:packages/leaflet-map"
@@ -4769,6 +4797,19 @@ __metadata:
     typescript: ^4.1.4
   languageName: unknown
   linkType: soft
+
+"@ribajs/octobercms@npm:*":
+  version: 1.9.0
+  resolution: "@ribajs/octobercms@npm:1.9.0"
+  dependencies:
+    "@ribajs/bs4": 1.9.0
+    "@ribajs/core": 1.9.0
+    "@ribajs/jquery": 1.9.0
+    "@ribajs/utils": 1.9.0
+    "@yarnpkg/pnpify": ^2.4.0
+  checksum: 6b809936021babb4b0366be9e7da4e9322597ba9a795bd06c04d734f28f111d1e18e02778a81a20b5dfc3078b3be19cd3728d11a3a315d3319dc6180712e0432
+  languageName: node
+  linkType: hard
 
 "@ribajs/octobercms@workspace:packages/octobercms":
   version: 0.0.0-use.local
@@ -5451,6 +5492,18 @@ __metadata:
   dependencies:
     "@babel/core": ^7.12.13
     "@graphql-tools/webpack-loader": ^6.4.0
+    "@ribajs/bs4": "*"
+    "@ribajs/content-slider": "*"
+    "@ribajs/core": "*"
+    "@ribajs/i18n": "*"
+    "@ribajs/iconset": "*"
+    "@ribajs/leaflet-map": "*"
+    "@ribajs/moment": "*"
+    "@ribajs/octobercms": "*"
+    "@ribajs/photoswipe": "*"
+    "@ribajs/shopify": "*"
+    "@ribajs/shopify-easdk": "*"
+    "@ribajs/shopify-tda": "*"
     "@yarnpkg/pnpify": ^2.4.0
     babel-loader: ^8.2.2
     copy-webpack-plugin: ^7.0.0
@@ -5461,6 +5514,7 @@ __metadata:
     html-loader: ^1.3.2
     html-webpack-plugin: ^5.0.0
     inspectpack: ^4.6.1
+    leaflet: "*"
     mini-css-extract-plugin: ^1.3.6
     pkg-dir: ^5.0.0
     postcss: ^8.2.5
@@ -5477,26 +5531,12 @@ __metadata:
     webpack-node-externals: ^2.5.2
     webpackbar: ^5.0.0-3
   peerDependencies:
-    "@ribajs/bs4": "*"
-    "@ribajs/content-slider": "*"
-    "@ribajs/core": "*"
-    "@ribajs/i18n": "*"
-    "@ribajs/iconset": "*"
-    "@ribajs/leaflet-map": "*"
-    "@ribajs/moment": "*"
-    "@ribajs/octobercms": "*"
-    "@ribajs/photoswipe": "*"
-    "@ribajs/shopify": "*"
-    "@ribajs/shopify-easdk": "*"
-    "@ribajs/shopify-tda": "*"
-    "@ribajs/tagged-image": "*"
     assert: ^2.0.0
     browserify-zlib: ^0.2.0
     buffer: ^6.0.3
     crypto-browserify: ^3.12.0
     events: ^3.2.0
     https-browserify: ^1.0.0
-    leaflet: "*"
     path-browserify: ^1.0.1
     punycode: ^2.1.1
     querystring-es3: ^0.2.1
@@ -5506,6 +5546,33 @@ __metadata:
     url: ^0.11.0
     util: ^0.12.3
     webpack: ^5.3.2
+  dependenciesMeta:
+    "@ribajs/bs4":
+      optional: true
+    "@ribajs/content-slider":
+      optional: true
+    "@ribajs/core":
+      optional: true
+    "@ribajs/i18n":
+      optional: true
+    "@ribajs/iconset":
+      optional: true
+    "@ribajs/leaflet-map":
+      optional: true
+    "@ribajs/moment":
+      optional: true
+    "@ribajs/octobercms":
+      optional: true
+    "@ribajs/photoswipe":
+      optional: true
+    "@ribajs/shopify":
+      optional: true
+    "@ribajs/shopify-easdk":
+      optional: true
+    "@ribajs/shopify-tda":
+      optional: true
+    leaflet:
+      optional: true
   languageName: node
   linkType: soft
 
@@ -5515,6 +5582,18 @@ __metadata:
   dependencies:
     "@babel/core": ^7.12.13
     "@graphql-tools/webpack-loader": ^6.4.0
+    "@ribajs/bs4": "*"
+    "@ribajs/content-slider": "*"
+    "@ribajs/core": "*"
+    "@ribajs/i18n": "*"
+    "@ribajs/iconset": "*"
+    "@ribajs/leaflet-map": "*"
+    "@ribajs/moment": "*"
+    "@ribajs/octobercms": "*"
+    "@ribajs/photoswipe": "*"
+    "@ribajs/shopify": "*"
+    "@ribajs/shopify-easdk": "*"
+    "@ribajs/shopify-tda": "*"
     "@yarnpkg/pnpify": ^2.4.0
     babel-loader: ^8.2.2
     copy-webpack-plugin: ^7.0.0
@@ -5525,6 +5604,7 @@ __metadata:
     html-loader: ^1.3.2
     html-webpack-plugin: ^5.0.0
     inspectpack: ^4.6.1
+    leaflet: "*"
     mini-css-extract-plugin: ^1.3.6
     pkg-dir: ^5.0.0
     postcss: ^8.2.5
@@ -5541,26 +5621,12 @@ __metadata:
     webpack-node-externals: ^2.5.2
     webpackbar: ^5.0.0-3
   peerDependencies:
-    "@ribajs/bs4": "*"
-    "@ribajs/content-slider": "*"
-    "@ribajs/core": "*"
-    "@ribajs/i18n": "*"
-    "@ribajs/iconset": "*"
-    "@ribajs/leaflet-map": "*"
-    "@ribajs/moment": "*"
-    "@ribajs/octobercms": "*"
-    "@ribajs/photoswipe": "*"
-    "@ribajs/shopify": "*"
-    "@ribajs/shopify-easdk": "*"
-    "@ribajs/shopify-tda": "*"
-    "@ribajs/tagged-image": "*"
     assert: ^2.0.0
     browserify-zlib: ^0.2.0
     buffer: ^6.0.3
     crypto-browserify: ^3.12.0
     events: ^3.2.0
     https-browserify: ^1.0.0
-    leaflet: "*"
     path-browserify: ^1.0.1
     punycode: ^2.1.1
     querystring-es3: ^0.2.1
@@ -5570,6 +5636,33 @@ __metadata:
     url: ^0.11.0
     util: ^0.12.3
     webpack: ^5.3.2
+  dependenciesMeta:
+    "@ribajs/bs4":
+      optional: true
+    "@ribajs/content-slider":
+      optional: true
+    "@ribajs/core":
+      optional: true
+    "@ribajs/i18n":
+      optional: true
+    "@ribajs/iconset":
+      optional: true
+    "@ribajs/leaflet-map":
+      optional: true
+    "@ribajs/moment":
+      optional: true
+    "@ribajs/octobercms":
+      optional: true
+    "@ribajs/photoswipe":
+      optional: true
+    "@ribajs/shopify":
+      optional: true
+    "@ribajs/shopify-easdk":
+      optional: true
+    "@ribajs/shopify-tda":
+      optional: true
+    leaflet:
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -6194,7 +6287,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/leaflet@npm:^1.5.21":
+"@types/leaflet@npm:^1.5.19, @types/leaflet@npm:^1.5.21":
   version: 1.5.21
   resolution: "@types/leaflet@npm:1.5.21"
   dependencies:
@@ -14931,7 +15024,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"leaflet@npm:^1.7.1":
+"leaflet@npm:*, leaflet@npm:^1.7.1":
   version: 1.7.1
   resolution: "leaflet@npm:1.7.1"
   checksum: 7a841174dc3c8e135a2ba9a81cdd8145ef4c00e516eb558281ea47b20499f94ddab58a76a72ee15104e0dce88a07ae91fe933cfab75b569c5ed0770497aa7d99

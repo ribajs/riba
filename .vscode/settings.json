@@ -35,7 +35,9 @@
     "corejs",
     "dragscroll",
     "easdk",
+    "favicons",
     "iconset",
+    "inspectpack",
     "keypath",
     "nestjs",
     "nodir",
@@ -49,6 +51,7 @@
     "tinybind",
     "tinyliquid",
     "typecheck",
+    "webpackbar",
     "yarnpkg"
   ]
 }

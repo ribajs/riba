@@ -82,12 +82,12 @@
     "webpack-node-externals": "^2.5.2"
   },
   "dependencies": {
-    "@ribajs/bs4": "^1.9.0",
-    "@ribajs/core": "^1.9.0",
-    "@ribajs/extras": "^1.9.0",
-    "@ribajs/iconset": "^1.9.0",
-    "@ribajs/types": "^1.9.0",
-    "@ribajs/utils": "^1.9.0",
+    "@ribajs/bs4": "next",
+    "@ribajs/core": "next",
+    "@ribajs/extras": "next",
+    "@ribajs/iconset": "next",
+    "@ribajs/types": "next",
+    "@ribajs/utils": "next",
     "bootstrap": "^4.5.3",
     "electron": "latest",
     "pkg-dir": "^5.0.0",

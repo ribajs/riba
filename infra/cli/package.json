@@ -26,7 +26,7 @@
     "@angular-devkit/core": "^10.1.7",
     "@angular-devkit/schematics": "^10.1.7",
     "@angular-devkit/schematics-cli": "^0.1001.7",
-    "@ribajs/core": "^1.9.0",
+    "@ribajs/core": "next",
     "@ribajs/schematics": "^1.9.0",
     "@types/os-name": "^3.1.0",
     "@yarnpkg/pnpify": "^2.3.3",

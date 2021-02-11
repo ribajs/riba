@@ -68,10 +68,10 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "@ribajs/bs4": "^1.9.0",
-    "@ribajs/core": "^1.9.0",
-    "@ribajs/utils": "^1.9.0",
-    "@ribajs/iconset": "^1.9.0",
+    "@ribajs/bs4": "next",
+    "@ribajs/core": "next",
+    "@ribajs/utils": "next",
+    "@ribajs/iconset": "next",
     "@ribajs/router": "^1.9.0",
     "bootstrap": "^4.3.1"
   }
