@@ -4,5 +4,5 @@ export interface ComponentLifecycleEventData {
   tagName: string;
   // component: Component;
   // scope: any;
-  id: string;
+  // id: string;
 }

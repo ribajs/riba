@@ -5,6 +5,7 @@ export * from "./binder-wrapper";
 export * from "./binders";
 export * from "./binding";
 export * from "./component-lifecycle-event-data";
+export * from "./component-lifecycle-object";
 export * from "./components";
 export * from "./event-handler";
 export * from "./extensions";

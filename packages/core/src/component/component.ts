@@ -8,7 +8,6 @@ import { Riba } from "../riba";
 import { BasicComponent } from "./basic-component";
 import { Formatter } from "../interfaces";
 import { EventDispatcher } from "@ribajs/events";
-import { getUID } from "@ribajs/utils/src/dom";
 import type { ComponentLifecycleEventData } from "../interfaces";
 
 export abstract class Component extends BasicComponent {
@@ -24,9 +23,6 @@ export abstract class Component extends BasicComponent {
 
   constructor(element?: HTMLUnknownElement) {
     super(element);
-    if (!this.id) {
-      this.id = getUID(this.tagName + "-");
-    }
     this.lifecycleEvents.trigger(
       "Component:constructor",
       this.getLifecycleEventData()
@@ -81,10 +77,10 @@ export abstract class Component extends BasicComponent {
 
   protected getLifecycleEventData() {
     const data: ComponentLifecycleEventData = {
-      tagName: this.tagName.toLocaleLowerCase(),
+      tagName: this.tagName.toLowerCase(),
       // scope: this.scope,
       // component: this,
-      id: this.id,
+      // id: this.id,
     };
     return data;
   }

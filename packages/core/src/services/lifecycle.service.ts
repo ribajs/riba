@@ -1,5 +1,8 @@
 import { EventDispatcher } from "@ribajs/events";
-import type { ComponentLifecycleEventData } from "../interfaces";
+import type {
+  ComponentLifecycleEventData,
+  ComponentLifecycleObject,
+} from "../interfaces";
 
 /**
  * Component lifecycle control service.
@@ -11,7 +14,7 @@ export class LifecycleService {
   protected static instance: LifecycleService;
 
   protected components: {
-    [name: string]: "connected" | "binding" | "bound";
+    [name: string]: ComponentLifecycleObject;
   } = {};
 
   protected constructor() {
@@ -26,30 +29,37 @@ export class LifecycleService {
     return new LifecycleService();
   }
 
+  protected getEmpty(): ComponentLifecycleObject {
+    return {
+      connected: 0,
+      bound: 0,
+    };
+  }
+
   protected addEventListeners() {
     this.events.on(
       "Component:connected",
       (data: ComponentLifecycleEventData) => {
-        this.components[data.id] = "connected";
-        console.debug(
-          "[ComponentLifecycle] New component connected: " + data.id
-        );
-      }
-    );
+        this.components[data.tagName] =
+          this.components[data.tagName] || this.getEmpty();
 
-    this.events.on(
-      "Component:beforeBind",
-      (data: ComponentLifecycleEventData) => {
-        this.components[data.id] = "binding";
-        console.debug("[ComponentLifecycle] New component binding: " + data.id);
+        this.components[data.tagName].connected++;
+        console.debug(
+          "[ComponentLifecycle] New component connected: " + data.tagName
+        );
       }
     );
 
     this.events.on(
       "Component:afterBind",
       (data: ComponentLifecycleEventData) => {
-        this.components[data.id] = "bound";
-        console.debug("[ComponentLifecycle] New component bound: " + data.id);
+        this.components[data.tagName] =
+          this.components[data.tagName] || this.getEmpty();
+
+        this.components[data.tagName].bound++;
+        console.debug(
+          "[ComponentLifecycle] New component bound: " + data.tagName
+        );
         this.checkState();
       }
     );
@@ -71,8 +81,10 @@ export class LifecycleService {
 
   protected checkState() {
     let allBound = true;
-    for (const id in this.components) {
-      allBound = allBound && this.components[id] === "bound";
+    for (const tagName in this.components) {
+      allBound =
+        allBound &&
+        this.components[tagName].connected === this.components[tagName].bound;
       if (!allBound) {
         break;
       }
