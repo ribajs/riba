@@ -35,7 +35,7 @@
   "scripts": {
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
     "build": "npm run lint && npm run build:ts",
-    "build:ts": "npm run tsc",
+    "build:ts": "tsc",
     "build:browser": "npm run lint && npm run webpack:browser",
     "clean": "rm -rf ./dist ./lib"
   },

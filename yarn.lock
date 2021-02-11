@@ -2321,7 +2321,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/plugin-rest-endpoint-methods@npm:4.10.1, @octokit/plugin-rest-endpoint-methods@npm:^4.10.1":
+"@octokit/plugin-rest-endpoint-methods@npm:4.10.1":
   version: 4.10.1
   resolution: "@octokit/plugin-rest-endpoint-methods@npm:4.10.1"
   dependencies:
@@ -2471,7 +2471,7 @@ __metadata:
     popper.js: ^1.16.1
     prettier: 2.2.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
   languageName: node
@@ -2539,7 +2539,7 @@ __metadata:
     eslint-config-prettier: ^7.2.0
     eslint-plugin-prettier: ^3.3.1
     prettier: 2.2.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
   languageName: node
   linkType: soft
 
@@ -2653,7 +2653,7 @@ __metadata:
     prettier: 2.2.1
     source-map-support: ^0.5.19
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     uglifyjs-webpack-plugin: ^2.2.0
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
@@ -3966,7 +3966,7 @@ __metadata:
     eslint-config-prettier: ^7.2.0
     eslint-plugin-prettier: ^3.3.1
     prettier: 2.2.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
   languageName: node
   linkType: soft
 
@@ -4000,7 +4000,7 @@ __metadata:
     jest-config: ^26.6.3
     jest-extended: ^0.11.5
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
   languageName: node
   linkType: soft
 
@@ -4271,7 +4271,7 @@ __metadata:
     jest-extended: ^0.11.5
     prettier: 2.2.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
   languageName: node
@@ -4325,7 +4325,7 @@ __metadata:
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@types/jest": ^26.0.20
     eslint: ^7.19.0
-    typescript: ^4.1.4
+    typescript: ^4.1.5
   languageName: node
   linkType: soft
 
@@ -4372,7 +4372,7 @@ __metadata:
     eslint-config-prettier: ^7.2.0
     eslint-plugin-prettier: ^3.3.1
     prettier: 2.2.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
   languageName: node
@@ -4476,7 +4476,7 @@ __metadata:
     jquery: ^3.5.1
     prettier: 2.2.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
   languageName: node
@@ -4612,7 +4612,7 @@ __metadata:
     moment: ^2.29.1
     prettier: 2.2.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
   languageName: node
@@ -4740,7 +4740,7 @@ __metadata:
     ts-jest: ^26.5.1
     ts-node: ^9.1.1
     tsconfig-paths: ^3.9.0
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     whatwg-encoding: ^1.0.5
     yaml: next
   peerDependencies:
@@ -4926,7 +4926,7 @@ __metadata:
     photoswipe: ^4.1.3
     prettier: 2.2.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
   languageName: node
@@ -5007,7 +5007,7 @@ __metadata:
     prettier: 2.2.1
     regexpp: ^3.1.0
     tsutils: ^3.20.0
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
   languageName: node
@@ -5082,7 +5082,7 @@ __metadata:
     eslint-config-prettier: ^7.2.0
     eslint-plugin-prettier: ^3.3.1
     prettier: 2.2.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
   languageName: node
@@ -5179,7 +5179,7 @@ __metadata:
     eslint-plugin-prettier: ^3.3.1
     prettier: 2.2.1
     socket.io-client: 3.1.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
   languageName: node
@@ -5237,7 +5237,7 @@ __metadata:
     "@babel/runtime": ^7.12.13
     "@babel/runtime-corejs3": ^7.12.13
     "@octokit/core": ^3.2.5
-    "@octokit/plugin-rest-endpoint-methods": ^4.10.1
+    "@octokit/plugin-rest-endpoint-methods": ^4.10.2
     "@octokit/request": ^5.4.14
     "@octokit/rest": ^18.1.0
     "@ribajs/cache": "workspace:packages/cache"
@@ -5306,7 +5306,7 @@ __metadata:
     shopify-admin-api: ^2.16.4
     terser: ^5.6.0-beta
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
   peerDependencies:
     gulp: ^4.0.2
     gulp-cheerio: ^1.0.0
@@ -5486,7 +5486,7 @@ __metadata:
     "@types/jest": ^26.0.20
     babel-jest: ^26.6.3
     eslint: ^7.19.0
-    typescript: ^4.1.4
+    typescript: ^4.1.5
   languageName: node
   linkType: soft
 
@@ -5546,7 +5546,7 @@ __metadata:
     leaflet: "*"
     mini-css-extract-plugin: ^1.3.6
     pkg-dir: ^5.0.0
-    postcss: ^8.2.5
+    postcss: ^8.2.6
     postcss-loader: ^5.0.0
     pug: ^3.0.0
     pug-loader: ^2.4.0
@@ -17672,17 +17672,6 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.2.5":
-  version: 8.2.5
-  resolution: "postcss@npm:8.2.5"
-  dependencies:
-    colorette: ^1.2.1
-    nanoid: ^3.1.20
-    source-map: ^0.6.1
-  checksum: dbd8281a32abdbb68be53a7022f405f25207cfadf86cd603bc47e29579432d6fe970fb4189af6ddbd81170c9f226ae36413970bed5bfcd6d04544c86374547be
-  languageName: node
-  linkType: hard
-
 "postcss@npm:^8.2.6":
   version: 8.2.6
   resolution: "postcss@npm:8.2.6"
@@ -21086,16 +21075,6 @@ typescript@4.0.5:
   languageName: node
   linkType: hard
 
-typescript@^4.1.4:
-  version: 4.1.4
-  resolution: "typescript@npm:4.1.4"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 2da55c253179d360bbc846436c42a5cbbffba99dfed69593450143b1c7f46fe43eab145b84a80f51d8e6d1be6dd4a6a0885e78495a42fc34c4a768595131e148
-  languageName: node
-  linkType: hard
-
 typescript@^4.1.5:
   version: 4.1.5
   resolution: "typescript@npm:4.1.5"
@@ -21113,16 +21092,6 @@ typescript@^4.1.5:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: ada6fea7657a51d1b842682d31233e53a3cf509b0edbd6288fda3cfd01643d0190b7ea77837527c4d282c90e61690e19dbfd91be6913e7e7292aa0b588d3506c
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@^4.1.4#builtin<compat/typescript>":
-  version: 4.1.4
-  resolution: "typescript@patch:typescript@npm%3A4.1.4#builtin<compat/typescript>::version=4.1.4&hash=cc6730"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: d913f9d92f15437627d35ec24bb28740c5f550843a0442977cb61be0973aa760d618b33f4426205ccff920442ed38256b7d4b48731cfb7084ce0977c07e35404
   languageName: node
   linkType: hard
 
