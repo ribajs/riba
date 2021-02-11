@@ -1,6 +1,8 @@
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { resolve, rootPath, findDir, findFile } = require("./path");
+const { logger } = require("./logger");
+const { colors } = require("./colors");
 
 module.exports.getBaseConfig = (config = {}, env = {}) => {
   env.development =
@@ -33,7 +35,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
       resolve(rootPath, "scripts"),
     ]);
     if (config.tsSourceDir) {
-      console.debug("Set config.tsSourceDir to: " + config.tsSourceDir);
+      logger.debug("Set config.tsSourceDir to: " + config.tsSourceDir);
     }
   }
 
@@ -46,7 +48,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
       resolve(rootPath, "styles"),
     ]);
     if (config.scssSourceDir) {
-      console.debug("Set config.scssSourceDir to: " + config.scssSourceDir);
+      logger.debug("Set config.scssSourceDir to: " + config.scssSourceDir);
     }
   }
 
@@ -63,7 +65,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
       resolve(rootPath, "index.html"),
     ]);
     if (config.templateDir) {
-      console.debug("Set config.templateDir to: " + config.templateDir);
+      logger.debug("Set config.templateDir to: " + config.templateDir);
     }
   }
 
@@ -81,7 +83,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
 
     config.tsIndexPath = findFile(config.tsSourceDir, searchFor);
     if (config.tsIndexPath) {
-      console.debug("Set config.tsIndexPath to: " + config.tsIndexPath);
+      logger.debug("Set config.tsIndexPath to: " + config.tsIndexPath);
     }
   }
 
@@ -99,7 +101,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
     config.scssIndexPath = findFile(config.scssSourceDir, searchFor);
 
     if (config.scssIndexPath) {
-      console.debug("Set config.scssIndexPath to: " + config.scssIndexPath);
+      logger.debug("Set config.scssIndexPath to: " + config.scssIndexPath);
     }
   }
 
@@ -115,7 +117,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
       ]);
 
       if (eslintConfig) {
-        console.debug(
+        logger.debug(
           "Enable ESLint because a eslint config file was found in " +
             eslintConfig
         );
@@ -136,7 +138,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
     ]);
 
     if (postcssConfigPath) {
-      console.debug(
+      logger.debug(
         "Enable PostCSS because a postcss config file was found in " +
           postcssConfigPath
       );
@@ -152,7 +154,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
       config.htmlTemplatePaths.push(htmlIndex);
     }
     if (Array.isArray(config.htmlTemplatePaths) && config.htmlTemplatePaths.length) {
-      console.debug(
+      logger.debug(
         "Set config.htmlTemplatePaths to: " + config.htmlTemplatePaths
       );
     }
@@ -165,7 +167,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
       config.pugTemplatePaths.push(pugIndex);
     }
     if (config.pugSourcePath) {
-      console.debug("Set config.pugSourcePath to: " + config.pugSourcePath);
+      logger.debug("Set config.pugSourcePath to: " + config.pugSourcePath);
     }
   }
 
@@ -264,6 +266,13 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
         iconset: true,
         foldername: "assets",
       };
+
+      // https://github.com/nuxt/nuxt.js/blob/dev/packages/webpack/src/config/base.js#L435
+      config.webpackbar = config.webpackbar || {
+        name: 'OctoberCMS',
+        color: colors.client,
+      }
+
       break;
     case "shopify":
       config.entry = config.entry || {};
@@ -292,6 +301,13 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
         iconset: true,
         foldername: "src",
       };
+
+      // https://github.com/nuxt/nuxt.js/blob/dev/packages/webpack/src/config/base.js#L435
+      config.webpackbar = config.webpackbar || {
+        name: 'Shopify',
+        color: colors.client,
+      }
+
       break;
     case "shopify-checkout":
       config.entry = config.entry || {};
@@ -320,6 +336,13 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
         iconset: true,
         foldername: "src",
       };
+
+      // https://github.com/nuxt/nuxt.js/blob/dev/packages/webpack/src/config/base.js#L435
+      config.webpackbar = config.webpackbar || {
+        name: 'Checkout',
+        color: colors.modern,
+      }
+
       break;
     // E.g. used for demos
     case "local":
@@ -353,6 +376,12 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
         inline: true,
       };
 
+      // https://github.com/nuxt/nuxt.js/blob/dev/packages/webpack/src/config/base.js#L435
+      config.webpackbar = config.webpackbar || {
+        name: 'Client',
+        color: colors.client,
+      }
+
       break;
     case "ssr":
       config.entry = config.entry || [config.tsIndexPath];
@@ -373,6 +402,12 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
         config.forkTsCheckerConfig.typescript || {};
 
       config.forkTsCheckerConfig.typescript.configFile = "tsconfig.ssr.json";
+
+      // https://github.com/nuxt/nuxt.js/blob/dev/packages/webpack/src/config/base.js#L435
+      config.webpackbar = config.webpackbar || {
+        name: 'Server',
+        color: colors.server,
+      }
 
       // Disable chunks for ssr builds
       config.optimization.splitChunks = {};

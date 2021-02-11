@@ -9,7 +9,7 @@ module.exports.getDependencies = (config = {}) => {
   config.TerserPlugin = config.TerserPlugin || require("terser-webpack-plugin");
 
   // https://github.com/nuxt-contrib/webpackbar
-  config.ProgressBarPlugin = config.ProgressBarPlugin || require('webpackbar');
+  config.WebpackbarPlugin = config.WebpackbarPlugin || require('webpackbar');
 
   config.ForkTsCheckerPlugin =
     config.ForkTsCheckerPlugin || require("fork-ts-checker-webpack-plugin");

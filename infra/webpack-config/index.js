@@ -11,7 +11,7 @@ module.exports = (config = {}) => {
     config = getBaseConfig(config, env);
     // Dependencies based on base config
     config = getDependencies(config);
-    // full config (needs to check the avaiable dependencies, so must used after getDependencies)
+    // Full config (needs to check the available dependencies, so must used after getDependencies)
     config = getConfig(config, env);
 
     const webpackConfig = {
@@ -21,6 +21,8 @@ module.exports = (config = {}) => {
       mode: env.production ? "production" : "development",
       output: config.output,
       resolve: config.resolve,
+      // https://webpack.js.org/configuration/other-options/#cache
+      cache: !env.production,
       externalsPresets: config.externalsPresets
         ? config.externalsPresets
         : undefined,

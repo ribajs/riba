@@ -4,6 +4,8 @@ const { isModuleAvailable } = require("./module");
 const path = require("path");
 const fs = require("fs");
 const glob = require("glob");
+const { logger } = require("./logger");
+
 // const normalize = require("copy-webpack-plugin/dist/utils/normalize").default;
 const rootPath = process.cwd();
 
@@ -148,10 +150,10 @@ const copy = (copyPluginPatterns) => {
       const appendDestPath = path.relative(context, file);
       const dest = path.join(pattern.to, appendDestPath);
       fs.mkdirSync(path.dirname(dest), { recursive: true });
-      console.debug("\ncopy file from: " + file);
-      console.debug("copy file to: " + dest);
-      // console.debug('context: ' + context);
-      // console.debug('appendDestPath: ' + appendDestPath);
+      logger.debug("\ncopy file from: " + file);
+      logger.debug("copy file to: " + dest);
+      logger.debug('context: ' + context);
+      logger.debug('appendDestPath: ' + appendDestPath);
       fs.copyFileSync(file, dest);
     }
   }

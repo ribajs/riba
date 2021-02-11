@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { getStyleLoaderRule } = require("./style");
 const { basename } = require("path");
+const { logger } = require("./logger");
 
 module.exports.getConfig = (config = {}, env = {}) => {
   // config defaults for config templates
@@ -128,7 +129,7 @@ module.exports.getConfig = (config = {}, env = {}) => {
     );
   }
 
-  // console.debug('Used plugins: ', config.plugins);
+  logger.debug('Used plugins: ', config.plugins);
 
   if (config.styles.build === true) {
     config.rules.push(getStyleLoaderRule(config));
@@ -149,8 +150,9 @@ module.exports.getConfig = (config = {}, env = {}) => {
   }
 
   // ProgressBar plugin
-  if (config.ProgressBarPlugin) {
-    config.plugins.push(new config.ProgressBarPlugin());
+  if (config.WebpackbarPlugin) {
+    config.webpackbar = config.webpackbar || {}
+    config.plugins.push(new config.WebpackbarPlugin(config.webpackbar));
   }
 
   if (config.nodeExternalsPlugin) {
