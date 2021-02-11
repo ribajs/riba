@@ -71,7 +71,7 @@
     "prettier": "2.2.1",
     "rgb-regex": "^1.0.1",
     "ts-jest": "^26.5.1",
-    "typescript": "^4.1.4",
+    "typescript": "^4.1.5",
     "webpack": "^5.21.2",
     "webpack-cli": "^4.5.0"
   },

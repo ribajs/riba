@@ -89,7 +89,7 @@
     "rxjs": "^6.6.3",
     "source-map-support": "^0.5.19",
     "ts-jest": "^26.5.1",
-    "typescript": "^4.1.4",
+    "typescript": "^4.1.5",
     "webpack-glob-entry": "^2.1.1"
   },
   "workspaces": [

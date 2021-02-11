@@ -111,11 +111,11 @@
     "shopify-admin-api": "^2.16.4",
     "terser": "^5.6.0-beta",
     "ts-jest": "^26.5.1",
-    "typescript": "^4.1.4"
+    "typescript": "^4.1.5"
   },
   "dependencies": {
     "@octokit/core": "^3.2.5",
-    "@octokit/plugin-rest-endpoint-methods": "^4.10.1",
+    "@octokit/plugin-rest-endpoint-methods": "^4.10.2",
     "@octokit/request": "^5.4.14",
     "@octokit/rest": "^18.1.0",
     "@ribajs/cache": "workspace:packages/cache",

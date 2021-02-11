@@ -2294,6 +2294,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@octokit/openapi-types@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "@octokit/openapi-types@npm:4.0.2"
+  checksum: b19a2a8263eef37e2d3b0276ab12afedfafc8911ca9b7b535c34435cd9abb422a93da1605962a189e3c9f60875b28ae3a40745a44a43d42cf4265bd66b2ff25f
+  languageName: node
+  linkType: hard
+
 "@octokit/plugin-paginate-rest@npm:^2.6.2":
   version: 2.6.2
   resolution: "@octokit/plugin-paginate-rest@npm:2.6.2"
@@ -2323,6 +2330,18 @@ __metadata:
   peerDependencies:
     "@octokit/core": ">=3"
   checksum: 6242ca47a098d9267e0a5f6b7703e8f81e1a48de5cb0208b0e7a897ae35a798b7891cb9b87bcba5200827090c93445134f36dc213a515e2f3b6d77d9ca58cd3d
+  languageName: node
+  linkType: hard
+
+"@octokit/plugin-rest-endpoint-methods@npm:^4.10.2":
+  version: 4.10.2
+  resolution: "@octokit/plugin-rest-endpoint-methods@npm:4.10.2"
+  dependencies:
+    "@octokit/types": ^6.8.3
+    deprecation: ^2.3.1
+  peerDependencies:
+    "@octokit/core": ">=3"
+  checksum: 513f3c162fd6eec3d51d3b6281e3a31104775e5fafa53c74b5363e967e7c873d6b3f8e248fede89837bd460cfa2f0fa6982ff63c65cce3ca01658329e02b09f3
   languageName: node
   linkType: hard
 
@@ -2398,6 +2417,16 @@ __metadata:
     "@octokit/openapi-types": ^4.0.0
     "@types/node": ">= 8"
   checksum: 27876139be723ca39da61e1e7d9bf52b2983b83c703c77641095f2f5d6b3bb34e432ca6d9d823e6b076ae8349cd20ac34ce25c707b168166f7c8a268b9e853c8
+  languageName: node
+  linkType: hard
+
+"@octokit/types@npm:^6.8.3":
+  version: 6.8.3
+  resolution: "@octokit/types@npm:6.8.3"
+  dependencies:
+    "@octokit/openapi-types": ^4.0.2
+    "@types/node": ">= 8"
+  checksum: 3cd312757306be9d42ae4864cb8617dc3b2e9795319470102ee7c6da4ff0868e69b3a1c88c0e0a22aa8f4515d503ca17974f5b28f5b07f3e23c9f04ed4d4e6bc
   languageName: node
   linkType: hard
 
@@ -2489,7 +2518,7 @@ __metadata:
     popper.js: ^1.16.1
     prettier: 2.2.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
   languageName: unknown
@@ -2529,7 +2558,7 @@ __metadata:
     eslint-config-prettier: ^7.2.0
     eslint-plugin-prettier: ^3.3.1
     prettier: 2.2.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
   languageName: unknown
   linkType: soft
 
@@ -2581,7 +2610,7 @@ __metadata:
     jest-extended: ^0.11.5
     prettier: 2.2.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
   languageName: unknown
@@ -2669,7 +2698,7 @@ __metadata:
     prettier: 2.2.1
     source-map-support: ^0.5.19
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     uglifyjs-webpack-plugin: ^2.2.0
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
@@ -2722,14 +2751,14 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.3.6
-    postcss: ^8.2.5
+    postcss: ^8.2.6
     postcss-loader: ^5.0.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
     prettier: 2.2.1
     pug-loader: ^2.4.0
     sass-loader: ^11.0.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
@@ -2782,14 +2811,14 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.3.6
-    postcss: ^8.2.5
+    postcss: ^8.2.6
     postcss-loader: ^5.0.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
     prettier: 2.2.1
     pug-loader: ^2.4.0
     sass-loader: ^11.0.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
@@ -2848,7 +2877,7 @@ __metadata:
     prettier: 2.2.1
     pug-loader: ^2.4.0
     sass-loader: ^11.0.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
@@ -2903,7 +2932,7 @@ __metadata:
     sass-loader: ^11.0.1
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
@@ -2956,7 +2985,7 @@ __metadata:
     postcss-preset-env: ^6.7.0
     sass-loader: ^11.0.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
@@ -3011,7 +3040,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.3.6
-    postcss: ^8.2.5
+    postcss: ^8.2.6
     postcss-loader: ^5.0.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -3021,7 +3050,7 @@ __metadata:
     style-loader: ^2.0.0
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
@@ -3082,7 +3111,7 @@ __metadata:
     prettier: 2.2.1
     pug-loader: ^2.4.0
     sass-loader: ^11.0.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
@@ -3135,14 +3164,14 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.3.6
-    postcss: ^8.2.5
+    postcss: ^8.2.6
     postcss-loader: ^5.0.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
     prettier: 2.2.1
     pug-loader: ^2.4.0
     sass-loader: ^11.0.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
@@ -3203,7 +3232,7 @@ __metadata:
     pug-loader: ^2.4.0
     sass-loader: ^11.0.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
@@ -3261,7 +3290,7 @@ __metadata:
     sass-loader: ^11.0.1
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
@@ -3314,7 +3343,7 @@ __metadata:
     sass-loader: ^11.0.1
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
@@ -3368,7 +3397,7 @@ __metadata:
     sass-loader: ^11.0.1
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
@@ -3427,7 +3456,7 @@ __metadata:
     sass-loader: ^11.0.1
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
@@ -3486,7 +3515,7 @@ __metadata:
     sass-loader: ^11.0.1
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
@@ -3539,14 +3568,14 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.3.6
-    postcss: ^8.2.5
+    postcss: ^8.2.6
     postcss-loader: ^5.0.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
     prettier: 2.2.1
     pug-loader: ^2.4.0
     sass-loader: ^11.0.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
@@ -3610,7 +3639,7 @@ __metadata:
     sass-loader: ^11.0.1
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
@@ -3670,7 +3699,7 @@ __metadata:
     sass-loader: ^11.0.1
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
@@ -3730,7 +3759,7 @@ __metadata:
     sass-loader: ^11.0.1
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
@@ -3794,7 +3823,7 @@ __metadata:
     sass-loader: ^11.0.1
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
@@ -3858,7 +3887,7 @@ __metadata:
     sass-loader: ^11.0.1
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
@@ -3919,7 +3948,7 @@ __metadata:
     sass-loader: ^11.0.1
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
@@ -3952,7 +3981,7 @@ __metadata:
     eslint-config-prettier: ^7.2.0
     eslint-plugin-prettier: ^3.3.1
     prettier: 2.2.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
   languageName: unknown
   linkType: soft
 
@@ -3990,7 +4019,7 @@ __metadata:
     jest-config: ^26.6.3
     jest-extended: ^0.11.5
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
   languageName: unknown
   linkType: soft
 
@@ -4045,7 +4074,7 @@ __metadata:
     sass: ^1.32.7
     style-loader: ^2.0.0
     terser-webpack-plugin: ^5.1.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
   languageName: unknown
@@ -4086,11 +4115,11 @@ __metadata:
     supertest: ^6.1.3
     tinyliquid: ^0.2.34
     ts-jest: ^26.5.1
-    ts-loader: ^8.0.16
+    ts-loader: ^8.0.17
     ts-node: ^9.1.1
     tsconfig-paths: ^3.9.0
     twig: ^1.15.4
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     yaml: next
   languageName: unknown
   linkType: soft
@@ -4147,7 +4176,7 @@ __metadata:
     sass: ^1.32.7
     style-loader: ^2.0.0
     terser-webpack-plugin: ^5.1.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
     webpack-node-externals: ^2.5.2
@@ -4200,11 +4229,11 @@ __metadata:
     supertest: ^6.1.3
     tinyliquid: ^0.2.34
     ts-jest: ^26.5.1
-    ts-loader: ^8.0.16
+    ts-loader: ^8.0.17
     ts-node: ^9.1.1
     tsconfig-paths: ^3.9.0
     twig: ^1.15.4
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     whatwg-encoding: ^1.0.5
     yaml: next
   languageName: unknown
@@ -4280,7 +4309,7 @@ __metadata:
     jest-extended: ^0.11.5
     prettier: 2.2.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
   languageName: unknown
@@ -4310,7 +4339,7 @@ __metadata:
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@types/jest": ^26.0.20
     eslint: ^7.19.0
-    typescript: ^4.1.4
+    typescript: ^4.1.5
   languageName: unknown
   linkType: soft
 
@@ -4378,7 +4407,7 @@ __metadata:
     eslint-config-prettier: ^7.2.0
     eslint-plugin-prettier: ^3.3.1
     prettier: 2.2.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
   languageName: unknown
@@ -4486,7 +4515,7 @@ __metadata:
     jquery: ^3.5.1
     prettier: 2.2.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
   languageName: unknown
@@ -4545,7 +4574,7 @@ __metadata:
     leaflet: ^1.7.1
     prettier: 2.2.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
   languageName: unknown
@@ -4621,7 +4650,7 @@ __metadata:
     moment: ^2.29.1
     prettier: 2.2.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
   languageName: unknown
@@ -4660,7 +4689,7 @@ __metadata:
     monaco-editor: ^0.22.3
     prettier: 2.2.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
   languageName: unknown
@@ -4766,7 +4795,7 @@ __metadata:
     ts-jest: ^26.5.1
     ts-node: ^9.1.1
     tsconfig-paths: ^3.9.0
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     whatwg-encoding: ^1.0.5
     yaml: next
   peerDependencies:
@@ -4794,7 +4823,7 @@ __metadata:
     graphql-request: ^3.4.0
     prettier: 2.2.1
     rimraf: ^3.0.2
-    typescript: ^4.1.4
+    typescript: ^4.1.5
   languageName: unknown
   linkType: soft
 
@@ -4856,7 +4885,7 @@ __metadata:
     prettier: 2.2.1
     rgb-regex: ^1.0.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
   languageName: unknown
@@ -4938,7 +4967,7 @@ __metadata:
     photoswipe: ^4.1.3
     prettier: 2.2.1
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
   languageName: unknown
@@ -5018,7 +5047,7 @@ __metadata:
     prettier: 2.2.1
     regexpp: ^3.1.0
     tsutils: ^3.20.0
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
   languageName: unknown
@@ -5088,7 +5117,7 @@ __metadata:
     eslint-config-prettier: ^7.2.0
     eslint-plugin-prettier: ^3.3.1
     prettier: 2.2.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
   languageName: unknown
@@ -5113,7 +5142,7 @@ __metadata:
     debug: ^4.3.2
     eslint: ^7.19.0
     monaco-editor: ^0.22.3
-    typescript: ^4.1.4
+    typescript: ^4.1.5
   languageName: unknown
   linkType: soft
 
@@ -5189,7 +5218,7 @@ __metadata:
     eslint-plugin-prettier: ^3.3.1
     prettier: 2.2.1
     socket.io-client: 3.1.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack: ^5.21.2
     webpack-cli: ^4.5.0
   languageName: unknown
@@ -5313,7 +5342,7 @@ __metadata:
     "@babel/runtime": ^7.12.13
     "@babel/runtime-corejs3": ^7.12.13
     "@octokit/core": ^3.2.5
-    "@octokit/plugin-rest-endpoint-methods": ^4.10.1
+    "@octokit/plugin-rest-endpoint-methods": ^4.10.2
     "@octokit/request": ^5.4.14
     "@octokit/rest": ^18.1.0
     "@ribajs/cache": "workspace:packages/cache"
@@ -5382,7 +5411,7 @@ __metadata:
     shopify-admin-api: ^2.16.4
     terser: ^5.6.0-beta
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
   peerDependencies:
     gulp: ^4.0.2
     gulp-cheerio: ^1.0.0
@@ -5472,7 +5501,7 @@ __metadata:
     "@types/jest": ^26.0.20
     babel-jest: ^26.6.3
     eslint: ^7.19.0
-    typescript: ^4.1.4
+    typescript: ^4.1.5
   languageName: unknown
   linkType: soft
 
@@ -5607,7 +5636,7 @@ __metadata:
     leaflet: "*"
     mini-css-extract-plugin: ^1.3.6
     pkg-dir: ^5.0.0
-    postcss: ^8.2.5
+    postcss: ^8.2.6
     postcss-loader: ^5.0.0
     pug: ^3.0.0
     pug-loader: ^2.4.0
@@ -17654,6 +17683,17 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"postcss@npm:^8.2.6":
+  version: 8.2.6
+  resolution: "postcss@npm:8.2.6"
+  dependencies:
+    colorette: ^1.2.1
+    nanoid: ^3.1.20
+    source-map: ^0.6.1
+  checksum: 31dcc6632589e5b0d06ae3854122073a38952f3a25280511fa4bd8c2bc254c05d1d1db0913848ed3171c84d41b233ec3fe5d7349de4700f624a16fa93553ccac
+  languageName: node
+  linkType: hard
+
 "prelude-ls@npm:^1.2.1":
   version: 1.2.1
   resolution: "prelude-ls@npm:1.2.1"
@@ -18884,7 +18924,7 @@ fsevents@~2.3.1:
     rxjs: ^6.6.3
     source-map-support: ^0.5.19
     ts-jest: ^26.5.1
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     webpack-glob-entry: ^2.1.1
   dependenciesMeta:
     prettier:
@@ -20803,9 +20843,9 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"ts-loader@npm:^8.0.16":
-  version: 8.0.16
-  resolution: "ts-loader@npm:8.0.16"
+"ts-loader@npm:^8.0.17":
+  version: 8.0.17
+  resolution: "ts-loader@npm:8.0.17"
   dependencies:
     chalk: ^4.1.0
     enhanced-resolve: ^4.0.0
@@ -20815,7 +20855,7 @@ fsevents@~2.3.1:
   peerDependencies:
     typescript: "*"
     webpack: "*"
-  checksum: 142fd347ab34d6d246098604f8def5dbef4d00e700e8d7abbc0733e56651754db445e99a1de281d05b2169f5eb3ac65854f7934eb0442cb95bdbbaf821bf4232
+  checksum: e09b71875034ec5daf0f6eac2acefea31c78df1a0aa2d6f76f66954326acf93bafa9092a5a7f5872276bba39ba4dfebbcb7c21ef88d4334ff95bb4d216b9dfe0
   languageName: node
   linkType: hard
 
@@ -21056,6 +21096,16 @@ typescript@^4.1.4:
   languageName: node
   linkType: hard
 
+typescript@^4.1.5:
+  version: 4.1.5
+  resolution: "typescript@npm:4.1.5"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 29157c84426ac94ce97aac836264f303a26bd9fb30865650229e3406a36ca2e89735ef4b8878075ba1b95fa4d3ff9810057b64888700c28e20b4034a6db4da83
+  languageName: node
+  linkType: hard
+
 "typescript@patch:typescript@4.0.5#builtin<compat/typescript>":
   version: 4.0.5
   resolution: "typescript@patch:typescript@npm%3A4.0.5#builtin<compat/typescript>::version=4.0.5&hash=cc6730"
@@ -21073,6 +21123,16 @@ typescript@^4.1.4:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: d913f9d92f15437627d35ec24bb28740c5f550843a0442977cb61be0973aa760d618b33f4426205ccff920442ed38256b7d4b48731cfb7084ce0977c07e35404
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@^4.1.5#builtin<compat/typescript>":
+  version: 4.1.5
+  resolution: "typescript@patch:typescript@npm%3A4.1.5#builtin<compat/typescript>::version=4.1.5&hash=cc6730"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 58cc7786be0f8485c124944883b1384287532e4867ec37f1fb5cb2811dbc10f7a9decccad89097f924043285f3515bfd8223c61dbb4f88af00b2d8dc2ef73207
   languageName: node
   linkType: hard
 
