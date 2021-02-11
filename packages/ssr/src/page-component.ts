@@ -36,13 +36,13 @@ export abstract class PageComponent extends Component {
   //   super.disconnectedCallback();
   // }
 
-  // protected async beforeBind() {
-  //   await super.beforeBind();
-  //   this.setHtmlHead();
-  // }
+  protected async beforeBind() {
+    await super.beforeBind();
+    this.setHtmlHead();
+  }
 
-  // protected async afterBind() {
-  //   this.setHtmlHead();
-  //   await super.afterBind();
-  // }
+  protected async afterBind() {
+    this.setHtmlHead();
+    await super.afterBind();
+  }
 }
