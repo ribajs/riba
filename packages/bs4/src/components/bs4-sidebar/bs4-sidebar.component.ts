@@ -49,7 +49,7 @@ interface Scope {
    */
   watchNewPageReadyEvent: boolean;
   /**
-   * You can force to hide the sidebar on corresponding URL pathames e.g. you can hide the sidebar on home with `['/']`.
+   * You can force to hide the sidebar on corresponding URL pathnames e.g. you can hide the sidebar on home with `['/']`.
    */
   forceHideOnLocationPathnames: Array<string>;
   /**
@@ -166,7 +166,7 @@ export class Bs4SidebarComponent extends Component {
     this.init(Bs4SidebarComponent.observedAttributes);
     this.computedStyle = window.getComputedStyle(this.el);
     window.addEventListener("resize", this.onEnvironmentChanges, false);
-    // inital
+    // initial
     this.onEnvironmentChanges();
   }
 
@@ -209,16 +209,16 @@ export class Bs4SidebarComponent extends Component {
     );
   }
 
-  protected onSide(directon: State) {
-    this.setContainersStyle(undefined, "", directon);
+  protected onSide(direction: State) {
+    this.setContainersStyle(undefined, "", direction);
     this.el.setAttribute(
       "style",
       `transform:translateX(0);width:${this.scope.width};`
     );
   }
 
-  protected onOverlay(directon: State) {
-    this.setContainersStyle(undefined, "", directon);
+  protected onOverlay(direction: State) {
+    this.setContainersStyle(undefined, "", direction);
     this.el.setAttribute(
       "style",
       `transform:translateX(0);width:${this.scope.width};`
@@ -255,7 +255,7 @@ export class Bs4SidebarComponent extends Component {
     return this.el.offsetWidth ? this.el.offsetWidth + "px" : this.scope.width;
   }
 
-  protected setStateByEnviroment() {
+  protected setStateByEnvironment() {
     if (
       this.scope.forceHideOnLocationPathnames.includes(window.location.pathname)
     ) {
@@ -282,10 +282,10 @@ export class Bs4SidebarComponent extends Component {
   }
 
   /**
-   * If vieport size changes, location url changes or something else
+   * If viewport size changes, location url changes or something else
    */
   protected onEnvironmentChanges() {
-    this.setStateByEnviroment();
+    this.setStateByEnvironment();
   }
 
   protected getContainers() {
@@ -371,7 +371,7 @@ export class Bs4SidebarComponent extends Component {
   }
 
   protected async afterBind() {
-    return this.onEnvironmentChanges();
+    this.onEnvironmentChanges();
     await super.afterBind();
   }
 
@@ -399,7 +399,7 @@ export class Bs4SidebarComponent extends Component {
     }
   }
 
-  // deconstructor
+  // deconstruction
   protected disconnectedCallback() {
     super.disconnectedCallback();
     this.eventDispatcher?.off(

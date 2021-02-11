@@ -143,6 +143,15 @@ export class LifecycleService {
     console.error(
       "[ComponentLifecycle] Timeout! Make sure you call the super.connectedCallback and super.afterBind methods exactly one time in all your components."
     );
+
+    console.error("[ComponentLifecycle] Unfinished components:");
+    for (const tagName in this.components) {
+      if (
+        this.components[tagName].connected !== this.components[tagName].bound
+      ) {
+        console.error(`${tagName}`, this.components[tagName]);
+      }
+    }
   }
 
   protected reset() {
