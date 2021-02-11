@@ -43,15 +43,20 @@
     "nodir",
     "octobercms",
     "photoswipe",
+    "pjax",
     "pnpify",
     "prebuild",
+    "preconnect",
+    "prefetch",
     "regist",
     "ribajs",
     "sightglass",
+    "subresource",
     "tinybind",
     "tinyliquid",
     "typecheck",
     "webpackbar",
+    "xlink",
     "yarnpkg"
   ]
 }

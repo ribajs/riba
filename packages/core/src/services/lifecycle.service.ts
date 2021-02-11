@@ -1,4 +1,5 @@
 import { EventDispatcher } from "@ribajs/events";
+import type { State } from "@ribajs/history";
 import type {
   ComponentLifecycleEventData,
   ComponentLifecycleObject,
@@ -11,6 +12,7 @@ import type {
 export class LifecycleService {
   public events = EventDispatcher.getInstance("lifecycle");
   public timeoutDelay = 3000;
+  protected debug = false;
   protected routerEvents = EventDispatcher.getInstance();
   protected timeout: number | null = null;
   protected static instance: LifecycleService;
@@ -47,9 +49,10 @@ export class LifecycleService {
           this.components[data.tagName] || this.getEmpty();
 
         this.components[data.tagName].connected++;
-        console.debug(
-          "[ComponentLifecycle] New component connected: " + data.tagName
-        );
+        if (this.debug)
+          console.debug(
+            "[ComponentLifecycle] New component connected: " + data.tagName
+          );
       }
     );
 
@@ -60,18 +63,48 @@ export class LifecycleService {
           this.components[data.tagName] || this.getEmpty();
 
         this.components[data.tagName].bound++;
-        console.debug(
-          "[ComponentLifecycle] New component bound: " + data.tagName
-        );
+        if (this.debug)
+          console.debug(
+            "[ComponentLifecycle] New component bound: " + data.tagName
+          );
         this.checkState();
       }
     );
 
     // Router
-    this.routerEvents.on("initStateChange", () => {
-      console.debug("[ComponentLifecycle] Reset!");
-      this.reset();
-    });
+
+    this.routerEvents.on(
+      "newPageReady",
+      (
+        viewId: string,
+        newStatus: State,
+        oldStatus: State,
+        container: HTMLElement,
+        containerHtml: string,
+        dataset: any,
+        firstPageLoad: boolean
+      ) => {
+        if (this.debug)
+          console.debug(
+            "newPageReady",
+            viewId,
+            newStatus,
+            oldStatus,
+            "firstPageLoad",
+            firstPageLoad
+          );
+        if (!firstPageLoad) {
+          this.reset();
+        }
+      }
+    );
+
+    // this.routerEvents.on(
+    //   "initStateChange",
+    //   (viewId: string, newStatus: State, oldStatus: State) => {
+    //     console.debug("initStateChange", viewId, newStatus, oldStatus);
+    //   }
+    // );
 
     // this.routerEvents.on("transitionCompleted", () => {
     //   console.debug("transitionCompleted");
@@ -102,7 +135,7 @@ export class LifecycleService {
       window.clearTimeout(this.timeout);
     }
     this.events.trigger("ComponentLifecycle:allBound", this.components);
-    console.debug("[ComponentLifecycle] All components bound!");
+    if (this.debug) console.debug("[ComponentLifecycle] All components bound!");
   }
 
   protected onTimeout() {
@@ -113,6 +146,7 @@ export class LifecycleService {
   }
 
   protected reset() {
+    if (this.debug) console.debug("[ComponentLifecycle] reset!");
     this.components = {};
     this.timeout = window.setTimeout(
       this.onTimeout.bind(this),
