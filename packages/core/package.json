@@ -89,6 +89,7 @@
   },
   "dependencies": {
     "@ribajs/events": "workspace:packages/events",
+    "@ribajs/history": "workspace:packages/history",
     "@ribajs/ssr": "workspace:packages/ssr",
     "@ribajs/utils": "workspace:packages/utils"
   }

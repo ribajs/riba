@@ -281,7 +281,7 @@ class Pjax {
   }
 
   /**
-   * Change the URL with pushstate and trigger the state change
+   * Change the URL with push state and trigger the state change
    */
   public goTo(url: string, newTab = false) {
     if (newTab) {
@@ -337,7 +337,7 @@ class Pjax {
         });
       }
     }
-    // Append The link elements to the head for native prefetching by the browser
+    // Append The link elements to the head for native prefetch by the browser
     head.appendChild(linkElement);
   }
 
@@ -355,7 +355,7 @@ class Pjax {
 
   /**
    * Replaces the prefetch links in the head with the new one.
-   * The custom link[href][rel="router-preload"] elements will be not readded to the head
+   * The custom link[href][rel="router-preload"] elements will be not readd to the head
    * because we preload them with javascript, the others are preloaded by the browser
    * because it has native support for them and for that they must exist in the head
    * @param prefetchLinks
@@ -404,8 +404,8 @@ class Pjax {
   /**
    * Load an url, will start an fetch request or load from the cache (and set it to the cache) and will return a `Response` object
    * @param url Url to get from cache or to make the request for
-   * @param forceCache Foce to use the browser build in cache, for more information see `force-cache` on https://developer.mozilla.org/en-US/docs/Web/API/Request/cache
-   * @param fallback If there is an error, make a normal browser request and reload the page you should not use this on prefetching urls
+   * @param forceCache Force to use the browser build in cache, for more information see `force-cache` on https://developer.mozilla.org/en-US/docs/Web/API/Request/cache
+   * @param fallback If there is an error, make a normal browser request and reload the page you should not use this on prefetch urls
    */
   public async loadResponseCached(
     url: string,
@@ -449,7 +449,7 @@ class Pjax {
   }
 
   /**
-   * Attach the eventlisteners
+   * Attach the event listeners
    */
   protected bindEvents(listenAllLinks: boolean, listenPopstate: boolean) {
     // you can also use the rv-router for this
@@ -478,7 +478,7 @@ class Pjax {
     let el = getElementFromEvent(evt);
 
     while (el && !Pjax.getHref(el)) {
-      el = el.parentNode as HTMLAnchorElement; // TODO testme
+      el = el.parentNode as HTMLAnchorElement; // TODO test me
     }
 
     if (!el || el.nodeName !== "A") {
@@ -494,7 +494,7 @@ class Pjax {
 
     if (!href) {
       throw new Error(
-        `Url is not defined, you can't cache the link without the url. Please make shure your element has the href attribute or pass the url directly to this function.`
+        `Url is not defined, you can't cache the link without the url. Please make sure your element has the href attribute or pass the url directly to this function.`
       );
     }
 
@@ -585,7 +585,7 @@ class Pjax {
       container,
       container.innerHTML,
       dataset,
-      false // true if this is the first time newPageReady is tiggered / true on initialisation
+      false // true if this is the first time newPageReady is triggered / true on initialisation
     );
   }
 
@@ -611,13 +611,13 @@ class Pjax {
     listenAllLinks: boolean,
     listenPopstate: boolean
   ) {
-    const initalResponse = Dom.parseInitial(
+    const initialResponse = Dom.parseInitial(
       this.parseTitle,
       this.containerSelector,
       this.prefetchLinks
     );
     const url = window.location.pathname;
-    // Reload the current site with pajax to cache the inital page
+    // Reload the current site with pjax to cache the initial page
     if (this.cacheEnabled) {
       const currentUrl = normalizeUrl(window.location.href);
       if (!Pjax.cache.get(url)) {
@@ -625,13 +625,13 @@ class Pjax {
       }
     }
 
-    this.replacePrefetchLinkElements(initalResponse.prefetchLinks);
+    this.replacePrefetchLinkElements(initialResponse.prefetchLinks);
 
     this.wrapper = wrapper;
 
     this.history.add(
       this.getCurrentUrl(),
-      Dom.getNamespace(initalResponse.container)
+      Dom.getNamespace(initialResponse.container)
     );
 
     // Fire for the current view.
@@ -641,17 +641,17 @@ class Pjax {
       this.history.currentStatus()
     );
 
-    const dataset = getDataset(initalResponse.container);
+    const dataset = getDataset(initialResponse.container);
 
     this.dispatcher.trigger(
       "newPageReady",
       this.viewId,
       this.history.currentStatus(),
       {},
-      initalResponse.container,
-      initalResponse.container.innerHTML,
+      initialResponse.container,
+      initialResponse.container.innerHTML,
       dataset,
-      true // true if this is the first time newPageReady is tiggered / true on initialisation
+      true // true if this is the first time newPageReady is triggered / true on initialisation
     );
 
     this.dispatcher.trigger(
