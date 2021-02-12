@@ -35,7 +35,7 @@ export class ShopifyNestContentBlogArticlesComponent extends ShopifyNestContentC
     element?: HTMLElement,
     readonly shopifyApiArticleService = ShopifyApiArticleService.getSingleton()
   ) {
-    super(element);
+    super();
     this.shopifyApiArticleService = shopifyApiArticleService;
     this.debug("constructor", this);
   }
