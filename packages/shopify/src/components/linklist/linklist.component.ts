@@ -71,8 +71,8 @@ export class ShopifyLinklistComponent extends Component {
     showAll: this.showAll,
   };
 
-  constructor(element?: HTMLElement /*, observedAttributes?: string[]*/) {
-    super(element);
+  constructor() {
+    super();
     this.mainDispatcher.on("newPageReady", this.onNewPageReady, this);
   }
 
