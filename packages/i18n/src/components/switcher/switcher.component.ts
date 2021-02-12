@@ -25,7 +25,7 @@ export const i18nSwitcherComponentWrapper = (
     };
 
     constructor() {
-      super(element);
+      super();
     }
 
     protected connectedCallback() {

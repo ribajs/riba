@@ -76,9 +76,7 @@ export class Bs4AccordionComponent extends TemplatesComponent {
   }
 
   public hide(item: AccordionItem, index: number) {
-    const target = this.querySelector<HTMLElement>(
-      `[data-index="${index}"]`
-    );
+    const target = this.querySelector<HTMLElement>(`[data-index="${index}"]`);
     if (target) {
       this.initItemEventListeners(item, target);
       new CollapseService(target, [this], { toggle: false }).hide();
@@ -86,9 +84,7 @@ export class Bs4AccordionComponent extends TemplatesComponent {
   }
 
   public show(item: AccordionItem, index: number) {
-    const target = this.querySelector<HTMLElement>(
-      `[data-index="${index}"]`
-    );
+    const target = this.querySelector<HTMLElement>(`[data-index="${index}"]`);
     const others = Array.from(
       this.querySelectorAll<HTMLElement>(
         `[data-index]:not([data-index="${index}"])`
@@ -106,9 +102,7 @@ export class Bs4AccordionComponent extends TemplatesComponent {
   }
 
   public toggle(item: AccordionItem, index: number) {
-    const target = this.querySelector<HTMLElement>(
-      `[data-index="${index}"]`
-    );
+    const target = this.querySelector<HTMLElement>(`[data-index="${index}"]`);
     const others = Array.from(
       this.querySelectorAll<HTMLElement>(
         `[data-index]:not([data-index="${index}"])`

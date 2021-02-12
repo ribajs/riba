@@ -287,14 +287,14 @@ export class ContentSliderComponent extends TemplatesComponent {
 
   protected getItemWidths() {
     this.scope.activeItemWidth =
-      this
-        .querySelector(`.item.${this.scope.activeClass}`)
-        ?.getBoundingClientRect().width || 0;
+      this.querySelector(
+        `.item.${this.scope.activeClass}`
+      )?.getBoundingClientRect().width || 0;
 
     this.scope.inactiveItemWidth =
-      this
-        .querySelector(`.item:not(.${this.scope.activeClass})`)
-        ?.getBoundingClientRect().width || 0;
+      this.querySelector(
+        `.item:not(.${this.scope.activeClass})`
+      )?.getBoundingClientRect().width || 0;
 
     this.debug("getItemWidths activeItemWidth: ", this.scope.activeItemWidth);
     this.debug(

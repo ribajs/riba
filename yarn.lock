@@ -2633,6 +2633,7 @@ __metadata:
     "@babel/runtime-corejs3": ^7.12.13
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/events": "workspace:packages/events"
+    "@ribajs/history": "workspace:packages/history"
     "@ribajs/ssr": "workspace:packages/ssr"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/types": "workspace:infra/types"

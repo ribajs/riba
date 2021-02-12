@@ -52,7 +52,7 @@ export const i18nShareComponentWrapper = (
     protected scope: Scope = super.scope;
 
     constructor() {
-      super(element);
+      super();
       this.scope = this.getScopeDefaults();
       this.scope.labelTemplate = labelTemplate;
     }
