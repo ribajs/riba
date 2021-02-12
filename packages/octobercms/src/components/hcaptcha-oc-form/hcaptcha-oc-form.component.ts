@@ -75,8 +75,8 @@ export class HCaptchaFormComponent extends OcFormComponent {
 
   protected scope: Scope = this.getDefaultScope();
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   public onSubmit(event: Event, el: HTMLButtonElement) {
@@ -107,9 +107,7 @@ export class HCaptchaFormComponent extends OcFormComponent {
   protected onHCaptchaLoaded() {
     this.debug("onHCaptchaLoaded", window.hcaptcha);
     const params = this.getHCaptchaParams();
-    const container = this.el.querySelector(
-      this.scope.hcaptchaContainerSelector
-    );
+    const container = this.querySelector(this.scope.hcaptchaContainerSelector);
     if (!container) {
       console.warn(
         `HCaptcha container element with selector "${this.scope.hcaptchaContainerSelector}" not found!`

@@ -25,8 +25,8 @@ export class <%= classify(name) %>Component extends Component {
     hello: '',
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
     this.debug('constructor', this);
   }
 
@@ -81,7 +81,7 @@ export class <%= classify(name) %>Component extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (hasChildNodesTrim(this.el)) {
+    if (hasChildNodesTrim(this)) {
       this.debug('Do not use template, because element has child nodes');
       return null;
     } else {

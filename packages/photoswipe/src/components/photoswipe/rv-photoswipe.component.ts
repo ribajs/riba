@@ -173,8 +173,8 @@ export class PhotoswipeComponent extends Component {
     controlShareIconSize: 16,
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
     // this.debug("constructor", this);
   }
 
@@ -204,12 +204,12 @@ export class PhotoswipeComponent extends Component {
   }
 
   protected closeShare() {
-    const bs4ShareComponent = this.el.querySelector("bs4-share");
+    const bs4ShareComponent = this.querySelector("bs4-share");
     bs4ShareComponent?.dispatchEvent(new CustomEvent("close"));
   }
 
   protected openShare() {
-    const bs4ShareComponent = this.el.querySelector("bs4-share");
+    const bs4ShareComponent = this.querySelector("bs4-share");
     bs4ShareComponent?.dispatchEvent(new CustomEvent("open"));
   }
 
@@ -494,7 +494,7 @@ export class PhotoswipeComponent extends Component {
 
   protected setItems() {
     this.images = Array.from(
-      this.el.querySelectorAll(this.scope.itemsSelector)
+      this.querySelectorAll(this.scope.itemsSelector)
     );
 
     for (let i = 0; i < this.images.length; i++) {
@@ -539,7 +539,7 @@ export class PhotoswipeComponent extends Component {
   }
 
   protected initFullscreenTemplate() {
-    this.pswpElement = this.el.querySelector<HTMLElement>(
+    this.pswpElement = this.querySelector<HTMLElement>(
       this.scope.fullscreenContainerSelector
     );
   }
@@ -597,8 +597,8 @@ export class PhotoswipeComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already<rv-photswipe>serhsehsehjiu </>
-    if (hasChildNodesTrim(this.el)) {
-      return (this.el as HTMLElement).innerHTML + fullscreenTemplate;
+    if (hasChildNodesTrim(this)) {
+      return (this as HTMLElement).innerHTML + fullscreenTemplate;
     } else {
       return template + fullscreenTemplate;
     }

@@ -13,8 +13,8 @@ export class PhotoswipeExampleComponent extends Component {
 
   protected scope = {};
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
     this.debug("constructor", this);
   }
 
@@ -40,7 +40,7 @@ export class PhotoswipeExampleComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (hasChildNodesTrim(this.el)) {
+    if (hasChildNodesTrim(this)) {
       // this.debug('Do not use template, because element has child nodes');
       return null;
     } else {

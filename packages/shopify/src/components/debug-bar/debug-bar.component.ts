@@ -22,8 +22,8 @@ export class ShopifyDebugBarComponent extends Component {
   protected previewBar: HTMLIFrameElement | null = null;
   protected adminBar: HTMLIFrameElement | null = null;
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {
@@ -100,7 +100,7 @@ export class ShopifyDebugBarComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el && hasChildNodesTrim(this.el)) {
+    if (this && hasChildNodesTrim(this)) {
       return null;
     } else {
       return template;

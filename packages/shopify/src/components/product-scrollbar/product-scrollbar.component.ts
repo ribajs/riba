@@ -17,8 +17,8 @@ export class ShopifyProductScrollbarComponent extends Component {
 
   protected products: NodeListOf<HTMLElement> | null = null;
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   /**
@@ -27,7 +27,7 @@ export class ShopifyProductScrollbarComponent extends Component {
    */
   protected connectedCallback() {
     super.connectedCallback();
-    this.products = this.el.querySelectorAll(".embed-responsive");
+    this.products = this.querySelectorAll(".embed-responsive");
     this.init(ShopifyProductScrollbarComponent.observedAttributes);
   }
 

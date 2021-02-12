@@ -120,7 +120,7 @@ export interface Scope extends Options {
 export class Bs4SlideshowComponent extends TemplatesComponent {
   protected get slideshowInner() {
     if (!this._slideshowInner) {
-      this._slideshowInner = this.el.querySelector(SLIDESHOW_INNER_SELECTOR);
+      this._slideshowInner = this.querySelector(SLIDESHOW_INNER_SELECTOR);
     }
     if (!this._slideshowInner) {
       throw new Error(
@@ -132,7 +132,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   protected get slideElements() {
     if (!this._slideElements) {
-      this._slideElements = this.el.querySelectorAll(SLIDES_SELECTOR);
+      this._slideElements = this.querySelectorAll(SLIDES_SELECTOR);
     }
     if (!this._slideElements) {
       throw new Error(
@@ -144,7 +144,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   protected get controlsElements() {
     if (!this._controlsElements) {
-      this._controlsElements = this.el.querySelectorAll(
+      this._controlsElements = this.querySelectorAll(
         ".slideshow-control-prev, .slideshow-control-next"
       );
     }
@@ -153,7 +153,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   protected get indicatorsElement() {
     if (!this._indicatorsElement) {
-      this._indicatorsElement = this.el.querySelector(".slideshow-indicators");
+      this._indicatorsElement = this.querySelector(".slideshow-indicators");
     }
     return this._indicatorsElement;
   }
@@ -375,8 +375,8 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     indicatorsPositionClass: "",
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
     // set event listeners to the this-bound version once, so we can easily pass them to DOM event handlers and remove them again later
     this.onViewChanges = this.onViewChanges.bind(this);
     this.onVisibilityChanged = this.onVisibilityChanged.bind(this);
@@ -770,7 +770,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     window.addEventListener("resize", this.onViewChanges);
 
     // Custom event triggered by some parent components when this component changes his visibility, e.g. triggered in the bs4-tabs component
-    this.el.addEventListener(
+    this.addEventListener(
       "visibility-changed" as any,
       this.onVisibilityChanged
     );
@@ -782,21 +782,21 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       passive: true,
     });
 
-    this.el.addEventListener("mouseenter", this.onMouseIn, { passive: true });
-    this.el.addEventListener("mouseover", this.onMouseIn, { passive: true });
-    this.el.addEventListener("focusin", this.onMouseIn, { passive: true });
-    this.el.addEventListener("touchstart", this.onMouseIn, { passive: true });
+    this.addEventListener("mouseenter", this.onMouseIn, { passive: true });
+    this.addEventListener("mouseover", this.onMouseIn, { passive: true });
+    this.addEventListener("focusin", this.onMouseIn, { passive: true });
+    this.addEventListener("touchstart", this.onMouseIn, { passive: true });
 
-    this.el.addEventListener("mouseout", this.onMouseOut, { passive: true });
-    this.el.addEventListener("mouseleave", this.onMouseOut, { passive: true });
-    this.el.addEventListener("focusout", this.onMouseOut, { passive: true });
+    this.addEventListener("mouseout", this.onMouseOut, { passive: true });
+    this.addEventListener("mouseleave", this.onMouseOut, { passive: true });
+    this.addEventListener("focusout", this.onMouseOut, { passive: true });
 
-    this.el.addEventListener("mouseup", this.onMouseUp, { passive: true });
-    this.el.addEventListener("touchend", this.onMouseUp, { passive: true });
-    this.el.addEventListener("scroll", this.onMouseUp, { passive: true });
-    this.el.addEventListener("scrollend", this.onMouseUp, { passive: true });
+    this.addEventListener("mouseup", this.onMouseUp, { passive: true });
+    this.addEventListener("touchend", this.onMouseUp, { passive: true });
+    this.addEventListener("scroll", this.onMouseUp, { passive: true });
+    this.addEventListener("scrollend", this.onMouseUp, { passive: true });
     // See ScrollEventsService for this event
-    this.el.addEventListener("scrollended", this.onMouseUp, { passive: true });
+    this.addEventListener("scrollended", this.onMouseUp, { passive: true });
 
     // inital
     this.onViewChanges();
@@ -809,7 +809,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
     window.removeEventListener("resize", this.onViewChanges);
 
-    this.el.removeEventListener(
+    this.removeEventListener(
       "visibility-changed" as any,
       this.onVisibilityChanged
     );
@@ -817,21 +817,21 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     this.slideshowInner.removeEventListener("scroll", this.onScroll);
     this.slideshowInner.removeEventListener("scrollended", this.onScrollend);
 
-    this.el.removeEventListener("mouseenter", this.onMouseIn);
-    this.el.removeEventListener("mouseover", this.onMouseIn);
-    this.el.removeEventListener("focusin", this.onMouseIn);
-    this.el.removeEventListener("touchstart", this.onMouseIn);
+    this.removeEventListener("mouseenter", this.onMouseIn);
+    this.removeEventListener("mouseover", this.onMouseIn);
+    this.removeEventListener("focusin", this.onMouseIn);
+    this.removeEventListener("touchstart", this.onMouseIn);
 
-    this.el.removeEventListener("mouseout", this.onMouseOut);
-    this.el.removeEventListener("mouseleave", this.onMouseOut);
-    this.el.removeEventListener("focusout", this.onMouseOut);
+    this.removeEventListener("mouseout", this.onMouseOut);
+    this.removeEventListener("mouseleave", this.onMouseOut);
+    this.removeEventListener("focusout", this.onMouseOut);
 
-    this.el.removeEventListener("mouseup", this.onMouseUp);
-    this.el.removeEventListener("touchend", this.onMouseUp);
-    this.el.removeEventListener("scroll", this.onMouseUp);
-    this.el.removeEventListener("scrollend", this.onMouseUp);
+    this.removeEventListener("mouseup", this.onMouseUp);
+    this.removeEventListener("touchend", this.onMouseUp);
+    this.removeEventListener("scroll", this.onMouseUp);
+    this.removeEventListener("scrollend", this.onMouseUp);
     // See ScrollEventsService for this event
-    this.el.removeEventListener("scrollended", this.onMouseUp);
+    this.removeEventListener("scrollended", this.onMouseUp);
   }
 
   protected async beforeBind() {
@@ -1267,18 +1267,18 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   protected template() {
     // Only set the component template if there no childs or the childs are templates
-    if (!hasChildNodesTrim(this.el) || this.hasOnlyTemplateChilds()) {
+    if (!hasChildNodesTrim(this) || this.hasOnlyTemplateChilds()) {
       // ('Full template!', this.templateIndicators);
       return templateSlides + this.templateControls + this.templateIndicators;
     } else {
       // this.debug('Append to template!');
       // Prepend control elements if no custom control elements in template are found
       if (this.controlsElements.length <= 0) {
-        this.el.innerHTML += this.templateControls;
+        this.innerHTML += this.templateControls;
       }
 
       if (!this.indicatorsElement) {
-        this.el.innerHTML += this.templateIndicators;
+        this.innerHTML += this.templateIndicators;
       }
 
       return null;

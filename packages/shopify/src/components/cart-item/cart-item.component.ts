@@ -89,8 +89,8 @@ export class ShopifyCartItemComponent extends Component {
     };
   }
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {
@@ -274,7 +274,7 @@ export class ShopifyCartItemComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (hasChildNodesTrim(this.el)) {
+    if (hasChildNodesTrim(this)) {
       return null;
     } else {
       return template;

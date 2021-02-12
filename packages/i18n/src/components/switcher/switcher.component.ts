@@ -24,7 +24,7 @@ export const i18nSwitcherComponentWrapper = (
       ready: false,
     };
 
-    constructor(element?: HTMLElement) {
+    constructor() {
       super(element);
     }
 

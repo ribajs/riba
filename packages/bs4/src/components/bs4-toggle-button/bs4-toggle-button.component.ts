@@ -55,8 +55,8 @@ export class Bs4ToggleButtonComponent extends Component {
     isClosed: false,
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   public toggle() {
@@ -155,7 +155,7 @@ export class Bs4ToggleButtonComponent extends Component {
   }
 
   protected template() {
-    if (!hasChildNodesTrim(this.el)) {
+    if (!hasChildNodesTrim(this)) {
       console.warn(
         "No child elements found, this component as no template so you need to define your own as child of this component."
       );

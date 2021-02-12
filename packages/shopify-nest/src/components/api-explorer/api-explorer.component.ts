@@ -110,7 +110,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
     if (this.editor) {
       this.editor.setValue(this.scope.result);
     } else {
-      const el = this.el.querySelector(".monaco-editor") as HTMLElement;
+      const el = this.querySelector(".monaco-editor") as HTMLElement;
       if (!el) {
         throw new Error(
           "This component needs a container element with the class of .monaco-editor"
@@ -135,8 +135,8 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
 
   protected abstract scope: Scope;
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
     this.debug("constructor", this);
   }
 
@@ -177,7 +177,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
     this.scope.apiList.forEach((api) => {
       if (api.freestyle) {
         this.selectApi(api);
-        this.el
+        this
           .querySelector<HTMLFormElement>(".form-control-freestyle")
           ?.focus();
         return;
@@ -424,7 +424,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
   protected template() {
     let template: string | null = null;
     // Only set the component template if there no childs already
-    if (hasChildNodesTrim(this.el)) {
+    if (hasChildNodesTrim(this)) {
       this.debug("Do not template, because element has child nodes");
       return template;
     } else {

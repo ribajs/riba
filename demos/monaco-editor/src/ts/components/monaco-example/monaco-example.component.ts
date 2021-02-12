@@ -19,8 +19,8 @@ export class MonacoExampleComponent extends Component {
     save: this.save,
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   public save() {
@@ -40,7 +40,7 @@ export class MonacoExampleComponent extends Component {
 
   protected async beforeBind() {
     await super.beforeBind();
-    this.scope.article.body_html = this.el.innerHTML;
+    this.scope.article.body_html = this.innerHTML;
   }
 
   protected requiredAttributes() {
@@ -54,7 +54,7 @@ export class MonacoExampleComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (hasChildNodesTrim(this.el)) {
+    if (hasChildNodesTrim(this)) {
       // console.debug('Do not use template, because element has child nodes');
       return null;
     } else {

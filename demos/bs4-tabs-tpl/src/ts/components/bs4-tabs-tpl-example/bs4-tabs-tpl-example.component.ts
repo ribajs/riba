@@ -5,8 +5,8 @@ import template from "./bs4-tabs-tpl-example.component.html";
 export class Bs4TabsTplExampleComponent extends Component {
   public static tagName = "rv-bs4-tabs-tpl-example";
   protected scope = {};
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
   protected connectedCallback() {
     super.connectedCallback();

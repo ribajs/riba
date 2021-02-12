@@ -74,8 +74,8 @@ export class ShopifyCommentsFormComponent extends Component {
     post: this.post,
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {
@@ -108,7 +108,7 @@ export class ShopifyCommentsFormComponent extends Component {
   }
 
   protected initValidation() {
-    this.newCommentForm = this.el.querySelector(
+    this.newCommentForm = this.querySelector(
       "#comment_form"
     ) as HTMLFormElement;
     this.newCommentForm.setAttribute("novalidate", "");
@@ -136,7 +136,7 @@ export class ShopifyCommentsFormComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el && hasChildNodesTrim(this.el)) {
+    if (this && hasChildNodesTrim(this)) {
       return null;
     } else {
       return template;

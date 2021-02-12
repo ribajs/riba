@@ -14,8 +14,8 @@ export class VueExampleWrapperComponent extends Component {
     message: "Message from Riba.js to Vue.js and back",
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {

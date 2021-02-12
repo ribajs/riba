@@ -15,8 +15,8 @@ export class EachItemExampleComponent extends Component {
     unshift: this.unshift,
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   public push() {

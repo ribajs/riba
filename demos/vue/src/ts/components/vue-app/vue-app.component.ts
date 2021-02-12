@@ -15,8 +15,8 @@ export class VueAppComponent extends VueComponent {
   // Values to use in the template
   protected scope = {};
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {

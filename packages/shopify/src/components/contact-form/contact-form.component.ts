@@ -47,8 +47,8 @@ export class ShopifyContactFormComponent extends Component {
     selectAll: this.selectAll,
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {
@@ -99,7 +99,7 @@ export class ShopifyContactFormComponent extends Component {
 
   protected async beforeBind() {
     // console.debug('before');
-    this.form = this.el.getElementsByTagName("form")[0];
+    this.form = this.getElementsByTagName("form")[0];
 
     // For custom style form validation, see https://getbootstrap.com/docs/4.1/components/forms/#custom-styles
     this.form.classList.add("needs-validation");
@@ -112,7 +112,7 @@ export class ShopifyContactFormComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el && hasChildNodesTrim(this.el)) {
+    if (this && hasChildNodesTrim(this)) {
       return null;
     } else {
       return template;

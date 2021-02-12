@@ -105,8 +105,8 @@ export class Bs4FormComponent extends Component {
 
   protected scope: Scope = this.getDefaultScope();
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
     this.enableSubmit = this.enableSubmit.bind(this);
   }
 
@@ -118,12 +118,12 @@ export class Bs4FormComponent extends Component {
 
   protected addEventListeners() {
     if (this.scope.disableSubmitUntilChange) {
-      this.el.addEventListener("input", this.enableSubmit);
+      this.addEventListener("input", this.enableSubmit);
     }
   }
 
   protected removeEventListeners() {
-    this.el.removeEventListener("input", this.enableSubmit);
+    this.removeEventListener("input", this.enableSubmit);
   }
 
   private enableSubmit() {
@@ -136,7 +136,7 @@ export class Bs4FormComponent extends Component {
 
   protected async beforeBind() {
     await super.beforeBind();
-    this.el.id = this.scope.id;
+    this.id = this.scope.id;
   }
 
   protected async afterBind() {
@@ -300,7 +300,7 @@ export class Bs4FormComponent extends Component {
 
   protected onErrorSubmit(status: string, message: string, response: any) {
     this.debug("onErrorSubmit");
-    this.el.dispatchEvent(
+    this.dispatchEvent(
       new CustomEvent("submit-error", {
         detail: { status, message: message, response },
       })
@@ -313,7 +313,7 @@ export class Bs4FormComponent extends Component {
       this.scope.submitDisabled = true;
     }
 
-    this.el.dispatchEvent(
+    this.dispatchEvent(
       new CustomEvent("submit-success", {
         detail: { status, message: message, response },
       })
@@ -329,7 +329,7 @@ export class Bs4FormComponent extends Component {
     validationScope.error = form.validationMessage;
     // only show validation if we want to give a hint to the user that something is wrong
     if (!validationScope.valid) {
-      this.el.dispatchEvent(new CustomEvent(errorEventName));
+      this.dispatchEvent(new CustomEvent(errorEventName));
       form.classList.add("was-validated");
     }
   }
@@ -347,7 +347,7 @@ export class Bs4FormComponent extends Component {
   }
 
   protected initForm() {
-    const formEl = this.el.querySelector("form");
+    const formEl = this.querySelector("form");
     if (formEl && formEl.length > 0) {
       this.formEl = formEl;
       this.formEl.classList.add("needs-validation");
@@ -358,7 +358,7 @@ export class Bs4FormComponent extends Component {
   }
 
   protected template() {
-    if (hasChildNodesTrim(this.el)) {
+    if (hasChildNodesTrim(this)) {
       this.initForm();
       return null;
     } else {

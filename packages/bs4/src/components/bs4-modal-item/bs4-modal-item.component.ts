@@ -38,8 +38,8 @@ export class Bs4ModalItemComponent extends Component {
     dismiss: this.dismiss.bind(this),
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {
@@ -54,7 +54,7 @@ export class Bs4ModalItemComponent extends Component {
 
   protected initModalService() {
     const modal = this.scope.modal;
-    const modalEl = this.el.firstElementChild as HTMLElement | null;
+    const modalEl = this.firstElementChild as HTMLElement | null;
     if (modal && modalEl) {
       this.modalService = new ModalService(modalEl, {
         focus:
@@ -76,7 +76,7 @@ export class Bs4ModalItemComponent extends Component {
       });
 
       // show modal using the modalservice
-      this.modalService.show(this.el);
+      this.modalService.show(this);
     }
   }
 

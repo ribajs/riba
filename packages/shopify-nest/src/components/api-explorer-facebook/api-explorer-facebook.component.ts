@@ -112,8 +112,8 @@ export class ShopifyNestApiExplorerFacebookComponent extends ShopifyNestApiExplo
   protected debug = Debug(
     "component:" + ShopifyNestApiExplorerFacebookComponent.tagName
   );
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected async loadParamValues(param: APIParam) {

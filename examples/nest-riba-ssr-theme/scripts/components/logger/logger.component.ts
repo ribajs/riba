@@ -17,8 +17,8 @@ export class LoggerComponent extends Component {
     return ["log-me"];
   }
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {

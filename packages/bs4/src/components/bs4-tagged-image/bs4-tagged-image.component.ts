@@ -47,7 +47,7 @@ export class Bs4TaggedImageComponent extends Component {
     debug: false,
     tags: [],
     options: {
-      popoverOptions: {}, // set container = this.el in constructor
+      popoverOptions: {}, // set container = this in constructor
       multiPopover: false,
       tagOptions: {},
     },
@@ -72,9 +72,9 @@ export class Bs4TaggedImageComponent extends Component {
    * CONSTRUCTOR AND LIFECYCLE HANDLERS
    */
 
-  constructor(element?: HTMLElement) {
-    super(element);
-    this.scope.options.popoverOptions.container = this.el;
+  constructor() {
+    super();
+    this.scope.options.popoverOptions.container = this;
   }
 
   protected parsedAttributeChangedCallback(
@@ -97,7 +97,7 @@ export class Bs4TaggedImageComponent extends Component {
   }
 
   protected template() {
-    if (hasChildNodesTrim(this.el)) {
+    if (hasChildNodesTrim(this)) {
       this.parseChildTags();
     }
     return template;
@@ -106,7 +106,7 @@ export class Bs4TaggedImageComponent extends Component {
   protected async beforeBind() {
     await super.beforeBind();
     // Template has been loaded. So the <img> tag should be there now.
-    this.image = this.el.querySelector("img") as HTMLImageElement;
+    this.image = this.querySelector("img") as HTMLImageElement;
     this.addEventListeners();
     this.initTags();
   }
@@ -129,7 +129,7 @@ export class Bs4TaggedImageComponent extends Component {
   }
 
   disconnectedCallback() {
-    this.el.removeEventListener("click", this.scope.onClick);
+    this.removeEventListener("click", this.scope.onClick);
     window.removeEventListener("resize", this.updateTagPositions);
   }
 
@@ -140,7 +140,7 @@ export class Bs4TaggedImageComponent extends Component {
   protected parseChildTags() {
     this.debug(`parseChildTags()`);
     for (const tagEl of Array.from(
-      this.el.querySelectorAll("tag") as NodeListOf<HTMLElement>
+      this.querySelectorAll("tag") as NodeListOf<HTMLElement>
     )) {
       const title = tagEl.getAttribute("title") || "";
       const content = tagEl.innerHTML;
@@ -193,7 +193,7 @@ export class Bs4TaggedImageComponent extends Component {
    */
   protected passImageAttributes() {
     const img = this.image as HTMLImageElement;
-    const attrs = this.el.attributes;
+    const attrs = this.attributes;
     for (let i = attrs.length - 1; i >= 0; i--) {
       if (attrs[i].name.startsWith("img-")) {
         img.setAttribute(attrs[i].name.substr(4), attrs[i].value);

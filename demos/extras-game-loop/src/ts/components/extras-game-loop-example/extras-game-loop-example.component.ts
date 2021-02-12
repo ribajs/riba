@@ -25,8 +25,8 @@ export class ExtrasGameLoopExampleComponent extends Component {
     color: "red",
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {

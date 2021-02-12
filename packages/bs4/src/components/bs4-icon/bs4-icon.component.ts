@@ -9,8 +9,8 @@ export class Bs4IconComponent extends BasicComponent {
 
   protected scope: any = {};
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   public attributeChangedCallback(
@@ -49,7 +49,7 @@ export class Bs4IconComponent extends BasicComponent {
             return "";
           })
           .then((response) => {
-            this.el.innerHTML = response;
+            this.innerHTML = response;
           })
           .catch((error) => {
             console.error(error);
@@ -64,7 +64,7 @@ export class Bs4IconComponent extends BasicComponent {
       );
       title.textContent = newValue;
 
-      const svg = this.el.firstElementChild;
+      const svg = this.firstElementChild;
       if (svg) {
         svg.appendChild(title);
       }
@@ -74,42 +74,42 @@ export class Bs4IconComponent extends BasicComponent {
       if (newValue.indexOf(",") !== -1) {
         newValue = newValue.split(",");
         if (newValue.length > 0) {
-          this.el.className = this.el.className.replace(/(^|\s)color-\S+/g, "");
+          this.className = this.className.replace(/(^|\s)color-\S+/g, "");
           for (let i = 0; i < newValue.length; i++) {
             const newColor: string = newValue[i];
             if (newColor.startsWith("#") || newColor.startsWith("rgb")) {
-              this.el.style.color = newColor;
+              this.style.color = newColor;
             }
-            this.el.classList.add(`color-${newColor}`);
+            this.classList.add(`color-${newColor}`);
           }
         }
       } else {
-        this.el.style.color = newValue;
-        this.el.className = this.el.className.replace(/(^|\s)color-\S+/g, "");
-        this.el.classList.add(`color-${newValue}`);
+        this.style.color = newValue;
+        this.className = this.className.replace(/(^|\s)color-\S+/g, "");
+        this.classList.add(`color-${newValue}`);
       }
     }
 
     if (name === "size") {
       const size = newValue;
-      this.el.style.height = size + "px";
-      this.el.style.width = size + "px";
-      this.el.className = this.el.className.replace(/(^|\s)size-\S+/g, "");
-      this.el.classList.add(`size-${size}`);
+      this.style.height = size + "px";
+      this.style.width = size + "px";
+      this.className = this.className.replace(/(^|\s)size-\S+/g, "");
+      this.classList.add(`size-${size}`);
     }
 
     if (name === "width") {
       const width = newValue;
-      this.el.style.width = width + "px";
-      this.el.className = this.el.className.replace(/(^|\s)width-\S+/g, "");
-      this.el.classList.add(`width-${width}`);
+      this.style.width = width + "px";
+      this.className = this.className.replace(/(^|\s)width-\S+/g, "");
+      this.classList.add(`width-${width}`);
     }
 
     if (name === "height") {
       const height = newValue;
-      this.el.style.height = height + "px";
-      this.el.className = this.el.className.replace(/(^|\s)height-\S+/g, "");
-      this.el.classList.add(`height-${height}`);
+      this.style.height = height + "px";
+      this.className = this.className.replace(/(^|\s)height-\S+/g, "");
+      this.classList.add(`height-${height}`);
     }
 
     if (name === "direction") {
@@ -153,17 +153,17 @@ export class Bs4IconComponent extends BasicComponent {
         classString += " rotate-225";
       }
 
-      this.el.className = this.el.className.replace(/(^|\s)direction-\S+/g, "");
-      this.el.className = this.el.className.replace(/(^|\s)rotate-\S+/g, "");
-      this.el.className += " " + classString;
+      this.className = this.className.replace(/(^|\s)direction-\S+/g, "");
+      this.className = this.className.replace(/(^|\s)rotate-\S+/g, "");
+      this.className += " " + classString;
     }
   }
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.el.setAttribute("aria-hidden", "true");
-    this.el.setAttribute("role", "img");
-    this.el.classList.add("iconset");
+    this.setAttribute("aria-hidden", "true");
+    this.setAttribute("role", "img");
+    this.classList.add("iconset");
     this.init(Bs4IconComponent.observedAttributes);
     // set default values
     if (!this.scope.direction) {

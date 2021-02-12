@@ -137,9 +137,9 @@ export class VideoComponent extends Component {
     togglePlay: this.togglePlay,
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
-    const video = this.el.querySelector("video") as HTMLVideoElement;
+  constructor() {
+    super();
+    const video = this.querySelector("video") as HTMLVideoElement;
     this.video = video;
   }
 
@@ -169,7 +169,7 @@ export class VideoComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    const video = this.el.querySelector("video");
+    const video = this.querySelector("video");
     if (!video) {
       throw new Error("The video child element is required!");
     }

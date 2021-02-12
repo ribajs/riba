@@ -12,8 +12,8 @@ export abstract class ShopifyNestContentComponent extends Component {
 
   protected scope = {};
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
     this.debug("constructor", this);
   }
 
@@ -55,7 +55,7 @@ export abstract class ShopifyNestContentComponent extends Component {
   protected template() {
     let template: string | null = null;
     // Only set the component template if there no childs already
-    if (hasChildNodesTrim(this.el)) {
+    if (hasChildNodesTrim(this)) {
       this.debug("Do not template, because element has child nodes");
       return template;
     } else {

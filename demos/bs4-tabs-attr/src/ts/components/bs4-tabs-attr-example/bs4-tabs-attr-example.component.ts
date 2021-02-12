@@ -7,8 +7,8 @@ export class Bs4TabsAttrExampleComponent extends Component {
 
   protected scope = {};
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {

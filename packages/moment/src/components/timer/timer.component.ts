@@ -61,8 +61,8 @@ export class TimerComponent extends Component {
 
   private updateIntervalId?: number;
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {

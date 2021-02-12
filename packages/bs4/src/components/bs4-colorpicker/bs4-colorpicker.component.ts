@@ -221,8 +221,8 @@ export class Bs4ColorPickerComponent extends Component {
   protected _domOkay: HTMLElement | null = null;
   protected _domCancel: HTMLElement | null = null;
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {
@@ -269,7 +269,7 @@ export class Bs4ColorPickerComponent extends Component {
   }
 
   protected template() {
-    if (hasChildNodesTrim(this.el)) {
+    if (hasChildNodesTrim(this)) {
       return null;
     } else {
       return template;
@@ -335,14 +335,14 @@ export class Bs4ColorPickerComponent extends Component {
   }
 
   protected setElements() {
-    this._domH = this.el.querySelector(".picker_hue");
-    this._domSL = this.el.querySelector(".picker_sl");
-    this._domA = this.el.querySelector(".picker_alpha");
+    this._domH = this.querySelector(".picker_hue");
+    this._domSL = this.querySelector(".picker_sl");
+    this._domA = this.querySelector(".picker_alpha");
     this._domEdit =
-      (this.el.querySelector(".picker_editor") as HTMLInputElement) || null;
-    this._domSample = this.el.querySelector(".picker_sample");
-    this._domOkay = this.el.querySelector(".picker_done");
-    this._domCancel = this.el.querySelector(".picker_cancel");
+      (this.querySelector(".picker_editor") as HTMLInputElement) || null;
+    this._domSample = this.querySelector(".picker_sample");
+    this._domOkay = this.querySelector(".picker_done");
+    this._domCancel = this.querySelector(".picker_cancel");
   }
 
   /**
@@ -367,7 +367,7 @@ export class Bs4ColorPickerComponent extends Component {
     };
 
     // Prevent clicks while dragging from bubbling up to the parent:
-    addEvent(this.el, "click", (e: MouseEvent) => e.preventDefault());
+    addEvent(this, "click", (e: MouseEvent) => e.preventDefault());
 
     // Draggable color selection
     const _dragTrack = dragTrack.bind(this);
@@ -419,7 +419,7 @@ export class Bs4ColorPickerComponent extends Component {
       this.onDone(this.color);
     };
     addEvent(this._domOkay, "click", onDoneProxy);
-    onKey(events, this.el, ["Enter"], onDoneProxy);
+    onKey(events, this, ["Enter"], onDoneProxy);
   }
 
   /*
@@ -460,7 +460,7 @@ export class Bs4ColorPickerComponent extends Component {
   }
 
   protected _updateUI(flags: any = {}) {
-    if (!this.el || !this.color) {
+    if (!this || !this.color) {
       return;
     }
 

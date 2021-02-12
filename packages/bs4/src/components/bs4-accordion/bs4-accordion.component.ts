@@ -71,26 +71,26 @@ export class Bs4AccordionComponent extends TemplatesComponent {
     showOnlyOne: true,
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   public hide(item: AccordionItem, index: number) {
-    const target = this.el.querySelector<HTMLElement>(
+    const target = this.querySelector<HTMLElement>(
       `[data-index="${index}"]`
     );
     if (target) {
       this.initItemEventListeners(item, target);
-      new CollapseService(target, [this.el], { toggle: false }).hide();
+      new CollapseService(target, [this], { toggle: false }).hide();
     }
   }
 
   public show(item: AccordionItem, index: number) {
-    const target = this.el.querySelector<HTMLElement>(
+    const target = this.querySelector<HTMLElement>(
       `[data-index="${index}"]`
     );
     const others = Array.from(
-      this.el.querySelectorAll<HTMLElement>(
+      this.querySelectorAll<HTMLElement>(
         `[data-index]:not([data-index="${index}"])`
       )
     );
@@ -106,11 +106,11 @@ export class Bs4AccordionComponent extends TemplatesComponent {
   }
 
   public toggle(item: AccordionItem, index: number) {
-    const target = this.el.querySelector<HTMLElement>(
+    const target = this.querySelector<HTMLElement>(
       `[data-index="${index}"]`
     );
     const others = Array.from(
-      this.el.querySelectorAll<HTMLElement>(
+      this.querySelectorAll<HTMLElement>(
         `[data-index]:not([data-index="${index}"])`
       )
     );
@@ -147,7 +147,7 @@ export class Bs4AccordionComponent extends TemplatesComponent {
   }
 
   protected getContentChildByIndex() {
-    return this.el.querySelector(`.card-body > *`) || undefined;
+    return this.querySelector(`.card-body > *`) || undefined;
   }
 
   protected onShow(element: HTMLElement, item: AccordionItem) {
@@ -239,7 +239,7 @@ export class Bs4AccordionComponent extends TemplatesComponent {
 
   protected template() {
     // Only set the component template if there no childs or the childs are templates
-    if (!hasChildNodesTrim(this.el) || this.hasOnlyTemplateChilds()) {
+    if (!hasChildNodesTrim(this) || this.hasOnlyTemplateChilds()) {
       return template;
     } else {
       return null;

@@ -31,22 +31,13 @@ export abstract class BasicComponent extends HTMLElement {
 
   protected abstract scope: any;
 
-  constructor(element?: HTMLUnknownElement) {
+  constructor() {
     super();
 
     if (this._debug) {
       this._color = getRandomColor();
     }
-
-    if (element) {
-      this.el = element;
-    } else if (window.customElements) {
-      this.el = (this as unknown) as HTMLElement;
-    } else {
-      throw new Error(
-        `element is required on browsers without custom elements support`
-      );
-    }
+    this.el = this; // revert
     this.onParentChanged = this.onParentChanged.bind(this);
     this.onRibaAttributeChanged = this.onRibaAttributeChanged.bind(this);
   }
@@ -55,8 +46,8 @@ export abstract class BasicComponent extends HTMLElement {
    * Remove this custom element
    */
   public remove() {
-    if (this.el && this.el.parentElement) {
-      this.el.parentElement.removeChild(this.el);
+    if (this && this.parentElement) {
+      this.parentElement.removeChild(this);
     }
   }
 
@@ -71,7 +62,7 @@ export abstract class BasicComponent extends HTMLElement {
       return;
     }
     if (typeof args[0] === "string") {
-      const name = this.constructor.name || this.el.tagName;
+      const name = this.constructor.name || this.tagName;
       if (this._color) {
         args[0] = `%c[${name}] ${args[0]}`;
         args.splice(1, 0, `color: ${this._color};`);
@@ -108,7 +99,7 @@ export abstract class BasicComponent extends HTMLElement {
    * @param observedAttribute
    */
   protected attributeIsPassed(observedAttribute: string) {
-    return this.el.hasAttribute(observedAttribute);
+    return this.hasAttribute(observedAttribute);
   }
 
   /**
@@ -329,10 +320,10 @@ export abstract class BasicComponent extends HTMLElement {
     return Promise.resolve(this.template())
       .then((template) => {
         if (template instanceof HTMLElement) {
-          this.el.innerHTML = "";
-          this.el.appendChild(template as HTMLElement);
+          this.innerHTML = "";
+          this.appendChild(template as HTMLElement);
         } else if (template !== null) {
-          this.el.innerHTML = template as string;
+          this.innerHTML = template as string;
         }
 
         return template;
@@ -372,7 +363,7 @@ export abstract class BasicComponent extends HTMLElement {
     newValue: any,
     namespace: any
   ) {
-    this.el.dispatchEvent(
+    this.dispatchEvent(
       new CustomEvent("notify-attribute-change:" + attrName, {
         detail: {
           name: attrName,
@@ -385,14 +376,14 @@ export abstract class BasicComponent extends HTMLElement {
   }
 
   protected askForRibaParent() {
-    this.el.dispatchEvent(new CustomEvent("ask-for-parent"));
+    this.dispatchEvent(new CustomEvent("ask-for-parent"));
   }
 
   protected askForRibaAttribute(attrName: string) {
     //TODO Fix if co-* has different keypath as attribute name
     const eventName = "ask-for-attribute:" + attrName;
     // this.debug("Trigger " + eventName);
-    this.el.dispatchEvent(new CustomEvent(eventName));
+    this.dispatchEvent(new CustomEvent(eventName));
   }
 
   protected askForRibaAttributes(observedAttributes: string[]) {
@@ -419,21 +410,21 @@ export abstract class BasicComponent extends HTMLElement {
   }
 
   protected listenForRibaParent() {
-    this.el.addEventListener("parent" as any, this.onParentChanged);
+    this.addEventListener("parent" as any, this.onParentChanged);
   }
 
   protected removeEventListenerForRibaParent() {
-    this.el.removeEventListener("parent" as any, this.onParentChanged);
+    this.removeEventListener("parent" as any, this.onParentChanged);
   }
 
   protected listenForRibaAttribute(attrName: string) {
     const eventName = "attribute:" + attrName;
     this.debug("Listen for " + eventName);
-    this.el.addEventListener(eventName as any, this.onRibaAttributeChanged);
+    this.addEventListener(eventName as any, this.onRibaAttributeChanged);
   }
 
   protected removeEventListenerForRibaAttribute(attrName: string) {
-    this.el.removeEventListener(
+    this.removeEventListener(
       ("attribute:" + attrName) as any,
       this.onRibaAttributeChanged
     );
@@ -470,7 +461,7 @@ export abstract class BasicComponent extends HTMLElement {
    * Please note: Normally the browser calls the attributeChangedCallback for you
    */
   protected loadAttributes(observedAttributes: string[]) {
-    const attributes = this.el.attributes;
+    const attributes = this.attributes;
     for (const i in attributes) {
       const attribute: Node = attributes[i];
       const name = attribute.nodeName;

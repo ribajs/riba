@@ -17,8 +17,8 @@ export class RibaIncreaseComponent extends Component {
     increaseCapacity: this.increaseCapacity,
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   public increaseCapacity() {

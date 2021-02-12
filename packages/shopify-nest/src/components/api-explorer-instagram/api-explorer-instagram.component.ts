@@ -67,8 +67,8 @@ export class ShopifyNestApiExplorerInstagramComponent extends ShopifyNestApiExpl
   protected debug = Debug(
     "component:" + ShopifyNestApiExplorerInstagramComponent.tagName
   );
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected async loadParamValues(param: APIParam) {

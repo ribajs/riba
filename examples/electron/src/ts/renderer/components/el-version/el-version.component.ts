@@ -25,8 +25,8 @@ export class ElVersionComponent extends Component {
     versions: {},
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
     this.debug("constructor", this);
   }
 

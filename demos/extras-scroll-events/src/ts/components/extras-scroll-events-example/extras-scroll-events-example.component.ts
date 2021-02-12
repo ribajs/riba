@@ -14,8 +14,8 @@ export class ExtrasScrollEventsExampleComponent extends Component {
     log: this.log,
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   public log(eventName: string, event: Event) {
@@ -39,13 +39,13 @@ export class ExtrasScrollEventsExampleComponent extends Component {
 
   protected async beforeBind() {
     await super.beforeBind();
-    this.consoleElement = this.el.querySelector(".console");
-    this.touchZoneElement = this.el.querySelector(".touch-zone");
+    this.consoleElement = this.querySelector(".console");
+    this.touchZoneElement = this.querySelector(".touch-zone");
   }
 
   protected template() {
     // Only set the component template if there no childs already
-    if (hasChildNodesTrim(this.el)) {
+    if (hasChildNodesTrim(this)) {
       return null;
     } else {
       return template;

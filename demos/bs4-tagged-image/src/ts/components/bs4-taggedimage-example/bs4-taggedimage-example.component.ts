@@ -78,8 +78,8 @@ export class Bs4TaggedImageExampleComponent extends Component {
     fadeshowImages: this.getFadeshowImageTags(),
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
     console.log("test");
   }
 

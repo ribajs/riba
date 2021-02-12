@@ -51,7 +51,7 @@ export const i18nShareComponentWrapper = (
 
     protected scope: Scope = super.scope;
 
-    constructor(element?: HTMLElement) {
+    constructor() {
       super(element);
       this.scope = this.getScopeDefaults();
       this.scope.labelTemplate = labelTemplate;
@@ -121,10 +121,10 @@ export const i18nShareComponentWrapper = (
     }
 
     protected template() {
-      this.debug("template", this.el, hasChildNodesTrim(this.el));
-      if (this.el && hasChildNodesTrim(this.el)) {
+      this.debug("template", this, hasChildNodesTrim(this));
+      if (this && hasChildNodesTrim(this)) {
         // If a child is set, this is a custom label template
-        this.scope.labelTemplate = this.el.innerHTML;
+        this.scope.labelTemplate = this.innerHTML;
         this.debug("Custom label template: ", this.scope.labelTemplate);
       }
       return template;

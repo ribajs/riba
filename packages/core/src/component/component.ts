@@ -21,8 +21,8 @@ export abstract class Component extends BasicComponent {
    */
   protected autobind = true;
 
-  constructor(element?: HTMLUnknownElement) {
-    super(element);
+  constructor() {
+    super();
     this.lifecycleEvents.trigger(
       "Component:constructor",
       this.getLifecycleEventData()

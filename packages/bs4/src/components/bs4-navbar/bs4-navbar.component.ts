@@ -25,8 +25,8 @@ export class Bs4NavbarComponent extends Component {
     return ["collapse-selector"];
   }
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
     this.onStateChange = this.onStateChange.bind(this);
   }
 
@@ -80,7 +80,7 @@ export class Bs4NavbarComponent extends Component {
 
   protected setCollapseElement() {
     const collapseElements = Array.from(
-      this.el.querySelectorAll<HTMLElement>(this.scope.collapseSelector) || []
+      this.querySelectorAll<HTMLElement>(this.scope.collapseSelector) || []
     );
 
     // remove old collapse targets
@@ -95,7 +95,7 @@ export class Bs4NavbarComponent extends Component {
       if (!this.collapseTargets.has(collapseElement)) {
         this.collapseTargets.set(
           collapseElement,
-          new CollapseService(collapseElement, [this.el], { toggle: false })
+          new CollapseService(collapseElement, [this], { toggle: false })
         );
         collapseElement.addEventListener(EVENT_SHOWN, this.onStateChange);
         collapseElement.addEventListener(EVENT_HIDDEN, this.onStateChange);
@@ -136,11 +136,11 @@ export class Bs4NavbarComponent extends Component {
       .value?.isCollapsed();
 
     if (this.scope.isCollapsed) {
-      this.el.classList.add(CLASS_NAME_COLLAPSED);
-      this.el.setAttribute("aria-expanded", "false");
+      this.classList.add(CLASS_NAME_COLLAPSED);
+      this.setAttribute("aria-expanded", "false");
     } else {
-      this.el.classList.remove(CLASS_NAME_COLLAPSED);
-      this.el.setAttribute("aria-expanded", "true");
+      this.classList.remove(CLASS_NAME_COLLAPSED);
+      this.setAttribute("aria-expanded", "true");
     }
   }
 

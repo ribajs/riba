@@ -31,8 +31,8 @@ export class Bs4NotificationContainerComponent extends Component {
     onItemHide: this.onItemHide,
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {
@@ -90,7 +90,7 @@ export class Bs4NotificationContainerComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs or the childs are templates
-    if (!hasChildNodesTrim(this.el)) {
+    if (!hasChildNodesTrim(this)) {
       return template;
     }
     return null;

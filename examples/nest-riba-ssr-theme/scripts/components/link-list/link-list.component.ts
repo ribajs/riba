@@ -39,8 +39,8 @@ export class LinkListComponent extends Component {
     return [];
   }
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {

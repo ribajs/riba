@@ -21,8 +21,8 @@ export abstract class VueComponent extends BasicComponent {
 
   protected abstract methods: any;
 
-  constructor(element?: HTMLUnknownElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected async init(observedAttributes: string[]) {

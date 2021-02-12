@@ -39,8 +39,8 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
     langcode: "en",
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
     this.debug("constructor", this);
   }
 
@@ -93,7 +93,7 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
 
   protected async afterBind() {
     this.debug("afterBind", this.scope);
-    this.cardContainer = this.el.querySelector<HTMLDivElement>(
+    this.cardContainer = this.querySelector<HTMLDivElement>(
       ".card-container"
     );
     this.watchSocketEvents();
@@ -793,7 +793,7 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
   protected template() {
     let template: string | null = null;
     // Only set the component template if there no childs already
-    if (hasChildNodesTrim(this.el)) {
+    if (hasChildNodesTrim(this)) {
       this.debug("Do not template, because element has child nodes");
       return template;
     } else {

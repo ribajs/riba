@@ -48,8 +48,8 @@ export class RouterViewComponent extends Component {
     dataset: {},
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {

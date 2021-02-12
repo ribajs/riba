@@ -84,8 +84,8 @@ export class Bs4ShareComponent extends Component {
 
   protected scope: Scope;
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
     this.scope = this.getScopeDefaults();
     this.debug("constructor", this.scope);
     Bs4ShareComponent.count++;
@@ -233,13 +233,13 @@ export class Bs4ShareComponent extends Component {
   }
 
   protected addEventListeners() {
-    this.el.addEventListener("open", this.onExternalOpenEvent);
-    this.el.addEventListener("close", this.onExternalCloseEvent);
+    this.addEventListener("open", this.onExternalOpenEvent);
+    this.addEventListener("close", this.onExternalCloseEvent);
   }
 
   protected removeEventListeners() {
-    this.el.removeEventListener("open", this.onExternalOpenEvent);
-    this.el.removeEventListener("close", this.onExternalOpenEvent);
+    this.removeEventListener("open", this.onExternalOpenEvent);
+    this.removeEventListener("close", this.onExternalOpenEvent);
   }
 
   protected getURLForShare() {
@@ -294,13 +294,13 @@ export class Bs4ShareComponent extends Component {
   }
 
   protected initDropdown() {
-    const dropDownButtonElement = this.el.querySelector(
+    const dropDownButtonElement = this.querySelector(
       ".dropdown-toggle-share"
     ) as HTMLButtonElement | HTMLAnchorElement;
     if (!dropDownButtonElement) {
       console.warn(
         'Element with selector ".dropdown-toggle-share" not found!',
-        this.el
+        this
       );
       return;
     }
@@ -389,10 +389,10 @@ export class Bs4ShareComponent extends Component {
   }
 
   protected template() {
-    this.debug("template", this.el, hasChildNodesTrim(this.el));
-    if (this.el && hasChildNodesTrim(this.el)) {
+    this.debug("template", this, hasChildNodesTrim(this));
+    if (this && hasChildNodesTrim(this)) {
       // If a child is set, this is a custom label template
-      this.scope.labelTemplate = this.el.innerHTML;
+      this.scope.labelTemplate = this.innerHTML;
       this.debug("Custom label template: ", this.scope.labelTemplate);
     }
     return template;

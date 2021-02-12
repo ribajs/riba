@@ -124,8 +124,8 @@ export class Bs4SidebarComponent extends Component {
     toggle: this.toggle,
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
     // assign this to bound version, so we can remove window EventListener later without problem
     this.onEnvironmentChanges = this.onEnvironmentChanges.bind(this);
   }
@@ -164,7 +164,7 @@ export class Bs4SidebarComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     this.init(Bs4SidebarComponent.observedAttributes);
-    this.computedStyle = window.getComputedStyle(this.el);
+    this.computedStyle = window.getComputedStyle(this);
     window.addEventListener("resize", this.onEnvironmentChanges, false);
     // inital
     this.onEnvironmentChanges();
@@ -203,7 +203,7 @@ export class Bs4SidebarComponent extends Component {
   protected onHidden() {
     this.setContainersStyle();
     const translateX = this.scope.position === "left" ? "-100%" : "100%";
-    this.el.setAttribute(
+    this.setAttribute(
       "style",
       `transform:translateX(${translateX});width:${this.scope.width};`
     );
@@ -211,7 +211,7 @@ export class Bs4SidebarComponent extends Component {
 
   protected onSide(directon: State) {
     this.setContainersStyle(undefined, "", directon);
-    this.el.setAttribute(
+    this.setAttribute(
       "style",
       `transform:translateX(0);width:${this.scope.width};`
     );
@@ -219,7 +219,7 @@ export class Bs4SidebarComponent extends Component {
 
   protected onOverlay(directon: State) {
     this.setContainersStyle(undefined, "", directon);
-    this.el.setAttribute(
+    this.setAttribute(
       "style",
       `transform:translateX(0);width:${this.scope.width};`
     );
@@ -252,7 +252,7 @@ export class Bs4SidebarComponent extends Component {
   }
 
   protected get width() {
-    return this.el.offsetWidth ? this.el.offsetWidth + "px" : this.scope.width;
+    return this.offsetWidth ? this.offsetWidth + "px" : this.scope.width;
   }
 
   protected setStateByEnviroment() {
@@ -417,7 +417,7 @@ export class Bs4SidebarComponent extends Component {
   }
 
   protected template() {
-    if (!hasChildNodesTrim(this.el)) {
+    if (!hasChildNodesTrim(this)) {
       console.warn(
         "No child elements found, this component as no template so you need to define your own as child of this component."
       );

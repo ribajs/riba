@@ -66,17 +66,17 @@ export class Bs4CarouselComponent extends Component {
 
   protected carouselService?: CarouselService;
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected async beforeBind() {
     await super.beforeBind();
-    this.el.classList.add("carousel", "slide");
+    this.classList.add("carousel", "slide");
   }
 
   protected async afterBind() {
-    this.carouselService = new CarouselService(this.el, {
+    this.carouselService = new CarouselService(this, {
       interval: this.scope.interval,
       keyboard: this.scope.keyboard,
       slide: this.scope.slide,
@@ -85,7 +85,7 @@ export class Bs4CarouselComponent extends Component {
       touch: this.scope.touch,
     });
     if (this.scope.fade) {
-      this.el.classList.add("carousel-fade");
+      this.classList.add("carousel-fade");
     }
     // TODO make this configurable?
     this.carouselService.cycle();

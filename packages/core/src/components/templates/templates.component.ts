@@ -92,7 +92,7 @@ export abstract class TemplatesComponent extends Component {
   }
 
   protected addItemsByTemplate() {
-    const templates = this.el.querySelectorAll<HTMLTemplateElement>("template");
+    const templates = this.querySelectorAll<HTMLTemplateElement>("template");
     for (let index = 0; index < templates.length; index++) {
       const tpl = templates[index];
 
@@ -102,22 +102,22 @@ export abstract class TemplatesComponent extends Component {
   }
 
   protected removeTemplates() {
-    const templates = this.el.querySelectorAll<HTMLTemplateElement>("template");
+    const templates = this.querySelectorAll<HTMLTemplateElement>("template");
     for (let index = 0; index < templates.length; index++) {
       const tpl = templates[index];
-      this.el.removeChild(tpl);
+      this.removeChild(tpl);
     }
   }
 
   protected hasOnlyTemplateChilds() {
-    return !Array.from(this.el.childNodes).some(
+    return !Array.from(this.childNodes).some(
       (child) => child.nodeName !== "TEMPLATE" && child.nodeName !== "#text"
     );
   }
 
   // protected template() {
   //   // Only set the component template if there no childs or the childs are templates
-  //   if (!hasChildNodesTrim(this.el) || this.hasOnlyTemplateChilds()) {
+  //   if (!hasChildNodesTrim(this) || this.hasOnlyTemplateChilds()) {
   //     return template;
   //   } else {
   //     return null;

@@ -149,8 +149,8 @@ export class ShopifyProductItemComponent extends Component {
     return this.scope.variant;
   }
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {
@@ -228,10 +228,10 @@ export class ShopifyProductItemComponent extends Component {
   protected activateOption(optionValue: string, optionName: string) {
     optionValue = optionValue.toString().replace("#", "");
     // console.debug('activateOption', `.option-${optionName.toLowerCase()}-${optionValue}`);
-    this.el
+    this
       .querySelector<HTMLElement>(`.option-${optionName.toLocaleLowerCase()}`)
       ?.classList.remove("active");
-    this.el
+    this
       .querySelector<HTMLElement>(
         `.option-${optionName.toLocaleLowerCase()}-${optionValue}`
       )
@@ -286,7 +286,7 @@ export class ShopifyProductItemComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el && hasChildNodesTrim(this.el)) {
+    if (this && hasChildNodesTrim(this)) {
       return null;
     } else {
       return template;

@@ -14,8 +14,8 @@ export class Bs4DropdownComponent extends Component {
     return [];
   }
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   public toggle(event: Event) {
@@ -30,7 +30,7 @@ export class Bs4DropdownComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     this.dropdownService = new DropdownService(
-      this.el.querySelector(".dropdown-toggle") as
+      this.querySelector(".dropdown-toggle") as
         | HTMLButtonElement
         | HTMLAnchorElement
     );

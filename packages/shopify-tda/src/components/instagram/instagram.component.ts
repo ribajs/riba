@@ -30,8 +30,8 @@ export class ShopifyTdaInstagramComponent extends Component {
     onTap: this.onTap,
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
     this.instagram = InstagramApiService.getSingleton();
   }
 
@@ -84,7 +84,7 @@ export class ShopifyTdaInstagramComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el && this.el.hasChildNodes()) {
+    if (this && this.hasChildNodes()) {
       return null;
     } else {
       return template;

@@ -39,8 +39,8 @@ export class ShopifyTdaInstagramScrollbarComponent extends Component {
 
   protected instagram = InstagramApiService.getSingleton();
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {
@@ -121,7 +121,7 @@ export class ShopifyTdaInstagramScrollbarComponent extends Component {
 
   protected async beforeBind() {
     // console.debug('beforeBind', this.scope);
-    this.scollWith = this.el.querySelector<HTMLElement>(".title-row");
+    this.scollWith = this.querySelector<HTMLElement>(".title-row");
     return this.loadMedia();
   }
 
@@ -131,7 +131,7 @@ export class ShopifyTdaInstagramScrollbarComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (hasChildNodesTrim(this.el)) {
+    if (hasChildNodesTrim(this)) {
       return null;
     } else {
       return template;

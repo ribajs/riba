@@ -24,8 +24,8 @@ export class RouterLoadScriptComponent extends Component {
     defer: true,
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {

@@ -82,8 +82,8 @@ export class ShopifyLoginFormComponent extends Component {
     recoverBack: this.recoverBack,
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {
@@ -205,19 +205,19 @@ export class ShopifyLoginFormComponent extends Component {
   }
 
   protected initValidation() {
-    this.createCustomerForm = this.el.querySelector(
+    this.createCustomerForm = this.querySelector(
       'form[action="/account"]'
     ) as HTMLFormElement;
     this.createCustomerForm.setAttribute("novalidate", "");
     this.createCustomerForm.classList.add("needs-validation");
 
-    this.loginCustomerForm = this.el.querySelector(
+    this.loginCustomerForm = this.querySelector(
       'form[action="/account/login"]'
     ) as HTMLFormElement;
     this.loginCustomerForm.setAttribute("novalidate", "");
     this.loginCustomerForm.classList.add("needs-validation");
 
-    this.recoverCustomerForm = this.el.querySelector(
+    this.recoverCustomerForm = this.querySelector(
       'form[action="/account/recover"]'
     ) as HTMLFormElement;
     this.recoverCustomerForm.setAttribute("novalidate", "");
@@ -246,7 +246,7 @@ export class ShopifyLoginFormComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el && hasChildNodesTrim(this.el)) {
+    if (this && hasChildNodesTrim(this)) {
       return null;
     } else {
       return template;

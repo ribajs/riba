@@ -131,8 +131,8 @@ export class Bs4TabsComponent extends TemplatesComponent {
     ];
   }
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
     this.onResizeEventHandler = throttle(this.setHeight.bind(this));
   }
 
@@ -210,7 +210,7 @@ export class Bs4TabsComponent extends TemplatesComponent {
 
   protected getTabContentChildByIndex(index: number) {
     return (
-      this.el.querySelector(
+      this.querySelector(
         `.tab-content .tab-pane:nth-child(${index + 1}) > *`
       ) || undefined
     );
@@ -251,9 +251,9 @@ export class Bs4TabsComponent extends TemplatesComponent {
   }
 
   protected setElements() {
-    this.tabs = this.el.querySelectorAll('[role="tab"]');
-    this.tabPanes = this.el.querySelectorAll('[role="tabpanel"]');
-    this.scrollable = this.el.querySelector("[scrollable]");
+    this.tabs = this.querySelectorAll('[role="tab"]');
+    this.tabPanes = this.querySelectorAll('[role="tabpanel"]');
+    this.scrollable = this.querySelector("[scrollable]");
   }
 
   protected resizeTabsArray(newSize: number) {
@@ -377,7 +377,7 @@ export class Bs4TabsComponent extends TemplatesComponent {
 
   protected template() {
     // Only set the component template if there no childs or the childs are templates
-    if (!hasChildNodesTrim(this.el) || this.hasOnlyTemplateChilds()) {
+    if (!hasChildNodesTrim(this) || this.hasOnlyTemplateChilds()) {
       if (this.scope.optionTabsAngle === "horizontal") {
         return templateHorizontal;
       } else {

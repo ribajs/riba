@@ -56,8 +56,8 @@ export class LeafletMapComponent extends Component {
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {
@@ -77,7 +77,7 @@ export class LeafletMapComponent extends Component {
     Leaflet.Icon.Default.imagePath = this.scope.assetsDir;
 
     const mapId = getUID("map-");
-    const mapElement = this.el.querySelector(this.scope.mapSelector);
+    const mapElement = this.querySelector(this.scope.mapSelector);
     if (mapElement) {
       mapElement.id = mapId;
     } else {
@@ -149,7 +149,7 @@ export class LeafletMapComponent extends Component {
   }
 
   protected template() {
-    for (const el of Array.from(this.el.children)) {
+    for (const el of Array.from(this.children)) {
       if (el.tagName === "ICON") {
         const iconName = el.getAttribute("name");
         const iconUrl = el.getAttribute("icon-url");

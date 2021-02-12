@@ -22,19 +22,19 @@ export class ShopifyNestShopInputComponent extends Component {
     submitted: false,
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
     this.debug("constructor", this);
   }
   protected connectedCallback() {
     super.connectedCallback();
-    let form = this.el;
+    let form = this;
     while (form.tagName !== "FORM") {
       form = form.parentElement as HTMLElement;
     }
     form.addEventListener("submit", () => {
       this.scope.submitted = true;
-      (this.el as HTMLInputElement).value += ".myshopify.com";
+      (this as HTMLInputElement).value += ".myshopify.com";
       this.scope.submitted = true;
       return true;
     });
@@ -44,7 +44,7 @@ export class ShopifyNestShopInputComponent extends Component {
   protected template() {
     let template: string | null = null;
     // Only set the component template if there no childs already
-    if (hasChildNodesTrim(this.el)) {
+    if (hasChildNodesTrim(this)) {
       this.debug("Do not template, because element has child nodes");
       return template;
     } else {

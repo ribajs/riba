@@ -26,8 +26,8 @@ export class Bs4NotificationsExampleComponent extends Component {
     },
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {
@@ -66,7 +66,7 @@ export class Bs4NotificationsExampleComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (hasChildNodesTrim(this.el)) {
+    if (hasChildNodesTrim(this)) {
       // console.debug('Do not use template, because element has child nodes');
       return null;
     } else {

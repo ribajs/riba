@@ -121,8 +121,8 @@ export class MonacoEditorComponent extends Component {
     htmlFormatWrapAttributes: "force-aligned",
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {
@@ -175,7 +175,7 @@ export class MonacoEditorComponent extends Component {
       },
     });
 
-    this.editor = monaco.editor.create(this.el, {
+    this.editor = monaco.editor.create(this, {
       value: value as string,
       language: this.scope.language,
       theme: this.scope.theme,
@@ -192,7 +192,7 @@ export class MonacoEditorComponent extends Component {
       if (this.editor) {
         this.scope.dataValue = this.editor.getValue();
         if (this.scope.dataValue) {
-          this.el.dispatchEvent(
+          this.dispatchEvent(
             new CustomEvent<string>("change", {
               detail: this.scope.dataValue,
             })
@@ -268,7 +268,7 @@ export class MonacoEditorComponent extends Component {
   protected template() {
     let template: string | null = null;
     // Only set the component template if there no childs already
-    if (this.el && hasChildNodesTrim(this.el)) {
+    if (this && hasChildNodesTrim(this)) {
       return null;
     } else {
       template = pugTemplate(this.scope);

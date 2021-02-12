@@ -110,8 +110,8 @@ export class ContentSliderComponent extends TemplatesComponent {
     goTo: this.goTo,
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
     this.debug("constructor", this);
   }
 
@@ -121,7 +121,7 @@ export class ContentSliderComponent extends TemplatesComponent {
   }
 
   protected initItems() {
-    const itemElements = this.el.querySelectorAll(".item");
+    const itemElements = this.querySelectorAll(".item");
     if (!itemElements || !itemElements.length) {
       throw new Error("No required items found!");
     }
@@ -162,7 +162,7 @@ export class ContentSliderComponent extends TemplatesComponent {
   protected async afterBind() {
     this.debug("afterBind", this.scope);
 
-    const contentInfoOffsetEl = this.el.querySelector<HTMLElement>(".controls");
+    const contentInfoOffsetEl = this.querySelector<HTMLElement>(".controls");
     if (contentInfoOffsetEl) {
       contentInfoOffsetEl.classList.add;
       this.addClasses(contentInfoOffsetEl, this.scope.activeColumnClasses);
@@ -205,7 +205,7 @@ export class ContentSliderComponent extends TemplatesComponent {
   }
 
   protected getItemElementByIndex(index: number) {
-    return this.el.querySelectorAll(".item")?.item(index);
+    return this.querySelectorAll(".item")?.item(index);
   }
 
   protected addClasses(el: Element, classes: string[]) {
@@ -256,7 +256,7 @@ export class ContentSliderComponent extends TemplatesComponent {
   public goTo(newActiveIndex: number) {
     this.debug("goTo");
     this.getItemWidths();
-    const oldActiveItem = this.el.querySelector(`.${this.scope.activeClass}`);
+    const oldActiveItem = this.querySelector(`.${this.scope.activeClass}`);
     const newActiveItem = this.getItemElementByIndex(newActiveIndex);
     if (oldActiveItem) {
       this.setInactiveClasses(oldActiveItem);
@@ -287,12 +287,12 @@ export class ContentSliderComponent extends TemplatesComponent {
 
   protected getItemWidths() {
     this.scope.activeItemWidth =
-      this.el
+      this
         .querySelector(`.item.${this.scope.activeClass}`)
         ?.getBoundingClientRect().width || 0;
 
     this.scope.inactiveItemWidth =
-      this.el
+      this
         .querySelector(`.item:not(.${this.scope.activeClass})`)
         ?.getBoundingClientRect().width || 0;
 
@@ -317,7 +317,7 @@ export class ContentSliderComponent extends TemplatesComponent {
 
   protected template() {
     // Only set the component template if there no childs or the childs are templates
-    if (!hasChildNodesTrim(this.el) || this.hasOnlyTemplateChilds()) {
+    if (!hasChildNodesTrim(this) || this.hasOnlyTemplateChilds()) {
       this.debug("Use template", template);
       return template;
     } else {

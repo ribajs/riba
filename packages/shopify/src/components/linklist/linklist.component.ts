@@ -248,7 +248,7 @@ export class ShopifyLinklistComponent extends Component {
    * Only set the component template if there no childs already
    */
   protected template() {
-    if (hasChildNodesTrim(this.el)) {
+    if (hasChildNodesTrim(this)) {
       return null;
     } else {
       return template;

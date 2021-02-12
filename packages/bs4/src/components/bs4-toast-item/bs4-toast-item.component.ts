@@ -39,8 +39,8 @@ export class Bs4ToastItemComponent extends Component {
     toast: undefined,
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {
@@ -55,7 +55,7 @@ export class Bs4ToastItemComponent extends Component {
 
   protected initToastService() {
     const toast = this.scope.toast;
-    const toastEl = this.el.firstElementChild as HTMLElement | null;
+    const toastEl = this.firstElementChild as HTMLElement | null;
     if (toast && toastEl) {
       this.toastService = new ToastService(toastEl, {
         delay:

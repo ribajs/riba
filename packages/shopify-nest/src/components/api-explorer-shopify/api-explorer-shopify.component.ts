@@ -340,8 +340,8 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
   protected debug = Debug(
     "component:" + ShopifyNestApiExplorerShopifyComponent.tagName
   );
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected async loadParamValues(param: APIParam) {

@@ -5,22 +5,22 @@ export abstract class ShopifySectionComponent extends Component {
 
   protected abstract scope: any;
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
     this.initEventListeners();
   }
 
   protected initEventListeners() {
-    this.el.addEventListener("shopify:section:load", this.onSectionLoad);
-    this.el.addEventListener("shopify:section:unload", this.onSectionUnload);
-    this.el.addEventListener("shopify:section:select", this.onSectionSelect);
-    this.el.addEventListener(
+    this.addEventListener("shopify:section:load", this.onSectionLoad);
+    this.addEventListener("shopify:section:unload", this.onSectionUnload);
+    this.addEventListener("shopify:section:select", this.onSectionSelect);
+    this.addEventListener(
       "shopify:section:deselect",
       this.onSectionDeselect
     );
-    this.el.addEventListener("shopify:section:reorder", this.onSectionReorder);
-    this.el.addEventListener("shopify:block:select", this.onBlockSelect);
-    this.el.addEventListener("shopify:block:deselect", this.onBlockDeselect);
+    this.addEventListener("shopify:section:reorder", this.onSectionReorder);
+    this.addEventListener("shopify:block:select", this.onBlockSelect);
+    this.addEventListener("shopify:block:deselect", this.onBlockDeselect);
   }
 
   protected abstract template(): string | null;

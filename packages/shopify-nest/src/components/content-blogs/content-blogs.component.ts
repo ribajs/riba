@@ -101,7 +101,7 @@ export class ShopifyNestContentBlogsComponent extends ShopifyNestContentComponen
   protected template() {
     let template: string | null = null;
     // Only set the component template if there no childs already
-    if (hasChildNodesTrim(this.el)) {
+    if (hasChildNodesTrim(this)) {
       this.debug("Do not template, because element has child nodes");
       return template;
     } else {

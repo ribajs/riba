@@ -19,8 +19,8 @@ export abstract class AI18nSwitcherComponent extends Component {
     ready: false,
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   /**

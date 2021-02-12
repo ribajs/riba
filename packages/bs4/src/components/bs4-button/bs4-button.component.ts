@@ -19,8 +19,8 @@ export class Bs4ButtonComponent extends Component {
     onClick: this.onClick.bind(this),
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
     // console.debug('constructor', this);
   }
 
@@ -35,7 +35,7 @@ export class Bs4ButtonComponent extends Component {
   }
 
   protected startAnimation() {
-    this.el.classList.add(this.scope.animationClass);
+    this.classList.add(this.scope.animationClass);
   }
 
   protected onStartAnimation() {
@@ -43,29 +43,29 @@ export class Bs4ButtonComponent extends Component {
   }
 
   protected onEndAnimation() {
-    // window.getComputedStyle(this.el)
-    // console.debug('onEndAnimation', event, window.getComputedStyle(this.el));
+    // window.getComputedStyle(this)
+    // console.debug('onEndAnimation', event, window.getComputedStyle(this));
 
     setTimeout(() => {
-      this.el.classList.remove(this.scope.animationClass);
+      this.classList.remove(this.scope.animationClass);
     });
   }
 
   protected async init(observedAttributes: string[]) {
     return super.init(observedAttributes).then((view) => {
       this.onStartAnimation = this.onStartAnimation.bind(this);
-      this.el.addEventListener(
+      this.addEventListener(
         "webkitAnimationStart" as "animationstart",
         this.onStartAnimation
       );
-      this.el.addEventListener("animationstart", this.onStartAnimation);
+      this.addEventListener("animationstart", this.onStartAnimation);
       this.onEndAnimation = this.onEndAnimation.bind(this);
-      this.el.addEventListener(
+      this.addEventListener(
         "webkitAnimationEnd" as "animationend",
         this.onEndAnimation
       );
-      this.el.addEventListener("animationend", this.onEndAnimation);
-      this.el.addEventListener("click", this.scope.onClick);
+      this.addEventListener("animationend", this.onEndAnimation);
+      this.addEventListener("click", this.scope.onClick);
       return view;
     });
   }
@@ -101,17 +101,17 @@ export class Bs4ButtonComponent extends Component {
   // deconstructor
   protected disconnectedCallback() {
     super.disconnectedCallback();
-    this.el.removeEventListener(
+    this.removeEventListener(
       "webkitAnimationStart" as "animationstart",
       this.onStartAnimation
     );
-    this.el.removeEventListener("animationstart", this.onStartAnimation);
-    this.el.removeEventListener(
+    this.removeEventListener("animationstart", this.onStartAnimation);
+    this.removeEventListener(
       "webkitAnimationEnd" as "animationend",
       this.onEndAnimation
     );
-    this.el.removeEventListener("animationend", this.onEndAnimation);
-    this.el.removeEventListener("click", this.scope.onClick);
+    this.removeEventListener("animationend", this.onEndAnimation);
+    this.removeEventListener("click", this.scope.onClick);
   }
 
   protected template() {

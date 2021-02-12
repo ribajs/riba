@@ -70,8 +70,8 @@ export class ShopifyAddressesComponent extends Component {
     delete: this.delete,
   };
 
-  constructor(element?: HTMLElement) {
-    super(element);
+  constructor() {
+    super();
   }
 
   protected connectedCallback() {
@@ -82,7 +82,7 @@ export class ShopifyAddressesComponent extends Component {
   public edit(id: string, event: Event) {
     // console.debug('login', this.scope);
 
-    const form = this.el.querySelector(
+    const form = this.querySelector(
       `form[action="/account/addresses/${id}]`
     ) as HTMLFormElement;
 
@@ -143,13 +143,13 @@ export class ShopifyAddressesComponent extends Component {
   }
 
   protected initValidation() {
-    this.editAddressForm = this.el.querySelector(
+    this.editAddressForm = this.querySelector(
       'form[action^="/account/addresses/"]'
     ) as HTMLFormElement;
     this.editAddressForm.attr("novalidate", "");
     this.editAddressForm.addClass("needs-validation");
 
-    this.createAddressForm = this.el.querySelector(
+    this.createAddressForm = this.querySelector(
       'form[action="/account/addresses"]'
     ) as HTMLFormElement;
     this.createAddressForm.attr("novalidate", "");
@@ -178,7 +178,7 @@ export class ShopifyAddressesComponent extends Component {
 
   protected template() {
     // Only set the component template if there no childs already
-    if (this.el && hasChildNodesTrim(this.el)) {
+    if (this && hasChildNodesTrim(this)) {
       return null;
     } else {
       return template;
