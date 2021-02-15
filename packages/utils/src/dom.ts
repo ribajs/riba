@@ -142,23 +142,35 @@ export const getViewportDimensions = () => {
 /**
  * Determine if an element is in the viewport
  * @param elem The element
+ * @param offsetTop (Default  Distance to the top of the screen, if this is 0, the element must be scrolled until the top of the screen.
+ * @param offsetBottom Distance to the bottom of the screen, if this is 0, the scroll position must be over the element
  * @return Returns true if element is in the viewport
  */
 export const isInViewport = (
   elem: Element,
-  offsetTop = 0,
+  offsetTop?: number,
   offsetBottom = 0
 ) => {
   if (!elem) {
     return false;
   }
+
   const distance = elem.getBoundingClientRect();
+
+  if (!offsetTop) {
+    const vp = getViewportDimensions();
+    offsetTop = vp.h - distance.height;
+  }
+
+  // console.log("top", distance.top + distance.height, distance.top + distance.height >= offsetBottom);
+  // console.log("bottom", distance.bottom - distance.height, distance.bottom - distance.height <= offsetTop);
+
   return (
     distance.top + distance.height >= offsetBottom &&
     distance.bottom - distance.height <= offsetTop
   );
 };
-
+ 
 /**
  * Select all of an contenteditable or input element
  * @param element The element you want to select
