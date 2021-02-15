@@ -47,7 +47,7 @@ export class MonacoExampleComponent extends Component {
     return [];
   }
 
-  // deconstructor
+  // deconstruction
   protected disconnectedCallback() {
     super.disconnectedCallback();
   }

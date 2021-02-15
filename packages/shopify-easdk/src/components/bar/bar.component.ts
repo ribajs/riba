@@ -164,7 +164,7 @@ export class BarComponent extends Component {
     return [];
   }
 
-  // deconstructor
+  // deconstruction
   protected disconnectedCallback() {
     super.disconnectedCallback();
   }

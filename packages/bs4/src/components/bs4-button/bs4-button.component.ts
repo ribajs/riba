@@ -98,7 +98,7 @@ export class Bs4ButtonComponent extends Component {
     );
   }
 
-  // deconstructor
+  // deconstruction
   protected disconnectedCallback() {
     super.disconnectedCallback();
     this.removeEventListener(

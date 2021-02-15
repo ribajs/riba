@@ -32,7 +32,7 @@ export class VideoExampleComponent extends Component {
     return [];
   }
 
-  // deconstructor
+  // deconstruction
   protected disconnectedCallback() {
     super.disconnectedCallback();
   }

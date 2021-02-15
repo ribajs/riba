@@ -163,7 +163,7 @@ export class Bs4ContentsComponent extends Component {
     );
   }
 
-  // deconstructor
+  // deconstruction
   protected disconnectedCallback() {
     super.disconnectedCallback();
     this.scope.anchors = [];

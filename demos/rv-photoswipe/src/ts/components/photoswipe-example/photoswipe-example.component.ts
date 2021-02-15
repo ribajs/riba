@@ -33,7 +33,7 @@ export class PhotoswipeExampleComponent extends Component {
     return [];
   }
 
-  // deconstructor
+  // deconstruction
   protected disconnectedCallback() {
     super.disconnectedCallback();
   }

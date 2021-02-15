@@ -587,7 +587,7 @@ export class PhotoswipeComponent extends Component {
     return [];
   }
 
-  // deconstructor
+  // deconstruction
   protected disconnectedCallback() {
     this.debug("disconnectedCallback");
     super.disconnectedCallback();

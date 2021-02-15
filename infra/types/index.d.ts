@@ -1,4 +1,5 @@
 // import type { RequestDocument } from "graphql-request/dist/types";
+// import "resize-observer-browser";
 
 /** Type definition for html-loader */
 declare module "*.html" {

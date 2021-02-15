@@ -245,7 +245,7 @@ export class ShopifyNestSyncProgressComponent extends Component {
     );
   }
 
-  // deconstructor
+  // deconstruction
   protected disconnectedCallback() {
     super.disconnectedCallback();
   }

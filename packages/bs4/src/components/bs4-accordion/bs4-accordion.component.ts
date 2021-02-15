@@ -175,16 +175,16 @@ export class Bs4AccordionComponent extends TemplatesComponent {
    * Trigger `visibility-changed` for components that need to update if visibility changes.
    * Se also bsf-tabs
    * @param element
-   * @param visibile
+   * @param visible
    */
   protected triggerVisibilityChangedForElement(
     element: Element,
-    visibile: boolean
+    visible: boolean
   ) {
     setTimeout(() => {
-      // Use this event to update any custom element when it becomes visibile
+      // Use this event to update any custom element when it becomes visible
       element.dispatchEvent(
-        new CustomEvent("visibility-changed", { detail: { visibile } })
+        new CustomEvent("visibility-changed", { detail: { visible } })
       );
     }, 200);
   }
@@ -226,7 +226,7 @@ export class Bs4AccordionComponent extends TemplatesComponent {
     );
   }
 
-  // deconstructor
+  // deconstruction
   protected disconnectedCallback() {
     super.disconnectedCallback();
   }

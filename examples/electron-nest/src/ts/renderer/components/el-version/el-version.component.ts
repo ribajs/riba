@@ -40,7 +40,7 @@ export class ElVersionComponent extends Component {
     this.debug("beforeBind", this.scope);
   }
 
-  // deconstructor
+  // deconstruction
   protected disconnectedCallback() {
     return super.disconnectedCallback();
   }

@@ -205,7 +205,7 @@ export class TimerComponent extends Component {
     this.updateIntervalId = undefined;
   }
 
-  // deconstructor
+  // deconstruction
   protected disconnectedCallback() {
     super.disconnectedCallback();
     this.cancelCountdownInterval();

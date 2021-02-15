@@ -293,7 +293,7 @@ export class VideoComponent extends Component {
     });
   }
 
-  // deconstructor
+  // deconstruction
   protected disconnectedCallback() {
     super.disconnectedCallback();
   }

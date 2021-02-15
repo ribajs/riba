@@ -142,7 +142,7 @@ export class Bs4ToggleButtonComponent extends Component {
     }
   }
 
-  // deconstructor
+  // deconstruction
   protected disconnectedCallback() {
     super.disconnectedCallback();
     if (this.eventDispatcher) {

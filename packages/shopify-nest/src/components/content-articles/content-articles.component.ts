@@ -95,7 +95,7 @@ export class ShopifyNestContentBlogArticlesComponent extends ShopifyNestContentC
     );
   }
 
-  // deconstructor
+  // deconstruction
   protected disconnectedCallback() {
     super.disconnectedCallback();
   }

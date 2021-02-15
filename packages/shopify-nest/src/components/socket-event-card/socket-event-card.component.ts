@@ -73,7 +73,7 @@ export class ShopifyNestSocketEventCardComponent extends Component {
     );
   }
 
-  // deconstructor
+  // deconstruction
   protected disconnectedCallback() {
     super.disconnectedCallback();
   }

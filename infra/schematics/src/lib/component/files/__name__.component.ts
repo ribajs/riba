@@ -74,7 +74,7 @@ export class <%= classify(name) %>Component extends Component {
     return super.parsedAttributeChangedCallback(attributeName, oldValue, newValue, namespace);
   }
 
-  // deconstructor
+  // deconstruction
   protected disconnectedCallback() {
     return super.disconnectedCallback();
   }

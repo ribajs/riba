@@ -257,7 +257,7 @@ export class MonacoEditorComponent extends Component {
     }
   }
 
-  // deconstructor
+  // deconstruction
   protected disconnectedCallback() {
     if (this.editor) {
       this.editor.dispose();

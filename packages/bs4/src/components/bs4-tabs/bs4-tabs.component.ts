@@ -220,16 +220,16 @@ export class Bs4TabsComponent extends TemplatesComponent {
    * Trigger `visibility-changed` for components that need to update if visibility changes.
    * E.g. this event is used the bs4-slideshow component
    * @param element
-   * @param visibile
+   * @param visible
    */
   protected triggerVisibilityChangedForElement(
     element: Element,
-    visibile: boolean
+    visible: boolean
   ) {
     setTimeout(() => {
-      // Use this event to update any custom element when it becomes visibile
+      // Use this event to update any custom element when it becomes visible
       element.dispatchEvent(
-        new CustomEvent("visibility-changed", { detail: { visibile } })
+        new CustomEvent("visibility-changed", { detail: { visible } })
       );
     }, 200);
   }

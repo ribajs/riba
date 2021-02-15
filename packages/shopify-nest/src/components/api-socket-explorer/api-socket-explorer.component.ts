@@ -93,9 +93,7 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
 
   protected async afterBind() {
     this.debug("afterBind", this.scope);
-    this.cardContainer = this.querySelector<HTMLDivElement>(
-      ".card-container"
-    );
+    this.cardContainer = this.querySelector<HTMLDivElement>(".card-container");
     this.watchSocketEvents();
   }
 
@@ -785,7 +783,7 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
     );
   }
 
-  // deconstructor
+  // deconstruction
   protected disconnectedCallback() {
     super.disconnectedCallback();
   }

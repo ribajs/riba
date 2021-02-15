@@ -47,7 +47,7 @@ export abstract class ShopifyNestContentComponent extends Component {
     );
   }
 
-  // deconstructor
+  // deconstruction
   protected disconnectedCallback() {
     super.disconnectedCallback();
   }
