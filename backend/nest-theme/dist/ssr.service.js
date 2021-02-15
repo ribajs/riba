@@ -18,6 +18,7 @@ const config_1 = require("@nestjs/config");
 const path_1 = require("path");
 const consolidate = require("consolidate");
 const fs_1 = require("fs");
+const node_fetch_1 = require("node-fetch");
 const events_1 = require("@ribajs/events");
 let SsrService = class SsrService {
     constructor(config) {
@@ -32,7 +33,6 @@ let SsrService = class SsrService {
                 return true;
             default:
                 return false;
-                break;
         }
     }
     async getSharedContext(req, templateVars) {
@@ -134,6 +134,9 @@ let SsrService = class SsrService {
         const vmContext = dom.getInternalVMContext();
         const window = vmContext.window;
         window.ssr = sharedContext;
+        if (!window.fetch) {
+            window.fetch = node_fetch_1.default;
+        }
         this.log.debug('Execute scripts...');
         for (const script of scripts) {
             await script.runInContext(vmContext);
@@ -156,6 +159,9 @@ let SsrService = class SsrService {
         const context = new server_rendering_1.HappyDOMContext();
         const window = context.window;
         window.ssr = sharedContext;
+        if (!window.fetch) {
+            window.fetch = node_fetch_1.default;
+        }
         const scriptSources = await this.readSsrScripts(scriptFilenames);
         const scripts = [];
         for (const [filename, scriptSource] of scriptSources) {

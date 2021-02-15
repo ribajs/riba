@@ -33,6 +33,7 @@
     "find-root": "^1.1.0",
     "happy-dom": "^2.5.0",
     "jsdom": "^16.4.0",
+    "node-fetch": "^2.6.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.6.3",
     "whatwg-encoding": "^1.0.5",

@@ -9,6 +9,7 @@ import { resolve, extname } from 'path';
 import * as consolidate from 'consolidate';
 import type { Request } from 'express';
 import { promises as fs } from 'fs';
+import fetch from 'node-fetch';
 import type {
   ComponentLifecycleEventData,
   SharedContext,
@@ -33,7 +34,6 @@ export class SsrService {
         return true;
       default:
         return false;
-        break;
     }
   }
 
@@ -178,6 +178,9 @@ export class SsrService {
     const vmContext = dom.getInternalVMContext();
     const window: Window = vmContext.window;
     window.ssr = sharedContext;
+    if (!window.fetch) {
+      window.fetch = fetch;
+    }
     this.log.debug('Execute scripts...');
     for (const script of scripts) {
       await script.runInContext(vmContext);
@@ -228,6 +231,10 @@ export class SsrService {
 
     // Set shared context here
     window.ssr = sharedContext;
+
+    if (!window.fetch) {
+      window.fetch = fetch;
+    }
 
     const scriptSources = await this.readSsrScripts(scriptFilenames);
     const scripts: Script[] = [];
