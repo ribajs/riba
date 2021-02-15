@@ -27,22 +27,22 @@ const SLIDES_SELECTOR = `${SLIDESHOW_INNER_SELECTOR} > .slide`;
 export type Breakpoint = "xs" | "sm" | "md" | "lg" | "xl";
 
 export type ControlsPosition =
-  | "insite-middle"
-  | "insite-bottom"
-  | "insite-top"
-  | "outsite-middle"
-  | "outsite-bottom"
-  | "outsite-top";
+  | "inside-middle"
+  | "inside-bottom"
+  | "inside-top"
+  | "outside-middle"
+  | "outside-bottom"
+  | "outside-top";
 
 export type IndicatorsPosition =
-  | "insite-bottom"
-  | "insite-top"
-  | "insite-right"
-  | "insite-left"
-  | "outsite-bottom"
-  | "outsite-top"
-  | "outsite-right"
-  | "outsite-left";
+  | "inside-bottom"
+  | "inside-top"
+  | "inside-right"
+  | "inside-left"
+  | "outside-bottom"
+  | "outside-top"
+  | "outside-right"
+  | "outside-left";
 
 export interface Position extends DOMRect {
   centerX: number;
@@ -60,7 +60,7 @@ export interface Slide {
 }
 
 export interface ResponsiveOptions extends Partial<Options> {
-  /** min witdh of responsive view port of from which these options take effect */
+  /** min width of responsive view port of from which these options take effect */
   minWidth: number;
 }
 
@@ -73,7 +73,7 @@ export interface Options {
   indicators: boolean;
   /** Position of the indicators */
   indicatorsPosition: IndicatorsPosition;
-  /** Pauses auto scoll on hover or focus */
+  /** Pauses auto scroll on hover or focus */
   pauseOnHover: boolean;
   /** number of slides to be scrolled by clicking on the controls */
   slidesToScroll: number;
@@ -118,13 +118,15 @@ export interface Scope extends Options {
 }
 
 export class Bs4SlideshowComponent extends TemplatesComponent {
+  protected resizeObserver?: any; // TODO type ResizeObserver;
+
   protected get slideshowInner() {
     if (!this._slideshowInner) {
       this._slideshowInner = this.querySelector(SLIDESHOW_INNER_SELECTOR);
     }
     if (!this._slideshowInner) {
       throw new Error(
-        `Child element with selecto ${SLIDESHOW_INNER_SELECTOR} not found!`
+        `Child element with selector ${SLIDESHOW_INNER_SELECTOR} not found!`
       );
     }
     return this._slideshowInner;
@@ -337,11 +339,11 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     // Options
     slidesToScroll: 1,
     controls: true,
-    controlsPosition: "insite-middle",
+    controlsPosition: "inside-middle",
     pauseOnHover: true,
     sticky: false,
     indicators: true,
-    indicatorsPosition: "insite-bottom",
+    indicatorsPosition: "inside-bottom",
     pause: false,
     drag: true,
     autoplay: false,
@@ -699,7 +701,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   }
 
   protected onVisibilityChanged(event: CustomEvent) {
-    if (event.detail.visibile) {
+    if (event.detail.visible) {
       this.dragscrollService?.checkDraggable();
       this.continuousAutoplayService?.update();
     }
@@ -767,7 +769,17 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   protected addEventListeners() {
     this.routerEvents.on("newPageReady", this.onBreakpointChanges, this);
 
-    window.addEventListener("resize", this.onViewChanges);
+    // TODO types
+    // What element resize
+    if ((window as any).ResizeObserver as any) {
+      this.resizeObserver = new (window as any).ResizeObserver(
+        this.onViewChanges
+      );
+      this.resizeObserver?.observe(this);
+    } else {
+      // Fallback watch window resize
+      window.addEventListener("resize", this.onViewChanges);
+    }
 
     // Custom event triggered by some parent components when this component changes his visibility, e.g. triggered in the bs4-tabs component
     this.addEventListener(
@@ -798,7 +810,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     // See ScrollEventsService for this event
     this.addEventListener("scrollended", this.onMouseUp, { passive: true });
 
-    // inital
+    // initial
     this.onViewChanges();
     // this.onScroll();
     this.onScrollend();
@@ -808,6 +820,8 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     this.routerEvents.off("newPageReady", this.onBreakpointChanges, this);
 
     window.removeEventListener("resize", this.onViewChanges);
+
+    this.resizeObserver?.unobserve(this);
 
     this.removeEventListener(
       "visibility-changed" as any,
@@ -1045,7 +1059,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     return minIndex;
   }
 
-  protected setAllSlidesUnactive(excludeIndex = -1) {
+  protected setAllSlidesInactive(excludeIndex = -1) {
     if (!this.slideElements) {
       return;
     }
@@ -1066,7 +1080,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   protected setCenteredSlideActive(): number {
     const index = this.getMostCenteredSlideIndex();
-    this.setAllSlidesUnactive(index);
+    this.setAllSlidesInactive(index);
     if (!this.scope.items[index]) {
       return -1;
     }
@@ -1256,7 +1270,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     );
   }
 
-  // deconstructor
+  // deconstruction
   protected disconnectedCallback() {
     this.removeEventListeners();
     this.scrollEventsService?.destroy();
