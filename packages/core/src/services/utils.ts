@@ -3,12 +3,12 @@ import { ready } from "@ribajs/utils/src/dom";
 /**
  * Just a class with some helpful functions
  *
- * @export
- * @class Utils
+ * @deprecated Use '@ribajs/utils' module instead
  */
 export class Utils {
   /**
    * Cross-browser Document Ready check
+   * @deprecated Use `import { ready } from '@ribajs/utils/src/dom'` instead
    * @see https://www.competa.com/blog/cross-browser-document-ready-with-vanilla-javascript/
    * @param callback
    */

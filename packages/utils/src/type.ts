@@ -320,3 +320,22 @@ export const classOf = (that: any) => {
  * but getting TypeScript error:
  * Property 'constructor' does not exist on type 'T'.
  */
+
+/**
+ * Removes internal riba properties from an object
+ * @param obj
+ * @return Cleared new object
+ */
+export const clearObjFromRiba = (obj: any) => {
+  const newObj: any = {};
+  for (const key in obj) {
+    if (obj[key] && key !== "__rv") {
+      if (isObject(obj[key])) {
+        newObj[key] = clearObjFromRiba(obj[key]);
+      } else {
+        newObj[key] = obj[key];
+      }
+    }
+  }
+  return newObj;
+};
