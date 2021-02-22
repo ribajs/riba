@@ -329,7 +329,7 @@ export const classOf = (that: any) => {
 export const clearObjFromRiba = (obj: any) => {
   const newObj: any = {};
   for (const key in obj) {
-    if (obj[key] && key !== "__rv") {
+    if (key !== "__rv") {
       if (isObject(obj[key])) {
         newObj[key] = clearObjFromRiba(obj[key]);
       } else {
