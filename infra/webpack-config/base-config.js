@@ -129,8 +129,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
         eslintConfig.options = require(eslintConfigPath);
       } else {
         logger.debug(
-          "Use default Riba ESLint config" +
-            postcssConfigPath
+          "Use default Riba ESLint config"
         );
         eslintConfig.options = require("@ribajs/eslint-config");
       }
