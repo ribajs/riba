@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-auto">
+    <div class="nav flex-column nav-pills" role="tablist" rv-aria-orientation="optionTabsAngle">
+      <div class="nav-item" rv-each-tab="items">
+        <button class="btn btn-link nav-link" role="tab" rv-class-active="tab.active" rv-id="'tab-title-' | append tab.handle" rv-aria-controls="'tab-content-' | append tab.handle" rv-on-click="activate | args tab" rv-html="tab.title"></button>
+      </div>
+    </div>
+  </div>
+  <div class="col-auto">
+    <div class="tab-content">
+      <div rv-each-tab="items" role="tabpanel" class="tab-pane" rv-class-show="tab.active" rv-class-active="tab.active" rv-id="'tab-content-' | append tab.handle" rv-aria-labelledby="'tab-title-' | append tab.handle" rv-template="tab.content"></div>
+    </div>  
+  </div>
+</div>

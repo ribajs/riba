@@ -137,6 +137,7 @@
     "@ribajs/nest-theme": "portal:backend/nest-theme"
   },
   "dependencies": {
+    "@popperjs/core": "^2.8.4",
     "glob": "^7.1.6",
     "pug": "^3.0.0"
   }

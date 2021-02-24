@@ -1,0 +1,121 @@
+$tagged-image-tag-full-size: 40px !default;
+$tagged-image-tag-small-size: $tagged-image-tag-full-size / 4 !default;
+$tagged-image-tag-color: #23de00 !default;
+$tagged-image-border-radius: 0 !default;
+
+
+bs4-tagged-image {
+  overflow: visible;
+  position: relative;
+  display: inline-block;
+  height: auto;
+
+  img {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    vertical-align: middle;
+  }
+  &.embed-responsive-item img {
+    object-fit: cover;
+  }
+  &.fit-contain img {
+    object-fit: contain !important;
+  }
+  &.fit-cover img {
+    object-fit: cover !important;
+  }
+  &.fit-initial img {
+    object-fit: initial !important;
+  }
+  &.fit-fill img {
+    object-fit: fill !important;
+  }
+  &.fit-scale-down img {
+    object-fit: scale-down !important;
+  }
+  &.fit-none img {
+    object-fit: none !important;
+  }
+
+  tag {
+    --tag-color: #{$tagged-image-tag-color};
+    --tag-full-size: #{$tagged-image-tag-full-size};
+    --tag-small-size: #{$tagged-image-tag-small-size};
+    --tag-border-radius: 100%;
+    visibility: hidden;
+    box-sizing: border-box;
+    width: var(--tag-full-size);
+    height: var(--tag-full-size);
+
+    transform: translate(
+      calc(-0.5 * var(--tag-full-size)),
+      calc(-0.5 * var(--tag-full-size))
+    );
+
+    position: absolute;
+    cursor: pointer;
+    &::before {
+      z-index: 10;
+      visibility: visible;
+      content: '\200b'; // zero-width whitespace, just to fill it with emptiness
+      box-sizing: content-box;
+      width: 0;
+      height: 0;
+      border-radius: var(--tag-border-radius);
+      padding: calc(var(--tag-small-size) / 2);
+      background-color: var(--tag-color);
+      position: absolute;
+
+      transform: translate(
+        calc(calc(var(--tag-full-size) - var(--tag-small-size)) / 2),
+        calc(calc(var(--tag-full-size) - var(--tag-small-size)) / 2),
+      );
+
+      transition: all ease-in-out 0.1s;
+    }
+    &:hover, &.active {
+      &::before {
+        transform: translate(0, 0);
+        padding: calc(var(--tag-full-size) / 2);
+      }
+    }
+
+    /*
+     * The --tag-color, --tag-border-radius and other CSS custom properties are set as
+     * inline styles in the component template.
+     * This is a workaround, as long as CSS3 attr() is not supported by browsers (maybe until 2040)
+     * In CSS3 one could just do:
+     *   background-color: attr(tag-color);
+     */
+    &[color] {
+      &::before {
+        background-color: var(--tag-color);
+      }
+    }
+    // recognize bootstrap theme colors
+    @each $color, $value in $theme-colors {
+      &[color="#{$color}"] {
+        &::before {
+          background-color: theme-color($color);
+        }
+      }
+    }
+
+    // special shape cases for border-radius 0 or 100% (100% = circle is default in the component)
+    &[shape="circle"] {
+      &::before {
+        border-radius: 100%;
+      }
+    }
+    &[shape="square"] {
+      &::before {
+        border-radius: 0;
+      }
+    }
+
+  }
+}

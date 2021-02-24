@@ -1,0 +1,95 @@
+{
+  "name": "@ribajs/bs5",
+  "description": "Bootstrap 5 module for Riba.js",
+  "version": "2.0.0-alpha.0",
+  "author": "Pascal Garber <pascal@artandcode.studio>",
+  "contributors": [],
+  "url": "https://github.com/ribajs/riba/tree/master/packages/bs4",
+  "homepage": "https://ribajs.com/",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "source": "src/index.ts",
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/ribajs/riba/blob/master/LICENSE"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ribajs/riba.git"
+  },
+  "keywords": [
+    "Bootstrap",
+    "Twitter Bootstrap",
+    "Bootstrap 5",
+    "Twitter Bootstrap 5",
+    "Art+Code Studio",
+    "Riba",
+    "Rivets",
+    "tinybind",
+    "SPA",
+    "TypeScript",
+    "Browser"
+  ],
+  "scripts": {
+    "test": "yarn run clean && yarn run lint && jest --config=jest.config.js",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
+    "build": "npm run lint && npm run build:module",
+    "build:module": "tsc",
+    "clean": "rm -rf ./dist ./lib",
+    "packages:npm:link": "npm link @ribajs/core @ribajs/extras"
+  },
+  "files": [
+    "/src",
+    "/dist"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.13.0",
+    "@babel/core": "^7.13.1",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.13.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.13.0",
+    "@babel/plugin-syntax-export-default-from": "^7.12.13",
+    "@babel/plugin-transform-runtime": "^7.13.7",
+    "@babel/preset-env": "^7.13.5",
+    "@babel/preset-typescript": "^7.13.0",
+    "@babel/runtime": "^7.13.7",
+    "@babel/runtime-corejs3": "^7.13.7",
+    "@ribajs/eslint-config": "workspace:infra/eslint-config",
+    "@ribajs/tsconfig": "workspace:infra/tsconfig",
+    "@ribajs/types": "workspace:infra/types",
+    "@types/jest": "^26.0.20",
+    "@typescript-eslint/eslint-plugin": "^4.15.2",
+    "@typescript-eslint/parser": "^4.15.2",
+    "@yarnpkg/pnpify": "^2.4.0",
+    "babel-jest": "^26.6.3",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-array-includes": "^2.0.3",
+    "core-js": "^3.9.0",
+    "eslint": "^7.20.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "jest": "^26.6.3",
+    "jest-extended": "^0.11.5",
+    "prettier": "2.2.1",
+    "ts-jest": "^26.5.2",
+    "typescript": "^4.1.5",
+    "webpack": "^5.24.1",
+    "webpack-cli": "^4.5.0"
+  },
+  "dependencies": {
+    "@ribajs/cache": "workspace:packages/cache",
+    "@ribajs/core": "workspace:packages/core",
+    "@ribajs/events": "workspace:packages/events",
+    "@ribajs/extras": "workspace:packages/extras",
+    "@ribajs/utils": "workspace:packages/utils",
+    "@sphinxxxx/color-conversion": "^2.2.2",
+    "@types/bootstrap": "^5.0.5",
+    "bootstrap": "next"
+  },
+  "bugs": {
+    "url": "https://github.com/ribajs/riba/issues"
+  }
+}

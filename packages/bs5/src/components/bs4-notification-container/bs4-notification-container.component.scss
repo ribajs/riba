@@ -1,0 +1,26 @@
+.toast-item-container {
+  position: fixed;
+  z-index: $zindex-fixed;
+}
+
+$toast-container-spacing-x: 30px !default;
+$toast-container-spacing-y: 30px !default;
+
+.toast-container {
+  .absolute-left {
+    left: $toast-container-spacing-x;
+  }
+  .absolute-right {
+    right: $toast-container-spacing-x;
+  }
+  .absolute-top {
+    top: $toast-container-spacing-y;
+  }
+  .absolute-bottom {
+    bottom: $toast-container-spacing-y;
+  }
+  .absolute-center {
+    right: 50%;
+    transform: translate(50%, 0);
+  }
+}

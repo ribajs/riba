@@ -1,0 +1,10 @@
+<div class="accordion">
+  <div class="card" rv-each-item="items">
+    <button type="button" class="btn btn-link card-header d-flex" rv-on-click="toggle | args item %item%" rv-aria-expanded="item.show">
+      <span class="card-header-text mr-auto " rv-html="item.title"></span> <bs4-icon class="ml-auto" rv-show="collapseIconSrc" rv-src="collapseIconSrc" rv-size="collapseIconSize" rv-direction="item.iconDirection"></bs4-icon>
+    </button>
+    <div class="collapse" rv-data-index="%item%">
+      <div class="card-body" rv-template="item.content"></div>
+    </div>
+  </div>
+</div>

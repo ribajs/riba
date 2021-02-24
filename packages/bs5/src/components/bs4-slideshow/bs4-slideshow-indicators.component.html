@@ -1,0 +1,6 @@
+<ol rv-if="indicators" class="slideshow-indicators" rv-add-class="indicatorsPositionClass">
+  <li rv-each-slide="items" rv-class-active="slide.active" rv-on-click="goTo | args slide.index">
+    <bs4-icon rv-hide="slide.active" rv-src="indicatorInactiveIconSrc" size="16"></bs4-icon>
+    <bs4-icon rv-show="slide.active" rv-src="indicatorActiveIconSrc" size="16"></bs4-icon>
+  </li>
+</ol>

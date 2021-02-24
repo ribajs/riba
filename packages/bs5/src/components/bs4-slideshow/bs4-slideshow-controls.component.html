@@ -1,0 +1,10 @@
+<button rv-show="controls" class="btn btn-link slideshow-controls slideshow-control-prev" rv-add-class="controlsPositionClass" role="button" data-slide="prev" rv-on-click="prev">
+  <bs4-icon rv-if="controlPrevIconSrc" rv-src="controlPrevIconSrc" direction="left" size="24"></bs4-icon>
+  <span rv-hide="controlPrevIconSrc" class="btn btn-link slideshow-control-fallback-prev-icon" aria-hidden="true"></span>
+  <span class="sr-only">Previous</span>
+</button>
+<button rv-show="controls" class="btn btn-link slideshow-controls slideshow-control-next" rv-add-class="controlsPositionClass" role="button" data-slide="next" rv-on-click="next">
+  <bs4-icon rv-if="controlNextIconSrc" rv-src="controlNextIconSrc" direction="right" size="24"></bs4-icon>
+  <span rv-hide="controlNextIconSrc" class="slideshow-control-fallback-next-icon" aria-hidden="true"></span>
+  <span class="sr-only">Next</span>
+</button>
