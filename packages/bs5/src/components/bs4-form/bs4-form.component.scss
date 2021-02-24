@@ -5,9 +5,9 @@
 }
 
 @keyframes invalid-flashing-label {
-  0%   { color: $custom-control-label-color; }
+  0%   { color: $form-label-color; }
   50% { color: $form-feedback-invalid-color; }
-  100% { color: $custom-control-label-color; }
+  100% { color: $form-label-color; }
 }
 
 // Example on https://hypnosezentrum-cux.de/kontakt/fragebogen

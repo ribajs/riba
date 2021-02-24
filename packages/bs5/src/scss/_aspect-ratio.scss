@@ -1,118 +1,16 @@
 /*
- * ASPECT RATIO for images and background images
- *
- * @see https://jumplink.eu/blog/post/onlineshop-immer-einheitlich-grosse-produktbilder
- * @see http://www.mademyday.de/css-height-equals-width-with-pure-css.html
- * @info See link and description
- * @info See snippets/product-grid-item and for example usage
+ * ASPECT RATIO
  */
 
-/**
- * ASPECT RATIO size for background images
- * To migrate to the new classnames which are more based on those of bootstrap replace the following name styles:
- *
- * - ".background-box" with ".embed-responsive-bg"
- * - ".ratio-md-4-3" with ".embed-responsive-bg-md-4by3"
- *
- */
-.embed-responsive-bg {
-  width: 100%;
-  display: block;
-  background-repeat: no-repeat;
-  background-position: center center;
-
-  // default fit is cover
-  background-size: cover;
-  
-  // default aspect ratio is 1:1
-  padding-top: 100%; 
-
-  &.fit-cover {
-    background-size: cover !important;
-  }
-  &.fit-contain {
-    background-size: contain !important;
-  }
-
-  &.position-center-center {
-    background-position: center center;
-  }
-  &.position-center-bottom {
-    background-position: center bottom;
-  }
-  &.position-center-top {
-    background-position: center top ;
-  }
-  &.position-bottom-center {
-    background-position: bottom center;
-  }
-  &.position-top-center {
-    background-position: top center;
-  }
-}
 
 @each $breakpoint in map-keys($grid-breakpoints) {
   $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-  @each $embed-responsive-aspect-ratio in $embed-responsive-aspect-ratios {
-    $embed-responsive-aspect-ratio-x: nth($embed-responsive-aspect-ratio, 1);
-    $embed-responsive-aspect-ratio-y: nth($embed-responsive-aspect-ratio, 2);
+  @each $key, $ratio in $aspect-ratios {
     @include media-breakpoint-up($breakpoint) {
-      // TODO TESTME
-      .embed-responsive-bg#{$infix}-#{$embed-responsive-aspect-ratio-x}by#{$embed-responsive-aspect-ratio-y} {
-        padding-top: percentage($embed-responsive-aspect-ratio-y / $embed-responsive-aspect-ratio-x);
+      .ratio-#{$infix}-#{$key} {
+        --#{$variable-prefix}aspect-ratio: #{$ratio};
       }
     }
   }
 }
 
-/**
- * ASPECT RATIO size for objects like iframes, videos, img, etc
- * To migrate to the new classnames which are more based on those of bootstrap replace the following name styles:
- *
- * - `.content-box` with `.embed-responsive`,
- * - `.content` with `.embed-responsive-item` and
- * - `.ratio-md-4-3` with `.embed-responsive-md-4by3`
- *
- * see https://getbootstrap.com/docs/4.4/utilities/embed/#about
- */
-.embed-responsive {
-  .embed-responsive-item {
-    // default fit is cover
-    object-fit: cover;
-    // Fix for vimeo videos in safari
-    &iframe {
-      object-fit: initial !important;
-    }
-
-    &.fit-cover {
-      object-fit: cover !important;
-    }
-
-    &.fit-contain {
-      object-fit: contain !important;
-    }
-  
-    &.fit-initial {
-      object-fit: initial !important;
-    }
-  }
-}
-
-@each $breakpoint in map-keys($grid-breakpoints) {
-  $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-  @each $embed-responsive-aspect-ratio in $embed-responsive-aspect-ratios {
-    $embed-responsive-aspect-ratio-x: nth($embed-responsive-aspect-ratio, 1);
-    $embed-responsive-aspect-ratio-y: nth($embed-responsive-aspect-ratio, 2);
-    @include media-breakpoint-up($breakpoint) {
-      .embed-responsive#{$infix}-#{$embed-responsive-aspect-ratio-x}by#{$embed-responsive-aspect-ratio-y} {
-        &::before {
-          padding-top: percentage($embed-responsive-aspect-ratio-y / $embed-responsive-aspect-ratio-x);
-        }
-      }
-    }
-  }
-}
-
-.embed-responsive-100vh {
-    padding-top: 100vh
-}

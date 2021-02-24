@@ -2646,6 +2646,53 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@ribajs/bs5@portal:packages/bs5::locator=ribajs%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/bs5@portal:packages/bs5::locator=ribajs%40workspace%3A."
+  dependencies:
+    "@babel/cli": ^7.13.0
+    "@babel/core": ^7.13.1
+    "@babel/plugin-proposal-class-properties": ^7.13.0
+    "@babel/plugin-proposal-object-rest-spread": ^7.13.0
+    "@babel/plugin-proposal-optional-chaining": ^7.13.0
+    "@babel/plugin-syntax-export-default-from": ^7.12.13
+    "@babel/plugin-transform-runtime": ^7.13.7
+    "@babel/preset-env": ^7.13.5
+    "@babel/preset-typescript": ^7.13.0
+    "@babel/runtime": ^7.13.7
+    "@babel/runtime-corejs3": ^7.13.7
+    "@ribajs/cache": "workspace:packages/cache"
+    "@ribajs/core": "workspace:packages/core"
+    "@ribajs/eslint-config": "workspace:infra/eslint-config"
+    "@ribajs/events": "workspace:packages/events"
+    "@ribajs/extras": "workspace:packages/extras"
+    "@ribajs/tsconfig": "workspace:infra/tsconfig"
+    "@ribajs/types": "workspace:infra/types"
+    "@ribajs/utils": "workspace:packages/utils"
+    "@sphinxxxx/color-conversion": ^2.2.2
+    "@types/bootstrap": ^5.0.5
+    "@types/jest": ^26.0.20
+    "@typescript-eslint/eslint-plugin": ^4.15.2
+    "@typescript-eslint/parser": ^4.15.2
+    "@yarnpkg/pnpify": ^2.4.0
+    babel-jest: ^26.6.3
+    babel-loader: ^8.2.2
+    babel-plugin-array-includes: ^2.0.3
+    bootstrap: next
+    core-js: ^3.9.0
+    eslint: ^7.20.0
+    eslint-config-prettier: ^7.2.0
+    eslint-plugin-prettier: ^3.3.1
+    jest: ^26.6.3
+    jest-extended: ^0.11.5
+    prettier: 2.2.1
+    ts-jest: ^26.5.2
+    typescript: ^4.1.5
+    webpack: ^5.24.1
+    webpack-cli: ^4.5.0
+  languageName: node
+  linkType: soft
+
 "@ribajs/bs5@workspace:packages/bs5":
   version: 0.0.0-use.local
   resolution: "@ribajs/bs5@workspace:packages/bs5"
@@ -2731,18 +2778,46 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/content-slider@npm:*":
-  version: 1.9.0
-  resolution: "@ribajs/content-slider@npm:1.9.0"
+"@ribajs/content-slider@portal:packages/content-slider::locator=ribajs%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/content-slider@portal:packages/content-slider::locator=ribajs%40workspace%3A."
   dependencies:
-    "@ribajs/bs4": 1.9.0
-    "@ribajs/core": 1.9.0
-    "@ribajs/extras": 1.9.0
-    "@ribajs/utils": 1.9.0
+    "@babel/cli": ^7.13.0
+    "@babel/core": ^7.13.1
+    "@babel/plugin-proposal-class-properties": ^7.13.0
+    "@babel/plugin-proposal-export-default-from": ^7.12.13
+    "@babel/plugin-proposal-object-rest-spread": ^7.13.0
+    "@babel/plugin-syntax-dynamic-import": ^7.8.3
+    "@babel/plugin-transform-runtime": ^7.13.7
+    "@babel/preset-env": ^7.13.5
+    "@babel/preset-typescript": ^7.13.0
+    "@babel/runtime": ^7.13.7
+    "@babel/runtime-corejs3": ^7.13.7
+    "@ribajs/bs4": "workspace:packages/bs4"
+    "@ribajs/core": "workspace:packages/core"
+    "@ribajs/eslint-config": "workspace:infra/eslint-config"
+    "@ribajs/extras": "workspace:packages/extras"
+    "@ribajs/tsconfig": "workspace:infra/tsconfig"
+    "@ribajs/utils": "workspace:packages/utils"
+    "@types/jest": ^26.0.20
+    "@typescript-eslint/eslint-plugin": ^4.15.2
+    "@typescript-eslint/parser": ^4.15.2
     "@yarnpkg/pnpify": ^2.4.0
-  checksum: 3d5679e8a9fe72fe6a05a18148fd7b02e7878f4cffb1a258477ce7b749e9b4f509107986c741f6cfad6e8fdaeef7a557279c7e0cc065f7a772a087145c255057
+    babel-loader: ^8.2.2
+    babel-plugin-array-includes: ^2.0.3
+    core-js: ^3.9.0
+    eslint: ^7.20.0
+    eslint-config-prettier: ^7.2.0
+    eslint-plugin-prettier: ^3.3.1
+    jest: ^26.6.3
+    jest-extended: ^0.11.5
+    prettier: 2.2.1
+    ts-jest: ^26.5.2
+    typescript: ^4.1.5
+    webpack: ^5.24.1
+    webpack-cli: ^4.5.0
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "@ribajs/content-slider@workspace:packages/content-slider":
   version: 0.0.0-use.local
@@ -3344,6 +3419,66 @@ __metadata:
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.3.8
     postcss: ^8.2.6
+    postcss-loader: ^5.0.0
+    postcss-modules: ^4.0.0
+    postcss-preset-env: ^6.7.0
+    prettier: 2.2.1
+    pug-loader: ^2.4.0
+    sass-loader: ^11.0.1
+    serve: ^11.3.2
+    typescript: ^4.1.5
+    webpack: ^5.24.1
+    webpack-cli: ^4.5.0
+    webpack-dev-server: ^3.11.2
+  languageName: unknown
+  linkType: soft
+
+"@ribajs/demo-bs5-slideshow@workspace:demos/bs5-slideshow":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/demo-bs5-slideshow@workspace:demos/bs5-slideshow"
+  dependencies:
+    "@babel/cli": ^7.13.0
+    "@babel/core": ^7.13.1
+    "@babel/plugin-proposal-class-properties": ^7.13.0
+    "@babel/plugin-proposal-export-default-from": ^7.12.13
+    "@babel/plugin-proposal-object-rest-spread": ^7.13.0
+    "@babel/plugin-proposal-optional-chaining": ^7.13.0
+    "@babel/plugin-syntax-export-default-from": ^7.12.13
+    "@babel/plugin-transform-runtime": ^7.13.7
+    "@babel/preset-env": ^7.13.5
+    "@babel/preset-typescript": ^7.13.0
+    "@babel/runtime": ^7.13.7
+    "@babel/runtime-corejs3": ^7.13.7
+    "@ribajs/bs5": "workspace:packages/bs5"
+    "@ribajs/core": "workspace:packages/core"
+    "@ribajs/eslint-config": "workspace:infra/eslint-config"
+    "@ribajs/extras": "workspace:packages/extras"
+    "@ribajs/iconset": "workspace:packages/iconset"
+    "@ribajs/tsconfig": "workspace:infra/tsconfig"
+    "@ribajs/utils": "workspace:packages/utils"
+    "@ribajs/webpack-config": "workspace:infra/webpack-config"
+    "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
+    "@types/jest": ^26.0.20
+    "@typescript-eslint/eslint-plugin": ^4.15.2
+    "@typescript-eslint/experimental-utils": ^4.15.2
+    "@typescript-eslint/parser": ^4.15.2
+    "@yarnpkg/pnpify": ^2.4.0
+    babel-jest: ^26.6.3
+    babel-loader: ^8.2.2
+    babel-plugin-array-includes: ^2.0.3
+    babelify: ^10.0.0
+    bootstrap: next
+    core-js: ^3.9.0
+    css-loader: ^5.0.2
+    dart-sass: ^1.25.0
+    eslint: ^7.20.0
+    eslint-config-prettier: ^7.2.0
+    eslint-plugin-prettier: ^3.3.1
+    html-loader: ^2.1.0
+    inspectpack: ^4.6.1
+    jest: ^26.6.3
+    jest-extended: ^0.11.5
+    mini-css-extract-plugin: ^1.3.8
     postcss-loader: ^5.0.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -4711,20 +4846,49 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/leaflet-map@npm:*":
-  version: 1.9.0
-  resolution: "@ribajs/leaflet-map@npm:1.9.0"
+"@ribajs/leaflet-map@portal:packages/leaflet-map::locator=ribajs%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/leaflet-map@portal:packages/leaflet-map::locator=ribajs%40workspace%3A."
   dependencies:
-    "@ribajs/bs4": 1.9.0
-    "@ribajs/core": 1.9.0
-    "@ribajs/extras": 1.9.0
-    "@ribajs/utils": 1.9.0
-    "@types/leaflet": ^1.5.19
+    "@babel/cli": ^7.13.0
+    "@babel/core": ^7.13.1
+    "@babel/plugin-proposal-class-properties": ^7.13.0
+    "@babel/plugin-proposal-export-default-from": ^7.12.13
+    "@babel/plugin-proposal-object-rest-spread": ^7.13.0
+    "@babel/plugin-syntax-dynamic-import": ^7.8.3
+    "@babel/plugin-transform-runtime": ^7.13.7
+    "@babel/preset-env": ^7.13.5
+    "@babel/preset-typescript": ^7.13.0
+    "@babel/runtime": ^7.13.7
+    "@babel/runtime-corejs3": ^7.13.7
+    "@ribajs/bs4": "workspace:packages/bs4"
+    "@ribajs/core": "workspace:packages/core"
+    "@ribajs/eslint-config": "workspace:infra/eslint-config"
+    "@ribajs/events": "workspace:packages/events"
+    "@ribajs/extras": "workspace:packages/extras"
+    "@ribajs/tsconfig": "workspace:infra/tsconfig"
+    "@ribajs/utils": "workspace:packages/utils"
+    "@types/jest": ^26.0.20
+    "@types/leaflet": ^1.5.23
+    "@typescript-eslint/eslint-plugin": ^4.15.2
+    "@typescript-eslint/parser": ^4.15.2
     "@yarnpkg/pnpify": ^2.4.0
+    babel-loader: ^8.2.2
+    babel-plugin-array-includes: ^2.0.3
+    core-js: ^3.9.0
+    eslint: ^7.20.0
+    eslint-config-prettier: ^7.2.0
+    eslint-plugin-prettier: ^3.3.1
+    jest: ^26.6.3
+    jest-extended: ^0.11.5
     leaflet: ^1.7.1
-  checksum: 3fa05c14250ba643ce50c42c9aa5b982aa091c5913ea20a088296e1710d91dafe4dfce33a120d7442b6fa850c74c7e0a5696d43ba8097f25799ca2e49b36ca68
+    prettier: 2.2.1
+    ts-jest: ^26.5.2
+    typescript: ^4.1.5
+    webpack: ^5.24.1
+    webpack-cli: ^4.5.0
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "@ribajs/leaflet-map@workspace:packages/leaflet-map":
   version: 0.0.0-use.local
@@ -5017,25 +5181,78 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@ribajs/npm-package@portal:infra/npm-package::locator=ribajs%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/npm-package@portal:infra/npm-package::locator=ribajs%40workspace%3A."
+  dependencies:
+    "@ribajs/bs4": "portal:packages/bs4"
+    "@ribajs/bs5": "portal:packages/bs5"
+    "@ribajs/content-slider": "portal:packages/content-slider"
+    "@ribajs/core": "portal:packages/core"
+    "@ribajs/i18n": "portal:packages/i18n"
+    "@ribajs/iconset": "portal:packages/iconset"
+    "@ribajs/leaflet-map": "portal:packages/leaflet-map"
+    "@ribajs/moment": "portal:packages/moment"
+    "@ribajs/octobercms": "portal:packages/octobercms"
+    "@ribajs/photoswipe": "portal:packages/photoswipe"
+    "@ribajs/shopify": "portal:packages/shopify"
+    "@ribajs/shopify-easdk": "portal:packages/shopify-easdk"
+    "@ribajs/shopify-tda": "portal:packages/shopify-tda"
+    leaflet: ^1.7.1
+  dependenciesMeta:
+    "@ribajs/bs4":
+      optional: true
+    "@ribajs/bs5":
+      optional: true
+    "@ribajs/content-slider":
+      optional: true
+    "@ribajs/core":
+      optional: true
+    "@ribajs/i18n":
+      optional: true
+    "@ribajs/iconset":
+      optional: true
+    "@ribajs/leaflet-map":
+      optional: true
+    "@ribajs/moment":
+      optional: true
+    "@ribajs/octobercms":
+      optional: true
+    "@ribajs/photoswipe":
+      optional: true
+    "@ribajs/shopify":
+      optional: true
+    "@ribajs/shopify-easdk":
+      optional: true
+    "@ribajs/shopify-tda":
+      optional: true
+    leaflet:
+      optional: true
+  languageName: node
+  linkType: soft
+
 "@ribajs/npm-package@workspace:infra/npm-package":
   version: 0.0.0-use.local
   resolution: "@ribajs/npm-package@workspace:infra/npm-package"
   dependencies:
-    "@ribajs/bs4": "*"
-    "@ribajs/content-slider": "*"
-    "@ribajs/core": "*"
-    "@ribajs/i18n": "*"
-    "@ribajs/iconset": "*"
-    "@ribajs/leaflet-map": "*"
-    "@ribajs/moment": "*"
-    "@ribajs/octobercms": "*"
-    "@ribajs/photoswipe": "*"
-    "@ribajs/shopify": "*"
-    "@ribajs/shopify-easdk": "*"
-    "@ribajs/shopify-tda": "*"
+    "@ribajs/bs4": "portal:packages/bs4"
+    "@ribajs/bs5": "portal:packages/bs5"
+    "@ribajs/content-slider": "portal:packages/content-slider"
+    "@ribajs/core": "portal:packages/core"
+    "@ribajs/i18n": "portal:packages/i18n"
+    "@ribajs/iconset": "portal:packages/iconset"
+    "@ribajs/leaflet-map": "portal:packages/leaflet-map"
+    "@ribajs/moment": "portal:packages/moment"
+    "@ribajs/octobercms": "portal:packages/octobercms"
+    "@ribajs/photoswipe": "portal:packages/photoswipe"
+    "@ribajs/shopify": "portal:packages/shopify"
+    "@ribajs/shopify-easdk": "portal:packages/shopify-easdk"
+    "@ribajs/shopify-tda": "portal:packages/shopify-tda"
     leaflet: ^1.7.1
   dependenciesMeta:
     "@ribajs/bs4":
+      optional: true
+    "@ribajs/bs5":
       optional: true
     "@ribajs/content-slider":
       optional: true
@@ -5064,18 +5281,56 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/octobercms@npm:*":
-  version: 1.9.0
-  resolution: "@ribajs/octobercms@npm:1.9.0"
+"@ribajs/octobercms@portal:packages/octobercms::locator=ribajs%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/octobercms@portal:packages/octobercms::locator=ribajs%40workspace%3A."
   dependencies:
-    "@ribajs/bs4": 1.9.0
-    "@ribajs/core": 1.9.0
-    "@ribajs/jquery": 1.9.0
-    "@ribajs/utils": 1.9.0
+    "@babel/cli": ^7.13.0
+    "@babel/core": ^7.13.1
+    "@babel/plugin-proposal-class-properties": ^7.13.0
+    "@babel/plugin-proposal-export-default-from": ^7.12.13
+    "@babel/plugin-proposal-object-rest-spread": ^7.13.0
+    "@babel/plugin-syntax-dynamic-import": ^7.8.3
+    "@babel/preset-env": ^7.13.5
+    "@babel/preset-typescript": ^7.13.0
+    "@babel/runtime": ^7.13.7
+    "@babel/runtime-corejs3": ^7.13.7
+    "@ribajs/bs4": "workspace:packages/bs4"
+    "@ribajs/core": "workspace:packages/core"
+    "@ribajs/eslint-config": "workspace:infra/eslint-config"
+    "@ribajs/jquery": "workspace:packages/jquery"
+    "@ribajs/tsconfig": "workspace:infra/tsconfig"
+    "@ribajs/utils": "workspace:packages/utils"
+    "@tsconfig/node14": ^1.0.0
+    "@types/gulp": ^4.0.8
+    "@types/hex-color-regex": ^1.1.0
+    "@types/jest": ^26.0.20
+    "@types/jquery": ^3.5.5
+    "@types/js-yaml": ^4.0.0
+    "@types/node": ^14.14.31
+    "@typescript-eslint/eslint-plugin": ^4.15.2
+    "@typescript-eslint/parser": ^4.15.2
     "@yarnpkg/pnpify": ^2.4.0
-  checksum: 6b809936021babb4b0366be9e7da4e9322597ba9a795bd06c04d734f28f111d1e18e02778a81a20b5dfc3078b3be19cd3728d11a3a315d3319dc6180712e0432
+    babel-loader: ^8.2.2
+    babel-plugin-array-includes: ^2.0.3
+    core-js: ^3.9.0
+    eslint: ^7.20.0
+    eslint-config-prettier: ^7.2.0
+    eslint-plugin-prettier: ^3.3.1
+    gulp: ^4.0.2
+    gulp-yaml-merge: ^2.0.0
+    hex-color-regex: ^1.1.0
+    jest: ^26.6.3
+    jest-extended: ^0.11.5
+    js-yaml: ^4.0.0
+    prettier: 2.2.1
+    rgb-regex: ^1.0.1
+    ts-jest: ^26.5.2
+    typescript: ^4.1.5
+    webpack: ^5.24.1
+    webpack-cli: ^4.5.0
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "@ribajs/octobercms@workspace:packages/octobercms":
   version: 0.0.0-use.local
@@ -5215,24 +5470,27 @@ __metadata:
   resolution: "@ribajs/postcss-config@workspace:infra/postcss-config"
   dependencies:
     "@fullhuman/postcss-purgecss": ^4.0.2
-    "@ribajs/bs4": "*"
-    "@ribajs/content-slider": "*"
-    "@ribajs/core": "*"
-    "@ribajs/i18n": "*"
-    "@ribajs/iconset": "*"
-    "@ribajs/leaflet-map": "*"
-    "@ribajs/moment": "*"
+    "@ribajs/bs4": "portal:packages/bs4"
+    "@ribajs/bs5": "portal:packages/bs5"
+    "@ribajs/content-slider": "portal:packages/content-slider"
+    "@ribajs/core": "portal:packages/core"
+    "@ribajs/i18n": "portal:packages/i18n"
+    "@ribajs/iconset": "portal:packages/iconset"
+    "@ribajs/leaflet-map": "portal:packages/leaflet-map"
+    "@ribajs/moment": "portal:packages/moment"
     "@ribajs/npm-package": "workspace:infra/npm-package"
-    "@ribajs/octobercms": "*"
-    "@ribajs/photoswipe": "*"
-    "@ribajs/shopify": "*"
-    "@ribajs/shopify-easdk": "*"
-    "@ribajs/shopify-tda": "*"
+    "@ribajs/octobercms": "portal:packages/octobercms"
+    "@ribajs/photoswipe": "portal:packages/photoswipe"
+    "@ribajs/shopify": "portal:packages/shopify"
+    "@ribajs/shopify-easdk": "portal:packages/shopify-easdk"
+    "@ribajs/shopify-tda": "portal:packages/shopify-tda"
     leaflet: ^1.7.1
     postcss: ^8.2.6
     postcss-preset-env: ^6.7.0
   dependenciesMeta:
     "@ribajs/bs4":
+      optional: true
+    "@ribajs/bs5":
       optional: true
     "@ribajs/content-slider":
       optional: true
@@ -5813,21 +6071,22 @@ __metadata:
   dependencies:
     "@babel/core": ^7.13.1
     "@graphql-tools/webpack-loader": ^6.4.0
-    "@ribajs/bs4": "*"
-    "@ribajs/content-slider": "*"
-    "@ribajs/core": "*"
+    "@ribajs/bs4": "portal:packages/bs4"
+    "@ribajs/bs5": "portal:packages/bs5"
+    "@ribajs/content-slider": "portal:packages/content-slider"
+    "@ribajs/core": "portal:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
-    "@ribajs/i18n": "*"
-    "@ribajs/iconset": "*"
-    "@ribajs/leaflet-map": "*"
-    "@ribajs/moment": "*"
+    "@ribajs/i18n": "portal:packages/i18n"
+    "@ribajs/iconset": "portal:packages/iconset"
+    "@ribajs/leaflet-map": "portal:packages/leaflet-map"
+    "@ribajs/moment": "portal:packages/moment"
     "@ribajs/npm-package": "workspace:infra/npm-package"
-    "@ribajs/octobercms": "*"
-    "@ribajs/photoswipe": "*"
+    "@ribajs/octobercms": "portal:packages/octobercms"
+    "@ribajs/photoswipe": "portal:packages/photoswipe"
     "@ribajs/postcss-config": "workspace:infra/postcss-config"
-    "@ribajs/shopify": "*"
-    "@ribajs/shopify-easdk": "*"
-    "@ribajs/shopify-tda": "*"
+    "@ribajs/shopify": "portal:packages/shopify"
+    "@ribajs/shopify-easdk": "portal:packages/shopify-easdk"
+    "@ribajs/shopify-tda": "portal:packages/shopify-tda"
     "@yarnpkg/pnpify": ^2.4.0
     babel-loader: ^8.2.2
     copy-webpack-plugin: ^7.0.0
@@ -5872,6 +6131,8 @@ __metadata:
     webpack: ^5.3.2
   dependenciesMeta:
     "@ribajs/bs4":
+      optional: true
+    "@ribajs/bs5":
       optional: true
     "@ribajs/content-slider":
       optional: true
@@ -5906,21 +6167,22 @@ __metadata:
   dependencies:
     "@babel/core": ^7.13.1
     "@graphql-tools/webpack-loader": ^6.4.0
-    "@ribajs/bs4": "*"
-    "@ribajs/content-slider": "*"
-    "@ribajs/core": "*"
+    "@ribajs/bs4": "portal:packages/bs4"
+    "@ribajs/bs5": "portal:packages/bs5"
+    "@ribajs/content-slider": "portal:packages/content-slider"
+    "@ribajs/core": "portal:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
-    "@ribajs/i18n": "*"
-    "@ribajs/iconset": "*"
-    "@ribajs/leaflet-map": "*"
-    "@ribajs/moment": "*"
+    "@ribajs/i18n": "portal:packages/i18n"
+    "@ribajs/iconset": "portal:packages/iconset"
+    "@ribajs/leaflet-map": "portal:packages/leaflet-map"
+    "@ribajs/moment": "portal:packages/moment"
     "@ribajs/npm-package": "workspace:infra/npm-package"
-    "@ribajs/octobercms": "*"
-    "@ribajs/photoswipe": "*"
+    "@ribajs/octobercms": "portal:packages/octobercms"
+    "@ribajs/photoswipe": "portal:packages/photoswipe"
     "@ribajs/postcss-config": "workspace:infra/postcss-config"
-    "@ribajs/shopify": "*"
-    "@ribajs/shopify-easdk": "*"
-    "@ribajs/shopify-tda": "*"
+    "@ribajs/shopify": "portal:packages/shopify"
+    "@ribajs/shopify-easdk": "portal:packages/shopify-easdk"
+    "@ribajs/shopify-tda": "portal:packages/shopify-tda"
     "@yarnpkg/pnpify": ^2.4.0
     babel-loader: ^8.2.2
     copy-webpack-plugin: ^7.0.0
@@ -5965,6 +6227,8 @@ __metadata:
     webpack: ^5.3.2
   dependenciesMeta:
     "@ribajs/bs4":
+      optional: true
+    "@ribajs/bs5":
       optional: true
     "@ribajs/content-slider":
       optional: true
@@ -6622,15 +6886,6 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: 3aaf557d5b82e733d5a17b7f55af5d6be953363c3a594f006d64265790fe87c301c6e1400c0b6b1cf72add50a0ceddc25afb8231ab8302a2e5b6ebfbfac30e5d
-  languageName: node
-  linkType: hard
-
-"@types/leaflet@npm:^1.5.19":
-  version: 1.5.21
-  resolution: "@types/leaflet@npm:1.5.21"
-  dependencies:
-    "@types/geojson": "*"
-  checksum: 414fd1e228285439c60e216eb9667671c68c507bd86a27cdf9fecbcef5a10b4f9331b40276ea4583ab6803844398f38f4fb8fb23b2d5cf6e7bedbbae67e35670
   languageName: node
   linkType: hard
 

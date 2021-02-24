@@ -25,6 +25,7 @@ const isAvailable = (moduleName) => {
 
 const ribaPackages = [
   "@ribajs/bs4",
+  "@ribajs/bs5",
   "@ribajs/content-slider",
   "@ribajs/core",
   "@ribajs/i18n",

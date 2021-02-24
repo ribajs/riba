@@ -60,6 +60,9 @@ module.exports = (options) => {
     /x-placement$/, // x-placement attribute for dropdown placements
     /bs-popover-.*$/, // Popover position
 
+    /rotate-.*$/, // bs5-icon
+    /size-*$/, // bs5-icon
+
     // Leaflet
     /^leaflet.*/,
 

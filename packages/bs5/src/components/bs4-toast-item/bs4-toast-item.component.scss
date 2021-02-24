@@ -13,27 +13,27 @@
 }
 
 $toast-min-width:                   250px;
-$toast-border-level:                $alert-border-level !default; // default is -9
+$toast-border-scale:                $alert-border-scale !default; // default is -9
 $toast-opacity:                     0.6 !default;
 
-$toast-body-bg-level:               $alert-bg-level !default; // default is -10
-$toast-body-color-level:            $alert-color-level !default; // default is 6
+$toast-body-bg-scale:               $alert-bg-scale !default; // default is -10
+$toast-body-color-scale:            $alert-color-scale !default; // default is 6
 
-$toast-header-bg-level:             $alert-bg-level + 2 !default;
-$toast-header-color-level:          $alert-color-level +2 !default;
+$toast-header-bg-scale:             $alert-bg-scale + 2 !default;
+$toast-header-color-scale:          $alert-color-scale +2 !default;
 
 .toast {
   min-width: $toast-min-width;
-  @each $color, $value in $theme-colors {
-    &.toast-#{$color} {
+  @each $state, $value in $theme-colors {
+    &.toast-#{$state} {
       
-      $toast-border-color: theme-color-level($color, $toast-border-level);
+      $toast-border-color: shift-color($value, $toast-border-scale);
 
-      $toast-body-bg: rgba(theme-color-level($color, $toast-body-bg-level), $toast-opacity);
-      $toast-body-color: theme-color-level($color, $toast-body-color-level);
+      $toast-body-bg: rgba(shift-color($value, $toast-body-bg-scale), $toast-opacity);
+      $toast-body-color: shift-color($value, $toast-body-color-scale);
 
-      $toast-header-bg: rgba(theme-color-level($color, $toast-header-bg-level), $toast-opacity);
-      $toast-header-color: theme-color-level($color, $toast-header-color-level);
+      $toast-header-bg: rgba(shift-color($value, $toast-header-bg-scale), $toast-opacity);
+      $toast-header-color: shift-color($value, $toast-header-color-scale);
 
       @include toast-variant($toast-body-bg, $toast-border-color, $toast-body-color);
       .toast-header {

@@ -18,7 +18,7 @@
 
 /**
  * Remove Autocomplete styles in Chrome
- * with a trick that the autofill chrome default backgound-color is set after 5000 seconds
+ * with a trick that the autofill chrome default background-color is set after 5000 seconds
  * (Also working with transparent background colors)
  */
  @mixin autofill($color) {
@@ -77,7 +77,7 @@
 }
 
 /**
- * Customization on bootstaps default form-control
+ * Customization on bootstrap`s default form-control
  */
 .form-control {
   @include autofill($input-color);
@@ -95,77 +95,28 @@
 }
 
 /**
- * Custom select colors
- */
-@each $color, $value in $theme-colors {
-  .custom-select.custom-select-#{$color} {
-    color: $value;
-    &::placeholder {
-      color: rgba($value, .7);
-    }
-    @include autofill($value);
-  }
-}
-
-/**
- * Customization on bootstaps default custom-select
- */
- .custom-select {
-  @include autofill($input-color);
-
-  /**
-   * Input without borders
-   */
-  &.custom-select-text {
-    border: none;
-    padding: 0;
-    height: auto
-  }
-}
-
-/**
  * Custom switch colors
  */
  @each $color, $value in $theme-colors {
-  .custom-switch.custom-switch-#{$color} {
+  .form-switch.form-switch-#{$color} {
     // Inactive
-    .custom-control-label {  
-      &::before {
-        border-color: $value;
-      }
-      &::after {
-        background-color: $value;
-      }
+    .form-check-label {  
+      background-color: $value;
     }
 
     // Inactive and disabled
-    .custom-control-input:disabled {
-      &::before {
-        border-color: rgba( $value, .7);
-      }
-      &::after {
-        background-color: rgba( $value, .7);
-      }
+    .form-check-input:disabled {
+      background-color: rgba( $value, .7);
     }
 
     // Active
-    .custom-control-input:checked ~ .custom-control-label {
-      &::before {
-        background-color: $value;
-      }
-      &::after {
-        background-color: $custom-control-indicator-bg;
-      }
+    .form-check-input:checked {
+      background-color: $value;
     }
 
     // Active and disabled
-    .custom-control-input:checked:disabled ~ .custom-control-label {
-      &::before {
-        background-color: rgba( $value, .7);
-      }
-      &::after {
-        background-color: rgba( $custom-control-indicator-bg, .7)
-      }
+    .form-check-input:checked:disabled {
+      background-color: rgba( $value, .7);
     }
 
   }

@@ -114,6 +114,10 @@
     "@types/express-serve-static-core": "latest",
     "@types/node": "latest",
     "@ribajs/bs4": "portal:packages/bs4",
+    "@ribajs/bs5": "portal:packages/bs5",
+    "@ribajs/content-slider": "portal:packages/content-slider",
+    "@ribajs/octobercms": "portal:packages/octobercms",
+    "@ribajs/leaflet-map": "portal:packages/leaflet-map",
     "@ribajs/cache": "portal:packages/cache",
     "@ribajs/core": "portal:packages/core",
     "@ribajs/extras": "portal:packages/extras",
@@ -134,7 +138,8 @@
     "@ribajs/types": "portal:infra/types",
     "@ribajs/webpack-config": "portal:infra/webpack-config",
     "@ribajs/tsconfig": "portal:infra/tsconfig",
-    "@ribajs/nest-theme": "portal:backend/nest-theme"
+    "@ribajs/nest-theme": "portal:backend/nest-theme",
+    "@ribajs/npm-package": "portal:infra/npm-package"
   },
   "dependencies": {
     "@popperjs/core": "^2.8.4",

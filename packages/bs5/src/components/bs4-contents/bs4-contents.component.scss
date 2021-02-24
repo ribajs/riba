@@ -1,9 +1,9 @@
 bs4-contents {
   display: block;
   ul.list-contents {
-    @extend .pl-2;
+    @extend .ps-2;
     &.list-contents-level-1 {
-      @extend .pl-0;
+      @extend .ps-0;
     }
   }
 }

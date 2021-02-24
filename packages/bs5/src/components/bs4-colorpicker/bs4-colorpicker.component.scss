@@ -155,7 +155,7 @@ bs4-colorpicker {
   .picker_sample {
     order: 1;
     flex: 1 1 auto;
-    @include button-size(0, 0, $btn-font-size, $btn-line-height, $btn-border-radius);
+    @include button-size(0, 0, $btn-font-size, $btn-border-radius);
     &::before {
       content: '';
       border-radius: $border-radius;
