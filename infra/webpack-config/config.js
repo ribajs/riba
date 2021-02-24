@@ -50,10 +50,13 @@ module.exports.getConfig = (config = {}, env = {}) => {
     },
     // image templates and other assets
     {
-      test: /\.(png|jpe?g|gif|ttf)$/i,
+      test: /\.(png|jpe?g|gif|ttf|svg)$/i,
       use: [
         {
           loader: config.fileLoaderPath,
+          options: {
+            // TODO publicPath function e.g. to resolve iconset`s and fonts for monaco editor? 
+          }
         },
       ],
     },

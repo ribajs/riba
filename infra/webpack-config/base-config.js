@@ -110,22 +110,33 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
     config.forkTsCheckerConfig = config.forkTsCheckerConfig || {};
     // Disable eslint with config.forkTsCheckerConfig.eslint = false;
     if (typeof config.forkTsCheckerConfig.eslint === "undefined") {
-      const eslintConfig = findFile(rootPath, [
+      const eslintConfigPath = findFile(rootPath, [
         ".eslintrc.js",
         "../.eslintrc.js",
         "../../.eslintrc.js",
       ]);
 
-      if (eslintConfig) {
+      const eslintConfig = {
+        files: config.tsSourceDir + "/**/*.{ts,tsx,js,jsx}",
+        options: {}
+      }
+
+      if (eslintConfigPath) {
         logger.debug(
           "Enable ESLint because a eslint config file was found in " +
-            eslintConfig
+            eslintConfigPath
         );
-        // TODO set src path in config
-        config.forkTsCheckerConfig.eslint = {
-          files: config.tsSourceDir + "/**/*.{ts,tsx,js,jsx}",
-        };
+        eslintConfig.options = require(eslintConfigPath);
+      } else {
+        logger.debug(
+          "Use default Riba ESLint config" +
+            postcssConfigPath
+        );
+        eslintConfig.options = require("@ribajs/eslint-config");
       }
+
+      config.forkTsCheckerConfig.eslint = eslintConfig;
+
     }
   }
 
@@ -143,6 +154,12 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
           postcssConfigPath
       );
       config.postcssOptions = require(postcssConfigPath);
+    } else {
+      logger.debug(
+        "Use default Riba PostCSS config" +
+          postcssConfigPath
+      );
+      config.postcssOptions = require("@ribajs/postcss-config")({env: env});
     }
   }
 
@@ -372,6 +389,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
         port: 8080,
         host: "0.0.0.0",
         contentBase: [resolve(rootPath, "src"), config.distPath],
+        // publicPath: '/dist', // TODO webpack output is served from undefined
         hot: true,
         inline: true,
       };
