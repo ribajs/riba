@@ -50,6 +50,6 @@
     "@ribajs/shopify": "*",
     "@ribajs/shopify-easdk": "*",
     "@ribajs/shopify-tda": "*",
-    "leaflet": "*"
+    "leaflet": "^1.7.1"
   }
 }
