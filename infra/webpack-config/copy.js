@@ -52,7 +52,7 @@ const getCopyPluginConfigForIconsetRibaModule = (config, moduleName) => {
     const moduleConfig = {
       from: path.resolve(
         modulePath,
-        "svg/*.svg"
+        "dist/svg/*.svg"
       ),
       to: path.resolve(rootPath, config.copyAssets.foldername, `iconset`),
       toType: "dir",
