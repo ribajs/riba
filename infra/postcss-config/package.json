@@ -1,0 +1,61 @@
+{
+  "name": "@ribajs/postcss-config",
+  "description": "Default PostCSS configuration for Riba.js projects",
+  "version": "2.0.0-alpha.0",
+  "author": "Pascal Garber <pascal@artandcode.studio>",
+  "contributors": [],
+  "url": "https://github.com/ribajs/riba/tree/master/infra/eslint",
+  "main": "postcss.config.js",
+  "module": "postcss.config.js",
+  "source": "postcss.config.js",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "postcss.config.js"
+  ],
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/ribajs/riba/blob/master/LICENSE"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ribajs/riba.git"
+  },
+  "keywords": [
+    "Art+Code Studio",
+    "Riba",
+    "postcss",
+    "postcss-config",
+    "postcss-plugin",
+    "purgecss"
+  ],
+  "scripts": {},
+  "bugs": {
+    "url": "https://github.com/ribajs/riba/issues"
+  },
+  "homepage": "https://github.com/ribajs/riba#readme",
+  "dependencies": {
+    "@fullhuman/postcss-purgecss": "^4.0.2",
+    "@ribajs/npm-package": "workspace:infra/npm-package",
+    "postcss": "^8.2.6",
+    "postcss-preset-env": "^6.7.0"
+  },
+  "optionalDependencies": {
+    "@ribajs/bs4": "*",
+    "@ribajs/content-slider": "*",
+    "@ribajs/core": "*",
+    "@ribajs/i18n": "*",
+    "@ribajs/iconset": "*",
+    "@ribajs/leaflet-map": "*",
+    "@ribajs/moment": "*",
+    "@ribajs/octobercms": "*",
+    "@ribajs/photoswipe": "*",
+    "@ribajs/shopify": "*",
+    "@ribajs/shopify-easdk": "*",
+    "@ribajs/shopify-tda": "*",
+    "leaflet": "*"
+  }
+}
