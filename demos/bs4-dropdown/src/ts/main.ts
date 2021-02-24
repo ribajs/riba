@@ -11,3 +11,5 @@ riba.module.regist(bs4Module);
 riba.module.regist(Bs4DropdownModule);
 
 riba.bind(document.body, model);
+
+console.log("bound");

@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "build": "webpack --progress --color --env production",
-    "build:dev": "npm run lint && webpack --progress --color --env development",
+    "build:dev": "webpack --progress --color --env development",
     "start": "webpack serve --progress --color --env development",
     "start:prod": "webpack serve --env production",
     "clear": "rm -rf ./dist",

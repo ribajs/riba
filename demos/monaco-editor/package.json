@@ -6,8 +6,10 @@
   "private": true,
   "scripts": {
     "build": "webpack --progress --color --env production",
-    "build:dev": "npm run lint && webpack --progress --color --env development",
-    "start": "webpack-serve",
+    "build:dev": "webpack --progress --color --env development",
+    "start": "webpack-serve --env production",
+    "start:dev": "webpack-serve --env development",
+    "serve": "serve dist",
     "clear": "rm -rf ./dist",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
     "test": "jest"

@@ -7,7 +7,9 @@
   "scripts": {
     "build": "webpack --progress --color --env production",
     "build:dev": "npm run lint && webpack --env.development",
-    "start": "npm run lint && webpack-serve",
+    "start": "webpack-serve --env production",
+    "start:dev": "webpack-serve --env development",
+    "serve": "serve dist",
     "clear": "rm -rf ./dist",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx && tsc --noEmit",
     "test": "jest",
@@ -52,6 +54,7 @@
     "postcss-modules": "^4.0.0",
     "postcss-preset-env": "^6.7.0",
     "sass-loader": "^11.0.1",
+    "serve": "^11.3.2",
     "terser-webpack-plugin": "^5.1.1",
     "ts-jest": "^26.5.1",
     "typescript": "^4.1.5",

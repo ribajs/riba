@@ -1,4 +1,2 @@
 /* eslint-disable no-undef */
-module.exports = {
-  plugins: [require("postcss-preset-env")],
-};
+module.exports = require("@ribajs/postcss-config")({});

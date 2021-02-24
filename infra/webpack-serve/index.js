@@ -7,24 +7,31 @@ const WDS = require("webpack-dev-server");
 const pkgDir = require("pkg-dir");
 const getPort = require("get-port");
 const rootPath = pkgDir.sync(process.cwd());
+const yargs = require('yargs/yargs')
+const { hideBin } = require('yargs/helpers')
+const argv = yargs(hideBin(process.argv)).argv
+
+console.log("argv", argv.env);
+
+const env = {
+  production: argv.env === 'production',
+  development: argv.env === 'development',
+}
 
 const start = async () => {
   let webpackConfig;
   try {
     const webpackPath = path.resolve(rootPath, "webpack.config.js");
     webpackConfig = await require(webpackPath)({
-      production: false,
-      development: true,
+      production: env.production,
+      development: env.development,
     });
     console.debug("Use webpack config from " + webpackPath);
   } catch (error) {
     console.warn(error);
     webpackConfig = await require("@ribajs/webpack-config")({
       template: "local",
-    })({
-      production: false,
-      development: true,
-    });
+    })(env);
     console.debug("Use default webpack config from @ribajs/webpack-config");
   }
 

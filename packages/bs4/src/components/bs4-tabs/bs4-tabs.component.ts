@@ -373,6 +373,7 @@ export class Bs4TabsComponent extends TemplatesComponent {
         this.setHeight();
       }
     }, 500);
+    await super.afterBind();
   }
 
   protected template() {
