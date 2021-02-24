@@ -12,7 +12,6 @@ export abstract class PageComponent extends Component {
    * Overwrite / add tags in the html head like the page title
    *
    * TODO add support for more head tags
-   * TODO add support for set title in happy-dom: https://github.com/capricorn86/happy-dom/blob/master/packages/happy-dom/src/nodes/document/Document.ts
    */
   protected head: SsrHtmlHead = {};
 
@@ -27,14 +26,6 @@ export abstract class PageComponent extends Component {
       document.title = this.head.title;
     }
   }
-
-  // protected connectedCallback() {
-  //   super.connectedCallback();
-  // }
-
-  // protected disconnectedCallback() {
-  //   super.disconnectedCallback();
-  // }
 
   protected async beforeBind() {
     await super.beforeBind();

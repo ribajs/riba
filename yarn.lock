@@ -4921,7 +4921,6 @@ __metadata:
     express: ^4.17.1
     express-session: ^1.17.1
     find-root: ^1.1.0
-    happy-dom: ^2.7.0
     jest: ^26.6.3
     jsdom: ^16.4.0
     node-fetch: ^2.6.1
@@ -5786,7 +5785,7 @@ __metadata:
     html-loader: ^2.1.0
     html-webpack-plugin: ^5.2.0
     inspectpack: ^4.6.1
-    leaflet: "*"
+    leaflet: ^1.7.1
     mini-css-extract-plugin: ^1.3.8
     pkg-dir: ^5.0.0
     postcss: ^8.2.6
@@ -15691,7 +15690,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"leaflet@npm:*, leaflet@npm:^1.7.1":
+"leaflet@npm:^1.7.1":
   version: 1.7.1
   resolution: "leaflet@npm:1.7.1"
   checksum: 7a841174dc3c8e135a2ba9a81cdd8145ef4c00e516eb558281ea47b20499f94ddab58a76a72ee15104e0dce88a07ae91fe933cfab75b569c5ed0770497aa7d99

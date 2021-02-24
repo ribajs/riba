@@ -1,6 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { VirtualConsole, JSDOM } from 'jsdom';
-import { HappyDOMContext } from '@happy-dom/server-rendering';
 import { Script } from 'vm';
 import { ConfigService } from '@nestjs/config';
 import { TemplateVars } from './types/template-vars';
@@ -28,8 +27,6 @@ export class SsrService {
 
   isRenderEngineValid(engine: RenderEngine) {
     switch (engine) {
-      case 'happy-dom':
-        return true;
       case 'jsdom':
         return true;
       default:
@@ -212,76 +209,6 @@ export class SsrService {
     });
   }
 
-  /**
-   * Start ssr using happy-dom
-   * @see https://github.com/capricorn86/happy-dom
-   *
-   * @param layout
-   * @param componentTagName
-   * @param sharedContext Shared context injected to window object of the fake browser environment
-   */
-  async renderWithHappyDom(
-    layout: string,
-    componentTagName: string,
-    sharedContext: SharedContext,
-    scriptFilenames = ['main.bundle.js'],
-  ) {
-    const context = new HappyDOMContext();
-    const window = (context as any).window; // TODO window is private, make pr for this
-
-    // Set shared context here
-    window.ssr = sharedContext;
-
-    if (!window.fetch) {
-      window.fetch = fetch;
-    }
-
-    const scriptSources = await this.readSsrScripts(scriptFilenames);
-    const scripts: Script[] = [];
-    for (const [filename, scriptSource] of scriptSources) {
-      const script = new Script(scriptSource, {
-        filename,
-      });
-      scripts.push(script);
-    }
-
-    // Do not use await here because we want to run the next method after we get the promise result
-    const ssrResultPromise = context.render({
-      html: layout,
-      scripts,
-      customElements: {
-        openShadowRoots: false,
-        extractCSS: false,
-        scopeCSS: false,
-        addCSSToHead: false,
-      },
-    });
-
-    const result = await new Promise<RenderResult>((resolve, reject) => {
-      sharedContext.events.once(
-        'ready',
-        async (lifecycleEventData: ComponentLifecycleEventData) => {
-          const ssrResult = await ssrResultPromise;
-
-          const result: RenderResult = {
-            ...lifecycleEventData,
-            html: ssrResult.html,
-            css: ssrResult.css,
-          };
-
-          return resolve(result);
-        },
-      );
-
-      window.addEventListener('error', (event: Event) => {
-        console.error(event);
-        return reject(event);
-      });
-    });
-
-    return result;
-  }
-
   async renderComponent({
     template,
     rootTag = 'ssr-root-page',
@@ -316,15 +243,14 @@ export class SsrService {
     layout = await this.transformLayout(layout, rootTag, componentTagName);
     this.log.debug(`layout (transformed): ${layout}`);
     try {
-      const renderData =
-        engine === 'jsdom'
-          ? await this.renderWithJSDom(layout, componentTagName, sharedContext)
-          : await this.renderWithHappyDom(
-              layout,
-              componentTagName,
-              sharedContext,
-            );
-      return renderData;
+      if(engine === 'jsdom') {
+        const renderData =
+        await this.renderWithJSDom(layout, componentTagName, sharedContext)
+        return renderData;
+      } else {
+        throw new Error("Unsupported render engine");
+      }
+
     } catch (error) {
       this.log.error(`Error on render component with ${engine}`);
       console.error(error);

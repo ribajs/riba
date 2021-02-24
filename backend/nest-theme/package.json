@@ -31,7 +31,6 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "find-root": "^1.1.0",
-    "happy-dom": "^2.7.0",
     "jsdom": "^16.4.0",
     "node-fetch": "^2.6.1",
     "reflect-metadata": "^0.1.13",

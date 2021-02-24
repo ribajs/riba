@@ -1,1 +1,1 @@
-export type RenderEngine = "jsdom" | "happy-dom";
+export type RenderEngine = "jsdom";

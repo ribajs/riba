@@ -51,5 +51,5 @@ riba.lifecycle.events.on("ComponentLifecycle:allBound", () => {
 
 const view = riba.bind(document.body, window.model);
 
-// WORKAROUND / FIXME view.traverse method seems not to be working in jsdom / happy-dom
+// WORKAROUND / FIXME view.traverse method seems not to be working in jsdom
 view.registComponents();
