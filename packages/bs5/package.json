@@ -69,24 +69,25 @@
     "babel-plugin-array-includes": "^2.0.3",
     "core-js": "^3.9.0",
     "eslint": "^7.20.0",
-    "eslint-config-prettier": "^7.2.0",
+    "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
     "jest": "^26.6.3",
     "jest-extended": "^0.11.5",
     "prettier": "2.2.1",
     "ts-jest": "^26.5.2",
     "typescript": "^4.1.5",
-    "webpack": "^5.24.1",
+    "webpack": "^5.24.2",
     "webpack-cli": "^4.5.0"
   },
   "dependencies": {
+    "@popperjs/core": "^2.8.4",
     "@ribajs/cache": "workspace:packages/cache",
     "@ribajs/core": "workspace:packages/core",
     "@ribajs/events": "workspace:packages/events",
     "@ribajs/extras": "workspace:packages/extras",
     "@ribajs/utils": "workspace:packages/utils",
     "@sphinxxxx/color-conversion": "^2.2.2",
-    "@types/bootstrap": "^5.0.5",
+    "@types/bootstrap": "^5.0.7",
     "bootstrap": "next"
   },
   "bugs": {
