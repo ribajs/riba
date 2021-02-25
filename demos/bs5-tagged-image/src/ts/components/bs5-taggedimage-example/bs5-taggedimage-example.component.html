@@ -1,0 +1,199 @@
+<div class="container-fluid">
+    <div class="row py-4">
+    <div class="col-12">
+      <h3 class="text-center">Responsive Grid Cover</h3>
+      <div class="embed-responsive embed-responsive-100vh">
+        <bs5-tagged-image options="{'popoverOptions': {'trigger': 'click'}}" class="embed-responsive-item fit-cover" rv-tags="responsiveTags | json 0" img-src="../../../images/grid.png">
+        </bs5-tagged-image>
+      </div>
+    </div>
+  </div>
+
+  <div class="row py-4">
+    <div class="col-12">
+      <h3 class="text-center">Responsive Grid Contain (trigger: hover)</h3>
+      <div class="embed-responsive embed-responsive-100vh">
+        <bs5-tagged-image options="{'popoverOptions': {'trigger': 'hover'}}" class="embed-responsive-item fit-contain" rv-tags="responsiveTags | json 0" img-src="../../../images/grid.png">
+        </bs5-tagged-image>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row py-4">
+    <div class="col-12">
+      <h3 class="text-center">Unresponsive Grid (trigger: focus)</h3>
+        <bs5-tagged-image options="{'popoverOptions': {'trigger': 'focus'}}" rv-tags="responsiveTags | json 0" img-src="../../../images/grid.png">
+        </bs5-tagged-image>
+    </div>
+  </div>
+
+  <div class="row py-4">
+    <div class="col-12">
+      <h3 class="text-center">Unresponsive Grid distorted</h3>
+        <bs5-tagged-image style="width: 50%; height:30%" rv-tags="responsiveTags | json 0" img-src="../../../images/grid.png">
+        </bs5-tagged-image>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row pb-4">
+    <div class="col-5"></div>
+    <div class="col-2">
+      <h3>Defaults</h3>
+      <bs5-tagged-image
+        rv-loading="lazy"
+        class="embed-responsive-item"
+        rv-img-src="fadeshowImages.0.src"
+        rv-img-srcset="fadeshowImages.0.srcset"
+        img-sizes="(max-height: 500px) 800px,
+                (max-height: 600px) 1000px,
+                (max-height: 700px) 1200px,
+                (max-height: 800px) 1400px,
+                (max-height: 900px) 1600px,
+                1920px,
+        "
+        >
+        <tag title="Tag 1 Title">Tag 1 <b>Content</b></tag>
+        <tag title="Tag 2 Title">Tag 2 <b>Content</b></tag>
+        <tag title="Tag 3 Title">Tag 3 <b>Content</b></tag>
+        <tag title="Tag 4 Title">Tag 4 <b>Content</b></tag>
+        <tag title="Tag 5 Title">Tag 5 <b>Content</b></tag>
+        <tag title="Tag 6 Title">Tag 6 <b>Content</b></tag>
+        <tag title="Tag 7 Title">Tag 7 <b>Content</b></tag>
+      </bs5-tagged-image>
+    </div>
+    <div class="col-5"></div>
+  </div>
+
+  <div class="row pb-4">
+    <div class="col-4"></div>
+    <div class="col-4">
+      <h3>Bootstrap Colors</h3>
+      <bs5-tagged-image
+        loading="lazy"
+        class="lazy embed-responsive-item"
+        rv-img-src="fadeshowImages.0.src"
+        rv-img-srcset="fadeshowImages.0.srcset"
+        img-sizes="(max-height: 500px) 800px,
+                (max-height: 600px) 1000px,
+                (max-height: 700px) 1200px,
+                (max-height: 800px) 1400px,
+                (max-height: 900px) 1600px,
+                1920px,
+        "
+        >
+        <tag x="0.5" y="0.5" title="bootstrap primary" color="primary">Bootstrap Primary</tag>
+        <tag title="bootstrap secondary" color="secondary">Bootstrap Secondary</tag>
+        <tag title="bootstrap success" color="succes">Bootstrap Success</tag>
+        <tag x="0.25" y="0.75" title="bootstrap danger" color="danger">Bootstrap Danger</tag>
+        <tag title="bootstrap warning" color="warning">Bootstrap Warning</tag>
+        <tag title="bootstrap info" color="info">Bootstrap Info</tag>
+      </bs5-tagged-image>
+    </div>
+    <div class="col-4"></div>
+  </div>
+
+
+  <div class="row py-4">
+    <div class="col-12">
+      <h3 class="text-center">CSS colors, different shapes and Multi-Popover</h3>
+      <bs5-tagged-image img-src="../../../images/Hamburg-Hbf-HDR.jpg" options="{ 'multiPopover': true }" debug="true" rv-tags="fadeshowImages.0.tags | json 0">
+        <tag title="Red: rgba(255, 0, 0, 1)" color="rgba(255, 0, 0, 1)">Red: rgba(255, 0, 0, 1)</tag>
+        <tag title="Red: #ff0000" color="#ff0000" border-radius="50%">Red: #ff0000</tag>
+        <tag title="Red: red" color="red" border-radius="0">Red: red</tag>
+        <tag title="Green: rgba(0, 255, 0, 1)" color="rgba(0, 255, 0, 1)">Green: rgba(0, 255, 0, 1)</tag>
+        <tag title="Green: #00ff00" color="#00ff00" border-radius="0.5">Green: #00ff00</tag>
+        <tag title="Green: green" color="green" border-radius="0">Green: green</tag>
+        <tag title="Blue: rgba(0, 0, 255, 1)" color="rgba(0, 0, 255, 1)">Blue: rgba(0, 0, 255, 1)</tag>
+        <tag title="Blue: #0000ff" color="#0000ff" border-radius="0.5">Blue: #0000ff</tag>
+        <tag title="Blue: blue" color="blue" border-radius="0">Blue: blue</tag>
+        <tag title="Orange: rgba(255, 127, 0, 1)" color="rgba(255, 127, 0, 1)">Orange: rgba(255, 127, 0, 1)</tag>
+        <tag title="Orange: #ff7f00" color="#ff7f00" border-radius="50%">Orange: #ff7f00</tag>
+        <tag title="Orange: orange" color="orange" border-radius="0">Orange: orange</tag>
+        <tag title="Yellow: rgba(255, 255, 0, 1)" color="rgba(255, 255, 0, 1)">Yellow: rgba(255, 255, 0, 1)</tag>
+        <tag title="Yellow: #ffff00" color="#ffff00" border-radius="50%">Yellow: #ffff00</tag>
+        <tag title="Yellow: yellow" color="yellow" border-radius="0">Yellow: yellow</tag>
+        <tag title="Pink: rgba(255, 0, 255, 1)" color="rgba(255, 0, 255, 1)">Pink: rgba(255, 0, 255, 1)</tag>
+        <tag title="Pink: #ff00ff" color="#ff00ff" border-radius="50%">Pink: #ff00ff</tag>
+        <tag title="Pink: pink" color="pink" border-radius="0">Pink: pink</tag>
+        <tag title="Purple: rgba(127, 0, 255, 1)" color="rgba(127, 0, 255, 1)">Purple: rgba(127, 0, 255, 1)</tag>
+        <tag title="Purple: #7f00ff" color="#7f00ff" border-radius="50%">Purple: #7f00ff</tag>
+        <tag title="Purple: purple" color="purple" border-radius="0">Purple: purple</tag>
+      </bs5-tagged-image>
+    </div>
+  </div>
+
+  <div class="row py-4">
+    <div class="col-12 px-0">
+      <h3 class=text-center>BS4-Carousel Fade-Show</h3>
+      <bs5-carousel rv-parent class="carousel slide carousel-fade" interval="10000">
+        <div class="carousel-inner">
+          <div rv-each-image="fadeshowImages" class="carousel-item" rv-class-active="%image% | eq 0">
+            <div class="embed-responsive embed-responsive-100vh">
+              <bs5-tagged-image
+              loading="lazy"
+              class="lazy embed-responsive-item"
+              rv-img-src="image.src"
+              rv-img-srcset="image.srcset"
+              rv-tags="image.tags | json 0"
+              img-sizes="(max-height: 500px) 800px,
+                      (max-height: 600px) 1000px,
+                      (max-height: 700px) 1200px,
+                      (max-height: 800px) 1400px,
+                      (max-height: 900px) 1600px,
+                      1920px,
+              "
+              ></bs5-tagged-image>
+            </div>
+            <div class="carousel-caption carousel-caption-center d-flex">
+              <h2 class="font-weight-bold m-0 text-shadow">
+                  { image.title }
+              </h2>
+            </div>
+          </div>
+        </div>
+      </bs5-carousel>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <section class="col-12 my-5">
+      <h3 class="text-center">BS4-Slideshow</h3>
+      <bs5-slideshow autoplay="true" autoplay-interval="4000" control-prev-icon-src="arrow_carrot.svg" indicator-inactive-icon-src="icon_circle-empty.svg" indicator-active-icon-src="icon_circle-selected.svg" control-next-icon-src="arrow_carrot.svg">
+        <div class="slideshow-inner">
+          <div class="slide-placeholder col-4">&nbsp;</div>
+          <div class="slide col-4">
+            <bs5-tagged-image options="{'popoverOptions': {'container': 'body'}}" img-loading="lazy" class="img-fluid w-100" img-src="https://picsum.photos/1500/600?random=1" img-alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></bs5-tagged-image>
+          </div>
+          <div class="slide col-4">
+            <bs5-tagged-image options="{'popoverOptions': {'container': 'body'}}" img-loading="lazy" class="img-fluid w-100" img-src="https://picsum.photos/1500/600?random=2" img-alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></bs5-tagged-image>
+          </div>
+          <div class="slide col-4">
+            <bs5-tagged-image options="{'popoverOptions': {'container': 'body'}}" img-loading="lazy" class="img-fluid w-100" img-src="https://picsum.photos/1500/600?random=3" img-alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></bs5-tagged-image>
+          </div>
+          <div class="slide col-4">
+            <bs5-tagged-image options="{'popoverOptions': {'container': 'body'}}" img-loading="lazy" class="img-fluid w-100" img-src="https://picsum.photos/1500/600?random=4" img-alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></bs5-tagged-image>
+          </div>
+          <div class="slide col-4">
+            <bs5-tagged-image options="{'popoverOptions': {'container': 'body'}}" img-loading="lazy" class="img-fluid w-100" img-src="https://picsum.photos/1500/600?random=5" img-alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></bs5-tagged-image>
+          </div>
+          <div class="slide col-4">
+            <bs5-tagged-image options="{'popoverOptions': {'container': 'body'}}" img-loading="lazy" class="img-fluid w-100" img-src="https://picsum.photos/1500/600?random=6" img-alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></bs5-tagged-image>
+          </div>
+          <div class="slide col-4">
+            <bs5-tagged-image options="{'popoverOptions': {'container': 'body'}}" img-loading="lazy" class="img-fluid w-100" img-src="https://picsum.photos/1500/600?random=7" img-alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></bs5-tagged-image>
+          </div>
+          <div class="slide col-4">
+            <bs5-tagged-image options="{'popoverOptions': {'container': 'body'}}" img-loading="lazy" class="img-fluid w-100" img-src="https://picsum.photos/1500/600?random=8" img-alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></bs5-tagged-image>
+          </div>
+          <div class="slide-placeholder col-4">&nbsp;</div>
+        </div>
+      </bs5-slideshow>
+    </section>
+  </div>
+</div>
