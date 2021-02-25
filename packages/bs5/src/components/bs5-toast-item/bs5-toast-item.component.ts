@@ -63,7 +63,7 @@ export class Bs5ToastItemComponent extends Component {
       });
 
       // Call onHidden on hidden event once
-      toastEl.addEventListener(Toast.Events.hidden, this.scope.onHidden, {
+      toastEl.addEventListener(Toast.EVENT_HIDDEN, this.scope.onHidden, {
         once: true,
       });
 

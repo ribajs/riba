@@ -1,5 +1,5 @@
 {
-  "name": "@ribajs/demo-bs4-notifications",
+  "name": "@ribajs/demo-bs5-notifications",
   "version": "2.0.0-alpha.0",
   "description": "",
   "main": "src/index.html",
@@ -13,7 +13,7 @@
     "clear": "rm -rf ./dist",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
     "test": "jest",
-    "packages:npm:link": "npm link @ribajs/tsconfig @ribajs/eslint-config @ribajs/bs4 @ribajs/core @ribajs/extras @ribajs/iconset @ribajs/tsconfig"
+    "packages:npm:link": "npm link @ribajs/tsconfig @ribajs/eslint-config @ribajs/bs5 @ribajs/core @ribajs/extras @ribajs/iconset @ribajs/tsconfig"
   },
   "files": [
     "src"
@@ -71,12 +71,12 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "@ribajs/bs4": "workspace:packages/bs4",
+    "@ribajs/bs5": "workspace:packages/bs5",
     "@ribajs/core": "workspace:packages/core",
     "@ribajs/events": "workspace:packages/events",
     "@ribajs/extras": "workspace:packages/extras",
     "@ribajs/iconset": "workspace:packages/iconset",
     "@ribajs/utils": "workspace:packages/utils",
-    "bootstrap": "4.6.0"
+    "bootstrap": "next"
   }
 }

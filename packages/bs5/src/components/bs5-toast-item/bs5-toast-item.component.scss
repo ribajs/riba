@@ -39,7 +39,7 @@ $toast-header-color-scale:          $alert-color-scale +2 !default;
       .toast-header {
         @include toast-variant($toast-header-bg, $toast-border-color, $toast-header-color);
         .btn-close {
-          opacity: 1;
+          // opacity: 1;
           color: $toast-header-color;
         }
       }

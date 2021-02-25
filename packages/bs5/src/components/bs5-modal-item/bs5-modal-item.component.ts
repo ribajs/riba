@@ -62,11 +62,11 @@ export class Bs5ModalItemComponent extends Component {
       });
 
       // Call onHidden on hidden event once
-      modalEl.addEventListener(Modal.Events.hidden, this.scope.onHidden, {
+      modalEl.addEventListener(Modal.EVENT_HIDDEN, this.scope.onHidden, {
         once: true,
       });
 
-      // show modal using the modalservice
+      // show modal using the modal service
       this.modalService.show();
     }
   }
