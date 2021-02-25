@@ -234,12 +234,12 @@ export class Bs5ShareComponent extends Component {
 
   protected addEventListeners() {
     this.addEventListener("open", this.onExternalOpenEvent);
-    this.addEventListener("close", this.onExternalCloseEvent);
+    this.addEventListener("btn-close", this.onExternalCloseEvent);
   }
 
   protected removeEventListeners() {
     this.removeEventListener("open", this.onExternalOpenEvent);
-    this.removeEventListener("close", this.onExternalOpenEvent);
+    this.removeEventListener("btn-close", this.onExternalOpenEvent);
   }
 
   protected getURLForShare() {

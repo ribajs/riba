@@ -20,7 +20,7 @@ import templateControls from "./bs5-slideshow-controls.component.html";
 
 import templateIndicators from "./bs5-slideshow-indicators.component.html";
 
-const SLIDESHOW_INNER_SELECTOR = ".slideshow-inner";
+const SLIDESHOW_INNER_SELECTOR = ".slideshow-row";
 
 const SLIDES_SELECTOR = `${SLIDESHOW_INNER_SELECTOR} > .slide`;
 

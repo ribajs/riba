@@ -195,7 +195,7 @@ button, .btn, select, .custom-select, [href] {
 }
 
 // Drag and drop / scrollbar-draggable / bs5-slideshow
-.draggable, [draggable] {
+.draggable {
   user-select: none;
   @extend .cursor-grab;
   &:active {
@@ -204,4 +204,8 @@ button, .btn, select, .custom-select, [href] {
   &img, img {
     pointer-events: none;
   }
+}
+
+[draggable] {
+  @extend .draggable;
 }

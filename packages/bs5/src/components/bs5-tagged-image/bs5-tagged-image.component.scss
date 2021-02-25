@@ -19,7 +19,7 @@ bs5-tagged-image {
     bottom: 0;
     vertical-align: middle;
   }
-  &.embed-responsive-item img {
+  &.ratio img {
     object-fit: cover;
   }
   &.fit-contain img {

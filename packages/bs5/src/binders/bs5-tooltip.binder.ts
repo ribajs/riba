@@ -29,7 +29,7 @@ export const tooltipBinder: Binder<string> = {
     this.customData.tip = template.cloneNode(true);
     this.customData.show = () => {
       const placement: Options["placement"] = (this.el.dataset.placement ||
-        "top") as Options["placement"];
+        "start") as Options["placement"];
 
       const offset = 0;
       this.customData.popper = createPopper(el, this.customData.tip, {

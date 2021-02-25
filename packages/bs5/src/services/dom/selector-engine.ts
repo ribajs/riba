@@ -66,7 +66,7 @@ export const parents = (element: HTMLElement, selector: string) => {
 };
 
 export const closest = (element: HTMLElement, selector: string) => {
-  return Element.prototype.closest.call(element, selector);
+  return Element.prototype.btn-closest.call(element, selector);
 };
 
 export const prev = (element: HTMLElement, selector: string) => {

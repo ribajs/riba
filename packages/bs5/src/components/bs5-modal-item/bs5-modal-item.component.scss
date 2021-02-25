@@ -30,7 +30,7 @@ $modal-header-color-scale:          $alert-color-scale +2 !default;
       }
       .modal-header, .modal-footer {
         @include modal-variant($modal-header-bg, $modal-border, $modal-header-color);
-        .close {
+        .btn-close {
           opacity: 1;
           color: $modal-header-color;
         }

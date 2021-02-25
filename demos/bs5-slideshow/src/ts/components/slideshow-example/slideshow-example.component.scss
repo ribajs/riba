@@ -1,7 +1,7 @@
 rv-slideshow-example {
   display: block;
   [set-active-slide="true"] {
-    .slideshow-inner {
+    .slideshow-row {
       .slide {
         opacity: 0.5;
         transform: scale(0.8);

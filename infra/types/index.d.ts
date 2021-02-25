@@ -70,7 +70,7 @@ declare module "@sphinxxxx/color-conversion" {
 declare module "@popperjs/core" {
   // See https://github.com/popperjs/popper-core/blob/master/src/types.js
   export interface Options {
-    placement?: "right";
+    placement?: "start" | "end";
     modifiers: Array<any>;
     strategy: any;
     onFirstUpdate?: (shape: any) => void;

@@ -11,13 +11,16 @@ bs5-slideshow {
   display: block;
   @extend .carousel !optional;
 
-  .slideshow-inner {
-    @extend .row;
+  .slideshow-row {
     @extend .flex-scrollbar-x-scroll;
     @extend .scrollbar-invisible;
 
-    .slide-caption {
-      @extend .carousel-caption !optional;
+    // slide
+    > * {
+      position: relative;
+      .slide-caption {
+        @extend .carousel-caption !optional;
+      }
     }
   }
 
