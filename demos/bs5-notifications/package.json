@@ -34,6 +34,7 @@
     "@babel/runtime": "^7.13.7",
     "@babel/runtime-corejs3": "^7.13.7",
     "@ribajs/eslint-config": "workspace:infra/eslint-config",
+    "@ribajs/postcss-config": "workspace:infra/postcss-config",
     "@ribajs/tsconfig": "workspace:infra/tsconfig",
     "@ribajs/webpack-config": "workspace:infra/webpack-config",
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve",

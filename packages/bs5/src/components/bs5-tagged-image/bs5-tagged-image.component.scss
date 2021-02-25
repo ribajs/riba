@@ -84,27 +84,6 @@ bs5-tagged-image {
       }
     }
 
-    /*
-     * The --tag-color, --tag-border-radius and other CSS custom properties are set as
-     * inline styles in the component template.
-     * This is a workaround, as long as CSS3 attr() is not supported by browsers (maybe until 2040)
-     * In CSS3 one could just do:
-     *   background-color: attr(tag-color);
-     */
-    &[color] {
-      &::before {
-        background-color: var(--tag-color);
-      }
-    }
-    // recognize bootstrap theme colors
-    @each $color, $value in $theme-colors {
-      &[color="#{$color}"] {
-        &::before {
-          background-color: theme-color($color);
-        }
-      }
-    }
-
     // special shape cases for border-radius 0 or 100% (100% = circle is default in the component)
     &[shape="circle"] {
       &::before {
