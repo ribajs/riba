@@ -1,7 +1,7 @@
 import { coreModule, Riba } from "@ribajs/core";
 import { extrasModule } from "@ribajs/extras";
-import { Bs4SlideshowComponent } from "@ribajs/bs5/src/components/bs4-slideshow/bs4-slideshow.component";
-import { Bs4IconComponent } from "@ribajs/bs5/src/components/bs4-icon/bs4-icon.component";
+import { Bs5SlideshowComponent } from "@ribajs/bs5/src/components/bs5-slideshow/bs5-slideshow.component";
+import { Bs5IconComponent } from "@ribajs/bs5/src/components/bs5-icon/bs5-icon.component";
 import { SlideshowDemoModule } from "./slideshow.module";
 
 const riba = new Riba();
@@ -11,6 +11,6 @@ const model = {};
 riba.module.regist(coreModule);
 riba.module.regist(extrasModule);
 riba.module.regist(SlideshowDemoModule);
-riba.module.component.regists([Bs4SlideshowComponent, Bs4IconComponent]);
+riba.module.component.regists([Bs5SlideshowComponent, Bs5IconComponent]);
 
 riba.bind(document.body, model);
