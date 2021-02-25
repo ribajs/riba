@@ -3435,6 +3435,66 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@ribajs/demo-bs5-dropdown@workspace:demos/bs5-dropdown":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/demo-bs5-dropdown@workspace:demos/bs5-dropdown"
+  dependencies:
+    "@babel/cli": ^7.13.0
+    "@babel/core": ^7.13.1
+    "@babel/plugin-proposal-class-properties": ^7.13.0
+    "@babel/plugin-proposal-export-default-from": ^7.12.13
+    "@babel/plugin-proposal-object-rest-spread": ^7.13.0
+    "@babel/plugin-proposal-optional-chaining": ^7.13.0
+    "@babel/plugin-syntax-export-default-from": ^7.12.13
+    "@babel/plugin-transform-runtime": ^7.13.7
+    "@babel/preset-env": ^7.13.5
+    "@babel/preset-typescript": ^7.13.0
+    "@babel/runtime": ^7.13.7
+    "@babel/runtime-corejs3": ^7.13.7
+    "@ribajs/bs5": "workspace:packages/bs5"
+    "@ribajs/core": "workspace:packages/core"
+    "@ribajs/eslint-config": "workspace:infra/eslint-config"
+    "@ribajs/iconset": "workspace:packages/iconset"
+    "@ribajs/tsconfig": "workspace:infra/tsconfig"
+    "@ribajs/utils": "workspace:packages/utils"
+    "@ribajs/webpack-config": "workspace:infra/webpack-config"
+    "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
+    "@types/jest": ^26.0.20
+    "@typescript-eslint/eslint-plugin": ^4.15.2
+    "@typescript-eslint/experimental-utils": ^4.15.2
+    "@typescript-eslint/parser": ^4.15.2
+    "@yarnpkg/pnpify": ^2.4.0
+    babel-jest: ^26.6.3
+    babel-loader: ^8.2.2
+    babel-plugin-array-includes: ^2.0.3
+    babelify: ^10.0.0
+    bootstrap: next
+    core-js: ^3.9.0
+    css-loader: ^5.0.2
+    dart-sass: ^1.25.0
+    eslint: ^7.20.0
+    eslint-config-prettier: ^8.1.0
+    eslint-plugin-prettier: ^3.3.1
+    html-loader: ^2.1.1
+    inspectpack: ^4.6.1
+    jest: ^26.6.3
+    jest-extended: ^0.11.5
+    mini-css-extract-plugin: ^1.3.8
+    postcss: ^8.2.6
+    postcss-loader: ^5.0.0
+    postcss-modules: ^4.0.0
+    postcss-preset-env: ^6.7.0
+    prettier: 2.2.1
+    pug-loader: ^2.4.0
+    sass-loader: ^11.0.1
+    serve: ^11.3.2
+    typescript: ^4.1.5
+    webpack: ^5.24.2
+    webpack-cli: ^4.5.0
+    webpack-dev-server: ^3.11.2
+  languageName: unknown
+  linkType: soft
+
 "@ribajs/demo-bs5-notifications@workspace:demos/bs5-notifications":
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs5-notifications@workspace:demos/bs5-notifications"
@@ -3457,6 +3517,7 @@ __metadata:
     "@ribajs/events": "workspace:packages/events"
     "@ribajs/extras": "workspace:packages/extras"
     "@ribajs/iconset": "workspace:packages/iconset"
+    "@ribajs/postcss-config": "workspace:infra/postcss-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"

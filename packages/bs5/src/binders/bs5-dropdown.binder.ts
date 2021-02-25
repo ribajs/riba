@@ -3,7 +3,7 @@ import { Dropdown } from "../services/dropdown";
 
 /**
  *
- * @see https://getbootstrap.com/docs/4.1/components/dropdown/
+ * @see https://getbootstrap.com/docs/5.0/components/dropdowns/#via-javascript
  */
 export const dropdownBinder: Binder<string> = {
   name: "bs5-dropdown",
@@ -17,22 +17,14 @@ export const dropdownBinder: Binder<string> = {
   },
   routine(el: HTMLElement, option: any = {}) {
     if (this.customData.dropdownService) {
-      this.customData.dropdownService.dispose();
-      this.customData.toggler.removeEventListener(
-        "click",
-        this.customData.dropdownService.toggle
-      );
+      const dropdownService: Dropdown = this.customData.dropdownService;
+      dropdownService.dispose();
+      // To detect this element as an dropdown by the bootstrap logic
+      this.customData.toggler.dataset.bsToggle = "";
     }
-    this.customData.dropdownService = new Dropdown(
-      this.customData.toggler,
-      option
-    );
-    this.customData.dropdownService.toggle = this.customData.dropdownService.toggle.bind(
-      this.customData.dropdownService
-    );
-    this.customData.toggler.addEventListener(
-      "click",
-      this.customData.dropdownService.toggle
-    );
+    const dropdownService = new Dropdown(this.customData.toggler, option);
+    // To detect this element as an dropdown by the bootstrap logic
+    this.customData.toggler.dataset.bsToggle = "dropdown";
+    this.customData.dropdownService = dropdownService;
   },
 };

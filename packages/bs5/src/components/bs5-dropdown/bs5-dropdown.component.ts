@@ -8,7 +8,8 @@ export class Bs5DropdownComponent extends Component {
     toggle: this.toggle,
   };
 
-  protected dropdownService?: Dropdown;
+  public dropdown?: Dropdown;
+  protected dropdownEl: HTMLElement | Bs5DropdownComponent | null = null;
 
   static get observedAttributes() {
     return [];
@@ -21,19 +22,18 @@ export class Bs5DropdownComponent extends Component {
   public toggle(event: Event) {
     event.preventDefault();
     event.stopPropagation();
-    if (!this.dropdownService) {
+    if (!this.dropdown) {
       throw new Error("Dropdown not ready!");
     }
-    return this.dropdownService.toggle();
+    return this.dropdown.toggle();
   }
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.dropdownService = new Dropdown(
-      this.querySelector(".dropdown-toggle") as
-        | HTMLButtonElement
-        | HTMLAnchorElement
-    );
+    this.dropdownEl = this.querySelector(".dropdown-toggle") || this;
+    this.dropdown = new Dropdown(this.dropdownEl);
+    // To detect this element as an dropdown by the bootstrap logic
+    this.dropdownEl.dataset.bsToggle = "dropdown";
     this.init(Bs5DropdownComponent.observedAttributes);
   }
 
