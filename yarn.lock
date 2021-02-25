@@ -4050,7 +4050,7 @@ __metadata:
     "@babel/preset-typescript": ^7.13.0
     "@babel/runtime": ^7.13.7
     "@babel/runtime-corejs3": ^7.13.7
-    "@ribajs/bs4": "workspace:packages/bs4"
+    "@ribajs/bs5": "workspace:packages/bs5"
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/events": "workspace:packages/events"
@@ -4068,7 +4068,7 @@ __metadata:
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
-    bootstrap: 4.6.0
+    bootstrap: next
     core-js: ^3.9.0
     css-loader: ^5.0.2
     dart-sass: ^1.25.0

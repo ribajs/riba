@@ -26,7 +26,7 @@ export class IconsetExampleComponent extends Component {
   protected async beforeBind() {
     await super.beforeBind();
     this.eventDispatcher = EventDispatcher.getInstance(
-      "bs4-colorpicker:" + this.scope.namespace
+      "bs5-colorpicker:" + this.scope.namespace
     );
     this.eventDispatcher.on("change", this.onColorChanged, this);
   }

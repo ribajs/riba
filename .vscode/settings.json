@@ -19,6 +19,7 @@
     "autobind",
     "autoscrolling",
     "builtins",
+    "colorpicker",
     "corejs",
     "draggable",
     "dragscroll",

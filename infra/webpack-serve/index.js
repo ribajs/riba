@@ -11,8 +11,6 @@ const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
 const argv = yargs(hideBin(process.argv)).argv
 
-console.log("argv", argv.env);
-
 const env = {
   production: argv.env === 'production',
   development: argv.env === 'development',
