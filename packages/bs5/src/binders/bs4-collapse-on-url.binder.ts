@@ -9,7 +9,7 @@ import { onRoute } from "@ribajs/utils/src/url";
  * @see https://github.com/twbs/bootstrap/blob/v4-dev/js/src/collapse.js
  */
 export const collapseOnUrlBinder: Binder<string> = {
-  name: "bs4-collapse-on-url",
+  name: "bs5-collapse-on-url",
   bind(el: HTMLElement) {
     this.customData = {
       dispatcher: EventDispatcher.getInstance("main"),

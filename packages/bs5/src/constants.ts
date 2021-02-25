@@ -1,6 +1,6 @@
 // EventDispatcher events
 export const TOGGLE_BUTTON = {
-  nsPrefix: "bs4-toggle-button:",
+  nsPrefix: "bs5-toggle-button:",
   eventNames: {
     toggle: "toggle",
     toggled: "toggled",

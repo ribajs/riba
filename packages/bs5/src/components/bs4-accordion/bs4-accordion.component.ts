@@ -3,7 +3,7 @@ import { CollapseService } from "../../services/collapse.service";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { TemplatesComponent } from "../templates/templates.component";
 
-import template from "./bs4-accordion.component.html";
+import template from "./bs5-accordion.component.html";
 
 const handleize = handleizeFormatter.read as FormatterFn;
 
@@ -24,16 +24,16 @@ interface AccordionItem {
 
 interface Scope {
   items: AccordionItem[];
-  toggle: Bs4AccordionComponent["toggle"];
-  show: Bs4AccordionComponent["show"];
-  hide: Bs4AccordionComponent["hide"];
+  toggle: Bs5AccordionComponent["toggle"];
+  show: Bs5AccordionComponent["show"];
+  hide: Bs5AccordionComponent["hide"];
   collapseIconSrc?: string;
   collapseIconSize: number;
   showOnlyOne: boolean;
 }
 
-export class Bs4AccordionComponent extends TemplatesComponent {
-  public static tagName = "bs4-accordion";
+export class Bs5AccordionComponent extends TemplatesComponent {
+  public static tagName = "bs5-accordion";
 
   protected autobind = true;
 
@@ -187,7 +187,7 @@ export class Bs4AccordionComponent extends TemplatesComponent {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init(Bs4AccordionComponent.observedAttributes);
+    this.init(Bs5AccordionComponent.observedAttributes);
   }
 
   protected async init(observedAttributes: string[]) {

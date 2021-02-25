@@ -1,5 +1,5 @@
 import { Component, HttpService, HttpMethod, HttpDataType } from "@ribajs/core";
-import template from "./bs4-form.component.html";
+import template from "./bs5-form.component.html";
 import { stripHtml } from "@ribajs/utils/src/type";
 import { getUID, hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { scrollTo, getViewportDimensions } from "@ribajs/utils/src/dom";
@@ -24,7 +24,7 @@ export interface SubmitSettings {
 export interface Scope {
   id: string;
   form: ValidationObject;
-  onSubmit: Bs4FormComponent["onSubmit"];
+  onSubmit: Bs5FormComponent["onSubmit"];
 
   disableSubmitUntilChange: boolean;
   submitDisabled: boolean;
@@ -58,8 +58,8 @@ export interface Scope {
   animateInvalidElement: true;
 }
 
-export class Bs4FormComponent extends Component {
-  public static tagName = "bs4-form";
+export class Bs5FormComponent extends Component {
+  public static tagName = "bs5-form";
   public _debug = false;
   protected autobind = true;
 
@@ -112,7 +112,7 @@ export class Bs4FormComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init(Bs4FormComponent.observedAttributes);
+    this.init(Bs5FormComponent.observedAttributes);
     this.addEventListeners();
   }
 
@@ -353,7 +353,7 @@ export class Bs4FormComponent extends Component {
       this.formEl.classList.add("needs-validation");
       this.formEl.setAttribute("novalidate", "");
     } else {
-      console.warn("bs4 form without children found");
+      console.warn("bs5 form without children found");
     }
   }
 

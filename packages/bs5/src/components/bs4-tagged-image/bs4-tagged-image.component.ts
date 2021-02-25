@@ -4,7 +4,7 @@ import { Component } from "@ribajs/core";
 import { PopoverOptions } from "@ribajs/bs5";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { TaggedImageTag as Tag } from "../../interfaces";
-import template from "./bs4-tagged-image.component.html";
+import template from "./bs5-tagged-image.component.html";
 import { debounce } from "@ribajs/utils/src/control";
 
 interface Options {
@@ -28,11 +28,11 @@ interface Scope {
   updateTagPositions: EventListener;
 }
 
-export class Bs4TaggedImageComponent extends Component {
+export class Bs5TaggedImageComponent extends Component {
   /**
    * ATTRIBUTES AND SCOPE
    */
-  public static tagName = "bs4-tagged-image";
+  public static tagName = "bs5-tagged-image";
 
   protected autobind = true;
   public _debug = true;
@@ -125,7 +125,7 @@ export class Bs4TaggedImageComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init(Bs4TaggedImageComponent.observedAttributes);
+    this.init(Bs5TaggedImageComponent.observedAttributes);
   }
 
   disconnectedCallback() {

@@ -23,7 +23,7 @@ interface Scope {
    */
   state: State;
   /**
-   * The 'id' is required to react to events of the `bs4-toggle-button`, the `target-id` attribute of the `bs4-toggle-button` must be identical to this `id`
+   * The 'id' is required to react to events of the `bs5-toggle-button`, the `target-id` attribute of the `bs5-toggle-button` must be identical to this `id`
    */
   id?: string;
   /**
@@ -65,19 +65,19 @@ interface Scope {
   /**
    * Hides / closes the sidebar
    */
-  hide: Bs4SidebarComponent["hide"];
+  hide: Bs5SidebarComponent["hide"];
   /**
    * Shows / opens the sidebar
    */
-  show: Bs4SidebarComponent["show"];
+  show: Bs5SidebarComponent["show"];
   /**
    * Toggles (closes or opens) the sidebar
    */
-  toggle: Bs4SidebarComponent["toggle"];
+  toggle: Bs5SidebarComponent["toggle"];
 }
 
-export class Bs4SidebarComponent extends Component {
-  public static tagName = "bs4-sidebar";
+export class Bs5SidebarComponent extends Component {
+  public static tagName = "bs5-sidebar";
 
   protected computedStyle?: CSSStyleDeclaration;
 
@@ -163,7 +163,7 @@ export class Bs4SidebarComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init(Bs4SidebarComponent.observedAttributes);
+    this.init(Bs5SidebarComponent.observedAttributes);
     this.computedStyle = window.getComputedStyle(this);
     window.addEventListener("resize", this.onEnvironmentChanges, false);
     // initial

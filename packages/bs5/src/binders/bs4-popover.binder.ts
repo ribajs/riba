@@ -9,7 +9,7 @@ import { Binder } from "@ribajs/core";
  *
  */
 export const popoverBinder: Binder<string> = {
-  name: "bs4-popover",
+  name: "bs5-popover",
   block: false,
   routine(el: HTMLElement, optionsOrContent: string | PopoverOptions) {
     let options: Partial<PopoverOptions> = {};

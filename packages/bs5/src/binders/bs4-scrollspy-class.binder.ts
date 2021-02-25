@@ -7,7 +7,7 @@ import { isInViewport } from "@ribajs/utils/src/dom";
  * @see https://getbootstrap.com/docs/4.1/components/scrollspy/
  */
 export const scrollspyClassBinder: Binder<string> = {
-  name: "bs4-scrollspy-*",
+  name: "bs5-scrollspy-*",
   bind(el: HTMLElement) {
     this.customData = {
       onScroll: function () {

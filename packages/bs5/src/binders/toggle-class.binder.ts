@@ -1,7 +1,7 @@
 import { Binder } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 
-export interface Bs4ToggleClass extends Binder<boolean> {
+export interface Bs5ToggleClass extends Binder<boolean> {
   toggleButtonEvents: EventDispatcher | null;
   state: "removed" | "added";
   triggerState: () => void;
@@ -14,30 +14,30 @@ export interface Bs4ToggleClass extends Binder<boolean> {
 import { TOGGLE_BUTTON, TOGGLE_CLASS } from "../constants";
 
 /**
- * Adds / removes the class on click on the bs4-toggle-button with the same id
+ * Adds / removes the class on click on the bs5-toggle-button with the same id
  *
  * Events
  * * `off`
  * * `on`
  */
 export const toggleClassBinder: Binder<string> = {
-  name: "bs4-toggle-class-*",
+  name: "bs5-toggle-class-*",
   toggleButtonEvents: null,
   state: "off",
   triggerState() {
-    const self = (this.binder || this) as Bs4ToggleClass;
+    const self = (this.binder || this) as Bs5ToggleClass;
     self.toggleButtonEvents?.trigger(
       TOGGLE_BUTTON.eventNames.state,
       self.state
     );
   },
   onToggle() {
-    const self = (this.binder || this) as Bs4ToggleClass;
-    // console.debug('onToggle', (this.binder as Bs4ToggleClass));
+    const self = (this.binder || this) as Bs5ToggleClass;
+    // console.debug('onToggle', (this.binder as Bs5ToggleClass));
     self.toggle.bind(this)(this.el);
   },
   toggle(el: HTMLElement) {
-    const self = (this.binder || this) as Bs4ToggleClass;
+    const self = (this.binder || this) as Bs5ToggleClass;
     if (self.state === "removed") {
       self.add.bind(this)(el);
     } else {
@@ -45,7 +45,7 @@ export const toggleClassBinder: Binder<string> = {
     }
   },
   remove(el: HTMLElement) {
-    const self = (this.binder || this) as Bs4ToggleClass;
+    const self = (this.binder || this) as Bs5ToggleClass;
     const className = this.args[0] as string;
     el.classList.remove(className);
     self.state = "removed";
@@ -57,7 +57,7 @@ export const toggleClassBinder: Binder<string> = {
     self.triggerState();
   },
   add(el: HTMLElement) {
-    const self = (this.binder || this) as Bs4ToggleClass;
+    const self = (this.binder || this) as Bs5ToggleClass;
     const className = this.args[0] as string;
 
     el.classList.add(className, className);
@@ -70,13 +70,13 @@ export const toggleClassBinder: Binder<string> = {
     self.triggerState();
   },
   bind(el) {
-    const self = (this.binder || this) as Bs4ToggleClass;
+    const self = (this.binder || this) as Bs5ToggleClass;
     const className = this.args[0] as string;
     self.state = el.classList.contains(className) ? "added" : "removed";
   },
 
   unbind() {
-    const self = (this.binder || this) as Bs4ToggleClass;
+    const self = (this.binder || this) as Bs5ToggleClass;
     self.toggleButtonEvents?.off(
       TOGGLE_BUTTON.eventNames.toggle,
       self.onToggle,
@@ -91,7 +91,7 @@ export const toggleClassBinder: Binder<string> = {
 
   routine(el: HTMLElement, newId: string) {
     const oldId = this.getValue(el);
-    const self = (this.binder || this) as Bs4ToggleClass;
+    const self = (this.binder || this) as Bs5ToggleClass;
     let toggleButton = self.toggleButtonEvents;
     if (oldId && toggleButton) {
       toggleButton.off(TOGGLE_BUTTON.eventNames.toggle, self.onToggle, this);

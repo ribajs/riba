@@ -1,8 +1,8 @@
-$bs4-slideshow-control-outsite-spacing: 80px !default;
-$bs4-slideshow-indicators-outsite-spacing: 50px !default;
-$bs4-slideshow-indicators-insite-spacing: 20px !default;
+$bs5-slideshow-control-outsite-spacing: 80px !default;
+$bs5-slideshow-indicators-outsite-spacing: 50px !default;
+$bs5-slideshow-indicators-insite-spacing: 20px !default;
 
-bs4-slideshow {
+bs5-slideshow {
 
   user-select: none;
   -webkit-user-drag: none;
@@ -63,7 +63,7 @@ bs4-slideshow {
             left: 0;
           }
           &.control#{$infix}-outsite {
-            left: -$bs4-slideshow-control-outsite-spacing;
+            left: -$bs5-slideshow-control-outsite-spacing;
           }
         }
       }
@@ -78,7 +78,7 @@ bs4-slideshow {
             right: 0;
           }
           &.control#{$infix}-outsite {
-            right: -$bs4-slideshow-control-outsite-spacing;
+            right: -$bs5-slideshow-control-outsite-spacing;
           }
         }
       }
@@ -125,49 +125,49 @@ bs4-slideshow {
         &.indicators#{$infix}-bottom {
           top: auto;
           right: 0;
-          bottom:  $bs4-slideshow-indicators-insite-spacing;
+          bottom:  $bs5-slideshow-indicators-insite-spacing;
           left: 0;
           &.indicators#{$infix}-insite {
-            bottom:  $bs4-slideshow-indicators-insite-spacing;
+            bottom:  $bs5-slideshow-indicators-insite-spacing;
           }
           &.indicators#{$infix}-outsite {
-            bottom: -$bs4-slideshow-indicators-outsite-spacing;
+            bottom: -$bs5-slideshow-indicators-outsite-spacing;
           }
         }
         &.indicators#{$infix}-top {
           top: 0;
           right: 0;
           bottom: auto;
-          left:  $bs4-slideshow-indicators-insite-spacing;
+          left:  $bs5-slideshow-indicators-insite-spacing;
           &.indicators#{$infix}-insite {
-            top:  $bs4-slideshow-indicators-insite-spacing;
+            top:  $bs5-slideshow-indicators-insite-spacing;
           }
           &.indicators#{$infix}-outsite {
-            top: -$bs4-slideshow-indicators-outsite-spacing;
+            top: -$bs5-slideshow-indicators-outsite-spacing;
           }
         }
         &.indicators#{$infix}-right {
           top: 0;
-          right:  $bs4-slideshow-indicators-insite-spacing;
+          right:  $bs5-slideshow-indicators-insite-spacing;
           bottom: 0;
           left: auto;
           &.indicators#{$infix}-insite {
-            right:  $bs4-slideshow-indicators-insite-spacing;
+            right:  $bs5-slideshow-indicators-insite-spacing;
           }
           &.indicators#{$infix}-outsite {
-            right: -$bs4-slideshow-indicators-outsite-spacing;
+            right: -$bs5-slideshow-indicators-outsite-spacing;
           }
         }
         &.indicators#{$infix}-left {
           top: 0;
           right: auto;
           bottom: 0;
-          left:  $bs4-slideshow-indicators-insite-spacing;
+          left:  $bs5-slideshow-indicators-insite-spacing;
           &.indicators#{$infix}-insite {
-            left:  $bs4-slideshow-indicators-insite-spacing;
+            left:  $bs5-slideshow-indicators-insite-spacing;
           }
           &.indicators#{$infix}-outsite {
-            left: -$bs4-slideshow-indicators-outsite-spacing;
+            left: -$bs5-slideshow-indicators-outsite-spacing;
           }
         }
       }

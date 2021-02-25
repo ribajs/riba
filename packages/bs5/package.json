@@ -4,7 +4,7 @@
   "version": "2.0.0-alpha.0",
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [],
-  "url": "https://github.com/ribajs/riba/tree/master/packages/bs4",
+  "url": "https://github.com/ribajs/riba/tree/master/packages/bs5",
   "homepage": "https://ribajs.com/",
   "main": "src/index.ts",
   "module": "src/index.ts",

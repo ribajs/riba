@@ -1,5 +1,5 @@
 /**
- * This components is used to trigger a toggle event used in other components or parts of your project. This site itself uses the bs4-toggle-button to open or close the sidebar.
+ * This components is used to trigger a toggle event used in other components or parts of your project. This site itself uses the bs5-toggle-button to open or close the sidebar.
  * @attribute "target-id" (Required) The id with which the toggle event is triggered
  * @method toggle	 Triggeres the toggle event
  * @property state Can be 'hidden' or something else
@@ -24,15 +24,15 @@ type State =
 
 interface Scope {
   targetId?: string;
-  toggle: Bs4ToggleButtonComponent["toggle"];
+  toggle: Bs5ToggleButtonComponent["toggle"];
   state: State;
   isActive: boolean;
   // depricated, use !isActive instead
   isClosed: boolean;
 }
 
-// TODO extend from Bs4ButtonComponent
-export class Bs4ToggleButtonComponent extends Component {
+// TODO extend from Bs5ButtonComponent
+export class Bs5ToggleButtonComponent extends Component {
   static get observedAttributes() {
     return ["target-id"];
   }
@@ -41,7 +41,7 @@ export class Bs4ToggleButtonComponent extends Component {
     return ["targetId"];
   }
 
-  public static tagName = "bs4-toggle-button";
+  public static tagName = "bs5-toggle-button";
 
   protected autobind = true;
 
@@ -80,7 +80,7 @@ export class Bs4ToggleButtonComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init(Bs4ToggleButtonComponent.observedAttributes);
+    this.init(Bs5ToggleButtonComponent.observedAttributes);
   }
 
   protected onToggledEvent(state: State) {

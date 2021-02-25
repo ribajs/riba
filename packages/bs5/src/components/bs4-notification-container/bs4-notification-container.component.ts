@@ -1,7 +1,7 @@
 import { Component } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import template from "./bs4-notification-container.component.html";
+import template from "./bs5-notification-container.component.html";
 import { Notification } from "../../interfaces";
 
 export interface Scope {
@@ -9,11 +9,11 @@ export interface Scope {
   positionClass: string;
   notifications: Notification[];
   channelName: string;
-  onItemHide: Bs4NotificationContainerComponent["onItemHide"];
+  onItemHide: Bs5NotificationContainerComponent["onItemHide"];
 }
 
-export class Bs4NotificationContainerComponent extends Component {
-  public static tagName = "bs4-notification-container";
+export class Bs5NotificationContainerComponent extends Component {
+  public static tagName = "bs5-notification-container";
 
   protected autobind = true;
   public _debug = false;
@@ -37,7 +37,7 @@ export class Bs4NotificationContainerComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init(Bs4NotificationContainerComponent.observedAttributes);
+    this.init(Bs5NotificationContainerComponent.observedAttributes);
   }
 
   // Called by child if notification item wants to be removed

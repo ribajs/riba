@@ -14,11 +14,11 @@ import {
   ScrollEventsService,
 } from "@ribajs/extras";
 
-import templateSlides from "./bs4-slideshow-slides.component.html";
+import templateSlides from "./bs5-slideshow-slides.component.html";
 
-import templateControls from "./bs4-slideshow-controls.component.html";
+import templateControls from "./bs5-slideshow-controls.component.html";
 
-import templateIndicators from "./bs4-slideshow-indicators.component.html";
+import templateIndicators from "./bs5-slideshow-indicators.component.html";
 
 const SLIDESHOW_INNER_SELECTOR = ".slideshow-inner";
 
@@ -109,15 +109,15 @@ export interface Options {
 }
 
 export interface Scope extends Options {
-  next: Bs4SlideshowComponent["next"];
-  prev: Bs4SlideshowComponent["prev"];
-  goTo: Bs4SlideshowComponent["goTo"];
+  next: Bs5SlideshowComponent["next"];
+  prev: Bs5SlideshowComponent["prev"];
+  goTo: Bs5SlideshowComponent["goTo"];
   controlsPositionClass: string;
   indicatorsPositionClass: string;
   items: Slide[];
 }
 
-export class Bs4SlideshowComponent extends TemplatesComponent {
+export class Bs5SlideshowComponent extends TemplatesComponent {
   protected resizeObserver?: any; // TODO type ResizeObserver;
 
   protected get slideshowInner() {
@@ -269,7 +269,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     ];
   }
 
-  public static tagName = "bs4-slideshow";
+  public static tagName = "bs5-slideshow";
 
   protected templateAttributes = [
     {
@@ -641,7 +641,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     this.scope.indicatorsPositionClass = `indicators-${xsIndicatorsPosition[0]} indicators-${xsIndicatorsPosition[1]} indicators-sm-${smIndicatorsPosition[0]} indicators-sm-${smIndicatorsPosition[1]} indicators-md-${mdIndicatorsPosition[0]} indicators-md-${mdIndicatorsPosition[1]} indicators-lg-${lgIndicatorsPosition[0]} indicators-lg-${lgIndicatorsPosition[1]} indicators-xl-${xlIndicatorsPosition[0]} indicators-xl-${xlIndicatorsPosition[1]}`;
   }
 
-  // TODO create independent bs4 breakpoint service
+  // TODO create independent bs5 breakpoint service
   protected getBreakpoint(): Breakpoint {
     const size = window.innerWidth;
     // XS
@@ -763,7 +763,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   protected connectedCallback() {
     super.connectedCallback();
-    return this.init(Bs4SlideshowComponent.observedAttributes);
+    return this.init(Bs5SlideshowComponent.observedAttributes);
   }
 
   protected addEventListeners() {
@@ -781,7 +781,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       window.addEventListener("resize", this.onViewChanges);
     }
 
-    // Custom event triggered by some parent components when this component changes his visibility, e.g. triggered in the bs4-tabs component
+    // Custom event triggered by some parent components when this component changes his visibility, e.g. triggered in the bs5-tabs component
     this.addEventListener(
       "visibility-changed" as any,
       this.onVisibilityChanged

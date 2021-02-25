@@ -13,17 +13,17 @@ export interface Scope {
   ride: CarouselOption["ride"]; // TODO
   fade: boolean;
   // Methods
-  next: Bs4CarouselComponent["next"];
-  nextWhenVisible: Bs4CarouselComponent["nextWhenVisible"];
-  prev: Bs4CarouselComponent["prev"];
-  pause: Bs4CarouselComponent["pause"];
-  cycle: Bs4CarouselComponent["cycle"];
-  to: Bs4CarouselComponent["to"];
-  dispose: Bs4CarouselComponent["dispose"];
+  next: Bs5CarouselComponent["next"];
+  nextWhenVisible: Bs5CarouselComponent["nextWhenVisible"];
+  prev: Bs5CarouselComponent["prev"];
+  pause: Bs5CarouselComponent["pause"];
+  cycle: Bs5CarouselComponent["cycle"];
+  to: Bs5CarouselComponent["to"];
+  dispose: Bs5CarouselComponent["dispose"];
 }
 
-export class Bs4CarouselComponent extends Component {
-  public static tagName = "bs4-carousel";
+export class Bs5CarouselComponent extends Component {
+  public static tagName = "bs5-carousel";
 
   static get observedAttributes() {
     return [
@@ -137,7 +137,7 @@ export class Bs4CarouselComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    super.init(Bs4CarouselComponent.observedAttributes);
+    super.init(Bs5CarouselComponent.observedAttributes);
   }
 
   protected template() {

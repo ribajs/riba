@@ -1,23 +1,23 @@
 import { Component } from "@ribajs/core";
 
-import template from "./bs4-toast-item.component.html";
+import template from "./bs5-toast-item.component.html";
 import { Toast } from "../../interfaces";
 import { ToastService } from "../../services/toast.service";
-import { Scope as Bs4NotificationContainerScope } from "../bs4-notification-container/bs4-notification-container.component";
+import { Scope as Bs5NotificationContainerScope } from "../bs5-notification-container/bs5-notification-container.component";
 import { getElementFromEvent } from "@ribajs/utils/src/dom";
 
 interface Scope {
   iconUrl?: string;
   toast?: Toast;
-  onHidden: Bs4ToastItemComponent["onHidden"];
-  dismiss: Bs4ToastItemComponent["dismiss"];
+  onHidden: Bs5ToastItemComponent["onHidden"];
+  dismiss: Bs5ToastItemComponent["dismiss"];
   index: number;
   $parent?: any;
   $event?: CustomEvent;
 }
 
-export class Bs4ToastItemComponent extends Component {
-  public static tagName = "bs4-toast-item";
+export class Bs5ToastItemComponent extends Component {
+  public static tagName = "bs5-toast-item";
 
   public _debug = false;
   protected autobind = true;
@@ -45,7 +45,7 @@ export class Bs4ToastItemComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init(Bs4ToastItemComponent.observedAttributes);
+    this.init(Bs5ToastItemComponent.observedAttributes);
   }
 
   protected async afterBind() {
@@ -87,7 +87,7 @@ export class Bs4ToastItemComponent extends Component {
     if (!el) {
       el = getElementFromEvent(event);
     }
-    const toastContainer: Bs4NotificationContainerScope | null =
+    const toastContainer: Bs5NotificationContainerScope | null =
       this.scope.$parent?.$parent || null;
     if (
       typeof toastContainer?.onItemHide === "function" &&

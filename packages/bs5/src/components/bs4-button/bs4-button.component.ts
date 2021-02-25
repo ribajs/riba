@@ -2,11 +2,11 @@ import { Component } from "@ribajs/core";
 
 interface Scope {
   animationClass: string;
-  onClick: Bs4ButtonComponent["onClick"];
+  onClick: Bs5ButtonComponent["onClick"];
 }
 
-export class Bs4ButtonComponent extends Component {
-  public static tagName = "bs4-button";
+export class Bs5ButtonComponent extends Component {
+  public static tagName = "bs5-button";
 
   protected autobind = true;
 
@@ -31,7 +31,7 @@ export class Bs4ButtonComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init(Bs4ButtonComponent.observedAttributes);
+    this.init(Bs5ButtonComponent.observedAttributes);
   }
 
   protected startAnimation() {

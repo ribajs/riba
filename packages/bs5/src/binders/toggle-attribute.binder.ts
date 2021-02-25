@@ -1,7 +1,7 @@
 import { Binder } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 
-export interface Bs4ToggleAttribute extends Binder<boolean> {
+export interface Bs5ToggleAttribute extends Binder<boolean> {
   toggleButtonEvents: EventDispatcher | null;
   state: "removed" | "added";
   triggerState: () => void;
@@ -14,30 +14,30 @@ export interface Bs4ToggleAttribute extends Binder<boolean> {
 import { TOGGLE_BUTTON, TOGGLE_ATTRIBUTE } from "../constants";
 
 /**
- * Adds / removes the attribute on click on the bs4-toggle-button with the same id
+ * Adds / removes the attribute on click on the bs5-toggle-button with the same id
  * E.g. with this binder you can toggle a hidden attribute to show / hide the element
  * Events
  * * `off`
  * * `on`
  */
 export const toggleAttributeBinder: Binder<string> = {
-  name: "bs4-toggle-attribute-*",
+  name: "bs5-toggle-attribute-*",
   toggleButtonEvents: null,
   state: "off",
   triggerState() {
-    const self = (this.binder || this) as Bs4ToggleAttribute;
+    const self = (this.binder || this) as Bs5ToggleAttribute;
     self.toggleButtonEvents?.trigger(
       TOGGLE_BUTTON.eventNames.state,
       self.state
     );
   },
   onToggle() {
-    const self = (this.binder || this) as Bs4ToggleAttribute;
-    // console.debug('onToggle', (this.binder as Bs4ToggleAttribute));
+    const self = (this.binder || this) as Bs5ToggleAttribute;
+    // console.debug('onToggle', (this.binder as Bs5ToggleAttribute));
     self.toggle.bind(this)(this.el);
   },
   toggle(el: HTMLElement) {
-    const self = (this.binder || this) as Bs4ToggleAttribute;
+    const self = (this.binder || this) as Bs5ToggleAttribute;
     if (self.state === "removed") {
       self.add.bind(this)(el);
     } else {
@@ -45,7 +45,7 @@ export const toggleAttributeBinder: Binder<string> = {
     }
   },
   remove(el: HTMLElement) {
-    const self = (this.binder || this) as Bs4ToggleAttribute;
+    const self = (this.binder || this) as Bs5ToggleAttribute;
     const attributeName = this.args[0] as string;
     el.removeAttribute(attributeName);
     self.state = "removed";
@@ -57,7 +57,7 @@ export const toggleAttributeBinder: Binder<string> = {
     self.triggerState();
   },
   add(el: HTMLElement) {
-    const self = (this.binder || this) as Bs4ToggleAttribute;
+    const self = (this.binder || this) as Bs5ToggleAttribute;
     const attributeName = this.args[0] as string;
 
     el.setAttribute(attributeName, attributeName);
@@ -70,13 +70,13 @@ export const toggleAttributeBinder: Binder<string> = {
     self.triggerState();
   },
   bind(el) {
-    const self = (this.binder || this) as Bs4ToggleAttribute;
+    const self = (this.binder || this) as Bs5ToggleAttribute;
     const attributeName = this.args[0] as string;
     self.state = el.hasAttribute(attributeName) ? "added" : "removed";
   },
 
   unbind() {
-    const self = (this.binder || this) as Bs4ToggleAttribute;
+    const self = (this.binder || this) as Bs5ToggleAttribute;
     self.toggleButtonEvents?.off(
       TOGGLE_BUTTON.eventNames.toggle,
       self.onToggle,
@@ -91,7 +91,7 @@ export const toggleAttributeBinder: Binder<string> = {
 
   routine(el: HTMLElement, newId: string) {
     const oldId = this.getValue(el);
-    const self = (this.binder || this) as Bs4ToggleAttribute;
+    const self = (this.binder || this) as Bs5ToggleAttribute;
     let toggleButton = self.toggleButtonEvents;
     if (oldId && toggleButton) {
       toggleButton.off(TOGGLE_BUTTON.eventNames.toggle, self.onToggle, self);

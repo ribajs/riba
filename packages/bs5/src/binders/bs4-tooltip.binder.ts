@@ -22,7 +22,7 @@ template.appendChild(inner);
  *
  */
 export const tooltipBinder: Binder<string> = {
-  name: "bs4-tooltip",
+  name: "bs5-tooltip",
   block: false,
   bind(el: HTMLUnknownElement) {
     // this.customData.$tip = $(template);

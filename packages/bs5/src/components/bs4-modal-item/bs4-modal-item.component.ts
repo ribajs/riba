@@ -1,23 +1,23 @@
 import { Component } from "@ribajs/core";
 
-import template from "./bs4-modal-item.component.html";
+import template from "./bs5-modal-item.component.html";
 import { Modal } from "../../interfaces";
 import { getElementFromEvent } from "@ribajs/utils/src/dom";
 import { ModalService } from "../../services/modal.service";
-import { Scope as Bs4NotificationContainerScope } from "../bs4-notification-container/bs4-notification-container.component";
+import { Scope as Bs5NotificationContainerScope } from "../bs5-notification-container/bs5-notification-container.component";
 
 interface Scope {
   iconUrl?: string;
   modal?: Modal;
-  onHidden: Bs4ModalItemComponent["onHidden"];
-  dismiss: Bs4ModalItemComponent["dismiss"];
+  onHidden: Bs5ModalItemComponent["onHidden"];
+  dismiss: Bs5ModalItemComponent["dismiss"];
   index: number;
   $parent?: any;
   $event?: CustomEvent;
 }
 
-export class Bs4ModalItemComponent extends Component {
-  public static tagName = "bs4-modal-item";
+export class Bs5ModalItemComponent extends Component {
+  public static tagName = "bs5-modal-item";
 
   public _debug = false;
   protected autobind = true;
@@ -44,7 +44,7 @@ export class Bs4ModalItemComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init(Bs4ModalItemComponent.observedAttributes);
+    this.init(Bs5ModalItemComponent.observedAttributes);
   }
 
   protected async afterBind() {
@@ -86,7 +86,7 @@ export class Bs4ModalItemComponent extends Component {
     if (!el) {
       el = getElementFromEvent(event);
     }
-    const notificationContainer: Bs4NotificationContainerScope | null =
+    const notificationContainer: Bs5NotificationContainerScope | null =
       this.scope.$parent?.$parent || null;
     if (
       typeof notificationContainer?.onItemHide === "function" &&

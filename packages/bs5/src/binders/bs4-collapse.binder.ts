@@ -6,10 +6,10 @@ import { CollapseService } from "../services/collapse.service";
  * @deprecated
  */
 export const collapseBinder: Binder<string> = {
-  name: "bs4-collapse",
+  name: "bs5-collapse",
   bind() {
     console.warn(
-      "bs4-collapse is deprecated, use bs4-toggle-collapse-on-click instead."
+      "bs5-collapse is deprecated, use bs5-toggle-collapse-on-click instead."
     );
   },
   routine(el: HTMLElement, targetSelector: string) {

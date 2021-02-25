@@ -1,9 +1,9 @@
 import {
-  Bs4ContentsComponent,
-  Scope as Bs4ContentsComponentScope,
-} from "../bs4-contents/bs4-contents.component";
+  Bs5ContentsComponent,
+  Scope as Bs5ContentsComponentScope,
+} from "../bs5-contents/bs5-contents.component";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import template from "./bs4-scrollspy.component.html";
+import template from "./bs5-scrollspy.component.html";
 
 export interface Anchor {
   element: HTMLHeadingElement;
@@ -12,7 +12,7 @@ export interface Anchor {
   childs: Anchor[];
 }
 
-export interface Scope extends Bs4ContentsComponentScope {
+export interface Scope extends Bs5ContentsComponentScope {
   /**
    * Pixels to offset from top when calculating position of scroll.
    */
@@ -23,8 +23,8 @@ export interface Scope extends Bs4ContentsComponentScope {
   offsetBottom: number;
 }
 
-export class Bs4ScrollspyComponent extends Bs4ContentsComponent {
-  public static tagName = "bs4-scrollspy";
+export class Bs5ScrollspyComponent extends Bs5ContentsComponent {
+  public static tagName = "bs5-scrollspy";
 
   protected autobind = true;
 
@@ -59,7 +59,7 @@ export class Bs4ScrollspyComponent extends Bs4ContentsComponent {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init(Bs4ScrollspyComponent.observedAttributes);
+    this.init(Bs5ScrollspyComponent.observedAttributes);
   }
 
   protected requiredAttributes() {

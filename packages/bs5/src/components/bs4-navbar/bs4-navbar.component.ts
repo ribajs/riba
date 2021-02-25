@@ -5,8 +5,8 @@ import {
   CLASS_NAME_COLLAPSED,
 } from "../../services/collapse.service";
 
-export class Bs4NavbarComponent extends Component {
-  public static tagName = "bs4-navbar";
+export class Bs5NavbarComponent extends Component {
+  public static tagName = "bs5-navbar";
 
   protected scope: any = {
     toggle: this.toggle,
@@ -73,7 +73,7 @@ export class Bs4NavbarComponent extends Component {
 
     this.onStateChange();
 
-    this.init(Bs4NavbarComponent.observedAttributes);
+    this.init(Bs5NavbarComponent.observedAttributes);
   }
 
   protected setCollapseElement() {

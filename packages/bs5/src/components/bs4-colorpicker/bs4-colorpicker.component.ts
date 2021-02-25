@@ -5,7 +5,7 @@
 import Color from "@sphinxxxx/color-conversion";
 import { Component } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
-import template from "./bs4-colorpicker.component.html";
+import template from "./bs5-colorpicker.component.html";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { ColorPickerOptions } from "../../interfaces";
 import { debounce } from "@ribajs/utils/src/control";
@@ -178,8 +178,8 @@ interface Scope extends ColorPickerOptions {
   alphaBg: string;
 }
 
-export class Bs4ColorPickerComponent extends Component {
-  public static tagName = "bs4-colorpicker";
+export class Bs5ColorPickerComponent extends Component {
+  public static tagName = "bs5-colorpicker";
   static get observedAttributes() {
     return [
       "namespace",
@@ -227,7 +227,7 @@ export class Bs4ColorPickerComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    super.init(Bs4ColorPickerComponent.observedAttributes);
+    super.init(Bs5ColorPickerComponent.observedAttributes);
     console.debug("scope", this.scope);
   }
 
@@ -238,7 +238,7 @@ export class Bs4ColorPickerComponent extends Component {
   protected async beforeBind() {
     await super.beforeBind();
     this.eventDispatcher = EventDispatcher.getInstance(
-      "bs4-colorpicker:" + this.scope.namespace
+      "bs5-colorpicker:" + this.scope.namespace
     );
     this.setColor(this.scope.color);
     this.updateUI();

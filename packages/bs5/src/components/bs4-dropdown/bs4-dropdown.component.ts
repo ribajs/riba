@@ -1,8 +1,8 @@
 import { Component } from "@ribajs/core";
 import { DropdownService } from "../../services/dropdown.service";
 
-export class Bs4DropdownComponent extends Component {
-  public static tagName = "bs4-dropdown";
+export class Bs5DropdownComponent extends Component {
+  public static tagName = "bs5-dropdown";
 
   protected scope: any = {
     toggle: this.toggle,
@@ -34,7 +34,7 @@ export class Bs4DropdownComponent extends Component {
         | HTMLButtonElement
         | HTMLAnchorElement
     );
-    this.init(Bs4DropdownComponent.observedAttributes);
+    this.init(Bs5DropdownComponent.observedAttributes);
   }
 
   protected template() {

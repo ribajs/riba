@@ -1,7 +1,7 @@
 import { BasicComponent } from "@ribajs/core";
 
-export class Bs4IconComponent extends BasicComponent {
-  public static tagName = "bs4-icon";
+export class Bs5IconComponent extends BasicComponent {
+  public static tagName = "bs5-icon";
 
   static get observedAttributes() {
     return ["size", "width", "height", "src", "color", "direction"];
@@ -42,7 +42,7 @@ export class Bs4IconComponent extends BasicComponent {
               return response.text();
             } else {
               console.error(
-                "[bs4-icon] Only svg's are supported! But content-type is " +
+                "[bs5-icon] Only svg's are supported! But content-type is " +
                   response.headers.get("content-type")
               );
             }
@@ -164,7 +164,7 @@ export class Bs4IconComponent extends BasicComponent {
     this.setAttribute("aria-hidden", "true");
     this.setAttribute("role", "img");
     this.classList.add("iconset");
-    this.init(Bs4IconComponent.observedAttributes);
+    this.init(Bs5IconComponent.observedAttributes);
     // set default values
     if (!this.scope.direction) {
       this.scope.direction = "up";

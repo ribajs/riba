@@ -1,7 +1,7 @@
 import { Component } from "@ribajs/core";
 import { getUrl } from "@ribajs/utils/src/url";
-import template from "./bs4-share.component.html";
-import labelTemplate from "./bs4-share.label.html";
+import template from "./bs5-share.component.html";
+import labelTemplate from "./bs5-share.label.html";
 import { ShareItem, ShareUrlType } from "../../interfaces";
 import { DropdownService } from "@ribajs/bs5";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
@@ -33,8 +33,8 @@ export interface Scope {
   dropdownDirection: "up" | "down" | "right" | "left";
 
   // Methods
-  shareOnService: Bs4ShareComponent["shareOnService"];
-  share: Bs4ShareComponent["share"];
+  shareOnService: Bs5ShareComponent["shareOnService"];
+  share: Bs5ShareComponent["share"];
 }
 
 export interface NavigatorShareParam {
@@ -60,8 +60,8 @@ declare global {
  *  * https://github.com/dimsemenov/PhotoSwipe/blob/master/src/js/ui/photoswipe-ui-default.js
  *
  */
-export class Bs4ShareComponent extends Component {
-  public static tagName = "bs4-share";
+export class Bs5ShareComponent extends Component {
+  public static tagName = "bs5-share";
 
   public _debug = false;
 
@@ -79,7 +79,7 @@ export class Bs4ShareComponent extends Component {
 
   protected dropdown?: DropdownService;
 
-  // Count of Bs4ShareComponent components
+  // Count of Bs5ShareComponent components
   static count = 0;
 
   protected scope: Scope;
@@ -88,7 +88,7 @@ export class Bs4ShareComponent extends Component {
     super();
     this.scope = this.getScopeDefaults();
     this.debug("constructor", this.scope);
-    Bs4ShareComponent.count++;
+    Bs5ShareComponent.count++;
     this.onExternalOpenEvent = this.onExternalOpenEvent.bind(this);
     this.onExternalCloseEvent = this.onExternalCloseEvent.bind(this);
   }
@@ -199,7 +199,7 @@ export class Bs4ShareComponent extends Component {
       isIos: this.isIos(),
       isDesktop: false,
       isNative: this.browserSupportsNativeShare(),
-      dropdownId: "dropdownShare" + Bs4ShareComponent.count,
+      dropdownId: "dropdownShare" + Bs5ShareComponent.count,
       shareItems: this.getDefaultShareServices(),
       dropdownDirection: "down",
       // Methods
@@ -223,7 +223,7 @@ export class Bs4ShareComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init(Bs4ShareComponent.observedAttributes);
+    this.init(Bs5ShareComponent.observedAttributes);
     this.addEventListeners();
   }
 

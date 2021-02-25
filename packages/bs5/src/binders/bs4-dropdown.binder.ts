@@ -6,7 +6,7 @@ import { DropdownService } from "../services/dropdown.service";
  * @see https://getbootstrap.com/docs/4.1/components/dropdown/
  */
 export const dropdownBinder: Binder<string> = {
-  name: "bs4-dropdown",
+  name: "bs5-dropdown",
   bind(el: HTMLElement) {
     this.customData = {
       toggler:

@@ -1,6 +1,6 @@
 import { Component } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import template from "./bs4-contents.component.html";
+import template from "./bs5-contents.component.html";
 
 export interface Anchor {
   element: HTMLHeadingElement;
@@ -40,8 +40,8 @@ export interface Scope {
   anchors: Anchor[];
 }
 
-export class Bs4ContentsComponent extends Component {
-  public static tagName = "bs4-contents";
+export class Bs5ContentsComponent extends Component {
+  public static tagName = "bs5-contents";
 
   protected autobind = true;
 
@@ -73,7 +73,7 @@ export class Bs4ContentsComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init(Bs4ContentsComponent.observedAttributes);
+    this.init(Bs5ContentsComponent.observedAttributes);
   }
 
   protected getIdFromElementOrParent(

@@ -1,6 +1,6 @@
 import { handleizeFormatter, FormatterFn } from "@ribajs/core";
-import templateHorizontal from "./bs4-tabs-horizontal.component.html";
-import templateVertical from "./bs4-tabs-vertical.component.html";
+import templateHorizontal from "./bs5-tabs-horizontal.component.html";
+import templateVertical from "./bs5-tabs-vertical.component.html";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { TemplatesComponent } from "../templates/templates.component";
 import { throttle } from "@ribajs/utils/src/control";
@@ -18,15 +18,15 @@ export interface Tab {
 
 export interface Scope {
   items: Tab[];
-  activate: Bs4TabsComponent["activate"];
-  deactivate: Bs4TabsComponent["activate"];
-  deactivateAll: Bs4TabsComponent["deactivateAll"];
+  activate: Bs5TabsComponent["activate"];
+  deactivate: Bs5TabsComponent["activate"];
+  deactivateAll: Bs5TabsComponent["deactivateAll"];
   optionTabsAutoHeight: boolean;
   optionTabsAngle: "vertical" | "horizontal";
 }
 
-export class Bs4TabsComponent extends TemplatesComponent {
-  public static tagName = "bs4-tabs";
+export class Bs5TabsComponent extends TemplatesComponent {
+  public static tagName = "bs5-tabs";
 
   protected templateAttributes = [
     {
@@ -218,7 +218,7 @@ export class Bs4TabsComponent extends TemplatesComponent {
 
   /**
    * Trigger `visibility-changed` for components that need to update if visibility changes.
-   * E.g. this event is used the bs4-slideshow component
+   * E.g. this event is used the bs5-slideshow component
    * @param element
    * @param visible
    */
@@ -238,7 +238,7 @@ export class Bs4TabsComponent extends TemplatesComponent {
     super.connectedCallback();
     this.initTabs();
     this.activateFirstTab();
-    this.init(Bs4TabsComponent.observedAttributes);
+    this.init(Bs5TabsComponent.observedAttributes);
   }
 
   protected disconnectedCallback() {
