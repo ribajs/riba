@@ -1,6 +1,6 @@
 import { Binder } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
-import { CollapseService } from "../services/collapse.service";
+import { Collapse } from "../services/collapse";
 import { onRoute } from "@ribajs/utils/src/url";
 
 /**
@@ -11,7 +11,7 @@ import { onRoute } from "@ribajs/utils/src/url";
 export const expanOnUrlBinder: Binder<string> = {
   name: "bs5-expan-on-url",
   routine(el: HTMLElement, url: string) {
-    const collapseService = new CollapseService(el, { toggle: false });
+    const collapseService = new Collapse(el, { toggle: false });
     const dispatcher = new EventDispatcher("main");
 
     const checkURL = (urlToCheck?: string) => {

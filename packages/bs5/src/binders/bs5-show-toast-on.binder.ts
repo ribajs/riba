@@ -1,8 +1,8 @@
 import { Binder } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
-import { Toast } from "@ribajs/bs5/src/interfaces";
+import { ToastNotification } from "@ribajs/bs5";
 
-export const showToastOnEventBinder: Binder<Toast> = {
+export const showToastOnEventBinder: Binder<ToastNotification> = {
   name: "show-toast-on-*",
   bind(el: HTMLUnknownElement) {
     this.customData = {
@@ -11,7 +11,9 @@ export const showToastOnEventBinder: Binder<Toast> = {
         this.customData.toastData.$event = event;
         this.customData.toastData.$context = this.view.models;
         console.debug(this.customData.toastData);
-        const toastData: Toast = new Toast(this.customData.toastData);
+        const toastData: ToastNotification = new ToastNotification(
+          this.customData.toastData
+        );
         const notificationDispatcher = new EventDispatcher(
           toastData.channel || "toast"
         );
@@ -23,7 +25,7 @@ export const showToastOnEventBinder: Binder<Toast> = {
     this.customData.onEvent = this.customData.onEvent.bind(this);
     el.addEventListener(eventName, this.customData.onEvent);
   },
-  routine(el: HTMLUnknownElement, toastData: Toast) {
+  routine(el: HTMLUnknownElement, toastData: ToastNotification) {
     if (this.args === null) {
       throw new Error("args is null");
     }

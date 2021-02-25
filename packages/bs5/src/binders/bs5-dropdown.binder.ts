@@ -1,5 +1,5 @@
 import { Binder } from "@ribajs/core";
-import { DropdownService } from "../services/dropdown.service";
+import { Dropdown } from "../services/dropdown";
 
 /**
  *
@@ -23,7 +23,7 @@ export const dropdownBinder: Binder<string> = {
         this.customData.dropdownService.toggle
       );
     }
-    this.customData.dropdownService = new DropdownService(
+    this.customData.dropdownService = new Dropdown(
       this.customData.toggler,
       option
     );

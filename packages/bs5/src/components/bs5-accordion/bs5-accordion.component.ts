@@ -1,5 +1,5 @@
 import { handleizeFormatter, FormatterFn } from "@ribajs/core";
-import { CollapseService } from "../../services/collapse.service";
+import { Collapse } from "../../services/collapse";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { TemplatesComponent } from "../templates/templates.component";
 
@@ -52,7 +52,7 @@ export class Bs5AccordionComponent extends TemplatesComponent {
     },
   ];
 
-  // protected collapseServices: CollapseService[] = [];
+  // protected collapseServices: Collapse[] = [];
 
   static get observedAttributes() {
     return ["collapse-icon-src", "collapse-icon-size", "show-only-one"];
@@ -75,7 +75,7 @@ export class Bs5AccordionComponent extends TemplatesComponent {
     const target = this.querySelector<HTMLElement>(`[data-index="${index}"]`);
     if (target) {
       this.initItemEventListeners(item, target);
-      new CollapseService(target, { toggle: false }).hide();
+      new Collapse(target, { toggle: false }).hide();
     }
   }
 
@@ -88,12 +88,12 @@ export class Bs5AccordionComponent extends TemplatesComponent {
     );
     if (others && this.scope.showOnlyOne) {
       for (const other of others) {
-        new CollapseService(other, { toggle: false }).hide();
+        new Collapse(other, { toggle: false }).hide();
       }
     }
     if (target) {
       this.initItemEventListeners(item, target);
-      new CollapseService(target, { toggle: false }).show();
+      new Collapse(target, { toggle: false }).show();
     }
   }
 
@@ -106,31 +106,31 @@ export class Bs5AccordionComponent extends TemplatesComponent {
     );
     if (others && this.scope.showOnlyOne) {
       for (const other of others) {
-        new CollapseService(other, { toggle: false }).hide();
+        new Collapse(other, { toggle: false }).hide();
       }
     }
     if (target) {
       this.initItemEventListeners(item, target);
-      new CollapseService(target, { toggle: false }).toggle();
+      new Collapse(target, { toggle: false }).toggle();
     }
   }
 
   protected initItemEventListeners(item: AccordionItem, element: HTMLElement) {
     element.removeEventListener(
-      CollapseService.Events.hide,
+      Collapse.Events.hide,
       this.onHide.bind(this, element, item)
     );
     element.removeEventListener(
-      CollapseService.Events.show,
+      Collapse.Events.show,
       this.onShow.bind(this, element, item)
     );
     element.addEventListener(
-      CollapseService.Events.hide,
+      Collapse.Events.hide,
       this.onHide.bind(this, element, item),
       { once: true }
     );
     element.addEventListener(
-      CollapseService.Events.show,
+      Collapse.Events.show,
       this.onShow.bind(this, element, item),
       { once: true }
     );

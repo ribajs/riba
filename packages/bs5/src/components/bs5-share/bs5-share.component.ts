@@ -3,7 +3,7 @@ import { getUrl } from "@ribajs/utils/src/url";
 import template from "./bs5-share.component.html";
 import labelTemplate from "./bs5-share.label.html";
 import { ShareItem, ShareUrlType } from "../../interfaces";
-import { DropdownService } from "@ribajs/bs5";
+import { Dropdown } from "@ribajs/bs5";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 
 export interface Scope {
@@ -77,7 +77,7 @@ export class Bs5ShareComponent extends Component {
     ];
   }
 
-  protected dropdown?: DropdownService;
+  protected dropdown?: Dropdown;
 
   // Count of Bs5ShareComponent components
   static count = 0;
@@ -304,7 +304,7 @@ export class Bs5ShareComponent extends Component {
       );
       return;
     }
-    this.dropdown = new DropdownService(dropDownButtonElement);
+    this.dropdown = new Dropdown(dropDownButtonElement);
   }
 
   /**

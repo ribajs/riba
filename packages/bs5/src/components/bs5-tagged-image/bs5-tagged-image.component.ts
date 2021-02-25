@@ -137,6 +137,18 @@ export class Bs5TaggedImageComponent extends Component {
    * LIFECYCLE HELPERS
    */
 
+  protected parseColor(color: string) {
+    // Is css variable
+    if (color.startsWith("--")) {
+      return `var(${color})`;
+    }
+    // Is bootstrap color variable
+    if (color.startsWith("bs-")) {
+      return `var(--${color})`;
+    }
+    return color;
+  }
+
   protected parseChildTags() {
     this.debug(`parseChildTags()`);
     for (const tagEl of Array.from(
@@ -153,7 +165,10 @@ export class Bs5TaggedImageComponent extends Component {
       );
 
       const shape = tagEl.getAttribute("shape") || undefined;
-      const color = tagEl.getAttribute("color") || undefined;
+      let color = tagEl.getAttribute("color") || undefined;
+      if (color) {
+        color = this.parseColor(color);
+      }
       const borderRadius = tagEl.getAttribute("border-radius") || undefined;
       const fullSize = tagEl.getAttribute("full-size") || undefined;
       const smallSize = tagEl.getAttribute("small-size") || undefined;

@@ -2,8 +2,8 @@
     <div class="row py-4">
     <div class="col-12">
       <h3 class="text-center">Responsive Grid Cover</h3>
-      <div class="embed-responsive embed-responsive-100vh">
-        <bs5-tagged-image options="{'popoverOptions': {'trigger': 'click'}}" class="embed-responsive-item fit-cover" rv-tags="responsiveTags | json 0" img-src="../../../images/grid.png">
+      <div class="ratio-1x1">
+        <bs5-tagged-image options="{'popoverOptions': {'trigger': 'click'}}" class="fit-cover" rv-tags="responsiveTags | json 0" img-src="../../../images/grid.png">
         </bs5-tagged-image>
       </div>
     </div>
@@ -12,8 +12,8 @@
   <div class="row py-4">
     <div class="col-12">
       <h3 class="text-center">Responsive Grid Contain (trigger: hover)</h3>
-      <div class="embed-responsive embed-responsive-100vh">
-        <bs5-tagged-image options="{'popoverOptions': {'trigger': 'hover'}}" class="embed-responsive-item fit-contain" rv-tags="responsiveTags | json 0" img-src="../../../images/grid.png">
+      <div class="ratio-1x2">
+        <bs5-tagged-image options="{'popoverOptions': {'trigger': 'hover'}}" class="fit-contain" rv-tags="responsiveTags | json 0" img-src="../../../images/grid.png">
         </bs5-tagged-image>
       </div>
     </div>
@@ -39,12 +39,12 @@
 
 <div class="container-fluid">
   <div class="row pb-4">
-    <div class="col-5"></div>
-    <div class="col-2">
-      <h3>Defaults</h3>
+    <div class="col"></div>
+    <div class="col-5">
+      <h3 class="text-center">Defaults</h3>
       <bs5-tagged-image
         rv-loading="lazy"
-        class="embed-responsive-item"
+        class=""
         rv-img-src="fadeshowImages.0.src"
         rv-img-srcset="fadeshowImages.0.srcset"
         img-sizes="(max-height: 500px) 800px,
@@ -64,16 +64,16 @@
         <tag title="Tag 7 Title">Tag 7 <b>Content</b></tag>
       </bs5-tagged-image>
     </div>
-    <div class="col-5"></div>
+    <div class="col"></div>
   </div>
 
   <div class="row pb-4">
-    <div class="col-4"></div>
-    <div class="col-4">
-      <h3>Bootstrap Colors</h3>
+    <div class="col"></div>
+    <div class="col-6">
+      <h3 class="text-center">Bootstrap Colors</h3>
       <bs5-tagged-image
         loading="lazy"
-        class="lazy embed-responsive-item"
+        class="lazy "
         rv-img-src="fadeshowImages.0.src"
         rv-img-srcset="fadeshowImages.0.srcset"
         img-sizes="(max-height: 500px) 800px,
@@ -84,15 +84,15 @@
                 1920px,
         "
         >
-        <tag x="0.5" y="0.5" title="bootstrap primary" color="primary">Bootstrap Primary</tag>
-        <tag title="bootstrap secondary" color="secondary">Bootstrap Secondary</tag>
-        <tag title="bootstrap success" color="succes">Bootstrap Success</tag>
-        <tag x="0.25" y="0.75" title="bootstrap danger" color="danger">Bootstrap Danger</tag>
-        <tag title="bootstrap warning" color="warning">Bootstrap Warning</tag>
-        <tag title="bootstrap info" color="info">Bootstrap Info</tag>
+        <tag x="0.5" y="0.5" title="bootstrap primary" color="bs-primary">Bootstrap Primary</tag>
+        <tag title="bootstrap secondary" color="bs-secondary">Bootstrap Secondary</tag>
+        <tag title="bootstrap success" color="bs-success">Bootstrap Success</tag>
+        <tag x="0.25" y="0.75" title="bootstrap danger" color="bs-danger">Bootstrap Danger</tag>
+        <tag title="bootstrap warning" color="bs-warning">Bootstrap Warning</tag>
+        <tag title="bootstrap info" color="bs-info">Bootstrap Info</tag>
       </bs5-tagged-image>
     </div>
-    <div class="col-4"></div>
+    <div class="col"></div>
   </div>
 
 
@@ -127,14 +127,14 @@
 
   <div class="row py-4">
     <div class="col-12 px-0">
-      <h3 class=text-center>BS4-Carousel Fade-Show</h3>
+      <h3 class="text-center">BS4-Carousel Fade-Show</h3>
       <bs5-carousel rv-parent class="carousel slide carousel-fade" interval="10000">
         <div class="carousel-inner">
           <div rv-each-image="fadeshowImages" class="carousel-item" rv-class-active="%image% | eq 0">
-            <div class="embed-responsive embed-responsive-100vh">
+            <div class="">
               <bs5-tagged-image
               loading="lazy"
-              class="lazy embed-responsive-item"
+              class="lazy "
               rv-img-src="image.src"
               rv-img-srcset="image.srcset"
               rv-tags="image.tags | json 0"
@@ -165,7 +165,7 @@
     <section class="col-12 my-5">
       <h3 class="text-center">BS4-Slideshow</h3>
       <bs5-slideshow autoplay="true" autoplay-interval="4000" control-prev-icon-src="arrow_carrot.svg" indicator-inactive-icon-src="icon_circle-empty.svg" indicator-active-icon-src="icon_circle-selected.svg" control-next-icon-src="arrow_carrot.svg">
-        <div class="slideshow-inner">
+        <div class="row slideshow-row">
           <div class="slide-placeholder col-4">&nbsp;</div>
           <div class="slide col-4">
             <bs5-tagged-image options="{'popoverOptions': {'container': 'body'}}" img-loading="lazy" class="img-fluid w-100" img-src="https://picsum.photos/1500/600?random=1" img-alt="Static Random Image from https://picsum.photos/"><tag title="tag1">content 1</tag><tag title="tag2">content 2</tag><tag title="tag3">content 3</tag></bs5-tagged-image>

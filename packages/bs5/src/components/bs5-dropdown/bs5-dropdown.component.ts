@@ -1,5 +1,5 @@
 import { Component } from "@ribajs/core";
-import { DropdownService } from "../../services/dropdown.service";
+import { Dropdown } from "../../services/dropdown";
 
 export class Bs5DropdownComponent extends Component {
   public static tagName = "bs5-dropdown";
@@ -8,7 +8,7 @@ export class Bs5DropdownComponent extends Component {
     toggle: this.toggle,
   };
 
-  protected dropdownService?: DropdownService;
+  protected dropdownService?: Dropdown;
 
   static get observedAttributes() {
     return [];
@@ -22,14 +22,14 @@ export class Bs5DropdownComponent extends Component {
     event.preventDefault();
     event.stopPropagation();
     if (!this.dropdownService) {
-      throw new Error("DropdownService not ready!");
+      throw new Error("Dropdown not ready!");
     }
     return this.dropdownService.toggle();
   }
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.dropdownService = new DropdownService(
+    this.dropdownService = new Dropdown(
       this.querySelector(".dropdown-toggle") as
         | HTMLButtonElement
         | HTMLAnchorElement

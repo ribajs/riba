@@ -1,9 +1,6 @@
 import { Component } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
-import {
-  CollapseService,
-  CLASS_NAME_COLLAPSED,
-} from "../../services/collapse.service";
+import { Collapse } from "../../services/collapse";
 
 export class Bs5NavbarComponent extends Component {
   public static tagName = "bs5-navbar";
@@ -16,7 +13,7 @@ export class Bs5NavbarComponent extends Component {
     collapseSelector: ".navbar-collapse",
   };
 
-  protected collapseTargets: Map<HTMLElement, CollapseService> = new Map();
+  protected collapseTargets: Map<HTMLElement, Collapse> = new Map();
   protected routerEvents?: EventDispatcher;
 
   static get observedAttributes() {
@@ -93,14 +90,14 @@ export class Bs5NavbarComponent extends Component {
       if (!this.collapseTargets.has(collapseElement)) {
         this.collapseTargets.set(
           collapseElement,
-          new CollapseService(collapseElement, { toggle: false })
+          new Collapse(collapseElement, { toggle: false })
         );
         collapseElement.addEventListener(
-          CollapseService.Events.shown,
+          Collapse.Events.shown,
           this.onStateChange
         );
         collapseElement.addEventListener(
-          CollapseService.Events.hidden,
+          Collapse.Events.hidden,
           this.onStateChange
         );
       }
@@ -122,11 +119,11 @@ export class Bs5NavbarComponent extends Component {
     }
     this.collapseTargets.delete(collapseElement);
     collapseElement.removeEventListener(
-      CollapseService.Events.shown,
+      Collapse.Events.shown,
       this.onStateChange
     );
     collapseElement.removeEventListener(
-      CollapseService.Events.hidden,
+      Collapse.Events.hidden,
       this.onStateChange
     );
   }
@@ -146,10 +143,10 @@ export class Bs5NavbarComponent extends Component {
       .value?.isCollapsed();
 
     if (this.scope.isCollapsed) {
-      this.classList.add(CLASS_NAME_COLLAPSED);
+      this.classList.add(Collapse.CLASS_NAME_COLLAPSED);
       this.setAttribute("aria-expanded", "false");
     } else {
-      this.classList.remove(CLASS_NAME_COLLAPSED);
+      this.classList.remove(Collapse.CLASS_NAME_COLLAPSED);
       this.setAttribute("aria-expanded", "true");
     }
   }

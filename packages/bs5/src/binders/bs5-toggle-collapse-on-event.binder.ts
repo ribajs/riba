@@ -1,10 +1,9 @@
 import { Binder } from "@ribajs/core";
-// import { CollapseService } from '../services/collapse.service';
-import { CollapseService } from "../services/collapse.service";
+import { Collapse } from "../services/collapse";
 
 export interface Bs5CollapseOnEventBinder extends Binder<boolean> {
   onEvent: (event: Event) => void;
-  collapseServices: CollapseService[];
+  collapseServices: Collapse[];
   targets: NodeListOf<HTMLElement>;
 }
 
@@ -15,7 +14,7 @@ export const toggleCollapseOnEventBinder: Binder<string> = {
   name: "bs5-toggle-collapse-on-*",
   bind(el: HTMLElement) {
     this.customData = {
-      targets: new Map<HTMLElement, CollapseService>(),
+      targets: new Map<HTMLElement, Collapse>(),
       onEvent(event: Event) {
         event.preventDefault();
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -58,7 +57,7 @@ export const toggleCollapseOnEventBinder: Binder<string> = {
       if (!this.customData.targets.has(target)) {
         this.customData.targets.set(
           target,
-          new CollapseService(target, { toggle: false })
+          new Collapse(target, { toggle: false })
         );
       }
     }

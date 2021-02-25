@@ -1,6 +1,5 @@
 import { Binder } from "@ribajs/core";
-// import { CollapseService } from '../services/collapse.service';
-import { CollapseService } from "../services/collapse.service";
+import { Collapse } from "../services/collapse";
 
 /**
  * @deprecated
@@ -15,10 +14,10 @@ export const collapseBinder: Binder<string> = {
   routine(el: HTMLElement, targetSelector: string) {
     const targets = document.querySelectorAll<HTMLElement>(targetSelector);
 
-    const collapseServices: CollapseService[] = [];
+    const collapseServices: Collapse[] = [];
 
     targets.forEach((target) => {
-      collapseServices.push(new CollapseService(target, { toggle: false }));
+      collapseServices.push(new Collapse(target, { toggle: false }));
     });
 
     el.addEventListener("click", (event) => {

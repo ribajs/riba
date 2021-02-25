@@ -1,9 +1,3 @@
-import { Placement } from "./placement";
-import { TooltipOptions } from "./tooltip-options";
+import type { Popover } from "bootstrap";
 
-export interface PopoverOptions extends TooltipOptions {
-  placement: Placement;
-  trigger: "click" | "mouseover" | string;
-  content: string;
-  template: string;
-}
+export type PopoverOptions = Popover.Options;

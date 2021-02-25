@@ -1,4 +1,5 @@
-export abstract class Notification implements EventBinderData {
+import type { NotificationEventBinderData } from "./notification-event-binder-data";
+export abstract class Notification implements NotificationEventBinderData {
   type: string;
   title?: string;
 
@@ -10,10 +11,4 @@ export abstract class Notification implements EventBinderData {
     this.type = type;
     this.title = title;
   }
-}
-
-export interface EventBinderData {
-  channel?: string;
-  $event?: CustomEvent;
-  $context?: any;
 }

@@ -1,6 +1,6 @@
 import { Binder } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
-import { CollapseService } from "../services/collapse.service";
+import { Collapse } from "../services/collapse";
 import { onRoute } from "@ribajs/utils/src/url";
 
 /**
@@ -13,7 +13,7 @@ export const collapseOnUrlBinder: Binder<string> = {
   bind(el: HTMLElement) {
     this.customData = {
       dispatcher: EventDispatcher.getInstance("main"),
-      collapseService: new CollapseService(el, { toggle: false }),
+      collapseService: new Collapse(el, { toggle: false }),
     };
   },
   unbind() {

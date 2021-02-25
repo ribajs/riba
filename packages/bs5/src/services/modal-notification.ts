@@ -1,24 +1,7 @@
-import { Notification } from "./notification";
-import { ModalService, ModalOptions } from "../services/modal.service";
+import { Notification, ModalNotificationButton } from "./../interfaces";
+import { Modal } from "../services/modal";
 
-export interface Button {
-  /**
-   * The text displayed in the button.
-   */
-  label: string;
-
-  /**
-   * Method in the scope wich should be called when the button is clicked
-   */
-  action?: string;
-
-  /**
-   * Bootstrap button class e.g. btn-primary, btn-secondary, btn-success, btn-outline-primary, btn-outline-secondary, btn-lg and so on...
-   */
-  class?: string;
-}
-
-export class Modal extends Notification implements ModalOptions {
+export class ModalNotification extends Notification {
   message: string;
   iconUrl?: string;
 
@@ -26,9 +9,9 @@ export class Modal extends Notification implements ModalOptions {
   keyboard: boolean;
   backdrop: boolean | "static";
 
-  buttons: Button[] = [];
+  buttons: ModalNotificationButton[] = [];
 
-  modalService?: ModalService;
+  modalService?: Modal;
   contextualClass?: string;
 
   constructor({
@@ -57,9 +40,9 @@ export class Modal extends Notification implements ModalOptions {
     backdrop?: boolean | "static";
     show?: boolean;
 
-    buttons?: Button[];
+    buttons?: ModalNotificationButton[];
 
-    modalService?: ModalService;
+    modalService?: Modal;
     contextualClass?: string;
     channel?: string;
     $event?: CustomEvent;

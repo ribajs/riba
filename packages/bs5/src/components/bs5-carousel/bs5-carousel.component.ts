@@ -1,16 +1,15 @@
 import { Component } from "@ribajs/core";
-import { CarouselService, Default } from "../../services/carousel.service";
-import { CarouselOption } from "../../interfaces";
+import { Carousel } from "../../services/carousel";
+import { CarouselOptions } from "../../interfaces";
 
 export interface Scope {
   // Properties
-  interval: CarouselOption["interval"];
-  keyboard: CarouselOption["keyboard"];
-  slide: CarouselOption["slide"];
-  pauseOn: CarouselOption["pause"];
-  wrap: CarouselOption["wrap"];
-  touch: CarouselOption["touch"];
-  ride: CarouselOption["ride"]; // TODO
+  interval: CarouselOptions["interval"];
+  keyboard: CarouselOptions["keyboard"];
+  slide: CarouselOptions["slide"];
+  pauseOn: CarouselOptions["pause"];
+  wrap: CarouselOptions["wrap"];
+  touch: CarouselOptions["touch"];
   fade: boolean;
   // Methods
   next: Bs5CarouselComponent["next"];
@@ -33,7 +32,6 @@ export class Bs5CarouselComponent extends Component {
       "pauseOn",
       "wrap",
       "touch",
-      "ride",
       "fade",
     ];
   }
@@ -44,13 +42,12 @@ export class Bs5CarouselComponent extends Component {
 
   protected scope: Scope = {
     // Properties
-    interval: Default.interval,
-    keyboard: Default.keyboard,
-    slide: Default.slide,
-    pauseOn: Default.pause || false, // changed from pause to pauseOn
-    wrap: Default.wrap,
-    touch: Default.touch,
-    ride: Default.touch || false,
+    interval: Carousel.Default.interval,
+    keyboard: Carousel.Default.keyboard,
+    slide: Carousel.Default.slide,
+    pauseOn: Carousel.Default.pause || false, // changed from pause to pauseOn
+    wrap: Carousel.Default.wrap,
+    touch: Carousel.Default.touch,
     fade: false,
     // Methods
     next: this.next,
@@ -64,7 +61,7 @@ export class Bs5CarouselComponent extends Component {
 
   protected autobind = true;
 
-  protected carouselService?: CarouselService;
+  protected carouselService?: Carousel;
 
   constructor() {
     super();
@@ -76,7 +73,7 @@ export class Bs5CarouselComponent extends Component {
   }
 
   protected async afterBind() {
-    this.carouselService = new CarouselService(this, {
+    this.carouselService = new Carousel(this, {
       interval: this.scope.interval,
       keyboard: this.scope.keyboard,
       slide: this.scope.slide,

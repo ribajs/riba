@@ -1,13 +1,13 @@
-import { ToastService } from "../services";
-import { Notification } from "./notification";
+import { Toast } from ".";
+import { Notification } from "../interfaces/notification";
 
-export class Toast extends Notification {
+export class ToastNotification extends Notification {
   message: string;
   iconUrl?: string;
   delay?: number;
   autoHide?: boolean;
   animation?: boolean;
-  toastService?: ToastService;
+  toastService?: Toast;
   contextualClass?: string;
 
   constructor({
@@ -29,7 +29,7 @@ export class Toast extends Notification {
     delay?: number;
     autoHide?: boolean;
     animation?: boolean;
-    toastService?: ToastService;
+    toastService?: Toast;
     contextualClass?: string;
     channel?: string;
     $event?: CustomEvent;

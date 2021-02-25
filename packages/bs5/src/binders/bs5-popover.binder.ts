@@ -1,4 +1,4 @@
-import { PopoverService, PopoverOptions } from "@ribajs/bs5";
+import { Popover, PopoverOptions } from "@ribajs/bs5";
 
 /**
  *
@@ -21,10 +21,10 @@ export const popoverBinder: Binder<string> = {
     }
     options.placement = options.placement || "auto";
 
-    const popover = new PopoverService(el, {
-      ...PopoverService.Default,
+    const popover = new Popover(el, {
+      ...Popover.Default,
       ...options,
-    } as any); // TODO
+    });
 
     // destroy previous popover if it already exists
     if (this.customData.popover) {
@@ -34,7 +34,7 @@ export const popoverBinder: Binder<string> = {
     this.customData.popover = popover;
 
     /*
-     * Methods "show", "hide", etc. of the PopoverService can be called by dispatching an
+     * Methods "show", "hide", etc. of the Popover can be called by dispatching an
      * event `trigger-${methodName}` on the bound element.
      * All these methods have no arguments.
      */
@@ -45,7 +45,6 @@ export const popoverBinder: Binder<string> = {
       "dispose",
       "enable",
       "disable",
-      "toggleEnable",
       "update", // render update
     ];
 
@@ -60,10 +59,14 @@ export const popoverBinder: Binder<string> = {
 
     this.customData.listeners = Object.create(null);
     for (const methodName of methodNames) {
-      const trigger = `trigger-${methodName}`;
-      const listener = (popover[methodName] as any).bind(popover);
-      this.el.addEventListener(trigger, listener);
-      this.customData.listeners[trigger] = listener;
+      if (popover[methodName] && typeof popover[methodName] === "function") {
+        const trigger = `trigger-${String(methodName)}`;
+        const listener = (popover[methodName] as any).bind(popover);
+        this.el.addEventListener(trigger, listener);
+        this.customData.listeners[trigger] = listener;
+      } else {
+        console.warn("Unknown method " + methodName);
+      }
     }
   },
 

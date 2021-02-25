@@ -1,14 +1,13 @@
 import { Component } from "@ribajs/core";
 
 import template from "./bs5-toast-item.component.html";
-import { Toast } from "../../interfaces";
-import { ToastService } from "../../services/toast.service";
+import { Toast, ToastNotification } from "../../services";
 import { Scope as Bs5NotificationContainerScope } from "../bs5-notification-container/bs5-notification-container.component";
 import { getElementFromEvent } from "@ribajs/utils/src/dom";
 
 interface Scope {
   iconUrl?: string;
-  toast?: Toast;
+  toast?: ToastNotification;
   onHidden: Bs5ToastItemComponent["onHidden"];
   dismiss: Bs5ToastItemComponent["dismiss"];
   index: number;
@@ -22,7 +21,7 @@ export class Bs5ToastItemComponent extends Component {
   public _debug = false;
   protected autobind = true;
 
-  protected toastService?: ToastService;
+  protected toastService?: Toast;
 
   static get observedAttributes() {
     return ["toast", "icon-url", "index"];
@@ -49,28 +48,24 @@ export class Bs5ToastItemComponent extends Component {
   }
 
   protected async afterBind() {
-    this.initToastService();
+    this.initToast();
     await super.afterBind();
   }
 
-  protected initToastService() {
+  protected initToast() {
     const toast = this.scope.toast;
     const toastEl = this.firstElementChild as HTMLElement | null;
     if (toast && toastEl) {
-      this.toastService = new ToastService(toastEl, {
+      this.toastService = new Toast(toastEl, {
         delay: toast.delay !== undefined ? toast.delay : 5000,
         autohide: toast.autoHide !== undefined ? toast.autoHide : true,
         animation: toast.animation !== undefined ? toast.animation : true,
       });
 
       // Call onHidden on hidden event once
-      toastEl.addEventListener(
-        ToastService.Events.hidden,
-        this.scope.onHidden,
-        {
-          once: true,
-        }
-      );
+      toastEl.addEventListener(Toast.Events.hidden, this.scope.onHidden, {
+        once: true,
+      });
 
       // show toast using the toastservice
       this.toastService.show();

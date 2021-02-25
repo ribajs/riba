@@ -1,14 +1,13 @@
 import { Component } from "@ribajs/core";
 
 import template from "./bs5-modal-item.component.html";
-import { Modal } from "../../interfaces";
 import { getElementFromEvent } from "@ribajs/utils/src/dom";
-import { ModalService } from "../../services/modal.service";
+import { Modal, ModalNotification } from "../../services";
 import { Scope as Bs5NotificationContainerScope } from "../bs5-notification-container/bs5-notification-container.component";
 
 interface Scope {
   iconUrl?: string;
-  modal?: Modal;
+  modal?: ModalNotification;
   onHidden: Bs5ModalItemComponent["onHidden"];
   dismiss: Bs5ModalItemComponent["dismiss"];
   index: number;
@@ -22,7 +21,7 @@ export class Bs5ModalItemComponent extends Component {
   public _debug = false;
   protected autobind = true;
 
-  protected modalService?: ModalService;
+  protected modalService?: Modal;
 
   static get observedAttributes() {
     return ["modal", "index"];
@@ -48,28 +47,24 @@ export class Bs5ModalItemComponent extends Component {
   }
 
   protected async afterBind() {
-    this.initModalService();
+    this.initModal();
     await super.afterBind();
   }
 
-  protected initModalService() {
+  protected initModal() {
     const modal = this.scope.modal;
     const modalEl = this.firstElementChild as HTMLElement | null;
     if (modal && modalEl) {
-      this.modalService = new ModalService(modalEl, {
+      this.modalService = new Modal(modalEl, {
         focus: modal.focus !== undefined ? modal.focus : true,
         keyboard: modal.keyboard !== undefined ? modal.keyboard : true,
         backdrop: modal.backdrop !== undefined ? modal.backdrop : true,
       });
 
       // Call onHidden on hidden event once
-      modalEl.addEventListener(
-        ModalService.Events.hidden,
-        this.scope.onHidden,
-        {
-          once: true,
-        }
-      );
+      modalEl.addEventListener(Modal.Events.hidden, this.scope.onHidden, {
+        once: true,
+      });
 
       // show modal using the modalservice
       this.modalService.show();
