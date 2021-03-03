@@ -215,26 +215,20 @@ export class Bs5SidebarComponent extends Component {
   protected onHidden() {
     this.setContainersStyle(this.scope.state);
     const translateX = this.scope.position === "left" ? "-100%" : "100%";
-    this.setAttribute(
-      "style",
-      `transform:translateX(${translateX});width:${this.scope.width};`
-    );
+    this.style.transform = `translateX(${translateX})`;
+    this.style.width = this.scope.width;
   }
 
   protected onSide(state: State) {
     this.setContainersStyle(state);
-    this.setAttribute(
-      "style",
-      `transform:translateX(0);width:${this.scope.width};`
-    );
+    this.style.transform = `translateX(0)`;
+    this.style.width = this.scope.width;
   }
 
   protected onOverlay(state: State) {
     this.setContainersStyle(state);
-    this.setAttribute(
-      "style",
-      `transform:translateX(0);width:${this.scope.width};`
-    );
+    this.style.transform = `translateX(0)`;
+    this.style.width = this.scope.width;
   }
 
   protected triggerState() {
@@ -389,10 +383,6 @@ export class Bs5SidebarComponent extends Component {
     container.style.transition = this.computedStyle
       ? this.computedStyle.transition
       : "";
-    // let styleStr = container.getAttribute("style") || "";
-    // styleStr += style;
-
-    // return container.setAttribute("style", styleStr);
   }
 
   protected async beforeBind() {
