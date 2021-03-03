@@ -31,7 +31,8 @@ export class LifecycleService {
     if (LifecycleService.instance) {
       return LifecycleService.instance;
     }
-    return new LifecycleService();
+    LifecycleService.instance = new LifecycleService();
+    return LifecycleService.instance;
   }
 
   protected getEmpty(): ComponentLifecycleObject {
