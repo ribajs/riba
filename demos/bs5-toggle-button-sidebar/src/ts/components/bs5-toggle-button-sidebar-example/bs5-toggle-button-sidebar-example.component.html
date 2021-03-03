@@ -1,0 +1,77 @@
+
+<div>
+  <bs5-sidebar class="bg-danger text-white d-flex justify-content-center align-items-center" id="left-sidebar" container-selector="#main-container" position="left">
+    <h1 class="color-white">Left</h1>
+  </bs5-sidebar>
+
+  <bs5-sidebar class="bg-success text-white d-flex justify-content-center align-items-center" id="right-sidebar" container-selector="#main-container" position="right">
+    <h1>Right</h1>
+  </bs5-sidebar>
+
+  <bs5-navbar class="navbar navbar-top fixed-top navbar-dark bg-danger">
+    <div class="container-fluid d-block">
+      <div class="row justify-content-start">
+        <div class="col-auto d-flex align-items-center">
+          <bs5-toggle-button class="text-light" target-id="left-sidebar">
+            <ul class="nav">
+              <li class="nav-item d-flex align-items-center">
+                <bs5-icon src="/iconset/svg/icon_menu.svg" size="32" rv-hide="isActive" rv-on-click="toggle"></bs5-icon>
+              </li>
+              <li class="nav-item d-flex align-items-center">
+                <bs5-icon src="/iconset/svg/icon_close.svg" size="32" rv-show="isActive" rv-on-click="toggle"></bs5-icon>
+              </li>
+            </ul>
+          </bs5-toggle-button>
+        </div>
+      </div>
+    </div>
+  </bs5-navbar>
+
+  <div id="main-container" class="py-5">
+    <div class="container-fluid">
+      <div class="row">
+        <section class="col-12 col-md-6 my-5">
+          <bs5-toggle-button target-id="left-sidebar" class="float-md-start p-3">
+            <button rv-on-click="toggle" class="btn btn-warning">
+              Toggle left 
+              <span rv-hide="isActive">(Inactive)</span>
+              <span rv-show="isActive">(Active)</span>
+            </button>
+          </bs5-toggle-button>
+        </section>
+        <section class="col-12 col-md-6 my-5">
+          <bs5-toggle-button target-id="right-sidebar" class="float-md-end p-3">
+            <button rv-on-click="toggle" class="btn btn-warning">
+              Toggle right 
+              <span rv-hide="isActive">(Inactive)</span>
+              <span rv-show="isActive">(Active)</span>
+            </button>
+          </bs5-toggle-button>
+        </section>
+        <section class="col-12 mb-5 text-center">
+          <h1>Resize your browser to see what happens</h1>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <bs5-navbar class="navbar navbar-bottom fixed-bottom navbar-dark bg-success">
+    <div class="container-fluid d-block">
+      <div class="row justify-content-end">
+        <div class="col-auto d-flex align-items-center">
+          <bs5-toggle-button class="text-light" target-id="right-sidebar">
+            <ul class="nav">
+              <li class="nav-item d-flex align-items-center">
+                <bs5-icon src="/iconset/svg/icon_menu.svg" size="32" rv-hide="isActive" rv-on-click="toggle"></bs5-icon>
+              </li>
+              <li class="nav-item d-flex align-items-center">
+                <bs5-icon src="/iconset/svg/icon_close.svg" size="32" rv-show="isActive" rv-on-click="toggle"></bs5-icon>
+              </li>
+            </ul>
+          </bs5-toggle-button>
+        </div>
+      </div>
+    </div>
+  </bs5-navbar>
+
+</div>
