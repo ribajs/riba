@@ -2,7 +2,7 @@
 const { isAvailable, ribaPackages } = require('@ribajs/npm-package');
 
 const getPurgecssContent = (content) => {
-  content = content || ['./**/*.html', './**/*.pug'];
+  content = content || ['./*.html', './*.pug', './**/*.html', './**/*.pug'];
 
   for (const ribaPackage of ribaPackages) {
     const ribaPackagePath = isAvailable(ribaPackage);
@@ -10,6 +10,8 @@ const getPurgecssContent = (content) => {
       content.push(ribaPackagePath + '/**/*.html', ribaPackagePath + '/**/*.pug')
     }
   }
+
+  console.log("\n\n\ncontent", content, "\n\n\n");
   return content;
 }
 

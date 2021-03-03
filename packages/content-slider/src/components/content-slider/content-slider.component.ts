@@ -15,7 +15,7 @@ export interface SlideItem {
 interface Scope {
   // States
   items: SlideItem[];
-  /** Current / start index, by default 0. You can also change this attribute from outsite to change the current active item */
+  /** Current / start index, by default 0. You can also change this attribute from outside to change the current active item */
   index: number;
   activeItem: SlideItem | null;
   transform: string;

@@ -1,22 +1,77 @@
-<div class="container-fluid">
-  <div class="row">
 
-    <section class="col-6 mb-5">
-      <bs4-sidebar class="bg-danger" id="main-sidebar" position="right">
-        <h1>I am the right Sidebar</h1>
-      </bs4-sidebar>
-    </section>
+<div>
+  <bs4-sidebar class="bg-danger text-white d-flex justify-content-center align-items-center" id="left-sidebar" container-selector="#main-container" position="left">
+    <h1 class="color-white">Left</h1>
+  </bs4-sidebar>
 
+  <bs4-sidebar class="bg-success text-white d-flex justify-content-center align-items-center" id="right-sidebar" container-selector="#main-container" position="right">
+    <h1>Right</h1>
+  </bs4-sidebar>
 
-    <section class="col-6 mb-5">
-      <bs4-toggle-button state="hidden" isActive="false" target-id="main-sidebar" class="p-3">
-        <button rv-on-click="toggle" class="btn btn-warning">
-          Click to toggle the main sidebar 
-          <span rv-hide="isActive">(Inactive)</span>
-          <span rv-show="isActive">(Active)</span>
-        </button>
-      </bs4-toggle-button>
+  <bs4-navbar class="navbar navbar-top fixed-top navbar-dark bg-danger">
+    <div class="container-fluid d-block px-0">
+      <div class="row justify-content-start">
+        <div class="col-auto d-flex align-items-center px-0">
+          <bs4-toggle-button class="text-light" target-id="left-sidebar">
+            <ul class="nav">
+              <li class="nav-item d-flex align-items-center">
+                <bs4-icon src="/iconset/svg/icon_menu.svg" size="32" rv-hide="isActive" rv-on-click="toggle"></bs4-icon>
+              </li>
+              <li class="nav-item d-flex align-items-center">
+                <bs4-icon src="/iconset/svg/icon_close.svg" size="32" rv-show="isActive" rv-on-click="toggle"></bs4-icon>
+              </li>
+            </ul>
+          </bs4-toggle-button>
+        </div>
+      </div>
+    </div>
+  </bs4-navbar>
 
-    </section>
+  <div id="main-container" class="py-5">
+    <div class="container-fluid">
+      <div class="row">
+        <section class="col-12 col-md-6 my-5">
+          <bs4-toggle-button target-id="left-sidebar" class="float-md-left p-3">
+            <button rv-on-click="toggle" class="btn btn-warning">
+              Toggle left 
+              <span rv-hide="isActive">(Inactive)</span>
+              <span rv-show="isActive">(Active)</span>
+            </button>
+          </bs4-toggle-button>
+        </section>
+        <section class="col-12 col-md-6 my-5">
+          <bs4-toggle-button target-id="right-sidebar" class="float-md-right p-3">
+            <button rv-on-click="toggle" class="btn btn-warning">
+              Toggle right 
+              <span rv-hide="isActive">(Inactive)</span>
+              <span rv-show="isActive">(Active)</span>
+            </button>
+          </bs4-toggle-button>
+        </section>
+        <section class="col-12 mb-5 text-center">
+          <h1>Resize your browser to see what happens</h1>
+        </section>
+      </div>
+    </div>
   </div>
+
+  <bs4-navbar class="navbar navbar-bottom fixed-bottom navbar-dark bg-success">
+    <div class="container-fluid d-block px-0">
+      <div class="row justify-content-end">
+        <div class="col-auto d-flex align-items-center px-0">
+          <bs4-toggle-button class="text-light" target-id="right-sidebar">
+            <ul class="nav">
+              <li class="nav-item d-flex align-items-center">
+                <bs4-icon src="/iconset/svg/icon_menu.svg" size="32" rv-hide="isActive" rv-on-click="toggle"></bs4-icon>
+              </li>
+              <li class="nav-item d-flex align-items-center">
+                <bs4-icon src="/iconset/svg/icon_close.svg" size="32" rv-show="isActive" rv-on-click="toggle"></bs4-icon>
+              </li>
+            </ul>
+          </bs4-toggle-button>
+        </div>
+      </div>
+    </div>
+  </bs4-navbar>
+
 </div>

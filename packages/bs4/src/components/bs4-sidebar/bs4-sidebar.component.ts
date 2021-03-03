@@ -22,6 +22,8 @@ interface Scope {
    * The current state of the sidebar, can be `'hidden'`, `'side-left'`, `'side-right'`, `'overlay-left'` or `'overlay-right'`
    */
   state: State;
+
+  oldState: State;
   /**
    * The 'id' is required to react to events of the `bs4-toggle-button`, the `target-id` attribute of the `bs4-toggle-button` must be identical to this `id`
    */
@@ -106,6 +108,7 @@ export class Bs4SidebarComponent extends Component {
     // template properties
     containerSelector: undefined,
     state: "hidden",
+    oldState: "hidden",
     id: undefined,
     width: "250px",
 
@@ -131,26 +134,33 @@ export class Bs4SidebarComponent extends Component {
   }
 
   public setState(state: State) {
+    this.scope.oldState = `${this.scope.state}` as State;
     this.scope.state = state;
+    this.onStateChange();
   }
 
   public getState() {
     return this.scope.state;
   }
 
+  public getShowMode() {
+    let mode: State;
+    const vw = getViewportDimensions().w;
+    if (vw < this.scope.overlayOnSlimmerThan) {
+      mode = ("overlay-" + this.scope.position) as State;
+    } else {
+      mode = ("side-" + this.scope.position) as State;
+    }
+    return mode;
+  }
+
   public hide() {
-    this.scope.state = "hidden";
-    this.onStateChange();
+    this.setState("hidden");
   }
 
   public show() {
-    const vw = getViewportDimensions().w;
-    if (vw < this.scope.overlayOnSlimmerThan) {
-      this.scope.state = ("overlay-" + this.scope.position) as State;
-    } else {
-      this.scope.state = ("side-" + this.scope.position) as State;
-    }
-    this.onStateChange();
+    const state = this.getShowMode();
+    this.setState(state);
   }
 
   public toggle() {
@@ -201,7 +211,7 @@ export class Bs4SidebarComponent extends Component {
   }
 
   protected onHidden() {
-    this.setContainersStyle();
+    this.setContainersStyle(this.scope.state);
     const translateX = this.scope.position === "left" ? "-100%" : "100%";
     this.setAttribute(
       "style",
@@ -209,17 +219,17 @@ export class Bs4SidebarComponent extends Component {
     );
   }
 
-  protected onSide(direction: State) {
-    this.setContainersStyle(undefined, "", direction);
-    this.el.setAttribute(
+  protected onSide(state: State) {
+    this.setContainersStyle(state);
+    this.setAttribute(
       "style",
       `transform:translateX(0);width:${this.scope.width};`
     );
   }
 
-  protected onOverlay(direction: State) {
-    this.setContainersStyle(undefined, "", direction);
-    this.el.setAttribute(
+  protected onOverlay(state: State) {
+    this.setContainersStyle(state);
+    this.setAttribute(
       "style",
       `transform:translateX(0);width:${this.scope.width};`
     );
@@ -296,23 +306,17 @@ export class Bs4SidebarComponent extends Component {
       : undefined;
   }
 
-  protected initContainers() {
-    const containers = this.getContainers();
-    this.setContainersStyle(containers);
+  protected initContainers(state: State) {
+    this.setContainersStyle(state);
   }
 
-  protected setContainersStyle(
-    containers?: NodeListOf<HTMLUnknownElement>,
-    style?: string,
-    move?: State
-  ) {
-    if (!containers) {
-      containers = this.getContainers();
-    }
+  protected setContainersStyle(state: State) {
+    const containers = this.getContainers() || [];
+
     if (containers) {
       for (let i = 0; i < containers.length; i++) {
         const container = containers[i];
-        this.setContainerStyle(container, style, move);
+        this.setContainerStyle(container, state);
       }
     }
   }
@@ -321,51 +325,77 @@ export class Bs4SidebarComponent extends Component {
    * Sets the container style, takes overs always the transition style of this sidebar
    * @param container
    * @param style
-   * @param move
+   * @param state
    */
-  protected setContainerStyle(
-    container: HTMLUnknownElement,
-    style = "",
-    move?: State
-  ) {
-    if (move) {
+  protected setContainerStyle(container: HTMLUnknownElement, state: State) {
+    const currStyle = container.style;
+    if (state) {
       const width = this.width;
       const conStyle = window.getComputedStyle(container);
-      switch (move) {
+
+      switch (state) {
         case "side-left":
           switch (conStyle.position) {
             case "fixed":
-              style += "left:" + width;
+              currStyle.left = width;
               break;
             default:
-              style += "margin-left:" + width;
+              currStyle.marginLeft = width;
               break;
           }
           break;
         case "side-right":
           switch (conStyle.position) {
             case "fixed":
-              style += "right:" + width;
+              currStyle.right = width;
               break;
             default:
-              style += "margin-right:" + width;
+              currStyle.marginRight = width;
               break;
           }
           break;
+        case "hidden":
+          switch (this.scope.oldState) {
+            case "side-left":
+              switch (conStyle.position) {
+                case "fixed":
+                  currStyle.left = "0";
+                  break;
+                default:
+                  currStyle.marginLeft = "0";
+                  break;
+              }
+              break;
+            case "side-right":
+              switch (conStyle.position) {
+                case "fixed":
+                  currStyle.right = "0";
+                  break;
+                default:
+                  currStyle.marginRight = "0";
+                  break;
+              }
+              break;
+            default:
+              break;
+          }
+
         default:
           break;
       }
     }
-    return container.setAttribute(
-      "style",
-      `transition:${
-        this.computedStyle ? this.computedStyle.transition : ""
-      };${style}`
-    );
+    container.style.transition = this.computedStyle
+      ? this.computedStyle.transition
+      : "";
+    // let styleStr = container.getAttribute("style") || "";
+    // styleStr += style;
+
+    // return container.setAttribute("style", styleStr);
   }
 
   protected async beforeBind() {
     await super.beforeBind();
+    this.scope.oldState = this.getShowMode();
     this.initRouterEventDispatcher();
     return this.onEnvironmentChanges();
   }
@@ -392,7 +422,7 @@ export class Bs4SidebarComponent extends Component {
       namespace
     );
     if (attributeName === "containerSelector") {
-      this.initContainers();
+      this.initContainers(this.scope.state);
     }
     if (attributeName === "id") {
       this.initToggleButtonEventDispatcher();

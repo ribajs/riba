@@ -377,18 +377,18 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
       };
 
       config.copyAssets = config.copyAssets || {
-        enable: false,
+        enable: true,
         images: true,
         scss: false,
         iconset: true,
-        foldername: "src",
+        foldername: config.distPath,
       };
 
       config.devServer = config.devServer || {
         port: 8080,
         host: "0.0.0.0",
-        contentBase: [resolve(rootPath, "src"), config.distPath],
-        // publicPath: '/dist', // TODO webpack output is served from undefined
+        contentBase: [config.distPath],
+        // contentBasePublicPath: config.distPath,
         hot: true,
         inline: true,
       };

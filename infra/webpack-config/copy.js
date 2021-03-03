@@ -35,7 +35,7 @@ const getCopyPluginConfigForImages = (config, moduleName) => {
       to: path.resolve(
         rootPath,
         config.copyAssets.foldername,
-        `images/vendors/${moduleName}`
+        `images/vendors/${moduleName}`,
       ),
       toType: "dir",
       context: modulePath,
@@ -56,7 +56,7 @@ const getCopyPluginConfigForIconsetRibaModule = (config, moduleName) => {
       ),
       to: path.resolve(rootPath, config.copyAssets.foldername, `iconset`),
       toType: "dir",
-      context: modulePath,
+      context:  path.join(modulePath, "dist"),
     };
     return moduleConfig;
   }
