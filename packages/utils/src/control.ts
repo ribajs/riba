@@ -25,7 +25,7 @@ export const deferred = () => {
 /**
  * The debounce function receives our function as a parameter
  * It is recommended to use this method for scroll events, but the event should still be passive
- * This method uses uses internaly the requestAnimationFrame method
+ * This method uses internally the requestAnimationFrame method
  * @see https://css-tricks.com/styling-based-on-scroll-position/
  * @see https://www.telerik.com/blogs/debouncing-and-throttling-in-javascript
  */
