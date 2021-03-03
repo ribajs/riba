@@ -16,7 +16,6 @@ export declare class SsrService {
     readSsrScripts(filenames: string[]): Promise<Map<string, string>>;
     renderTemplate(templatePath: string, variables: any): Promise<any>;
     renderWithJSDom(layout: string, componentTagName: string, sharedContext: SharedContext, scriptFilenames?: string[]): Promise<RenderResult>;
-    renderWithHappyDom(layout: string, componentTagName: string, sharedContext: SharedContext, scriptFilenames?: string[]): Promise<RenderResult>;
     renderComponent({ template, rootTag, componentTagName, engine, sharedContext, }: {
         template?: string;
         rootTag?: string;

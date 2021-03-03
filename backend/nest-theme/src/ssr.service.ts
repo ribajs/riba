@@ -243,14 +243,16 @@ export class SsrService {
     layout = await this.transformLayout(layout, rootTag, componentTagName);
     this.log.debug(`layout (transformed): ${layout}`);
     try {
-      if(engine === 'jsdom') {
-        const renderData =
-        await this.renderWithJSDom(layout, componentTagName, sharedContext)
+      if (engine === 'jsdom') {
+        const renderData = await this.renderWithJSDom(
+          layout,
+          componentTagName,
+          sharedContext,
+        );
         return renderData;
       } else {
-        throw new Error("Unsupported render engine");
+        throw new Error('Unsupported render engine');
       }
-
     } catch (error) {
       this.log.error(`Error on render component with ${engine}`);
       console.error(error);

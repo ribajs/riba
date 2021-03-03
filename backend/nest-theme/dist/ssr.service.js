@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SsrService = void 0;
 const common_1 = require("@nestjs/common");
 const jsdom_1 = require("jsdom");
-const server_rendering_1 = require("@happy-dom/server-rendering");
 const vm_1 = require("vm");
 const config_1 = require("@nestjs/config");
 const path_1 = require("path");
@@ -27,8 +26,6 @@ let SsrService = class SsrService {
     }
     isRenderEngineValid(engine) {
         switch (engine) {
-            case 'happy-dom':
-                return true;
             case 'jsdom':
                 return true;
             default:
@@ -155,44 +152,6 @@ let SsrService = class SsrService {
             });
         });
     }
-    async renderWithHappyDom(layout, componentTagName, sharedContext, scriptFilenames = ['main.bundle.js']) {
-        const context = new server_rendering_1.HappyDOMContext();
-        const window = context.window;
-        window.ssr = sharedContext;
-        if (!window.fetch) {
-            window.fetch = node_fetch_1.default;
-        }
-        const scriptSources = await this.readSsrScripts(scriptFilenames);
-        const scripts = [];
-        for (const [filename, scriptSource] of scriptSources) {
-            const script = new vm_1.Script(scriptSource, {
-                filename,
-            });
-            scripts.push(script);
-        }
-        const ssrResultPromise = context.render({
-            html: layout,
-            scripts,
-            customElements: {
-                openShadowRoots: false,
-                extractCSS: false,
-                scopeCSS: false,
-                addCSSToHead: false,
-            },
-        });
-        const result = await new Promise((resolve, reject) => {
-            sharedContext.events.once('ready', async (lifecycleEventData) => {
-                const ssrResult = await ssrResultPromise;
-                const result = Object.assign(Object.assign({}, lifecycleEventData), { html: ssrResult.html, css: ssrResult.css });
-                return resolve(result);
-            });
-            window.addEventListener('error', (event) => {
-                console.error(event);
-                return reject(event);
-            });
-        });
-        return result;
-    }
     async renderComponent({ template, rootTag = 'ssr-root-page', componentTagName, engine, sharedContext, }) {
         if (!rootTag) {
             rootTag = this.theme.ssr.rootTag || 'ssr-root-page';
@@ -213,10 +172,13 @@ let SsrService = class SsrService {
         layout = await this.transformLayout(layout, rootTag, componentTagName);
         this.log.debug(`layout (transformed): ${layout}`);
         try {
-            const renderData = engine === 'jsdom'
-                ? await this.renderWithJSDom(layout, componentTagName, sharedContext)
-                : await this.renderWithHappyDom(layout, componentTagName, sharedContext);
-            return renderData;
+            if (engine === 'jsdom') {
+                const renderData = await this.renderWithJSDom(layout, componentTagName, sharedContext);
+                return renderData;
+            }
+            else {
+                throw new Error('Unsupported render engine');
+            }
         }
         catch (error) {
             this.log.error(`Error on render component with ${engine}`);
