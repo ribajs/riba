@@ -25,7 +25,12 @@ export class Bs5IconComponent extends BasicComponent {
     let response: Response;
 
     // Append hostname on ssr
-    if (window?.ssr?.ctx) {
+    if (
+      window?.ssr?.ctx &&
+      !src.startsWith("http") &&
+      !src.startsWith("ftp") &&
+      !src.startsWith("sftp")
+    ) {
       const url = new URL(
         src,
         window.ssr.ctx.protocol + "://" + window.ssr.ctx.hostname
