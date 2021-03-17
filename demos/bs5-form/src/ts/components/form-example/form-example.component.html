@@ -4,7 +4,7 @@
 <div class="container">
   <div class="row">
     <section class="col-12 my-5">
-      <bs4-form
+      <bs5-form
         rv-show-toast-on-submit-success="{'message': 'Contact form sent successfully!', 'title': 'Message', 'channel': 'formular', 'contextualClass': 'success'}"
         rv-show-toast-on-submit-error="{'message': 'Contact form could not be sent!', 'title': 'Error', 'channel': 'formular', 'contextualClass': 'danger'}"
         rv-show-toast-on-invalid="{'message': 'Form is invalid, please check your input.', 'title': 'Invalid', 'channel': 'formular', 'contextualClass': 'warning'}"
@@ -12,24 +12,28 @@
         ajax-request-type="form"
         auto-set-form-data="false"
       >
-        <form rv-on-submit="onSubmit" action="/" method="get"> 
-          <div class="form-row">
+        <form
+          rv-on-submit="onSubmit"
+          action="/"
+          method="get"
+        > 
+          <div class="row">
             <div class="col-md-4 mb-3">
-              <label for="validationCustom01">First name</label>
+              <label class="form-label" for="validationCustom01">First name</label>
               <input type="text" class="form-control" id="validationCustom01" placeholder="First name" name="given-name" rv-value="form.fields.givenName | default 'Mark'" required>
               <div class="valid-feedback">
                 Looks good!
               </div>
             </div>
             <div class="col-md-4 mb-3">
-              <label for="validationCustom02">Last name</label>
+              <label class="form-label" for="validationCustom02">Last name</label>
               <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" name="family-name" rv-value="form.fields.familyName | default 'Otto'" required>
               <div class="valid-feedback">
                 Looks good!
               </div>
             </div>
             <div class="col-md-4 mb-3">
-              <label for="validationCustomUsername">Username</label>
+              <label class="form-label" for="validationCustomUsername">Username</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroupPrepend">@</span>
@@ -41,23 +45,23 @@
               </div>
             </div>
           </div>
-          <div class="form-row">
+          <div class="row">
             <div class="col-md-6 mb-3">
-              <label for="validationCustom03">City</label>
+              <label class="form-label" for="validationCustom03">City</label>
               <input type="text" class="form-control" id="validationCustom03" placeholder="City" name="address-level2" rv-value="form.fields.addressLevel2" required>
               <div class="invalid-feedback">
                 Please provide a valid city.
               </div>
             </div>
             <div class="col-md-3 mb-3">
-              <label for="validationCustom04">State</label>
+              <label class="form-label" for="validationCustom04">State</label>
               <input type="text" class="form-control" id="validationCustom04" placeholder="State" name="address-level1" rv-value="form.fields.addressLevel1" required>
               <div class="invalid-feedback">
                 Please provide a valid state.
               </div>
             </div>
             <div class="col-md-3 mb-3">
-              <label for="validationCustom05">Zip</label>
+              <label class="form-label" for="validationCustom05">Zip</label>
               <input
                 type="text"
                 class="form-control"
@@ -66,14 +70,14 @@
                 name="postal-code"
                 rv-value="form.fields.postalCode"
                 required
-                rv-show-toast-on-invalid="{'message': 'Please provide a valid zip.', 'title': 'Zip', 'channel': 'formular', 'contextualClass': 'danger'}"
+                rv-show-toast-on-invalid="{'message': 'The postcode is required', 'title': 'Zip', 'channel': 'formular', 'contextualClass': 'danger'}"
               >
               <div class="invalid-feedback">
                 Please provide a valid zip.
               </div>
             </div>
           </div>
-          <div class="form-group">
+          <div class="input-group mb-3">
             <div class="form-check">
               <input
                 class="form-check-input"
@@ -94,9 +98,9 @@
           </div>
           <button class="btn btn-primary" rv-disabled="submitDisabled" type="submit">Submit form</button>
         </form>
-      </bs4-form>
+      </bs5-form>
     </section>
   </div>
 </div>
-<bs4-notification-container channel-name="formular" icon-url="/iconset/svg/icon_error-circle.svg">
-</bs4-notification-container>
+<bs5-notification-container channel-name="formular" icon-url="/iconset/svg/icon_error-circle.svg">
+</bs5-notification-container>
