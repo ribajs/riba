@@ -52,7 +52,7 @@
     "babelify": "^10.0.0",
     "core-js": "^3.8.2",
     "css-loader": "^5.0.1",
-    "dart-sass": "^1.25.0",
+    "sass": "^1.32.8",
     "electron-builder": "^22.9.1",
     "electron-webpack": "^2.8.2",
     "electron-webpack-ts": "^4.0.1",

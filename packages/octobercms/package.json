@@ -70,7 +70,7 @@
     "js-yaml": "^4.0.0",
     "prettier": "2.2.1",
     "rgb-regex": "^1.0.1",
-    "ts-jest": "^26.5.3",
+    "ts-jest": "^26.5.4",
     "typescript": "^4.1.5",
     "webpack": "^5.26.2",
     "webpack-cli": "^4.5.0"

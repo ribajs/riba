@@ -89,7 +89,7 @@ export abstract class Component extends BasicComponent {
    * Event handler to listen for publish binder event for two-way-binding in web components
    */
   // protected publish(name: string, newValue: any, namespace: string | null) {
-  //   this.el.dispatchEvent(
+  //   this.dispatchEvent(
   //     new CustomEvent("publish-binder-change:" + name, {
   //       detail: {
   //         name,
@@ -212,9 +212,6 @@ export abstract class Component extends BasicComponent {
 
     await this.beforeBind()
       .then(() => {
-        if (!this.el) {
-          throw new Error("this.el is not defined");
-        }
         this.debug("Start to bind Riba");
         this.riba = new Riba();
         this.view = this.getView();

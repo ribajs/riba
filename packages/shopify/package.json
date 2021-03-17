@@ -110,7 +110,7 @@
     "prompt": "^1.1.0",
     "shopify-admin-api": "^2.16.5",
     "terser": "^5.6.0",
-    "ts-jest": "^26.5.3",
+    "ts-jest": "^26.5.4",
     "typescript": "^4.1.5"
   },
   "dependencies": {

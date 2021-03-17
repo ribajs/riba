@@ -8,7 +8,8 @@
   "source": "src/index.ts",
   "dependencies": {
     "@ribajs/core": "workspace:packages/core",
-    "vue": "^2.6.12"
+    "@vue/compiler-sfc": "latest",
+    "vue": "next"
   },
   "devDependencies": {
     "@babel/runtime": "^7.13.10"

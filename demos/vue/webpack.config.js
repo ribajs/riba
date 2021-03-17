@@ -18,7 +18,7 @@ const webpackConfig = ribaWebpackConfig({
   rules: [
     {
       test: /\.vue$/,
-      loader: "vue-loader",
+      loader: "vue-loader", //require.resolve("vue-loader"),
     },
   ],
   resolve: {

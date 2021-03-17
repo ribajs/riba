@@ -80,10 +80,10 @@ export abstract class VueComponent extends BasicComponent {
   }
 
   /**
-   * Event handler to liste for publish binder event for two-way-binding in web components
+   * Event handler to listen for publish binder event for two-way-binding in web components
    */
   // protected publish(name: string, newValue: any, namespace: string | null) {
-  //   this.el.dispatchEvent(
+  //   this.dispatchEvent(
   //     new CustomEvent("publish-binder-change:" + name, {
   //       detail: {
   //         name,
@@ -165,9 +165,6 @@ export abstract class VueComponent extends BasicComponent {
 
     this.bound = true;
 
-    if (!this.el) {
-      throw new Error("this.el is not defined");
-    }
     this.debug("Start to bind Vue");
 
     await this.beforeBind();
@@ -191,7 +188,7 @@ export abstract class VueComponent extends BasicComponent {
       watch: this.getAttributeWatchOption(),
     };
     this.vue = createApp(VueOptions);
-    this.vueVm = this.vue.mount(this.el);
+    this.vueVm = this.vue.mount(this);
 
     await this.afterBind();
 
@@ -218,14 +215,14 @@ export abstract class VueComponent extends BasicComponent {
   protected async unbind() {
     if (this.vue) {
       this.bound = false;
-      this.vue.unmount(this.el);
+      this.vue.unmount();
       delete this.vue;
     }
   }
 
   protected async build() {
     if (this.vue) {
-      this.vue.mount(this.el);
+      this.vue.mount(this);
     }
   }
 }
