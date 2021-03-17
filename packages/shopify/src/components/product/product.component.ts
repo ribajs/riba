@@ -193,14 +193,12 @@ export class ShopifyProductComponent extends Component {
   protected activateOption(optionValue: string, optionName: string) {
     optionValue = optionValue.toString().replace("#", "");
     // console.debug('activateOption', `.option-${optionName.toLowerCase()}-${optionValue}`);
-    this
-      .querySelector<HTMLElement>(`.option-${optionName.toLocaleLowerCase()}`)
-      ?.classList.remove("active");
-    this
-      .querySelector<HTMLElement>(
-        `.option-${optionName.toLocaleLowerCase()}-${optionValue}`
-      )
-      ?.classList.add("active");
+    this.querySelector<HTMLElement>(
+      `.option-${optionName.toLocaleLowerCase()}`
+    )?.classList.remove("active");
+    this.querySelector<HTMLElement>(
+      `.option-${optionName.toLocaleLowerCase()}-${optionValue}`
+    )?.classList.add("active");
   }
 
   /**

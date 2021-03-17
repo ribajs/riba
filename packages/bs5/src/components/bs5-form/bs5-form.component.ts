@@ -288,7 +288,6 @@ export class Bs5FormComponent extends Component {
         detail: { elements: invalidElements },
       })
     );
-
   }
 
   protected scrollToElement(invalidElement: HTMLElement) {

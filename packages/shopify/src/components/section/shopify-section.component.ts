@@ -14,10 +14,7 @@ export abstract class ShopifySectionComponent extends Component {
     this.addEventListener("shopify:section:load", this.onSectionLoad);
     this.addEventListener("shopify:section:unload", this.onSectionUnload);
     this.addEventListener("shopify:section:select", this.onSectionSelect);
-    this.addEventListener(
-      "shopify:section:deselect",
-      this.onSectionDeselect
-    );
+    this.addEventListener("shopify:section:deselect", this.onSectionDeselect);
     this.addEventListener("shopify:section:reorder", this.onSectionReorder);
     this.addEventListener("shopify:block:select", this.onBlockSelect);
     this.addEventListener("shopify:block:deselect", this.onBlockDeselect);

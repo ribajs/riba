@@ -51,7 +51,7 @@
     "/dist"
   ],
   "devDependencies": {
-    "@babel/runtime-corejs3": "^7.13.9",
+    "@babel/runtime-corejs3": "^7.13.10",
     "core-js": "^3.9.1",
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",

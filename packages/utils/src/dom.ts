@@ -170,7 +170,7 @@ export const isInViewport = (
     distance.bottom - distance.height <= offsetTop
   );
 };
- 
+
 /**
  * Select all of an contenteditable or input element
  * @param element The element you want to select
