@@ -262,7 +262,7 @@ export class Bs5FormComponent extends Component {
   }
 
   protected onInvalidForm(event: Event) {
-    console.info("form not valid", this.scope);
+    this.debug("Form not valid", this.scope);
     // stop native submit
     event.preventDefault();
     event.stopPropagation();
@@ -282,6 +282,13 @@ export class Bs5FormComponent extends Component {
         this.scrollToElement(invalidElement);
       }
     }
+
+    this.dispatchEvent(
+      new CustomEvent("invalid", {
+        detail: { elements: invalidElements },
+      })
+    );
+
   }
 
   protected scrollToElement(invalidElement: HTMLElement) {
