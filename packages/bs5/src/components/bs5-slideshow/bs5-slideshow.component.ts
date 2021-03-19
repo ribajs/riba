@@ -118,7 +118,7 @@ export interface Scope extends Options {
 }
 
 export class Bs5SlideshowComponent extends TemplatesComponent {
-  protected resizeObserver?: any; // TODO type ResizeObserver;
+  protected resizeObserver?: ResizeObserver;
 
   protected get slideshowInner() {
     if (!this._slideshowInner) {
@@ -1068,10 +1068,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
         if (this.scope.items[index]) {
           this.scope.items[index].active = false;
         }
-        if (
-          this.slideElements[index] &&
-          this.slideElements[index].classList
-        ) {
+        if (this.slideElements[index] && this.slideElements[index].classList) {
           this.slideElements[index].classList.remove("active");
         }
       }

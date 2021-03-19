@@ -1068,10 +1068,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
         if (this.scope.items[index]) {
           this.scope.items[index].active = false;
         }
-        if (
-          this.slideElements[index] &&
-          this.slideElements[index].classList
-        ) {
+        if (this.slideElements[index] && this.slideElements[index].classList) {
           this.slideElements[index].classList.remove("active");
         }
       }

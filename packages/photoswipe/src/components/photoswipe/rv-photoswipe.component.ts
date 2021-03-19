@@ -493,9 +493,7 @@ export class PhotoswipeComponent extends Component {
   }
 
   protected setItems() {
-    this.images = Array.from(
-      this.querySelectorAll(this.scope.itemsSelector)
-    );
+    this.images = Array.from(this.querySelectorAll(this.scope.itemsSelector));
 
     for (let i = 0; i < this.images.length; i++) {
       if (this.scope.openImageOnClick) {

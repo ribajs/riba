@@ -177,9 +177,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
     this.scope.apiList.forEach((api) => {
       if (api.freestyle) {
         this.selectApi(api);
-        this
-          .querySelector<HTMLFormElement>(".form-control-freestyle")
-          ?.focus();
+        this.querySelector<HTMLFormElement>(".form-control-freestyle")?.focus();
         return;
       }
     });
