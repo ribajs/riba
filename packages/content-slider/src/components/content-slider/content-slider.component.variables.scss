@@ -1,0 +1,176 @@
+$content-slider-debug: false;
+
+$content-slider-height: 400px !default;
+$content-slider-sm-height: 500px !default;
+$content-slider-md-height: 600px !default;
+$content-slider-lg-height: 600px !default;
+$content-slider-xl-height: 600px !default;
+$content-slider-xxl-height: 600px !default;
+
+$content-slider-capture-height: 300px !default;
+$content-slider-capture-sm-height: 300px !default;
+$content-slider-capture-md-height: 400px !default;
+$content-slider-capture-lg-height: 350px !default;
+$content-slider-capture-xl-height: 300px !default;
+$content-slider-capture-xxl-height: 300px !default;
+
+$content-slider-active-item-margin-bottom: 30px !default;
+$content-slider-active-item-sm-margin-bottom: 30px !default;
+$content-slider-active-item-md-margin-bottom: 30px !default;
+$content-slider-active-item-lg-margin-bottom: 30px !default;
+$content-slider-active-item-xl-margin-bottom: 30px !default;
+$content-slider-active-item-xxl-margin-bottom: 30px !default;
+
+$content-slider-offset: 50px !default;
+$content-slider-sm-offset: 50px !default;
+$content-slider-md-offset: 50px !default;
+$content-slider-lg-offset: 50px !default;
+$content-slider-xl-offset: 50px !default;
+$content-slider-xxl-offset: 50px !default;
+
+$content-slider-active-item-height: $content-slider-height + $content-slider-active-item-margin-bottom !default;
+$content-slider-active-item-sm-height: $content-slider-sm-height + $content-slider-active-item-sm-margin-bottom !default;
+$content-slider-active-item-md-height: $content-slider-md-height + $content-slider-active-item-md-margin-bottom !default;
+$content-slider-active-item-lg-height: $content-slider-lg-height + $content-slider-active-item-lg-margin-bottom !default;
+$content-slider-active-item-xl-height: $content-slider-xl-height + $content-slider-active-item-xl-margin-bottom !default;
+$content-slider-active-item-xxl-height: $content-slider-xxl-height + $content-slider-active-item-xxl-margin-bottom !default;
+
+$content-slider-inactive-item-height: auto !default;
+$content-slider-inactive-item-sm-height: auto !default;
+$content-slider-inactive-item-md-height: $content-slider-md-height - $content-slider-capture-md-height !default;
+$content-slider-inactive-item-lg-height: $content-slider-lg-height - $content-slider-capture-lg-height !default;
+$content-slider-inactive-item-xl-height: $content-slider-xl-height - $content-slider-capture-xl-height !default;
+$content-slider-inactive-item-xxl-height: $content-slider-xxl-height - $content-slider-capture-xxl-height !default;
+
+@function content-slider-breakpoint-height($breakpoint) {
+  @if $breakpoint == xxl {
+    @return $content-slider-xxl-height;
+  }
+  @if $breakpoint == xl {
+    @return $content-slider-xl-height;
+  }
+  @if $breakpoint == lg {
+    @return $content-slider-lg-height;
+  }
+  @if $breakpoint == md {
+    @return $content-slider-md-height;
+  }
+  @if $breakpoint == sm {
+    @return $content-slider-sm-height;
+  }
+  @return $content-slider-height;
+}
+
+@function content-slider-capture-breakpoint-height($breakpoint) {
+  @if $breakpoint == xxl {
+    @return $content-slider-capture-xxl-height;
+  }
+  @if $breakpoint == xl {
+    @return $content-slider-capture-xl-height;
+  }
+  @if $breakpoint == lg {
+    @return $content-slider-capture-lg-height;
+  }
+  @if $breakpoint == md {
+    @return $content-slider-capture-md-height;
+  }
+  @if $breakpoint == sm {
+    @return $content-slider-capture-sm-height;
+  }
+  @return $content-slider-capture-height;
+}
+
+@function content-slider-active-item-breakpoint-margin-bottom($breakpoint) {
+  @if $breakpoint == xxl {
+    @return $content-slider-active-item-xxl-margin-bottom;
+  }
+  @if $breakpoint == xl {
+    @return $content-slider-active-item-xl-margin-bottom;
+  }
+  @if $breakpoint == lg {
+    @return $content-slider-active-item-lg-margin-bottom;
+  }
+  @if $breakpoint == md {
+    @return $content-slider-active-item-md-margin-bottom;
+  }
+  @if $breakpoint == sm {
+    @return $content-slider-active-item-sm-margin-bottom;
+  }
+  @return $content-slider-active-item-margin-bottom;
+}
+
+@function content-slider-breakpoint-offset($breakpoint) {
+  @if $breakpoint == xxl {
+    @return $content-slider-xxl-offset;
+  }
+  @if $breakpoint == xl {
+    @return $content-slider-xl-offset;
+  }
+  @if $breakpoint == lg {
+    @return $content-slider-lg-offset;
+  }
+  @if $breakpoint == md {
+    @return $content-slider-md-offset;
+  }
+  @if $breakpoint == sm {
+    @return $content-slider-sm-offset;
+  }
+  @return $content-slider-offset;
+}
+
+@function content-slider-active-item-height($breakpoint) {
+  @if $breakpoint == xxl {
+    @return $content-slider-active-item-xxl-height;
+  }
+  @if $breakpoint == xl {
+    @return $content-slider-active-item-xl-height;
+  }
+  @if $breakpoint == lg {
+    @return $content-slider-active-item-lg-height;
+  }
+  @if $breakpoint == md {
+    @return $content-slider-active-item-md-height;
+  }
+  @if $breakpoint == sm {
+    @return $content-slider-active-item-sm-height;
+  }
+  @return $content-slider-active-item-height;
+}
+
+@function content-slider-active-item-height($breakpoint) {
+  @if $breakpoint == xxl {
+    @return $content-slider-active-item-xxl-height;
+  }
+  @if $breakpoint == xl {
+    @return $content-slider-active-item-xl-height;
+  }
+  @if $breakpoint == lg {
+    @return $content-slider-active-item-lg-height;
+  }
+  @if $breakpoint == md {
+    @return $content-slider-active-item-md-height;
+  }
+  @if $breakpoint == sm {
+    @return $content-slider-active-item-sm-height;
+  }
+  @return $content-slider-active-item-height;
+}
+
+@function content-slider-inactive-item-height($breakpoint) {
+  @if $breakpoint == xxl {
+    @return $content-slider-inactive-item-xxl-height;
+  }
+  @if $breakpoint == xl {
+    @return $content-slider-inactive-item-xl-height;
+  }
+  @if $breakpoint == lg {
+    @return $content-slider-inactive-item-lg-height;
+  }
+  @if $breakpoint == md {
+    @return $content-slider-inactive-item-md-height;
+  }
+  @if $breakpoint == sm {
+    @return $content-slider-inactive-item-sm-height;
+  }
+  @return $content-slider-inactive-item-height;
+}

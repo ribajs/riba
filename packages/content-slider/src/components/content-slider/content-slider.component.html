@@ -12,15 +12,15 @@
             <div class="controls">
 
                 <button rv-show="controls" role="button" class="prev" rv-add-class="controlsButtonClasses" rv-on-click="prev" rv-disabled="index | eq 0">
-                    <bs4-icon rv-if="controlPrevIconSrc" rv-src="controlPrevIconSrc" direction="left" size="32"></bs4-icon>
+                    <bs5-icon rv-if="controlPrevIconSrc" rv-src="controlPrevIconSrc" direction="left" size="32"></bs5-icon>
                     <span rv-hide="controlPrevIconSrc" class="fallback-prev-icon" aria-hidden="true"> &lt; </span>
-                    <span class="sr-only">Previous</span>
+                    <span class="visually-hidden">Previous</span>
                 </button>
 
                 <button rv-show="controls" role="button" class="next" rv-add-class="controlsButtonClasses" rv-on-click="next" rv-disabled="index | plus 1 | eq items.length">
-                    <bs4-icon rv-if="controlNextIconSrc" rv-src="controlNextIconSrc" direction="right" size="32"></bs4-icon>
+                    <bs5-icon rv-if="controlNextIconSrc" rv-src="controlNextIconSrc" direction="right" size="32"></bs5-icon>
                     <span rv-hide="controlNextIconSrc" class="fallback-next-icon" aria-hidden="true"> &gt; </span>
-                    <span class="sr-only">Next</span>
+                    <span class="visually-hidden">Next</span>
                 </button>
 
             </div>

@@ -1,43 +1,105 @@
-$content-slider-snes-height: 400px;
+$content-slider-snes-height: 300px;
 $content-slider-snes-sm-height: 400px;
 $content-slider-snes-md-height: 400px;
 $content-slider-snes-lg-height: 400px;
 $content-slider-snes-xl-height: 400px;
+$content-slider-snes-xxl-height: 400px;
 
 $content-slider-snes-capture-height: 150px;
 $content-slider-snes-capture-sm-height: 150px;
 $content-slider-snes-capture-md-height: 250px;
 $content-slider-snes-capture-lg-height: 200px;
 $content-slider-snes-capture-xl-height: 200px;
+$content-slider-snes-capture-xxl-height: 200px;
+
+$content-slider-snes-active-item-height: $content-slider-snes-height + $content-slider-active-item-margin-bottom !default;
+$content-slider-snes-active-item-sm-height: $content-slider-snes-sm-height + $content-slider-active-item-sm-margin-bottom !default;
+$content-slider-snes-active-item-md-height: $content-slider-snes-md-height + $content-slider-active-item-md-margin-bottom !default;
+$content-slider-snes-active-item-lg-height: $content-slider-snes-lg-height + $content-slider-active-item-lg-margin-bottom !default;
+$content-slider-snes-active-item-xl-height: $content-slider-snes-xl-height + $content-slider-active-item-xl-margin-bottom !default;
+$content-slider-snes-active-item-xxl-height: $content-slider-snes-xxl-height + $content-slider-active-item-xxl-margin-bottom !default;
+
+$content-slider-snes-inactive-item-height: auto !default;
+$content-slider-snes-inactive-item-sm-height: auto !default;
+$content-slider-snes-inactive-item-md-height: $content-slider-snes-md-height - $content-slider-snes-capture-md-height !default;
+$content-slider-snes-inactive-item-lg-height: $content-slider-snes-lg-height - $content-slider-snes-capture-lg-height !default;
+$content-slider-snes-inactive-item-xl-height: $content-slider-snes-xl-height - $content-slider-snes-capture-xl-height !default;
+$content-slider-snes-inactive-item-xxl-height: $content-slider-snes-xxl-height - $content-slider-snes-capture-xxl-height !default;
 
 @function content-slider-snes-breakpoint-height($breakpoint) {
+  @if $breakpoint == xxl {
+    @return $content-slider-snes-xxl-height;
+  }
   @if $breakpoint == xl {
     @return $content-slider-snes-xl-height;
-  } @else if $breakpoint == lg {
+  }
+  @if $breakpoint == lg {
     @return $content-slider-snes-lg-height;
-  } @else if $breakpoint == md {
+  }
+  @if $breakpoint == md {
     @return $content-slider-snes-md-height;
-  } @else if $breakpoint == sm {
+  }
+  @if $breakpoint == sm {
     @return $content-slider-snes-sm-height;
-  } @else if $breakpoint == xs {
-    @return $content-slider-snes-height;
   }
   @return $content-slider-snes-height;
 }
 
 @function content-slider-snes-capture-breakpoint-height($breakpoint) {
+  @if $breakpoint == xxl {
+    @return $content-slider-snes-capture-xxl-height;
+  }
   @if $breakpoint == xl {
     @return $content-slider-snes-capture-xl-height;
-  } @else if $breakpoint == lg {
+  }
+  @if $breakpoint == lg {
     @return $content-slider-snes-capture-lg-height;
-  } @else if $breakpoint == md {
+  }
+  @if $breakpoint == md {
     @return $content-slider-snes-capture-md-height;
-  } @else if $breakpoint == sm {
+  }
+  @if $breakpoint == sm {
     @return $content-slider-snes-capture-sm-height;
-  } @else if $breakpoint == xs {
-    @return $content-slider-snes-capture-height;
   }
   @return $content-slider-snes-capture-height;
+}
+
+@function content-slider-snes-active-item-height($breakpoint) {
+  @if $breakpoint == xxl {
+    @return $content-slider-snes-active-item-xxl-height;
+  }
+  @if $breakpoint == xl {
+    @return $content-slider-snes-active-item-xl-height;
+  }
+  @if $breakpoint == lg {
+    @return $content-slider-snes-active-item-lg-height;
+  }
+  @if $breakpoint == md {
+    @return $content-slider-snes-active-item-md-height;
+  }
+  @if $breakpoint == sm {
+    @return $content-slider-snes-active-item-sm-height;
+  }
+  @return $content-slider-snes-active-item-height;
+}
+
+@function content-slider-snes-inactive-item-height($breakpoint) {
+  @if $breakpoint == xxl {
+    @return $content-slider-snes-inactive-item-xxl-height;
+  }
+  @if $breakpoint == xl {
+    @return $content-slider-snes-inactive-item-xl-height;
+  }
+  @if $breakpoint == lg {
+    @return $content-slider-snes-inactive-item-lg-height;
+  }
+  @if $breakpoint == md {
+    @return $content-slider-snes-inactive-item-md-height;
+  }
+  @if $breakpoint == sm {
+    @return $content-slider-snes-inactive-item-sm-height;
+  }
+  @return $content-slider-snes-inactive-item-height;
 }
 
 content-slider-example {
@@ -50,7 +112,6 @@ content-slider-example {
       $content-slider-active-item-cur-margin-bottom: 0;
 
       content-slider.snes {
-        // content: $breakpoint; // For debugging
         height: $content-slider-cur-height;
         min-height: $content-slider-cur-height;
         .wrapper {

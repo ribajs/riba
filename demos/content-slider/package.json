@@ -38,7 +38,7 @@
     "@ribajs/types": "workspace:infra/types",
     "@ribajs/webpack-config": "workspace:infra/webpack-config",
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve",
-    "@types/jest": "^26.0.20",
+    "@types/jest": "^26.0.21",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "@yarnpkg/pnpify": "^2.4.0",
@@ -66,17 +66,17 @@
     "serve": "^11.3.2",
     "ts-jest": "^26.5.4",
     "typescript": "^4.1.5",
-    "webpack": "^5.26.2",
+    "webpack": "^5.26.3",
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "@ribajs/bs4": "workspace:packages/bs4",
+    "@ribajs/bs5": "workspace:packages/bs5",
     "@ribajs/content-slider": "workspace:packages/content-slider",
     "@ribajs/core": "workspace:packages/core",
     "@ribajs/extras": "workspace:packages/extras",
     "@ribajs/iconset": "workspace:packages/iconset",
     "@ribajs/utils": "workspace:packages/utils",
-    "bootstrap": "4.6.0"
+    "bootstrap": "next"
   }
 }

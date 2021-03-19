@@ -1,86 +1,4 @@
-$content-slider-height: 800px !default;
-$content-slider-sm-height: 800px !default;
-$content-slider-md-height: 600px !default;
-$content-slider-lg-height: 600px !default;
-$content-slider-xl-height: 800px !default;
-
-$content-slider-capture-height: 300px !default;
-$content-slider-capture-sm-height: 300px !default;
-$content-slider-capture-md-height: 400px !default;
-$content-slider-capture-lg-height: 350px !default;
-$content-slider-capture-xl-height: 400px !default;
-
-$content-slider-active-item-margin-bottom: 30px !default;
-$content-slider-active-item-sm-margin-bottom: 30px !default;
-$content-slider-active-item-md-margin-bottom: 30px !default;
-$content-slider-active-item-lg-margin-bottom: 30px !default;
-$content-slider-active-item-xl-margin-bottom: 30px !default;
-
-$content-slider-offset: 50px !default;
-$content-slider-sm-offset: 50px !default;
-$content-slider-md-offset: 50px !default;
-$content-slider-lg-offset: 50px !default;
-$content-slider-xl-offset: 50px !default;
-
-@function content-slider-breakpoint-height($breakpoint) {
-  @if $breakpoint == xl {
-    @return $content-slider-xl-height;
-  } @else if $breakpoint == lg {
-    @return $content-slider-lg-height;
-  } @else if $breakpoint == md {
-    @return $content-slider-md-height;
-  } @else if $breakpoint == sm {
-    @return $content-slider-sm-height;
-  } @else if $breakpoint == xs {
-    @return $content-slider-height;
-  }
-  @return $content-slider-height;
-}
-
-@function content-slider-capture-breakpoint-height($breakpoint) {
-  @if $breakpoint == xl {
-    @return $content-slider-capture-xl-height;
-  } @else if $breakpoint == lg {
-    @return $content-slider-capture-lg-height;
-  } @else if $breakpoint == md {
-    @return $content-slider-capture-md-height;
-  } @else if $breakpoint == sm {
-    @return $content-slider-capture-sm-height;
-  } @else if $breakpoint == xs {
-    @return $content-slider-capture-height;
-  }
-  @return $content-slider-capture-height;
-}
-
-@function content-slider-active-item-breakpoint-margin-bottom($breakpoint) {
-  @if $breakpoint == xl {
-    @return $content-slider-active-item-xl-margin-bottom;
-  } @else if $breakpoint == lg {
-    @return $content-slider-active-item-lg-margin-bottom;
-  } @else if $breakpoint == md {
-    @return $content-slider-active-item-md-margin-bottom;
-  } @else if $breakpoint == sm {
-    @return $content-slider-active-item-sm-margin-bottom;
-  } @else if $breakpoint == xs {
-    @return $content-slider-active-item-margin-bottom;
-  }
-  @return $content-slider-active-item-margin-bottom;
-}
-
-@function content-slider-breakpoint-offset($breakpoint) {
-  @if $breakpoint == xl {
-    @return $content-slider-xl-offset;
-  } @else if $breakpoint == lg {
-    @return $content-slider-lg-offset;
-  } @else if $breakpoint == md {
-    @return $content-slider-md-offset;
-  } @else if $breakpoint == sm {
-    @return $content-slider-sm-offset;
-  } @else if $breakpoint == xs {
-    @return $content-slider-offset;
-  }
-  @return $content-slider-offset;
-}
+@import './content-slider.component.variables.scss';
 
 content-slider {
   .wrapper {
@@ -89,11 +7,9 @@ content-slider {
       overflow-x: visible;
       transition: transform 0.2s ease-in-out;
       .item {
-        // background-color: antiquewhite;
         transition: all 0.2s ease-in-out;
         
         &.active {
-          // background-color: red;
           z-index: 1;
         }
         
@@ -115,12 +31,14 @@ content-slider {
         height: 100%;
       }
       .controls {
+        position: relative;
         z-index: 1;
         pointer-events: none;
         .prev, .next {
           position: absolute;
           top: 50%;
           pointer-events: all;
+          transform: translate(0,-50%);
         }
         .prev {
           left: 0;
@@ -144,9 +62,17 @@ content-slider {
     $content-slider-capture-cur-height: content-slider-capture-breakpoint-height($breakpoint);
     $content-slider-active-item-cur-margin-bottom: content-slider-active-item-breakpoint-margin-bottom($breakpoint);
     $content-slider-cur-offset: content-slider-breakpoint-offset($breakpoint);
+    $content-slider-active-item-cur-offset: content-slider-active-item-height($breakpoint);
+    $content-slider-inactive-item-cur-offset: content-slider-inactive-item-height($breakpoint);
 
     content-slider {
-      // content: $breakpoint; // For debugging
+      @if $content-slider-debug == true {
+        &::after {
+          content: "#{$breakpoint}";
+          display: block;
+          position: absolute;
+        }
+      }
       height: $content-slider-cur-height;
       min-height: $content-slider-cur-height;
       .wrapper {
@@ -158,11 +84,11 @@ content-slider {
           height: $content-slider-cur-height;
           .item {
             &.active {
-              height: $content-slider-cur-height + $content-slider-active-item-cur-margin-bottom;
+              height: $content-slider-active-item-cur-offset;
               margin-bottom: -$content-slider-active-item-cur-margin-bottom;
             }
             &:not(.active) {
-              height: $content-slider-cur-height - $content-slider-capture-cur-height;
+              height: $content-slider-inactive-item-cur-offset;
             }
           }
         }
