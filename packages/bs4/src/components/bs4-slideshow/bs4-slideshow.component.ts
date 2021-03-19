@@ -1070,7 +1070,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
         }
         if (
           this.slideElements[index] &&
-          this.slideElements[index].classList.remove
+          this.slideElements[index].classList
         ) {
           this.slideElements[index].classList.remove("active");
         }
@@ -1085,7 +1085,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       return -1;
     }
     this.scope.items[index].active = true;
-    if (this.slideElements && this.slideElements[index].classList.add) {
+    if (this.slideElements && this.slideElements[index].classList) {
       this.slideElements[index].classList.add("active");
     }
     return index;

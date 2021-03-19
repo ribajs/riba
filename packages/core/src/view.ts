@@ -129,7 +129,7 @@ export class View {
     if (Array.isArray(this.bindings)) {
       this.bindings.forEach((binding) => {
         binding.unbind();
-        if (binding.el.setAttribute && this.options.removeBinderAttributes) {
+        if (typeof binding.el && this.options.removeBinderAttributes) {
           // TODO reset attribute ?
           // binding.el.setAttribute(attribute.name);
         }

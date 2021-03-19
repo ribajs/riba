@@ -43,5 +43,5 @@ module.exports = {
    * 
    * @see https://github.com/facebook/jest/issues/8114#issuecomment-475068766
    */
-  modulePathIgnorePatterns: ['<rootDir>/infra'. '<rootDir>/packages/vue']
+  modulePathIgnorePatterns: ['<rootDir>/infra', '<rootDir>/demos/vue', '<rootDir>/examples/electron', '<rootDir>/examples/electron-nest']
 }
