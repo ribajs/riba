@@ -36,4 +36,12 @@ module.exports = {
   },
   preset: 'ts-jest',
   testMatch: null,
+  /**
+   * Fixes error:
+   * jest-haste-map: Haste module naming collision: eslint
+   * The following files share their name; please adjust your hasteImpl:
+   * 
+   * @see https://github.com/facebook/jest/issues/8114#issuecomment-475068766
+   */
+  modulePathIgnorePatterns: ['<rootDir>/infra'. '<rootDir>/packages/vue']
 }

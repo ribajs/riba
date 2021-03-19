@@ -2623,7 +2623,7 @@ __metadata:
     "@ribajs/types": "workspace:infra/types"
     "@ribajs/utils": "workspace:packages/utils"
     "@sphinxxxx/color-conversion": ^2.2.2
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -2641,7 +2641,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.26.3
     webpack-cli: ^4.5.0
   languageName: node
   linkType: soft
@@ -2670,7 +2670,7 @@ __metadata:
     "@ribajs/types": "workspace:infra/types"
     "@ribajs/utils": "workspace:packages/utils"
     "@sphinxxxx/color-conversion": ^2.2.2
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -2688,7 +2688,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: unknown
   linkType: soft
@@ -2719,7 +2719,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@sphinxxxx/color-conversion": ^2.2.2
     "@types/bootstrap": ^5.0.9
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -2736,7 +2736,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.26.3
     webpack-cli: ^4.5.0
   languageName: node
   linkType: soft
@@ -2767,7 +2767,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@sphinxxxx/color-conversion": ^2.2.2
     "@types/bootstrap": ^5.0.9
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -2784,7 +2784,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: unknown
   linkType: soft
@@ -2797,7 +2797,7 @@ __metadata:
     "@babel/runtime-corejs3": ^7.13.10
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     eslint: ^7.22.0
@@ -2816,7 +2816,7 @@ __metadata:
     "@babel/runtime-corejs3": ^7.13.10
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     eslint: ^7.22.0
@@ -2842,13 +2842,13 @@ __metadata:
     "@babel/preset-typescript": ^7.13.0
     "@babel/runtime": ^7.13.10
     "@babel/runtime-corejs3": ^7.13.10
-    "@ribajs/bs4": "workspace:packages/bs4"
+    "@ribajs/bs5": "workspace:packages/bs5"
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/extras": "workspace:packages/extras"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -2863,7 +2863,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.26.3
     webpack-cli: ^4.5.0
   languageName: node
   linkType: soft
@@ -2883,13 +2883,13 @@ __metadata:
     "@babel/preset-typescript": ^7.13.0
     "@babel/runtime": ^7.13.10
     "@babel/runtime-corejs3": ^7.13.10
-    "@ribajs/bs4": "workspace:packages/bs4"
+    "@ribajs/bs5": "workspace:packages/bs5"
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/extras": "workspace:packages/extras"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -2904,7 +2904,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: unknown
   linkType: soft
@@ -2932,7 +2932,7 @@ __metadata:
     "@ribajs/types": "workspace:infra/types"
     "@ribajs/utils": "workspace:packages/utils"
     "@types/core-js": ^2.5.4
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@types/node": ^14.14.35
     babel-jest: ^26.6.3
     babel-loader: ^8.2.2
@@ -2949,7 +2949,7 @@ __metadata:
     ts-jest: ^26.5.4
     typescript: ^4.1.5
     uglifyjs-webpack-plugin: ^2.2.0
-    webpack: ^5.26.2
+    webpack: ^5.26.3
     webpack-cli: ^4.5.0
     webpack-glob-entry: ^2.1.1
   languageName: node
@@ -2978,7 +2978,7 @@ __metadata:
     "@ribajs/types": "workspace:infra/types"
     "@ribajs/utils": "workspace:packages/utils"
     "@types/core-js": ^2.5.4
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@types/node": ^14.14.35
     babel-jest: ^26.6.3
     babel-loader: ^8.2.2
@@ -2995,7 +2995,7 @@ __metadata:
     ts-jest: ^26.5.4
     typescript: ^4.1.5
     uglifyjs-webpack-plugin: ^2.2.0
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-glob-entry: ^2.1.1
   languageName: unknown
@@ -3025,7 +3025,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/experimental-utils": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
@@ -3055,7 +3055,7 @@ __metadata:
     sass-loader: ^11.0.1
     serve: ^11.3.2
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -3087,7 +3087,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/experimental-utils": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
@@ -3117,7 +3117,7 @@ __metadata:
     sass-loader: ^11.0.1
     serve: ^11.3.2
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -3149,7 +3149,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/experimental-utils": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
@@ -3179,7 +3179,7 @@ __metadata:
     sass-loader: ^11.0.1
     serve: ^11.3.2
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -3210,7 +3210,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/experimental-utils": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
@@ -3239,7 +3239,7 @@ __metadata:
     sass-loader: ^11.0.1
     serve: ^11.3.2
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -3267,7 +3267,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -3295,7 +3295,7 @@ __metadata:
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -3323,7 +3323,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -3349,7 +3349,7 @@ __metadata:
     serve: ^11.3.2
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -3381,7 +3381,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@types/node": ^14.14.35
     "@types/webpack-env": ^1.16.0
     "@typescript-eslint/eslint-plugin": ^4.18.0
@@ -3415,7 +3415,7 @@ __metadata:
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -3446,7 +3446,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/experimental-utils": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
@@ -3476,7 +3476,7 @@ __metadata:
     sass-loader: ^11.0.1
     serve: ^11.3.2
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -3506,7 +3506,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/experimental-utils": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
@@ -3536,7 +3536,7 @@ __metadata:
     sass-loader: ^11.0.1
     serve: ^11.3.2
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -3568,7 +3568,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/experimental-utils": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
@@ -3598,7 +3598,7 @@ __metadata:
     sass-loader: ^11.0.1
     serve: ^11.3.2
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -3631,7 +3631,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/experimental-utils": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
@@ -3661,7 +3661,7 @@ __metadata:
     sass-loader: ^11.0.1
     serve: ^11.3.2
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -3692,7 +3692,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/experimental-utils": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
@@ -3721,7 +3721,7 @@ __metadata:
     sass-loader: ^11.0.1
     serve: ^11.3.2
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -3753,7 +3753,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@types/node": ^14.14.35
     "@types/webpack-env": ^1.16.0
     "@typescript-eslint/eslint-plugin": ^4.18.0
@@ -3787,7 +3787,7 @@ __metadata:
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -3818,7 +3818,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/experimental-utils": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
@@ -3848,7 +3848,7 @@ __metadata:
     sass-loader: ^11.0.1
     serve: ^11.3.2
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -3870,7 +3870,7 @@ __metadata:
     "@babel/preset-typescript": ^7.13.0
     "@babel/runtime": ^7.13.10
     "@babel/runtime-corejs3": ^7.13.10
-    "@ribajs/bs4": "workspace:packages/bs4"
+    "@ribajs/bs5": "workspace:packages/bs5"
     "@ribajs/content-slider": "workspace:packages/content-slider"
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
@@ -3881,14 +3881,14 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     "@yarnpkg/pnpify": ^2.4.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
-    bootstrap: 4.6.0
+    bootstrap: next
     core-js: ^3.9.1
     css-loader: ^5.1.3
     eslint: ^7.22.0
@@ -3910,7 +3910,7 @@ __metadata:
     serve: ^11.3.2
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -3938,7 +3938,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/experimental-utils": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
@@ -3969,7 +3969,7 @@ __metadata:
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -3997,7 +3997,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -4023,7 +4023,7 @@ __metadata:
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -4052,7 +4052,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -4078,7 +4078,7 @@ __metadata:
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -4108,7 +4108,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -4138,7 +4138,7 @@ __metadata:
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -4168,7 +4168,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -4198,7 +4198,7 @@ __metadata:
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -4229,7 +4229,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/experimental-utils": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
@@ -4259,7 +4259,7 @@ __metadata:
     sass-loader: ^11.0.1
     serve: ^11.3.2
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -4292,7 +4292,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -4324,7 +4324,7 @@ __metadata:
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -4355,7 +4355,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -4384,7 +4384,7 @@ __metadata:
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -4415,7 +4415,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -4444,7 +4444,7 @@ __metadata:
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -4477,7 +4477,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -4508,7 +4508,7 @@ __metadata:
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -4541,7 +4541,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/experimental-utils": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
@@ -4573,7 +4573,7 @@ __metadata:
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -4605,7 +4605,7 @@ __metadata:
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     "@yarnpkg/pnpify": ^2.4.0
@@ -4635,7 +4635,7 @@ __metadata:
     terser-webpack-plugin: ^5.1.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
@@ -4678,7 +4678,7 @@ __metadata:
     "@babel/runtime": ^7.13.10
     "@babel/runtime-corejs3": ^7.13.10
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@types/node": ^14.14.35
     babel-jest: ^26.6.3
     eslint: ^7.22.0
@@ -4697,7 +4697,7 @@ __metadata:
     "@babel/runtime": ^7.13.10
     "@babel/runtime-corejs3": ^7.13.10
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@types/node": ^14.14.35
     babel-jest: ^26.6.3
     eslint: ^7.22.0
@@ -4751,7 +4751,7 @@ __metadata:
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
     file-loader: ^6.2.0
-    fork-ts-checker-webpack-plugin: ^6.1.1
+    fork-ts-checker-webpack-plugin: ^6.2.0
     html-loader: ^2.1.2
     leaflet: ^1.7.1
     prettier: 2.2.1
@@ -4761,7 +4761,7 @@ __metadata:
     style-loader: ^2.0.0
     terser-webpack-plugin: ^5.1.1
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: unknown
   linkType: soft
@@ -4779,7 +4779,7 @@ __metadata:
     "@nestjs/testing": ^7.6.14
     "@types/cookie-parser": ^1.4.2
     "@types/express-session": ^1.17.3
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@types/node": ^14.14.35
     "@types/supertest": ^2.0.10
     "@typescript-eslint/eslint-plugin": ^4.18.0
@@ -4854,7 +4854,7 @@ __metadata:
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
     file-loader: ^6.2.0
-    fork-ts-checker-webpack-plugin: ^6.1.1
+    fork-ts-checker-webpack-plugin: ^6.2.0
     html-loader: ^2.1.2
     prettier: 2.2.1
     pug: ^3.0.2
@@ -4863,7 +4863,7 @@ __metadata:
     style-loader: ^2.0.0
     terser-webpack-plugin: ^5.1.1
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
     webpack-node-externals: ^2.5.2
   languageName: unknown
@@ -4888,7 +4888,7 @@ __metadata:
     "@types/cookie-parser": ^1.4.2
     "@types/express": ^4.17.11
     "@types/express-session": ^1.17.3
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@types/jsdom": ^16.2.7
     "@types/node": ^14.14.35
     "@types/supertest": ^2.0.10
@@ -4942,7 +4942,7 @@ __metadata:
     "@ribajs/events": "workspace:packages/events"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     babel-loader: ^8.2.2
@@ -4956,7 +4956,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.26.3
     webpack-cli: ^4.5.0
   languageName: node
   linkType: soft
@@ -4980,7 +4980,7 @@ __metadata:
     "@ribajs/events": "workspace:packages/events"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     babel-loader: ^8.2.2
@@ -4994,7 +4994,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: unknown
   linkType: soft
@@ -5007,7 +5007,7 @@ __metadata:
     "@babel/runtime-corejs3": ^7.13.10
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     eslint: ^7.22.0
     typescript: ^4.1.5
   languageName: node
@@ -5021,7 +5021,7 @@ __metadata:
     "@babel/runtime-corejs3": ^7.13.10
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     eslint: ^7.22.0
     typescript: ^4.1.5
   languageName: unknown
@@ -5046,7 +5046,7 @@ __metadata:
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     babel-loader: ^8.2.2
@@ -5057,7 +5057,7 @@ __metadata:
     eslint-plugin-prettier: ^3.3.1
     prettier: 2.2.1
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.26.3
     webpack-cli: ^4.5.0
   languageName: node
   linkType: soft
@@ -5081,7 +5081,7 @@ __metadata:
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     babel-loader: ^8.2.2
@@ -5092,7 +5092,7 @@ __metadata:
     eslint-plugin-prettier: ^3.3.1
     prettier: 2.2.1
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: unknown
   linkType: soft
@@ -5146,7 +5146,7 @@ __metadata:
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@types/jquery": ^3.5.5
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
@@ -5161,7 +5161,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.26.3
     webpack-cli: ^4.5.0
   languageName: node
   linkType: soft
@@ -5185,7 +5185,7 @@ __metadata:
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@types/jquery": ^3.5.5
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
@@ -5200,7 +5200,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: unknown
   linkType: soft
@@ -5227,7 +5227,7 @@ __metadata:
     "@ribajs/extras": "workspace:packages/extras"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@types/leaflet": ^1.7.0
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
@@ -5244,7 +5244,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.26.3
     webpack-cli: ^4.5.0
   languageName: node
   linkType: soft
@@ -5271,7 +5271,7 @@ __metadata:
     "@ribajs/extras": "workspace:packages/extras"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@types/leaflet": ^1.7.0
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
@@ -5288,7 +5288,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: unknown
   linkType: soft
@@ -5311,7 +5311,7 @@ __metadata:
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     babel-loader: ^8.2.2
@@ -5326,7 +5326,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.26.3
     webpack-cli: ^4.5.0
   languageName: node
   linkType: soft
@@ -5349,7 +5349,7 @@ __metadata:
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     babel-loader: ^8.2.2
@@ -5364,7 +5364,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: unknown
   linkType: soft
@@ -5388,7 +5388,7 @@ __metadata:
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     babel-loader: ^8.2.2
@@ -5403,7 +5403,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: unknown
   linkType: soft
@@ -5426,7 +5426,7 @@ __metadata:
     "@types/cookie-parser": ^1.4.2
     "@types/express": ^4.17.11
     "@types/express-session": ^1.17.3
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@types/jsdom": ^16.2.7
     "@types/node": ^14.14.35
     "@types/supertest": ^2.0.10
@@ -5480,7 +5480,7 @@ __metadata:
     "@types/cookie-parser": ^1.4.2
     "@types/express": ^4.17.11
     "@types/express-session": ^1.17.3
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@types/jsdom": ^16.2.7
     "@types/node": ^14.14.35
     "@types/supertest": ^2.0.10
@@ -5661,7 +5661,7 @@ __metadata:
     "@tsconfig/node14": ^1.0.0
     "@types/gulp": ^4.0.8
     "@types/hex-color-regex": ^1.1.0
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@types/jquery": ^3.5.5
     "@types/js-yaml": ^4.0.0
     "@types/node": ^14.14.35
@@ -5684,7 +5684,7 @@ __metadata:
     rgb-regex: ^1.0.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.26.3
     webpack-cli: ^4.5.0
   languageName: node
   linkType: soft
@@ -5712,7 +5712,7 @@ __metadata:
     "@tsconfig/node14": ^1.0.0
     "@types/gulp": ^4.0.8
     "@types/hex-color-regex": ^1.1.0
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@types/jquery": ^3.5.5
     "@types/js-yaml": ^4.0.0
     "@types/node": ^14.14.35
@@ -5735,7 +5735,7 @@ __metadata:
     rgb-regex: ^1.0.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: unknown
   linkType: soft
@@ -5761,7 +5761,7 @@ __metadata:
     "@ribajs/extras": "workspace:packages/extras"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     babel-loader: ^8.2.2
@@ -5776,7 +5776,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.26.3
     webpack-cli: ^4.5.0
   languageName: node
   linkType: soft
@@ -5802,7 +5802,7 @@ __metadata:
     "@ribajs/extras": "workspace:packages/extras"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     babel-loader: ^8.2.2
@@ -5817,7 +5817,7 @@ __metadata:
     prettier: 2.2.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: unknown
   linkType: soft
@@ -5895,7 +5895,7 @@ __metadata:
     "@ribajs/history": "workspace:packages/history"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/experimental-utils": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
@@ -5911,7 +5911,7 @@ __metadata:
     regexpp: ^3.1.0
     tsutils: ^3.21.0
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.26.3
     webpack-cli: ^4.5.0
   languageName: node
   linkType: soft
@@ -5935,7 +5935,7 @@ __metadata:
     "@ribajs/history": "workspace:packages/history"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/experimental-utils": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
@@ -5951,7 +5951,7 @@ __metadata:
     regexpp: ^3.1.0
     tsutils: ^3.21.0
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: unknown
   linkType: soft
@@ -5975,7 +5975,7 @@ __metadata:
     "@ribajs/router": "workspace:packages/router"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     babel-loader: ^8.2.2
@@ -5986,7 +5986,7 @@ __metadata:
     eslint-plugin-prettier: ^3.3.1
     prettier: 2.2.1
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.26.3
     webpack-cli: ^4.5.0
   languageName: node
   linkType: soft
@@ -6010,7 +6010,7 @@ __metadata:
     "@ribajs/router": "workspace:packages/router"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
     babel-loader: ^8.2.2
@@ -6021,7 +6021,7 @@ __metadata:
     eslint-plugin-prettier: ^3.3.1
     prettier: 2.2.1
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: unknown
   linkType: soft
@@ -6070,7 +6070,7 @@ __metadata:
     "@ribajs/shopify": "workspace:packages/shopify"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@types/socket.io-client": 1.4.36
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
@@ -6083,7 +6083,7 @@ __metadata:
     prettier: 2.2.1
     socket.io-client: 3.1.3
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.26.3
     webpack-cli: ^4.5.0
   languageName: node
   linkType: soft
@@ -6109,7 +6109,7 @@ __metadata:
     "@ribajs/shopify": "workspace:packages/shopify"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:packages/utils"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@types/socket.io-client": 1.4.36
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
@@ -6122,7 +6122,7 @@ __metadata:
     prettier: 2.2.1
     socket.io-client: 3.1.3
     typescript: ^4.1.5
-    webpack: ^5.26.2
+    webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: unknown
   linkType: soft
@@ -6167,7 +6167,7 @@ __metadata:
     "@types/gulp-terser": ^1.2.1
     "@types/gulp-util": ^3.0.35
     "@types/gulp-zip": ^4.0.1
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@types/js-yaml": ^4.0.0
     "@types/lodash": ^4.14.168
     "@types/node": ^14.14.35
@@ -6203,11 +6203,11 @@ __metadata:
     js-yaml: ^4.0.0
     lodash: ^4.17.21
     moment: ^2.29.1
-    open: ^8.0.2
+    open: ^8.0.3
     prettier: 2.2.1
     prompt: ^1.1.0
     shopify-admin-api: ^2.16.5
-    terser: ^5.6.0
+    terser: ^5.6.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
   peerDependencies:
@@ -6272,7 +6272,7 @@ __metadata:
     "@types/gulp-terser": ^1.2.1
     "@types/gulp-util": ^3.0.35
     "@types/gulp-zip": ^4.0.1
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@types/js-yaml": ^4.0.0
     "@types/lodash": ^4.14.168
     "@types/node": ^14.14.35
@@ -6308,11 +6308,11 @@ __metadata:
     js-yaml: ^4.0.0
     lodash: ^4.17.21
     moment: ^2.29.1
-    open: ^8.0.2
+    open: ^8.0.3
     prettier: 2.2.1
     prompt: ^1.1.0
     shopify-admin-api: ^2.16.5
-    terser: ^5.6.0
+    terser: ^5.6.1
     ts-jest: ^26.5.4
     typescript: ^4.1.5
   peerDependencies:
@@ -6390,7 +6390,7 @@ __metadata:
     "@babel/runtime-corejs3": ^7.13.10
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     babel-jest: ^26.6.3
     eslint: ^7.22.0
     typescript: ^4.1.5
@@ -6405,7 +6405,7 @@ __metadata:
     "@babel/runtime-corejs3": ^7.13.10
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     babel-jest: ^26.6.3
     eslint: ^7.22.0
     typescript: ^4.1.5
@@ -6450,7 +6450,7 @@ __metadata:
     copy-webpack-plugin: ^8.0.0
     css-loader: ^5.1.3
     file-loader: ^6.2.0
-    fork-ts-checker-webpack-plugin: ^6.1.1
+    fork-ts-checker-webpack-plugin: ^6.2.0
     glob: ^7.1.6
     html-loader: ^2.1.2
     html-webpack-plugin: ^5.3.1
@@ -6546,7 +6546,7 @@ __metadata:
     copy-webpack-plugin: ^8.0.0
     css-loader: ^5.1.3
     file-loader: ^6.2.0
-    fork-ts-checker-webpack-plugin: ^6.1.1
+    fork-ts-checker-webpack-plugin: ^6.2.0
     glob: ^7.1.6
     html-loader: ^2.1.2
     html-webpack-plugin: ^5.3.1
@@ -7177,13 +7177,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:^26.0.20":
-  version: 26.0.20
-  resolution: "@types/jest@npm:26.0.20"
+"@types/jest@npm:^26.0.21":
+  version: 26.0.21
+  resolution: "@types/jest@npm:26.0.21"
   dependencies:
     jest-diff: ^26.0.0
     pretty-format: ^26.0.0
-  checksum: 221e39c7c9ce8d71ae4b2ba6abeef1a5b04f1cd96419b9fbbb65534bef4c4215b650561183073dcf47584ff1888d1f4fa7d2af2a38492b7feb9a3bfdcd24c44f
+  checksum: c219599d663527302a261aaa7cc038b79c428d7af39b0a20c2167cb698ae280f3a238b2ca3594bcabbe7ee441a6370d4b3afd19c4a616aaa5556d5b9e875c081
   languageName: node
   linkType: hard
 
@@ -13099,9 +13099,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fork-ts-checker-webpack-plugin@npm:^6.1.1":
-  version: 6.1.1
-  resolution: "fork-ts-checker-webpack-plugin@npm:6.1.1"
+"fork-ts-checker-webpack-plugin@npm:^6.2.0":
+  version: 6.2.0
+  resolution: "fork-ts-checker-webpack-plugin@npm:6.2.0"
   dependencies:
     "@babel/code-frame": ^7.8.3
     "@types/json-schema": ^7.0.5
@@ -13115,7 +13115,7 @@ __metadata:
     schema-utils: 2.7.0
     semver: ^7.3.2
     tapable: ^1.0.0
-  checksum: 0327346d6a2939f90274945c53024387f5e527cff4313fdd6edfb2aa4c0760b843648171ba9221d6675b8c4dd0a481f269690541e6d4f6161aed1c2c8a27fbab
+  checksum: 0600c928014a1a0a24728aca863a998028b2f3cbbd53722ecb1555cfc0723a31662d1b3970e58d1dad646bf16c6da12415ca779e84ea0446dcf74122f0c3d41c
   languageName: node
   linkType: hard
 
@@ -17509,14 +17509,14 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"open@npm:^8.0.2":
-  version: 8.0.2
-  resolution: "open@npm:8.0.2"
+"open@npm:^8.0.3":
+  version: 8.0.3
+  resolution: "open@npm:8.0.3"
   dependencies:
     define-lazy-prop: ^2.0.0
     is-docker: ^2.1.1
     is-wsl: ^2.2.0
-  checksum: bc47f97595fcb0c7825054a496846e4f7279747473bb553d67b8ae56fb8102a122ff8b161aaf4db21526e54f2a91de644b3e92b33f03b81a4f9322f46c9a3fe2
+  checksum: 7025f895191f6963777c1c8ed9573367d47350f72a840c04b65d3a11a33d32635aeeb5c8113658e12180ae88aad86e146e707fcd4ff223839b13f8b82fe14ac5
   languageName: node
   linkType: hard
 
@@ -19950,7 +19950,7 @@ resolve@^1.14.2:
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/types": "workspace:infra/types"
     "@types/core-js": ^2.5.4
-    "@types/jest": ^26.0.20
+    "@types/jest": ^26.0.21
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/experimental-utils": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
@@ -21563,16 +21563,16 @@ resolve@^1.14.2:
   languageName: node
   linkType: hard
 
-"terser@npm:^5.6.0":
-  version: 5.6.0
-  resolution: "terser@npm:5.6.0"
+"terser@npm:^5.6.1":
+  version: 5.6.1
+  resolution: "terser@npm:5.6.1"
   dependencies:
     commander: ^2.20.0
     source-map: ~0.7.2
     source-map-support: ~0.5.19
   bin:
     terser: bin/terser
-  checksum: dcf3fdf7cd3cb6a4d891d42a9177c28af514d6ba175c5d889e03f3bb1ef0a5291bf5320f7a6d6aafd62227b8986d54d1c3423e77e23b3497d2b6633386ced1ab
+  checksum: 55348dd25452f0a1690040f943a890dc3e33b8711b1c0592ef1114b2eca51d6ec8db8f8f769f1483b088575c07f44b7e92b3dda5f430ff6fa8c2ebd461db26f9
   languageName: node
   linkType: hard
 
@@ -22125,11 +22125,11 @@ resolve@^1.14.2:
 
 "typescript@patch:typescript@4.1.5#builtin<compat/typescript>, typescript@patch:typescript@^4.1.5#builtin<compat/typescript>":
   version: 4.1.5
-  resolution: "typescript@patch:typescript@npm%3A4.1.5#builtin<compat/typescript>::version=4.1.5&hash=cc6730"
+  resolution: "typescript@patch:typescript@npm%3A4.1.5#builtin<compat/typescript>::version=4.1.5&hash=a45b0e"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 58cc7786be0f8485c124944883b1384287532e4867ec37f1fb5cb2811dbc10f7a9decccad89097f924043285f3515bfd8223c61dbb4f88af00b2d8dc2ef73207
+  checksum: 9c57e19536e978f130694888fbda2f8fe60f92c388c6b2945881dd7c912078bf52663dcb3278100cf9f4689805fbaec86b3de42ef600fb9672545b24fc1b7b15
   languageName: node
   linkType: hard
 
@@ -22883,9 +22883,9 @@ resolve@^1.14.2:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.26.2":
-  version: 5.26.2
-  resolution: "webpack@npm:5.26.2"
+"webpack@npm:^5.26.3":
+  version: 5.26.3
+  resolution: "webpack@npm:5.26.3"
   dependencies:
     "@types/eslint-scope": ^3.7.0
     "@types/estree": ^0.0.46
@@ -22915,7 +22915,43 @@ resolve@^1.14.2:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: 8787f3cbeece7f6d2f43e865b198815bb48fe6d6d79fda6969a0e861bbf1e3205b47f8a542a7328162dba27e63be37b9e9058375dfa5c94b7f459c32e77f00d7
+  checksum: f3d456173423ba67a18167f79c1c1b3dd33c9e4d2de2c51253fcb148353449235c4b789d22207de34106cfe9efbd20e20fe6a26ba204224ecc34f486a428a3a6
+  languageName: node
+  linkType: hard
+
+"webpack@npm:^5.27.0":
+  version: 5.27.0
+  resolution: "webpack@npm:5.27.0"
+  dependencies:
+    "@types/eslint-scope": ^3.7.0
+    "@types/estree": ^0.0.46
+    "@webassemblyjs/ast": 1.11.0
+    "@webassemblyjs/wasm-edit": 1.11.0
+    "@webassemblyjs/wasm-parser": 1.11.0
+    acorn: ^8.0.4
+    browserslist: ^4.14.5
+    chrome-trace-event: ^1.0.2
+    enhanced-resolve: ^5.7.0
+    es-module-lexer: ^0.4.0
+    eslint-scope: ^5.1.1
+    events: ^3.2.0
+    glob-to-regexp: ^0.4.1
+    graceful-fs: ^4.2.4
+    json-parse-better-errors: ^1.0.2
+    loader-runner: ^4.2.0
+    mime-types: ^2.1.27
+    neo-async: ^2.6.2
+    schema-utils: ^3.0.0
+    tapable: ^2.1.1
+    terser-webpack-plugin: ^5.1.1
+    watchpack: ^2.0.0
+    webpack-sources: ^2.1.1
+  peerDependenciesMeta:
+    webpack-cli:
+      optional: true
+  bin:
+    webpack: bin/webpack.js
+  checksum: c37a74ae986c22674cf185c4527e55db4ee0d65f9ec039769c1a84da8335e8d17e4fe06678eb02e37f7ff32e6bfff45a0337ac9c7c6e9e033f94d10d6b935d52
   languageName: node
   linkType: hard
 

@@ -67,61 +67,61 @@ bs5-icon {
   }
 
   &.color-primary {
-    color: theme-color('primary');
+    color: $primary;
   }
   &.color-stroke-primary {
     svg {
-      stroke: theme-color('primary') !important;
+      stroke: $primary !important;
       * {
-        stroke: theme-color('primary') !important;
+        stroke: $primary !important;
       }
     }
   }
   
   &.color-success {
-    color: theme-color('success');
+    color: $success;
   }
   &.color-stroke-success {
     svg {
-      stroke: theme-color('success') !important;
+      stroke: $success !important;
       * {
-        stroke: theme-color('success') !important;
+        stroke: $success !important;
       }
     }
   }
   
   &.color-info {
-    color: theme-color('info');
+    color: $info;
   }
   &.color-stroke-info {
     svg {
-      stroke: theme-color('info') !important;
+      stroke: $info !important;
       * {
-        stroke: theme-color('info') !important;
+        stroke: $info !important;
       }
     }
   }
   
   &.color-warning, &.warning {
-    color: theme-color('warning');
+    color: $warning;
   }
   &.color-stroke-warning {
     svg {
-      stroke: theme-color('warning') !important;
+      stroke: $warning !important;
       * {
-        stroke: theme-color('warning') !important;
+        stroke: $warning !important;
       }
     }
   }
 
   &.color-danger, &.danger {
-    color: theme-color('danger');
+    color: $danger;
   }
   &.color-stroke-danger {
     svg {
-      stroke: theme-color('danger') !important;
+      stroke: $danger !important;
       * {
-        stroke: theme-color('danger') !important;
+        stroke: $danger !important;
       }
     }
   }

@@ -11,35 +11,35 @@
 }
 
 .scrollbar-primary {
-  @include scrollbars(.5em, theme-color(primary), transparent);
+  @include scrollbars(.5em, $primary, transparent);
 }
 
 .scrollbar-secondary {
-  @include scrollbars(.5em, theme-color(secondary), transparent);
+  @include scrollbars(.5em, $secondary, transparent);
 }
 
 .scrollbar-success {
-  @include scrollbars(.5em, theme-color(success), transparent);
+  @include scrollbars(.5em, $success, transparent);
 }
 
 .scrollbar-danger {
-  @include scrollbars(.5em, theme-color(danger), transparent);
+  @include scrollbars(.5em, $danger, transparent);
 }
 
 .scrollbar-warning {
-  @include scrollbars(.5em, theme-color(warning), transparent);
+  @include scrollbars(.5em, $warning, transparent);
 }
 
 .scrollbar-info {
-  @include scrollbars(.5em, theme-color(info), transparent);
+  @include scrollbars(.5em, $info, transparent);
 }
 
 .scrollbar-light {
-  @include scrollbars(.5em, theme-color(light), transparent);
+  @include scrollbars(.5em, $light, transparent);
 }
 
 .scrollbar-dark {
-  @include scrollbars(.5em, theme-color(dark), transparent);
+  @include scrollbars(.5em, $dark, transparent);
 }
 
 .scrollbar-white {

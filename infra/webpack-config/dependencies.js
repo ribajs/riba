@@ -36,7 +36,7 @@ module.exports.getDependencies = (config = {}) => {
 
   config.sassLoaderPath =
     config.sassLoaderPath || require.resolve("sass-loader");
-  // Use dart-sass by default for yarn 2 pnp support, see: https://github.com/webpack-contrib/sass-loader/issues/802
+  // Use sass by default for yarn 2 pnp support, see: https://github.com/webpack-contrib/sass-loader/issues/802
   config.styles.SassImplementation =
     config.styles.SassImplementation || require("sass");
 
