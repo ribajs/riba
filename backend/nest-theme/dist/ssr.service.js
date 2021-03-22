@@ -119,6 +119,15 @@ let SsrService = class SsrService {
             virtualConsole,
             runScripts: 'outside-only',
             includeNodeLocations: true,
+            beforeParse(window) {
+                if (!window.fetch) {
+                    window.fetch = node_fetch_1.default;
+                }
+                if (!window.requestAnimationFrame) {
+                    window.requestAnimationFrame = () => { };
+                }
+                window.ssr = sharedContext;
+            },
         });
         const scriptSources = await this.readSsrScripts(scriptFilenames);
         const scripts = [];
@@ -129,11 +138,6 @@ let SsrService = class SsrService {
             scripts.push(script);
         }
         const vmContext = dom.getInternalVMContext();
-        const window = vmContext.window;
-        window.ssr = sharedContext;
-        if (!window.fetch) {
-            window.fetch = node_fetch_1.default;
-        }
         this.log.debug('Execute scripts...');
         for (const script of scripts) {
             await script.runInContext(vmContext);

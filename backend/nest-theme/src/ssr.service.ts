@@ -160,6 +160,17 @@ export class SsrService {
       virtualConsole,
       runScripts: 'outside-only', // 'dangerously',
       includeNodeLocations: true,
+      beforeParse(window) {
+        if (!window.fetch) {
+          window.fetch = fetch;
+        }
+
+        if (!window.requestAnimationFrame) {
+          (window as any).requestAnimationFrame = () => {};
+        }
+
+        window.ssr = sharedContext;
+      },
     });
 
     const scriptSources = await this.readSsrScripts(scriptFilenames);
@@ -173,11 +184,7 @@ export class SsrService {
 
     // Set shared context here
     const vmContext = dom.getInternalVMContext();
-    const window: Window = vmContext.window;
-    window.ssr = sharedContext;
-    if (!window.fetch) {
-      window.fetch = fetch;
-    }
+
     this.log.debug('Execute scripts...');
     for (const script of scripts) {
       await script.runInContext(vmContext);

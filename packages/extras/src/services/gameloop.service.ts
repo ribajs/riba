@@ -55,7 +55,7 @@ export class Gameloop {
   protected static loop(timestamp: number) {
     // Throttle the frame rate.
     if (timestamp < this.lastFrameTimeMs + 1000 / this.maxFPS) {
-      this.frameID = requestAnimationFrame(this.loop.bind(this));
+      this.frameID = window.requestAnimationFrame(this.loop.bind(this));
       return;
     }
 

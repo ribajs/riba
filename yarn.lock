@@ -2640,7 +2640,7 @@ __metadata:
     popper.js: ^1.16.1
     prettier: 2.2.1
     ts-jest: ^26.5.4
-    typescript: ^4.1.5
+    typescript: ^4.2.3
     webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: node
@@ -2735,7 +2735,7 @@ __metadata:
     jest-extended: ^0.11.5
     prettier: 2.2.1
     ts-jest: ^26.5.4
-    typescript: ^4.1.5
+    typescript: ^4.2.3
     webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: node
@@ -2804,7 +2804,7 @@ __metadata:
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
     prettier: 2.2.1
-    typescript: ^4.1.5
+    typescript: ^4.2.3
   languageName: node
   linkType: soft
 
@@ -2862,7 +2862,7 @@ __metadata:
     jest-extended: ^0.11.5
     prettier: 2.2.1
     ts-jest: ^26.5.4
-    typescript: ^4.1.5
+    typescript: ^4.2.3
     webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: node
@@ -2947,7 +2947,7 @@ __metadata:
     prettier: 2.2.1
     source-map-support: ^0.5.19
     ts-jest: ^26.5.4
-    typescript: ^4.1.5
+    typescript: ^4.2.3
     uglifyjs-webpack-plugin: ^2.2.0
     webpack: ^5.27.0
     webpack-cli: ^4.5.0
@@ -4652,7 +4652,7 @@ __metadata:
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
     prettier: 2.2.1
-    typescript: ^4.1.5
+    typescript: ^4.2.3
   languageName: node
   linkType: soft
 
@@ -4686,7 +4686,7 @@ __metadata:
     jest-config: ^26.6.3
     jest-extended: ^0.11.5
     ts-jest: ^26.5.4
-    typescript: ^4.1.5
+    typescript: ^4.2.3
   languageName: node
   linkType: soft
 
@@ -4955,7 +4955,7 @@ __metadata:
     jest-extended: ^0.11.5
     prettier: 2.2.1
     ts-jest: ^26.5.4
-    typescript: ^4.1.5
+    typescript: ^4.2.3
     webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: node
@@ -5009,7 +5009,7 @@ __metadata:
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@types/jest": ^26.0.21
     eslint: ^7.22.0
-    typescript: ^4.1.5
+    typescript: ^4.2.3
   languageName: node
   linkType: soft
 
@@ -5056,7 +5056,7 @@ __metadata:
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
     prettier: 2.2.1
-    typescript: ^4.1.5
+    typescript: ^4.2.3
     webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: node
@@ -5160,7 +5160,7 @@ __metadata:
     jquery: ^3.6.0
     prettier: 2.2.1
     ts-jest: ^26.5.4
-    typescript: ^4.1.5
+    typescript: ^4.2.3
     webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: node
@@ -5243,7 +5243,7 @@ __metadata:
     leaflet: ^1.7.1
     prettier: 2.2.1
     ts-jest: ^26.5.4
-    typescript: ^4.1.5
+    typescript: ^4.2.3
     webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: node
@@ -5325,7 +5325,7 @@ __metadata:
     moment: ^2.29.1
     prettier: 2.2.1
     ts-jest: ^26.5.4
-    typescript: ^4.1.5
+    typescript: ^4.2.3
     webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: node
@@ -5452,7 +5452,7 @@ __metadata:
     ts-jest: ^26.5.4
     ts-node: ^9.1.1
     tsconfig-paths: ^3.9.0
-    typescript: ^4.1.5
+    typescript: ^4.2.3
     whatwg-encoding: ^1.0.5
     yaml: next
   peerDependencies:
@@ -5683,7 +5683,7 @@ __metadata:
     prettier: 2.2.1
     rgb-regex: ^1.0.1
     ts-jest: ^26.5.4
-    typescript: ^4.1.5
+    typescript: ^4.2.3
     webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: node
@@ -5775,7 +5775,7 @@ __metadata:
     photoswipe: ^4.1.3
     prettier: 2.2.1
     ts-jest: ^26.5.4
-    typescript: ^4.1.5
+    typescript: ^4.2.3
     webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: node
@@ -5910,7 +5910,7 @@ __metadata:
     prettier: 2.2.1
     regexpp: ^3.1.0
     tsutils: ^3.21.0
-    typescript: ^4.1.5
+    typescript: ^4.2.3
     webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: node
@@ -5985,7 +5985,7 @@ __metadata:
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
     prettier: 2.2.1
-    typescript: ^4.1.5
+    typescript: ^4.2.3
     webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: node
@@ -6082,7 +6082,7 @@ __metadata:
     eslint-plugin-prettier: ^3.3.1
     prettier: 2.2.1
     socket.io-client: 3.1.3
-    typescript: ^4.1.5
+    typescript: ^4.2.3
     webpack: ^5.27.0
     webpack-cli: ^4.5.0
   languageName: node
@@ -6209,7 +6209,7 @@ __metadata:
     shopify-admin-api: ^2.16.5
     terser: ^5.6.1
     ts-jest: ^26.5.4
-    typescript: ^4.1.5
+    typescript: ^4.2.3
   peerDependencies:
     gulp: ^4.0.2
     gulp-cheerio: ^1.0.0
@@ -6393,7 +6393,7 @@ __metadata:
     "@types/jest": ^26.0.21
     babel-jest: ^26.6.3
     eslint: ^7.22.0
-    typescript: ^4.1.5
+    typescript: ^4.2.3
   languageName: node
   linkType: soft
 
@@ -22113,7 +22113,7 @@ resolve@^1.14.2:
   languageName: node
   linkType: hard
 
-"typescript@4.1.5, typescript@^4.1.5":
+typescript@4.1.5:
   version: 4.1.5
   resolution: "typescript@npm:4.1.5"
   bin:
@@ -22133,7 +22133,7 @@ typescript@^4.2.3:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@4.1.5#builtin<compat/typescript>, typescript@patch:typescript@^4.1.5#builtin<compat/typescript>":
+"typescript@patch:typescript@4.1.5#builtin<compat/typescript>":
   version: 4.1.5
   resolution: "typescript@patch:typescript@npm%3A4.1.5#builtin<compat/typescript>::version=4.1.5&hash=a45b0e"
   bin:

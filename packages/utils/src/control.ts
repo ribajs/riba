@@ -41,7 +41,7 @@ export const debounce = (fn: (...params: any) => any) => {
     }
 
     // Queue our function call for the next frame
-    frame = requestAnimationFrame(() => {
+    frame = window.requestAnimationFrame(() => {
       // Call our function and pass any params we received
       fn(...params);
     });
