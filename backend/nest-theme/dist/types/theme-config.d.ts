@@ -6,5 +6,6 @@ export interface NestThemeConfig {
     templateVars?: TemplateVars;
 }
 export interface FullThemeConfig extends ThemeConfig, NestThemeConfig {
+    basePath: string;
     templateVars: TemplateVars;
 }

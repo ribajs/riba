@@ -62,6 +62,7 @@ export class ThemeModule {
     const fullThemeConfig: FullThemeConfig = {
       ...activeThemeConfig,
       ...nestThemeConfig,
+      basePath,
       templateVars: nestThemeConfig.templateVars || new EmptyTemplateVars(),
       assetsDir: resolve(nestThemeConfig.themeDir, activeThemeConfig.assetsDir),
       viewsDir: resolve(nestThemeConfig.themeDir, activeThemeConfig.viewsDir),

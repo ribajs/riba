@@ -39,7 +39,7 @@ let ThemeModule = ThemeModule_1 = class ThemeModule {
         ]);
         config_2.validateThemeConfig(activeThemeConfig);
         config_2.validateNestThemeConfig(nestThemeConfig);
-        const fullThemeConfig = Object.assign(Object.assign(Object.assign({}, activeThemeConfig), nestThemeConfig), { templateVars: nestThemeConfig.templateVars || new empty_template_vars_1.EmptyTemplateVars(), assetsDir: path_1.resolve(nestThemeConfig.themeDir, activeThemeConfig.assetsDir), viewsDir: path_1.resolve(nestThemeConfig.themeDir, activeThemeConfig.viewsDir), pageComponentsDir: path_1.resolve(nestThemeConfig.themeDir, activeThemeConfig.pageComponentsDir || '') });
+        const fullThemeConfig = Object.assign(Object.assign(Object.assign({}, activeThemeConfig), nestThemeConfig), { basePath, templateVars: nestThemeConfig.templateVars || new empty_template_vars_1.EmptyTemplateVars(), assetsDir: path_1.resolve(nestThemeConfig.themeDir, activeThemeConfig.assetsDir), viewsDir: path_1.resolve(nestThemeConfig.themeDir, activeThemeConfig.viewsDir), pageComponentsDir: path_1.resolve(nestThemeConfig.themeDir, activeThemeConfig.pageComponentsDir || '') });
         config_2.validateFullThemeConfig(fullThemeConfig);
         return {
             imports: [
