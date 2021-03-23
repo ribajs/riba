@@ -193,11 +193,17 @@ export class SsrService {
     this.log.debug('Wait for custom element...');
     // await dom.window.customElements.whenDefined(componentTagName);
 
-    this.log.debug('Scripts executed!');
     return new Promise<RenderResult>((resolve, reject) => {
+      const errorTimeout = setTimeout(() => {
+        return reject(new Error('Timeout'));
+      }, 5000);
+
       sharedContext.events.once(
         'ready',
         (lifecycleEventData: ComponentLifecycleEventData) => {
+          clearTimeout(errorTimeout);
+
+          this.log.debug('Scripts executed!');
           const html = dom.serialize();
 
           const result: RenderResult = {
@@ -210,6 +216,8 @@ export class SsrService {
         },
       );
       dom.window.addEventListener('error', (event: Event) => {
+        clearTimeout(errorTimeout);
+
         console.error(event);
         return reject(event);
       });

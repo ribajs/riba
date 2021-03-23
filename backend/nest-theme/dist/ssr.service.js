@@ -145,12 +145,18 @@ let SsrService = class SsrService {
         this.log.debug('Wait for custom element...');
         this.log.debug('Scripts executed!');
         return new Promise((resolve, reject) => {
+            const errorTimeout = setTimeout(() => {
+                return reject(new Error('Timeout'));
+            }, 5000);
             sharedContext.events.once('ready', (lifecycleEventData) => {
+                clearTimeout(errorTimeout);
+                this.log.debug('Custom elements ready');
                 const html = dom.serialize();
                 const result = Object.assign(Object.assign({}, lifecycleEventData), { html: html, css: [] });
                 return resolve(result);
             });
             dom.window.addEventListener('error', (event) => {
+                clearTimeout(errorTimeout);
                 console.error(event);
                 return reject(event);
             });
