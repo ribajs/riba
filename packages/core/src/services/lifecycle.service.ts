@@ -3,6 +3,7 @@ import type { State } from "@ribajs/history";
 import type {
   ComponentLifecycleEventData,
   ComponentLifecycleObject,
+  ComponentLifecycleStates,
 } from "../interfaces";
 
 /**
@@ -37,8 +38,7 @@ export class LifecycleService {
 
   protected getEmpty(): ComponentLifecycleObject {
     return {
-      connected: 0,
-      bound: 0,
+      components: [],
     };
   }
 
@@ -46,29 +46,27 @@ export class LifecycleService {
     this.events.on(
       "Component:connected",
       (data: ComponentLifecycleEventData) => {
+        this.resetTimeout();
+
         this.components[data.tagName] =
           this.components[data.tagName] || this.getEmpty();
+        this.components[data.tagName].components.push(data.component);
+      }
+    );
 
-        this.components[data.tagName].connected++;
-        if (this.debug)
-          console.debug(
-            "[ComponentLifecycle] New component connected: " + data.tagName
-          );
+    this.events.on(
+      "Component:disconnected",
+      (data: ComponentLifecycleEventData) => {
+        this.resetTimeout();
+        this.checkStates();
       }
     );
 
     this.events.on(
       "Component:afterBind",
       (data: ComponentLifecycleEventData) => {
-        this.components[data.tagName] =
-          this.components[data.tagName] || this.getEmpty();
-
-        this.components[data.tagName].bound++;
-        if (this.debug)
-          console.debug(
-            "[ComponentLifecycle] New component bound: " + data.tagName
-          );
-        this.checkState();
+        this.resetTimeout();
+        this.checkStates();
       }
     );
 
@@ -99,36 +97,62 @@ export class LifecycleService {
         }
       }
     );
-
-    // this.routerEvents.on(
-    //   "initStateChange",
-    //   (viewId: string, newStatus: State, oldStatus: State) => {
-    //     console.debug("initStateChange", viewId, newStatus, oldStatus);
-    //   }
-    // );
-
-    // this.routerEvents.on("transitionCompleted", () => {
-    //   console.debug("transitionCompleted");
-    // });
-
-    // this.routerEvents.on("newPageReady", () => {
-    //   console.debug("newPageReady");
-    // });
   }
 
-  protected checkState() {
-    let allBound = true;
+  protected getState(tagName: string) {
+    let connected = 0;
+    let bound = 0;
+
+    for (const component of this.components[tagName].components) {
+      if (component.connected) {
+        connected++;
+
+        if (component.bound) {
+          bound++;
+        }
+      }
+    }
+
+    return {
+      connected,
+      bound,
+    };
+  }
+
+  protected getStates() {
+    const states: {
+      [tagName: string]: ComponentLifecycleStates;
+    } = {};
+
     for (const tagName in this.components) {
-      allBound =
-        allBound &&
-        this.components[tagName].connected === this.components[tagName].bound;
-      if (!allBound) {
+      const state = this.getState(tagName);
+
+      states[tagName] = {
+        state,
+        components: this.components[tagName].components,
+      };
+    }
+
+    return states;
+  }
+
+  protected checkStates() {
+    let allBound = true;
+    const states = this.getStates();
+    for (const tagName in states) {
+      const state = states[tagName].state;
+      if (state.connected !== state.bound) {
+        allBound = false;
         break;
       }
     }
     if (allBound) {
       this.onAllBound();
     }
+    return {
+      states,
+      allBound,
+    };
   }
 
   protected onAllBound() {
@@ -140,27 +164,36 @@ export class LifecycleService {
   }
 
   protected onTimeout() {
+    const states = this.getStates();
     this.events.trigger("ComponentLifecycle:timeout", this.components);
     console.error(
       "[ComponentLifecycle] Timeout! Make sure you call the super.connectedCallback and super.afterBind methods exactly one time in all your components."
     );
 
     console.error("[ComponentLifecycle] Unfinished components:");
-    for (const tagName in this.components) {
-      if (
-        this.components[tagName].connected !== this.components[tagName].bound
-      ) {
-        console.error(`${tagName}`, this.components[tagName]);
+    for (const tagName in states) {
+      const state = states[tagName].state;
+      if (state.connected !== state.bound) {
+        console.error(`${tagName}`, states[tagName].state);
       }
     }
+  }
+
+  protected resetTimeout() {
+    if (this.debug) console.debug("[ComponentLifecycle] reset timeout..");
+    if (this.timeout) {
+      window.clearTimeout(this.timeout);
+    }
+    this.timeout = window.setTimeout(
+      this.onTimeout.bind(this),
+      this.timeoutDelay
+    );
+    return this.timeout;
   }
 
   protected reset() {
     if (this.debug) console.debug("[ComponentLifecycle] reset!");
     this.components = {};
-    this.timeout = window.setTimeout(
-      this.onTimeout.bind(this),
-      this.timeoutDelay
-    );
+    this.resetTimeout();
   }
 }

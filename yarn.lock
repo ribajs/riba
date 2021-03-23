@@ -5486,6 +5486,7 @@ __metadata:
     "@types/supertest": ^2.0.10
     "@typescript-eslint/eslint-plugin": ^4.18.0
     "@typescript-eslint/parser": ^4.18.0
+    brakes: ^3.1.0
     consolidate: ^0.16.0
     cookie-parser: ^1.4.5
     dotenv: ^8.2.0
@@ -9462,7 +9463,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bluebird@npm:^3.5.5, bluebird@npm:^3.7.2":
+"bluebird@npm:^3.4.6, bluebird@npm:^3.5.5, bluebird@npm:^3.7.2":
   version: 3.7.2
   resolution: "bluebird@npm:3.7.2"
   checksum: 4f2288662f3d4eadbb82d4daa4a7d7976a28fa3c7eb4102c9b4033b03e5be4574ba123ac52a7c103cde4cb7b2d2afc1dbe41817ca15a29ff21ecd258d0286047
@@ -9576,6 +9577,15 @@ __metadata:
   dependencies:
     fill-range: ^7.0.1
   checksum: f3493181c3e91a1333d3c9afc9b3263a3f62f4ced0b033c372efc1373b48a7699557f4e04026b232a8556e043ca5360a9d3008c33852350138d4b0ea57558b8d
+  languageName: node
+  linkType: hard
+
+"brakes@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "brakes@npm:3.1.0"
+  dependencies:
+    bluebird: ^3.4.6
+  checksum: 80f069e8c7250779232ba2cb2a0431b9d5ac258c48126efc5b3c0889cf48f2d4e87399cbf7e99fc97ad87eb69393254bb7a1fd084d96ebabc718f789811383e5
   languageName: node
   linkType: hard
 

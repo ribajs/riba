@@ -13,8 +13,35 @@ import type { ComponentLifecycleEventData } from "../interfaces";
 export abstract class Component extends BasicComponent {
   protected view: View | null = null;
   protected riba?: Riba;
-  protected bound = false;
+  /** true when binding is in progress */
+  protected _binds = false;
+  /** true when binding is done */
+  protected _bound = false;
+  /** true when component is connected to the dom */
+  protected _connected = false;
+  /** true when component is disconnected from the dom */
+  protected _disconnected = false;
   protected lifecycleEvents = EventDispatcher.getInstance("lifecycle");
+
+  /** true when binding is in progress */
+  public get binds() {
+    return this._binds;
+  }
+
+  /** true when binding is done */
+  public get bound() {
+    return this._bound;
+  }
+
+  /** true when component is connected to the dom */
+  public get connected() {
+    return this._connected;
+  }
+
+  /** true when component is disconnected from the dom */
+  public get disconnected() {
+    return this._disconnected;
+  }
 
   /**
    * If true the component will automatically bind the component to riba if all required attributes are set.
@@ -31,6 +58,10 @@ export abstract class Component extends BasicComponent {
 
   protected async init(observedAttributes: string[]) {
     await super.init(observedAttributes);
+    this.lifecycleEvents.trigger(
+      "Component:init",
+      this.getLifecycleEventData()
+    );
     return this.bindIfReady();
   }
 
@@ -59,27 +90,41 @@ export abstract class Component extends BasicComponent {
     return;
   }
 
-  protected async beforeBind(): Promise<any> {
-    // this.debug("beforeBind", this.scope);
+  /** Only internal used */
+  private async _beforeBind(): Promise<any> {
+    this._binds = true;
+    this.debug("Start to bind Riba");
     this.lifecycleEvents.trigger(
       "Component:beforeBind",
       this.getLifecycleEventData()
     );
   }
 
-  protected async afterBind(): Promise<any> {
-    // this.debug("afterBind", this.scope);
+  /** Used to handle stuff before binding starts */
+  protected async beforeBind(): Promise<any> {
+    // this.debug("beforeBind", this.scope);
+  }
+
+  /** Only internal used */
+  private async _afterBind(): Promise<any> {
+    this._binds = false;
+    this._bound = true;
     this.lifecycleEvents.trigger(
       "Component:afterBind",
       this.getLifecycleEventData()
     );
   }
 
+  /** Used to handle stuff after binding is done */
+  protected async afterBind(): Promise<any> {
+    // this.debug("afterBind", this.scope);
+  }
+
   protected getLifecycleEventData() {
     const data: ComponentLifecycleEventData = {
       tagName: this.tagName.toLowerCase(),
       // scope: this.scope,
-      // component: this,
+      component: this,
       // id: this.id,
     };
     return data;
@@ -105,12 +150,14 @@ export abstract class Component extends BasicComponent {
    * Invoked when the custom element is disconnected from the document's DOM.
    */
   protected disconnectedCallback() {
+    this._disconnected = true;
+    this._connected = false;
     super.disconnectedCallback();
     // IMPORTANT ROUTE FIXME, if we unbind the component then it will no longer work if it is retrieved from the cache and the connectedCallback is called
     // because the riba attributes are removed. We need a solution for that, maybe we do not remove the attributes or we recreate the attributes
     // See view bind / unbind methods for that.
     // only unbind if cache is not enabled?
-    // if (this.bound && this.view) {
+    // if (this._binds && this.view) {
     //   this.unbind();
     // }
     this.lifecycleEvents.trigger(
@@ -124,6 +171,8 @@ export abstract class Component extends BasicComponent {
    * Invoked when the custom element is first connected to the document's DOM.
    */
   protected connectedCallback() {
+    this._disconnected = false;
+    this._connected = true;
     super.connectedCallback();
     this.lifecycleEvents.trigger(
       "Component:connected",
@@ -198,7 +247,7 @@ export abstract class Component extends BasicComponent {
   }
 
   protected async bind() {
-    if (this.bound === true) {
+    if (this.binds || this.bound) {
       // this.debug("component already bound");
       return this.view;
     }
@@ -208,26 +257,24 @@ export abstract class Component extends BasicComponent {
       return;
     }
 
-    this.bound = true;
+    try {
+      await this._beforeBind();
+      await this.beforeBind();
 
-    await this.beforeBind()
-      .then(() => {
-        this.debug("Start to bind Riba");
-        this.riba = new Riba();
-        this.view = this.getView();
-        if (this.view) {
-          this.scope = this.view.models;
-          this.view.bind();
-        }
-        return this.view;
-      })
-      .then(() => {
-        return this.afterBind();
-      })
-      .catch((error) => {
-        this.bound = false;
-        console.error(error);
-      });
+      this.riba = new Riba();
+      this.view = this.getView();
+      if (this.view) {
+        this.scope = this.view.models;
+        this.view.bind();
+      }
+
+      await this._afterBind();
+      await this.afterBind();
+    } catch (error) {
+      this._binds = false;
+      this._bound = false;
+      console.error(error);
+    }
 
     return this.view;
   }
@@ -255,7 +302,7 @@ export abstract class Component extends BasicComponent {
 
   protected async unbind() {
     if (this.view) {
-      this.bound = false;
+      this._binds = false;
       this.view.unbind();
       this.view = null;
     }

@@ -1,4 +1,5 @@
+import type { Component } from "../component";
+
 export interface ComponentLifecycleObject {
-  connected: number;
-  bound: number;
+  components: Component[];
 }

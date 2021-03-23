@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SsrService = void 0;
 const common_1 = require("@nestjs/common");
 const jsdom_1 = require("jsdom");
+const Brakes = require("brakes");
 const vm_1 = require("vm");
 const config_1 = require("@nestjs/config");
 const path_1 = require("path");
@@ -143,20 +144,14 @@ let SsrService = class SsrService {
             await script.runInContext(vmContext);
         }
         this.log.debug('Wait for custom element...');
-        this.log.debug('Scripts executed!');
         return new Promise((resolve, reject) => {
-            const errorTimeout = setTimeout(() => {
-                return reject(new Error('Timeout'));
-            }, 5000);
             sharedContext.events.once('ready', (lifecycleEventData) => {
-                clearTimeout(errorTimeout);
-                this.log.debug('Custom elements ready');
+                this.log.debug('Custom elements ready!');
                 const html = dom.serialize();
                 const result = Object.assign(Object.assign({}, lifecycleEventData), { html: html, css: [] });
                 return resolve(result);
             });
             dom.window.addEventListener('error', (event) => {
-                clearTimeout(errorTimeout);
                 console.error(event);
                 return reject(event);
             });
@@ -183,7 +178,10 @@ let SsrService = class SsrService {
         this.log.debug(`layout (transformed): ${layout}`);
         try {
             if (engine === 'jsdom') {
-                const renderData = await this.renderWithJSDom(layout, componentTagName, sharedContext);
+                const renderWithJSDom = new Brakes(this.renderWithJSDom.bind(this), {
+                    timeout: 10000,
+                });
+                const renderData = await renderWithJSDom.exec(layout, componentTagName, sharedContext);
                 return renderData;
             }
             else {

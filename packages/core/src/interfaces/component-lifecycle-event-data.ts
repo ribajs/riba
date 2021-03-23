@@ -1,8 +1,8 @@
-// import type { Component } from "../component";
+import type { Component } from "../component";
 
 export interface ComponentLifecycleEventData {
   tagName: string;
-  // component: Component;
+  component: Component;
   // scope: any;
   // id: string;
 }

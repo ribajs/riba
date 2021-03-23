@@ -45,7 +45,11 @@ export class Bs5ToggleButtonComponent extends Component {
 
   protected autobind = true;
 
+  public _debug = false;
+
   protected eventDispatcher?: EventDispatcher;
+
+  protected lifecycleEvents = EventDispatcher.getInstance("lifecycle");
 
   protected scope: Scope = {
     targetId: undefined,
@@ -57,10 +61,12 @@ export class Bs5ToggleButtonComponent extends Component {
 
   constructor() {
     super();
+    this.lifecycleEvents.once('ComponentLifecycle:allBound', this.onAllComponentsReady, this);
+    this.lifecycleEvents.once('ComponentLifecycle:timeout', this.onAllComponentsReady, this);
   }
 
   public toggle() {
-    // console.debug('toggle', this.eventDispatcher);
+    this.debug('toggle', this.eventDispatcher);
     if (this.eventDispatcher) {
       this.eventDispatcher.trigger(
         TOGGLE_BUTTON.eventNames.toggle,
@@ -69,12 +75,16 @@ export class Bs5ToggleButtonComponent extends Component {
     }
   }
 
-  protected async afterBind() {
+  protected onAllComponentsReady() {
+    this.debug("onAllComponentsReady");
     // Trigger init to trigger there current state of all the components that are connected to this component
     this.eventDispatcher?.trigger(
       TOGGLE_BUTTON.eventNames.init,
       this.scope.targetId
     );
+  }
+
+  protected async afterBind() {
     await super.afterBind();
   }
 

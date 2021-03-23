@@ -141,8 +141,7 @@ export abstract class BasicComponent extends HTMLElement {
    */
   protected checkRequiredAttributes() {
     return this.requiredAttributes().every(
-      // eslint-disable-next-line no-prototype-builtins
-      (requiredAttribute) => this.scope.hasOwnProperty(requiredAttribute)
+      (requiredAttribute) => this.scope.hasOwnProperty(requiredAttribute) && typeof this.scope[requiredAttribute] !== 'undefined'
     );
   }
 

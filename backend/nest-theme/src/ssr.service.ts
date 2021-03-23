@@ -1,5 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { VirtualConsole, JSDOM } from 'jsdom';
+import * as Brakes from 'brakes';
+
 import { Script } from 'vm';
 import { ConfigService } from '@nestjs/config';
 import { TemplateVars } from './types/template-vars';
@@ -194,18 +196,15 @@ export class SsrService {
     // await dom.window.customElements.whenDefined(componentTagName);
 
     return new Promise<RenderResult>((resolve, reject) => {
-      const errorTimeout = setTimeout(() => {
-        return reject(new Error('Timeout'));
-      }, 5000);
-
       sharedContext.events.once(
         'ready',
         (lifecycleEventData: ComponentLifecycleEventData) => {
-          clearTimeout(errorTimeout);
+this.log.debug('Custom elements ready!');
 
-          this.log.debug('Scripts executed!');
+
+
           const html = dom.serialize();
-
+ 
           const result: RenderResult = {
             ...lifecycleEventData,
             html: html,
@@ -216,8 +215,6 @@ export class SsrService {
         },
       );
       dom.window.addEventListener('error', (event: Event) => {
-        clearTimeout(errorTimeout);
-
         console.error(event);
         return reject(event);
       });
@@ -259,7 +256,11 @@ export class SsrService {
     this.log.debug(`layout (transformed): ${layout}`);
     try {
       if (engine === 'jsdom') {
-        const renderData = await this.renderWithJSDom(
+        // https://github.com/awolden/brakes
+        const renderWithJSDom = new Brakes(this.renderWithJSDom.bind(this), {
+          timeout: 10000,
+        });
+        const renderData = await renderWithJSDom.exec(
           layout,
           componentTagName,
           sharedContext,
