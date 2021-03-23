@@ -203,22 +203,22 @@ export class View {
     this.bindings.sort(View.bindingComparator);
   }
 
-  public traverse(node: BindableElement): boolean {
-    let bindingPrefix;
-    if (this.options.fullPrefix) {
-      bindingPrefix = this.options.fullPrefix;
-    } else {
-      // TODO FIXME
-      console.error(
-        "If you do not see this message you can remove the else part"
-      );
-      bindingPrefix = this.options.prefix + "-";
-    }
-
-    if (!bindingPrefix) {
+  protected startsWithPrefix(name: string) {
+    const bindingFullPrefixes = this.options.fullPrefix;  
+    if (!bindingFullPrefixes) {
       throw new Error("prefix is required");
     }
 
+    for (const fullPrefix of bindingFullPrefixes) {
+      if (name.startsWith(fullPrefix)) {
+        return fullPrefix;
+      }
+    }
+
+    return undefined;
+  }
+
+  public traverse(node: BindableElement): boolean {
     /** If true stop / block the parseNode recursion */
     let block = this.options.blockNodeNames.includes(node.nodeName);
     const attributes = node.attributes;
@@ -232,9 +232,10 @@ export class View {
         let binder = null;
         let identifier = null;
         const attribute = attributes[i];
-        // if attribute starts with the binding prefix. E.g. rv
-        if (attribute.name.indexOf(bindingPrefix) === 0) {
-          nodeName = attribute.name.slice(bindingPrefix.length);
+        // if attribute starts with the binding prefix. E.g. rv-
+        const startingPrefix = this.startsWithPrefix(attribute.name);
+        if (startingPrefix) {
+          nodeName = attribute.name.slice(startingPrefix.length);
           // if binder is not a attributeBinder binder should be set
           if (this.options.binders[nodeName]) {
             binder = this.options.binders[nodeName];

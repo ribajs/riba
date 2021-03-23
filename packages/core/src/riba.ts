@@ -85,21 +85,28 @@ export class Riba {
   public blockUnknownCustomElements = true;
 
   /** Default attribute prefix. */
-  private _prefix = "rv";
+  private _prefix: string[] = ["rv"];
 
   /** Default attribute full prefix. */
-  private _fullPrefix = "rv-";
+  private _fullPrefix: string[] = ["rv-"];
 
-  set prefix(value) {
-    this._prefix = value;
-    this._fullPrefix = value + "-";
+  set prefix(value: string[]) {
+    if (Array.isArray(value)) {
+      this._prefix = [];
+      this._fullPrefix = [];
+      for (const val of value) {
+        this._prefix.push(val)
+        this._fullPrefix.push(val + "-")
+      }
+    }
+
   }
 
-  get prefix() {
+  get prefix(): string[] {
     return this._prefix;
   }
 
-  get fullPrefix() {
+  get fullPrefix(): string[] {
     return this._fullPrefix;
   }
 
@@ -204,9 +211,18 @@ export class Riba {
       };
     }
 
-    viewOptions.prefix = (options && options.prefix) || this.prefix;
-    viewOptions.fullPrefix =
-      (viewOptions.prefix && viewOptions.prefix + "-") || this.fullPrefix;
+    // Prefix
+    if (options?.prefix && Array.isArray(options?.prefix)) {
+      viewOptions.prefix = [];
+      viewOptions.fullPrefix = [];
+      for (const prefix of options.prefix) {
+        viewOptions.prefix.push(prefix);
+        viewOptions.fullPrefix.push(prefix + "-");
+      }
+    } else {
+      viewOptions.prefix = this.prefix;
+      viewOptions.fullPrefix = this.fullPrefix;
+    }
 
     viewOptions.templateDelimiters =
       (options && options.templateDelimiters) || this.templateDelimiters;

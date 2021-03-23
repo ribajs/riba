@@ -24,13 +24,13 @@ describe("riba.Binding", () => {
   let el: HTMLElement;
   let view: View;
   let binding: Binding;
-  let originalPrefix: string;
+  let originalPrefix: string[];
   let adapter: Adapter;
   let routineFn;
 
   beforeEach(() => {
     originalPrefix = riba.prefix;
-    riba.prefix = "data";
+    riba.prefix = ["data"];
     adapter = riba.adapters["."];
 
     el = document.createElement("div");
@@ -70,6 +70,35 @@ describe("riba.Binding", () => {
       expect(() => {
         riba.bind(el, { obj: data });
       }).not.toThrow();
+    });
+  });
+
+  describe("with multiple prefixes", () => {
+    beforeEach(() => {
+      riba.prefix = ["foo", "bar", "any"];
+
+      // Positive test
+      el.setAttribute("foo-a", "'a'");
+      el.setAttribute("bar-b", "'b'");
+      el.setAttribute("any-c", "'c'");
+
+      // Negative test
+      el.setAttribute("rv-d", "'d'");
+    });
+
+    it("All prefixes should be applied", () => {
+      expect(() => {
+        riba.bind(el, {});
+      }).not.toThrow();
+
+      // Positive test
+      expect(el.getAttribute('a')).toEqual('a');
+      expect(el.getAttribute('b')).toEqual('b');
+      expect(el.getAttribute('c')).toEqual('c');
+
+      // Negative test
+      expect(el.getAttribute('d')).toBeNull();
+
     });
   });
 
@@ -637,12 +666,12 @@ describe("Functional", () => {
   let bindData: { data: Data };
   let el: HTMLUnknownElement;
   let input: HTMLInputElement;
-  let originalPrefix: string;
+  let originalPrefix: string[];
   let adapter: Adapter;
 
   beforeEach(() => {
     originalPrefix = riba.prefix;
-    riba.prefix = "data";
+    riba.prefix = ["data"];
     adapter = {
       name: ":",
       observe: (obj, keypath, callback) => {

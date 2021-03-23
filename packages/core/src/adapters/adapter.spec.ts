@@ -13,7 +13,7 @@ describe("Functional", () => {
   let data: Data;
   let bindData: { data: Data };
   let el: HTMLUnknownElement;
-  let originalPrefix: string;
+  let originalPrefix: string[];
   let adapter: Adapter;
 
   const riba = new Riba();
@@ -23,7 +23,7 @@ describe("Functional", () => {
 
   beforeEach(() => {
     originalPrefix = riba.prefix;
-    riba.prefix = "data";
+    riba.prefix = ["data"];
     adapter = {
       name: ":",
       observe: (obj: any, keypath: string, callback: ObserverSyncCallback) => {

@@ -3,10 +3,10 @@ import { EventHandler } from "./event-handler";
 
 export interface Options extends Extensions {
   /** Attribute / web-component prefix in templates */
-  prefix?: string;
+  prefix?: string[];
 
   /** Attribute/ web-component  prefix + '-' */
-  fullPrefix?: string;
+  fullPrefix?: string[];
 
   /** Preload templates with initial data on bind */
   preloadData?: boolean;
