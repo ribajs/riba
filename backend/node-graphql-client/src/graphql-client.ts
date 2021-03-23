@@ -1,11 +1,12 @@
 import { GraphQLClient as _GraphQLClient, gql } from 'graphql-request';
 import type { Variables, RequestDocument } from 'graphql-request/dist/types';
 import type { RequestInit } from 'graphql-request/dist/types.dom';
+
 import { promises as fs } from 'fs';
 import { extname } from 'path';
 import findRoot = require('find-root');
 import { promisify } from 'util';
-import _glob from 'glob';
+import * as _glob from 'glob';
 
 const glob = promisify(_glob);
 
@@ -20,7 +21,7 @@ export class GraphQLClient extends _GraphQLClient {
     this.root = root;
   }
 
-  async searchFiles(filePath: string) {
+  protected async searchFiles(filePath: string) {
     if (!extname(filePath)) {
       filePath += '.{gql,graphql}';
     }
@@ -33,7 +34,7 @@ export class GraphQLClient extends _GraphQLClient {
     return files;
   }
 
-  async searchFile(filePath: string) {
+  protected async searchFile(filePath: string) {
     const files = await this.searchFiles(filePath);
 
     if (files.length >= 2) {
@@ -46,7 +47,7 @@ export class GraphQLClient extends _GraphQLClient {
     return files[0];
   }
 
-  async loadFile(filePath: string) {
+  protected async loadFile(filePath: string) {
     const file = await this.searchFile(filePath);
     const content = await fs.readFile(file, 'utf8');
     return content;
@@ -54,9 +55,7 @@ export class GraphQLClient extends _GraphQLClient {
 
   async loadRequestDocument(filePath: string): Promise<RequestDocument> {
     const content = await this.loadFile(filePath);
-    return gql`
-      ${content}
-    `;
+    return gql`${content}`;
   }
 
   /**

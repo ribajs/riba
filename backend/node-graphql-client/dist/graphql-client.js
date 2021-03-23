@@ -6,8 +6,8 @@ const fs_1 = require("fs");
 const path_1 = require("path");
 const findRoot = require("find-root");
 const util_1 = require("util");
-const glob_1 = require("glob");
-const glob = util_1.promisify(glob_1.default);
+const _glob = require("glob");
+const glob = util_1.promisify(_glob);
 class GraphQLClient extends graphql_request_1.GraphQLClient {
     constructor(url, options, root) {
         super(url, options);
