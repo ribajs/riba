@@ -4,6 +4,7 @@ import type { FullThemeConfig } from './types/theme-config';
 import type { RenderEngine } from '@ribajs/ssr';
 import { SsrService } from './ssr.service';
 import type { Request, Response, NextFunction } from 'express';
+import { handle } from './exception-handler';
 
 @Injectable()
 export class SsrMiddleware implements NestMiddleware {
@@ -48,7 +49,7 @@ export class SsrMiddleware implements NestMiddleware {
     } catch (error) {
       console.error(error);
       // return res.status(500).json({ error: error.message });
-      return next(error);
+      return handle(error, next);
     }
   }
 

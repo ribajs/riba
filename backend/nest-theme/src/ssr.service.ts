@@ -11,6 +11,7 @@ import * as consolidate from 'consolidate';
 import type { Request } from 'express';
 import { promises as fs } from 'fs';
 import fetch from 'node-fetch';
+import indexedDB from 'indexeddb';
 import type {
   ComponentLifecycleEventData,
   SharedContext,
@@ -106,7 +107,7 @@ export class SsrService {
     const scriptsDir = resolve(assetsDir, 'ssr');
     for (const filename of filenames) {
       const scriptPath = resolve(scriptsDir, filename);
-      console.debug('scriptPath', scriptPath);
+      // this.log.debug('scriptPath', scriptPath);
       const scriptSource = await fs.readFile(scriptPath, 'utf8');
       this.log.debug('Scripts loaded!');
       scripts.set(filename, scriptSource);
@@ -168,7 +169,13 @@ export class SsrService {
         }
 
         if (!window.requestAnimationFrame) {
-          (window as any).requestAnimationFrame = () => {};
+          (window as any).requestAnimationFrame = () => {
+            /** Do nothing */
+          };
+        }
+
+        if (!window.indexedDB) {
+          (window as any).indexedDB = indexedDB;
         }
 
         window.ssr = sharedContext;
@@ -199,12 +206,10 @@ export class SsrService {
       sharedContext.events.once(
         'ready',
         (lifecycleEventData: ComponentLifecycleEventData) => {
-this.log.debug('Custom elements ready!');
-
-
+          this.log.debug('Custom elements ready!');
 
           const html = dom.serialize();
- 
+
           const result: RenderResult = {
             ...lifecycleEventData,
             html: html,

@@ -19,6 +19,7 @@ const path_1 = require("path");
 const consolidate = require("consolidate");
 const fs_1 = require("fs");
 const node_fetch_1 = require("node-fetch");
+const indexeddb_1 = require("indexeddb");
 const events_1 = require("@ribajs/events");
 let SsrService = class SsrService {
     constructor(config) {
@@ -88,7 +89,6 @@ let SsrService = class SsrService {
         const scriptsDir = path_1.resolve(assetsDir, 'ssr');
         for (const filename of filenames) {
             const scriptPath = path_1.resolve(scriptsDir, filename);
-            console.debug('scriptPath', scriptPath);
             const scriptSource = await fs_1.promises.readFile(scriptPath, 'utf8');
             this.log.debug('Scripts loaded!');
             scripts.set(filename, scriptSource);
@@ -125,7 +125,11 @@ let SsrService = class SsrService {
                     window.fetch = node_fetch_1.default;
                 }
                 if (!window.requestAnimationFrame) {
-                    window.requestAnimationFrame = () => { };
+                    window.requestAnimationFrame = () => {
+                    };
+                }
+                if (!window.indexedDB) {
+                    window.indexedDB = indexeddb_1.default;
                 }
                 window.ssr = sharedContext;
             },

@@ -6,11 +6,10 @@
   "license": "MIT",
   "main": "./dist/index.js",
   "scripts": {
-    "prebuild": "rimraf dist",
-    "build": "npm run prebuild && npm run lint && tsc -p tsconfig.json",
-    "clear": "rm -rf dist",
+    "clear": "rimraf dist",
+    "build": "npm run lint && tsc -p tsconfig.json",
     "watch": "npm run build -- --watch",
-    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --ignore-pattern '*.spec.ts' --fix && npm run typecheck",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --ignore-pattern '*.spec.ts' --fix",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
@@ -31,6 +30,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "find-root": "^1.1.0",
+    "indexeddb": "^0.0.1",
     "jsdom": "^16.5.1",
     "node-fetch": "^2.6.1",
     "reflect-metadata": "^0.1.13",
