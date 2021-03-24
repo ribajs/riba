@@ -53,9 +53,18 @@ export class GraphQLClient extends _GraphQLClient {
     return content;
   }
 
+  /**
+   * Load GraphQL documents (query/mutation/subscription/fragment)
+   * @param filePath
+   * @returns
+   * @see https://www.graphql-tools.com/docs/documents-loading/
+   */
   async loadRequestDocument(filePath: string): Promise<RequestDocument> {
+    // const pattern = `${this.root}/**/${filePath}`;
     const content = await this.loadFile(filePath);
-    return gql`${content}`;
+    return gql`
+      ${content}
+    `;
   }
 
   /**

@@ -38,7 +38,7 @@
   },
   "homepage": "https://github.com/ribajs/riba#readme",
   "dependencies": {
-    "@fullhuman/postcss-purgecss": "^4.0.2",
+    "@fullhuman/postcss-purgecss": "^4.0.3",
     "@ribajs/npm-package": "workspace:infra/npm-package",
     "postcss": "^8.2.8",
     "postcss-preset-env": "^6.7.0"

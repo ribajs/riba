@@ -20,7 +20,7 @@
     "@ribajs/shopify-tda": "workspace:packages/shopify-tda",
     "@ribajs/utils": "workspace:packages/utils",
     "@types/debug": "^4.1.5",
-    "debug": "^4.3.2",
+    "debug": "^4.3.1",
     "monaco-editor": "^0.23.0"
   },
   "main": "src/index.ts",

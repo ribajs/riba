@@ -79,8 +79,12 @@
     "titleBar.inactiveBackground": "#37a07e99",
     "titleBar.inactiveForeground": "#e7e7e799"
   },
-  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "modifications",
-  "eslint.format.enable": true
+  "typescript.format.enable": false,
+  "eslint.format.enable": true,
+  "eslint.packageManager": "yarn",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
 }

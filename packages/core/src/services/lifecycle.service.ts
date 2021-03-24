@@ -54,21 +54,15 @@ export class LifecycleService {
       }
     );
 
-    this.events.on(
-      "Component:disconnected",
-      (data: ComponentLifecycleEventData) => {
-        this.resetTimeout();
-        this.checkStates();
-      }
-    );
+    this.events.on("Component:disconnected", () => {
+      this.resetTimeout();
+      this.checkStates();
+    });
 
-    this.events.on(
-      "Component:afterBind",
-      (data: ComponentLifecycleEventData) => {
-        this.resetTimeout();
-        this.checkStates();
-      }
-    );
+    this.events.on("Component:afterBind", () => {
+      this.resetTimeout();
+      this.checkStates();
+    });
 
     // Router
 
