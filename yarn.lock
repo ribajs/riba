@@ -5478,6 +5478,7 @@ __metadata:
     jest: ^26.6.3
     jsdom: ^16.5.1
     node-fetch: ^2.6.1
+    perhaps: ^0.0.1
     prettier: 2.2.1
     reflect-metadata: ^0.1.13
     rimraf: ^3.0.2
@@ -5530,7 +5531,6 @@ __metadata:
     express: ^4.17.1
     express-session: ^1.17.1
     find-root: ^1.1.0
-    indexeddb: ^0.0.1
     jest: ^26.6.3
     jsdom: ^16.5.1
     node-fetch: ^2.6.1
@@ -18347,6 +18347,13 @@ fsevents@~2.3.1:
   version: 0.0.9
   resolution: "perhaps@npm:0.0.9"
   checksum: 74c84fb401f52461570efdc66c0716fde9ddf9640fcd6aa21a4d8a21080d967fc3ffe52b6496aff5244ecb351e106b7cb2c63ff638808d2208063122d789991e
+  languageName: node
+  linkType: hard
+
+"perhaps@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "perhaps@npm:0.0.1"
+  checksum: 679dc296f440a8797883107b57ce8921b406b7e77858db1dda7e641450b2659feff8cdf6e20ae1b8970bd0893dd55f854ace6d07e0e5c6f81194ce0866f3402b
   languageName: node
   linkType: hard
 

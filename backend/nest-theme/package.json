@@ -30,7 +30,6 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "find-root": "^1.1.0",
-    "indexeddb": "^0.0.1",
     "jsdom": "^16.5.1",
     "node-fetch": "^2.6.1",
     "reflect-metadata": "^0.1.13",

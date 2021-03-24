@@ -19,7 +19,6 @@ const path_1 = require("path");
 const consolidate = require("consolidate");
 const fs_1 = require("fs");
 const node_fetch_1 = require("node-fetch");
-const indexeddb_1 = require("indexeddb");
 const events_1 = require("@ribajs/events");
 let SsrService = class SsrService {
     constructor(config) {
@@ -129,7 +128,11 @@ let SsrService = class SsrService {
                     };
                 }
                 if (!window.indexedDB) {
-                    window.indexedDB = indexeddb_1.default;
+                    window.indexedDB = {
+                        open: () => {
+                            return {};
+                        },
+                    };
                 }
                 window.ssr = sharedContext;
             },

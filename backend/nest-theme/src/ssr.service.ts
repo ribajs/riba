@@ -11,7 +11,6 @@ import * as consolidate from 'consolidate';
 import type { Request } from 'express';
 import { promises as fs } from 'fs';
 import fetch from 'node-fetch';
-import indexedDB from 'indexeddb';
 import type {
   ComponentLifecycleEventData,
   SharedContext,
@@ -169,13 +168,25 @@ export class SsrService {
         }
 
         if (!window.requestAnimationFrame) {
+          // Dummy
           (window as any).requestAnimationFrame = () => {
             /** Do nothing */
           };
         }
 
         if (!window.indexedDB) {
-          (window as any).indexedDB = indexedDB;
+          /**
+           * Dummy
+           * Maybe in the future:
+           * * https://www.npmjs.com/package/indexeddb
+           * * https://github.com/metagriffin/indexeddb-js
+           * * ...
+           */
+          (window as any).indexedDB = {
+            open: () => {
+              return {};
+            },
+          };
         }
 
         window.ssr = sharedContext;
