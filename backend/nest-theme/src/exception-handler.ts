@@ -6,12 +6,16 @@ export const handle = (error: Error | string, next: NextFunction) => {
     error = new Error(error);
   }
 
+  const statusCode =
+    (error as any).statusCode || HttpStatus.INTERNAL_SERVER_ERROR;
+
   const httpError = new HttpException(
     {
       error: error.message,
-      status: HttpStatus.INTERNAL_SERVER_ERROR,
+      status: statusCode,
+      stack: error.stack,
     },
-    HttpStatus.INTERNAL_SERVER_ERROR,
+    statusCode,
   );
 
   // throw httpError;
