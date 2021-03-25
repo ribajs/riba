@@ -13,7 +13,6 @@ exports.SsrMiddleware = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const ssr_service_1 = require("./ssr.service");
-const exception_handler_1 = require("./exception-handler");
 let SsrMiddleware = class SsrMiddleware {
     constructor(config, ssr) {
         this.config = config;
@@ -28,22 +27,18 @@ let SsrMiddleware = class SsrMiddleware {
             return next();
         }
         const sharedContext = await this.ssr.getSharedContext(req, this.theme.templateVars);
-        const forceEngine = req.query['force-engine'] || undefined;
-        if (forceEngine) {
-            this.log.debug(`Force render engine: ${forceEngine}`);
-        }
         try {
             const page = await this.ssr.renderComponent({
                 componentTagName: routeSettings.component,
                 sharedContext,
-                engine: forceEngine,
             });
             this.log.debug(`Rendered page component: ${routeSettings.component}`);
             return res.send(page.html);
         }
         catch (error) {
-            console.error(error);
-            return exception_handler_1.handle(error, next);
+            this.log.error(error);
+            return res.status(500).json({ error: 'error' });
+            return res.status(500).json({ error: error.message });
         }
     }
     getRouteSettingsByRoute(routePath) {

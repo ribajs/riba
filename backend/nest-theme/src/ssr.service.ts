@@ -5,7 +5,7 @@ import * as Brakes from 'brakes';
 import { Script } from 'vm';
 import { ConfigService } from '@nestjs/config';
 import { TemplateVars } from './types/template-vars';
-import { ThemeConfig } from '@ribajs/ssr';
+import { ThemeConfig, ErrorObj } from '@ribajs/ssr';
 import { resolve, extname } from 'path';
 import * as consolidate from 'consolidate';
 import type { Request } from 'express';
@@ -36,7 +36,11 @@ export class SsrService {
     }
   }
 
-  async getSharedContext(req: Request, templateVars: TemplateVars) {
+  async getSharedContext(
+    req: Request,
+    templateVars: TemplateVars,
+    errorObj?: ErrorObj,
+  ) {
     const sharedContext: SharedContext = {
       events: EventDispatcher.getInstance('ssr') as any, // TODO
       ctx: {
@@ -64,6 +68,8 @@ export class SsrService {
       },
       env: process.env,
       templateVars: templateVars.get(),
+      status: req.statusCode || 200,
+      errorObj: errorObj,
     };
     return sharedContext;
   }
@@ -81,7 +87,7 @@ export class SsrService {
     try {
       require.resolve(detected);
     } catch (error) {
-      console.error(
+      this.log.error(
         `Template engine not installed, try to run "yarn add ${detected}"`,
       );
     }
@@ -136,7 +142,7 @@ export class SsrService {
       return result;
     } catch (error) {
       this.log.error('Error on render template');
-      console.error(error);
+      this.log.error(error);
       throw error;
     }
   }
@@ -230,8 +236,12 @@ export class SsrService {
           return resolve(result);
         },
       );
+      dom.window.onerror = (msg, url, line, col, error) => {
+        this.log.error(error);
+        return reject(error);
+      };
       dom.window.addEventListener('error', (event: Event) => {
-        console.error(event);
+        this.log.error(event);
         return reject(event);
       });
     });
@@ -287,7 +297,7 @@ export class SsrService {
       }
     } catch (error) {
       this.log.error(`Error on render component with ${engine}`);
-      console.error(error);
+      this.log.error(error);
       throw error;
     }
   }

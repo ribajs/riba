@@ -4,3 +4,4 @@ export * from './empty-template-vars';
 export * from './ssr.middleware';
 export * from './ssr.service';
 export * from './theme.module';
+export * from './filters/http-exception.filter';

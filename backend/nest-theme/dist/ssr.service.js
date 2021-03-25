@@ -33,7 +33,7 @@ let SsrService = class SsrService {
                 return false;
         }
     }
-    async getSharedContext(req, templateVars) {
+    async getSharedContext(req, templateVars, errorObj) {
         const sharedContext = {
             events: events_1.EventDispatcher.getInstance('ssr'),
             ctx: {
@@ -60,6 +60,8 @@ let SsrService = class SsrService {
             },
             env: process.env,
             templateVars: templateVars.get(),
+            status: req.statusCode || 200,
+            errorObj: errorObj,
         };
         return sharedContext;
     }
@@ -74,7 +76,7 @@ let SsrService = class SsrService {
             require.resolve(detected);
         }
         catch (error) {
-            console.error(`Template engine not installed, try to run "yarn add ${detected}"`);
+            this.log.error(`Template engine not installed, try to run "yarn add ${detected}"`);
         }
         return detected;
     }
@@ -108,7 +110,7 @@ let SsrService = class SsrService {
         }
         catch (error) {
             this.log.error('Error on render template');
-            console.error(error);
+            this.log.error(error);
             throw error;
         }
     }
@@ -158,8 +160,12 @@ let SsrService = class SsrService {
                 const result = Object.assign(Object.assign({}, lifecycleEventData), { html: html, css: [] });
                 return resolve(result);
             });
+            dom.window.onerror = (msg, url, line, col, error) => {
+                this.log.error(error);
+                return reject(error);
+            };
             dom.window.addEventListener('error', (event) => {
-                console.error(event);
+                this.log.error(event);
                 return reject(event);
             });
         });
@@ -197,7 +203,7 @@ let SsrService = class SsrService {
         }
         catch (error) {
             this.log.error(`Error on render component with ${engine}`);
-            console.error(error);
+            this.log.error(error);
             throw error;
         }
     }

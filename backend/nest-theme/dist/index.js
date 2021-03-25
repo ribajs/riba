@@ -16,4 +16,5 @@ __exportStar(require("./empty-template-vars"), exports);
 __exportStar(require("./ssr.middleware"), exports);
 __exportStar(require("./ssr.service"), exports);
 __exportStar(require("./theme.module"), exports);
+__exportStar(require("./filters/http-exception.filter"), exports);
 //# sourceMappingURL=index.js.map

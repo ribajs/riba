@@ -1,3 +1,4 @@
+export * from "./error-obj";
 export * from "./html-head";
 export * from "./render-engine";
 export * from "./route";

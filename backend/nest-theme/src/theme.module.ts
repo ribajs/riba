@@ -12,6 +12,8 @@ import { SsrService } from './ssr.service';
 import { SsrMiddleware } from './ssr.middleware';
 import { EmptyTemplateVars } from './empty-template-vars';
 import type { ThemeConfig } from '@ribajs/ssr';
+import { HttpExceptionFilterProvider } from './filters/http-exception.filter';
+
 import type { NestThemeConfig, FullThemeConfig } from './types';
 import {
   loadConfig,
@@ -20,9 +22,8 @@ import {
   validateFullThemeConfig,
 } from './helper/config';
 import { resolve } from 'path';
-
 @Module({
-  providers: [SsrService, SsrMiddleware],
+  providers: [SsrService, SsrMiddleware /*, HttpExceptionFilterProvider*/],
   controllers: [],
   exports: [SsrService, SsrMiddleware],
 })
@@ -88,7 +89,7 @@ export class ThemeModule {
   }
 
   /**
-   * Applying middlewares, see https://docs.nestjs.com/middleware#applying-middleware
+   * Applying middleware, see https://docs.nestjs.com/middleware#applying-middleware
    * @param consumer
    */
   configure(consumer: MiddlewareConsumer) {

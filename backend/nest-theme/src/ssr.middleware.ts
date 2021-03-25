@@ -1,10 +1,9 @@
 import { Injectable, NestMiddleware, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import type { FullThemeConfig } from './types/theme-config';
-import type { RenderEngine } from '@ribajs/ssr';
 import { SsrService } from './ssr.service';
 import type { Request, Response, NextFunction } from 'express';
-import { handle } from './exception-handler';
+import { handleError } from './error-handler';
 
 @Injectable()
 export class SsrMiddleware implements NestMiddleware {
@@ -31,25 +30,20 @@ export class SsrMiddleware implements NestMiddleware {
     // this.log.debug('Template variables:');
     // this.log.debug(sharedContext);
 
-    const forceEngine =
-      (req.query['force-engine'] as RenderEngine) || undefined;
-    if (forceEngine) {
-      this.log.debug(`Force render engine: ${forceEngine}`);
-    }
-
     try {
       const page = await this.ssr.renderComponent({
         componentTagName: routeSettings.component,
         sharedContext,
-        engine: forceEngine,
       });
       this.log.debug(`Rendered page component: ${routeSettings.component}`);
       // this.log.debug(`page: ${page.html}`);
       return res.send(page.html);
     } catch (error) {
-      console.error(error);
-      // return res.status(500).json({ error: error.message });
-      return handle(error, next);
+      this.log.error(error);
+      return res.status(500).json({ error: 'error' });
+      return res.status(500).json({ error: error.message });
+      // return next(handleError(error));
+      // return next(error);
     }
   }
 

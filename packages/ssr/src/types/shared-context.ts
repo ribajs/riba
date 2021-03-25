@@ -1,5 +1,6 @@
 import type { EventDispatcher } from "@ribajs/events";
 import type { Request } from "express";
+import type { ErrorObj } from "./error-obj";
 
 interface ExpressRoute extends Partial<Request["route"]> {
   path: string;
@@ -34,4 +35,6 @@ export interface SharedContext {
     subdomains: Request["subdomains"];
     xhr: Request["xhr"];
   };
+  status: number;
+  errorObj?: ErrorObj;
 }
