@@ -21,8 +21,8 @@ export class HttpService {
    * @param data A plain object or string that is sent to the server with the request.
    * @see https://api.jquery.com/jquery.getjson/
    */
-  public static async getJSON<T = any>(url: string, data?: any) {
-    return this.fetch<T>(url, "GET", data, "json");
+  public static async getJSON<T = any>(url: string, data?: any, headers: any = {}, options: HttpServiceOptions = {}) {
+    return this.fetch<T>(url, "GET", data, "json", headers, options);
   }
 
   /**
@@ -135,6 +135,7 @@ export class HttpService {
         "Your browser does not support the fetch API, use xhr instead or install a polyfill."
       );
     }
+    console.debug("options.mode", options.mode);
     let body;
     // headers
     for (const header of this._requestHeadersEachRequest) {
@@ -170,6 +171,7 @@ export class HttpService {
       method,
       body,
       headers,
+      mode: options.mode || 'cors'
     });
     const text = await response.text();
     if (typeof dataType === "string" && dataType.includes("json")) {

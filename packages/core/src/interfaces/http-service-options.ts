@@ -1,5 +1,6 @@
 export interface HttpServiceOptions {
-  crossDomain?: boolean;
+  crossDomain?: boolean; // TODO remove?
+  mode?: 'no-cors' | 'cors' | 'same-origin',
   cache?:
     | "default"
     | "no-store"

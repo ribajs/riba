@@ -590,7 +590,7 @@ class Pjax {
       container,
       container.innerHTML,
       dataset,
-      false // true if this is the first time newPageReady is triggered / true on initialisation
+      false // true if this is the first time newPageReady is triggered / true on initialization
     );
   }
 
@@ -656,7 +656,7 @@ class Pjax {
       initialResponse.container,
       initialResponse.container.innerHTML,
       dataset,
-      true // true if this is the first time newPageReady is triggered / true on initialisation
+      true // true if this is the first time newPageReady is triggered / true on initialization
     );
 
     this.dispatcher.trigger(
