@@ -3,6 +3,6 @@
   display: none !important;
 }
 
-[rv-show] {
-  display: none;
+[rv-show], [rv-hide], [rv-if], [rv-each] {
+  display: none !important;
 }

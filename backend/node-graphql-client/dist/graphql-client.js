@@ -22,7 +22,6 @@ class GraphQLClient extends graphql_request_1.GraphQLClient {
         }
         const pattern = `${this.root}/**/${filePath}`;
         const files = await glob(pattern, { nodir: true });
-        console.debug('files', files);
         if (files.length <= 0) {
             throw new Error('No file found for pattern ' + pattern);
         }

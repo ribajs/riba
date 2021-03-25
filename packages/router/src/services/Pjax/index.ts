@@ -509,7 +509,12 @@ class Pjax {
   /**
    * Callback called from click event
    */
-  public onLinkClick(evt: Event, el: HTMLAnchorElement, href: string, newTab = false) {
+  public onLinkClick(
+    evt: Event,
+    el: HTMLAnchorElement,
+    href: string,
+    newTab = false
+  ) {
     // normalize url, returns the relative url for internal urls and the full url for external urls
     href = normalizeUrl(href);
 
@@ -524,7 +529,7 @@ class Pjax {
 
       this.dispatcher.trigger("linkClicked", el, evt);
 
-      this.goTo(href);
+      this.goTo(href, newTab);
     }
   }
 
