@@ -88,7 +88,6 @@ export class LifecycleService {
           );
         if (!firstPageLoad) {
           this.reset();
-          this.checkStates();
         }
       }
     );
