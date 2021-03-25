@@ -40,10 +40,9 @@ export class SsrMiddleware implements NestMiddleware {
       return res.send(page.html);
     } catch (error) {
       this.log.error(error);
-      return res.status(500).json({ error: 'error' });
-      return res.status(500).json({ error: error.message });
-      // return next(handleError(error));
+      // return res.status(500).json({ error: error.message });
       // return next(error);
+      return next(handleError(error));
     }
   }
 

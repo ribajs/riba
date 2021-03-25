@@ -32,20 +32,34 @@ export const getMessage = (exception: HttpException | Error | string) => {
 };
 
 export const getStack = (exception: HttpException | Error | string) => {
+  let stack: string | string[];
   if (typeof exception === 'string') {
-    return new Error(exception).stack;
+    stack = new Error(exception).stack;
+    return stack.split('\n');
   }
 
-  if (exception instanceof HttpException) {
+  if (!stack && exception instanceof HttpException) {
     const excResp = exception.getResponse();
-    return (excResp as any).stack || exception.stack;
+    stack = (excResp as any).stack || exception.stack;
+    if (Array.isArray(stack)) {
+      return stack;
+    }
+    return stack.split('\n');
   }
 
   if (!exception.stack) {
-    return new Error().stack;
+    stack = new Error().stack;
   }
 
-  return exception.stack;
+  if (!stack) {
+    stack = exception.stack;
+  }
+
+  if (Array.isArray(stack)) {
+    return stack;
+  }
+
+  return stack.split('\n');
 };
 
 export const handleError = (error: HttpException | Error | string) => {

@@ -11,6 +11,15 @@ export declare class HttpExceptionFilter implements ExceptionFilter {
     log: Logger;
     constructor(config: ConfigService, ssr: SsrService);
     protected getErrorObject(exception: HttpException | Error, req: Request): ErrorObj;
+    protected renderErrorPage(exception: HttpException, host: ArgumentsHost, componentTagName: string): Promise<{
+        hasError: boolean;
+        html: string;
+        exception?: undefined;
+    } | {
+        hasError: boolean;
+        html: string;
+        exception: HttpException | Error;
+    }>;
     catch(exception: HttpException, host: ArgumentsHost): Promise<Response<any, Record<string, any>>>;
 }
 export declare const HttpExceptionFilterProvider: {

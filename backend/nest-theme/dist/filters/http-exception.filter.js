@@ -35,27 +35,58 @@ let HttpExceptionFilter = class HttpExceptionFilter {
         };
         return errorObj;
     }
+    async renderErrorPage(exception, host, componentTagName) {
+        const ctx = host.switchToHttp();
+        const req = ctx.getRequest();
+        let overwriteException;
+        const sharedContext = await this.ssr.getSharedContext(req, this.theme.templateVars, this.getErrorObject(exception, req));
+        try {
+            const page = await this.ssr.renderComponent({
+                componentTagName,
+                sharedContext,
+            });
+            this.log.debug(`Rendered page component: not-found-page`);
+            const html = page.html;
+            return {
+                hasError: false,
+                html,
+            };
+        }
+        catch (error) {
+            this.log.error(error);
+            overwriteException = error_handler_1.handleError(error);
+        }
+        return {
+            hasError: true,
+            html: '',
+            exception: overwriteException,
+        };
+    }
     async catch(exception, host) {
         const ctx = host.switchToHttp();
         const res = ctx.getResponse();
         const req = ctx.getRequest();
         let status = error_handler_1.getStatus(exception);
         let overwriteException;
-        return res.status(status).json({});
+        this.log.debug('catch error', JSON.stringify(exception));
         if (status === common_1.HttpStatus.NOT_FOUND) {
-            const sharedContext = await this.ssr.getSharedContext(req, this.theme.templateVars, this.getErrorObject(exception, req));
-            try {
-                const page = await this.ssr.renderComponent({
-                    componentTagName: '404-page',
-                    sharedContext,
-                });
-                this.log.debug(`Rendered page component: 404-page`);
-                return res.send(page.html);
-            }
-            catch (error) {
-                this.log.error(error);
-                overwriteException = error_handler_1.handleError(error);
+            const result = await this.renderErrorPage(exception, host, 'not-found-page');
+            if (result.hasError) {
+                overwriteException = result.exception;
                 status = error_handler_1.getStatus(overwriteException);
+            }
+            else {
+                return res.status(status).send(result.html);
+            }
+        }
+        if (status === common_1.HttpStatus.INTERNAL_SERVER_ERROR) {
+            const result = await this.renderErrorPage(exception, host, 'error-page');
+            if (result.hasError) {
+                overwriteException = result.exception;
+                status = error_handler_1.getStatus(overwriteException);
+            }
+            else {
+                return res.status(status).send(result.html);
             }
         }
         res

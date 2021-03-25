@@ -28,17 +28,29 @@ const getMessage = (exception) => {
 };
 exports.getMessage = getMessage;
 const getStack = (exception) => {
+    let stack;
     if (typeof exception === 'string') {
-        return new Error(exception).stack;
+        stack = new Error(exception).stack;
+        return stack.split('\n');
     }
-    if (exception instanceof common_1.HttpException) {
+    if (!stack && exception instanceof common_1.HttpException) {
         const excResp = exception.getResponse();
-        return excResp.stack || exception.stack;
+        stack = excResp.stack || exception.stack;
+        if (Array.isArray(stack)) {
+            return stack;
+        }
+        return stack.split('\n');
     }
     if (!exception.stack) {
-        return new Error().stack;
+        stack = new Error().stack;
     }
-    return exception.stack;
+    if (!stack) {
+        stack = exception.stack;
+    }
+    if (Array.isArray(stack)) {
+        return stack;
+    }
+    return stack.split('\n');
 };
 exports.getStack = getStack;
 const handleError = (error) => {

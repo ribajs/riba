@@ -23,7 +23,7 @@ import {
 } from './helper/config';
 import { resolve } from 'path';
 @Module({
-  providers: [SsrService, SsrMiddleware /*, HttpExceptionFilterProvider*/],
+  providers: [SsrService, SsrMiddleware, HttpExceptionFilterProvider],
   controllers: [],
   exports: [SsrService, SsrMiddleware],
 })

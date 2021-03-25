@@ -57,11 +57,11 @@ let SsrService = class SsrService {
                 stale: req.stale,
                 subdomains: req.subdomains,
                 xhr: req.xhr,
+                errorObj: errorObj,
+                status: (errorObj === null || errorObj === void 0 ? void 0 : errorObj.statusCode) || req.statusCode || 200,
             },
             env: process.env,
             templateVars: templateVars.get(),
-            status: req.statusCode || 200,
-            errorObj: errorObj,
         };
         return sharedContext;
     }

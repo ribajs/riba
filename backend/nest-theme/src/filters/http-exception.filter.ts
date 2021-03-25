@@ -38,6 +38,45 @@ export class HttpExceptionFilter implements ExceptionFilter {
     return errorObj;
   }
 
+  protected async renderErrorPage(
+    exception: HttpException,
+    host: ArgumentsHost,
+    componentTagName: string,
+  ) {
+    const ctx = host.switchToHttp();
+    const req = ctx.getRequest<Request>();
+    let overwriteException: Error | HttpException | undefined;
+
+    const sharedContext = await this.ssr.getSharedContext(
+      req,
+      this.theme.templateVars,
+      this.getErrorObject(exception, req),
+    );
+
+    try {
+      const page = await this.ssr.renderComponent({
+        componentTagName,
+        sharedContext,
+      });
+      this.log.debug(`Rendered page component: not-found-page`);
+      // this.log.debug(`page: ${page.html}`);
+      const html = page.html;
+      return {
+        hasError: false,
+        html,
+      };
+    } catch (error) {
+      this.log.error(error);
+      overwriteException = handleError(error);
+    }
+
+    return {
+      hasError: true,
+      html: '',
+      exception: overwriteException,
+    };
+  }
+
   async catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const res = ctx.getResponse<Response>();
@@ -45,34 +84,37 @@ export class HttpExceptionFilter implements ExceptionFilter {
     let status = getStatus(exception);
     let overwriteException: Error | HttpException | undefined;
 
-    return res.status(status).json({});
+    this.log.debug('catch error', JSON.stringify(exception));
 
     /**
      * Render custom 404 error page
      * @see https://docs.nestjs.com/exception-filters
      */
     if (status === HttpStatus.NOT_FOUND) {
-      const sharedContext = await this.ssr.getSharedContext(
-        req,
-        this.theme.templateVars,
-        this.getErrorObject(exception, req),
+      const result = await this.renderErrorPage(
+        exception,
+        host,
+        'not-found-page',
       );
-
-      // this.log.debug('Template variables:');
-      // this.log.debug(sharedContext)
-
-      try {
-        const page = await this.ssr.renderComponent({
-          componentTagName: '404-page',
-          sharedContext,
-        });
-        this.log.debug(`Rendered page component: 404-page`);
-        // this.log.debug(`page: ${page.html}`);
-        return res.send(page.html);
-      } catch (error) {
-        this.log.error(error);
-        overwriteException = handleError(error);
+      if (result.hasError) {
+        overwriteException = result.exception;
         status = getStatus(overwriteException);
+      } else {
+        return res.status(status).send(result.html);
+      }
+    }
+
+    /**
+     * Render custom 500 error page
+     * @see https://docs.nestjs.com/exception-filters
+     */
+    if (status === HttpStatus.INTERNAL_SERVER_ERROR) {
+      const result = await this.renderErrorPage(exception, host, 'error-page');
+      if (result.hasError) {
+        overwriteException = result.exception;
+        status = getStatus(overwriteException);
+      } else {
+        return res.status(status).send(result.html);
       }
     }
 

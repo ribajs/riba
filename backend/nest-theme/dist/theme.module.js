@@ -17,6 +17,7 @@ const config_1 = require("@nestjs/config");
 const ssr_service_1 = require("./ssr.service");
 const ssr_middleware_1 = require("./ssr.middleware");
 const empty_template_vars_1 = require("./empty-template-vars");
+const http_exception_filter_1 = require("./filters/http-exception.filter");
 const config_2 = require("./helper/config");
 const path_1 = require("path");
 let ThemeModule = ThemeModule_1 = class ThemeModule {
@@ -66,7 +67,7 @@ let ThemeModule = ThemeModule_1 = class ThemeModule {
 };
 ThemeModule = ThemeModule_1 = __decorate([
     common_1.Module({
-        providers: [ssr_service_1.SsrService, ssr_middleware_1.SsrMiddleware],
+        providers: [ssr_service_1.SsrService, ssr_middleware_1.SsrMiddleware, http_exception_filter_1.HttpExceptionFilterProvider],
         controllers: [],
         exports: [ssr_service_1.SsrService, ssr_middleware_1.SsrMiddleware],
     }),

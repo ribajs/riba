@@ -34,7 +34,7 @@ export interface SharedContext {
     stale: Request["stale"];
     subdomains: Request["subdomains"];
     xhr: Request["xhr"];
+    errorObj?: ErrorObj;
+    status: number;
   };
-  status: number;
-  errorObj?: ErrorObj;
 }
