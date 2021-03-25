@@ -24,7 +24,7 @@ window.model = window.model || window.ssr.templateVars || {};
 const riba = new Riba();
 
 // These Riba settings are necessary for the ssr
-riba.configure({ prefix: "ssr-rv", blockUnknownCustomElements: false });
+riba.configure({ prefix: ["ssr-rv"], blockUnknownCustomElements: false });
 
 // Regist custom components
 riba.module.regist({
