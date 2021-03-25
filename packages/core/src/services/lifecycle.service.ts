@@ -88,6 +88,7 @@ export class LifecycleService {
           );
         if (!firstPageLoad) {
           this.reset();
+          this.checkStates();
         }
       }
     );
@@ -159,6 +160,10 @@ export class LifecycleService {
 
   protected onTimeout() {
     const states = this.getStates();
+    if (Object.keys(states).length <= 0) {
+      console.warn("No component found");
+      return;
+    }
     this.events.trigger("ComponentLifecycle:timeout", this.components);
     console.error(
       "[ComponentLifecycle] Timeout! Make sure you call the super.connectedCallback and super.afterBind methods exactly one time in all your components."
