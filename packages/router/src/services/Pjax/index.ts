@@ -292,7 +292,7 @@ class Pjax {
       return false;
     }
 
-    if (url.indexOf("http") !== 0) {
+    if (!url.startsWith("http")) {
       if (this.changeBrowserUrl) {
         window.history.pushState(null, "", url);
       }
@@ -509,7 +509,7 @@ class Pjax {
   /**
    * Callback called from click event
    */
-  public onLinkClick(evt: Event, el: HTMLAnchorElement, href: string) {
+  public onLinkClick(evt: Event, el: HTMLAnchorElement, href: string, newTab = false) {
     // normalize url, returns the relative url for internal urls and the full url for external urls
     href = normalizeUrl(href);
 

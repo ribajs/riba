@@ -13,12 +13,6 @@ export class HttpService {
       name,
       value,
     });
-    // console.debug(
-    //   "[HttpService] setRequestHeaderEachRequest",
-    //   name,
-    //   value,
-    //   this._requestHeadersEachRequest
-    // );
   }
 
   /**
@@ -116,9 +110,9 @@ export class HttpService {
       case "form":
         contentType = "application/x-www-form-urlencoded";
         break;
-      /*case "multi-form":
-        contentType = "multipart/form-data";
-        break;*/
+      // case "multi-form":
+      //   contentType = "multipart/form-data";
+      //   break;
     }
     if (contentType) {
       headers["Content-Type"] = contentType;
@@ -170,14 +164,6 @@ export class HttpService {
         body = JSON.stringify(data);
       }
     }
-    // console.debug("[HttpService] url", url);
-    // console.debug("[HttpService] method", method);
-    // console.debug("[HttpService] body", body);
-    // console.debug(
-    //   "[HttpService] headers",
-    //   headers,
-    //   this._requestHeadersEachRequest
-    // );
     const response = await fetch(url, {
       credentials: "same-origin",
       cache,
@@ -185,9 +171,6 @@ export class HttpService {
       body,
       headers,
     });
-    if (response.status >= 400) {
-      throw response;
-    }
     const text = await response.text();
     if (typeof dataType === "string" && dataType.includes("json")) {
       try {

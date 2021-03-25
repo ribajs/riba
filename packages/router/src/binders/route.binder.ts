@@ -9,6 +9,7 @@ export interface RouteOptions {
   viewId: string;
   removeAfterActivation: boolean;
   newTab: boolean;
+  newTabOnExtern: boolean;
 }
 
 export interface CustomData {
@@ -33,18 +34,28 @@ export const routeBinder: Binder<string> = {
       options: {
         removeAfterActivation: false,
         newTab: false,
+        newTabOnExtern: true,
       } as RouteOptions,
       onClick(this: Binding, event: Event) {
         // console.log(this.customData.options.url);
         const pjax = Pjax.getInstance(this.customData.options.viewId);
         if (onRoute(this.customData.options.url)) {
-          console.debug("already on this site");
+          console.debug("already on this site, do nothing");
+          event.stopPropagation();
+          event.preventDefault();
         } else if (isExternalUrl(this.customData.options.url)) {
           // console.debug('check');
           if (!pjax) {
             return;
           }
-          pjax.goTo(this.customData.options.url);
+          event.stopPropagation();
+          event.preventDefault();
+          if (!this.customData.options.url.startsWith("http")) {
+
+          }
+          // Is extern
+          const newTab = this.customData.options.newTab || this.customData.options.newTabOnExtern;
+          pjax.goTo(this.customData.options.url, newTab);
         } else {
           if (this.customData.options.url) {
             if (!pjax) {
@@ -53,7 +64,8 @@ export const routeBinder: Binder<string> = {
             pjax.onLinkClick(
               event,
               this.el as HTMLAnchorElement,
-              this.customData.options.url
+              this.customData.options.url,
+              this.customData.options.newTab
             );
           }
         }
