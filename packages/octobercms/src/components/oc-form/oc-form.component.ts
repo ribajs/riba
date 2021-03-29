@@ -36,9 +36,9 @@ export class OcFormComponent extends Bs4FormComponent {
     this.addEventListeners();
   }
 
-  protected ajaxSubmit(event?: Event, el?: HTMLButtonElement) {
+  protected async ajaxSubmit(event?: Event, el?: HTMLButtonElement) {
     if (!this.scope.octoberHandler) {
-      return super.ajaxSubmit(event, el);
+      return await super.ajaxSubmit(event, el);
     }
 
     this.debug("ajaxSubmit", this.scope.octoberHandler);

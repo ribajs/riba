@@ -108,12 +108,12 @@ export class ShopifyNestAccountConnectsComponent extends Component {
     }
 
     if (this.scope.type === "facebook") {
-      return HttpService.getJSON(`/facebook/api/user/picture?type=normal`).then(
-        (picture: FbUserPictureData) => {
-          this.debug("getAvatarUrl");
-          return picture.url;
-        }
+      const res = await HttpService.getJSON<FbUserPictureData>(
+        `/facebook/api/user/picture?type=normal`
       );
+      const picture = res.body;
+      this.debug("getAvatarUrl");
+      return picture.url;
     }
   }
 
