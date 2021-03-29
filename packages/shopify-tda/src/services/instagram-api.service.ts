@@ -33,6 +33,7 @@ export class InstagramApiService extends BaseApiService {
       data.shop = (window as any).Shopify.shop;
     }
 
-    return HttpService.getJSON<InstagramMedia>(url, data);
+    const res = await HttpService.getJSON<InstagramMedia>(url, data);
+    return res.body;
   }
 }

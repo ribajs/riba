@@ -2,7 +2,12 @@ export * from "./Dom";
 export * from "./Prefetch";
 
 import { EventDispatcher } from "@ribajs/events";
-import { getDataset, HttpService, HttpServiceOptions } from "@ribajs/core";
+import {
+  getDataset,
+  HttpService,
+  HttpServiceOptions,
+  HttpServiceResponse,
+} from "@ribajs/core";
 import {
   cleanLink,
   getPort,
@@ -29,7 +34,7 @@ export interface PjaxInstances {
  * @borrows Dom as Dom
  */
 class Pjax {
-  public static cache = new BaseCache<Promise<Response>>();
+  public static cache = new BaseCache<Response>();
 
   public static getInstance(id = "main"): Pjax | undefined {
     const result = Pjax.instances[id];
@@ -414,36 +419,40 @@ class Pjax {
   ) {
     if (this.cacheEnabled) {
       const cachedResponse = Pjax.cache.get(url);
-      if (cachedResponse && cachedResponse.then) {
-        return cachedResponse.then((response) => {
-          // console.debug('cachedResponse', response);
-          return response;
-        });
+      if (cachedResponse) {
+        return cachedResponse;
       }
     }
     const options: HttpServiceOptions = forceCache
       ? { cache: "force-cache" }
       : {};
-    const response = HttpService.get(url, undefined, "html", {}, options)
-      .then((data: string) => {
-        return Dom.parseResponse(
-          data,
-          this.parseTitle,
-          this.containerSelector,
-          this.prefetchLinks
-        );
-      })
-      .catch((error) => {
-        console.error(error);
-        if (fallback) {
-          this.forceGoTo(url);
-        }
-        throw error;
-      });
-    if (this.cacheEnabled && response) {
+
+    let data: HttpServiceResponse<string> | void;
+    let response: Response;
+
+    try {
+      data = await HttpService.get<string>(url, undefined, "html", {}, options);
+      if (!data || !data.body) {
+        throw new Error("No body!");
+      }
+      response = Dom.parseResponse(
+        data.body,
+        this.parseTitle,
+        this.containerSelector,
+        this.prefetchLinks
+      );
+    } catch (error) {
+      console.error(error);
+      if (fallback) {
+        this.forceGoTo(url);
+      }
+      throw error;
+    }
+
+    if (this.cacheEnabled && response && data.status < 400) {
       Pjax.cache.set(url, response);
     } else {
-      Pjax.cache.reset();
+      // Pjax.cache.reset();
     }
     return response;
   }

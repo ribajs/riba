@@ -16,6 +16,7 @@ export declare class SsrService {
     readSsrScripts(filenames: string[]): Promise<Map<string, string>>;
     renderTemplate(templatePath: string, variables: any): Promise<any>;
     renderWithJSDom(layout: string, componentTagName: string, sharedContext: SharedContext, scriptFilenames?: string[]): Promise<RenderResult>;
+    protected trasformError(error: Error | ErrorEvent): Error;
     renderComponent({ template, rootTag, componentTagName, engine, sharedContext, }: {
         template?: string;
         rootTag?: string;

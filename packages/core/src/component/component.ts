@@ -66,6 +66,22 @@ export abstract class Component extends BasicComponent {
   }
 
   /**
+   * Use this to throw critical errors within the component
+   *
+   * @protected
+   * @param {Error} error
+   * @memberof Component
+   */
+  protected throw(error: Error) {
+    this.lifecycleEvents.trigger(
+      "Component:error",
+      error,
+      this.getLifecycleEventData()
+    );
+    // throw error;
+  }
+
+  /**
    * If `autobind` is true this component will bind riba automatically in this component if all all passed observed and required attributes are initialized
    */
   protected async bindIfReady() {

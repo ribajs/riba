@@ -59,10 +59,9 @@ export class ShopifyApiProductService extends BaseApiService {
     if (limit) {
       url += "?limit=" + limit;
     }
-    return HttpService.getJSON(url).then((products: Product[]) => {
-      console.debug("[ShopifyApiProductService] products", products);
-      return products;
-    });
+    const res = await HttpService.getJSON<Product[]>(url);
+    console.debug("[ShopifyApiProductService] products", res.body);
+    return res.body;
   }
 
   public async all(options = {}) {

@@ -1,12 +1,12 @@
 import { concat } from "@ribajs/utils/src/type";
 import { HttpMethod } from "../interfaces/http-method";
-import { HttpServiceOptions } from "../interfaces/http-service-options";
+import { HttpServiceOptions, HttpServiceResponse } from "../interfaces";
 
 export class HttpService {
   /**
    * Set header for each request
    * @param name Header name
-   * @param value Hander value
+   * @param value Header value
    */
   public static setRequestHeaderEachRequest(name: string, value: string) {
     this._requestHeadersEachRequest.push({
@@ -21,7 +21,12 @@ export class HttpService {
    * @param data A plain object or string that is sent to the server with the request.
    * @see https://api.jquery.com/jquery.getjson/
    */
-  public static async getJSON<T = any>(url: string, data?: any, headers: any = {}, options: HttpServiceOptions = {}) {
+  public static async getJSON<T = any>(
+    url: string,
+    data?: any,
+    headers: any = {},
+    options: HttpServiceOptions = {}
+  ) {
     return this.fetch<T>(url, "GET", data, "json", headers, options);
   }
 
@@ -32,34 +37,34 @@ export class HttpService {
    * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html).
    * @see https://api.jquery.com/jquery.post/
    */
-  public static async post(
+  public static async post<T = any>(
     url: string,
     data?: any,
     dataType?: string,
     headers: any = {},
     options: HttpServiceOptions = {}
   ) {
-    return this.fetch(url, "POST", data, dataType, headers, options);
+    return this.fetch<T>(url, "POST", data, dataType, headers, options);
   }
 
-  public static async delete(
+  public static async delete<T = any>(
     url: string,
     data?: any,
     dataType?: string,
     headers: any = {},
     options: HttpServiceOptions = {}
   ) {
-    return this.fetch(url, "DELETE", data, dataType, headers, options);
+    return this.fetch<T>(url, "DELETE", data, dataType, headers, options);
   }
 
-  public static async put(
+  public static async put<T = any>(
     url: string,
     data?: any,
     dataType?: string,
     headers: any = {},
     options: HttpServiceOptions = {}
   ) {
-    return this.fetch(url, "PUT", data, dataType, headers, options);
+    return this.fetch<T>(url, "PUT", data, dataType, headers, options);
   }
 
   /**
@@ -69,14 +74,14 @@ export class HttpService {
    * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html).
    * @see https://api.jquery.com/jquery.get/
    */
-  public static async get(
+  public static async get<T = any>(
     url: string,
     data?: any,
     dataType?: string,
     headers: any = {},
     options: HttpServiceOptions = {}
   ) {
-    return this.fetch(url, "GET", data, dataType, headers, options);
+    return this.fetch<T>(url, "GET", data, dataType, headers, options);
   }
 
   /**
@@ -129,13 +134,13 @@ export class HttpService {
     dataType?: string,
     headers: any = {},
     options: HttpServiceOptions = {}
-  ): Promise<T | void> {
+  ): Promise<HttpServiceResponse<T>> {
     if (!fetch) {
-      return console.error(
+      throw new Error(
         "Your browser does not support the fetch API, use xhr instead or install a polyfill."
       );
     }
-    console.debug("options.mode", options.mode);
+
     let body;
     // headers
     for (const header of this._requestHeadersEachRequest) {
@@ -155,8 +160,8 @@ export class HttpService {
     if (method === "GET" && data) {
       const queryStr = new URLSearchParams(data).toString();
       if (queryStr) {
-        const seperator = url.includes("?") ? "&" : "?";
-        url = url + seperator + new URLSearchParams(data).toString();
+        const separator = url.includes("?") ? "&" : "?";
+        url = url + separator + new URLSearchParams(data).toString();
       }
     } else if (data) {
       if (dataType === "form") {
@@ -171,17 +176,21 @@ export class HttpService {
       method,
       body,
       headers,
-      mode: options.mode || 'cors'
+      mode: options.mode || "cors",
     });
-    const text = await response.text();
-    if (typeof dataType === "string" && dataType.includes("json")) {
+    const result: HttpServiceResponse<T> = {
+      status: response.status,
+      body: null as any,
+    };
+    result.body = ((await response.text()) as unknown) as T;
+    if (typeof dataType === "string") {
       try {
-        return JSON.parse(text);
+        result.body = JSON.parse(result.body as any);
       } catch (error) {
-        return text as any;
+        // Do nothing
       }
     }
-    return text as any;
+    return result;
   }
 
   /**

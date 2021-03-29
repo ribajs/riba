@@ -24,9 +24,10 @@ export class InstagramApiService extends _InstagramApiService {
   }
 
   public async accounts() {
-    return HttpService.getJSON(
+    return HttpService.getJSON<InstagramResponse<InstagramAccounts[]>>(
       `${this.baseUrl}/instagram/api/user/accounts`
-    ).then((accounts: InstagramResponse<InstagramAccounts[]>) => {
+    ).then((res) => {
+      const accounts = res.body;
       this.debug("accounts", accounts);
       return accounts;
     });

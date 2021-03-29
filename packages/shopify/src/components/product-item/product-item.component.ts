@@ -110,7 +110,7 @@ export class ShopifyProductItemComponent extends Component {
   protected set product(product: ShopifyProduct | null) {
     // console.debug('set product', product);
     if (product) {
-      this.scope.product = ShopifyProductService.prepair(product);
+      this.scope.product = ShopifyProductService.prepare(product);
 
       this.scope.colorOption = ShopifyProductService.getOption(
         this.scope.product,

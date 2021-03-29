@@ -7,6 +7,7 @@ export declare class GraphQLClient extends _GraphQLClient {
     protected searchFiles(filePath: string): Promise<string[]>;
     protected searchFile(filePath: string): Promise<string>;
     protected loadFile(filePath: string): Promise<string>;
-    loadRequestDocument(filePath: string): Promise<RequestDocument>;
+    loadRequestDocumentCustom(filePath: string): Promise<RequestDocument>;
+    loadRequestDocument(filePath: string): Promise<string>;
     execute(actionFilePath: string, variables?: Variables): Promise<any>;
 }

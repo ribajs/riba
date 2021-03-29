@@ -195,7 +195,7 @@ export class Bs5FormComponent extends Component {
   /**
    * TODO Not tested in the wild, may need to be adjusted. Also the error handling is untested
    */
-  protected ajaxSubmit(event?: Event, el?: HTMLButtonElement) {
+  protected async ajaxSubmit(event?: Event, el?: HTMLButtonElement) {
     this.debug("onSubmit", event, el, this.scope);
     const submitSettings = this.getSubmitSettings(event);
     if (!submitSettings) {
@@ -207,26 +207,28 @@ export class Bs5FormComponent extends Component {
       this.getFormValues();
     }
 
-    // This method is untested in the wild
-    HttpService.fetch(
-      submitSettings.action,
-      submitSettings.method,
-      this.scope.form.fields,
-      submitSettings.type
-    )
-      .then((res) => {
-        const message = res.body && res.body.message ? res.body.message : "";
-        if (Number(res.status) >= 400) {
-          // TODO generate message by status
-          this.onErrorSubmit(res.status, message, res.body);
-        }
-        this.onSuccessSubmit(res.status, message, res.body);
-      })
-      .catch((err) => {
-        console.error(err);
-        //
-        this.onErrorSubmit(err.status, err.body.message, err.body);
-      });
+    try {
+      // This method is untested in the wild
+      const res = await HttpService.fetch(
+        submitSettings.action,
+        submitSettings.method,
+        this.scope.form.fields,
+        submitSettings.type
+      );
+
+      if (!res || !res.body) {
+        return this.onErrorSubmit("500", "Error", "Empty body!");
+      }
+
+      const message = res.body && res.body.message ? res.body.message : "";
+      if (Number(res.status) >= 400) {
+        // TODO generate message by status
+        this.onErrorSubmit(res.status.toString(), message, res.body);
+      }
+      return this.onSuccessSubmit(res.status.toString(), message, res.body);
+    } catch (err) {
+      this.onErrorSubmit(err.status, err.body.message, err.body);
+    }
   }
 
   protected getSubmitSettings(event?: Event) {

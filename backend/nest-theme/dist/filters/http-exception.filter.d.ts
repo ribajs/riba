@@ -10,7 +10,7 @@ export declare class HttpExceptionFilter implements ExceptionFilter {
     theme: FullThemeConfig;
     log: Logger;
     constructor(config: ConfigService, ssr: SsrService);
-    protected getErrorObject(exception: HttpException | Error, req: Request): ErrorObj;
+    protected getErrorObject(exception: HttpException | Error, req: Request, overwriteException?: HttpException | Error): ErrorObj;
     protected renderErrorPage(exception: HttpException, host: ArgumentsHost, componentTagName: string): Promise<{
         hasError: boolean;
         html: string;
@@ -18,7 +18,7 @@ export declare class HttpExceptionFilter implements ExceptionFilter {
     } | {
         hasError: boolean;
         html: string;
-        exception: HttpException | Error;
+        exception: Error | HttpException;
     }>;
     catch(exception: HttpException, host: ArgumentsHost): Promise<Response<any, Record<string, any>>>;
 }

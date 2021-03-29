@@ -22,10 +22,10 @@ let HttpExceptionFilter = class HttpExceptionFilter {
         this.log = new common_1.Logger(this.constructor.name);
         this.theme = this.config.get('theme');
     }
-    getErrorObject(exception, req) {
-        const status = error_handler_1.getStatus(exception);
-        const message = error_handler_1.getMessage(exception);
-        const stack = error_handler_1.getStack(exception);
+    getErrorObject(exception, req, overwriteException) {
+        const status = error_handler_1.getStatus(overwriteException || exception);
+        const message = error_handler_1.getMessage(overwriteException || exception);
+        const stack = error_handler_1.getStack(overwriteException || exception);
         const errorObj = {
             statusCode: status,
             message: message,
@@ -33,13 +33,16 @@ let HttpExceptionFilter = class HttpExceptionFilter {
             stack,
             path: req.url,
         };
+        if (overwriteException) {
+            errorObj.before = this.getErrorObject(exception, req);
+        }
         return errorObj;
     }
     async renderErrorPage(exception, host, componentTagName) {
         const ctx = host.switchToHttp();
         const req = ctx.getRequest();
         let overwriteException;
-        const sharedContext = await this.ssr.getSharedContext(req, this.theme.templateVars, this.getErrorObject(exception, req));
+        const sharedContext = await this.ssr.getSharedContext(req, this.theme.templateVars, this.getErrorObject(exception, req, overwriteException));
         try {
             const page = await this.ssr.renderComponent({
                 componentTagName,
@@ -53,7 +56,7 @@ let HttpExceptionFilter = class HttpExceptionFilter {
             };
         }
         catch (error) {
-            this.log.error(error);
+            this.log.error(`Can't render "${componentTagName}":  ${error}`);
             overwriteException = error_handler_1.handleError(error);
         }
         return {
@@ -68,7 +71,7 @@ let HttpExceptionFilter = class HttpExceptionFilter {
         const req = ctx.getRequest();
         let status = error_handler_1.getStatus(exception);
         let overwriteException;
-        this.log.debug('catch error', JSON.stringify(exception));
+        this.log.debug('catch error: ' + JSON.stringify(exception));
         if (status === common_1.HttpStatus.NOT_FOUND) {
             const result = await this.renderErrorPage(exception, host, 'not-found-page');
             if (result.hasError) {
@@ -79,19 +82,17 @@ let HttpExceptionFilter = class HttpExceptionFilter {
                 return res.status(status).send(result.html);
             }
         }
-        if (status === common_1.HttpStatus.INTERNAL_SERVER_ERROR) {
-            const result = await this.renderErrorPage(exception, host, 'error-page');
-            if (result.hasError) {
-                overwriteException = result.exception;
-                status = error_handler_1.getStatus(overwriteException);
-            }
-            else {
-                return res.status(status).send(result.html);
-            }
+        const result = await this.renderErrorPage(exception, host, 'error-page');
+        if (result.hasError) {
+            overwriteException = result.exception;
+            status = error_handler_1.getStatus(overwriteException);
+        }
+        else {
+            return res.status(status).send(result.html);
         }
         res
             .status(status)
-            .json(this.getErrorObject(overwriteException || exception, req));
+            .json(this.getErrorObject(exception, req, overwriteException));
     }
 };
 HttpExceptionFilter = __decorate([

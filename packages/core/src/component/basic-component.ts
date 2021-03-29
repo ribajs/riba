@@ -7,7 +7,7 @@ import "@ribajs/types";
 import { EventHandler, ObservedAttributesToCheck } from "../interfaces";
 import { Binding } from "../binding";
 import { parseJsonString, camelCase } from "@ribajs/utils/src/type";
-import { getRandomColor } from "@ribajs/utils/src/color";
+import { getRandomColor, consoleColoured } from "@ribajs/utils/src/color";
 
 export abstract class BasicComponent extends HTMLElement {
   public static tagName: string;
@@ -57,20 +57,28 @@ export abstract class BasicComponent extends HTMLElement {
     | null
     | Promise<HTMLElement | string | null>;
 
+  protected _log(mode: "debug" | "info" | "log" | "error", ...args: unknown[]) {
+    const namespace = this.constructor.name || this.tagName;
+    if (this._color) {
+      this._color = getRandomColor();
+    }
+    consoleColoured({ namespace, color: this._color, mode }, args);
+  }
+
+  protected info(...args: unknown[]) {
+    return this._log("info", ...args);
+  }
+
   protected debug(...args: unknown[]) {
     if (!this._debug) {
       return;
     }
-    if (typeof args[0] === "string") {
-      const name = this.constructor.name || this.tagName;
-      if (this._color) {
-        args[0] = `%c[${name}] ${args[0]}`;
-        args.splice(1, 0, `color: ${this._color};`);
-      } else {
-        args[0] = `[${name}] ${args[0]}`;
-      }
-    }
-    console.debug(...args);
+
+    return this._log("debug", ...args);
+  }
+
+  protected error(...args: unknown[]) {
+    console.error(...args);
   }
 
   /**
@@ -141,7 +149,9 @@ export abstract class BasicComponent extends HTMLElement {
    */
   protected checkRequiredAttributes() {
     return this.requiredAttributes().every(
-      (requiredAttribute) => this.scope.hasOwnProperty(requiredAttribute) && typeof this.scope[requiredAttribute] !== 'undefined'
+      (requiredAttribute) =>
+        this.scope.hasOwnProperty(requiredAttribute) &&
+        typeof this.scope[requiredAttribute] !== "undefined"
     );
   }
 

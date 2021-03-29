@@ -25,12 +25,12 @@ export class ShopifyApiArticleService extends BaseApiService {
    * @param blogId
    */
   public async list(blogId: number) {
-    return HttpService.getJSON(`${this.baseUrl}/${blogId}/articles`).then(
-      (articles: Article[]) => {
-        console.debug("[ShopifyApiArticleService] articles", articles);
-        return articles;
-      }
-    );
+    return HttpService.getJSON<Article[]>(
+      `${this.baseUrl}/${blogId}/articles`
+    ).then((res) => {
+      console.debug("[ShopifyApiArticleService] articles", res.body);
+      return res.body;
+    });
   }
 
   /**
@@ -39,11 +39,11 @@ export class ShopifyApiArticleService extends BaseApiService {
    * @param articleId
    */
   public async get(blogId: number, articleId: number) {
-    return HttpService.getJSON(
+    return HttpService.getJSON<Article>(
       `${this.baseUrl}/${blogId}/articles/${articleId}`
-    ).then((article: Article) => {
-      console.debug("[ShopifyApiArticleService] get article", article);
-      return article;
+    ).then((res) => {
+      console.debug("[ShopifyApiArticleService] get article", res);
+      return res.body;
     });
   }
 }

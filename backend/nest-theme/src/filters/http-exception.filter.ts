@@ -23,10 +23,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
     this.theme = this.config.get<FullThemeConfig>('theme');
   }
 
-  protected getErrorObject(exception: HttpException | Error, req: Request) {
-    const status = getStatus(exception);
-    const message = getMessage(exception);
-    const stack = getStack(exception);
+  protected getErrorObject(
+    exception: HttpException | Error,
+    req: Request,
+    overwriteException?: HttpException | Error,
+  ) {
+    const status = getStatus(overwriteException || exception);
+    const message = getMessage(overwriteException || exception);
+    const stack = getStack(overwriteException || exception);
 
     const errorObj: ErrorObj = {
       statusCode: status,
@@ -35,6 +39,11 @@ export class HttpExceptionFilter implements ExceptionFilter {
       stack,
       path: req.url,
     };
+
+    if (overwriteException) {
+      errorObj.before = this.getErrorObject(exception, req);
+    }
+
     return errorObj;
   }
 
@@ -50,7 +59,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const sharedContext = await this.ssr.getSharedContext(
       req,
       this.theme.templateVars,
-      this.getErrorObject(exception, req),
+      this.getErrorObject(exception, req, overwriteException),
     );
 
     try {
@@ -66,7 +75,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
         html,
       };
     } catch (error) {
-      this.log.error(error);
+      this.log.error(`Can't render "${componentTagName}":  ${error}`);
       overwriteException = handleError(error);
     }
 
@@ -84,7 +93,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     let status = getStatus(exception);
     let overwriteException: Error | HttpException | undefined;
 
-    this.log.debug('catch error', JSON.stringify(exception));
+    this.log.debug('catch error: ' + JSON.stringify(exception));
 
     /**
      * Render custom 404 error page
@@ -105,23 +114,21 @@ export class HttpExceptionFilter implements ExceptionFilter {
     }
 
     /**
-     * Render custom 500 error page
+     * Render custom 500 and other error pages
      * @see https://docs.nestjs.com/exception-filters
      */
-    if (status === HttpStatus.INTERNAL_SERVER_ERROR) {
-      const result = await this.renderErrorPage(exception, host, 'error-page');
-      if (result.hasError) {
-        overwriteException = result.exception;
-        status = getStatus(overwriteException);
-      } else {
-        return res.status(status).send(result.html);
-      }
+    const result = await this.renderErrorPage(exception, host, 'error-page');
+    if (result.hasError) {
+      overwriteException = result.exception;
+      status = getStatus(overwriteException);
+    } else {
+      return res.status(status).send(result.html);
     }
 
-    // 500 and others
+    // Fallback
     res
       .status(status)
-      .json(this.getErrorObject(overwriteException || exception, req));
+      .json(this.getErrorObject(exception, req, overwriteException));
   }
 }
 

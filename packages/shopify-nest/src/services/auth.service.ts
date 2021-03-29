@@ -41,10 +41,10 @@ export class AuthService {
 
   public async shopifyConnectIframe(myshopifyDomain?: string) {
     const connectUrl = `/shopify/auth/iframe?shop=${myshopifyDomain}`;
-    return HttpService.getJSON(connectUrl).then(
-      (result: { authUrl: string }) => {
-        this.debug("shopifyConnectIframe", result.authUrl);
-        return result;
+    return HttpService.getJSON<{ authUrl: string }>(connectUrl).then(
+      (result) => {
+        this.debug("shopifyConnectIframe", result.body);
+        return result.body;
       }
     );
   }
@@ -58,10 +58,10 @@ export class AuthService {
       (profile as FacebookConnect).facebookID ||
       (profile as ShopifyConnect).shopifyID;
     const disconnectUrl = `/${type}/auth/disconnect/${id}`;
-    return HttpService.getJSON(disconnectUrl).then(
-      (result: { success: boolean }) => {
-        this.debug("disconnected", result);
-        return result;
+    return HttpService.getJSON<{ success: boolean }>(disconnectUrl).then(
+      (result) => {
+        this.debug("disconnected", result.body);
+        return result.body;
       }
     );
   }
@@ -71,20 +71,22 @@ export class AuthService {
    * @param type
    */
   public async connected(type: "shopify" | "facebook" | "vimeo") {
-    return HttpService.getJSON(`/${type}/auth/connected/current`).then(
-      (account: ShopifyConnect | null) => {
-        this.debug("isConnected", account);
-        return account;
-      }
-    );
+    return HttpService.getJSON<ShopifyConnect | null>(
+      `/${type}/auth/connected/current`
+    ).then((res) => {
+      const account = res.body;
+      this.debug("isConnected", account);
+      return account;
+    });
   }
 
   /**
    * Check if the current user is logged in
    */
   public async loggedIn() {
-    return HttpService.getJSON(`/shopify/auth/loggedIn`).then(
-      (loggedIn: boolean) => {
+    return HttpService.getJSON<boolean>(`/shopify/auth/loggedIn`).then(
+      (res) => {
+        const loggedIn = res.body;
         this.debug("loggedIn", loggedIn);
         return loggedIn;
       }

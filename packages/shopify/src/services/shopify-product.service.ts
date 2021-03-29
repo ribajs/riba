@@ -17,8 +17,9 @@ export class ShopifyProductService {
         resolve(this.cache[handle]);
       });
     } else {
-      return HttpService.getJSON(`/products/${handle}.js`).then(
-        (product: ShopifyProduct) => {
+      return HttpService.getJSON<ShopifyProduct>(`/products/${handle}.js`).then(
+        (res) => {
+          const product = res.body;
           this.cache[handle] = product;
           return this.cache[handle];
         }
@@ -104,10 +105,10 @@ export class ShopifyProductService {
   }
 
   /**
-   * Prepair product, remove protocol from featured_image, lovercase the option names
+   * Prepare product, remove protocol from featured_image, lowercase the option names
    * @param product product object
    */
-  public static prepair(product: ShopifyProduct) {
+  public static prepare(product: ShopifyProduct) {
     // remove protocol
     product.featured_image.replace(/(^\w+:|^)\/\//, "//");
 

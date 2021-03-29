@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GraphQLClient = void 0;
 const graphql_request_1 = require("graphql-request");
+const load_1 = require("@graphql-tools/load");
+const graphql_file_loader_1 = require("@graphql-tools/graphql-file-loader");
 const fs_1 = require("fs");
 const path_1 = require("path");
 const findRoot = require("find-root");
@@ -40,11 +42,18 @@ class GraphQLClient extends graphql_request_1.GraphQLClient {
         const content = await fs_1.promises.readFile(file, 'utf8');
         return content;
     }
-    async loadRequestDocument(filePath) {
+    async loadRequestDocumentCustom(filePath) {
         const content = await this.loadFile(filePath);
         return graphql_request_1.gql `
       ${content}
     `;
+    }
+    async loadRequestDocument(filePath) {
+        const pattern = `${this.root}/**/${filePath}.{gql, graphql}`;
+        const documents = await load_1.loadDocuments(pattern, {
+            loaders: [new graphql_file_loader_1.GraphQLFileLoader()],
+        });
+        return documents.map((document) => document.rawSDL).join('\n');
     }
     async execute(actionFilePath, variables) {
         const action = await this.loadRequestDocument(actionFilePath);

@@ -139,6 +139,26 @@ let SsrService = class SsrService {
                 window.ssr = sharedContext;
             },
         });
+        const result = new Promise((resolve, reject) => {
+            sharedContext.events.once('ready', (lifecycleEventData) => {
+                this.log.debug('Custom elements ready!');
+                const html = dom.serialize();
+                const result = Object.assign(Object.assign({}, lifecycleEventData), { html: html, css: [] });
+                return resolve(result);
+            });
+            sharedContext.events.once('error', (error) => {
+                this.log.error('SSR error event: ' + error);
+                return reject(this.trasformError(error));
+            });
+            dom.window.onerror = (msg, url, line, col, error) => {
+                this.log.error('SSR window.onerror: ' + error);
+                return reject(this.trasformError(error));
+            };
+            dom.window.addEventListener('error', (error) => {
+                this.log.error('SSR window error: ' + error);
+                return reject(this.trasformError(error));
+            });
+        });
         const scriptSources = await this.readSsrScripts(scriptFilenames);
         const scripts = [];
         for (const [filename, scriptSource] of scriptSources) {
@@ -153,22 +173,14 @@ let SsrService = class SsrService {
             await script.runInContext(vmContext);
         }
         this.log.debug('Wait for custom element...');
-        return new Promise((resolve, reject) => {
-            sharedContext.events.once('ready', (lifecycleEventData) => {
-                this.log.debug('Custom elements ready!');
-                const html = dom.serialize();
-                const result = Object.assign(Object.assign({}, lifecycleEventData), { html: html, css: [] });
-                return resolve(result);
-            });
-            dom.window.onerror = (msg, url, line, col, error) => {
-                this.log.error(error);
-                return reject(error);
-            };
-            dom.window.addEventListener('error', (event) => {
-                this.log.error(event);
-                return reject(event);
-            });
-        });
+        return result;
+    }
+    trasformError(error) {
+        const newError = new Error(error.message);
+        if (error.stack) {
+            newError.stack = error.stack;
+        }
+        return newError;
     }
     async renderComponent({ template, rootTag = 'ssr-root-page', componentTagName, engine, sharedContext, }) {
         if (!rootTag) {
@@ -190,19 +202,17 @@ let SsrService = class SsrService {
         layout = await this.transformLayout(layout, rootTag, componentTagName);
         this.log.debug(`layout (transformed): ${layout}`);
         try {
-            if (engine === 'jsdom') {
-                const renderWithJSDom = new Brakes(this.renderWithJSDom.bind(this), {
-                    timeout: 10000,
-                });
-                const renderData = await renderWithJSDom.exec(layout, componentTagName, sharedContext);
-                return renderData;
-            }
-            else {
-                throw new Error('Unsupported render engine');
-            }
+            const render = async () => {
+                return this.renderWithJSDom(layout, componentTagName, sharedContext);
+            };
+            const renderWithJSDom = new Brakes(render, {
+                timeout: 20000,
+            });
+            const renderData = await renderWithJSDom.exec();
+            return renderData;
         }
         catch (error) {
-            this.log.error(`Error on render component with ${engine}`);
+            this.log.error(`Error on render component! rootTag: "${rootTag}"`);
             this.log.error(error);
             throw error;
         }

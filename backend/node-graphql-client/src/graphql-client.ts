@@ -2,6 +2,10 @@ import { GraphQLClient as _GraphQLClient, gql } from 'graphql-request';
 import type { Variables, RequestDocument } from 'graphql-request/dist/types';
 import type { RequestInit } from 'graphql-request/dist/types.dom';
 
+import { loadDocuments } from '@graphql-tools/load';
+import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
+// import { CodeFileLoader } from '@graphql-tools/code-file-loader';
+
 import { promises as fs } from 'fs';
 import { extname } from 'path';
 import findRoot = require('find-root');
@@ -58,12 +62,27 @@ export class GraphQLClient extends _GraphQLClient {
    * @returns
    * @see https://www.graphql-tools.com/docs/documents-loading/
    */
-  async loadRequestDocument(filePath: string): Promise<RequestDocument> {
+  async loadRequestDocumentCustom(filePath: string): Promise<RequestDocument> {
     // const pattern = `${this.root}/**/${filePath}`;
     const content = await this.loadFile(filePath);
     return gql`
       ${content}
     `;
+  }
+
+  /**
+   * Load GraphQL documents (query/mutation/subscription/fragment)
+   * @param filePath
+   * @returns
+   * @see https://www.graphql-tools.com/docs/documents-loading/
+   */
+  async loadRequestDocument(filePath: string): Promise<string> {
+    const pattern = `${this.root}/**/${filePath}.{gql, graphql}`;
+    console.debug('loadRequestDocument', pattern);
+    const documents = await loadDocuments(pattern, {
+      loaders: [new GraphQLFileLoader()],
+    });
+    return documents.map((document) => document.rawSDL).join('\n');
   }
 
   /**

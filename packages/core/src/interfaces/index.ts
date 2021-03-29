@@ -16,6 +16,7 @@ export * from "./formatters";
 export * from "./http-data-type";
 export * from "./http-method";
 export * from "./http-service-options";
+export * from "./http-service-response";
 export * from "./module-element-type";
 export * from "./module";
 export * from "./observed-attribute-to-check";

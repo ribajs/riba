@@ -26,12 +26,11 @@ export class ShopifyApiThemesService extends BaseApiService {
    * List themes
    */
   public async list() {
-    return HttpService.getJSON(`/shopify/api/themes`).then(
-      (themes: ITheme[]) => {
-        console.debug("[ShopifyApiThemesService] themes", themes);
-        return themes;
-      }
-    );
+    const res = await HttpService.getJSON<ITheme[]>(`/shopify/api/themes`);
+    const themes = res.body;
+
+    console.debug("[ShopifyApiThemesService] themes", themes);
+    return themes;
   }
 
   public async locales(id: string | number, propertyPath?: string) {
@@ -39,10 +38,10 @@ export class ShopifyApiThemesService extends BaseApiService {
     if (propertyPath) {
       url += "/" + propertyPath;
     }
-    return HttpService.getJSON(url).then((locales: any) => {
-      console.debug("[ShopifyApiThemesService] locales", locales);
-      return locales;
-    });
+    const res = await HttpService.getJSON(url);
+    const locales = res.body;
+    console.debug("[ShopifyApiThemesService] locales", locales);
+    return locales;
   }
 
   public async assets(id: string | number, key?: string) {
@@ -50,18 +49,18 @@ export class ShopifyApiThemesService extends BaseApiService {
     if (key) {
       url += "/" + key;
     }
-    return HttpService.getJSON(url).then((assets: Asset[]) => {
-      console.debug("[ShopifyApiThemesService] assets", assets);
-      return assets;
-    });
+    const res = await HttpService.getJSON<Asset[]>(url);
+    const assets = res.body;
+    console.debug("[ShopifyApiThemesService] assets", assets);
+    return assets;
   }
 
   public async assetLocalesList(id: string | number) {
-    return HttpService.getJSON(`/shopify/api/themes/${id}/locales/list`).then(
-      (assets: AssetLocale[]) => {
-        console.debug("[ShopifyApiThemesService] assets", assets);
-        return assets;
-      }
+    const res = await HttpService.getJSON<AssetLocale[]>(
+      `/shopify/api/themes/${id}/locales/list`
     );
+    const assets = res.body;
+    console.debug("[ShopifyApiThemesService] assets", assets);
+    return assets;
   }
 }

@@ -7,7 +7,9 @@ const isAvailable = (moduleName) => {
     const pnpApi = require('pnpapi');
     const rootLocator = pnpApi.findPackageLocator('./')
     const rootPgk = pnpApi.getPackageInformation(rootLocator);
+    // console.log("rootPgk", rootPgk)
     const available = rootPgk.packageDependencies.get(moduleName);
+    // console.log("available", available);
     if (!available) {
       return false;
     }

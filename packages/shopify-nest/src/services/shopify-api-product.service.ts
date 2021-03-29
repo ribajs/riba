@@ -27,9 +27,9 @@ export class ShopifyApiProductService extends _ShopifyApiProductService {
    */
   public async create(product: ProductUpdateCreate) {
     const url = `${this.baseUrl}`;
-    return HttpService.post(url, product, "json").then((prod: Product) => {
-      console.debug("[ShopifyApiProductService] product", prod);
-      return prod;
+    return HttpService.post<Product>(url, product, "json").then((res) => {
+      console.debug("[ShopifyApiProductService] product", res.body);
+      return res.body;
     });
   }
 
@@ -39,9 +39,12 @@ export class ShopifyApiProductService extends _ShopifyApiProductService {
    */
   public async update(id: number, product: ProductUpdateCreate) {
     const url = `${this.baseUrl}/${id}`;
-    return HttpService.put(url, product, "json").then((prod: Product) => {
-      console.debug("[ShopifyApiProductService] update product result", prod);
-      return prod;
+    return HttpService.put<Product>(url, product, "json").then((res) => {
+      console.debug(
+        "[ShopifyApiProductService] update product result",
+        res.body
+      );
+      return res.body;
     });
   }
 
@@ -51,13 +54,13 @@ export class ShopifyApiProductService extends _ShopifyApiProductService {
    */
   public async delete(id: number) {
     const url = `${this.baseUrl}/${id}`;
-    return HttpService.delete(url, {}, "json").then(
-      (result: { id: number }) => {
+    return HttpService.delete<{ id: number }>(url, {}, "json").then(
+      (result) => {
         console.debug(
           "[ShopifyApiProductService] delete product result",
-          result
+          result.body
         );
-        return result;
+        return result.body;
       }
     );
   }

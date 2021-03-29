@@ -199,6 +199,37 @@ export class SsrService {
       },
     });
 
+    const result = new Promise<RenderResult>((resolve, reject) => {
+      sharedContext.events.once(
+        'ready',
+        (lifecycleEventData: ComponentLifecycleEventData) => {
+          this.log.debug('Custom elements ready!');
+
+          const html = dom.serialize();
+
+          const result: RenderResult = {
+            ...lifecycleEventData,
+            html: html,
+            css: [],
+          };
+
+          return resolve(result);
+        },
+      );
+      sharedContext.events.once('error', (error: Error) => {
+        this.log.error('SSR error event: ' + error);
+        return reject(this.transformBrowserError(error));
+      });
+      dom.window.onerror = (msg, url, line, col, error) => {
+        this.log.error('SSR window.onerror: ' + error);
+        return reject(this.transformBrowserError(error));
+      };
+      dom.window.addEventListener('error', (error: ErrorEvent) => {
+        this.log.error('SSR window error: ' + error);
+        return reject(this.transformBrowserError(error));
+      });
+    });
+
     const scriptSources = await this.readSsrScripts(scriptFilenames);
     const scripts: Script[] = [];
     for (const [filename, scriptSource] of scriptSources) {
@@ -219,32 +250,15 @@ export class SsrService {
     this.log.debug('Wait for custom element...');
     // await dom.window.customElements.whenDefined(componentTagName);
 
-    return new Promise<RenderResult>((resolve, reject) => {
-      sharedContext.events.once(
-        'ready',
-        (lifecycleEventData: ComponentLifecycleEventData) => {
-          this.log.debug('Custom elements ready!');
+    return result;
+  }
 
-          const html = dom.serialize();
-
-          const result: RenderResult = {
-            ...lifecycleEventData,
-            html: html,
-            css: [],
-          };
-
-          return resolve(result);
-        },
-      );
-      dom.window.onerror = (msg, url, line, col, error) => {
-        this.log.error(error);
-        return reject(error);
-      };
-      dom.window.addEventListener('error', (event: Event) => {
-        this.log.error(event);
-        return reject(event);
-      });
-    });
+  protected transformBrowserError(error: Error | ErrorEvent) {
+    const newError = new Error(error.message);
+    if ((error as Error).stack) {
+      newError.stack = (error as Error).stack;
+    }
+    return newError;
   }
 
   async renderComponent({
@@ -280,23 +294,20 @@ export class SsrService {
     // this.log.debug(`layout: ${layout}`);
     layout = await this.transformLayout(layout, rootTag, componentTagName);
     this.log.debug(`layout (transformed): ${layout}`);
+
     try {
-      if (engine === 'jsdom') {
-        // https://github.com/awolden/brakes
-        const renderWithJSDom = new Brakes(this.renderWithJSDom.bind(this), {
-          timeout: 10000,
-        });
-        const renderData = await renderWithJSDom.exec(
-          layout,
-          componentTagName,
-          sharedContext,
-        );
-        return renderData;
-      } else {
-        throw new Error('Unsupported render engine');
-      }
+      const render = async () => {
+        return this.renderWithJSDom(layout, componentTagName, sharedContext);
+      };
+
+      // https://github.com/awolden/brakes
+      const renderWithJSDom = new Brakes(render, {
+        timeout: 20000, // TODO move to theme settings
+      });
+      const renderData = await renderWithJSDom.exec();
+      return renderData;
     } catch (error) {
-      this.log.error(`Error on render component with ${engine}`);
+      this.log.error(`Error on render component! rootTag: "${rootTag}"`);
       this.log.error(error);
       throw error;
     }

@@ -4,4 +4,5 @@ export interface ErrorObj {
   timestamp: string;
   stack: string[];
   path: string;
+  before?: ErrorObj;
 }

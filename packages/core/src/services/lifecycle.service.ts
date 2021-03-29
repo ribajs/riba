@@ -64,6 +64,13 @@ export class LifecycleService {
       this.checkStates();
     });
 
+    this.events.on(
+      "Component:error",
+      (error: Error, data: ComponentLifecycleEventData) => {
+        this.onError(error, data);
+      }
+    );
+
     // Router
 
     this.routerEvents.on(
@@ -150,38 +157,61 @@ export class LifecycleService {
   }
 
   protected onAllBound() {
-    if (this.timeout) {
-      window.clearTimeout(this.timeout);
-    }
+    this.clearTimeout();
     this.events.trigger("ComponentLifecycle:allBound", this.components);
     if (this.debug) console.debug("[ComponentLifecycle] All components bound!");
   }
 
+  protected onError(error: Error, data: ComponentLifecycleEventData) {
+    this.clearTimeout();
+    console.error(
+      `The component "${data.tagName}" has caused an error:`,
+      error
+    );
+    this.events.trigger("ComponentLifecycle:error", error, data);
+  }
+
   protected onTimeout() {
+    this.clearTimeout();
     const states = this.getStates();
     if (Object.keys(states).length <= 0) {
       console.warn("No component found");
       return;
     }
-    this.events.trigger("ComponentLifecycle:timeout", this.components);
-    console.error(
-      "[ComponentLifecycle] Timeout! Make sure you call the super.connectedCallback and super.afterBind methods exactly one time in all your components."
-    );
 
-    console.error("[ComponentLifecycle] Unfinished components:");
+    let errorMessage =
+      "[ComponentLifecycle] Timeout! {count} component(s) takes too long!\nUnfinished components:\n" +
+      console.error("[ComponentLifecycle] Unfinished components:");
+    let count = 0;
     for (const tagName in states) {
       const state = states[tagName].state;
       if (state.connected !== state.bound) {
-        console.error(`${tagName}`, states[tagName].state);
+        count++;
+        errorMessage += `${tagName}: ${JSON.stringify(
+          states[tagName].state,
+          null,
+          2
+        )} + \n`;
       }
+    }
+
+    errorMessage.replace("{count}", count.toString());
+    this.events.trigger(
+      "ComponentLifecycle:error",
+      new Error(errorMessage),
+      {}
+    );
+  }
+
+  protected clearTimeout() {
+    if (this.timeout) {
+      window.clearTimeout(this.timeout);
     }
   }
 
   protected resetTimeout() {
     if (this.debug) console.debug("[ComponentLifecycle] reset timeout..");
-    if (this.timeout) {
-      window.clearTimeout(this.timeout);
-    }
+    this.clearTimeout();
     this.timeout = window.setTimeout(
       this.onTimeout.bind(this),
       this.timeoutDelay

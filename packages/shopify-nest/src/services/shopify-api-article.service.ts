@@ -32,9 +32,9 @@ export class ShopifyApiArticleService extends _ShopifyApiArticleService {
       `/shopify/api/blogs/${blogId}/articles/${articleId}`,
       article,
       "json"
-    ).then((result: any) => {
-      this.debug("update article", result);
-      return article;
+    ).then((res) => {
+      this.debug("update article", res.body);
+      return res.body;
     });
   }
 }

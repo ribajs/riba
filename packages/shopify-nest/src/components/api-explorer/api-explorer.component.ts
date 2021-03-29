@@ -31,7 +31,7 @@ export interface APIParam {
    */
   values: Array<string | number>;
   /**
-   * Dynamic params are params wich can have a value,
+   * Dynamic params are params which can have a value,
    * they are displayed with a dropdown menu with his possible values
    */
   dynamic: boolean;
@@ -40,7 +40,7 @@ export interface APIParam {
    */
   type: "text" | "dropdown" | "number";
   /**
-   * Is this param ready? Param is ready if a valid value was choosen
+   * Is this param ready? Param is ready if a valid value was chosen
    */
   ready: boolean;
   /**
@@ -151,8 +151,8 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
     this.debug("send", this.scope.currentUrl);
     HttpService.getJSON(this.scope.currentUrl)
       .then((result: any) => {
-        this.debug("result 2", result);
-        this.result = JSON.stringify(result, null, 4);
+        this.debug("result", result);
+        this.result = JSON.stringify(result.body, null, 4);
       })
       .catch((error) => {
         if (typeof error === "object") {
@@ -186,7 +186,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
   public selectApi(api: APIListItem) {
     DropdownService.closeAll();
     if (api.freestyle) {
-      // Generate the url befor the new api is selected if the user want's to go back to freestyle without losing the current url
+      // Generate the url before the new api is selected if the user want's to go back to freestyle without losing the current url
       this.generateUrlOfParams();
     }
     this.scope.currentSelectApi = api;
@@ -222,7 +222,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
   }
 
   protected initLocales() {
-    // set avaible langcodes
+    // set available langcodes
     this.scope.langcode = this.localesService.getLangcode();
     this.localesService.event.on("changed", (
       changedLangcode: string /*, initial: boolean*/

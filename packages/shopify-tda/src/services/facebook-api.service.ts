@@ -26,20 +26,20 @@ export class FacebookApiService extends BaseApiService {
    * Retrieves your facebook user pages your user has access to
    */
   public async pages() {
-    return HttpService.getJSON(`${this.baseUrl}/user/pages`).then(
-      (pages: IFbRequest<FbPage>) => {
-        console.debug("[services:FacebookApiService] pages", pages);
-        return pages;
-      }
+    const res = await HttpService.getJSON<IFbRequest<FbPage>>(
+      `${this.baseUrl}/user/pages`
     );
+    const pages = res.body;
+    console.debug("[services:FacebookApiService] pages", pages);
+    return pages;
   }
 
   public async posts() {
-    return HttpService.getJSON(`${this.baseUrl}/posts/user`).then(
-      (posts: IFbRequest<IFbPostData>) => {
-        console.debug("[services:FacebookApiService] posts", posts);
-        return posts;
-      }
+    const res = await HttpService.getJSON<IFbRequest<IFbPostData>>(
+      `${this.baseUrl}/posts/user`
     );
+    const posts = res.body;
+    console.debug("[services:FacebookApiService] posts", posts);
+    return posts;
   }
 }

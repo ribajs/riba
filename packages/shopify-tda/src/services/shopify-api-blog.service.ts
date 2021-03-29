@@ -24,7 +24,8 @@ export class ShopifyApiBlogsService extends BaseApiService {
    * List blogs
    */
   public async list() {
-    const blogs = await HttpService.getJSON<Blog[]>(`${this.baseUrl}`);
+    const res = await HttpService.getJSON<Blog[]>(`${this.baseUrl}`);
+    const blogs = res.body;
     console.debug("[ShopifyApiBlogsService] blogs", blogs);
     return blogs;
   }

@@ -85,38 +85,34 @@ export class ShopifyApiSyncService extends EventDispatcher {
     options.resync = !!options.resync;
     options.cancelExisting = !!options.cancelExisting;
     this.debug("start", options);
-    return HttpService.post(this.baseUrl, options, "json").then(
-      (progress: SyncProgress) => {
-        this.debug("start progress", progress);
-        return progress;
+    return HttpService.post<SyncProgress>(this.baseUrl, options, "json").then(
+      (res) => {
+        this.debug("start progress", res.body);
+        return res.body;
       }
     );
   }
 
   public async cancel() {
-    return HttpService.delete(this.baseUrl, null, "json").then(
-      (result: any) => {
-        this.debug("cancel result", result);
-        return result;
-      }
-    );
+    return HttpService.delete(this.baseUrl, null, "json").then((result) => {
+      this.debug("cancel result", result.body);
+      return result.body;
+    });
   }
 
   public async get() {
-    return HttpService.getJSON(this.baseUrl + "/latest").then(
-      (progress: SyncProgress | null) => {
-        this.debug("Last progress", progress);
-        return progress;
-      }
-    );
+    return HttpService.getJSON<SyncProgress | null>(
+      this.baseUrl + "/latest"
+    ).then((res) => {
+      this.debug("Last progress", res.body);
+      return res.body;
+    });
   }
 
   public async list() {
-    return HttpService.getJSON(this.baseUrl).then(
-      (progress: SyncProgress[]) => {
-        this.debug("list progress", progress);
-        return progress;
-      }
-    );
+    return HttpService.getJSON<SyncProgress[]>(this.baseUrl).then((res) => {
+      this.debug("list progress", res.body);
+      return res.body;
+    });
   }
 }

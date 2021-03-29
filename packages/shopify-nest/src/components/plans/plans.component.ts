@@ -49,21 +49,23 @@ export class ShopifyNestPlansComponent extends Component {
   }
 
   protected async loadActiveCharge() {
-    return HttpService.getJSON(`/shopify/charge/active`).then(
-      (activeCharge: RecurringCharge | null) => {
-        this.debug("activeCharge", activeCharge);
-        this.scope.active = activeCharge ? activeCharge : undefined;
-        if (this.scope.active) {
-          this.scope.hasActive = true;
-        }
-        return this.scope.active;
+    return HttpService.getJSON<RecurringCharge | null>(
+      `/shopify/charge/active`
+    ).then((res) => {
+      const activeCharge = res.body;
+      this.debug("activeCharge", activeCharge);
+      this.scope.active = activeCharge ? activeCharge : undefined;
+      if (this.scope.active) {
+        this.scope.hasActive = true;
       }
-    );
+      return this.scope.active;
+    });
   }
 
   protected async loadAvailableCharges() {
-    return HttpService.getJSON(`/shopify/charge/available`).then(
-      (availableCharges: Plan[]) => {
+    return HttpService.getJSON<Plan[]>(`/shopify/charge/available`).then(
+      (res) => {
+        const availableCharges = res.body;
         this.debug("available charges", availableCharges);
         this.scope.plans = availableCharges;
         return this.scope.plans;

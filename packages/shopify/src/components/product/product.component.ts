@@ -74,7 +74,7 @@ export class ShopifyProductComponent extends Component {
   protected set product(product: ShopifyProduct | null) {
     // console.debug('set product', product);
     if (product) {
-      this.scope.product = ShopifyProductService.prepair(product);
+      this.scope.product = ShopifyProductService.prepare(product);
 
       // this.selectedOptions = new Array(this.scope.product.options.length);
 
