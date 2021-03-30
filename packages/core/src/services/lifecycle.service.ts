@@ -180,8 +180,7 @@ export class LifecycleService {
     }
 
     let errorMessage =
-      "[ComponentLifecycle] Timeout! {count} component(s) takes too long!\nUnfinished components:\n" +
-      console.error("[ComponentLifecycle] Unfinished components:");
+      "[ComponentLifecycle] Timeout! {count} component(s) takes too long!\nUnfinished components:\n";
     let count = 0;
     for (const tagName in states) {
       const state = states[tagName].state;

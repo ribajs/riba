@@ -78,7 +78,7 @@ export abstract class Component extends BasicComponent {
       error,
       this.getLifecycleEventData()
     );
-    // throw error;
+    throw error;
   }
 
   /**
