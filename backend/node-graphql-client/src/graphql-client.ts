@@ -3,6 +3,7 @@ import type { Variables } from 'graphql-request/dist/types';
 import type { RequestInit } from 'graphql-request/dist/types.dom';
 
 import { loadDocuments } from '@graphql-tools/load';
+
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 
 import findRoot = require('find-root');
@@ -24,13 +25,13 @@ export class GraphQLClient extends _GraphQLClient {
    * @returns
    * @see https://www.graphql-tools.com/docs/documents-loading/
    */
-  async loadRequestDocument(filePath: string): Promise<string> {
+  async loadRequestDocument(filePath: string) {
     const pattern = `${this.root}/**/${filePath}.{gql, graphql}`;
     console.debug('loadRequestDocument', pattern);
-    const documents = await loadDocuments(pattern, {
+    const sources = await loadDocuments(pattern, {
       loaders: [new GraphQLFileLoader()],
     });
-    return documents.map((document) => document.rawSDL).join('\n');
+    return sources[0].document;
   }
 
   /**

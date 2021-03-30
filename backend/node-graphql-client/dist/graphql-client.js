@@ -16,10 +16,10 @@ class GraphQLClient extends graphql_request_1.GraphQLClient {
     async loadRequestDocument(filePath) {
         const pattern = `${this.root}/**/${filePath}.{gql, graphql}`;
         console.debug('loadRequestDocument', pattern);
-        const documents = await load_1.loadDocuments(pattern, {
+        const sources = await load_1.loadDocuments(pattern, {
             loaders: [new graphql_file_loader_1.GraphQLFileLoader()],
         });
-        return documents.map((document) => document.rawSDL).join('\n');
+        return sources[0].document;
     }
     async execute(actionFilePath, variables, requestHeaders) {
         const action = await this.loadRequestDocument(actionFilePath);

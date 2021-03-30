@@ -6,9 +6,8 @@
   "license": "MIT",
   "main": "./dist/index.js",
   "scripts": {
-    "prebuild": "rimraf dist",
-    "build": "npm run prebuild && npm run lint && tsc -p tsconfig.json",
-    "clear": "rm -rf dist",
+    "clear": "rimraf dist",
+    "build": "npm run lint && tsc -p tsconfig.json",
     "watch": "npm run build -- --watch",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --ignore-pattern '*.spec.ts' --fix && npm run typecheck",
     "typecheck": "tsc -p tsconfig.json --noEmit"
@@ -17,6 +16,7 @@
     "@graphql-tools/graphql-file-loader": "^6.2.7",
     "@graphql-tools/graphql-tag-pluck": "^6.5.1",
     "@graphql-tools/load": "^6.2.7",
+    "@graphql-tools/utils": "^7.7.1",
     "find-root": "^1.1.0",
     "glob": "^7.1.6",
     "graphql": "^15.5.0",
