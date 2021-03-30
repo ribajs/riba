@@ -51,10 +51,11 @@ export const routeBinder: Binder<string> = {
           event.stopPropagation();
           event.preventDefault();
           if (!this.customData.options.url.startsWith("http")) {
-
           }
           // Is extern
-          const newTab = this.customData.options.newTab || this.customData.options.newTabOnExtern;
+          const newTab =
+            this.customData.options.newTab ||
+            this.customData.options.newTabOnExtern;
           pjax.goTo(this.customData.options.url, newTab);
         } else {
           if (this.customData.options.url) {

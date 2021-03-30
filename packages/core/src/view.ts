@@ -204,7 +204,7 @@ export class View {
   }
 
   protected startsWithPrefix(name: string) {
-    const bindingFullPrefixes = this.options.fullPrefix;  
+    const bindingFullPrefixes = this.options.fullPrefix;
     if (!bindingFullPrefixes) {
       throw new Error("prefix is required");
     }

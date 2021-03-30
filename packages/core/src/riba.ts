@@ -95,11 +95,10 @@ export class Riba {
       this._prefix = [];
       this._fullPrefix = [];
       for (const val of value) {
-        this._prefix.push(val)
-        this._fullPrefix.push(val + "-")
+        this._prefix.push(val);
+        this._fullPrefix.push(val + "-");
       }
     }
-
   }
 
   get prefix(): string[] {

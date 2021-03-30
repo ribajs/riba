@@ -61,12 +61,20 @@ export class Bs5ToggleButtonComponent extends Component {
 
   constructor() {
     super();
-    this.lifecycleEvents.once('ComponentLifecycle:allBound', this.onAllComponentsReady, this);
-    this.lifecycleEvents.once('ComponentLifecycle:timeout', this.onAllComponentsReady, this);
+    this.lifecycleEvents.once(
+      "ComponentLifecycle:allBound",
+      this.onAllComponentsReady,
+      this
+    );
+    this.lifecycleEvents.once(
+      "ComponentLifecycle:timeout",
+      this.onAllComponentsReady,
+      this
+    );
   }
 
   public toggle() {
-    this.debug('toggle', this.eventDispatcher);
+    this.debug("toggle", this.eventDispatcher);
     if (this.eventDispatcher) {
       this.eventDispatcher.trigger(
         TOGGLE_BUTTON.eventNames.toggle,

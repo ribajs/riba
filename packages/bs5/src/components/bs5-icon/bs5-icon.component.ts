@@ -64,8 +64,8 @@ export class Bs5IconComponent extends BasicComponent {
       return;
     }
 
-    let currentSvg = this.getSvg();
-    let oldSrc = currentSvg ? currentSvg.getAttribute("src") : "";
+    const currentSvg = this.getSvg();
+    const oldSrc = currentSvg ? currentSvg.getAttribute("src") : "";
 
     // Icon already set (maybe on SSR)
     if (oldSrc === this.scope.src) {

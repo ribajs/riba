@@ -84,7 +84,7 @@ export class HCaptchaFormComponent extends OcFormComponent {
     return super.onSubmit(event, el);
   }
 
-  protected ajaxSubmit(event?: Event, el?: HTMLButtonElement) {
+  protected async ajaxSubmit(event?: Event, el?: HTMLButtonElement) {
     this.debug(
       "ajaxSubmit",
       "octoberHandler",
