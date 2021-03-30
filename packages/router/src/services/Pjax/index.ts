@@ -449,7 +449,7 @@ class Pjax {
       throw error;
     }
 
-    if (this.cacheEnabled && response && data.status < 400) {
+    if (this.cacheEnabled && response /*&& data.status < 400*/) {
       Pjax.cache.set(url, response);
     } else {
       // Pjax.cache.reset();
