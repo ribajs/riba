@@ -311,17 +311,6 @@ export const classOf = (that: any) => {
 };
 
 /**
- * TODO: Would like to do it with class parameter T for the parent class:
- *
-   export function classOf<T = any>(that: T) {
-     return that.constructor as typeof T;
-   };
- *
- * but getting TypeScript error:
- * Property 'constructor' does not exist on type 'T'.
- */
-
-/**
  * Removes internal riba properties from an object
  * @param obj
  * @return Cleared new object
@@ -338,4 +327,23 @@ export const clearObjFromRiba = (obj: any) => {
     }
   }
   return newObj;
+};
+
+/**
+ * Generate a Hash from string
+ * @param str The string
+ * @returns hash code
+ * @see https://stackoverflow.com/a/7616484
+ */
+export const hashCode = (str: string) => {
+  let hash = 0,
+    i,
+    chr;
+  if (str.length === 0) return hash;
+  for (i = 0; i < str.length; i++) {
+    chr = str.charCodeAt(i);
+    hash = (hash << 5) - hash + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
 };

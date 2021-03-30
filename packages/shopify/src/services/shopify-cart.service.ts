@@ -428,7 +428,7 @@ export class ShopifyCartService {
   protected static waitForComplete = false;
 
   /**
-   * Trigger `ShopifyCart:request:complete`, if queue is already panding no noting (in this case we already looking for onIdle)
+   * Trigger `ShopifyCart:request:complete`, if queue is already pending no noting (in this case we already looking for onIdle)
    */
   protected static triggerOnComplete() {
     if (!this.waitForComplete) {

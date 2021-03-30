@@ -107,7 +107,7 @@ class Prefetch {
           console.error(error);
         });
       } else {
-        console.warn(`No pjax instace for viewId "${this.viewId}" found!`);
+        console.warn(`No pjax instance for viewId "${this.viewId}" found!`);
         el.classList.add(ROUTE_ERROR_CLASS);
       }
     } else {
@@ -118,7 +118,7 @@ class Prefetch {
   }
 
   /**
-   * Callback for the mousehover/touchstart, please use the rv-route binder instead
+   * Callback for the mouseover/touchstart, please use the rv-route binder instead
    *
    */
   protected onLinkEnterIntern(evt: Event) {
@@ -129,7 +129,7 @@ class Prefetch {
     }
 
     while (el && !Pjax.getHref(el)) {
-      el = el.parentNode as HTMLAnchorElement; // TODO testme
+      el = el.parentNode as HTMLAnchorElement;
     }
 
     if (!el) {
@@ -149,7 +149,7 @@ class Prefetch {
 
     if (!href) {
       console.warn(
-        `Url is not defined, you can't cache the link without the url. Please make shure your element has the href attribute or pass the url directly to this function.`,
+        `Url is not defined, you can't cache the link without the url. Please make sure your element has the href attribute or pass the url directly to this function.`,
         el
       );
       return;

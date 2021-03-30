@@ -22,18 +22,21 @@ let SsrMiddleware = class SsrMiddleware {
         this.theme = this.config.get('theme');
     }
     async use(req, res, next) {
-        this.log.debug('SsrMiddleware req.route', req.route.path);
         const routeSettings = this.getRouteSettingsByRoute(req.route.path);
         if (!routeSettings) {
             return next();
         }
+        this.log.debug('');
+        this.log.debug(req.url);
+        this.log.debug(req.params);
+        this.log.debug('');
         const sharedContext = await this.ssr.getSharedContext(req, this.theme.templateVars);
         try {
             const page = await this.ssr.renderComponent({
                 componentTagName: routeSettings.component,
                 sharedContext,
             });
-            this.log.debug(`Rendered page component: ${routeSettings.component}`);
+            this.log.debug(`Rendered page component: ${routeSettings.component} for ${req.url}`);
             return res.send(page.html);
         }
         catch (error) {

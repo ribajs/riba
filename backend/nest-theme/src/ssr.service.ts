@@ -11,11 +11,7 @@ import * as consolidate from 'consolidate';
 import type { Request } from 'express';
 import { promises as fs } from 'fs';
 import fetch from 'node-fetch';
-import type {
-  ComponentLifecycleEventData,
-  SharedContext,
-  RenderEngine,
-} from '@ribajs/ssr';
+import type { ComponentLifecycleEventData, SharedContext } from '@ribajs/ssr';
 import type { RenderResult } from './types';
 import { EventDispatcher } from '@ribajs/events';
 
@@ -27,22 +23,13 @@ export class SsrService {
     this.theme = config.get<ThemeConfig>('theme');
   }
 
-  isRenderEngineValid(engine: RenderEngine) {
-    switch (engine) {
-      case 'jsdom':
-        return true;
-      default:
-        return false;
-    }
-  }
-
   async getSharedContext(
     req: Request,
     templateVars: TemplateVars,
     errorObj?: ErrorObj,
   ) {
     const sharedContext: SharedContext = {
-      events: EventDispatcher.getInstance('ssr') as any, // TODO
+      events: new EventDispatcher(),
       ctx: {
         // See https://expressjs.com/de/api.html#req
         app: req.app,
@@ -114,7 +101,7 @@ export class SsrService {
       const scriptPath = resolve(scriptsDir, filename);
       // this.log.debug('scriptPath', scriptPath);
       const scriptSource = await fs.readFile(scriptPath, 'utf8');
-      this.log.debug('Scripts loaded!');
+      // this.log.debug('Scripts loaded!');
       scripts.set(filename, scriptSource);
     }
 
@@ -133,7 +120,7 @@ export class SsrService {
     const viewsDir: string = this.theme.viewsDir;
     const tplEngine = this.getTemplateEngine(templatePath);
     templatePath = resolve(viewsDir, templatePath);
-    this.log.debug(`Template engine: ${tplEngine}, path: ${templatePath}`);
+    // this.log.debug(`Template engine: ${tplEngine}, path: ${templatePath}`);
     try {
       const result = await consolidate[tplEngine](
         resolve(viewsDir, templatePath),
@@ -203,7 +190,7 @@ export class SsrService {
       sharedContext.events.once(
         'ready',
         (lifecycleEventData: ComponentLifecycleEventData) => {
-          this.log.debug('Custom elements ready!');
+          // this.log.debug('Custom elements ready!');
 
           const html = dom.serialize();
 
@@ -242,7 +229,7 @@ export class SsrService {
     // Set shared context here
     const vmContext = dom.getInternalVMContext();
 
-    this.log.debug('Execute scripts...');
+    // this.log.debug('Execute scripts...');
     for (const script of scripts) {
       await script.runInContext(vmContext);
     }
@@ -265,35 +252,26 @@ export class SsrService {
     template,
     rootTag = 'ssr-root-page',
     componentTagName,
-    engine,
     sharedContext,
   }: {
     template?: string;
     rootTag?: string;
     componentTagName: string;
-    engine?: RenderEngine;
     sharedContext: SharedContext;
   }): Promise<RenderResult> {
     if (!rootTag) {
       rootTag = this.theme.ssr.rootTag || 'ssr-root-page';
     }
 
-    if (engine && !this.isRenderEngineValid(engine)) {
-      this.log.warn(`Ignore unknown render engine "${engine}"`);
-    }
-    if (!engine) {
-      engine = this.theme.ssr.engine || 'jsdom';
-    }
     if (!template) {
       template = this.theme.ssr.template || 'page-component.pug';
     }
-    this.log.debug(`rootTag: ${rootTag}`);
-    this.log.debug(`engine: ${engine}`);
-    this.log.debug(`template: ${template}`);
+    // this.log.debug(`rootTag: ${rootTag}`);
+    // this.log.debug(`template: ${template}`);
     let layout = await this.renderTemplate(template, sharedContext);
     // this.log.debug(`layout: ${layout}`);
     layout = await this.transformLayout(layout, rootTag, componentTagName);
-    this.log.debug(`layout (transformed): ${layout}`);
+    // this.log.debug(`layout (transformed): ${layout}`);
 
     try {
       const render = async () => {

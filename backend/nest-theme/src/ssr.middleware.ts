@@ -13,35 +13,33 @@ export class SsrMiddleware implements NestMiddleware {
     this.theme = this.config.get<FullThemeConfig>('theme');
   }
   async use(req: Request, res: Response, next: NextFunction) {
-    this.log.debug('SsrMiddleware req.route', req.route.path);
     const routeSettings = this.getRouteSettingsByRoute(req.route.path);
 
     if (!routeSettings) {
       return next();
     }
 
-    // this.log.debug(`Route found: ${JSON.stringify(routeSettings)}`);
+    this.log.debug('');
+    this.log.debug(req.url);
+    this.log.debug(req.params);
+    this.log.debug('');
 
     const sharedContext = await this.ssr.getSharedContext(
       req,
       this.theme.templateVars,
     );
 
-    // this.log.debug('Template variables:');
-    // this.log.debug(sharedContext);
-
     try {
       const page = await this.ssr.renderComponent({
         componentTagName: routeSettings.component,
         sharedContext,
       });
-      this.log.debug(`Rendered page component: ${routeSettings.component}`);
-      // this.log.debug(`page: ${page.html}`);
+      this.log.debug(
+        `Rendered page component: ${routeSettings.component} for ${req.url}`,
+      );
       return res.send(page.html);
     } catch (error) {
       this.log.error(error);
-      // return res.status(500).json({ error: error.message });
-      // return next(error);
       return next(handleError(error));
     }
   }

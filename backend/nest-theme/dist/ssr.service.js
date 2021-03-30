@@ -25,17 +25,9 @@ let SsrService = class SsrService {
         this.log = new common_1.Logger(this.constructor.name);
         this.theme = config.get('theme');
     }
-    isRenderEngineValid(engine) {
-        switch (engine) {
-            case 'jsdom':
-                return true;
-            default:
-                return false;
-        }
-    }
     async getSharedContext(req, templateVars, errorObj) {
         const sharedContext = {
-            events: events_1.EventDispatcher.getInstance('ssr'),
+            events: new events_1.EventDispatcher(),
             ctx: {
                 app: req.app,
                 baseUrl: req.baseUrl,
@@ -91,7 +83,6 @@ let SsrService = class SsrService {
         for (const filename of filenames) {
             const scriptPath = path_1.resolve(scriptsDir, filename);
             const scriptSource = await fs_1.promises.readFile(scriptPath, 'utf8');
-            this.log.debug('Scripts loaded!');
             scripts.set(filename, scriptSource);
         }
         return scripts;
@@ -103,7 +94,6 @@ let SsrService = class SsrService {
         const viewsDir = this.theme.viewsDir;
         const tplEngine = this.getTemplateEngine(templatePath);
         templatePath = path_1.resolve(viewsDir, templatePath);
-        this.log.debug(`Template engine: ${tplEngine}, path: ${templatePath}`);
         try {
             const result = await consolidate[tplEngine](path_1.resolve(viewsDir, templatePath), variables);
             return result;
@@ -141,7 +131,6 @@ let SsrService = class SsrService {
         });
         const result = new Promise((resolve, reject) => {
             sharedContext.events.once('ready', (lifecycleEventData) => {
-                this.log.debug('Custom elements ready!');
                 const html = dom.serialize();
                 const result = Object.assign(Object.assign({}, lifecycleEventData), { html: html, css: [] });
                 return resolve(result);
@@ -168,7 +157,6 @@ let SsrService = class SsrService {
             scripts.push(script);
         }
         const vmContext = dom.getInternalVMContext();
-        this.log.debug('Execute scripts...');
         for (const script of scripts) {
             await script.runInContext(vmContext);
         }
@@ -182,25 +170,15 @@ let SsrService = class SsrService {
         }
         return newError;
     }
-    async renderComponent({ template, rootTag = 'ssr-root-page', componentTagName, engine, sharedContext, }) {
+    async renderComponent({ template, rootTag = 'ssr-root-page', componentTagName, sharedContext, }) {
         if (!rootTag) {
             rootTag = this.theme.ssr.rootTag || 'ssr-root-page';
-        }
-        if (engine && !this.isRenderEngineValid(engine)) {
-            this.log.warn(`Ignore unknown render engine "${engine}"`);
-        }
-        if (!engine) {
-            engine = this.theme.ssr.engine || 'jsdom';
         }
         if (!template) {
             template = this.theme.ssr.template || 'page-component.pug';
         }
-        this.log.debug(`rootTag: ${rootTag}`);
-        this.log.debug(`engine: ${engine}`);
-        this.log.debug(`template: ${template}`);
         let layout = await this.renderTemplate(template, sharedContext);
         layout = await this.transformLayout(layout, rootTag, componentTagName);
-        this.log.debug(`layout (transformed): ${layout}`);
         try {
             const render = async () => {
                 return this.renderWithJSDom(layout, componentTagName, sharedContext);

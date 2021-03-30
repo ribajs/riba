@@ -194,7 +194,7 @@ export class LifecycleService {
       }
     }
 
-    errorMessage.replace("{count}", count.toString());
+    errorMessage = errorMessage.replace("{count}", count.toString());
     this.events.trigger(
       "ComponentLifecycle:error",
       new Error(errorMessage),
