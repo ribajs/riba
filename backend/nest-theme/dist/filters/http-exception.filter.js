@@ -72,8 +72,9 @@ let HttpExceptionFilter = class HttpExceptionFilter {
         let status = error_handler_1.getStatus(exception);
         let overwriteException;
         this.log.debug('catch error: ' + JSON.stringify(exception));
-        if (status === common_1.HttpStatus.NOT_FOUND) {
-            const result = await this.renderErrorPage(exception, host, 'not-found-page');
+        const errorPageConfig = this.theme.errorRoutes[status];
+        if (errorPageConfig) {
+            const result = await this.renderErrorPage(exception, host, errorPageConfig.component);
             if (result.hasError) {
                 overwriteException = result.exception;
                 status = error_handler_1.getStatus(overwriteException);
@@ -81,14 +82,6 @@ let HttpExceptionFilter = class HttpExceptionFilter {
             else {
                 return res.status(status).send(result.html);
             }
-        }
-        const result = await this.renderErrorPage(exception, host, 'error-page');
-        if (result.hasError) {
-            overwriteException = result.exception;
-            status = error_handler_1.getStatus(overwriteException);
-        }
-        else {
-            return res.status(status).send(result.html);
         }
         res
             .status(status)

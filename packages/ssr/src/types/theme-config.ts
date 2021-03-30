@@ -1,4 +1,5 @@
 import type { Route } from "./route";
+import type { ErrorRoutes } from "./error-routes";
 import type { SupportedTemplateEngines } from "./template-engines";
 import type { RenderEngine } from "./render-engine";
 export interface ThemeConfig {
@@ -13,4 +14,5 @@ export interface ThemeConfig {
   };
   pageComponentsDir?: string;
   routes?: Route[];
+  errorRoutes: ErrorRoutes;
 }

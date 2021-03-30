@@ -4,7 +4,6 @@ import {
   ArgumentsHost,
   HttpException,
   Logger,
-  HttpStatus,
 } from '@nestjs/common';
 import { ErrorObj } from '@ribajs/ssr';
 import { ConfigService } from '@nestjs/config';
@@ -96,14 +95,16 @@ export class HttpExceptionFilter implements ExceptionFilter {
     this.log.debug('catch error: ' + JSON.stringify(exception));
 
     /**
-     * Render custom 404 error page
+     * Render custom status error page
+     * - Gets error page component name from theme config
      * @see https://docs.nestjs.com/exception-filters
      */
-    if (status === HttpStatus.NOT_FOUND) {
+    const errorPageConfig = this.theme.errorRoutes[status];
+    if (errorPageConfig) {
       const result = await this.renderErrorPage(
         exception,
         host,
-        'not-found-page',
+        errorPageConfig.component,
       );
       if (result.hasError) {
         overwriteException = result.exception;
@@ -111,18 +112,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
       } else {
         return res.status(status).send(result.html);
       }
-    }
-
-    /**
-     * Render custom 500 and other error pages
-     * @see https://docs.nestjs.com/exception-filters
-     */
-    const result = await this.renderErrorPage(exception, host, 'error-page');
-    if (result.hasError) {
-      overwriteException = result.exception;
-      status = getStatus(overwriteException);
-    } else {
-      return res.status(status).send(result.html);
     }
 
     // Fallback

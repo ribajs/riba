@@ -148,15 +148,15 @@ let SsrService = class SsrService {
             });
             sharedContext.events.once('error', (error) => {
                 this.log.error('SSR error event: ' + error);
-                return reject(this.trasformError(error));
+                return reject(this.transformBrowserError(error));
             });
             dom.window.onerror = (msg, url, line, col, error) => {
                 this.log.error('SSR window.onerror: ' + error);
-                return reject(this.trasformError(error));
+                return reject(this.transformBrowserError(error));
             };
             dom.window.addEventListener('error', (error) => {
                 this.log.error('SSR window error: ' + error);
-                return reject(this.trasformError(error));
+                return reject(this.transformBrowserError(error));
             });
         });
         const scriptSources = await this.readSsrScripts(scriptFilenames);
@@ -175,7 +175,7 @@ let SsrService = class SsrService {
         this.log.debug('Wait for custom element...');
         return result;
     }
-    trasformError(error) {
+    transformBrowserError(error) {
         const newError = new Error(error.message);
         if (error.stack) {
             newError.stack = error.stack;
