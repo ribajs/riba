@@ -19,7 +19,7 @@ export class PagesPageComponent extends PageComponent {
     params: {},
   };
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -46,7 +46,7 @@ export class PagesPageComponent extends PageComponent {
     await super.afterBind();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return pugTemplate(this.scope);
   }
 }

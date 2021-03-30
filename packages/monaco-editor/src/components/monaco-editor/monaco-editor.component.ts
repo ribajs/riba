@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import * as monaco from "monaco-editor";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import pugTemplate from "./monaco-editor.component.pug";
@@ -72,7 +72,7 @@ export class MonacoEditorComponent extends Component {
 
   protected editor?: monaco.editor.IStandaloneCodeEditor;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [
       "data-value",
       "language",
@@ -232,7 +232,7 @@ export class MonacoEditorComponent extends Component {
     }
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return ["language", "dataValue"];
   }
 
@@ -265,7 +265,7 @@ export class MonacoEditorComponent extends Component {
     super.disconnectedCallback();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     let template: string | null = null;
     // Only set the component template if there no childs already
     if (this && hasChildNodesTrim(this)) {

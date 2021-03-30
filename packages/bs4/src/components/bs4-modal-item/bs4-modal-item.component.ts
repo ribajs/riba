@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 
 import template from "./bs4-modal-item.component.html";
 import { Modal } from "../../interfaces";
@@ -24,11 +24,11 @@ export class Bs4ModalItemComponent extends Component {
 
   protected modalService?: ModalService;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return ["modal", "index"];
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return ["modal"];
   }
 
@@ -105,7 +105,7 @@ export class Bs4ModalItemComponent extends Component {
       );
     }
   }
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return template;
   }
 }

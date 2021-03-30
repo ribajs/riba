@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./bs5-contents.component.html";
 
@@ -47,7 +47,7 @@ export class Bs5ContentsComponent extends Component {
 
   protected wrapperElement?: Element;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [
       "headers-start",
       "headers-depth",
@@ -145,7 +145,7 @@ export class Bs5ContentsComponent extends Component {
     await super.afterBind();
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return ["headersStart", "headersDepth", "headerParentSelector"];
   }
 
@@ -169,7 +169,7 @@ export class Bs5ContentsComponent extends Component {
     this.scope.anchors = [];
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       return null;

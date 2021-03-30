@@ -1,4 +1,4 @@
-import { Component, HttpService } from "@ribajs/core";
+import { Component, TemplateFunction, HttpService } from "@ribajs/core";
 import Debug from "debug";
 import pugTemplate from "./plans.component.pug";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
@@ -15,7 +15,7 @@ interface Scope {
 export class ShopifyNestPlansComponent extends Component {
   public static tagName = "shopify-nest-plans";
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -89,7 +89,7 @@ export class ShopifyNestPlansComponent extends Component {
     await super.afterBind();
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
@@ -97,7 +97,7 @@ export class ShopifyNestPlansComponent extends Component {
     super.disconnectedCallback();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     let template: string | null = null;
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {

@@ -105,7 +105,7 @@ export class ShopifyNestApiExplorerFacebookComponent extends ShopifyNestApiExplo
     selectApiQueryValue: this.selectApiQueryValue,
   };
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 

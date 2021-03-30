@@ -1,8 +1,7 @@
 import { Component } from "@ribajs/core";
 import { camelCase } from "@ribajs/utils/src/type";
-// import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 
-export type AttributeType = string; // 'string' | 'number' | 'boolean';
+export type AttributeType = string;
 
 export interface TemplateAttribute {
   name: string;
@@ -35,7 +34,7 @@ export abstract class TemplatesComponent extends Component {
   }
 
   /**
-   * Called before getting attribute value, use this method to tramsform the attribute value if you wish
+   * Called before getting attribute value, use this method to transform the attribute value if you wish
    * @param name Attribute name
    * @param value Attribute value
    */
@@ -59,7 +58,7 @@ export abstract class TemplatesComponent extends Component {
   }
 
   /**
-   * Called before getting all attribute values, use this method to tramsform the attribute values if you wish
+   * Called before getting all attribute values, use this method to transform the attribute values if you wish
    * @param attributes
    */
   protected transformTemplateAttributes(attributes: any, index: number) {
@@ -114,13 +113,4 @@ export abstract class TemplatesComponent extends Component {
       (child) => child.nodeName !== "TEMPLATE" && child.nodeName !== "#text"
     );
   }
-
-  // protected template() {
-  //   // Only set the component template if there no childs or the childs are templates
-  //   if (!hasChildNodesTrim(this) || this.hasOnlyTemplateChilds()) {
-  //     return template;
-  //   } else {
-  //     return null;
-  //   }
-  // }
 }

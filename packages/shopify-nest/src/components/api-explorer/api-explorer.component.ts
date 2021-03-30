@@ -1,4 +1,4 @@
-import { Component, HttpService } from "@ribajs/core";
+import { Component, TemplateFunction, HttpService } from "@ribajs/core";
 import { isNumber, concat, hasChildNodesTrim } from "@ribajs/utils";
 import Debug from "debug";
 
@@ -101,7 +101,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
   protected editor?: monaco.editor.IStandaloneCodeEditor;
   protected localesService = LocalesStaticService.getInstance("main");
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -393,7 +393,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
     await super.afterBind();
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
@@ -419,7 +419,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
     super.disconnectedCallback();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     let template: string | null = null;
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {

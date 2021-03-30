@@ -60,7 +60,7 @@ export class ShopifyNestApiExplorerInstagramComponent extends ShopifyNestApiExpl
     selectApiQueryValue: this.selectApiQueryValue,
   };
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 

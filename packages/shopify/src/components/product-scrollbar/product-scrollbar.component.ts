@@ -1,10 +1,10 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { Pjax, Prefetch } from "@ribajs/router";
 
 export class ShopifyProductScrollbarComponent extends Component {
   public static tagName = "shopify-product-scrollbar";
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -86,11 +86,11 @@ export class ShopifyProductScrollbarComponent extends Component {
     }
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return null;
   }
 }

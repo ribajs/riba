@@ -4,7 +4,11 @@
  * @see https://developer.mozilla.org/de/docs/Web/Web_Components/Using_custom_elements
  */
 import "@ribajs/types";
-import { EventHandler, ObservedAttributesToCheck } from "../interfaces";
+import {
+  EventHandler,
+  ObservedAttributesToCheck,
+  TemplateFunction,
+} from "../interfaces";
 import { Binding } from "../binding";
 import { parseJsonString, camelCase } from "@ribajs/utils/src/type";
 import { getRandomColor, consoleColoured } from "@ribajs/utils/src/color";
@@ -51,11 +55,7 @@ export abstract class BasicComponent extends HTMLElement {
     }
   }
 
-  protected abstract template():
-    | HTMLElement
-    | string
-    | null
-    | Promise<HTMLElement | string | null>;
+  protected abstract template(): ReturnType<TemplateFunction>;
 
   protected _log(mode: "debug" | "info" | "log" | "error", ...args: unknown[]) {
     const namespace = this.constructor.name || this.tagName;

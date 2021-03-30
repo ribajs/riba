@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import template from "./iconset-example.component.html";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
@@ -7,13 +7,13 @@ import Color from "@sphinxxxx/color-conversion";
 export class IconsetExampleComponent extends Component {
   public static tagName = "iconset-example";
   protected eventDispatcher?: EventDispatcher;
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return ["iconset"];
   }
 
   protected scope = {
     size: 32,
-    iconset: [],
+    iconset: [] as string[],
     // Icon colors
     color: "",
     namespace: "main",
@@ -41,11 +41,11 @@ export class IconsetExampleComponent extends Component {
     console.debug("scope", this.scope);
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       // console.debug('Do not use template, because element has child nodes');

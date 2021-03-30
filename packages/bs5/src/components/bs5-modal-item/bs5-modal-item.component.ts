@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 
 import template from "./bs5-modal-item.component.html";
 import { getElementFromEvent } from "@ribajs/utils/src/dom";
@@ -23,11 +23,11 @@ export class Bs5ModalItemComponent extends Component {
 
   protected modalService?: Modal;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return ["modal", "index"];
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return ["modal"];
   }
 
@@ -96,7 +96,7 @@ export class Bs5ModalItemComponent extends Component {
       );
     }
   }
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return template;
   }
 }

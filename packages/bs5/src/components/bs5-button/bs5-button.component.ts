@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 
 interface Scope {
   animationClass: string;
@@ -10,7 +10,7 @@ export class Bs5ButtonComponent extends Component {
 
   protected autobind = true;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return ["animation-class"];
   }
 
@@ -80,7 +80,7 @@ export class Bs5ButtonComponent extends Component {
     // console.debug('afterBind', this.scope);
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
@@ -114,7 +114,7 @@ export class Bs5ButtonComponent extends Component {
     this.removeEventListener("click", this.scope.onClick);
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return null;
   }
 }

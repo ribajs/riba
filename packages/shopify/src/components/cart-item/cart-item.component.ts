@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { ShopifyCartLineItem, ShopifyCartObject } from "../../interfaces";
 import { ShopifyCartService } from "../../services";
@@ -40,7 +40,7 @@ export interface Scope {
 export class ShopifyCartItemComponent extends Component {
   public static tagName = "shopify-cart-item";
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [
       "id",
       "title",
@@ -68,7 +68,7 @@ export class ShopifyCartItemComponent extends Component {
     ];
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return ["id", "variantId", "quantity"];
   }
 
@@ -272,7 +272,7 @@ export class ShopifyCartItemComponent extends Component {
     );
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       return null;

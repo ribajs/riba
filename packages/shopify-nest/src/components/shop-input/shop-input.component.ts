@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import Debug from "debug";
 import pugTemplate from "./shop-input.component.pug";
@@ -11,7 +11,7 @@ interface Scope {
 export class ShopifyNestShopInputComponent extends Component {
   public static tagName = "shopify-nest-shop-input";
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -46,7 +46,7 @@ export class ShopifyNestShopInputComponent extends Component {
     return this.init(ShopifyNestShopInputComponent.observedAttributes);
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     let template: string | null = null;
     // Only set the component template if there no child's already
     if (hasChildNodesTrim(this)) {

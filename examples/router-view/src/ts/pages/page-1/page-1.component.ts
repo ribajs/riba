@@ -1,9 +1,9 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 
 export class Page1PageComponent extends Component {
   public static tagName = "page-1-page";
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -18,11 +18,11 @@ export class Page1PageComponent extends Component {
     this.init(Page1PageComponent.observedAttributes);
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return null;
   }
 }

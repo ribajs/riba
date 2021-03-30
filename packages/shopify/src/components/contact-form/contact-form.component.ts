@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import template from "./contact-form.component.html";
 import { selectAll, hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { stripHtml } from "@ribajs/utils/src/type";
@@ -21,7 +21,7 @@ interface Scope {
 export class ShopifyContactFormComponent extends Component {
   public static tagName = "shopify-contact-form";
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -106,11 +106,11 @@ export class ShopifyContactFormComponent extends Component {
     this.form.setAttribute("novalidate", "");
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs already
     if (this && hasChildNodesTrim(this)) {
       return null;

@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import template from "./el-version.component.html";
 import { AppApiService } from "../../services";
 
@@ -17,7 +17,7 @@ export class ElVersionComponent extends Component {
   protected autobind = true;
   protected app = new AppApiService();
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -46,7 +46,7 @@ export class ElVersionComponent extends Component {
     return super.disconnectedCallback();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return template;
   }
 }

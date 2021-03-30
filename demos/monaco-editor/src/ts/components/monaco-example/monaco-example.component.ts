@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import pugTemplate from "./monaco-example.component.pug";
 
@@ -7,7 +7,7 @@ export class MonacoExampleComponent extends Component {
 
   protected autobind = true;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -43,7 +43,7 @@ export class MonacoExampleComponent extends Component {
     this.scope.article.body_html = this.innerHTML;
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
@@ -52,7 +52,7 @@ export class MonacoExampleComponent extends Component {
     super.disconnectedCallback();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       // console.debug('Do not use template, because element has child nodes');

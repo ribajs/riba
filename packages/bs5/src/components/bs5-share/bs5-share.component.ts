@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { getUrl } from "@ribajs/utils/src/url";
 import template from "./bs5-share.component.html";
 import labelTemplate from "./bs5-share.label.html";
@@ -25,7 +25,7 @@ export interface Scope {
   isNative: boolean;
   dropdownId: string;
   /**
-   * Object with share urls like whatsapp, telegram, instagram etc used if the native share is noit available
+   * Object with share urls like WhatsApp, Telegram, instagram etc used if the native share is not available
    * Only used if the browser has not an native share support like on android and iOS
    * */
   shareItems: ShareItem[];
@@ -52,7 +52,7 @@ declare global {
 
 /**
  * Component to share the a link
- * Similar projects wich are can share stuff:
+ * Similar projects which are can share stuff:
  *  * https://github.com/nimiq/web-share-shim
  *  * http://webintents.org/
  *  * http://chriswren.github.io/native-social-interactions/
@@ -65,7 +65,7 @@ export class Bs5ShareComponent extends Component {
 
   public _debug = false;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [
       "type",
       "title",
@@ -384,11 +384,11 @@ export class Bs5ShareComponent extends Component {
     await super.afterBind();
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return ["url"];
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     this.debug("template", this, hasChildNodesTrim(this));
     if (this && hasChildNodesTrim(this)) {
       // If a child is set, this is a custom label template

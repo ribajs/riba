@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { Pjax } from "@ribajs/router";
 import template from "./instagram.component.html";
 import { InstagramMediaData, InstagramApiService } from "@ribajs/shopify-tda";
@@ -18,7 +18,7 @@ export class ShopifyTdaInstagramComponent extends Component {
 
   public _debug = false;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return ["instagram-id", "open-links", "limit"];
   }
 
@@ -78,11 +78,11 @@ export class ShopifyTdaInstagramComponent extends Component {
     return this.loadMedia();
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return ["instagramId", "limit"];
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs already
     if (this && this.hasChildNodes()) {
       return null;

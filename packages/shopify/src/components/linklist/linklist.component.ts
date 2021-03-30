@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./linklist.component.html";
@@ -45,7 +45,7 @@ export class ShopifyLinklistComponent extends Component {
 
   protected autobind = true;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [
       "linklist",
       "handle",
@@ -240,14 +240,14 @@ export class ShopifyLinklistComponent extends Component {
     }
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return ["linklist"];
   }
 
   /**
    * Only set the component template if there no childs already
    */
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {

@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import {
   BarConfig,
@@ -51,7 +51,7 @@ interface Scope extends BarConfig {
 export class BarComponent extends Component {
   public static tagName = "rv-shopify-easdk-bar";
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [
       "buttons",
       "title",
@@ -160,7 +160,7 @@ export class BarComponent extends Component {
     await super.afterBind();
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
@@ -215,7 +215,7 @@ export class BarComponent extends Component {
     }
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     let template: string | null = null;
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {

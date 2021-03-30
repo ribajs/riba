@@ -35,7 +35,7 @@ export class HCaptchaFormComponent extends OcFormComponent {
 
   protected widgetID?: string;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [
       ...OcFormComponent.observedAttributes,
       "hcaptcha-src",
@@ -214,7 +214,7 @@ export class HCaptchaFormComponent extends OcFormComponent {
     ];
   }
 
-  // protected template() {
+  // protected template(): ReturnType<TemplateFunction> {
   //   return null;
   // }
 }

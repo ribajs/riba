@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import template from "./bs5-toggle-button-sidebar-example.component.html";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 
@@ -6,7 +6,7 @@ export class Bs5ToggleButtonSidebarExampleComponent extends Component {
   public static tagName = "rv-bs5-toggle-button-sidebar-example";
 
   protected autobind = true;
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -21,11 +21,11 @@ export class Bs5ToggleButtonSidebarExampleComponent extends Component {
     super.init(Bs5ToggleButtonSidebarExampleComponent.observedAttributes);
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       // console.debug('Do not use template, because element has child nodes');

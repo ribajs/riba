@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { htmlToElement, hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import Debug from "debug";
 import { LocalesStaticService } from "@ribajs/i18n";
@@ -26,7 +26,7 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
 
   protected autobind = true;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -765,7 +765,7 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
     );
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
@@ -788,7 +788,7 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
     super.disconnectedCallback();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     let template: string | null = null;
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {

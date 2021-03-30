@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import template from "./vue-example-wrapper.component.html";
 
 export class VueExampleWrapperComponent extends Component {
@@ -6,7 +6,7 @@ export class VueExampleWrapperComponent extends Component {
 
   protected autobind = true;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -23,11 +23,11 @@ export class VueExampleWrapperComponent extends Component {
     this.init(VueExampleWrapperComponent.observedAttributes);
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return template;
   }
 }

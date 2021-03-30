@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { Dropdown } from "@ribajs/bs5";
 import template from "./bs5-dropdown-example.component.html";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
@@ -12,7 +12,7 @@ export class Bs5DropdownExampleComponent extends Component {
   public static tagName = "bs5-dropdown-example";
 
   protected autobind = true;
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -76,7 +76,7 @@ export class Bs5DropdownExampleComponent extends Component {
     super.init(Bs5DropdownExampleComponent.observedAttributes);
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
@@ -85,7 +85,7 @@ export class Bs5DropdownExampleComponent extends Component {
     this.scope.selected = item;
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       // console.debug('Do not use template, because element has child nodes');

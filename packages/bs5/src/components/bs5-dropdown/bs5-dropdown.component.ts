@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { Dropdown } from "../../services/dropdown";
 
 export class Bs5DropdownComponent extends Component {
@@ -11,7 +11,7 @@ export class Bs5DropdownComponent extends Component {
   public dropdown?: Dropdown;
   protected dropdownEl: HTMLElement | Bs5DropdownComponent | null = null;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -37,7 +37,7 @@ export class Bs5DropdownComponent extends Component {
     this.init(Bs5DropdownComponent.observedAttributes);
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return null;
   }
 }

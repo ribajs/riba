@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 
 import template from "./i18n-static-example.component.html";
 
@@ -7,7 +7,7 @@ export class I18nStaticExampleComponent extends Component {
 
   protected autobind = true;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -28,11 +28,11 @@ export class I18nStaticExampleComponent extends Component {
     });
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return template;
   }
 }

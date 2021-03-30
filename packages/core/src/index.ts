@@ -5,6 +5,7 @@ export * from "./adapters";
 export * from "./binders";
 export * from "./component";
 export * from "./components";
+export * from "./components/templates/templates.component";
 export * from "./formatters";
 export * from "./binding";
 export * from "./parsers";

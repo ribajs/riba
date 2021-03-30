@@ -1,4 +1,4 @@
-import { Component, HttpService } from "@ribajs/core";
+import { Component, TemplateFunction, HttpService } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import Debug from "debug";
 
@@ -29,7 +29,7 @@ declare const shop: string;
 export class ShopifyNestAccountConnectsComponent extends Component {
   public static tagName = "shopify-nest-account-connects";
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return ["type"];
   }
 
@@ -182,7 +182,7 @@ export class ShopifyNestAccountConnectsComponent extends Component {
     await super.afterBind();
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return ["type"];
   }
 
@@ -190,7 +190,7 @@ export class ShopifyNestAccountConnectsComponent extends Component {
     super.disconnectedCallback();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     let template: string | null = null;
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {

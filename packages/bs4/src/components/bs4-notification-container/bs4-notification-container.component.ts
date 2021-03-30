@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./bs4-notification-container.component.html";
@@ -20,7 +20,7 @@ export class Bs4NotificationContainerComponent extends Component {
 
   protected notificationDispatcher?: EventDispatcher;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return ["icon-url", "position-class", "channel-name"];
   }
 
@@ -84,11 +84,11 @@ export class Bs4NotificationContainerComponent extends Component {
     );
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs or the childs are templates
     if (!hasChildNodesTrim(this)) {
       return template;

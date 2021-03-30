@@ -1,7 +1,11 @@
-import { handleizeFormatter, FormatterFn } from "@ribajs/core";
+import {
+  handleizeFormatter,
+  FormatterFn,
+  TemplatesComponent,
+  TemplateFunction,
+} from "@ribajs/core";
 import { Collapse } from "../../services/collapse";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import { TemplatesComponent } from "../templates/templates.component";
 
 import template from "./bs5-accordion.component.html";
 
@@ -54,7 +58,7 @@ export class Bs5AccordionComponent extends TemplatesComponent {
 
   // protected collapseServices: Collapse[] = [];
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return ["collapse-icon-src", "collapse-icon-size", "show-only-one"];
   }
 
@@ -204,7 +208,7 @@ export class Bs5AccordionComponent extends TemplatesComponent {
     return await super.afterBind();
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
@@ -227,7 +231,7 @@ export class Bs5AccordionComponent extends TemplatesComponent {
     super.disconnectedCallback();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs or the childs are templates
     if (!hasChildNodesTrim(this) || this.hasOnlyTemplateChilds()) {
       return template;

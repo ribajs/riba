@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { Collapse } from "../../services/collapse";
 
@@ -16,7 +16,7 @@ export class Bs5NavbarComponent extends Component {
   protected collapseTargets: Map<HTMLElement, Collapse> = new Map();
   protected routerEvents?: EventDispatcher;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return ["collapse-selector"];
   }
 
@@ -172,7 +172,7 @@ export class Bs5NavbarComponent extends Component {
     }
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return null;
   }
 }

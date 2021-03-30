@@ -3,7 +3,7 @@
  */
 
 import Color from "@sphinxxxx/color-conversion";
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import template from "./bs4-colorpicker.component.html";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
@@ -180,7 +180,7 @@ interface Scope extends ColorPickerOptions {
 
 export class Bs4ColorPickerComponent extends Component {
   public static tagName = "bs4-colorpicker";
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [
       "namespace",
       "alpha",
@@ -231,7 +231,7 @@ export class Bs4ColorPickerComponent extends Component {
     console.debug("scope", this.scope);
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
@@ -268,7 +268,7 @@ export class Bs4ColorPickerComponent extends Component {
     this.eventDispatcher?.trigger("done", color);
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {

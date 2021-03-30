@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import {
   ShopifyProductVariant,
   ShopifyProduct,
@@ -42,7 +42,7 @@ export class ShopifyProductItemComponent extends Component {
    * handle is the product handle to get the product json object
    * extras are product data wich is only avaiable over liquid and not over the product json object
    */
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return ["handle", "extras"];
   }
 
@@ -278,11 +278,11 @@ export class ShopifyProductItemComponent extends Component {
     this.activateOptions();
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return ["handle"];
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs already
     if (this && hasChildNodesTrim(this)) {
       return null;

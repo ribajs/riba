@@ -1,4 +1,5 @@
 import { Component } from "../../component/component";
+import { TemplateFunction } from "../../interfaces";
 
 interface Scope {
   // properties
@@ -32,7 +33,7 @@ export class VideoComponent extends Component {
   protected alreadyStartedPlaying = false;
   protected wasPaused = false;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return ["video-src", "autoplay-on-min-buffer", "autoplay-media-query"];
   }
 
@@ -298,7 +299,7 @@ export class VideoComponent extends Component {
     super.disconnectedCallback();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return null;
   }
 }

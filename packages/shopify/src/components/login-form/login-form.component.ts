@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import template from "./login-form.component.html";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 
@@ -46,7 +46,7 @@ interface Scope {
 export class ShopifyLoginFormComponent extends Component {
   public static tagName = "shopify-login-form";
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -240,11 +240,11 @@ export class ShopifyLoginFormComponent extends Component {
     this.initValidation();
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs already
     if (this && hasChildNodesTrim(this)) {
       return null;

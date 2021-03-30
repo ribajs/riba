@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import Debug from "debug";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import pugTemplate from "./socket-event-card.component.pug";
@@ -15,7 +15,7 @@ export class ShopifyNestSocketEventCardComponent extends Component {
 
   protected autobind = true;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return ["event", "data", "role"];
   }
 
@@ -55,7 +55,7 @@ export class ShopifyNestSocketEventCardComponent extends Component {
     await super.afterBind();
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return ["event"];
   }
 
@@ -78,7 +78,7 @@ export class ShopifyNestSocketEventCardComponent extends Component {
     super.disconnectedCallback();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     let template: string | null = null;
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {

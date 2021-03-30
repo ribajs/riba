@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 
 export abstract class ShopifySectionComponent extends Component {
   public static tagName = "shopify-section";

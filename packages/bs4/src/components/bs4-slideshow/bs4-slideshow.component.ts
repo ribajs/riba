@@ -1,8 +1,8 @@
-import { TemplatesComponent } from "../templates/templates.component";
 import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { clone, camelCase } from "@ribajs/utils/src/type";
 import { throttle, debounce } from "@ribajs/utils/src/control";
+import { TemplateFunction, TemplatesComponent } from "@ribajs/core";
 
 import {
   Dragscroll,
@@ -160,7 +160,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     return this._indicatorsElement;
   }
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [
       "min-width",
       "slides-to-show",
@@ -1177,7 +1177,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     }
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
@@ -1276,7 +1276,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     return super.disconnectedCallback();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs or the childs are templates
     if (!hasChildNodesTrim(this) || this.hasOnlyTemplateChilds()) {
       // ('Full template!', this.templateIndicators);

@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import {
   getViewportDimensions,
@@ -85,7 +85,7 @@ export class Bs4SidebarComponent extends Component {
 
   protected autobind = true;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [
       "id",
       "container-selector",
@@ -311,7 +311,9 @@ export class Bs4SidebarComponent extends Component {
   }
 
   protected setContainersStyle(state: State) {
-    const containers = this.getContainers() || [];
+    const containers:
+      | NodeListOf<HTMLUnknownElement>
+      | Array<HTMLUnknownElement> = this.getContainers() || [];
 
     if (containers) {
       for (let i = 0; i < containers.length; i++) {
@@ -405,7 +407,7 @@ export class Bs4SidebarComponent extends Component {
     await super.afterBind();
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return ["id"];
   }
 
@@ -446,7 +448,7 @@ export class Bs4SidebarComponent extends Component {
     window.removeEventListener("resize", this.onEnvironmentChanges, false);
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     if (!hasChildNodesTrim(this)) {
       console.warn(
         "No child elements found, this component as no template so you need to define your own as child of this component."

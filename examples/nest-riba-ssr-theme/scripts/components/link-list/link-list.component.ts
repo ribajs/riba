@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 
 export interface Link {
   label: string;
@@ -35,7 +35,7 @@ export class LinkListComponent extends Component {
     ],
   };
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -48,7 +48,7 @@ export class LinkListComponent extends Component {
     this.init(LinkListComponent.observedAttributes);
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return null;
   }
 }

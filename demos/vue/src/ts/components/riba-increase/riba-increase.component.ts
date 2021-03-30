@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import template from "./riba-increase.component.html";
 
 export class RibaIncreaseComponent extends Component {
@@ -8,7 +8,7 @@ export class RibaIncreaseComponent extends Component {
 
   public _debug = true;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -30,11 +30,11 @@ export class RibaIncreaseComponent extends Component {
     this.init(RibaIncreaseComponent.observedAttributes);
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return template;
   }
 }

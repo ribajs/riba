@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 
 import template from "./bs4-tabs-attr-example.component.html";
 
@@ -16,7 +16,7 @@ export class Bs4TabsAttrExampleComponent extends Component {
     this.init([]);
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return template;
   }
 }

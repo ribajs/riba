@@ -1,4 +1,10 @@
-import { Component, HttpService, HttpMethod, HttpDataType } from "@ribajs/core";
+import {
+  Component,
+  TemplateFunction,
+  HttpService,
+  HttpMethod,
+  HttpDataType,
+} from "@ribajs/core";
 import template from "./bs5-form.component.html";
 import { stripHtml } from "@ribajs/utils/src/type";
 import { getUID, hasChildNodesTrim } from "@ribajs/utils/src/dom";
@@ -63,7 +69,7 @@ export class Bs5FormComponent extends Component {
   public _debug = false;
   protected autobind = true;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [
       "id",
       "disable-submit-until-change",
@@ -263,7 +269,7 @@ export class Bs5FormComponent extends Component {
     return settings;
   }
 
-  protected onInvalidForm(event: Event) {
+  protected onInvalidForm(event: Event): void {
     this.debug("Form not valid", this.scope);
     // stop native submit
     event.preventDefault();
@@ -365,7 +371,7 @@ export class Bs5FormComponent extends Component {
     }
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     if (hasChildNodesTrim(this)) {
       this.initForm();
       return null;

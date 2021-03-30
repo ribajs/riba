@@ -19,7 +19,7 @@ export class ShopifyNestContentBlogArticlesComponent extends ShopifyNestContentC
 
   protected autobind = true;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return ["blog-id"];
   }
 
@@ -77,7 +77,7 @@ export class ShopifyNestContentBlogArticlesComponent extends ShopifyNestContentC
     await super.afterBind();
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
@@ -100,7 +100,7 @@ export class ShopifyNestContentBlogArticlesComponent extends ShopifyNestContentC
     super.disconnectedCallback();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     let template: string | null = null;
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {

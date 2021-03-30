@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { getUrl } from "@ribajs/utils/src/url";
 import template from "./bs4-share.component.html";
 import labelTemplate from "./bs4-share.label.html";
@@ -65,7 +65,7 @@ export class Bs4ShareComponent extends Component {
 
   public _debug = false;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [
       "type",
       "title",
@@ -384,11 +384,11 @@ export class Bs4ShareComponent extends Component {
     await super.afterBind();
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return ["url"];
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     this.debug("template", this, hasChildNodesTrim(this));
     if (this && hasChildNodesTrim(this)) {
       // If a child is set, this is a custom label template

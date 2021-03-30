@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import template from "./each-item-example.component.html";
 
 export class EachItemExampleComponent extends Component {
@@ -68,7 +68,7 @@ export class EachItemExampleComponent extends Component {
     });
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return template;
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import {
   ShopifyCartLineItem,
   ShopifyCartObject,
@@ -30,7 +30,7 @@ export class ShopifyCartComponent extends Component {
     return ["shipping-address", "estimate-shipping-rate"];
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
@@ -213,7 +213,7 @@ export class ShopifyCartComponent extends Component {
     await super.afterBind();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       return null;

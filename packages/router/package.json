@@ -43,8 +43,8 @@
     "/dist"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.13.10",
-    "@babel/core": "^7.13.10",
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.13.14",
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.13.8",
     "@babel/preset-env": "^7.13.12",
@@ -53,15 +53,15 @@
     "@babel/runtime-corejs3": "^7.13.10",
     "@ribajs/eslint-config": "workspace:infra/eslint-config",
     "@ribajs/tsconfig": "workspace:infra/tsconfig",
-    "@types/jest": "^26.0.21",
-    "@typescript-eslint/eslint-plugin": "^4.19.0",
-    "@typescript-eslint/experimental-utils": "^4.19.0",
-    "@typescript-eslint/parser": "^4.19.0",
-    "@typescript-eslint/typescript-estree": "^4.19.0",
+    "@types/jest": "^26.0.22",
+    "@typescript-eslint/eslint-plugin": "^4.20.0",
+    "@typescript-eslint/experimental-utils": "^4.20.0",
+    "@typescript-eslint/parser": "^4.20.0",
+    "@typescript-eslint/typescript-estree": "^4.20.0",
     "babel-loader": "^8.2.2",
     "babel-plugin-array-includes": "^2.0.3",
     "core-js": "^3.9.1",
-    "eslint": "^7.22.0",
+    "eslint": "^7.23.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-visitor-keys": "^2.0.0",
@@ -69,8 +69,8 @@
     "regexpp": "^3.1.0",
     "tsutils": "^3.21.0",
     "typescript": "^4.2.3",
-    "webpack": "^5.27.2",
-    "webpack-cli": "^4.5.0"
+    "webpack": "^5.28.0",
+    "webpack-cli": "^4.6.0"
   },
   "dependencies": {
     "@ribajs/cache": "workspace:packages/cache",

@@ -25,10 +25,10 @@
   "devDependencies": {
     "@babel/runtime": "^7.13.10",
     "@babel/runtime-corejs3": "^7.13.10",
-    "@types/jest": "^26.0.21",
-    "@types/node": "^14.14.35",
+    "@types/jest": "^26.0.22",
+    "@types/node": "^14.14.37",
     "babel-jest": "^26.6.3",
-    "eslint": "^7.22.0",
+    "eslint": "^7.23.0",
     "jest": "^26.6.3",
     "jest-config": "^26.6.3",
     "jest-extended": "^0.11.5",

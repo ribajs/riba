@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 
 interface Scope {
   time: string;
@@ -27,7 +27,7 @@ export class TimerComponent extends Component {
 
   protected autobind = true;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [
       "time",
       "countdown-years",
@@ -38,7 +38,7 @@ export class TimerComponent extends Component {
     ];
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return ["time"];
   }
 
@@ -211,7 +211,7 @@ export class TimerComponent extends Component {
     this.cancelCountdownInterval();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return null;
   }
 }

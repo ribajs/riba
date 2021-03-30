@@ -1,4 +1,4 @@
-import { TemplatesComponent } from "@ribajs/core/src/components/templates/templates.component";
+import { TemplatesComponent, TemplateFunction } from "@ribajs/core";
 import { throttle } from "@ribajs/utils/src/control";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 
@@ -61,7 +61,7 @@ export class ContentSliderComponent extends TemplatesComponent {
     },
   ];
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [
       "active-class",
       "active-column-classes",
@@ -200,7 +200,7 @@ export class ContentSliderComponent extends TemplatesComponent {
     }
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
@@ -315,7 +315,7 @@ export class ContentSliderComponent extends TemplatesComponent {
     this.scope.transform = `translateX(-${x}px)`;
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs or the childs are templates
     if (!hasChildNodesTrim(this) || this.hasOnlyTemplateChilds()) {
       this.debug("Use template", template);

@@ -7,10 +7,15 @@
     "inlineSourceMap": true,
     "noUnusedLocals": true,
     "esModuleInterop": true,
-    "strict": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "strict": false,
     "noImplicitAny": true,
     "noImplicitThis": true,
     "allowSyntheticDefaultImports": true,
+    "incremental": true,
     "lib": ["ES2015", "ESNext", "DOM"]
   }
 }

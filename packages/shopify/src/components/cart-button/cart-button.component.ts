@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { Pjax } from "@ribajs/router";
 import { ShopifyCartService, ShopifyCartObject } from "@ribajs/shopify";
 import { onRoute } from "@ribajs/utils/src/url";
@@ -17,7 +17,7 @@ export class ShopifyCartButtonComponent extends Component {
 
   public static cartUrl = "/cart";
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -95,11 +95,11 @@ export class ShopifyCartButtonComponent extends Component {
     });
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       return null;

@@ -17,7 +17,7 @@ export class <%= classify(name) %>Component extends Component {
 
   protected autobind = true;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return ['hello'];
   }
 
@@ -52,7 +52,7 @@ export class <%= classify(name) %>Component extends Component {
     await super.afterBind();
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
@@ -79,7 +79,7 @@ export class <%= classify(name) %>Component extends Component {
     return super.disconnectedCallback();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       this.debug('Do not use template, because element has child nodes');

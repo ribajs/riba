@@ -1,9 +1,9 @@
-import { BasicComponent } from "@ribajs/core";
+import { BasicComponent, TemplateFunction } from "@ribajs/core";
 
 export class Bs5IconComponent extends BasicComponent {
   public static tagName = "bs5-icon";
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return ["size", "width", "height", "src", "color", "direction"];
   }
 
@@ -226,7 +226,7 @@ export class Bs5IconComponent extends BasicComponent {
     }
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return null;
   }
 }

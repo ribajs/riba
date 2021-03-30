@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./bs4-notifications-example.component.html";
@@ -8,7 +8,7 @@ export class Bs4NotificationsExampleComponent extends Component {
   public static tagName = "bs4-notifications-example";
 
   protected autobind = true;
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -60,11 +60,11 @@ export class Bs4NotificationsExampleComponent extends Component {
     notificationDispatcher.trigger("show-notification", modal);
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       // console.debug('Do not use template, because element has child nodes');

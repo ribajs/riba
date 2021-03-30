@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { Langcode } from "../../interfaces";
 import { ALocalesService } from "../../services/locales-base.service";
 
@@ -113,7 +113,7 @@ export abstract class AI18nSwitcherComponent extends Component {
     this.localesService.setLangcode(langcode);
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
@@ -121,7 +121,7 @@ export abstract class AI18nSwitcherComponent extends Component {
     super.disconnectedCallback();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return null;
   }
 }

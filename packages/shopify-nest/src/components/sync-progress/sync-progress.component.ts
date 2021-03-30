@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import Debug from "debug";
 import pugTemplate from "./sync-progress.component.pug";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
@@ -17,7 +17,7 @@ export class ShopifyNestSyncProgressComponent extends Component {
 
   protected autobind = true;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -227,7 +227,7 @@ export class ShopifyNestSyncProgressComponent extends Component {
     await super.afterBind();
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
@@ -250,7 +250,7 @@ export class ShopifyNestSyncProgressComponent extends Component {
     super.disconnectedCallback();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     let template: string | null = null;
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {

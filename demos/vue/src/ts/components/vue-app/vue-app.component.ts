@@ -34,7 +34,7 @@ export class VueAppComponent extends VueComponent {
     this.vue?.component("v-increase", Increase);
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return null;
   }
 }

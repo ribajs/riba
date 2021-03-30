@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { Pjax } from "@ribajs/router";
 import {
   getViewportDimensions,
@@ -21,7 +21,7 @@ export interface Scope {
 export class ShopifyTdaInstagramScrollbarComponent extends Component {
   public static tagName = "shopify-tda-instagram-scrollbar";
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return ["instagram-id", "open-links", "limit", "open-url"];
   }
 
@@ -125,11 +125,11 @@ export class ShopifyTdaInstagramScrollbarComponent extends Component {
     return this.loadMedia();
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return ["instagramId", "limit"];
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       return null;

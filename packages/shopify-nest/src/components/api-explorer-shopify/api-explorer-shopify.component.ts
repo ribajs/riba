@@ -333,7 +333,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
     selectApiQueryValue: this.selectApiQueryValue,
   };
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 

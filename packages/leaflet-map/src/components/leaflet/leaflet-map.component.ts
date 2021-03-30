@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { isNumber, justDigits } from "@ribajs/utils/src/type";
 import { getUID } from "@ribajs/utils/src/dom";
@@ -33,7 +33,7 @@ export class LeafletMapComponent extends Component {
   private map?: Leaflet.Map;
   private events: EventDispatcher = new EventDispatcher();
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [
       "map-selector",
       "initial-lat",
@@ -148,7 +148,7 @@ export class LeafletMapComponent extends Component {
     return numberArr as PointTuple;
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     for (const el of Array.from(this.children)) {
       if (el.tagName === "ICON") {
         const iconName = el.getAttribute("name");

@@ -26,7 +26,7 @@ export class IndexPageComponent extends PageComponent {
     },
   };
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -51,7 +51,7 @@ export class IndexPageComponent extends PageComponent {
     await super.afterBind();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return pugTemplate(this.scope);
   }
 }

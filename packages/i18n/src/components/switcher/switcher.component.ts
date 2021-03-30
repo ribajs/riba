@@ -1,4 +1,4 @@
-import { TypeOfComponent } from "@ribajs/core";
+import { TypeOfComponent, TemplateFunction } from "@ribajs/core";
 import { AI18nSwitcherComponent } from "../abstract-switcher/switcher.abstract.component";
 import { Langcode } from "../../interfaces";
 import { ALocalesService } from "../../services/locales-base.service";
@@ -11,7 +11,7 @@ export const i18nSwitcherComponentWrapper = (
 
     public _debug = false;
 
-    static get observedAttributes() {
+    static get observedAttributes(): string[] {
       return [];
     }
 
@@ -56,7 +56,7 @@ export const i18nSwitcherComponentWrapper = (
       return super.setLangcode(langcode);
     }
 
-    protected requiredAttributes() {
+    protected requiredAttributes(): string[] {
       return [];
     }
 
@@ -64,7 +64,7 @@ export const i18nSwitcherComponentWrapper = (
       super.disconnectedCallback();
     }
 
-    protected template() {
+    protected template(): ReturnType<TemplateFunction> {
       return null;
     }
   };

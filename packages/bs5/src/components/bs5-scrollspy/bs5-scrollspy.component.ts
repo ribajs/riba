@@ -4,6 +4,7 @@ import {
 } from "../bs5-contents/bs5-contents.component";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./bs5-scrollspy.component.html";
+import { TemplateFunction } from "@ribajs/core";
 
 export interface Anchor {
   element: HTMLHeadingElement;
@@ -30,7 +31,7 @@ export class Bs5ScrollspyComponent extends Bs5ContentsComponent {
 
   protected wrapperElement?: Element;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [
       "headers-start",
       "headers-depth",
@@ -62,11 +63,11 @@ export class Bs5ScrollspyComponent extends Bs5ContentsComponent {
     this.init(Bs5ScrollspyComponent.observedAttributes);
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return ["headersStart", "headersDepth", "headerParentSelector"];
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       return null;

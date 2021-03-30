@@ -67,29 +67,29 @@ declare module "@sphinxxxx/color-conversion" {
   }
 }
 
-declare module "@popperjs/core" {
-  // See https://github.com/popperjs/popper-core/blob/master/src/types.js
-  export interface Options {
-    placement?: "start" | "end";
-    modifiers: Array<any>;
-    strategy: any;
-    onFirstUpdate?: (shape: any) => void;
-  }
+// declare module "@popperjs/core" {
+//   // See https://github.com/popperjs/popper-core/blob/master/src/types.js
+//   export interface Options {
+//     placement?: "start" | "end";
+//     modifiers: Array<any>;
+//     strategy: any;
+//     onFirstUpdate?: (shape: any) => void;
+//   }
 
-  // TODO
-  export type preventOverflow = any;
-  export type flip = any;
-  export type Boundary = any;
+//   // TODO
+//   export type preventOverflow = any;
+//   export type flip = any;
+//   export type Boundary = any;
 
-  export function createPopper(
-    button: HTMLUnknownElement,
-    tooltip: HTMLUnknownElement,
-    options: Options
-  ): void;
+//   export function createPopper(
+//     button: HTMLUnknownElement,
+//     tooltip: HTMLUnknownElement,
+//     options: Options
+//   ): void;
 
-  export function createPopperLite(
-    button: HTMLUnknownElement,
-    tooltip: HTMLUnknownElement,
-    options: Options
-  ): void;
-}
+//   export function createPopperLite(
+//     button: HTMLUnknownElement,
+//     tooltip: HTMLUnknownElement,
+//     options: Options
+//   ): void;
+// }

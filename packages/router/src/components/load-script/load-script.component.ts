@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { loadScript, getUID } from "@ribajs/utils/src/dom";
 
 interface Scope {
@@ -13,7 +13,7 @@ export class RouterLoadScriptComponent extends Component {
 
   protected autobind = false;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return ["src", "id", "async", "defer"];
   }
 
@@ -41,11 +41,11 @@ export class RouterLoadScriptComponent extends Component {
     loadScript(this.scope.src, this.scope.id, this.scope.async);
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return ["src"];
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return null;
   }
 }

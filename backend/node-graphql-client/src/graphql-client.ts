@@ -1,18 +1,11 @@
-import { GraphQLClient as _GraphQLClient, gql } from 'graphql-request';
-import type { Variables, RequestDocument } from 'graphql-request/dist/types';
+import { GraphQLClient as _GraphQLClient } from 'graphql-request';
+import type { Variables } from 'graphql-request/dist/types';
 import type { RequestInit } from 'graphql-request/dist/types.dom';
 
 import { loadDocuments } from '@graphql-tools/load';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
-// import { CodeFileLoader } from '@graphql-tools/code-file-loader';
 
-import { promises as fs } from 'fs';
-import { extname } from 'path';
 import findRoot = require('find-root');
-import { promisify } from 'util';
-import * as _glob from 'glob';
-
-const glob = promisify(_glob);
 
 export class GraphQLClient extends _GraphQLClient {
   protected root: string;
@@ -23,51 +16,6 @@ export class GraphQLClient extends _GraphQLClient {
       root = findRoot(process.cwd());
     }
     this.root = root;
-  }
-
-  protected async searchFiles(filePath: string) {
-    if (!extname(filePath)) {
-      filePath += '.{gql,graphql}';
-    }
-    const pattern = `${this.root}/**/${filePath}`;
-    const files = await glob(pattern, { nodir: true });
-    if (files.length <= 0) {
-      throw new Error('No file found for pattern ' + pattern);
-    }
-    return files;
-  }
-
-  protected async searchFile(filePath: string) {
-    const files = await this.searchFiles(filePath);
-
-    if (files.length >= 2) {
-      throw new Error(
-        'Unclear file path specification, multiple files found: ' +
-          files.join(', '),
-      );
-    }
-
-    return files[0];
-  }
-
-  protected async loadFile(filePath: string) {
-    const file = await this.searchFile(filePath);
-    const content = await fs.readFile(file, 'utf8');
-    return content;
-  }
-
-  /**
-   * Load GraphQL documents (query/mutation/subscription/fragment)
-   * @param filePath
-   * @returns
-   * @see https://www.graphql-tools.com/docs/documents-loading/
-   */
-  async loadRequestDocumentCustom(filePath: string): Promise<RequestDocument> {
-    // const pattern = `${this.root}/**/${filePath}`;
-    const content = await this.loadFile(filePath);
-    return gql`
-      ${content}
-    `;
   }
 
   /**
@@ -90,9 +38,13 @@ export class GraphQLClient extends _GraphQLClient {
    * @param options
    * @param queryFilePath
    */
-  async execute(actionFilePath: string, variables?: Variables) {
+  async execute<T = any, V = Variables>(
+    actionFilePath: string,
+    variables?: V,
+    requestHeaders?: RequestInit['headers'],
+  ) {
     const action = await this.loadRequestDocument(actionFilePath);
-    const data = await this.request(action, variables);
+    const data = await this.request<T, V>(action, variables, requestHeaders);
     return data;
   }
 }

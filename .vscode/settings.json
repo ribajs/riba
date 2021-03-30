@@ -26,6 +26,7 @@
     "draggable",
     "dragscroll",
     "easdk",
+    "eslintplugin",
     "fadeshow",
     "favicons",
     "formaction",
@@ -47,6 +48,7 @@
     "octobercms",
     "pathnames",
     "photoswipe",
+    "pinterest",
     "pjax",
     "pnpify",
     "popperjs",
@@ -68,6 +70,7 @@
     "toggleable",
     "typecheck",
     "webpackbar",
+    "whatsapp",
     "xlink",
     "yarnpkg"
   ],

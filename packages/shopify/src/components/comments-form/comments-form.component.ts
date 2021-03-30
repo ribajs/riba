@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./comments-form.component.html";
 
@@ -43,7 +43,7 @@ interface Scope {
 export class ShopifyCommentsFormComponent extends Component {
   public static tagName = "shopify-comments-form";
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -130,11 +130,11 @@ export class ShopifyCommentsFormComponent extends Component {
     this.initValidation();
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs already
     if (this && hasChildNodesTrim(this)) {
       return null;

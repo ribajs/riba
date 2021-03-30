@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./rv-photoswipe.component.html";
 import fullscreenTemplate from "./rv-photoswipe.fullscreen.component.html";
@@ -88,7 +88,7 @@ export class PhotoswipeComponent extends Component {
     closeElClasses: [], // 'item', 'caption', 'zoom-wrap', 'ui', 'top-bar'
   };
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [
       "open-image-on-click",
       "fullscreen-container-selector",
@@ -581,7 +581,7 @@ export class PhotoswipeComponent extends Component {
     return params;
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
@@ -593,7 +593,7 @@ export class PhotoswipeComponent extends Component {
     this.removeEventListeners();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs already<rv-photswipe>serhsehsehjiu </>
     if (hasChildNodesTrim(this)) {
       return (this as HTMLElement).innerHTML + fullscreenTemplate;

@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import template from "./bs4-taggedimage-example.component.html";
 import { TaggedImageTag as Tag } from "@ribajs/bs4";
 
@@ -17,7 +17,7 @@ export class Bs4TaggedImageExampleComponent extends Component {
 
   protected autobind = true;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -88,7 +88,7 @@ export class Bs4TaggedImageExampleComponent extends Component {
     this.init(Bs4TaggedImageExampleComponent.observedAttributes);
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return template;
   }
 }

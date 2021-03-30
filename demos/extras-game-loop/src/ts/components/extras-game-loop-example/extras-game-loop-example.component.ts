@@ -2,7 +2,7 @@
  * This example and the Gameloop are based on this greate blo article: https://isaacsukin.com/news/2015/01/detailed-explanation-javascript-game-loops-and-timing
  */
 
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 
 import { Gameloop } from "@ribajs/extras";
 
@@ -60,7 +60,7 @@ export class ExtrasGameLoopExampleComponent extends Component {
     }
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return template;
   }
 }

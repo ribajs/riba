@@ -1,8 +1,12 @@
-import { handleizeFormatter, FormatterFn } from "@ribajs/core";
+import {
+  handleizeFormatter,
+  FormatterFn,
+  TemplateFunction,
+  TemplatesComponent,
+} from "@ribajs/core";
 import templateHorizontal from "./bs5-tabs-horizontal.component.html";
 import templateVertical from "./bs5-tabs-vertical.component.html";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import { TemplatesComponent } from "../templates/templates.component";
 import { throttle } from "@ribajs/utils/src/control";
 
 const handleize = handleizeFormatter.read as FormatterFn;
@@ -64,7 +68,7 @@ export class Bs5TabsComponent extends TemplatesComponent {
   protected tabPanes?: NodeListOf<Element>;
   protected scrollable?: Element | null;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [
       "option-tabs-auto-height",
       "option-tabs-angle",
@@ -376,7 +380,7 @@ export class Bs5TabsComponent extends TemplatesComponent {
     await super.afterBind();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs or the childs are templates
     if (!hasChildNodesTrim(this) || this.hasOnlyTemplateChilds()) {
       if (this.scope.optionTabsAngle === "horizontal") {

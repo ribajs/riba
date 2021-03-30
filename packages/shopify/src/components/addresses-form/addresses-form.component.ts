@@ -1,4 +1,4 @@
-import { Component, HttpService } from "@ribajs/core";
+import { Component, TemplateFunction, HttpService } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./addresses-form.component.html";
 
@@ -50,7 +50,7 @@ interface Scope {
 export class ShopifyAddressesComponent extends Component {
   public static tagName = "shopify-addresses-form";
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -172,11 +172,11 @@ export class ShopifyAddressesComponent extends Component {
     this.initValidation();
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs already
     if (this && hasChildNodesTrim(this)) {
       return null;

@@ -7,7 +7,7 @@
  * @property targetId Passed attribute value, see `target-id` attribute
  */
 
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { TOGGLE_BUTTON } from "../../constants";
@@ -33,11 +33,11 @@ interface Scope {
 
 // TODO extend from Bs5ButtonComponent
 export class Bs5ToggleButtonComponent extends Component {
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return ["target-id"];
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return ["targetId"];
   }
 
@@ -172,7 +172,7 @@ export class Bs5ToggleButtonComponent extends Component {
     }
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     if (!hasChildNodesTrim(this)) {
       console.warn(
         "No child elements found, this component as no template so you need to define your own as child of this component."

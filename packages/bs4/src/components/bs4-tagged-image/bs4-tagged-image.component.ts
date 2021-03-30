@@ -1,6 +1,6 @@
 import { extend } from "@ribajs/utils";
 
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { PopoverOptions } from "@ribajs/bs4";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { TaggedImageTag as Tag } from "../../interfaces";
@@ -37,7 +37,7 @@ export class Bs4TaggedImageComponent extends Component {
   protected autobind = true;
   public _debug = true;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return ["tags", "options", "debug"];
   }
 
@@ -96,7 +96,7 @@ export class Bs4TaggedImageComponent extends Component {
     }
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     if (hasChildNodesTrim(this)) {
       this.parseChildTags();
     }

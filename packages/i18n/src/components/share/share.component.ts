@@ -1,4 +1,4 @@
-import { TypeOfComponent } from "@ribajs/core";
+import { TypeOfComponent, TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import {
   Bs4ShareComponent,
@@ -38,7 +38,7 @@ export const i18nShareComponentWrapper = (
 
     public _debug = false;
 
-    static get observedAttributes() {
+    static get observedAttributes(): string[] {
       return [
         ...Bs4ShareComponent.observedAttributes,
         "text-i18n",
@@ -120,7 +120,7 @@ export const i18nShareComponentWrapper = (
       await super.afterBind();
     }
 
-    protected template() {
+    protected template(): ReturnType<TemplateFunction> {
       this.debug("template", this, hasChildNodesTrim(this));
       if (this && hasChildNodesTrim(this)) {
         // If a child is set, this is a custom label template

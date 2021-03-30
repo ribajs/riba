@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import CarouselService from "../../services/carousel.service";
 import { CarouselOption } from "../../interfaces";
 
@@ -25,7 +25,7 @@ export interface Scope {
 export class Bs4CarouselComponent extends Component {
   public static tagName = "bs4-carousel";
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [
       "interval",
       "keyboard",
@@ -38,7 +38,7 @@ export class Bs4CarouselComponent extends Component {
     ];
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
@@ -139,7 +139,7 @@ export class Bs4CarouselComponent extends Component {
     super.init(Bs4CarouselComponent.observedAttributes);
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return null;
   }
 }

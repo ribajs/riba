@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 
 import template from "./bs5-toast-item.component.html";
 import { Toast, ToastNotification } from "../../services";
@@ -23,11 +23,11 @@ export class Bs5ToastItemComponent extends Component {
 
   protected toastService?: Toast;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return ["toast", "icon-url", "index"];
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return ["toast"];
   }
 
@@ -92,7 +92,7 @@ export class Bs5ToastItemComponent extends Component {
       toastContainer.onItemHide(event, el, this.scope.index, this.scope.toast);
     }
   }
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return template;
   }
 }

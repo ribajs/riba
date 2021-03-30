@@ -1,4 +1,4 @@
-import { Component, HttpService } from "@ribajs/core";
+import { Component, TemplateFunction, HttpService } from "@ribajs/core";
 import template from "./el-version.component.html";
 
 interface Scope {
@@ -15,7 +15,7 @@ export class ElVersionComponent extends Component {
   public _debug = true;
   protected autobind = true;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [];
   }
 
@@ -45,7 +45,7 @@ export class ElVersionComponent extends Component {
     return super.disconnectedCallback();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return template;
   }
 }

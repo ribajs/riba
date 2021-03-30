@@ -12,7 +12,7 @@ export class OcFormComponent extends Bs4FormComponent {
 
   public _debug = false;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [...Bs4FormComponent.observedAttributes, "october-handler"];
   }
 

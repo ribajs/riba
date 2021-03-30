@@ -1,4 +1,4 @@
-import { Component, View } from "@ribajs/core";
+import { Component, View, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { scrollTo } from "@ribajs/utils/src/dom";
 import { State } from "@ribajs/history";
@@ -17,7 +17,7 @@ export class RouterViewComponent extends Component {
   protected pjax: Pjax | null = null;
   protected prefetch: Prefetch | null = null;
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [
       "id",
       "action",
@@ -116,7 +116,7 @@ export class RouterViewComponent extends Component {
       return;
     }
 
-    // Only to anything if the viewID is eqal (in this way it is possible to have multiple views)
+    // Only to anything if the viewID is equal (in this way it is possible to have multiple views)
     if (viewId !== this.scope.id) {
       console.warn("not the right view", this.scope.id, viewId, dataset);
       return;
@@ -135,7 +135,7 @@ export class RouterViewComponent extends Component {
   }
 
   protected onTransitionCompleted(viewId: string) {
-    // Only to anything if the viewID is eqal (in this way it is possible to have multiple views)
+    // Only to anything if the viewID is equal (in this way it is possible to have multiple views)
     if (viewId !== this.scope.id) {
       return;
     }
@@ -154,7 +154,7 @@ export class RouterViewComponent extends Component {
     return Promise.resolve();
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
@@ -186,7 +186,7 @@ export class RouterViewComponent extends Component {
     this.initAndStartPjax();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     return null;
   }
 }

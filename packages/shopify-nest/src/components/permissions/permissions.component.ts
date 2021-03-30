@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { getElementFromEvent, hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import Debug from "debug";
 import { ACCESS_SCOPES } from "../../constants";
@@ -28,7 +28,7 @@ interface Scope {
 export class ShopifyNestPermissionsComponent extends Component {
   public static tagName = "shopify-nest-permissions";
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return ["default-scopes"];
   }
 
@@ -100,7 +100,7 @@ export class ShopifyNestPermissionsComponent extends Component {
     await super.afterBind();
   }
 
-  protected requiredAttributes() {
+  protected requiredAttributes(): string[] {
     return [];
   }
 
@@ -108,7 +108,7 @@ export class ShopifyNestPermissionsComponent extends Component {
     super.disconnectedCallback();
   }
 
-  protected template() {
+  protected template(): ReturnType<TemplateFunction> {
     let template: string | null = null;
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
