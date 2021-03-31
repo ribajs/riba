@@ -76,7 +76,7 @@ const uploadFile = (filePath) => __awaiter(void 0, void 0, void 0, function* () 
 });
 exports.uploadFile = uploadFile;
 /**
- * Note: You need write access to the repo to use ` bitbucket.repositories.getDownload` wich is used in this method
+ * Note: You need write access to the repo to use ` bitbucket.repositories.getDownload` which is used in this method
  * @param filename
  */
 const getDownloadFileUrl = (filename) => __awaiter(void 0, void 0, void 0, function* () {

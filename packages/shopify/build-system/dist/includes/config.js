@@ -44,7 +44,8 @@ if ((pkg === null || pkg === void 0 ? void 0 : pkg.dependencies) && (pkg === nul
     const ribaShopifyPath = require.resolve("@ribajs/shopify");
     ribaShopifyRoot = path_1.default.resolve(themeRoot, ribaShopifyPath);
 }
-if ((pkg === null || pkg === void 0 ? void 0 : pkg.resolutions) && ((_a = pkg === null || pkg === void 0 ? void 0 : pkg.resolutions["@ribajs/shopify"]) === null || _a === void 0 ? void 0 : _a.includes("portal:"))) {
+if ((pkg === null || pkg === void 0 ? void 0 : pkg.resolutions) &&
+    ((_a = pkg === null || pkg === void 0 ? void 0 : pkg.resolutions["@ribajs/shopify"]) === null || _a === void 0 ? void 0 : _a.includes("portal:"))) {
     const ribaShopifyPath = pkg.resolutions["@ribajs/shopify"].split("portal:")[1];
     ribaShopifyRoot = path_1.default.resolve(themeRoot, ribaShopifyPath);
 }
@@ -53,7 +54,8 @@ if ((pkg === null || pkg === void 0 ? void 0 : pkg.dependencies) && (pkg === nul
     const ribaShopifyTdaPath = require.resolve("@ribajs/shopify-tda");
     ribaShopifyTdaRoot = path_1.default.resolve(themeRoot, ribaShopifyTdaPath);
 }
-if ((pkg === null || pkg === void 0 ? void 0 : pkg.resolutions) && ((_b = pkg === null || pkg === void 0 ? void 0 : pkg.resolutions["@ribajs/shopify-tda"]) === null || _b === void 0 ? void 0 : _b.includes("portal:"))) {
+if ((pkg === null || pkg === void 0 ? void 0 : pkg.resolutions) &&
+    ((_b = pkg === null || pkg === void 0 ? void 0 : pkg.resolutions["@ribajs/shopify-tda"]) === null || _b === void 0 ? void 0 : _b.includes("portal:"))) {
     const ribaShopifyTdaPath = pkg.resolutions["@ribajs/shopify-tda"].split("portal:")[1];
     ribaShopifyTdaRoot = path_1.default.resolve(themeRoot, ribaShopifyTdaPath);
 }

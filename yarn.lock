@@ -2651,9 +2651,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/core@npm:^3.3.1":
-  version: 3.3.1
-  resolution: "@octokit/core@npm:3.3.1"
+"@octokit/core@npm:^3.3.2":
+  version: 3.3.2
+  resolution: "@octokit/core@npm:3.3.2"
   dependencies:
     "@octokit/auth-token": ^2.4.4
     "@octokit/graphql": ^4.5.8
@@ -2662,7 +2662,7 @@ __metadata:
     "@octokit/types": ^6.0.3
     before-after-hook: ^2.2.0
     universal-user-agent: ^6.0.0
-  checksum: b4009fa670aa9a9b858083e23e8fe5cc76b1350bb66c05edda735b56c091b5735942915794a9f302e74e93526024afa4b3a0f431de79c41352aaf8ca83226677
+  checksum: ade53f6d1364b89879ec6db200a0daded914353ccdf4c728912dce81ddd5a426cf2cc09e0c668b0221f4ba0af0489e93bf3caa1c82f635bf5d5f3c2494b12d77
   languageName: node
   linkType: hard
 
@@ -2882,7 +2882,7 @@ __metadata:
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     bootstrap: 4.6.0
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -2929,7 +2929,7 @@ __metadata:
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     bootstrap: 4.6.0
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -2978,7 +2978,7 @@ __metadata:
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     bootstrap: next
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -3026,7 +3026,7 @@ __metadata:
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     bootstrap: next
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -3105,7 +3105,7 @@ __metadata:
     "@yarnpkg/pnpify": ^2.4.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -3146,7 +3146,7 @@ __metadata:
     "@yarnpkg/pnpify": ^2.4.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -3188,7 +3188,7 @@ __metadata:
     babel-jest: ^26.6.3
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -3234,7 +3234,7 @@ __metadata:
     babel-jest: ^26.6.3
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -3286,7 +3286,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -3296,7 +3296,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.4.0
-    postcss: ^8.2.8
+    postcss: ^8.2.9
     postcss-loader: ^5.2.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -3348,7 +3348,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -3358,7 +3358,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.4.0
-    postcss: ^8.2.8
+    postcss: ^8.2.9
     postcss-loader: ^5.2.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -3411,7 +3411,7 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: 4.6.0
     copy-webpack-plugin: ^8.1.0
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -3471,7 +3471,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -3528,7 +3528,7 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: 4.6.0
     copy-webpack-plugin: ^8.1.0
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     html-loader: ^2.1.2
@@ -3583,7 +3583,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     html-loader: ^2.1.2
@@ -3642,7 +3642,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -3653,7 +3653,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.4.0
-    postcss: ^8.2.8
+    postcss: ^8.2.9
     postcss-loader: ^5.2.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -3707,7 +3707,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -3717,7 +3717,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.4.0
-    postcss: ^8.2.8
+    postcss: ^8.2.9
     postcss-loader: ^5.2.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -3767,7 +3767,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: next
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -3777,7 +3777,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.4.0
-    postcss: ^8.2.8
+    postcss: ^8.2.9
     postcss-loader: ^5.2.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -3829,7 +3829,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: next
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -3839,7 +3839,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.4.0
-    postcss: ^8.2.8
+    postcss: ^8.2.9
     postcss-loader: ^5.2.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -3893,7 +3893,7 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: next
     copy-webpack-plugin: ^8.1.0
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -3953,7 +3953,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: next
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -4014,7 +4014,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: next
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -4025,7 +4025,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.4.0
-    postcss: ^8.2.8
+    postcss: ^8.2.9
     postcss-loader: ^5.2.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -4079,7 +4079,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: next
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -4089,7 +4089,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.4.0
-    postcss: ^8.2.8
+    postcss: ^8.2.9
     postcss-loader: ^5.2.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -4140,7 +4140,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: next
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -4199,7 +4199,7 @@ __metadata:
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -4256,7 +4256,7 @@ __metadata:
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     html-loader: ^2.1.2
@@ -4312,7 +4312,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     html-loader: ^2.1.2
@@ -4368,7 +4368,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -4428,7 +4428,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -4490,7 +4490,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: next
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -4500,7 +4500,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.4.0
-    postcss: ^8.2.8
+    postcss: ^8.2.9
     postcss-loader: ^5.2.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -4551,7 +4551,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -4614,7 +4614,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -4674,7 +4674,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -4736,7 +4736,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -4802,8 +4802,8 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.9.1
-    core-js-pure: ^3.9.1
+    core-js: ^3.10.0
+    core-js-pure: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -4864,7 +4864,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     css-loader: ^5.2.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -5032,7 +5032,7 @@ __metadata:
     "@types/express-session": ^1.17.3
     "@types/jest": ^26.0.22
     "@types/node": ^14.14.37
-    "@types/supertest": ^2.0.10
+    "@types/supertest": ^2.0.11
     "@typescript-eslint/eslint-plugin": ^4.20.0
     "@typescript-eslint/parser": ^4.20.0
     cookie-parser: ^1.4.5
@@ -5142,7 +5142,7 @@ __metadata:
     "@types/jest": ^26.0.22
     "@types/jsdom": ^16.2.9
     "@types/node": ^14.14.37
-    "@types/supertest": ^2.0.10
+    "@types/supertest": ^2.0.11
     "@typescript-eslint/eslint-plugin": ^4.20.0
     "@typescript-eslint/parser": ^4.20.0
     consolidate: ^0.16.0
@@ -5198,7 +5198,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.20.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -5236,7 +5236,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.20.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -5302,7 +5302,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.20.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -5337,7 +5337,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.20.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -5353,7 +5353,7 @@ __metadata:
   resolution: "@ribajs/iconset@portal:packages/iconset::locator=ribajs%40workspace%3A."
   dependencies:
     "@babel/runtime-corejs3": ^7.13.10
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     gulp: ^4.0.2
     gulp-clean: ^0.4.0
     gulp-debug: ^4.0.0
@@ -5368,7 +5368,7 @@ __metadata:
   resolution: "@ribajs/iconset@workspace:packages/iconset"
   dependencies:
     "@babel/runtime-corejs3": ^7.13.10
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     gulp: ^4.0.2
     gulp-clean: ^0.4.0
     gulp-debug: ^4.0.0
@@ -5403,7 +5403,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.20.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -5442,7 +5442,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.20.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -5485,7 +5485,7 @@ __metadata:
     "@yarnpkg/pnpify": ^2.4.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -5529,7 +5529,7 @@ __metadata:
     "@yarnpkg/pnpify": ^2.4.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -5567,7 +5567,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.20.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -5605,7 +5605,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.20.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -5644,7 +5644,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.20.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -5680,7 +5680,7 @@ __metadata:
     "@types/jest": ^26.0.22
     "@types/jsdom": ^16.2.9
     "@types/node": ^14.14.37
-    "@types/supertest": ^2.0.10
+    "@types/supertest": ^2.0.11
     "@typescript-eslint/eslint-plugin": ^4.20.0
     "@typescript-eslint/parser": ^4.20.0
     brakes: ^3.1.0
@@ -5735,7 +5735,7 @@ __metadata:
     "@types/jest": ^26.0.22
     "@types/jsdom": ^16.2.9
     "@types/node": ^14.14.37
-    "@types/supertest": ^2.0.10
+    "@types/supertest": ^2.0.11
     "@typescript-eslint/eslint-plugin": ^4.20.0
     "@typescript-eslint/parser": ^4.20.0
     brakes: ^3.1.0
@@ -5927,7 +5927,7 @@ __metadata:
     "@yarnpkg/pnpify": ^2.4.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -5978,7 +5978,7 @@ __metadata:
     "@yarnpkg/pnpify": ^2.4.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -6023,7 +6023,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.20.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -6064,7 +6064,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.20.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -6099,7 +6099,7 @@ __metadata:
     "@ribajs/shopify-easdk": "portal:packages/shopify-easdk"
     "@ribajs/shopify-tda": "portal:packages/shopify-tda"
     leaflet: ^1.7.1
-    postcss: ^8.2.8
+    postcss: ^8.2.9
     postcss-preset-env: ^6.7.0
   dependenciesMeta:
     "@ribajs/bs4":
@@ -6159,7 +6159,7 @@ __metadata:
     "@typescript-eslint/typescript-estree": ^4.20.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -6199,7 +6199,7 @@ __metadata:
     "@typescript-eslint/typescript-estree": ^4.20.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -6237,7 +6237,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.20.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -6272,7 +6272,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.20.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -6333,7 +6333,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.20.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -6372,7 +6372,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.20.0
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1
@@ -6396,7 +6396,7 @@ __metadata:
     "@babel/preset-typescript": ^7.13.0
     "@babel/runtime": ^7.13.10
     "@babel/runtime-corejs3": ^7.13.10
-    "@octokit/core": ^3.3.1
+    "@octokit/core": ^3.3.2
     "@octokit/plugin-rest-endpoint-methods": ^5.0.0
     "@octokit/request": ^5.4.14
     "@octokit/rest": ^18.5.2
@@ -6446,7 +6446,7 @@ __metadata:
     browser-sync: ^2.26.14
     chalk: ^4.1.0
     chokidar: ^3.5.1
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     del: ^6.0.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -6501,7 +6501,7 @@ __metadata:
     "@babel/preset-typescript": ^7.13.0
     "@babel/runtime": ^7.13.10
     "@babel/runtime-corejs3": ^7.13.10
-    "@octokit/core": ^3.3.1
+    "@octokit/core": ^3.3.2
     "@octokit/plugin-rest-endpoint-methods": ^5.0.0
     "@octokit/request": ^5.4.14
     "@octokit/rest": ^18.5.2
@@ -6551,7 +6551,7 @@ __metadata:
     browser-sync: ^2.26.14
     chalk: ^4.1.0
     chokidar: ^3.5.1
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     del: ^6.0.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
@@ -6716,7 +6716,7 @@ __metadata:
     leaflet: ^1.7.1
     mini-css-extract-plugin: ^1.4.0
     pkg-dir: ^5.0.0
-    postcss: ^8.2.8
+    postcss: ^8.2.9
     postcss-loader: ^5.2.0
     pug: ^3.0.2
     pug-loader: ^2.4.0
@@ -6813,7 +6813,7 @@ __metadata:
     leaflet: ^1.7.1
     mini-css-extract-plugin: ^1.4.0
     pkg-dir: ^5.0.0
-    postcss: ^8.2.8
+    postcss: ^8.2.9
     postcss-loader: ^5.2.0
     pug: ^3.0.2
     pug-loader: ^2.4.0
@@ -7711,12 +7711,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/supertest@npm:^2.0.10":
-  version: 2.0.10
-  resolution: "@types/supertest@npm:2.0.10"
+"@types/supertest@npm:^2.0.11":
+  version: 2.0.11
+  resolution: "@types/supertest@npm:2.0.11"
   dependencies:
     "@types/superagent": "*"
-  checksum: 9ceae7e74305bdd892f57922bfa5355dc50f44f3e2243e159609fa0e275e4a3fea55c2c2d637f37bd8193143cdbab50449e5be36380afe29899ad7aecffb7685
+  checksum: a4b001038d8972d9efbfe73590961718f59923ed9c44356a0280e7a042dd1862cc9ea4c8a5c1ef3f7813f25e8b3b0b483bdafec089efe544c12207763c8ea6b1
   languageName: node
   linkType: hard
 
@@ -10895,17 +10895,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js-pure@npm:^3.9.1":
-  version: 3.9.1
-  resolution: "core-js-pure@npm:3.9.1"
-  checksum: 9cbb38523f6360c068991af52bb91a55cfdc3dd3cda0964b8e232caa795b95c08523d2fb1c80b76ffd2a8446e4822a6ba960f3bd762353ad0f8470f2fd3c652e
+"core-js-pure@npm:^3.10.0":
+  version: 3.10.0
+  resolution: "core-js-pure@npm:3.10.0"
+  checksum: 987b8428ce5732e9e77ba640b8c254054a304fc7e9672ea6c537abc705b192d5cb30b857e904e4cc931b73d29227e3c98f4a4a1e0247c3bca59f7a93e57b10b6
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.9.1":
-  version: 3.9.1
-  resolution: "core-js@npm:3.9.1"
-  checksum: 3f360466246e816ff745f349bf0ea0c54bc3a05203638d84c5f0eae3583f07e7d848d6aa9b69c30467efb418e526bae034a6da50bcfda8b2cd413e5144cd1444
+"core-js@npm:^3.10.0":
+  version: 3.10.0
+  resolution: "core-js@npm:3.10.0"
+  checksum: d8bb20f7da9fdd944057cb41938153a7c4e471fb7d529e37958e32c7a20ab9506abbd03932750c27c8fd02de03a8e4775ba68252506a0dd42dda5404901ae9f1
   languageName: node
   linkType: hard
 
@@ -17116,6 +17116,15 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"nanoid@npm:^3.1.22":
+  version: 3.1.22
+  resolution: "nanoid@npm:3.1.22"
+  bin:
+    nanoid: bin/nanoid.cjs
+  checksum: 6a38c799816de388cd67233a9fad6216e0ad2abda3ce5b34eb126afbef6905924507223dc65797e2bcbc513f9cd7e078ea7e69448d59f434a6206b491278ae24
+  languageName: node
+  linkType: hard
+
 "nanomatch@npm:^1.2.9":
   version: 1.2.13
   resolution: "nanomatch@npm:1.2.13"
@@ -18792,6 +18801,17 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"postcss@npm:^8.2.9":
+  version: 8.2.9
+  resolution: "postcss@npm:8.2.9"
+  dependencies:
+    colorette: ^1.2.2
+    nanoid: ^3.1.22
+    source-map: ^0.6.1
+  checksum: b661a6e858c82e8919c9b1e6bc299b5b2ba61dc66ccc52ef631ddc8b69aabce170a6f0a9ea04f087e7be780ad34cfc15dbbf952c152a9698375de8c88b8c4e96
+  languageName: node
+  linkType: hard
+
 "prelude-ls@npm:^1.2.1":
   version: 1.2.1
   resolution: "prelude-ls@npm:1.2.1"
@@ -20057,7 +20077,7 @@ resolve@^1.14.2:
     babel-jest: ^26.6.3
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.9.1
+    core-js: ^3.10.0
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-prettier: ^3.3.1

@@ -42,7 +42,7 @@
     "babel-plugin-array-includes": "^2.0.3",
     "babelify": "^10.0.0",
     "copy-webpack-plugin": "^8.1.0",
-    "core-js": "^3.9.1",
+    "core-js": "^3.10.0",
     "css-loader": "^5.2.0",
     "eslint": "^7.23.0",
     "html-loader": "^2.1.2",
