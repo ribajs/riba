@@ -72,10 +72,6 @@ export class PhotoswipeComponent extends Component {
 
   protected images: HTMLImageElement[] = [];
 
-  protected listeners = {
-    items: [],
-  };
-
   protected options: Options = {
     // optionName: 'option value'
     getThumbBoundsFn: this.getThumbBoundsFn.bind(this),
@@ -387,16 +383,16 @@ export class PhotoswipeComponent extends Component {
   }
 
   public toggleFullscreen() {
-    const fullscrenAPI = this.pswp?.ui?.getFullscreenAPI();
-    if (!fullscrenAPI) {
-      console.error("fullscrenAPI not found");
+    const fullscreenAPI = this.pswp?.ui?.getFullscreenAPI();
+    if (!fullscreenAPI) {
+      console.error("fullscreenAPI not found");
       return;
     }
-    if (fullscrenAPI.isFullscreen()) {
-      fullscrenAPI.exit();
+    if (fullscreenAPI.isFullscreen()) {
+      fullscreenAPI.exit();
       this.scope.isFullscreen = false;
     } else {
-      fullscrenAPI.enter();
+      fullscreenAPI.enter();
       this.scope.isFullscreen = true;
     }
     (this.pswp?.ui as any).updateFullscreen();
@@ -594,7 +590,7 @@ export class PhotoswipeComponent extends Component {
   }
 
   protected template(): ReturnType<TemplateFunction> {
-    // Only set the component template if there no childs already<rv-photswipe>serhsehsehjiu </>
+    // Only set the component template if there no childs already: `<rv-photoswipe> any childs here.. <rv-photoswipe/>`
     if (hasChildNodesTrim(this)) {
       return (this as HTMLElement).innerHTML + fullscreenTemplate;
     } else {

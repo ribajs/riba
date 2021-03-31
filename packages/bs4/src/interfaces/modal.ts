@@ -8,7 +8,7 @@ export interface Button {
   label: string;
 
   /**
-   * Method in the scope wich should be called when the button is clicked
+   * Method in the scope which should be called when the button is clicked
    */
   action?: string;
 

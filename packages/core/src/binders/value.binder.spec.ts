@@ -190,10 +190,10 @@ describe("riba.binders", () => {
         (riba.binders.value as any).routine(selectMultipleEl, ["d", "f"]);
         const result = Array.prototype.slice
           .call(selectMultipleEl.children)
-          .filter((option) => {
+          .filter((option: any) => {
             return option.selected;
           })
-          .map((option) => {
+          .map((option: any) => {
             return option.value;
           });
 
@@ -213,10 +213,10 @@ describe("riba.binders", () => {
         ]);
         const result = Array.prototype.slice
           .call(groupedMultipleSelectEl.options)
-          .filter((option) => {
+          .filter((option: any) => {
             return option.selected;
           })
-          .map((option) => {
+          .map((option: any) => {
             return option.value;
           });
 

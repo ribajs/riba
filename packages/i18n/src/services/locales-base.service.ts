@@ -157,7 +157,7 @@ export abstract class ALocalesService {
   }
 
   /**
-   * Parse templates wich can be used to set variables on language strings
+   * Parse templates which can be used to set variables on language strings
    */
   public parseTemplateVars(el: HTMLElement): LocalVar {
     const templates = el.querySelectorAll<HTMLTemplateElement>("template");
@@ -172,7 +172,7 @@ export abstract class ALocalesService {
   }
 
   /**
-   * Parse templates wich have his own translations
+   * Parse templates which have his own translations
    */
   public parseLocalVars(el: HTMLElement): LocalVar {
     const templates = el.querySelectorAll<HTMLTemplateElement>("template");

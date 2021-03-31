@@ -1,4 +1,5 @@
 import Debug from "debug";
+import { TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { ShopifyNestContentComponent } from "../content/content.component";
 import { ShopifyApiBlogsService } from "../../services/shopify-api-blog.service";

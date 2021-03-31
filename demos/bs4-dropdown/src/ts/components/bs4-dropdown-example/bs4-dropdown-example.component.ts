@@ -5,7 +5,7 @@ import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 
 interface DropdownItem {
   label: string;
-  value: any;
+  value: unknown;
 }
 
 export class Bs4DropdownExampleComponent extends Component {
@@ -71,7 +71,7 @@ export class Bs4DropdownExampleComponent extends Component {
     super();
   }
 
-  protected connectedCallback() {
+  protected connectedCallback(): void {
     super.connectedCallback();
     super.init(Bs4DropdownExampleComponent.observedAttributes);
   }
@@ -80,7 +80,7 @@ export class Bs4DropdownExampleComponent extends Component {
     return [];
   }
 
-  public select(item: DropdownItem) {
+  public select(item: DropdownItem): void {
     DropdownService.closeAll();
     this.scope.selected = item;
   }

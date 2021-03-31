@@ -1,5 +1,5 @@
 /**
- * Ported TypeScrit version of https://raw.githubusercontent.com/dimsemenov/PhotoSwipe/master/src/js/ui/photoswipe-ui-default.js
+ * Ported TypeScript version of https://raw.githubusercontent.com/dimsemenov/PhotoSwipe/master/src/js/ui/photoswipe-ui-default.js
  *
  *
  * UI on top of main sliding area (caption, arrows, close button, etc.).
@@ -14,7 +14,7 @@ import { FullscreenService } from "@ribajs/extras";
 export class PhotoSwipeUI {
   _overlayUIUpdated = false;
   _controlsVisible = true;
-  _fullscrenAPI: FullscreenService | null = null;
+  _fullscreenAPI: FullscreenService | null = null;
   _controls: any;
   _captionContainer: any;
   _fakeCaptionContainer: any;
@@ -22,7 +22,7 @@ export class PhotoSwipeUI {
   _shareButton?: HTMLElement;
   _shareModal?: HTMLElement;
   _shareModalHidden = true;
-  _initalCloseOnScrollValue: any;
+  _initialCloseOnScrollValue: any;
   _isIdle: any;
   _listen: PhotoSwipe<Options, PhotoSwipeUI>["listen"];
   _galleryHasOneSlide: any;
@@ -60,7 +60,7 @@ export class PhotoSwipeUI {
   _blockControlsTapTimeout: any;
 
   _idleInterval?: number;
-  _idleTimer?: number;
+  _idleTimer?: ReturnType<typeof setTimeout>;
   _idleIncrement = 0;
 
   _uiElements = [
@@ -186,13 +186,13 @@ export class PhotoSwipeUI {
 
   protected _setupFullscreenAPI() {
     if (!this.framework.features.isOldAndroid) {
-      if (!this._fullscrenAPI) {
-        this._fullscrenAPI = this.getFullscreenAPI();
+      if (!this._fullscreenAPI) {
+        this._fullscreenAPI = this.getFullscreenAPI();
       }
-      if (this._fullscrenAPI) {
+      if (this._fullscreenAPI) {
         this.framework.bind(
           document,
-          this._fullscrenAPI.eventK,
+          this._fullscreenAPI.eventK,
           this.updateFullscreen
         );
         this.updateFullscreen();
@@ -427,17 +427,17 @@ export class PhotoSwipeUI {
       );
       this.framework.unbind(this.pswp.scrollWrap, "pswpTap", this.onGlobalTap);
 
-      if (this._fullscrenAPI) {
+      if (this._fullscreenAPI) {
         this.framework.unbind(
           document,
-          this._fullscrenAPI.eventK,
+          this._fullscreenAPI.eventK,
           this.updateFullscreen
         );
-        if (this._fullscrenAPI.isFullscreen()) {
+        if (this._fullscreenAPI.isFullscreen()) {
           this._options.hideAnimationDuration = 0;
-          this._fullscrenAPI.exit();
+          this._fullscreenAPI.exit();
         }
-        this._fullscrenAPI = null;
+        this._fullscreenAPI = null;
       }
     });
 
@@ -523,9 +523,9 @@ export class PhotoSwipeUI {
       }, 50);
     }
 
-    // toogle pswp--fs class on root element
+    // toggle pswp--fs class on root element
     this.framework[
-      (this._fullscrenAPI?.isFullscreen() ? "add" : "remove") + "Class"
+      (this._fullscreenAPI?.isFullscreen() ? "add" : "remove") + "Class"
     ](this.pswp.template, "pswp--fs");
   }
 
@@ -607,12 +607,12 @@ export class PhotoSwipeUI {
       elementK: fullscreenApi.elementK,
       eventK: fullscreenApi.eventK,
       enter: () => {
-        this._initalCloseOnScrollValue = this._options.closeOnScroll;
+        this._initialCloseOnScrollValue = this._options.closeOnScroll;
         this._options.closeOnScroll = false;
         return fullscreenApi.enter(this.pswp.template);
       },
       exit: () => {
-        this._options.closeOnScroll = this._initalCloseOnScrollValue;
+        this._options.closeOnScroll = this._initialCloseOnScrollValue;
         return fullscreenApi.exit();
       },
       isFullscreen: fullscreenApi.isFullscreen,

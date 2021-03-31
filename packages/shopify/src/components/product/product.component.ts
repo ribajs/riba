@@ -9,14 +9,14 @@ import {
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./product.component.html";
 
-export interface PrepairedProductVariant extends ShopifyProductVariant {
+export interface PreparedProductVariant extends ShopifyProductVariant {
   images?: string[];
 }
 
 export interface Scope {
   handle: string | null;
   product: ShopifyProduct | null;
-  variant: PrepairedProductVariant | null;
+  variant: PreparedProductVariant | null;
   quantity: number;
   showDetailMenu: boolean;
   // showAddToCartButton: boolean;
@@ -38,7 +38,7 @@ export class ShopifyProductComponent extends Component {
 
   /**
    * handle is the product handle to get the product json object
-   * extras are product data wich is only avaiable over liquid and not over the product json object
+   * extras are product data which is only available over liquid and not over the product json object
    */
   static get observedAttributes(): string[] {
     return ["handle", "extras"];
@@ -67,9 +67,9 @@ export class ShopifyProductComponent extends Component {
   private selectedOptions: string[] = [];
 
   /**
-   * Is true if the user has choosed an option
+   * Is true if the user has chosen an option
    */
-  private optionChoosed = false;
+  private optionChosen = false;
 
   protected set product(product: ShopifyProduct | null) {
     // console.debug('set product', product);
@@ -97,7 +97,7 @@ export class ShopifyProductComponent extends Component {
       return;
     }
     // console.debug('set variant', variant);
-    this.scope.variant = this.prepairVariant(variant);
+    this.scope.variant = this.prepareVariant(variant);
     if (this.scope.variant) {
       this.selectedOptions = this.scope.variant.options.slice();
       // console.debug('set selectedOptions', this.selectedOptions);
@@ -114,7 +114,7 @@ export class ShopifyProductComponent extends Component {
    * available is only true if the variant is available and the user has clicked on an option
    */
   protected set available(available: boolean) {
-    this.scope.available = available && this.optionChoosed;
+    this.scope.available = available && this.optionChosen;
   }
 
   constructor() {
@@ -143,8 +143,8 @@ export class ShopifyProductComponent extends Component {
       this.selectedOptions
     );
     if (variant) {
-      // Option choosed so enable add to cart button
-      this.optionChoosed = true;
+      // Option chosen so enable add to cart button
+      this.optionChosen = true;
 
       this.variant = variant as ShopifyProductVariant;
     }
@@ -214,7 +214,7 @@ export class ShopifyProductComponent extends Component {
           const optionName = this.scope.product.options[position0].name;
           // Only activate size if it was clicked by the user
           if (optionName === "size") {
-            if (this.optionChoosed) {
+            if (this.optionChosen) {
               this.activateOption(optionValue, optionName);
             }
           } else {
@@ -277,7 +277,7 @@ export class ShopifyProductComponent extends Component {
   }
 
   /**
-   * Get images wich are not linked to any variant
+   * Get images which are not linked to any variant
    */
   private getGeneralImages(optionName = "color") {
     optionName = optionName.toLowerCase();
@@ -335,7 +335,7 @@ export class ShopifyProductComponent extends Component {
   /**
    * Get featured images of variant, use the first option image or the featured product image as fallback
    */
-  private getFeaturedImage(variant: PrepairedProductVariant) {
+  private getFeaturedImage(variant: PreparedProductVariant) {
     if (variant.featured_image !== null) {
       variant.featured_image.src = variant.featured_image.src.replace(
         /(^\w+:|^)\/\//,
@@ -356,7 +356,7 @@ export class ShopifyProductComponent extends Component {
       return null;
     }
 
-    // remove protocol for normalisation
+    // remove protocol for normalization
     fallbackImageSrc = fallbackImageSrc.replace(/(^\w+:|^)\/\//, "//");
 
     // If variant has no image use the default product image
@@ -365,7 +365,7 @@ export class ShopifyProductComponent extends Component {
         src: fallbackImageSrc,
         position: 0,
         product_id: this.scope.product.id,
-        variant_ids: [],
+        variant_ids: [] as PreparedProductVariant["id"][],
         alt: this.scope.product.title,
         created_at: this.scope.product.created_at,
         height: 0,
@@ -380,10 +380,10 @@ export class ShopifyProductComponent extends Component {
   }
 
   /**
-   * prepair variant, e.g. fix missing image etc
+   * prepare variant, e.g. fix missing image etc
    * @param variant
    */
-  private prepairVariant(variant: PrepairedProductVariant) {
+  private prepareVariant(variant: PreparedProductVariant) {
     if (variant === null) {
       // console.debug('Error: Variant is null!');
       return null;
@@ -408,7 +408,7 @@ export class ShopifyProductComponent extends Component {
         variant.images.splice(i, 1);
       }
 
-      // add gerneal images
+      // add general images
       variant.images = variant.images.concat(this.getGeneralImages());
     }
 

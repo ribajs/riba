@@ -5,7 +5,9 @@ import { HttpException, HttpStatus } from '@nestjs/common';
  * @param exception
  * @returns
  */
-export const getStatus = (exception: HttpException | Error | string) => {
+export const getStatus = (
+  exception: HttpException | Error | string,
+): number => {
   const status =
     exception instanceof HttpException
       ? exception.getStatus()
@@ -13,7 +15,9 @@ export const getStatus = (exception: HttpException | Error | string) => {
   return status;
 };
 
-export const getMessage = (exception: HttpException | Error | string) => {
+export const getMessage = (
+  exception: HttpException | Error | string,
+): string => {
   let message = 'Internal server error';
 
   if (typeof exception === 'string') {
@@ -31,7 +35,9 @@ export const getMessage = (exception: HttpException | Error | string) => {
   return `${message}`;
 };
 
-export const getStack = (exception: HttpException | Error | string) => {
+export const getStack = (
+  exception: HttpException | Error | string,
+): string[] => {
   let stack: string | string[];
   if (typeof exception === 'string') {
     stack = new Error(exception).stack;
@@ -62,7 +68,9 @@ export const getStack = (exception: HttpException | Error | string) => {
   return stack.split('\n');
 };
 
-export const handleError = (error: HttpException | Error | string) => {
+export const handleError = (
+  error: HttpException | Error | string,
+): HttpException => {
   if (error instanceof HttpException) {
     return error;
   }

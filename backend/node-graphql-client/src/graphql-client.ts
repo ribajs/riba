@@ -1,6 +1,7 @@
 import { GraphQLClient as _GraphQLClient } from 'graphql-request';
 import type { Variables } from 'graphql-request/dist/types';
 import type { RequestInit } from 'graphql-request/dist/types.dom';
+import type { DocumentNode } from 'graphql';
 
 import { loadDocuments } from '@graphql-tools/load';
 
@@ -25,7 +26,7 @@ export class GraphQLClient extends _GraphQLClient {
    * @returns
    * @see https://www.graphql-tools.com/docs/documents-loading/
    */
-  async loadRequestDocument(filePath: string) {
+  async loadRequestDocument(filePath: string): Promise<DocumentNode> {
     const pattern = `${this.root}/**/${filePath}.{gql, graphql}`;
     console.debug('loadRequestDocument', pattern);
     const sources = await loadDocuments(pattern, {
@@ -43,7 +44,7 @@ export class GraphQLClient extends _GraphQLClient {
     actionFilePath: string,
     variables?: V,
     requestHeaders?: RequestInit['headers'],
-  ) {
+  ): Promise<T> {
     const action = await this.loadRequestDocument(actionFilePath);
     const data = await this.request<T, V>(action, variables, requestHeaders);
     return data;

@@ -14,8 +14,9 @@ interface AccessScopeItem {
 interface AccessScopes {
   [groupKey: string]: {
     items: AccessScopeItem[];
-    // placeholder
-    info: any;
+    i18n: {
+      [key: string]: string;
+    };
   };
 }
 

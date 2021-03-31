@@ -52,7 +52,7 @@ declare global {
 
 /**
  * Component to share the a link
- * Similar projects wich are can share stuff:
+ * Similar projects which are can share stuff:
  *  * https://github.com/nimiq/web-share-shim
  *  * http://webintents.org/
  *  * http://chriswren.github.io/native-social-interactions/

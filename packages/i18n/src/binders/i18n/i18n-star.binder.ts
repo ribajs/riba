@@ -81,7 +81,7 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (
         //   console.warn('parsed attribute vars', this.customData.vars);
         // }
 
-        // Parse templates wich have his own translations
+        // Parse templates which have his own translations
         this.customData.langVars = this.customData.i18n.parseLocalVars(_el);
         // if (this.customData.langVars && Object.keys(this.customData.langVars).length) {
         //   console.warn('parsed own translations', this.customData.langVars);

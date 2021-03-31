@@ -1,6 +1,10 @@
 import { HttpService } from "@ribajs/core";
 
-import { ShopifyProduct, ShopifyProductVariant } from "../interfaces";
+import {
+  ShopifyProduct,
+  ShopifyProductVariant,
+  ShopifyProductVariantOption,
+} from "../interfaces";
 
 export interface ProductsCache {
   [handle: string]: ShopifyProduct;
@@ -78,29 +82,20 @@ export class ShopifyProductService {
    * @param id Variant id
    */
   public static getVariant(product: ShopifyProduct, id: number) {
-    let result = null;
-    if (product) {
-      product.variants.forEach((variant: ShopifyProductVariant) => {
-        if (variant.id === id) {
-          result = variant;
-        }
-      });
-    }
+    const result =
+      product.variants.find((variant) => variant.id === id) || null;
     return result;
   }
 
   /**
    * Get product option by name
-   * @param product product wich holds the options
+   * @param product product which holds the options
    * @param name option name
    */
   public static getOption(product: ShopifyProduct, name: string) {
-    let result = null;
-    product.options.forEach((option) => {
-      if (option.name.toLowerCase() === name.toLowerCase()) {
-        result = option;
-      }
-    });
+    const result = product.options.find(
+      (option) => option.name.toLowerCase() === name.toLowerCase()
+    );
     return result;
   }
 

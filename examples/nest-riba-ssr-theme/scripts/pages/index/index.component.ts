@@ -1,4 +1,5 @@
 import { PageComponent } from "@ribajs/ssr";
+import { TemplateFunction } from "@ribajs/core";
 
 import pugTemplate from "./index.component.pug";
 

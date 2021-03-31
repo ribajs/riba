@@ -40,7 +40,7 @@ export class ShopifyProductItemComponent extends Component {
 
   /**
    * handle is the product handle to get the product json object
-   * extras are product data wich is only avaiable over liquid and not over the product json object
+   * extras are product data which is only avaiable over liquid and not over the product json object
    */
   static get observedAttributes(): string[] {
     return ["handle", "extras"];
