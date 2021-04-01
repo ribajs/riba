@@ -1,4 +1,4 @@
-import type { Fields, Plugin } from '.';
+import type { Fields, PluginOption } from '.';
 import type { tokenizer, Pipeline } from 'lunr';
 export interface CreateOptions {
     fields?: Fields | string[];
@@ -14,5 +14,5 @@ export interface CreateOptions {
     termIndex?: number;
     metadataWhitelist?: string[];
     ref?: string;
-    plugins?: Plugin[];
+    plugins?: PluginOption[];
 }

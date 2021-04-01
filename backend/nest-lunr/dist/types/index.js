@@ -15,5 +15,7 @@ __exportStar(require("./create-options"), exports);
 __exportStar(require("./field-attributes"), exports);
 __exportStar(require("./fields"), exports);
 __exportStar(require("./indices"), exports);
-__exportStar(require("./plugins"), exports);
+__exportStar(require("./plugin-option"), exports);
+__exportStar(require("./plugin"), exports);
+__exportStar(require("./search-result"), exports);
 //# sourceMappingURL=index.js.map

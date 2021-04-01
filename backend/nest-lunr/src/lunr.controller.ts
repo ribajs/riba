@@ -1,6 +1,5 @@
 import { Controller, Get, Param, Res, NotFoundException } from '@nestjs/common';
 import { Response } from 'express';
-import {} from './types';
 import { LunrService } from './lunr.service';
 
 /**

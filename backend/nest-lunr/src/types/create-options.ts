@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import type { Fields, Plugin } from '.';
+import type { Fields, PluginOption } from '.';
 import type { tokenizer, Pipeline } from 'lunr';
 
 export interface CreateOptions {
@@ -89,5 +89,5 @@ export interface CreateOptions {
    * with the index builder as its context.
    *
    */
-  plugins?: Plugin[];
+  plugins?: PluginOption[];
 }
