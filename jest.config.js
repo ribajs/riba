@@ -21,6 +21,7 @@ module.exports = {
     '/infra/schematics/src/lib/',
     '/node_modules/',
     '/packages/*/dist/',
+    '/backend/*',
   ],
   coverageReporters: [
     'json',

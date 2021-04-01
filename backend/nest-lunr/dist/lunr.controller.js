@@ -20,14 +20,11 @@ let LunrController = class LunrController {
         this.lunr = lunr;
     }
     search(res, namespace, query) {
-        console.debug('lunr namespace', namespace);
-        console.debug('lunr query', query);
         const index = this.lunr.getIndex(namespace);
         if (!index) {
             throw new common_1.NotFoundException(`[Lunr] No index namespace "${namespace}" found!`);
         }
         const result = index.search(query);
-        console.debug('lunr result', result);
         return res.json(result);
     }
 };

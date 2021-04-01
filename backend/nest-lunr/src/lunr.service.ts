@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 import * as lunr from 'lunr';
 import type { Builder, Index } from 'lunr';
 import type { CreateOptions, Builders, Indices } from './types';
