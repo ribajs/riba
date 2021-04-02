@@ -20,11 +20,14 @@ let LunrController = class LunrController {
         this.lunr = lunr;
     }
     search(res, namespace, query) {
-        const index = this.lunr.getIndex(namespace);
-        if (!index) {
+        const result = this.lunr.search(namespace, query);
+        if (!result) {
             throw new common_1.NotFoundException(`[Lunr] No index namespace "${namespace}" found!`);
         }
-        const result = index.search(query);
+        return res.json(result);
+    }
+    searchAll(res, query) {
+        const result = this.lunr.searchAll(query);
         return res.json(result);
     }
 };
@@ -37,6 +40,13 @@ __decorate([
     __metadata("design:paramtypes", [Object, String, String]),
     __metadata("design:returntype", void 0)
 ], LunrController.prototype, "search", null);
+__decorate([
+    common_1.Get('/search/:query'),
+    __param(0, common_1.Res()), __param(1, common_1.Param('query')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", void 0)
+], LunrController.prototype, "searchAll", null);
 LunrController = __decorate([
     common_1.Controller('lunr'),
     __metadata("design:paramtypes", [lunr_service_1.LunrService])

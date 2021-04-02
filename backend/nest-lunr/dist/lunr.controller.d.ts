@@ -4,4 +4,5 @@ export declare class LunrController {
     readonly lunr: LunrService;
     constructor(lunr: LunrService);
     search(res: Response, namespace: string, query: string): Response<any, Record<string, any>>;
+    searchAll(res: Response, query: string): Response<any, Record<string, any>>;
 }

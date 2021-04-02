@@ -90,11 +90,30 @@ export class SearchService implements OnModuleInit {
 }
 ```
 
+## Api
+
+### Controller
+
 The Nest.js Lunr.js module has [a build in controller](./src/lunr.controller.ts), you can use it as a base for your own controller or just use the build in controller:
 
-* `@Get('/search/:namespace/:query')` The url, e.g. `https://myproject.org/lunr/page/ゼルダ` which searchs for `ゼルダ` in your page namespace
-* `@Param('namespace')` The namespace you have defined in your `search.service.ts` with `this.searchPage = this.lunr.create('page')`
-* `@Param('query')` Your search query, e.g. `ゼルダ`
+`/lunr/search/:namespace/:query`
+
+Search in a specific namespace
+
+- `@Get('/search/:namespace/:query')` - The url, e.g. `https://myproject.org/lunr/page/ゼルダ` which search for `ゼルダ` in your page namespace
+- `@Param('namespace')` - The namespace you have defined in your `search.service.ts` with `this.searchPage = this.lunr.create('page')`
+- `@Param('query')` - Your search query, e.g. `ゼルダ`
+
+---
+
+`/lunr/search/:query`
+
+Search in a all existing namespaces
+
+- `@Get('/search/:query')` - The url, e.g. `https://myproject.org/lunr/ゼル
+- `@Param('query') query: string` - Your search query, e.g. `ゼルダ`
+
+---
 
 A custom search controller could look like this:
 
@@ -116,15 +135,18 @@ export class SearchController {
     @Param('namespace') namespace: string,
     @Param('query') query: string,
   ) {
-    const index = this.lunr.getIndex(namespace);
-    if (!index) {
+    const result = this.lunr.search(namespace, query);
+    if (!result) {
       throw new NotFoundException(
         `[Lunr] No index namespace "${namespace}" found!`,
       );
     }
-
-    const result = index.search(query);
     return res.json(result);
+  }
+
+  @Get('/:query')
+  searchAll(@Res() res: Response, @Param('query') query: string) {
+    return res.json(this.lunr.searchAll(namespace, query));
   }
 }
 ```

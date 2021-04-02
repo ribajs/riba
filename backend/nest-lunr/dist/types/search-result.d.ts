@@ -1,2 +1,4 @@
 import type { Index } from 'lunr';
-export declare type SearchResult = Index.Result;
+export interface SearchResult extends Index.Result {
+    ns: string;
+}

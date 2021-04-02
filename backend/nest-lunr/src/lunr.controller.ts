@@ -15,14 +15,21 @@ export class LunrController {
     @Param('namespace') namespace: string,
     @Param('query') query: string,
   ) {
-    const index = this.lunr.getIndex(namespace);
-    if (!index) {
+    const results = this.lunr.search(namespace, query);
+    if (!results) {
       throw new NotFoundException(
         `[Lunr] No index namespace "${namespace}" found!`,
       );
     }
+    return res.json(results);
+  }
 
-    const result = index.search(query);
+  /**
+   * E.g. /lunr/search/ゼルダ
+   */
+  @Get('/search/:query')
+  searchAll(@Res() res: Response, @Param('query') query: string) {
+    const result = this.lunr.searchAll(query);
     return res.json(result);
   }
 }

@@ -96,6 +96,34 @@ let LunrService = LunrService_1 = class LunrService {
         }
         return this.indices[namespace];
     }
+    getNamespaces() {
+        return Object.keys(this.indices);
+    }
+    search(ns, query) {
+        const index = this.getIndex(ns);
+        if (!index) {
+            return null;
+        }
+        const results = index.search(query);
+        if (!results) {
+            return null;
+        }
+        for (const result of results) {
+            result.ns = ns;
+        }
+        return results;
+    }
+    searchAll(query) {
+        const searchResults = [];
+        const namespaces = this.getNamespaces();
+        for (const ns of namespaces) {
+            const results = this.search(ns, query);
+            if (results) {
+                searchResults.push(...results);
+            }
+        }
+        return searchResults;
+    }
 };
 LunrService.lunr = lunr;
 LunrService = LunrService_1 = __decorate([

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import * as lunr from 'lunr';
 import type { Builder, Index } from 'lunr';
-import type { CreateOptions, Builders, Indices } from './types';
+import type { CreateOptions, Builders, Indices, SearchResult } from './types';
 
 @Injectable()
 export class LunrService {
@@ -137,5 +137,51 @@ export class LunrService {
       return this.buildIndex(namespace);
     }
     return this.indices[namespace];
+  }
+
+  /**
+   * Returns all namespaces for which a built index exists
+   * @returns All namespaces for which a built index exists
+   */
+  public getNamespaces() {
+    return Object.keys(this.indices);
+  }
+
+  /**
+   * Search in a specific namespace
+   * @param ns The namespace
+   * @param query The search query
+   * @returns The search results
+   */
+  public search(ns: string, query: string) {
+    const index = this.getIndex(ns);
+    if (!index) {
+      return null;
+    }
+    const results: Partial<SearchResult>[] = index.search(query);
+    if (!results) {
+      return null;
+    }
+    for (const result of results) {
+      result.ns = ns;
+    }
+    return results as SearchResult[];
+  }
+
+  /**
+   * Search in all namespaces for which a built index exists
+   * @param query The search query
+   * @returns The merged search results from all namespaces
+   */
+  public searchAll(query: string) {
+    const searchResults: Partial<SearchResult[]> = [];
+    const namespaces = this.getNamespaces();
+    for (const ns of namespaces) {
+      const results = this.search(ns, query);
+      if (results) {
+        searchResults.push(...results);
+      }
+    }
+    return searchResults;
   }
 }
