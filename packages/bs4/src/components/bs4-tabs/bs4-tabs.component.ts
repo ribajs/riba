@@ -141,7 +141,7 @@ export class Bs4TabsComponent extends TemplatesComponent {
   }
 
   /**
-   * Make all tabs panes as height as the heighest tab pane
+   * Make all tabs panes as height as the highest tab pane
    */
   public setHeight() {
     if (this.scope.optionTabsAutoHeight) {
@@ -150,7 +150,7 @@ export class Bs4TabsComponent extends TemplatesComponent {
     // Bind static template
     this.setElements();
 
-    let heigest = 0;
+    let highest = 0;
     if (!this.tabPanes) {
       return;
     }
@@ -161,8 +161,8 @@ export class Bs4TabsComponent extends TemplatesComponent {
       ((tabPane as unknown) as HTMLElement).style.height = "auto";
       ((tabPane as unknown) as HTMLElement).style.display = "block";
       const height = ((tabPane as unknown) as HTMLElement).offsetHeight || 0;
-      if (height > heigest) {
-        heigest = height;
+      if (height > highest) {
+        highest = height;
       }
     });
     this.tabPanes.forEach((tabPane) => {
@@ -171,8 +171,8 @@ export class Bs4TabsComponent extends TemplatesComponent {
       }
       // Reset display style property
       ((tabPane as unknown) as HTMLElement).style.display = "";
-      if (heigest > 0) {
-        ((tabPane as unknown) as HTMLElement).style.height = heigest + "px";
+      if (highest > 0) {
+        ((tabPane as unknown) as HTMLElement).style.height = highest + "px";
       }
     });
   }

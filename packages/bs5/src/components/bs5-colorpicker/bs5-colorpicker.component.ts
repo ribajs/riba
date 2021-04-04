@@ -300,9 +300,7 @@ export class Bs5ColorPickerComponent extends Component {
    * @param flags If { silent: true }, won't trigger onChange.
    */
   protected setColor(color: string, flags: any = { silent: false }) {
-    debounce(() => {
-      this._setColor(color, flags);
-    })();
+    return debounce(this._setColor.bind(this))(color, flags);
   }
 
   protected _setColor(color: string, flags: any = { silent: false }) {

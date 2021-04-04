@@ -6,7 +6,7 @@ export interface DragscrollOptions {
 }
 
 /**
- * Scroll an scrollable element by draging and moving your mouse.
+ * Scroll an scrollable element by dragging and moving your mouse.
  * inspired by https://github.com/asvd/dragscroll
  */
 export class Dragscroll {
@@ -73,16 +73,16 @@ export class Dragscroll {
     this.el.classList.remove("draggable");
   }
 
-  public checkDraggable() {
+  protected _checkDraggable() {
     console.debug("checkDraggable");
-    return throttle(() => {
-      if (Utils.isScrollable(this.el)) {
-        this.el.classList.add("draggable");
-      } else {
-        this.el.classList.remove("draggable");
-      }
-    })();
+    if (Utils.isScrollable(this.el)) {
+      this.el.classList.add("draggable");
+    } else {
+      this.el.classList.remove("draggable");
+    }
   }
+
+  public checkDraggable = throttle(this._checkDraggable.bind(this));
 
   protected onMouseDown(e: MouseEvent) {
     this.pushed = true;

@@ -1,6 +1,6 @@
 import { Utils as ExtraUtils } from "./utils.service";
 import { Gameloop } from "./gameloop.service";
-import { throttle, debounce } from "@ribajs/utils/src/control";
+import { throttle } from "@ribajs/utils/src/control";
 
 export interface AutoscrollOptions {
   angle?: "vertical" | "horizontal";
@@ -204,20 +204,18 @@ export class Autoscroll {
     this.resume(1000);
   }
 
-  protected onResize() {
-    throttle(() => {
-      this.limit = this.getLimit(this.el);
-      this.resume(200);
-    })();
+  protected _onResize() {
+    this.limit = this.getLimit(this.el);
+    this.resume(200);
   }
 
-  protected onScroll() {
-    throttle(() => {
-      debounce(() => {
-        this.stopResumeTimeout();
-      })();
-    })();
+  protected onResize = throttle(this._onResize.bind(this));
+
+  protected _onScroll() {
+    this.stopResumeTimeout();
   }
+
+  protected onScroll = throttle(this._onScroll.bind(this));
 
   protected stopResumeTimeout() {
     if (this.resumeTimer !== null) {
@@ -245,11 +243,11 @@ export class Autoscroll {
   /**
    * This Interpolation:
    * ```
-   * protected render(interp: number) {
+   * protected render(Interpolation: number) {
    * ...
-   * this.move = (this.lastMove + (this.move - this.lastMove) * interp);
+   * this.move = (this.lastMove + (this.move - this.lastMove) * Interpolation);
    * ```
-   * is not working here for some reasion
+   * is not working here for some reason
    * like it works in the demos/extras-game-loop demo or here:
    * https://isaacsukin.com/news/2015/01/detailed-explanation-javascript-game-loops-and-timing
    *

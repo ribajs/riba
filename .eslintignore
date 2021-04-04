@@ -15,3 +15,5 @@ webpack.config.js
 infra/schematics/**
 
 **/*.js
+
+*.md

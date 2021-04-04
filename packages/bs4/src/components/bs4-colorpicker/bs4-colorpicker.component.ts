@@ -300,9 +300,7 @@ export class Bs4ColorPickerComponent extends Component {
    * @param flags If { silent: true }, won't trigger onChange.
    */
   protected setColor(color: string, flags: any = { silent: false }) {
-    debounce(() => {
-      this._setColor(color, flags);
-    })();
+    return debounce(this._setColor.bind(this))(color, flags);
   }
 
   protected _setColor(color: string, flags: any = { silent: false }) {
@@ -454,9 +452,7 @@ export class Bs4ColorPickerComponent extends Component {
   }
 
   protected updateUI(flags: any = {}) {
-    debounce(() => {
-      this._updateUI(flags);
-    })();
+    return debounce(this._updateUI.bind(this))(flags);
   }
 
   protected _updateUI(flags: any = {}) {

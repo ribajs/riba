@@ -5673,6 +5673,7 @@ __metadata:
     "@types/express": ^4.17.11
     "@types/express-session": ^1.17.3
     "@types/jest": ^26.0.22
+    "@types/lunr": ^2.3.3
     "@types/node": ^14.14.37
     "@types/supertest": ^2.0.11
     "@typescript-eslint/eslint-plugin": ^4.20.0
@@ -7548,6 +7549,13 @@ __metadata:
   version: 4.14.168
   resolution: "@types/lodash@npm:4.14.168"
   checksum: 9a4e25f89fc035b9f0388f1f7be85e5eff49f9e6db0d93432c9a89fce0916f8a89db4e8290415f7ea02de6b00d3573826378dcb655b7b2d20530a6e8d6dd6fd0
+  languageName: node
+  linkType: hard
+
+"@types/lunr@npm:^2.3.3":
+  version: 2.3.3
+  resolution: "@types/lunr@npm:2.3.3"
+  checksum: ae9e99337eb7ba9b6673167f212f5054ff9116daf1d507224b28fa3cbacea126a1101f788160e707d834cb4f9aa285c257f30777f7795241d82660042d958a09
   languageName: node
   linkType: hard
 

@@ -2,7 +2,7 @@ import { TemplatesComponent, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { clone, camelCase } from "@ribajs/utils/src/type";
-import { throttle, debounce } from "@ribajs/utils/src/control";
+import { throttle } from "@ribajs/utils/src/control";
 
 import {
   Dragscroll,
@@ -684,21 +684,21 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     this.setOptionsByBreakpoint(this.breakpoint);
   }
 
-  protected onViewChanges() {
-    throttle(() => {
-      this.debug("onViewChanges");
-      const newBreakpoint = this.getBreakpoint();
-      if (newBreakpoint !== this.breakpoint) {
-        this.breakpoint = newBreakpoint;
-        this.onBreakpointChanges();
-      }
-      this.setSlidePositions();
-      const index = this.setCenteredSlideActive();
-      if (this.scope.sticky) {
-        this.goTo(index);
-      }
-    })();
+  protected _onViewChanges() {
+    this.debug("onViewChanges");
+    const newBreakpoint = this.getBreakpoint();
+    if (newBreakpoint !== this.breakpoint) {
+      this.breakpoint = newBreakpoint;
+      this.onBreakpointChanges();
+    }
+    this.setSlidePositions();
+    const index = this.setCenteredSlideActive();
+    if (this.scope.sticky) {
+      this.goTo(index);
+    }
   }
+
+  protected onViewChanges = throttle(this._onViewChanges.bind(this));
 
   protected onVisibilityChanged(event: CustomEvent) {
     if (event.detail.visible) {
@@ -707,15 +707,11 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     }
   }
 
-  protected onScroll() {
-    throttle(() => {
-      debounce(() => {
-        // this.setSlidePositions();
-        // this.setCenteredSlideActive();
-        this.resume(1000);
-      })();
-    })();
+  protected _onScroll() {
+    this.resume(1000);
   }
+
+  protected onScroll = throttle(this._onScroll.bind(this));
 
   protected onScrollend() {
     this.setSlidePositions();
@@ -736,13 +732,11 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     this.resume(200);
   }
 
-  protected onMouseUp() {
-    throttle(() => {
-      debounce(() => {
-        this.resume(1000);
-      })();
-    })();
+  protected _onMouseUp() {
+    this.resume(1000);
   }
+
+  protected onMouseUp = throttle(this._onMouseUp.bind(this));
 
   /** Resume if this method was not called up for [delay] milliseconds */
   protected resume(delay = 1000) {
