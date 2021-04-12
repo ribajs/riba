@@ -6,11 +6,12 @@ export declare class LunrService {
     protected builders: Builders;
     protected indices: Indices;
     protected data: Data;
+    protected spell: any;
     protected getData(ns: string, resultRef: string): any;
     protected getSortedPositions(metadata: SearchResultExt['matchData']['metadata']): SortedPositionItem[];
     protected insertAt(target: string, insert: string, position: number): string;
-    protected highlightResult(fortifyResult: SearchResultExt): SearchResultExt;
-    protected highlightResults(fortifyResults: SearchResultExt[]): SearchResultExt[];
+    protected highlightResult(result: SearchResultExt): SearchResultExt;
+    protected highlightResults(results: SearchResultExt[]): SearchResultExt[];
     getRef(ns?: string): string;
     getOptions(ns?: string): CreateOptions;
     create(namespace?: string, options?: CreateOptions): Builder;

@@ -47,27 +47,27 @@ let LunrService = LunrService_1 = class LunrService {
     insertAt(target, insert, position) {
         return [target.slice(0, position), insert, target.slice(position)].join('');
     }
-    highlightResult(fortifyResult) {
+    highlightResult(result) {
         var _a;
-        const metadata = fortifyResult.matchData.metadata;
+        const metadata = result.matchData.metadata;
         const sortedPositions = this.getSortedPositions(metadata);
         for (const sortPos of sortedPositions) {
             const prop = sortPos.prop;
             const start = sortPos.start;
             const end = sortPos.end;
-            if ((_a = fortifyResult.data) === null || _a === void 0 ? void 0 : _a[prop]) {
-                let text = fortifyResult.data[prop];
+            if ((_a = result.data) === null || _a === void 0 ? void 0 : _a[prop]) {
+                let text = result.data[prop];
                 if (typeof text === 'string') {
                     text = this.insertAt(text, '</span>', end);
                     text = this.insertAt(text, `<span class='search-highlight'>`, start);
                 }
-                fortifyResult.data[prop] = text;
+                result.data[prop] = text;
             }
         }
-        return fortifyResult;
+        return result;
     }
-    highlightResults(fortifyResults) {
-        return fortifyResults.map((fortifyResult) => this.highlightResult(fortifyResult));
+    highlightResults(results) {
+        return results.map((result) => this.highlightResult(result));
     }
     getRef(ns = 'main') {
         var _a;
@@ -173,11 +173,14 @@ let LunrService = LunrService_1 = class LunrService {
     }
     add(ns, doc, attributes) {
         const builder = this.getBuilder(ns);
+        const options = this.getOptions(ns);
         if (!builder) {
             return null;
         }
-        this.data[ns] = this.data[ns] || [];
-        this.data[ns].push(doc);
+        if (options.metadataWhitelist.includes('data')) {
+            this.data[ns] = this.data[ns] || [];
+            this.data[ns].push(doc);
+        }
         return builder.add(doc, attributes);
     }
     build(ns) {
