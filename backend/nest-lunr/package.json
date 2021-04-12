@@ -7,7 +7,7 @@
   "main": "./dist/index.js",
   "scripts": {
     "clear": "rimraf dist",
-    "build": "npm run lint && tsc -p tsconfig.json",
+    "build": "npm run lint && npm run typecheck && npm run clear && tsc -p tsconfig.json",
     "watch": "npm run build -- --watch",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --ignore-pattern '*.spec.ts' --fix",
     "typecheck": "tsc -p tsconfig.json --noEmit"

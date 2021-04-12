@@ -14,17 +14,17 @@ app.module.ts
 
 ```ts
 import { Module } from '@nestjs/common';
-import { LunrModule } from '@ribajs/nest-lunr';
+import { LunrModule, SearchController } from '@ribajs/nest-lunr';
 
 // Your custom search service / controller
 import { SearchService } from './api/search/search.service';
-import { SearchController } from './api/search/search.controller';
+import { CustomSearchController } from './api/search/custom-search.controller';
 
 @Module({
   imports: [
     LunrModule,
   ],
-  controllers: [SearchController],
+  controllers: [SearchController, CustomSearchController],
   providers: [SearchService],
 })
 export class AppModule {}
@@ -42,7 +42,6 @@ import type { PagesQuery, PagesQueryVariables} from './types';
 
 @Injectable()
 export class SearchService implements OnModuleInit {
-  protected searchPage: Builder;
   protected graphql = new GraphQLClient('cms.myproject.org/graphql');;
 
   constructor(readonly lunr: LunrService) {
@@ -56,7 +55,7 @@ export class SearchService implements OnModuleInit {
     require('lunr-languages/lunr.de')(LunrService.lunr);
 
     const pageFields: Array<keyof PagesQuery> = ['title', 'slug', 'text'];
-    this.searchPage = this.lunr.create('page', {
+    this.lunr.create('page', {
       fields: pageFields,
       plugins: [{ plugin: lunr.multiLanguage('en', 'jp', 'de'), args: [] }],
       metadataWhitelist: ['position', 'index'],
@@ -79,7 +78,7 @@ export class SearchService implements OnModuleInit {
   public async refresh() {
     const pages = await this.loadPages();
     for (const page of pages) {
-      this.searchPage.add(page);
+      this.lunr.add('page', page);
     }
     this.lunr.buildIndex('page');
   }

@@ -14,11 +14,79 @@ let LunrService = LunrService_1 = class LunrService {
     constructor() {
         this.builders = {};
         this.indices = {};
+        this.data = {};
+    }
+    getData(ns = 'main', resultRef) {
+        var _a;
+        const ref = this.getRef(ns);
+        console.debug('getData', ns, ref, resultRef, this.data[ns]);
+        return (_a = this.data[ns]) === null || _a === void 0 ? void 0 : _a.find((data) => data[ref] === resultRef);
+    }
+    getSortedPositions(metadata) {
+        const sortedPositions = [];
+        for (const term in metadata) {
+            for (const prop in metadata[term]) {
+                const positions = metadata[term][prop].position;
+                for (let p = positions.length - 1; p >= 0; p--) {
+                    const pos = positions[p];
+                    if (pos.length === 2) {
+                        const start = positions[p][0];
+                        const end = start + positions[p][1];
+                        sortedPositions.push({
+                            start,
+                            end,
+                            prop,
+                            term,
+                        });
+                    }
+                }
+            }
+        }
+        return sortedPositions.sort((a, b) => b.end - a.end);
+    }
+    insertAt(target, insert, position) {
+        return [target.slice(0, position), insert, target.slice(position)].join('');
+    }
+    highlightResult(fortifyResult) {
+        var _a;
+        const metadata = fortifyResult.matchData.metadata;
+        const sortedPositions = this.getSortedPositions(metadata);
+        for (const sortPos of sortedPositions) {
+            const prop = sortPos.prop;
+            const start = sortPos.start;
+            const end = sortPos.end;
+            if ((_a = fortifyResult.data) === null || _a === void 0 ? void 0 : _a[prop]) {
+                let text = fortifyResult.data[prop];
+                if (typeof text === 'string') {
+                    text = this.insertAt(text, '</span>', end);
+                    text = this.insertAt(text, `<span class='search-highlight'>`, start);
+                }
+                fortifyResult.data[prop] = text;
+            }
+        }
+        return fortifyResult;
+    }
+    highlightResults(fortifyResults) {
+        return fortifyResults.map((fortifyResult) => this.highlightResult(fortifyResult));
+    }
+    getRef(ns = 'main') {
+        var _a;
+        return ((_a = this.getOptions(ns)) === null || _a === void 0 ? void 0 : _a.ref) || 'id';
+    }
+    getOptions(ns = 'main') {
+        var _a;
+        return (_a = this.builders[ns]) === null || _a === void 0 ? void 0 : _a.options;
     }
     create(namespace = 'main', options = {}) {
-        if (this.builders[namespace]) {
-            return this.builders[namespace];
+        var _a, _b;
+        if ((_a = this.builders[namespace]) === null || _a === void 0 ? void 0 : _a.builder) {
+            return this.builders[namespace].builder;
         }
+        options.metadataWhitelist = options.metadataWhitelist || [
+            'position',
+            'data',
+            'ns',
+        ];
         LunrService_1.lunr((builder) => {
             if (options.fields) {
                 if (typeof options.fields === 'object') {
@@ -75,20 +143,24 @@ let LunrService = LunrService_1 = class LunrService {
                     builder.use(plugin.plugin, ...plugin.args);
                 }
             }
-            this.builders[namespace] = builder;
-            return this.builders[namespace];
+            if (!this.builders[namespace]) {
+                this.builders[namespace] = {};
+            }
+            this.builders[namespace].builder = builder;
+            this.builders[namespace].options = options;
         });
-        return this.builders[namespace];
+        return (_b = this.builders[namespace]) === null || _b === void 0 ? void 0 : _b.builder;
     }
     buildIndex(namespace) {
-        var _a;
+        var _a, _b;
         if (this.builders[namespace]) {
-            this.indices[namespace] = (_a = this.builders[namespace]) === null || _a === void 0 ? void 0 : _a.build();
+            this.indices[namespace] = (_b = (_a = this.builders[namespace]) === null || _a === void 0 ? void 0 : _a.builder) === null || _b === void 0 ? void 0 : _b.build();
         }
         return this.indices[namespace];
     }
     getBuilder(namespace) {
-        return this.builders[namespace];
+        var _a;
+        return (_a = this.builders[namespace]) === null || _a === void 0 ? void 0 : _a.builder;
     }
     getIndex(namespace) {
         if (!this.indices[namespace]) {
@@ -99,19 +171,57 @@ let LunrService = LunrService_1 = class LunrService {
     getNamespaces() {
         return Object.keys(this.indices);
     }
+    add(ns, doc, attributes) {
+        const builder = this.getBuilder(ns);
+        if (!builder) {
+            return null;
+        }
+        this.data[ns] = this.data[ns] || [];
+        this.data[ns].push(doc);
+        return builder.add(doc, attributes);
+    }
+    build(ns) {
+        const builder = this.getBuilder(ns);
+        if (!builder) {
+            return null;
+        }
+        return builder.build();
+    }
+    use(ns, plugin, ...args) {
+        const builder = this.getBuilder(ns);
+        if (!builder) {
+            return null;
+        }
+        return builder.use(plugin, ...args);
+    }
     search(ns, query) {
         const index = this.getIndex(ns);
+        const options = this.getOptions(ns);
         if (!index) {
             return null;
         }
+        const resultsExt = [];
         const results = index.search(query);
         if (!results) {
             return null;
         }
         for (const result of results) {
-            result.ns = ns;
+            const data = this.getData(ns, result.ref);
+            console.debug('search data', ns, data);
+            const resultExt = Object.assign({}, result);
+            if (options.metadataWhitelist.includes('ns')) {
+                resultExt.ns = ns;
+            }
+            if (options.metadataWhitelist.includes('data')) {
+                resultExt.data = data;
+            }
+            resultsExt.push(resultExt);
         }
-        return results;
+        this.highlightResults(resultsExt);
+        resultsExt.sort((a, b) => {
+            return b.score - a.score;
+        });
+        return resultsExt;
     }
     searchAll(query) {
         const searchResults = [];
@@ -122,6 +232,9 @@ let LunrService = LunrService_1 = class LunrService {
                 searchResults.push(...results);
             }
         }
+        searchResults.sort((a, b) => {
+            return b.score - a.score;
+        });
         return searchResults;
     }
 };

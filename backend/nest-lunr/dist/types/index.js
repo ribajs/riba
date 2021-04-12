@@ -12,10 +12,14 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./builders"), exports);
 __exportStar(require("./create-options"), exports);
+__exportStar(require("./data"), exports);
 __exportStar(require("./field-attributes"), exports);
 __exportStar(require("./fields"), exports);
 __exportStar(require("./indices"), exports);
+__exportStar(require("./match-data-ext"), exports);
 __exportStar(require("./plugin-option"), exports);
 __exportStar(require("./plugin"), exports);
+__exportStar(require("./search-result-ext"), exports);
 __exportStar(require("./search-result"), exports);
+__exportStar(require("./sorted-position-item"), exports);
 //# sourceMappingURL=index.js.map
