@@ -19,8 +19,8 @@ let LunrService = LunrService_1 = class LunrService {
     getData(ns = 'main', resultRef) {
         var _a;
         const ref = this.getRef(ns);
-        console.debug('getData', ns, ref, resultRef, this.data[ns]);
-        return (_a = this.data[ns]) === null || _a === void 0 ? void 0 : _a.find((data) => data[ref] === resultRef);
+        const data = (_a = this.data[ns]) === null || _a === void 0 ? void 0 : _a.find((data) => data[ref] === resultRef);
+        return Object.assign({}, data);
     }
     getSortedPositions(metadata) {
         const sortedPositions = [];
@@ -207,7 +207,6 @@ let LunrService = LunrService_1 = class LunrService {
         }
         for (const result of results) {
             const data = this.getData(ns, result.ref);
-            console.debug('search data', ns, data);
             const resultExt = Object.assign({}, result);
             if (options.metadataWhitelist.includes('ns')) {
                 resultExt.ns = ns;

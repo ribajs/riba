@@ -27,8 +27,8 @@ export class LunrService {
 
   protected getData(ns = 'main', resultRef: string) {
     const ref = this.getRef(ns);
-    console.debug('getData', ns, ref, resultRef, this.data[ns]);
-    return this.data[ns]?.find((data) => data[ref] === resultRef);
+    const data = this.data[ns]?.find((data) => data[ref] === resultRef);
+    return Object.assign({}, data);
   }
 
   /**
@@ -347,7 +347,6 @@ export class LunrService {
     }
     for (const result of results) {
       const data = this.getData(ns, result.ref);
-      console.debug('search data', ns, data);
 
       const resultExt: SearchResultExt = {
         ...(result as SearchResultExt),
