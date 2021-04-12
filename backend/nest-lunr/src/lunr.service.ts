@@ -24,7 +24,6 @@ export class LunrService {
   protected builders: Builders = {};
   protected indices: Indices = {};
   protected data: Data = {};
-  protected spell;
 
   protected getData(ns = 'main', resultRef: string) {
     const ref = this.getRef(ns);

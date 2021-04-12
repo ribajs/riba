@@ -1,21 +1,20 @@
 import { Suggest } from './suggest';
+import { Storage } from './types';
 import big = require('../../test/big.json');
 import PERF1 = require('../../test/perf1');
 import PERF2 = require('../../test/perf2');
 
-function quality(name) {
-  var dict      = new Suggest()
-    , n         = 0
-    , bad       = 0
-    , unknown   = 0
-    , tests     = (name === '2') ? PERF2 : PERF1
-    , target
-    , start
-    , exported
-    ;
+function quality(name: string) {
+  const dict      = new Suggest();
+  let n         = 0;
+  let bad       = 0;
+  let unknown   = 0;
+  let tests: {[word: string]: string}     = (name === '2') ? PERF2 : PERF1;
+  let target: string;
+  let exported;
 
   dict.load(big);
-  exported = dict['export']().corpus;
+  exported = dict.export().corpus;
 
   for (target in tests) {
     if (tests.hasOwnProperty(target)) {
@@ -246,8 +245,8 @@ describe('Suggest', () => {
 
     it('Should be able to store and load from storage', function(){
 
-      let testSpell: any = {};
-      const storage = {
+      let testSpell: string = "";
+      const storage: Storage = {
         get: function () {
           try         { return JSON.parse(testSpell); }
           catch (err) { return {}; }
@@ -258,11 +257,9 @@ describe('Suggest', () => {
         }
       };
 
-      const dict = new Suggest();
-      dict.setStorage(storage);
+      const dict = new Suggest(storage);
       dict.load("tucano second skin", {store: true});
-      const dictClone     = new Suggest();
-      dictClone.setStorage(storage);
+      const dictClone     = new Suggest(storage);
       const dictNotClone = new Suggest();
       const exported           = dictClone.export().corpus;
       const exportedNotClone = dictNotClone.export().corpus;

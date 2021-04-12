@@ -1,3 +1,11 @@
+import {
+  Dictionary,
+  Storage,
+  LoadOptions,
+  AddWordOptions,
+  RemoveWordOptions,
+} from './types';
+
 /**
  * javascript spell checker based on
  * https://github.com/dscape/spell
@@ -5,8 +13,8 @@
  *  Maybe an good alternative: https://github.com/wooorm/nspell
  */
 export class Suggest {
-  protected dict: { [word: string]: number } = {};
-  protected dictStore: any;
+  protected dict: Dictionary = {};
+  protected dictStore: Storage;
   protected alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
   protected noop() {
@@ -18,18 +26,6 @@ export class Suggest {
       if (obj.hasOwnProperty(key)) return false;
     }
     return true;
-  }
-
-  /**
-   * Set a place to store
-   *
-   * @param dictStore object that implements two functions `get` to retrieve a stored dictionary from disk/memory `store` to store a dictionary from disk/memory
-   */
-  public setStorage(dictStore: any) {
-    this.dictStore = dictStore;
-    if (dictStore && typeof dictStore.get === 'function') {
-      this.dict = dictStore.get();
-    }
   }
 
   protected store(cb: () => void) {
@@ -83,7 +79,7 @@ export class Suggest {
   }
 
   protected order(candidates: any, min: number, max: number) {
-    const ordered_candidates = [];
+    const orderedCandidates = [];
     let current: any;
     let i: number;
     let w: string;
@@ -92,12 +88,26 @@ export class Suggest {
         current = candidates[i];
         for (w in current) {
           if (current.hasOwnProperty(w)) {
-            ordered_candidates.push({ word: w, score: i });
+            orderedCandidates.push({ word: w, score: i });
           }
         }
       }
     }
-    return ordered_candidates;
+    return orderedCandidates;
+  }
+
+  /**
+   * Set a place to store
+   *
+   * @param dictStore object that implements two functions `get` to retrieve a stored dictionary from disk/memory `store` to store a dictionary from disk/memory
+   */
+  constructor(dictStore?: Storage) {
+    if (dictStore) {
+      this.dictStore = dictStore;
+      if (typeof dictStore.get === 'function') {
+        this.dict = dictStore.get();
+      }
+    }
   }
 
   /**
@@ -124,26 +134,15 @@ export class Suggest {
    * spell.load('dog cat cat');
    *
    * @param corpus corpus string to initialize to
-   * @param opts.corpus corpus string to initialize to
-   * @param opts.reset whether you want to reset the existing dictionary or just append to what already exists
-   * @param opts.store decide if you want to use storage
-   * @param opts.after_store function to call back when store is done
+   * @param opts
    *
    * @return void
    */
-  public load(
-    corpus?: string | { [word: string]: number },
-    opts?: {
-      corpus?: string | { [word: string]: number };
-      reset?: boolean;
-      store?: boolean;
-      after_store?: () => void;
-    },
-  ) {
+  public load(corpus?: string | Dictionary, opts?: LoadOptions) {
     opts = opts || {};
     opts.reset = opts.reset !== false;
     opts.store = opts.store !== false;
-    opts.after_store = opts.after_store || this.noop;
+    opts.afterStore = opts.afterStore || this.noop;
     opts.corpus = corpus || opts.corpus || '';
     if (opts.reset) {
       this.dict = {};
@@ -156,7 +155,7 @@ export class Suggest {
       this.train(opts.corpus);
     }
     if (opts.store) {
-      this.store(opts.after_store);
+      this.store(opts.afterStore);
     }
   }
 
@@ -166,28 +165,14 @@ export class Suggest {
    * loads a word into the dictionary
    *
    * e.g.
-   * spell.insert_word('dog', 5);
+   * spell.insertWord('dog', 5);
    *
    * @param word the word you want to add
-   * @param opts.count number of times the word appears in a text, defaults to one
-   * @param opts.store decide if you want to use storage
-   * @param opts.done function to call back when store is done
+   * @param opts
    *
    * @return void
    */
-  public addWord(
-    word: string,
-    opts?:
-      | number
-      | string
-      | {
-          count?: number;
-          store?: boolean;
-          score?: number;
-          corpus?: string;
-          done?: () => void;
-        },
-  ) {
+  public addWord(word: string, opts?: number | string | AddWordOptions) {
     if (typeof opts === 'number' || typeof opts === 'string') {
       opts = { score: parseInt(opts.toString()) };
     }
@@ -213,15 +198,9 @@ export class Suggest {
    * spell.removeWord('dog');
    *
    * @param word the word you want to add
-   * @param opts.store decide if you want to use storage
-   * @param opts.done function to call back when store is done
-   *
-   * @return void
+   * @param opts
    */
-  public removeWord(
-    word: string,
-    opts?: { store?: boolean; done?: () => void },
-  ) {
+  public removeWord(word: string, opts?: RemoveWordOptions) {
     opts = opts || {};
     opts.store = opts.store !== false;
     opts.done = opts.done || this.noop;
@@ -312,7 +291,7 @@ export class Suggest {
    *
    * @return dictionary
    */
-  public export(): any {
+  public export(): { corpus: Dictionary } {
     return { corpus: this.dict };
   }
 }

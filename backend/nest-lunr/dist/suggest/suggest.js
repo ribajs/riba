@@ -2,9 +2,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Suggest = void 0;
 class Suggest {
-    constructor() {
+    constructor(dictStore) {
         this.dict = {};
         this.alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+        if (dictStore) {
+            this.dictStore = dictStore;
+            if (typeof dictStore.get === 'function') {
+                this.dict = dictStore.get();
+            }
+        }
     }
     noop() {
     }
@@ -14,12 +20,6 @@ class Suggest {
                 return false;
         }
         return true;
-    }
-    setStorage(dictStore) {
-        this.dictStore = dictStore;
-        if (dictStore && typeof dictStore.get === 'function') {
-            this.dict = dictStore.get();
-        }
     }
     store(cb) {
         if (this.dictStore && typeof this.dictStore.store === 'function') {
@@ -63,7 +63,7 @@ class Suggest {
         return edits;
     }
     order(candidates, min, max) {
-        const ordered_candidates = [];
+        const orderedCandidates = [];
         let current;
         let i;
         let w;
@@ -72,12 +72,12 @@ class Suggest {
                 current = candidates[i];
                 for (w in current) {
                     if (current.hasOwnProperty(w)) {
-                        ordered_candidates.push({ word: w, score: i });
+                        orderedCandidates.push({ word: w, score: i });
                     }
                 }
             }
         }
-        return ordered_candidates;
+        return orderedCandidates;
     }
     reset() {
         return this.load({}, { reset: true });
@@ -86,7 +86,7 @@ class Suggest {
         opts = opts || {};
         opts.reset = opts.reset !== false;
         opts.store = opts.store !== false;
-        opts.after_store = opts.after_store || this.noop;
+        opts.afterStore = opts.afterStore || this.noop;
         opts.corpus = corpus || opts.corpus || '';
         if (opts.reset) {
             this.dict = {};
@@ -100,7 +100,7 @@ class Suggest {
             this.train(opts.corpus);
         }
         if (opts.store) {
-            this.store(opts.after_store);
+            this.store(opts.afterStore);
         }
     }
     addWord(word, opts) {

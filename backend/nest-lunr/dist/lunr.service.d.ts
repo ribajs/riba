@@ -6,7 +6,6 @@ export declare class LunrService {
     protected builders: Builders;
     protected indices: Indices;
     protected data: Data;
-    protected spell: any;
     protected getData(ns: string, resultRef: string): any;
     protected getSortedPositions(metadata: SearchResultExt['matchData']['metadata']): SortedPositionItem[];
     protected insertAt(target: string, insert: string, position: number): string;
