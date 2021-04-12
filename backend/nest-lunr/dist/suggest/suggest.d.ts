@@ -1,4 +1,4 @@
-export declare class SuggestService {
+export declare class Suggest {
     protected dict: {
         [word: string]: number;
     };

@@ -9,12 +9,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.LunrModule = void 0;
 const common_1 = require("@nestjs/common");
 const lunr_service_1 = require("./lunr.service");
-const suggest_service_1 = require("./suggest/suggest.service");
 let LunrModule = class LunrModule {
 };
 LunrModule = __decorate([
     common_1.Module({
-        providers: [lunr_service_1.LunrService, suggest_service_1.SuggestService],
+        providers: [lunr_service_1.LunrService],
         controllers: [],
         exports: [lunr_service_1.LunrService],
     })

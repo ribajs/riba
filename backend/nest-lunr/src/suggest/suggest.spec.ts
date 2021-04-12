@@ -1,11 +1,10 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { SuggestService } from './suggest.service';
+import { Suggest } from './suggest';
 import big = require('../../test/big.json');
 import PERF1 = require('../../test/perf1');
 import PERF2 = require('../../test/perf2');
 
 function quality(name) {
-  var dict      = new SuggestService()
+  var dict      = new Suggest()
     , n         = 0
     , bad       = 0
     , unknown   = 0
@@ -38,35 +37,27 @@ function quality(name) {
 }
 
 // See https://github.com/dscape/spell/blob/master/test/spell.js
-describe('SuggestService', () => {
-  let service: SuggestService;
+describe('Suggest', () => {
+  let dict: Suggest;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [SuggestService],
-    }).compile();
-
-    service = module.get<SuggestService>(SuggestService);
+    dict = new Suggest();
   });
 
   it('should be defined', () => {
-    expect(service).toBeDefined();
+    expect(dict).toBeDefined();
   });
 
   describe('#load()', function(){
 
     beforeEach(async () => {
-      const module: TestingModule = await Test.createTestingModule({
-        providers: [SuggestService],
-      }).compile();
-  
-      service = module.get<SuggestService>(SuggestService);
+      dict = new Suggest();
     });
 
     it('Should be export the load', function() {
-      service.load("I am going to the park with Theo today. It's going to be the bomb.");
+      dict.load("I am going to the park with Theo today. It's going to be the bomb.");
 
-      var exported = service.export().corpus;
+      var exported = dict.export().corpus;
       expect(exported.i).toEqual(1);
       expect(exported.am).toEqual(1);
       expect(exported.going).toEqual(2);
@@ -80,7 +71,7 @@ describe('SuggestService', () => {
     });
 
     it('Should be able to read json', function() {
-      service.load(
+      dict.load(
           { "I"     : 1
           , "am"    : 1
           , "going" : 1
@@ -90,7 +81,7 @@ describe('SuggestService', () => {
           }
       );
 
-      const exported = service.export().corpus;
+      const exported = dict.export().corpus;
       expect(exported.i).toEqual(1);
       expect(exported.am).toEqual(1);
       expect(exported.going).toEqual(1);
@@ -100,10 +91,10 @@ describe('SuggestService', () => {
     });
 
     it('Should load without reseting', function() {
-      service.load("One Two Three.");
-      service.load("four", {"reset": false });
+      dict.load("One Two Three.");
+      dict.load("four", {"reset": false });
 
-      const exported = service.export().corpus;
+      const exported = dict.export().corpus;
       expect(exported.one).toEqual(1);
       expect(exported.two).toEqual(1);
       expect(exported.three).toEqual(1);
@@ -111,17 +102,17 @@ describe('SuggestService', () => {
     });
 
     it('Should load and export should work together', function() {
-      service.load();
-      const another = new SuggestService();
-      another.load({}, service.export());
-      expect(another.export()).toEqual(service.export());
+      dict.load();
+      const another = new Suggest();
+      another.load({}, dict.export());
+      expect(another.export()).toEqual(dict.export());
     });
 
     it('Should load with reseting', function() {
-      service.load("One Two Three.");
-      service.load("four", {"reset": true });
+      dict.load("One Two Three.");
+      dict.load("four", {"reset": true });
 
-      const exported = service.export().corpus;
+      const exported = dict.export().corpus;
       expect(exported.one).not.toEqual(1);
       expect(exported.two).not.toEqual(1);
       expect(exported.three).not.toEqual(1);
@@ -129,10 +120,10 @@ describe('SuggestService', () => {
     });
 
     it('Should load with first param string', function() {
-      service.load("One Two Three.");
-      service.load("four", {"reset": false });
+      dict.load("One Two Three.");
+      dict.load("four", {"reset": false });
 
-      const exported = service.export().corpus;
+      const exported = dict.export().corpus;
       expect(exported.one).toEqual(1);
       expect(exported.two).toEqual(1);
       expect(exported.three).toEqual(1);
@@ -143,17 +134,13 @@ describe('SuggestService', () => {
   describe('#addWord()', function(){
 
     beforeEach(async () => {
-      const module: TestingModule = await Test.createTestingModule({
-        providers: [SuggestService],
-      }).compile();
-  
-      service = module.get<SuggestService>(SuggestService);
+      dict = new Suggest();
     });
 
     it('Basic usage', function() {
-      service.load("One Two Three.");
-      service.addWord("Four");
-      const exported = service.export().corpus;
+      dict.load("One Two Three.");
+      dict.addWord("Four");
+      const exported = dict.export().corpus;
       expect(exported.one).toEqual(1);
       expect(exported.two).toEqual(1);
       expect(exported.three).toEqual(1);
@@ -161,20 +148,20 @@ describe('SuggestService', () => {
     });
 
     it('Should setting score', function() {
-      service.addWord("Four", {score: 500});
-      const exported = service.export().corpus;
+      dict.addWord("Four", {score: 500});
+      const exported = dict.export().corpus;
       expect(exported.four).toEqual(500);
     });
 
     it('Should add word with integer', function() {
-      service.addWord("test", 500);
-      const exported = service.export().corpus;
+      dict.addWord("test", 500);
+      const exported = dict.export().corpus;
       expect(exported.test).toEqual(500);
     });
 
     it('Should add word with string', function() {
-      service.addWord("test", "500");
-      const exported = service.export().corpus;
+      dict.addWord("test", "500");
+      const exported = dict.export().corpus;
       expect(exported.test).toEqual(500);
     });
   });
@@ -182,17 +169,13 @@ describe('SuggestService', () => {
   describe('#removeWord()', function(){
 
     beforeEach(async () => {
-      const module: TestingModule = await Test.createTestingModule({
-        providers: [SuggestService],
-      }).compile();
-  
-      service = module.get<SuggestService>(SuggestService);
+      dict = new Suggest();
     });
 
     it('Should removing word', function() {
-      service.load('the game');
-      service.removeWord("the");
-      const exported = service.export().corpus;
+      dict.load('the game');
+      dict.removeWord("the");
+      const exported = dict.export().corpus;
       expect(exported.game).toEqual(1);
       expect(exported.the).toEqual(undefined);
     });
@@ -201,17 +184,13 @@ describe('SuggestService', () => {
   describe('#reset()', function(){
 
     beforeEach(async () => {
-      const module: TestingModule = await Test.createTestingModule({
-        providers: [SuggestService],
-      }).compile();
-  
-      service = module.get<SuggestService>(SuggestService);
+      dict = new Suggest();
     });
 
     it('Reset should clean contents of dict', function() {
-      service.load("I am going to the park with Theo today. It's going to be the bomb.");
-      service.reset();
-      const exported = JSON.stringify(service.export().corpus);
+      dict.load("I am going to the park with Theo today. It's going to be the bomb.");
+      dict.reset();
+      const exported = JSON.stringify(dict.export().corpus);
       expect(exported).toEqual('{}');
     });
   });
@@ -219,34 +198,30 @@ describe('SuggestService', () => {
   describe('#suggest()', function(){
 
     beforeEach(async () => {
-      const module: TestingModule = await Test.createTestingModule({
-        providers: [SuggestService],
-      }).compile();
-  
-      service = module.get<SuggestService>(SuggestService);
-      service.load("I am going to the park with Theo today. It's going to be the bomb.");
+      dict = new Suggest();
+      dict.load("I am going to the park with Theo today. It's going to be the bomb.");
     });
 
     it('Should `suggest` `the` for `thew`', function() {
-      var suggest = service.suggest("thew");
+      var suggest = dict.suggest("thew");
       expect(suggest[0].word).toEqual("the");
       expect(suggest[0].score).toEqual(2);
       expect(suggest[1].word).toEqual("theo");
       expect(suggest[1].score ).toEqual(1);
     });
     it('Should correct word that exists should return the word', function(){
-      var suggest = service.suggest("the");
+      var suggest = dict.suggest("the");
       expect(suggest[0].word).toEqual("the");
       expect(suggest[0].score).toEqual(2);
       expect(suggest.length).toEqual(1);
     });
     it('Should first `suggest` should match `lucky`', function(){
-      const suggest = service.suggest("thew");
-      const lucky   = service.lucky("the");
+      const suggest = dict.suggest("thew");
+      const lucky   = dict.lucky("the");
       expect(suggest[0].word  ).toEqual(lucky);
     });
     it('Should be able to suggest w/ customer alphabets', function () {
-      var npm     = new SuggestService();
+      var npm     = new Suggest();
       npm.load({"uglify": 1, "uglify-js": 1});
       const suggest = npm.suggest('uglifyjs',
         "abcdefghijklmnopqrstuvwxyz-".split(""));
@@ -256,27 +231,18 @@ describe('SuggestService', () => {
   });
 
   describe('#lucky()', function(){
+
     beforeEach(async () => {
-      const module: TestingModule = await Test.createTestingModule({
-        providers: [SuggestService],
-      }).compile();
-  
-      service = module.get<SuggestService>(SuggestService);
+      dict = new Suggest();
     });
 
     it('Should work with empty dict', function() {
-      const lucky = service.lucky("testing");
+      const lucky = dict.lucky("testing");
       expect(lucky).toBeUndefined();
     });
   });
 
   describe('#storage', function () {
-
-    beforeEach(async () => {
-      const module: TestingModule = await Test.createTestingModule({
-        providers: [SuggestService],
-      }).compile();
-    });
 
     it('Should be able to store and load from storage', function(){
 
@@ -292,12 +258,12 @@ describe('SuggestService', () => {
         }
       };
 
-      const dict = new SuggestService();
+      const dict = new Suggest();
       dict.setStorage(storage);
       dict.load("tucano second skin", {store: true});
-      const dictClone     = new SuggestService();
+      const dictClone     = new Suggest();
       dictClone.setStorage(storage);
-      const dictNotClone = new SuggestService();
+      const dictNotClone = new Suggest();
       const exported           = dictClone.export().corpus;
       const exportedNotClone = dictNotClone.export().corpus;
       expect(exported.tucano).toEqual(1);
@@ -312,11 +278,7 @@ describe('SuggestService', () => {
   describe('#quality', function(){
 
     beforeEach(async () => {
-      const module: TestingModule = await Test.createTestingModule({
-        providers: [SuggestService],
-      }).compile();
-  
-      service = module.get<SuggestService>(SuggestService);
+      dict = new Suggest();
     });
 
     it('[perf1] less than 68 bad, 15 unknown', function() {
