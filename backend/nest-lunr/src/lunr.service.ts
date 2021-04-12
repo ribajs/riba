@@ -78,34 +78,32 @@ export class LunrService {
   /**
    * Highlights the search results in the text
    */
-  protected highlightResult(fortifyResult: SearchResultExt) {
-    const metadata = fortifyResult.matchData.metadata;
+  protected highlightResult(result: SearchResultExt) {
+    const metadata = result.matchData.metadata;
     const sortedPositions = this.getSortedPositions(metadata);
 
     for (const sortPos of sortedPositions) {
       const prop = sortPos.prop;
       const start = sortPos.start;
       const end = sortPos.end;
-      if (fortifyResult.data?.[prop]) {
-        let text = fortifyResult.data[prop] as string;
+      if (result.data?.[prop]) {
+        let text = result.data[prop] as string;
         if (typeof text === 'string') {
           text = this.insertAt(text, '</span>', end);
           text = this.insertAt(text, `<span class='search-highlight'>`, start);
         }
-        fortifyResult.data[prop] = text;
+        result.data[prop] = text;
       }
     }
 
-    return fortifyResult;
+    return result;
   }
 
   /**
    * Highlights the search results in the text
    */
-  protected highlightResults(fortifyResults: SearchResultExt[]) {
-    return fortifyResults.map((fortifyResult) =>
-      this.highlightResult(fortifyResult),
-    );
+  protected highlightResults(results: SearchResultExt[]) {
+    return results.map((result) => this.highlightResult(result));
   }
 
   public getRef(ns = 'main') {
@@ -278,11 +276,14 @@ export class LunrService {
    */
   add(ns: string, doc: any, attributes?: { boost?: number }): void {
     const builder = this.getBuilder(ns);
+    const options = this.getOptions(ns);
     if (!builder) {
       return null;
     }
-    this.data[ns] = this.data[ns] || [];
-    this.data[ns].push(doc);
+    if (options.metadataWhitelist.includes('data')) {
+      this.data[ns] = this.data[ns] || [];
+      this.data[ns].push(doc);
+    }
     return builder.add(doc, attributes);
   }
 
