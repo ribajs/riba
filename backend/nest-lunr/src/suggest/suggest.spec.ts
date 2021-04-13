@@ -1,8 +1,8 @@
 import { Suggest } from './suggest';
-import { Storage } from './types';
-import big = require('../../test/big.json');
-import PERF1 = require('../../test/perf1');
-import PERF2 = require('../../test/perf2');
+import { Storage, Dictionary } from './types';
+import * as big from '../../test/big.json';
+import * as PERF1 from '../../test/perf1.json';
+import * as PERF2 from '../../test/perf2.json';
 
 function quality(name: string) {
   const dict      = new Suggest();
@@ -11,7 +11,7 @@ function quality(name: string) {
   let unknown   = 0;
   let tests: {[word: string]: string}     = (name === '2') ? PERF2 : PERF1;
   let target: string;
-  let exported;
+  let exported: Dictionary;
 
   dict.load(big);
   exported = dict.export().corpus;

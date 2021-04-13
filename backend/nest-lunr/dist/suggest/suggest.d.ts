@@ -1,4 +1,4 @@
-import { Dictionary, Storage, LoadOptions, AddWordOptions, RemoveWordOptions } from './types';
+import { Dictionary, Storage, LoadOptions, AddWordOptions, RemoveWordOptions, SuggestResult } from './types';
 export declare class Suggest {
     protected dict: Dictionary;
     protected dictStore: Storage;
@@ -14,7 +14,7 @@ export declare class Suggest {
     load(corpus?: string | Dictionary, opts?: LoadOptions): void;
     addWord(word: string, opts?: number | string | AddWordOptions): void;
     removeWord(word: string, opts?: RemoveWordOptions): void;
-    suggest(word: string, alphabet?: string[]): any[];
+    suggest(word: string, alphabet?: string[]): SuggestResult[];
     lucky(word: string, alphabet?: string[]): string;
     export(): {
         corpus: Dictionary;

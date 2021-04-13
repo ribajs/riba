@@ -130,11 +130,7 @@ export class LunrService {
     }
 
     // TODO move to defaults
-    options.metadataWhitelist = options.metadataWhitelist || [
-      'position',
-      'data',
-      'ns',
-    ];
+    options.metadataWhitelist = options.metadataWhitelist || ['position'];
 
     LunrService.lunr((builder) => {
       if (options.fields) {
@@ -250,8 +246,7 @@ export class LunrService {
   }
 
   /**
-   * Returns all namespaces for which a built index exists
-   * @returns All namespaces for which a built index exists
+   * Returns all existing namespaces
    */
   public getNamespaces() {
     return Object.keys(this.indices);
@@ -276,14 +271,11 @@ export class LunrService {
    */
   add(ns: string, doc: any, attributes?: { boost?: number }): void {
     const builder = this.getBuilder(ns);
-    const options = this.getOptions(ns);
     if (!builder) {
       return null;
     }
-    if (options.metadataWhitelist.includes('data')) {
-      this.data[ns] = this.data[ns] || [];
-      this.data[ns].push(doc);
-    }
+    this.data[ns] = this.data[ns] || [];
+    this.data[ns].push(doc);
     return builder.add(doc, attributes);
   }
 
@@ -337,7 +329,6 @@ export class LunrService {
    */
   public search(ns: string, query: string) {
     const index = this.getIndex(ns);
-    const options = this.getOptions(ns);
     if (!index) {
       return null;
     }
@@ -351,15 +342,9 @@ export class LunrService {
 
       const resultExt: SearchResultExt = {
         ...(result as SearchResultExt),
+        ns,
+        data,
       };
-
-      if (options.metadataWhitelist.includes('ns')) {
-        resultExt.ns = ns;
-      }
-
-      if (options.metadataWhitelist.includes('data')) {
-        resultExt.data = data;
-      }
 
       resultsExt.push(resultExt);
     }

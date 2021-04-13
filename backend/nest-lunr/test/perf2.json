@@ -1,5 +1,5 @@
-var PERF2 = exports =
-  { "forbidden": "forbiden"
+{
+  "forbidden": "forbiden"
   , "decisions": "deciscions descisions"
   , "supposedly": "supposidly"
   , "embellishing": "embelishing"
@@ -362,5 +362,4 @@ var PERF2 = exports =
   , "necessitates": "nessisitates"
   , "together": "togehter"
   , "profits": "proffits"
-  };
-if(module && module.exports) { module.exports = PERF2; }
+}

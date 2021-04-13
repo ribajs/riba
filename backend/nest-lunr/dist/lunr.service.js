@@ -82,11 +82,7 @@ let LunrService = LunrService_1 = class LunrService {
         if ((_a = this.builders[namespace]) === null || _a === void 0 ? void 0 : _a.builder) {
             return this.builders[namespace].builder;
         }
-        options.metadataWhitelist = options.metadataWhitelist || [
-            'position',
-            'data',
-            'ns',
-        ];
+        options.metadataWhitelist = options.metadataWhitelist || ['position'];
         LunrService_1.lunr((builder) => {
             if (options.fields) {
                 if (typeof options.fields === 'object') {
@@ -173,14 +169,11 @@ let LunrService = LunrService_1 = class LunrService {
     }
     add(ns, doc, attributes) {
         const builder = this.getBuilder(ns);
-        const options = this.getOptions(ns);
         if (!builder) {
             return null;
         }
-        if (options.metadataWhitelist.includes('data')) {
-            this.data[ns] = this.data[ns] || [];
-            this.data[ns].push(doc);
-        }
+        this.data[ns] = this.data[ns] || [];
+        this.data[ns].push(doc);
         return builder.add(doc, attributes);
     }
     build(ns) {
@@ -199,7 +192,6 @@ let LunrService = LunrService_1 = class LunrService {
     }
     search(ns, query) {
         const index = this.getIndex(ns);
-        const options = this.getOptions(ns);
         if (!index) {
             return null;
         }
@@ -210,13 +202,8 @@ let LunrService = LunrService_1 = class LunrService {
         }
         for (const result of results) {
             const data = this.getData(ns, result.ref);
-            const resultExt = Object.assign({}, result);
-            if (options.metadataWhitelist.includes('ns')) {
-                resultExt.ns = ns;
-            }
-            if (options.metadataWhitelist.includes('data')) {
-                resultExt.data = data;
-            }
+            const resultExt = Object.assign(Object.assign({}, result), { ns,
+                data });
             resultsExt.push(resultExt);
         }
         this.highlightResults(resultsExt);

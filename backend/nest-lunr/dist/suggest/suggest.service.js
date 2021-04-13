@@ -23,6 +23,9 @@ let SuggestService = class SuggestService {
     get(ns) {
         return this.suggests[ns] || null;
     }
+    getNamespaces() {
+        return Object.keys(this.suggests);
+    }
     reset(ns) {
         const suggest = this.get(ns);
         if (!suggest) {
@@ -58,12 +61,40 @@ let SuggestService = class SuggestService {
         }
         return suggest.suggest(word, alphabet);
     }
+    suggestAll(word, alphabet) {
+        const namespaces = this.getNamespaces();
+        const allResults = [];
+        for (const ns of namespaces) {
+            const results = this.suggest(ns, word, alphabet);
+            if (results) {
+                for (const result of results) {
+                    const exists = allResults.find((allResult) => allResult.word === result.word);
+                    if (exists) {
+                        exists.ns.push(ns);
+                        exists.score += result.score;
+                    }
+                    else {
+                        allResults.push(Object.assign(Object.assign({}, result), { ns: [ns] }));
+                    }
+                }
+            }
+        }
+        allResults.sort((a, b) => {
+            return b.score - a.score;
+        });
+        return allResults;
+    }
     lucky(ns, word, alphabet) {
         const suggest = this.get(ns);
         if (!suggest) {
             return null;
         }
         return suggest.lucky(word, alphabet);
+    }
+    luckyAll(word, alphabet) {
+        var _a;
+        const suggestions = this.suggestAll(word, alphabet);
+        return (_a = suggestions[0]) === null || _a === void 0 ? void 0 : _a.word;
     }
     export(ns) {
         const suggest = this.get(ns);

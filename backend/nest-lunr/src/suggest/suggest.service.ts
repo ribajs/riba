@@ -6,6 +6,7 @@ import {
   LoadOptions,
   AddWordOptions,
   RemoveWordOptions,
+  SuggestResultExt,
 } from './types';
 import { Suggest } from './suggest';
 
@@ -24,6 +25,13 @@ export class SuggestService {
 
   public get(ns: string) {
     return this.suggests[ns] || null;
+  }
+
+  /**
+   * Returns all existing namespaces
+   */
+  public getNamespaces() {
+    return Object.keys(this.suggests);
   }
 
   public reset(ns: string) {
@@ -70,12 +78,46 @@ export class SuggestService {
     return suggest.suggest(word, alphabet);
   }
 
+  public suggestAll(word: string, alphabet?: string[]) {
+    const namespaces = this.getNamespaces();
+    const allResults: SuggestResultExt[] = [];
+    for (const ns of namespaces) {
+      const results = this.suggest(ns, word, alphabet);
+      if (results) {
+        for (const result of results) {
+          const exists = allResults.find(
+            (allResult) => allResult.word === result.word,
+          );
+          if (exists) {
+            // Merge existing word to result
+            exists.ns.push(ns);
+            exists.score += result.score;
+          } else {
+            // Add new word to result
+            allResults.push({ ...result, ns: [ns] });
+          }
+        }
+      }
+    }
+
+    allResults.sort((a, b) => {
+      return b.score - a.score;
+    });
+
+    return allResults;
+  }
+
   public lucky(ns: string, word: string, alphabet?: string[]) {
     const suggest = this.get(ns);
     if (!suggest) {
       return null;
     }
     return suggest.lucky(word, alphabet);
+  }
+
+  public luckyAll(word: string, alphabet?: string[]) {
+    const suggestions = this.suggestAll(word, alphabet);
+    return suggestions[0]?.word;
   }
 
   public export(ns: string) {

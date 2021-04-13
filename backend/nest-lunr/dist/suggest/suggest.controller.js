@@ -12,44 +12,53 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LunrController = void 0;
+exports.SuggestController = void 0;
 const common_1 = require("@nestjs/common");
-const lunr_service_1 = require("./lunr.service");
-let LunrController = class LunrController {
-    constructor(lunr) {
-        this.lunr = lunr;
+const suggest_service_1 = require("./suggest.service");
+let SuggestController = class SuggestController {
+    constructor(suggest) {
+        this.suggest = suggest;
     }
-    search(res, namespace, query) {
-        const results = this.lunr.search(namespace, query);
-        if (!results) {
-            throw new common_1.NotFoundException(`[Lunr] No index namespace "${namespace}" found!`);
+    async suggestion(res, namespace, word) {
+        let result;
+        try {
+            result = this.suggest.suggest(namespace, word);
         }
-        return res.json(results);
+        catch (error) {
+            throw error;
+        }
+        return res.json(result);
     }
-    searchAll(res, query) {
-        const result = this.lunr.searchAll(query);
+    async allSuggestions(res, word) {
+        let result;
+        try {
+            result = this.suggest.suggestAll(word);
+        }
+        catch (error) {
+            throw error;
+        }
         return res.json(result);
     }
 };
 __decorate([
-    common_1.Get('/search/:namespace/:query'),
+    common_1.Get('/:namespace/:word'),
     __param(0, common_1.Res()),
     __param(1, common_1.Param('namespace')),
-    __param(2, common_1.Param('query')),
+    __param(2, common_1.Param('word')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String, String]),
-    __metadata("design:returntype", void 0)
-], LunrController.prototype, "search", null);
+    __metadata("design:returntype", Promise)
+], SuggestController.prototype, "suggestion", null);
 __decorate([
-    common_1.Get('/search/:query'),
-    __param(0, common_1.Res()), __param(1, common_1.Param('query')),
+    common_1.Get('/:word'),
+    __param(0, common_1.Res()), __param(1, common_1.Param('word')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String]),
-    __metadata("design:returntype", void 0)
-], LunrController.prototype, "searchAll", null);
-LunrController = __decorate([
-    common_1.Controller('lunr'),
-    __metadata("design:paramtypes", [lunr_service_1.LunrService])
-], LunrController);
-exports.LunrController = LunrController;
-//# sourceMappingURL=lunr.controller.js.map
+    __metadata("design:returntype", Promise)
+], SuggestController.prototype, "allSuggestions", null);
+SuggestController = __decorate([
+    common_1.Controller('api/suggest'),
+    __metadata("design:paramtypes", [suggest_service_1.SuggestService])
+], SuggestController);
+exports.SuggestController = SuggestController;
+//# sourceMappingURL=suggest.controller.js.map

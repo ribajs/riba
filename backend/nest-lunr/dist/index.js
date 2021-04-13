@@ -10,9 +10,8 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./suggest/suggest"), exports);
-__exportStar(require("./suggest/suggest.service"), exports);
-__exportStar(require("./lunr.controller"), exports);
+__exportStar(require("./suggest"), exports);
+__exportStar(require("./search.controller"), exports);
 __exportStar(require("./lunr.module"), exports);
 __exportStar(require("./lunr.service"), exports);
 __exportStar(require("./types"), exports);

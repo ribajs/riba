@@ -4,7 +4,12 @@ import {
   LoadOptions,
   AddWordOptions,
   RemoveWordOptions,
+  SuggestResult,
 } from './types';
+
+// TODO include umlaut for all languages
+const ALPHABET = 'abcdefghijklmnopqrstuvwxyzäüöß'.split('');
+const ALPHABET_REGEX = /[a-zäüöß]+/g;
 
 /**
  * javascript spell checker based on
@@ -15,7 +20,7 @@ import {
 export class Suggest {
   protected dict: Dictionary = {};
   protected dictStore: Storage;
-  protected alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+  protected alphabet = ALPHABET;
 
   protected noop() {
     /**/
@@ -37,7 +42,8 @@ export class Suggest {
   protected train(corpus: string, regex?: RegExp) {
     let match: RegExpExecArray;
     let word: string;
-    regex = regex || /[a-z]+/g;
+    // TODO include umlaut for all languages
+    regex = regex || ALPHABET_REGEX;
     corpus = corpus.toLowerCase();
     while ((match = regex.exec(corpus))) {
       word = match[0];
@@ -225,7 +231,7 @@ export class Suggest {
    *
    * @return ordered array containing json objects such as [{"word": "spelling", "score": 10}]
    */
-  public suggest(word: string, alphabet?: string[]) {
+  public suggest(word: string, alphabet?: string[]): SuggestResult[] {
     if (this.dict.hasOwnProperty(word)) {
       return [{ word: word, score: this.dict[word] }];
     }

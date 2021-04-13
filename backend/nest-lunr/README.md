@@ -93,23 +93,23 @@ export class SearchService implements OnModuleInit {
 
 ### Controller
 
-The Nest.js Lunr.js module has [a build in controller](./src/lunr.controller.ts), you can use it as a base for your own controller or just use the build in controller:
+The Nest.js Lunr.js module has [a build in controller](./src/search.controller.ts), you can use it as a base for your own controller or just use the build in controller:
 
-`/lunr/search/:namespace/:query`
+`/api/search/:namespace/:query`
 
 Search in a specific namespace
 
-- `@Get('/search/:namespace/:query')` - The url, e.g. `https://myproject.org/lunr/page/ゼルダ` which search for `ゼルダ` in your page namespace
+- `@Get('/:namespace/:query')` - The url, e.g. `https://myproject.org/api/search/page/ゼルダ` which search for `ゼルダ` in your page namespace
 - `@Param('namespace')` - The namespace you have defined in your `search.service.ts` with `this.searchPage = this.lunr.create('page')`
 - `@Param('query')` - Your search query, e.g. `ゼルダ`
 
 ---
 
-`/lunr/search/:query`
+`/api/search/:query`
 
 Search in a all existing namespaces
 
-- `@Get('/search/:query')` - The url, e.g. `https://myproject.org/lunr/ゼル
+- `@Get('/:query')` - The url, e.g. `https://myproject.org/api/search/ゼル
 - `@Param('query') query: string` - Your search query, e.g. `ゼルダ`
 
 ---

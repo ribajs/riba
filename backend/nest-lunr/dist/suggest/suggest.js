@@ -1,10 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Suggest = void 0;
+const ALPHABET = 'abcdefghijklmnopqrstuvwxyzäüöß'.split('');
+const ALPHABET_REGEX = /[a-zäüöß]+/g;
 class Suggest {
     constructor(dictStore) {
         this.dict = {};
-        this.alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+        this.alphabet = ALPHABET;
         if (dictStore) {
             this.dictStore = dictStore;
             if (typeof dictStore.get === 'function') {
@@ -29,7 +31,7 @@ class Suggest {
     train(corpus, regex) {
         let match;
         let word;
-        regex = regex || /[a-z]+/g;
+        regex = regex || ALPHABET_REGEX;
         corpus = corpus.toLowerCase();
         while ((match = regex.exec(corpus))) {
             word = match[0];
