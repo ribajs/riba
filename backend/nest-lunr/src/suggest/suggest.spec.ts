@@ -303,4 +303,65 @@ describe('Suggest', () => {
     });
   });
 
+  describe('#ignore()', function(){
+
+    beforeEach(async () => {
+      dict = new Suggest();
+    });
+
+    it('Should ignore ignored words', function() {
+
+      dict.ignore('I am to the with it to be')
+      dict.load("I am going to the park with Theo today. It's going to be the bomb.");
+
+      // Ignored
+      const luckyThe = dict.lucky("the");
+      expect(luckyThe).not.toEqual('the');
+
+      const luckyWith = dict.lucky("with");
+      expect(luckyWith).not.toEqual("with");
+
+      const luckyI = dict.lucky("i");
+      expect(luckyI).not.toEqual('i');
+
+      const luckyAm = dict.lucky("am");
+      expect(luckyAm).not.toEqual("am");
+
+      const luckyTo = dict.lucky("to");
+      expect(luckyTo).not.toEqual("to");
+
+      // Not ignored
+      const luckyToday = dict.lucky("today");
+      expect(luckyToday).toEqual("today");
+
+      const luckyTheo = dict.lucky("Theo");
+      expect(luckyTheo).toEqual("theo");
+
+      const luckyBomp = dict.lucky("bomb");
+      expect(luckyBomp).toEqual("bomb");
+    });
+
+
+    it('Should reset ignored words', function() {
+      dict.ignore('I am to the with it to be')
+      dict.ignore('the to', { reset: true });
+      dict.load("I am going to the park with Theo today. It's going to be the bomb.");
+
+      // Ignored
+      const luckyThe = dict.lucky("the");
+      expect(luckyThe).not.toEqual('the');
+
+      const luckyTo = dict.lucky("to");
+      expect(luckyTo).not.toEqual("to");
+
+      // Not ignored
+      const luckyWith = dict.lucky("with");
+      expect(luckyWith).toEqual("with");
+
+      const luckyI = dict.lucky("i");
+      expect(luckyI).toEqual("i");
+    });
+
+  });
+
 });

@@ -21,6 +21,7 @@ export class Suggest {
   protected dict: Dictionary = {};
   protected dictStore: Storage;
   protected alphabet = ALPHABET;
+  protected ignoreWords: string[] = [];
 
   protected noop() {
     /**/
@@ -42,7 +43,6 @@ export class Suggest {
   protected train(corpus: string, regex?: RegExp) {
     let match: RegExpExecArray;
     let word: string;
-    // TODO include umlaut for all languages
     regex = regex || ALPHABET_REGEX;
     corpus = corpus.toLowerCase();
     while ((match = regex.exec(corpus))) {
@@ -117,6 +117,31 @@ export class Suggest {
   }
 
   /**
+   *
+   * ignore words
+   *
+   * @see https://github.com/olivernn/lunr.js/blob/master/lib/stop_word_filter.js for example words to ignore
+   *
+   * @return void
+   */
+  public ignore(
+    ignoreWords: string | string[],
+    opts: { reset?: boolean } = {},
+  ) {
+    if (typeof ignoreWords === 'string') {
+      ignoreWords = ignoreWords.split(' ');
+    }
+    if (Array.isArray(ignoreWords)) {
+      ignoreWords = ignoreWords.map((ignoreWord) => ignoreWord.toLowerCase());
+    }
+    if (opts?.reset === true) {
+      this.ignoreWords = ignoreWords;
+    } else {
+      this.ignoreWords.push(...ignoreWords);
+    }
+  }
+
+  /**
    * reset
    *
    * resets the dictionary.
@@ -187,6 +212,9 @@ export class Suggest {
     opts.store = opts.store || true;
     opts.done = opts.done || this.noop;
     word = word.toLowerCase();
+    if (this.ignoreWords.includes(word)) {
+      return;
+    }
     this.dict[word] = this.dict.hasOwnProperty(word)
       ? this.dict[word] + opts.score
       : opts.score;

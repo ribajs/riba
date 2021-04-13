@@ -26,6 +26,13 @@ let SuggestService = class SuggestService {
     getNamespaces() {
         return Object.keys(this.suggests);
     }
+    ignore(ns, ignoreWords) {
+        const suggest = this.get(ns);
+        if (!suggest) {
+            throw new Error(`Namespace "${ns}" not found!`);
+        }
+        return suggest.ignore(ignoreWords);
+    }
     reset(ns) {
         const suggest = this.get(ns);
         if (!suggest) {

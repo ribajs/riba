@@ -7,6 +7,7 @@ class Suggest {
     constructor(dictStore) {
         this.dict = {};
         this.alphabet = ALPHABET;
+        this.ignoreWords = [];
         if (dictStore) {
             this.dictStore = dictStore;
             if (typeof dictStore.get === 'function') {
@@ -81,6 +82,20 @@ class Suggest {
         }
         return orderedCandidates;
     }
+    ignore(ignoreWords, opts = {}) {
+        if (typeof ignoreWords === 'string') {
+            ignoreWords = ignoreWords.split(' ');
+        }
+        if (Array.isArray(ignoreWords)) {
+            ignoreWords = ignoreWords.map((ignoreWord) => ignoreWord.toLowerCase());
+        }
+        if ((opts === null || opts === void 0 ? void 0 : opts.reset) === true) {
+            this.ignoreWords = ignoreWords;
+        }
+        else {
+            this.ignoreWords.push(...ignoreWords);
+        }
+    }
     reset() {
         return this.load({}, { reset: true });
     }
@@ -114,6 +129,9 @@ class Suggest {
         opts.store = opts.store || true;
         opts.done = opts.done || this.noop;
         word = word.toLowerCase();
+        if (this.ignoreWords.includes(word)) {
+            return;
+        }
         this.dict[word] = this.dict.hasOwnProperty(word)
             ? this.dict[word] + opts.score
             : opts.score;

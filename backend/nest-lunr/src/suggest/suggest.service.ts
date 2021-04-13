@@ -34,6 +34,14 @@ export class SuggestService {
     return Object.keys(this.suggests);
   }
 
+  public ignore(ns: string, ignoreWords: string | string[]) {
+    const suggest = this.get(ns);
+    if (!suggest) {
+      throw new Error(`Namespace "${ns}" not found!`);
+    }
+    return suggest.ignore(ignoreWords);
+  }
+
   public reset(ns: string) {
     const suggest = this.get(ns);
     if (!suggest) {
