@@ -91,7 +91,18 @@ describe('Suggest', () => {
 
     it('Should load without reseting', function() {
       dict.load("One Two Three.");
-      dict.load("four", {"reset": false });
+      dict.load("four", {reset: false });
+
+      const exported = dict.export().corpus;
+      expect(exported.one).toEqual(1);
+      expect(exported.two).toEqual(1);
+      expect(exported.three).toEqual(1);
+      expect(exported.four).toEqual(1);
+    });
+
+    it('Should not reset by default', function() {
+      dict.load("One Two Three.");
+      dict.load("four");
 
       const exported = dict.export().corpus;
       expect(exported.one).toEqual(1);
@@ -109,7 +120,7 @@ describe('Suggest', () => {
 
     it('Should load with reseting', function() {
       dict.load("One Two Three.");
-      dict.load("four", {"reset": true });
+      dict.load("four", {reset: true });
 
       const exported = dict.export().corpus;
       expect(exported.one).not.toEqual(1);
@@ -120,7 +131,7 @@ describe('Suggest', () => {
 
     it('Should load with first param string', function() {
       dict.load("One Two Three.");
-      dict.load("four", {"reset": false });
+      dict.load("four", {reset: false });
 
       const exported = dict.export().corpus;
       expect(exported.one).toEqual(1);

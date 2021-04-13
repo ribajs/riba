@@ -1,11 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { SuggestController } from './suggest.controller';
+import { SuggestService } from './suggest.service';
 
 describe('SuggestController', () => {
   let controller: SuggestController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      providers: [SuggestService],
       controllers: [SuggestController],
     }).compile();
 

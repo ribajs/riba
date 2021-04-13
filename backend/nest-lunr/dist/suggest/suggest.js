@@ -86,7 +86,7 @@ class Suggest {
     }
     load(corpus, opts) {
         opts = opts || {};
-        opts.reset = opts.reset !== false;
+        opts.reset = opts.reset === true;
         opts.store = opts.store !== false;
         opts.afterStore = opts.afterStore || this.noop;
         opts.corpus = corpus || opts.corpus || '';

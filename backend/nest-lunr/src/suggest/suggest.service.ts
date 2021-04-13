@@ -37,7 +37,7 @@ export class SuggestService {
   public reset(ns: string) {
     const suggest = this.get(ns);
     if (!suggest) {
-      return null;
+      throw new Error(`Namespace "${ns}" not found!`);
     }
     return suggest.reset();
   }
@@ -45,7 +45,7 @@ export class SuggestService {
   public load(ns: string, corpus?: string | Dictionary, opts?: LoadOptions) {
     const suggest = this.get(ns);
     if (!suggest) {
-      return null;
+      throw new Error(`Namespace "${ns}" not found!`);
     }
     return suggest.load(corpus, opts);
   }
@@ -57,7 +57,7 @@ export class SuggestService {
   ) {
     const suggest = this.get(ns);
     if (!suggest) {
-      return null;
+      throw new Error(`Namespace "${ns}" not found!`);
     }
     return suggest.addWord(word, opts);
   }
@@ -65,7 +65,7 @@ export class SuggestService {
   public removeWord(ns: string, word: string, opts?: RemoveWordOptions) {
     const suggest = this.get(ns);
     if (!suggest) {
-      return null;
+      throw new Error(`Namespace "${ns}" not found!`);
     }
     return suggest.removeWord(word, opts);
   }
@@ -73,7 +73,7 @@ export class SuggestService {
   public suggest(ns: string, word: string, alphabet?: string[]) {
     const suggest = this.get(ns);
     if (!suggest) {
-      return null;
+      throw new Error(`Namespace "${ns}" not found!`);
     }
     return suggest.suggest(word, alphabet);
   }
@@ -110,7 +110,7 @@ export class SuggestService {
   public lucky(ns: string, word: string, alphabet?: string[]) {
     const suggest = this.get(ns);
     if (!suggest) {
-      return null;
+      throw new Error(`Namespace "${ns}" not found!`);
     }
     return suggest.lucky(word, alphabet);
   }
@@ -123,7 +123,7 @@ export class SuggestService {
   public export(ns: string) {
     const suggest = this.get(ns);
     if (!suggest) {
-      return null;
+      throw new Error(`Namespace "${ns}" not found!`);
     }
     return suggest.export();
   }

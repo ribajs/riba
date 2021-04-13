@@ -29,35 +29,35 @@ let SuggestService = class SuggestService {
     reset(ns) {
         const suggest = this.get(ns);
         if (!suggest) {
-            return null;
+            throw new Error(`Namespace "${ns}" not found!`);
         }
         return suggest.reset();
     }
     load(ns, corpus, opts) {
         const suggest = this.get(ns);
         if (!suggest) {
-            return null;
+            throw new Error(`Namespace "${ns}" not found!`);
         }
         return suggest.load(corpus, opts);
     }
     addWord(ns, word, opts) {
         const suggest = this.get(ns);
         if (!suggest) {
-            return null;
+            throw new Error(`Namespace "${ns}" not found!`);
         }
         return suggest.addWord(word, opts);
     }
     removeWord(ns, word, opts) {
         const suggest = this.get(ns);
         if (!suggest) {
-            return null;
+            throw new Error(`Namespace "${ns}" not found!`);
         }
         return suggest.removeWord(word, opts);
     }
     suggest(ns, word, alphabet) {
         const suggest = this.get(ns);
         if (!suggest) {
-            return null;
+            throw new Error(`Namespace "${ns}" not found!`);
         }
         return suggest.suggest(word, alphabet);
     }
@@ -87,7 +87,7 @@ let SuggestService = class SuggestService {
     lucky(ns, word, alphabet) {
         const suggest = this.get(ns);
         if (!suggest) {
-            return null;
+            throw new Error(`Namespace "${ns}" not found!`);
         }
         return suggest.lucky(word, alphabet);
     }
@@ -99,7 +99,7 @@ let SuggestService = class SuggestService {
     export(ns) {
         const suggest = this.get(ns);
         if (!suggest) {
-            return null;
+            throw new Error(`Namespace "${ns}" not found!`);
         }
         return suggest.export();
     }
