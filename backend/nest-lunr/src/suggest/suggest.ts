@@ -5,11 +5,12 @@ import {
   AddWordOptions,
   RemoveWordOptions,
   SuggestResult,
+  IgnoreOptions,
 } from './types';
 
 // TODO include umlaut for all languages
 const ALPHABET = 'abcdefghijklmnopqrstuvwxyzäüöß'.split('');
-const ALPHABET_REGEX = /[a-zäüöß]+/g;
+const ALPHABET_REGEX = /[a-zÀ-ž]+/g;
 
 /**
  * javascript spell checker based on
@@ -124,10 +125,7 @@ export class Suggest {
    *
    * @return void
    */
-  public ignore(
-    ignoreWords: string | string[],
-    opts: { reset?: boolean } = {},
-  ) {
+  public ignore(ignoreWords: string | string[], opts: IgnoreOptions = {}) {
     if (typeof ignoreWords === 'string') {
       ignoreWords = ignoreWords.split(' ');
     }
@@ -169,8 +167,7 @@ export class Suggest {
    *
    * @return void
    */
-  public load(corpus?: string | Dictionary, opts?: LoadOptions) {
-    opts = opts || {};
+  public load(corpus?: string | Dictionary, opts: LoadOptions = {}) {
     opts.reset = opts.reset === true;
     opts.store = opts.store !== false;
     opts.afterStore = opts.afterStore || this.noop;
@@ -203,11 +200,10 @@ export class Suggest {
    *
    * @return void
    */
-  public addWord(word: string, opts?: number | string | AddWordOptions) {
+  public addWord(word: string, opts: number | string | AddWordOptions = {}) {
     if (typeof opts === 'number' || typeof opts === 'string') {
       opts = { score: parseInt(opts.toString()) };
     }
-    opts = opts || {};
     opts.score = opts.score || 1;
     opts.store = opts.store || true;
     opts.done = opts.done || this.noop;
@@ -234,8 +230,7 @@ export class Suggest {
    * @param word the word you want to add
    * @param opts
    */
-  public removeWord(word: string, opts?: RemoveWordOptions) {
-    opts = opts || {};
+  public removeWord(word: string, opts: RemoveWordOptions = {}) {
     opts.store = opts.store !== false;
     opts.done = opts.done || this.noop;
     if (this.dict.hasOwnProperty(word)) {

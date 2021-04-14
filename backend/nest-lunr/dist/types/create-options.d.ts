@@ -12,7 +12,12 @@ export interface CreateOptions {
     b?: number;
     k1?: number;
     termIndex?: number;
-    metadataWhitelist?: string[];
+    metadataAllowList?: string[];
     ref?: string;
     plugins?: PluginOption[];
+    data?: {
+        include?: boolean;
+        highlight?: boolean;
+        shorten?: boolean;
+    };
 }

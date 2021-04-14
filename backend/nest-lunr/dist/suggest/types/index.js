@@ -12,6 +12,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./add-word-options"), exports);
 __exportStar(require("./dictionary"), exports);
+__exportStar(require("./ignore-options"), exports);
 __exportStar(require("./load-options"), exports);
 __exportStar(require("./remove-word-options"), exports);
 __exportStar(require("./storage"), exports);

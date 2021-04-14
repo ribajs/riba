@@ -1,4 +1,4 @@
-import { Dictionary, Storage, LoadOptions, AddWordOptions, RemoveWordOptions, SuggestResult } from './types';
+import { Dictionary, Storage, LoadOptions, AddWordOptions, RemoveWordOptions, SuggestResult, IgnoreOptions } from './types';
 export declare class Suggest {
     protected dict: Dictionary;
     protected dictStore: Storage;
@@ -11,9 +11,7 @@ export declare class Suggest {
     protected edits(word: string, alphabetOverride: string[]): any[];
     protected order(candidates: any, min: number, max: number): any[];
     constructor(dictStore?: Storage);
-    ignore(ignoreWords: string | string[], opts?: {
-        reset?: boolean;
-    }): void;
+    ignore(ignoreWords: string | string[], opts?: IgnoreOptions): void;
     reset(): void;
     load(corpus?: string | Dictionary, opts?: LoadOptions): void;
     addWord(word: string, opts?: number | string | AddWordOptions): void;

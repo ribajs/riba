@@ -1,5 +1,6 @@
 export * from './add-word-options';
 export * from './dictionary';
+export * from './ignore-options';
 export * from './load-options';
 export * from './remove-word-options';
 export * from './storage';

@@ -59,9 +59,9 @@ export interface CreateOptions {
   termIndex?: number;
 
   /**
-   * A list of metadata keys that have been whitelisted for entry in the index.
+   * A list of metadata keys that have been allowed for entry in the index.
    */
-  metadataWhitelist?: string[];
+  metadataAllowList?: string[];
 
   /**
    * Sets the document field used as the document reference. Every document must have this field.
@@ -90,4 +90,17 @@ export interface CreateOptions {
    *
    */
   plugins?: PluginOption[];
+
+  data?: {
+    /**
+     * Set this to true if you want to return the original data with the search result.
+     */
+    include?: boolean;
+
+    /**
+     * Set this to true if you want to highlight the text in the original data.
+     * Please note that for this the option data.include must be `true` and you need to allow the `position` key in metadataAllowList.
+     */
+    highlight?: boolean;
+  };
 }

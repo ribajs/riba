@@ -58,7 +58,7 @@ export class SearchService implements OnModuleInit {
     this.lunr.create('page', {
       fields: pageFields,
       plugins: [{ plugin: lunr.multiLanguage('en', 'jp', 'de'), args: [] }],
-      metadataWhitelist: ['position', 'index'],
+      metadataAllowList: ['position', 'index'],
     });
   }
 

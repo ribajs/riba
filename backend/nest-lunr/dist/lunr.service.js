@@ -82,7 +82,8 @@ let LunrService = LunrService_1 = class LunrService {
         if ((_a = this.builders[namespace]) === null || _a === void 0 ? void 0 : _a.builder) {
             return this.builders[namespace].builder;
         }
-        options.metadataWhitelist = options.metadataWhitelist || ['position'];
+        options.metadataAllowList = options.metadataAllowList || ['position'];
+        options.data = options.data || {};
         LunrService_1.lunr((builder) => {
             if (options.fields) {
                 if (typeof options.fields === 'object') {
@@ -119,8 +120,8 @@ let LunrService = LunrService_1 = class LunrService {
             if (options.invertedIndex) {
                 builder.invertedIndex = options.invertedIndex;
             }
-            if (options.metadataWhitelist) {
-                builder.metadataWhitelist = options.metadataWhitelist;
+            if (options.metadataAllowList) {
+                builder.metadataWhitelist = options.metadataAllowList;
             }
             if (options.pipeline) {
                 builder.pipeline = options.pipeline;
@@ -168,12 +169,16 @@ let LunrService = LunrService_1 = class LunrService {
         return Object.keys(this.indices);
     }
     add(ns, doc, attributes) {
+        var _a;
         const builder = this.getBuilder(ns);
         if (!builder) {
             return null;
         }
-        this.data[ns] = this.data[ns] || [];
-        this.data[ns].push(doc);
+        const options = this.getOptions(ns);
+        if ((_a = options.data) === null || _a === void 0 ? void 0 : _a.include) {
+            this.data[ns] = this.data[ns] || [];
+            this.data[ns].push(doc);
+        }
         return builder.add(doc, attributes);
     }
     build(ns) {
@@ -191,22 +196,27 @@ let LunrService = LunrService_1 = class LunrService {
         return builder.use(plugin, ...args);
     }
     search(ns, query) {
+        var _a, _b, _c;
         const index = this.getIndex(ns);
         if (!index) {
             return null;
         }
+        const options = this.getOptions(ns);
         const resultsExt = [];
         const results = index.search(query);
         if (!results) {
             return null;
         }
         for (const result of results) {
-            const data = this.getData(ns, result.ref);
-            const resultExt = Object.assign(Object.assign({}, result), { ns,
-                data });
+            const resultExt = Object.assign(Object.assign({}, result), { ns });
+            if ((_a = options.data) === null || _a === void 0 ? void 0 : _a.include) {
+                resultExt.data = this.getData(ns, result.ref);
+            }
             resultsExt.push(resultExt);
         }
-        this.highlightResults(resultsExt);
+        if (((_b = options.data) === null || _b === void 0 ? void 0 : _b.include) && ((_c = options.data) === null || _c === void 0 ? void 0 : _c.highlight)) {
+            this.highlightResults(resultsExt);
+        }
         resultsExt.sort((a, b) => {
             return b.score - a.score;
         });

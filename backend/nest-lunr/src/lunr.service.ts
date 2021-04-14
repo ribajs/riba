@@ -130,7 +130,9 @@ export class LunrService {
     }
 
     // TODO move to defaults
-    options.metadataWhitelist = options.metadataWhitelist || ['position'];
+    options.metadataAllowList = options.metadataAllowList || ['position'];
+
+    options.data = options.data || {};
 
     LunrService.lunr((builder) => {
       if (options.fields) {
@@ -176,8 +178,8 @@ export class LunrService {
         builder.invertedIndex = options.invertedIndex;
       }
 
-      if (options.metadataWhitelist) {
-        builder.metadataWhitelist = options.metadataWhitelist;
+      if (options.metadataAllowList) {
+        builder.metadataWhitelist = options.metadataAllowList;
       }
 
       if (options.pipeline) {
@@ -274,8 +276,11 @@ export class LunrService {
     if (!builder) {
       return null;
     }
-    this.data[ns] = this.data[ns] || [];
-    this.data[ns].push(doc);
+    const options = this.getOptions(ns);
+    if (options.data?.include) {
+      this.data[ns] = this.data[ns] || [];
+      this.data[ns].push(doc);
+    }
     return builder.add(doc, attributes);
   }
 
@@ -332,24 +337,28 @@ export class LunrService {
     if (!index) {
       return null;
     }
+    const options = this.getOptions(ns);
     const resultsExt: SearchResultExt[] = [];
     const results: Partial<SearchResult>[] = index.search(query);
     if (!results) {
       return null;
     }
     for (const result of results) {
-      const data = this.getData(ns, result.ref);
-
       const resultExt: SearchResultExt = {
         ...(result as SearchResultExt),
         ns,
-        data,
       };
+
+      if (options.data?.include) {
+        resultExt.data = this.getData(ns, result.ref);
+      }
 
       resultsExt.push(resultExt);
     }
 
-    this.highlightResults(resultsExt);
+    if (options.data?.include && options.data?.highlight) {
+      this.highlightResults(resultsExt);
+    }
 
     resultsExt.sort((a, b) => {
       return b.score - a.score;

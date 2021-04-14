@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Suggest = void 0;
 const ALPHABET = 'abcdefghijklmnopqrstuvwxyzäüöß'.split('');
-const ALPHABET_REGEX = /[a-zäüöß]+/g;
+const ALPHABET_REGEX = /[a-zÀ-ž]+/g;
 class Suggest {
     constructor(dictStore) {
         this.dict = {};
@@ -99,8 +99,7 @@ class Suggest {
     reset() {
         return this.load({}, { reset: true });
     }
-    load(corpus, opts) {
-        opts = opts || {};
+    load(corpus, opts = {}) {
         opts.reset = opts.reset === true;
         opts.store = opts.store !== false;
         opts.afterStore = opts.afterStore || this.noop;
@@ -120,11 +119,10 @@ class Suggest {
             this.store(opts.afterStore);
         }
     }
-    addWord(word, opts) {
+    addWord(word, opts = {}) {
         if (typeof opts === 'number' || typeof opts === 'string') {
             opts = { score: parseInt(opts.toString()) };
         }
-        opts = opts || {};
         opts.score = opts.score || 1;
         opts.store = opts.store || true;
         opts.done = opts.done || this.noop;
@@ -139,8 +137,7 @@ class Suggest {
             this.store(opts.done);
         }
     }
-    removeWord(word, opts) {
-        opts = opts || {};
+    removeWord(word, opts = {}) {
         opts.store = opts.store !== false;
         opts.done = opts.done || this.noop;
         if (this.dict.hasOwnProperty(word)) {
