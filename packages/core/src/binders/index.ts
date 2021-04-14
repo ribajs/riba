@@ -7,6 +7,7 @@ export { checkedBinder } from "./checked.binder";
 export { classStarBinder } from "./class-name.binder";
 export { componentAttributeBinder } from "./co-attribute.binder";
 export { cssStarBinder } from "./style-css-property.binder";
+export { tagStarBinder } from "./tag-name.binder";
 export { enabledBinder } from "./enabled.binder";
 export { flexSortChildsBinder } from "./flex-sort-childs.binder";
 export { disabledBinder } from "./disabled.binder";
