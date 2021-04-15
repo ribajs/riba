@@ -13,15 +13,15 @@ exports.SsrService = void 0;
 const common_1 = require("@nestjs/common");
 const jsdom_1 = require("jsdom");
 const Brakes = require("brakes");
-const vm_1 = require("vm");
 const config_1 = require("@nestjs/config");
 const path_1 = require("path");
 const consolidate = require("consolidate");
-const fs_1 = require("fs");
 const node_fetch_1 = require("node-fetch");
 const events_1 = require("@ribajs/events");
+const source_file_service_1 = require("./source-file/source-file.service");
 let SsrService = class SsrService {
-    constructor(config) {
+    constructor(config, sourceFile) {
+        this.sourceFile = sourceFile;
         this.log = new common_1.Logger(this.constructor.name);
         this.theme = config.get('theme');
     }
@@ -75,17 +75,6 @@ let SsrService = class SsrService {
     async transformLayout(layout, rootTag, pageTag) {
         layout = layout.replace(new RegExp(rootTag, 'gi'), pageTag);
         return layout;
-    }
-    async readSsrScripts(filenames) {
-        const scripts = new Map();
-        const assetsDir = this.theme.assetsDir;
-        const scriptsDir = path_1.resolve(assetsDir, 'ssr');
-        for (const filename of filenames) {
-            const scriptPath = path_1.resolve(scriptsDir, filename);
-            const scriptSource = await fs_1.promises.readFile(scriptPath, 'utf8');
-            scripts.set(filename, scriptSource);
-        }
-        return scripts;
     }
     async renderTemplate(templatePath, variables) {
         if (!path_1.extname(templatePath)) {
@@ -148,17 +137,10 @@ let SsrService = class SsrService {
                 return reject(this.transformBrowserError(error));
             });
         });
-        const scriptSources = await this.readSsrScripts(scriptFilenames);
-        const scripts = [];
-        for (const [filename, scriptSource] of scriptSources) {
-            const script = new vm_1.Script(scriptSource, {
-                filename,
-            });
-            scripts.push(script);
-        }
+        const files = await this.sourceFile.loads(scriptFilenames);
         const vmContext = dom.getInternalVMContext();
-        for (const script of scripts) {
-            await script.runInContext(vmContext);
+        for (const file of files) {
+            await file.script.runInContext(vmContext);
         }
         this.log.debug('Wait for custom element...');
         return result;
@@ -198,7 +180,8 @@ let SsrService = class SsrService {
 };
 SsrService = __decorate([
     common_1.Injectable(),
-    __metadata("design:paramtypes", [config_1.ConfigService])
+    __metadata("design:paramtypes", [config_1.ConfigService,
+        source_file_service_1.SourceFileService])
 ], SsrService);
 exports.SsrService = SsrService;
 //# sourceMappingURL=ssr.service.js.map

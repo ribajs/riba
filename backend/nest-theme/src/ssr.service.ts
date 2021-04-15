@@ -1,25 +1,26 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { VirtualConsole, JSDOM } from 'jsdom';
 import * as Brakes from 'brakes';
-
-import { Script } from 'vm';
 import { ConfigService } from '@nestjs/config';
 import { TemplateVars } from './types/template-vars';
 import { ThemeConfig, ErrorObj } from '@ribajs/ssr';
 import { resolve, extname } from 'path';
 import * as consolidate from 'consolidate';
 import type { Request } from 'express';
-import { promises as fs } from 'fs';
 import fetch from 'node-fetch';
 import type { ComponentLifecycleEventData, SharedContext } from '@ribajs/ssr';
 import type { RenderResult } from './types';
 import { EventDispatcher } from '@ribajs/events';
+import { SourceFileService } from './source-file/source-file.service';
 
 @Injectable()
 export class SsrService {
   log = new Logger(this.constructor.name);
   theme: ThemeConfig;
-  constructor(config: ConfigService) {
+  constructor(
+    config: ConfigService,
+    protected readonly sourceFile: SourceFileService,
+  ) {
     this.theme = config.get<ThemeConfig>('theme');
   }
 
@@ -91,21 +92,6 @@ export class SsrService {
   async transformLayout(layout: string, rootTag: string, pageTag: string) {
     layout = layout.replace(new RegExp(rootTag, 'gi'), pageTag);
     return layout;
-  }
-
-  async readSsrScripts(filenames: string[]) {
-    const scripts = new Map<string, string>();
-    const assetsDir = this.theme.assetsDir;
-    const scriptsDir = resolve(assetsDir, 'ssr');
-    for (const filename of filenames) {
-      const scriptPath = resolve(scriptsDir, filename);
-      // this.log.debug('scriptPath', scriptPath);
-      const scriptSource = await fs.readFile(scriptPath, 'utf8');
-      // this.log.debug('Scripts loaded!');
-      scripts.set(filename, scriptSource);
-    }
-
-    return scripts;
   }
 
   /**
@@ -217,21 +203,14 @@ export class SsrService {
       });
     });
 
-    const scriptSources = await this.readSsrScripts(scriptFilenames);
-    const scripts: Script[] = [];
-    for (const [filename, scriptSource] of scriptSources) {
-      const script = new Script(scriptSource, {
-        filename,
-      });
-      scripts.push(script);
-    }
+    const files = await this.sourceFile.loads(scriptFilenames);
 
     // Set shared context here
     const vmContext = dom.getInternalVMContext();
 
     // this.log.debug('Execute scripts...');
-    for (const script of scripts) {
-      await script.runInContext(vmContext);
+    for (const file of files) {
+      await file.script.runInContext(vmContext);
     }
 
     this.log.debug('Wait for custom element...');

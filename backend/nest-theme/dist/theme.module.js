@@ -20,6 +20,7 @@ const empty_template_vars_1 = require("./empty-template-vars");
 const http_exception_filter_1 = require("./filters/http-exception.filter");
 const config_2 = require("./helper/config");
 const path_1 = require("path");
+const source_file_service_1 = require("./source-file/source-file.service");
 let ThemeModule = ThemeModule_1 = class ThemeModule {
     constructor(adapterHost, config, ssrMiddleware) {
         this.adapterHost = adapterHost;
@@ -67,9 +68,14 @@ let ThemeModule = ThemeModule_1 = class ThemeModule {
 };
 ThemeModule = ThemeModule_1 = __decorate([
     common_1.Module({
-        providers: [ssr_service_1.SsrService, ssr_middleware_1.SsrMiddleware, http_exception_filter_1.HttpExceptionFilterProvider],
+        providers: [
+            ssr_service_1.SsrService,
+            ssr_middleware_1.SsrMiddleware,
+            http_exception_filter_1.HttpExceptionFilterProvider,
+            source_file_service_1.SourceFileService,
+        ],
         controllers: [],
-        exports: [ssr_service_1.SsrService, ssr_middleware_1.SsrMiddleware],
+        exports: [ssr_service_1.SsrService, ssr_middleware_1.SsrMiddleware, source_file_service_1.SourceFileService],
     }),
     __metadata("design:paramtypes", [core_1.HttpAdapterHost,
         config_1.ConfigService,

@@ -22,10 +22,16 @@ import {
   validateFullThemeConfig,
 } from './helper/config';
 import { resolve } from 'path';
+import { SourceFileService } from './source-file/source-file.service';
 @Module({
-  providers: [SsrService, SsrMiddleware, HttpExceptionFilterProvider],
+  providers: [
+    SsrService,
+    SsrMiddleware,
+    HttpExceptionFilterProvider,
+    SourceFileService,
+  ],
   controllers: [],
-  exports: [SsrService, SsrMiddleware],
+  exports: [SsrService, SsrMiddleware, SourceFileService],
 })
 export class ThemeModule {
   constructor(
