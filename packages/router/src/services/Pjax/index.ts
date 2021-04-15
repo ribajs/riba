@@ -92,47 +92,51 @@ class Pjax {
    * Determine if the link should be followed
    */
   public static preventCheck(
-    evt: Event,
-    element: HTMLAnchorElement | HTMLLinkElement | HTMLUnknownElement,
-    href: string
+    url: string,
+    element?: HTMLAnchorElement | HTMLLinkElement | HTMLUnknownElement,
+    evt?: Event
   ): boolean {
     if (!window.history.pushState) {
       return false;
     }
 
-    if (!this.preventCheckUrl(href)) {
+    if (!this.preventCheckUrl(url)) {
       return false;
     }
 
-    // Middle click, cmd click, ctrl click or prefetch load event
-    if (
-      (evt && (evt as any).which && (evt as any).which > 1) ||
-      (evt as any).metaKey ||
-      (evt as any).ctrlKey ||
-      (evt as any).shiftKey ||
-      (evt as any).altKey
-    ) {
-      return false;
+    if (evt) {
+      // Middle click, cmd click, ctrl click or prefetch load event
+      if (
+        (evt && (evt as any).which && (evt as any).which > 1) ||
+        (evt as any).metaKey ||
+        (evt as any).ctrlKey ||
+        (evt as any).shiftKey ||
+        (evt as any).altKey
+      ) {
+        return false;
+      }
     }
 
-    // Ignore target with _blank target
-    if (
-      (element as HTMLAnchorElement).target &&
-      (element as HTMLAnchorElement).target === "_blank"
-    ) {
-      return false;
-    }
+    if (element) {
+      // Ignore target with _blank target
+      if (
+        (element as HTMLAnchorElement).target &&
+        (element as HTMLAnchorElement).target === "_blank"
+      ) {
+        return false;
+      }
 
-    // Ignore case where there is download attribute
-    if (
-      element.getAttribute &&
-      typeof element.getAttribute("download") === "string"
-    ) {
-      return false;
-    }
+      // Ignore case where there is download attribute
+      if (
+        element.getAttribute &&
+        typeof element.getAttribute("download") === "string"
+      ) {
+        return false;
+      }
 
-    if (element.classList.contains(IGNORE_CLASS_LINK)) {
-      return false;
+      if (element.classList.contains(IGNORE_CLASS_LINK)) {
+        return false;
+      }
     }
 
     return true;
@@ -530,7 +534,7 @@ class Pjax {
     if (!href) {
       throw new Error("href is falsy");
     }
-    const follow = Pjax.preventCheck(evt, el, href);
+    const follow = Pjax.preventCheck(href, el, evt);
 
     if (follow) {
       evt.stopPropagation();

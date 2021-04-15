@@ -96,7 +96,7 @@ class Prefetch {
 
     url = normalizeUrl(url);
 
-    const preventCheck = Pjax.preventCheck(evt, el, url);
+    const preventCheck = Pjax.preventCheck(url, el, evt);
 
     // Check if the link is eligible for Pjax
     if (url && preventCheck) {
@@ -110,9 +110,23 @@ class Prefetch {
         console.warn(`No pjax instance for viewId "${this.viewId}" found!`);
         el.classList.add(ROUTE_ERROR_CLASS);
       }
-    } else {
-      if (!preventCheck) {
-        // console.warn('preventCheck failed: ' + url, preventCheck);
+    }
+  }
+
+  public url(url: string) {
+    url = normalizeUrl(url);
+
+    const preventCheck = Pjax.preventCheck(url);
+
+    // Check if the link is eligible for Pjax
+    if (url && preventCheck) {
+      const pjax = Pjax.getInstance(this.viewId);
+      if (pjax) {
+        pjax.loadResponseCached(url, false, false).catch((error) => {
+          console.error(error);
+        });
+      } else {
+        console.warn(`No pjax instance for viewId "${this.viewId}" found!`);
       }
     }
   }
