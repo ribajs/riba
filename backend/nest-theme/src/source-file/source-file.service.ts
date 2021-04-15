@@ -1,14 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { ThemeConfig } from '@ribajs/ssr';
 import { ConfigService } from '@nestjs/config';
 import { resolve } from 'path';
 import { promises as fs } from 'fs';
 import { Script } from 'vm';
-
 import { SourceFile } from './types';
 
 @Injectable()
 export class SourceFileService {
+  protected log = new Logger(this.constructor.name);
   protected theme: ThemeConfig;
   protected scripts = new Map<string, SourceFile>();
   protected dir: string;
@@ -23,7 +23,7 @@ export class SourceFileService {
    *
    * @param {string} filename
    */
-  public async loadUncached(filename: string) {
+  public async loadAndSetCache(filename: string) {
     const path = resolve(this.dir, filename);
     // this.log.debug('path', path);
     const source = await fs.readFile(path, 'utf8');
@@ -54,15 +54,17 @@ export class SourceFileService {
       const file = this.scripts.get(filename);
       const stats = await fs.stat(file.path);
       if (file.stats.mtimeMs === stats.mtimeMs) {
-        console.debug(`Load ${filename} from cache`);
+        this.log.debug(`Source ${filename} from cache`);
         return file;
       } else {
-        console.debug(`File ${filename} has been change, refresh cache`);
-        return this.loadUncached(filename);
+        this.log.debug(`Source ${filename} has been change, refresh cache`);
+        return this.loadAndSetCache(filename);
       }
     }
-    console.debug(`File ${filename} currently not cached, add them to cache`);
-    return this.loadUncached(filename);
+    this.log.debug(
+      `Source ${filename} currently not cached, add them to cache`,
+    );
+    return this.loadAndSetCache(filename);
   }
 
   /**

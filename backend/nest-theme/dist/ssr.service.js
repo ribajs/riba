@@ -14,14 +14,14 @@ const common_1 = require("@nestjs/common");
 const jsdom_1 = require("jsdom");
 const Brakes = require("brakes");
 const config_1 = require("@nestjs/config");
-const path_1 = require("path");
-const consolidate = require("consolidate");
 const node_fetch_1 = require("node-fetch");
 const events_1 = require("@ribajs/events");
 const source_file_service_1 = require("./source-file/source-file.service");
+const template_file_service_1 = require("./template-file/template-file.service");
 let SsrService = class SsrService {
-    constructor(config, sourceFile) {
+    constructor(config, sourceFile, templateFile) {
         this.sourceFile = sourceFile;
+        this.templateFile = templateFile;
         this.log = new common_1.Logger(this.constructor.name);
         this.theme = config.get('theme');
     }
@@ -57,43 +57,7 @@ let SsrService = class SsrService {
         };
         return sharedContext;
     }
-    getTemplateEngine(templatePath) {
-        const ext = path_1.extname(templatePath);
-        const def = this.theme.viewEngine;
-        const detected = (ext === null || ext === void 0 ? void 0 : ext.substring(1)) || def;
-        if (detected !== def) {
-            this.log.warn(`Detected template engine is not the default: "${detected}" (Default: "${def}")'`);
-        }
-        try {
-            require.resolve(detected);
-        }
-        catch (error) {
-            this.log.error(`Template engine not installed, try to run "yarn add ${detected}"`);
-        }
-        return detected;
-    }
-    async transformLayout(layout, rootTag, pageTag) {
-        layout = layout.replace(new RegExp(rootTag, 'gi'), pageTag);
-        return layout;
-    }
-    async renderTemplate(templatePath, variables) {
-        if (!path_1.extname(templatePath)) {
-            templatePath += '.' + this.theme.viewEngine;
-        }
-        const viewsDir = this.theme.viewsDir;
-        const tplEngine = this.getTemplateEngine(templatePath);
-        templatePath = path_1.resolve(viewsDir, templatePath);
-        try {
-            const result = await consolidate[tplEngine](path_1.resolve(viewsDir, templatePath), variables);
-            return result;
-        }
-        catch (error) {
-            this.log.error('Error on render template');
-            this.log.error(error);
-            throw error;
-        }
-    }
-    async renderWithJSDom(layout, componentTagName, sharedContext, scriptFilenames = ['main.bundle.js']) {
+    async createDomForLayout(layout) {
         const virtualConsole = new jsdom_1.VirtualConsole();
         virtualConsole.sendTo(console);
         const dom = new jsdom_1.JSDOM(layout, {
@@ -115,10 +79,14 @@ let SsrService = class SsrService {
                         },
                     };
                 }
-                window.ssr = sharedContext;
             },
         });
-        const result = new Promise((resolve, reject) => {
+        return dom;
+    }
+    async render(layout, componentTagName, sharedContext, scriptFilenames = ['main.bundle.js']) {
+        const dom = await this.createDomForLayout(layout);
+        dom.window.ssr = sharedContext;
+        const renderResult = new Promise((resolve, reject) => {
             sharedContext.events.once('ready', (lifecycleEventData) => {
                 const html = dom.serialize();
                 const result = Object.assign(Object.assign({}, lifecycleEventData), { html: html, css: [] });
@@ -143,7 +111,7 @@ let SsrService = class SsrService {
             await file.script.runInContext(vmContext);
         }
         this.log.debug('Wait for custom element...');
-        return result;
+        return renderResult;
     }
     transformBrowserError(error) {
         const newError = new Error(error.message);
@@ -152,23 +120,22 @@ let SsrService = class SsrService {
         }
         return newError;
     }
-    async renderComponent({ template, rootTag = 'ssr-root-page', componentTagName, sharedContext, }) {
-        if (!rootTag) {
-            rootTag = this.theme.ssr.rootTag || 'ssr-root-page';
-        }
-        if (!template) {
-            template = this.theme.ssr.template || 'page-component.pug';
-        }
-        let layout = await this.renderTemplate(template, sharedContext);
-        layout = await this.transformLayout(layout, rootTag, componentTagName);
+    async renderComponent({ templatePath, rootTag = 'ssr-root-page', componentTagName, sharedContext, }) {
+        rootTag = rootTag || this.theme.ssr.rootTag || 'ssr-root-page';
+        templatePath =
+            templatePath || this.theme.ssr.template || 'page-component.pug';
+        const template = await this.templateFile.load(templatePath, rootTag, componentTagName, {
+            env: sharedContext.env,
+            templateVars: sharedContext.templateVars,
+        });
         try {
-            const render = async () => {
-                return this.renderWithJSDom(layout, componentTagName, sharedContext);
+            const _render = async () => {
+                return this.render(template.layout, componentTagName, sharedContext);
             };
-            const renderWithJSDom = new Brakes(render, {
+            const render = new Brakes(_render, {
                 timeout: 20000,
             });
-            const renderData = await renderWithJSDom.exec();
+            const renderData = await render.exec();
             return renderData;
         }
         catch (error) {
@@ -181,7 +148,8 @@ let SsrService = class SsrService {
 SsrService = __decorate([
     common_1.Injectable(),
     __metadata("design:paramtypes", [config_1.ConfigService,
-        source_file_service_1.SourceFileService])
+        source_file_service_1.SourceFileService,
+        template_file_service_1.TemplateFileService])
 ], SsrService);
 exports.SsrService = SsrService;
 //# sourceMappingURL=ssr.service.js.map

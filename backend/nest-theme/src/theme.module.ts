@@ -23,12 +23,14 @@ import {
 } from './helper/config';
 import { resolve } from 'path';
 import { SourceFileService } from './source-file/source-file.service';
+import { TemplateFileService } from './template-file/template-file.service';
 @Module({
   providers: [
     SsrService,
     SsrMiddleware,
     HttpExceptionFilterProvider,
     SourceFileService,
+    TemplateFileService,
   ],
   controllers: [],
   exports: [SsrService, SsrMiddleware, SourceFileService],

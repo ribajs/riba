@@ -17,11 +17,12 @@ const fs_1 = require("fs");
 const vm_1 = require("vm");
 let SourceFileService = class SourceFileService {
     constructor(config) {
+        this.log = new common_1.Logger(this.constructor.name);
         this.scripts = new Map();
         this.theme = config.get('theme');
         this.dir = path_1.resolve(this.theme.assetsDir, 'ssr');
     }
-    async loadUncached(filename) {
+    async loadAndSetCache(filename) {
         const path = path_1.resolve(this.dir, filename);
         const source = await fs_1.promises.readFile(path, 'utf8');
         const stats = await fs_1.promises.stat(path);
@@ -42,16 +43,16 @@ let SourceFileService = class SourceFileService {
             const file = this.scripts.get(filename);
             const stats = await fs_1.promises.stat(file.path);
             if (file.stats.mtimeMs === stats.mtimeMs) {
-                console.debug(`Load ${filename} from cache`);
+                this.log.debug(`Source ${filename} from cache`);
                 return file;
             }
             else {
-                console.debug(`File ${filename} has been change, refresh cache`);
-                return this.loadUncached(filename);
+                this.log.debug(`Source ${filename} has been change, refresh cache`);
+                return this.loadAndSetCache(filename);
             }
         }
-        console.debug(`File ${filename} currently not cached, add them to cache`);
-        return this.loadUncached(filename);
+        this.log.debug(`Source ${filename} currently not cached, add them to cache`);
+        return this.loadAndSetCache(filename);
     }
     async loads(filenames) {
         for (const filename of filenames) {
