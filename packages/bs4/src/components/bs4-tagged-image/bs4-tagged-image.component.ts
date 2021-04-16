@@ -114,8 +114,17 @@ export class Bs4TaggedImageComponent extends Component {
   protected addEventListeners() {
     const img = this.image as HTMLImageElement;
     img.addEventListener("load", this.scope.updateTagPositions);
-    window.addEventListener("resize", this.scope.updateTagPositions);
     img.addEventListener("click", this.scope.onClick);
+    window.addEventListener("resize", this.scope.updateTagPositions, {
+      passive: true,
+    });
+  }
+
+  protected removeEventListeners() {
+    const img = this.image as HTMLImageElement;
+    img.removeEventListener("load", this.scope.updateTagPositions);
+    img.removeEventListener("click", this.scope.onClick);
+    window.removeEventListener("resize", this.scope.updateTagPositions);
   }
 
   protected async afterBind() {
@@ -130,7 +139,7 @@ export class Bs4TaggedImageComponent extends Component {
 
   disconnectedCallback() {
     this.removeEventListener("click", this.scope.onClick);
-    window.removeEventListener("resize", this.updateTagPositions);
+    window.removeEventListener("resize", this.scope.updateTagPositions);
   }
 
   /**

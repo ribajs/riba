@@ -1,4 +1,4 @@
-import { Binder } from "../interfaces";
+import { Binder } from "../types";
 import { extend } from "@ribajs/utils/src/type";
 
 export interface Assign {

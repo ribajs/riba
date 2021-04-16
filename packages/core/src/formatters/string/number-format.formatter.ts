@@ -1,4 +1,4 @@
-import { Formatter } from "../../interfaces";
+import { Formatter } from "../../types";
 import { isNumber } from "@ribajs/utils/src/type";
 import { toDecimalFormatter } from "../type/to-decimal.formatter";
 import { isIntegerFormatter } from "../type/is-integer.formatter";

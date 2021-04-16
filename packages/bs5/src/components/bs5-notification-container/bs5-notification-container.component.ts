@@ -2,7 +2,7 @@ import { Component, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./bs5-notification-container.component.html";
-import { Notification } from "../../interfaces";
+import { Notification } from "../../types";
 
 export interface Scope {
   iconUrl?: string;

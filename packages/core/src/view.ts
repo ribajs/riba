@@ -1,10 +1,5 @@
 import { Riba } from "./riba";
-import {
-  Binder,
-  Options,
-  BindableElement,
-  TypeOfComponent,
-} from "./interfaces";
+import { Binder, Options, BindableElement, TypeOfComponent } from "./types";
 import { Binding } from "./binding";
 import { parseNode, parseDeclaration } from "./parsers";
 import { BasicComponent, Component } from "./component";

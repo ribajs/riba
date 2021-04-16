@@ -1,4 +1,4 @@
-import { Binder } from "../interfaces";
+import { Binder } from "../types";
 
 /**
  * Enables the element when value is true.

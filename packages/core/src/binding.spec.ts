@@ -8,7 +8,7 @@ import {
   eachStarBinder,
   addClassBinder
 } from "./binders";
-import { Formatter, Adapter } from "./interfaces";
+import { Formatter, Adapter } from "./types";
 
 describe("riba.Binding", () => {
 

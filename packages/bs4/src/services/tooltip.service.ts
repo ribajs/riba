@@ -5,25 +5,23 @@
  * @see https://github.com/twbs/bootstrap/blob/main/js/src/tooltip.js
  * --------------------------------------------------------------------------
  */
-
+import { TRANSITION_END, DEFAULT_ALLOWLIST } from "../constants";
 import {
-  TRANSITION_END,
   emulateTransitionEnd,
   findShadowRoot,
   getTransitionDurationFromElement,
   isElement,
   noop,
   typeCheckConfig,
-} from "./utils";
+} from "../helper/utils";
 
 import { classOf, getUID, getElementFromEvent } from "@ribajs/utils";
-
-import { DefaultAllowlist, sanitizeHtml } from "./sanitizer";
-import Data from "./dom/data";
-import EventHandler from "./dom/event-handler";
-import Manipulator from "./dom/manipulator";
+import { sanitizeHtml } from "../helper/sanitizer";
+import { setData, getData, removeData } from "../helper/dom/data";
+import { on, one, off, trigger } from "../helper/dom/event-handler";
+import * as Manipulator from "../helper/dom/manipulator";
 import Popper from "popper.js";
-import { findOne } from "./dom/selector-engine";
+import { findOne } from "../helper/dom/selector-engine";
 import {
   TooltipOptions,
   TooltipTitleFn,
@@ -89,7 +87,7 @@ const Default: TooltipOptions = {
   boundary: "scrollParent",
   sanitize: true,
   sanitizeFn: null,
-  allowList: DefaultAllowlist,
+  allowList: DEFAULT_ALLOWLIST,
   popperConfig: null,
 };
 
@@ -178,7 +176,7 @@ export class TooltipService {
     this.element = element;
     this.config = this._getConfig(config);
     this._setListeners();
-    Data.setData(element, TooltipService.DATA_KEY, this);
+    setData(element, TooltipService.DATA_KEY, this);
   }
 
   // Getters
@@ -233,11 +231,11 @@ export class TooltipService {
     if (event) {
       const dataKey = TooltipService.DATA_KEY;
       const element = getElementFromEvent(event);
-      let context = Data.getData(element, dataKey);
+      let context = getData(element, dataKey);
 
       if (!context) {
         context = new TooltipService(element, this._getDelegateConfig());
-        Data.setData(element, dataKey, context);
+        setData(element, dataKey, context);
       }
 
       context._activeTrigger.click = !context._activeTrigger.click;
@@ -260,12 +258,12 @@ export class TooltipService {
   dispose() {
     clearTimeout(this._timeout);
 
-    Data.removeData(this.element, TooltipService.DATA_KEY);
+    removeData(this.element, TooltipService.DATA_KEY);
 
-    // EventHandler.off(this.element, TooltipService.EVENT_KEY);
+    // off(this.element, TooltipService.EVENT_KEY);
     const modalElement = this.element.closest(`.${CLASS_NAME_MODAL}`);
     if (modalElement) {
-      EventHandler.off(modalElement, "hide.bs.modal", this._hideModalHandler);
+      off(modalElement, "hide.bs.modal", this._hideModalHandler);
     }
 
     if (this.tip) {
@@ -292,10 +290,7 @@ export class TooltipService {
     }
 
     if (this.isWithContent() && this._isEnabled) {
-      const showEvent = EventHandler.trigger(
-        this.element,
-        classOf(this).Event.SHOW
-      );
+      const showEvent = trigger(this.element, classOf(this).Event.SHOW);
       const shadowRoot = findShadowRoot(this.element);
       const isInTheDom =
         shadowRoot === null
@@ -327,13 +322,13 @@ export class TooltipService {
       this._addAttachmentClass(attachment);
 
       const container = this._getContainer();
-      Data.setData(tip, TooltipService.DATA_KEY, this);
+      setData(tip, TooltipService.DATA_KEY, this);
 
       if (!this.element.ownerDocument.documentElement.contains(this.tip)) {
         container?.appendChild(tip);
       }
 
-      EventHandler.trigger(this.element, classOf(this).Event.INSERTED);
+      trigger(this.element, classOf(this).Event.INSERTED);
 
       this._popper = new Popper(
         this.element,
@@ -349,7 +344,7 @@ export class TooltipService {
       // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
       if ("ontouchstart" in document.documentElement) {
         Array.from(document.body.children).forEach((element) => {
-          EventHandler.on(element, "mouseover", noop());
+          on(element, "mouseover", noop());
         });
       }
 
@@ -360,7 +355,7 @@ export class TooltipService {
 
         const prevHoverState = this._hoverState;
         this._hoverState = "";
-        EventHandler.trigger(this.element, classOf(this).Event.SHOWN);
+        trigger(this.element, classOf(this).Event.SHOWN);
 
         if (prevHoverState === HOVER_STATE_OUT) {
           this._leave(undefined, this);
@@ -369,7 +364,7 @@ export class TooltipService {
 
       if (this.tip?.classList.contains(CLASS_NAME_FADE)) {
         const transitionDuration = getTransitionDurationFromElement(this.tip);
-        EventHandler.one(this.tip, TRANSITION_END, complete);
+        one(this.tip, TRANSITION_END, complete);
         emulateTransitionEnd(this.tip, transitionDuration);
       } else {
         complete();
@@ -386,14 +381,11 @@ export class TooltipService {
 
       this._cleanTipClass();
       this.element.removeAttribute("aria-describedby");
-      EventHandler.trigger(this.element, classOf(this).Event.HIDDEN);
+      trigger(this.element, classOf(this).Event.HIDDEN);
       this._popper?.destroy();
     };
 
-    const hideEvent = EventHandler.trigger(
-      this.element,
-      classOf(this).Event.HIDE
-    );
+    const hideEvent = trigger(this.element, classOf(this).Event.HIDE);
     if (hideEvent.defaultPrevented) {
       return;
     }
@@ -404,7 +396,7 @@ export class TooltipService {
     // empty mouseover listeners we added for iOS support
     if ("ontouchstart" in document.documentElement) {
       Array.from(document.body.children).forEach((element) =>
-        EventHandler.off(element, "mouseover", noop)
+        off(element, "mouseover", noop)
       );
     }
 
@@ -415,7 +407,7 @@ export class TooltipService {
     if (this.tip?.classList.contains(CLASS_NAME_FADE)) {
       const transitionDuration = getTransitionDurationFromElement(tip);
 
-      EventHandler.one(tip, TRANSITION_END, complete);
+      one(tip, TRANSITION_END, complete);
       emulateTransitionEnd(tip, transitionDuration);
     } else {
       complete();
@@ -605,7 +597,7 @@ export class TooltipService {
     */
     triggers.forEach((trigger) => {
       if (trigger === "click") {
-        EventHandler.on(
+        on(
           this.element,
           "click", // TooltipService.Event.CLICK,
           // this.config.selector,
@@ -620,15 +612,11 @@ export class TooltipService {
           trigger === TRIGGER_HOVER
             ? "mouseout" // TooltipService.Event.MOUSELEAVE
             : "blur"; // TooltipService.Event.FOCUSOUT;
-        EventHandler.on(
-          this.element,
-          eventIn /*, this.config.selector*/,
-          (event) => this._enter(event)
+        on(this.element, eventIn /*, this.config.selector*/, (event) =>
+          this._enter(event)
         );
-        EventHandler.on(
-          this.element,
-          eventOut /*, this.config.selector*/,
-          (event) => this._leave(event)
+        on(this.element, eventOut /*, this.config.selector*/, (event) =>
+          this._leave(event)
         );
       }
     });
@@ -640,7 +628,7 @@ export class TooltipService {
     // };
     const closestModalEl = this.element.closest(`.${CLASS_NAME_MODAL}`);
     if (closestModalEl) {
-      EventHandler.on(closestModalEl, "hide.bs.modal", this._hideModalHandler);
+      on(closestModalEl, "hide.bs.modal", this._hideModalHandler);
     }
 
     if (this.config.selector) {
@@ -677,11 +665,11 @@ export class TooltipService {
     const dataKey = TooltipService.DATA_KEY;
     if (event) {
       const el = (event as any).delegateTarget || getElementFromEvent(event);
-      context = context || Data.getData(el, dataKey);
+      context = context || getData(el, dataKey);
 
       if (!context) {
         context = new TooltipService(el, this._getDelegateConfig());
-        Data.setData(el, dataKey, context);
+        setData(el, dataKey, context);
       }
 
       context._activeTrigger[
@@ -717,11 +705,11 @@ export class TooltipService {
     const dataKey = TooltipService.DATA_KEY;
     if (event) {
       const el = (event as any).delegateTarget || getElementFromEvent(event);
-      context = context || Data.getData(el, dataKey);
+      context = context || getData(el, dataKey);
 
       if (!context) {
         context = new TooltipService(el, this._getDelegateConfig());
-        Data.setData(el, dataKey, context);
+        setData(el, dataKey, context);
       }
     }
 
@@ -863,7 +851,7 @@ export class TooltipService {
   // Static
 
   static getInstance(element: HTMLElement) {
-    return Data.getData(element, DATA_KEY);
+    return getData(element, DATA_KEY);
   }
 }
 

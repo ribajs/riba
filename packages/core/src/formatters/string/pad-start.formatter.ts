@@ -1,4 +1,4 @@
-import { Formatter } from "../../interfaces";
+import { Formatter } from "../../types";
 
 /**
  * The padStart formatter pads the current string with another string (multiple times, if needed) until the resulting string reaches the given length.

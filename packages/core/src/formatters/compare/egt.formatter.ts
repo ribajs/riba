@@ -1,4 +1,4 @@
-import { Formatter } from "../../interfaces/formatter";
+import { Formatter } from "../../types/formatter";
 /**
  * equal or greater than
  * a >= b

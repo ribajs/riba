@@ -1,6 +1,7 @@
 import { CarouselOption } from "../interfaces/carousel-option";
 import { CarouselDirection } from "../interfaces/carousel-direction";
 import { CarouselClassName } from "../interfaces/carousel-class-name";
+import { TRANSITION_END } from "../constants";
 
 /**
  * --------------------------------------------------------------------------
@@ -10,7 +11,6 @@ import { CarouselClassName } from "../interfaces/carousel-class-name";
  */
 
 import {
-  TRANSITION_END,
   typeCheckConfig,
   makeArray,
   reflow,
@@ -18,9 +18,9 @@ import {
   emulateTransitionEnd,
   isVisible,
   triggerTransitionEnd,
-} from "./utils";
-import EventHandler from "./dom/event-handler";
-import { findOne, find } from "./dom/selector-engine";
+} from "../helper/utils";
+import { on, one, off, trigger } from "../helper/dom/event-handler";
+import { findOne, find } from "../helper/dom/selector-engine";
 
 /**
  * ------------------------------------------------------------------------
@@ -219,7 +219,7 @@ class CarouselService {
     }
 
     if (this.isSliding) {
-      EventHandler.one(this.element, Event.SLID, () => this.to(index));
+      one(this.element, Event.SLID, () => this.to(index));
       return;
     }
 
@@ -279,12 +279,12 @@ class CarouselService {
     this.pause = this.pause.bind(this);
     this.cycle = this.cycle.bind(this);
     if (this.config.keyboard) {
-      EventHandler.on(this.element, Event.KEYDOWN, this.keydown);
+      on(this.element, Event.KEYDOWN, this.keydown);
     }
 
     if (this.config.pause === "hover") {
-      EventHandler.on(this.element, Event.MOUSEENTER, this.pause);
-      EventHandler.on(this.element, Event.MOUSELEAVE, this.cycle);
+      on(this.element, Event.MOUSEENTER, this.pause);
+      on(this.element, Event.MOUSELEAVE, this.cycle);
     }
 
     if (this.config.touch && this.touchSupported) {
@@ -297,29 +297,29 @@ class CarouselService {
     this.onTouchMove = this.onTouchMove.bind(this);
     this.onTouchEnd = this.onTouchEnd.bind(this);
     makeArray(find(Selector.ITEM_IMG, this.element)).forEach((itemImg) => {
-      EventHandler.on(itemImg, Event.DRAG_START, this.preventDrag);
+      on(itemImg, Event.DRAG_START, this.preventDrag);
     });
 
     if (this.pointerEvent) {
-      EventHandler.on(this.element, Event.POINTERDOWN, this.onTouchStart);
-      EventHandler.on(this.element, Event.POINTERUP, this.onTouchEnd);
+      on(this.element, Event.POINTERDOWN, this.onTouchStart);
+      on(this.element, Event.POINTERUP, this.onTouchEnd);
 
       this.element.classList.add(ClassName.POINTER_EVENT);
     } else {
-      EventHandler.on(this.element, Event.TOUCHSTART, this.onTouchStart);
-      EventHandler.on(this.element, Event.TOUCHMOVE, this.onTouchMove);
-      EventHandler.on(this.element, Event.TOUCHEND, this.onTouchEnd);
+      on(this.element, Event.TOUCHSTART, this.onTouchStart);
+      on(this.element, Event.TOUCHMOVE, this.onTouchMove);
+      on(this.element, Event.TOUCHEND, this.onTouchEnd);
     }
   }
 
   private removeEventListeners() {
     if (this.config.keyboard) {
-      EventHandler.off(this.element, Event.KEYDOWN, this.keydown);
+      off(this.element, Event.KEYDOWN, this.keydown);
     }
 
     if (this.config.pause === "hover") {
-      EventHandler.off(this.element, Event.MOUSEENTER, this.pause);
-      EventHandler.off(this.element, Event.MOUSELEAVE, this.cycle);
+      off(this.element, Event.MOUSEENTER, this.pause);
+      off(this.element, Event.MOUSELEAVE, this.cycle);
     }
 
     this.removeTouchEventListeners();
@@ -327,17 +327,17 @@ class CarouselService {
 
   private removeTouchEventListeners() {
     makeArray(find(Selector.ITEM_IMG, this.element)).forEach((itemImg) => {
-      EventHandler.off(itemImg, Event.DRAG_START, this.preventDrag);
+      off(itemImg, Event.DRAG_START, this.preventDrag);
     });
     if (this.pointerEvent) {
-      EventHandler.off(this.element, Event.POINTERDOWN, this.onTouchStart);
-      EventHandler.off(this.element, Event.POINTERUP, this.onTouchEnd);
+      off(this.element, Event.POINTERDOWN, this.onTouchStart);
+      off(this.element, Event.POINTERUP, this.onTouchEnd);
 
       this.element.classList.add(ClassName.POINTER_EVENT);
     } else {
-      EventHandler.off(this.element, Event.TOUCHSTART, this.onTouchStart);
-      EventHandler.off(this.element, Event.TOUCHMOVE, this.onTouchMove);
-      EventHandler.off(this.element, Event.TOUCHEND, this.onTouchEnd);
+      off(this.element, Event.TOUCHSTART, this.onTouchStart);
+      off(this.element, Event.TOUCHMOVE, this.onTouchMove);
+      off(this.element, Event.TOUCHEND, this.onTouchEnd);
     }
   }
 
@@ -470,7 +470,7 @@ class CarouselService {
       (findOne(Selector.ACTIVE_ITEM, this.element) as HTMLElement) || null
     );
 
-    return EventHandler.trigger(this.element, Event.SLIDE, {
+    return trigger(this.element, Event.SLIDE, {
       relatedTarget,
       direction: eventDirectionName,
       from: fromIndex,
@@ -573,7 +573,7 @@ class CarouselService {
         activeElement
       );
 
-      EventHandler.one(activeElement, TRANSITION_END, () => {
+      one(activeElement, TRANSITION_END, () => {
         nextElement.classList.remove(directionalClassName);
         nextElement.classList.remove(orderClassName);
         nextElement.classList.add(ClassName.ACTIVE);
@@ -585,7 +585,7 @@ class CarouselService {
         this.isSliding = false;
 
         setTimeout(() => {
-          EventHandler.trigger(this.element, Event.SLID, {
+          trigger(this.element, Event.SLID, {
             relatedTarget: nextElement,
             direction: eventDirectionName,
             from: activeElementIndex,
@@ -600,7 +600,7 @@ class CarouselService {
       nextElement.classList.add(ClassName.ACTIVE);
 
       this.isSliding = false;
-      EventHandler.trigger(this.element, Event.SLID, {
+      trigger(this.element, Event.SLID, {
         relatedTarget: nextElement,
         direction: eventDirectionName,
         from: activeElementIndex,

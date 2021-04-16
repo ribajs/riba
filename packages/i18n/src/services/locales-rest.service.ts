@@ -1,10 +1,10 @@
 import { HttpService } from "@ribajs/core";
-import { ALocalesService } from "./locales-base.service";
+import { LocalesService } from "../types/locales-service";
 
 /**
  * LocalesRestService get locales object from url
  */
-export class LocalesRestService extends ALocalesService {
+export class LocalesRestService extends LocalesService {
   public static instances: {
     [url: string]: LocalesRestService;
   } = {};
@@ -16,14 +16,14 @@ export class LocalesRestService extends ALocalesService {
   public locales: any = {};
 
   /**
-   * The current setted langcode
+   * The current defined langcode
    */
   protected currentLangcode?: string;
 
   /**
-   * The default theme langcode before any language was choosed
+   * The default theme langcode before any language was chosen
    */
-  protected initalLangcode?: string;
+  protected initialLangcode?: string;
 
   constructor(
     protected url: string,
@@ -35,7 +35,7 @@ export class LocalesRestService extends ALocalesService {
     this.url = url;
 
     if (!this.url) {
-      throw new Error(`Url is requred!`);
+      throw new Error(`Url is required!`);
     }
 
     if (LocalesRestService.instances[this.url]) {
@@ -56,7 +56,7 @@ export class LocalesRestService extends ALocalesService {
     }
 
     if (!url) {
-      throw new Error(`Url is requred!`);
+      throw new Error(`Url is required!`);
     }
 
     if ((window as any).Shopify.shop) {

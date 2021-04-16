@@ -1,4 +1,4 @@
-import { Binder } from "../interfaces";
+import { Binder } from "../types";
 
 /**
  * Togggles a boolean variable to true/false if the event is triggered.

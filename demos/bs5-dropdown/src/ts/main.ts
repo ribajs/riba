@@ -7,7 +7,7 @@ const model = {};
 
 // Register modules
 riba.module.regist(coreModule);
-riba.module.regist(bs5Module);
+riba.module.regist(bs5Module({}));
 riba.module.regist(Bs5DropdownModule);
 
 riba.bind(document.body, model);

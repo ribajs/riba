@@ -1,4 +1,4 @@
-import { Formatter } from "../../interfaces";
+import { Formatter } from "../../types";
 
 /**
  * Appends characters to a string.

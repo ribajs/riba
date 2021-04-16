@@ -1,4 +1,4 @@
-import { Formatter } from "../../interfaces";
+import { Formatter } from "../../types";
 import { stripHtml } from "@ribajs/utils/src/type";
 
 /**

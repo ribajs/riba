@@ -1,9 +1,9 @@
-import { Formatter } from "@ribajs/core";
-import { ALocalesService } from "../services/locales-base.service";
+import { FormatterCreator, Formatter } from "@ribajs/core";
+import { LocalesService } from "../types/locales-service";
 
 const translate = async (
   translateMePathString: string,
-  localesService: ALocalesService,
+  localesService: LocalesService,
   langcode?: string
 ) => {
   const properties = translateMePathString.split(".");
@@ -23,9 +23,9 @@ const translate = async (
     });
 };
 
-export const tFormatterWrapper = (
-  localesService: ALocalesService
-): Formatter => {
+export const tFormatterWrapper: FormatterCreator = (
+  localesService: LocalesService
+) => {
   return {
     name: "t",
     read(

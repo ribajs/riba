@@ -4,7 +4,7 @@ import { textBinder } from "./text.binder";
 
 import { dotAdapter } from "../adapters/dot.adapter";
 
-import { Adapters } from "../interfaces";
+import { Adapters } from "../types";
 
 describe("riba.binders", () => {
   let el: HTMLUnknownElement;

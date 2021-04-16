@@ -5,7 +5,7 @@ import {
   Root,
   Components,
   Options,
-} from "./interfaces";
+} from "./types";
 import { parseTemplate, parseType } from "./parsers";
 import { Binding } from "./binding";
 import { attributeBinder } from "./binders/attribute.binder";

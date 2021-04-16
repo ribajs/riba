@@ -1,4 +1,8 @@
-import { TypeOfComponent, TemplateFunction } from "@ribajs/core";
+import {
+  TypeOfComponent,
+  TemplateFunction,
+  ComponentCreator,
+} from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import {
   Bs4ShareComponent,
@@ -6,7 +10,7 @@ import {
 } from "@ribajs/bs4/src/components/bs4-share/bs4-share.component";
 import template from "@ribajs/bs4/src/components/bs4-share/bs4-share.component.html";
 import labelTemplate from "./share.label.html";
-import { ALocalesService } from "../../services/locales-base.service";
+import { I18nModuleOptions } from "../../types";
 
 interface Scope extends Bs4ShareScope {
   textI18n?: string;
@@ -21,7 +25,6 @@ interface Scope extends Bs4ShareScope {
 // }
 
 declare global {
-  // tslint:disable: interface-name
   interface Navigator {
     share: (data?: ShareData) => Promise<void>;
   }
@@ -30,8 +33,8 @@ declare global {
 /**
  * Component to share the a link (i18n version)
  */
-export const i18nShareComponentWrapper = (
-  localesService: ALocalesService
+export const i18nShareComponentWrapper: ComponentCreator = (
+  options: I18nModuleOptions
 ): TypeOfComponent<any> => {
   return class I18nShareComponent extends Bs4ShareComponent {
     public static tagName = "i18n-share";
@@ -47,7 +50,7 @@ export const i18nShareComponentWrapper = (
       ];
     }
 
-    protected localesService: ALocalesService = localesService;
+    protected localesService = options.localesService;
 
     protected scope: Scope = super.scope;
 

@@ -1,4 +1,4 @@
-import { Binder } from "../interfaces";
+import { Binder } from "../types";
 
 export interface Assign {
   key: string;

@@ -1,4 +1,4 @@
-import { Binder, Binders, ModuleElementType } from "../interfaces";
+import { Binder, Binders, ModuleElementType } from "../types";
 import { ModuleElementService } from "./module-element.service";
 
 export class BindersService extends ModuleElementService {

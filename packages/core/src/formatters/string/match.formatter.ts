@@ -1,4 +1,4 @@
-import { Formatter } from "../../interfaces";
+import { Formatter } from "../../types";
 
 export const matchFormatter: Formatter = {
   name: "match",

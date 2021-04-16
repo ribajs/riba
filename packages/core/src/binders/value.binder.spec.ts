@@ -4,7 +4,7 @@ import { dotAdapter } from "../adapters/dot.adapter";
 
 import { valueBinder } from "./value.binder";
 
-import { Adapters } from "../interfaces";
+import { Adapters } from "../types";
 
 describe("riba.binders", () => {
   describe("value", () => {

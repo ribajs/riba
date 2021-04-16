@@ -6,7 +6,7 @@ import {
   ObserverSyncCallback,
   Obj,
   Options,
-} from "./interfaces";
+} from "./types";
 import { isObject } from "@ribajs/utils/src/type";
 
 export class Observer {

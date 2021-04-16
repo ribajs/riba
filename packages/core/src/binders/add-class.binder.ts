@@ -1,9 +1,9 @@
-import { Binder } from "../interfaces";
+import { Binder } from "../types";
 
 /**
  * add-class
  * Adds the value of the attribute to the class.
- * Instead of `class-[classname]` the classname is setted by the
+ * Instead of `class-[classname]` the classname is defined by the
  * attribute value and not by the star value.
  * @example
  * <ul>

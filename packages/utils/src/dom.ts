@@ -1,4 +1,41 @@
+import { clone, parseJsonString } from "./type";
+
 export const MAX_UID = 1000;
+
+export const parseAttribute = (attr?: string | null) => {
+  let value: any = attr;
+  if (attr === "true") {
+    value = true;
+  } else if (attr === "false") {
+    value = false;
+  } else if (attr === "null") {
+    value = null;
+  } else if (attr === "undefined") {
+    value = undefined;
+  } else if (attr === "") {
+    value = undefined;
+  } else if (!isNaN(Number(attr))) {
+    value = Number(attr);
+    // If number is too large store the value as string
+    if (value >= Number.MAX_SAFE_INTEGER) {
+      value = attr;
+    }
+  } else {
+    const jsonString = parseJsonString(value);
+    value = jsonString ? jsonString : value;
+  }
+  return value;
+};
+
+export const getDataset = (element: HTMLElement) => {
+  const dataset = clone(false, element.dataset);
+  for (const attr in dataset) {
+    if (dataset[attr]) {
+      dataset[attr] = parseAttribute(dataset[attr]);
+    }
+  }
+  return dataset;
+};
 
 /**
  * Calls el.hasChildNodes but ignores empty strings, the default hasChildNodes would return ture on `<div> </div>`.
@@ -161,9 +198,6 @@ export const isInViewport = (
     const vp = getViewportDimensions();
     offsetTop = vp.h - distance.height;
   }
-
-  // console.log("top", distance.top + distance.height, distance.top + distance.height >= offsetBottom);
-  // console.log("bottom", distance.bottom - distance.height, distance.bottom - distance.height <= offsetTop);
 
   return (
     distance.top + distance.height >= offsetBottom &&
@@ -353,4 +387,45 @@ export const htmlToElements = (html: string) => {
   const template = document.createElement("template");
   template.innerHTML = html;
   return template.content.childNodes;
+};
+
+/**
+ * Converts a NodeList or HTMLCollection to an Array
+ * @param nodeList
+ * @returns
+ */
+export const toArray = (nodeList: NodeList | HTMLCollection): HTMLElement[] => {
+  if (!nodeList) {
+    return [];
+  }
+
+  return [].slice.call(nodeList);
+};
+
+/**
+ * Check if any html element is visible in the dom
+ * @param element
+ * @returns
+ */
+export const isVisible = (element: HTMLElement) => {
+  if (!element) {
+    return false;
+  }
+
+  if (
+    element.style &&
+    element.parentNode &&
+    (element.parentNode as HTMLElement).style
+  ) {
+    const elementStyle = getComputedStyle(element);
+    const parentNodeStyle = getComputedStyle(element.parentNode as HTMLElement);
+
+    return (
+      elementStyle.display !== "none" &&
+      parentNodeStyle.display !== "none" &&
+      elementStyle.visibility !== "hidden"
+    );
+  }
+
+  return false;
 };

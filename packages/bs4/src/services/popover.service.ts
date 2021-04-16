@@ -6,8 +6,8 @@
  * --------------------------------------------------------------------------
  */
 
-import { getData } from "./dom/data";
-import { findOne } from "./dom/selector-engine";
+import { getData } from "../helper/dom/data";
+import { findOne } from "../helper/dom/selector-engine";
 import { TooltipService } from "./tooltip.service";
 import {
   TooltipContentFn,

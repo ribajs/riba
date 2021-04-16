@@ -4,7 +4,7 @@ import { hideBinder } from "./hide.binder";
 
 import { dotAdapter } from "../adapters/dot.adapter";
 
-import { Adapters } from "../interfaces";
+import { Adapters } from "../types";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);

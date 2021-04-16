@@ -1,4 +1,4 @@
-import { Binder } from "../interfaces";
+import { Binder } from "../types";
 import { camelCase } from "@ribajs/utils/src/type";
 
 /**

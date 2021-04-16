@@ -6,18 +6,17 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  * --------------------------------------------------------------------------
  */
-
+import { TRANSITION_END } from "../constants";
 import {
   getTransitionDurationFromElement,
   emulateTransitionEnd,
-  TRANSITION_END,
   typeCheckConfig,
   reflow,
-} from "./utils";
-import Data from "./dom/data";
-import EventHandler from "./dom/event-handler";
+} from "../helper/utils";
+import { setData, getData, removeData } from "../helper/dom/data";
+import { on, one, off, trigger } from "../helper/dom/event-handler";
 // import Manipulator from "./dom/manipulator";
-import SelectorEngine from "./dom/selector-engine";
+import * as SelectorEngine from "../helper/dom/selector-engine";
 
 export interface Config {
   focus?: boolean;
@@ -103,7 +102,7 @@ export class ModalService {
     this._ignoreBackdropClick = false;
     this._isTransitioning = false;
     this._scrollbarWidth = 0;
-    Data.setData(element, DATA_KEY, this);
+    setData(element, DATA_KEY, this);
   }
 
   // Getters
@@ -131,7 +130,7 @@ export class ModalService {
       this._isTransitioning = true;
     }
 
-    const showEvent = EventHandler.trigger(this._element, EVENT_SHOW, {
+    const showEvent = trigger(this._element, EVENT_SHOW, {
       relatedTarget,
     });
 
@@ -149,7 +148,7 @@ export class ModalService {
     this._setEscapeEvent();
     this._setResizeEvent();
 
-    EventHandler.on(
+    on(
       this._element,
       EVENT_CLICK_DISMISS,
       // SELECTOR_DATA_DISMISS,
@@ -157,16 +156,12 @@ export class ModalService {
     );
 
     if (this._dialog) {
-      EventHandler.on(this._dialog, EVENT_MOUSEDOWN_DISMISS, () => {
-        EventHandler.one(
-          this._element,
-          EVENT_MOUSEUP_DISMISS,
-          (event: Event) => {
-            if (event.target === this._element) {
-              this._ignoreBackdropClick = true;
-            }
+      on(this._dialog, EVENT_MOUSEDOWN_DISMISS, () => {
+        one(this._element, EVENT_MOUSEUP_DISMISS, (event: Event) => {
+          if (event.target === this._element) {
+            this._ignoreBackdropClick = true;
           }
-        );
+        });
       });
     }
 
@@ -182,7 +177,7 @@ export class ModalService {
       return;
     }
 
-    const hideEvent = EventHandler.trigger(this._element, EVENT_HIDE);
+    const hideEvent = trigger(this._element, EVENT_HIDE);
 
     if (hideEvent.defaultPrevented) {
       return;
@@ -198,19 +193,19 @@ export class ModalService {
     this._setEscapeEvent();
     this._setResizeEvent();
 
-    // EventHandler.off(document, EVENT_FOCUSIN); TODO
+    // off(document, EVENT_FOCUSIN); TODO
 
     this._element.classList.remove(CLASS_NAME_SHOW);
 
-    // EventHandler.off(this._element, EVENT_CLICK_DISMISS); TODO
-    // EventHandler.off(this._dialog, EVENT_MOUSEDOWN_DISMISS); TODO
+    // off(this._element, EVENT_CLICK_DISMISS); TODO
+    // off(this._dialog, EVENT_MOUSEDOWN_DISMISS); TODO
 
     if (transition) {
       const transitionDuration = getTransitionDurationFromElement(
         this._element
       );
 
-      EventHandler.one(this._element, TRANSITION_END, (/*event*/) =>
+      one(this._element, TRANSITION_END, (/*event*/) =>
         this._hideModal(/*event*/));
       emulateTransitionEnd(this._element, transitionDuration);
     } else {
@@ -221,7 +216,7 @@ export class ModalService {
   dispose() {
     // TODO
     // [window, this._element, this._dialog].forEach((htmlElement) =>
-    //   EventHandler.off(htmlElement, EVENT_KEY)
+    //   off(htmlElement, EVENT_KEY)
     // );
 
     /**
@@ -229,9 +224,9 @@ export class ModalService {
      * Do not move `document` in `htmlElements` array
      * It will remove `EVENT_CLICK_DATA_API` event that should remain
      */
-    // EventHandler.off(document, EVENT_FOCUSIN); TODO
+    // off(document, EVENT_FOCUSIN); TODO
 
-    Data.removeData(this._element, DATA_KEY);
+    removeData(this._element, DATA_KEY);
 
     // this._config = null;
     // this._element = null;
@@ -299,7 +294,7 @@ export class ModalService {
       }
 
       this._isTransitioning = false;
-      EventHandler.trigger(this._element, EVENT_SHOWN, {
+      trigger(this._element, EVENT_SHOWN, {
         relatedTarget,
       });
     };
@@ -312,7 +307,7 @@ export class ModalService {
 
       const transitionDuration = getTransitionDurationFromElement(this._dialog);
 
-      EventHandler.one(this._dialog, TRANSITION_END, transitionComplete);
+      one(this._dialog, TRANSITION_END, transitionComplete);
       emulateTransitionEnd(this._dialog, transitionDuration);
     } else {
       transitionComplete();
@@ -330,8 +325,8 @@ export class ModalService {
         this._element.focus();
       }
     };
-    EventHandler.off(document, EVENT_FOCUSIN, onFocusIn); // guard against infinite focus loou
-    EventHandler.on(document, EVENT_FOCUSIN, onFocusIn);
+    off(document, EVENT_FOCUSIN, onFocusIn); // guard against infinite focus loou
+    on(document, EVENT_FOCUSIN, onFocusIn);
   }
 
   _setEscapeEvent() {
@@ -351,18 +346,18 @@ export class ModalService {
     };
 
     if (this._isShown) {
-      EventHandler.on(this._element, EVENT_KEYDOWN_DISMISS, onEscapeEvent);
+      on(this._element, EVENT_KEYDOWN_DISMISS, onEscapeEvent);
     } else {
-      EventHandler.off(this._element, EVENT_KEYDOWN_DISMISS, onEscapeEvent);
+      off(this._element, EVENT_KEYDOWN_DISMISS, onEscapeEvent);
     }
   }
 
   _setResizeEvent() {
     const onResizeEvent = () => this._adjustDialog();
     if (this._isShown) {
-      EventHandler.on(window, EVENT_RESIZE, onResizeEvent);
+      on(window, EVENT_RESIZE, onResizeEvent);
     } else {
-      EventHandler.off(window, EVENT_RESIZE, onResizeEvent);
+      off(window, EVENT_RESIZE, onResizeEvent);
     }
   }
 
@@ -376,7 +371,7 @@ export class ModalService {
       document.body.classList.remove(CLASS_NAME_OPEN);
       this._resetAdjustments();
       this._resetScrollbar();
-      EventHandler.trigger(this._element, EVENT_HIDDEN);
+      trigger(this._element, EVENT_HIDDEN);
     });
   }
 
@@ -400,7 +395,7 @@ export class ModalService {
 
       document.body.appendChild(this._backdrop);
 
-      EventHandler.on(this._element, EVENT_CLICK_DISMISS, (event) => {
+      on(this._element, EVENT_CLICK_DISMISS, (event) => {
         if (this._ignoreBackdropClick) {
           this._ignoreBackdropClick = false;
           return;
@@ -428,7 +423,7 @@ export class ModalService {
         this._backdrop
       );
 
-      EventHandler.one(this._backdrop, TRANSITION_END, callback);
+      one(this._backdrop, TRANSITION_END, callback);
       emulateTransitionEnd(this._backdrop, backdropTransitionDuration);
     } else if (!this._isShown && this._backdrop) {
       this._backdrop.classList.remove(CLASS_NAME_SHOW);
@@ -442,7 +437,7 @@ export class ModalService {
         const backdropTransitionDuration = getTransitionDurationFromElement(
           this._backdrop
         );
-        EventHandler.one(this._backdrop, TRANSITION_END, callbackRemove);
+        one(this._backdrop, TRANSITION_END, callbackRemove);
         emulateTransitionEnd(this._backdrop, backdropTransitionDuration);
       } else {
         callbackRemove();
@@ -459,10 +454,7 @@ export class ModalService {
         return;
       }
 
-      const hideEvent = EventHandler.trigger(
-        this._element,
-        EVENT_HIDE_PREVENTED
-      );
+      const hideEvent = trigger(this._element, EVENT_HIDE_PREVENTED);
       if (hideEvent.defaultPrevented) {
         return;
       }
@@ -483,15 +475,15 @@ export class ModalService {
       const onTransitionEnd = () => {
         this._element.classList.remove(CLASS_NAME_STATIC);
         if (!isModalOverflowing) {
-          EventHandler.one(this._element, TRANSITION_END, () => {
+          one(this._element, TRANSITION_END, () => {
             this._element.style.overflowY = "";
           });
           emulateTransitionEnd(this._element, modalTransitionDuration);
         }
       };
 
-      EventHandler.off(this._element, TRANSITION_END, onTransitionEnd);
-      EventHandler.one(this._element, TRANSITION_END, onTransitionEnd);
+      off(this._element, TRANSITION_END, onTransitionEnd);
+      one(this._element, TRANSITION_END, onTransitionEnd);
       emulateTransitionEnd(this._element, modalTransitionDuration);
       this._element.focus();
     } else {
@@ -631,7 +623,7 @@ export class ModalService {
   // Static
 
   static getInstance(element: HTMLElement) {
-    return Data.getData(element, DATA_KEY);
+    return getData(element, DATA_KEY);
   }
 }
 

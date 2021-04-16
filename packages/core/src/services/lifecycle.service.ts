@@ -4,7 +4,7 @@ import type {
   ComponentLifecycleEventData,
   ComponentLifecycleObject,
   ComponentLifecycleStates,
-} from "../interfaces";
+} from "../types";
 
 /**
  * Component lifecycle control service.

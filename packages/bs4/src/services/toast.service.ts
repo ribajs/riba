@@ -6,16 +6,15 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  * --------------------------------------------------------------------------
  */
-
+import { TRANSITION_END } from "../constants";
 import {
   reflow,
   getTransitionDurationFromElement,
-  TRANSITION_END,
   emulateTransitionEnd,
   typeCheckConfig,
-} from "./utils";
-import Data from "./dom/data";
-import EventHandler from "./dom/event-handler";
+} from "../helper/utils";
+import { setData, getData, removeData } from "../helper/dom/data";
+import { on, one, trigger } from "../helper/dom/event-handler";
 
 /**
  * ------------------------------------------------------------------------
@@ -75,7 +74,7 @@ export class ToastService {
     this._config = this._getConfig(config);
     this._timeout = null;
     this._setListeners();
-    Data.setData(element, DATA_KEY, this);
+    setData(element, DATA_KEY, this);
   }
 
   // Getters
@@ -95,7 +94,7 @@ export class ToastService {
   // Public
 
   public show() {
-    const showEvent = EventHandler.trigger(this._element, EVENT_SHOW);
+    const showEvent = trigger(this._element, EVENT_SHOW);
 
     if (showEvent.defaultPrevented) {
       return;
@@ -112,7 +111,7 @@ export class ToastService {
       this._element.classList.remove(CLASS_NAME_SHOWING);
       this._element.classList.add(CLASS_NAME_SHOW);
 
-      EventHandler.trigger(this._element, EVENT_SHOWN);
+      trigger(this._element, EVENT_SHOWN);
 
       if (this._config.autohide) {
         this._timeout = Number(
@@ -131,7 +130,7 @@ export class ToastService {
         this._element
       );
 
-      EventHandler.one(this._element, TRANSITION_END, complete);
+      one(this._element, TRANSITION_END, complete);
       emulateTransitionEnd(this._element, transitionDuration);
     } else {
       complete();
@@ -143,7 +142,7 @@ export class ToastService {
       return;
     }
 
-    const hideEvent = EventHandler.trigger(this._element, EVENT_HIDE);
+    const hideEvent = trigger(this._element, EVENT_HIDE);
 
     if (hideEvent.defaultPrevented) {
       return;
@@ -154,7 +153,7 @@ export class ToastService {
         return;
       }
       this._element.classList.add(CLASS_NAME_HIDE);
-      EventHandler.trigger(this._element, EVENT_HIDDEN);
+      trigger(this._element, EVENT_HIDDEN);
     };
 
     this._element.classList.remove(CLASS_NAME_SHOW);
@@ -163,7 +162,7 @@ export class ToastService {
         this._element
       );
 
-      EventHandler.one(this._element, TRANSITION_END, complete);
+      one(this._element, TRANSITION_END, complete);
       emulateTransitionEnd(this._element, transitionDuration);
     } else {
       complete();
@@ -180,8 +179,8 @@ export class ToastService {
       this._element.classList.remove(CLASS_NAME_SHOW);
     }
 
-    // EventHandler.off(this._element, EVENT_CLICK_DISMISS);
-    Data.removeData(this._element, DATA_KEY);
+    // off(this._element, EVENT_CLICK_DISMISS);
+    removeData(this._element, DATA_KEY);
 
     // this._element = null;
     // this._config = null;
@@ -205,7 +204,7 @@ export class ToastService {
     if (!this._element) {
       return;
     }
-    EventHandler.on(
+    on(
       this._element,
       EVENT_CLICK_DISMISS,
       // SELECTOR_DATA_DISMISS,
@@ -221,7 +220,7 @@ export class ToastService {
   // Static
 
   static getInstance(element: HTMLElement) {
-    return Data.getData(element, DATA_KEY);
+    return getData(element, DATA_KEY);
   }
 }
 

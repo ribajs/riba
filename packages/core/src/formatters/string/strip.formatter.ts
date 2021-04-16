@@ -1,4 +1,4 @@
-import { Formatter } from "../../interfaces";
+import { Formatter } from "../../types";
 
 /**
  * Strips tabs, spaces, and newlines (all whitespace) from the left and right side of a string.

@@ -1,4 +1,4 @@
-import { Formatter } from "../../interfaces";
+import { Formatter } from "../../types";
 
 // babel misinterprets the "this" fake parameter, so we define it in this interfaces
 export type FormatterFuntionParam = (this: any, ...args: any[]) => any;

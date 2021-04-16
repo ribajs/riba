@@ -1,4 +1,4 @@
-import { Components, ModuleElementType } from "../interfaces";
+import { Components, ModuleElementType } from "../types";
 import { Component } from "../component";
 import { ModuleElementService } from "./module-element.service";
 

@@ -1,6 +1,6 @@
 import { concat } from "@ribajs/utils/src/type";
-import { HttpMethod } from "../interfaces/http-method";
-import { HttpServiceOptions, HttpServiceResponse } from "../interfaces";
+import { HttpMethod } from "../types/http-method";
+import { HttpServiceOptions, HttpServiceResponse } from "../types";
 
 export class HttpService {
   /**

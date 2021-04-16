@@ -3,7 +3,6 @@ export * from "./Prefetch";
 
 import { EventDispatcher } from "@ribajs/events";
 import {
-  getDataset,
   HttpService,
   HttpServiceOptions,
   HttpServiceResponse,
@@ -15,7 +14,7 @@ import {
   getUrl,
 } from "@ribajs/utils/src/url";
 import { isBoolean } from "@ribajs/utils/src/type";
-import { getElementFromEvent } from "@ribajs/utils/src/dom";
+import { getElementFromEvent, getDataset } from "@ribajs/utils/src/dom";
 
 import { BaseCache } from "@ribajs/cache";
 import { HideShowTransition } from "../Transition";

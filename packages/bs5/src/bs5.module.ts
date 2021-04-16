@@ -1,12 +1,17 @@
-import { RibaModule } from "@ribajs/core";
-import * as binders from "./binders";
-import * as components from "./components";
-// import * as formatters from './formatters/bs5.formatters';
+import { RibaModuleCreator, RibaModule } from "@ribajs/core";
+import { Bs5ModuleOptions } from "./types";
+import binders from "./binders";
+import components from "./components";
+import formatters from "./formatters";
 import * as services from "./services";
 
-export const bs5Module: RibaModule = {
-  binders,
-  services,
-  formatters: {},
-  components,
+export const bs5Module: RibaModuleCreator = (
+  options: Bs5ModuleOptions = {}
+) => {
+  return {
+    binders: binders(options),
+    services,
+    formatters: formatters(options),
+    components: components(options),
+  } as RibaModule;
 };

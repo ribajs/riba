@@ -1,5 +1,5 @@
 /* tslint:disable:variable-name */
-import { Formatter } from "../../interfaces";
+import { Formatter } from "../../types";
 
 /**
  * Replaces the first occurrence of a string with a substring.

@@ -6,9 +6,9 @@
 import { View } from "../view";
 import { Riba } from "../riba";
 import { BasicComponent } from "./basic-component";
-import { Formatter } from "../interfaces";
+import { Formatter } from "../types";
 import { EventDispatcher } from "@ribajs/events";
-import type { ComponentLifecycleEventData } from "../interfaces";
+import type { ComponentLifecycleEventData } from "../types";
 
 export abstract class Component extends BasicComponent {
   protected view: View | null = null;

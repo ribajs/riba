@@ -1,5 +1,5 @@
 import { jsonFormatter } from "../formatters/type/json.formatter";
-import type { Binder } from "../interfaces";
+import type { Binder } from "../types";
 export interface BinderAttributeChangedEvent {
   detail: {
     name: string;

@@ -2,7 +2,7 @@ import { Component, TemplateFunction } from "@ribajs/core";
 import { getUrl } from "@ribajs/utils/src/url";
 import template from "./bs5-share.component.html";
 import labelTemplate from "./bs5-share.label.html";
-import { ShareItem, ShareUrlType } from "../../interfaces";
+import { ShareItem, ShareUrlType } from "../../types";
 import { Dropdown } from "@ribajs/bs5";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 

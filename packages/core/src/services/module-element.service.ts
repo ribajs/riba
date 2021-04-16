@@ -1,5 +1,5 @@
 import { isObject } from "@ribajs/utils/src/type";
-import { ModuleElementType } from "../interfaces/module-element-type";
+import { ModuleElementType } from "../types/module-element-type";
 
 export type Element = any;
 

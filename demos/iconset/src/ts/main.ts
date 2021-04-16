@@ -13,7 +13,7 @@ const model = {
 
 // Register modules
 riba.module.regist(coreModule);
-riba.module.regist(bs5Module);
+riba.module.regist(bs5Module({}));
 riba.module.regist(IconsetModule);
 
 riba.bind(document.body, model);

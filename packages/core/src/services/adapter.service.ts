@@ -1,8 +1,10 @@
-import { Adapter, Adapters, ModuleElementType } from "../interfaces";
+import { Adapter, Adapters, ModuleElementType, AnyConstructor } from "../types";
 import { ModuleElementService } from "./module-element.service";
 import { Observer } from "../observer";
 
-export class AdapterService extends ModuleElementService {
+export class AdapterService
+  extends ModuleElementService
+  implements AnyConstructor {
   protected type: ModuleElementType = "adapter";
 
   /**

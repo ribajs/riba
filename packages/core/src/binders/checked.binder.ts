@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
-import { Binder } from "../interfaces";
+import { Binder } from "../types";
 import { getInputValue } from "@ribajs/utils/src/dom";
 import { getString } from "@ribajs/utils/src/type";
 

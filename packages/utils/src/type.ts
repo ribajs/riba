@@ -1,3 +1,13 @@
+/**
+ * Fixed version of typeof operator
+ * @param obj
+ * @see https://goo.gl/pxwQGp
+ */
+export const toType = (obj: any) => {
+  const matches = {}.toString.call(obj).match(/\s([a-z]+)/i);
+  return matches ? matches[1].toLowerCase() : null;
+};
+
 export const couldBeJson = (str?: string | null) => {
   if (!str || typeof str !== "string") {
     return false;
@@ -62,7 +72,7 @@ export const getNumber = (value: string) => {
 
 /**
  * Parses a json string with the special feature that json strings
- * can also havesingle quotations for defining the properties and values
+ * can also have single quotations for defining the properties and values
  */
 export const parseJsonString = (value: string) => {
   let object = null;
@@ -92,9 +102,7 @@ export const isFunction = (value: any) => {
  * Check if variable is an Array
  * @see https://stackoverflow.com/a/4775737/1465919
  */
-export const isArray = (value: any) => {
-  return Object.prototype.toString.call(value) === "[object Array]";
-};
+export const isArray = Array.isArray;
 
 /**
  * Check whether variable is number or a string with numbers in JavaScript
@@ -116,7 +124,7 @@ export const isBoolean = (value?: any) => {
  * Check if value is a string
  */
 export const isString = (value?: any) => {
-  return isDefined(value) && typeof value === "string";
+  return typeof value === "string";
 };
 
 /**
@@ -145,7 +153,10 @@ export const stringIsPhoneNumber = (value: string) => {
  *
  * @see http://stackoverflow.com/a/1100653/1465919
  */
-export const justDigits = (str: string) => {
+export const justDigits = (str: string | number) => {
+  if (typeof str === "number") {
+    return str;
+  }
   const num = str.replace(/[^-\d.]/g, "");
   if (!isNumber(num)) {
     return 0;
@@ -218,7 +229,7 @@ export const camelCase = (str: string) => {
 };
 
 /**
- * Uppercases the first letter of a string
+ * uppercase's the first letter of a string
  * @param str
  */
 export const capitalize = (str: string) => {
@@ -232,7 +243,6 @@ export const capitalize = (str: string) => {
  * @param target An object that will receive the new properties
  * @param objects The objects containing additional properties to merge in.
  * @see http://www.damirscorner.com/blog/posts/20180216-VariableNumberOfArgumentsInTypescript.html
- * Copied from here:
  * @see https://gomakethings.com/merging-objects-with-vanilla-javascript/
  */
 export const extend = (
@@ -243,7 +253,6 @@ export const extend = (
   // Merge the object into the extended object
   const merge = (obj: any) => {
     for (const prop in obj) {
-      // eslint-disable-next-line no-prototype-builtins
       if (obj.hasOwnProperty(prop)) {
         if (
           deep &&
@@ -268,20 +277,16 @@ export const extend = (
 };
 
 /**
- * Concat the contents of two objects together into the first object and return the concatenated object.
+
+ * Concat the contents of two (or more) objects together into the first object and return the concatenated object.
  * @param deep If true, the merge becomes recursive (aka. deep copy).
- * @param object1 An first object containing properties to concat.
- * @param object2 The second object containing properties to concat.
- *
- * Note: This is actually just the same as extend with only two objects. Redundant.
+ * @param target An object that will receive the new properties
+ * @param objects The objects containing additional properties to merge in.
  */
-export const concat = (deep: boolean, object1?: any, object2?: any): any => {
-  object1 = extend(deep, object1 || {}, object2 || {});
-  return object1;
-};
+export const concat = extend;
 
 /**
- * Clone an object or array
+ * Clone an object, array or any primitive type like numbers or strings.
  * @param deep If true, the merge becomes recursive (aka. deep copy).
  * @param val The value(s) to clone
  */
@@ -296,14 +301,12 @@ export const clone = (deep: boolean, val: any): any => {
   if (isObject(val)) {
     return extend(deep, {}, val);
   }
-  if (isString(val)) {
-    return val.repeat(1);
-  }
+  // Primitive types like numbers and strings are copied by default
   return val;
 };
 
 /**
- * Get the class "that"
+ * Get the class `"that"`
  * @param that
  */
 export const classOf = (that: any) => {
@@ -315,7 +318,7 @@ export const classOf = (that: any) => {
  * @param obj
  * @return Cleared new object
  */
-export const clearObjFromRiba = (obj: any) => {
+export const clearObjFromRiba = (obj: Record<string, any>) => {
   const newObj: any = {};
   for (const key in obj) {
     if (key !== "__rv") {
@@ -336,9 +339,9 @@ export const clearObjFromRiba = (obj: any) => {
  * @see https://stackoverflow.com/a/7616484
  */
 export const hashCode = (str: string) => {
-  let hash = 0,
-    i,
-    chr;
+  let hash = 0;
+  let i: number;
+  let chr: number;
   if (str.length === 0) return hash;
   for (i = 0; i < str.length; i++) {
     chr = str.charCodeAt(i);

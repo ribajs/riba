@@ -1,6 +1,6 @@
-import { Binder, BinderWrapper } from "@ribajs/core";
+import { Binder, BinderCreator } from "@ribajs/core";
 import { concat } from "@ribajs/utils/src/type";
-import { ALocalesService } from "../../services/locales-base.service";
+import { I18nModuleOptions } from "../../types";
 
 // see star.binder.ts
 export interface BinderAttributeChangedEvent {
@@ -15,8 +15,8 @@ export interface BinderAttributeChangedEvent {
 /**
  *
  */
-export const i18nStarBinderWrapper: BinderWrapper<string> = (
-  localesService: ALocalesService
+export const i18nStarBinderCreator: BinderCreator<string> = (
+  options: I18nModuleOptions
 ) => {
   return {
     name: "i18n-*",
@@ -35,7 +35,7 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (
         return customData;
       };
       this.customData = getElementData();
-      this.customData.i18n = localesService;
+      this.customData.i18n = options.localesService;
       this.customData.vars = {};
       this.customData.translateMePathString = null;
       this.customData.properties = [];
@@ -96,7 +96,7 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (
         if (!langcode) {
           langcode = this.customData.i18n.getLangcode();
           if (!langcode) {
-            console.error("Langcode is requred", langcode);
+            console.error("Langcode is required", langcode);
             return;
           }
         }
@@ -121,7 +121,7 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (
           }
         }
 
-        // translate by properies, e.g. de.cart.add
+        // translate by properties, e.g. de.cart.add
         return this.customData.i18n
           .get([langcode, ...this.customData.properties], this.customData.vars)
           .then((local: string) => {
@@ -161,7 +161,7 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (
         langcode: string,
         initial: boolean
       ) => {
-        // Do not translate on inital language change, we use the ready event for this
+        // Do not translate on initial language change, we use the ready event for this
         if (!initial) {
           this.customData.translate(langcode);
         }
@@ -210,8 +210,8 @@ export const i18nStarBinderWrapper: BinderWrapper<string> = (
           this.customData.initOnReady(
             this.customData.i18n.getLangcode(),
             this.customData.i18n.currentLangcode !==
-              this.customData.i18n.initalLangcode ||
-              !localesService.doNotTranslateDefaultLanguage
+              this.customData.i18n.initialLangcode ||
+              !options.localesService.doNotTranslateDefaultLanguage
           );
         } else {
           this.customData.i18n.event.on("ready", this.customData.initOnReady);

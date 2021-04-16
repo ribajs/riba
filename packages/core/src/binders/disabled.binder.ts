@@ -1,4 +1,4 @@
-import { Binder } from "../interfaces";
+import { Binder } from "../types";
 
 /**
  * Disables the element when value is true (negated version of `enabled` binder).

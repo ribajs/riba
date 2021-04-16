@@ -1,4 +1,4 @@
-import { Binder, eventHandlerFunction } from "../interfaces";
+import { Binder, eventHandlerFunction } from "../types";
 
 /**
  * Binds an event handler on the element.

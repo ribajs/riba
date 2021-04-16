@@ -1,4 +1,4 @@
-import { Formatter, Formatters } from "../interfaces";
+import { Formatter, Formatters } from "../types";
 import { ModuleElementService } from "./module-element.service";
 
 export class FormatterService extends ModuleElementService {

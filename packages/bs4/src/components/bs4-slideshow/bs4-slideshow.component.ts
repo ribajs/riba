@@ -774,7 +774,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       this.resizeObserver?.observe(this);
     } else {
       // Fallback watch window resize
-      window.addEventListener("resize", this.onViewChanges);
+      window.addEventListener("resize", this.onViewChanges, { passive: true });
     }
 
     // Custom event triggered by some parent components when this component changes his visibility, e.g. triggered in the bs4-tabs component

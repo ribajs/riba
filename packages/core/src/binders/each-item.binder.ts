@@ -1,4 +1,4 @@
-import { Bindable, Binder } from "../interfaces";
+import { Bindable, Binder } from "../types";
 import { View } from "../view";
 import { times } from "@ribajs/utils/src/control";
 

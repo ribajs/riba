@@ -1,4 +1,4 @@
-import { ObserverSyncCallback } from "../../src/interfaces";
+import { ObserverSyncCallback } from "../../src/types";
 import { Observer } from "../../src/observer";
 
 export interface Change {

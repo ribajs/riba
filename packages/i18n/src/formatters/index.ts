@@ -1,9 +1,11 @@
 import { tFormatterWrapper } from "./t.formatter";
-import { ALocalesService } from "../services/locales-base.service";
-import { Formatters } from "@ribajs/core";
+import { I18nModuleOptions } from "../types";
+import { FormattersCreator } from "@ribajs/core";
 
-export default (localesService: ALocalesService): Formatters => {
+export const formatters: FormattersCreator = (options: I18nModuleOptions) => {
   return {
-    t: tFormatterWrapper(localesService),
+    t: tFormatterWrapper(options),
   };
 };
+
+export default formatters;

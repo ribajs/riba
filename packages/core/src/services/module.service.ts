@@ -4,7 +4,7 @@ import {
   Formatters,
   Components,
   RibaModule,
-} from "../interfaces";
+} from "../types";
 import { BindersService } from "./binder.service";
 import { ComponentService } from "./component.service";
 import { FormatterService } from "./formatter.service";

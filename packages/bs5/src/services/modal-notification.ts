@@ -1,4 +1,4 @@
-import { Notification, ModalNotificationButton } from "./../interfaces";
+import { Notification, ModalNotificationButton } from "../types";
 import { Modal } from "../services/modal";
 
 export class ModalNotification extends Notification {

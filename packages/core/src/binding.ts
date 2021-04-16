@@ -5,7 +5,7 @@ import {
   FormatterObservers,
   eventHandlerFunction,
   ObserverSyncCallback,
-} from "./interfaces";
+} from "./types";
 import { View } from "./view";
 import { getInputValue } from "@ribajs/utils/src/dom";
 

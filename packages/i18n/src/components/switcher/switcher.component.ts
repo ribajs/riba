@@ -1,12 +1,15 @@
-import { TypeOfComponent, TemplateFunction } from "@ribajs/core";
-import { AI18nSwitcherComponent } from "../abstract-switcher/switcher.abstract.component";
-import { Langcode } from "../../interfaces";
-import { ALocalesService } from "../../services/locales-base.service";
+import {
+  TypeOfComponent,
+  TemplateFunction,
+  ComponentCreator,
+} from "@ribajs/core";
+import { SwitcherComponent } from "../../types/switcher-component";
+import { Langcode, I18nModuleOptions } from "../../types";
 
-export const i18nSwitcherComponentWrapper = (
-  localesService: ALocalesService
-): TypeOfComponent<AI18nSwitcherComponent> => {
-  return class I18nSwitcherComponent extends AI18nSwitcherComponent {
+export const i18nSwitcherComponentWrapper: ComponentCreator = (
+  options: I18nModuleOptions
+): TypeOfComponent<SwitcherComponent> => {
+  return class I18nSwitcherComponent extends SwitcherComponent {
     public static tagName = "i18n-switcher";
 
     public _debug = false;
@@ -15,7 +18,7 @@ export const i18nSwitcherComponentWrapper = (
       return [];
     }
 
-    protected localesService = localesService;
+    protected localesService = options.localesService;
 
     protected scope = {
       langcodes: [] as Langcode[],

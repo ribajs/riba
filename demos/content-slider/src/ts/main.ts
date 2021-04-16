@@ -9,7 +9,7 @@ const model = {};
 
 // Register modules
 riba.module.regist(coreModule);
-riba.module.regist(bs5Module);
+riba.module.regist(bs5Module({}));
 riba.module.regist(extrasModule);
 riba.module.regist(contentSliderModule);
 riba.module.regist(ContentSliderDemoModule);

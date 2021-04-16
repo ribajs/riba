@@ -1,4 +1,4 @@
-export * from "./interfaces";
+export * from "./types";
 export * from "./vendors";
 export * from "./services";
 export * from "./adapters";

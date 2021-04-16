@@ -1,4 +1,4 @@
-import { AllowList } from "../services/sanitizer";
+import { AllowList } from "../helper/sanitizer";
 import { Placement } from "./placement";
 
 export type TooltipOffsetFn = (

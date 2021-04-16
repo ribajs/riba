@@ -7,4 +7,3 @@ export { Tooltip } from "./tooltip";
 export { Popover } from "./popover";
 export { ToastNotification } from "./toast-notification";
 export { Toast } from "./toast";
-export * from "./utils";

@@ -137,8 +137,13 @@ export class Bs5TabsComponent extends TemplatesComponent {
 
   constructor() {
     super();
-    this.onResizeEventHandler = throttle(this.setHeight.bind(this));
   }
+
+  protected _onResize() {
+    this.setHeight();
+  }
+
+  protected onResize = throttle(this._onResize.bind(this));
 
   /**
    * Make all tabs panes as height as the highest tab pane
@@ -251,7 +256,7 @@ export class Bs5TabsComponent extends TemplatesComponent {
         tab.removeEventListener("shown.bs.tab", this.onTabShownEventHandler);
       });
     }
-    window.removeEventListener("resize", this.onResizeEventHandler);
+    window.removeEventListener("resize", this.onResize);
   }
 
   protected setElements() {
@@ -287,10 +292,6 @@ export class Bs5TabsComponent extends TemplatesComponent {
     }
   }
 
-  protected onResizeEventHandler() {
-    this.setHeight();
-  }
-
   protected initTabs() {
     // Bind static template
     this.setElements();
@@ -303,8 +304,8 @@ export class Bs5TabsComponent extends TemplatesComponent {
     }
 
     if (this.scope.optionTabsAutoHeight) {
-      window.removeEventListener("resize", this.onResizeEventHandler);
-      window.addEventListener("resize", this.onResizeEventHandler);
+      window.removeEventListener("resize", this.onResize);
+      window.addEventListener("resize", this.onResize, { passive: true });
       this.setHeight();
     }
   }

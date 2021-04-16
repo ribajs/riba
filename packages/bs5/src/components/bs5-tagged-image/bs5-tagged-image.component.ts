@@ -3,7 +3,7 @@ import { extend } from "@ribajs/utils";
 import { Component, TemplateFunction } from "@ribajs/core";
 import { PopoverOptions } from "@ribajs/bs5";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import { TaggedImageTag as Tag } from "../../interfaces";
+import { TaggedImageTag as Tag } from "../../types";
 import template from "./bs5-tagged-image.component.html";
 import { debounce } from "@ribajs/utils/src/control";
 

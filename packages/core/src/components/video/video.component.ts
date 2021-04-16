@@ -1,5 +1,5 @@
 import { Component } from "../../component/component";
-import { TemplateFunction } from "../../interfaces";
+import { TemplateFunction } from "../../types";
 
 interface Scope {
   // properties

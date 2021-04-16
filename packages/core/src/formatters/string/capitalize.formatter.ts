@@ -1,4 +1,4 @@
-import { Formatter } from "../../interfaces";
+import { Formatter } from "../../types";
 import { capitalize } from "@ribajs/utils/src/type";
 
 /**

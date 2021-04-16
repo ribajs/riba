@@ -7,7 +7,7 @@ import { Component, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import template from "./bs5-colorpicker.component.html";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import { ColorPickerOptions } from "../../interfaces";
+import { ColorPickerOptions } from "../../types";
 import { debounce } from "@ribajs/utils/src/control";
 
 interface EventBucketItem {

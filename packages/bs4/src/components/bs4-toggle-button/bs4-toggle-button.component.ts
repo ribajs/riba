@@ -1,7 +1,7 @@
 /**
  * This components is used to trigger a toggle event used in other components or parts of your project. This site itself uses the bs4-toggle-button to open or close the sidebar.
  * @attribute "target-id" (Required) The id with which the toggle event is triggered
- * @method toggle	 Triggeres the toggle event
+ * @method toggle	 Triggers the toggle event
  * @property state Can be 'hidden' or something else
  * @property isClosed Is true if the state is 'hidden'
  * @property targetId Passed attribute value, see `target-id` attribute
@@ -27,7 +27,7 @@ interface Scope {
   toggle: Bs4ToggleButtonComponent["toggle"];
   state: State;
   isActive: boolean;
-  // depricated, use !isActive instead
+  /** @deprecated use !isActive instead */
   isClosed: boolean;
 }
 

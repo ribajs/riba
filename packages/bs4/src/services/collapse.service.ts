@@ -4,19 +4,18 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
-
+import { TRANSITION_END } from "../constants";
 import {
-  TRANSITION_END,
   getTransitionDurationFromElement,
   emulateTransitionEnd,
   reflow,
   getElementFromSelector,
   typeCheckConfig,
   isElement,
-} from "./utils";
-import EventHandler from "./dom/event-handler";
-import SelectorEngine from "./dom/selector-engine";
-import Data from "./dom/data";
+} from "../helper/utils";
+import { one, trigger } from "../helper/dom/event-handler";
+import * as SelectorEngine from "../helper/dom/selector-engine";
+import { setData, getData, removeData } from "../helper/dom/data";
 
 export interface Config {
   toggle: boolean;
@@ -113,7 +112,7 @@ export class CollapseService {
       this.toggle();
     }
 
-    Data.setData(element, DATA_KEY, this);
+    setData(element, DATA_KEY, this);
   }
 
   // Getters
@@ -182,7 +181,7 @@ export class CollapseService {
     if (actives) {
       const tempActiveData = actives.filter((elem) => container !== elem);
       activesData = tempActiveData[0]
-        ? Data.getData(tempActiveData[0], DATA_KEY)
+        ? getData(tempActiveData[0], DATA_KEY)
         : null;
 
       if (activesData && activesData._isTransitioning) {
@@ -190,7 +189,7 @@ export class CollapseService {
       }
     }
 
-    const startEvent = EventHandler.trigger(this._element, EVENT_SHOW);
+    const startEvent = trigger(this._element, EVENT_SHOW);
     if (startEvent.defaultPrevented) {
       return;
     }
@@ -202,7 +201,7 @@ export class CollapseService {
         }
 
         if (!activesData) {
-          Data.setData(elemActive, DATA_KEY, null);
+          setData(elemActive, DATA_KEY, null);
         }
       });
     }
@@ -236,7 +235,7 @@ export class CollapseService {
 
       this.setTransitioning(false);
 
-      EventHandler.trigger(this._element, EVENT_SHOWN);
+      trigger(this._element, EVENT_SHOWN);
     };
 
     const capitalizedDimension =
@@ -246,7 +245,7 @@ export class CollapseService {
       | "scrollHeight";
     const transitionDuration = getTransitionDurationFromElement(this._element);
 
-    EventHandler.one(this._element, TRANSITION_END, complete);
+    one(this._element, TRANSITION_END, complete);
 
     emulateTransitionEnd(this._element, transitionDuration);
     this._element.style[dimension] = `${this._element[scrollSize]}px`;
@@ -270,7 +269,7 @@ export class CollapseService {
       return;
     }
 
-    const startEvent = EventHandler.trigger(this._element, EVENT_HIDE);
+    const startEvent = trigger(this._element, EVENT_HIDE);
     if (startEvent.defaultPrevented) {
       return;
     }
@@ -309,13 +308,13 @@ export class CollapseService {
       }
       this._element.classList.remove(CLASS_NAME_COLLAPSING);
       this._element.classList.add(CLASS_NAME_COLLAPSE);
-      EventHandler.trigger(this._element, EVENT_HIDDEN);
+      trigger(this._element, EVENT_HIDDEN);
     };
 
     this._element.style[dimension] = "";
     const transitionDuration = getTransitionDurationFromElement(this._element);
 
-    EventHandler.one(this._element, TRANSITION_END, complete);
+    one(this._element, TRANSITION_END, complete);
     emulateTransitionEnd(this._element, transitionDuration);
 
     if (!this._config.parent && this._triggerArray) {
@@ -330,7 +329,7 @@ export class CollapseService {
 
   dispose() {
     if (this._element) {
-      Data.removeData(this._element, DATA_KEY);
+      removeData(this._element, DATA_KEY);
     }
 
     this._config = null;
@@ -418,7 +417,7 @@ export class CollapseService {
   // Static
 
   static collapseInterface(element: HTMLElement, config: string) {
-    let data = Data.getData(element, DATA_KEY);
+    let data = getData(element, DATA_KEY);
     const _config: Config = {
       ...Default,
       ...element.dataset,
@@ -443,6 +442,6 @@ export class CollapseService {
   }
 
   static getInstance(element: HTMLElement) {
-    return Data.getData(element, DATA_KEY);
+    return getData(element, DATA_KEY);
   }
 }

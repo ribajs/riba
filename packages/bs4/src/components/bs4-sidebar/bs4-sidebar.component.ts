@@ -5,6 +5,7 @@ import {
   hasChildNodesTrim,
 } from "@ribajs/utils/src/dom";
 import { TOGGLE_BUTTON } from "../../constants";
+import { throttle } from "@ribajs/utils/src/control";
 
 type State =
   | "overlay-left"
@@ -175,7 +176,9 @@ export class Bs4SidebarComponent extends Component {
     super.connectedCallback();
     this.init(Bs4SidebarComponent.observedAttributes);
     this.computedStyle = window.getComputedStyle(this);
-    window.addEventListener("resize", this.onEnvironmentChanges, false);
+    window.addEventListener("resize", this.onEnvironmentChanges, {
+      passive: true,
+    });
     // initial
     this.onEnvironmentChanges();
   }
@@ -292,11 +295,18 @@ export class Bs4SidebarComponent extends Component {
   }
 
   /**
-   * If viewport size changes, location url changes or something else
+   * Internal "unthrottled" version of `onEnvironmentChanges`.
    */
-  protected onEnvironmentChanges() {
+  protected _onEnvironmentChanges() {
     this.setStateByEnvironment();
   }
+
+  /**
+   * If viewport size changes, location url changes or something else.
+   */
+  protected onEnvironmentChanges = throttle(
+    this._onEnvironmentChanges.bind(this)
+  );
 
   protected getContainers() {
     return this.scope.containerSelector

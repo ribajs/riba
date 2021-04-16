@@ -1,4 +1,4 @@
-import { Binder } from "../interfaces";
+import { Binder } from "../types";
 import { debounce } from "@ribajs/utils/src/control";
 
 const DEFAULT_OFFSET = 10;

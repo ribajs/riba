@@ -1,4 +1,4 @@
-import { Formatter } from "../../interfaces";
+import { Formatter } from "../../types";
 import { FormatterFuntionParam } from "./call.formatter";
 import { Binding } from "../../binding";
 

@@ -1,5 +1,5 @@
 import { Riba } from "../riba";
-import { Adapter, ObserverSyncCallback } from "../interfaces";
+import { Adapter, ObserverSyncCallback } from "../types";
 
 import { dotAdapter } from "../adapters/dot.adapter";
 

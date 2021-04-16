@@ -1,5 +1,9 @@
 import { Deferred } from "./types";
 
+export const noop = () => {
+  /** do nothing */
+};
+
 export const times = (n: number, cb: () => void) => {
   for (let i = 0; i < n; i++) {
     cb();

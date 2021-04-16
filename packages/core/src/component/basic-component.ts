@@ -8,7 +8,7 @@ import {
   EventHandler,
   ObservedAttributesToCheck,
   TemplateFunction,
-} from "../interfaces";
+} from "../types";
 import { Binding } from "../binding";
 import { parseJsonString, camelCase } from "@ribajs/utils/src/type";
 import { getRandomColor, consoleColoured } from "@ribajs/utils/src/color";

@@ -1,6 +1,6 @@
-import { ALocalesService } from "./locales-base.service";
+import { LocalesService } from "../types/locales-service";
 
-export class LocalesStaticService extends ALocalesService {
+export class LocalesStaticService extends LocalesService {
   public static instances: {
     [id: string]: LocalesStaticService;
   } = {};
@@ -10,14 +10,14 @@ export class LocalesStaticService extends ALocalesService {
   }
 
   /**
-   * The current setted langcode
+   * The current defined langcode
    */
   protected currentLangcode?: string;
 
   /**
-   * The default theme langcode before any language was choosed
+   * The default theme langcode before any language was chosen
    */
-  protected initalLangcode?: string;
+  protected initialLangcode?: string;
 
   constructor(
     protected locales: any,

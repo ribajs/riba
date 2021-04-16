@@ -1,4 +1,4 @@
-import { RibaModule } from "./interfaces";
+import { RibaModule } from "./types";
 import * as binders from "./binders";
 import * as formatters from "./formatters";
 import * as services from "./services";

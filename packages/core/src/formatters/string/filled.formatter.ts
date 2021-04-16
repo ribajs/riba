@@ -1,4 +1,4 @@
-import { Formatter } from "../../interfaces";
+import { Formatter } from "../../types";
 import { emptyFormatter } from "../array/empty.formatter";
 import { isString } from "@ribajs/utils/src/type";
 

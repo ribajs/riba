@@ -1,4 +1,4 @@
-import { Formatter } from "../../interfaces";
+import { Formatter } from "../../types";
 import { isArray } from "@ribajs/utils/src/type";
 
 export const pluralizeFormatter: Formatter = {
