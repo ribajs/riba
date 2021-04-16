@@ -88,7 +88,7 @@ bs5-slideshow {
     }
   
     .slideshow-control-fallback-prev-icon {
-      @extend .carousel-control-next-icon !optional;
+      @extend .carousel-control-prev-icon !optional;
     }
     .slideshow-control-fallback-next-icon {
       @extend .carousel-control-next-icon !optional;

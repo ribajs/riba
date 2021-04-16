@@ -171,37 +171,45 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   static get observedAttributes(): string[] {
-    const responsiveOptionProps = [
-      "min-width",
-      "slides-to-show",
-      "slides-to-scroll",
-      "controls",
-      "controls-position",
-      "drag",
-      "autoplay",
-      "autoplay-interval",
-      "autoplay-velocity",
-      "control-prev-icon-src",
-      "control-next-icon-src",
-      "indicator-inactive-icon-src",
-      "indicator-active-icon-src",
-      "angle",
-      "set-active-slide",
-      "pause-on-hover",
-      "sticky",
-      "indicators",
-      "indicators-position",
-      "pause",
-    ];
     const breakpointNames = this.getBreakpointNames();
 
     const result: string[] = [];
     for (const breakpointName of breakpointNames) {
       result.push(
-        ...responsiveOptionProps.map((prop) => `${breakpointName}-${prop}`)
+        ...this.responsiveAttributes.map((prop) => `${breakpointName}-${prop}`)
       );
     }
     return result;
+  }
+
+  static responsiveAttributes = [
+    "breakpoint",
+    "name",
+    "slides-to-show",
+    "slides-to-scroll",
+    "controls",
+    "controls-position",
+    "drag",
+    "autoplay",
+    "autoplay-interval",
+    "autoplay-velocity",
+    "control-prev-icon-src",
+    "control-next-icon-src",
+    "indicator-inactive-icon-src",
+    "indicator-active-icon-src",
+    "angle",
+    "set-active-slide",
+    "pause-on-hover",
+    "sticky",
+    "indicators",
+    "indicators-position",
+    "pause",
+  ];
+
+  static get responsiveProperties() {
+    return this.responsiveAttributes.map((attribute) =>
+      camelCase(attribute)
+    ) as (keyof ResponsiveOptions)[];
   }
 
   static defaultBreakpointOptions: ResponsiveOptions = {
@@ -390,152 +398,54 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     dest: Partial<ResponsiveOptions>,
     source: Partial<ResponsiveOptions>
   ) {
-    dest.slidesToScroll =
-      typeof source.slidesToScroll !== "undefined"
-        ? clone(false, source.slidesToScroll)
-        : dest.slidesToScroll;
-    dest.controls =
-      typeof source.controls !== "undefined"
-        ? clone(false, source.controls)
-        : dest.controls;
-    dest.controlsPosition =
-      typeof source.controlsPosition !== "undefined"
-        ? clone(false, source.controlsPosition)
-        : dest.controlsPosition;
-    dest.drag =
-      typeof source.drag !== "undefined"
-        ? clone(false, source.drag)
-        : dest.drag;
-    dest.autoplay =
-      typeof source.autoplay !== "undefined"
-        ? clone(false, source.autoplay)
-        : dest.autoplay;
-    dest.autoplayInterval =
-      typeof source.autoplayInterval !== "undefined"
-        ? clone(false, source.autoplayInterval)
-        : dest.autoplayInterval;
-    dest.autoplayVelocity =
-      typeof source.autoplayVelocity !== "undefined"
-        ? clone(false, source.autoplayVelocity)
-        : dest.autoplayVelocity;
-    dest.controlPrevIconSrc =
-      typeof source.controlPrevIconSrc !== "undefined"
-        ? clone(false, source.controlPrevIconSrc)
-        : dest.controlPrevIconSrc;
-    dest.controlNextIconSrc =
-      typeof source.controlNextIconSrc !== "undefined"
-        ? clone(false, source.controlNextIconSrc)
-        : dest.controlNextIconSrc;
-    dest.indicatorActiveIconSrc =
-      typeof source.indicatorActiveIconSrc !== "undefined"
-        ? clone(false, source.indicatorActiveIconSrc)
-        : dest.indicatorActiveIconSrc;
-    dest.indicatorInactiveIconSrc =
-      typeof source.indicatorInactiveIconSrc !== "undefined"
-        ? clone(false, source.indicatorInactiveIconSrc)
-        : dest.indicatorInactiveIconSrc;
-    dest.angle =
-      typeof source.angle !== "undefined"
-        ? clone(false, source.angle)
-        : dest.angle;
-    dest.pauseOnHover =
-      typeof source.pauseOnHover !== "undefined"
-        ? clone(false, source.pauseOnHover)
-        : dest.pauseOnHover;
-    dest.sticky =
-      typeof source.sticky !== "undefined"
-        ? clone(false, source.sticky)
-        : dest.sticky;
-    dest.indicators =
-      typeof source.indicators !== "undefined"
-        ? clone(false, source.indicators)
-        : dest.indicators;
-    dest.indicatorsPosition =
-      typeof source.indicatorsPosition !== "undefined"
-        ? clone(false, source.indicatorsPosition)
-        : dest.indicatorsPosition;
-    dest.pause =
-      typeof source.pause !== "undefined"
-        ? clone(false, source.pause)
-        : dest.pause;
+    const props = Bs5SlideshowComponent.responsiveProperties;
+    for (const prop of props) {
+      (dest[prop] as any) =
+        typeof source[prop] !== "undefined"
+          ? clone(false, source[prop])
+          : dest[prop];
+    }
   }
 
   protected setOptionsIfUndefined(
     dest: Partial<ResponsiveOptions>,
     source: Partial<ResponsiveOptions>
   ) {
-    dest.slidesToScroll =
-      typeof dest.slidesToScroll === "undefined"
-        ? source.slidesToScroll
-        : dest.slidesToScroll;
-    dest.controls =
-      typeof dest.controls === "undefined" ? source.controls : dest.controls;
-    dest.controlsPosition =
-      typeof dest.controlsPosition === "undefined"
-        ? source.controlsPosition
-        : dest.controlsPosition;
-    dest.drag = typeof dest.drag === "undefined" ? source.drag : dest.drag;
-    dest.autoplay =
-      typeof dest.autoplay === "undefined" ? source.autoplay : dest.autoplay;
-    dest.autoplayInterval =
-      typeof dest.autoplayInterval === "undefined"
-        ? source.autoplayInterval
-        : dest.autoplayInterval;
-    dest.autoplayVelocity =
-      typeof dest.autoplayVelocity === "undefined"
-        ? source.autoplayVelocity
-        : dest.autoplayVelocity;
-    dest.controlPrevIconSrc =
-      typeof dest.controlPrevIconSrc === "undefined"
-        ? source.controlPrevIconSrc
-        : dest.controlPrevIconSrc;
-    dest.controlNextIconSrc =
-      typeof dest.controlNextIconSrc === "undefined"
-        ? source.controlNextIconSrc
-        : dest.controlNextIconSrc;
-    dest.indicatorActiveIconSrc =
-      typeof dest.indicatorActiveIconSrc === "undefined"
-        ? source.indicatorActiveIconSrc
-        : dest.indicatorActiveIconSrc;
-    dest.indicatorInactiveIconSrc =
-      typeof dest.indicatorInactiveIconSrc === "undefined"
-        ? source.indicatorInactiveIconSrc
-        : dest.indicatorInactiveIconSrc;
-    dest.angle = typeof dest.angle === "undefined" ? source.angle : dest.angle;
-    dest.pauseOnHover =
-      typeof dest.pauseOnHover === "undefined"
-        ? source.pauseOnHover
-        : dest.pauseOnHover;
-    dest.sticky =
-      typeof dest.sticky === "undefined" ? source.sticky : dest.sticky;
-    dest.indicators =
-      typeof dest.indicators === "undefined"
-        ? source.indicators
-        : dest.indicators;
-    dest.indicatorsPosition =
-      typeof dest.indicatorsPosition === "undefined"
-        ? source.indicatorsPosition
-        : dest.indicatorsPosition;
-    dest.pause = typeof dest.pause === "undefined" ? source.pause : dest.pause;
+    const props = Bs5SlideshowComponent.responsiveProperties;
+    for (const prop of props) {
+      (dest[prop] as any) =
+        typeof dest[prop] === "undefined"
+          ? clone(false, source[prop])
+          : dest[prop];
+    }
   }
 
   protected initResponsiveOptions() {
     const breakpointNames = Bs5SlideshowComponent.getBreakpointNames();
-    for (let i = 0; i < breakpointNames.length; i++) {
+    for (let i = 1; i < breakpointNames.length; i++) {
       const currName = breakpointNames[i];
-      const prevName = i > 0 ? breakpointNames[i - 1] : "";
+      const prevName = breakpointNames[i - 1];
 
-      this.scope.breakpoints[currName] = {};
+      this.scope.breakpoints[currName] = this.scope.breakpoints[currName] || {};
+      this.scope.breakpoints[prevName] = this.scope.breakpoints[prevName] || {};
+
       const currOptions = this.scope.breakpoints[currName];
-      const prevOptions =
-        this.scope.breakpoints[prevName] ||
-        Bs5SlideshowComponent.defaultBreakpointOptions;
+      const prevOptions = this.scope.breakpoints[prevName];
 
       // Set the breakpoint min width
       currOptions.breakpoint = Bs5SlideshowComponent.breakpoints[currName];
       currOptions.name = currName;
 
-      this.setOptionsIfUndefined(currOptions, prevOptions);
+      if (prevOptions) {
+        if (i === 1) {
+          this.setOptionsIfUndefined(
+            prevOptions,
+            Bs5SlideshowComponent.defaultBreakpointOptions
+          );
+        }
+
+        this.setOptionsIfUndefined(currOptions, prevOptions);
+      }
     }
 
     this.activeBreakpointName = this.getActiveBreakpoint();
@@ -544,30 +454,46 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   protected setControlsOptions() {
     let result = "";
+    let count = 0;
 
-    for (const name in this.scope.breakpoints) {
-      const breakpoint = this.scope.breakpoints[name];
+    for (const infix in this.scope.breakpoints) {
+      const breakpoint = this.scope.breakpoints[infix];
       const position = breakpoint.controlsPosition?.split(
         "-"
       ) as ControlsPosition[];
-      result += ` control-${position[0]} control-${position[1]}`;
+      if (position.length === 2) {
+        if (count === 0) {
+          result += `control-${position[0]} control-${position[1]} `;
+        } else {
+          result += `control-${infix}-${position[0]} control-${infix}-${position[1]} `;
+        }
+      }
+      count++;
     }
 
-    this.scope.controlsPositionClass = result;
+    this.scope.controlsPositionClass = result.trim();
   }
 
   protected setIndicatorsOptions() {
     let result = "";
+    let count = 0;
 
-    for (const name in this.scope.breakpoints) {
-      const breakpoint = this.scope.breakpoints[name];
-      const position = breakpoint.controlsPosition?.split(
+    for (const infix in this.scope.breakpoints) {
+      const breakpoint = this.scope.breakpoints[infix];
+      const indicators = breakpoint.controlsPosition?.split(
         "-"
       ) as IndicatorsPosition[];
-      result += ` indicators-${position[0]} control-${position[1]}`;
+      if (indicators.length === 2) {
+        if (count === 0) {
+          result += `indicators-${indicators[0]} indicators-${indicators[1]} `;
+        } else {
+          result += `indicators-${infix}-${indicators[0]} indicators-${infix}-${indicators[1]} `;
+        }
+      }
+      count++;
     }
 
-    this.scope.indicatorsPositionClass = result;
+    this.scope.indicatorsPositionClass = result.trim();
   }
 
   /**
@@ -716,12 +642,8 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   protected addEventListeners() {
     this.routerEvents.on("newPageReady", this.onBreakpointChanges, this);
 
-    // TODO types
-    // What element resize
-    if ((window as any).ResizeObserver as any) {
-      this.resizeObserver = new (window as any).ResizeObserver(
-        this.onViewChanges
-      );
+    if (window.ResizeObserver) {
+      this.resizeObserver = new window.ResizeObserver(this.onViewChanges);
       this.resizeObserver?.observe(this);
     } else {
       // Fallback watch window resize
@@ -729,10 +651,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     }
 
     // Custom event triggered by some parent components when this component changes his visibility, e.g. triggered in the bs5-tabs component
-    this.addEventListener(
-      "visibility-changed" as any,
-      this.onVisibilityChanged
-    );
+    this.addEventListener("visibility-changed", this.onVisibilityChanged);
 
     this.slideshowInner.addEventListener("scroll", this.onScroll, {
       passive: true,
@@ -759,7 +678,6 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
     // initial
     this.onViewChanges();
-    // this.onScroll();
     this.onScrollend();
   }
 
@@ -796,13 +714,12 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected async beforeBind() {
-    return await super.beforeBind();
+    await super.beforeBind();
   }
 
   protected async afterBind() {
     this.initSlideshowInner();
     this.initResponsiveOptions();
-    // this.removeEventListeners();
     this.addEventListeners();
     await super.afterBind();
   }
@@ -1143,9 +1060,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     newValue: any,
     namespace: string | null
   ) {
-    let optionForSize = "xs";
-
-    let responsiveScope: Partial<ResponsiveOptions>;
+    let responsiveAttributeName: keyof ResponsiveOptions | null = null;
 
     if (
       this.observedAttributesToCheck &&
@@ -1155,33 +1070,32 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     }
 
     newValue = this.parseAttribute(newValue);
-    const breakpointSuffixes = Bs5SlideshowComponent.getBreakpointNames();
+    const breakpointNames = Bs5SlideshowComponent.getBreakpointNames();
 
-    for (const suffix of breakpointSuffixes) {
-      if (attributeName.startsWith(suffix + "-")) {
-        optionForSize = suffix;
-        responsiveScope = this.scope.breakpoints[suffix];
-        attributeName = attributeName.slice(suffix.length + 1);
+    for (const name of breakpointNames) {
+      const affix = name + "-";
+      if (attributeName.startsWith(affix)) {
+        this.scope.breakpoints[name] = this.scope.breakpoints[name] || {};
+        responsiveAttributeName = camelCase(
+          attributeName.slice(affix.length)
+        ) as keyof ResponsiveOptions;
+        (this.scope.breakpoints[name][
+          responsiveAttributeName
+        ] as any) = newValue;
+        break;
       }
     }
 
-    const parsedAttributeName = camelCase(
-      attributeName
-    ) as keyof ResponsiveOptions;
-
-    if (responsiveScope && responsiveScope[parsedAttributeName]) {
-      oldValue = clone(true, responsiveScope[parsedAttributeName]);
-      // automatically inject observed attributes to view responsiveScope
-      (responsiveScope[parsedAttributeName] as any) = newValue;
+    if (!responsiveAttributeName) {
+      const parsedAttributeName = camelCase(attributeName);
+      // call custom attribute changed callback with parsed values
+      this.parsedAttributeChangedCallback(
+        parsedAttributeName,
+        oldValue,
+        newValue,
+        namespace
+      );
     }
-
-    // call custom attribute changed callback with parsed values
-    this.parsedAttributeChangedCallback(
-      optionForSize + parsedAttributeName,
-      oldValue,
-      newValue,
-      namespace
-    );
 
     this.bindIfReady();
   }

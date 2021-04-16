@@ -74,7 +74,6 @@ export class Dragscroll {
   }
 
   protected _checkDraggable() {
-    console.debug("checkDraggable");
     if (Utils.isScrollable(this.el)) {
       this.el.classList.add("draggable");
     } else {
