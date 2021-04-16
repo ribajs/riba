@@ -1,4 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
+import { Breakpoints } from "./breakpoints";
 export interface Bs5ModuleOptions {
-  // TODO
+  breakpoints: Breakpoints;
 }

@@ -290,12 +290,12 @@ export const concat = extend;
  * @param deep If true, the merge becomes recursive (aka. deep copy).
  * @param val The value(s) to clone
  */
-export const clone = (deep: boolean, val: any): any => {
+export const clone = <T = any>(deep: boolean, val: T): T => {
   if (isArray(val)) {
     if (deep) {
-      return (val as any[]).map((x) => clone(true, x));
+      return (val as any).map((x: any) => clone<any>(true, x));
     } else {
-      return val.slice();
+      return (val as any).slice();
     }
   }
   if (isObject(val)) {

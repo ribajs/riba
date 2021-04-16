@@ -3,6 +3,8 @@ import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { clone, camelCase } from "@ribajs/utils/src/type";
 import { throttle } from "@ribajs/utils/src/control";
+import { Breakpoints, Bs5ModuleOptions } from "../../types";
+import { DEFAULT_MODULE_OPTIONS } from "../../constants";
 
 import {
   Dragscroll,
@@ -23,8 +25,6 @@ import templateIndicators from "./bs5-slideshow-indicators.component.html";
 const SLIDESHOW_INNER_SELECTOR = ".slideshow-row";
 
 const SLIDES_SELECTOR = `${SLIDESHOW_INNER_SELECTOR} > .slide`;
-
-export type Breakpoint = "xs" | "sm" | "md" | "lg" | "xl";
 
 export type ControlsPosition =
   | "inside-middle"
@@ -59,12 +59,7 @@ export interface Slide {
   index: number;
 }
 
-export interface ResponsiveOptions extends Partial<Options> {
-  /** min width of responsive view port of from which these options take effect */
-  minWidth: number;
-}
-
-export interface Options {
+export interface ResponsiveOptions {
   /** Show controls */
   controls: boolean;
   /** Position of the controls */
@@ -99,14 +94,17 @@ export interface Options {
   angle: "vertical" | "horizontal";
   /** Pause on autoplay (with interval) */
   pause: boolean;
-
-  // Responsive options
-  xs: ResponsiveOptions;
-  sm: ResponsiveOptions;
-  md: ResponsiveOptions;
-  lg: ResponsiveOptions;
-  xl: ResponsiveOptions;
+  /** min width of responsive view port of from which these options take effect */
+  breakpoint: number;
+  /** Name of the current breakpoint, e.g. xs, sm, md, ... */
+  name: string;
 }
+
+export type Options = {
+  breakpoints: {
+    [bp: string]: Partial<ResponsiveOptions>;
+  };
+};
 
 export interface Scope extends Options {
   next: Bs5SlideshowComponent["next"];
@@ -115,6 +113,8 @@ export interface Scope extends Options {
   controlsPositionClass: string;
   indicatorsPositionClass: string;
   items: Slide[];
+  /** Active breakpoint options */
+  activeBreakpoint: ResponsiveOptions;
 }
 
 export class Bs5SlideshowComponent extends TemplatesComponent {
@@ -160,8 +160,18 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     return this._indicatorsElement;
   }
 
+  public static breakpoints: Breakpoints = DEFAULT_MODULE_OPTIONS.breakpoints;
+
+  static setModuleOptions(options: Bs5ModuleOptions) {
+    this.breakpoints = options.breakpoints;
+  }
+
+  static getBreakpointNames() {
+    return Object.keys(this.breakpoints);
+  }
+
   static get observedAttributes(): string[] {
-    return [
+    const responsiveOptionProps = [
       "min-width",
       "slides-to-show",
       "slides-to-scroll",
@@ -182,92 +192,40 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       "indicators",
       "indicators-position",
       "pause",
-
-      "sm-min-width",
-      "sm-slides-to-show",
-      "sm-slides-to-scroll",
-      "sm-controls",
-      "sm-controls-position",
-      "sm-drag",
-      "sm-autoplay",
-      "sm-autoplay-interval",
-      "sm-autoplay-velocity",
-      "sm-control-prev-icon-src",
-      "sm-control-next-icon-src",
-      "sm-indicator-inactive-icon-src",
-      "sm-indicator-active-icon-src",
-      "sm-angle",
-      "sm-set-active-slide",
-      "sm-pause-on-hover",
-      "sm-sticky",
-      "sm-indicators",
-      "sm-indicators-position",
-      "sm-pause",
-
-      "md-min-width",
-      "md-slides-to-show",
-      "md-slides-to-scroll",
-      "md-controls",
-      "md-controls-position",
-      "md-drag",
-      "md-autoplay",
-      "md-autoplay-interval",
-      "md-autoplay-velocity",
-      "md-control-prev-icon-src",
-      "md-control-next-icon-src",
-      "md-indicator-inactive-icon-src",
-      "md-indicator-active-icon-src",
-      "md-angle",
-      "md-set-active-slide",
-      "md-pause-on-hover",
-      "md-sticky",
-      "md-indicators",
-      "sm-indicators-position",
-      "md-pause",
-
-      "lg-min-width",
-      "lg-slides-to-show",
-      "lg-slides-to-scroll",
-      "lg-controls",
-      "lg-controls-position",
-      "lg-drag",
-      "lg-autoplay",
-      "lg-autoplay-interval",
-      "lg-autoplay-velocity",
-      "lg-control-prev-icon-src",
-      "lg-control-next-icon-src",
-      "lg-indicator-inactive-icon-src",
-      "lg-indicator-active-icon-src",
-      "lg-angle",
-      "lg-set-active-slide",
-      "lg-pause-on-hover",
-      "lg-sticky",
-      "lg-indicators",
-      "lg-indicators-position",
-      "lg-pause",
-
-      "xl-min-width",
-      "xl-slides-to-show",
-      "xl-slides-to-scroll",
-      "xl-controls",
-      "xl-controls-position",
-      "xl-drag",
-      "xl-autoplay",
-      "xl-autoplay-interval",
-      "xl-autoplay-velocity",
-      "xl-control-prev-icon-src",
-      "xl-control-next-icon-src",
-      "xl-indicator-inactive-icon-src",
-      "xl-indicator-active-icon-src",
-      "xl-angle",
-      "xl-set-active-slide",
-      "xl-pause-on-hover",
-      "xl-sticky",
-      "xl-indicators",
-      "xl-indicators-position",
-      "xl-pause",
     ];
+    const breakpointNames = this.getBreakpointNames();
+
+    const result: string[] = [];
+    for (const breakpointName of breakpointNames) {
+      result.push(
+        ...responsiveOptionProps.map((prop) => `${breakpointName}-${prop}`)
+      );
+    }
+    return result;
   }
+
+  static defaultBreakpointOptions: ResponsiveOptions = {
+    // Options
+    slidesToScroll: 1,
+    controls: true,
+    controlsPosition: "inside-middle",
+    pauseOnHover: true,
+    sticky: false,
+    indicators: true,
+    indicatorsPosition: "inside-bottom",
+    pause: false,
+    drag: true,
+    autoplay: false,
+    autoplayInterval: 0,
+    autoplayVelocity: 0.8,
+    controlPrevIconSrc: "",
+    controlNextIconSrc: "",
+    indicatorActiveIconSrc: "",
+    indicatorInactiveIconSrc: "",
+    angle: "horizontal",
+    breakpoint: 0,
+    name: "xs",
+  };
 
   public static tagName = "bs5-slideshow";
 
@@ -327,50 +285,19 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   /**
    * Current breakpoint
    */
-  protected breakpoint: Breakpoint = "xs";
+  protected activeBreakpointName = "xs";
 
   protected scope: Scope = {
+    breakpoints: {},
+    activeBreakpoint: Bs5SlideshowComponent.defaultBreakpointOptions,
+
     // Template methods
     next: this.next.bind(this),
     prev: this.prev.bind(this),
     goTo: this.goTo.bind(this),
+
     // Template properties
     items: new Array<Slide>(),
-    // Options
-    slidesToScroll: 1,
-    controls: true,
-    controlsPosition: "inside-middle",
-    pauseOnHover: true,
-    sticky: false,
-    indicators: true,
-    indicatorsPosition: "inside-bottom",
-    pause: false,
-    drag: true,
-    autoplay: false,
-    autoplayInterval: 0,
-    autoplayVelocity: 0.8,
-    controlPrevIconSrc: "",
-    controlNextIconSrc: "",
-    indicatorActiveIconSrc: "",
-    indicatorInactiveIconSrc: "",
-    angle: "horizontal",
-
-    // Responsive options
-    xs: {
-      minWidth: 0,
-    },
-    sm: {
-      minWidth: 576,
-    },
-    md: {
-      minWidth: 768,
-    },
-    lg: {
-      minWidth: 992,
-    },
-    xl: {
-      minWidth: 1200,
-    },
 
     // Classes
     controlsPositionClass: "",
@@ -379,6 +306,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   constructor() {
     super();
+
     // set event listeners to the this-bound version once, so we can easily pass them to DOM event handlers and remove them again later
     this.onViewChanges = this.onViewChanges.bind(this);
     this.onVisibilityChanged = this.onVisibilityChanged.bind(this);
@@ -419,7 +347,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       return;
     }
 
-    if (this.scope.angle === "vertical") {
+    if (this.scope.activeBreakpoint.angle === "vertical") {
       // Check if we do not need to slide
       if (this.scope.items[index].position.centerY === 0) {
         // We do not need to scroll
@@ -449,7 +377,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
           top,
         });
       } else {
-        if (this.scope.angle === "vertical") {
+        if (this.scope.activeBreakpoint.angle === "vertical") {
           this.slideshowInner.scrollTop = top;
         } else {
           this.slideshowInner.scrollLeft = left;
@@ -459,8 +387,8 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected setOptions(
-    dest: ResponsiveOptions | Options,
-    source: ResponsiveOptions | Options
+    dest: Partial<ResponsiveOptions>,
+    source: Partial<ResponsiveOptions>
   ) {
     dest.slidesToScroll =
       typeof source.slidesToScroll !== "undefined"
@@ -533,8 +461,8 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected setOptionsIfUndefined(
-    dest: ResponsiveOptions | Options,
-    source: ResponsiveOptions | Options
+    dest: Partial<ResponsiveOptions>,
+    source: Partial<ResponsiveOptions>
   ) {
     dest.slidesToScroll =
       typeof dest.slidesToScroll === "undefined"
@@ -592,86 +520,111 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected initResponsiveOptions() {
-    this.setOptions(this.scope.xs, this.scope);
-    this.setOptionsIfUndefined(this.scope.sm, this.scope.xs);
-    this.setOptionsIfUndefined(this.scope.md, this.scope.sm);
-    this.setOptionsIfUndefined(this.scope.lg, this.scope.md);
-    this.setOptionsIfUndefined(this.scope.xl, this.scope.lg);
-    this.breakpoint = this.getBreakpoint();
-    this.setOptionsByBreakpoint(this.breakpoint);
+    const breakpointNames = Bs5SlideshowComponent.getBreakpointNames();
+    for (let i = 0; i < breakpointNames.length; i++) {
+      const currName = breakpointNames[i];
+      const prevName = i > 0 ? breakpointNames[i - 1] : "";
+
+      this.scope.breakpoints[currName] = {};
+      const currOptions = this.scope.breakpoints[currName];
+      const prevOptions =
+        this.scope.breakpoints[prevName] ||
+        Bs5SlideshowComponent.defaultBreakpointOptions;
+
+      // Set the breakpoint min width
+      currOptions.breakpoint = Bs5SlideshowComponent.breakpoints[currName];
+      currOptions.name = currName;
+
+      this.setOptionsIfUndefined(currOptions, prevOptions);
+    }
+
+    this.activeBreakpointName = this.getActiveBreakpoint();
+    this.setOptionsByBreakpoint(this.activeBreakpointName);
   }
 
   protected setControlsOptions() {
-    const xsControlsPosition = this.scope.xs.controlsPosition?.split(
-      "-"
-    ) as ControlsPosition[];
-    const smControlsPosition = this.scope.sm.controlsPosition?.split(
-      "-"
-    ) as ControlsPosition[];
-    const mdControlsPosition = this.scope.md.controlsPosition?.split(
-      "-"
-    ) as ControlsPosition[];
-    const lgControlsPosition = this.scope.lg.controlsPosition?.split(
-      "-"
-    ) as ControlsPosition[];
-    const xlControlsPosition = this.scope.xl.controlsPosition?.split(
-      "-"
-    ) as ControlsPosition[];
+    let result = "";
 
-    this.scope.controlsPositionClass = `control-${xsControlsPosition[0]} control-${xsControlsPosition[1]} control-sm-${smControlsPosition[0]} control-sm-${smControlsPosition[1]} control-md-${mdControlsPosition[0]} control-md-${mdControlsPosition[1]} control-lg-${lgControlsPosition[0]} control-lg-${lgControlsPosition[1]} control-xl-${xlControlsPosition[0]} control-xl-${xlControlsPosition[1]}`;
+    for (const name in this.scope.breakpoints) {
+      const breakpoint = this.scope.breakpoints[name];
+      const position = breakpoint.controlsPosition?.split(
+        "-"
+      ) as ControlsPosition[];
+      result += ` control-${position[0]} control-${position[1]}`;
+    }
+
+    this.scope.controlsPositionClass = result;
   }
 
   protected setIndicatorsOptions() {
-    const xsIndicatorsPosition = this.scope.xs.indicatorsPosition?.split(
-      "-"
-    ) as IndicatorsPosition[];
-    const smIndicatorsPosition = this.scope.sm.indicatorsPosition?.split(
-      "-"
-    ) as IndicatorsPosition[];
-    const mdIndicatorsPosition = this.scope.md.indicatorsPosition?.split(
-      "-"
-    ) as IndicatorsPosition[];
-    const lgIndicatorsPosition = this.scope.lg.indicatorsPosition?.split(
-      "-"
-    ) as IndicatorsPosition[];
-    const xlIndicatorsPosition = this.scope.xl.indicatorsPosition?.split(
-      "-"
-    ) as IndicatorsPosition[];
+    let result = "";
 
-    this.scope.indicatorsPositionClass = `indicators-${xsIndicatorsPosition[0]} indicators-${xsIndicatorsPosition[1]} indicators-sm-${smIndicatorsPosition[0]} indicators-sm-${smIndicatorsPosition[1]} indicators-md-${mdIndicatorsPosition[0]} indicators-md-${mdIndicatorsPosition[1]} indicators-lg-${lgIndicatorsPosition[0]} indicators-lg-${lgIndicatorsPosition[1]} indicators-xl-${xlIndicatorsPosition[0]} indicators-xl-${xlIndicatorsPosition[1]}`;
+    for (const name in this.scope.breakpoints) {
+      const breakpoint = this.scope.breakpoints[name];
+      const position = breakpoint.controlsPosition?.split(
+        "-"
+      ) as IndicatorsPosition[];
+      result += ` indicators-${position[0]} control-${position[1]}`;
+    }
+
+    this.scope.indicatorsPositionClass = result;
   }
 
-  // TODO create independent bs5 breakpoint service
-  protected getBreakpoint(): Breakpoint {
+  /**
+   * Get current breakpoint based on the screen width
+   * TODO create independent bs5 breakpoint service
+   * @protected
+   * @returns {string}
+   * @memberof Bs5SlideshowComponent
+   */
+  protected getActiveBreakpoint(): string {
     const size = window.innerWidth;
-    // XS
-    if (size >= this.scope.xs.minWidth && size < this.scope.sm.minWidth) {
-      return "xs";
+    const breakpointNames = Bs5SlideshowComponent.getBreakpointNames();
+
+    for (let i = 0; i < breakpointNames.length; i++) {
+      const currName = breakpointNames[i];
+      const prevName = i > 0 ? breakpointNames[i - 1] : "";
+
+      const currOptions = this.scope.breakpoints[currName];
+      const prevOptions = this.scope.breakpoints[prevName] || null;
+
+      if (
+        prevOptions &&
+        currOptions &&
+        size >= prevOptions.breakpoint &&
+        size < currOptions.breakpoint
+      ) {
+        return prevOptions.name;
+      }
     }
-    // SM
-    if (size >= this.scope.sm.minWidth && size < this.scope.md.minWidth) {
-      return "sm";
+
+    const lastName = breakpointNames[breakpointNames.length - 1];
+    const last = this.scope.breakpoints[lastName];
+
+    if (size >= last.breakpoint) {
+      return last.name;
     }
-    // MD
-    if (size >= this.scope.md.minWidth && size < this.scope.lg.minWidth) {
-      return "md";
-    }
-    // LG
-    if (size >= this.scope.lg.minWidth && size < this.scope.xl.minWidth) {
-      return "lg";
-    }
-    // XL
-    return "xl";
+
+    const firstName = breakpointNames[0];
+    const first = this.scope.breakpoints[firstName];
+    return first.name;
   }
 
-  protected setOptionsByBreakpoint(breakpoint: Breakpoint) {
-    this.setOptions(this.scope, this.scope[breakpoint]);
-    if (this.scope.autoplay) {
+  protected setOptionsByBreakpoint(breakpointName: string) {
+    if (!this.scope.breakpoints[breakpointName]) {
+      console.error(`Breakpoint ${breakpointName} not found!`);
+      return;
+    }
+    this.setOptions(
+      this.scope.activeBreakpoint,
+      this.scope.breakpoints[breakpointName]
+    );
+    if (this.scope.activeBreakpoint.autoplay) {
       this.enableAutoplay();
     } else {
       this.disableAutoplay();
     }
-    if (this.scope.drag) {
+    if (this.scope.activeBreakpoint.drag) {
       this.enableDesktopDragscroll();
     } else {
       this.disableDesktopDragscroll();
@@ -681,19 +634,19 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected onBreakpointChanges() {
-    this.setOptionsByBreakpoint(this.breakpoint);
+    this.setOptionsByBreakpoint(this.activeBreakpointName);
   }
 
   protected _onViewChanges() {
     this.debug("onViewChanges");
-    const newBreakpoint = this.getBreakpoint();
-    if (newBreakpoint !== this.breakpoint) {
-      this.breakpoint = newBreakpoint;
+    const newBreakpoint = this.getActiveBreakpoint();
+    if (newBreakpoint !== this.activeBreakpointName) {
+      this.activeBreakpointName = newBreakpoint;
       this.onBreakpointChanges();
     }
     this.setSlidePositions();
     const index = this.setCenteredSlideActive();
-    if (this.scope.sticky) {
+    if (this.scope.activeBreakpoint.sticky) {
       this.goTo(index);
     }
   }
@@ -716,15 +669,15 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   protected onScrollend() {
     this.setSlidePositions();
     this.setCenteredSlideActive();
-    if (this.scope.sticky) {
+    if (this.scope.activeBreakpoint.sticky) {
       this.scrollToNearestSlide();
     }
     this.resume(1000);
   }
 
   protected onMouseIn() {
-    if (this.scope.pauseOnHover) {
-      this.scope.pause = true;
+    if (this.scope.activeBreakpoint.pauseOnHover) {
+      this.scope.activeBreakpoint.pause = true;
     }
   }
 
@@ -740,7 +693,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   /** Resume if this method was not called up for [delay] milliseconds */
   protected resume(delay = 1000) {
-    if (!this.scope.pause) {
+    if (!this.scope.activeBreakpoint.pause) {
       return;
     }
 
@@ -751,7 +704,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
     this.resumeTimer = window.setTimeout(() => {
       this.setSlidePositions();
-      this.scope.pause = false;
+      this.scope.activeBreakpoint.pause = false;
     }, delay);
   }
 
@@ -880,9 +833,9 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   protected enableContinuousAutoplay() {
     if (!this.continuousAutoplayService) {
       const autoscrollOptions: AutoscrollOptions = {
-        velocity: this.scope.autoplayVelocity,
-        angle: this.scope.angle,
-        pauseOnHover: this.scope.pauseOnHover,
+        velocity: this.scope.activeBreakpoint.autoplayVelocity,
+        angle: this.scope.activeBreakpoint.angle,
+        pauseOnHover: this.scope.activeBreakpoint.pauseOnHover,
       };
       this.continuousAutoplayService = new Autoscroll(
         this.slideshowInner,
@@ -892,7 +845,8 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     // on continuous autoplay the scrollended event is never triggered, so call this method all `intervalsTimeMs` milliseconds as a WORKAROUND
     if (!this.continuousAutoplayIntervalIndex) {
       // intervals are depending on the autoscrolling speed (autoplayVelocity)
-      const intervalsTimeMs = this.scope.autoplayVelocity * 10000;
+      const intervalsTimeMs =
+        this.scope.activeBreakpoint.autoplayVelocity * 10000;
       // this.debug('intervalsTimeMs', intervalsTimeMs);
       this.continuousAutoplayIntervalIndex = window.setInterval(
         this.onScrollend.bind(this),
@@ -915,10 +869,10 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   protected enableIntervalAutoplay() {
     if (this.autoplayIntervalIndex === null) {
       this.autoplayIntervalIndex = window.setInterval(() => {
-        if (!this.scope.pause) {
+        if (!this.scope.activeBreakpoint.pause) {
           this.next();
         }
-      }, this.scope.autoplayInterval);
+      }, this.scope.activeBreakpoint.autoplayInterval);
     }
   }
 
@@ -936,7 +890,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   protected enableAutoplay() {
     // continuous scrolling
-    if (this.scope.autoplayInterval <= 0) {
+    if (this.scope.activeBreakpoint.autoplayInterval <= 0) {
       this.enableContinuousAutoplay();
     } else {
       this.enableIntervalAutoplay();
@@ -1033,7 +987,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       return -1;
     }
     let nearZero = Math.abs(
-      this.scope.angle === "vertical"
+      this.scope.activeBreakpoint.angle === "vertical"
         ? this.scope.items[0].position.centerY
         : this.scope.items[0].position.centerX
     );
@@ -1041,7 +995,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
     for (let i = 1; i < this.scope.items.length; i++) {
       const position = Math.abs(
-        this.scope.angle === "vertical"
+        this.scope.activeBreakpoint.angle === "vertical"
           ? this.scope.items[i].position.centerY
           : this.scope.items[i].position.centerX
       );
@@ -1087,11 +1041,11 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       return false;
     }
     const maxScrollTo =
-      this.scope.angle === "vertical"
+      this.scope.activeBreakpoint.angle === "vertical"
         ? this.getScrollPosition().maxY
         : this.getScrollPosition().maxX;
     const scrollTo =
-      this.scope.angle === "vertical"
+      this.scope.activeBreakpoint.angle === "vertical"
         ? this.slideshowInner.scrollTop +
           this.scope.items[index].position.centerY
         : this.slideshowInner.scrollLeft +
@@ -1102,7 +1056,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   protected scrollToNextSlide() {
     this.setSlidePositions();
     const currentIndex = this.getMostCenteredSlideIndex();
-    let nextIndex = currentIndex + this.scope.slidesToScroll;
+    let nextIndex = currentIndex + this.scope.activeBreakpoint.slidesToScroll;
 
     if (nextIndex >= this.slideElements.length) {
       nextIndex = nextIndex - this.slideElements.length;
@@ -1122,7 +1076,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   protected scrollToPrevSlide() {
     this.setSlidePositions();
     const currentIndex = this.getMostCenteredSlideIndex();
-    let prevIndex = currentIndex - this.scope.slidesToScroll;
+    let prevIndex = currentIndex - this.scope.activeBreakpoint.slidesToScroll;
 
     if (prevIndex < 0) {
       prevIndex = this.slideElements.length - 1 + (prevIndex + 1);
@@ -1189,9 +1143,9 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     newValue: any,
     namespace: string | null
   ) {
-    let optionForSize: Breakpoint = "xs";
+    let optionForSize = "xs";
 
-    let responsiveScope: ResponsiveOptions | Options = this.scope;
+    let responsiveScope: Partial<ResponsiveOptions>;
 
     if (
       this.observedAttributesToCheck &&
@@ -1201,33 +1155,25 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     }
 
     newValue = this.parseAttribute(newValue);
+    const breakpointSuffixes = Bs5SlideshowComponent.getBreakpointNames();
 
-    if (attributeName.startsWith("sm-")) {
-      optionForSize = "sm";
-      responsiveScope = this.scope.sm;
-      attributeName = attributeName.slice(3);
-    } else if (attributeName.startsWith("md-")) {
-      optionForSize = "md";
-      responsiveScope = this.scope.md;
-      attributeName = attributeName.slice(3);
-    } else if (attributeName.startsWith("lg-")) {
-      optionForSize = "lg";
-      responsiveScope = this.scope.lg;
-      attributeName = attributeName.slice(3);
-    } else if (attributeName.startsWith("xl-")) {
-      optionForSize = "xl";
-      responsiveScope = this.scope.xl;
-      attributeName = attributeName.slice(3);
+    for (const suffix of breakpointSuffixes) {
+      if (attributeName.startsWith(suffix + "-")) {
+        optionForSize = suffix;
+        responsiveScope = this.scope.breakpoints[suffix];
+        attributeName = attributeName.slice(suffix.length + 1);
+      }
     }
 
-    const parsedAttributeName = camelCase(attributeName);
+    const parsedAttributeName = camelCase(
+      attributeName
+    ) as keyof ResponsiveOptions;
 
-    if (responsiveScope && (responsiveScope as any)[parsedAttributeName]) {
-      oldValue = (responsiveScope as any)[parsedAttributeName];
+    if (responsiveScope && responsiveScope[parsedAttributeName]) {
+      oldValue = clone(true, responsiveScope[parsedAttributeName]);
+      // automatically inject observed attributes to view responsiveScope
+      (responsiveScope[parsedAttributeName] as any) = newValue;
     }
-
-    // automatically inject observed attributes to view responsiveScope
-    (responsiveScope as any)[parsedAttributeName] = newValue;
 
     // call custom attribute changed callback with parsed values
     this.parsedAttributeChangedCallback(

@@ -23,6 +23,9 @@ import { Bs5TaggedImageComponent } from "./bs5-tagged-image/bs5-tagged-image.com
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const components: ComponentsCreator = (options: Bs5ModuleOptions) => {
+  Bs5SidebarComponent.setModuleOptions(options);
+  Bs5SlideshowComponent.setModuleOptions(options);
+
   return {
     Bs5DropdownComponent,
     Bs5AccordionComponent,

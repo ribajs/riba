@@ -2,8 +2,7 @@ import { HttpService } from "@ribajs/core";
 import Debug from "debug";
 import { ShopifyConnect } from "./../interfaces/shopify-connect/connect";
 import { FacebookConnect } from "./../interfaces/facebook-connect/connect";
-import { shopifyEasdkModule } from "@ribajs/shopify-easdk";
-
+import { EASDKWrapperService } from "@ribajs/shopify-easdk";
 export class AuthService {
   public static instance?: AuthService;
 
@@ -24,7 +23,7 @@ export class AuthService {
   ) {
     this.debug("connect");
     const connectUrl = `/${type}/auth?shop=${myshopifyDomain}`;
-    if (shopifyEasdkModule?.services?.EASDKWrapperService.inIframe()) {
+    if (EASDKWrapperService.inIframe()) {
       const win = window.open(connectUrl + "&iniframe=true");
       if (win) {
         const timer = setInterval(() => {

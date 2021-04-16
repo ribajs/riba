@@ -34,6 +34,7 @@ export * from "./observed-attributes-to-check";
 export * from "./observer";
 export * from "./options";
 export * from "./services";
+export * from "./services-creator";
 export * from "./template-function";
 export * from "./type-of-component";
 export * from "./type-of";

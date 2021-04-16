@@ -3,7 +3,7 @@ import { FormattersCreator } from "@ribajs/core";
 
 export const formatters: FormattersCreator = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  options: Bs5ModuleOptions = {}
+  options: Bs5ModuleOptions
 ) => {
   return {};
 };

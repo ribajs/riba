@@ -1,10 +1,11 @@
 import { Component, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
+import { Breakpoints, Bs5ModuleOptions } from "../../types";
+import { TOGGLE_BUTTON, DEFAULT_MODULE_OPTIONS } from "../../constants";
 import {
   getViewportDimensions,
   hasChildNodesTrim,
 } from "@ribajs/utils/src/dom";
-import { TOGGLE_BUTTON } from "../../constants";
 import { throttle } from "@ribajs/utils/src/control";
 
 type State =
@@ -117,18 +118,24 @@ export class Bs5SidebarComponent extends Component {
 
     // Options
     position: "left",
-    autoShowOnWiderThan: 1199,
-    autoHideOnSlimmerThan: 1200,
+    autoShowOnWiderThan: Bs5SidebarComponent.breakpoints.xl - 1,
+    autoHideOnSlimmerThan: Bs5SidebarComponent.breakpoints.xl,
     watchNewPageReadyEvent: true,
     forceHideOnLocationPathnames: [],
     forceShowOnLocationPathnames: [],
-    overlayOnSlimmerThan: 1200,
+    overlayOnSlimmerThan: Bs5SidebarComponent.breakpoints.xl,
 
     // template methods
     hide: this.hide,
     show: this.show,
     toggle: this.toggle,
   };
+
+  public static breakpoints: Breakpoints = DEFAULT_MODULE_OPTIONS.breakpoints;
+
+  static setModuleOptions(options: Bs5ModuleOptions) {
+    this.breakpoints = options.breakpoints;
+  }
 
   constructor() {
     super();

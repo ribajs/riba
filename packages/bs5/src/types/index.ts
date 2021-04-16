@@ -1,3 +1,4 @@
+export * from "./breakpoints";
 export * from "./carousel-options";
 export * from "./color-picker-options";
 export * from "./modal-notification-button";
