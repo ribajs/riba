@@ -13,9 +13,13 @@ type State =
   | "overlay-right"
   | "side-left"
   | "side-right"
+  | "move-left"
+  | "move-right"
   | "hidden";
 
 interface Scope {
+  // Template properties
+
   /**
    * Selector string to get the container element from DOM
    */
@@ -38,10 +42,15 @@ interface Scope {
   width: string;
 
   // Options
+
   /**
    * The sidebar can be positioned `right` or `left`
    */
   position: "left" | "right";
+  /**
+   * The sidebar can be move the full page (iPhone style) or overlap (Android style)
+   */
+  mode: "overlap" | "move";
   /**
    * Auto show the sidebar if the viewport width is wider than this value
    */
@@ -68,6 +77,7 @@ interface Scope {
   overlayOnSlimmerThan: number;
 
   // Template methods
+
   /**
    * Hides / closes the sidebar
    */
@@ -94,6 +104,7 @@ export class Bs5SidebarComponent extends Component {
       "id",
       "container-selector",
       "position",
+      "mode",
       "width",
       "auto-show-on-wider-than",
       "auto-hide-on-slimmer-than",
@@ -109,7 +120,7 @@ export class Bs5SidebarComponent extends Component {
   protected routerEvents = new EventDispatcher("main");
 
   protected scope: Scope = {
-    // template properties
+    // Template properties
     containerSelector: undefined,
     state: "hidden",
     oldState: "hidden",
@@ -118,6 +129,7 @@ export class Bs5SidebarComponent extends Component {
 
     // Options
     position: "left",
+    mode: "overlap",
     autoShowOnWiderThan: Bs5SidebarComponent.breakpoints.xl - 1,
     autoHideOnSlimmerThan: Bs5SidebarComponent.breakpoints.xl,
     watchNewPageReadyEvent: true,
@@ -125,7 +137,7 @@ export class Bs5SidebarComponent extends Component {
     forceShowOnLocationPathnames: [],
     overlayOnSlimmerThan: Bs5SidebarComponent.breakpoints.xl,
 
-    // template methods
+    // Template methods
     hide: this.hide,
     show: this.show,
     toggle: this.toggle,
@@ -144,7 +156,7 @@ export class Bs5SidebarComponent extends Component {
   }
 
   public setState(state: State) {
-    this.scope.oldState = `${this.scope.state}` as State;
+    this.scope.oldState = this.scope.state;
     this.scope.state = state;
     this.onStateChange();
   }
@@ -157,9 +169,9 @@ export class Bs5SidebarComponent extends Component {
     let mode: State;
     const vw = getViewportDimensions().w;
     if (vw < this.scope.overlayOnSlimmerThan) {
-      mode = ("overlay-" + this.scope.position) as State;
+      mode = `${this.scope.mode}-${this.scope.position}` as State;
     } else {
-      mode = ("side-" + this.scope.position) as State;
+      mode = `side-${this.scope.position}` as State;
     }
     return mode;
   }
@@ -229,6 +241,12 @@ export class Bs5SidebarComponent extends Component {
     this.style.width = this.scope.width;
   }
 
+  protected onMove(state: State) {
+    this.setContainersStyle(state);
+    this.style.transform = `translateX(0)`;
+    this.style.width = this.scope.width;
+  }
+
   protected onSide(state: State) {
     this.setContainersStyle(state);
     this.style.transform = `translateX(0)`;
@@ -254,6 +272,10 @@ export class Bs5SidebarComponent extends Component {
       case "overlay-left":
       case "overlay-right":
         this.onOverlay(this.scope.state);
+        break;
+      case "move-left":
+      case "move-right":
+        this.onMove(this.scope.state);
         break;
       default:
         this.onHidden();
@@ -348,6 +370,19 @@ export class Bs5SidebarComponent extends Component {
       const width = this.width;
       const conStyle = window.getComputedStyle(container);
 
+      if (this.scope.mode === "move" && state.startsWith("overlay-")) {
+        switch (conStyle.position) {
+          case "fixed":
+            currStyle.left = "0";
+            currStyle.right = "0";
+            break;
+          default:
+            currStyle.marginLeft = "0";
+            currStyle.marginRight = "0";
+            break;
+        }
+      }
+
       switch (state) {
         case "side-left":
           switch (conStyle.position) {
@@ -366,6 +401,30 @@ export class Bs5SidebarComponent extends Component {
               break;
             default:
               currStyle.marginRight = width;
+              break;
+          }
+          break;
+        case "move-left":
+          switch (conStyle.position) {
+            case "fixed":
+              currStyle.left = width;
+              currStyle.right = `-${width}`;
+              break;
+            default:
+              currStyle.marginLeft = width;
+              currStyle.marginRight = `-${width}`;
+              break;
+          }
+          break;
+        case "move-right":
+          switch (conStyle.position) {
+            case "fixed":
+              currStyle.right = width;
+              currStyle.left = `-${width}`;
+              break;
+            default:
+              currStyle.marginRight = width;
+              currStyle.marginLeft = `-${width}`;
               break;
           }
           break;
@@ -388,6 +447,30 @@ export class Bs5SidebarComponent extends Component {
                   break;
                 default:
                   currStyle.marginRight = "0";
+                  break;
+              }
+              break;
+            case "move-left":
+              switch (conStyle.position) {
+                case "fixed":
+                  currStyle.left = "0";
+                  currStyle.right = "0";
+                  break;
+                default:
+                  currStyle.marginRight = "0";
+                  currStyle.marginLeft = "0";
+                  break;
+              }
+              break;
+            case "move-right":
+              switch (conStyle.position) {
+                case "fixed":
+                  currStyle.right = "0";
+                  currStyle.left = "0";
+                  break;
+                default:
+                  currStyle.marginRight = "0";
+                  currStyle.marginLeft = "0";
                   break;
               }
               break;

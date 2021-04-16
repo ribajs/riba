@@ -89,7 +89,8 @@
     "webpackbar",
     "whatsapp",
     "xlink",
-    "yarnpkg"
+    "yarnpkg",
+    "zindex"
   ],
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#49c19a",

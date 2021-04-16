@@ -1,14 +1,19 @@
+$bs5-sidebar-transition: all .2s cubic-bezier(.7,0,.3,1) !default;
+$bs5-sidebar-zindex: $zindex-fixed + 1 !default;
+$bs5-sidebar-width: 250px !default;
+$bs5-sidebar-height: 100vh !default;
+$bs5-sidebar-max-height: $bs5-sidebar-height !default;
+
 bs5-sidebar {
   display: block;
-  height: 100vh;
-  max-height: 100vh;
+  height: $bs5-sidebar-height;
+  max-height: $bs5-sidebar-max-height;
   position: fixed;
-  width: 250px;
+  width: $bs5-sidebar-width;
   top: 0;
   bottom: 0;
-  // left: 0;
-  z-index: $zindex-fixed + 1;
-  transition: all .2s cubic-bezier(.7,0,.3,1);
+  z-index: $bs5-sidebar-zindex;
+  transition: $bs5-sidebar-transition;
 
   &[position="right"] {
     right: 0;
