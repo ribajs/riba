@@ -10,6 +10,7 @@ import {
   ShopifyCartObject,
   ShopifyCustomerAddress,
   ShopifyShippingRates,
+  ShopifyShippingRate,
   ShopifyShippingRatesNormalized,
 } from "../interfaces";
 
@@ -485,7 +486,7 @@ export class ShopifyCartService {
     for (const i in shippingRates) {
       if (shippingRates[i]) {
         const shippingRate = shippingRates[i];
-        normalized[i] = clone(false, shippingRate) as ShopifyShippingRates;
+        normalized[i] = clone<ShopifyShippingRate>(false, shippingRate);
         if (normalized[i] && normalized[i].price) {
           normalized[i].price = getNumber(normalized[i].price);
           if (normalized[i].price) {
