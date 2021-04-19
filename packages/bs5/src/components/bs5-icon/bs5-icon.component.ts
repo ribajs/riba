@@ -60,7 +60,7 @@ export class Bs5IconComponent extends BasicComponent {
     let icon = "";
 
     if (!this.scope.src) {
-      console.error("Src is not set!");
+      this.innerHTML = "";
       return;
     }
 
@@ -180,10 +180,10 @@ export class Bs5IconComponent extends BasicComponent {
     super.attributeChangedCallback(name, oldValue, newValue, namespace);
 
     if (name === "src") {
-      if (!newValue) {
-        console.warn("The src attribute must have a value!", this.scope);
-        return "";
-      }
+      // if (!newValue) {
+      //   console.warn("The src attribute must have a value!", this.scope);
+      //   return "";
+      // }
       this.onSrcChanged();
     }
 
