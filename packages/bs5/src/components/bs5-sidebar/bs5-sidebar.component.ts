@@ -1,4 +1,5 @@
 import { Component, TemplateFunction } from "@ribajs/core";
+import { TouchEventsService, TouchSwipeData } from "@ribajs/extras";
 import { EventDispatcher } from "@ribajs/events";
 import { TOGGLE_BUTTON } from "../../constants";
 import { Bs5Service } from "../../services";
@@ -102,6 +103,8 @@ export class Bs5SidebarComponent extends Component {
 
   protected bs5: Bs5Service;
 
+  protected touch: TouchEventsService = new TouchEventsService(this);
+
   static get observedAttributes(): string[] {
     return [
       "id",
@@ -200,11 +203,31 @@ export class Bs5SidebarComponent extends Component {
     super.connectedCallback();
     this.init(Bs5SidebarComponent.observedAttributes);
     this.computedStyle = window.getComputedStyle(this);
+    this.addEventListeners();
+    // initial
+    this.onEnvironmentChanges();
+  }
+
+  protected addEventListeners() {
     window.addEventListener("resize", this.onEnvironmentChanges, {
       passive: true,
     });
-    // initial
-    this.onEnvironmentChanges();
+    this.addEventListener("swipe", this.onSwipe);
+  }
+
+  protected removeEventListeners() {
+    this.eventDispatcher?.off(
+      TOGGLE_BUTTON.eventNames.init,
+      this.triggerState,
+      this
+    );
+    this.eventDispatcher?.off(
+      TOGGLE_BUTTON.eventNames.toggle,
+      this.toggle,
+      this
+    );
+    this.routerEvents.off("newPageReady", this.onEnvironmentChanges, this);
+    window.removeEventListener("resize", this.onEnvironmentChanges);
   }
 
   protected initToggleButtonEventDispatcher() {
@@ -236,6 +259,27 @@ export class Bs5SidebarComponent extends Component {
       this.routerEvents.on("newPageReady", this.onEnvironmentChanges, this);
     }
   }
+
+  protected _onSwipe(event: CustomEvent<TouchSwipeData>) {
+    console.debug(
+      "onSwipe",
+      event.detail,
+      this.scope.state,
+      this.scope.position
+    );
+    if (this.scope.state === "side-left" || this.scope.state === "side-right") {
+      return;
+    }
+    if (this.scope.position === "left" && event.detail.direction === "left") {
+      this.hide();
+    }
+
+    if (this.scope.position === "right" && event.detail.direction === "right") {
+      this.hide();
+    }
+  }
+
+  protected onSwipe = this._onSwipe.bind(this);
 
   protected onHidden() {
     this.setContainersStyle(this.scope.state);
@@ -529,18 +573,7 @@ export class Bs5SidebarComponent extends Component {
   // deconstruction
   protected disconnectedCallback() {
     super.disconnectedCallback();
-    this.eventDispatcher?.off(
-      TOGGLE_BUTTON.eventNames.init,
-      this.triggerState,
-      this
-    );
-    this.eventDispatcher?.off(
-      TOGGLE_BUTTON.eventNames.toggle,
-      this.toggle,
-      this
-    );
-    this.routerEvents.off("newPageReady", this.onEnvironmentChanges, this);
-    window.removeEventListener("resize", this.onEnvironmentChanges, false);
+    this.removeEventListeners();
   }
 
   protected template(): ReturnType<TemplateFunction> {
