@@ -1,4 +1,4 @@
-import { Utils as ExtraUtils } from "../utils.service";
+import { getElementIndex } from "@ribajs/utils/src/dom";
 import {
   Position,
   TouchData,
@@ -16,7 +16,7 @@ import { BaseTouchEventsService } from "./base-touch-events.service";
  * @see https://github.com/benmajor/jQuery-Touch-Events
  *
  * Copyright 2011-2019, Ben Major
- * Copyright 2019, Pascal Garber
+ * Copyright 2019-2021, Pascal Garber
  * Licensed under the MIT License:
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -268,7 +268,7 @@ export class TouchEventsService extends BaseTouchEventsService {
     return swipeDir;
   }
 
-  protected getPostion(
+  protected getPosition(
     event: TouchEvent | MouseEvent,
     type: TouchType = TouchType.DEFAULT,
     index = 0
@@ -344,14 +344,12 @@ export class TouchEventsService extends BaseTouchEventsService {
     offsetType = TouchType.CHANGED
   ): TouchData {
     const touchData: TouchData = {
-      position: this.getPostion(event, positionType),
+      position: this.getPosition(event, positionType),
       offset: this.getOffset(event, offsetType),
       time: Date.now(),
     };
     if (withIndex) {
-      touchData.index = ExtraUtils.getElementIndex(
-        event.target as Element | null
-      );
+      touchData.index = getElementIndex(event.target as Element | null);
     }
     return touchData;
   }
@@ -380,7 +378,7 @@ export class TouchEventsService extends BaseTouchEventsService {
     if (event.which && event.which !== 1) {
       return false;
     }
-    this.startPosition = this.getPostion(event, TouchType.TARGET);
+    this.startPosition = this.getPosition(event, TouchType.TARGET);
     this.endPosition = {
       x: this.startPosition.x,
       y: this.startPosition.y,
@@ -403,8 +401,8 @@ export class TouchEventsService extends BaseTouchEventsService {
     this.swipeStarted = true;
 
     // For `swipe`
-    this.originalCoord = this.getPostion(event, TouchType.TARGET);
-    this.finalCoord = this.getPostion(event, TouchType.TARGET);
+    this.originalCoord = this.getPosition(event, TouchType.TARGET);
+    this.finalCoord = this.getPosition(event, TouchType.TARGET);
     this.startEvnt = this.getTouchData(
       event,
       false,
@@ -418,7 +416,7 @@ export class TouchEventsService extends BaseTouchEventsService {
   }
 
   protected onEndEvent(event: TouchEvent | MouseEvent) {
-    this.endPosition = this.getPostion(event, TouchType.CHANGED);
+    this.endPosition = this.getPosition(event, TouchType.CHANGED);
     this.tapheld = false;
 
     window.clearTimeout(this.holdTimer);
@@ -436,8 +434,8 @@ export class TouchEventsService extends BaseTouchEventsService {
   }
 
   protected onMoveEvent(event: TouchEvent | MouseEvent) {
-    this.endPosition = this.getPostion(event, TouchType.TARGET);
-    this.finalCoord = this.getPostion(event, TouchType.TARGET);
+    this.endPosition = this.getPosition(event, TouchType.TARGET);
+    this.finalCoord = this.getPosition(event, TouchType.TARGET);
     this.tapmove(event);
     this.swipe(event);
     return true;
@@ -562,8 +560,7 @@ export class TouchEventsService extends BaseTouchEventsService {
       delta < this.settings.doubletapInterval &&
       delta > 100 &&
       this.firstTap &&
-      ExtraUtils.getElementIndex(event.target as Element | null) ===
-        this.firstTap.index
+      getElementIndex(event.target as Element | null) === this.firstTap.index
     ) {
       this.doubletapped = true;
       window.clearTimeout(this.tapTimer);

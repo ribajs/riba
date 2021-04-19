@@ -9,9 +9,9 @@ import {
   DragscrollOptions,
   Autoscroll,
   AutoscrollOptions,
-  Utils as ExtraUtils,
   ScrollPosition,
   ScrollEventsService,
+  getScrollPosition,
 } from "@ribajs/extras";
 import templateSlides from "./bs5-slideshow-slides.component.html";
 import templateControls from "./bs5-slideshow-controls.component.html";
@@ -838,7 +838,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected getScrollPosition(): ScrollPosition {
-    const scrollPosition = ExtraUtils.getScrollPosition(this.slideshowInner);
+    const scrollPosition = getScrollPosition(this.slideshowInner);
     return scrollPosition;
   }
 

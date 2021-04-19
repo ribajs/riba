@@ -429,3 +429,19 @@ export const isVisible = (element: HTMLElement) => {
 
   return false;
 };
+
+/**
+ * Similar to JQuery's `$(el).index();`
+ * @param el
+ */
+export const getElementIndex = (el: Element | null) => {
+  if (!el) {
+    return -1;
+  }
+  let i = 0;
+  do {
+    i++;
+    el = (el as HTMLElement).previousElementSibling;
+  } while (el);
+  return i;
+};

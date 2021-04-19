@@ -1,4 +1,4 @@
-import { Utils } from "./utils.service";
+import { isScrollable } from "../helper/scroll";
 import { throttle } from "@ribajs/utils/src/control";
 
 export interface DragscrollOptions {
@@ -74,7 +74,7 @@ export class Dragscroll {
   }
 
   protected _checkDraggable() {
-    if (Utils.isScrollable(this.el)) {
+    if (isScrollable(this.el)) {
       this.el.classList.add("draggable");
     } else {
       this.el.classList.remove("draggable");

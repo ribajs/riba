@@ -1,4 +1,4 @@
-import { Utils as ExtraUtils } from "./utils.service";
+import { getScrollPosition } from "../helper/scroll";
 import { Gameloop } from "./gameloop.service";
 import { throttle } from "@ribajs/utils/src/control";
 
@@ -236,8 +236,8 @@ export class Autoscroll {
 
   protected getLimit(el: HTMLElement) {
     return this.angle === "vertical"
-      ? ExtraUtils.getScrollPosition(el).maxY
-      : ExtraUtils.getScrollPosition(el).maxX;
+      ? getScrollPosition(el).maxY
+      : getScrollPosition(el).maxX;
   }
 
   /**
