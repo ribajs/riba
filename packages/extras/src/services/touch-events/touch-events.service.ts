@@ -1,7 +1,14 @@
 import { Utils as ExtraUtils } from "../utils.service";
-import { Position } from "../../types";
+import {
+  Position,
+  TouchData,
+  TouchOffset,
+  TouchSettings,
+  TouchType,
+  TouchSwipeData,
+  TouchDirection,
+} from "../../types";
 
-// import { ScrollEventsService } from './scroll-events.service';
 import { BaseTouchEventsService } from "./base-touch-events.service";
 
 /**
@@ -30,41 +37,6 @@ import { BaseTouchEventsService } from "./base-touch-events.service";
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
-export interface Settings {
-  tapPixelRange: number;
-  swipeHThreshold: number;
-  swipeVThreshold: number;
-  tapholdThreshold: number;
-  doubletapInterval: number;
-  shakeThreshold: number;
-
-  touchCapable: boolean;
-
-  startevent: Array<"touchstart" | "mousedown">;
-  endevent: Array<"touchend" | "touchcancel" | "mouseup">;
-  moveevent: Array<"touchmove" | "mousemove">;
-  tapevent: Array<"tap" | "click">;
-}
-
-export interface Offset {
-  x: number;
-  y: number;
-}
-
-export interface TouchData {
-  position: Position;
-  offset: Offset;
-  time: number;
-  index?: number;
-}
-
-export enum TouchType {
-  DEFAULT,
-  TARGET,
-  CHANGED,
-}
-
 export class TouchEventsService extends BaseTouchEventsService {
   // GETTERS:
 
@@ -201,13 +173,13 @@ export class TouchEventsService extends BaseTouchEventsService {
   /** Used internally for `doubletap` */
   protected actionTimer = -1;
 
-  protected settings: Settings;
+  protected settings: TouchSettings;
 
   // protected scrollEvents: ScrollEventsService;
 
   constructor(
     el: HTMLElement,
-    settings: Settings = {
+    settings: TouchSettings = {
       tapPixelRange: 5,
       swipeHThreshold: 50,
       swipeVThreshold: 50,
@@ -328,7 +300,7 @@ export class TouchEventsService extends BaseTouchEventsService {
     event: TouchEvent | MouseEvent,
     type: TouchType = TouchType.DEFAULT,
     index = 0
-  ): Offset {
+  ): TouchOffset {
     const boundingClientRect = this.el.getBoundingClientRect();
     let touchesTypes: TouchList;
     switch (type) {
@@ -755,10 +727,10 @@ export class TouchEventsService extends BaseTouchEventsService {
       const xAmount = Math.abs(this.startEvnt.position.x - endEvnt.position.x);
       const yAmount = Math.abs(this.startEvnt.position.y - endEvnt.position.y);
 
-      const touchData = {
+      const touchData: TouchSwipeData = {
         startEvnt: this.startEvnt,
         endEvnt,
-        direction: swipeDir.replace("swipe", ""),
+        direction: swipeDir.replace("swipe", "") as TouchDirection,
         xAmount,
         yAmount,
         duration: endEvnt.time - this.startEvnt.time,
@@ -790,10 +762,10 @@ export class TouchEventsService extends BaseTouchEventsService {
       const xAmount = Math.abs(this.startEvnt.position.x - endEvnt.position.x);
       const yAmount = Math.abs(this.startEvnt.position.y - endEvnt.position.y);
 
-      const touchData = {
+      const touchData: TouchSwipeData = {
         startEvnt: this.startEvnt,
         endEvnt,
-        direction: swipeDir.replace("swipe", ""),
+        direction: swipeDir.replace("swipe", "") as TouchDirection,
         xAmount,
         yAmount,
         duration: endEvnt.time - this.startEvnt.time,
