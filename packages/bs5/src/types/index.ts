@@ -1,3 +1,4 @@
+export * from "./breakpoint";
 export * from "./breakpoints";
 export * from "./carousel-options";
 export * from "./color-picker-options";

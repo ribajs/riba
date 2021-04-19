@@ -3,9 +3,7 @@ import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { clone, camelCase } from "@ribajs/utils/src/type";
 import { throttle } from "@ribajs/utils/src/control";
-import { Breakpoints, Bs5ModuleOptions } from "../../types";
-import { DEFAULT_MODULE_OPTIONS } from "../../constants";
-
+import { Bs5Service } from "../../services";
 import {
   Dragscroll,
   DragscrollOptions,
@@ -15,11 +13,8 @@ import {
   ScrollPosition,
   ScrollEventsService,
 } from "@ribajs/extras";
-
 import templateSlides from "./bs5-slideshow-slides.component.html";
-
 import templateControls from "./bs5-slideshow-controls.component.html";
-
 import templateIndicators from "./bs5-slideshow-indicators.component.html";
 
 const SLIDESHOW_INNER_SELECTOR = ".slideshow-row";
@@ -119,6 +114,7 @@ export interface Scope extends Options {
 
 export class Bs5SlideshowComponent extends TemplatesComponent {
   protected resizeObserver?: ResizeObserver;
+  protected bs5: Bs5Service;
 
   protected get slideshowInner() {
     if (!this._slideshowInner) {
@@ -160,18 +156,8 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     return this._indicatorsElement;
   }
 
-  public static breakpoints: Breakpoints = DEFAULT_MODULE_OPTIONS.breakpoints;
-
-  static setModuleOptions(options: Bs5ModuleOptions) {
-    this.breakpoints = options.breakpoints;
-  }
-
-  static getBreakpointNames() {
-    return Object.keys(this.breakpoints);
-  }
-
   static get observedAttributes(): string[] {
-    const breakpointNames = this.getBreakpointNames();
+    const breakpointNames = Bs5Service.getSingleton().breakpointNames;
 
     const result: string[] = [];
     for (const breakpointName of breakpointNames) {
@@ -314,6 +300,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   constructor() {
     super();
+    this.bs5 = Bs5Service.getSingleton();
 
     // set event listeners to the this-bound version once, so we can easily pass them to DOM event handlers and remove them again later
     this.onViewChanges = this.onViewChanges.bind(this);
@@ -421,7 +408,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected initResponsiveOptions() {
-    const breakpointNames = Bs5SlideshowComponent.getBreakpointNames();
+    const breakpointNames = Bs5Service.getSingleton().breakpointNames;
     for (let i = 1; i < breakpointNames.length; i++) {
       const currName = breakpointNames[i];
       const prevName = breakpointNames[i - 1];
@@ -433,7 +420,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       const prevOptions = this.scope.breakpoints[prevName];
 
       // Set the breakpoint min width
-      currOptions.breakpoint = Bs5SlideshowComponent.breakpoints[currName];
+      currOptions.breakpoint = this.bs5.options.breakpoints[currName];
       currOptions.name = currName;
 
       if (prevOptions) {
@@ -448,7 +435,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       }
     }
 
-    this.activeBreakpointName = this.getActiveBreakpoint();
+    this.activeBreakpointName = this.getActiveBreakpoint().name;
     this.setOptionsByBreakpoint(this.activeBreakpointName);
   }
 
@@ -498,42 +485,9 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   /**
    * Get current breakpoint based on the screen width
-   * TODO create independent bs5 breakpoint service
-   * @protected
-   * @returns {string}
-   * @memberof Bs5SlideshowComponent
    */
-  protected getActiveBreakpoint(): string {
-    const size = window.innerWidth;
-    const breakpointNames = Bs5SlideshowComponent.getBreakpointNames();
-
-    for (let i = 0; i < breakpointNames.length; i++) {
-      const currName = breakpointNames[i];
-      const prevName = i > 0 ? breakpointNames[i - 1] : "";
-
-      const currOptions = this.scope.breakpoints[currName];
-      const prevOptions = this.scope.breakpoints[prevName] || null;
-
-      if (
-        prevOptions &&
-        currOptions &&
-        size >= prevOptions.breakpoint &&
-        size < currOptions.breakpoint
-      ) {
-        return prevOptions.name;
-      }
-    }
-
-    const lastName = breakpointNames[breakpointNames.length - 1];
-    const last = this.scope.breakpoints[lastName];
-
-    if (size >= last.breakpoint) {
-      return last.name;
-    }
-
-    const firstName = breakpointNames[0];
-    const first = this.scope.breakpoints[firstName];
-    return first.name;
+  protected getActiveBreakpoint() {
+    return this.bs5.getBreakpointByDimension(window.innerWidth);
   }
 
   protected setOptionsByBreakpoint(breakpointName: string) {
@@ -565,7 +519,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   protected _onViewChanges() {
     this.debug("onViewChanges");
-    const newBreakpoint = this.getActiveBreakpoint();
+    const newBreakpoint = this.getActiveBreakpoint().name;
     if (newBreakpoint !== this.activeBreakpointName) {
       this.activeBreakpointName = newBreakpoint;
       this.onBreakpointChanges();
@@ -1070,7 +1024,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     }
 
     newValue = this.parseAttribute(newValue);
-    const breakpointNames = Bs5SlideshowComponent.getBreakpointNames();
+    const breakpointNames = Bs5Service.getSingleton().breakpointNames;
 
     for (const name of breakpointNames) {
       const affix = name + "-";

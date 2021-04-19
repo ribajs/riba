@@ -1,12 +1,13 @@
 import { Component, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
-import { Breakpoints, Bs5ModuleOptions } from "../../types";
-import { TOGGLE_BUTTON, DEFAULT_MODULE_OPTIONS } from "../../constants";
+import { TOGGLE_BUTTON } from "../../constants";
+import { Bs5Service } from "../../services";
 import {
   getViewportDimensions,
   hasChildNodesTrim,
 } from "@ribajs/utils/src/dom";
 import { throttle } from "@ribajs/utils/src/control";
+import { DEFAULT_MODULE_OPTIONS } from "../../constants";
 
 type State =
   | "overlay-left"
@@ -99,6 +100,8 @@ export class Bs5SidebarComponent extends Component {
 
   protected autobind = true;
 
+  protected bs5: Bs5Service;
+
   static get observedAttributes(): string[] {
     return [
       "id",
@@ -130,12 +133,12 @@ export class Bs5SidebarComponent extends Component {
     // Options
     position: "left",
     mode: "overlap",
-    autoShowOnWiderThan: Bs5SidebarComponent.breakpoints.xl - 1,
-    autoHideOnSlimmerThan: Bs5SidebarComponent.breakpoints.xl,
+    autoShowOnWiderThan: DEFAULT_MODULE_OPTIONS.breakpoints.xl - 1,
+    autoHideOnSlimmerThan: DEFAULT_MODULE_OPTIONS.breakpoints.xl,
     watchNewPageReadyEvent: true,
     forceHideOnLocationPathnames: [],
     forceShowOnLocationPathnames: [],
-    overlayOnSlimmerThan: Bs5SidebarComponent.breakpoints.xl,
+    overlayOnSlimmerThan: DEFAULT_MODULE_OPTIONS.breakpoints.xl,
 
     // Template methods
     hide: this.hide,
@@ -143,14 +146,14 @@ export class Bs5SidebarComponent extends Component {
     toggle: this.toggle,
   };
 
-  public static breakpoints: Breakpoints = DEFAULT_MODULE_OPTIONS.breakpoints;
-
-  static setModuleOptions(options: Bs5ModuleOptions) {
-    this.breakpoints = options.breakpoints;
-  }
-
   constructor() {
     super();
+    this.bs5 = Bs5Service.getSingleton();
+
+    this.scope.autoShowOnWiderThan = this.bs5.options.breakpoints.xl - 1;
+    this.scope.autoHideOnSlimmerThan = this.bs5.options.breakpoints.xl;
+    this.scope.overlayOnSlimmerThan = this.bs5.options.breakpoints.xl;
+
     // assign this to bound version, so we can remove window EventListener later without problem
     this.onEnvironmentChanges = this.onEnvironmentChanges.bind(this);
   }

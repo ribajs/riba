@@ -1,4 +1,4 @@
-import { Bs5ModuleOptions } from "../types";
+// import { Bs5ModuleOptions } from "../types";
 import { ComponentsCreator } from "@ribajs/core";
 
 import { Bs5DropdownComponent } from "./bs5-dropdown/bs5-dropdown.component";
@@ -21,11 +21,7 @@ import { Bs5ToastItemComponent } from "./bs5-toast-item/bs5-toast-item.component
 import { Bs5ModalItemComponent } from "./bs5-modal-item/bs5-modal-item.component";
 import { Bs5TaggedImageComponent } from "./bs5-tagged-image/bs5-tagged-image.component";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const components: ComponentsCreator = (options: Bs5ModuleOptions) => {
-  Bs5SidebarComponent.setModuleOptions(options);
-  Bs5SlideshowComponent.setModuleOptions(options);
-
+const components: ComponentsCreator = (/*options: Bs5ModuleOptions*/) => {
   return {
     Bs5DropdownComponent,
     Bs5AccordionComponent,

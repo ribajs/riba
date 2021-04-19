@@ -4,7 +4,7 @@ import { Bs5ModuleOptions } from "./types";
 import binders from "./binders";
 import components from "./components";
 import formatters from "./formatters";
-import * as services from "./services";
+import services from "./services";
 import * as constants from "./constants";
 
 export const bs5Module: RibaModuleCreator = (
@@ -18,7 +18,7 @@ export const bs5Module: RibaModuleCreator = (
 
   return {
     binders: binders(options),
-    services,
+    services: services(options),
     formatters: formatters(options),
     components: components(options),
     constants,

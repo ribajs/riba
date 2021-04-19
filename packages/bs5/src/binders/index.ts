@@ -14,7 +14,7 @@ import { toggleAttributeBinder } from "./toggle-attribute.binder";
 import { toggleClassBinder } from "./toggle-class.binder";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const binders: BindersCreator<unknown> = (options: Bs5ModuleOptions) => {
+const binders: BindersCreator<unknown> = (options: Bs5ModuleOptions) => {
   return {
     collapseOnUrlBinder,
     toggleCollapseOnEventBinder,
