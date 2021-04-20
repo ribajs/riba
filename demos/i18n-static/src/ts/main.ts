@@ -38,7 +38,7 @@ const riba = new Riba();
 const localesService = new LocalesStaticService(locales);
 const model = {};
 riba.module.regist(coreModule);
-riba.module.regist(i18nModule(localesService));
+riba.module.regist(i18nModule.init({ localesService }));
 riba.module.regist(I18nStaticModule);
 ready(() => {
   riba.bind(document.body, model);

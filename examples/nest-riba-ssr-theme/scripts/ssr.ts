@@ -32,7 +32,7 @@ riba.module.binder.regists(binders);
 riba.module.formatter.regists(formatters);
 
 // const localesService = new LocalesStaticService(locales, undefined, false);
-// riba.module.regist(i18nModule(localesService));
+// riba.module.regist(i18nModule.init({ localesService }));
 
 // Regist modules
 riba.module.regist(coreModule);

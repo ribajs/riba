@@ -1,7 +1,7 @@
-import { ShopifyEasdkModuleOptions } from "../types";
+import { ShopifyNestModuleOptions } from "../types";
 
 export class ModuleService {
-  protected static _options: ShopifyEasdkModuleOptions;
+  protected static _options: ShopifyNestModuleOptions;
   public static instance?: ModuleService;
 
   public static get options() {
@@ -22,7 +22,7 @@ export class ModuleService {
     );
   }
 
-  public static setSingleton(options: ShopifyEasdkModuleOptions = {}) {
+  public static setSingleton(options: ShopifyNestModuleOptions = {}) {
     if (this.instance) {
       throw new Error(`Singleton of ModuleService already defined!`);
     }
