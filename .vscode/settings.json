@@ -76,6 +76,8 @@
     "ribajs",
     "scrolldown",
     "scrollended",
+    "scrollleft",
+    "scrollright",
     "scrollspy",
     "scrollstart",
     "scrollup",

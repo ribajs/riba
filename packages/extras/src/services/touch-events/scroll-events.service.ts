@@ -11,19 +11,9 @@ export class ScrollEventsService extends BaseTouchEventsService {
   /** The element to trigger the events on */
   protected el: HTMLUnknownElement | Window;
 
-  protected startPosition: ScrollPosition = {
-    maxX: 0,
-    maxY: 0,
-    x: 0,
-    y: 0,
-  };
+  protected startPosition: ScrollPosition | null = null;
 
-  protected endPosition: ScrollPosition = {
-    maxX: 0,
-    maxY: 0,
-    x: 0,
-    y: 0,
-  };
+  protected endPosition: ScrollPosition | null = null;
 
   protected scrollTimer: number | null = null;
 
@@ -35,7 +25,6 @@ export class ScrollEventsService extends BaseTouchEventsService {
     this._scrollEvent = this.touchCapable
       ? ["touchmove", "scrollend", "scroll"]
       : ["scroll", "scrollend"];
-    this.onScrollEvent = this.onScrollEvent.bind(this);
     this.addEventListeners();
   }
 
@@ -47,7 +36,13 @@ export class ScrollEventsService extends BaseTouchEventsService {
     return this._scrollEvent;
   }
 
-  protected getScrollDir(start: ScrollPosition, end: ScrollPosition) {
+  protected getScrollDir(
+    start: ScrollPosition | null,
+    end: ScrollPosition | null
+  ) {
+    if (!start || !end) {
+      return "unknown";
+    }
     if (start.x > end.x) {
       return "right";
     }
@@ -77,31 +72,32 @@ export class ScrollEventsService extends BaseTouchEventsService {
     }
   }
 
-  protected onScrollEvent(event: TouchEvent | MouseEvent) {
+  protected _onScrollEvent(event: TouchEvent | MouseEvent) {
     if (!event.target) {
       return false;
+    }
+
+    if (this.scrollTimer !== null) {
+      clearTimeout(this.scrollTimer);
+      this.scrollTimer = null;
     }
 
     if (!this.isScrolling) {
       this.scrollstart(event);
     }
 
-    // console.debug('scroll timer is ', this.scrollTimer);
-    if (this.scrollTimer !== null) {
-      clearTimeout(this.scrollTimer);
-      this.scrollTimer = null;
-    }
-
-    this.scrollTimer = window.setTimeout(() => {
-      this.scrollended(event);
-    }, 200);
-
     if (this.isScrolling) {
       this.scroll(event);
     }
 
+    this.scrollTimer = window.setTimeout(() => {
+      this.scrollended(event);
+    }, 100);
+
     return true;
   }
+
+  protected onScrollEvent = this._onScrollEvent.bind(this);
 
   /**
    * scrollended Event
@@ -109,10 +105,11 @@ export class ScrollEventsService extends BaseTouchEventsService {
   protected scrollended(event: TouchEvent | MouseEvent) {
     this.isScrolling = false;
     this.endPosition = getScrollPosition(this.el);
+    const direction = this.getScrollDir(this.startPosition, this.endPosition);
     this.triggerCustomEvent("scrollended", event, {
       startPosition: this.startPosition,
       endPosition: this.endPosition,
-      direction: this.getScrollDir(this.startPosition, this.endPosition),
+      direction,
     });
   }
 
@@ -132,7 +129,7 @@ export class ScrollEventsService extends BaseTouchEventsService {
    */
   protected _scroll(event: TouchEvent | MouseEvent) {
     const currentPosition = getScrollPosition(this.el);
-    const direction = this.getScrollDir(this.startPosition, this.endPosition);
+    const direction = this.getScrollDir(this.startPosition, currentPosition);
     this.triggerCustomEvent("scroll" + direction, event, {
       startPosition: this.startPosition,
       currentPosition,
