@@ -1,3 +1,4 @@
+export * from "./module-options";
 export * from "./position";
 export * from "./scroll-position";
 export * from "./touch-data";

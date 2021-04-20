@@ -1,17 +1,17 @@
-import { RibaModuleCreator, RibaModule } from "@ribajs/core";
+import { RibaModule } from "@ribajs/core";
 import { I18nModuleOptions } from "./types";
-import binders from "./binders";
-import formatters from "./formatters";
-import components from "./components";
+import * as binders from "./binders";
+import * as formatters from "./formatters";
+import * as components from "./components";
 import * as services from "./services";
 
-export const i18nModule: RibaModuleCreator = (
-  options: I18nModuleOptions
-): RibaModule => {
-  return {
-    binders: binders(options),
-    components: components(options),
-    formatters: formatters(options),
-    services,
-  };
+export const i18nModule: RibaModule = {
+  binders,
+  components,
+  formatters,
+  services,
+  init(options: I18nModuleOptions) {
+    services.I18nService.setSingleton(options);
+    return this;
+  },
 };

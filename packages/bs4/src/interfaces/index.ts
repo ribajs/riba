@@ -3,6 +3,7 @@ export * from "./carousel-direction";
 export * from "./carousel-option";
 export * from "./color-picker-options";
 export * from "./modal";
+export * from "./module-options";
 export * from "./notification";
 export * from "./placement";
 export * from "./popover-options";

@@ -1,3 +1,4 @@
+export * from "./module.service";
 export * from "./p-queue.service";
 export * from "./priority-queue.service";
 export * from "./shopify-cart.service";

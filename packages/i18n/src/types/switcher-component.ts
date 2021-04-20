@@ -10,7 +10,7 @@ export interface Scope {
 }
 
 export abstract class SwitcherComponent extends Component {
-  protected abstract localesService: LocalesService;
+  protected abstract localesService?: LocalesService;
 
   protected scope = {
     langcodes: [] as Langcode[],
@@ -59,7 +59,7 @@ export abstract class SwitcherComponent extends Component {
   }
 
   protected async init(observedAttributes: string[]): Promise<void> {
-    if (this.localesService.ready) {
+    if (this.localesService?.ready) {
       const langcode = this.localesService.getLangcode();
       if (langcode) {
         return this.initLocales(langcode).then(() => {
@@ -68,7 +68,7 @@ export abstract class SwitcherComponent extends Component {
       }
     }
     return new Promise<void>((resolve) => {
-      this.localesService.event.on("ready", (
+      this.localesService?.event.on("ready", (
         langcode: string /*, translationNeeded: boolean*/
       ) => {
         return this.initLocales(langcode).then((/*langcodes*/) => {
@@ -81,7 +81,7 @@ export abstract class SwitcherComponent extends Component {
   }
 
   protected async initLocales(langcode: string) {
-    // set avaible langcodes
+    // set available langcodes
     return this.localesService
       .getAvailableLangcodes()
       .then((langcodes) => {

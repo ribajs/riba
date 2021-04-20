@@ -1,3 +1,4 @@
+export * from "./bs4.service";
 export * from "./carousel.service";
 export { CollapseService } from "./collapse.service";
 export { DropdownService } from "./dropdown.service";
