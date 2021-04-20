@@ -1,26 +1,26 @@
-import { RibaModuleCreator, RibaModule } from "@ribajs/core";
+import { RibaModule } from "@ribajs/core";
 import { concat } from "@ribajs/utils/src/type";
 import { Bs5ModuleOptions } from "./types";
-import binders from "./binders";
-import components from "./components";
-import formatters from "./formatters";
-import services from "./services";
+
+import * as binders from "./binders";
+import * as components from "./components";
+import * as formatters from "./formatters";
+import * as services from "./services";
 import * as constants from "./constants";
 
-export const bs5Module: RibaModuleCreator = (
-  partialOptions: Partial<Bs5ModuleOptions> = {}
-) => {
-  const options = concat(
-    true,
-    partialOptions,
-    constants.DEFAULT_MODULE_OPTIONS
-  ) as Bs5ModuleOptions;
-
-  return {
-    binders: binders(options),
-    services: services(options),
-    formatters: formatters(options),
-    components: components(options),
-    constants,
-  } as RibaModule;
+export const bs5Module: RibaModule = {
+  binders,
+  services,
+  formatters,
+  components,
+  constants,
+  init(partialOptions: Partial<Bs5ModuleOptions> = {}) {
+    const options = concat(
+      true,
+      partialOptions,
+      constants.DEFAULT_MODULE_OPTIONS
+    ) as Bs5ModuleOptions;
+    services.Bs5Service.setSingleton(options);
+    return this;
+  },
 };

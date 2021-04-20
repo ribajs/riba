@@ -1,4 +1,4 @@
-import { Breakpoints } from "./breakpoints";
+import { Breakpoint } from "./breakpoint";
 export interface Bs5ModuleOptions {
-  breakpoints: Breakpoints;
+  breakpoints: Breakpoint[];
 }

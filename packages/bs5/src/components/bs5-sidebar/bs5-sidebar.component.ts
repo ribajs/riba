@@ -8,7 +8,6 @@ import {
   hasChildNodesTrim,
 } from "@ribajs/utils/src/dom";
 import { throttle } from "@ribajs/utils/src/control";
-import { DEFAULT_MODULE_OPTIONS } from "../../constants";
 
 type State =
   | "overlay-left"
@@ -136,12 +135,12 @@ export class Bs5SidebarComponent extends Component {
     // Options
     position: "left",
     mode: "overlap",
-    autoShowOnWiderThan: DEFAULT_MODULE_OPTIONS.breakpoints.xl - 1,
-    autoHideOnSlimmerThan: DEFAULT_MODULE_OPTIONS.breakpoints.xl,
+    autoShowOnWiderThan: -1,
+    autoHideOnSlimmerThan: -1,
     watchNewPageReadyEvent: true,
     forceHideOnLocationPathnames: [],
     forceShowOnLocationPathnames: [],
-    overlayOnSlimmerThan: DEFAULT_MODULE_OPTIONS.breakpoints.xl,
+    overlayOnSlimmerThan: -1,
 
     // Template methods
     hide: this.hide,
@@ -152,10 +151,11 @@ export class Bs5SidebarComponent extends Component {
   constructor() {
     super();
     this.bs5 = Bs5Service.getSingleton();
+    const xl = this.bs5.getBreakpointByName("xl");
 
-    this.scope.autoShowOnWiderThan = this.bs5.options.breakpoints.xl - 1;
-    this.scope.autoHideOnSlimmerThan = this.bs5.options.breakpoints.xl;
-    this.scope.overlayOnSlimmerThan = this.bs5.options.breakpoints.xl;
+    this.scope.autoShowOnWiderThan = xl ? xl.dimension - 1 : -1;
+    this.scope.autoHideOnSlimmerThan = xl ? xl.dimension - 1 : -1;
+    this.scope.overlayOnSlimmerThan = xl ? xl.dimension - 1 : -1;
 
     // assign this to bound version, so we can remove window EventListener later without problem
     this.onEnvironmentChanges = this.onEnvironmentChanges.bind(this);
@@ -212,7 +212,7 @@ export class Bs5SidebarComponent extends Component {
     window.addEventListener("resize", this.onEnvironmentChanges, {
       passive: true,
     });
-    this.addEventListener("swipe", this.onSwipe);
+    this.addEventListener("swipe" as any, this.onSwipe);
   }
 
   protected removeEventListeners() {

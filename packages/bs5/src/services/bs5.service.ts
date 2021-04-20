@@ -1,46 +1,87 @@
-import { Breakpoint, Breakpoints, Bs5ModuleOptions } from "../types";
+import { Breakpoint, Bs5ModuleOptions } from "../types";
 import { DEFAULT_MODULE_OPTIONS } from "../constants";
+import { throttle } from "@ribajs/utils/src/control";
+import { EventDispatcher } from "@ribajs/core";
 
 /**
- *
+ * Events:
+ * * breakpoint:changed
  */
 export class Bs5Service {
   protected _options: Bs5ModuleOptions = DEFAULT_MODULE_OPTIONS;
+  protected _activeBreakpoint: Breakpoint | null = null;
+  protected _events = EventDispatcher.getInstance("bs5");
 
   public get options() {
     return this._options;
+  }
+
+  public get activeBreakpoint() {
+    return this._activeBreakpoint;
+  }
+
+  get breakpointNames() {
+    return this.options.breakpoints.map((breakpoint) => breakpoint.name);
+  }
+
+  public get events() {
+    return this._events;
   }
 
   public static instance?: Bs5Service;
 
   protected constructor(options: Bs5ModuleOptions) {
     this._options = options;
+    this._options.breakpoints.sort((a, b) => a.dimension - b.dimension);
+    this.onViewChanges();
+    this.addEventListeners();
+  }
+
+  protected onBreakpointChanges() {
+    this._events.trigger("breakpoint:changed", this.activeBreakpoint);
+  }
+
+  protected setActiveBreakpoint(name: string) {
+    this._activeBreakpoint = this.getBreakpointByName(name);
+    this.onBreakpointChanges();
   }
 
   public static getSingleton() {
     if (Bs5Service.instance) {
       return Bs5Service.instance;
     }
-    if (Bs5Service.instance) {
-      throw new Error(
-        `Singleton of ${this.constructor.name} not defined, please call setSingleton first!`
-      );
-    }
+
+    throw new Error(
+      `Singleton of Bs5Service not defined, please call setSingleton first!`
+    );
   }
 
   public static setSingleton(
     options: Bs5ModuleOptions = DEFAULT_MODULE_OPTIONS
   ) {
     if (Bs5Service.instance) {
-      throw new Error(`Singleton of ${this.constructor.name} already defined!`);
+      throw new Error(`Singleton of Bs5Service already defined!`);
     }
     Bs5Service.instance = new Bs5Service(options);
     return Bs5Service.instance;
   }
 
-  get breakpointNames() {
-    return Object.keys(this.options.breakpoints);
+  protected addEventListeners() {
+    window.addEventListener("resize", this.onViewChanges, { passive: true });
   }
+
+  protected removeEventListeners() {
+    window.removeEventListener("resize", this.onViewChanges);
+  }
+
+  protected _onViewChanges() {
+    const newBreakpoint = this.getBreakpointByDimension(window.innerWidth);
+    if (newBreakpoint && newBreakpoint.name !== this.activeBreakpoint?.name) {
+      this.setActiveBreakpoint(newBreakpoint.name);
+    }
+  }
+
+  protected onViewChanges = throttle(this._onViewChanges.bind(this));
 
   /**
    * Get breakpoint for width
@@ -49,39 +90,29 @@ export class Bs5Service {
    */
   public getBreakpointByDimension(
     dimension: number,
-    breakpoints?: Breakpoints
-  ): Breakpoint {
+    breakpoints?: Breakpoint[]
+  ): Breakpoint | null {
     breakpoints = breakpoints || this.options.breakpoints;
-    const breakpointNames = this.breakpointNames;
 
-    for (let i = 0; i < breakpointNames.length; i++) {
-      const curr: Breakpoint = {
-        name: breakpointNames[i],
-        dimension: breakpoints[breakpointNames[i]],
-      };
-
-      if (curr && dimension >= curr.dimension && dimension < curr.dimension) {
+    for (let i = 0; i < breakpoints.length - 1; i++) {
+      const curr = breakpoints[i];
+      const next = breakpoints[i + 1];
+      if (
+        next &&
+        curr &&
+        dimension > curr.dimension &&
+        dimension < next.dimension
+      ) {
         return curr;
       }
     }
 
-    const lastName = breakpointNames[breakpointNames.length - 1];
-    const last: Breakpoint = {
-      name: lastName,
-      dimension: breakpoints[lastName],
-    };
-
+    const last = breakpoints[breakpoints.length - 1];
     if (dimension >= last.dimension) {
       return last;
     }
 
-    const firstName = breakpointNames[0];
-    const first: Breakpoint = {
-      name: firstName,
-      dimension: breakpoints[firstName],
-    };
-
-    return first;
+    return null;
   }
 
   /**
@@ -91,14 +122,61 @@ export class Bs5Service {
    */
   public getBreakpointByName(
     name: string,
-    breakpoints?: Breakpoints
-  ): Breakpoint {
+    breakpoints?: Breakpoint[]
+  ): Breakpoint | null {
     breakpoints = breakpoints || this.options.breakpoints;
-    const breakpointNames = this.breakpointNames;
-    const foundName = breakpointNames.find((bpName) => bpName === name);
-    return {
-      name: foundName,
-      dimension: breakpoints[name],
-    };
+    const found = breakpoints.find((breakpoint) => breakpoint.name === name);
+    if (!found) {
+      return null;
+    }
+    return found;
+  }
+
+  public isBreakpointGreaterThan(
+    isBreakpointName: string,
+    compareBreakpointName: string
+  ): boolean | null {
+    const isBreakpoint = this.getBreakpointByName(isBreakpointName);
+    const compareBreakpoint = this.getBreakpointByName(compareBreakpointName);
+    if (isBreakpoint && compareBreakpoint) {
+      return isBreakpoint.dimension > compareBreakpoint.dimension;
+    }
+    return null;
+  }
+
+  public isBreakpointSmallerThan(
+    isBreakpointName: string,
+    compareBreakpointName: string
+  ): boolean | null {
+    const isBreakpoint = this.getBreakpointByName(isBreakpointName);
+    const compareBreakpoint = this.getBreakpointByName(compareBreakpointName);
+    if (isBreakpoint && compareBreakpoint) {
+      return isBreakpoint.dimension < compareBreakpoint.dimension;
+    }
+    return null;
+  }
+
+  public isActiveBreakpointGreaterThan(
+    compareBreakpoint: string
+  ): boolean | null {
+    if (!this.activeBreakpoint) {
+      return null;
+    }
+    return this.isBreakpointGreaterThan(
+      this.activeBreakpoint.name,
+      compareBreakpoint
+    );
+  }
+
+  public isActiveBreakpointSmallerThan(
+    compareBreakpoint: string
+  ): boolean | null {
+    if (!this.activeBreakpoint) {
+      return null;
+    }
+    return this.isBreakpointSmallerThan(
+      this.activeBreakpoint.name,
+      compareBreakpoint
+    );
   }
 }

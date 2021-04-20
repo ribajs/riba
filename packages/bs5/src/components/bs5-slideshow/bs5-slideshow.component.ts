@@ -1,5 +1,6 @@
 import { TemplatesComponent, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
+import { Breakpoint } from "@ribajs/bs5";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { clone, camelCase } from "@ribajs/utils/src/type";
 import { throttle } from "@ribajs/utils/src/control";
@@ -420,7 +421,8 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       const prevOptions = this.scope.breakpoints[prevName];
 
       // Set the breakpoint min width
-      currOptions.breakpoint = this.bs5.options.breakpoints[currName];
+      currOptions.breakpoint =
+        this.bs5.getBreakpointByName(currName)?.dimension || 0;
       currOptions.name = currName;
 
       if (prevOptions) {
@@ -435,7 +437,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       }
     }
 
-    this.activeBreakpointName = this.getActiveBreakpoint().name;
+    this.activeBreakpointName = this.bs5.activeBreakpoint?.name || "xs";
     this.setOptionsByBreakpoint(this.activeBreakpointName);
   }
 
@@ -483,14 +485,12 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     this.scope.indicatorsPositionClass = result.trim();
   }
 
-  /**
-   * Get current breakpoint based on the screen width
-   */
-  protected getActiveBreakpoint() {
-    return this.bs5.getBreakpointByDimension(window.innerWidth);
+  protected getBreakpointByName(name: string) {
+    console.debug("getBreakpointByName", name, this.scope.breakpoints);
   }
 
   protected setOptionsByBreakpoint(breakpointName: string) {
+    this.getBreakpointByName(breakpointName);
     if (!this.scope.breakpoints[breakpointName]) {
       console.error(`Breakpoint ${breakpointName} not found!`);
       return;
@@ -513,17 +513,13 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     this.setIndicatorsOptions();
   }
 
-  protected onBreakpointChanges() {
+  protected onBreakpointChanges(breakpoint: Breakpoint) {
+    this.activeBreakpointName = breakpoint.name;
     this.setOptionsByBreakpoint(this.activeBreakpointName);
   }
 
   protected _onViewChanges() {
     this.debug("onViewChanges");
-    const newBreakpoint = this.getActiveBreakpoint().name;
-    if (newBreakpoint !== this.activeBreakpointName) {
-      this.activeBreakpointName = newBreakpoint;
-      this.onBreakpointChanges();
-    }
     this.setSlidePositions();
     const index = this.setCenteredSlideActive();
     if (this.scope.activeBreakpoint.sticky) {
@@ -594,7 +590,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected addEventListeners() {
-    this.routerEvents.on("newPageReady", this.onBreakpointChanges, this);
+    this.routerEvents.on("newPageReady", this.onViewChanges, this);
 
     if (window.ResizeObserver) {
       this.resizeObserver = new window.ResizeObserver(this.onViewChanges);
@@ -604,8 +600,13 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       window.addEventListener("resize", this.onViewChanges);
     }
 
+    this.bs5?.events.on("breakpoint:changed", this.onBreakpointChanges, this);
+
     // Custom event triggered by some parent components when this component changes his visibility, e.g. triggered in the bs5-tabs component
-    this.addEventListener("visibility-changed", this.onVisibilityChanged);
+    this.addEventListener(
+      "visibility-changed" as any,
+      this.onVisibilityChanged
+    );
 
     this.slideshowInner.addEventListener("scroll", this.onScroll, {
       passive: true,
@@ -636,11 +637,13 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected removeEventListeners() {
-    this.routerEvents.off("newPageReady", this.onBreakpointChanges, this);
+    this.routerEvents.off("newPageReady", this.onViewChanges, this);
 
     window.removeEventListener("resize", this.onViewChanges);
 
     this.resizeObserver?.unobserve(this);
+
+    this.bs5?.events.off("breakpoint:changed", this.onViewChanges, this);
 
     this.removeEventListener(
       "visibility-changed" as any,

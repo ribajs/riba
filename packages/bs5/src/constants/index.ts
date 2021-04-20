@@ -1,22 +1,40 @@
-import { Bs5ModuleOptions } from "../types";
+import { Bs5ModuleOptions, Breakpoint } from "../types";
 
 // Breakpoints
-export const DEFAULT_BP_XS = 0;
-export const DEFAULT_BP_SM = 576;
-export const DEFAULT_BP_MD = 768;
-export const DEFAULT_BP_LG = 992;
-export const DEFAULT_BP_XL = 1200;
-export const DEFAULT_BP_XXL = 1400;
+export const DEFAULT_BP_XS: Breakpoint = {
+  dimension: 0,
+  name: "xs",
+};
+export const DEFAULT_BP_SM: Breakpoint = {
+  dimension: 576,
+  name: "sm",
+};
+export const DEFAULT_BP_MD: Breakpoint = {
+  dimension: 768,
+  name: "md",
+};
+export const DEFAULT_BP_LG: Breakpoint = {
+  dimension: 992,
+  name: "lg",
+};
+export const DEFAULT_BP_XL: Breakpoint = {
+  dimension: 1200,
+  name: "xl",
+};
+export const DEFAULT_BP_XXL: Breakpoint = {
+  dimension: 1400,
+  name: "xxl",
+};
 
 export const DEFAULT_MODULE_OPTIONS: Bs5ModuleOptions = {
-  breakpoints: {
-    xs: DEFAULT_BP_XS,
-    sm: DEFAULT_BP_SM,
-    md: DEFAULT_BP_MD,
-    lg: DEFAULT_BP_LG,
-    xl: DEFAULT_BP_XL,
-    xxl: DEFAULT_BP_XXL,
-  },
+  breakpoints: [
+    DEFAULT_BP_XS,
+    DEFAULT_BP_SM,
+    DEFAULT_BP_MD,
+    DEFAULT_BP_LG,
+    DEFAULT_BP_XL,
+    DEFAULT_BP_XXL,
+  ],
 };
 
 // EventDispatcher events
