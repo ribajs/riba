@@ -11,7 +11,7 @@ import { EventDispatcher } from "@ribajs/events";
 import type { ComponentLifecycleEventData } from "../types";
 
 export abstract class Component extends BasicComponent {
-  protected view: View | null = null;
+  protected view?: View | null = null;
   protected riba?: Riba;
   /** true when binding is in progress */
   protected _binds = false;
@@ -57,12 +57,16 @@ export abstract class Component extends BasicComponent {
   }
 
   protected async init(observedAttributes: string[]) {
-    await super.init(observedAttributes);
-    this.lifecycleEvents.trigger(
-      "Component:init",
-      this.getLifecycleEventData()
-    );
-    return this.bindIfReady();
+    try {
+      await super.init(observedAttributes);
+      this.lifecycleEvents.trigger(
+        "Component:init",
+        this.getLifecycleEventData()
+      );
+      return this.bindIfReady();
+    } catch (error) {
+      this.throw(error);
+    }
   }
 
   /**
@@ -73,6 +77,9 @@ export abstract class Component extends BasicComponent {
    * @memberof Component
    */
   protected throw(error: Error) {
+    if (error.message) {
+      error.message = `[${this.tagName}] ${error.message}`;
+    }
     this.lifecycleEvents.trigger(
       "Component:error",
       error,
@@ -166,20 +173,24 @@ export abstract class Component extends BasicComponent {
    * Invoked when the custom element is disconnected from the document's DOM.
    */
   protected disconnectedCallback() {
-    this._disconnected = true;
-    this._connected = false;
-    super.disconnectedCallback();
-    // IMPORTANT ROUTE FIXME, if we unbind the component then it will no longer work if it is retrieved from the cache and the connectedCallback is called
-    // because the riba attributes are removed. We need a solution for that, maybe we do not remove the attributes or we recreate the attributes
-    // See view bind / unbind methods for that.
-    // only unbind if cache is not enabled?
-    // if (this._binds && this.view) {
-    //   this.unbind();
-    // }
-    this.lifecycleEvents.trigger(
-      "Component:disconnected",
-      this.getLifecycleEventData()
-    );
+    try {
+      this._disconnected = true;
+      this._connected = false;
+      super.disconnectedCallback();
+      // IMPORTANT ROUTE FIXME, if we unbind the component then it will no longer work if it is retrieved from the cache and the connectedCallback is called
+      // because the riba attributes are removed. We need a solution for that, maybe we do not remove the attributes or we recreate the attributes
+      // See view bind / unbind methods for that.
+      // only unbind if cache is not enabled?
+      // if (this._binds && this.view) {
+      //   this.unbind();
+      // }
+      this.lifecycleEvents.trigger(
+        "Component:disconnected",
+        this.getLifecycleEventData()
+      );
+    } catch (error) {
+      this.throw(error);
+    }
   }
 
   /**
@@ -187,13 +198,17 @@ export abstract class Component extends BasicComponent {
    * Invoked when the custom element is first connected to the document's DOM.
    */
   protected connectedCallback() {
-    this._disconnected = false;
-    this._connected = true;
-    super.connectedCallback();
-    this.lifecycleEvents.trigger(
-      "Component:connected",
-      this.getLifecycleEventData()
-    );
+    try {
+      this._disconnected = false;
+      this._connected = true;
+      super.connectedCallback();
+      this.lifecycleEvents.trigger(
+        "Component:connected",
+        this.getLifecycleEventData()
+      );
+    } catch (error) {
+      this.throw(error);
+    }
   }
 
   /**
@@ -210,14 +225,17 @@ export abstract class Component extends BasicComponent {
     newValue: any,
     namespace: string | null
   ) {
-    super.attributeChangedCallback(
-      attributeName,
-      oldValue,
-      newValue,
-      namespace
-    );
-
-    this.bindIfReady();
+    try {
+      super.attributeChangedCallback(
+        attributeName,
+        oldValue,
+        newValue,
+        namespace
+      );
+      this.bindIfReady();
+    } catch (error) {
+      this.throw(error);
+    }
   }
 
   /**
@@ -289,44 +307,55 @@ export abstract class Component extends BasicComponent {
     } catch (error) {
       this._binds = false;
       this._bound = false;
-      console.error(error);
+      this.throw(error);
     }
 
     return this.view;
   }
 
   protected getView() {
-    //   | HTMLUnknownElement[] //   | NodeListOf<ChildNode> //   | Node //   | HTMLElement //   | HTMLCollection // elements?:
-    const viewOptions = this.riba?.getViewOptions({
-      handler: this.eventHandler(this),
-      formatters: {
-        call: this.callFormatterHandler(this),
-        args: this.argsFormatterHandler(this),
-      },
-    });
+    try {
+      const viewOptions = this.riba?.getViewOptions({
+        handler: this.eventHandler(this),
+        formatters: {
+          call: this.callFormatterHandler(this),
+          args: this.argsFormatterHandler(this),
+        },
+      });
 
-    if (viewOptions) {
-      const view = new View(
-        Array.prototype.slice.call(this.childNodes),
-        this.scope,
-        viewOptions
-      );
-      return view;
+      if (viewOptions) {
+        const view = new View(
+          Array.prototype.slice.call(this.childNodes),
+          this.scope,
+          viewOptions
+        );
+        return view;
+      }
+      return null;
+    } catch (error) {
+      this.throw(error);
     }
-    return null;
   }
 
   protected async unbind() {
-    if (this.view) {
-      this._binds = false;
-      this.view.unbind();
-      this.view = null;
+    try {
+      if (this.view) {
+        this._binds = false;
+        this.view.unbind();
+        this.view = null;
+      }
+    } catch (error) {
+      this.throw(error);
     }
   }
 
   protected async build() {
-    if (this.view) {
-      this.view.build();
+    try {
+      if (this.view) {
+        this.view.build();
+      }
+    } catch (error) {
+      this.throw(error);
     }
   }
 }

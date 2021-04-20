@@ -27,4 +27,12 @@ export interface RibaModule {
   helper?: { [key: string]: (...args: any[]) => any };
 
   constants?: { [key: string]: any };
+
+  /**
+   * Module initialization
+   *
+   * @param {unknown} options
+   * @memberof RibaModule
+   */
+  init(options?: unknown): RibaModule;
 }
