@@ -40,7 +40,7 @@ export class ShopifyProductItemComponent extends Component {
 
   /**
    * handle is the product handle to get the product json object
-   * extras are product data which is only avaiable over liquid and not over the product json object
+   * extras are product data which is only available over liquid and not over the product json object
    */
   static get observedAttributes(): string[] {
     return ["handle", "extras"];
@@ -78,9 +78,9 @@ export class ShopifyProductItemComponent extends Component {
   private _menuPadding = 60;
 
   /**
-   * Is true if the user has choosed an option
+   * Is true if the user has chosen an option
    */
-  private optionChoosed = false;
+  private optionChosen = false;
 
   protected set menuPadding(padding: number) {
     this._menuPadding = padding;
@@ -91,7 +91,7 @@ export class ShopifyProductItemComponent extends Component {
    * available is only true if the variant is available and the user has clicked on an option
    */
   protected set available(available: boolean) {
-    this.scope.available = available && this.optionChoosed;
+    this.scope.available = available && this.optionChosen;
   }
 
   protected set showMenu(show: boolean) {
@@ -112,14 +112,10 @@ export class ShopifyProductItemComponent extends Component {
     if (product) {
       this.scope.product = ShopifyProductService.prepare(product);
 
-      this.scope.colorOption = ShopifyProductService.getOption(
-        this.scope.product,
-        "color"
-      );
-      this.scope.sizeOption = ShopifyProductService.getOption(
-        this.scope.product,
-        "size"
-      );
+      this.scope.colorOption =
+        ShopifyProductService.getOption(this.scope.product, "color") || null;
+      this.scope.sizeOption =
+        ShopifyProductService.getOption(this.scope.product, "size") || null;
 
       // set the first variant to the selected one
       this.variant = this.scope.product.variants[0];
@@ -178,8 +174,8 @@ export class ShopifyProductItemComponent extends Component {
       this.selectedOptions
     );
     if (variant) {
-      // Option choosed so enable add to cart button
-      this.optionChoosed = true;
+      // Option chosen -> so enable add to cart button
+      this.optionChosen = true;
 
       this.variant = variant as ShopifyProductVariant;
     }
@@ -249,7 +245,7 @@ export class ShopifyProductItemComponent extends Component {
           const optionName = this.scope.product.options[position0].name;
           // Only activate size if it was clicked by the user
           if (optionName === "size") {
-            if (this.optionChoosed) {
+            if (this.optionChosen) {
               this.activateOption(optionValue, optionName);
             }
           } else {

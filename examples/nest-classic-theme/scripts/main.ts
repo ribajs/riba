@@ -25,16 +25,16 @@ export class MainApp {
     console.debug("init the main application");
 
     // Regist custom components
-    this.riba.module.regist({
-      components,
-      binders,
-      formatters,
-    });
+    this.riba.module.component.regists(components);
+    this.riba.module.binder.regists(binders);
+    this.riba.module.formatter.regists(formatters);
 
     // Regist modules
     this.riba.module.regist(coreModule);
     this.riba.module.regist(routerModule);
-    this.riba.module.regist(i18nModule(this.localesService));
+    this.riba.module.regist(
+      i18nModule.init({ localesService: this.localesService })
+    );
     this.riba.module.regist(bs4Module);
 
     this.view = this.riba.bind(document.body, this.model);

@@ -41,7 +41,9 @@ export const tagStarBinder: Binder<boolean> = {
 
       // Move childs to new element we use this instead if innerHTML to keep the binders alive on this childs
       while (oldEl.childNodes.length > 0) {
-        newEl.appendChild(oldEl.firstChild);
+        if (oldEl.firstChild) {
+          newEl.appendChild(oldEl.firstChild);
+        }
       }
 
       // Copy attributes to new element

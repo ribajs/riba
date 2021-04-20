@@ -8,6 +8,9 @@ export const PhotoswipeDemoModule: RibaModule = {
   components,
   formatters: {},
   services: {},
+  init() {
+    return this;
+  },
 };
 
 export default PhotoswipeDemoModule;

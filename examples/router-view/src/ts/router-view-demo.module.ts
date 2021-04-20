@@ -12,6 +12,9 @@ export const RouterViewDemoModule: RibaModule = {
   },
   formatters: {},
   services: {},
+  init() {
+    return this;
+  },
 };
 
 export default RouterViewDemoModule;

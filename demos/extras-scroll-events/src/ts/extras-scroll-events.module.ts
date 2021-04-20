@@ -8,6 +8,9 @@ export const extrasScrollEventsModule: RibaModule = {
   components,
   formatters: {},
   services: {},
+  init() {
+    return this;
+  },
 };
 
 export default extrasScrollEventsModule;

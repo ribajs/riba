@@ -6,4 +6,7 @@ export const Bs4TabsTplModule: RibaModule = {
   components,
   formatters: {},
   services: {},
+  init() {
+    return this;
+  },
 };

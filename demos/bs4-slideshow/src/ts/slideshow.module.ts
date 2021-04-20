@@ -8,6 +8,9 @@ export const SlideshowDemoModule: RibaModule = {
   components,
   formatters: {},
   services: {},
+  init() {
+    return this;
+  },
 };
 
 export default SlideshowDemoModule;

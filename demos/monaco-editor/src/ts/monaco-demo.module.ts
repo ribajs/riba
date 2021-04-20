@@ -8,6 +8,9 @@ export const MonacoDemoModule: RibaModule = {
   components,
   formatters: {},
   services: {},
+  init() {
+    return this;
+  },
 };
 
 export default MonacoDemoModule;

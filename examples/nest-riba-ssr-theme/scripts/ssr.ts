@@ -27,11 +27,9 @@ const riba = new Riba();
 riba.configure({ prefix: ["ssr-rv"], blockUnknownCustomElements: false });
 
 // Regist custom components
-riba.module.regist({
-  components: { ...pageComponents, LinkListComponent },
-  binders,
-  formatters,
-});
+riba.module.component.regists({ ...pageComponents, LinkListComponent });
+riba.module.binder.regists(binders);
+riba.module.formatter.regists(formatters);
 
 // const localesService = new LocalesStaticService(locales, undefined, false);
 // riba.module.regist(i18nModule(localesService));

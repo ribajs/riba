@@ -62,14 +62,14 @@ export class I18nShareComponent extends Bs4ShareComponent {
 
   protected async initI18n() {
     return new Promise<string | undefined>((resolve) => {
-      this.localesService.event.on("changed", async (langcode: string) => {
+      this.localesService?.event.on("changed", async (langcode: string) => {
         return resolve(langcode);
       });
-      if (this.localesService.ready) {
-        const langcode = this.localesService.getLangcode();
+      if (this.localesService?.ready) {
+        const langcode = this.localesService?.getLangcode();
         return resolve(langcode);
       } else {
-        this.localesService.event.on("ready", async (langcode: string) => {
+        this.localesService?.event.on("ready", async (langcode: string) => {
           return resolve(langcode);
         });
       }
@@ -82,7 +82,7 @@ export class I18nShareComponent extends Bs4ShareComponent {
     }
 
     return this.localesService
-      .get([langcode, ...value.split(".")])
+      ?.get([langcode, ...value.split(".")])
       .then((locale: string) => {
         // this.debug('changed local', local);
         return locale;

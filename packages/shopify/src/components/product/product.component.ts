@@ -78,10 +78,8 @@ export class ShopifyProductComponent extends Component {
 
       // this.selectedOptions = new Array(this.scope.product.options.length);
 
-      this.colorOption = ShopifyProductService.getOption(
-        this.scope.product,
-        "color"
-      );
+      this.colorOption =
+        ShopifyProductService.getOption(this.scope.product, "color") || null;
       // set the first variant to the selected one
       this.variant = this.scope.product.variants[0];
     }

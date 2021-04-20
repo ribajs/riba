@@ -8,6 +8,9 @@ export const Bs5ToastModule: RibaModule = {
   components,
   formatters: {},
   services: {},
+  init() {
+    return this;
+  },
 };
 
 export default Bs5ToastModule;

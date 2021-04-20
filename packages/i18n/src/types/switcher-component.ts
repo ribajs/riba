@@ -83,7 +83,7 @@ export abstract class SwitcherComponent extends Component {
   protected async initLocales(langcode: string) {
     // set available langcodes
     return this.localesService
-      .getAvailableLangcodes()
+      ?.getAvailableLangcodes()
       .then((langcodes) => {
         this.scope.langcodes = langcodes;
         // set active langcodes
@@ -93,7 +93,7 @@ export abstract class SwitcherComponent extends Component {
         return this.scope.langcodes;
       })
       .then((langcodes) => {
-        this.localesService.event.on("changed", (
+        this.localesService?.event.on("changed", (
           changedLangcode: string /*, initial: boolean*/
         ) => {
           // Activate localcode and disable the other
@@ -110,7 +110,7 @@ export abstract class SwitcherComponent extends Component {
   }
 
   protected setLangcode(langcode: string) {
-    this.localesService.setLangcode(langcode);
+    this.localesService?.setLangcode(langcode);
   }
 
   protected requiredAttributes(): string[] {

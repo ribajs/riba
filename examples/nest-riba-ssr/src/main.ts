@@ -35,12 +35,12 @@ async function bootstrap() {
   app.set('trust proxy', 1); // trust first proxy
 
   /**
-   * Init express sesion
+   * Init express session
    */
   const session = expressSession(config.session);
 
   /**
-   * Set express sesion
+   * Set express session
    */
   app.use(session);
 

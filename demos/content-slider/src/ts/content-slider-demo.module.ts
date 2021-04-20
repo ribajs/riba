@@ -8,6 +8,9 @@ export const ContentSliderDemoModule: RibaModule = {
   components,
   formatters: {},
   services: {},
+  init() {
+    return this;
+  },
 };
 
 export default ContentSliderDemoModule;

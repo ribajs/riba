@@ -6,6 +6,9 @@ export const I18nStaticModule: RibaModule = {
   components,
   formatters: {},
   services: {},
+  init() {
+    return this;
+  },
 };
 
 export default I18nStaticModule;

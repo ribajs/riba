@@ -8,6 +8,9 @@ export const Bs4DropdownModule: RibaModule = {
   components,
   formatters: {},
   services: {},
+  init() {
+    return this;
+  },
 };
 
 export default Bs4DropdownModule;

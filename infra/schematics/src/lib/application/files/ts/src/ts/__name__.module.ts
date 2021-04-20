@@ -8,6 +8,9 @@ export const <%= classify(name) %>Module: RibaModule = {
   components,
   formatters,
   services: {},
+  init() {
+    return this;
+  },
 };
 
 export default <%= classify(name) %>Module;

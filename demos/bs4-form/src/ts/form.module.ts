@@ -8,6 +8,9 @@ export const FormModule: RibaModule = {
   components,
   formatters: {},
   services: {},
+  init() {
+    return this;
+  },
 };
 
 export default FormModule;

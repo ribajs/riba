@@ -8,6 +8,9 @@ export const MomentDemoModule: RibaModule = {
   components,
   formatters: {},
   services: {},
+  init() {
+    return this;
+  },
 };
 
 export default MomentDemoModule;

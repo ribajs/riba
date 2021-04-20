@@ -276,7 +276,7 @@ export class Bs5FormComponent extends Component {
     event.stopPropagation();
     if (!this.formEl) {
       console.warn("No form found");
-      return null;
+      return;
     }
     const invalidElements = this.formEl.querySelectorAll<HTMLElement>(
       ":invalid"

@@ -8,6 +8,9 @@ export const IconsetModule: RibaModule = {
   components,
   formatters: {},
   services: {},
+  init() {
+    return this;
+  },
 };
 
 export default IconsetModule;

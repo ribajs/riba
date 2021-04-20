@@ -8,6 +8,9 @@ export const Bs4TaggedImageDemoModule: RibaModule = {
   components,
   formatters: {},
   services: {},
+  init() {
+    return this;
+  },
 };
 
 export default Bs4TaggedImageDemoModule;

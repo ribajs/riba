@@ -485,20 +485,17 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     this.scope.indicatorsPositionClass = result.trim();
   }
 
-  protected getBreakpointByName(name: string) {
-    console.debug("getBreakpointByName", name, this.scope.breakpoints);
+  protected getBreakpointOptionsByName(name: string) {
+    return this.scope.breakpoints[name];
   }
 
   protected setOptionsByBreakpoint(breakpointName: string) {
-    this.getBreakpointByName(breakpointName);
-    if (!this.scope.breakpoints[breakpointName]) {
+    const breakpointOptions = this.getBreakpointOptionsByName(breakpointName);
+    if (!breakpointOptions) {
       console.error(`Breakpoint ${breakpointName} not found!`);
       return;
     }
-    this.setOptions(
-      this.scope.activeBreakpoint,
-      this.scope.breakpoints[breakpointName]
-    );
+    this.setOptions(this.scope.activeBreakpoint, breakpointOptions);
     if (this.scope.activeBreakpoint.autoplay) {
       this.enableAutoplay();
     } else {

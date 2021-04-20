@@ -6,4 +6,7 @@ export const eachItemModule: RibaModule = {
   binders: {},
   components: { ...eachItemComponents },
   services: {},
+  init() {
+    return this;
+  },
 };

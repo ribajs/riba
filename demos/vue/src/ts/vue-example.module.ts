@@ -6,4 +6,7 @@ export const vueExampleModule: RibaModule = {
   binders: {},
   components: { ...vueComponents },
   services: {},
+  init() {
+    return this;
+  },
 };
