@@ -19,7 +19,7 @@ import { contentSlider } from '@ribajs/content-slider';
 const riba = new Riba();
 const model = {};
 riba.module.regist(coreModule);
-riba.module.regist(bs5Module({}));
+riba.module.regist(bs5Module.init({}));
 riba.module.regist(extrasModule);
 riba.module.regist(contentSlider);
 ready(() => {

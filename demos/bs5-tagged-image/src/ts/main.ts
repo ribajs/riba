@@ -10,7 +10,7 @@ const model = {};
 
 // Register modules
 riba.module.regist(coreModule);
-riba.module.regist(bs5Module({}));
+riba.module.regist(bs5Module.init({}));
 riba.module.regist(extrasModule);
 riba.module.regist(Bs5TaggedImageDemoModule);
 
