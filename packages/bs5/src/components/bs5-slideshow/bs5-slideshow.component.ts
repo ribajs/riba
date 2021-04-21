@@ -6,6 +6,11 @@ import { clone, camelCase } from "@ribajs/utils/src/type";
 import { throttle } from "@ribajs/utils/src/control";
 import { Bs5Service } from "../../services";
 import {
+  SlideshowSlide,
+  SlideshowControlsPosition,
+  SlideshowIndicatorsPosition,
+} from "../../types";
+import {
   Dragscroll,
   DragscrollOptions,
   Autoscroll,
@@ -22,48 +27,15 @@ const SLIDESHOW_INNER_SELECTOR = ".slideshow-row";
 
 const SLIDES_SELECTOR = `${SLIDESHOW_INNER_SELECTOR} > .slide`;
 
-export type ControlsPosition =
-  | "inside-middle"
-  | "inside-bottom"
-  | "inside-top"
-  | "outside-middle"
-  | "outside-bottom"
-  | "outside-top";
-
-export type IndicatorsPosition =
-  | "inside-bottom"
-  | "inside-top"
-  | "inside-right"
-  | "inside-left"
-  | "outside-bottom"
-  | "outside-top"
-  | "outside-right"
-  | "outside-left";
-
-export interface Position extends DOMRect {
-  centerX: number;
-  centerY: number;
-}
-
-export interface Slide {
-  title?: string;
-  content: string;
-  handle?: string;
-  active: boolean;
-  type?: string;
-  position: Position;
-  index: number;
-}
-
 export interface ResponsiveOptions {
   /** Show controls */
   controls: boolean;
   /** Position of the controls */
-  controlsPosition: ControlsPosition;
+  controlsPosition: SlideshowControlsPosition;
   /** Show indicators */
   indicators: boolean;
   /** Position of the indicators */
-  indicatorsPosition: IndicatorsPosition;
+  indicatorsPosition: SlideshowIndicatorsPosition;
   /** Pauses auto scroll on hover or focus */
   pauseOnHover: boolean;
   /** number of slides to be scrolled by clicking on the controls */
@@ -108,7 +80,7 @@ export interface Scope extends Options {
   goTo: Bs5SlideshowComponent["goTo"];
   controlsPositionClass: string;
   indicatorsPositionClass: string;
-  items: Slide[];
+  items: SlideshowSlide[];
   /** Active breakpoint options */
   activeBreakpoint: ResponsiveOptions;
 }
@@ -295,7 +267,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     goTo: this.goTo.bind(this),
 
     // Template properties
-    items: new Array<Slide>(),
+    items: new Array<SlideshowSlide>(),
 
     // Classes
     controlsPositionClass: "",
@@ -450,7 +422,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       const breakpoint = this.scope.breakpoints[infix];
       const position = breakpoint.controlsPosition?.split(
         "-"
-      ) as ControlsPosition[];
+      ) as SlideshowControlsPosition[];
       if (breakpoint.controls && position.length === 2) {
         if (count === 0) {
           // Do not use xs on class
@@ -473,7 +445,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       const breakpoint = this.scope.breakpoints[infix];
       const positions = breakpoint.indicatorsPosition?.split(
         "-"
-      ) as IndicatorsPosition[];
+      ) as SlideshowIndicatorsPosition[];
       if (breakpoint.indicators && positions.length === 2) {
         if (count === 0) {
           // Do not use xs on class
