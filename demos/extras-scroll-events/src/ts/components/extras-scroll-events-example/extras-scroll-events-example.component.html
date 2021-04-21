@@ -1,17 +1,22 @@
 <div class="row flex-column flex-md-row d-flex flex-nowrap h-100">
   <div
-    class="col-md-7 col-lg-8 col-xl-8 bg-light text-dark touch-zone"
+    class="col bg-light text-dark touch-zone"
     rv-scroll-events
     rv-scrollbar-draggable
     rv-on-scrollstart="log | args 'scrollstart'"
     rv-on-scrollended="log | args 'scrollended'"
+    rv-on-scrollleft="log | args 'scrollleft'"
+    rv-on-scrollright="log | args 'scrollright'"
+    rv-on-scrollup="log | args 'scrollup'"
+    rv-on-scrolldown="log | args 'scrolldown'"
+    rv-on-scrolling="log | args 'scrolling'"
     rv-on-scrollend="log | args '(native scrollend)'"
     rv-on-scroll="log | args '(native scroll)'"
   >
     <div class="touch-zone-background d-flex justify-content-center align-items-center h-100 w-100">Scroll here</div>
     <div class="touch-space"></div>
   </div>
-  <div class="col-md-6 col-lg-4 col-xl-4 bg-dark text-light py-3 h-100 console">
+  <div class="col-12 col-md-6 col-lg-4 col-xl-4 bg-dark text-light py-3 h-100 console">
     <p class="log">
       <span class="no-data">Start touching to send data to this console.</span>
     </p>

@@ -63,10 +63,10 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "@ribajs/bs4": "workspace:packages/bs4",
+    "@ribajs/bs5": "workspace:packages/bs5",
     "@ribajs/core": "workspace:packages/core",
     "@ribajs/extras": "workspace:packages/extras",
     "@ribajs/utils": "workspace:packages/utils",
-    "bootstrap": "4.6.0"
+    "bootstrap": "next"
   }
 }
