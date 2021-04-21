@@ -1813,16 +1813,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime-corejs3@npm:^7.13.16":
-  version: 7.13.16
-  resolution: "@babel/runtime-corejs3@npm:7.13.16"
-  dependencies:
-    core-js-pure: ^3.0.0
-    regenerator-runtime: ^0.13.4
-  checksum: ec3fdafe86b929ed6e603441c13023c1b964d925d71baf0a7cb991c464cfa838faa385106af04628a4bbd8c09fbbfc831ad2b607f83ef7c3bc2723f6f9e77936
-  languageName: node
-  linkType: hard
-
 "@babel/runtime-corejs3@npm:^7.13.17":
   version: 7.13.17
   resolution: "@babel/runtime-corejs3@npm:7.13.17"
@@ -1830,15 +1820,6 @@ __metadata:
     core-js-pure: ^3.0.0
     regenerator-runtime: ^0.13.4
   checksum: 526eeb9979d63359ef62c9bcbc8d07d28f2e09392517547212af257cf95e7cf790884b15561cdd10edaf7a6a4396ee0d0986e07ae2d5199d0b00182850b386b8
-  languageName: node
-  linkType: hard
-
-"@babel/runtime@npm:^7.13.16":
-  version: 7.13.16
-  resolution: "@babel/runtime@npm:7.13.16"
-  dependencies:
-    regenerator-runtime: ^0.13.4
-  checksum: 5975f71ee999ee80d5a2f9e35a645c1d6a54acf77bcfe1ce2904e0ed3155b2f2984aafdaabd0b776dc7ba19fe6764ca4a705fa22de07df983655faa76d5927a1
   languageName: node
   linkType: hard
 
@@ -2832,7 +2813,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/plugin-rest-endpoint-methods@npm:5.0.0, @octokit/plugin-rest-endpoint-methods@npm:^5.0.0":
+"@octokit/plugin-rest-endpoint-methods@npm:5.0.0":
   version: 5.0.0
   resolution: "@octokit/plugin-rest-endpoint-methods@npm:5.0.0"
   dependencies:
@@ -2985,8 +2966,8 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.13.15
     "@babel/preset-env": ^7.13.15
     "@babel/preset-typescript": ^7.13.0
-    "@babel/runtime": ^7.13.16
-    "@babel/runtime-corejs3": ^7.13.16
+    "@babel/runtime": ^7.13.17
+    "@babel/runtime-corejs3": ^7.13.17
     "@ribajs/cache": "workspace:packages/cache"
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
@@ -3079,8 +3060,8 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.13.15
     "@babel/preset-env": ^7.13.15
     "@babel/preset-typescript": ^7.13.0
-    "@babel/runtime": ^7.13.16
-    "@babel/runtime-corejs3": ^7.13.16
+    "@babel/runtime": ^7.13.17
+    "@babel/runtime-corejs3": ^7.13.17
     "@popperjs/core": ^2.9.2
     "@ribajs/cache": "workspace:packages/cache"
     "@ribajs/core": "workspace:packages/core"
@@ -3166,8 +3147,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/cache@portal:packages/cache::locator=ribajs%40workspace%3A."
   dependencies:
-    "@babel/runtime": ^7.13.16
-    "@babel/runtime-corejs3": ^7.13.16
+    "@babel/runtime": ^7.13.17
+    "@babel/runtime-corejs3": ^7.13.17
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@types/jest": ^26.0.22
@@ -3213,8 +3194,8 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.13.15
     "@babel/preset-env": ^7.13.15
     "@babel/preset-typescript": ^7.13.0
-    "@babel/runtime": ^7.13.16
-    "@babel/runtime-corejs3": ^7.13.16
+    "@babel/runtime": ^7.13.17
+    "@babel/runtime-corejs3": ^7.13.17
     "@ribajs/bs5": "workspace:packages/bs5"
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
@@ -3295,8 +3276,8 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.13.15
     "@babel/preset-env": ^7.13.15
     "@babel/preset-typescript": ^7.13.0
-    "@babel/runtime": ^7.13.16
-    "@babel/runtime-corejs3": ^7.13.16
+    "@babel/runtime": ^7.13.17
+    "@babel/runtime-corejs3": ^7.13.17
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/events": "workspace:packages/events"
     "@ribajs/history": "workspace:packages/history"
@@ -4418,7 +4399,7 @@ __metadata:
     "@babel/preset-typescript": ^7.13.0
     "@babel/runtime": ^7.13.17
     "@babel/runtime-corejs3": ^7.13.17
-    "@ribajs/bs4": "workspace:packages/bs4"
+    "@ribajs/bs5": "workspace:packages/bs5"
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/extras": "workspace:packages/extras"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
@@ -4433,7 +4414,7 @@ __metadata:
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
-    bootstrap: 4.6.0
+    bootstrap: next
     core-js: ^3.10.2
     css-loader: ^5.2.4
     eslint: ^7.24.0
@@ -5014,6 +4995,23 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@ribajs/esbuild@workspace:infra/esbuild":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/esbuild@workspace:infra/esbuild"
+  dependencies:
+    "@ribajs/npm-package": "workspace:infra/npm-package"
+    "@ribajs/postcss-config": "workspace:infra/postcss-config"
+    "@ribajs/tsconfig": "workspace:infra/tsconfig"
+    "@tsconfig/node14": ^1.0.0
+    "@types/node": ^14.14.41
+    "@types/pkg-dir": ^2.0.1
+    "@yarnpkg/esbuild-plugin-pnp": ^1.0.0-rc.2
+    "@yarnpkg/pnpify": ^3.0.0-rc.3
+    pkg-dir: ^5.0.0
+    typescript: ^4.2.4
+  languageName: unknown
+  linkType: soft
+
 "@ribajs/eslint-config@portal:infra/eslint-config::locator=ribajs%40workspace%3A.":
   version: 0.0.0-use.local
   resolution: "@ribajs/eslint-config@portal:infra/eslint-config::locator=ribajs%40workspace%3A."
@@ -5048,8 +5046,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/events@portal:packages/events::locator=ribajs%40workspace%3A."
   dependencies:
-    "@babel/runtime": ^7.13.16
-    "@babel/runtime-corejs3": ^7.13.16
+    "@babel/runtime": ^7.13.17
+    "@babel/runtime-corejs3": ^7.13.17
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@types/jest": ^26.0.22
     "@types/node": ^14.14.41
@@ -5308,8 +5306,8 @@ __metadata:
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
     "@babel/preset-env": ^7.13.15
     "@babel/preset-typescript": ^7.13.0
-    "@babel/runtime": ^7.13.16
-    "@babel/runtime-corejs3": ^7.13.16
+    "@babel/runtime": ^7.13.17
+    "@babel/runtime-corejs3": ^7.13.17
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/events": "workspace:packages/events"
@@ -5376,8 +5374,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/history@portal:packages/history::locator=ribajs%40workspace%3A."
   dependencies:
-    "@babel/runtime": ^7.13.16
-    "@babel/runtime-corejs3": ^7.13.16
+    "@babel/runtime": ^7.13.17
+    "@babel/runtime-corejs3": ^7.13.17
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@types/jest": ^26.0.22
@@ -5410,8 +5408,8 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.13.8
     "@babel/preset-env": ^7.13.15
     "@babel/preset-typescript": ^7.13.0
-    "@babel/runtime": ^7.13.16
-    "@babel/runtime-corejs3": ^7.13.16
+    "@babel/runtime": ^7.13.17
+    "@babel/runtime-corejs3": ^7.13.17
     "@ribajs/bs4": "workspace:packages/bs4"
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
@@ -5474,7 +5472,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/iconset@portal:packages/iconset::locator=ribajs%40workspace%3A."
   dependencies:
-    "@babel/runtime-corejs3": ^7.13.16
+    "@babel/runtime-corejs3": ^7.13.17
     core-js: ^3.10.2
     gulp: ^4.0.2
     gulp-clean: ^0.4.0
@@ -5512,8 +5510,8 @@ __metadata:
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
     "@babel/preset-env": ^7.13.15
     "@babel/preset-typescript": ^7.13.0
-    "@babel/runtime": ^7.13.16
-    "@babel/runtime-corejs3": ^7.13.16
+    "@babel/runtime": ^7.13.17
+    "@babel/runtime-corejs3": ^7.13.17
     "@ribajs/cache": "workspace:packages/cache"
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
@@ -5591,8 +5589,8 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.13.15
     "@babel/preset-env": ^7.13.15
     "@babel/preset-typescript": ^7.13.0
-    "@babel/runtime": ^7.13.16
-    "@babel/runtime-corejs3": ^7.13.16
+    "@babel/runtime": ^7.13.17
+    "@babel/runtime-corejs3": ^7.13.17
     "@ribajs/bs4": "workspace:packages/bs4"
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
@@ -5679,8 +5677,8 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.13.15
     "@babel/preset-env": ^7.13.15
     "@babel/preset-typescript": ^7.13.0
-    "@babel/runtime": ^7.13.16
-    "@babel/runtime-corejs3": ^7.13.16
+    "@babel/runtime": ^7.13.17
+    "@babel/runtime-corejs3": ^7.13.17
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
@@ -6069,8 +6067,8 @@ __metadata:
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
     "@babel/preset-env": ^7.13.15
     "@babel/preset-typescript": ^7.13.0
-    "@babel/runtime": ^7.13.16
-    "@babel/runtime-corejs3": ^7.13.16
+    "@babel/runtime": ^7.13.17
+    "@babel/runtime-corejs3": ^7.13.17
     "@ribajs/bs4": "workspace:packages/bs4"
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
@@ -6171,8 +6169,8 @@ __metadata:
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
     "@babel/preset-env": ^7.13.15
     "@babel/preset-typescript": ^7.13.0
-    "@babel/runtime": ^7.13.16
-    "@babel/runtime-corejs3": ^7.13.16
+    "@babel/runtime": ^7.13.17
+    "@babel/runtime-corejs3": ^7.13.17
     "@ribajs/bs4": "workspace:packages/bs4"
     "@ribajs/cache": "workspace:packages/cache"
     "@ribajs/core": "workspace:packages/core"
@@ -6305,8 +6303,8 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.13.8
     "@babel/preset-env": ^7.13.15
     "@babel/preset-typescript": ^7.13.0
-    "@babel/runtime": ^7.13.16
-    "@babel/runtime-corejs3": ^7.13.16
+    "@babel/runtime": ^7.13.17
+    "@babel/runtime-corejs3": ^7.13.17
     "@ribajs/cache": "workspace:packages/cache"
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
@@ -6385,8 +6383,8 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.13.8
     "@babel/preset-env": ^7.13.15
     "@babel/preset-typescript": ^7.13.0
-    "@babel/runtime": ^7.13.16
-    "@babel/runtime-corejs3": ^7.13.16
+    "@babel/runtime": ^7.13.17
+    "@babel/runtime-corejs3": ^7.13.17
     "@ribajs/cache": "workspace:packages/cache"
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
@@ -6478,8 +6476,8 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.13.8
     "@babel/preset-env": ^7.13.15
     "@babel/preset-typescript": ^7.13.0
-    "@babel/runtime": ^7.13.16
-    "@babel/runtime-corejs3": ^7.13.16
+    "@babel/runtime": ^7.13.17
+    "@babel/runtime-corejs3": ^7.13.17
     "@ribajs/cache": "workspace:packages/cache"
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
@@ -6500,7 +6498,7 @@ __metadata:
     eslint-config-prettier: ^8.2.0
     eslint-plugin-prettier: ^3.4.0
     prettier: 2.2.1
-    socket.io-client: 3.1.3
+    socket.io-client: 4.0.1
     typescript: ^4.2.4
     webpack: ^5.34.0
     webpack-cli: ^4.6.0
@@ -6556,10 +6554,10 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.13.8
     "@babel/preset-env": ^7.13.15
     "@babel/preset-typescript": ^7.13.0
-    "@babel/runtime": ^7.13.16
-    "@babel/runtime-corejs3": ^7.13.16
+    "@babel/runtime": ^7.13.17
+    "@babel/runtime-corejs3": ^7.13.17
     "@octokit/core": ^3.4.0
-    "@octokit/plugin-rest-endpoint-methods": ^5.0.0
+    "@octokit/plugin-rest-endpoint-methods": ^5.0.1
     "@octokit/request": ^5.4.15
     "@octokit/rest": ^18.5.2
     "@ribajs/cache": "workspace:packages/cache"
@@ -6606,7 +6604,7 @@ __metadata:
     bitbucket: ^2.5.1
     bluebird: ^3.7.2
     browser-sync: ^2.26.14
-    chalk: ^4.1.0
+    chalk: ^4.1.1
     chokidar: ^3.5.1
     core-js: ^3.10.2
     del: ^6.0.0
@@ -6805,8 +6803,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/utils@portal:packages/utils::locator=ribajs%40workspace%3A."
   dependencies:
-    "@babel/runtime": ^7.13.16
-    "@babel/runtime-corejs3": ^7.13.16
+    "@babel/runtime": ^7.13.17
+    "@babel/runtime-corejs3": ^7.13.17
     "@ribajs/eslint-config": "workspace:infra/eslint-config"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@types/jest": ^26.0.22
@@ -7762,6 +7760,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/pkg-dir@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@types/pkg-dir@npm:2.0.1"
+  dependencies:
+    pkg-dir: "*"
+  checksum: 3869fa6a5986785fac31629267ae588646687f748acd881d561749cb39058021becc9a6724007d25c2071f380ab208f61d6e64d6636137b813c13c842accc3a6
+  languageName: node
+  linkType: hard
+
 "@types/prettier@npm:^2.0.0":
   version: 2.1.5
   resolution: "@types/prettier@npm:2.1.5"
@@ -8548,6 +8555,19 @@ __metadata:
     tslib: ^1.13.0
     tunnel: ^0.0.6
   checksum: e3a522d4804ab129023d07350fd7b50827ac27a06bb47271668c59628fe8f8cc82c2c571edb72f89669e15b34933c52c10fd55755cde3f9756543603459f22e8
+  languageName: node
+  linkType: hard
+
+"@yarnpkg/esbuild-plugin-pnp@npm:^1.0.0-rc.2":
+  version: 1.0.0-rc.2
+  resolution: "@yarnpkg/esbuild-plugin-pnp@npm:1.0.0-rc.2"
+  dependencies:
+    tslib: ^1.13.0
+  peerDependencies:
+    esbuild: ^0.8.36
+  bin:
+    esbuild-plugin-pnp: ./lib/cli.js
+  checksum: bfa55937465b0a4ecae1af2639fdddcf63a614e0a68e10401348fd290c86a630396978c2ab3afccfb1bf90e23b7b45cf11947c0348830d57464f4976c4b30bec
   languageName: node
   linkType: hard
 
@@ -12246,24 +12266,6 @@ __metadata:
     xmlhttprequest-ssl: ~1.5.4
     yeast: 0.1.2
   checksum: 9b554ac29986ba75cf071dd09d4d29212ae11c737838310a43256a50cb9875f290daaacce45a573c06f07120639cf280488f452825908aa06d71b5a339442c4b
-  languageName: node
-  linkType: hard
-
-"engine.io-client@npm:~4.1.0":
-  version: 4.1.1
-  resolution: "engine.io-client@npm:4.1.1"
-  dependencies:
-    base64-arraybuffer: 0.1.4
-    component-emitter: ~1.3.0
-    debug: ~4.3.1
-    engine.io-parser: ~4.0.1
-    has-cors: 1.1.0
-    parseqs: 0.0.6
-    parseuri: 0.0.6
-    ws: ~7.4.2
-    xmlhttprequest-ssl: ~1.5.4
-    yeast: 0.1.2
-  checksum: ddc734f80b55589bbcd63011d020167419830982178629c99254d156d7632670e4057754d4f38132914150dbfd17ffbc58372e51e5800915fb1c86c8ac4719ac
   languageName: node
   linkType: hard
 
@@ -18543,6 +18545,15 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"pkg-dir@npm:*, pkg-dir@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "pkg-dir@npm:5.0.0"
+  dependencies:
+    find-up: ^5.0.0
+  checksum: 86f6ecee1787d8fe1606fd831f823f967c6ea0d760ce714af6afd2fec076ce71fbedcb57b339d93b84edf90ccdd81d4e6e2c10fcde21684ef3ffee5e05fd37dc
+  languageName: node
+  linkType: hard
+
 "pkg-dir@npm:^3.0.0":
   version: 3.0.0
   resolution: "pkg-dir@npm:3.0.0"
@@ -18558,15 +18569,6 @@ fsevents@~2.3.1:
   dependencies:
     find-up: ^4.0.0
   checksum: 1956ebf3cf5cc36a5d20e93851fcadd5a786774eb08667078561e72e0ab8ace91fc36a028d5305f0bfe7c89f9bf51886e2a3c8cb2c2620accfa3feb8da3c256b
-  languageName: node
-  linkType: hard
-
-"pkg-dir@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "pkg-dir@npm:5.0.0"
-  dependencies:
-    find-up: ^5.0.0
-  checksum: 86f6ecee1787d8fe1606fd831f823f967c6ea0d760ce714af6afd2fec076ce71fbedcb57b339d93b84edf90ccdd81d4e6e2c10fcde21684ef3ffee5e05fd37dc
   languageName: node
   linkType: hard
 
@@ -21110,21 +21112,6 @@ resolve@^1.14.2:
     socket.io-parser: ~3.3.0
     to-array: 0.1.4
   checksum: 75a8f9b69a0a47c41c9cff80fe5bfff02b7f75eefd4fdbe2f6b74ca0f0f408d3eccd734f5d8cc8c180859bb75b24fdb9f97110c36ac4015a0f4d2b41c891e99f
-  languageName: node
-  linkType: hard
-
-"socket.io-client@npm:3.1.3":
-  version: 3.1.3
-  resolution: "socket.io-client@npm:3.1.3"
-  dependencies:
-    "@types/component-emitter": ^1.2.10
-    backo2: ~1.0.2
-    component-emitter: ~1.3.0
-    debug: ~4.3.1
-    engine.io-client: ~4.1.0
-    parseuri: 0.0.6
-    socket.io-parser: ~4.0.4
-  checksum: 93ffe33648437948500632d1aea97c048fe57ee8434e8fc534a5bc099869e64e849962d5ca765157faac62964fd1d0c56887df64f99075e07aa1deb00457d21a
   languageName: node
   linkType: hard
 

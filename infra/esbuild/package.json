@@ -1,0 +1,32 @@
+{
+  "name": "@ribajs/esbuild",
+  "version": "2.0.0-alpha.0",
+  "description": "Default esbuild configs used in Riba.js projects",
+  "scripts": {
+    "build": "tsc"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "source": "src/index.ts",
+  "author": "Pascal Garber <pascal@artandcode.studio",
+  "license": "MIT",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "./*.js"
+  ],
+  "dependencies": {
+    "@ribajs/npm-package": "workspace:infra/npm-package",
+    "@ribajs/postcss-config": "workspace:infra/postcss-config",
+    "@ribajs/tsconfig": "workspace:infra/tsconfig",
+    "@types/node": "^14.14.41",
+    "@types/pkg-dir": "^2.0.1",
+    "@yarnpkg/esbuild-plugin-pnp": "^1.0.0-rc.2",
+    "@yarnpkg/pnpify": "^3.0.0-rc.3",
+    "pkg-dir": "^5.0.0",
+    "typescript": "^4.2.4"
+  },
+  "devDependencies": {
+    "@tsconfig/node14": "^1.0.0"
+  }
+}
