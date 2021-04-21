@@ -172,7 +172,6 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   static responsiveAttributes = [
     "breakpoint",
     "name",
-    "slides-to-show",
     "slides-to-scroll",
     "controls",
     "controls-position",
@@ -199,7 +198,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     ) as (keyof ResponsiveOptions)[];
   }
 
-  static defaultBreakpointOptions: ResponsiveOptions = {
+  protected _defaultBreakpointOptions: ResponsiveOptions = {
     // Options
     slidesToScroll: 1,
     controls: true,
@@ -221,6 +220,10 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     breakpoint: 0,
     name: "xs",
   };
+
+  protected getDefaultBreakpointOptions() {
+    return clone(true, this._defaultBreakpointOptions);
+  }
 
   public static tagName = "bs5-slideshow";
 
@@ -284,7 +287,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   protected scope: Scope = {
     breakpoints: {},
-    activeBreakpoint: Bs5SlideshowComponent.defaultBreakpointOptions,
+    activeBreakpoint: this.getDefaultBreakpointOptions(),
 
     // Template methods
     next: this.next.bind(this),
@@ -429,7 +432,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
         if (i === 1) {
           this.setOptionsIfUndefined(
             prevOptions,
-            Bs5SlideshowComponent.defaultBreakpointOptions
+            this.getDefaultBreakpointOptions()
           );
         }
 
@@ -437,21 +440,20 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       }
     }
 
-    this.activeBreakpointName = this.bs5.activeBreakpoint?.name || "xs";
-    this.setOptionsByBreakpoint(this.activeBreakpointName);
+    this.setOptionsByBreakpoint(this.bs5.activeBreakpoint);
   }
 
   protected setControlsOptions() {
     let result = "";
     let count = 0;
-
     for (const infix in this.scope.breakpoints) {
       const breakpoint = this.scope.breakpoints[infix];
       const position = breakpoint.controlsPosition?.split(
         "-"
       ) as ControlsPosition[];
-      if (position.length === 2) {
+      if (breakpoint.controls && position.length === 2) {
         if (count === 0) {
+          // Do not use xs on class
           result += `control-${position[0]} control-${position[1]} `;
         } else {
           result += `control-${infix}-${position[0]} control-${infix}-${position[1]} `;
@@ -469,14 +471,15 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
     for (const infix in this.scope.breakpoints) {
       const breakpoint = this.scope.breakpoints[infix];
-      const indicators = breakpoint.controlsPosition?.split(
+      const positions = breakpoint.indicatorsPosition?.split(
         "-"
       ) as IndicatorsPosition[];
-      if (indicators.length === 2) {
+      if (breakpoint.indicators && positions.length === 2) {
         if (count === 0) {
-          result += `indicators-${indicators[0]} indicators-${indicators[1]} `;
+          // Do not use xs on class
+          result += `indicators-${positions[0]} indicators-${positions[1]} `;
         } else {
-          result += `indicators-${infix}-${indicators[0]} indicators-${infix}-${indicators[1]} `;
+          result += `indicators-${infix}-${positions[0]} indicators-${infix}-${positions[1]} `;
         }
       }
       count++;
@@ -485,14 +488,20 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     this.scope.indicatorsPositionClass = result.trim();
   }
 
-  protected getBreakpointOptionsByName(name: string) {
+  protected getBreakpointOptionsByBreakpointName(name: string) {
     return this.scope.breakpoints[name];
   }
 
-  protected setOptionsByBreakpoint(breakpointName: string) {
-    const breakpointOptions = this.getBreakpointOptionsByName(breakpointName);
+  protected setOptionsByBreakpoint(breakpoint: Breakpoint | null) {
+    if (!breakpoint) {
+      console.warn(`Breakpoint not found!`);
+      return;
+    }
+    const breakpointOptions = this.getBreakpointOptionsByBreakpointName(
+      breakpoint.name
+    );
     if (!breakpointOptions) {
-      console.error(`Breakpoint ${breakpointName} not found!`);
+      console.warn(`Breakpoint options for "${breakpoint.name}" not found!`);
       return;
     }
     this.setOptions(this.scope.activeBreakpoint, breakpointOptions);
@@ -510,10 +519,11 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     this.setIndicatorsOptions();
   }
 
-  protected onBreakpointChanges(breakpoint: Breakpoint) {
-    this.activeBreakpointName = breakpoint.name;
-    this.setOptionsByBreakpoint(this.activeBreakpointName);
+  protected _onBreakpointChanges(breakpoint: Breakpoint) {
+    this.setOptionsByBreakpoint(breakpoint);
   }
+
+  protected onBreakpointChanges = this._onBreakpointChanges.bind(this);
 
   protected _onViewChanges() {
     this.debug("onViewChanges");
@@ -587,7 +597,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected addEventListeners() {
-    this.routerEvents.on("newPageReady", this.onViewChanges, this);
+    this.routerEvents.on("newPageReady", this.onViewChanges);
 
     if (window.ResizeObserver) {
       this.resizeObserver = new window.ResizeObserver(this.onViewChanges);
@@ -597,7 +607,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       window.addEventListener("resize", this.onViewChanges);
     }
 
-    this.bs5?.events.on("breakpoint:changed", this.onBreakpointChanges, this);
+    this.bs5.events.on("breakpoint:changed", this.onBreakpointChanges);
 
     // Custom event triggered by some parent components when this component changes his visibility, e.g. triggered in the bs5-tabs component
     this.addEventListener(
@@ -640,7 +650,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
     this.resizeObserver?.unobserve(this);
 
-    this.bs5?.events.off("breakpoint:changed", this.onViewChanges, this);
+    this.bs5.events.off("breakpoint:changed", this.onViewChanges, this);
 
     this.removeEventListener(
       "visibility-changed" as any,

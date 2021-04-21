@@ -1,6 +1,7 @@
 import { Breakpoint, Bs5ModuleOptions } from "../types";
 import { DEFAULT_MODULE_OPTIONS } from "../constants";
 import { throttle } from "@ribajs/utils/src/control";
+import { getViewportDimensions } from "@ribajs/utils/src/dom";
 import { EventDispatcher } from "@ribajs/core";
 
 /**
@@ -9,8 +10,8 @@ import { EventDispatcher } from "@ribajs/core";
  */
 export class Bs5Service {
   protected _options: Bs5ModuleOptions = DEFAULT_MODULE_OPTIONS;
-  protected _activeBreakpoint: Breakpoint | null = null;
   protected _events = EventDispatcher.getInstance("bs5");
+  protected _activeBreakpoint: Breakpoint | null = null;
 
   public get options() {
     return this._options;
@@ -41,9 +42,11 @@ export class Bs5Service {
     this._events.trigger("breakpoint:changed", this.activeBreakpoint);
   }
 
-  protected setActiveBreakpoint(name: string) {
-    this._activeBreakpoint = this.getBreakpointByName(name);
-    this.onBreakpointChanges();
+  protected setActiveBreakpoint(breakpoint: Breakpoint) {
+    if (breakpoint && breakpoint.name !== this.activeBreakpoint?.name) {
+      this._activeBreakpoint = breakpoint;
+      this.onBreakpointChanges();
+    }
   }
 
   public static getSingleton() {
@@ -75,13 +78,15 @@ export class Bs5Service {
   }
 
   protected _onViewChanges() {
-    const newBreakpoint = this.getBreakpointByDimension(window.innerWidth);
-    if (newBreakpoint && newBreakpoint.name !== this.activeBreakpoint?.name) {
-      this.setActiveBreakpoint(newBreakpoint.name);
+    const newBreakpoint = this.getBreakpointByDimension(
+      getViewportDimensions().w
+    );
+    if (newBreakpoint) {
+      this.setActiveBreakpoint(newBreakpoint);
     }
   }
 
-  protected onViewChanges = throttle(this._onViewChanges.bind(this));
+  protected onViewChanges = throttle(this._onViewChanges.bind(this), 100);
 
   /**
    * Get breakpoint for width

@@ -57,7 +57,7 @@ export class EventDispatcher {
    * @param cb function to call when an event with eventName is triggered
    * @param thisContext optional, if a thisContext is supplied, the callback function is bound to the given thisContext
    *
-   * IMPORTANT; cb CANNOT BE arrow function if a thisContext is used, use function() {} instead
+   * @note cb can not be arrow function if a thisContext is used, use `function() {}` instead
    */
   public once(eventName: string, cb: EventCallback, thisContext?: any) {
     this.eventsOnce[eventName] = this.eventsOnce[eventName] || [];
@@ -79,7 +79,7 @@ export class EventDispatcher {
    * @param cb function to call when an event with eventName is triggered
    * @param thisContext optional, if a thisContext is supplied, the callback function is bound to the given thisContext
    *
-   * IMPORTANT; cb CANNOT BE arrow function if a thisContext is used, use function() {} instead
+   * @note cb can not be arrow function if a thisContext is used, use `function() {}` instead
    */
   public on(eventName: string, cb: EventCallback, thisContext?: any) {
     this.events[eventName] = this.events[eventName] || [];
