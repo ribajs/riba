@@ -63,6 +63,7 @@
     "@nestjs/common": "^7.6.15",
     "@nestjs/core": "^7.6.15",
     "@nestjs/testing": "^7.6.15",
+    "@ribajs/babel-config": "workspace:infra/babel-config",
     "@ribajs/eslint-config": "workspace:infra/eslint-config",
     "@ribajs/tsconfig": "workspace:infra/tsconfig",
     "@ribajs/types": "workspace:infra/types",
