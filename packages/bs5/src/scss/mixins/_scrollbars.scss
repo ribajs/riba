@@ -2,7 +2,7 @@
  * Mixin to customize scrollbars
  * Beware, this does not work in all browsers
  *
- * @author Hugo Giraudel
+ * @author Hugo Giraude
  *
  * @param {Length} $size - Horizontal scrollbar's height and vertical scrollbar's width
  * @param {Color} $foreground-color - Scrollbar's color
@@ -30,4 +30,17 @@
   // For Internet Explorer
   scrollbar-face-color: $foreground-color !important;
   scrollbar-track-color: $background-color !important;
+
+  // For Firefox
+  scrollbar-color: $foreground-color $background-color !important;
+  @if $size == 0 {
+    scrollbar-width: none;
+    scrollbar-height: none;
+  } @else if $size < 1em {
+    scrollbar-width: thin;
+    scrollbar-height: thin;
+  } @else {
+    scrollbar-width: auto;
+    scrollbar-height: auto;
+  }
 }
