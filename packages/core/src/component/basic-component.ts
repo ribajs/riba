@@ -39,7 +39,6 @@ export abstract class BasicComponent extends HTMLElement {
       this._color = getRandomColor();
     }
     this.onParentChanged = this.onParentChanged.bind(this);
-    this.onRibaAttributeChanged = this.onRibaAttributeChanged.bind(this);
   }
 
   /**
@@ -357,21 +356,6 @@ export abstract class BasicComponent extends HTMLElement {
   }
 
   /**
-   * @deprecated
-   */
-  protected onRibaAttributeChanged(event: CustomEvent) {
-    const data = (event as CustomEvent).detail;
-    this.debug("onRibaAttributeChanged", data);
-    const oldValue = this.scope[data.name];
-    this.attributeChangedCallback(
-      data.name,
-      oldValue,
-      data.newValue,
-      data.namespace
-    );
-  }
-
-  /**
    * Observes a object keypath in the scope
    * @param keypath
    * @param callback
@@ -380,6 +364,11 @@ export abstract class BasicComponent extends HTMLElement {
     return new Observer(this.scope, keypath, callback);
   }
 
+  /**
+   * Observes a attributeName
+   * @param attributeName
+   * @param callback
+   */
   public observeAttribute(
     attributeName: string,
     callback: ObserverSyncCallback
@@ -389,7 +378,9 @@ export abstract class BasicComponent extends HTMLElement {
   }
 
   /**
-   * This method is called from the componentAttributeBinder
+   * Directly set a attribute value in the scope.
+   * This method is meant to be called from the outside, e.g. from a binder or another component.
+   * @note This method is used in the componentAttributeBinder
    * @param attributeName
    * @param newValue
    * @param namespace
@@ -405,7 +396,9 @@ export abstract class BasicComponent extends HTMLElement {
   }
 
   /**
-   * This method is called from the componentAttributeBinder
+   * Directly get a attribute value from the scope.
+   * This method is meant to be called from the outside, e.g. from a binder or another component.
+   * @note This method is used in the componentAttributeBinder
    * @param attributeName
    * @returns
    */
