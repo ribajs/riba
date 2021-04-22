@@ -7,5 +7,6 @@ export interface SlideshowSlide {
   active: boolean;
   type?: string;
   position: SlideshowSlidePosition;
+  class?: string;
   index: number;
 }

@@ -130,15 +130,16 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   static get observedAttributes(): string[] {
+    const staticAttributes = ["items"];
     const breakpointNames = Bs5Service.getSingleton().breakpointNames;
 
-    const result: string[] = [];
+    const responsiveAttributes: string[] = [];
     for (const breakpointName of breakpointNames) {
-      result.push(
+      responsiveAttributes.push(
         ...this.responsiveAttributes.map((prop) => `${breakpointName}-${prop}`)
       );
     }
-    return result;
+    return [...staticAttributes, ...responsiveAttributes];
   }
 
   static responsiveAttributes = [
@@ -1023,10 +1024,8 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     }
 
     if (!responsiveAttributeName) {
-      const parsedAttributeName = camelCase(attributeName);
-      // call custom attribute changed callback with parsed values
-      this.parsedAttributeChangedCallback(
-        parsedAttributeName,
+      return super.attributeChangedCallback(
+        attributeName,
         oldValue,
         newValue,
         namespace

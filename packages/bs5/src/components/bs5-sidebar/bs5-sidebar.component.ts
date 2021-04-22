@@ -77,6 +77,11 @@ interface Scope {
    */
   overlayOnSlimmerThan: number;
 
+  /**
+   * Close sidebar on swipe
+   */
+  closeOnSwipe: boolean;
+
   // Template methods
 
   /**
@@ -117,6 +122,7 @@ export class Bs5SidebarComponent extends Component {
       "force-show-on-location-pathnames",
       "overlay-on-slimmer-than",
       "watch-new-page-ready-event",
+      "close-on-swipe",
     ];
   }
 
@@ -141,6 +147,7 @@ export class Bs5SidebarComponent extends Component {
     forceHideOnLocationPathnames: [],
     forceShowOnLocationPathnames: [],
     overlayOnSlimmerThan: -1,
+    closeOnSwipe: true,
 
     // Template methods
     hide: this.hide,
@@ -261,12 +268,9 @@ export class Bs5SidebarComponent extends Component {
   }
 
   protected _onSwipe(event: CustomEvent<TouchSwipeData>) {
-    console.debug(
-      "onSwipe",
-      event.detail,
-      this.scope.state,
-      this.scope.position
-    );
+    if (!this.scope.closeOnSwipe) {
+      return;
+    }
     if (this.scope.state === "side-left" || this.scope.state === "side-right") {
       return;
     }
