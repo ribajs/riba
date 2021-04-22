@@ -54,6 +54,11 @@ export abstract class Component extends BasicComponent {
       "Component:constructor",
       this.getLifecycleEventData()
     );
+    this.lifecycleEvents.on(
+      "ComponentLifecycle:allBound",
+      this.afterAllBind,
+      this
+    );
   }
 
   protected async init(observedAttributes: string[]) {
@@ -143,6 +148,13 @@ export abstract class Component extends BasicComponent {
     // this.debug("afterBind", this.scope);
   }
 
+  /**
+   * Called after component binding is done for all current components
+   */
+  protected async afterAllBind(): Promise<any> {
+    // this.debug("afterBind", this.scope);
+  }
+
   protected getLifecycleEventData() {
     const data: ComponentLifecycleEventData = {
       tagName: this.tagName.toLowerCase(),
@@ -187,6 +199,11 @@ export abstract class Component extends BasicComponent {
       this.lifecycleEvents.trigger(
         "Component:disconnected",
         this.getLifecycleEventData()
+      );
+      this.lifecycleEvents.off(
+        "ComponentLifecycle:allBound",
+        this.afterAllBind,
+        this
       );
     } catch (error) {
       this.throw(error);
