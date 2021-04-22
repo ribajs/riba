@@ -38,7 +38,6 @@ export abstract class BasicComponent extends HTMLElement {
     if (this._debug) {
       this._color = getRandomColor();
     }
-    this.onParentChanged = this.onParentChanged.bind(this);
   }
 
   /**
@@ -85,7 +84,6 @@ export abstract class BasicComponent extends HTMLElement {
 
   protected async init(observedAttributes: string[]) {
     this.loadAttributes(observedAttributes);
-    this.initRibaAttributeObserver();
     this.getPassedObservedAttributes(observedAttributes);
     return;
   }
@@ -218,8 +216,6 @@ export abstract class BasicComponent extends HTMLElement {
     //   // only unbind if cache is not enabled?
     //   this.unbind();
     // }
-
-    this.removeEventListenerForRibaParent();
   }
 
   /**
@@ -344,18 +340,6 @@ export abstract class BasicComponent extends HTMLElement {
   }
 
   /**
-   *
-   */
-  protected askForRibaParent() {
-    this.dispatchEvent(new CustomEvent("ask-for-parent"));
-  }
-
-  protected onParentChanged(event: CustomEvent) {
-    // this.debug("onParentChanged", event.detail);
-    this.scope.$parent = event.detail;
-  }
-
-  /**
    * Observes a object keypath in the scope
    * @param keypath
    * @param callback
@@ -406,19 +390,6 @@ export abstract class BasicComponent extends HTMLElement {
     const parsedAttributeName = camelCase(attributeName);
     const oldValue = this.scope[parsedAttributeName];
     return oldValue;
-  }
-
-  protected listenForRibaParent() {
-    this.addEventListener("parent" as any, this.onParentChanged);
-  }
-
-  protected removeEventListenerForRibaParent() {
-    this.removeEventListener("parent" as any, this.onParentChanged);
-  }
-
-  protected initRibaAttributeObserver() {
-    this.listenForRibaParent();
-    this.askForRibaParent();
   }
 
   /**

@@ -1,11 +1,17 @@
 import { Component, TemplateFunction } from "@ribajs/core";
 import template from "./components-example.component.html";
 
+export interface ComponentsExampleScope {
+  defaultInputVal: string;
+  anotherVal: string;
+}
+
 export class ComponentsExampleComponent extends Component {
   public static tagName = "rv-components-example";
 
-  public scope = {
-    defaultInputVal: "Hello",
+  public scope: ComponentsExampleScope = {
+    defaultInputVal: "Hello as attribute",
+    anotherVal: "Hello as parent",
   };
 
   constructor() {

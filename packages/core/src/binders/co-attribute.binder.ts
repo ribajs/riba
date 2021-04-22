@@ -11,7 +11,7 @@ export const componentAttributeBinder: Binder<any, BasicComponent> = {
   publishes: true,
   routine(el: BasicComponent, value: any) {
     const attrName = (this.args[0] as string).trim();
-    el.setBinderAttribute(attrName, this.observer?.value() || value);
+    el.setBinderAttribute(attrName, value);
   },
   bind(el) {
     const attrName = (this.args[0] as string).trim();

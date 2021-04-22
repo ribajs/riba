@@ -1,3 +1,11 @@
 rv-components-example {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 500px;
+  height: 700px;
+  background-color: antiquewhite;
+  padding: 50px;
 }

@@ -1,35 +1,16 @@
 import { Binder } from "../types";
+import { BasicComponent } from "../component/basic-component";
 
 /**
  * parent
  * Binds the parent scope to your component
  */
-export const parentBinder: Binder<any> = {
+export const parentBinder: Binder<any, BasicComponent> = {
   name: "parent",
-  routine(/*el: HTMLElement, value: object*/) {
+  routine() {
     /**/
   },
   bind(el) {
-    this.customData = {
-      onAskForParent: () => {
-        el.dispatchEvent(
-          new CustomEvent("parent", { detail: this.view.models })
-        );
-      },
-    };
-    el.addEventListener(
-      "ask-for-parent" as any,
-      this.customData.onAskForParent,
-      false
-    );
-    this.customData.onAskForParent();
-  },
-
-  unbind(el) {
-    el.removeEventListener(
-      "ask-for-parent" as any,
-      this.customData.onAskForParent,
-      false
-    );
+    el.setBinderAttribute("$parent", this.view.models);
   },
 };
