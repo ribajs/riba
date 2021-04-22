@@ -10,7 +10,7 @@ import {
 export class Bs4NavbarComponent extends Component {
   public static tagName = "bs4-navbar";
 
-  protected scope: any = {
+  public scope: any = {
     toggle: this.toggle,
     show: this.show,
     hide: this.hide,

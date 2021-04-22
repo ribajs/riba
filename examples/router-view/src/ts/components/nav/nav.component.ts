@@ -8,7 +8,7 @@ export class NavComponent extends Component {
     return [];
   }
 
-  protected scope = {};
+  public scope = {};
 
   constructor() {
     super();

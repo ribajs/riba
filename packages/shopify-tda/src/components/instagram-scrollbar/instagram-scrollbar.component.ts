@@ -25,7 +25,7 @@ export class ShopifyTdaInstagramScrollbarComponent extends Component {
     return ["instagram-id", "open-links", "limit", "open-url"];
   }
 
-  protected scope: Scope = {
+  public scope: Scope = {
     instagramId: undefined,
     openLinks: false,
     openUrl: "",

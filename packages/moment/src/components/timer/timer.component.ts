@@ -42,7 +42,7 @@ export class TimerComponent extends Component {
     return ["time"];
   }
 
-  protected scope: Scope = {
+  public scope: Scope = {
     countdownYears: false,
     countdownDays: true,
     countdownHours: true,

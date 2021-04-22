@@ -40,7 +40,7 @@ export class Bs5CarouselComponent extends Component {
     return [];
   }
 
-  protected scope: Scope = {
+  public scope: Scope = {
     // Properties
     interval: Carousel.Default.interval,
     keyboard: Carousel.Default.keyboard,

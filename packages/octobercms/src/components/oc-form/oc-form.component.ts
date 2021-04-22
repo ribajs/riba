@@ -28,7 +28,7 @@ export class OcFormComponent extends Bs4FormComponent {
     return scope as Scope;
   }
 
-  protected scope: Scope = this.getDefaultScope();
+  public scope: Scope = this.getDefaultScope();
 
   protected connectedCallback() {
     this.debug("connectedCallback");

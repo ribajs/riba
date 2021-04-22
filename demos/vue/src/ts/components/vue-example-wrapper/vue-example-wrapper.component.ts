@@ -10,7 +10,7 @@ export class VueExampleWrapperComponent extends Component {
     return [];
   }
 
-  protected scope = {
+  public scope = {
     message: "Message from Riba.js to Vue.js and back",
   };
 

@@ -7,7 +7,7 @@ export class Page1PageComponent extends Component {
     return [];
   }
 
-  protected scope = {};
+  public scope = {};
 
   constructor() {
     super();

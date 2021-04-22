@@ -19,7 +19,7 @@ export class ExtrasGameLoopExampleComponent extends Component {
 
   protected limit = 300;
 
-  protected scope = {
+  public scope = {
     fps: 60,
     left: "10px",
     color: "red",

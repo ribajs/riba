@@ -4,7 +4,7 @@ import { Dropdown } from "../../services/dropdown";
 export class Bs5DropdownComponent extends Component {
   public static tagName = "bs5-dropdown";
 
-  protected scope: any = {
+  public scope: any = {
     toggle: this.toggle,
   };
 

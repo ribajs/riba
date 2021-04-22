@@ -22,7 +22,7 @@ export class ShopifyTdaInstagramComponent extends Component {
     return ["instagram-id", "open-links", "limit"];
   }
 
-  protected scope: Scope = {
+  public scope: Scope = {
     media: [],
     openLinks: false,
     limit: 0,

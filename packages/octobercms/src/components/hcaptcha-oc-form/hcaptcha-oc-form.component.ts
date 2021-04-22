@@ -73,7 +73,7 @@ export class HCaptchaFormComponent extends OcFormComponent {
     return scope;
   }
 
-  protected scope: Scope = this.getDefaultScope();
+  public scope: Scope = this.getDefaultScope();
 
   constructor() {
     super();

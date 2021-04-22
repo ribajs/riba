@@ -11,7 +11,7 @@ export class MomentExampleComponent extends Component {
     return [];
   }
 
-  protected scope = {};
+  public scope = {};
 
   constructor() {
     super();

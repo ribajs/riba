@@ -94,7 +94,7 @@ export class MonacoEditorComponent extends Component {
     ];
   }
 
-  protected scope: Scope = {
+  public scope: Scope = {
     dataValue: "{}",
     /**
      * monaco editor options

@@ -72,7 +72,7 @@ export class ShopifyCartItemComponent extends Component {
     return ["id", "variantId", "quantity"];
   }
 
-  protected scope: Scope = this.getScopeDefaults();
+  public scope: Scope = this.getScopeDefaults();
 
   protected getScopeDefaults(): Scope {
     return {

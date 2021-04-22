@@ -34,7 +34,7 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
     "component:" + ShopifyNestApiSocketExplorerComponent.tagName
   );
 
-  protected scope: Scope = {
+  public scope: Scope = {
     simulate: this.simulate,
     langcode: "en",
   };

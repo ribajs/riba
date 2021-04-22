@@ -43,7 +43,7 @@ export class Bs5ScrollspyComponent extends Bs5ContentsComponent {
     ];
   }
 
-  protected scope: Scope = {
+  public scope: Scope = {
     headersDepth: 1,
     headersStart: 2,
     findHeaderIdDepth: 1,

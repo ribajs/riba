@@ -4,7 +4,7 @@ import template from "./each-item-example.component.html";
 export class EachItemExampleComponent extends Component {
   public static tagName = "rv-each-item-example";
 
-  protected scope: Scope = {
+  public scope: Scope = {
     items: this.getItems(),
     pop: this.pop,
     push: this.push,

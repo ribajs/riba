@@ -10,7 +10,7 @@ export class Bs5ToggleButtonSidebarExampleComponent extends Component {
     return [];
   }
 
-  protected scope = {};
+  public scope = {};
 
   constructor() {
     super();

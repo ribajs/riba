@@ -105,7 +105,7 @@ export class Bs4SidebarComponent extends Component {
 
   protected routerEvents = new EventDispatcher("main");
 
-  protected scope: Scope = {
+  public scope: Scope = {
     // template properties
     containerSelector: undefined,
     state: "hidden",

@@ -196,7 +196,7 @@ export class Bs5ColorPickerComponent extends Component {
 
   public color?: Color;
   public _debug = false;
-  protected scope: Scope = {
+  public scope: Scope = {
     namespace: "main",
     hsl: [],
     cssHue: "",

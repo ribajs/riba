@@ -23,7 +23,7 @@ export class ShopifyNestSocketEventCardComponent extends Component {
     "component:" + ShopifyNestSocketEventCardComponent.tagName
   );
 
-  protected scope: Scope = {
+  public scope: Scope = {
     close: this.close,
     event: undefined,
     data: undefined,

@@ -5,7 +5,7 @@ import template from "./bs4-tabs-attr-example.component.html";
 export class Bs4TabsAttrExampleComponent extends Component {
   public static tagName = "rv-bs4-tabs-attr-example";
 
-  protected scope = {};
+  public scope = {};
 
   constructor() {
     super();

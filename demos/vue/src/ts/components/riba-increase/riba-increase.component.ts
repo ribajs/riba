@@ -12,7 +12,7 @@ export class RibaIncreaseComponent extends Component {
     return [];
   }
 
-  protected scope = {
+  public scope = {
     capacity: 3,
     increaseCapacity: this.increaseCapacity,
   };

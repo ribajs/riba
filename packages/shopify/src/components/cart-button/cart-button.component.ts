@@ -21,7 +21,7 @@ export class ShopifyCartButtonComponent extends Component {
     return [];
   }
 
-  protected scope: Scope = {
+  public scope: Scope = {
     cartItemCount: 0,
     toggle: this.toggle,
     pending: false,

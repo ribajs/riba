@@ -27,7 +27,7 @@ export class ShopifyContactFormComponent extends Component {
 
   protected form?: HTMLFormElement;
 
-  protected scope: Scope = {
+  public scope: Scope = {
     form: {
       fields: {
         firstName: "",

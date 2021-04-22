@@ -9,7 +9,7 @@ export class ShopifyDebugBarComponent extends Component {
     return ["theme-name"];
   }
 
-  protected scope: any = {
+  public scope: any = {
     hasPreviewBar: false,
     hasAdminBar: false,
     toggleBar: this.toggleBar,

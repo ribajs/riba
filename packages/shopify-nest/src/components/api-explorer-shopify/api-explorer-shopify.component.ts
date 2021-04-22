@@ -317,7 +317,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
     },
   ];
 
-  protected scope: Scope = {
+  public scope: Scope = {
     langcode: "en",
     self: this,
     result: "",

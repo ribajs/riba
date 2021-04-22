@@ -44,7 +44,7 @@ export class ShopifyNestApiExplorerInstagramComponent extends ShopifyNestApiExpl
     },
   ];
 
-  protected scope: Scope = {
+  public scope: Scope = {
     langcode: "en",
     self: this,
     result: "",

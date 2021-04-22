@@ -45,7 +45,7 @@ export class LeafletMapComponent extends Component {
     ];
   }
 
-  protected scope: Scope = {
+  public scope: Scope = {
     mapSelector: ".leaflet-map",
     initialLat: 53.872654,
     initialLng: 8.710849,

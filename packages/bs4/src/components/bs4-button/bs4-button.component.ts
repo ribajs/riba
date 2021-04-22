@@ -14,7 +14,7 @@ export class Bs4ButtonComponent extends Component {
     return ["animation-class"];
   }
 
-  protected scope: Scope = {
+  public scope: Scope = {
     animationClass: "btn-animation-start",
     onClick: this.onClick.bind(this),
   };

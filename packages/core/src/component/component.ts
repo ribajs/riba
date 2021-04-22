@@ -247,7 +247,7 @@ export abstract class Component extends BasicComponent {
       read: (fn: (...args: any[]) => any, ...args: any[]) => {
         if (!fn) {
           console.error(
-            `[${self.el.tagName}] Can not use "call" formatter: fn is undefined! Arguments: `,
+            `[${self.tagName}] Can not use "call" formatter: fn is undefined! Arguments: `,
             args
           );
           throw new Error("TypeError: fn is undefined");

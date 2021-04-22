@@ -119,7 +119,7 @@ export class PhotoswipeComponent extends Component {
     ];
   }
 
-  protected scope: Scope = {
+  public scope: Scope = {
     // Properties
     items: [],
     isFullscreen: false,

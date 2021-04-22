@@ -54,6 +54,35 @@ export class Observer {
     return tokens;
   }
 
+  /**
+   * Gets the provided key on an object.
+   * @param key
+   * @param obj
+   */
+  public static get(key: Key, obj: Obj) {
+    return Observer.adapters[key.i].get(obj, key.path);
+  }
+
+  /**
+   * Observes or unobserves a callback on the object using the provided key.
+   * @param active
+   * @param key
+   * @param obj
+   * @param callback
+   */
+  public static set(
+    active: boolean,
+    key: Key,
+    obj: Obj,
+    callback: ObserverSyncCallback
+  ) {
+    if (active) {
+      Observer.adapters[key.i].observe(obj, key.path, callback);
+    } else {
+      Observer.adapters[key.i].unobserve(obj, key.path, callback);
+    }
+  }
+
   public keypath: string;
   public callback: ObserverSyncCallback;
   public objectPath: Obj[];
@@ -78,7 +107,7 @@ export class Observer {
     this.obj = this.getRootObject(obj);
     this.target = this.realize();
     if (isObject(this.target)) {
-      this.set(true, this.key, this.target, this.callback);
+      Observer.set(true, this.key, this.target, this.callback);
     }
   }
 
@@ -136,22 +165,22 @@ export class Observer {
         if (typeof this.objectPath[index] !== "undefined") {
           prev = this.objectPath[index];
           if (current !== prev) {
-            this.set(false, token, prev, this);
-            this.set(true, token, current, this);
+            Observer.set(false, token, prev, this);
+            Observer.set(true, token, current, this);
             this.objectPath[index] = current;
           }
         } else {
-          this.set(true, token, current, this);
+          Observer.set(true, token, current, this);
           this.objectPath[index] = current;
         }
-        current = this.get(token, current);
+        current = Observer.get(token, current);
       } else {
         if (unreached === -1) {
           unreached = index;
         }
         prev = this.objectPath[index];
         if (prev) {
-          this.set(false, token, prev, this);
+          Observer.set(false, token, prev, this);
         }
       }
     }
@@ -170,11 +199,11 @@ export class Observer {
     const next = this.realize();
     if (next !== this.target) {
       if (isObject(this.target)) {
-        this.set(false, this.key, this.target, this.callback);
+        Observer.set(false, this.key, this.target, this.callback);
       }
 
       if (isObject(next)) {
-        this.set(true, this.key, next, this.callback);
+        Observer.set(true, this.key, next, this.callback);
       }
 
       oldValue = this.value();
@@ -194,7 +223,7 @@ export class Observer {
    */
   public value() {
     if (isObject(this.target)) {
-      return this.get(this.key, this.target);
+      return Observer.get(this.key, this.target);
     }
   }
 
@@ -210,35 +239,6 @@ export class Observer {
   }
 
   /**
-   * Gets the provided key on an object.
-   * @param key
-   * @param obj
-   */
-  public get(key: Key, obj: Obj) {
-    return Observer.adapters[key.i].get(obj, key.path);
-  }
-
-  /**
-   * Observes or unobserves a callback on the object using the provided key.
-   * @param active
-   * @param key
-   * @param obj
-   * @param callback
-   */
-  public set(
-    active: boolean,
-    key: Key,
-    obj: Obj,
-    callback: ObserverSyncCallback
-  ) {
-    if (active) {
-      Observer.adapters[key.i].observe(obj, key.path, callback);
-    } else {
-      Observer.adapters[key.i].unobserve(obj, key.path, callback);
-    }
-  }
-
-  /**
    * Unobserves the entire keypath.
    */
   public unobserve() {
@@ -249,12 +249,12 @@ export class Observer {
       token = this.tokens[index];
       obj = this.objectPath[index];
       if (obj) {
-        this.set(false, token, obj, this);
+        Observer.set(false, token, obj, this);
       }
     }
 
     if (isObject(this.target)) {
-      this.set(false, this.key, this.target, this.callback);
+      Observer.set(false, this.key, this.target, this.callback);
     }
   }
 

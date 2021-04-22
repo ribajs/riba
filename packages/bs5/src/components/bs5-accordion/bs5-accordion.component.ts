@@ -62,7 +62,7 @@ export class Bs5AccordionComponent extends TemplatesComponent {
     return ["collapse-icon-src", "collapse-icon-size", "show-only-one"];
   }
 
-  protected scope: Scope = {
+  public scope: Scope = {
     items: [],
     toggle: this.toggle,
     show: this.show,

@@ -32,7 +32,7 @@ export class Bs4ModalItemComponent extends Component {
     return ["modal"];
   }
 
-  protected scope: Scope = {
+  public scope: Scope = {
     onHidden: this.onHidden.bind(this),
     index: -1,
     dismiss: this.dismiss.bind(this),

@@ -109,7 +109,7 @@ export class Bs5FormComponent extends Component {
     return scope;
   }
 
-  protected scope: Scope = this.getDefaultScope();
+  public scope: Scope = this.getDefaultScope();
 
   constructor() {
     super();

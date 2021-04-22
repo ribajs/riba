@@ -38,7 +38,7 @@ export class ShopifyNestAccountConnectsComponent extends Component {
   );
   protected authService = new AuthService();
 
-  protected scope: Scope = {
+  public scope: Scope = {
     myshopify_domain: shop || undefined,
     account: undefined,
     isConnected: false,

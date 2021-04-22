@@ -44,7 +44,7 @@ export class ShopifyProductComponent extends Component {
     return ["handle", "extras"];
   }
 
-  protected scope: Scope = {
+  public scope: Scope = {
     handle: null,
     product: null,
     variant: null,

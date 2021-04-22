@@ -49,7 +49,7 @@ export class ShopifyCommentsFormComponent extends Component {
 
   protected newCommentForm: HTMLFormElement | null = null;
 
-  protected scope: Scope = {
+  public scope: Scope = {
     form: {
       customer: {
         email: "",

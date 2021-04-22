@@ -272,7 +272,7 @@ export class Binding {
   }
 
   /**
-   * Publishes the value currently set on the input element back to the model.
+   * Publishes the value currently set on the input element (or any other wich implements getValue) back to the model.
    */
   public publish() {
     if (this.observer) {

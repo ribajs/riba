@@ -13,7 +13,7 @@ export class VueAppComponent extends VueComponent {
   protected methods = {};
 
   // Values to use in the template
-  protected scope = {};
+  public scope = {};
 
   constructor() {
     super();

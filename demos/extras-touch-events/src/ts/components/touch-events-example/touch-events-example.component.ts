@@ -10,7 +10,7 @@ export class TouchEventsExampleComponent extends Component {
   protected consoleElement: HTMLDivElement | null = null;
   protected touchZoneElement: HTMLDivElement | null = null;
 
-  protected scope: any = {
+  public scope: any = {
     log: this.log,
   };
 

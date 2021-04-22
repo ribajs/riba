@@ -6,19 +6,19 @@ export interface BindableElement extends HTMLUnknownElement {
 /**
  * A one way or to way binder interface
  */
-export interface Binder<T> {
+export interface Binder<T = any, E = HTMLUnknownElement> {
   /**
    * The routine function is called when an observed attribute on the model changes and is used to update the DOM. When defining a one-way binder as a single function, it is actually the routine function that you're defining.
    */
-  routine: (this: Binding, element: HTMLUnknownElement, value: T) => void;
+  routine: (this: Binding, element: E, value: T) => void;
   /**
    * This function will get called for this binding on the initial `view.bind()`. Use it to store some initial state on the binding, or to set up any event listeners on the element.
    */
-  bind?: (this: Binding, element: HTMLUnknownElement) => void;
+  bind?: (this: Binding, element: E) => void;
   /**
    * This function will get called for this binding on `view.unbind()`. Use it to reset any state on the element that would have been changed from the routine getting called, or to unbind any event listeners on the element that you've set up in the `binder.bind` function.
    */
-  unbind?: (this: Binding, element: HTMLUnknownElement) => void;
+  unbind?: (this: Binding, element: E) => void;
   /**
    * Updates the binding's model from what is currently set on the view.
    * Unbinds the old model first and then re-binds with the new model.
@@ -27,7 +27,7 @@ export interface Binder<T> {
   /**
    * The getValue function is called when the binder wants to set the value on the model. This function takes the HTML element as only parameter
    */
-  getValue?: (this: Binding, element: HTMLUnknownElement) => void;
+  getValue?: (this: Binding, element: E) => void;
   /**
    * The name of the binder to access the binder by
    */

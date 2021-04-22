@@ -12,7 +12,7 @@ export class Bs5NotificationsExampleComponent extends Component {
     return [];
   }
 
-  protected scope = {
+  public scope = {
     showToast: this.showToast,
     showModal: this.showModal,
     message: "",

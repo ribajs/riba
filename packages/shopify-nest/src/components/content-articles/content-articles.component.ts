@@ -28,7 +28,7 @@ export class ShopifyNestContentBlogArticlesComponent extends ShopifyNestContentC
     "component:" + ShopifyNestContentBlogArticlesComponent.tagName
   );
 
-  protected scope: Scope = {
+  public scope: Scope = {
     articles: [],
   };
 

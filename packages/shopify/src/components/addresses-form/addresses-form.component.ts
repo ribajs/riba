@@ -57,7 +57,7 @@ export class ShopifyAddressesComponent extends Component {
   protected editAddressForm: HTMLFormElement | null = null;
   protected createAddressForm: HTMLFormElement | null = null;
 
-  protected scope: Scope = {
+  public scope: Scope = {
     createAddress: {
       validation: {
         valid: false,

@@ -11,7 +11,7 @@ export class MonacoExampleComponent extends Component {
     return [];
   }
 
-  protected scope = {
+  public scope = {
     article: {
       title: "How to use the monaco-editor from VSCode in Riba.js",
       body_html: "",

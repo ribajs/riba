@@ -47,7 +47,7 @@ export class Bs4ToggleButtonComponent extends Component {
 
   protected eventDispatcher?: EventDispatcher;
 
-  protected scope: Scope = {
+  public scope: Scope = {
     targetId: undefined,
     toggle: this.toggle,
     state: "undefined",

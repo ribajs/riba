@@ -34,7 +34,7 @@ export class ShopifyCartComponent extends Component {
     return [];
   }
 
-  protected scope: Scope = this.getScopeDefaults();
+  public scope: Scope = this.getScopeDefaults();
 
   protected getScopeDefaults(): Scope {
     return {

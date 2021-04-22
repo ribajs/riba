@@ -24,7 +24,7 @@ export class Bs5NotificationContainerComponent extends Component {
     return ["icon-url", "position-class", "channel-name"];
   }
 
-  protected scope: Scope = {
+  public scope: Scope = {
     notifications: [],
     positionClass: "absolute-bottom absolute-center",
     channelName: "toast",

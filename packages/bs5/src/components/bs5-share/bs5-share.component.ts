@@ -82,7 +82,7 @@ export class Bs5ShareComponent extends Component {
   // Count of Bs5ShareComponent components
   static count = 0;
 
-  protected scope: Scope;
+  public scope: Scope;
 
   constructor() {
     super();

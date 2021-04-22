@@ -329,7 +329,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
    */
   protected breakpoint: Breakpoint = "xs";
 
-  protected scope: Scope = {
+  public scope: Scope = {
     // Template methods
     next: this.next.bind(this),
     prev: this.prev.bind(this),

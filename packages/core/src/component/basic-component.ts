@@ -8,8 +8,10 @@ import {
   EventHandler,
   ObservedAttributesToCheck,
   TemplateFunction,
+  ObserverSyncCallback,
 } from "../types";
 import { Binding } from "../binding";
+import { Observer } from "../observer";
 import { parseJsonString, camelCase } from "@ribajs/utils/src/type";
 import { getRandomColor, consoleColoured } from "@ribajs/utils/src/color";
 
@@ -28,12 +30,7 @@ export abstract class BasicComponent extends HTMLElement {
 
   protected observedAttributes: string[] = [];
 
-  /**
-   * @deprecated Use `this` instead
-   */
-  protected el: HTMLElement;
-
-  protected abstract scope: any;
+  public abstract scope: any;
 
   constructor() {
     super();
@@ -41,7 +38,6 @@ export abstract class BasicComponent extends HTMLElement {
     if (this._debug) {
       this._color = getRandomColor();
     }
-    this.el = this; // revert
     this.onParentChanged = this.onParentChanged.bind(this);
     this.onRibaAttributeChanged = this.onRibaAttributeChanged.bind(this);
   }
@@ -90,7 +86,7 @@ export abstract class BasicComponent extends HTMLElement {
 
   protected async init(observedAttributes: string[]) {
     this.loadAttributes(observedAttributes);
-    this.initRibaAttributeObserver(observedAttributes);
+    this.initRibaAttributeObserver();
     this.getPassedObservedAttributes(observedAttributes);
     return;
   }
@@ -225,7 +221,6 @@ export abstract class BasicComponent extends HTMLElement {
     // }
 
     this.removeEventListenerForRibaParent();
-    this.removeEventListenersForRibaAttributes(this.observedAttributes);
   }
 
   /**
@@ -251,15 +246,6 @@ export abstract class BasicComponent extends HTMLElement {
     }
 
     newValue = this.parseAttribute(newValue);
-
-    if (oldValue !== newValue) {
-      this.notifyRibaAttributeChanged(
-        attributeName,
-        oldValue,
-        newValue,
-        namespace
-      );
-    }
 
     const parsedAttributeName = camelCase(attributeName);
 
@@ -359,46 +345,10 @@ export abstract class BasicComponent extends HTMLElement {
   }
 
   /**
-   * This is for the rv-co-attribute binder
-   * TODO only notify attributes which are passed as rv-co-*="*"
-   * @param attrName
-   * @param oldValue
-   * @param newValue
-   * @param namespace
+   *
    */
-  protected notifyRibaAttributeChanged(
-    attrName: string,
-    oldValue: any,
-    newValue: any,
-    namespace: any
-  ) {
-    this.dispatchEvent(
-      new CustomEvent("notify-attribute-change:" + attrName, {
-        detail: {
-          name: attrName,
-          oldValue,
-          newValue,
-          namespace,
-        },
-      })
-    );
-  }
-
   protected askForRibaParent() {
     this.dispatchEvent(new CustomEvent("ask-for-parent"));
-  }
-
-  protected askForRibaAttribute(attrName: string) {
-    //TODO Fix if co-* has different keypath as attribute name
-    const eventName = "ask-for-attribute:" + attrName;
-    // this.debug("Trigger " + eventName);
-    this.dispatchEvent(new CustomEvent(eventName));
-  }
-
-  protected askForRibaAttributes(observedAttributes: string[]) {
-    for (const observedAttribute of observedAttributes) {
-      this.askForRibaAttribute(observedAttribute);
-    }
   }
 
   protected onParentChanged(event: CustomEvent) {
@@ -406,6 +356,9 @@ export abstract class BasicComponent extends HTMLElement {
     this.scope.$parent = event.detail;
   }
 
+  /**
+   * @deprecated
+   */
   protected onRibaAttributeChanged(event: CustomEvent) {
     const data = (event as CustomEvent).detail;
     this.debug("onRibaAttributeChanged", data);
@@ -418,6 +371,50 @@ export abstract class BasicComponent extends HTMLElement {
     );
   }
 
+  /**
+   * Observes a object keypath in the scope
+   * @param keypath
+   * @param callback
+   */
+  public observe(keypath: string, callback: ObserverSyncCallback): Observer {
+    return new Observer(this.scope, keypath, callback);
+  }
+
+  public observeAttribute(
+    attributeName: string,
+    callback: ObserverSyncCallback
+  ): Observer {
+    const parsedAttributeName = camelCase(attributeName);
+    return this.observe(parsedAttributeName, callback);
+  }
+
+  /**
+   * This method is called from the componentAttributeBinder
+   * @param attributeName
+   * @param newValue
+   * @param namespace
+   */
+  public setBinderAttribute(
+    attributeName: string,
+    newValue: any,
+    namespace: string | null = null
+  ) {
+    const parsedAttributeName = camelCase(attributeName);
+    const oldValue = this.scope[parsedAttributeName];
+    this.attributeChangedCallback(attributeName, oldValue, newValue, namespace);
+  }
+
+  /**
+   * This method is called from the componentAttributeBinder
+   * @param attributeName
+   * @returns
+   */
+  public getBinderAttribute(attributeName: string) {
+    const parsedAttributeName = camelCase(attributeName);
+    const oldValue = this.scope[parsedAttributeName];
+    return oldValue;
+  }
+
   protected listenForRibaParent() {
     this.addEventListener("parent" as any, this.onParentChanged);
   }
@@ -426,43 +423,9 @@ export abstract class BasicComponent extends HTMLElement {
     this.removeEventListener("parent" as any, this.onParentChanged);
   }
 
-  protected listenForRibaAttribute(attrName: string) {
-    const eventName = "attribute:" + attrName;
-    this.debug("Listen for " + eventName);
-    this.addEventListener(eventName as any, this.onRibaAttributeChanged);
-  }
-
-  protected removeEventListenerForRibaAttribute(attrName: string) {
-    this.removeEventListener(
-      ("attribute:" + attrName) as any,
-      this.onRibaAttributeChanged
-    );
-  }
-
-  /**
-   * This is for the co-attribute-binder
-   * TODO only watch for attributes passed as rv-co-* and not all
-   * @param observedAttributes
-   */
-  protected listenForRibaAttributes(observedAttributes: string[]) {
-    for (const observedAttribute of observedAttributes) {
-      this.listenForRibaAttribute(observedAttribute);
-    }
-  }
-
-  protected removeEventListenersForRibaAttributes(
-    observedAttributes: string[]
-  ) {
-    for (const observedAttribute of observedAttributes) {
-      this.removeEventListenerForRibaAttribute(observedAttribute);
-    }
-  }
-
-  protected initRibaAttributeObserver(observedAttributes: string[]) {
+  protected initRibaAttributeObserver() {
     this.listenForRibaParent();
-    this.listenForRibaAttributes(observedAttributes);
     this.askForRibaParent();
-    this.askForRibaAttributes(observedAttributes);
   }
 
   /**

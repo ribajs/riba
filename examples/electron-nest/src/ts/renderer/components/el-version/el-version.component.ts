@@ -19,7 +19,7 @@ export class ElVersionComponent extends Component {
     return [];
   }
 
-  protected scope: Scope = {
+  public scope: Scope = {
     versions: {},
   };
 

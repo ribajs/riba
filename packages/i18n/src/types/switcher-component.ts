@@ -12,7 +12,7 @@ export interface Scope {
 export abstract class SwitcherComponent extends Component {
   protected abstract localesService?: LocalesService;
 
-  protected scope = {
+  public scope = {
     langcodes: [] as Langcode[],
     switch: this.switch,
     toggle: this.toggle,

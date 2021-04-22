@@ -5,7 +5,7 @@ export interface RibaModule {
    * Binders can be a object of binders named by property key (Binders<any>)
    * or an array of binders with binder and name property (Binder<any>)
    */
-  binders?: Binders<any>;
+  binders?: Binders<any, any>;
 
   /**
    * Components must be a object of component classes

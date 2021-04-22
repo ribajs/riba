@@ -73,7 +73,7 @@ export class Bs5TaggedImageExampleComponent extends Component {
     }));
   }
 
-  protected scope: Scope = {
+  public scope: Scope = {
     responsiveTags: this.getResponsiveTags(),
     fadeshowImages: this.getFadeshowImageTags(),
   };

@@ -32,7 +32,7 @@ export class ShopifyNestContentBlogArticleComponent extends ShopifyNestContentCo
     "component:" + ShopifyNestContentBlogArticleComponent.tagName
   );
 
-  protected scope: Scope = {
+  public scope: Scope = {
     save: this.save,
     new_body_html: "",
   };

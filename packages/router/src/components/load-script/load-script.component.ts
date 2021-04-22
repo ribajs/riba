@@ -17,7 +17,7 @@ export class RouterLoadScriptComponent extends Component {
     return ["src", "id", "async", "defer"];
   }
 
-  protected scope: Scope = {
+  public scope: Scope = {
     src: "",
     id: "",
     async: true,

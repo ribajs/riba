@@ -5,7 +5,7 @@ import { Collapse } from "../../services/collapse";
 export class Bs5NavbarComponent extends Component {
   public static tagName = "bs5-navbar";
 
-  protected scope: any = {
+  public scope: any = {
     toggle: this.toggle,
     show: this.show,
     hide: this.hide,

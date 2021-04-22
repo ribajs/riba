@@ -10,7 +10,7 @@ export abstract class ShopifyNestContentComponent extends Component {
 
   protected debug = Debug("component:" + ShopifyNestContentComponent.tagName);
 
-  protected scope = {};
+  public scope = {};
 
   constructor() {
     super();

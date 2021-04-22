@@ -11,7 +11,7 @@ export class I18nStaticExampleComponent extends Component {
     return [];
   }
 
-  protected scope = {};
+  public scope = {};
 
   constructor() {
     super();

@@ -46,7 +46,7 @@ export class I18nShareComponent extends Bs4ShareComponent {
 
   protected localesService?: LocalesService;
 
-  protected scope: Scope = super.scope;
+  public scope: Scope = super.scope;
 
   constructor() {
     super();

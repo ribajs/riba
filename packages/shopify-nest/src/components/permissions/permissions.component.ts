@@ -37,7 +37,7 @@ export class ShopifyNestPermissionsComponent extends Component {
     "component:" + ShopifyNestPermissionsComponent.tagName
   );
 
-  protected scope: Scope = {
+  public scope: Scope = {
     defaultScopes: [],
     accessScopes: {},
     toggleAll: this.toggleAll,

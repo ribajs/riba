@@ -133,7 +133,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
     "component:" + ShopifyNestApiExplorerComponent.tagName
   );
 
-  protected abstract scope: Scope;
+  public abstract scope: Scope;
 
   constructor() {
     super();

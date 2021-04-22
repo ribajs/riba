@@ -11,7 +11,7 @@ export class IconsetExampleComponent extends Component {
     return ["iconset"];
   }
 
-  protected scope = {
+  public scope = {
     size: 32,
     iconset: [] as string[],
     // Icon colors

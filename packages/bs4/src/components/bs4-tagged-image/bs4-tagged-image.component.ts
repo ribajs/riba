@@ -43,7 +43,7 @@ export class Bs4TaggedImageComponent extends Component {
 
   image?: HTMLImageElement;
 
-  protected scope: Scope = {
+  public scope: Scope = {
     debug: false,
     tags: [],
     options: {

@@ -74,7 +74,7 @@ export class ContentSliderComponent extends TemplatesComponent {
     ];
   }
 
-  protected scope: Scope = {
+  public scope: Scope = {
     // States
     items: [],
     index: 0,

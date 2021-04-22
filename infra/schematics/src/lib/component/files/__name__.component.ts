@@ -21,7 +21,7 @@ export class <%= classify(name) %>Component extends Component {
     return ['hello'];
   }
 
-  protected scope: Scope = {
+  public scope: Scope = {
     hello: '',
   };
 

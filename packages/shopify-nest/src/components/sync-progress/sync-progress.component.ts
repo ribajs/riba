@@ -38,7 +38,7 @@ export class ShopifyNestSyncProgressComponent extends Component {
     includeCustomCollections: true,
   };
 
-  protected scope: Scope = {
+  public scope: Scope = {
     start: this.start,
     cancel: this.cancel,
     restart: this.restart,

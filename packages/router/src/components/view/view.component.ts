@@ -33,7 +33,7 @@ export class RouterViewComponent extends Component {
     ];
   }
 
-  protected scope: Scope = {
+  public scope: Scope = {
     id: "main",
     action: "replace",
     scrollToTop: true,

@@ -89,7 +89,7 @@ export class ShopifyNestApiExplorerFacebookComponent extends ShopifyNestApiExplo
     },
   ];
 
-  protected scope: Scope = {
+  public scope: Scope = {
     langcode: "en",
     self: this,
     result: "",

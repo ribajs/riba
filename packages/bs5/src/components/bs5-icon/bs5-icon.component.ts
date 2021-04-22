@@ -7,7 +7,7 @@ export class Bs5IconComponent extends BasicComponent {
     return ["size", "width", "height", "src", "color", "direction"];
   }
 
-  protected scope: any = {};
+  public scope: any = {};
 
   constructor() {
     super();

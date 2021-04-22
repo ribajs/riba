@@ -17,7 +17,7 @@ export class ShopifyNestShopInputComponent extends Component {
 
   protected debug = Debug("component:" + ShopifyNestShopInputComponent.tagName);
 
-  protected scope: Scope = {
+  public scope: Scope = {
     shop: "",
     submitted: false,
   };

@@ -54,7 +54,7 @@ export class ShopifyLoginFormComponent extends Component {
   protected createCustomerForm: HTMLFormElement | null = null;
   protected recoverCustomerForm: HTMLFormElement | null = null;
 
-  protected scope: Scope = {
+  public scope: Scope = {
     form: {
       customer: {
         email: "",

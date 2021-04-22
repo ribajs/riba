@@ -55,7 +55,7 @@ export class Bs5TabsComponent extends TemplatesComponent {
     },
   ];
 
-  protected scope: Scope = {
+  public scope: Scope = {
     items: new Array<Tab>(),
     activate: this.activate,
     deactivate: this.deactivate,

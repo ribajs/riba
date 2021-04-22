@@ -14,7 +14,7 @@ export class I18nSwitcherComponent extends SwitcherComponent {
 
   protected localesService?: LocalesService;
 
-  protected scope = {
+  public scope = {
     langcodes: [] as Langcode[],
     switch: this.switch,
     toggle: this.toggle,

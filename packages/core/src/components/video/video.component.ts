@@ -115,7 +115,7 @@ export class VideoComponent extends Component {
 
   protected video: HTMLVideoElement;
 
-  protected scope: Scope = {
+  public scope: Scope = {
     // properties
     muted: this.muted,
     volume: this.volume,

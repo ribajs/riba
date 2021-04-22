@@ -57,7 +57,7 @@ export class ShopifyLinklistComponent extends Component {
     ];
   }
 
-  protected scope: Scope = {
+  public scope: Scope = {
     // properties
     pills: false,
     vertical: false,

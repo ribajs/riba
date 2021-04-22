@@ -257,7 +257,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
    */
   protected activeBreakpointName = "xs";
 
-  protected scope: Scope = {
+  public scope: Scope = {
     breakpoints: {},
     activeBreakpoint: this.getDefaultBreakpointOptions(),
 

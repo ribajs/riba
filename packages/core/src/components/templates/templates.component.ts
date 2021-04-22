@@ -20,7 +20,7 @@ export abstract class TemplatesComponent extends Component {
 
   protected templateReady = false;
 
-  protected abstract scope: Scope;
+  public abstract scope: Scope;
 
   protected connectedCallback() {
     this.addItemsByTemplate();

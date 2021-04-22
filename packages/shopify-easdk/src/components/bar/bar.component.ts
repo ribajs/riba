@@ -65,7 +65,7 @@ export class BarComponent extends Component {
 
   protected bar: BarWrapper = new BarWrapperService();
 
-  protected scope: Scope = {
+  public scope: Scope = {
     showFallbackBar: false,
   };
 

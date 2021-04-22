@@ -51,7 +51,7 @@ export class Bs5ToggleButtonComponent extends Component {
 
   protected lifecycleEvents = EventDispatcher.getInstance("lifecycle");
 
-  protected scope: Scope = {
+  public scope: Scope = {
     targetId: undefined,
     toggle: this.toggle,
     state: "undefined",

@@ -8,7 +8,7 @@ export class ShopifyProductScrollbarComponent extends Component {
     return [];
   }
 
-  protected scope: any = {
+  public scope: any = {
     onScroll: this.onScroll,
     onProductTap: this.onProductTap,
     onProductMouseenter: this.onProductMouseenter,

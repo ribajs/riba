@@ -16,7 +16,7 @@ export class Bs5DropdownExampleComponent extends Component {
     return [];
   }
 
-  protected scope = {
+  public scope = {
     dropdownBinderLabel: "Dropdown binder",
     items: [
       {

@@ -21,7 +21,7 @@ export class ShopifyNestPlansComponent extends Component {
 
   protected debug = Debug("component:" + ShopifyNestPlansComponent.tagName);
 
-  protected scope: Scope = {
+  public scope: Scope = {
     plans: [],
     active: undefined,
     hasActive: false,
