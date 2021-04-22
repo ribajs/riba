@@ -4487,6 +4487,7 @@ __metadata:
     "@babel/preset-typescript": ^7.13.0
     "@babel/runtime": ^7.13.17
     "@babel/runtime-corejs3": ^7.13.17
+    "@ribajs/babel-config": "workspace:infra/babel-config"
     "@ribajs/bs5": "workspace:packages/bs5"
     "@ribajs/core": "workspace:packages/core"
     "@ribajs/extras": "workspace:packages/extras"

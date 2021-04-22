@@ -30,6 +30,7 @@
     "@babel/preset-typescript": "^7.13.0",
     "@babel/runtime": "^7.13.17",
     "@babel/runtime-corejs3": "^7.13.17",
+    "@ribajs/babel-config": "workspace:infra/babel-config",
     "@ribajs/tsconfig": "workspace:infra/tsconfig",
     "@ribajs/webpack-config": "workspace:infra/webpack-config",
     "@ribajs/webpack-serve": "workspace:infra/webpack-serve",
