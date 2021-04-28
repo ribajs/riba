@@ -11,6 +11,12 @@ export const parentBinder: Binder<any, BasicComponent> = {
     /**/
   },
   bind(el) {
-    el.setBinderAttribute("$parent", this.view.models);
+    if (el.setBinderAttribute) {
+      el.setBinderAttribute("$parent", this.view.models);
+    } else {
+      console.warn(
+        "[parentBinder] You can only this binder on Riba components"
+      );
+    }
   },
 };

@@ -11,7 +11,13 @@ export const componentAttributeBinder: Binder<any, BasicComponent> = {
   publishes: true,
   routine(el: BasicComponent, value: any) {
     const attrName = (this.args[0] as string).trim();
-    el.setBinderAttribute(attrName, value);
+    if (el.setBinderAttribute) {
+      el.setBinderAttribute(attrName, value);
+    } else {
+      console.warn(
+        "[componentAttributeBinder] You can only this binder on Riba components"
+      );
+    }
   },
   bind(el) {
     const attrName = (this.args[0] as string).trim();
