@@ -87,7 +87,7 @@ export class Bs4TaggedImageComponent extends Component {
       if (this.bound) {
         this.scope.options = newValue;
       } else {
-        this.scope.options = extend(true, oldValue, newValue);
+        this.scope.options = extend({ deep: true }, oldValue, newValue);
       }
       const po = this.scope.options.popoverOptions;
       if (po && typeof po.container === "string") {

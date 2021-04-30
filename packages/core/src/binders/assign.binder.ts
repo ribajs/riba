@@ -17,7 +17,7 @@ export const assignBinder: Binder<Assign> = {
   name: "assign",
   routine(el: HTMLElement, value: any) {
     if (typeof value === "object") {
-      return extend(false, this.view.models, value);
+      return extend({ deep: false }, this.view.models, value);
     }
     console.warn("Value must be an object or propertyName is required");
   },

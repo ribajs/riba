@@ -1,4 +1,4 @@
-import { concat } from "@ribajs/utils/src/type";
+import { extend } from "@ribajs/utils/src/type";
 import { HttpMethod } from "../types/http-method";
 import { HttpServiceOptions, HttpServiceResponse } from "../types";
 
@@ -148,7 +148,7 @@ export class HttpService {
     }
 
     if (dataType) {
-      headers = concat(false, headers, this.parseDataType(dataType));
+      headers = extend({ deep: false }, headers, this.parseDataType(dataType));
     }
 
     if (!options.crossDomain && !headers["X-Requested-With"]) {

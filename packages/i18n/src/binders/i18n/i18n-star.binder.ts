@@ -1,5 +1,5 @@
 import { Binder } from "@ribajs/core";
-import { concat } from "@ribajs/utils/src/type";
+import { extend } from "@ribajs/utils/src/type";
 import { I18nService } from "../../services/i18n.service";
 
 // see star.binder.ts
@@ -68,13 +68,21 @@ export const i18nStarBinder: Binder<string> = {
     this.customData.parseVars = (_el: HTMLElement) => {
       // parse templates to vars
       const newVars = this.customData.i18n.parseTemplateVars(_el);
-      this.customData.vars = concat(true, this.customData.vars, newVars);
+      this.customData.vars = extend(
+        { deep: true },
+        this.customData.vars,
+        newVars
+      );
       // if (Object.keys(this.customData.vars).length) {
       //   console.warn('parsed templates vars', this.customData.vars);
       // }
 
       // parse data attributes to vars
-      this.customData.vars = concat(true, this.customData.vars, _el.dataset);
+      this.customData.vars = extend(
+        { deep: true },
+        this.customData.vars,
+        _el.dataset
+      );
       // if (Object.keys(this.customData.vars).length) {
       //   console.warn('parsed attribute vars', this.customData.vars);
       // }
@@ -150,7 +158,11 @@ export const i18nStarBinder: Binder<string> = {
         const newVar: any = {};
         newVar[varName] = data.detail.newValue;
         // console.warn('binder-changed newVar', newVar);
-        this.customData.vars = concat(true, this.customData.vars, newVar);
+        this.customData.vars = extend(
+          { deep: true },
+          this.customData.vars,
+          newVar
+        );
         this.customData.translate();
       }
     };

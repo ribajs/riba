@@ -1,6 +1,5 @@
 import {
   isString,
-  isArray,
   isObject,
   isDefined,
   isNumber,
@@ -15,7 +14,7 @@ export const containsFormatter = {
   read(value: string | any | any[], attr: string | number, search: string) {
     if (isString(value)) {
       return value.indexOf(attr) > -1;
-    } else if (isArray(value)) {
+    } else if (Array.isArray(value)) {
       if (!isNumber(attr)) {
         console.warn(
           "[containsFormatter] The second parameter must be of type number for arrays but is " +

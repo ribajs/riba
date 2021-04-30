@@ -1,4 +1,4 @@
-import { isArray, isNumber } from "@ribajs/utils/src/type";
+import { isNumber } from "@ribajs/utils/src/type";
 
 /**
  * Gets back random value of array
@@ -14,7 +14,7 @@ export const randomFormatter = {
   name: "random",
   read(arrayOrMaxNumber: any, min = 0) {
     // If is array
-    if (isArray(arrayOrMaxNumber)) {
+    if (Array.isArray(arrayOrMaxNumber)) {
       return arrayOrMaxNumber[
         Math.floor(Math.random() * arrayOrMaxNumber.length)
       ];

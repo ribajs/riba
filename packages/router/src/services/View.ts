@@ -20,7 +20,7 @@ abstract class BaseView {
    * Helper to extend the object
    */
   public extend(obj: any) {
-    return extend(false, this, obj);
+    return extend({ deep: false }, this, obj);
   }
 
   /**

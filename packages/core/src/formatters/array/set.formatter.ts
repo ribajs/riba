@@ -1,4 +1,4 @@
-import { isArray, isObject } from "@ribajs/utils/src/type";
+import { isObject } from "@ribajs/utils/src/type";
 
 /**
  * Sets property of object, array or value
@@ -12,7 +12,7 @@ export const setFormatter = {
       value = key;
     }
 
-    if (isObject(obj) || isArray(obj)) {
+    if (isObject(obj) || Array.isArray(obj)) {
       obj[key] = value;
     } else {
       obj = value;

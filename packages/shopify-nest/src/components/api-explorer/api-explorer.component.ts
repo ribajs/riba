@@ -1,5 +1,5 @@
 import { Component, TemplateFunction, HttpService } from "@ribajs/core";
-import { isNumber, concat, hasChildNodesTrim } from "@ribajs/utils";
+import { isNumber, extend, hasChildNodesTrim } from "@ribajs/utils";
 import Debug from "debug";
 
 import { DropdownService } from "@ribajs/bs4";
@@ -369,7 +369,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
       this.scope.currentQueries.forEach((currentQuery) => {
         this.loadQueryValues(currentQuery)
           .then((query) => {
-            currentQuery = concat(false, currentQuery, query);
+            currentQuery = extend({ deep: false }, currentQuery, query);
           })
           .catch((error) => {
             console.error(error);
