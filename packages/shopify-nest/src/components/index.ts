@@ -6,6 +6,7 @@ export { ShopifyNestApiSocketExplorerComponent } from "./api-socket-explorer/api
 export { ShopifyNestContentBlogArticleComponent } from "./content-article/content-article.component";
 export { ShopifyNestContentBlogArticlesComponent } from "./content-articles/content-articles.component";
 export { ShopifyNestContentBlogsComponent } from "./content-blogs/content-blogs.component";
+export { ShopifyNestPermissionsCardComponent } from "./permissions-card/permissions-card.component";
 export { ShopifyNestPermissionsComponent } from "./permissions/permissions.component";
 export { ShopifyNestPlansComponent } from "./plans/plans.component";
 export { ShopifyNestSocketEventCardComponent } from "./socket-event-card/socket-event-card.component";

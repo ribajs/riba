@@ -22,6 +22,7 @@ interface AccessScopes {
 
 interface Scope {
   defaultScopes: string[];
+  selectedScopes: string[];
   accessScopes: AccessScopes;
   toggleAll: ShopifyNestPermissionsComponent["toggleAll"];
 }
@@ -39,6 +40,7 @@ export class ShopifyNestPermissionsComponent extends Component {
 
   public scope: Scope = {
     defaultScopes: [],
+    selectedScopes: [],
     accessScopes: {},
     toggleAll: this.toggleAll,
   };
@@ -64,7 +66,15 @@ export class ShopifyNestPermissionsComponent extends Component {
     }
   }
 
+  protected async fetchAccessScopes() {
+    console.log("fetch them scopes, boi");
+    this.scope.selectedScopes = ((x) => (x && JSON.parse(x)) || [])(
+      await (await fetch("/shopify/api/access-scopes")).text()
+    ).map((scope: { handle: string }) => scope.handle);
+  }
+
   protected groupAccessScopes() {
+    console.log("group them scopes, boi");
     for (const ACCESS_SCOPE of ACCESS_SCOPES) {
       const groupKey = ACCESS_SCOPE.replace(/^(read_|write_)/i, "");
       this.scope.accessScopes[groupKey] = this.scope.accessScopes[groupKey] || {
@@ -78,7 +88,10 @@ export class ShopifyNestPermissionsComponent extends Component {
         this.scope.accessScopes[groupKey].items.push({
           value: ACCESS_SCOPE,
           action: ACCESS_SCOPE.replace("_" + groupKey, "") as "read" | "write",
-          checked: this.scope.defaultScopes.indexOf(ACCESS_SCOPE) !== -1,
+          checked:
+            [...this.scope.defaultScopes, ...this.scope.selectedScopes].indexOf(
+              ACCESS_SCOPE
+            ) !== -1,
           disabled: this.scope.defaultScopes.indexOf(ACCESS_SCOPE) !== -1,
         });
       }
@@ -93,6 +106,7 @@ export class ShopifyNestPermissionsComponent extends Component {
   protected async beforeBind() {
     this.debug("beforeBind");
     await super.beforeBind();
+    await this.fetchAccessScopes();
     this.groupAccessScopes();
   }
 
