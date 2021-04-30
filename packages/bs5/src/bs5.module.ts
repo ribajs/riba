@@ -1,5 +1,5 @@
 import { RibaModule } from "@ribajs/core";
-import { concat } from "@ribajs/utils/src/type";
+import { extend } from "@ribajs/utils/src/type";
 import { Bs5ModuleOptions } from "./types";
 
 import * as binders from "./binders";
@@ -15,8 +15,8 @@ export const bs5Module: RibaModule = {
   components,
   constants,
   init(partialOptions: Partial<Bs5ModuleOptions> = {}) {
-    const options = concat(
-      true,
+    const options = extend(
+      { deep: true },
       partialOptions,
       constants.DEFAULT_MODULE_OPTIONS
     ) as Bs5ModuleOptions;
