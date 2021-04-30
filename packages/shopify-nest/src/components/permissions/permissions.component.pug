@@ -1,13 +1,16 @@
+input(rv-if="shop" name="shop" rv-value="shop" type="hidden")
 .row
   .col-12.col-md-8.col-xl-6.mx-auto
     .row.my-3
       .col-auto.text-center.mx-auto.mt-3
         h1 Access scopes
         p Toggle which access scopes you wish to grant permission for in the app.
-        .scopes-list.text-center
+        .scopes-list.text-center.d-flex.justify-content-around.align-items-center
+          .btn.btn-secondary.btn-sm(rv-if="shop" rv-on-click="resetSelection") Reset selection
           .custom-control.custom-switch.custom-switch-primary
             input(type="checkbox" class="custom-control-input" id="scope-all" value="" rv-on-change="toggleAll")
             label(class="custom-control-label" for="scope-all") select all
+          input.btn.btn-primary.btn-sm(rv-if="shop" type="submit" value="Save changes")
     .row.my-3
       .col-6.col-md-4.offset-md-2.my-3(rv-each-group="accessScopes")
         h4 { %group% }

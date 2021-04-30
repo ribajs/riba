@@ -25,6 +25,8 @@ interface Scope {
   selectedScopes: string[];
   accessScopes: AccessScopes;
   toggleAll: ShopifyNestPermissionsComponent["toggleAll"];
+  resetSelection: ShopifyNestPermissionsComponent["resetSelection"];
+  shop: string | undefined;
 }
 
 export class ShopifyNestPermissionsComponent extends Component {
@@ -43,6 +45,8 @@ export class ShopifyNestPermissionsComponent extends Component {
     selectedScopes: [],
     accessScopes: {},
     toggleAll: this.toggleAll,
+    resetSelection: this.resetSelection,
+    shop: (window as any).shop,
   };
 
   constructor() {
@@ -67,14 +71,14 @@ export class ShopifyNestPermissionsComponent extends Component {
   }
 
   protected async fetchAccessScopes() {
-    console.log("fetch them scopes, boi");
-    this.scope.selectedScopes = ((x) => (x && JSON.parse(x)) || [])(
-      await (await fetch("/shopify/api/access-scopes")).text()
-    ).map((scope: { handle: string }) => scope.handle);
+    if (this.scope.shop) {
+      this.scope.selectedScopes = ((x) => (x && JSON.parse(x)) || [])(
+        await (await fetch("/shopify/api/access-scopes")).text()
+      ).map((scope: { handle: string }) => scope.handle);
+    }
   }
 
-  protected groupAccessScopes() {
-    console.log("group them scopes, boi");
+  public groupAccessScopes() {
     for (const ACCESS_SCOPE of ACCESS_SCOPES) {
       const groupKey = ACCESS_SCOPE.replace(/^(read_|write_)/i, "");
       this.scope.accessScopes[groupKey] = this.scope.accessScopes[groupKey] || {
@@ -94,6 +98,22 @@ export class ShopifyNestPermissionsComponent extends Component {
             ) !== -1,
           disabled: this.scope.defaultScopes.indexOf(ACCESS_SCOPE) !== -1,
         });
+      }
+    }
+  }
+
+  public resetSelection() {
+    for (const ACCESS_SCOPE of ACCESS_SCOPES) {
+      const groupKey = ACCESS_SCOPE.replace(/^(read_|write_)/i, "");
+      const action = ACCESS_SCOPE.replace("_" + groupKey, "");
+      const accessScope = this.scope.accessScopes[groupKey].items.find(
+        (item) => item.action === action
+      );
+      if (accessScope) {
+        accessScope.checked =
+          [...this.scope.defaultScopes, ...this.scope.selectedScopes].indexOf(
+            ACCESS_SCOPE
+          ) !== -1;
       }
     }
   }
