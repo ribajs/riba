@@ -23,10 +23,10 @@
   "module": "dist/esm/index.js",
   "source": "src/index.ts",
   "devDependencies": {
-    "@babel/runtime": "^7.13.17",
-    "@babel/runtime-corejs3": "^7.13.17",
+    "@babel/runtime": "^7.14.0",
+    "@babel/runtime-corejs3": "^7.14.0",
     "@types/jest": "^26.0.23",
-    "@types/node": "^14.14.43",
+    "@types/node": "^15.0.1",
     "babel-jest": "^26.6.3",
     "eslint": "^7.25.0",
     "jest": "^26.6.3",

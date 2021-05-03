@@ -34,7 +34,7 @@
     "pug": "^3.0.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.6.7",
+    "rxjs": "^7.0.0",
     "tinyliquid": "^0.2.34",
     "twig": "^1.15.4",
     "yaml": "next"
@@ -46,7 +46,7 @@
     "@types/cookie-parser": "^1.4.2",
     "@types/express-session": "^1.17.3",
     "@types/jest": "^26.0.23",
-    "@types/node": "^14.14.43",
+    "@types/node": "^15.0.1",
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
