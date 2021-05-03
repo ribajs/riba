@@ -43,7 +43,7 @@ export const onEventBinder: Binder<eventHandlerFunction> = {
     try {
       JQuery(el).on(eventName, (event, extraParameters = {}) => {
         (event as any).data = extend(
-          false,
+          { deep: false },
           (event as any).data || {},
           extraParameters
         );
@@ -53,7 +53,7 @@ export const onEventBinder: Binder<eventHandlerFunction> = {
       console.warn(error);
       JQuery(el).on(eventName, (event: JQuery.Event, extraParameters: any) => {
         (event as any).data = extend(
-          false,
+          { deep: false },
           (event as any).data || {},
           extraParameters
         );
