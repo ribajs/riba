@@ -44,19 +44,19 @@
     "postcss-preset-env": "^6.7.0"
   },
   "optionalDependencies": {
-    "@ribajs/bs4": "portal:packages/bs4",
-    "@ribajs/bs5": "portal:packages/bs5",
-    "@ribajs/content-slider": "portal:packages/content-slider",
-    "@ribajs/core": "portal:packages/core",
-    "@ribajs/i18n": "portal:packages/i18n",
-    "@ribajs/iconset": "portal:packages/iconset",
-    "@ribajs/leaflet-map": "portal:packages/leaflet-map",
-    "@ribajs/moment": "portal:packages/moment",
-    "@ribajs/octobercms": "portal:packages/octobercms",
-    "@ribajs/photoswipe": "portal:packages/photoswipe",
-    "@ribajs/shopify": "portal:packages/shopify",
-    "@ribajs/shopify-easdk": "portal:packages/shopify-easdk",
-    "@ribajs/shopify-tda": "portal:packages/shopify-tda",
+    "@ribajs/bs4": "workspace:*",
+    "@ribajs/bs5": "workspace:*",
+    "@ribajs/content-slider": "workspace:*",
+    "@ribajs/core": "workspace:*",
+    "@ribajs/i18n": "workspace:*",
+    "@ribajs/iconset": "workspace:*",
+    "@ribajs/leaflet-map": "workspace:*",
+    "@ribajs/moment": "workspace:*",
+    "@ribajs/octobercms": "workspace:*",
+    "@ribajs/photoswipe": "workspace:*",
+    "@ribajs/shopify": "workspace:*",
+    "@ribajs/shopify-easdk": "workspace:*",
+    "@ribajs/shopify-tda": "workspace:*",
     "leaflet": "^1.7.1"
   }
 }
