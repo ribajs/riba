@@ -16,9 +16,9 @@
   "dependencies": {
     "@babel/core": "^7.14.0",
     "@graphql-tools/webpack-loader": "^6.4.0",
-    "@ribajs/eslint-config": "workspace:infra/eslint-config",
-    "@ribajs/npm-package": "workspace:infra/npm-package",
-    "@ribajs/postcss-config": "workspace:infra/postcss-config",
+    "@ribajs/eslint-config": "workspace:*",
+    "@ribajs/npm-package": "workspace:*",
+    "@ribajs/postcss-config": "workspace:*",
     "@yarnpkg/pnpify": "^3.0.0-rc.3",
     "babel-loader": "^8.2.2",
     "copy-webpack-plugin": "^8.1.1",

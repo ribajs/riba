@@ -15,7 +15,7 @@
     "index.js"
   ],
   "dependencies": {
-    "@ribajs/webpack-config": "workspace:infra/webpack-config",
+    "@ribajs/webpack-config": "workspace:*",
     "get-port": "^5.1.1",
     "pkg-dir": "^5.0.0",
     "webpack-dev-server": "^3.11.2",

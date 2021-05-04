@@ -2,8 +2,8 @@
   "name": "@ribajs/ssr",
   "version": "2.0.0-alpha.0",
   "dependencies": {
-    "@ribajs/core": "workspace:packages/core",
-    "@ribajs/events": "workspace:packages/events",
+    "@ribajs/core": "workspace:*",
+    "@ribajs/events": "workspace:*",
     "@types/express": "^4.17.11"
   },
   "main": "src/index.ts",

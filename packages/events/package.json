@@ -14,7 +14,7 @@
     "/dist"
   ],
   "dependencies": {
-    "@ribajs/tsconfig": "workspace:infra/tsconfig",
+    "@ribajs/tsconfig": "workspace:*",
     "typescript": "^4.2.4"
   },
   "main": "dist/cjs/index.js",

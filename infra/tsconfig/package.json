@@ -31,7 +31,7 @@
   ],
   "scripts": {},
   "devDependencies": {
-    "@ribajs/types": "workspace:infra/types"
+    "@ribajs/types": "workspace:*"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

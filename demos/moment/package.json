@@ -33,10 +33,10 @@
     "@babel/preset-typescript": "^7.13.0",
     "@babel/runtime": "^7.14.0",
     "@babel/runtime-corejs3": "^7.14.0",
-    "@ribajs/eslint-config": "workspace:infra/eslint-config",
-    "@ribajs/tsconfig": "workspace:infra/tsconfig",
-    "@ribajs/types": "workspace:infra/types",
-    "@ribajs/webpack-config": "workspace:infra/webpack-config",
+    "@ribajs/eslint-config": "workspace:*",
+    "@ribajs/tsconfig": "workspace:*",
+    "@ribajs/types": "workspace:*",
+    "@ribajs/webpack-config": "workspace:*",
     "@types/jest": "^26.0.23",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
@@ -70,11 +70,11 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "@ribajs/bs4": "workspace:packages/bs4",
-    "@ribajs/core": "workspace:packages/core",
-    "@ribajs/moment": "workspace:packages/moment",
-    "@ribajs/utils": "workspace:packages/utils",
-    "@ribajs/webpack-serve": "workspace:infra/webpack-serve",
+    "@ribajs/bs4": "workspace:*",
+    "@ribajs/core": "workspace:*",
+    "@ribajs/moment": "workspace:*",
+    "@ribajs/utils": "workspace:*",
+    "@ribajs/webpack-serve": "workspace:*",
     "bootstrap": "4.6.0"
   }
 }
