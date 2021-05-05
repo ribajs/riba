@@ -33,7 +33,7 @@ export abstract class ShopifyNestContentComponent extends Component {
     await super.afterBind();
   }
 
-  protected attributeChangedCallback(
+  protected async attributeChangedCallback(
     attributeName: string,
     oldValue: any,
     newValue: any,

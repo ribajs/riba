@@ -149,7 +149,7 @@ export class Bs5ContentsComponent extends Component {
     return ["headersStart", "headersDepth", "headerParentSelector"];
   }
 
-  protected attributeChangedCallback(
+  protected async attributeChangedCallback(
     attributeName: string,
     oldValue: any,
     newValue: any,

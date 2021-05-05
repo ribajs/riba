@@ -111,7 +111,7 @@ export class Bs4ToggleButtonComponent extends Component {
     );
   }
 
-  protected attributeChangedCallback(
+  protected async attributeChangedCallback(
     attributeName: string,
     oldValue: any,
     newValue: any,

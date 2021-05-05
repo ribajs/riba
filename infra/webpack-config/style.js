@@ -26,7 +26,7 @@ module.exports.getStyleLoaderRule = (config = {}) => {
   ) {
     config.styles.resolveUrl = (url /*, resourcePath*/) => {
       // Ignore assets
-      if (/\.(gif|jpe?g|tiff?|png|svg|webp|bmp|ttf)$/i.test(url)) {
+      if (/\.(gif|jpe?g|tiff?|png|svg|webp|bmp|ttf|woff|woff2)$/i.test(url)) {
         return false;
       }
       // Enabled for all other file extensions

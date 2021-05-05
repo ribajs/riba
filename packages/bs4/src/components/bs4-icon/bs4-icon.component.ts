@@ -13,7 +13,7 @@ export class Bs4IconComponent extends BasicComponent {
     super();
   }
 
-  public attributeChangedCallback(
+  protected async attributeChangedCallback(
     name: string,
     oldValue: any,
     newValue: any,
@@ -25,7 +25,7 @@ export class Bs4IconComponent extends BasicComponent {
     if (name === "src") {
       if (!newValue) {
         console.warn("The src attribute must have a value!", this.scope);
-        return "";
+        return;
       }
       if (fetch) {
         fetch(newValue)

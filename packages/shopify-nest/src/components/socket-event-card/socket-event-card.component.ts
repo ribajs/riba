@@ -59,7 +59,7 @@ export class ShopifyNestSocketEventCardComponent extends Component {
     return ["event"];
   }
 
-  protected attributeChangedCallback(
+  protected async attributeChangedCallback(
     attributeName: string,
     oldValue: any,
     newValue: any,

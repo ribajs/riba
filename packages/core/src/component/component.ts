@@ -8,7 +8,7 @@ import { Riba } from "../riba";
 import { BasicComponent } from "./basic-component";
 import { Formatter } from "../types";
 import { EventDispatcher } from "@ribajs/events";
-import type { ComponentLifecycleEventData } from "../types";
+import type { ComponentLifecycleEventData, Binder } from "../types";
 
 export abstract class Component extends BasicComponent {
   protected view?: View | null = null;
@@ -236,7 +236,7 @@ export abstract class Component extends BasicComponent {
    * @param newValue
    * @param namespace
    */
-  protected attributeChangedCallback(
+  protected async attributeChangedCallback(
     attributeName: string,
     oldValue: any,
     newValue: any,
@@ -249,7 +249,7 @@ export abstract class Component extends BasicComponent {
         newValue,
         namespace
       );
-      this.bindIfReady();
+      await this.bindIfReady();
     } catch (error) {
       this.throw(error);
     }
@@ -263,11 +263,9 @@ export abstract class Component extends BasicComponent {
       name: "call",
       read: (fn: (...args: any[]) => any, ...args: any[]) => {
         if (!fn) {
-          console.error(
-            `[${self.tagName}] Can not use "call" formatter: fn is undefined! Arguments: `,
-            args
+          throw new Error(
+            `[${self.tagName}] Can not use "call" formatter: fn is undefined!`
           );
-          throw new Error("TypeError: fn is undefined");
         }
         return fn.apply(self, args);
       },
@@ -285,7 +283,13 @@ export abstract class Component extends BasicComponent {
     return {
       name: "args",
       read: (fn: (...args: any[]) => any, ...fnArgs: any[]) => {
-        return (event: Event, scope: any, el: HTMLElement, binding: any) => {
+        return (event: Event, scope: any, el: HTMLElement, binding: Binder) => {
+          if (!fn) {
+            throw new Error(
+              `[${self.tagName}] Can not use "args" formatter: fn is undefined!`
+            );
+          }
+
           // append the event handler args to passed args
           fnArgs.push(event);
           fnArgs.push(scope);

@@ -173,7 +173,7 @@ export class ContentSliderComponent extends TemplatesComponent {
     await super.afterBind();
   }
 
-  protected attributeChangedCallback(
+  protected async attributeChangedCallback(
     attributeName: string,
     oldValue: any,
     newValue: any,
