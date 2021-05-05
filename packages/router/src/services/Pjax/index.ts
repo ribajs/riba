@@ -2,11 +2,7 @@ export * from "./Dom";
 export * from "./Prefetch";
 
 import { EventDispatcher } from "@ribajs/events";
-import {
-  HttpService,
-  HttpServiceOptions,
-  HttpServiceResponse,
-} from "@ribajs/core";
+import { HttpService, HttpServiceOptions } from "@ribajs/core";
 import {
   cleanLink,
   getPort,
@@ -33,7 +29,7 @@ export interface PjaxInstances {
  * @borrows Dom as Dom
  */
 class Pjax {
-  public static cache = new BaseCache<Response>();
+  public static cache = new BaseCache<Promise<Response>>();
 
   public static getInstance(id = "main"): Pjax | undefined {
     const result = Pjax.instances[id];
@@ -275,7 +271,11 @@ class Pjax {
    */
   public start() {
     if (this.wrapper) {
-      this.init(this.wrapper, this.listenAllLinks, this.listenPopstate);
+      try {
+        this.init(this.wrapper, this.listenAllLinks, this.listenPopstate);
+      } catch (error) {
+        console.error(error);
+      }
     } else {
       console.error(`Can't init pjax without wrapper`);
     }
@@ -384,29 +384,26 @@ class Pjax {
    * Also puts the container to the DOM and sets the title (if this option is active)
    */
   public async loadCached(url: string): Promise<HTMLElement> {
-    const response = this.loadResponseCached(url, false, true);
+    try {
+      const response = await this.loadResponseCached(url, false, true);
+      if (!this.wrapper) {
+        throw new Error("[Pjax] you need a wrapper!");
+      }
+      Dom.putContainer(response.container, this.wrapper);
+      if (this.parseTitle === true && response.title) {
+        document.title = response.title;
+      }
+      if (this.prefetchLinks === true && response.prefetchLinks) {
+        this.replacePrefetchLinkElements(response.prefetchLinks);
+      }
 
-    return response
-      .then((_response) => {
-        if (!this.wrapper) {
-          throw new Error("[Pjax] you need a wrapper!");
-        }
-        Dom.putContainer(_response.container, this.wrapper);
-        if (this.parseTitle === true && _response.title) {
-          document.title = _response.title;
-        }
-        if (this.prefetchLinks === true && _response.prefetchLinks) {
-          this.replacePrefetchLinkElements(_response.prefetchLinks);
-        }
-
-        return _response.container;
-      })
-      .catch((error: any) => {
-        console.error(error);
-        // Something went wrong (timeout, 404, 505...)
-        this.forceGoTo(url);
-        throw error;
-      });
+      return response.container;
+    } catch (error) {
+      console.error(error);
+      // Something went wrong (timeout, 404, 505...)
+      this.forceGoTo(url);
+      throw error;
+    }
   }
 
   /**
@@ -420,30 +417,22 @@ class Pjax {
     forceCache = false,
     fallback = true
   ) {
+    let response: Promise<Response>;
     if (this.cacheEnabled) {
-      const cachedResponse = Pjax.cache.get(url);
-      if (cachedResponse) {
-        return cachedResponse;
+      const response = await Pjax.cache.get(url);
+      if (response) {
+        return response;
       }
     }
-    const options: HttpServiceOptions = forceCache
-      ? { cache: "force-cache" }
-      : {};
-
-    let data: HttpServiceResponse<string> | void;
-    let response: Response;
 
     try {
-      data = await HttpService.get<string>(url, undefined, "html", {}, options);
-      if (!data || !data.body) {
-        throw new Error("No body!");
+      response = this.loadResponse(url, forceCache);
+
+      if (this.cacheEnabled && response) {
+        Pjax.cache.set(url, response);
+      } else {
+        // Pjax.cache.reset();
       }
-      response = Dom.parseResponse(
-        data.body,
-        this.parseTitle,
-        this.containerSelector,
-        this.prefetchLinks
-      );
     } catch (error) {
       console.error(error);
       if (fallback) {
@@ -452,11 +441,34 @@ class Pjax {
       throw error;
     }
 
-    if (this.cacheEnabled && response /*&& data.status < 400*/) {
-      Pjax.cache.set(url, response);
-    } else {
-      // Pjax.cache.reset();
+    return response;
+  }
+
+  /**
+   * Load an url, will start an fetch request and will return a `Response` object
+   * @param url Url to get from cache or to make the request for
+   * @param forceCache Force to use the browser build in cache, for more information see `force-cache` on https://developer.mozilla.org/en-US/docs/Web/API/Request/cache
+   */
+  public async loadResponse(url: string, forceCache = false) {
+    const options: HttpServiceOptions = forceCache
+      ? { cache: "force-cache" }
+      : {};
+    const data = await HttpService.get<string>(
+      url,
+      undefined,
+      "html",
+      {},
+      options
+    );
+    if (!data || !data.body) {
+      throw new Error("No body!");
     }
+    const response = Dom.parseResponse(
+      data.body,
+      this.parseTitle,
+      this.containerSelector,
+      this.prefetchLinks
+    );
     return response;
   }
 

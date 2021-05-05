@@ -104,6 +104,7 @@ class Prefetch {
       if (pjax) {
         pjax.loadResponseCached(url, false, false).catch((error) => {
           el.classList.add(ROUTE_ERROR_CLASS);
+          console.error(url);
           console.error(error);
         });
       } else {
