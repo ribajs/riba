@@ -25,7 +25,7 @@ import templateIndicators from "./bs5-slideshow-indicators.component.html";
 
 const SLIDESHOW_INNER_SELECTOR = ".slideshow-row";
 
-const SLIDES_SELECTOR = `${SLIDESHOW_INNER_SELECTOR} > .slide`;
+const SLIDES_SELECTOR = `${SLIDESHOW_INNER_SELECTOR} .slide`;
 
 export interface ResponsiveOptions {
   /** Show controls */
@@ -80,7 +80,7 @@ export interface Scope extends Options {
   goTo: Bs5SlideshowComponent["goTo"];
   controlsPositionClass: string;
   indicatorsPositionClass: string;
-  items: SlideshowSlide[];
+  items?: SlideshowSlide[];
   /** Active breakpoint options */
   activeBreakpoint: ResponsiveOptions;
 }
@@ -94,20 +94,25 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       this._slideshowInner = this.querySelector(SLIDESHOW_INNER_SELECTOR);
     }
     if (!this._slideshowInner) {
-      throw new Error(
-        `Child element with selector ${SLIDESHOW_INNER_SELECTOR} not found!`
+      console.warn(
+        new Error(
+          `Child element with selector ${SLIDESHOW_INNER_SELECTOR} not found!`
+        )
       );
     }
     return this._slideshowInner;
   }
 
   protected get slideElements() {
-    if (!this._slideElements) {
+    if (
+      !this._slideElements?.length ||
+      this.scope.items?.length !== this._slideElements?.length
+    ) {
       this._slideElements = this.querySelectorAll(SLIDES_SELECTOR);
     }
-    if (!this._slideElements) {
-      throw new Error(
-        `Child element with selector ${SLIDES_SELECTOR} not found!`
+    if (!this._slideElements?.length) {
+      console.warn(
+        new Error(`Child element with selector ${SLIDES_SELECTOR} not found!`)
       );
     }
     return this._slideElements;
@@ -268,7 +273,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     goTo: this.goTo.bind(this),
 
     // Template properties
-    items: new Array<SlideshowSlide>(),
+    items: undefined,
 
     // Classes
     controlsPositionClass: "",
@@ -307,15 +312,20 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
    * @param index
    */
   public goTo(index: number) {
+    if (index < 0) {
+      this.throw(new Error(`Can't go to slide of index ${index}`));
+      return;
+    }
     this.setSlidePositions();
     let top = 0;
     let left = 0;
 
-    if (!this.scope.items[index]) {
-      console.error(
-        `Slide with index "${index}" not found!`,
-        this.scope.items[index]
-      );
+    if (!this.slideshowInner) {
+      return;
+    }
+
+    if (!this.scope.items?.[index]) {
+      this.throw(new Error(`Slide with index "${index}" not found!`));
       return;
     }
 
@@ -340,9 +350,11 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     }
 
     // TODO new scroll service based on https://pawelgrzybek.com/page-scroll-in-vanilla-javascript/
-    if (this.slideElements[index]) {
-      // if is is window to scroll
+    if (!this.slideElements[index]) {
+      this.throw(new Error(`Slide element with index "${index}" not found!`));
+    } else {
       if (typeof this.slideshowInner.scroll === "function") {
+        console.debug("scroll left", left, this.slideshowInner);
         this.slideshowInner.scroll({
           behavior: "smooth",
           left,
@@ -500,10 +512,17 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   protected _onViewChanges() {
     this.debug("onViewChanges");
-    this.setSlidePositions();
-    const index = this.setCenteredSlideActive();
-    if (this.scope.activeBreakpoint.sticky) {
-      this.goTo(index);
+    if (!this.scope.items?.length || !this.slideElements?.length) {
+      return;
+    }
+    try {
+      this.setSlidePositions();
+      const index = this.setCenteredSlideActive();
+      if (this.scope.activeBreakpoint.sticky) {
+        this.goTo(index);
+      }
+    } catch (error) {
+      this.throw(error);
     }
   }
 
@@ -523,12 +542,16 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   protected onScroll = throttle(this._onScroll.bind(this));
 
   protected onScrollend() {
-    this.setSlidePositions();
-    this.setCenteredSlideActive();
-    if (this.scope.activeBreakpoint.sticky) {
-      this.scrollToNearestSlide();
+    try {
+      this.setSlidePositions();
+      this.setCenteredSlideActive();
+      if (this.scope.activeBreakpoint.sticky) {
+        this.scrollToNearestSlide();
+      }
+      this.resume(1000);
+    } catch (error) {
+      this.throw(error);
     }
-    this.resume(1000);
   }
 
   protected onMouseIn() {
@@ -566,6 +589,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   protected connectedCallback() {
     super.connectedCallback();
+    this.initSlideshowInner();
     return this.init(Bs5SlideshowComponent.observedAttributes);
   }
 
@@ -577,7 +601,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       this.resizeObserver?.observe(this);
     } else {
       // Fallback watch window resize
-      window.addEventListener("resize", this.onViewChanges);
+      window.addEventListener("resize", this.onViewChanges, { passive: true });
     }
 
     this.bs5.events.on("breakpoint:changed", this.onBreakpointChanges);
@@ -588,10 +612,10 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       this.onVisibilityChanged
     );
 
-    this.slideshowInner.addEventListener("scroll", this.onScroll, {
+    this.slideshowInner?.addEventListener("scroll", this.onScroll, {
       passive: true,
     });
-    this.slideshowInner.addEventListener("scrollended", this.onScrollend, {
+    this.slideshowInner?.addEventListener("scrollended", this.onScrollend, {
       passive: true,
     });
 
@@ -630,8 +654,8 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       this.onVisibilityChanged
     );
 
-    this.slideshowInner.removeEventListener("scroll", this.onScroll);
-    this.slideshowInner.removeEventListener("scrollended", this.onScrollend);
+    this.slideshowInner?.removeEventListener("scroll", this.onScroll);
+    this.slideshowInner?.removeEventListener("scrollended", this.onScrollend);
 
     this.removeEventListener("mouseenter", this.onMouseIn);
     this.removeEventListener("mouseover", this.onMouseIn);
@@ -661,14 +685,28 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     await super.afterBind();
   }
 
+  protected async afterAllBind() {
+    this.initSlideshowInner();
+    this.initResponsiveOptions();
+    this.addEventListeners();
+    await super.afterAllBind();
+  }
+
   protected initSlideshowInner() {
     this.initSlideshowInnerSlides();
+
+    if (!this.slideshowInner) {
+      return;
+    }
 
     this.scrollEventsService = new ScrollEventsService(this.slideshowInner);
   }
 
   protected enableDesktopDragscroll() {
     if (!this.dragscrollService) {
+      if (!this.slideshowInner) {
+        return;
+      }
       const dragscrollOptions: DragscrollOptions = { detectGlobalMove: true };
       this.dragscrollService = new Dragscroll(
         this.slideshowInner,
@@ -685,7 +723,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected enableContinuousAutoplay() {
-    if (!this.continuousAutoplayService) {
+    if (!this.continuousAutoplayService && this.slideshowInner) {
       const autoscrollOptions: AutoscrollOptions = {
         velocity: this.scope.activeBreakpoint.autoplayVelocity,
         angle: this.scope.activeBreakpoint.angle,
@@ -753,11 +791,11 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   protected initSlideshowInnerSlides() {
     if (!this.slideElements) {
-      throw new Error("No slides found!");
+      this.throw(new Error("No slides found!"));
     }
 
-    // If slides not added by template
-    if (this.scope.items.length === 0) {
+    // If slides not added by template or attribute
+    if (!this.scope.items?.length) {
       this.addItemsByChilds();
     }
   }
@@ -780,6 +818,9 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     const content = tpl.innerHTML;
     if (attributes.type) {
       if (attributes.type === "slide") {
+        if (!this.scope.items) {
+          this.scope.items = [];
+        }
         this.scope.items.push({ ...attributes, content });
       }
       if (attributes.type === "controls") {
@@ -799,6 +840,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     if (!this.slideElements) {
       return;
     }
+
     this.slideElements.forEach((slideElement, index) => {
       const handle =
         slideElement.getAttribute("handle") ||
@@ -816,11 +858,17 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
           centerX: 0,
         },
       };
+      if (!this.scope.items) {
+        this.scope.items = [];
+      }
       this.scope.items.push(attributes);
     });
   }
 
-  protected getScrollPosition(): ScrollPosition {
+  protected getScrollPosition(): ScrollPosition | null {
+    if (!this.slideshowInner) {
+      return null;
+    }
     const scrollPosition = getScrollPosition(this.slideshowInner);
     return scrollPosition;
   }
@@ -837,9 +885,10 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected getMostCenteredSlideIndex() {
-    if (this.scope.items.length <= 0) {
+    if (!this.scope.items?.length) {
       return -1;
     }
+
     let nearZero = Math.abs(
       this.scope.activeBreakpoint.angle === "vertical"
         ? this.scope.items[0].position.centerY
@@ -862,7 +911,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected setAllSlidesInactive(excludeIndex = -1) {
-    if (!this.slideElements) {
+    if (!this.slideElements || !this.scope.items?.length) {
       return;
     }
     for (let index = 0; index < this.scope.items.length; index++) {
@@ -879,6 +928,9 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   protected setCenteredSlideActive(): number {
     const index = this.getMostCenteredSlideIndex();
+    if (index === -1 || !this.scope.items?.length) {
+      return -1;
+    }
     this.setAllSlidesInactive(index);
     if (!this.scope.items[index]) {
       return -1;
@@ -891,13 +943,14 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected isScrollableToIndex(index: number) {
-    if (!this.scope.items[index]) {
+    const scrollPosition = this.getScrollPosition();
+    if (!this.scope.items?.[index] || !this.slideshowInner || !scrollPosition) {
       return false;
     }
     const maxScrollTo =
       this.scope.activeBreakpoint.angle === "vertical"
-        ? this.getScrollPosition().maxY
-        : this.getScrollPosition().maxX;
+        ? scrollPosition.maxY
+        : scrollPosition.maxX;
     const scrollTo =
       this.scope.activeBreakpoint.angle === "vertical"
         ? this.slideshowInner.scrollTop +
@@ -946,22 +999,30 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected setSlidePositions() {
-    if (this.scope.items.length !== this.slideElements?.length) {
+    if (this.scope.items?.length !== this.slideElements?.length) {
       console.warn(
-        `The slide objects must be the same size as the slide elements! ${this.scope.items.length} !== ${this.slideElements?.length}`
+        new Error(
+          `The slide objects must be the same size as the slide elements! items (${this.scope.items?.length}) !== slideElements (${this.slideElements?.length})`
+        ),
+        this.slideElements,
+        this
       );
       return;
     }
+    if (!this.slideshowInner) {
+      return;
+    }
+
     const mainBoundingClient = this.slideshowInner.getBoundingClientRect();
     for (let i = 0; i < this.scope.items.length; i++) {
       const slideElement = this.slideElements[i];
-      const slideObject = this.scope.items[i];
+      const item = this.scope.items[i];
       const rect = slideElement.getBoundingClientRect();
 
       rect.x -= mainBoundingClient.x;
       rect.y -= mainBoundingClient.y;
 
-      slideObject.position = {
+      item.position = {
         x: rect.x,
         y: rect.y,
         width: rect.width,
@@ -980,7 +1041,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected requiredAttributes(): string[] {
-    return [];
+    return ["items"];
   }
 
   /**
@@ -991,7 +1052,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
    * @param newValue
    * @param namespace
    */
-  protected attributeChangedCallback(
+  protected async attributeChangedCallback(
     attributeName: string,
     oldValue: any,
     newValue: any,
@@ -1024,15 +1085,19 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     }
 
     if (!responsiveAttributeName) {
-      return super.attributeChangedCallback(
+      await super.attributeChangedCallback(
         attributeName,
         oldValue,
         newValue,
         namespace
       );
+    } else {
+      try {
+        await this.bindIfReady();
+      } catch (error) {
+        this.throw(error);
+      }
     }
-
-    this.bindIfReady();
   }
 
   /**
@@ -1058,11 +1123,12 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   // deconstruction
   protected disconnectedCallback() {
-    this.removeEventListeners();
-    this.scrollEventsService?.destroy();
-    this.disableAutoplay();
-    this.disableDesktopDragscroll();
-    return super.disconnectedCallback();
+    console.debug("disconnectedCallback");
+    // this.removeEventListeners();
+    // this.scrollEventsService?.destroy();
+    // this.disableAutoplay();
+    // this.disableDesktopDragscroll();
+    // return super.disconnectedCallback();
   }
 
   protected template(): ReturnType<TemplateFunction> {
