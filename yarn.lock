@@ -3025,7 +3025,7 @@ __metadata:
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     bootstrap: 4.6.0
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^3.4.0
@@ -3033,10 +3033,10 @@ __metadata:
     jest-extended: ^0.11.5
     popper.js: ^1.16.1
     prettier: 2.2.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
   languageName: unknown
   linkType: soft
 
@@ -3074,17 +3074,17 @@ __metadata:
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     bootstrap: next
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^3.4.0
     jest: ^26.6.3
     jest-extended: ^0.11.5
     prettier: 2.2.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
   languageName: unknown
   linkType: soft
 
@@ -3134,17 +3134,17 @@ __metadata:
     "@yarnpkg/pnpify": ^3.0.0-rc.3
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^3.4.0
     jest: ^26.6.3
     jest-extended: ^0.11.5
     prettier: 2.2.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
   languageName: unknown
   linkType: soft
 
@@ -3172,11 +3172,11 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@types/core-js": ^2.5.4
     "@types/jest": ^26.0.23
-    "@types/node": ^15.0.1
+    "@types/node": ^15.0.2
     babel-jest: ^26.6.3
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^3.4.0
@@ -3185,11 +3185,11 @@ __metadata:
     jest-extended: ^0.11.5
     prettier: 2.2.1
     source-map-support: ^0.5.19
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     uglifyjs-webpack-plugin: ^2.2.0
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-glob-entry: ^2.1.1
   languageName: unknown
   linkType: soft
@@ -3228,7 +3228,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -3238,7 +3238,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.6.0
-    postcss: ^8.2.13
+    postcss: ^8.2.14
     postcss-loader: ^5.2.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -3249,7 +3249,7 @@ __metadata:
     serve: ^11.3.2
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -3290,7 +3290,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -3300,7 +3300,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.6.0
-    postcss: ^8.2.13
+    postcss: ^8.2.14
     postcss-loader: ^5.2.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -3311,7 +3311,7 @@ __metadata:
     serve: ^11.3.2
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -3353,7 +3353,7 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: 4.6.0
     copy-webpack-plugin: ^8.1.1
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -3373,7 +3373,7 @@ __metadata:
     serve: ^11.3.2
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -3413,7 +3413,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -3433,7 +3433,7 @@ __metadata:
     serve: ^11.3.2
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -3470,7 +3470,7 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: 4.6.0
     copy-webpack-plugin: ^8.1.1
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     html-loader: ^2.1.2
@@ -3486,10 +3486,10 @@ __metadata:
     sass-loader: ^11.0.1
     serve: ^11.3.2
     terser-webpack-plugin: ^5.1.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -3525,7 +3525,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     html-loader: ^2.1.2
@@ -3540,10 +3540,10 @@ __metadata:
     sass: ^1.32.12
     sass-loader: ^11.0.1
     serve: ^11.3.2
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -3575,7 +3575,7 @@ __metadata:
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^26.0.23
-    "@types/node": ^15.0.1
+    "@types/node": ^15.0.2
     "@types/webpack-env": ^1.16.0
     "@typescript-eslint/eslint-plugin": ^4.22.1
     "@typescript-eslint/parser": ^4.22.1
@@ -3584,7 +3584,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -3595,7 +3595,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.6.0
-    postcss: ^8.2.13
+    postcss: ^8.2.14
     postcss-loader: ^5.2.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -3606,10 +3606,10 @@ __metadata:
     serve: ^11.3.2
     style-loader: ^2.0.0
     terser-webpack-plugin: ^5.1.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -3649,7 +3649,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -3659,7 +3659,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.6.0
-    postcss: ^8.2.13
+    postcss: ^8.2.14
     postcss-loader: ^5.2.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -3670,7 +3670,7 @@ __metadata:
     serve: ^11.3.2
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -3709,7 +3709,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: next
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -3719,7 +3719,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.6.0
-    postcss: ^8.2.13
+    postcss: ^8.2.14
     postcss-loader: ^5.2.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -3730,7 +3730,7 @@ __metadata:
     serve: ^11.3.2
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -3771,7 +3771,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: next
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -3781,7 +3781,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.6.0
-    postcss: ^8.2.13
+    postcss: ^8.2.14
     postcss-loader: ^5.2.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -3792,7 +3792,7 @@ __metadata:
     serve: ^11.3.2
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -3835,7 +3835,7 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: next
     copy-webpack-plugin: ^8.1.1
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -3855,7 +3855,7 @@ __metadata:
     serve: ^11.3.2
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -3895,7 +3895,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: next
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -3915,7 +3915,7 @@ __metadata:
     serve: ^11.3.2
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -3947,7 +3947,7 @@ __metadata:
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^26.0.23
-    "@types/node": ^15.0.1
+    "@types/node": ^15.0.2
     "@types/webpack-env": ^1.16.0
     "@typescript-eslint/eslint-plugin": ^4.22.1
     "@typescript-eslint/parser": ^4.22.1
@@ -3956,7 +3956,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: next
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -3967,7 +3967,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.6.0
-    postcss: ^8.2.13
+    postcss: ^8.2.14
     postcss-loader: ^5.2.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -3978,10 +3978,10 @@ __metadata:
     serve: ^11.3.2
     style-loader: ^2.0.0
     terser-webpack-plugin: ^5.1.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -4021,7 +4021,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: next
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -4031,7 +4031,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.6.0
-    postcss: ^8.2.13
+    postcss: ^8.2.14
     postcss-loader: ^5.2.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -4042,7 +4042,7 @@ __metadata:
     serve: ^11.3.2
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -4082,7 +4082,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: next
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -4101,10 +4101,10 @@ __metadata:
     sass: ^1.32.12
     sass-loader: ^11.0.1
     serve: ^11.3.2
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -4136,13 +4136,13 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^4.22.1
     "@typescript-eslint/experimental-utils": ^4.22.1
     "@typescript-eslint/parser": ^4.22.1
-    "@webpack-cli/serve": ^1.3.1
+    "@webpack-cli/serve": ^1.4.0
     "@yarnpkg/pnpify": ^3.0.0-rc.3
     babel-jest: ^26.6.3
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -4161,10 +4161,10 @@ __metadata:
     sass-loader: ^11.0.1
     serve: ^11.3.2
     terser-webpack-plugin: ^5.1.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -4195,13 +4195,13 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^4.22.1
     "@typescript-eslint/experimental-utils": ^4.22.1
     "@typescript-eslint/parser": ^4.22.1
-    "@webpack-cli/serve": ^1.3.1
+    "@webpack-cli/serve": ^1.4.0
     "@yarnpkg/pnpify": ^3.0.0-rc.3
     babel-jest: ^26.6.3
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -4220,10 +4220,10 @@ __metadata:
     sass-loader: ^11.0.1
     serve: ^11.3.2
     terser-webpack-plugin: ^5.1.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -4258,7 +4258,7 @@ __metadata:
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     html-loader: ^2.1.2
@@ -4274,10 +4274,10 @@ __metadata:
     sass-loader: ^11.0.1
     serve: ^11.3.2
     terser-webpack-plugin: ^5.1.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -4315,7 +4315,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: next
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     html-loader: ^2.1.2
@@ -4330,10 +4330,10 @@ __metadata:
     sass-loader: ^11.0.1
     serve: ^11.3.2
     terser-webpack-plugin: ^5.1.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -4371,7 +4371,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -4390,10 +4390,10 @@ __metadata:
     sass-loader: ^11.0.1
     serve: ^11.3.2
     terser-webpack-plugin: ^5.1.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -4431,7 +4431,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -4450,10 +4450,10 @@ __metadata:
     sass-loader: ^11.0.1
     serve: ^11.3.2
     terser-webpack-plugin: ^5.1.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -4493,7 +4493,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: next
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -4503,7 +4503,7 @@ __metadata:
     jest: ^26.6.3
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^1.6.0
-    postcss: ^8.2.13
+    postcss: ^8.2.14
     postcss-loader: ^5.2.0
     postcss-modules: ^4.0.0
     postcss-preset-env: ^6.7.0
@@ -4514,7 +4514,7 @@ __metadata:
     serve: ^11.3.2
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -4554,7 +4554,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -4576,10 +4576,10 @@ __metadata:
     sass-loader: ^11.0.1
     serve: ^11.3.2
     terser-webpack-plugin: ^5.1.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -4617,7 +4617,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -4636,10 +4636,10 @@ __metadata:
     sass: ^1.32.12
     sass-loader: ^11.0.1
     terser-webpack-plugin: ^5.1.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -4677,7 +4677,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -4696,10 +4696,10 @@ __metadata:
     sass: ^1.32.12
     sass-loader: ^11.0.1
     terser-webpack-plugin: ^5.1.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -4739,7 +4739,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -4760,10 +4760,10 @@ __metadata:
     sass: ^1.32.12
     sass-loader: ^11.0.1
     terser-webpack-plugin: ^5.1.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -4805,8 +4805,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.11.2
-    core-js-pure: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -4825,10 +4824,10 @@ __metadata:
     sass-loader: ^11.0.1
     serve: ^11.3.2
     terser-webpack-plugin: ^5.1.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -4867,7 +4866,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     css-loader: ^5.2.4
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -4887,10 +4886,10 @@ __metadata:
     sass-loader: ^11.0.1
     serve: ^11.3.2
     terser-webpack-plugin: ^5.1.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-dev-server: ^3.11.2
   languageName: unknown
   linkType: soft
@@ -4903,7 +4902,7 @@ __metadata:
     "@ribajs/postcss-config": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
     "@tsconfig/node14": ^1.0.0
-    "@types/node": ^15.0.1
+    "@types/node": ^15.0.2
     "@types/pkg-dir": ^2.0.1
     "@yarnpkg/esbuild-plugin-pnp": ^1.0.0-rc.2
     "@yarnpkg/pnpify": ^3.0.0-rc.3
@@ -4935,13 +4934,13 @@ __metadata:
     "@babel/runtime-corejs3": ^7.14.0
     "@ribajs/tsconfig": "workspace:*"
     "@types/jest": ^26.0.23
-    "@types/node": ^15.0.1
+    "@types/node": ^15.0.2
     babel-jest: ^26.6.3
     eslint: ^7.25.0
     jest: ^26.6.3
     jest-config: ^26.6.3
     jest-extended: ^0.11.5
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
   languageName: unknown
   linkType: soft
@@ -4999,7 +4998,7 @@ __metadata:
     terser-webpack-plugin: ^5.1.1
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
   languageName: unknown
   linkType: soft
 
@@ -5017,12 +5016,12 @@ __metadata:
     "@types/cookie-parser": ^1.4.2
     "@types/express-session": ^1.17.3
     "@types/jest": ^26.0.23
-    "@types/node": ^15.0.1
+    "@types/node": ^15.0.2
     "@types/supertest": ^2.0.11
     "@typescript-eslint/eslint-plugin": ^4.22.1
     "@typescript-eslint/parser": ^4.22.1
     cookie-parser: ^1.4.5
-    dotenv: ^8.2.0
+    dotenv: ^9.0.0
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^3.4.0
@@ -5037,8 +5036,8 @@ __metadata:
     rxjs: ^7.0.0
     supertest: ^6.1.3
     tinyliquid: ^0.2.34
-    ts-jest: ^26.5.5
-    ts-loader: ^9.1.1
+    ts-jest: ^26.5.6
+    ts-loader: ^9.1.2
     ts-node: ^9.1.1
     tsconfig-paths: ^3.9.0
     twig: ^1.15.4
@@ -5077,7 +5076,7 @@ __metadata:
     "@ribajs/webpack-config": "workspace:*"
     "@types/component-emitter": ^1.2.10
     "@types/debug": ^4.1.5
-    "@types/node": ^15.0.1
+    "@types/node": ^15.0.2
     "@types/socket.io-client": ^1.4.36
     "@typescript-eslint/eslint-plugin": ^4.22.1
     "@typescript-eslint/experimental-utils": ^4.22.1
@@ -5101,7 +5100,7 @@ __metadata:
     terser-webpack-plugin: ^5.1.1
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
     webpack-node-externals: ^3.0.0
   languageName: unknown
   linkType: soft
@@ -5127,13 +5126,13 @@ __metadata:
     "@types/express-session": ^1.17.3
     "@types/jest": ^26.0.23
     "@types/jsdom": ^16.2.10
-    "@types/node": ^15.0.1
+    "@types/node": ^15.0.2
     "@types/supertest": ^2.0.11
     "@typescript-eslint/eslint-plugin": ^4.22.1
     "@typescript-eslint/parser": ^4.22.1
     consolidate: ^0.16.0
     cookie-parser: ^1.4.5
-    dotenv: ^8.2.0
+    dotenv: ^9.0.0
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^3.4.0
@@ -5149,8 +5148,8 @@ __metadata:
     rxjs: ^7.0.0
     supertest: ^6.1.3
     tinyliquid: ^0.2.34
-    ts-jest: ^26.5.5
-    ts-loader: ^9.1.1
+    ts-jest: ^26.5.6
+    ts-loader: ^9.1.2
     ts-node: ^9.1.1
     tsconfig-paths: ^3.9.0
     twig: ^1.15.4
@@ -5184,17 +5183,17 @@ __metadata:
     "@typescript-eslint/parser": ^4.22.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^3.4.0
     jest: ^26.6.3
     jest-extended: ^0.11.5
     prettier: 2.2.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
   languageName: unknown
   linkType: soft
 
@@ -5236,14 +5235,14 @@ __metadata:
     "@typescript-eslint/parser": ^4.22.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^3.4.0
     prettier: 2.2.1
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
   languageName: unknown
   linkType: soft
 
@@ -5252,7 +5251,7 @@ __metadata:
   resolution: "@ribajs/iconset@workspace:packages/iconset"
   dependencies:
     "@babel/runtime-corejs3": ^7.14.0
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     gulp: ^4.0.2
     gulp-clean: ^0.4.0
     gulp-debug: ^4.0.0
@@ -5287,17 +5286,17 @@ __metadata:
     "@typescript-eslint/parser": ^4.22.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^3.4.0
     jest: ^26.6.3
     jquery: ^3.6.0
     prettier: 2.2.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
   languageName: unknown
   linkType: soft
 
@@ -5330,7 +5329,7 @@ __metadata:
     "@yarnpkg/pnpify": ^3.0.0-rc.3
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^3.4.0
@@ -5338,10 +5337,10 @@ __metadata:
     jest-extended: ^0.11.5
     leaflet: ^1.7.1
     prettier: 2.2.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
   languageName: unknown
   linkType: soft
 
@@ -5368,7 +5367,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.22.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^3.4.0
@@ -5376,10 +5375,10 @@ __metadata:
     jest-extended: ^0.11.5
     moment: ^2.29.1
     prettier: 2.2.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
   languageName: unknown
   linkType: soft
 
@@ -5407,7 +5406,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.22.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^3.4.0
@@ -5415,10 +5414,10 @@ __metadata:
     jest-extended: ^0.11.5
     monaco-editor: ^0.23.0
     prettier: 2.2.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
   languageName: unknown
   linkType: soft
 
@@ -5437,7 +5436,7 @@ __metadata:
     "@types/express-session": ^1.17.3
     "@types/jest": ^26.0.23
     "@types/lunr": ^2.3.3
-    "@types/node": ^15.0.1
+    "@types/node": ^15.0.2
     "@types/supertest": ^2.0.11
     "@typescript-eslint/eslint-plugin": ^4.22.1
     "@typescript-eslint/parser": ^4.22.1
@@ -5451,7 +5450,7 @@ __metadata:
     rimraf: ^3.0.2
     rxjs: ^7.0.0
     supertest: ^6.1.3
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     ts-node: ^9.1.1
     tsconfig-paths: ^3.9.0
     typescript: ^4.2.4
@@ -5482,14 +5481,14 @@ __metadata:
     "@types/express-session": ^1.17.3
     "@types/jest": ^26.0.23
     "@types/jsdom": ^16.2.10
-    "@types/node": ^15.0.1
+    "@types/node": ^15.0.2
     "@types/supertest": ^2.0.11
     "@typescript-eslint/eslint-plugin": ^4.22.1
     "@typescript-eslint/parser": ^4.22.1
     brakes: ^3.1.0
     consolidate: ^0.16.0
     cookie-parser: ^1.4.5
-    dotenv: ^8.2.0
+    dotenv: ^9.0.0
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^3.4.0
@@ -5504,7 +5503,7 @@ __metadata:
     rimraf: ^3.0.2
     rxjs: ^7.0.0
     supertest: ^6.1.3
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     ts-node: ^9.1.1
     tsconfig-paths: ^3.9.0
     typescript: ^4.2.4
@@ -5527,7 +5526,7 @@ __metadata:
     "@graphql-tools/utils": ^7.9.0
     "@types/find-root": ^1.1.2
     "@types/glob": ^7.1.3
-    "@types/node": ^15.0.1
+    "@types/node": ^15.0.2
     "@typescript-eslint/eslint-plugin": ^4.22.1
     "@typescript-eslint/parser": ^4.22.1
     eslint: ^7.25.0
@@ -5619,13 +5618,13 @@ __metadata:
     "@types/jest": ^26.0.23
     "@types/jquery": ^3.5.5
     "@types/js-yaml": ^4.0.1
-    "@types/node": ^15.0.1
+    "@types/node": ^15.0.2
     "@typescript-eslint/eslint-plugin": ^4.22.1
     "@typescript-eslint/parser": ^4.22.1
     "@yarnpkg/pnpify": ^3.0.0-rc.3
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^3.4.0
@@ -5637,10 +5636,10 @@ __metadata:
     js-yaml: ^4.1.0
     prettier: 2.2.1
     rgb-regex: ^1.0.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
   languageName: unknown
   linkType: soft
 
@@ -5670,7 +5669,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.22.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^3.4.0
@@ -5678,10 +5677,10 @@ __metadata:
     jest-extended: ^0.11.5
     photoswipe: ^4.1.3
     prettier: 2.2.1
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
   languageName: unknown
   linkType: soft
 
@@ -5705,7 +5704,7 @@ __metadata:
     "@ribajs/shopify-easdk": "workspace:*"
     "@ribajs/shopify-tda": "workspace:*"
     leaflet: ^1.7.1
-    postcss: ^8.2.13
+    postcss: ^8.2.14
     postcss-preset-env: ^6.7.0
   dependenciesMeta:
     "@ribajs/bs4":
@@ -5765,7 +5764,7 @@ __metadata:
     "@typescript-eslint/typescript-estree": ^4.22.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^3.4.0
@@ -5775,7 +5774,7 @@ __metadata:
     tsutils: ^3.21.0
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
   languageName: unknown
   linkType: soft
 
@@ -5803,14 +5802,14 @@ __metadata:
     "@typescript-eslint/parser": ^4.22.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^3.4.0
     prettier: 2.2.1
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
   languageName: unknown
   linkType: soft
 
@@ -5829,7 +5828,7 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@types/debug": ^4.1.5
-    "@types/node": ^15.0.1
+    "@types/node": ^15.0.2
     debug: ^4.3.2
     eslint: ^7.25.0
     monaco-editor: ^0.23.0
@@ -5864,15 +5863,15 @@ __metadata:
     "@typescript-eslint/parser": ^4.22.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^3.4.0
     prettier: 2.2.1
-    socket.io-client: 4.0.1
+    socket.io-client: 4.0.2
     typescript: ^4.2.4
     webpack: ^5.36.2
-    webpack-cli: ^4.6.0
+    webpack-cli: ^4.7.0
   languageName: unknown
   linkType: soft
 
@@ -5903,7 +5902,7 @@ __metadata:
     "@shopify/theme-lint": ^3.1.0
     "@tsconfig/node14": ^1.0.0
     "@types/archiver": ^5.1.0
-    "@types/bluebird": ^3.5.33
+    "@types/bluebird": ^3.5.34
     "@types/browser-sync": ^2.26.1
     "@types/debug": ^4.1.5
     "@types/find-root": ^1.1.2
@@ -5919,7 +5918,7 @@ __metadata:
     "@types/jest": ^26.0.23
     "@types/js-yaml": ^4.0.1
     "@types/lodash": ^4.14.168
-    "@types/node": ^15.0.1
+    "@types/node": ^15.0.2
     "@types/node-xlsx": ^0.15.1
     "@types/open": ^6.2.1
     "@types/prettier": ^2.2.3
@@ -5938,7 +5937,7 @@ __metadata:
     browser-sync: ^2.26.14
     chalk: ^4.1.1
     chokidar: ^3.5.1
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     del: ^6.0.0
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
@@ -5957,7 +5956,7 @@ __metadata:
     prompt: ^1.1.0
     shopify-admin-api: ^2.16.5
     terser: ^5.7.0
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
   peerDependencies:
     gulp: ^4.0.2
@@ -5990,7 +5989,7 @@ __metadata:
     "@ribajs/core": "workspace:*"
     "@ribajs/events": "workspace:*"
     "@types/express": ^4.17.11
-    "@types/node": ^15.0.1
+    "@types/node": ^15.0.2
   languageName: unknown
   linkType: soft
 
@@ -6072,7 +6071,7 @@ __metadata:
     leaflet: ^1.7.1
     mini-css-extract-plugin: ^1.6.0
     pkg-dir: ^5.0.0
-    postcss: ^8.2.13
+    postcss: ^8.2.14
     postcss-loader: ^5.2.0
     pug: ^3.0.2
     pug-loader: ^2.4.0
@@ -6279,10 +6278,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/bluebird@npm:*, @types/bluebird@npm:^3.5.33":
+"@types/bluebird@npm:*":
   version: 3.5.33
   resolution: "@types/bluebird@npm:3.5.33"
   checksum: 45f7adeec6e656501f5b2127d5cc1538d3ae497d06bfa00d8d7f51eb2aa482267b3b4868ac1c75fc84acfad86d2c0d4de8af535cf725156f222d679df9694aff
+  languageName: node
+  linkType: hard
+
+"@types/bluebird@npm:^3.5.34":
+  version: 3.5.34
+  resolution: "@types/bluebird@npm:3.5.34"
+  checksum: 1aa99b94cd373c9eb547476148343faab414b99a2a391b2b368b76e17a327752074ca80b01d5b83e39e5e7a268a49bb4339711c0d347005f7d78764c2892c832
   languageName: node
   linkType: hard
 
@@ -7532,36 +7538,36 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webpack-cli/configtest@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "@webpack-cli/configtest@npm:1.0.2"
+"@webpack-cli/configtest@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "@webpack-cli/configtest@npm:1.0.3"
   peerDependencies:
     webpack: 4.x.x || 5.x.x
     webpack-cli: 4.x.x
-  checksum: 98edc004536d7fd212386a759b738f78f71dc24a7c10fa5245d3c4d2b33e47e9076c132d25aa94c291848ccf47e8986b71244785c95fbacf770a5d9f54dc8586
+  checksum: df7187543189306058d9b2300fbbb13ade0af47847e9e3600311afdc7910b1e9910ce5a5c8c7a952b51626ad46b59701253d844c819dc1971e3e21d6c6419ebc
   languageName: node
   linkType: hard
 
-"@webpack-cli/info@npm:^1.2.3":
-  version: 1.2.3
-  resolution: "@webpack-cli/info@npm:1.2.3"
+"@webpack-cli/info@npm:^1.2.4":
+  version: 1.2.4
+  resolution: "@webpack-cli/info@npm:1.2.4"
   dependencies:
     envinfo: ^7.7.3
   peerDependencies:
     webpack-cli: 4.x.x
-  checksum: 0499e93583176fe0d3f1f8a2022f460c8177cf24e07d7b6110de4ac89dab42115d898095c856ede4cf2b4c1c36a4a6e0230658480fae341119d20e25d28f3e35
+  checksum: 7a1b1676692f04c417dfb9d3974e81c9aee1aadeccb101269aab48e83cceb8c02022a7f9e8bb2d4530e9db2e0258e02faac7c36048b12c33b48fd2eec26d9d7d
   languageName: node
   linkType: hard
 
-"@webpack-cli/serve@npm:^1.3.1":
-  version: 1.3.1
-  resolution: "@webpack-cli/serve@npm:1.3.1"
+"@webpack-cli/serve@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "@webpack-cli/serve@npm:1.4.0"
   peerDependencies:
     webpack-cli: 4.x.x
   peerDependenciesMeta:
     webpack-dev-server:
       optional: true
-  checksum: 8a734da3451268d5d2ae24b57c7f824b452fb2eba8ea41f7b8830eb3f322a9649cc3d40a6dbb6f19017748bbdbf24cf459ad0ac27289b723d9b132b946c168c7
+  checksum: 0a2495e2f1bb71d9362fa04fb91ce3bc234d9f0a5bdb8fb1bb608ad1ead6b525b461868b2b9f102ccd6db0cead4ea62b5c6a807f127a779e600ce555ed5a31fd
   languageName: node
   linkType: hard
 
@@ -10337,17 +10343,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js-pure@npm:^3.11.2":
-  version: 3.11.2
-  resolution: "core-js-pure@npm:3.11.2"
-  checksum: a5ee6590f60e23ab2e84de336c26d4f8d8ccc13f4393ddd18ecd2757e40a34d9cba22f638129f973a6fb939956705aaca2c3ae4a35bdccd4c5324ac0f02dc1b8
-  languageName: node
-  linkType: hard
-
-"core-js@npm:^3.11.2":
-  version: 3.11.2
-  resolution: "core-js@npm:3.11.2"
-  checksum: a332ed594db0bbb01344c1a5e18796d9459911006a47f5e7ebb645c04cc63c26726ba7acdd81956324f58153450fb14c3de634bccfe127c2982d2bd5db9409f2
+"core-js@npm:^3.12.0":
+  version: 3.12.0
+  resolution: "core-js@npm:3.12.0"
+  checksum: 85242be9b4e66844e967c68ee9feeafec69f14a95e6ce35dd696b296b3613eab86f9f42349c39d672a2c663d5f58ef37368ea1f70101b738ad5920d2b8517f8a
   languageName: node
   linkType: hard
 
@@ -11212,10 +11211,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:8.2.0, dotenv@npm:^8.2.0":
+"dotenv@npm:8.2.0":
   version: 8.2.0
   resolution: "dotenv@npm:8.2.0"
   checksum: 16cb89cbd7b98b053899b8aba8c5044c8fb61a2db8a81fe70360b75035fce5fed53bd7a34d772be717d0880c0321122a4c09423f518025e1b52d96791521b1a7
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "dotenv@npm:9.0.0"
+  checksum: 8111fb99a12a8da9fedc90d855d734bbf026f3257d67b611b2517d393b027ca5774c1f9dd5aa0887f339f4e7c711f99bdd8bc82fa076e572f3eb6000b2c09343
   languageName: node
   linkType: hard
 
@@ -11442,7 +11448,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"enquirer@npm:^2.3.5, enquirer@npm:^2.3.6":
+"enquirer@npm:^2.3.5":
   version: 2.3.6
   resolution: "enquirer@npm:2.3.6"
   dependencies:
@@ -18262,14 +18268,14 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.2.13":
-  version: 8.2.13
-  resolution: "postcss@npm:8.2.13"
+"postcss@npm:^8.2.14":
+  version: 8.2.14
+  resolution: "postcss@npm:8.2.14"
   dependencies:
     colorette: ^1.2.2
     nanoid: ^3.1.22
     source-map: ^0.6.1
-  checksum: df64697cbd6d8e501eac2eaed501dc9a9c848538b4b51c53bfe7ed62a91736e97135d1fe22384b69af11bb2387a6cb483f5eecd14b19ca192ab5497ed5522124
+  checksum: 46bcc7c05f2b6b0e22e36af03e0244366871bd5cd9e3ca35e0ba2a87fb9080063322ee1dcef307d6e116fdac7c85941aaebd3755a3c88b4533bb8722b7bba4d2
   languageName: node
   linkType: hard
 
@@ -19546,7 +19552,7 @@ resolve@^1.14.2:
     babel-jest: ^26.6.3
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.11.2
+    core-js: ^3.12.0
     eslint: ^7.25.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^3.4.0
@@ -19561,7 +19567,7 @@ resolve@^1.14.2:
     rxjs: ^7.0.0
     sass: ^1.32.12
     source-map-support: ^0.5.19
-    ts-jest: ^26.5.5
+    ts-jest: ^26.5.6
     typescript: ^4.2.4
     webpack-glob-entry: ^2.1.1
   dependenciesMeta:
@@ -20235,9 +20241,9 @@ resolve@^1.14.2:
   languageName: node
   linkType: hard
 
-"socket.io-client@npm:4.0.1":
-  version: 4.0.1
-  resolution: "socket.io-client@npm:4.0.1"
+"socket.io-client@npm:4.0.2":
+  version: 4.0.2
+  resolution: "socket.io-client@npm:4.0.2"
   dependencies:
     "@types/component-emitter": ^1.2.10
     backo2: ~1.0.2
@@ -20246,7 +20252,7 @@ resolve@^1.14.2:
     engine.io-client: ~5.0.0
     parseuri: 0.0.6
     socket.io-parser: ~4.0.4
-  checksum: 9b163f559cc7d1c1898a85227b1f3cfd0d941c69739f3f75c3489f0a898155544e82659379dc71c3169f3157a8b3d0e51ba9225ab93f0d2923654de2ef9da6b9
+  checksum: 2939d3e7ddd8eec403c3a3cd9aba36f143d3b0d50db159825cc36e05e10719d978d687367a7086643de5164e15b7d3694e5692f36b310d000bcb4527e8308bf2
   languageName: node
   linkType: hard
 
@@ -21454,9 +21460,9 @@ resolve@^1.14.2:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:^26.5.5":
-  version: 26.5.5
-  resolution: "ts-jest@npm:26.5.5"
+"ts-jest@npm:^26.5.6":
+  version: 26.5.6
+  resolution: "ts-jest@npm:26.5.6"
   dependencies:
     bs-logger: 0.x
     buffer-from: 1.x
@@ -21473,13 +21479,13 @@ resolve@^1.14.2:
     typescript: ">=3.8 <5.0"
   bin:
     ts-jest: cli.js
-  checksum: a7fe56357bfd7e7cd833ea4a97408910ee67796fb7f3938c7155c69dc7b35f3172b76503e16282715e07a4a2b5026efd4803f0b090b3930e0c79c58d25b740db
+  checksum: fd32a8b256091d45d850c491fd090f74a368d44bccc8fedfa0dd074757727e7f07621eb2a69ebf081428f44a357a879237a2cf0aef970896410d454d0bf87ac6
   languageName: node
   linkType: hard
 
-"ts-loader@npm:^9.1.1":
-  version: 9.1.1
-  resolution: "ts-loader@npm:9.1.1"
+"ts-loader@npm:^9.1.2":
+  version: 9.1.2
+  resolution: "ts-loader@npm:9.1.2"
   dependencies:
     chalk: ^4.1.0
     enhanced-resolve: ^5.0.0
@@ -21488,7 +21494,7 @@ resolve@^1.14.2:
   peerDependencies:
     typescript: "*"
     webpack: "*"
-  checksum: d74d6fa6846b27763ae5927dc0f07d156909e8d5302e1514668da7404c89ad0494b656b6a971a89c344d34d419b5b63db24346cfea1a4b03a2ee539b66d10629
+  checksum: 159e576eec2329bea1e92d87c3cdccb47110a167a766aa45888a74797240356aa639d6e6b46f3cddea3c3caa773e70af8956a2fab00d3fe38b415361f5f89168
   languageName: node
   linkType: hard
 
@@ -22336,17 +22342,16 @@ typescript@^4.2.4:
   languageName: node
   linkType: hard
 
-"webpack-cli@npm:^4.6.0":
-  version: 4.6.0
-  resolution: "webpack-cli@npm:4.6.0"
+"webpack-cli@npm:^4.7.0":
+  version: 4.7.0
+  resolution: "webpack-cli@npm:4.7.0"
   dependencies:
     "@discoveryjs/json-ext": ^0.5.0
-    "@webpack-cli/configtest": ^1.0.2
-    "@webpack-cli/info": ^1.2.3
-    "@webpack-cli/serve": ^1.3.1
+    "@webpack-cli/configtest": ^1.0.3
+    "@webpack-cli/info": ^1.2.4
+    "@webpack-cli/serve": ^1.4.0
     colorette: ^1.2.1
     commander: ^7.0.0
-    enquirer: ^2.3.6
     execa: ^5.0.0
     fastest-levenshtein: ^1.0.12
     import-local: ^3.0.2
@@ -22367,7 +22372,7 @@ typescript@^4.2.4:
       optional: true
   bin:
     webpack-cli: bin/cli.js
-  checksum: 5818245d609bfe677a84c14ebb7177590a511a871ce877803c14ba948dc603c15637fdfc1346726480d26b97ba4a55785a211e584d0dd098ec767927f244f9b9
+  checksum: 6b935cda02446df2fdafa3ae3598c8a38049e99e02a72cabe032b39e584badfc1738631192be7d8fd7bb52bb9eb4e654ae326e8a84608f402923fb60635db321
   languageName: node
   linkType: hard
 

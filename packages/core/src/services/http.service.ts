@@ -178,18 +178,33 @@ export class HttpService {
       headers,
       mode: options.mode || "cors",
     });
-    const result: HttpServiceResponse<T> = {
-      status: response.status,
-      body: null as any,
-    };
-    result.body = ((await response.text()) as unknown) as T;
+
+    let bodyResult = ((await response.text()) as unknown) as T;
     if (typeof dataType === "string") {
       try {
-        result.body = JSON.parse(result.body as any);
+        bodyResult = JSON.parse(response.body as any);
       } catch (error) {
         // Do nothing
       }
     }
+
+    const result: HttpServiceResponse<T> = {
+      status: response.status,
+      headers: response.headers,
+      ok: response.ok,
+      redirected: response.redirected,
+      statusText: response.statusText,
+      trailer: response.trailer,
+      type: response.type,
+      url: response.url,
+      arrayBuffer: response.arrayBuffer,
+      blob: response.blob,
+      bodyUsed: response.bodyUsed,
+      clone: response.clone,
+      formData: response.formData,
+      text: response.text,
+      body: bodyResult,
+    };
     return result;
   }
 

@@ -1,4 +1,9 @@
-import { BasicComponent, TemplateFunction } from "@ribajs/core";
+import {
+  BasicComponent,
+  TemplateFunction,
+  HttpService,
+  HttpServiceResponse,
+} from "@ribajs/core";
 
 export class Bs5IconComponent extends BasicComponent {
   public static tagName = "bs5-icon";
@@ -18,11 +23,7 @@ export class Bs5IconComponent extends BasicComponent {
   }
 
   protected async fetchIcon(src: string) {
-    if (!fetch) {
-      return "";
-    }
-
-    let response: Response;
+    let response: HttpServiceResponse<string>;
 
     // Append hostname on ssr
     if (
@@ -35,18 +36,18 @@ export class Bs5IconComponent extends BasicComponent {
         src,
         window.ssr.ctx.protocol + "://" + window.ssr.ctx.hostname
       );
-      response = await fetch(url.href);
+      response = await HttpService.get(url.href);
     } else {
-      response = await fetch(src);
+      response = await HttpService.get(src);
     }
 
     if (response.status !== 200) {
-      console.error(response.statusText);
+      console.error(response.status);
       return "";
     }
 
     if (response.headers.get("content-type")?.includes("image/svg+xml")) {
-      return response.text();
+      return response.body;
     }
 
     console.error(

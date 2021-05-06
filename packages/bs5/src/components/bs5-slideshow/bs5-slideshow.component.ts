@@ -1,7 +1,7 @@
 import { TemplatesComponent, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { Breakpoint } from "@ribajs/bs5";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { hasChildNodesTrim, scrollTo } from "@ribajs/utils/src/dom";
 import { clone, camelCase } from "@ribajs/utils/src/type";
 import { throttle } from "@ribajs/utils/src/control";
 import { Bs5Service } from "../../services";
@@ -22,6 +22,7 @@ import {
 import templateSlides from "./bs5-slideshow-slides.component.html";
 import templateControls from "./bs5-slideshow-controls.component.html";
 import templateIndicators from "./bs5-slideshow-indicators.component.html";
+import templateImage from "./bs5-slideshow-image.component.html";
 
 const SLIDESHOW_INNER_SELECTOR = ".slideshow-row";
 
@@ -90,48 +91,21 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   protected bs5: Bs5Service;
 
   protected get slideshowInner() {
-    if (!this._slideshowInner) {
-      this._slideshowInner = this.querySelector(SLIDESHOW_INNER_SELECTOR);
-    }
-    if (!this._slideshowInner) {
-      console.warn(
-        new Error(
-          `Child element with selector ${SLIDESHOW_INNER_SELECTOR} not found!`
-        )
-      );
-    }
-    return this._slideshowInner;
+    return this.querySelector<HTMLElement>(SLIDESHOW_INNER_SELECTOR);
   }
 
   protected get slideElements() {
-    if (
-      !this._slideElements?.length ||
-      this.scope.items?.length !== this._slideElements?.length
-    ) {
-      this._slideElements = this.querySelectorAll(SLIDES_SELECTOR);
-    }
-    if (!this._slideElements?.length) {
-      console.warn(
-        new Error(`Child element with selector ${SLIDES_SELECTOR} not found!`)
-      );
-    }
-    return this._slideElements;
+    return this.querySelectorAll<HTMLElement>(SLIDES_SELECTOR);
   }
 
   protected get controlsElements() {
-    if (!this._controlsElements) {
-      this._controlsElements = this.querySelectorAll(
-        ".slideshow-control-prev, .slideshow-control-next"
-      );
-    }
-    return this._controlsElements;
+    return this.querySelectorAll(
+      ".slideshow-control-prev, .slideshow-control-next"
+    );
   }
 
   protected get indicatorsElement() {
-    if (!this._indicatorsElement) {
-      this._indicatorsElement = this.querySelector(".slideshow-indicators");
-    }
-    return this._indicatorsElement;
+    return this.querySelector(".slideshow-indicators");
   }
 
   static get observedAttributes(): string[] {
@@ -228,6 +202,11 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       type: "number",
       required: false,
     },
+    {
+      name: "src",
+      type: "string",
+      required: false,
+    },
   ];
 
   protected autobind = true;
@@ -237,14 +216,6 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   protected continuousAutoplayService?: Autoscroll;
 
   protected scrollEventsService?: ScrollEventsService;
-
-  protected _slideshowInner: HTMLElement | null = null;
-
-  protected _slideElements: NodeListOf<Element> | null = null;
-
-  protected _controlsElements: NodeListOf<Element> | null = null;
-
-  protected _indicatorsElement: HTMLElement | null = null;
 
   protected templateControls = templateControls;
 
@@ -312,61 +283,26 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
    * @param index
    */
   public goTo(index: number) {
-    if (index < 0) {
+    if (
+      index < 0 ||
+      !this.scope.items?.[index] ||
+      !this.slideElements[index] ||
+      !this.slideshowInner
+    ) {
       this.throw(new Error(`Can't go to slide of index ${index}`));
       return;
     }
     this.setSlidePositions();
-    let top = 0;
-    let left = 0;
 
-    if (!this.slideshowInner) {
-      return;
-    }
-
-    if (!this.scope.items?.[index]) {
-      this.throw(new Error(`Slide with index "${index}" not found!`));
-      return;
-    }
-
-    if (this.scope.activeBreakpoint.angle === "vertical") {
-      // Check if we do not need to slide
-      if (this.scope.items[index].position.centerY === 0) {
-        // We do not need to scroll
-        return;
-      }
-      top =
-        this.slideshowInner.scrollTop +
-        this.scope.items[index].position.centerY;
-    } else {
-      // Check if we do not need to slide
-      if (this.scope.items[index].position.centerX === 0) {
-        // We do not need to scroll
-        return;
-      }
-      left =
-        this.slideshowInner.scrollLeft +
-        this.scope.items[index].position.centerX;
-    }
-
-    // TODO new scroll service based on https://pawelgrzybek.com/page-scroll-in-vanilla-javascript/
     if (!this.slideElements[index]) {
       this.throw(new Error(`Slide element with index "${index}" not found!`));
     } else {
-      if (typeof this.slideshowInner.scroll === "function") {
-        console.debug("scroll left", left, this.slideshowInner);
-        this.slideshowInner.scroll({
-          behavior: "smooth",
-          left,
-          top,
-        });
-      } else {
-        if (this.scope.activeBreakpoint.angle === "vertical") {
-          this.slideshowInner.scrollTop = top;
-        } else {
-          this.slideshowInner.scrollLeft = left;
-        }
-      }
+      scrollTo(
+        this.slideElements[index],
+        0,
+        this.slideshowInner,
+        this.scope.activeBreakpoint.angle
+      );
     }
   }
 
@@ -542,6 +478,9 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   protected onScroll = throttle(this._onScroll.bind(this));
 
   protected onScrollend() {
+    if (!this.scope.items?.length) {
+      return;
+    }
     try {
       this.setSlidePositions();
       this.setCenteredSlideActive();
@@ -588,8 +527,11 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected connectedCallback() {
+    // If slides not added by template or attribute
+    if (!this.scope.items?.length && this.slideElements) {
+      this.addItemsByChilds();
+    }
     super.connectedCallback();
-    this.initSlideshowInner();
     return this.init(Bs5SlideshowComponent.observedAttributes);
   }
 
@@ -634,10 +576,6 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     this.addEventListener("scrollend", this.onMouseUp, { passive: true });
     // See ScrollEventsService for this event
     this.addEventListener("scrollended", this.onMouseUp, { passive: true });
-
-    // initial
-    this.onViewChanges();
-    this.onScrollend();
   }
 
   protected removeEventListeners() {
@@ -674,28 +612,29 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     this.removeEventListener("scrollended", this.onMouseUp);
   }
 
+  protected initAll() {
+    this.initSlideshowInner();
+    this.initResponsiveOptions();
+    // this.removeEventListeners();
+    this.addEventListeners();
+    // initial
+    this.onViewChanges();
+    this.onScrollend();
+  }
+
   protected async beforeBind() {
     await super.beforeBind();
+    this.validateItems();
   }
 
   protected async afterBind() {
-    this.initSlideshowInner();
-    this.initResponsiveOptions();
-    this.addEventListeners();
+    this.initAll();
     await super.afterBind();
   }
 
-  protected async afterAllBind() {
-    this.initSlideshowInner();
-    this.initResponsiveOptions();
-    this.addEventListeners();
-    await super.afterAllBind();
-  }
-
   protected initSlideshowInner() {
-    this.initSlideshowInnerSlides();
-
     if (!this.slideshowInner) {
+      this.throw(new Error("Can't init slideshow inner!"));
       return;
     }
 
@@ -789,17 +728,6 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     }
   }
 
-  protected initSlideshowInnerSlides() {
-    if (!this.slideElements) {
-      this.throw(new Error("No slides found!"));
-    }
-
-    // If slides not added by template or attribute
-    if (!this.scope.items?.length) {
-      this.addItemsByChilds();
-    }
-  }
-
   protected transformTemplateAttributes(attributes: any, index: number) {
     attributes = super.transformTemplateAttributes(attributes, index);
     attributes.handle = attributes.handle || index.toString();
@@ -807,6 +735,30 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     attributes.class = attributes.class || "";
     attributes.class += " slide";
     return attributes;
+  }
+
+  protected validateItems() {
+    if (!this.scope.items) {
+      this.throw(new Error("No items to validate!"));
+      return;
+    }
+    for (let i = 0; i < this.scope.items.length; i++) {
+      const item = this.scope.items[i];
+      item.index = item.index || i;
+      item.active = item.active || false;
+      item.active = item.active || false;
+      item.title = item.title || "";
+      item.handle = item.handle || item.index.toString();
+      item.position = item.position || {
+        centerX: 0,
+        centerY: 0,
+      };
+
+      item.class = item.class || "";
+      item.class += " slide";
+
+      item.content = item.content || templateImage;
+    }
   }
 
   /**
@@ -838,7 +790,11 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
    */
   protected addItemsByChilds() {
     if (!this.slideElements) {
-      return;
+      this.throw(
+        new Error(
+          "Can't not add items by childs because no slide childs are found!"
+        )
+      );
     }
 
     this.slideElements.forEach((slideElement, index) => {
@@ -886,6 +842,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   protected getMostCenteredSlideIndex() {
     if (!this.scope.items?.length) {
+      this.throw(new Error("No slide items found!"));
       return -1;
     }
 
@@ -927,14 +884,20 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected setCenteredSlideActive(): number {
-    const index = this.getMostCenteredSlideIndex();
+    let index = this.getMostCenteredSlideIndex();
     if (index === -1 || !this.scope.items?.length) {
-      return -1;
+      console.warn(new Error("Most centered slide not found!"));
+      index = 0;
+    }
+
+    if (!this.scope.items?.[index]) {
+      index = 0;
+    }
+    if (!this.scope.items?.[index]) {
+      this.throw(new Error("Slide item to set active not found!"));
+      return 0;
     }
     this.setAllSlidesInactive(index);
-    if (!this.scope.items[index]) {
-      return -1;
-    }
     this.scope.items[index].active = true;
     if (this.slideElements && this.slideElements[index].classList) {
       this.slideElements[index].classList.add("active");
@@ -999,6 +962,10 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected setSlidePositions() {
+    if (!this.bound) {
+      return;
+    }
+
     if (this.scope.items?.length !== this.slideElements?.length) {
       console.warn(
         new Error(
@@ -1091,6 +1058,10 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
         newValue,
         namespace
       );
+
+      if (attributeName === "items") {
+        this.validateItems();
+      }
     } else {
       try {
         await this.bindIfReady();
@@ -1123,7 +1094,6 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   // deconstruction
   protected disconnectedCallback() {
-    console.debug("disconnectedCallback");
     // this.removeEventListeners();
     // this.scrollEventsService?.destroy();
     // this.disableAutoplay();

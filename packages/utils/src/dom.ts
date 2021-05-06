@@ -101,6 +101,7 @@ export const elementIsVisable = (el: HTMLElement) => {
  *
  * Attributes:
  *  * scroll-element="query-selector"
+ * TODO new scroll service based on https://pawelgrzybek.com/page-scroll-in-vanilla-javascript/
  * @see https://stackoverflow.com/a/31987330
  * @param element
  * @param to

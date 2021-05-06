@@ -34,7 +34,7 @@ export class Bs5Service {
   protected constructor(options: Bs5ModuleOptions) {
     this._options = options;
     this._options.breakpoints.sort((a, b) => a.dimension - b.dimension);
-    this.onViewChanges();
+    this._onViewChanges();
     this.addEventListeners();
   }
 
@@ -78,9 +78,9 @@ export class Bs5Service {
   }
 
   protected _onViewChanges() {
-    const newBreakpoint = this.getBreakpointByDimension(
-      getViewportDimensions().w
-    );
+    const newBreakpoint =
+      this.getBreakpointByDimension(getViewportDimensions().w) ||
+      this.getBreakpointByName("xs");
     if (newBreakpoint) {
       this.setActiveBreakpoint(newBreakpoint);
     }
@@ -97,6 +97,7 @@ export class Bs5Service {
     dimension: number,
     breakpoints?: Breakpoint[]
   ): Breakpoint | null {
+    console.debug("getBreakpointByDimension", dimension);
     breakpoints = breakpoints || this.options.breakpoints;
 
     for (let i = 0; i < breakpoints.length - 1; i++) {

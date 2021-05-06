@@ -9,4 +9,6 @@ export interface SlideshowSlide {
   position: SlideshowSlidePosition;
   class?: string;
   index: number;
+  /** Optional image source, can be used to append an image dynamically */
+  src?: string;
 }
