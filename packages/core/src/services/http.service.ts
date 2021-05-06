@@ -1,4 +1,4 @@
-import { extend } from "@ribajs/utils/src/type";
+import { extend, couldBeJson, isJson } from "@ribajs/utils/src/type";
 import { HttpMethod } from "../types/http-method";
 import { HttpServiceOptions, HttpServiceResponse } from "../types";
 
@@ -179,13 +179,10 @@ export class HttpService {
       mode: options.mode || "cors",
     });
 
+
     let bodyResult = ((await response.text()) as unknown) as T;
-    if (typeof dataType === "string") {
-      try {
-        bodyResult = JSON.parse(response.body as any);
-      } catch (error) {
-        // Do nothing
-      }
+    if (typeof bodyResult === "string" && couldBeJson(bodyResult) && isJson(bodyResult)) {
+      bodyResult = JSON.parse(bodyResult);
     }
 
     const result: HttpServiceResponse<T> = {

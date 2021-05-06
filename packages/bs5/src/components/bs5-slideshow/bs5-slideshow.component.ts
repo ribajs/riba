@@ -290,6 +290,9 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       !this.slideshowInner
     ) {
       this.throw(new Error(`Can't go to slide of index ${index}`));
+      console.error("items", this.scope.items);
+      console.error("this.slideElements", this.slideElements);
+      console.error("this.slideshowInner", this.slideshowInner);
       return;
     }
     this.setSlidePositions();
