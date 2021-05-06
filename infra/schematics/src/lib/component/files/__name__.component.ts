@@ -56,7 +56,7 @@ export class <%= classify(name) %>Component extends Component {
     return [];
   }
 
-  protected attributeChangedCallback(
+  protected async attributeChangedCallback(
     attributeName: string,
     oldValue: any,
     newValue: any,

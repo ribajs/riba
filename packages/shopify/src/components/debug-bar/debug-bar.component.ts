@@ -31,7 +31,7 @@ export class ShopifyDebugBarComponent extends Component {
     this.init(ShopifyDebugBarComponent.observedAttributes);
   }
 
-  public attributeChangedCallback(
+  protected async attributeChangedCallback(
     name: string,
     oldValue: any,
     newValue: any,

@@ -117,7 +117,7 @@ export abstract class VueComponent extends BasicComponent {
    * @param newValue
    * @param namespace
    */
-  protected attributeChangedCallback(
+  protected async attributeChangedCallback(
     attributeName: string,
     oldValue: any,
     newValue: any,

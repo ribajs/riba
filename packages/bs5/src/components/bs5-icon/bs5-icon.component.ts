@@ -170,7 +170,7 @@ export class Bs5IconComponent extends BasicComponent {
     this.className += " " + classString;
   }
 
-  public attributeChangedCallback(
+  protected async attributeChangedCallback(
     name: string,
     oldValue: any,
     newValue: any,

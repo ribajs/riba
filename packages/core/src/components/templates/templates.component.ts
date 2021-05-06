@@ -12,7 +12,7 @@ export interface TemplateAttribute {
 export type TemplateAttributes = Array<TemplateAttribute>;
 
 export interface Scope {
-  items: Array<any>;
+  items?: Array<any>;
 }
 
 export abstract class TemplatesComponent extends Component {
@@ -87,6 +87,9 @@ export abstract class TemplatesComponent extends Component {
   protected addItemByTemplate(tpl: HTMLTemplateElement, index: number) {
     const attributes = this.getTemplateAttributes(tpl, index);
     const content = tpl.innerHTML;
+    if (!this.scope.items) {
+      this.scope.items = [];
+    }
     this.scope.items.push({ ...attributes, content });
   }
 

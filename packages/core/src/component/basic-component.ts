@@ -226,7 +226,7 @@ export abstract class BasicComponent extends HTMLElement {
    * @param newValue
    * @param namespace
    */
-  protected attributeChangedCallback(
+  protected async attributeChangedCallback(
     attributeName: string,
     oldValue: any,
     newValue: any,

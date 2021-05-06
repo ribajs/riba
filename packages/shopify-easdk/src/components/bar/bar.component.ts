@@ -169,7 +169,7 @@ export class BarComponent extends Component {
     super.disconnectedCallback();
   }
 
-  protected attributeChangedCallback(
+  protected async attributeChangedCallback(
     attributeName: string,
     oldValue: any,
     newValue: any,

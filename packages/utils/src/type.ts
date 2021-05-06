@@ -283,7 +283,7 @@ export const extend = (
               extended[prop] = obj[prop];
             }
           } else if (options.mergeArrays) {
-            // Merge array
+            // Merge array if both values are array's
             if (Array.isArray(extended[prop]) && Array.isArray(obj[prop])) {
               extended[prop] = [...extended[prop], ...obj[prop]];
             } else {

@@ -82,7 +82,7 @@ export class ShopifyNestContentBlogArticlesComponent extends ShopifyNestContentC
     return [];
   }
 
-  protected attributeChangedCallback(
+  protected async attributeChangedCallback(
     attributeName: string,
     oldValue: any,
     newValue: any,

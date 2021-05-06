@@ -133,7 +133,7 @@ export class ShopifyLinklistComponent extends Component {
     }
   }
 
-  public attributeChangedCallback(
+  protected async attributeChangedCallback(
     name: string,
     oldValue: any,
     newValue: any,

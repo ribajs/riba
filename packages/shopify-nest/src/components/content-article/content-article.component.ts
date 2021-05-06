@@ -114,7 +114,7 @@ export class ShopifyNestContentBlogArticleComponent extends ShopifyNestContentCo
     return [];
   }
 
-  protected attributeChangedCallback(
+  protected async attributeChangedCallback(
     attributeName: string,
     oldValue: any,
     newValue: any,
