@@ -21,7 +21,7 @@ export const couldBeJson = (str?: string | null) => {
  * @param str
  */
 export const isJson = (str?: string | null) => {
-  if (!str) {
+  if (!str || !couldBeJson(str)) {
     return false;
   }
   try {
@@ -76,16 +76,14 @@ export const getNumber = (value: string) => {
  */
 export const parseJsonString = (value: string) => {
   let object = null;
-  if (couldBeJson(value)) {
-    if (isJson(value)) {
-      object = JSON.parse(value) || null;
-    } else {
-      try {
-        // Transform an invalid json string with single quotation to a valid json string with double quotation
-        object = JSON.parse(value.replace(/'/g, '"')) || null;
-      } catch (error) {
-        console.warn(error);
-      }
+  if (isJson(value)) {
+    object = JSON.parse(value) || null;
+  } else {
+    try {
+      // Transform an invalid json string with single quotation to a valid json string with double quotation
+      object = JSON.parse(value.replace(/'/g, '"')) || null;
+    } catch (error) {
+      console.warn(error);
     }
   }
   return object;
