@@ -1,0 +1,18 @@
+{
+  "name": "@ribajs/masonry",
+  "version": "2.0.0-alpha.0",
+  "dependencies": {
+    "@ribajs/core": "workspace:*",
+    "@ribajs/utils": "workspace:*",
+    "masonry-layout": "^4.2.2"
+  },
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "source": "src/index.ts",
+  "devDependencies": {
+    "@babel/runtime": "^7.14.0",
+    "@babel/runtime-corejs3": "^7.14.0",
+    "@types/masonry-layout": "^4.2.2",
+    "@types/node": "^15.0.2"
+  }
+}

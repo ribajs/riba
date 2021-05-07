@@ -78,6 +78,7 @@
     "@ribajs/core": "workspace:*",
     "@ribajs/extras": "workspace:*",
     "@ribajs/iconset": "workspace:*",
+    "@ribajs/masonry": "workspace:*",
     "@ribajs/utils": "workspace:*",
     "bootstrap": "next"
   }
