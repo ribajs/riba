@@ -1,0 +1,21 @@
+@import './bs5-photoswipe.variables';
+@import './bs5-photoswipe.main';
+@import './bs5-photoswipe.skin';
+
+bs5-photoswipe {
+  display: block;
+  .dropdown-toggle-share {
+    // remove bootstrap arrow
+    &:after {
+      border: none;
+      content: none;
+      margin: 0;
+    }
+    .share-label {
+      @extend .cursor-pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

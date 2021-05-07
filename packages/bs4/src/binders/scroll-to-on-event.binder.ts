@@ -8,7 +8,7 @@ export const scrollToOnEventBinder: Binder<string> = {
       onEvent: function (event: Event) {
         const offset = Number(el.dataset.offset || 0);
         const scrollElement = el.dataset.scrollElement
-          ? document.querySelector(el.dataset.scrollElement)
+          ? document.querySelector<HTMLElement>(el.dataset.scrollElement)
           : window;
         if (this.customData.target) {
           scrollTo(this.customData.target, offset, scrollElement);

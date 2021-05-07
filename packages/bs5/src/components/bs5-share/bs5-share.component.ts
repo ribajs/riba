@@ -87,7 +87,7 @@ export class Bs5ShareComponent extends Component {
   constructor() {
     super();
     this.scope = this.getScopeDefaults();
-    this.debug("constructor", this.scope);
+    // this.debug("constructor", this.scope);
     Bs5ShareComponent.count++;
     this.onExternalOpenEvent = this.onExternalOpenEvent.bind(this);
     this.onExternalCloseEvent = this.onExternalCloseEvent.bind(this);
@@ -380,7 +380,7 @@ export class Bs5ShareComponent extends Component {
 
   protected async afterBind() {
     this.initDropdown();
-    // this.debug('afterBind', this.scope);
+    this.debug("afterBind", this.scope);
     await super.afterBind();
   }
 
@@ -389,11 +389,11 @@ export class Bs5ShareComponent extends Component {
   }
 
   protected template(): ReturnType<TemplateFunction> {
-    this.debug("template", this, hasChildNodesTrim(this));
+    // this.debug("template", this, hasChildNodesTrim(this));
     if (this && hasChildNodesTrim(this)) {
       // If a child is set, this is a custom label template
       this.scope.labelTemplate = this.innerHTML;
-      this.debug("Custom label template: ", this.scope.labelTemplate);
+      // this.debug("Custom label template: ", this.scope.labelTemplate);
     }
     return template;
   }

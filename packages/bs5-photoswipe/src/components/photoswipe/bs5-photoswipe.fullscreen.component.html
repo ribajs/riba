@@ -1,0 +1,63 @@
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+        It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <div class="pswp__top-bar-left">
+                    <div class="pswp__counter"></div>
+                </div>
+
+                <div class="pswp__top-bar-middle">
+                    <div class="pswp__caption">
+                        <div class="pswp__caption__center"></div>
+                    </div>
+                </div>
+
+
+                <div class="pswp__top-bar-right">
+                    
+                    <bs5-share rv-show="controlShareIconShow" rv-parent class="pswp__button" type="image" rv-title="currItem.title" rv-url="currItem.src" rv-media-url="currItem.src" text="Hey, did you checked out this nice image?" label="Share">
+                        <div class="share-label" rv-on-click="share">
+                            <bs5-icon class="share-label m-2" rv-size="$parent.controlShareIconSize" rv-src="$parent.controlShareIconSrc"></bs5-icon>
+                        </div>
+                    </bs5-share>
+
+                    <bs5-icon rv-hide="isZoomed" rv-size="controlZoomInIconSize" size="32" rv-on-click="toggleZoom" class="pswp__button" rv-if="controlZoomInIconShow | and isZoomAllowed" rv-src="controlZoomInIconSrc" title="Zoom in"></bs5-icon>
+                    <bs5-icon rv-show="isZoomed" rv-size="controlZoomOutIconSize" rv-on-click="toggleZoom" class="pswp__button" rv-if="controlZoomOutIconShow | and isZoomAllowed" rv-src="controlZoomOutIconSrc" title="Zoom out"></bs5-icon>
+
+                    <bs5-icon rv-hide="isFullscreen" rv-size="controlFullscreenOnIconSize" rv-on-click="toggleFullscreen" class="pswp__button" rv-if="controlFullscreenOnIconShow" rv-src="controlFullscreenOnIconSrc" title="Go to fullscreen"></bs5-icon>
+                    <bs5-icon rv-show="isFullscreen" rv-size="controlFullscreenOffIconSize" rv-on-click="toggleFullscreen" class="pswp__button" rv-if="controlFullscreenOffIconShow" rv-src="controlFullscreenOffIconSrc" title="Leave fullscreen"></bs5-icon>
+
+                    <bs5-icon rv-on-click="close" rv-size="controlCloseIconSize" class="pswp__button" rv-if="controlCloseIconShow" rv-src="controlCloseIconSrc" title="Close (Esc)"></bs5-icon>
+                </div>
+
+            </div>
+
+            <bs5-icon rv-size="controlPrevIconSize" rv-on-click="prev" direction="left" class="pswp__button pswp-control-prev" rv-if="controlPrevIconShow" rv-src="controlPrevIconSrc" title="Previous (arrow left)"></bs5-icon>
+
+            <bs5-icon rv-size="controlPrevIconSize" rv-on-click="next" direction="right" class="pswp__button pswp-control-next" rv-if="controlNextIconShow" rv-src="controlNextIconSrc" title="Next (arrow right)"></bs5-icon>
+
+        </div>
+
+    </div>
+
+</div>
