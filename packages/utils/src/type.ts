@@ -33,6 +33,28 @@ export const isJson = (str?: string | null) => {
 };
 
 /**
+ * Parses a json string with the special feature that json strings
+ * can also have single quotations for defining the properties and values
+ */
+export const parseJsonString = (value: string) => {
+  let object = null;
+  if (!couldBeJson(value)) {
+    return object;
+  }
+  if (isJson(value)) {
+    object = JSON.parse(value) || null;
+  } else {
+    try {
+      // Transform an invalid json string with single quotation to a valid json string with double quotation
+      object = JSON.parse(value.replace(/'/g, '"')) || null;
+    } catch (error) {
+      console.warn(error);
+    }
+  }
+  return object;
+};
+
+/**
  * Check if value is undefined
  */
 export const isUndefined = (value?: any) => {
@@ -68,25 +90,6 @@ export const getString = (value: any) => {
  */
 export const getNumber = (value: string) => {
   return value ? parseFloat(value) : undefined;
-};
-
-/**
- * Parses a json string with the special feature that json strings
- * can also have single quotations for defining the properties and values
- */
-export const parseJsonString = (value: string) => {
-  let object = null;
-  if (isJson(value)) {
-    object = JSON.parse(value) || null;
-  } else {
-    try {
-      // Transform an invalid json string with single quotation to a valid json string with double quotation
-      object = JSON.parse(value.replace(/'/g, '"')) || null;
-    } catch (error) {
-      console.warn(error);
-    }
-  }
-  return object;
 };
 
 /**

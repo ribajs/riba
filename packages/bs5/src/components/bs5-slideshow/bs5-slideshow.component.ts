@@ -535,7 +535,8 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       this.addItemsByChilds();
     }
     super.connectedCallback();
-    return this.init(Bs5SlideshowComponent.observedAttributes);
+    this.init(Bs5SlideshowComponent.observedAttributes);
+    this.addEventListeners();
   }
 
   protected addEventListeners() {
@@ -993,15 +994,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       rect.y -= mainBoundingClient.y;
 
       item.position = {
-        x: rect.x,
-        y: rect.y,
-        width: rect.width,
-        height: rect.height,
-        bottom: rect.bottom,
-        left: rect.left,
-        right: rect.right,
-        top: rect.top,
-        toJSON: rect.toJSON,
+        ...rect,
         // 0 if element is in the middle / center
         centerY: rect.y + rect.height / 2 - mainBoundingClient.height / 2,
         // 0 if element is in the middle / center
@@ -1097,7 +1090,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   // deconstruction
   protected disconnectedCallback() {
-    // this.removeEventListeners();
+    this.removeEventListeners();
     // this.scrollEventsService?.destroy();
     // this.disableAutoplay();
     // this.disableDesktopDragscroll();

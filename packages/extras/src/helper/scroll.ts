@@ -5,6 +5,7 @@ export const getScrollPosition = (
 ): ScrollPosition => {
   const window = element as Window;
   const el = element as HTMLUnknownElement;
+  // If element is window
   if (window.document && window.location) {
     const scrollPosition: ScrollPosition = {
       /** horizontal: left / right / width */

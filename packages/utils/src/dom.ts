@@ -1,4 +1,4 @@
-import { clone, parseJsonString } from "./type";
+import { clone, parseJsonString, justDigits } from "./type";
 
 export const MAX_UID = 1000;
 
@@ -97,12 +97,10 @@ export const elementIsVisable = (el: HTMLElement) => {
 };
 
 /**
- * Scrolls to an element by event and selector
+ * Scrolls to an element
  *
- * Attributes:
- *  * scroll-element="query-selector"
- * TODO new scroll service based on https://pawelgrzybek.com/page-scroll-in-vanilla-javascript/
  * @see https://stackoverflow.com/a/31987330
+ * @see https://pawelgrzybek.com/page-scroll-in-vanilla-javascript/
  * @param element
  * @param to
  * @param duration
@@ -110,7 +108,7 @@ export const elementIsVisable = (el: HTMLElement) => {
 export const scrollTo = (
   to: HTMLElement,
   offset: number,
-  scrollElement: Element | (Window & typeof globalThis) | null,
+  scrollElement: HTMLElement | (Window & typeof globalThis) | null,
   angle: "horizontal" | "vertical" = "vertical",
   behavior: "auto" | "smooth" | undefined = "smooth"
 ) => {
@@ -135,13 +133,18 @@ export const scrollTo = (
     }
   } else {
     if (angle === "vertical") {
-      top = to.offsetTop - offset;
+      const marginTop = justDigits(
+        window.getComputedStyle(scrollElement as HTMLElement).marginTop
+      );
+      top = to.offsetTop - offset - marginTop;
     } else {
-      left = to.offsetLeft - offset;
+      const marginLeft = justDigits(
+        window.getComputedStyle(scrollElement as HTMLElement).marginLeft
+      );
+      left = to.offsetLeft - offset - marginLeft;
     }
   }
 
-  // if is is window to scroll
   scrollElement.scroll({
     behavior,
     left,
