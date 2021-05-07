@@ -97,7 +97,6 @@ export class Bs5Service {
     dimension: number,
     breakpoints?: Breakpoint[]
   ): Breakpoint | null {
-    console.debug("getBreakpointByDimension", dimension);
     breakpoints = breakpoints || this.options.breakpoints;
 
     for (let i = 0; i < breakpoints.length - 1; i++) {

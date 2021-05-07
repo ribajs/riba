@@ -15,10 +15,9 @@ import { throttle } from "@ribajs/utils";
 export const masonryBinder: Binder<Options> = {
   name: "masonry",
 
-  bind(el) {
+  bind() {
     const layout = () => {
       const masonry = this.customData.masonry as Masonry | null;
-      console.debug("layout", masonry);
       if (masonry?.layout) {
         masonry.layout();
       }
