@@ -1,12 +1,12 @@
-import { photoswipeModule } from "./index";
+import { bs5PhotoswipeModule } from "./index";
 
 declare global {
   interface Window {
-    photoswipeModule: typeof photoswipeModule;
+    bs5PhotoswipeModule: typeof bs5PhotoswipeModule;
   }
 }
 
-window.photoswipeModule = photoswipeModule;
+window.bs5PhotoswipeModule = bs5PhotoswipeModule;
 
-export { photoswipeModule };
-export default photoswipeModule;
+export { bs5PhotoswipeModule };
+export default bs5PhotoswipeModule;
