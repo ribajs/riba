@@ -64,7 +64,7 @@
     "@ribajs/shopify": "workspace:*",
     "@ribajs/utils": "workspace:*",
     "@types/socket.io-client": "1.4.36",
-    "socket.io-client": "4.0.2"
+    "socket.io-client": "4.1.0"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"
