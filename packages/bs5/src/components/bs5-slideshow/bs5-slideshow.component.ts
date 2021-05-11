@@ -84,6 +84,8 @@ export interface Scope extends Options {
   items?: SlideshowSlide[];
   /** Active breakpoint options */
   activeBreakpoint: ResponsiveOptions;
+  /** If interval autoplay is active, this is the interval count. */
+  intervalCount: number;
   /** If interval autoplay is active, this is the progress (in percent) until the next page is switched to. */
   intervalProgress: number;
   nextIndex: number;
@@ -254,6 +256,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     // Classes
     controlsPositionClass: "",
     indicatorsPositionClass: "",
+    intervalCount: 0,
     intervalProgress: 0,
     nextIndex: -1,
     prevIndex: -1,
@@ -315,6 +318,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
         this.slideshowInner,
         this.scope.activeBreakpoint.angle
       );
+      this.setSlideActive(index);
     }
   }
 
@@ -697,19 +701,23 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     }
   }
 
+  protected resetIntervalAutoplay() {
+    this.scope.intervalCount = 0;
+    this.scope.intervalProgress = 0;
+  }
+
   protected enableIntervalAutoplay() {
     const steps = 100;
-    let count = 0;
-    this.scope.intervalProgress = 0;
+    this.resetIntervalAutoplay();
     if (this.autoplayIntervalIndex === null) {
       this.autoplayIntervalIndex = window.setInterval(() => {
         if (!this.scope.activeBreakpoint.pause) {
-          count += steps;
+          this.scope.intervalCount += steps;
           this.scope.intervalProgress =
-            (count / this.scope.activeBreakpoint.autoplayInterval) * 100;
+            (this.scope.intervalCount /
+              this.scope.activeBreakpoint.autoplayInterval) *
+            100;
           if (this.scope.intervalProgress >= 100) {
-            count = 0;
-            this.scope.intervalProgress = 0;
             this.next();
           }
         }
@@ -892,8 +900,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     }
   }
 
-  protected setCenteredSlideActive(): number {
-    let index = this.getMostCenteredSlideIndex();
+  protected setSlideActive(index: number) {
     if (index === -1 || !this.scope.items?.length) {
       console.warn(new Error("Most centered slide not found!"));
       index = 0;
@@ -911,9 +918,16 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     this.scope.activeIndex = index;
     this.scope.nextIndex = this.getNextIndex(index);
     this.scope.prevIndex = this.getPrevIndex(index);
+    this.resetIntervalAutoplay();
+
     if (this.slideElements && this.slideElements[index].classList) {
       this.slideElements[index].classList.add("active");
     }
+  }
+
+  protected setCenteredSlideActive(): number {
+    const index = this.getMostCenteredSlideIndex();
+    this.setSlideActive(index);
     return index;
   }
 
