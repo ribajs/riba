@@ -475,7 +475,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected _onScroll() {
-    this.resume(1000);
+    //
   }
 
   protected onScroll = throttle(this._onScroll.bind(this));
@@ -490,7 +490,6 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       if (this.scope.activeBreakpoint.sticky) {
         this.scrollToNearestSlide();
       }
-      this.resume(1000);
     } catch (error) {
       this.throw(error);
     }
@@ -503,31 +502,22 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected onMouseOut() {
-    this.resume(200);
+    this.resume();
   }
 
   protected _onMouseUp() {
-    this.resume(1000);
+    //
   }
 
   protected onMouseUp = throttle(this._onMouseUp.bind(this));
 
-  /** Resume if this method was not called up for [delay] milliseconds */
-  protected resume(delay = 1000) {
-    if (!this.scope.activeBreakpoint.pause) {
-      return;
-    }
-
-    if (this.resumeTimer !== null) {
-      clearTimeout(this.resumeTimer);
-      this.resumeTimer = null;
-    }
-
-    this.resumeTimer = window.setTimeout(() => {
-      this.setSlidePositions();
-      this.scope.activeBreakpoint.pause = false;
-    }, delay);
+  protected _resume() {
+    this.setSlidePositions();
+    this.scope.activeBreakpoint.pause = false;
   }
+
+  /** Resume if this method was not called up for [delay] milliseconds */
+  protected resume = throttle(this._resume.bind(this), 500);
 
   protected connectedCallback() {
     // If slides not added by template or attribute
@@ -570,7 +560,6 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     this.addEventListener("focusin", this.onMouseIn, { passive: true });
     this.addEventListener("touchstart", this.onMouseIn, { passive: true });
 
-    this.addEventListener("mouseout", this.onMouseOut, { passive: true });
     this.addEventListener("mouseleave", this.onMouseOut, { passive: true });
     this.addEventListener("focusout", this.onMouseOut, { passive: true });
 
@@ -604,7 +593,6 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     this.removeEventListener("focusin", this.onMouseIn);
     this.removeEventListener("touchstart", this.onMouseIn);
 
-    this.removeEventListener("mouseout", this.onMouseOut);
     this.removeEventListener("mouseleave", this.onMouseOut);
     this.removeEventListener("focusout", this.onMouseOut);
 
@@ -619,7 +607,6 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   protected initAll() {
     this.initSlideshowInner();
     this.initResponsiveOptions();
-    // this.removeEventListeners();
     this.addEventListeners();
     // initial
     this.onViewChanges();
@@ -1040,9 +1027,8 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
         responsiveAttributeName = camelCase(
           attributeName.slice(affix.length)
         ) as keyof ResponsiveOptions;
-        (this.scope.breakpoints[name][
-          responsiveAttributeName
-        ] as any) = newValue;
+        (this.scope.breakpoints[name][responsiveAttributeName] as any) =
+          newValue;
         break;
       }
     }
