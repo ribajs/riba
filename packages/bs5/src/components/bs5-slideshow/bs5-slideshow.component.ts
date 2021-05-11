@@ -84,6 +84,11 @@ export interface Scope extends Options {
   items?: SlideshowSlide[];
   /** Active breakpoint options */
   activeBreakpoint: ResponsiveOptions;
+  /** If interval autoplay is active, this is the progress (in percent) until the next page is switched to. */
+  intervalProgress: number;
+  nextIndex: number;
+  prevIndex: number;
+  activeIndex: number;
 }
 
 export class Bs5SlideshowComponent extends TemplatesComponent {
@@ -249,6 +254,10 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     // Classes
     controlsPositionClass: "",
     indicatorsPositionClass: "",
+    intervalProgress: 0,
+    nextIndex: -1,
+    prevIndex: -1,
+    activeIndex: 0,
   };
 
   constructor() {
@@ -689,12 +698,22 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected enableIntervalAutoplay() {
+    const steps = 100;
+    let count = 0;
+    this.scope.intervalProgress = 0;
     if (this.autoplayIntervalIndex === null) {
       this.autoplayIntervalIndex = window.setInterval(() => {
         if (!this.scope.activeBreakpoint.pause) {
-          this.next();
+          count += steps;
+          this.scope.intervalProgress =
+            (count / this.scope.activeBreakpoint.autoplayInterval) * 100;
+          if (this.scope.intervalProgress >= 100) {
+            count = 0;
+            this.scope.intervalProgress = 0;
+            this.next();
+          }
         }
-      }, this.scope.activeBreakpoint.autoplayInterval);
+      }, steps);
     }
   }
 
@@ -736,7 +755,6 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     for (let i = 0; i < this.scope.items.length; i++) {
       const item = this.scope.items[i];
       item.index = item.index || i;
-      item.active = item.active || false;
       item.active = item.active || false;
       item.title = item.title || "";
       item.handle = item.handle || item.index.toString();
@@ -890,6 +908,9 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     }
     this.setAllSlidesInactive(index);
     this.scope.items[index].active = true;
+    this.scope.activeIndex = index;
+    this.scope.nextIndex = this.getNextIndex(index);
+    this.scope.prevIndex = this.getPrevIndex(index);
     if (this.slideElements && this.slideElements[index].classList) {
       this.slideElements[index].classList.add("active");
     }
@@ -914,22 +935,29 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     return scrollTo <= maxScrollTo && scrollTo >= 0;
   }
 
-  protected scrollToNextSlide() {
-    this.setSlidePositions();
-    const currentIndex = this.getMostCenteredSlideIndex();
+  protected getNextIndex(currentIndex: number) {
     let nextIndex = currentIndex + this.scope.activeBreakpoint.slidesToScroll;
 
     if (nextIndex >= this.slideElements.length) {
       nextIndex = nextIndex - this.slideElements.length;
     }
 
-    // if (!this.isScrollableToIndex(nextIndex)) {
-    //   nextIndex++;
-    // }
+    return nextIndex;
+  }
 
-    // if (nextIndex >= this.slideElements.length) {
-    //   nextIndex = nextIndex - this.slideElements.length;
-    // }
+  protected getPrevIndex(currentIndex: number) {
+    let prevIndex = currentIndex - this.scope.activeBreakpoint.slidesToScroll;
+
+    if (prevIndex < 0) {
+      prevIndex = this.slideElements.length - 1 + (prevIndex + 1);
+    }
+    return prevIndex;
+  }
+
+  protected scrollToNextSlide() {
+    this.setSlidePositions();
+    const currentIndex = this.getMostCenteredSlideIndex();
+    const nextIndex = this.getNextIndex(currentIndex);
 
     return this.goTo(nextIndex);
   }
@@ -937,12 +965,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   protected scrollToPrevSlide() {
     this.setSlidePositions();
     const currentIndex = this.getMostCenteredSlideIndex();
-    let prevIndex = currentIndex - this.scope.activeBreakpoint.slidesToScroll;
-
-    if (prevIndex < 0) {
-      prevIndex = this.slideElements.length - 1 + (prevIndex + 1);
-    }
-
+    const prevIndex = this.getPrevIndex(currentIndex);
     return this.goTo(prevIndex);
   }
 
