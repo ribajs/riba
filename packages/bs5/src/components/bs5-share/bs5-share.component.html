@@ -2,7 +2,7 @@
   <div class="dropdown-toggle dropdown-toggle-share" rv-id="dropdownId" rv-template="labelTemplate"></div>
   <div class="dropdown-menu" rv-aria-labelledby="dropdownId">
     <a rv-each-item="shareItems" rv-show="item.available" rv-download="item.type | eq 'download'" rv-type="item.type"
-      target="_blank" rv-on-click="shareOnService | args item" class="dropdown-item" rv-href="item.url"
+      target="_blank" rv-on-click="shareOnService | args item" class="dropdown-item no-barba" rv-href="item.url"
       rv-html="item.label"></a>
   </div>
 </div>

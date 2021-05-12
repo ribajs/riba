@@ -156,7 +156,7 @@ export class Bs5ShareComponent extends Component {
       {
         id: "telegram",
         label: this.scope.labelTelegram,
-        urlTemplate: `https://telegram.me/share/url?url={{media_url}}&text={{text}}`,
+        urlTemplate: `https://telegram.me/share/url?url={{url}}&text={{text}}`,
         mediaUrlTemplate: `https://telegram.me/share/url?url={{media_url}}&text={{text}}${newLine}({{url}})`,
         type: "popup",
         url: "",
@@ -192,6 +192,7 @@ export class Bs5ShareComponent extends Component {
         id: "clipboard",
         label: this.scope.labelClipboard,
         urlTemplate: "{{text}}\n\r{{url}}",
+        mediaUrlTemplate: `{{text}}\n\r{{media_url}}`,
         type: "clipboard",
         url: "",
         availableFor: ["page", "image", "video"],
@@ -369,7 +370,7 @@ export class Bs5ShareComponent extends Component {
       copyTextToClipboard(item.url);
       event.preventDefault();
       event.stopPropagation();
-      return;
+      return false;
     }
 
     if (!el || !el.href) {
