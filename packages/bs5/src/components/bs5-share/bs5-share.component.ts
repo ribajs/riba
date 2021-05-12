@@ -4,7 +4,7 @@ import template from "./bs5-share.component.html";
 import labelTemplate from "./bs5-share.label.html";
 import { ShareItem, ShareUrlType } from "../../types";
 import { Dropdown } from "@ribajs/bs5";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { hasChildNodesTrim, copyTextToClipboard } from "@ribajs/utils";
 
 export interface Scope {
   type: ShareUrlType;
@@ -31,6 +31,15 @@ export interface Scope {
   shareItems: ShareItem[];
 
   dropdownDirection: "up" | "down" | "right" | "left";
+
+  labelFacebook: string;
+  labelTwitter: string;
+  labelPinterest: string;
+  labelWhatsapp: string;
+  labelTelegram: string;
+  labelEmail: string;
+  labelDownload: string;
+  labelClipboard: string;
 
   // Methods
   shareOnService: Bs5ShareComponent["shareOnService"];
@@ -74,6 +83,14 @@ export class Bs5ShareComponent extends Component {
       "media-url",
       "label",
       "dropdown-direction",
+      "label-facebook",
+      "label-twitter",
+      "label-pinterest",
+      "label-whatsapp",
+      "label-telegram",
+      "label-email",
+      "label-download",
+      "label-clipboard",
     ];
   }
 
@@ -98,7 +115,7 @@ export class Bs5ShareComponent extends Component {
     const shareItems: ShareItem[] = [
       {
         id: "facebook",
-        label: "Facebook",
+        label: this.scope.labelFacebook,
         // It is not possible to add a message on facebook sharer.php but with the Dialog API, see https://developers.facebook.com/docs/javascript/reference/FB.ui
         urlTemplate: "https://www.facebook.com/sharer/sharer.php?u={{url}}",
         mediaUrlTemplate:
@@ -109,7 +126,7 @@ export class Bs5ShareComponent extends Component {
       },
       {
         id: "twitter",
-        label: "Twitter",
+        label: this.scope.labelTwitter,
         urlTemplate:
           "https://twitter.com/intent/tweet?text={{text}}&url={{url}}",
         mediaUrlTemplate: `https://twitter.com/intent/tweet?text={{text}}&url={{media_url}}${newLine}({{url}})`,
@@ -118,7 +135,7 @@ export class Bs5ShareComponent extends Component {
       },
       {
         id: "pinterest",
-        label: "Pinterest",
+        label: this.scope.labelPinterest,
         urlTemplate:
           "http://www.pinterest.com/pin/create/button/" +
           "?url={{url}}&media={{media_url}}&description={{text}}",
@@ -129,7 +146,7 @@ export class Bs5ShareComponent extends Component {
       },
       {
         id: "whatsapp",
-        label: "WhatsApp",
+        label: this.scope.labelWhatsapp,
         urlTemplate: `https://api.whatsapp.com/send?text={{text}}${newLine}${newLine}{{url}}`,
         mediaUrlTemplate: `https://api.whatsapp.com/send?text={{text}}${newLine}${newLine}{{media_url}}${newLine}({{url}})`,
         type: "popup",
@@ -138,7 +155,7 @@ export class Bs5ShareComponent extends Component {
       },
       {
         id: "telegram",
-        label: "Telegram",
+        label: this.scope.labelTelegram,
         urlTemplate: `https://telegram.me/share/url?url={{media_url}}&text={{text}}`,
         mediaUrlTemplate: `https://telegram.me/share/url?url={{media_url}}&text={{text}}${newLine}({{url}})`,
         type: "popup",
@@ -147,7 +164,7 @@ export class Bs5ShareComponent extends Component {
       },
       {
         id: "email",
-        label: "Email",
+        label: this.scope.labelEmail,
         urlTemplate: `mailto:?subject={{title}}&body={{text}}${newLine}${newLine}{{url}}`,
         mediaUrlTemplate: `mailto:?subject={{title}}&body={{text}}${newLine}${newLine}{{media_url}}${newLine}({{url}})`,
         type: "href",
@@ -165,11 +182,19 @@ export class Bs5ShareComponent extends Component {
       // },
       {
         id: "download",
-        label: "Download image",
+        label: this.scope.labelDownload,
         urlTemplate: "{{raw_media_url}}",
         type: "download",
         url: "",
         availableFor: ["image", "video"],
+      },
+      {
+        id: "clipboard",
+        label: this.scope.labelClipboard,
+        urlTemplate: "{{text}}\n\r{{url}}",
+        type: "clipboard",
+        url: "",
+        availableFor: ["page", "image", "video"],
       },
     ];
     return shareItems;
@@ -200,8 +225,17 @@ export class Bs5ShareComponent extends Component {
       isDesktop: false,
       isNative: this.browserSupportsNativeShare(),
       dropdownId: "dropdownShare" + Bs5ShareComponent.count,
-      shareItems: this.getDefaultShareServices(),
+      shareItems: [],
       dropdownDirection: "down",
+      // Service labels
+      labelFacebook: "Facebook",
+      labelTwitter: "Twitter",
+      labelPinterest: "Pinterest",
+      labelWhatsapp: "Whatsapp",
+      labelTelegram: "Telegram",
+      labelEmail: "Email",
+      labelDownload: "Download",
+      labelClipboard: "Copy to clipboard",
       // Methods
       share: this.share,
       shareOnService: this.shareOnService,
@@ -280,13 +314,20 @@ export class Bs5ShareComponent extends Component {
         urlTemplate = shareItem.mediaUrlTemplate;
       }
 
+      const encode = shareItem.type === "clipboard" ? false : true;
+
       const shareURL = urlTemplate
-        .replace("{{url}}", encodeURIComponent(url))
-        .replace("{{url}}", encodeURIComponent(url))
-        .replace("{{media_url}}", encodeURIComponent(mediaUrl))
+        .replace("{{url}}", encode ? encodeURIComponent(url) : url)
+        .replace(
+          "{{media_url}}",
+          encode ? encodeURIComponent(mediaUrl) : mediaUrl
+        )
         .replace("{{raw_media_url}}", mediaUrl)
-        .replace("{{text}}", encodeURIComponent(shareText))
-        .replace("{{title}}", encodeURIComponent(shareTitle));
+        .replace("{{text}}", encode ? encodeURIComponent(shareText) : shareText)
+        .replace(
+          "{{title}}",
+          encode ? encodeURIComponent(shareTitle) : shareTitle
+        );
 
       shareItem.available = shareItem.availableFor.includes(this.scope.type);
       shareItem.url = shareURL;
@@ -314,10 +355,22 @@ export class Bs5ShareComponent extends Component {
    * @param controller
    * @param el
    */
-  public shareOnService(event: Event, controller: any, el: HTMLAnchorElement) {
+  public shareOnService(
+    item: ShareItem,
+    event: Event,
+    controller: any,
+    el: HTMLAnchorElement
+  ) {
     this.debug("Open popup");
 
     this.dropdown?.hide();
+
+    if (item.type === "clipboard") {
+      copyTextToClipboard(item.url);
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
 
     if (!el || !el.href) {
       console.error("No href attribute found");
@@ -381,6 +434,7 @@ export class Bs5ShareComponent extends Component {
   protected async afterBind() {
     this.initDropdown();
     this.debug("afterBind", this.scope);
+    this.scope.shareItems = this.getDefaultShareServices();
     await super.afterBind();
   }
 

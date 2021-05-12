@@ -34,7 +34,7 @@ export interface ShareItem {
   /**
    * Whether this link is a direct download button or not.
    */
-  type?: "download" | "popup" | "href";
+  type?: "download" | "popup" | "href" | "clipboard";
 
   availableFor: ShareUrlType[];
 

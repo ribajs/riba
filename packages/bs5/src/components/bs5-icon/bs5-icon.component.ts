@@ -51,7 +51,7 @@ export class Bs5IconComponent extends BasicComponent {
     }
 
     console.error(
-      "[bs5-icon] Only svg's are supported! But content-type is " +
+      "[bs5-icon] Only SVG's are supported! But content-type is " +
         response.headers.get("content-type")
     );
     return "";
