@@ -49,7 +49,7 @@ interface Scope {
    */
   position: "left" | "right";
   /**
-   * The sidebar can be move the full page (iPhone style) or overlap (Android style)
+   * The sidebar can be `move` the full page (iPhone style) or `overlap` (Android style)
    */
   mode: "overlap" | "move";
   /**
@@ -73,9 +73,11 @@ interface Scope {
    */
   forceShowOnLocationPathnames: Array<string>;
   /**
-   * If the viewport width is wider than this value the sidebar adds a margin to the container (detected with the `container-selector`) to reduce its content, if the viewport width is slimmer than this value the sidebar opens over the content
+   * If the viewport width is wider than this value
+   * the sidebar adds a margin to the container (detected with the `container-selector`),
+   * if the viewport width is slimmer than this value the sidebar opens over the content (according to the specified mode)
    */
-  overlayOnSlimmerThan: number;
+  modeOnSlimmerThan: number;
 
   /**
    * Close sidebar on swipe
@@ -120,7 +122,7 @@ export class Bs5SidebarComponent extends Component {
       "auto-hide-on-slimmer-than",
       "force-hide-on-location-pathnames",
       "force-show-on-location-pathnames",
-      "overlay-on-slimmer-than",
+      "mode-on-slimmer-than",
       "watch-new-page-ready-event",
       "close-on-swipe",
     ];
@@ -146,7 +148,7 @@ export class Bs5SidebarComponent extends Component {
     watchNewPageReadyEvent: true,
     forceHideOnLocationPathnames: [],
     forceShowOnLocationPathnames: [],
-    overlayOnSlimmerThan: -1,
+    modeOnSlimmerThan: -1,
     closeOnSwipe: true,
 
     // Template methods
@@ -162,7 +164,7 @@ export class Bs5SidebarComponent extends Component {
 
     this.scope.autoShowOnWiderThan = xl ? xl.dimension - 1 : -1;
     this.scope.autoHideOnSlimmerThan = xl ? xl.dimension - 1 : -1;
-    this.scope.overlayOnSlimmerThan = xl ? xl.dimension - 1 : -1;
+    this.scope.modeOnSlimmerThan = xl ? xl.dimension - 1 : -1;
 
     // assign this to bound version, so we can remove window EventListener later without problem
     this.onEnvironmentChanges = this.onEnvironmentChanges.bind(this);
@@ -178,10 +180,14 @@ export class Bs5SidebarComponent extends Component {
     return this.scope.state;
   }
 
+  public modeIsActive() {
+    const vw = getViewportDimensions().w;
+    return vw < this.scope.modeOnSlimmerThan;
+  }
+
   public getShowMode() {
     let mode: State;
-    const vw = getViewportDimensions().w;
-    if (vw < this.scope.overlayOnSlimmerThan) {
+    if (this.modeIsActive()) {
       mode = `${this.scope.mode}-${this.scope.position}` as State;
     } else {
       mode = `side-${this.scope.position}` as State;
@@ -190,7 +196,9 @@ export class Bs5SidebarComponent extends Component {
   }
 
   public hide() {
-    this.setState("hidden");
+    if (this.modeIsActive()) {
+      this.setState("hidden");
+    }
   }
 
   public show() {

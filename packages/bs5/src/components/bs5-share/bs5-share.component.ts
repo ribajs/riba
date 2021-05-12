@@ -191,8 +191,8 @@ export class Bs5ShareComponent extends Component {
       {
         id: "clipboard",
         label: this.scope.labelClipboard,
-        urlTemplate: "{{text}}\n\r{{url}}",
-        mediaUrlTemplate: `{{text}}\n\r{{media_url}}`,
+        urlTemplate: "{{url}}",
+        mediaUrlTemplate: `{{media_url}}`,
         type: "clipboard",
         url: "",
         availableFor: ["page", "image", "video"],
