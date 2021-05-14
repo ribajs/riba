@@ -30,7 +30,11 @@ export const masonryBinder: Binder<Options> = {
       resizeObserver: null,
     };
 
-    this.customData.resizeObserver = new ResizeObserver(this.customData.layout);
+    if (window.ResizeObserver) {
+      this.customData.resizeObserver = new ResizeObserver(
+        this.customData.layout
+      );
+    }
 
     // All components bound
     const lifecycle = LifecycleService.getInstance();
@@ -49,7 +53,7 @@ export const masonryBinder: Binder<Options> = {
     }
     this.customData.images.forEach((img: HTMLImageElement) => {
       // Image size changed
-      this.customData.resizeObserver.unobserve(img);
+      this.customData.resizeObserver?.unobserve(img);
     });
     delete this.customData;
   },
@@ -75,7 +79,7 @@ export const masonryBinder: Binder<Options> = {
       // Image loaded
       img.onload?.(this.customData.layout);
       // Image size changed
-      this.customData.resizeObserver.observe(img);
+      this.customData.resizeObserver?.observe(img);
     });
   },
 };
