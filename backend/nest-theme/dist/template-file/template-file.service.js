@@ -92,15 +92,15 @@ let TemplateFileService = class TemplateFileService {
             const file = this.templates.get(key);
             const stats = await fs_1.promises.stat(file.path);
             if (file.stats.mtimeMs === stats.mtimeMs) {
-                this.log.debug(`Load ${path} from cache`);
+                this.log.debug(`Load ${path} with ${componentTagName} from cache`);
                 return file;
             }
             else {
-                this.log.debug(`Template ${path} has been change, refresh cache`);
+                this.log.debug(`Template ${path} with ${componentTagName} has been change, refresh cache`);
                 return this.loadAndSetCache(key, path, rootTag, componentTagName, variables);
             }
         }
-        this.log.debug(`Template ${path} currently not cached, add them to cache`);
+        this.log.debug(`Template ${path} with ${componentTagName} currently not cached, add them to cache`);
         return this.loadAndSetCache(key, path, rootTag, componentTagName, variables);
     }
 };

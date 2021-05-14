@@ -32,6 +32,7 @@ let SsrMiddleware = class SsrMiddleware {
         this.log.debug('');
         const sharedContext = await this.ssr.getSharedContext(req, this.theme.templateVars);
         try {
+            this.log.debug(`Render page component: ${routeSettings.component} for ${req.url}`);
             const page = await this.ssr.renderComponent({
                 componentTagName: routeSettings.component,
                 sharedContext,
@@ -46,6 +47,7 @@ let SsrMiddleware = class SsrMiddleware {
     }
     getRouteSettingsByRoute(routePath) {
         return this.theme.routes.find((route) => {
+            this.log.debug(`getRouteSettingsByRoute: ${routePath} ${route.path} ${route.path.includes(routePath)}`);
             return route.path.includes(routePath);
         });
     }

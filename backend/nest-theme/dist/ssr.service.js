@@ -83,7 +83,7 @@ let SsrService = class SsrService {
         });
         return dom;
     }
-    async render(layout, componentTagName, sharedContext, scriptFilenames = ['main.bundle.js']) {
+    async render(layout, sharedContext, scriptFilenames = ['main.bundle.js']) {
         const dom = await this.createDomForLayout(layout);
         dom.window.ssr = sharedContext;
         const renderResult = new Promise((resolve, reject) => {
@@ -130,7 +130,7 @@ let SsrService = class SsrService {
         });
         try {
             const _render = async () => {
-                return this.render(template.layout, componentTagName, sharedContext);
+                return this.render(template.layout, sharedContext);
             };
             const render = new Brakes(_render, {
                 timeout: 20000,

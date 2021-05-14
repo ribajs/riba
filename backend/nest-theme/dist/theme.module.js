@@ -60,9 +60,11 @@ let ThemeModule = ThemeModule_1 = class ThemeModule {
         const theme = this.config.get('theme');
         if (theme.routes) {
             for (const route of theme.routes) {
-                consumer
-                    .apply(ssr_middleware_1.SsrMiddleware)
-                    .forRoutes({ path: route.path[0], method: common_1.RequestMethod.GET });
+                for (const path of route.path) {
+                    consumer
+                        .apply(ssr_middleware_1.SsrMiddleware)
+                        .forRoutes({ path, method: common_1.RequestMethod.GET });
+                }
             }
         }
     }

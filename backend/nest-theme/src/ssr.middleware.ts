@@ -30,6 +30,9 @@ export class SsrMiddleware implements NestMiddleware {
     );
 
     try {
+      this.log.debug(
+        `Render page component: ${routeSettings.component} for ${req.url}`,
+      );
       const page = await this.ssr.renderComponent({
         componentTagName: routeSettings.component,
         sharedContext,
@@ -46,6 +49,11 @@ export class SsrMiddleware implements NestMiddleware {
 
   protected getRouteSettingsByRoute(routePath: string) {
     return this.theme.routes.find((route) => {
+      this.log.debug(
+        `getRouteSettingsByRoute: ${routePath} ${
+          route.path
+        } ${route.path.includes(routePath)}`,
+      );
       return route.path.includes(routePath);
     });
   }

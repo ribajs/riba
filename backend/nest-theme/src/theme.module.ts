@@ -105,9 +105,11 @@ export class ThemeModule {
     const theme = this.config.get<ThemeConfig>('theme');
     if (theme.routes) {
       for (const route of theme.routes) {
-        consumer
-          .apply(SsrMiddleware)
-          .forRoutes({ path: route.path[0], method: RequestMethod.GET });
+        for (const path of route.path) {
+          consumer
+            .apply(SsrMiddleware)
+            .forRoutes({ path, method: RequestMethod.GET });
+        }
       }
     }
   }

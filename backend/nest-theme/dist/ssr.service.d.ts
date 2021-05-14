@@ -16,7 +16,7 @@ export declare class SsrService {
     constructor(config: ConfigService, sourceFile: SourceFileService, templateFile: TemplateFileService);
     getSharedContext(req: Request, templateVars: TemplateVars, errorObj?: ErrorObj): Promise<SharedContext>;
     protected createDomForLayout(layout: string): Promise<JSDOM>;
-    render(layout: string, componentTagName: string, sharedContext: SharedContext, scriptFilenames?: string[]): Promise<RenderResult>;
+    render(layout: string, sharedContext: SharedContext, scriptFilenames?: string[]): Promise<RenderResult>;
     protected transformBrowserError(error: Error | ErrorEvent): Error;
     renderComponent({ templatePath, rootTag, componentTagName, sharedContext, }: {
         templatePath?: string;

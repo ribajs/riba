@@ -9,6 +9,7 @@ import {
   SlideshowSlide,
   SlideshowControlsPosition,
   SlideshowIndicatorsPosition,
+  SlideshowSlidePosition,
 } from "../../types";
 import {
   Dragscroll,
@@ -766,10 +767,12 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       item.active = item.active || false;
       item.title = item.title || "";
       item.handle = item.handle || item.index.toString();
-      item.position = item.position || {
-        centerX: 0,
-        centerY: 0,
-      };
+      item.position =
+        item.position ||
+        ({
+          centerX: 0,
+          centerY: 0,
+        } as SlideshowSlidePosition);
 
       item.class = item.class || "";
       item.class += " slide";
