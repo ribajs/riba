@@ -57,6 +57,19 @@ interface Scope {
   controlFullscreenOnIconSize: number;
   controlFullscreenOffIconSize: number;
   controlShareIconSize: number;
+
+  // Share
+  shareText?: string;
+  shareLabel?: string;
+  shareDropdownDirection?: "up" | "down" | "right" | "left";
+  shareLabelFacebook?: string;
+  shareLabelTwitter?: string;
+  shareLabelPinterest?: string;
+  shareLabelWhatsapp?: string;
+  shareLabelTelegram?: string;
+  shareLabelEmail?: string;
+  shareLabelDownload?: string;
+  shareLabelClipboard?: string;
 }
 
 export class PhotoswipeComponent extends Component {
@@ -116,6 +129,20 @@ export class PhotoswipeComponent extends Component {
       "control-fullscreen-on-icon-size",
       "control-fullscreen-off-icon-size",
       "control-share-icon-size",
+      // Share
+      "share-text",
+      "share-url",
+      "share-media-url",
+      "share-label",
+      "share-dropdown-direction",
+      "share-label-facebook",
+      "share-label-twitter",
+      "share-label-pinterest",
+      "share-label-whatsapp",
+      "share-label-telegram",
+      "share-label-email",
+      "share-label-download",
+      "share-label-clipboard",
     ];
   }
 
@@ -167,6 +194,19 @@ export class PhotoswipeComponent extends Component {
     controlFullscreenOnIconSize: 32,
     controlFullscreenOffIconSize: 32,
     controlShareIconSize: 16,
+
+    // Share
+    shareText: undefined,
+    shareLabel: undefined,
+    shareDropdownDirection: undefined,
+    shareLabelFacebook: undefined,
+    shareLabelTwitter: undefined,
+    shareLabelPinterest: undefined,
+    shareLabelWhatsapp: undefined,
+    shareLabelTelegram: undefined,
+    shareLabelEmail: undefined,
+    shareLabelDownload: undefined,
+    shareLabelClipboard: undefined,
   };
 
   constructor() {
@@ -598,7 +638,7 @@ export class PhotoswipeComponent extends Component {
   }
 
   protected template(): ReturnType<TemplateFunction> {
-    // Only set the component template if there no childs already: `<bs5-photoswipe> any childs here.. <bs5-photoswipe/>`
+    // Only set the component template if there no child's already: `<bs5-photoswipe> any child's here.. <bs5-photoswipe/>`
     if (hasChildNodesTrim(this)) {
       return (this as HTMLElement).innerHTML + fullscreenTemplate;
     } else {
