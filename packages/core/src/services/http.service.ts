@@ -179,7 +179,7 @@ export class HttpService {
       mode: options.mode || "cors",
     });
 
-    let bodyResult = ((await response.text()) as unknown) as T;
+    let bodyResult = (await response.text()) as unknown as T;
     if (typeof bodyResult === "string" && isJson(bodyResult)) {
       bodyResult = JSON.parse(bodyResult);
     }

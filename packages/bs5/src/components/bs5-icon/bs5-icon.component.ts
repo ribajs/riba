@@ -5,8 +5,11 @@ import {
   HttpServiceResponse,
 } from "@ribajs/core";
 
+import { BaseCache } from "@ribajs/cache";
+
 export class Bs5IconComponent extends BasicComponent {
   public static tagName = "bs5-icon";
+  public static cache = new BaseCache<Promise<HttpServiceResponse<string>>>();
 
   static get observedAttributes(): string[] {
     return ["size", "width", "height", "src", "color", "direction"];
@@ -20,6 +23,18 @@ export class Bs5IconComponent extends BasicComponent {
 
   protected getSvg() {
     return this.querySelector("svg");
+  }
+
+  protected async fetchCached(url: string) {
+    let response = Bs5IconComponent.cache.get(url);
+    if (response) {
+      return response;
+    }
+    response = HttpService.get(url);
+    if (response) {
+      Bs5IconComponent.cache.set(url, response);
+    }
+    return response;
   }
 
   protected async fetchIcon(src: string) {
@@ -36,9 +51,9 @@ export class Bs5IconComponent extends BasicComponent {
         src,
         window.ssr.ctx.protocol + "://" + window.ssr.ctx.hostname
       );
-      response = await HttpService.get(url.href);
+      response = await this.fetchCached(url.href);
     } else {
-      response = await HttpService.get(src);
+      response = await this.fetchCached(src);
     }
 
     if (response.status !== 200) {
