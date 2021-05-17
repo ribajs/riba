@@ -32,10 +32,10 @@
   ],
   "devDependencies": {
     "@babel/cli": "^7.13.16",
-    "@babel/core": "^7.14.0",
+    "@babel/core": "^7.14.2",
     "@babel/plugin-proposal-class-properties": "^7.13.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.13.8",
-    "@babel/preset-env": "^7.14.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.14.2",
+    "@babel/preset-env": "^7.14.2",
     "@babel/preset-typescript": "^7.13.0",
     "@babel/runtime": "^7.14.0",
     "@babel/runtime-corejs3": "^7.14.0",
@@ -63,8 +63,8 @@
     "@ribajs/router": "workspace:*",
     "@ribajs/shopify": "workspace:*",
     "@ribajs/utils": "workspace:*",
-    "@types/socket.io-client": "1.4.36",
-    "socket.io-client": "4.1.0"
+    "@types/socket.io-client": "3.0.0",
+    "socket.io-client": "4.1.1"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

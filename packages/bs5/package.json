@@ -47,13 +47,13 @@
   ],
   "devDependencies": {
     "@babel/cli": "^7.13.16",
-    "@babel/core": "^7.14.0",
+    "@babel/core": "^7.14.2",
     "@babel/plugin-proposal-class-properties": "^7.13.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.13.8",
-    "@babel/plugin-proposal-optional-chaining": "^7.13.12",
+    "@babel/plugin-proposal-object-rest-spread": "^7.14.2",
+    "@babel/plugin-proposal-optional-chaining": "^7.14.2",
     "@babel/plugin-syntax-export-default-from": "^7.12.13",
-    "@babel/plugin-transform-runtime": "^7.13.15",
-    "@babel/preset-env": "^7.14.1",
+    "@babel/plugin-transform-runtime": "^7.14.2",
+    "@babel/preset-env": "^7.14.2",
     "@babel/preset-typescript": "^7.13.0",
     "@babel/runtime": "^7.14.0",
     "@babel/runtime-corejs3": "^7.14.0",
@@ -87,8 +87,8 @@
     "@ribajs/extras": "workspace:*",
     "@ribajs/utils": "workspace:*",
     "@sphinxxxx/color-conversion": "^2.2.2",
-    "@types/bootstrap": "^5.0.13",
-    "bootstrap": "^5.0.0"
+    "@types/bootstrap": "^5.0.15",
+    "bootstrap": "^5.0.1"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"
