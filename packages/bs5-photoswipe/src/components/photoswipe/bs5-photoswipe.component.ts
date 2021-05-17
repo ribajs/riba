@@ -177,6 +177,7 @@ export class PhotoswipeComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     this.init(PhotoswipeComponent.observedAttributes);
+    this.addEventListeners();
   }
 
   protected async init(observedAttributes: string[]) {
@@ -488,6 +489,17 @@ export class PhotoswipeComponent extends Component {
     }
   }
 
+  protected addEventListeners() {
+    if (this.scope.openImageOnClick) {
+      for (let i = 0; i < this.images.length; i++) {
+        this.images[i].addEventListener(
+          "click",
+          (this.images[i] as any)._rv_click_listener
+        );
+      }
+    }
+  }
+
   protected setItems() {
     this.images = Array.from(this.querySelectorAll(this.scope.itemsSelector));
 
@@ -496,10 +508,6 @@ export class PhotoswipeComponent extends Component {
         (this.images[i] as any)._rv_click_listener = this.openByIndex.bind(
           this,
           i
-        );
-        this.images[i].addEventListener(
-          "click",
-          (this.images[i] as any)._rv_click_listener
         );
       }
 
@@ -543,7 +551,7 @@ export class PhotoswipeComponent extends Component {
     await super.afterBind();
 
     this.setItems();
-
+    this.addEventListeners();
     this.initFullscreenTemplate();
 
     const hashData = this.parseHash();
