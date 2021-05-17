@@ -15,10 +15,10 @@ export class PhotoSwipeUI {
   _overlayUIUpdated = false;
   _controlsVisible = true;
   _fullscreenAPI: FullscreenService | null = null;
-  _controls: any;
-  _captionContainer: any;
-  _fakeCaptionContainer: any;
-  _indexIndicator: any;
+  _controls?: HTMLElement;
+  _captionContainer?: HTMLElement;
+  _fakeCaptionContainer?: HTMLElement;
+  _indexIndicator?: HTMLElement;
   _shareButton?: HTMLElement;
   _shareModal?: HTMLElement;
   _shareModalHidden = true;
@@ -156,7 +156,12 @@ export class PhotoSwipeUI {
     );
 
     if (hasOneSlide !== this._galleryHasOneSlide) {
-      this._togglePswpClass(this._controls, "ui--one-slide", hasOneSlide);
+      if (this._controls) {
+        this._togglePswpClass(this._controls, "ui--one-slide", hasOneSlide);
+      } else {
+        console.warn("_controls not foound!");
+      }
+
       this._galleryHasOneSlide = hasOneSlide;
     }
   }
@@ -217,22 +222,36 @@ export class PhotoSwipeUI {
           this._fakeCaptionContainer = this.framework.createEl(
             "pswp__caption pswp__caption--fake"
           );
-          this._fakeCaptionContainer.appendChild(
-            this.framework.createEl("pswp__caption__center")
-          );
-          this._controls.insertBefore(
-            this._fakeCaptionContainer,
-            this._captionContainer
-          );
+          if (this._fakeCaptionContainer) {
+            this._fakeCaptionContainer.appendChild(
+              this.framework.createEl("pswp__caption__center")
+            );
+            if (this._controls) {
+              if (this._captionContainer) {
+                this._controls.insertBefore(
+                  this._fakeCaptionContainer,
+                  this._captionContainer
+                );
+              } else {
+                console.warn("_captionContainer not found!");
+              }
+            } else {
+              console.warn("_controls not found!");
+            }
+          } else {
+            console.warn("Can't create _fakeCaptionContainer");
+          }
+
           this.framework.addClass(this._controls, "pswp__ui--fit");
         }
         if (
           this._options &&
           this._options.addCaptionHTMLFn &&
+          this._fakeCaptionContainer &&
           this._options.addCaptionHTMLFn(item, this._fakeCaptionContainer, true)
         ) {
           const captionSize = this._fakeCaptionContainer.clientHeight;
-          gap.bottom = parseInt(captionSize, 10) || 44;
+          gap.bottom = parseInt(captionSize.toString(), 10) || 44;
         } else {
           gap.bottom = bars.top; // if no caption, set size of bottom gap to size of top
         }
@@ -302,18 +321,19 @@ export class PhotoSwipeUI {
   }
 
   protected _setupUIElements() {
-    let item, classAttr, uiElement;
+    let item: HTMLElement | null, classAttr, uiElement;
 
-    const loopThroughChildElements = (
-      sChildren: NodeListOf<HTMLUnknownElement>
-    ) => {
+    const loopThroughChildElements = (sChildren: HTMLCollection) => {
       if (!sChildren) {
         return;
       }
 
       const l = sChildren.length;
       for (let i = 0; i < l; i++) {
-        item = sChildren[i];
+        item = sChildren.item(i) as HTMLElement | null;
+        if (!item) {
+          continue;
+        }
         classAttr = item.className;
 
         for (let a = 0; a < this._uiElements.length; a++) {
@@ -329,7 +349,11 @@ export class PhotoSwipeUI {
         }
       }
     };
-    loopThroughChildElements(this._controls.children);
+    if (this._controls?.children) {
+      loopThroughChildElements(this._controls.children);
+    } else {
+      console.warn("Can't loop through _controls!");
+    }
 
     const topBar = this.framework.getChildByClass(
       this._controls,
@@ -445,7 +469,7 @@ export class PhotoSwipeUI {
     this._listen("destroy", () => {
       if (this._options.captionEl) {
         if (this._fakeCaptionContainer) {
-          this._controls.removeChild(this._fakeCaptionContainer);
+          this._controls?.removeChild(this._fakeCaptionContainer);
         }
         this.framework.removeClass(
           this._captionContainer,
@@ -485,7 +509,9 @@ export class PhotoSwipeUI {
 
   public setIdle(isIdle: boolean) {
     this._isIdle = isIdle;
-    this._togglePswpClass(this._controls, "ui--idle", isIdle);
+    if (this._controls) {
+      this._togglePswpClass(this._controls, "ui--idle", isIdle);
+    }
   }
 
   public update() {
@@ -494,16 +520,20 @@ export class PhotoSwipeUI {
       this.updateIndexIndicator();
 
       if (this._options.captionEl && this._options.addCaptionHTMLFn) {
-        this._options.addCaptionHTMLFn(
-          this.pswp.currItem,
-          this._captionContainer
-        );
+        if (this._captionContainer) {
+          this._options.addCaptionHTMLFn(
+            this.pswp.currItem,
+            this._captionContainer
+          );
 
-        this._togglePswpClass(
-          this._captionContainer,
-          "caption--empty",
-          !(this.pswp.currItem as Item).title
-        );
+          this._togglePswpClass(
+            this._captionContainer,
+            "caption--empty",
+            !(this.pswp.currItem as Item).title
+          );
+        } else {
+          console.warn("_captionContainer not found!");
+        }
       }
 
       this._overlayUIUpdated = true;
@@ -537,11 +567,15 @@ export class PhotoSwipeUI {
       if (this._options.getNumItemsFn) {
         numItems = this._options.getNumItemsFn();
       }
-      this._indexIndicator.innerHTML =
-        this.pswp.getCurrentIndex() +
-        1 +
-        (this._options.indexIndicatorSep || "/") +
-        numItems;
+      if (this._indexIndicator) {
+        this._indexIndicator.innerHTML =
+          this.pswp.getCurrentIndex() +
+          1 +
+          (this._options.indexIndicatorSep || "/") +
+          numItems;
+      } else {
+        console.warn("_indexIndicator not found!");
+      }
     }
   }
 

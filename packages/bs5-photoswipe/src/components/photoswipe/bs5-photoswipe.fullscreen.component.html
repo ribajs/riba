@@ -22,18 +22,17 @@
 
             <div class="pswp__top-bar">
 
-                <div class="pswp__top-bar-left">
-                    <div class="pswp__counter"></div>
-                </div>
-
-                <div class="pswp__top-bar-middle">
-                    <div class="pswp__caption">
-                        <div class="pswp__caption__center"></div>
+                <div class="pswp__bar-left">
+                    <div class="pswp__counter" rv-show="showCounter">
+                        {currItem.index | plus 1} / {items.length}
                     </div>
                 </div>
 
+                <div class="pswp__bar-middle">
+                </div>
 
-                <div class="pswp__top-bar-right">
+
+                <div class="pswp__bar-right">
 
                     <bs5-share rv-show="controlShareIconShow" rv-parent class="pswp__button" type="image"
                         rv-co-title="currItem.title" rv-co-url="currItem.src" rv-co-media-url="currItem.src"
@@ -67,6 +66,21 @@
                         rv-if="controlCloseIconShow" rv-src="controlCloseIconSrc" title="Close (Esc)"></bs5-icon>
                 </div>
 
+            </div>
+
+            <div class="pswp__bottom-bar">
+                <div class="pswp__bottom-bar-left">
+
+                </div>
+                <div class="pswp__bottom-bar-middle" rv-show="showCaption">
+                    <div class="pswp__caption">
+                        <div class="pswp__caption__center" rv-html="currItem.title"></div>
+                    </div>
+                    
+                </div>
+                <div class="pswp__bottom-bar-right">
+                    
+                </div>
             </div>
 
             <bs5-icon rv-size="controlPrevIconSize" rv-on-click="prev" direction="left"

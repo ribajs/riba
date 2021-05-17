@@ -17,6 +17,10 @@ interface Scope {
   isZoomAllowed: boolean;
   zoomLevel: number;
 
+  // Options
+  showCounter: boolean;
+  showCaption: boolean;
+
   // Methods
   open: PhotoswipeComponent["open"];
   openByIndex: PhotoswipeComponent["openByIndex"];
@@ -90,8 +94,8 @@ export class PhotoswipeComponent extends Component {
     getThumbBoundsFn: this.getThumbBoundsFn.bind(this),
 
     // Buttons/elements
-    captionEl: false,
-    counterEl: false,
+    captionEl: false, // We have or own logic here
+    counterEl: false, // We have or own logic here
     preloaderEl: true,
 
     closeElClasses: [], // 'item', 'caption', 'zoom-wrap', 'ui', 'top-bar'
@@ -102,6 +106,8 @@ export class PhotoswipeComponent extends Component {
       "open-image-on-click",
       "fullscreen-container-selector",
       "items-selector",
+      "show-counter",
+      "show-caption",
       // Show icons
       "control-next-icon-show",
       "control-prev-icon-show",
@@ -153,6 +159,8 @@ export class PhotoswipeComponent extends Component {
     isZoomed: false,
     isZoomAllowed: false,
     zoomLevel: 0,
+    showCounter: false,
+    showCaption: true,
 
     // Methods
     open: this.open,
@@ -563,6 +571,7 @@ export class PhotoswipeComponent extends Component {
         this.images[i].dataset.fsHeight ||
         this.images[i].height ||
         this.images[i].naturalHeight;
+      const title = this.images[i].dataset.title;
       if (!src || !width || !height) {
         console.warn(
           "[bs5-photoswipe] image element found without src, width or height. Ignoring.."
@@ -575,7 +584,9 @@ export class PhotoswipeComponent extends Component {
         msrc: this.images[i].currentSrc || this.images[i].src || src,
         w: Number(width),
         h: Number(height),
+        title,
         element: this.images[i],
+        index: i,
       });
     }
   }

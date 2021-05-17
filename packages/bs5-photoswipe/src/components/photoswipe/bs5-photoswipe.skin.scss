@@ -158,27 +158,36 @@
 }
 
 /* top black bar with buttons and "1 of X" indicator */
-.pswp__top-bar {
+.pswp__top-bar, .pswp__bottom-bar {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 
 	position: absolute;
 	left: 0;
-	top: 0;
+	right: 0;
 	height: 44px;
 	width: 100%;
 	backdrop-filter: blur($pswp-top-bar-blur);
 	color: $pswp-top-bar-icons-color;
-	.pswp__top-bar-left, .pswp__top-bar-middle, .pswp__top-bar-right {
+	.pswp__bar-left, .pswp__bar-middle, .pswp__bar-right {
 		display: flex;
 		align-items: center;
 		justify-content: center;
 	}
 }
 
+.pswp__top-bar {
+	top: 0;
+}
+
+.pswp__bottom-bar {
+	bottom: 0;
+}
+
 .pswp__caption,
 .pswp__top-bar,
+.pswp__bottom-bar,
 .pswp--has_mouse .pswp-control-prev,
 .pswp--has_mouse .pswp-control-next {
 	backface-visibility: hidden; 

@@ -3462,7 +3462,7 @@ __metadata:
     "@babel/runtime": ^7.14.0
     "@babel/runtime-corejs3": ^7.14.0
     "@popperjs/core": ^2.9.2
-    "@ribajs/cache": "workspace:packages/cache"
+    "@ribajs/cache": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
     "@ribajs/events": "workspace:*"

@@ -9,4 +9,5 @@ export interface Item extends PhotoSwipe.Item {
    */
   title?: string;
   element?: HTMLImageElement;
+  index?: number;
 }

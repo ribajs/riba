@@ -170,7 +170,7 @@
 	width: 100%;
 	backdrop-filter: blur($pswp-top-bar-blur);
 	color: $pswp-top-bar-icons-color;
-	.pswp__top-bar-left, .pswp__top-bar-middle, .pswp__top-bar-right {
+	.pswp__bar-left, .pswp__bar-middle, .pswp__bar-right {
 		display: flex;
 		align-items: center;
 		justify-content: center;
