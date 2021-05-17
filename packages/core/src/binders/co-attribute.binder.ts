@@ -11,7 +11,7 @@ export const componentAttributeBinder: Binder<any, BasicComponent> = {
   publishes: true,
   routine(el: BasicComponent, value: any) {
     const attrName = (this.args[0] as string).trim();
-    if (el.setBinderAttribute) {
+    if (typeof value !== "undefined" && el.setBinderAttribute) {
       el.setBinderAttribute(attrName, value);
     } else {
       console.warn(
@@ -31,9 +31,9 @@ export const componentAttributeBinder: Binder<any, BasicComponent> = {
   },
 
   unbind() {
-    (this.customData.componentAttributeObserver as
-      | Observer
-      | undefined)?.unobserve();
+    (
+      this.customData.componentAttributeObserver as Observer | undefined
+    )?.unobserve();
   },
 
   getValue(el: BasicComponent) {
