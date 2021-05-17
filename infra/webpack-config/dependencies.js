@@ -9,7 +9,7 @@ module.exports.getDependencies = (config = {}) => {
   config.TerserPlugin = config.TerserPlugin || require("terser-webpack-plugin");
 
   // https://github.com/nuxt-contrib/webpackbar
-  config.WebpackbarPlugin = config.WebpackbarPlugin || require('webpackbar');
+  config.WebpackbarPlugin = config.WebpackbarPlugin || require("webpackbar");
 
   config.ForkTsCheckerPlugin =
     config.ForkTsCheckerPlugin || require("fork-ts-checker-webpack-plugin");
@@ -36,12 +36,12 @@ module.exports.getDependencies = (config = {}) => {
 
   config.sassLoaderPath =
     config.sassLoaderPath || require.resolve("sass-loader");
-  // Use sass by default for yarn 2 pnp support, see: https://github.com/webpack-contrib/sass-loader/issues/802
-  config.styles.SassImplementation =
-    config.styles.SassImplementation || require("sass");
 
   // Graphql loader https://www.npmjs.com/package/@graphql-tools/webpack-loader
-  config.gqlLoaderPath = config.gqlLoaderPath || require.resolve("@graphql-tools/webpack-loader") || require.resolve('raw-loader');
+  config.gqlLoaderPath =
+    config.gqlLoaderPath ||
+    require.resolve("@graphql-tools/webpack-loader") ||
+    require.resolve("raw-loader");
 
   // https://github.com/webpack-contrib/copy-webpack-plugin
   if (config.copyAssets && config.copyAssets.enable === true) {

@@ -55,8 +55,8 @@ module.exports.getConfig = (config = {}, env = {}) => {
         {
           loader: config.fileLoaderPath,
           options: {
-            // TODO publicPath function e.g. to resolve iconset`s and fonts for monaco editor? 
-          }
+            // TODO publicPath function e.g. to resolve iconset`s and fonts for monaco editor?
+          },
         },
       ],
     },
@@ -132,7 +132,7 @@ module.exports.getConfig = (config = {}, env = {}) => {
     );
   }
 
-  logger.debug('Used plugins: ', config.plugins);
+  logger.debug("Used plugins: ", config.plugins);
 
   if (config.styles.build === true) {
     config.rules.push(getStyleLoaderRule(config));
@@ -154,7 +154,7 @@ module.exports.getConfig = (config = {}, env = {}) => {
 
   // ProgressBar plugin
   if (config.WebpackbarPlugin) {
-    config.webpackbar = config.webpackbar || {}
+    config.webpackbar = config.webpackbar || {};
     config.plugins.push(new config.WebpackbarPlugin(config.webpackbar));
   }
 

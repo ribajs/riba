@@ -118,24 +118,21 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
 
       const eslintConfig = {
         files: config.tsSourceDir + "/**/*.{ts,tsx,js,jsx}",
-        options: {}
-      }
+        options: {},
+      };
 
       if (eslintConfigPath) {
         logger.debug(
           "Enable ESLint because a eslint config file was found in " +
-            eslintConfigPath
+          eslintConfigPath
         );
         eslintConfig.options = require(eslintConfigPath);
       } else {
-        logger.debug(
-          "Use default Riba ESLint config"
-        );
+        logger.debug("Use default Riba ESLint config");
         eslintConfig.options = require("@ribajs/eslint-config");
       }
 
       config.forkTsCheckerConfig.eslint = eslintConfig;
-
     }
   }
 
@@ -150,15 +147,12 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
     if (postcssConfigPath) {
       logger.debug(
         "Enable PostCSS because a postcss config file was found in " +
-          postcssConfigPath
+        postcssConfigPath
       );
       config.postcssOptions = require(postcssConfigPath);
     } else {
-      logger.debug(
-        "Use default Riba PostCSS config" +
-          postcssConfigPath
-      );
-      config.postcssOptions = require("@ribajs/postcss-config")({env: env});
+      logger.debug("Use default Riba PostCSS config" + postcssConfigPath);
+      config.postcssOptions = require("@ribajs/postcss-config")({ env: env });
     }
   }
 
@@ -169,7 +163,10 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
     if (htmlIndex) {
       config.htmlTemplatePaths.push(htmlIndex);
     }
-    if (Array.isArray(config.htmlTemplatePaths) && config.htmlTemplatePaths.length) {
+    if (
+      Array.isArray(config.htmlTemplatePaths) &&
+      config.htmlTemplatePaths.length
+    ) {
       logger.debug(
         "Set config.htmlTemplatePaths to: " + config.htmlTemplatePaths
       );
@@ -240,21 +237,21 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
           test: /[\\/]node_modules[\\/]/,
           name: commonsName,
           chunks: "all",
-          reuseExistingChunk: true
+          reuseExistingChunk: true,
         },
         styles: {
           name: "styles",
           test: /\.css$/,
           chunks: "all",
           enforce: true,
-          reuseExistingChunk: true
+          reuseExistingChunk: true,
         },
         templates: {
           name: "templates",
           test: /\.[html|pug]$/,
           chunks: "all",
           enforce: true,
-          reuseExistingChunk: true
+          reuseExistingChunk: true,
         },
       },
     },
@@ -285,9 +282,9 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
 
       // https://github.com/nuxt/nuxt.js/blob/dev/packages/webpack/src/config/base.js#L435
       config.webpackbar = config.webpackbar || {
-        name: 'OctoberCMS',
+        name: "OctoberCMS",
         color: colors.client,
-      }
+      };
 
       break;
     case "shopify":
@@ -320,9 +317,9 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
 
       // https://github.com/nuxt/nuxt.js/blob/dev/packages/webpack/src/config/base.js#L435
       config.webpackbar = config.webpackbar || {
-        name: 'Shopify',
+        name: "Shopify",
         color: colors.client,
-      }
+      };
 
       break;
     case "shopify-checkout":
@@ -355,9 +352,9 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
 
       // https://github.com/nuxt/nuxt.js/blob/dev/packages/webpack/src/config/base.js#L435
       config.webpackbar = config.webpackbar || {
-        name: 'Checkout',
+        name: "Checkout",
         color: colors.modern,
-      }
+      };
 
       break;
     // E.g. used for demos
@@ -395,9 +392,9 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
 
       // https://github.com/nuxt/nuxt.js/blob/dev/packages/webpack/src/config/base.js#L435
       config.webpackbar = config.webpackbar || {
-        name: 'Client',
+        name: "Client",
         color: colors.client,
-      }
+      };
 
       break;
     case "ssr":
@@ -415,6 +412,8 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
         foldername: "src",
       };
 
+      config.styles.build = false;
+
       config.forkTsCheckerConfig.typescript =
         config.forkTsCheckerConfig.typescript || {};
 
@@ -422,9 +421,9 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
 
       // https://github.com/nuxt/nuxt.js/blob/dev/packages/webpack/src/config/base.js#L435
       config.webpackbar = config.webpackbar || {
-        name: 'Server',
+        name: "Server",
         color: colors.server,
-      }
+      };
 
       // Disable chunks for ssr builds
       config.optimization.splitChunks = {};
