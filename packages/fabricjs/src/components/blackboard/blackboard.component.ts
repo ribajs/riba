@@ -7,108 +7,56 @@ export class FabricJSBlackboardComponent extends Component {
 
   public _debug = false;
 
-  private _backgroundColor = [0, 0, 0];
-  private _foregroundColor = [255, 255, 255];
   private _canvas: HTMLCanvasElement;
-  private _backgroundImage: string | null = null;
   private _fabricCanvas: fabric.Canvas | null = null;
 
   static get observedAttributes(): string[] {
-    return ["width", "height", "background-color", "background-image", "foreground-color"];
+    return [
+      "width",
+      "height",
+      "background-color",
+      "background-image",
+      "foreground-color",
+    ];
   }
 
-  public scope: any;
+  public scope = {
+    backgroundImage: null,
+    backgroundColor: [0, 0, 0],
+    foregroundColor: [255, 255, 255],
+    width: 800,
+    height: 600,
+  };
 
   constructor() {
     super();
     this._canvas = document.createElement("canvas");
-    this._canvas.setAttribute("id", "fabric__canvas_"+FabricJSBlackboardComponent._canvasID);
-    this.scope = ((self) => ({
-      get backgroundColor() {
-        return self._backgroundColor;
-      },
-      set backgroundColor(val) {
-        console.log("Set background color", val);
-        self._backgroundColor = val;
-        if (self._fabricCanvas) {
-          self._fabricCanvas.setBackgroundColor(`rgb(${val[0]}, ${val[1]}, ${val[2]})}`, self._fabricCanvas!.renderAll.bind(self._fabricCanvas))
-        }
-      },
-      get foregroundColor() {
-        return self._foregroundColor;
-      },
-      set foregroundColor(val) {
-        console.log("Set foreground color", val);
-        self._foregroundColor = val;
-        if (self._fabricCanvas) {
-          self._fabricCanvas.freeDrawingBrush.color = `(rgb(${val[0]}, ${val[1]}, ${val[2]}))`;
-        }
-      },
-      get backgroundImage() {
-        return self._backgroundImage;
-      },
-      set backgroundImage(val: string | null) {
-        console.log("Set background image", val);
-        self._backgroundImage = val;
-        if (val && self._fabricCanvas) {
-          console.log("Load image", val);
-          fabric.util.loadImage(val, (img, ...args) => {
-            if (!img) {
-              console.error(`Could not load image: '${val}' -`, ...args);
-            } else {
-              console.log("Image loaded:", img);
-              const fabricImg = new fabric.Image(img);
-              console.log("fabricImg", fabricImg);
-              self._fabricCanvas!.setBackgroundImage(
-                fabricImg,
-                self._fabricCanvas!.renderAll.bind(self._fabricCanvas),
-                {
-                  scaleX: self._fabricCanvas!.width! / fabricImg.width!,
-                  scaleY: self._fabricCanvas!.height! / fabricImg.height!
-                }
-              );
-            }
-          });
-        }
-      },
-      get width() {
-        return self._canvas.width;
-      },
-      set width(val) {
-        console.log("Set width", val);
-        self._canvas.width = val;
-        this.backgroundColor = this.backgroundColor;
-      },
-      get height() {
-        return self._canvas.height;
-      },
-      set height(val) {
-        console.log("Set height", val);
-        self._canvas.height = val;
-        this.backgroundColor = this.backgroundColor;
-      },
-    }))(this);
+    this._canvas.setAttribute(
+      "id",
+      "fabric__canvas_" + FabricJSBlackboardComponent._canvasID
+    );
   }
 
   protected async connectedCallback() {
     super.connectedCallback();
     this.appendChild(this._canvas);
     this._fabricCanvas = new fabric.Canvas(
-      "fabric__canvas_"+FabricJSBlackboardComponent._canvasID,
+      "fabric__canvas_" + FabricJSBlackboardComponent._canvasID,
       {
         isDrawingMode: true,
         hoverCursor: "pointer",
         selection: false,
-        backgroundColor: `rgb(${this._backgroundColor[0]}, ${this._backgroundColor[1]}, ${this._backgroundColor[2]})`,
-      });
+        backgroundColor: `rgb(${this.scope.backgroundColor[0]}, ${this.scope.backgroundColor[1]}, ${this.scope.backgroundColor[2]})`,
+      }
+    );
     await super.init(FabricJSBlackboardComponent.observedAttributes);
-    this._fabricCanvas.freeDrawingBrush = new ((fabric as any).CrayonBrush)(
+    this._fabricCanvas.freeDrawingBrush = new (fabric as any).CrayonBrush(
       this._fabricCanvas,
       {
         width: 30,
         opacity: 1,
         inkAmount: 5,
-        color: `rgb(${this._foregroundColor[0]}, ${this._foregroundColor[1]}, ${this._foregroundColor[2]})`,
+        color: `rgb(${this.scope.foregroundColor[0]}, ${this.scope.foregroundColor[1]}, ${this.scope.foregroundColor[2]})`,
       }
     );
     // console.log(fabric);
@@ -119,6 +67,89 @@ export class FabricJSBlackboardComponent extends Component {
     return [];
   }
 
+  protected parsedAttributeChangedCallback(
+    attributeName: string,
+    oldValue: any,
+    newValue: any,
+    namespace: string | null
+  ) {
+    super.parsedAttributeChangedCallback(
+      attributeName,
+      oldValue,
+      newValue,
+      namespace
+    );
+
+    // console.log("attributeName", attributeName, oldValue, newValue);
+    switch (attributeName) {
+      case "foregroundColor":
+        this.onForegroundColorChanged(newValue);
+        break;
+      case "backgroundColor":
+        this.onBackgroundColorChanged(newValue);
+        break;
+      case "backgroundImage":
+        this.onBackgroundImageChanged(newValue);
+        break;
+      case "width":
+        this.onWidthChanged(newValue);
+        break;
+      case "height":
+        this.onHeightChanged(newValue);
+        break;
+    }
+  }
+
+  protected onForegroundColorChanged(val: number[]) {
+    console.log("Set foreground color boi", val);
+    if (this._fabricCanvas) {
+      console.log(this._fabricCanvas.freeDrawingBrush.color);
+      this._fabricCanvas.freeDrawingBrush.color = `rgb(${val[0]}, ${val[1]}, ${val[2]})`;
+      console.log(this._fabricCanvas.freeDrawingBrush.color);
+    }
+  }
+
+  protected onBackgroundColorChanged(val: number[]) {
+    console.log("Set background color boi", val);
+    if (this._fabricCanvas) {
+      this._fabricCanvas.setBackgroundColor(
+        `rgb(${val[0]}, ${val[1]}, ${val[2]})}`,
+        this._fabricCanvas.renderAll.bind(this._fabricCanvas)
+      );
+    }
+  }
+
+  protected onBackgroundImageChanged(val: string) {
+    console.log("Set background image", val);
+    if (val && this._fabricCanvas) {
+      console.log("Load image", val);
+      fabric.util.loadImage(val, (img, ...args) => {
+        if (!img) {
+          console.error(`Could not load image: '${val}' -`, ...args);
+        } else {
+          console.log("Image loaded:", img);
+          const fabricImg = new fabric.Image(img);
+          console.log("fabricImg", fabricImg);
+          this._fabricCanvas!.setBackgroundImage(
+            fabricImg,
+            this._fabricCanvas!.renderAll.bind(this._fabricCanvas),
+            {
+              scaleX: this._fabricCanvas!.width! / fabricImg.width!,
+              scaleY: this._fabricCanvas!.height! / fabricImg.height!,
+            }
+          );
+        }
+      });
+    }
+  }
+  protected onHeightChanged(val: number) {
+    console.log("Set height", val);
+    this._canvas.height = val;
+  }
+  protected onWidthChanged(val: number) {
+    console.log("Set width", val);
+    this._canvas.width = val;
+  }
   protected template() {
     return null;
   }
