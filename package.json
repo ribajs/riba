@@ -122,6 +122,7 @@
     "@ribajs/cache": "workspace:*",
     "@ribajs/core": "workspace:*",
     "@ribajs/extras": "workspace:*",
+    "@ribajs/fabricjs": "workspace:*",
     "@ribajs/events": "workspace:*",
     "@ribajs/history": "workspace:*",
     "@ribajs/i18n": "workspace:*",
