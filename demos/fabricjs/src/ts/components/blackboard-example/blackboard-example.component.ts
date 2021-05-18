@@ -15,15 +15,16 @@ export class BlackboardExampleComponent extends Component {
   }
 
   public scope = {
-    color: [255, 255, 255],
+    color: [0, 255, 0],
   };
 
   constructor() {
     super();
-    this.eventDispatcher = EventDispatcher.getInstance(
-      "bs5-colorpicker:main"
-    );
-    this.eventDispatcher.on("change", color => this.scope.color = [color.substr(1, 2), color.substr(3, 2), color.substr(5, 2)].map(x => parseInt(x, 16)))
+    this.eventDispatcher = EventDispatcher.getInstance("bs5-colorpicker:main");
+    this.eventDispatcher.on("change", (color) => {
+      console.log("Change color", JSON.parse(JSON.stringify(color)));
+      this.scope.color = JSON.parse(JSON.stringify(color._rgba));
+    });
   }
 
   protected connectedCallback() {
