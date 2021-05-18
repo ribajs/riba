@@ -14,7 +14,7 @@
     "./*.js"
   ],
   "dependencies": {
-    "@babel/core": "^7.14.2",
+    "@babel/core": "^7.14.3",
     "@graphql-tools/webpack-loader": "^6.4.0",
     "@ribajs/eslint-config": "workspace:*",
     "@ribajs/npm-package": "workspace:*",
