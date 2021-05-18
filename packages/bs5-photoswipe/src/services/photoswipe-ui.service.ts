@@ -159,7 +159,7 @@ export class PhotoSwipeUI {
       if (this._controls) {
         this._togglePswpClass(this._controls, "ui--one-slide", hasOneSlide);
       } else {
-        console.warn("_controls not foound!");
+        console.warn("_controls not found!");
       }
 
       this._galleryHasOneSlide = hasOneSlide;

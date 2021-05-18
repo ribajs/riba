@@ -2,6 +2,7 @@ import { Component, TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./bs5-photoswipe.component.html";
 import fullscreenTemplate from "./bs5-photoswipe.fullscreen.component.html";
+import { EventDispatcher } from "@ribajs/events";
 
 import PhotoSwipe from "photoswipe";
 import { PhotoSwipeUI } from "../../services/photoswipe-ui.service";
@@ -82,6 +83,8 @@ export class PhotoswipeComponent extends Component {
   protected autobind = true;
 
   public _debug = false;
+
+  protected routerEvents = new EventDispatcher("main");
 
   protected pswp?: PhotoSwipe<Options, PhotoSwipeUI>;
 
@@ -537,6 +540,10 @@ export class PhotoswipeComponent extends Component {
     }
   }
 
+  protected onPageChanges() {
+    this.checkHash();
+  }
+
   protected addEventListeners() {
     if (this.scope.openImageOnClick) {
       for (let i = 0; i < this.images.length; i++) {
@@ -546,6 +553,8 @@ export class PhotoswipeComponent extends Component {
         );
       }
     }
+
+    this.routerEvents.on("newPageReady", this.onPageChanges, this);
   }
 
   protected setItems() {
@@ -597,6 +606,13 @@ export class PhotoswipeComponent extends Component {
     );
   }
 
+  protected checkHash() {
+    const hashData = this.parseHash();
+    if (hashData.pid && hashData.gid) {
+      this.openWithoutAnimation(this.scope.items[hashData.pid - 1]);
+    }
+  }
+
   protected async afterBind() {
     // this.debug("afterBind", this.scope);
     await super.afterBind();
@@ -604,12 +620,7 @@ export class PhotoswipeComponent extends Component {
     this.setItems();
     this.addEventListeners();
     this.initFullscreenTemplate();
-
-    const hashData = this.parseHash();
-    if (hashData.pid && hashData.gid) {
-      //Todo check for bounds
-      this.openWithoutAnimation(this.scope.items[hashData.pid - 1]);
-    }
+    this.checkHash();
   }
 
   protected parseHash() {

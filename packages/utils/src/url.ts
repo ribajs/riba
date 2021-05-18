@@ -39,7 +39,7 @@ export const getLocation = (url?: string): Location => {
   }
   const l = document.createElement("a");
   l.href = url;
-  return (l as any) as Location;
+  return l as any as Location;
 };
 
 /**
@@ -52,7 +52,7 @@ export const normalizeUrl = (url: string): string => {
   const checkLocation = getLocation(url);
   const hostname = getLocation().hostname;
   if (checkLocation.hostname === hostname) {
-    return checkLocation.pathname + checkLocation.search;
+    return checkLocation.pathname + checkLocation.search + checkLocation.hash;
   } else {
     return getUrl(url);
   }
@@ -70,7 +70,8 @@ export const getUrl = (url?: string): string => {
     "//" +
     location.host +
     location.pathname +
-    location.search
+    location.search +
+    location.hash
   );
 };
 

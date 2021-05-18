@@ -3423,6 +3423,7 @@ __metadata:
     "@ribajs/cache": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
+    "@ribajs/events": "workspace:packages/events"
     "@ribajs/extras": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"

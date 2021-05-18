@@ -24,6 +24,13 @@ export const componentAttributeBinder: Binder<any, BasicComponent> = {
   },
   bind(el) {
     const attrName = (this.args[0] as string).trim();
+    if (typeof el.observeAttribute !== "function") {
+      console.warn(
+        "[componentAttributeBinder] You can only use this binder on Riba components",
+        el
+      );
+      return;
+    }
     this.customData = {
       componentAttributeObserver: el.observeAttribute(attrName, {
         sync: () => {
@@ -35,7 +42,7 @@ export const componentAttributeBinder: Binder<any, BasicComponent> = {
 
   unbind() {
     (
-      this.customData.componentAttributeObserver as Observer | undefined
+      this.customData?.componentAttributeObserver as Observer | undefined
     )?.unobserve();
   },
 

@@ -58,9 +58,10 @@ class Pjax {
     }
 
     // Ignore case when a hash is being tacked on the current URL
-    if (href.indexOf("#") > -1) {
-      return false;
-    }
+    // TODO option for this
+    // if (href.indexOf("#") > -1) {
+    //   return false;
+    // }
 
     // In case you're trying to load the same page
     if (cleanLink(href) === cleanLink(location.href)) {

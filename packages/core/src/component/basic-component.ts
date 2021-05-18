@@ -114,9 +114,8 @@ export abstract class BasicComponent extends HTMLElement {
         oa2c[observedAttribute] = { passed: false, initialized: false };
       } else {
         if (!oa2c[observedAttribute].passed) {
-          oa2c[observedAttribute].passed = this.attributeIsPassed(
-            observedAttribute
-          );
+          oa2c[observedAttribute].passed =
+            this.attributeIsPassed(observedAttribute);
         }
       }
     }
