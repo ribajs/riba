@@ -16,3 +16,4 @@ export { ltFormatter } from "./lt.formatter";
 export { eltFormatter } from "./elt.formatter";
 export { orFormatter } from "./or.formatter";
 export { notFormatter } from "./not.formatter";
+export { ternaryFormatter } from "./ternary.formatter";
