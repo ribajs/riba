@@ -44,6 +44,7 @@ module.exports.getConfig = (config = {}, env = {}) => {
           loader: config.htmlLoaderPath,
           options: {
             minimize: true,
+            sources: false,
           },
         },
       ],
