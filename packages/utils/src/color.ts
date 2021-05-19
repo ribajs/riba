@@ -40,5 +40,5 @@ export const consoleColoured = (
 
   printArgs.push(...args);
 
-  console[options.mode](console, ...printArgs);
+  console[options.mode](...printArgs);
 };
