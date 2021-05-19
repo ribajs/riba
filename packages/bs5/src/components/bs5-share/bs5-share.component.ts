@@ -4,16 +4,21 @@ import template from "./bs5-share.component.html";
 import labelTemplate from "./bs5-share.label.html";
 import { ShareItem, ShareUrlType } from "../../types";
 import { Dropdown } from "@ribajs/bs5";
-import { hasChildNodesTrim, copyTextToClipboard } from "@ribajs/utils";
+import {
+  hasChildNodesTrim,
+  copyTextToClipboard,
+  stripHtml,
+} from "@ribajs/utils";
 
 export interface Scope {
   type: ShareUrlType;
   title: string;
   text: string;
   /** Page url to share */
-  url: string;
+  url?: string;
   label: string;
   labelTemplate: string;
+  filename?: string;
 
   /** true if the browser runs on Android */
   isAndroid: boolean;
@@ -44,6 +49,7 @@ export interface Scope {
   // Methods
   shareOnService: Bs5ShareComponent["shareOnService"];
   share: Bs5ShareComponent["share"];
+  getFilename: Bs5ShareComponent["getFilename"];
 }
 
 export interface NavigatorShareParam {
@@ -81,6 +87,7 @@ export class Bs5ShareComponent extends Component {
       "text",
       "url",
       "media-url",
+      "filename",
       "label",
       "dropdown-direction",
       "label-facebook",
@@ -108,6 +115,17 @@ export class Bs5ShareComponent extends Component {
     Bs5ShareComponent.count++;
     this.onExternalOpenEvent = this.onExternalOpenEvent.bind(this);
     this.onExternalCloseEvent = this.onExternalCloseEvent.bind(this);
+  }
+
+  public getFilename(item: ShareItem) {
+    console.debug("getFilename", item);
+    if (item.filename) {
+      return item.filename;
+    }
+    const url = this.getMediaUrlForShare();
+    const filename = url.split("/").pop();
+    console.debug("filename", filename);
+    return filename;
   }
 
   protected getDefaultShareServices() {
@@ -187,6 +205,7 @@ export class Bs5ShareComponent extends Component {
         type: "download",
         url: "",
         availableFor: ["image", "video"],
+        filename: this.scope.filename,
       },
       {
         id: "clipboard",
@@ -218,7 +237,7 @@ export class Bs5ShareComponent extends Component {
       type: "page",
       title: document.title,
       text: "Look at this! 👀🤩",
-      url: window.location.href,
+      url: undefined,
       label: "Share",
       labelTemplate,
       isAndroid: this.isAndroid(),
@@ -240,6 +259,7 @@ export class Bs5ShareComponent extends Component {
       // Methods
       share: this.share,
       shareOnService: this.shareOnService,
+      getFilename: this.getFilename,
     };
 
     // on those two support "mobile deep links", so HTTP based fallback for all others.
@@ -292,7 +312,7 @@ export class Bs5ShareComponent extends Component {
   }
 
   protected getTextForShare() {
-    return this.scope.text;
+    return stripHtml(this.scope.text);
   }
 
   /**
@@ -300,7 +320,7 @@ export class Bs5ShareComponent extends Component {
    * @param appendUrl
    */
   protected getTitleForShare() {
-    return this.scope.title;
+    return stripHtml(this.scope.title);
   }
 
   protected updateShareURLs() {
@@ -356,33 +376,30 @@ export class Bs5ShareComponent extends Component {
    * @param controller
    * @param el
    */
-  public shareOnService(
+  public async shareOnService(
     item: ShareItem,
     event: Event,
     controller: any,
     el: HTMLAnchorElement
   ) {
-    this.debug("Open popup");
+    console.debug("shareOnService", item);
 
     this.dropdown?.hide();
 
     if (item.type === "clipboard") {
-      copyTextToClipboard(item.url);
       event.preventDefault();
       event.stopPropagation();
+      await copyTextToClipboard(item.url);
       return false;
     }
 
-    if (!el || !el.href) {
-      console.error("No href attribute found");
-      return false;
-    }
+    // if (!el || !el.href) {
+    //   console.error("No href attribute found");
+    //   return false;
+    // }
 
     // We use the default browser anchor href logic for download and href
-    if (
-      (el.hasAttribute("type") && el.getAttribute("type") === "download") ||
-      el.getAttribute("type") === "href"
-    ) {
+    if (item.type === "download") {
       return true;
     }
 
@@ -392,11 +409,11 @@ export class Bs5ShareComponent extends Component {
     // this.debug('Open popup');
 
     window.open(
-      el.href,
+      item.url,
       "Share",
       "scrollbars=yes,resizable=yes,toolbar=no," +
-        "location=yes,width=550,height=420,top=100,left=" +
-        (window.screen ? Math.round(screen.width / 2 - 275) : 100)
+      "location=yes,width=550,height=420,top=100,left=" +
+      (window.screen ? Math.round(screen.width / 2 - 275) : 100)
     );
 
     return false;
@@ -407,20 +424,20 @@ export class Bs5ShareComponent extends Component {
     event.preventDefault();
     event.stopPropagation();
     if (this.scope.isNative && !this.scope.isDesktop) {
-      return navigator
-        .share({
+      try {
+        await navigator.share({
           title: this.scope.title,
           text: `${this.scope.text}\r\n\r\n`,
           url: this.scope.url || window.location.href,
-        })
-        .catch((error: DOMException) => {
-          if (error.name === "AbortError") {
-            // TODO show flash message
-            // this.debug(error.message);
-            return;
-          }
-          console.error(`Error ${error.name}: ${error.message}`, error);
         });
+      } catch (error) {
+        if (error.name === "AbortError") {
+          // TODO show flash message
+          // this.debug(error.message);
+          return;
+        }
+        console.error(`Error ${error.name}: ${error.message}`, error);
+      }
     } else {
       this.updateShareURLs();
       return this.dropdown?.toggle();
@@ -440,7 +457,7 @@ export class Bs5ShareComponent extends Component {
   }
 
   protected requiredAttributes(): string[] {
-    return ["url"];
+    return [];
   }
 
   protected template(): ReturnType<TemplateFunction> {

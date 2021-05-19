@@ -26,17 +26,15 @@ const fallbackCopyTextToClipboard = (text: string) => {
  * Copy text to clipboard
  * @see https://stackoverflow.com/a/30810322
  */
-export const copyTextToClipboard = (text: string) => {
+export const copyTextToClipboard = async (text: string) => {
   if (!navigator.clipboard) {
     fallbackCopyTextToClipboard(text);
     return;
   }
-  navigator.clipboard.writeText(text).then(
-    function () {
-      console.log("Async: Copying to clipboard was successful: " + text);
-    },
-    function (err) {
-      console.error("Async: Could not copy text: ", err);
-    }
-  );
+  try {
+    await navigator.clipboard.writeText(text);
+    console.log("Copying to clipboard was successful: " + text);
+  } catch (error) {
+    console.error("Could not copy text: ", error);
+  }
 };

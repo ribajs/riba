@@ -1,8 +1,13 @@
 <div rv-add-class="'drop' | append dropdownDirection">
   <div class="dropdown-toggle dropdown-toggle-share" rv-id="dropdownId" rv-template="labelTemplate"></div>
   <div class="dropdown-menu" rv-aria-labelledby="dropdownId">
-    <a rv-each-item="shareItems" rv-show="item.available" rv-download="item.type | eq 'download'" rv-type="item.type"
-      target="_blank" rv-on-click="shareOnService | args item" class="dropdown-item no-barba" rv-href="item.url"
-      rv-html="item.label"></a>
+
+    <div rv-each-item="shareItems" rv-show="item.available" rv-on-click="shareOnService | args item">
+      <a rv-if="item.type | eq 'download'" class="dropdown-item no-barba" rv-type="item.type" target="_blank"
+        rv-download="getFilename | call item" rv-href="item.url" rv-html="item.label">
+      </a>
+      <div class="dropdown-item" rv-unless="item.type | eq 'download'" rv-type="item.type" rv-html="item.label"></div>
+    </div>
+
   </div>
 </div>

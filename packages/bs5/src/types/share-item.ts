@@ -29,6 +29,8 @@ export interface ShareItem {
    */
   urlTemplate: string;
 
+  filename?: string;
+
   mediaUrlTemplate?: string;
 
   /**
