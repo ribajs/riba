@@ -10,10 +10,11 @@ export const DurationFormatter: Formatter = {
   /**
    * Get the duration between two dates
    * @example { startAt | duration endAt | asHours }
-   * @param start
-   * @param end
    */
-  read(start: moment.MomentInput, end: moment.MomentInput) {
+  read(start: moment.MomentInput, end?: moment.MomentInput) {
+    if (!end) {
+      end = moment.now();
+    }
     return moment.duration(moment(end).diff(start));
   },
 };
