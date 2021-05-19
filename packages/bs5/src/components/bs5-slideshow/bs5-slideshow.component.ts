@@ -546,13 +546,14 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   protected addEventListeners() {
     this.routerEvents.on("newPageReady", this.onViewChanges);
 
+    // If sidebar itself resizes
     if (window.ResizeObserver) {
       this.resizeObserver = new window.ResizeObserver(this.onViewChanges);
       this.resizeObserver?.observe(this);
-    } else {
-      // Fallback watch window resize
-      window.addEventListener("resize", this.onViewChanges, { passive: true });
     }
+
+    // If window resizes
+    window.addEventListener("resize", this.onViewChanges, { passive: true });
 
     this.bs5.events.on("breakpoint:changed", this.onBreakpointChanges);
 
@@ -946,9 +947,9 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     const scrollTo =
       this.scope.activeBreakpoint.angle === "vertical"
         ? this.slideshowInner.scrollTop +
-          this.scope.items[index].position.centerY
+        this.scope.items[index].position.centerY
         : this.slideshowInner.scrollLeft +
-          this.scope.items[index].position.centerX;
+        this.scope.items[index].position.centerX;
     return scrollTo <= maxScrollTo && scrollTo >= 0;
   }
 
