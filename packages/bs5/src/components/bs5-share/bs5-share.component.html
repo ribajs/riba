@@ -3,10 +3,11 @@
   <div class="dropdown-menu" rv-aria-labelledby="dropdownId">
 
     <div rv-each-item="shareItems" rv-show="item.available" rv-on-click="shareOnService | args item">
-      <a rv-if="item.type | eq 'download'" class="dropdown-item no-barba" rv-type="item.type" target="_blank"
-        rv-download="getFilename | call item" rv-href="item.url" rv-html="item.label">
+      <a rv-if="item.type | eq 'download'" class="dropdown-item no-barba cursor-pointer" rv-type="item.type"
+        target="_blank" rv-download="getFilename | call item" rv-href="item.url" rv-html="item.label">
       </a>
-      <div class="dropdown-item" rv-unless="item.type | eq 'download'" rv-type="item.type" rv-html="item.label"></div>
+      <div class="dropdown-item cursor-pointer" rv-unless="item.type | eq 'download'" rv-type="item.type"
+        rv-html="item.label"></div>
     </div>
 
   </div>
