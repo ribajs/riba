@@ -24,7 +24,7 @@
     "copy-webpack-plugin": "^8.1.1",
     "css-loader": "^5.2.4",
     "file-loader": "^6.2.0",
-    "fork-ts-checker-webpack-plugin": "^6.2.9",
+    "fork-ts-checker-webpack-plugin": "^6.2.10",
     "glob": "^7.1.7",
     "graphql": "^15.5.0",
     "html-loader": "^2.1.2",
