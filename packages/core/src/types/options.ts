@@ -11,7 +11,7 @@ export interface Options extends Extensions {
   /** Preload templates with initial data on bind */
   preloadData?: boolean;
 
-  /** Root sightglass interface for keypaths */
+  /** Root sightglass interface for keypath's */
   rootInterface?: string;
 
   /** Template delimiters for text bindings */

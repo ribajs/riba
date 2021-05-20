@@ -1,9 +1,8 @@
-    
-
 <div class="row">
     <div class="wrapper py-5 col-12" rv-touch-events rv-on-swipeleft="next" rv-on-swiperight="prev">
         <div class="slider row flex-nowrap align-items-end" rv-style-transform="transform">
-            <div rv-each-item="items" class="item d-flex justify-content-center align-items-end"  rv-touch-events rv-on-tap="goTo | args item.index">
+            <div rv-each-item="items" class="item d-flex justify-content-center align-items-end" rv-touch-events
+                rv-on-tap="goTo | args item.index">
                 <img rv-src="item.imageSrc" draggable="false">
             </div>
         </div>
@@ -11,21 +10,25 @@
         <div class="overlay row">
             <div class="controls">
 
-                <button rv-show="controls" role="button" class="prev" rv-add-class="controlsButtonClasses" rv-on-click="prev" rv-disabled="index | eq 0">
-                    <bs5-icon rv-if="controlPrevIconSrc" rv-src="controlPrevIconSrc" direction="left" size="32"></bs5-icon>
+                <button rv-show="controls" role="button" class="prev" rv-add-class="controlsButtonClasses"
+                    rv-on-click="prev" rv-disabled="index | eq 0">
+                    <bs5-icon rv-if="controlPrevIconSrc" rv-src="controlPrevIconSrc" direction="left" size="32">
+                    </bs5-icon>
                     <span rv-hide="controlPrevIconSrc" class="fallback-prev-icon" aria-hidden="true"> &lt; </span>
                     <span class="visually-hidden">Previous</span>
                 </button>
 
-                <button rv-show="controls" role="button" class="next" rv-add-class="controlsButtonClasses" rv-on-click="next" rv-disabled="index | plus 1 | eq items.length">
-                    <bs5-icon rv-if="controlNextIconSrc" rv-src="controlNextIconSrc" direction="right" size="32"></bs5-icon>
+                <button rv-show="controls" role="button" class="next" rv-add-class="controlsButtonClasses"
+                    rv-on-click="next" rv-disabled="index | plus 1 | eq items.length">
+                    <bs5-icon rv-if="controlNextIconSrc" rv-src="controlNextIconSrc" direction="right" size="32">
+                    </bs5-icon>
                     <span rv-hide="controlNextIconSrc" class="fallback-next-icon" aria-hidden="true"> &gt; </span>
                     <span class="visually-hidden">Next</span>
                 </button>
 
             </div>
-            <div class="capture my-5 my-md-0 col scrollbar-dark" rv-html="activeItem.content"></div>
+            <div class="capture my-5 my-md-0 col scrollbar-dark" rv-template="activeItem.content"></div>
         </div>
 
-     </div>
+    </div>
 </div>

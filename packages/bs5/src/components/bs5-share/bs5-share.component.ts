@@ -118,13 +118,11 @@ export class Bs5ShareComponent extends Component {
   }
 
   public getFilename(item: ShareItem) {
-    console.debug("getFilename", item);
     if (item.filename) {
       return item.filename;
     }
     const url = this.getMediaUrlForShare();
     const filename = url.split("/").pop();
-    console.debug("filename", filename);
     return filename;
   }
 

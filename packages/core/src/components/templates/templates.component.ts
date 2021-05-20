@@ -125,7 +125,7 @@ export abstract class TemplatesComponent extends Component {
     return !Array.from(this.children).some(
       (child) =>
         child.nodeName !== "TEMPLATE" &&
-        child.classList?.contains("template") &&
+        !child.classList?.contains("template") &&
         child.nodeName !== "#text"
     );
   }

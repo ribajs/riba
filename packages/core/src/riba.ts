@@ -224,20 +224,18 @@ export class Riba {
     }
 
     viewOptions.templateDelimiters =
-      (options && options.templateDelimiters) || this.templateDelimiters;
-    viewOptions.rootInterface =
-      (options && options.rootInterface) || this.rootInterface;
+      options?.templateDelimiters || this.templateDelimiters;
+    viewOptions.rootInterface = options?.rootInterface || this.rootInterface;
     viewOptions.removeBinderAttributes =
-      options && typeof options.removeBinderAttributes === "boolean"
+      typeof options?.removeBinderAttributes === "boolean"
         ? options.removeBinderAttributes
         : this.removeBinderAttributes;
-    viewOptions.blockNodeNames =
-      (options && options.blockNodeNames) || this.blockNodeNames;
+    viewOptions.blockNodeNames = options?.blockNodeNames || this.blockNodeNames;
     viewOptions.preloadData =
-      options && typeof options.preloadData === "boolean"
+      typeof options?.preloadData === "boolean"
         ? options.preloadData
         : this.preloadData;
-    viewOptions.handler = (options && options.handler) || Riba.handler;
+    viewOptions.handler = options?.handler || Riba.handler;
 
     // merge extensions
     viewOptions.binders = { ...this.binders, ...viewOptions.binders };
