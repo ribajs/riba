@@ -1,16 +1,12 @@
-import { TemplatesComponent, TemplateFunction } from "@ribajs/core";
+import {
+  TemplatesComponent,
+  TemplateFunction,
+  EventDispatcher,
+} from "@ribajs/core";
 import { throttle } from "@ribajs/utils/src/control";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-
+import { hasChildNodesTrim } from "@ribajs/utils";
+import { SlideItem } from "../../types";
 import template from "./content-slider.component.html";
-
-export interface SlideItem {
-  /** Template content is the item capture */
-  content: string;
-  imageSrc: string;
-  active: boolean;
-  index: number;
-}
 
 interface Scope {
   // States
@@ -50,14 +46,22 @@ export class ContentSliderComponent extends TemplatesComponent {
     {
       name: "image-src",
       required: true,
+      type: "string",
     },
     {
       name: "active",
       required: false,
+      type: "boolean",
     },
     {
       name: "index",
       required: false,
+    },
+    // Additional optional data
+    {
+      name: "data",
+      required: false,
+      type: "object",
     },
   ];
 
@@ -73,6 +77,8 @@ export class ContentSliderComponent extends TemplatesComponent {
       "controls-button-classes",
     ];
   }
+
+  public events = EventDispatcher.getInstance(ContentSliderComponent.tagName);
 
   public scope: Scope = {
     // States
@@ -243,6 +249,7 @@ export class ContentSliderComponent extends TemplatesComponent {
       newActiveIndex = 0;
     }
     this.goTo(newActiveIndex);
+    this.events.trigger("next", newActiveIndex);
   }
 
   public prev() {
@@ -251,27 +258,30 @@ export class ContentSliderComponent extends TemplatesComponent {
       newActiveIndex = this.scope.items.length - 1;
     }
     this.goTo(newActiveIndex);
+    this.events.trigger("prev", newActiveIndex);
   }
 
   public goTo(newActiveIndex: number) {
     this.debug("goTo");
     this.getItemWidths();
-    const oldActiveItem = this.querySelector(`.${this.scope.activeClass}`);
-    const newActiveItem = this.getItemElementByIndex(newActiveIndex);
-    if (oldActiveItem) {
-      this.setInactiveClasses(oldActiveItem);
+    const oldActiveItemEl = this.querySelector(`.${this.scope.activeClass}`);
+    const newActiveItemEl = this.getItemElementByIndex(newActiveIndex);
+    const item = this.scope.items[newActiveIndex];
+    if (oldActiveItemEl) {
+      this.setInactiveClasses(oldActiveItemEl);
     } else {
       this.debug("No old active item found!");
     }
 
-    if (newActiveItem) {
-      this.setActiveClasses(newActiveItem);
+    if (newActiveItemEl) {
+      this.setActiveClasses(newActiveItemEl);
     } else {
       this.debug("No new active item found!");
     }
 
     this.setActiveItem(newActiveIndex);
     this.update();
+    this.events.trigger("goTo", { oldActiveItemEl, newActiveItemEl, item });
   }
 
   protected setActiveItem(index: number) {

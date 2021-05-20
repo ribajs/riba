@@ -1,4 +1,4 @@
-import { parseJsonString } from "@ribajs/utils/src/type";
+import { parseJsonString, couldBeJson } from "@ribajs/utils";
 
 import { DataElement, View } from "./view";
 
@@ -12,7 +12,8 @@ export const TEXT = 0;
 export const BINDING = 1;
 
 const QUOTED_STR = /^'.*'$|^".*"$/; // regex to test if string is wrapped in " or '
-const DECLARATION_SPLIT = /((?:'[^']*')*(?:(?:[^|']*(?:'[^']*')+[^|']*)+|[^|]+))|^$/g;
+const DECLARATION_SPLIT =
+  /((?:'[^']*')*(?:(?:[^|']*(?:'[^']*')+[^|']*)+|[^|]+))|^$/g;
 
 /**
  * Parser and tokenizer for getting the type and value from a string.
@@ -40,7 +41,7 @@ export function parseType(str?: string) {
     value = undefined;
   } else if (!isNaN(Number(str))) {
     value = Number(str);
-  } else if (value.startsWith("{") || value.startsWith("[")) {
+  } else if (couldBeJson(value)) {
     const jsonString = parseJsonString(value);
     value = jsonString ? jsonString : value;
   } else {

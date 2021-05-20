@@ -1,5 +1,5 @@
-import { Component } from "@ribajs/core";
-import { camelCase } from "@ribajs/utils/src/type";
+import { Component, parseType } from "@ribajs/core";
+import { camelCase, parseJsonString } from "@ribajs/utils";
 
 export type AttributeType = string;
 
@@ -45,16 +45,20 @@ export abstract class TemplatesComponent extends Component {
   ) {
     switch (type) {
       case "number":
-        value = Number(value);
-        break;
+        return Number(value);
       case "boolean":
-        value = value === "true";
-        break;
+        return value === "true";
       case "string":
-      default:
-        break;
+        if (typeof value === "string") {
+          return value;
+        }
+        if (typeof value.toString === "function") {
+          return value.toString();
+        }
+      case "object":
+        return parseJsonString(value);
     }
-    return value;
+    return parseType(value).value;
   }
 
   /**
