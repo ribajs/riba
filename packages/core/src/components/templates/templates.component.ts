@@ -66,7 +66,10 @@ export abstract class TemplatesComponent extends Component {
     return attributes;
   }
 
-  protected getTemplateAttributes(tpl: HTMLTemplateElement, index: number) {
+  protected getTemplateAttributes(
+    tpl: HTMLTemplateElement | HTMLElement,
+    index: number
+  ) {
     const attributes: any = {};
     for (const attribute of this.templateAttributes) {
       const attrValue = tpl.getAttribute(attribute.name);
@@ -84,7 +87,10 @@ export abstract class TemplatesComponent extends Component {
     return this.transformTemplateAttributes(attributes, index);
   }
 
-  protected addItemByTemplate(tpl: HTMLTemplateElement, index: number) {
+  protected addItemByTemplate(
+    tpl: HTMLTemplateElement | HTMLElement,
+    index: number
+  ) {
     const attributes = this.getTemplateAttributes(tpl, index);
     const content = tpl.innerHTML;
     if (!this.scope.items) {
@@ -94,7 +100,9 @@ export abstract class TemplatesComponent extends Component {
   }
 
   protected addItemsByTemplate() {
-    const templates = this.querySelectorAll<HTMLTemplateElement>("template");
+    const templates = this.querySelectorAll<HTMLTemplateElement | HTMLElement>(
+      "template, .template"
+    );
     for (let index = 0; index < templates.length; index++) {
       const tpl = templates[index];
 
@@ -104,7 +112,9 @@ export abstract class TemplatesComponent extends Component {
   }
 
   protected removeTemplates() {
-    const templates = this.querySelectorAll<HTMLTemplateElement>("template");
+    const templates = this.querySelectorAll<HTMLTemplateElement | HTMLElement>(
+      "template, .template"
+    );
     for (let index = 0; index < templates.length; index++) {
       const tpl = templates[index];
       this.removeChild(tpl);
@@ -112,8 +122,11 @@ export abstract class TemplatesComponent extends Component {
   }
 
   protected hasOnlyTemplateChilds() {
-    return !Array.from(this.childNodes).some(
-      (child) => child.nodeName !== "TEMPLATE" && child.nodeName !== "#text"
+    return !Array.from(this.children).some(
+      (child) =>
+        child.nodeName !== "TEMPLATE" &&
+        child.classList?.contains("template") &&
+        child.nodeName !== "#text"
     );
   }
 }
