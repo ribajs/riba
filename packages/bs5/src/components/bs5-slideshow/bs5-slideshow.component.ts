@@ -323,6 +323,46 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     }
   }
 
+  public getNextIndex(currentIndex: number) {
+    let nextIndex = currentIndex + this.scope.activeBreakpoint.slidesToScroll;
+
+    if (nextIndex >= this.slideElements.length) {
+      nextIndex = nextIndex - this.slideElements.length;
+    }
+
+    return nextIndex;
+  }
+
+  public getPrevIndex(currentIndex: number) {
+    let prevIndex = currentIndex - this.scope.activeBreakpoint.slidesToScroll;
+
+    if (prevIndex < 0) {
+      prevIndex = this.slideElements.length - 1 + (prevIndex + 1);
+    }
+    return prevIndex;
+  }
+
+  public scrollToNearestSlide() {
+    this.setSlidePositions();
+    const nearestIndex = this.getMostCenteredSlideIndex();
+    return this.goTo(nearestIndex);
+  }
+
+  protected scrollToNextSlide() {
+    this.setSlidePositions();
+    const currentIndex = this.getMostCenteredSlideIndex();
+    const nextIndex = this.getNextIndex(currentIndex);
+
+    return this.goTo(nextIndex);
+  }
+
+  protected scrollToPrevSlide() {
+    this.setSlidePositions();
+    const currentIndex = this.getMostCenteredSlideIndex();
+    const prevIndex = this.getPrevIndex(currentIndex);
+    return this.goTo(prevIndex);
+  }
+
   protected setOptions(
     dest: Partial<ResponsiveOptions>,
     source: Partial<ResponsiveOptions>
@@ -813,7 +853,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     if (!this.slideElements) {
       this.throw(
         new Error(
-          "Can't not add items by childs because no slide childs are found!"
+          "Can't not add items by child's because no slide child's are found!"
         )
       );
     }
@@ -951,46 +991,6 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
         : this.slideshowInner.scrollLeft +
         this.scope.items[index].position.centerX;
     return scrollTo <= maxScrollTo && scrollTo >= 0;
-  }
-
-  protected getNextIndex(currentIndex: number) {
-    let nextIndex = currentIndex + this.scope.activeBreakpoint.slidesToScroll;
-
-    if (nextIndex >= this.slideElements.length) {
-      nextIndex = nextIndex - this.slideElements.length;
-    }
-
-    return nextIndex;
-  }
-
-  protected getPrevIndex(currentIndex: number) {
-    let prevIndex = currentIndex - this.scope.activeBreakpoint.slidesToScroll;
-
-    if (prevIndex < 0) {
-      prevIndex = this.slideElements.length - 1 + (prevIndex + 1);
-    }
-    return prevIndex;
-  }
-
-  protected scrollToNextSlide() {
-    this.setSlidePositions();
-    const currentIndex = this.getMostCenteredSlideIndex();
-    const nextIndex = this.getNextIndex(currentIndex);
-
-    return this.goTo(nextIndex);
-  }
-
-  protected scrollToPrevSlide() {
-    this.setSlidePositions();
-    const currentIndex = this.getMostCenteredSlideIndex();
-    const prevIndex = this.getPrevIndex(currentIndex);
-    return this.goTo(prevIndex);
-  }
-
-  protected scrollToNearestSlide() {
-    this.setSlidePositions();
-    const nearestIndex = this.getMostCenteredSlideIndex();
-    return this.goTo(nearestIndex);
   }
 
   protected setSlidePositions() {

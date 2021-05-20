@@ -11,6 +11,9 @@ export * from "./slideshow-controls-position";
 export * from "./slideshow-indicators-position";
 export * from "./slideshow-slide-position";
 export * from "./slideshow-slide";
-export * from "../services/toast-notification";
-export * from "./tooltip-options";
+export * from "./slideshow-state";
 export * from "./tagged-image-tag";
+export * from "./tooltip-options";
+
+// TODO
+export * from "../services/toast-notification";

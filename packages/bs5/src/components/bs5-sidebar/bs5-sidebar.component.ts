@@ -3,20 +3,12 @@ import { TouchEventsService, TouchSwipeData } from "@ribajs/extras";
 import { EventDispatcher } from "@ribajs/events";
 import { TOGGLE_BUTTON } from "../../constants";
 import { Bs5Service } from "../../services";
+import { SlideshowState } from "../../types";
 import {
   getViewportDimensions,
   hasChildNodesTrim,
 } from "@ribajs/utils/src/dom";
 import { throttle } from "@ribajs/utils/src/control";
-
-type State =
-  | "overlay-left"
-  | "overlay-right"
-  | "side-left"
-  | "side-right"
-  | "move-left"
-  | "move-right"
-  | "hidden";
 
 interface Scope {
   // Template properties
@@ -28,11 +20,11 @@ interface Scope {
   /**
    * The current state of the sidebar, can be `'hidden'`, `'side-left'`, `'side-right'`, `'overlay-left'` or `'overlay-right'`
    */
-  state: State;
+  state: SlideshowState;
   /**
    * The last state before the state was changed
    */
-  oldState: State;
+  oldState: SlideshowState;
   /**
    * The 'id' is required to react to events of the `bs5-toggle-button`, the `target-id` attribute of the `bs5-toggle-button` must be identical to this `id`
    */
@@ -128,7 +120,7 @@ export class Bs5SidebarComponent extends Component {
     ];
   }
 
-  protected eventDispatcher?: EventDispatcher;
+  public events?: EventDispatcher;
 
   protected routerEvents = new EventDispatcher("main");
 
@@ -170,7 +162,7 @@ export class Bs5SidebarComponent extends Component {
     this.onEnvironmentChanges = this.onEnvironmentChanges.bind(this);
   }
 
-  public setState(state: State) {
+  public setState(state: SlideshowState) {
     this.scope.oldState = this.scope.state;
     this.scope.state = state;
     this.onStateChange();
@@ -186,11 +178,11 @@ export class Bs5SidebarComponent extends Component {
   }
 
   public getShowMode() {
-    let mode: State;
+    let mode: SlideshowState;
     if (this.modeIsActive()) {
-      mode = `${this.scope.mode}-${this.scope.position}` as State;
+      mode = `${this.scope.mode}-${this.scope.position}` as SlideshowState;
     } else {
-      mode = `side-${this.scope.position}` as State;
+      mode = `side-${this.scope.position}` as SlideshowState;
     }
     return mode;
   }
@@ -231,42 +223,20 @@ export class Bs5SidebarComponent extends Component {
   }
 
   protected removeEventListeners() {
-    this.eventDispatcher?.off(
-      TOGGLE_BUTTON.eventNames.init,
-      this.triggerState,
-      this
-    );
-    this.eventDispatcher?.off(
-      TOGGLE_BUTTON.eventNames.toggle,
-      this.toggle,
-      this
-    );
+    this.events?.off(TOGGLE_BUTTON.eventNames.init, this.triggerState, this);
+    this.events?.off(TOGGLE_BUTTON.eventNames.toggle, this.toggle, this);
     this.routerEvents.off("newPageReady", this.onEnvironmentChanges, this);
     window.removeEventListener("resize", this.onEnvironmentChanges);
   }
 
   protected initToggleButtonEventDispatcher() {
-    if (this.eventDispatcher) {
-      this.eventDispatcher.off(
-        TOGGLE_BUTTON.eventNames.toggle,
-        this.toggle,
-        this
-      );
-      this.eventDispatcher.off(
-        TOGGLE_BUTTON.eventNames.init,
-        this.triggerState,
-        this
-      );
+    if (this.events) {
+      this.events.off(TOGGLE_BUTTON.eventNames.toggle, this.toggle, this);
+      this.events.off(TOGGLE_BUTTON.eventNames.init, this.triggerState, this);
     }
-    this.eventDispatcher = new EventDispatcher(
-      TOGGLE_BUTTON.nsPrefix + this.scope.id
-    );
-    this.eventDispatcher.on(TOGGLE_BUTTON.eventNames.toggle, this.toggle, this);
-    this.eventDispatcher.on(
-      TOGGLE_BUTTON.eventNames.init,
-      this.triggerState,
-      this
-    );
+    this.events = new EventDispatcher(TOGGLE_BUTTON.nsPrefix + this.scope.id);
+    this.events.on(TOGGLE_BUTTON.eventNames.toggle, this.toggle, this);
+    this.events.on(TOGGLE_BUTTON.eventNames.init, this.triggerState, this);
   }
 
   protected initRouterEventDispatcher() {
@@ -300,26 +270,27 @@ export class Bs5SidebarComponent extends Component {
     this.style.width = this.scope.width;
   }
 
-  protected onMove(state: State) {
+  protected onMove(state: SlideshowState) {
     this.setContainersStyle(state);
     this.style.transform = `translateX(0)`;
     this.style.width = this.scope.width;
   }
 
-  protected onSide(state: State) {
+  protected onSide(state: SlideshowState) {
     this.setContainersStyle(state);
     this.style.transform = `translateX(0)`;
     this.style.width = this.scope.width;
   }
 
-  protected onOverlay(state: State) {
+  protected onOverlay(state: SlideshowState) {
     this.setContainersStyle(state);
     this.style.transform = `translateX(0)`;
     this.style.width = this.scope.width;
   }
 
   protected triggerState() {
-    this.eventDispatcher?.trigger("state", this.scope.state);
+    // Global event
+    this.events?.trigger("state", this.scope.state);
   }
 
   protected onStateChange() {
@@ -340,12 +311,14 @@ export class Bs5SidebarComponent extends Component {
         this.onHidden();
         break;
     }
-    if (this.eventDispatcher) {
-      this.eventDispatcher.trigger(
-        TOGGLE_BUTTON.eventNames.toggled,
-        this.scope.state
-      );
+    if (this.events) {
+      this.events.trigger(TOGGLE_BUTTON.eventNames.toggled, this.scope.state);
     }
+    this.dispatchEvent(
+      new CustomEvent(TOGGLE_BUTTON.eventNames.toggled, {
+        detail: this.scope.state,
+      })
+    );
   }
 
   protected get width() {
@@ -395,16 +368,16 @@ export class Bs5SidebarComponent extends Component {
   protected getContainers() {
     return this.scope.containerSelector
       ? document.querySelectorAll<HTMLUnknownElement>(
-          this.scope.containerSelector
-        )
+        this.scope.containerSelector
+      )
       : undefined;
   }
 
-  protected initContainers(state: State) {
+  protected initContainers(state: SlideshowState) {
     this.setContainersStyle(state);
   }
 
-  protected setContainersStyle(state: State) {
+  protected setContainersStyle(state: SlideshowState) {
     const containers:
       | NodeListOf<HTMLUnknownElement>
       | Array<HTMLUnknownElement> = this.getContainers() || [];
@@ -423,7 +396,10 @@ export class Bs5SidebarComponent extends Component {
    * @param style
    * @param state
    */
-  protected setContainerStyle(container: HTMLUnknownElement, state: State) {
+  protected setContainerStyle(
+    container: HTMLUnknownElement,
+    state: SlideshowState
+  ) {
     const currStyle = container.style;
     if (state) {
       const width = this.width;
