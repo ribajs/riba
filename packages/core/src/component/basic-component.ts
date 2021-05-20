@@ -56,7 +56,7 @@ export abstract class BasicComponent extends HTMLElement {
     if (this._color) {
       this._color = getRandomColor();
     }
-    consoleColoured({ namespace, color: this._color, mode }, args);
+    consoleColoured({ namespace, color: this._color, mode }, ...args);
   }
 
   protected info(...args: unknown[]) {
