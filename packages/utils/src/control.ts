@@ -35,7 +35,12 @@ export const deferred = () => {
  */
 export const debounce = (fn: (...params: any) => any) => {
   // This holds the requestAnimationFrame reference, so we can cancel it if we wish
-  let frame: number;
+  let frame: number | null = null;
+  let resolve: (val: any) => any, reject: (error: Error) => void;
+  let promise = new Promise((res, rej) => {
+    resolve = res;
+    reject = rej;
+  });
 
   // The debounce function returns a new function that can receive a variable number of arguments
   return (...params: any) => {
@@ -47,8 +52,20 @@ export const debounce = (fn: (...params: any) => any) => {
     // Queue our function call for the next frame
     frame = window.requestAnimationFrame(() => {
       // Call our function and pass any params we received
-      fn(...params);
+      try {
+        resolve(fn(...params));
+      } catch (error) {
+        reject(error);
+      }
+      // reset frame and initialize new promise for next call
+      frame = null;
+      promise = new Promise((res, rej) => {
+        resolve = res;
+        reject = rej;
+      });
     });
+
+    return promise;
   };
 };
 
@@ -61,12 +78,28 @@ export const debounce = (fn: (...params: any) => any) => {
  */
 export const throttle = (fn: (...params: any) => any, wait = 100) => {
   let timerId: number | null = null;
+  let resolve: (val: any) => any, reject: (error: Error) => void;
+  let promise = new Promise((res, rej) => {
+    resolve = res;
+    reject = rej;
+  });
+
   return (...params: any[]) => {
     if (timerId === null) {
       timerId = window.setTimeout(() => {
-        fn(...params);
+        try {
+          resolve(fn(...params));
+        } catch (error) {
+          reject(error);
+        }
+        // reset timerId and initialize new promise for next call
         timerId = null;
+        promise = new Promise((res, rej) => {
+          resolve = res;
+          reject = rej;
+        });
       }, wait);
     }
+    return promise;
   };
 };
