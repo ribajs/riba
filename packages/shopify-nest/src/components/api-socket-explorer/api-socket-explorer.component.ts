@@ -78,12 +78,13 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
   protected initLocales() {
     // set avaible langcodes
     this.scope.langcode = this.localesService.getLangcode();
-    this.localesService.event.on("changed", (
-      changedLangcode: string /*, initial: boolean*/
-    ) => {
-      // Activate localcode and disable the other
-      this.scope.langcode = changedLangcode;
-    });
+    this.localesService.event.on(
+      "changed",
+      (changedLangcode: string /*, initial: boolean*/) => {
+        // Activate localcode and disable the other
+        this.scope.langcode = changedLangcode;
+      }
+    );
   }
 
   protected async beforeBind() {

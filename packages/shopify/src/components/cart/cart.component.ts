@@ -64,7 +64,8 @@ export class ShopifyCartComponent extends Component {
         (
           shippingRates: ShopifyShippingRates | ShopifyShippingRatesNormalized
         ) => {
-          this.scope.shippingRates = shippingRates as ShopifyShippingRatesNormalized;
+          this.scope.shippingRates =
+            shippingRates as ShopifyShippingRatesNormalized;
         }
       );
     }

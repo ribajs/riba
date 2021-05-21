@@ -987,9 +987,9 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     const scrollTo =
       this.scope.activeBreakpoint.angle === "vertical"
         ? this.slideshowInner.scrollTop +
-        this.scope.items[index].position.centerY
+          this.scope.items[index].position.centerY
         : this.slideshowInner.scrollLeft +
-        this.scope.items[index].position.centerX;
+          this.scope.items[index].position.centerX;
     return scrollTo <= maxScrollTo && scrollTo >= 0;
   }
 

@@ -41,7 +41,8 @@ import { UserWrapperService } from "./shopify-easdk-user.service";
 
 export class EASDKWrapperService
   extends WrapperService
-  implements EASDKWrapper {
+  implements EASDKWrapper
+{
   public static instance?: EASDKWrapperService;
 
   public event = new EventDispatcher("shopify-easdk");

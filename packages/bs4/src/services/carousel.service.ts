@@ -485,9 +485,8 @@ class CarouselService {
         indicators[i].classList.remove(ClassName.ACTIVE);
       }
 
-      const nextIndicator = this.indicatorsElement.children[
-        this.getItemIndex(element)
-      ];
+      const nextIndicator =
+        this.indicatorsElement.children[this.getItemIndex(element)];
 
       if (nextIndicator) {
         nextIndicator.classList.add(ClassName.ACTIVE);
@@ -569,9 +568,8 @@ class CarouselService {
           this.config.defaultInterval || this.config.interval;
       }
 
-      const transitionDuration = getTransitionDurationFromElement(
-        activeElement
-      );
+      const transitionDuration =
+        getTransitionDurationFromElement(activeElement);
 
       one(activeElement, TRANSITION_END, () => {
         nextElement.classList.remove(directionalClassName);

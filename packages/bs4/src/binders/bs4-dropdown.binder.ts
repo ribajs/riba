@@ -27,9 +27,10 @@ export const dropdownBinder: Binder<string> = {
       this.customData.toggler,
       option
     );
-    this.customData.dropdownService.toggle = this.customData.dropdownService.toggle.bind(
-      this.customData.dropdownService
-    );
+    this.customData.dropdownService.toggle =
+      this.customData.dropdownService.toggle.bind(
+        this.customData.dropdownService
+      );
     this.customData.toggler.addEventListener(
       "click",
       this.customData.dropdownService.toggle

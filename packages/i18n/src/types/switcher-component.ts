@@ -68,15 +68,16 @@ export abstract class SwitcherComponent extends Component {
       }
     }
     return new Promise<void>((resolve) => {
-      this.localesService?.event.on("ready", (
-        langcode: string /*, translationNeeded: boolean*/
-      ) => {
-        return this.initLocales(langcode).then((/*langcodes*/) => {
-          return super.init(observedAttributes).then(() => {
-            resolve();
+      this.localesService?.event.on(
+        "ready",
+        (langcode: string /*, translationNeeded: boolean*/) => {
+          return this.initLocales(langcode).then((/*langcodes*/) => {
+            return super.init(observedAttributes).then(() => {
+              resolve();
+            });
           });
-        });
-      });
+        }
+      );
     });
   }
 
@@ -93,14 +94,15 @@ export abstract class SwitcherComponent extends Component {
         return this.scope.langcodes;
       })
       .then((langcodes) => {
-        this.localesService?.event.on("changed", (
-          changedLangcode: string /*, initial: boolean*/
-        ) => {
-          // Activate localcode and disable the other
-          this.scope.langcodes.forEach((langCode) => {
-            langCode.active = langCode.code === changedLangcode;
-          });
-        });
+        this.localesService?.event.on(
+          "changed",
+          (changedLangcode: string /*, initial: boolean*/) => {
+            // Activate localcode and disable the other
+            this.scope.langcodes.forEach((langCode) => {
+              langCode.active = langCode.code === changedLangcode;
+            });
+          }
+        );
         return langcodes;
       })
       .then((langcodes) => {

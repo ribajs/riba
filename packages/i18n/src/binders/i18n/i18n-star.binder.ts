@@ -206,9 +206,8 @@ export const i18nStarBinder: Binder<string> = {
       // if this is the first call of this function
       this.customData.translateMePathString = translateMePathString;
       if (translateMePathString) {
-        this.customData.properties = this.customData.translateMePathString.split(
-          "."
-        );
+        this.customData.properties =
+          this.customData.translateMePathString.split(".");
       }
 
       this.customData.parseVars(el);
@@ -229,9 +228,8 @@ export const i18nStarBinder: Binder<string> = {
     ) {
       // If translate string was changed
       this.customData.translateMePathString = translateMePathString;
-      this.customData.properties = this.customData.translateMePathString.split(
-        "."
-      );
+      this.customData.properties =
+        this.customData.translateMePathString.split(".");
       this.customData.parseVars(el);
       this.customData.translate();
     }

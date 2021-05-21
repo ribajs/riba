@@ -158,47 +158,48 @@ export class Binding {
       throw new Error(`[${this.binder.name} formatters is null`);
     }
 
-    return this.formatters.reduce((
-      result: any /*check type*/,
-      declaration: string,
-      index: number
-    ) => {
-      const args = declaration.match(Binding.FORMATTER_ARGS);
-      if (args === null) {
-        console.warn(
-          new Error(
-            `[${this.binder.name}] No args matched with regex "FORMATTER_ARGS"!\nvalue: ${value}\nresult: ${result}\ndeclaration: ${declaration}\nindex: ${index}\n`
-          )
-        );
+    return this.formatters.reduce(
+      (result: any /*check type*/, declaration: string, index: number) => {
+        const args = declaration.match(Binding.FORMATTER_ARGS);
+        if (args === null) {
+          console.warn(
+            new Error(
+              `[${this.binder.name}] No args matched with regex "FORMATTER_ARGS"!\nvalue: ${value}\nresult: ${result}\ndeclaration: ${declaration}\nindex: ${index}\n`
+            )
+          );
+          return result;
+        }
+        const id = args.shift();
+
+        if (!id) {
+          throw new Error(
+            `[${this.binder.name}] No formatter id found in args!`
+          );
+        }
+
+        if (!this.view.options.formatters) {
+          throw new Error(`[${this.binder.name}] No formatters are defined!`);
+        }
+
+        const formatter = this.view.options.formatters[id];
+
+        if (!formatter) {
+          throw new Error(
+            `[${this.binder.name}] No formatters with id "${id}" found!`
+          );
+        }
+
+        const processedArgs = this.parseFormatterArguments(args, index);
+
+        // get formatter read funcion
+        if (formatter && typeof formatter.read === "function") {
+          result = formatter.read.apply(this.model, [result, ...processedArgs]);
+        }
+
         return result;
-      }
-      const id = args.shift();
-
-      if (!id) {
-        throw new Error(`[${this.binder.name}] No formatter id found in args!`);
-      }
-
-      if (!this.view.options.formatters) {
-        throw new Error(`[${this.binder.name}] No formatters are defined!`);
-      }
-
-      const formatter = this.view.options.formatters[id];
-
-      if (!formatter) {
-        throw new Error(
-          `[${this.binder.name}] No formatters with id "${id}" found!`
-        );
-      }
-
-      const processedArgs = this.parseFormatterArguments(args, index);
-
-      // get formatter read funcion
-      if (formatter && typeof formatter.read === "function") {
-        result = formatter.read.apply(this.model, [result, ...processedArgs]);
-      }
-
-      return result;
-    }, value);
+      },
+      value
+    );
   }
 
   /**
@@ -280,29 +281,32 @@ export class Binding {
         throw new Error("formatters is null");
       }
 
-      const value = this.formatters.reduceRight((
-        result: any /*check type*/,
-        declaration: string /*check type*/,
-        index: number
-      ) => {
-        const args = declaration.split(Binding.FORMATTER_SPLIT);
-        const id = args.shift();
-        if (!id) {
-          throw new Error("id not defined");
-        }
+      const value = this.formatters.reduceRight(
+        (
+          result: any /*check type*/,
+          declaration: string /*check type*/,
+          index: number
+        ) => {
+          const args = declaration.split(Binding.FORMATTER_SPLIT);
+          const id = args.shift();
+          if (!id) {
+            throw new Error("id not defined");
+          }
 
-        if (!this.view.options.formatters) {
-          return undefined;
-        }
+          if (!this.view.options.formatters) {
+            return undefined;
+          }
 
-        const formatter = this.view.options.formatters[id];
-        const processedArgs = this.parseFormatterArguments(args, index);
+          const formatter = this.view.options.formatters[id];
+          const processedArgs = this.parseFormatterArguments(args, index);
 
-        if (formatter && typeof formatter.publish === "function") {
-          result = formatter.publish(result, ...processedArgs);
-        }
-        return result;
-      }, this.getValue(this.el));
+          if (formatter && typeof formatter.publish === "function") {
+            result = formatter.publish(result, ...processedArgs);
+          }
+          return result;
+        },
+        this.getValue(this.el)
+      );
 
       this.observer.setValue(value);
     }

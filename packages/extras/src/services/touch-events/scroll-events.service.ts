@@ -97,9 +97,9 @@ export class ScrollEventsService extends BaseTouchEventsService {
     return true;
   }
 
-  protected onScrollEvent = (this._onScrollEvent.bind(
+  protected onScrollEvent = this._onScrollEvent.bind(
     this
-  ) as any) as EventListener;
+  ) as any as EventListener;
 
   /**
    * scrollended Event

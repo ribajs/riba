@@ -49,9 +49,8 @@ export const dataScrollPositionYBinder: Binder<string> = {
     if (elementSelector === "window") {
       this.customData.watchScrollOnElement = window;
     } else {
-      this.customData.watchScrollOnElement = document.querySelector(
-        elementSelector
-      );
+      this.customData.watchScrollOnElement =
+        document.querySelector(elementSelector);
     }
 
     // Watch new element for scroll event

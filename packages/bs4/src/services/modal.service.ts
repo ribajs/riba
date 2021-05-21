@@ -528,9 +528,8 @@ export class ModalService {
       // Adjust fixed content padding
       SelectorEngine.find(SELECTOR_FIXED_CONTENT).forEach((element) => {
         const actualPadding = element.style.paddingRight;
-        const calculatedPadding: string = window.getComputedStyle(element)[
-          "padding-right" as any
-        ];
+        const calculatedPadding: string =
+          window.getComputedStyle(element)["padding-right" as any];
         // Manipulator.setDataAttribute(element, "padding-right", actualPadding);
         element.dataset.paddingRight = actualPadding;
         element.style.paddingRight = `${
@@ -541,9 +540,8 @@ export class ModalService {
       // Adjust sticky content margin
       SelectorEngine.find(SELECTOR_STICKY_CONTENT).forEach((element) => {
         const actualMargin = element.style.marginRight;
-        const calculatedMargin = window.getComputedStyle(element)[
-          "margin-right" as any
-        ];
+        const calculatedMargin =
+          window.getComputedStyle(element)["margin-right" as any];
         // Manipulator.setDataAttribute(element, "margin-right", actualMargin);
         element.dataset.marginRight = actualMargin;
         element.style.marginRight = `${

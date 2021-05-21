@@ -278,9 +278,8 @@ export class Bs5FormComponent extends Component {
       console.warn("No form found");
       return;
     }
-    const invalidElements = this.formEl.querySelectorAll<HTMLElement>(
-      ":invalid"
-    );
+    const invalidElements =
+      this.formEl.querySelectorAll<HTMLElement>(":invalid");
     if (invalidElements && invalidElements.length) {
       const invalidElement = invalidElements[0];
       if (this.scope.scrollToInvalidElement) {

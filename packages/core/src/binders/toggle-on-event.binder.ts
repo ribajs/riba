@@ -12,9 +12,8 @@ export const toggleOnEventBinder: Binder<string> = {
       propertyKey: null as string | null,
       toggle: () => {
         if (this.customData.propertyKey) {
-          this.view.models[this.customData.propertyKey] = !this.view.models[
-            this.customData.propertyKey
-          ];
+          this.view.models[this.customData.propertyKey] =
+            !this.view.models[this.customData.propertyKey];
         }
       },
     };

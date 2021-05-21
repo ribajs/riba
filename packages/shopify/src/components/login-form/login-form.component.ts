@@ -175,8 +175,9 @@ export class ShopifyLoginFormComponent extends Component {
         "hidden",
         ""
       );
-      (this.recoverCustomerForm
-        .parentNode as HTMLElement | null)?.removeAttribute("hidden");
+      (
+        this.recoverCustomerForm.parentNode as HTMLElement | null
+      )?.removeAttribute("hidden");
     }
   }
 

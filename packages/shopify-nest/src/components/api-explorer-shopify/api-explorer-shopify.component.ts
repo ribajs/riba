@@ -197,8 +197,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
      */
     {
       label: "/shopify/api/products",
-      url:
-        '/shopify/api/products?collection_id=""&created_at_max=""&created_at_min=""&ids=""&page=""&fields=""&limit=0&product_type=""&published_at_max=""&published_at_min=""&since_id=0&title=""&updated_at_max=""&updated_at_min=""&vendor=""',
+      url: '/shopify/api/products?collection_id=""&created_at_max=""&created_at_min=""&ids=""&page=""&fields=""&limit=0&product_type=""&published_at_max=""&published_at_min=""&since_id=0&title=""&updated_at_max=""&updated_at_min=""&vendor=""',
       short_desc: "components.apiExplorer.shopify.products.short_desc",
       roles: [],
     },
@@ -208,8 +207,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
      */
     {
       label: "/shopify/api/products/count",
-      url:
-        '/shopify/api/products/count?collection_id=""&created_at_max=""&created_at_min=""&product_type=""&published_at_max=""&published_at_min=""&updated_at_max=""&updated_at_min=""&vendor=""',
+      url: '/shopify/api/products/count?collection_id=""&created_at_max=""&created_at_min=""&product_type=""&published_at_max=""&published_at_min=""&updated_at_max=""&updated_at_min=""&vendor=""',
       short_desc: "components.apiExplorer.shopify.products.count.short_desc",
       roles: [],
     },
@@ -230,8 +228,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
      */
     {
       label: "/shopify/api/pages",
-      url:
-        '/shopify/api/pages?created_at_max=""&created_at_min=""&page=""&fields=""&handle=""&limit=0&published_at_max=""&published_at_min=""&since_id=0&title=""&updated_at_max=""&updated_at_min=""',
+      url: '/shopify/api/pages?created_at_max=""&created_at_min=""&page=""&fields=""&handle=""&limit=0&published_at_max=""&published_at_min=""&since_id=0&title=""&updated_at_max=""&updated_at_min=""',
       short_desc: "components.apiExplorer.shopify.pages.short_desc",
       roles: [],
     },
@@ -240,8 +237,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
      */
     {
       label: "/shopify/api/pages/count",
-      url:
-        '/shopify/api/pages/count?created_at_max=""&created_at_min=""&title=""&published_at_max=""&published_at_min=""&updated_at_max=""&updated_at_min=""',
+      url: '/shopify/api/pages/count?created_at_max=""&created_at_min=""&title=""&published_at_max=""&published_at_min=""&updated_at_max=""&updated_at_min=""',
       short_desc: "components.apiExplorer.shopify.pages.count.short_desc",
       roles: [],
     },

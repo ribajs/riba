@@ -28,9 +28,9 @@ export const getSelectorFromElement = (element: HTMLElement) => {
 export const getElementFromSelector = (element: HTMLElement) => {
   const selector = getSelector(element);
 
-  return (selector
-    ? document.querySelector(selector)
-    : null) as HTMLElement | null;
+  return (
+    selector ? document.querySelector(selector) : null
+  ) as HTMLElement | null;
 };
 
 export const getTransitionDurationFromElement = (element: HTMLElement) => {
@@ -39,9 +39,8 @@ export const getTransitionDurationFromElement = (element: HTMLElement) => {
   }
 
   // Get transition-duration of the element
-  let { transitionDuration, transitionDelay } = window.getComputedStyle(
-    element
-  );
+  let { transitionDuration, transitionDelay } =
+    window.getComputedStyle(element);
 
   const floatTransitionDuration = parseFloat(transitionDuration);
   const floatTransitionDelay = parseFloat(transitionDelay);

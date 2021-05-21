@@ -368,8 +368,8 @@ export class Bs5SidebarComponent extends Component {
   protected getContainers() {
     return this.scope.containerSelector
       ? document.querySelectorAll<HTMLUnknownElement>(
-        this.scope.containerSelector
-      )
+          this.scope.containerSelector
+        )
       : undefined;
   }
 

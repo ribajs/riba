@@ -4,7 +4,8 @@ import { Observer } from "../observer";
 
 export class AdapterService
   extends ModuleElementService
-  implements AnyConstructor {
+  implements AnyConstructor
+{
   protected type: ModuleElementType = "adapter";
 
   /**
@@ -31,7 +32,7 @@ export class AdapterService
       throw new Error("Adapter name not found!");
     }
     this.elements[name] = adapter;
-    const options = { adapters: (this.elements as any) as Adapters };
+    const options = { adapters: this.elements as any as Adapters };
     Observer.updateOptions(options);
     return this.elements;
   }

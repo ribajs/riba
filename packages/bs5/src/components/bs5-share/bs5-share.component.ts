@@ -410,8 +410,8 @@ export class Bs5ShareComponent extends Component {
       item.url,
       "Share",
       "scrollbars=yes,resizable=yes,toolbar=no," +
-      "location=yes,width=550,height=420,top=100,left=" +
-      (window.screen ? Math.round(screen.width / 2 - 275) : 100)
+        "location=yes,width=550,height=420,top=100,left=" +
+        (window.screen ? Math.round(screen.width / 2 - 275) : 100)
     );
 
     return false;

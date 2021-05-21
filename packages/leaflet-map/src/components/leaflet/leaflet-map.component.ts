@@ -170,27 +170,23 @@ export class LeafletMapComponent extends Component {
           }
 
           if (iconAnchorAttr) {
-            iconOptions.iconAnchor = this.convertStringToPointTuple(
-              iconAnchorAttr
-            );
+            iconOptions.iconAnchor =
+              this.convertStringToPointTuple(iconAnchorAttr);
           }
 
           if (popupAnchorAttr) {
-            iconOptions.popupAnchor = this.convertStringToPointTuple(
-              popupAnchorAttr
-            );
+            iconOptions.popupAnchor =
+              this.convertStringToPointTuple(popupAnchorAttr);
           }
 
           if (shadowSizeAttr) {
-            iconOptions.shadowSize = this.convertStringToPointTuple(
-              shadowSizeAttr
-            );
+            iconOptions.shadowSize =
+              this.convertStringToPointTuple(shadowSizeAttr);
           }
 
           if (shadowAnchorAttr) {
-            iconOptions.shadowSize = this.convertStringToPointTuple(
-              shadowAnchorAttr
-            );
+            iconOptions.shadowSize =
+              this.convertStringToPointTuple(shadowAnchorAttr);
           }
 
           this.icons[iconName] = Leaflet.icon(iconOptions);

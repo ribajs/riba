@@ -321,7 +321,7 @@ export class TouchEventsService extends BaseTouchEventsService {
               (boundingClientRect ? boundingClientRect.left : 0)
           )
         : Math.round(
-            ((event as any) as MouseEvent).pageX -
+            (event as any as MouseEvent).pageX -
               (boundingClientRect ? boundingClientRect.left : 0)
           ),
       y: this.settings.touchCapable
@@ -330,7 +330,7 @@ export class TouchEventsService extends BaseTouchEventsService {
               (boundingClientRect ? boundingClientRect.top : 0)
           )
         : Math.round(
-            ((event as any) as MouseEvent).pageY -
+            (event as any as MouseEvent).pageY -
               (boundingClientRect ? boundingClientRect.top : 0)
           ),
     };

@@ -160,24 +160,24 @@ export class Bs4TabsComponent extends TemplatesComponent {
       return;
     }
     this.tabPanes.forEach((tabPane) => {
-      if (!((tabPane as unknown) as HTMLElement).style) {
+      if (!(tabPane as unknown as HTMLElement).style) {
         return;
       }
-      ((tabPane as unknown) as HTMLElement).style.height = "auto";
-      ((tabPane as unknown) as HTMLElement).style.display = "block";
-      const height = ((tabPane as unknown) as HTMLElement).offsetHeight || 0;
+      (tabPane as unknown as HTMLElement).style.height = "auto";
+      (tabPane as unknown as HTMLElement).style.display = "block";
+      const height = (tabPane as unknown as HTMLElement).offsetHeight || 0;
       if (height > highest) {
         highest = height;
       }
     });
     this.tabPanes.forEach((tabPane) => {
-      if (!((tabPane as unknown) as HTMLElement).style) {
+      if (!(tabPane as unknown as HTMLElement).style) {
         return;
       }
       // Reset display style property
-      ((tabPane as unknown) as HTMLElement).style.display = "";
+      (tabPane as unknown as HTMLElement).style.display = "";
       if (highest > 0) {
-        ((tabPane as unknown) as HTMLElement).style.height = highest + "px";
+        (tabPane as unknown as HTMLElement).style.height = highest + "px";
       }
     });
   }

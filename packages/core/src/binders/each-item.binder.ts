@@ -91,9 +91,9 @@ export const eachStarBinder: Binder<any[]> = {
         let previous: Comment | HTMLElement;
 
         if (this.customData.iterated.length) {
-          previous = this.customData.iterated[
-            this.customData.iterated.length - 1
-          ].els[0];
+          previous =
+            this.customData.iterated[this.customData.iterated.length - 1]
+              .els[0];
         } else if (this.marker) {
           previous = this.marker;
         } else {
