@@ -16,6 +16,7 @@ export class BlackboardExampleComponent extends Component {
 
   public scope = {
     color: [0, 255, 0],
+    erase: false,
   };
 
   constructor() {
@@ -23,7 +24,7 @@ export class BlackboardExampleComponent extends Component {
     this.eventDispatcher = EventDispatcher.getInstance("bs5-colorpicker:main");
     this.eventDispatcher.on("change", (color) => {
       console.log("Change color", JSON.parse(JSON.stringify(color)));
-      this.scope.color = JSON.parse(JSON.stringify(color._rgba));
+      this.scope.color = JSON.parse(JSON.stringify(color.rgba));
     });
   }
 

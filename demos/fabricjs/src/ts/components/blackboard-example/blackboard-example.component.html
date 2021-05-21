@@ -1,6 +1,8 @@
-<bs5-colorpicker></bs5-colorpicker>
+<div style="display: flex; flex-direction: row">
+  <bs5-colorpicker></bs5-colorpicker>
+  <input type="checkbox" rv-checked="erase"><span>Schwamm drüber?</span>
+</div>
 
-<input type="text" rv-value="color">
-<fabricjs-blackboard background-color="[255, 0, 0]" width="800" height="600" background-image="/assets/mathe.png" rv-co-foreground-color="color">
+<fabricjs-blackboard background-color="[255, 0, 0]" width="1000" height="650" background-image="/assets/mathe.png" rv-foreground-color="color" rv-drawing-mode="erase | ternary 'sponge' 'crayon'">
   <input type="text" rv-value="foregroundColor">
 </fabricjs-blackboard>
