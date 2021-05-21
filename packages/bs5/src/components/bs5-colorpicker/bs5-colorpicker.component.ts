@@ -228,7 +228,6 @@ export class Bs5ColorPickerComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     super.init(Bs5ColorPickerComponent.observedAttributes);
-    console.debug("scope", this.scope);
   }
 
   protected requiredAttributes(): string[] {
@@ -299,9 +298,7 @@ export class Bs5ColorPickerComponent extends Component {
    * @param color Color name, RGBA/HSLA/HEX string, or RGBA array.
    * @param flags If { silent: true }, won't trigger onChange.
    */
-  protected setColor(color: string, flags: any = { silent: false }) {
-    return debounce(this._setColor.bind(this))(color, flags);
-  }
+  protected setColor = debounce(this._setColor.bind(this));
 
   protected _setColor(color: string, flags: any = { silent: false }) {
     if (typeof color === "string") {
@@ -451,11 +448,7 @@ export class Bs5ColorPickerComponent extends Component {
     }
   }
 
-  protected updateUI(flags: any = {}) {
-    debounce(() => {
-      this._updateUI(flags);
-    })();
-  }
+  protected updateUI = debounce(this._updateUI.bind(this));
 
   protected _updateUI(flags: any = {}) {
     if (!this || !this.color) {
