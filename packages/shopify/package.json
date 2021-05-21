@@ -75,7 +75,7 @@
     "@types/jest": "^26.0.23",
     "@types/js-yaml": "^4.0.1",
     "@types/lodash": "^4.14.169",
-    "@types/node": "^15.3.0",
+    "@types/node": "^15.3.1",
     "@types/node-xlsx": "^0.15.1",
     "@types/open": "^6.2.1",
     "@types/prettier": "^2.2.3",
