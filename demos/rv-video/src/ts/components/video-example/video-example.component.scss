@@ -1,4 +1,5 @@
 video-example {
+  display: block;
   .mobile {
     display: none;
   }
@@ -15,12 +16,45 @@ video-example {
     }
   }
 
-  rv-video, video {
-    width: 100vw;
-    height: 100vh;
-    max-width: 100vw;
-    max-height: 100vh;
+  rv-video {
+    display: block;
+    position: relative;
+    color: $white;
+
+    video {
+      width: 100%;
+      max-width: 100vw;
+      max-height: 100vh;
+    }
+
+    .video-controls {
+      position: absolute;
+      transition: opacity 300ms ease;
+      opacity: 0;
+      z-index: 1;
+      width: 100%;
+      &.video-controls-bottom {
+        bottom: 0;
+      }
+      &.video-controls-top {
+        top: 0;
+      }
+      .video-control {
+        display: inline-block;
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+
+    &:hover, &:focus {
+      .video-controls {
+        opacity: 0.7;
+      }
+    }
+
   }
+
 }
 
 

@@ -1,0 +1,41 @@
+section.row.text-center.text-white.my-5
+  .col-12
+    h1 rv-video Demo
+
+section.row.text-center.text-white.my-5
+  .col-12
+    h2 Responsive Videos
+    p Resize the viewport to swich the video source
+
+    rv-video(rv-video-src="videos | get 0" autoplay-on-min-buffer="0.3" autoplay-media-query="(min-width: 1200px)")
+      video.d-none.d-xl-block(playsinline loop mute)
+
+    rv-video(rv-video-src="videos | get 1" autoplay-on-min-buffer="0.3" autoplay-media-query="(max-width: 1200px)")
+      video.d-block.d-xl-none(playsinline loop mute)
+        
+
+section.row.text-center.text-white.my-5
+  .col-12
+    h2 Select Video
+    p Select a video to start the video from the selected source
+
+    .dropdown.mb-5(rv-bs5-dropdown)
+      #dropdownMenuVideo.btn.btn-secondary.dropdown-toggle(role='button' aria-haspopup='true' aria-expanded='false' rv-text="selectedVideo | default 'Select a video'")
+      .dropdown-menu(aria-labelledby='dropdownMenuVideo')
+        .dropdown-item.cursor-pointer(rv-each-video="videos" rv-on-click="selectVideo | args video" rv-text="video")
+
+    rv-video(rv-co-video-src="selectedVideo")
+      video(rv-show="videoSrc" playsinline autoplay mute loop)
+      div(rv-show="videoSrc")
+        .video-controls.video-controls-bottom.p-2(rv-hide="controls")
+          .d-flex.justify-content-end
+            .video-control.m-2
+              bs5-icon(rv-hide="paused" rv-on-click="togglePause" size="32" src="/iconset/svg/icon_pause.svg")
+              bs5-icon(rv-show="paused" rv-on-click="togglePause" size="32" direction="right" src="/iconset/svg/arrow_triangle.svg")
+            .video-control.m-2
+              bs5-icon.p-1(rv-hide="muted" rv-on-click="toggleMute" size="32" src="/iconset/svg/icon_volume-high_alt.svg")
+              bs5-icon.p-1(rv-show="muted" rv-on-click="toggleMute" size="32" src="/iconset/svg/icon_vol-mute_alt.svg")
+        .video-controls.video-controls-top.p-2
+          .d-flex.justify-content-end
+            .video-control.m-2
+              bs5-icon(rv-on-click="toggleControls" direction="right" size="32" src="/iconset/svg/icon_adjust.svg" title="toggle default controls")

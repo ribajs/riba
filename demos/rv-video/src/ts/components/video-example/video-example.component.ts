@@ -1,6 +1,12 @@
 import { Component, TemplateFunction } from "@ribajs/core";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import template from "./video-example.component.html";
+import { hasChildNodesTrim } from "@ribajs/utils";
+import template from "./video-example.component.pug";
+
+export interface Scope {
+  videos: string[];
+  selectedVideo: string;
+  selectVideo: VideoExampleComponent["selectVideo"];
+}
 
 export class VideoExampleComponent extends Component {
   public static tagName = "video-example";
@@ -11,10 +17,18 @@ export class VideoExampleComponent extends Component {
     return [];
   }
 
-  public scope = {};
+  public scope: Scope = {
+    videos: ["/videos/desktop.mp4", "/videos/mobile.mp4"],
+    selectedVideo: "",
+    selectVideo: this.selectVideo,
+  };
 
   constructor() {
     super();
+  }
+
+  public selectVideo(video: string) {
+    this.scope.selectedVideo = video;
   }
 
   protected connectedCallback() {
@@ -40,11 +54,9 @@ export class VideoExampleComponent extends Component {
   protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
-      // console.debug('Do not use template, because element has child nodes');
       return null;
     } else {
-      // console.debug('Use template', template);
-      return template;
+      return template(this.scope);
     }
   }
 }

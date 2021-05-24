@@ -18,6 +18,7 @@ interface Scope {
   play: VideoComponent["play"];
   pause: VideoComponent["pause"];
   togglePlay: VideoComponent["togglePlay"];
+  togglePause: VideoComponent["togglePause"];
 
   // custom
   /** If the user will pass the video source for some reason */
@@ -32,6 +33,9 @@ export class VideoComponent extends Component {
   protected autobind = true;
   protected alreadyStartedPlaying = false;
   protected wasPaused = false;
+  protected updateInterval: ReturnType<typeof setInterval> | null = null;
+  protected updateIntervalDelay = 200;
+  public _debug = true;
 
   static get observedAttributes(): string[] {
     return ["video-src", "autoplay-on-min-buffer", "autoplay-media-query"];
@@ -57,7 +61,7 @@ export class VideoComponent extends Component {
    * * 0.0 is silent (same as mute)
    */
   public get volume() {
-    return this.video ? this.video.volume : 0;
+    return this.video?.volume || 0;
   }
 
   public set volume(volume: number) {
@@ -66,7 +70,7 @@ export class VideoComponent extends Component {
   }
 
   public get loop() {
-    return this.video && this.video.loop;
+    return this.video?.loop;
   }
 
   public set loop(loop: boolean) {
@@ -80,7 +84,7 @@ export class VideoComponent extends Component {
   }
 
   public get controls() {
-    return this.video && this.video.controls;
+    return this.video?.controls;
   }
 
   public set controls(controls: boolean) {
@@ -98,7 +102,7 @@ export class VideoComponent extends Component {
   }
 
   public get currentTime() {
-    return this.video ? this.video.currentTime : 0;
+    return this.video?.currentTime || 0;
   }
 
   public set currentTime(currentTime: number) {
@@ -110,7 +114,7 @@ export class VideoComponent extends Component {
    * @readonly
    */
   public get paused() {
-    return this.video && this.video.paused;
+    return this.video?.paused ?? true;
   }
 
   protected video: HTMLVideoElement;
@@ -136,6 +140,7 @@ export class VideoComponent extends Component {
     play: this.play,
     pause: this.pause,
     togglePlay: this.togglePlay,
+    togglePause: this.togglePause,
   };
 
   constructor() {
@@ -145,49 +150,70 @@ export class VideoComponent extends Component {
   }
 
   public toggleMute() {
+    this.debug("toggleMute");
     this.muted = !this.muted;
+    this.onUpdate();
   }
 
   public toggleControls() {
+    this.debug("toggleControls");
     this.controls = !this.controls;
+    this.onUpdate();
   }
 
   public play() {
+    this.debug("play");
     this.video.play();
+    this.scope.paused = false;
+    this.onUpdate();
   }
 
   public pause() {
+    this.debug("pause");
     this.video.pause();
+    this.scope.paused = true;
+    this.onUpdate();
   }
 
   public togglePlay() {
     if (this.paused) {
-      this.play();
+      return this.play();
     } else {
-      this.pause();
+      return this.pause();
     }
+  }
+
+  public togglePause() {
+    this.debug("togglePause");
+    return this.togglePlay();
   }
 
   protected connectedCallback() {
     super.connectedCallback();
+    this.init(VideoComponent.observedAttributes);
+  }
+
+  protected initVideoElement() {
     const video = this.querySelector("video");
     if (!video) {
       throw new Error("The video child element is required!");
     }
     this.video = video;
-    this.scope.muted = this.video.muted;
-    this.scope.volume = this.video.volume;
-    this.scope.loop = this.video.loop;
-    this.scope.controls = this.video.controls;
-    this.scope.currentTime = this.video.currentTime;
-    this.scope.paused = this.video.paused;
-
-    this.init(VideoComponent.observedAttributes);
+    this.onUpdate();
   }
 
-  protected async afterBind() {
-    // video-src attribute
+  protected resetVideo() {
+    this.video.innerHTML = "";
+    const videoEl = this.video.cloneNode(true) as HTMLVideoElement;
+    this.video.remove();
+    this.appendChild(videoEl);
+    this.video = videoEl;
+    this.initVideoElement();
+  }
+
+  protected setVideoSource() {
     if (this.scope.videoSrc) {
+      this.resetVideo();
       let sourceElement = this.video.querySelector("source");
       if (!sourceElement) {
         sourceElement = document.createElement("source");
@@ -195,21 +221,88 @@ export class VideoComponent extends Component {
       }
       sourceElement.setAttribute("src", this.scope.videoSrc);
     }
+  }
 
+  protected parsedAttributeChangedCallback(
+    attributeName: string,
+    oldValue: any,
+    newValue: any,
+    namespace: string | null
+  ) {
+    super.parsedAttributeChangedCallback(
+      attributeName,
+      oldValue,
+      newValue,
+      namespace
+    );
+    this.debug("parsedAttributeChangedCallback", attributeName);
+    if (attributeName === "videoSrc") {
+      this.setVideoSource();
+    }
+  }
+
+  protected addEventListeners() {
     if (this.scope.autoplayMediaQuery) {
       // autoplay-media-query attribute
       const mediaQueryList = window.matchMedia(this.scope.autoplayMediaQuery);
-      mediaQueryList.addEventListener(
-        "change",
-        this.onMediaQueryListEvent.bind(this)
-      );
+      mediaQueryList.addEventListener("change", this.onMediaQueryListEvent);
+      // Intial check
       if (mediaQueryList.matches) {
         this.autoplay();
       }
-    } else if (this.scope.autoplayOnMinBuffer) {
-      // autoplay-on-min-buffer attribute
-      this.autoplay();
     }
+
+    if (this.scope.autoplayOnMinBuffer) {
+      this.video.addEventListener("progress", this.onVideoProgress);
+      this.video.addEventListener(
+        "canplaythrough",
+        this.forceAutoplay // trust browser more than ourselves
+      );
+    }
+  }
+
+  protected _onUpdate() {
+    console.debug("_onUpdate");
+    if (this.scope.muted != this.video.muted) {
+      this.scope.muted = this.video.muted;
+    }
+
+    if (this.scope.volume != this.video.volume) {
+      this.scope.volume = this.video.volume;
+    }
+
+    if (this.scope.loop != this.video.loop) {
+      this.scope.loop = this.video.loop;
+    }
+
+    if (this.scope.controls != this.video.controls) {
+      this.scope.controls = this.video.controls;
+    }
+
+    if (this.scope.currentTime != this.video.currentTime) {
+      this.scope.currentTime = this.video.currentTime;
+    }
+
+    if (this.scope.paused != this.video.paused) {
+      this.scope.paused = this.video.paused;
+    }
+  }
+
+  protected onUpdate = this._onUpdate.bind(this);
+
+  protected setInvervals() {
+    this.updateInterval = setInterval(this.onUpdate, this.updateIntervalDelay);
+  }
+
+  protected async beforeBind() {
+    this.initVideoElement();
+  }
+
+  protected async afterBind() {
+    this.setVideoSource();
+    this.addEventListeners();
+    this.setInvervals();
+
     await super.afterBind();
   }
   /**
@@ -217,11 +310,6 @@ export class VideoComponent extends Component {
    */
   public autoplay() {
     if (this.scope.autoplayOnMinBuffer) {
-      this.video.addEventListener("progress", this.onVideoProgress.bind(this));
-      this.video.addEventListener(
-        "canplaythrough",
-        this.forceAutoplay.bind(this) //trust browser more than ourselves
-      );
       this.forceLoad();
     } else {
       this.forceAutoplay();
@@ -236,7 +324,7 @@ export class VideoComponent extends Component {
   /**
    * Forces autoplay without checking for the autoplay-on-min-buffer event
    */
-  public forceAutoplay() {
+  protected _forceAutoplay() {
     if (!this.alreadyStartedPlaying) {
       this.alreadyStartedPlaying = true;
       this.video.muted = true; //video is required to be muted if autoplay video is supposed to autoplay
@@ -245,10 +333,15 @@ export class VideoComponent extends Component {
     }
   }
 
+  /**
+   * Forces autoplay without checking for the autoplay-on-min-buffer event
+   */
+  public forceAutoplay = this._forceAutoplay.bind(this);
+
   /*********************
    * Event listener start
    *********************/
-  private onMediaQueryListEvent(event: MediaQueryListEvent) {
+  protected _onMediaQueryListEvent(event: MediaQueryListEvent) {
     if (event.matches) {
       //if mediaquery matches, play video or start autoplay
       if (this.alreadyStartedPlaying) {
@@ -265,7 +358,9 @@ export class VideoComponent extends Component {
     }
   }
 
-  private onVideoProgress() {
+  protected onMediaQueryListEvent = this._onMediaQueryListEvent.bind(this);
+
+  protected _onVideoProgress() {
     if (this.alreadyStartedPlaying) return;
     if (isNaN(this.video.duration)) {
       console.warn("Video duration is NaN");
@@ -284,6 +379,9 @@ export class VideoComponent extends Component {
       this.forceAutoplay();
     }
   }
+
+  protected onVideoProgress = this._onVideoProgress.bind(this);
+
   /*********************
    * Event listener end
    *********************/

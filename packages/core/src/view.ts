@@ -3,7 +3,7 @@ import { Binder, Options, BindableElement, TypeOfComponent } from "./types";
 import { Binding } from "./binding";
 import { parseNode, parseDeclaration } from "./parsers";
 import { BasicComponent, Component } from "./component";
-import { isCustomElement } from "@ribajs/utils/src/dom";
+import { isCustomElement } from "@ribajs/utils";
 
 /**
  * TODO Check if there is an official interface which fits better here
