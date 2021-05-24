@@ -53,7 +53,7 @@ export abstract class BasicComponent extends HTMLElement {
 
   protected _log(mode: "debug" | "info" | "log" | "error", ...args: unknown[]) {
     const namespace = this.constructor.name || this.tagName;
-    if (this._color) {
+    if (!this._color) {
       this._color = getRandomColor();
     }
     consoleColoured({ namespace, color: this._color, mode }, ...args);
