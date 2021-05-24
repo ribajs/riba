@@ -368,8 +368,8 @@ export class Bs5SidebarComponent extends Component {
   protected getContainers() {
     return this.scope.containerSelector
       ? document.querySelectorAll<HTMLUnknownElement>(
-          this.scope.containerSelector
-        )
+        this.scope.containerSelector
+      )
       : undefined;
   }
 
@@ -408,6 +408,7 @@ export class Bs5SidebarComponent extends Component {
       if (this.scope.mode === "move" && state.startsWith("overlay-")) {
         switch (conStyle.position) {
           case "fixed":
+          case "absolute":
             currStyle.left = "0";
             currStyle.right = "0";
             break;
@@ -422,6 +423,7 @@ export class Bs5SidebarComponent extends Component {
         case "side-left":
           switch (conStyle.position) {
             case "fixed":
+            case "absolute":
               currStyle.left = width;
               break;
             default:
@@ -432,6 +434,7 @@ export class Bs5SidebarComponent extends Component {
         case "side-right":
           switch (conStyle.position) {
             case "fixed":
+            case "absolute":
               currStyle.right = width;
               break;
             default:
@@ -442,6 +445,7 @@ export class Bs5SidebarComponent extends Component {
         case "move-left":
           switch (conStyle.position) {
             case "fixed":
+            case "absolute":
               currStyle.left = width;
               currStyle.right = `-${width}`;
               break;
@@ -454,6 +458,7 @@ export class Bs5SidebarComponent extends Component {
         case "move-right":
           switch (conStyle.position) {
             case "fixed":
+            case "absolute":
               currStyle.right = width;
               currStyle.left = `-${width}`;
               break;
@@ -468,6 +473,7 @@ export class Bs5SidebarComponent extends Component {
             case "side-left":
               switch (conStyle.position) {
                 case "fixed":
+                case "absolute":
                   currStyle.left = "0";
                   break;
                 default:
@@ -478,6 +484,7 @@ export class Bs5SidebarComponent extends Component {
             case "side-right":
               switch (conStyle.position) {
                 case "fixed":
+                case "absolute":
                   currStyle.right = "0";
                   break;
                 default:
@@ -488,6 +495,7 @@ export class Bs5SidebarComponent extends Component {
             case "move-left":
               switch (conStyle.position) {
                 case "fixed":
+                case "absolute":
                   currStyle.left = "0";
                   currStyle.right = "0";
                   break;
@@ -500,6 +508,7 @@ export class Bs5SidebarComponent extends Component {
             case "move-right":
               switch (conStyle.position) {
                 case "fixed":
+                case "absolute":
                   currStyle.right = "0";
                   currStyle.left = "0";
                   break;

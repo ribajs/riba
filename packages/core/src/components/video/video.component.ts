@@ -1,31 +1,6 @@
 import { Component } from "../../component/component";
-import { TemplateFunction } from "../../types";
-
-interface Scope {
-  // properties
-  muted: boolean;
-  volume: number;
-  loop: boolean;
-  controls: boolean;
-  currentTime: number;
-  /**
-   * @readonly
-   */
-  paused: boolean;
-  // methods
-  toggleMute: VideoComponent["toggleMute"];
-  toggleControls: VideoComponent["toggleControls"];
-  play: VideoComponent["play"];
-  pause: VideoComponent["pause"];
-  togglePlay: VideoComponent["togglePlay"];
-  togglePause: VideoComponent["togglePause"];
-
-  // custom
-  /** If the user will pass the video source for some reason */
-  videoSrc?: string;
-  autoplayOnMinBuffer: number;
-  autoplayMediaQuery: string;
-}
+import { TemplateFunction, VideoComponentScope } from "../../types";
+import { justDigits } from "@ribajs/utils";
 
 export class VideoComponent extends Component {
   public static tagName = "rv-video";
@@ -53,6 +28,7 @@ export class VideoComponent extends Component {
     } else {
       this.video.removeAttribute("muted");
     }
+    this.onUpdate();
   }
 
   /**
@@ -66,7 +42,7 @@ export class VideoComponent extends Component {
 
   public set volume(volume: number) {
     this.video.volume = volume;
-    this.scope.volume = this.video.volume;
+    this.onUpdate();
   }
 
   public get loop() {
@@ -75,12 +51,12 @@ export class VideoComponent extends Component {
 
   public set loop(loop: boolean) {
     this.video.loop = loop;
-    this.scope.loop = this.video.loop;
     if (loop) {
       this.video.setAttribute("loop", "");
     } else {
       this.video.removeAttribute("loop");
     }
+    this.onUpdate();
   }
 
   public get controls() {
@@ -99,6 +75,7 @@ export class VideoComponent extends Component {
     } else {
       this.video.removeAttribute("controls");
     }
+    this.onUpdate();
   }
 
   public get currentTime() {
@@ -107,7 +84,52 @@ export class VideoComponent extends Component {
 
   public set currentTime(currentTime: number) {
     this.video.currentTime = currentTime;
-    this.scope.currentTime = this.video.currentTime;
+    this.onUpdate();
+  }
+
+  public get autoplay() {
+    return this.video?.autoplay || false;
+  }
+
+  public set autoplay(autoplay: boolean) {
+    this.video.autoplay = autoplay;
+    this.onUpdate();
+  }
+
+  public get height() {
+    return this.video?.height || 0;
+  }
+
+  public set height(height: number) {
+    this.video.height = height;
+    this.onUpdate();
+  }
+
+  public get width() {
+    return this.video?.width || 0;
+  }
+
+  public set width(width: number) {
+    this.video.width = width;
+    this.onUpdate();
+  }
+
+  public get poster() {
+    return this.video?.poster;
+  }
+
+  public set poster(poster: string) {
+    this.video.poster = poster;
+    this.onUpdate();
+  }
+
+  public get preload() {
+    return this.video?.preload;
+  }
+
+  public set preload(preload: string) {
+    this.video.preload = preload;
+    this.onUpdate();
   }
 
   /**
@@ -119,7 +141,7 @@ export class VideoComponent extends Component {
 
   protected video: HTMLVideoElement;
 
-  public scope: Scope = {
+  public scope: VideoComponentScope = {
     // properties
     muted: this.muted,
     volume: this.volume,
@@ -141,6 +163,7 @@ export class VideoComponent extends Component {
     pause: this.pause,
     togglePlay: this.togglePlay,
     togglePause: this.togglePause,
+    reset: this.reset,
   };
 
   constructor() {
@@ -188,6 +211,12 @@ export class VideoComponent extends Component {
     return this.togglePlay();
   }
 
+  public reset() {
+    this.debug("reset");
+    this.video.currentTime = 0;
+    this.onUpdate();
+  }
+
   protected connectedCallback() {
     super.connectedCallback();
     this.init(VideoComponent.observedAttributes);
@@ -202,12 +231,61 @@ export class VideoComponent extends Component {
     this.onUpdate();
   }
 
+  /**
+   * Used to load new video source file
+   */
   protected resetVideo() {
     this.video.innerHTML = "";
     const videoEl = this.video.cloneNode(true) as HTMLVideoElement;
     this.video.remove();
     this.appendChild(videoEl);
     this.video = videoEl;
+
+    if (this.video.hasAttribute("muted")) {
+      this.muted = true;
+    } else {
+      this.muted = false;
+    }
+
+    if (this.video.hasAttribute("controls")) {
+      this.controls = true;
+    } else {
+      this.controls = false;
+    }
+
+    if (this.video.hasAttribute("autoplay")) {
+      this.autoplay = true;
+    } else {
+      this.autoplay = false;
+    }
+
+    if (this.video.hasAttribute("height")) {
+      this.height = justDigits(this.video.getAttribute("height") || 0);
+    }
+
+    if (this.video.hasAttribute("width")) {
+      this.width = justDigits(this.video.getAttribute("width") || 0);
+    }
+
+    if (this.video.hasAttribute("loop")) {
+      this.loop = true;
+    } else {
+      this.loop = false;
+    }
+
+    if (this.video.hasAttribute("muted")) {
+      this.muted = true;
+    } else {
+      this.muted = false;
+    }
+
+    if (this.video.hasAttribute("poster")) {
+      this.poster = this.video.getAttribute("poster") || "";
+    }
+
+    if (this.video.hasAttribute("preload")) {
+      this.preload = this.video.getAttribute("preload") || "";
+    }
     this.initVideoElement();
   }
 
@@ -246,9 +324,9 @@ export class VideoComponent extends Component {
       // autoplay-media-query attribute
       const mediaQueryList = window.matchMedia(this.scope.autoplayMediaQuery);
       mediaQueryList.addEventListener("change", this.onMediaQueryListEvent);
-      // Intial check
+      // Initial check
       if (mediaQueryList.matches) {
-        this.autoplay();
+        this.startAutoplay();
       }
     }
 
@@ -262,7 +340,6 @@ export class VideoComponent extends Component {
   }
 
   protected _onUpdate() {
-    console.debug("_onUpdate");
     if (this.scope.muted != this.video.muted) {
       this.scope.muted = this.video.muted;
     }
@@ -290,7 +367,7 @@ export class VideoComponent extends Component {
 
   protected onUpdate = this._onUpdate.bind(this);
 
-  protected setInvervals() {
+  protected setIntervals() {
     this.updateInterval = setInterval(this.onUpdate, this.updateIntervalDelay);
   }
 
@@ -301,14 +378,14 @@ export class VideoComponent extends Component {
   protected async afterBind() {
     this.setVideoSource();
     this.addEventListeners();
-    this.setInvervals();
+    this.setIntervals();
 
     await super.afterBind();
   }
   /**
    * Loads the media and checks if the autoplay-on-min-buffer is set
    */
-  public autoplay() {
+  public startAutoplay() {
     if (this.scope.autoplayOnMinBuffer) {
       this.forceLoad();
     } else {
@@ -349,7 +426,7 @@ export class VideoComponent extends Component {
           this.play();
         }
       } else {
-        this.autoplay();
+        this.startAutoplay();
       }
     } else {
       //if mediaquery stops matching, pause video if not already paused

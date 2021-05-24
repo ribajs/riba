@@ -31,3 +31,4 @@ export * from "./services";
 export * from "./template-function";
 export * from "./type-of-component";
 export * from "./type-of";
+export * from "./video-component-scope";
