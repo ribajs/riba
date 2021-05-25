@@ -22,7 +22,7 @@
     "@yarnpkg/pnpify": "^3.0.0-rc.3",
     "babel-loader": "^8.2.2",
     "copy-webpack-plugin": "^9.0.0",
-    "css-loader": "^5.2.5",
+    "css-loader": "^5.2.6",
     "file-loader": "^6.2.0",
     "fork-ts-checker-webpack-plugin": "^6.2.10",
     "glob": "^7.1.7",
