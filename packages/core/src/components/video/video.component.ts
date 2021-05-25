@@ -10,7 +10,7 @@ export class VideoComponent extends Component {
   protected wasPaused = false;
   protected updateInterval: ReturnType<typeof setInterval> | null = null;
   protected updateIntervalDelay = 200;
-  public _debug = true;
+  public _debug = false;
 
   static get observedAttributes(): string[] {
     return ["video-src", "autoplay-on-min-buffer", "autoplay-media-query"];
@@ -132,6 +132,27 @@ export class VideoComponent extends Component {
     this.onUpdate();
   }
 
+  public get disablePictureInPicture() {
+    return (
+      (this.video as any)?.disablePictureInPicture ||
+      this.video?.getAttribute("disablePictureInPicture") === "true" ||
+      false
+    );
+  }
+
+  public set disablePictureInPicture(disablePictureInPicture: boolean) {
+    if ((this.video as any)?.disablePictureInPicture) {
+      (this.video as any).disablePictureInPicture = disablePictureInPicture;
+    }
+
+    this.video.setAttribute(
+      "disablePictureInPicture",
+      disablePictureInPicture.toString()
+    );
+
+    this.onUpdate();
+  }
+
   /**
    * @readonly
    */
@@ -152,6 +173,7 @@ export class VideoComponent extends Component {
     videoSrc: undefined,
     autoplayOnMinBuffer: 0,
     autoplayMediaQuery: "",
+    disablePictureInPicture: this.disablePictureInPicture,
     /**
      * @readonly
      */
@@ -286,6 +308,12 @@ export class VideoComponent extends Component {
     if (this.video.hasAttribute("preload")) {
       this.preload = this.video.getAttribute("preload") || "";
     }
+
+    if (this.video.hasAttribute("disablePictureInPicture")) {
+      this.disablePictureInPicture =
+        this.video.getAttribute("disablePictureInPicture") === "true";
+    }
+
     this.initVideoElement();
   }
 

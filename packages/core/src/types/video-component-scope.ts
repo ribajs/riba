@@ -7,6 +7,7 @@ export interface VideoComponentScope {
   loop: boolean;
   controls: boolean;
   currentTime: number;
+  disablePictureInPicture: boolean;
   /**
    * @readonly
    */
