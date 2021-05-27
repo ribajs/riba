@@ -6,7 +6,7 @@ import { stripHtml } from "@ribajs/utils/src/type";
  * @see https://help.shopify.com/en/themes/liquid/filters/string-filters#strip_html
  */
 export const stripHtmlFormatter: Formatter = {
-  name: "stripHtml",
+  name: "strip-html",
   read(html: string) {
     return stripHtml(html);
   },
