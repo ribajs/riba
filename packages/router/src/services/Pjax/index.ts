@@ -320,6 +320,14 @@ class Pjax {
     return this.transition || new HideShowTransition();
   }
 
+  public prefetchLink(href: string) {
+    href = normalizeUrl(href);
+    const follow = Pjax.preventCheckUrl(href);
+    if (follow) {
+      return this.loadResponseCached(href, true, false);
+    }
+  }
+
   /**
    * Appends a prefetch link to the head and caches the result
    */
@@ -328,22 +336,18 @@ class Pjax {
     head: HTMLHeadElement
   ) {
     const rel = linkElement.getAttribute("rel");
-    let href = Pjax.getHref(linkElement);
+    const href = Pjax.getHref(linkElement);
     if (
       rel === "router-preload" &&
       href &&
       this.cacheEnabled &&
       !linkElement.classList.contains(ROUTE_ERROR_CLASS)
     ) {
-      // normalize url, returns the relative url for internal urls and the full url for external urls
-      href = normalizeUrl(href);
-      const follow = Pjax.preventCheckUrl(href);
-      if (follow) {
-        // TODO wait for idle because we do not want to block the user
-        return this.loadResponseCached(href, true, false).catch((error) => {
-          linkElement.classList.add(ROUTE_ERROR_CLASS);
-          console.error(error);
-        });
+      try {
+        this.prefetchLink(href);
+      } catch (error) {
+        linkElement.classList.add(ROUTE_ERROR_CLASS);
+        console.error(error);
       }
     }
     // Append The link elements to the head for native prefetch by the browser

@@ -16,10 +16,10 @@ export const routeClassStarBinder: Binder<string> = {
    * @param el Binder HTML Element
    * @param url Url to compare with the current location
    */
-  routine(el: HTMLElement, url: string) {
+  routine(el: HTMLElement, url?: string) {
     const className = this.args[0].toString() || "active";
-    const isAnkerHTMLElement = el.tagName === "A";
-    if (!url && isAnkerHTMLElement) {
+    const isAnchorElement = el.tagName === "A";
+    if (!url && isAnchorElement) {
       const href = el.getAttribute("href");
       if (href) {
         url = href;
