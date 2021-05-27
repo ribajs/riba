@@ -1,17 +1,32 @@
 import { Component } from "@ribajs/core";
 import { fabric } from "../../dependencies/index";
 
+import { debounce } from "@ribajs/utils/src/control";
+
+interface Scope {
+  width: number;
+  height: number;
+  backgroundColor: number[];
+  foregroundColor: number[];
+  backgroundImage: string | null;
+  drawingMode: "crayon" | "sponge" | null;
+};
+
+export type FabricJSBlackboardComponentScope = Scope;
+
 export class FabricJSBlackboardComponent extends Component {
   public static tagName = "fabricjs-blackboard";
   public static _canvasID = 0;
 
-  public _debug = true;
+  public _debug = false;
 
   private _canvas: HTMLCanvasElement;
   private _fabricCanvas: fabric.Canvas | null = null;
 
   private _crayon: fabric.FreeDrawingBrush | null = null;
   private _sponge: fabric.FreeDrawingBrush | null = null;
+
+  private _resizeObserver: ResizeObserver | null = null;
 
   static get observedAttributes(): string[] {
     return [
@@ -24,7 +39,7 @@ export class FabricJSBlackboardComponent extends Component {
     ];
   }
 
-  public scope = {
+  public scope: Scope = {
     backgroundImage: null,
     backgroundColor: [0, 0, 0],
     foregroundColor: [255, 255, 255],
@@ -35,20 +50,28 @@ export class FabricJSBlackboardComponent extends Component {
 
   constructor() {
     super();
+    console.log("blackboard constructor");
     FabricJSBlackboardComponent._canvasID++;
     this._canvas = document.createElement("canvas");
     this._canvas.setAttribute(
       "id",
       "fabric__canvas_" + FabricJSBlackboardComponent._canvasID
     );
+    console.log("blackboard constructed", this._canvas.id);
   }
 
   protected async connectedCallback() {
-    this.debug("connectedCallback");
+    console.log("blackboard connectedCallback", this._canvas.id);
     super.connectedCallback();
+    this.addEventListeners();
+  }
+
+  protected async beforeBind() {
+    console.log("blackboard before bind", this.scope.width, this.scope.height);
+
     this.appendChild(this._canvas);
     this._fabricCanvas = new fabric.Canvas(
-      "fabric__canvas_" + FabricJSBlackboardComponent._canvasID,
+      this._canvas.id,
       {
         isDrawingMode: true /*
           this.scope.drawingMode === "sponge" ||
@@ -56,9 +79,26 @@ export class FabricJSBlackboardComponent extends Component {
         hoverCursor: "pointer",
         selection: false,
         backgroundColor: `rgb(${this.scope.backgroundColor[0]}, ${this.scope.backgroundColor[1]}, ${this.scope.backgroundColor[2]})`,
+        width: this.scope.width,
+        height: this.scope.height
       }
     );
-    this.debug("fabric canvas created:", this._fabricCanvas);
+    this._fabricCanvas.on("path:created", opt => {
+      console.log("Yo", opt);
+      this._fabricCanvas?.renderAll();
+    });
+    this._fabricCanvas.on("mouse:up", (t) => {
+      if (this._fabricCanvas?.isDrawingMode) {
+        const c = (fabric.util as any).copyCanvasElement!((this._fabricCanvas as any).upperCanvasEl!);
+        const img = new fabric.Image(c);
+        (this._fabricCanvas as any).contextTopDirty = true;
+        this._fabricCanvas.add(img);
+        this._fabricCanvas.isDrawingMode = false;
+        this._fabricCanvas.isDrawingMode = true;
+        this._fabricCanvas.clearContext((this._fabricCanvas as any).contextTop);
+      }
+    })
+    console.log("fabric canvas created:", this._fabricCanvas);
     this._crayon = new (fabric as any).CrayonBrush(this._fabricCanvas, {
       width: 18,
       opacity: 0.7,
@@ -71,13 +111,11 @@ export class FabricJSBlackboardComponent extends Component {
       inkAmount: 10,
       color: `#4E4E4E`,
     });
-    this.debug("sponge and crayon created:", this._sponge, this._crayon);
+    console.log("sponge and crayon created:", this._sponge, this._crayon);
     await super.init(FabricJSBlackboardComponent.observedAttributes);
-    this.debug("init done");
-  }
+    console.log("init done");
 
-  protected async beforeBind() {
-    this.debug("befor bind");
+    
     this._fabricCanvas!.freeDrawingBrush =
       this.scope.drawingMode === "sponge" ? this._sponge! : this._crayon!;
   }
@@ -98,7 +136,7 @@ export class FabricJSBlackboardComponent extends Component {
       namespace
     );
 
-    this.debug("attributeChanged", attributeName, oldValue, newValue);
+    console.log("attributeChanged", attributeName, oldValue, newValue);
     switch (attributeName) {
       case "foregroundColor":
         this.onForegroundColorChanged(newValue);
@@ -119,7 +157,7 @@ export class FabricJSBlackboardComponent extends Component {
         this.onDrawingModeChanged(newValue);
         break;
       default:
-        this.debug(`Unknown attribute changed: '${attributeName}'`, {
+        console.log(`Unknown attribute changed: '${attributeName}'`, {
           oldValue,
           newValue,
         });
@@ -127,32 +165,32 @@ export class FabricJSBlackboardComponent extends Component {
   }
 
   protected onForegroundColorChanged(val: number[]) {
-    this.debug("onForegroundColorChanged", val);
+    console.log("onForegroundColorChanged", val);
     if (this._fabricCanvas) {
       if (this._crayon) {
         this._crayon.color = `rgb(${val[0]}, ${val[1]}, ${val[2]})`;
       } else {
-        this.debug("No crayon yet");
+        console.log("No crayon yet");
       }
     } else {
-      this.debug("No Fabric Canvas yet");
+      console.log("No Fabric Canvas yet");
     }
   }
 
   protected onBackgroundColorChanged(val: number[]) {
-    this.debug("onBackgroundColorChanged", val);
+    console.log("onBackgroundColorChanged", val);
     if (this._fabricCanvas) {
       this._fabricCanvas.setBackgroundColor(
         `rgb(${val[0]}, ${val[1]}, ${val[2]})}`,
         this._fabricCanvas.renderAll.bind(this._fabricCanvas)
       );
     } else {
-      this.debug("onBackgroundColorChanged: No Fabric canvas yet");
+      console.log("onBackgroundColorChanged: No Fabric canvas yet");
     }
   }
 
   protected onBackgroundImageChanged(val: string) {
-    this.debug("onBackgroundImageChanged", val);
+    console.log("onBackgroundImageChanged", val);
     if (val && this._fabricCanvas) {
       fabric.util.loadImage(val, (img, ...args) => {
         if (!img) {
@@ -161,9 +199,9 @@ export class FabricJSBlackboardComponent extends Component {
             ...args
           );
         } else {
-          this.debug("onBackgroundImageChanged: Image loaded:", img);
+          console.log("onBackgroundImageChanged: Image loaded:", img);
           const fabricImg = new fabric.Image(img);
-          this.debug("onBackgroundImageChanged: fabricImg", fabricImg);
+          console.log("onBackgroundImageChanged: fabricImg", fabricImg);
           this._fabricCanvas!.setBackgroundImage(
             fabricImg,
             this._fabricCanvas!.renderAll.bind(this._fabricCanvas),
@@ -177,31 +215,66 @@ export class FabricJSBlackboardComponent extends Component {
     }
   }
   protected onHeightChanged(val: number) {
-    this.debug("onHeightChanged", val);
-    this._canvas.height = val;
+    console.log("onHeightChanged", val);
+    this._fabricCanvas?.setHeight(val);
   }
   protected onWidthChanged(val: number) {
-    this.debug("onWidthChanged", val);
-    this._canvas.width = val;
+    console.log("onWidthChanged", val);
+    this._fabricCanvas?.setWidth(val);
   }
   protected onDrawingModeChanged(val: string) {
-    this.debug("onDrawingModeChanged", val);
+    console.log("onDrawingModeChanged", val);
     if (val === "crayon" && this._crayon) {
-      this.debug("Ye", this._crayon);
+      console.log("Ye", this._crayon);
       this._fabricCanvas!.isDrawingMode = true;
       this._fabricCanvas!.freeDrawingBrush = this._crayon;
       console.log(this._fabricCanvas);
       console.log(this._crayon, this._fabricCanvas!.freeDrawingBrush);
     } else if (val === "sponge" && this._sponge) {
-      this.debug("Ne", this._sponge);
+      console.log("Ne", this._sponge);
       this._fabricCanvas!.isDrawingMode = true;
       this._fabricCanvas!.freeDrawingBrush = this._sponge;
       console.log(this._fabricCanvas);
     } else if (this._fabricCanvas) {
-      this.debug("wtf");
+      console.log("wtf");
       //this._fabricCanvas.isDrawingMode = false;
     }
   }
+
+  protected onViewChanges(event: any) {
+    this.debug("onViewChanges:", event);
+    if (!this._fabricCanvas) {
+      this.debug("onViewChanges", "No fabric canvas yet");
+      return;
+    }
+    this.debug(this.clientWidth, this.clientHeight, this.scope.width, this.scope.height);
+    if (this.scope.width !== this.clientWidth || this.scope.height !== this.clientHeight) {
+      this.scope.width = this.clientWidth;
+      this.scope.height = this.clientHeight;
+      this._fabricCanvas?.setDimensions({ width: this.clientWidth, height: this.clientHeight });
+      /*
+      const rgb = this.scope.backgroundColor;
+      this._fabricCanvas?.setBackgroundColor(`rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})}`, () => {
+        if (this.scope.backgroundImage) {
+          this.onBackgroundImageChanged(this.scope.backgroundImage);
+        } else {
+          this._fabricCanvas?.renderAll();
+        }
+      })*/
+    }
+  }
+
+  protected addEventListeners() {
+    console.log("lISTEN, BOI");
+    window.addEventListener("resize", debounce(this.onViewChanges.bind(this)));
+  }
+
+  disconnectedCallback() {
+    if (this._resizeObserver) {
+      this._resizeObserver.unobserve(this);
+    }
+  }
+
   protected template() {
     return null;
   }
