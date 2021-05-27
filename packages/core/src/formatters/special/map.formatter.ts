@@ -12,10 +12,10 @@ import { Formatter } from "@ribajs/core";
  * ```
  * @returns e.g. as in the example: `<span>-0.5440211108893699</span>`
  */
-export const MapFormatter: Formatter = {
+export const mapFormatter: Formatter = {
   name: "map",
   /**
-   * Calls a method on the given object. The first parameters defines the object and the second the methodname.
+   * Calls a method on the given object. The first parameters defines the object and the second the method name.
    * Target will be passed as the first argument to the method.
    * @see https://github.com/matthieuriolo/rivetsjs-stdlib#map
    * @example
