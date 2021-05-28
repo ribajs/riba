@@ -10,6 +10,8 @@
   "arrow_carrot_alt",
   "arrow_carrot_alt2",
   "arrow_carrot_thin",
+  "arrow_chalk_next",
+  "arrow_chalk_prev",
   "arrow_condense",
   "arrow_condense_alt",
   "arrow_double_alt",
@@ -21,6 +23,7 @@
   "arrow_triangle_alt",
   "arrow_triangle_alt2",
   "arrow_up-down_alt",
+  "chalk",
   "icon_adjust",
   "icon_archive",
   "icon_archive_alt",
@@ -319,5 +322,6 @@
   "social_wordpress_square",
   "social_youtube",
   "social_youtube_circle",
-  "social_youtube_square"
+  "social_youtube_square",
+  "sponge"
 ]
