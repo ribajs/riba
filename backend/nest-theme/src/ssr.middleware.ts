@@ -30,33 +30,52 @@ export class SsrMiddleware implements NestMiddleware {
     }
 
     try {
-      const cache = routeSettings.cache || this.theme.cache || { ttl: 3000 };
+      const cacheOptions = routeSettings.cache ||
+        this.theme.cache || { ttl: 200 };
       const cacheKey = req.url;
 
-      const html = await this.cacheManager.wrap<string>(
-        cacheKey,
-        async () => {
-          const sharedContext = await this.ssr.getSharedContext(
-            req,
-            this.theme.templateVars,
-          );
+      const render = async () => {
+        const sharedContext = await this.ssr.getSharedContext(
+          req,
+          this.theme.templateVars,
+        );
 
-          this.log.debug(
-            `START: Render page component: ${routeSettings.component} for ${req.url}`,
-          );
-          const page = await this.ssr.renderComponent({
-            componentTagName: routeSettings.component,
-            sharedContext,
-          });
-          this.log.debug(
-            `END: Render page component: ${routeSettings.component} for ${req.url}`,
-          );
-          return page.html;
-        },
-        cache,
-      );
+        this.log.debug(
+          `START: Render page component: ${routeSettings.component} for ${req.url}`,
+        );
+        const page = await this.ssr.renderComponent({
+          componentTagName: routeSettings.component,
+          sharedContext,
+        });
+        this.log.debug(
+          `END: Render page component: ${routeSettings.component} for ${req.url}`,
+        );
+        return page.html;
+      };
 
-      return res.send(html);
+      // const html = await this.cacheManager.wrap<string>(
+      //   cacheKey,
+      //   render,
+      //   cacheOptions,
+      // );
+      // return res.send(html);
+
+      // TODO use the wrap method (so comment above)
+      this.cacheManager.get(cacheKey, async (error, result) => {
+        if (error) {
+          this.log.error(error);
+          return next(handleError(error));
+        }
+
+        if (result) {
+          this.log.debug(`Cache used`);
+          return res.send(result);
+        }
+
+        result = await render();
+        this.cacheManager.set(cacheKey, result, cacheOptions);
+        return res.send(result);
+      });
     } catch (error) {
       this.log.error(error);
       return next(handleError(error));
@@ -65,11 +84,6 @@ export class SsrMiddleware implements NestMiddleware {
 
   protected getRouteSettingsByRoute(routePath: string) {
     return this.theme.routes.find((route) => {
-      // this.log.debug(
-      //   `getRouteSettingsByRoute: ${routePath} ${
-      //     route.path
-      //   } ${route.path.includes(routePath)}`,
-      // );
       return route.path.includes(routePath);
     });
   }

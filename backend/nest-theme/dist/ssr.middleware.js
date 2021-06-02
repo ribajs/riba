@@ -31,9 +31,10 @@ let SsrMiddleware = class SsrMiddleware {
             return next();
         }
         try {
-            const cache = routeSettings.cache || this.theme.cache || { ttl: 3000 };
+            const cacheOptions = routeSettings.cache ||
+                this.theme.cache || { ttl: 200 };
             const cacheKey = req.url;
-            const html = await this.cacheManager.wrap(cacheKey, async () => {
+            const render = async () => {
                 const sharedContext = await this.ssr.getSharedContext(req, this.theme.templateVars);
                 this.log.debug(`START: Render page component: ${routeSettings.component} for ${req.url}`);
                 const page = await this.ssr.renderComponent({
@@ -42,8 +43,20 @@ let SsrMiddleware = class SsrMiddleware {
                 });
                 this.log.debug(`END: Render page component: ${routeSettings.component} for ${req.url}`);
                 return page.html;
-            }, cache);
-            return res.send(html);
+            };
+            this.cacheManager.get(cacheKey, async (error, result) => {
+                if (error) {
+                    this.log.error(error);
+                    return next(error_handler_1.handleError(error));
+                }
+                if (result) {
+                    this.log.debug(`Cache used`);
+                    return res.send(result);
+                }
+                result = await render();
+                this.cacheManager.set(cacheKey, result, cacheOptions);
+                return res.send(result);
+            });
         }
         catch (error) {
             this.log.error(error);
