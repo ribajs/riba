@@ -134,7 +134,7 @@ let SsrService = class SsrService {
                 return this.render(template.layout, sharedContext);
             };
             const render = new Brakes(_render, {
-                timeout: 3000,
+                timeout: this.theme.timeout || 10000,
             });
             const renderData = await render.exec();
             return renderData;

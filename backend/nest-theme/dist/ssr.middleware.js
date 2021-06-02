@@ -31,7 +31,7 @@ let SsrMiddleware = class SsrMiddleware {
             return next();
         }
         try {
-            const cache = routeSettings.cache || { ttl: 3000 };
+            const cache = routeSettings.cache || this.theme.cache || { ttl: 3000 };
             const cacheKey = req.url;
             const html = await this.cacheManager.wrap(cacheKey, async () => {
                 const sharedContext = await this.ssr.getSharedContext(req, this.theme.templateVars);
