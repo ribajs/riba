@@ -197,7 +197,7 @@ export class SsrService {
 
       // https://github.com/awolden/brakes
       const render = new Brakes(_render, {
-        timeout: 3000, // TODO move to theme settings
+        timeout: this.theme.timeout || 10000,
       });
       const renderData = await render.exec();
       return renderData;

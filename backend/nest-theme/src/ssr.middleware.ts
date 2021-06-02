@@ -30,7 +30,7 @@ export class SsrMiddleware implements NestMiddleware {
     }
 
     try {
-      const cache = routeSettings.cache || { ttl: 3000 };
+      const cache = routeSettings.cache || this.theme.cache || { ttl: 3000 };
       const cacheKey = req.url;
 
       const html = await this.cacheManager.wrap<string>(

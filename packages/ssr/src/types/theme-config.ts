@@ -14,5 +14,6 @@ export interface ThemeConfig {
   pageComponentsDir?: string;
   routes?: Route[];
   errorRoutes: ErrorRoutes;
+  timeout?: number;
   cache: Cache;
 }
