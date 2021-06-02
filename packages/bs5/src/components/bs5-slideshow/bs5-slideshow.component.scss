@@ -24,6 +24,12 @@ bs5-slideshow {
     }
   }
 
+  &.touchscroll-disabled {
+    .slideshow-row {
+      overflow-x: hidden;
+    }
+  }
+
   .slideshow-controls {
     color: inherit;
     width: 50px;
