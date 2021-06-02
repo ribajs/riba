@@ -33,7 +33,7 @@ export const deferred = () => {
  * @see https://css-tricks.com/styling-based-on-scroll-position/
  * @see https://www.telerik.com/blogs/debouncing-and-throttling-in-javascript
  */
-export const debounce = (fn: (...params: any) => any) => {
+export const debounce = (fn: (this: any, ...params: any) => any) => {
   // This holds the requestAnimationFrame reference, so we can cancel it if we wish
   let frame: number | null = null;
   let resolve: (val: any) => any, reject: (error: Error) => void;
@@ -43,7 +43,7 @@ export const debounce = (fn: (...params: any) => any) => {
   });
 
   // The debounce function returns a new function that can receive a variable number of arguments
-  return (...params: any) => {
+  return function (this: any, ...params: any) {
     // If the frame variable has been defined, clear it now, and queue for next frame
     if (frame) {
       cancelAnimationFrame(frame);
@@ -53,7 +53,7 @@ export const debounce = (fn: (...params: any) => any) => {
     frame = window.requestAnimationFrame(() => {
       // Call our function and pass any params we received
       try {
-        resolve(fn(...params));
+        resolve(fn.call(this, ...params));
       } catch (error) {
         reject(error);
       }
@@ -76,7 +76,10 @@ export const debounce = (fn: (...params: any) => any) => {
  * @see https://www.telerik.com/blogs/debouncing-and-throttling-in-javascript
  * @see https://gist.github.com/peduarte/969217eac456538789e8fac8f45143b4
  */
-export const throttle = (fn: (...params: any) => any, wait = 100) => {
+export const throttle = function (
+  fn: (this: any, ...params: any[]) => any,
+  wait = 100
+) {
   let timerId: number | null = null;
   let resolve: (val: any) => any, reject: (error: Error) => void;
   let promise = new Promise((res, rej) => {
@@ -84,14 +87,9 @@ export const throttle = (fn: (...params: any) => any, wait = 100) => {
     reject = rej;
   });
 
-  return (...params: any[]) => {
+  return function (this: any, ...params: any[]) {
     if (timerId === null) {
       timerId = window.setTimeout(() => {
-        try {
-          resolve(fn(...params));
-        } catch (error) {
-          reject(error);
-        }
         // reset timerId and initialize new promise for next call
         timerId = null;
         promise = new Promise((res, rej) => {
@@ -99,6 +97,11 @@ export const throttle = (fn: (...params: any) => any, wait = 100) => {
           reject = rej;
         });
       }, wait);
+      try {
+        resolve(fn.call(this, ...params));
+      } catch (error) {
+        reject(error);
+      }
     }
     return promise;
   };
