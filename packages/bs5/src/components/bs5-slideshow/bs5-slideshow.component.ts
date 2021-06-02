@@ -46,6 +46,8 @@ export interface ResponsiveOptions {
   sticky: boolean;
   /** Slides are draggable on desktop browsers */
   drag: boolean;
+  /** Slides are scrollable through touch on touch devices */
+  touchScroll: boolean;
   /** Enables autoplay continuously or with interval */
   autoplay: boolean;
   /** Pause between autoscroll, 0 for continuously autoscrolling */
@@ -80,6 +82,8 @@ export interface Scope extends Options {
   next: Bs5SlideshowComponent["next"];
   prev: Bs5SlideshowComponent["prev"];
   goTo: Bs5SlideshowComponent["goTo"];
+  enableTouchScroll: Bs5SlideshowComponent["enableTouchScroll"];
+  disableTouchScroll: Bs5SlideshowComponent["disableTouchScroll"];
   controlsPositionClass: string;
   indicatorsPositionClass: string;
   items?: SlideshowSlide[];
@@ -169,6 +173,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     indicatorsPosition: "inside-bottom",
     pause: false,
     drag: true,
+    touchScroll: true,
     autoplay: false,
     autoplayInterval: 0,
     autoplayVelocity: 0.8,
@@ -250,6 +255,8 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     next: this.next.bind(this),
     prev: this.prev.bind(this),
     goTo: this.goTo.bind(this),
+    enableTouchScroll: this.enableTouchScroll.bind(this),
+    disableTouchScroll: this.disableTouchScroll.bind(this),
 
     // Template properties
     items: undefined,
@@ -493,6 +500,11 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     } else {
       this.disableDesktopDragscroll();
     }
+    if (this.scope.activeBreakpoint.touchScroll) {
+      this.enableTouchScroll();
+    } else {
+      this.disableTouchScroll();
+    }
     this.setControlsOptions();
     this.setIndicatorsOptions();
   }
@@ -705,6 +717,14 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       this.dragscrollService.destroy();
       this.dragscrollService = undefined;
     }
+  }
+
+  public enableTouchScroll() {
+    this.classList.remove("touchscroll-disabled");
+  }
+
+  public disableTouchScroll() {
+    this.classList.add("touchscroll-disabled");
   }
 
   protected enableContinuousAutoplay() {
