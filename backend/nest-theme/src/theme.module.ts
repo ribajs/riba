@@ -3,6 +3,7 @@ import {
   DynamicModule,
   MiddlewareConsumer,
   RequestMethod,
+  CacheModule,
 } from '@nestjs/common';
 import { HttpAdapterHost } from '@nestjs/core';
 import { ConfigModule, ConfigService, registerAs } from '@nestjs/config';
@@ -88,6 +89,7 @@ export class ThemeModule {
         ConfigModule.forRoot({
           load: [registerAs('theme', () => fullThemeConfig)],
         }),
+        CacheModule.register(),
       ],
       module: ThemeModule,
       providers: [],

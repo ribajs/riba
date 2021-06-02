@@ -42,15 +42,24 @@ export class Bs5IconComponent extends BasicComponent {
 
     // Append hostname on ssr
     if (
-      window?.ssr?.ctx &&
+      window?.ssr &&
       !src.startsWith("http") &&
       !src.startsWith("ftp") &&
       !src.startsWith("sftp")
     ) {
-      const url = new URL(
-        src,
-        window.ssr.ctx.protocol + "://" + window.ssr.ctx.hostname
-      );
+      let url: URL;
+
+      if (window.ssr.env.NEST_INTERN_URL) {
+        url = new URL(src, window.ssr.env.NEST_INTERN_URL);
+      } else if (window.ssr.ctx) {
+        url = new URL(
+          src,
+          window.ssr.ctx.protocol + "://" + window.ssr.ctx.hostname
+        );
+      } else {
+        throw new Error("Host for SSR not found!");
+      }
+
       response = await this.fetchCached(url.href);
     } else {
       response = await this.fetchCached(src);
@@ -67,7 +76,7 @@ export class Bs5IconComponent extends BasicComponent {
 
     console.error(
       "[bs5-icon] Only SVG's are supported! But content-type is " +
-        response.headers.get("content-type")
+      response.headers.get("content-type")
     );
     return "";
   }

@@ -1,3 +1,4 @@
+export * from "./cache";
 export * from "./error-obj";
 export * from "./error-route";
 export * from "./error-routes";

@@ -3,12 +3,14 @@ import { ConfigService } from '@nestjs/config';
 import type { FullThemeConfig } from './types/theme-config';
 import { SsrService } from './ssr.service';
 import type { Request, Response, NextFunction } from 'express';
+import type { Cache } from 'cache-manager';
 export declare class SsrMiddleware implements NestMiddleware {
     protected config: ConfigService;
     protected ssr: SsrService;
+    protected cacheManager: Cache;
     theme: FullThemeConfig;
     log: Logger;
-    constructor(config: ConfigService, ssr: SsrService);
+    constructor(config: ConfigService, ssr: SsrService, cacheManager: Cache);
     use(req: Request, res: Response, next: NextFunction): Promise<void | Response<any, Record<string, any>>>;
     protected getRouteSettingsByRoute(routePath: string): import("@ribajs/ssr").Route;
 }

@@ -49,6 +49,7 @@ let ThemeModule = ThemeModule_1 = class ThemeModule {
                 config_1.ConfigModule.forRoot({
                     load: [config_1.registerAs('theme', () => fullThemeConfig)],
                 }),
+                common_1.CacheModule.register(),
             ],
             module: ThemeModule_1,
             providers: [],

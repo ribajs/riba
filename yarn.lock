@@ -5709,6 +5709,7 @@ __metadata:
     "@ribajs/core": "workspace:*"
     "@ribajs/events": "workspace:*"
     "@ribajs/ssr": "workspace:*"
+    "@types/cache-manager": ^3.4.0
     "@types/consolidate": ^0.14.0
     "@types/cookie-parser": ^1.4.2
     "@types/express": ^4.17.12
@@ -5720,6 +5721,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^4.25.0
     "@typescript-eslint/parser": ^4.25.0
     brakes: ^3.1.0
+    cache-manager: ^3.4.3
     consolidate: ^0.16.0
     cookie-parser: ^1.4.5
     dotenv: ^10.0.0
@@ -6596,6 +6598,13 @@ __metadata:
     "@types/serve-static": "*"
     chokidar: ^2.1.2
   checksum: 84fc2fac81adc5d7c33f6edcc5ec1c89c0a581c0e5e217ebf2902dc9e8f1ce30beea89447bf3137106b3e8cd3351bc74282339566905bbd9b323e92338b67d65
+  languageName: node
+  linkType: hard
+
+"@types/cache-manager@npm:^3.4.0":
+  version: 3.4.0
+  resolution: "@types/cache-manager@npm:3.4.0"
+  checksum: 11a5d923d246e5956e23ccf6e02126c4abf1c1e57e057cd5fa758941e54eb764c504137d4623bc0a972e68edfc37f241bfd0b316f176e1211fbc2c36846e097e
   languageName: node
   linkType: hard
 
@@ -8843,19 +8852,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"async@npm:3.2.0, async@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "async@npm:3.2.0"
+  checksum: 5c7913c08496877a9896dc6670d3a6c64f02d350e74b9e9191194959c473414a0732539ebdfec0fd2f34c20f439714773a30c20e0e68eb27bd8ee5ec9d8ff5ba
+  languageName: node
+  linkType: hard
+
 "async@npm:^2.6.2":
   version: 2.6.3
   resolution: "async@npm:2.6.3"
   dependencies:
     lodash: ^4.17.14
   checksum: 5c30ec6f3d64308dd96d56dae16a00a23b9e6278fe8f66492837896d958508698648c59c53457d3fdf05fd04484e16538efeca2be38337cd78df0284e764ab34
-  languageName: node
-  linkType: hard
-
-"async@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "async@npm:3.2.0"
-  checksum: 5c7913c08496877a9896dc6670d3a6c64f02d350e74b9e9191194959c473414a0732539ebdfec0fd2f34c20f439714773a30c20e0e68eb27bd8ee5ec9d8ff5ba
   languageName: node
   linkType: hard
 
@@ -9658,6 +9667,17 @@ __metadata:
     union-value: ^1.0.0
     unset-value: ^1.0.0
   checksum: 3f362ba824453d4043df82655314503e591a09a1bcb909ffdfcc74deb0fe4e7c58e40de31293153b07aeb5545610a1d81bf49b67cff5d3dd084d389e5a4d4849
+  languageName: node
+  linkType: hard
+
+"cache-manager@npm:^3.4.3":
+  version: 3.4.3
+  resolution: "cache-manager@npm:3.4.3"
+  dependencies:
+    async: 3.2.0
+    lodash: ^4.17.21
+    lru-cache: 6.0.0
+  checksum: 36f5b8f30893a9b24f63fcfc8b2238eeeebc6fd2c0d8b407f3ebdeb25bdb58664e879fbc9afc8ed14e076d649aaad99c5dba449da5de4c4a236838e19e350f51
   languageName: node
   linkType: hard
 
@@ -16426,6 +16446,15 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"lru-cache@npm:6.0.0, lru-cache@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "lru-cache@npm:6.0.0"
+  dependencies:
+    yallist: ^4.0.0
+  checksum: b8b78353d2391c0f135cdc245c4744ad41c2efb1a6d98f31bc57a2cf48ebf02de96e4876657c3026673576bf1f1f61fc3fdd77ab00ad1ead737537bf17d8019d
+  languageName: node
+  linkType: hard
+
 "lru-cache@npm:^4.0.1":
   version: 4.1.5
   resolution: "lru-cache@npm:4.1.5"
@@ -16442,15 +16471,6 @@ fsevents@~2.3.1:
   dependencies:
     yallist: ^3.0.2
   checksum: ffd9a280fa3400e731265db502270c2a65432f3fbfac23d480c72f675ec16dbbeddd57d4baf7aca70ab7af49949fad1bcaaf5a5e6e1cfed7316de71bb5dddf1c
-  languageName: node
-  linkType: hard
-
-"lru-cache@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "lru-cache@npm:6.0.0"
-  dependencies:
-    yallist: ^4.0.0
-  checksum: b8b78353d2391c0f135cdc245c4744ad41c2efb1a6d98f31bc57a2cf48ebf02de96e4876657c3026673576bf1f1f61fc3fdd77ab00ad1ead737537bf17d8019d
   languageName: node
   linkType: hard
 

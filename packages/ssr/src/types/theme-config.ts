@@ -1,6 +1,7 @@
 import type { Route } from "./route";
 import type { ErrorRoutes } from "./error-routes";
 import type { SupportedTemplateEngines } from "./template-engines";
+import type { Cache } from "./cache";
 export interface ThemeConfig {
   name: string;
   viewEngine: SupportedTemplateEngines;
@@ -13,4 +14,5 @@ export interface ThemeConfig {
   pageComponentsDir?: string;
   routes?: Route[];
   errorRoutes: ErrorRoutes;
+  cache: Cache;
 }
