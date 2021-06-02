@@ -387,8 +387,8 @@ export abstract class BasicComponent extends HTMLElement {
    */
   public getBinderAttribute(attributeName: string) {
     const parsedAttributeName = camelCase(attributeName);
-    const oldValue = this.scope[parsedAttributeName];
-    return oldValue;
+    const value = this.scope[parsedAttributeName];
+    return value;
   }
 
   /**

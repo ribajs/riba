@@ -127,7 +127,7 @@ export class SsrService {
             html: html,
             css: [],
           };
-
+          this.log.debug('[Riba lifecycle] Done.');
           return resolve(result);
         },
       );
@@ -152,7 +152,7 @@ export class SsrService {
       await file.script.runInContext(vmContext);
     }
 
-    this.log.debug('Wait for custom element...');
+    this.log.debug('[Riba lifecycle] Wait...');
 
     return renderResult;
   }
@@ -197,7 +197,7 @@ export class SsrService {
 
       // https://github.com/awolden/brakes
       const render = new Brakes(_render, {
-        timeout: 20000, // TODO move to theme settings
+        timeout: 3000, // TODO move to theme settings
       });
       const renderData = await render.exec();
       return renderData;

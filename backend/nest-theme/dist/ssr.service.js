@@ -90,6 +90,7 @@ let SsrService = class SsrService {
             sharedContext.events.once('ready', (lifecycleEventData) => {
                 const html = dom.serialize();
                 const result = Object.assign(Object.assign({}, lifecycleEventData), { html: html, css: [] });
+                this.log.debug('[Riba lifecycle] Done.');
                 return resolve(result);
             });
             sharedContext.events.once('error', (error) => {
@@ -110,7 +111,7 @@ let SsrService = class SsrService {
         for (const file of files) {
             await file.script.runInContext(vmContext);
         }
-        this.log.debug('Wait for custom element...');
+        this.log.debug('[Riba lifecycle] Wait...');
         return renderResult;
     }
     transformBrowserError(error) {
@@ -133,7 +134,7 @@ let SsrService = class SsrService {
                 return this.render(template.layout, sharedContext);
             };
             const render = new Brakes(_render, {
-                timeout: 20000,
+                timeout: 3000,
             });
             const renderData = await render.exec();
             return renderData;
