@@ -74,7 +74,12 @@ export class SsrMiddleware implements NestMiddleware {
 
         result = await render();
         this.cacheManager.set(cacheKey, result, cacheOptions);
-        return res.send(result);
+        res.send(result);
+        if (global.gc) {
+          this.log.debug(`run garbage collector`);
+          global.gc();
+        }
+        return;
       });
     } catch (error) {
       this.log.error(error);
