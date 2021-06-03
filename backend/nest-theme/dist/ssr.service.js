@@ -84,13 +84,21 @@ let SsrService = class SsrService {
         return dom;
     }
     async render(layout, sharedContext, scriptFilenames = ['main.bundle.js']) {
-        const dom = await this.createDomForLayout(layout);
+        let dom = await this.createDomForLayout(layout);
         dom.window.ssr = sharedContext;
+        let files = await this.sourceFile.loads(scriptFilenames);
+        let vmContext = dom.getInternalVMContext();
+        for (const file of files) {
+            await file.script.runInContext(vmContext);
+        }
         const renderResult = new Promise((resolve, reject) => {
             sharedContext.events.once('ready', (lifecycleEventData) => {
                 const html = dom.serialize();
                 const result = Object.assign(Object.assign({}, lifecycleEventData), { html: html, css: [] });
                 this.log.debug('[Riba lifecycle] Done.');
+                dom = null;
+                files = null;
+                vmContext = null;
                 return resolve(result);
             });
             sharedContext.events.once('error', (error) => {
@@ -106,11 +114,6 @@ let SsrService = class SsrService {
                 return reject(this.transformBrowserError(error));
             });
         });
-        const files = await this.sourceFile.loads(scriptFilenames);
-        const vmContext = dom.getInternalVMContext();
-        for (const file of files) {
-            await file.script.runInContext(vmContext);
-        }
         this.log.debug('[Riba lifecycle] Wait...');
         return renderResult;
     }

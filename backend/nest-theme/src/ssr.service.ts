@@ -63,7 +63,7 @@ export class SsrService {
   }
 
   protected async createDomForLayout(layout: string) {
-    const virtualConsole = new VirtualConsole();
+    const virtualConsole: VirtualConsole | null = new VirtualConsole();
     virtualConsole.sendTo(console);
 
     const dom = new JSDOM(layout, {
@@ -114,8 +114,15 @@ export class SsrService {
     sharedContext: SharedContext,
     scriptFilenames = ['main.bundle.js'],
   ) {
-    const dom = await this.createDomForLayout(layout);
+    let dom: JSDOM | null = await this.createDomForLayout(layout);
     dom.window.ssr = sharedContext;
+
+    let files = await this.sourceFile.loads(scriptFilenames);
+    let vmContext = dom.getInternalVMContext();
+
+    for (const file of files) {
+      await file.script.runInContext(vmContext);
+    }
 
     const renderResult = new Promise<RenderResult>((resolve, reject) => {
       sharedContext.events.once(
@@ -128,6 +135,9 @@ export class SsrService {
             css: [],
           };
           this.log.debug('[Riba lifecycle] Done.');
+          dom = null;
+          files = null;
+          vmContext = null;
           return resolve(result);
         },
       );
@@ -144,13 +154,6 @@ export class SsrService {
         return reject(this.transformBrowserError(error));
       });
     });
-
-    const files = await this.sourceFile.loads(scriptFilenames);
-    const vmContext = dom.getInternalVMContext();
-
-    for (const file of files) {
-      await file.script.runInContext(vmContext);
-    }
 
     this.log.debug('[Riba lifecycle] Wait...');
 
