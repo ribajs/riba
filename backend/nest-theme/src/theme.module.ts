@@ -84,17 +84,19 @@ export class ThemeModule {
 
     validateFullThemeConfig(fullThemeConfig);
 
+    const cacheModule = CacheModule.register();
+
     return {
       imports: [
         ConfigModule.forRoot({
           load: [registerAs('theme', () => fullThemeConfig)],
         }),
-        CacheModule.register(),
+        cacheModule,
       ],
       module: ThemeModule,
       providers: [],
       controllers: [],
-      exports: [],
+      exports: [cacheModule],
     };
   }
 

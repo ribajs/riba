@@ -65,7 +65,7 @@ export const loadConfig = <T>(searchConfigPaths: string[]) => {
     }
     // Transpile typescript config file
     if (configPath.endsWith('.ts')) {
-      const tSource = readFileSync(configPath, 'utf8');
+      let tSource = readFileSync(configPath, 'utf8');
       const compilerOptions: CompilerOptions = {
         module: ModuleKind.CommonJS,
       };
@@ -75,10 +75,14 @@ export const loadConfig = <T>(searchConfigPaths: string[]) => {
         },
         require,
       };
-      const jSource = transpileModule(tSource, { compilerOptions }).outputText;
-      const script = new Script(jSource);
+      let jSource = transpileModule(tSource, { compilerOptions }).outputText;
+      let script = new Script(jSource);
       script.runInNewContext(context);
-      return context.exports.themeConfig as T;
+      const themeConfig: T = context.exports.themeConfig as T;
+      script = null;
+      jSource = null;
+      tSource = null;
+      return themeConfig;
     }
     // Parse yaml config file
     else if (configPath.endsWith('.yaml')) {

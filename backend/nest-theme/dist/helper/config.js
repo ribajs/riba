@@ -46,7 +46,7 @@ const loadConfig = (searchConfigPaths) => {
             continue;
         }
         if (configPath.endsWith('.ts')) {
-            const tSource = fs_1.readFileSync(configPath, 'utf8');
+            let tSource = fs_1.readFileSync(configPath, 'utf8');
             const compilerOptions = {
                 module: typescript_1.ModuleKind.CommonJS,
             };
@@ -56,10 +56,14 @@ const loadConfig = (searchConfigPaths) => {
                 },
                 require,
             };
-            const jSource = typescript_1.transpileModule(tSource, { compilerOptions }).outputText;
-            const script = new vm_1.Script(jSource);
+            let jSource = typescript_1.transpileModule(tSource, { compilerOptions }).outputText;
+            let script = new vm_1.Script(jSource);
             script.runInNewContext(context);
-            return context.exports.themeConfig;
+            const themeConfig = context.exports.themeConfig;
+            script = null;
+            jSource = null;
+            tSource = null;
+            return themeConfig;
         }
         else if (configPath.endsWith('.yaml')) {
             const result = YAML.parse(fs_1.readFileSync(configPath, 'utf8'));
