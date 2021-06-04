@@ -348,9 +348,13 @@ export const classOf = (that: any) => {
  * @param obj
  * @return Cleared new object
  */
-export const clearObjFromRiba = (obj: Record<string, any>) => {
+export const clearObjFromRiba = (
+  obj: Record<string, any> | Array<any>,
+): Record<string, any> | Array<any> => {
   if (Array.isArray(obj)) {
-    return obj.map((x: any) => (isObject(x) ? clearObjFromRiba(x) : x));
+    return (obj as Array<any>).map((x: any) =>
+      isObject(x) ? clearObjFromRiba(x) : x,
+    );
   }
   const newObj: any = {};
   for (const key in obj) {
