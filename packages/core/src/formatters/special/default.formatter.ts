@@ -15,6 +15,9 @@ export const defaultFormatter = {
           return defaultValue;
         }
       }
+      if (value === null) {
+        return defaultValue;
+      }
       return value;
     }
     return defaultValue;
