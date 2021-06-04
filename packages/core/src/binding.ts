@@ -153,13 +153,23 @@ export class Binding {
    * Applies all the current formatters to the supplied value and returns the
    * formatted value.
    */
-  public formattedValue(value: any): any {
+  public formattedValue(value: any, startIndex = 0): any {
     if (this.formatters === null) {
       throw new Error(`[${this.binder.name} formatters is null`);
     }
 
-    return this.formatters.reduce(
-      (result: any /*check type*/, declaration: string, index: number) => {
+    // If any intermediate result is a promise continue the chain (with startIndex set) after it is resolved.
+    let promised = false;
+    const formatters = startIndex
+      ? this.formatters.slice(startIndex)
+      : this.formatters;
+
+    return formatters.reduce(
+      (result: any, declaration: string, index: number) => {
+        if (promised) {
+          return result;
+        }
+
         const args = declaration.match(Binding.FORMATTER_ARGS);
         if (args === null) {
           console.warn(
@@ -196,6 +206,18 @@ export class Binding {
           result = formatter.read.apply(this.model, [result, ...processedArgs]);
         }
 
+        // If result is a promise, and this is not the last formatter in the chain
+        if (
+          index < formatters.length - 1 &&
+          result &&
+          typeof result.then === "function" &&
+          typeof result.catch === "function"
+        ) {
+          promised = true;
+          return result.then((value: any) =>
+            this.formattedValue(value, index + 1)
+          );
+        }
         return result;
       },
       value
