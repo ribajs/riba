@@ -75,7 +75,7 @@
     "@types/jest": "^26.0.23",
     "@types/js-yaml": "^4.0.1",
     "@types/lodash": "^4.14.170",
-    "@types/node": "^15.6.2",
+    "@types/node": "^15.12.0",
     "@types/node-xlsx": "^0.15.1",
     "@types/open": "^6.2.1",
     "@types/prettier": "^2.2.3",
@@ -100,7 +100,7 @@
     "eslint-plugin-prettier": "^3.4.0",
     "find-root": "^1.1.0",
     "graceful-fs": "^4.2.6",
-    "jest": "^27.0.3",
+    "jest": "^27.0.4",
     "jest-extended": "^0.11.5",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
@@ -111,7 +111,7 @@
     "shopify-admin-api": "^2.16.5",
     "terser": "^5.7.0",
     "ts-jest": "^27.0.2",
-    "typescript": "^4.2.4"
+    "typescript": "^4.3.2"
   },
   "dependencies": {
     "@octokit/core": "^3.4.0",

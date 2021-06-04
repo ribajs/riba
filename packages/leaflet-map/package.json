@@ -55,11 +55,11 @@
     "eslint": "^7.27.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "jest": "^27.0.3",
+    "jest": "^27.0.4",
     "jest-extended": "^0.11.5",
     "prettier": "2.3.0",
     "ts-jest": "^27.0.2",
-    "typescript": "^4.2.4",
+    "typescript": "^4.3.2",
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.0"
   },
@@ -69,8 +69,8 @@
     "@ribajs/events": "workspace:*",
     "@ribajs/extras": "workspace:*",
     "@ribajs/utils": "workspace:*",
-    "@types/leaflet": "^1.7.0",
-    "@yarnpkg/pnpify": "^3.0.0-rc.3",
+    "@types/leaflet": "^1.7.1",
+    "@yarnpkg/pnpify": "^3.0.0-rc.6",
     "leaflet": "^1.7.1"
   },
   "bugs": {

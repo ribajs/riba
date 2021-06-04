@@ -72,7 +72,7 @@
     "@typescript-eslint/eslint-plugin": "^4.26.0",
     "@typescript-eslint/experimental-utils": "^4.26.0",
     "@typescript-eslint/parser": "^4.26.0",
-    "@yarnpkg/pnpify": "^3.0.0-rc.3",
+    "@yarnpkg/pnpify": "^3.0.0-rc.6",
     "babel-jest": "^27.0.2",
     "babel-loader": "^8.2.2",
     "babel-plugin-array-includes": "^2.0.3",
@@ -80,8 +80,8 @@
     "eslint": "^7.27.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "jest": "^27.0.3",
-    "jest-config": "^27.0.3",
+    "jest": "^27.0.4",
+    "jest-config": "^27.0.4",
     "jest-extended": "^0.11.5",
     "pkg-dir": "^5.0.0",
     "prettier": "2.3.0",
@@ -90,7 +90,7 @@
     "sass": "^1.34.0",
     "source-map-support": "^0.5.19",
     "ts-jest": "^27.0.2",
-    "typescript": "^4.2.4",
+    "typescript": "^4.3.2",
     "webpack-glob-entry": "^2.1.1"
   },
   "workspaces": [
