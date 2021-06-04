@@ -1,6 +1,6 @@
-import { extend, isJson } from "@ribajs/utils/src/type";
-import { HttpMethod } from "../types/http-method";
-import { HttpServiceOptions, HttpServiceResponse } from "../types";
+import { extend, isJson } from '@ribajs/utils/src/type';
+import { HttpMethod } from '../types/http-method';
+import { HttpServiceOptions, HttpServiceResponse } from '../types';
 
 export class HttpService {
   /**
@@ -25,9 +25,9 @@ export class HttpService {
     url: string,
     data?: any,
     headers: any = {},
-    options: HttpServiceOptions = {}
+    options: HttpServiceOptions = {},
   ) {
-    return this.fetch<T>(url, "GET", data, "json", headers, options);
+    return this.fetch<T>(url, 'GET', data, 'json', headers, options);
   }
 
   /**
@@ -42,9 +42,9 @@ export class HttpService {
     data?: any,
     dataType?: string,
     headers: any = {},
-    options: HttpServiceOptions = {}
+    options: HttpServiceOptions = {},
   ) {
-    return this.fetch<T>(url, "POST", data, dataType, headers, options);
+    return this.fetch<T>(url, 'POST', data, dataType, headers, options);
   }
 
   public static async delete<T = any>(
@@ -52,9 +52,9 @@ export class HttpService {
     data?: any,
     dataType?: string,
     headers: any = {},
-    options: HttpServiceOptions = {}
+    options: HttpServiceOptions = {},
   ) {
-    return this.fetch<T>(url, "DELETE", data, dataType, headers, options);
+    return this.fetch<T>(url, 'DELETE', data, dataType, headers, options);
   }
 
   public static async put<T = any>(
@@ -62,9 +62,9 @@ export class HttpService {
     data?: any,
     dataType?: string,
     headers: any = {},
-    options: HttpServiceOptions = {}
+    options: HttpServiceOptions = {},
   ) {
-    return this.fetch<T>(url, "PUT", data, dataType, headers, options);
+    return this.fetch<T>(url, 'PUT', data, dataType, headers, options);
   }
 
   /**
@@ -79,9 +79,9 @@ export class HttpService {
     data?: any,
     dataType?: string,
     headers: any = {},
-    options: HttpServiceOptions = {}
+    options: HttpServiceOptions = {},
   ) {
-    return this.fetch<T>(url, "GET", data, dataType, headers, options);
+    return this.fetch<T>(url, 'GET', data, dataType, headers, options);
   }
 
   /**
@@ -89,55 +89,55 @@ export class HttpService {
    * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html).
    */
   public static parseDataType(dataType: string) {
-    const headers: { "Content-Type"?: string; Accept?: string } = {};
-    let contentType = "application/x-www-form-urlencoded";
-    let accept = "*/*";
+    const headers: { 'Content-Type'?: string; Accept?: string } = {};
+    let contentType = 'application/x-www-form-urlencoded';
+    let accept = '*/*';
     switch (dataType) {
-      case "script":
-        contentType = "application/javascript";
+      case 'script':
+        contentType = 'application/javascript';
         break;
-      case "json":
-        contentType = "application/json";
-        accept = "application/json, text/javascript";
+      case 'json':
+        contentType = 'application/json';
+        accept = 'application/json, text/javascript';
         break;
-      case "xml":
-        contentType = "application/xml";
-        accept = "application/xml, text/xml";
+      case 'xml':
+        contentType = 'application/xml';
+        accept = 'application/xml, text/xml';
         break;
-      case "text":
-        contentType = "text/plain";
-        accept = "text/plain";
+      case 'text':
+        contentType = 'text/plain';
+        accept = 'text/plain';
         break;
-      case "html":
-        contentType = "text/html";
-        accept = "text/html";
+      case 'html':
+        contentType = 'text/html';
+        accept = 'text/html';
         break;
-      case "form":
-        contentType = "application/x-www-form-urlencoded";
+      case 'form':
+        contentType = 'application/x-www-form-urlencoded';
         break;
       // case "multi-form":
       //   contentType = "multipart/form-data";
       //   break;
     }
     if (contentType) {
-      headers["Content-Type"] = contentType;
+      headers['Content-Type'] = contentType;
       // tslint:disable-next-line:no-string-literal
-      headers["Accept"] = accept;
+      headers['Accept'] = accept;
     }
     return headers;
   }
 
   public static async fetch<T = any>(
     url: string,
-    method: HttpMethod = "GET",
+    method: HttpMethod = 'GET',
     data: any = {},
     dataType?: string,
     headers: any = {},
-    options: HttpServiceOptions = {}
+    options: HttpServiceOptions = {},
   ): Promise<HttpServiceResponse<T>> {
     if (!fetch) {
       throw new Error(
-        "Your browser does not support the fetch API, use xhr instead or install a polyfill."
+        'Your browser does not support the fetch API, use xhr instead or install a polyfill.',
       );
     }
 
@@ -151,36 +151,36 @@ export class HttpService {
       headers = extend({ deep: false }, headers, this.parseDataType(dataType));
     }
 
-    if (!options.crossDomain && !headers["X-Requested-With"]) {
-      headers["X-Requested-With"] = "XMLHttpRequest";
+    if (!options.crossDomain && !headers['X-Requested-With']) {
+      headers['X-Requested-With'] = 'XMLHttpRequest';
     }
 
-    const cache = options.cache ? options.cache : "default";
+    const cache = options.cache ? options.cache : 'default';
 
-    if (method === "GET" && data) {
+    if (method === 'GET' && data) {
       const queryStr = new URLSearchParams(data).toString();
       if (queryStr) {
-        const separator = url.includes("?") ? "&" : "?";
+        const separator = url.includes('?') ? '&' : '?';
         url = url + separator + new URLSearchParams(data).toString();
       }
     } else if (data) {
-      if (dataType === "form") {
+      if (dataType === 'form') {
         body = new URLSearchParams(data);
       } else {
         body = JSON.stringify(data);
       }
     }
     const response = await fetch(url, {
-      credentials: "same-origin",
+      credentials: 'same-origin',
       cache,
       method,
       body,
       headers,
-      mode: options.mode || "cors",
+      mode: options.mode || 'cors',
     });
 
     let bodyResult = (await response.text()) as unknown as T;
-    if (typeof bodyResult === "string" && isJson(bodyResult)) {
+    if (typeof bodyResult === 'string' && isJson(bodyResult)) {
       bodyResult = JSON.parse(bodyResult);
     }
 
