@@ -29,8 +29,6 @@ export class Bs5ScrollspyComponent extends Bs5ContentsComponent {
 
   protected autobind = true;
 
-  protected wrapperElement?: Element;
-
   static get observedAttributes(): string[] {
     return [
       "headers-start",

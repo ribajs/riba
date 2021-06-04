@@ -134,7 +134,9 @@ class CarouselService {
     this.touchSupported =
       "ontouchstart" in document.documentElement ||
       navigator.maxTouchPoints > 0;
-    this.pointerEvent = !!(window.PointerEvent || window.MSPointerEvent);
+    this.pointerEvent = !!(
+      window.PointerEvent || (window as any).MSPointerEvent
+    );
 
     console.debug("CarouselService", this);
 
