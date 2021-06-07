@@ -1,10 +1,10 @@
-import { FacebookApiService as _FacebookApiService } from "@ribajs/shopify-tda";
+import { FacebookApiService as _FacebookApiService } from '@ribajs/shopify-tda';
 
 export class FacebookApiService extends _FacebookApiService {
   public static instance?: FacebookApiService;
 
   protected constructor() {
-    super("/");
+    super('/');
   }
 
   public static getSingleton() {

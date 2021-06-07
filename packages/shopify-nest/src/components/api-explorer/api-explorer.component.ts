@@ -1,13 +1,13 @@
-import { Component, TemplateFunction, HttpService } from "@ribajs/core";
-import { isNumber, extend, hasChildNodesTrim } from "@ribajs/utils";
-import Debug from "debug";
+import { Component, TemplateFunction, HttpService } from '@ribajs/core';
+import { isNumber, extend, hasChildNodesTrim } from '@ribajs/utils';
+import Debug from 'debug';
 
-import { DropdownService } from "@ribajs/bs4";
+import { DropdownService } from '@ribajs/bs4';
 
-import pugTemplate from "./api-explorer.component.pug";
+import pugTemplate from './api-explorer.component.pug';
 
-import * as monaco from "monaco-editor";
-import { LocalesStaticService } from "@ribajs/i18n";
+import * as monaco from 'monaco-editor';
+import { LocalesStaticService } from '@ribajs/i18n';
 
 export interface APIParam {
   /**
@@ -38,7 +38,7 @@ export interface APIParam {
   /**
    * Param type
    */
-  type: "text" | "dropdown" | "number";
+  type: 'text' | 'dropdown' | 'number';
   /**
    * Is this param ready? Param is ready if a valid value was chosen
    */
@@ -83,23 +83,23 @@ export interface Scope {
   currentQueries: APIParam[];
   currentUrl: string;
   currentSelectApi: APIListItem;
-  send: ShopifyNestApiExplorerComponent["send"];
-  apiList: ShopifyNestApiExplorerComponent["apiList"];
-  selectApi: ShopifyNestApiExplorerComponent["selectApi"];
-  selectFreestyleApi: ShopifyNestApiExplorerComponent["selectFreestyleApi"];
-  selectApiParamValue: ShopifyNestApiExplorerComponent["selectApiParamValue"];
-  selectApiQueryValue: ShopifyNestApiExplorerComponent["selectApiQueryValue"];
+  send: ShopifyNestApiExplorerComponent['send'];
+  apiList: ShopifyNestApiExplorerComponent['apiList'];
+  selectApi: ShopifyNestApiExplorerComponent['selectApi'];
+  selectFreestyleApi: ShopifyNestApiExplorerComponent['selectFreestyleApi'];
+  selectApiParamValue: ShopifyNestApiExplorerComponent['selectApiParamValue'];
+  selectApiQueryValue: ShopifyNestApiExplorerComponent['selectApiQueryValue'];
 }
 
 export abstract class ShopifyNestApiExplorerComponent extends Component {
-  public static tagName = "shopify-nest-api-explorer";
+  public static tagName = 'shopify-nest-api-explorer';
 
   protected abstract apiList: APIListItem[];
 
   protected autobind = true;
 
   protected editor?: monaco.editor.IStandaloneCodeEditor;
-  protected localesService = LocalesStaticService.getInstance("main");
+  protected localesService = LocalesStaticService.getInstance('main');
 
   static get observedAttributes(): string[] {
     return [];
@@ -110,16 +110,16 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
     if (this.editor) {
       this.editor.setValue(this.scope.result);
     } else {
-      const el = this.querySelector(".monaco-editor") as HTMLElement;
+      const el = this.querySelector('.monaco-editor') as HTMLElement;
       if (!el) {
         throw new Error(
-          "This component needs a container element with the class of .monaco-editor"
+          'This component needs a container element with the class of .monaco-editor',
         );
       }
       this.editor = monaco.editor.create(el, {
         value: this.scope.result,
-        language: "json",
-        theme: "vs-dark",
+        language: 'json',
+        theme: 'vs-dark',
         readOnly: true,
         automaticLayout: true,
         minimap: {
@@ -130,14 +130,14 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
   }
 
   protected debug = Debug(
-    "component:" + ShopifyNestApiExplorerComponent.tagName
+    'component:' + ShopifyNestApiExplorerComponent.tagName,
   );
 
   public abstract scope: Scope;
 
   constructor() {
     super();
-    this.debug("constructor", this);
+    this.debug('constructor', this);
   }
 
   protected connectedCallback() {
@@ -148,21 +148,21 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
   public send() {
     this.generateUrlOfParams();
 
-    this.debug("send", this.scope.currentUrl);
+    this.debug('send', this.scope.currentUrl);
     HttpService.getJSON(this.scope.currentUrl)
       .then((result: any) => {
-        this.debug("result", result);
+        this.debug('result', result);
         this.result = JSON.stringify(result.body, null, 4);
       })
       .catch((error) => {
-        if (typeof error === "object") {
+        if (typeof error === 'object') {
           if (error.responseJSON) {
             this.result = JSON.stringify(error.responseJSON, null, 4);
             return;
           }
           this.result = JSON.stringify(error, null, 4);
           return;
-        } else if (typeof error === "string") {
+        } else if (typeof error === 'string') {
           try {
             this.result = JSON.stringify(error, null, 4);
           } catch (error) {
@@ -177,7 +177,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
     this.scope.apiList.forEach((api) => {
       if (api.freestyle) {
         this.selectApi(api);
-        this.querySelector<HTMLFormElement>(".form-control-freestyle")?.focus();
+        this.querySelector<HTMLFormElement>('.form-control-freestyle')?.focus();
         return;
       }
     });
@@ -200,9 +200,9 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
   public selectApiParamValue(
     self: this,
     param: APIParam,
-    value: string | number
+    value: string | number,
   ) {
-    self.debug("selectApiParamValue", param, value);
+    self.debug('selectApiParamValue', param, value);
     param.value = value;
     param.ready = true;
     self.checkPreviousParamsReady();
@@ -213,9 +213,9 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
   public selectApiQueryValue(
     self: this,
     query: APIParam,
-    value: string | number
+    value: string | number,
   ) {
-    self.debug("selectApiQueryValue", query, value);
+    self.debug('selectApiQueryValue', query, value);
     query.value = value;
     query.ready = true;
     DropdownService.closeAll();
@@ -225,11 +225,11 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
     // set available langcodes
     this.scope.langcode = this.localesService.getLangcode();
     this.localesService.event.on(
-      "changed",
+      'changed',
       (changedLangcode: string /*, initial: boolean*/) => {
         // Activate localcode and disable the other
         this.scope.langcode = changedLangcode;
-      }
+      },
     );
   }
 
@@ -238,19 +238,19 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
    */
   protected generateUrlOfParams() {
     if (!this.scope.currentSelectApi.freestyle && this.scope.currentParams) {
-      this.scope.currentUrl = "";
+      this.scope.currentUrl = '';
       this.scope.currentParams.forEach((param) => {
         if (param.active) {
           const value = param.value ? param.value : param.original;
-          this.scope.currentUrl += "/" + value;
+          this.scope.currentUrl += '/' + value;
         }
       });
       this.scope.currentQueries.forEach((query /*, i*/) => {
         let activeCounter = 0;
         if (query.active) {
           const value = query.value ? query.value : query.defaultValue;
-          this.scope.currentUrl += activeCounter <= 0 ? "?" : "&";
-          this.scope.currentUrl += query.name + "=";
+          this.scope.currentUrl += activeCounter <= 0 ? '?' : '&';
+          this.scope.currentUrl += query.name + '=';
           this.scope.currentUrl += value;
           activeCounter++;
         }
@@ -259,23 +259,23 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
   }
 
   protected generateParamsForApi(api: APIListItem) {
-    const queryStartIndex = api.url.indexOf("?");
+    const queryStartIndex = api.url.indexOf('?');
     const url =
       queryStartIndex < 0 ? api.url : api.url.substring(0, queryStartIndex);
-    const params = url.split("/");
+    const params = url.split('/');
     const paramObjs = new Array<APIParam>();
     for (const i in params) {
       if (params[i]) {
         const param = params[i];
         if (param) {
-          const isDynamic = param.startsWith(":") || param.startsWith("*");
-          const name = param.replace(/(:|\*)/g, "");
+          const isDynamic = param.startsWith(':') || param.startsWith('*');
+          const name = param.replace(/(:|\*)/g, '');
           paramObjs.push({
             name,
             original: param,
             value: isDynamic ? undefined : param, // no dynamic params has a static value
             values: [],
-            type: "dropdown",
+            type: 'dropdown',
             dynamic: isDynamic,
             ready: !isDynamic, // dynamic params not ready by default, we need to load the values first
             dependenciesResolved: !isDynamic,
@@ -288,27 +288,27 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
   }
 
   protected generateQueriesForApi(api: APIListItem) {
-    const queryStartIndex = api.url.indexOf("?");
+    const queryStartIndex = api.url.indexOf('?');
     const queryObjs = new Array<APIParam>();
     if (queryStartIndex < 0) {
       return queryObjs;
     }
     const queryString = api.url.substring(queryStartIndex + 1);
     const queries = new URLSearchParams(queryString);
-    this.debug("generateQueriesForApi", queries, queryString);
+    this.debug('generateQueriesForApi', queries, queryString);
     if (queries) {
       queries.forEach((defaultValue, name) => {
-        let type: "text" | "number" | "dropdown" = "dropdown";
+        let type: 'text' | 'number' | 'dropdown' = 'dropdown';
         let ready = false;
         let value: string | number | undefined;
         if (defaultValue !== null) {
           if (isNumber(defaultValue)) {
-            type = "number";
+            type = 'number';
             value = 0;
             ready = true;
           } else {
-            type = "text";
-            value = "";
+            type = 'text';
+            value = '';
             ready = true;
           }
         }
@@ -340,7 +340,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
       param.dependenciesResolved =
         prevParam.ready && prevParam.dependenciesResolved;
     }
-    this.debug("checkPreviousParamsReady", this.scope.currentParams);
+    this.debug('checkPreviousParamsReady', this.scope.currentParams);
   }
 
   protected loadParamsValues() {
@@ -352,7 +352,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
               this.debug(`values for ${param.name}`, values);
               param.values = values;
             } else {
-              this.debug("No values found for", param.name);
+              this.debug('No values found for', param.name);
             }
           })
           .then(() => {
@@ -377,7 +377,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
           });
       });
     }
-    this.debug("loadQueriesValues", this.scope.currentQueries);
+    this.debug('loadQueriesValues', this.scope.currentQueries);
   }
 
   protected abstract loadParamValues(param: APIParam): Promise<any>;
@@ -386,11 +386,11 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
 
   protected async beforeBind() {
     this.initLocales();
-    this.debug("beforeBind");
+    this.debug('beforeBind');
   }
 
   protected async afterBind() {
-    this.debug("afterBind", this.scope);
+    this.debug('afterBind', this.scope);
     await super.afterBind();
   }
 
@@ -402,13 +402,13 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.attributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
   }
 
@@ -424,11 +424,11 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
     let template: string | null = null;
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
-      this.debug("Do not template, because element has child nodes");
+      this.debug('Do not template, because element has child nodes');
       return template;
     } else {
       template = pugTemplate(this.scope);
-      this.debug("Use template", template);
+      this.debug('Use template', template);
       return template;
     }
   }

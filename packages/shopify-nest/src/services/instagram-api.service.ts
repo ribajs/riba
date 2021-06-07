@@ -1,17 +1,17 @@
-import { HttpService } from "@ribajs/core";
+import { HttpService } from '@ribajs/core';
 import {
   InstagramApiService as _InstagramApiService,
   InstagramResponse,
-} from "@ribajs/shopify-tda";
-import Debug from "debug";
-import { InstagramAccounts } from "./../interfaces/instagram-api/accounts";
+} from '@ribajs/shopify-tda';
+import Debug from 'debug';
+import { InstagramAccounts } from './../interfaces/instagram-api/accounts';
 
 export class InstagramApiService extends _InstagramApiService {
   public static instance?: InstagramApiService;
 
-  protected debug = Debug("services:AuthService");
+  protected debug = Debug('services:AuthService');
 
-  protected constructor(host = "/") {
+  protected constructor(host = '/') {
     super(host);
   }
 
@@ -25,10 +25,10 @@ export class InstagramApiService extends _InstagramApiService {
 
   public async accounts() {
     return HttpService.getJSON<InstagramResponse<InstagramAccounts[]>>(
-      `${this.baseUrl}/instagram/api/user/accounts`
+      `${this.baseUrl}/user/accounts`,
     ).then((res) => {
       const accounts = res.body;
-      this.debug("accounts", accounts);
+      this.debug('accounts', accounts);
       return accounts;
     });
   }

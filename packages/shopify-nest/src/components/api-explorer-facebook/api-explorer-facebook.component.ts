@@ -1,12 +1,12 @@
-import Debug from "debug";
+import Debug from 'debug';
 import {
   ShopifyNestApiExplorerComponent,
   APIParam,
   APIListItem,
   Scope as IBaseScope,
-} from "../api-explorer/api-explorer.component";
+} from '../api-explorer/api-explorer.component';
 
-import { FacebookApiService } from "../../services/facebook-api.service";
+import { FacebookApiService } from '../../services/facebook-api.service';
 
 export interface Scope extends IBaseScope {
   langcode?: string;
@@ -16,86 +16,86 @@ export interface Scope extends IBaseScope {
   currentQueries: APIParam[];
   currentUrl: string;
   currentSelectApi: APIListItem;
-  send: ShopifyNestApiExplorerComponent["send"];
-  apiList: ShopifyNestApiExplorerComponent["apiList"];
-  selectApi: ShopifyNestApiExplorerComponent["selectApi"];
-  selectFreestyleApi: ShopifyNestApiExplorerComponent["selectFreestyleApi"];
-  selectApiParamValue: ShopifyNestApiExplorerFacebookComponent["selectApiParamValue"];
-  selectApiQueryValue: ShopifyNestApiExplorerFacebookComponent["selectApiQueryValue"];
+  send: ShopifyNestApiExplorerComponent['send'];
+  apiList: ShopifyNestApiExplorerComponent['apiList'];
+  selectApi: ShopifyNestApiExplorerComponent['selectApi'];
+  selectFreestyleApi: ShopifyNestApiExplorerComponent['selectFreestyleApi'];
+  selectApiParamValue: ShopifyNestApiExplorerFacebookComponent['selectApiParamValue'];
+  selectApiQueryValue: ShopifyNestApiExplorerFacebookComponent['selectApiQueryValue'];
 }
 
 export class ShopifyNestApiExplorerFacebookComponent extends ShopifyNestApiExplorerComponent {
-  public static tagName = "shopify-nest-api-explorer-facebook";
+  public static tagName = 'shopify-nest-api-explorer-facebook';
 
   protected apiService = FacebookApiService.getSingleton();
 
   protected apiList: APIListItem[] = [
     {
       // Freestyle
-      label: "Freestyle",
-      url: "/facebook/api",
-      short_desc: "components.apiExplorer.freestyle.short_desc",
+      label: 'Freestyle',
+      url: '/facebook/api',
+      short_desc: 'components.apiExplorer.freestyle.short_desc',
       freestyle: true,
     },
     {
       // Retrieves your facebook user name and id.
-      label: "facebook/api/user",
-      url: "facebook/api/user",
-      short_desc: "components.apiExplorer.facebook.user.short_desc",
-      roles: ["shopify-staff-member"],
+      label: 'facebook/api/user',
+      url: 'facebook/api/user',
+      short_desc: 'components.apiExplorer.facebook.user.short_desc',
+      roles: ['shopify-staff-member'],
     },
     {
       // Retrieves your facebook user picture image.
-      label: "facebook/api/user/picture",
-      url: "facebook/api/user/picture?type=small",
-      short_desc: "components.apiExplorer.facebook.user.picture.short_desc",
-      roles: ["shopify-staff-member"],
+      label: 'facebook/api/user/picture',
+      url: 'facebook/api/user/picture?type=small',
+      short_desc: 'components.apiExplorer.facebook.user.picture.short_desc',
+      roles: ['shopify-staff-member'],
     },
     {
       // Retrieves your facebook user pages your user has access to
-      label: "facebook/api/user/pages",
-      url: "facebook/api/user/pages",
-      short_desc: "components.apiExplorer.facebook.user.pages.short_desc",
-      roles: ["shopify-staff-member"],
+      label: 'facebook/api/user/pages',
+      url: 'facebook/api/user/pages',
+      short_desc: 'components.apiExplorer.facebook.user.pages.short_desc',
+      roles: ['shopify-staff-member'],
     },
     {
       // Retrieves a list of facebook posts by your user account.
-      label: "facebook/api/posts/user",
-      url: "facebook/api/posts/user?limit=0",
-      short_desc: "components.apiExplorer.facebook.posts.user.short_desc",
-      roles: ["shopify-staff-member"],
+      label: 'facebook/api/posts/user',
+      url: 'facebook/api/posts/user?limit=0',
+      short_desc: 'components.apiExplorer.facebook.posts.user.short_desc',
+      roles: ['shopify-staff-member'],
     },
     {
       // Retrieves a list of facebook posts by a page.
-      label: "facebook/api/posts/:page_id",
-      url: "facebook/api/posts/:page_id?limit=0",
-      short_desc: "components.apiExplorer.facebook.posts.pageId.short_desc",
+      label: 'facebook/api/posts/:page_id',
+      url: 'facebook/api/posts/:page_id?limit=0',
+      short_desc: 'components.apiExplorer.facebook.posts.pageId.short_desc',
       roles: [],
     },
     {
       // Retrieves a single facebook post by post id.
-      label: "facebook/api/post/:post_id",
-      url: "facebook/api/post/:post_id",
-      short_desc: "components.apiExplorer.facebook.post.postId.short_desc",
+      label: 'facebook/api/post/:post_id',
+      url: 'facebook/api/post/:post_id',
+      short_desc: 'components.apiExplorer.facebook.post.postId.short_desc',
       roles: [],
     },
     {
       // Retrieves a list of comments of a post by post id. Mainly used for comments pagination
-      label: "facebook/api/post/:post_id/comments",
-      url: "facebook/api/post/:post_id/comments?limit=0",
+      label: 'facebook/api/post/:post_id/comments',
+      url: 'facebook/api/post/:post_id/comments?limit=0',
       short_desc:
-        "components.apiExplorer.facebook.post.postId.comments.short_desc",
+        'components.apiExplorer.facebook.post.postId.comments.short_desc',
       roles: [],
     },
   ];
 
   public scope: Scope = {
-    langcode: "en",
+    langcode: 'en',
     self: this,
-    result: "",
+    result: '',
     currentParams: [],
     currentQueries: [],
-    currentUrl: "",
+    currentUrl: '',
     currentSelectApi: this.apiList[0],
     send: this.send,
     apiList: this.apiList,
@@ -110,25 +110,25 @@ export class ShopifyNestApiExplorerFacebookComponent extends ShopifyNestApiExplo
   }
 
   protected debug = Debug(
-    "component:" + ShopifyNestApiExplorerFacebookComponent.tagName
+    'component:' + ShopifyNestApiExplorerFacebookComponent.tagName,
   );
   constructor() {
     super();
   }
 
   protected async loadParamValues(param: APIParam) {
-    this.debug("loadParamValues", param);
+    this.debug('loadParamValues', param);
     if (!param.dependenciesResolved) {
       this.debug(
-        `Dependencies for this parameter '${param.name}' not resolved`
+        `Dependencies for this parameter '${param.name}' not resolved`,
       );
       return;
     }
     switch (param.name) {
-      case "page_id":
+      case 'page_id':
         return this.loadFacebookPageIdParamValues();
         break;
-      case "post_id":
+      case 'post_id':
         return this.loadFacebookPostIdParamValues();
         break;
     }
@@ -159,14 +159,14 @@ export class ShopifyNestApiExplorerFacebookComponent extends ShopifyNestApiExplo
   }
 
   protected async loadQueryValues(query: APIParam) {
-    this.debug("loadParamValues", query);
+    this.debug('loadParamValues', query);
     switch (query.name) {
-      case "type":
-        query.type = "dropdown";
-        query.values = ["small", "normal", "album", "large", "square"];
+      case 'type':
+        query.type = 'dropdown';
+        query.values = ['small', 'normal', 'album', 'large', 'square'];
         break;
-      case "limit":
-        query.type = "number";
+      case 'limit':
+        query.type = 'number';
         query.value = 0;
         break;
       default:
