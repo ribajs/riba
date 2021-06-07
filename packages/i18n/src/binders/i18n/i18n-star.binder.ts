@@ -83,7 +83,6 @@ export const i18nStarBinder: Binder<string> = {
         this.customData.vars,
         _el.dataset,
       );
-      console.debug('this.customData.vars', this.customData.vars, _el.dataset);
       // Parse templates which have his own translations
       this.customData.langVars = (
         this.customData.i18n as LocalesService
