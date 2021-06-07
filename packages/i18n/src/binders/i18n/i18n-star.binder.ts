@@ -1,6 +1,7 @@
-import { Binder } from "@ribajs/core";
-import { extend } from "@ribajs/utils/src/type";
-import { I18nService } from "../../services/i18n.service";
+import { Binder } from '@ribajs/core';
+import { extend } from '@ribajs/utils/src/type';
+import { I18nService } from '../../services/i18n.service';
+import { LocalesService } from '../../types';
 
 // see star.binder.ts
 export interface BinderAttributeChangedEvent {
@@ -16,7 +17,7 @@ export interface BinderAttributeChangedEvent {
  *
  */
 export const i18nStarBinder: Binder<string> = {
-  name: "i18n-*",
+  name: 'i18n-*',
   block: false,
   priority: 0,
   bind(el: HTMLUnknownElement) {
@@ -25,11 +26,11 @@ export const i18nStarBinder: Binder<string> = {
       const customData: any = {};
       customData.type = (el as HTMLInputElement).type;
       customData.tagName = el.tagName;
-      customData.contenteditable = el.getAttribute("contenteditable")
+      customData.contenteditable = el.getAttribute('contenteditable')
         ? true
         : false;
       customData.isRadio =
-        customData.tagName === "INPUT" && customData.type === "radio";
+        customData.tagName === 'INPUT' && customData.type === 'radio';
       return customData;
     };
     this.customData = getElementData();
@@ -41,19 +42,19 @@ export const i18nStarBinder: Binder<string> = {
 
     this.customData.applyTranslation = (locale: string) => {
       if (!locale) {
-        if (this.customData.i18n.showMissingTranslation) {
+        if ((this.customData.i18n as LocalesService).showMissingTranslation) {
           locale = `translation missing: "${this.customData.properties.join(
-            "."
+            '.',
           )}"`;
         } else {
           return;
         }
       }
-      if (this.customData.attributeName === "html") {
+      if (this.customData.attributeName === 'html') {
         el.innerHTML = locale;
-      } else if (this.customData.attributeName === "text") {
+      } else if (this.customData.attributeName === 'text') {
         el.innerText = locale;
-      } else if (this.customData.attributeName === "value") {
+      } else if (this.customData.attributeName === 'value') {
         // TODO support also: https://github.com/JumpLinkNetwork/tinybind/blob/master/src/binders/basic/value.binder.ts#L51
         if (this.customData.contenteditable) {
           el.innerHTML = locale;
@@ -67,42 +68,37 @@ export const i18nStarBinder: Binder<string> = {
 
     this.customData.parseVars = (_el: HTMLElement) => {
       // parse templates to vars
-      const newVars = this.customData.i18n.parseTemplateVars(_el);
+      const newVars = (
+        this.customData.i18n as LocalesService
+      ).parseTemplateVars(_el);
       this.customData.vars = extend(
         { deep: true },
         this.customData.vars,
-        newVars
+        newVars,
       );
-      // if (Object.keys(this.customData.vars).length) {
-      //   console.warn('parsed templates vars', this.customData.vars);
-      // }
 
       // parse data attributes to vars
       this.customData.vars = extend(
-        { deep: true },
+        { deep: false },
         this.customData.vars,
-        _el.dataset
+        _el.dataset,
       );
-      // if (Object.keys(this.customData.vars).length) {
-      //   console.warn('parsed attribute vars', this.customData.vars);
-      // }
-
+      console.debug('this.customData.vars', this.customData.vars, _el.dataset);
       // Parse templates which have his own translations
-      this.customData.langVars = this.customData.i18n.parseLocalVars(_el);
-      // if (this.customData.langVars && Object.keys(this.customData.langVars).length) {
-      //   console.warn('parsed own translations', this.customData.langVars);
-      // }
+      this.customData.langVars = (
+        this.customData.i18n as LocalesService
+      ).parseLocalVars(_el);
     };
 
     this.customData.translate = (langcode?: string) => {
       // If language service is not ready do nothing
-      if (!this.customData.i18n.ready) {
+      if (!(this.customData.i18n as LocalesService).ready) {
         return;
       }
       if (!langcode) {
-        langcode = this.customData.i18n.getLangcode();
+        langcode = (this.customData.i18n as LocalesService).getLangcode();
         if (!langcode) {
-          console.error("Langcode is required", langcode);
+          console.error('Langcode is required', langcode);
           return;
         }
       }
@@ -110,7 +106,7 @@ export const i18nStarBinder: Binder<string> = {
       // translate by using the already translated language variable
       if (this.customData.langVars && this.customData.langVars[langcode]) {
         return this.customData.applyTranslation(
-          this.customData.langVars[langcode]
+          this.customData.langVars[langcode],
         );
       }
 
@@ -122,16 +118,16 @@ export const i18nStarBinder: Binder<string> = {
         if (this.customData.langVars && this.customData.langVars.default) {
           // console.warn('Translate by default', this.customData.langVars.default);
           return this.customData.applyTranslation(
-            this.customData.langVars.default
+            this.customData.langVars.default,
           );
         }
       }
 
       // translate by properties, e.g. de.cart.add
-      return this.customData.i18n
+      return (this.customData.i18n as LocalesService)
         .get([langcode, ...this.customData.properties], this.customData.vars)
         .then((local: string) => {
-          if (local && typeof local === "string") {
+          if (local && typeof local === 'string') {
             // console.warn('Translate by properties', [langcode, ...this.customData.properties], local);
             return this.customData.applyTranslation(local);
           }
@@ -139,7 +135,7 @@ export const i18nStarBinder: Binder<string> = {
           if (this.customData.langVars && this.customData.langVars.default) {
             // console.warn('Translate by default as fallback', this.customData.langVars.default);
             return this.customData.applyTranslation(
-              this.customData.langVars.default
+              this.customData.langVars.default,
             );
           }
 
@@ -151,17 +147,16 @@ export const i18nStarBinder: Binder<string> = {
     };
 
     this.customData.onAttributeChanged = (
-      data: BinderAttributeChangedEvent
+      data: BinderAttributeChangedEvent,
     ) => {
-      if (data.detail.name.startsWith("data-")) {
+      if (data.detail.name.startsWith('data-')) {
         const varName = data.detail.name.slice(5);
         const newVar: any = {};
         newVar[varName] = data.detail.newValue;
-        // console.warn('binder-changed newVar', newVar);
         this.customData.vars = extend(
           { deep: true },
           this.customData.vars,
-          newVar
+          newVar,
         );
         this.customData.translate();
       }
@@ -169,7 +164,7 @@ export const i18nStarBinder: Binder<string> = {
 
     this.customData.onLanguageChanged = (
       langcode: string,
-      initial: boolean
+      initial: boolean,
     ) => {
       // Do not translate on initial language change, we use the ready event for this
       if (!initial) {
@@ -182,7 +177,7 @@ export const i18nStarBinder: Binder<string> = {
      */
     this.customData.initOnReady = (
       langcode: string,
-      translationNeeded: boolean
+      translationNeeded: boolean,
     ) => {
       // Translate on translation service ready if needed
       if (translationNeeded) {
@@ -190,13 +185,13 @@ export const i18nStarBinder: Binder<string> = {
       }
 
       // Translate if language changes
-      this.customData.i18n.event.on(
-        "changed",
-        this.customData.onLanguageChanged
+      (this.customData.i18n as LocalesService).event.on(
+        'changed',
+        this.customData.onLanguageChanged,
       );
 
       // Translate if binder attribute event is changed
-      el.addEventListener("binder-changed", this.customData.onAttributeChanged);
+      el.addEventListener('binder-changed', this.customData.onAttributeChanged);
     };
   },
 
@@ -207,21 +202,29 @@ export const i18nStarBinder: Binder<string> = {
       this.customData.translateMePathString = translateMePathString;
       if (translateMePathString) {
         this.customData.properties =
-          this.customData.translateMePathString.split(".");
+          this.customData.translateMePathString.split('.');
       }
 
       this.customData.parseVars(el);
 
       // Translate if language is ready
-      if (this.customData.i18n.ready) {
+      if ((this.customData.i18n as LocalesService).ready) {
+        const currentLangcode = (
+          this.customData.i18n as LocalesService
+        ).getLangcode();
+        const initialLangcode = (
+          this.customData.i18n as LocalesService
+        ).getInitialLangcode();
         this.customData.initOnReady(
-          this.customData.i18n.getLangcode(),
-          this.customData.i18n.currentLangcode !==
-            this.customData.i18n.initialLangcode ||
-            !options.localesService.doNotTranslateDefaultLanguage
+          currentLangcode,
+          currentLangcode !== initialLangcode ||
+            !options.localesService.doNotTranslateDefaultLanguage,
         );
       } else {
-        this.customData.i18n.event.on("ready", this.customData.initOnReady);
+        (this.customData.i18n as LocalesService).event.on(
+          'ready',
+          this.customData.initOnReady,
+        );
       }
     } else if (
       this.customData.translateMePathString !== translateMePathString
@@ -229,7 +232,7 @@ export const i18nStarBinder: Binder<string> = {
       // If translate string was changed
       this.customData.translateMePathString = translateMePathString;
       this.customData.properties =
-        this.customData.translateMePathString.split(".");
+        this.customData.translateMePathString.split('.');
       this.customData.parseVars(el);
       this.customData.translate();
     }
@@ -237,12 +240,12 @@ export const i18nStarBinder: Binder<string> = {
 
   unbind() {
     this.el.removeEventListener(
-      "binder-changed",
-      this.customData.onAttributeChanged
+      'binder-changed',
+      this.customData.onAttributeChanged,
     );
-    this.customData.i18n.event.off(
-      "changed",
-      this.customData.onLanguageChanged
+    (this.customData.i18n as LocalesService).event.off(
+      'changed',
+      this.customData.onLanguageChanged,
     );
   },
 } as Binder<string>;
