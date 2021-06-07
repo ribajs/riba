@@ -184,6 +184,23 @@ export class HttpService {
       bodyResult = JSON.parse(bodyResult);
     }
 
+    if (typeof bodyResult === 'string') {
+      switch (bodyResult) {
+        case 'null':
+          bodyResult = null as unknown as T;
+          break;
+        case 'true':
+          bodyResult = true as unknown as T;
+          break;
+        case 'false':
+          bodyResult = false as unknown as T;
+          break;
+        case 'undefined':
+          bodyResult = undefined as unknown as T;
+          break;
+      }
+    }
+
     const result: HttpServiceResponse<T> = {
       status: response.status,
       headers: response.headers,
