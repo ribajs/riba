@@ -66,11 +66,6 @@ export class Bs5ToggleButtonComponent extends Component {
       this.onAllComponentsReady,
       this
     );
-    this.lifecycleEvents.once(
-      "ComponentLifecycle:timeout",
-      this.onAllComponentsReady,
-      this
-    );
   }
 
   public toggle() {

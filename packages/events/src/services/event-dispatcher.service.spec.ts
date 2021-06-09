@@ -5,7 +5,7 @@ describe("riba.core", () => {
     let eventDispatcher: EventDispatcher;
 
     beforeEach(() => {
-      EventDispatcher.instances = {}; //clear all old event dispatcher instances
+      EventDispatcher.deleteAllInstances();
       eventDispatcher = new EventDispatcher();
     });
 
@@ -38,7 +38,7 @@ describe("riba.core", () => {
       let obj3 = {
         value: 3
       };
-      const handler = jest.fn(function(this: {name: string}) { return (this as any).value });
+      const handler = jest.fn(function (this: { name: string }) { return (this as any).value });
       eventDispatcher.on("test1", handler, obj1);
       eventDispatcher.on("test2", handler, obj2);
       eventDispatcher.on("test3", handler, obj3);
@@ -53,15 +53,15 @@ describe("riba.core", () => {
       let thisContext = { value: 7452 }
       const obj = {
         value: 42,
-        testFunction: function(this: {value: number}) {
+        testFunction: function (this: { value: number }) {
           value = this.value;
         }
       };
       eventDispatcher.on("test1", obj.testFunction, thisContext);
-      eventDispatcher.off("test1", obj.testFunction, { number: 7452})
+      eventDispatcher.off("test1", obj.testFunction, { number: 7452 })
       eventDispatcher.trigger("test1");
       expect(value).toBe(7452); //test if testFunction is still active
-      
+
       value = undefined;
       eventDispatcher.off("test1", obj.testFunction, thisContext);
       expect(value).toBe(undefined); //test if testFunction is removed
@@ -80,7 +80,7 @@ describe("riba.core", () => {
       const thatContext = { value: 666 };
       const obj = {
         value: 42,
-        testFunction: function(this: {value: number}) {
+        testFunction: function (this: { value: number }) {
           value = this.value;
         },
       };
@@ -89,13 +89,13 @@ describe("riba.core", () => {
       eventDispatcher.on("test1", obj.testFunction, thisContext);
       eventDispatcher.off("test1", obj.testFunction, thisContext);
       eventDispatcher.on("test1", () => value = 23);
-      
+
       eventDispatcher.off("test1");
       eventDispatcher.trigger("test1");
       // No event handler got triggered: value still 1
       expect(value).toBe(1);
     });
-    
+
     it("All event listeners for all events should be removed if no arguments are supplied to 'off()'", () => {
       let value1: any = 1;
       let value2: any = 2;
@@ -104,7 +104,7 @@ describe("riba.core", () => {
       const thatContext = { value: 666 };
       const obj = {
         value: 42,
-        testFunction1: function(this: {value: number}) {
+        testFunction1: function (this: { value: number }) {
           value1 = this.value;
         },
       };

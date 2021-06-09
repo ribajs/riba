@@ -132,6 +132,13 @@ export class View {
     }
 
     // TODO fallback to unbind web components
+    if (Array.isArray(this.webComponents)) {
+      this.webComponents.forEach((webComponent) => {
+        if (typeof (webComponent as Component).unbind === "function") {
+          (webComponent as Component).unbind();
+        }
+      });
+    }
   }
 
   /**

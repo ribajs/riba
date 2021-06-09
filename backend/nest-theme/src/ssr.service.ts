@@ -11,6 +11,7 @@ import type { RenderResult } from './types';
 import { EventDispatcher } from '@ribajs/events';
 import { SourceFileService } from './source-file/source-file.service';
 import { TemplateFileService } from './template-file/template-file.service';
+import { DummyConsole } from './helper/dummy-console';
 
 @Injectable()
 export class SsrService {
@@ -98,7 +99,7 @@ export class SsrService {
         }
       },
     });
-    return dom;
+    return { dom, virtualConsole };
   }
 
   /**
@@ -114,45 +115,83 @@ export class SsrService {
     sharedContext: SharedContext,
     scriptFilenames = ['main.bundle.js'],
   ) {
-    let dom: JSDOM | null = await this.createDomForLayout(layout);
+    let { dom, virtualConsole } = await this.createDomForLayout(layout);
     dom.window.ssr = sharedContext;
 
     let files = await this.sourceFile.loads(scriptFilenames);
     let vmContext = dom.getInternalVMContext();
 
     for (const file of files) {
-      await file.script.runInContext(vmContext);
+      try {
+        await file.script.runInContext(vmContext, {
+          timeout: this.theme.timeout || 5000,
+        });
+      } catch (error) {
+        this.log.error('Error on run script');
+        this.log.error(error);
+      }
     }
 
     const renderResult = new Promise<RenderResult>((resolve, reject) => {
-      sharedContext.events.once(
-        'ready',
-        (lifecycleEventData: ComponentLifecycleEventData) => {
-          const html = dom.serialize();
-          const result: RenderResult = {
-            ...lifecycleEventData,
-            html: html,
-            css: [],
-          };
-          this.log.debug('[Riba lifecycle] Done.');
-          dom = null;
-          files = null;
-          vmContext = null;
-          return resolve(result);
-        },
-      );
-      sharedContext.events.once('error', (error: Error) => {
-        this.log.error('SSR error event: ' + error);
-        return reject(this.transformBrowserError(error));
-      });
-      dom.window.onerror = (msg, url, line, col, error) => {
-        this.log.error('SSR window.onerror: ' + error);
-        return reject(this.transformBrowserError(error));
+      const onError = (error: Error | ErrorEvent) => {
+        this.log.error('SSR error');
+        reject(this.transformBrowserError(error));
+        clear();
+        return true;
       };
-      dom.window.addEventListener('error', (error: ErrorEvent) => {
-        this.log.error('SSR window error: ' + error);
-        return reject(this.transformBrowserError(error));
-      });
+
+      const onDone = (lifecycleEventData: ComponentLifecycleEventData) => {
+        this.log.debug('[Riba lifecycle] Done.');
+        const html = dom.serialize();
+        const result: RenderResult = {
+          ...lifecycleEventData,
+          html: html,
+          css: [],
+        };
+        resolve(result);
+        clear();
+        return;
+      };
+
+      const clear = () => {
+        console.debug('Clear JSDom');
+
+        // Ignore clear errors
+        virtualConsole.sendTo(new DummyConsole());
+        virtualConsole.off('jsdomError', onError);
+
+        sharedContext.events.off('error', onError, this);
+        sharedContext.events.off('ready', onDone, this);
+
+        if (typeof dom?.window?.removeEventListener === 'function') {
+          dom.window.removeEventListener('error', onError);
+        }
+
+        if (
+          typeof dom?.window?.dispatchEvent === 'function' &&
+          dom.window.Event
+        ) {
+          dom.window.dispatchEvent(new dom.window.Event('beforeunload'));
+        }
+
+        if (typeof dom?.window?.close === 'function') {
+          dom.window.close();
+        }
+
+        // Clear dom
+        if (typeof dom?.window?.document?.write === 'function') {
+          dom.window.document.write();
+        }
+        files = null;
+        vmContext = null;
+        virtualConsole = null;
+        dom = null;
+      };
+
+      sharedContext.events.once('ready', onDone, this);
+      virtualConsole.on('jsdomError', onError);
+      sharedContext.events.once('error', onError, this);
+      dom.window.addEventListener('error', onError);
     });
 
     this.log.debug('[Riba lifecycle] Wait...');

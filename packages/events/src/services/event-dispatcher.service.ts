@@ -11,7 +11,11 @@ import {
  * @type {object}
  */
 export class EventDispatcher {
-  public static instances: EventDispatcherInstances = {};
+  protected static instances: EventDispatcherInstances = {};
+
+  public static getNamespaces(): string[] {
+    return Object.keys(this.instances);
+  }
 
   public static getInstance(namespace = "main"): EventDispatcher {
     const result = EventDispatcher.instances[namespace];
@@ -21,16 +25,44 @@ export class EventDispatcher {
     return result;
   }
 
+  public static getAllInstances(): EventDispatcherInstances {
+    return EventDispatcher.instances;
+  }
+
+  public static clearInstance(namespace = "main") {
+    const instance = EventDispatcher.instances[namespace];
+    instance.events = {};
+    instance.eventsOnce = {};
+    return instance;
+  }
+
+  public static deleteInstance(namespace = "main") {
+    this.clearInstance(namespace);
+    delete this.instances[namespace];
+  }
+
+  public static clearAllInstances() {
+    const namespaces = this.getNamespaces();
+    for (const namespace of namespaces) {
+      this.clearInstance(namespace);
+    }
+  }
+
+  public static deleteAllInstances() {
+    this.clearAllInstances();
+    this.instances = {};
+  }
+
   /**
    * Object that keeps all the events
    *
    * @readOnly
    * @type {object}
    */
-  private events: Events = {};
-  private eventsOnce: Events = {};
+  protected events: Events = {};
+  protected eventsOnce: Events = {};
 
-  private _namespace = "anonymous";
+  protected _namespace = "anonymous";
 
   public get namespace(): string {
     return this._namespace;

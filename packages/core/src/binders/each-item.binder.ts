@@ -13,11 +13,11 @@ export const eachStarBinder: Binder<any[]> = {
 
   bind(el: HTMLElement) {
     if (!this.marker) {
-      this.marker = document.createComment(` riba: ${this.type} `);
+      this.marker = document?.createComment(` riba: ${this.type} `);
       this.customData = {
         iterated: [] as View[],
       };
-      if (!el.parentNode) {
+      if (!el.parentNode?.insertBefore || !this.marker) {
         // console.warn('No parent node!');
       } else {
         el.parentNode.insertBefore(this.marker, el);
@@ -63,9 +63,9 @@ export const eachStarBinder: Binder<any[]> = {
     if (!Array.isArray(collection)) {
       throw new Error(
         "each-" +
-          modelName +
-          " needs an array or object to iterate over, but it is " +
-          typeof collection
+        modelName +
+        " needs an array or object to iterate over, but it is " +
+        typeof collection
       );
     }
 
@@ -88,7 +88,7 @@ export const eachStarBinder: Binder<any[]> = {
       let view = this.customData.iterated[index];
 
       if (!view) {
-        let previous: Comment | HTMLElement;
+        let previous: Comment | HTMLElement | undefined;
 
         if (this.customData.iterated.length) {
           previous =
@@ -96,8 +96,10 @@ export const eachStarBinder: Binder<any[]> = {
               .els[0];
         } else if (this.marker) {
           previous = this.marker;
-        } else {
-          throw new Error("previous not defined");
+        }
+
+        if (!previous) {
+          return;
         }
 
         view = View.create(this, scope, previous.nextSibling);

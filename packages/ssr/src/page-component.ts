@@ -22,7 +22,7 @@ export abstract class PageComponent extends Component {
   }
 
   protected setHtmlHead() {
-    if (this.head.title) {
+    if (this.head.title && document) {
       document.title = this.head.title;
     }
   }

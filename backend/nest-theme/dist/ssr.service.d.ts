@@ -1,5 +1,5 @@
 import { Logger } from '@nestjs/common';
-import { JSDOM } from 'jsdom';
+import { VirtualConsole, JSDOM } from 'jsdom';
 import { ConfigService } from '@nestjs/config';
 import { TemplateVars } from './types/template-vars';
 import { ThemeConfig, ErrorObj } from '@ribajs/ssr';
@@ -15,7 +15,10 @@ export declare class SsrService {
     theme: ThemeConfig;
     constructor(config: ConfigService, sourceFile: SourceFileService, templateFile: TemplateFileService);
     getSharedContext(req: Request, templateVars: TemplateVars, errorObj?: ErrorObj): Promise<SharedContext>;
-    protected createDomForLayout(layout: string): Promise<JSDOM>;
+    protected createDomForLayout(layout: string): Promise<{
+        dom: JSDOM;
+        virtualConsole: VirtualConsole;
+    }>;
     render(layout: string, sharedContext: SharedContext, scriptFilenames?: string[]): Promise<RenderResult>;
     protected transformBrowserError(error: Error | ErrorEvent): Error;
     renderComponent({ templatePath, rootTag, componentTagName, sharedContext, }: {

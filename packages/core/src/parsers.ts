@@ -145,7 +145,7 @@ export function parseNode(
       for (let i = 0; i < tokens.length; i++) {
         const token = tokens[i];
         const text = document.createTextNode(token.value);
-        if (node.parentNode) {
+        if (node.parentNode && text && node) {
           node.parentNode.insertBefore(text, node);
         }
         if (token.type === BINDING) {

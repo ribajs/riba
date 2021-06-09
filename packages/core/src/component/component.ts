@@ -358,7 +358,7 @@ export abstract class Component extends BasicComponent {
     }
   }
 
-  protected async unbind() {
+  public async unbind() {
     try {
       if (this.view) {
         this._binds = false;

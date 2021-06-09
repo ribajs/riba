@@ -1,10 +1,16 @@
-import { EventDispatcherInstances, EventCallback } from "../types/event-dispatcher";
+import { EventDispatcherInstances, Events, EventCallback } from "../types/event-dispatcher";
 export declare class EventDispatcher {
-    static instances: EventDispatcherInstances;
+    protected static instances: EventDispatcherInstances;
+    static getNamespaces(): string[];
     static getInstance(namespace?: string): EventDispatcher;
-    private events;
-    private eventsOnce;
-    private _namespace;
+    static getAllInstances(): EventDispatcherInstances;
+    static clearInstance(namespace?: string): EventDispatcher;
+    static deleteInstance(namespace?: string): void;
+    static clearAllInstances(): void;
+    static deleteAllInstances(): void;
+    protected events: Events;
+    protected eventsOnce: Events;
+    protected _namespace: string;
     get namespace(): string;
     constructor(namespace?: string);
     once(eventName: string, cb: EventCallback, thisContext?: any): void;
