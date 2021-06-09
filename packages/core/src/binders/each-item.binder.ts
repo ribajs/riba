@@ -63,9 +63,9 @@ export const eachStarBinder: Binder<any[]> = {
     if (!Array.isArray(collection)) {
       throw new Error(
         "each-" +
-        modelName +
-        " needs an array or object to iterate over, but it is " +
-        typeof collection
+          modelName +
+          " needs an array or object to iterate over, but it is " +
+          typeof collection
       );
     }
 

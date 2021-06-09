@@ -9,11 +9,11 @@ export const toType = (obj: any) => {
 };
 
 export const couldBeJson = (str?: string | null) => {
-  if (!str || typeof str !== 'string') {
+  if (!str || typeof str !== "string") {
     return false;
   }
   str = str.trim();
-  return str.charAt(0) === '{' || str.charAt(0) === '[';
+  return str.charAt(0) === "{" || str.charAt(0) === "[";
 };
 
 /**
@@ -26,7 +26,7 @@ export const isJson = (str?: string | null) => {
   }
   try {
     const val = JSON.parse(str);
-    return Array.isArray(val) || typeof val === 'object' ? true : false;
+    return Array.isArray(val) || typeof val === "object" ? true : false;
   } catch (error) {
     return false;
   }
@@ -58,7 +58,7 @@ export const parseJsonString = (value: string) => {
  * Check if value is undefined
  */
 export const isUndefined = (value?: any) => {
-  return typeof value === 'undefined';
+  return typeof value === "undefined";
 };
 
 /**
@@ -73,7 +73,7 @@ export const isDefined = (value?: any) => {
  * @see https://stackoverflow.com/a/4775737/1465919
  */
 export const isObject = (obj: any) => {
-  return isDefined(obj) && typeof obj === 'object' && obj !== null;
+  return isDefined(obj) && typeof obj === "object" && obj !== null;
 };
 
 /**
@@ -96,7 +96,7 @@ export const getNumber = (value: string) => {
  * Check if value is a function
  */
 export const isFunction = (value: any) => {
-  return typeof value === 'function';
+  return typeof value === "function";
 };
 
 /**
@@ -126,7 +126,7 @@ export const isBoolean = (value?: any) => {
  * Check if value is a string
  */
 export const isString = (value?: any) => {
-  return typeof value === 'string';
+  return typeof value === "string";
 };
 
 /**
@@ -156,10 +156,10 @@ export const stringIsPhoneNumber = (value: string) => {
  * @see http://stackoverflow.com/a/1100653/1465919
  */
 export const justDigits = (str: string | number) => {
-  if (typeof str === 'number') {
+  if (typeof str === "number") {
     return str;
   }
-  const num = str.replace(/[^-\d.]/g, '');
+  const num = str.replace(/[^-\d.]/g, "");
   if (!isNumber(num)) {
     return 0;
   } else {
@@ -169,13 +169,13 @@ export const justDigits = (str: string | number) => {
 
 export const escapeHtml = (str: string) => {
   const tagsToReplace = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
   };
 
   return str.replace(/[&<>]/g, (tag) => {
-    return tagsToReplace[tag as '&' | '<' | '>'] || tag;
+    return tagsToReplace[tag as "&" | "<" | ">"] || tag;
   });
 };
 
@@ -186,7 +186,7 @@ export const escapeHtml = (str: string) => {
  */
 export const withoutSpecialChars = (str: string) => {
   // str = str.replace(/[^\w\s]/gi, ""); // http://stackoverflow.com/a/4374890
-  str = str.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}[\]\\/]/gi, '');
+  str = str.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}[\]\\/]/gi, "");
   return str;
 };
 
@@ -195,7 +195,7 @@ export const withoutSpecialChars = (str: string) => {
  * @param str
  */
 export const withoutMultiWhitespace = (str: string) => {
-  str = str.replace(/\s\s+/g, ' ');
+  str = str.replace(/\s\s+/g, " ");
   return str;
 };
 
@@ -209,14 +209,14 @@ export const handleize = (str: string) => {
   str = withoutMultiWhitespace(str);
   str = withoutSpecialChars(str);
   str = str.toLowerCase();
-  str = str.replace(/ /g, '-');
+  str = str.replace(/ /g, "-");
   return str;
 };
 
 export const stripHtml = (html: string) => {
-  const tmp = document.createElement('DIV');
+  const tmp = document.createElement("DIV");
   tmp.innerHTML = html;
-  return tmp.textContent || tmp.innerText || '';
+  return tmp.textContent || tmp.innerText || "";
 };
 
 /**
@@ -235,7 +235,7 @@ export const camelCase = (str: string) => {
  * @param str
  */
 export const capitalize = (str: string) => {
-  if (typeof str !== 'string') return '';
+  if (typeof str !== "string") return "";
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
@@ -267,7 +267,7 @@ export const extend = (
       if (obj.hasOwnProperty(prop)) {
         if (
           options.deep &&
-          Object.prototype.toString.call(obj[prop]) === '[object Object]'
+          Object.prototype.toString.call(obj[prop]) === "[object Object]"
         ) {
           // If we're doing a deep merge and the property is an object
           extended[prop] = extend(options, extended[prop], obj[prop]);
@@ -275,12 +275,12 @@ export const extend = (
           // Otherwise, do a regular merge
           if (options.keepValues) {
             // Only overwrite target value if the target value is undefined
-            if (typeof extended[prop] === 'undefined') {
+            if (typeof extended[prop] === "undefined") {
               extended[prop] = obj[prop];
             }
           } else if (options.onlyDefined) {
             // Only overwrite target value if the source value is defined / not undefined
-            if (typeof obj[prop] !== 'undefined') {
+            if (typeof obj[prop] !== "undefined") {
               extended[prop] = obj[prop];
             }
           } else if (options.mergeArrays) {
@@ -349,16 +349,16 @@ export const classOf = (that: any) => {
  * @return Cleared new object
  */
 export const clearObjFromRiba = (
-  obj: Record<string, any> | Array<any>,
+  obj: Record<string, any> | Array<any>
 ): Record<string, any> | Array<any> => {
   if (Array.isArray(obj)) {
     return (obj as Array<any>).map((x: any) =>
-      isObject(x) ? clearObjFromRiba(x) : x,
+      isObject(x) ? clearObjFromRiba(x) : x
     );
   }
   const newObj: any = {};
   for (const key in obj) {
-    if (key !== '__rv') {
+    if (key !== "__rv") {
       if (isObject(obj[key])) {
         newObj[key] = clearObjFromRiba(obj[key]);
       } else {

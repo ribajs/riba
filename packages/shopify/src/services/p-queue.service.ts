@@ -1,6 +1,6 @@
 // https://github.com/sindresorhus/p-queue
 
-import { PriorityQueue } from './priority-queue.service';
+import { PriorityQueue } from "./priority-queue.service";
 
 export class PQueue {
   public queue = new PriorityQueue(); // eslint-disable-line new-cap
@@ -31,32 +31,32 @@ export class PQueue {
         autoStart: true,
         queueClass: PriorityQueue,
       },
-      options,
+      options
     );
 
     if (
-      !(typeof options.concurrency === 'number' && options.concurrency >= 1)
+      !(typeof options.concurrency === "number" && options.concurrency >= 1)
     ) {
       throw new TypeError(
         `Expected \`concurrency\` to be a number from 1 and up, got \`${
           options.concurrency
-        }\` (${typeof options.concurrency})`,
+        }\` (${typeof options.concurrency})`
       );
     }
 
     if (
-      !(typeof options.intervalCap === 'number' && options.intervalCap >= 1)
+      !(typeof options.intervalCap === "number" && options.intervalCap >= 1)
     ) {
       throw new TypeError(
         `Expected \`intervalCap\` to be a number from 1 and up, got \`${
           options.intervalCap
-        }\` (${typeof options.intervalCap})`,
+        }\` (${typeof options.intervalCap})`
       );
     }
 
     if (
       !(
-        typeof options.interval === 'number' &&
+        typeof options.interval === "number" &&
         Number.isFinite(options.interval) &&
         options.interval >= 0
       )
@@ -64,7 +64,7 @@ export class PQueue {
       throw new TypeError(
         `Expected \`interval\` to be a finite number >= 0, got \`${
           options.interval
-        }\` (${typeof options.interval})`,
+        }\` (${typeof options.interval})`
       );
     }
 
@@ -101,7 +101,7 @@ export class PQueue {
             (err) => {
               reject(err);
               this._next();
-            },
+            }
           );
         } catch (err) {
           reject(err);

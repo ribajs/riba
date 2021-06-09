@@ -13,4 +13,3 @@ export const ternaryFormatter: Formatter = {
     return condition ? yes : no;
   },
 };
-

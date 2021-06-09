@@ -85,7 +85,7 @@ let SsrService = class SsrService {
         return { dom, virtualConsole };
     }
     async render(layout, sharedContext, scriptFilenames = ['main.bundle.js']) {
-        const { dom, virtualConsole } = await this.createDomForLayout(layout);
+        let { dom, virtualConsole } = await this.createDomForLayout(layout);
         dom.window.ssr = sharedContext;
         let files = await this.sourceFile.loads(scriptFilenames);
         let vmContext = dom.getInternalVMContext();
@@ -137,6 +137,8 @@ let SsrService = class SsrService {
                 }
                 files = null;
                 vmContext = null;
+                virtualConsole = null;
+                dom = null;
             };
             sharedContext.events.once('ready', onDone, this);
             virtualConsole.on('jsdomError', onError);

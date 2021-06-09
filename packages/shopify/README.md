@@ -199,7 +199,7 @@ bitbucket:
 
 ## Deploy
 
-To deploy this branch to all shops just create a `config.deploy.yml` with an enviroment for each shop like in the `config-sample.deploy.yml` and run
+To deploy this branch to all shops just create a `config.deploy.yml` with an environment for each shop like in the `config-sample.deploy.yml` and run
 
 ```bash
 gulp deploy

@@ -58,7 +58,7 @@ gulp.task("backup:locale", async () => {
     getYamlConfig(config.liveConfig) as ThemeConfigByEnv
   );
   await fs.mkdir(config.backup, { recursive: true });
-  gutil.log(`Get primary locale file of each enviroment...`);
+  gutil.log(`Get primary locale file of each environment...`);
   for (const envKey in liveConfigs) {
     if (liveConfigs[envKey]) {
       const themeConfig = liveConfigs[envKey];
@@ -95,7 +95,7 @@ gulp.task("backup:settings_data", async () => {
     getYamlConfig(config.liveConfig) as ThemeConfigByEnv
   );
   await fs.mkdir(config.backup, { recursive: true });
-  gutil.log(`Get "config/settings_data.json" of each enviroment...`);
+  gutil.log(`Get "config/settings_data.json" of each environment...`);
   for (const envKey in liveConfigs) {
     if (liveConfigs[envKey]) {
       gutil.log(`[${envKey}] Get config/settings_data.json...`);

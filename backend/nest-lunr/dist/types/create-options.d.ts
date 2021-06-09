@@ -18,6 +18,5 @@ export interface CreateOptions {
     data?: {
         include?: boolean;
         highlight?: boolean;
-        shorten?: boolean;
     };
 }

@@ -46,7 +46,7 @@ function mergeOctoberFormFields(path) {
             //dump
             file.contents = Buffer.from(yaml.dump(input, {
                 styles: {
-                    "!!null": "canonical",
+                    "!!null": "canonical", // dump null as ~
                 },
             }));
             console.log("\n### OUTPUT ###\n");

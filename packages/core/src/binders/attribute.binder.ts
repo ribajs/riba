@@ -1,5 +1,5 @@
-import { jsonFormatter } from '../formatters/type/json.formatter';
-import type { Binder } from '../types';
+import { jsonFormatter } from "../formatters/type/json.formatter";
+import type { Binder } from "../types";
 export interface BinderAttributeChangedEvent {
   detail: {
     name: string;
@@ -14,7 +14,7 @@ export interface BinderAttributeChangedEvent {
  * back to using this binder.
  */
 export const attributeBinder: Binder<string> = {
-  name: '*',
+  name: "*",
   bind(/*el*/) {
     /**/
   },
@@ -31,16 +31,16 @@ export const attributeBinder: Binder<string> = {
     const oldValue = el.getAttribute(this.type);
     let newValueFormatted: any;
     switch (typeof newValue) {
-      case 'string':
+      case "string":
         newValueFormatted = newValue;
         break;
-      case 'number':
+      case "number":
         newValueFormatted = newValue;
         break;
-      case 'boolean':
+      case "boolean":
         newValueFormatted = newValue;
         break;
-      case 'object':
+      case "object":
         if (newValue === null) {
           newValue = null;
         } else {
@@ -59,18 +59,18 @@ export const attributeBinder: Binder<string> = {
         el.setAttribute(this.type, newValueFormatted);
         el.dispatchEvent(
           // E.g. Event used in BinderAttributeChangedEvent
-          new CustomEvent('binder-changed', {
+          new CustomEvent("binder-changed", {
             detail: { name: this.type, newValue: newValueFormatted, oldValue },
-          }),
+          })
         );
       }
     } else {
       el.removeAttribute(this.type);
       el.dispatchEvent(
         // E.g. Event used in BinderAttributeChangedEvent
-        new CustomEvent('binder-changed', {
+        new CustomEvent("binder-changed", {
           detail: { name: this.type, newValue: newValueFormatted, oldValue },
-        }),
+        })
       );
     }
   },

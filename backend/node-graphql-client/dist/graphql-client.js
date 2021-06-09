@@ -15,7 +15,6 @@ class GraphQLClient extends graphql_request_1.GraphQLClient {
     }
     async loadRequestDocument(filePath) {
         const pattern = `${this.root}/**/${filePath}.{gql, graphql}`;
-        console.debug('loadRequestDocument', pattern);
         const sources = await load_1.loadDocuments(pattern, {
             loaders: [new graphql_file_loader_1.GraphQLFileLoader()],
         });

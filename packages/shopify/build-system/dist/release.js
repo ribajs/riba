@@ -52,7 +52,7 @@ gulp_1.default.task("backup:locale", () => __awaiter(void 0, void 0, void 0, fun
     // copy
     const liveConfigs = Object.assign({}, config_1.getYamlConfig(config_1.config.liveConfig));
     yield fs_1.promises.mkdir(config_1.config.backup, { recursive: true });
-    gulp_util_1.default.log(`Get primary locale file of each enviroment...`);
+    gulp_util_1.default.log(`Get primary locale file of each environment...`);
     for (const envKey in liveConfigs) {
         if (liveConfigs[envKey]) {
             const themeConfig = liveConfigs[envKey];
@@ -84,7 +84,7 @@ gulp_1.default.task("backup:settings_data", () => __awaiter(void 0, void 0, void
     // copy
     const liveConfigs = Object.assign({}, config_1.getYamlConfig(config_1.config.liveConfig));
     yield fs_1.promises.mkdir(config_1.config.backup, { recursive: true });
-    gulp_util_1.default.log(`Get "config/settings_data.json" of each enviroment...`);
+    gulp_util_1.default.log(`Get "config/settings_data.json" of each environment...`);
     for (const envKey in liveConfigs) {
         if (liveConfigs[envKey]) {
             gulp_util_1.default.log(`[${envKey}] Get config/settings_data.json...`);
