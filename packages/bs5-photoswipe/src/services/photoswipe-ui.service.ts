@@ -60,7 +60,7 @@ export class PhotoSwipeUI {
   _blockControlsTapTimeout: any;
 
   _idleInterval?: number;
-  _idleTimer?: ReturnType<Window["setTimeout"]>;
+  _idleTimer?: ReturnType<typeof setTimeout>;
   _idleIncrement = 0;
 
   _uiElements = [
