@@ -8,10 +8,12 @@ section.row.text-center.text-white.my-5
     p Resize the viewport to swich the video source
 
     rv-video(rv-video-src="videos | get 0" autoplay-on-min-buffer="0.3" autoplay-media-query="(min-width: 1200px)")
-      video.d-none.d-xl-block(playsinline loop mute)
+      .video-wrapper(rv-class-loading="loading" rv-loading="loading")
+        video.d-none.d-xl-block(playsinline loop mute)
 
     rv-video(rv-video-src="videos | get 1" autoplay-on-min-buffer="0.3" autoplay-media-query="(max-width: 1200px)")
-      video.d-block.d-xl-none(playsinline loop mute)
+      .video-wrapper(rv-class-loading="loading" rv-loading="loading")
+        video.d-block.d-xl-none(playsinline loop mute)
         
 
 section.row.text-center.text-white.my-5
@@ -25,7 +27,8 @@ section.row.text-center.text-white.my-5
         .dropdown-item.cursor-pointer(rv-each-video="videos" rv-on-click="selectVideo | args video" rv-text="video")
 
     rv-video(rv-co-video-src="selectedVideo")
-      video(rv-show="videoSrc" playsinline autoplay mute loop)
+      .video-wrapper(rv-class-loading="loading" rv-loading="loading")
+        video(rv-show="videoSrc" playsinline autoplay mute loop)
       div(rv-show="videoSrc")
         .video-controls.video-controls-bottom.p-2(rv-hide="controls")
           .d-flex.justify-content-end

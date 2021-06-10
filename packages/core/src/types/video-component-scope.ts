@@ -1,4 +1,5 @@
 import type { VideoComponent } from "../components/video/video.component";
+import type { MediaReadyState } from "./media-ready-state";
 
 export interface VideoComponentScope {
   // properties
@@ -12,6 +13,9 @@ export interface VideoComponentScope {
    * @readonly
    */
   paused: boolean;
+  loading: boolean;
+  duration: number;
+  readyState: MediaReadyState;
   // methods
   toggleMute: VideoComponent["toggleMute"];
   toggleControls: VideoComponent["toggleControls"];
@@ -26,4 +30,5 @@ export interface VideoComponentScope {
   videoSrc?: string;
   autoplayOnMinBuffer: number;
   autoplayMediaQuery: string;
+  buffer: number;
 }

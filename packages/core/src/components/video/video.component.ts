@@ -1,5 +1,9 @@
 import { Component } from "../../component/component";
-import { TemplateFunction, VideoComponentScope } from "../../types";
+import {
+  TemplateFunction,
+  VideoComponentScope,
+  MediaReadyState,
+} from "../../types";
 import { justDigits } from "@ribajs/utils";
 
 export class VideoComponent extends Component {
@@ -8,9 +12,7 @@ export class VideoComponent extends Component {
   protected autobind = true;
   protected alreadyStartedPlaying = false;
   protected wasPaused = false;
-  protected updateInterval: ReturnType<typeof setInterval> | null = null;
-  protected updateIntervalDelay = 200;
-  public _debug = false;
+  public _debug = true;
 
   static get observedAttributes(): string[] {
     return ["video-src", "autoplay-on-min-buffer", "autoplay-media-query"];
@@ -178,6 +180,10 @@ export class VideoComponent extends Component {
      * @readonly
      */
     paused: this.paused,
+    loading: false,
+    duration: 0,
+    readyState: MediaReadyState.HAVE_NOTHING,
+    buffer: 0,
     // methods
     toggleMute: this.toggleMute,
     toggleControls: this.toggleControls,
@@ -209,14 +215,11 @@ export class VideoComponent extends Component {
   public play() {
     this.debug("play");
     this.video.play();
-    this.scope.paused = false;
-    this.onUpdate();
   }
 
   public pause() {
     this.debug("pause");
     this.video.pause();
-    this.scope.paused = true;
     this.onUpdate();
   }
 
@@ -250,6 +253,7 @@ export class VideoComponent extends Component {
       throw new Error("The video child element is required!");
     }
     this.video = video;
+    this.addEventListeners();
     this.onUpdate();
   }
 
@@ -259,8 +263,15 @@ export class VideoComponent extends Component {
   protected resetVideo() {
     this.video.innerHTML = "";
     const videoEl = this.video.cloneNode(true) as HTMLVideoElement;
+    const videoWrapperEl = this.querySelector(".video-wrapper");
+    this.removeEventListeners();
     this.video.remove();
-    this.appendChild(videoEl);
+    if (videoWrapperEl) {
+      videoWrapperEl.appendChild(videoEl);
+    } else {
+      this.appendChild(videoEl);
+    }
+
     this.video = videoEl;
 
     if (this.video.hasAttribute("muted")) {
@@ -314,6 +325,10 @@ export class VideoComponent extends Component {
         this.video.getAttribute("disablePictureInPicture") === "true";
     }
 
+    this.scope.readyState = MediaReadyState.HAVE_NOTHING;
+    this.alreadyStartedPlaying = false;
+    this.scope.loading = false;
+
     this.initVideoElement();
   }
 
@@ -358,58 +373,75 @@ export class VideoComponent extends Component {
       }
     }
 
-    if (this.scope.autoplayOnMinBuffer) {
-      this.video.addEventListener("progress", this.onVideoProgress);
-      this.video.addEventListener(
-        "canplaythrough",
-        this.forceAutoplay // trust browser more than ourselves
-      );
+    this.video.addEventListener("progress", this.onVideoProgress);
+    this.video.addEventListener("loadstart", this.onLoadStart);
+    this.video.addEventListener("canplay", this.onCanPlay);
+    this.video.addEventListener("canplaythrough", this.onCanPlayThrough);
+    this.video.addEventListener("waiting", this.onWaiting);
+    this.video.addEventListener("durationchange", this.onDurationChange);
+    this.video.addEventListener("timeupdate", this.onTimeUpdate);
+    this.video.addEventListener("play", this.onPlay);
+    this.video.addEventListener("pause", this.onPause);
+  }
+
+  protected removeEventListeners() {
+    if (this.scope.autoplayMediaQuery) {
+      // autoplay-media-query attribute
+      const mediaQueryList = window.matchMedia(this.scope.autoplayMediaQuery);
+      mediaQueryList.removeEventListener("change", this.onMediaQueryListEvent);
     }
+
+    this.video.removeEventListener("progress", this.onVideoProgress);
+    this.video.removeEventListener("loadstart", this.onLoadStart);
+    this.video.removeEventListener("canplay", this.onCanPlay);
+    this.video.removeEventListener("canplaythrough", this.onCanPlayThrough);
+    this.video.removeEventListener("waiting", this.onWaiting);
+    this.video.removeEventListener("durationchange", this.onDurationChange);
+    this.video.removeEventListener("timeupdate", this.onTimeUpdate);
+    this.video.removeEventListener("play", this.onPlay);
+    this.video.removeEventListener("pause", this.onPause);
   }
 
   protected _onUpdate() {
-    if (this.scope.muted != this.video.muted) {
+    if (this.scope.muted !== this.video.muted) {
       this.scope.muted = this.video.muted;
     }
 
-    if (this.scope.volume != this.video.volume) {
+    if (this.scope.volume !== this.video.volume) {
       this.scope.volume = this.video.volume;
     }
 
-    if (this.scope.loop != this.video.loop) {
+    if (this.scope.loop !== this.video.loop) {
       this.scope.loop = this.video.loop;
     }
 
-    if (this.scope.controls != this.video.controls) {
+    if (this.scope.controls !== this.video.controls) {
       this.scope.controls = this.video.controls;
     }
 
-    if (this.scope.currentTime != this.video.currentTime) {
+    if (this.scope.currentTime !== this.video.currentTime) {
       this.scope.currentTime = this.video.currentTime;
     }
 
-    if (this.scope.paused != this.video.paused) {
+    if (this.scope.paused !== this.video.paused) {
       this.scope.paused = this.video.paused;
+    }
+
+    if (this.scope.duration !== this.video.duration) {
+      this.scope.duration = this.video.duration;
+    }
+
+    if (this.scope.readyState !== this.video.readyState) {
+      this.scope.readyState = this.video.readyState;
     }
   }
 
   protected onUpdate = this._onUpdate.bind(this);
 
-  protected setIntervals() {
-    this.updateInterval = setInterval(this.onUpdate, this.updateIntervalDelay);
-  }
-
   protected async beforeBind() {
     this.initVideoElement();
   }
 
-  protected async afterBind() {
-    this.setVideoSource();
-    this.addEventListeners();
-    this.setIntervals();
-
-    await super.afterBind();
-  }
   /**
    * Loads the media and checks if the autoplay-on-min-buffer is set
    */
@@ -434,7 +466,7 @@ export class VideoComponent extends Component {
       this.alreadyStartedPlaying = true;
       this.video.muted = true; //video is required to be muted if autoplay video is supposed to autoplay
       this.forceLoad();
-      this.video.play();
+      this.play();
     }
   }
 
@@ -466,26 +498,95 @@ export class VideoComponent extends Component {
   protected onMediaQueryListEvent = this._onMediaQueryListEvent.bind(this);
 
   protected _onVideoProgress() {
+    this.debug("_onVideoProgress");
     if (this.alreadyStartedPlaying) return;
     if (isNaN(this.video.duration)) {
       console.warn("Video duration is NaN");
       return;
     }
 
-    //calculate already buffered amount
+    // Calculate already buffered amount
     let bufferedAmount = 0;
     for (let i = 0; i < this.video.buffered.length; i++) {
       bufferedAmount +=
         this.video.buffered.end(i) - this.video.buffered.start(i);
     }
 
-    //if buffered amount is over given percentage in scope, force autoplay
-    if (bufferedAmount / this.video.duration > this.scope.autoplayOnMinBuffer) {
+    this.scope.buffer = bufferedAmount / this.video.duration;
+
+    // If buffered amount is over given percentage in scope, force autoplay
+    if (
+      this.scope.autoplayOnMinBuffer &&
+      this.scope.buffer > this.scope.autoplayOnMinBuffer
+    ) {
       this.forceAutoplay();
     }
   }
 
   protected onVideoProgress = this._onVideoProgress.bind(this);
+
+  protected _onLoadStart() {
+    this.debug("_onLoadStart");
+    this.scope.loading = true;
+    this.onUpdate();
+  }
+
+  protected onLoadStart = this._onLoadStart.bind(this);
+
+  protected _onCanPlay() {
+    this.debug("_onCanPlay");
+    // this.scope.loading = false;
+    this.onUpdate();
+  }
+
+  protected onCanPlay = this._onCanPlay.bind(this);
+
+  protected _onCanPlayThrough() {
+    this.scope.loading = false;
+    if (this.scope.autoplayOnMinBuffer) {
+      this.forceAutoplay(); // trust browser more than ourselves
+    }
+    this.onUpdate();
+  }
+
+  protected onCanPlayThrough = this._onCanPlayThrough.bind(this);
+
+  protected _onWaiting() {
+    this.debug("_onPlay");
+    this.scope.loading = true;
+    this.onUpdate();
+  }
+
+  protected onWaiting = this._onWaiting.bind(this);
+
+  protected _onDurationChange() {
+    this.onUpdate();
+  }
+
+  protected onDurationChange = this._onDurationChange.bind(this);
+
+  protected _onTimeUpdate() {
+    this.onUpdate();
+  }
+
+  protected onTimeUpdate = this._onTimeUpdate.bind(this);
+
+  protected _onPlay() {
+    this.debug("_onPlay");
+    this.scope.loading = false;
+    this.alreadyStartedPlaying = true;
+    this.scope.paused = false;
+    this.onUpdate();
+  }
+
+  protected onPlay = this._onPlay.bind(this);
+
+  protected _onPause() {
+    this.scope.paused = true;
+    this.onUpdate();
+  }
+
+  protected onPause = this._onPause.bind(this);
 
   /*********************
    * Event listener end
