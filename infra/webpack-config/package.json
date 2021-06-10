@@ -14,7 +14,7 @@
     "./*.js"
   ],
   "dependencies": {
-    "@babel/core": "^7.14.3",
+    "@babel/core": "^7.14.5",
     "@graphql-tools/webpack-loader": "^6.4.0",
     "@ribajs/eslint-config": "workspace:*",
     "@ribajs/npm-package": "workspace:*",
@@ -32,7 +32,7 @@
     "inspectpack": "^4.7.1",
     "mini-css-extract-plugin": "^1.6.0",
     "pkg-dir": "^5.0.0",
-    "postcss": "^8.3.0",
+    "postcss": "^8.3.1",
     "postcss-loader": "^5.3.0",
     "pug": "^3.0.2",
     "pug-loader": "^2.4.0",
