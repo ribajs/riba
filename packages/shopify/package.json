@@ -78,7 +78,7 @@
     "@types/node": "^15.12.2",
     "@types/node-xlsx": "^0.15.1",
     "@types/open": "^6.2.1",
-    "@types/prettier": "^2.2.3",
+    "@types/prettier": "^2.3.0",
     "@types/request": "^2.48.5",
     "@types/undertaker": "^1.2.6",
     "@types/vinyl-paths": "^0.0.31",
