@@ -249,6 +249,7 @@ export const stripHtml = (html: string) => {
 };
 
 /**
+ * foo-bar -> fooBar
  * Returns a camel-cased version of the string. Used when translating an
  * element's attribute name into a property name for the component's scope.
  * @param str
@@ -257,6 +258,13 @@ export const camelCase = (str: string) => {
   return str.replace(/-([a-z0-9])/g, (grouped) => {
     return grouped[1].toUpperCase();
   });
+};
+
+/**
+ * fooBar -> foo-bar
+ */
+export const kebabCase = (str: string) => {
+  return str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
 };
 
 /**

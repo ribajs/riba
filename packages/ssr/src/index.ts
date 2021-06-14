@@ -1,5 +1,5 @@
 export * from "./types";
-export {
+export type {
   TypeOfComponent,
   Component,
   ComponentLifecycleEventData,
