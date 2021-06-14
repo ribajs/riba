@@ -60,7 +60,7 @@ export class PhotoSwipeUI {
   _blockControlsTapTimeout: any;
 
   _idleInterval?: number;
-  _idleTimer?: ReturnType<typeof setTimeout>;
+  _idleTimer?: ReturnType<Window["setTimeout"]>;
   _idleIncrement = 0;
 
   _uiElements = [
@@ -130,7 +130,7 @@ export class PhotoSwipeUI {
       // older versions strangely work correctly,
       // but just in case we add delay on all of them)
       const tapDelay = this.framework.features.isOldAndroid ? 600 : 30;
-      this._blockControlsTapTimeout = setTimeout(() => {
+      this._blockControlsTapTimeout = window.setTimeout(() => {
         this._blockControlsTap = false;
       }, tapDelay);
     }
@@ -183,7 +183,7 @@ export class PhotoSwipeUI {
       if (this._idleTimer) {
         clearTimeout(this._idleTimer);
       }
-      this._idleTimer = setTimeout(() => {
+      this._idleTimer = window.setTimeout(() => {
         this.setIdle(true);
       }, this._options.timeToIdleOutside);
     }
@@ -548,7 +548,7 @@ export class PhotoSwipeUI {
     if (e) {
       // some browsers change window scroll position during the fullscreen
       // so PhotoSwipe updates it just in case
-      setTimeout(() => {
+      window.setTimeout(() => {
         this.pswp.setScrollOffset(0, this.framework.getScrollY());
       }, 50);
     }
