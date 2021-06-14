@@ -43,6 +43,8 @@ export const masonryBinder: Binder<Options> = {
       this.customData.layout,
       this
     );
+
+    this.customData.layout();
   },
 
   unbind() {
@@ -81,5 +83,7 @@ export const masonryBinder: Binder<Options> = {
       // Image size changed
       this.customData.resizeObserver?.observe(img);
     });
+
+    this.customData.layout();
   },
 };
