@@ -33,6 +33,35 @@ export const isJson = (str?: string | null) => {
 };
 
 /**
+ * TODO merge with parseType in ./packages/core/src/parsers.ts
+ */
+export const parseType = (input?: string) => {
+  let type = "undefined";
+  let value: any = input;
+  if (input === undefined) {
+    return { type, value: undefined };
+  }
+  if (input === "true") {
+    value = true;
+  } else if (input === "false") {
+    value = false;
+  } else if (input === "null") {
+    value = null;
+  } else if (input === "undefined") {
+    value = undefined;
+  } else if (input === "") {
+    value = "";
+  } else if (!isNaN(Number(input))) {
+    value = Number(input);
+  } else if (couldBeJson(value)) {
+    const jsonString = parseJsonString(value);
+    value = jsonString ? jsonString : value;
+  }
+  type = typeof value;
+  return { type, value };
+}
+
+/**
  * Parses a json string with the special feature that json strings
  * can also have single quotations for defining the properties and values
  */
