@@ -120,7 +120,7 @@ const getCopyPluginPatterns = (config) => {
       getCopyPluginConfigForScssThirdPartyModule(
         config,
         "bootstrap",
-        "../../scss",
+        "scss",
         "**/*.scss"
       )
     );
