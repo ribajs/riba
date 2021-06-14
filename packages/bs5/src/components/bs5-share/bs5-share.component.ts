@@ -377,8 +377,8 @@ export class Bs5ShareComponent extends Component {
   public async shareOnService(
     item: ShareItem,
     event: Event,
-    controller: any,
-    el: HTMLAnchorElement
+    // controller: any,
+    // el: HTMLAnchorElement
   ) {
     console.debug("shareOnService", item);
 
