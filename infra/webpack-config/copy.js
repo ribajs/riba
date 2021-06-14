@@ -75,6 +75,7 @@ const getCopyPluginConfigForScssThirdPartyModule = (
     const moduleConfig = {
       from: path.join(
         modulePath,
+        'node_modules/bootstrap',
         scssPath,
         glob
       ),
@@ -85,7 +86,7 @@ const getCopyPluginConfigForScssThirdPartyModule = (
         moduleName
       ),
       toType: "dir",
-      context: path.join(modulePath, scssPath),
+      context: path.join(modulePath, 'node_modules/bootstrap', scssPath),
     };
     return moduleConfig;
   }
