@@ -4,6 +4,7 @@
   "dependencies": {
     "@ribajs/core": "workspace:*",
     "@ribajs/events": "workspace:*",
+    "@ribajs/utils": "workspace:packages/utils",
     "@types/express": "^4.17.12"
   },
   "main": "src/index.ts",
