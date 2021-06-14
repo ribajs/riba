@@ -8,14 +8,14 @@ import { Binder } from "../types";
  * <div rv-style-background-color="'blue'"></div>
  * ```
  */
-export const cssStarBinder: Binder<string> = {
+export const styleStarBinder: Binder<string> = {
   name: "style-*",
   routine(el: HTMLElement, value: string) {
     const propertyName = this.args[0];
     if (value === null || value === undefined || value === "") {
-      (el.style as any).removeProperty(propertyName);
+      el.style.removeProperty(propertyName.toString());
     } else {
-      (el.style as any).setProperty(propertyName, value);
+      el.style.setProperty(propertyName.toString(), value);
     }
   },
 };
