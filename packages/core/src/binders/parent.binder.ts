@@ -10,7 +10,7 @@ export const parentBinder: Binder<any, BasicComponent> = {
   routine() {
     /**/
   },
-  bind(el) {
+  async bind(el) {
     const customConstructor = customElements.get(el.localName);
     if (!customConstructor) {
       console.warn(
@@ -34,22 +34,21 @@ export const parentBinder: Binder<any, BasicComponent> = {
         el.constructor,
         customConstructor
       );
-      window.customElements.whenDefined(el.localName).then((customElementConstructor) => {
-        if (el.setBinderAttribute) {
-          console.debug(`[parentBinder] Upgraded component ${el.localName}, binding $parent`,
-            el,
-            customElementConstructor,
-            this.view.models
-          );
-          el.setBinderAttribute("$parent", this.view.models);
-        } else {
-          console.warn(
-            "[parentBinder] You can only use this binder on Riba components",
-            el.localName,
-            customElements.get(el.localName)
-          );
-        }
-      })
+      const customElementConstructor = await window.customElements.whenDefined(el.localName);
+      if (el.setBinderAttribute) {
+        console.debug(`[parentBinder] Upgraded component ${el.localName}, binding $parent`,
+          el,
+          customElementConstructor,
+          this.view.models
+        );
+        el.setBinderAttribute("$parent", this.view.models);
+      } else {
+        console.warn(
+          "[parentBinder] You can only use this binder on Riba components",
+          el.localName,
+          customElements.get(el.localName)
+        );
+      }
     }
   },
 };

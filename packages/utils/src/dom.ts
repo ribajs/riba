@@ -353,11 +353,11 @@ export const getUID = (prefix: string): string => {
  */
 export const isCustomElement = (
   element: HTMLUnknownElement,
-  mustBeRegistred = false
+  isRegistered = false
 ) => {
   // A custom element's name is required to contain a -, whereas an HTML-defined element will not. So:
   const isCustomElement = element.tagName.includes("-");
-  if (isCustomElement && mustBeRegistred && customElements) {
+  if (isCustomElement && isRegistered && customElements) {
     return !!customElements.get(element.tagName.toLocaleLowerCase());
   }
   return isCustomElement;
