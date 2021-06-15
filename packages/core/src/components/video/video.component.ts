@@ -137,20 +137,21 @@ export class VideoComponent extends Component {
   public get disablePictureInPicture() {
     return (
       (this.video as any)?.disablePictureInPicture ||
-      this.video?.getAttribute("disablePictureInPicture") === "true" ||
+      this.video?.hasAttribute("disablePictureInPicture") ||
       false
     );
   }
 
   public set disablePictureInPicture(disablePictureInPicture: boolean) {
-    if ((this.video as any)?.disablePictureInPicture) {
+    if (typeof (this.video as any)?.disablePictureInPicture !== "undefined") {
       (this.video as any).disablePictureInPicture = disablePictureInPicture;
     }
 
-    this.video.setAttribute(
-      "disablePictureInPicture",
-      disablePictureInPicture.toString()
-    );
+    if (disablePictureInPicture) {
+      this.video.setAttribute("disablePictureInPicture", "");
+    } else {
+      this.video.removeAttribute("disablePictureInPicture");
+    }
 
     this.onUpdate();
   }
@@ -321,8 +322,9 @@ export class VideoComponent extends Component {
     }
 
     if (this.video.hasAttribute("disablePictureInPicture")) {
-      this.disablePictureInPicture =
-        this.video.getAttribute("disablePictureInPicture") === "true";
+      this.disablePictureInPicture = true;
+    } else {
+      this.disablePictureInPicture = false;
     }
 
     this.scope.readyState = MediaReadyState.HAVE_NOTHING;
