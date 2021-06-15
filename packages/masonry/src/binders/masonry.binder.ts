@@ -2,6 +2,7 @@ import { Binder, LifecycleService } from "@ribajs/core";
 import Masonry from "masonry-layout";
 import type { Options } from "masonry-layout";
 import { throttle } from "@ribajs/utils";
+import { EventDispatcher } from "@ribajs/events";
 
 /**
  * masonry
@@ -38,11 +39,15 @@ export const masonryBinder: Binder<Options> = {
 
     // All components bound
     const lifecycle = LifecycleService.getInstance();
-    lifecycle.events.once(
+    lifecycle.events.on(
       "ComponentLifecycle:allBound",
       this.customData.layout,
       this
     );
+
+    // On new router page
+    const routerEvents = new EventDispatcher("main");
+    routerEvents.on("newPageReady", this.customData.layout, this);
 
     this.customData.layout();
   },
@@ -67,14 +72,6 @@ export const masonryBinder: Binder<Options> = {
     this.customData.masonry = new Masonry(el, options);
 
     this.customData.images = el.querySelectorAll<HTMLImageElement>("img");
-
-    // All components bound
-    const lifecycle = LifecycleService.getInstance();
-    lifecycle.events.once(
-      "ComponentLifecycle:allBound",
-      this.customData.layout,
-      this
-    );
 
     // Detect image changes
     this.customData.images.forEach((img: HTMLImageElement) => {
