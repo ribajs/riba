@@ -365,13 +365,25 @@ export const isCustomElement = (
     }
     // If the element is not yet upgraded the constructor is still equal to HTMLElement
     if (isUpgraded) {
-      return customConstructor !== HTMLElement;
+      return customConstructor === element.constructor;
     }
     // If we don't need to check for upgraded status
     return true;
   }
   return isCustomElement;
 };
+
+/**
+ * Waits for CustomElement to be upgraded, returns the element.
+ * @param element The custom Element waiting for an upgrade.
+ * @returns the element after the upgrade
+ */
+export const waitForCustomElement = async (
+  element: HTMLUnknownElement
+) => {
+  await customElements.whenDefined(element.localName);
+  return element;
+}
 
 /**
  * Creating a new DOM element from an HTML string

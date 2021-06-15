@@ -1,6 +1,7 @@
 import { Binder } from "../types";
 import { BasicComponent } from "../component/basic-component";
 import type { Observer } from "../observer";
+import { isCustomElement, waitForCustomElement } from "@ribajs/utils";
 
 /**
  * co-*
@@ -9,7 +10,7 @@ import type { Observer } from "../observer";
 export const componentAttributeBinder: Binder<any, BasicComponent> = {
   name: "co-*",
   publishes: true,
-  routine(el: BasicComponent, value: any) {
+  _routine(el: BasicComponent, value: any) {
     const attrName = (this.args[0] as string).trim();
     if (el.setBinderAttribute) {
       if (typeof value !== "undefined") {
@@ -22,7 +23,20 @@ export const componentAttributeBinder: Binder<any, BasicComponent> = {
       );
     }
   },
-  bind(el) {
+  async routine(el: BasicComponent, value: any) {
+    if (isCustomElement(el, true, true)) {
+      componentAttributeBinder._routine.call(this, el, value);
+    } else if (isCustomElement(el, true)) {
+      await waitForCustomElement(el);
+      componentAttributeBinder._routine.call(this, el, value);
+    } else {
+      console.warn(
+        "[componentAttributeBinder] You can only use this binder on Riba components",
+        el
+      );
+    }
+  },
+  _bind(el: BasicComponent) {
     const attrName = (this.args[0] as string).trim();
     if (typeof el.observeAttribute !== "function") {
       console.warn(
@@ -38,6 +52,19 @@ export const componentAttributeBinder: Binder<any, BasicComponent> = {
         },
       }),
     };
+  },
+  async bind(el) {
+    if (isCustomElement(el, true, true)) {
+      componentAttributeBinder._bind.call(this, el);
+    } else if (isCustomElement(el, true)) {
+      await waitForCustomElement(el);
+      componentAttributeBinder._bind.call(this, el);
+    } else {
+      console.warn(
+        "[componentAttributeBinder] You can only use this binder on Riba components",
+        el
+      );
+    }
   },
 
   unbind() {
