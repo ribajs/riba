@@ -3,7 +3,7 @@
   "version": "2.0.0-alpha.0",
   "dependencies": {
     "@ribajs/core": "workspace:*",
-    "@ribajs/events": "workspace:packages/events",
+    "@ribajs/events": "workspace:*",
     "@ribajs/utils": "workspace:*",
     "masonry-layout": "^4.2.2"
   },
