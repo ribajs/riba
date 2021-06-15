@@ -19,7 +19,7 @@ const getCopyPluginConfigForScssRibaModule = (config, moduleName) => {
         `${rootPath}/${config.copyAssets.foldername}/scss/vendors/${moduleName}`
       ),
       toType: "dir",
-      context: modulePath,
+      context: modulePath + '/src',
     };
     return moduleConfig;
   }
