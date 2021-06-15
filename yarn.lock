@@ -5640,6 +5640,7 @@ __metadata:
     "@babel/runtime": ^7.14.5
     "@babel/runtime-corejs3": ^7.14.5
     "@ribajs/core": "workspace:*"
+    "@ribajs/events": "workspace:packages/events"
     "@ribajs/utils": "workspace:*"
     "@types/masonry-layout": ^4.2.2
     "@types/node": ^15.12.2
