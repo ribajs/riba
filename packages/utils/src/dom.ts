@@ -353,12 +353,22 @@ export const getUID = (prefix: string): string => {
  */
 export const isCustomElement = (
   element: HTMLUnknownElement,
-  isRegistered = false
+  isRegistered = false,
+  isUpgraded = false
 ) => {
   // A custom element's name is required to contain a -, whereas an HTML-defined element will not. So:
-  const isCustomElement = element.tagName.includes("-");
+  const isCustomElement = element.localName.includes("-");
   if (isCustomElement && isRegistered && customElements) {
-    return !!customElements.get(element.tagName.toLocaleLowerCase());
+    const customConstructor = customElements.get(element.localName);
+    if (!customConstructor) {
+      return false;
+    }
+    // If the element is not yet upgraded the constructor is still equal to HTMLElement
+    if (isUpgraded) {
+      return customConstructor !== HTMLElement;
+    }
+    // If we don't need to check for upgraded status
+    return true;
   }
   return isCustomElement;
 };
