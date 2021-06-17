@@ -3,7 +3,7 @@ const { dirname } = require('path');
 const isAvailable = (moduleName) => {
 
   // See https://yarnpkg.com/advanced/pnpapi
-  if(process.versions.pnp) {
+  if (process.versions.pnp) {
     const pnpApi = require('pnpapi');
     const rootLocator = pnpApi.findPackageLocator('./')
     const rootPgk = pnpApi.getPackageInformation(rootLocator);
@@ -39,6 +39,7 @@ const ribaPackages = [
   "@ribajs/shopify-easdk",
   "@ribajs/shopify-tda",
   "@ribajs/tagged-image",
+  "@ribajs/artcodestudio",
 ];
 
 module.exports.isAvailable = isAvailable;

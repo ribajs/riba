@@ -62,21 +62,5 @@
     "url": "^0.11.0",
     "util": "^0.12.3",
     "webpack": "^5.3.2"
-  },
-  "optionalDependencies": {
-    "@ribajs/bs4": "workspace:*",
-    "@ribajs/bs5": "workspace:*",
-    "@ribajs/content-slider": "workspace:*",
-    "@ribajs/core": "workspace:*",
-    "@ribajs/i18n": "workspace:*",
-    "@ribajs/iconset": "workspace:*",
-    "@ribajs/leaflet-map": "workspace:*",
-    "@ribajs/moment": "workspace:*",
-    "@ribajs/octobercms": "workspace:*",
-    "@ribajs/photoswipe": "workspace:*",
-    "@ribajs/shopify": "workspace:*",
-    "@ribajs/shopify-easdk": "workspace:*",
-    "@ribajs/shopify-tda": "workspace:*",
-    "leaflet": "^1.7.1"
   }
 }

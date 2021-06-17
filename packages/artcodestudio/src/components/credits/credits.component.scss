@@ -1,0 +1,141 @@
+$ac-base-color: #ff0040 !default;
+$ac-heart-color: $ac-base-color !default;
+$ac-popup-bg-color: $ac-base-color !default;
+$ac-popup-text-color: black !default;
+$ac-popup-link-color: white !default;
+$ac-popup-font-size: 80% !default;
+$ac-popup-text-align: center !default;
+$ac-popup-width: 322px !default;
+
+$ac-default-cursor: url(/images/cursor_default.png) !default;
+$ac-default-cursor-2x: url(/images/cursor_default_2x.png) !default;
+
+$ac-pointer-cursor: url(/images/cursor_pointer.png) !default;
+$ac-pointer-cursor-2x: url(/images/cursor_pointer_2x.png) !default;
+
+$ac-grabbing-cursor: url(/images/cursor_grabbing.png) !default;
+$ac-grabbing-cursor-2x: url(/images/cursor_grabbing_2x.png) !default;
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(0.75);
+  }
+  10% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(0.75);
+  }
+  30% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(0.75);
+  }
+  50% {
+    transform: scale(0.75);
+  }
+  60% {
+    transform: scale(0.75);
+  }
+  100% {
+    transform: scale(0.75);
+  }
+}
+
+.heartbeat {
+  animation: heartbeat 3s infinite;
+}
+
+ac-credits {
+  display: block;
+  height: 100px;
+}
+
+.art-code-popup {
+  position: absolute;
+
+  bs5-icon.heartbeat  {
+    svg {
+      fill: $ac-heart-color;
+    }
+  }
+
+  .popup {
+    width: $ac-popup-width;
+    max-width: 100%;
+    background-color: $ac-popup-bg-color;
+    border-color: transparent;
+    border-radius: 0;
+    color: $ac-popup-text-color;
+    font-size: $ac-popup-font-size;
+    text-align: $ac-popup-text-align;
+    a {
+      color: $ac-popup-link-color;
+    }
+  }
+
+  .align-bottom {
+    bottom: unset;
+    top: 100px;
+  }
+
+  .align-top {
+    bottom: 100px;
+    top: unset;
+  }
+
+  .align-left {
+    left: 100px;
+    right: unset;
+  }
+
+  .align-right {
+    left: unset;
+    right: 100px;
+  }
+
+  .popup-container {
+    position: absolute;
+    bottom: 0;
+    transform: translateX(-50%);
+  }
+  .icon-container {
+    transform: translateX(-50%);
+    position: absolute;
+  }
+
+  button.face-button {
+    background: transparent;
+    border: none;
+    &:focus { outline: none; }
+  }
+
+  .show {
+    display: block;
+  }
+
+  .dropdown-toggle {
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+    }
+    &::after {
+      content: none;
+    }
+  }
+
+  .cursor-default {
+    cursor: $ac-default-cursor, default;
+    cursor: $ac-default-cursor-2x, default;
+  }
+
+  .cursor-pointer {
+    cursor: $ac-pointer-cursor, pointer !important;
+    cursor: $ac-pointer-cursor-2x, pointer !important;
+    &:active {
+      cursor: $ac-grabbing-cursor, grabbing !important;
+      cursor: $ac-grabbing-cursor-2x, grabbing !important;
+    }
+  }
+}

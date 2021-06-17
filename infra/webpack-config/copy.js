@@ -31,7 +31,7 @@ const getCopyPluginConfigForImages = (config, moduleName) => {
   if (modulePath) {
     // Copy @ribajs/xyz scss files
     var moduleConfig = {
-      from: modulePath + "/**/*.png",
+      from: modulePath + "/**/*.{png,svg}",
       to: path.resolve(
         rootPath,
         config.copyAssets.foldername,
@@ -56,7 +56,7 @@ const getCopyPluginConfigForIconsetRibaModule = (config, moduleName) => {
       ),
       to: path.resolve(rootPath, config.copyAssets.foldername, `iconset`),
       toType: "dir",
-      context:  path.join(modulePath, "dist"),
+      context: path.join(modulePath, "dist"),
     };
     return moduleConfig;
   }
@@ -111,8 +111,13 @@ const getCopyPluginPatterns = (config) => {
     );
   }
 
-  if (config.copyAssets.images && isAvailable("leaflet")) {
-    patterns.push(getCopyPluginConfigForImages(config, "leaflet"));
+  if (config.copyAssets.images) {
+    if (isAvailable("leaflet")) {
+      patterns.push(getCopyPluginConfigForImages(config, "leaflet"));
+    }
+    if (isAvailable("@ribajs/artcodestudio")) {
+      patterns.push(getCopyPluginConfigForImages(config, "@ribajs/artcodestudio"));
+    }
   }
 
   if (config.copyAssets.scss && isAvailable("bootstrap")) {

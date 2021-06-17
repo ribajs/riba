@@ -1,0 +1,15 @@
+.art-code-popup
+  .popup-container.cursor-default(rv-add-class='align | prepend "align-"' hidden='true' rv-show='popupVisible' csr-rv-show='popupVisible')
+    .popup.mx-auto.p-2
+      p
+        strong Handcrafted by Art+Code Studio
+      p
+        | Das 
+        a.cursor-pointer(href='https://artandcode.studio/' target='_blank' rel='noopener') Art+Code Studio
+        | versteht, dass
+        | jeder Kunde einzigartig ist, jedes Projekt einen anderen Ansatz erfordert und dass jedes Projekte
+        | unvoreingenommen und mit freien Gedanken begonnen werden muss. So entdecken wir in enger Zusammenarbeit mit
+        | unseren Kunden das Potenzial und schaffen kreative und sch&ouml;ne L&ouml;sungen. Schreib uns: 
+        a.cursor-pointer(href='mailto:hi@artandcode.studio') hi@artandcode.studio
+  button.face-button.cursor-pointer.text-center.icon-container(rv-on-click='toggle' csr-rv-on-click='toggle')
+    bs5-icon.mx-auto.heartbeat(rv-class-visible='popupVisible' rv-src='iconSrc' size='100' alt='Handcrafted by Art+Code Studio')

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<g>
+	<polygon points="13.3,8.8 13.3,7 9.7,7 9.7,8.8 11.5,8.8 	"/>
+	<rect x="7.9" y="8.8" width="1.8" height="1.8"/>
+	<polygon points="7.9,12.4 7.9,10.6 6.1,10.6 6.1,12.4 6.1,14.2 6.1,16 7.9,16 7.9,14.2 	"/>
+	<rect x="7.9" y="16" width="1.8" height="1.8"/>
+	<rect x="22.3" y="8.8" width="1.8" height="1.8"/>
+	<polygon points="22.3,8.8 22.3,7 18.7,7 18.7,8.8 20.5,8.8 	"/>
+	<rect x="16.9" y="8.8" width="1.8" height="1.8"/>
+	<rect x="15.1" y="10.6" width="1.8" height="1.8"/>
+	<rect x="13.3" y="8.8" width="1.8" height="1.8"/>
+	<rect x="20.5" y="17.8" width="1.8" height="1.8"/>
+	<rect x="22.3" y="16" width="1.8" height="1.8"/>
+	<rect x="15.1" y="23.2" width="1.8" height="1.8"/>
+	<polygon points="24.1,10.6 24.1,12.4 24.1,14.2 24.1,16 25.9,16 25.9,10.6 	"/>
+	<rect x="18.7" y="19.6" width="1.8" height="1.8"/>
+	<rect x="16.9" y="21.4" width="1.8" height="1.8"/>
+	<rect x="9.7" y="17.8" width="1.8" height="1.8"/>
+	<rect x="11.5" y="19.6" width="1.8" height="1.8"/>
+	<rect x="13.3" y="21.4" width="1.8" height="1.8"/>
+</g>
+</svg>

@@ -3153,6 +3153,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ribajs/artcodestudio@workspace:packages/artcodestudio":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/artcodestudio@workspace:packages/artcodestudio"
+  dependencies:
+    "@babel/runtime": ^7.14.6
+    "@babel/runtime-corejs3": ^7.14.6
+    "@ribajs/bs5": "workspace:*"
+    "@ribajs/core": "workspace:*"
+    "@ribajs/utils": "workspace:*"
+    "@types/node": ^15.12.2
+  languageName: unknown
+  linkType: soft
+
 "@ribajs/babel-config@workspace:*, @ribajs/babel-config@workspace:infra/babel-config":
   version: 0.0.0-use.local
   resolution: "@ribajs/babel-config@workspace:infra/babel-config"
@@ -5646,7 +5659,7 @@ __metadata:
     "@babel/runtime": ^7.14.6
     "@babel/runtime-corejs3": ^7.14.6
     "@ribajs/core": "workspace:*"
-    "@ribajs/events": "workspace:packages/events"
+    "@ribajs/events": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@types/masonry-layout": ^4.2.2
     "@types/node": ^15.12.2
@@ -6300,7 +6313,7 @@ __metadata:
     "@babel/runtime-corejs3": ^7.14.6
     "@ribajs/core": "workspace:*"
     "@ribajs/events": "workspace:*"
-    "@ribajs/utils": "workspace:packages/utils"
+    "@ribajs/utils": "workspace:*"
     "@types/express": ^4.17.12
     "@types/node": ^15.12.2
   languageName: unknown
