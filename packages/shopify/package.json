@@ -92,7 +92,7 @@
     "bluebird": "^3.7.2",
     "browser-sync": "^2.26.14",
     "chalk": "^4.1.1",
-    "chokidar": "^3.5.1",
+    "chokidar": "^3.5.2",
     "core-js": "^3.14.0",
     "del": "^6.0.0",
     "eslint": "^7.28.0",
@@ -111,7 +111,7 @@
     "shopify-admin-api": "^2.16.5",
     "terser": "^5.7.0",
     "ts-jest": "^27.0.3",
-    "typescript": "^4.3.2"
+    "typescript": "^4.3.4"
   },
   "dependencies": {
     "@octokit/core": "^3.5.1",
