@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SearchController = void 0;
 const common_1 = require("@nestjs/common");
 const lunr_service_1 = require("./lunr.service");
+const swagger_1 = require("@nestjs/swagger");
 let SearchController = class SearchController {
     constructor(lunr) {
         this.lunr = lunr;
@@ -54,12 +55,14 @@ __decorate([
 ], SearchController.prototype, "search", null);
 __decorate([
     common_1.Get('/:query'),
-    __param(0, common_1.Res()), __param(1, common_1.Param('query')),
+    __param(0, common_1.Res()),
+    __param(1, common_1.Param('query')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", void 0)
 ], SearchController.prototype, "searchAll", null);
 SearchController = __decorate([
+    swagger_1.ApiTags('search'),
     common_1.Controller('api/search'),
     __metadata("design:paramtypes", [lunr_service_1.LunrService])
 ], SearchController);

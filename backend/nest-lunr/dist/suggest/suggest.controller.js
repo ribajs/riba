@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SuggestController = void 0;
 const common_1 = require("@nestjs/common");
 const suggest_service_1 = require("./suggest.service");
+const swagger_1 = require("@nestjs/swagger");
 let SuggestController = class SuggestController {
     constructor(suggest) {
         this.suggest = suggest;
@@ -51,12 +52,14 @@ __decorate([
 ], SuggestController.prototype, "suggestion", null);
 __decorate([
     common_1.Get('/:word'),
-    __param(0, common_1.Res()), __param(1, common_1.Param('word')),
+    __param(0, common_1.Res()),
+    __param(1, common_1.Param('word')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", Promise)
 ], SuggestController.prototype, "allSuggestions", null);
 SuggestController = __decorate([
+    swagger_1.ApiTags('suggestions'),
     common_1.Controller('api/suggest'),
     __metadata("design:paramtypes", [suggest_service_1.SuggestService])
 ], SuggestController);

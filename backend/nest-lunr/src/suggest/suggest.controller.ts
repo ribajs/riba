@@ -2,10 +2,12 @@ import { Controller, Get, Res, Param } from '@nestjs/common';
 import { Response } from 'express';
 import { SuggestService } from './suggest.service';
 import { SuggestResult, SuggestResultExt } from './types';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('suggestions')
 @Controller('api/suggest')
 export class SuggestController {
-  constructor(readonly suggest: SuggestService) {}
+  constructor(readonly suggest: SuggestService) { }
 
   /**
    * Get suggestions for all namespaces

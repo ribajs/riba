@@ -2835,6 +2835,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nestjs/mapped-types@npm:0.4.1":
+  version: 0.4.1
+  resolution: "@nestjs/mapped-types@npm:0.4.1"
+  peerDependencies:
+    "@nestjs/common": ^7.0.8
+    class-transformer: ^0.2.0 || ^0.3.0 || ^0.4.0
+    class-validator: ^0.11.1 || ^0.12.0 || ^0.13.0
+    reflect-metadata: ^0.1.12
+  checksum: 3c451fd0b161602e4522411d311245ccdfa968710e221d721c871a4caf68a3c11a6baaf3a96f629b84999a852695b0a05cefe0a27846590d261a6d947a34e599
+  languageName: node
+  linkType: hard
+
 "@nestjs/platform-express@npm:^7.6.18":
   version: 7.6.18
   resolution: "@nestjs/platform-express@npm:7.6.18"
@@ -2878,6 +2890,28 @@ __metadata:
   peerDependencies:
     typescript: ^3.4.5 || ^4.0.0
   checksum: f827f15d970512f1991d1b0957f7db753165eca56eea818a42337fa800e1403faa2932592f221863f52b2cc76dedd4c4832e797e25002ccfb7815becb31345c7
+  languageName: node
+  linkType: hard
+
+"@nestjs/swagger@npm:^4.8.1":
+  version: 4.8.1
+  resolution: "@nestjs/swagger@npm:4.8.1"
+  dependencies:
+    "@nestjs/mapped-types": 0.4.1
+    lodash: 4.17.21
+    path-to-regexp: 3.2.0
+  peerDependencies:
+    "@nestjs/common": ^6.8.0 || ^7.0.0
+    "@nestjs/core": ^6.8.0 || ^7.0.0
+    fastify-swagger: "*"
+    reflect-metadata: ^0.1.12
+    swagger-ui-express: "*"
+  peerDependenciesMeta:
+    fastify-swagger:
+      optional: true
+    swagger-ui-express:
+      optional: true
+  checksum: 090713dda225150a51c57509d0b9af512944e0c4d57aa00e86c673b15680843459ba246c57d197189064323becbd2df4ed68b249ecf04617d9a55781bd2fa839
   languageName: node
   linkType: hard
 
@@ -5753,6 +5787,7 @@ __metadata:
     "@nestjs/core": ^7.6.18
     "@nestjs/platform-express": ^7.6.18
     "@nestjs/schematics": ^7.3.1
+    "@nestjs/swagger": ^4.8.1
     "@nestjs/testing": ^7.6.18
     "@types/cookie-parser": ^1.4.2
     "@types/express": ^4.17.12
@@ -5773,6 +5808,7 @@ __metadata:
     rimraf: ^3.0.2
     rxjs: ^7.1.0
     supertest: ^6.1.3
+    swagger-ui-express: ^4.1.6
     ts-jest: ^27.0.3
     ts-node: ^10.0.0
     tsconfig-paths: ^3.9.0
@@ -16501,17 +16537,17 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"lodash@npm:4.17.21, lodash@npm:^4.17.21, lodash@npm:^4.7.0":
+  version: 4.17.21
+  resolution: "lodash@npm:4.17.21"
+  checksum: 4983720b9abca930a4a46f18db163d7dad8dd00dbed6db0cc7b499b33b717cce69f80928b27bbb1ff2cbd3b19d251ee90669a8b5ea466072ca81c2ebe91e7468
+  languageName: node
+  linkType: hard
+
 "lodash@npm:4.x, lodash@npm:^4.15.0, lodash@npm:^4.17.10, lodash@npm:^4.17.11, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20":
   version: 4.17.20
   resolution: "lodash@npm:4.17.20"
   checksum: c62101d2500c383b5f174a7e9e6fe8098149ddd6e9ccfa85f36d4789446195f5c4afd3cfba433026bcaf3da271256566b04a2bf2618e5a39f6e67f8c12030cb6
-  languageName: node
-  linkType: hard
-
-"lodash@npm:^4.17.21, lodash@npm:^4.7.0":
-  version: 4.17.21
-  resolution: "lodash@npm:4.17.21"
-  checksum: 4983720b9abca930a4a46f18db163d7dad8dd00dbed6db0cc7b499b33b717cce69f80928b27bbb1ff2cbd3b19d251ee90669a8b5ea466072ca81c2ebe91e7468
   languageName: node
   linkType: hard
 
@@ -21511,6 +21547,24 @@ fsevents@~2.3.1:
   bin:
     svgo: ./bin/svgo
   checksum: e1659738423f625561fa23769d0a010f5ba08e83926ce697491153fa29a8cb2452fa5abb14c1bb489aa186718856f8768d4da870210a79302d47535c57c30d30
+  languageName: node
+  linkType: hard
+
+"swagger-ui-dist@npm:^3.18.1":
+  version: 3.50.0
+  resolution: "swagger-ui-dist@npm:3.50.0"
+  checksum: fa205e1dbddcc6b3b5b6abf7475c041f1fbaa748f84a9c8ae080f87db6e8ed45535a389b12bdc725c9c2d8655ee740c9aa4884e32ea720ee2c506a997087e789
+  languageName: node
+  linkType: hard
+
+"swagger-ui-express@npm:^4.1.6":
+  version: 4.1.6
+  resolution: "swagger-ui-express@npm:4.1.6"
+  dependencies:
+    swagger-ui-dist: ^3.18.1
+  peerDependencies:
+    express: ">=4.0.0"
+  checksum: ded7c3cc5da2b0f1e10c5ed50787ef7531305cb66c796decfb4956c9f09a636a65967c1dfe341ebda2efb716bb81e57e6cf5051c073a02e403b22210d803030a
   languageName: node
   linkType: hard
 

@@ -2,14 +2,16 @@ import { Controller, Get, Param, Res, NotFoundException } from '@nestjs/common';
 import { Response } from 'express';
 import { LunrService } from './lunr.service';
 import { SearchResultExt } from './types';
+import { ApiTags } from '@nestjs/swagger';
 
 /**
  * Search in a specific namespace
  * E.g. /api/search/page/ゼルダ
  */
+@ApiTags('search')
 @Controller('api/search')
 export class SearchController {
-  constructor(readonly lunr: LunrService) {}
+  constructor(readonly lunr: LunrService) { }
 
   @Get('/:namespace/:query')
   search(

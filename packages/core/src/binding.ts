@@ -174,7 +174,7 @@ export class Binding {
         if (args === null) {
           console.warn(
             new Error(
-              `[${this.binder.name}] No args matched with regex "FORMATTER_ARGS"!\nvalue: ${value}\nresult: ${result}\ndeclaration: ${declaration}\nindex: ${index}\n`
+              `[${this.binder.name}] No args matched with regex "FORMATTER_ARGS"!\nvalue: ${JSON.stringify(value)}\nresult: ${JSON.stringify(result)}\ndeclaration: ${JSON.stringify(declaration)}\nindex: ${index}\n`
             )
           );
           return result;
