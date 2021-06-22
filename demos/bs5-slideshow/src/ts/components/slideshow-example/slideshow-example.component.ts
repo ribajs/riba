@@ -22,12 +22,6 @@ export class SlideshowExampleComponent extends Component {
     this.init(SlideshowExampleComponent.observedAttributes);
   }
 
-  protected async init(observedAttributes: string[]) {
-    return super.init(observedAttributes).then((view) => {
-      return view;
-    });
-  }
-
   protected requiredAttributes(): string[] {
     return [];
   }

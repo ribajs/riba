@@ -374,12 +374,7 @@ export class Bs5ShareComponent extends Component {
    * @param controller
    * @param el
    */
-  public async shareOnService(
-    item: ShareItem,
-    event: Event,
-    // controller: any,
-    // el: HTMLAnchorElement
-  ) {
+  public async shareOnService(item: ShareItem, event: Event) {
     console.debug("shareOnService", item);
 
     this.dropdown?.hide();
@@ -391,11 +386,6 @@ export class Bs5ShareComponent extends Component {
       return false;
     }
 
-    // if (!el || !el.href) {
-    //   console.error("No href attribute found");
-    //   return false;
-    // }
-
     // We use the default browser anchor href logic for download and href
     if (item.type === "download") {
       return true;
@@ -403,8 +393,6 @@ export class Bs5ShareComponent extends Component {
 
     event.preventDefault();
     event.stopPropagation();
-
-    // this.debug('Open popup');
 
     window.open(
       item.url,
@@ -459,11 +447,8 @@ export class Bs5ShareComponent extends Component {
   }
 
   protected template(): ReturnType<TemplateFunction> {
-    // this.debug("template", this, hasChildNodesTrim(this));
     if (this && hasChildNodesTrim(this)) {
-      // If a child is set, this is a custom label template
       this.scope.labelTemplate = this.innerHTML;
-      // this.debug("Custom label template: ", this.scope.labelTemplate);
     }
     return template;
   }
