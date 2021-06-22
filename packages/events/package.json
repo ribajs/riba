@@ -24,13 +24,13 @@
   "source": "src/index.ts",
   "devDependencies": {
     "@babel/runtime": "^7.14.6",
-    "@babel/runtime-corejs3": "^7.14.6",
+    "@babel/runtime-corejs3": "^7.14.7",
     "@types/jest": "^26.0.23",
-    "@types/node": "^15.12.2",
-    "babel-jest": "^27.0.2",
-    "eslint": "^7.28.0",
-    "jest": "^27.0.4",
-    "jest-config": "^27.0.4",
+    "@types/node": "^15.12.4",
+    "babel-jest": "^27.0.5",
+    "eslint": "^7.29.0",
+    "jest": "^27.0.5",
+    "jest-config": "^27.0.5",
     "jest-extended": "^0.11.5",
     "ts-jest": "^27.0.3"
   }
