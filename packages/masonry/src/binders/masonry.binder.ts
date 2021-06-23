@@ -18,6 +18,7 @@ export const masonryBinder: Binder<Options> = {
 
   bind() {
     const layout = () => {
+      console.debug("layout");
       const masonry = this.customData.masonry as Masonry | null;
       if (masonry?.layout) {
         masonry.layout();
@@ -36,6 +37,10 @@ export const masonryBinder: Binder<Options> = {
         this.customData.layout
       );
     }
+
+    window.addEventListener("resize", this.customData.layout, {
+      passive: true,
+    });
 
     // All components bound
     const lifecycle = LifecycleService.getInstance();
@@ -62,6 +67,9 @@ export const masonryBinder: Binder<Options> = {
       // Image size changed
       this.customData.resizeObserver?.unobserve(img);
     });
+
+    window.removeEventListener("resize", this.customData.layout);
+
     delete this.customData;
   },
 
