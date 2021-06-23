@@ -17,7 +17,6 @@ export const styleBinder: Binder<Partial<CSSStyleDeclaration>> = {
         el.setAttribute("style", value);
       } else {
         for (const key of Object.keys(value)) {
-          console.debug("set style", key, value[key as any]);
           el.style.setProperty(kebabCase(key), value[key as any] || null);
         }
       }
