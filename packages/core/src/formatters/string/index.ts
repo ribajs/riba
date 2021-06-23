@@ -15,5 +15,6 @@ export { upcaseFormatter } from "./upcase.formatter";
 export { replaceFormatter } from "./replace.formatter";
 export { replaceFirstFormatter } from "./replace-first.formatter";
 export { sliceFormatter } from "./slice.formatter";
+export { startsWithFormatter } from "./starts-with.formatter";
 export { stripFormatter } from "./strip.formatter";
 export { stripHtmlFormatter } from "./strip-html.formatter";
