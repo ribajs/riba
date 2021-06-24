@@ -5,8 +5,8 @@ import { Formatter } from "../../types";
  * Otherwise returns false.
  *
  * @example
- * <p rv-text="'abcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyz' | starts-with 'abc'"></p>
- * -> <p>true</p>
+ * <p rv-if="'abcdefg' | starts-with 'abc'">Hello World!</p>
+ * -> <p>Hello World!</p>
  */
 export const startsWithFormatter: Formatter = {
   name: "starts-with",
