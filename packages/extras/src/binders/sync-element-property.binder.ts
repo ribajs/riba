@@ -3,7 +3,7 @@ import { throttle } from "@ribajs/utils/src/control";
 
 /**
  * Binds an event handler on the element.
- * either copy-element-width or copy-element-height
+ * either `sync-element-width` or `sync-element-height`
  */
 export const syncElementPropertyBinder: Binder<string> = {
   name: "sync-element-*",

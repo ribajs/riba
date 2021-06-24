@@ -119,6 +119,7 @@ export const scrollTo = (
   let top = 0;
   let left = 0;
 
+  // If element is window
   if (typeof (scrollElement as Window).pageYOffset === "number") {
     if (angle === "vertical") {
       top =
@@ -150,6 +151,72 @@ export const scrollTo = (
     left,
     top,
   });
+};
+
+export const scrollToPosition = (
+  scrollElement: HTMLElement | (Window & typeof globalThis) | null,
+  position: number | "end" | "start",
+  angle: "horizontal" | "vertical" | "both" = "vertical",
+  behavior: "auto" | "smooth" | undefined = "smooth"
+) => {
+  let top: number | undefined;
+  let left: number | undefined;
+
+  if (!scrollElement) {
+    return;
+  }
+
+  if (angle === "vertical" || angle === "both") {
+    switch (position) {
+      case "start":
+        top = 0;
+        break;
+      case "end":
+        top =
+          (scrollElement as HTMLElement).scrollHeight ||
+          (scrollElement as Window).innerHeight; // TODO check me
+        break;
+      default:
+        top = position;
+        break;
+    }
+  }
+
+  if (angle === "horizontal" || angle === "both") {
+    switch (position) {
+      case "start":
+        left = 0;
+        break;
+      case "end":
+        left =
+          (scrollElement as HTMLElement).scrollWidth ||
+          (scrollElement as Window).innerWidth; // TODO check me
+        break;
+      default:
+        left = position;
+        break;
+    }
+  }
+
+  console.log("scroll", behavior, top, left, angle);
+
+  if (top !== undefined && left !== undefined) {
+    scrollElement.scroll({
+      behavior,
+      top,
+      left,
+    });
+  } else if (top !== undefined) {
+    scrollElement.scroll({
+      behavior,
+      top,
+    });
+  } else if (left !== undefined) {
+    scrollElement.scroll({
+      behavior,
+      left,
+    });
+  }
 };
 
 export const getElementFromEvent = <T = HTMLAnchorElement | HTMLUnknownElement>(
@@ -378,12 +445,10 @@ export const isCustomElement = (
  * @param element The custom Element waiting for an upgrade.
  * @returns the element after the upgrade
  */
-export const waitForCustomElement = async (
-  element: HTMLUnknownElement
-) => {
+export const waitForCustomElement = async (element: HTMLUnknownElement) => {
   await customElements.whenDefined(element.localName);
   return element;
-}
+};
 
 /**
  * Creating a new DOM element from an HTML string
