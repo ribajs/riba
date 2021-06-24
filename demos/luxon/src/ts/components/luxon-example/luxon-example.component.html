@@ -1,0 +1,92 @@
+<h1>Luxon Module</h1>
+
+<div>
+  <p>This module provides Riba formatters for <a href="https://moment.github.io/luxon">Luxon</a>, a wrapper library that including various formatting and manipulation methods for JavaScript dates and times. More details about Luxon and examples may be found in the Luxon documentation: <a href="https://moment.github.io/luxon/index.html">https://moment.github.io/luxon/index.html</a></p>
+</div>
+
+<h2>Luxon Object types</h2>
+
+<div>
+  <p>In Luxon there are three basic classes of objects: <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html">DateTime</a> (representing a point in time), <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~Duration.html">Duration</a> (representing the length of a time-span) and <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~Interval.html">Interval</a> (representing a timespan, defined by a beginning and end point in time).</p>
+  <p>Each of these classes has a number of static methods for creating objects of that class, and instance methods and getters for manipulation, transformation and output of those objects. The Luxon Riba Module wraps all these in Riba formatters.</p>
+  <p>All Riba formatters of this module are prefixed according to the Luxon object class they belong to: <code>lx-</code> for methods and getters of the <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html">DateTime</a> class, <code>lx-duration-</code> for methods and getters of the <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~Duration.html">Duration</a> class, and <code>lx-interval</code> for methods and getters of the <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~Interval.html">Interval</a> class.</p>
+  <p>Each of the three Luxon classes has a <code>toString</code> method. So when the result of a formatter is of a Luxon class type, its output in a Riba template will be the result of that <code>toString</code> method, which also exists as explicit formatter for each class (i.e. <code>lx-to-string</code>, <code>lx-interval-to-string</code> and <code>lx-duration-to-string</code>).</p>
+</div>
+
+<hr>
+
+<div>
+  <h2>DateTime</h2>
+
+  <h3>Creation</h3>
+
+  <div>
+    <h4>lx-now</h4>
+    <p>See <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#static-method-now">https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#static-method-now</a></p>
+    <p>Create a DateTime for the current instant, in the system's time zone.</p>
+
+    <p>
+      <code> '' | lx-now </code><br />
+      <span> { '' | lx-now } </span><br />
+    </p>
+
+    <p>(The ouput here is the result of <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-method-toString">DateTime.toString()</a>, which is just an alias to <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-method-toISO">DateTime.toISO()</a> and outputs the DateTime as ISO-8601 string.)</p>
+  </div>
+
+  <div>
+    <h4>lx-local</h4>
+    <p>See <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#static-method-local">https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#static-method-local</a></p>
+    <p>Create a local DateTime. Accepts an array of numbers as input: <code>[ year, month, day, hour, minute, second, millisecond ]</code>. The last inputs can be omitted and will default to 0.</p>
+
+    <p>
+      <code> [ 2020, 6, 24 ] | parse | lx-local </code><br />
+      <span> { [ 2020, 6, 24 ] | parse | lx-local } </span><br />
+    </p>
+
+    <p>(The ouput here is the result of <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-method-toString">DateTime.toString()</a>, which is just an alias to <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-method-toISO">DateTime.toISO()</a> and outputs the DateTime as ISO-8601 string.)</p>
+  </div>
+
+  <div>
+    <h4>lx-utc</h4>
+    <p>See <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#static-method-local">https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#static-method-utc</a></p>
+    <p>Create a UTC DateTime. Accepts an array of numbers as input: <code>[ year, month, day, hour, minute, second, millisecond ]</code>. The last inputs can be omitted and will default to 0.</p>
+
+    <p>
+      <code> [ 2020, 6, 24 ] | parse | lx-utc </code><br />
+      <span> { [ 2020, 6, 24 ] | parse | lx-utc } </span><br />
+    </p>
+
+    <p>(The ouput here is the result of <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-method-toString">DateTime.toString()</a>, which is just an alias to <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-method-toISO">DateTime.toISO()</a> and outputs the DateTime as ISO-8601 string.)</p>
+  </div>
+
+  <div>
+    <h4>lx-from-seconds</h4>
+    <p>See <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#static-method-from-seconds">https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#static-method-from-seconds</a></p>
+    <p>Create a DateTime from a number of seconds since the epoch (meaning since 1 January 1970 00:00:00 UTC).</p>
+
+    <p>
+      <code> 1624535464 | lx-from-seconds </code><br />
+      <span> { 1624535464 | lx-from-seconds  } </span><br />
+    </p>
+
+    <p>
+        <code> 1624535464 | lx-from-seconds { zone: 'America/Los_Angeles', numberingSystem: 'beng' } </code><br />
+        <span> { 1624535464 | lx-from-seconds '{ zone: "America/Los_Angeles", numberingSystem: "beng" }' } </span><br />
+    </p>
+
+    <p>(The ouput here is the result of <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-method-toString">DateTime.toString()</a>, which is just an alias to <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-method-toISO">DateTime.toISO()</a> and outputs the DateTime as ISO-8601 string.)</p>
+  </div>
+
+  <div>
+    <h4>lx-from-millis</h4>
+    <p>See <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#static-method-from-seconds">https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#static-method-from-seconds</a></p>
+    <p>Create a DateTime from a number of seconds since the epoch (meaning since 1 January 1970 00:00:00 UTC). Accepts a <code>DateTimeOptions</code> parameter. Refer to the Luxon documentation for details.</p>
+
+    <p>
+      <code> 1624535464 | lx-from-seconds </code><br />
+      <span> { 1624535464 | lx-from-seconds  } </span><br />
+    </p>
+
+    <p>(The ouput here is the result of <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-method-toString">DateTime.toString()</a>, which is just an alias to <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-method-toISO">DateTime.toISO()</a> and outputs the DateTime as ISO-8601 string.)</p>
+  </div>
+</div>
