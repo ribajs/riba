@@ -16,7 +16,7 @@ import { EventDispatcher } from "@ribajs/events";
 export const masonryBinder: Binder<Options> = {
   name: "masonry",
 
-  bind() {
+  bind(el: HTMLElement) {
     const layout = () => {
       console.debug("layout");
       const masonry = this.customData.masonry as Masonry | null;
@@ -36,11 +36,12 @@ export const masonryBinder: Binder<Options> = {
       this.customData.resizeObserver = new ResizeObserver(
         this.customData.layout
       );
+      this.customData.resizeObserver.observe(el);
+    } else {
+      window.addEventListener("resize", this.customData.layout, {
+        passive: true,
+      });
     }
-
-    window.addEventListener("resize", this.customData.layout, {
-      passive: true,
-    });
 
     // All components bound
     const lifecycle = LifecycleService.getInstance();
@@ -57,7 +58,7 @@ export const masonryBinder: Binder<Options> = {
     this.customData.layout();
   },
 
-  unbind() {
+  unbind(el: HTMLElement) {
     let masonry = this.customData.masonry as Masonry | null;
     if (masonry?.destroy) {
       masonry.destroy();
@@ -67,6 +68,8 @@ export const masonryBinder: Binder<Options> = {
       // Image size changed
       this.customData.resizeObserver?.unobserve(img);
     });
+
+    this.customData.resizeObserver?.unobserve(el);
 
     window.removeEventListener("resize", this.customData.layout);
 
