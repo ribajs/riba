@@ -105,6 +105,7 @@ export { LuxonToLocaleStringFormatter } from "./lx-to-locale-string.formatter";
 export { LuxonToLocalFormatter } from "./lx-to-local.formatter";
 export { LuxonToMillisFormatter } from "./lx-to-millis.formatter";
 export { LuxonToObjectFormatter } from "./lx-to-object.formatter";
+export { LuxonToMomentCalendarFormatter } from "./lx-to-moment-calendar.formatter";
 export { LuxonToRelativeCalendarFormatter } from "./lx-to-relative-calendar.formatter";
 export { LuxonToRelativeFormatter } from "./lx-to-relative.formatter";
 export { LuxonToRFC2822Formatter } from "./lx-to-rfc2822.formatter";
