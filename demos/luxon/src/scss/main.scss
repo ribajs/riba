@@ -1,9 +1,9 @@
-// Original Bootstrap 4 Styles
+// Original Bootstrap 5 Styles
 @import "~bootstrap/scss/bootstrap";
 
 // Riba modules
-@import '~@ribajs/core/src/index';
-@import '~@ribajs/bs4/src/index';
+@import "~@ribajs/core/src/index";
+@import "~@ribajs/bs5/src/index";
 
 // @import './binders/index';
 @import "../ts/components/index";

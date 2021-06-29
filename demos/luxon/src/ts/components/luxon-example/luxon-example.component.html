@@ -52,8 +52,8 @@
     <p>Create a UTC DateTime. Accepts an array of numbers as input: <code>[ year, month, day, hour, minute, second, millisecond ]</code>. The last inputs can be omitted and will default to 0.</p>
 
     <p>
-      <code> [ 2020, 6, 24 ] | parse | lx-utc </code><br />
-      <span> { [ 2020, 6, 24 ] | parse | lx-utc } </span><br />
+      <code> [ 2020, 6, 24 ] | lx-utc </code><br />
+      <span> { [ 2020, 6, 24 ] | lx-utc } </span><br />
     </p>
 
     <p>(The ouput here is the result of <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-method-toString">DateTime.toString()</a>, which is just an alias to <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-method-toISO">DateTime.toISO()</a> and outputs the DateTime as ISO-8601 string.)</p>
@@ -70,8 +70,8 @@
     </p>
 
     <p>
-        <code> 1624535464 | lx-from-seconds { zone: 'America/Los_Angeles', numberingSystem: 'beng' } </code><br />
-        <span> { 1624535464 | lx-from-seconds '{ zone: "America/Los_Angeles", numberingSystem: "beng" }' } </span><br />
+        <code> 1624535464 | lx-from-seconds { 'zone': 'America/Los_Angeles', 'numberingSystem': 'beng' } </code><br />
+        <span rv-assign-america="{ 'zone': 'America/Los_Angeles', 'numberingSystem': 'beng' }"> { 1624535464 | lx-from-seconds america } </span><br />
     </p>
 
     <p>(The ouput here is the result of <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-method-toString">DateTime.toString()</a>, which is just an alias to <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-method-toISO">DateTime.toISO()</a> and outputs the DateTime as ISO-8601 string.)</p>
