@@ -43,86 +43,103 @@ export const copyTextToClipboard = async (text: string) => {
  * Get the Operating system the browser is running on
  * @see https://stackoverflow.com/questions/19877924/what-is-the-list-of-possible-values-for-navigator-platform-as-of-today
  * @see https://stackoverflow.com/questions/9038625/detect-if-device-is-ios
+ * @see https://github.com/podlove/podlove-subscribe-button/blob/master/src/coffee/user_agent.coffee
  */
 export const getOS = () => {
   const ua = navigator.userAgent;
   const platform = window.navigator.platform;
-  if (platform.includes("Win")) return "Windows";
-  if (platform.includes("Mac")) return "MacOS";
 
-  if (
-    platform.includes("iPhone") ||
-    platform.includes("iPad") ||
-    platform.includes("iPod")
-  )
-    return "iOS";
+  const uAs = {
+    windows7: /Windows NT 6.1/,
+    windows8: /Windows NT 6.2/,
+    windows81: /Windows NT 6.3/,
+    windows10: /Windows NT 10.0/,
+    windows: /windows/i,
+    windowsPhone: /trident/i,
+    android: /android/i,
+    ios: /(ipad|iphone|ipod)/i,
+    linux: /(linux)/i,
+    unix: /(openbsd|freebsd|netbsd)/i,
+    osxCatalina: /macintosh.+10(_|\.)15/i,
+    osxBigSur: /macintosh.+((10(_|\.)16)|(11(_|\.)))/i,
+    osx: /macintosh/i,
+    mac: /mac/i,
+  };
 
-  // iPad on iOS 13 detection
-  if (ua.includes("Mac") && "ontouchend" in document) return "iOS";
+  const platforms = {
+    linux: /Linux/i,
 
-  if (ua.includes("Android")) return "Android";
-  if (platform.includes("Linux")) return "Linux";
+    unix: /(FreeBSD|OpenBSD|X11|SunOS)/i,
+    webOS: /webOS/i,
 
-  if (platform.includes("FreeBSD")) return "FreeBSD";
-  if (platform.includes("OpenBSD")) return "OpenBSD";
-  if (platform.includes("X11")) return "Unix";
-  if (platform.includes("SunOS")) return "Solaris";
+    playstation3: /playstation 3/i,
+    playstation4: /playstation 4/i,
+    PlaystationPortable: /psp/i,
 
-  if (platform.includes("webOS")) return "WebOS";
+    newNintendo3Ds: /new nintendo 3ds/i,
+    nintendoDsi: /nintendo dsi/i,
+    nintendo3Ds: /nintendo 3ds/i,
+    nintendoWii: /nintendo wii/i,
+    nintendoWiiU: /nintendo wiiu/i,
 
-  if (platform.includes("PLAYSTATION 3")) return "PlayStation 3";
-  if (platform.includes("PlayStation 4")) return "PlayStation 4";
-  if (platform.includes("PSP")) return "PlayStation Portable";
+    palmos: /palmos/i,
 
-  if (platform.includes("New Nintendo 3DS")) return "New Nintendo 3DS";
-  if (platform.includes("Nintendo DSi")) return "Nintendo DSi";
-  if (platform.includes("Nintendo 3DS")) return "Nintendo 3DS";
-  if (platform.includes("Nintendo Wii")) return "Nintendo Wii";
-  if (platform.includes("Nintendo WiiU")) return "Nintendo WiiU";
+    symbian: /(nokia_series_40|s60|symbian)/i,
+  };
 
-  if (platform.includes("PalmOS")) return "PalmOS";
+  for (const uAKey of Object.keys(uAs) as Array<keyof typeof uAs>) {
+    const regex = uAs[uAKey];
+    if (regex.test(ua)) {
+      // iPad on iOS 13 detection
+      if (uAKey === "mac" && "ontouchend" in document) {
+        return "ios";
+      }
+      return uAKey;
+    }
+  }
 
-  if (
-    platform.includes("Nokia_Series_40") ||
-    platform.includes("S60") ||
-    platform.includes("Symbian")
-  )
-    return "Symbian";
+  for (const pfKey of Object.keys(platforms) as Array<keyof typeof platforms>) {
+    const regex = platforms[pfKey];
+    if (regex.test(ua)) {
+      return pfKey;
+    }
+  }
 
   return "Unknown";
 };
 
-// TODO more tests for other devices
+// TODO test TV
 export const getOSType = () => {
   const os = getOS();
 
   let isMobile = false;
   let isDesktop = false;
   let isGameConsole = false;
-  let isTV = false;
 
   switch (os) {
-    case "Windows":
-    case "MacOS":
-    case "Linux":
-    case "FreeBSD":
-    case "OpenBSD":
-    case "Unix":
-    case "Solaris":
+    case "windows":
+    case "windows10":
+    case "windows7":
+    case "windows8":
+    case "windows81":
+    case "osxBigSur":
+    case "osxCatalina":
+    case "osx":
+    case "mac":
+    case "linux":
+    case "unix":
       isDesktop = true;
       break;
 
-    case "iOS":
-    case "Android":
+    case "ios":
+    case "android":
+    case "windowsPhone":
+    case "symbian":
       isMobile = true;
-      break;
-
-    case "WebOS":
-      isTV = true;
       break;
   }
 
-  if (os.includes("PlayStation") || os.includes("Nintendo")) {
+  if (os.includes("playstation") || os.includes("nintendo")) {
     isGameConsole = true;
   }
 
@@ -130,7 +147,6 @@ export const getOSType = () => {
     isMobile,
     isDesktop,
     isGameConsole,
-    isTV,
   };
 };
 
@@ -144,8 +160,4 @@ export const isDesktop = () => {
 
 export const isGameConsole = () => {
   return getOSType().isGameConsole;
-};
-
-export const isTV = () => {
-  return getOSType().isTV;
 };
