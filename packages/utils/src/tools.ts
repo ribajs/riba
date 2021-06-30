@@ -47,7 +47,11 @@ export const copyTextToClipboard = async (text: string) => {
  */
 export const getOS = () => {
   const ua = navigator.userAgent;
-  const platform = window.navigator.platform;
+  /**
+   * TODO? remove unused?
+   * window.navigator.platform is deprecated: https://developer.mozilla.org/en-US/docs/Web/API/NavigatorID/platform
+   */
+  // const platform = window.navigator.platform;
 
   const uAs = {
     windows7: /Windows NT 6.1/,
