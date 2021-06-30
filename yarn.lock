@@ -2031,7 +2031,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.14.6":
+"@babel/runtime@npm:^7.14.6, @babel/runtime@npm:^7.9.2":
   version: 7.14.6
   resolution: "@babel/runtime@npm:7.14.6"
   dependencies:
@@ -3222,6 +3222,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@reduxjs/toolkit@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "@reduxjs/toolkit@npm:1.6.0"
+  dependencies:
+    immer: ^9.0.1
+    redux: ^4.1.0
+    redux-thunk: ^2.3.0
+    reselect: ^4.0.0
+  peerDependencies:
+    react: ^16.14.0 || ^17.0.0
+    react-redux: ^7.2.1
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-redux:
+      optional: true
+  checksum: b42d66cae4ea23ab23f394dd80ae9879b34dc995eda04a1f8aebc4fdfc03a7d138418ef103325d84594b43a616b7a70d1d306816ea823fbfd40502f56f124533
+  languageName: node
+  linkType: hard
+
 "@ribajs/artcodestudio@workspace:*, @ribajs/artcodestudio@workspace:packages/artcodestudio":
   version: 0.0.0-use.local
   resolution: "@ribajs/artcodestudio@workspace:packages/artcodestudio"
@@ -3230,6 +3250,7 @@ __metadata:
     "@babel/runtime-corejs3": ^7.14.7
     "@ribajs/bs5": "workspace:*"
     "@ribajs/core": "workspace:*"
+    "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:*"
     "@types/node": ^15.12.5
   languageName: unknown
@@ -4605,6 +4626,64 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@ribajs/demo-empty-template@workspace:demos/empty-template":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/demo-empty-template@workspace:demos/empty-template"
+  dependencies:
+    "@babel/cli": ^7.14.5
+    "@babel/core": ^7.14.6
+    "@babel/plugin-proposal-class-properties": ^7.14.5
+    "@babel/plugin-proposal-export-default-from": ^7.14.5
+    "@babel/plugin-proposal-object-rest-spread": ^7.14.7
+    "@babel/plugin-proposal-optional-chaining": ^7.14.5
+    "@babel/plugin-syntax-export-default-from": ^7.14.5
+    "@babel/plugin-transform-runtime": ^7.14.5
+    "@babel/preset-env": ^7.14.7
+    "@babel/preset-typescript": ^7.14.5
+    "@babel/runtime": ^7.14.6
+    "@babel/runtime-corejs3": ^7.14.7
+    "@ribajs/core": "workspace:*"
+    "@ribajs/empty-template": "workspace:*"
+    "@ribajs/eslint-config": "workspace:*"
+    "@ribajs/tsconfig": "workspace:*"
+    "@ribajs/utils": "workspace:*"
+    "@ribajs/webpack-config": "workspace:*"
+    "@ribajs/webpack-serve": "workspace:*"
+    "@types/jest": ^26.0.23
+    "@typescript-eslint/eslint-plugin": ^4.28.1
+    "@typescript-eslint/experimental-utils": ^4.28.1
+    "@typescript-eslint/parser": ^4.28.1
+    "@yarnpkg/pnpify": ^3.0.0-rc.7
+    babel-jest: ^27.0.6
+    babel-loader: ^8.2.2
+    babel-plugin-array-includes: ^2.0.3
+    babelify: ^10.0.0
+    core-js: ^3.15.2
+    css-loader: ^5.2.6
+    eslint: ^7.29.0
+    eslint-config-prettier: ^8.3.0
+    eslint-plugin-prettier: ^3.4.0
+    html-loader: ^2.1.2
+    inspectpack: ^4.7.1
+    jest: ^27.0.6
+    jest-extended: ^0.11.5
+    mini-css-extract-plugin: ^1.6.2
+    postcss: ^8.3.5
+    postcss-loader: ^6.1.0
+    postcss-modules: ^4.1.3
+    postcss-preset-env: ^6.7.0
+    prettier: 2.3.2
+    pug-loader: ^2.4.0
+    sass: ^1.35.1
+    sass-loader: ^12.1.0
+    serve: ^12.0.0
+    typescript: ^4.3.4
+    webpack: ^5.41.0
+    webpack-cli: ^4.7.2
+    webpack-dev-server: ^3.11.2
+  languageName: unknown
+  linkType: soft
+
 "@ribajs/demo-extras-game-loop@workspace:demos/extras-game-loop":
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-extras-game-loop@workspace:demos/extras-game-loop"
@@ -5328,6 +5407,19 @@ __metadata:
     webpack: ^5.41.0
     webpack-cli: ^4.7.2
     webpack-dev-server: ^3.11.2
+  languageName: unknown
+  linkType: soft
+
+"@ribajs/empty-template@workspace:*, @ribajs/empty-template@workspace:packages/empty-template":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/empty-template@workspace:packages/empty-template"
+  dependencies:
+    "@babel/runtime": ^7.14.6
+    "@babel/runtime-corejs3": ^7.14.7
+    "@ribajs/core": "workspace:*"
+    "@ribajs/tsconfig": "workspace:infra/tsconfig"
+    "@ribajs/utils": "workspace:*"
+    "@types/node": ^15.12.5
   languageName: unknown
   linkType: soft
 
@@ -6179,6 +6271,81 @@ __metadata:
     typescript: ^4.3.4
     webpack: ^5.41.0
     webpack-cli: ^4.7.2
+  languageName: unknown
+  linkType: soft
+
+"@ribajs/podcast-example@workspace:demos/podcast":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/podcast-example@workspace:demos/podcast"
+  dependencies:
+    "@babel/cli": ^7.14.5
+    "@babel/core": ^7.14.6
+    "@babel/plugin-proposal-class-properties": ^7.14.5
+    "@babel/plugin-proposal-export-default-from": ^7.14.5
+    "@babel/plugin-proposal-object-rest-spread": ^7.14.7
+    "@babel/plugin-proposal-optional-chaining": ^7.14.5
+    "@babel/plugin-syntax-export-default-from": ^7.14.5
+    "@babel/plugin-transform-runtime": ^7.14.5
+    "@babel/preset-env": ^7.14.7
+    "@babel/preset-typescript": ^7.14.5
+    "@babel/runtime": ^7.14.6
+    "@babel/runtime-corejs3": ^7.14.7
+    "@ribajs/bs5": "workspace:*"
+    "@ribajs/core": "workspace:*"
+    "@ribajs/eslint-config": "workspace:*"
+    "@ribajs/podcast": "workspace:*"
+    "@ribajs/tsconfig": "workspace:*"
+    "@ribajs/utils": "workspace:*"
+    "@ribajs/webpack-config": "workspace:*"
+    "@ribajs/webpack-serve": "workspace:*"
+    "@types/jest": ^26.0.23
+    "@typescript-eslint/eslint-plugin": ^4.28.1
+    "@typescript-eslint/experimental-utils": ^4.28.1
+    "@typescript-eslint/parser": ^4.28.1
+    "@yarnpkg/pnpify": ^3.0.0-rc.7
+    babel-jest: ^27.0.6
+    babel-loader: ^8.2.2
+    babel-plugin-array-includes: ^2.0.3
+    babelify: ^10.0.0
+    bootstrap: ^5.0.2
+    core-js: ^3.15.2
+    css-loader: ^5.2.6
+    eslint: ^7.29.0
+    eslint-config-prettier: ^8.3.0
+    eslint-plugin-prettier: ^3.4.0
+    html-loader: ^2.1.2
+    inspectpack: ^4.7.1
+    jest: ^27.0.6
+    jest-extended: ^0.11.5
+    mini-css-extract-plugin: ^1.6.2
+    postcss: ^8.3.5
+    postcss-loader: ^6.1.0
+    postcss-modules: ^4.1.3
+    postcss-preset-env: ^6.7.0
+    prettier: 2.3.2
+    pug-loader: ^2.4.0
+    sass: ^1.35.1
+    sass-loader: ^12.1.0
+    serve: ^12.0.0
+    typescript: ^4.3.4
+    webpack: ^5.41.0
+    webpack-cli: ^4.7.2
+    webpack-dev-server: ^3.11.2
+  languageName: unknown
+  linkType: soft
+
+"@ribajs/podcast@workspace:*, @ribajs/podcast@workspace:packages/podcast":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/podcast@workspace:packages/podcast"
+  dependencies:
+    "@babel/runtime": ^7.14.6
+    "@babel/runtime-corejs3": ^7.14.7
+    "@reduxjs/toolkit": ^1.6.0
+    "@ribajs/bs5": "workspace:*"
+    "@ribajs/core": "workspace:*"
+    "@ribajs/tsconfig": "workspace:infra/tsconfig"
+    "@ribajs/utils": "workspace:*"
+    "@types/node": ^15.12.5
   languageName: unknown
   linkType: soft
 
@@ -14397,6 +14564,13 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"immer@npm:^9.0.1":
+  version: 9.0.3
+  resolution: "immer@npm:9.0.3"
+  checksum: 98e0dabde5361afe30fb72d6b662682af2cd9be82919d78955901dabb9851ce00e8655cf935f68f4b055f250f9f33a0f80f94f3e954e7887228ee6710c9d05b4
+  languageName: node
+  linkType: hard
+
 "immutable@npm:^3":
   version: 3.8.2
   resolution: "immutable@npm:3.8.2"
@@ -19585,6 +19759,22 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"redux-thunk@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "redux-thunk@npm:2.3.0"
+  checksum: 2d7210b88cef244384ab15bfe0c0f79a7d5a2fe059825da121121ec75378b175860695fafd5265386a0fd4b86212cc49e5972825f7bc9f803ad8753229f0258b
+  languageName: node
+  linkType: hard
+
+"redux@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "redux@npm:4.1.0"
+  dependencies:
+    "@babel/runtime": ^7.9.2
+  checksum: d939d0df1e12982c66c0ea767c8ec98276ee981ce0381222239b7f823c6ad02ea3e3c622859bcb4934446b3f86d735db35d7bd8b1697d359070e5fbef1f4ad49
+  languageName: node
+  linkType: hard
+
 "reflect-metadata@npm:^0.1.13":
   version: 0.1.13
   resolution: "reflect-metadata@npm:0.1.13"
@@ -19856,6 +20046,13 @@ fsevents@~2.3.1:
   version: 1.0.0
   resolution: "requires-port@npm:1.0.0"
   checksum: 0db25fb2ac9b4f2345a350846b7ba99d1f25a6686b1728246d14f05450c8f2fc066bdfae4561b4be2627c184a030a27e17268cfefdf46836e271db13734bc49e
+  languageName: node
+  linkType: hard
+
+"reselect@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "reselect@npm:4.0.0"
+  checksum: 3480930929f673f12962cdde140dce48ea8ba171cd428bb2c7639672e41770bd6b64e935bc0400f47cfa960f617c7ac068c4309527373825d11e27262f08c0a3
   languageName: node
   linkType: hard
 
