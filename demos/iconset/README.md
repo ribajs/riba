@@ -2,7 +2,7 @@
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git
-cd riba/examples/iconset
+cd riba/demos/iconset
 yarn install
 yarn run start
 ```

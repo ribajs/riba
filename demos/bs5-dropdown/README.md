@@ -2,7 +2,7 @@
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git
-cd riba/examples/bs5-dropdown
+cd riba/demos/bs5-dropdown
 yarn install
 yarn run start
 ```

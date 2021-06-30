@@ -2,7 +2,7 @@
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git
-cd riba/examples/bs4-tagged-image
+cd riba/demos/bs4-tagged-image
 yarn install
 yarn run start
 ```
