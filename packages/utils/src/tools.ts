@@ -47,11 +47,7 @@ export const copyTextToClipboard = async (text: string) => {
  */
 export const getOS = () => {
   const ua = navigator.userAgent;
-  /**
-   * TODO? remove unused?
-   * window.navigator.platform is deprecated: https://developer.mozilla.org/en-US/docs/Web/API/NavigatorID/platform
-   */
-  // const platform = window.navigator.platform;
+  const platform = window.navigator.platform;
 
   const uAs = {
     windows7: /Windows NT 6.1/,
@@ -102,10 +98,12 @@ export const getOS = () => {
     }
   }
 
-  for (const pfKey of Object.keys(platforms) as Array<keyof typeof platforms>) {
-    const regex = platforms[pfKey];
-    if (regex.test(ua)) {
-      return pfKey;
+  for (const platformKey of Object.keys(platforms) as Array<
+    keyof typeof platforms
+  >) {
+    const regex = platforms[platformKey];
+    if (regex.test(platform)) {
+      return platformKey;
     }
   }
 
