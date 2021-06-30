@@ -1,3 +1,5 @@
+@use "sass:math";
+
 $color-bg: transparent; //#f2f2f2;
 
 bs4-colorpicker {
@@ -25,9 +27,9 @@ bs4-colorpicker {
   // Needed for the default popup behavior, where the parent is temporarily disabled via "pointer-events: none"
   pointer-events: auto;
 
-  padding: $width-gutter/2;
+  padding: math.div($width-slider, 2);
   > * {
-    margin: $width-gutter/2;
+    margin: math.div($width-slider, 2);
   }
   
   //https://stackoverflow.com/questions/29732575/line-break-in-multi-line-flexbox
@@ -50,7 +52,7 @@ bs4-colorpicker {
   }
 
   .picker_slider, .picker_selector {
-    padding: $width-slider/2;
+    padding: math.div($width-slider, 2);
   }
   
   .picker_hue {

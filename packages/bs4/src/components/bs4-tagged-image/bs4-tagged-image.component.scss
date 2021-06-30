@@ -1,5 +1,7 @@
+@use "sass:math";
+
 $tagged-image-tag-full-size: 40px !default;
-$tagged-image-tag-small-size: $tagged-image-tag-full-size / 4 !default;
+$tagged-image-tag-small-size: math.div($tagged-image-tag-full-size, 4) !default;
 $tagged-image-tag-color: #23de00 !default;
 $tagged-image-border-radius: 0 !default;
 
