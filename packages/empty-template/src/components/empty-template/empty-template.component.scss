@@ -1,0 +1,8 @@
+$empty-template-component-bg-color: #ff0000 !default;
+$empty-template-component-color: #ffffff !default;
+
+empty-template {
+  display: block;
+  background-color: $empty-template-component-bg-color;
+  color: $empty-template-component-color;
+}
