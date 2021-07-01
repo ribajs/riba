@@ -29,10 +29,24 @@ export class PodloveWebPlayerComponent extends Component {
     this.init(PodloveWebPlayerComponent.observedAttributes);
   }
 
+  protected async maybeLoadPolyfills() {
+    // Legacy Browsers Polyfill
+    const modernBrowser = "fetch" in window && "assign" in Object;
+
+    if (!modernBrowser) {
+      await loadScript(
+        "//cdn.podlove.org/web-player/5.x/polyfills.js",
+        "podlove-web-player-polyfills-5-x",
+        true,
+        true
+      );
+    }
+  }
+
   protected async loadPlayer() {
     await loadScript(
       "//cdn.podlove.org/web-player/5.x/embed.js",
-      "podlove-web-placer-5-x",
+      "podlove-web-player-5-x",
       true,
       true
     );
@@ -50,6 +64,7 @@ export class PodloveWebPlayerComponent extends Component {
 
   protected async beforeBind() {
     await super.beforeBind();
+    await this.maybeLoadPolyfills();
     await this.loadPlayer();
   }
 
