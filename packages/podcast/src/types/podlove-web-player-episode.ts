@@ -40,7 +40,7 @@ export interface PodloveWebPlayerEpisode {
    * - can be a plain list or a reference to a json file
    * - if present chapters tab will be available
    */
-  chapters: PodloveWebPlayerChapter[];
+  chapters: string | PodloveWebPlayerChapter[];
 
   /**
    * Audio Assets
@@ -86,5 +86,5 @@ export interface PodloveWebPlayerEpisode {
    * - can be a plain list or a reference to a json file
    * - if present transcripts tab will be available (if the template includes it)
    */
-  transcripts: PodloveWebPlayerTranscript[];
+  transcripts: string | PodloveWebPlayerTranscript[];
 }

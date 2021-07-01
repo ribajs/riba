@@ -8,5 +8,6 @@ export * from "./podlove-web-player-episode";
 export * from "./podlove-web-player-file";
 export * from "./podlove-web-player-playlist-item";
 export * from "./podlove-web-player-show";
+export * from "./podlove-web-player-subscribe-button";
 export * from "./podlove-web-player-transcript";
 import "./podlove-web-player";

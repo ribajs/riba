@@ -49,7 +49,7 @@ export interface PodloveWebPlayerConfig {
 
   /**
    * Subscribe Button
-   * - configuration for the subsscribe button overlay
+   * - configuration for the subscribe button overlay
    * - if not defined the subscribe button won't be rendered
    */
   "subscribe-button": PodloveWebPlayerSubscribeButton;
