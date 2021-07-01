@@ -6346,6 +6346,8 @@ __metadata:
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:*"
     "@types/node": ^15.12.5
+    eslint: ^7.29.0
+    typescript: ^4.3.5
   languageName: unknown
   linkType: soft
 
@@ -7600,6 +7602,13 @@ __metadata:
   version: 1.2.3
   resolution: "@types/range-parser@npm:1.2.3"
   checksum: 092fabae0ecbd728d3e4debc938cd043e97cb9f210cfec1c56ff6065c6e91666f376eb586591825d6757a058fd1a1dc4831d34e04ecfbb0800f35b8d86d38635
+  languageName: node
+  linkType: hard
+
+"@types/redux@npm:*":
+  version: 3.6.31
+  resolution: "@types/redux@npm:3.6.31"
+  checksum: cf977fc072b3b4ac527308fffd6631aeaaa5e076015e170c4865ec2cc3f6ff039b4402b9b5bf44496588f8e6b1c6394c9680e3da8a5798d34adff9231ddccc0d
   languageName: node
   linkType: hard
 
@@ -19766,7 +19775,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"redux@npm:^4.1.0":
+"redux@npm:*, redux@npm:^4.1.0":
   version: 4.1.0
   resolution: "redux@npm:4.1.0"
   dependencies:
@@ -22496,6 +22505,16 @@ typescript@^4.3.4:
   languageName: node
   linkType: hard
 
+typescript@^4.3.5:
+  version: 4.3.5
+  resolution: "typescript@npm:4.3.5"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: d9a8e78d72dd19896e6bfa73ab2a0fcea6eca2700d1d6e7c33f67a970af54a3e0fed8f715a8c4e6a0ff7fc0995067b394b2003518ab0aa84cd396377e54b760c
+  languageName: node
+  linkType: hard
+
 "typescript@patch:typescript@4.2.3#builtin<compat/typescript>":
   version: 4.2.3
   resolution: "typescript@patch:typescript@npm%3A4.2.3#builtin<compat/typescript>::version=4.2.3&hash=ddfc1b"
@@ -22513,6 +22532,16 @@ typescript@^4.3.4:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: c8766e84a4f71e925cc059af8286cc7f41819fe821d433b90c83e9b36729cbda7a8e4be3292d8a1433cd717d529c93217d58d173418f43862290b206bd88b284
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@^4.3.5#builtin<compat/typescript>":
+  version: 4.3.5
+  resolution: "typescript@patch:typescript@npm%3A4.3.5#builtin<compat/typescript>::version=4.3.5&hash=ddfc1b"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 7f0b8343f71ecac18095be1476b398aca420ab60dc207cc1efe078f381eef5527b80a518297720257114cdbda65612f8839e4b63e85dc95e67ac5cbbade8bdf0
   languageName: node
   linkType: hard
 

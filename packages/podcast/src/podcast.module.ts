@@ -9,7 +9,7 @@ export const podcastModule: RibaModule = {
   services,
   formatters,
   components,
-  init(options = {}) {
+  init(/*options = {}*/) {
     return this;
   },
 };
