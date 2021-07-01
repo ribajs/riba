@@ -1,7 +1,6 @@
 import { Component, TemplateFunction } from "@ribajs/core";
 import { PodloveWebPlayerComponentScope } from "../../types";
 import { hasChildNodesTrim, loadScript } from "@ribajs/utils";
-import template from "./podlove-web-player.component.pug";
 
 export class PodloveWebPlayerComponent extends Component {
   public static tagName = "podlove-web-player";
@@ -15,7 +14,7 @@ export class PodloveWebPlayerComponent extends Component {
   }
 
   public scope: PodloveWebPlayerComponentScope = {
-    selector: "#podlove-web-layer",
+    selector: "#podlove-web-player",
     episode: "",
     config: "",
   };
@@ -70,7 +69,7 @@ export class PodloveWebPlayerComponent extends Component {
 
   protected template(): ReturnType<TemplateFunction> {
     if (!hasChildNodesTrim(this)) {
-      return template(this.scope);
+      return '<div id="podlove-web-player"></div>';
     } else {
       return null;
     }
