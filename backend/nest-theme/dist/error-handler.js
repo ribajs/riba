@@ -57,10 +57,18 @@ const handleError = (error) => {
     if (error instanceof common_1.HttpException) {
         return error;
     }
-    return new common_1.HttpException({
-        message: exports.getMessage(error),
-        stack: exports.getStack(error),
-    }, exports.getStatus(error));
+    try {
+        return new common_1.HttpException({
+            message: exports.getMessage(error),
+            stack: exports.getStack(error),
+        }, exports.getStatus(error));
+    }
+    catch (error) {
+        console.error(error);
+        return new common_1.HttpException({
+            message: "Can't handle error",
+        }, 500);
+    }
 };
 exports.handleError = handleError;
 //# sourceMappingURL=error-handler.js.map

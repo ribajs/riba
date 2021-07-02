@@ -74,11 +74,21 @@ export const handleError = (
   if (error instanceof HttpException) {
     return error;
   }
-  return new HttpException(
-    {
-      message: getMessage(error),
-      stack: getStack(error),
-    },
-    getStatus(error),
-  );
+  try {
+    return new HttpException(
+      {
+        message: getMessage(error),
+        stack: getStack(error),
+      },
+      getStatus(error),
+    );
+  } catch (error) {
+    console.error(error);
+    return new HttpException(
+      {
+        message: "Can't handle error",
+      },
+      500,
+    );
+  }
 };
