@@ -19,7 +19,7 @@
     "@ribajs/shopify-easdk": "workspace:*",
     "@ribajs/shopify-tda": "workspace:*",
     "@ribajs/utils": "workspace:*",
-    "@types/debug": "^4.1.5",
+    "@types/debug": "^4.1.6",
     "debug": "^4.3.2",
     "monaco-editor": "^0.25.2"
   },
@@ -30,8 +30,8 @@
     "@babel/runtime": "^7.14.6",
     "@babel/runtime-corejs3": "^7.14.7",
     "@ribajs/tsconfig": "workspace:*",
-    "@types/node": "^15.12.5",
-    "eslint": "^7.29.0",
-    "typescript": "^4.3.4"
+    "@types/node": "^16.0.0",
+    "eslint": "^7.30.0",
+    "typescript": "^4.3.5"
   }
 }
