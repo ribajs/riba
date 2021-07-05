@@ -14,9 +14,9 @@ export interface PodloveWebPlayerEpisode {
     duration: string;
     poster: string;
     link: string;
-    chapters: string | PodloveWebPlayerChapter[];
+    chapters?: string | PodloveWebPlayerChapter[];
     audio: PodloveWebPlayerAudio[];
-    files: PodloveWebPlayerFile[];
-    contributors: PodloveWebPlayerContributor[];
-    transcripts: string | PodloveWebPlayerTranscript[];
+    files?: PodloveWebPlayerFile[];
+    contributors?: PodloveWebPlayerContributor[];
+    transcripts?: string | PodloveWebPlayerTranscript[];
 }

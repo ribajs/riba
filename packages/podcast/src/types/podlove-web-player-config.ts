@@ -6,10 +6,11 @@ import { PodloveWebPlayerTheme } from "./podlove-web-player-theme";
 export interface PodloveWebPlayerConfig {
   version: 5;
 
-  // player asset base path, falls back to ./
+  /** player asset base path, falls back to ./ */
   base: string;
 
-  activeTab: string; // default active tab, can be set to [chapters, files, share, playlist]
+  /** default active tab, can be set to [shownotes, chapters, files, share, playlist] */
+  activeTab?: "shownotes" | "chapters" | "files" | "share" | "playlist";
 
   theme: PodloveWebPlayerTheme;
 
@@ -18,17 +19,15 @@ export interface PodloveWebPlayerConfig {
    * - configuration for the subscribe button overlay
    * - if not defined the subscribe button won't be rendered
    */
-  "subscribe-button": PodloveWebPlayerSubscribeButton;
+  "subscribe-button"?: PodloveWebPlayerSubscribeButton;
 
   /**
    * Playlist:
    * - can be a plain list or a reference to a json file
    * - if present playlist tab will be available
    */
-  playlist: PodloveWebPlayerPlaylistItem[];
+  playlist?: PodloveWebPlayerPlaylistItem[];
 
-  /*
-    Share Tab
-  */
+  /** Share Tab */
   share?: PodloveWebPlayerShare;
 }

@@ -40,7 +40,7 @@ export interface PodloveWebPlayerEpisode {
    * - can be a plain list or a reference to a json file
    * - if present chapters tab will be available
    */
-  chapters: string | PodloveWebPlayerChapter[];
+  chapters?: string | PodloveWebPlayerChapter[];
 
   /**
    * Audio Assets
@@ -67,7 +67,7 @@ export interface PodloveWebPlayerEpisode {
    * - title: title to be displayed in download tab
    * - (mimeType): media asset mimeType
    */
-  files: PodloveWebPlayerFile[];
+  files?: PodloveWebPlayerFile[];
 
   /**
    * Contributors
@@ -79,12 +79,12 @@ export interface PodloveWebPlayerEpisode {
    * - (avatar): avatar of the contributor
    * - (group): contributors group
    */
-  contributors: PodloveWebPlayerContributor[];
+  contributors?: PodloveWebPlayerContributor[];
 
   /**
    * Transcripts:
    * - can be a plain list or a reference to a json file
    * - if present transcripts tab will be available (if the template includes it)
    */
-  transcripts: string | PodloveWebPlayerTranscript[];
+  transcripts?: string | PodloveWebPlayerTranscript[];
 }

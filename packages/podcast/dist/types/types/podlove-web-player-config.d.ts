@@ -5,9 +5,9 @@ import { PodloveWebPlayerTheme } from "./podlove-web-player-theme";
 export interface PodloveWebPlayerConfig {
     version: 5;
     base: string;
-    activeTab: string;
+    activeTab?: "shownotes" | "chapters" | "files" | "share" | "playlist";
     theme: PodloveWebPlayerTheme;
-    "subscribe-button": PodloveWebPlayerSubscribeButton;
-    playlist: PodloveWebPlayerPlaylistItem[];
+    "subscribe-button"?: PodloveWebPlayerSubscribeButton;
+    playlist?: PodloveWebPlayerPlaylistItem[];
     share?: PodloveWebPlayerShare;
 }
