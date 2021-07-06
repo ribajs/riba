@@ -10,7 +10,13 @@ export interface PodloveWebPlayerConfig {
   base: string;
 
   /** default active tab, can be set to [shownotes, chapters, files, share, playlist] */
-  activeTab?: "shownotes" | "chapters" | "files" | "share" | "playlist";
+  activeTab?:
+    | "none"
+    | "shownotes"
+    | "chapters"
+    | "files"
+    | "share"
+    | "playlist";
 
   theme: PodloveWebPlayerTheme;
 
