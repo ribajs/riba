@@ -72,7 +72,13 @@ export class SsrMiddleware implements NestMiddleware {
           return res.send(result);
         }
 
-        result = await render();
+        // We need the try catch here because we are inside if a callback
+        try {
+          result = await render();
+        } catch (error) {
+          return next(handleError(error));
+        }
+
         this.cacheManager.set(cacheKey, result, cacheOptions);
         res.send(result);
         if (global.gc) {

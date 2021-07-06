@@ -129,6 +129,7 @@ export class SsrService {
       } catch (error) {
         this.log.error('Error on run script');
         this.log.error(error);
+        throw error;
       }
     }
 

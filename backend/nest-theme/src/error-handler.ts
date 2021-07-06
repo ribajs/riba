@@ -83,7 +83,6 @@ export const handleError = (
       getStatus(error),
     );
   } catch (error) {
-    console.error(error);
     return new HttpException(
       {
         message: "Can't handle error",

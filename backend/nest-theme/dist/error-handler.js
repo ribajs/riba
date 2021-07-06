@@ -64,7 +64,6 @@ const handleError = (error) => {
         }, exports.getStatus(error));
     }
     catch (error) {
-        console.error(error);
         return new common_1.HttpException({
             message: "Can't handle error",
         }, 500);
