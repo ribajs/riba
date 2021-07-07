@@ -1,5 +1,5 @@
-import type { Store } from "@reduxjs/toolkit";
 import { PodloveWebPlayerEpisode } from "./podlove-web-player-episode";
+import { PodloveWebPlayerStore } from "./podlove-web-player-store";
 
 declare global {
   interface Window {
@@ -28,6 +28,6 @@ declare global {
       selector: string | Node,
       episode: string | PodloveWebPlayerEpisode,
       configuration: string | any // TODO configuration type
-    ) => Promise<Store>;
+    ) => Promise<PodloveWebPlayerStore>;
   }
 }
