@@ -362,6 +362,7 @@ export abstract class Component extends BasicComponent {
     try {
       if (this.view) {
         this._binds = false;
+        this._bound = false;
         this.view.unbind();
         this.view = null;
       }
