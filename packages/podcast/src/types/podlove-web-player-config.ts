@@ -2,6 +2,7 @@ import { PodloveWebPlayerPlaylistItem } from "./podlove-web-player-playlist-item
 import { PodloveWebPlayerSubscribeButton } from "./podlove-web-player-subscribe-button";
 import { PodloveWebPlayerShare } from "./podlove-web-player-share";
 import { PodloveWebPlayerTheme } from "./podlove-web-player-theme";
+import { PodloveWebPlayerTab } from "./podlove-web-player-tab";
 
 export interface PodloveWebPlayerConfig {
   version: 5;
@@ -9,14 +10,8 @@ export interface PodloveWebPlayerConfig {
   /** player asset base path, falls back to ./ */
   base: string;
 
-  /** default active tab, can be set to [shownotes, chapters, files, share, playlist] */
-  activeTab?:
-    | "none"
-    | "shownotes"
-    | "chapters"
-    | "files"
-    | "share"
-    | "playlist";
+  /** default active tab, can be set to [none, shownotes, chapters, files, share, playlist] */
+  activeTab?: PodloveWebPlayerTab;
 
   theme: PodloveWebPlayerTheme;
 

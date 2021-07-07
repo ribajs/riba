@@ -10,6 +10,7 @@ export * from "./podlove-web-player-playlist-item";
 export * from "./podlove-web-player-share";
 export * from "./podlove-web-player-show";
 export * from "./podlove-web-player-subscribe-button";
+export * from "./podlove-web-player-tab";
 export * from "./podlove-web-player-theme";
 export * from "./podlove-web-player-transcript";
 import "./podlove-web-player";
