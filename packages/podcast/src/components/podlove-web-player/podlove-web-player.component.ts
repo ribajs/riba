@@ -1,5 +1,8 @@
 import { Component, TemplateFunction } from "@ribajs/core";
-import { PodloveWebPlayerComponentScope } from "../../types";
+import {
+  PodloveWebPlayerComponentScope,
+  PodloveWebPlayerStore,
+} from "../../types";
 import { loadScript } from "@ribajs/utils";
 
 export class PodloveWebPlayerComponent extends Component {
@@ -15,6 +18,8 @@ export class PodloveWebPlayerComponent extends Component {
   protected requiredAttributes(): string[] {
     return ["episode", "config"];
   }
+
+  public store?: PodloveWebPlayerStore;
 
   public scope: PodloveWebPlayerComponentScope = {
     episode: "",
@@ -77,7 +82,7 @@ export class PodloveWebPlayerComponent extends Component {
       throw new Error("Can't load Podlove Web Player");
     }
 
-    /* const store =*/ await window.podlovePlayer(
+    this.store = await window.podlovePlayer(
       this,
       this.scope.episode,
       this.scope.config
