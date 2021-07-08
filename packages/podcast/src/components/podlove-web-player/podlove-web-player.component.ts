@@ -1,4 +1,5 @@
 import { Component, TemplateFunction } from "@ribajs/core";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import {
   PodloveWebPlayerComponentScope,
   PodloveWebPlayerStore,
@@ -41,7 +42,7 @@ export class PodloveWebPlayerComponent extends Component {
     if (this.bound && this.view) {
       this.unbind();
     }
-    this.innerHTML = "";
+    this.innerHTML = "<div></div>";
     this.templateLoaded = false;
     super.disconnectedCallback();
   }
@@ -82,8 +83,14 @@ export class PodloveWebPlayerComponent extends Component {
       throw new Error("Can't load Podlove Web Player");
     }
 
+    let selector = this.firstElementChild || this;
+
+    if (selector?.tagName === "ROOT") {
+      selector = this;
+    }
+
     this.store = await window.podlovePlayer(
-      this,
+      selector,
       this.scope.episode,
       this.scope.config
     );
@@ -104,6 +111,10 @@ export class PodloveWebPlayerComponent extends Component {
   }
 
   protected template(): ReturnType<TemplateFunction> {
-    return null;
+    if (!hasChildNodesTrim(this)) {
+      return "<div></div>";
+    } else {
+      return null;
+    }
   }
 }

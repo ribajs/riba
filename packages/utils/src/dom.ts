@@ -38,7 +38,7 @@ export const getDataset = (element: HTMLElement) => {
 };
 
 /**
- * Calls el.hasChildNodes but ignores empty strings, the default hasChildNodes would return ture on `<div> </div>`.
+ * Calls el.hasChildNodes but ignores empty strings, the default hasChildNodes would return true on `<div> </div>`.
  * Very useful to check within a component if the component has set child elements to load or overwrite the component template
  * @param el
  */
@@ -92,7 +92,7 @@ export const elementIsHidden = (el: HTMLElement) => {
   );
 };
 
-export const elementIsVisable = (el: HTMLElement) => {
+export const elementIsVisible = (el: HTMLElement) => {
   return !elementIsHidden(el);
 };
 
@@ -197,8 +197,6 @@ export const scrollToPosition = (
         break;
     }
   }
-
-  console.log("scroll", behavior, top, left, angle);
 
   if (top !== undefined && left !== undefined) {
     scrollElement.scroll({

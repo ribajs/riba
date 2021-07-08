@@ -1,5 +1,5 @@
 import { Component, TemplateFunction } from "@ribajs/core";
-import { elementIsVisable, hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { elementIsVisible, hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./debug-bar.component.html";
 
 export class ShopifyDebugBarComponent extends Component {
@@ -48,7 +48,7 @@ export class ShopifyDebugBarComponent extends Component {
 
   public toggleBar(forceHide = false) {
     if (this.previewBar) {
-      if (forceHide === true || elementIsVisable(this.previewBar)) {
+      if (forceHide === true || elementIsVisible(this.previewBar)) {
         // this.debug('hide previewbar');
         this.previewBar.setAttribute("hidden", "");
         // this.$previewBar.hide();
@@ -60,7 +60,7 @@ export class ShopifyDebugBarComponent extends Component {
     }
 
     if (this.adminBar) {
-      if (forceHide === true || elementIsVisable(this.adminBar)) {
+      if (forceHide === true || elementIsVisible(this.adminBar)) {
         // this.debug('hide adminbar');
         this.adminBar.setAttribute("hidden", "");
         // this.$adminBar.hide();

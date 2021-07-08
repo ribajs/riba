@@ -1,11 +1,12 @@
 import { Component, TemplateFunction } from "@ribajs/core";
-import { PodloveWebPlayerComponentScope } from "../../types";
+import { PodloveWebPlayerComponentScope, PodloveWebPlayerStore } from "../../types";
 export declare class PodloveWebPlayerComponent extends Component {
     static tagName: string;
     static loadingClass: string;
     static readyClass: string;
     static get observedAttributes(): string[];
     protected requiredAttributes(): string[];
+    store?: PodloveWebPlayerStore;
     scope: PodloveWebPlayerComponentScope;
     constructor();
     protected connectedCallback(): void;
