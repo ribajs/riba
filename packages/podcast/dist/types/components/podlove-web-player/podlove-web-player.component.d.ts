@@ -4,6 +4,7 @@ export declare class PodloveWebPlayerComponent extends Component {
     static tagName: string;
     static loadingClass: string;
     static readyClass: string;
+    protected _template: string;
     static get observedAttributes(): string[];
     protected requiredAttributes(): string[];
     store?: PodloveWebPlayerStore;

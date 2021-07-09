@@ -12,6 +12,8 @@ export class PodloveWebPlayerComponent extends Component {
   public static loadingClass = "podlove-web-player-loading";
   public static readyClass = "podlove-web-player-ready";
 
+  protected _template = "";
+
   static get observedAttributes() {
     return ["episode", "config"];
   }
@@ -42,7 +44,7 @@ export class PodloveWebPlayerComponent extends Component {
     if (this.bound && this.view) {
       this.unbind();
     }
-    this.innerHTML = "<div></div>";
+    this.innerHTML = this._template;
     this.templateLoaded = false;
     super.disconnectedCallback();
   }
@@ -83,14 +85,8 @@ export class PodloveWebPlayerComponent extends Component {
       throw new Error("Can't load Podlove Web Player");
     }
 
-    let selector = this.firstElementChild || this;
-
-    if (selector?.tagName === "ROOT") {
-      selector = this;
-    }
-
     this.store = await window.podlovePlayer(
-      selector,
+      this,
       this.scope.episode,
       this.scope.config
     );
@@ -112,8 +108,9 @@ export class PodloveWebPlayerComponent extends Component {
 
   protected template(): ReturnType<TemplateFunction> {
     if (!hasChildNodesTrim(this)) {
-      return "<div></div>";
+      return this._template;
     } else {
+      this._template = this.innerHTML;
       return null;
     }
   }
