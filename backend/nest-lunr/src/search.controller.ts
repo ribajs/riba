@@ -11,7 +11,7 @@ import { ApiTags } from '@nestjs/swagger';
 @ApiTags('search')
 @Controller('api/search')
 export class SearchController {
-  constructor(readonly lunr: LunrService) { }
+  constructor(readonly lunr: LunrService) {}
 
   @Get('/:namespace/:query')
   search(

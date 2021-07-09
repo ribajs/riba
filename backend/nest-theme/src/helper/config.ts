@@ -83,7 +83,6 @@ export const loadConfig = <T>(searchConfigPaths: string[], env: string) => {
       script = null;
       jSource = null;
       tSource = null;
-      console.debug('Config loaded: ', themeConfig);
       return themeConfig;
     }
     // Parse yaml config file

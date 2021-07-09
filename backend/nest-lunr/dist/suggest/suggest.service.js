@@ -40,6 +40,12 @@ let SuggestService = class SuggestService {
         }
         return suggest.reset();
     }
+    resetAll() {
+        const namespaces = this.getNamespaces();
+        for (const ns of namespaces) {
+            this.reset(ns);
+        }
+    }
     load(ns, corpus, opts) {
         const suggest = this.get(ns);
         if (!suggest) {

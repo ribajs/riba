@@ -80,7 +80,7 @@ ThemeModule = ThemeModule_1 = __decorate([
             refresh_cache_service_1.RefreshCacheService,
         ],
         controllers: [],
-        exports: [ssr_service_1.SsrService, ssr_middleware_1.SsrMiddleware, source_file_service_1.SourceFileService],
+        exports: [ssr_service_1.SsrService, ssr_middleware_1.SsrMiddleware, source_file_service_1.SourceFileService, refresh_cache_service_1.RefreshCacheService],
     }),
     __metadata("design:paramtypes", [core_1.HttpAdapterHost,
         config_1.ConfigService,

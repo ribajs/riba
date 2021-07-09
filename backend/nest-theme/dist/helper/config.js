@@ -63,7 +63,6 @@ const loadConfig = (searchConfigPaths, env) => {
             script = null;
             jSource = null;
             tSource = null;
-            console.debug('Config loaded: ', themeConfig);
             return themeConfig;
         }
         else if (configPath.endsWith('.yaml')) {

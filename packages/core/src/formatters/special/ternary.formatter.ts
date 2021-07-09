@@ -5,11 +5,6 @@ import { Formatter } from "../../types/formatter";
 export const ternaryFormatter: Formatter = {
   name: "ternary",
   read(condition: any, yes, no) {
-    console.log({
-      condition,
-      yes,
-      no,
-    });
     return condition ? yes : no;
   },
 };

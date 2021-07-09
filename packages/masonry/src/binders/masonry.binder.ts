@@ -18,7 +18,6 @@ export const masonryBinder: Binder<Options> = {
 
   bind(el: HTMLElement) {
     const layout = () => {
-      console.debug("layout");
       const masonry = this.customData.masonry as Masonry | null;
       if (masonry?.layout) {
         masonry.layout();

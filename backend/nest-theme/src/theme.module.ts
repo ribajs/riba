@@ -36,7 +36,7 @@ import { RefreshCacheService } from './refresh-cache/refresh-cache.service';
     RefreshCacheService,
   ],
   controllers: [],
-  exports: [SsrService, SsrMiddleware, SourceFileService],
+  exports: [SsrService, SsrMiddleware, SourceFileService, RefreshCacheService],
 })
 export class ThemeModule {
   constructor(

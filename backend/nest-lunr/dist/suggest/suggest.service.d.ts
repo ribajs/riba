@@ -7,6 +7,7 @@ export declare class SuggestService {
     getNamespaces(): string[];
     ignore(ns: string, ignoreWords: string | string[]): void;
     reset(ns: string): void;
+    resetAll(): void;
     load(ns: string, corpus?: string | Dictionary, opts?: LoadOptions): void;
     addWord(ns: string, word: string, opts?: number | string | AddWordOptions): void;
     removeWord(ns: string, word: string, opts?: RemoveWordOptions): void;

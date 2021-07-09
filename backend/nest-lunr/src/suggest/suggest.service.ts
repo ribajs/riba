@@ -50,6 +50,13 @@ export class SuggestService {
     return suggest.reset();
   }
 
+  public resetAll() {
+    const namespaces = this.getNamespaces();
+    for (const ns of namespaces) {
+      this.reset(ns);
+    }
+  }
+
   public load(ns: string, corpus?: string | Dictionary, opts?: LoadOptions) {
     const suggest = this.get(ns);
     if (!suggest) {

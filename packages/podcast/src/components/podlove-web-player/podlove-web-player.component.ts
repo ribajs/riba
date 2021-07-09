@@ -37,7 +37,6 @@ export class PodloveWebPlayerComponent extends Component {
     super.connectedCallback();
     this.setLoadingClass(true);
     this.init(PodloveWebPlayerComponent.observedAttributes);
-    console.debug("connectedCallback");
   }
 
   protected disconnectedCallback() {
@@ -100,7 +99,6 @@ export class PodloveWebPlayerComponent extends Component {
   }
 
   protected async beforeBind() {
-    console.debug("beforeBind");
     await super.beforeBind();
     await this.maybeLoadPolyfills();
     await this.loadPlayer();

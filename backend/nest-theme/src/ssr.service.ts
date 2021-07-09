@@ -3,7 +3,8 @@ import { VirtualConsole, JSDOM } from 'jsdom';
 import * as Brakes from 'brakes';
 import { ConfigService } from '@nestjs/config';
 import { TemplateVars } from './types/template-vars';
-import { ThemeConfig, ErrorObj } from '@ribajs/ssr';
+import { ErrorObj } from '@ribajs/ssr';
+import type { FullThemeConfig } from './types/theme-config';
 import type { Request } from 'express';
 import fetch from 'node-fetch';
 import type { ComponentLifecycleEventData, SharedContext } from '@ribajs/ssr';
@@ -16,13 +17,13 @@ import { DummyConsole } from './helper/dummy-console';
 @Injectable()
 export class SsrService {
   log = new Logger(this.constructor.name);
-  theme: ThemeConfig;
+  theme: FullThemeConfig;
   constructor(
     config: ConfigService,
     protected readonly sourceFile: SourceFileService,
     protected readonly templateFile: TemplateFileService,
   ) {
-    this.theme = config.get<ThemeConfig>('theme');
+    this.theme = config.get<FullThemeConfig>('theme');
   }
 
   async getSharedContext(
@@ -73,7 +74,7 @@ export class SsrService {
       includeNodeLocations: true,
       beforeParse(window) {
         if (!window.fetch) {
-          window.fetch = fetch;
+          window.fetch = fetch as any;
         }
 
         if (!window.requestAnimationFrame) {

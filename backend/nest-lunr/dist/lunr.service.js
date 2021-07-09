@@ -181,6 +181,15 @@ let LunrService = LunrService_1 = class LunrService {
         }
         return builder.add(doc, attributes);
     }
+    delete(ns) {
+        this.builders[ns] = {};
+        this.data[ns] = [];
+    }
+    reset(ns) {
+        const options = this.getOptions(ns);
+        this.delete(ns);
+        this.create(ns, options);
+    }
     build(ns) {
         const builder = this.getBuilder(ns);
         if (!builder) {

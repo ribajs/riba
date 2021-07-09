@@ -16,8 +16,8 @@ export class SsrMiddleware implements NestMiddleware {
   theme: FullThemeConfig;
   log = new Logger(this.constructor.name);
   constructor(
-    protected config: ConfigService,
-    protected ssr: SsrService,
+    protected readonly config: ConfigService,
+    protected readonly ssr: SsrService,
     @Inject(CACHE_MANAGER) protected cacheManager: Cache,
   ) {
     this.theme = this.config.get<FullThemeConfig>('theme');
