@@ -25,6 +25,7 @@ import {
 import { resolve } from 'path';
 import { SourceFileService } from './source-file/source-file.service';
 import { TemplateFileService } from './template-file/template-file.service';
+import { RefreshCacheService } from './refresh-cache/refresh-cache.service';
 @Module({
   providers: [
     SsrService,
@@ -32,6 +33,7 @@ import { TemplateFileService } from './template-file/template-file.service';
     HttpExceptionFilterProvider,
     SourceFileService,
     TemplateFileService,
+    RefreshCacheService,
   ],
   controllers: [],
   exports: [SsrService, SsrMiddleware, SourceFileService],
@@ -59,12 +61,15 @@ export class ThemeModule {
     express.setBaseViewsDir(fullThemeConfig.viewsDir);
   }
 
-  static forRoot(nestThemeConfig: NestThemeConfig): DynamicModule {
+  static forRoot(
+    nestThemeConfig: NestThemeConfig,
+    env = process.env.NODE_ENV,
+  ): DynamicModule {
     const basePath = resolve(nestThemeConfig.themeDir, 'config');
-    const activeThemeConfig = loadConfig<ThemeConfig>([
-      resolve(basePath, 'theme.ts'),
-      resolve(basePath, 'theme.yaml'),
-    ]);
+    const activeThemeConfig = loadConfig<ThemeConfig>(
+      [resolve(basePath, 'theme.ts'), resolve(basePath, 'theme.yaml')],
+      env,
+    );
 
     validateThemeConfig(activeThemeConfig);
     validateNestThemeConfig(nestThemeConfig);

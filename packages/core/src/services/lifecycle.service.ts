@@ -12,7 +12,7 @@ import type {
  */
 export class LifecycleService {
   public events = EventDispatcher.getInstance("lifecycle");
-  public timeoutDelay = 3000;
+  public timeoutDelay = 5000; // TODO make this configurable
   protected debug = false;
   protected routerEvents = EventDispatcher.getInstance();
   protected timeout: number | null = null;

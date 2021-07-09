@@ -7,4 +7,5 @@ export * from "./module-options";
 export * from "./route";
 export * from "./shared-context";
 export * from "./template-engines";
+export * from "./theme-config-file";
 export * from "./theme-config";

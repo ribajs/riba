@@ -9,6 +9,6 @@ export declare class ThemeModule {
     protected config: ConfigService;
     protected ssrMiddleware: SsrMiddleware;
     constructor(adapterHost: HttpAdapterHost<ExpressAdapter>, config: ConfigService, ssrMiddleware: SsrMiddleware);
-    static forRoot(nestThemeConfig: NestThemeConfig): DynamicModule;
+    static forRoot(nestThemeConfig: NestThemeConfig, env?: string): DynamicModule;
     configure(consumer: MiddlewareConsumer): void;
 }

@@ -57,8 +57,9 @@ export const validateFullThemeConfig = (fullThemeConfig: FullThemeConfig) => {
  * Loads a pure TypeScript or yaml config file
  * TODO replace with config module in riba-nest-projects
  * @param configPath
+ * @param env environment, e.g. development or production
  */
-export const loadConfig = <T>(searchConfigPaths: string[]) => {
+export const loadConfig = <T>(searchConfigPaths: string[], env: string) => {
   for (const configPath of searchConfigPaths) {
     if (!existsSync(configPath)) {
       continue;
@@ -71,17 +72,18 @@ export const loadConfig = <T>(searchConfigPaths: string[]) => {
       };
       const context = {
         exports: {
-          themeConfig: {},
+          config: undefined,
         },
         require,
       };
       let jSource = transpileModule(tSource, { compilerOptions }).outputText;
       let script = new Script(jSource);
       script.runInNewContext(context);
-      const themeConfig: T = context.exports.themeConfig as T;
+      const themeConfig: T = context.exports.config(env) as any as T;
       script = null;
       jSource = null;
       tSource = null;
+      console.debug('Config loaded: ', themeConfig);
       return themeConfig;
     }
     // Parse yaml config file

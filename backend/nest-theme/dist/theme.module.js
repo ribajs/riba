@@ -22,6 +22,7 @@ const config_2 = require("./helper/config");
 const path_1 = require("path");
 const source_file_service_1 = require("./source-file/source-file.service");
 const template_file_service_1 = require("./template-file/template-file.service");
+const refresh_cache_service_1 = require("./refresh-cache/refresh-cache.service");
 let ThemeModule = ThemeModule_1 = class ThemeModule {
     constructor(adapterHost, config, ssrMiddleware) {
         this.adapterHost = adapterHost;
@@ -34,12 +35,9 @@ let ThemeModule = ThemeModule_1 = class ThemeModule {
         express.useStaticAssets(fullThemeConfig.assetsDir, {});
         express.setBaseViewsDir(fullThemeConfig.viewsDir);
     }
-    static forRoot(nestThemeConfig) {
+    static forRoot(nestThemeConfig, env = process.env.NODE_ENV) {
         const basePath = path_1.resolve(nestThemeConfig.themeDir, 'config');
-        const activeThemeConfig = config_2.loadConfig([
-            path_1.resolve(basePath, 'theme.ts'),
-            path_1.resolve(basePath, 'theme.yaml'),
-        ]);
+        const activeThemeConfig = config_2.loadConfig([path_1.resolve(basePath, 'theme.ts'), path_1.resolve(basePath, 'theme.yaml')], env);
         config_2.validateThemeConfig(activeThemeConfig);
         config_2.validateNestThemeConfig(nestThemeConfig);
         const fullThemeConfig = Object.assign(Object.assign(Object.assign({}, activeThemeConfig), nestThemeConfig), { basePath, templateVars: nestThemeConfig.templateVars || new empty_template_vars_1.EmptyTemplateVars(), assetsDir: path_1.resolve(nestThemeConfig.themeDir, activeThemeConfig.assetsDir), viewsDir: path_1.resolve(nestThemeConfig.themeDir, activeThemeConfig.viewsDir), pageComponentsDir: path_1.resolve(nestThemeConfig.themeDir, activeThemeConfig.pageComponentsDir || '') });
@@ -79,6 +77,7 @@ ThemeModule = ThemeModule_1 = __decorate([
             http_exception_filter_1.HttpExceptionFilterProvider,
             source_file_service_1.SourceFileService,
             template_file_service_1.TemplateFileService,
+            refresh_cache_service_1.RefreshCacheService,
         ],
         controllers: [],
         exports: [ssr_service_1.SsrService, ssr_middleware_1.SsrMiddleware, source_file_service_1.SourceFileService],
