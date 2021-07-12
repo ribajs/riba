@@ -35,7 +35,7 @@ export const parentBinder: Binder<any, BasicComponent> = {
     } else {
       console.warn(
         "[parentBinder] You can only use this binder on Riba components",
-        el.localName,
+        el.localName
       );
     }
   },

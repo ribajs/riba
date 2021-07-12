@@ -1,6 +1,6 @@
 import { Bindable, Binder } from "../types";
 import { View } from "../view";
-import { times } from "@ribajs/utils/src/control";
+import { times, camelCase } from "@ribajs/utils";
 
 /**
  * each-*
@@ -43,7 +43,7 @@ export const eachStarBinder: Binder<any[]> = {
       throw new Error("args is null");
     }
     let isObject = false;
-    const modelName = this.args[0] as string;
+    const modelName = camelCase(this.args[0].toString());
     collection = collection || [];
 
     // Transform object to array to iterate over
@@ -62,10 +62,9 @@ export const eachStarBinder: Binder<any[]> = {
 
     if (!Array.isArray(collection)) {
       throw new Error(
-        "each-" +
-          modelName +
-          " needs an array or object to iterate over, but it is " +
-          typeof collection
+        `each-${
+          this.args[0]
+        } needs an array or object to iterate over, but it is ${typeof collection}`
       );
     }
 
