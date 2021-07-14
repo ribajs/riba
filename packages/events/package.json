@@ -23,7 +23,7 @@
     "@babel/runtime-corejs3": "^7.14.7",
     "@ribajs/tsconfig": "workspace:*",
     "@types/jest": "^26.0.24",
-    "@types/node": "^16.3.0",
+    "@types/node": "^16.3.2",
     "babel-jest": "^27.0.6",
     "eslint": "^7.30.0",
     "jest": "^27.0.6",
