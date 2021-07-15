@@ -2,6 +2,10 @@ import { OpenGraphType } from "./open-graph-type";
 import { OpenGraphDeterminer } from "./open-graph-determiner";
 import { OpenGraphImage } from "./open-graph-image";
 import { OpenGraphVideo } from "./open-graph-video";
+import { OpenGraphAudio } from "./open-graph-audio";
+import { OpenGraphLocale } from "./open-graph-locale";
+import { OpenGraphBook } from "./open-graph-book";
+import { OpenGraphProfile } from "./open-graph-profile";
 
 export interface OpenGraph {
   // Basic
@@ -11,20 +15,12 @@ export interface OpenGraph {
   url: string;
 
   // Optional
-  audio?: string;
+  audio?: string | string[] | OpenGraphAudio | OpenGraphAudio[];
   description?: string;
   determiner?: OpenGraphDeterminer;
-  locale?: string;
-  /** og:locale:alternate */
-  localeAlternate?: string | string[];
+  locale?: string | OpenGraphLocale | OpenGraphLocale[];
   site_name?: string;
   video?: string | string[] | OpenGraphVideo | OpenGraphVideo[];
-
-  // Audio
-  /** Identical to og:audio. */
-  audioUrl?: string;
-  /** An alternate url to use if the webpage requires HTTPS. */
-  audioSecure_url?: string;
-  /** A MIME type for this audio. */
-  audioType?: string;
+  book?: OpenGraphBook;
+  profile?: OpenGraphProfile;
 }

@@ -1,8 +1,13 @@
-import { OpenGraph } from "../types/open-graph";
+import { OpenGraph, OpenGraphNamespaces } from "../types";
 
 export class OpenGraphService {
-  public static getHead() {
+  public static getHeadElement(): HTMLHeadElement {
     return document.head || document.getElementsByName("head")[0];
+  }
+
+  public static getHtmlElement(): HTMLHtmlElement {
+    return (document.body.parentNode ||
+      document.getElementsByName("html")[0]) as HTMLHtmlElement;
   }
 
   public static createMetaTags(data: OpenGraph, prefix = "og:") {
@@ -30,9 +35,42 @@ export class OpenGraphService {
 
   public static setMetaTags(data: OpenGraph) {
     const metaElements = this.createMetaTags(data);
-    const head = this.getHead();
+    const head = this.getHeadElement();
     for (const metaElement of metaElements) {
       head.appendChild(metaElement);
+    }
+  }
+
+  /**
+   * @example
+   *  <head prefix='og: https://ogp.me/ns# fb: https://ogp.me/ns/fb# website: https://ogp.me/ns/website#'>
+   **/
+  public static setNamespaces(namespaces: OpenGraphNamespaces) {
+    const htmlEl = this.getHtmlElement();
+    let prefixStr = "";
+    for (const prefix of Object.keys(namespaces)) {
+      const ns = namespaces[prefix];
+      if (prefixStr) {
+        prefixStr += " ";
+      }
+      prefixStr += `${prefix}: ${ns}`;
+    }
+    htmlEl.setAttribute("prefix", prefixStr);
+  }
+
+  public static setLocale(locale: string) {
+    const htmlEl = this.getHtmlElement();
+    htmlEl.setAttribute("lang", locale);
+  }
+
+  public static set(
+    data: OpenGraph,
+    namespaces: OpenGraphNamespaces = { og: "https://ogp.me/ns#" }
+  ) {
+    this.setNamespaces(namespaces);
+    this.setMetaTags(data);
+    if (typeof data.locale === "string") {
+      this.setLocale(data.locale);
     }
   }
 }
