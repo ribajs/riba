@@ -118,7 +118,6 @@ let SsrService = class SsrService {
             };
             const clear = () => {
                 var _a, _b, _c, _d, _e;
-                console.debug('Clear JSDom');
                 virtualConsole.sendTo(new dummy_console_1.DummyConsole());
                 virtualConsole.off('jsdomError', onError);
                 sharedContext.events.off('error', onError, this);
