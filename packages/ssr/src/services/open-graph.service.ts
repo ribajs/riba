@@ -19,9 +19,9 @@ export class OpenGraphService {
     const metaElements: HTMLMetaElement[] = [];
     const properties = Object.keys(data) as OpenGraphProperty[];
     for (const property of properties) {
-      const contents = Array.isArray((data as any)[property])
-        ? (data[property] as OpenGraphProperty[])
-        : [data[property]];
+      const contents = (Array.isArray((data as any)[property])
+        ? (data as any)[property]
+        : [(data as any)[property]]) as unknown as OpenGraphTree[];
 
       for (const content of contents) {
         if (typeof content === "object") {

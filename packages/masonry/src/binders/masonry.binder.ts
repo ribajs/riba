@@ -53,6 +53,7 @@ export const masonryBinder: Binder<Options> = {
     // On new router page
     const routerEvents = new EventDispatcher("main");
     routerEvents.on("newPageReady", this.customData.layout, this);
+    routerEvents.on("transitionCompleted", this.customData.layout, this);
 
     this.customData.layout();
   },
@@ -86,7 +87,7 @@ export const masonryBinder: Binder<Options> = {
     // Detect image changes
     this.customData.images.forEach((img: HTMLImageElement) => {
       // Image loaded
-      img.onload?.(this.customData.layout);
+      img.addEventListener("load", this.customData.layout, { once: true });
       // Image size changed
       this.customData.resizeObserver?.observe(img);
     });
