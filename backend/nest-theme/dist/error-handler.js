@@ -3,10 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.handleError = exports.getStack = exports.getMessage = exports.getStatus = void 0;
 const common_1 = require("@nestjs/common");
 const getStatus = (exception) => {
-    const status = exception instanceof common_1.HttpException
-        ? exception.getStatus()
-        : common_1.HttpStatus.INTERNAL_SERVER_ERROR;
-    return status;
+    if (exception instanceof common_1.HttpException) {
+        return exception.getStatus();
+    }
+    if (typeof exception !== 'string' && exception.status) {
+        return exception.status;
+    }
+    return common_1.HttpStatus.INTERNAL_SERVER_ERROR;
 };
 exports.getStatus = getStatus;
 const getMessage = (exception) => {

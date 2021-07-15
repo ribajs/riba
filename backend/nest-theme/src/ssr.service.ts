@@ -1,6 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { VirtualConsole, JSDOM } from 'jsdom';
-import * as Brakes from 'brakes';
 import { ConfigService } from '@nestjs/config';
 import { TemplateVars } from './types/template-vars';
 import { ErrorObj } from '@ribajs/ssr';
@@ -13,6 +12,7 @@ import { EventDispatcher } from '@ribajs/events';
 import { SourceFileService } from './source-file/source-file.service';
 import { TemplateFileService } from './template-file/template-file.service';
 import { DummyConsole } from './helper/dummy-console';
+import { ResponseError } from './types';
 
 @Injectable()
 export class SsrService {
@@ -201,10 +201,13 @@ export class SsrService {
     return renderResult;
   }
 
-  protected transformBrowserError(error: Error | ErrorEvent) {
+  protected transformBrowserError(error: ResponseError | ErrorEvent) {
     const newError = new Error(error.message);
     if ((error as Error).stack) {
       newError.stack = (error as Error).stack;
+    }
+    if ((error as ResponseError).status) {
+      (newError as ResponseError).status = (error as ResponseError).status;
     }
     return newError;
   }
@@ -235,16 +238,7 @@ export class SsrService {
     );
 
     try {
-      const _render = async () => {
-        return this.render(template.layout, sharedContext);
-      };
-
-      // https://github.com/awolden/brakes
-      const render = new Brakes(_render, {
-        timeout: this.theme.timeout || 10000,
-      });
-      const renderData = await render.exec();
-      return renderData;
+      return await this.render(template.layout, sharedContext);
     } catch (error) {
       this.log.error(`Error on render component! rootTag: "${rootTag}"`);
       this.log.error(error);

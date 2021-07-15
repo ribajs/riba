@@ -9,6 +9,7 @@ import type { SharedContext } from '@ribajs/ssr';
 import type { RenderResult } from './types';
 import { SourceFileService } from './source-file/source-file.service';
 import { TemplateFileService } from './template-file/template-file.service';
+import { ResponseError } from './types';
 export declare class SsrService {
     protected readonly sourceFile: SourceFileService;
     protected readonly templateFile: TemplateFileService;
@@ -21,7 +22,7 @@ export declare class SsrService {
         virtualConsole: VirtualConsole;
     }>;
     render(layout: string, sharedContext: SharedContext, scriptFilenames?: string[]): Promise<RenderResult>;
-    protected transformBrowserError(error: Error | ErrorEvent): Error;
+    protected transformBrowserError(error: ResponseError | ErrorEvent): Error;
     renderComponent({ templatePath, rootTag, componentTagName, sharedContext, }: {
         templatePath?: string;
         rootTag?: string;

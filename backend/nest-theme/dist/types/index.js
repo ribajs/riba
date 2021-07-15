@@ -13,4 +13,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./render-result"), exports);
 __exportStar(require("./template-vars"), exports);
 __exportStar(require("./theme-config"), exports);
+__exportStar(require("./response-error"), exports);
 //# sourceMappingURL=index.js.map
