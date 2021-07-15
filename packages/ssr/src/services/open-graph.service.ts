@@ -1,4 +1,9 @@
-import { OpenGraph, OpenGraphNamespaces } from "../types";
+import {
+  OpenGraphTree,
+  OpenGraph,
+  OpenGraphProperty,
+  OpenGraphNamespaces,
+} from "../types";
 
 export class OpenGraphService {
   public static getHeadElement(): HTMLHeadElement {
@@ -10,11 +15,12 @@ export class OpenGraphService {
       document.getElementsByName("html")[0]) as HTMLHtmlElement;
   }
 
-  public static createMetaTags(data: OpenGraph, prefix = "og:") {
+  public static createMetaTags(data: OpenGraphTree, prefix = "og:") {
     const metaElements: HTMLMetaElement[] = [];
-    for (const property of Object.keys(data)) {
-      const contents: any[] = Array.isArray(data[property])
-        ? data[property]
+    const properties = Object.keys(data) as OpenGraphProperty[];
+    for (const property of properties) {
+      const contents = Array.isArray((data as any)[property])
+        ? (data[property] as OpenGraphProperty[])
         : [data[property]];
 
       for (const content of contents) {
@@ -33,7 +39,7 @@ export class OpenGraphService {
     return metaElements;
   }
 
-  public static setMetaTags(data: OpenGraph) {
+  public static setMetaTags(data: OpenGraphTree) {
     const metaElements = this.createMetaTags(data);
     const head = this.getHeadElement();
     for (const metaElement of metaElements) {
@@ -64,13 +70,13 @@ export class OpenGraphService {
   }
 
   public static set(
-    data: OpenGraph,
+    data: OpenGraphTree,
     namespaces: OpenGraphNamespaces = { og: "https://ogp.me/ns#" }
   ) {
     this.setNamespaces(namespaces);
     this.setMetaTags(data);
-    if (typeof data.locale === "string") {
-      this.setLocale(data.locale);
+    if (typeof (data as OpenGraph).locale === "string") {
+      this.setLocale((data as OpenGraph).locale as string);
     }
   }
 }
