@@ -76,7 +76,7 @@
   "dependencies": {
     "@ribajs/core": "workspace:*",
     "@ribajs/utils": "workspace:*",
-    "monaco-editor": "^0.25.2"
+    "monaco-editor": "^0.26.1"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

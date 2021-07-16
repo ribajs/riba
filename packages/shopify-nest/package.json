@@ -21,7 +21,7 @@
     "@ribajs/utils": "workspace:*",
     "@types/debug": "^4.1.6",
     "debug": "^4.3.2",
-    "monaco-editor": "^0.25.2"
+    "monaco-editor": "^0.26.1"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",
