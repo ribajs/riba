@@ -45,6 +45,7 @@
     "@babel/runtime-corejs3": "^7.14.7",
     "@ribajs/eslint-config": "workspace:*",
     "@ribajs/tsconfig": "workspace:*",
+    "@types/imagesloaded": "^4.1.2",
     "@types/jest": "^26.0.24",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
@@ -65,7 +66,8 @@
   "dependencies": {
     "@ribajs/core": "workspace:*",
     "@ribajs/events": "workspace:*",
-    "@ribajs/utils": "workspace:*"
+    "@ribajs/utils": "workspace:*",
+    "imagesloaded": "^4.1.4"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

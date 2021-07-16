@@ -10,8 +10,10 @@ import { EventDispatcher } from "@ribajs/events";
  * see the original documentation for the options
  * @see https://masonry.desandro.com/options.html
  *
+ * If you want to order images with this binder you should use this binder together with the image-events binder (imageEventsBinder) from the @ribajs/extras module
+ *
  * @example
- * <div class="grid" rv-masonry='{ "columnWidth": 200, "itemSelector": ".grid-item" }'>
+ * <div class="grid" rv-image-events rv-masonry='{ "columnWidth": 200, "itemSelector": ".grid-item" }'>
  */
 export const masonryBinder: Binder<Options> = {
   name: "masonry",
@@ -87,7 +89,11 @@ export const masonryBinder: Binder<Options> = {
     // Detect image changes
     this.customData.images.forEach((img: HTMLImageElement) => {
       // Image loaded
-      img.addEventListener("load", this.customData.layout, { once: true });
+      img.addEventListener("load", this.customData.layout);
+      img.addEventListener("load-always", () => {
+        console.debug("load-always");
+        this.customData.layout();
+      });
       // Image size changed
       this.customData.resizeObserver?.observe(img);
     });

@@ -5713,6 +5713,7 @@ __metadata:
     "@ribajs/events": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
+    "@types/imagesloaded": ^4.1.2
     "@types/jest": ^26.0.24
     "@typescript-eslint/eslint-plugin": ^4.28.3
     "@typescript-eslint/parser": ^4.28.3
@@ -5722,6 +5723,7 @@ __metadata:
     eslint: ^7.30.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^3.4.0
+    imagesloaded: ^4.1.4
     jest: ^27.0.6
     jest-extended: ^0.11.5
     prettier: 2.3.2
@@ -7376,6 +7378,15 @@ __metadata:
   version: 4.0.0
   resolution: "@types/http-cache-semantics@npm:4.0.0"
   checksum: e16fae56d4daea4ed678b4d5918b693b44ca12fb5e479b87d242d3a35bf3a014974dcf9ed7aba7e29149fdb6c3719f9987fca51b20ef10aa84b58f86553c2f74
+  languageName: node
+  linkType: hard
+
+"@types/imagesloaded@npm:^4.1.2":
+  version: 4.1.2
+  resolution: "@types/imagesloaded@npm:4.1.2"
+  dependencies:
+    "@types/jquery": "*"
+  checksum: 7f2a72ef6648089b35e3e8336687a5b0d8a84c73253e6f17db45b3c600353e79ed149e9e4d199087efe492578771ac0f6ebf353b1f813c191687d0127b5cf305
   languageName: node
   linkType: hard
 
@@ -14966,6 +14977,15 @@ fsevents@~2.3.1:
   version: 5.1.8
   resolution: "ignore@npm:5.1.8"
   checksum: b08e3d5b5d94eca13475f29a5d47d221060e9cdd7e38d7647088e29d90130669a970fecbc4cdb41b8fa295c6673740c729d3dc05dadc381f593efb42282cbf9f
+  languageName: node
+  linkType: hard
+
+"imagesloaded@npm:^4.1.4":
+  version: 4.1.4
+  resolution: "imagesloaded@npm:4.1.4"
+  dependencies:
+    ev-emitter: ^1.0.0
+  checksum: f7542689485c6a9355f139e87af9511a718e68e79cba83154560f356d0b2a333c998ccd0140d9a2d0adbd3deb807ce1de5935fcfe2d0e3216641ddaed267a31d
   languageName: node
   linkType: hard
 
