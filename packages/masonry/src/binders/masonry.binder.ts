@@ -88,12 +88,10 @@ export const masonryBinder: Binder<Options> = {
 
     // Detect image changes
     this.customData.images.forEach((img: HTMLImageElement) => {
-      // Image loaded
+      // Default vanilla image loaded event
       img.addEventListener("load", this.customData.layout);
-      img.addEventListener("load-always", () => {
-        console.debug("load-always");
-        this.customData.layout();
-      });
+      // Additional event from images-events binder
+      img.addEventListener("load-always", this.customData.layout);
       // Image size changed
       this.customData.resizeObserver?.observe(img);
     });

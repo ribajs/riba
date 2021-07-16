@@ -17,11 +17,8 @@ export const imageEventsBinder: Binder<string> = {
     }
     const events = imagesLoaded(el);
 
-    console.debug("[imageEventsBinder] bind");
-
     // Forward the events as native events
     events.on("always", (load, image) => {
-      console.debug("[imageEventsBinder] always");
       el.dispatchEvent(
         new CustomEvent("load-always", {
           detail: { load, image },
@@ -30,7 +27,6 @@ export const imageEventsBinder: Binder<string> = {
     });
 
     events.on("done", (load, image) => {
-      console.debug("[imageEventsBinder] done");
       el.dispatchEvent(
         new CustomEvent("load-done", {
           detail: { load, image },
@@ -39,7 +35,6 @@ export const imageEventsBinder: Binder<string> = {
     });
 
     events.on("fail", (load, image) => {
-      console.debug("[imageEventsBinder] fail");
       el.dispatchEvent(
         new CustomEvent("load-fail", {
           detail: { load, image },
@@ -48,7 +43,6 @@ export const imageEventsBinder: Binder<string> = {
     });
 
     events.on("progress", (load, image) => {
-      console.debug("[imageEventsBinder] progress");
       el.dispatchEvent(
         new CustomEvent("load-progress", {
           detail: { load, image },
