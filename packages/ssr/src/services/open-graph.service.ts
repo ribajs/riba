@@ -15,7 +15,7 @@ export class OpenGraphService {
       document.getElementsByName("html")[0]) as HTMLHtmlElement;
   }
 
-  public static createMetaTags(data: OpenGraphTree, prefix = "og:") {
+  public static createMetaTags(data: OpenGraphTree, prefix = "og") {
     const metaElements: HTMLMetaElement[] = [];
     const properties = Object.keys(data) as OpenGraphProperty[];
     for (const property of properties) {
@@ -30,7 +30,11 @@ export class OpenGraphService {
           );
         } else {
           const meta = document.createElement("meta");
-          meta.setAttribute("property", `${prefix}${property}`);
+          if (prefix === "og:image" && property === "url") {
+            meta.setAttribute("property", `og:image`);
+          } else {
+            meta.setAttribute("property", `${prefix}:${property}`);
+          }
           meta.setAttribute("content", content);
           metaElements.push(meta);
         }
