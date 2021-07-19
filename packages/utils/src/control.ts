@@ -28,12 +28,14 @@ export const deferred = () => {
 
 /**
  * The debounce function receives our function as a parameter
- * It is recommended to use this method for scroll events, but the event should still be passive
+ * It is recommended to use this method for scroll events, but the event should still be passive.
+ * In the debouncing technique, no matter how many times the user fires the event,
+ * the attached function will be executed only after the specified time once the user stops firing the event.
  * This method uses internally the requestAnimationFrame method
  * @see https://css-tricks.com/styling-based-on-scroll-position/
  * @see https://www.telerik.com/blogs/debouncing-and-throttling-in-javascript
  */
-export const debounce = (fn: (this: any, ...params: any) => any) => {
+export const debounce = (fn: (...params: any) => any) => {
   // This holds the requestAnimationFrame reference, so we can cancel it if we wish
   let frame: number | null = null;
   let resolve: (val: any) => any, reject: (error: Error) => void;
@@ -43,7 +45,7 @@ export const debounce = (fn: (this: any, ...params: any) => any) => {
   });
 
   // The debounce function returns a new function that can receive a variable number of arguments
-  return function (this: any, ...params: any) {
+  return (...params: any) => {
     // If the frame variable has been defined, clear it now, and queue for next frame
     if (frame) {
       cancelAnimationFrame(frame);
@@ -53,7 +55,7 @@ export const debounce = (fn: (this: any, ...params: any) => any) => {
     frame = window.requestAnimationFrame(() => {
       // Call our function and pass any params we received
       try {
-        resolve(fn.call(this, ...params));
+        resolve(fn(...params));
       } catch (error) {
         reject(error);
       }
@@ -72,14 +74,12 @@ export const debounce = (fn: (this: any, ...params: any) => any) => {
 /**
  * The throttle function receives our function as a parameter
  * It is recommended to use this method for resize events
- * Throttling is a technique in which, no matter how many times the user fires the event, the attached function will be executed only once in a given time interval.
+ * Throttling is a technique in which, no matter how many times the user fires the event,
+ * the attached function will be executed only once in a given time interval.
  * @see https://www.telerik.com/blogs/debouncing-and-throttling-in-javascript
  * @see https://gist.github.com/peduarte/969217eac456538789e8fac8f45143b4
  */
-export const throttle = function (
-  fn: (this: any, ...params: any[]) => any,
-  wait = 100
-) {
+export const throttle = (fn: (...params: any[]) => any, wait = 100) => {
   let timerId: number | null = null;
   let resolve: (val: any) => any, reject: (error: Error) => void;
   let promise = new Promise((res, rej) => {
@@ -87,7 +87,7 @@ export const throttle = function (
     reject = rej;
   });
 
-  return function (this: any, ...params: any[]) {
+  return (...params: any[]) => {
     if (timerId === null) {
       timerId = window.setTimeout(() => {
         // reset timerId and initialize new promise for next call
@@ -98,7 +98,7 @@ export const throttle = function (
         });
       }, wait);
       try {
-        resolve(fn.call(this, ...params));
+        resolve(fn(...params));
       } catch (error) {
         reject(error);
       }
