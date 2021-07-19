@@ -29,7 +29,7 @@ export const toggleCollapseOnEventBinder: Binder<string> = {
       throw new Error("args is null");
     }
     const eventName = this.args[0] as string;
-    el.addEventListener(eventName, this.customData.onEvent);
+    el.addEventListener(eventName, this.customData.onEvent, { passive: true });
   },
   unbind() {
     const eventName = this.args[0] as string;

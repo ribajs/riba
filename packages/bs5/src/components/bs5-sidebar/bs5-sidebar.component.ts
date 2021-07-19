@@ -8,7 +8,7 @@ import {
   getViewportDimensions,
   hasChildNodesTrim,
 } from "@ribajs/utils/src/dom";
-import { throttle } from "@ribajs/utils/src/control";
+import { debounce } from "@ribajs/utils/src/control";
 
 interface Scope {
   // Template properties
@@ -352,7 +352,7 @@ export class Bs5SidebarComponent extends Component {
   }
 
   /**
-   * Internal "unthrottled" version of `onEnvironmentChanges`.
+   * Internal "undebounced" version of `onEnvironmentChanges`.
    */
   protected _onEnvironmentChanges() {
     this.setStateByEnvironment();
@@ -361,7 +361,7 @@ export class Bs5SidebarComponent extends Component {
   /**
    * If viewport size changes, location url changes or something else.
    */
-  protected onEnvironmentChanges = throttle(
+  protected onEnvironmentChanges = debounce(
     this._onEnvironmentChanges.bind(this)
   );
 

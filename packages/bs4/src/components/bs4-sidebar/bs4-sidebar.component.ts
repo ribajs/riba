@@ -5,7 +5,7 @@ import {
   hasChildNodesTrim,
 } from "@ribajs/utils/src/dom";
 import { TOGGLE_BUTTON } from "../../constants";
-import { throttle } from "@ribajs/utils/src/control";
+import { debounce } from "@ribajs/utils/src/control";
 
 type State =
   | "overlay-left"
@@ -295,7 +295,7 @@ export class Bs4SidebarComponent extends Component {
   }
 
   /**
-   * Internal "unthrottled" version of `onEnvironmentChanges`.
+   * Internal "undebounced" version of `onEnvironmentChanges`.
    */
   protected _onEnvironmentChanges() {
     this.setStateByEnvironment();
@@ -304,7 +304,7 @@ export class Bs4SidebarComponent extends Component {
   /**
    * If viewport size changes, location url changes or something else.
    */
-  protected onEnvironmentChanges = throttle(
+  protected onEnvironmentChanges = debounce(
     this._onEnvironmentChanges.bind(this)
   );
 

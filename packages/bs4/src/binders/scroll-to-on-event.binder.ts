@@ -18,7 +18,7 @@ export const scrollToOnEventBinder: Binder<string> = {
     };
     this.customData.onEvent = this.customData.onEvent.bind(this);
     const eventName = this.args[0] as string;
-    el.addEventListener(eventName, this.customData.onEvent);
+    el.addEventListener(eventName, this.customData.onEvent, { passive: true });
   },
   routine(el: HTMLUnknownElement, targetSelector: string) {
     this.customData.target = document.querySelector(targetSelector);

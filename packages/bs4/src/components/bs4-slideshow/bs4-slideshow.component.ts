@@ -1,7 +1,7 @@
 import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { clone, camelCase } from "@ribajs/utils/src/type";
-import { throttle } from "@ribajs/utils/src/control";
+import { throttle, debounce } from "@ribajs/utils/src/control";
 import { TemplateFunction, TemplatesComponent } from "@ribajs/core";
 
 import {
@@ -698,7 +698,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     }
   }
 
-  protected onViewChanges = throttle(this._onViewChanges.bind(this));
+  protected onViewChanges = debounce(this._onViewChanges.bind(this));
 
   protected onVisibilityChanged(event: CustomEvent) {
     if (event.detail.visible) {
@@ -713,7 +713,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     this.resume(1000);
   }
 
-  protected onScroll = throttle(this._onScroll.bind(this));
+  protected onScroll = debounce(this._onScroll.bind(this));
 
   protected onScrollend() {
     this.setSlidePositions();

@@ -3,7 +3,7 @@ import { EventDispatcher } from "@ribajs/events";
 import { Breakpoint } from "@ribajs/bs5";
 import { hasChildNodesTrim, scrollTo } from "@ribajs/utils/src/dom";
 import { clone, camelCase } from "@ribajs/utils/src/type";
-import { throttle } from "@ribajs/utils/src/control";
+import { throttle, debounce } from "@ribajs/utils/src/control";
 import { Bs5Service } from "../../services";
 import {
   SlideshowSlide,
@@ -531,7 +531,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     }
   }
 
-  protected onViewChanges = throttle(this._onViewChanges.bind(this));
+  protected onViewChanges = debounce(this._onViewChanges.bind(this));
 
   protected onVisibilityChanged(event: CustomEvent) {
     if (event.detail.visible) {
@@ -544,7 +544,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     //
   }
 
-  protected onScroll = throttle(this._onScroll.bind(this));
+  protected onScroll = debounce(this._onScroll.bind(this));
 
   protected onScrollend() {
     if (!this.scope.items?.length) {

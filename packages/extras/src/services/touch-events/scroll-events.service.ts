@@ -1,7 +1,7 @@
 import { ScrollPosition } from "../../types";
 import { getScrollPosition } from "../../helper/scroll";
 import { BaseTouchEventsService } from "./base-touch-events.service";
-import { throttle } from "@ribajs/utils/src/control";
+import { debounce } from "@ribajs/utils/src/control";
 
 export class ScrollEventsService extends BaseTouchEventsService {
   public isScrolling = false;
@@ -144,5 +144,5 @@ export class ScrollEventsService extends BaseTouchEventsService {
     });
   }
 
-  protected scroll = throttle(this._scroll.bind(this), 100);
+  protected scroll = debounce(this._scroll.bind(this));
 }
