@@ -17,7 +17,7 @@ export const ifBinder: Binder<boolean> = {
         " riba: " + this.type + " " + this.keypath + " "
       );
       this.customData.attached = false;
-      if (!el.parentNode) {
+      if (!el.parentNode?.insertBefore) {
         // console.warn('Element has no parent node');
       } else {
         el.parentNode.insertBefore(this.marker, el);

@@ -121,13 +121,16 @@ export const eachStarBinder: Binder<any[]> = {
           }
           if (matchIndex !== undefined) {
             // model is in other position
-            // todo: consider avoiding the splice here by setting a flag
+            // TODO: consider avoiding the splice here by setting a flag
             // profile performance before implementing such change
             this.customData.iterated.splice(matchIndex, 1);
-            if (!this.marker || !this.marker.parentNode) {
+            if (!this.marker || !this.marker.parentNode?.insertBefore) {
               throw new Error("Marker has no parent node");
             }
-            this.marker.parentNode.insertBefore(nextView.els[0], view.els[0]);
+            if (nextView.els[0] && view.els[0]) {
+              this.marker.parentNode.insertBefore(nextView.els[0], view.els[0]);
+            }
+
             nextView.models[indexProp] = index;
           } else {
             // new model
