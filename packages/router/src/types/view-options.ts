@@ -1,4 +1,4 @@
-import type { Transition } from "../interfaces";
+import type { Transition } from ".";
 
 /**
  * @depricated Use RouterViewOptions instead

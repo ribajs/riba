@@ -8,13 +8,14 @@ import {
   getPort,
   normalizeUrl,
   getUrl,
-} from "@ribajs/utils/src/url";
-import { isBoolean } from "@ribajs/utils/src/type";
-import { getElementFromEvent, getDataset } from "@ribajs/utils/src/dom";
+  isBoolean,
+  getElementFromEvent,
+  getDataset,
+} from "@ribajs/utils";
 
 import { BaseCache } from "@ribajs/cache";
 import { HideShowTransition } from "../Transition";
-import { Transition, Response, PjaxOptions } from "../../interfaces";
+import { Transition, Response, PjaxOptions } from "../../types";
 import { Dom } from "./Dom";
 import { HistoryManager } from "@ribajs/history";
 import { ROUTE_ERROR_CLASS, IGNORE_CLASS_LINK } from "../../constants";
@@ -390,10 +391,15 @@ class Pjax {
    */
   public async loadCached(url: string): Promise<HTMLElement> {
     try {
-      const response = await this.loadResponseCached(url, false, true);
+      const { responsePromise } = await this.loadResponseCached(
+        url,
+        false,
+        true
+      );
       if (!this.wrapper) {
         throw new Error("[Pjax] you need a wrapper!");
       }
+      const response = await responsePromise;
       Dom.putContainer(response.container, this.wrapper);
       if (this.parseTitle === true && response.title) {
         document.title = response.title;
@@ -422,19 +428,20 @@ class Pjax {
     forceCache = false,
     fallback = true
   ) {
-    let response: Promise<Response>;
-    if (this.cacheEnabled) {
-      const response = await Pjax.cache.get(url);
-      if (response) {
-        return response;
-      }
-    }
-
+    let responsePromise: Promise<Response> | undefined;
     try {
-      response = this.loadResponse(url, forceCache);
-
-      if (this.cacheEnabled && response) {
-        Pjax.cache.set(url, response);
+      if (this.cacheEnabled) {
+        responsePromise = Pjax.cache.get(url);
+        if (responsePromise) {
+          return {
+            fromCache: true,
+            responsePromise,
+          };
+        }
+      }
+      responsePromise = this.loadResponse(url, forceCache);
+      if (this.cacheEnabled && responsePromise) {
+        Pjax.cache.set(url, responsePromise);
       } else {
         // Pjax.cache.reset();
       }
@@ -446,7 +453,10 @@ class Pjax {
       throw error;
     }
 
-    return response;
+    return {
+      fromCache: false,
+      responsePromise,
+    };
   }
 
   /**
@@ -565,7 +575,7 @@ class Pjax {
   /**
    * Method called after a 'popstate' or from .goTo()
    */
-  protected onStateChange(
+  protected async onStateChange(
     event?: Event,
     newUrl: string = this.getCurrentUrl()
   ) {
@@ -588,17 +598,18 @@ class Pjax {
     );
 
     const oldContainer = Dom.getContainer(document, this.containerSelector);
-    const newContainer = this.loadCached(newUrl);
+    const newContainerPromise = this.loadCached(newUrl);
 
     const transition = this.getTransition();
 
     this.transitionProgress = true;
 
-    const transitionInstance = transition.init(oldContainer, newContainer);
+    const transitionResult = transition.init(oldContainer, newContainerPromise);
 
-    newContainer.then(this.onNewContainerLoaded.bind(this));
+    this.onNewContainerLoaded(await newContainerPromise);
 
-    transitionInstance.then(this.onTransitionEnd.bind(this));
+    await transitionResult;
+    this.onTransitionEnd();
   }
 
   /**

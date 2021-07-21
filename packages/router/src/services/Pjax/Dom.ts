@@ -1,4 +1,4 @@
-import { Response } from "../../interfaces/response";
+import { Response } from "../../types/response";
 
 /**
  * Object that is going to deal with DOM parsing/manipulation

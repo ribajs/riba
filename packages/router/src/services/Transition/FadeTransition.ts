@@ -8,14 +8,12 @@ import { scrollToPosition } from "@ribajs/utils";
  *
  * @private
  */
-export class HideShowTransition extends BaseTransition implements Transition {
-  protected action: "replace" | "append";
-
+export class FadeTransition extends BaseTransition implements Transition {
   protected scrollToTop: boolean;
+  protected durationMs = 200;
 
-  constructor(action: "replace" | "append" = "replace", scrollToTop = true) {
-    super(action);
-    this.action = action;
+  constructor(scrollToTop = true) {
+    super("replace");
     this.scrollToTop = scrollToTop;
   }
 
@@ -23,17 +21,30 @@ export class HideShowTransition extends BaseTransition implements Transition {
     if (!this.newContainerLoading) {
       throw new Error("this.newContainerLoading is not set");
     }
+
+    if (this.oldContainer) {
+      this.oldContainer.style.transition = `opacity ${this.durationMs}ms`;
+      this.oldContainer.style.opacity = "0";
+    }
+
     if (this.scrollToTop) {
       await scrollToPosition(window, "start", "vertical", "smooth");
     }
 
-    await this.newContainerLoading;
+    const newContainer = await this.newContainerLoading;
 
-    await this.finish();
+    newContainer.style.opacity = "0";
+    newContainer.style.transition = `opacity ${this.durationMs}ms`;
+
+    setTimeout(() => {
+      this.finish(newContainer);
+    }, this.durationMs);
+
     return;
   }
 
-  public async finish() {
+  public async finish(newContainer: HTMLElement) {
+    newContainer.style.opacity = "1";
     return this.done();
   }
 }

@@ -36,7 +36,6 @@ export const scrollPositionAngleBinder: Binder<number | "end" | "start"> = {
     window.addEventListener(
       "resize",
       () => {
-        // console.log("resize", el, position, angle);
         scrollToPosition(
           el,
           position,

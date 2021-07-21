@@ -30,8 +30,11 @@ export class OpenGraphService {
           );
         } else {
           const meta = document.createElement("meta");
-          if (prefix === "og:image" && property === "url") {
-            meta.setAttribute("property", `og:image`);
+          if (
+            (prefix === "og:image" || prefix === "og:audio") &&
+            property === "url"
+          ) {
+            meta.setAttribute("property", prefix);
           } else {
             meta.setAttribute("property", `${prefix}:${property}`);
           }

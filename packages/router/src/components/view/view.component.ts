@@ -2,8 +2,8 @@ import { Component, View, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { scrollTo } from "@ribajs/utils/src/dom";
 import { State } from "@ribajs/history";
-import { Pjax, Prefetch, HideShowTransition } from "../../services";
-import type { RouterViewOptions, PjaxOptions } from "../../interfaces";
+import { Pjax, Prefetch, RouterService } from "../../services";
+import type { RouterViewOptions, PjaxOptions } from "../../types";
 
 export interface Scope extends RouterViewOptions {
   dataset: any;
@@ -44,7 +44,7 @@ export class RouterViewComponent extends Component {
     parseTitle: true,
     changeBrowserUrl: true,
     prefetchLinks: true,
-    transition: new HideShowTransition("replace", true),
+    transition: RouterService.options.defaultTransition,
     dataset: {},
   };
 
@@ -134,24 +134,29 @@ export class RouterViewComponent extends Component {
     this.view.bind();
   }
 
-  protected onTransitionCompleted(viewId: string) {
+  protected async onTransitionCompleted(viewId: string) {
+    console.debug("onTransitionCompleted");
     // Only to anything if the viewID is equal (in this way it is possible to have multiple views)
     if (viewId !== this.scope.id) {
       return;
     }
 
-    // scroll to Anchor of hash
-    if (this.scope.scrollToAnchorHash && window.location.hash) {
-      const scrollToMe = document.getElementById(
-        window.location.hash.substr(1)
-      );
-      if (scrollToMe) {
-        return new Promise((resolve) => {
-          resolve(scrollTo(scrollToMe, 0, window));
-        });
+    if (this.scope.scrollToTop || this.scope.scrollToAnchorHash) {
+      let scrollToElement: HTMLElement | null = null;
+      const hash = window.location.hash.substr(1);
+      if (hash) {
+        scrollToElement = document.getElementById(
+          window.location.hash.substr(1)
+        );
+      }
+
+      // Scroll to Anchor of hash
+      if (this.scope.scrollToAnchorHash && hash && scrollToElement) {
+        return await scrollTo(scrollToElement, 0, window);
       }
     }
-    return Promise.resolve();
+
+    return;
   }
 
   protected requiredAttributes(): string[] {

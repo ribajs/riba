@@ -1,5 +1,5 @@
-import { deferred } from "@ribajs/utils/src/control";
-import { Transition } from "../../interfaces/transition";
+import { deferred } from "@ribajs/utils";
+import { Transition } from "../../types/transition";
 
 /**
  * BaseTransition to extend
@@ -11,7 +11,7 @@ export abstract class BaseTransition implements Transition {
 
   protected newContainerLoading?: Promise<HTMLElement>;
 
-  protected deferred: any; // TODO type
+  protected deferred = deferred();
 
   protected action: "replace" | "append";
 
@@ -24,31 +24,27 @@ export abstract class BaseTransition implements Transition {
    * the transition.
    *
    */
-  public init(
+  public async init(
     oldContainer: HTMLElement,
     newContainer: Promise<HTMLElement>
   ): Promise<void> {
     this.oldContainer = oldContainer;
 
     this.deferred = deferred();
-    const newContainerReady = deferred();
-    this.newContainerLoading = newContainerReady.promise;
+    const newContainerLoading = deferred();
+    this.newContainerLoading = newContainerLoading.promise;
 
     this.start();
 
-    newContainer.then((_newContainer: HTMLElement) => {
-      this.newContainer = _newContainer;
-      newContainerReady.resolve();
-    });
-
+    this.newContainer = await newContainer;
+    newContainerLoading.resolve(this.newContainer);
     return this.deferred.promise;
   }
 
   /**
    * This function needs to be called as soon the Transition is finished
    */
-  public done() {
-    // this.oldContainer[0].parentNode.removeChild(this.oldContainer[]);
+  public async done() {
     if (!this.oldContainer) {
       throw new Error("Can't remove old container");
     }
@@ -56,16 +52,16 @@ export abstract class BaseTransition implements Transition {
     if (this.action === "replace") {
       this.oldContainer.remove();
     }
-    // this.newContainer.style.visibility = 'visible';
+
     if (!this.newContainer) {
       throw new Error("Can't show new container");
     }
     this.newContainer.style.visibility = "visible";
-    this.deferred.resolve();
+    return this.deferred.resolve();
   }
 
   /**
    * Constructor for your Transition
    */
-  public abstract start(): any;
+  public abstract start(): void;
 }
