@@ -24,13 +24,15 @@ module.exports.getStyleLoaderRule = (config = {}) => {
     config.styles.resolveUrl === "onlyImports" ||
     config.styles.resolveUrl === "notForAssets"
   ) {
-    config.styles.resolveUrl = (url /*, resourcePath*/) => {
-      // Ignore assets
-      if (/\.(gif|jpe?g|tiff?|png|svg|webp|bmp|ttf|woff2?)$/i.test(url)) {
-        return false;
-      }
-      // Enabled for all other file extensions
-      return true;
+    config.styles.resolveUrl = {
+      filter: (url /*, resourcePath*/) => {
+        // Ignore assets
+        if (/\.(gif|jpe?g|tiff?|png|svg|webp|bmp|ttf|woff2?)$/i.test(url)) {
+          return false;
+        }
+        // Enabled for all other file extensions
+        return true;
+      },
     };
   }
 
