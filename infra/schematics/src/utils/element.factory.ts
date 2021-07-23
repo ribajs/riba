@@ -11,7 +11,6 @@ import {
   url,
 } from "@angular-devkit/schematics";
 import { debug as Debug } from "debug";
-import "source-map-support/register";
 import { isNullOrUndefined } from "util";
 import { DeclarationOptions, ElementOptions, Location } from "../interfaces";
 import { DEFAULT_LANGUAGE, DEFAULT_STYLE_LANGUAGE } from "../lib/defaults";

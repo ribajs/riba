@@ -19,17 +19,17 @@
   "module": "dist/esm/index.js",
   "source": "src/index.ts",
   "devDependencies": {
-    "@babel/runtime": "^7.14.6",
-    "@babel/runtime-corejs3": "^7.14.7",
+    "@babel/runtime": "^7.14.8",
+    "@babel/runtime-corejs3": "^7.14.8",
     "@ribajs/tsconfig": "workspace:*",
     "@types/jest": "^26.0.24",
-    "@types/node": "^16.3.2",
+    "@types/node": "^16.4.1",
     "babel-jest": "^27.0.6",
-    "eslint": "^7.30.0",
+    "eslint": "^7.31.0",
     "jest": "^27.0.6",
     "jest-config": "^27.0.6",
     "jest-extended": "^0.11.5",
-    "ts-jest": "^27.0.3",
+    "ts-jest": "^27.0.4",
     "typescript": "^4.3.5"
   }
 }

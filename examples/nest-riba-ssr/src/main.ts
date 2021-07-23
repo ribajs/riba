@@ -1,4 +1,4 @@
-import { NestFactory } from '@nestjs/core';
+import { NestFactory, HttpAdapterHost } from '@nestjs/core';
 import { Logger } from '@nestjs/common';
 import * as Express from 'express';
 import {
@@ -14,9 +14,10 @@ import * as config from './config/config';
 async function bootstrap() {
   const console = new Logger('bootstrap');
   const express = Express();
+  const expressAdapter = new ExpressAdapter(express);
   const app = await NestFactory.create<NestExpressApplication>(
-    AppModule,
-    new ExpressAdapter(express),
+    AppModule.register(expressAdapter),
+    expressAdapter,
     {
       logger: ['error', 'warn', 'debug', 'log'],
     },

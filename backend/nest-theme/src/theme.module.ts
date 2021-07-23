@@ -6,7 +6,7 @@ import {
   CacheModule,
 } from '@nestjs/common';
 import { HttpAdapterHost } from '@nestjs/core';
-import { ConfigModule, ConfigService, registerAs } from '@nestjs/config';
+import { ConfigModule, registerAs, ConfigService } from '@nestjs/config';
 import { ExpressAdapter } from '@nestjs/platform-express';
 
 import { SsrService } from './ssr.service';
@@ -34,8 +34,10 @@ import { RefreshCacheService } from './refresh-cache/refresh-cache.service';
     SourceFileService,
     TemplateFileService,
     RefreshCacheService,
+    HttpAdapterHost,
   ],
   controllers: [],
+  imports: [],
   exports: [SsrService, SsrMiddleware, SourceFileService, RefreshCacheService],
 })
 export class ThemeModule {
@@ -43,26 +45,11 @@ export class ThemeModule {
     protected readonly adapterHost: HttpAdapterHost<ExpressAdapter>,
     protected config: ConfigService,
     protected ssrMiddleware: SsrMiddleware,
-  ) {
-    this.adapterHost = adapterHost;
-    const fullThemeConfig = this.config.get<ThemeConfig>('theme');
+  ) {}
 
-    /**
-     * Get the application context.
-     * @see https://docs.nestjs.com/faq/http-adapter#in-context-strategy
-     */
-    const express = this.adapterHost.httpAdapter;
-
-    /**
-     * Set express options for the template engine, assets path and view dir for the current active theme
-     */
-    express.setViewEngine(fullThemeConfig.viewEngine);
-    express.useStaticAssets(fullThemeConfig.assetsDir, {});
-    express.setBaseViewsDir(fullThemeConfig.viewsDir);
-  }
-
-  static forRoot(
+  static register(
     nestThemeConfig: NestThemeConfig,
+    expressAdapter: ExpressAdapter,
     env = process.env.NODE_ENV,
   ): DynamicModule {
     const basePath = resolve(nestThemeConfig.themeDir, 'config');
@@ -90,6 +77,13 @@ export class ThemeModule {
     validateFullThemeConfig(fullThemeConfig);
 
     const cacheModule = CacheModule.register();
+
+    /**
+     * Set express options for the template engine, assets path and view dir for the current active theme
+     */
+    expressAdapter.setViewEngine(fullThemeConfig.viewEngine);
+    expressAdapter.useStaticAssets(fullThemeConfig.assetsDir, {});
+    expressAdapter.setBaseViewsDir(fullThemeConfig.viewsDir);
 
     return {
       imports: [
