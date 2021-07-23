@@ -112,7 +112,6 @@ export const scrolling = async (
       }
 
       scrollTimeout = setTimeout(() => {
-        console.debug("Scroll ended");
         resolve();
       }, 100);
     };
@@ -229,13 +228,6 @@ export const scrollToPosition = async (
         break;
     }
   }
-
-  console.debug("scrollToPosition", {
-    behavior,
-    top,
-    left,
-    angle,
-  });
 
   if (top !== undefined && left !== undefined) {
     scrollElement.scroll({

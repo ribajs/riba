@@ -135,7 +135,6 @@ export class RouterViewComponent extends Component {
   }
 
   protected async onTransitionCompleted(viewId: string) {
-    console.debug("onTransitionCompleted");
     // Only to anything if the viewID is equal (in this way it is possible to have multiple views)
     if (viewId !== this.scope.id) {
       return;
