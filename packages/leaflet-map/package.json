@@ -70,7 +70,7 @@
     "@ribajs/extras": "workspace:*",
     "@ribajs/utils": "workspace:*",
     "@types/leaflet": "^1.7.4",
-    "@yarnpkg/pnpify": "^3.0.0-rc.13",
+    "@yarnpkg/pnpify": "^3.0.0-rc.14",
     "leaflet": "^1.7.1"
   },
   "bugs": {

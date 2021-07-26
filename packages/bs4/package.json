@@ -63,7 +63,7 @@
     "@types/jest": "^26.0.24",
     "@typescript-eslint/eslint-plugin": "^4.28.4",
     "@typescript-eslint/parser": "^4.28.4",
-    "@yarnpkg/pnpify": "^3.0.0-rc.13",
+    "@yarnpkg/pnpify": "^3.0.0-rc.14",
     "babel-jest": "^27.0.6",
     "babel-loader": "^8.2.2",
     "babel-plugin-array-includes": "^2.0.3",

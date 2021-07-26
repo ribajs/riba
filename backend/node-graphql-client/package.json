@@ -25,7 +25,7 @@
   "devDependencies": {
     "@types/find-root": "^1.1.2",
     "@types/glob": "^7.1.4",
-    "@types/node": "^16.4.1",
+    "@types/node": "^16.4.3",
     "@typescript-eslint/eslint-plugin": "^4.28.4",
     "@typescript-eslint/parser": "^4.28.4",
     "eslint": "^7.31.0",
