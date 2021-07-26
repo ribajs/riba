@@ -84,6 +84,7 @@ const uploadFile = (filePath) => __awaiter(void 0, void 0, void 0, function* () 
         releaseID = newRelease.data.id;
     }
     return octokit.repos.uploadReleaseAsset({
+        name: filename,
         owner: releaseConfig.github.org || releaseConfig.github.owner,
         repo: releaseConfig.github.repo,
         release_id: releaseID,

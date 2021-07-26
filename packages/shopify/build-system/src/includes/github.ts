@@ -88,6 +88,7 @@ export const uploadFile = async (filePath: string) => {
   }
 
   return octokit.repos.uploadReleaseAsset({
+    name: filename,
     owner: releaseConfig.github.org || releaseConfig.github.owner,
     repo: releaseConfig.github.repo,
     release_id: releaseID,

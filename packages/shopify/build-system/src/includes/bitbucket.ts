@@ -71,7 +71,7 @@ export const uploadFile = async (filePath: string) => {
     repo_slug,
     workspace,
     // WORAROUND
-    _body: (form as unknown) as globalThis.FormData,
+    _body: form as unknown as globalThis.FormData,
   });
 
   // WORKAROUND
@@ -145,7 +145,6 @@ export const getDownloadFileUrlAlternate = async (
   console.log("Download url: " + uri);
 
   // Get redirect url of zip file
-  return got(uri).then((result) => {
-    return result.url;
-  });
+  const result = await got(uri);
+  return result.url;
 };

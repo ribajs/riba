@@ -46,9 +46,8 @@ if (
   pkg?.resolutions &&
   pkg?.resolutions["@ribajs/shopify"]?.includes("portal:")
 ) {
-  const ribaShopifyPath = pkg.resolutions["@ribajs/shopify"].split(
-    "portal:"
-  )[1];
+  const ribaShopifyPath =
+    pkg.resolutions["@ribajs/shopify"].split("portal:")[1];
   ribaShopifyRoot = path.resolve(themeRoot, ribaShopifyPath);
 }
 
@@ -61,9 +60,8 @@ if (
   pkg?.resolutions &&
   pkg?.resolutions["@ribajs/shopify-tda"]?.includes("portal:")
 ) {
-  const ribaShopifyTdaPath = pkg.resolutions["@ribajs/shopify-tda"].split(
-    "portal:"
-  )[1];
+  const ribaShopifyTdaPath =
+    pkg.resolutions["@ribajs/shopify-tda"].split("portal:")[1];
   ribaShopifyTdaRoot = path.resolve(themeRoot, ribaShopifyTdaPath);
 }
 
