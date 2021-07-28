@@ -37,6 +37,7 @@ gulp.task(
     gulp.parallel(
       "build:wp",
       "build:assets",
+      "build:assets:favicons",
       "build:assets:riba-shopify",
       "build:assets:riba-shopify-tda",
       "build:config",

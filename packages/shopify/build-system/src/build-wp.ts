@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import gulp from "gulp";
 import path from "path";
-import webpack from "webpack";
+import * as webpack from "webpack";
 import gulpWebpack from "webpack-stream";
 import gutil from "gulp-util";
 
@@ -18,7 +18,7 @@ try {
   webpackConfig = require("../webpack.config.js")(gutil.env.environments);
 }
 
-let webpackCheckoutConfig: any;
+let webpackCheckoutConfig: any; // TODO
 try {
   webpackCheckoutConfig = require(path.resolve(
     config.dist.root,
@@ -49,7 +49,12 @@ gulp.task("watch:wp:main", () => {
 
 gulp.task("build:wp:checkout", () => {
   messages.logProcessFiles("build:wp:checkout");
-  // console.debug("webpackConfig", webpackConfig);
+  if (
+    !webpackCheckoutConfig.entry.checkout ||
+    webpackCheckoutConfig.entry.checkout?.length <= 0
+  ) {
+    return gutil.noop;
+  }
   return gulp
     .src(webpackCheckoutConfig.entry.checkout)
     .pipe(gulpWebpack(webpackCheckoutConfig, webpack as any))

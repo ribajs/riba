@@ -32,7 +32,7 @@ function processIcons(files) {
     return gulp_1.default
         .src(files)
         .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
-        .pipe(gulp_svgmin_1.default(config_1.config.plugins.svgmin))
+        .pipe(gulp_svgmin_1.default(config_1.config.plugins.svgmin)) // TODO
         .pipe(gulp_cheerio_1.default(config_1.config.plugins.cheerio))
         .pipe(gulp_ext_replace_1.default(".liquid"))
         .pipe(gulp_size_1.default({

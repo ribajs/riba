@@ -22,6 +22,7 @@ const chokidar_1 = __importDefault(require("chokidar"));
 const vinyl_paths_1 = __importDefault(require("vinyl-paths"));
 const del_1 = __importDefault(require("del"));
 const gulp_size_1 = __importDefault(require("gulp-size"));
+const gulp_print_1 = __importDefault(require("gulp-print"));
 const config_1 = require("./includes/config");
 const utilities_1 = require("./includes/utilities");
 const messages_1 = __importDefault(require("./includes/messages"));
@@ -122,6 +123,12 @@ function removeAssets(files) {
  */
 gulp_1.default.task("build:assets", () => {
     return processAssetsTheme(assetsPaths);
+});
+gulp_1.default.task("build:assets:favicons", () => {
+    return gulp_1.default
+        .src(config_1.config.src.favicons)
+        .pipe(gulp_print_1.default())
+        .pipe(gulp_1.default.dest(config_1.config.dist.assets));
 });
 gulp_1.default.task("build:assets:riba-shopify", () => {
     return processAssetsRibaShopify(assetsPathsRibaShopify);

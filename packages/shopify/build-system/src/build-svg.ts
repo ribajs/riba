@@ -33,7 +33,7 @@ function processIcons(files: string[]) {
   return gulp
     .src(files)
     .pipe(plumber(errorHandler))
-    .pipe(svgmin(config.plugins.svgmin))
+    .pipe(svgmin(config.plugins.svgmin as unknown)) // TODO
     .pipe(cheerio(config.plugins.cheerio))
     .pipe(extReplace(".liquid"))
     .pipe(

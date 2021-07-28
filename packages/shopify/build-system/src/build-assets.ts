@@ -7,6 +7,7 @@ import chokidar from "chokidar";
 import vinylPaths from "vinyl-paths";
 import del from "del";
 import size from "gulp-size";
+import print from "gulp-print";
 
 import { config } from "./includes/config";
 import {
@@ -137,6 +138,13 @@ async function removeAssets(files: string[]) {
  */
 gulp.task("build:assets", () => {
   return processAssetsTheme(assetsPaths);
+});
+
+gulp.task("build:assets:favicons", () => {
+  return gulp
+    .src(config.src.favicons)
+    .pipe(print())
+    .pipe(gulp.dest(config.dist.assets));
 });
 
 gulp.task("build:assets:riba-shopify", () => {
