@@ -30,44 +30,60 @@ try {
   );
 }
 
-gulp.task("build:wp:main", () => {
+gulp.task("build:wp:main", (done) => {
   messages.logProcessFiles("build:wp:main");
+  if (!webpackConfig.entry.main || webpackConfig.entry.main?.length <= 0) {
+    return done();
+  }
   return gulp
     .src(webpackConfig.entry.main)
     .pipe(gulpWebpack(webpackConfig, webpack as any)) // TODO
-    .pipe(gulp.dest(config.dist.assets));
+    .pipe(gulp.dest(config.dist.assets))
+    .on("end", done);
 });
 
-gulp.task("watch:wp:main", () => {
+gulp.task("watch:wp:main", (done) => {
   messages.logProcessFiles("watch:wp:main");
+  if (!webpackConfig.entry.main || webpackConfig.entry.main?.length <= 0) {
+    return done();
+  }
   webpackConfig.watch = true;
   return gulp
     .src(webpackConfig.entry.main)
     .pipe(gulpWebpack(webpackConfig, webpack as any)) // TODO
-    .pipe(gulp.dest(config.dist.assets));
+    .pipe(gulp.dest(config.dist.assets))
+    .on("end", done);
 });
 
-gulp.task("build:wp:checkout", () => {
+gulp.task("build:wp:checkout", (done) => {
   messages.logProcessFiles("build:wp:checkout");
   if (
     !webpackCheckoutConfig.entry.checkout ||
     webpackCheckoutConfig.entry.checkout?.length <= 0
   ) {
-    return gutil.noop as any; // TODO
+    return done();
   }
   return gulp
     .src(webpackCheckoutConfig.entry.checkout)
     .pipe(gulpWebpack(webpackCheckoutConfig, webpack as any)) // TODO
-    .pipe(gulp.dest(config.dist.assets));
+    .pipe(gulp.dest(config.dist.assets))
+    .on("end", done);
 });
 
-gulp.task("watch:wp:checkout", () => {
+gulp.task("watch:wp:checkout", (done) => {
   messages.logProcessFiles("watch:wp:checkout");
+  if (
+    !webpackCheckoutConfig.entry.checkout ||
+    webpackCheckoutConfig.entry.checkout?.length <= 0
+  ) {
+    return done();
+  }
   webpackCheckoutConfig.watch = true;
   return gulp
     .src(webpackCheckoutConfig.entry.checkout)
     .pipe(gulpWebpack(webpackCheckoutConfig, webpack as any)) // TODO
-    .pipe(gulp.dest(config.dist.assets));
+    .pipe(gulp.dest(config.dist.assets))
+    .on("end", done);
 });
 
 gulp.task("build:wp", gulp.parallel("build:wp:main", "build:wp:checkout"));
