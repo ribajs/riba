@@ -15,7 +15,8 @@ gulp.task(
       "build:assets",
       "build:assets:riba-shopify",
       "build:assets:riba-shopify-tda",
-      "build:svg"
+      "build:svg:snippet",
+      "build:svg:asset"
     )
   )
 );
@@ -41,7 +42,8 @@ gulp.task(
       "build:assets:riba-shopify",
       "build:assets:riba-shopify-tda",
       "build:config",
-      "build:svg"
+      "build:svg:snippet",
+      "build:svg:asset"
     ),
     "output:errors"
   )

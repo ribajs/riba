@@ -86,14 +86,14 @@ export const config: Config = {
     root: "src/",
     json: "src/**/*.json",
     assets: "src/assets/*",
-    icons: "src/icons/**/*.svg",
+    iconset: "src/iconset/svg/*.svg",
     templates: "src/templates/**/*",
     snippets: "src/snippets/*",
     sections: "src/sections/*",
     locales: "src/locales/*",
     config: "src/config/*",
     layout: "src/layout/*",
-    favicons: "src/assets/favicons/*",
+    favicons: "src/favicons/*",
   },
 
   dist: {
@@ -112,7 +112,7 @@ export const config: Config = {
       root: path.resolve(ribaShopifyRoot, "src/"),
       json: path.resolve(ribaShopifyRoot, "src/") + "/**/*.json",
       assets: path.resolve(ribaShopifyRoot, "src/assets/") + "*",
-      icons: path.resolve(ribaShopifyRoot, "src/icons/") + "/**/*.svg",
+      iconset: path.resolve(ribaShopifyRoot, "src/iconset/svg") + "/*.svg",
       templates: path.resolve(ribaShopifyRoot, "src/templates/") + "/**/*",
       snippets: path.resolve(ribaShopifyRoot, "src/snippets/") + "/*",
       sections: path.resolve(ribaShopifyRoot, "src/sections/") + "/*",
@@ -132,10 +132,21 @@ export const config: Config = {
     },
     svgmin: {
       plugins: [
-        { removeTitle: true },
-        { removeDesc: true },
-        { cleanupIDs: false },
-      ] as any[], // TODO
+        {
+          name: "removeTitle",
+        },
+        {
+          name: "removeDesc",
+        },
+        {
+          name: "removeAttrs",
+          params: { preserveCurrentColor: true },
+        },
+        {
+          name: "cleanupIDs",
+          active: false,
+        },
+      ],
     },
   },
 };
@@ -145,7 +156,7 @@ if (ribaShopifyTdaRoot) {
     root: path.resolve(ribaShopifyTdaRoot, "src/"),
     json: path.resolve(ribaShopifyTdaRoot, "src/"),
     assets: path.resolve(ribaShopifyTdaRoot, "src/assets/"),
-    icons: path.resolve(ribaShopifyTdaRoot, "src/icons/"),
+    iconset: path.resolve(ribaShopifyTdaRoot, "src/iconset/svg"),
     templates: path.resolve(ribaShopifyTdaRoot, "src/templates/"),
     snippets: path.resolve(ribaShopifyTdaRoot, "src/snippets/"),
     sections: path.resolve(ribaShopifyTdaRoot, "src/sections/"),

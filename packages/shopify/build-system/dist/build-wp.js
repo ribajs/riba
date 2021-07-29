@@ -12,7 +12,7 @@ const gulp_util_1 = __importDefault(require("gulp-util"));
 const config_1 = require("./includes/config");
 const messages_1 = __importDefault(require("./includes/messages"));
 // Try to get the webpack.config.js from root of the project, otherwise use the default babel config
-let webpackConfig;
+let webpackConfig; // TODO
 try {
     webpackConfig = require(path_1.default.resolve(config_1.config.dist.root, "webpack.config.js"))(gulp_util_1.default.env.environments);
 }

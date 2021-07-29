@@ -296,8 +296,9 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
       if (config.tsIndexPath) {
         config.entry.main.push(config.tsIndexPath);
       }
+      const assetsPath = resolve(rootPath, "theme/assets/");
       config.output = config.output || {
-        path: resolve(rootPath, "theme/assets/"),
+        path: assetsPath,
         filename: "[name].bundle.js",
       };
 
@@ -331,8 +332,9 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
       if (config.tsIndexPath) {
         config.entry.checkout.push(config.tsIndexPath);
       }
+      const checkoutAssetsPath = resolve(rootPath, "theme/assets/");
       config.output = config.output || {
-        path: resolve(rootPath, "theme/assets/"),
+        path: checkoutAssetsPath,
         filename: "[name].bundle.js",
       };
 
@@ -343,10 +345,10 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
       config.styles.resolveUrl = "onlyImports";
 
       config.copyAssets = config.copyAssets || {
-        enable: true,
-        images: true,
+        enable: false,
+        images: false,
         scss: false,
-        iconset: true,
+        iconset: false,
         foldername: "src",
       };
 

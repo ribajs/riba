@@ -9,7 +9,7 @@ import { config } from "./includes/config";
 import messages from "./includes/messages";
 
 // Try to get the webpack.config.js from root of the project, otherwise use the default babel config
-let webpackConfig: any;
+let webpackConfig: any; // TODO
 try {
   webpackConfig = require(path.resolve(config.dist.root, "webpack.config.js"))(
     gutil.env.environments

@@ -5479,6 +5479,7 @@ __metadata:
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
     "@ribajs/extras": "workspace:*"
+    "@ribajs/history": "workspace:packages/history"
     "@ribajs/i18n": "workspace:*"
     "@ribajs/iconset": "workspace:*"
     "@ribajs/photoswipe": "workspace:*"

@@ -97,7 +97,8 @@ gulp.task(
     "watch:assets:riba-shopify",
     "watch:assets:riba-shopify-tda",
     "watch:config",
-    "watch:svg",
+    "watch:svg:snippet",
+    "watch:svg:asset",
     "watch:wp"
   )
 );

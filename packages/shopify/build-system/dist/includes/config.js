@@ -82,14 +82,14 @@ exports.config = {
         root: "src/",
         json: "src/**/*.json",
         assets: "src/assets/*",
-        icons: "src/icons/**/*.svg",
+        iconset: "src/iconset/svg/*.svg",
         templates: "src/templates/**/*",
         snippets: "src/snippets/*",
         sections: "src/sections/*",
         locales: "src/locales/*",
         config: "src/config/*",
         layout: "src/layout/*",
-        favicons: "src/assets/favicons/*",
+        favicons: "src/favicons/*",
     },
     dist: {
         root: "theme/",
@@ -106,7 +106,7 @@ exports.config = {
             root: path_1.default.resolve(ribaShopifyRoot, "src/"),
             json: path_1.default.resolve(ribaShopifyRoot, "src/") + "/**/*.json",
             assets: path_1.default.resolve(ribaShopifyRoot, "src/assets/") + "*",
-            icons: path_1.default.resolve(ribaShopifyRoot, "src/icons/") + "/**/*.svg",
+            iconset: path_1.default.resolve(ribaShopifyRoot, "src/iconset/svg") + "/*.svg",
             templates: path_1.default.resolve(ribaShopifyRoot, "src/templates/") + "/**/*",
             snippets: path_1.default.resolve(ribaShopifyRoot, "src/snippets/") + "/*",
             sections: path_1.default.resolve(ribaShopifyRoot, "src/sections/") + "/*",
@@ -124,10 +124,21 @@ exports.config = {
         },
         svgmin: {
             plugins: [
-                { removeTitle: true },
-                { removeDesc: true },
-                { cleanupIDs: false },
-            ], // TODO
+                {
+                    name: "removeTitle",
+                },
+                {
+                    name: "removeDesc",
+                },
+                {
+                    name: "removeAttrs",
+                    params: { preserveCurrentColor: true },
+                },
+                {
+                    name: "cleanupIDs",
+                    active: false,
+                },
+            ],
         },
     },
 };
@@ -136,7 +147,7 @@ if (ribaShopifyTdaRoot) {
         root: path_1.default.resolve(ribaShopifyTdaRoot, "src/"),
         json: path_1.default.resolve(ribaShopifyTdaRoot, "src/"),
         assets: path_1.default.resolve(ribaShopifyTdaRoot, "src/assets/"),
-        icons: path_1.default.resolve(ribaShopifyTdaRoot, "src/icons/"),
+        iconset: path_1.default.resolve(ribaShopifyTdaRoot, "src/iconset/svg"),
         templates: path_1.default.resolve(ribaShopifyTdaRoot, "src/templates/"),
         snippets: path_1.default.resolve(ribaShopifyTdaRoot, "src/snippets/"),
         sections: path_1.default.resolve(ribaShopifyTdaRoot, "src/sections/"),

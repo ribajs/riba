@@ -22,7 +22,7 @@ export interface Config {
     root: string;
     json: string;
     assets: string;
-    icons: string;
+    iconset: string;
     templates: string;
     snippets: string;
     sections: string;
@@ -48,7 +48,7 @@ export interface Config {
       root: string;
       json: string;
       assets: string;
-      icons: string;
+      iconset: string;
       templates: string;
       snippets: string;
       sections: string;
@@ -64,7 +64,7 @@ export interface Config {
       root: string;
       json: string;
       assets: string;
-      icons: string;
+      iconset: string;
       templates: string;
       snippets: string;
       sections: string;
