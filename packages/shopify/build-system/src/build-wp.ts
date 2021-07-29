@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import gulp from "gulp";
 import path from "path";
-import * as webpack from "webpack";
+import webpack from "webpack";
 import gulpWebpack from "webpack-stream";
 import gutil from "gulp-util";
 
@@ -34,7 +34,7 @@ gulp.task("build:wp:main", () => {
   messages.logProcessFiles("build:wp:main");
   return gulp
     .src(webpackConfig.entry.main)
-    .pipe(gulpWebpack(webpackConfig, webpack as any))
+    .pipe(gulpWebpack(webpackConfig, webpack as any)) // TODO
     .pipe(gulp.dest(config.dist.assets));
 });
 
@@ -43,7 +43,7 @@ gulp.task("watch:wp:main", () => {
   webpackConfig.watch = true;
   return gulp
     .src(webpackConfig.entry.main)
-    .pipe(gulpWebpack(webpackConfig, webpack as any))
+    .pipe(gulpWebpack(webpackConfig, webpack as any)) // TODO
     .pipe(gulp.dest(config.dist.assets));
 });
 
@@ -53,11 +53,11 @@ gulp.task("build:wp:checkout", () => {
     !webpackCheckoutConfig.entry.checkout ||
     webpackCheckoutConfig.entry.checkout?.length <= 0
   ) {
-    return gutil.noop;
+    return gutil.noop as any; // TODO
   }
   return gulp
     .src(webpackCheckoutConfig.entry.checkout)
-    .pipe(gulpWebpack(webpackCheckoutConfig, webpack as any))
+    .pipe(gulpWebpack(webpackCheckoutConfig, webpack as any)) // TODO
     .pipe(gulp.dest(config.dist.assets));
 });
 
@@ -66,7 +66,7 @@ gulp.task("watch:wp:checkout", () => {
   webpackCheckoutConfig.watch = true;
   return gulp
     .src(webpackCheckoutConfig.entry.checkout)
-    .pipe(gulpWebpack(webpackCheckoutConfig, webpack as any))
+    .pipe(gulpWebpack(webpackCheckoutConfig, webpack as any)) // TODO
     .pipe(gulp.dest(config.dist.assets));
 });
 

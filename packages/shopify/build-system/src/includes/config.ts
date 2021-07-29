@@ -85,7 +85,7 @@ export const config: Config = {
   src: {
     root: "src/",
     json: "src/**/*.json",
-    assets: "src/assets/**/*",
+    assets: "src/assets/*",
     icons: "src/icons/**/*.svg",
     templates: "src/templates/**/*",
     snippets: "src/snippets/*",
@@ -93,7 +93,7 @@ export const config: Config = {
     locales: "src/locales/*",
     config: "src/config/*",
     layout: "src/layout/*",
-    favicons: "src/assets/favicons",
+    favicons: "src/assets/favicons/*",
   },
 
   dist: {
@@ -111,7 +111,7 @@ export const config: Config = {
     src: {
       root: path.resolve(ribaShopifyRoot, "src/"),
       json: path.resolve(ribaShopifyRoot, "src/") + "/**/*.json",
-      assets: path.resolve(ribaShopifyRoot, "src/assets/") + "/**/*",
+      assets: path.resolve(ribaShopifyRoot, "src/assets/") + "*",
       icons: path.resolve(ribaShopifyRoot, "src/icons/") + "/**/*.svg",
       templates: path.resolve(ribaShopifyRoot, "src/templates/") + "/**/*",
       snippets: path.resolve(ribaShopifyRoot, "src/snippets/") + "/*",

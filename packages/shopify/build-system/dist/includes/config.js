@@ -81,7 +81,7 @@ exports.config = {
     src: {
         root: "src/",
         json: "src/**/*.json",
-        assets: "src/assets/**/*",
+        assets: "src/assets/*",
         icons: "src/icons/**/*.svg",
         templates: "src/templates/**/*",
         snippets: "src/snippets/*",
@@ -89,7 +89,7 @@ exports.config = {
         locales: "src/locales/*",
         config: "src/config/*",
         layout: "src/layout/*",
-        favicons: "src/assets/favicons",
+        favicons: "src/assets/favicons/*",
     },
     dist: {
         root: "theme/",
@@ -105,7 +105,7 @@ exports.config = {
         src: {
             root: path_1.default.resolve(ribaShopifyRoot, "src/"),
             json: path_1.default.resolve(ribaShopifyRoot, "src/") + "/**/*.json",
-            assets: path_1.default.resolve(ribaShopifyRoot, "src/assets/") + "/**/*",
+            assets: path_1.default.resolve(ribaShopifyRoot, "src/assets/") + "*",
             icons: path_1.default.resolve(ribaShopifyRoot, "src/icons/") + "/**/*.svg",
             templates: path_1.default.resolve(ribaShopifyRoot, "src/templates/") + "/**/*",
             snippets: path_1.default.resolve(ribaShopifyRoot, "src/snippets/") + "/*",
