@@ -6786,6 +6786,7 @@ __metadata:
     got: ^11.8.2
     graceful-fs: ^4.2.6
     gulp: ^4.0.2
+    gulp-jsoncombine: ^1.0.4
     gulp-print: ^5.0.2
     jest: ^27.0.6
     jest-extended: ^0.11.5

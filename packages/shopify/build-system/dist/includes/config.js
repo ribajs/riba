@@ -90,6 +90,7 @@ exports.config = {
         config: "src/config/*",
         layout: "src/layout/*",
         favicons: "src/favicons/*",
+        schema: "./src/schema/*.json",
     },
     dist: {
         root: "theme/",

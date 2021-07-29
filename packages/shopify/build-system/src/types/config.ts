@@ -30,6 +30,7 @@ export interface Config {
     config: string;
     layout: string;
     favicons: string;
+    schema: string;
   };
 
   dist: {
