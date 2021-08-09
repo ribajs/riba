@@ -3,6 +3,7 @@
  */
 import gulp from "gulp";
 import plumber from "gulp-plumber";
+import rename from "gulp-rename";
 import chokidar from "chokidar";
 import vinylPaths from "vinyl-paths";
 import del from "del";
@@ -61,7 +62,7 @@ if (config.ribaShopifyTda?.root) {
 const processAssetsTheme = (files: string[]) => {
   messages.logProcessFiles("build:assets");
   return gulp
-    .src(files, { base: config.src.root })
+    .src(files, { base: config.src.root, nodir: true })
     .pipe(plumber(errorHandler))
     .pipe(
       size({
@@ -143,7 +144,12 @@ gulp.task("build:assets", () => {
 gulp.task("build:assets:favicons", () => {
   return gulp
     .src(config.src.favicons)
-    .pipe(print())
+    .pipe(
+      rename((path) => {
+        path.basename = "favicons_" + path.basename;
+      })
+    )
+    .pipe(print() as any) // TODO
     .pipe(gulp.dest(config.dist.assets));
 });
 

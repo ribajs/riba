@@ -97,7 +97,9 @@ gulp.task(
     "watch:assets:riba-shopify",
     "watch:assets:riba-shopify-tda",
     "watch:config",
-    "watch:svg",
+    // TODO Fix endless change loop
+    // "watch:svg:snippet",
+    // "watch:svg:asset",
     "watch:wp"
   )
 );

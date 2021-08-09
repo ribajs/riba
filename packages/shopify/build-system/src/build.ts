@@ -5,6 +5,7 @@ require("./build-config");
 require("./build-svg");
 require("./build-utils");
 require("./build-wp");
+require("./build-schema");
 
 gulp.task(
   "build:zip",
@@ -12,10 +13,12 @@ gulp.task(
     "clean",
     gulp.parallel(
       "build:wp",
+      "build:schema",
       "build:assets",
       "build:assets:riba-shopify",
       "build:assets:riba-shopify-tda",
-      "build:svg"
+      "build:svg:snippet",
+      "build:svg:asset"
     )
   )
 );
@@ -36,12 +39,14 @@ gulp.task(
     "clean",
     gulp.parallel(
       "build:wp",
+      "build:schema",
       "build:assets",
       "build:assets:favicons",
       "build:assets:riba-shopify",
       "build:assets:riba-shopify-tda",
       "build:config",
-      "build:svg"
+      "build:svg:snippet",
+      "build:svg:asset"
     ),
     "output:errors"
   )

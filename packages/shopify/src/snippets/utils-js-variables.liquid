@@ -111,7 +111,7 @@
     
     console.warn("No currency formatter found, set to default!", moneyString);
     return '{% raw %}{{ amount }} EUR{% endraw %}';
-  }
+  };
 
   {%- if settings.money_with_currency -%}
     var moneyString = '{{ 113465 | money_with_currency }}';

@@ -5479,6 +5479,7 @@ __metadata:
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
     "@ribajs/extras": "workspace:*"
+    "@ribajs/history": "workspace:packages/history"
     "@ribajs/i18n": "workspace:*"
     "@ribajs/iconset": "workspace:*"
     "@ribajs/photoswipe": "workspace:*"
@@ -6760,6 +6761,7 @@ __metadata:
     "@types/svgo": ^2.3.1
     "@types/undertaker": ^1.2.7
     "@types/vinyl": ^2.0.5
+    "@types/vinyl-fs": ^2.4.12
     "@types/vinyl-paths": ^0.0.31
     "@types/webpack": ^5.28.0
     "@types/webpack-stream": ^3.2.12
@@ -6783,6 +6785,8 @@ __metadata:
     form-data: ^4.0.0
     got: ^11.8.2
     graceful-fs: ^4.2.6
+    gulp: ^4.0.2
+    gulp-jsoncombine: ^1.0.4
     gulp-print: ^5.0.2
     jest: ^27.0.6
     jest-extended: ^0.11.5
@@ -6798,7 +6802,9 @@ __metadata:
     terser: ^5.7.1
     ts-jest: ^27.0.4
     typescript: ^4.3.5
+    undertaker: ^1.3.0
     vinyl: ^2.2.1
+    vinyl-fs: ^3.0.3
     vinyl-paths: ^3.0.1
     webpack-stream: ^6.1.2
   peerDependencies:
@@ -8109,6 +8115,17 @@ __metadata:
     "@types/node": "*"
     "@types/vinyl": "*"
   checksum: 6e97c6403cbd50b016f75daaf057189c0528baba1229aa5832284cf862edd5ab59f341f518ce0ca26d27ea87a88fd3a8891e1e1fa3fbc7973b0a1e5c558c0eca
+  languageName: node
+  linkType: hard
+
+"@types/vinyl-fs@npm:^2.4.12":
+  version: 2.4.12
+  resolution: "@types/vinyl-fs@npm:2.4.12"
+  dependencies:
+    "@types/glob-stream": "*"
+    "@types/node": "*"
+    "@types/vinyl": "*"
+  checksum: 50be8b36c5c82553bdc0c18a5231145d4d3b692aa6ba2956a098d04352fc13093dcddb68190bdfe929ee76f73c6c5838c4f104518e3d2cb374c84aeb98497ea5
   languageName: node
   linkType: hard
 
@@ -28180,7 +28197,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"undertaker@npm:^1.2.1":
+"undertaker@npm:^1.2.1, undertaker@npm:^1.3.0":
   version: 1.3.0
   resolution: "undertaker@npm:1.3.0"
   dependencies:
@@ -28614,7 +28631,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"vinyl-fs@npm:^3.0.0":
+"vinyl-fs@npm:^3.0.0, vinyl-fs@npm:^3.0.3":
   version: 3.0.3
   resolution: "vinyl-fs@npm:3.0.3"
   dependencies:
