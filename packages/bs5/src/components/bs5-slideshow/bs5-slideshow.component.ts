@@ -70,6 +70,8 @@ export interface ResponsiveOptions {
   breakpoint: number;
   /** Name of the current breakpoint, e.g. xs, sm, md, ... */
   name: string;
+  /** Disables wraparound to first/last element of slideshow  */
+  infinite: boolean;
 }
 
 export type Options = {
@@ -154,6 +156,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     "indicators",
     "indicators-position",
     "pause",
+    "infinite",
   ];
 
   static get responsiveProperties() {
@@ -184,6 +187,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     angle: "horizontal",
     breakpoint: 0,
     name: "xs",
+    infinite: true,
   };
 
   protected getDefaultBreakpointOptions() {
@@ -330,20 +334,26 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     }
   }
 
-  public getNextIndex(currentIndex: number) {
-    let nextIndex = currentIndex + this.scope.activeBreakpoint.slidesToScroll;
+  public getNextIndex(centeredIndex: number) {
+    let nextIndex = centeredIndex + this.scope.activeBreakpoint.slidesToScroll;
 
     if (nextIndex >= this.slideElements.length) {
+      if (!this.scope.activeBreakpoint.infinite) {
+        return this.slideElements.length - 1;
+      }
       nextIndex = nextIndex - this.slideElements.length;
     }
 
     return nextIndex;
   }
 
-  public getPrevIndex(currentIndex: number) {
-    let prevIndex = currentIndex - this.scope.activeBreakpoint.slidesToScroll;
+  public getPrevIndex(centeredIndex: number) {
+    let prevIndex = centeredIndex - this.scope.activeBreakpoint.slidesToScroll;
 
     if (prevIndex < 0) {
+      if (!this.scope.activeBreakpoint.infinite) {
+        return 0;
+      }
       prevIndex = this.slideElements.length - 1 + (prevIndex + 1);
     }
     return prevIndex;
@@ -357,16 +367,16 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   protected scrollToNextSlide() {
     this.setSlidePositions();
-    const currentIndex = this.getMostCenteredSlideIndex();
-    const nextIndex = this.getNextIndex(currentIndex);
+    const centeredIndex = this.getMostCenteredSlideIndex();
+    const nextIndex = this.getNextIndex(centeredIndex);
 
     return this.goTo(nextIndex);
   }
 
   protected scrollToPrevSlide() {
     this.setSlidePositions();
-    const currentIndex = this.getMostCenteredSlideIndex();
-    const prevIndex = this.getPrevIndex(currentIndex);
+    const centeredIndex = this.getMostCenteredSlideIndex();
+    const prevIndex = this.getPrevIndex(centeredIndex);
     return this.goTo(prevIndex);
   }
 
@@ -1007,9 +1017,9 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     const scrollTo =
       this.scope.activeBreakpoint.angle === "vertical"
         ? this.slideshowInner.scrollTop +
-          this.scope.items[index].position.centerY
+        this.scope.items[index].position.centerY
         : this.slideshowInner.scrollLeft +
-          this.scope.items[index].position.centerX;
+        this.scope.items[index].position.centerX;
     return scrollTo <= maxScrollTo && scrollTo >= 0;
   }
 
