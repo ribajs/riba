@@ -1,0 +1,18 @@
+{
+  "name": "@ribajs/ionic",
+  "version": "2.0.0-alpha.0",
+  "dependencies": {
+    "@ionic/core": "^5.6.13",
+    "@ribajs/core": "workspace:*",
+    "@ribajs/utils": "workspace:*"
+  },
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "source": "src/index.ts",
+  "devDependencies": {
+    "@babel/runtime": "^7.14.8",
+    "@babel/runtime-corejs3": "^7.14.8",
+    "@ribajs/tsconfig": "workspace:infra/tsconfig",
+    "@types/node": "^16.4.3"
+  }
+}
