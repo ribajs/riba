@@ -207,7 +207,7 @@ export class HttpService {
       ok: response.ok,
       redirected: response.redirected,
       statusText: response.statusText,
-      trailer: response.trailer,
+      // trailer: response.trailer,
       type: response.type,
       url: response.url,
       arrayBuffer: response.arrayBuffer,

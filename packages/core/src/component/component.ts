@@ -70,7 +70,7 @@ export abstract class Component extends BasicComponent {
       );
       return this.bindIfReady();
     } catch (error) {
-      this.throw(error);
+      this.throw(error as Error);
     }
   }
 
@@ -206,7 +206,7 @@ export abstract class Component extends BasicComponent {
         this
       );
     } catch (error) {
-      this.throw(error);
+      this.throw(error as Error);
     }
   }
 
@@ -224,7 +224,7 @@ export abstract class Component extends BasicComponent {
         this.getLifecycleEventData()
       );
     } catch (error) {
-      this.throw(error);
+      this.throw(error as Error);
     }
   }
 
@@ -251,7 +251,7 @@ export abstract class Component extends BasicComponent {
       );
       await this.bindIfReady();
     } catch (error) {
-      this.throw(error);
+      this.throw(error as Error);
     }
   }
 
@@ -328,7 +328,7 @@ export abstract class Component extends BasicComponent {
     } catch (error) {
       this._binds = false;
       this._bound = false;
-      this.throw(error);
+      this.throw(error as Error);
     }
 
     return this.view;
@@ -354,7 +354,7 @@ export abstract class Component extends BasicComponent {
       }
       return null;
     } catch (error) {
-      this.throw(error);
+      this.throw(error as Error);
     }
   }
 
@@ -367,7 +367,7 @@ export abstract class Component extends BasicComponent {
         this.view = null;
       }
     } catch (error) {
-      this.throw(error);
+      this.throw(error as Error);
     }
   }
 
@@ -377,7 +377,7 @@ export abstract class Component extends BasicComponent {
         this.view.build();
       }
     } catch (error) {
-      this.throw(error);
+      this.throw(error as Error);
     }
   }
 }

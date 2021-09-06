@@ -6,9 +6,7 @@ import {
   HttpDataType,
 } from "@ribajs/core";
 import template from "./bs4-form.component.html";
-import { stripHtml } from "@ribajs/utils/src/type";
-import { getUID, hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import { scrollTo, getViewportDimensions } from "@ribajs/utils/src/dom";
+import { scrollTo, getViewportDimensions, getUID, hasChildNodesTrim, stripHtml } from "@ribajs/utils";
 
 export interface ValidationObject {
   fields:
@@ -232,7 +230,7 @@ export class Bs4FormComponent extends Component {
         this.onErrorSubmit(res.status.toString(), message, res.body);
       }
       return this.onSuccessSubmit(res.status.toString(), message, res.body);
-    } catch (err) {
+    } catch (err: any) {
       this.onErrorSubmit(err.status, err.body.message, err.body);
     }
   }

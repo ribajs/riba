@@ -57,7 +57,7 @@ export const debounce = (fn: (...params: any) => any) => {
       try {
         resolve(fn(...params));
       } catch (error) {
-        reject(error);
+        reject(error as Error);
       }
       // reset frame and initialize new promise for next call
       frame = null;
@@ -100,7 +100,7 @@ export const throttle = (fn: (...params: any[]) => any, wait = 100) => {
       try {
         resolve(fn(...params));
       } catch (error) {
-        reject(error);
+        reject(error as Error);
       }
     }
     return promise;
