@@ -80,7 +80,6 @@ export class Bs4TaggedImageExampleComponent extends Component {
 
   constructor() {
     super();
-    console.log("test");
   }
 
   protected connectedCallback() {

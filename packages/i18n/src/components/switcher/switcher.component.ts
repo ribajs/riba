@@ -29,7 +29,6 @@ export class I18nSwitcherComponent extends Component {
   };
 
   protected connectedCallback() {
-    console.debug('[I18nSwitcherComponent] connectedCallback');
     super.connectedCallback();
     this.init(I18nSwitcherComponent.observedAttributes);
   }

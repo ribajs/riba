@@ -144,16 +144,15 @@ export abstract class LocalesService {
 
   public async getAvailableLangcodes() {
     const activeCode = this.getLangcode();
-    return this.get(undefined, undefined, true).then((locals) => {
-      const langcodes: Langcode[] = [];
-      Object.keys(locals).forEach((langcode) => {
-        langcodes.push({
-          code: langcode,
-          active: langcode === activeCode,
-        });
+    const locals = await this.get(undefined, undefined, true)
+    const langcodes: Langcode[] = [];
+    for (const langcode of Object.keys(locals)) {
+      langcodes.push({
+        code: langcode,
+        active: langcode === activeCode,
       });
-      return langcodes;
-    });
+    }
+    return langcodes;
   }
 
   /**

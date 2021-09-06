@@ -65,9 +65,8 @@ export class LocalesRestService extends LocalesService {
     if (this.locales[url]) {
       return this.locales[url];
     }
-    return HttpService.getJSON(url).then((locales: any) => {
-      this.locales[url as string] = locales;
-      return this.locales[url as string];
-    });
+    const resp = await HttpService.getJSON<string[]>(url)
+    this.locales[url as string] = resp.body;
+    return this.locales[url as string];
   }
 }
