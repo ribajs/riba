@@ -3,7 +3,7 @@ import { EventDispatcher } from "@ribajs/events";
 import { isBoolean, isObject } from "@ribajs/utils/src/type";
 import { scrollTo } from "@ribajs/utils/src/dom";
 import { State } from "@ribajs/history";
-import { RouterBinderViewOptions, PjaxOptions } from "../interfaces";
+import { RouterBinderViewOptions, PjaxOptions } from "../types";
 import { Pjax, Prefetch, HideShowTransition } from "../services";
 
 export interface ViewBinder extends Binder<string> {

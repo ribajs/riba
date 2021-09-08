@@ -30,6 +30,7 @@ const ribaPackages = [
   "@ribajs/bs5",
   "@ribajs/content-slider",
   "@ribajs/core",
+  "@ribajs/iconset",
   "@ribajs/i18n",
   "@ribajs/leaflet-map",
   "@ribajs/moment",

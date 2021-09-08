@@ -5,6 +5,6 @@ import { isUndefined } from "@ribajs/utils/src/type";
  * Check if value is undefined
  */
 export const isUndefinedFormatter: Formatter = {
-  name: "isUndefined",
+  name: "is-undefined",
   read: isUndefined,
 };

@@ -59,7 +59,7 @@
     @include media-breakpoint-up($breakpoint) {
       // TODO TESTME
       .embed-responsive-bg#{$infix}-#{$embed-responsive-aspect-ratio-x}by#{$embed-responsive-aspect-ratio-y} {
-        padding-top: percentage($embed-responsive-aspect-ratio-y / $embed-responsive-aspect-ratio-x);
+        padding-top: percentage(math.div($embed-responsive-aspect-ratio-y, $embed-responsive-aspect-ratio-x));
       }
     }
   }
@@ -79,20 +79,25 @@
   .embed-responsive-item {
     // default fit is cover
     object-fit: cover;
-    // Fix for vimeo videos in safari
-    &iframe {
+  }
+  // Fix for vimeo videos in safari
+  iframe {
+    &.embed-responsive-item {
       object-fit: initial !important;
     }
-
-    &.fit-cover {
+  }
+  .fit-cover {
+    &.embed-responsive-item {
       object-fit: cover !important;
     }
-
-    &.fit-contain {
+  }
+  .fit-contain {
+    &.embed-responsive-item {
       object-fit: contain !important;
     }
-  
-    &.fit-initial {
+  }
+  &.fit-initial {
+    &.embed-responsive-item {
       object-fit: initial !important;
     }
   }
@@ -106,7 +111,7 @@
     @include media-breakpoint-up($breakpoint) {
       .embed-responsive#{$infix}-#{$embed-responsive-aspect-ratio-x}by#{$embed-responsive-aspect-ratio-y} {
         &::before {
-          padding-top: percentage($embed-responsive-aspect-ratio-y / $embed-responsive-aspect-ratio-x);
+          padding-top: percentage(math.div($embed-responsive-aspect-ratio-y, $embed-responsive-aspect-ratio-x));
         }
       }
     }

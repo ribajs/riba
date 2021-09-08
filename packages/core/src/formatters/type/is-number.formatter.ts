@@ -5,6 +5,6 @@ import { isNumber } from "@ribajs/utils/src/type";
  * Checks if value is a number
  */
 export const isNumberFormatter: Formatter = {
-  name: "isNumber",
+  name: "is-number",
   read: isNumber,
 };

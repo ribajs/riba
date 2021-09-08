@@ -16,8 +16,8 @@ export class SsrMiddleware implements NestMiddleware {
   theme: FullThemeConfig;
   log = new Logger(this.constructor.name);
   constructor(
-    protected config: ConfigService,
-    protected ssr: SsrService,
+    protected readonly config: ConfigService,
+    protected readonly ssr: SsrService,
     @Inject(CACHE_MANAGER) protected cacheManager: Cache,
   ) {
     this.theme = this.config.get<FullThemeConfig>('theme');
@@ -72,7 +72,13 @@ export class SsrMiddleware implements NestMiddleware {
           return res.send(result);
         }
 
-        result = await render();
+        // We need the try catch here because we are inside if a callback
+        try {
+          result = await render();
+        } catch (error) {
+          return next(handleError(error));
+        }
+
         this.cacheManager.set(cacheKey, result, cacheOptions);
         res.send(result);
         if (global.gc) {

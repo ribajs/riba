@@ -38,7 +38,7 @@ export const getDataset = (element: HTMLElement) => {
 };
 
 /**
- * Calls el.hasChildNodes but ignores empty strings, the default hasChildNodes would return ture on `<div> </div>`.
+ * Calls el.hasChildNodes but ignores empty strings, the default hasChildNodes would return true on `<div> </div>`.
  * Very useful to check within a component if the component has set child elements to load or overwrite the component template
  * @param el
  */
@@ -92,8 +92,33 @@ export const elementIsHidden = (el: HTMLElement) => {
   );
 };
 
-export const elementIsVisable = (el: HTMLElement) => {
+export const elementIsVisible = (el: HTMLElement) => {
   return !elementIsHidden(el);
+};
+
+/**
+ * Observe scroll event
+ * @param scrollElement The element or window you want to observe
+ * @returns Returns a promise which resolves when an element stops scrolling
+ */
+export const scrolling = async (
+  scrollElement: HTMLElement | (Window & typeof globalThis)
+) => {
+  return new Promise<void>((resolve) => {
+    let scrollTimeout: ReturnType<typeof setTimeout> | undefined;
+    const checkScroll = () => {
+      if (scrollTimeout !== undefined) {
+        clearTimeout(scrollTimeout);
+      }
+
+      scrollTimeout = setTimeout(() => {
+        resolve();
+      }, 100);
+    };
+
+    scrollElement.addEventListener("scroll", checkScroll);
+    checkScroll();
+  });
 };
 
 /**
@@ -105,7 +130,7 @@ export const elementIsVisable = (el: HTMLElement) => {
  * @param to
  * @param duration
  */
-export const scrollTo = (
+export const scrollTo = async (
   to: HTMLElement,
   offset: number,
   scrollElement: HTMLElement | (Window & typeof globalThis) | null,
@@ -115,6 +140,8 @@ export const scrollTo = (
   if (!scrollElement) {
     scrollElement = window;
   }
+
+  const scrollPromise = scrolling(scrollElement);
 
   let top = 0;
   let left = 0;
@@ -151,9 +178,11 @@ export const scrollTo = (
     left,
     top,
   });
+
+  return scrollPromise;
 };
 
-export const scrollToPosition = (
+export const scrollToPosition = async (
   scrollElement: HTMLElement | (Window & typeof globalThis) | null,
   position: number | "end" | "start",
   angle: "horizontal" | "vertical" | "both" = "vertical",
@@ -165,6 +194,8 @@ export const scrollToPosition = (
   if (!scrollElement) {
     return;
   }
+
+  const scrollPromise = scrolling(scrollElement);
 
   if (angle === "vertical" || angle === "both") {
     switch (position) {
@@ -198,8 +229,6 @@ export const scrollToPosition = (
     }
   }
 
-  console.log("scroll", behavior, top, left, angle);
-
   if (top !== undefined && left !== undefined) {
     scrollElement.scroll({
       behavior,
@@ -217,6 +246,8 @@ export const scrollToPosition = (
       left,
     });
   }
+
+  return scrollPromise;
 };
 
 export const getElementFromEvent = <T = HTMLAnchorElement | HTMLUnknownElement>(
@@ -372,7 +403,8 @@ export const loadScript = async (
       if (defer) {
         script.defer = true;
       }
-      document.getElementsByTagName("head")[0].appendChild(script);
+      const head = document.head || document.getElementsByTagName("head")[0];
+      head.appendChild(script);
     }
 
     // IE

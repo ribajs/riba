@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SsrService = void 0;
 const common_1 = require("@nestjs/common");
 const jsdom_1 = require("jsdom");
-const Brakes = require("brakes");
 const config_1 = require("@nestjs/config");
 const node_fetch_1 = require("node-fetch");
 const events_1 = require("@ribajs/events");
@@ -98,6 +97,7 @@ let SsrService = class SsrService {
             catch (error) {
                 this.log.error('Error on run script');
                 this.log.error(error);
+                throw error;
             }
         }
         const renderResult = new Promise((resolve, reject) => {
@@ -117,7 +117,6 @@ let SsrService = class SsrService {
             };
             const clear = () => {
                 var _a, _b, _c, _d, _e;
-                console.debug('Clear JSDom');
                 virtualConsole.sendTo(new dummy_console_1.DummyConsole());
                 virtualConsole.off('jsdomError', onError);
                 sharedContext.events.off('error', onError, this);
@@ -153,6 +152,9 @@ let SsrService = class SsrService {
         if (error.stack) {
             newError.stack = error.stack;
         }
+        if (error.status) {
+            newError.status = error.status;
+        }
         return newError;
     }
     async renderComponent({ templatePath, rootTag = 'ssr-root-page', componentTagName, sharedContext, }) {
@@ -164,14 +166,7 @@ let SsrService = class SsrService {
             templateVars: sharedContext.templateVars,
         });
         try {
-            const _render = async () => {
-                return this.render(template.layout, sharedContext);
-            };
-            const render = new Brakes(_render, {
-                timeout: this.theme.timeout || 10000,
-            });
-            const renderData = await render.exec();
-            return renderData;
+            return await this.render(template.layout, sharedContext);
         }
         catch (error) {
             this.log.error(`Error on render component! rootTag: "${rootTag}"`);

@@ -9,7 +9,7 @@ import vinylPaths from "vinyl-paths";
 import del from "del";
 import svgmin from "gulp-svgmin";
 import cheerio from "gulp-cheerio";
-import extReplace from "gulp-ext-replace";
+import rename from "gulp-rename";
 import gutil from "gulp-util";
 
 import { config } from "./includes/config";
@@ -24,18 +24,22 @@ import messages from "./includes/messages";
  * Processing for SVGs prior to deployment - adds accessibility markup, and converts
  * the file to a liquid snippet.
  *
- * @param {String|Array} files - glob/array of files to match & send to the stream
- * @returns {Stream}
- * @private
+ * @param files - glob/array of files to match & send to the stream
+ * @returns
  */
-function processIcons(files: string[]) {
+function processSnippetIcons(files: string[]) {
   messages.logProcessFiles("build:svg");
   return gulp
-    .src(files)
+    .src(files, { nodir: true })
     .pipe(plumber(errorHandler))
-    .pipe(svgmin(config.plugins.svgmin))
+    .pipe(svgmin(config.plugins.svgmin as unknown)) // TODO
     .pipe(cheerio(config.plugins.cheerio))
-    .pipe(extReplace(".liquid"))
+    .pipe(
+      rename((path) => {
+        path.basename = "iconset_" + path.basename;
+        path.extname = ".liquid";
+      })
+    )
     .pipe(
       size({
         showFiles: true,
@@ -49,17 +53,16 @@ function processIcons(files: string[]) {
  * Cleanup/remove liquid snippets from the `dist` directory during watch tasks if
  * any underlying SVG files in the `src` folder have been removed.
  *
- * @param {String|Array} files - glob/array of files to match & send to the stream
- * @returns {Stream}
- * @private
+ * @param files - glob/array of files to match & send to the stream
  */
-function removeIcons(files: string[]) {
+function removeSnippetIcons(files: string[]) {
   messages.logProcessFiles("remove:svg");
   const mapFiles = files.map((file) => {
     gutil.log("remove icon: " + file);
     const distFile = file
-      .replace("src/icons", "dist/snippets")
+      .replace(config.src.iconset, "dist/snippets")
       .replace(config.ribaShopify.root, config.dist.root);
+    // TODO rename basename to iconset_ + basename?
     const snippetFile = distFile.replace(".svg", ".liquid");
     return snippetFile;
   });
@@ -77,33 +80,110 @@ function removeIcons(files: string[]) {
 }
 
 /**
- * Pre-processing for svg icons
+ * Processing for SVGs prior to deployment - adds accessibility markup.
  *
- * @function build:svg
- * @memberof slate-cli.tasks.build
- * @static
+ * @param files - glob/array of files to match & send to the stream
+ * @returns
  */
-gulp.task("build:svg", () => {
-  return processIcons([config.src.icons, config.ribaShopify.src.icons]);
+function processAssetIcons(files: string[]) {
+  messages.logProcessFiles("build:svg");
+  return gulp
+    .src(files, { nodir: true })
+    .pipe(plumber(errorHandler))
+    .pipe(svgmin(config.plugins.svgmin as unknown)) // TODO
+    .pipe(
+      rename((path) => {
+        path.basename = "iconset_" + path.basename;
+      })
+    )
+    .pipe(
+      size({
+        showFiles: true,
+        pretty: true,
+      })
+    )
+    .pipe(gulp.dest(config.dist.assets));
+}
+
+/**
+ * Cleanup/remove svg assets from the `dist` directory during watch tasks if
+ * any underlying SVG files in the `src` folder have been removed.
+ *
+ * @param files - glob/array of files to match & send to the stream
+ */
+function removeAssetIcons(files: string[]) {
+  messages.logProcessFiles("remove:svg");
+  const mapFiles = files.map((file) => {
+    gutil.log("remove icon: " + file);
+    const distFile = file
+      .replace(config.src.iconset, "dist/assets")
+      .replace(config.ribaShopify.root, config.dist.root);
+    // TODO rename basename to iconset_ + basename?
+    return distFile;
+  });
+
+  return gulp
+    .src(mapFiles)
+    .pipe(plumber(errorHandler))
+    .pipe(vinylPaths(del))
+    .pipe(
+      size({
+        showFiles: true,
+        pretty: true,
+      })
+    );
+}
+
+/**
+ * Pre-processing for svg icons as snippets
+ */
+gulp.task("build:svg:snippet", () => {
+  return processSnippetIcons([
+    config.src.iconset,
+    config.ribaShopify.src.iconset,
+  ]);
 });
 
 /**
  * Watches source svg icons for changes...
- *
- * @function watch:svg
- * @memberof slate-cli.tasks.watch
- * @static
  */
-gulp.task("watch:svg", () => {
+gulp.task("watch:svg:snippet", () => {
   const cache = createEventCache();
 
   return chokidar
-    .watch([config.src.icons, config.ribaShopify.src.icons], {
+    .watch([config.src.iconset, config.ribaShopify.src.iconset], {
       ignoreInitial: true,
     })
     .on("all", (event, path) => {
       messages.logFileEvent(event, path);
       cache.addEvent(event, path);
-      processCache(cache, processIcons, removeIcons);
+      processCache(cache, processSnippetIcons, removeSnippetIcons);
+    });
+});
+
+/**
+ * Pre-processing for svg icons as assets
+ */
+gulp.task("build:svg:asset", () => {
+  return processAssetIcons([
+    config.src.iconset,
+    config.ribaShopify.src.iconset,
+  ]);
+});
+
+/**
+ * Watches source svg icons for changes...
+ */
+gulp.task("watch:svg:asset", () => {
+  const cache = createEventCache();
+
+  return chokidar
+    .watch([config.src.iconset, config.ribaShopify.src.iconset], {
+      ignoreInitial: true,
+    })
+    .on("all", (event, path) => {
+      messages.logFileEvent(event, path);
+      cache.addEvent(event, path);
+      processCache(cache, processAssetIcons, removeAssetIcons);
     });
 });

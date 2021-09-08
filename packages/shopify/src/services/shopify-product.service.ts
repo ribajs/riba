@@ -96,6 +96,18 @@ export class ShopifyProductService {
   }
 
   /**
+   * Get product option which includes a substring
+   * @param product product which holds the options
+   * @param name option name
+   */
+   public static getOptionIncludes(product: ShopifyProduct, searchSubstr: string) {
+    const result = product.options.find(
+      (option) => option.name.includes(searchSubstr)
+    );
+    return result;
+  }
+
+  /**
    * Prepare product, remove protocol from featured_image, lowercase the option names
    * @param product product object
    */

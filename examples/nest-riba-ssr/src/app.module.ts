@@ -1,17 +1,23 @@
-import { Module } from '@nestjs/common';
+import { Module, DynamicModule } from '@nestjs/common';
+import { ExpressAdapter } from '@nestjs/platform-express';
 import { ConfigService, ConfigModule } from '@nestjs/config';
 
 import { appConfig, theme } from './config/config';
 import { ThemeModule } from '@ribajs/nest-theme';
 
-@Module({
-  imports: [
-    ConfigModule.forRoot({
-      load: [appConfig],
-    }),
-    ThemeModule.forRoot(theme),
-  ],
-  controllers: [],
-  providers: [ConfigService],
-})
-export class AppModule {}
+@Module({})
+export class AppModule {
+  static register(expressAdapter: ExpressAdapter): DynamicModule {
+    return {
+      module: AppModule,
+      imports: [
+        ConfigModule.forRoot({
+          load: [appConfig],
+        }),
+        ThemeModule.register(theme, expressAdapter),
+      ],
+      controllers: [],
+      providers: [ConfigService],
+    };
+  }
+}

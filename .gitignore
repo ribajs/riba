@@ -5,6 +5,7 @@
 /packages/*/dist/
 !packages/iconset/dist/
 !packages/events/dist/
+!packages/podcast/dist/
 /demos/*/dist
 /examples/*/dist
 node_modules/

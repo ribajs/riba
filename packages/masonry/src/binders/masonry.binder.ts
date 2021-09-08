@@ -1,7 +1,7 @@
 import { Binder, LifecycleService } from "@ribajs/core";
 import Masonry from "masonry-layout";
 import type { Options } from "masonry-layout";
-import { throttle } from "@ribajs/utils";
+import { debounce } from "@ribajs/utils";
 import { EventDispatcher } from "@ribajs/events";
 
 /**
@@ -10,15 +10,16 @@ import { EventDispatcher } from "@ribajs/events";
  * see the original documentation for the options
  * @see https://masonry.desandro.com/options.html
  *
+ * If you want to order images with this binder you should use this binder together with the image-events binder (imageEventsBinder) from the @ribajs/extras module
+ *
  * @example
- * <div class="grid" rv-masonry='{ "columnWidth": 200, "itemSelector": ".grid-item" }'>
+ * <div class="grid" rv-image-events rv-masonry='{ "columnWidth": 200, "itemSelector": ".grid-item" }'>
  */
 export const masonryBinder: Binder<Options> = {
   name: "masonry",
 
   bind(el: HTMLElement) {
-    const layout = () => {
-      console.debug("layout");
+    const _layout = () => {
       const masonry = this.customData.masonry as Masonry | null;
       if (masonry?.layout) {
         masonry.layout();
@@ -27,7 +28,7 @@ export const masonryBinder: Binder<Options> = {
 
     this.customData = {
       masonry: null,
-      layout: throttle(layout.bind(this)),
+      layout: debounce(_layout.bind(this)),
       images: null,
       resizeObserver: null,
     };
@@ -45,7 +46,7 @@ export const masonryBinder: Binder<Options> = {
 
     // All components bound
     const lifecycle = LifecycleService.getInstance();
-    lifecycle.events.on(
+    lifecycle.events.once(
       "ComponentLifecycle:allBound",
       this.customData.layout,
       this
@@ -53,7 +54,8 @@ export const masonryBinder: Binder<Options> = {
 
     // On new router page
     const routerEvents = new EventDispatcher("main");
-    routerEvents.on("newPageReady", this.customData.layout, this);
+    routerEvents.once("newPageReady", this.customData.layout, this);
+    routerEvents.once("transitionCompleted", this.customData.layout, this);
 
     this.customData.layout();
   },
@@ -86,8 +88,12 @@ export const masonryBinder: Binder<Options> = {
 
     // Detect image changes
     this.customData.images.forEach((img: HTMLImageElement) => {
-      // Image loaded
-      img.onload?.(this.customData.layout);
+      // Default vanilla image loaded event
+      img.addEventListener("load", this.customData.layout, { once: true });
+      // Additional event from images-events binder
+      img.addEventListener("load-always", this.customData.layout, {
+        once: true,
+      });
       // Image size changed
       this.customData.resizeObserver?.observe(img);
     });

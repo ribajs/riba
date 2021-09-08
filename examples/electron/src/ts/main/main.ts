@@ -14,8 +14,6 @@ async function createWindow() {
   const rootDir = await pkgDir(__dirname);
   const preloadPath = path.join(rootDir || __dirname, "dist", "preload.js");
 
-  console.log("preloadPath", preloadPath);
-
   const webPreferences = {
     nodeIntegration: false, // is default value after Electron v5
     contextIsolation: true, // protect against prototype pollution
@@ -85,7 +83,6 @@ ipcMain.on("main/versions", async (/*event, data*/) => {
 });
 
 ipcMain.on("main/hello", (event, data) => {
-  console.log(data);
   // Send result back to renderer process
   mainWindow.webContents.send("main/hello", { answer: "hello :)" });
 });

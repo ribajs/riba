@@ -9,7 +9,7 @@ export const routerModule: RibaModule = {
   components,
   services,
   formatters: {},
-  init(options: RouterModuleOptions = {}) {
+  init(options: Partial<RouterModuleOptions> = {}) {
     services.RouterService.setSingleton(options);
     return this;
   },

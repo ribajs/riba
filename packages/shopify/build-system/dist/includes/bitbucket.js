@@ -125,9 +125,8 @@ const getDownloadFileUrlAlternate = (filename) => __awaiter(void 0, void 0, void
     const uri = `https://${username}:${password}@bitbucket.org/${workspace}/${repo_slug}/downloads/${filename}`;
     console.log("Download url: " + uri);
     // Get redirect url of zip file
-    return got_1.default(uri).then((result) => {
-        return result.url;
-    });
+    const result = yield got_1.default(uri);
+    return result.url;
 });
 exports.getDownloadFileUrlAlternate = getDownloadFileUrlAlternate;
 //# sourceMappingURL=bitbucket.js.map

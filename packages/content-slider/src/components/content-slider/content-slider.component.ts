@@ -3,7 +3,7 @@ import {
   TemplateFunction,
   EventDispatcher,
 } from "@ribajs/core";
-import { throttle } from "@ribajs/utils/src/control";
+import { debounce } from "@ribajs/utils/src/control";
 import { hasChildNodesTrim } from "@ribajs/utils";
 import { SlideItem } from "../../types";
 import template from "./content-slider.component.html";
@@ -153,8 +153,8 @@ export class ContentSliderComponent extends TemplatesComponent {
   }
 
   protected initEventListeners() {
-    this.onResize = throttle(this.onResize.bind(this));
-    window.addEventListener("resize", this.onResize);
+    this.onResize = debounce(this.onResize.bind(this));
+    window.addEventListener("resize", this.onResize, { passive: true });
   }
 
   protected removeEventListeners() {

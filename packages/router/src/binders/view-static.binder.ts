@@ -5,13 +5,13 @@ import { Pjax, HideShowTransition } from "../services";
 const handleize = handleizeFormatter.read as FormatterFn;
 
 /**
- * Loads a url with pjax and show them insite the element this binder is used on
+ * Loads a url with pjax and show them inside the element this binder is used on
  */
 export const viewStaticBinder: Binder<string> = {
   name: "view-static",
   block: true,
 
-  bind(/*el: HTMLElement*/) {
+  bind() {
     if (!this.customData) {
       this.customData = {
         nested: null,
@@ -19,7 +19,7 @@ export const viewStaticBinder: Binder<string> = {
     }
   },
 
-  routine(el: HTMLElement, options: any) {
+  async routine(el: HTMLElement, options: any) {
     const wrapper = el;
 
     // Set default options
@@ -35,33 +35,35 @@ export const viewStaticBinder: Binder<string> = {
 
     const pjax = new Pjax(options);
 
-    // TODO use prefetch.loadResponseCached to use the cache
-    const response = pjax.loadResponseCached(options.url, false, false);
+    const { responsePromise } = await pjax.loadResponseCached(
+      options.url,
+      false,
+      false
+    );
 
-    response.then((_response) => {
-      wrapper.replaceWith(_response.container);
+    const response = await responsePromise;
 
-      _response.container.style.visibility = "visible";
+    wrapper.replaceWith(response.container);
 
-      // add the dateset to the model
-      if (!isObject(this.view.models)) {
-        this.view.models = {};
-      }
+    response.container.style.visibility = "visible";
 
-      // this.view.models.dataset = container.data();
-      if (this.customData.nested) {
-        this.customData.nested.unbind();
-      }
-      this.customData.nested = new View(
-        _response.container,
-        this.view.models,
-        this.view.options
-      );
-      this.customData.nested.bind();
-    });
+    // add the dataset to the model
+    if (!isObject(this.view.models)) {
+      this.view.models = {};
+    }
+
+    if (this.customData.nested) {
+      this.customData.nested.unbind();
+    }
+    this.customData.nested = new View(
+      response.container,
+      this.view.models,
+      this.view.options
+    );
+    this.customData.nested.bind();
   },
 
-  unbind(/*el: HTMLUnknownElement*/) {
+  unbind() {
     if (this.customData.nested) {
       this.customData.nested.unbind();
     }

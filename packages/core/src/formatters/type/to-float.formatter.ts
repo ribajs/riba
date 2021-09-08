@@ -5,7 +5,7 @@ import { Formatter } from "@ribajs/core";
  * @see https://github.com/matthieuriolo/rivetsjs-stdlib/blob/master/src/rivetsstdlib.js#L133
  */
 export const toFloatFormatter: Formatter = {
-  name: "toFloat",
+  name: "to-float",
   /**
    * Returns the integer representation of the given target.
    * @param target

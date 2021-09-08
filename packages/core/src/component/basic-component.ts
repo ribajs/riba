@@ -140,11 +140,13 @@ export abstract class BasicComponent extends HTMLElement {
    * So define required attributes and the view is ony bind the first time after all this attributes are transmitted.
    */
   protected checkRequiredAttributes() {
-    return this.requiredAttributes().every(
-      (requiredAttribute) =>
+    return this.requiredAttributes().every((requiredAttribute) => {
+      requiredAttribute = camelCase(requiredAttribute);
+      return (
         this.scope.hasOwnProperty(requiredAttribute) &&
         typeof this.scope[requiredAttribute] !== "undefined"
-    );
+      );
+    });
   }
 
   protected parseAttribute(attr: string | null) {

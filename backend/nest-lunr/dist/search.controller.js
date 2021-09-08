@@ -20,10 +20,13 @@ let SearchController = class SearchController {
     constructor(lunr) {
         this.lunr = lunr;
     }
-    search(res, namespace, query) {
+    search(res, namespace, query, limit = 50) {
         let result;
         try {
             result = this.lunr.search(namespace, query);
+            if (result.length >= limit) {
+                result = result.slice(0, limit);
+            }
         }
         catch (error) {
             throw error;
@@ -33,10 +36,13 @@ let SearchController = class SearchController {
         }
         return res.json(result);
     }
-    searchAll(res, query) {
+    searchAll(res, query, limit = 50) {
         let result;
         try {
             result = this.lunr.searchAll(query);
+            if (result.length >= limit) {
+                result = result.slice(0, limit);
+            }
         }
         catch (error) {
             throw error;
@@ -49,16 +55,18 @@ __decorate([
     __param(0, common_1.Res()),
     __param(1, common_1.Param('namespace')),
     __param(2, common_1.Param('query')),
+    __param(3, common_1.Query('limit')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, String, String]),
+    __metadata("design:paramtypes", [Object, String, String, Object]),
     __metadata("design:returntype", void 0)
 ], SearchController.prototype, "search", null);
 __decorate([
     common_1.Get('/:query'),
     __param(0, common_1.Res()),
     __param(1, common_1.Param('query')),
+    __param(2, common_1.Query('limit')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:paramtypes", [Object, String, Object]),
     __metadata("design:returntype", void 0)
 ], SearchController.prototype, "searchAll", null);
 SearchController = __decorate([

@@ -5,6 +5,6 @@ import { isObject } from "@ribajs/utils/src/type";
  * Checks if value is a object
  */
 export const isObjectFormatter: Formatter = {
-  name: "isObject",
+  name: "is-object",
   read: isObject,
 };

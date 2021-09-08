@@ -7,7 +7,7 @@ import { ApiTags } from '@nestjs/swagger';
 @ApiTags('suggestions')
 @Controller('api/suggest')
 export class SuggestController {
-  constructor(readonly suggest: SuggestService) { }
+  constructor(readonly suggest: SuggestService) {}
 
   /**
    * Get suggestions for all namespaces

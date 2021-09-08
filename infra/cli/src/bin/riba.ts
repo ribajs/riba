@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import "source-map-support/register";
 import commander from "commander";
 import { CommandLoader } from "../commands";
 

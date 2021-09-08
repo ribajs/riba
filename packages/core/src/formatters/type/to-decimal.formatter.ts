@@ -3,7 +3,7 @@ import { toIntegerFormatter } from "./to-integer.formatter";
 import { toFloatFormatter } from "./to-float.formatter";
 
 export const toDecimalFormatter: Formatter = {
-  name: "toDecimal",
+  name: "to-decimal",
   read(target: any) {
     if (!toIntegerFormatter.read) {
       throw new Error("toIntegerFormatter must have a read function");

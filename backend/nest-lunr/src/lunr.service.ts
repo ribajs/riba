@@ -284,6 +284,17 @@ export class LunrService {
     return builder.add(doc, attributes);
   }
 
+  delete(ns: string) {
+    this.builders[ns] = {};
+    this.data[ns] = [];
+  }
+
+  reset(ns: string) {
+    const options = this.getOptions(ns);
+    this.delete(ns);
+    this.create(ns, options);
+  }
+
   /**
    * Builds the index, creating an instance of lunr.Index.
    *

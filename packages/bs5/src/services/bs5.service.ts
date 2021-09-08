@@ -1,6 +1,6 @@
 import { Breakpoint, Bs5ModuleOptions } from "../types";
 import { DEFAULT_MODULE_OPTIONS } from "../constants";
-import { throttle } from "@ribajs/utils/src/control";
+import { debounce } from "@ribajs/utils/src/control";
 import { getViewportDimensions } from "@ribajs/utils/src/dom";
 import { EventDispatcher } from "@ribajs/core";
 
@@ -87,7 +87,7 @@ export class Bs5Service {
     }
   }
 
-  protected onViewChanges = throttle(this._onViewChanges.bind(this), 100);
+  protected onViewChanges = debounce(this._onViewChanges.bind(this));
 
   /**
    * Get breakpoint for width

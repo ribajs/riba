@@ -7,7 +7,7 @@ import {
 import templateHorizontal from "./bs4-tabs-horizontal.component.html";
 import templateVertical from "./bs4-tabs-vertical.component.html";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import { throttle } from "@ribajs/utils/src/control";
+import { debounce } from "@ribajs/utils/src/control";
 
 const handleize = handleizeFormatter.read as FormatterFn;
 
@@ -143,7 +143,7 @@ export class Bs4TabsComponent extends TemplatesComponent {
     this.setHeight();
   }
 
-  protected onResize = throttle(this._onResize.bind(this));
+  protected onResize = debounce(this._onResize.bind(this));
 
   /**
    * Make all tabs panes as height as the highest tab pane

@@ -46,7 +46,7 @@ Add webpack to `resolutions` in your package.json to be shure to use the latest 
 ### Gulp 4 and (Slate) tools
 
 ```bash
-yarn add -D gul gulp-cheerio gulp-cssimport gulp-eslint gulp-ext-replace gulp-include gulp-plumber gulp-rename gulp-size gulp-sourcemaps gulp-svgmin gulp-terser gulp-uglify gulp-util gulp-zip @shopify/slate-tools @shopify/theme-lint @shopify/themekit archiver bitbucket bluebird browser-sync chokidar cross-spawn debug del find-root graceful-fs inspectpack js-yaml lodash moment open pnp-webpack-plugin require-dir run-sequence source-map-support terser-webpack-plugin vinyl-paths yargs got chalk
+yarn add -D gulp gulp-cheerio gulp-ext-replace gulp-plumber gulp-rename gulp-size gulp-svgmin gulp-util gulp-zip @ribajs/webpack-config
 ```
 
 ## Regist Riba

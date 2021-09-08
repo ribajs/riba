@@ -5,8 +5,8 @@ import { SsrService } from './ssr.service';
 import type { Request, Response, NextFunction } from 'express';
 import type { Cache } from 'cache-manager';
 export declare class SsrMiddleware implements NestMiddleware {
-    protected config: ConfigService;
-    protected ssr: SsrService;
+    protected readonly config: ConfigService;
+    protected readonly ssr: SsrService;
     protected cacheManager: Cache;
     theme: FullThemeConfig;
     log: Logger;

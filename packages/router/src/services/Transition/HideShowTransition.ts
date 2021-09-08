@@ -1,5 +1,6 @@
 import { BaseTransition } from "./BaseTransition";
-import { Transition } from "../../interfaces/transition";
+import { Transition } from "../../types/transition";
+import { scrollToPosition } from "@ribajs/utils";
 
 /**
  * Basic Transition object, wait for the new Container to be ready,
@@ -18,29 +19,21 @@ export class HideShowTransition extends BaseTransition implements Transition {
     this.scrollToTop = scrollToTop;
   }
 
-  public doScrollToTop() {
-    return new Promise((resolve) => {
-      resolve(
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        })
-      );
-    });
-  }
-
-  public start() {
+  public async start() {
     if (!this.newContainerLoading) {
       throw new Error("this.newContainerLoading is not set");
     }
     if (this.scrollToTop) {
-      this.doScrollToTop();
+      await scrollToPosition(window, "start", "vertical", "smooth");
     }
 
-    this.newContainerLoading.then(this.finish.bind(this));
+    await this.newContainerLoading;
+
+    await this.finish();
+    return;
   }
 
-  public finish() {
-    this.done();
+  public async finish() {
+    return this.done();
   }
 }

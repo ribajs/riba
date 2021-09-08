@@ -21,6 +21,8 @@ export declare class LunrService {
     add(ns: string, doc: any, attributes?: {
         boost?: number;
     }): void;
+    delete(ns: string): void;
+    reset(ns: string): void;
     build(ns: string): Index;
     use(ns: string, plugin: Builder.Plugin, ...args: any[]): void;
     search(ns: string, query: string): SearchResultExt[];

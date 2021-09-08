@@ -5,7 +5,7 @@ import { Formatter } from "../../types/formatter";
  * @see https://github.com/matthieuriolo/rivetsjs-stdlib/blob/master/src/rivetsstdlib.js#L82
  */
 export const isIntegerFormatter: Formatter = {
-  name: "isInteger",
+  name: "is-integer",
   read(n: number) {
     /**
      * Thanks a lot to Dagg Nabbit

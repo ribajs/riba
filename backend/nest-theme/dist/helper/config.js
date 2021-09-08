@@ -40,7 +40,7 @@ const validateFullThemeConfig = (fullThemeConfig) => {
     exports.validateNestThemeConfig(fullThemeConfig);
 };
 exports.validateFullThemeConfig = validateFullThemeConfig;
-const loadConfig = (searchConfigPaths) => {
+const loadConfig = (searchConfigPaths, env) => {
     for (const configPath of searchConfigPaths) {
         if (!fs_1.existsSync(configPath)) {
             continue;
@@ -52,14 +52,14 @@ const loadConfig = (searchConfigPaths) => {
             };
             const context = {
                 exports: {
-                    themeConfig: {},
+                    config: undefined,
                 },
                 require,
             };
             let jSource = typescript_1.transpileModule(tSource, { compilerOptions }).outputText;
             let script = new vm_1.Script(jSource);
             script.runInNewContext(context);
-            const themeConfig = context.exports.themeConfig;
+            const themeConfig = context.exports.config(env);
             script = null;
             jSource = null;
             tSource = null;

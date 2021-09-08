@@ -53,7 +53,12 @@ let SsrMiddleware = class SsrMiddleware {
                     this.log.debug(`Cache used`);
                     return res.send(result);
                 }
-                result = await render();
+                try {
+                    result = await render();
+                }
+                catch (error) {
+                    return next(error_handler_1.handleError(error));
+                }
                 this.cacheManager.set(cacheKey, result, cacheOptions);
                 res.send(result);
                 if (global.gc) {

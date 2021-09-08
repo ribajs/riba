@@ -95,19 +95,23 @@ exports.promiseSeries = promiseSeries;
  * @param file Reference to current icon file?
  */
 const processSvg = ($, file) => {
-    var $svg = $("svg"); // eslint-disable-line no-var
-    const $newSvg = $('<svg aria-hidden="true" focusable="false" role="presentation" class="icon" />'); // eslint-disable-line no-var
-    var fileName = file.relative.replace(".svg", ""); // eslint-disable-line no-var
-    var viewBoxAttr = $svg.attr("viewbox"); // eslint-disable-line no-var
+    const $svg = $("svg");
+    const $newSvg = $('<svg aria-hidden="true" focusable="false" role="presentation" class="icon" />');
+    const fileName = file.relative.replace(".svg", "");
+    const viewBoxAttr = $svg.attr("viewbox");
+    const fillAttr = $svg.attr("fill");
     // Add necessary attributes
     if (viewBoxAttr) {
-        var width = parseInt(viewBoxAttr.split(" ")[2], 10); // eslint-disable-line no-var
-        var height = parseInt(viewBoxAttr.split(" ")[3], 10); // eslint-disable-line no-var
-        var widthToHeightRatio = width / height; // eslint-disable-line no-var
+        const width = parseInt(viewBoxAttr.split(" ")[2], 10);
+        const height = parseInt(viewBoxAttr.split(" ")[3], 10);
+        const widthToHeightRatio = width / height;
         if (widthToHeightRatio >= 1.5) {
             $newSvg.addClass("icon--wide");
         }
         $newSvg.attr("viewBox", viewBoxAttr);
+    }
+    if (fillAttr) {
+        $newSvg.attr("fill", fillAttr);
     }
     // Add required classes to full color icons
     if (file.relative.indexOf("-full-color") >= 0) {

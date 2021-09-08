@@ -18,10 +18,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 const gulp_1 = __importDefault(require("gulp"));
 const gulp_plumber_1 = __importDefault(require("gulp-plumber"));
+const gulp_rename_1 = __importDefault(require("gulp-rename"));
 const chokidar_1 = __importDefault(require("chokidar"));
 const vinyl_paths_1 = __importDefault(require("vinyl-paths"));
 const del_1 = __importDefault(require("del"));
 const gulp_size_1 = __importDefault(require("gulp-size"));
+const gulp_print_1 = __importDefault(require("gulp-print"));
 const config_1 = require("./includes/config");
 const utilities_1 = require("./includes/utilities");
 const messages_1 = __importDefault(require("./includes/messages"));
@@ -57,7 +59,7 @@ if ((_a = config_1.config.ribaShopifyTda) === null || _a === void 0 ? void 0 : _
 const processAssetsTheme = (files) => {
     messages_1.default.logProcessFiles("build:assets");
     return gulp_1.default
-        .src(files, { base: config_1.config.src.root })
+        .src(files, { base: config_1.config.src.root, nodir: true })
         .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
         .pipe(gulp_size_1.default({
         showFiles: true,
@@ -122,6 +124,15 @@ function removeAssets(files) {
  */
 gulp_1.default.task("build:assets", () => {
     return processAssetsTheme(assetsPaths);
+});
+gulp_1.default.task("build:assets:favicons", () => {
+    return gulp_1.default
+        .src(config_1.config.src.favicons)
+        .pipe(gulp_rename_1.default((path) => {
+        path.basename = "favicons_" + path.basename;
+    }))
+        .pipe(gulp_print_1.default()) // TODO
+        .pipe(gulp_1.default.dest(config_1.config.dist.assets));
 });
 gulp_1.default.task("build:assets:riba-shopify", () => {
     return processAssetsRibaShopify(assetsPathsRibaShopify);

@@ -9,7 +9,7 @@ import { config } from "./includes/config";
 import messages from "./includes/messages";
 
 // Try to get the webpack.config.js from root of the project, otherwise use the default babel config
-let webpackConfig: any;
+let webpackConfig: any; // TODO
 try {
   webpackConfig = require(path.resolve(config.dist.root, "webpack.config.js"))(
     gutil.env.environments
@@ -18,7 +18,7 @@ try {
   webpackConfig = require("../webpack.config.js")(gutil.env.environments);
 }
 
-let webpackCheckoutConfig: any;
+let webpackCheckoutConfig: any; // TODO
 try {
   webpackCheckoutConfig = require(path.resolve(
     config.dist.root,
@@ -30,39 +30,60 @@ try {
   );
 }
 
-gulp.task("build:wp:main", () => {
+gulp.task("build:wp:main", (done) => {
   messages.logProcessFiles("build:wp:main");
+  if (!webpackConfig.entry.main || webpackConfig.entry.main?.length <= 0) {
+    return done();
+  }
   return gulp
     .src(webpackConfig.entry.main)
-    .pipe(gulpWebpack(webpackConfig, webpack as any))
-    .pipe(gulp.dest(config.dist.assets));
+    .pipe(gulpWebpack(webpackConfig, webpack as any)) // TODO
+    .pipe(gulp.dest(config.dist.assets))
+    .on("end", done);
 });
 
-gulp.task("watch:wp:main", () => {
+gulp.task("watch:wp:main", (done) => {
   messages.logProcessFiles("watch:wp:main");
+  if (!webpackConfig.entry.main || webpackConfig.entry.main?.length <= 0) {
+    return done();
+  }
   webpackConfig.watch = true;
   return gulp
     .src(webpackConfig.entry.main)
-    .pipe(gulpWebpack(webpackConfig, webpack as any))
-    .pipe(gulp.dest(config.dist.assets));
+    .pipe(gulpWebpack(webpackConfig, webpack as any)) // TODO
+    .pipe(gulp.dest(config.dist.assets))
+    .on("end", done);
 });
 
-gulp.task("build:wp:checkout", () => {
+gulp.task("build:wp:checkout", (done) => {
   messages.logProcessFiles("build:wp:checkout");
-  // console.debug("webpackConfig", webpackConfig);
+  if (
+    !webpackCheckoutConfig.entry.checkout ||
+    webpackCheckoutConfig.entry.checkout?.length <= 0
+  ) {
+    return done();
+  }
   return gulp
     .src(webpackCheckoutConfig.entry.checkout)
-    .pipe(gulpWebpack(webpackCheckoutConfig, webpack as any))
-    .pipe(gulp.dest(config.dist.assets));
+    .pipe(gulpWebpack(webpackCheckoutConfig, webpack as any)) // TODO
+    .pipe(gulp.dest(config.dist.assets))
+    .on("end", done);
 });
 
-gulp.task("watch:wp:checkout", () => {
+gulp.task("watch:wp:checkout", (done) => {
   messages.logProcessFiles("watch:wp:checkout");
+  if (
+    !webpackCheckoutConfig.entry.checkout ||
+    webpackCheckoutConfig.entry.checkout?.length <= 0
+  ) {
+    return done();
+  }
   webpackCheckoutConfig.watch = true;
   return gulp
     .src(webpackCheckoutConfig.entry.checkout)
-    .pipe(gulpWebpack(webpackCheckoutConfig, webpack as any))
-    .pipe(gulp.dest(config.dist.assets));
+    .pipe(gulpWebpack(webpackCheckoutConfig, webpack as any)) // TODO
+    .pipe(gulp.dest(config.dist.assets))
+    .on("end", done);
 });
 
 gulp.task("build:wp", gulp.parallel("build:wp:main", "build:wp:checkout"));

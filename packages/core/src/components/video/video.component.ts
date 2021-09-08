@@ -12,7 +12,7 @@ export class VideoComponent extends Component {
   protected autobind = true;
   protected alreadyStartedPlaying = false;
   protected wasPaused = false;
-  public _debug = true;
+  public _debug = false;
 
   static get observedAttributes(): string[] {
     return ["video-src", "autoplay-on-min-buffer", "autoplay-media-query"];

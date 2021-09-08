@@ -1,9 +1,9 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { VirtualConsole, JSDOM } from 'jsdom';
-import * as Brakes from 'brakes';
 import { ConfigService } from '@nestjs/config';
 import { TemplateVars } from './types/template-vars';
-import { ThemeConfig, ErrorObj } from '@ribajs/ssr';
+import { ErrorObj } from '@ribajs/ssr';
+import type { FullThemeConfig } from './types/theme-config';
 import type { Request } from 'express';
 import fetch from 'node-fetch';
 import type { ComponentLifecycleEventData, SharedContext } from '@ribajs/ssr';
@@ -12,17 +12,18 @@ import { EventDispatcher } from '@ribajs/events';
 import { SourceFileService } from './source-file/source-file.service';
 import { TemplateFileService } from './template-file/template-file.service';
 import { DummyConsole } from './helper/dummy-console';
+import { ResponseError } from './types';
 
 @Injectable()
 export class SsrService {
   log = new Logger(this.constructor.name);
-  theme: ThemeConfig;
+  theme: FullThemeConfig;
   constructor(
     config: ConfigService,
     protected readonly sourceFile: SourceFileService,
     protected readonly templateFile: TemplateFileService,
   ) {
-    this.theme = config.get<ThemeConfig>('theme');
+    this.theme = config.get<FullThemeConfig>('theme');
   }
 
   async getSharedContext(
@@ -73,7 +74,7 @@ export class SsrService {
       includeNodeLocations: true,
       beforeParse(window) {
         if (!window.fetch) {
-          window.fetch = fetch;
+          window.fetch = fetch as any;
         }
 
         if (!window.requestAnimationFrame) {
@@ -129,6 +130,7 @@ export class SsrService {
       } catch (error) {
         this.log.error('Error on run script');
         this.log.error(error);
+        throw error;
       }
     }
 
@@ -154,7 +156,7 @@ export class SsrService {
       };
 
       const clear = () => {
-        console.debug('Clear JSDom');
+        // console.debug('Clear JSDom');
 
         // Ignore clear errors
         virtualConsole.sendTo(new DummyConsole());
@@ -199,10 +201,13 @@ export class SsrService {
     return renderResult;
   }
 
-  protected transformBrowserError(error: Error | ErrorEvent) {
+  protected transformBrowserError(error: ResponseError | ErrorEvent) {
     const newError = new Error(error.message);
     if ((error as Error).stack) {
       newError.stack = (error as Error).stack;
+    }
+    if ((error as ResponseError).status) {
+      (newError as ResponseError).status = (error as ResponseError).status;
     }
     return newError;
   }
@@ -233,16 +238,7 @@ export class SsrService {
     );
 
     try {
-      const _render = async () => {
-        return this.render(template.layout, sharedContext);
-      };
-
-      // https://github.com/awolden/brakes
-      const render = new Brakes(_render, {
-        timeout: this.theme.timeout || 10000,
-      });
-      const renderData = await render.exec();
-      return renderData;
+      return await this.render(template.layout, sharedContext);
     } catch (error) {
       this.log.error(`Error on render component! rootTag: "${rootTag}"`);
       this.log.error(error);

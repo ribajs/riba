@@ -1,4 +1,5 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
+import { ResponseError } from './types';
 
 /**
  *
@@ -6,17 +7,19 @@ import { HttpException, HttpStatus } from '@nestjs/common';
  * @returns
  */
 export const getStatus = (
-  exception: HttpException | Error | string,
+  exception: HttpException | ResponseError | string,
 ): number => {
-  const status =
-    exception instanceof HttpException
-      ? exception.getStatus()
-      : HttpStatus.INTERNAL_SERVER_ERROR;
-  return status;
+  if (exception instanceof HttpException) {
+    return exception.getStatus();
+  }
+  if (typeof exception !== 'string' && exception.status) {
+    return exception.status;
+  }
+  return HttpStatus.INTERNAL_SERVER_ERROR;
 };
 
 export const getMessage = (
-  exception: HttpException | Error | string,
+  exception: HttpException | ResponseError | string,
 ): string => {
   let message = 'Internal server error';
 
@@ -36,7 +39,7 @@ export const getMessage = (
 };
 
 export const getStack = (
-  exception: HttpException | Error | string,
+  exception: HttpException | ResponseError | string,
 ): string[] => {
   let stack: string | string[];
   if (typeof exception === 'string') {
@@ -69,16 +72,25 @@ export const getStack = (
 };
 
 export const handleError = (
-  error: HttpException | Error | string,
+  error: HttpException | ResponseError | string,
 ): HttpException => {
   if (error instanceof HttpException) {
     return error;
   }
-  return new HttpException(
-    {
-      message: getMessage(error),
-      stack: getStack(error),
-    },
-    getStatus(error),
-  );
+  try {
+    return new HttpException(
+      {
+        message: getMessage(error),
+        stack: getStack(error),
+      },
+      getStatus(error),
+    );
+  } catch (error) {
+    return new HttpException(
+      {
+        message: "Can't handle error",
+      },
+      500,
+    );
+  }
 };

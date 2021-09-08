@@ -4,7 +4,7 @@ export interface HttpServiceResponse<T> {
   ok: Response["ok"];
   redirected: Response["redirected"];
   statusText: Response["statusText"];
-  trailer: Response["trailer"];
+  // trailer: Response["trailer"];
   type: Response["type"];
   url: Response["url"];
   arrayBuffer: Response["arrayBuffer"];
