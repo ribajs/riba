@@ -15,11 +15,11 @@
   ],
   "dependencies": {
     "@babel/core": "^7.15.5",
-    "@graphql-tools/webpack-loader": "^6.4.0",
+    "@graphql-tools/webpack-loader": "^6.6.0",
     "@ribajs/eslint-config": "workspace:*",
     "@ribajs/npm-package": "workspace:*",
     "@ribajs/postcss-config": "workspace:*",
-    "@yarnpkg/pnpify": "^3.0.1",
+    "@yarnpkg/pnpify": "^3.0.1-rc.2",
     "babel-loader": "^8.2.2",
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^6.2.0",

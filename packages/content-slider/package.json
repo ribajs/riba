@@ -68,7 +68,7 @@
     "@ribajs/core": "workspace:*",
     "@ribajs/extras": "workspace:*",
     "@ribajs/utils": "workspace:*",
-    "@yarnpkg/pnpify": "^3.0.1"
+    "@yarnpkg/pnpify": "^3.0.1-rc.2"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"
