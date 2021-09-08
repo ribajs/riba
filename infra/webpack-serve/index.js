@@ -29,31 +29,34 @@ const start = async () => {
     console.warn(error);
     webpackConfig = await require("@ribajs/webpack-config")({
       template: "local",
+      plugins: [
+        // Plugin for hot module replacement
+        new webpack.HotModuleReplacementPlugin(),
+      ]
     })(env);
     console.debug("Use default webpack config from @ribajs/webpack-config");
   }
 
-  WDS.addDevServerEntrypoints(webpackConfig, webpackConfig.devServer);
+  const entry = Array.isArray(webpackConfig.entry) ? webpackConfig.entry : [webpackConfig.entry];
 
-  const compiler = webpack(webpackConfig);
-  const devServer = new WDS(compiler, webpackConfig.devServer);
+  webpackConfig.entry = [
+    // Runtime code for hot module replacement
+    "webpack/hot/dev-server.js",
+    // Dev server client for web socket transport, hot and live reload logic
+    "webpack-dev-server/client/index.js?hot=true&live-reload=true",
+
+    ...entry,
+  ];
 
   webpackConfig.devServer.host = webpackConfig.devServer.host || "0.0.0.0";
   webpackConfig.devServer.port = await getPort({
     port: webpackConfig.devServer.port || 8080,
   });
 
-  devServer.listen(
-    webpackConfig.devServer.port,
-    webpackConfig.devServer.host,
-    (err) => {
-      console.error(err);
-    }
-  );
+  const compiler = webpack(webpackConfig);
+  const devServer = new WDS(webpackConfig.devServer, compiler);
 
-  console.log(
-    `webpack-serve listening on http://${webpackConfig.devServer.host}:${webpackConfig.devServer.port}\n`
-  );
+  await devServer.start();
 };
 
 module.exports = start();

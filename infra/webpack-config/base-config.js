@@ -386,10 +386,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
       config.devServer = config.devServer || {
         port: 8080,
         host: "0.0.0.0",
-        contentBase: [config.distPath],
-        // contentBasePublicPath: config.distPath,
         hot: true,
-        inline: true,
       };
 
       // https://github.com/nuxt/nuxt.js/blob/dev/packages/webpack/src/config/base.js#L435
