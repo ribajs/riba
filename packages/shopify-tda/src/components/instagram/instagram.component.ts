@@ -1,10 +1,10 @@
 import { Component, TemplateFunction } from "@ribajs/core";
 import { Pjax } from "@ribajs/router";
 import template from "./instagram.component.html";
-import { InstagramMediaData, InstagramApiService } from "@ribajs/shopify-tda";
+import { InstagramMedia, InstagramApiService } from "@ribajs/shopify-tda";
 
 export interface Scope {
-  media: InstagramMediaData[];
+  media?: InstagramMedia;
   instagramId?: string;
   openLinks: boolean;
   limit: number;
@@ -23,7 +23,7 @@ export class ShopifyTdaInstagramComponent extends Component {
   }
 
   public scope: Scope = {
-    media: [],
+    media: undefined,
     openLinks: false,
     limit: 0,
     instagramId: undefined,

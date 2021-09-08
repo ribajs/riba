@@ -1,6 +1,9 @@
+$shopify-tda-instagram-scrollbar-component-font-size: 9vw !default;
+$shopify-tda-instagram-scrollbar-component-line-height: $shopify-tda-instagram-scrollbar-component-font-size !default;
+
 .title-row {
   .title-col {
-    font-size: 9vw;
-    line-height: 9vw;
+    font-size: $shopify-tda-instagram-scrollbar-component-font-size;
+    line-height: $shopify-tda-instagram-scrollbar-component-line-height;
   }
 }

@@ -1,3 +1,6 @@
+$shopify-tda-instagram-component-color: white !default;
+$shopify-tda-instagram-component-bg-color: rgba(0,0,0,0.8) !default;
+
 shopify-tda-instagram {
   @extend .font-size-sm !optional;
   .embed-responsive {
@@ -6,8 +9,8 @@ shopify-tda-instagram {
       transition: 0.3s all ease;
       &.caption {
         opacity: 0;
-        background-color: rgba(0,0,0,0.8);
-        color: white;
+        background-color: $shopify-tda-instagram-component-bg-color;
+        color: $shopify-tda-instagram-component-color;
         text-align: center;
         padding: 10%;
       }

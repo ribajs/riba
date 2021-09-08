@@ -1,6 +1,7 @@
-import type { InstagramPaging } from "./paging";
+import { InstagramMedia } from "./media";
 
-export interface InstagramResponse<T> {
-  data: T;
-  paging: InstagramPaging;
+export interface InstagramResponse {
+  id: string;
+  media: InstagramMedia;
+  media_count: number;
 }

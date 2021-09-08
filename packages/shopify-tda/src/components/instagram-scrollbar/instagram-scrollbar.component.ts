@@ -4,18 +4,18 @@ import {
   getViewportDimensions,
   hasChildNodesTrim,
 } from "@ribajs/utils/src/dom";
-import type { InstagramMediaData } from "../../interfaces/instagram-api";
+import type { InstagramMedia } from "../../interfaces/instagram-api";
 import { InstagramApiService } from "../../services/instagram-api.service";
 import template from "./instagram-scrollbar.component.html";
 
 export interface Scope {
   instagramId?: string;
   openLinks: boolean;
-  openUrl: string;
+  openUrl?: string;
   limit: number;
   onScroll: ShopifyTdaInstagramScrollbarComponent["onScroll"];
   onTap: ShopifyTdaInstagramScrollbarComponent["onTap"];
-  media?: InstagramMediaData[];
+  media?: InstagramMedia;
 }
 
 export class ShopifyTdaInstagramScrollbarComponent extends Component {
@@ -28,7 +28,7 @@ export class ShopifyTdaInstagramScrollbarComponent extends Component {
   public scope: Scope = {
     instagramId: undefined,
     openLinks: false,
-    openUrl: "",
+    openUrl: undefined,
     limit: 0,
     onScroll: this.onScroll,
     onTap: this.onTap,
@@ -56,7 +56,7 @@ export class ShopifyTdaInstagramScrollbarComponent extends Component {
     if (!pjax) {
       return;
     }
-    if (this.scope.openUrl.length > 0) {
+    if (this.scope.openUrl && this.scope.openUrl.length > 0) {
       pjax.goTo(this.scope.openUrl);
     }
     if (this.scope.openLinks) {
@@ -97,7 +97,8 @@ export class ShopifyTdaInstagramScrollbarComponent extends Component {
     if (!this.scope.media) {
       return;
     }
-    const width = (getViewportDimensions().w / 3) * this.scope.media.length;
+    const width =
+      (getViewportDimensions().w / 3) * this.scope.media.data.length;
     return width;
   }
 

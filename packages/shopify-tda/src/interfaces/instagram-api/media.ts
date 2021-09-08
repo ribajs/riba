@@ -13,6 +13,6 @@ export interface InstagramMediaData {
 }
 
 export interface InstagramMedia {
-  media: InstagramMediaData[];
+  data: InstagramMediaData[];
   paging: InstagramPaging;
 }

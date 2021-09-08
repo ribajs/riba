@@ -1,0 +1,11 @@
+// Bootstrap Style extensions
+@import './scss/index';
+// Components
+@import './components/index';
+
+// fix rv-show, rv-hide on bootstrap
+[hidden] {
+  &.d-flex, &.d-block {
+    display: none !important;
+  }
+}
