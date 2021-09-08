@@ -12,6 +12,6 @@
     "@babel/runtime": "^7.15.4",
     "@babel/runtime-corejs3": "^7.15.4",
     "@ribajs/tsconfig": "workspace:infra/tsconfig",
-    "@types/node": "^16.7.10"
+    "@types/node": "^16.7.13"
   }
 }
