@@ -22,14 +22,14 @@
     "@babel/runtime": "^7.15.4",
     "@babel/runtime-corejs3": "^7.15.4",
     "@ribajs/tsconfig": "workspace:*",
-    "@types/jest": "^26.0.24",
-    "@types/node": "^16.7.10",
-    "babel-jest": "^27.0.6",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.7.13",
+    "babel-jest": "^27.1.1",
     "eslint": "^7.32.0",
-    "jest": "^27.0.6",
-    "jest-config": "^27.0.6",
+    "jest": "^27.1.1",
+    "jest-config": "^27.1.1",
     "jest-extended": "^0.11.5",
-    "ts-jest": "^27.0.4",
+    "ts-jest": "^27.0.5",
     "typescript": "^4.4.2"
   }
 }
