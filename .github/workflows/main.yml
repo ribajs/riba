@@ -5,20 +5,30 @@ on: # rebuild any PRs and main branch changes
     branches:
       - "*"
 jobs:
+  # https://github.com/marketplace/actions/checkout-submodules
   build: # make sure build/ci work properly
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Checkout submodules
+        # uses: textbook/git-checkout-submodule-action@master
+        run: git submodule update --init --recursive
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
-         node-version: '16'
-      - run: |
+          node-version: '16'
+      - name: Install dependencies
+        run: |
           yarn install
-      - run: |
+      - name: Lint source files
+        run: |
           yarn run lint
         env:
           NODE_OPTIONS: '--max-old-space-size=4096'
-      - run: |
+      - name: Test
+        run: |
           yarn run test
-      - run: |
+      - name: Build each package
+        run: |
           yarn run build
