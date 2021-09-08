@@ -8,7 +8,7 @@ section.row
       .card-body(rv-show="isConnected")
         .card-text
           p.d-flex.align-items-center
-            bs4-icon.mr-3(rv-src="avatarUrl" size="50")
+            img.mr-3(rv-src="avatarUrl" width="50" height="50")
             if type === 'shopify'
               | {account.shop.name}
             else
