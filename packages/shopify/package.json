@@ -60,7 +60,7 @@
     "@shopify/theme-lint": "^3.1.0",
     "@tsconfig/node14": "^1.0.1",
     "@types/app-root-path": "^1.2.4",
-    "@types/archiver": "^5.3.0",
+    "@types/archiver": "^5.1.1",
     "@types/bluebird": "^3.5.36",
     "@types/browser-sync": "^2.26.2",
     "@types/debug": "^4.1.7",
