@@ -51,27 +51,27 @@ let SearchController = class SearchController {
     }
 };
 __decorate([
-    common_1.Get('/:namespace/:query'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Param('namespace')),
-    __param(2, common_1.Param('query')),
-    __param(3, common_1.Query('limit')),
+    (0, common_1.Get)('/:namespace/:query'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('namespace')),
+    __param(2, (0, common_1.Param)('query')),
+    __param(3, (0, common_1.Query)('limit')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String, String, Object]),
     __metadata("design:returntype", void 0)
 ], SearchController.prototype, "search", null);
 __decorate([
-    common_1.Get('/:query'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Param('query')),
-    __param(2, common_1.Query('limit')),
+    (0, common_1.Get)('/:query'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('query')),
+    __param(2, (0, common_1.Query)('limit')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String, Object]),
     __metadata("design:returntype", void 0)
 ], SearchController.prototype, "searchAll", null);
 SearchController = __decorate([
-    swagger_1.ApiTags('search'),
-    common_1.Controller('api/search'),
+    (0, swagger_1.ApiTags)('search'),
+    (0, common_1.Controller)('api/search'),
     __metadata("design:paramtypes", [lunr_service_1.LunrService])
 ], SearchController);
 exports.SearchController = SearchController;

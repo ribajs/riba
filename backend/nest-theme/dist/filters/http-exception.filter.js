@@ -23,9 +23,9 @@ let HttpExceptionFilter = class HttpExceptionFilter {
         this.theme = this.config.get('theme');
     }
     getErrorObject(exception, req, overwriteException) {
-        const status = error_handler_1.getStatus(overwriteException || exception);
-        const message = error_handler_1.getMessage(overwriteException || exception);
-        const stack = error_handler_1.getStack(overwriteException || exception);
+        const status = (0, error_handler_1.getStatus)(overwriteException || exception);
+        const message = (0, error_handler_1.getMessage)(overwriteException || exception);
+        const stack = (0, error_handler_1.getStack)(overwriteException || exception);
         const errorObj = {
             statusCode: status,
             message: message,
@@ -57,7 +57,7 @@ let HttpExceptionFilter = class HttpExceptionFilter {
         }
         catch (error) {
             this.log.error(`Can't render "${componentTagName}":  ${error}`);
-            overwriteException = error_handler_1.handleError(error);
+            overwriteException = (0, error_handler_1.handleError)(error);
         }
         return {
             hasError: true,
@@ -69,7 +69,7 @@ let HttpExceptionFilter = class HttpExceptionFilter {
         const ctx = host.switchToHttp();
         const res = ctx.getResponse();
         const req = ctx.getRequest();
-        let status = error_handler_1.getStatus(exception);
+        let status = (0, error_handler_1.getStatus)(exception);
         let overwriteException;
         this.log.debug('catch error: ' + JSON.stringify(exception));
         const errorPageConfig = this.theme.errorRoutes[status];
@@ -77,7 +77,7 @@ let HttpExceptionFilter = class HttpExceptionFilter {
             const result = await this.renderErrorPage(exception, host, errorPageConfig.component);
             if (result.hasError) {
                 overwriteException = result.exception;
-                status = error_handler_1.getStatus(overwriteException);
+                status = (0, error_handler_1.getStatus)(overwriteException);
             }
             else {
                 return res.status(status).send(result.html);
@@ -89,7 +89,7 @@ let HttpExceptionFilter = class HttpExceptionFilter {
     }
 };
 HttpExceptionFilter = __decorate([
-    common_1.Catch(common_1.HttpException, Error),
+    (0, common_1.Catch)(common_1.HttpException, Error),
     __metadata("design:paramtypes", [config_1.ConfigService, ssr_service_1.SsrService])
 ], HttpExceptionFilter);
 exports.HttpExceptionFilter = HttpExceptionFilter;

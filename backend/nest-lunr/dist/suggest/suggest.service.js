@@ -118,7 +118,7 @@ let SuggestService = class SuggestService {
     }
 };
 SuggestService = __decorate([
-    common_1.Injectable()
+    (0, common_1.Injectable)()
 ], SuggestService);
 exports.SuggestService = SuggestService;
 //# sourceMappingURL=suggest.service.js.map

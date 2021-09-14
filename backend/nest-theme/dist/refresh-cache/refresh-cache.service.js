@@ -74,7 +74,7 @@ let RefreshCacheService = class RefreshCacheService {
             const url = this.normalize(link, host);
             this.visited.push(link);
             this.log.log('refresh ' + url);
-            const response = await node_fetch_1.default(url);
+            const response = await (0, node_fetch_1.default)(url);
             const contentType = response.headers.get('content-type');
             if (!contentType || !contentType.includes('text/html')) {
                 continue;
@@ -98,7 +98,7 @@ let RefreshCacheService = class RefreshCacheService {
     }
 };
 RefreshCacheService = __decorate([
-    common_1.Injectable(),
+    (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [config_1.ConfigService])
 ], RefreshCacheService);
 exports.RefreshCacheService = RefreshCacheService;

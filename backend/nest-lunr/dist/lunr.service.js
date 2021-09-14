@@ -248,7 +248,7 @@ let LunrService = LunrService_1 = class LunrService {
 };
 LunrService.lunr = lunr;
 LunrService = LunrService_1 = __decorate([
-    common_1.Injectable()
+    (0, common_1.Injectable)()
 ], LunrService);
 exports.LunrService = LunrService;
 //# sourceMappingURL=lunr.service.js.map

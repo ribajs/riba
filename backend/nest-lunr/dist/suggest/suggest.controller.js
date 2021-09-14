@@ -42,25 +42,25 @@ let SuggestController = class SuggestController {
     }
 };
 __decorate([
-    common_1.Get('/:namespace/:word'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Param('namespace')),
-    __param(2, common_1.Param('word')),
+    (0, common_1.Get)('/:namespace/:word'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('namespace')),
+    __param(2, (0, common_1.Param)('word')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String, String]),
     __metadata("design:returntype", Promise)
 ], SuggestController.prototype, "suggestion", null);
 __decorate([
-    common_1.Get('/:word'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Param('word')),
+    (0, common_1.Get)('/:word'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('word')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", Promise)
 ], SuggestController.prototype, "allSuggestions", null);
 SuggestController = __decorate([
-    swagger_1.ApiTags('suggestions'),
-    common_1.Controller('api/suggest'),
+    (0, swagger_1.ApiTags)('suggestions'),
+    (0, common_1.Controller)('api/suggest'),
     __metadata("design:paramtypes", [suggest_service_1.SuggestService])
 ], SuggestController);
 exports.SuggestController = SuggestController;

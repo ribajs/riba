@@ -36,17 +36,17 @@ const validateNestThemeConfig = (nestThemeConfig) => {
 };
 exports.validateNestThemeConfig = validateNestThemeConfig;
 const validateFullThemeConfig = (fullThemeConfig) => {
-    exports.validateThemeConfig(fullThemeConfig);
-    exports.validateNestThemeConfig(fullThemeConfig);
+    (0, exports.validateThemeConfig)(fullThemeConfig);
+    (0, exports.validateNestThemeConfig)(fullThemeConfig);
 };
 exports.validateFullThemeConfig = validateFullThemeConfig;
 const loadConfig = (searchConfigPaths, env) => {
     for (const configPath of searchConfigPaths) {
-        if (!fs_1.existsSync(configPath)) {
+        if (!(0, fs_1.existsSync)(configPath)) {
             continue;
         }
         if (configPath.endsWith('.ts')) {
-            let tSource = fs_1.readFileSync(configPath, 'utf8');
+            let tSource = (0, fs_1.readFileSync)(configPath, 'utf8');
             const compilerOptions = {
                 module: typescript_1.ModuleKind.CommonJS,
             };
@@ -56,7 +56,7 @@ const loadConfig = (searchConfigPaths, env) => {
                 },
                 require,
             };
-            let jSource = typescript_1.transpileModule(tSource, { compilerOptions }).outputText;
+            let jSource = (0, typescript_1.transpileModule)(tSource, { compilerOptions }).outputText;
             let script = new vm_1.Script(jSource);
             script.runInNewContext(context);
             const themeConfig = context.exports.config(env);
@@ -66,7 +66,7 @@ const loadConfig = (searchConfigPaths, env) => {
             return themeConfig;
         }
         else if (configPath.endsWith('.yaml')) {
-            const result = YAML.parse(fs_1.readFileSync(configPath, 'utf8'));
+            const result = YAML.parse((0, fs_1.readFileSync)(configPath, 'utf8'));
             return result;
         }
         else {

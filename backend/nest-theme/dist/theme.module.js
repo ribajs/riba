@@ -30,12 +30,12 @@ let ThemeModule = ThemeModule_1 = class ThemeModule {
         this.ssrMiddleware = ssrMiddleware;
     }
     static register(nestThemeConfig, expressAdapter, env = process.env.NODE_ENV) {
-        const basePath = path_1.resolve(nestThemeConfig.themeDir, 'config');
-        const activeThemeConfig = config_2.loadConfig([path_1.resolve(basePath, 'theme.ts'), path_1.resolve(basePath, 'theme.yaml')], env);
-        config_2.validateThemeConfig(activeThemeConfig);
-        config_2.validateNestThemeConfig(nestThemeConfig);
-        const fullThemeConfig = Object.assign(Object.assign(Object.assign({}, activeThemeConfig), nestThemeConfig), { basePath, templateVars: nestThemeConfig.templateVars || new empty_template_vars_1.EmptyTemplateVars(), assetsDir: path_1.resolve(nestThemeConfig.themeDir, activeThemeConfig.assetsDir), viewsDir: path_1.resolve(nestThemeConfig.themeDir, activeThemeConfig.viewsDir), pageComponentsDir: path_1.resolve(nestThemeConfig.themeDir, activeThemeConfig.pageComponentsDir || '') });
-        config_2.validateFullThemeConfig(fullThemeConfig);
+        const basePath = (0, path_1.resolve)(nestThemeConfig.themeDir, 'config');
+        const activeThemeConfig = (0, config_2.loadConfig)([(0, path_1.resolve)(basePath, 'theme.ts'), (0, path_1.resolve)(basePath, 'theme.yaml')], env);
+        (0, config_2.validateThemeConfig)(activeThemeConfig);
+        (0, config_2.validateNestThemeConfig)(nestThemeConfig);
+        const fullThemeConfig = Object.assign(Object.assign(Object.assign({}, activeThemeConfig), nestThemeConfig), { basePath, templateVars: nestThemeConfig.templateVars || new empty_template_vars_1.EmptyTemplateVars(), assetsDir: (0, path_1.resolve)(nestThemeConfig.themeDir, activeThemeConfig.assetsDir), viewsDir: (0, path_1.resolve)(nestThemeConfig.themeDir, activeThemeConfig.viewsDir), pageComponentsDir: (0, path_1.resolve)(nestThemeConfig.themeDir, activeThemeConfig.pageComponentsDir || '') });
+        (0, config_2.validateFullThemeConfig)(fullThemeConfig);
         const cacheModule = common_1.CacheModule.register();
         expressAdapter.setViewEngine(fullThemeConfig.viewEngine);
         expressAdapter.useStaticAssets(fullThemeConfig.assetsDir, {});
@@ -43,7 +43,7 @@ let ThemeModule = ThemeModule_1 = class ThemeModule {
         return {
             imports: [
                 config_1.ConfigModule.forRoot({
-                    load: [config_1.registerAs('theme', () => fullThemeConfig)],
+                    load: [(0, config_1.registerAs)('theme', () => fullThemeConfig)],
                 }),
                 cacheModule,
             ],
@@ -67,7 +67,7 @@ let ThemeModule = ThemeModule_1 = class ThemeModule {
     }
 };
 ThemeModule = ThemeModule_1 = __decorate([
-    common_1.Module({
+    (0, common_1.Module)({
         providers: [
             ssr_service_1.SsrService,
             ssr_middleware_1.SsrMiddleware,

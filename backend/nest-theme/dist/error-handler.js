@@ -62,9 +62,9 @@ const handleError = (error) => {
     }
     try {
         return new common_1.HttpException({
-            message: exports.getMessage(error),
-            stack: exports.getStack(error),
-        }, exports.getStatus(error));
+            message: (0, exports.getMessage)(error),
+            stack: (0, exports.getStack)(error),
+        }, (0, exports.getStatus)(error));
     }
     catch (error) {
         return new common_1.HttpException({

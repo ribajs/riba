@@ -40,7 +40,7 @@ let TemplateFileService = class TemplateFileService {
         return this.hashCode(path + componentTagName + JSON.stringify(variables)).toString();
     }
     getEngine(templatePath) {
-        const ext = path_1.extname(templatePath);
+        const ext = (0, path_1.extname)(templatePath);
         const detected = (ext === null || ext === void 0 ? void 0 : ext.substring(1)) || this.defaultEngine;
         if (detected !== this.defaultEngine) {
             this.log.warn(`Detected template engine is not the default: "${detected}" (Default: "${this.defaultEngine}")'`);
@@ -54,11 +54,11 @@ let TemplateFileService = class TemplateFileService {
         return detected;
     }
     normalizePath(path) {
-        if (!path_1.extname(path)) {
+        if (!(0, path_1.extname)(path)) {
             path = path + '.' + this.defaultEngine;
         }
         if (!path.startsWith(this.dir)) {
-            path = path_1.resolve(this.dir, path);
+            path = (0, path_1.resolve)(this.dir, path);
         }
         return path;
     }
@@ -105,7 +105,7 @@ let TemplateFileService = class TemplateFileService {
     }
 };
 TemplateFileService = __decorate([
-    common_1.Injectable(),
+    (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [config_1.ConfigService])
 ], TemplateFileService);
 exports.TemplateFileService = TemplateFileService;

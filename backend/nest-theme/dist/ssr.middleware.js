@@ -47,7 +47,7 @@ let SsrMiddleware = class SsrMiddleware {
             this.cacheManager.get(cacheKey, async (error, result) => {
                 if (error) {
                     this.log.error(error);
-                    return next(error_handler_1.handleError(error));
+                    return next((0, error_handler_1.handleError)(error));
                 }
                 if (result) {
                     this.log.debug(`Cache used`);
@@ -57,7 +57,7 @@ let SsrMiddleware = class SsrMiddleware {
                     result = await render();
                 }
                 catch (error) {
-                    return next(error_handler_1.handleError(error));
+                    return next((0, error_handler_1.handleError)(error));
                 }
                 this.cacheManager.set(cacheKey, result, cacheOptions);
                 res.send(result);
@@ -70,7 +70,7 @@ let SsrMiddleware = class SsrMiddleware {
         }
         catch (error) {
             this.log.error(error);
-            return next(error_handler_1.handleError(error));
+            return next((0, error_handler_1.handleError)(error));
         }
     }
     getRouteSettingsByRoute(routePath) {
@@ -80,8 +80,8 @@ let SsrMiddleware = class SsrMiddleware {
     }
 };
 SsrMiddleware = __decorate([
-    common_1.Injectable(),
-    __param(2, common_1.Inject(common_1.CACHE_MANAGER)),
+    (0, common_1.Injectable)(),
+    __param(2, (0, common_1.Inject)(common_1.CACHE_MANAGER)),
     __metadata("design:paramtypes", [config_1.ConfigService,
         ssr_service_1.SsrService, Object])
 ], SsrMiddleware);

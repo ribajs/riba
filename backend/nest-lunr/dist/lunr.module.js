@@ -13,7 +13,7 @@ const suggest_service_1 = require("./suggest/suggest.service");
 let LunrModule = class LunrModule {
 };
 LunrModule = __decorate([
-    common_1.Module({
+    (0, common_1.Module)({
         providers: [lunr_service_1.LunrService, suggest_service_1.SuggestService],
         controllers: [],
         exports: [lunr_service_1.LunrService, suggest_service_1.SuggestService],

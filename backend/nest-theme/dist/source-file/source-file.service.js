@@ -20,10 +20,10 @@ let SourceFileService = class SourceFileService {
         this.log = new common_1.Logger(this.constructor.name);
         this.scripts = new Map();
         this.theme = config.get('theme');
-        this.dir = path_1.resolve(this.theme.assetsDir, 'ssr');
+        this.dir = (0, path_1.resolve)(this.theme.assetsDir, 'ssr');
     }
     async loadAndSetCache(filename) {
-        const path = path_1.resolve(this.dir, filename);
+        const path = (0, path_1.resolve)(this.dir, filename);
         const source = await fs_1.promises.readFile(path, 'utf8');
         const stats = await fs_1.promises.stat(path);
         const script = new vm_1.Script(source, {
@@ -62,7 +62,7 @@ let SourceFileService = class SourceFileService {
     }
 };
 SourceFileService = __decorate([
-    common_1.Injectable(),
+    (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [config_1.ConfigService])
 ], SourceFileService);
 exports.SourceFileService = SourceFileService;
