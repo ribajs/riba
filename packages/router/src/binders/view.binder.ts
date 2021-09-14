@@ -219,7 +219,6 @@ export const viewBinder: ViewBinder = {
       this.view.models.dataset = dataset; // = container.data();
     }
 
-    // TODO append on action "append"
     self.nested = new View(container, this.view.models, this.view.options);
     self.nested.bind();
   },

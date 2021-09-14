@@ -69,9 +69,9 @@ export class RouterViewComponent extends Component {
 
   protected getContainerSelector() {
     if (this.scope.id === "main") {
-      return `${RouterViewComponent.tagName} > *`;
+      return `${RouterViewComponent.tagName} > *:first-child`;
     } else {
-      return `${RouterViewComponent.tagName}#${this.scope.id} > *`;
+      return `${RouterViewComponent.tagName}#${this.scope.id} > *:first-child`;
     }
   }
 
@@ -83,6 +83,7 @@ export class RouterViewComponent extends Component {
 
     const pjaxOptions: PjaxOptions = {
       id: this.scope.id,
+      action: this.scope.action,
       wrapper: this,
       containerSelector: this.getContainerSelector(),
       listenAllLinks: !!this.scope.listenAllLinks,
@@ -91,8 +92,10 @@ export class RouterViewComponent extends Component {
       parseTitle: !!this.scope.parseTitle,
       changeBrowserUrl: !!this.scope.changeBrowserUrl,
       prefetchLinks: !!this.scope.prefetchLinks,
+      scrollToTop: !!this.scope.scrollToTop,
     };
     this.pjax = new Pjax(pjaxOptions);
+    this.pjax.setActiveWrapper(this);
     this.prefetch = new Prefetch(this.scope.id);
     this.prefetch.init(pjaxOptions.prefetchLinks);
     this.pjax.start();

@@ -39,7 +39,7 @@ export const routeBinder: Binder<string> = {
       onClick(this: Binding, event: Event) {
         // console.log(this.customData.options.url);
         const pjax = Pjax.getInstance(this.customData.options.viewId);
-        if (onRoute(this.customData.options.url)) {
+        if (onRoute(this.customData.options.url, true)) {
           console.debug("already on this site, do nothing");
           event.stopPropagation();
           event.preventDefault();

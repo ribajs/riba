@@ -35,7 +35,9 @@ class Pjax {
   public static getInstance(id = "main"): Pjax | undefined {
     const result = Pjax.instances[id];
     if (!result) {
-      console.warn(`No pjax instance for viewId "${id}" found!`);
+      console.warn(
+        `[Pjax.getInstance] No pjax instance for viewId "${id}" found!`
+      );
     }
     return result;
   }
@@ -211,14 +213,15 @@ class Pjax {
    */
   constructor({
     id,
+    action = "replace",
     wrapper,
     containerSelector = "[data-namespace]",
     listenAllLinks = false,
     listenPopstate = true,
-    transition = new HideShowTransition(),
     parseTitle = true,
     changeBrowserUrl = true,
     prefetchLinks = true,
+    scrollToTop = true,
   }: PjaxOptions) {
     if (id) {
       this.viewId = id;
@@ -239,7 +242,8 @@ class Pjax {
       instance = Pjax.instances[this.viewId];
     }
 
-    instance.transition = instance.transition || transition;
+    instance.transition =
+      instance.transition || new HideShowTransition(action, scrollToTop);
     instance.wrapper = instance.wrapper || wrapper;
     instance.containerSelector =
       instance.containerSelector || containerSelector;
@@ -266,6 +270,13 @@ class Pjax {
 
     Pjax.instances[this.viewId] = instance;
     return Pjax.instances[this.viewId];
+  }
+
+  /**
+   * USe this if you have a view component
+   */
+  public setActiveWrapper(wrapper: HTMLElement) {
+    this.wrapper = wrapper;
   }
 
   /**

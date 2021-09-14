@@ -78,15 +78,22 @@ export const getUrl = (url?: string): string => {
 /**
  * Check if we are on the route
  */
-export const onRoute = (checkUrl?: string) => {
+export const onRoute = (checkUrl?: string, compareQueryParam = false) => {
   if (checkUrl) {
-    const location = getLocation();
-    const pathname = location.pathname;
-    const hostname = location.hostname;
-    const checkLocation = getLocation(checkUrl);
-    const checkPathname = checkLocation.pathname;
-    const checkHostname = checkLocation.hostname;
-    return hostname === checkHostname && pathname === checkPathname;
+    const location1 = getLocation();
+    const location2 = getLocation(checkUrl);
+
+    if (compareQueryParam) {
+      // TODO ignore query parameter order
+      if (location1.search !== location2.search) {
+        return false;
+      }
+    }
+
+    return (
+      location1.hostname === location2.hostname &&
+      location1.pathname === location2.pathname
+    );
   }
   return false;
 };

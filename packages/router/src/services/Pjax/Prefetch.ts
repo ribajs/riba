@@ -108,7 +108,9 @@ class Prefetch {
           console.error(error);
         });
       } else {
-        console.warn(`No pjax instance for viewId "${this.viewId}" found!`);
+        console.warn(
+          `[Prefetch.onLinkEnter] No pjax instance for viewId "${this.viewId}" found!`
+        );
         el.classList.add(ROUTE_ERROR_CLASS);
       }
     }
@@ -127,7 +129,9 @@ class Prefetch {
           console.error(error);
         });
       } else {
-        console.warn(`No pjax instance for viewId "${this.viewId}" found!`);
+        console.warn(
+          `[Prefetch.url] No pjax instance for viewId "${this.viewId}" found!`
+        );
       }
     }
   }
