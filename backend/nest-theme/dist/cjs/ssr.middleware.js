@@ -17,6 +17,8 @@ const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const ssr_service_1 = require("./ssr.service");
 const error_handler_1 = require("./error-handler");
+const path_to_regexp_1 = require("path-to-regexp");
+const qs_1 = require("qs");
 let SsrMiddleware = class SsrMiddleware {
     constructor(config, ssr, cacheManager) {
         this.config = config;
@@ -26,12 +28,17 @@ let SsrMiddleware = class SsrMiddleware {
         this.theme = this.config.get('theme');
     }
     async use(req, res, next) {
-        var _a;
-        console.debug('req', req);
-        const path = ((_a = req.route) === null || _a === void 0 ? void 0 : _a.path) ||
-            req.baseUrl ||
-            req._parsedUrl.pathname;
-        const routeSettings = this.getRouteSettingsByRoute(path);
+        let routeSettings;
+        if (req.route) {
+            routeSettings = this.getRouteSettingsByRoute(req.route.path);
+        }
+        else {
+            console.warn('FIXME: req.route is not set!');
+            const _route = this.getRouteSettingsByUrl(req._parsedUrl);
+            routeSettings = _route.settings;
+            req.params = _route.params;
+            req.query = _route.query;
+        }
         if (!routeSettings) {
             return next();
         }
@@ -77,6 +84,40 @@ let SsrMiddleware = class SsrMiddleware {
             this.log.error(error);
             return next((0, error_handler_1.handleError)(error));
         }
+    }
+    getRouteSettingsByUrl(url) {
+        let keys;
+        let match;
+        const settings = this.theme.routes.find((route) => {
+            for (const path of route.path) {
+                const _keys = [];
+                const _regexp = (0, path_to_regexp_1.pathToRegexp)(path, _keys);
+                const _match = url.pathname.match(_regexp);
+                if (!!_match) {
+                    match = _match;
+                    keys = _keys;
+                    return true;
+                }
+            }
+        });
+        if (!settings) {
+            return {
+                settings: undefined,
+                query: {},
+                params: {},
+                path: undefined,
+                keys: [],
+            };
+        }
+        const query = (0, qs_1.parse)(url.search, { ignoreQueryPrefix: true });
+        const path = match[0];
+        const params = {};
+        for (let i = 1; i < match.length; i++) {
+            const val = decodeURIComponent(match[i]);
+            const key = keys[i - 1].name;
+            params[key] = val;
+        }
+        return { settings, query, params, path, keys };
     }
     getRouteSettingsByRoute(routePath) {
         return this.theme.routes.find((route) => {

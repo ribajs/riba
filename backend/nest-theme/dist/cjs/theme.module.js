@@ -55,15 +55,15 @@ let ThemeModule = ThemeModule_1 = class ThemeModule {
     }
     configure(consumer) {
         const theme = this.config.get('theme');
+        const paths = [];
         if (theme.routes) {
             for (const route of theme.routes) {
                 for (const path of route.path) {
-                    consumer
-                        .apply(ssr_middleware_1.SsrMiddleware)
-                        .forRoutes({ path, method: common_1.RequestMethod.GET });
+                    paths.push({ path, method: common_1.RequestMethod.GET });
                 }
             }
         }
+        consumer.apply(ssr_middleware_1.SsrMiddleware).forRoutes(...paths);
     }
 };
 ThemeModule = ThemeModule_1 = __decorate([

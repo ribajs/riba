@@ -106,14 +106,15 @@ export class ThemeModule {
   configure(consumer: MiddlewareConsumer) {
     // Dynamic routes
     const theme = this.config.get<ThemeConfig>('theme');
+    const paths: { path: string; method: RequestMethod }[] = [];
     if (theme.routes) {
       for (const route of theme.routes) {
         for (const path of route.path) {
-          consumer
-            .apply(SsrMiddleware)
-            .forRoutes({ path, method: RequestMethod.GET });
+          paths.push({ path, method: RequestMethod.GET });
         }
       }
     }
+
+    consumer.apply(SsrMiddleware).forRoutes(...paths);
   }
 }

@@ -11,6 +11,10 @@ import { SsrService } from './ssr.service';
 import type { Request, Response, NextFunction } from 'express';
 import { handleError } from './error-handler';
 import type { Cache } from 'cache-manager';
+import { pathToRegexp, Key } from 'path-to-regexp';
+import { parse as queryparse } from 'qs';
+
+import { Route } from '@ribajs/ssr';
 @Injectable()
 export class SsrMiddleware implements NestMiddleware {
   theme: FullThemeConfig;
@@ -23,14 +27,19 @@ export class SsrMiddleware implements NestMiddleware {
     this.theme = this.config.get<FullThemeConfig>('theme');
   }
   async use(req: Request, res: Response, next: NextFunction) {
-    if (!req.route) {
-      console.warn(
-        'FIXME: req.route is not set! See https://github.com/nestjs/nest/issues/4129',
-      );
-    }
+    let routeSettings: Route | undefined;
 
-    const path = req.route?.path || req.baseUrl; // WORKAROUND
-    const routeSettings = this.getRouteSettingsByRoute(path);
+    if (req.route) {
+      routeSettings = this.getRouteSettingsByRoute(req.route.path);
+    } else {
+      console.warn('FIXME: req.route is not set!');
+
+      // WORKAROUND
+      const _route = this.getRouteSettingsByUrl((req as any)._parsedUrl as URL);
+      routeSettings = _route.settings;
+      req.params = _route.params;
+      req.query = _route.query;
+    }
 
     if (!routeSettings) {
       return next();
@@ -98,6 +107,48 @@ export class SsrMiddleware implements NestMiddleware {
       this.log.error(error);
       return next(handleError(error));
     }
+  }
+
+  /**
+   * WORKAROUND if req.route is missing
+   */
+  protected getRouteSettingsByUrl(url: URL) {
+    let keys: Key[];
+    let match: RegExpMatchArray;
+    const settings = this.theme.routes.find((route) => {
+      for (const path of route.path) {
+        const _keys: Key[] = [];
+        const _regexp = pathToRegexp(path, _keys);
+        const _match = url.pathname.match(_regexp);
+        if (!!_match) {
+          match = _match;
+          keys = _keys;
+          return true;
+        }
+      }
+    });
+
+    if (!settings) {
+      return {
+        settings: undefined,
+        query: {},
+        params: {},
+        path: undefined,
+        keys: [],
+      };
+    }
+
+    const query = queryparse(url.search, { ignoreQueryPrefix: true });
+
+    const path = match[0];
+    const params: any = {};
+    for (let i = 1; i < match.length; i++) {
+      const val = decodeURIComponent(match[i]);
+      const key = keys[i - 1].name;
+      params[key] = val;
+    }
+
+    return { settings, query, params, path, keys };
   }
 
   protected getRouteSettingsByRoute(routePath: string) {

@@ -6435,10 +6435,11 @@ __metadata:
     "@types/jsdom": ^16.2.13
     "@types/node": ^16.9.6
     "@types/node-fetch": ^3.0.3
+    "@types/path-to-regexp": ^1.7.0
+    "@types/qs": ^6.9.7
     "@types/supertest": ^2.0.11
     "@typescript-eslint/eslint-plugin": ^4.31.2
     "@typescript-eslint/parser": ^4.31.2
-    app-root-path: ^3.0.0
     cache-manager: ^3.4.4
     cheerio: ^1.0.0-rc.10
     consolidate: ^0.16.0
@@ -6452,7 +6453,9 @@ __metadata:
     jest: ^27.2.1
     jsdom: ^17.0.0
     node-fetch: ^2.6.4
+    path-to-regexp: ^6.2.0
     prettier: 2.4.1
+    qs: ^6.10.1
     reflect-metadata: ^0.1.13
     rimraf: ^3.0.2
     rxjs: ^7.3.0
@@ -8078,6 +8081,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/path-to-regexp@npm:^1.7.0":
+  version: 1.7.0
+  resolution: "@types/path-to-regexp@npm:1.7.0"
+  dependencies:
+    path-to-regexp: "*"
+  checksum: 36d8df1bf27b13f8e7021153e2a3b56f97a12744534f9fc35debf8324f883458e7757b8fdd84974dc942e749752968ae34df1ea966da60c463545717541cc524
+  languageName: node
+  linkType: hard
+
 "@types/pkg-dir@npm:^2.0.1":
   version: 2.0.1
   resolution: "@types/pkg-dir@npm:2.0.1"
@@ -8112,6 +8124,13 @@ __metadata:
   version: 6.9.5
   resolution: "@types/qs@npm:6.9.5"
   checksum: eeb4597a9c5d3e7b3da3f6395fdfc53e435b79c863fd9d56ff14951e644d51d40870a7d8440c0f132299469941d27817b04ef3c7aa71242115eded0953f4f620
+  languageName: node
+  linkType: hard
+
+"@types/qs@npm:^6.9.7":
+  version: 6.9.7
+  resolution: "@types/qs@npm:6.9.7"
+  checksum: 7fd6f9c25053e9b5bb6bc9f9f76c1d89e6c04f7707a7ba0e44cc01f17ef5284adb82f230f542c2d5557d69407c9a40f0f3515e8319afd14e1e16b5543ac6cdba
   languageName: node
   linkType: hard
 
@@ -22886,6 +22905,13 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"path-to-regexp@npm:*, path-to-regexp@npm:^6.2.0":
+  version: 6.2.0
+  resolution: "path-to-regexp@npm:6.2.0"
+  checksum: a6aca74d2d6e2e7594d812f653cf85e9cb5054d3a8d80f099722a44ef6ad22639b02078e5ea83d11db16321c3e4359e3f1ab0274fa78dad0754a6e53f630b0fc
+  languageName: node
+  linkType: hard
+
 "path-to-regexp@npm:0.1.7":
   version: 0.1.7
   resolution: "path-to-regexp@npm:0.1.7"
@@ -24394,6 +24420,15 @@ fsevents@~2.3.1:
   version: 6.7.0
   resolution: "qs@npm:6.7.0"
   checksum: dfd5f6adef50e36e908cfa70a6233871b5afe66fbaca37ecc1da352ba29eb2151a3797991948f158bb37fccde51bd57845cb619a8035287bfc24e4591172c347
+  languageName: node
+  linkType: hard
+
+"qs@npm:^6.10.1":
+  version: 6.10.1
+  resolution: "qs@npm:6.10.1"
+  dependencies:
+    side-channel: ^1.0.4
+  checksum: 00e390dbf98eff4d8ff121b61ab2fe32106852290de99ecd0e40fc76651c4101f43fc6cc8313cb69423563876fc532951b11dda55d2917def05f292258263480
   languageName: node
   linkType: hard
 
