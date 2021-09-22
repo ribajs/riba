@@ -232,8 +232,12 @@ export class Bs5FormComponent extends Component {
         this.onErrorSubmit(res.status.toString(), message, res.body);
       }
       return this.onSuccessSubmit(res.status.toString(), message, res.body);
-    } catch (err) {
-      this.onErrorSubmit(err.status, err.body.message, err.body);
+    } catch (err: any) {
+      if (err.status && err.body) {
+        this.onErrorSubmit(err.status, err.body.message, err.body);
+      } else {
+        throw this.error;
+      }
     }
   }
 

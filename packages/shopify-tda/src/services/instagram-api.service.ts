@@ -1,6 +1,6 @@
 import { HttpService } from "@ribajs/core";
 import { BaseApiService } from "./base.service";
-import { InstagramResponse } from "../interfaces/instagram-api/response";
+import { InstagramMediaResponse } from "../interfaces/instagram-api/media-response";
 
 export class InstagramApiService extends BaseApiService {
   public static instance?: InstagramApiService;
@@ -33,7 +33,7 @@ export class InstagramApiService extends BaseApiService {
       data.shop = (window as any).Shopify.shop;
     }
 
-    const res = await HttpService.getJSON<InstagramResponse>(url, data);
+    const res = await HttpService.getJSON<InstagramMediaResponse>(url, data);
     return res.body;
   }
 }

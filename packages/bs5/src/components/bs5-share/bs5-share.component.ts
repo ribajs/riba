@@ -416,7 +416,7 @@ export class Bs5ShareComponent extends Component {
           text: `${this.scope.text}\r\n\r\n`,
           url: this.scope.url || window.location.href,
         });
-      } catch (error) {
+      } catch (error: any) {
         if (error.name === "AbortError") {
           // TODO show flash message
           // this.debug(error.message);

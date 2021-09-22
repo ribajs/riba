@@ -1,4 +1,4 @@
-import { NestFactory, HttpAdapterHost } from '@nestjs/core';
+import { NestFactory } from '@nestjs/core';
 import { Logger } from '@nestjs/common';
 import * as Express from 'express';
 import {

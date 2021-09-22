@@ -536,7 +536,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       if (this.scope.activeBreakpoint.sticky) {
         this.goTo(index);
       }
-    } catch (error) {
+    } catch (error: any) {
       this.throw(error);
     }
   }
@@ -566,7 +566,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       if (this.scope.activeBreakpoint.sticky) {
         this.scrollToNearestSlide();
       }
-    } catch (error) {
+    } catch (error: any) {
       this.throw(error);
     }
   }
@@ -1017,9 +1017,9 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     const scrollTo =
       this.scope.activeBreakpoint.angle === "vertical"
         ? this.slideshowInner.scrollTop +
-        this.scope.items[index].position.centerY
+          this.scope.items[index].position.centerY
         : this.slideshowInner.scrollLeft +
-        this.scope.items[index].position.centerX;
+          this.scope.items[index].position.centerX;
     return scrollTo <= maxScrollTo && scrollTo >= 0;
   }
 
@@ -1118,7 +1118,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     } else {
       try {
         await this.bindIfReady();
-      } catch (error) {
+      } catch (error: any) {
         this.throw(error);
       }
     }
