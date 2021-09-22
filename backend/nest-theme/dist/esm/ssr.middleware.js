@@ -23,7 +23,12 @@ let SsrMiddleware = class SsrMiddleware {
         this.theme = this.config.get('theme');
     }
     async use(req, res, next) {
-        const routeSettings = this.getRouteSettingsByRoute(req.route.path);
+        var _a;
+        console.debug('req', req);
+        const path = ((_a = req.route) === null || _a === void 0 ? void 0 : _a.path) ||
+            req.baseUrl ||
+            req._parsedUrl.pathname;
+        const routeSettings = this.getRouteSettingsByRoute(path);
         if (!routeSettings) {
             return next();
         }

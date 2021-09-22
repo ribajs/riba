@@ -23,7 +23,14 @@ export class SsrMiddleware implements NestMiddleware {
     this.theme = this.config.get<FullThemeConfig>('theme');
   }
   async use(req: Request, res: Response, next: NextFunction) {
-    const routeSettings = this.getRouteSettingsByRoute(req.route.path);
+    if (!req.route) {
+      console.warn(
+        'FIXME: req.route is not set! See https://github.com/nestjs/nest/issues/4129',
+      );
+    }
+
+    const path = req.route?.path || req.baseUrl; // WORKAROUND
+    const routeSettings = this.getRouteSettingsByRoute(path);
 
     if (!routeSettings) {
       return next();
