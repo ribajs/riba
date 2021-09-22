@@ -19,19 +19,19 @@
     "@graphql-tools/utils": "^7.10.0",
     "find-root": "^1.1.0",
     "glob": "^7.1.7",
-    "graphql": "^15.5.3",
+    "graphql": "^15.6.0",
     "graphql-request": "^3.5.0"
   },
   "devDependencies": {
     "@types/find-root": "^1.1.2",
     "@types/glob": "^7.1.4",
-    "@types/node": "^16.9.1",
-    "@typescript-eslint/eslint-plugin": "^4.31.1",
-    "@typescript-eslint/parser": "^4.31.1",
+    "@types/node": "^16.9.6",
+    "@typescript-eslint/eslint-plugin": "^4.31.2",
+    "@typescript-eslint/parser": "^4.31.2",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "2.4.0",
+    "prettier": "2.4.1",
     "rimraf": "^3.0.2",
     "typescript": "^4.4.3"
   }

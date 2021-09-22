@@ -14,6 +14,6 @@
     "@babel/runtime": "^7.15.4",
     "@babel/runtime-corejs3": "^7.15.4",
     "@types/masonry-layout": "^4.2.4",
-    "@types/node": "^16.9.1"
+    "@types/node": "^16.9.6"
   }
 }

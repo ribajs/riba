@@ -14,4 +14,7 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": "off",
   },
   ignorePatterns: ["**/*.spec.ts", "node_modules/"],
+  parserOptions: {
+    sourceType: "module",
+  },
 };

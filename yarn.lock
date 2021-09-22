@@ -89,11 +89,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/cli@npm:^7.15.4":
-  version: 7.15.4
-  resolution: "@babel/cli@npm:7.15.4"
+"@babel/cli@npm:^7.15.7":
+  version: 7.15.7
+  resolution: "@babel/cli@npm:7.15.7"
   dependencies:
-    "@nicolo-ribaudo/chokidar-2": 2.1.8-no-fsevents.2
+    "@nicolo-ribaudo/chokidar-2": 2.1.8-no-fsevents.3
     chokidar: ^3.4.0
     commander: ^4.0.1
     convert-source-map: ^1.1.0
@@ -112,7 +112,7 @@ __metadata:
   bin:
     babel: ./bin/babel.js
     babel-external-helpers: ./bin/babel-external-helpers.js
-  checksum: 99c529a7b8d367f3c88b472bf25235a0f666951d43482327f34eefc51d302b19e9d889c77635e39cc8bac6f6131b31b97c321bc6d72876f2520a1042b28ed760
+  checksum: 128c8251c1f8c3d719fe8a0c6ce45db0ac086c7f877bc9dd34a3cf0a3e8caa4664ca17c24ca4c644b4d277b6e3ce4a73cb950f69003fb278a90bbf7d4645f903
   languageName: node
   linkType: hard
 
@@ -2731,14 +2731,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/core@npm:^27.2.0":
-  version: 27.2.0
-  resolution: "@jest/core@npm:27.2.0"
+"@jest/core@npm:^27.2.1":
+  version: 27.2.1
+  resolution: "@jest/core@npm:27.2.1"
   dependencies:
     "@jest/console": ^27.2.0
-    "@jest/reporters": ^27.2.0
+    "@jest/reporters": ^27.2.1
     "@jest/test-result": ^27.2.0
-    "@jest/transform": ^27.2.0
+    "@jest/transform": ^27.2.1
     "@jest/types": ^27.1.1
     "@types/node": "*"
     ansi-escapes: ^4.2.1
@@ -2747,15 +2747,15 @@ __metadata:
     exit: ^0.1.2
     graceful-fs: ^4.2.4
     jest-changed-files: ^27.1.1
-    jest-config: ^27.2.0
+    jest-config: ^27.2.1
     jest-haste-map: ^27.2.0
     jest-message-util: ^27.2.0
     jest-regex-util: ^27.0.6
     jest-resolve: ^27.2.0
-    jest-resolve-dependencies: ^27.2.0
-    jest-runner: ^27.2.0
-    jest-runtime: ^27.2.0
-    jest-snapshot: ^27.2.0
+    jest-resolve-dependencies: ^27.2.1
+    jest-runner: ^27.2.1
+    jest-runtime: ^27.2.1
+    jest-snapshot: ^27.2.1
     jest-util: ^27.2.0
     jest-validate: ^27.2.0
     jest-watcher: ^27.2.0
@@ -2769,7 +2769,7 @@ __metadata:
   peerDependenciesMeta:
     node-notifier:
       optional: true
-  checksum: 3f6622f6c9b01a270598ad5740d62e863a19cf7be2e491ccfcd70e757dab721105348e9e7cc09e2beaac13450fee6f0e226754ac682f33b30de0a6ac69d44d71
+  checksum: 230ae7e1b9804f0e46220f2115cefa583573ef279955c4301ee1c2839d77355ecfae37f850ece146b03058827b08f1a84f7838735d3b4791f72c743d26b73cb1
   languageName: node
   linkType: hard
 
@@ -2799,25 +2799,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/globals@npm:^27.2.0":
-  version: 27.2.0
-  resolution: "@jest/globals@npm:27.2.0"
+"@jest/globals@npm:^27.2.1":
+  version: 27.2.1
+  resolution: "@jest/globals@npm:27.2.1"
   dependencies:
     "@jest/environment": ^27.2.0
     "@jest/types": ^27.1.1
-    expect: ^27.2.0
-  checksum: ec1f29fc25835b2347cbaad13145654fe25d34506af341175a06f3a4c16bb6c7d7a19ab8a4759e52f81562f939125469bacc7fce3f8658dd1e60a0e77bdaedfa
+    expect: ^27.2.1
+  checksum: 1f04b6f98b26338cdac4cf249bcd58a3808749e56bb8c47ae61b6d552cff2456da5ff545b1a00e4e683850d917d45b9551874c74d5027b38701568cddd02ca30
   languageName: node
   linkType: hard
 
-"@jest/reporters@npm:^27.2.0":
-  version: 27.2.0
-  resolution: "@jest/reporters@npm:27.2.0"
+"@jest/reporters@npm:^27.2.1":
+  version: 27.2.1
+  resolution: "@jest/reporters@npm:27.2.1"
   dependencies:
     "@bcoe/v8-coverage": ^0.2.3
     "@jest/console": ^27.2.0
     "@jest/test-result": ^27.2.0
-    "@jest/transform": ^27.2.0
+    "@jest/transform": ^27.2.1
     "@jest/types": ^27.1.1
     chalk: ^4.0.0
     collect-v8-coverage: ^1.0.0
@@ -2843,7 +2843,7 @@ __metadata:
   peerDependenciesMeta:
     node-notifier:
       optional: true
-  checksum: afb433b8f0afc038b3fb70bbb464926d80110e28d9a301c56a4d27fc46ccc7a0cf7369a4247b9e097c5eba396c69facb1c9f1c1870d40eb05cc970086423b85c
+  checksum: 24290ca7cedfc0258a77c764f31e699d0e8343c994c758a2b68141938ab13bb598af2a2e9816a84dfac87d943dd8a6eb77bb5af9e3d739f7112600feab2a5e39
   languageName: node
   linkType: hard
 
@@ -2892,21 +2892,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/test-sequencer@npm:^27.2.0":
-  version: 27.2.0
-  resolution: "@jest/test-sequencer@npm:27.2.0"
+"@jest/test-sequencer@npm:^27.2.1":
+  version: 27.2.1
+  resolution: "@jest/test-sequencer@npm:27.2.1"
   dependencies:
     "@jest/test-result": ^27.2.0
     graceful-fs: ^4.2.4
     jest-haste-map: ^27.2.0
-    jest-runtime: ^27.2.0
-  checksum: 8df5166f44d512de5b09ba004d3cf3e1f0d8f631a64b304afdcf3441363656541d3f7663eea401e5247ec4e64dd92e7e96172c1455c6fceec4b7ed4bb4b4a333
+    jest-runtime: ^27.2.1
+  checksum: 4d5a096ae9b9eebe056796274fd6c4d929e1c5e2b6ed7fa55604785c03041f40067791b655052e6df35073157ef3bbe2911f1683adf6d081ac6e819c467d9988
   languageName: node
   linkType: hard
 
-"@jest/transform@npm:^27.2.0":
-  version: 27.2.0
-  resolution: "@jest/transform@npm:27.2.0"
+"@jest/transform@npm:^27.2.1":
+  version: 27.2.1
+  resolution: "@jest/transform@npm:27.2.1"
   dependencies:
     "@babel/core": ^7.1.0
     "@jest/types": ^27.1.1
@@ -2923,7 +2923,7 @@ __metadata:
     slash: ^3.0.0
     source-map: ^0.6.1
     write-file-atomic: ^3.0.0
-  checksum: 0bd4ad3ce2b12765d0c015001e2eb9b864ac20eda2805a4da4a3be5cf1dc3f6be51a018ce6d6c782d0afdd7708a63db16ff7b1294315eae8b716aea1188ea00c
+  checksum: c27d7a178c3654ecb93a95975975cd9a835129ea948f1a734501cbf147c9b2572b1a554dc4ce492cb16e7ed9460e83e47989ef5d0b86f8e9489d97f0f127ddac
   languageName: node
   linkType: hard
 
@@ -3168,22 +3168,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nicolo-ribaudo/chokidar-2@npm:2.1.8-no-fsevents.2":
-  version: 2.1.8-no-fsevents.2
-  resolution: "@nicolo-ribaudo/chokidar-2@npm:2.1.8-no-fsevents.2"
-  dependencies:
-    anymatch: ^2.0.0
-    async-each: ^1.0.1
-    braces: ^2.3.2
-    glob-parent: ^5.1.2
-    inherits: ^2.0.3
-    is-binary-path: ^1.0.0
-    is-glob: ^4.0.0
-    normalize-path: ^3.0.0
-    path-is-absolute: ^1.0.0
-    readdirp: ^2.2.1
-    upath: ^1.1.1
-  checksum: 76003fce915aa6891b759498d3f79bc7b4db48395dc465e28f982e95fd04ebb63a7755ebbaa7e1fe6ff65edf182ba82ad51d97ebcf7ad1c6feaf8f53d43415bb
+"@nicolo-ribaudo/chokidar-2@npm:2.1.8-no-fsevents.3":
+  version: 2.1.8-no-fsevents.3
+  resolution: "@nicolo-ribaudo/chokidar-2@npm:2.1.8-no-fsevents.3"
+  checksum: ee55cc9241aeea7eb94b8a8551bfa4246c56c53bc71ecda0a2104018fcc328ba5723b33686bdf9cc65d4df4ae65e8016b89e0bbdeb94e0309fe91bb9ced42344
   languageName: node
   linkType: hard
 
@@ -3280,10 +3268,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/openapi-types@npm:^10.1.5":
-  version: 10.2.0
-  resolution: "@octokit/openapi-types@npm:10.2.0"
-  checksum: 877709a613d8e9299f7ea75f9141b06897e60ecd2d40079fa8c24742051ba714e600b5e75d490d1c3e9912d0d90f5ceef59797c5a28181657e42d7bf5b7f611c
+"@octokit/openapi-types@npm:^10.3.0":
+  version: 10.3.0
+  resolution: "@octokit/openapi-types@npm:10.3.0"
+  checksum: ccdb79ff6f3cf90d8ed2095d225890f87b3a9c4ceb6f5b49f3739e41aa55f20edd492f9dbe6ff088d13df68ac0b9dab8ba46d1e96539c3045c5a3a98c82710d1
   languageName: node
   linkType: hard
 
@@ -3321,15 +3309,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/plugin-rest-endpoint-methods@npm:^5.10.3":
-  version: 5.10.3
-  resolution: "@octokit/plugin-rest-endpoint-methods@npm:5.10.3"
+"@octokit/plugin-rest-endpoint-methods@npm:^5.11.0":
+  version: 5.11.0
+  resolution: "@octokit/plugin-rest-endpoint-methods@npm:5.11.0"
   dependencies:
-    "@octokit/types": ^6.27.2
+    "@octokit/types": ^6.29.0
     deprecation: ^2.3.1
   peerDependencies:
     "@octokit/core": ">=3"
-  checksum: 753efc8ce9e73d9245e02ca905ff09884b1cc1e1ecb6c652489e78176c146d2faa928c6fd6fd968de20c68c29ed6322bf97b98f259637a8a5a13eed0e3e40835
+  checksum: 55ffd8abbba36aa9b698544f4958c38ffad6e7134cdba6464e2d0e5005311ea758c67d594ca9b40bb6147cd395e2e4d3b46f303da8fe06bdcf5ba2b04255725f
   languageName: node
   linkType: hard
 
@@ -3462,12 +3450,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/types@npm:^6.27.2":
-  version: 6.27.2
-  resolution: "@octokit/types@npm:6.27.2"
+"@octokit/types@npm:^6.29.0":
+  version: 6.29.0
+  resolution: "@octokit/types@npm:6.29.0"
   dependencies:
-    "@octokit/openapi-types": ^10.1.5
-  checksum: 0355063fb971d242d4cd5bbadf6ea6aa1653e1f9ebcd95117cad4791c655e99742df3ee0ddee264b56bf5b59610540648264528b693f1014e9b09b71045da92e
+    "@octokit/openapi-types": ^10.3.0
+  checksum: c00c279226fc72569ae7d55c87f45ab1da253353afc069f06067228830f3d67ef5d05a85eac296449dab20bb0ecc7b316429798152f4a032a9773eb2c802ed59
   languageName: node
   linkType: hard
 
@@ -3515,7 +3503,7 @@ __metadata:
     "@ribajs/core": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
-    "@types/node": ^16.9.1
+    "@types/node": ^16.9.6
   languageName: unknown
   linkType: soft
 
@@ -3523,24 +3511,25 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/babel-config@workspace:infra/babel-config"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-object-rest-spread": ^7.15.6
     "@babel/plugin-proposal-optional-chaining": ^7.14.5
     "@babel/plugin-syntax-export-default-from": ^7.14.5
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.15.0
     "@babel/preset-env": ^7.15.6
     "@babel/preset-typescript": ^7.15.0
     "@babel/runtime": ^7.15.4
     "@babel/runtime-corejs3": ^7.15.4
     "@babel/types": ^7.15.6
-    babel-jest: ^27.2.0
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
-    prettier: 2.4.0
+    prettier: 2.4.1
   dependenciesMeta:
     prettier:
       unplugged: true
@@ -3551,7 +3540,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/bs4@workspace:packages/bs4"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-object-rest-spread": ^7.15.6
@@ -3571,25 +3560,25 @@ __metadata:
     "@ribajs/types": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@sphinxxxx/color-conversion": ^2.2.2
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     bootstrap: ^4.6.0
-    core-js: ^3.17.3
+    core-js: ^3.18.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     popper.js: ^1.16.1
-    prettier: 2.4.0
+    prettier: 2.4.1
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
   languageName: unknown
   linkType: soft
@@ -3598,7 +3587,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/bs5-photoswipe@workspace:packages/bs5-photoswipe"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -3616,22 +3605,22 @@ __metadata:
     "@ribajs/extras": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.17.3
+    core-js: ^3.18.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     photoswipe: ^4.1.3
-    prettier: 2.4.0
+    prettier: 2.4.1
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
   languageName: unknown
   linkType: soft
@@ -3640,7 +3629,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/bs5@workspace:packages/bs5"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-object-rest-spread": ^7.15.6
@@ -3661,25 +3650,25 @@ __metadata:
     "@ribajs/types": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@sphinxxxx/color-conversion": ^2.2.2
-    "@types/bootstrap": ^5.1.4
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/bootstrap": ^5.1.6
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     bootstrap: ^5.1.1
-    core-js: ^3.17.3
+    core-js: ^3.18.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
-    prettier: 2.4.0
+    prettier: 2.4.1
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
   languageName: unknown
   linkType: soft
@@ -3692,13 +3681,13 @@ __metadata:
     "@babel/runtime-corejs3": ^7.15.4
     "@ribajs/eslint-config": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     typescript: ^4.4.3
   languageName: unknown
   linkType: soft
@@ -3707,7 +3696,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/content-slider@workspace:packages/content-slider"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -3724,22 +3713,22 @@ __metadata:
     "@ribajs/extras": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.17.3
+    core-js: ^3.18.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
-    prettier: 2.4.0
+    prettier: 2.4.1
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
   languageName: unknown
   linkType: soft
@@ -3748,7 +3737,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/core@workspace:packages/core"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-object-rest-spread": ^7.15.6
@@ -3767,24 +3756,24 @@ __metadata:
     "@ribajs/types": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@types/core-js": ^2.5.5
-    "@types/jest": ^27.0.1
-    "@types/node": ^16.9.1
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@types/node": ^16.9.6
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.17.3
+    core-js: ^3.18.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
-    jest: ^27.2.0
-    jest-config: ^27.2.0
+    jest: ^27.2.1
+    jest-config: ^27.2.1
     jest-extended: ^0.11.5
-    prettier: 2.4.0
+    prettier: 2.4.1
     source-map-support: ^0.5.20
     ts-jest: ^27.0.5
     typescript: ^4.4.3
     uglifyjs-webpack-plugin: ^2.2.0
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-glob-entry: ^2.1.1
   languageName: unknown
@@ -3794,7 +3783,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs4-dropdown@workspace:demos/bs4-dropdown"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -3814,37 +3803,37 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/experimental-utils": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/experimental-utils": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
-    postcss: ^8.3.6
+    postcss: ^8.3.7
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -3854,7 +3843,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs4-form@workspace:demos/bs4-form"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -3876,37 +3865,37 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/experimental-utils": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/experimental-utils": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
-    postcss: ^8.3.6
+    postcss: ^8.3.7
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -3916,7 +3905,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs4-notifications@workspace:demos/bs4-notifications"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -3938,37 +3927,37 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/experimental-utils": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/experimental-utils": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
     copy-webpack-plugin: ^9.0.1
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -3978,7 +3967,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs4-slideshow@workspace:demos/bs4-slideshow"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -3999,36 +3988,36 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/experimental-utils": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/experimental-utils": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -4038,7 +4027,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs4-tabs-attr@workspace:demos/bs4-tabs-attr"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -4056,35 +4045,35 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
     copy-webpack-plugin: ^9.0.1
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     html-loader: ^2.1.2
     html-webpack-plugin: ^5.3.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     terser-webpack-plugin: ^5.2.4
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -4094,7 +4083,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs4-tabs-tpl@workspace:demos/bs4-tabs-tpl"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -4112,33 +4101,33 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     html-loader: ^2.1.2
     html-webpack-plugin: ^5.3.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -4148,7 +4137,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs4-tagged-image@workspace:demos/bs4-tagged-image"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -4170,41 +4159,41 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@types/node": ^16.9.1
+    "@types/jest": ^27.0.2
+    "@types/node": ^16.9.6
     "@types/webpack-env": ^1.16.2
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     file-loader: ^6.2.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
-    postcss: ^8.3.6
+    postcss: ^8.3.7
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
-    style-loader: ^3.2.1
+    style-loader: ^3.3.0
     terser-webpack-plugin: ^5.2.4
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -4214,7 +4203,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs4-toggle-button-sidebar@workspace:demos/bs4-toggle-button-sidebar"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -4235,37 +4224,37 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/experimental-utils": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/experimental-utils": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 4.6.0
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
-    postcss: ^8.3.6
+    postcss: ^8.3.7
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -4275,7 +4264,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs5-dropdown@workspace:demos/bs5-dropdown"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -4295,37 +4284,37 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/experimental-utils": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/experimental-utils": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: ^5.1.1
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
-    postcss: ^8.3.6
+    postcss: ^8.3.7
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -4335,7 +4324,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs5-form@workspace:demos/bs5-form"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -4357,37 +4346,37 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/experimental-utils": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/experimental-utils": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: ^5.1.1
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
-    postcss: ^8.3.6
+    postcss: ^8.3.7
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -4397,7 +4386,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs5-notifications@workspace:demos/bs5-notifications"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -4420,37 +4409,37 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/experimental-utils": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/experimental-utils": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: ^5.1.1
     copy-webpack-plugin: ^9.0.1
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -4460,7 +4449,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs5-photoswipe@workspace:demos/bs5-photoswipe"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -4484,38 +4473,38 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/experimental-utils": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/experimental-utils": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: ^5.1.1
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     terser-webpack-plugin: ^5.2.4
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -4525,7 +4514,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs5-slideshow@workspace:demos/bs5-slideshow"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -4546,36 +4535,36 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/experimental-utils": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/experimental-utils": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: ^5.1.1
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -4585,7 +4574,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs5-tagged-image@workspace:demos/bs5-tagged-image"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -4607,41 +4596,41 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@types/node": ^16.9.1
+    "@types/jest": ^27.0.2
+    "@types/node": ^16.9.6
     "@types/webpack-env": ^1.16.2
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: ^5.1.1
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     file-loader: ^6.2.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
-    postcss: ^8.3.6
+    postcss: ^8.3.7
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
-    style-loader: ^3.2.1
+    style-loader: ^3.3.0
     terser-webpack-plugin: ^5.2.4
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -4651,7 +4640,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs5-toggle-button-sidebar@workspace:demos/bs5-toggle-button-sidebar"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -4672,37 +4661,37 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/experimental-utils": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/experimental-utils": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: ^5.1.1
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
-    postcss: ^8.3.6
+    postcss: ^8.3.7
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -4712,7 +4701,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-content-slider@workspace:demos/content-slider"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -4735,36 +4724,36 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: ^5.1.1
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     file-loader: ^6.2.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -4774,7 +4763,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-core-components@workspace:demos/core-components"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -4793,38 +4782,38 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/experimental-utils": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/experimental-utils": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
     "@webpack-cli/serve": ^1.5.2
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^2.1.2
     html-webpack-plugin: ^5.3.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
-    sass: ^1.40.1
+    prettier: 2.4.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     terser-webpack-plugin: ^5.2.4
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -4834,7 +4823,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-core-each-item@workspace:demos/core-each-item"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -4852,38 +4841,38 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/experimental-utils": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/experimental-utils": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
     "@webpack-cli/serve": ^1.5.2
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^2.1.2
     html-webpack-plugin: ^5.3.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
-    sass: ^1.40.1
+    prettier: 2.4.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     terser-webpack-plugin: ^5.2.4
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -4893,7 +4882,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-empty-template@workspace:demos/empty-template"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -4912,36 +4901,36 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/experimental-utils": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/experimental-utils": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
-    postcss: ^8.3.6
+    postcss: ^8.3.7
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -4951,7 +4940,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-extras-game-loop@workspace:demos/extras-game-loop"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -4969,33 +4958,33 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     html-loader: ^2.1.2
     html-webpack-plugin: ^5.3.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     terser-webpack-plugin: ^5.2.4
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -5005,7 +4994,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-extras-scroll-events@workspace:demos/extras-scroll-events"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -5025,22 +5014,22 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: ^5.1.1
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     html-loader: ^2.1.2
     html-webpack-plugin: ^5.3.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
     postcss-loader: ^6.1.1
@@ -5051,7 +5040,7 @@ __metadata:
     terser-webpack-plugin: ^5.2.4
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -5061,7 +5050,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-extras-touch-events@workspace:demos/extras-touch-events"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -5081,37 +5070,37 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 5.1.1
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^2.1.2
     html-webpack-plugin: ^5.3.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
-    sass: ^1.40.1
+    prettier: 2.4.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     terser-webpack-plugin: ^5.2.4
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -5121,7 +5110,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-i18n-static@workspace:demos/i18n-static"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -5141,37 +5130,37 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 5.1.1
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^2.1.2
     html-webpack-plugin: ^5.3.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
-    sass: ^1.40.1
+    prettier: 2.4.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     terser-webpack-plugin: ^5.2.4
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -5181,7 +5170,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-iconset@workspace:demos/iconset"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -5202,37 +5191,37 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/experimental-utils": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/experimental-utils": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: ^5.1.1
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
-    postcss: ^8.3.6
+    postcss: ^8.3.7
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -5242,7 +5231,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-leaflet-map@workspace:demos/leaflet-map"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -5265,39 +5254,39 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 5.1.1
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     file-loader: ^6.2.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     leaflet: ^1.7.1
     mini-css-extract-plugin: ^2.3.0
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
     resolve-url-loader: ^4.0.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     terser-webpack-plugin: ^5.2.4
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -5307,7 +5296,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-luxon@workspace:demos/luxon"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -5328,36 +5317,36 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 5.1.1
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     file-loader: ^6.2.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     terser-webpack-plugin: ^5.2.4
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -5367,7 +5356,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-moment@workspace:demos/moment"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -5388,36 +5377,36 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 5.1.1
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     file-loader: ^6.2.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     terser-webpack-plugin: ^5.2.4
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -5427,7 +5416,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-router-view@workspace:examples/router-view"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -5448,36 +5437,36 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 5.1.1
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     file-loader: ^6.2.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     terser-webpack-plugin: ^5.2.4
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -5487,7 +5476,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-rv-monaco-editor@workspace:demos/monaco-editor"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -5510,38 +5499,38 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 5.1.1
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     file-loader: ^6.2.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
-    monaco-editor: ^0.27.0
-    monaco-editor-webpack-plugin: ^4.1.2
+    monaco-editor: ^0.28.0
+    monaco-editor-webpack-plugin: ^4.2.0
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     terser-webpack-plugin: ^5.2.4
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -5551,7 +5540,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-rv-photoswipe@workspace:demos/rv-photoswipe"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -5574,38 +5563,38 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/experimental-utils": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/experimental-utils": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: 5.1.1
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     terser-webpack-plugin: ^5.2.4
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -5615,7 +5604,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-rv-video@workspace:demos/rv-video"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -5637,37 +5626,37 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: ^5.1.1
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     file-loader: ^6.2.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     terser-webpack-plugin: ^5.2.4
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -5677,7 +5666,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/doc@workspace:infra/doc"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-object-rest-spread": ^7.15.6
@@ -5707,9 +5696,9 @@ __metadata:
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@types/debug": ^4.1.7
     "@types/prismjs": ^1.16.6
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
     abbrev: ^1.1.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
@@ -5718,14 +5707,14 @@ __metadata:
     clean-css-cli: ^5.3.3
     concurrently: ^6.2.1
     config-chain: ^1.1.13
-    core-js: ^3.17.3
+    core-js: ^3.18.0
     css-flip: ^0.5.0
-    css-loader: ^6.2.0
+    css-loader: ^6.3.0
     csso-cli: ^3.0.0
     debug: ^4.3.2
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
-    eslint-plugin-prettier: ^4.0.0
+    eslint-plugin-prettier: ^3.4.1
     extract-loader: ^5.1.0
     extract-text-webpack-plugin: ^3.0.2
     file-loader: ^6.2.0
@@ -5744,7 +5733,7 @@ __metadata:
     has-unicode: ^2.0.1
     html-loader: ^2.1.2
     inherits: ^2.0.4
-    ini: ^2.0.0
+    ini: ^1.3.8
     inspectpack: ^4.7.1
     jquery: ^3.6.0
     jshint: ^2.13.1
@@ -5755,29 +5744,29 @@ __metadata:
     mini-css-extract-plugin: ^2.3.0
     nodemon: ^2.0.12
     popper.js: ^1.16.1
-    postcss: ^8.3.6
+    postcss: ^8.3.7
     postcss-cli: ^8.3.1
-    postcss-loader: ^6.1.1
+    postcss-loader: ^4.3.0
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: ^2.4.0
-    prismjs: ^1.24.1
+    prettier: ^2.4.1
+    prismjs: ^1.25.0
     pug-cli: ^1.0.0-alpha6
     pug-loader: ^2.4.0
     require-dir: ^1.2.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     semver: ^7.3.5
     shelljs: ^0.8.4
-    style-loader: ^3.2.1
+    style-loader: ^3.3.0
     terser-webpack-plugin: ^5.2.4
     three: ^0.132.2
-    ts-loader: ^9.2.5
+    ts-loader: ^9.2.6
     typescript: ^4.4.3
     vinyl-buffer: ^1.0.1
     vinyl-source-stream: ^2.0.0
     watchify: ^4.0.0
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-stream: ^7.0.0
     yargs: ^17.1.1
@@ -5793,7 +5782,7 @@ __metadata:
     "@ribajs/core": "workspace:*"
     "@ribajs/tsconfig": "workspace:infra/tsconfig"
     "@ribajs/utils": "workspace:*"
-    "@types/node": ^16.9.1
+    "@types/node": ^16.9.6
   languageName: unknown
   linkType: soft
 
@@ -5805,10 +5794,10 @@ __metadata:
     "@ribajs/postcss-config": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
     "@tsconfig/node14": ^1.0.1
-    "@types/node": ^16.9.1
+    "@types/node": ^16.9.6
     "@types/pkg-dir": ^2.0.1
     "@yarnpkg/esbuild-plugin-pnp": ^1.0.1-rc.6
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
+    "@yarnpkg/pnpify": ^3.0.1
     pkg-dir: ^5.0.0
     typescript: ^4.4.3
   languageName: unknown
@@ -5818,13 +5807,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/eslint-config@workspace:infra/eslint-config"
   dependencies:
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/experimental-utils": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/experimental-utils": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     typescript: ^4.4.3
   languageName: unknown
   linkType: soft
@@ -5836,12 +5825,12 @@ __metadata:
     "@babel/runtime": ^7.15.4
     "@babel/runtime-corejs3": ^7.15.4
     "@ribajs/tsconfig": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@types/node": ^16.9.1
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@types/node": ^16.9.6
+    babel-jest: ^27.2.1
     eslint: ^7.32.0
-    jest: ^27.2.0
-    jest-config: ^27.2.0
+    jest: ^27.2.1
+    jest-config: ^27.2.1
     jest-extended: ^0.11.5
     ts-jest: ^27.0.5
     typescript: ^4.4.3
@@ -5852,7 +5841,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/examples-nest-classic-theme@workspace:examples/nest-classic-theme"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -5878,14 +5867,14 @@ __metadata:
     "@types/component-emitter": ^1.2.10
     "@types/debug": ^4.1.7
     "@types/socket.io-client": ^3.0.0
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/experimental-utils": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@typescript-eslint/typescript-estree": ^4.31.1
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/experimental-utils": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@typescript-eslint/typescript-estree": ^4.31.2
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     bootstrap: 5.1.1
-    css-loader: ^6.2.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
@@ -5893,14 +5882,14 @@ __metadata:
     fork-ts-checker-webpack-plugin: ^6.3.3
     html-loader: ^2.1.2
     leaflet: ^1.7.1
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug: ^3.0.2
     pug-loader: ^2.4.0
-    sass: ^1.40.1
-    style-loader: ^3.2.1
+    sass: ^1.42.1
+    style-loader: ^3.3.0
     terser-webpack-plugin: ^5.2.4
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
   languageName: unknown
   linkType: soft
@@ -5918,11 +5907,11 @@ __metadata:
     "@nestjs/testing": ^8.0.6
     "@types/cookie-parser": ^1.4.2
     "@types/express-session": ^1.17.4
-    "@types/jest": ^27.0.1
-    "@types/node": ^16.9.1
+    "@types/jest": ^27.0.2
+    "@types/node": ^16.9.6
     "@types/supertest": ^2.0.11
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
     cookie-parser: ^1.4.5
     dotenv: ^10.0.0
     eslint: ^7.32.0
@@ -5931,8 +5920,8 @@ __metadata:
     express: ^4.17.1
     express-session: ^1.17.2
     find-root: ^1.1.0
-    jest: ^27.2.0
-    prettier: 2.4.0
+    jest: ^27.2.1
+    prettier: 2.4.1
     pug: ^3.0.2
     reflect-metadata: ^0.1.13
     rimraf: ^3.0.2
@@ -5940,7 +5929,7 @@ __metadata:
     supertest: ^6.1.6
     tinyliquid: ^0.2.34
     ts-jest: ^27.0.5
-    ts-loader: ^9.2.5
+    ts-loader: ^9.2.6
     ts-node: ^10.2.1
     tsconfig-paths: ^3.11.0
     twig: ^1.15.4
@@ -5953,7 +5942,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/examples-nest-riba-ssr-theme@workspace:examples/nest-riba-ssr-theme"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -5979,30 +5968,30 @@ __metadata:
     "@ribajs/webpack-config": "workspace:*"
     "@types/component-emitter": ^1.2.10
     "@types/debug": ^4.1.7
-    "@types/node": ^16.9.1
+    "@types/node": ^16.9.6
     "@types/socket.io-client": ^3.0.0
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/experimental-utils": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@typescript-eslint/typescript-estree": ^4.31.1
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/experimental-utils": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@typescript-eslint/typescript-estree": ^4.31.2
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     bootstrap: ^5.1.1
-    css-loader: ^6.2.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     file-loader: ^6.2.0
     fork-ts-checker-webpack-plugin: ^6.3.3
     html-loader: ^2.1.2
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug: ^3.0.2
     pug-loader: ^2.4.0
-    sass: ^1.40.1
-    style-loader: ^3.2.1
+    sass: ^1.42.1
+    style-loader: ^3.3.0
     terser-webpack-plugin: ^5.2.4
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-node-externals: ^3.0.0
   languageName: unknown
@@ -6027,12 +6016,12 @@ __metadata:
     "@types/cookie-parser": ^1.4.2
     "@types/express": ^4.17.13
     "@types/express-session": ^1.17.4
-    "@types/jest": ^27.0.1
+    "@types/jest": ^27.0.2
     "@types/jsdom": ^16.2.13
-    "@types/node": ^16.9.1
+    "@types/node": ^16.9.6
     "@types/supertest": ^2.0.11
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
     consolidate: ^0.16.0
     cookie-parser: ^1.4.5
     dotenv: ^10.0.0
@@ -6042,9 +6031,9 @@ __metadata:
     express: ^4.17.1
     express-session: ^1.17.2
     find-root: ^1.1.0
-    jest: ^27.2.0
+    jest: ^27.2.1
     jsdom: ^17.0.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug: ^3.0.2
     reflect-metadata: ^0.1.13
     rimraf: ^3.0.2
@@ -6053,7 +6042,7 @@ __metadata:
     supertest: ^6.1.6
     tinyliquid: ^0.2.34
     ts-jest: ^27.0.5
-    ts-loader: ^9.2.5
+    ts-loader: ^9.2.6
     ts-node: ^10.2.1
     tsconfig-paths: ^3.11.0
     twig: ^1.15.4
@@ -6067,7 +6056,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/extras@workspace:packages/extras"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -6083,22 +6072,22 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@types/imagesloaded": ^4.1.2
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.17.3
+    core-js: ^3.18.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     imagesloaded: ^4.1.4
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
-    prettier: 2.4.0
+    prettier: 2.4.1
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
   languageName: unknown
   linkType: soft
@@ -6111,7 +6100,7 @@ __metadata:
     "@babel/runtime-corejs3": ^7.15.4
     "@ribajs/eslint-config": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
-    "@types/jest": ^27.0.1
+    "@types/jest": ^27.0.2
     eslint: ^7.32.0
     typescript: ^4.4.3
   languageName: unknown
@@ -6121,7 +6110,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/i18n@workspace:packages/i18n"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-object-rest-spread": ^7.15.6
@@ -6136,18 +6125,18 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.17.3
+    core-js: ^3.18.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
   languageName: unknown
   linkType: soft
@@ -6157,7 +6146,7 @@ __metadata:
   resolution: "@ribajs/iconset@workspace:packages/iconset"
   dependencies:
     "@babel/runtime-corejs3": ^7.15.4
-    core-js: ^3.17.3
+    core-js: ^3.18.0
     gulp: ^4.0.2
     gulp-clean: ^0.4.0
     gulp-debug: ^4.0.0
@@ -6171,7 +6160,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/jquery@workspace:packages/jquery"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -6186,22 +6175,22 @@ __metadata:
     "@ribajs/eslint-config": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
-    "@types/jest": ^27.0.1
+    "@types/jest": ^27.0.2
     "@types/jquery": ^3.5.6
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.17.3
+    core-js: ^3.18.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
-    jest: ^27.2.0
+    jest: ^27.2.1
     jquery: ^3.6.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
   languageName: unknown
   linkType: soft
@@ -6210,7 +6199,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/leaflet-map@workspace:packages/leaflet-map"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -6228,24 +6217,24 @@ __metadata:
     "@ribajs/extras": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
-    "@types/jest": ^27.0.1
+    "@types/jest": ^27.0.2
     "@types/leaflet": ^1.7.5
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.17.3
+    core-js: ^3.18.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     leaflet: ^1.7.1
-    prettier: 2.4.0
+    prettier: 2.4.1
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
   languageName: unknown
   linkType: soft
@@ -6254,7 +6243,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/luxon@workspace:packages/luxon"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -6268,23 +6257,23 @@ __metadata:
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
-    "@types/jest": ^27.0.1
+    "@types/jest": ^27.0.2
     "@types/luxon": ^1.27.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.17.3
+    core-js: ^3.18.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     luxon: ^1.28.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
   languageName: unknown
   linkType: soft
@@ -6299,7 +6288,7 @@ __metadata:
     "@ribajs/events": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@types/masonry-layout": ^4.2.4
-    "@types/node": ^16.9.1
+    "@types/node": ^16.9.6
     masonry-layout: ^4.2.2
   languageName: unknown
   linkType: soft
@@ -6308,7 +6297,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/moment@workspace:packages/moment"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -6322,22 +6311,22 @@ __metadata:
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.17.3
+    core-js: ^3.18.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     moment: ^2.29.1
-    prettier: 2.4.0
+    prettier: 2.4.1
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
   languageName: unknown
   linkType: soft
@@ -6346,7 +6335,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/monaco-editor@workspace:packages/monaco-editor"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -6361,22 +6350,22 @@ __metadata:
     "@ribajs/eslint-config": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.17.3
+    core-js: ^3.18.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
-    monaco-editor: ^0.27.0
-    prettier: 2.4.0
+    monaco-editor: ^0.28.0
+    prettier: 2.4.1
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
   languageName: unknown
   linkType: soft
@@ -6395,18 +6384,18 @@ __metadata:
     "@types/cookie-parser": ^1.4.2
     "@types/express": ^4.17.13
     "@types/express-session": ^1.17.4
-    "@types/jest": ^27.0.1
+    "@types/jest": ^27.0.2
     "@types/lunr": ^2.3.4
-    "@types/node": ^16.9.1
+    "@types/node": ^16.9.6
     "@types/supertest": ^2.0.11
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
-    jest: ^27.2.0
+    jest: ^27.2.1
     lunr: ^2.3.9
-    prettier: 2.4.0
+    prettier: 2.4.1
     reflect-metadata: ^0.1.13
     rimraf: ^3.0.2
     rxjs: ^7.3.0
@@ -6442,13 +6431,13 @@ __metadata:
     "@types/cookie-parser": ^1.4.2
     "@types/express": ^4.17.13
     "@types/express-session": ^1.17.4
-    "@types/jest": ^27.0.1
+    "@types/jest": ^27.0.2
     "@types/jsdom": ^16.2.13
-    "@types/node": ^16.9.1
+    "@types/node": ^16.9.6
     "@types/node-fetch": ^3.0.3
     "@types/supertest": ^2.0.11
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
     cache-manager: ^3.4.4
     cheerio: ^1.0.0-rc.10
     consolidate: ^0.16.0
@@ -6460,10 +6449,10 @@ __metadata:
     express: ^4.17.1
     express-session: ^1.17.2
     find-root: ^1.1.0
-    jest: ^27.2.0
+    jest: ^27.2.1
     jsdom: ^17.0.0
-    node-fetch: ^2.6.2
-    prettier: 2.4.0
+    node-fetch: ^2.6.4
+    prettier: 2.4.1
     reflect-metadata: ^0.1.13
     rimraf: ^3.0.2
     rxjs: ^7.3.0
@@ -6472,7 +6461,7 @@ __metadata:
     ts-node: ^10.2.1
     tsconfig-paths: ^3.11.0
     typescript: ^4.4.3
-    whatwg-encoding: ^1.0.5
+    whatwg-encoding: ^2.0.0
     yaml: next
   peerDependencies:
     pug: ^3.0.0
@@ -6491,17 +6480,17 @@ __metadata:
     "@graphql-tools/utils": ^7.10.0
     "@types/find-root": ^1.1.2
     "@types/glob": ^7.1.4
-    "@types/node": ^16.9.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
+    "@types/node": ^16.9.6
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     find-root: ^1.1.0
     glob: ^7.1.7
-    graphql: ^15.5.3
+    graphql: ^15.6.0
     graphql-request: ^3.5.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     rimraf: ^3.0.2
     typescript: ^4.4.3
   languageName: unknown
@@ -6564,7 +6553,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/octobercms@workspace:packages/octobercms"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -6583,30 +6572,30 @@ __metadata:
     "@tsconfig/node14": ^1.0.1
     "@types/gulp": ^4.0.9
     "@types/hex-color-regex": ^1.1.1
-    "@types/jest": ^27.0.1
+    "@types/jest": ^27.0.2
     "@types/jquery": ^3.5.6
     "@types/js-yaml": ^4.0.3
-    "@types/node": ^16.9.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
+    "@types/node": ^16.9.6
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.17.3
+    core-js: ^3.18.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     gulp: ^4.0.2
     gulp-yaml-merge: ^2.0.0
     hex-color-regex: ^1.1.0
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     js-yaml: ^4.1.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     rgb-regex: ^1.0.1
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
   languageName: unknown
   linkType: soft
@@ -6615,7 +6604,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/photoswipe@workspace:packages/photoswipe"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -6632,22 +6621,22 @@ __metadata:
     "@ribajs/extras": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.17.3
+    core-js: ^3.18.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     photoswipe: ^4.1.3
-    prettier: 2.4.0
+    prettier: 2.4.1
     ts-jest: ^27.0.5
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
   languageName: unknown
   linkType: soft
@@ -6656,7 +6645,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/podcast-example@workspace:demos/podcast"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-export-default-from": ^7.14.5
@@ -6676,37 +6665,37 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
     "@ribajs/webpack-serve": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/experimental-utils": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/experimental-utils": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     bootstrap: ^5.1.1
-    core-js: ^3.17.3
-    css-loader: ^6.2.0
+    core-js: ^3.18.0
+    css-loader: ^6.3.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^2.1.2
     inspectpack: ^4.7.1
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     mini-css-extract-plugin: ^2.3.0
-    postcss: ^8.3.6
+    postcss: ^8.3.7
     postcss-loader: ^6.1.1
     postcss-modules: ^4.2.2
     postcss-preset-env: ^6.7.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug-loader: ^2.4.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
     serve: ^12.0.1
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   languageName: unknown
@@ -6724,7 +6713,7 @@ __metadata:
     "@ribajs/events": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
-    "@types/node": ^16.9.1
+    "@types/node": ^16.9.6
     concurrently: ^6.2.1
     eslint: ^7.32.0
     typescript: ^4.4.3
@@ -6751,7 +6740,7 @@ __metadata:
     "@ribajs/shopify-easdk": "workspace:*"
     "@ribajs/shopify-tda": "workspace:*"
     leaflet: ^1.7.1
-    postcss: ^8.3.6
+    postcss: ^8.3.7
     postcss-preset-env: ^6.7.0
   dependenciesMeta:
     "@ribajs/bs4":
@@ -6789,7 +6778,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/router@workspace:packages/router"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-object-rest-spread": ^7.15.6
@@ -6804,23 +6793,23 @@ __metadata:
     "@ribajs/history": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/experimental-utils": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@typescript-eslint/typescript-estree": ^4.31.1
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/experimental-utils": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@typescript-eslint/typescript-estree": ^4.31.2
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.17.3
+    core-js: ^3.18.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     eslint-visitor-keys: ^3.0.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     regexpp: ^3.2.0
     tsutils: ^3.21.0
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
   languageName: unknown
   linkType: soft
@@ -6829,7 +6818,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/shopify-easdk@workspace:packages/shopify-easdk"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-object-rest-spread": ^7.15.6
@@ -6844,18 +6833,18 @@ __metadata:
     "@ribajs/router": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.17.3
+    core-js: ^3.18.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
   languageName: unknown
   linkType: soft
@@ -6875,10 +6864,10 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@types/debug": ^4.1.7
-    "@types/node": ^16.9.1
+    "@types/node": ^16.9.6
     debug: ^4.3.2
     eslint: ^7.32.0
-    monaco-editor: ^0.27.0
+    monaco-editor: ^0.28.0
     typescript: ^4.4.3
   languageName: unknown
   linkType: soft
@@ -6887,7 +6876,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/shopify-tda@workspace:packages/shopify-tda"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-object-rest-spread": ^7.15.6
@@ -6904,20 +6893,20 @@ __metadata:
     "@ribajs/shopify": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
-    "@types/jest": ^27.0.1
+    "@types/jest": ^27.0.2
     "@types/socket.io-client": 3.0.0
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.17.3
+    core-js: ^3.18.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     socket.io-client: 4.2.0
     typescript: ^4.4.3
-    webpack: ^5.52.1
+    webpack: ^5.53.0
     webpack-cli: ^4.8.0
   languageName: unknown
   linkType: soft
@@ -6926,7 +6915,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/shopify@workspace:packages/shopify"
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-object-rest-spread": ^7.15.6
@@ -6935,7 +6924,7 @@ __metadata:
     "@babel/runtime": ^7.15.4
     "@babel/runtime-corejs3": ^7.15.4
     "@octokit/core": ^3.5.1
-    "@octokit/plugin-rest-endpoint-methods": ^5.10.3
+    "@octokit/plugin-rest-endpoint-methods": ^5.11.0
     "@octokit/request": ^5.6.1
     "@octokit/rest": ^18.10.0
     "@ribajs/cache": "workspace:*"
@@ -6965,23 +6954,23 @@ __metadata:
     "@types/gulp-terser": ^1.2.1
     "@types/gulp-util": ^3.0.36
     "@types/gulp-zip": ^4.0.2
-    "@types/jest": ^27.0.1
+    "@types/jest": ^27.0.2
     "@types/js-yaml": ^4.0.3
-    "@types/lodash": ^4.14.172
-    "@types/node": ^16.9.1
+    "@types/lodash": ^4.14.173
+    "@types/node": ^16.9.6
     "@types/node-xlsx": ^0.15.2
     "@types/open": ^6.2.1
     "@types/prettier": ^2.3.2
     "@types/request": ^2.48.7
-    "@types/svgo": ^2.4.1
+    "@types/svgo": ^2.4.2
     "@types/undertaker": ^1.2.7
     "@types/vinyl": ^2.0.6
     "@types/vinyl-fs": ^2.4.12
     "@types/vinyl-paths": ^0.0.31
     "@types/webpack": ^5.28.0
     "@types/webpack-stream": ^3.2.12
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
     app-root-path: ^3.0.0
     archiver: ^5.3.0
     babel-loader: ^8.2.2
@@ -6991,7 +6980,7 @@ __metadata:
     browser-sync: ^2.27.5
     chalk: ^4.1.2
     chokidar: ^3.5.2
-    core-js: ^3.17.3
+    core-js: ^3.18.0
     debug: ^4.3.2
     del: ^6.0.0
     eslint: ^7.32.0
@@ -7003,18 +6992,18 @@ __metadata:
     gulp: ^4.0.2
     gulp-jsoncombine: ^1.0.4
     gulp-print: ^5.0.2
-    jest: ^27.2.0
+    jest: ^27.2.1
     jest-extended: ^0.11.5
     js-yaml: ^4.1.0
     lodash: ^4.17.21
     moment: ^2.29.1
     open: ^8.2.1
     package-json-type: ^1.0.3
-    prettier: 2.4.0
+    prettier: 2.4.1
     prompt: ^1.2.0
     shopify-admin-api: ^2.17.0
-    svgo: ^2.6.0
-    terser: ^5.8.0
+    svgo: ^2.6.1
+    terser: ^5.9.0
     ts-jest: ^27.0.5
     typescript: ^4.4.3
     undertaker: ^1.3.0
@@ -7051,7 +7040,7 @@ __metadata:
     "@ribajs/events": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@types/express": ^4.17.13
-    "@types/node": ^16.9.1
+    "@types/node": ^16.9.6
   languageName: unknown
   linkType: soft
 
@@ -7079,8 +7068,8 @@ __metadata:
     "@babel/runtime-corejs3": ^7.15.4
     "@ribajs/eslint-config": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
-    "@types/jest": ^27.0.1
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    babel-jest: ^27.2.1
     eslint: ^7.32.0
     typescript: ^4.4.3
   languageName: unknown
@@ -7106,28 +7095,28 @@ __metadata:
     "@ribajs/eslint-config": "workspace:*"
     "@ribajs/npm-package": "workspace:*"
     "@ribajs/postcss-config": "workspace:*"
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
+    "@yarnpkg/pnpify": ^3.0.1
     babel-loader: ^8.2.2
     copy-webpack-plugin: ^9.0.1
-    css-loader: ^6.2.0
+    css-loader: ^6.3.0
     file-loader: ^6.2.0
     fork-ts-checker-webpack-plugin: ^6.3.3
     glob: ^7.1.7
-    graphql: ^15.5.3
+    graphql: ^15.6.0
     html-loader: ^2.1.2
     html-webpack-plugin: ^5.3.2
     inspectpack: ^4.7.1
     mini-css-extract-plugin: ^2.3.0
     pkg-dir: ^5.0.0
-    postcss: ^8.3.6
+    postcss: ^8.3.7
     postcss-loader: ^6.1.1
     pug: ^3.0.2
     pug-loader: ^2.4.0
     raw-loader: ^4.0.2
     resolve-url-loader: ^4.0.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
-    style-loader: ^3.2.1
+    style-loader: ^3.3.0
     terser-webpack-plugin: ^5.2.4
     webpack-dev-server: ^4.2.1
     webpack-node-externals: ^3.0.0
@@ -7432,13 +7421,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/bootstrap@npm:^5.1.4":
-  version: 5.1.4
-  resolution: "@types/bootstrap@npm:5.1.4"
+"@types/bootstrap@npm:^5.1.6":
+  version: 5.1.6
+  resolution: "@types/bootstrap@npm:5.1.6"
   dependencies:
     "@popperjs/core": ^2.9.2
     "@types/jquery": "*"
-  checksum: 82a8af2729b2ab6e10dad56cd81fb8c14f5821b7df87bd1956636acc6ff456b202e1df5dfddcfcdb7c5f511864926eaf6045fc9141315cd4b719ca072025e32d
+  checksum: 99f0cda126973e3efad8c3632f5f33358bc8a5650fda885a72722fac853750ffc0484313618a2b502fe0ad2118512810e59153898d3f403f5869e864a9b0deee
   languageName: node
   linkType: hard
 
@@ -7875,13 +7864,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:^27.0.1":
-  version: 27.0.1
-  resolution: "@types/jest@npm:27.0.1"
+"@types/jest@npm:^27.0.2":
+  version: 27.0.2
+  resolution: "@types/jest@npm:27.0.2"
   dependencies:
     jest-diff: ^27.0.0
     pretty-format: ^27.0.0
-  checksum: 972aaae341b83eb608970c93295282f1f9edc056dc8123635456cbaced822702673118d60279c7b889300e7c9a0726c3674d701115915e2e1967db09542389c2
+  checksum: 814ad5f5d2f277849f47e52906da4b745758e555630fc8cb46a071bde648eefeffb1b35710c530a8cea7fc4ea7c1d813812c120484bf7902ab6c5e473cdd49c9
   languageName: node
   linkType: hard
 
@@ -7976,10 +7965,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4.14.172":
-  version: 4.14.172
-  resolution: "@types/lodash@npm:4.14.172"
-  checksum: 5fc51ea40d7e455bd1c760bcc60c9e81f82d85988666d4d4969bd8311367c63bbf1fe2be48755ba87836710e45fff94014ec164ebe6ccaa72815014981152434
+"@types/lodash@npm:^4.14.173":
+  version: 4.14.173
+  resolution: "@types/lodash@npm:4.14.173"
+  checksum: 9e97ef5816299e5470db1cb32a93e981af60f74f18a35d045ed4caf224a065df96bfae6e444ec96aa392fc01258592b965d840ae042eef77ef719a578c7daef8
   languageName: node
   linkType: hard
 
@@ -8262,12 +8251,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/svgo@npm:^2.4.1":
-  version: 2.4.1
-  resolution: "@types/svgo@npm:2.4.1"
+"@types/svgo@npm:^2.4.2":
+  version: 2.4.2
+  resolution: "@types/svgo@npm:2.4.2"
   dependencies:
     "@types/node": "*"
-  checksum: d95f45799887a255f4c2926f3319e0644d06506d3f9623ec325f1a9e8d8334ab5a587c48fdac0c39a9c6c4a6d15ab37d8e8ff7a2d0d01e1fc2a85ef92fa058ff
+  checksum: d9f977d34bcefbaf566ca3714c99b837d639a398f6ffa5d9c89be4330eeda60ed76731d45e14696d1227a838b71559174bfa2580f933d85236da8f271d663e80
   languageName: node
   linkType: hard
 
@@ -8468,12 +8457,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^4.31.1":
-  version: 4.31.1
-  resolution: "@typescript-eslint/eslint-plugin@npm:4.31.1"
+"@typescript-eslint/eslint-plugin@npm:^4.31.2":
+  version: 4.31.2
+  resolution: "@typescript-eslint/eslint-plugin@npm:4.31.2"
   dependencies:
-    "@typescript-eslint/experimental-utils": 4.31.1
-    "@typescript-eslint/scope-manager": 4.31.1
+    "@typescript-eslint/experimental-utils": 4.31.2
+    "@typescript-eslint/scope-manager": 4.31.2
     debug: ^4.3.1
     functional-red-black-tree: ^1.0.1
     regexpp: ^3.1.0
@@ -8485,66 +8474,66 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 90bed374dcdb5497a829f6bb02aa2a88dfb74683b0385b433e29a34b03d4b0f2992cd953cee20426c35c2695fb75845824860a77aca12481e9a1f823c4158bf8
+  checksum: 5d0c2ff34d5a263d2c7e5455ae5844cd24f34eac013e7a1189a959d4edb3ce2312cf340bc78f9a346e64cc3a73e1c8bd9ed367a58ba8633acd04122ad7304b82
   languageName: node
   linkType: hard
 
-"@typescript-eslint/experimental-utils@npm:4.31.1, @typescript-eslint/experimental-utils@npm:^4.31.1":
-  version: 4.31.1
-  resolution: "@typescript-eslint/experimental-utils@npm:4.31.1"
+"@typescript-eslint/experimental-utils@npm:4.31.2, @typescript-eslint/experimental-utils@npm:^4.31.2":
+  version: 4.31.2
+  resolution: "@typescript-eslint/experimental-utils@npm:4.31.2"
   dependencies:
     "@types/json-schema": ^7.0.7
-    "@typescript-eslint/scope-manager": 4.31.1
-    "@typescript-eslint/types": 4.31.1
-    "@typescript-eslint/typescript-estree": 4.31.1
+    "@typescript-eslint/scope-manager": 4.31.2
+    "@typescript-eslint/types": 4.31.2
+    "@typescript-eslint/typescript-estree": 4.31.2
     eslint-scope: ^5.1.1
     eslint-utils: ^3.0.0
   peerDependencies:
     eslint: "*"
-  checksum: 0767a1a554b78e3a81df28a40d213b0ca8d16e2360e04a377d99fceec4cf6af132953076fe6ed5a07708e6115091d18744a6b4904878e029bb22278e84193f59
+  checksum: 0c251effbab00ee26eaaa78540b2988ff24550564e6dea9e31190c1d120e846afb3882394be4d65fac53008f6feb5abc66723826ed093d09c49c14374630b8fb
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^4.31.1":
-  version: 4.31.1
-  resolution: "@typescript-eslint/parser@npm:4.31.1"
+"@typescript-eslint/parser@npm:^4.31.2":
+  version: 4.31.2
+  resolution: "@typescript-eslint/parser@npm:4.31.2"
   dependencies:
-    "@typescript-eslint/scope-manager": 4.31.1
-    "@typescript-eslint/types": 4.31.1
-    "@typescript-eslint/typescript-estree": 4.31.1
+    "@typescript-eslint/scope-manager": 4.31.2
+    "@typescript-eslint/types": 4.31.2
+    "@typescript-eslint/typescript-estree": 4.31.2
     debug: ^4.3.1
   peerDependencies:
     eslint: ^5.0.0 || ^6.0.0 || ^7.0.0
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: e4e312ec1ef1666fe3ed9cd565f85cc5e11d0a5ae4dff529fc8f212cc758f46ec8ebd388194a57f73ea3250e0ec9040fef8bee32d922d88153c04870683773fa
+  checksum: e0f83958483326942241838f672291a652ce30078c1a9faac0a99ff381c977c1e568bf0591593e3f5bd4e492fb7d91dbabde965ef5e3296e6f28de127db3107b
   languageName: node
   linkType: hard
 
-"@typescript-eslint/scope-manager@npm:4.31.1":
-  version: 4.31.1
-  resolution: "@typescript-eslint/scope-manager@npm:4.31.1"
+"@typescript-eslint/scope-manager@npm:4.31.2":
+  version: 4.31.2
+  resolution: "@typescript-eslint/scope-manager@npm:4.31.2"
   dependencies:
-    "@typescript-eslint/types": 4.31.1
-    "@typescript-eslint/visitor-keys": 4.31.1
-  checksum: 386442e7713df96cf32565e0f3caff173a9206630f385c1cfa09f11d8b4479a9f51572a4b795e4b68b2740bacebd1bb3a3de5a69bee564bc28dbce4b035ed3fb
+    "@typescript-eslint/types": 4.31.2
+    "@typescript-eslint/visitor-keys": 4.31.2
+  checksum: 5560dcbe0fbb629967071f88ab4767cb7e443f2a2008724e1dc0d974bf16cf89400180d3bf56206bf3e7d6c49ad3b22c72b8c465c826510979b4513dad3e6b2d
   languageName: node
   linkType: hard
 
-"@typescript-eslint/types@npm:4.31.1":
-  version: 4.31.1
-  resolution: "@typescript-eslint/types@npm:4.31.1"
-  checksum: 08b5cf0d02fbf946a4b10e93279e3253287e4826ee744e7d3f38d7da241aaa6fce2743e448f9cdf36d93c20259e17248e50b9fffdff59e1c878289acca0c2d65
+"@typescript-eslint/types@npm:4.31.2":
+  version: 4.31.2
+  resolution: "@typescript-eslint/types@npm:4.31.2"
+  checksum: 361533ef9d921ead2e4aac9f097dd01468e84eca2d73157ec02c13fa164688fa1d58497a1a4519f00a5eb88d67efdea279ebc365328aa7371a0466b6ff8149bc
   languageName: node
   linkType: hard
 
-"@typescript-eslint/typescript-estree@npm:4.31.1, @typescript-eslint/typescript-estree@npm:^4.31.1":
-  version: 4.31.1
-  resolution: "@typescript-eslint/typescript-estree@npm:4.31.1"
+"@typescript-eslint/typescript-estree@npm:4.31.2, @typescript-eslint/typescript-estree@npm:^4.31.2":
+  version: 4.31.2
+  resolution: "@typescript-eslint/typescript-estree@npm:4.31.2"
   dependencies:
-    "@typescript-eslint/types": 4.31.1
-    "@typescript-eslint/visitor-keys": 4.31.1
+    "@typescript-eslint/types": 4.31.2
+    "@typescript-eslint/visitor-keys": 4.31.2
     debug: ^4.3.1
     globby: ^11.0.3
     is-glob: ^4.0.1
@@ -8553,17 +8542,17 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 1780223f52fde98fcfef4e7d9a59fc811232f608800e6a69b73789aad34ddf43fc9d4041707baa88b25cf88c223a7f2a749cf084dc45d89de44a803b29e19eb3
+  checksum: 75df8e5341f581d3303b237b9b32bef3e63e87114d14ed5896c293f25ec253e6ef8489752cf78ca0fbfc3cf1d4deb122a22b92b57bfb845bc0fa41812a04e34c
   languageName: node
   linkType: hard
 
-"@typescript-eslint/visitor-keys@npm:4.31.1":
-  version: 4.31.1
-  resolution: "@typescript-eslint/visitor-keys@npm:4.31.1"
+"@typescript-eslint/visitor-keys@npm:4.31.2":
+  version: 4.31.2
+  resolution: "@typescript-eslint/visitor-keys@npm:4.31.2"
   dependencies:
-    "@typescript-eslint/types": 4.31.1
+    "@typescript-eslint/types": 4.31.2
     eslint-visitor-keys: ^2.0.0
-  checksum: 14a86bf96a41a81feba32f5acbb72539345a33f250b2f17968dc7b9f4ae9eca00209a11dd208b9c6305f5a841a9f809713027c0ed969465e2d62a042d116bdc9
+  checksum: 5f3d16d3d282e9b4b02acd06e787e182e9afb9e0a1c42a19268d9f8e02895163ff81674281db27e4777cc239675d6be2abfab8129458f670fe0c17a0d19ad796
   languageName: node
   linkType: hard
 
@@ -9245,7 +9234,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/pnpify@npm:^3.0.1-rc.5":
+"@yarnpkg/pnpify@npm:^3.0.1, @yarnpkg/pnpify@npm:^3.0.1":
   version: 3.0.1
   resolution: "@yarnpkg/pnpify@npm:3.0.1"
   dependencies:
@@ -10508,11 +10497,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-jest@npm:^27.2.0":
-  version: 27.2.0
-  resolution: "babel-jest@npm:27.2.0"
+"babel-jest@npm:^27.2.1":
+  version: 27.2.1
+  resolution: "babel-jest@npm:27.2.1"
   dependencies:
-    "@jest/transform": ^27.2.0
+    "@jest/transform": ^27.2.1
     "@jest/types": ^27.1.1
     "@types/babel__core": ^7.1.14
     babel-plugin-istanbul: ^6.0.0
@@ -10522,7 +10511,7 @@ __metadata:
     slash: ^3.0.0
   peerDependencies:
     "@babel/core": ^7.8.0
-  checksum: 82de77285be55e25b7dc01af852ad11c6eb48588392d03448ab8533cd4edcb6972baf6f9ddfb56dbdbe8bc30494e51e994598de1be8954af9fb98f76c9b4ac88
+  checksum: a28d7135e64462edb6b825c033025828ec6482926b5d6bdb0902128e8635dfe5a8871facab69c26b802d86ca50b9af4b2ea4415fde572a8b32583f78d9bfe55a
   languageName: node
   linkType: hard
 
@@ -12857,7 +12846,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"colorette@npm:^1.3.0":
+"colorette@npm:^1.3.0, colorette@npm:^1.4.0":
   version: 1.4.0
   resolution: "colorette@npm:1.4.0"
   checksum: 01c3c16058b182a4ab4c126a65a75faa4d38a20fa7c845090b25453acec6c371bb2c5dceb0a2338511f17902b9d1a9af0cadd8509c9403894b79311032c256c3
@@ -13356,10 +13345,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.17.3":
-  version: 3.17.3
-  resolution: "core-js@npm:3.17.3"
-  checksum: cdc61f068533469e15745e4644cc205916248b5b49d07840ed8e26a52e4aa557499e3d70e42a76dbc5e921f87d2db4365d9d3a5b8babbd351c3fd9e981d74fab
+"core-js@npm:^3.18.0":
+  version: 3.18.0
+  resolution: "core-js@npm:3.18.0"
+  checksum: 192c345eb0c8b9d582ebed798cf124e00cd8241303c3c801987563f8ebb8cb991e2ff91494c258752014c29d5515070d2c0a862687401c7d7e1e2f96f8980d42
   languageName: node
   linkType: hard
 
@@ -13584,9 +13573,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-loader@npm:^6.2.0":
-  version: 6.2.0
-  resolution: "css-loader@npm:6.2.0"
+"css-loader@npm:^6.3.0":
+  version: 6.3.0
+  resolution: "css-loader@npm:6.3.0"
   dependencies:
     icss-utils: ^5.1.0
     postcss: ^8.2.15
@@ -13598,7 +13587,7 @@ __metadata:
     semver: ^7.3.5
   peerDependencies:
     webpack: ^5.0.0
-  checksum: 9c6e6e1eef7ab897ea1f45094a153ee82d94ef5248b54b8f8a3634c72900ec5f3cc463b3c0eca65290118c3dbfd52887ba7294b4807a0247a3c5d7cf3a63b2e6
+  checksum: af23ad314c69b278da476a65b4912f11b2f9402496dad109b8fa7fe987666889c2f67f3996441d4fc485cae3b4349cdb4e0ec7c8b1d79344eac3d19664bb6a32
   languageName: node
   linkType: hard
 
@@ -15166,6 +15155,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-plugin-prettier@npm:^3.4.1":
+  version: 3.4.1
+  resolution: "eslint-plugin-prettier@npm:3.4.1"
+  dependencies:
+    prettier-linter-helpers: ^1.0.0
+  peerDependencies:
+    eslint: ">=5.0.0"
+    prettier: ">=1.13.0"
+  peerDependenciesMeta:
+    eslint-config-prettier:
+      optional: true
+  checksum: fa6a89f0d7cba1cc87064352f5a4a68dc3739448dd279bec2bced1bfa3b704467e603d13b69dcec853f8fa30b286b8b715912898e9da776e1b016cf0ee48bd99
+  languageName: node
+  linkType: hard
+
 "eslint-plugin-prettier@npm:^4.0.0":
   version: 4.0.0
   resolution: "eslint-plugin-prettier@npm:4.0.0"
@@ -15542,9 +15546,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expect@npm:^27.2.0":
-  version: 27.2.0
-  resolution: "expect@npm:27.2.0"
+"expect@npm:^27.2.1":
+  version: 27.2.1
+  resolution: "expect@npm:27.2.1"
   dependencies:
     "@jest/types": ^27.1.1
     ansi-styles: ^5.0.0
@@ -15552,7 +15556,7 @@ __metadata:
     jest-matcher-utils: ^27.2.0
     jest-message-util: ^27.2.0
     jest-regex-util: ^27.0.6
-  checksum: 623b69e8e97bb55ecd0a27378431f42bb14f4f08a14b7497af870da38b86985ebde9d2fab026a9cb4983465a0bae5bb7d8a0c0df0384c745e9b12d5c239de2ca
+  checksum: cd39409f75ac3faa22b1839d38c60a6da3ca106d6b66aec1203e5a999b2de2922513fa46d9a044c0acc7c9a949566825f98f2d288fb22d5eb12b4f6069070fbc
   languageName: node
   linkType: hard
 
@@ -17132,10 +17136,10 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"graphql@npm:^15.5.3":
-  version: 15.5.3
-  resolution: "graphql@npm:15.5.3"
-  checksum: 0d507c7fdc1fd42b012827440473bb92b61cf3327f1ef837241c9344e87d2c8bcd400ae3f7acbfd20837e4aa90a31075b9f6d3abb0cc4dacad417bbb1306b89b
+"graphql@npm:^15.6.0":
+  version: 15.6.0
+  resolution: "graphql@npm:15.6.0"
+  checksum: 439959514665bc03ba86d6e55d8fb81d4c1e8ba3fc7f5114878b0ba794147e7ef57f368e40dadbb3f94d7c5f6685d15599bebb3a124cee2a1a8871a797d5ae81
   languageName: node
   linkType: hard
 
@@ -17986,6 +17990,15 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"iconv-lite@npm:0.6.3":
+  version: 0.6.3
+  resolution: "iconv-lite@npm:0.6.3"
+  dependencies:
+    safer-buffer: ">= 2.1.2 < 3.0.0"
+  checksum: 3f60d47a5c8fc3313317edfd29a00a692cc87a19cac0159e2ce711d0ebc9019064108323b5e493625e25594f11c6236647d8e256fbe7a58f4a3b33b89e6d30bf
+  languageName: node
+  linkType: hard
+
 "icss-replace-symbols@npm:^1.1.0":
   version: 1.1.0
   resolution: "icss-replace-symbols@npm:1.1.0"
@@ -18187,17 +18200,10 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"ini@npm:^1.3.4, ini@npm:~1.3.0":
+"ini@npm:^1.3.4, ini@npm:^1.3.8, ini@npm:~1.3.0":
   version: 1.3.8
   resolution: "ini@npm:1.3.8"
   checksum: dfd98b0ca3a4fc1e323e38a6c8eb8936e31a97a918d3b377649ea15bdb15d481207a0dda1021efbd86b464cae29a0d33c1d7dcaf6c5672bee17fa849bc50a1b3
-  languageName: node
-  linkType: hard
-
-"ini@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "ini@npm:2.0.0"
-  checksum: e7aadc5fb2e4aefc666d74ee2160c073995a4061556b1b5b4241ecb19ad609243b9cceafe91bae49c219519394bbd31512516cb22a3b1ca6e66d869e0447e84e
   languageName: node
   linkType: hard
 
@@ -19191,9 +19197,9 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"jest-circus@npm:^27.2.0":
-  version: 27.2.0
-  resolution: "jest-circus@npm:27.2.0"
+"jest-circus@npm:^27.2.1":
+  version: 27.2.1
+  resolution: "jest-circus@npm:27.2.1"
   dependencies:
     "@jest/environment": ^27.2.0
     "@jest/test-result": ^27.2.0
@@ -19202,34 +19208,34 @@ fsevents@~2.3.1:
     chalk: ^4.0.0
     co: ^4.6.0
     dedent: ^0.7.0
-    expect: ^27.2.0
+    expect: ^27.2.1
     is-generator-fn: ^2.0.0
     jest-each: ^27.2.0
     jest-matcher-utils: ^27.2.0
     jest-message-util: ^27.2.0
-    jest-runtime: ^27.2.0
-    jest-snapshot: ^27.2.0
+    jest-runtime: ^27.2.1
+    jest-snapshot: ^27.2.1
     jest-util: ^27.2.0
     pretty-format: ^27.2.0
     slash: ^3.0.0
     stack-utils: ^2.0.3
     throat: ^6.0.1
-  checksum: c0db6ce3706e326e6b5df0aec8f4f27e4dc2e18de178b4cc2b740e3228df893f2754cdaf9b4a19bc29a06c7f408ad7d73b8c82e24baafb7e865209a2c9561faf
+  checksum: db77343cfdcfd13ada745cdbd7eeeb4b1f40f209eb939c8efce7f8146a4b9f631fd23fb292de0f4031e12b37eb15ff00e160e2e508b6b8643f5045ea8c1d0994
   languageName: node
   linkType: hard
 
-"jest-cli@npm:^27.2.0":
-  version: 27.2.0
-  resolution: "jest-cli@npm:27.2.0"
+"jest-cli@npm:^27.2.1":
+  version: 27.2.1
+  resolution: "jest-cli@npm:27.2.1"
   dependencies:
-    "@jest/core": ^27.2.0
+    "@jest/core": ^27.2.1
     "@jest/test-result": ^27.2.0
     "@jest/types": ^27.1.1
     chalk: ^4.0.0
     exit: ^0.1.2
     graceful-fs: ^4.2.4
     import-local: ^3.0.2
-    jest-config: ^27.2.0
+    jest-config: ^27.2.1
     jest-util: ^27.2.0
     jest-validate: ^27.2.0
     prompts: ^2.0.1
@@ -19241,31 +19247,31 @@ fsevents@~2.3.1:
       optional: true
   bin:
     jest: bin/jest.js
-  checksum: fa96bc41010591fa7b3fb78eab7fea1ce2231149e50c1685f5d4c840c255e5ede7389f7fefaf2a501f4ac64c924521b0e454b359db552a5fce0c0129f846728e
+  checksum: de2266e4a42425a531e54a626e27a4207d3099fc9369c498b8b8f5594a7a5999d68a46cbc7cd23e302039ccaac42fed04b36b3f4d06dcf0fff278c34f9f0e3da
   languageName: node
   linkType: hard
 
-"jest-config@npm:^27.2.0":
-  version: 27.2.0
-  resolution: "jest-config@npm:27.2.0"
+"jest-config@npm:^27.2.1":
+  version: 27.2.1
+  resolution: "jest-config@npm:27.2.1"
   dependencies:
     "@babel/core": ^7.1.0
-    "@jest/test-sequencer": ^27.2.0
+    "@jest/test-sequencer": ^27.2.1
     "@jest/types": ^27.1.1
-    babel-jest: ^27.2.0
+    babel-jest: ^27.2.1
     chalk: ^4.0.0
     deepmerge: ^4.2.2
     glob: ^7.1.1
     graceful-fs: ^4.2.4
     is-ci: ^3.0.0
-    jest-circus: ^27.2.0
+    jest-circus: ^27.2.1
     jest-environment-jsdom: ^27.2.0
     jest-environment-node: ^27.2.0
     jest-get-type: ^27.0.6
-    jest-jasmine2: ^27.2.0
+    jest-jasmine2: ^27.2.1
     jest-regex-util: ^27.0.6
     jest-resolve: ^27.2.0
-    jest-runner: ^27.2.0
+    jest-runner: ^27.2.1
     jest-util: ^27.2.0
     jest-validate: ^27.2.0
     micromatch: ^4.0.4
@@ -19275,7 +19281,7 @@ fsevents@~2.3.1:
   peerDependenciesMeta:
     ts-node:
       optional: true
-  checksum: 3396de6d808fea4261e13e0320c081cfe78ad542809f94481b3262940e2ea6a05fede0b5e7bf28025d77e09326226eeb8ed9547362df4fb6d8bf81db7df413f5
+  checksum: 657b106544e5621d5dabe7fddf60e125937fedbbed754f535533a113b50112fa171183cb15afbe2910dec16b193ead8930f1f7b67a390a0459b7f9a90b79b6ca
   languageName: node
   linkType: hard
 
@@ -19422,9 +19428,9 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"jest-jasmine2@npm:^27.2.0":
-  version: 27.2.0
-  resolution: "jest-jasmine2@npm:27.2.0"
+"jest-jasmine2@npm:^27.2.1":
+  version: 27.2.1
+  resolution: "jest-jasmine2@npm:27.2.1"
   dependencies:
     "@babel/traverse": ^7.1.0
     "@jest/environment": ^27.2.0
@@ -19434,17 +19440,17 @@ fsevents@~2.3.1:
     "@types/node": "*"
     chalk: ^4.0.0
     co: ^4.6.0
-    expect: ^27.2.0
+    expect: ^27.2.1
     is-generator-fn: ^2.0.0
     jest-each: ^27.2.0
     jest-matcher-utils: ^27.2.0
     jest-message-util: ^27.2.0
-    jest-runtime: ^27.2.0
-    jest-snapshot: ^27.2.0
+    jest-runtime: ^27.2.1
+    jest-snapshot: ^27.2.1
     jest-util: ^27.2.0
     pretty-format: ^27.2.0
     throat: ^6.0.1
-  checksum: cfb7bb8f438f87f167b35eb0bd01a56c1bc4f82be99ceeb90808498bb274f9c89df4945248bd6fcaaf96639862fcb1e3168112d0595e4abd682efe35bc2137e0
+  checksum: a676885382eb2c85912e227da323cc821b1ff4cf0fa4aa6d0c42c25fe04bdf455f4a0e1ed3892acbf897c703de8adb6f655c0b123b39f90e11c2309620eca737
   languageName: node
   linkType: hard
 
@@ -19562,14 +19568,14 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"jest-resolve-dependencies@npm:^27.2.0":
-  version: 27.2.0
-  resolution: "jest-resolve-dependencies@npm:27.2.0"
+"jest-resolve-dependencies@npm:^27.2.1":
+  version: 27.2.1
+  resolution: "jest-resolve-dependencies@npm:27.2.1"
   dependencies:
     "@jest/types": ^27.1.1
     jest-regex-util: ^27.0.6
-    jest-snapshot: ^27.2.0
-  checksum: 164cc41b4ce23e2e7e549b79a5acce0549b5a31b1aeffab5cd4790e7171608874453f8d845a513dc97465d9bb553beb8706de23e33c960d7868e88b747a8d3bf
+    jest-snapshot: ^27.2.1
+  checksum: 7c771c03dac5b5cde6a77d3431e8ec3e8432120431f3d9d4e0fb8167dcf2214c4dbc112f8f9f8fb76725ad2ed31de24a1e8a5004a0850d50028806b569775328
   languageName: node
   linkType: hard
 
@@ -19591,14 +19597,14 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"jest-runner@npm:^27.2.0":
-  version: 27.2.0
-  resolution: "jest-runner@npm:27.2.0"
+"jest-runner@npm:^27.2.1":
+  version: 27.2.1
+  resolution: "jest-runner@npm:27.2.1"
   dependencies:
     "@jest/console": ^27.2.0
     "@jest/environment": ^27.2.0
     "@jest/test-result": ^27.2.0
-    "@jest/transform": ^27.2.0
+    "@jest/transform": ^27.2.1
     "@jest/types": ^27.1.1
     "@types/node": "*"
     chalk: ^4.0.0
@@ -19612,26 +19618,26 @@ fsevents@~2.3.1:
     jest-leak-detector: ^27.2.0
     jest-message-util: ^27.2.0
     jest-resolve: ^27.2.0
-    jest-runtime: ^27.2.0
+    jest-runtime: ^27.2.1
     jest-util: ^27.2.0
     jest-worker: ^27.2.0
     source-map-support: ^0.5.6
     throat: ^6.0.1
-  checksum: d82f0b8f3d2eeeb1a951133e7f5823704725c1d09bfb61d42727039852f9aa70ecc1c215ee42bcbc6e0548f7c35a4ed57bebcbba9f8ec0665af45f7970f667e4
+  checksum: 76fb902d3aa6241f05a68fddef2cbb96d4ae3e4c7326c75ab19131821eb968c3f2e70b6685c6e4469b79d382a0e7d077f1ae7ca342471423ba042fdf648ab7e9
   languageName: node
   linkType: hard
 
-"jest-runtime@npm:^27.2.0":
-  version: 27.2.0
-  resolution: "jest-runtime@npm:27.2.0"
+"jest-runtime@npm:^27.2.1":
+  version: 27.2.1
+  resolution: "jest-runtime@npm:27.2.1"
   dependencies:
     "@jest/console": ^27.2.0
     "@jest/environment": ^27.2.0
     "@jest/fake-timers": ^27.2.0
-    "@jest/globals": ^27.2.0
+    "@jest/globals": ^27.2.1
     "@jest/source-map": ^27.0.6
     "@jest/test-result": ^27.2.0
-    "@jest/transform": ^27.2.0
+    "@jest/transform": ^27.2.1
     "@jest/types": ^27.1.1
     "@types/yargs": ^16.0.0
     chalk: ^4.0.0
@@ -19646,13 +19652,13 @@ fsevents@~2.3.1:
     jest-mock: ^27.1.1
     jest-regex-util: ^27.0.6
     jest-resolve: ^27.2.0
-    jest-snapshot: ^27.2.0
+    jest-snapshot: ^27.2.1
     jest-util: ^27.2.0
     jest-validate: ^27.2.0
     slash: ^3.0.0
     strip-bom: ^4.0.0
     yargs: ^16.0.3
-  checksum: 0095eda680085c523f96362f7b28a3e60e328ef7100b8a03b598f142e06afa553ad987d96507c30b1984542dafffaa15ba29e5853a45eb83582e5b50d207907a
+  checksum: 3ca818a5db7219d5a32f828574899052f1b0393f0313a6d39d1419b9dc5334c273c244cd8d8c58f645c5dcfd4dfee33a2dcdc59c7e373860492c886bcae7506c
   languageName: node
   linkType: hard
 
@@ -19666,9 +19672,9 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"jest-snapshot@npm:^27.2.0":
-  version: 27.2.0
-  resolution: "jest-snapshot@npm:27.2.0"
+"jest-snapshot@npm:^27.2.1":
+  version: 27.2.1
+  resolution: "jest-snapshot@npm:27.2.1"
   dependencies:
     "@babel/core": ^7.7.2
     "@babel/generator": ^7.7.2
@@ -19676,13 +19682,13 @@ fsevents@~2.3.1:
     "@babel/plugin-syntax-typescript": ^7.7.2
     "@babel/traverse": ^7.7.2
     "@babel/types": ^7.0.0
-    "@jest/transform": ^27.2.0
+    "@jest/transform": ^27.2.1
     "@jest/types": ^27.1.1
     "@types/babel__traverse": ^7.0.4
     "@types/prettier": ^2.1.5
     babel-preset-current-node-syntax: ^1.0.0
     chalk: ^4.0.0
-    expect: ^27.2.0
+    expect: ^27.2.1
     graceful-fs: ^4.2.4
     jest-diff: ^27.2.0
     jest-get-type: ^27.0.6
@@ -19694,7 +19700,7 @@ fsevents@~2.3.1:
     natural-compare: ^1.4.0
     pretty-format: ^27.2.0
     semver: ^7.3.2
-  checksum: 5a46ef7e8300e672cd2e9b271a3bf34cc8be8266fd244bbcf314826c007fb684fad1864f37835d8f42c7b449353112738583a4495a7a0c049ca90c56b0326f23
+  checksum: 8e540260999ba762d167884d86649530d40216786c99c3b5df25e1459f86aeb67a32c0ddd16acbace6ebeb1f55c94d8564e2f6d5f6dbbc5f50dac209d62f7b9b
   languageName: node
   linkType: hard
 
@@ -19799,13 +19805,13 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"jest@npm:^27.2.0":
-  version: 27.2.0
-  resolution: "jest@npm:27.2.0"
+"jest@npm:^27.2.1":
+  version: 27.2.1
+  resolution: "jest@npm:27.2.1"
   dependencies:
-    "@jest/core": ^27.2.0
+    "@jest/core": ^27.2.1
     import-local: ^3.0.2
-    jest-cli: ^27.2.0
+    jest-cli: ^27.2.1
   peerDependencies:
     node-notifier: ^8.0.1 || ^9.0.0 || ^10.0.0
   peerDependenciesMeta:
@@ -19813,7 +19819,7 @@ fsevents@~2.3.1:
       optional: true
   bin:
     jest: bin/jest.js
-  checksum: 468749325b0f5cd8d3e6e6a92157f0b9bc6565efa99e7a5aff9fdf0f629f5107c6739e461429e680948786ce5ab7f78837c3b11a0489d92eb00aea0402cdb873
+  checksum: c9753ed1233c9318f9885e278924e15c018c50e5374b0e8d968cf652d6d1a2e86c53fa00cc01ce1bfaaffb762a48a7db9e7b98bcb28574493aeda5e852b35f5e
   languageName: node
   linkType: hard
 
@@ -21566,22 +21572,22 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"monaco-editor-webpack-plugin@npm:^4.1.2":
-  version: 4.1.2
-  resolution: "monaco-editor-webpack-plugin@npm:4.1.2"
+"monaco-editor-webpack-plugin@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "monaco-editor-webpack-plugin@npm:4.2.0"
   dependencies:
     loader-utils: ^2.0.0
   peerDependencies:
-    monaco-editor: 0.25.x || 0.26.x || 0.27.x
+    monaco-editor: 0.25.x || 0.26.x || 0.27.x || 0.28.x
     webpack: ^4.5.0 || 5.x
-  checksum: 11ca4e17144b85bd13d966684eddeb779f5e1dc5f83f24c8c3084690cc5ce76be813d53d217dd907b7b3894dd2d6cb947146ae66c1c77db42f6e026825fe0ac1
+  checksum: 165da4085635e19f8dc7f9a30c6c473422ea54115d8051c99fb4c90eb94e6403ab9ddb99f5506016feb8065ec50a27d2c340f10cc90c2e500dc7258da659846e
   languageName: node
   linkType: hard
 
-"monaco-editor@npm:^0.27.0":
-  version: 0.27.0
-  resolution: "monaco-editor@npm:0.27.0"
-  checksum: 766ce20ea6f5b5861ce3a05fa437d0755622520ce3e7d6af84a103ea5daa52fe7053cfa4ab470fa84eb42a27810c336b39764c984b9cd30bc32fd69b2eba233b
+"monaco-editor@npm:^0.28.0":
+  version: 0.28.0
+  resolution: "monaco-editor@npm:0.28.0"
+  checksum: 6b15c839a3ef9a5de59a795be7f823bd3e950420626a47cbba64787dbde1852b6577e135f8c409096579a65a80ec84b91b6c2c529072ab639a84f9b1af39d2d7
   languageName: node
   linkType: hard
 
@@ -21694,6 +21700,13 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"nanocolors@npm:^0.1.5":
+  version: 0.1.6
+  resolution: "nanocolors@npm:0.1.6"
+  checksum: 3e748505531f5b21b98275cc8012efa92394ae1b6132d80e96646c20f0ca46442e82ab4b11ad57edccb8bf40433ade6e16d1ce535bc536bde6c009396467c887
+  languageName: node
+  linkType: hard
+
 "nanoid@npm:^3.1.20":
   version: 3.1.20
   resolution: "nanoid@npm:3.1.20"
@@ -21709,6 +21722,15 @@ fsevents@~2.3.1:
   bin:
     nanoid: bin/nanoid.cjs
   checksum: 8fa8dc3283a4fa159700a36cb22f61197547c8155831cb74f1b9c51fbc29ea80c136fd91001468d147a31d3a77f884958aec6c1beabac903c89780acacca9327
+  languageName: node
+  linkType: hard
+
+"nanoid@npm:^3.1.25":
+  version: 3.1.25
+  resolution: "nanoid@npm:3.1.25"
+  bin:
+    nanoid: bin/nanoid.cjs
+  checksum: e2353828c7d8fde65265e9c981380102e2021f292038a93fd27288bad390339833286e8cbc7531abe1cb2c6b317e55f38b895dcb775151637bb487388558e0ff
   languageName: node
   linkType: hard
 
@@ -21802,10 +21824,12 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:^2.6.2":
-  version: 2.6.2
-  resolution: "node-fetch@npm:2.6.2"
-  checksum: de367eae1dfbc0e12283c1cf92256ea7fba7eac8655e2e51ebb217727162396fc6cf24689ef9fc6accf075e3991e2ffaa061f7cfaa958215329649b2297ff06d
+"node-fetch@npm:^2.6.4":
+  version: 2.6.4
+  resolution: "node-fetch@npm:2.6.4"
+  dependencies:
+    whatwg-url: ^5.0.0
+  checksum: 0ab0e1f16776aea6f27bcb68b86dcdf2096f9eb728bb7d028ce3e75ae22bd08cb908b7c00a4dd86ad5b31f154494b6fc18051863cd89f0bce66130f3b432c597
   languageName: node
   linkType: hard
 
@@ -23356,6 +23380,22 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"postcss-loader@npm:^4.3.0":
+  version: 4.3.0
+  resolution: "postcss-loader@npm:4.3.0"
+  dependencies:
+    cosmiconfig: ^7.0.0
+    klona: ^2.0.4
+    loader-utils: ^2.0.0
+    schema-utils: ^3.0.0
+    semver: ^7.3.4
+  peerDependencies:
+    postcss: ^7.0.0 || ^8.0.1
+    webpack: ^4.0.0 || ^5.0.0
+  checksum: b8ba29789d48512c7ce10e9391b1e1512a4b8f8b4063ebff0f9ebdd0a3a01e433ccfa0d2db6dbdd63b126acf7692330f0773bef75e78d53f38eba556ca5f2aee
+  languageName: node
+  linkType: hard
+
 "postcss-loader@npm:^6.1.1":
   version: 6.1.1
   resolution: "postcss-loader@npm:6.1.1"
@@ -23690,14 +23730,14 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.3.6":
-  version: 8.3.6
-  resolution: "postcss@npm:8.3.6"
+"postcss@npm:^8.3.7":
+  version: 8.3.7
+  resolution: "postcss@npm:8.3.7"
   dependencies:
-    colorette: ^1.2.2
-    nanoid: ^3.1.23
+    nanocolors: ^0.1.5
+    nanoid: ^3.1.25
     source-map-js: ^0.6.2
-  checksum: ff55b91bea21f42c2a94d77fd05c3f66dd15889c68506cf1dbb9cdee8c3b9e9d0e219bcbc6e61a107bd63e3cac0670176486e2a5794c106a4e1b9babceb79317
+  checksum: 6b8c80611045787efa9900b1a278ec71393a12530a1c1f14baadcd6076e753791edd9bb9ef36c258cac450bc95dc3542ce2a4b6f21d5087875b91daa87422fc5
   languageName: node
   linkType: hard
 
@@ -23731,12 +23771,12 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"prettier@npm:2.4.0, prettier@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "prettier@npm:2.4.0"
+"prettier@npm:2.4.1, prettier@npm:^2.4.1":
+  version: 2.4.1
+  resolution: "prettier@npm:2.4.1"
   bin:
     prettier: bin-prettier.js
-  checksum: ac1bf07566dad5f58469e6d8a954bd5c0f833935597deb00330e9f673e14e4cf81e07dee7eff5776c0edebe11358d199f332d9940be40c8b455516034e553ce0
+  checksum: cc6830588b401b0d742862fe9c46bc9118204fb307c3abe0e49e95b35ed23629573807ffdf9cdd65289c252a0bb51fc0171437f6626ee36378dea80f0ee80b91
   languageName: node
   linkType: hard
 
@@ -23833,7 +23873,14 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"prismjs@npm:^1.24.1, prismjs@npm:^1.3.0":
+"prismjs@npm:^1.25.0":
+  version: 1.25.0
+  resolution: "prismjs@npm:1.25.0"
+  checksum: 04d8eae9d1b26b76c350bc65621584c8f8cab80ace7da3953f8aef2f9a8dd4b4f71c1d15bc5c67f126ddc90cd5af613919dc1340589a6c57355bed86fa3ac010
+  languageName: node
+  linkType: hard
+
+"prismjs@npm:^1.3.0":
   version: 1.24.1
   resolution: "prismjs@npm:1.24.1"
   checksum: e5d14a4ba56773122039295bd760c72106acc964e04cb9831b9ae7e7a58f67ccac6c053e77e21f1018a3684f31d35bb065c0c81fd4ff00b73b1570c3ace4aef0
@@ -25275,7 +25322,7 @@ fsevents@~2.3.1:
   version: 0.0.0-use.local
   resolution: "ribajs@workspace:."
   dependencies:
-    "@babel/cli": ^7.15.4
+    "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
     "@babel/plugin-proposal-class-properties": ^7.14.5
     "@babel/plugin-proposal-object-rest-spread": ^7.15.6
@@ -25296,28 +25343,28 @@ fsevents@~2.3.1:
     "@ribajs/tsconfig": next
     "@ribajs/types": next
     "@types/core-js": ^2.5.5
-    "@types/jest": ^27.0.1
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/experimental-utils": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    "@yarnpkg/pnpify": ^3.0.1-rc.5
-    babel-jest: ^27.2.0
+    "@types/jest": ^27.0.2
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/experimental-utils": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    "@yarnpkg/pnpify": ^3.0.1
+    babel-jest: ^27.2.1
     babel-loader: ^8.2.2
     babel-plugin-array-includes: ^2.0.3
-    core-js: ^3.17.3
+    core-js: ^3.18.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     glob: ^7.1.7
-    jest: ^27.2.0
-    jest-config: ^27.2.0
+    jest: ^27.2.1
+    jest-config: ^27.2.1
     jest-extended: ^0.11.5
     pkg-dir: ^5.0.0
-    prettier: 2.4.0
+    prettier: 2.4.1
     pug: ^3.0.2
     reflect-metadata: ^0.1.13
     rxjs: ^7.3.0
-    sass: ^1.40.1
+    sass: ^1.42.1
     source-map-support: ^0.5.20
     ts-jest: ^27.0.5
     typescript: ^4.4.3
@@ -25458,7 +25505,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"safer-buffer@npm:>= 2.1.2 < 3, safer-buffer@npm:^2.0.2, safer-buffer@npm:^2.1.0, safer-buffer@npm:~2.1.0":
+"safer-buffer@npm:>= 2.1.2 < 3, safer-buffer@npm:>= 2.1.2 < 3.0.0, safer-buffer@npm:^2.0.2, safer-buffer@npm:^2.1.0, safer-buffer@npm:~2.1.0":
   version: 2.1.2
   resolution: "safer-buffer@npm:2.1.2"
   checksum: cab8f25ae6f1434abee8d80023d7e72b598cf1327164ddab31003c51215526801e40b66c5e65d658a0af1e9d6478cadcb4c745f4bd6751f97d8644786c0978b0
@@ -25487,14 +25534,14 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.40.1":
-  version: 1.40.1
-  resolution: "sass@npm:1.40.1"
+"sass@npm:^1.42.1":
+  version: 1.42.1
+  resolution: "sass@npm:1.42.1"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
   bin:
     sass: sass.js
-  checksum: 09966a8f857f023ce059cfa4b925076626ded6f9ef47e70715ee06f5221a574cf120712a0bfa23b74e11707af3d6632f83f431375c71e4f43cadff300cf2a7f5
+  checksum: 467817475b23a3da3aac2f5e401f3b3d9431845b31ff1bc6269d4677852b4e1445e50d6ed1a8daffa4a76398cff6c531670171823466137ed8c2721c17983973
   languageName: node
   linkType: hard
 
@@ -26925,12 +26972,12 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"style-loader@npm:^3.2.1":
-  version: 3.2.1
-  resolution: "style-loader@npm:3.2.1"
+"style-loader@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "style-loader@npm:3.3.0"
   peerDependencies:
     webpack: ^5.0.0
-  checksum: 10e47c29f4fff7a95fd24cc905c61abba82910cf956730294e8823271b1c2777bd0a180248c2a5185fccf2555863c695b4be31f3b5a8ca2026aab31ee4cba809
+  checksum: edad553a1ae74af9afb4dd582774d484e8e4e5f8c9593a921b0f3f0e2cdb3a58c4b44a3afb43021956804042eaffd68d5dc4f956d4c5f633e7e67eda6a750042
   languageName: node
   linkType: hard
 
@@ -27052,12 +27099,12 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"svgo@npm:^2.6.0":
-  version: 2.6.0
-  resolution: "svgo@npm:2.6.0"
+"svgo@npm:^2.6.1":
+  version: 2.6.1
+  resolution: "svgo@npm:2.6.1"
   dependencies:
     "@trysound/sax": 0.2.0
-    colorette: ^1.3.0
+    colorette: ^1.4.0
     commander: ^7.2.0
     css-select: ^4.1.3
     css-tree: ^1.1.3
@@ -27065,7 +27112,7 @@ fsevents@~2.3.1:
     stable: ^0.1.8
   bin:
     svgo: bin/svgo
-  checksum: cd1c13e4c05d31561d8712de035ed1ca5f5dcc4afffc76975e37935d211b27e3b7ecb1320c650efdf510e1e8ee457d323621f1c8dc8e69095c13d2dc8c1d1f6c
+  checksum: 1946a28b96868464fdfd6758b5d9bf773b589da27f2b9cad4879cd4e924517f7bf20ae91ca10607ce3bfe0fabe8bcfe39ae3d6243ac16cf1c1b3239c87a44ca3
   languageName: node
   linkType: hard
 
@@ -27361,16 +27408,16 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"terser@npm:^5.8.0":
-  version: 5.8.0
-  resolution: "terser@npm:5.8.0"
+"terser@npm:^5.9.0":
+  version: 5.9.0
+  resolution: "terser@npm:5.9.0"
   dependencies:
     commander: ^2.20.0
     source-map: ~0.7.2
     source-map-support: ~0.5.20
   bin:
     terser: bin/terser
-  checksum: 770b7d3fad7eece4a423464a9774e4456b7aca70b869d0c783bde42d7453fac2670ef7532dbce0a5a6f79038c367f2cb6353995190b730e2c52cb4914f3d671e
+  checksum: 11c1246b1991015a8881742878af779e3863fad42f626ffda957dbf28c94bf51e7994cffb9ffbec86ff3c23ab45ffa6d79d453c15e664306e35fc7b2c4eee5f4
   languageName: node
   linkType: hard
 
@@ -27699,6 +27746,13 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"tr46@npm:~0.0.3":
+  version: 0.0.3
+  resolution: "tr46@npm:0.0.3"
+  checksum: 726321c5eaf41b5002e17ffbd1fb7245999a073e8979085dacd47c4b4e8068ff5777142fc6726d6ca1fd2ff16921b48788b87225cbc57c72636f6efa8efbffe3
+  languageName: node
+  linkType: hard
+
 "tree-kill@npm:1.2.2, tree-kill@npm:^1.2.2":
   version: 1.2.2
   resolution: "tree-kill@npm:1.2.2"
@@ -27762,9 +27816,9 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"ts-loader@npm:^9.2.5":
-  version: 9.2.5
-  resolution: "ts-loader@npm:9.2.5"
+"ts-loader@npm:^9.2.6":
+  version: 9.2.6
+  resolution: "ts-loader@npm:9.2.6"
   dependencies:
     chalk: ^4.1.0
     enhanced-resolve: ^5.0.0
@@ -27773,7 +27827,7 @@ fsevents@~2.3.1:
   peerDependencies:
     typescript: "*"
     webpack: ^5.0.0
-  checksum: e39fab0caac55dc3c57789ea690aca687d033f0d202e2a27cc37aa0f57f987e7a70d033750d4079253e549fdd5c4379e3b5049c17dd1665ab89263dee06f2d1c
+  checksum: 309d8fb6348c0c3a7166d42c1238c585ede00f816155b24217dbca489406a72409395d7954bc5801ddb9ca71c71e7e0b2375dbc342337e0ab1a461944598a7fe
   languageName: node
   linkType: hard
 
@@ -28870,6 +28924,13 @@ typescript@^4.4.3:
   languageName: node
   linkType: hard
 
+"webidl-conversions@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "webidl-conversions@npm:3.0.1"
+  checksum: c92a0a6ab95314bde9c32e1d0a6dfac83b578f8fa5f21e675bc2706ed6981bc26b7eb7e6a1fab158e5ce4adf9caa4a0aee49a52505d4d13c7be545f15021b17c
+  languageName: node
+  linkType: hard
+
 "webidl-conversions@npm:^5.0.0":
   version: 5.0.0
   resolution: "webidl-conversions@npm:5.0.0"
@@ -29126,9 +29187,9 @@ typescript@^4.4.3:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.52.1":
-  version: 5.52.1
-  resolution: "webpack@npm:5.52.1"
+"webpack@npm:^5.53.0":
+  version: 5.53.0
+  resolution: "webpack@npm:5.53.0"
   dependencies:
     "@types/eslint-scope": ^3.7.0
     "@types/estree": ^0.0.50
@@ -29159,7 +29220,7 @@ typescript@^4.4.3:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: 3a509d571ec7b7a1f21d364c7abbfa994bc0bd897bf57d690e56ad3a0b438e0065255ec92720d1839a8ea2ad526041306d0b0f7a7efaf8789f37d18b20cb20a3
+  checksum: f55c40e0a215d68633976ea54acbd9e92bf43f18593d25ffa2f4f1c33e7017d9c475ceabaddf1742d60310d84ec4600e564c1125e061378032948c11a2b18245
   languageName: node
   linkType: hard
 
@@ -29208,10 +29269,29 @@ typescript@^4.4.3:
   languageName: node
   linkType: hard
 
+"whatwg-encoding@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "whatwg-encoding@npm:2.0.0"
+  dependencies:
+    iconv-lite: 0.6.3
+  checksum: 7087810c410aa9b689cbd6af8773341a53cdc1f3aae2a882c163bd5522ec8ca4cdfc269aef417a5792f411807d5d77d50df4c24e3abb00bb60192858a40cc675
+  languageName: node
+  linkType: hard
+
 "whatwg-mimetype@npm:^2.3.0":
   version: 2.3.0
   resolution: "whatwg-mimetype@npm:2.3.0"
   checksum: 23eb885940bcbcca4ff841c40a78e9cbb893ec42743993a42bf7aed16085b048b44b06f3402018931687153550f9a32d259dfa524e4f03577ab898b6965e5383
+  languageName: node
+  linkType: hard
+
+"whatwg-url@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "whatwg-url@npm:5.0.0"
+  dependencies:
+    tr46: ~0.0.3
+    webidl-conversions: ^3.0.0
+  checksum: b8daed4ad3356cc4899048a15b2c143a9aed0dfae1f611ebd55073310c7b910f522ad75d727346ad64203d7e6c79ef25eafd465f4d12775ca44b90fa82ed9e2c
   languageName: node
   linkType: hard
 

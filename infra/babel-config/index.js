@@ -22,6 +22,7 @@ module.exports = {
         regenerator: true,
       },
     ],
+    "@babel/plugin-syntax-top-level-await",
     "@babel/plugin-syntax-export-default-from",
     "@babel/plugin-proposal-class-properties",
     "@babel/plugin-proposal-object-rest-spread",
