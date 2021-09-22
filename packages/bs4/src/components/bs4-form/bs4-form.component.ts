@@ -6,7 +6,13 @@ import {
   HttpDataType,
 } from "@ribajs/core";
 import template from "./bs4-form.component.html";
-import { scrollTo, getViewportDimensions, getUID, hasChildNodesTrim, stripHtml } from "@ribajs/utils";
+import {
+  scrollTo,
+  getViewportDimensions,
+  getUID,
+  hasChildNodesTrim,
+  stripHtml,
+} from "@ribajs/utils";
 
 export interface ValidationObject {
   fields:

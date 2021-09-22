@@ -1,8 +1,8 @@
-import { HttpService } from '@ribajs/core';
-import { IFbRequest } from './../interfaces/facebook-api/base';
-import { FbPage } from './../interfaces/facebook-api/pages';
-import { IFbPostData } from './../interfaces/facebook-api/post';
-import { BaseApiService } from './base.service';
+import { HttpService } from "@ribajs/core";
+import { IFbRequest } from "./../interfaces/facebook-api/base";
+import { FbPage } from "./../interfaces/facebook-api/pages";
+import { IFbPostData } from "./../interfaces/facebook-api/post";
+import { BaseApiService } from "./base.service";
 
 export class FacebookApiService extends BaseApiService {
   public static instance?: FacebookApiService;
@@ -11,7 +11,7 @@ export class FacebookApiService extends BaseApiService {
 
   protected constructor(host?: string) {
     super(host);
-    this.baseUrl = this.host + '/facebook/api';
+    this.baseUrl = this.host + "/facebook/api";
   }
 
   public static getSingleton(host?: string) {
@@ -27,19 +27,19 @@ export class FacebookApiService extends BaseApiService {
    */
   public async pages() {
     const res = await HttpService.getJSON<IFbRequest<FbPage>>(
-      `${this.baseUrl}/user/pages`,
+      `${this.baseUrl}/user/pages`
     );
     const pages = res.body;
-    console.debug('[services:FacebookApiService] pages', pages);
+    console.debug("[services:FacebookApiService] pages", pages);
     return pages;
   }
 
   public async posts() {
     const res = await HttpService.getJSON<IFbRequest<IFbPostData>>(
-      `${this.baseUrl}/posts/user`,
+      `${this.baseUrl}/posts/user`
     );
     const posts = res.body;
-    console.debug('[services:FacebookApiService] posts', posts);
+    console.debug("[services:FacebookApiService] posts", posts);
     return posts;
   }
 }

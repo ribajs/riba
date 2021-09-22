@@ -1,4 +1,4 @@
-import { I18nModuleOptions } from '../types';
+import { I18nModuleOptions } from "../types";
 
 export class I18nService {
   protected static _options: I18nModuleOptions;
@@ -18,7 +18,7 @@ export class I18nService {
     }
 
     throw new Error(
-      `Singleton of I18nService not defined, please call setSingleton first!`,
+      `Singleton of I18nService not defined, please call setSingleton first!`
     );
   }
 

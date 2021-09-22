@@ -1,25 +1,25 @@
-import { Component, TemplateFunction, HttpService } from '@ribajs/core';
-import Debug from 'debug';
-import pugTemplate from './plans.component.pug';
-import { hasChildNodesTrim } from '@ribajs/utils/src/dom';
-import { RecurringCharge } from '../../interfaces/shopify-api/recurring_charge';
-import { Plan } from '../../interfaces/plan';
+import { Component, TemplateFunction, HttpService } from "@ribajs/core";
+import Debug from "debug";
+import pugTemplate from "./plans.component.pug";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { RecurringCharge } from "../../interfaces/shopify-api/recurring_charge";
+import { Plan } from "../../interfaces/plan";
 
 interface Scope {
   plans: Plan[];
   active?: RecurringCharge;
   hasActive: boolean;
-  activate: ShopifyNestPlansComponent['activate'];
+  activate: ShopifyNestPlansComponent["activate"];
 }
 
 export class ShopifyNestPlansComponent extends Component {
-  public static tagName = 'shopify-nest-plans';
+  public static tagName = "shopify-nest-plans";
 
   static get observedAttributes(): string[] {
     return [];
   }
 
-  protected debug = Debug('component:' + ShopifyNestPlansComponent.tagName);
+  protected debug = Debug("component:" + ShopifyNestPlansComponent.tagName);
 
   public scope: Scope = {
     plans: [],
@@ -30,7 +30,7 @@ export class ShopifyNestPlansComponent extends Component {
 
   constructor() {
     super();
-    this.debug('constructor', this);
+    this.debug("constructor", this);
   }
 
   protected connectedCallback() {
@@ -43,17 +43,17 @@ export class ShopifyNestPlansComponent extends Component {
    * @param plan
    */
   public activate(plan: Plan) {
-    this.debug('activate');
+    this.debug("activate");
     const activateUrl = `/shopify/charge/create/${plan.name}`;
     window.location.href = activateUrl;
   }
 
   protected async loadActiveCharge() {
     return HttpService.getJSON<RecurringCharge | null>(
-      `/shopify/charge/active`,
+      `/shopify/charge/active`
     ).then((res) => {
       const activeCharge = res.body;
-      this.debug('activeCharge', activeCharge);
+      this.debug("activeCharge", activeCharge);
       this.scope.active = activeCharge ? activeCharge : undefined;
       if (this.scope.active) {
         this.scope.hasActive = true;
@@ -66,26 +66,26 @@ export class ShopifyNestPlansComponent extends Component {
     return HttpService.getJSON<Plan[]>(`/shopify/charge/available`).then(
       (res) => {
         const availableCharges = res.body;
-        this.debug('available charges', availableCharges);
+        this.debug("available charges", availableCharges);
         this.scope.plans = availableCharges;
         return this.scope.plans;
-      },
+      }
     );
   }
 
   protected async beforeBind() {
-    this.debug('beforeBind');
+    this.debug("beforeBind");
     await super.beforeBind();
     try {
       await this.loadAvailableCharges();
       await this.loadActiveCharge();
     } catch (error) {
-      this.debug('error', error);
+      this.debug("error", error);
     }
   }
 
   protected async afterBind() {
-    this.debug('afterBind', this.scope);
+    this.debug("afterBind", this.scope);
     await super.afterBind();
   }
 
@@ -101,11 +101,11 @@ export class ShopifyNestPlansComponent extends Component {
     let template: string | null = null;
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
-      this.debug('Do not template, because element has child nodes');
+      this.debug("Do not template, because element has child nodes");
       return template;
     } else {
       template = pugTemplate(this.scope);
-      this.debug('Use template', template);
+      this.debug("Use template", template);
       return template;
     }
   }

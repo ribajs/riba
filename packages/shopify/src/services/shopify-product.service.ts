@@ -100,9 +100,12 @@ export class ShopifyProductService {
    * @param product product which holds the options
    * @param name option name
    */
-   public static getOptionIncludes(product: ShopifyProduct, searchSubstr: string) {
-    const result = product.options.find(
-      (option) => option.name.includes(searchSubstr)
+  public static getOptionIncludes(
+    product: ShopifyProduct,
+    searchSubstr: string
+  ) {
+    const result = product.options.find((option) =>
+      option.name.includes(searchSubstr)
     );
     return result;
   }

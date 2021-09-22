@@ -5912,6 +5912,7 @@ __metadata:
     "@types/supertest": ^2.0.11
     "@typescript-eslint/eslint-plugin": ^4.31.2
     "@typescript-eslint/parser": ^4.31.2
+    app-root-path: ^3.0.0
     cookie-parser: ^1.4.5
     dotenv: ^10.0.0
     eslint: ^7.32.0
@@ -5919,7 +5920,6 @@ __metadata:
     eslint-plugin-prettier: ^4.0.0
     express: ^4.17.1
     express-session: ^1.17.2
-    find-root: ^1.1.0
     jest: ^27.2.1
     prettier: 2.4.1
     pug: ^3.0.2
@@ -6022,6 +6022,7 @@ __metadata:
     "@types/supertest": ^2.0.11
     "@typescript-eslint/eslint-plugin": ^4.31.2
     "@typescript-eslint/parser": ^4.31.2
+    app-root-path: ^3.0.0
     consolidate: ^0.16.0
     cookie-parser: ^1.4.5
     dotenv: ^10.0.0
@@ -6030,7 +6031,6 @@ __metadata:
     eslint-plugin-prettier: ^4.0.0
     express: ^4.17.1
     express-session: ^1.17.2
-    find-root: ^1.1.0
     jest: ^27.2.1
     jsdom: ^17.0.0
     prettier: 2.4.1
@@ -6438,6 +6438,7 @@ __metadata:
     "@types/supertest": ^2.0.11
     "@typescript-eslint/eslint-plugin": ^4.31.2
     "@typescript-eslint/parser": ^4.31.2
+    app-root-path: ^3.0.0
     cache-manager: ^3.4.4
     cheerio: ^1.0.0-rc.10
     consolidate: ^0.16.0
@@ -6448,7 +6449,6 @@ __metadata:
     eslint-plugin-prettier: ^4.0.0
     express: ^4.17.1
     express-session: ^1.17.2
-    find-root: ^1.1.0
     jest: ^27.2.1
     jsdom: ^17.0.0
     node-fetch: ^2.6.4
@@ -6478,15 +6478,15 @@ __metadata:
     "@graphql-tools/graphql-tag-pluck": ^6.5.1
     "@graphql-tools/load": ^6.2.8
     "@graphql-tools/utils": ^7.10.0
-    "@types/find-root": ^1.1.2
+    "@types/app-root-path": ^1.2.4
     "@types/glob": ^7.1.4
     "@types/node": ^16.9.6
     "@typescript-eslint/eslint-plugin": ^4.31.2
     "@typescript-eslint/parser": ^4.31.2
+    app-root-path: ^3.0.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
-    find-root: ^1.1.0
     glob: ^7.1.7
     graphql: ^15.6.0
     graphql-request: ^3.5.0
@@ -7632,13 +7632,6 @@ __metadata:
     "@types/qs": "*"
     "@types/serve-static": "*"
   checksum: 12a2a0e6c4b993fc0854bec665906788aea0d8ee4392389d7a98a5de1eefdd33c9e1e40a91f3afd274011119c506f7b4126acb97fae62ae20b654974d44cba12
-  languageName: node
-  linkType: hard
-
-"@types/find-root@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "@types/find-root@npm:1.1.2"
-  checksum: 658492cc913d30de0bb6cbc1ae8ad70be329f8938cdcc20521f66114464c66c5d14755c2fe7f38bc28230bb769ac6bf35367bdadee0c2275d38e4e99eb652b74
   languageName: node
   linkType: hard
 
@@ -16085,13 +16078,6 @@ __metadata:
     make-dir: ^3.0.2
     pkg-dir: ^4.1.0
   checksum: 0f7c22b65e07f9b486b4560227d014fab1e79ffbbfbafb87d113a2e878510bd620ef6fdff090e5248bb2846d28851d19e42bfdc7c50687966acc106328e7abf1
-  languageName: node
-  linkType: hard
-
-"find-root@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "find-root@npm:1.1.0"
-  checksum: b2a59fe4b6c932eef36c45a048ae8f93c85640212ebe8363164814990ee20f154197505965f3f4f102efc33bfb1cbc26fd17c4a2fc739ebc51b886b137cbefaf
   languageName: node
   linkType: hard
 

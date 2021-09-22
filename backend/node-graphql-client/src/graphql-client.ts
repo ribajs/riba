@@ -7,7 +7,7 @@ import { loadDocuments } from '@graphql-tools/load';
 
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 
-import findRoot = require('find-root');
+import findRoot from 'app-root-path';
 
 export class GraphQLClient extends _GraphQLClient {
   protected root: string;
@@ -15,7 +15,7 @@ export class GraphQLClient extends _GraphQLClient {
   constructor(url: string, options?: RequestInit, root?: string) {
     super(url, options);
     if (!root) {
-      root = findRoot(process.cwd());
+      root = findRoot.toString();
     }
     this.root = root;
   }

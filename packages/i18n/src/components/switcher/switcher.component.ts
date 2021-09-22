@@ -1,17 +1,17 @@
-import { TemplateFunction, Component } from '@ribajs/core';
-import { I18nService } from '../../services';
-import { LocalesService } from '../../types';
-import { Langcode } from '../../types';
+import { TemplateFunction, Component } from "@ribajs/core";
+import { I18nService } from "../../services";
+import { LocalesService } from "../../types";
+import { Langcode } from "../../types";
 
 export interface Scope {
   langcodes: Langcode[];
-  switch: I18nSwitcherComponent['switch'];
-  toggle: I18nSwitcherComponent['toggle'];
+  switch: I18nSwitcherComponent["switch"];
+  toggle: I18nSwitcherComponent["toggle"];
   ready: boolean;
 }
 
 export class I18nSwitcherComponent extends Component {
-  public static tagName = 'i18n-switcher';
+  public static tagName = "i18n-switcher";
 
   public _debug = true;
 
@@ -51,7 +51,7 @@ export class I18nSwitcherComponent extends Component {
     this.localesService = I18nService.options.localesService;
 
     if (!this.localesService) {
-      throw new Error('LocalesService not defined!');
+      throw new Error("LocalesService not defined!");
     }
 
     if (this.localesService.ready) {
@@ -61,10 +61,10 @@ export class I18nSwitcherComponent extends Component {
       }
     } else {
       this.localesService?.event.on(
-        'ready',
+        "ready",
         async (langcode: string /*, translationNeeded: boolean*/) => {
           await this.initLocales(langcode);
-        },
+        }
       );
     }
   }
@@ -113,7 +113,7 @@ export class I18nSwitcherComponent extends Component {
     const langcodes = await this.localesService?.getAvailableLangcodes();
 
     if (!langcodes) {
-      throw new Error('No lancodes found!');
+      throw new Error("No lancodes found!");
     }
 
     this.scope.langcodes = langcodes;
@@ -123,13 +123,13 @@ export class I18nSwitcherComponent extends Component {
     });
 
     this.localesService?.event.on(
-      'changed',
+      "changed",
       (changedLangcode: string /*, initial: boolean*/) => {
         // Activate localcode and disable the other
         this.scope.langcodes.forEach((langCode) => {
           langCode.active = langCode.code === changedLangcode;
         });
-      },
+      }
     );
 
     this.scope.ready = true;

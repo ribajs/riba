@@ -1,13 +1,13 @@
-import { EventDispatcher } from '@ribajs/events';
-import { clone } from '@ribajs/utils/src/type';
-import { Langcode, LocalPluralization, LocalVar } from '.';
+import { EventDispatcher } from "@ribajs/events";
+import { clone } from "@ribajs/utils/src/type";
+import { Langcode, LocalPluralization, LocalVar } from ".";
 
 export abstract class LocalesService {
   public get ready() {
     return this._ready;
   }
 
-  public event = new EventDispatcher('i18n');
+  public event = new EventDispatcher("i18n");
 
   public showMissingTranslation = false;
 
@@ -25,7 +25,7 @@ export abstract class LocalesService {
 
   constructor(
     public doNotTranslateDefaultLanguage: boolean,
-    showMissingTranslation: boolean,
+    showMissingTranslation: boolean
   ) {
     this.doNotTranslateDefaultLanguage = doNotTranslateDefaultLanguage;
     this.showMissingTranslation = showMissingTranslation;
@@ -40,10 +40,10 @@ export abstract class LocalesService {
   public async get(
     properties?: string[],
     vars?: LocalVar,
-    force = false,
+    force = false
   ): Promise<string> {
     if (!this.ready && !force) {
-      throw new Error('not ready');
+      throw new Error("not ready");
     }
     return (
       this.getAll()
@@ -68,9 +68,9 @@ export abstract class LocalesService {
         .then((local) => {
           if (local === null && properties) {
             console.warn(
-              `WARNING translation missing: "${properties.join('.')}"`,
+              `WARNING translation missing: "${properties.join(".")}"`,
               local,
-              properties,
+              properties
             );
           }
           return local;
@@ -99,21 +99,21 @@ export abstract class LocalesService {
   public async getByCurrentLang(properties: string[] = [], vars?: LocalVar) {
     const langcode = this.getLangcode();
     if (!langcode) {
-      throw new Error('Langcode not found in html tag');
+      throw new Error("Langcode not found in html tag");
     }
     return this.get([langcode, ...properties], vars);
   }
 
   public getBrowserLangcode() {
     const lang = navigator.language || (navigator as any).userLanguage;
-    const simplified = lang.split('-')[0].toLowerCase();
+    const simplified = lang.split("-")[0].toLowerCase();
     return simplified;
   }
 
   public getHTMLLangcode(): string {
     const langcode = document.documentElement
       ? document.documentElement.lang
-      : 'en';
+      : "en";
     return langcode;
   }
 
@@ -138,13 +138,13 @@ export abstract class LocalesService {
       if (document.documentElement) {
         document.documentElement.lang = langcode;
       }
-      this.event.trigger('changed', langcode, initial);
+      this.event.trigger("changed", langcode, initial);
     }
   }
 
   public async getAvailableLangcodes() {
     const activeCode = this.getLangcode();
-    const locals = await this.get(undefined, undefined, true)
+    const locals = await this.get(undefined, undefined, true);
     const langcodes: Langcode[] = [];
     for (const langcode of Object.keys(locals)) {
       langcodes.push({
@@ -159,10 +159,10 @@ export abstract class LocalesService {
    * Parse templates which can be used to set variables on language strings
    */
   public parseTemplateVars(el: HTMLElement): LocalVar {
-    const templates = el.querySelectorAll<HTMLTemplateElement>('template');
+    const templates = el.querySelectorAll<HTMLTemplateElement>("template");
     const vars: LocalVar = {};
     templates.forEach((template) => {
-      const name: string | null = template.getAttribute('name');
+      const name: string | null = template.getAttribute("name");
       if (name !== null) {
         vars[name] = template.innerHTML.trim();
       }
@@ -174,10 +174,10 @@ export abstract class LocalesService {
    * Parse templates which have his own translations
    */
   public parseLocalVars(el: HTMLElement): LocalVar {
-    const templates = el.querySelectorAll<HTMLTemplateElement>('template');
+    const templates = el.querySelectorAll<HTMLTemplateElement>("template");
     const vars: LocalVar = {};
     templates.forEach((template) => {
-      const lang: string | null = template.getAttribute('lang');
+      const lang: string | null = template.getAttribute("lang");
       if (lang !== null) {
         vars[lang] = template.innerHTML.trim();
       }
@@ -194,7 +194,7 @@ export abstract class LocalesService {
     if (
       !translateString ||
       Object.keys(vars).length === 0 ||
-      typeof translateString.match !== 'function'
+      typeof translateString.match !== "function"
     ) {
       return translateString;
     }
@@ -202,14 +202,14 @@ export abstract class LocalesService {
     if (matches) {
       for (const match of matches) {
         if (match) {
-          const varName = match.replace(/{{\s*|\s*}}/gm, '');
+          const varName = match.replace(/{{\s*|\s*}}/gm, "");
           if (
-            typeof vars[varName] === 'string' ||
-            typeof vars[varName] === 'number'
+            typeof vars[varName] === "string" ||
+            typeof vars[varName] === "number"
           ) {
             translateString = translateString.replace(
               match,
-              vars[varName] as string,
+              vars[varName] as string
             );
           }
         }
@@ -228,7 +228,7 @@ export abstract class LocalesService {
     this.currentLangcode = this.initialLangcode;
     if (!this.initialLangcode) {
       throw new Error(
-        `The lang attribute on the html element is required to detect the default theme language: ${this.initialLangcode}`,
+        `The lang attribute on the html element is required to detect the default theme language: ${this.initialLangcode}`
       );
     }
     // Detect browser language and switch to this language when available
@@ -256,7 +256,7 @@ export abstract class LocalesService {
         const translationNeeded =
           this.currentLangcode !== this.initialLangcode ||
           !this.doNotTranslateDefaultLanguage;
-        this.event.trigger('ready', this.currentLangcode, translationNeeded);
+        this.event.trigger("ready", this.currentLangcode, translationNeeded);
       })
       .catch((error) => {
         console.error(error);
@@ -272,11 +272,11 @@ export abstract class LocalesService {
    */
   protected setTranslateStringPluralization(
     translateObj: LocalPluralization | string,
-    vars: LocalVar,
+    vars: LocalVar
   ) {
     if (
       vars.count &&
-      typeof translateObj === 'object' &&
+      typeof translateObj === "object" &&
       translateObj !== null
     ) {
       const count = Number(vars.count);
@@ -296,7 +296,7 @@ export abstract class LocalesService {
     }
 
     if (
-      typeof translateObj === 'object' &&
+      typeof translateObj === "object" &&
       translateObj !== null &&
       translateObj.other
     ) {

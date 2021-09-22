@@ -1,26 +1,26 @@
-import { Component, TemplateFunction } from '@ribajs/core';
-import { htmlToElement, hasChildNodesTrim } from '@ribajs/utils/src/dom';
-import Debug from 'debug';
-import { LocalesStaticService } from '@ribajs/i18n';
-import { Product } from '@ribajs/shopify-tda';
-import { WebhooksService } from '../../services/webhooks.service';
-import { ShopifyApiProductService } from '../../services/shopify-api-product.service';
-import productCreatesTestDatas from '../../tests/data/products/creates.data';
-import productUpdatesTestDatas from '../../tests/data/products/updates.data';
+import { Component, TemplateFunction } from "@ribajs/core";
+import { htmlToElement, hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import Debug from "debug";
+import { LocalesStaticService } from "@ribajs/i18n";
+import { Product } from "@ribajs/shopify-tda";
+import { WebhooksService } from "../../services/webhooks.service";
+import { ShopifyApiProductService } from "../../services/shopify-api-product.service";
+import productCreatesTestDatas from "../../tests/data/products/creates.data";
+import productUpdatesTestDatas from "../../tests/data/products/updates.data";
 
-import pugTemplate from './api-socket-explorer.component.pug';
+import pugTemplate from "./api-socket-explorer.component.pug";
 
 interface Scope {
-  simulate?: ShopifyNestApiSocketExplorerComponent['simulate'];
+  simulate?: ShopifyNestApiSocketExplorerComponent["simulate"];
   langcode?: string;
 }
 
 export class ShopifyNestApiSocketExplorerComponent extends Component {
-  public static tagName = 'shopify-nest-api-socket-explorer';
+  public static tagName = "shopify-nest-api-socket-explorer";
 
   protected webhooksService = new WebhooksService();
   protected apProductService = ShopifyApiProductService.getSingleton();
-  protected localesService = LocalesStaticService.getInstance('main');
+  protected localesService = LocalesStaticService.getInstance("main");
 
   protected cardContainer: HTMLDivElement | null = null;
 
@@ -31,17 +31,17 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
   }
 
   protected debug = Debug(
-    'component:' + ShopifyNestApiSocketExplorerComponent.tagName,
+    "component:" + ShopifyNestApiSocketExplorerComponent.tagName
   );
 
   public scope: Scope = {
     simulate: this.simulate,
-    langcode: 'en',
+    langcode: "en",
   };
 
   constructor() {
     super();
-    this.debug('constructor', this);
+    this.debug("constructor", this);
   }
 
   protected connectedCallback() {
@@ -53,22 +53,22 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
    * Creates a dummy product, updates this products and deletes the product again.
    */
   public simulate() {
-    this.debug('simulate');
+    this.debug("simulate");
     this.apProductService
       .create(productCreatesTestDatas[0])
       .then((product) => {
-        this.debug('product created', product);
+        this.debug("product created", product);
         return this.apProductService.update(
           product.id,
-          productUpdatesTestDatas[0],
+          productUpdatesTestDatas[0]
         );
       })
       .then((product) => {
-        this.debug('product updated', product);
+        this.debug("product updated", product);
         return this.apProductService.delete(product.id);
       })
       .then((product) => {
-        this.debug('product deleted', product);
+        this.debug("product deleted", product);
       })
       .catch((error) => {
         console.error(error);
@@ -79,690 +79,690 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
     // set avaible langcodes
     this.scope.langcode = this.localesService.getLangcode();
     this.localesService.event.on(
-      'changed',
+      "changed",
       (changedLangcode: string /*, initial: boolean*/) => {
         // Activate localcode and disable the other
         this.scope.langcode = changedLangcode;
-      },
+      }
     );
   }
 
   protected async beforeBind() {
     this.initLocales();
-    this.debug('beforeBind');
+    this.debug("beforeBind");
   }
 
   protected async afterBind() {
-    this.debug('afterBind', this.scope);
-    this.cardContainer = this.querySelector<HTMLDivElement>('.card-container');
+    this.debug("afterBind", this.scope);
+    this.cardContainer = this.querySelector<HTMLDivElement>(".card-container");
     this.watchSocketEvents();
   }
 
   protected prependNewSocketCard(eventName: string, data: any, role?: string) {
-    this.debug('prependNewSocketCard', eventName, data);
+    this.debug("prependNewSocketCard", eventName, data);
 
     for (const key in data) {
-      if (data[key] && typeof data[key] === 'string') {
+      if (data[key] && typeof data[key] === "string") {
         data[key] = data[key].replace(/&quot;/g, '"');
       }
     }
 
     const newCard = htmlToElement(
       `<shopify-nest-socket-event-card class="col-auto" event="${eventName}" data='${JSON.stringify(
-        data,
+        data
       ).replace(/'/g, `&#39;`)}' role="${
-        role || ''
-      }"></shopify-nest-socket-event-card>`,
+        role || ""
+      }"></shopify-nest-socket-event-card>`
     );
-    this.debug('newCard', newCard);
+    this.debug("newCard", newCard);
     if (this.cardContainer && newCard) {
       this.cardContainer.prepend(newCard);
-      this.debug('cardContainer', this.cardContainer);
+      this.debug("cardContainer", this.cardContainer);
       this.build();
     }
   }
 
   protected watchSocketEvents() {
     this.webhooksService.on(
-      'webhook:carts/create',
+      "webhook:carts/create",
       (data: any) => {
         this.prependNewSocketCard(
-          'webhook:carts/create',
+          "webhook:carts/create",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:carts/update',
+      "webhook:carts/update",
       (data: any) => {
-        this.prependNewSocketCard('carts/update', data, 'shopify-staff-member');
+        this.prependNewSocketCard("carts/update", data, "shopify-staff-member");
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:checkouts/create',
+      "webhook:checkouts/create",
       (data: any) => {
         this.prependNewSocketCard(
-          'checkouts/create',
+          "checkouts/create",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:checkouts/update',
+      "webhook:checkouts/update",
       (data: any) => {
         this.prependNewSocketCard(
-          'checkouts/update',
+          "checkouts/update",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:checkouts/delete',
+      "webhook:checkouts/delete",
       (data: any) => {
         this.prependNewSocketCard(
-          'checkouts/delete',
+          "checkouts/delete",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:collections/create',
+      "webhook:collections/create",
       (data: any) => {
         this.prependNewSocketCard(
-          'collections/create',
+          "collections/create",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:collections/update',
+      "webhook:collections/update",
       (data: any) => {
         this.prependNewSocketCard(
-          'collections/update',
+          "collections/update",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:collections/delete',
+      "webhook:collections/delete",
       (data: any) => {
         this.prependNewSocketCard(
-          'collections/delete',
+          "collections/delete",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:collection_listings/add',
+      "webhook:collection_listings/add",
       (data: any) => {
         this.prependNewSocketCard(
-          'collection_listings/add',
+          "collection_listings/add",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:collection_listings/remove',
+      "webhook:collection_listings/remove",
       (data: any) => {
         this.prependNewSocketCard(
-          'collection_listings/remove',
+          "collection_listings/remove",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
-      },
+      }
     );
 
     this.webhooksService.on(
-      'webhook:collection_listings/update',
+      "webhook:collection_listings/update",
       (data: any) => {
         this.prependNewSocketCard(
-          'collection_listings/update',
+          "collection_listings/update",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
-      },
+      }
     );
 
     this.webhooksService.on(
-      'webhook:customers/create',
+      "webhook:customers/create",
       (data: any) => {
         this.prependNewSocketCard(
-          'customers/create',
+          "customers/create",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:customers/disable',
+      "webhook:customers/disable",
       (data: any) => {
         this.prependNewSocketCard(
-          'customers/disable',
+          "customers/disable",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:customers/enable',
+      "webhook:customers/enable",
       (data: any) => {
         this.prependNewSocketCard(
-          'customers/enable',
+          "customers/enable",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:customers/update',
+      "webhook:customers/update",
       (data: any) => {
         this.prependNewSocketCard(
-          'customers/update',
+          "customers/update",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:customers/delete',
+      "webhook:customers/delete",
       (data: any) => {
         this.prependNewSocketCard(
-          'customers/delete',
+          "customers/delete",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:customer_groups/create',
+      "webhook:customer_groups/create",
       (data: any) => {
         this.prependNewSocketCard(
-          'customer_groups/create',
+          "customer_groups/create",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:customer_groups/update',
+      "webhook:customer_groups/update",
       (data: any) => {
         this.prependNewSocketCard(
-          'customer_groups/update',
+          "customer_groups/update",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:customer_groups/delete',
+      "webhook:customer_groups/delete",
       (data: any) => {
         this.prependNewSocketCard(
-          'customer_groups/delete',
+          "customer_groups/delete",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:draft_orders/create',
+      "webhook:draft_orders/create",
       (data: any) => {
         this.prependNewSocketCard(
-          'draft_orders/create',
+          "draft_orders/create",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:draft_orders/update',
+      "webhook:draft_orders/update",
       (data: any) => {
         this.prependNewSocketCard(
-          'draft_orders/update',
+          "draft_orders/update",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:fulfillments/create',
+      "webhook:fulfillments/create",
       (data: any) => {
         this.prependNewSocketCard(
-          'fulfillments/create',
+          "fulfillments/create",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:fulfillments/update',
+      "webhook:fulfillments/update",
       (data: any) => {
         this.prependNewSocketCard(
-          'fulfillments/update',
+          "fulfillments/update",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:fulfillment_events/create',
+      "webhook:fulfillment_events/create",
       (data: any) => {
         this.prependNewSocketCard(
-          'fulfillment_events/create',
+          "fulfillment_events/create",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:fulfillment_events/delete',
+      "webhook:fulfillment_events/delete",
       (data: any) => {
         this.prependNewSocketCard(
-          'fulfillment_events/delete',
+          "fulfillment_events/delete",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:inventory_items/create',
+      "webhook:inventory_items/create",
       (data: any) => {
         this.prependNewSocketCard(
-          'inventory_items/create',
+          "inventory_items/create",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:inventory_items/update',
+      "webhook:inventory_items/update",
       (data: any) => {
         this.prependNewSocketCard(
-          'inventory_items/update',
+          "inventory_items/update",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:inventory_items/delete',
+      "webhook:inventory_items/delete",
       (data: any) => {
         this.prependNewSocketCard(
-          'inventory_items/delete',
+          "inventory_items/delete",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:inventory_levels/connect',
+      "webhook:inventory_levels/connect",
       (data: any) => {
         this.prependNewSocketCard(
-          'inventory_levels/connect',
+          "inventory_levels/connect",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:inventory_levels/update',
+      "webhook:inventory_levels/update",
       (data: any) => {
         this.prependNewSocketCard(
-          'inventory_levels/update',
+          "inventory_levels/update",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:inventory_levels/disconnect',
+      "webhook:inventory_levels/disconnect",
       (data: any) => {
         this.prependNewSocketCard(
-          'inventory_levels/disconnect',
+          "inventory_levels/disconnect",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
-      },
+      }
     );
 
     this.webhooksService.on(
-      'webhook:locations/create',
+      "webhook:locations/create",
       (data: any) => {
         this.prependNewSocketCard(
-          'locations/create',
+          "locations/create",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:locations/update',
+      "webhook:locations/update",
       (data: any) => {
         this.prependNewSocketCard(
-          'locations/update',
+          "locations/update",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:locations/delete',
+      "webhook:locations/delete",
       (data: any) => {
         this.prependNewSocketCard(
-          'locations/delete',
+          "locations/delete",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:orders/cancelled',
+      "webhook:orders/cancelled",
       (data: any) => {
         this.prependNewSocketCard(
-          'orders/cancelled',
+          "orders/cancelled",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:orders/create',
+      "webhook:orders/create",
       (data: any) => {
         this.prependNewSocketCard(
-          'orders/create',
+          "orders/create",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:orders/fulfilled',
+      "webhook:orders/fulfilled",
       (data: any) => {
         this.prependNewSocketCard(
-          'orders/fulfilled',
+          "orders/fulfilled",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:orders/paid',
+      "webhook:orders/paid",
       (data: any) => {
-        this.prependNewSocketCard('orders/paid', data, 'shopify-staff-member');
+        this.prependNewSocketCard("orders/paid", data, "shopify-staff-member");
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:orders/partially_fulfilled',
-      (data: any) => {
-        this.prependNewSocketCard(
-          'orders/partially_fulfilled',
-          data,
-          'shopify-staff-member',
-        );
-      },
-      this,
-    );
-
-    this.webhooksService.on(
-      'webhook:orders/updated',
+      "webhook:orders/partially_fulfilled",
       (data: any) => {
         this.prependNewSocketCard(
-          'orders/updated',
+          "orders/partially_fulfilled",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:orders/delete',
+      "webhook:orders/updated",
       (data: any) => {
         this.prependNewSocketCard(
-          'orders/delete',
+          "orders/updated",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:order_transactions/create',
+      "webhook:orders/delete",
       (data: any) => {
         this.prependNewSocketCard(
-          'order_transactions/create',
+          "orders/delete",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:products/create',
+      "webhook:order_transactions/create",
+      (data: any) => {
+        this.prependNewSocketCard(
+          "order_transactions/create",
+          data,
+          "shopify-staff-member"
+        );
+      },
+      this
+    );
+
+    this.webhooksService.on(
+      "webhook:products/create",
       (product: Product) => {
-        this.debug('products/create', product);
+        this.debug("products/create", product);
         let role: string | undefined;
         // Unpublised products can only be recived in the app backend
         if (product.published_at === null) {
-          role = 'shopify-staff-member';
+          role = "shopify-staff-member";
         }
-        this.prependNewSocketCard('products/create', product, role);
+        this.prependNewSocketCard("products/create", product, role);
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:products/update',
+      "webhook:products/update",
       (product: Product) => {
-        this.debug('products/update', product);
+        this.debug("products/update", product);
         let role: string | undefined;
         // Unpublised products can only be recived in the app backend
         if (product.published_at === null) {
-          role = 'shopify-staff-member';
+          role = "shopify-staff-member";
         }
-        this.prependNewSocketCard('products/update', product, role);
+        this.prependNewSocketCard("products/update", product, role);
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:products/delete',
+      "webhook:products/delete",
       (data: { id: string }) => {
-        this.debug('products/delete', data);
-        this.prependNewSocketCard('products/delete', data);
+        this.debug("products/delete", data);
+        this.prependNewSocketCard("products/delete", data);
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:product_listings/add',
+      "webhook:product_listings/add",
       (data: any) => {
         this.prependNewSocketCard(
-          'product_listings/add',
+          "product_listings/add",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:product_listings/remove',
+      "webhook:product_listings/remove",
       (data: any) => {
         this.prependNewSocketCard(
-          'product_listings/remove',
+          "product_listings/remove",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:product_listings/update',
+      "webhook:product_listings/update",
       (data: any) => {
         this.prependNewSocketCard(
-          'product_listings/update',
+          "product_listings/update",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:refunds/create',
+      "webhook:refunds/create",
       (data: any) => {
         this.prependNewSocketCard(
-          'refunds/create',
+          "refunds/create",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:app/uninstalled',
+      "webhook:app/uninstalled",
       (data: any) => {
-        this.prependNewSocketCard('app/uninstalled', data);
+        this.prependNewSocketCard("app/uninstalled", data);
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:shop/update',
+      "webhook:shop/update",
       (data: any) => {
-        this.prependNewSocketCard('shop/update', data, 'shopify-staff-member');
+        this.prependNewSocketCard("shop/update", data, "shopify-staff-member");
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:themes/create',
+      "webhook:themes/create",
       (data: any) => {
         this.prependNewSocketCard(
-          'themes/create',
+          "themes/create",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:themes/publish',
+      "webhook:themes/publish",
       (data: any) => {
         this.prependNewSocketCard(
-          'themes/publish',
+          "themes/publish",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:themes/update',
+      "webhook:themes/update",
       (data: any) => {
         this.prependNewSocketCard(
-          'themes/update',
+          "themes/update",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
 
     this.webhooksService.on(
-      'webhook:themes/delete',
+      "webhook:themes/delete",
       (data: any) => {
         this.prependNewSocketCard(
-          'themes/delete',
+          "themes/delete",
           data,
-          'shopify-staff-member',
+          "shopify-staff-member"
         );
       },
-      this,
+      this
     );
   }
 
@@ -774,13 +774,13 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null,
+    namespace: string | null
   ) {
     super.attributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace,
+      namespace
     );
   }
 
@@ -793,11 +793,11 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
     let template: string | null = null;
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
-      this.debug('Do not template, because element has child nodes');
+      this.debug("Do not template, because element has child nodes");
       return template;
     } else {
       template = pugTemplate(this.scope);
-      this.debug('Use template', template);
+      this.debug("Use template", template);
       return template;
     }
   }

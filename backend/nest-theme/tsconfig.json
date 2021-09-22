@@ -10,7 +10,8 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
-    "incremental": true
+    "incremental": true,
+    "moduleResolution": "node"
   },
   "include": [
     "src/**/*"

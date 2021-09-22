@@ -59,7 +59,7 @@ export const parseType = (input?: string) => {
   }
   type = typeof value;
   return { type, value };
-}
+};
 
 /**
  * Parses a json string with the special feature that json strings
@@ -264,7 +264,7 @@ export const camelCase = (str: string) => {
  * fooBar -> foo-bar
  */
 export const kebabCase = (str: string) => {
-  return str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
+  return str.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
 };
 
 /**

@@ -4,10 +4,20 @@
   "description": "Nest.js module to use Lunr.js in your in your Nest.js application.",
   "author": "Art+Code Studio (Pascal Garber) <pascal@artandcode.studio>",
   "license": "MIT",
-  "main": "./dist/index.js",
+  "main": "dist/cjs/index.js",
+  "browser": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "module": "dist/esm/index.js",
+  "source": "src/index.ts",
+  "files": [
+    "/dist"
+  ],
   "scripts": {
     "clear": "rimraf dist",
-    "build": "npm run lint && npm run typecheck && npm run clear && tsc -p tsconfig.json",
+    "build": "npm run lint && npm run build:esm && npm run build:cjs && npm run build:types",
+    "build:types": "tsc --project ./tsconfig.json --declaration true --emitDeclarationOnly --outDir dist/types",
+    "build:esm": "tsc --project ./tsconfig.json --declaration false --module esnext --outDir dist/esm",
+    "build:cjs": "tsc --project ./tsconfig.json --declaration false --module commonjs --outDir dist/cjs",
     "watch": "npm run build -- --watch",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --ignore-pattern '*.spec.ts' --fix",
     "typecheck": "tsc -p tsconfig.json --noEmit",
