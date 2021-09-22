@@ -69,11 +69,13 @@ module.exports = (options) => {
 
   ]);
 
-  // postcss-preset-env options
-  options.presetEnv = options.presetEnv || {};
+  // Disable postcss-preset-env temporary
 
-  const presentEnv = require("postcss-preset-env");
-  options.plugins.push(presentEnv(options.presetEnv)) 
+  // postcss-preset-env options
+  // options.presetEnv = options.presetEnv || {};
+
+  // const presentEnv = require("postcss-preset-env");
+  // options.plugins.push(presentEnv(options.presetEnv)) 
 
   if (options.env.production) {
     const purgecss = require('@fullhuman/postcss-purgecss');
