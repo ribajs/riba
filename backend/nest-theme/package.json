@@ -23,10 +23,10 @@
     "/dist"
   ],
   "dependencies": {
-    "@nestjs/common": "^8.0.6",
-    "@nestjs/config": "^1.0.1",
-    "@nestjs/core": "^8.0.6",
-    "@nestjs/platform-express": "^8.0.6",
+    "@nestjs/common": "^8.0.10",
+    "@nestjs/config": "^1.0.2",
+    "@nestjs/core": "^8.0.10",
+    "@nestjs/platform-express": "^8.0.10",
     "@ribajs/core": "workspace:*",
     "@ribajs/events": "workspace:*",
     "@ribajs/ssr": "workspace:*",
@@ -55,14 +55,14 @@
     "twig": "^1.15.4"
   },
   "devDependencies": {
-    "@nestjs/cli": "^8.1.1",
+    "@nestjs/cli": "^8.1.2",
     "@nestjs/schematics": "^8.0.3",
-    "@nestjs/testing": "^8.0.6",
+    "@nestjs/testing": "^8.0.10",
     "@types/cache-manager": "^3.4.2",
     "@types/cookie-parser": "^1.4.2",
     "@types/express-session": "^1.17.4",
     "@types/jest": "^27.0.2",
-    "@types/node": "^16.9.6",
+    "@types/node": "^16.10.2",
     "@types/node-fetch": "^3.0.3",
     "@types/path-to-regexp": "^1.7.0",
     "@types/qs": "^6.9.7",
