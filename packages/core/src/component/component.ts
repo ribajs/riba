@@ -81,7 +81,7 @@ export abstract class Component extends BasicComponent {
    * @param {Error} error
    * @memberof Component
    */
-  protected throw(error: Error) {
+  protected throw(error: any) {
     if (error.message) {
       error.message = `[${this.tagName}] ${error.message}`;
     }
