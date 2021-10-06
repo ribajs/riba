@@ -83,7 +83,7 @@ export abstract class Component extends BasicComponent {
    */
   protected throw(error: any) {
     if (error.message) {
-      error.message = `[${this.tagName}] ${error.message}`;
+      console.error(`[${this.tagName}] ${error.message}`);
     }
     this.lifecycleEvents.trigger(
       "Component:error",
