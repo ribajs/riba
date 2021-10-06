@@ -35,14 +35,14 @@
     "@ribajs/webpack-config": "workspace:*",
     "@ribajs/webpack-serve": "workspace:*",
     "@types/jest": "^27.0.2",
-    "@typescript-eslint/eslint-plugin": "^4.31.2",
-    "@typescript-eslint/parser": "^4.31.2",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
     "@yarnpkg/pnpify": "^3.0.1",
     "babel-jest": "^27.2.1",
     "babel-loader": "^8.2.2",
     "babel-plugin-array-includes": "^2.0.3",
     "babelify": "^10.0.0",
-    "core-js": "^3.18.0",
+    "core-js": "^3.18.2",
     "css-loader": "^6.3.0",
     "eslint": "^7.32.0",
     "html-loader": "^2.1.2",
@@ -59,15 +59,15 @@
     "terser-webpack-plugin": "^5.2.4",
     "ts-jest": "^27.0.5",
     "typescript": "^4.4.3",
-    "webpack": "^5.53.0",
+    "webpack": "^5.57.1",
     "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "^4.2.1"
+    "webpack-dev-server": "^4.3.1"
   },
   "dependencies": {
     "@ribajs/bs5": "workspace:*",
     "@ribajs/core": "workspace:*",
     "@ribajs/extras": "workspace:*",
     "@ribajs/utils": "workspace:*",
-    "bootstrap": "^5.1.1"
+    "bootstrap": "^5.1.2"
   }
 }

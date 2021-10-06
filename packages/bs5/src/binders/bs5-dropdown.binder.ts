@@ -1,11 +1,12 @@
 import { Binder } from "@ribajs/core";
 import { Dropdown } from "../services/dropdown";
+import { Dropdown as BSDropdown } from "bootstrap";
 
 /**
  *
  * @see https://getbootstrap.com/docs/5.0/components/dropdowns/#via-javascript
  */
-export const dropdownBinder: Binder<string> = {
+export const dropdownBinder: Binder<Partial<BSDropdown.Options>> = {
   name: "bs5-dropdown",
   bind(el: HTMLElement) {
     this.customData = {
@@ -15,7 +16,7 @@ export const dropdownBinder: Binder<string> = {
           : el.querySelector(".dropdown-toggle")) || el,
     };
   },
-  routine(el: HTMLElement, option: any = {}) {
+  routine(el: HTMLElement, option = {}) {
     if (this.customData.dropdownService) {
       const dropdownService: Dropdown = this.customData.dropdownService;
       dropdownService.dispose();
