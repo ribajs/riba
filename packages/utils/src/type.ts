@@ -220,6 +220,22 @@ export const withoutSpecialChars = (str: string) => {
 };
 
 /**
+ * Replace all umlaut chars from string like ä with ae
+ * @param str
+ */
+export const replaceUmlautChars = (str: string) => {
+  str = str
+    .replace(/ä/g, "ae")
+    .replace(/ö/g, "oe")
+    .replace(/ü/g, "ue")
+    .replace(/ß/g, "ss")
+    .replace(/Ä/g, "Ae")
+    .replace(/Ö/g, "Oe")
+    .replace(/Ü/g, "Üe");
+  return str;
+};
+
+/**
  * Removes multiple tabs, newlines, etc from a string
  * @param str
  */
@@ -235,9 +251,10 @@ export const withoutMultiWhitespace = (str: string) => {
  */
 export const handleize = (str: string) => {
   str = str.trim();
+  str = str.toLowerCase();
   str = withoutMultiWhitespace(str);
   str = withoutSpecialChars(str);
-  str = str.toLowerCase();
+  str = replaceUmlautChars(str);
   str = str.replace(/ /g, "-");
   return str;
 };
