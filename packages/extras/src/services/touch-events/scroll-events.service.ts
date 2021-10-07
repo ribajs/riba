@@ -1,7 +1,6 @@
-import { ScrollPosition } from "../../types";
+import { ScrollPosition, ScrollEventsOptions } from "../../types";
 import { getScrollPosition } from "../../helper/scroll";
 import { BaseTouchEventsService } from "./base-touch-events.service";
-import { debounce } from "@ribajs/utils/src/control";
 
 export class ScrollEventsService extends BaseTouchEventsService {
   public isScrolling = false;
@@ -11,15 +10,21 @@ export class ScrollEventsService extends BaseTouchEventsService {
   /** The element to trigger the events on */
   protected el: HTMLUnknownElement | Window;
 
+  protected delay = 300;
+
   protected startPosition: ScrollPosition | null = null;
 
   protected endPosition: ScrollPosition | null = null;
 
   protected scrollTimer: number | null = null;
 
-  constructor(el: HTMLUnknownElement | Window) {
+  constructor(
+    el: HTMLUnknownElement | Window,
+    options: Partial<ScrollEventsOptions> = {}
+  ) {
     super(el);
     this.el = el;
+    this.delay = options.delay || this.delay;
     this.startPosition = getScrollPosition(this.el);
     // Watch also native scrollend to not trigger scrollended before scrollend was triggered
     this._scrollEvent = this.touchCapable
@@ -92,7 +97,7 @@ export class ScrollEventsService extends BaseTouchEventsService {
 
     this.scrollTimer = window.setTimeout(() => {
       this.scrollended(event);
-    }, 100);
+    }, this.delay);
 
     return true;
   }
@@ -144,5 +149,5 @@ export class ScrollEventsService extends BaseTouchEventsService {
     });
   }
 
-  protected scroll = debounce(this._scroll.bind(this));
+  protected scroll = this._scroll.bind(this);
 }

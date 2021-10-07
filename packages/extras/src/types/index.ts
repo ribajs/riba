@@ -1,5 +1,6 @@
 export * from "./module-options";
 export * from "./position";
+export * from "./scroll-events-options";
 export * from "./scroll-position";
 export * from "./touch-data";
 export * from "./touch-direction";
