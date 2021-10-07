@@ -45,11 +45,11 @@ interface Scope {
    */
   mode: "overlap" | "move";
   /**
-   * Auto show the sidebar if the viewport width is wider than this value
+   * Auto show the sidebar if the viewport width is wider than this value. Set this to -1 to disable this option.
    */
   autoShowOnWiderThan: number;
   /**
-   * Auto hide the sidebar if the viewport width is slimmer than this value
+   * Auto hide the sidebar if the viewport width is slimmer than this value. Set this to -1 to disable this option.
    */
   autoHideOnSlimmerThan: number;
   /**
