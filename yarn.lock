@@ -7031,6 +7031,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@ribajs/strapi@workspace:packages/strapi":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/strapi@workspace:packages/strapi"
+  dependencies:
+    "@babel/runtime": ^7.15.4
+    "@babel/runtime-corejs3": ^7.15.4
+    "@ribajs/core": "workspace:*"
+    "@ribajs/tsconfig": "workspace:*"
+    "@ribajs/utils": "workspace:*"
+    "@types/node": ^16.10.2
+  languageName: unknown
+  linkType: soft
+
 "@ribajs/tsconfig@workspace:*, @ribajs/tsconfig@workspace:infra/tsconfig":
   version: 0.0.0-use.local
   resolution: "@ribajs/tsconfig@workspace:infra/tsconfig"
