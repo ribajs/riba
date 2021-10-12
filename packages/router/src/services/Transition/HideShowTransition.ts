@@ -23,6 +23,10 @@ export class HideShowTransition extends BaseTransition implements Transition {
     if (!this.newContainerLoading) {
       throw new Error("this.newContainerLoading is not set");
     }
+    if (this.oldContainer) {
+      this.oldContainer.style.display = "none";
+    }
+    
     if (this.scrollToTop) {
       await scrollToPosition(window, "start", "vertical", "smooth");
     }
@@ -30,6 +34,11 @@ export class HideShowTransition extends BaseTransition implements Transition {
     await this.newContainerLoading;
 
     await this.finish();
+
+    if (this.oldContainer) {
+      this.oldContainer.style.display = "";
+    }
+
     return;
   }
 
