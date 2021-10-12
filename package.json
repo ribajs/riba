@@ -141,7 +141,8 @@
     "@ribajs/tsconfig": "workspace:*",
     "@ribajs/nest-theme": "workspace:*",
     "@ribajs/npm-package": "workspace:*",
-    "@ribajs/babel-config": "workspace:*"
+    "@ribajs/babel-config": "workspace:*",
+    "@ribajs/strapi": "workspace:*"
   },
   "dependencies": {
     "@popperjs/core": "^2.10.1",
