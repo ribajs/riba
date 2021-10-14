@@ -13,7 +13,7 @@ section.row
                 th.border-top-0 Date
             tbody
               tr(rv-each-article="articles")
-                td: img(class="img-fluid" rv-src="article.image.src" rv-show="article.image.src" width="100")
+                td: img(loading="lazy" class="img-fluid" rv-src="article.image.src" rv-show="article.image.src" width="100")
                 td: a(rv-href="article.href" rv-text="article.title")
                 td(rv-text="article.blog_id")
                 td(rv-text="article.user_id")
