@@ -25,14 +25,14 @@
     "@graphql-tools/load": "^6.2.8",
     "@graphql-tools/utils": "^7.10.0",
     "app-root-path": "^3.0.0",
-    "glob": "^7.1.7",
-    "graphql": "^15.6.0",
-    "graphql-request": "^3.5.0"
+    "glob": "^7.2.0",
+    "graphql": "^15.6.1",
+    "graphql-request": "^3.6.0"
   },
   "devDependencies": {
     "@types/app-root-path": "^1.2.4",
     "@types/glob": "^7.1.4",
-    "@types/node": "^16.10.2",
+    "@types/node": "^16.11.0",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "eslint": "^7.32.0",

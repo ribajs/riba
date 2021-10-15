@@ -52,13 +52,13 @@
   ],
   "devDependencies": {
     "@babel/runtime-corejs3": "^7.15.4",
-    "core-js": "^3.18.2",
+    "core-js": "^3.18.3",
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
     "gulp-debug": "^4.0.0",
     "gulp-exec": "^5.0.0",
     "gulp-filelist": "^2.0.5",
-    "gulp-svgmin": "^4.0.1"
+    "gulp-svgmin": "^4.1.0"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"
