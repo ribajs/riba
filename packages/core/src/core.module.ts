@@ -6,13 +6,13 @@ import * as components from "./components";
 import * as adapters from "./adapters";
 import { CoreModuleOptions } from "./types";
 
-export const coreModule: RibaModule = {
+export const coreModule: RibaModule<CoreModuleOptions> = {
   formatters,
   binders,
   services,
   components,
   adapters,
-  init(options: CoreModuleOptions = {}) {
+  init(options = {}) {
     services.CoreService.setSingleton(options);
     return this;
   },

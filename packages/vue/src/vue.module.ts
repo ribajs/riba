@@ -5,13 +5,12 @@ import { RibaModule } from "@ribajs/core";
 // import * as components from './components';
 import { VueModuleOptions } from "./types";
 
-export const vueModule = <RibaModule>{
+export const vueModule: RibaModule<VueModuleOptions> = {
   binders: {},
   services: {},
   formatters: {},
   components: {},
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  init(options: VueModuleOptions = {}) {
+  init(/*options = {}*/) {
     return this;
   },
 };

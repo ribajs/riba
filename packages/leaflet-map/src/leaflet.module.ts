@@ -5,12 +5,12 @@ import * as services from "./services";
 import * as components from "./components";
 import { LeafletModuleOptions } from "./types";
 
-export const leafletModule: RibaModule = {
+export const leafletModule: RibaModule<LeafletModuleOptions> = {
   formatters,
   binders,
   services,
   components,
-  init(options: LeafletModuleOptions = {}) {
+  init(options = {}) {
     services.LeafletService.setSingleton(options);
     return this;
   },

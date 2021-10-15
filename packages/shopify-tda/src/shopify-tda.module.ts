@@ -5,12 +5,12 @@ import * as services from "./services";
 import * as components from "./components";
 import { ShopifyTDAModuleOptions } from "./types";
 
-export const shopifyTDAModule = <RibaModule>{
+export const shopifyTDAModule: RibaModule<ShopifyTDAModuleOptions> = {
   binders,
   services,
   formatters,
   components,
-  init(options: ShopifyTDAModuleOptions = {}) {
+  init(options = {}) {
     services.ModuleService.setSingleton(options);
     return this;
   },

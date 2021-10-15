@@ -5,12 +5,15 @@ import * as formatters from "./formatters";
 import * as components from "./components";
 import * as services from "./services";
 
-export const i18nModule: RibaModule = {
+export const i18nModule: RibaModule<I18nModuleOptions> = {
   binders,
   components,
   formatters,
   services,
-  init(options: I18nModuleOptions) {
+  init(options) {
+    if (!options) {
+      throw new Error("[i18nModule] Module options required!");
+    }
     services.I18nService.setSingleton(options);
     return this;
   },

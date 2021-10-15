@@ -5,12 +5,12 @@ import * as services from "./services";
 import * as components from "./components";
 import { OctobercmsModuleOptions } from "./types";
 
-export const octobercmsModule: RibaModule = {
+export const octobercmsModule: RibaModule<OctobercmsModuleOptions> = {
   formatters,
   binders,
   services,
   components,
-  init(options: OctobercmsModuleOptions = {}) {
+  init(options = {}) {
     services.OctobercmsService.setSingleton(options);
     return this;
   },

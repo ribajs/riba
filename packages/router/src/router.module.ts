@@ -4,12 +4,12 @@ import * as components from "./components";
 import * as services from "./services";
 import { RouterModuleOptions } from "./types";
 
-export const routerModule: RibaModule = {
+export const routerModule: RibaModule<Partial<RouterModuleOptions>> = {
   binders,
   components,
   services,
   formatters: {},
-  init(options: Partial<RouterModuleOptions> = {}) {
+  init(options = {}) {
     services.RouterService.setSingleton(options);
     return this;
   },

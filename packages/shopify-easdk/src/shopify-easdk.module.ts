@@ -5,12 +5,12 @@ import * as components from "./components";
 import * as services from "./services";
 import { ShopifyEasdkModuleOptions } from "./types";
 
-export const shopifyEasdkModule: RibaModule = {
+export const shopifyEasdkModule: RibaModule<ShopifyEasdkModuleOptions> = {
   formatters: {},
   binders: {},
   services,
   components,
-  init(options: ShopifyEasdkModuleOptions = {}) {
+  init(options = {}) {
     services.ModuleService.setSingleton(options);
     return this;
   },

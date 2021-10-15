@@ -7,7 +7,7 @@ import * as helper from "./helper";
 import * as constants from "./constants";
 import { Bs4ModuleOptions } from "./interfaces";
 
-export const bs4Module: RibaModule = {
+export const bs4Module: RibaModule<Bs4ModuleOptions> = {
   binders,
   services,
   formatters,

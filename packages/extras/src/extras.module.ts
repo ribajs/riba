@@ -6,13 +6,13 @@ import * as services from "./services";
 // import * as components from './components';
 import { ExtrasModuleOptions } from "./types";
 
-export const extrasModule: RibaModule = {
+export const extrasModule: RibaModule<ExtrasModuleOptions> = {
   helper,
   formatters: {},
   binders,
   services,
   components: {},
-  init(options: ExtrasModuleOptions = {}) {
+  init(options = {}) {
     services.ExtrasService.setSingleton(options);
     return this;
   },

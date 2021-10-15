@@ -5,12 +5,12 @@ import * as services from "./services";
 import * as components from "./components";
 import { PhotoswipeModuleOptions } from "./types";
 
-export const photoswipeModule: RibaModule = {
+export const photoswipeModule: RibaModule<PhotoswipeModuleOptions> = {
   formatters,
   binders,
   services,
   components,
-  init(options: PhotoswipeModuleOptions = {}) {
+  init(options = {}) {
     services.PhotoswipeService.setSingleton(options);
     return this;
   },

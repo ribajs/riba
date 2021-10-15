@@ -3,8 +3,9 @@ import * as binders from "./binders";
 import * as formatters from "./formatters";
 import * as services from "./services";
 import * as components from "./components";
+import { EmptyTemplateModuleOptions } from "./types";
 
-export const emptyTemplateModule: RibaModule = {
+export const emptyTemplateModule: RibaModule<EmptyTemplateModuleOptions> = {
   binders,
   services,
   formatters,

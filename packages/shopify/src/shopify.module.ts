@@ -5,12 +5,12 @@ import * as formatters from "./formatters";
 import * as services from "./services";
 import { ShopifyModuleOptions } from "./types";
 
-export const shopifyModule: RibaModule = {
+export const shopifyModule: RibaModule<ShopifyModuleOptions> = {
   binders,
   formatters,
   services,
   components,
-  init(options: ShopifyModuleOptions = {}) {
+  init(options = {}) {
     services.ModuleService.setSingleton(options);
     return this;
   },

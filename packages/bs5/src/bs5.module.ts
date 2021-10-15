@@ -8,13 +8,13 @@ import * as formatters from "./formatters";
 import * as services from "./services";
 import * as constants from "./constants";
 
-export const bs5Module: RibaModule = {
+export const bs5Module: RibaModule<Partial<Bs5ModuleOptions>> = {
   binders,
   services,
   formatters,
   components,
   constants,
-  init(partialOptions: Partial<Bs5ModuleOptions> = {}) {
+  init(partialOptions = {}) {
     const options = extend(
       { deep: true },
       partialOptions,

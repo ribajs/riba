@@ -1,6 +1,6 @@
 import { Binders, Formatters, Components, Services, Adapters } from ".";
 
-export interface RibaModule {
+export interface RibaModule<O = Record<string, never>> {
   /**
    * Binders can be a object of binders named by property key (Binders<any>)
    * or an array of binders with binder and name property (Binder<any>)
@@ -34,5 +34,5 @@ export interface RibaModule {
    * @param {unknown} options
    * @memberof RibaModule
    */
-  init(options?: unknown): RibaModule;
+  init(options?: O): RibaModule<O>;
 }
