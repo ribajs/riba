@@ -59,11 +59,13 @@ export class RouterViewComponent extends Component {
 
   protected addEventListeners() {
     this.events.on("newPageReady", this.onPageReady, this);
+    this.events.on("initStateChange", this.onTransitionInit, this);
     this.events.on("transitionCompleted", this.onTransitionCompleted, this);
   }
 
   protected removeEventListeners() {
     this.events.off("newPageReady", this.onPageReady, this);
+    this.events.off("initStateChange", this.onTransitionInit, this);
     this.events.off("transitionCompleted", this.onTransitionCompleted, this);
   }
 
@@ -137,11 +139,20 @@ export class RouterViewComponent extends Component {
     this.view.bind();
   }
 
+  protected async onTransitionInit(viewId: string) {
+    if (viewId !== this.scope.id) {
+      return;
+    }
+    this.setTransitionClass('init');
+  }
+
   protected async onTransitionCompleted(viewId: string) {
     // Only to anything if the viewID is equal (in this way it is possible to have multiple views)
     if (viewId !== this.scope.id) {
       return;
     }
+
+    this.setTransitionClass('complete');
 
     if (this.scope.scrollToTop || this.scope.scrollToAnchorHash) {
       let scrollToElement: HTMLElement | null = null;
@@ -159,6 +170,12 @@ export class RouterViewComponent extends Component {
     }
 
     return;
+  }
+
+  protected setTransitionClass(state: 'init' | 'complete') {
+    this.classList.remove('transition-init');
+    this.classList.remove('transition-complete');
+    this.classList.add(`transition-${state}`);
   }
 
   protected requiredAttributes(): string[] {
