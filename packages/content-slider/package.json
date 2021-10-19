@@ -47,28 +47,28 @@
     "@ribajs/eslint-config": "workspace:*",
     "@ribajs/tsconfig": "workspace:*",
     "@types/jest": "^27.0.2",
-    "@typescript-eslint/eslint-plugin": "^5.0.0",
-    "@typescript-eslint/parser": "^5.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "@typescript-eslint/parser": "^5.1.0",
     "babel-loader": "^8.2.2",
     "babel-plugin-array-includes": "^2.0.3",
     "core-js": "^3.18.3",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "jest": "^27.2.5",
-    "jest-extended": "^1.0.0",
+    "jest": "^27.3.1",
+    "jest-extended": "^1.1.0",
     "prettier": "2.4.1",
-    "ts-jest": "^27.0.6",
+    "ts-jest": "^27.0.7",
     "typescript": "^4.4.4",
     "webpack": "^5.58.2",
-    "webpack-cli": "^4.9.0"
+    "webpack-cli": "^4.9.1"
   },
   "dependencies": {
     "@ribajs/bs5": "workspace:*",
     "@ribajs/core": "workspace:*",
     "@ribajs/extras": "workspace:*",
     "@ribajs/utils": "workspace:*",
-    "@yarnpkg/pnpify": "^3.0.1"
+    "@yarnpkg/pnpify": "^3.1.0-rc.1"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"
