@@ -2,26 +2,21 @@ import { PodloveWebPlayerEpisode } from "@ribajs/podcast";
 
 import { chapters } from "./chapters";
 import { transcripts } from "./transcripts";
+import { alexanderHeimbuch, michaelaLehr, ericTeubert, simon } from "../contributors/index";
+import { show } from "../show";
 
 /**
  * Epsiode Meta Information
  */
 
-export const episode: PodloveWebPlayerEpisode = {
+export const episode03: PodloveWebPlayerEpisode = {
   // Configuration Version
   version: 5,
 
   /**
    * Show Related Information
    */
-  show: {
-    title: "Podlovers",
-    subtitle: "Der Podlove Entwickler:innen Podcast",
-    summary:
-      "Podlove ist eine Initiative zur Verbesserung der Open Source Infrastruktur zum Podcasting. Podlove ist gleichzeitig auch ein Netzwerk an Entwickler:innen zur Diskussion von Features und Standardisierung.",
-    poster: "/assets/web-player/show.png",
-    link: "https://podlovers.org",
-  },
+  show,
 
   /**
    * Episode related Information
@@ -88,7 +83,7 @@ export const episode: PodloveWebPlayerEpisode = {
    * - can be a plain list or a reference to a json file
    * - if present chapters tab will be available
    */
-  chapters: chapters,
+  chapters,
 
   /**
    * Contributors
@@ -101,66 +96,7 @@ export const episode: PodloveWebPlayerEpisode = {
    * - (group): contributors group
    */
   contributors: [
-    {
-      id: "1",
-      name: "Alexander Heimbuch",
-      avatar: "/assets/alexander-heimbuch.jpeg",
-      role: {
-        id: "1",
-        slug: "team",
-        title: "Team",
-      },
-      group: {
-        id: "2",
-        slug: "on-air",
-        title: "On Air",
-      },
-    },
-    {
-      id: "2",
-      name: "Michaela Lehr",
-      avatar: "/assets/michaela-lehr.jpeg",
-      role: {
-        id: "1",
-        slug: "team",
-        title: "Team",
-      },
-      group: {
-        id: "2",
-        slug: "on-air",
-        title: "On Air",
-      },
-    },
-    {
-      id: "3",
-      name: "Eric Teubert",
-      avatar: "/assets/eric-teubert.jpeg",
-      role: {
-        id: "1",
-        slug: "team",
-        title: "Team",
-      },
-      group: {
-        id: "2",
-        slug: "on-air",
-        title: "On Air",
-      },
-    },
-    {
-      id: "4",
-      name: "Simon",
-      avatar: "/assets/simon.jpeg",
-      role: {
-        id: "2",
-        slug: "guest",
-        title: "Gast",
-      },
-      group: {
-        id: "2",
-        slug: "on-air",
-        title: "On Air",
-      },
-    },
+    alexanderHeimbuch, michaelaLehr, ericTeubert, simon
   ],
 
   /**
@@ -168,5 +104,5 @@ export const episode: PodloveWebPlayerEpisode = {
    * - can be a plain list or a reference to a json file
    * - if present transcripts tab will be available
    */
-  transcripts: transcripts,
+  transcripts,
 };

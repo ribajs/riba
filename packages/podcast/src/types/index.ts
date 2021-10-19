@@ -1,3 +1,4 @@
+export * from "./podlove-play-button-component-scope";
 export * from "./podlove-web-player-audio";
 export * from "./podlove-web-player-chapter";
 export * from "./podlove-web-player-client";

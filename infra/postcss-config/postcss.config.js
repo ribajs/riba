@@ -23,7 +23,7 @@ module.exports = (options) => {
   options.plugins = options.plugins || [];
   
   // purgecss options
-  options.purgecss = options.purgecss || {};
+  options.purgecss = options.purgecss || { enable: false };
   options.purgecss.content = getPurgecssContent(options.purgecss.content);
   options.purgecss.safelist = options.purgecss.safelist || []
 
@@ -77,7 +77,8 @@ module.exports = (options) => {
   // const presentEnv = require("postcss-preset-env");
   // options.plugins.push(presentEnv(options.presetEnv)) 
 
-  if (options.env.production) {
+
+  if (options.purgecss.enable) {
     const purgecss = require('@fullhuman/postcss-purgecss');
     options.plugins.push(purgecss(options.purgecss))
   }

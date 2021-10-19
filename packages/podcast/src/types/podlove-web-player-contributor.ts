@@ -12,4 +12,5 @@ export interface PodloveWebPlayerContributor {
     slug: string;
     title: string;
   };
+  comment?: null | string;
 }

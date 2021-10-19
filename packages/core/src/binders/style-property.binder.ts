@@ -6,7 +6,7 @@ import { kebabCase } from "@ribajs/utils";
  * Adds a style to the element.
  *
  * ```html
- * <div rv-csr-style="{'backgroundColor':'blue'}"></div>
+ * <div rv-style="{'backgroundColor':'blue'}"></div>
  * ```
  */
 export const styleBinder: Binder<Partial<CSSStyleDeclaration>> = {

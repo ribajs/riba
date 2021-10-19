@@ -6,6 +6,9 @@ import {
 } from "../../types";
 import { loadScript } from "@ribajs/utils";
 
+const DEFAULT_POLYFILLS_URL = "//cdn.podlove.org/web-player/5.x/polyfills.js";
+const DEFAULT_WEB_PLAYER_URL = "//cdn.podlove.org/web-player/5.x/embed.js";
+
 export class PodloveWebPlayerComponent extends Component {
   public static tagName = "podlove-web-player";
 
@@ -64,7 +67,7 @@ export class PodloveWebPlayerComponent extends Component {
 
     if (!modernBrowser) {
       await loadScript(
-        "//cdn.podlove.org/web-player/5.x/polyfills.js",
+        DEFAULT_POLYFILLS_URL,
         "podlove-web-player-polyfills-5-x",
         true,
         true
@@ -74,7 +77,7 @@ export class PodloveWebPlayerComponent extends Component {
 
   protected async loadPlayer() {
     await loadScript(
-      "//cdn.podlove.org/web-player/5.x/embed.js",
+      DEFAULT_WEB_PLAYER_URL,
       "podlove-web-player-5-x",
       true,
       true

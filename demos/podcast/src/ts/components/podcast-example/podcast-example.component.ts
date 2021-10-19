@@ -2,7 +2,8 @@ import { Component, TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import template from "./podcast-example.component.pug";
 
-import { episode } from "../../data/episode";
+import { episode03 } from "../../data/episode-03/episode";
+import { episode01 } from "../../data/episode-01/episode";
 import { config } from "../../data/config";
 
 export class EmptyTemplateExampleComponent extends Component {
@@ -14,7 +15,8 @@ export class EmptyTemplateExampleComponent extends Component {
   }
 
   public scope = {
-    episode,
+    episode03,
+    episode01,
     config,
   };
 

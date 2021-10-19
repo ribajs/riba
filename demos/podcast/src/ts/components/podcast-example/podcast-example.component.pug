@@ -1,7 +1,12 @@
-.row.my-5
-  section.col-12.my-5.text-center
-    h2 Podlove Web Player
-    p This example is based on 
-      a(href="https://docs.podlove.org/podlove-web-player/v5/playground" target="_blank") Podlove Web Player Playground Example
-    .row
-      podlove-web-player.col-12.col-md-8.col-xl-6.col-xxl-4.mx-auto(rv-co-episode="episode" rv-co-config="config")
+.container
+  .row.my-5
+    section.col-12.my-5.text-center
+      h2 Podlove Web Player
+      p This example is based on 
+        a(href="https://docs.podlove.org/podlove-web-player/v5/playground", target="_blank") Podlove Web Player Playground Example
+      .row
+        .col-12.col-md-10.col-xl-8.col-xxl-6.mx-auto
+          podlove-web-player.w-100(rv-co-episode="episode03", rv-co-config="config", id="mainplayer")
+      .row.py-5
+        .col-12.col-md-10.col-xl-8.col-xxl-6.mx-auto
+          podlove-play-button(rv-co-episode="episode01", rv-co-config="config", web-player-id="mainplayer", play-label="Podcast abspielen")
