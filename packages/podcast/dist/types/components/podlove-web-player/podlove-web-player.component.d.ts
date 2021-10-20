@@ -1,9 +1,7 @@
 import { Component, TemplateFunction } from "@ribajs/core";
-import type { PodloveWebPlayerComponentScope, PodloveWebPlayerStore } from "../../types";
+import type { PodloveWebPlayerComponentScope, PodloveWebPlayerStore, PodloveWebPlayerStoreAction } from "../../types";
 export declare class PodloveWebPlayerComponent extends Component {
     static tagName: string;
-    static loadingClass: string;
-    static readyClass: string;
     protected _template: string;
     static get observedAttributes(): string[];
     protected requiredAttributes(): string[];
@@ -16,6 +14,7 @@ export declare class PodloveWebPlayerComponent extends Component {
     protected maybeLoadPolyfills(): Promise<void>;
     protected setId(): void;
     protected loadPlayer(): Promise<void>;
+    protected onPlay(action: PodloveWebPlayerStoreAction): void;
     protected beforeBind(): Promise<void>;
     protected template(): ReturnType<TemplateFunction>;
 }

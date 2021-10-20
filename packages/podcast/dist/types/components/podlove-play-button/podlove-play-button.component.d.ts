@@ -11,7 +11,7 @@ export declare class PodlovePlayButtonComponent extends Component {
     constructor();
     protected connectedCallback(): void;
     protected initConfigs(): Promise<void>;
-    protected setWebPlayer(): PodloveWebPlayerComponent | undefined;
+    protected initWebPlayer(): Promise<PodloveWebPlayerComponent | undefined>;
     protected addEventListeners(): void;
     protected _onClick(): void;
     protected getEpisodePlaylistIndex(): number;

@@ -1,6 +1,7 @@
 import { Component, TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import { requestPause, requestPlay, selectEpisode } from "../../mixins/actions.mixins";
+import { waitForProp } from "@ribajs/utils/src/control";
+import { requestPlay, selectEpisode } from "../../mixins/actions.mixins";
 import { getEpisodeConfig, getPlayerConfig } from "../../mixins/config.mixins";
 import { DEFAULT_MAIN_PLAYER_ID } from "../../constants";
 
@@ -108,13 +109,27 @@ export class PodlovePlayButtonComponent extends Component {
     this.style.backgroundColor = this.scope.config.theme.tokens.brandLightest;
   }
 
-  protected setWebPlayer() {
+  protected async initWebPlayer() {
     const webPlayerEl = document.getElementById(this.scope.webPlayerId) as PodloveWebPlayerComponent | null;
-    if (!webPlayerEl) {
+    this.player = webPlayerEl || undefined;
+
+    if (!this.player) {
       console.error(`Web player element not found by id "${this.scope.webPlayerId}"!`);
       return;
     }
-    this.player = webPlayerEl;
+
+    const store = await waitForProp<PodloveWebPlayerStore>('store', this.player);
+
+    if (!store) {
+      console.error(`Web player not ready!`);
+      return;
+    }
+
+    // store.subscribe(() => {
+    //   const { lastAction } = store.getState();
+    //   console.debug("lastAction", lastAction);
+    // });
+
     return this.player;
   }
 
@@ -182,7 +197,7 @@ export class PodlovePlayButtonComponent extends Component {
     }
 
     const store = this.player.store;
-    store.dispatch(requestPause());
+    // store.dispatch(requestPause());
     store.dispatch(selectEpisode({ index: index, play: true }))
     return store.dispatch(requestPlay());
   }
@@ -192,13 +207,13 @@ export class PodlovePlayButtonComponent extends Component {
   protected async afterBind() {
     await super.afterBind();
     await this.initConfigs();
-    this.setWebPlayer();
+    await this.initWebPlayer();
     this.addEventListeners();
   }
 
   // protected async afterAllBind() {
   //   await super.afterAllBind();
-  //   this.setWebPlayer();
+  //   this.initWebPlayer();
   // }
 
   protected template(): ReturnType<TemplateFunction> {

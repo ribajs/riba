@@ -10,6 +10,21 @@ export const times = (n: number, cb: () => void) => {
   }
 };
 
+export const sleep = (time: number) => {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+
+export const waitForProp = async <T = any> (propName: string, obj: any = window, delay = 1000) => {
+  console.debug("check", obj[propName])
+
+  while(!obj[propName]) {
+    await sleep(delay);
+  }
+
+  return obj[propName] as T
+}
+
 /**
  * Return a new "Deferred" object
  * https://developer.mozilla.org/en-US/docs/Mozilla/JavaScript_code_modules/Promise.jsm/Deferred

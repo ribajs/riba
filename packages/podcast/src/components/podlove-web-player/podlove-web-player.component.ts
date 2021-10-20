@@ -1,20 +1,16 @@
 import { Component, TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { loadScript } from "@ribajs/utils";
-import { DEFAULT_MAIN_PLAYER_ID, DEFAULT_POLYFILLS_URL, DEFAULT_WEB_PLAYER_URL, DEFAULT_POLYFILLS_SCRIPT_ID, DEFAULT_WEB_PLAYER_SCRIPT_ID } from "../../constants";
+import { DEFAULT_MAIN_PLAYER_ID, DEFAULT_POLYFILLS_URL, DEFAULT_WEB_PLAYER_URL, DEFAULT_POLYFILLS_SCRIPT_ID, DEFAULT_WEB_PLAYER_SCRIPT_ID, LOADING_CLASS, READY_CLASS, HAS_PLAYED_CLASS } from "../../constants";
 
 import type {
   PodloveWebPlayerComponentScope,
   PodloveWebPlayerStore,
+  PodloveWebPlayerStoreAction,
 } from "../../types";
-
-
 
 export class PodloveWebPlayerComponent extends Component {
   public static tagName = "podlove-web-player";
-
-  public static loadingClass = "podlove-web-player-loading";
-  public static readyClass = "podlove-web-player-ready";
 
   protected _template = "";
 
@@ -54,11 +50,11 @@ export class PodloveWebPlayerComponent extends Component {
 
   protected setLoadingClass(loading: boolean) {
     if (loading) {
-      this.classList.add(PodloveWebPlayerComponent.loadingClass);
-      this.classList.remove(PodloveWebPlayerComponent.readyClass);
+      this.classList.add(LOADING_CLASS);
+      this.classList.remove(READY_CLASS);
     } else {
-      this.classList.remove(PodloveWebPlayerComponent.loadingClass);
-      this.classList.add(PodloveWebPlayerComponent.readyClass);
+      this.classList.remove(LOADING_CLASS);
+      this.classList.add(READY_CLASS);
     }
   }
 
@@ -94,18 +90,27 @@ export class PodloveWebPlayerComponent extends Component {
       throw new Error("Can't load Podlove Web Player");
     }
 
-    this.store = await window.podlovePlayer(
+    const store = await window.podlovePlayer(
       this,
       this.scope.episode,
       this.scope.config
     );
 
+    this.store = store;
+
     this.setLoadingClass(false);
 
-    // store.subscribe(() => {
-    //   const { lastAction } = store.getState();
-    //   console.debug("lastAction", lastAction);
-    // });
+    this.store.subscribe(() => {
+      const { lastAction } = store.getState();
+      if(lastAction?.type === "PLAYER_REQUEST_PLAY") {
+        this.onPlay(lastAction);
+      }
+    });
+  }
+
+  protected onPlay(action: PodloveWebPlayerStoreAction) {
+    this.debug("onPlay", action);
+    this.classList.add(HAS_PLAYED_CLASS);
   }
 
   protected async beforeBind() {
