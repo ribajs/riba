@@ -132,7 +132,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
         eslintConfig.options = require("@ribajs/eslint-config");
       }
 
-      config.forkTsCheckerConfig.eslint = eslintConfig;
+      // config.forkTsCheckerConfig.eslint = eslintConfig; // temporarily disabled until the error "CLIEngine is not a constructor" is fixed
     }
   }
 

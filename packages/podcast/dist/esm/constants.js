@@ -1,0 +1,6 @@
+export const DEFAULT_MAIN_PLAYER_ID = "main-podcast-player";
+export const DEFAULT_POLYFILLS_URL = "//cdn.podlove.org/web-player/5.x/polyfills.js";
+export const DEFAULT_POLYFILLS_SCRIPT_ID = "podlove-web-player-polyfills-5-x";
+export const DEFAULT_WEB_PLAYER_URL = "//cdn.podlove.org/web-player/5.x/embed.js";
+export const DEFAULT_WEB_PLAYER_SCRIPT_ID = "podlove-web-player-5-x";
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29uc3RhbnRzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vc3JjL2NvbnN0YW50cy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLENBQUMsTUFBTSxzQkFBc0IsR0FBRyxxQkFBcUIsQ0FBQztBQUM1RCxNQUFNLENBQUMsTUFBTSxxQkFBcUIsR0FBRywrQ0FBK0MsQ0FBQztBQUNyRixNQUFNLENBQUMsTUFBTSwyQkFBMkIsR0FBRyxrQ0FBa0MsQ0FBQztBQUM5RSxNQUFNLENBQUMsTUFBTSxzQkFBc0IsR0FBRywyQ0FBMkMsQ0FBQztBQUNsRixNQUFNLENBQUMsTUFBTSw0QkFBNEIsR0FBRyx3QkFBd0IsQ0FBQyJ9

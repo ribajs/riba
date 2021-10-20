@@ -1,13 +1,14 @@
 import { Component, TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import {
+import { loadScript } from "@ribajs/utils";
+import { DEFAULT_MAIN_PLAYER_ID, DEFAULT_POLYFILLS_URL, DEFAULT_WEB_PLAYER_URL, DEFAULT_POLYFILLS_SCRIPT_ID, DEFAULT_WEB_PLAYER_SCRIPT_ID } from "../../constants";
+
+import type {
   PodloveWebPlayerComponentScope,
   PodloveWebPlayerStore,
 } from "../../types";
-import { loadScript } from "@ribajs/utils";
 
-const DEFAULT_POLYFILLS_URL = "//cdn.podlove.org/web-player/5.x/polyfills.js";
-const DEFAULT_WEB_PLAYER_URL = "//cdn.podlove.org/web-player/5.x/embed.js";
+
 
 export class PodloveWebPlayerComponent extends Component {
   public static tagName = "podlove-web-player";
@@ -68,17 +69,23 @@ export class PodloveWebPlayerComponent extends Component {
     if (!modernBrowser) {
       await loadScript(
         DEFAULT_POLYFILLS_URL,
-        "podlove-web-player-polyfills-5-x",
+        DEFAULT_POLYFILLS_SCRIPT_ID,
         true,
         true
       );
     }
   }
 
+  protected setId() {
+    if(!this.id) {
+      this.id = DEFAULT_MAIN_PLAYER_ID;
+    }
+  }
+
   protected async loadPlayer() {
     await loadScript(
       DEFAULT_WEB_PLAYER_URL,
-      "podlove-web-player-5-x",
+      DEFAULT_WEB_PLAYER_SCRIPT_ID,
       true,
       true
     );
@@ -103,6 +110,7 @@ export class PodloveWebPlayerComponent extends Component {
 
   protected async beforeBind() {
     await super.beforeBind();
+    this.setId();
     await this.maybeLoadPolyfills();
     await this.loadPlayer();
   }

@@ -1,6 +1,9 @@
 import { Component, TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { requestPause, requestPlay, selectEpisode } from "../../mixins/actions.mixins";
+import { getEpisodeConfig, getPlayerConfig } from "../../mixins/config.mixins";
+import { DEFAULT_MAIN_PLAYER_ID } from "../../constants";
+
 import type {
   PodlovePlayButtonComponentScope,
   PodloveWebPlayerStore,
@@ -25,14 +28,13 @@ const TEMPLATE = `
 </div>
 `;
 
-
 export class PodlovePlayButtonComponent extends Component {
   public static tagName = "podlove-play-button";
 
   protected player?: PodloveWebPlayerComponent;
 
   static get observedAttributes() {
-    return ["episode", "config", "web-player-id", "play-label"];
+    return ["episode", "config", "web-player-id", "play-label", "id"];
   }
 
   protected requiredAttributes(): string[] {
@@ -44,7 +46,7 @@ export class PodlovePlayButtonComponent extends Component {
   public scope: PodlovePlayButtonComponentScope = {
     episode: "",
     config: "",
-    webPlayerId: "",
+    webPlayerId: DEFAULT_MAIN_PLAYER_ID,
     playLabel: "",
     styles: {
       play: null,
@@ -65,12 +67,14 @@ export class PodlovePlayButtonComponent extends Component {
     this.init(PodlovePlayButtonComponent.observedAttributes);
   }
 
-  protected initConfigs() {
+  protected async initConfigs() {
     if (typeof this.scope.episode === 'string') {
-      throw new Error('TODO');
+      const response = await getEpisodeConfig(this.scope.episode);
+      this.scope.episode = response.body;
     }
     if (typeof this.scope.config === 'string') {
-      throw new Error('TODO');
+      const response = await getPlayerConfig(this.scope.config);
+      this.scope.config = response.body;
     }
 
     const playBtn = {
@@ -85,10 +89,12 @@ export class PodlovePlayButtonComponent extends Component {
     }
 
     const infoTitle = {
+      color: this.scope.config.theme.tokens.contrast,
       fontFamily: this.scope.config.theme.fonts.bold.family.join(', '),
     }
 
     const infoSubtitle = {
+      color: this.scope.config.theme.tokens.contrast,
       fontFamily: this.scope.config.theme.fonts.regular.family.join(', '),
     }
 
@@ -115,7 +121,6 @@ export class PodlovePlayButtonComponent extends Component {
   }
 
   protected _onClick() {
-    console.debug("on play", this.scope.episode);
     if (!this.player) {
       console.error("The web player element is required!");
       return
@@ -124,9 +129,6 @@ export class PodlovePlayButtonComponent extends Component {
       console.error("The web player store is not ready!");
       return
     }
-    
-    const { lastAction } = this.player.store.getState();
-    console.debug("player lastAction", lastAction);
     const index = this.getEpisodePlaylistIndex();
     this.selectEpisode(index);
   }
@@ -160,10 +162,7 @@ export class PodlovePlayButtonComponent extends Component {
       throw new Error("Episode not found in playlist!");
     }
 
-    console.debug("index", index);
-
     return index;
-  
   }
 
   /**
@@ -171,8 +170,6 @@ export class PodlovePlayButtonComponent extends Component {
    * @see https://github.com/podlove/podlove-ui/blob/release/5.7.1/apps/player/src/components/tab-playlist/components/A11y.vue
    */
   protected selectEpisode(index: number) {
-
-    console.debug("on play", this.scope.episode);
     if (!this.player) {
       console.error("The web player element is required!");
       return
@@ -192,15 +189,15 @@ export class PodlovePlayButtonComponent extends Component {
 
   protected async afterBind() {
     await super.afterBind();
+    await this.initConfigs();
     this.setWebPlayer();
-    this.initConfigs();
     this.addEventListeners();
   }
 
-  protected async afterAllBind() {
-    await super.afterAllBind();
-    this.setWebPlayer();
-  }
+  // protected async afterAllBind() {
+  //   await super.afterAllBind();
+  //   this.setWebPlayer();
+  // }
 
   protected template(): ReturnType<TemplateFunction> {
     if (!hasChildNodesTrim(this)) {

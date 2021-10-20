@@ -10,7 +10,7 @@ export declare class PodlovePlayButtonComponent extends Component {
     scope: PodlovePlayButtonComponentScope;
     constructor();
     protected connectedCallback(): void;
-    protected initConfigs(): void;
+    protected initConfigs(): Promise<void>;
     protected setWebPlayer(): PodloveWebPlayerComponent | undefined;
     protected addEventListeners(): void;
     protected _onClick(): void;
@@ -21,6 +21,5 @@ export declare class PodlovePlayButtonComponent extends Component {
     } | undefined;
     protected onClick: () => void;
     protected afterBind(): Promise<void>;
-    protected afterAllBind(): Promise<void>;
     protected template(): ReturnType<TemplateFunction>;
 }
