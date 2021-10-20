@@ -1,7 +1,7 @@
-# Router Module
+# Podcast Module
 
 ```bash
-npm install --save @ribajs/router
+npm install --save @ribajs/podcast
 ```
 
-Please [see here](https://ribajs.com/pages/router) for documentation.
+Please [see here](https://ribajs.com/pages/podcast) for documentation.
