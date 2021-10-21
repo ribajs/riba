@@ -4,22 +4,22 @@ import type { PodloveWebPlayerComponent } from "../podlove-web-player/podlove-we
 export declare class PodlovePlayButtonComponent extends Component {
     static tagName: string;
     protected player?: PodloveWebPlayerComponent;
+    _debug: boolean;
     static get observedAttributes(): string[];
     protected requiredAttributes(): string[];
     store?: PodloveWebPlayerStore;
     scope: PodlovePlayButtonComponentScope;
     constructor();
     protected connectedCallback(): void;
+    protected loadConfigs(): Promise<void>;
     protected initConfigs(): Promise<void>;
     protected initWebPlayer(): Promise<PodloveWebPlayerComponent | undefined>;
-    protected addEventListeners(): void;
-    protected _onClick(): void;
+    play(): Promise<void>;
     protected getEpisodePlaylistIndex(): number;
-    protected selectEpisode(index: number): {
+    protected selectEpisode(index: number): Promise<{
         type: import("../../types").PodloveWebPlayerStoreActionType;
         payload: any;
-    } | undefined;
-    protected onClick: () => void;
+    } | undefined>;
     protected afterBind(): Promise<void>;
     protected template(): ReturnType<TemplateFunction>;
 }

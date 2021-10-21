@@ -1,6 +1,7 @@
 import { Component, TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { loadScript } from "@ribajs/utils";
+import { getPlayerConfig } from "../../mixins/config.mixins";
 import { DEFAULT_MAIN_PLAYER_ID, DEFAULT_POLYFILLS_URL, DEFAULT_WEB_PLAYER_URL, DEFAULT_POLYFILLS_SCRIPT_ID, DEFAULT_WEB_PLAYER_SCRIPT_ID, LOADING_CLASS, READY_CLASS, HAS_PLAYED_CLASS } from "../../constants";
 
 import type {
@@ -15,18 +16,20 @@ export class PodloveWebPlayerComponent extends Component {
   protected _template = "";
 
   static get observedAttributes() {
-    return ["episode", "config"];
+    return ["episode-url", "config-url", "episode", "config"];
   }
 
   protected requiredAttributes(): string[] {
-    return ["episode", "config"];
+    return [];
   }
 
   public store?: PodloveWebPlayerStore;
 
   public scope: PodloveWebPlayerComponentScope = {
-    episode: "",
-    config: "",
+    episode: undefined,
+    config: undefined,
+    episodeUrl: "",
+    configUrl: "",
   };
 
   constructor() {
@@ -78,6 +81,23 @@ export class PodloveWebPlayerComponent extends Component {
     }
   }
 
+  protected async loadConfig() {
+    if (this.scope.configUrl && !this.scope.config) {
+      const response = await getPlayerConfig(this.scope.configUrl);
+      this.scope.config = response.body;
+    }
+  }
+
+  protected async initConfig() {
+    await this.loadConfig();
+
+    if (typeof this.scope.config !== 'object') {
+      throw new Error(`The podlove config object must be of type "object"!\n${JSON.stringify(this.scope.config)}`);
+    }
+
+    this.style.backgroundColor = this.scope.config.theme.tokens.brandLightest;
+  }
+
   protected async loadPlayer() {
     await loadScript(
       DEFAULT_WEB_PLAYER_URL,
@@ -92,8 +112,8 @@ export class PodloveWebPlayerComponent extends Component {
 
     const store = await window.podlovePlayer(
       this,
-      this.scope.episode,
-      this.scope.config
+      this.scope.episode || this.scope.episodeUrl,
+      this.scope.config || this.scope.configUrl
     );
 
     this.store = store;
@@ -115,6 +135,11 @@ export class PodloveWebPlayerComponent extends Component {
 
   protected async beforeBind() {
     await super.beforeBind();
+    await this.initConfig();
+  }
+
+  protected async afterBind() {
+    await super.afterBind();
     this.setId();
     await this.maybeLoadPolyfills();
     await this.loadPlayer();

@@ -126,13 +126,20 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
           "Enable ESLint because a eslint config file was found in " +
           eslintConfigPath
         );
-        eslintConfig.options = require(eslintConfigPath);
+        const _options = require(eslintConfigPath);
+        delete _options.root;
+        if (Array.isArray(_options.extends) && _options.extends["@ribajs"]) {
+          delete _options.extends;
+          const _ribaOptions = require("@ribajs/eslint-config");
+
+          eslintConfig.options = { ..._ribaOptions, _options };
+        }
       } else {
         logger.debug("Use default Riba ESLint config");
         eslintConfig.options = require("@ribajs/eslint-config");
       }
-
-      // config.forkTsCheckerConfig.eslint = eslintConfig; // temporarily disabled until the error "CLIEngine is not a constructor" is fixed
+      // Wait for fix https://github.com/yarnpkg/berry/issues/3578
+      // config.forkTsCheckerConfig.eslint = eslintConfig;
     }
   }
 

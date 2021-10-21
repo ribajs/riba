@@ -1,8 +1,11 @@
-import { PodloveWebPlayerEpisode } from "./podlove-web-player-episode";
-import { PodloveWebPlayerConfig } from "./podlove-web-player-config";
+import type { PodloveWebPlayerEpisode } from "./podlove-web-player-episode";
+import type { PodloveWebPlayerConfig } from "./podlove-web-player-config";
+import type { PodlovePlayButtonComponent } from "../components/podlove-play-button/podlove-play-button.component";
 export interface PodlovePlayButtonComponentScope {
-    episode: string | PodloveWebPlayerEpisode;
-    config: string | PodloveWebPlayerConfig;
+    episode?: PodloveWebPlayerEpisode;
+    config?: PodloveWebPlayerConfig;
+    episodeUrl: string;
+    configUrl: string;
     webPlayerId: string;
     playLabel: string;
     styles: {
@@ -11,4 +14,5 @@ export interface PodlovePlayButtonComponentScope {
     icons: {
         play: string;
     };
+    play: PodlovePlayButtonComponent['play'];
 }

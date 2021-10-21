@@ -1,0 +1,43 @@
+podlove-fixed-web-player {
+  podlove-web-player {
+    display: block;
+    width: 100%;
+    border-top: 1px solid black;
+    &.fixed-bottom {
+      transition: bottom 0.2s linear;
+      position: fixed;
+      right: 0;
+      bottom: -200px;
+      &.podlove-web-player-played {
+        bottom: -15px;
+      }
+      left: 0;
+      z-index: 1030;
+    }
+    &.fixed-top {
+      transition: top 0.2s linear;
+      position: fixed;
+      top: -200px;
+      &.podlove-web-player-played {
+        top: -15px;
+      }
+      right: 0;
+      left: 0;
+      z-index: 1030;
+    }
+    podlove-web-player, podlove-web-player > * {
+      width: 100%;
+      &.podlove-web-player-loading {
+        max-width: 950px;
+        width: 100%;
+        background-image: url(/images/loading-blue.svg);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 100px;
+        * {
+          display: none;
+        }
+      }
+    }
+  }
+}

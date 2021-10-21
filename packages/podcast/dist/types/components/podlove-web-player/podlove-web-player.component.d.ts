@@ -13,8 +13,11 @@ export declare class PodloveWebPlayerComponent extends Component {
     protected setLoadingClass(loading: boolean): void;
     protected maybeLoadPolyfills(): Promise<void>;
     protected setId(): void;
+    protected loadConfig(): Promise<void>;
+    protected initConfig(): Promise<void>;
     protected loadPlayer(): Promise<void>;
     protected onPlay(action: PodloveWebPlayerStoreAction): void;
     protected beforeBind(): Promise<void>;
+    protected afterBind(): Promise<void>;
     protected template(): ReturnType<TemplateFunction>;
 }

@@ -16,12 +16,9 @@ export const sleep = (time: number) => {
 
 
 export const waitForProp = async <T = any> (propName: string, obj: any = window, delay = 1000) => {
-  console.debug("check", obj[propName])
-
   while(!obj[propName]) {
     await sleep(delay);
   }
-
   return obj[propName] as T
 }
 
