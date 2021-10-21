@@ -96,6 +96,7 @@ export class Autoscroll {
   }
 
   protected addEventListeners() {
+    this.removeEventListeners();
     this.onResize = this.onResize.bind(this);
     this.onMouseIn = this.onMouseIn.bind(this);
     this.onMouseOut = this.onMouseOut.bind(this);

@@ -30,6 +30,7 @@ export class ScrollEventsService extends BaseTouchEventsService {
     this._scrollEvent = this.touchCapable
       ? ["touchmove", "scrollend", "scroll"]
       : ["scroll", "scrollend"];
+    this.removeEventListeners();
     this.addEventListeners();
   }
 

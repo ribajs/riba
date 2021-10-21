@@ -1,5 +1,4 @@
 export default `
-<button class="close" rv-on-click="close">×</button>
 <podlove-web-player rv-class="position | prepend 'fixed-'" rv-id="playerId" rv-co-episode-url="episodeUrl" rv-co-config-url="configUrl" rv-co-episode="episode" rv-co-config="config" id="main-podcast-player">
     <root style="max-width:100%;min-width:100%;">
         <div class="flex flex-col p-3">

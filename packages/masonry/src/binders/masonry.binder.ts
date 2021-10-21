@@ -39,6 +39,7 @@ export const masonryBinder: Binder<Options> = {
       );
       this.customData.resizeObserver.observe(el);
     } else {
+      window.removeEventListener("resize", this.customData.layout);
       window.addEventListener("resize", this.customData.layout, {
         passive: true,
       });
@@ -89,8 +90,10 @@ export const masonryBinder: Binder<Options> = {
     // Detect image changes
     this.customData.images.forEach((img: HTMLImageElement) => {
       // Default vanilla image loaded event
+      img.removeEventListener("load", this.customData.layout);
       img.addEventListener("load", this.customData.layout, { once: true });
       // Additional event from images-events binder
+      img.removeEventListener("load-always", this.customData.layout);
       img.addEventListener("load-always", this.customData.layout, {
         once: true,
       });

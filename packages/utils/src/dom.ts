@@ -115,7 +115,7 @@ export const scrolling = async (
         resolve();
       }, 100);
     };
-
+    scrollElement.removeEventListener("scroll", checkScroll);
     scrollElement.addEventListener("scroll", checkScroll);
     checkScroll();
   });
