@@ -149,7 +149,8 @@ export abstract class Component extends BasicComponent {
   }
 
   /**
-   * Called after component binding is done for all current components
+   * Called after component binding is done for all current components.
+   * Please note: this method is called every time a route changes, so be careful with this method.
    */
   protected async afterAllBind(): Promise<any> {
     // this.debug("afterBind", this.scope);

@@ -19,7 +19,7 @@
     "@ribajs/npm-package": "workspace:*",
     "@ribajs/postcss-config": "workspace:*",
     "@ribajs/tsconfig": "workspace:*",
-    "@types/node": "^16.11.1",
+    "@types/node": "^16.11.3",
     "@types/pkg-dir": "^2.0.1",
     "@yarnpkg/esbuild-plugin-pnp": "^2.0.0-rc.5",
     "@yarnpkg/pnpify": "^3.1.0-rc.2",
