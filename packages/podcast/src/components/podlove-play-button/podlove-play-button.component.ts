@@ -21,7 +21,15 @@ export class PodlovePlayButtonComponent extends Component {
   public _debug = false;
 
   static get observedAttributes() {
-    return ["episode", "config", "episode-url", "config-url", "web-player-id", "play-label", "id"];
+    return [
+      "episode",
+      "config",
+      "episode-url",
+      "config-url",
+      "web-player-id",
+      "play-label",
+      "id",
+    ];
   }
 
   protected requiredAttributes(): string[] {
@@ -43,7 +51,7 @@ export class PodlovePlayButtonComponent extends Component {
       infoTitle: null,
     },
     icons: {
-      play: PLAY_ICON
+      play: PLAY_ICON,
     },
     play: this.play,
   };
@@ -71,48 +79,60 @@ export class PodlovePlayButtonComponent extends Component {
   protected async initConfigs() {
     await this.loadConfigs();
 
-    if (typeof this.scope.config !== 'object') {
-      throw new Error(`The podlove config object must be of type "object"!\n${JSON.stringify(this.scope.config)}`);
+    if (typeof this.scope.config !== "object") {
+      throw new Error(
+        `The podlove config object must be of type "object"!\n${JSON.stringify(
+          this.scope.config
+        )}`
+      );
     }
-    if (typeof this.scope.episode !== 'object') {
-      throw new Error(`The episode object must be of type "object"!\n${JSON.stringify(this.scope.episode)}`);
+    if (typeof this.scope.episode !== "object") {
+      throw new Error(
+        `The episode object must be of type "object"!\n${JSON.stringify(
+          this.scope.episode
+        )}`
+      );
     }
 
     const playBtn = {
       backgroundColor: this.scope.config.theme.tokens.brandDark,
       color: this.scope.config.theme.tokens.brandLightest,
-      fontFamily: this.scope.config.theme.fonts.bold.family.join(', '),
-    }
+      fontFamily: this.scope.config.theme.fonts.bold.family.join(", "),
+    };
 
     const infoName = {
       color: this.scope.config.theme.tokens.brand,
-      fontFamily: this.scope.config.theme.fonts.bold.family.join(', '),
-    }
+      fontFamily: this.scope.config.theme.fonts.bold.family.join(", "),
+    };
 
     const infoTitle = {
       color: this.scope.config.theme.tokens.contrast,
-      fontFamily: this.scope.config.theme.fonts.bold.family.join(', '),
-    }
+      fontFamily: this.scope.config.theme.fonts.bold.family.join(", "),
+    };
 
     const infoSubtitle = {
       color: this.scope.config.theme.tokens.contrast,
-      fontFamily: this.scope.config.theme.fonts.regular.family.join(', '),
-    }
+      fontFamily: this.scope.config.theme.fonts.regular.family.join(", "),
+    };
 
-    this.scope.styles['play'] = playBtn;
-    this.scope.styles['infoName'] = infoName;
-    this.scope.styles['infoTitle'] = infoTitle;
-    this.scope.styles['infoSubtitle'] = infoSubtitle;
-    
+    this.scope.styles["play"] = playBtn;
+    this.scope.styles["infoName"] = infoName;
+    this.scope.styles["infoTitle"] = infoTitle;
+    this.scope.styles["infoSubtitle"] = infoSubtitle;
+
     this.style.backgroundColor = this.scope.config.theme.tokens.brandLightest;
   }
 
   protected async initWebPlayer() {
-    const webPlayerEl = document.getElementById(this.scope.webPlayerId) as PodloveWebPlayerComponent | null;
+    const webPlayerEl = document.getElementById(
+      this.scope.webPlayerId
+    ) as PodloveWebPlayerComponent | null;
     this.player = webPlayerEl || undefined;
 
     if (!this.player) {
-      console.error(`Web player element not found by id "${this.scope.webPlayerId}"!`);
+      console.error(
+        `Web player element not found by id "${this.scope.webPlayerId}"!`
+      );
       return;
     }
 
@@ -126,18 +146,30 @@ export class PodlovePlayButtonComponent extends Component {
   }
 
   protected getEpisodePlaylistIndex() {
-    if (typeof this.scope.config !== 'object') {
-      throw new Error(`The podlove config object must be of type "object"!\n${JSON.stringify(this.scope.config)}`);
+    if (typeof this.scope.config !== "object") {
+      throw new Error(
+        `The podlove config object must be of type "object"!\n${JSON.stringify(
+          this.scope.config
+        )}`
+      );
     }
-    if (typeof this.scope.episode !== 'object') {
-      throw new Error(`The episode object must be of type "object"!\n${JSON.stringify(this.scope.episode)}`);
+    if (typeof this.scope.episode !== "object") {
+      throw new Error(
+        `The episode object must be of type "object"!\n${JSON.stringify(
+          this.scope.episode
+        )}`
+      );
     }
 
     const title = this.scope.episode.title;
     const playlist = this.scope.config.playlist;
 
     if (!playlist) {
-      throw new Error(`Playlist is required to change the episode over the play button component!\n${JSON.stringify(playlist)}`);
+      throw new Error(
+        `Playlist is required to change the episode over the play button component!\n${JSON.stringify(
+          playlist
+        )}`
+      );
     }
 
     let index = -1;
@@ -158,25 +190,29 @@ export class PodlovePlayButtonComponent extends Component {
   }
 
   /**
-   * 
+   *
    * @see https://github.com/podlove/podlove-ui/blob/release/5.7.1/apps/player/src/components/tab-playlist/components/A11y.vue
    */
   protected async selectEpisode(index: number) {
     if (!this.player) {
       console.error("The web player element is required!");
-      return
+      return;
     }
 
-    const store = await waitForProp<PodloveWebPlayerStore>('store', this.player, 100);
+    const store = await waitForProp<PodloveWebPlayerStore>(
+      "store",
+      this.player,
+      100
+    );
 
     if (!store) {
       console.error("The web player store is not ready!");
-      return
+      return;
     }
 
     if (!this.player.store) {
       console.error("The web player store is not ready!");
-      return
+      return;
     }
 
     // store.subscribe(() => {
@@ -184,7 +220,7 @@ export class PodlovePlayButtonComponent extends Component {
     //   this.debug("lastAction", lastAction);
     // });
 
-    store.dispatch(selectEpisode({ index: index, play: true }))
+    store.dispatch(selectEpisode({ index: index, play: true }));
     return store.dispatch(requestPlay());
   }
 

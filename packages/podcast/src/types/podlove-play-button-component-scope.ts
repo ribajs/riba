@@ -10,10 +10,10 @@ export interface PodlovePlayButtonComponentScope {
   webPlayerId: string;
   playLabel: string;
   styles: {
-    [key: string]: any
-  },
+    [key: string]: any;
+  };
   icons: {
     play: string;
-  }
-  play: PodlovePlayButtonComponent['play']
+  };
+  play: PodlovePlayButtonComponent["play"];
 }

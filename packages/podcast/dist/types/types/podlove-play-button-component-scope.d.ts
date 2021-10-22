@@ -14,5 +14,5 @@ export interface PodlovePlayButtonComponentScope {
     icons: {
         play: string;
     };
-    play: PodlovePlayButtonComponent['play'];
+    play: PodlovePlayButtonComponent["play"];
 }

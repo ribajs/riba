@@ -47,4 +47,4 @@ export default `
         </div>
         <error></error>
     </root>
-</podlove-web-player>`
+</podlove-web-player>`;

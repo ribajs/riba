@@ -2,7 +2,16 @@ import { Component, TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { loadScript } from "@ribajs/utils";
 import { getPlayerConfig } from "../../mixins/config.mixins";
-import { DEFAULT_MAIN_PLAYER_ID, DEFAULT_POLYFILLS_URL, DEFAULT_WEB_PLAYER_URL, DEFAULT_POLYFILLS_SCRIPT_ID, DEFAULT_WEB_PLAYER_SCRIPT_ID, LOADING_CLASS, READY_CLASS, HAS_PLAYED_CLASS } from "../../constants";
+import {
+  DEFAULT_MAIN_PLAYER_ID,
+  DEFAULT_POLYFILLS_URL,
+  DEFAULT_WEB_PLAYER_URL,
+  DEFAULT_POLYFILLS_SCRIPT_ID,
+  DEFAULT_WEB_PLAYER_SCRIPT_ID,
+  LOADING_CLASS,
+  READY_CLASS,
+  HAS_PLAYED_CLASS,
+} from "../../constants";
 
 import type {
   PodloveWebPlayerComponentScope,
@@ -76,7 +85,7 @@ export class PodloveWebPlayerComponent extends Component {
   }
 
   protected setId() {
-    if(!this.id) {
+    if (!this.id) {
       this.id = DEFAULT_MAIN_PLAYER_ID;
     }
   }
@@ -91,8 +100,12 @@ export class PodloveWebPlayerComponent extends Component {
   protected async initConfig() {
     await this.loadConfig();
 
-    if (typeof this.scope.config !== 'object') {
-      throw new Error(`The podlove config object must be of type "object"!\n${JSON.stringify(this.scope.config)}`);
+    if (typeof this.scope.config !== "object") {
+      throw new Error(
+        `The podlove config object must be of type "object"!\n${JSON.stringify(
+          this.scope.config
+        )}`
+      );
     }
 
     this.style.backgroundColor = this.scope.config.theme.tokens.brandLightest;
@@ -122,7 +135,7 @@ export class PodloveWebPlayerComponent extends Component {
 
     this.store.subscribe(() => {
       const { lastAction } = store.getState();
-      if(lastAction?.type === "PLAYER_REQUEST_PLAY") {
+      if (lastAction?.type === "PLAYER_REQUEST_PLAY") {
         this.onPlay(lastAction);
       }
     });

@@ -6,12 +6,9 @@ import type {
   PodloveWebPlayerEpisode,
   PodloveWebPlayerConfig,
 } from "../../types";
-import { DEFAULT_MAIN_PLAYER_ID } from '../../constants';
+import { DEFAULT_MAIN_PLAYER_ID } from "../../constants";
 import type { PodloveWebPlayerComponent } from "../podlove-web-player/podlove-web-player.component";
-import type {
-  PodloveWebPlayerStore,
-} from "../../types";
-
+import type { PodloveWebPlayerStore } from "../../types";
 
 export interface Scope {
   episode?: PodloveWebPlayerEpisode;
@@ -19,7 +16,7 @@ export interface Scope {
   episodeUrl: string;
   configUrl: string;
   playerId: string;
-  position: 'top' | 'bottom';
+  position: "top" | "bottom";
 }
 
 export class PodloveFixedWebPlayerComponent extends Component {
@@ -35,11 +32,18 @@ export class PodloveFixedWebPlayerComponent extends Component {
     episodeUrl: "",
     configUrl: "",
     playerId: DEFAULT_MAIN_PLAYER_ID,
-    position: 'bottom',
+    position: "bottom",
   };
 
   static get observedAttributes(): string[] {
-    return ["player-id", "episode-url", "config-url", "episode", "config", "position"];
+    return [
+      "player-id",
+      "episode-url",
+      "config-url",
+      "episode",
+      "config",
+      "position",
+    ];
   }
 
   protected connectedCallback() {
@@ -48,15 +52,23 @@ export class PodloveFixedWebPlayerComponent extends Component {
   }
 
   protected async initWebPlayer() {
-    const webPlayerEl = document.getElementById(this.scope.playerId) as PodloveWebPlayerComponent | null;
+    const webPlayerEl = document.getElementById(
+      this.scope.playerId
+    ) as PodloveWebPlayerComponent | null;
     this.player = webPlayerEl || undefined;
 
     if (!this.player) {
-      console.error(`Web player element not found by id "${this.scope.playerId}"!`);
+      console.error(
+        `Web player element not found by id "${this.scope.playerId}"!`
+      );
       return;
     }
 
-    const store = await waitForProp<PodloveWebPlayerStore>('store', this.player, 100);
+    const store = await waitForProp<PodloveWebPlayerStore>(
+      "store",
+      this.player,
+      100
+    );
 
     if (!store) {
       console.error(`Web player not ready!`);
@@ -68,11 +80,11 @@ export class PodloveFixedWebPlayerComponent extends Component {
     store.subscribe(() => {
       const { lastAction } = store.getState();
       this.debug("lastAction", lastAction);
-      if (lastAction?.type === 'PLAYER_REQUEST_PLAY') {
-        if (this.scope.position === 'bottom') {
+      if (lastAction?.type === "PLAYER_REQUEST_PLAY") {
+        if (this.scope.position === "bottom") {
           document.body.style.marginBottom = "139px";
         }
-        if (this.scope.position === 'top') {
+        if (this.scope.position === "top") {
           document.body.style.marginTop = "139px";
         }
       }
