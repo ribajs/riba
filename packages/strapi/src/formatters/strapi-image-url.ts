@@ -9,10 +9,10 @@ import { strapiFormatter } from "./strapi";
 export const strapiImageUrlFormatter = {
   name: "strapi-image-url",
   read(
-    image: StrapiImage,
+    image: Partial<StrapiImage>,
     format: StrapiImageFormatType | "original" = "thumbnail"
   ) {
     const imageFormat = strapiImageFormatter.read(image, format);
-    return strapiFormatter.read(imageFormat.url);
+    return strapiFormatter.read(imageFormat?.url);
   },
 };

@@ -11,31 +11,31 @@ import type {
 export const strapiImageFormatter = {
   name: "strapi-image",
   read(
-    image: StrapiImage,
+    image: Partial<StrapiImage>,
     format: StrapiImageFormatType | "original" = "thumbnail"
   ) {
-    let imageFormat: StrapiImageFormat = image.formats.thumbnail;
+    let imageFormat: StrapiImageFormat | undefined = image?.formats?.thumbnail;
     switch (format) {
       case "original":
         return image;
       case "large":
         imageFormat =
-          image.formats.large ||
-          image.formats.medium ||
-          image.formats.small ||
-          image.formats.thumbnail;
+          image?.formats?.large ||
+          image?.formats?.medium ||
+          image?.formats?.small ||
+          image?.formats?.thumbnail;
         break;
       case "medium":
         imageFormat =
-          image.formats.medium ||
-          image.formats.small ||
-          image.formats.thumbnail;
+          image?.formats?.medium ||
+          image?.formats?.small ||
+          image?.formats?.thumbnail;
         break;
       case "small":
-        imageFormat = image.formats.small || image.formats.thumbnail;
+        imageFormat = image?.formats?.small || image?.formats?.thumbnail;
         break;
       case "thumbnail":
-        imageFormat = image.formats.thumbnail;
+        imageFormat = image?.formats?.thumbnail;
         break;
       default:
         throw new Error("Unknown image format: " + format + " !");

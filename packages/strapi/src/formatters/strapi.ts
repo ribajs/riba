@@ -18,7 +18,7 @@ export const strapiFormatter = {
     }
 
     let host =
-      window?.env?.STRAPI_REMOTE_URL ||
+      (window as any)?.env?.STRAPI_REMOTE_URL ||
       window?.ssr?.env?.STRAPI_REMOTE_URL ||
       "";
 

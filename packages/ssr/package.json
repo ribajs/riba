@@ -13,6 +13,6 @@
   "devDependencies": {
     "@babel/runtime": "^7.15.4",
     "@babel/runtime-corejs3": "^7.15.4",
-    "@types/node": "^16.11.3"
+    "@types/node": "^16.11.6"
   }
 }
