@@ -80,7 +80,7 @@
     "@ribajs/core": "workspace:*",
     "@ribajs/jquery": "workspace:*",
     "@ribajs/utils": "workspace:*",
-    "@yarnpkg/pnpify": "^3.1.0"
+    "@yarnpkg/pnpify": "^3.1.1-rc.1"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

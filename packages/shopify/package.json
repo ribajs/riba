@@ -95,7 +95,7 @@
     "babel-loader": "^8.2.3",
     "babel-plugin-array-includes": "^2.0.3",
     "bluebird": "^3.7.2",
-    "browser-sync": "^2.27.5",
+    "browser-sync": "^2.27.6",
     "chalk": "^4.1.2",
     "chokidar": "^3.5.2",
     "core-js": "^3.19.0",
