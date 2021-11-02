@@ -40,7 +40,7 @@ export class Bs5Service {
 
   protected onBreakpointChanges() {
     this._events.trigger("breakpoint:changed", this.activeBreakpoint);
-    console.debug("breakpoint: " + this.activeBreakpoint?.name);
+    // console.debug("breakpoint: " + this.activeBreakpoint?.name);
   }
 
   protected setActiveBreakpoint(breakpoint: Breakpoint) {

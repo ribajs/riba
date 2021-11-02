@@ -13,7 +13,7 @@ export const eachStarBinder: Binder<any[]> = {
 
   bind(el: HTMLElement) {
     if (!this.marker) {
-      this.marker = document?.createComment(` riba: ${this.type} `);
+      this.marker = window?.document?.createComment(` riba: ${this.type} `);
       this.customData = {
         iterated: [] as View[],
       };

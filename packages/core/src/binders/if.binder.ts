@@ -13,7 +13,7 @@ export const ifBinder: Binder<boolean> = {
   bind(el: HTMLUnknownElement) {
     this.customData = {};
     if (!this.marker) {
-      this.marker = document?.createComment(
+      this.marker = window?.document?.createComment(
         " riba: " + this.type + " " + this.keypath + " "
       );
       this.customData.attached = false;
