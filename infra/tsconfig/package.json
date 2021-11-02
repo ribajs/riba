@@ -29,7 +29,6 @@
     "Riba",
     "tsconfig"
   ],
-  "scripts": {},
   "devDependencies": {
     "@ribajs/types": "workspace:*"
   },

@@ -2,7 +2,6 @@
   "name": "@ribajs/webpack-serve",
   "version": "2.0.0-alpha.0",
   "description": "Simple webpack serve script",
-  "scripts": {},
   "bin": "index.js",
   "main": "index.js",
   "module": "index.js",

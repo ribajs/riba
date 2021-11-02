@@ -32,7 +32,6 @@
     "eslint-plugin",
     "prettier"
   ],
-  "scripts": {},
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.2.0",
     "@typescript-eslint/experimental-utils": "^5.2.0",

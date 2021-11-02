@@ -2,7 +2,6 @@
   "name": "@ribajs/types",
   "version": "2.0.0-alpha.0",
   "description": "Default typescript types used in Riba.js projects",
-  "scripts": {},
   "author": "Pascal Garber <pascal@artandcode.studio",
   "license": "MIT",
   "main": "index.js",

@@ -32,7 +32,6 @@
     "postcss-plugin",
     "purgecss"
   ],
-  "scripts": {},
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"
   },
