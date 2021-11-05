@@ -20,21 +20,21 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@graphql-tools/graphql-file-loader": "^7.3.1",
-    "@graphql-tools/graphql-tag-pluck": "^7.1.2",
-    "@graphql-tools/load": "^7.4.0",
-    "@graphql-tools/utils": "^8.5.0",
+    "@graphql-tools/graphql-file-loader": "^7.3.2",
+    "@graphql-tools/graphql-tag-pluck": "^7.1.3",
+    "@graphql-tools/load": "^7.4.1",
+    "@graphql-tools/utils": "^8.5.2",
     "app-root-path": "^3.0.0",
     "glob": "^7.2.0",
-    "graphql": "^15.7.0",
+    "graphql": "^15.7.2",
     "graphql-request": "^3.6.1"
   },
   "devDependencies": {
     "@types/app-root-path": "^1.2.4",
     "@types/glob": "^7.2.0",
     "@types/node": "^16.11.6",
-    "@typescript-eslint/eslint-plugin": "^5.2.0",
-    "@typescript-eslint/parser": "^5.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.3.0",
+    "@typescript-eslint/parser": "^5.3.0",
     "eslint": "^8.1.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",

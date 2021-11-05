@@ -80,18 +80,10 @@ export class PodlovePlayButtonComponent extends Component {
     await this.loadConfigs();
 
     if (typeof this.scope.config !== "object") {
-      throw new Error(
-        `The podlove config object must be of type "object"!\n${JSON.stringify(
-          this.scope.config
-        )}`
-      );
+      throw new Error(`The podlove config object must be of type "object"!`);
     }
     if (typeof this.scope.episode !== "object") {
-      throw new Error(
-        `The episode object must be of type "object"!\n${JSON.stringify(
-          this.scope.episode
-        )}`
-      );
+      throw new Error(`The episode object must be of type "object"!`);
     }
 
     const playBtn = {
@@ -225,9 +217,13 @@ export class PodlovePlayButtonComponent extends Component {
   }
 
   protected async afterBind() {
-    await super.afterBind();
-    await this.initConfigs();
-    await this.initWebPlayer();
+    try {
+      await super.afterBind();
+      await this.initConfigs();
+      await this.initWebPlayer();
+    } catch (error) {
+      this.scope.error = error;
+    }
   }
 
   protected template(): ReturnType<TemplateFunction> {

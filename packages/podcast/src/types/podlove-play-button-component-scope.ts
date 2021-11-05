@@ -16,4 +16,5 @@ export interface PodlovePlayButtonComponentScope {
     play: string;
   };
   play: PodlovePlayButtonComponent["play"];
+  error?: unknown;
 }

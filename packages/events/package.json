@@ -19,8 +19,8 @@
   "module": "dist/esm/index.js",
   "source": "src/index.ts",
   "devDependencies": {
-    "@babel/runtime": "^7.15.4",
-    "@babel/runtime-corejs3": "^7.15.4",
+    "@babel/runtime": "^7.16.0",
+    "@babel/runtime-corejs3": "^7.16.0",
     "@ribajs/tsconfig": "workspace:*",
     "@types/jest": "^27.0.2",
     "@types/node": "^16.11.6",
