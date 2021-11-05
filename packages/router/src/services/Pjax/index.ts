@@ -11,6 +11,7 @@ import {
   isBoolean,
   getElementFromEvent,
   getDataset,
+  scrollTo,
 } from "@ribajs/utils";
 
 import { BaseCache } from "@ribajs/cache";
@@ -333,7 +334,7 @@ class Pjax {
   }
 
   public prefetchLink(href: string) {
-    href = normalizeUrl(href);
+    href = normalizeUrl(href).url;
     const follow = Pjax.preventCheckUrl(href);
     if (follow) {
       return this.loadResponseCached(href, true, false);
@@ -566,12 +567,26 @@ class Pjax {
     newTab = false
   ) {
     // normalize url, returns the relative url for internal urls and the full url for external urls
-    href = normalizeUrl(href);
+    const { url, location } = normalizeUrl(href);
+    
+    const { location: currLocation } = normalizeUrl();
 
-    if (!href) {
-      throw new Error("href is falsy");
+    // Is this a local scroll link to an title anchor?
+    if (location.hash && currLocation.pathname === location.pathname) {
+      let id = location.hash.slice(1);
+      id = decodeURI(id); // Workaround for markdown generated ids with umlauts
+      const scrollToElement = document.getElementById(id);
+      if (scrollToElement) {
+        evt.stopPropagation();
+        evt.preventDefault();
+        return scrollTo(scrollToElement);
+      }
     }
-    const follow = Pjax.preventCheck(href, el, evt);
+
+    if (!url) {
+      throw new Error("url is falsy");
+    }
+    const follow = Pjax.preventCheck(url, el, evt);
 
     if (follow) {
       evt.stopPropagation();
@@ -579,7 +594,7 @@ class Pjax {
 
       this.dispatcher.trigger("linkClicked", el, evt);
 
-      this.goTo(href, newTab);
+      this.goTo(url, newTab);
     }
   }
 
@@ -591,8 +606,8 @@ class Pjax {
     newUrl: string = this.getCurrentUrl()
   ) {
     // normalize url, returns the relative url for internal urls and the full url for external urls
-    newUrl = normalizeUrl(newUrl);
-    const oldUrl = normalizeUrl(this.history.currentStatus().url);
+    newUrl = normalizeUrl(newUrl).url;
+    const oldUrl = normalizeUrl(this.history.currentStatus().url).url;
 
     if (this.changeBrowserUrl && oldUrl === newUrl) {
       // console.debug('ignore');
@@ -675,7 +690,7 @@ class Pjax {
     const url = window.location.pathname;
     // Reload the current site with pjax to cache the initial page
     if (this.cacheEnabled) {
-      const currentUrl = normalizeUrl(window.location.href);
+      const currentUrl = normalizeUrl(window.location.href).url;
       if (!Pjax.cache.get(url)) {
         this.loadResponseCached(currentUrl, false, false);
       }

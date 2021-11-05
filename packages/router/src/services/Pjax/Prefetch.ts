@@ -94,7 +94,7 @@ class Prefetch {
       return;
     }
 
-    url = normalizeUrl(url);
+    url = normalizeUrl(url).url;
 
     const preventCheck = Pjax.preventCheck(url, el, evt);
 
@@ -117,7 +117,7 @@ class Prefetch {
   }
 
   public url(url: string) {
-    url = normalizeUrl(url);
+    url = normalizeUrl(url).url;
 
     const preventCheck = Pjax.preventCheck(url);
 

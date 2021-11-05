@@ -76,7 +76,7 @@ export class SsrMiddleware implements NestMiddleware {
       // );
       // return res.send(html);
 
-      // TODO use the wrap method (so comment above)
+      // TODO use the wrap method (see comment above)
       this.cacheManager.get(cacheKey, async (error, result) => {
         if (error) {
           this.log.error(error);

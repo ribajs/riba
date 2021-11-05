@@ -48,13 +48,19 @@ export const getLocation = (url?: string): Location => {
  * If the url is https://anothersite.org/subpage?search=test this method will return https://anothersite.org/subpage?search=test
  * @param url
  */
-export const normalizeUrl = (url: string): string => {
-  const checkLocation = getLocation(url);
+export const normalizeUrl = (url?: string): { url: string, location: Location} => {
+  const location = getLocation(url);
   const hostname = getLocation().hostname;
-  if (checkLocation.hostname === hostname) {
-    return checkLocation.pathname + checkLocation.search + checkLocation.hash;
+  if (location.hostname === hostname) {
+    return {
+      url: location.pathname + location.search + location.hash,
+      location
+    }
   } else {
-    return getUrl(url);
+    return {
+      url: getUrl(url),
+      location
+    }
   }
 };
 

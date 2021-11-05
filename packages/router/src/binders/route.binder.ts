@@ -101,9 +101,9 @@ export const routeBinder: Binder<string> = {
     );
 
     this.customData.options.newTab = false;
-    const isAnkerHTMLElement = el.tagName === "A";
+    const isAnchorHTMLElement = el.tagName === "A";
 
-    if (!this.customData.options.url && isAnkerHTMLElement) {
+    if (!this.customData.options.url && isAnchorHTMLElement) {
       const url = el.getAttribute("href");
       if (url) {
         this.customData.options.url = url;
@@ -115,11 +115,11 @@ export const routeBinder: Binder<string> = {
     }
 
     // normalize url
-    this.customData.options.url = normalizeUrl(this.customData.options.url);
+    this.customData.options.url = normalizeUrl(this.customData.options.url).url;
 
     // set href if not set
     if (
-      isAnkerHTMLElement &&
+      isAnchorHTMLElement &&
       (!(el as HTMLAnchorElement).href || !el.getAttribute("href")) &&
       this.customData.options.url
     ) {

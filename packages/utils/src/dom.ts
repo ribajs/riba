@@ -132,8 +132,8 @@ export const scrolling = async (
  */
 export const scrollTo = async (
   to: HTMLElement,
-  offset: number,
-  scrollElement: HTMLElement | (Window & typeof globalThis) | null,
+  offset: number = 0,
+  scrollElement: HTMLElement | (Window & typeof globalThis) | null = window,
   angle: "horizontal" | "vertical" = "vertical",
   behavior: "auto" | "smooth" | undefined = "smooth"
 ) => {
