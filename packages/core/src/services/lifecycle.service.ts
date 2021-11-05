@@ -1,4 +1,5 @@
 import { EventDispatcher } from "@ribajs/events";
+import { CoreService } from "./core.service"
 import type { State } from "@ribajs/history";
 import type {
   ComponentLifecycleEventData,
@@ -12,7 +13,6 @@ import type {
  */
 export class LifecycleService {
   public events = EventDispatcher.getInstance("lifecycle");
-  public timeoutDelay = 5000; // TODO make this configurable
   protected debug = false;
   protected routerEvents = EventDispatcher.getInstance();
   protected timeout: number | null = null;
@@ -213,7 +213,7 @@ export class LifecycleService {
     this.clearTimeout();
     this.timeout = window.setTimeout(
       this.onTimeout.bind(this),
-      this.timeoutDelay
+      CoreService.options.lifecycle?.timeout || 5000
     );
     return this.timeout;
   }

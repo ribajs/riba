@@ -1,1 +1,5 @@
-export type CoreModuleOptions = Record<string, never>;
+export type CoreModuleOptions = {
+  lifecycle?: {
+    timeout?: number;
+  }
+}

@@ -1,7 +1,7 @@
 import { CoreModuleOptions } from "../types";
 
 export class CoreService {
-  protected static _options: CoreModuleOptions;
+  protected static _options: CoreModuleOptions = {};
   public static instance?: CoreService;
 
   public static get options() {
