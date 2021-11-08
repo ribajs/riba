@@ -1,5 +1,6 @@
 export default `
-<podlove-web-player rv-class="position | prepend 'fixed-'" rv-id="playerId" rv-co-episode-url="episodeUrl" rv-co-config-url="configUrl" rv-co-episode="episode" rv-co-config="config" id="main-podcast-player">
+<button class="close" rv-on-click="hide">×</button>
+<podlove-web-player rv-id="playerId" rv-co-episode-url="episodeUrl" rv-co-config-url="configUrl" rv-co-episode="episode" rv-co-config="config" id="main-podcast-player">
     <root style="max-width:100%;min-width:100%;">
         <div class="flex flex-col p-3">
             <div class="flex-grow mobile:flex tablet:flex">
@@ -14,7 +15,7 @@ export default `
                                 <current-chapter class="block text-sm ml-3 mobile:hidden"></current-chapter>
                             </play-state>
                         </div>
-                        <subscribe-button class="flex"></subscribe-button>
+                        <subscribe-button class="flex mr-10"></subscribe-button>
                     </div>
                     <div class="flex items-center justify-between">
                         <div class="block" style="min-width:50px;">
@@ -47,5 +48,6 @@ export default `
         </div>
         <error></error>
     </root>
-</podlove-web-player>`;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicG9kbG92ZS1maXhlZC13ZWItcGxheWVyLmNvbXBvbmVudC50ZW1wbGF0ZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NyYy9jb21wb25lbnRzL3BvZGxvdmUtZml4ZWQtd2ViLXBsYXllci9wb2Rsb3ZlLWZpeGVkLXdlYi1wbGF5ZXIuY29tcG9uZW50LnRlbXBsYXRlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGVBQWU7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7c0JBaURPLENBQUMifQ==
+</podlove-web-player>
+`;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicG9kbG92ZS1maXhlZC13ZWItcGxheWVyLmNvbXBvbmVudC50ZW1wbGF0ZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NyYy9jb21wb25lbnRzL3BvZGxvdmUtZml4ZWQtd2ViLXBsYXllci9wb2Rsb3ZlLWZpeGVkLXdlYi1wbGF5ZXIuY29tcG9uZW50LnRlbXBsYXRlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGVBQWU7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztDQW1EZCxDQUFDIn0=

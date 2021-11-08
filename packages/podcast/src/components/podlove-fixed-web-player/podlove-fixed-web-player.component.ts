@@ -17,6 +17,8 @@ export interface Scope {
   configUrl: string;
   playerId: string;
   position: "top" | "bottom";
+  show: PodloveFixedWebPlayerComponent['show'];
+  hide: PodloveFixedWebPlayerComponent['hide'];
 }
 
 export class PodloveFixedWebPlayerComponent extends Component {
@@ -33,6 +35,8 @@ export class PodloveFixedWebPlayerComponent extends Component {
     configUrl: "",
     playerId: DEFAULT_MAIN_PLAYER_ID,
     position: "bottom",
+    show: this.show,
+    hide: this.hide,
   };
 
   static get observedAttributes(): string[] {
@@ -81,16 +85,37 @@ export class PodloveFixedWebPlayerComponent extends Component {
       const { lastAction } = store.getState();
       this.debug("lastAction", lastAction);
       if (lastAction?.type === "PLAYER_REQUEST_PLAY") {
-        if (this.scope.position === "bottom") {
-          document.body.style.marginBottom = "139px";
-        }
-        if (this.scope.position === "top") {
-          document.body.style.marginTop = "139px";
-        }
+        this.show();
       }
     });
 
     return this.player;
+  }
+
+  public show() {
+    if (this.player) {
+      this.style.height = this.player.clientHeight + "px";
+    }
+    if (this.scope.position === "bottom") {
+      document.body.style.marginBottom = "140px";
+      this.style.bottom ="-15px";
+    }
+    if (this.scope.position === "top") {
+      document.body.style.marginTop = "140px";
+      this.style.top ="-15px";
+    }
+  }
+
+  public hide() {
+    if (this.scope.position === "bottom") {
+      document.body.style.marginBottom = "";
+      this.style.bottom ="-200px";
+    }
+    if (this.scope.position === "top") {
+      document.body.style.marginTop = "";
+      this.style.top ="-200px";
+    }
+    
   }
 
   protected async afterBind() {

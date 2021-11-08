@@ -1,13 +1,13 @@
 import { Component, TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import template from "./podcast-example.component.pug";
+import template from "./podcast-fixed-player-example.component.pug";
 
 import { episode03 } from "../../data/episode-03/episode";
 import { episode01 } from "../../data/episode-01/episode";
 import { config } from "../../data/config";
 
-export class PodcastExampleComponent extends Component {
-  public static tagName = "podcast-example";
+export class PodcastFixedPlayerExampleComponent extends Component {
+  public static tagName = "podcast-fixed-player-example";
 
   protected autobind = true;
   static get observedAttributes(): string[] {
@@ -26,7 +26,7 @@ export class PodcastExampleComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    super.init(PodcastExampleComponent.observedAttributes);
+    super.init(PodcastFixedPlayerExampleComponent.observedAttributes);
   }
 
   protected template(): ReturnType<TemplateFunction> {
