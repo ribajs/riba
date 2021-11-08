@@ -17,8 +17,8 @@ export interface Scope {
   configUrl: string;
   playerId: string;
   position: "top" | "bottom";
-  show: PodloveFixedWebPlayerComponent['show'];
-  hide: PodloveFixedWebPlayerComponent['hide'];
+  show: PodloveFixedWebPlayerComponent["show"];
+  hide: PodloveFixedWebPlayerComponent["hide"];
 }
 
 export class PodloveFixedWebPlayerComponent extends Component {
@@ -98,24 +98,23 @@ export class PodloveFixedWebPlayerComponent extends Component {
     }
     if (this.scope.position === "bottom") {
       document.body.style.marginBottom = "140px";
-      this.style.bottom ="-15px";
+      this.style.bottom = "-15px";
     }
     if (this.scope.position === "top") {
       document.body.style.marginTop = "140px";
-      this.style.top ="-15px";
+      this.style.top = "-15px";
     }
   }
 
   public hide() {
     if (this.scope.position === "bottom") {
       document.body.style.marginBottom = "";
-      this.style.bottom ="-200px";
+      this.style.bottom = "-200px";
     }
     if (this.scope.position === "top") {
       document.body.style.marginTop = "";
-      this.style.top ="-200px";
+      this.style.top = "-200px";
     }
-    
   }
 
   protected async afterBind() {

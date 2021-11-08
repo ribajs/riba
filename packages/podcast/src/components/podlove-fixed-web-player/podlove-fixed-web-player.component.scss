@@ -1,4 +1,5 @@
-$podcast-loading-background-image: "";
+$podcast-loading-background-image: "" !default;
+$podcast-fixed-web-player-close-color: black !default;
 
 podlove-fixed-web-player {
   podlove-web-player {
@@ -26,7 +27,7 @@ podlove-fixed-web-player {
 
   button.close {
     font-size: 40px;
-    line-height: 20px;
+    line-height: 18px;
     font-weight: lighter;
     display: flex;
     justify-content: center;
@@ -37,5 +38,8 @@ podlove-fixed-web-player {
     z-index: 9999;
     background-color: transparent;
     border: none;
+    color: $podcast-fixed-web-player-close-color;
+    padding: 15px;
+    margin: 0;
   }
 }

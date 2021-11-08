@@ -15,7 +15,7 @@ export default `
                                 <current-chapter class="block text-sm ml-3 mobile:hidden"></current-chapter>
                             </play-state>
                         </div>
-                        <subscribe-button class="flex mr-10"></subscribe-button>
+                        <subscribe-button class="flex mr-8"></subscribe-button>
                     </div>
                     <div class="flex items-center justify-between">
                         <div class="block" style="min-width:50px;">
