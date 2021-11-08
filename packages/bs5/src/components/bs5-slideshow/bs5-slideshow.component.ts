@@ -6,10 +6,11 @@ import { clone, camelCase } from "@ribajs/utils/src/type";
 import { throttle, debounce } from "@ribajs/utils/src/control";
 import { Bs5Service } from "../../services";
 import {
-  SlideshowSlide,
+  Bs5SlideshowComponentResponsiveOptions,
   SlideshowControlsPosition,
   SlideshowIndicatorsPosition,
   SlideshowSlidePosition,
+  Bs5SlideshowComponentScope,
 } from "../../types";
 import {
   Dragscroll,
@@ -29,76 +30,7 @@ const SLIDESHOW_INNER_SELECTOR = ".slideshow-row";
 
 const SLIDES_SELECTOR = `${SLIDESHOW_INNER_SELECTOR} .slide`;
 
-export interface ResponsiveOptions {
-  /** Show controls */
-  controls: boolean;
-  /** Position of the controls */
-  controlsPosition: SlideshowControlsPosition;
-  /** Show indicators */
-  indicators: boolean;
-  /** Position of the indicators */
-  indicatorsPosition: SlideshowIndicatorsPosition;
-  /** Pauses auto scroll on hover or focus */
-  pauseOnHover: boolean;
-  /** number of slides to be scrolled by clicking on the controls */
-  slidesToScroll: number;
-  /** Autoscroll to the nearest slide after manual scroll or dragscroll */
-  sticky: boolean;
-  /** Slides are draggable on desktop browsers */
-  drag: boolean;
-  /** Slides are scrollable through touch on touch devices */
-  touchScroll: boolean;
-  /** Enables autoplay continuously or with interval */
-  autoplay: boolean;
-  /** Pause between autoscroll, 0 for continuously autoscrolling */
-  autoplayInterval: number;
-  /** Scroll speed for continuously autoscrolling */
-  autoplayVelocity: number;
-  /** Icon source url for the prev slide icon button */
-  controlPrevIconSrc: string;
-  /** Icon source url for the next slide icon button */
-  controlNextIconSrc: string;
-  /** Icon source url for the inactive indicator */
-  indicatorInactiveIconSrc: string;
-  /** Icon source url for the active indicator */
-  indicatorActiveIconSrc: string;
-  /** Slide angle, can be vertical or horizontal */
-  angle: "vertical" | "horizontal";
-  /** Pause on autoplay (with interval) */
-  pause: boolean;
-  /** min width of responsive view port of from which these options take effect */
-  breakpoint: number;
-  /** Name of the current breakpoint, e.g. xs, sm, md, ... */
-  name: string;
-  /** Disables wraparound to first/last element of slideshow  */
-  infinite: boolean;
-}
 
-export type Options = {
-  breakpoints: {
-    [bp: string]: Partial<ResponsiveOptions>;
-  };
-};
-
-export interface Scope extends Options {
-  next: Bs5SlideshowComponent["next"];
-  prev: Bs5SlideshowComponent["prev"];
-  goTo: Bs5SlideshowComponent["goTo"];
-  enableTouchScroll: Bs5SlideshowComponent["enableTouchScroll"];
-  disableTouchScroll: Bs5SlideshowComponent["disableTouchScroll"];
-  controlsPositionClass: string;
-  indicatorsPositionClass: string;
-  items?: SlideshowSlide[];
-  /** Active breakpoint options */
-  activeBreakpoint: ResponsiveOptions;
-  /** If interval autoplay is active, this is the interval count. */
-  intervalCount: number;
-  /** If interval autoplay is active, this is the progress (in percent) until the next page is switched to. */
-  intervalProgress: number;
-  nextIndex: number;
-  prevIndex: number;
-  activeIndex: number;
-}
 
 export class Bs5SlideshowComponent extends TemplatesComponent {
   protected resizeObserver?: ResizeObserver;
@@ -162,10 +94,10 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   static get responsiveProperties() {
     return this.responsiveAttributes.map((attribute) =>
       camelCase(attribute)
-    ) as (keyof ResponsiveOptions)[];
+    ) as (keyof Bs5SlideshowComponentResponsiveOptions)[];
   }
 
-  protected _defaultBreakpointOptions: ResponsiveOptions = {
+  protected _defaultBreakpointOptions: Bs5SlideshowComponentResponsiveOptions = {
     // Options
     slidesToScroll: 1,
     controls: true,
@@ -251,7 +183,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
    */
   protected activeBreakpointName = "xs";
 
-  public scope: Scope = {
+  public scope: Bs5SlideshowComponentScope = {
     breakpoints: {},
     activeBreakpoint: this.getDefaultBreakpointOptions(),
 
@@ -381,8 +313,8 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected setOptions(
-    dest: Partial<ResponsiveOptions>,
-    source: Partial<ResponsiveOptions>
+    dest: Partial<Bs5SlideshowComponentResponsiveOptions>,
+    source: Partial<Bs5SlideshowComponentResponsiveOptions>
   ) {
     const props = Bs5SlideshowComponent.responsiveProperties;
     for (const prop of props) {
@@ -394,8 +326,8 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected setOptionsIfUndefined(
-    dest: Partial<ResponsiveOptions>,
-    source: Partial<ResponsiveOptions>
+    dest: Partial<Bs5SlideshowComponentResponsiveOptions>,
+    source: Partial<Bs5SlideshowComponentResponsiveOptions>
   ) {
     const props = Bs5SlideshowComponent.responsiveProperties;
     for (const prop of props) {
@@ -1079,7 +1011,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     newValue: any,
     namespace: string | null
   ) {
-    let responsiveAttributeName: keyof ResponsiveOptions | null = null;
+    let responsiveAttributeName: keyof Bs5SlideshowComponentResponsiveOptions | null = null;
 
     if (
       this.observedAttributesToCheck &&
@@ -1097,7 +1029,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
         this.scope.breakpoints[name] = this.scope.breakpoints[name] || {};
         responsiveAttributeName = camelCase(
           attributeName.slice(affix.length)
-        ) as keyof ResponsiveOptions;
+        ) as keyof Bs5SlideshowComponentResponsiveOptions;
         (this.scope.breakpoints[name][responsiveAttributeName] as any) =
           newValue;
         break;
