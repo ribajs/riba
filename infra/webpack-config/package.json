@@ -18,7 +18,7 @@
     "@ribajs/eslint-config": "workspace:*",
     "@ribajs/npm-package": "workspace:*",
     "@ribajs/postcss-config": "workspace:*",
-    "@yarnpkg/pnpify": "^3.1.1-rc.2",
+    "@yarnpkg/pnpify": "^3.1.1-rc.3",
     "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^6.5.1",
@@ -40,10 +40,10 @@
     "sass": "^1.43.4",
     "sass-loader": "^12.3.0",
     "style-loader": "^3.3.1",
-    "terser-webpack-plugin": "^5.2.4",
+    "terser-webpack-plugin": "^5.2.5",
     "webpack-dev-server": "^4.4.0",
     "webpack-node-externals": "^3.0.0",
-    "webpackbar": "^5.0.0-3"
+    "webpackbar": "^5.0.2"
   },
   "peerDependencies": {
     "assert": "^2.0.0",
