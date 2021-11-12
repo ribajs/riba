@@ -7,11 +7,11 @@ import {
 
 export class OpenGraphService {
   public static getHeadElement(): HTMLHeadElement {
-    return document.head || document.getElementsByName("head")[0];
+    return document?.head || document.getElementsByName("head")[0];
   }
 
   public static getHtmlElement(): HTMLHtmlElement {
-    return (document.body.parentNode ||
+    return (document?.body?.parentNode ||
       document.getElementsByName("html")[0]) as HTMLHtmlElement;
   }
 
