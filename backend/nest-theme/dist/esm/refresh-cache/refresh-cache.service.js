@@ -7,11 +7,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var RefreshCacheService_1;
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import fetch from 'node-fetch';
 import * as cheerio from 'cheerio';
-let RefreshCacheService = class RefreshCacheService {
+let RefreshCacheService = RefreshCacheService_1 = class RefreshCacheService {
     constructor(config) {
         this.config = config;
         this.visited = [];
@@ -87,14 +88,25 @@ let RefreshCacheService = class RefreshCacheService {
         if (!force && !this.theme.cache.refresh.active) {
             return;
         }
+        if (RefreshCacheService_1.isRunning) {
+            this.log.log('refresh is already running');
+            return;
+        }
+        RefreshCacheService_1.isRunning = true;
         this.visited = [];
         const startPath = ((_a = this.theme.cache.refresh) === null || _a === void 0 ? void 0 : _a.startPath) || '/';
-        await this.deepRefresh([startPath], host);
+        try {
+            await this.deepRefresh([startPath], host);
+        }
+        finally {
+            RefreshCacheService_1.isRunning = false;
+        }
         this.log.log('refresh done');
         this.log.log('refreshed: ' + JSON.stringify(this.visited, null, 2));
     }
 };
-RefreshCacheService = __decorate([
+RefreshCacheService.isRunning = false;
+RefreshCacheService = RefreshCacheService_1 = __decorate([
     Injectable(),
     __metadata("design:paramtypes", [ConfigService])
 ], RefreshCacheService);

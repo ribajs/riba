@@ -9,6 +9,7 @@ export class RefreshCacheService implements OnApplicationBootstrap {
   protected theme: FullThemeConfig;
   protected visited: string[] = [];
   protected log = new Logger(this.constructor.name);
+  public static isRunning = false;
   constructor(protected readonly config: ConfigService) {
     this.theme = config.get<FullThemeConfig>('theme');
   }
@@ -101,9 +102,19 @@ export class RefreshCacheService implements OnApplicationBootstrap {
     if (!force && !this.theme.cache.refresh.active) {
       return;
     }
+    if (RefreshCacheService.isRunning) {
+      this.log.log('refresh is already running');
+      return;
+    }
+    RefreshCacheService.isRunning = true;
     this.visited = [];
     const startPath = this.theme.cache.refresh?.startPath || '/';
-    await this.deepRefresh([startPath], host);
+    try {
+      await this.deepRefresh([startPath], host);
+    } finally {
+      RefreshCacheService.isRunning = false;
+    }
+
     this.log.log('refresh done');
     this.log.log('refreshed: ' + JSON.stringify(this.visited, null, 2));
   }

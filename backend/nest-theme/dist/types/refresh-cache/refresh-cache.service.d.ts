@@ -6,6 +6,7 @@ export declare class RefreshCacheService implements OnApplicationBootstrap {
     protected theme: FullThemeConfig;
     protected visited: string[];
     protected log: Logger;
+    static isRunning: boolean;
     constructor(config: ConfigService);
     onApplicationBootstrap(): Promise<void>;
     protected isInternalLink(link: string, host: string): boolean;
