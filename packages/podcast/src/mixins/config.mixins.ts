@@ -1,6 +1,8 @@
 import { HttpService } from "@ribajs/core";
-import type { PodloveWebPlayerEpisode } from "../types/podlove-web-player-episode";
-import type { PodloveWebPlayerConfig } from "../types/podlove-web-player-config";
+import type {
+  PodloveWebPlayerEpisode,
+  PodloveWebPlayerConfig,
+} from "@podlove/types";
 
 export const getEpisodeConfig = (episodeConfigUrl: string) => {
   return HttpService.getJSON<PodloveWebPlayerEpisode>(episodeConfigUrl);

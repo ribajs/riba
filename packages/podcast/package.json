@@ -8,17 +8,18 @@
   "source": "src/index.ts",
   "scripts": {
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix",
-    "build": "npm run lint &&  npm run build:types && npm run build:esm && npm run build:cjs",
+    "build": "yarn run clean && yarn run lint &&  yarn run build:types && yarn run build:esm && yarn run build:cjs",
     "build:types": "tsc --project ./tsconfig.json --declaration true --emitDeclarationOnly --outDir dist/types",
     "build:esm": "tsc --project ./tsconfig.json --declaration false --module esnext --outDir dist/esm",
     "build:cjs": "tsc --project ./tsconfig.json --declaration false --module commonjs --outDir dist/cjs",
     "watch": "concurrently 'npm:watch:types' 'npm:watch:esm' 'npm:watch:cjs'",
-    "watch:types": "npm run build:types -- --watch",
-    "watch:esm": "npm run build:esm -- --watch",
-    "watch:cjs": "npm run build:cjs -- --watch",
+    "watch:types": "yarn run build:types -- --watch",
+    "watch:esm": "yarn run build:esm -- --watch",
+    "watch:cjs": "yarn run build:cjs -- --watch",
     "clean": "rm -rf ./dist"
   },
   "dependencies": {
+    "@podlove/types": "workspace:*",
     "@reduxjs/toolkit": "^1.6.2",
     "@ribajs/bs5": "workspace:*",
     "@ribajs/core": "workspace:*",

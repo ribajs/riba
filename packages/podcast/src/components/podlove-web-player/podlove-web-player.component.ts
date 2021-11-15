@@ -13,11 +13,14 @@ import {
   HAS_PLAYED_CLASS,
 } from "../../constants";
 
+import "@podlove/types/embed";
+
 import type {
-  PodloveWebPlayerComponentScope,
   PodloveWebPlayerStore,
   PodloveWebPlayerStoreAction,
-} from "../../types";
+} from "@podlove/types";
+
+import type { PodloveWebPlayerComponentScope } from "../../types";
 
 export class PodloveWebPlayerComponent extends Component {
   public static tagName = "podlove-web-player";

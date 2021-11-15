@@ -1,5 +1,4 @@
-import { PodloveWebPlayerEpisode } from "./podlove-web-player-episode";
-import { PodloveWebPlayerConfig } from "./podlove-web-player-config";
+import { PodloveWebPlayerEpisode, PodloveWebPlayerConfig } from "@podlove/types";
 export interface PodloveWebPlayerComponentScope {
     episode?: PodloveWebPlayerEpisode;
     config?: PodloveWebPlayerConfig;

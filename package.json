@@ -94,6 +94,7 @@
     "webpack-glob-entry": "^2.1.1"
   },
   "workspaces": [
+    "vendor/podlove-ui/packages/types",
     "packages/*",
     "infra/*",
     "!infra/cli",

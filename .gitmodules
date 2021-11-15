@@ -1,3 +1,6 @@
 [submodule "infra/doc"]
 	path = infra/doc
 	url = https://github.com/ribajs/doc.git
+[submodule "vendor/podlove-ui"]
+	path = vendor/podlove-ui
+	url = https://github.com/ArtCodeStudio/podlove-ui.git

@@ -1,7 +1,6 @@
 import { Component } from "@ribajs/core";
-import type { PodloveWebPlayerEpisode, PodloveWebPlayerConfig } from "../../types";
+import type { PodloveWebPlayerEpisode, PodloveWebPlayerConfig, PodloveWebPlayerStore } from "@podlove/types";
 import type { PodloveWebPlayerComponent } from "../podlove-web-player/podlove-web-player.component";
-import type { PodloveWebPlayerStore } from "../../types";
 export interface Scope {
     episode?: PodloveWebPlayerEpisode;
     config?: PodloveWebPlayerConfig;

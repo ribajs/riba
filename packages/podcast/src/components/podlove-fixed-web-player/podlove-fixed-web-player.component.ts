@@ -5,10 +5,10 @@ import template from "./podlove-fixed-web-player.component.template";
 import type {
   PodloveWebPlayerEpisode,
   PodloveWebPlayerConfig,
-} from "../../types";
+  PodloveWebPlayerStore,
+} from "@podlove/types";
 import { DEFAULT_MAIN_PLAYER_ID } from "../../constants";
 import type { PodloveWebPlayerComponent } from "../podlove-web-player/podlove-web-player.component";
-import type { PodloveWebPlayerStore } from "../../types";
 
 export interface Scope {
   episode?: PodloveWebPlayerEpisode;

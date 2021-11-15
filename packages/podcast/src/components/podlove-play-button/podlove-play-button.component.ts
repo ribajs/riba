@@ -5,10 +5,8 @@ import { requestPlay, selectEpisode } from "../../mixins/actions.mixins";
 import { getEpisodeConfig, getPlayerConfig } from "../../mixins/config.mixins";
 import { DEFAULT_MAIN_PLAYER_ID } from "../../constants";
 
-import type {
-  PodlovePlayButtonComponentScope,
-  PodloveWebPlayerStore,
-} from "../../types";
+import type { PodlovePlayButtonComponentScope } from "../../types";
+import type { PodloveWebPlayerStore } from "@podlove/types";
 import type { PodloveWebPlayerComponent } from "../podlove-web-player/podlove-web-player.component";
 import TEMPLATE from "./podlove-play-button.component.template";
 
