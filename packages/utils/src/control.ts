@@ -96,7 +96,8 @@ export const debounce = (fn: (...params: any) => any) => {
  */
 export const throttle = (fn: (...params: any[]) => any, wait = 100) => {
   let timerId: number | null = null;
-  let resolve: (val: any) => any, reject: (error: Error) => void;
+  let resolve: (val: any) => any;
+  let reject: (error: Error) => void;
   let promise = new Promise((res, rej) => {
     resolve = res;
     reject = rej;
