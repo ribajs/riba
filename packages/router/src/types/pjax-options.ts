@@ -12,4 +12,5 @@ export interface PjaxOptions {
   changeBrowserUrl: boolean;
   prefetchLinks: boolean;
   scrollToTop?: boolean;
+  scrollToAnchorOffset?: number;
 }

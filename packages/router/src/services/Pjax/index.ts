@@ -20,6 +20,7 @@ import { Transition, Response, PjaxOptions } from "../../types";
 import { Dom } from "./Dom";
 import { HistoryManager } from "@ribajs/history";
 import { ROUTE_ERROR_CLASS, IGNORE_CLASS_LINK } from "../../constants";
+import { RouterService } from "../../services"
 
 export interface PjaxInstances {
   [key: string]: Pjax;
@@ -60,12 +61,6 @@ class Pjax {
     if (!href) {
       return false;
     }
-
-    // Ignore case when a hash is being tacked on the current URL
-    // TODO option for this
-    // if (href.indexOf("#") > -1) {
-    //   return false;
-    // }
 
     // In case you're trying to load the same page
     if (cleanLink(href) === cleanLink(location.href)) {
@@ -209,6 +204,8 @@ class Pjax {
    */
   protected prefetchLinks: boolean;
 
+  protected scrollToAnchorOffset: number;
+
   /**
    * Creates an singleton instance of Pjax.
    */
@@ -223,12 +220,15 @@ class Pjax {
     changeBrowserUrl = true,
     prefetchLinks = true,
     scrollToTop = true,
+    scrollToAnchorOffset = RouterService.options.scrollToAnchorOffset,
   }: PjaxOptions) {
     if (id) {
       this.viewId = id;
     }
 
     let instance = this as Pjax;
+
+    this.scrollToAnchorOffset = scrollToAnchorOffset || 0;
 
     this.dispatcher = new EventDispatcher(this.viewId);
 
@@ -579,7 +579,10 @@ class Pjax {
       if (scrollToElement) {
         evt.stopPropagation();
         evt.preventDefault();
-        return scrollTo(scrollToElement);
+        if (this.changeBrowserUrl) {
+          window.history.pushState(null, "", url);
+        }
+        return scrollTo(scrollToElement, this.scrollToAnchorOffset);
       }
     }
 

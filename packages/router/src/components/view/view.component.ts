@@ -1,6 +1,6 @@
 import { Component, View, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
-import { scrollTo } from "@ribajs/utils/src/dom";
+import { scrollTo, scrollToPosition } from "@ribajs/utils/src/dom";
 import { State } from "@ribajs/history";
 import { Pjax, Prefetch, RouterService } from "../../services";
 import type { RouterViewOptions, PjaxOptions } from "../../types";
@@ -26,6 +26,7 @@ export class RouterViewComponent extends Component {
       "listen-all-links",
       "listen-popstate",
       "scroll-to-anchor-hash",
+      "scroll-to-anchor-offset",
       "dataset-to-model",
       "parse-title",
       "change-browser-url",
@@ -40,6 +41,7 @@ export class RouterViewComponent extends Component {
     listenAllLinks: true,
     listenPopstate: true,
     scrollToAnchorHash: true,
+    scrollToAnchorOffset: RouterService.options.scrollToAnchorOffset,
     datasetToModel: true,
     parseTitle: true,
     changeBrowserUrl: true,
@@ -154,22 +156,23 @@ export class RouterViewComponent extends Component {
 
     this.setTransitionClass('complete');
 
-    if (this.scope.scrollToTop || this.scope.scrollToAnchorHash) {
+    if (this.scope.scrollToAnchorHash) {
       let scrollToElement: HTMLElement | null = null;
       const hash = window.location.hash.substr(1);
       if (hash) {
         scrollToElement = document.getElementById(
           window.location.hash.substr(1)
         );
-      }
-
-      // Scroll to Anchor of hash
-      if (this.scope.scrollToAnchorHash && hash && scrollToElement) {
-        return await scrollTo(scrollToElement, 0, window);
+        // Scroll to Anchor of hash
+        if (scrollToElement) {
+          return await scrollTo(scrollToElement, this.scope.scrollToAnchorOffset, window);
+        }
       }
     }
 
-    return;
+    if (this.scope.scrollToTop) {
+      return await scrollToPosition(window, "start", "vertical", "smooth");
+    }
   }
 
   protected setTransitionClass(state: 'init' | 'complete') {

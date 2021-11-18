@@ -23,14 +23,13 @@ export class RouterService {
     );
   }
 
-  public static setSingleton(_options: Partial<RouterModuleOptions> = {}) {
+  public static setSingleton(options: Partial<RouterModuleOptions> = {}) {
     if (this.instance) {
       throw new Error(`Singleton of RouterService already defined!`);
     }
-    const options: RouterModuleOptions = {
-      defaultTransition: _options.defaultTransition || new HideShowTransition(),
-    };
-    this._options = options;
+    options.defaultTransition = options.defaultTransition ?? new HideShowTransition();
+    options.scrollToAnchorOffset = options.scrollToAnchorOffset ?? 0;
+    this._options = options as RouterModuleOptions;
     this.instance = new this();
     return this.instance;
   }

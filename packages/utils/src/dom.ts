@@ -132,7 +132,7 @@ export const scrolling = async (
  */
 export const scrollTo = async (
   to: HTMLElement,
-  offset: number = 0,
+  offset = 0,
   scrollElement: HTMLElement | (Window & typeof globalThis) | null = window,
   angle: "horizontal" | "vertical" = "vertical",
   behavior: "auto" | "smooth" | undefined = "smooth"
@@ -147,29 +147,29 @@ export const scrollTo = async (
   let left = 0;
 
   // If element is window
-  if (typeof (scrollElement as Window).pageYOffset === "number") {
+  if ((scrollElement as Window).document) {
     if (angle === "vertical") {
-      top =
-        to.getBoundingClientRect().top +
-        (scrollElement as Window).pageYOffset -
-        offset;
+      const scrollY =
+        (scrollElement as Window).scrollY ||
+        (scrollElement as Window).pageYOffset;
+      top = Math.round(to.getBoundingClientRect().top + scrollY - offset);
     } else {
-      left =
-        to.getBoundingClientRect().left +
-        (scrollElement as Window).pageXOffset -
-        offset;
+      const scrollX =
+        (scrollElement as Window).scrollX ||
+        (scrollElement as Window).pageXOffset;
+      left = Math.round(to.getBoundingClientRect().left + scrollX - offset);
     }
   } else {
     if (angle === "vertical") {
       const marginTop = justDigits(
         window.getComputedStyle(scrollElement as HTMLElement).marginTop
       );
-      top = to.offsetTop - offset - marginTop;
+      top = Math.round(to.offsetTop - offset - marginTop);
     } else {
       const marginLeft = justDigits(
         window.getComputedStyle(scrollElement as HTMLElement).marginLeft
       );
-      left = to.offsetLeft - offset - marginLeft;
+      left = Math.round(to.offsetLeft - offset - marginLeft);
     }
   }
 
@@ -203,9 +203,15 @@ export const scrollToPosition = async (
         top = 0;
         break;
       case "end":
-        top =
-          (scrollElement as HTMLElement).scrollHeight ||
-          (scrollElement as Window).innerHeight; // TODO check me
+        // if element is window
+        if ((scrollElement as Window).document) {
+          const win = scrollElement as Window;
+          const doc = win.document;
+          top = (win as any).scrollMaxY || Math.max( doc.body.scrollHeight, doc.body.offsetHeight, 
+            doc.documentElement.clientHeight, doc.documentElement.scrollHeight, doc.documentElement.offsetHeight );
+        } else {
+          top = (scrollElement as HTMLElement).scrollHeight;
+        }          
         break;
       default:
         top = position;
@@ -219,9 +225,15 @@ export const scrollToPosition = async (
         left = 0;
         break;
       case "end":
-        left =
-          (scrollElement as HTMLElement).scrollWidth ||
-          (scrollElement as Window).innerWidth; // TODO check me
+        // if element is window
+        if ((scrollElement as Window).document) {
+          const win = scrollElement as Window;
+          const doc = win.document;
+          left = (win as any).scrollMaxX || Math.max( doc.body.scrollWidth, doc.body.offsetWidth, 
+            doc.documentElement.clientWidth, doc.documentElement.scrollWidth, doc.documentElement.offsetWidth );
+        } else {
+          left = (scrollElement as HTMLElement).scrollWidth;
+        }  
         break;
       default:
         left = position;
@@ -229,26 +241,16 @@ export const scrollToPosition = async (
     }
   }
 
-  if (top !== undefined && left !== undefined) {
-    scrollElement.scroll({
-      behavior,
-      top,
-      left,
-    });
-  } else if (top !== undefined) {
-    scrollElement.scroll({
-      behavior,
-      top,
-    });
-  } else if (left !== undefined) {
-    scrollElement.scroll({
-      behavior,
-      left,
-    });
-  }
+  scrollElement.scroll({
+    behavior,
+    top,
+    left,
+  });
 
   return scrollPromise;
 };
+
+(window as any).scrollToPosition = scrollToPosition;
 
 export const getElementFromEvent = <T = HTMLAnchorElement | HTMLUnknownElement>(
   event: Event | MouseEvent | TouchEvent

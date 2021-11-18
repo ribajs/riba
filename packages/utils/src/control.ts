@@ -12,15 +12,18 @@ export const times = (n: number, cb: () => void) => {
 
 export const sleep = (time: number) => {
   return new Promise((resolve) => setTimeout(resolve, time));
-}
+};
 
-
-export const waitForProp = async <T = any> (propName: string, obj: any = window, delay = 1000) => {
-  while(!obj[propName]) {
+export const waitForProp = async <T = any>(
+  propName: string,
+  obj: any = window,
+  delay = 1000
+) => {
+  while (!obj[propName]) {
     await sleep(delay);
   }
-  return obj[propName] as T
-}
+  return obj[propName] as T;
+};
 
 /**
  * Return a new "Deferred" object

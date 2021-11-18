@@ -1,7 +1,7 @@
 import type { Transition } from ".";
 
 /**
- * @depricated Use RouterViewOptions instead
+ * @deprecated Use RouterViewOptions instead
  */
 export interface RouterBinderViewOptions {
   viewId?: string;
@@ -25,6 +25,7 @@ export interface RouterViewOptions {
   listenAllLinks: boolean;
   listenPopstate: boolean;
   scrollToAnchorHash: boolean;
+  scrollToAnchorOffset: number;
   datasetToModel?: boolean;
   parseTitle: boolean;
   changeBrowserUrl: boolean;
