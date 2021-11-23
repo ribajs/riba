@@ -22,11 +22,11 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@nestjs/common": "^8.2.0",
-    "@nestjs/config": "^1.1.0",
-    "@nestjs/core": "^8.2.0",
-    "@nestjs/platform-express": "^8.2.0",
-    "cookie-parser": "^1.4.5",
+    "@nestjs/common": "^8.2.3",
+    "@nestjs/config": "^1.1.2",
+    "@nestjs/core": "^8.2.3",
+    "@nestjs/platform-express": "^8.2.3",
+    "cookie-parser": "^1.4.6",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
@@ -39,17 +39,17 @@
     "yaml": "next"
   },
   "devDependencies": {
-    "@nestjs/cli": "^8.1.4",
-    "@nestjs/schematics": "^8.0.4",
-    "@nestjs/testing": "^8.2.0",
+    "@nestjs/cli": "^8.1.5",
+    "@nestjs/schematics": "^8.0.5",
+    "@nestjs/testing": "^8.2.3",
     "@types/cookie-parser": "^1.4.2",
     "@types/express-session": "^1.17.4",
-    "@types/jest": "^27.0.2",
-    "@types/node": "^16.11.7",
+    "@types/jest": "^27.0.3",
+    "@types/node": "^16.11.9",
     "@types/supertest": "^2.0.11",
-    "@typescript-eslint/eslint-plugin": "^5.3.1",
-    "@typescript-eslint/parser": "^5.3.1",
-    "eslint": "^8.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "eslint": "^8.3.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^27.3.1",
@@ -58,8 +58,8 @@
     "ts-jest": "^27.0.7",
     "ts-loader": "^9.2.6",
     "ts-node": "^10.4.0",
-    "tsconfig-paths": "^3.11.0",
-    "typescript": "^4.4.4"
+    "tsconfig-paths": "^3.12.0",
+    "typescript": "4.4.4"
   },
   "jest": {
     "moduleFileExtensions": [

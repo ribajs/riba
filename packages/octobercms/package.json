@@ -41,7 +41,7 @@
     "@babel/plugin-proposal-export-default-from": "^7.16.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.16.0",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/preset-env": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
     "@babel/preset-typescript": "^7.16.0",
     "@babel/runtime": "^7.16.3",
     "@babel/runtime-corejs3": "^7.16.3",
@@ -50,16 +50,16 @@
     "@tsconfig/node14": "^1.0.1",
     "@types/gulp": "^4.0.9",
     "@types/hex-color-regex": "^1.1.1",
-    "@types/jest": "^27.0.2",
-    "@types/jquery": "^3.5.8",
-    "@types/js-yaml": "^4.0.4",
-    "@types/node": "^16.11.7",
-    "@typescript-eslint/eslint-plugin": "^5.3.1",
-    "@typescript-eslint/parser": "^5.3.1",
+    "@types/jest": "^27.0.3",
+    "@types/jquery": "^3.5.9",
+    "@types/js-yaml": "^4.0.5",
+    "@types/node": "^16.11.9",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
     "babel-loader": "^8.2.3",
     "babel-plugin-array-includes": "^2.0.3",
     "core-js": "^3.19.1",
-    "eslint": "^8.2.0",
+    "eslint": "^8.3.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "gulp": "^4.0.2",
@@ -71,8 +71,8 @@
     "prettier": "2.4.1",
     "rgb-regex": "^1.0.1",
     "ts-jest": "^27.0.7",
-    "typescript": "^4.4.4",
-    "webpack": "^5.64.0",
+    "typescript": "4.4.4",
+    "webpack": "^5.64.2",
     "webpack-cli": "^4.9.1"
   },
   "dependencies": {
@@ -80,7 +80,7 @@
     "@ribajs/core": "workspace:*",
     "@ribajs/jquery": "workspace:*",
     "@ribajs/utils": "workspace:*",
-    "@yarnpkg/pnpify": "^3.1.1-rc.3"
+    "@yarnpkg/pnpify": "^3.1.1-rc.5"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

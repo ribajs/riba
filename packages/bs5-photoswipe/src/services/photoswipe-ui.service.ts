@@ -6,10 +6,10 @@
  * Built just using public methods/properties of PhotoSwipe.
  */
 
-import { Item, Options, UIElement } from "../types";
-import * as PhotoSwipe from "photoswipe";
+import { Item, Options, UIElement } from '../types';
+import * as PhotoSwipe from 'photoswipe';
 
-import { FullscreenService } from "@ribajs/extras";
+import { FullscreenService } from '@ribajs/extras';
 
 export class PhotoSwipeUI {
   _overlayUIUpdated = false;
@@ -24,22 +24,22 @@ export class PhotoSwipeUI {
   _shareModalHidden = true;
   _initialCloseOnScrollValue: any;
   _isIdle: any;
-  _listen: PhotoSwipe<Options, PhotoSwipeUI>["listen"];
+  _listen: PhotoSwipe<Options, PhotoSwipeUI>['listen'];
   _galleryHasOneSlide: any;
   _options: Options = {};
   _defaultUIOptions = {
-    barsSize: { top: 44, bottom: "auto" },
-    closeElClasses: ["item", "caption", "zoom-wrap", "ui", "top-bar"],
+    barsSize: { top: 44, bottom: 'auto' },
+    closeElClasses: ['item', 'caption', 'zoom-wrap', 'ui', 'top-bar'],
     timeToIdle: 4000,
     timeToIdleOutside: 1000,
 
     addCaptionHTMLFn: function (
       item: Item,
-      captionEl: HTMLElement
+      captionEl: HTMLElement,
       /*isFake?: boolean*/
     ) {
       if (!item.title) {
-        captionEl.children[0].innerHTML = "";
+        captionEl.children[0].innerHTML = '';
         return false;
       }
       captionEl.children[0].innerHTML = item.title;
@@ -53,27 +53,27 @@ export class PhotoSwipeUI {
 
     clickToCloseNonZoomable: true,
 
-    indexIndicatorSep: " / ",
+    indexIndicatorSep: ' / ',
     fitControlsWidth: 1200,
   } as Options;
   _blockControlsTap: any;
   _blockControlsTapTimeout: any;
 
   _idleInterval?: number;
-  _idleTimer?: ReturnType<Window["setTimeout"]>;
+  _idleTimer?: ReturnType<Window['setTimeout']>;
   _idleIncrement = 0;
 
   _uiElements = [
     {
-      name: "caption",
-      option: "captionEl",
+      name: 'caption',
+      option: 'captionEl',
       onInit: (el: HTMLElement) => {
         this._captionContainer = el;
       },
     },
     {
-      name: "counter",
-      option: "counterEl",
+      name: 'counter',
+      option: 'counterEl',
       onInit: (el: HTMLElement) => {
         this._indexIndicator = el;
       },
@@ -82,7 +82,7 @@ export class PhotoSwipeUI {
 
   constructor(
     protected readonly pswp: PhotoSwipe<Options, PhotoSwipeUI>,
-    protected readonly framework: PhotoSwipe.UIFramework
+    protected readonly framework: PhotoSwipe.UIFramework,
   ) {
     this.pswp = pswp;
     this.framework = framework;
@@ -103,14 +103,14 @@ export class PhotoSwipeUI {
 
     const target = (e.target || e.srcElement) as HTMLElement | null;
     let uiElement;
-    const clickedClass = target?.getAttribute("class") || "";
+    const clickedClass = target?.getAttribute('class') || '';
     let found;
 
     for (let i = 0; i < this._uiElements.length; i++) {
       uiElement = this._uiElements[i];
       if (
         uiElement.onTap &&
-        clickedClass.indexOf("pswp__" + uiElement.name) > -1
+        clickedClass.indexOf('pswp__' + uiElement.name) > -1
       ) {
         uiElement.onTap();
         found = true;
@@ -145,7 +145,7 @@ export class PhotoSwipeUI {
   }
 
   protected _togglePswpClass(el: HTMLElement, cName: string, add: boolean) {
-    this.framework[(add ? "add" : "remove") + "Class"](el, "pswp__" + cName);
+    this.framework[(add ? 'add' : 'remove') + 'Class'](el, 'pswp__' + cName);
   }
 
   // add class when there is just one item in the gallery
@@ -157,9 +157,9 @@ export class PhotoSwipeUI {
 
     if (hasOneSlide !== this._galleryHasOneSlide) {
       if (this._controls) {
-        this._togglePswpClass(this._controls, "ui--one-slide", hasOneSlide);
+        this._togglePswpClass(this._controls, 'ui--one-slide', hasOneSlide);
       } else {
-        console.warn("_controls not found!");
+        console.warn('_controls not found!');
       }
 
       this._galleryHasOneSlide = hasOneSlide;
@@ -179,7 +179,7 @@ export class PhotoSwipeUI {
   protected _onMouseLeaveWindow(e?: MouseEvent | Event) {
     e = e ? e : window.event;
     const from = (e as MouseEvent)?.relatedTarget || (e as any)?.toElement;
-    if (!from || from.nodeName === "HTML") {
+    if (!from || from.nodeName === 'HTML') {
       if (this._idleTimer) {
         clearTimeout(this._idleTimer);
       }
@@ -198,12 +198,12 @@ export class PhotoSwipeUI {
         this.framework.bind(
           document,
           this._fullscreenAPI.eventK,
-          this.updateFullscreen
+          this.updateFullscreen,
         );
         this.updateFullscreen();
-        this.framework.addClass(this.pswp.template, "pswp--supports-fs");
+        this.framework.addClass(this.pswp.template, 'pswp--supports-fs');
       } else {
-        this.framework.removeClass(this.pswp.template, "pswp--supports-fs");
+        this.framework.removeClass(this.pswp.template, 'pswp--supports-fs');
       }
     }
   }
@@ -212,37 +212,37 @@ export class PhotoSwipeUI {
     const gap = item.vGap;
 
     if (!gap) {
-      throw new Error("gap is undefined");
+      throw new Error('gap is undefined');
     }
 
     if (this._fitControlsInViewport()) {
       const bars = this._options.barsSize;
-      if (this._options.captionEl && bars && bars.bottom === "auto") {
+      if (this._options.captionEl && bars && bars.bottom === 'auto') {
         if (!this._fakeCaptionContainer) {
           this._fakeCaptionContainer = this.framework.createEl(
-            "pswp__caption pswp__caption--fake"
+            'pswp__caption pswp__caption--fake',
           );
           if (this._fakeCaptionContainer) {
             this._fakeCaptionContainer.appendChild(
-              this.framework.createEl("pswp__caption__center")
+              this.framework.createEl('pswp__caption__center'),
             );
             if (this._controls) {
               if (this._captionContainer) {
                 this._controls.insertBefore(
                   this._fakeCaptionContainer,
-                  this._captionContainer
+                  this._captionContainer,
                 );
               } else {
-                console.warn("_captionContainer not found!");
+                console.warn('_captionContainer not found!');
               }
             } else {
-              console.warn("_controls not found!");
+              console.warn('_controls not found!');
             }
           } else {
             console.warn("Can't create _fakeCaptionContainer");
           }
 
-          this.framework.addClass(this._controls, "pswp__ui--fit");
+          this.framework.addClass(this._controls, 'pswp__ui--fit');
         }
         if (
           this._options &&
@@ -256,7 +256,7 @@ export class PhotoSwipeUI {
           gap.bottom = bars.top; // if no caption, set size of bottom gap to size of top
         }
       } else {
-        gap.bottom = (bars?.bottom === "auto" ? 0 : bars?.bottom) as number | 0;
+        gap.bottom = (bars?.bottom === 'auto' ? 0 : bars?.bottom) as number | 0;
       }
 
       // height of top bar is static, no need to calculate it
@@ -269,16 +269,16 @@ export class PhotoSwipeUI {
   protected _setupIdle() {
     // Hide controls when mouse is used
     if (this._options.timeToIdle) {
-      this._listen("mouseUsed", () => {
+      this._listen('mouseUsed', () => {
         this.framework.bind(
           document,
-          "mousemove",
-          this._onIdleMouseMove.bind(this)
+          'mousemove',
+          this._onIdleMouseMove.bind(this),
         );
         this.framework.bind(
           document,
-          "mouseout",
-          this._onMouseLeaveWindow.bind(this)
+          'mouseout',
+          this._onMouseLeaveWindow.bind(this),
         );
 
         this._idleInterval = window.setInterval(() => {
@@ -293,7 +293,7 @@ export class PhotoSwipeUI {
 
   protected _setupHidingControlsDuringGestures() {
     // Hide controls on vertical drag
-    this._listen("onVerticalDrag", (now: number) => {
+    this._listen('onVerticalDrag', (now: number) => {
       if (this._controlsVisible && now < 0.95) {
         this.hideControls();
       } else if (!this._controlsVisible && now >= 0.95) {
@@ -303,7 +303,7 @@ export class PhotoSwipeUI {
 
     // Hide controls when pinching to close
     let pinchControlsHidden: boolean;
-    this._listen("onPinchClose", (now: number) => {
+    this._listen('onPinchClose', (now: number) => {
       if (this._controlsVisible && now < 0.9) {
         this.hideControls();
         pinchControlsHidden = true;
@@ -312,7 +312,7 @@ export class PhotoSwipeUI {
       }
     });
 
-    this._listen("zoomGestureEnded", () => {
+    this._listen('zoomGestureEnded', () => {
       pinchControlsHidden = false;
       if (pinchControlsHidden && !this._controlsVisible) {
         this.showControls();
@@ -339,9 +339,9 @@ export class PhotoSwipeUI {
         for (let a = 0; a < this._uiElements.length; a++) {
           uiElement = this._uiElements[a];
 
-          if (classAttr.indexOf("pswp__" + uiElement.name) > -1) {
+          if (classAttr.indexOf('pswp__' + uiElement.name) > -1) {
             if (this._options[uiElement.option]) {
-              if (typeof uiElement.onInit === "function") {
+              if (typeof uiElement.onInit === 'function') {
                 uiElement.onInit(item);
               }
             }
@@ -357,7 +357,7 @@ export class PhotoSwipeUI {
 
     const topBar = this.framework.getChildByClass(
       this._controls,
-      "pswp__top-bar"
+      'pswp__top-bar',
     );
     if (topBar) {
       loopThroughChildElements(topBar.children);
@@ -374,7 +374,7 @@ export class PhotoSwipeUI {
     // find pswp__ui element
     this._controls = this.framework.getChildByClass(
       this.pswp.scrollWrap,
-      "pswp__ui"
+      'pswp__ui',
     );
 
     // create local link
@@ -383,10 +383,10 @@ export class PhotoSwipeUI {
     this._setupHidingControlsDuringGestures();
 
     // update controls when slides change
-    this._listen("beforeChange", this.update.bind(this));
+    this._listen('beforeChange', this.update.bind(this));
 
     // toggle zoom on double-tap
-    this._listen("doubleTap", (point: MouseEvent) => {
+    this._listen('doubleTap', (point: MouseEvent) => {
       const initialZoomLevel = this.pswp.currItem.initialZoomLevel || 1;
       if (this.pswp.getZoomLevel() !== initialZoomLevel) {
         this.pswp.zoomTo(initialZoomLevel, point, 333);
@@ -400,62 +400,62 @@ export class PhotoSwipeUI {
 
     // Allow text selection in caption
     this._listen(
-      "preventDragEvent",
+      'preventDragEvent',
       (
         e: MouseEvent,
         isDown: boolean,
         preventObj: {
           prevent: boolean;
-        }
+        },
       ) => {
         const t = (e.target || e.srcElement) as
           | (EventTarget & HTMLElement)
           | null;
         if (
           t &&
-          t.getAttribute("class") &&
-          e.type.indexOf("mouse") > -1 &&
-          (t.classList.contains("__caption") ||
+          t.getAttribute('class') &&
+          e.type.indexOf('mouse') > -1 &&
+          (t.classList.contains('__caption') ||
             /(SMALL|STRONG|EM)/i.test(t.tagName))
         ) {
           preventObj.prevent = false;
         }
-      }
+      },
     );
 
     // bind events for UI
-    this._listen("bindEvents", () => {
+    this._listen('bindEvents', () => {
       this.framework.bind(
         this._controls,
-        "pswpTap click",
-        this._onControlsTap.bind(this)
+        'pswpTap click',
+        this._onControlsTap.bind(this),
       );
       this.framework.bind(
         this.pswp.scrollWrap,
-        "pswpTap",
-        this.onGlobalTap.bind(this)
+        'pswpTap',
+        this.onGlobalTap.bind(this),
       );
     });
 
     // unbind events for UI
-    this._listen("unbindEvents", () => {
+    this._listen('unbindEvents', () => {
       if (this._idleInterval) {
         clearInterval(this._idleInterval);
       }
-      this.framework.unbind(document, "mouseout", this._onMouseLeaveWindow);
-      this.framework.unbind(document, "mousemove", this._onIdleMouseMove);
+      this.framework.unbind(document, 'mouseout', this._onMouseLeaveWindow);
+      this.framework.unbind(document, 'mousemove', this._onIdleMouseMove);
       this.framework.unbind(
         this._controls,
-        "pswpTap click",
-        this._onControlsTap
+        'pswpTap click',
+        this._onControlsTap,
       );
-      this.framework.unbind(this.pswp.scrollWrap, "pswpTap", this.onGlobalTap);
+      this.framework.unbind(this.pswp.scrollWrap, 'pswpTap', this.onGlobalTap);
 
       if (this._fullscreenAPI) {
         this.framework.unbind(
           document,
           this._fullscreenAPI.eventK,
-          this.updateFullscreen
+          this.updateFullscreen,
         );
         if (this._fullscreenAPI.isFullscreen()) {
           this._options.hideAnimationDuration = 0;
@@ -466,37 +466,37 @@ export class PhotoSwipeUI {
     });
 
     // clean up things when gallery is destroyed
-    this._listen("destroy", () => {
+    this._listen('destroy', () => {
       if (this._options.captionEl) {
         if (this._fakeCaptionContainer) {
           this._controls?.removeChild(this._fakeCaptionContainer);
         }
         this.framework.removeClass(
           this._captionContainer,
-          "pswp__caption--empty"
+          'pswp__caption--empty',
         );
       }
 
       if (this._shareModal && this._shareModal.children[0]) {
         (this._shareModal.children[0] as HTMLElement).onclick = null;
       }
-      this.framework.addClass(this._controls, "pswp__ui--hidden");
+      this.framework.addClass(this._controls, 'pswp__ui--hidden');
       this.setIdle(false);
     });
 
     if (!this._options.showAnimationDuration) {
-      this.framework.removeClass(this._controls, "pswp__ui--hidden");
+      this.framework.removeClass(this._controls, 'pswp__ui--hidden');
     }
-    this._listen("initialZoomIn", () => {
+    this._listen('initialZoomIn', () => {
       if (this._options.showAnimationDuration) {
-        this.framework.removeClass(this._controls, "pswp__ui--hidden");
+        this.framework.removeClass(this._controls, 'pswp__ui--hidden');
       }
     });
-    this._listen("initialZoomOut", () => {
-      this.framework.addClass(this._controls, "pswp__ui--hidden");
+    this._listen('initialZoomOut', () => {
+      this.framework.addClass(this._controls, 'pswp__ui--hidden');
     });
 
-    this._listen("parseVerticalMargin", this._applyNavBarGaps.bind(this));
+    this._listen('parseVerticalMargin', this._applyNavBarGaps.bind(this));
 
     this._setupUIElements();
 
@@ -510,7 +510,7 @@ export class PhotoSwipeUI {
   public setIdle(isIdle: boolean) {
     this._isIdle = isIdle;
     if (this._controls) {
-      this._togglePswpClass(this._controls, "ui--idle", isIdle);
+      this._togglePswpClass(this._controls, 'ui--idle', isIdle);
     }
   }
 
@@ -523,16 +523,16 @@ export class PhotoSwipeUI {
         if (this._captionContainer) {
           this._options.addCaptionHTMLFn(
             this.pswp.currItem,
-            this._captionContainer
+            this._captionContainer,
           );
 
           this._togglePswpClass(
             this._captionContainer,
-            "caption--empty",
-            !(this.pswp.currItem as Item).title
+            'caption--empty',
+            !(this.pswp.currItem as Item).title,
           );
         } else {
-          console.warn("_captionContainer not found!");
+          console.warn('_captionContainer not found!');
         }
       }
 
@@ -555,8 +555,8 @@ export class PhotoSwipeUI {
 
     // toggle pswp--fs class on root element
     this.framework[
-      (this._fullscreenAPI?.isFullscreen() ? "add" : "remove") + "Class"
-    ](this.pswp.template, "pswp--fs");
+      (this._fullscreenAPI?.isFullscreen() ? 'add' : 'remove') + 'Class'
+    ](this.pswp.template, 'pswp--fs');
   }
 
   public updateFullscreen = this._updateFullscreen.bind(this);
@@ -571,10 +571,10 @@ export class PhotoSwipeUI {
         this._indexIndicator.innerHTML =
           this.pswp.getCurrentIndex() +
           1 +
-          (this._options.indexIndicatorSep || "/") +
+          (this._options.indexIndicatorSep || '/') +
           numItems;
       } else {
-        console.warn("_indexIndicator not found!");
+        console.warn('_indexIndicator not found!');
       }
     }
   }
@@ -591,10 +591,10 @@ export class PhotoSwipeUI {
     if (
       e &&
       (e as CustomEvent).detail &&
-      (e as CustomEvent).detail.pointerType === "mouse" &&
+      (e as CustomEvent).detail.pointerType === 'mouse' &&
       target
     ) {
-      if (this.framework.hasClass(target, "pswp__img")) {
+      if (this.framework.hasClass(target, 'pswp__img')) {
         if (
           this.pswp.getZoomLevel() === 1 &&
           this.pswp.getZoomLevel() <= (this.pswp.currItem.fitRatio || 0)
@@ -619,7 +619,7 @@ export class PhotoSwipeUI {
   }
 
   public hideControls() {
-    this.framework.addClass(this._controls, "pswp__ui--hidden");
+    this.framework.addClass(this._controls, 'pswp__ui--hidden');
     this._controlsVisible = false;
   }
 
@@ -628,7 +628,7 @@ export class PhotoSwipeUI {
     if (!this._overlayUIUpdated) {
       this.update();
     }
-    this.framework.removeClass(this._controls, "pswp__ui--hidden");
+    this.framework.removeClass(this._controls, 'pswp__ui--hidden');
   }
 
   public supportsFullscreen() {
