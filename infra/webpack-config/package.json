@@ -25,7 +25,7 @@
     "file-loader": "^6.2.0",
     "fork-ts-checker-webpack-plugin": "^6.4.2",
     "glob": "^7.2.0",
-    "graphql": "^15.7.2",
+    "graphql": "^16.0.1",
     "html-loader": "^3.0.1",
     "html-webpack-plugin": "^5.5.0",
     "inspectpack": "^4.7.1",
