@@ -25,7 +25,8 @@ export class RouterService {
 
   public static setSingleton(options: Partial<RouterModuleOptions> = {}) {
     if (this.instance) {
-      throw new Error(`Singleton of RouterService already defined!`);
+      console.warn(`Singleton of RouterService already defined!`);
+      return this.instance;
     }
     options.defaultTransition = options.defaultTransition ?? new HideShowTransition();
     options.scrollToAnchorOffset = options.scrollToAnchorOffset ?? 0;
