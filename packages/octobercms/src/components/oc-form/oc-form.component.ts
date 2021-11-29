@@ -1,11 +1,5 @@
-import {
-  Bs4FormComponent,
-  Scope as Bs4FormScope,
-} from "@ribajs/bs4/src/components/bs4-form/bs4-form.component";
-
-export interface Scope extends Bs4FormScope {
-  octoberHandler: string;
-}
+import { Bs4FormComponent } from "@ribajs/bs4";
+import { OcFormComponentScope as Scope } from "../../types";
 
 export class OcFormComponent extends Bs4FormComponent {
   public static tagName = "oc-form";

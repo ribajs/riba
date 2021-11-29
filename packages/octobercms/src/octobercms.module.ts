@@ -5,6 +5,13 @@ import * as services from "./services";
 import * as components from "./components";
 import { OctobercmsModuleOptions } from "./types";
 
+declare global {
+  interface Window {
+    // Allow any custom property in Window
+    [key: string]: any;
+  }
+}
+
 export const octobercmsModule: RibaModule<OctobercmsModuleOptions> = {
   formatters,
   binders,

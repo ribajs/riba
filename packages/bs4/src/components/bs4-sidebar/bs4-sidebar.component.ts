@@ -6,78 +6,10 @@ import {
 } from "@ribajs/utils/src/dom";
 import { TOGGLE_BUTTON } from "../../constants";
 import { debounce } from "@ribajs/utils/src/control";
-
-type State =
-  | "overlay-left"
-  | "overlay-right"
-  | "side-left"
-  | "side-right"
-  | "hidden";
-
-interface Scope {
-  /**
-   * Selector string to get the container element from DOM
-   */
-  containerSelector?: string;
-  /**
-   * The current state of the sidebar, can be `'hidden'`, `'side-left'`, `'side-right'`, `'overlay-left'` or `'overlay-right'`
-   */
-  state: State;
-
-  oldState: State;
-  /**
-   * The 'id' is required to react to events of the `bs4-toggle-button`, the `target-id` attribute of the `bs4-toggle-button` must be identical to this `id`
-   */
-  id?: string;
-  /**
-   * The width of the sidebar with unit
-   */
-  width: string;
-
-  // Options
-  /**
-   * The sidebar can be positioned `right` or `left`
-   */
-  position: "left" | "right";
-  /**
-   * Auto show the sidebar if the viewport width is wider than this value
-   */
-  autoShowOnWiderThan: number;
-  /**
-   * Auto hide the sidebar if the viewport width is slimmer than this value
-   */
-  autoHideOnSlimmerThan: number;
-  /**
-   * Watch the routers `newPageReady` event to update the sidebar state, e.g. hide on slime than after route changes
-   */
-  watchNewPageReadyEvent: boolean;
-  /**
-   * You can force to hide the sidebar on corresponding URL pathnames e.g. you can hide the sidebar on home with `['/']`.
-   */
-  forceHideOnLocationPathnames: Array<string>;
-  /**
-   * Like `force-hide-on-location-pathnames`, but to force to open the sidebar
-   */
-  forceShowOnLocationPathnames: Array<string>;
-  /**
-   * If the viewport width is wider than this value the sidebar adds a margin to the container (detected with the `container-selector`) to reduce its content, if the viewport width is slimmer than this value the sidebar opens over the content
-   */
-  overlayOnSlimmerThan: number;
-
-  // Template methods
-  /**
-   * Hides / closes the sidebar
-   */
-  hide: Bs4SidebarComponent["hide"];
-  /**
-   * Shows / opens the sidebar
-   */
-  show: Bs4SidebarComponent["show"];
-  /**
-   * Toggles (closes or opens) the sidebar
-   */
-  toggle: Bs4SidebarComponent["toggle"];
-}
+import {
+  Bs4SidebarComponentScope as Scope,
+  Bs4SidebarComponentState as State,
+} from "../../interfaces";
 
 export class Bs4SidebarComponent extends Component {
   public static tagName = "bs4-sidebar";

@@ -1,31 +1,6 @@
-import {
-  OcFormComponent,
-  Scope as OcFormScope,
-} from "@ribajs/octobercms/src/components/oc-form/oc-form.component";
+import { OcFormComponent } from "../oc-form/oc-form.component";
+import { HCaptchaFormComponentScope as Scope } from "../../types";
 import { loadScript, getUID } from "@ribajs/utils/src/dom";
-
-declare global {
-  interface Window {
-    // Allow any custom property in Window
-    [key: string]: any;
-  }
-}
-
-export interface Scope extends OcFormScope {
-  hcaptchaSrc: string;
-  hcaptchaHl: string;
-  hcaptchaRender: "explicit" | "onload";
-  /** normally this is not needed because we have our own callback which is triggered when the script is loaded */
-  hcaptchaOnload?: string;
-  hcaptchaSitekey: string;
-  hcaptchaSize: "invisible" | "normal" | "compact";
-  hcaptchaCallback: string;
-  hcaptchaTheme: "light" | "dark";
-  hcaptchaTabindex: number;
-  hcaptchaExpiredCallback?: string;
-  hcaptchaErrorCallback?: string;
-  hcaptchaContainerSelector: string;
-}
 
 export class HCaptchaFormComponent extends OcFormComponent {
   public static tagName = "hcaptcha-oc-form";
@@ -67,7 +42,11 @@ export class HCaptchaFormComponent extends OcFormComponent {
       hcaptchaCallback: getUID("onHCaptchaSubmit"),
       // hcaptchaExpiredCallback: "onHCaptchaExpired",
       hcaptchaErrorCallback: "onHCaptchaError",
-      hcaptchaContainerSelector: ".h-captcha-container",
+      hcaptchaContainerSelector:
+        ".h-captcha-container, .re-captcha-container, .hcaptcha-container, .recaptcha-container",
+
+      // Methods
+      onSubmit: this.onSubmit,
     };
 
     return scope;
