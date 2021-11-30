@@ -4,12 +4,46 @@ Riba.js is a fork of Rivets.js, a lightweight data binding and templating system
 
 ## Documentation
 
-You found the documentation source files on [github.com/ribajs/doc](https://github.com/ribajs/doc/tree/master/doc) or rendered on [ribajs.com](https://ribajs.com/).
+You found the documentation source files on [github.com/ribajs/doc](https://github.com/ribajs/doc) or rendered on [ribajs.com](https://ribajs.com/).
 
-## Yarn 2
+## Yarn
 
-We are using yarn 2 to build and release Riba, so to test the demos please use yarn 2.
+We are using yarn to build and release Riba, so to test the demos please use yarn instead of npm.
 
+## Demos
+
+For the different modules there are some demos, to start one of the demos go into the directory and execute it with `yarn run start`: 
+
+```bash
+git clone --recurse-submodules https://github.com/ribajs/riba.git
+cd riba/demos/core-each-item # replace core-each-item with a demo of your choice
+yarn run start
+```
+
+## Exmaples
+
+There are a few Riba projects you can take a look at:
+
+### OctoberCMS v1.x
+
+There are a few OctoberCMS v1.x themes which were developed using Riba:
+
+* [Strandhus OctoberCMS Theme](https://github.com/ArtCodeStudio/strandhus-october-theme)
+* [Hypnose OctoberCMS Theme](https://github.com/ArtCodeStudio/hypnose-october-theme)
+* [watt-land-fluss OctoberCMS Theme](https://github.com/ArtCodeStudio/wattlandfluss-october-theme) (Note: Currently an outdated Riba version is still used here)
+
+### Shopify Themes
+
+* The [Riba Documentation Theme](https://github.com/ribajs/doc) is currently implemented as Shopify Theme.
+
+### Node.js
+
+* The [Gymnasium Otterndorf Website](https://github.com/ArtCodeStudio/gymnasium-otterndorf-website) was developed using Riba.js, Nest.js and Strapi. Riba.js is also used for the templates on the server side, and the custom elements are delivered with server side rendering (SSR).
+* The [ParcelLab Shopify App](https://github.com/ArtCodeStudio/parcel-lab-shopify-app) is a small Shopify App and the dashboard / fronted is build with Riba.js.
+
+### Deno
+
+* The [website of markusmorische.de](https://github.com/ArtCodeStudio/markus-morische-rechtsanwalt-website) is build using Deno, Alosaur, Riba.js and Strapi. 
 ## Contributing
 
 ### Clone
