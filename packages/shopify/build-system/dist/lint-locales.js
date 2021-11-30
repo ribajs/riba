@@ -29,7 +29,7 @@ const lint_reporter_1 = __importDefault(require("./includes/lint-reporter"));
  */
 function lintLocales() {
     return __awaiter(this, void 0, void 0, function* () {
-        return theme_lint_1.runAll(config_1.config.src.root, new lint_reporter_1.default())
+        return (0, theme_lint_1.runAll)(config_1.config.src.root, new lint_reporter_1.default())
             .then((reporter) => reporter.output())
             .catch((err) => {
             gulp_util_1.default.log(err);

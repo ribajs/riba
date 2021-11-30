@@ -20,7 +20,7 @@ const utilities_1 = require("./utilities");
 const getAsset = (themeConfig, key) => __awaiter(void 0, void 0, void 0, function* () {
     const assets = new shopify_admin_api_1.Assets(themeConfig.store, themeConfig.password);
     const themeId = Number(themeConfig.theme_id);
-    if (!utilities_1.isNumber(themeId)) {
+    if (!(0, utilities_1.isNumber)(themeId)) {
         throw new Error(`"theme_id" property in theme config must be a number, but is "${themeConfig.theme_id}"`);
     }
     const settingsData = yield assets.get(themeId, key);

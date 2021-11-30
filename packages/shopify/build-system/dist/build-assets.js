@@ -20,7 +20,7 @@ const gulp_1 = __importDefault(require("gulp"));
 const gulp_plumber_1 = __importDefault(require("gulp-plumber"));
 const gulp_rename_1 = __importDefault(require("gulp-rename"));
 const chokidar_1 = __importDefault(require("chokidar"));
-const vinyl_paths_1 = __importDefault(require("vinyl-paths"));
+const vinyl_paths_1 = require("./vinyl-paths");
 const del_1 = __importDefault(require("del"));
 const gulp_size_1 = __importDefault(require("gulp-size"));
 const gulp_print_1 = __importDefault(require("gulp-print"));
@@ -60,8 +60,8 @@ const processAssetsTheme = (files) => {
     messages_1.default.logProcessFiles("build:assets");
     return gulp_1.default
         .src(files, { base: config_1.config.src.root, nodir: true })
-        .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
-        .pipe(gulp_size_1.default({
+        .pipe((0, gulp_plumber_1.default)(utilities_1.errorHandler))
+        .pipe((0, gulp_size_1.default)({
         showFiles: true,
         pretty: true,
     }))
@@ -71,8 +71,8 @@ const processAssetsRibaShopify = (files) => {
     messages_1.default.logProcessFiles("build:assets:riba-shopify");
     return gulp_1.default
         .src(files, { base: config_1.config.ribaShopify.src.root })
-        .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
-        .pipe(gulp_size_1.default({
+        .pipe((0, gulp_plumber_1.default)(utilities_1.errorHandler))
+        .pipe((0, gulp_size_1.default)({
         showFiles: true,
         pretty: true,
     }))
@@ -82,8 +82,8 @@ const processAssetsRibaShopifyTda = (files) => {
     messages_1.default.logProcessFiles("build:assets:riba-shopify-tda");
     return gulp_1.default
         .src(files, { base: config_1.config.ribaShopifyTda.src.root })
-        .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
-        .pipe(gulp_size_1.default({
+        .pipe((0, gulp_plumber_1.default)(utilities_1.errorHandler))
+        .pipe((0, gulp_size_1.default)({
         showFiles: true,
         pretty: true,
     }))
@@ -107,9 +107,9 @@ function removeAssets(files) {
         });
         return gulp_1.default
             .src(mapFiles)
-            .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
-            .pipe(vinyl_paths_1.default(del_1.default))
-            .pipe(gulp_size_1.default({
+            .pipe((0, gulp_plumber_1.default)(utilities_1.errorHandler))
+            .pipe(yield (0, vinyl_paths_1.vinylPaths)(del_1.default))
+            .pipe((0, gulp_size_1.default)({
             showFiles: true,
             pretty: true,
         }));
@@ -128,10 +128,10 @@ gulp_1.default.task("build:assets", () => {
 gulp_1.default.task("build:assets:favicons", () => {
     return gulp_1.default
         .src(config_1.config.src.favicons)
-        .pipe(gulp_rename_1.default((path) => {
+        .pipe((0, gulp_rename_1.default)((path) => {
         path.basename = "favicons_" + path.basename;
     }))
-        .pipe(gulp_print_1.default()) // TODO
+        .pipe((0, gulp_print_1.default)()) // TODO
         .pipe(gulp_1.default.dest(config_1.config.dist.assets));
 });
 gulp_1.default.task("build:assets:riba-shopify", () => {
@@ -148,7 +148,7 @@ gulp_1.default.task("build:assets:riba-shopify-tda", () => {
  * @static
  */
 gulp_1.default.task("watch:assets", () => {
-    const eventCache = utilities_1.createEventCache();
+    const eventCache = (0, utilities_1.createEventCache)();
     return chokidar_1.default
         .watch(assetsPaths, {
         ignored: /(^|[/\\])\../,
@@ -157,11 +157,11 @@ gulp_1.default.task("watch:assets", () => {
         .on("all", (event, path) => {
         messages_1.default.logFileEvent(event, path);
         eventCache.addEvent(event, path);
-        utilities_1.processCache(eventCache, processAssetsTheme, removeAssets);
+        (0, utilities_1.processCache)(eventCache, processAssetsTheme, removeAssets);
     });
 });
 gulp_1.default.task("watch:assets:riba-shopify", () => {
-    const eventCache = utilities_1.createEventCache();
+    const eventCache = (0, utilities_1.createEventCache)();
     return chokidar_1.default
         .watch(assetsPathsRibaShopify, {
         ignored: /(^|[/\\])\../,
@@ -170,11 +170,11 @@ gulp_1.default.task("watch:assets:riba-shopify", () => {
         .on("all", (event, path) => {
         messages_1.default.logFileEvent(event, path);
         eventCache.addEvent(event, path);
-        utilities_1.processCache(eventCache, processAssetsRibaShopify, removeAssets);
+        (0, utilities_1.processCache)(eventCache, processAssetsRibaShopify, removeAssets);
     });
 });
 gulp_1.default.task("watch:assets:riba-shopify-tda", () => {
-    const eventCache = utilities_1.createEventCache();
+    const eventCache = (0, utilities_1.createEventCache)();
     return chokidar_1.default
         .watch(assetsPathsRibaShopifyTda, {
         ignored: /(^|[/\\])\../,
@@ -183,7 +183,7 @@ gulp_1.default.task("watch:assets:riba-shopify-tda", () => {
         .on("all", (event, path) => {
         messages_1.default.logFileEvent(event, path);
         eventCache.addEvent(event, path);
-        utilities_1.processCache(eventCache, processAssetsRibaShopifyTda, removeAssets);
+        (0, utilities_1.processCache)(eventCache, processAssetsRibaShopifyTda, removeAssets);
     });
 });
 //# sourceMappingURL=build-assets.js.map

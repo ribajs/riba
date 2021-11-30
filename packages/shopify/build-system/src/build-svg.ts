@@ -5,7 +5,7 @@ import gulp from "gulp";
 import plumber from "gulp-plumber";
 import chokidar from "chokidar";
 import size from "gulp-size";
-import vinylPaths from "vinyl-paths";
+import { vinylPaths } from "./vinyl-paths";
 import del from "del";
 import svgmin from "gulp-svgmin";
 import cheerio from "gulp-cheerio";
@@ -55,7 +55,7 @@ function processSnippetIcons(files: string[]) {
  *
  * @param files - glob/array of files to match & send to the stream
  */
-function removeSnippetIcons(files: string[]) {
+const removeSnippetIcons = async (files: string[]) => {
   messages.logProcessFiles("remove:svg");
   const mapFiles = files.map((file) => {
     gutil.log("remove icon: " + file);
@@ -70,7 +70,7 @@ function removeSnippetIcons(files: string[]) {
   return gulp
     .src(mapFiles)
     .pipe(plumber(errorHandler))
-    .pipe(vinylPaths(del))
+    .pipe(await vinylPaths(del))
     .pipe(
       size({
         showFiles: true,
@@ -111,7 +111,7 @@ function processAssetIcons(files: string[]) {
  *
  * @param files - glob/array of files to match & send to the stream
  */
-function removeAssetIcons(files: string[]) {
+const removeAssetIcons = async (files: string[]) => {
   messages.logProcessFiles("remove:svg");
   const mapFiles = files.map((file) => {
     gutil.log("remove icon: " + file);
@@ -125,7 +125,7 @@ function removeAssetIcons(files: string[]) {
   return gulp
     .src(mapFiles)
     .pipe(plumber(errorHandler))
-    .pipe(vinylPaths(del))
+    .pipe(await vinylPaths(del))
     .pipe(
       size({
         showFiles: true,

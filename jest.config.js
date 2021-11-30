@@ -27,7 +27,7 @@ module.exports = {
     'json',
     'lcov',
   ],
-  setupFilesAfterEnv: [require.resolve("jest-extended")],
+  setupFilesAfterEnv: [require.resolve("jest-extended/all")],
   globals: {
     'ts-jest': {
       babelConfig: './babel.config.js',

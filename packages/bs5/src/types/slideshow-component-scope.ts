@@ -1,4 +1,4 @@
-import type { Bs5SlideshowComponent } from '../components/bs5-slideshow/bs5-slideshow.component';
+import type { Bs5SlideshowComponent } from "../components/bs5-slideshow/bs5-slideshow.component";
 
 import type {
   SlideshowSlide,
@@ -57,7 +57,8 @@ export type Bs5SlideshowComponentOptions = {
   };
 };
 
-export interface Bs5SlideshowComponentScope extends Bs5SlideshowComponentOptions {
+export interface Bs5SlideshowComponentScope
+  extends Bs5SlideshowComponentOptions {
   next: Bs5SlideshowComponent["next"];
   prev: Bs5SlideshowComponent["prev"];
   goTo: Bs5SlideshowComponent["goTo"];

@@ -28,7 +28,8 @@ export class RouterService {
       console.warn(`Singleton of RouterService already defined!`);
       return this.instance;
     }
-    options.defaultTransition = options.defaultTransition ?? new HideShowTransition();
+    options.defaultTransition =
+      options.defaultTransition ?? new HideShowTransition();
     options.scrollToAnchorOffset = options.scrollToAnchorOffset ?? 0;
     this._options = options as RouterModuleOptions;
     this.instance = new this();

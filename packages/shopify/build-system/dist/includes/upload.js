@@ -38,7 +38,7 @@ const config_1 = require("./config");
 const bithucket = __importStar(require("./bitbucket"));
 const github = __importStar(require("./github"));
 const uploadFile = (filePath) => __awaiter(void 0, void 0, void 0, function* () {
-    const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
+    const releaseConfig = (0, config_1.getYamlConfig)(config_1.config.releaseConfig);
     const filename = path_1.default.basename(filePath);
     if (releaseConfig === null || releaseConfig === void 0 ? void 0 : releaseConfig.bitbucket) {
         return bithucket.uploadFile(filePath);
@@ -53,7 +53,7 @@ const uploadFile = (filePath) => __awaiter(void 0, void 0, void 0, function* () 
 });
 exports.uploadFile = uploadFile;
 const getDownloadFileUrl = (filename) => __awaiter(void 0, void 0, void 0, function* () {
-    const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
+    const releaseConfig = (0, config_1.getYamlConfig)(config_1.config.releaseConfig);
     if (releaseConfig === null || releaseConfig === void 0 ? void 0 : releaseConfig.bitbucket) {
         return bithucket.getDownloadFileUrl(filename);
     }

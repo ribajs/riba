@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -10,7 +19,7 @@ const gulp_1 = __importDefault(require("gulp"));
 const gulp_plumber_1 = __importDefault(require("gulp-plumber"));
 const chokidar_1 = __importDefault(require("chokidar"));
 const gulp_size_1 = __importDefault(require("gulp-size"));
-const vinyl_paths_1 = __importDefault(require("vinyl-paths"));
+const vinyl_paths_1 = require("./vinyl-paths");
 const del_1 = __importDefault(require("del"));
 const gulp_svgmin_1 = __importDefault(require("gulp-svgmin"));
 const gulp_cheerio_1 = __importDefault(require("gulp-cheerio"));
@@ -30,14 +39,14 @@ function processSnippetIcons(files) {
     messages_1.default.logProcessFiles("build:svg");
     return gulp_1.default
         .src(files, { nodir: true })
-        .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
-        .pipe(gulp_svgmin_1.default(config_1.config.plugins.svgmin)) // TODO
-        .pipe(gulp_cheerio_1.default(config_1.config.plugins.cheerio))
-        .pipe(gulp_rename_1.default((path) => {
+        .pipe((0, gulp_plumber_1.default)(utilities_1.errorHandler))
+        .pipe((0, gulp_svgmin_1.default)(config_1.config.plugins.svgmin)) // TODO
+        .pipe((0, gulp_cheerio_1.default)(config_1.config.plugins.cheerio))
+        .pipe((0, gulp_rename_1.default)((path) => {
         path.basename = "iconset_" + path.basename;
         path.extname = ".liquid";
     }))
-        .pipe(gulp_size_1.default({
+        .pipe((0, gulp_size_1.default)({
         showFiles: true,
         pretty: true,
     }))
@@ -49,7 +58,7 @@ function processSnippetIcons(files) {
  *
  * @param files - glob/array of files to match & send to the stream
  */
-function removeSnippetIcons(files) {
+const removeSnippetIcons = (files) => __awaiter(void 0, void 0, void 0, function* () {
     messages_1.default.logProcessFiles("remove:svg");
     const mapFiles = files.map((file) => {
         gulp_util_1.default.log("remove icon: " + file);
@@ -62,13 +71,13 @@ function removeSnippetIcons(files) {
     });
     return gulp_1.default
         .src(mapFiles)
-        .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
-        .pipe(vinyl_paths_1.default(del_1.default))
-        .pipe(gulp_size_1.default({
+        .pipe((0, gulp_plumber_1.default)(utilities_1.errorHandler))
+        .pipe(yield (0, vinyl_paths_1.vinylPaths)(del_1.default))
+        .pipe((0, gulp_size_1.default)({
         showFiles: true,
         pretty: true,
     }));
-}
+});
 /**
  * Processing for SVGs prior to deployment - adds accessibility markup.
  *
@@ -79,12 +88,12 @@ function processAssetIcons(files) {
     messages_1.default.logProcessFiles("build:svg");
     return gulp_1.default
         .src(files, { nodir: true })
-        .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
-        .pipe(gulp_svgmin_1.default(config_1.config.plugins.svgmin)) // TODO
-        .pipe(gulp_rename_1.default((path) => {
+        .pipe((0, gulp_plumber_1.default)(utilities_1.errorHandler))
+        .pipe((0, gulp_svgmin_1.default)(config_1.config.plugins.svgmin)) // TODO
+        .pipe((0, gulp_rename_1.default)((path) => {
         path.basename = "iconset_" + path.basename;
     }))
-        .pipe(gulp_size_1.default({
+        .pipe((0, gulp_size_1.default)({
         showFiles: true,
         pretty: true,
     }))
@@ -96,7 +105,7 @@ function processAssetIcons(files) {
  *
  * @param files - glob/array of files to match & send to the stream
  */
-function removeAssetIcons(files) {
+const removeAssetIcons = (files) => __awaiter(void 0, void 0, void 0, function* () {
     messages_1.default.logProcessFiles("remove:svg");
     const mapFiles = files.map((file) => {
         gulp_util_1.default.log("remove icon: " + file);
@@ -108,13 +117,13 @@ function removeAssetIcons(files) {
     });
     return gulp_1.default
         .src(mapFiles)
-        .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
-        .pipe(vinyl_paths_1.default(del_1.default))
-        .pipe(gulp_size_1.default({
+        .pipe((0, gulp_plumber_1.default)(utilities_1.errorHandler))
+        .pipe(yield (0, vinyl_paths_1.vinylPaths)(del_1.default))
+        .pipe((0, gulp_size_1.default)({
         showFiles: true,
         pretty: true,
     }));
-}
+});
 /**
  * Pre-processing for svg icons as snippets
  */
@@ -128,7 +137,7 @@ gulp_1.default.task("build:svg:snippet", () => {
  * Watches source svg icons for changes...
  */
 gulp_1.default.task("watch:svg:snippet", () => {
-    const cache = utilities_1.createEventCache();
+    const cache = (0, utilities_1.createEventCache)();
     return chokidar_1.default
         .watch([config_1.config.src.iconset, config_1.config.ribaShopify.src.iconset], {
         ignoreInitial: true,
@@ -136,7 +145,7 @@ gulp_1.default.task("watch:svg:snippet", () => {
         .on("all", (event, path) => {
         messages_1.default.logFileEvent(event, path);
         cache.addEvent(event, path);
-        utilities_1.processCache(cache, processSnippetIcons, removeSnippetIcons);
+        (0, utilities_1.processCache)(cache, processSnippetIcons, removeSnippetIcons);
     });
 });
 /**
@@ -152,7 +161,7 @@ gulp_1.default.task("build:svg:asset", () => {
  * Watches source svg icons for changes...
  */
 gulp_1.default.task("watch:svg:asset", () => {
-    const cache = utilities_1.createEventCache();
+    const cache = (0, utilities_1.createEventCache)();
     return chokidar_1.default
         .watch([config_1.config.src.iconset, config_1.config.ribaShopify.src.iconset], {
         ignoreInitial: true,
@@ -160,7 +169,7 @@ gulp_1.default.task("watch:svg:asset", () => {
         .on("all", (event, path) => {
         messages_1.default.logFileEvent(event, path);
         cache.addEvent(event, path);
-        utilities_1.processCache(cache, processAssetIcons, removeAssetIcons);
+        (0, utilities_1.processCache)(cache, processAssetIcons, removeAssetIcons);
     });
 });
 //# sourceMappingURL=build-svg.js.map

@@ -20,7 +20,7 @@ import { Transition, Response, PjaxOptions } from "../../types";
 import { Dom } from "./Dom";
 import { HistoryManager } from "@ribajs/history";
 import { ROUTE_ERROR_CLASS, IGNORE_CLASS_LINK } from "../../constants";
-import { RouterService } from "../../services"
+import { RouterService } from "../../services";
 
 export interface PjaxInstances {
   [key: string]: Pjax;
@@ -568,7 +568,7 @@ class Pjax {
   ) {
     // normalize url, returns the relative url for internal urls and the full url for external urls
     const { url, location } = normalizeUrl(href);
-    
+
     const { location: currLocation } = normalizeUrl();
 
     // Is this a local scroll link to an title anchor?

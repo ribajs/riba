@@ -23,7 +23,7 @@ const got_1 = __importDefault(require("got"));
 const path_1 = __importDefault(require("path"));
 const gulp_util_1 = __importDefault(require("gulp-util"));
 const uploadFileExists = (filename) => __awaiter(void 0, void 0, void 0, function* () {
-    const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
+    const releaseConfig = (0, config_1.getYamlConfig)(config_1.config.releaseConfig);
     const username = releaseConfig.bitbucket.username;
     const password = releaseConfig.bitbucket.password;
     const repo_slug = releaseConfig.bitbucket.repo_slug;
@@ -44,13 +44,13 @@ const uploadFileExists = (filename) => __awaiter(void 0, void 0, void 0, functio
 });
 exports.uploadFileExists = uploadFileExists;
 const uploadFile = (filePath) => __awaiter(void 0, void 0, void 0, function* () {
-    const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
+    const releaseConfig = (0, config_1.getYamlConfig)(config_1.config.releaseConfig);
     const username = releaseConfig.bitbucket.username;
     const password = releaseConfig.bitbucket.password;
     const repo_slug = releaseConfig.bitbucket.repo_slug;
     const workspace = releaseConfig.bitbucket.workspace;
     const filename = path_1.default.basename(filePath);
-    const exists = yield exports.uploadFileExists(filename);
+    const exists = yield (0, exports.uploadFileExists)(filename);
     if (exists) {
         console.warn(messages_1.default.colorize(`The file "${filename}" already exists on bitbucket, normally the file will be overwritten, but if there are problems delete the file in bithucket and try it again`), "warning");
     }
@@ -71,7 +71,7 @@ const uploadFile = (filePath) => __awaiter(void 0, void 0, void 0, function* () 
     });
     // WORKAROUND
     console.log("Wait 3 seconds...");
-    yield utilities_1.asnycTimeout(3000);
+    yield (0, utilities_1.asnycTimeout)(3000);
     return result;
 });
 exports.uploadFile = uploadFile;
@@ -80,7 +80,7 @@ exports.uploadFile = uploadFile;
  * @param filename
  */
 const getDownloadFileUrl = (filename) => __awaiter(void 0, void 0, void 0, function* () {
-    const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
+    const releaseConfig = (0, config_1.getYamlConfig)(config_1.config.releaseConfig);
     const username = releaseConfig.bitbucket.username;
     const password = releaseConfig.bitbucket.password;
     const repo_slug = releaseConfig.bitbucket.repo_slug;
@@ -101,7 +101,7 @@ const getDownloadFileUrl = (filename) => __awaiter(void 0, void 0, void 0, funct
         url = result.url;
     }
     catch (error) {
-        url = yield exports.getDownloadFileUrlAlternate(filename);
+        url = yield (0, exports.getDownloadFileUrlAlternate)(filename);
     }
     console.log("bitbucket.repositories.getDownload");
     console.log(url);
@@ -113,7 +113,7 @@ exports.getDownloadFileUrl = getDownloadFileUrl;
  * @param filename
  */
 const getDownloadFileUrlAlternate = (filename) => __awaiter(void 0, void 0, void 0, function* () {
-    const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
+    const releaseConfig = (0, config_1.getYamlConfig)(config_1.config.releaseConfig);
     if (!releaseConfig) {
         gulp_util_1.default.log(`Skip get download url`);
         return null;
@@ -125,7 +125,7 @@ const getDownloadFileUrlAlternate = (filename) => __awaiter(void 0, void 0, void
     const uri = `https://${username}:${password}@bitbucket.org/${workspace}/${repo_slug}/downloads/${filename}`;
     console.log("Download url: " + uri);
     // Get redirect url of zip file
-    const result = yield got_1.default(uri);
+    const result = yield (0, got_1.default)(uri);
     return result.url;
 });
 exports.getDownloadFileUrlAlternate = getDownloadFileUrlAlternate;

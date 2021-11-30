@@ -2,7 +2,12 @@ import { PodloveWebPlayerEpisode } from "@ribajs/podcast";
 
 import { chapters } from "./chapters";
 import { transcripts } from "./transcripts";
-import { alexanderHeimbuch, michaelaLehr, ericTeubert, simon } from "../contributors/index";
+import {
+  alexanderHeimbuch,
+  michaelaLehr,
+  ericTeubert,
+  simon,
+} from "../contributors/index";
 import { show } from "../show";
 
 /**
@@ -95,9 +100,7 @@ export const episode03: PodloveWebPlayerEpisode = {
    * - (avatar): avatar of the contributor
    * - (group): contributors group
    */
-  contributors: [
-    alexanderHeimbuch, michaelaLehr, ericTeubert, simon
-  ],
+  contributors: [alexanderHeimbuch, michaelaLehr, ericTeubert, simon],
 
   /**
    * Transcripts:

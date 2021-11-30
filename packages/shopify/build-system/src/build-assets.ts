@@ -5,7 +5,7 @@ import gulp from "gulp";
 import plumber from "gulp-plumber";
 import rename from "gulp-rename";
 import chokidar from "chokidar";
-import vinylPaths from "vinyl-paths";
+import { vinylPaths } from "./vinyl-paths";
 import del from "del";
 import size from "gulp-size";
 import print from "gulp-print";
@@ -121,7 +121,7 @@ async function removeAssets(files: string[]) {
   return gulp
     .src(mapFiles)
     .pipe(plumber(errorHandler))
-    .pipe(vinylPaths(del))
+    .pipe(await vinylPaths(del))
     .pipe(
       size({
         showFiles: true,

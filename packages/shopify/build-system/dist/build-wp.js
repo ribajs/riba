@@ -34,7 +34,7 @@ gulp_1.default.task("build:wp:main", (done) => {
     }
     return gulp_1.default
         .src(webpackConfig.entry.main)
-        .pipe(webpack_stream_1.default(webpackConfig, webpack_1.default)) // TODO
+        .pipe((0, webpack_stream_1.default)(webpackConfig, webpack_1.default)) // TODO
         .pipe(gulp_1.default.dest(config_1.config.dist.assets))
         .on("end", done);
 });
@@ -47,7 +47,7 @@ gulp_1.default.task("watch:wp:main", (done) => {
     webpackConfig.watch = true;
     return gulp_1.default
         .src(webpackConfig.entry.main)
-        .pipe(webpack_stream_1.default(webpackConfig, webpack_1.default)) // TODO
+        .pipe((0, webpack_stream_1.default)(webpackConfig, webpack_1.default)) // TODO
         .pipe(gulp_1.default.dest(config_1.config.dist.assets))
         .on("end", done);
 });
@@ -60,7 +60,7 @@ gulp_1.default.task("build:wp:checkout", (done) => {
     }
     return gulp_1.default
         .src(webpackCheckoutConfig.entry.checkout)
-        .pipe(webpack_stream_1.default(webpackCheckoutConfig, webpack_1.default)) // TODO
+        .pipe((0, webpack_stream_1.default)(webpackCheckoutConfig, webpack_1.default)) // TODO
         .pipe(gulp_1.default.dest(config_1.config.dist.assets))
         .on("end", done);
 });
@@ -74,7 +74,7 @@ gulp_1.default.task("watch:wp:checkout", (done) => {
     webpackCheckoutConfig.watch = true;
     return gulp_1.default
         .src(webpackCheckoutConfig.entry.checkout)
-        .pipe(webpack_stream_1.default(webpackCheckoutConfig, webpack_1.default)) // TODO
+        .pipe((0, webpack_stream_1.default)(webpackCheckoutConfig, webpack_1.default)) // TODO
         .pipe(gulp_1.default.dest(config_1.config.dist.assets))
         .on("end", done);
 });

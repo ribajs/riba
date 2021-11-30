@@ -21,14 +21,14 @@ const gulp_util_1 = __importDefault(require("gulp-util"));
 const compressForStore = (envKey, settingsData, zipFilename) => __awaiter(void 0, void 0, void 0, function* () {
     yield fs_1.promises.mkdir(config_1.config.upload, { recursive: true });
     if (!zipFilename) {
-        zipFilename = config_1.getReleaseZipFilename(envKey);
+        zipFilename = (0, config_1.getReleaseZipFilename)(envKey);
     }
-    const archive = archiver_1.default("zip");
+    const archive = (0, archiver_1.default)("zip");
     const include = "**/*";
     const distPath = path_1.default.resolve(config_1.config.themeRoot, config_1.config.dist.root);
     const ignore = "config.yml";
     const zipPath = path_1.default.resolve(config_1.config.upload, zipFilename);
-    const archiveOutput = fs_1.createWriteStream(zipPath);
+    const archiveOutput = (0, fs_1.createWriteStream)(zipPath);
     // archiveOutput.on("close", function () {
     //   gutil.log(`[${envKey}] ${archive.pointer()} total bytes`);
     //   gutil.log(

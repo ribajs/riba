@@ -145,7 +145,7 @@ export class RouterViewComponent extends Component {
     if (viewId !== this.scope.id) {
       return;
     }
-    this.setTransitionClass('init');
+    this.setTransitionClass("init");
   }
 
   protected async onTransitionCompleted(viewId: string) {
@@ -154,7 +154,7 @@ export class RouterViewComponent extends Component {
       return;
     }
 
-    this.setTransitionClass('complete');
+    this.setTransitionClass("complete");
 
     if (this.scope.scrollToAnchorHash) {
       let scrollToElement: HTMLElement | null = null;
@@ -165,7 +165,11 @@ export class RouterViewComponent extends Component {
         );
         // Scroll to Anchor of hash
         if (scrollToElement) {
-          return await scrollTo(scrollToElement, this.scope.scrollToAnchorOffset, window);
+          return await scrollTo(
+            scrollToElement,
+            this.scope.scrollToAnchorOffset,
+            window
+          );
         }
       }
     }
@@ -175,9 +179,9 @@ export class RouterViewComponent extends Component {
     }
   }
 
-  protected setTransitionClass(state: 'init' | 'complete') {
-    this.classList.remove('transition-init');
-    this.classList.remove('transition-complete');
+  protected setTransitionClass(state: "init" | "complete") {
+    this.classList.remove("transition-init");
+    this.classList.remove("transition-complete");
     this.classList.add(`transition-${state}`);
   }
 

@@ -110,7 +110,7 @@ gulp_1.default.task("validate:id", () => __awaiter(void 0, void 0, void 0, funct
         }
         promises.push(factory);
     });
-    return utilities_1.promiseSeries(promises).catch((result) => {
+    return (0, utilities_1.promiseSeries)(promises).catch((result) => {
         // stop process to prevent deploy defaulting to published theme
         messages_1.default.invalidThemeId(result.themeId, result.environment);
         return process.exit(2);
@@ -130,7 +130,7 @@ gulp_1.default.task("deploy:replace", () => __awaiter(void 0, void 0, void 0, fu
         }
         promises.push(factory);
     });
-    return utilities_1.promiseSeries(promises).then(() => {
+    return (0, utilities_1.promiseSeries)(promises).then(() => {
         return messages_1.default.allDeploysComplete();
     });
 }));
@@ -146,16 +146,16 @@ gulp_1.default.task("open:admin", () => __awaiter(void 0, void 0, void 0, functi
     environments.forEach((environment) => {
         function factory() {
             envObj = tkConfig[environment];
-            return open_1.default(`https://${envObj.store}/admin/themes`);
+            return (0, open_1.default)(`https://${envObj.store}/admin/themes`);
         }
         promises.push(factory);
     });
-    return utilities_1.promiseSeries(promises);
+    return (0, utilities_1.promiseSeries)(promises);
 }));
 /**
  * Opens the Zip file in the file browser
  */
 gulp_1.default.task("open:zip", () => {
-    return open_1.default("upload");
+    return (0, open_1.default)("upload");
 });
 //# sourceMappingURL=deploy-utils.js.map

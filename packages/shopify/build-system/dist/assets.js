@@ -18,24 +18,24 @@ const config_1 = require("./includes/config");
 const assets_1 = require("./includes/assets");
 require("./release"); // Imports the generate:config:live task
 gulp_1.default.task("assets:list:live", () => __awaiter(void 0, void 0, void 0, function* () {
-    const liveConfig = config_1.getYamlConfig(config_1.config.liveConfig);
-    const externalScriptsConfig = config_1.getYamlConfig(config_1.config.externalScriptsConfig);
+    const liveConfig = (0, config_1.getYamlConfig)(config_1.config.liveConfig);
+    const externalScriptsConfig = (0, config_1.getYamlConfig)(config_1.config.externalScriptsConfig);
     for (const envKey in externalScriptsConfig) {
         gulp_util_1.default.log(`[${envKey}] "List assets on "${liveConfig[envKey].store}"...`);
         const liveThemeConfig = liveConfig[envKey];
-        const assetList = yield assets_1.list(liveThemeConfig);
+        const assetList = yield (0, assets_1.list)(liveThemeConfig);
         gulp_util_1.default.log(assetList);
     }
 }));
 gulp_1.default.task("assets:update:live", () => __awaiter(void 0, void 0, void 0, function* () {
-    const liveConfig = config_1.getYamlConfig(config_1.config.liveConfig);
-    const externalScriptsConfig = config_1.getYamlConfig(config_1.config.externalScriptsConfig);
+    const liveConfig = (0, config_1.getYamlConfig)(config_1.config.liveConfig);
+    const externalScriptsConfig = (0, config_1.getYamlConfig)(config_1.config.externalScriptsConfig);
     for (const envKey in externalScriptsConfig) {
         const liveThemeConfig = liveConfig[envKey];
         const extAssetsConfig = externalScriptsConfig[envKey].assets;
         for (const extAssetConfig of extAssetsConfig) {
             gulp_util_1.default.log(`[${envKey}] "Get "${extAssetConfig.key}" from "${liveConfig[envKey].store}"...`);
-            const extAsset = yield assets_1.updateOrCreate(liveThemeConfig, extAssetConfig);
+            const extAsset = yield (0, assets_1.updateOrCreate)(liveThemeConfig, extAssetConfig);
             gulp_util_1.default.log(extAsset);
         }
     }

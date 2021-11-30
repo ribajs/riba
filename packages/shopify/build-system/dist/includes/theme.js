@@ -42,10 +42,10 @@ const getStoreThemes = (themeConfig) => __awaiter(void 0, void 0, void 0, functi
     for (const theme of themes) {
         theme.store = store;
         if (theme.created_at) {
-            theme.created_at_moment = moment_1.default(theme.created_at);
+            theme.created_at_moment = (0, moment_1.default)(theme.created_at);
         }
         if (theme.updated_at) {
-            theme.updated_at_moment = moment_1.default(theme.updated_at);
+            theme.updated_at_moment = (0, moment_1.default)(theme.updated_at);
         }
     }
     return themes;
@@ -53,11 +53,11 @@ const getStoreThemes = (themeConfig) => __awaiter(void 0, void 0, void 0, functi
 exports.getStoreThemes = getStoreThemes;
 const getStoresThemes = () => __awaiter(void 0, void 0, void 0, function* () {
     const themesByEnv = {};
-    const shopifyConfigs = config_1.getYamlConfig(config_1.config.deployConfig);
+    const shopifyConfigs = (0, config_1.getYamlConfig)(config_1.config.deployConfig);
     for (const envKey in shopifyConfigs) {
         if (shopifyConfigs[envKey]) {
             const themeConfig = shopifyConfigs[envKey];
-            const themes = yield exports.getStoreThemes(themeConfig);
+            const themes = yield (0, exports.getStoreThemes)(themeConfig);
             themesByEnv[envKey] = themes;
         }
     }
@@ -65,7 +65,7 @@ const getStoresThemes = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.getStoresThemes = getStoresThemes;
 const getStoresThemesByRole = (role) => __awaiter(void 0, void 0, void 0, function* () {
-    const envThemes = yield exports.getStoresThemes();
+    const envThemes = yield (0, exports.getStoresThemes)();
     for (const envKey in envThemes) {
         if (envThemes[envKey]) {
             let themes = envThemes[envKey];
@@ -91,7 +91,7 @@ const createStoreTheme = (themeConfig, themeName, zipSrc) => __awaiter(void 0, v
 });
 exports.createStoreTheme = createStoreTheme;
 const getSortedThemesByCreatedDate = (ascending) => __awaiter(void 0, void 0, void 0, function* () {
-    const envThemes = yield exports.getStoresThemes();
+    const envThemes = yield (0, exports.getStoresThemes)();
     for (const envKey in envThemes) {
         if (envThemes[envKey]) {
             let themes = envThemes[envKey];
@@ -110,7 +110,7 @@ const getSortedThemesByCreatedDate = (ascending) => __awaiter(void 0, void 0, vo
 });
 exports.getSortedThemesByCreatedDate = getSortedThemesByCreatedDate;
 const getOldestEnvTheme = () => __awaiter(void 0, void 0, void 0, function* () {
-    const envThemes = yield exports.getSortedThemesByCreatedDate(true);
+    const envThemes = yield (0, exports.getSortedThemesByCreatedDate)(true);
     const envTheme = {};
     for (const envKey in envThemes) {
         if (envThemes[envKey]) {
@@ -122,7 +122,7 @@ const getOldestEnvTheme = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.getOldestEnvTheme = getOldestEnvTheme;
 const getYoungestEnvTheme = () => __awaiter(void 0, void 0, void 0, function* () {
-    const envThemes = yield exports.getSortedThemesByCreatedDate(false);
+    const envThemes = yield (0, exports.getSortedThemesByCreatedDate)(false);
     const envTheme = {};
     for (const envKey in envThemes) {
         if (envThemes[envKey]) {
@@ -138,7 +138,7 @@ const getEnvSettingsData = (shopifyConfigs) => __awaiter(void 0, void 0, void 0,
     for (const envKey in shopifyConfigs) {
         if (shopifyConfigs[envKey]) {
             const themeConfig = shopifyConfigs[envKey];
-            const settingsData = yield shopify_api_1.getAsset(themeConfig, "config/settings_data.json");
+            const settingsData = yield (0, shopify_api_1.getAsset)(themeConfig, "config/settings_data.json");
             settingsDataEnv[envKey] = settingsData;
         }
     }
@@ -149,8 +149,8 @@ exports.getEnvSettingsData = getEnvSettingsData;
  * Returns an object based on config.deploy.yml but with the current published theme id's
  */
 const generateEnvLiveThemeConfig = (baseConfig) => __awaiter(void 0, void 0, void 0, function* () {
-    const themesByEnv = yield exports.getStoresThemesByRole("main");
-    const shopifyLiveThemeConfigs = Object.assign({}, config_1.getYamlConfig(baseConfig));
+    const themesByEnv = yield (0, exports.getStoresThemesByRole)("main");
+    const shopifyLiveThemeConfigs = Object.assign({}, (0, config_1.getYamlConfig)(baseConfig));
     for (const envKey in shopifyLiveThemeConfigs) {
         shopifyLiveThemeConfigs[envKey].theme_id = themesByEnv[envKey][0].id;
     }
@@ -161,8 +161,8 @@ exports.generateEnvLiveThemeConfig = generateEnvLiveThemeConfig;
  * Returns an object based on the current config.deploy.yml but with the youngest theme id's
  */
 const generateEnvYoungestThemeConfig = (baseConfig) => __awaiter(void 0, void 0, void 0, function* () {
-    const themesByEnv = yield exports.getYoungestEnvTheme();
-    const shopifyLiveThemeConfigs = Object.assign({}, config_1.getYamlConfig(baseConfig));
+    const themesByEnv = yield (0, exports.getYoungestEnvTheme)();
+    const shopifyLiveThemeConfigs = Object.assign({}, (0, config_1.getYamlConfig)(baseConfig));
     for (const envKey in shopifyLiveThemeConfigs) {
         shopifyLiveThemeConfigs[envKey].theme_id = themesByEnv[envKey].id;
     }

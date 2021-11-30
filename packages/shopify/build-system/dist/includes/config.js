@@ -17,8 +17,8 @@ const fs_1 = __importDefault(require("fs"));
 const utilities_1 = require("./utilities");
 const npm_package_1 = require("@ribajs/npm-package");
 const themeRoot = app_root_path_1.default.toString();
-const ribaShopifyRoot = npm_package_1.isAvailable("@ribajs/shopify");
-const ribaShopifyTdaRoot = npm_package_1.isAvailable("@ribajs/shopify-tda");
+const ribaShopifyRoot = (0, npm_package_1.isAvailable)("@ribajs/shopify");
+const ribaShopifyTdaRoot = (0, npm_package_1.isAvailable)("@ribajs/shopify-tda");
 if (!ribaShopifyRoot) {
     throw new Error("You need to install the @ribajs/shopify module!");
 }
@@ -133,7 +133,6 @@ exports.config = {
                 },
                 {
                     name: "removeAttrs",
-                    params: { preserveCurrentColor: true },
                 },
                 {
                     name: "cleanupIDs",

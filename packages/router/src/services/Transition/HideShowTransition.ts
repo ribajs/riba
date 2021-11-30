@@ -26,7 +26,7 @@ export class HideShowTransition extends BaseTransition implements Transition {
     if (this.oldContainer) {
       this.oldContainer.style.display = "none";
     }
-    
+
     if (this.scrollToTop) {
       await scrollToPosition(window, "start", "vertical", "smooth");
     }

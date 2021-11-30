@@ -31,7 +31,7 @@ gulp_1.default.task("generate:config:live", () => __awaiter(void 0, void 0, void
     const baseConfig = config_1.config.deployConfig;
     const targetConfig = config_1.config.liveConfig;
     gulp_util_1.default.log(`Load ${baseConfig} as base config file for store and password...`);
-    const liveConfigs = yield theme_2.generateEnvLiveThemeConfig(baseConfig);
+    const liveConfigs = yield (0, theme_2.generateEnvLiveThemeConfig)(baseConfig);
     const configPath = path_1.default.resolve(config_1.config.themeRoot, targetConfig);
     const yamlConfig = js_yaml_1.default.dump(liveConfigs);
     gulp_util_1.default.log(`Write "${targetConfig}" to ${configPath}...`);
@@ -41,7 +41,7 @@ gulp_1.default.task("generate:config:deploy", () => __awaiter(void 0, void 0, vo
     const baseConfig = config_1.config.deployConfig;
     const targetConfig = config_1.config.deployConfig;
     gulp_util_1.default.log(`Load ${baseConfig} as base config file for store and password...`);
-    const liveConfigs = yield theme_2.generateEnvYoungestThemeConfig(baseConfig);
+    const liveConfigs = yield (0, theme_2.generateEnvYoungestThemeConfig)(baseConfig);
     const configPath = path_1.default.resolve(config_1.config.themeRoot, targetConfig);
     const yamlConfig = js_yaml_1.default.dump(liveConfigs);
     gulp_util_1.default.log(`Overwrite "${targetConfig}" to ${configPath}...`);
@@ -50,24 +50,24 @@ gulp_1.default.task("generate:config:deploy", () => __awaiter(void 0, void 0, vo
 gulp_1.default.task("backup:locale", () => __awaiter(void 0, void 0, void 0, function* () {
     gulp_util_1.default.log(`Load ${config_1.config.liveConfig}...`);
     // copy
-    const liveConfigs = Object.assign({}, config_1.getYamlConfig(config_1.config.liveConfig));
+    const liveConfigs = Object.assign({}, (0, config_1.getYamlConfig)(config_1.config.liveConfig));
     yield fs_1.promises.mkdir(config_1.config.backup, { recursive: true });
     gulp_util_1.default.log(`Get primary locale file of each environment...`);
     for (const envKey in liveConfigs) {
         if (liveConfigs[envKey]) {
             const themeConfig = liveConfigs[envKey];
-            const shopData = yield shopify_api_1.getShop(themeConfig);
+            const shopData = yield (0, shopify_api_1.getShop)(themeConfig);
             const locale = shopData.primary_locale;
             gulp_util_1.default.log(`[${envKey}] locale: ${locale}`);
             let localeData = {};
             let localeFilename = `${locale}.json`;
             try {
-                localeData = yield shopify_api_1.getAsset(themeConfig, `locales/${localeFilename}`);
+                localeData = yield (0, shopify_api_1.getAsset)(themeConfig, `locales/${localeFilename}`);
             }
             catch (error) {
                 try {
                     localeFilename = `${locale}.default.json`;
-                    localeData = yield shopify_api_1.getAsset(themeConfig, `locales/${localeFilename}`);
+                    localeData = yield (0, shopify_api_1.getAsset)(themeConfig, `locales/${localeFilename}`);
                 }
                 catch (error) {
                     console.error(error);
@@ -82,28 +82,28 @@ gulp_1.default.task("backup:locale", () => __awaiter(void 0, void 0, void 0, fun
 gulp_1.default.task("backup:settings_data", () => __awaiter(void 0, void 0, void 0, function* () {
     gulp_util_1.default.log(`Load ${config_1.config.liveConfig}...`);
     // copy
-    const liveConfigs = Object.assign({}, config_1.getYamlConfig(config_1.config.liveConfig));
+    const liveConfigs = Object.assign({}, (0, config_1.getYamlConfig)(config_1.config.liveConfig));
     yield fs_1.promises.mkdir(config_1.config.backup, { recursive: true });
     gulp_util_1.default.log(`Get "config/settings_data.json" of each environment...`);
     for (const envKey in liveConfigs) {
         if (liveConfigs[envKey]) {
             gulp_util_1.default.log(`[${envKey}] Get config/settings_data.json...`);
             const themeConfig = liveConfigs[envKey];
-            const settingsData = yield shopify_api_1.getAsset(themeConfig, "config/settings_data.json");
+            const settingsData = yield (0, shopify_api_1.getAsset)(themeConfig, "config/settings_data.json");
             const writePath = path_1.default.resolve(config_1.config.backup, `${envKey}_settings_data.json`);
             yield fs_1.promises.writeFile(writePath, settingsData.value);
         }
     }
 }));
 gulp_1.default.task("build:zips", () => __awaiter(void 0, void 0, void 0, function* () {
-    const baseConfig = config_1.getYamlConfig(config_1.config.deployConfig);
+    const baseConfig = (0, config_1.getYamlConfig)(config_1.config.deployConfig);
     for (const envKey in baseConfig) {
         if (baseConfig[envKey]) {
             gulp_util_1.default.log(`[${envKey}] Get config/settings_data.json...`);
             gulp_util_1.default.log(`[${envKey}] Get config/settings_data.json...`);
             const settingsDataPath = path_1.default.resolve(config_1.config.backup, `${envKey}_settings_data.json`);
             const settingsData = yield fs_1.promises.readFile(settingsDataPath);
-            yield release_1.compressForStore(envKey, settingsData);
+            yield (0, release_1.compressForStore)(envKey, settingsData);
         }
     }
 }));
@@ -111,21 +111,21 @@ gulp_1.default.task("build:zips", () => __awaiter(void 0, void 0, void 0, functi
  * Uploads the zip files to bitbucket downloads
  */
 gulp_1.default.task("upload:zips", () => __awaiter(void 0, void 0, void 0, function* () {
-    const baseConfig = config_1.getYamlConfig(config_1.config.deployConfig);
+    const baseConfig = (0, config_1.getYamlConfig)(config_1.config.deployConfig);
     for (const envKey in baseConfig) {
         if (baseConfig[envKey]) {
-            const zipFilePath = path_1.default.resolve(config_1.config.upload, config_1.getReleaseZipFilename(envKey));
-            yield upload_1.uploadFile(zipFilePath);
+            const zipFilePath = path_1.default.resolve(config_1.config.upload, (0, config_1.getReleaseZipFilename)(envKey));
+            yield (0, upload_1.uploadFile)(zipFilePath);
         }
     }
 }));
 gulp_1.default.task("deploy:zips", () => __awaiter(void 0, void 0, void 0, function* () {
     const createdThemes = []; //
-    const deployConfig = config_1.getYamlConfig(config_1.config.deployConfig);
-    const themeName = global.themeName || config_1.getReleaseName();
+    const deployConfig = (0, config_1.getYamlConfig)(config_1.config.deployConfig);
+    const themeName = global.themeName || (0, config_1.getReleaseName)();
     for (const envKey in deployConfig) {
-        const filename = config_1.getReleaseZipFilename(envKey);
-        const src = yield upload_1.getDownloadFileUrl(filename);
+        const filename = (0, config_1.getReleaseZipFilename)(envKey);
+        const src = yield (0, upload_1.getDownloadFileUrl)(filename);
         if (!src) {
             gulp_util_1.default.log(gulp_util_1.default.colors.yellow(`Skip deploy zip`));
             return null;
@@ -134,7 +134,7 @@ gulp_1.default.task("deploy:zips", () => __awaiter(void 0, void 0, void 0, funct
         gulp_util_1.default.log(zipFilename);
         gulp_util_1.default.log(`[${envKey}] Deploy "${zipFilename}" as "${themeName}" on "${deployConfig[envKey].store}"...`);
         try {
-            const createdTheme = yield theme_1.createStoreTheme(deployConfig[envKey], themeName, src);
+            const createdTheme = yield (0, theme_1.createStoreTheme)(deployConfig[envKey], themeName, src);
             createdThemes.push(createdTheme);
         }
         catch (error) {
@@ -149,26 +149,26 @@ gulp_1.default.task("deploy:zips", () => __awaiter(void 0, void 0, void 0, funct
 gulp_1.default.task("theme:delete-oldest-on-limit", () => __awaiter(void 0, void 0, void 0, function* () {
     const LIMIT = 100;
     const promises = [];
-    const baseConfig = config_1.getYamlConfig(config_1.config.deployConfig);
+    const baseConfig = (0, config_1.getYamlConfig)(config_1.config.deployConfig);
     for (const envKey in baseConfig) {
-        const themes = yield theme_2.getStoreThemes(baseConfig[envKey]);
+        const themes = yield (0, theme_2.getStoreThemes)(baseConfig[envKey]);
         const count = themes.length;
         gulp_util_1.default.log(`[${envKey}] Count of themes: ${count}/${LIMIT}`);
         if (count >= LIMIT) {
-            const oldestEnvTheme = yield theme_1.getOldestEnvTheme();
+            const oldestEnvTheme = yield (0, theme_1.getOldestEnvTheme)();
             gulp_util_1.default.log(messages_1.default.colorize(`[${envKey}] Are you sure that you want to delete the following theme unrecoverably? (type "yes" or "no")`, "danger"));
-            theme_2.print(envKey, oldestEnvTheme[envKey]);
-            const remove = yield prompts_1.promptYesNo(`[${envKey}] You have reached the maximum limit of themes (${LIMIT}) in your shop "${oldestEnvTheme[envKey].store}", do you want to delete the oldest theme "${oldestEnvTheme[envKey].name}"?`, "danger");
+            (0, theme_2.print)(envKey, oldestEnvTheme[envKey]);
+            const remove = yield (0, prompts_1.promptYesNo)(`[${envKey}] You have reached the maximum limit of themes (${LIMIT}) in your shop "${oldestEnvTheme[envKey].store}", do you want to delete the oldest theme "${oldestEnvTheme[envKey].name}"?`, "danger");
             if (!remove) {
                 return process.exit(0);
             }
-            promises.push(theme_2.remove(baseConfig[envKey], oldestEnvTheme[envKey].id));
+            promises.push((0, theme_2.remove)(baseConfig[envKey], oldestEnvTheme[envKey].id));
         }
     }
     return Promise.all(promises);
 }));
 gulp_1.default.task("theme:name", () => __awaiter(void 0, void 0, void 0, function* () {
-    const name = yield prompts_1.promptInput("What do you want to call this release? (Press enter to accept the default name)", config_1.getReleaseName(), "name", "success");
+    const name = yield (0, prompts_1.promptInput)("What do you want to call this release? (Press enter to accept the default name)", (0, config_1.getReleaseName)(), "name", "success");
     global.themeName = name;
     gulp_util_1.default.log(`Release name: ${global.themeName}`);
     return global.themeName;

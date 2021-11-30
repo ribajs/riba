@@ -66,6 +66,6 @@
     "@ribajs/bs4": "workspace:*",
     "@ribajs/core": "workspace:*",
     "@ribajs/utils": "workspace:*",
-    "bootstrap": "4.6.1"
+    "bootstrap": "^4.6.1"
   }
 }

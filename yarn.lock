@@ -3651,7 +3651,7 @@ __metadata:
     babel-loader: ^8.2.3
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
-    bootstrap: 4.6.1
+    bootstrap: ^4.6.1
     core-js: ^3.19.2
     css-loader: ^6.5.1
     eslint: ^8.3.0
@@ -3713,7 +3713,7 @@ __metadata:
     babel-loader: ^8.2.3
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
-    bootstrap: 4.6.1
+    bootstrap: ^4.6.1
     core-js: ^3.19.2
     css-loader: ^6.5.1
     eslint: ^8.3.0
@@ -3775,7 +3775,7 @@ __metadata:
     babel-loader: ^8.2.3
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
-    bootstrap: 4.6.1
+    bootstrap: ^4.6.1
     copy-webpack-plugin: ^9.1.0
     core-js: ^3.19.2
     css-loader: ^6.5.1
@@ -3836,7 +3836,7 @@ __metadata:
     babel-loader: ^8.2.3
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
-    bootstrap: 4.6.1
+    bootstrap: ^4.6.1
     core-js: ^3.19.2
     css-loader: ^6.5.1
     eslint: ^8.3.0
@@ -3892,7 +3892,7 @@ __metadata:
     babel-loader: ^8.2.3
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
-    bootstrap: 4.6.1
+    bootstrap: ^4.6.1
     copy-webpack-plugin: ^9.1.0
     core-js: ^3.19.2
     css-loader: ^6.5.1
@@ -3948,7 +3948,7 @@ __metadata:
     babel-loader: ^8.2.3
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
-    bootstrap: 4.6.1
+    bootstrap: ^4.6.1
     core-js: ^3.19.2
     css-loader: ^6.5.1
     eslint: ^8.3.0
@@ -4007,7 +4007,7 @@ __metadata:
     babel-loader: ^8.2.3
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
-    bootstrap: 4.6.1
+    bootstrap: ^4.6.1
     core-js: ^3.19.2
     css-loader: ^6.5.1
     eslint: ^8.3.0
@@ -4072,7 +4072,7 @@ __metadata:
     babel-loader: ^8.2.3
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
-    bootstrap: 4.6.1
+    bootstrap: ^4.6.1
     core-js: ^3.19.2
     css-loader: ^6.5.1
     eslint: ^8.3.0
@@ -5759,6 +5759,8 @@ __metadata:
     express: ^4.17.1
     express-session: ^1.17.2
     jest: ^27.4.1
+    jest-config: ^27.4.1
+    jest-extended: ^1.2.0
     prettier: 2.5.0
     pug: ^3.0.2
     reflect-metadata: ^0.1.13
@@ -5870,6 +5872,8 @@ __metadata:
     express: ^4.17.1
     express-session: ^1.17.2
     jest: ^27.4.1
+    jest-config: ^27.4.1
+    jest-extended: ^1.2.0
     jsdom: ^18.1.1
     prettier: 2.5.0
     pug: ^3.0.2
@@ -6024,6 +6028,8 @@ __metadata:
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     jest: ^27.4.1
+    jest-config: ^27.4.1
+    jest-extended: ^1.2.0
     jquery: ^3.6.0
     prettier: 2.5.0
     ts-jest: ^27.0.7
@@ -6235,6 +6241,8 @@ __metadata:
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     jest: ^27.4.1
+    jest-config: ^27.4.1
+    jest-extended: ^1.2.0
     lunr: ^2.3.9
     prettier: 2.5.0
     reflect-metadata: ^0.1.13
@@ -6292,6 +6300,8 @@ __metadata:
     express: ^4.17.1
     express-session: ^1.17.2
     jest: ^27.4.1
+    jest-config: ^27.4.1
+    jest-extended: ^1.2.0
     jsdom: ^18.1.1
     node-fetch: ^2.6.6
     path-to-regexp: ^6.2.0
@@ -11381,7 +11391,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bootstrap@npm:4.6.1, bootstrap@npm:^4.6.1":
+"bootstrap@npm:^4.6.1":
   version: 4.6.1
   resolution: "bootstrap@npm:4.6.1"
   peerDependencies:
@@ -25782,7 +25792,9 @@ fsevents@~2.3.1:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3

@@ -38,7 +38,7 @@ const asnycTimeout = (ms) => __awaiter(void 0, void 0, void 0, function* () {
 exports.asnycTimeout = asnycTimeout;
 // https://stackoverflow.com/a/33292942/1465919
 const asyncSleep = (fn, ...args) => __awaiter(void 0, void 0, void 0, function* () {
-    yield exports.asnycTimeout(3000);
+    yield (0, exports.asnycTimeout)(3000);
     return fn(...args);
 });
 exports.asyncSleep = asyncSleep;

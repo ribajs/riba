@@ -18,12 +18,12 @@ const processConfig = (file) => {
     messages_1.default.logProcessFiles("build:config");
     return gulp_1.default
         .src(file, { allowEmpty: true })
-        .pipe(gulp_plumber_1.default(utilities_1.errorHandler))
-        .pipe(gulp_size_1.default({
+        .pipe((0, gulp_plumber_1.default)(utilities_1.errorHandler))
+        .pipe((0, gulp_size_1.default)({
         showFiles: true,
         pretty: true,
     }))
-        .pipe(gulp_rename_1.default("config.yml"))
+        .pipe((0, gulp_rename_1.default)("config.yml"))
         .pipe(gulp_1.default.dest(config_1.config.dist.root));
 };
 /**

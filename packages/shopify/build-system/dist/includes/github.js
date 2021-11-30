@@ -24,7 +24,7 @@ const config_1 = require("./config");
  * @param filename
  */
 const getRelease = (filename) => __awaiter(void 0, void 0, void 0, function* () {
-    const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
+    const releaseConfig = (0, config_1.getYamlConfig)(config_1.config.releaseConfig);
     const octokit = new rest_1.Octokit({
         auth: releaseConfig.github.token,
     });
@@ -44,7 +44,7 @@ exports.getRelease = getRelease;
  * @param filename
  */
 const createRelease = (filename) => __awaiter(void 0, void 0, void 0, function* () {
-    const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
+    const releaseConfig = (0, config_1.getYamlConfig)(config_1.config.releaseConfig);
     const octokit = new rest_1.Octokit({
         auth: releaseConfig.github.token,
     });
@@ -68,19 +68,19 @@ const createRelease = (filename) => __awaiter(void 0, void 0, void 0, function* 
 });
 exports.createRelease = createRelease;
 const uploadFile = (filePath) => __awaiter(void 0, void 0, void 0, function* () {
-    const releaseConfig = config_1.getYamlConfig(config_1.config.releaseConfig);
+    const releaseConfig = (0, config_1.getYamlConfig)(config_1.config.releaseConfig);
     const octokit = new rest_1.Octokit({
         auth: releaseConfig.github.token,
     });
     const filename = path_1.default.basename(filePath);
-    const existingRelease = yield exports.getRelease(filename);
+    const existingRelease = yield (0, exports.getRelease)(filename);
     gulp_util_1.default.log(`Upload ${filename} to github...`);
     let releaseID;
     if (existingRelease) {
         releaseID = existingRelease.data.id;
     }
     else {
-        const newRelease = yield exports.createRelease(filename);
+        const newRelease = yield (0, exports.createRelease)(filename);
         releaseID = newRelease.data.id;
     }
     return octokit.repos.uploadReleaseAsset({

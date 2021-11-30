@@ -24,7 +24,7 @@ const themekit_1 = __importDefault(require("@shopify/themekit"));
 const config_1 = require("./includes/config");
 const utilities_js_1 = require("./includes/utilities.js");
 const messages_js_1 = __importDefault(require("./includes/messages.js"));
-const cache = utilities_js_1.createEventCache();
+const cache = (0, utilities_js_1.createEventCache)();
 const environment = config_1.config.environment.split(/\s*,\s*|\s+/)[0];
 let activeDeploy = false;
 let deploy = null;
@@ -90,7 +90,7 @@ deploy = function async(cmd, files, env) {
  * @static
  */
 gulp_1.default.task("watch:src", gulp_1.default.parallel("watch:assets", "watch:assets:riba-shopify", "watch:assets:riba-shopify-tda", "watch:config", 
-// TODO fixme
+// TODO Fix endless change loop
 // "watch:svg:snippet",
 // "watch:svg:asset",
 "watch:wp"));

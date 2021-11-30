@@ -19,6 +19,6 @@ const utilities_1 = require("./includes/utilities");
  * This task will only be run for the build and zip tasks.
  */
 gulp_1.default.task("output:errors", () => __awaiter(void 0, void 0, void 0, function* () {
-    return utilities_1.outputErrors();
+    return (0, utilities_1.outputErrors)();
 }));
 //# sourceMappingURL=output.js.map

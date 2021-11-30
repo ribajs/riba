@@ -15,7 +15,7 @@ const config_1 = require("./includes/config");
 gulp_1.default.task("build:schema", () => {
     return gulp_1.default
         .src(config_1.config.src.schema)
-        .pipe(gulp_jsoncombine_1.default("settings_schema.json", (data) => {
+        .pipe((0, gulp_jsoncombine_1.default)("settings_schema.json", (data) => {
         const data_array = [];
         console.debug("data", data);
         for (const file of Object.keys(data)) {

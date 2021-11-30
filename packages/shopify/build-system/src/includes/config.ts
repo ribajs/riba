@@ -141,7 +141,6 @@ export const config: Config = {
         },
         {
           name: "removeAttrs",
-          params: { preserveCurrentColor: true },
         },
         {
           name: "cleanupIDs",

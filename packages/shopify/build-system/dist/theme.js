@@ -15,25 +15,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const gulp_1 = __importDefault(require("gulp"));
 const theme_1 = require("./includes/theme");
 gulp_1.default.task("themes:list:live", () => __awaiter(void 0, void 0, void 0, function* () {
-    const themesByEnv = yield theme_1.getStoresThemesByRole("main");
+    const themesByEnv = yield (0, theme_1.getStoresThemesByRole)("main");
     for (const env in themesByEnv) {
         const theme = themesByEnv[env][0];
-        theme_1.print(env, theme);
+        (0, theme_1.print)(env, theme);
         // console.log(theme);
     }
 }));
 gulp_1.default.task("themes:list:oldest", () => __awaiter(void 0, void 0, void 0, function* () {
-    const themesByEnv = yield theme_1.getOldestEnvTheme();
+    const themesByEnv = yield (0, theme_1.getOldestEnvTheme)();
     for (const env in themesByEnv) {
         const theme = themesByEnv[env];
-        theme_1.print(env, theme);
+        (0, theme_1.print)(env, theme);
     }
 }));
 gulp_1.default.task("themes:list:youngest", () => __awaiter(void 0, void 0, void 0, function* () {
-    const themesByEnv = yield theme_1.getYoungestEnvTheme();
+    const themesByEnv = yield (0, theme_1.getYoungestEnvTheme)();
     for (const env in themesByEnv) {
         const theme = themesByEnv[env];
-        theme_1.print(env, theme);
+        (0, theme_1.print)(env, theme);
     }
 }));
 //# sourceMappingURL=theme.js.map

@@ -30,8 +30,6 @@ const SLIDESHOW_INNER_SELECTOR = ".slideshow-row";
 
 const SLIDES_SELECTOR = `${SLIDESHOW_INNER_SELECTOR} .slide`;
 
-
-
 export class Bs5SlideshowComponent extends TemplatesComponent {
   protected resizeObserver?: ResizeObserver;
   protected bs5: Bs5Service;
@@ -97,30 +95,31 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     ) as (keyof Bs5SlideshowComponentResponsiveOptions)[];
   }
 
-  protected _defaultBreakpointOptions: Bs5SlideshowComponentResponsiveOptions = {
-    // Options
-    slidesToScroll: 1,
-    controls: true,
-    controlsPosition: "inside-middle",
-    pauseOnHover: true,
-    sticky: false,
-    indicators: true,
-    indicatorsPosition: "inside-bottom",
-    pause: false,
-    drag: true,
-    touchScroll: true,
-    autoplay: false,
-    autoplayInterval: 0,
-    autoplayVelocity: 0.8,
-    controlPrevIconSrc: "",
-    controlNextIconSrc: "",
-    indicatorActiveIconSrc: "",
-    indicatorInactiveIconSrc: "",
-    angle: "horizontal",
-    breakpoint: 0,
-    name: "xs",
-    infinite: true,
-  };
+  protected _defaultBreakpointOptions: Bs5SlideshowComponentResponsiveOptions =
+    {
+      // Options
+      slidesToScroll: 1,
+      controls: true,
+      controlsPosition: "inside-middle",
+      pauseOnHover: true,
+      sticky: false,
+      indicators: true,
+      indicatorsPosition: "inside-bottom",
+      pause: false,
+      drag: true,
+      touchScroll: true,
+      autoplay: false,
+      autoplayInterval: 0,
+      autoplayVelocity: 0.8,
+      controlPrevIconSrc: "",
+      controlNextIconSrc: "",
+      indicatorActiveIconSrc: "",
+      indicatorInactiveIconSrc: "",
+      angle: "horizontal",
+      breakpoint: 0,
+      name: "xs",
+      infinite: true,
+    };
 
   protected getDefaultBreakpointOptions() {
     return clone(true, this._defaultBreakpointOptions);
@@ -1011,7 +1010,9 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     newValue: any,
     namespace: string | null
   ) {
-    let responsiveAttributeName: keyof Bs5SlideshowComponentResponsiveOptions | null = null;
+    let responsiveAttributeName:
+      | keyof Bs5SlideshowComponentResponsiveOptions
+      | null = null;
 
     if (
       this.observedAttributesToCheck &&

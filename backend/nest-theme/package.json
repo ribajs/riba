@@ -73,6 +73,8 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^27.4.1",
+    "jest-config": "^27.4.1",
+    "jest-extended": "^1.2.0",
     "prettier": "2.5.0",
     "rimraf": "^3.0.2",
     "supertest": "^6.1.6",
