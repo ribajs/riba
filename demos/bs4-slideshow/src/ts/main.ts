@@ -8,9 +8,9 @@ const riba = new Riba();
 const model = {};
 
 // Register modules
-riba.module.regist(coreModule);
-riba.module.regist(extrasModule);
-riba.module.regist(SlideshowDemoModule);
+riba.module.regist(coreModule.init());
+riba.module.regist(extrasModule.init());
+riba.module.regist(SlideshowDemoModule.init());
 riba.module.component.regists([Bs4SlideshowComponent, Bs4IconComponent]);
 
 riba.bind(document.body, model);

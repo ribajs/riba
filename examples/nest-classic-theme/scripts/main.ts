@@ -30,12 +30,12 @@ export class MainApp {
     this.riba.module.formatter.regists(formatters);
 
     // Regist modules
-    this.riba.module.regist(coreModule);
-    this.riba.module.regist(routerModule);
+    this.riba.module.regist(coreModule.init());
+    this.riba.module.regist(routerModule.init());
     this.riba.module.regist(
       i18nModule.init({ localesService: this.localesService })
     );
-    this.riba.module.regist(bs4Module);
+    this.riba.module.regist(bs4Module.init());
 
     this.view = this.riba.bind(document.body, this.model);
   }

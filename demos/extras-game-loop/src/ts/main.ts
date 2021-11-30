@@ -6,7 +6,7 @@ const riba = new Riba();
 const model = {};
 
 // Register modules
-riba.module.regist(coreModule);
-riba.module.regist(ExtrasGameLoopModule);
+riba.module.regist(coreModule.init());
+riba.module.regist(ExtrasGameLoopModule.init());
 
 riba.bind(document.body, model);

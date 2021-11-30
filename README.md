@@ -20,7 +20,7 @@ cd riba/demos/core-each-item # replace core-each-item with a demo of your choice
 yarn run start
 ```
 
-## Exmaples
+## Examples
 
 There are a few Riba projects you can take a look at:
 

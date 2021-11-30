@@ -3629,11 +3629,14 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs4": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
@@ -3689,11 +3692,14 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs4": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
@@ -3751,11 +3757,14 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs4": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
@@ -3813,11 +3822,14 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs4": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
@@ -3873,13 +3885,17 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs4": "workspace:*"
     "@ribajs/core": "workspace:*"
+    "@ribajs/eslint-config": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
@@ -3929,13 +3945,17 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs4": "workspace:*"
     "@ribajs/core": "workspace:*"
+    "@ribajs/eslint-config": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
@@ -3983,11 +4003,14 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs4": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
@@ -4049,11 +4072,14 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs4": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
@@ -4110,11 +4136,14 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs5": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
@@ -4170,17 +4199,19 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs5": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
     "@ribajs/extras": "workspace:*"
     "@ribajs/iconset": "workspace:*"
-    "@ribajs/postcss-config": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
@@ -4232,11 +4263,14 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs5": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
@@ -4295,11 +4329,14 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs5": "workspace:*"
     "@ribajs/bs5-photoswipe": "workspace:*"
     "@ribajs/core": "workspace:*"
@@ -4360,11 +4397,14 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs5": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
@@ -4420,11 +4460,14 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs5": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
@@ -4486,11 +4529,14 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs5": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
@@ -4547,11 +4593,14 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs5": "workspace:*"
     "@ribajs/content-slider": "workspace:*"
     "@ribajs/core": "workspace:*"
@@ -4609,7 +4658,9 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
@@ -4669,11 +4720,14 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
@@ -4728,11 +4782,14 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/empty-template": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
@@ -4786,12 +4843,16 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/core": "workspace:*"
+    "@ribajs/eslint-config": "workspace:*"
     "@ribajs/extras": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
@@ -4840,7 +4901,9 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
@@ -4848,6 +4911,7 @@ __metadata:
     "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs5": "workspace:*"
     "@ribajs/core": "workspace:*"
+    "@ribajs/eslint-config": "workspace:*"
     "@ribajs/extras": "workspace:*"
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
@@ -4896,11 +4960,14 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs4": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
@@ -4956,11 +5023,14 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs4": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
@@ -5016,11 +5086,14 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs5": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
@@ -5077,12 +5150,15 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
-    "@ribajs/bs4": "workspace:*"
+    "@ribajs/babel-config": "workspace:*"
+    "@ribajs/bs5": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
     "@ribajs/extras": "workspace:*"
@@ -5142,11 +5218,14 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs5": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
@@ -5202,11 +5281,14 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs4": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
@@ -5322,11 +5404,14 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs5": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
@@ -5386,11 +5471,14 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs4": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
@@ -5450,11 +5538,14 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3
     "@babel/runtime-corejs3": ^7.16.3
+    "@ribajs/babel-config": "workspace:*"
     "@ribajs/bs5": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
@@ -5511,7 +5602,9 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.0
     "@babel/plugin-proposal-optional-chaining": ^7.16.0
     "@babel/plugin-syntax-export-default-from": ^7.16.0
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
     "@babel/plugin-transform-runtime": ^7.16.4
+    "@babel/plugin-transform-typescript": ^7.16.1
     "@babel/preset-env": ^7.16.4
     "@babel/preset-typescript": ^7.16.0
     "@babel/runtime": ^7.16.3

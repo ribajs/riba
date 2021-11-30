@@ -6,8 +6,8 @@ const riba = new Riba();
 const model = {};
 
 // Register modules
-riba.module.regist(coreModule);
-riba.module.regist(extrasModule);
-riba.module.regist(touchEventsModule);
+riba.module.regist(coreModule.init());
+riba.module.regist(extrasModule.init());
+riba.module.regist(touchEventsModule.init());
 
 riba.bind(document.body, model);

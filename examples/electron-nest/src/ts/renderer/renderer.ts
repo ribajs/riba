@@ -14,9 +14,9 @@ const riba = new Riba();
 const model = {};
 
 // Register modules
-riba.module.regist(coreModule);
-riba.module.regist(bs4Module);
-riba.module.regist(extrasModule);
+riba.module.regist(coreModule.init());
+riba.module.regist(bs4Module.init());
+riba.module.regist(extrasModule.init());
 
 // Register custom components
 riba.module.component.regists(CustomComponents);

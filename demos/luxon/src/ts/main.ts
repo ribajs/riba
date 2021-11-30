@@ -6,8 +6,8 @@ const riba = new Riba();
 const model = {};
 
 // Register modules
-riba.module.regist(coreModule);
-riba.module.regist(luxonModule);
-riba.module.regist(LuxonDemoModule);
+riba.module.regist(coreModule.init());
+riba.module.regist(luxonModule.init());
+riba.module.regist(LuxonDemoModule.init());
 
 riba.bind(document.body, model);

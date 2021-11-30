@@ -9,9 +9,9 @@ const riba = new Riba();
 const model = {};
 
 // Register modules
-riba.module.regist(coreModule);
+riba.module.regist(coreModule.init());
 riba.module.regist(bs5Module.init({}));
-riba.module.regist(extrasModule);
-riba.module.regist(Bs5TaggedImageDemoModule);
+riba.module.regist(extrasModule.init());
+riba.module.regist(Bs5TaggedImageDemoModule.init());
 
 riba.bind(document.body, model);

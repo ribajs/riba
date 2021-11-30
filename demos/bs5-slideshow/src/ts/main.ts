@@ -13,9 +13,9 @@ const model = {};
 Bs5Service.setSingleton();
 
 // Register modules
-riba.module.regist(coreModule);
-riba.module.regist(extrasModule);
-riba.module.regist(SlideshowDemoModule);
+riba.module.regist(coreModule.init());
+riba.module.regist(extrasModule.init());
+riba.module.regist(SlideshowDemoModule.init());
 riba.module.component.regists([Bs5SlideshowComponent, Bs5IconComponent]);
 
 riba.bind(document.body, model);

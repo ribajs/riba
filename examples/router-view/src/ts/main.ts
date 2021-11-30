@@ -7,9 +7,9 @@ const riba = new Riba();
 const model = {};
 
 // Register modules
-riba.module.regist(coreModule);
-riba.module.regist(routerModule);
-riba.module.regist(bs4Module);
-riba.module.regist(RouterViewDemoModule);
+riba.module.regist(coreModule.init());
+riba.module.regist(routerModule.init());
+riba.module.regist(bs4Module.init());
+riba.module.regist(RouterViewDemoModule.init());
 
 riba.bind(document.body, model);

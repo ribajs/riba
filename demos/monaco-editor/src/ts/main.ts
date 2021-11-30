@@ -8,10 +8,10 @@ const riba = new Riba();
 const model = {};
 
 // Register modules
-riba.module.regist(coreModule);
-riba.module.regist(bs5Module);
-riba.module.regist(extrasModule);
-riba.module.regist(monacoEditorModule);
-riba.module.regist(MonacoDemoModule);
+riba.module.regist(coreModule.init());
+riba.module.regist(bs5Module.init());
+riba.module.regist(extrasModule.init());
+riba.module.regist(monacoEditorModule.init());
+riba.module.regist(MonacoDemoModule.init());
 
 riba.bind(document.body, model);

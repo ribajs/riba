@@ -35,8 +35,8 @@ riba.module.formatter.regists(formatters);
 // riba.module.regist(i18nModule.init({ localesService }));
 
 // Regist modules
-riba.module.regist(coreModule);
-riba.module.regist(SSRModule);
+riba.module.regist(coreModule.init());
+riba.module.regist(SSRModule.init());
 
 console.log("Hello from Riba");
 

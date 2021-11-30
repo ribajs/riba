@@ -9,10 +9,10 @@ riba.configure({});
 const model = {};
 
 // Register modules
-riba.module.regist(coreModule);
-riba.module.regist(bs4Module);
-riba.module.regist(extrasModule);
-riba.module.regist(photoswipeModule);
-riba.module.regist(PhotoswipeDemoModule);
+riba.module.regist(coreModule.init());
+riba.module.regist(bs4Module.init());
+riba.module.regist(extrasModule.init());
+riba.module.regist(photoswipeModule.init());
+riba.module.regist(PhotoswipeDemoModule.init());
 
 riba.bind(document.body, model);

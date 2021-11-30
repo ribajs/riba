@@ -8,10 +8,10 @@ const riba = new Riba();
 const model = {};
 
 // Register modules
-riba.module.regist(coreModule);
+riba.module.regist(coreModule.init());
 riba.module.regist(bs5Module.init({}));
-riba.module.regist(extrasModule);
-riba.module.regist(contentSliderModule);
-riba.module.regist(ContentSliderDemoModule);
+riba.module.regist(extrasModule.init());
+riba.module.regist(contentSliderModule.init());
+riba.module.regist(ContentSliderDemoModule.init());
 
 riba.bind(document.body, model);
