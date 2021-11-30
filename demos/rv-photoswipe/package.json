@@ -82,6 +82,6 @@
     "@ribajs/iconset": "workspace:*",
     "@ribajs/photoswipe": "workspace:*",
     "@ribajs/utils": "workspace:*",
-    "bootstrap": "5.1.3"
+    "bootstrap": "^4.6.1"
   }
 }
