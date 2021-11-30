@@ -1,4 +1,4 @@
-import { Binder } from "@ribajs/core";
+import { BinderDeprecated } from "@ribajs/core";
 import { debounce } from "@ribajs/utils/src/control";
 
 const DEFAULT_OFFSET = 10;
@@ -14,7 +14,7 @@ const DEFAULT_OFFSET = 10;
  * ```
  * @see https://css-tricks.com/styling-based-on-scroll-position/
  */
-export const dataScrollPositionYBinder: Binder<string> = {
+export const dataScrollPositionYBinder: BinderDeprecated<string> = {
   name: "data-scroll-position-y",
   customData: {},
   bind() {

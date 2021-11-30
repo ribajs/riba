@@ -1,4 +1,4 @@
-import { Binder } from "@ribajs/core";
+import { BinderDeprecated } from "@ribajs/core";
 import imagesLoaded from "imagesloaded";
 
 /**
@@ -9,7 +9,7 @@ import imagesLoaded from "imagesloaded";
  * * load-fail - Triggered after all images have been loaded with at least one broken image.
  * * load-progress - Triggered after each image has been loaded.
  */
-export const imageEventsBinder: Binder<string> = {
+export const imageEventsBinder: BinderDeprecated<string> = {
   name: "image-events",
   bind(el) {
     if (!this.customData) {

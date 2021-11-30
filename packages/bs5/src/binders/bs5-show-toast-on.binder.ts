@@ -1,8 +1,8 @@
-import { Binder } from "@ribajs/core";
+import { BinderDeprecated } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { ToastNotification } from "@ribajs/bs5";
 
-export const showToastOnEventBinder: Binder<ToastNotification> = {
+export const showToastOnEventBinder: BinderDeprecated<ToastNotification> = {
   name: "show-toast-on-*",
   bind(el: HTMLUnknownElement) {
     this.customData = {

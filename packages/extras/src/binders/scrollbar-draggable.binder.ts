@@ -1,10 +1,10 @@
-import { Binder } from "@ribajs/core";
+import { BinderDeprecated } from "@ribajs/core";
 import { Dragscroll, DragscrollOptions } from "../services/dragscroll.service";
 
 /**
  * dragscroll
  */
-export const scrollbarDraggableBinder: Binder<DragscrollOptions> = {
+export const scrollbarDraggableBinder: BinderDeprecated<DragscrollOptions> = {
   name: "scrollbar-draggable",
   routine(el: HTMLElement, options: DragscrollOptions) {
     this.customData = this.customData || {};

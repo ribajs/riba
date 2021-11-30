@@ -1,11 +1,11 @@
-import { Binder } from "@ribajs/core";
+import { BinderDeprecated } from "@ribajs/core";
 // import { CollapseService } from '../services/collapse.service';
 import { CollapseService } from "../services/collapse.service";
 
 /**
  * @deprecated
  */
-export const collapseBinder: Binder<string> = {
+export const collapseBinder: BinderDeprecated<string> = {
   name: "bs4-collapse",
   bind() {
     console.warn(

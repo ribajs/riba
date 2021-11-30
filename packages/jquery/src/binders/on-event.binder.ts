@@ -5,7 +5,7 @@ import { JQuery } from "../vendors/jquery.module";
 /**
  * Binds an event handler on the element.
  */
-export const onEventBinder: Binder<eventHandlerFunction> = {
+export const onEventBinder: BinderDeprecated<eventHandlerFunction> = {
   name: "on-*",
   function: true,
   priority: 1000,

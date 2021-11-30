@@ -1,7 +1,7 @@
-import { Binder } from "@ribajs/core";
+import { BinderDeprecated } from "@ribajs/core";
 import { scrollTo } from "@ribajs/utils/src/dom";
 
-export const scrollToOnEventBinder: Binder<string> = {
+export const scrollToOnEventBinder: BinderDeprecated<string> = {
   name: "scroll-to-on-*",
   bind(el: HTMLUnknownElement) {
     this.customData = {

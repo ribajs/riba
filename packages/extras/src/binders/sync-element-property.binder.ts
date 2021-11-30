@@ -1,11 +1,11 @@
-import { Binder } from "@ribajs/core";
+import { BinderDeprecated } from "@ribajs/core";
 import { throttle } from "@ribajs/utils/src/control";
 
 /**
  * Binds an event handler on the element.
  * either `sync-element-width` or `sync-element-height`
  */
-export const syncElementPropertyBinder: Binder<string> = {
+export const syncElementPropertyBinder: BinderDeprecated<string> = {
   name: "sync-element-*",
   function: true,
   priority: 1000,

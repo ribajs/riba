@@ -1,8 +1,8 @@
-import { Binder } from "@ribajs/core";
+import { BinderDeprecated } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { onRoute } from "@ribajs/utils/src/url";
 
-export const routeClassStarBinder: Binder<string> = {
+export const routeClassStarBinder: BinderDeprecated<string> = {
   name: "route-class-*",
 
   bind(/*el: HTMLUnknownElement*/) {

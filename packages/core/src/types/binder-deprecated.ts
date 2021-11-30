@@ -1,8 +1,5 @@
 import { Binding } from "../binding";
 
-export interface BindableElement extends HTMLUnknownElement {
-  _bound?: boolean;
-}
 /**
  * A one way or to way binder interface
  * @deprecated

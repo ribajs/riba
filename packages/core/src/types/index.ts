@@ -5,6 +5,7 @@ export * from "./any-constructor";
 export * from "./any-service";
 export * from "./any-singleton";
 export * from "./any-singleton";
+export * from "./bindable-element";
 export * from "./binder-attribute-changed-event";
 export * from "./binder-deprecated";
 export * from "./binders";

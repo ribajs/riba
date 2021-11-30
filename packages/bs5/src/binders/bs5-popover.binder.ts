@@ -3,12 +3,12 @@ import { Popover, PopoverOptions } from "@ribajs/bs5";
 /**
  *
  */
-import { Binder } from "@ribajs/core";
+import { BinderDeprecated } from "@ribajs/core";
 
 /**
  *
  */
-export const popoverBinder: Binder<string> = {
+export const popoverBinder: BinderDeprecated<string> = {
   name: "bs5-popover",
   block: false,
   routine(el: HTMLElement, optionsOrContent: string | PopoverOptions) {

@@ -1,4 +1,4 @@
-import { Binder } from "@ribajs/core";
+import { BinderDeprecated } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 
 export interface Bs4ToggleAttribute extends Binder<boolean> {
@@ -20,7 +20,7 @@ import { TOGGLE_BUTTON, TOGGLE_ATTRIBUTE } from "../constants";
  * * `off`
  * * `on`
  */
-export const toggleAttributeBinder: Binder<string> = {
+export const toggleAttributeBinder: BinderDeprecated<string> = {
   name: "bs4-toggle-attribute-*",
   toggleButtonEvents: null,
   state: "off",

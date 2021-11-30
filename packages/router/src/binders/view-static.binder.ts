@@ -7,7 +7,7 @@ const handleize = handleizeFormatter.read as FormatterFn;
 /**
  * Loads a url with pjax and show them inside the element this binder is used on
  */
-export const viewStaticBinder: Binder<string> = {
+export const viewStaticBinder: BinderDeprecated<string> = {
   name: "view-static",
   block: true,
 

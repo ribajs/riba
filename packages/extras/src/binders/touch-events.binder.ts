@@ -1,7 +1,7 @@
-import { Binder } from "@ribajs/core";
+import { BinderDeprecated } from "@ribajs/core";
 import { TouchEventsService } from "../services/touch-events/touch-events.service";
 
-export const touchEventsBinder: Binder<string> = {
+export const touchEventsBinder: BinderDeprecated<string> = {
   name: "touch-events",
   bind(el) {
     if (!this.customData) {

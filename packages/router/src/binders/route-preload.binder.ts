@@ -1,7 +1,7 @@
-import { Binder } from "@ribajs/core";
+import { BinderDeprecated } from "@ribajs/core";
 import { Pjax } from "@ribajs/router";
 
-export const routePreloadBinder: Binder<string> = {
+export const routePreloadBinder: BinderDeprecated<string> = {
   name: "route-preload",
 
   bind(/*el: HTMLUnknownElement*/) {

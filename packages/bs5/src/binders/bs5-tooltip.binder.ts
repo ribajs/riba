@@ -4,7 +4,7 @@ import { createPopper, Options } from "@popperjs/core";
  *
  * @see https://github.com/twbs/bootstrap/blob/main/js/src/tooltip.js
  */
-import { Binder } from "@ribajs/core";
+import { BinderDeprecated } from "@ribajs/core";
 
 const template = document.createElement("div");
 template.classList.add("tooltip");
@@ -21,7 +21,7 @@ template.appendChild(inner);
 /**
  *
  */
-export const tooltipBinder: Binder<string> = {
+export const tooltipBinder: BinderDeprecated<string> = {
   name: "bs5-tooltip",
   block: false,
   bind(el: HTMLUnknownElement) {

@@ -1,4 +1,4 @@
-import { Binder } from "@ribajs/core";
+import { BinderDeprecated } from "@ribajs/core";
 import { Dropdown } from "../services/dropdown";
 import { Dropdown as BSDropdown } from "bootstrap";
 
@@ -6,7 +6,7 @@ import { Dropdown as BSDropdown } from "bootstrap";
  *
  * @see https://getbootstrap.com/docs/5.0/components/dropdowns/#via-javascript
  */
-export const dropdownBinder: Binder<Partial<BSDropdown.Options>> = {
+export const dropdownBinder: BinderDeprecated<Partial<BSDropdown.Options>> = {
   name: "bs5-dropdown",
   bind(el: HTMLElement) {
     this.customData = {

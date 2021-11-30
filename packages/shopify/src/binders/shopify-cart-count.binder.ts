@@ -1,11 +1,11 @@
-import { Binder } from "@ribajs/core";
+import { BinderDeprecated } from "@ribajs/core";
 import { ShopifyCartService } from "../services";
 import { ShopifyCartObject } from "../interfaces";
 
 /**
  * Sets the shopify items count
  */
-export const shopifyCartCountBinder: Binder<void> = {
+export const shopifyCartCountBinder: BinderDeprecated<void> = {
   name: "shopify-cart-count",
 
   bind(el: HTMLElement) {

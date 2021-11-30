@@ -15,7 +15,7 @@ import { EventDispatcher } from "@ribajs/events";
  * @example
  * <div class="grid" rv-image-events rv-masonry='{ "columnWidth": 200, "itemSelector": ".grid-item" }'>
  */
-export const masonryBinder: Binder<Options> = {
+export const masonryBinder: BinderDeprecated<Options> = {
   name: "masonry",
 
   bind(el: HTMLElement) {

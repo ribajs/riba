@@ -1,4 +1,4 @@
-import { Binder } from "@ribajs/core";
+import { BinderDeprecated } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { CollapseService } from "../services/collapse.service";
 import { onRoute } from "@ribajs/utils/src/url";
@@ -8,7 +8,7 @@ import { onRoute } from "@ribajs/utils/src/url";
  * @see https://getbootstrap.com/docs/4.1/components/collapse/
  * @see https://github.com/twbs/bootstrap/blob/v4-dev/js/src/collapse.js
  */
-export const expanOnUrlBinder: Binder<string> = {
+export const expanOnUrlBinder: BinderDeprecated<string> = {
   name: "bs4-expan-on-url",
   routine(el: HTMLElement, url: string) {
     const collapseService = new CollapseService(el, [], { toggle: false });

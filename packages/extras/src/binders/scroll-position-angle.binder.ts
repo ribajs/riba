@@ -1,4 +1,4 @@
-import { Binder } from "@ribajs/core";
+import { BinderDeprecated } from "@ribajs/core";
 import { scrollToPosition } from "@ribajs/utils/src/dom";
 
 /**
@@ -15,7 +15,7 @@ import { scrollToPosition } from "@ribajs/utils/src/dom";
  * <div rv-scroll-position-x="'start'"></div>
  * ```
  */
-export const scrollPositionAngleBinder: Binder<number | "end" | "start"> = {
+export const scrollPositionAngleBinder: BinderDeprecated<number | "end" | "start"> = {
   name: "scroll-position-*",
   customData: {},
 

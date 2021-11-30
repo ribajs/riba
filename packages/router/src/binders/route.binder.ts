@@ -24,7 +24,7 @@ export interface CustomData {
 /**
  * Open link with pajax if the route is not the active route
  */
-export const routeBinder: Binder<string> = {
+export const routeBinder: BinderDeprecated<string> = {
   name: "route",
 
   bind(this: Binding, el: HTMLElement) {

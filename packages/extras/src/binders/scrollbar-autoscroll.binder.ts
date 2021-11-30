@@ -1,11 +1,11 @@
-import { Binder } from "@ribajs/core";
+import { BinderDeprecated } from "@ribajs/core";
 import { isString } from "@ribajs/utils/src/type";
 import { Autoscroll, AutoscrollOptions } from "../services/autoscroll.service";
 
 /**
  * Slideout click event to toggle the slideout
  */
-export const autoscrollBinder: Binder<AutoscrollOptions> = {
+export const autoscrollBinder: BinderDeprecated<AutoscrollOptions> = {
   name: "autoscroll",
   routine(el: HTMLElement, options: AutoscrollOptions) {
     this.customData = this.customData || {};

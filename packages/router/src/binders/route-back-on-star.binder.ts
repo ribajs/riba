@@ -7,7 +7,7 @@ export const goBack = () => {
 /**
  * Calls `window.history.back()` an event.
  */
-export const routeBackOnStarBinder: Binder<eventHandlerFunction> = {
+export const routeBackOnStarBinder: BinderDeprecated<eventHandlerFunction> = {
   name: "route-back-on-*",
   priority: 3000,
 

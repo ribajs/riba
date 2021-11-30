@@ -1,4 +1,4 @@
-import { Binder } from "@ribajs/core";
+import { BinderDeprecated } from "@ribajs/core";
 import { Collapse } from "../services/collapse";
 
 export interface Bs5CollapseOnEventBinder extends Binder<boolean> {
@@ -10,7 +10,7 @@ export interface Bs5CollapseOnEventBinder extends Binder<boolean> {
 /**
  *
  */
-export const toggleCollapseOnEventBinder: Binder<string> = {
+export const toggleCollapseOnEventBinder: BinderDeprecated<string> = {
   name: "bs5-toggle-collapse-on-*",
   bind(el: HTMLElement) {
     this.customData = {

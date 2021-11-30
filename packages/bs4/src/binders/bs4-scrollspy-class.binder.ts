@@ -1,4 +1,4 @@
-import { Binder } from "@ribajs/core";
+import { BinderDeprecated } from "@ribajs/core";
 import { debounce } from "@ribajs/utils/src/control";
 import { isInViewport } from "@ribajs/utils/src/dom";
 
@@ -6,7 +6,7 @@ import { isInViewport } from "@ribajs/utils/src/dom";
  * scrollspy-class
  * @see https://getbootstrap.com/docs/4.1/components/scrollspy/
  */
-export const scrollspyClassBinder: Binder<string> = {
+export const scrollspyClassBinder: BinderDeprecated<string> = {
   name: "bs4-scrollspy-*",
   bind(el: HTMLElement) {
     this.customData = {

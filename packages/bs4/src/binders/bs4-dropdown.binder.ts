@@ -1,11 +1,11 @@
-import { Binder } from "@ribajs/core";
+import { BinderDeprecated } from "@ribajs/core";
 import { DropdownService } from "../services/dropdown.service";
 
 /**
  *
  * @see https://getbootstrap.com/docs/4.1/components/dropdown/
  */
-export const dropdownBinder: Binder<string> = {
+export const dropdownBinder: BinderDeprecated<string> = {
   name: "bs4-dropdown",
   bind(el: HTMLElement) {
     this.customData = {
