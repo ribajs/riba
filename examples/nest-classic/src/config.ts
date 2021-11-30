@@ -4,7 +4,7 @@ import fs = require('fs');
 import * as dotenv from 'dotenv';
 dotenv.config();
 import { resolve } from 'path';
-import findRoot = require('find-root');
+import findRoot from 'app-root-path';
 import { ThemeConfig } from './types';
 
 const THEME_ACTIVE = process.env.THEME_ACTIVE || 'nest-classic-theme';

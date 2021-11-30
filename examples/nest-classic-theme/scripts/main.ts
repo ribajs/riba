@@ -2,7 +2,7 @@ import { Riba, View, coreModule } from "@ribajs/core";
 import { ready } from "@ribajs/utils/src/dom";
 import { routerModule } from "@ribajs/router";
 import { i18nModule, LocalesStaticService } from "@ribajs/i18n";
-import { bs4Module } from "@ribajs/bs4";
+import { bs5Module } from "@ribajs/bs5";
 
 // Own
 import * as components from "./components";
@@ -35,7 +35,7 @@ export class MainApp {
     this.riba.module.regist(
       i18nModule.init({ localesService: this.localesService })
     );
-    this.riba.module.regist(bs4Module.init());
+    this.riba.module.regist(bs5Module.init());
 
     this.view = this.riba.bind(document.body, this.model);
   }

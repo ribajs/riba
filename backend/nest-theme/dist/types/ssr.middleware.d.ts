@@ -1,3 +1,4 @@
+/// <reference types="qs" />
 import { NestMiddleware, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import type { FullThemeConfig } from './types/theme-config';
