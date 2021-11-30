@@ -1,7 +1,6 @@
 import { PRIMITIVE, KEYPATH, parseType } from "./parsers";
 import { Observer } from "./observer";
 import {
-  BinderDeprecated,
   FormatterObservers,
   eventHandlerFunction,
   ObserverSyncCallback,
@@ -13,16 +12,54 @@ import { getInputValue } from "@ribajs/utils/src/dom";
 /**
  * A single binding between a model attribute and a DOM element.
  */
-export class Binding {
+export abstract class Binder<T = any, E = HTMLUnknownElement> {
+  /**
+   * The name of the binder to access the binder by
+   */
+  abstract name: string;
+  /**
+   * Blocks the current node and child nodes from being parsed (used for iteration binding as well as the if/unless binders).
+   */
+  block = false;
+  /**
+   * Set this to true if you want view.publish() to call publish on these bindings.
+   */
+  publishes = false;
+  /**
+   * Priority of the binder, binders with higher priority are applied first
+   */
+  priority = 0;
+
+  /**
+   * The routine function is called when an observed attribute on the model changes and is used to update the DOM. When defining a one-way binder as a single function, it is actually the routine function that you're defining.
+   */
+  abstract routine(element: E, value: T): void;
+  /**
+   * This function will get called for this binding on the initial `view.bind()`. Use it to store some initial state on the binding, or to set up any event listeners on the element.
+   */
+  bind?(element: E): void;
+  /**
+   * This function will get called for this binding on `view.unbind()`. Use it to reset any state on the element that would have been changed from the routine getting called, or to unbind any event listeners on the element that you've set up in the `binder.bind` function.
+   */
+  unbind?(element: E): void;
+  /**
+   * Updates the binding's model from what is currently set on the view.
+   * Unbinds the old model first and then re-binds with the new model.
+   */
+  update?(model: any): void;
+  /**
+   * The getValue function is called when the binder wants to set the value on the model. This function takes the HTML element as only parameter
+   */
+  getValue?(element: E): void;
+
   public value?: any;
   public observer?: Observer;
   public view: View;
-  public el: HTMLUnknownElement;
+  public el: E;
   /**
    * Name of the binder without the prefix
    */
   public type: string | null;
-  public binder: BinderDeprecated<any>;
   public formatters: string[] | null;
   public formatterObservers: FormatterObservers = {};
   public keypath?: string;
@@ -57,10 +94,9 @@ export class Binding {
    */
   constructor(
     view: View,
-    el: HTMLUnknownElement,
+    el: E,
     type: string | null,
     keypath: string | undefined,
-    binder: BinderDeprecated<any>,
     formatters: string[] | null,
     identifier: string | null
   ) {
@@ -71,7 +107,6 @@ export class Binding {
     this.el = el;
     this.type = type;
     this.keypath = keypath;
-    this.binder = binder;
     this.formatters = formatters;
     this.model = undefined;
     this.customData = {};
@@ -105,7 +140,7 @@ export class Binding {
         this.observer = this.observe(this.view.models, this.keypath, this);
         this.model = this.observer.target;
       } else {
-        throw new Error(`[${this.binder.name}] Unknown type in token`);
+        throw new Error(`[${this.name}] Unknown type in token`);
       }
     } else {
       this.value = undefined;
@@ -145,7 +180,7 @@ export class Binding {
         }
         return observer.value();
       } else {
-        throw new Error(`[${this.binder.name}] Unknown argument type`);
+        throw new Error(`[${this.name}] Unknown argument type`);
       }
     });
   }
@@ -156,7 +191,7 @@ export class Binding {
    */
   public formattedValue(value: any, startIndex = 0): any {
     if (this.formatters === null) {
-      throw new Error(`[${this.binder.name} formatters is null`);
+      throw new Error(`[${this.name} formatters is null`);
     }
 
     // If any intermediate result is a promise continue the chain (with startIndex set) after it is resolved.
@@ -176,7 +211,7 @@ export class Binding {
           console.warn(
             new Error(
               `[${
-                this.binder.name
+                this.name
               }] No args matched with regex "FORMATTER_ARGS"!\nvalue: ${JSON.stringify(
                 value
               )}\nresult: ${JSON.stringify(
@@ -191,20 +226,18 @@ export class Binding {
         const id = args.shift();
 
         if (!id) {
-          throw new Error(
-            `[${this.binder.name}] No formatter id found in args!`
-          );
+          throw new Error(`[${this.name}] No formatter id found in args!`);
         }
 
         if (!this.view.options.formatters) {
-          throw new Error(`[${this.binder.name}] No formatters are defined!`);
+          throw new Error(`[${this.name}] No formatters are defined!`);
         }
 
         const formatter = this.view.options.formatters[id];
 
         if (!formatter) {
           throw new Error(
-            `[${this.binder.name}] No formatters with id "${id}" found!`
+            `[${this.name}] No formatters with id "${id}" found!`
           );
         }
 
@@ -243,14 +276,12 @@ export class Binding {
     fn: eventHandlerFunction,
     el: HTMLElement
   ): (ev: Event) => any {
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const binding = this;
-    const handler = binding.view.options.handler;
+    const handler = this.view.options.handler;
     return (ev) => {
       if (!handler) {
         throw new Error("No handler defined in binding.view.options.handler");
       }
-      handler.call(fn, this, ev, binding, el);
+      handler.call(fn, this, ev, this, el);
     };
   }
 
@@ -259,11 +290,6 @@ export class Binding {
    * with the supplied value formatted.
    */
   public set(value: any) {
-    if (this.binder === null) {
-      console.warn(new Error("Binder is null"), this);
-      return;
-    }
-
     try {
       value = this.formattedValue(value);
     } catch (error) {
@@ -271,7 +297,7 @@ export class Binding {
       return value;
     }
 
-    if (this.binder && typeof this.binder.routine === "function") {
+    if (typeof this.routine === "function") {
       // If value is a promise
       if (
         value &&
@@ -280,13 +306,13 @@ export class Binding {
       ) {
         value
           .then((realValue: any) => {
-            this.binder.routine.call(this, this.el, realValue);
+            this.routine(this.el, realValue);
           })
           .catch((error: Error) => {
             console.error(error);
           });
       } else {
-        this.binder.routine.call(this, this.el, value);
+        this.routine(this.el, value);
       }
     }
   }
@@ -336,7 +362,7 @@ export class Binding {
           }
           return result;
         },
-        this.getValue(this.el)
+        this._getValue(this.el)
       );
 
       this.observer.setValue(value);
@@ -348,14 +374,14 @@ export class Binding {
    * routines will also listen for changes on the element to propagate them back
    * to the model.
    */
-  public bind() {
+  public _bind() {
     this.parseTarget();
 
-    if (this.binder && this.binder.bind) {
-      if (typeof this.binder.bind !== "function") {
+    if (this.bind) {
+      if (typeof this.bind !== "function") {
         throw new Error("the method bind is not a function");
       }
-      this.binder.bind.call(this, this.el);
+      this.bind(this.el);
     }
 
     if (this.view.options.preloadData) {
@@ -366,14 +392,9 @@ export class Binding {
   /**
    * Unsubscribes from the model and the element.
    */
-  public unbind() {
-    if (!this.binder) {
-      console.warn(new Error("Binder is not defined"), this);
-      return;
-    }
-
-    if (this.binder.unbind) {
-      this.binder.unbind.call(this, this.el);
+  public _unbind() {
+    if (this.unbind) {
+      this.unbind(this.el);
     }
 
     if (this.observer) {
@@ -396,15 +417,12 @@ export class Binding {
    * the old model first and then re-binds with the new model.
    * @param {any} models
    */
-  public update(models: any = {}) {
+  public _update(models: any = {}) {
     if (this.observer) {
       this.model = this.observer.target;
     }
-    if (this.binder === null) {
-      throw new Error("binder is null");
-    }
-    if (typeof this.binder.update === "function") {
-      this.binder.update.call(this, models);
+    if (typeof this.update === "function") {
+      this.update(models);
     }
   }
 
@@ -412,14 +430,11 @@ export class Binding {
    * Returns elements value
    * @param el
    */
-  public getValue(el: HTMLElement) {
-    if (this.binder === null) {
-      throw new Error("binder is null");
-    }
-    if (typeof this.binder.getValue === "function") {
-      return this.binder.getValue.call(this, el);
+  public _getValue(el: E) {
+    if (typeof this.getValue === "function") {
+      return this.getValue(el);
     } else {
-      return getInputValue(el);
+      return getInputValue(el as any);
     }
   }
 

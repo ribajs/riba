@@ -3,12 +3,12 @@ import { Riba } from "../../riba";
 import { dotAdapter } from "../../adapters/dot.adapter";
 
 import { plusFormatter } from "./plus.formatter";
-import { textBinder } from "../../binders/text.binder";
+import { textBinder } from "../../binders-deprecated/text.binder";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
 riba.module.formatter.regist(plusFormatter);
-riba.module.binder.regist(textBinder);
+riba.module.binderDeprecated.regist(textBinder);
 
 interface Model {
   obj?: {

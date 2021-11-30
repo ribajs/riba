@@ -1,9 +1,9 @@
-import { Binder } from "./binder";
+import { BinderDeprecated } from "./binder-deprecated";
 import { ObserverSyncCallback } from "./observer";
 import { Observer } from "../observer";
 
 export interface Bindable {
-  binder?: Binder<any>;
+  binder?: BinderDeprecated<any>;
 
   /**
    * Name of the binder without the prefix

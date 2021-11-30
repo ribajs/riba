@@ -6,6 +6,8 @@ import {
   htmlBinder,
   valueBinder,
   eachStarBinder,
+} from "./binders-deprecated";
+import {
   addClassBinder
 } from "./binders";
 import { Formatter, Adapter } from "./types";
@@ -14,10 +16,10 @@ describe("riba.Binding", () => {
 
   const riba = new Riba();
   riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regist(textBinder);
-  riba.module.binder.regist(htmlBinder);
-  riba.module.binder.regist(valueBinder);
-  riba.module.binder.regist(eachStarBinder);
+  riba.module.binderDeprecated.regist(textBinder);
+  riba.module.binderDeprecated.regist(htmlBinder);
+  riba.module.binderDeprecated.regist(valueBinder);
+  riba.module.binderDeprecated.regist(eachStarBinder);
   riba.module.binder.regist(addClassBinder);
 
   let model: object;

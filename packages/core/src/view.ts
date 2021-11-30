@@ -1,5 +1,10 @@
 import { Riba } from "./riba";
-import { Binder, Options, BindableElement, TypeOfComponent } from "./types";
+import {
+  BinderDeprecated,
+  Options,
+  BindableElement,
+  TypeOfComponent,
+} from "./types";
 import { Binding } from "./binding";
 import { parseNode, parseDeclaration } from "./parsers";
 import { BasicComponent, Component } from "./component";
@@ -19,7 +24,7 @@ export class View {
   /**
    * Binder for mustache style `{model.property}` text Binders
    */
-  public static mustacheTextBinder: Binder<string> = {
+  public static mustacheTextBinder: BinderDeprecated<string> = {
     name: "mustache-text",
     routine: (node: DataElement, value: string) => {
       node.data = value != null ? value : "";
@@ -324,7 +329,7 @@ export class View {
     node: HTMLUnknownElement,
     type: string | null,
     declaration: string,
-    binder: Binder<any>,
+    binder: BinderDeprecated<any>,
     identifier: string | null
   ) {
     const parsedDeclaration = parseDeclaration(declaration);

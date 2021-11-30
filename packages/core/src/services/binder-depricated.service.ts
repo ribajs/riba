@@ -1,18 +1,17 @@
-import { Binders, ModuleElementType, TypeOf, Elements } from "../types";
-import { Binder } from "../binder";
+import { BinderDeprecated, BindersDeprecated, ModuleElementType } from "../types";
 import { ModuleElementService } from "./module-element.service";
 
 /**
- * 
+ * @deprecated
  */
-export class BindersService extends ModuleElementService<TypeOf<Binder<any, any>>> {
+export class BindersDeprecatedService extends ModuleElementService {
   protected type: ModuleElementType = "binder";
 
   /**
    *
    * @param binders;
    */
-  constructor(binders: Binders) {
+  constructor(binders: BindersDeprecated<any>) {
     super(binders);
   }
 
@@ -22,11 +21,11 @@ export class BindersService extends ModuleElementService<TypeOf<Binder<any, any>
    * @param name  Overwrites the name to access the binder over
    */
   public regist(
-    binder: TypeOf<Binder<any, any>>,
+    binder: BinderDeprecated<any>,
     fallbackName?: string,
     forceFallback = false
-  ) {
-    if (!binder) {
+  ): BindersDeprecated<any> {
+    if (!binder || typeof binder.routine !== "function") {
       console.warn(new Error("Can not regist binder!"), binder);
       return this.elements;
     }

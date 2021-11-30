@@ -7,6 +7,7 @@ export * from "./component";
 export * from "./components";
 export * from "./components/templates/templates.component";
 export * from "./formatters";
+export * from "./binder";
 export * from "./binding";
 export * from "./parsers";
 export * from "./riba";

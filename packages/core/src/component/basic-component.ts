@@ -11,6 +11,7 @@ import {
   ObserverSyncCallback,
 } from "../types";
 import { Binding } from "../binding";
+import { Binder } from "../binder";
 import { Observer } from "../observer";
 import { parseJsonString, camelCase } from "@ribajs/utils/src/type";
 import { getRandomColor, consoleColoured } from "@ribajs/utils/src/color";
@@ -180,9 +181,9 @@ export abstract class BasicComponent extends HTMLElement {
   protected eventHandler(self: BasicComponent): EventHandler {
     // IMPORTANT this must be a function and not a Arrow Functions
     return function (
-      context: Binding,
+      context: Binding | Binder,
       event: Event,
-      binding: Binding,
+      binding: Binding | Binder,
       el: HTMLElement
     ) {
       if (!this || !this.call) {

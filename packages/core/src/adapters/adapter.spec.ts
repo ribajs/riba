@@ -3,9 +3,9 @@ import { Adapter, ObserverSyncCallback } from "../types";
 
 import { dotAdapter } from "../adapters/dot.adapter";
 
-import { textBinder } from "../binders/text.binder";
+import { textBinder } from "../binders-deprecated/text.binder";
 
-import { valueBinder } from "../binders/value.binder";
+import { valueBinder } from "../binders-deprecated/value.binder";
 
 import { Data } from "../../spec/lib/moch.data";
 
@@ -18,8 +18,8 @@ describe("Functional", () => {
 
   const riba = new Riba();
   riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regist(textBinder);
-  riba.module.binder.regist(valueBinder);
+  riba.module.binderDeprecated.regist(textBinder);
+  riba.module.binderDeprecated.regist(valueBinder);
 
   beforeEach(() => {
     originalPrefix = riba.prefix;

@@ -8,7 +8,8 @@ import {
 } from "./types";
 import { parseTemplate, parseType } from "./parsers";
 import { Binding } from "./binding";
-import { attributeBinder } from "./binders/attribute.binder";
+import { Binder } from "./binder";
+import { attributeBinder } from "./binders-deprecated/attribute.binder";
 
 import { View } from "./view";
 import { Observer } from "./observer";
@@ -31,7 +32,7 @@ export class Riba {
     this: any,
     context: any,
     ev: Event,
-    binding: Binding,
+    binding: Binding | Binder,
     el: HTMLElement
   ) {
     if (!this || !this.call) {
