@@ -71,7 +71,6 @@
     "webpack-dev-server": "^4.6.0"
   },
   "dependencies": {
-    "@ribajs/bs4": "workspace:*",
     "@ribajs/core": "workspace:*",
     "@ribajs/i18n": "workspace:*",
     "@ribajs/utils": "workspace:*"

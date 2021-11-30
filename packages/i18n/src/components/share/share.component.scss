@@ -1,6 +1,7 @@
 i18n-share {
   display: inline-block;
   .share-label {
-    @extend .cursor-pointer;
+    cursor: pointer;
+    @extend .cursor-pointer !optional;
   }
 }
