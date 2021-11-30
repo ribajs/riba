@@ -18,7 +18,7 @@ export declare class HttpExceptionFilter implements ExceptionFilter {
     } | {
         hasError: boolean;
         html: string;
-        exception: HttpException | Error;
+        exception: Error | HttpException;
     }>;
     catch(exception: HttpException, host: ArgumentsHost): Promise<Response<any, Record<string, any>>>;
 }

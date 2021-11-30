@@ -1,8 +1,9 @@
 /// <reference types="node" />
+import { ConsoleConstructor } from 'console';
 export declare class DummyConsole implements Console {
     memory: any;
     exception: any;
-    Console: NodeJS.ConsoleConstructor;
+    Console: ConsoleConstructor;
     constructor();
     assert(): void;
     clear(): void;
