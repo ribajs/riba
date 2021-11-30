@@ -10,7 +10,7 @@ describe("riba.binders", () => {
   describe("value", () => {
     const riba = new Riba();
     riba.module.adapter.regist(dotAdapter);
-    riba.module.binder.regist(valueBinder, "value");
+    riba.module.binderDeprecated.regist(valueBinder, "value");
 
     let fragment: DocumentFragment;
     let el: HTMLInputElement;
@@ -69,7 +69,7 @@ describe("riba.binders", () => {
   describe("value", () => {
     let input: HTMLInputElement;
     const riba = new Riba();
-    riba.module.binder.regist(valueBinder, "value");
+    riba.module.binderDeprecated.regist(valueBinder, "value");
 
     const createOptionEls = (val: string) => {
       const option = document.createElement("option");

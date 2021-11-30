@@ -11,7 +11,7 @@ describe("riba.binders", () => {
 
   const riba = new Riba();
   riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regist(textBinder);
+  riba.module.binderDeprecated.regist(textBinder);
 
   beforeEach(() => {
     riba.configure({

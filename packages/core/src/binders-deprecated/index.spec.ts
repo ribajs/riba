@@ -14,7 +14,7 @@ export const customBinder: BinderDeprecated<string> = {
 
 describe("Custom binder with no attribute value", () => {
   const riba = new Riba();
-  riba.module.binder.regist(customBinder);
+  riba.module.binderDeprecated.regist(customBinder);
 
   let el: HTMLDivElement;
   let model: any;

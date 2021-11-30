@@ -1,4 +1,4 @@
-import { Binder } from "@ribajs/core";
+import { BinderDeprecated } from "@ribajs/core";
 
 
 /**
@@ -9,7 +9,7 @@ import { Binder } from "@ribajs/core";
  * <div rv-csr-style="{'backgroundColor':'blue'}"></div>
  * ```
  */
-export const csrBinder: Binder<Partial<CSSStyleDeclaration>> = {
+export const csrBinder: BinderDeprecated<Partial<CSSStyleDeclaration>> = {
   name: "csr-*",
   routine(el: HTMLElement, value: Partial<CSSStyleDeclaration>) {
     const binderName = this.args[0];

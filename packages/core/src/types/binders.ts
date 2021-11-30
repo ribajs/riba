@@ -1,15 +1,15 @@
 import { BinderDeprecated } from "./binder-deprecated";
 import { Binder } from "../binder";
-import { TypeOf } from "./type-of";
+import { ClassOfBinder } from "./class-of-binder";
 
 /**
  * A list of binders with any key name
  * @deprecated
  */
-export interface BindersDeprecated<T = unknown, E = HTMLUnknownElement> {
+export interface BindersDeprecated<T = any, E = HTMLUnknownElement> {
   [name: string]: BinderDeprecated<T, E>;
 }
 
-export interface Binders<T = unknown, E = HTMLUnknownElement> {
-  [name: string]: TypeOf<Binder<T, E>>;
+export interface Binders<T = any, E = HTMLUnknownElement> {
+  [name: string]: ClassOfBinder<Binder<T, E>, E>;
 }

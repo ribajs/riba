@@ -1,22 +1,12 @@
-import { Binder } from "@ribajs/core";
+import { BinderDeprecated, BinderAttributeChangedEvent } from "@ribajs/core";
 import { extend } from "@ribajs/utils/src/type";
 import { I18nService } from "../../services/i18n.service";
 import { LocalesService } from "../../types";
 
-// see star.binder.ts
-export interface BinderAttributeChangedEvent {
-  detail: {
-    name: string;
-    oldValue: string;
-    newValue: string;
-    namespace: null;
-  };
-}
-
 /**
  *
  */
-export const i18nStarBinder: Binder<string> = {
+export const i18nStarBinder: BinderDeprecated<string> = {
   name: "i18n-*",
   block: false,
   priority: 0,
@@ -247,4 +237,4 @@ export const i18nStarBinder: Binder<string> = {
       this.customData.onLanguageChanged
     );
   },
-} as Binder<string>;
+};

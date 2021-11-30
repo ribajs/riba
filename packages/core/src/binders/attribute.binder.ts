@@ -1,19 +1,20 @@
 import { jsonFormatter } from "../formatters/type/json.formatter";
-import type { BinderDeprecated, BinderAttributeChangedEvent } from "../types";
+import { Binder } from "../binder";
+import { BinderAttributeChangedEvent } from "../types";
 
 /**
  * Sets the attribute on the element. If no binder above is matched it will fall
  * back to using this binder.
  */
-export const attributeBinder: BinderDeprecated<string> = {
-  name: "*",
-  bind(/*el*/) {
-    /**/
-  },
+export class attributeBinder extends Binder<string, HTMLElement> {
+  name = "*";
+  bind() {
+    //
+  }
 
   unbind() {
-    delete this.customData;
-  },
+    //
+  }
 
   routine(el: HTMLElement, newValue: any) {
     if (!this.type) {
@@ -50,7 +51,6 @@ export const attributeBinder: BinderDeprecated<string> = {
       ) {
         el.setAttribute(this.type, newValueFormatted);
         el.dispatchEvent(
-          // E.g. Event used in BinderAttributeChangedEvent
           new CustomEvent("binder-changed", {
             detail: { name: this.type, newValue: newValueFormatted, oldValue },
           } as BinderAttributeChangedEvent)
@@ -59,11 +59,10 @@ export const attributeBinder: BinderDeprecated<string> = {
     } else {
       el.removeAttribute(this.type);
       el.dispatchEvent(
-        // E.g. Event used in BinderAttributeChangedEvent
         new CustomEvent("binder-changed", {
           detail: { name: this.type, newValue: newValueFormatted, oldValue },
         } as BinderAttributeChangedEvent)
       );
     }
-  },
-};
+  }
+}

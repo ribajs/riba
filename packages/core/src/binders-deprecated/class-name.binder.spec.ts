@@ -6,7 +6,7 @@ import { dotAdapter } from "../adapters/dot.adapter";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
-riba.module.binder.regist(classStarBinder);
+riba.module.binderDeprecated.regist(classStarBinder);
 
 describe("riba.binders", () => {
   let element: HTMLDivElement;

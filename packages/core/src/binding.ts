@@ -5,6 +5,7 @@ import {
   FormatterObservers,
   eventHandlerFunction,
   ObserverSyncCallback,
+  Bindable,
 } from "./types";
 import { FORMATTER_ARGS, FORMATTER_SPLIT } from "./constants/formatter";
 import { View } from "./view";
@@ -12,8 +13,9 @@ import { getInputValue } from "@ribajs/utils/src/dom";
 
 /**
  * A single binding between a model attribute and a DOM element.
+ * @deprecated
  */
-export class Binding {
+export class Binding implements Bindable {
   public value?: any;
   public observer?: Observer;
   public view: View;
@@ -336,7 +338,7 @@ export class Binding {
           }
           return result;
         },
-        this.getValue(this.el)
+        this._getValue(this.el)
       );
 
       this.observer.setValue(value);
@@ -348,7 +350,7 @@ export class Binding {
    * routines will also listen for changes on the element to propagate them back
    * to the model.
    */
-  public bind() {
+  public _bind() {
     this.parseTarget();
 
     if (this.binder && this.binder.bind) {
@@ -366,7 +368,7 @@ export class Binding {
   /**
    * Unsubscribes from the model and the element.
    */
-  public unbind() {
+  public _unbind() {
     if (!this.binder) {
       console.warn(new Error("Binder is not defined"), this);
       return;
@@ -396,7 +398,7 @@ export class Binding {
    * the old model first and then re-binds with the new model.
    * @param {any} models
    */
-  public update(models: any = {}) {
+  public _update(models: any = {}) {
     if (this.observer) {
       this.model = this.observer.target;
     }
@@ -412,7 +414,7 @@ export class Binding {
    * Returns elements value
    * @param el
    */
-  public getValue(el: HTMLElement) {
+  public _getValue(el: HTMLElement) {
     if (this.binder === null) {
       throw new Error("binder is null");
     }

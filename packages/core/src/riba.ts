@@ -5,11 +5,13 @@ import {
   Root,
   Components,
   Options,
+  BindersDeprecated,
 } from "./types";
 import { parseTemplate, parseType } from "./parsers";
 import { Binding } from "./binding";
 import { Binder } from "./binder";
-import { attributeBinder } from "./binders-deprecated/attribute.binder";
+import { attributeBinder as attributeBinderDeprecated } from "./binders-deprecated/attribute.binder";
+import { attributeBinder } from "./binders/attribute.binder";
 
 import { View } from "./view";
 import { Observer } from "./observer";
@@ -22,6 +24,13 @@ export class Riba {
    * back to using this binder.
    */
   public static fallbackBinder = attributeBinder;
+
+  /**
+   * Sets the attribute on the element. If no binder above is matched it will fall
+   * back to using this binder.
+   * @deprecated
+   */
+  public static fallbackBinderDeprecated = attributeBinderDeprecated;
 
   /**
    * Default event handler, calls the function defined in his binder
@@ -54,6 +63,12 @@ export class Riba {
 
   /** Global binders */
   public binders: Binders<any> = {};
+
+  /**
+   * Global deprecated binders
+   * @deprecated
+   **/
+  public bindersDeprecated: BindersDeprecated<any> = {};
 
   /** Global components. */
   public components: Components = {};
@@ -115,6 +130,7 @@ export class Riba {
    */
   constructor() {
     this.module = new ModulesService(
+      this.bindersDeprecated,
       this.binders,
       this.components,
       this.formatters,

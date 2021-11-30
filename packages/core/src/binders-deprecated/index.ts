@@ -12,6 +12,7 @@ export { enabledBinder } from "./enabled.binder";
 export { flexSortChildsBinder } from "./flex-sort-childs.binder";
 export { disabledBinder } from "./disabled.binder";
 export { maxlengthBinder } from "./maxlength.binder";
+// export { mustacheTextBinder } from "./mustache-text.binder";
 export { notDraggableBinder } from "./not-draggable";
 export { onEventBinder } from "./on-event.binder";
 export { parentBinder } from "./parent.binder";

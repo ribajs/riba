@@ -9,7 +9,7 @@ import { dotAdapter } from "../adapters/dot.adapter";
 describe("if", () => {
   const riba = new Riba();
   riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regist(ifBinder);
+  riba.module.binderDeprecated.regist(ifBinder);
 
   let el: HTMLDivElement;
   let model: any;
@@ -142,7 +142,7 @@ describe("if", () => {
 
 describe("Array observe and unobserve", () => {
   const riba = new Riba();
-  riba.module.binder.regist(eachStarBinder);
+  riba.module.binderDeprecated.regist(eachStarBinder);
 
   let fragment: DocumentFragment;
   let el1: HTMLDivElement;

@@ -101,7 +101,7 @@ export const eachStarBinder: BinderDeprecated<any[]> = {
           return;
         }
 
-        view = View.create(this, scope, previous.nextSibling);
+        view = View.createDeprecated(this, scope, previous.nextSibling);
         this.customData.iterated.push(view);
       } else {
         if (view.models[modelName] !== model) {
@@ -134,7 +134,7 @@ export const eachStarBinder: BinderDeprecated<any[]> = {
             nextView.models[indexProp] = index;
           } else {
             // new model
-            nextView = View.create(this, scope, view.els[0]);
+            nextView = View.createDeprecated(this, scope, view.els[0]);
           }
           this.customData.iterated.splice(index, 0, nextView);
         } else {

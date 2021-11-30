@@ -6,7 +6,7 @@ import { removeClassBinder } from "./remove-class.binder";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
-riba.module.binder.regist(removeClassBinder);
+riba.module.binderDeprecated.regist(removeClassBinder);
 
 describe("riba.binders", () => {
   let element: HTMLDivElement;

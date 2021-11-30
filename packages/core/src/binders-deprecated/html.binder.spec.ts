@@ -10,7 +10,7 @@ describe("riba.binders", () => {
   let el: HTMLUnknownElement;
   const riba = new Riba();
   riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regist(htmlBinder);
+  riba.module.binderDeprecated.regist(htmlBinder);
 
   beforeEach(() => {
     riba.configure({

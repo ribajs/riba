@@ -3,6 +3,7 @@ export * from "./vendors";
 export * from "./services";
 export * from "./adapters";
 export * from "./binders";
+export * from "./binders-deprecated";
 export * from "./component";
 export * from "./components";
 export * from "./components/templates/templates.component";

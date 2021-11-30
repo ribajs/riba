@@ -3,37 +3,28 @@ import {
   BinderDeprecated,
   Options,
   BindableElement,
-  TypeOfComponent,
+  ClassOfBinder,
+  ClassOfComponent,
+  DataElement,
 } from "./types";
 import { Binding } from "./binding";
 import { parseNode, parseDeclaration } from "./parsers";
 import { BasicComponent, Component } from "./component";
 import { isCustomElement } from "@ribajs/utils";
-
-/**
- * TODO Check if there is an official interface which fits better here
- */
-export interface DataElement extends HTMLUnknownElement {
-  data?: string;
-}
+import { Binder } from ".";
 
 /**
  * A collection of bindings built from a set of parent nodes.
  */
 export class View {
-  /**
-   * Binder for mustache style `{model.property}` text Binders
-   */
-  public static mustacheTextBinder: BinderDeprecated<string> = {
-    name: "mustache-text",
-    routine: (node: DataElement, value: string) => {
-      node.data = value != null ? value : "";
-    },
-  };
-
-  public static bindingComparator = (a: Binding, b: Binding) => {
-    const aPriority = a.binder?.priority || 0;
-    const bPriority = b.binder?.priority || 0;
+  public static bindingComparator = (
+    a: Binding | Binder,
+    b: Binding | Binder
+  ) => {
+    const aPriority =
+      (a as Binding)?.binder?.priority || (a as Binder).priority || 0;
+    const bPriority =
+      (b as Binding)?.binder?.priority || (b as Binder).priority || 0;
     return bPriority - aPriority;
   };
 
@@ -42,8 +33,9 @@ export class View {
    * @param binding
    * @param models
    * @param anchorEl
+   * @deprecated
    */
-  public static create(
+  public static createDeprecated(
     binding: Binding,
     models: any,
     anchorEl: HTMLElement | Node | null
@@ -59,10 +51,32 @@ export class View {
     return view;
   }
 
+  /**
+   * Helper function to create a new view inside of a binding
+   * @param binding
+   * @param models
+   * @param anchorEl
+   */
+  public static create(
+    binder: Binder,
+    models: any,
+    anchorEl: HTMLElement | Node | null
+  ) {
+    const template = binder.el.cloneNode(true);
+    const view = new View(template, models, binder.view.options);
+    view.bind();
+    if (!binder?.marker?.parentNode) {
+      console.warn("[View]: No parent node for binding!");
+    } else {
+      binder.marker.parentNode.insertBefore(template, anchorEl);
+    }
+    return view;
+  }
+
   public els: HTMLCollection | HTMLElement[] | Node[];
   public models: any;
   public options: Options;
-  public bindings: Array<Binding> = [];
+  public bindings: Array<Binding | Binder> = [];
   public webComponents: Array<Component | BasicComponent> = [];
   // public componentView: View | null = null;
 
@@ -118,7 +132,7 @@ export class View {
    */
   public bind() {
     this.bindings.forEach((binding) => {
-      binding.bind();
+      binding._bind();
     });
   }
 
@@ -128,7 +142,7 @@ export class View {
   public unbind() {
     if (Array.isArray(this.bindings)) {
       this.bindings.forEach((binding) => {
-        binding.unbind();
+        binding._unbind();
         if (typeof binding.el && this.options.removeBinderAttributes) {
           // TODO reset attribute ?
           // binding.el.setAttribute(attribute.name);
@@ -162,8 +176,15 @@ export class View {
    */
   public publish() {
     this.bindings.forEach((binding) => {
-      if (binding.binder && binding.binder.publishes && binding.publish) {
-        binding.publish();
+      if (
+        (binding as Binding).binder &&
+        (binding as Binding).binder.publishes &&
+        (binding as Binding).publish
+      ) {
+        (binding as Binding).publish();
+      }
+      if ((binding as Binder).publishes && (binding as Binder).publish) {
+        (binding as Binding).publish();
       }
     });
   }
@@ -179,7 +200,7 @@ export class View {
 
     for (const binding of this.bindings) {
       // if ((binding as Binding).update) {
-      binding.update(models);
+      binding._update(models);
       // }
     }
   }
@@ -225,107 +246,241 @@ export class View {
     return undefined;
   }
 
+  /**
+   *
+   * @deprecated
+   */
+  private bindBindersDeprecated(
+    attributes: NamedNodeMap,
+    node: BindableElement,
+    attributeBinders = this.options.attributeBinders
+  ) {
+    if (!this.options.bindersDeprecated) {
+      return;
+    }
+    const bindInfos = [];
+    for (let i = 0, len = attributes.length; i < len; i++) {
+      let nodeName = "";
+      let binder: BinderDeprecated<any, any> | null = null;
+      let identifier = "";
+      const attribute = attributes[i];
+      // if attribute starts with the binding prefix. E.g. rv-
+      const startingPrefix = this.startsWithPrefix(attribute.name);
+      if (startingPrefix) {
+        nodeName = attribute.name.slice(startingPrefix.length);
+        // if binder is not a attributeBinder binder should be set
+        if (this.options.bindersDeprecated[nodeName]) {
+          binder = this.options.bindersDeprecated[nodeName];
+        }
+
+        if (binder === null) {
+          // seems to be a star binder (because binder was not set)
+          // Check if any attributeBinder match's
+          for (let k = 0; k < attributeBinders.length; k++) {
+            identifier = attributeBinders[k];
+            const regexp = new RegExp(`^${identifier.replace(/\*/g, ".+")}$`);
+            if (regexp.test(nodeName)) {
+              binder = this.options.bindersDeprecated[identifier];
+              break;
+            }
+          }
+        }
+
+        if (binder === null) {
+          if (this.options.bindersDeprecated["*"]) {
+            binder = this.options.bindersDeprecated["*"];
+            identifier = "*";
+          } else {
+            binder = Riba.fallbackBinderDeprecated;
+          }
+        }
+        // if block is set, do not bind its child's (this means the binder bound it by itself)
+        // and build binding directly (do not push it to bindInfos array)
+        if (binder.block) {
+          this.buildBindingDeprecated(
+            node,
+            nodeName,
+            attribute.value,
+            binder,
+            identifier
+          );
+          if (node.removeAttribute && this.options.removeBinderAttributes) {
+            node.removeAttribute(attribute.name);
+          }
+          return true;
+        }
+
+        bindInfos.push({ attr: attribute, binder, nodeName, identifier });
+      }
+    }
+
+    for (let i = 0; i < bindInfos.length; i++) {
+      const bindInfo = bindInfos[i];
+      this.buildBindingDeprecated(
+        node,
+        bindInfo.nodeName,
+        bindInfo.attr.value,
+        bindInfo.binder,
+        bindInfo.identifier
+      );
+      if (node.removeAttribute && this.options.removeBinderAttributes) {
+        node.removeAttribute(bindInfo.attr.name);
+      }
+    }
+  }
+
+  /**
+   *
+   */
+  private bindBinders(
+    attributes: NamedNodeMap,
+    node: BindableElement,
+    attributeBinders = this.options.attributeBinders
+  ) {
+    if (!this.options.binders) {
+      return;
+    }
+    const bindInfos = [];
+    for (let i = 0, len = attributes.length; i < len; i++) {
+      let nodeName = "";
+      let binder: ClassOfBinder | null = null;
+      let identifier = "";
+      const attribute = attributes[i];
+      // if attribute starts with the binding prefix. E.g. rv-
+      const startingPrefix = this.startsWithPrefix(attribute.name);
+      if (startingPrefix) {
+        nodeName = attribute.name.slice(startingPrefix.length);
+        // if binder is not a attributeBinder binder should be set
+        if (this.options.binders[nodeName]) {
+          binder = this.options.binders[nodeName];
+        }
+
+        if (binder === null) {
+          // seems to be a star binder (because binder was not set)
+          // Check if any attributeBinder match's
+          for (let k = 0; k < attributeBinders.length; k++) {
+            identifier = attributeBinders[k];
+            const regexp = new RegExp(`^${identifier.replace(/\*/g, ".+")}$`);
+            if (regexp.test(nodeName)) {
+              binder = this.options.binders[identifier];
+              break;
+            }
+          }
+        }
+
+        if (binder === null) {
+          if (this.options.binders["*"]) {
+            binder = this.options.binders["*"];
+            identifier = "*";
+          } else {
+            binder = Riba.fallbackBinder;
+          }
+        }
+        // if block is set, do not bind its child's (this means the binder bound it by itself)
+        // and build binding directly (do not push it to bindInfos array)
+        if (binder.block) {
+          this.buildBinding(
+            node,
+            nodeName,
+            attribute.value,
+            binder,
+            identifier
+          );
+          if (node.removeAttribute && this.options.removeBinderAttributes) {
+            node.removeAttribute(attribute.name);
+          }
+          return true;
+        }
+
+        bindInfos.push({ attr: attribute, binder, nodeName, identifier });
+      }
+    }
+
+    for (let i = 0; i < bindInfos.length; i++) {
+      const bindInfo = bindInfos[i];
+      this.buildBinding(
+        node,
+        bindInfo.nodeName,
+        bindInfo.attr.value,
+        bindInfo.binder,
+        bindInfo.identifier
+      );
+      if (node.removeAttribute && this.options.removeBinderAttributes) {
+        node.removeAttribute(bindInfo.attr.name);
+      }
+    }
+  }
+
+  private bindComponent(node: BindableElement) {
+    let block = false;
+    if (!this.options.components) {
+      return block;
+    }
+
+    const nodeName = node.nodeName.toLowerCase();
+    const COMPONENT = this.options.components[nodeName];
+    if (COMPONENT) {
+      // this.registComponentWithFallback(node, COMPONENT, nodeName);
+      this.registComponent(COMPONENT, nodeName);
+      block = true;
+    }
+    // Also block unknown custom elements except page components
+    else if (
+      this.options.blockUnknownCustomElements &&
+      isCustomElement(node) &&
+      !nodeName.endsWith("-page")
+    ) {
+      block = true;
+    }
+    return block;
+  }
+
   public traverse(node: BindableElement): boolean {
     /** If true stop / block the parseNode recursion */
     let block = this.options.blockNodeNames.includes(node.nodeName);
     const attributes = node.attributes;
-    const bindInfos = [];
-    const attributeBinders = this.options.attributeBinders;
+
+    // bind attribute deprecated binders if available
+    if (attributes && this.options.bindersDeprecated) {
+      this.bindBindersDeprecated(attributes, node);
+    }
 
     // bind attribute binders if available
     if (attributes && this.options.binders) {
-      for (let i = 0, len = attributes.length; i < len; i++) {
-        let nodeName = null;
-        let binder = null;
-        let identifier = null;
-        const attribute = attributes[i];
-        // if attribute starts with the binding prefix. E.g. rv-
-        const startingPrefix = this.startsWithPrefix(attribute.name);
-        if (startingPrefix) {
-          nodeName = attribute.name.slice(startingPrefix.length);
-          // if binder is not a attributeBinder binder should be set
-          if (this.options.binders[nodeName]) {
-            binder = this.options.binders[nodeName];
-          }
-
-          if (binder === null) {
-            // seems to be a star binder (because binder was not set)
-            // Check if any attributeBinder match's
-            for (let k = 0; k < attributeBinders.length; k++) {
-              identifier = attributeBinders[k];
-              const regexp = new RegExp(`^${identifier.replace(/\*/g, ".+")}$`);
-              if (regexp.test(nodeName)) {
-                binder = this.options.binders[identifier];
-                break;
-              }
-            }
-          }
-
-          if (binder === null) {
-            if (this.options.binders["*"]) {
-              binder = this.options.binders["*"];
-              identifier = "*";
-            } else {
-              binder = Riba.fallbackBinder;
-            }
-          }
-          // if block is set, do not bind its child's (this means the binder bound it by itself)
-          // and build binding directly (do not push it to bindInfos array)
-          if (binder.block) {
-            this.buildBinding(
-              node,
-              nodeName,
-              attribute.value,
-              binder,
-              identifier
-            );
-            if (node.removeAttribute && this.options.removeBinderAttributes) {
-              node.removeAttribute(attribute.name);
-            }
-            return true;
-          }
-
-          bindInfos.push({ attr: attribute, binder, nodeName, identifier });
-        }
-      }
-
-      for (let i = 0; i < bindInfos.length; i++) {
-        const bindInfo = bindInfos[i];
-        this.buildBinding(
-          node,
-          bindInfo.nodeName,
-          bindInfo.attr.value,
-          bindInfo.binder,
-          bindInfo.identifier
-        );
-        if (node.removeAttribute && this.options.removeBinderAttributes) {
-          node.removeAttribute(bindInfo.attr.name);
-        }
-      }
+      this.bindBinders(attributes, node);
     }
 
     // bind components
     if (!block && !node._bound && this.options.components) {
-      const nodeName = node.nodeName.toLowerCase();
-      const COMPONENT = this.options.components[nodeName];
-      if (COMPONENT) {
-        // this.registComponentWithFallback(node, COMPONENT, nodeName);
-        this.registComponent(COMPONENT, nodeName);
-        block = true;
-      }
-      // Also block unknown custom elements except page components
-      else if (
-        this.options.blockUnknownCustomElements &&
-        isCustomElement(node) &&
-        !nodeName.endsWith("-page")
-      ) {
-        block = true;
-      }
+      block = this.bindComponent(node);
     }
     return block;
   }
 
   public buildBinding(
+    node: HTMLUnknownElement | Text,
+    type: string | null,
+    declaration: string,
+    Binder: ClassOfBinder,
+    identifier: string | null
+  ) {
+    const parsedDeclaration = parseDeclaration(declaration);
+    const keypath = parsedDeclaration.keypath;
+    const pipes = parsedDeclaration.pipes;
+    this.bindings.push(
+      new Binder(this, node, type, keypath, pipes, identifier)
+    );
+  }
+
+  /**
+   * @deprecated
+   * @param node
+   * @param type
+   * @param declaration
+   * @param binder
+   * @param identifier
+   */
+  public buildBindingDeprecated(
     node: HTMLUnknownElement,
     type: string | null,
     declaration: string,
@@ -345,7 +500,7 @@ export class View {
    * @param COMPONENT
    * @param nodeName
    */
-  protected registComponent(COMPONENT: TypeOfComponent, nodeName?: string) {
+  protected registComponent(COMPONENT: ClassOfComponent, nodeName?: string) {
     if (!customElements) {
       console.error("customElements not supported by your browser!");
       throw new Error("customElements not supported by your browser!");

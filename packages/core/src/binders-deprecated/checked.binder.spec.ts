@@ -8,7 +8,7 @@ import { Adapters } from "../types";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
-riba.module.binder.regist(checkedBinder);
+riba.module.binderDeprecated.regist(checkedBinder);
 
 describe("riba.binders", () => {
   let trueRadioInput: HTMLInputElement;

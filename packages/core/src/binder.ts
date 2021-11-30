@@ -4,6 +4,7 @@ import {
   FormatterObservers,
   eventHandlerFunction,
   ObserverSyncCallback,
+  Bindable,
 } from "./types";
 import { FORMATTER_ARGS, FORMATTER_SPLIT } from "./constants/formatter";
 import { View } from "./view";
@@ -12,7 +13,9 @@ import { getInputValue } from "@ribajs/utils/src/dom";
 /**
  * A single binding between a model attribute and a DOM element.
  */
-export abstract class Binder<T = any, E = HTMLUnknownElement> {
+export abstract class Binder<T = any, E = HTMLUnknownElement>
+  implements Bindable<T, E>
+{
   /**
    * The name of the binder to access the binder by
    */
@@ -20,7 +23,7 @@ export abstract class Binder<T = any, E = HTMLUnknownElement> {
   /**
    * Blocks the current node and child nodes from being parsed (used for iteration binding as well as the if/unless binders).
    */
-  block = false;
+  static block = false;
   /**
    * Set this to true if you want view.publish() to call publish on these bindings.
    */

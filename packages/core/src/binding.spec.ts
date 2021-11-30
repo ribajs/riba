@@ -1,4 +1,4 @@
-import { Riba, Binding, View } from "./index";
+import { Riba, Binding, Binder, View } from "./index";
 import { Data } from "../spec/lib/moch.data";
 import { dotAdapter } from "./adapters";
 import {
@@ -25,7 +25,7 @@ describe("riba.Binding", () => {
   let model: object;
   let el: HTMLElement;
   let view: View;
-  let binding: Binding;
+  let binding: Binding | Binder;
   let originalPrefix: string[];
   let adapter: Adapter;
   let routineFn;
@@ -39,7 +39,7 @@ describe("riba.Binding", () => {
     el.setAttribute("data-text", "obj.name");
 
     view = riba.bind(el, { obj: { name: "test" } });
-    binding = view.bindings[0] as Binding;
+    binding = view.bindings[0];
     model = binding.model;
   });
 
@@ -48,8 +48,8 @@ describe("riba.Binding", () => {
   });
 
   it("gets assigned the proper binder routine matching the identifier", () => {
-    routineFn = binding.binder.routine;
-    expect(routineFn).toEqual(riba.binders.text.routine);
+    routineFn = (binding as Binding)?.binder?.routine || (binding as Binder)?.routine;
+    expect(routineFn).toEqual(riba.bindersDeprecated.text.routine);
   });
 
   describe("when bind to non configurable properties", () => {
@@ -152,7 +152,7 @@ describe("riba.Binding", () => {
       );
 
       view = riba.bind(valueInput, { obj: { name: "nothing" } });
-      binding = view.bindings[0] as Binding;
+      binding = view.bindings[0];
 
       expect(binding.formatters).toEqual([
         "awesome",
@@ -165,22 +165,32 @@ describe("riba.Binding", () => {
   describe("bind()", () => {
     it("subscribes to the model for changes via the adapter", () => {
       jest.spyOn(adapter, "observe");
-      binding.bind();
+      binding._bind();
       expect(adapter.observe).toHaveBeenCalledWith(model, "name", binding);
     });
 
     it(`calls the binder's bind method if one exists`, () => {
       expect(() => {
-        binding.bind();
+        binding._bind();
       }).not.toThrow();
 
-      binding.binder.bind = () => {
-        return;
-      };
-      jest.spyOn(binding.binder, "bind");
+      if ((binding as Binding)?.binder) {
+        (binding as Binding).binder._bind = () => {
+          return;
+        };
+        jest.spyOn((binding as Binding).binder, "bind");
 
-      binding.bind();
-      expect(binding.binder.bind).toHaveBeenCalled();
+        binding._bind();
+        expect((binding as Binding).binder.bind).toHaveBeenCalled();
+      } else {
+        (binding as Binder)._bind = () => {
+          return;
+        };
+        jest.spyOn((binding as Binder), "bind");
+
+        binding._bind();
+        expect((binding as Binder).bind).toHaveBeenCalled();
+      }
     });
 
     describe("with preloadData set to true", () => {
@@ -190,7 +200,7 @@ describe("riba.Binding", () => {
 
       it("sets the initial value", () => {
         jest.spyOn(binding, "set");
-        binding.bind();
+        binding._bind();
         expect(binding.set).toHaveBeenCalledWith("test");
       });
     });
@@ -200,35 +210,35 @@ describe("riba.Binding", () => {
     describe("without a binder.unbind defined", () => {
       it("should not throw an error", () => {
         expect(() => {
-          binding.unbind();
+          binding._unbind();
         }).not.toThrow();
       });
     });
 
     describe("with a binder.unbind defined", () => {
       beforeEach(() => {
-        binding.binder.unbind = () => {
+        (binding as Binding).binder.unbind = () => {
           /**/
         };
       });
 
       it("should not throw an error", () => {
         expect(() => {
-          binding.unbind();
+          binding._unbind();
         }).not.toThrow();
       });
 
       it(`calls the binder's unbind method`, () => {
-        jest.spyOn(binding.binder, "unbind");
-        binding.unbind();
-        expect(binding.binder.unbind).toHaveBeenCalled();
+        jest.spyOn((binding as Binding).binder, "unbind");
+        binding._unbind();
+        expect((binding as Binding).binder.unbind).toHaveBeenCalled();
       });
     });
   });
 
   describe("set()", () => {
     it("performs the binding routine with the supplied value", () => {
-      routineFn = jest.spyOn(binding.binder, "routine");
+      routineFn = jest.spyOn((binding as Binding).binder, "routine");
 
       binding.set("sweater");
       expect(routineFn).toHaveBeenCalledWith(el, "sweater");
@@ -250,7 +260,7 @@ describe("riba.Binding", () => {
       }
       binding.set("sweater");
 
-      expect(binding.binder.routine).toHaveBeenCalledWith(
+      expect((binding as Binding).binder.routine).toHaveBeenCalledWith(
         el,
         "awesome sweater"
       );
@@ -286,7 +296,7 @@ describe("riba.Binding", () => {
 
       riba.module.formatter.regist(awesomeFormatter, "awesome");
 
-      routineFn = jest.spyOn(binding.binder, "routine");
+      routineFn = jest.spyOn((binding as Binding).binder, "routine");
 
       if (!binding.formatters) {
         throw new Error("Formatters not set!");
@@ -325,7 +335,7 @@ describe("riba.Binding", () => {
         read: (value: string) => value + " is awesome",
       };
 
-      jest.spyOn(binding.binder, "routine");
+      jest.spyOn((binding as Binding).binder, "routine");
 
       valueInput = document.createElement("input");
       valueInput.setAttribute("type", "text");
@@ -335,7 +345,7 @@ describe("riba.Binding", () => {
       binding = view.bindings[0];
       model = binding.model;
 
-      jest.spyOn(binding.binder, "routine");
+      jest.spyOn((binding as Binding).binder, "routine");
 
       valueInput.value = "charles";
       binding.publish();
@@ -346,7 +356,7 @@ describe("riba.Binding", () => {
       );
 
       binding.set("fred");
-      expect(binding.binder.routine).toHaveBeenCalledWith(
+      expect((binding as Binding).binder.routine).toHaveBeenCalledWith(
         valueInput,
         "fred is awesome"
       );
@@ -389,7 +399,7 @@ describe("riba.Binding", () => {
       expect(valueInput.value).toEqual("bobby");
 
       binding.set("andy:50:male");
-      expect(binding.binder.routine).toBeCalledWith(valueInput, "andy");
+      expect((binding as Binding).binder.routine).toBeCalledWith(valueInput, "andy");
     });
 
     it(`should resolve formatter arguments correctly with multiple formatters`, () => {
@@ -435,7 +445,7 @@ describe("riba.Binding", () => {
       binding = view.bindings[0] as Binding;
       model = binding.model;
 
-      jest.spyOn(binding.binder, "routine");
+      jest.spyOn((binding as Binding).binder, "routine");
 
       valueInput.value = "bobby";
       binding.publish();
@@ -444,7 +454,7 @@ describe("riba.Binding", () => {
       expect(valueInput.value).toEqual("bobby");
 
       binding.set("{[(ANDY)]}");
-      expect(binding.binder.routine).toBeCalledWith(valueInput, "andy");
+      expect((binding as Binding).binder.routine).toBeCalledWith(valueInput, "andy");
     });
 
     it(`should not fail or format if the specified binding function doesn't exist`, () => {
@@ -457,14 +467,14 @@ describe("riba.Binding", () => {
       binding = view.bindings[0] as Binding;
       model = binding.model;
 
-      jest.spyOn(binding.binder, "routine");
+      jest.spyOn((binding as Binding).binder, "routine");
 
       valueInput.value = "charles";
       binding.publish();
       expect(adapter.set).toBeCalledWith(model, "name", "charles");
 
       binding.set("fred");
-      expect(binding.binder.routine).toBeCalledWith(valueInput, "fred");
+      expect((binding as Binding).binder.routine).toBeCalledWith(valueInput, "fred");
     });
 
     it(`should apply read binders left to right, and write binders right to left`, () => {
@@ -488,10 +498,10 @@ describe("riba.Binding", () => {
       binding = view.bindings[0] as Binding;
       model = binding.model;
 
-      jest.spyOn(binding.binder, "routine");
+      jest.spyOn((binding as Binding).binder, "routine");
 
       binding.set("fred");
-      expect(binding.binder.routine).toBeCalledWith(
+      expect((binding as Binding).binder.routine).toBeCalledWith(
         valueInput,
         "fred is awesome totally"
       );
@@ -533,15 +543,15 @@ describe("riba.Binding", () => {
       binding = view.bindings[0] as Binding;
       model = binding.model;
 
-      jest.spyOn(binding.binder, "routine");
+      jest.spyOn((binding as Binding).binder, "routine");
 
-      expect(binding.binder.routine).toHaveBeenCalledWith(
+      expect((binding as Binding).binder.routine).toHaveBeenCalledWith(
         valueInput,
         "nothing is awesome totally"
       );
 
       binding.set("fred");
-      expect(binding.binder.routine).toHaveBeenCalledWith(
+      expect((binding as Binding).binder.routine).toHaveBeenCalledWith(
         valueInput,
         "fred is awesome totally"
       );
@@ -627,29 +637,29 @@ describe("riba.Binding", () => {
 
   describe("getValue()", () => {
     it("should use binder.getValue() if present", () => {
-      binding.binder.getValue = () => {
+      (binding as Binding).binder.getValue = () => {
         return "foo";
       };
 
-      expect(binding.getValue(el)).toEqual("foo");
+      expect(binding._getValue(el)).toEqual("foo");
     });
 
     it("binder.getValue() should have access to passed element", () => {
-      binding.binder.getValue = (_el: HTMLElement) => {
+      (binding as Binding).binder.getValue = (_el: HTMLElement) => {
         return _el.dataset.foo;
       };
 
       el.dataset.foo = "bar";
-      expect(binding.getValue(el)).toEqual("bar");
+      expect(binding._getValue(el)).toEqual("bar");
     });
 
     it("binder.getValue() should have access to binding", () => {
-      binding.binder.getValue = function () {
+      (binding as Binding).binder.getValue = function () {
         return (this as any).foo;
       };
 
       (binding as any).foo = "bar";
-      expect(binding.getValue(el)).toEqual("bar");
+      expect(binding._getValue(el)).toEqual("bar");
     });
   });
 });
@@ -658,10 +668,10 @@ describe("Functional", () => {
 
   const riba = new Riba();
   riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regist(textBinder);
-  riba.module.binder.regist(htmlBinder);
-  riba.module.binder.regist(valueBinder);
-  riba.module.binder.regist(eachStarBinder);
+  riba.module.binderDeprecated.regist(textBinder);
+  riba.module.binderDeprecated.regist(htmlBinder);
+  riba.module.binderDeprecated.regist(valueBinder);
+  riba.module.binderDeprecated.regist(eachStarBinder);
   riba.module.binder.regist(addClassBinder);
 
   let data: Data;
@@ -768,14 +778,14 @@ describe("Functional", () => {
         mockA = jest.fn();
         mockB = jest.fn();
 
-        riba.binders.a = {
+        riba.bindersDeprecated.a = {
           name: "a",
           bind: () => mockA(),
           routine: () => {
             /**/
           },
         };
-        riba.binders.b = {
+        riba.bindersDeprecated.b = {
           name: "b",
           bind: () => mockB(),
           routine: () => {
@@ -789,8 +799,8 @@ describe("Functional", () => {
 
       describe("a:10, b:30", () => {
         beforeEach(() => {
-          riba.binders.a.priority = 10;
-          riba.binders.b.priority = 30;
+          riba.bindersDeprecated.a.priority = 10;
+          riba.bindersDeprecated.b.priority = 30;
           riba.bind(el, bindData);
         });
 
@@ -801,8 +811,8 @@ describe("Functional", () => {
 
       describe("a:5, b:2", () => {
         beforeEach(() => {
-          riba.binders.a.priority = 5;
-          riba.binders.b.priority = 2;
+          riba.bindersDeprecated.a.priority = 5;
+          riba.bindersDeprecated.b.priority = 2;
           riba.bind(el, bindData);
         });
 
@@ -813,7 +823,7 @@ describe("Functional", () => {
 
       describe("a:undefined, b:1", () => {
         beforeEach(() => {
-          riba.binders.b.priority = 1;
+          riba.bindersDeprecated.b.priority = 1;
           riba.bind(el, bindData);
         });
 

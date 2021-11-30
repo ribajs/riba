@@ -1,11 +1,10 @@
-import { Binders, ModuleElementType, TypeOf, Elements } from "../types";
-import { Binder } from "../binder";
+import { Binders, ModuleElementType, ClassOfBinder } from "../types";
 import { ModuleElementService } from "./module-element.service";
 
 /**
- * 
+ *
  */
-export class BindersService extends ModuleElementService<TypeOf<Binder<any, any>>> {
+export class BindersService extends ModuleElementService<ClassOfBinder> {
   protected type: ModuleElementType = "binder";
 
   /**
@@ -22,7 +21,7 @@ export class BindersService extends ModuleElementService<TypeOf<Binder<any, any>
    * @param name  Overwrites the name to access the binder over
    */
   public regist(
-    binder: TypeOf<Binder<any, any>>,
+    binder: ClassOfBinder,
     fallbackName?: string,
     forceFallback = false
   ) {

@@ -8,7 +8,7 @@ import { Adapters } from "../types";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
-riba.module.binder.regist(hideBinder);
+riba.module.binderDeprecated.regist(hideBinder);
 
 describe("riba.binders", () => {
   let el: HTMLUnknownElement;

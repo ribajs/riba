@@ -11,7 +11,7 @@ describe("riba.binders", () => {
 
   const riba = new Riba();
   riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regist(srcsetSizeBinder);
+  riba.module.binderDeprecated.regist(srcsetSizeBinder);
 
   beforeEach(() => {
     fragment = document.createDocumentFragment();

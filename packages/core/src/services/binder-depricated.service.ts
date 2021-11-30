@@ -1,4 +1,8 @@
-import { BinderDeprecated, BindersDeprecated, ModuleElementType } from "../types";
+import {
+  BinderDeprecated,
+  BindersDeprecated,
+  ModuleElementType,
+} from "../types";
 import { ModuleElementService } from "./module-element.service";
 
 /**

@@ -4,7 +4,7 @@ export * from "./formatters";
 export * from "./services";
 export * from "./components";
 export type {
-  TypeOfComponent,
+  ClassOfComponent,
   Component,
   ComponentLifecycleEventData,
 } from "@ribajs/core";

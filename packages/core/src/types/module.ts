@@ -1,4 +1,11 @@
-import { BindersDeprecated, Binders, Formatters, Components, Services, Adapters } from ".";
+import {
+  BindersDeprecated,
+  Binders,
+  Formatters,
+  Components,
+  Services,
+  Adapters,
+} from ".";
 
 export interface RibaModule<O = any> {
   /**
