@@ -13,7 +13,7 @@ export class LeafletExampleComponent extends Component {
 
   public scope = {};
 
-  constructor() {
+  constructor() { 
     super();
   }
 

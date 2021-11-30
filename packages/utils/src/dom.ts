@@ -58,7 +58,7 @@ export const hasChildNodesTrim = (el: HTMLUnknownElement) => {
 /**
  *
  */
-export const getInputValue = (el: HTMLElement) => {
+export const getInputValue = (el: HTMLUnknownElement | HTMLElement | HTMLSelectElement | HTMLInputElement | HTMLOptionsCollection) => {
   const results: string[] = [];
   if ((el as HTMLSelectElement).type === "checkbox") {
     return (el as HTMLInputElement).checked;
@@ -75,8 +75,8 @@ export const getInputValue = (el: HTMLElement) => {
     }
 
     return results;
-  } else if (el.hasAttribute("contenteditable")) {
-    return el.innerHTML; // TODO write test for contenteditable
+  } else if ((el as HTMLElement).hasAttribute && (el as HTMLElement).hasAttribute("contenteditable")) {
+    return (el as HTMLElement).innerHTML; // TODO write test for contenteditable
   } else {
     return (el as HTMLInputElement).value;
   }
