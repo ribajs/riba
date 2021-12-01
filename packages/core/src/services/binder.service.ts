@@ -26,7 +26,7 @@ export class BindersService extends ModuleElementService<ClassOfBinder> {
     forceFallback = false
   ) {
     if (!Binder) {
-      throw new Error("No Binder passed to register!")
+      throw new Error("No Binder passed to register!");
     }
 
     const name = forceFallback

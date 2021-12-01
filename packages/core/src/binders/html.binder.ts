@@ -8,4 +8,4 @@ export class htmlBinder extends Binder<number | string | boolean, HTMLElement> {
   routine(el: HTMLElement, value: number | string | boolean) {
     el.innerHTML = typeof value !== "undefined" ? value.toString() : "";
   }
-};
+}

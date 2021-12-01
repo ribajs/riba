@@ -16,7 +16,7 @@ import { Binder } from "./binder";
  * Sets the attribute on the element. If no binder is matched it will fall
  * back to using this binder.
  * @deprecated
-*/
+ */
 import { attributeBinder as attributeBinderDeprecated } from "./binders-deprecated/attribute.binder";
 /**
  * Sets the attribute on the element. If no binder is matched it will fall
@@ -283,10 +283,7 @@ export class View {
         nodeName = attribute.name.slice(startingPrefix.length);
 
         // If is a new binder for this, skip
-        if (
-          this.options.binders &&
-          this.options.binders[nodeName]
-        ) {
+        if (this.options.binders && this.options.binders[nodeName]) {
           hasNewBinder = true;
           continue;
         }
@@ -323,14 +320,17 @@ export class View {
             binder = this.options.bindersDeprecated["*"];
             identifier = "*";
           } else {
-            binder = attributeBinderDeprecated
+            binder = attributeBinderDeprecated;
           }
         }
 
         if (!binder) {
           console.error("attributeBinders: ", attributeBinders);
           console.error("binders", this.options.binders?.[nodeName]);
-          console.error("binders (deprecated)", this.options.bindersDeprecated?.[nodeName]);
+          console.error(
+            "binders (deprecated)",
+            this.options.bindersDeprecated?.[nodeName]
+          );
           throw new Error(`Binder for "${nodeName}" is undefined!`);
         }
 
@@ -417,7 +417,7 @@ export class View {
             Binder = this.options.binders["*"];
             identifier = "*";
           } else {
-            Binder = attributeBinder
+            Binder = attributeBinder;
           }
         }
         // if block is set, do not bind its child's (this means the binder bound it by itself)

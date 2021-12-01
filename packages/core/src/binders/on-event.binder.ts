@@ -6,14 +6,10 @@ import { Binder } from "../binder";
  */
 export class onEventBinder extends Binder<eventHandlerFunction, HTMLElement> {
   static key = "on-*";
-  function =  true;
+  function = true;
   priority = 1000;
 
-  handler: any = null;
-
-  bind() {
-
-  }
+  handler?: any;
 
   unbind(el: HTMLElement) {
     if (this.handler) {
@@ -36,17 +32,10 @@ export class onEventBinder extends Binder<eventHandlerFunction, HTMLElement> {
       passive: this.el.dataset.passive === "true", // data-passive="true"
     };
     if (this.handler) {
-      el.removeEventListener(
-        // must use as any here, because TypeScript is stupid as of version 4.0.3
-        eventName as any,
-        this.handler,
-        options
-      );
+      el.removeEventListener(eventName, this.handler, options);
     }
-    this.handler = this.eventHandler(value, el).bind(
-      this
-    );
+    this.handler = this.eventHandler(value, el).bind(this);
 
     el.addEventListener(eventName, this.handler, options);
   }
-};
+}

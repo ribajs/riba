@@ -49,7 +49,10 @@ export class valueBinder extends Binder<any, HTMLElement> {
     }
   }
 
-  routine(el: HTMLElement | HTMLSelectElement, value?: number | string | string[]) {
+  routine(
+    el: HTMLElement | HTMLSelectElement,
+    value?: number | string | string[]
+  ) {
     let oldValue = this.getValue(el);
 
     if (!Array.isArray(value)) {
@@ -96,4 +99,4 @@ export class valueBinder extends Binder<any, HTMLElement> {
   getValue(el: HTMLElement) {
     return getInputValue(el);
   }
-};
+}

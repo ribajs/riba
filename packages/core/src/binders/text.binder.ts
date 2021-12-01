@@ -8,4 +8,4 @@ export class textBinder extends Binder<string, HTMLElement> {
   routine(el: HTMLElement, value: number | string) {
     el.textContent = value != null ? value.toString() : "";
   }
-};
+}

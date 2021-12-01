@@ -91,9 +91,7 @@ export class eachStarBinder extends Binder<any[], HTMLElement> {
         let previous: HTMLElement | Element | Node | undefined;
 
         if (this.iterated.length) {
-          previous =
-            this.iterated[this.iterated.length - 1]
-              .els[0];
+          previous = this.iterated[this.iterated.length - 1].els[0];
         } else if (this.marker) {
           previous = this.marker;
         }
@@ -147,7 +145,7 @@ export class eachStarBinder extends Binder<any[], HTMLElement> {
       times(this.iterated.length - collection.length, () => {
         const view = this.iterated.pop();
         if (!view) {
-          throw new Error("view is undefined!")
+          throw new Error("view is undefined!");
         }
         view.unbind();
         if (!this.marker || !this.marker.parentNode) {
@@ -187,4 +185,4 @@ export class eachStarBinder extends Binder<any[], HTMLElement> {
       view.update(data);
     });
   }
-};
+}
