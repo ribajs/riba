@@ -8,7 +8,7 @@ import { textBinder } from "../../binders-deprecated/text.binder";
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
 riba.module.formatter.regist(plusFormatter);
-riba.module.binderDeprecated.regist(textBinder);
+riba.module.binder.regist(textBinder);
 
 interface Model {
   obj?: {

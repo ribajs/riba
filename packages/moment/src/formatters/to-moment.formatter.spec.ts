@@ -5,7 +5,7 @@ import moment from 'moment';
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
 riba.module.formatter.regist(ToMomentFormatter);
-riba.module.binderDeprecated.regist(textBinder);
+riba.module.binder.regist(textBinder);
 
 interface Model {
   value: moment.MomentInput;

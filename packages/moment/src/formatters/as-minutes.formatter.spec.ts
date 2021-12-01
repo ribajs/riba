@@ -5,7 +5,7 @@ import { duration, Duration } from "moment";
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
 riba.module.formatter.regist(AsMinutesFormatter);
-riba.module.binderDeprecated.regist(textBinder);
+riba.module.binder.regist(textBinder);
 
 interface Model {
   duration: Duration,

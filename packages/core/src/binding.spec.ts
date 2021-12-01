@@ -2,11 +2,13 @@ import { Riba, Binding, Binder, View } from "./index";
 import { Data } from "../spec/lib/moch.data";
 import { dotAdapter } from "./adapters";
 import {
+  valueBinder,
+} from "./binders-deprecated";
+import {
   textBinder,
   htmlBinder,
-  valueBinder,
   eachStarBinder,
-} from "./binders-deprecated";
+} from "./binders";
 import {
   addClassBinder
 } from "./binders";
@@ -16,10 +18,10 @@ describe("riba.Binding", () => {
 
   const riba = new Riba();
   riba.module.adapter.regist(dotAdapter);
-  riba.module.binderDeprecated.regist(textBinder);
-  riba.module.binderDeprecated.regist(htmlBinder);
+  riba.module.binder.regist(textBinder);
+  riba.module.binder.regist(htmlBinder);
   riba.module.binderDeprecated.regist(valueBinder);
-  riba.module.binderDeprecated.regist(eachStarBinder);
+  riba.module.binder.regist(eachStarBinder);
   riba.module.binder.regist(addClassBinder);
 
   let model: object;
@@ -668,10 +670,10 @@ describe("Functional", () => {
 
   const riba = new Riba();
   riba.module.adapter.regist(dotAdapter);
-  riba.module.binderDeprecated.regist(textBinder);
-  riba.module.binderDeprecated.regist(htmlBinder);
+  riba.module.binder.regist(textBinder);
+  riba.module.binder.regist(htmlBinder);
   riba.module.binderDeprecated.regist(valueBinder);
-  riba.module.binderDeprecated.regist(eachStarBinder);
+  riba.module.binder.regist(eachStarBinder);
   riba.module.binder.regist(addClassBinder);
 
   let data: Data;

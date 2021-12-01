@@ -4,7 +4,7 @@ import { mapFormatter } from './map.formatter';
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
 riba.module.formatter.regist(mapFormatter);
-riba.module.binderDeprecated.regist(textBinder);
+riba.module.binder.regist(textBinder);
 
 interface Model {
   Math: Math;
