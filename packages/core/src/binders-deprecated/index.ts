@@ -18,8 +18,6 @@ export { parentBinder } from "./parent.binder";
 export { readonlyBinder } from "./readonly.binder";
 export { removeClassBinder } from "./remove-class.binder";
 export { ifBinder } from "./if.binder";
-export { hideBinder } from "./hide.binder";
-export { showBinder } from "./show.binder";
 export { srcsetSizeBinder } from "./srcset-size.binder";
 export { styleBackgroundImageBinder } from "./style-background-image.binder";
 export { toggleOnEventBinder } from "./toggle-on-event.binder";

@@ -8,13 +8,6 @@ import { BinderAttributeChangedEvent } from "../types";
  */
 export class attributeBinder extends Binder<string, HTMLElement> {
   static key = "*";
-  bind() {
-    //
-  }
-
-  unbind() {
-    //
-  }
 
   routine(el: HTMLElement, newValue: any) {
     if (!this.type) {

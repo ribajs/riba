@@ -6,9 +6,7 @@ import { BinderDeprecated } from "@ribajs/core";
 export const flexSortChildsBinder: BinderDeprecated<boolean> = {
   name: "flex-sort-childs",
   priority: 90000,
-  // bind(el: HTMLUnknownElement) {
 
-  // },
   routine(el: HTMLElement, descending: boolean) {
     const childrens = Array.from(el.children) as HTMLElement[];
     childrens.sort((a, b) => {

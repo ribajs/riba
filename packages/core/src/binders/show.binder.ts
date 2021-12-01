@@ -1,10 +1,10 @@
-import { BinderDeprecated } from "../types";
+import { Binder } from "../binder";
 
 /**
- * Shows the element when value is true.
+ * Shows the element when value is true (negated version of `hide` binder).
  */
-export const showBinder: BinderDeprecated<boolean> = {
-  name: "show",
+export class showBinder extends Binder<boolean, HTMLElement> {
+  static key = "show";
   routine(el: HTMLElement, value: boolean) {
     el.style.display = value ? "" : "none";
     if (value) {
@@ -12,5 +12,6 @@ export const showBinder: BinderDeprecated<boolean> = {
     } else {
       el.setAttribute("hidden", "true");
     }
-  },
-};
+  }
+}
+

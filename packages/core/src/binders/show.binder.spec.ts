@@ -5,7 +5,7 @@ import { Adapters } from "../types";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
-riba.module.binderDeprecated.regist(showBinder);
+riba.module.binder.regist(showBinder);
 
 describe("riba.binders", () => {
   let el: HTMLUnknownElement;
@@ -29,6 +29,7 @@ describe("riba.binders", () => {
     });
 
     el = document.createElement("div");
+    el.setAttribute("rv-show", "true");
     document.body.appendChild(el);
   });
 
@@ -42,14 +43,18 @@ describe("riba.binders", () => {
   describe("show", () => {
     describe("with a truthy value", () => {
       it("shows the element", () => {
-        (riba.bindersDeprecated.show as any).routine(el, true);
+        const view = riba.bind(el);
+        const showBinder = view.bindings[0] as showBinder;
+        showBinder.routine(el, true);
         expect(el.style.display).toEqual("");
       });
     });
 
     describe("with a falsey value", () => {
       it("hides the element", () => {
-        (riba.bindersDeprecated.show as any).routine(el, false);
+        const view = riba.bind(el);
+        const showBinder = view.bindings[0] as showBinder;
+        showBinder.routine(el, false);
         expect(el.style.display).toEqual("none");
       });
     });
