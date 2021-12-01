@@ -110,7 +110,9 @@ export class Bs5ToggleButtonComponent extends Component {
         this
       );
     }
-    this.eventDispatcher = new EventDispatcher(TOGGLE_BUTTON.nsPrefix + id);
+    const namespace = TOGGLE_BUTTON.nsPrefix + id;
+    this.debug(`Init event dispatcher for namespace  ${namespace}`);
+    this.eventDispatcher = new EventDispatcher(namespace);
     this.eventDispatcher.on(
       TOGGLE_BUTTON.eventNames.toggled,
       this.onToggledEvent,

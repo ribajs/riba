@@ -2,6 +2,25 @@
 /**
  * https://raw.githubusercontent.com/Shopify/slate/0.x/packages/slate-tools/src/tasks/includes/config.js
  */
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -10,13 +29,13 @@ exports.getReleaseName = exports.getReleaseZipFilename = exports.getYamlConfig =
 const path_1 = __importDefault(require("path"));
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const logger = require("debug")("@ribajs/shopify");
-const app_root_path_1 = __importDefault(require("app-root-path"));
+const findRoot = __importStar(require("app-root-path"));
 const gulp_util_1 = __importDefault(require("gulp-util"));
 const js_yaml_1 = __importDefault(require("js-yaml"));
 const fs_1 = __importDefault(require("fs"));
 const utilities_1 = require("./utilities");
 const npm_package_1 = require("@ribajs/npm-package");
-const themeRoot = app_root_path_1.default.toString();
+const themeRoot = findRoot.toString();
 const ribaShopifyRoot = (0, npm_package_1.isAvailable)("@ribajs/shopify");
 const ribaShopifyTdaRoot = (0, npm_package_1.isAvailable)("@ribajs/shopify-tda");
 if (!ribaShopifyRoot) {

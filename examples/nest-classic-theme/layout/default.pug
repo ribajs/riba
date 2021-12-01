@@ -1,3 +1,4 @@
+doctype html
 html(lang='en')
   head
     meta(charset='UTF-8')
@@ -15,8 +16,8 @@ html(lang='en')
       #main-container
         #layout-top
           include ../snippets/navbar.pug
-        #main(rv-view='{"listenAllLinks": true, "datasetToModel": true}')
+        router-view#main(listen-all-links="true")
           .router-container(data-namespace=router.namespace)
-            block content
+            block content    
     script(src='/vendors.bundle.js')
     script(src='/main.bundle.js')

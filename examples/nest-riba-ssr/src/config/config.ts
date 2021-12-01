@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 import { resolve } from 'path';
-import * as findRoot from 'find-root';
+import findRoot = require('find-root');
 import { registerAs } from '@nestjs/config';
 import { NestThemeConfig } from '@ribajs/nest-theme';
 

@@ -1,6 +1,6 @@
 export type SlideshowState =
-  | "overlay-left"
-  | "overlay-right"
+  | "overlap-left"
+  | "overlap-right"
   | "side-left"
   | "side-right"
   | "move-left"

@@ -1,8 +1,8 @@
 bs5-navbar.navbar.navbar-main.fixed-top.navbar-dark.bg-primary
-  .container-fluid.d-block.px-0
+  .container-fluid.d-block
     .row.justify-content-between
       //- Left
-      .col-auto.d-flex.align-items-center.px-0
+      .col-auto.d-flex.align-items-center
         bs5-toggle-button.text-light(target-id="main-sidebar")
           ul.nav
             li.nav-item.d-flex.align-items-center
@@ -15,4 +15,4 @@ bs5-navbar.navbar.navbar-main.fixed-top.navbar-dark.bg-primary
         ul.nav.d-none.d-lg-flex
           each item in linkList.main.items
             li.nav.d-flex
-              a.nav-link.text-light(href=item.url)= item.label
+              a.nav-link.text-light(rv-route-class-active href=item.url)= item.label
