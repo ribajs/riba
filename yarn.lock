@@ -7161,7 +7161,6 @@ __metadata:
     "@ribajs/postcss-config": "workspace:*"
     "@yarnpkg/pnpify": ^3.1.1-rc.6
     babel-loader: ^8.2.3
-    circular-dependency-plugin: ^5.2.2
     copy-webpack-plugin: ^9.1.0
     css-loader: ^6.5.1
     file-loader: ^6.2.0
@@ -12606,15 +12605,6 @@ __metadata:
     inherits: ^2.0.1
     safe-buffer: ^5.0.1
   checksum: 47d3568dbc17431a339bad1fe7dff83ac0891be8206911ace3d3b818fc695f376df809bea406e759cdea07fff4b454fa25f1013e648851bec790c1d75763032e
-  languageName: node
-  linkType: hard
-
-"circular-dependency-plugin@npm:^5.2.2":
-  version: 5.2.2
-  resolution: "circular-dependency-plugin@npm:5.2.2"
-  peerDependencies:
-    webpack: ">=4.0.1"
-  checksum: d1a51e7f86e72d9e7a08c47234511cc7a5c3050781c2d6dcc77c0b22214f94f272702488c952e59b2af589c67944160ad1c9c0b7b3e0d4f89222f2a27ebf085e
   languageName: node
   linkType: hard
 
