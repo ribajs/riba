@@ -47,6 +47,6 @@ async function bootstrap() {
 
   await app.listen(config.app.port);
 
-  console.debug(`Start app on localhost:${config.app.port}`);
+  console.debug(`Start app on http://localhost:${config.app.port}`);
 }
 bootstrap();

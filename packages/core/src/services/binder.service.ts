@@ -21,25 +21,25 @@ export class BindersService extends ModuleElementService<ClassOfBinder> {
    * @param name  Overwrites the name to access the binder over
    */
   public regist(
-    binder: ClassOfBinder,
+    Binder: ClassOfBinder,
     fallbackName?: string,
     forceFallback = false
   ) {
-    if (!binder) {
-      console.warn(new Error("Can not regist binder!"), binder);
+    if (!Binder) {
+      console.warn(new Error("Can not regist binder!"), Binder);
       return this.elements;
     }
 
     const name = forceFallback
-      ? fallbackName || binder.name
-      : binder.name || fallbackName;
+      ? fallbackName || Binder.key
+      : Binder.key || fallbackName;
 
     if (!name) {
-      console.warn(new Error("Binder name not found!"), binder);
+      console.warn(new Error("Binder name not found!"), Binder);
       return this.elements;
     }
 
-    this.elements[name] = binder;
+    this.elements[name] = Binder;
     return this.elements;
   }
 }

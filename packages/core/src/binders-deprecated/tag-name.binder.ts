@@ -49,7 +49,6 @@ export const tagStarBinder: BinderDeprecated<boolean> = {
       // Copy attributes to new element
       const attributes = Array.prototype.slice.call(oldEl.attributes);
       for (const attribute of attributes) {
-        console.debug("attribute", attribute);
         newEl.setAttribute(attribute.name, attribute.value);
       }
 

@@ -55,10 +55,8 @@ export class MonacoExampleComponent extends Component {
   protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
-      // console.debug('Do not use template, because element has child nodes');
       return null;
     } else {
-      // console.debug('Use template', template);
       return pugTemplate(this.scope);
     }
   }

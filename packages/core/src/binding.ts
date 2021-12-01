@@ -1,6 +1,6 @@
 import { PRIMITIVE, KEYPATH, parseType } from "./parsers";
 import { Observer } from "./observer";
-import {
+import type {
   BinderDeprecated,
   FormatterObservers,
   eventHandlerFunction,
@@ -8,7 +8,7 @@ import {
   Bindable,
 } from "./types";
 import { FORMATTER_ARGS, FORMATTER_SPLIT } from "./constants/formatter";
-import { View } from "./view";
+import type { View } from "./view";
 import { getInputValue } from "@ribajs/utils/src/dom";
 
 /**
@@ -59,18 +59,18 @@ export class Binding implements Bindable {
    */
   constructor(
     view: View,
-    el: HTMLUnknownElement,
+    el: HTMLUnknownElement | Text,
     type: string | null,
     keypath: string | undefined,
     binder: BinderDeprecated<any>,
     formatters: string[] | null,
     identifier: string | null
   ) {
-    console.warn(
-      `[Binding][${type}] Binding objects are deprecated, Binding objects are deprecated, please use a binding class instead`
-    );
+    // console.warn(
+    //   `[Binding][${type}] Binder is deprecated`
+    // );
     this.view = view;
-    this.el = el;
+    this.el = el as HTMLUnknownElement;
     this.type = type;
     this.keypath = keypath;
     this.binder = binder;

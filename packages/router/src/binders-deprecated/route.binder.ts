@@ -44,7 +44,6 @@ export const routeBinder: BinderDeprecated<string> = {
           event.stopPropagation();
           event.preventDefault();
         } else if (isExternalUrl(this.customData.options.url)) {
-          // console.debug('check');
           if (!pjax) {
             return;
           }

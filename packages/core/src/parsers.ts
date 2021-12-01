@@ -1,6 +1,8 @@
 import { parseJsonString, couldBeJson } from "@ribajs/utils";
 import { DataElement } from "./types";
-import { MustacheTextBinder } from "./binders/mustache-text.binder";
+// TODO fix circular dependency
+// import { MustacheTextBinder } from "./binders/mustache-text.binder";
+import { mustacheTextBinderDeprecated } from "./binders-deprecated/mustache-text.binder";
 import { View } from "./view";
 
 /**
@@ -137,7 +139,6 @@ export function parseNode(
   if (node.nodeType === Node.TEXT_NODE) {
     let tokens = null;
 
-    // TODO why check data?
     if (node.data) {
       tokens = parseTemplate(node.data, templateDelimiters);
     }
@@ -150,7 +151,9 @@ export function parseNode(
           node.parentNode.insertBefore(text, node);
         }
         if (token.type === BINDING) {
-          view.buildBinding(text, null, token.value, MustacheTextBinder, null);
+          // TODO fix circular dependency
+          // view.buildBinding(text, null, token.value, MustacheTextBinder, null);
+          view.buildBindingDeprecated(text, null, token.value, mustacheTextBinderDeprecated, null);
         }
       }
       if (node.parentNode) {

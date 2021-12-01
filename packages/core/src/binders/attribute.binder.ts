@@ -7,7 +7,7 @@ import { BinderAttributeChangedEvent } from "../types";
  * back to using this binder.
  */
 export class attributeBinder extends Binder<string, HTMLElement> {
-  name = "*";
+  static key = "*";
   bind() {
     //
   }

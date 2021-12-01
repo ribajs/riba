@@ -13,7 +13,7 @@ import { Binder } from "../binder";
  * <ul>
  */
 export class addClassBinder extends Binder<string, HTMLElement> {
-  name = "add-class";
+  static key = "add-class";
   function = true;
   priority = 1000;
   private staticClasses?: string[];

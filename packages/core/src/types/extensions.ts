@@ -4,6 +4,7 @@ import { Adapters } from "./adapters";
 import { Components } from "./components";
 
 export interface Extensions {
+  /** @deprecated */
   bindersDeprecated?: BindersDeprecated;
   binders?: Binders;
   formatters?: Formatters;

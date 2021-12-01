@@ -71,7 +71,6 @@ export const dataScrollPositionYBinder: BinderDeprecated<string> = {
 
     // Watch new element for scroll event
     if (this.customData.watchScrollOnElement) {
-      // console.debug('addEventListener', this.customData.watchScrollOnElement);
       this.customData.watchScrollOnElement.addEventListener(
         "scroll",
         this.customData.onScroll,

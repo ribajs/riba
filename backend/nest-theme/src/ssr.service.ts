@@ -156,8 +156,6 @@ export class SsrService {
       };
 
       const clear = () => {
-        // console.debug('Clear JSDom');
-
         // Ignore clear errors
         virtualConsole.sendTo(new DummyConsole());
         virtualConsole.off('jsdomError', onError);

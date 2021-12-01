@@ -184,7 +184,7 @@ export class View {
         (binding as Binding).publish();
       }
       if ((binding as Binder).publishes && (binding as Binder).publish) {
-        (binding as Binding).publish();
+        (binding as Binder).publish();
       }
     });
   }
@@ -199,9 +199,9 @@ export class View {
     });
 
     for (const binding of this.bindings) {
-      // if ((binding as Binding).update) {
-      binding._update(models);
-      // }
+      if (binding._update) {
+        binding._update(models);
+      }
     }
   }
 
@@ -256,7 +256,7 @@ export class View {
     attributeBinders = this.options.attributeBinders
   ) {
     if (!this.options.bindersDeprecated) {
-      return;
+      return false;
     }
     const bindInfos = [];
     for (let i = 0, len = attributes.length; i < len; i++) {
@@ -271,6 +271,11 @@ export class View {
         // if binder is not a attributeBinder binder should be set
         if (this.options.bindersDeprecated[nodeName]) {
           binder = this.options.bindersDeprecated[nodeName];
+        }
+
+        if (binder === null && this.options.binders && this.options.binders[nodeName]) {
+          // There is a new binder for this, skip
+          continue;
         }
 
         if (binder === null) {
@@ -327,6 +332,7 @@ export class View {
         node.removeAttribute(bindInfo.attr.name);
       }
     }
+    return false;
   }
 
   /**
@@ -338,12 +344,12 @@ export class View {
     attributeBinders = this.options.attributeBinders
   ) {
     if (!this.options.binders) {
-      return;
+      return false;
     }
     const bindInfos = [];
     for (let i = 0, len = attributes.length; i < len; i++) {
       let nodeName = "";
-      let binder: ClassOfBinder | null = null;
+      let Binder: ClassOfBinder | null = null;
       let identifier = "";
       const attribute = attributes[i];
       // if attribute starts with the binding prefix. E.g. rv-
@@ -352,38 +358,38 @@ export class View {
         nodeName = attribute.name.slice(startingPrefix.length);
         // if binder is not a attributeBinder binder should be set
         if (this.options.binders[nodeName]) {
-          binder = this.options.binders[nodeName];
+          Binder = this.options.binders[nodeName];
         }
 
-        if (binder === null) {
+        if (Binder === null) {
           // seems to be a star binder (because binder was not set)
           // Check if any attributeBinder match's
           for (let k = 0; k < attributeBinders.length; k++) {
             identifier = attributeBinders[k];
             const regexp = new RegExp(`^${identifier.replace(/\*/g, ".+")}$`);
             if (regexp.test(nodeName)) {
-              binder = this.options.binders[identifier];
+              Binder = this.options.binders[identifier];
               break;
             }
           }
         }
 
-        if (binder === null) {
+        if (Binder === null) {
           if (this.options.binders["*"]) {
-            binder = this.options.binders["*"];
+            Binder = this.options.binders["*"];
             identifier = "*";
           } else {
-            binder = Riba.fallbackBinder;
+            Binder = Riba.fallbackBinder;
           }
         }
         // if block is set, do not bind its child's (this means the binder bound it by itself)
         // and build binding directly (do not push it to bindInfos array)
-        if (binder.block) {
+        if (Binder.block) {
           this.buildBinding(
             node,
             nodeName,
             attribute.value,
-            binder,
+            Binder,
             identifier
           );
           if (node.removeAttribute && this.options.removeBinderAttributes) {
@@ -392,7 +398,7 @@ export class View {
           return true;
         }
 
-        bindInfos.push({ attr: attribute, binder, nodeName, identifier });
+        bindInfos.push({ attr: attribute, Binder, nodeName, identifier });
       }
     }
 
@@ -402,13 +408,14 @@ export class View {
         node,
         bindInfo.nodeName,
         bindInfo.attr.value,
-        bindInfo.binder,
+        bindInfo.Binder,
         bindInfo.identifier
       );
       if (node.removeAttribute && this.options.removeBinderAttributes) {
         node.removeAttribute(bindInfo.attr.name);
       }
     }
+    return false;
   }
 
   private bindComponent(node: BindableElement) {
@@ -442,12 +449,18 @@ export class View {
 
     // bind attribute deprecated binders if available
     if (attributes && this.options.bindersDeprecated) {
-      this.bindBindersDeprecated(attributes, node);
+      block = this.bindBindersDeprecated(attributes, node);
+      if (block) {
+        return block;
+      }
     }
 
     // bind attribute binders if available
     if (attributes && this.options.binders) {
-      this.bindBinders(attributes, node);
+      block = this.bindBinders(attributes, node);
+      if (block) {
+        return block;
+      }
     }
 
     // bind components
@@ -481,7 +494,7 @@ export class View {
    * @param identifier
    */
   public buildBindingDeprecated(
-    node: HTMLUnknownElement,
+    node: HTMLUnknownElement | Text,
     type: string | null,
     declaration: string,
     binder: BinderDeprecated<any>,

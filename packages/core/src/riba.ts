@@ -153,38 +153,41 @@ export class Riba {
 
     for (const [option, value] of Object.entries(options)) {
       switch (option) {
+        case "bindersDeprecated":
+          this.bindersDeprecated = { ...this.bindersDeprecated, ...value as BindersDeprecated };
+          break;
         case "binders":
-          this.binders = { ...this.binders, ...value };
+          this.binders = { ...this.binders, ...value as Binders };
           break;
         case "formatters":
-          this.formatters = { ...this.formatters, ...value };
+          this.formatters = { ...this.formatters, ...value as Formatters };
           break;
         case "components":
-          this.components = { ...this.components, ...value };
+          this.components = { ...this.components, ...value as Components };
           break;
         case "adapters":
-          this.adapters = { ...this.adapters, ...value };
+          this.adapters = { ...this.adapters, ...value as Adapters };
           break;
         case "prefix":
-          this.prefix = value;
+          this.prefix = value as string[];
           break;
         case "parseTemplate":
-          this.parseTemplate = value;
+          this.parseTemplate = value as any;
           break;
         case "parseType":
-          this.parseType = value;
+          this.parseType = value as any;
           break;
         case "templateDelimiters":
-          this.templateDelimiters = value;
+          this.templateDelimiters = value as string[];
           break;
         case "rootInterface":
-          this.rootInterface = value;
+          this.rootInterface = value as string;
           break;
         case "preloadData":
-          this.preloadData = value;
+          this.preloadData = value as boolean;
           break;
         case "blockNodeNames":
-          this.blockNodeNames = value;
+          this.blockNodeNames = value as string[];
           break;
         case "blockUnknownCustomElements":
           this.blockUnknownCustomElements = Boolean(value);
@@ -201,11 +204,12 @@ export class Riba {
       // EXTENSIONS
       adapters: {} as Adapters,
       binders: {} as Binders<any>,
+      bindersDeprecated: {} as BindersDeprecated<any>,
       components: {} as Components,
       formatters: {} as Formatters,
 
       // other
-      attributeBinders: {},
+      attributeBinders: [],
 
       // sightglass
       rootInterface: {} as Root,
@@ -213,6 +217,7 @@ export class Riba {
 
     if (options) {
       viewOptions.binders = { ...viewOptions.binders, ...options.binders };
+      viewOptions.bindersDeprecated = { ...viewOptions.bindersDeprecated, ...options.bindersDeprecated };
       viewOptions.formatters = {
         ...viewOptions.formatters,
         ...options.formatters,
@@ -256,15 +261,28 @@ export class Riba {
 
     // merge extensions
     viewOptions.binders = { ...this.binders, ...viewOptions.binders };
+    viewOptions.bindersDeprecated = { ...this.bindersDeprecated, ...viewOptions.bindersDeprecated };
     viewOptions.formatters = { ...this.formatters, ...viewOptions.formatters };
     viewOptions.components = { ...this.components, ...viewOptions.components };
     viewOptions.adapters = { ...this.adapters, ...viewOptions.adapters };
 
+    if (!viewOptions.attributeBinders) {
+      viewOptions.attributeBinders = [];
+    }
+
     // get all attributeBinders from available binders
-    if (viewOptions.binders) {
-      viewOptions.attributeBinders = Object.keys(viewOptions.binders).filter(
+    if (viewOptions.bindersDeprecated) {
+      const attributeBinders = Object.keys(viewOptions.bindersDeprecated).filter(
         (key) => key.indexOf("*") >= 1 // Should contain, but not start with, *
       );
+
+      viewOptions.attributeBinders.push(...attributeBinders);
+    }
+    if (viewOptions.binders) {
+      const attributeBinders = Object.keys(viewOptions.binders).filter(
+        (key) => key.indexOf("*") >= 1 // Should contain, but not start with, *
+      );
+      viewOptions.attributeBinders.push(...attributeBinders);
     }
 
     return viewOptions as Options;

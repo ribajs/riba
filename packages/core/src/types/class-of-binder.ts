@@ -16,4 +16,5 @@ export interface ClassOfBinder<T = Binder<any, any>, E = any> extends Function {
     identifier: string | null
   ): T;
   block: boolean;
+  key: string;
 }

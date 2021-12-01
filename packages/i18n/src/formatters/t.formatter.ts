@@ -33,7 +33,6 @@ export const tFormatter: Formatter = {
     const localesService = I18nService.options.localesService;
     return new Promise((resolve, reject) => {
       localesService.event.on("changed", () => {
-        // console.debug('changed');
         translate(translateMePathString, localesService, langcode)
           .then((locale) => {
             resolve(locale as any);

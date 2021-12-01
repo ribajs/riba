@@ -1,6 +1,6 @@
 import { PRIMITIVE, KEYPATH, parseType } from "./parsers";
 import { Observer } from "./observer";
-import {
+import type {
   FormatterObservers,
   eventHandlerFunction,
   ObserverSyncCallback,
@@ -19,11 +19,18 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
   /**
    * The name of the binder to access the binder by
    */
-  abstract name: string;
+  static key: string = "";
+
+
+  get name() {
+    return Binder.key;
+  }
+
   /**
    * Blocks the current node and child nodes from being parsed (used for iteration binding as well as the if/unless binders).
    */
   static block = false;
+
   /**
    * Set this to true if you want view.publish() to call publish on these bindings.
    */
@@ -103,9 +110,6 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
     formatters: string[] | null,
     identifier: string | null
   ) {
-    console.warn(
-      `[Binding][${type}] Binding objects are deprecated, Binding objects are deprecated, please use a binding class instead`
-    );
     this.view = view;
     this.el = el;
     this.type = type;

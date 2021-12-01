@@ -29,7 +29,7 @@ export class Component2Component extends Component {
   }
 
   protected async afterBind() {
-    console.debug("scope", this.scope);
+    this.debug("scope", this.scope);
   }
 
   protected template(): ReturnType<TemplateFunction> {
