@@ -19,8 +19,7 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
   /**
    * The name of the binder to access the binder by
    */
-  static key: string = "";
-
+  static key = "";
 
   get name() {
     return Binder.key;

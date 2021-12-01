@@ -1,4 +1,9 @@
-import { BinderDeprecated, View, handleizeFormatter, FormatterFn } from "@ribajs/core";
+import {
+  BinderDeprecated,
+  View,
+  handleizeFormatter,
+  FormatterFn,
+} from "@ribajs/core";
 import { isObject } from "@ribajs/utils/src/type";
 import { Pjax, HideShowTransition } from "../services";
 

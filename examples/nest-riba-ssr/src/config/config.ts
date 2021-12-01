@@ -6,7 +6,7 @@ import { registerAs } from '@nestjs/config';
 import { NestThemeConfig } from '@ribajs/nest-theme';
 
 const THEME_ACTIVE = process.env.THEME_ACTIVE || 'nest-riba-ssr-theme';
-const ROOT = findRoot(process.cwd())
+const ROOT = findRoot(process.cwd());
 const PACKAGES = resolve(ROOT, '..');
 const THEME_DIR = process.env.THEME_DIR || resolve(PACKAGES, THEME_ACTIVE);
 

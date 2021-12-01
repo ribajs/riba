@@ -73,7 +73,6 @@ export const eachStarBinder: BinderDeprecated<any[]> = {
       el.getAttribute("index-property") || this.getIterationAlias(modelName);
 
     collection.forEach((model, index) => {
-
       const scope: any = { $parent: this.view.models };
       // Is object transformed to array
       if (isObject) {

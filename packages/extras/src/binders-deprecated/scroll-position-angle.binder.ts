@@ -15,7 +15,9 @@ import { scrollToPosition } from "@ribajs/utils/src/dom";
  * <div rv-scroll-position-x="'start'"></div>
  * ```
  */
-export const scrollPositionAngleBinder: BinderDeprecated<number | "end" | "start"> = {
+export const scrollPositionAngleBinder: BinderDeprecated<
+  number | "end" | "start"
+> = {
   name: "scroll-position-*",
   customData: {},
 

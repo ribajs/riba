@@ -153,7 +153,13 @@ export function parseNode(
         if (token.type === BINDING) {
           // TODO fix circular dependency
           // view.buildBinding(text, null, token.value, MustacheTextBinder, null);
-          view.buildBindingDeprecated(text, null, token.value, mustacheTextBinderDeprecated, null);
+          view.buildBindingDeprecated(
+            text,
+            null,
+            token.value,
+            mustacheTextBinderDeprecated,
+            null
+          );
         }
       }
       if (node.parentNode) {

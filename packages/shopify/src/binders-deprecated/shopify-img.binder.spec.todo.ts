@@ -6,7 +6,7 @@ describe("riba.binders", () => {
   let el: HTMLImageElement;
 
   const riba = new Riba();
-  riba.module.binder.regist(shopifyImgBinder);
+  riba.module.binderDeprecated.regist(shopifyImgBinder);
 
   beforeEach(() => {
     el = document.createElement("img");

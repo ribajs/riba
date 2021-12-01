@@ -273,7 +273,11 @@ export class View {
           binder = this.options.bindersDeprecated[nodeName];
         }
 
-        if (binder === null && this.options.binders && this.options.binders[nodeName]) {
+        if (
+          binder === null &&
+          this.options.binders &&
+          this.options.binders[nodeName]
+        ) {
           // There is a new binder for this, skip
           continue;
         }
