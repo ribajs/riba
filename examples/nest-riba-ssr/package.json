@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "nest build",
+    "_build": "nest build # Wait for bugfix https://github.com/DefinitelyTyped/DefinitelyTyped/discussions/57467",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "NODE_ENV=development nest start",
     "start:debug": "NODE_ENV=development nest start --debug",
