@@ -26,7 +26,13 @@ export const checkedBinder: BinderDeprecated<string | boolean> = {
   },
 
   routine(el: HTMLElement, newValue) {
-    const oldValue = this._getValue(el);
+    let oldValue;
+    if (!this._getValue) {
+      console.warn("this._getValue is not a function, this: ", this);
+      oldValue = getInputValue(el);
+    } else {
+      oldValue = this._getValue(el);
+    }
     if ((el as HTMLInputElement).type === "radio") {
       (el as HTMLInputElement).checked =
         getString(oldValue) === getString(newValue);

@@ -6,7 +6,7 @@ import moment from 'moment';
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
 riba.module.formatter.regist(HoursFormatter);
-riba.module.binder.regist(textBinder);
+riba.module.binderDeprecated.regist(textBinder);
 
 interface Model {
   obj?: {

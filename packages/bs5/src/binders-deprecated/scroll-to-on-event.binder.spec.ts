@@ -10,7 +10,7 @@ describe('riba.binders', () => {
 
   const riba = new Riba();
   riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regist(scrollToOnEventBinder);
+  riba.module.binderDeprecated.regist(scrollToOnEventBinder);
 
   beforeEach(() => {
 

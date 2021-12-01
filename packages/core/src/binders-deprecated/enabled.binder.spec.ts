@@ -45,14 +45,14 @@ describe("riba.binders", () => {
   describe("enabled", () => {
     describe("with a truthy value", () => {
       it("enables the element", () => {
-        (riba.binders.enabled as any).routine(button, true);
+        (riba.bindersDeprecated.enabled as any).routine(button, true);
         expect(button.disabled).toEqual(false);
       });
     });
 
     describe("with a falsey value", () => {
       it("disables the element", () => {
-        (riba.binders.enabled as any).routine(button, false);
+        (riba.bindersDeprecated.enabled as any).routine(button, false);
         expect(button.disabled).toEqual(true);
       });
     });

@@ -1,9 +1,6 @@
 import { Riba } from "../riba";
-
 import { dotAdapter } from "../adapters/dot.adapter";
-
 import { showBinder } from "./show.binder";
-
 import { Adapters } from "../types";
 
 const riba = new Riba();
@@ -45,14 +42,14 @@ describe("riba.binders", () => {
   describe("show", () => {
     describe("with a truthy value", () => {
       it("shows the element", () => {
-        (riba.binders.show as any).routine(el, true);
+        (riba.bindersDeprecated.show as any).routine(el, true);
         expect(el.style.display).toEqual("");
       });
     });
 
     describe("with a falsey value", () => {
       it("hides the element", () => {
-        (riba.binders.show as any).routine(el, false);
+        (riba.bindersDeprecated.show as any).routine(el, false);
         expect(el.style.display).toEqual("none");
       });
     });

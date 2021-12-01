@@ -72,14 +72,14 @@ describe("riba.binders", () => {
     describe("with a checkbox input", () => {
       describe("and a truthy value", () => {
         it("checks the checkbox input", () => {
-          (riba.binders.checked as any).routine(checkboxInput, true);
+          (riba.bindersDeprecated.checked as any).routine(checkboxInput, true);
           expect(checkboxInput.checked).toEqual(true);
         });
       });
 
       describe("with a falsey value", () => {
         it("unchecks the checkbox input", () => {
-          (riba.binders.checked as any).routine(checkboxInput, false);
+          (riba.bindersDeprecated.checked as any).routine(checkboxInput, false);
           expect(checkboxInput.checked).toEqual(false);
         });
       });
@@ -88,14 +88,14 @@ describe("riba.binders", () => {
     describe('with a radio input with value="true"', () => {
       describe("and a truthy value", () => {
         it("checks the radio input", () => {
-          (riba.binders.checked as any).routine(trueRadioInput, true);
+          (riba.bindersDeprecated.checked as any).routine(trueRadioInput, true);
           expect(trueRadioInput.checked).toEqual(true);
         });
       });
 
       describe("with a falsey value", () => {
         it("unchecks the radio input", () => {
-          (riba.binders.checked as any).routine(trueRadioInput, false);
+          (riba.bindersDeprecated.checked as any).routine(trueRadioInput, false);
           expect(trueRadioInput.checked).toEqual(false);
         });
       });
@@ -104,14 +104,14 @@ describe("riba.binders", () => {
     describe('with a radio input with value="false"', () => {
       describe("and a truthy value", () => {
         it("unchecks the radio input", () => {
-          (riba.binders.checked as any).routine(falseRadioInput, true);
+          (riba.bindersDeprecated.checked as any).routine(falseRadioInput, true);
           expect(falseRadioInput.checked).toEqual(false);
         });
       });
 
       describe("with a falsey value", () => {
         it("checks the radio input", () => {
-          (riba.binders.checked as any).routine(falseRadioInput, false);
+          (riba.bindersDeprecated.checked as any).routine(falseRadioInput, false);
           expect(falseRadioInput.checked).toEqual(true);
         });
       });

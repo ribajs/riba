@@ -43,13 +43,13 @@ describe("riba.binders", () => {
 
   describe("html", () => {
     it("sets the element's HTML content", () => {
-      (riba.binders.html as any).routine(el, "<strong>hello</strong>");
+      (riba.bindersDeprecated.html as any).routine(el, "<strong>hello</strong>");
       expect(el.textContent).toEqual("hello");
       expect(el.innerHTML).toEqual("<strong>hello</strong>");
     });
 
     it("sets the element's HTML content to zero when a zero value is passed", () => {
-      (riba.binders.html as any).routine(el, 0);
+      (riba.bindersDeprecated.html as any).routine(el, 0);
       expect(el.textContent).toEqual("0");
       expect(el.innerHTML).toEqual("0");
     });

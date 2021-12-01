@@ -139,7 +139,7 @@ describe("riba.Binding", () => {
       );
 
       view = riba.bind(valueInput, { obj: { name: "nothing" } });
-      binding = view.bindings[0] as Binding;
+      binding = view.bindings[0];
       expect(binding.formatters).toEqual(["awesome", "radical", "totally"]);
     });
 
@@ -175,7 +175,7 @@ describe("riba.Binding", () => {
       }).not.toThrow();
 
       if ((binding as Binding)?.binder) {
-        (binding as Binding).binder._bind = () => {
+        (binding as Binding).binder.bind = () => {
           return;
         };
         jest.spyOn((binding as Binding).binder, "bind");
@@ -183,7 +183,7 @@ describe("riba.Binding", () => {
         binding._bind();
         expect((binding as Binding).binder.bind).toHaveBeenCalled();
       } else {
-        (binding as Binder)._bind = () => {
+        (binding as Binder).bind = () => {
           return;
         };
         jest.spyOn((binding as Binder), "bind");

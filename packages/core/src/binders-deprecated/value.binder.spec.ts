@@ -1,9 +1,6 @@
 import { Riba } from "../riba";
-
 import { dotAdapter } from "../adapters/dot.adapter";
-
 import { valueBinder } from "./value.binder";
-
 import { Adapters } from "../types";
 
 describe("riba.binders", () => {
@@ -147,17 +144,17 @@ describe("riba.binders", () => {
     });
 
     it("sets the element's value", () => {
-      (riba.binders.value as any).routine(input, "pitchfork");
+      (riba.bindersDeprecated.value as any).routine(input, "pitchfork");
       expect(input.value).toEqual("pitchfork");
     });
 
     it("applies a default value to the element when the model doesn't contain it", () => {
-      (riba.binders.value as any).routine(input, undefined);
+      (riba.bindersDeprecated.value as any).routine(input, undefined);
       expect(input.value).toEqual("");
     });
 
     it("sets the element's value to zero when a zero value is passed", () => {
-      (riba.binders.value as any).routine(input, 0);
+      (riba.bindersDeprecated.value as any).routine(input, 0);
       expect(input.value).toEqual("0");
     });
 
@@ -181,13 +178,13 @@ describe("riba.binders", () => {
       });
 
       it("sets the correct option on a select element", () => {
-        (riba.binders.value as any).routine(selectEl, "b");
-        (riba.binders.value as any).routine(selectEl, "c");
+        (riba.bindersDeprecated.value as any).routine(selectEl, "b");
+        (riba.bindersDeprecated.value as any).routine(selectEl, "c");
         expect(selectEl.value).toEqual("c");
       });
 
       it("sets the correct option on a select-multiple element", () => {
-        (riba.binders.value as any).routine(selectMultipleEl, ["d", "f"]);
+        (riba.bindersDeprecated.value as any).routine(selectMultipleEl, ["d", "f"]);
         const result = Array.prototype.slice
           .call(selectMultipleEl.children)
           .filter((option: any) => {
@@ -201,13 +198,13 @@ describe("riba.binders", () => {
       });
 
       it("sets the correct option on a grouped select element", () => {
-        (riba.binders.value as any).routine(groupedSelectEl, "b");
-        (riba.binders.value as any).routine(groupedSelectEl, "c");
+        (riba.bindersDeprecated.value as any).routine(groupedSelectEl, "b");
+        (riba.bindersDeprecated.value as any).routine(groupedSelectEl, "c");
         expect(groupedSelectEl.value).toEqual("c");
       });
 
       it("sets the correct option on a select-multiple element", () => {
-        (riba.binders.value as any).routine(groupedMultipleSelectEl, [
+        (riba.bindersDeprecated.value as any).routine(groupedMultipleSelectEl, [
           "a",
           "c",
         ]);

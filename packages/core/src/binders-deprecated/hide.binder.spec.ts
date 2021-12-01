@@ -45,14 +45,14 @@ describe("riba.binders", () => {
   describe("hide", () => {
     describe("with a truthy value", () => {
       it("hides the element", () => {
-        (riba.binders.hide as any).routine(el, true);
+        (riba.bindersDeprecated.hide as any).routine(el, true);
         expect(el.style.display).toEqual("none");
       });
     });
 
     describe("with a falsey value", () => {
       it("shows the element", () => {
-        (riba.binders.hide as any).routine(el, false);
+        (riba.bindersDeprecated.hide as any).routine(el, false);
         expect(el.style.display).toEqual("");
       });
     });

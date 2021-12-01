@@ -44,13 +44,13 @@ describe("riba.binders", () => {
 
   describe("text", () => {
     it("sets the element's text content", () => {
-      (riba.binders.text as any).routine(el, "<em>hello</em>");
+      (riba.bindersDeprecated.text as any).routine(el, "<em>hello</em>");
       expect(el.textContent).toEqual("<em>hello</em>");
       expect(el.innerHTML).toEqual("&lt;em&gt;hello&lt;/em&gt;");
     });
 
     it("sets the element's text content to zero when a numeric zero is passed", () => {
-      (riba.binders.text as any).routine(el, 0);
+      (riba.bindersDeprecated.text as any).routine(el, 0);
       expect(el.textContent).toEqual("0");
       expect(el.innerHTML).toEqual("0");
     });

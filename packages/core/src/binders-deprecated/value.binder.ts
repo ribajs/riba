@@ -58,7 +58,14 @@ export const valueBinder: BinderDeprecated<any> = {
   },
 
   routine(el: HTMLElement | HTMLSelectElement, value?: string | string[]) {
-    let oldValue = this._getValue(el);
+    let oldValue
+    if (!this._getValue) {
+      console.warn("this._getValue is not a function, this: ", this);
+      oldValue = getInputValue(el);
+    } else {
+      oldValue = this._getValue(el);
+    }
+    
     if (!Array.isArray(value)) {
       if (value != null) {
         value = getString(value);

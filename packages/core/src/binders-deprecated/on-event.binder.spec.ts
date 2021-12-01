@@ -8,7 +8,7 @@ import { valueBinder } from "./value.binder";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
-riba.module.binder.regists([onEventBinder, valueBinder]);
+riba.module.binderDeprecated.regists([onEventBinder, valueBinder]);
 
 describe("riba.binders", () => {
   let element: HTMLInputElement;
