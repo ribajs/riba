@@ -5838,12 +5838,12 @@ __metadata:
     "@nestjs/testing": ^8.2.3
     "@types/cookie-parser": ^1.4.2
     "@types/express-session": ^1.17.4
+    "@types/find-root": ^1.1.2
     "@types/jest": ^27.0.3
     "@types/node": ^16.11.11
     "@types/supertest": ^2.0.11
     "@typescript-eslint/eslint-plugin": ^5.5.0
     "@typescript-eslint/parser": ^5.5.0
-    app-root-path: ^3.0.0
     cookie-parser: ^1.4.6
     dotenv: ^10.0.0
     eslint: ^8.3.0
@@ -5851,6 +5851,7 @@ __metadata:
     eslint-plugin-prettier: ^4.0.0
     express: ^4.17.1
     express-session: ^1.17.2
+    find-root: ^1.1.0
     jest: ^27.4.2
     jest-config: ^27.4.2
     jest-extended: ^1.2.0
@@ -5951,13 +5952,13 @@ __metadata:
     "@types/cookie-parser": ^1.4.2
     "@types/express": ^4.17.13
     "@types/express-session": ^1.17.4
+    "@types/find-root": ^1.1.2
     "@types/jest": ^27.0.3
     "@types/jsdom": ^16.2.13
     "@types/node": ^16.11.11
     "@types/supertest": ^2.0.11
     "@typescript-eslint/eslint-plugin": ^5.5.0
     "@typescript-eslint/parser": ^5.5.0
-    app-root-path: ^3.0.0
     consolidate: ^0.16.0
     cookie-parser: ^1.4.6
     dotenv: ^10.0.0
@@ -5966,6 +5967,7 @@ __metadata:
     eslint-plugin-prettier: ^4.0.0
     express: ^4.17.1
     express-session: ^1.17.2
+    find-root: ^1.1.0
     jest: ^27.4.2
     jest-config: ^27.4.2
     jest-extended: ^1.2.0
@@ -7677,6 +7679,13 @@ __metadata:
     "@types/qs": "*"
     "@types/serve-static": "*"
   checksum: 12a2a0e6c4b993fc0854bec665906788aea0d8ee4392389d7a98a5de1eefdd33c9e1e40a91f3afd274011119c506f7b4126acb97fae62ae20b654974d44cba12
+  languageName: node
+  linkType: hard
+
+"@types/find-root@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "@types/find-root@npm:1.1.2"
+  checksum: 658492cc913d30de0bb6cbc1ae8ad70be329f8938cdcc20521f66114464c66c5d14755c2fe7f38bc28230bb769ac6bf35367bdadee0c2275d38e4e99eb652b74
   languageName: node
   linkType: hard
 
@@ -16246,6 +16255,13 @@ __metadata:
     make-dir: ^3.0.2
     pkg-dir: ^4.1.0
   checksum: 0f7c22b65e07f9b486b4560227d014fab1e79ffbbfbafb87d113a2e878510bd620ef6fdff090e5248bb2846d28851d19e42bfdc7c50687966acc106328e7abf1
+  languageName: node
+  linkType: hard
+
+"find-root@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "find-root@npm:1.1.0"
+  checksum: b2a59fe4b6c932eef36c45a048ae8f93c85640212ebe8363164814990ee20f154197505965f3f4f102efc33bfb1cbc26fd17c4a2fc739ebc51b886b137cbefaf
   languageName: node
   linkType: hard
 
