@@ -107,7 +107,7 @@
     "graceful-fs": "^4.2.8",
     "gulp": "^4.0.2",
     "gulp-jsoncombine": "^1.0.4",
-    "jest": "^27.4.1",
+    "jest": "^27.4.2",
     "jest-extended": "^1.2.0",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
