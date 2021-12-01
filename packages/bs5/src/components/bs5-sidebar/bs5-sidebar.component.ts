@@ -18,7 +18,7 @@ interface Scope {
    */
   containerSelector?: string;
   /**
-   * The current state of the sidebar, can be `'hidden'`, `'side-left'`, `'side-right'`, `'overlay-left'` or `'overlay-right'`
+   * The current state of the sidebar, can be `'hidden'`, `'side-left'`, `'side-right'`, `'overlap-left'` or `'overlap-right'`
    */
   state: SlideshowState;
   /**
@@ -65,9 +65,8 @@ interface Scope {
    */
   forceShowOnLocationPathnames: Array<string>;
   /**
-   * If the viewport width is wider than this value
-   * the sidebar adds a margin to the container (detected with the `container-selector`),
-   * if the viewport width is slimmer than this value the sidebar opens over the content (according to the specified mode)
+   * If the viewport width is wider than this value the mode is active.
+   * You can disable the mode for all widths with "0" or enable the mode for all widths with "-1" 
    */
   modeOnSlimmerThan: number;
 
@@ -98,6 +97,8 @@ export class Bs5SidebarComponent extends Component {
   protected computedStyle?: CSSStyleDeclaration;
 
   protected autobind = true;
+
+  public _debug = false;
 
   protected bs5: Bs5Service;
 
@@ -152,11 +153,11 @@ export class Bs5SidebarComponent extends Component {
   constructor() {
     super();
     this.bs5 = Bs5Service.getSingleton();
-    const xl = this.bs5.getBreakpointByName("xl");
 
-    this.scope.autoShowOnWiderThan = xl ? xl.dimension - 1 : -1;
-    this.scope.autoHideOnSlimmerThan = xl ? xl.dimension - 1 : -1;
-    this.scope.modeOnSlimmerThan = xl ? xl.dimension - 1 : -1;
+    // const xl = this.bs5.getBreakpointByName("xl");
+    // this.scope.autoShowOnWiderThan = xl ? xl.dimension - 1 : -1;
+    // this.scope.autoHideOnSlimmerThan = xl ? xl.dimension - 1 : -1;
+    // this.scope.modeOnSlimmerThan = xl ? xl.dimension - 1 : -1;
 
     // assign this to bound version, so we can remove window EventListener later without problem
     this.onEnvironmentChanges = this.onEnvironmentChanges.bind(this);
@@ -173,6 +174,9 @@ export class Bs5SidebarComponent extends Component {
   }
 
   public modeIsActive() {
+    if (this.scope.modeOnSlimmerThan === -1) {
+      return true;
+    }
     const vw = getViewportDimensions().w;
     return vw < this.scope.modeOnSlimmerThan;
   }
@@ -190,6 +194,8 @@ export class Bs5SidebarComponent extends Component {
   public hide() {
     if (this.modeIsActive()) {
       this.setState("hidden");
+    } else {
+      console.warn(`Ignore hide because the mode "${this.scope.mode}" is inactive. You can change this by the "mode-on-slimmer-than" attribute (Current value is ${this.scope.modeOnSlimmerThan})!`);
     }
   }
 
@@ -199,11 +205,13 @@ export class Bs5SidebarComponent extends Component {
   }
 
   public toggle() {
+    this.debug("toggle state: " + this.scope.state);
     if (this.scope.state === "hidden") {
       this.show();
     } else {
       this.hide();
     }
+    this.debug("toggled state: " + this.scope.state);
   }
 
   protected connectedCallback() {
@@ -234,7 +242,9 @@ export class Bs5SidebarComponent extends Component {
       this.events.off(TOGGLE_BUTTON.eventNames.toggle, this.toggle, this);
       this.events.off(TOGGLE_BUTTON.eventNames.init, this.triggerState, this);
     }
-    this.events = new EventDispatcher(TOGGLE_BUTTON.nsPrefix + this.scope.id);
+    const namespace = TOGGLE_BUTTON.nsPrefix + this.scope.id;
+    this.debug(`Init event dispatcher for namespace  ${namespace}`);
+    this.events = new EventDispatcher(namespace);
     this.events.on(TOGGLE_BUTTON.eventNames.toggle, this.toggle, this);
     this.events.on(TOGGLE_BUTTON.eventNames.init, this.triggerState, this);
   }
@@ -282,7 +292,7 @@ export class Bs5SidebarComponent extends Component {
     this.style.width = this.scope.width;
   }
 
-  protected onOverlay(state: SlideshowState) {
+  protected onOverlap(state: SlideshowState) {
     this.setContainersStyle(state);
     this.style.transform = `translateX(0)`;
     this.style.width = this.scope.width;
@@ -299,9 +309,9 @@ export class Bs5SidebarComponent extends Component {
       case "side-right":
         this.onSide(this.scope.state);
         break;
-      case "overlay-left":
-      case "overlay-right":
-        this.onOverlay(this.scope.state);
+      case "overlap-left":
+      case "overlap-right":
+        this.onOverlap(this.scope.state);
         break;
       case "move-left":
       case "move-right":
@@ -405,7 +415,7 @@ export class Bs5SidebarComponent extends Component {
       const width = this.width;
       const conStyle = window.getComputedStyle(container);
 
-      if (this.scope.mode === "move" && state.startsWith("overlay-")) {
+      if (this.scope.mode === "move" && state.startsWith("overlap-")) {
         switch (conStyle.position) {
           case "fixed":
           case "absolute":

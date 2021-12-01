@@ -34,7 +34,7 @@
     "lunr": "^2.3.9",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.4.0",
-    "swagger-ui-express": "^4.1.6"
+    "swagger-ui-express": "^4.2.0"
   },
   "peerDependencies": {
     "pug": "^3.0.0",
@@ -55,8 +55,8 @@
     "eslint": "^8.3.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "jest": "^27.4.1",
-    "jest-config": "^27.4.1",
+    "jest": "^27.4.2",
+    "jest-config": "^27.4.2",
     "jest-extended": "^1.2.0",
     "prettier": "2.5.0",
     "rimraf": "^3.0.2",

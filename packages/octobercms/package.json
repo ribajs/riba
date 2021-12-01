@@ -65,7 +65,7 @@
     "gulp": "^4.0.2",
     "gulp-yaml-merge": "^2.0.0",
     "hex-color-regex": "^1.1.0",
-    "jest": "^27.4.1",
+    "jest": "^27.4.2",
     "jest-extended": "^1.2.0",
     "js-yaml": "^4.1.0",
     "prettier": "2.5.0",

@@ -14,4 +14,4 @@ bs5-navbar.navbar.navbar-main.fixed-top.navbar-dark.bg-primary
         //- Only on desktop
         ul.nav.d-none.d-lg-flex
           li.nav.d-flex(ssr-rv-each-item="items")
-            a.nav-link.text-light(ssr-rv-href="item.url") { item.label }
+            a.nav-link.text-light(rv-route-class-active ssr-rv-href="item.url") { item.label }

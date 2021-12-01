@@ -112,5 +112,5 @@ function looseJsonParse(obj) {
     return Function('"use strict";return (' + obj + ")")(); //@reviewer, don't use Function? alternative would be JSON.parse()
 }
 function isColor(strColor) {
-    return (rgb_regex_1.default({ exact: true }).test(strColor) || hexRegex({}).test(strColor));
+    return ((0, rgb_regex_1.default)({ exact: true }).test(strColor) || hexRegex({}).test(strColor));
 }

@@ -5,7 +5,7 @@
 import path from "path";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const logger = require("debug")("@ribajs/shopify");
-import findRoot from "app-root-path";
+import * as findRoot from 'app-root-path';
 import gutil from "gulp-util";
 import yaml from "js-yaml";
 import fs from "fs";

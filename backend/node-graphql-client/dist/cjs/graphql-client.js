@@ -4,12 +4,12 @@ exports.GraphQLClient = void 0;
 const graphql_request_1 = require("graphql-request");
 const load_1 = require("@graphql-tools/load");
 const graphql_file_loader_1 = require("@graphql-tools/graphql-file-loader");
-const app_root_path_1 = require("app-root-path");
+const findRoot = require("app-root-path");
 class GraphQLClient extends graphql_request_1.GraphQLClient {
     constructor(url, options, root) {
         super(url, options);
         if (!root) {
-            root = app_root_path_1.default.toString();
+            root = findRoot.toString();
         }
         this.root = root;
     }

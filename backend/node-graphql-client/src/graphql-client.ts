@@ -7,7 +7,7 @@ import { loadDocuments } from '@graphql-tools/load';
 
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 
-import findRoot from 'app-root-path';
+import * as findRoot from 'app-root-path';
 
 export class GraphQLClient extends _GraphQLClient {
   protected root: string;
