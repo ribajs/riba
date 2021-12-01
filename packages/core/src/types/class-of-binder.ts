@@ -11,6 +11,7 @@ export interface ClassOfBinder<T = Binder<any, any>, E = any> extends Function {
     view: View,
     el: E,
     type: string | null,
+    name: string,
     keypath: string | undefined,
     formatters: string[] | null,
     identifier: string | null

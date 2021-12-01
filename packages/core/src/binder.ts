@@ -21,9 +21,10 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
    */
   static key = "";
 
-  get name() {
-    return Binder.key;
-  }
+  /**
+   * Key of the Binder
+   */
+  name: string;
 
   /**
    * Blocks the current node and child nodes from being parsed (used for iteration binding as well as the if/unless binders).
@@ -84,10 +85,6 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
    * HTML Comment to mark a binding in the DOM
    */
   public marker?: Comment;
-  /**
-   * just to have a value where we could store custom data
-   */
-  public customData?: any;
 
   /**
    * All information about the binding is passed into the constructor; the
@@ -105,6 +102,7 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
     view: View,
     el: E,
     type: string | null,
+    name: string,
     keypath: string | undefined,
     formatters: string[] | null,
     identifier: string | null
@@ -112,10 +110,10 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
     this.view = view;
     this.el = el;
     this.type = type;
+    this.name = name;
     this.keypath = keypath;
     this.formatters = formatters;
     this.model = undefined;
-    this.customData = {};
 
     if (identifier && type) {
       this.args = this.getStarArguments(identifier, type);

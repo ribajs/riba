@@ -28,6 +28,7 @@ describe("riba.binders", () => {
     });
 
     el = document.createElement("div");
+    el.setAttribute('rv-html', "");
     document.body.appendChild(el);
   });
 
@@ -40,13 +41,17 @@ describe("riba.binders", () => {
 
   describe("html", () => {
     it("sets the element's HTML content", () => {
-      (riba.bindersDeprecated.html as any).routine(el, "<strong>hello</strong>");
+      const view = riba.bind(el);
+      const htmlBinder = view.bindings[0] as htmlBinder;
+      htmlBinder.routine(el, "<strong>hello</strong>");
       expect(el.textContent).toEqual("hello");
       expect(el.innerHTML).toEqual("<strong>hello</strong>");
     });
 
     it("sets the element's HTML content to zero when a zero value is passed", () => {
-      (riba.bindersDeprecated.html as any).routine(el, 0);
+      const view = riba.bind(el);
+      const htmlBinder = view.bindings[0] as htmlBinder;
+      htmlBinder.routine(el, 0);
       expect(el.textContent).toEqual("0");
       expect(el.innerHTML).toEqual("0");
     });

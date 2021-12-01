@@ -1,9 +1,6 @@
 import { Riba } from "../riba";
-
 import { textBinder } from "./text.binder";
-
 import { dotAdapter } from "../adapters/dot.adapter";
-
 import { Adapters } from "../types";
 
 describe("riba.binders", () => {
@@ -32,6 +29,7 @@ describe("riba.binders", () => {
     });
 
     el = document.createElement("div");
+    el.setAttribute("rv-text", "");
     document.body.appendChild(el);
   });
 
@@ -44,13 +42,17 @@ describe("riba.binders", () => {
 
   describe("text", () => {
     it("sets the element's text content", () => {
-      (riba.bindersDeprecated.text as any).routine(el, "<em>hello</em>");
+      const view = riba.bind(el);
+      const textBinder = view.bindings[0] as textBinder;
+      textBinder.routine(el, "<em>hello</em>");
       expect(el.textContent).toEqual("<em>hello</em>");
       expect(el.innerHTML).toEqual("&lt;em&gt;hello&lt;/em&gt;");
     });
 
     it("sets the element's text content to zero when a numeric zero is passed", () => {
-      (riba.bindersDeprecated.text as any).routine(el, 0);
+      const view = riba.bind(el);
+      const textBinder = view.bindings[0] as textBinder;
+      textBinder.routine(el, 0);
       expect(el.textContent).toEqual("0");
       expect(el.innerHTML).toEqual("0");
     });

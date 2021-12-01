@@ -266,8 +266,9 @@ export class View {
     node: BindableElement,
     attributeBinders = this.options.attributeBinders
   ) {
+    let block = false;
     if (!this.options.bindersDeprecated) {
-      return false;
+      return block;
     }
     const bindInfos = [];
     for (let i = 0, len = attributes.length; i < len; i++) {
@@ -286,7 +287,6 @@ export class View {
           this.options.binders &&
           this.options.binders[nodeName]
         ) {
-          console.debug("Use new binder", this.options.binders[nodeName]);
           hasNewBinder = true;
           continue;
         }
@@ -303,7 +303,6 @@ export class View {
             identifier = attributeBinders[k];
             const regexp = new RegExp(`^${identifier.replace(/\*/g, ".+")}$`);
             if (regexp.test(nodeName)) {
-              console.debug("Found identifier: " + identifier);
               binder = this.options.bindersDeprecated[identifier];
 
               // Or is there a new binder for this identifier?
@@ -348,7 +347,8 @@ export class View {
           if (node.removeAttribute && this.options.removeBinderAttributes) {
             node.removeAttribute(attribute.name);
           }
-          return true;
+          block = true;
+          return block;
         }
 
         bindInfos.push({ attr: attribute, binder, nodeName, identifier });
@@ -368,7 +368,7 @@ export class View {
         node.removeAttribute(bindInfo.attr.name);
       }
     }
-    return false;
+    return block;
   }
 
   /**
@@ -379,18 +379,19 @@ export class View {
     node: BindableElement,
     attributeBinders = this.options.attributeBinders
   ) {
+    let block = false;
     if (!this.options.binders) {
-      return false;
+      return block;
     }
     const bindInfos = [];
     for (let i = 0, len = attributes.length; i < len; i++) {
       let nodeName = "";
       let Binder: ClassOfBinder | null = null;
-      let identifier = "";
       const attribute = attributes[i];
       // if attribute starts with the binding prefix. E.g. rv-
       const startingPrefix = this.startsWithPrefix(attribute.name);
       if (startingPrefix) {
+        let identifier = "";
         nodeName = attribute.name.slice(startingPrefix.length);
 
         // if binder is not a attributeBinder binder should be set
@@ -405,7 +406,6 @@ export class View {
             identifier = attributeBinders[k];
             const regexp = new RegExp(`^${identifier.replace(/\*/g, ".+")}$`);
             if (regexp.test(nodeName)) {
-              console.debug("Found identifier: " + identifier);
               Binder = this.options.binders[identifier];
               break;
             }
@@ -433,7 +433,8 @@ export class View {
           if (node.removeAttribute && this.options.removeBinderAttributes) {
             node.removeAttribute(attribute.name);
           }
-          return true;
+          block = true;
+          return block;
         }
 
         bindInfos.push({ attr: attribute, Binder, nodeName, identifier });
@@ -453,7 +454,7 @@ export class View {
         node.removeAttribute(bindInfo.attr.name);
       }
     }
-    return false;
+    return block;
   }
 
   private bindComponent(node: BindableElement) {
@@ -519,7 +520,7 @@ export class View {
     const keypath = parsedDeclaration.keypath;
     const pipes = parsedDeclaration.pipes;
     this.bindings.push(
-      new Binder(this, node, type, keypath, pipes, identifier)
+      new Binder(this, node, type, Binder.key, keypath, pipes, identifier)
     );
   }
 

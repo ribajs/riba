@@ -26,4 +26,3 @@ export { toggleOnEventBinder } from "./toggle-on-event.binder";
 export { attributeBinder } from "./attribute.binder";
 export { templateBinder } from "./template.binder";
 export { unlessBinder } from "./unless.binder";
-export { valueBinder } from "./value.binder";

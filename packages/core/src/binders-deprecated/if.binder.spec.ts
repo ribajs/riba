@@ -2,7 +2,7 @@ import { Riba } from "../riba";
 
 import { ifBinder } from "./if.binder";
 
-import { eachStarBinder } from "./each-item.binder";
+import { eachStarBinder } from "../binders";
 
 import { dotAdapter } from "../adapters/dot.adapter";
 
@@ -142,7 +142,7 @@ describe("if", () => {
 
 describe("Array observe and unobserve", () => {
   const riba = new Riba();
-  riba.module.binderDeprecated.regist(eachStarBinder);
+  riba.module.binder.regist(eachStarBinder);
 
   let fragment: DocumentFragment;
   let el1: HTMLDivElement;

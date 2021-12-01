@@ -26,8 +26,7 @@ export class BindersService extends ModuleElementService<ClassOfBinder> {
     forceFallback = false
   ) {
     if (!Binder) {
-      console.warn(new Error("Can not regist binder!"), Binder);
-      return this.elements;
+      throw new Error("No Binder passed to register!")
     }
 
     const name = forceFallback
@@ -35,8 +34,7 @@ export class BindersService extends ModuleElementService<ClassOfBinder> {
       : Binder.key || fallbackName;
 
     if (!name) {
-      console.warn(new Error("Binder name not found!"), Binder);
-      return this.elements;
+      throw new Error("Binder name not found!");
     }
 
     this.elements[name] = Binder;

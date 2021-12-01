@@ -5,3 +5,4 @@ export * from "./html.binder";
 // export * from "./mustache-text.binder";
 export * from "./on-event.binder";
 export * from "./text.binder";
+export * from "./value.binder";

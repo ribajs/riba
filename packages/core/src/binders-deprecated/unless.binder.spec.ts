@@ -4,7 +4,7 @@ import { dotAdapter } from "../adapters/dot.adapter";
 
 import { unlessBinder } from "./unless.binder";
 
-import { eachStarBinder } from "./each-item.binder";
+import { eachStarBinder } from "../binders";
 
 describe("unless", () => {
   const riba = new Riba();
@@ -151,7 +151,7 @@ describe("unless", () => {
 
 describe("Array observe and unobserve", () => {
   const riba = new Riba();
-  riba.module.binderDeprecated.regist(eachStarBinder);
+  riba.module.binder.regist(eachStarBinder);
 
   let fragment: DocumentFragment;
   let el1: HTMLDivElement;

@@ -3,7 +3,7 @@ import { Riba } from "../../riba";
 import { dotAdapter } from "../../adapters/dot.adapter";
 
 import { callFormatter } from "./call.formatter";
-import { textBinder } from "../../binders-deprecated/text.binder";
+import { textBinder } from "../../binders/text.binder";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);

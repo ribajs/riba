@@ -288,7 +288,7 @@ export class Riba {
    */
   public bind(
     el: HTMLElement | DocumentFragment | HTMLUnknownElement[],
-    models: any,
+    models?: any,
     options?: Options
   ) {
     const viewOptions: Options = this.getViewOptions(options);
