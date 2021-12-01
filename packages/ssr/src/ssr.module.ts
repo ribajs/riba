@@ -1,7 +1,7 @@
 import "./types/global";
 
 import { RibaModule } from "@ribajs/core";
-import * as bindersDeprecated from "./binders";
+import * as bindersDeprecated from "./binders-deprecated";
 import * as formatters from "./formatters";
 import * as services from "./services";
 import * as components from "./components";

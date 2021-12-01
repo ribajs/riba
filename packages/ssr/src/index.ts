@@ -1,5 +1,5 @@
 export * from "./types";
-export * from "./binders";
+export * from "./binders-deprecated";
 export * from "./formatters";
 export * from "./services";
 export * from "./components";

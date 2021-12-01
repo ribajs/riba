@@ -1,9 +1,10 @@
 import { BinderDeprecated } from "@ribajs/core";
-import { Collapse } from "../services/collapse";
+// import { CollapseService } from '../services/collapse.service';
+import { CollapseService } from "../services/collapse.service";
 
-export interface Bs5CollapseOnEventBinder extends Binder<boolean> {
+export interface Bs4CollapseOnEventBinder extends BinderDeprecated<boolean> {
   onEvent: (event: Event) => void;
-  collapseServices: Collapse[];
+  collapseServices: CollapseService[];
   targets: NodeListOf<HTMLElement>;
 }
 
@@ -11,10 +12,10 @@ export interface Bs5CollapseOnEventBinder extends Binder<boolean> {
  *
  */
 export const toggleCollapseOnEventBinder: BinderDeprecated<string> = {
-  name: "bs5-toggle-collapse-on-*",
+  name: "bs4-toggle-collapse-on-*",
   bind(el: HTMLElement) {
     this.customData = {
-      targets: new Map<HTMLElement, Collapse>(),
+      targets: new Map<HTMLElement, CollapseService>(),
       onEvent(event: Event) {
         event.preventDefault();
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -28,7 +29,7 @@ export const toggleCollapseOnEventBinder: BinderDeprecated<string> = {
       throw new Error("args is null");
     }
     const eventName = this.args[0] as string;
-    el.addEventListener(eventName, this.customData.onEvent);
+    el.addEventListener(eventName, this.customData.onEvent, { passive: true });
   },
   unbind() {
     const eventName = this.args[0] as string;
@@ -57,7 +58,7 @@ export const toggleCollapseOnEventBinder: BinderDeprecated<string> = {
       if (!this.customData.targets.has(target)) {
         this.customData.targets.set(
           target,
-          new Collapse(target, { toggle: false })
+          new CollapseService(target, [el], { toggle: false })
         );
       }
     }

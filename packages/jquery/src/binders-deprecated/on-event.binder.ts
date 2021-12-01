@@ -1,4 +1,4 @@
-import { Binder, eventHandlerFunction } from "@ribajs/core";
+import { BinderDeprecated, eventHandlerFunction } from "@ribajs/core";
 import { extend } from "@ribajs/utils/src/type";
 import { JQuery } from "../vendors/jquery.module";
 

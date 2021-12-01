@@ -2,14 +2,14 @@ import { RibaModule } from "@ribajs/core";
 import { extend } from "@ribajs/utils/src/type";
 import { Bs5ModuleOptions } from "./types";
 
-import * as binders from "./binders";
+import * as bindersDeprecated from "./binders-deprecated";
 import * as components from "./components";
 import * as formatters from "./formatters";
 import * as services from "./services";
 import * as constants from "./constants";
 
 export const bs5Module: RibaModule<Partial<Bs5ModuleOptions>> = {
-  binders,
+  bindersDeprecated,
   services,
   formatters,
   components,

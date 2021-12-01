@@ -1,4 +1,4 @@
-import { Binder, eventHandlerFunction } from "@ribajs/core";
+import { BinderDeprecated, eventHandlerFunction } from "@ribajs/core";
 
 export const goBack = () => {
   window.history.back();

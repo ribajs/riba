@@ -1,5 +1,5 @@
 export * from "./services";
-export * from "./binders";
+export * from "./binders-deprecated";
 export * from "./components";
 // export * as formatters from './formatters/bs4.formatters';
 export * from "./interfaces";

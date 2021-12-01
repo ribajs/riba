@@ -1,7 +1,7 @@
 import { BinderDeprecated, BinderAttributeChangedEvent } from "@ribajs/core";
 import { extend } from "@ribajs/utils/src/type";
-import { I18nService } from "../../services/i18n.service";
-import { LocalesService } from "../../types";
+import { I18nService } from "../services/i18n.service";
+import { LocalesService } from "../types";
 
 /**
  *

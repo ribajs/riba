@@ -1,5 +1,5 @@
 import { Pjax, Prefetch } from "../services";
-import { Binding, Binder } from "@ribajs/core";
+import { Binding, BinderDeprecated } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { isObject, isString } from "@ribajs/utils/src/type";
 import { onRoute, normalizeUrl, isExternalUrl } from "@ribajs/utils/src/url";

@@ -11,7 +11,7 @@ import { Binding } from "./binding";
 import { parseNode, parseDeclaration } from "./parsers";
 import { BasicComponent, Component } from "./component";
 import { isCustomElement } from "@ribajs/utils";
-import { Binder } from ".";
+import { Binder } from "./binder";
 
 /**
  * A collection of bindings built from a set of parent nodes.

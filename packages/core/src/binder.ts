@@ -7,7 +7,7 @@ import {
   Bindable,
 } from "./types";
 import { FORMATTER_ARGS, FORMATTER_SPLIT } from "./constants/formatter";
-import { View } from "./view";
+import type { View } from "./view";
 import { getInputValue } from "@ribajs/utils/src/dom";
 
 /**

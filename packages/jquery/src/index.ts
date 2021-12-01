@@ -1,3 +1,3 @@
 export * from "./vendors";
-export * from "./binders";
+export * from "./binders-deprecated";
 export * from "./jquery.module";

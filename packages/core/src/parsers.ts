@@ -1,6 +1,6 @@
 import { parseJsonString, couldBeJson } from "@ribajs/utils";
 import { DataElement } from "./types";
-import { mustacheTextBinder } from "./binders/mustache-text.binder";
+import { MustacheTextBinder } from "./binders/mustache-text.binder";
 import { View } from "./view";
 
 /**
@@ -150,7 +150,7 @@ export function parseNode(
           node.parentNode.insertBefore(text, node);
         }
         if (token.type === BINDING) {
-          view.buildBinding(text, null, token.value, mustacheTextBinder, null);
+          view.buildBinding(text, null, token.value, MustacheTextBinder, null);
         }
       }
       if (node.parentNode) {
