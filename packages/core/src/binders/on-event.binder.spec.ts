@@ -1,14 +1,12 @@
 import { Riba } from "../riba";
-
 import { dotAdapter } from "../adapters/dot.adapter";
-
 import { onEventBinder } from "./on-event.binder";
-
-import { valueBinder } from "./value.binder";
+import { valueBinder } from "../binders-deprecated/value.binder";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
-riba.module.binderDeprecated.regists([onEventBinder, valueBinder]);
+riba.module.binder.regist(onEventBinder);
+riba.module.binderDeprecated.regist(valueBinder);
 
 describe("riba.binders", () => {
   let element: HTMLInputElement;

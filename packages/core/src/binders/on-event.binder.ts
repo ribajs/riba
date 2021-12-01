@@ -1,28 +1,29 @@
-import { BinderDeprecated, eventHandlerFunction } from "../types";
+import { eventHandlerFunction } from "../types";
+import { Binder } from "../binder";
 
 /**
  * Binds an event handler on the element.
  */
-export const onEventBinder: BinderDeprecated<eventHandlerFunction> = {
-  name: "on-*",
-  function: true,
-  priority: 1000,
+export class onEventBinder extends Binder<eventHandlerFunction, HTMLElement> {
+  static key = "on-*";
+  function =  true;
+  priority = 1000;
+
+  handler: any = null;
 
   bind() {
-    this.customData = {
-      handler: null,
-    };
-  },
+
+  }
 
   unbind(el: HTMLElement) {
-    if (this.customData.handler) {
+    if (this.handler) {
       if (this.args === null) {
         throw new Error("args is null");
       }
       const eventName = this.args[0] as string;
-      el.removeEventListener(eventName, this.customData.handler);
+      el.removeEventListener(eventName, this.handler);
     }
-  },
+  }
 
   routine(el: HTMLElement, value: eventHandlerFunction) {
     if (this.args === null) {
@@ -34,18 +35,18 @@ export const onEventBinder: BinderDeprecated<eventHandlerFunction> = {
     const options: AddEventListenerOptions & EventListenerOptions = {
       passive: this.el.dataset.passive === "true", // data-passive="true"
     };
-    if (this.customData.handler) {
+    if (this.handler) {
       el.removeEventListener(
         // must use as any here, because TypeScript is stupid as of version 4.0.3
         eventName as any,
-        this.customData.handler,
+        this.handler,
         options
       );
     }
-    this.customData.handler = this.eventHandler(value, el).bind(
-      this.customData
+    this.handler = this.eventHandler(value, el).bind(
+      this
     );
 
-    el.addEventListener(eventName, this.customData.handler, options);
-  },
+    el.addEventListener(eventName, this.handler, options);
+  }
 };

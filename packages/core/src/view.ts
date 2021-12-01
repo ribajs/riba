@@ -1,4 +1,3 @@
-import { Riba } from "./riba";
 import {
   BinderDeprecated,
   Options,
@@ -12,6 +11,18 @@ import { parseNode, parseDeclaration } from "./parsers";
 import { BasicComponent, Component } from "./component";
 import { isCustomElement } from "@ribajs/utils";
 import { Binder } from "./binder";
+
+/**
+ * Sets the attribute on the element. If no binder is matched it will fall
+ * back to using this binder.
+ * @deprecated
+*/
+import { attributeBinder as attributeBinderDeprecated } from "./binders-deprecated/attribute.binder";
+/**
+ * Sets the attribute on the element. If no binder is matched it will fall
+ * back to using this binder.
+ */
+import { attributeBinder } from "./binders/attribute.binder";
 
 /**
  * A collection of bindings built from a set of parent nodes.
@@ -263,23 +274,26 @@ export class View {
       let nodeName = "";
       let binder: BinderDeprecated<any, any> | null = null;
       let identifier = "";
+      let hasNewBinder = false;
       const attribute = attributes[i];
       // if attribute starts with the binding prefix. E.g. rv-
       const startingPrefix = this.startsWithPrefix(attribute.name);
       if (startingPrefix) {
         nodeName = attribute.name.slice(startingPrefix.length);
-        // if binder is not a attributeBinder binder should be set
-        if (this.options.bindersDeprecated[nodeName]) {
-          binder = this.options.bindersDeprecated[nodeName];
-        }
 
+        // If is a new binder for this, skip
         if (
-          binder === null &&
           this.options.binders &&
           this.options.binders[nodeName]
         ) {
-          // There is a new binder for this, skip
+          console.debug("Use new binder", this.options.binders[nodeName]);
+          hasNewBinder = true;
           continue;
+        }
+
+        // if binder is not a attributeBinder binder should be set
+        if (this.options.bindersDeprecated[nodeName]) {
+          binder = this.options.bindersDeprecated[nodeName];
         }
 
         if (binder === null) {
@@ -289,10 +303,20 @@ export class View {
             identifier = attributeBinders[k];
             const regexp = new RegExp(`^${identifier.replace(/\*/g, ".+")}$`);
             if (regexp.test(nodeName)) {
+              console.debug("Found identifier: " + identifier);
               binder = this.options.bindersDeprecated[identifier];
+
+              // Or is there a new binder for this identifier?
+              if (this.options.binders?.[identifier]) {
+                hasNewBinder = true;
+              }
               break;
             }
           }
+        }
+
+        if (hasNewBinder) {
+          continue;
         }
 
         if (binder === null) {
@@ -300,9 +324,17 @@ export class View {
             binder = this.options.bindersDeprecated["*"];
             identifier = "*";
           } else {
-            binder = Riba.fallbackBinderDeprecated;
+            binder = attributeBinderDeprecated
           }
         }
+
+        if (!binder) {
+          console.error("attributeBinders: ", attributeBinders);
+          console.error("binders", this.options.binders?.[nodeName]);
+          console.error("binders (deprecated)", this.options.bindersDeprecated?.[nodeName]);
+          throw new Error(`Binder for "${nodeName}" is undefined!`);
+        }
+
         // if block is set, do not bind its child's (this means the binder bound it by itself)
         // and build binding directly (do not push it to bindInfos array)
         if (binder.block) {
@@ -360,18 +392,20 @@ export class View {
       const startingPrefix = this.startsWithPrefix(attribute.name);
       if (startingPrefix) {
         nodeName = attribute.name.slice(startingPrefix.length);
+
         // if binder is not a attributeBinder binder should be set
         if (this.options.binders[nodeName]) {
           Binder = this.options.binders[nodeName];
         }
 
         if (Binder === null) {
-          // seems to be a star binder (because binder was not set)
+          // seems to be a star binder
           // Check if any attributeBinder match's
           for (let k = 0; k < attributeBinders.length; k++) {
             identifier = attributeBinders[k];
             const regexp = new RegExp(`^${identifier.replace(/\*/g, ".+")}$`);
             if (regexp.test(nodeName)) {
+              console.debug("Found identifier: " + identifier);
               Binder = this.options.binders[identifier];
               break;
             }
@@ -383,7 +417,7 @@ export class View {
             Binder = this.options.binders["*"];
             identifier = "*";
           } else {
-            Binder = Riba.fallbackBinder;
+            Binder = attributeBinder
           }
         }
         // if block is set, do not bind its child's (this means the binder bound it by itself)

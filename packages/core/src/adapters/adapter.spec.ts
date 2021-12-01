@@ -1,12 +1,8 @@
 import { Riba } from "../riba";
 import { Adapter, ObserverSyncCallback } from "../types";
-
 import { dotAdapter } from "../adapters/dot.adapter";
-
-import { textBinder } from "../binders-deprecated/text.binder";
-
+import { textBinder } from "../binders/text.binder";
 import { valueBinder } from "../binders-deprecated/value.binder";
-
 import { Data } from "../../spec/lib/moch.data";
 
 describe("Functional", () => {
@@ -18,7 +14,7 @@ describe("Functional", () => {
 
   const riba = new Riba();
   riba.module.adapter.regist(dotAdapter);
-  riba.module.binderDeprecated.regist(textBinder);
+  riba.module.binder.regist(textBinder);
   riba.module.binderDeprecated.regist(valueBinder);
 
   beforeEach(() => {

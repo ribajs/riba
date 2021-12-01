@@ -10,28 +10,12 @@ import {
 import { parseTemplate, parseType } from "./parsers";
 import { Binding } from "./binding";
 import { Binder } from "./binder";
-import { attributeBinder as attributeBinderDeprecated } from "./binders-deprecated/attribute.binder";
-import { attributeBinder } from "./binders/attribute.binder";
-
 import { View } from "./view";
 import { Observer } from "./observer";
 import { ModulesService } from "./services/module.service";
 import { LifecycleService } from "./services/lifecycle.service";
 
 export class Riba {
-  /**
-   * Sets the attribute on the element. If no binder above is matched it will fall
-   * back to using this binder.
-   */
-  public static fallbackBinder = attributeBinder;
-
-  /**
-   * Sets the attribute on the element. If no binder above is matched it will fall
-   * back to using this binder.
-   * @deprecated
-   */
-  public static fallbackBinderDeprecated = attributeBinderDeprecated;
-
   /**
    * Default event handler, calls the function defined in his binder
    * @see Binding.eventHandler

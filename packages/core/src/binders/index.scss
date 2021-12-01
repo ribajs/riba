@@ -1,0 +1,8 @@
+// for rv-show / rv-hide
+[hidden="true"] {
+  display: none !important;
+}
+
+[csr-rv-show], [rv-show], [csr-rv-hide], [rv-hide], [csr-rv-if], [rv-if], [csr-rv-each], [rv-each] {
+  display: none !important;
+}

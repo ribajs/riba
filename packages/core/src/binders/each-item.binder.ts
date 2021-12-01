@@ -1,22 +1,22 @@
-import { Bindable, BinderDeprecated } from "../types";
+import { Bindable } from "../types";
 import { View } from "../view";
+import { Binder } from "../binder";
 import { times, camelCase } from "@ribajs/utils";
 
 /**
  * each-*
  * Appends bound instances of the element in place for each item in the array.
  */
-export const eachStarBinder: BinderDeprecated<any[]> = {
-  name: "each-*",
-  block: true,
-  priority: 4000,
+export class eachStarBinder extends Binder<any[], HTMLElement> {
+  static key = "each-*";
+  static block = true;
+  priority = 4000;
+
+  iterated: View[] = [];
 
   bind(el: HTMLElement) {
     if (!this.marker) {
       this.marker = window?.document?.createComment(` riba: ${this.type} `);
-      this.customData = {
-        iterated: [] as View[],
-      };
       if (!el.parentNode?.insertBefore || !this.marker) {
         // console.warn('No parent node!');
       } else {
@@ -24,21 +24,21 @@ export const eachStarBinder: BinderDeprecated<any[]> = {
         el.parentNode.removeChild(el);
       }
     } else {
-      this.customData.iterated.forEach((view: View) => {
+      this.iterated.forEach((view: View) => {
         view.bind();
       });
     }
-  },
+  }
 
   unbind() {
-    if (this.customData.iterated) {
-      this.customData.iterated.forEach((view: View) => {
+    if (this.iterated) {
+      this.iterated.forEach((view: View) => {
         view.unbind();
       });
     }
-  },
+  }
 
-  routine(el, collection) {
+  routine(el: HTMLElement, collection: any[]) {
     if (this.args === null) {
       throw new Error("args is null");
     }
@@ -85,14 +85,14 @@ export const eachStarBinder: BinderDeprecated<any[]> = {
         scope[modelName] = model;
       }
 
-      let view = this.customData.iterated[index];
+      let view = this.iterated[index];
 
       if (!view) {
-        let previous: Comment | HTMLElement | undefined;
+        let previous: HTMLElement | Element | Node | undefined;
 
-        if (this.customData.iterated.length) {
+        if (this.iterated.length) {
           previous =
-            this.customData.iterated[this.customData.iterated.length - 1]
+            this.iterated[this.iterated.length - 1]
               .els[0];
         } else if (this.marker) {
           previous = this.marker;
@@ -101,19 +101,19 @@ export const eachStarBinder: BinderDeprecated<any[]> = {
         if (!previous) {
           return;
         }
-        view = View.createDeprecated(this, scope, previous.nextSibling);
-        this.customData.iterated.push(view);
+        view = View.create(this, scope, previous.nextSibling);
+        this.iterated.push(view);
       } else {
         if (view.models[modelName] !== model) {
           // search for a view that matches the model
           let matchIndex;
-          let nextView;
+          let nextView: View = this.iterated[index];
           for (
             let nextIndex = index + 1;
-            nextIndex < this.customData.iterated.length;
+            nextIndex < this.iterated.length;
             nextIndex++
           ) {
-            nextView = this.customData.iterated[nextIndex];
+            nextView = this.iterated[nextIndex];
             if (nextView.models[modelName] === model) {
               matchIndex = nextIndex;
               break;
@@ -123,29 +123,32 @@ export const eachStarBinder: BinderDeprecated<any[]> = {
             // model is in other position
             // TODO: consider avoiding the splice here by setting a flag
             // profile performance before implementing such change
-            this.customData.iterated.splice(matchIndex, 1);
+            this.iterated.splice(matchIndex, 1);
             if (!this.marker || !this.marker.parentNode?.insertBefore) {
               throw new Error("Marker has no parent node");
             }
-            if (nextView.els[0] && view.els[0]) {
+            if (nextView && nextView.els[0] && view.els[0]) {
               this.marker.parentNode.insertBefore(nextView.els[0], view.els[0]);
             }
 
             nextView.models[indexProp] = index;
           } else {
             // new model
-            nextView = View.createDeprecated(this, scope, view.els[0]);
+            nextView = View.create(this, scope, view.els[0]);
           }
-          this.customData.iterated.splice(index, 0, nextView);
+          this.iterated.splice(index, 0, nextView);
         } else {
           view.models[indexProp] = index;
         }
       }
     });
 
-    if (this.customData.iterated.length > collection.length) {
-      times(this.customData.iterated.length - collection.length, () => {
-        const view = this.customData.iterated.pop();
+    if (this.iterated.length > collection.length) {
+      times(this.iterated.length - collection.length, () => {
+        const view = this.iterated.pop();
+        if (!view) {
+          throw new Error("view is undefined!")
+        }
         view.unbind();
         if (!this.marker || !this.marker.parentNode) {
           throw new Error("Marker has no parent node");
@@ -166,9 +169,9 @@ export const eachStarBinder: BinderDeprecated<any[]> = {
         }
       });
     }
-  },
+  }
 
-  update(models) {
+  update(models: any) {
     const data: any = {};
     // TODO: add test and fix if necessary
     Object.keys(models).forEach((key) => {
@@ -180,8 +183,8 @@ export const eachStarBinder: BinderDeprecated<any[]> = {
       }
     });
 
-    this.customData.iterated.forEach((view: View) => {
+    this.iterated.forEach((view: View) => {
       view.update(data);
     });
-  },
+  }
 };

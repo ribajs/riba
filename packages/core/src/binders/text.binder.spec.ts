@@ -1,6 +1,6 @@
 import { Riba } from "../riba";
 
-import { htmlBinder } from "./html.binder";
+import { textBinder } from "./text.binder";
 
 import { dotAdapter } from "../adapters/dot.adapter";
 
@@ -8,9 +8,10 @@ import { Adapters } from "../types";
 
 describe("riba.binders", () => {
   let el: HTMLUnknownElement;
+
   const riba = new Riba();
   riba.module.adapter.regist(dotAdapter);
-  riba.module.binderDeprecated.regist(htmlBinder);
+  riba.module.binder.regist(textBinder);
 
   beforeEach(() => {
     riba.configure({
@@ -41,15 +42,15 @@ describe("riba.binders", () => {
     el.parentNode.removeChild(el);
   });
 
-  describe("html", () => {
-    it("sets the element's HTML content", () => {
-      (riba.bindersDeprecated.html as any).routine(el, "<strong>hello</strong>");
-      expect(el.textContent).toEqual("hello");
-      expect(el.innerHTML).toEqual("<strong>hello</strong>");
+  describe("text", () => {
+    it("sets the element's text content", () => {
+      (riba.bindersDeprecated.text as any).routine(el, "<em>hello</em>");
+      expect(el.textContent).toEqual("<em>hello</em>");
+      expect(el.innerHTML).toEqual("&lt;em&gt;hello&lt;/em&gt;");
     });
 
-    it("sets the element's HTML content to zero when a zero value is passed", () => {
-      (riba.bindersDeprecated.html as any).routine(el, 0);
+    it("sets the element's text content to zero when a numeric zero is passed", () => {
+      (riba.bindersDeprecated.text as any).routine(el, 0);
       expect(el.textContent).toEqual("0");
       expect(el.innerHTML).toEqual("0");
     });
