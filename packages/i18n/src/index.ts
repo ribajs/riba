@@ -1,4 +1,4 @@
-export * from "./binders-deprecated";
+export * from "./binders";
 export * from "./components";
 export * from "./formatters";
 export * from "./types";
