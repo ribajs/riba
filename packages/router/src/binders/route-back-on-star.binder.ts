@@ -1,32 +1,32 @@
 import { Binder, eventHandlerFunction } from "@ribajs/core";
 
-export const goBack = () => {
+const goBack = () => {
   window.history.back();
 };
 
 /**
- * Calls `window.history.back()` an event.
+ * Calls `window.history.back()` on event.
  */
-export const routeBackOnStarBinder: Binder<eventHandlerFunction> = {
-  name: "route-back-on-*",
-  priority: 3000,
+export class RouteBackOnStarBinder extends Binder<eventHandlerFunction> {
+  static key = "route-back-on-*";
+  priority = 3000;
 
-  bind() {
-    this.customData = {};
-  },
+  private eventName?: string;
 
   unbind(el: HTMLElement) {
-    el.removeEventListener(this.args[0] as string, goBack);
-  },
+    if (this.eventName) {
+      el.removeEventListener(this.eventName, goBack);
+    }
+  }
 
   routine(el: HTMLElement /*, options: any*/) {
     if (this.args === null) {
       throw new Error("args is null");
     }
-    if (this.customData.eventName) {
-      el.removeEventListener(this.customData.eventName, goBack);
+    if (this.eventName) {
+      el.removeEventListener(this.eventName, goBack);
     }
-    this.customData.eventName = this.args[0] as string;
+    this.eventName = this.args[0] as string;
     el.addEventListener(this.args[0] as string, goBack);
-  },
-};
+  }
+}

@@ -72,15 +72,10 @@ export class ShopifyProductComponent extends Component {
   private optionChosen = false;
 
   protected set product(product: ShopifyProduct | null) {
-    // console.debug('set product', product);
     if (product) {
       this.scope.product = ShopifyProductService.prepare(product);
-
-      // this.selectedOptions = new Array(this.scope.product.options.length);
-
       this.colorOption =
         ShopifyProductService.getOption(this.scope.product, "color") || null;
-      // set the first variant to the selected one
       this.variant = this.scope.product.variants[0];
     }
   }
@@ -91,14 +86,11 @@ export class ShopifyProductComponent extends Component {
 
   protected set variant(variant: ShopifyProductVariant | null) {
     if (variant === null) {
-      // console.debug('Error: Variant ist null');
       return;
     }
-    // console.debug('set variant', variant);
     this.scope.variant = this.prepareVariant(variant);
     if (this.scope.variant) {
       this.selectedOptions = this.scope.variant.options.slice();
-      // console.debug('set selectedOptions', this.selectedOptions);
       this.available = this.scope.variant.available;
       this.activateOptions();
     }
@@ -117,7 +109,6 @@ export class ShopifyProductComponent extends Component {
 
   constructor() {
     super();
-    // console.debug('constructor', this);
     this.init(ShopifyProductComponent.observedAttributes);
   }
 
@@ -132,8 +123,6 @@ export class ShopifyProductComponent extends Component {
     }
 
     optionValue = optionValue.toString();
-
-    // console.debug('chooseOption', optionValue, position1, self.selectedOptions, self.variant);
 
     this.selectedOptions[position1 - 1] = optionValue.toString();
     const variant = ShopifyProductService.getVariantOfOptions(
@@ -152,31 +141,26 @@ export class ShopifyProductComponent extends Component {
 
   public addToCart() {
     if (!this.variant) {
-      // console.debug('Variant not selected');
       return;
     }
-    // console.debug('addToCart', this.variant.id, this.scope.quantity);
     ShopifyCartService.add(this.variant.id, this.scope.quantity)
       .then((response) => {
         console.debug("addToCart response", response);
       })
       .catch((error) => {
-        console.debug("addToCart error", error);
+        console.error("addToCart error", error);
       });
   }
 
   public toggleDetailMenu() {
-    // console.debug('toggleDetailMenu');
     this.scope.showDetailMenu = !this.scope.showDetailMenu;
   }
 
   public increase() {
-    // console.debug('increase', this.scope.quantity);
     this.scope.quantity++;
   }
 
   public decrease() {
-    // console.debug('decrease', this.scope.quantity);
     this.scope.quantity--;
     if (this.scope.quantity <= 0) {
       this.scope.quantity = 1;
@@ -190,7 +174,6 @@ export class ShopifyProductComponent extends Component {
    */
   protected activateOption(optionValue: string, optionName: string) {
     optionValue = optionValue.toString().replace("#", "");
-    // console.debug('activateOption', `.option-${optionName.toLowerCase()}-${optionValue}`);
     this.querySelector<HTMLElement>(
       `.option-${optionName.toLocaleLowerCase()}`
     )?.classList.remove("active");
@@ -208,7 +191,6 @@ export class ShopifyProductComponent extends Component {
       if (this.selectedOptions[position0]) {
         const optionValue = this.selectedOptions[position0];
         if (this.scope.product) {
-          // console.debug('activateOptions', this.scope.product.options[position0]);
           const optionName = this.scope.product.options[position0].name;
           // Only activate size if it was clicked by the user
           if (optionName === "size") {
@@ -224,7 +206,7 @@ export class ShopifyProductComponent extends Component {
   }
 
   protected async beforeBind() {
-    // console.debug('beforeBind');
+    await super.beforeBind();
     if (this.scope.handle === null) {
       throw new Error("Product handle not set");
     }
@@ -236,8 +218,8 @@ export class ShopifyProductComponent extends Component {
   }
 
   protected async afterBind() {
-    // console.debug('afterBind', this.scope);
     this.activateOptions();
+    await super.afterBind();
   }
 
   protected requiredAttributes(): string[] {
@@ -279,15 +261,17 @@ export class ShopifyProductComponent extends Component {
    */
   private getGeneralImages(optionName = "color") {
     optionName = optionName.toLowerCase();
-    // // console.debug('getImages');
     const generalImages: string[] = [];
+
     if (this.scope.product) {
+  
       // add images without optionName in filename
       this.scope.product.images.forEach((image: string) => {
         if (!image.toLowerCase().includes(`${optionName}-`)) {
           generalImages.push(image);
         }
       });
+  
       // remove variant images from copied array
       this.scope.product.variants.forEach((variant: ShopifyProductVariant) => {
         let index = -1;
@@ -299,8 +283,6 @@ export class ShopifyProductComponent extends Component {
         }
       });
     }
-
-    // // console.debug('getGeneralImages', generalImages);
 
     return generalImages;
   }
@@ -316,11 +298,9 @@ export class ShopifyProductComponent extends Component {
   ) {
     optionValue = optionValue.toLowerCase().replace("#", "_");
     const optionName = option.name.toLowerCase();
-    // // console.debug('getOptionImages', optionName, optionValue);
     const optionImages: string[] = [];
     if (this.scope.product) {
       this.scope.product.images.forEach((image: string) => {
-        // // console.debug(`check ${optionName}-${optionValue} in`, image);
         if (image.toLowerCase().includes(`${optionName}-${optionValue}`)) {
           optionImages.push(image);
         }
@@ -383,7 +363,7 @@ export class ShopifyProductComponent extends Component {
    */
   private prepareVariant(variant: PreparedProductVariant) {
     if (variant === null) {
-      // console.debug('Error: Variant is null!');
+      console.warn('Warn: Variant is null!');
       return null;
     }
 
@@ -393,7 +373,7 @@ export class ShopifyProductComponent extends Component {
         variant.options[this.colorOption.position - 1]
       );
     } else {
-      // console.debug('Warn: colorOption not defined');
+      console.warn('Warn: colorOption not defined');
       variant.images = [];
     }
 

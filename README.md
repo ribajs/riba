@@ -30,7 +30,6 @@ There are a few OctoberCMS v1.x themes which were developed using Riba:
 
 * [Strandhus OctoberCMS Theme](https://github.com/ArtCodeStudio/strandhus-october-theme)
 * [Hypnose OctoberCMS Theme](https://github.com/ArtCodeStudio/hypnose-october-theme)
-* [watt-land-fluss OctoberCMS Theme](https://github.com/ArtCodeStudio/wattlandfluss-october-theme) (Note: Currently an outdated Riba version is still used here)
 
 ### Shopify Themes
 

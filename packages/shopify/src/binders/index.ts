@@ -1,2 +1,2 @@
-export { shopifyCartCountBinder } from "./shopify-cart-count.binder";
-export { shopifyImgBinder } from "./shopify-img.binder";
+export * from "./shopify-cart-count.binder";
+export * from "./shopify-img.binder";

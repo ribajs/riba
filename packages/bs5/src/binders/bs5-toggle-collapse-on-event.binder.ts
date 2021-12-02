@@ -1,39 +1,36 @@
 import { Binder } from "@ribajs/core";
 import { Collapse } from "../services/collapse";
 
-export interface Bs5CollapseOnEventBinder extends Binder<boolean> {
-  onEvent: (event: Event) => void;
-  collapseServices: Collapse[];
-  targets: NodeListOf<HTMLElement>;
-}
-
 /**
  *
  */
-export const toggleCollapseOnEventBinder: Binder<string> = {
-  name: "bs5-toggle-collapse-on-*",
+export class ToggleCollapseOnEventBinder extends Binder<string, HTMLElement> {
+  static key = "bs5-toggle-collapse-on-*";
+
+  private targets = new Map<HTMLElement, Collapse>();
+
+  private _onEvent(event: Event) {
+    event.preventDefault();
+    for (const collapseService of this.targets.values()) {
+      collapseService.toggle();
+    }
+  }
+
+  private onEvent = this._onEvent.bind(this);
+
   bind(el: HTMLElement) {
-    this.customData = {
-      targets: new Map<HTMLElement, Collapse>(),
-      onEvent(event: Event) {
-        event.preventDefault();
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        for (const collapseService of this.targets.values()) {
-          collapseService.toggle();
-        }
-      },
-    };
-    this.customData.onEvent = this.customData.onEvent.bind(this.customData);
     if (this.args === null) {
       throw new Error("args is null");
     }
     const eventName = this.args[0] as string;
-    el.addEventListener(eventName, this.customData.onEvent);
-  },
+    el.addEventListener(eventName, this.onEvent);
+  }
+
   unbind() {
     const eventName = this.args[0] as string;
-    this.el.removeEventListener(eventName, this.customData.onEvent);
-  },
+    this.el.removeEventListener(eventName, this.onEvent);
+  }
+
   routine(el: HTMLElement, targetSelector: string) {
     const newTargets = Array.from(
       document.querySelectorAll<HTMLElement>(targetSelector)
@@ -45,22 +42,17 @@ export const toggleCollapseOnEventBinder: Binder<string> = {
       );
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    for (const target of this.customData.targets.keys()) {
+    for (const target of this.targets.keys()) {
       if (!newTargets.find((x) => x === target)) {
-        this.customData.targets.get(target).dispose();
-        this.customData.targets.delete(target);
+        this.targets.get(target)?.dispose();
+        this.targets.delete(target);
       }
     }
 
     for (const target of newTargets) {
-      if (!this.customData.targets.has(target)) {
-        this.customData.targets.set(
-          target,
-          new Collapse(target, { toggle: false })
-        );
+      if (!this.targets.has(target)) {
+        this.targets.set(target, new Collapse(target, { toggle: false }));
       }
     }
-    // onStateChange();
-  },
-};
+  }
+}

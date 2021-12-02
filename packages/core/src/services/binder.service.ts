@@ -1,14 +1,17 @@
-import { Binder, Binders, ModuleElementType } from "../types";
+import { Binders, ModuleElementType, ClassOfBinder } from "../types";
 import { ModuleElementService } from "./module-element.service";
 
-export class BindersService extends ModuleElementService {
+/**
+ *
+ */
+export class BindersService extends ModuleElementService<ClassOfBinder> {
   protected type: ModuleElementType = "binder";
 
   /**
    *
    * @param binders;
    */
-  constructor(binders: Binders<any>) {
+  constructor(binders: Binders) {
     super(binders);
   }
 
@@ -18,25 +21,23 @@ export class BindersService extends ModuleElementService {
    * @param name  Overwrites the name to access the binder over
    */
   public regist(
-    binder: Binder<any>,
+    Binder: ClassOfBinder,
     fallbackName?: string,
     forceFallback = false
-  ): Binders<any> {
-    if (!binder || typeof binder.routine !== "function") {
-      console.warn(new Error("Can not regist binder!"), binder);
-      return this.elements;
+  ) {
+    if (!Binder) {
+      throw new Error("No Binder passed to register!");
     }
 
     const name = forceFallback
-      ? fallbackName || binder.name
-      : binder.name || fallbackName;
+      ? fallbackName || Binder.key
+      : Binder.key || fallbackName;
 
     if (!name) {
-      console.warn(new Error("Binder name not found!"), binder);
-      return this.elements;
+      throw new Error("Binder name not found!");
     }
 
-    this.elements[name] = binder;
+    this.elements[name] = Binder;
     return this.elements;
   }
 }

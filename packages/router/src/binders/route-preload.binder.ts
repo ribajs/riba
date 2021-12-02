@@ -1,12 +1,8 @@
 import { Binder } from "@ribajs/core";
 import { Pjax } from "@ribajs/router";
 
-export const routePreloadBinder: Binder<string> = {
-  name: "route-preload",
-
-  bind(/*el: HTMLUnknownElement*/) {
-    //
-  },
+export class RoutePreloadBinder extends Binder<string, HTMLAnchorElement> {
+  static key = "route-preload";
 
   routine(el: HTMLElement, url?: string) {
     const isAnchorElement = el.tagName === "A";
@@ -19,9 +15,5 @@ export const routePreloadBinder: Binder<string> = {
     if (url) {
       Pjax.getInstance()?.prefetchLink(url);
     }
-  },
-
-  unbind() {
-    //
-  },
-};
+  }
+}

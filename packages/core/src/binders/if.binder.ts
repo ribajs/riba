@@ -1,71 +1,69 @@
-import { Binder } from "../types";
+import { Binder } from "../binder";
 import { View } from "../view";
 
 /**
  * if
  * Inserts and binds the element and it's child nodes into the DOM when true.
  */
-export const ifBinder: Binder<boolean> = {
-  name: "if",
-  block: true,
-  priority: 4000,
+export class IfBinder extends Binder<boolean> {
+  static key = "if";
+  static block = true;
+  priority = 4000;
+
+  attached = false;
+  nested?: View;
 
   bind(el: HTMLUnknownElement) {
-    this.customData = {};
     if (!this.marker) {
       this.marker = window?.document?.createComment(
         " riba: " + this.type + " " + this.keypath + " "
       );
-      this.customData.attached = false;
+      this.attached = false;
       if (!el.parentNode?.insertBefore) {
         // console.warn('Element has no parent node');
       } else {
         el.parentNode.insertBefore(this.marker, el);
         el.parentNode.removeChild(el);
       }
-    } else if (this.customData.nested) {
-      this.customData.nested.bind();
+    } else if (this.nested) {
+      this.nested.bind();
     }
-  },
+  }
 
   unbind() {
-    if (this.customData.nested) {
-      this.customData.nested.unbind();
+    if (this.nested) {
+      this.nested.unbind();
     }
-  },
+  }
 
   routine(el: HTMLElement, value: boolean) {
     value = !!value;
-    if (value !== this.customData.attached) {
+    if (value !== this.attached) {
       if (value) {
-        if (!this.customData.nested) {
-          this.customData.nested = new View(
-            el,
-            this.view.models,
-            this.view.options
-          );
-          this.customData.nested.bind();
+        if (!this.nested) {
+          this.nested = new View(el, this.view.models, this.view.options);
+          this.nested.bind();
         }
         if (!this.marker || !this.marker.parentNode) {
           // console.warn('Marker has no parent node');
         } else {
           this.marker.parentNode.insertBefore(el, this.marker.nextSibling);
         }
-        this.customData.attached = true;
+        this.attached = true;
       } else {
         if (!el.parentNode) {
           // console.warn('Element has no parent node');
         } else {
           el.parentNode.removeChild(el);
         }
-        this.customData.attached = false;
+        this.attached = false;
       }
     }
-  },
+  }
 
-  update(models) {
-    if (this.customData.nested) {
-      this.customData.nested.update(models);
+  update(models: any) {
+    if (this.nested) {
+      this.nested.update(models);
     }
-  },
-};
+  }
+}

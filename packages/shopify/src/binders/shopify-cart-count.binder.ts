@@ -5,40 +5,44 @@ import { ShopifyCartObject } from "../interfaces";
 /**
  * Sets the shopify items count
  */
-export const shopifyCartCountBinder: Binder<void> = {
-  name: "shopify-cart-count",
+export class ShopifyCartCountBinder extends Binder<void, HTMLElement> {
+  static key = "shopify-cart-count";
 
-  bind(el: HTMLElement) {
-    this.customData = {
-      onCartRequestComplete: (cart: ShopifyCartObject) => {
-        el.textContent = String(cart.item_count);
-      },
-      onCartRequestChanged: (cart: ShopifyCartObject) => {
-        el.textContent = String(cart.item_count);
-      },
-    };
-    ShopifyCartService.shopifyCartEventDispatcher.on(
-      "ShopifyCart:request:complete",
-      this.customData.onCartRequestComplete
-    );
-    ShopifyCartService.shopifyCartEventDispatcher.on(
-      "ShopifyCart:request:changed",
-      this.customData.onCartRequestChanged
-    );
-  },
+  private _onCartRequestComplete(cart: ShopifyCartObject) {
+    this.el.textContent = String(cart.item_count);
+  }
 
-  unbind(/*el: HTMLElement*/) {
-    ShopifyCartService.shopifyCartEventDispatcher.off(
-      "ShopifyCart:request:complete",
-      this.customData.onCartRequestComplete
-    );
-    ShopifyCartService.shopifyCartEventDispatcher.off(
-      "ShopifyCart:request:changed",
-      this.customData.onCartRequestChanged
-    );
-  },
+  private onCartRequestComplete = this._onCartRequestComplete.bind(this);
+
+  private _onCartRequestChanged(cart: ShopifyCartObject) {
+    this.el.textContent = String(cart.item_count);
+  }
+
+  private onCartRequestChanged = this._onCartRequestChanged.bind(this);
 
   routine() {
-    /**/
-  },
-};
+    //
+  }
+
+  bind() {
+    ShopifyCartService.shopifyCartEventDispatcher.on(
+      "ShopifyCart:request:complete",
+      this.onCartRequestComplete
+    );
+    ShopifyCartService.shopifyCartEventDispatcher.on(
+      "ShopifyCart:request:changed",
+      this.onCartRequestChanged
+    );
+  }
+
+  unbind() {
+    ShopifyCartService.shopifyCartEventDispatcher.off(
+      "ShopifyCart:request:complete",
+      this.onCartRequestComplete
+    );
+    ShopifyCartService.shopifyCartEventDispatcher.off(
+      "ShopifyCart:request:changed",
+      this.onCartRequestChanged
+    );
+  }
+}

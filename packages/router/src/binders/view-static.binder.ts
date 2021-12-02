@@ -7,17 +7,11 @@ const handleize = handleizeFormatter.read as FormatterFn;
 /**
  * Loads a url with pjax and show them inside the element this binder is used on
  */
-export const viewStaticBinder: Binder<string> = {
-  name: "view-static",
-  block: true,
+export class ViewStaticBinder extends Binder<string, HTMLAnchorElement> {
+  static key = "view-static";
+  static block = true;
 
-  bind() {
-    if (!this.customData) {
-      this.customData = {
-        nested: null,
-      };
-    }
-  },
+  private nested: View | null = null;
 
   async routine(el: HTMLElement, options: any) {
     const wrapper = el;
@@ -52,21 +46,20 @@ export const viewStaticBinder: Binder<string> = {
       this.view.models = {};
     }
 
-    if (this.customData.nested) {
-      this.customData.nested.unbind();
+    if (this.nested) {
+      this.nested.unbind();
     }
-    this.customData.nested = new View(
+    this.nested = new View(
       response.container,
       this.view.models,
       this.view.options
     );
-    this.customData.nested.bind();
-  },
+    this.nested.bind();
+  }
 
   unbind() {
-    if (this.customData.nested) {
-      this.customData.nested.unbind();
+    if (this.nested) {
+      this.nested.unbind();
     }
-    delete this.customData;
-  },
-};
+  }
+}

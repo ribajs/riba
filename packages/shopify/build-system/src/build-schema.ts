@@ -14,7 +14,6 @@ gulp.task("build:schema", () => {
     .pipe(
       jsoncombine("settings_schema.json", (data: any) => {
         const data_array: any[] = [];
-        console.debug("data", data);
         for (const file of Object.keys(data)) {
           data_array.push(data[file]);
         }

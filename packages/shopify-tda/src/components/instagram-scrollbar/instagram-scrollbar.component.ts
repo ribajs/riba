@@ -72,7 +72,6 @@ export class ShopifyTdaInstagramScrollbarComponent extends Component {
    * TODO not used
    */
   public onScroll(event: Event, scope: any, eventEl: HTMLElement) {
-    // console.debug('onScroll', eventEl.scrollLeft, this.scollWith);
     if (this.scollWith) {
       const factor = 3;
       this.scollWith.scrollLeft = eventEl.scrollLeft / factor;
@@ -121,7 +120,7 @@ export class ShopifyTdaInstagramScrollbarComponent extends Component {
   }
 
   protected async beforeBind() {
-    // console.debug('beforeBind', this.scope);
+    await super.beforeBind();
     this.scollWith = this.querySelector<HTMLElement>(".title-row");
     return this.loadMedia();
   }

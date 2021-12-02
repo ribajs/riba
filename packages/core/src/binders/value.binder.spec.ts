@@ -1,16 +1,13 @@
 import { Riba } from "../riba";
-
 import { dotAdapter } from "../adapters/dot.adapter";
-
-import { valueBinder } from "./value.binder";
-
+import { ValueBinder } from "./value.binder";
 import { Adapters } from "../types";
 
 describe("riba.binders", () => {
   describe("value", () => {
     const riba = new Riba();
     riba.module.adapter.regist(dotAdapter);
-    riba.module.binder.regist(valueBinder, "value");
+    riba.module.binder.regist(ValueBinder);
 
     let fragment: DocumentFragment;
     let el: HTMLInputElement;
@@ -69,7 +66,9 @@ describe("riba.binders", () => {
   describe("value", () => {
     let input: HTMLInputElement;
     const riba = new Riba();
-    riba.module.binder.regist(valueBinder, "value");
+
+    let fragment: DocumentFragment;
+    let model: any;
 
     const createOptionEls = (val: string) => {
       const option = document.createElement("option");
@@ -119,6 +118,7 @@ describe("riba.binders", () => {
     };
 
     beforeEach(() => {
+      riba.module.binder.regist(ValueBinder);
       riba.configure({
         adapters: ({
           subscribe: () => {
@@ -137,6 +137,12 @@ describe("riba.binders", () => {
       });
 
       input = createInputElement("text");
+
+      model = { value: "foobar" };
+      fragment = document.createDocumentFragment();
+      const el = document.createElement("div");
+      el.setAttribute("rv-value", "");
+      fragment.appendChild(el);
     });
 
     afterEach(() => {
@@ -147,17 +153,27 @@ describe("riba.binders", () => {
     });
 
     it("sets the element's value", () => {
-      (riba.binders.value as any).routine(input, "pitchfork");
+      const view = riba.bind(fragment, model);
+      const valueBinder = view.bindings[0] as ValueBinder;
+      expect(valueBinder.name).toEqual("value");
+      valueBinder.routine(input, "pitchfork");
       expect(input.value).toEqual("pitchfork");
     });
 
     it("applies a default value to the element when the model doesn't contain it", () => {
-      (riba.binders.value as any).routine(input, undefined);
+      const view = riba.bind(fragment, model);
+      const valueBinder = view.bindings[0] as ValueBinder;
+      expect(valueBinder.name).toEqual("value");
+      valueBinder.routine(input, undefined);
       expect(input.value).toEqual("");
     });
 
     it("sets the element's value to zero when a zero value is passed", () => {
-      (riba.binders.value as any).routine(input, 0);
+      const view = riba.bind(fragment, model);
+      expect(view.bindings).toBeArrayOfSize(1);
+      const valueBinder = view.bindings[0] as ValueBinder;
+      expect(valueBinder.name).toEqual("value");
+      valueBinder.routine(input, 0);
       expect(input.value).toEqual("0");
     });
 
@@ -181,13 +197,17 @@ describe("riba.binders", () => {
       });
 
       it("sets the correct option on a select element", () => {
-        (riba.binders.value as any).routine(selectEl, "b");
-        (riba.binders.value as any).routine(selectEl, "c");
+        const view = riba.bind(fragment, model);
+        const valueBinder = view.bindings[0] as ValueBinder;
+        valueBinder.routine(selectEl, "b");
+        valueBinder.routine(selectEl, "c");
         expect(selectEl.value).toEqual("c");
       });
 
       it("sets the correct option on a select-multiple element", () => {
-        (riba.binders.value as any).routine(selectMultipleEl, ["d", "f"]);
+        const view = riba.bind(fragment, model);
+        const valueBinder = view.bindings[0] as ValueBinder;
+        valueBinder.routine(selectMultipleEl, ["d", "f"]);
         const result = Array.prototype.slice
           .call(selectMultipleEl.children)
           .filter((option: any) => {
@@ -201,13 +221,20 @@ describe("riba.binders", () => {
       });
 
       it("sets the correct option on a grouped select element", () => {
-        (riba.binders.value as any).routine(groupedSelectEl, "b");
-        (riba.binders.value as any).routine(groupedSelectEl, "c");
+        const view = riba.bind(fragment, model);
+        const valueBinder = view.bindings[0] as ValueBinder;
+        valueBinder.routine(groupedSelectEl, "b");
+        valueBinder.routine(groupedSelectEl, "c");
         expect(groupedSelectEl.value).toEqual("c");
       });
 
       it("sets the correct option on a select-multiple element", () => {
-        (riba.binders.value as any).routine(groupedMultipleSelectEl, [
+        const view = riba.bind(fragment, model);
+        const valueBinder = view.bindings[0] as ValueBinder;
+        expect(view.bindings).toBeArrayOfSize(1);
+        expect(valueBinder).toBeDefined();
+        expect(valueBinder.name).toEqual("value");
+        valueBinder.routine(groupedMultipleSelectEl, [
           "a",
           "c",
         ]);

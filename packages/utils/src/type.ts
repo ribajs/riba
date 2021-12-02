@@ -129,13 +129,6 @@ export const isFunction = (value: any) => {
 };
 
 /**
- * @Depricated Use Array.isArray instead
- * Check if variable is an Array
- * @see https://stackoverflow.com/a/4775737/1465919
- */
-export const isArray = Array.isArray;
-
-/**
  * Check whether variable is number or a string with numbers in JavaScript
  * @see https://stackoverflow.com/a/1421988/1465919
  */
@@ -359,15 +352,6 @@ export const extend = (
 
   return extended;
 };
-
-/**
- * @depricated Use `extend` instead.
- * Concat the contents of two (or more) objects together into the first object and return the concatenated object.
- * @param deep If true, the merge becomes recursive (aka. deep copy).
- * @param target An object that will receive the new properties
- * @param objects The objects containing additional properties to merge in.
- */
-export const concat = extend;
 
 /**
  * Clone an object, array or any primitive type like numbers or strings.

@@ -1,11 +1,11 @@
-import { Binder } from "../types";
+import { Binder } from "../binder";
 
 /**
  * Sets the element's text value.
  */
-export const textBinder: Binder<string> = {
-  name: "text",
-  routine(el: HTMLElement, value: string) {
-    el.textContent = value != null ? value : "";
-  },
-};
+export class TextBinder extends Binder<string, HTMLElement> {
+  static key = "text";
+  routine(el: HTMLElement, value: number | string) {
+    el.textContent = value != null ? value.toString() : "";
+  }
+}

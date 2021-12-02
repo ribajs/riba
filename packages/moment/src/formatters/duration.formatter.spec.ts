@@ -1,4 +1,4 @@
-import { Riba, textBinder, dotAdapter } from '@ribajs/core';
+import { Riba, TextBinder, dotAdapter } from '@ribajs/core';
 import { DurationFormatter } from './duration.formatter';
 import { MomentInput } from 'moment';
 import moment from 'moment';
@@ -6,7 +6,7 @@ import moment from 'moment';
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
 riba.module.formatter.regist(DurationFormatter);
-riba.module.binder.regist(textBinder);
+riba.module.binder.regist(TextBinder);
 
 interface Model {
   startAt: MomentInput;

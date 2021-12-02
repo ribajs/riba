@@ -1,1 +1,1 @@
-export { onEventBinder } from "./on-event.binder";
+export * from "./on-event.binder";

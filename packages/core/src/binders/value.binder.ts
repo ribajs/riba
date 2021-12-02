@@ -1,18 +1,6 @@
-import { Binder } from "../types";
+import { Binder } from "../binder";
 import { getInputValue } from "@ribajs/utils/src/dom";
 import { getString } from "@ribajs/utils/src/type";
-
-const getData = (el: HTMLElement) => {
-  const customData: any = {};
-  customData.type = (el as HTMLInputElement).type;
-  customData.tagName = el.tagName;
-  customData.contenteditable = el.getAttribute("contenteditable")
-    ? true
-    : false;
-  customData.isRadio =
-    customData.tagName === "INPUT" && customData.type === "radio";
-  return customData;
-};
 
 const DEFAULT_EVENTS = "change input paste blur focus";
 
@@ -20,45 +8,53 @@ const DEFAULT_EVENTS = "change input paste blur focus";
  * Sets the element's value. Also sets the model property when the input changes
  * (two-way binder).
  */
-export const valueBinder: Binder<any> = {
-  name: "value",
-  publishes: true,
-  priority: 3000,
+export class ValueBinder extends Binder<any, HTMLElement> {
+  static key = "value";
+  publishes = true;
+  priority = 3000;
 
-  onChange() {
-    this.publish();
-  },
+  event?: string;
+
+  getData(el: HTMLElement) {
+    const data = {
+      type: (el as HTMLInputElement).type,
+      tagName: el.tagName,
+      contenteditable: el.getAttribute("contenteditable") ? true : false,
+      isRadio: false,
+    };
+    data.isRadio = data.tagName === "INPUT" && data.type === "radio";
+    return data;
+  }
+
+  onChange = this.publish.bind(this);
 
   bind(el: HTMLElement) {
-    if (!this.customData) {
-      this.customData = getData(el);
-    }
-    if (!this.customData.isRadio) {
-      this.customData.event = el.getAttribute("event-name") || DEFAULT_EVENTS;
-      // eslint-disable-next-line @typescript-eslint/no-this-alias
-      const self = this;
-      if (!this.customData.onChange) {
-        this.customData.onChange = () => {
-          self.publish();
-        };
-      }
+    const data = this.getData(el);
+    if (!data.isRadio) {
+      this.event = el.getAttribute("event-name") || DEFAULT_EVENTS;
 
-      const events = (this.customData.event as string).split(" ");
+      const events = this.event.split(" ");
       for (const event of events) {
-        el.addEventListener(event.trim(), this.customData.onChange, false);
+        el.addEventListener(event.trim(), this.onChange, false);
       }
     }
-  },
+  }
 
   unbind(el: HTMLUnknownElement) {
-    const events = this.customData.event.split(" ");
-    for (const event in events) {
-      el.removeEventListener(event.trim(), this.customData.onChange);
+    if (this.event) {
+      const events = this.event.split(" ");
+      for (const event in events) {
+        el.removeEventListener(event.trim(), this.onChange);
+      }
     }
-  },
+  }
 
-  routine(el: HTMLElement | HTMLSelectElement, value?: string | string[]) {
+  routine(
+    el: HTMLElement | HTMLSelectElement,
+    value?: number | string | string[]
+  ) {
     let oldValue = this.getValue(el);
+
     if (!Array.isArray(value)) {
       if (value != null) {
         value = getString(value);
@@ -78,10 +74,9 @@ export const valueBinder: Binder<any> = {
       return;
     }
 
-    if (!this.customData) {
-      this.customData = getData(el);
-    }
-    if (this.customData.isRadio) {
+    const data = this.getData(el);
+
+    if (data.isRadio) {
       el.setAttribute("value", value as string);
     } else {
       if ((el as HTMLSelectElement).type === "select-multiple") {
@@ -99,7 +94,9 @@ export const valueBinder: Binder<any> = {
         (el as HTMLInputElement).value = value as string;
       }
     }
-  },
+  }
 
-  getValue: getInputValue,
-};
+  getValue(el: HTMLElement) {
+    return getInputValue(el);
+  }
+}

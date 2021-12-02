@@ -8,8 +8,9 @@ import { onRoute } from "@ribajs/utils/src/url";
  * @see https://getbootstrap.com/docs/4.1/components/collapse/
  * @see https://github.com/twbs/bootstrap/blob/v4-dev/js/src/collapse.js
  */
-export const expandOnUrlBinder: Binder<string> = {
-  name: "bs5-expand-on-url",
+export class ExpandOnUrlBinder extends Binder<string, HTMLElement> {
+  static key = "bs5-expand-on-url";
+
   routine(el: HTMLElement, url: string) {
     const collapseService = new Collapse(el, { toggle: false });
     const dispatcher = new EventDispatcher("main");
@@ -26,5 +27,5 @@ export const expandOnUrlBinder: Binder<string> = {
     dispatcher.on("newPageReady", () => checkURL(url));
 
     checkURL(url);
-  },
-};
+  }
+}

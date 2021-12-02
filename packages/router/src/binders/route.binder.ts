@@ -1,140 +1,107 @@
 import { Pjax, Prefetch } from "../services";
-import { Binding, Binder } from "@ribajs/core";
-import { EventDispatcher } from "@ribajs/events";
+import { Binder } from "@ribajs/core";
 import { isObject, isString } from "@ribajs/utils/src/type";
 import { onRoute, normalizeUrl, isExternalUrl } from "@ribajs/utils/src/url";
-
-export interface RouteOptions {
-  url: string;
-  viewId: string;
-  removeAfterActivation: boolean;
-  newTab: boolean;
-  newTabOnExtern: boolean;
-}
-
-export interface CustomData {
-  prefetch: Prefetch;
-  dispatcher?: EventDispatcher;
-  options: RouteOptions;
-  checkURL(this: Binding, urlToCheck?: string): boolean;
-  onClick(this: Binding, event: Event): void;
-  onNewPageReady(this: Binding): void;
-}
+import { RouteOptions } from "../types/route-options";
 
 /**
  * Open link with pajax if the route is not the active route
  */
-export const routeBinder: Binder<string> = {
-  name: "route",
+export class RouteBinder extends Binder<string, HTMLAnchorElement> {
+  static key = "route";
 
-  bind(this: Binding, el: HTMLElement) {
-    el.classList.add("route");
-    this.customData = {
-      dispatcher: undefined,
-      options: {
-        removeAfterActivation: false,
-        newTab: false,
-        newTabOnExtern: true,
-      } as RouteOptions,
-      onClick(this: Binding, event: Event) {
-        // console.log(this.customData.options.url);
-        const pjax = Pjax.getInstance(this.customData.options.viewId);
-        if (onRoute(this.customData.options.url, true)) {
-          console.debug("already on this site, do nothing");
-          event.stopPropagation();
-          event.preventDefault();
-        } else if (isExternalUrl(this.customData.options.url)) {
-          // console.debug('check');
-          if (!pjax) {
-            return;
-          }
-          event.stopPropagation();
-          event.preventDefault();
-          if (!this.customData.options.url.startsWith("http")) {
-          }
-          // Is extern
-          const newTab =
-            this.customData.options.newTab ||
-            this.customData.options.newTabOnExtern;
-          pjax.goTo(this.customData.options.url, newTab);
-        } else {
-          if (this.customData.options.url) {
-            if (!pjax) {
-              return;
-            }
-            pjax.onLinkClick(
-              event,
-              this.el as HTMLAnchorElement,
-              this.customData.options.url,
-              this.customData.options.newTab
-            );
-          }
-        }
-        if (
-          this.customData.options.removeAfterActivation &&
-          this.el &&
-          this.el.parentNode
-        ) {
-          // this.unbind(); TODO?
-          this.el.parentNode.removeChild(this.el);
-        }
-      },
-    } as CustomData;
-    this.customData.onClick = this.customData.onClick.bind(this);
-    el.addEventListener("click", this.customData.onClick);
-  },
+  private prefetch?: Prefetch;
 
-  routine(
-    this: Binding,
-    el: HTMLElement,
-    optionsOrUrl?: string | RouteOptions
-  ) {
-    if (isString(optionsOrUrl)) {
-      this.customData.options.url = optionsOrUrl as string;
-    } else if (isObject(optionsOrUrl as RouteOptions)) {
-      this.customData.options = optionsOrUrl as RouteOptions;
+  private options: RouteOptions = {
+    url: "",
+    viewId: "main",
+    removeAfterActivation: false,
+    newTab: false,
+    newTabOnExtern: true,
+  };
+
+  private _onClick(event: Event) {
+    // console.log(this.options.url);
+    const pjax = Pjax.getInstance(this.options.viewId);
+    if (onRoute(this.options.url, true)) {
+      console.info("already on this site, do nothing");
+      event.stopPropagation();
+      event.preventDefault();
+    } else if (isExternalUrl(this.options.url)) {
+      if (!pjax) {
+        return;
+      }
+      event.stopPropagation();
+      event.preventDefault();
+      // Is extern
+      const newTab = this.options.newTab || this.options.newTabOnExtern;
+      pjax.goTo(this.options.url, newTab);
+    } else {
+      if (this.options.url) {
+        if (!pjax) {
+          return;
+        }
+        pjax.onLinkClick(event, this.el, this.options.url, this.options.newTab);
+      }
     }
-    this.customData.options.viewId = this.customData.options.viewId || "main";
-    this.customData.prefetch = new Prefetch(this.customData.options.viewId);
-    this.customData.dispatcher = new EventDispatcher(
-      this.customData.options.viewId
-    );
+    if (this.options.removeAfterActivation && this.el && this.el.parentNode) {
+      // this.unbind(); TODO?
+      this.el.parentNode.removeChild(this.el);
+    }
+  }
 
-    this.customData.options.newTab = false;
+  private onClick = this._onClick.bind(this);
+
+  bind(el: HTMLAnchorElement) {
+    el.classList.add("route");
+    this.onClick = this.onClick.bind(this);
+    el.addEventListener("click", this.onClick);
+  }
+
+  routine(el: HTMLAnchorElement, optionsOrUrl?: string | RouteOptions) {
+    if (isString(optionsOrUrl)) {
+      this.options.url = optionsOrUrl as string;
+    } else if (isObject(optionsOrUrl as RouteOptions)) {
+      this.options = optionsOrUrl as RouteOptions;
+    }
+    this.options.viewId = this.options.viewId || "main";
+    this.prefetch = new Prefetch(this.options.viewId);
+
+    this.options.newTab = false;
     const isAnchorHTMLElement = el.tagName === "A";
 
-    if (!this.customData.options.url && isAnchorHTMLElement) {
+    if (!this.options.url && isAnchorHTMLElement) {
       const url = el.getAttribute("href");
       if (url) {
-        this.customData.options.url = url;
+        this.options.url = url;
       }
     }
 
     if (el.getAttribute("target") === "_blank") {
-      this.customData.options.newTab = true;
+      this.options.newTab = true;
     }
 
     // normalize url
-    this.customData.options.url = normalizeUrl(this.customData.options.url).url;
+    this.options.url = normalizeUrl(this.options.url).url;
 
     // set href if not set
     if (
       isAnchorHTMLElement &&
       (!(el as HTMLAnchorElement).href || !el.getAttribute("href")) &&
-      this.customData.options.url
+      this.options.url
     ) {
-      el.setAttribute("href", this.customData.options.url);
-      (el as HTMLAnchorElement).href = this.customData.options.url;
+      el.setAttribute("href", this.options.url);
+      (el as HTMLAnchorElement).href = this.options.url;
     }
 
-    if (!this.customData.options.newTab) {
-      this.customData.prefetch.initBinder(el, this.customData.options.url);
+    if (!this.options.newTab) {
+      this.prefetch.initBinder(el, this.options.url);
     }
+    // this.checkURL.call(this, this.options.url);
+  }
 
-    // this.customData.checkURL.call(this, this.customData.options.url);
-  },
-  unbind(this: Binding, el: HTMLUnknownElement) {
-    this.customData.prefetch.deInitBinder(el, this.customData.options.url);
-    el.removeEventListener("click", this.customData.onClick);
-  },
-};
+  unbind(el: HTMLAnchorElement) {
+    this.prefetch?.deInitBinder(el, this.options.url);
+    el.removeEventListener("click", this.onClick);
+  }
+}

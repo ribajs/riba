@@ -11,8 +11,6 @@ export interface Scope {
   linklist?: Linklist;
   /** Sets the linklist by his name */
   handle?: string;
-  /** @deprecated Use `handle` instead */
-  name?: string;
   /** If the navigation should be displayed as pills */
   pills: boolean;
   /** If the navigation should be displayed as vertically */

@@ -1,5 +1,6 @@
 export * from "./breakpoint";
 export * from "./carousel-options";
+export * from "./collapse-on-event-binder";
 export * from "./color-picker-options";
 export * from "./modal-notification-button";
 export * from "./module-options";
@@ -14,7 +15,6 @@ export * from "./slideshow-slide-position";
 export * from "./slideshow-slide";
 export * from "./slideshow-state";
 export * from "./tagged-image-tag";
+export * from "./toggle-attribute";
+export * from "./toggle-class";
 export * from "./tooltip-options";
-
-// TODO
-export * from "../services/toast-notification";

@@ -1,10 +1,10 @@
-import { Binder } from "../types";
+import { Binder } from "../binder";
 
 /**
- * Shows the element when value is true.
+ * Shows the element when value is true (negated version of `hide` binder).
  */
-export const showBinder: Binder<boolean> = {
-  name: "show",
+export class ShowBinder extends Binder<boolean, HTMLElement> {
+  static key = "show";
   routine(el: HTMLElement, value: boolean) {
     el.style.display = value ? "" : "none";
     if (value) {
@@ -12,5 +12,5 @@ export const showBinder: Binder<boolean> = {
     } else {
       el.setAttribute("hidden", "true");
     }
-  },
-};
+  }
+}

@@ -1,14 +1,12 @@
 import { Riba } from "../riba";
-
 import { dotAdapter } from "../adapters/dot.adapter";
-
-import { onEventBinder } from "./on-event.binder";
-
-import { valueBinder } from "./value.binder";
+import { OnEventBinder } from "./on-event.binder";
+import { ValueBinder } from "./value.binder";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
-riba.module.binder.regists([onEventBinder, valueBinder]);
+riba.module.binder.regist(OnEventBinder);
+riba.module.binder.regist(ValueBinder);
 
 describe("riba.binders", () => {
   let element: HTMLInputElement;

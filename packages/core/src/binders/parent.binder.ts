@@ -1,4 +1,4 @@
-import { Binder } from "../types";
+import { Binder } from "../binder";
 import { BasicComponent } from "../component/basic-component";
 import { isCustomElement, waitForCustomElement } from "@ribajs/utils";
 
@@ -6,12 +6,12 @@ import { isCustomElement, waitForCustomElement } from "@ribajs/utils";
  * parent
  * Binds the parent scope to your component
  */
-export const parentBinder: Binder<any, BasicComponent> = {
-  name: "parent",
+export class ParentBinder extends Binder<any, BasicComponent> {
+  static key = "parent";
   routine() {
     /**/
-  },
-  _bind(el: BasicComponent) {
+  }
+  private bindIntern(el: BasicComponent) {
     if (el.setBinderAttribute) {
       el.setBinderAttribute("$parent", this.view.models);
     } else {
@@ -21,22 +21,23 @@ export const parentBinder: Binder<any, BasicComponent> = {
         customElements.get(el.localName)
       );
     }
-  },
-  async bind(el) {
+  }
+
+  async bind(el: BasicComponent) {
     if (isCustomElement(el, true, true)) {
-      parentBinder._bind.call(this, el);
+      this.bindIntern(el);
     } else if (isCustomElement(el, true)) {
-      console.debug(
-        `[parentBinder] CustomElement ${el.localName} has been defined, but not yet upgraded. Waiting for upgrade.`,
+      console.info(
+        `[parentBinder] CustomElement ${el.localName} has been defined, but is not yet upgraded. Waiting for upgrade..`,
         el
       );
       await waitForCustomElement(el);
-      parentBinder._bind.call(this, el);
+      this.bindIntern(el);
     } else {
       console.warn(
         "[parentBinder] You can only use this binder on Riba components",
         el.localName
       );
     }
-  },
-};
+  }
+}

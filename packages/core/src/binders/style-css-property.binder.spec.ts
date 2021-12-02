@@ -1,12 +1,12 @@
 import { Riba } from "../riba";
 
-import { styleStarBinder } from "./style-css-property.binder";
+import { StyleStarBinder } from "./style-css-property.binder";
 
 import { dotAdapter } from "../adapters/dot.adapter";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
-riba.module.binder.regist(styleStarBinder);
+riba.module.binder.regist(StyleStarBinder);
 
 describe("riba.binders", () => {
   let element: HTMLDivElement;

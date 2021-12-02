@@ -95,8 +95,6 @@ export class ShopifyLoginFormComponent extends Component {
    * Login submit using the login form
    */
   public login(event: Event) {
-    // console.debug('login', this.scope.form);
-
     if (!this.loginCustomerForm) {
       console.error("No login form found");
       return false;
@@ -110,8 +108,6 @@ export class ShopifyLoginFormComponent extends Component {
 
     if (this.scope.loginCustomer.validation.valid) {
       this.loginCustomerForm.submit();
-    } else {
-      // console.debug('form not valid', this.scope.form);
     }
   }
 
@@ -119,7 +115,6 @@ export class ShopifyLoginFormComponent extends Component {
    * Create an account submit using the login form
    */
   public create(event: Event) {
-    // console.debug('create', this.scope.form);
 
     if (!this.createCustomerForm) {
       console.error("No create form found");
@@ -137,8 +132,6 @@ export class ShopifyLoginFormComponent extends Component {
 
     if (this.scope.createCustomer.validation.valid) {
       this.createCustomerForm.submit();
-    } else {
-      // console.debug('form not valid', this.scope.form);
     }
   }
 
@@ -147,7 +140,6 @@ export class ShopifyLoginFormComponent extends Component {
    * @param event
    */
   public recover(event: Event) {
-    // console.debug('recover', this.scope.form, this.recoverCustomerForm);
     if (!this.recoverCustomerForm) {
       console.error("No recover form found");
       return false;
@@ -170,7 +162,6 @@ export class ShopifyLoginFormComponent extends Component {
     if (this.scope.recoverCustomer.validation.valid) {
       this.recoverCustomerForm.submit();
     } else {
-      // console.debug('form not valid', this.scope.form);
       (this.loginCustomerForm.parentNode as HTMLElement | null)?.setAttribute(
         "hidden",
         ""
@@ -223,8 +214,6 @@ export class ShopifyLoginFormComponent extends Component {
     ) as HTMLFormElement;
     this.recoverCustomerForm.setAttribute("novalidate", "");
     this.recoverCustomerForm.classList.add("needs-validation");
-
-    // console.debug('initValidation', this.createCustomerForm, this.loginCustomerForm, this.recoverCustomerForm);
   }
 
   protected validate(form: HTMLFormElement, validationScope: ValidationObject) {
@@ -232,12 +221,8 @@ export class ShopifyLoginFormComponent extends Component {
     form.classList.add("was-validated");
   }
 
-  protected async beforeBind() {
-    // console.debug('beforeBind');
-  }
-
   protected async afterBind() {
-    // console.debug('afterBind', this.scope);
+    await super.afterBind();
     this.initValidation();
   }
 

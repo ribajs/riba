@@ -21,11 +21,9 @@ export class Bs5ButtonComponent extends Component {
 
   constructor() {
     super();
-    // console.debug('constructor', this);
   }
 
   public onClick() {
-    // console.debug('onClick');
     this.startAnimation();
   }
 
@@ -39,13 +37,10 @@ export class Bs5ButtonComponent extends Component {
   }
 
   protected onStartAnimation() {
-    // console.debug('onStartAnimation');
+    //
   }
 
   protected onEndAnimation() {
-    // window.getComputedStyle(this)
-    // console.debug('onEndAnimation', event, window.getComputedStyle(this));
-
     setTimeout(() => {
       this.classList.remove(this.scope.animationClass);
     });
@@ -68,16 +63,6 @@ export class Bs5ButtonComponent extends Component {
       this.addEventListener("click", this.scope.onClick);
       return view;
     });
-  }
-
-  protected async beforeBind() {
-    return await super.beforeBind();
-    // console.debug('beforeBind', this.scope);
-  }
-
-  protected async afterBind() {
-    return await super.afterBind();
-    // console.debug('afterBind', this.scope);
   }
 
   protected requiredAttributes(): string[] {

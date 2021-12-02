@@ -1,1 +1,1 @@
-export { i18nStarBinder } from "./i18n/i18n-star.binder";
+export * from "./i18n-star.binder";

@@ -1,14 +1,8 @@
 import { isObject } from "@ribajs/utils/src/type";
-import { ModuleElementType } from "../types/module-element-type";
+import { ModuleElementType, Elements } from "../types";
 
-export type Element = any;
-
-export interface Elements {
-  [key: string]: Element;
-}
-
-export abstract class ModuleElementService {
-  protected elements: Elements;
+export abstract class ModuleElementService<T = any> {
+  protected elements: Elements<T>;
 
   protected abstract type: ModuleElementType;
 
@@ -25,7 +19,7 @@ export abstract class ModuleElementService {
    * @param element
    * @param name  Overwrites the name to access the element over
    */
-  public abstract regist(element: Element, name?: string): Elements;
+  public abstract regist(element: T, name?: string): Elements;
 
   /**
    * Regist a set / array of elements

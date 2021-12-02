@@ -18,7 +18,7 @@
 before:
 
 ```ts
-public toggle(context?: Binder<any>, event?: Event) {
+public toggle(context?: BinderDeprecated<any>, event?: Event) {
 ```
 
 after:

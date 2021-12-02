@@ -228,7 +228,6 @@ export class Bs4ColorPickerComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     super.init(Bs4ColorPickerComponent.observedAttributes);
-    console.debug("scope", this.scope);
   }
 
   protected requiredAttributes(): string[] {

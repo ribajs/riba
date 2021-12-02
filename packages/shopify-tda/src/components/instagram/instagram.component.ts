@@ -74,7 +74,6 @@ export class ShopifyTdaInstagramComponent extends Component {
   }
 
   protected async beforeBind() {
-    // console.debug('beforeBind', this.scope);
     return this.loadMedia();
   }
 

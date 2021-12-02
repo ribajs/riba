@@ -1,23 +1,14 @@
-import { Binder } from "../types";
-import { ifBinder } from "./if.binder";
+import { IfBinder } from "./if.binder";
 
 /**
  * unless
  * Removes and unbinds the element and it's child nodes into the DOM when true
  * (negated version of `if` binder).
  */
-export const unlessBinder: Binder<boolean> = {
-  name: "unless",
-  block: true,
-  priority: 4000,
-
-  bind: ifBinder.bind,
-
-  unbind: ifBinder.unbind,
+export class UnlessBinder extends IfBinder {
+  static key = "unless";
 
   routine(el: HTMLElement, value: boolean) {
-    return ifBinder.routine.call(this, el, !value);
-  },
-
-  update: ifBinder.update,
-};
+    return super.routine(el, !value);
+  }
+}

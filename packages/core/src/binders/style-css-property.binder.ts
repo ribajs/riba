@@ -1,4 +1,4 @@
-import { Binder } from "../types";
+import { Binder } from "../binder";
 
 /**
  * style-*
@@ -8,8 +8,8 @@ import { Binder } from "../types";
  * <div rv-style-background-color="'blue'"></div>
  * ```
  */
-export const styleStarBinder: Binder<string> = {
-  name: "style-*",
+export class StyleStarBinder extends Binder<string, HTMLElement> {
+  static key = "style-*";
   routine(el: HTMLElement, value: string) {
     const propertyName = this.args[0];
     if (value === null || value === undefined || value === "") {
@@ -17,5 +17,5 @@ export const styleStarBinder: Binder<string> = {
     } else {
       el.style.setProperty(propertyName.toString(), value);
     }
-  },
-};
+  }
+}

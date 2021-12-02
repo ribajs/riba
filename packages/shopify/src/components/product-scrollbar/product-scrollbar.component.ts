@@ -50,7 +50,6 @@ export class ShopifyProductScrollbarComponent extends Component {
    * Preload product on mouse over
    */
   public onProductMouseenter(event: Event, scope: any, eventEl: HTMLElement) {
-    // console.debug('onProductMouseenter');
     const url = eventEl.dataset.url;
     const prefetch = Prefetch.getInstance();
     if (!prefetch) {
@@ -66,7 +65,6 @@ export class ShopifyProductScrollbarComponent extends Component {
    * get product in the middle of the scrollbar element
    */
   public onScroll(event: Event, scope: any, eventEl: HTMLElement) {
-    // console.debug('onScroll', this.scope);
     if (this.products) {
       for (let i = 0; i < this.products.length; i++) {
         const product = this.products[i];

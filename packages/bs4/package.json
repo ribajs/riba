@@ -38,8 +38,7 @@
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
     "build": "npm run lint && npm run build:module",
     "build:module": "tsc",
-    "clean": "rm -rf ./dist ./lib",
-    "packages:npm:link": "npm link @ribajs/core @ribajs/extras"
+    "clean": "rm -rf ./dist ./lib"
   },
   "files": [
     "/src",

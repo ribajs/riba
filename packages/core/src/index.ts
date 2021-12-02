@@ -7,14 +7,11 @@ export * from "./component";
 export * from "./components";
 export * from "./components/templates/templates.component";
 export * from "./formatters";
-export * from "./binding";
-export * from "./parsers";
+export * from "./binder";
+export * from "./parse-declaration";
+export * from "./parse-node";
+export * from "./parse-template";
+export * from "./parse-type";
 export * from "./riba";
 export * from "./view";
 export * from "./core.module";
-
-/**
- * TODO remove this export
- * @deprecated Use the @ribajs/events module directly
- */
-export * from "@ribajs/events";

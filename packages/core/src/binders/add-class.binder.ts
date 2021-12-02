@@ -1,4 +1,4 @@
-import { Binder } from "../types";
+import { Binder } from "../binder";
 
 /**
  * add-class
@@ -12,29 +12,30 @@ import { Binder } from "../types";
  *   </li>
  * <ul>
  */
-export const addClassBinder: Binder<string> = {
-  name: "add-class",
-  function: true,
-  priority: 1000,
+export class AddClassBinder extends Binder<string, HTMLElement> {
+  static key = "add-class";
+  function = true;
+  priority = 1000;
+  private staticClasses?: string[];
 
-  bind(el) {
-    this.customData = {
-      staticClasses: el.className.split(" "),
-    };
-  },
+  bind(el: HTMLElement) {
+    this.staticClasses = el.className.split(" ");
+  }
 
   unbind() {
-    delete this.customData;
-  },
+    delete this.staticClasses;
+  }
 
   routine(el: HTMLElement, newValue: string) {
     if (newValue) {
-      if (this.customData.staticClasses.indexOf(newValue) === -1) {
-        el.className = this.customData.staticClasses.join(" ") + " " + newValue;
+      if (this.staticClasses?.indexOf(newValue) === -1) {
+        el.className = this.staticClasses.join(" ") + " " + newValue;
       }
     } else {
-      el.className = this.customData.staticClasses.join(" ");
+      if (this.staticClasses) {
+        el.className = this.staticClasses.join(" ");
+      }
     }
     el.className = el.className.trim();
-  },
-};
+  }
+}

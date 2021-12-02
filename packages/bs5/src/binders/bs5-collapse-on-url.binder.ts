@@ -8,31 +8,39 @@ import { onRoute } from "@ribajs/utils/src/url";
  * @see https://getbootstrap.com/docs/4.1/components/collapse/
  * @see https://github.com/twbs/bootstrap/blob/v4-dev/js/src/collapse.js
  */
-export const collapseOnUrlBinder: Binder<string> = {
-  name: "bs5-collapse-on-url",
+export class CollapseOnUrlBinder extends Binder<string, HTMLInputElement> {
+  static key = "bs5-collapse-on-url";
+
+  private dispatcher = EventDispatcher.getInstance("main");
+  private collapseService?: Collapse;
+  private url?: string;
+
+  private _checkURL() {
+    if (this.url && onRoute(this.url)) {
+      this.collapseService?.hide();
+      return true;
+    }
+    // collapseService.show();
+    return false;
+  }
+
+  private checkURL = this._checkURL.bind(this);
+
   bind(el: HTMLElement) {
-    this.customData = {
-      dispatcher: EventDispatcher.getInstance("main"),
-      collapseService: new Collapse(el, { toggle: false }),
-    };
-  },
+    this.collapseService = new Collapse(el, { toggle: false });
+  }
+
   unbind() {
-    if (this.customData.checkURL) {
-      this.customData.dispatcher.off("newPageReady", this.customData.checkURL);
+    if (this.checkURL) {
+      this.dispatcher.off("newPageReady", this.checkURL);
     }
-  },
+  }
+
   routine(el: HTMLElement, url: string) {
-    if (this.customData.checkURL) {
-      this.customData.dispatcher.off("newPageReady", this.customData.checkURL);
+    this.url = url;
+    if (this.checkURL) {
+      this.dispatcher.off("newPageReady", this.checkURL);
     }
-    this.customData.checkURL = () => {
-      if (url && onRoute(url)) {
-        this.customData.collapseService.hide();
-        return true;
-      }
-      // collapseService.show();
-      return false;
-    };
-    this.customData.dispatcher.on("newPageReady", this.customData.checkURL);
-  },
-};
+    this.dispatcher.on("newPageReady", this.checkURL);
+  }
+}

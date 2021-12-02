@@ -5,35 +5,33 @@ import { DropdownService } from "../services/dropdown.service";
  *
  * @see https://getbootstrap.com/docs/4.1/components/dropdown/
  */
-export const dropdownBinder: Binder<string> = {
-  name: "bs4-dropdown",
+export class DropdownBinder extends Binder<string, HTMLElement> {
+  static key = "bs4-dropdown";
+
+  private toggler?: HTMLButtonElement | HTMLAnchorElement;
+
+  private dropdownService?: DropdownService;
+
   bind(el: HTMLElement) {
-    this.customData = {
-      toggler:
-        (el.classList.contains("dropdown-toggle")
-          ? el
-          : el.querySelector(".dropdown-toggle")) || el,
-    };
-  },
+    this.toggler = ((el.classList.contains("dropdown-toggle")
+      ? el
+      : el.querySelector(".dropdown-toggle")) || el) as
+      | HTMLButtonElement
+      | HTMLAnchorElement;
+  }
+
   routine(el: HTMLElement, option: any = {}) {
-    if (this.customData.dropdownService) {
-      this.customData.dropdownService.dispose();
-      this.customData.toggler.removeEventListener(
-        "click",
-        this.customData.dropdownService.toggle
-      );
+    if (!this.toggler) {
+      throw new Error("No dropdown toggle element found!");
     }
-    this.customData.dropdownService = new DropdownService(
-      this.customData.toggler,
-      option
+    if (this.dropdownService) {
+      this.dropdownService.dispose();
+      this.toggler.removeEventListener("click", this.dropdownService.toggle);
+    }
+    this.dropdownService = new DropdownService(this.toggler, option);
+    this.dropdownService.toggle = this.dropdownService.toggle.bind(
+      this.dropdownService
     );
-    this.customData.dropdownService.toggle =
-      this.customData.dropdownService.toggle.bind(
-        this.customData.dropdownService
-      );
-    this.customData.toggler.addEventListener(
-      "click",
-      this.customData.dropdownService.toggle
-    );
-  },
-};
+    this.toggler.addEventListener("click", this.dropdownService.toggle);
+  }
+}

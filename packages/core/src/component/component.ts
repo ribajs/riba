@@ -5,10 +5,11 @@
  */
 import { View } from "../view";
 import { Riba } from "../riba";
+import { Binder } from "../binder";
 import { BasicComponent } from "./basic-component";
 import { Formatter } from "../types";
 import { EventDispatcher } from "@ribajs/events";
-import type { ComponentLifecycleEventData, Binder } from "../types";
+import type { ComponentLifecycleEventData } from "../types";
 
 export abstract class Component extends BasicComponent {
   protected view?: View | null = null;

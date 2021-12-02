@@ -15,92 +15,84 @@ import { EventDispatcher } from "@ribajs/events";
  * @example
  * <div class="grid" rv-image-events rv-masonry='{ "columnWidth": 200, "itemSelector": ".grid-item" }'>
  */
-export const masonryBinder: Binder<Options> = {
-  name: "masonry",
+export class MasonryBinder extends Binder<Options, HTMLElement> {
+  static key = "masonry";
+
+  private masonry: Masonry | null = null;
+  private images: NodeListOf<HTMLImageElement> | null = null;
+  private resizeObserver: ResizeObserver | null = null;
+
+  private _layout() {
+    if (this.masonry?.layout) {
+      this.masonry.layout();
+    }
+  }
+
+  private layout = debounce(this._layout.bind(this));
 
   bind(el: HTMLElement) {
-    const _layout = () => {
-      const masonry = this.customData.masonry as Masonry | null;
-      if (masonry?.layout) {
-        masonry.layout();
-      }
-    };
-
-    this.customData = {
-      masonry: null,
-      layout: debounce(_layout.bind(this)),
-      images: null,
-      resizeObserver: null,
-    };
-
     if (window.ResizeObserver) {
-      this.customData.resizeObserver = new ResizeObserver(
-        this.customData.layout
-      );
-      this.customData.resizeObserver.observe(el);
+      this.resizeObserver = new ResizeObserver(this.layout);
+      this.resizeObserver.observe(el);
     } else {
-      window.removeEventListener("resize", this.customData.layout);
-      window.addEventListener("resize", this.customData.layout, {
+      window.removeEventListener("resize", this.layout);
+      window.addEventListener("resize", this.layout, {
         passive: true,
       });
     }
 
     // All components bound
     const lifecycle = LifecycleService.getInstance();
-    lifecycle.events.once(
-      "ComponentLifecycle:allBound",
-      this.customData.layout,
-      this
-    );
+    lifecycle.events.once("ComponentLifecycle:allBound", this.layout, this);
 
     // On new router page
     const routerEvents = new EventDispatcher("main");
-    routerEvents.once("newPageReady", this.customData.layout, this);
-    routerEvents.once("transitionCompleted", this.customData.layout, this);
+    routerEvents.once("newPageReady", this.layout, this);
+    routerEvents.once("transitionCompleted", this.layout, this);
 
-    this.customData.layout();
-  },
+    this.layout();
+  }
 
   unbind(el: HTMLElement) {
-    let masonry = this.customData.masonry as Masonry | null;
+    let masonry = this.masonry as Masonry | null;
     if (masonry?.destroy) {
       masonry.destroy();
       masonry = null;
     }
-    this.customData.images.forEach((img: HTMLImageElement) => {
-      // Image size changed
-      this.customData.resizeObserver?.unobserve(img);
-    });
+    if (this.images) {
+      this.images.forEach((img: HTMLImageElement) => {
+        // Image size changed
+        this.resizeObserver?.unobserve(img);
+      });
+    }
 
-    this.customData.resizeObserver?.unobserve(el);
+    this.resizeObserver?.unobserve(el);
 
-    window.removeEventListener("resize", this.customData.layout);
-
-    delete this.customData;
-  },
+    window.removeEventListener("resize", this.layout);
+  }
 
   routine(el: HTMLElement, options: Options = {}) {
-    if (this.customData?.masonry?.destroy) {
-      this.customData.masonry.destroy();
+    if (this?.masonry?.destroy) {
+      this.masonry.destroy();
     }
-    this.customData.masonry = new Masonry(el, options);
+    this.masonry = new Masonry(el, options);
 
-    this.customData.images = el.querySelectorAll<HTMLImageElement>("img");
+    this.images = el.querySelectorAll<HTMLImageElement>("img");
 
     // Detect image changes
-    this.customData.images.forEach((img: HTMLImageElement) => {
+    this.images.forEach((img: HTMLImageElement) => {
       // Default vanilla image loaded event
-      img.removeEventListener("load", this.customData.layout);
-      img.addEventListener("load", this.customData.layout, { once: true });
+      img.removeEventListener("load", this.layout);
+      img.addEventListener("load", this.layout, { once: true });
       // Additional event from images-events binder
-      img.removeEventListener("load-always", this.customData.layout);
-      img.addEventListener("load-always", this.customData.layout, {
+      img.removeEventListener("load-always", this.layout);
+      img.addEventListener("load-always", this.layout, {
         once: true,
       });
       // Image size changed
-      this.customData.resizeObserver?.observe(img);
+      this.resizeObserver?.observe(img);
     });
 
-    this.customData.layout();
-  },
-};
+    this.layout();
+  }
+}

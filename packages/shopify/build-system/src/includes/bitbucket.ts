@@ -28,7 +28,6 @@ export const uploadFileExists = async (filename: string) => {
     repo_slug,
     workspace,
   });
-  // console.debug("[uploadFileExists]", files.data.values);
 
   // TODO implement pagination?
   return (files.data.values as Array<any>).some((e) => e.name === filename);

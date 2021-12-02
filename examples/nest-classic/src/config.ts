@@ -8,7 +8,7 @@ import findRoot = require('find-root');
 import { ThemeConfig } from './types';
 
 const THEME_ACTIVE = process.env.THEME_ACTIVE || 'nest-classic-theme';
-const ROOT = findRoot(process.cwd())
+const ROOT = findRoot(process.cwd());
 const PACKAGES = resolve(ROOT, '..');
 const THEME_DIR = resolve(PACKAGES, THEME_ACTIVE);
 const THEME: ThemeConfig = YAML.parse(

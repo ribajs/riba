@@ -1,15 +1,12 @@
 import { Riba } from "../riba";
-
 import { dotAdapter } from "../adapters/dot.adapter";
-
-import { unlessBinder } from "./unless.binder";
-
-import { eachStarBinder } from "./each-item.binder";
+import { UnlessBinder } from "./unless.binder";
+import { EachStarBinder } from "./each-item.binder";
 
 describe("unless", () => {
   const riba = new Riba();
   riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regist(unlessBinder);
+  riba.module.binder.regist(UnlessBinder);
 
   let el: HTMLDivElement;
   let model: any;
@@ -151,7 +148,7 @@ describe("unless", () => {
 
 describe("Array observe and unobserve", () => {
   const riba = new Riba();
-  riba.module.binder.regist(eachStarBinder);
+  riba.module.binder.regist(EachStarBinder);
 
   let fragment: DocumentFragment;
   let el1: HTMLDivElement;

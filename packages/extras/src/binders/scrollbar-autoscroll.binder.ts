@@ -5,10 +5,12 @@ import { Autoscroll, AutoscrollOptions } from "../services/autoscroll.service";
 /**
  * Slideout click event to toggle the slideout
  */
-export const autoscrollBinder: Binder<AutoscrollOptions> = {
-  name: "autoscroll",
+export class AutoscrollBinder extends Binder<AutoscrollOptions, HTMLElement> {
+  static key = "autoscroll";
+
+  autoscroll?: Autoscroll;
+
   routine(el: HTMLElement, options: AutoscrollOptions) {
-    this.customData = this.customData || {};
     if (options && options.width && isString(options.width)) {
       if (options.width === "100vw") {
         el.style.width = options.width;
@@ -20,15 +22,16 @@ export const autoscrollBinder: Binder<AutoscrollOptions> = {
     el.classList.add(`rv-autoscroll-${options.angle}`);
 
     setTimeout(() => {
-      if (this.customData.autoscroll) {
-        (this.customData.autoscroll as Autoscroll).destroy();
+      if (this.autoscroll) {
+        (this.autoscroll as Autoscroll).destroy();
       }
-      this.customData.autoscroll = new Autoscroll(el, options);
+      this.autoscroll = new Autoscroll(el, options);
     }, 1000);
-  },
+  }
+
   unbind() {
-    if (this.customData.autoscroll) {
-      (this.customData.autoscroll as Autoscroll).destroy();
+    if (this.autoscroll) {
+      (this.autoscroll as Autoscroll).destroy();
     }
-  },
-};
+  }
+}

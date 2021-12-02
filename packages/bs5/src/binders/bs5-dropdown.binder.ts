@@ -6,26 +6,37 @@ import { Dropdown as BSDropdown } from "bootstrap";
  *
  * @see https://getbootstrap.com/docs/5.0/components/dropdowns/#via-javascript
  */
-export const dropdownBinder: Binder<Partial<BSDropdown.Options>> = {
-  name: "bs5-dropdown",
+export class DropdownBinder extends Binder<
+  Partial<BSDropdown.Options>,
+  HTMLInputElement
+> {
+  static key = "bs5-dropdown";
+
+  private toggler?: HTMLButtonElement | HTMLAnchorElement;
+
+  private dropdownService?: Dropdown;
+
   bind(el: HTMLElement) {
-    this.customData = {
-      toggler:
-        (el.classList.contains("dropdown-toggle")
-          ? el
-          : el.querySelector(".dropdown-toggle")) || el,
-    };
-  },
+    this.toggler = ((el.classList.contains("dropdown-toggle")
+      ? el
+      : el.querySelector(".dropdown-toggle")) || el) as
+      | HTMLButtonElement
+      | HTMLAnchorElement;
+  }
+
   routine(el: HTMLElement, option = {}) {
-    if (this.customData.dropdownService) {
-      const dropdownService: Dropdown = this.customData.dropdownService;
+    if (!this.toggler) {
+      throw new Error("No dropdown toggle element found!");
+    }
+    if (this.dropdownService) {
+      const dropdownService: Dropdown = this.dropdownService;
       dropdownService.dispose();
       // To detect this element as an dropdown by the bootstrap logic
-      this.customData.toggler.dataset.bsToggle = "";
+      this.toggler.dataset.bsToggle = "";
     }
-    const dropdownService = new Dropdown(this.customData.toggler, option);
+    const dropdownService = new Dropdown(this.toggler, option);
     // To detect this element as an dropdown by the bootstrap logic
-    this.customData.toggler.dataset.bsToggle = "dropdown";
-    this.customData.dropdownService = dropdownService;
-  },
-};
+    this.toggler.dataset.bsToggle = "dropdown";
+    this.dropdownService = dropdownService;
+  }
+}

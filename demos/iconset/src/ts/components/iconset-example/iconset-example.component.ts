@@ -38,7 +38,6 @@ export class IconsetExampleComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     super.init(IconsetExampleComponent.observedAttributes);
-    console.debug("scope", this.scope);
   }
 
   protected requiredAttributes(): string[] {
@@ -48,10 +47,8 @@ export class IconsetExampleComponent extends Component {
   protected template(): ReturnType<TemplateFunction> {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
-      // console.debug('Do not use template, because element has child nodes');
       return null;
     } else {
-      // console.debug('Use template', template);
       return template;
     }
   }

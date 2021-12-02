@@ -1,27 +1,13 @@
 import { jsonFormatter } from "../formatters/type/json.formatter";
-import type { Binder } from "../types";
-export interface BinderAttributeChangedEvent {
-  detail: {
-    name: string;
-    oldValue: string;
-    newValue: string;
-    namespace: null;
-  };
-}
+import { Binder } from "../binder";
+import { BinderAttributeChangedEvent } from "../types";
 
 /**
  * Sets the attribute on the element. If no binder above is matched it will fall
  * back to using this binder.
  */
-export const attributeBinder: Binder<string> = {
-  name: "*",
-  bind(/*el*/) {
-    /**/
-  },
-
-  unbind() {
-    delete this.customData;
-  },
+export class AttributeBinder extends Binder<string, HTMLElement> {
+  static key = "*";
 
   routine(el: HTMLElement, newValue: any) {
     if (!this.type) {
@@ -58,20 +44,18 @@ export const attributeBinder: Binder<string> = {
       ) {
         el.setAttribute(this.type, newValueFormatted);
         el.dispatchEvent(
-          // E.g. Event used in BinderAttributeChangedEvent
           new CustomEvent("binder-changed", {
             detail: { name: this.type, newValue: newValueFormatted, oldValue },
-          })
+          } as BinderAttributeChangedEvent)
         );
       }
     } else {
       el.removeAttribute(this.type);
       el.dispatchEvent(
-        // E.g. Event used in BinderAttributeChangedEvent
         new CustomEvent("binder-changed", {
           detail: { name: this.type, newValue: newValueFormatted, oldValue },
-        })
+        } as BinderAttributeChangedEvent)
       );
     }
-  },
-};
+  }
+}

@@ -1,18 +1,15 @@
-import {
-  Component,
-  TemplateFunction,
-} from '@ribajs/core';
-import { CreditsComponentScope } from '../../types'
+import { Component, TemplateFunction } from "@ribajs/core";
+import { CreditsComponentScope } from "../../types";
 import { hasChildNodesTrim } from "@ribajs/utils";
-import template from './credits.component.pug';
+import template from "./credits.component.pug";
 
 export class ArtCodeCreditsComponent extends Component {
-  public static tagName = 'ac-credits';
+  public static tagName = "ac-credits";
 
   autobind = true;
 
   static get observedAttributes() {
-    return ['align', 'icon-src'];
+    return ["align", "icon-src"];
   }
 
   protected requiredAttributes() {
@@ -22,8 +19,8 @@ export class ArtCodeCreditsComponent extends Component {
   public scope: CreditsComponentScope = {
     popupVisible: false,
     toggle: this.toggle,
-    align: 'top',
-    iconSrc: 'images/pixelherz.svg',
+    align: "top",
+    iconSrc: "images/pixelherz.svg",
   };
 
   constructor() {
@@ -43,7 +40,7 @@ export class ArtCodeCreditsComponent extends Component {
 
   protected async afterBind() {
     await super.afterBind();
-    document.addEventListener('click', this.onClickOutside);
+    document.addEventListener("click", this.onClickOutside);
   }
 
   protected _onClickOutside(event: MouseEvent) {
@@ -62,9 +59,14 @@ export class ArtCodeCreditsComponent extends Component {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null,
+    namespace: string | null
   ) {
-    super.parsedAttributeChangedCallback(attributeName, oldValue, newValue, namespace);
+    super.parsedAttributeChangedCallback(
+      attributeName,
+      oldValue,
+      newValue,
+      namespace
+    );
   }
 
   protected template(): ReturnType<TemplateFunction> {

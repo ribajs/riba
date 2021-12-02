@@ -1,20 +1,16 @@
-import { Binder } from "../types";
+import { Binder } from "../binder";
 
 /**
  * not-draggable
  * Useful to prevent dragging of ghost image
  */
-export const notDraggableBinder: Binder<boolean> = {
-  name: "not-draggable",
-
-  bind() {
-    this.customData = {};
-  },
+export class NotDraggableBinder extends Binder<boolean, HTMLElement> {
+  static key = "not-draggable";
 
   routine(el: HTMLElement) {
     el.addEventListener("dragstart", (event) => {
       event.preventDefault();
       return false;
     });
-  },
-};
+  }
+}

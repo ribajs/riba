@@ -46,12 +46,10 @@ export class ShopifyCartButtonComponent extends Component {
   }
 
   public toggle(event: Event) {
-    // console.debug('toggle');
     event.preventDefault();
     event.stopPropagation();
 
     if (onRoute(ShopifyCartButtonComponent.cartUrl)) {
-      // console.debug('already on this site');
       window.history.back();
     } else {
       if (ShopifyCartButtonComponent.cartUrl) {
@@ -65,12 +63,10 @@ export class ShopifyCartButtonComponent extends Component {
   }
 
   protected async beforeBind() {
-    // console.debug('beforeBind');
-
+    await super.beforeBind();
     ShopifyCartService.shopifyCartEventDispatcher.on(
       "ShopifyCart:request:start",
       () => {
-        // console.debug('ShopifyCartButton:request:start');
         this.scope.pending = true;
       }
     );
@@ -78,7 +74,6 @@ export class ShopifyCartButtonComponent extends Component {
     ShopifyCartService.shopifyCartEventDispatcher.on(
       "ShopifyCart:request:complete",
       (cart: ShopifyCartObject) => {
-        // console.debug('ShopifyCartButton:request:complete', cart);
         if (cart) {
           this.cart = cart;
         }
@@ -88,10 +83,9 @@ export class ShopifyCartButtonComponent extends Component {
   }
 
   protected async afterBind() {
-    // console.debug('afterBind', this.scope);
-
+    await super.afterBind();
     return ShopifyCartService.get().catch((error: Error) => {
-      console.debug(error);
+      console.error("[ShopifyCartButtonComponent]", error);
     });
   }
 

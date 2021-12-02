@@ -6,66 +6,66 @@ import { isInViewport } from "@ribajs/utils/src/dom";
  * scrollspy-class
  * @see https://getbootstrap.com/docs/4.1/components/scrollspy/
  */
-export const scrollspyClassBinder: Binder<string> = {
-  name: "bs5-scrollspy-*",
-  bind(el: HTMLElement) {
-    this.customData = {
-      onScroll: function () {
-        const target = this.customData.target;
-        const className = this.customData.className;
-        if (!this.customData.target) {
-          return;
-        }
+export class ScrollspyClassBinder extends Binder<string, HTMLInputElement> {
+  static key = "bs5-scrollspy-*";
 
-        /**
-         * Because we are looking if the element is in viewport we should use the parent wrapper instead of header elements
-         */
-        // if (target.tagName === 'H1' || target.tagName === 'H2' || target.tagName === 'H3' || target.tagName === 'H4' || target.tagName === 'H5' || target.tagName === 'H6') {
-        //   if (target.parentElement.tagName === 'SECTION') {
-        //     target = target.parentElement;
-        //   }
-        // }
+  private target?: HTMLElement;
+  private className?: string;
 
-        if (this.customData.isInViewport(target)) {
-          el.classList.add(className);
-          if ((el as HTMLInputElement).type === "radio") {
-            (el as HTMLInputElement).checked = true;
-          }
-        } else {
-          el.classList.remove(className);
-          if ((el as HTMLInputElement).type === "radio") {
-            (el as HTMLInputElement).checked = false;
-          }
-        }
-      },
-      /**
-       * Determine if an element is in the viewport
-       * @param elem The element
-       * @return Returns true if element is in the viewport
-       */
-      isInViewport: function (elem: Element) {
-        if (!elem) {
-          return false;
-        }
-        const offsetTop = Number(el.dataset.offset || 0);
-        const offsetBottom = Number(el.dataset.offsetBottom || 0);
-        return isInViewport(elem, offsetTop, offsetBottom);
-      },
-    };
-    this.customData.isInViewport = this.customData.isInViewport.bind(this);
-    this.customData.onScroll = debounce(this.customData.onScroll.bind(this));
+  private _onScroll() {
+    if (!this.target) {
+      throw new Error("No target element found!");
+    }
 
-    window.addEventListener("scroll", this.customData.onScroll, {
+    if (!this.className) {
+      throw new Error("className not set!");
+    }
+
+    if (this.isInViewport(this.target)) {
+      this.el.classList.add(this.className);
+      if (this.el.type === "radio") {
+        this.el.checked = true;
+      }
+    } else {
+      this.el.classList.remove(this.className);
+      if (this.el.type === "radio") {
+        this.el.checked = false;
+      }
+    }
+  }
+
+  private onScroll = debounce(this._onScroll.bind(this));
+
+  /**
+   * Determine if an element is in the viewport
+   * @param elem The element
+   * @return Returns true if element is in the viewport
+   */
+  private _isInViewport(elem: Element) {
+    if (!elem) {
+      return false;
+    }
+    const offsetTop = Number(this.el.dataset.offset || 0);
+    const offsetBottom = Number(this.el.dataset.offsetBottom || 0);
+    return isInViewport(elem, offsetTop, offsetBottom);
+  }
+
+  private isInViewport = this._isInViewport.bind(this);
+
+  bind() {
+    window.addEventListener("scroll", this.onScroll, {
       passive: true,
     });
-    this.customData.onScroll();
-  },
+    this.onScroll();
+  }
+
   routine(el: HTMLElement, targetSelector: string) {
     const nativeIDTargetSelector = targetSelector.replace("#", "");
-    this.customData.target = document.getElementById(nativeIDTargetSelector);
-    this.customData.className = this.args[0] as string;
-  },
+    this.target = document.getElementById(nativeIDTargetSelector) || undefined;
+    this.className = this.args[0] as string;
+  }
+
   unbind() {
-    window.removeEventListener("scroll", this.customData.onScroll);
-  },
-};
+    window.removeEventListener("scroll", this.onScroll);
+  }
+}

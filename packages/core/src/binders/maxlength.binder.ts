@@ -1,14 +1,10 @@
-import { Binder } from "../types";
+import { Binder } from "../binder";
 
 /**
  * maxlength
  */
-export const maxlengthBinder: Binder<number> = {
-  name: "maxlength",
-
-  bind() {
-    this.customData = {};
-  },
+export class MaxlengthBinder extends Binder<number, HTMLElement> {
+  static key = "maxlength";
 
   routine(el: HTMLElement, maxLength?: number) {
     if (typeof maxLength === "number") {
@@ -17,5 +13,5 @@ export const maxlengthBinder: Binder<number> = {
     } else {
       (el as HTMLInputElement).removeAttribute("maxlength");
     }
-  },
-};
+  }
+}

@@ -19,7 +19,6 @@ export class ExtrasScrollEventsExampleComponent extends Component {
   }
 
   public log(eventName: string, event: Event) {
-    // console.debug(eventName + ' called', event.type, (event as any), (event as any).detail);
     if (this.consoleElement) {
       let html = `<p class="log"><span class="name">${eventName}</span>`;
       const detail = (event as CustomEvent).detail;

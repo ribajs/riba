@@ -1,15 +1,12 @@
 import { Riba } from "../riba";
-
-import { ifBinder } from "./if.binder";
-
-import { eachStarBinder } from "./each-item.binder";
-
+import { IfBinder } from "./if.binder";
+import { EachStarBinder } from "../binders";
 import { dotAdapter } from "../adapters/dot.adapter";
 
 describe("if", () => {
   const riba = new Riba();
   riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regist(ifBinder);
+  riba.module.binder.regist(IfBinder);
 
   let el: HTMLDivElement;
   let model: any;
@@ -142,7 +139,7 @@ describe("if", () => {
 
 describe("Array observe and unobserve", () => {
   const riba = new Riba();
-  riba.module.binder.regist(eachStarBinder);
+  riba.module.binder.regist(EachStarBinder);
 
   let fragment: DocumentFragment;
   let el1: HTMLDivElement;
@@ -152,20 +149,6 @@ describe("Array observe and unobserve", () => {
   let model: any;
 
   beforeEach(() => {
-    /*
-          DOM for test
-          <div>
-            <div rv-if='scope.visible'>
-              <div>
-                <div rv-each-item='scope.items'>{item.data}</div>
-              </div>
-            </div>
-            <div>
-              <div rv-each-item='scope.items'>{item.data}</div>
-            </div>
-          </div>
-        */
-    // fragment = document.createElement('div');
     fragment = document.createDocumentFragment();
     el1 = document.createElement("div");
     el1.setAttribute("rv-if", "scope.visible");

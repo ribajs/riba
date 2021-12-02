@@ -1,20 +1,19 @@
 import { Riba } from "../riba";
-
-import { Binder } from "../types";
+import { Binder } from "../binder";
 
 /**
  * Sets the element's text value.
  */
-export const customBinder: Binder<string> = {
-  name: "custom-binder",
+export class CustomBinder extends Binder<string> {
+  static key = "custom-binder";
   routine(el: HTMLElement, value: string) {
     el.innerHTML = "received " + value;
-  },
+  }
 };
 
 describe("Custom binder with no attribute value", () => {
   const riba = new Riba();
-  riba.module.binder.regist(customBinder);
+  riba.module.binder.regist(CustomBinder);
 
   let el: HTMLDivElement;
   let model: any;

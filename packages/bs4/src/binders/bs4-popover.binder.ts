@@ -1,16 +1,15 @@
 import { PopoverService, PopoverOptions } from "@ribajs/bs4";
-
-/**
- *
- */
 import { Binder } from "@ribajs/core";
 
 /**
  *
  */
-export const popoverBinder: Binder<string> = {
-  name: "bs4-popover",
-  block: false,
+export class PopoverBinder extends Binder<string, HTMLElement> {
+  static key = "bs4-popover";
+
+  private popover?: PopoverService;
+  private listeners: { [key: string]: EventListener } = {};
+
   routine(el: HTMLElement, optionsOrContent: string | PopoverOptions) {
     let options: Partial<PopoverOptions> = {};
 
@@ -27,11 +26,11 @@ export const popoverBinder: Binder<string> = {
     });
 
     // destroy previous popover if it already exists
-    if (this.customData.popover) {
-      this.customData.popover.dispose();
+    if (this.popover) {
+      this.popover.dispose();
     }
 
-    this.customData.popover = popover;
+    this.popover = popover;
 
     /*
      * Methods "show", "hide", etc. of the PopoverService can be called by dispatching an
@@ -50,22 +49,20 @@ export const popoverBinder: Binder<string> = {
     ];
 
     // remove listeners of previous Popover if there already was one
-    if (this.customData.listeners) {
-      for (const [trigger, listener] of Object.entries(
-        this.customData.listeners as [string, EventListener]
-      )) {
+    if (this.listeners) {
+      for (const [trigger, listener] of Object.entries(this.listeners)) {
         this.el.removeEventListener(trigger, listener as EventListener);
       }
     }
 
-    this.customData.listeners = Object.create(null);
+    this.listeners = Object.create(null);
     for (const methodName of methodNames) {
       const trigger = `trigger-${methodName}`;
       const listener = (popover[methodName] as any).bind(popover);
       this.el.addEventListener(trigger, listener);
-      this.customData.listeners[trigger] = listener;
+      this.listeners[trigger] = listener;
     }
-  },
+  }
 
   bind(el: HTMLElement) {
     // inform ancestors that this popover was bound
@@ -73,20 +70,18 @@ export const popoverBinder: Binder<string> = {
     el.dispatchEvent(
       new CustomEvent("bound.bs.popover", { bubbles: true, cancelable: true })
     );
-  },
+  }
 
   unbind() {
     // destroy Popover if it already exists
-    if (this.customData.popover) {
-      this.customData.popover.dispose();
+    if (this.popover) {
+      this.popover.dispose();
     }
     // remove listeners if there are any
-    if (this.customData.listeners) {
-      for (const [trigger, listener] of Object.entries(
-        this.customData.listeners as [string, EventListener]
-      )) {
+    if (this.listeners) {
+      for (const [trigger, listener] of Object.entries(this.listeners)) {
         this.el.removeEventListener(trigger, listener as EventListener);
       }
     }
-  },
-};
+  }
+}

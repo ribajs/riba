@@ -1,1 +1,1 @@
-export {};
+export * from "./module-options";

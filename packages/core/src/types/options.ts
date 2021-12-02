@@ -20,7 +20,7 @@ export interface Options extends Extensions {
   /** Augment the event handler of the on-* binder */
   handler?: EventHandler;
 
-  attributeBinders?: any;
+  attributeBinders: string[];
 
   /** Removes binder attribute after the binder was bound */
   removeBinderAttributes?: boolean;

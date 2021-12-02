@@ -20,7 +20,6 @@ export class Bs5DropdownComponent extends Component {
   }
 
   public toggle(event: Event) {
-    console.debug("toggle");
     event.preventDefault();
     event.stopPropagation();
     if (!this.dropdown) {
@@ -38,7 +37,6 @@ export class Bs5DropdownComponent extends Component {
     this.toggler = this.classList.contains("dropdown-toggle")
       ? this
       : this.querySelector<HTMLElement>(".dropdown-toggle") || this;
-    console.debug("toggler", this.toggler);
     // To detect this element as an dropdown by the bootstrap logic
     this.toggler.dataset.bsToggle = "dropdown";
     this.dropdown = new Dropdown(this.toggler, {});

@@ -4,7 +4,7 @@ import { Adapters } from "./adapters";
 import { Components } from "./components";
 
 export interface Extensions {
-  binders?: Binders<any>;
+  binders?: Binders;
   formatters?: Formatters;
   components?: Components;
   adapters?: Adapters;

@@ -1,4 +1,4 @@
-import { Binder } from "../types";
+import { Binder } from "../binder";
 
 /**
  * style-*
@@ -8,8 +8,8 @@ import { Binder } from "../types";
  * <div rv-style-background-image="'/image.png'"></div>
  * ```
  */
-export const styleBackgroundImageBinder: Binder<string> = {
-  name: "style-background-image",
+export class StyleBackgroundImageBinder extends Binder<string, HTMLElement> {
+  static key = "style-background-image";
   routine(el: HTMLElement, value: string) {
     const prop = "background-image";
     if (value === null || value === undefined || value === "") {
@@ -17,5 +17,5 @@ export const styleBackgroundImageBinder: Binder<string> = {
     } else {
       el.style.setProperty(prop, `url(${value})`);
     }
-  },
-};
+  }
+}

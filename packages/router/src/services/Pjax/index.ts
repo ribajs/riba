@@ -613,7 +613,6 @@ class Pjax {
     const oldUrl = normalizeUrl(this.history.currentStatus().url).url;
 
     if (this.changeBrowserUrl && oldUrl === newUrl) {
-      // console.debug('ignore');
       return false;
     }
 

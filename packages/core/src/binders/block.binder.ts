@@ -1,9 +1,4 @@
-import { Binder } from "../types";
-
-export interface Assign {
-  key: string;
-  value: any;
-}
+import { Binder } from "../binder";
 
 /**
  * block
@@ -16,10 +11,10 @@ export interface Assign {
  *  { value }
  * </div>
  */
-export const blockBinder: Binder<Assign> = {
-  name: "block",
-  block: true,
+export class BlockBinder extends Binder<unknown> {
+  static key = "block";
+  static block = true;
   routine() {
     /**/
-  },
-};
+  }
+}

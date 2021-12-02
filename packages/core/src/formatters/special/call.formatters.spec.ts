@@ -3,12 +3,12 @@ import { Riba } from "../../riba";
 import { dotAdapter } from "../../adapters/dot.adapter";
 
 import { callFormatter } from "./call.formatter";
-import { textBinder } from "../../binders/text.binder";
+import { TextBinder } from "../../binders/text.binder";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
 riba.module.formatter.regist(callFormatter, "call");
-riba.module.binder.regist(textBinder);
+riba.module.binder.regist(TextBinder);
 
 interface Model {
   fn?: (arg1: string, arg2: string) => string;

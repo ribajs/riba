@@ -1,4 +1,4 @@
-import { Binder } from "../types";
+import { Binder } from "../binder";
 import { getInputValue } from "@ribajs/utils/src/dom";
 import { getString } from "@ribajs/utils/src/type";
 
@@ -8,32 +8,33 @@ import { getString } from "@ribajs/utils/src/type";
  * `checked` binder). Also sets the model property when the input is checked or
  * unchecked (two-way binder).
  */
-export const uncheckedBinder: Binder<string> = {
-  name: "unchecked",
-  publishes: true,
-  priority: 2000,
+export class UncheckedBinder extends Binder<
+  string | boolean,
+  HTMLInputElement
+> {
+  static key = "unchecked";
+  publishes = true;
+  priority = 2000;
 
-  bind(el) {
-    this.customData = {
-      onChange: () => {
-        this.publish.bind(this);
-      },
-    };
-    el.addEventListener("change", this.customData.onChange);
-  },
+  onChange = this.publish.bind(this);
 
-  unbind(el) {
-    el.removeEventListener("change", this.customData.onChange);
-  },
+  bind(el: HTMLInputElement) {
+    el.addEventListener("change", this.onChange);
+  }
 
-  routine(el: HTMLElement, value) {
-    if ((el as HTMLInputElement).type === "radio") {
-      (el as HTMLInputElement).checked =
-        getString((el as HTMLInputElement).value) !== getString(value);
+  unbind(el: HTMLInputElement) {
+    el.removeEventListener("change", this.onChange);
+  }
+
+  routine(el: HTMLInputElement, value: string | boolean) {
+    if (el.type === "radio") {
+      el.checked = getString(el.value) !== getString(value);
     } else {
-      (el as HTMLInputElement).checked = !value;
+      el.checked = !value;
     }
-  },
+  }
 
-  getValue: getInputValue,
-};
+  getValue(el: HTMLInputElement) {
+    return getInputValue(el);
+  }
+}

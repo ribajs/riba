@@ -1,11 +1,11 @@
-import { Riba, textBinder, dotAdapter } from '@ribajs/core';
+import { Riba, TextBinder, dotAdapter } from '@ribajs/core';
 import { AsMinutesFormatter } from './as-minutes.formatter';
 import { duration, Duration } from "moment";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
 riba.module.formatter.regist(AsMinutesFormatter);
-riba.module.binder.regist(textBinder);
+riba.module.binder.regist(TextBinder);
 
 interface Model {
   duration: Duration,

@@ -1,41 +1,37 @@
-import { Binder } from "../types";
+import { Binder } from "../binder";
 
 /**
- * Togggles a boolean variable to true/false if the event is triggered.
+ * Toggles a boolean variable to true/false if the event is triggered.
  */
-export const toggleOnEventBinder: Binder<string> = {
-  name: "toggle-on-*",
+export class ToggleOnEventBinder extends Binder<string, HTMLUnknownElement> {
+  static key = "toggle-on-*";
 
-  bind(el) {
-    this.customData = {
-      handler: null,
-      propertyKey: null as string | null,
-      toggle: () => {
-        if (this.customData.propertyKey) {
-          this.view.models[this.customData.propertyKey] =
-            !this.view.models[this.customData.propertyKey];
-        }
-      },
-    };
+  private propertyKey?: string;
+
+  toggle() {
+    if (this.propertyKey) {
+      this.view.models[this.propertyKey] = !this.view.models[this.propertyKey];
+    }
+  }
+
+  bind(el: HTMLUnknownElement) {
     const eventName = this.args[0] as string;
     const passive = this.el.dataset.passive === "true"; // data-passive="true"
-    el.addEventListener(eventName, this.customData.toggle, { passive });
-  },
+    el.addEventListener(eventName, this.toggle, { passive });
+  }
 
-  unbind(el: HTMLElement) {
-    if (this.customData.handler) {
-      if (this.args === null) {
-        throw new Error("args is null");
-      }
-      const eventName = this.args[0] as string;
-      el.removeEventListener(eventName, this.customData.toggle);
-    }
-  },
-
-  routine(el: HTMLElement, propertyKey: string) {
+  unbind(el: HTMLUnknownElement) {
     if (this.args === null) {
       throw new Error("args is null");
     }
-    this.customData.propertyKey = propertyKey;
-  },
-};
+    const eventName = this.args[0] as string;
+    el.removeEventListener(eventName, this.toggle);
+  }
+
+  routine(el: HTMLUnknownElement, propertyKey: string) {
+    if (this.args === null) {
+      throw new Error("args is null");
+    }
+    this.propertyKey = propertyKey;
+  }
+}

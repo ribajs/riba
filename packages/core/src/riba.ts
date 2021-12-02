@@ -6,22 +6,15 @@ import {
   Components,
   Options,
 } from "./types";
-import { parseTemplate, parseType } from "./parsers";
-import { Binding } from "./binding";
-import { attributeBinder } from "./binders/attribute.binder";
-
+import { parseTemplate } from "./parse-template";
+import { parseType } from "./parse-type";
+import { Binder } from "./binder";
 import { View } from "./view";
 import { Observer } from "./observer";
 import { ModulesService } from "./services/module.service";
 import { LifecycleService } from "./services/lifecycle.service";
 
 export class Riba {
-  /**
-   * Sets the attribute on the element. If no binder above is matched it will fall
-   * back to using this binder.
-   */
-  public static fallbackBinder = attributeBinder;
-
   /**
    * Default event handler, calls the function defined in his binder
    * @see Binding.eventHandler
@@ -31,17 +24,17 @@ export class Riba {
     this: any,
     context: any,
     ev: Event,
-    binding: Binding,
+    binder: Binder,
     el: HTMLElement
   ) {
     if (!this || !this.call) {
       const error = new Error(
-        `[rv-${binding.type}="${binding.keypath}"] Event handler "${binding.keypath}" not found!"`
+        `[rv-${binder.type}="${binder.keypath}"] Event handler "${binder.keypath}" not found!"`
       );
-      console.error(error, binding, el, binding.view.models);
+      console.error(error, binder, el, binder.view.models);
       throw error;
     }
-    this.call(context, ev, binding.view.models, el);
+    this.call(context, ev, binder.view.models, el);
   }
 
   /** singleton instance */
@@ -137,37 +130,37 @@ export class Riba {
     for (const [option, value] of Object.entries(options)) {
       switch (option) {
         case "binders":
-          this.binders = { ...this.binders, ...value };
+          this.binders = { ...this.binders, ...(value as Binders) };
           break;
         case "formatters":
-          this.formatters = { ...this.formatters, ...value };
+          this.formatters = { ...this.formatters, ...(value as Formatters) };
           break;
         case "components":
-          this.components = { ...this.components, ...value };
+          this.components = { ...this.components, ...(value as Components) };
           break;
         case "adapters":
-          this.adapters = { ...this.adapters, ...value };
+          this.adapters = { ...this.adapters, ...(value as Adapters) };
           break;
         case "prefix":
-          this.prefix = value;
+          this.prefix = value as string[];
           break;
         case "parseTemplate":
-          this.parseTemplate = value;
+          this.parseTemplate = value as any;
           break;
         case "parseType":
-          this.parseType = value;
+          this.parseType = value as any;
           break;
         case "templateDelimiters":
-          this.templateDelimiters = value;
+          this.templateDelimiters = value as string[];
           break;
         case "rootInterface":
-          this.rootInterface = value;
+          this.rootInterface = value as string;
           break;
         case "preloadData":
-          this.preloadData = value;
+          this.preloadData = value as boolean;
           break;
         case "blockNodeNames":
-          this.blockNodeNames = value;
+          this.blockNodeNames = value as string[];
           break;
         case "blockUnknownCustomElements":
           this.blockUnknownCustomElements = Boolean(value);
@@ -188,7 +181,7 @@ export class Riba {
       formatters: {} as Formatters,
 
       // other
-      attributeBinders: {},
+      attributeBinders: [],
 
       // sightglass
       rootInterface: {} as Root,
@@ -243,11 +236,16 @@ export class Riba {
     viewOptions.components = { ...this.components, ...viewOptions.components };
     viewOptions.adapters = { ...this.adapters, ...viewOptions.adapters };
 
+    if (!viewOptions.attributeBinders) {
+      viewOptions.attributeBinders = [];
+    }
+
     // get all attributeBinders from available binders
     if (viewOptions.binders) {
-      viewOptions.attributeBinders = Object.keys(viewOptions.binders).filter(
+      const attributeBinders = Object.keys(viewOptions.binders).filter(
         (key) => key.indexOf("*") >= 1 // Should contain, but not start with, *
       );
+      viewOptions.attributeBinders.push(...attributeBinders);
     }
 
     return viewOptions as Options;
@@ -258,7 +256,7 @@ export class Riba {
    */
   public bind(
     el: HTMLElement | DocumentFragment | HTMLUnknownElement[],
-    models: any,
+    models?: any,
     options?: Options
   ) {
     const viewOptions: Options = this.getViewOptions(options);

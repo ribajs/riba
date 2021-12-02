@@ -1,14 +1,12 @@
-import { Binder } from "@ribajs/core";
+import { Binder } from "../binder";
 
 /**
  * sort-childs using flex order
  */
-export const flexSortChildsBinder: Binder<boolean> = {
-  name: "flex-sort-childs",
-  priority: 90000,
-  // bind(el: HTMLUnknownElement) {
+export class FlexSortChildsBinder extends Binder<boolean, HTMLElement> {
+  static key = "flex-sort-childs";
+  priority = 90000;
 
-  // },
   routine(el: HTMLElement, descending: boolean) {
     const childrens = Array.from(el.children) as HTMLElement[];
     childrens.sort((a, b) => {
@@ -27,5 +25,5 @@ export const flexSortChildsBinder: Binder<boolean> = {
       const child = childrens[i];
       child.style.order = i.toString();
     }
-  },
-};
+  }
+}

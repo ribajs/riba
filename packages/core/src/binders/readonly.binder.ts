@@ -1,22 +1,18 @@
-import { Binder } from "../types";
+import { Binder } from "../binder";
 
 /**
  * readonly
  */
-export const readonlyBinder: Binder<boolean> = {
-  name: "readonly",
+export class ReadonlyBinder extends Binder<boolean, HTMLInputElement> {
+  static key = "readonly";
 
-  bind() {
-    this.customData = {};
-  },
-
-  routine(el: HTMLElement, readOnly: boolean) {
+  routine(el: HTMLInputElement, readOnly: boolean) {
     readOnly = !!readOnly;
-    (el as HTMLInputElement).readOnly = readOnly;
+    el.readOnly = readOnly;
     if (readOnly) {
-      (el as HTMLInputElement).setAttribute("readonly", "");
+      el.setAttribute("readonly", "");
     } else {
-      (el as HTMLInputElement).removeAttribute("readonly");
+      el.removeAttribute("readonly");
     }
-  },
-};
+  }
+}

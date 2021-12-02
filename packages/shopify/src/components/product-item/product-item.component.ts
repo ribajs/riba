@@ -108,7 +108,6 @@ export class ShopifyProductItemComponent extends Component {
   }
 
   protected set product(product: ShopifyProduct | null) {
-    // console.debug('set product', product);
     if (product) {
       this.scope.product = ShopifyProductService.prepare(product);
 
@@ -128,14 +127,11 @@ export class ShopifyProductItemComponent extends Component {
 
   protected set variant(variant: ShopifyProductVariant | null) {
     if (variant === null) {
-      // console.debug('Error: Variant ist null');
       return;
     }
-    // console.debug('set variant', variant);
     this.scope.variant = variant;
     if (this.scope.variant) {
       this.selectedOptions = this.scope.variant.options.slice();
-      // console.debug('set selectedOptions', this.selectedOptions);
       this.available = this.scope.variant.available;
       this.activateOptions();
     }
@@ -166,8 +162,6 @@ export class ShopifyProductItemComponent extends Component {
       throw new Error("Product not set!");
     }
 
-    // console.debug('chooseOption', optionValue, position1, self.selectedOptions, self.variant);
-
     this.selectedOptions[position1 - 1] = optionValue.toString();
     const variant = ShopifyProductService.getVariantOfOptions(
       this.scope.product,
@@ -185,10 +179,8 @@ export class ShopifyProductItemComponent extends Component {
 
   public addToCart() {
     if (!this.variant) {
-      // console.debug('Variant not selected');
       return;
     }
-    // console.debug('addToCart', this.variant.id, this.scope.quantity);
     ShopifyCartService.add(this.variant.id, this.scope.quantity)
       .then((response: any /** TODO not any */) => {
         console.debug("addToCart response", response);
@@ -199,17 +191,14 @@ export class ShopifyProductItemComponent extends Component {
   }
 
   public toggleDetailMenu() {
-    // console.debug('toggleDetailMenu');
     this.showMenu = !this.showMenu;
   }
 
   public increase() {
-    // console.debug('increase', this.scope.quantity);
     this.scope.quantity++;
   }
 
   public decrease() {
-    // console.debug('decrease', this.scope.quantity);
     this.scope.quantity--;
     if (this.scope.quantity <= 0) {
       this.scope.quantity = 1;
@@ -223,7 +212,6 @@ export class ShopifyProductItemComponent extends Component {
    */
   protected activateOption(optionValue: string, optionName: string) {
     optionValue = optionValue.toString().replace("#", "");
-    // console.debug('activateOption', `.option-${optionName.toLowerCase()}-${optionValue}`);
     this.querySelector<HTMLElement>(
       `.option-${optionName.toLocaleLowerCase()}`
     )?.classList.remove("active");
@@ -241,7 +229,6 @@ export class ShopifyProductItemComponent extends Component {
       if (this.selectedOptions[position0]) {
         const optionValue = this.selectedOptions[position0];
         if (this.scope.product) {
-          // console.debug('activateOptions', this.scope.product.options[position0]);
           const optionName = this.scope.product.options[position0].name;
           // Only activate size if it was clicked by the user
           if (optionName === "size") {
@@ -257,7 +244,7 @@ export class ShopifyProductItemComponent extends Component {
   }
 
   protected async beforeBind() {
-    // console.debug('beforeBind');
+    await super.beforeBind();
     if (this.scope.handle === null) {
       throw new Error("Product handle not set");
     }
@@ -270,7 +257,7 @@ export class ShopifyProductItemComponent extends Component {
   }
 
   protected async afterBind() {
-    // console.debug('afterBind', this.scope);
+    await super.afterBind();
     this.activateOptions();
   }
 

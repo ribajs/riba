@@ -66,7 +66,7 @@ interface Scope {
   forceShowOnLocationPathnames: Array<string>;
   /**
    * If the viewport width is wider than this value the mode is active.
-   * You can disable the mode for all widths with "0" or enable the mode for all widths with "-1" 
+   * You can disable the mode for all widths with "0" or enable the mode for all widths with "-1"
    */
   modeOnSlimmerThan: number;
 
@@ -195,7 +195,9 @@ export class Bs5SidebarComponent extends Component {
     if (this.modeIsActive()) {
       this.setState("hidden");
     } else {
-      console.warn(`Ignore hide because the mode "${this.scope.mode}" is inactive. You can change this by the "mode-on-slimmer-than" attribute (Current value is ${this.scope.modeOnSlimmerThan})!`);
+      console.warn(
+        `Ignore hide because the mode "${this.scope.mode}" is inactive. You can change this by the "mode-on-slimmer-than" attribute (Current value is ${this.scope.modeOnSlimmerThan})!`
+      );
     }
   }
 

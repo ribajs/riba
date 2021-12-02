@@ -2,14 +2,45 @@ import { Binder } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { onParentRoute } from "@ribajs/utils/src/url";
 
-export const parentRouteClassStarBinder: Binder<string> = {
-  name: "parent-route-class-*",
+export class ParentRouteClassStarBinder extends Binder<
+  string,
+  HTMLAnchorElement | HTMLInputElement
+> {
+  static class = "parent-route-class-*";
 
-  bind(/*el: HTMLUnknownElement*/) {
-    this.customData = {
-      dispatcher: new EventDispatcher("main"),
-    };
-  },
+  private dispatcher = new EventDispatcher("main");
+
+  private className?: string;
+
+  private url?: string;
+
+  private _onUrlChange() {
+    if (!this.url) {
+      throw new Error("url is not defined!");
+    }
+
+    if (!this.className) {
+      throw new Error("className is not defined!");
+    }
+
+    if (onParentRoute(this.url)) {
+      this.el.classList.add(this.className);
+      // check if element is radio input
+      if (this.el.getAttribute("type") === "radio") {
+        (this.el as HTMLInputElement).checked = true;
+      }
+      return true;
+    } else {
+      this.el.classList.remove(this.className);
+      // uncheck if element is radio input
+      if (this.el.getAttribute("type") === "radio") {
+        (this.el as HTMLInputElement).checked = false;
+      }
+    }
+    return false;
+  }
+
+  private onUrlChange = this._onUrlChange.bind(this);
 
   /**
    * Tests the url with the current location, if the current location starts with the url this element gets the `[classname]` class
@@ -17,7 +48,8 @@ export const parentRouteClassStarBinder: Binder<string> = {
    * @param url Url to compare with the current location
    */
   routine(el: HTMLElement, url?: string) {
-    const className = this.args[0].toString() || "active";
+    this.url = url;
+    this.className = this.args[0].toString() || "active";
     const isAnkerHTMLElement = el.tagName === "A";
     if (!url && isAnkerHTMLElement) {
       const href = el.getAttribute("href");
@@ -25,30 +57,14 @@ export const parentRouteClassStarBinder: Binder<string> = {
         url = href;
       }
     }
-    const onUrlChange = (urlToCheck?: string) => {
-      if (urlToCheck) {
-        if (onParentRoute(urlToCheck)) {
-          el.classList.add(className);
-          // check if element is radio input
-          if (el.getAttribute("type") === "radio") {
-            (el as HTMLInputElement).checked = true;
-          }
-          return true;
-        } else {
-          el.classList.remove(className);
-          // uncheck if element is radio input
-          if (el.getAttribute("type") === "radio") {
-            (el as HTMLInputElement).checked = false;
-          }
-        }
-      }
-      return false;
-    };
-    this.customData.dispatcher.on("newPageReady", () => onUrlChange(url));
-    onUrlChange(url);
-  },
+    this.onUrlChange();
+  }
 
-  unbind(/*el: HTMLUnknownElement*/) {
-    // console.warn('routeClassStarBinder routine', el);
-  },
-};
+  bind() {
+    this.dispatcher.on("newPageReady", this.onUrlChange);
+  }
+
+  unbind() {
+    this.dispatcher.off("newPageReady", this.onUrlChange);
+  }
+}

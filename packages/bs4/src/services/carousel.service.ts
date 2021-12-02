@@ -138,8 +138,6 @@ class CarouselService {
       window.PointerEvent || (window as any).MSPointerEvent
     );
 
-    console.debug("CarouselService", this);
-
     this.addEventListeners();
   }
 

@@ -2,7 +2,7 @@ import { Breakpoint, Bs5ModuleOptions } from "../types";
 import { DEFAULT_MODULE_OPTIONS } from "../constants";
 import { debounce } from "@ribajs/utils/src/control";
 import { getViewportDimensions } from "@ribajs/utils/src/dom";
-import { EventDispatcher } from "@ribajs/core";
+import { EventDispatcher } from "@ribajs/events";
 
 /**
  * Events:
@@ -40,7 +40,6 @@ export class Bs5Service {
 
   protected onBreakpointChanges() {
     this._events.trigger("breakpoint:changed", this.activeBreakpoint);
-    // console.debug("breakpoint: " + this.activeBreakpoint?.name);
   }
 
   protected setActiveBreakpoint(breakpoint: Breakpoint) {

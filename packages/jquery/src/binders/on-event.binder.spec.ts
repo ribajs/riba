@@ -1,10 +1,10 @@
-import { Riba, valueBinder } from "@ribajs/core";
-
-import { onEventBinder } from "./on-event.binder";
+import { Riba, ValueBinder, dotAdapter } from "@ribajs/core";
+import { OnEventBinder } from "./on-event.binder";
 
 describe("riba.binders", () => {
   const riba = new Riba();
-  riba.module.binder.regists([onEventBinder, valueBinder]);
+  riba.module.adapter.regist(dotAdapter);
+  riba.module.binder.regists([OnEventBinder, ValueBinder]);
 
   let element: HTMLInputElement;
   let fragment: DocumentFragment;
@@ -40,9 +40,16 @@ describe("riba.binders", () => {
 
     it("on-change: Watch's the change event", () => {
       element.className = "foobar remove-me";
+
       model.onChange = jest.fn();
+      jest.spyOn(model, 'onChange');
+
       model.onFocus = jest.fn();
+      jest.spyOn(model, 'onFocus');
+
       model.onFocusout = jest.fn();
+      jest.spyOn(model, 'onFocusout');
+
       model.value = "test";
       element.setAttribute("rv-on-change", "onChange");
       element.setAttribute("rv-on-focus", "onFocus");
@@ -53,9 +60,14 @@ describe("riba.binders", () => {
 
       // Trigger the change event
       element.focus();
+      element.dispatchEvent(new Event("focus"));
+  
       model.value = "this should trigger the change event!";
+      element.dispatchEvent(new Event("change"));
+  
       blurAll(); // Focus out all focused elements
-
+      element.dispatchEvent(new Event("blur"));
+      
       expect(model.onChange).toHaveBeenCalled();
       expect(model.onFocus).toHaveBeenCalled();
       expect(model.onFocusout).toHaveBeenCalled();
