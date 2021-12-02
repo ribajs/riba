@@ -1,15 +1,12 @@
 import { Riba } from "../riba";
-
+import { IfBinder } from "./if.binder";
+import { EachStarBinder } from "../binders";
 import { dotAdapter } from "../adapters/dot.adapter";
 
-import { unlessBinder } from "./unless.binder";
-
-import { eachStarBinder } from "../binders";
-
-describe("unless", () => {
+describe("if", () => {
   const riba = new Riba();
   riba.module.adapter.regist(dotAdapter);
-  riba.module.binderDeprecated.regist(unlessBinder);
+  riba.module.binder.regist(IfBinder);
 
   let el: HTMLDivElement;
   let model: any;
@@ -18,116 +15,107 @@ describe("unless", () => {
   beforeEach(() => {
     fragment = document.createDocumentFragment();
     el = document.createElement("div");
-    el.setAttribute("rv-unless", "data.show");
+    el.setAttribute("rv-if", "data.show");
     el.innerHTML = "{ data.count }";
 
     fragment.appendChild(el);
 
     model = {
       data: {
-        show: false,
+        show: true,
         count: 1,
       },
     };
   });
 
-  it("Removes element with bound key inside if the value is true", () => {
+  it("shows element with bound key inside if the value is true", () => {
     riba.bind(fragment, model);
-
-    model.data.show = true;
-
-    // 1 for the comment placeholder
-    expect(fragment.childNodes.length).toEqual(1);
-  });
-
-  it("Shows if the value is false", () => {
-    riba.bind(fragment, model);
-
-    model.data.show = false;
 
     // one child for the original div plus 1 for the comment placeholder
     expect(fragment.childNodes).toHaveLength(2);
     expect((fragment.childNodes[1] as Element).innerHTML).toEqual("1");
   });
 
-  it("Removes when element becomes remove again", () => {
+  it("hides if the value is false", () => {
+    riba.bind(fragment, model);
+
+    model.data.show = false;
+
+    // 1 for the comment placeholder
+    expect(fragment.childNodes.length).toEqual(1);
+  });
+
+  it("keeps binding when element becomes visible again", () => {
     riba.bind(fragment, model);
 
     model.data.show = false;
     model.data.count = 2;
     model.data.show = true;
 
+    // one child for the original div plus 1 for the comment placeholder
+    expect(fragment.childNodes).toHaveLength(2);
+    expect((fragment.childNodes[1] as Element).innerHTML).toEqual("2");
+  });
+
+  it("hides if the value is falsey - zero", () => {
+    riba.bind(fragment, model);
+
+    model.data.show = 0;
     // 1 for the comment placeholder
     expect(fragment.childNodes.length).toEqual(1);
   });
 
-  it("Shows if the value is falsey - zero", () => {
-    riba.bind(fragment, model);
-
-    model.data.show = 0;
-
-    // one child for the original div plus 1 for the comment placeholder
-    expect(fragment.childNodes).toHaveLength(2);
-    expect((fragment.childNodes[1] as Element).innerHTML).toEqual("1");
-  });
-
-  it("Shows if the value is falsey - empty string", () => {
+  it("hides if the value is falsey - empty string", () => {
     riba.bind(fragment, model);
 
     model.data.show = "";
-
-    // one child for the original div plus 1 for the comment placeholder
-    expect(fragment.childNodes).toHaveLength(2);
-    expect((fragment.childNodes[1] as Element).innerHTML).toEqual("1");
+    // 1 for the comment placeholder
+    expect(fragment.childNodes.length).toEqual(1);
   });
 
-  it("Shows if the value is falsey - undefined", () => {
+  it("hides if the value is falsey - undefined", () => {
     riba.bind(fragment, model);
 
     model.data.show = undefined;
-
-    // one child for the original div plus 1 for the comment placeholder
-    expect(fragment.childNodes).toHaveLength(2);
-    expect((fragment.childNodes[1] as Element).innerHTML).toEqual("1");
+    // 1 for the comment placeholder
+    expect(fragment.childNodes.length).toEqual(1);
   });
 
-  it("Rebindes nested unless", () => {
+  it("rebindes nested if", () => {
     const nestedEl = document.createElement("div");
-    nestedEl.setAttribute("rv-unless", "data.showNested");
+    nestedEl.setAttribute("rv-if", "data.showNested");
     nestedEl.innerHTML = "{ data.countNested }";
     el.appendChild(nestedEl);
 
     riba.bind(fragment, model);
 
     model.data.countNested = "1";
-    model.data.showNested = false;
+    model.data.showNested = true;
     expect(nestedEl.innerHTML).toEqual("1");
-    model.data.show = true;
     model.data.show = false;
+    model.data.show = true;
     model.data.countNested = "42";
 
     expect(nestedEl.innerHTML).toEqual("42");
   });
 
-  it("Respects nested if state after rebind", () => {
+  it("respects nested if state after rebind", () => {
     const nestedEl = document.createElement("div");
-    nestedEl.setAttribute("rv-unless", "data.showNested");
+    nestedEl.setAttribute("rv-if", "data.showNested");
     el.appendChild(nestedEl);
-
-    model.data.show = false;
 
     riba.bind(fragment, model);
 
-    model.data.showNested = false;
-    expect(el.contains(nestedEl)).toBeTruthy();
-    model.data.show = true;
     model.data.showNested = true;
+    expect(el.contains(nestedEl)).toBeTruthy();
     model.data.show = false;
+    model.data.showNested = false;
+    model.data.show = true;
     expect(el.contains(nestedEl)).toBeFalsy();
   });
 
-  it("Does not throw when root scope is reset", () => {
-    el.setAttribute("rv-unless", "scope.error.errors");
+  it("does not throw when root scope is reset", () => {
+    el.setAttribute("rv-if", "scope.error.errors");
     el.innerHTML = "<div>{scope.error.errors.email}</div>";
     model = {
       scope: {
@@ -151,7 +139,7 @@ describe("unless", () => {
 
 describe("Array observe and unobserve", () => {
   const riba = new Riba();
-  riba.module.binder.regist(eachStarBinder);
+  riba.module.binder.regist(EachStarBinder);
 
   let fragment: DocumentFragment;
   let el1: HTMLDivElement;
@@ -161,23 +149,9 @@ describe("Array observe and unobserve", () => {
   let model: any;
 
   beforeEach(() => {
-    /*
-          DOM for test
-          <div>
-            <div rv-unless='scope.visible'>
-              <div>
-                <div rv-each-item='scope.items'>{item.data}</div>
-              </div>
-            </div>
-            <div>
-              <div rv-each-item='scope.items'>{item.data}</div>
-            </div>
-          </div>
-        */
-    // fragment = document.createElement('div');
     fragment = document.createDocumentFragment();
     el1 = document.createElement("div");
-    el1.setAttribute("rv-unless", "scope.hidden");
+    el1.setAttribute("rv-if", "scope.visible");
     el2 = document.createElement("div");
     elEach = document.createElement("div");
     elEach.setAttribute("rv-each-item", "scope.items");
@@ -192,16 +166,16 @@ describe("Array observe and unobserve", () => {
     fragment.appendChild(el1);
     fragment.appendChild(el3);
 
-    model = { scope: { items: [], hidden: false } };
+    model = { scope: { items: [], visible: true } };
   });
 
-  it("Observes array changes after another array binding is unbound", () => {
+  it("observes array changes after another array binding is unbound", () => {
     riba.bind(fragment, model);
     model.scope.items.push({ data: "data" });
     expect(el3.childNodes.length).toEqual(2);
     model.scope.items.push({ data: "data" });
     expect(el3.childNodes.length).toEqual(3);
-    model.scope.hidden = true;
+    model.scope.visible = false;
     model.scope.items.push({ data: "data" });
     expect(el3.childNodes.length).toEqual(4);
   });

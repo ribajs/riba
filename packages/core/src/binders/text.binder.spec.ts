@@ -1,5 +1,5 @@
 import { Riba } from "../riba";
-import { textBinder } from "./text.binder";
+import { TextBinder } from "./text.binder";
 import { dotAdapter } from "../adapters/dot.adapter";
 import { Adapters } from "../types";
 
@@ -8,7 +8,7 @@ describe("riba.binders", () => {
 
   const riba = new Riba();
   riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regist(textBinder);
+  riba.module.binder.regist(TextBinder);
 
   beforeEach(() => {
     riba.configure({
@@ -43,7 +43,7 @@ describe("riba.binders", () => {
   describe("text", () => {
     it("sets the element's text content", () => {
       const view = riba.bind(el);
-      const textBinder = view.bindings[0] as textBinder;
+      const textBinder = view.bindings[0] as TextBinder;
       textBinder.routine(el, "<em>hello</em>");
       expect(el.textContent).toEqual("<em>hello</em>");
       expect(el.innerHTML).toEqual("&lt;em&gt;hello&lt;/em&gt;");
@@ -51,7 +51,7 @@ describe("riba.binders", () => {
 
     it("sets the element's text content to zero when a numeric zero is passed", () => {
       const view = riba.bind(el);
-      const textBinder = view.bindings[0] as textBinder;
+      const textBinder = view.bindings[0] as TextBinder;
       textBinder.routine(el, 0);
       expect(el.textContent).toEqual("0");
       expect(el.innerHTML).toEqual("0");

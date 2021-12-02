@@ -1,11 +1,11 @@
-import { Riba, textBinder, dotAdapter } from '@ribajs/core';
+import { Riba, TextBinder, dotAdapter } from '@ribajs/core';
 import { ToTimestampFormatter } from './to-timestamp.formatter';
 import moment from 'moment';
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
 riba.module.formatter.regist(ToTimestampFormatter);
-riba.module.binder.regist(textBinder);
+riba.module.binder.regist(TextBinder);
 
 interface Model {
   obj?: {

@@ -2,11 +2,11 @@ import { Riba, View } from "./index";
 import { Data } from "../spec/lib/moch.data";
 import { dotAdapter } from "./adapters";
 import {
-  textBinder,
-  htmlBinder,
-  eachStarBinder,
-  valueBinder,
-  addClassBinder
+  TextBinder,
+  HtmlBinder,
+  EachStarBinder,
+  ValueBinder,
+  AddClassBinder
 } from "./binders";
 import { Formatter, Adapter } from "./types";
 
@@ -14,16 +14,16 @@ describe("riba.Binding", () => {
 
   const riba = new Riba();
   riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regist(textBinder);
-  riba.module.binder.regist(htmlBinder);
-  riba.module.binder.regist(valueBinder);
-  riba.module.binder.regist(eachStarBinder);
-  riba.module.binder.regist(addClassBinder);
+  riba.module.binder.regist(TextBinder);
+  riba.module.binder.regist(HtmlBinder);
+  riba.module.binder.regist(ValueBinder);
+  riba.module.binder.regist(EachStarBinder);
+  riba.module.binder.regist(AddClassBinder);
 
   let model: object;
   let el: HTMLElement;
   let view: View;
-  let binding: textBinder | valueBinder;
+  let binding: TextBinder | ValueBinder;
   let originalPrefix: string[];
   let adapter: Adapter;
   let routineFn;
@@ -37,7 +37,7 @@ describe("riba.Binding", () => {
     el.setAttribute("data-text", "obj.name");
 
     view = riba.bind(el, { obj: { name: "test" } });
-    binding = view.bindings[0] as textBinder;
+    binding = view.bindings[0] as TextBinder;
     model = binding.model;
   });
 
@@ -138,7 +138,7 @@ describe("riba.Binding", () => {
       );
 
       view = riba.bind(valueInput, { obj: { name: "nothing" } });
-      binding = view.bindings[0] as textBinder;
+      binding = view.bindings[0] as TextBinder;
       expect(binding.formatters).toEqual(["awesome", "radical", "totally"]);
     });
 
@@ -151,7 +151,7 @@ describe("riba.Binding", () => {
       );
 
       view = riba.bind(valueInput, { obj: { name: "nothing" } });
-      binding = view.bindings[0] as textBinder;
+      binding = view.bindings[0] as TextBinder;
 
       expect(binding.formatters).toEqual([
         "awesome",
@@ -265,7 +265,7 @@ describe("riba.Binding", () => {
       numberInput.setAttribute("data-value", "obj.num");
 
       view = riba.bind(numberInput, { obj: { num: 42 } });
-      binding = view.bindings[0] as textBinder;
+      binding = view.bindings[0] as TextBinder;
       model = binding.model;
 
       numberInput.value = "42";
@@ -309,7 +309,7 @@ describe("riba.Binding", () => {
       numberInput.setAttribute("data-value", "obj.num | awesome");
 
       view = riba.bind(numberInput, { obj: { num: 42 } });
-      binding = view.bindings[0] as textBinder;
+      binding = view.bindings[0] as TextBinder;
       model = binding.model;
 
       numberInput.value = "42";
@@ -332,7 +332,7 @@ describe("riba.Binding", () => {
       valueInput.setAttribute("data-value", "obj.name | awesome");
 
       view = riba.bind(valueInput, { obj: { name: "nothing" } });
-      binding = view.bindings[0] as valueBinder;
+      binding = view.bindings[0] as ValueBinder;
       model = binding.model;
 
       jest.spyOn(binding, "routine");
@@ -382,7 +382,7 @@ describe("riba.Binding", () => {
         },
       });
 
-      binding = view.bindings[0] as valueBinder;
+      binding = view.bindings[0] as ValueBinder;
       jest.spyOn(binding, "routine");
       model = binding.model;
 
@@ -438,7 +438,7 @@ describe("riba.Binding", () => {
         },
       });
 
-      binding = view.bindings[0] as textBinder;
+      binding = view.bindings[0] as TextBinder;
       model = binding.model;
 
       jest.spyOn(binding, "routine");
@@ -460,7 +460,7 @@ describe("riba.Binding", () => {
       valueInput.setAttribute("data-value", "obj.name | awesome");
 
       view = riba.bind(valueInput, { obj: { name: "nothing" } });
-      binding = view.bindings[0] as textBinder;
+      binding = view.bindings[0] as TextBinder;
       model = binding.model;
 
       jest.spyOn(binding, "routine");
@@ -491,7 +491,7 @@ describe("riba.Binding", () => {
       valueInput.setAttribute("data-value", "obj.name | awesome | totally");
 
       view = riba.bind(valueInput, { obj: { name: "nothing" } });
-      binding = view.bindings[0] as textBinder;
+      binding = view.bindings[0] as TextBinder;
       model = binding.model;
 
       jest.spyOn(binding, "routine");
@@ -536,7 +536,7 @@ describe("riba.Binding", () => {
       );
 
       view = riba.bind(valueInput, { obj: { name: "nothing" } });
-      binding = view.bindings[0] as valueBinder;
+      binding = view.bindings[0] as ValueBinder;
       jest.spyOn(binding, "routine");
 
       expect(binding.name).toEqual("value");
@@ -666,11 +666,11 @@ describe("Functional", () => {
 
   const riba = new Riba();
   riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regist(textBinder);
-  riba.module.binder.regist(htmlBinder);
-  riba.module.binder.regist(valueBinder);
-  riba.module.binder.regist(eachStarBinder);
-  riba.module.binder.regist(addClassBinder);
+  riba.module.binder.regist(TextBinder);
+  riba.module.binder.regist(HtmlBinder);
+  riba.module.binder.regist(ValueBinder);
+  riba.module.binder.regist(EachStarBinder);
+  riba.module.binder.regist(AddClassBinder);
 
   let data: Data;
   let bindData: { data: Data };

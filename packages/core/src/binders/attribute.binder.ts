@@ -6,7 +6,7 @@ import { BinderAttributeChangedEvent } from "../types";
  * Sets the attribute on the element. If no binder above is matched it will fall
  * back to using this binder.
  */
-export class attributeBinder extends Binder<string, HTMLElement> {
+export class AttributeBinder extends Binder<string, HTMLElement> {
   static key = "*";
 
   routine(el: HTMLElement, newValue: any) {

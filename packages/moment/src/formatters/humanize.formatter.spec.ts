@@ -1,11 +1,11 @@
-import { Riba, textBinder, dotAdapter } from '@ribajs/core';
+import { Riba, TextBinder, dotAdapter } from '@ribajs/core';
 import { HumanizeFormatter } from './humanize.formatter';
 import { Duration, duration } from 'moment';
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
 riba.module.formatter.regist(HumanizeFormatter);
-riba.module.binder.regist(textBinder);
+riba.module.binder.regist(TextBinder);
 
 interface Model {
   obj?: {

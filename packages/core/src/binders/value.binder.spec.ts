@@ -1,13 +1,13 @@
 import { Riba } from "../riba";
 import { dotAdapter } from "../adapters/dot.adapter";
-import { valueBinder } from "./value.binder";
+import { ValueBinder } from "./value.binder";
 import { Adapters } from "../types";
 
 describe("riba.binders", () => {
   describe("value", () => {
     const riba = new Riba();
     riba.module.adapter.regist(dotAdapter);
-    riba.module.binder.regist(valueBinder);
+    riba.module.binder.regist(ValueBinder);
 
     let fragment: DocumentFragment;
     let el: HTMLInputElement;
@@ -118,7 +118,7 @@ describe("riba.binders", () => {
     };
 
     beforeEach(() => {
-      riba.module.binder.regist(valueBinder);
+      riba.module.binder.regist(ValueBinder);
       riba.configure({
         adapters: ({
           subscribe: () => {
@@ -154,7 +154,7 @@ describe("riba.binders", () => {
 
     it("sets the element's value", () => {
       const view = riba.bind(fragment, model);
-      const valueBinder = view.bindings[0] as valueBinder;
+      const valueBinder = view.bindings[0] as ValueBinder;
       expect(valueBinder.name).toEqual("value");
       valueBinder.routine(input, "pitchfork");
       expect(input.value).toEqual("pitchfork");
@@ -162,7 +162,7 @@ describe("riba.binders", () => {
 
     it("applies a default value to the element when the model doesn't contain it", () => {
       const view = riba.bind(fragment, model);
-      const valueBinder = view.bindings[0] as valueBinder;
+      const valueBinder = view.bindings[0] as ValueBinder;
       expect(valueBinder.name).toEqual("value");
       valueBinder.routine(input, undefined);
       expect(input.value).toEqual("");
@@ -171,7 +171,7 @@ describe("riba.binders", () => {
     it("sets the element's value to zero when a zero value is passed", () => {
       const view = riba.bind(fragment, model);
       expect(view.bindings).toBeArrayOfSize(1);
-      const valueBinder = view.bindings[0] as valueBinder;
+      const valueBinder = view.bindings[0] as ValueBinder;
       expect(valueBinder.name).toEqual("value");
       valueBinder.routine(input, 0);
       expect(input.value).toEqual("0");
@@ -198,7 +198,7 @@ describe("riba.binders", () => {
 
       it("sets the correct option on a select element", () => {
         const view = riba.bind(fragment, model);
-        const valueBinder = view.bindings[0] as valueBinder;
+        const valueBinder = view.bindings[0] as ValueBinder;
         valueBinder.routine(selectEl, "b");
         valueBinder.routine(selectEl, "c");
         expect(selectEl.value).toEqual("c");
@@ -206,7 +206,7 @@ describe("riba.binders", () => {
 
       it("sets the correct option on a select-multiple element", () => {
         const view = riba.bind(fragment, model);
-        const valueBinder = view.bindings[0] as valueBinder;
+        const valueBinder = view.bindings[0] as ValueBinder;
         valueBinder.routine(selectMultipleEl, ["d", "f"]);
         const result = Array.prototype.slice
           .call(selectMultipleEl.children)
@@ -222,7 +222,7 @@ describe("riba.binders", () => {
 
       it("sets the correct option on a grouped select element", () => {
         const view = riba.bind(fragment, model);
-        const valueBinder = view.bindings[0] as valueBinder;
+        const valueBinder = view.bindings[0] as ValueBinder;
         valueBinder.routine(groupedSelectEl, "b");
         valueBinder.routine(groupedSelectEl, "c");
         expect(groupedSelectEl.value).toEqual("c");
@@ -230,7 +230,7 @@ describe("riba.binders", () => {
 
       it("sets the correct option on a select-multiple element", () => {
         const view = riba.bind(fragment, model);
-        const valueBinder = view.bindings[0] as valueBinder;
+        const valueBinder = view.bindings[0] as ValueBinder;
         expect(view.bindings).toBeArrayOfSize(1);
         expect(valueBinder).toBeDefined();
         expect(valueBinder.name).toEqual("value");

@@ -8,7 +8,7 @@ const DEFAULT_EVENTS = "change input paste blur focus";
  * Sets the element's value. Also sets the model property when the input changes
  * (two-way binder).
  */
-export class valueBinder extends Binder<any, HTMLElement> {
+export class ValueBinder extends Binder<any, HTMLElement> {
   static key = "value";
   publishes = true;
   priority = 3000;

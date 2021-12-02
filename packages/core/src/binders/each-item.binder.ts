@@ -7,7 +7,7 @@ import { times, camelCase } from "@ribajs/utils";
  * each-*
  * Appends bound instances of the element in place for each item in the array.
  */
-export class eachStarBinder extends Binder<any[], HTMLElement> {
+export class EachStarBinder extends Binder<any[], HTMLElement> {
   static key = "each-*";
   static block = true;
   priority = 4000;

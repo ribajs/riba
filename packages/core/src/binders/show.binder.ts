@@ -3,7 +3,7 @@ import { Binder } from "../binder";
 /**
  * Shows the element when value is true (negated version of `hide` binder).
  */
-export class showBinder extends Binder<boolean, HTMLElement> {
+export class ShowBinder extends Binder<boolean, HTMLElement> {
   static key = "show";
   routine(el: HTMLElement, value: boolean) {
     el.style.display = value ? "" : "none";
@@ -14,4 +14,3 @@ export class showBinder extends Binder<boolean, HTMLElement> {
     }
   }
 }
-

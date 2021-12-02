@@ -4,7 +4,7 @@ import { Binder } from "../binder";
 /**
  * Binds an event handler on the element.
  */
-export class onEventBinder extends Binder<eventHandlerFunction, HTMLElement> {
+export class OnEventBinder extends Binder<eventHandlerFunction, HTMLElement> {
   static key = "on-*";
   function = true;
   priority = 1000;

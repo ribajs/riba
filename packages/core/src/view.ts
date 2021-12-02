@@ -22,7 +22,7 @@ import { attributeBinder as attributeBinderDeprecated } from "./binders-deprecat
  * Sets the attribute on the element. If no binder is matched it will fall
  * back to using this binder.
  */
-import { attributeBinder } from "./binders/attribute.binder";
+import { AttributeBinder } from "./binders/attribute.binder";
 
 /**
  * A collection of bindings built from a set of parent nodes.
@@ -417,7 +417,7 @@ export class View {
             Binder = this.options.binders["*"];
             identifier = "*";
           } else {
-            Binder = attributeBinder;
+            Binder = AttributeBinder;
           }
         }
         // if block is set, do not bind its child's (this means the binder bound it by itself)

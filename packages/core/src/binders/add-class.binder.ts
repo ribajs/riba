@@ -12,7 +12,7 @@ import { Binder } from "../binder";
  *   </li>
  * <ul>
  */
-export class addClassBinder extends Binder<string, HTMLElement> {
+export class AddClassBinder extends Binder<string, HTMLElement> {
   static key = "add-class";
   function = true;
   priority = 1000;

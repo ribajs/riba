@@ -1,11 +1,11 @@
 import { Riba } from "../riba";
-import { hideBinder } from "./hide.binder";
+import { HideBinder } from "./hide.binder";
 import { dotAdapter } from "../adapters/dot.adapter";
 import { Adapters } from "../types";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
-riba.module.binder.regist(hideBinder);
+riba.module.binder.regist(HideBinder);
 
 describe("riba.binders", () => {
   let el: HTMLUnknownElement;
@@ -44,7 +44,7 @@ describe("riba.binders", () => {
     describe("with a truthy value", () => {
       it("hides the element", () => {
         const view = riba.bind(el);
-        const hideBinder = view.bindings[0] as hideBinder;
+        const hideBinder = view.bindings[0] as HideBinder;
         hideBinder.routine(el, true);
         expect(el.style.display).toEqual("none");
       });
@@ -53,7 +53,7 @@ describe("riba.binders", () => {
     describe("with a falsey value", () => {
       it("shows the element", () => {
         const view = riba.bind(el);
-        const hideBinder = view.bindings[0] as hideBinder;
+        const hideBinder = view.bindings[0] as HideBinder;
         hideBinder.routine(el, false);
         expect(el.style.display).toEqual("");
       });

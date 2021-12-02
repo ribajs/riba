@@ -1,6 +1,6 @@
 import { Riba } from "../riba";
 
-import { enabledBinder } from "./enabled.binder";
+import { EnabledBinder } from "./enabled.binder";
 
 import { dotAdapter } from "../adapters/dot.adapter";
 
@@ -8,7 +8,7 @@ import { Adapters } from "../types";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
-riba.module.binderDeprecated.regist(enabledBinder);
+riba.module.binder.regist(EnabledBinder);
 
 describe("riba.binders", () => {
   let button: HTMLButtonElement;
@@ -45,14 +45,18 @@ describe("riba.binders", () => {
   describe("enabled", () => {
     describe("with a truthy value", () => {
       it("enables the element", () => {
-        (riba.bindersDeprecated.enabled as any).routine(button, true);
+        button.setAttribute("rv-enabled", "true");
+        const enabledBinder = riba.bind(button).bindings[0] as EnabledBinder;
+        enabledBinder.routine(button, true);
         expect(button.disabled).toEqual(false);
       });
     });
 
     describe("with a falsey value", () => {
       it("disables the element", () => {
-        (riba.bindersDeprecated.enabled as any).routine(button, false);
+        button.setAttribute("rv-enabled", "true");
+        const enabledBinder = riba.bind(button).bindings[0] as EnabledBinder;
+        enabledBinder.routine(button, false);
         expect(button.disabled).toEqual(true);
       });
     });
