@@ -55,7 +55,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "html-loader": "^3.0.1",
     "inspectpack": "^4.7.1",
-    "jest": "^27.4.2",
+    "jest": "^27.4.3",
     "jest-extended": "^1.2.0",
     "mini-css-extract-plugin": "^2.4.5",
     "postcss-loader": "^6.2.1",
