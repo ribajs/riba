@@ -1,11 +1,11 @@
-import { BinderDeprecated } from "@ribajs/core";
+import { Binder } from "../binder";
 
 /**
  * sort-childs using flex order
  */
-export const flexSortChildsBinder: BinderDeprecated<boolean> = {
-  name: "flex-sort-childs",
-  priority: 90000,
+export class FlexSortChildsBinder extends Binder<boolean, HTMLElement> {
+  static key = "flex-sort-childs";
+  priority = 90000;
 
   routine(el: HTMLElement, descending: boolean) {
     const childrens = Array.from(el.children) as HTMLElement[];
@@ -25,5 +25,5 @@ export const flexSortChildsBinder: BinderDeprecated<boolean> = {
       const child = childrens[i];
       child.style.order = i.toString();
     }
-  },
+  }
 };

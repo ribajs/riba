@@ -1,5 +1,4 @@
-import { BinderDeprecated } from "../types";
-// import { View } from "../view";
+import { Binder } from "../binder";
 
 /**
  * tag-*
@@ -13,15 +12,15 @@ import { BinderDeprecated } from "../types";
  * @example
  * <div rv-tag-a="item.hasHref">{ item.label }</div>
  */
-export const tagStarBinder: BinderDeprecated<boolean> = {
-  name: "tag-*",
-  priority: -1000,
+export class TagStarBinder extends Binder<boolean, HTMLElement> {
+  static key = "tag-*";
+  priority = -1000;
+
+  private originalTag?: string;
 
   bind(el: HTMLUnknownElement) {
-    this.customData = {
-      originalTag: el.tagName.toLowerCase(),
-    };
-  },
+    this.originalTag = el.tagName.toLowerCase();
+  }
 
   routine(oldEl: HTMLUnknownElement, value: boolean) {
     if (this.args === null) {
@@ -32,8 +31,10 @@ export const tagStarBinder: BinderDeprecated<boolean> = {
     let tagName: string;
     if (value) {
       tagName = (this.args[0] as string).trim().toLowerCase();
+    } else if (this.originalTag) {
+      tagName = this.originalTag.toLowerCase();
     } else {
-      tagName = this.customData.originalTag.toLowerCase();
+      throw new Error("Tag name not found!");
     }
 
     if (curTagName !== tagName) {
@@ -61,5 +62,5 @@ export const tagStarBinder: BinderDeprecated<boolean> = {
 
       this.el = newEl;
     }
-  },
+  }
 };

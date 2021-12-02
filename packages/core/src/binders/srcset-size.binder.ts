@@ -1,11 +1,12 @@
-import { BinderDeprecated } from "../types";
+import { Binder } from "../binder";
 
 /**
  * srcset-size
  * Sets an url with size to the `srcset` attribute
  */
-export const srcsetSizeBinder: BinderDeprecated<string> = {
-  name: "srcset-*",
+export class SrcsetSizeBinder extends Binder<string, HTMLElement> {
+  static key = "srcset-*";
+
   routine(el: HTMLUnknownElement, url: string) {
     const size: string = this.args[0] as string;
     let srcset = el.getAttribute("srcset");
@@ -24,5 +25,5 @@ export const srcsetSizeBinder: BinderDeprecated<string> = {
       srcset = sizes.join(", ") || "";
     }
     el.setAttribute("srcset", srcset);
-  },
+  }
 };

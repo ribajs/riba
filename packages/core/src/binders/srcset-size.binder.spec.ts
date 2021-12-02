@@ -2,7 +2,7 @@ import { Riba } from "../riba";
 
 import { dotAdapter } from "../adapters/dot.adapter";
 
-import { srcsetSizeBinder } from "./srcset-size.binder";
+import { SrcsetSizeBinder } from "./srcset-size.binder";
 
 describe("riba.binders", () => {
   let el: HTMLDivElement;
@@ -11,7 +11,7 @@ describe("riba.binders", () => {
 
   const riba = new Riba();
   riba.module.adapter.regist(dotAdapter);
-  riba.module.binderDeprecated.regist(srcsetSizeBinder);
+  riba.module.binder.regist(SrcsetSizeBinder);
 
   beforeEach(() => {
     fragment = document.createDocumentFragment();

@@ -1,10 +1,5 @@
-export { tagStarBinder } from "./tag-name.binder";
-export { flexSortChildsBinder } from "./flex-sort-childs.binder";
-export { maxlengthBinder } from "./maxlength.binder";
+
 // export { mustacheTextBinder } from "./mustache-text.binder";
-export { notDraggableBinder } from "./not-draggable";
-export { readonlyBinder } from "./readonly.binder";
-export { srcsetSizeBinder } from "./srcset-size.binder";
-export { toggleOnEventBinder } from "./toggle-on-event.binder";
+
 export { attributeBinder } from "./attribute.binder";
-export { templateBinder } from "./template.binder";
+
