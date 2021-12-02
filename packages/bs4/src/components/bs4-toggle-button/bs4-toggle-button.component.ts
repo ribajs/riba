@@ -60,7 +60,6 @@ export class Bs4ToggleButtonComponent extends Component {
   }
 
   public toggle() {
-    // console.debug('toggle', this.eventDispatcher);
     if (this.eventDispatcher) {
       this.eventDispatcher.trigger(
         TOGGLE_BUTTON.eventNames.toggle,

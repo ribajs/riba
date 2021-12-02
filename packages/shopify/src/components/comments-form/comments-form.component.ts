@@ -87,8 +87,6 @@ export class ShopifyCommentsFormComponent extends Component {
    * Post comment
    */
   public post(event: Event) {
-    // console.debug('post', this.scope.form);
-
     if (!this.newCommentForm) {
       console.error("No comment form found");
       return false;
@@ -102,8 +100,6 @@ export class ShopifyCommentsFormComponent extends Component {
 
     if (this.scope.loginCustomer.validation.valid) {
       this.newCommentForm.submit();
-    } else {
-      // console.debug('form not valid', this.scope.form);
     }
   }
 
@@ -113,7 +109,6 @@ export class ShopifyCommentsFormComponent extends Component {
     ) as HTMLFormElement;
     this.newCommentForm.setAttribute("novalidate", "");
     this.newCommentForm.classList.add("needs-validation");
-    // console.debug('initValidation', this.newCommentForm);
   }
 
   protected validate(form: HTMLFormElement, validationScope: ValidationObject) {
@@ -121,13 +116,9 @@ export class ShopifyCommentsFormComponent extends Component {
     form.classList.add("was-validated");
   }
 
-  protected async beforeBind() {
-    // console.debug('beforeBind');
-  }
-
   protected async afterBind() {
-    // console.debug('afterBind', this.scope);
     this.initValidation();
+    await super.afterBind();
   }
 
   protected requiredAttributes(): string[] {

@@ -24,7 +24,7 @@ export class RouteBinder extends Binder<string, HTMLAnchorElement> {
     // console.log(this.options.url);
     const pjax = Pjax.getInstance(this.options.viewId);
     if (onRoute(this.options.url, true)) {
-      console.debug("already on this site, do nothing");
+      console.info("already on this site, do nothing");
       event.stopPropagation();
       event.preventDefault();
     } else if (isExternalUrl(this.options.url)) {

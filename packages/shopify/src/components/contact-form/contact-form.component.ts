@@ -60,8 +60,6 @@ export class ShopifyContactFormComponent extends Component {
    * Send the contact form using a form submit request with best shopify form support
    */
   public send(event: Event) {
-    // console.debug('send', this.scope, event);
-
     for (const key in this.scope.form.fields) {
       if (this.scope.form.fields[key]) {
         this.scope.form.fields[key] = stripHtml(this.scope.form.fields[key]);
@@ -73,7 +71,6 @@ export class ShopifyContactFormComponent extends Component {
     event.stopPropagation();
 
     if (!this.form) {
-      // console.debug('No form found');
       return false;
     }
 
@@ -81,13 +78,10 @@ export class ShopifyContactFormComponent extends Component {
 
     if (this.scope.form.valid) {
       this.form.submit();
-    } else {
-      // console.debug('form not valid', this.scope);
     }
   }
 
   public selectAll(event: Event, scope: any, eventEl: HTMLInputElement) {
-    // console.debug('selectAll');
     selectAll(eventEl);
   }
 
@@ -98,7 +92,6 @@ export class ShopifyContactFormComponent extends Component {
   }
 
   protected async beforeBind() {
-    // console.debug('before');
     this.form = this.getElementsByTagName("form")[0];
 
     // For custom style form validation, see https://getbootstrap.com/docs/4.1/components/forms/#custom-styles

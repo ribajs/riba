@@ -375,8 +375,6 @@ export class Bs5ShareComponent extends Component {
    * @param el
    */
   public async shareOnService(item: ShareItem, event: Event) {
-    console.debug("shareOnService", item);
-
     this.dropdown?.hide();
 
     if (item.type === "clipboard") {

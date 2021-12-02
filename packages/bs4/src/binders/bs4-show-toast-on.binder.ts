@@ -8,13 +8,11 @@ export class ShowToastOnEventBinder extends Binder<Toast, HTMLInputElement> {
   private toastData?: Toast;
 
   private _onEvent(event: CustomEvent) {
-    console.debug("[show-toast-on-*] event.detail:", event.detail);
     if (!this.toastData) {
       throw new Error("Toast data not set!");
     }
     this.toastData.$event = event;
     this.toastData.$context = this.view.models;
-    console.debug(this.toastData);
     const toastData: Toast = new Toast(this.toastData);
     const notificationDispatcher = new EventDispatcher(
       toastData.channel || "toast"

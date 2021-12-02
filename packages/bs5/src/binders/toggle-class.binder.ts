@@ -25,7 +25,6 @@ export class ToggleClassBinder extends Binder<string, HTMLButtonElement> {
   private triggerState = this._triggerState.bind(this);
 
   private _onToggle() {
-    // console.debug('onToggle', (this.binder as Bs5ToggleClass));
     this.toggle.bind(this)(this.el);
   }
 

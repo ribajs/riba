@@ -80,14 +80,11 @@ export class ShopifyAddressesComponent extends Component {
   }
 
   public edit(id: string, event: Event) {
-    // console.debug('login', this.scope);
-
     const form = this.querySelector(
       `form[action="/account/addresses/${id}]`
     ) as HTMLFormElement;
 
     if (!form) {
-      // console.debug('No edit address form found');
       return false;
     }
 
@@ -99,8 +96,6 @@ export class ShopifyAddressesComponent extends Component {
 
     if (this.scope.editAddress[id].validation.valid) {
       form.submit();
-    } else {
-      // console.debug('form not valid', this.scope);
     }
   }
 
@@ -108,10 +103,7 @@ export class ShopifyAddressesComponent extends Component {
    * Submit an new address
    */
   public create(event: Event) {
-    // console.debug('create', this.scope);
-
     if (!this.createAddressForm) {
-      // console.debug('No create form found');
       return false;
     }
 
@@ -123,8 +115,6 @@ export class ShopifyAddressesComponent extends Component {
 
     if (this.scope.createAddress.validation.valid) {
       this.createAddressForm.submit();
-    } else {
-      // console.debug('form not valid', this.createAddressForm);
     }
   }
 
@@ -133,11 +123,10 @@ export class ShopifyAddressesComponent extends Component {
   public delete(id: string) {
     HttpService.delete(`/account/addresses/${id}`, {}, "json")
       .then((response: any) => {
-        console.debug("delete response", response);
         location.reload();
       })
       .catch((error: any) => {
-        console.debug("delete error", error);
+        console.error("delete error", error);
         location.reload();
       });
   }
@@ -154,8 +143,6 @@ export class ShopifyAddressesComponent extends Component {
     ) as HTMLFormElement;
     this.createAddressForm.attr("novalidate", "");
     this.createAddressForm.addClass("needs-validation");
-
-    // console.debug('initValidation', this.createAddressForm, this.createAddressForm);
   }
 
   protected validate(form: HTMLFormElement, validationScope: ValidationObject) {
@@ -163,12 +150,7 @@ export class ShopifyAddressesComponent extends Component {
     form.classList.add("was-validated");
   }
 
-  protected async beforeBind() {
-    // console.debug('beforeBind');
-  }
-
   protected async afterBind() {
-    // console.debug('afterBind', this.scope);
     this.initValidation();
   }
 

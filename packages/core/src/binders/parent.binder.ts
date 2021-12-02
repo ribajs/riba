@@ -27,8 +27,8 @@ export class ParentBinder extends Binder<any, BasicComponent> {
     if (isCustomElement(el, true, true)) {
       this.bindIntern(el);
     } else if (isCustomElement(el, true)) {
-      console.debug(
-        `[parentBinder] CustomElement ${el.localName} has been defined, but not yet upgraded. Waiting for upgrade.`,
+      console.info(
+        `[parentBinder] CustomElement ${el.localName} has been defined, but is not yet upgraded. Waiting for upgrade..`,
         el
       );
       await waitForCustomElement(el);

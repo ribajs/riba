@@ -52,12 +52,10 @@ export class EachStarBinder extends Binder<any[], HTMLElement> {
       typeof collection === "object" &&
       collection !== null
     ) {
-      console.debug("original collection", collection);
       collection = Object.entries(collection).map(([key, value]) => {
         return { key, value };
       });
       isObject = true;
-      console.debug("converted collection", collection);
     }
 
     if (!Array.isArray(collection)) {
