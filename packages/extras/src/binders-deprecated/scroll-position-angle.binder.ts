@@ -1,4 +1,4 @@
-import { BinderDeprecated } from "@ribajs/core";
+import { Binder } from "@ribajs/core";
 import { scrollToPosition } from "@ribajs/utils/src/dom";
 
 /**
@@ -15,40 +15,51 @@ import { scrollToPosition } from "@ribajs/utils/src/dom";
  * <div rv-scroll-position-x="'start'"></div>
  * ```
  */
-export const scrollPositionAngleBinder: BinderDeprecated<
-  number | "end" | "start"
-> = {
-  name: "scroll-position-*",
-  customData: {},
+export class ScrollPositionAngleBinder extends Binder<
+  number | "end" | "start",
+  HTMLElement | (Window & typeof globalThis) | null
+> {
+  static key = "scroll-position-*";
+
+  private position?: number | "end" | "start";
+
+  private angle?: "x" | "y" | "horizontal" | "vertical" | "both";
+
+  private _onResize() {
+    if (!this.position) {
+      throw new Error("postion not defined!");
+    }
+    if (!this.angle) {
+      throw new Error("angle not defined!");
+    }
+    scrollToPosition(
+      this.el,
+      this.position,
+      this.angle as "horizontal" | "vertical" | "both"
+    );
+  }
+
+  private onResize = this._onResize.bind(this);
 
   routine(
     el: HTMLElement | (Window & typeof globalThis) | null,
     position: number | "end" | "start"
   ) {
-    let angle = this.args[0] as "x" | "y" | "horizontal" | "vertical" | "both";
+    this.position = position;
+    this.angle = this.args[0] as "x" | "y" | "horizontal" | "vertical" | "both";
 
-    if (angle === "x") {
-      angle = "horizontal";
+    if (this.angle === "x") {
+      this.angle = "horizontal";
     }
 
-    if (angle === "y") {
-      angle = "vertical";
+    if (this.angle === "y") {
+      this.angle = "vertical";
     }
 
-    window.addEventListener(
-      "resize",
-      () => {
-        scrollToPosition(
-          el,
-          position,
-          angle as "horizontal" | "vertical" | "both"
-        );
-      },
-      {
-        passive: true,
-      }
-    );
+    window.addEventListener("resize", this.onResize, {
+      passive: true,
+    });
 
-    scrollToPosition(el, position, angle);
-  },
-};
+    scrollToPosition(el, this.position, this.angle);
+  }
+}

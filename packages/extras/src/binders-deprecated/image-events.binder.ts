@@ -1,4 +1,4 @@
-import { BinderDeprecated } from "@ribajs/core";
+import { Binder } from "@ribajs/core";
 import imagesLoaded from "imagesloaded";
 
 /**
@@ -9,51 +9,48 @@ import imagesLoaded from "imagesloaded";
  * * load-fail - Triggered after all images have been loaded with at least one broken image.
  * * load-progress - Triggered after each image has been loaded.
  */
-export const imageEventsBinder: BinderDeprecated<string> = {
-  name: "image-events",
-  bind(el) {
-    if (!this.customData) {
-      this.customData = {};
-    }
-    const events = imagesLoaded(el);
+export class ImageEventsBinder extends Binder<string, HTMLImageElement> {
+  static key = "image-events";
+
+  private events?: ImagesLoaded.ImagesLoaded;
+
+  private _onEvent(
+    customEventName: string,
+    load: ImagesLoaded.ImagesLoaded,
+    image?: ImagesLoaded.LoadingImage
+  ) {
+    this.el.dispatchEvent(
+      new CustomEvent(customEventName, {
+        detail: { load, image },
+      })
+    );
+  }
+
+  private onAlways = this._onEvent.bind(this, "load-always");
+  private onDone = this._onEvent.bind(this, "load-done");
+  private onFail = this._onEvent.bind(this, "load-fail");
+  private onProgress = this._onEvent.bind(this, "load-progress");
+
+  bind(el: HTMLImageElement) {
+    this.events = imagesLoaded(el);
 
     // Forward the events as native events
-    events.on("always", (load, image) => {
-      el.dispatchEvent(
-        new CustomEvent("load-always", {
-          detail: { load, image },
-        })
-      );
-    });
+    this.events.on("always", this.onAlways);
+    this.events.on("done", this.onDone);
+    this.events.on("fail", this.onFail);
+    this.events.on("progress", this.onProgress);
+  }
 
-    events.on("done", (load, image) => {
-      el.dispatchEvent(
-        new CustomEvent("load-done", {
-          detail: { load, image },
-        })
-      );
-    });
-
-    events.on("fail", (load, image) => {
-      el.dispatchEvent(
-        new CustomEvent("load-fail", {
-          detail: { load, image },
-        })
-      );
-    });
-
-    events.on("progress", (load, image) => {
-      el.dispatchEvent(
-        new CustomEvent("load-progress", {
-          detail: { load, image },
-        })
-      );
-    });
-  },
   unbind() {
-    // nothing yet
-  },
+    if (this.events) {
+      this.events.off("always", this.onAlways);
+      this.events.off("done", this.onDone);
+      this.events.off("fail", this.onFail);
+      this.events.off("progress", this.onProgress);
+    }
+  }
+
   routine() {
     // nothing yet
-  },
-};
+  }
+}

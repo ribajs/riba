@@ -1,20 +1,22 @@
-import { BinderDeprecated } from "@ribajs/core";
+import { Binder } from "@ribajs/core";
 import { ScrollEventsService } from "../services/touch-events/scroll-events.service";
 
-export const scrollEventsBinder: BinderDeprecated<string> = {
-  name: "scroll-events",
-  bind(el) {
-    if (!this.customData) {
-      this.customData = {};
-    }
-    this.customData.touchEventService = new ScrollEventsService(el);
-  },
+export class ScrollEventsBinder extends Binder<string, HTMLElement> {
+  static key = "scroll-events";
+
+  private touchEventService?: ScrollEventsService;
+
+  bind(el: HTMLElement) {
+    this.touchEventService = new ScrollEventsService(el);
+  }
+
   unbind() {
-    if (this.customData.touchEventService) {
-      (this.customData.touchEventService as ScrollEventsService).destroy();
+    if (this.touchEventService) {
+      (this.touchEventService as ScrollEventsService).destroy();
     }
-  },
+  }
+
   routine() {
     // nothing
-  },
-};
+  }
+}

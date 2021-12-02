@@ -1,37 +1,35 @@
-import { BinderDeprecated } from "@ribajs/core";
+import { Binder } from "@ribajs/core";
 import { throttle } from "@ribajs/utils/src/control";
 
 /**
  * Binds an event handler on the element.
  * either `sync-element-width` or `sync-element-height`
  */
-export const syncElementPropertyBinder: BinderDeprecated<string> = {
-  name: "sync-element-*",
-  function: true,
-  priority: 1000,
+export class SyncElementPropertyBinder extends Binder<string, HTMLElement> {
+  static key = "sync-element-*";
 
-  bind() {
-    this.customData = {
-      syncWidth: throttle(() => {
-        this.el.style.width = this.customData.elToSync.clientWidth + "px";
-      }),
-      syncHeight: throttle(() => {
-        this.el.style.height = this.customData.elToSync.clientHeight + "px";
-      }),
-    };
-  },
+  function = true;
+  priority = 1000;
 
-  unbind(/*el: HTMLElement*/) {
+  private elToSync?: HTMLElement;
+
+  private syncWidth = throttle(() => {
+    this.el.style.width = (this.elToSync?.clientWidth || 0) + "px";
+  });
+
+  private syncHeight = throttle(() => {
+    this.el.style.height = (this.elToSync?.clientHeight || 0) + "px";
+  });
+
+  unbind() {
     const propertyName = this.args[0] as string;
-    if (this.customData.elToSync) {
-      this.customData.elToSync.removeEventListener(
+    if (this.elToSync) {
+      this.elToSync.removeEventListener(
         "resize",
-        propertyName === "width"
-          ? this.customData.syncWidth
-          : this.customData.syncHeight
+        propertyName === "width" ? this.syncWidth : this.syncHeight
       );
     }
-  },
+  }
 
   routine(el: HTMLElement, value: string) {
     if (this.args === null) {
@@ -39,25 +37,23 @@ export const syncElementPropertyBinder: BinderDeprecated<string> = {
     }
     const propertyName = this.args[0] as string;
 
-    if (this.customData.elToSync) {
-      this.customData.elToSync.removeEventListener(
+    if (this.elToSync) {
+      this.elToSync.removeEventListener(
         "resize",
-        propertyName === "width"
-          ? this.customData.syncWidth
-          : this.customData.syncHeight
+        propertyName === "width" ? this.syncWidth : this.syncHeight
       );
     }
     const elementToSync = document.getElementById(value);
     if (elementToSync) {
-      this.customData.elToSync = elementToSync;
+      this.elToSync = elementToSync;
       switch (propertyName) {
         case "height":
           el.style.height = elementToSync.clientHeight + "px";
-          window.addEventListener("resize", this.customData.syncHeight);
+          window.addEventListener("resize", this.syncHeight);
           break;
         case "width":
           el.style.width = elementToSync.clientWidth + "px";
-          window.addEventListener("resize", this.customData.syncWidth);
+          window.addEventListener("resize", this.syncWidth);
           break;
         default:
           console.warn(
@@ -69,5 +65,5 @@ export const syncElementPropertyBinder: BinderDeprecated<string> = {
         "[syncElementPropertyBinder] Could not find element with id: " + value
       );
     }
-  },
-};
+  }
+}
