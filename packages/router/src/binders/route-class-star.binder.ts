@@ -29,7 +29,7 @@ export class RouteClassStarBinder extends Binder<string, HTMLInputElement> {
     return false;
   }
 
-  private onUrlChange = this._onUrlChange;
+  private onUrlChange = this._onUrlChange.bind(this);
 
   bind() {
     this.dispatcher.on("newPageReady", this.onUrlChange);
