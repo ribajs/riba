@@ -1,5 +1,7 @@
 export * from "./bs4-sidebar-component-scope";
 export * from "./bs4-sidebar-component-state";
+export * from "./bs4-toggle-attribute";
+export * from "./bs4-toggle-class";
 export * from "./carousel-class-name";
 export * from "./carousel-direction";
 export * from "./carousel-option";

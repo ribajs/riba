@@ -1,8 +1,8 @@
 import {
   TemplatesComponent,
   TemplateFunction,
-  EventDispatcher,
 } from "@ribajs/core";
+import { EventDispatcher } from "@ribajs/events";
 import { debounce } from "@ribajs/utils/src/control";
 import { hasChildNodesTrim } from "@ribajs/utils";
 import { SlideItem } from "../../types";
