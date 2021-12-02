@@ -2,11 +2,11 @@ import { Riba } from "../riba";
 
 import { dotAdapter } from "../adapters/dot.adapter";
 
-import { removeClassBinder } from "./remove-class.binder";
+import { RemoveClassBinder } from "./remove-class.binder";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
-riba.module.binderDeprecated.regist(removeClassBinder);
+riba.module.binder.regist(RemoveClassBinder);
 
 describe("riba.binders", () => {
   let element: HTMLDivElement;

@@ -1,4 +1,4 @@
-import { BinderDeprecated } from "../types";
+import { Binder } from "../binder";
 
 /**
  * remove-class
@@ -8,17 +8,19 @@ import { BinderDeprecated } from "../types";
  * @example
  * <img class="loading" rv-src="img.src" rv-remove-class="loadingClass">
  */
-export const removeClassBinder: BinderDeprecated<string> = {
-  name: "remove-class",
-  bind(el) {
-    this.customData = {
-      staticClassesString: el.className,
-    };
-  },
+export class RemoveClassBinder extends Binder<string, HTMLElement> {
+  static key = "remove-class";
+  private staticClassesString?: string;
+  bind(el: HTMLElement) {
+    this.staticClassesString = el.className;
+  }
   routine(el: HTMLElement, value: string) {
     const regex = new RegExp(`\\b${value}\\b`, "g");
-    el.className = this.customData.staticClassesString
+    if (!this.staticClassesString) {
+      throw new Error("staticClassesString is undefined!");
+    }
+    el.className = this.staticClassesString
       .replace(regex, "")
       .trim();
-  },
+  }
 };

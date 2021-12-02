@@ -1,4 +1,4 @@
-import { BinderDeprecated } from "../types";
+import { Binder } from "../binder";
 
 /**
  * class-*
@@ -10,8 +10,8 @@ import { BinderDeprecated } from "../types";
  * @example
  * <li rv-class-completed="todo.done">{ todo.name }</li>
  */
-export const classStarBinder: BinderDeprecated<boolean> = {
-  name: "class-*",
+export class ClassStarBinder extends Binder<boolean, HTMLElement> {
+  static key = "class-*";
   routine(el: HTMLElement, value: boolean) {
     if (this.args === null) {
       throw new Error("args is null");
@@ -26,5 +26,5 @@ export const classStarBinder: BinderDeprecated<boolean> = {
     } else if (!value) {
       el.className = classList.filter((_, i) => i !== idx).join(" ");
     }
-  },
+  }
 };

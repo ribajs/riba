@@ -1,4 +1,4 @@
-import { BinderDeprecated } from "../types";
+import { Binder } from "../binder";
 import { kebabCase } from "@ribajs/utils";
 
 /**
@@ -9,8 +9,8 @@ import { kebabCase } from "@ribajs/utils";
  * <div rv-style="{'backgroundColor':'blue'}"></div>
  * ```
  */
-export const styleBinder: BinderDeprecated<Partial<CSSStyleDeclaration>> = {
-  name: "style",
+export class StyleBinder extends Binder<Partial<CSSStyleDeclaration> | string, HTMLElement> {
+  static key = "style";
   routine(el: HTMLElement, value: Partial<CSSStyleDeclaration> | string) {
     if (value) {
       if (typeof value === "string") {
@@ -25,5 +25,5 @@ export const styleBinder: BinderDeprecated<Partial<CSSStyleDeclaration>> = {
         (el.style as any).removeProperty(key);
       }
     }
-  },
+  }
 };

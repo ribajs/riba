@@ -1,16 +1,10 @@
-export { blockBinder } from "./block.binder";
-export { classStarBinder } from "./class-name.binder";
-export { styleStarBinder } from "./style-css-property.binder";
-export { styleBinder } from "./style-property.binder";
 export { tagStarBinder } from "./tag-name.binder";
 export { flexSortChildsBinder } from "./flex-sort-childs.binder";
 export { maxlengthBinder } from "./maxlength.binder";
 // export { mustacheTextBinder } from "./mustache-text.binder";
 export { notDraggableBinder } from "./not-draggable";
 export { readonlyBinder } from "./readonly.binder";
-export { removeClassBinder } from "./remove-class.binder";
 export { srcsetSizeBinder } from "./srcset-size.binder";
-export { styleBackgroundImageBinder } from "./style-background-image.binder";
 export { toggleOnEventBinder } from "./toggle-on-event.binder";
 export { attributeBinder } from "./attribute.binder";
 export { templateBinder } from "./template.binder";
