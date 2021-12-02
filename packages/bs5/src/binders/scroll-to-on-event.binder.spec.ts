@@ -1,6 +1,5 @@
 import { Riba, dotAdapter } from '@ribajs/core';
-
-import { scrollToOnEventBinder } from './scroll-to-on-event.binder';
+import { ScrollToOnEventBinder } from './scroll-to-on-event.binder';
 
 describe('riba.binders', () => {
   let el: HTMLDivElement;
@@ -10,7 +9,7 @@ describe('riba.binders', () => {
 
   const riba = new Riba();
   riba.module.adapter.regist(dotAdapter);
-  riba.module.binderDeprecated.regist(scrollToOnEventBinder);
+  riba.module.binder.regist(ScrollToOnEventBinder);
 
   beforeEach(() => {
 

@@ -1,16 +1,13 @@
 import { Binder } from "@ribajs/core";
-import { CollapseService } from "../services/collapse.service";
+import { Collapse } from "../services/collapse";
 
 /**
  *
  */
-export class ToggleCollapseOnEventBinder extends Binder<
-  string,
-  HTMLInputElement
-> {
-  static key = "bs4-toggle-collapse-on-*";
+export class ToggleCollapseOnEventBinder extends Binder<string, HTMLElement> {
+  static key = "bs5-toggle-collapse-on-*";
 
-  private targets = new Map<HTMLElement, CollapseService>();
+  private targets = new Map<HTMLElement, Collapse>();
 
   private _onEvent(event: Event) {
     event.preventDefault();
@@ -22,12 +19,11 @@ export class ToggleCollapseOnEventBinder extends Binder<
   private onEvent = this._onEvent.bind(this);
 
   bind(el: HTMLElement) {
-    this.onEvent = this.onEvent.bind(this);
     if (this.args === null) {
       throw new Error("args is null");
     }
     const eventName = this.args[0] as string;
-    el.addEventListener(eventName, this.onEvent, { passive: true });
+    el.addEventListener(eventName, this.onEvent);
   }
 
   unbind() {
@@ -55,10 +51,7 @@ export class ToggleCollapseOnEventBinder extends Binder<
 
     for (const target of newTargets) {
       if (!this.targets.has(target)) {
-        this.targets.set(
-          target,
-          new CollapseService(target, [el], { toggle: false })
-        );
+        this.targets.set(target, new Collapse(target, { toggle: false }));
       }
     }
   }

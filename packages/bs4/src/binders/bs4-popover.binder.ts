@@ -6,7 +6,6 @@ import { Binder } from "@ribajs/core";
  */
 export class PopoverBinder extends Binder<string, HTMLElement> {
   static key = "bs4-popover";
-  static block = false;
 
   private popover?: PopoverService;
   private listeners: { [key: string]: EventListener } = {};

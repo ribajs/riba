@@ -1,16 +1,16 @@
 import { Binder } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
-import { TOGGLE_BUTTON, TOGGLE_CLASS } from "../constants";
+import { TOGGLE_BUTTON, TOGGLE_ATTRIBUTE } from "../constants";
 
 /**
- * Adds / removes the class on click on the bs4-toggle-button with the same id
- *
+ * Adds / removes the attribute on click on the bs5-toggle-button with the same id
+ * E.g. with this binder you can toggle a hidden attribute to show / hide the element
  * Events
  * * `off`
  * * `on`
  */
-export class ToggleClassBinder extends Binder<string, HTMLButtonElement> {
-  static key = "bs4-toggle-class-*";
+export class ToggleAttributeBinder extends Binder<string, HTMLElement> {
+  static key = "bs5-toggle-attribute-*";
 
   private toggleButtonEvents?: EventDispatcher;
   private state = "off";
@@ -30,7 +30,7 @@ export class ToggleClassBinder extends Binder<string, HTMLButtonElement> {
 
   private onToggle = this._onToggle.bind(this);
 
-  private toggle(el: HTMLButtonElement) {
+  private toggle(el: HTMLElement) {
     if (this.state === "removed") {
       this.add.bind(this)(el);
     } else {
@@ -38,34 +38,34 @@ export class ToggleClassBinder extends Binder<string, HTMLButtonElement> {
     }
   }
 
-  private remove(el: HTMLButtonElement) {
-    const className = this.args[0] as string;
-    el.classList.remove(className);
+  private remove(el: HTMLElement) {
+    const attributeName = this.args[0] as string;
+    el.removeAttribute(attributeName);
     this.state = "removed";
     el.dispatchEvent(
-      new CustomEvent(TOGGLE_CLASS.elEventNames.removed, {
-        detail: { className },
+      new CustomEvent(TOGGLE_ATTRIBUTE.elEventNames.removed, {
+        detail: { attributeName },
       })
     );
     this.triggerState();
   }
 
-  private add(el: HTMLButtonElement) {
-    const className = this.args[0] as string;
+  private add(el: HTMLElement) {
+    const attributeName = this.args[0] as string;
 
-    el.classList.add(className, className);
+    el.setAttribute(attributeName, attributeName);
     this.state = "added";
     el.dispatchEvent(
-      new CustomEvent(TOGGLE_CLASS.elEventNames.added, {
-        detail: { className },
+      new CustomEvent(TOGGLE_ATTRIBUTE.elEventNames.added, {
+        detail: { attributeName },
       })
     );
     this.triggerState();
   }
 
-  bind(el: HTMLButtonElement) {
-    const className = this.args[0] as string;
-    this.state = el.classList.contains(className) ? "added" : "removed";
+  bind(el: HTMLElement) {
+    const attributeName = this.args[0] as string;
+    this.state = el.hasAttribute(attributeName) ? "added" : "removed";
   }
 
   unbind() {
@@ -81,7 +81,7 @@ export class ToggleClassBinder extends Binder<string, HTMLButtonElement> {
     );
   }
 
-  routine(el: HTMLButtonElement, newId: string) {
+  routine(el: HTMLElement, newId: string) {
     const oldId = this._getValue(el);
     let toggleButton = this.toggleButtonEvents;
     if (oldId && toggleButton) {

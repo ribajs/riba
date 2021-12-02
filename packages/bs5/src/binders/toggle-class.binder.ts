@@ -3,14 +3,14 @@ import { EventDispatcher } from "@ribajs/events";
 import { TOGGLE_BUTTON, TOGGLE_CLASS } from "../constants";
 
 /**
- * Adds / removes the class on click on the bs4-toggle-button with the same id
+ * Adds / removes the class on click on the bs5-toggle-button with the same id
  *
  * Events
  * * `off`
  * * `on`
  */
 export class ToggleClassBinder extends Binder<string, HTMLButtonElement> {
-  static key = "bs4-toggle-class-*";
+  static key = "bs5-toggle-class-*";
 
   private toggleButtonEvents?: EventDispatcher;
   private state = "off";
@@ -25,6 +25,7 @@ export class ToggleClassBinder extends Binder<string, HTMLButtonElement> {
   private triggerState = this._triggerState.bind(this);
 
   private _onToggle() {
+    // console.debug('onToggle', (this.binder as Bs5ToggleClass));
     this.toggle.bind(this)(this.el);
   }
 
