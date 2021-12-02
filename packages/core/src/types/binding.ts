@@ -1,10 +1,7 @@
-import { BinderDeprecated } from "./binder-deprecated";
-import { ObserverSyncCallback } from "./observer";
-import { Observer } from "../observer";
+import type { ObserverSyncCallback } from "./observer";
+import type { Observer } from "../observer";
 
-export interface Bindable<T = any, E = HTMLElement> {
-  binder?: BinderDeprecated<T, E>;
-
+export interface Bindable<E = HTMLElement> {
   /**
    * Name of the binder without the prefix
    */
@@ -42,11 +39,3 @@ export interface Bindable<T = any, E = HTMLElement> {
 
   sync?(): void;
 }
-
-export interface FormatterObservers {
-  [key: string]: {
-    [key: string]: Observer;
-  };
-}
-
-export type eventHandlerFunction = (event: Event) => void;

@@ -5,10 +5,11 @@
  */
 import { View } from "../view";
 import { Riba } from "../riba";
+import { Binder } from "../binder";
 import { BasicComponent } from "./basic-component";
 import { Formatter } from "../types";
 import { EventDispatcher } from "@ribajs/events";
-import type { ComponentLifecycleEventData, BinderDeprecated } from "../types";
+import type { ComponentLifecycleEventData } from "../types";
 
 export abstract class Component extends BasicComponent {
   protected view?: View | null = null;
@@ -284,12 +285,7 @@ export abstract class Component extends BasicComponent {
     return {
       name: "args",
       read: (fn: (...args: any[]) => any, ...fnArgs: any[]) => {
-        return (
-          event: Event,
-          scope: any,
-          el: HTMLElement,
-          binding: BinderDeprecated
-        ) => {
+        return (event: Event, scope: any, el: HTMLElement, binding: Binder) => {
           if (!fn) {
             throw new Error(
               `[${self.tagName}] Can not use "args" formatter: fn is undefined!`

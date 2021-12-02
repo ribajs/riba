@@ -1,22 +1,4 @@
-import type { Transition } from ".";
-
-/**
- * @deprecated Use RouterViewOptions instead
- */
-export interface RouterBinderViewOptions {
-  viewId?: string;
-  action?: "replace" | "append";
-  containerSelector?: string;
-  scrollToTop?: boolean;
-  listenAllLinks?: boolean;
-  listenPopstate?: boolean;
-  scrollToAnchorHash?: boolean;
-  datasetToModel?: boolean;
-  parseTitle?: boolean;
-  changeBrowserUrl?: boolean;
-  prefetchLinks?: boolean;
-  transition: Transition;
-}
+import type { Transition } from "./transition";
 
 export interface RouterViewOptions {
   id?: string;

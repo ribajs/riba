@@ -15,7 +15,7 @@ import { getInputValue } from "@ribajs/utils/src/dom";
  * A single binding between a model attribute and a DOM element.
  */
 export abstract class Binder<T = any, E = HTMLUnknownElement>
-  implements Bindable<T, E>
+  implements Bindable<E>
 {
   /**
    * The name of the binder to access the binder by

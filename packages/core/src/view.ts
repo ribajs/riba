@@ -1,12 +1,10 @@
 import {
-  BinderDeprecated,
   Options,
   BindableElement,
   ClassOfBinder,
   ClassOfComponent,
   DataElement,
 } from "./types";
-import { Binding } from "./binding";
 import { parseNode } from "./parse-node";
 import { parseDeclaration } from "./parse-declaration";
 import { BasicComponent, Component } from "./component";
@@ -23,39 +21,11 @@ import { AttributeBinder } from "./binders/attribute.binder";
  * A collection of bindings built from a set of parent nodes.
  */
 export class View {
-  public static bindingComparator = (
-    a: Binding | Binder,
-    b: Binding | Binder
-  ) => {
-    const aPriority =
-      (a as Binding)?.binder?.priority || (a as Binder).priority || 0;
-    const bPriority =
-      (b as Binding)?.binder?.priority || (b as Binder).priority || 0;
+  public static bindingComparator = (a: Binder, b: Binder) => {
+    const aPriority = a.priority || 0;
+    const bPriority = b.priority || 0;
     return bPriority - aPriority;
   };
-
-  /**
-   * Helper function to create a new view inside of a binding
-   * @param binding
-   * @param models
-   * @param anchorEl
-   * @deprecated
-   */
-  public static createDeprecated(
-    binding: Binding,
-    models: any,
-    anchorEl: HTMLElement | Node | null
-  ) {
-    const template = binding.el.cloneNode(true);
-    const view = new View(template, models, binding.view.options);
-    view.bind();
-    if (!binding?.marker?.parentNode) {
-      console.warn("[View]: No parent node for binding!");
-    } else {
-      binding.marker.parentNode.insertBefore(template, anchorEl);
-    }
-    return view;
-  }
 
   /**
    * Helper function to create a new view inside of a binding
@@ -82,7 +52,7 @@ export class View {
   public els: HTMLCollection | HTMLElement[] | Node[];
   public models: any;
   public options: Options;
-  public bindings: Array<Binding | Binder> = [];
+  public bindings: Array<Binder> = [];
   public webComponents: Array<Component | BasicComponent> = [];
   // public componentView: View | null = null;
 
@@ -181,16 +151,9 @@ export class View {
    * Publishes the input values from the view back to the model (reverse sync).
    */
   public publish() {
-    this.bindings.forEach((binding) => {
-      if (
-        (binding as Binding).binder &&
-        (binding as Binding).binder.publishes &&
-        (binding as Binding).publish
-      ) {
-        (binding as Binding).publish();
-      }
-      if ((binding as Binder).publishes && (binding as Binder).publish) {
-        (binding as Binder).publish();
+    this.bindings.forEach((binder) => {
+      if (binder.publishes && binder.publish) {
+        binder.publish();
       }
     });
   }
@@ -250,105 +213,6 @@ export class View {
     }
 
     return undefined;
-  }
-
-  /**
-   *
-   * @deprecated
-   */
-  private bindBindersDeprecated(
-    attributes: NamedNodeMap,
-    node: BindableElement,
-    attributeBinders = this.options.attributeBinders
-  ) {
-    let block = false;
-    if (!this.options.bindersDeprecated) {
-      return block;
-    }
-    const bindInfos = [];
-    for (let i = 0, len = attributes.length; i < len; i++) {
-      let nodeName = "";
-      let binder: BinderDeprecated<any, any> | null = null;
-      let identifier = "";
-      let hasNewBinder = false;
-      const attribute = attributes[i];
-      // if attribute starts with the binding prefix. E.g. rv-
-      const startingPrefix = this.startsWithPrefix(attribute.name);
-      if (startingPrefix) {
-        nodeName = attribute.name.slice(startingPrefix.length);
-
-        // If is a new binder for this, skip
-        if (this.options.binders && this.options.binders[nodeName]) {
-          hasNewBinder = true;
-          continue;
-        }
-
-        // if binder is not a attributeBinder binder should be set
-        if (this.options.bindersDeprecated[nodeName]) {
-          binder = this.options.bindersDeprecated[nodeName];
-        }
-
-        if (binder === null) {
-          // seems to be a star binder (because binder was not set)
-          // Check if any attributeBinder match's
-          for (let k = 0; k < attributeBinders.length; k++) {
-            identifier = attributeBinders[k];
-            const regexp = new RegExp(`^${identifier.replace(/\*/g, ".+")}$`);
-            if (regexp.test(nodeName)) {
-              binder = this.options.bindersDeprecated[identifier];
-
-              // Or is there a new binder for this identifier?
-              if (this.options.binders?.[identifier]) {
-                hasNewBinder = true;
-              }
-              break;
-            }
-          }
-        }
-
-        if (hasNewBinder) {
-          continue;
-        }
-
-        if (binder === null) {
-          return block;
-        }
-
-        // if block is set, do not bind its child's (this means the binder bound it by itself)
-        // and build binding directly (do not push it to bindInfos array)
-        if (binder.block) {
-          this.buildBindingDeprecated(
-            node,
-            nodeName,
-            attribute.value,
-            binder,
-            identifier
-          );
-          if (node.removeAttribute && this.options.removeBinderAttributes) {
-            node.removeAttribute(attribute.name);
-          }
-          block = true;
-          return block;
-        }
-
-        bindInfos.push({ attr: attribute, binder, nodeName, identifier });
-      }
-    }
-
-    for (let i = 0; i < bindInfos.length; i++) {
-      const bindInfo = bindInfos[i];
-      this.buildBindingDeprecated(
-        node,
-        bindInfo.nodeName,
-        bindInfo.attr.value,
-        bindInfo.binder,
-        bindInfo.identifier
-      );
-      if (node.removeAttribute && this.options.removeBinderAttributes) {
-        node.removeAttribute(bindInfo.attr.name);
-      }
-    }
-    return block;
   }
 
   /**
@@ -466,14 +330,6 @@ export class View {
     let block = this.options.blockNodeNames.includes(node.nodeName);
     const attributes = node.attributes;
 
-    // bind attribute deprecated binders if available
-    if (attributes && this.options.bindersDeprecated) {
-      block = this.bindBindersDeprecated(attributes, node);
-      if (block) {
-        return block;
-      }
-    }
-
     // bind attribute binders if available
     if (attributes && this.options.binders) {
       block = this.bindBinders(attributes, node);
@@ -501,29 +357,6 @@ export class View {
     const pipes = parsedDeclaration.pipes;
     this.bindings.push(
       new Binder(this, node, type, Binder.key, keypath, pipes, identifier)
-    );
-  }
-
-  /**
-   * @deprecated
-   * @param node
-   * @param type
-   * @param declaration
-   * @param binder
-   * @param identifier
-   */
-  public buildBindingDeprecated(
-    node: HTMLUnknownElement | Text,
-    type: string | null,
-    declaration: string,
-    binder: BinderDeprecated<any>,
-    identifier: string | null
-  ) {
-    const parsedDeclaration = parseDeclaration(declaration);
-    const keypath = parsedDeclaration.keypath;
-    const pipes = parsedDeclaration.pipes;
-    this.bindings.push(
-      new Binding(this, node, type, keypath, binder, pipes, identifier)
     );
   }
 

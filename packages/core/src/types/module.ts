@@ -1,20 +1,6 @@
-import {
-  BindersDeprecated,
-  Binders,
-  Formatters,
-  Components,
-  Services,
-  Adapters,
-} from ".";
+import { Binders, Formatters, Components, Services, Adapters } from ".";
 
 export interface RibaModule<O = any> {
-  /**
-   * Binders can be a object of binders named by property key (Binders<any>)
-   * or an array of binders with binder and name property (Binder<any>)
-   * @deprecated
-   */
-  bindersDeprecated?: BindersDeprecated<any, any>;
-
   /**
    * Binders can be a object of binders named by property key (Binders<any>)
    * or an array of binders with binder and name property (Binder<any>)

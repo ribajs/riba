@@ -8,7 +8,6 @@ export * from "./components";
 export * from "./components/templates/templates.component";
 export * from "./formatters";
 export * from "./binder";
-export * from "./binding";
 export * from "./parse-declaration";
 export * from "./parse-node";
 export * from "./parse-template";

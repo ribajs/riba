@@ -1,4 +1,4 @@
-import { Riba, View } from "./index";
+import { Riba, View, Binder } from "./index";
 import { Data } from "../spec/lib/moch.data";
 import { dotAdapter } from "./adapters";
 import {
@@ -10,7 +10,7 @@ import {
 } from "./binders";
 import { Formatter, Adapter } from "./types";
 
-describe("riba.Binding", () => {
+describe("riba.Binder", () => {
 
   const riba = new Riba();
   riba.module.adapter.regist(dotAdapter);
@@ -773,61 +773,141 @@ describe("Functional", () => {
     describe("Priority", () => {
       let mockA: jest.Mock<any, any>;
       let mockB: jest.Mock<any, any>;
+      let mockC: jest.Mock<any, any>;
+      let mockD: jest.Mock<any, any>;
+      let mockE: jest.Mock<any, any>;
+      let mockF: jest.Mock<any, any>;
+      let mockG: jest.Mock<any, any>;
       beforeEach(() => {
         mockA = jest.fn();
         mockB = jest.fn();
+        mockC = jest.fn();
+        mockD = jest.fn();
+        mockE = jest.fn();
+        mockF = jest.fn();
+        mockG = jest.fn();
 
-        riba.bindersDeprecated.a = {
-          name: "a",
-          bind: () => mockA(),
-          routine: () => {
+        class ABinder extends Binder<any, any> {
+          static key = "a";
+          bind = mockA;
+          routine() {
             /**/
-          },
-        };
-        riba.bindersDeprecated.b = {
-          name: "b",
-          bind: () => mockB(),
-          routine: () => {
+          }
+        }
+
+        class BBinder extends Binder<any, any> {
+          static key = "b";
+          bind = mockB;
+          routine() {
             /**/
-          },
-        };
+          }
+        }
+
+        class CBinder extends Binder<any, any> {
+          static key = "c";
+          priority = 10;
+          bind = mockC;
+          routine() {
+            /**/
+          }
+        }
+
+        class DBinder extends Binder<any, any> {
+          static key = "d";
+          priority = 30;
+          bind = mockD;
+          routine() {
+            /**/
+          }
+        }
+
+        class EBinder extends Binder<any, any> {
+          static key = "e";
+          priority = 5;
+          bind = mockE;
+          routine() {
+            /**/
+          }
+        }
+
+        class FBinder extends Binder<any, any> {
+          static key = "f";
+          priority = 2;
+          bind = mockF;
+          routine() {
+            /**/
+          }
+        }
+
+        class GBinder extends Binder<any, any> {
+          static key = "g";
+          priority = 1;
+          bind = mockG;
+          routine() {
+            /**/
+          }
+        }
+
+        riba.module.binder.regist(ABinder);
+        riba.module.binder.regist(BBinder);
+        riba.module.binder.regist(CBinder);
+        riba.module.binder.regist(DBinder);
+        riba.module.binder.regist(EBinder);
+        riba.module.binder.regist(FBinder);
+        riba.module.binder.regist(GBinder);
 
         el.setAttribute("data-a", "data:foo");
         el.setAttribute("data-b", "data:foo");
+        el.setAttribute("data-c", "data:foo");
+        el.setAttribute("data-d", "data:foo");
+        el.setAttribute("data-e", "data:foo");
+        el.setAttribute("data-f", "data:foo");
+        el.setAttribute("data-g", "data:foo");
       });
 
       describe("a:10, b:30", () => {
         beforeEach(() => {
-          riba.bindersDeprecated.a.priority = 10;
-          riba.bindersDeprecated.b.priority = 30;
-          riba.bind(el, bindData);
+          const view = riba.bind(el, bindData);
+          const c = view.bindings[1];
+          const d = view.bindings[0];
+          expect(c.name).toEqual("c");
+          expect(c.priority).toEqual(10);
+          expect(d.name).toEqual("d");
+          expect(d.priority).toEqual(30);
         });
 
-        it("should bind b before a", () => {
-          expect(mockB).toHaveBeenCalledBefore(mockA);
+        it("should bind d before c", () => {
+          expect(mockD).toHaveBeenCalledBefore(mockC);
         });
       });
 
       describe("a:5, b:2", () => {
         beforeEach(() => {
-          riba.bindersDeprecated.a.priority = 5;
-          riba.bindersDeprecated.b.priority = 2;
-          riba.bind(el, bindData);
+          const view = riba.bind(el, bindData);
+          const e = view.bindings[2];
+          const f = view.bindings[3];
+          expect(e.name).toEqual("e");
+          expect(e.priority).toEqual(5);
+          expect(f.name).toEqual("f");
+          expect(f.priority).toEqual(2);
         });
 
-        it("should bind a before b", () => {
-          expect(mockA).toHaveBeenCalledBefore(mockB);
+        it("should bind e before f", () => {
+          expect(mockE).toHaveBeenCalledBefore(mockF);
         });
       });
 
-      describe("a:undefined, b:1", () => {
+      describe("a:undefined, g:1", () => {
         beforeEach(() => {
-          riba.bindersDeprecated.b.priority = 1;
+          const view = riba.bind(el, bindData);
+          const g = view.bindings[4];
+          expect(g.name).toEqual("g");
+          expect(g.priority).toEqual(1);
           riba.bind(el, bindData);
         });
 
-        it("should bind b before a", () => {
-          expect(mockB).toHaveBeenCalledBefore(mockA);
+        it("should bind g before a", () => {
+          expect(mockG).toHaveBeenCalledBefore(mockA);
         });
       });
     });

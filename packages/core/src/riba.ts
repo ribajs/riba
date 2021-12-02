@@ -5,11 +5,9 @@ import {
   Root,
   Components,
   Options,
-  BindersDeprecated,
 } from "./types";
 import { parseTemplate } from "./parse-template";
 import { parseType } from "./parse-type";
-import { Binding } from "./binding";
 import { Binder } from "./binder";
 import { View } from "./view";
 import { Observer } from "./observer";
@@ -26,17 +24,17 @@ export class Riba {
     this: any,
     context: any,
     ev: Event,
-    binding: Binding | Binder,
+    binder: Binder,
     el: HTMLElement
   ) {
     if (!this || !this.call) {
       const error = new Error(
-        `[rv-${binding.type}="${binding.keypath}"] Event handler "${binding.keypath}" not found!"`
+        `[rv-${binder.type}="${binder.keypath}"] Event handler "${binder.keypath}" not found!"`
       );
-      console.error(error, binding, el, binding.view.models);
+      console.error(error, binder, el, binder.view.models);
       throw error;
     }
-    this.call(context, ev, binding.view.models, el);
+    this.call(context, ev, binder.view.models, el);
   }
 
   /** singleton instance */
@@ -48,12 +46,6 @@ export class Riba {
 
   /** Global binders */
   public binders: Binders<any> = {};
-
-  /**
-   * Global deprecated binders
-   * @deprecated
-   **/
-  public bindersDeprecated: BindersDeprecated<any> = {};
 
   /** Global components. */
   public components: Components = {};
@@ -115,7 +107,6 @@ export class Riba {
    */
   constructor() {
     this.module = new ModulesService(
-      this.bindersDeprecated,
       this.binders,
       this.components,
       this.formatters,
@@ -138,12 +129,6 @@ export class Riba {
 
     for (const [option, value] of Object.entries(options)) {
       switch (option) {
-        case "bindersDeprecated":
-          this.bindersDeprecated = {
-            ...this.bindersDeprecated,
-            ...(value as BindersDeprecated),
-          };
-          break;
         case "binders":
           this.binders = { ...this.binders, ...(value as Binders) };
           break;
@@ -192,7 +177,6 @@ export class Riba {
       // EXTENSIONS
       adapters: {} as Adapters,
       binders: {} as Binders<any>,
-      bindersDeprecated: {} as BindersDeprecated<any>,
       components: {} as Components,
       formatters: {} as Formatters,
 
@@ -205,10 +189,6 @@ export class Riba {
 
     if (options) {
       viewOptions.binders = { ...viewOptions.binders, ...options.binders };
-      viewOptions.bindersDeprecated = {
-        ...viewOptions.bindersDeprecated,
-        ...options.bindersDeprecated,
-      };
       viewOptions.formatters = {
         ...viewOptions.formatters,
         ...options.formatters,
@@ -252,10 +232,6 @@ export class Riba {
 
     // merge extensions
     viewOptions.binders = { ...this.binders, ...viewOptions.binders };
-    viewOptions.bindersDeprecated = {
-      ...this.bindersDeprecated,
-      ...viewOptions.bindersDeprecated,
-    };
     viewOptions.formatters = { ...this.formatters, ...viewOptions.formatters };
     viewOptions.components = { ...this.components, ...viewOptions.components };
     viewOptions.adapters = { ...this.adapters, ...viewOptions.adapters };
@@ -265,15 +241,6 @@ export class Riba {
     }
 
     // get all attributeBinders from available binders
-    if (viewOptions.bindersDeprecated) {
-      const attributeBinders = Object.keys(
-        viewOptions.bindersDeprecated
-      ).filter(
-        (key) => key.indexOf("*") >= 1 // Should contain, but not start with, *
-      );
-
-      viewOptions.attributeBinders.push(...attributeBinders);
-    }
     if (viewOptions.binders) {
       const attributeBinders = Object.keys(viewOptions.binders).filter(
         (key) => key.indexOf("*") >= 1 // Should contain, but not start with, *
