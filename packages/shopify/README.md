@@ -51,7 +51,7 @@ yarn add -D gulp gulp-cheerio gulp-ext-replace gulp-plumber gulp-rename gulp-siz
 
 ## Regist Riba
 
-To regist the module create a `src/ts/main.ts` and insert `import shopifyModule from '@ribajs/shopify';`, than you can regist the module with `riba.module.regist(shopifyModule);`:
+To regist the module create a `src/ts/main.ts` and insert `import shopifyModule from '@ribajs/shopify';`, than you can regist the module with `riba.module.regist(shopifyModule.init());`:
 
 The main.ts could look like this:
 
@@ -61,8 +61,8 @@ import { shopifyModule } from '@ribajs/shopify';
 import { ready } from '@ribajs/utils/src/dom';
 const riba = new Riba();
 const model = {};
-riba.module.regist(coreModule);
-riba.module.regist(shopifyModule);
+riba.module.regist(coreModule.init());
+riba.module.regist(shopifyModule.init());
 ready(() => {
   riba.bind(document.body, model);
 });

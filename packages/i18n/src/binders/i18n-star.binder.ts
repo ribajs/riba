@@ -8,7 +8,7 @@ import { LocalesService, LocalVar, LocalPluralization } from "../types";
  */
 export class I18nStarBinder extends Binder<string, HTMLInputElement> {
   static key = "i18n-*";
-  priority =  0;
+  priority = 0;
 
   private contenteditable = false;
 
@@ -23,14 +23,12 @@ export class I18nStarBinder extends Binder<string, HTMLInputElement> {
   private applyTranslation(locale: string | LocalPluralization | null) {
     if (!locale) {
       if ((this.i18n as LocalesService).showMissingTranslation) {
-        locale = `translation missing: "${this.properties.join(
-          "."
-        )}"`;
+        locale = `translation missing: "${this.properties.join(".")}"`;
       } else {
         return;
       }
     }
-    if (typeof locale !== 'string') {
+    if (typeof locale !== "string") {
       console.warn("TODO", locale);
       return;
     }
@@ -56,21 +54,13 @@ export class I18nStarBinder extends Binder<string, HTMLInputElement> {
       throw new Error("LocalesService is not defined!");
     }
     const newVars = this.i18n.parseTemplateVars(_el);
-    this.vars = extend(
-      { deep: true },
-      this.vars,
-      newVars
-    );
+    this.vars = extend({ deep: true }, this.vars, newVars);
 
     // parse data attributes to vars
-    this.vars = extend(
-      { deep: false },
-      this.vars,
-      _el.dataset
-    );
+    this.vars = extend({ deep: false }, this.vars, _el.dataset);
     // Parse templates which have his own translations
     this.langVars = this.i18n.parseLocalVars(_el);
-  };
+  }
 
   private translate(langcode?: string) {
     // If language service is not ready do nothing
@@ -87,21 +77,14 @@ export class I18nStarBinder extends Binder<string, HTMLInputElement> {
 
     // translate by using the already translated language variable
     if (this.langVars && this.langVars[langcode]) {
-      return this.applyTranslation(
-        this.langVars[langcode]
-      );
+      return this.applyTranslation(this.langVars[langcode]);
     }
 
-    if (
-      !this.properties ||
-      this.properties.length === 0
-    ) {
+    if (!this.properties || this.properties.length === 0) {
       // get the default translation if available
       if (this.langVars && this.langVars.default) {
         // console.warn('Translate by default', this.langVars.default);
-        return this.applyTranslation(
-          this.langVars.default
-        );
+        return this.applyTranslation(this.langVars.default);
       }
     }
 
@@ -116,9 +99,7 @@ export class I18nStarBinder extends Binder<string, HTMLInputElement> {
         // get the default translation if available
         if (this.langVars && this.langVars.default) {
           // console.warn('Translate by default as fallback', this.langVars.default);
-          return this.applyTranslation(
-            this.langVars.default
-          );
+          return this.applyTranslation(this.langVars.default);
         }
 
         return this.applyTranslation(null);
@@ -126,30 +107,21 @@ export class I18nStarBinder extends Binder<string, HTMLInputElement> {
       .catch((error: Error) => {
         console.error(error);
       });
-  };
+  }
 
-  private _onAttributeChanged(
-    data: BinderAttributeChangedEvent
-  ) {
+  private _onAttributeChanged(data: BinderAttributeChangedEvent) {
     if (data.detail.name.startsWith("data-")) {
       const varName = data.detail.name.slice(5);
       const newVar: any = {};
       newVar[varName] = data.detail.newValue;
-      this.vars = extend(
-        { deep: true },
-        this.vars,
-        newVar
-      );
+      this.vars = extend({ deep: true }, this.vars, newVar);
       this.translate();
     }
   }
 
   private onAttributeChanged = this._onAttributeChanged.bind(this);
 
-  private onLanguageChanged(
-    langcode: string,
-    initial: boolean
-  ) {
+  private onLanguageChanged(langcode: string, initial: boolean) {
     // Do not translate on initial language change, we use the ready event for this
     if (!initial) {
       this.translate(langcode);
@@ -159,27 +131,20 @@ export class I18nStarBinder extends Binder<string, HTMLInputElement> {
   /**
    * Initial stuff wee need to do after the language service is ready
    */
-  private initOnReady (
-    langcode: string,
-    translationNeeded: boolean
-  ) {
+  private initOnReady(langcode: string, translationNeeded: boolean) {
     // Translate on translation service ready if needed
     if (translationNeeded) {
       this.translate(langcode);
     }
 
     // Translate if language changes
-    (this.i18n as LocalesService).event.on(
-      "changed",
-      this.onLanguageChanged
-    );
+    (this.i18n as LocalesService).event.on("changed", this.onLanguageChanged);
 
     // Translate if binder attribute event is changed
     this.el.addEventListener("binder-changed" as any, this.onAttributeChanged);
   }
 
   bind(el: HTMLInputElement) {
-
     this.contenteditable = !!el.getAttribute("contenteditable");
 
     const options = I18nService.options;
@@ -193,8 +158,7 @@ export class I18nStarBinder extends Binder<string, HTMLInputElement> {
       // if this is the first call of this function
       this.translateMePathString = translateMePathString;
       if (this.translateMePathString) {
-        this.properties =
-          this.translateMePathString.split(".");
+        this.properties = this.translateMePathString.split(".");
       }
 
       this.parseVars(el);
@@ -214,14 +178,9 @@ export class I18nStarBinder extends Binder<string, HTMLInputElement> {
             !options.localesService.doNotTranslateDefaultLanguage
         );
       } else {
-        (this.i18n as LocalesService).event.on(
-          "ready",
-          this.initOnReady
-        );
+        (this.i18n as LocalesService).event.on("ready", this.initOnReady);
       }
-    } else if (
-      this.translateMePathString !== translateMePathString
-    ) {
+    } else if (this.translateMePathString !== translateMePathString) {
       // If translate string was changed
       this.translateMePathString = translateMePathString;
       if (this.translateMePathString) {
@@ -237,9 +196,6 @@ export class I18nStarBinder extends Binder<string, HTMLInputElement> {
       "binder-changed" as any,
       this.onAttributeChanged
     );
-    this.i18n?.event.off(
-      "changed",
-      this.onLanguageChanged
-    );
+    this.i18n?.event.off("changed", this.onLanguageChanged);
   }
-};
+}

@@ -18,7 +18,7 @@ import { ready } from '@ribajs/utils/src/dom';
 const riba = new Riba();
 const localesService = new LocalesService();
 const model = {};
-riba.module.regist(coreModule);
+riba.module.regist(coreModule.init());
 riba.module.regist(i18nModule.init({ localesService }));
 ready(() => {
   riba.bind(document.body, model);
