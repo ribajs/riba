@@ -18,4 +18,4 @@ export class StyleBackgroundImageBinder extends Binder<string, HTMLElement> {
       el.style.setProperty(prop, `url(${value})`);
     }
   }
-};
+}

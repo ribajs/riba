@@ -7,7 +7,8 @@ import {
   Options,
   BindersDeprecated,
 } from "./types";
-import { parseTemplate, parseType } from "./parsers";
+import { parseTemplate } from "./parse-template";
+import { parseType } from "./parse-type";
 import { Binding } from "./binding";
 import { Binder } from "./binder";
 import { View } from "./view";

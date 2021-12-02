@@ -17,4 +17,4 @@ export class AssignBinder extends Binder<Assign, HTMLUnknownElement> {
     }
     console.warn("Value must be an object or propertyName is required");
   }
-};
+}

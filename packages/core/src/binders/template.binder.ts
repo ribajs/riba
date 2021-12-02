@@ -28,4 +28,4 @@ export class TemplateBinder extends Binder<string, HTMLElement> {
   update(models: any) {
     this.nested?.update(models);
   }
-};
+}

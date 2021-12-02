@@ -14,4 +14,4 @@ export class MaxlengthBinder extends Binder<number, HTMLElement> {
       (el as HTMLInputElement).removeAttribute("maxlength");
     }
   }
-};
+}

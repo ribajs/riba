@@ -27,4 +27,4 @@ export class ClassStarBinder extends Binder<boolean, HTMLElement> {
       el.className = classList.filter((_, i) => i !== idx).join(" ");
     }
   }
-};
+}

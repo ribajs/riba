@@ -19,8 +19,6 @@ export class RemoveClassBinder extends Binder<string, HTMLElement> {
     if (!this.staticClassesString) {
       throw new Error("staticClassesString is undefined!");
     }
-    el.className = this.staticClassesString
-      .replace(regex, "")
-      .trim();
+    el.className = this.staticClassesString.replace(regex, "").trim();
   }
-};
+}

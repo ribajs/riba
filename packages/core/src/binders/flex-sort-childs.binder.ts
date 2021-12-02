@@ -26,4 +26,4 @@ export class FlexSortChildsBinder extends Binder<boolean, HTMLElement> {
       child.style.order = i.toString();
     }
   }
-};
+}

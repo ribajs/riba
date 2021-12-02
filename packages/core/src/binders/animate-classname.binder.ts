@@ -24,4 +24,4 @@ export class AnimateStarBinder extends Binder<boolean, HTMLUnknownElement> {
       el.classList.add(animateClassName + "-done");
     }
   }
-};
+}

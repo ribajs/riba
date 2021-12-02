@@ -26,4 +26,4 @@ export class SrcsetSizeBinder extends Binder<string, HTMLElement> {
     }
     el.setAttribute("srcset", srcset);
   }
-};
+}

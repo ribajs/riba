@@ -36,6 +36,8 @@ export * from "./observed-attribute-to-check";
 export * from "./observed-attributes-to-check";
 export * from "./observer";
 export * from "./options";
+export * from "./parsed-declarations";
 export * from "./services";
 export * from "./template-function";
+export * from "./tokens";
 export * from "./video-component-scope";

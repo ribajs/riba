@@ -15,4 +15,4 @@ export class ReadonlyBinder extends Binder<boolean, HTMLInputElement> {
       el.removeAttribute("readonly");
     }
   }
-};
+}

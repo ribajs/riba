@@ -18,4 +18,4 @@ export class StyleStarBinder extends Binder<string, HTMLElement> {
       el.style.setProperty(propertyName.toString(), value);
     }
   }
-};
+}

@@ -63,4 +63,4 @@ export class TagStarBinder extends Binder<boolean, HTMLElement> {
       this.el = newEl;
     }
   }
-};
+}

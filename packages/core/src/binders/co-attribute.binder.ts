@@ -80,4 +80,4 @@ export class ComponentAttributeBinder extends Binder<any, BasicComponent> {
     const val = el.getBinderAttribute(attrName);
     return val;
   }
-};
+}

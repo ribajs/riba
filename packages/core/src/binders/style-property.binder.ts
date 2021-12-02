@@ -9,7 +9,10 @@ import { kebabCase } from "@ribajs/utils";
  * <div rv-style="{'backgroundColor':'blue'}"></div>
  * ```
  */
-export class StyleBinder extends Binder<Partial<CSSStyleDeclaration> | string, HTMLElement> {
+export class StyleBinder extends Binder<
+  Partial<CSSStyleDeclaration> | string,
+  HTMLElement
+> {
   static key = "style";
   routine(el: HTMLElement, value: Partial<CSSStyleDeclaration> | string) {
     if (value) {
@@ -26,4 +29,4 @@ export class StyleBinder extends Binder<Partial<CSSStyleDeclaration> | string, H
       }
     }
   }
-};
+}

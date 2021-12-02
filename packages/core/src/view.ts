@@ -7,17 +7,12 @@ import {
   DataElement,
 } from "./types";
 import { Binding } from "./binding";
-import { parseNode, parseDeclaration } from "./parsers";
+import { parseNode } from "./parse-node";
+import { parseDeclaration } from "./parse-declaration";
 import { BasicComponent, Component } from "./component";
 import { isCustomElement } from "@ribajs/utils";
 import { Binder } from "./binder";
 
-/**
- * Sets the attribute on the element. If no binder is matched it will fall
- * back to using this binder.
- * @deprecated
- */
-import { attributeBinder as attributeBinderDeprecated } from "./binders-deprecated/attribute.binder";
 /**
  * Sets the attribute on the element. If no binder is matched it will fall
  * back to using this binder.
@@ -316,22 +311,7 @@ export class View {
         }
 
         if (binder === null) {
-          if (this.options.bindersDeprecated["*"]) {
-            binder = this.options.bindersDeprecated["*"];
-            identifier = "*";
-          } else {
-            binder = attributeBinderDeprecated;
-          }
-        }
-
-        if (!binder) {
-          console.error("attributeBinders: ", attributeBinders);
-          console.error("binders", this.options.binders?.[nodeName]);
-          console.error(
-            "binders (deprecated)",
-            this.options.bindersDeprecated?.[nodeName]
-          );
-          throw new Error(`Binder for "${nodeName}" is undefined!`);
+          return block;
         }
 
         // if block is set, do not bind its child's (this means the binder bound it by itself)

@@ -16,4 +16,4 @@ export class AssignPropertyBinder extends Binder<any, HTMLUnknownElement> {
     obj[propertyName] = value;
     this.view.models[propertyName] = value;
   }
-};
+}

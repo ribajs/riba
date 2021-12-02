@@ -1,4 +1,5 @@
-import { PRIMITIVE, KEYPATH, parseType } from "./parsers";
+import { parseType } from "./parse-type";
+import { PRIMITIVE, KEYPATH } from "./constants/parser";
 import { Observer } from "./observer";
 import type {
   BinderDeprecated,

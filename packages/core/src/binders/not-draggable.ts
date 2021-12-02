@@ -13,4 +13,4 @@ export class NotDraggableBinder extends Binder<boolean, HTMLElement> {
       return false;
     });
   }
-};
+}

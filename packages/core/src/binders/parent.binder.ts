@@ -40,4 +40,4 @@ export class ParentBinder extends Binder<any, BasicComponent> {
       );
     }
   }
-};
+}

@@ -3,15 +3,14 @@ import { Binder } from "../binder";
 /**
  * Toggles a boolean variable to true/false if the event is triggered.
  */
- export class ToggleOnEventBinder extends Binder<string, HTMLUnknownElement> {
+export class ToggleOnEventBinder extends Binder<string, HTMLUnknownElement> {
   static key = "toggle-on-*";
 
   private propertyKey?: string;
 
   toggle() {
     if (this.propertyKey) {
-      this.view.models[this.propertyKey] =
-        !this.view.models[this.propertyKey];
+      this.view.models[this.propertyKey] = !this.view.models[this.propertyKey];
     }
   }
 
@@ -35,4 +34,4 @@ import { Binder } from "../binder";
     }
     this.propertyKey = propertyKey;
   }
-};
+}
