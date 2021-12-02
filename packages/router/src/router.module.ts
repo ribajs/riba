@@ -1,11 +1,11 @@
 import { RibaModule } from "@ribajs/core";
-import * as bindersDeprecated from "./binders-deprecated";
+import * as binders from "./binders";
 import * as components from "./components";
 import * as services from "./services";
 import { RouterModuleOptions } from "./types";
 
 export const routerModule: RibaModule<Partial<RouterModuleOptions>> = {
-  bindersDeprecated,
+  binders,
   components,
   services,
   formatters: {},
