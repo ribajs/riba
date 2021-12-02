@@ -1,24 +1,20 @@
-import { BinderDeprecated } from "../types";
+import { Binder } from "../binder";
 
 /**
  * animate-{class}
  * Add / remove animation class with start and done affix
  */
-export const animateStarBinder: BinderDeprecated<boolean> = {
-  name: "animate-*",
-  function: true,
-  priority: 1000,
+export class AnimateStarBinder extends Binder<boolean, HTMLUnknownElement> {
+  static key = "animate-*";
+  function = true;
+  priority = 1000;
 
-  bind(el) {
+  bind(el: HTMLUnknownElement) {
     const animateClassName = (this as any).args[0];
     el.classList.add(animateClassName);
-  },
+  }
 
-  unbind() {
-    //
-  },
-
-  routine(el: HTMLElement, start: boolean) {
+  routine(el: HTMLUnknownElement, start: boolean) {
     const animateClassName = (this as any).args[0];
     if (start) {
       el.classList.add(animateClassName + "-start");
@@ -27,5 +23,5 @@ export const animateStarBinder: BinderDeprecated<boolean> = {
       el.classList.remove(animateClassName + "-start");
       el.classList.add(animateClassName + "-done");
     }
-  },
+  }
 };

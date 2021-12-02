@@ -1,10 +1,6 @@
-import { BinderDeprecated } from "../types";
+import { Binder } from "../binder";
+import type { Assign } from "../types/assign";
 import { extend } from "@ribajs/utils/src/type";
-
-export interface Assign {
-  key: string;
-  value: any;
-}
 
 /**
  * assign
@@ -13,12 +9,12 @@ export interface Assign {
  * @example
  * <div rv-assign='{"newValue": "hello", "anotherNewValue": "world"}'>{newValue} {anotherNewValue}!</div>
  */
-export const assignBinder: BinderDeprecated<Assign> = {
-  name: "assign",
-  routine(el: HTMLElement, value: any) {
+export class AssignBinder extends Binder<Assign, HTMLUnknownElement> {
+  static key = "assign";
+  routine(el: HTMLUnknownElement, value: any) {
     if (typeof value === "object") {
       return extend({ deep: false }, this.view.models, value);
     }
     console.warn("Value must be an object or propertyName is required");
-  },
+  }
 };

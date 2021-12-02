@@ -1,4 +1,4 @@
-import { BinderDeprecated } from "../types";
+import { Binder } from "../binder";
 import { camelCase } from "@ribajs/utils/src/type";
 
 /**
@@ -8,12 +8,12 @@ import { camelCase } from "@ribajs/utils/src/type";
  * @example
  * <div rv-assign-new='"hello"'>{new}</div>
  */
-export const assignPropertyBinder: BinderDeprecated<any> = {
-  name: "assign-*",
-  routine(el: HTMLElement, value: any) {
+export class AssignPropertyBinder extends Binder<any, HTMLUnknownElement> {
+  static key = "assign-*";
+  routine(el: HTMLUnknownElement, value: any) {
     const propertyName = camelCase((this.args[0] as string).trim());
     const obj: any = {};
     obj[propertyName] = value;
     this.view.models[propertyName] = value;
-  },
+  }
 };

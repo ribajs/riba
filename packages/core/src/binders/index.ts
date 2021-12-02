@@ -1,4 +1,7 @@
+export * from "./animate-classname.binder";
 export * from "./add-class.binder";
+export * from "./assign-property.binder";
+export * from "./assign.binder";
 // export * from "./attribute.binder";
 export * from "./checked.binder";
 export * from "./co-attribute.binder";
@@ -12,6 +15,7 @@ export * from "./if.binder";
 export * from "./on-event.binder";
 export * from "./parent.binder";
 export * from "./show.binder";
+export * from "./style-css-property.binder";
 export * from "./text.binder";
 export * from "./unchecked.binder";
 export * from "./unless.binder";

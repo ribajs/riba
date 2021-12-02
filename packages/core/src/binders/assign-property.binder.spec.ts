@@ -1,12 +1,10 @@
 import { Riba } from "../riba";
-
 import { dotAdapter } from "../adapters/dot.adapter";
-
-import { assignPropertyBinder } from "./assign-property.binder";
+import { AssignPropertyBinder } from "./assign-property.binder";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
-riba.module.binderDeprecated.regist(assignPropertyBinder);
+riba.module.binder.regist(AssignPropertyBinder);
 
 describe("riba.binders", () => {
   let element: HTMLDivElement;

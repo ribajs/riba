@@ -1,6 +1,3 @@
-export { animateStarBinder } from "./animate-classname.binder";
-export { assignBinder } from "./assign.binder";
-export { assignPropertyBinder } from "./assign-property.binder";
 export { blockBinder } from "./block.binder";
 export { classStarBinder } from "./class-name.binder";
 export { styleStarBinder } from "./style-css-property.binder";

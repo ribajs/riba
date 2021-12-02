@@ -1,10 +1,10 @@
-import { Riba, valueBinder } from "@ribajs/core";
+import { Riba, ValueBinder } from "@ribajs/core";
 
 import { onEventBinder } from "./on-event.binder";
 
 describe("riba.binders", () => {
   const riba = new Riba();
-  riba.module.binder.regists([onEventBinder, valueBinder]);
+  riba.module.binder.regists([onEventBinder, ValueBinder]);
 
   let element: HTMLInputElement;
   let fragment: DocumentFragment;
