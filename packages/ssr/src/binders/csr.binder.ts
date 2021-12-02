@@ -1,5 +1,4 @@
-import { BinderDeprecated } from "@ribajs/core";
-
+import { Binder } from "@ribajs/core";
 
 /**
  * csr
@@ -9,11 +8,11 @@ import { BinderDeprecated } from "@ribajs/core";
  * <div rv-csr-style="{'backgroundColor':'blue'}"></div>
  * ```
  */
-export const csrBinder: BinderDeprecated<Partial<CSSStyleDeclaration>> = {
-  name: "csr-*",
+export class CsrBinder extends Binder<any, HTMLElement> {
+  static key = "csr-*";
   routine(el: HTMLElement, value: Partial<CSSStyleDeclaration>) {
     const binderName = this.args[0];
     // TODO use prefix from config and remove single quotes in json string (if present)
     el.setAttribute(`rv-${binderName}`, `'${JSON.stringify(value)}'`);
-  },
-};
+  }
+}

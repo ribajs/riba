@@ -59,10 +59,12 @@ export class MasonryBinder extends Binder<Options, HTMLElement> {
       masonry.destroy();
       masonry = null;
     }
-    this.images.forEach((img: HTMLImageElement) => {
-      // Image size changed
-      this.resizeObserver?.unobserve(img);
-    });
+    if(this.images) {
+      this.images.forEach((img: HTMLImageElement) => {
+        // Image size changed
+        this.resizeObserver?.unobserve(img);
+      });
+    }
 
     this.resizeObserver?.unobserve(el);
 
