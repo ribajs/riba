@@ -115,7 +115,6 @@ export class ShopifyLoginFormComponent extends Component {
    * Create an account submit using the login form
    */
   public create(event: Event) {
-
     if (!this.createCustomerForm) {
       console.error("No create form found");
       return false;

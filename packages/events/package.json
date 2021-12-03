@@ -30,6 +30,6 @@
     "jest-config": "^27.4.3",
     "jest-extended": "^1.2.0",
     "ts-jest": "^27.0.7",
-    "typescript": "4.4.4"
+    "typescript": "4.5.2"
   }
 }

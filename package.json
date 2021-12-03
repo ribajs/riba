@@ -92,7 +92,7 @@
     "sass": "^1.44.0",
     "source-map-support": "^0.5.21",
     "ts-jest": "^27.0.7",
-    "typescript": "4.4.4",
+    "typescript": "4.5.2",
     "webpack-glob-entry": "^2.1.1"
   },
   "workspaces": [

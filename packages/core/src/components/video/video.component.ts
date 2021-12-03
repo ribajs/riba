@@ -129,7 +129,7 @@ export class VideoComponent extends Component {
     return this.video?.preload;
   }
 
-  public set preload(preload: string) {
+  public set preload(preload: "" | "none" | "metadata" | "auto") {
     this.video.preload = preload;
     this.onUpdate();
   }
@@ -318,7 +318,11 @@ export class VideoComponent extends Component {
     }
 
     if (this.video.hasAttribute("preload")) {
-      this.preload = this.video.getAttribute("preload") || "";
+      this.preload = (this.video.getAttribute("preload") || "") as
+        | ""
+        | "none"
+        | "metadata"
+        | "auto";
     }
 
     if (this.video.hasAttribute("disablePictureInPicture")) {

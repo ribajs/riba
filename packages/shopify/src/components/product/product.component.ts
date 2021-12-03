@@ -264,14 +264,13 @@ export class ShopifyProductComponent extends Component {
     const generalImages: string[] = [];
 
     if (this.scope.product) {
-  
       // add images without optionName in filename
       this.scope.product.images.forEach((image: string) => {
         if (!image.toLowerCase().includes(`${optionName}-`)) {
           generalImages.push(image);
         }
       });
-  
+
       // remove variant images from copied array
       this.scope.product.variants.forEach((variant: ShopifyProductVariant) => {
         let index = -1;
@@ -363,7 +362,7 @@ export class ShopifyProductComponent extends Component {
    */
   private prepareVariant(variant: PreparedProductVariant) {
     if (variant === null) {
-      console.warn('Warn: Variant is null!');
+      console.warn("Warn: Variant is null!");
       return null;
     }
 
@@ -373,7 +372,7 @@ export class ShopifyProductComponent extends Component {
         variant.options[this.colorOption.position - 1]
       );
     } else {
-      console.warn('Warn: colorOption not defined');
+      console.warn("Warn: colorOption not defined");
       variant.images = [];
     }
 
