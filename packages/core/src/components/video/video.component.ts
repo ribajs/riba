@@ -126,7 +126,7 @@ export class VideoComponent extends Component {
   }
 
   public get preload() {
-    return this.video?.preload;
+    return this.video?.preload as "" | "none" | "metadata" | "auto";
   }
 
   public set preload(preload: "" | "none" | "metadata" | "auto") {
