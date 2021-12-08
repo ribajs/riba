@@ -10,11 +10,10 @@ exports.start = void 0;
 const path_1 = __importDefault(require("path"));
 const webpack_1 = __importDefault(require("webpack"));
 const webpack_dev_server_1 = __importDefault(require("webpack-dev-server"));
-const pkg_dir_1 = __importDefault(require("pkg-dir"));
-const get_port_1 = __importDefault(require("get-port"));
+const pkg_dir_1 = __importDefault(require("./dependencies/pkg-dir"));
+const get_port_1 = __importDefault(require("./dependencies/get-port"));
 const yargs_1 = __importDefault(require("yargs/yargs"));
 const helpers_1 = require("yargs/helpers");
-const rootPath = pkg_dir_1.default.sync(process.cwd()) || process.cwd();
 const argv = (0, yargs_1.default)((0, helpers_1.hideBin)(process.argv)).argv;
 const env = {
     production: argv.env === "production",
@@ -23,6 +22,7 @@ const env = {
 const start = async () => {
     let webpackConfig;
     try {
+        const rootPath = (await (0, pkg_dir_1.default)(process.cwd())) || process.cwd();
         const webpackPath = path_1.default.resolve(rootPath, "webpack.config.js");
         webpackConfig = await require(webpackPath)({
             production: env.production,

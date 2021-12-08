@@ -4,12 +4,11 @@
 import path from "path";
 import webpack from "webpack";
 import WDS from "webpack-dev-server";
-import pkgDir from "pkg-dir";
-import getPort from "get-port";
+import pkgDir from "./dependencies/pkg-dir";
+import getPort from "./dependencies/get-port";
 import yargs from "yargs/yargs";
 import { hideBin } from "yargs/helpers";
 
-const rootPath = pkgDir.sync(process.cwd()) || process.cwd();
 const argv = yargs(hideBin(process.argv)).argv as any;
 
 const env = {
@@ -20,6 +19,7 @@ const env = {
 export const start = async () => {
   let webpackConfig;
   try {
+    const rootPath = (await pkgDir(process.cwd())) || process.cwd();
     const webpackPath = path.resolve(rootPath, "webpack.config.js");
     webpackConfig = await require(webpackPath)({
       production: env.production,

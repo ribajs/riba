@@ -5,7 +5,7 @@ process.env.NODE_OPTIONS = undefined;
 import { app, BrowserWindow, ipcMain } from "electron";
 import * as path from "path";
 import { promises as fs } from "fs";
-import pkgDir from "pkg-dir";
+import pkgDir from "./dependencies/pkg-dir";
 
 const isDevelopment = process.env.NODE_ENV !== "production";
 let mainWindow: BrowserWindow;

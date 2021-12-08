@@ -2,10 +2,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
 import { resolve, dirname, basename, extname } from "path";
-import pkgDir from "pkg-dir";
+import pkgDir from "./dependencies/pkg-dir";
 import { existsSync, lstatSync } from "fs";
 
-export const rootPath = pkgDir.sync(process.cwd()) || process.cwd();
+export const getRootPath = async () => {
+  return (await pkgDir(process.cwd())) || process.cwd();
+};
 
 export const findDir = (searchPaths: string[]) => {
   let result = null;
@@ -31,9 +33,4 @@ export const findFile = (rootDir: string, searchForFiles: string[]) => {
   return result;
 };
 
-export {
-  resolve,
-  dirname,
-  basename,
-  extname,
-};
+export { resolve, dirname, basename, extname };

@@ -9,7 +9,7 @@ import * as Express from "express";
 import { AppModule } from "./app.module";
 import { app as electron } from "electron";
 import { webpackServer } from "./webpack-server";
-import * as getPort from "get-port";
+import getPort from "../dependencies/get-port";
 import { Config, Env } from "../typings";
 
 async function bootstrap(env: Env, config: Config) {
