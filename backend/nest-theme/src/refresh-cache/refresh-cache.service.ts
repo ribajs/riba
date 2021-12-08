@@ -1,6 +1,6 @@
 import { Injectable, Logger, OnApplicationBootstrap } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import fetch from 'node-fetch';
+import { fetch } from '../dependencies/fetch';
 import type { FullThemeConfig } from '../types/theme-config';
 import * as cheerio from 'cheerio';
 

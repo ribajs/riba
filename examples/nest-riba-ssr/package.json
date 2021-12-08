@@ -41,7 +41,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "find-root": "^1.1.0",
-    "jsdom": "^18.1.1",
+    "jsdom": "^19.0.0",
     "pug": "^3.0.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",

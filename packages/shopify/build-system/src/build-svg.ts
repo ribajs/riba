@@ -5,7 +5,7 @@ import gulp from "gulp";
 import plumber from "gulp-plumber";
 import chokidar from "chokidar";
 import size from "gulp-size";
-import { vinylPaths } from "./vinyl-paths";
+import { vinylPaths } from "./dependencies/vinyl-paths";
 import del from "del";
 import svgmin from "gulp-svgmin";
 import cheerio from "gulp-cheerio";
@@ -77,7 +77,7 @@ const removeSnippetIcons = async (files: string[]) => {
         pretty: true,
       })
     );
-}
+};
 
 /**
  * Processing for SVGs prior to deployment - adds accessibility markup.
@@ -132,7 +132,7 @@ const removeAssetIcons = async (files: string[]) => {
         pretty: true,
       })
     );
-}
+};
 
 /**
  * Pre-processing for svg icons as snippets
