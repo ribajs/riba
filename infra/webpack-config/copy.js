@@ -12,11 +12,15 @@ const rootPath = process.cwd();
 const getCopyPluginConfigForScssRibaModule = (config, moduleName) => {
   const modulePath = isAvailable(moduleName);
   if (modulePath) {
+
+    const publicPath = config.copyAssets.path || path.resolve(
+      rootPath,
+      config.copyAssets.foldername);
+
     // Copy @ribajs/xyz scss files
     var moduleConfig = {
       from: modulePath + "/**/*.scss",
-      to: path.resolve(
-        `${rootPath}/${config.copyAssets.foldername}/scss/vendors/${moduleName}`
+      to: path.resolve(publicPath, 'scss/vendors', moduleName
       ),
       toType: "dir",
       context: modulePath + '/src',
@@ -29,12 +33,16 @@ const getCopyPluginConfigForScssRibaModule = (config, moduleName) => {
 const getCopyPluginConfigForImages = (config, moduleName) => {
   const modulePath = isAvailable(moduleName);
   if (modulePath) {
+
+    const publicPath = config.copyAssets.path || path.resolve(
+      rootPath,
+      config.copyAssets.foldername);
+
     // Copy @ribajs/xyz scss files
     var moduleConfig = {
       from: modulePath + "/**/*.{png,svg}",
       to: path.resolve(
-        rootPath,
-        config.copyAssets.foldername,
+        publicPath,
         `images/vendors/${moduleName}`,
       ),
       toType: "dir",
@@ -48,13 +56,17 @@ const getCopyPluginConfigForImages = (config, moduleName) => {
 const getCopyPluginConfigForIconsetRibaModule = (config, moduleName) => {
   const modulePath = isAvailable(moduleName);
   if (modulePath) {
+    const publicPath = config.copyAssets.path || path.resolve(
+      rootPath,
+      config.copyAssets.foldername);
+
     // Copy iconset svg's
     const moduleConfig = {
       from: path.resolve(
         modulePath,
         "dist/svg/*.svg"
       ),
-      to: path.resolve(rootPath, config.copyAssets.foldername, `iconset`),
+      to: path.resolve(publicPath, `iconset`),
       toType: "dir",
       context: path.join(modulePath, "dist"),
     };
@@ -71,6 +83,11 @@ const getCopyPluginConfigForScssThirdPartyModule = (
 ) => {
   const modulePath = isAvailable(moduleName);
   if (modulePath) {
+
+    const publicPath = config.copyAssets.path || path.resolve(
+      rootPath,
+      config.copyAssets.foldername);
+
     // Copy bootstrap scss files. Note: `require.resolve('bootstrap')` resolves to `'bootstrap/dist/js/bootstrap.js'` because this is the main file in package.json
     const moduleConfig = {
       from: path.join(
@@ -78,9 +95,7 @@ const getCopyPluginConfigForScssThirdPartyModule = (
         scssPath,
         glob
       ),
-      to: path.resolve(
-        rootPath,
-        config.copyAssets.foldername,
+      to: path.resolve(publicPath,
         `scss/vendors`,
         moduleName
       ),

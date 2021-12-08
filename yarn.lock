@@ -3668,7 +3668,6 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/experimental-utils": ^5.6.0
@@ -3733,7 +3732,6 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/experimental-utils": ^5.6.0
@@ -3798,7 +3796,6 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/experimental-utils": ^5.6.0
@@ -3862,7 +3859,6 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/experimental-utils": ^5.6.0
@@ -3923,7 +3919,6 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/parser": ^5.6.0
@@ -3983,7 +3978,6 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/parser": ^5.6.0
@@ -4044,7 +4038,6 @@ __metadata:
     "@ribajs/types": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@types/node": ^16.11.12
     "@types/webpack-env": ^1.16.3
@@ -4112,7 +4105,6 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/experimental-utils": ^5.6.0
@@ -4175,7 +4167,6 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/experimental-utils": ^5.6.0
@@ -4239,7 +4230,6 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/experimental-utils": ^5.6.0
@@ -4305,7 +4295,6 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/experimental-utils": ^5.6.0
@@ -4372,7 +4361,6 @@ __metadata:
     "@ribajs/types": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/experimental-utils": ^5.6.0
@@ -4437,7 +4425,6 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/experimental-utils": ^5.6.0
@@ -4501,7 +4488,6 @@ __metadata:
     "@ribajs/types": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@types/node": ^16.11.12
     "@types/webpack-env": ^1.16.3
@@ -4569,7 +4555,6 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/experimental-utils": ^5.6.0
@@ -4635,7 +4620,6 @@ __metadata:
     "@ribajs/types": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/parser": ^5.6.0
@@ -4695,7 +4679,6 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/experimental-utils": ^5.6.0
@@ -4757,7 +4740,6 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/experimental-utils": ^5.6.0
@@ -4820,7 +4802,6 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/experimental-utils": ^5.6.0
@@ -4881,7 +4862,6 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/parser": ^5.6.0
@@ -4940,7 +4920,6 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/parser": ^5.6.0
@@ -4999,7 +4978,6 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/parser": ^5.6.0
@@ -5061,7 +5039,6 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/parser": ^5.6.0
@@ -5125,7 +5102,6 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/experimental-utils": ^5.6.0
@@ -5189,7 +5165,6 @@ __metadata:
     "@ribajs/types": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/parser": ^5.6.0
@@ -5255,7 +5230,6 @@ __metadata:
     "@ribajs/types": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/parser": ^5.6.0
@@ -5317,7 +5291,6 @@ __metadata:
     "@ribajs/types": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/parser": ^5.6.0
@@ -5443,7 +5416,6 @@ __metadata:
     "@ribajs/types": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/parser": ^5.6.0
@@ -5510,7 +5482,6 @@ __metadata:
     "@ribajs/types": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/experimental-utils": ^5.6.0
@@ -5576,7 +5547,6 @@ __metadata:
     "@ribajs/types": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/parser": ^5.6.0
@@ -6404,9 +6374,9 @@ __metadata:
     tsconfig-paths: ^3.12.0
     typescript: 4.5.2
   peerDependencies:
-    pug: ^3.0.0
-    tinyliquid: ^0.2.34
-    twig: ^1.15.4
+    pug: ^3.x.x
+    tinyliquid: ^0.x.x
+    twig: ^1.x.x
   languageName: unknown
   linkType: soft
 
@@ -6467,9 +6437,9 @@ __metadata:
     whatwg-encoding: ^2.0.0
     yaml: next
   peerDependencies:
-    pug: ^3.0.0
-    tinyliquid: ^0.2.34
-    twig: ^1.15.4
+    pug: "*"
+    tinyliquid: ^0.x.x
+    twig: ^1.x.x
   languageName: unknown
   linkType: soft
 
@@ -6673,7 +6643,6 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/experimental-utils": ^5.6.0
@@ -6736,7 +6705,6 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/experimental-utils": ^5.6.0
@@ -7039,7 +7007,6 @@ __metadata:
     "@types/vinyl": ^2.0.6
     "@types/vinyl-fs": ^2.4.12
     "@types/vinyl-paths": ^0.0.31
-    "@types/webpack": ^5.28.0
     "@types/webpack-stream": ^3.2.12
     "@typescript-eslint/eslint-plugin": ^5.6.0
     "@typescript-eslint/parser": ^5.6.0
@@ -7082,20 +7049,20 @@ __metadata:
     vinyl: ^2.2.1
     vinyl-fs: ^3.0.3
     vinyl-paths: ^4.0.0
+    webpack: ^5.x.x
+    webpack-cli: ^4.x.x
     webpack-stream: ^7.0.0
   peerDependencies:
     "@ribajs/webpack-config": "*"
-    gulp: ^4.0.2
-    gulp-cheerio: ^1.0.0
-    gulp-ext-replace: ^0.3.0
-    gulp-plumber: ^1.2.1
-    gulp-rename: ^2.0.0
-    gulp-size: ^3.0.0
-    gulp-svgmin: ^3.0.0
-    gulp-util: ^3.0.8
-    gulp-zip: ^5.0.2
-    webpack: ^5.3.2
-    webpack-cli: ^4.1.0
+    gulp: ^4.x.x
+    gulp-cheerio: "*"
+    gulp-ext-replace: "*"
+    gulp-plumber: "*"
+    gulp-rename: "*"
+    gulp-size: "*"
+    gulp-svgmin: "*"
+    gulp-util: "*"
+    gulp-zip: "*"
   dependenciesMeta:
     "@ribajs/shopify-tda":
       optional: true
@@ -7222,7 +7189,7 @@ __metadata:
     pkg-dir: ^5.0.0
     postcss: ^8.4.4
     postcss-loader: ^6.2.1
-    pug: ^3.0.2
+    pug: ^3.x.x
     pug-loader: ^2.4.0
     raw-loader: ^4.0.2
     resolve-url-loader: ^4.0.0
@@ -7230,25 +7197,12 @@ __metadata:
     sass-loader: ^12.4.0
     style-loader: ^3.3.1
     terser-webpack-plugin: ^5.2.5
+    typescript: ^4.5.2
     webpack-dev-server: ^4.6.0
     webpack-node-externals: ^3.0.0
     webpackbar: ^5.0.2
   peerDependencies:
-    assert: ^2.0.0
-    browserify-zlib: ^0.2.0
-    buffer: ^6.0.3
-    crypto-browserify: ^3.12.0
-    events: ^3.2.0
-    https-browserify: ^1.0.0
-    path-browserify: ^1.0.1
-    punycode: ^2.1.1
-    querystring-es3: ^0.2.1
-    stream-browserify: ^3.0.0
-    stream-http: ^3.1.1
-    string_decoder: ^1.3.0
-    url: ^0.11.0
-    util: ^0.12.3
-    webpack: ^5.3.2
+    webpack: ^5.x.x
   languageName: unknown
   linkType: soft
 
@@ -7257,14 +7211,18 @@ __metadata:
   resolution: "@ribajs/webpack-serve@workspace:infra/webpack-serve"
   dependencies:
     "@ribajs/webpack-config": "workspace:*"
+    "@tsconfig/node16": ^1.0.2
+    "@types/node": ^16.11.12
+    "@types/webpack-dev-server": ^4.5.0
+    "@types/yargs": ^17.0.7
     get-port: ^5.1.1
     pkg-dir: ^5.0.0
+    typescript: ^4.5.2
+    webpack: ^5.x.x
     webpack-dev-server: ^4.6.0
     yargs: ^17.3.0
-  peerDependencies:
-    webpack: ^5.3.2
   bin:
-    webpack-serve: index.js
+    webpack-serve: dist/cjs/index.js
   languageName: unknown
   linkType: soft
 
@@ -7540,6 +7498,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/bonjour@npm:*":
+  version: 3.5.9
+  resolution: "@types/bonjour@npm:3.5.9"
+  dependencies:
+    "@types/node": "*"
+  checksum: a04f2eb99ed3b3a8bfc2443dee9c7a7aa904f552e595e9c8459e6cf937ba03599b839197657ebb8ce6be9b93ce4b123092fa19c8bab1d2c84d58f1ef6ad9f571
+  languageName: node
+  linkType: hard
+
 "@types/bootstrap@npm:^5.1.6":
   version: 5.1.6
   resolution: "@types/bootstrap@npm:5.1.6"
@@ -7608,6 +7575,16 @@ __metadata:
   version: 1.2.11
   resolution: "@types/component-emitter@npm:1.2.11"
   checksum: 0e081c5f7a4b113af3732f67ad9ebb487d5c239d440d96938ff9a679d18bb9337a513638e12b5b02a7a921494eef18c5a4d78f1188bc43a12290edd74c42a9c7
+  languageName: node
+  linkType: hard
+
+"@types/connect-history-api-fallback@npm:*":
+  version: 1.3.5
+  resolution: "@types/connect-history-api-fallback@npm:1.3.5"
+  dependencies:
+    "@types/express-serve-static-core": "*"
+    "@types/node": "*"
+  checksum: 464d06e5ab00f113fa89978633d5eb00d225aeb4ebbadc07f6f3bc337aa7cbfcd74957b2a539d6d47f2e128e956a17819973ec7ae62ade2e16e367a6c38b8d3a
   languageName: node
   linkType: hard
 
@@ -7693,13 +7670,6 @@ __metadata:
   version: 0.0.45
   resolution: "@types/estree@npm:0.0.45"
   checksum: 82c3eed5ab5b20ecd58a6d19176b9be0523c00a794db11f8ed08faee851066f09a959b88a1983ad52313f750e1cfe6b9565904ad2f4f7cf5c1f96300cde04ca0
-  languageName: node
-  linkType: hard
-
-"@types/estree@npm:^0.0.46":
-  version: 0.0.46
-  resolution: "@types/estree@npm:0.0.46"
-  checksum: 620f7549c8cf99fe1c91a943a42ae2684c18f6007dc1bd6a439a2bf3204022ab746ffb3be5244c70d43a822beeb3c948216be1a69cb25e79005daeca4ebe5722
   languageName: node
   linkType: hard
 
@@ -8317,6 +8287,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/serve-index@npm:*":
+  version: 1.9.1
+  resolution: "@types/serve-index@npm:1.9.1"
+  dependencies:
+    "@types/express": "*"
+  checksum: 026f3995fb500f6df7c3fe5009e53bad6d739e20b84089f58ebfafb2f404bbbb6162bbe33f72d2f2af32d5b8d3799c8e179793f90d9ed5871fb8591190bb6056
+  languageName: node
+  linkType: hard
+
 "@types/serve-static@npm:*":
   version: 1.13.8
   resolution: "@types/serve-static@npm:1.13.8"
@@ -8511,6 +8490,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/webpack-dev-middleware@npm:*":
+  version: 5.0.2
+  resolution: "@types/webpack-dev-middleware@npm:5.0.2"
+  dependencies:
+    "@types/connect": "*"
+    tapable: ^2.1.1
+    webpack: ^5.38.1
+  checksum: fd7ff7608362a1bd01ca7f89d1f3308d21519e4271a16f672e7801b087618c9fda10a102db61a8f5fda1253d580bfc227d574feb10ee0d87d24288f19bd846a9
+  languageName: node
+  linkType: hard
+
+"@types/webpack-dev-server@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "@types/webpack-dev-server@npm:4.5.0"
+  dependencies:
+    "@types/bonjour": "*"
+    "@types/connect-history-api-fallback": "*"
+    "@types/express": "*"
+    "@types/serve-index": "*"
+    "@types/serve-static": "*"
+    "@types/webpack-dev-middleware": "*"
+    chokidar: ^3.5.1
+    http-proxy-middleware: ^2.0.0
+    webpack: "*"
+  checksum: 3d4c4efba232f077d998811bc56fa90567f0832980ef694a0bca19d61dd0a3aa35071376cc9418c669ec6c844efa1e68cdb692e87da7bf3844192eda098912dd
+  languageName: node
+  linkType: hard
+
 "@types/webpack-env@npm:^1.16.3":
   version: 1.16.3
   resolution: "@types/webpack-env@npm:1.16.3"
@@ -8553,17 +8560,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/webpack@npm:^5.28.0":
-  version: 5.28.0
-  resolution: "@types/webpack@npm:5.28.0"
-  dependencies:
-    "@types/node": "*"
-    tapable: ^2.2.0
-    webpack: ^5
-  checksum: a038d7e12dd109c6a8d2eb744fd32070ef94f1655e730fb1443b370db98864c3a0e408638b02d12ba08269b9c012b3be8b801117ced2d1102e7676203fd663ed
-  languageName: node
-  linkType: hard
-
 "@types/yargs-parser@npm:*":
   version: 15.0.0
   resolution: "@types/yargs-parser@npm:15.0.0"
@@ -8586,6 +8582,15 @@ __metadata:
   dependencies:
     "@types/yargs-parser": "*"
   checksum: 0968b06d2f6df764cb180a4089b293ae313a310b0c3524c296f93ac896ca1ed8d857b595db0388355f9f45772226d25d6a4f7df359302f245040a63ba057ae5a
+  languageName: node
+  linkType: hard
+
+"@types/yargs@npm:^17.0.7":
+  version: 17.0.7
+  resolution: "@types/yargs@npm:17.0.7"
+  dependencies:
+    "@types/yargs-parser": "*"
+  checksum: 520e803720b2a626338c0e2b61825dd1b956910fec4d855018c17e62cf9fb41eb67bcf122ba5c6fb569b1bfac73520d5d73e8be502b87f9a551619df441b1875
   languageName: node
   linkType: hard
 
@@ -8785,16 +8790,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webassemblyjs/ast@npm:1.11.0":
-  version: 1.11.0
-  resolution: "@webassemblyjs/ast@npm:1.11.0"
-  dependencies:
-    "@webassemblyjs/helper-numbers": 1.11.0
-    "@webassemblyjs/helper-wasm-bytecode": 1.11.0
-  checksum: ee81d1a40d04da516e82296db366be8236acb7ef26b86877723cfd0a23e8c9579895beb523be1491f06f06db2bccdf6102ea99099fcdd41ab17f236524b8e747
-  languageName: node
-  linkType: hard
-
 "@webassemblyjs/ast@npm:1.11.1":
   version: 1.11.1
   resolution: "@webassemblyjs/ast@npm:1.11.1"
@@ -8805,24 +8800,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webassemblyjs/floating-point-hex-parser@npm:1.11.0":
-  version: 1.11.0
-  resolution: "@webassemblyjs/floating-point-hex-parser@npm:1.11.0"
-  checksum: bcfbf90a1e23217c4f5200a1d20226f07b2ef5adddea1f0ed7729c04efec8445ec1bc9e57a2f29480ea80e25a50c6b3d46ebb90cd776de8ffbbb648d4235e332
-  languageName: node
-  linkType: hard
-
 "@webassemblyjs/floating-point-hex-parser@npm:1.11.1":
   version: 1.11.1
   resolution: "@webassemblyjs/floating-point-hex-parser@npm:1.11.1"
   checksum: b8efc6fa08e4787b7f8e682182d84dfdf8da9d9c77cae5d293818bc4a55c1f419a87fa265ab85252b3e6c1fd323d799efea68d825d341a7c365c64bc14750e97
-  languageName: node
-  linkType: hard
-
-"@webassemblyjs/helper-api-error@npm:1.11.0":
-  version: 1.11.0
-  resolution: "@webassemblyjs/helper-api-error@npm:1.11.0"
-  checksum: d606eef863c028ba872afe706ad56acc5cdcae568f90c74a6159c063dfa4c199a41f81b17a2bf02a31c059a68d6acc115a020109e09d0dfa77f639dd5a45815a
   languageName: node
   linkType: hard
 
@@ -8833,28 +8814,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webassemblyjs/helper-buffer@npm:1.11.0":
-  version: 1.11.0
-  resolution: "@webassemblyjs/helper-buffer@npm:1.11.0"
-  checksum: cce45295e533a83db0fd9a31e2f94d679a835c88765eca18922a0c6d5fddbcb515ee11f53c7867e17220c647f748bbd0e30af717086361b1f121cfd4ccd7ab9c
-  languageName: node
-  linkType: hard
-
 "@webassemblyjs/helper-buffer@npm:1.11.1":
   version: 1.11.1
   resolution: "@webassemblyjs/helper-buffer@npm:1.11.1"
   checksum: a337ee44b45590c3a30db5a8b7b68a717526cf967ada9f10253995294dbd70a58b2da2165222e0b9830cd4fc6e4c833bf441a721128d1fe2e9a7ab26b36003ce
-  languageName: node
-  linkType: hard
-
-"@webassemblyjs/helper-numbers@npm:1.11.0":
-  version: 1.11.0
-  resolution: "@webassemblyjs/helper-numbers@npm:1.11.0"
-  dependencies:
-    "@webassemblyjs/floating-point-hex-parser": 1.11.0
-    "@webassemblyjs/helper-api-error": 1.11.0
-    "@xtuc/long": 4.2.2
-  checksum: 66f20c755b2df23064128109c13178a9c24beac76278c1f36561ef87ce16cf3d92fc29e677921d86a952cc6bda5fb7d527947663bb21bd092932ce05ca278044
   languageName: node
   linkType: hard
 
@@ -8869,29 +8832,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webassemblyjs/helper-wasm-bytecode@npm:1.11.0":
-  version: 1.11.0
-  resolution: "@webassemblyjs/helper-wasm-bytecode@npm:1.11.0"
-  checksum: 0110bfa3755886ea402b86256ce98a9106d0349672e0528c5da27c7672479a4d885458e231591cb0a99c1b07a93c5d046a86fdcbf0c9245c0ade11a9b3a4d772
-  languageName: node
-  linkType: hard
-
 "@webassemblyjs/helper-wasm-bytecode@npm:1.11.1":
   version: 1.11.1
   resolution: "@webassemblyjs/helper-wasm-bytecode@npm:1.11.1"
   checksum: eac400113127832c88f5826bcc3ad1c0db9b3dbd4c51a723cfdb16af6bfcbceb608170fdaac0ab7731a7e18b291be7af68a47fcdb41cfe0260c10857e7413d97
-  languageName: node
-  linkType: hard
-
-"@webassemblyjs/helper-wasm-section@npm:1.11.0":
-  version: 1.11.0
-  resolution: "@webassemblyjs/helper-wasm-section@npm:1.11.0"
-  dependencies:
-    "@webassemblyjs/ast": 1.11.0
-    "@webassemblyjs/helper-buffer": 1.11.0
-    "@webassemblyjs/helper-wasm-bytecode": 1.11.0
-    "@webassemblyjs/wasm-gen": 1.11.0
-  checksum: 54153a703dfc18884a301f75bd29af58177ba890e0a0ca57561cd1d7553a18875a46966f546054e15de6c7280ce30cc9e63c6986bad6093583e188c08168b4b6
   languageName: node
   linkType: hard
 
@@ -8907,30 +8851,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webassemblyjs/ieee754@npm:1.11.0":
-  version: 1.11.0
-  resolution: "@webassemblyjs/ieee754@npm:1.11.0"
-  dependencies:
-    "@xtuc/ieee754": ^1.2.0
-  checksum: c4dbd174263b98ef4d18ce3200a08094e7d4e66ba703cf3cd8a581d5676648e2e182e370437a64a1a7b770f2956782f9e67ab980833f0d123752a3b7c4fa9248
-  languageName: node
-  linkType: hard
-
 "@webassemblyjs/ieee754@npm:1.11.1":
   version: 1.11.1
   resolution: "@webassemblyjs/ieee754@npm:1.11.1"
   dependencies:
     "@xtuc/ieee754": ^1.2.0
   checksum: 23a0ac02a50f244471631802798a816524df17e56b1ef929f0c73e3cde70eaf105a24130105c60aff9d64a24ce3b640dad443d6f86e5967f922943a7115022ec
-  languageName: node
-  linkType: hard
-
-"@webassemblyjs/leb128@npm:1.11.0":
-  version: 1.11.0
-  resolution: "@webassemblyjs/leb128@npm:1.11.0"
-  dependencies:
-    "@xtuc/long": 4.2.2
-  checksum: 0d5f977d600da64d448dda84df99f6b6e0c2773eb30f5b4e5bb733f12da56377acec1cc275979973277d6caf8bef90d29e3ba7442674c9e5a107b010ce267864
   languageName: node
   linkType: hard
 
@@ -8943,33 +8869,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webassemblyjs/utf8@npm:1.11.0":
-  version: 1.11.0
-  resolution: "@webassemblyjs/utf8@npm:1.11.0"
-  checksum: 6e7d2024cdfb6104fdc9865d5f4a1c3212fde96b8fe229375e1b9034929f0b5587d644ca095005cc1a8b3a4d00030581f9d3a9a1fd53c05ed74d77f178ee1de0
-  languageName: node
-  linkType: hard
-
 "@webassemblyjs/utf8@npm:1.11.1":
   version: 1.11.1
   resolution: "@webassemblyjs/utf8@npm:1.11.1"
   checksum: 972c5cfc769d7af79313a6bfb96517253a270a4bf0c33ba486aa43cac43917184fb35e51dfc9e6b5601548cd5931479a42e42c89a13bb591ffabebf30c8a6a0b
-  languageName: node
-  linkType: hard
-
-"@webassemblyjs/wasm-edit@npm:1.11.0":
-  version: 1.11.0
-  resolution: "@webassemblyjs/wasm-edit@npm:1.11.0"
-  dependencies:
-    "@webassemblyjs/ast": 1.11.0
-    "@webassemblyjs/helper-buffer": 1.11.0
-    "@webassemblyjs/helper-wasm-bytecode": 1.11.0
-    "@webassemblyjs/helper-wasm-section": 1.11.0
-    "@webassemblyjs/wasm-gen": 1.11.0
-    "@webassemblyjs/wasm-opt": 1.11.0
-    "@webassemblyjs/wasm-parser": 1.11.0
-    "@webassemblyjs/wast-printer": 1.11.0
-  checksum: 9ca4c3ff9abdb9648fc1039f8dcf600f7017a270724ce7751f125b49d19daae4731b95dfd14e4c077b09a7ab7c0105fa5820dc1ded3bdc0257509d5e3d6d6b27
   languageName: node
   linkType: hard
 
@@ -8989,19 +8892,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webassemblyjs/wasm-gen@npm:1.11.0":
-  version: 1.11.0
-  resolution: "@webassemblyjs/wasm-gen@npm:1.11.0"
-  dependencies:
-    "@webassemblyjs/ast": 1.11.0
-    "@webassemblyjs/helper-wasm-bytecode": 1.11.0
-    "@webassemblyjs/ieee754": 1.11.0
-    "@webassemblyjs/leb128": 1.11.0
-    "@webassemblyjs/utf8": 1.11.0
-  checksum: 678e2b8ee3e13ebcd7794c78379ab95501e4c8499b4d4b669bd9a780f3c34aecace7690d09adb0df7cc531ce8bfd28fdfad72df05c57a779c67595caafbc55ee
-  languageName: node
-  linkType: hard
-
 "@webassemblyjs/wasm-gen@npm:1.11.1":
   version: 1.11.1
   resolution: "@webassemblyjs/wasm-gen@npm:1.11.1"
@@ -9012,18 +8902,6 @@ __metadata:
     "@webassemblyjs/leb128": 1.11.1
     "@webassemblyjs/utf8": 1.11.1
   checksum: 1f6921e640293bf99fb16b21e09acb59b340a79f986c8f979853a0ae9f0b58557534b81e02ea2b4ef11e929d946708533fd0693c7f3712924128fdafd6465f5b
-  languageName: node
-  linkType: hard
-
-"@webassemblyjs/wasm-opt@npm:1.11.0":
-  version: 1.11.0
-  resolution: "@webassemblyjs/wasm-opt@npm:1.11.0"
-  dependencies:
-    "@webassemblyjs/ast": 1.11.0
-    "@webassemblyjs/helper-buffer": 1.11.0
-    "@webassemblyjs/wasm-gen": 1.11.0
-    "@webassemblyjs/wasm-parser": 1.11.0
-  checksum: 7f0e5ed309b7c9983f45deacb583a2508de418f8819a36782859bfe7ceabd2dc1a521c24129319ec10f03940c1ae20352c2dbcefe86561d9fae1246ee292c6c2
   languageName: node
   linkType: hard
 
@@ -9039,20 +8917,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webassemblyjs/wasm-parser@npm:1.11.0":
-  version: 1.11.0
-  resolution: "@webassemblyjs/wasm-parser@npm:1.11.0"
-  dependencies:
-    "@webassemblyjs/ast": 1.11.0
-    "@webassemblyjs/helper-api-error": 1.11.0
-    "@webassemblyjs/helper-wasm-bytecode": 1.11.0
-    "@webassemblyjs/ieee754": 1.11.0
-    "@webassemblyjs/leb128": 1.11.0
-    "@webassemblyjs/utf8": 1.11.0
-  checksum: cd861066c9fdd16a9b8c920aa6f27039e200f4d06aff35b438c1acc3e22ec81af26bacd1467f563edb7e00bf00d473ed12dc6d481089c61dc4e01f58e416a7d7
-  languageName: node
-  linkType: hard
-
 "@webassemblyjs/wasm-parser@npm:1.11.1":
   version: 1.11.1
   resolution: "@webassemblyjs/wasm-parser@npm:1.11.1"
@@ -9064,16 +8928,6 @@ __metadata:
     "@webassemblyjs/leb128": 1.11.1
     "@webassemblyjs/utf8": 1.11.1
   checksum: 1521644065c360e7b27fad9f4bb2df1802d134dd62937fa1f601a1975cde56bc31a57b6e26408b9ee0228626ff3ba1131ae6f74ffb7d718415b6528c5a6dbfc2
-  languageName: node
-  linkType: hard
-
-"@webassemblyjs/wast-printer@npm:1.11.0":
-  version: 1.11.0
-  resolution: "@webassemblyjs/wast-printer@npm:1.11.0"
-  dependencies:
-    "@webassemblyjs/ast": 1.11.0
-    "@xtuc/long": 4.2.2
-  checksum: 5462cf6c7ffb4082464c7238497064d067f1421648a5f9fa784d04223a876a9b41cbd95106e899326840aad36fea0b7a39cad264b5c73df8c7fc2bca6313fd74
   languageName: node
   linkType: hard
 
@@ -9550,15 +9404,6 @@ __metadata:
   bin:
     acorn: bin/acorn
   checksum: 1860f23c2107c910c6177b7b7be71be350db9e1080d814493fae143ae37605189504152d1ba8743ba3178d0b37269ce1ffc42b101547fdc1827078f82671e407
-  languageName: node
-  linkType: hard
-
-"acorn@npm:^8.0.4":
-  version: 8.0.4
-  resolution: "acorn@npm:8.0.4"
-  bin:
-    acorn: bin/acorn
-  checksum: 6f161c19abc7449345a458ba3b7a7eac3429d4dbce95708475f6bac088ea901f066c8a1101f0f6b575552ecf026fbc1235c85c1ba34a7aeb388e15aba0e33d0d
   languageName: node
   linkType: hard
 
@@ -15220,13 +15065,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"es-module-lexer@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "es-module-lexer@npm:0.4.0"
-  checksum: 74902044ef807eea13cc4ea9842ce0627eaa7e7c02b923218fc0443b0456b518e51de9da1e7c951646720251843255b6b8d45a2506226f0a57c1b73f88dfb7a2
-  languageName: node
-  linkType: hard
-
 "es-module-lexer@npm:^0.9.0":
   version: 0.9.2
   resolution: "es-module-lexer@npm:0.9.2"
@@ -20236,17 +20074,6 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"jest-worker@npm:^26.6.2":
-  version: 26.6.2
-  resolution: "jest-worker@npm:26.6.2"
-  dependencies:
-    "@types/node": "*"
-    merge-stream: ^2.0.0
-    supports-color: ^7.0.0
-  checksum: f9afa3b88e3f12027901e4964ba3ff048285b5783b5225cab28fac25b4058cea8ad54001e9a1577ee2bed125fac3ccf5c80dc507b120300cc1bbcb368796533e
-  languageName: node
-  linkType: hard
-
 "jest-worker@npm:^27.0.2":
   version: 27.0.2
   resolution: "jest-worker@npm:27.0.2"
@@ -24751,7 +24578,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"pug@npm:^3.0.2":
+"pug@npm:^3.0.2, pug@npm:^3.x.x":
   version: 3.0.2
   resolution: "pug@npm:3.0.2"
   dependencies:
@@ -26742,7 +26569,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"source-list-map@npm:^2.0.0, source-list-map@npm:^2.0.1":
+"source-list-map@npm:^2.0.0":
   version: 2.0.1
   resolution: "source-list-map@npm:2.0.1"
   checksum: 806efc6f75e7cd31e4815e7a3aaf75a45c704871ea4075cb2eb49882c6fca28998f44fc5ac91adb6de03b2882ee6fb02f951fdc85e6a22b338c32bfe19557938
@@ -27744,22 +27571,6 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"terser-webpack-plugin@npm:^5.1.1":
-  version: 5.1.1
-  resolution: "terser-webpack-plugin@npm:5.1.1"
-  dependencies:
-    jest-worker: ^26.6.2
-    p-limit: ^3.1.0
-    schema-utils: ^3.0.0
-    serialize-javascript: ^5.0.1
-    source-map: ^0.6.1
-    terser: ^5.5.1
-  peerDependencies:
-    webpack: ^5.1.0
-  checksum: 4b3dbd353022400dba04a5c695f2746dc513f22a4673fee22945821e209948c8cfc6068d2bffc06f3159a1b86cf7f5bd9e4df6d581feebde0bfbd24d2f813d32
-  languageName: node
-  linkType: hard
-
 "terser-webpack-plugin@npm:^5.1.3":
   version: 5.1.3
   resolution: "terser-webpack-plugin@npm:5.1.3"
@@ -27826,19 +27637,6 @@ fsevents@~2.3.1:
   bin:
     terser: bin/terser
   checksum: 1080faeb6d5cd155bb39d9cc41d20a590eafc9869560d5285f255f6858604dcd135311e344188a106f87fedb12d096ad3799cfc2e65acd470b85d468b1c7bd4c
-  languageName: node
-  linkType: hard
-
-"terser@npm:^5.5.1":
-  version: 5.5.1
-  resolution: "terser@npm:5.5.1"
-  dependencies:
-    commander: ^2.20.0
-    source-map: ~0.7.2
-    source-map-support: ~0.5.19
-  bin:
-    terser: bin/terser
-  checksum: 82c1bbb9174e97b833fc4e11267e70d957fff1cc632ad674eec022fe3ec15e4fff89d1fdc002335a3f961958387e0f0275da37a1d63197b67efe4e371789e58a
   languageName: node
   linkType: hard
 
@@ -28557,7 +28355,7 @@ typescript@4.3.5:
   languageName: node
   linkType: hard
 
-"typescript@npm:4.5.2":
+"typescript@npm:4.5.2, typescript@npm:^4.5.2":
   version: 4.5.2
   resolution: "typescript@npm:4.5.2"
   bin:
@@ -28577,7 +28375,7 @@ typescript@4.3.5:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@4.5.2#~builtin<compat/typescript>":
+"typescript@patch:typescript@4.5.2#~builtin<compat/typescript>, typescript@patch:typescript@^4.5.2#~builtin<compat/typescript>":
   version: 4.5.2
   resolution: "typescript@patch:typescript@npm%3A4.5.2#~builtin<compat/typescript>::version=4.5.2&hash=493e53"
   bin:
@@ -29317,16 +29115,6 @@ typescript@4.3.5:
   languageName: node
   linkType: hard
 
-"watchpack@npm:^2.0.0":
-  version: 2.1.0
-  resolution: "watchpack@npm:2.1.0"
-  dependencies:
-    glob-to-regexp: ^0.4.1
-    graceful-fs: ^4.1.2
-  checksum: fc5cef57dcfe601d20289464f0d18bee111793f2bd6047b4f4a3cefc09bd0adaa03d74f46b624660132182e0d0a7f62e3046fd762201ce1ec8ef8fa0150d3644
-  languageName: node
-  linkType: hard
-
 "watchpack@npm:^2.2.0":
   version: 2.2.0
   resolution: "watchpack@npm:2.2.0"
@@ -29400,7 +29188,7 @@ typescript@4.3.5:
   languageName: node
   linkType: hard
 
-"webpack-cli@npm:^4.9.1":
+"webpack-cli@npm:^4.9.1, webpack-cli@npm:^4.x.x":
   version: 4.9.1
   resolution: "webpack-cli@npm:4.9.1"
   dependencies:
@@ -29524,16 +29312,6 @@ typescript@4.3.5:
   languageName: node
   linkType: hard
 
-"webpack-sources@npm:^2.1.1":
-  version: 2.2.0
-  resolution: "webpack-sources@npm:2.2.0"
-  dependencies:
-    source-list-map: ^2.0.1
-    source-map: ^0.6.1
-  checksum: 8276fd6c90039d1e08acc51d53d5aa6efac43b5bec9dad878cb5ec7b336c93d25599f1675a354183ab31358a060421feda6f8e56f4453e53502c81b081fda102
-  languageName: node
-  linkType: hard
-
 "webpack-sources@npm:^3.2.2":
   version: 3.2.2
   resolution: "webpack-sources@npm:3.2.2"
@@ -29556,6 +29334,43 @@ typescript@4.3.5:
   peerDependencies:
     webpack: ^5.21.2
   checksum: e3069e0a4c9ee9ab7b0d68937be56471ffdc05bd5e0c696e672196da2d4454746a8da129ba773ab81760c079dfbb9fd9d10f64e6b7bc65548712a6be69dfd1e3
+  languageName: node
+  linkType: hard
+
+"webpack@npm:*, webpack@npm:^5.38.1, webpack@npm:^5.65.0, webpack@npm:^5.x.x":
+  version: 5.65.0
+  resolution: "webpack@npm:5.65.0"
+  dependencies:
+    "@types/eslint-scope": ^3.7.0
+    "@types/estree": ^0.0.50
+    "@webassemblyjs/ast": 1.11.1
+    "@webassemblyjs/wasm-edit": 1.11.1
+    "@webassemblyjs/wasm-parser": 1.11.1
+    acorn: ^8.4.1
+    acorn-import-assertions: ^1.7.6
+    browserslist: ^4.14.5
+    chrome-trace-event: ^1.0.2
+    enhanced-resolve: ^5.8.3
+    es-module-lexer: ^0.9.0
+    eslint-scope: 5.1.1
+    events: ^3.2.0
+    glob-to-regexp: ^0.4.1
+    graceful-fs: ^4.2.4
+    json-parse-better-errors: ^1.0.2
+    loader-runner: ^4.2.0
+    mime-types: ^2.1.27
+    neo-async: ^2.6.2
+    schema-utils: ^3.1.0
+    tapable: ^2.1.1
+    terser-webpack-plugin: ^5.1.3
+    watchpack: ^2.3.1
+    webpack-sources: ^3.2.2
+  peerDependenciesMeta:
+    webpack-cli:
+      optional: true
+  bin:
+    webpack: bin/webpack.js
+  checksum: 221ab8ccd440cb678269e86689704bbef81cf41393eb266625873e30c6980ffaa055bb1a7d14bf9fc0f5a2e6f03d15d068cbb995bc876757c01a4ca27fd2870c
   languageName: node
   linkType: hard
 
@@ -29593,79 +29408,6 @@ typescript@4.3.5:
   bin:
     webpack: bin/webpack.js
   checksum: d2a1baddaed03f2ce70c13501b89935d4bb4af30b4accb0d2dfbd00ec6f491eaf46272346cedcf013b477e131c8cc202ee0b2d2c51ece1cfb713fd2d98b80a52
-  languageName: node
-  linkType: hard
-
-"webpack@npm:^5":
-  version: 5.28.0
-  resolution: "webpack@npm:5.28.0"
-  dependencies:
-    "@types/eslint-scope": ^3.7.0
-    "@types/estree": ^0.0.46
-    "@webassemblyjs/ast": 1.11.0
-    "@webassemblyjs/wasm-edit": 1.11.0
-    "@webassemblyjs/wasm-parser": 1.11.0
-    acorn: ^8.0.4
-    browserslist: ^4.14.5
-    chrome-trace-event: ^1.0.2
-    enhanced-resolve: ^5.7.0
-    es-module-lexer: ^0.4.0
-    eslint-scope: ^5.1.1
-    events: ^3.2.0
-    glob-to-regexp: ^0.4.1
-    graceful-fs: ^4.2.4
-    json-parse-better-errors: ^1.0.2
-    loader-runner: ^4.2.0
-    mime-types: ^2.1.27
-    neo-async: ^2.6.2
-    schema-utils: ^3.0.0
-    tapable: ^2.1.1
-    terser-webpack-plugin: ^5.1.1
-    watchpack: ^2.0.0
-    webpack-sources: ^2.1.1
-  peerDependenciesMeta:
-    webpack-cli:
-      optional: true
-  bin:
-    webpack: bin/webpack.js
-  checksum: 328377204175d69eef4d3e1d5a75949637f0c8b3a48a4a9e60a901d0a8c58e81013bce76f063c1e6c449be29ff24ec56bb235131a2d13a70a7b3d821f50e50a1
-  languageName: node
-  linkType: hard
-
-"webpack@npm:^5.65.0":
-  version: 5.65.0
-  resolution: "webpack@npm:5.65.0"
-  dependencies:
-    "@types/eslint-scope": ^3.7.0
-    "@types/estree": ^0.0.50
-    "@webassemblyjs/ast": 1.11.1
-    "@webassemblyjs/wasm-edit": 1.11.1
-    "@webassemblyjs/wasm-parser": 1.11.1
-    acorn: ^8.4.1
-    acorn-import-assertions: ^1.7.6
-    browserslist: ^4.14.5
-    chrome-trace-event: ^1.0.2
-    enhanced-resolve: ^5.8.3
-    es-module-lexer: ^0.9.0
-    eslint-scope: 5.1.1
-    events: ^3.2.0
-    glob-to-regexp: ^0.4.1
-    graceful-fs: ^4.2.4
-    json-parse-better-errors: ^1.0.2
-    loader-runner: ^4.2.0
-    mime-types: ^2.1.27
-    neo-async: ^2.6.2
-    schema-utils: ^3.1.0
-    tapable: ^2.1.1
-    terser-webpack-plugin: ^5.1.3
-    watchpack: ^2.3.1
-    webpack-sources: ^3.2.2
-  peerDependenciesMeta:
-    webpack-cli:
-      optional: true
-  bin:
-    webpack: bin/webpack.js
-  checksum: 221ab8ccd440cb678269e86689704bbef81cf41393eb266625873e30c6980ffaa055bb1a7d14bf9fc0f5a2e6f03d15d068cbb995bc876757c01a4ca27fd2870c
   languageName: node
   linkType: hard
 

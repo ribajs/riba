@@ -7,8 +7,8 @@
   "scripts": {
     "build": "webpack --progress --color --env production",
     "build:dev": "webpack --progress --color --env development",
-    "start": "webpack-serve --env production",
-    "start:dev": "webpack-serve --env development",
+    "start": "webpack serve --env production",
+    "start:dev": "webpack serve --env development",
     "serve": "serve dist",
     "clear": "rm -rf ./dist",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
@@ -39,7 +39,6 @@
     "@ribajs/tsconfig": "workspace:*",
     "@ribajs/types": "workspace:*",
     "@ribajs/webpack-config": "workspace:*",
-    "@ribajs/webpack-serve": "workspace:*",
     "@types/jest": "^27.0.3",
     "@typescript-eslint/eslint-plugin": "^5.6.0",
     "@typescript-eslint/parser": "^5.6.0",

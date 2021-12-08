@@ -37,9 +37,9 @@
     "swagger-ui-express": "^4.2.0"
   },
   "peerDependencies": {
-    "pug": "^3.0.0",
-    "tinyliquid": "^0.2.34",
-    "twig": "^1.15.4"
+    "pug": "^3.x.x",
+    "tinyliquid": "^0.x.x",
+    "twig": "^1.x.x"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.1.5",

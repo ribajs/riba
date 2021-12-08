@@ -7,8 +7,8 @@
   "scripts": {
     "build": "webpack --progress --color --env production",
     "build:dev": "webpack --progress --color --env development",
-    "start": "webpack-serve --env production",
-    "start:dev": "webpack-serve --env development",
+    "start": "webpack serve --env production",
+    "start:dev": "webpack serve --env development",
     "serve": "serve dist",
     "clear": "rm -rf ./dist",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix",
@@ -76,7 +76,6 @@
     "@ribajs/core": "workspace:*",
     "@ribajs/moment": "workspace:*",
     "@ribajs/utils": "workspace:*",
-    "@ribajs/webpack-serve": "workspace:*",
     "bootstrap": "5.1.3"
   }
 }

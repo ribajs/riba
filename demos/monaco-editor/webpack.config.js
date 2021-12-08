@@ -4,6 +4,6 @@ const webpackConfig = ribaWebpackConfig({
   template: 'local',
   plugins: [
     new MonacoWebpackPlugin()
-  ]
+  ],
 });
 module.exports = webpackConfig;
