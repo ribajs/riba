@@ -19,8 +19,12 @@ export const strapiFormatter = {
 
     let host =
       (window as any)?.env?.STRAPI_REMOTE_URL ||
-      window?.ssr?.env?.STRAPI_REMOTE_URL ||
+      window?.ssr?.env?.STRAPI_LOCAL_URL ||
       "";
+
+    if (!host) {
+      throw new Error("[strapiFormatter] Host not found, please make sure that window.env.STRAPI_REMOTE_URL or window.ssr.env.STRAPI_LOCAL_URL is set!");
+    }
 
     if (host.endsWith("/")) {
       host = host.substring(0, host.length - 1);
