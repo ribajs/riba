@@ -50,7 +50,7 @@ export class LeafletMapComponent extends Component {
     initialLat: 53.872654,
     initialLng: 8.710849,
     initialZoom: 13,
-    assetsDir: "/images/vendors/leaflet/images/",
+    assetsDir: "/images/vendors/leaflet/dist/images/",
     tileUrl: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',

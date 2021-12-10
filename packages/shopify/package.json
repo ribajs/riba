@@ -86,7 +86,6 @@
     "@types/vinyl": "^2.0.6",
     "@types/vinyl-fs": "^2.4.12",
     "@types/vinyl-paths": "^0.0.31",
-    "@types/webpack": "^5.28.0",
     "@types/webpack-stream": "^3.2.12",
     "@typescript-eslint/eslint-plugin": "^5.6.0",
     "@typescript-eslint/parser": "^5.6.0",
@@ -119,7 +118,7 @@
     "shopify-admin-api": "^2.17.1",
     "svgo": "^2.8.0",
     "terser": "^5.10.0",
-    "ts-jest": "^27.1.0",
+    "ts-jest": "^27.1.1",
     "typescript": "4.5.2",
     "undertaker": "^1.3.0",
     "vinyl": "^2.2.1",
@@ -145,20 +144,20 @@
     "bitbucket": "^2.7.0",
     "form-data": "^4.0.0",
     "got": "^11.8.3",
-    "gulp-print": "^5.0.2"
+    "gulp-print": "^5.0.2",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1"
   },
   "peerDependencies": {
     "@ribajs/webpack-config": "*",
-    "gulp": "^4.0.2",
-    "gulp-cheerio": "^1.0.0",
-    "gulp-ext-replace": "^0.3.0",
-    "gulp-plumber": "^1.2.1",
-    "gulp-rename": "^2.0.0",
-    "gulp-size": "^3.0.0",
-    "gulp-svgmin": "^3.0.0",
-    "gulp-util": "^3.0.8",
-    "gulp-zip": "^5.0.2",
-    "webpack": "^5.3.2",
-    "webpack-cli": "^4.1.0"
+    "gulp": "^4.x.x",
+    "gulp-cheerio": "*",
+    "gulp-ext-replace": "*",
+    "gulp-plumber": "*",
+    "gulp-rename": "*",
+    "gulp-size": "*",
+    "gulp-svgmin": "*",
+    "gulp-util": "*",
+    "gulp-zip": "*"
   }
 }

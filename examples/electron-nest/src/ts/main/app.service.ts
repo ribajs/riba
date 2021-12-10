@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { promises as fs } from "fs";
 import { resolve } from "path";
-import * as pkgDir from "pkg-dir";
+import pkgDir from "../dependencies/pkg-dir";
 
 @Injectable()
 export class AppService {

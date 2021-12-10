@@ -268,10 +268,12 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
   switch (config.template) {
     case "octobercms":
       config.entry = config.entry || [config.tsIndexPath];
+      config.distPath = resolve(rootPath, "assets");
       config.output = config.output || {
-        path: resolve(rootPath, "assets/js"),
+        path: resolve(config.distPath, "js"),
         filename: "[name].bundle.js",
       };
+      config.publicPath = config.publicPath || config.distPath;
 
       /**
        * On October we use the build in sass compiler for the styles to make use of some october features like theme setting variables in the scss files,
@@ -284,7 +286,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
         images: true,
         scss: true,
         iconset: true,
-        foldername: "assets",
+        path: config.publicPath,
       };
 
       // https://github.com/nuxt/nuxt.js/blob/dev/packages/webpack/src/config/base.js#L435
@@ -303,9 +305,9 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
       if (config.tsIndexPath) {
         config.entry.main.push(config.tsIndexPath);
       }
-      const assetsPath = resolve(rootPath, "theme/assets/");
+      config.publicPath = config.publicPath || resolve(rootPath, "theme/assets/");
       config.output = config.output || {
-        path: assetsPath,
+        path: config.publicPath,
         filename: "[name].bundle.js",
       };
 
@@ -320,7 +322,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
         images: true,
         scss: false,
         iconset: true,
-        foldername: "src",
+        path: config.publicPath,
       };
 
       // https://github.com/nuxt/nuxt.js/blob/dev/packages/webpack/src/config/base.js#L435
@@ -356,7 +358,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
         images: false,
         scss: false,
         iconset: false,
-        foldername: "src",
+        path: config.publicPath,
       };
 
       // https://github.com/nuxt/nuxt.js/blob/dev/packages/webpack/src/config/base.js#L435
@@ -377,6 +379,9 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
           config.entry.push(config.tsIndexPath);
         }
       }
+
+      config.publicPath = config.publicPath || resolve(rootPath, "public");
+
       config.output = config.output || {
         path: config.distPath,
         filename: "[name].bundle.js",
@@ -387,13 +392,16 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
         images: true,
         scss: false,
         iconset: true,
-        foldername: config.distPath,
+        path: config.publicPath,
       };
 
       config.devServer = config.devServer || {
         port: 8080,
         host: "0.0.0.0",
         hot: true,
+        static: [{
+          directory: config.publicPath
+        }]
       };
 
       // https://github.com/nuxt/nuxt.js/blob/dev/packages/webpack/src/config/base.js#L435
@@ -415,7 +423,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
         images: false,
         scss: false,
         iconset: false,
-        foldername: "src",
+        path: config.publicPath,
       };
 
       config.styles.build = false;

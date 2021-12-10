@@ -50,9 +50,9 @@
     "yaml": "next"
   },
   "peerDependencies": {
-    "pug": "^3.0.0",
-    "tinyliquid": "^0.2.34",
-    "twig": "^1.15.4"
+    "pug": "*",
+    "tinyliquid": "^0.x.x",
+    "twig": "^1.x.x"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.1.5",
@@ -78,7 +78,7 @@
     "prettier": "2.5.1",
     "rimraf": "^3.0.2",
     "supertest": "^6.1.6",
-    "ts-jest": "^27.1.0",
+    "ts-jest": "^27.1.1",
     "ts-node": "^10.4.0",
     "tsconfig-paths": "^3.12.0",
     "typescript": "4.5.2"

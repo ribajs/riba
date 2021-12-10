@@ -5,7 +5,7 @@ import { TemplateVars } from './types/template-vars';
 import { ErrorObj } from '@ribajs/ssr';
 import type { FullThemeConfig } from './types/theme-config';
 import type { Request } from 'express';
-import fetch from 'node-fetch';
+import { fetch } from './dependencies/fetch';
 import type { ComponentLifecycleEventData, SharedContext } from '@ribajs/ssr';
 import type { RenderResult } from './types';
 import { EventDispatcher } from '@ribajs/events';

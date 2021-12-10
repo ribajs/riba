@@ -2,6 +2,7 @@
 /lib/
 /dist/
 /infra/*/dist/
+!infra/webpack-serve/dist/
 /packages/*/dist/
 !packages/iconset/dist/
 !packages/events/dist/

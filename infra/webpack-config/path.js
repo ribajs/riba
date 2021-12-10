@@ -2,8 +2,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
 const { resolve, dirname } = require("path");
-const pkgDir = require("pkg-dir");
-const rootPath = pkgDir.sync(process.cwd());
+const pkgDir = require('find-root');
+const rootPath = pkgDir(process.cwd());
 const { existsSync, lstatSync } = require("fs");
 
 const findDir = (searchPaths) => {
