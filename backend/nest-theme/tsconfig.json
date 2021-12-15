@@ -9,15 +9,13 @@
     "target": "ES2020",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "incremental": true,
     "moduleResolution": "node",
     "alwaysStrict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
   },
-  "include": [
-    "src/**/*"
-, "../node-ssr/src/types/response-error.ts"  ],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
 }

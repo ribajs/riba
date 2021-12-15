@@ -6,7 +6,6 @@ import { resolve } from 'path';
 
 @Injectable()
 export class SsrService {
-  private theme: FullThemeConfig;
   private ssr: Ssr;
 
   getSharedContext: Ssr['getSharedContext'];
@@ -18,15 +17,15 @@ export class SsrService {
     if (!theme) {
       throw new Error('Theme config not defined!');
     }
-    this.theme = theme;
     this.ssr = new Ssr({
-      defaultRootTag: this.theme.ssr?.rootTag,
-      defaultTemplateEngine: this.theme.viewEngine,
-      sourceFileDir: resolve(this.theme.assetsDir, 'ssr'),
-      templateDir: this.theme.viewsDir,
+      defaultRootTag: theme.ssr?.rootTag,
+      defaultTemplateEngine: theme.viewEngine,
+      defaultTemplateFile: theme.ssr?.template,
+      sourceFileDir: resolve(theme.assetsDir, 'ssr'),
+      templateDir: theme.viewsDir,
     });
-    this.getSharedContext = this.ssr.getSharedContext;
-    this.render = this.ssr.render;
-    this.renderComponent = this.ssr.renderComponent;
+    this.getSharedContext = this.ssr.getSharedContext.bind(this.ssr);
+    this.render = this.ssr.render.bind(this.ssr);
+    this.renderComponent = this.ssr.renderComponent.bind(this.ssr);
   }
 }

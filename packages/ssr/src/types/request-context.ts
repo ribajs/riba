@@ -3,7 +3,7 @@ import { ParsedQs } from "./parsed-query";
 
 export interface RequestContext {
   params: {
-    [name: string]: string | number | undefined;
+    [name: string]: string | undefined;
   };
   query: ParsedQs;
   protocol: string;
