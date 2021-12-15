@@ -55,8 +55,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
     host: ArgumentsHost,
     componentTagName: string,
   ) {
-    const ctx = host.switchToHttp();
-    const req = ctx.getRequest<Request>();
+    const httpCtx = host.switchToHttp();
+    const req = httpCtx.getRequest<Request>();
     let overwriteException: Error | HttpException | undefined;
 
     const sharedContext = await this.ssr.getSharedContext(
