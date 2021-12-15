@@ -1,4 +1,3 @@
-import { transpileModule, ModuleKind } from 'typescript';
 import { Script } from 'vm';
 import * as YAML from 'yaml';
 import { readFileSync, existsSync } from 'fs';
@@ -34,12 +33,17 @@ export const validateFullThemeConfig = (fullThemeConfig) => {
     validateThemeConfig(fullThemeConfig);
     validateNestThemeConfig(fullThemeConfig);
 };
-export const loadConfig = (searchConfigPaths, env) => {
+export const loadConfig = async (searchConfigPaths, env) => {
     for (const configPath of searchConfigPaths) {
         if (!existsSync(configPath)) {
             continue;
         }
-        if (configPath.endsWith('.ts')) {
+        if (configPath.endsWith('.js')) {
+            const config = await import(configPath);
+            return config(env);
+        }
+        else if (configPath.endsWith('.ts')) {
+            const { transpileModule, ModuleKind } = await import('typescript');
             let tSource = readFileSync(configPath, 'utf8');
             const compilerOptions = {
                 module: ModuleKind.CommonJS,

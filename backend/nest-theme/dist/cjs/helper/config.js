@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.loadConfig = exports.validateFullThemeConfig = exports.validateNestThemeConfig = exports.validateThemeConfig = void 0;
-const typescript_1 = require("typescript");
 const vm_1 = require("vm");
 const YAML = require("yaml");
 const fs_1 = require("fs");
@@ -40,15 +39,20 @@ const validateFullThemeConfig = (fullThemeConfig) => {
     (0, exports.validateNestThemeConfig)(fullThemeConfig);
 };
 exports.validateFullThemeConfig = validateFullThemeConfig;
-const loadConfig = (searchConfigPaths, env) => {
+const loadConfig = async (searchConfigPaths, env) => {
     for (const configPath of searchConfigPaths) {
         if (!(0, fs_1.existsSync)(configPath)) {
             continue;
         }
-        if (configPath.endsWith('.ts')) {
+        if (configPath.endsWith('.js')) {
+            const config = await Promise.resolve().then(() => require(configPath));
+            return config(env);
+        }
+        else if (configPath.endsWith('.ts')) {
+            const { transpileModule, ModuleKind } = await Promise.resolve().then(() => require('typescript'));
             let tSource = (0, fs_1.readFileSync)(configPath, 'utf8');
             const compilerOptions = {
-                module: typescript_1.ModuleKind.CommonJS,
+                module: ModuleKind.CommonJS,
             };
             const context = {
                 exports: {
@@ -56,7 +60,7 @@ const loadConfig = (searchConfigPaths, env) => {
                 },
                 require,
             };
-            let jSource = (0, typescript_1.transpileModule)(tSource, { compilerOptions }).outputText;
+            let jSource = transpileModule(tSource, { compilerOptions }).outputText;
             let script = new vm_1.Script(jSource);
             script.runInNewContext(context);
             const themeConfig = context.exports.config(env);

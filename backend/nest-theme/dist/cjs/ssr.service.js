@@ -13,7 +13,7 @@ exports.SsrService = void 0;
 const common_1 = require("@nestjs/common");
 const jsdom_1 = require("jsdom");
 const config_1 = require("@nestjs/config");
-const node_fetch_1 = require("node-fetch");
+const fetch_1 = require("./dependencies/fetch");
 const events_1 = require("@ribajs/events");
 const source_file_service_1 = require("./source-file/source-file.service");
 const template_file_service_1 = require("./template-file/template-file.service");
@@ -66,7 +66,7 @@ let SsrService = class SsrService {
             includeNodeLocations: true,
             beforeParse(window) {
                 if (!window.fetch) {
-                    window.fetch = node_fetch_1.default;
+                    window.fetch = fetch_1.fetch;
                 }
                 if (!window.requestAnimationFrame) {
                     window.requestAnimationFrame = () => {

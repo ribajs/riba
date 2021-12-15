@@ -11,38 +11,26 @@ import { SsrService } from './ssr.service';
 import type { Request, Response, NextFunction } from 'express';
 import { handleError } from './error-handler';
 import type { Cache } from 'cache-manager';
-import { pathToRegexp, Key } from 'path-to-regexp';
-import { parse as queryparse } from 'qs';
-
-import { Route } from '@ribajs/ssr';
 @Injectable()
 export class SsrMiddleware implements NestMiddleware {
   theme: FullThemeConfig;
   log = new Logger(this.constructor.name);
   constructor(
-    protected readonly config: ConfigService,
-    protected readonly ssr: SsrService,
-    @Inject(CACHE_MANAGER) protected cacheManager: Cache,
+    private readonly config: ConfigService,
+    private readonly ssr: SsrService,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {
     this.theme = this.config.get<FullThemeConfig>('theme');
   }
   async use(req: Request, res: Response, next: NextFunction) {
-    let routeSettings: Route | undefined;
-
-    if (req.route) {
-      routeSettings = this.getRouteSettingsByRoute(req.route.path);
-    } else {
-      console.warn('FIXME: req.route is not set!');
-
-      // WORKAROUND
-      const _route = this.getRouteSettingsByUrl((req as any)._parsedUrl as URL);
-      routeSettings = _route.settings;
-      req.params = _route.params;
-      req.query = _route.query;
+    if (!req.route) {
+      return next('req.route is not set!');
     }
 
+    const routeSettings = this.getRouteSettingsByRoute(req.route.path);
+
     if (!routeSettings) {
-      return next();
+      return next('routeSettings is not set!');
     }
 
     try {
@@ -109,49 +97,7 @@ export class SsrMiddleware implements NestMiddleware {
     }
   }
 
-  /**
-   * WORKAROUND if req.route is missing
-   */
-  protected getRouteSettingsByUrl(url: URL) {
-    let keys: Key[];
-    let match: RegExpMatchArray;
-    const settings = this.theme.routes.find((route) => {
-      for (const path of route.path) {
-        const _keys: Key[] = [];
-        const _regexp = pathToRegexp(path, _keys);
-        const _match = url.pathname.match(_regexp);
-        if (!!_match) {
-          match = _match;
-          keys = _keys;
-          return true;
-        }
-      }
-    });
-
-    if (!settings) {
-      return {
-        settings: undefined,
-        query: {},
-        params: {},
-        path: undefined,
-        keys: [],
-      };
-    }
-
-    const query = queryparse(url.search, { ignoreQueryPrefix: true });
-
-    const path = match[0];
-    const params: any = {};
-    for (let i = 1; i < match.length; i++) {
-      const val = decodeURIComponent(match[i]);
-      const key = keys[i - 1].name;
-      params[key] = val;
-    }
-
-    return { settings, query, params, path, keys };
-  }
-
-  protected getRouteSettingsByRoute(routePath: string) {
+  private getRouteSettingsByRoute(routePath: string) {
     return this.theme.routes.find((route) => {
       return route.path.includes(routePath);
     });

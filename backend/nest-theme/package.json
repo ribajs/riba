@@ -63,7 +63,7 @@
     "@types/express-session": "^1.17.4",
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.12",
-    "@types/node-fetch": "^3.0.3",
+    "@types/node-fetch": "^2.5.12",
     "@types/path-to-regexp": "^1.7.0",
     "@types/qs": "^6.9.7",
     "@types/supertest": "^2.0.11",

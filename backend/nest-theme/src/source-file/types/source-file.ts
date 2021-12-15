@@ -1,4 +1,3 @@
-import type { Stats } from 'fs';
 import type { Script } from 'vm';
 
 export interface SourceFile {
@@ -6,5 +5,4 @@ export interface SourceFile {
   path: string;
   source: string;
   script: Script;
-  stats: Stats;
 }

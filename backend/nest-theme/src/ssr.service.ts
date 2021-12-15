@@ -20,8 +20,8 @@ export class SsrService {
   theme: FullThemeConfig;
   constructor(
     config: ConfigService,
-    protected readonly sourceFile: SourceFileService,
-    protected readonly templateFile: TemplateFileService,
+    private readonly sourceFile: SourceFileService,
+    private readonly templateFile: TemplateFileService,
   ) {
     this.theme = config.get<FullThemeConfig>('theme');
   }
@@ -64,7 +64,7 @@ export class SsrService {
     return sharedContext;
   }
 
-  protected async createDomForLayout(layout: string) {
+  private async createDomForLayout(layout: string) {
     const virtualConsole: VirtualConsole | null = new VirtualConsole();
     virtualConsole.sendTo(console);
 
@@ -199,7 +199,7 @@ export class SsrService {
     return renderResult;
   }
 
-  protected transformBrowserError(error: ResponseError | ErrorEvent) {
+  private transformBrowserError(error: ResponseError | ErrorEvent) {
     const newError = new Error(error.message);
     if ((error as Error).stack) {
       newError.stack = (error as Error).stack;

@@ -18,11 +18,11 @@ export class HttpExceptionFilter implements ExceptionFilter {
   theme: FullThemeConfig;
   log = new Logger(this.constructor.name);
 
-  constructor(protected config: ConfigService, protected ssr: SsrService) {
+  constructor(private config: ConfigService, private ssr: SsrService) {
     this.theme = this.config.get<FullThemeConfig>('theme');
   }
 
-  protected getErrorObject(
+  private getErrorObject(
     exception: HttpException | Error,
     req: Request,
     overwriteException?: HttpException | Error,
@@ -46,7 +46,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     return errorObj;
   }
 
-  protected async renderErrorPage(
+  private async renderErrorPage(
     exception: HttpException,
     host: ArgumentsHost,
     componentTagName: string,

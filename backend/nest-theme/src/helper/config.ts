@@ -1,4 +1,4 @@
-import { transpileModule, CompilerOptions, ModuleKind } from 'typescript';
+import type { CompilerOptions } from 'typescript';
 import { Script } from 'vm';
 import * as YAML from 'yaml';
 import { readFileSync, existsSync } from 'fs';
@@ -59,13 +59,20 @@ export const validateFullThemeConfig = (fullThemeConfig: FullThemeConfig) => {
  * @param configPath
  * @param env environment, e.g. development or production
  */
-export const loadConfig = <T>(searchConfigPaths: string[], env: string) => {
+export const loadConfig = async <T>(
+  searchConfigPaths: string[],
+  env: string,
+): Promise<T> => {
   for (const configPath of searchConfigPaths) {
     if (!existsSync(configPath)) {
       continue;
     }
-    // Transpile typescript config file
-    if (configPath.endsWith('.ts')) {
+    if (configPath.endsWith('.js')) {
+      const config = await import(configPath);
+      return config(env) as T;
+    } else if (configPath.endsWith('.ts')) {
+      const { transpileModule, ModuleKind } = await import('typescript');
+      // Transpile typescript config file
       let tSource = readFileSync(configPath, 'utf8');
       const compilerOptions: CompilerOptions = {
         module: ModuleKind.CommonJS,

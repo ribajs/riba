@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Injectable, Logger } from '@nestjs/common';
 import { VirtualConsole, JSDOM } from 'jsdom';
 import { ConfigService } from '@nestjs/config';
-import fetch from 'node-fetch';
+import { fetch } from './dependencies/fetch';
 import { EventDispatcher } from '@ribajs/events';
 import { SourceFileService } from './source-file/source-file.service';
 import { TemplateFileService } from './template-file/template-file.service';

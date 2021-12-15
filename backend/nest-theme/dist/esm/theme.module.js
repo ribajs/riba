@@ -21,14 +21,16 @@ import { SourceFileService } from './source-file/source-file.service';
 import { TemplateFileService } from './template-file/template-file.service';
 import { RefreshCacheService } from './refresh-cache/refresh-cache.service';
 let ThemeModule = ThemeModule_1 = class ThemeModule {
-    constructor(adapterHost, config, ssrMiddleware) {
-        this.adapterHost = adapterHost;
+    constructor(config) {
         this.config = config;
-        this.ssrMiddleware = ssrMiddleware;
     }
-    static register(nestThemeConfig, expressAdapter, env = process.env.NODE_ENV) {
+    static async register(nestThemeConfig, expressAdapter, env = process.env.NODE_ENV) {
         const basePath = resolve(nestThemeConfig.themeDir, 'config');
-        const activeThemeConfig = loadConfig([resolve(basePath, 'theme.ts'), resolve(basePath, 'theme.yaml')], env);
+        const activeThemeConfig = await loadConfig([
+            resolve(basePath, 'theme.js'),
+            resolve(basePath, 'theme.ts'),
+            resolve(basePath, 'theme.yaml'),
+        ], env);
         validateThemeConfig(activeThemeConfig);
         validateNestThemeConfig(nestThemeConfig);
         const fullThemeConfig = Object.assign(Object.assign(Object.assign({}, activeThemeConfig), nestThemeConfig), { basePath, templateVars: nestThemeConfig.templateVars || new EmptyTemplateVars(), assetsDir: resolve(nestThemeConfig.themeDir, activeThemeConfig.assetsDir), viewsDir: resolve(nestThemeConfig.themeDir, activeThemeConfig.viewsDir), pageComponentsDir: resolve(nestThemeConfig.themeDir, activeThemeConfig.pageComponentsDir || '') });
@@ -78,9 +80,7 @@ ThemeModule = ThemeModule_1 = __decorate([
         imports: [],
         exports: [SsrService, SsrMiddleware, SourceFileService, RefreshCacheService],
     }),
-    __metadata("design:paramtypes", [HttpAdapterHost,
-        ConfigService,
-        SsrMiddleware])
+    __metadata("design:paramtypes", [ConfigService])
 ], ThemeModule);
 export { ThemeModule };
 //# sourceMappingURL=theme.module.js.map

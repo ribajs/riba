@@ -24,14 +24,16 @@ const source_file_service_1 = require("./source-file/source-file.service");
 const template_file_service_1 = require("./template-file/template-file.service");
 const refresh_cache_service_1 = require("./refresh-cache/refresh-cache.service");
 let ThemeModule = ThemeModule_1 = class ThemeModule {
-    constructor(adapterHost, config, ssrMiddleware) {
-        this.adapterHost = adapterHost;
+    constructor(config) {
         this.config = config;
-        this.ssrMiddleware = ssrMiddleware;
     }
-    static register(nestThemeConfig, expressAdapter, env = process.env.NODE_ENV) {
+    static async register(nestThemeConfig, expressAdapter, env = process.env.NODE_ENV) {
         const basePath = (0, path_1.resolve)(nestThemeConfig.themeDir, 'config');
-        const activeThemeConfig = (0, config_2.loadConfig)([(0, path_1.resolve)(basePath, 'theme.ts'), (0, path_1.resolve)(basePath, 'theme.yaml')], env);
+        const activeThemeConfig = await (0, config_2.loadConfig)([
+            (0, path_1.resolve)(basePath, 'theme.js'),
+            (0, path_1.resolve)(basePath, 'theme.ts'),
+            (0, path_1.resolve)(basePath, 'theme.yaml'),
+        ], env);
         (0, config_2.validateThemeConfig)(activeThemeConfig);
         (0, config_2.validateNestThemeConfig)(nestThemeConfig);
         const fullThemeConfig = Object.assign(Object.assign(Object.assign({}, activeThemeConfig), nestThemeConfig), { basePath, templateVars: nestThemeConfig.templateVars || new empty_template_vars_1.EmptyTemplateVars(), assetsDir: (0, path_1.resolve)(nestThemeConfig.themeDir, activeThemeConfig.assetsDir), viewsDir: (0, path_1.resolve)(nestThemeConfig.themeDir, activeThemeConfig.viewsDir), pageComponentsDir: (0, path_1.resolve)(nestThemeConfig.themeDir, activeThemeConfig.pageComponentsDir || '') });
@@ -81,9 +83,7 @@ ThemeModule = ThemeModule_1 = __decorate([
         imports: [],
         exports: [ssr_service_1.SsrService, ssr_middleware_1.SsrMiddleware, source_file_service_1.SourceFileService, refresh_cache_service_1.RefreshCacheService],
     }),
-    __metadata("design:paramtypes", [core_1.HttpAdapterHost,
-        config_1.ConfigService,
-        ssr_middleware_1.SsrMiddleware])
+    __metadata("design:paramtypes", [config_1.ConfigService])
 ], ThemeModule);
 exports.ThemeModule = ThemeModule;
 //# sourceMappingURL=theme.module.js.map

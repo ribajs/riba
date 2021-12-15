@@ -6,11 +6,11 @@ import * as cheerio from 'cheerio';
 
 @Injectable()
 export class RefreshCacheService implements OnApplicationBootstrap {
-  protected theme: FullThemeConfig;
-  protected visited: string[] = [];
-  protected log = new Logger(this.constructor.name);
+  private theme: FullThemeConfig;
+  private visited: string[] = [];
+  private log = new Logger(this.constructor.name);
   public static isRunning = false;
-  constructor(protected readonly config: ConfigService) {
+  constructor(private readonly config: ConfigService) {
     this.theme = config.get<FullThemeConfig>('theme');
   }
 
@@ -20,7 +20,7 @@ export class RefreshCacheService implements OnApplicationBootstrap {
     }, 3000);
   }
 
-  protected isInternalLink(link: string, host: string) {
+  private isInternalLink(link: string, host: string) {
     if (
       link.startsWith('tel:') ||
       link.startsWith('mailto:') ||
@@ -36,7 +36,7 @@ export class RefreshCacheService implements OnApplicationBootstrap {
     return false;
   }
 
-  protected normalize(link: string, host: string) {
+  private normalize(link: string, host: string) {
     if (link.startsWith(host)) {
       return host;
     }
@@ -51,15 +51,15 @@ export class RefreshCacheService implements OnApplicationBootstrap {
     return host + '/' + link;
   }
 
-  protected alreadyVisited(link: string) {
+  private alreadyVisited(link: string) {
     return this.visited.indexOf(link) !== -1;
   }
 
-  protected followLink(link: string, host: string) {
+  private followLink(link: string, host: string) {
     return !this.alreadyVisited(link) && this.isInternalLink(link, host);
   }
 
-  protected parseLinks(html: string) {
+  private parseLinks(html: string) {
     const $ = cheerio.load(html);
     const $anchors = $('a[href]');
 
@@ -74,7 +74,7 @@ export class RefreshCacheService implements OnApplicationBootstrap {
     return links;
   }
 
-  protected async deepRefresh(links: string[], host: string) {
+  private async deepRefresh(links: string[], host: string) {
     for (const link of links) {
       if (!this.followLink(link, host)) {
         continue;

@@ -41,20 +41,20 @@ import { RefreshCacheService } from './refresh-cache/refresh-cache.service';
   exports: [SsrService, SsrMiddleware, SourceFileService, RefreshCacheService],
 })
 export class ThemeModule {
-  constructor(
-    protected readonly adapterHost: HttpAdapterHost<ExpressAdapter>,
-    protected config: ConfigService,
-    protected ssrMiddleware: SsrMiddleware,
-  ) {}
+  constructor(private config: ConfigService) {}
 
-  static register(
+  static async register(
     nestThemeConfig: NestThemeConfig,
     expressAdapter: ExpressAdapter,
     env = process.env.NODE_ENV,
-  ): DynamicModule {
+  ): Promise<DynamicModule> {
     const basePath = resolve(nestThemeConfig.themeDir, 'config');
-    const activeThemeConfig = loadConfig<ThemeConfig>(
-      [resolve(basePath, 'theme.ts'), resolve(basePath, 'theme.yaml')],
+    const activeThemeConfig = await loadConfig<ThemeConfig>(
+      [
+        resolve(basePath, 'theme.js'),
+        resolve(basePath, 'theme.ts'),
+        resolve(basePath, 'theme.yaml'),
+      ],
       env,
     );
 

@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var RefreshCacheService_1;
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import fetch from 'node-fetch';
+import { fetch } from '../dependencies/fetch';
 import * as cheerio from 'cheerio';
 let RefreshCacheService = RefreshCacheService_1 = class RefreshCacheService {
     constructor(config) {

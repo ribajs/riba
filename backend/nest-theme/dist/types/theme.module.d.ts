@@ -1,14 +1,10 @@
 import { DynamicModule, MiddlewareConsumer } from '@nestjs/common';
-import { HttpAdapterHost } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
 import { ExpressAdapter } from '@nestjs/platform-express';
-import { SsrMiddleware } from './ssr.middleware';
 import type { NestThemeConfig } from './types';
 export declare class ThemeModule {
-    protected readonly adapterHost: HttpAdapterHost<ExpressAdapter>;
-    protected config: ConfigService;
-    protected ssrMiddleware: SsrMiddleware;
-    constructor(adapterHost: HttpAdapterHost<ExpressAdapter>, config: ConfigService, ssrMiddleware: SsrMiddleware);
-    static register(nestThemeConfig: NestThemeConfig, expressAdapter: ExpressAdapter, env?: string): DynamicModule;
+    private config;
+    constructor(config: ConfigService);
+    static register(nestThemeConfig: NestThemeConfig, expressAdapter: ExpressAdapter, env?: string): Promise<DynamicModule>;
     configure(consumer: MiddlewareConsumer): void;
 }

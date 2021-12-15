@@ -1,19 +1,18 @@
-import { Logger, OnApplicationBootstrap } from '@nestjs/common';
+import { OnApplicationBootstrap } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import type { FullThemeConfig } from '../types/theme-config';
 export declare class RefreshCacheService implements OnApplicationBootstrap {
-    protected readonly config: ConfigService;
-    protected theme: FullThemeConfig;
-    protected visited: string[];
-    protected log: Logger;
+    private readonly config;
+    private theme;
+    private visited;
+    private log;
     static isRunning: boolean;
     constructor(config: ConfigService);
     onApplicationBootstrap(): Promise<void>;
-    protected isInternalLink(link: string, host: string): boolean;
-    protected normalize(link: string, host: string): string;
-    protected alreadyVisited(link: string): boolean;
-    protected followLink(link: string, host: string): boolean;
-    protected parseLinks(html: string): string[];
-    protected deepRefresh(links: string[], host: string): Promise<void>;
+    private isInternalLink;
+    private normalize;
+    private alreadyVisited;
+    private followLink;
+    private parseLinks;
+    private deepRefresh;
     refresh(host?: string, force?: boolean): Promise<void>;
 }

@@ -13,7 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RefreshCacheService = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
-const node_fetch_1 = require("node-fetch");
+const fetch_1 = require("../dependencies/fetch");
 const cheerio = require("cheerio");
 let RefreshCacheService = RefreshCacheService_1 = class RefreshCacheService {
     constructor(config) {
@@ -75,7 +75,7 @@ let RefreshCacheService = RefreshCacheService_1 = class RefreshCacheService {
             const url = this.normalize(link, host);
             this.visited.push(link);
             this.log.log('refresh ' + url);
-            const response = await (0, node_fetch_1.default)(url);
+            const response = await (0, fetch_1.fetch)(url);
             const contentType = response.headers.get('content-type');
             if (!contentType || !contentType.includes('text/html')) {
                 continue;
