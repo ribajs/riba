@@ -27,7 +27,7 @@ let ThemeModule = ThemeModule_1 = class ThemeModule {
     constructor(config) {
         this.config = config;
     }
-    static async register(nestThemeConfig, expressAdapter, env = process.env.NODE_ENV) {
+    static async register(nestThemeConfig, expressAdapter, env = process.env.NODE_ENV || 'development') {
         const basePath = (0, path_1.resolve)(nestThemeConfig.themeDir, 'config');
         const activeThemeConfig = await (0, config_2.loadConfig)([
             (0, path_1.resolve)(basePath, 'theme.js'),
@@ -36,7 +36,15 @@ let ThemeModule = ThemeModule_1 = class ThemeModule {
         ], env);
         (0, config_2.validateThemeConfig)(activeThemeConfig);
         (0, config_2.validateNestThemeConfig)(nestThemeConfig);
-        const fullThemeConfig = Object.assign(Object.assign(Object.assign({}, activeThemeConfig), nestThemeConfig), { basePath, templateVars: nestThemeConfig.templateVars || new empty_template_vars_1.EmptyTemplateVars(), assetsDir: (0, path_1.resolve)(nestThemeConfig.themeDir, activeThemeConfig.assetsDir), viewsDir: (0, path_1.resolve)(nestThemeConfig.themeDir, activeThemeConfig.viewsDir), pageComponentsDir: (0, path_1.resolve)(nestThemeConfig.themeDir, activeThemeConfig.pageComponentsDir || '') });
+        const fullThemeConfig = {
+            ...activeThemeConfig,
+            ...nestThemeConfig,
+            basePath,
+            templateVars: nestThemeConfig.templateVars || new empty_template_vars_1.EmptyTemplateVars(),
+            assetsDir: (0, path_1.resolve)(nestThemeConfig.themeDir, activeThemeConfig.assetsDir),
+            viewsDir: (0, path_1.resolve)(nestThemeConfig.themeDir, activeThemeConfig.viewsDir),
+            pageComponentsDir: (0, path_1.resolve)(nestThemeConfig.themeDir, activeThemeConfig.pageComponentsDir || ''),
+        };
         (0, config_2.validateFullThemeConfig)(fullThemeConfig);
         const cacheModule = common_1.CacheModule.register();
         expressAdapter.setViewEngine(fullThemeConfig.viewEngine);
@@ -57,6 +65,9 @@ let ThemeModule = ThemeModule_1 = class ThemeModule {
     }
     configure(consumer) {
         const theme = this.config.get('theme');
+        if (!theme) {
+            throw new Error('Theme config not defined!');
+        }
         const paths = [];
         if (theme.routes) {
             for (const route of theme.routes) {

@@ -1,8 +1,9 @@
 import type { CompilerOptions } from 'typescript';
 import { Script } from 'vm';
 import * as YAML from 'yaml';
-import { readFileSync, existsSync } from 'fs';
-import type { ThemeConfig } from '@ribajs/ssr';
+import { readFile } from 'fs/promises';
+import { existsSync } from 'fs';
+import type { ThemeConfig, ThemeConfigFile } from '@ribajs/ssr';
 import { SUPPORTED_TEMPLATE_EINGINES } from '../constants';
 import type { NestThemeConfig, FullThemeConfig } from '../types';
 
@@ -73,28 +74,34 @@ export const loadConfig = async <T>(
     } else if (configPath.endsWith('.ts')) {
       const { transpileModule, ModuleKind } = await import('typescript');
       // Transpile typescript config file
-      let tSource = readFileSync(configPath, 'utf8');
+      const tSource = await readFile(configPath, 'utf8');
       const compilerOptions: CompilerOptions = {
         module: ModuleKind.CommonJS,
       };
       const context = {
         exports: {
-          config: undefined,
+          config: undefined as ThemeConfigFile | undefined,
         },
         require,
       };
-      let jSource = transpileModule(tSource, { compilerOptions }).outputText;
-      let script = new Script(jSource);
+      let jSource: string | null = transpileModule(tSource, {
+        compilerOptions,
+      }).outputText;
+      let script: Script | null = new Script(jSource);
       script.runInNewContext(context);
+      if (!context.exports.config) {
+        throw new Error(
+          `The theme condig file "${configPath}" needs to export a config method!`,
+        );
+      }
       const themeConfig: T = context.exports.config(env) as any as T;
       script = null;
       jSource = null;
-      tSource = null;
       return themeConfig;
     }
     // Parse yaml config file
     else if (configPath.endsWith('.yaml')) {
-      const result: T = YAML.parse(readFileSync(configPath, 'utf8'));
+      const result: T = YAML.parse(await readFile(configPath, 'utf8'));
       return result;
     } else {
       throw new Error('Config file extension not supported! ' + configPath);

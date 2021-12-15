@@ -14,5 +14,5 @@ export declare class RefreshCacheService implements OnApplicationBootstrap {
     private followLink;
     private parseLinks;
     private deepRefresh;
-    refresh(host?: string, force?: boolean): Promise<void>;
+    refresh(host?: string | undefined, force?: boolean): Promise<void>;
 }

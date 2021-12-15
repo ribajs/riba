@@ -29,7 +29,7 @@ export const getStack = (exception) => {
     let stack;
     if (typeof exception === 'string') {
         stack = new Error(exception).stack;
-        return stack.split('\n');
+        return stack?.split('\n') || [];
     }
     if (!stack && exception instanceof HttpException) {
         const excResp = exception.getResponse();
@@ -37,7 +37,7 @@ export const getStack = (exception) => {
         if (Array.isArray(stack)) {
             return stack;
         }
-        return stack.split('\n');
+        return stack?.split('\n') || [];
     }
     if (!exception.stack) {
         stack = new Error().stack;
@@ -48,7 +48,7 @@ export const getStack = (exception) => {
     if (Array.isArray(stack)) {
         return stack;
     }
-    return stack.split('\n');
+    return stack?.split('\n') || [];
 };
 export const handleError = (error) => {
     if (error instanceof HttpException) {

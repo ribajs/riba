@@ -11,16 +11,21 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { resolve, extname } from 'path';
 import * as consolidate from 'consolidate';
+import { SUPPORTED_TEMPLATE_EINGINES } from '../constants';
 let TemplateFileService = class TemplateFileService {
     constructor(config) {
         this.log = new Logger(this.constructor.name);
-        this.theme = config.get('theme');
+        const theme = config.get('theme');
+        if (!theme) {
+            throw new Error('Theme config not defined!');
+        }
+        this.theme = theme;
         this.dir = this.theme.viewsDir;
         this.defaultEngine = this.theme.viewEngine;
     }
     getEngine(templatePath) {
         const ext = extname(templatePath);
-        const detected = (ext === null || ext === void 0 ? void 0 : ext.substring(1)) || this.defaultEngine;
+        const detected = ext?.substring(1) || this.defaultEngine;
         if (detected !== this.defaultEngine) {
             this.log.warn(`Detected template engine is not the default: "${detected}" (Default: "${this.defaultEngine}")'`);
         }
@@ -29,6 +34,9 @@ let TemplateFileService = class TemplateFileService {
         }
         catch (error) {
             this.log.error(`Template engine not installed, try to run "yarn add ${detected}"`);
+        }
+        if (!SUPPORTED_TEMPLATE_EINGINES.includes(detected)) {
+            throw new Error('The theme config must contain a "viewEngine" property of a supported template engine string!');
         }
         return detected;
     }

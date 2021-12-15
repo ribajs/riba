@@ -1,9 +1,10 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { ThemeConfig } from '@ribajs/ssr';
+import { ThemeConfig, SupportedTemplateEngines } from '@ribajs/ssr';
 import { ConfigService } from '@nestjs/config';
 import { resolve, extname } from 'path';
 import * as consolidate from 'consolidate';
-import { TemplateFile } from './types';
+import { TemplateFile } from '../types';
+import { SUPPORTED_TEMPLATE_EINGINES } from '../constants';
 
 @Injectable()
 export class TemplateFileService {
@@ -13,7 +14,11 @@ export class TemplateFileService {
   private dir: string;
 
   constructor(config: ConfigService) {
-    this.theme = config.get<ThemeConfig>('theme');
+    const theme = config.get<ThemeConfig>('theme');
+    if (!theme) {
+      throw new Error('Theme config not defined!');
+    }
+    this.theme = theme;
     this.dir = this.theme.viewsDir;
     this.defaultEngine = this.theme.viewEngine;
   }
@@ -35,7 +40,17 @@ export class TemplateFileService {
       );
     }
 
-    return detected;
+    if (
+      !SUPPORTED_TEMPLATE_EINGINES.includes(
+        detected as SupportedTemplateEngines,
+      )
+    ) {
+      throw new Error(
+        'The theme config must contain a "viewEngine" property of a supported template engine string!',
+      );
+    }
+
+    return detected as SupportedTemplateEngines;
   }
 
   private normalizePath(path: string) {

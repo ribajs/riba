@@ -8,13 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __asyncValues = (this && this.__asyncValues) || function (o) {
-    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-    var m = o[Symbol.asyncIterator], i;
-    return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
-    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
-    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SourceFileService = void 0;
 const common_1 = require("@nestjs/common");
@@ -24,7 +17,11 @@ const fs_1 = require("fs");
 const vm_1 = require("vm");
 let SourceFileService = class SourceFileService {
     constructor(config) {
-        this.theme = config.get('theme');
+        const theme = config.get('theme');
+        if (!theme) {
+            throw new Error('Theme config not defined!');
+        }
+        this.theme = theme;
         this.dir = (0, path_1.resolve)(this.theme.assetsDir, 'ssr');
     }
     async load(filename) {
@@ -41,20 +38,9 @@ let SourceFileService = class SourceFileService {
         };
     }
     async loads(filenames) {
-        var e_1, _a;
         const sourceFiles = [];
-        try {
-            for (var filenames_1 = __asyncValues(filenames), filenames_1_1; filenames_1_1 = await filenames_1.next(), !filenames_1_1.done;) {
-                const filename = filenames_1_1.value;
-                sourceFiles.push(await this.load(filename));
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (filenames_1_1 && !filenames_1_1.done && (_a = filenames_1.return)) await _a.call(filenames_1);
-            }
-            finally { if (e_1) throw e_1.error; }
+        for await (const filename of filenames) {
+            sourceFiles.push(await this.load(filename));
         }
         return sourceFiles;
     }

@@ -34,7 +34,7 @@ const getStack = (exception) => {
     let stack;
     if (typeof exception === 'string') {
         stack = new Error(exception).stack;
-        return stack.split('\n');
+        return stack?.split('\n') || [];
     }
     if (!stack && exception instanceof common_1.HttpException) {
         const excResp = exception.getResponse();
@@ -42,7 +42,7 @@ const getStack = (exception) => {
         if (Array.isArray(stack)) {
             return stack;
         }
-        return stack.split('\n');
+        return stack?.split('\n') || [];
     }
     if (!exception.stack) {
         stack = new Error().stack;
@@ -53,7 +53,7 @@ const getStack = (exception) => {
     if (Array.isArray(stack)) {
         return stack;
     }
-    return stack.split('\n');
+    return stack?.split('\n') || [];
 };
 exports.getStack = getStack;
 const handleError = (error) => {

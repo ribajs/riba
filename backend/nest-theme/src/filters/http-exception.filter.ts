@@ -19,7 +19,11 @@ export class HttpExceptionFilter implements ExceptionFilter {
   log = new Logger(this.constructor.name);
 
   constructor(private config: ConfigService, private ssr: SsrService) {
-    this.theme = this.config.get<FullThemeConfig>('theme');
+    const theme = this.config.get<FullThemeConfig>('theme');
+    if (!theme) {
+      throw new Error('Theme config not defined!');
+    }
+    this.theme = theme;
   }
 
   private getErrorObject(
@@ -108,7 +112,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       );
       if (result.hasError) {
         overwriteException = result.exception;
-        status = getStatus(overwriteException);
+        status = overwriteException ? getStatus(overwriteException) : 500;
       } else {
         return res.status(status).send(result.html);
       }

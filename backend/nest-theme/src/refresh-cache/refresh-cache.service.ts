@@ -11,7 +11,11 @@ export class RefreshCacheService implements OnApplicationBootstrap {
   private log = new Logger(this.constructor.name);
   public static isRunning = false;
   constructor(private readonly config: ConfigService) {
-    this.theme = config.get<FullThemeConfig>('theme');
+    const theme = config.get<FullThemeConfig>('theme');
+    if (!theme) {
+      throw new Error('Theme config not defined!');
+    }
+    this.theme = theme;
   }
 
   async onApplicationBootstrap(): Promise<void> {
@@ -68,7 +72,9 @@ export class RefreshCacheService implements OnApplicationBootstrap {
     for (const anchor of $anchors) {
       const $anchor = $(anchor);
       const link = $anchor.attr('href');
-      links.push(link);
+      if (link) {
+        links.push(link);
+      }
     }
 
     return links;
@@ -98,11 +104,11 @@ export class RefreshCacheService implements OnApplicationBootstrap {
   }
 
   // TODO set host to global config modules
-  public async refresh(
-    host: string = process.env.NEST_REMOTE_URL,
-    force?: boolean,
-  ) {
-    if (!force && !this.theme.cache.refresh.active) {
+  public async refresh(host = process.env.NEST_REMOTE_URL, force?: boolean) {
+    if (!host) {
+      throw new Error('The host is required');
+    }
+    if (!force && !this.theme.cache.refresh?.active) {
       return;
     }
     if (RefreshCacheService.isRunning) {

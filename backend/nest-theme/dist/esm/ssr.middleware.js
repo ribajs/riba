@@ -20,7 +20,11 @@ let SsrMiddleware = class SsrMiddleware {
         this.ssr = ssr;
         this.cacheManager = cacheManager;
         this.log = new Logger(this.constructor.name);
-        this.theme = this.config.get('theme');
+        const theme = config.get('theme');
+        if (!theme) {
+            throw new Error('Theme config not defined!');
+        }
+        this.theme = theme;
     }
     async use(req, res, next) {
         if (!req.route) {
@@ -74,7 +78,8 @@ let SsrMiddleware = class SsrMiddleware {
         }
     }
     getRouteSettingsByRoute(routePath) {
-        return this.theme.routes.find((route) => {
+        const routes = this.theme.routes || [];
+        return routes.find((route) => {
             return route.path.includes(routePath);
         });
     }

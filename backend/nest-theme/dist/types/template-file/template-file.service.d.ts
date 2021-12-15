@@ -1,5 +1,5 @@
 import { ConfigService } from '@nestjs/config';
-import { TemplateFile } from './types';
+import { TemplateFile } from '../types';
 export declare class TemplateFileService {
     private log;
     private theme;

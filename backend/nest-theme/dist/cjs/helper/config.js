@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.loadConfig = exports.validateFullThemeConfig = exports.validateNestThemeConfig = exports.validateThemeConfig = void 0;
 const vm_1 = require("vm");
 const YAML = require("yaml");
+const promises_1 = require("fs/promises");
 const fs_1 = require("fs");
 const constants_1 = require("../constants");
 const validateThemeConfig = (themeConfig) => {
@@ -50,7 +51,7 @@ const loadConfig = async (searchConfigPaths, env) => {
         }
         else if (configPath.endsWith('.ts')) {
             const { transpileModule, ModuleKind } = await Promise.resolve().then(() => require('typescript'));
-            let tSource = (0, fs_1.readFileSync)(configPath, 'utf8');
+            const tSource = await (0, promises_1.readFile)(configPath, 'utf8');
             const compilerOptions = {
                 module: ModuleKind.CommonJS,
             };
@@ -60,17 +61,21 @@ const loadConfig = async (searchConfigPaths, env) => {
                 },
                 require,
             };
-            let jSource = transpileModule(tSource, { compilerOptions }).outputText;
+            let jSource = transpileModule(tSource, {
+                compilerOptions,
+            }).outputText;
             let script = new vm_1.Script(jSource);
             script.runInNewContext(context);
+            if (!context.exports.config) {
+                throw new Error(`The theme condig file "${configPath}" needs to export a config method!`);
+            }
             const themeConfig = context.exports.config(env);
             script = null;
             jSource = null;
-            tSource = null;
             return themeConfig;
         }
         else if (configPath.endsWith('.yaml')) {
-            const result = YAML.parse((0, fs_1.readFileSync)(configPath, 'utf8'));
+            const result = YAML.parse(await (0, promises_1.readFile)(configPath, 'utf8'));
             return result;
         }
         else {

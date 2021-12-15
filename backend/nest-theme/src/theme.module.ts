@@ -46,7 +46,7 @@ export class ThemeModule {
   static async register(
     nestThemeConfig: NestThemeConfig,
     expressAdapter: ExpressAdapter,
-    env = process.env.NODE_ENV,
+    env = process.env.NODE_ENV || 'development',
   ): Promise<DynamicModule> {
     const basePath = resolve(nestThemeConfig.themeDir, 'config');
     const activeThemeConfig = await loadConfig<ThemeConfig>(
@@ -106,6 +106,9 @@ export class ThemeModule {
   configure(consumer: MiddlewareConsumer) {
     // Dynamic routes
     const theme = this.config.get<ThemeConfig>('theme');
+    if (!theme) {
+      throw new Error('Theme config not defined!');
+    }
     const paths: { path: string; method: RequestMethod }[] = [];
     if (theme.routes) {
       for (const route of theme.routes) {

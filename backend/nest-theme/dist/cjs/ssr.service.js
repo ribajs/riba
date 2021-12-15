@@ -23,7 +23,11 @@ let SsrService = class SsrService {
         this.sourceFile = sourceFile;
         this.templateFile = templateFile;
         this.log = new common_1.Logger(this.constructor.name);
-        this.theme = config.get('theme');
+        const theme = config.get('theme');
+        if (!theme) {
+            throw new Error('Theme config not defined!');
+        }
+        this.theme = theme;
     }
     async getSharedContext(req, templateVars, errorObj) {
         const sharedContext = {
@@ -50,7 +54,7 @@ let SsrService = class SsrService {
                 subdomains: req.subdomains,
                 xhr: req.xhr,
                 errorObj: errorObj,
-                status: (errorObj === null || errorObj === void 0 ? void 0 : errorObj.statusCode) || req.statusCode || 200,
+                status: errorObj?.statusCode || req.statusCode || 200,
             },
             env: process.env,
             templateVars: templateVars.get(),
@@ -84,7 +88,10 @@ let SsrService = class SsrService {
         return { dom, virtualConsole };
     }
     async render(layout, sharedContext, scriptFilenames = ['main.bundle.js']) {
-        let { dom, virtualConsole } = await this.createDomForLayout(layout);
+        let { dom, virtualConsole } = (await this.createDomForLayout(layout));
+        if (!dom) {
+            throw new Error('Dom not defined!');
+        }
         dom.window.ssr = sharedContext;
         let files = await this.sourceFile.loads(scriptFilenames);
         let vmContext = dom.getInternalVMContext();
@@ -109,29 +116,35 @@ let SsrService = class SsrService {
             };
             const onDone = (lifecycleEventData) => {
                 this.log.debug('[Riba lifecycle] Done.');
+                if (!dom) {
+                    throw new Error('Dom is not defined!');
+                }
                 const html = dom.serialize();
-                const result = Object.assign(Object.assign({}, lifecycleEventData), { html: html, css: [] });
+                const result = {
+                    ...lifecycleEventData,
+                    html: html,
+                    css: [],
+                };
                 resolve(result);
                 clear();
                 return;
             };
             const clear = () => {
-                var _a, _b, _c, _d, _e;
-                virtualConsole.sendTo(new dummy_console_1.DummyConsole());
-                virtualConsole.off('jsdomError', onError);
+                virtualConsole?.sendTo(new dummy_console_1.DummyConsole());
+                virtualConsole?.off('jsdomError', onError);
                 sharedContext.events.off('error', onError, this);
                 sharedContext.events.off('ready', onDone, this);
-                if (typeof ((_a = dom === null || dom === void 0 ? void 0 : dom.window) === null || _a === void 0 ? void 0 : _a.removeEventListener) === 'function') {
+                if (typeof dom?.window?.removeEventListener === 'function') {
                     dom.window.removeEventListener('error', onError);
                 }
-                if (typeof ((_b = dom === null || dom === void 0 ? void 0 : dom.window) === null || _b === void 0 ? void 0 : _b.dispatchEvent) === 'function' &&
+                if (typeof dom?.window?.dispatchEvent === 'function' &&
                     dom.window.Event) {
                     dom.window.dispatchEvent(new dom.window.Event('beforeunload'));
                 }
-                if (typeof ((_c = dom === null || dom === void 0 ? void 0 : dom.window) === null || _c === void 0 ? void 0 : _c.close) === 'function') {
+                if (typeof dom?.window?.close === 'function') {
                     dom.window.close();
                 }
-                if (typeof ((_e = (_d = dom === null || dom === void 0 ? void 0 : dom.window) === null || _d === void 0 ? void 0 : _d.document) === null || _e === void 0 ? void 0 : _e.write) === 'function') {
+                if (typeof dom?.window?.document?.write === 'function') {
                     dom.window.document.write();
                 }
                 files = null;
@@ -140,9 +153,9 @@ let SsrService = class SsrService {
                 dom = null;
             };
             sharedContext.events.once('ready', onDone, this);
-            virtualConsole.on('jsdomError', onError);
+            virtualConsole?.on('jsdomError', onError);
             sharedContext.events.once('error', onError, this);
-            dom.window.addEventListener('error', onError);
+            dom?.window.addEventListener('error', onError);
         });
         this.log.debug('[Riba lifecycle] Wait...');
         return renderResult;
@@ -158,9 +171,9 @@ let SsrService = class SsrService {
         return newError;
     }
     async renderComponent({ templatePath, rootTag = 'ssr-root-page', componentTagName, sharedContext, }) {
-        rootTag = rootTag || this.theme.ssr.rootTag || 'ssr-root-page';
+        rootTag = rootTag || this.theme.ssr?.rootTag || 'ssr-root-page';
         templatePath =
-            templatePath || this.theme.ssr.template || 'page-component.pug';
+            templatePath || this.theme.ssr?.template || 'page-component.pug';
         const template = await this.templateFile.load(templatePath, rootTag, componentTagName, {
             env: sharedContext.env,
             templateVars: sharedContext.templateVars,

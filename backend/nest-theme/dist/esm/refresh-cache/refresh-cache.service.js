@@ -17,7 +17,11 @@ let RefreshCacheService = RefreshCacheService_1 = class RefreshCacheService {
         this.config = config;
         this.visited = [];
         this.log = new Logger(this.constructor.name);
-        this.theme = config.get('theme');
+        const theme = config.get('theme');
+        if (!theme) {
+            throw new Error('Theme config not defined!');
+        }
+        this.theme = theme;
     }
     async onApplicationBootstrap() {
         setTimeout(async () => {
@@ -60,7 +64,9 @@ let RefreshCacheService = RefreshCacheService_1 = class RefreshCacheService {
         for (const anchor of $anchors) {
             const $anchor = $(anchor);
             const link = $anchor.attr('href');
-            links.push(link);
+            if (link) {
+                links.push(link);
+            }
         }
         return links;
     }
@@ -87,8 +93,10 @@ let RefreshCacheService = RefreshCacheService_1 = class RefreshCacheService {
         return;
     }
     async refresh(host = process.env.NEST_REMOTE_URL, force) {
-        var _a;
-        if (!force && !this.theme.cache.refresh.active) {
+        if (!host) {
+            throw new Error('The host is required');
+        }
+        if (!force && !this.theme.cache.refresh?.active) {
             return;
         }
         if (RefreshCacheService_1.isRunning) {
@@ -97,7 +105,7 @@ let RefreshCacheService = RefreshCacheService_1 = class RefreshCacheService {
         }
         RefreshCacheService_1.isRunning = true;
         this.visited = [];
-        const startPath = ((_a = this.theme.cache.refresh) === null || _a === void 0 ? void 0 : _a.startPath) || '/';
+        const startPath = this.theme.cache.refresh?.startPath || '/';
         try {
             await this.deepRefresh([startPath], host);
         }

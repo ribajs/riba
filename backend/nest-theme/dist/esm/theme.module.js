@@ -24,7 +24,7 @@ let ThemeModule = ThemeModule_1 = class ThemeModule {
     constructor(config) {
         this.config = config;
     }
-    static async register(nestThemeConfig, expressAdapter, env = process.env.NODE_ENV) {
+    static async register(nestThemeConfig, expressAdapter, env = process.env.NODE_ENV || 'development') {
         const basePath = resolve(nestThemeConfig.themeDir, 'config');
         const activeThemeConfig = await loadConfig([
             resolve(basePath, 'theme.js'),
@@ -33,7 +33,15 @@ let ThemeModule = ThemeModule_1 = class ThemeModule {
         ], env);
         validateThemeConfig(activeThemeConfig);
         validateNestThemeConfig(nestThemeConfig);
-        const fullThemeConfig = Object.assign(Object.assign(Object.assign({}, activeThemeConfig), nestThemeConfig), { basePath, templateVars: nestThemeConfig.templateVars || new EmptyTemplateVars(), assetsDir: resolve(nestThemeConfig.themeDir, activeThemeConfig.assetsDir), viewsDir: resolve(nestThemeConfig.themeDir, activeThemeConfig.viewsDir), pageComponentsDir: resolve(nestThemeConfig.themeDir, activeThemeConfig.pageComponentsDir || '') });
+        const fullThemeConfig = {
+            ...activeThemeConfig,
+            ...nestThemeConfig,
+            basePath,
+            templateVars: nestThemeConfig.templateVars || new EmptyTemplateVars(),
+            assetsDir: resolve(nestThemeConfig.themeDir, activeThemeConfig.assetsDir),
+            viewsDir: resolve(nestThemeConfig.themeDir, activeThemeConfig.viewsDir),
+            pageComponentsDir: resolve(nestThemeConfig.themeDir, activeThemeConfig.pageComponentsDir || ''),
+        };
         validateFullThemeConfig(fullThemeConfig);
         const cacheModule = CacheModule.register();
         expressAdapter.setViewEngine(fullThemeConfig.viewEngine);
@@ -54,6 +62,9 @@ let ThemeModule = ThemeModule_1 = class ThemeModule {
     }
     configure(consumer) {
         const theme = this.config.get('theme');
+        if (!theme) {
+            throw new Error('Theme config not defined!');
+        }
         const paths = [];
         if (theme.routes) {
             for (const route of theme.routes) {

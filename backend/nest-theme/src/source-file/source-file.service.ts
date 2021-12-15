@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { resolve } from 'path';
 import { promises as fs } from 'fs';
 import { Script } from 'vm';
-import { SourceFile } from './types';
+import { SourceFile } from '../types';
 
 @Injectable()
 export class SourceFileService {
@@ -12,7 +12,11 @@ export class SourceFileService {
   private dir: string;
 
   constructor(config: ConfigService) {
-    this.theme = config.get<ThemeConfig>('theme');
+    const theme = config.get<ThemeConfig>('theme');
+    if (!theme) {
+      throw new Error('Theme config not defined!');
+    }
+    this.theme = theme;
     this.dir = resolve(this.theme.assetsDir, 'ssr');
   }
 

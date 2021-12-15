@@ -20,7 +20,11 @@ export class SsrMiddleware implements NestMiddleware {
     private readonly ssr: SsrService,
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {
-    this.theme = this.config.get<FullThemeConfig>('theme');
+    const theme = config.get<FullThemeConfig>('theme');
+    if (!theme) {
+      throw new Error('Theme config not defined!');
+    }
+    this.theme = theme;
   }
   async use(req: Request, res: Response, next: NextFunction) {
     if (!req.route) {
@@ -98,7 +102,8 @@ export class SsrMiddleware implements NestMiddleware {
   }
 
   private getRouteSettingsByRoute(routePath: string) {
-    return this.theme.routes.find((route) => {
+    const routes = this.theme.routes || [];
+    return routes.find((route) => {
       return route.path.includes(routePath);
     });
   }

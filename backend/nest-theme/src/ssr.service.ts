@@ -1,18 +1,22 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { VirtualConsole, JSDOM } from 'jsdom';
+import { Context } from 'vm';
 import { ConfigService } from '@nestjs/config';
-import { TemplateVars } from './types/template-vars';
+import type {
+  TemplateVars,
+  ResponseError,
+  RenderResult,
+  FullThemeConfig,
+  SourceFile,
+} from './types/index';
 import { ErrorObj } from '@ribajs/ssr';
-import type { FullThemeConfig } from './types/theme-config';
 import type { Request } from 'express';
 import { fetch } from './dependencies/fetch';
 import type { ComponentLifecycleEventData, SharedContext } from '@ribajs/ssr';
-import type { RenderResult } from './types';
 import { EventDispatcher } from '@ribajs/events';
 import { SourceFileService } from './source-file/source-file.service';
 import { TemplateFileService } from './template-file/template-file.service';
 import { DummyConsole } from './helper/dummy-console';
-import { ResponseError } from './types';
 
 @Injectable()
 export class SsrService {
@@ -23,7 +27,11 @@ export class SsrService {
     private readonly sourceFile: SourceFileService,
     private readonly templateFile: TemplateFileService,
   ) {
-    this.theme = config.get<FullThemeConfig>('theme');
+    const theme = config.get<FullThemeConfig>('theme');
+    if (!theme) {
+      throw new Error('Theme config not defined!');
+    }
+    this.theme = theme;
   }
 
   async getSharedContext(
@@ -58,7 +66,7 @@ export class SsrService {
         errorObj: errorObj,
         status: errorObj?.statusCode || req.statusCode || 200,
       },
-      env: process.env,
+      env: process.env as { [key: string]: string },
       templateVars: templateVars.get(),
     };
     return sharedContext;
@@ -116,11 +124,19 @@ export class SsrService {
     sharedContext: SharedContext,
     scriptFilenames = ['main.bundle.js'],
   ) {
-    let { dom, virtualConsole } = await this.createDomForLayout(layout);
+    let { dom, virtualConsole } = (await this.createDomForLayout(layout)) as {
+      dom: JSDOM | null;
+      virtualConsole: VirtualConsole | null;
+    };
+    if (!dom) {
+      throw new Error('Dom not defined!');
+    }
     dom.window.ssr = sharedContext;
 
-    let files = await this.sourceFile.loads(scriptFilenames);
-    let vmContext = dom.getInternalVMContext();
+    let files: SourceFile[] | null = await this.sourceFile.loads(
+      scriptFilenames,
+    );
+    let vmContext: Context | null = dom.getInternalVMContext();
 
     for (const file of files) {
       try {
@@ -144,6 +160,9 @@ export class SsrService {
 
       const onDone = (lifecycleEventData: ComponentLifecycleEventData) => {
         this.log.debug('[Riba lifecycle] Done.');
+        if (!dom) {
+          throw new Error('Dom is not defined!');
+        }
         const html = dom.serialize();
         const result: RenderResult = {
           ...lifecycleEventData,
@@ -157,8 +176,8 @@ export class SsrService {
 
       const clear = () => {
         // Ignore clear errors
-        virtualConsole.sendTo(new DummyConsole());
-        virtualConsole.off('jsdomError', onError);
+        virtualConsole?.sendTo(new DummyConsole());
+        virtualConsole?.off('jsdomError', onError);
 
         sharedContext.events.off('error', onError, this);
         sharedContext.events.off('ready', onDone, this);
@@ -189,9 +208,9 @@ export class SsrService {
       };
 
       sharedContext.events.once('ready', onDone, this);
-      virtualConsole.on('jsdomError', onError);
+      virtualConsole?.on('jsdomError', onError);
       sharedContext.events.once('error', onError, this);
-      dom.window.addEventListener('error', onError);
+      dom?.window.addEventListener('error', onError);
     });
 
     this.log.debug('[Riba lifecycle] Wait...');
@@ -221,9 +240,9 @@ export class SsrService {
     componentTagName: string;
     sharedContext: SharedContext;
   }): Promise<RenderResult> {
-    rootTag = rootTag || this.theme.ssr.rootTag || 'ssr-root-page';
+    rootTag = rootTag || this.theme.ssr?.rootTag || 'ssr-root-page';
     templatePath =
-      templatePath || this.theme.ssr.template || 'page-component.pug';
+      templatePath || this.theme.ssr?.template || 'page-component.pug';
 
     const template = await this.templateFile.load(
       templatePath,

@@ -41,10 +41,10 @@ export const getMessage = (
 export const getStack = (
   exception: HttpException | ResponseError | string,
 ): string[] => {
-  let stack: string | string[];
+  let stack: string | string[] | undefined;
   if (typeof exception === 'string') {
     stack = new Error(exception).stack;
-    return stack.split('\n');
+    return stack?.split('\n') || [];
   }
 
   if (!stack && exception instanceof HttpException) {
@@ -53,7 +53,7 @@ export const getStack = (
     if (Array.isArray(stack)) {
       return stack;
     }
-    return stack.split('\n');
+    return stack?.split('\n') || [];
   }
 
   if (!exception.stack) {
@@ -68,7 +68,7 @@ export const getStack = (
     return stack;
   }
 
-  return stack.split('\n');
+  return stack?.split('\n') || [];
 };
 
 export const handleError = (

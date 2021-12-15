@@ -17,7 +17,11 @@ let HttpExceptionFilter = class HttpExceptionFilter {
         this.config = config;
         this.ssr = ssr;
         this.log = new Logger(this.constructor.name);
-        this.theme = this.config.get('theme');
+        const theme = this.config.get('theme');
+        if (!theme) {
+            throw new Error('Theme config not defined!');
+        }
+        this.theme = theme;
     }
     getErrorObject(exception, req, overwriteException) {
         const status = getStatus(overwriteException || exception);
@@ -74,7 +78,7 @@ let HttpExceptionFilter = class HttpExceptionFilter {
             const result = await this.renderErrorPage(exception, host, errorPageConfig.component);
             if (result.hasError) {
                 overwriteException = result.exception;
-                status = getStatus(overwriteException);
+                status = overwriteException ? getStatus(overwriteException) : 500;
             }
             else {
                 return res.status(status).send(result.html);

@@ -11,7 +11,7 @@ export declare class HttpExceptionFilter implements ExceptionFilter {
     constructor(config: ConfigService, ssr: SsrService);
     private getErrorObject;
     private renderErrorPage;
-    catch(exception: HttpException, host: ArgumentsHost): Promise<Response<any, Record<string, any>>>;
+    catch(exception: HttpException, host: ArgumentsHost): Promise<Response<any, Record<string, any>> | undefined>;
 }
 export declare const HttpExceptionFilterProvider: {
     provide: string;

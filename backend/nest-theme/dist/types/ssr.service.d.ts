@@ -1,11 +1,9 @@
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { TemplateVars } from './types/template-vars';
+import type { TemplateVars, RenderResult, FullThemeConfig } from './types/index';
 import { ErrorObj } from '@ribajs/ssr';
-import type { FullThemeConfig } from './types/theme-config';
 import type { Request } from 'express';
 import type { SharedContext } from '@ribajs/ssr';
-import type { RenderResult } from './types';
 import { SourceFileService } from './source-file/source-file.service';
 import { TemplateFileService } from './template-file/template-file.service';
 export declare class SsrService {
