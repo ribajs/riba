@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { ResponseError } from './types';
+import { ResponseError } from '@ribajs/node-ssr';
 
 /**
  *

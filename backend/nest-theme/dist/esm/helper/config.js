@@ -2,7 +2,7 @@ import { Script } from 'vm';
 import * as YAML from 'yaml';
 import { readFile } from 'fs/promises';
 import { existsSync } from 'fs';
-import { SUPPORTED_TEMPLATE_EINGINES } from '../constants';
+import { SUPPORTED_TEMPLATE_ENGINES } from '@ribajs/node-ssr';
 export const validateThemeConfig = (themeConfig) => {
     if (typeof themeConfig.name !== 'string') {
         throw new Error('The theme config must contain a "name" property of type string!');
@@ -13,7 +13,7 @@ export const validateThemeConfig = (themeConfig) => {
     if (typeof themeConfig.viewsDir !== 'string') {
         throw new Error('The theme config must contain a "viewsDir" property of type string!');
     }
-    if (!SUPPORTED_TEMPLATE_EINGINES.includes(themeConfig.viewEngine)) {
+    if (!SUPPORTED_TEMPLATE_ENGINES.includes(themeConfig.viewEngine)) {
         throw new Error('The theme config must contain a "viewEngine" property of a supported template engine string!');
     }
     if (themeConfig.routes) {

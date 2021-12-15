@@ -23,22 +23,18 @@ import {
   validateFullThemeConfig,
 } from './helper/config';
 import { resolve } from 'path';
-import { SourceFileService } from './source-file/source-file.service';
-import { TemplateFileService } from './template-file/template-file.service';
 import { RefreshCacheService } from './refresh-cache/refresh-cache.service';
 @Module({
   providers: [
     SsrService,
     SsrMiddleware,
     HttpExceptionFilterProvider,
-    SourceFileService,
-    TemplateFileService,
     RefreshCacheService,
     HttpAdapterHost,
   ],
   controllers: [],
   imports: [],
-  exports: [SsrService, SsrMiddleware, SourceFileService, RefreshCacheService],
+  exports: [SsrService, SsrMiddleware, RefreshCacheService],
 })
 export class ThemeModule {
   constructor(private config: ConfigService) {}

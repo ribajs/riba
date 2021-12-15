@@ -6,7 +6,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     // "allowSyntheticDefaultImports": true,
-    "target": "ES2021",
+    "target": "ES2020",
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
@@ -18,6 +18,6 @@
   },
   "include": [
     "src/**/*"
-  ],
+, "../node-ssr/src/types/response-error.ts"  ],
   "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
 }

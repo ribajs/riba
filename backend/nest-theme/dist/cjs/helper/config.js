@@ -5,7 +5,7 @@ const vm_1 = require("vm");
 const YAML = require("yaml");
 const promises_1 = require("fs/promises");
 const fs_1 = require("fs");
-const constants_1 = require("../constants");
+const node_ssr_1 = require("@ribajs/node-ssr");
 const validateThemeConfig = (themeConfig) => {
     if (typeof themeConfig.name !== 'string') {
         throw new Error('The theme config must contain a "name" property of type string!');
@@ -16,7 +16,7 @@ const validateThemeConfig = (themeConfig) => {
     if (typeof themeConfig.viewsDir !== 'string') {
         throw new Error('The theme config must contain a "viewsDir" property of type string!');
     }
-    if (!constants_1.SUPPORTED_TEMPLATE_EINGINES.includes(themeConfig.viewEngine)) {
+    if (!node_ssr_1.SUPPORTED_TEMPLATE_ENGINES.includes(themeConfig.viewEngine)) {
         throw new Error('The theme config must contain a "viewEngine" property of a supported template engine string!');
     }
     if (themeConfig.routes) {

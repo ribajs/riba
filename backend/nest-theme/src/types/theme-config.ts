@@ -1,5 +1,5 @@
 import type { ThemeConfig } from '@ribajs/ssr';
-import { TemplateVars } from '../types/template-vars';
+import { TemplateVars } from '@ribajs/node-ssr';
 
 export interface NestThemeConfig {
   themeDir: string;

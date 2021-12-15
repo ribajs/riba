@@ -6465,6 +6465,7 @@ __metadata:
     "@nestjs/testing": ^8.2.3
     "@ribajs/core": "workspace:*"
     "@ribajs/events": "workspace:*"
+    "@ribajs/node-ssr": "workspace:^"
     "@ribajs/ssr": "workspace:*"
     "@types/cache-manager": ^3.4.2
     "@types/consolidate": ^0.14.1
@@ -6538,6 +6539,96 @@ __metadata:
     prettier: 2.5.1
     rimraf: ^3.0.2
     typescript: 4.5.4
+  languageName: unknown
+  linkType: soft
+
+"@ribajs/node-ssr-example@workspace:examples/node-ssr-example":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/node-ssr-example@workspace:examples/node-ssr-example"
+  dependencies:
+    "@babel/cli": ^7.16.0
+    "@babel/core": ^7.16.5
+    "@babel/plugin-proposal-class-properties": ^7.16.5
+    "@babel/plugin-proposal-export-default-from": ^7.16.5
+    "@babel/plugin-proposal-object-rest-spread": ^7.16.5
+    "@babel/plugin-proposal-optional-chaining": ^7.16.5
+    "@babel/plugin-syntax-export-default-from": ^7.16.5
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
+    "@babel/plugin-transform-classes": ^7.16.5
+    "@babel/plugin-transform-runtime": ^7.16.5
+    "@babel/plugin-transform-typescript": ^7.16.1
+    "@babel/preset-env": ^7.16.5
+    "@babel/preset-typescript": ^7.16.5
+    "@babel/runtime": ^7.16.5
+    "@babel/runtime-corejs3": ^7.16.5
+    "@graphql-tools/webpack-loader": ^6.6.1
+    "@ribajs/babel-config": "workspace:*"
+    "@ribajs/core": "workspace:*"
+    "@ribajs/eslint-config": "workspace:*"
+    "@ribajs/events": "workspace:*"
+    "@ribajs/node-ssr": "workspace:*"
+    "@ribajs/ssr": "workspace:*"
+    "@ribajs/tsconfig": "workspace:*"
+    "@ribajs/utils": "workspace:*"
+    "@ribajs/webpack-config": "workspace:*"
+    "@typescript-eslint/eslint-plugin": ^5.7.0
+    "@typescript-eslint/experimental-utils": ^5.7.0
+    "@typescript-eslint/parser": ^5.7.0
+    "@typescript-eslint/typescript-estree": ^5.7.0
+    babel-loader: ^8.2.3
+    babel-plugin-array-includes: ^2.0.3
+    css-loader: ^6.5.1
+    eslint: ^8.4.1
+    eslint-config-prettier: ^8.3.0
+    eslint-plugin-prettier: ^4.0.0
+    file-loader: ^6.2.0
+    fork-ts-checker-webpack-plugin: ^6.5.0
+    html-loader: ^3.0.1
+    postcss-preset-env: ^7.0.1
+    prettier: 2.5.1
+    pug: ^3.0.2
+    pug-loader: ^2.4.0
+    sass: ^1.45.0
+    style-loader: ^3.3.1
+    terser-webpack-plugin: ^5.2.5
+    typescript: ^4.5.4
+    webpack: ^5.65.0
+    webpack-cli: ^4.9.1
+  languageName: unknown
+  linkType: soft
+
+"@ribajs/node-ssr@workspace:*, @ribajs/node-ssr@workspace:^, @ribajs/node-ssr@workspace:backend/node-ssr":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/node-ssr@workspace:backend/node-ssr"
+  dependencies:
+    "@ribajs/core": "workspace:*"
+    "@ribajs/events": "workspace:*"
+    "@ribajs/ssr": "workspace:*"
+    "@types/consolidate": ^0.14.1
+    "@types/express": ^4.17.13
+    "@types/jsdom": ^16.2.13
+    "@types/node": ^16.11.13
+    "@types/node-fetch": ^2.5.12
+    "@types/yargs": ^17.0.7
+    "@typescript-eslint/eslint-plugin": ^5.7.0
+    "@typescript-eslint/parser": ^5.7.0
+    consolidate: ^0.16.0
+    eslint: ^8.4.1
+    eslint-config-prettier: ^8.3.0
+    eslint-plugin-prettier: ^4.0.0
+    express: ^4.17.1
+    jsdom: ^19.0.0
+    node-fetch: ^2.6.6
+    prettier: 2.5.1
+    rimraf: ^3.0.2
+    typescript: 4.5.4
+    yargs: ^17.3.0
+  peerDependencies:
+    pug: "*"
+    tinyliquid: "*"
+    twig: "*"
+  bin:
+    ssr: ./bin/run
   languageName: unknown
   linkType: soft
 

@@ -11,188 +11,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SsrService = void 0;
 const common_1 = require("@nestjs/common");
-const jsdom_1 = require("jsdom");
 const config_1 = require("@nestjs/config");
-const fetch_1 = require("./dependencies/fetch");
-const events_1 = require("@ribajs/events");
-const source_file_service_1 = require("./source-file/source-file.service");
-const template_file_service_1 = require("./template-file/template-file.service");
-const dummy_console_1 = require("./helper/dummy-console");
+const node_ssr_1 = require("@ribajs/node-ssr");
+const path_1 = require("path");
 let SsrService = class SsrService {
-    constructor(config, sourceFile, templateFile) {
-        this.sourceFile = sourceFile;
-        this.templateFile = templateFile;
-        this.log = new common_1.Logger(this.constructor.name);
+    constructor(config) {
         const theme = config.get('theme');
         if (!theme) {
             throw new Error('Theme config not defined!');
         }
         this.theme = theme;
-    }
-    async getSharedContext(req, templateVars, errorObj) {
-        const sharedContext = {
-            events: new events_1.EventDispatcher(),
-            ctx: {
-                app: req.app,
-                baseUrl: req.baseUrl,
-                body: req.body,
-                cookies: req.cookies,
-                fresh: req.fresh,
-                hostname: req.hostname,
-                ip: req.ip,
-                ips: req.ips,
-                method: req.method,
-                originalUrl: req.originalUrl,
-                params: req.params,
-                path: req.path,
-                protocol: req.protocol,
-                query: req.query,
-                route: req.route,
-                secure: req.secure,
-                signedCookies: req.signedCookies,
-                stale: req.stale,
-                subdomains: req.subdomains,
-                xhr: req.xhr,
-                errorObj: errorObj,
-                status: errorObj?.statusCode || req.statusCode || 200,
-            },
-            env: process.env,
-            templateVars: templateVars.get(),
-        };
-        return sharedContext;
-    }
-    async createDomForLayout(layout) {
-        const virtualConsole = new jsdom_1.VirtualConsole();
-        virtualConsole.sendTo(console);
-        const dom = new jsdom_1.JSDOM(layout, {
-            virtualConsole,
-            runScripts: 'outside-only',
-            includeNodeLocations: true,
-            beforeParse(window) {
-                if (!window.fetch) {
-                    window.fetch = fetch_1.fetch;
-                }
-                if (!window.requestAnimationFrame) {
-                    window.requestAnimationFrame = () => {
-                    };
-                }
-                if (!window.indexedDB) {
-                    window.indexedDB = {
-                        open: () => {
-                            return {};
-                        },
-                    };
-                }
-            },
+        this.ssr = new node_ssr_1.SsrService({
+            defaultRootTag: this.theme.ssr?.rootTag,
+            defaultTemplateEngine: this.theme.viewEngine,
+            sourceFileDir: (0, path_1.resolve)(this.theme.assetsDir, 'ssr'),
+            templateDir: this.theme.viewsDir,
         });
-        return { dom, virtualConsole };
-    }
-    async render(layout, sharedContext, scriptFilenames = ['main.bundle.js']) {
-        let { dom, virtualConsole } = (await this.createDomForLayout(layout));
-        if (!dom) {
-            throw new Error('Dom not defined!');
-        }
-        dom.window.ssr = sharedContext;
-        let files = await this.sourceFile.loads(scriptFilenames);
-        let vmContext = dom.getInternalVMContext();
-        for (const file of files) {
-            try {
-                await file.script.runInContext(vmContext, {
-                    timeout: this.theme.timeout || 5000,
-                });
-            }
-            catch (error) {
-                this.log.error('Error on run script');
-                this.log.error(error);
-                throw error;
-            }
-        }
-        const renderResult = new Promise((resolve, reject) => {
-            const onError = (error) => {
-                this.log.error('SSR error');
-                reject(this.transformBrowserError(error));
-                clear();
-                return true;
-            };
-            const onDone = (lifecycleEventData) => {
-                this.log.debug('[Riba lifecycle] Done.');
-                if (!dom) {
-                    throw new Error('Dom is not defined!');
-                }
-                const html = dom.serialize();
-                const result = {
-                    ...lifecycleEventData,
-                    html: html,
-                    css: [],
-                };
-                resolve(result);
-                clear();
-                return;
-            };
-            const clear = () => {
-                virtualConsole?.sendTo(new dummy_console_1.DummyConsole());
-                virtualConsole?.off('jsdomError', onError);
-                sharedContext.events.off('error', onError, this);
-                sharedContext.events.off('ready', onDone, this);
-                if (typeof dom?.window?.removeEventListener === 'function') {
-                    dom.window.removeEventListener('error', onError);
-                }
-                if (typeof dom?.window?.dispatchEvent === 'function' &&
-                    dom.window.Event) {
-                    dom.window.dispatchEvent(new dom.window.Event('beforeunload'));
-                }
-                if (typeof dom?.window?.close === 'function') {
-                    dom.window.close();
-                }
-                if (typeof dom?.window?.document?.write === 'function') {
-                    dom.window.document.write();
-                }
-                files = null;
-                vmContext = null;
-                virtualConsole = null;
-                dom = null;
-            };
-            sharedContext.events.once('ready', onDone, this);
-            virtualConsole?.on('jsdomError', onError);
-            sharedContext.events.once('error', onError, this);
-            dom?.window.addEventListener('error', onError);
-        });
-        this.log.debug('[Riba lifecycle] Wait...');
-        return renderResult;
-    }
-    transformBrowserError(error) {
-        const newError = new Error(error.message);
-        if (error.stack) {
-            newError.stack = error.stack;
-        }
-        if (error.status) {
-            newError.status = error.status;
-        }
-        return newError;
-    }
-    async renderComponent({ templatePath, rootTag = 'ssr-root-page', componentTagName, sharedContext, }) {
-        rootTag = rootTag || this.theme.ssr?.rootTag || 'ssr-root-page';
-        templatePath =
-            templatePath || this.theme.ssr?.template || 'page-component.pug';
-        const template = await this.templateFile.load(templatePath, rootTag, componentTagName, {
-            env: sharedContext.env,
-            templateVars: sharedContext.templateVars,
-        });
-        try {
-            return await this.render(template.layout, sharedContext);
-        }
-        catch (error) {
-            this.log.error(`Error on render component! rootTag: "${rootTag}"`);
-            this.log.error(error);
-            throw error;
-        }
+        this.getSharedContext = this.ssr.getSharedContext;
+        this.render = this.ssr.render;
+        this.renderComponent = this.ssr.renderComponent;
     }
 };
 SsrService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [config_1.ConfigService,
-        source_file_service_1.SourceFileService,
-        template_file_service_1.TemplateFileService])
+    __metadata("design:paramtypes", [config_1.ConfigService])
 ], SsrService);
 exports.SsrService = SsrService;
 //# sourceMappingURL=ssr.service.js.map

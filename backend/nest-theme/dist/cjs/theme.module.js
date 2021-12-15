@@ -20,8 +20,6 @@ const empty_template_vars_1 = require("./empty-template-vars");
 const http_exception_filter_1 = require("./filters/http-exception.filter");
 const config_2 = require("./helper/config");
 const path_1 = require("path");
-const source_file_service_1 = require("./source-file/source-file.service");
-const template_file_service_1 = require("./template-file/template-file.service");
 const refresh_cache_service_1 = require("./refresh-cache/refresh-cache.service");
 let ThemeModule = ThemeModule_1 = class ThemeModule {
     constructor(config) {
@@ -85,14 +83,12 @@ ThemeModule = ThemeModule_1 = __decorate([
             ssr_service_1.SsrService,
             ssr_middleware_1.SsrMiddleware,
             http_exception_filter_1.HttpExceptionFilterProvider,
-            source_file_service_1.SourceFileService,
-            template_file_service_1.TemplateFileService,
             refresh_cache_service_1.RefreshCacheService,
             core_1.HttpAdapterHost,
         ],
         controllers: [],
         imports: [],
-        exports: [ssr_service_1.SsrService, ssr_middleware_1.SsrMiddleware, source_file_service_1.SourceFileService, refresh_cache_service_1.RefreshCacheService],
+        exports: [ssr_service_1.SsrService, ssr_middleware_1.SsrMiddleware, refresh_cache_service_1.RefreshCacheService],
     }),
     __metadata("design:paramtypes", [config_1.ConfigService])
 ], ThemeModule);

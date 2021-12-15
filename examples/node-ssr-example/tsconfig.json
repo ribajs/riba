@@ -1,0 +1,12 @@
+{
+  "extends": "@ribajs/tsconfig",
+  "compilerOptions": {
+    "outDir": "assets",
+    "baseUrl": "scripts"
+  },
+  "exclude": [
+    "node_modules",
+    "**/*.d.ts",
+    "assets"
+  ]
+}

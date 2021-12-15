@@ -1,265 +1,32 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { VirtualConsole, JSDOM } from 'jsdom';
-import { Context } from 'vm';
+import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import type {
-  TemplateVars,
-  ResponseError,
-  RenderResult,
-  FullThemeConfig,
-  SourceFile,
-} from './types/index';
-import { ErrorObj } from '@ribajs/ssr';
-import type { Request } from 'express';
-import { fetch } from './dependencies/fetch';
-import type { ComponentLifecycleEventData, SharedContext } from '@ribajs/ssr';
-import { EventDispatcher } from '@ribajs/events';
-import { SourceFileService } from './source-file/source-file.service';
-import { TemplateFileService } from './template-file/template-file.service';
-import { DummyConsole } from './helper/dummy-console';
+import type { FullThemeConfig } from './types/index';
+import { SsrService as Ssr } from '@ribajs/node-ssr';
+import { resolve } from 'path';
 
 @Injectable()
 export class SsrService {
-  log = new Logger(this.constructor.name);
-  theme: FullThemeConfig;
-  constructor(
-    config: ConfigService,
-    private readonly sourceFile: SourceFileService,
-    private readonly templateFile: TemplateFileService,
-  ) {
+  private theme: FullThemeConfig;
+  private ssr: Ssr;
+
+  getSharedContext: Ssr['getSharedContext'];
+  render: Ssr['render'];
+  renderComponent: Ssr['renderComponent'];
+
+  constructor(config: ConfigService) {
     const theme = config.get<FullThemeConfig>('theme');
     if (!theme) {
       throw new Error('Theme config not defined!');
     }
     this.theme = theme;
-  }
-
-  async getSharedContext(
-    req: Request,
-    templateVars: TemplateVars,
-    errorObj?: ErrorObj,
-  ) {
-    const sharedContext: SharedContext = {
-      events: new EventDispatcher(),
-      ctx: {
-        // See https://expressjs.com/de/api.html#req
-        app: req.app,
-        baseUrl: req.baseUrl,
-        body: req.body,
-        cookies: req.cookies,
-        fresh: req.fresh,
-        hostname: req.hostname,
-        ip: req.ip,
-        ips: req.ips,
-        method: req.method,
-        originalUrl: req.originalUrl,
-        params: req.params,
-        path: req.path,
-        protocol: req.protocol,
-        query: req.query,
-        route: req.route,
-        secure: req.secure,
-        signedCookies: req.signedCookies,
-        stale: req.stale,
-        subdomains: req.subdomains,
-        xhr: req.xhr,
-        errorObj: errorObj,
-        status: errorObj?.statusCode || req.statusCode || 200,
-      },
-      env: process.env as { [key: string]: string },
-      templateVars: templateVars.get(),
-    };
-    return sharedContext;
-  }
-
-  private async createDomForLayout(layout: string) {
-    const virtualConsole: VirtualConsole | null = new VirtualConsole();
-    virtualConsole.sendTo(console);
-
-    const dom = new JSDOM(layout, {
-      virtualConsole,
-      runScripts: 'outside-only', // 'dangerously',
-      includeNodeLocations: true,
-      beforeParse(window) {
-        if (!window.fetch) {
-          window.fetch = fetch as any;
-        }
-
-        if (!window.requestAnimationFrame) {
-          // Dummy
-          (window as any).requestAnimationFrame = () => {
-            /** Do nothing */
-          };
-        }
-
-        if (!window.indexedDB) {
-          /**
-           * Dummy
-           * Maybe in the future:
-           * * https://www.npmjs.com/package/indexeddb
-           * * https://github.com/metagriffin/indexeddb-js
-           * * ...
-           */
-          (window as any).indexedDB = {
-            open: () => {
-              return {};
-            },
-          };
-        }
-      },
+    this.ssr = new Ssr({
+      defaultRootTag: this.theme.ssr?.rootTag,
+      defaultTemplateEngine: this.theme.viewEngine,
+      sourceFileDir: resolve(this.theme.assetsDir, 'ssr'),
+      templateDir: this.theme.viewsDir,
     });
-    return { dom, virtualConsole };
-  }
-
-  /**
-   * Start ssr using jsdom
-   * @see https://github.com/jsdom/jsdom
-   *
-   * @param layout
-   * @param componentTagName
-   * @param sharedContext Shared context injected to window object of the fake browser environment
-   */
-  async render(
-    layout: string,
-    sharedContext: SharedContext,
-    scriptFilenames = ['main.bundle.js'],
-  ) {
-    let { dom, virtualConsole } = (await this.createDomForLayout(layout)) as {
-      dom: JSDOM | null;
-      virtualConsole: VirtualConsole | null;
-    };
-    if (!dom) {
-      throw new Error('Dom not defined!');
-    }
-    dom.window.ssr = sharedContext;
-
-    let files: SourceFile[] | null = await this.sourceFile.loads(
-      scriptFilenames,
-    );
-    let vmContext: Context | null = dom.getInternalVMContext();
-
-    for (const file of files) {
-      try {
-        await file.script.runInContext(vmContext, {
-          timeout: this.theme.timeout || 5000,
-        });
-      } catch (error) {
-        this.log.error('Error on run script');
-        this.log.error(error);
-        throw error;
-      }
-    }
-
-    const renderResult = new Promise<RenderResult>((resolve, reject) => {
-      const onError = (error: Error | ErrorEvent) => {
-        this.log.error('SSR error');
-        reject(this.transformBrowserError(error));
-        clear();
-        return true;
-      };
-
-      const onDone = (lifecycleEventData: ComponentLifecycleEventData) => {
-        this.log.debug('[Riba lifecycle] Done.');
-        if (!dom) {
-          throw new Error('Dom is not defined!');
-        }
-        const html = dom.serialize();
-        const result: RenderResult = {
-          ...lifecycleEventData,
-          html: html,
-          css: [],
-        };
-        resolve(result);
-        clear();
-        return;
-      };
-
-      const clear = () => {
-        // Ignore clear errors
-        virtualConsole?.sendTo(new DummyConsole());
-        virtualConsole?.off('jsdomError', onError);
-
-        sharedContext.events.off('error', onError, this);
-        sharedContext.events.off('ready', onDone, this);
-
-        if (typeof dom?.window?.removeEventListener === 'function') {
-          dom.window.removeEventListener('error', onError);
-        }
-
-        if (
-          typeof dom?.window?.dispatchEvent === 'function' &&
-          dom.window.Event
-        ) {
-          dom.window.dispatchEvent(new dom.window.Event('beforeunload'));
-        }
-
-        if (typeof dom?.window?.close === 'function') {
-          dom.window.close();
-        }
-
-        // Clear dom
-        if (typeof dom?.window?.document?.write === 'function') {
-          dom.window.document.write();
-        }
-        files = null;
-        vmContext = null;
-        virtualConsole = null;
-        dom = null;
-      };
-
-      sharedContext.events.once('ready', onDone, this);
-      virtualConsole?.on('jsdomError', onError);
-      sharedContext.events.once('error', onError, this);
-      dom?.window.addEventListener('error', onError);
-    });
-
-    this.log.debug('[Riba lifecycle] Wait...');
-
-    return renderResult;
-  }
-
-  private transformBrowserError(error: ResponseError | ErrorEvent) {
-    const newError = new Error(error.message);
-    if ((error as Error).stack) {
-      newError.stack = (error as Error).stack;
-    }
-    if ((error as ResponseError).status) {
-      (newError as ResponseError).status = (error as ResponseError).status;
-    }
-    return newError;
-  }
-
-  async renderComponent({
-    templatePath,
-    rootTag = 'ssr-root-page',
-    componentTagName,
-    sharedContext,
-  }: {
-    templatePath?: string;
-    rootTag?: string;
-    componentTagName: string;
-    sharedContext: SharedContext;
-  }): Promise<RenderResult> {
-    rootTag = rootTag || this.theme.ssr?.rootTag || 'ssr-root-page';
-    templatePath =
-      templatePath || this.theme.ssr?.template || 'page-component.pug';
-
-    const template = await this.templateFile.load(
-      templatePath,
-      rootTag,
-      componentTagName,
-      {
-        env: sharedContext.env,
-        templateVars: sharedContext.templateVars,
-      },
-    );
-
-    try {
-      return await this.render(template.layout, sharedContext);
-    } catch (error) {
-      this.log.error(`Error on render component! rootTag: "${rootTag}"`);
-      this.log.error(error);
-      throw error;
-    }
+    this.getSharedContext = this.ssr.getSharedContext;
+    this.render = this.ssr.render;
+    this.renderComponent = this.ssr.renderComponent;
   }
 }

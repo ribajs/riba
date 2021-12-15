@@ -1,4 +1,4 @@
-import { TemplateVars } from './types/template-vars';
+import { TemplateVars } from '@ribajs/node-ssr';
 
 export class EmptyTemplateVars implements TemplateVars {
   public get() {

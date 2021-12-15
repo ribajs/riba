@@ -16,7 +16,7 @@ export class SsrMiddleware implements NestMiddleware {
   theme: FullThemeConfig;
   log = new Logger(this.constructor.name);
   constructor(
-    private readonly config: ConfigService,
+    readonly config: ConfigService,
     private readonly ssr: SsrService,
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {
