@@ -2,7 +2,7 @@ import type {
   StrapiImage,
   StrapiImageFormat,
   StrapiImageFormatType,
-} from "..//types";
+} from "../types";
 
 /**
  * Get strapi image for format

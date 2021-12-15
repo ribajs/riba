@@ -18,12 +18,16 @@ export const strapiFormatter = {
     }
 
     let host =
-      (window as any)?.env?.STRAPI_REMOTE_URL ||
-      window?.ssr?.env?.STRAPI_LOCAL_URL ||
+      (window as any)?.env?.STRAPI_REMOTE_URL || // This is used on client side
+      window?.ssr?.env?.STRAPI_REMOTE_URL || // This is used on server side
+      (window as any)?.env?.STRAPI_LOCAL_URL || // Client side fallback WARN: This should not be used productively!
+      window?.ssr?.env?.STRAPI_LOCAL_URL || // Server side fallback WARN: This should not be used productively!
       "";
 
     if (!host) {
-      throw new Error("[strapiFormatter] Host not found, please make sure that window.env.STRAPI_REMOTE_URL or window.ssr.env.STRAPI_LOCAL_URL is set!");
+      throw new Error(
+        "[strapiFormatter] Host not found, please make sure that window.env.STRAPI_REMOTE_URL or window.ssr.env.STRAPI_LOCAL_URL is set!"
+      );
     }
 
     if (host.endsWith("/")) {
