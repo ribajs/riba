@@ -9,9 +9,9 @@
   "module": "src/index.ts",
   "source": "src/index.ts",
   "devDependencies": {
-    "@babel/runtime": "^7.16.3",
-    "@babel/runtime-corejs3": "^7.16.3",
+    "@babel/runtime": "^7.16.5",
+    "@babel/runtime-corejs3": "^7.16.5",
     "@ribajs/tsconfig": "workspace:*",
-    "@types/node": "^16.11.12"
+    "@types/node": "^16.11.13"
   }
 }
