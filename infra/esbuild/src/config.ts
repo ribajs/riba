@@ -1,6 +1,6 @@
 import { Config, ESBuildConfig } from "./types";
 import * as DEF from "./constants/defaults";
-import { findFile, basename, getRootPath, resolve, extname } from "./path";
+import { findFile, basename, rootPath, resolve, extname } from "./path";
 import { pnpPlugin } from "@yarnpkg/esbuild-plugin-pnp";
 
 export const searchForTsIndexPath = (
@@ -40,7 +40,6 @@ export const searchForScssIndexPath = (
 export const getDefaultDistDir = async (
   template: Config["template"] = DEF.TEMPLATE
 ) => {
-  const rootPath = await getRootPath();
   switch (template) {
     case "local":
       return DEF.DIST_DIR_LOCAL;

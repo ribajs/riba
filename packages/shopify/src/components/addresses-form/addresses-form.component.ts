@@ -120,15 +120,14 @@ export class ShopifyAddressesComponent extends Component {
 
   // https://help.shopify.com/en/api/reference/customers/customer_address
   // /account/addresses/{id}
-  public delete(id: string) {
-    HttpService.delete(`/account/addresses/${id}`, {}, "json")
-      .then((response: any) => {
-        location.reload();
-      })
-      .catch((error: any) => {
-        console.error("delete error", error);
-        location.reload();
-      });
+  public async delete(id: string) {
+    try {
+      await HttpService.delete(`/account/addresses/${id}`, {}, "json");
+      location.reload();
+    } catch (error) {
+      console.error("delete error", error);
+      location.reload();
+    }
   }
 
   protected initValidation() {

@@ -23,8 +23,8 @@ exports.pkgDir = void 0;
 // Import ESM Module into CommonJS
 // See https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
 const pkgDir = async (cwd) => {
-    const { default: _pkgDir } = await Promise.resolve().then(() => __importStar(require("pkg-dir")));
-    return _pkgDir(cwd);
+    const { packageDirectory } = await Promise.resolve().then(() => __importStar(require("pkg-dir")));
+    return packageDirectory({ cwd });
 };
 exports.pkgDir = pkgDir;
 exports.default = exports.pkgDir;

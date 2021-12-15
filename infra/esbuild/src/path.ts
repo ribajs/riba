@@ -2,12 +2,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
 import { resolve, dirname, basename, extname } from "path";
-import pkgDir from "./dependencies/pkg-dir";
+import findRoot from "find-root";
 import { existsSync, lstatSync } from "fs";
 
-export const getRootPath = async () => {
-  return (await pkgDir(process.cwd())) || process.cwd();
-};
+export const rootPath = findRoot(process.cwd());
 
 export const findDir = (searchPaths: string[]) => {
   let result = null;
