@@ -54,6 +54,9 @@ export class RouteBinder extends Binder<string, HTMLAnchorElement> {
 
   bind(el: HTMLAnchorElement) {
     el.classList.add("route");
+    if (window.ssr) {
+      return;
+    }
     this.onClick = this.onClick.bind(this);
     el.addEventListener("click", this.onClick);
   }

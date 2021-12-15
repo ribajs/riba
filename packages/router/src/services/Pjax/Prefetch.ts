@@ -11,10 +11,10 @@ export interface PrefetchInstances {
  * Prefetch
  */
 class Prefetch {
-  public static getInstance(id = "main"): Prefetch | undefined {
+  public static getInstance(id = "main"): Prefetch {
     const result = Prefetch.instances[id];
     if (!result) {
-      console.warn(`No Pjax instance with id ${id} found!`);
+      return new this(id);
     }
     return result;
   }
