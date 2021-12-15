@@ -24,7 +24,7 @@ let RefreshCacheService = RefreshCacheService_1 = class RefreshCacheService {
     }
     async onApplicationBootstrap() {
         setTimeout(async () => {
-            await this.refresh(process.env.NEST_EXTERN_URL);
+            await this.refresh(process.env.NEST_REMOTE_URL);
         }, 3000);
     }
     isInternalLink(link, host) {
@@ -73,7 +73,10 @@ let RefreshCacheService = RefreshCacheService_1 = class RefreshCacheService {
                 continue;
             }
             const url = this.normalize(link, host);
-            this.visited.push(link);
+            if (this.alreadyVisited(url)) {
+                continue;
+            }
+            this.visited.push(url);
             this.log.log('refresh ' + url);
             const response = await (0, fetch_1.fetch)(url);
             const contentType = response.headers.get('content-type');
@@ -86,7 +89,7 @@ let RefreshCacheService = RefreshCacheService_1 = class RefreshCacheService {
         }
         return;
     }
-    async refresh(host = process.env.NEST_EXTERN_URL, force) {
+    async refresh(host = process.env.NEST_REMOTE_URL, force) {
         var _a;
         if (!force && !this.theme.cache.refresh.active) {
             return;

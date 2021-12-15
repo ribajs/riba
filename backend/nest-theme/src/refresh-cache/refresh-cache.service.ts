@@ -16,7 +16,7 @@ export class RefreshCacheService implements OnApplicationBootstrap {
 
   async onApplicationBootstrap(): Promise<void> {
     setTimeout(async () => {
-      await this.refresh(process.env.NEST_EXTERN_URL);
+      await this.refresh(process.env.NEST_REMOTE_URL);
     }, 3000);
   }
 
@@ -80,7 +80,10 @@ export class RefreshCacheService implements OnApplicationBootstrap {
         continue;
       }
       const url = this.normalize(link, host);
-      this.visited.push(link);
+      if (this.alreadyVisited(url)) {
+        continue;
+      }
+      this.visited.push(url);
       this.log.log('refresh ' + url);
       const response = await fetch(url);
       const contentType = response.headers.get('content-type');
@@ -96,7 +99,7 @@ export class RefreshCacheService implements OnApplicationBootstrap {
 
   // TODO set host to global config modules
   public async refresh(
-    host: string = process.env.NEST_EXTERN_URL,
+    host: string = process.env.NEST_REMOTE_URL,
     force?: boolean,
   ) {
     if (!force && !this.theme.cache.refresh.active) {
