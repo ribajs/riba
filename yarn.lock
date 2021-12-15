@@ -5676,9 +5676,9 @@ __metadata:
     "@ribajs/bs4": "workspace:*"
     "@ribajs/core": "workspace:*"
     "@ribajs/eslint-config": "workspace:*"
-    "@ribajs/events": "workspace:^"
+    "@ribajs/events": "workspace:*"
     "@ribajs/extras": "workspace:*"
-    "@ribajs/history": "workspace:packages/history"
+    "@ribajs/history": "workspace:*"
     "@ribajs/i18n": "workspace:*"
     "@ribajs/iconset": "workspace:*"
     "@ribajs/photoswipe": "workspace:*"
@@ -5690,6 +5690,7 @@ __metadata:
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:infra/webpack-config"
     "@types/debug": ^4.1.7
+    "@types/node": ^16.11.13
     "@types/prismjs": ^1.16.6
     "@typescript-eslint/eslint-plugin": ^5.7.0
     "@typescript-eslint/parser": ^5.7.0

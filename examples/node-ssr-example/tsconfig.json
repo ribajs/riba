@@ -2,7 +2,7 @@
   "extends": "@ribajs/tsconfig",
   "compilerOptions": {
     "outDir": "assets",
-    "baseUrl": "scripts"
+    "baseUrl": "."
   },
   "exclude": [
     "node_modules",

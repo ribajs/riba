@@ -1,6 +1,6 @@
 {
   "files": [
-    "./scripts/ssr/index.ts"
+    "./ssr/index.ts"
   ],
   "compilerOptions": {
     "module": "commonjs",
@@ -10,13 +10,10 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
-    "target": "es2015",
+    "target": "ESNext",
     "lib": [
-      "es2015",
+      "ESNext",
       "dom"
-    ],
-    "types": [
-      "node"
     ],
     "sourceMap": true,
     "outDir": "assets",
