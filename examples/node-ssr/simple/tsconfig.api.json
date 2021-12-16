@@ -5,6 +5,6 @@
     "module": "CommonJS",
     "esModuleInterop": true,
   },
-  "include": ["./api.ts"],
+  "include": ["./api.ts", "deno-api.ts"],
   "exclude": ["dist"]
 }

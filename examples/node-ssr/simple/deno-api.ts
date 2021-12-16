@@ -18,6 +18,8 @@ const request: RequestContext = {
   params: {},
   protocol: "http",
   query: {},
+  path: "/",
+  url: "http://localhost/",
   status: 200,
 };
 

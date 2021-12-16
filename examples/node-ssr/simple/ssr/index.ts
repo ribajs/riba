@@ -21,14 +21,20 @@ riba.module.component.regist(HelloSsrPageComponent);
 riba.module.regist(coreModule.init({}));
 riba.module.regist(SSRModule.init({}));
 
+if (!window.ssr.events) {
+  console.warn(
+    "window.ssr.events is not set, this is required to detect the finished SSR"
+  );
+}
+
 // After all components are bound wie trigger the ssr ready event,
 // as soon as this event is triggered the ssr rendering will be done returns the rendered html
 riba.lifecycle.events.on("ComponentLifecycle:allBound", () => {
-  window.ssr.events.trigger("ready");
+  window.ssr.events?.trigger("ready");
 });
 
 riba.lifecycle.events.on("ComponentLifecycle:error", (error: Error) => {
-  window.ssr.events.trigger("error", error);
+  window.ssr.events?.trigger("error", error);
 });
 
 const view = riba.bind(document?.body);
