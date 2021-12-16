@@ -1,3 +1,5 @@
+// Note: This config is used by nest
+
 import type { ThemeConfigFile, ThemeConfig } from "@ribajs/nest-theme";
 
 export const config: ThemeConfigFile = (env: string | undefined) => {

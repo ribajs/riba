@@ -25,13 +25,9 @@ export class SsrService {
         const sharedContext = {
             events: new EventDispatcher(),
             ctx: {
-                hostname: req.hostname,
-                method: req.method,
-                params: req.params,
-                protocol: req.protocol,
-                query: req.query,
-                errorObj: errorObj,
-                status: errorObj?.statusCode || req.status || 200,
+                ...req,
+                errorObj: req.errorObj || errorObj,
+                status: errorObj?.statusCode || req?.status || 200,
             },
             env: process.env,
             templateVars,

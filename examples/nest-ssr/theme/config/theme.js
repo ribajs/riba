@@ -1,3 +1,5 @@
+// Note: This config is used by alosaur
+
 export default (env) => {
   const config = {
     name: "Demo Theme",
@@ -11,7 +13,7 @@ export default (env) => {
     },
     cache: {
       // One year cache on production
-      ttl: env === "production" ? 300 : 0,
+      ttl: env === "production" ? 300000 : 30000,
       refresh: {
         active: false,
       },

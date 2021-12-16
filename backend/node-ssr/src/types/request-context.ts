@@ -10,5 +10,7 @@ export interface RequestContext {
   hostname: string;
   status: number;
   method: string;
+  path: string;
+  url: string;
   errorObj?: ErrorObj;
 }

@@ -1,15 +1,19 @@
 import {
   container,
   HttpContext,
-  Inject,
   Middleware,
   MiddlewareTarget,
-  NotFoundError,
 } from "https://deno.land/x/alosaur@v0.35.1/mod.ts";
 import type { FullThemeConfig } from "./types/index.ts";
+import type { RequestContext } from "../deno-ssr/mod.ts";
 import { SsrService } from "./ssr.service.ts";
 import { handleError } from "./error-handler.ts";
 import { Cache } from "https://deno.land/x/local_cache@1.0/mod.ts";
+import {
+  Key,
+  pathToRegexp,
+} from "https://deno.land/x/path_to_regexp@v6.2.0/index.ts";
+import { qs } from "https://deno.land/x/deno_qs@0.0.1/mod.ts";
 
 @Middleware(new RegExp("/"))
 export class SsrMiddleware implements MiddlewareTarget {
@@ -26,6 +30,8 @@ export class SsrMiddleware implements MiddlewareTarget {
         "Theme config not defined! " + JSON.stringify(SsrMiddleware.theme),
       );
     }
+
+    this.log.debug("[SsrMiddleware] Init");
 
     this.ssr = container.resolve(SsrService);
 
@@ -44,19 +50,32 @@ export class SsrMiddleware implements MiddlewareTarget {
       this.init();
     }
 
-    const req = context.request;
-    const route = req.parserUrl;
-    const routeSettings = this.getRouteSettingsByRoute(route.pathname);
+    const route = context.request.parserUrl;
+    // const rs = this.getRouteSettingsByRoute(route.pathname);
+    const rs = this.getRouteSettingsByUrl(route);
 
-    if (!routeSettings) {
-      this.log.warn("routeSettings is not set! " + route.pathname);
+    if (!rs) {
+      this.log.warn(
+        "[SsrMiddleware] routeSettings is not set! " + route.pathname,
+      );
       return;
-      // throw new NotFoundError();
     }
+
+    const req: RequestContext = {
+      url: context.request.url,
+      hostname: context.request.parserUrl.hostname,
+      method: context.request.method,
+      protocol: context.request.parserUrl.protocol,
+      params: rs.params,
+      path: rs.path,
+      query: rs.query,
+      status: 200,
+    };
 
     if (!this.cacheManager) {
       throw new Error(
-        "cacheManager not defined! " + JSON.stringify(this.cacheManager),
+        "[SsrMiddleware] cacheManager not defined! " +
+          JSON.stringify(this.cacheManager),
       );
     }
 
@@ -66,7 +85,8 @@ export class SsrMiddleware implements MiddlewareTarget {
       const render = async () => {
         if (!this.theme) {
           throw new Error(
-            "Theme config not defined! " + JSON.stringify(this.theme),
+            "[SsrMiddleware] Theme config not defined! " +
+              JSON.stringify(this.theme),
           );
         }
 
@@ -76,17 +96,16 @@ export class SsrMiddleware implements MiddlewareTarget {
         );
 
         this.log.debug(
-          `START: Render page component: ${routeSettings.component} for ${req.url}`,
+          `[SsrMiddleware] START: Render page component: ${rs.settings.component} for ${req.url}`,
         );
         try {
           const page = await this.ssr.renderComponent({
-            componentTagName: routeSettings.component,
+            componentTagName: rs.settings.component,
             sharedContext,
           });
           this.log.debug(
-            `END: Render page component: ${routeSettings.component} for ${req.url}`,
+            `[SsrMiddleware] END: Render page component: ${rs.settings.component} for ${req.url}`,
           );
-          this.log.debug("Result", page.html);
           return page.html;
         } catch (error) {
           this.log.error(error);
@@ -97,9 +116,9 @@ export class SsrMiddleware implements MiddlewareTarget {
       let result: string;
       if (this.cacheManager.has(cacheKey)) {
         result = this.cacheManager.get(cacheKey);
-        this.log.debug(`Cache used`);
+        this.log.debug(`[SsrMiddleware] Cache used`);
       } else {
-        // We need the try catch here because we are inside if a callback
+        // We need the try catch here because we are inside a callback
         try {
           result = await render();
         } catch (error) {
@@ -120,10 +139,55 @@ export class SsrMiddleware implements MiddlewareTarget {
     }
   }
 
-  private getRouteSettingsByRoute(routePath: string) {
+  private parseRoutePath = (url: URL, path: string) => {
+    const keys: Key[] = [];
+    const regexp = pathToRegexp(path, keys);
+    const match = url.pathname.match(regexp);
+    return {
+      match,
+      keys,
+    };
+  };
+
+  private findRouteSettingsByUrl(url: URL) {
     const routes = this.theme?.routes || [];
-    return routes.find((route) => {
-      return route.path.includes(routePath);
-    });
+    for (const route of routes) {
+      for (const path of route.path) {
+        const data = this.parseRoutePath(url, path);
+        if (data.match) {
+          return {
+            ...data,
+            settings: route,
+            path,
+          };
+        }
+      }
+    }
+    return undefined;
+  }
+
+  /**
+   * Get the route settings for a express route like route, e.g. /pages/:slug
+   * @param url
+   * @returns
+   */
+  private getRouteSettingsByUrl(url: URL) {
+    const data = this.findRouteSettingsByUrl(url);
+
+    if (!data || !data.match) {
+      return undefined;
+    }
+
+    const query = qs.parse(url.search, { ignoreQueryPrefix: true });
+
+    const path = data.match[0];
+    const params: Record<string, string> = {};
+    for (let i = 1; i < data.match.length; i++) {
+      const val = decodeURIComponent(data.match[i]);
+      const key = data.keys[i - 1].name;
+      params[key] = val;
+    }
+
+    return { ...data, query, params, originalPath: path };
   }
 }

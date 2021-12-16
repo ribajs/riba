@@ -2,7 +2,8 @@ import yargs from "yargs/yargs";
 import { hideBin } from "yargs/helpers";
 import { SsrService } from "./ssr.service";
 import { SUPPORTED_TEMPLATE_ENGINES } from "./constants";
-import type { SupportedTemplateEngines } from "./types";
+import type { SupportedTemplateEngines, RequestContext } from "./types";
+import { parseJsonString } from "./utils";
 
 const start = async () => {
   const argv = await yargs(hideBin(process.argv))
@@ -13,7 +14,7 @@ const start = async () => {
       default: 5000,
     })
     .option("root-tag", {
-      alias: "r",
+      alias: "rt",
       type: "string",
       description:
         "The root tag is an html tag name you defined in your initial template. This will be exchanged with the tag name of the page component in the render process.",
@@ -33,24 +34,42 @@ const start = async () => {
       default: "pug",
     })
     .option("template-file", {
-      alias: "f",
+      alias: "tf",
       type: "string",
       description:
         "The template file name of your entry template in which you defined the rootTag",
       default: "page-component.pug",
     })
     .option("source-file-dir", {
-      alias: "s",
+      alias: "sf",
       type: "string",
       description:
         "The directory in which your javascript source files are stored",
       demandOption: true,
     })
     .option("template-dir", {
-      alias: "d",
+      alias: "td",
       type: "string",
       description: "The directory in which your template view files are stored",
       demandOption: true,
+    })
+    .option("template-vars-json", {
+      alias: "tvj",
+      type: "string",
+      description: "JSON string for template variables",
+      default: "{}",
+    })
+    .option("request-json", {
+      alias: "rj",
+      type: "string",
+      description: "JSON string for request data",
+      default: "{}",
+    })
+    .option("pipe-output", {
+      alias: "po",
+      type: "boolean",
+      description: "Pipe node-ssr output to stdin and stderr",
+      default: false,
     })
     .option("pretty", {
       alias: "p",
@@ -77,12 +96,18 @@ const start = async () => {
     defaultTemplateFile: argv["template-file"],
   });
 
-  const sharedContext = await ssr.getSharedContext({}, {});
+  const requestJson = argv["request-json"];
+  const request: RequestContext = parseJsonString(requestJson);
+
+  const templateVarsJson = argv["template-vars-json"];
+  const templateVars = parseJsonString(templateVarsJson);
+
+  const sharedContext = await ssr.getSharedContext(request, templateVars);
 
   const page = await ssr.renderComponent({
     componentTagName: argv.component,
     sharedContext,
-    pipeOutput: false, // TODO
+    pipeOutput: argv["pipe-output"] || false,
   });
 
   console.log(

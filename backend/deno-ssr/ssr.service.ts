@@ -10,6 +10,8 @@ import {
   TemplateVars,
 } from "./types/index.ts";
 
+import { toJsonString } from "./utils.ts";
+
 export class SsrService {
   log = console;
 
@@ -42,6 +44,7 @@ export class SsrService {
         params: req.params,
         protocol: req.protocol,
         query: req.query,
+        path: req.path,
         errorObj: errorObj,
         status: errorObj?.statusCode || req.status || 200,
       },
@@ -85,6 +88,10 @@ export class SsrService {
         sourceFileDir,
         "--template-dir",
         templateDir,
+        "--template-vars-json",
+        toJsonString(sharedContext.templateVars || {}),
+        "--request-json",
+        toJsonString(sharedContext.ctx || {}),
       ],
       stdout: "piped",
       stderr: "piped",
@@ -100,7 +107,6 @@ export class SsrService {
       throw new Error(stderr);
     }
     const output = new TextDecoder().decode(await process.output());
-    console.debug("output", output);
     let result: RenderResult;
     try {
       result = JSON.parse(output).result;
@@ -110,7 +116,6 @@ export class SsrService {
           error?.message,
       );
     }
-    console.debug("result", result);
     return result as RenderResult;
   }
 }

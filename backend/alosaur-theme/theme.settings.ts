@@ -38,7 +38,6 @@ export const getSettings = async (alosaurThemeConfig: AlosaurThemeConfig) => {
   //   useClass: SsrService,
   // });
 
-  console.debug("set themeConfig", themeConfig);
   SsrMiddleware.theme = themeConfig; // Workaround
 
   const themeAppSettings: AppSettings = {
