@@ -39,11 +39,7 @@ export const loadConfig = async (searchConfigPaths, env) => {
         if (!existsSync(configPath)) {
             continue;
         }
-        if (configPath.endsWith('.js')) {
-            const config = await import(configPath);
-            return config(env);
-        }
-        else if (configPath.endsWith('.ts')) {
+        if (configPath.endsWith('.ts')) {
             const { transpileModule, ModuleKind } = await import('typescript');
             const tSource = await readFile(configPath, 'utf8');
             const compilerOptions = {
@@ -67,6 +63,10 @@ export const loadConfig = async (searchConfigPaths, env) => {
             script = null;
             jSource = null;
             return themeConfig;
+        }
+        else if (configPath.endsWith('.js')) {
+            const config = await import(configPath);
+            return config(env);
         }
         else if (configPath.endsWith('.yaml')) {
             const result = YAML.parse(await readFile(configPath, 'utf8'));

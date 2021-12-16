@@ -3,7 +3,6 @@ import { Context } from "vm";
 import fetch from "node-fetch";
 import type {
   ComponentLifecycleEventData,
-  SharedContext,
   ErrorObj,
   RequestContext,
 } from "@ribajs/ssr";
@@ -18,6 +17,7 @@ import type {
   SourceFile,
   SsrServiceOptions,
   SsrServiceOptionsArg,
+  SharedContext,
 } from "./types/index";
 
 export class SsrService {
@@ -67,9 +67,12 @@ export class SsrService {
     return sharedContext;
   }
 
-  private async createDomForLayout(layout: string) {
+  private async createDomForLayout(layout: string, pipeOutput = true) {
     const virtualConsole: VirtualConsole | null = new VirtualConsole();
-    virtualConsole.sendTo(console);
+
+    if (pipeOutput) {
+      virtualConsole.sendTo(console);
+    }
 
     const dom = new JSDOM(layout, {
       virtualConsole,
@@ -117,7 +120,8 @@ export class SsrService {
   async render(
     layout: string,
     sharedContext?: SharedContext,
-    scriptFilenames = ["main.bundle.js"]
+    scriptFilenames = ["main.bundle.js"],
+    pipeOutput = true
   ) {
     sharedContext = sharedContext || (await this.getSharedContext());
 
@@ -125,7 +129,10 @@ export class SsrService {
       sharedContext.events = new EventDispatcher();
     }
 
-    let { dom, virtualConsole } = (await this.createDomForLayout(layout)) as {
+    let { dom, virtualConsole } = (await this.createDomForLayout(
+      layout,
+      pipeOutput
+    )) as {
       dom: JSDOM | null;
       virtualConsole: VirtualConsole | null;
     };
@@ -168,6 +175,7 @@ export class SsrService {
           ...lifecycleEventData,
           html: html,
           css: [],
+          // output: {} // TODO send output to dummy console to return the output here
         };
         resolve(result);
         clear();
@@ -240,11 +248,13 @@ export class SsrService {
     sharedContext,
     templateFile = this.options.defaultTemplateFile,
     rootTag = this.options.defaultRootTag,
+    pipeOutput = true,
   }: {
     templateFile?: string;
     rootTag?: string;
     componentTagName: string;
     sharedContext?: SharedContext;
+    pipeOutput?: boolean;
   }): Promise<RenderResult> {
     sharedContext = sharedContext || (await this.getSharedContext());
 
@@ -259,7 +269,12 @@ export class SsrService {
     );
 
     try {
-      return await this.render(template.layout, sharedContext);
+      return await this.render(
+        template.layout,
+        sharedContext,
+        undefined,
+        pipeOutput
+      );
     } catch (error) {
       this.log.error(`Error on render component! rootTag: "${rootTag}"`);
       this.log.error(error);

@@ -1,6 +1,6 @@
 import { NestMiddleware, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import type { FullThemeConfig } from './types/theme-config';
+import type { FullThemeConfig } from './types';
 import { SsrService } from './ssr.service';
 import type { Request, Response, NextFunction } from 'express';
 import type { Cache } from 'cache-manager';

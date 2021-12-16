@@ -38,9 +38,11 @@ export class SsrService {
         };
         return sharedContext;
     }
-    async createDomForLayout(layout) {
+    async createDomForLayout(layout, pipeOutput = true) {
         const virtualConsole = new VirtualConsole();
-        virtualConsole.sendTo(console);
+        if (pipeOutput) {
+            virtualConsole.sendTo(console);
+        }
         const dom = new JSDOM(layout, {
             virtualConsole,
             runScripts: "outside-only",
@@ -64,12 +66,12 @@ export class SsrService {
         });
         return { dom, virtualConsole };
     }
-    async render(layout, sharedContext, scriptFilenames = ["main.bundle.js"]) {
+    async render(layout, sharedContext, scriptFilenames = ["main.bundle.js"], pipeOutput = true) {
         sharedContext = sharedContext || (await this.getSharedContext());
         if (!sharedContext?.events) {
             sharedContext.events = new EventDispatcher();
         }
-        let { dom, virtualConsole } = (await this.createDomForLayout(layout));
+        let { dom, virtualConsole } = (await this.createDomForLayout(layout, pipeOutput));
         if (!dom) {
             throw new Error("Dom not defined!");
         }
@@ -155,14 +157,14 @@ export class SsrService {
         }
         return newError;
     }
-    async renderComponent({ componentTagName, sharedContext, templateFile = this.options.defaultTemplateFile, rootTag = this.options.defaultRootTag, }) {
+    async renderComponent({ componentTagName, sharedContext, templateFile = this.options.defaultTemplateFile, rootTag = this.options.defaultRootTag, pipeOutput = true, }) {
         sharedContext = sharedContext || (await this.getSharedContext());
         const template = await this.templateFile.load(templateFile, rootTag, componentTagName, {
             env: sharedContext.env,
             templateVars: sharedContext.templateVars,
         });
         try {
-            return await this.render(template.layout, sharedContext);
+            return await this.render(template.layout, sharedContext, undefined, pipeOutput);
         }
         catch (error) {
             this.log.error(`Error on render component! rootTag: "${rootTag}"`);

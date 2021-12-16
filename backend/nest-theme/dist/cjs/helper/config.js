@@ -45,11 +45,7 @@ const loadConfig = async (searchConfigPaths, env) => {
         if (!(0, fs_1.existsSync)(configPath)) {
             continue;
         }
-        if (configPath.endsWith('.js')) {
-            const config = await Promise.resolve().then(() => require(configPath));
-            return config(env);
-        }
-        else if (configPath.endsWith('.ts')) {
+        if (configPath.endsWith('.ts')) {
             const { transpileModule, ModuleKind } = await Promise.resolve().then(() => require('typescript'));
             const tSource = await (0, promises_1.readFile)(configPath, 'utf8');
             const compilerOptions = {
@@ -73,6 +69,10 @@ const loadConfig = async (searchConfigPaths, env) => {
             script = null;
             jSource = null;
             return themeConfig;
+        }
+        else if (configPath.endsWith('.js')) {
+            const config = await Promise.resolve().then(() => require(configPath));
+            return config(env);
         }
         else if (configPath.endsWith('.yaml')) {
             const result = YAML.parse(await (0, promises_1.readFile)(configPath, 'utf8'));

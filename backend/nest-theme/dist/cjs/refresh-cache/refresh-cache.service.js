@@ -97,7 +97,8 @@ let RefreshCacheService = RefreshCacheService_1 = class RefreshCacheService {
     }
     async refresh(host = process.env.NEST_REMOTE_URL, force) {
         if (!host) {
-            throw new Error('The host is required');
+            this.log.warn('Host not set!');
+            return;
         }
         if (!force && !this.theme.cache.refresh?.active) {
             return;

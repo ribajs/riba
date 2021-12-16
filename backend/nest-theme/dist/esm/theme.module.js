@@ -25,8 +25,8 @@ let ThemeModule = ThemeModule_1 = class ThemeModule {
     static async register(nestThemeConfig, expressAdapter, env = process.env.NODE_ENV || 'development') {
         const basePath = resolve(nestThemeConfig.themeDir, 'config');
         const activeThemeConfig = await loadConfig([
-            resolve(basePath, 'theme.js'),
             resolve(basePath, 'theme.ts'),
+            resolve(basePath, 'theme.js'),
             resolve(basePath, 'theme.yaml'),
         ], env);
         validateThemeConfig(activeThemeConfig);

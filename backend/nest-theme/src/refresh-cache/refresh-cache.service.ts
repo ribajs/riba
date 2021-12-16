@@ -1,7 +1,7 @@
 import { Injectable, Logger, OnApplicationBootstrap } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { fetch } from '../dependencies/fetch';
-import type { FullThemeConfig } from '../types/theme-config';
+import type { FullThemeConfig } from '../types';
 import * as cheerio from 'cheerio';
 
 @Injectable()
@@ -106,7 +106,8 @@ export class RefreshCacheService implements OnApplicationBootstrap {
   // TODO set host to global config modules
   public async refresh(host = process.env.NEST_REMOTE_URL, force?: boolean) {
     if (!host) {
-      throw new Error('The host is required');
+      this.log.warn('Host not set!');
+      return;
     }
     if (!force && !this.theme.cache.refresh?.active) {
       return;

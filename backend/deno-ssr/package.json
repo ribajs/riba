@@ -1,7 +1,0 @@
-{
-    "name": "@ribajs/deno-ssr",
-    "private": true,
-    "dependencies": {
-        "@ribajs/node-ssr": "workspace:*"
-    }
-}

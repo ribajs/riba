@@ -1,8 +1,8 @@
-import type { SupportedTemplateEngines } from "@ribajs/ssr";
 import yargs from "yargs/yargs";
 import { hideBin } from "yargs/helpers";
 import { SsrService } from "./ssr.service";
 import { SUPPORTED_TEMPLATE_ENGINES } from "./constants";
+import type { SupportedTemplateEngines } from "./types";
 
 const start = async () => {
   const argv = await yargs(hideBin(process.argv))
@@ -82,6 +82,7 @@ const start = async () => {
   const page = await ssr.renderComponent({
     componentTagName: argv.component,
     sharedContext,
+    pipeOutput: false, // TODO
   });
 
   console.log(

@@ -67,6 +67,7 @@ const start = async () => {
     const page = await ssr.renderComponent({
         componentTagName: argv.component,
         sharedContext,
+        pipeOutput: false,
     });
     console.log(JSON.stringify({ result: page }, null, argv.pretty ? 2 : undefined));
 };

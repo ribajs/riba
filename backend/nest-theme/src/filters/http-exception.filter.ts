@@ -8,7 +8,7 @@ import {
 import { ErrorObj } from '@ribajs/ssr';
 import { ConfigService } from '@nestjs/config';
 import { SsrService } from '../ssr.service';
-import type { FullThemeConfig } from '../types/theme-config';
+import type { FullThemeConfig } from '../types';
 import { APP_FILTER } from '@nestjs/core';
 import { Request, Response } from 'express';
 import { getMessage, getStatus, getStack, handleError } from '../error-handler';

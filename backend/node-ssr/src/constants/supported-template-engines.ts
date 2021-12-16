@@ -1,4 +1,4 @@
-import type { SupportedTemplateEngines } from "@ribajs/ssr";
+import type { SupportedTemplateEngines } from "../types/supported-template-engines";
 
 export const SUPPORTED_TEMPLATE_ENGINES: SupportedTemplateEngines[] = [
   "arc-templates",

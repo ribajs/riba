@@ -1,8 +1,7 @@
-import { SupportedTemplateEngines } from "@ribajs/ssr";
 import { resolve, extname } from "path";
 import * as consolidate from "consolidate";
 import { SUPPORTED_TEMPLATE_ENGINES } from "./constants";
-import { TemplateFile } from "./types";
+import { TemplateFile, SupportedTemplateEngines } from "./types";
 
 export class TemplateFileService {
   private log = console;

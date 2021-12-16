@@ -8,5 +8,5 @@ export * from "./request-context.ts";
 export * from "./shared-context.ts";
 export * from "./ssr-service-options-arg.ts";
 export * from "./ssr-service-options.ts";
-export * from "./template-engines.ts";
+export * from "./supported-template-engines.ts";
 export * from "./template-vars.ts";

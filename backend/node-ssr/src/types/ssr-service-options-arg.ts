@@ -1,4 +1,4 @@
-import type { SupportedTemplateEngines } from "@ribajs/ssr";
+import type { SupportedTemplateEngines } from "./supported-template-engines";
 
 export interface SsrServiceOptionsArg {
   timeout?: number;

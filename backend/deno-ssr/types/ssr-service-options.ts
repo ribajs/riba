@@ -1,6 +1,6 @@
 // See https://github.com/ribajs/riba/blob/master/backend/node-ssr/src/types/ssr-service-options.ts
 
-import type { SupportedTemplateEngines } from "./template-engines.ts";
+import type { SupportedTemplateEngines } from "./supported-template-engines.ts";
 
 export interface SsrServiceOptions {
   timeout: number;

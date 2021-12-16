@@ -1,5 +1,4 @@
-import { SupportedTemplateEngines } from "@ribajs/ssr";
-import { TemplateFile } from "./types";
+import { TemplateFile, SupportedTemplateEngines } from "./types";
 export declare class TemplateFileService {
     private dir;
     private defaultEngine;

@@ -93,21 +93,24 @@ export class SsrService {
     const status = await process.status();
 
     if (!status.success) {
-      const output = new TextDecoder().decode(await process.stderrOutput());
-      throw new Error(output);
+      const stderr = new TextDecoder().decode(await process.stderrOutput());
+      const stdin = new TextDecoder().decode(await process.output());
+      console.error("stderr", stderr);
+      console.error("stdin", stdin);
+      throw new Error(stderr);
     }
     const output = new TextDecoder().decode(await process.output());
-    4;
+    console.debug("output", output);
     let result: RenderResult;
     try {
-      result = JSON.parse(output);
+      result = JSON.parse(output).result;
     } catch (error) {
       throw new Error(
         `You can not use JSON.parse on ${JSON.stringify(output)}.\n` +
           error?.message,
       );
     }
-
+    console.debug("result", result);
     return result as RenderResult;
   }
 }

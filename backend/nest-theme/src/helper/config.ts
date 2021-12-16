@@ -3,9 +3,13 @@ import { Script } from 'vm';
 import * as YAML from 'yaml';
 import { readFile } from 'fs/promises';
 import { existsSync } from 'fs';
-import type { ThemeConfig, ThemeConfigFile } from '@ribajs/ssr';
 import { SUPPORTED_TEMPLATE_ENGINES } from '@ribajs/node-ssr';
-import type { NestThemeConfig, FullThemeConfig } from '../types';
+import type {
+  NestThemeConfig,
+  FullThemeConfig,
+  ThemeConfig,
+  ThemeConfigFile,
+} from '../types';
 
 export const validateThemeConfig = (themeConfig: ThemeConfig) => {
   if (typeof themeConfig.name !== 'string') {
@@ -68,10 +72,7 @@ export const loadConfig = async <T>(
     if (!existsSync(configPath)) {
       continue;
     }
-    if (configPath.endsWith('.js')) {
-      const config = await import(configPath);
-      return config(env) as T;
-    } else if (configPath.endsWith('.ts')) {
+    if (configPath.endsWith('.ts')) {
       const { transpileModule, ModuleKind } = await import('typescript');
       // Transpile typescript config file
       const tSource = await readFile(configPath, 'utf8');
@@ -98,9 +99,11 @@ export const loadConfig = async <T>(
       script = null;
       jSource = null;
       return themeConfig;
-    }
-    // Parse yaml config file
-    else if (configPath.endsWith('.yaml')) {
+    } else if (configPath.endsWith('.js')) {
+      const config = await import(configPath);
+      return config(env) as T;
+      // Parse yaml config file
+    } else if (configPath.endsWith('.yaml')) {
       const result: T = YAML.parse(await readFile(configPath, 'utf8'));
       return result;
     } else {

@@ -1,7 +1,7 @@
 import { ExceptionFilter, ArgumentsHost, HttpException, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { SsrService } from '../ssr.service';
-import type { FullThemeConfig } from '../types/theme-config';
+import type { FullThemeConfig } from '../types';
 import { Response } from 'express';
 export declare class HttpExceptionFilter implements ExceptionFilter {
     private config;

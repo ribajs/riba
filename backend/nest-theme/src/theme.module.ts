@@ -12,10 +12,9 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 import { SsrService } from './ssr.service';
 import { SsrMiddleware } from './ssr.middleware';
 import { EmptyTemplateVars } from './empty-template-vars';
-import type { ThemeConfig } from '@ribajs/ssr';
 import { HttpExceptionFilterProvider } from './filters/http-exception.filter';
 
-import type { NestThemeConfig, FullThemeConfig } from './types';
+import type { NestThemeConfig, FullThemeConfig, ThemeConfig } from './types';
 import {
   loadConfig,
   validateThemeConfig,
@@ -47,8 +46,8 @@ export class ThemeModule {
     const basePath = resolve(nestThemeConfig.themeDir, 'config');
     const activeThemeConfig = await loadConfig<ThemeConfig>(
       [
-        resolve(basePath, 'theme.js'),
         resolve(basePath, 'theme.ts'),
+        resolve(basePath, 'theme.js'),
         resolve(basePath, 'theme.yaml'),
       ],
       env,

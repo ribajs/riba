@@ -46,7 +46,7 @@
     "twig": "*"
   },
   "devDependencies": {
-    "@types/node": "^16.11.13",
+    "@types/node": "^16.11.14",
     "@types/node-fetch": "^2.5.12",
     "@typescript-eslint/eslint-plugin": "^5.7.0",
     "@typescript-eslint/parser": "^5.7.0",

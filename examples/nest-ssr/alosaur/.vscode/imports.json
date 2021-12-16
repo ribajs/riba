@@ -1,0 +1,10 @@
+{
+  "imports": {
+    "alosaur/": "https://deno.land/x/alosaur@v0.35.1/",
+    "pug/": "https://deno.land/x/pug@v0.1.3/",
+    "dotenv/": "https://deno.land/x/dotenv@v3.1.0/",
+    "std/": "https://deno.land/std@0.116.0/",
+    "rusty_markdown/": "https://deno.land/x/rusty_markdown@v0.4.1/",
+    "vcard/": "https://deno.land/x/vcard@v1.0.7d/"
+  }
+}
