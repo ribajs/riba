@@ -8,9 +8,6 @@ import { ResponseError } from "./types/index.ts";
 export const getStatus = (
   exception: ResponseError | string,
 ): number => {
-  // if (exception instanceof HttpException) {
-  //   return exception.getStatus();
-  // }
   if (typeof exception !== "string" && exception.status) {
     return exception.status;
   }
@@ -24,11 +21,6 @@ export const getMessage = (
 
   if (typeof exception === "string") {
     message = exception;
-    // } else if (exception instanceof HttpError) {
-    //   const excResp = exception.getResponse();
-    //   message = typeof excResp === "string"
-    //     ? excResp
-    //     : (excResp as any).message || JSON.stringify(excResp);
   } else if (exception.message) {
     message = exception.message || message;
   }
@@ -44,15 +36,6 @@ export const getStack = (
     stack = new Error(exception).stack;
     return stack;
   }
-
-  // if (!stack && exception instanceof HttpError) {
-  //   const excResp = exception.getResponse();
-  //   stack = (excResp as any).stack || exception.stack;
-  //   if (Array.isArray(stack)) {
-  //     return stack.join("\n");
-  //   }
-  //   return stack;
-  // }
 
   if (!exception.stack) {
     stack = new Error().stack;
@@ -80,7 +63,7 @@ export const handleError = (
     const httpError = new HttpError(getStatus(error), getMessage(error));
     httpError.stack = getStack(error);
     return httpError;
-  } catch (_) {
-    return new HttpError(500, "Can't handle error");
+  } catch (error) {
+    return new HttpError(500, "Can't handle error! " + error);
   }
 };

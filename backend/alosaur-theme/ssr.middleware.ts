@@ -19,24 +19,25 @@ import { qs } from "https://deno.land/x/deno_qs@0.0.1/mod.ts";
 export class SsrMiddleware implements MiddlewareTarget {
   log = console;
   cacheManager?: Cache<string, string>;
-  static theme?: FullThemeConfig;
-  theme?: FullThemeConfig;
-  constructor(private ssr: SsrService) {}
+  private theme?: FullThemeConfig;
+  private ssr?: SsrService;
+  constructor() {}
 
   // Workaround
   init() {
-    if (!SsrMiddleware.theme) {
-      throw new Error(
-        "Theme config not defined! " + JSON.stringify(SsrMiddleware.theme),
-      );
-    }
-
     this.log.debug("[SsrMiddleware] Init");
 
     this.ssr = container.resolve(SsrService);
 
-    this.theme = SsrMiddleware.theme;
-    const ttl = SsrMiddleware.theme?.cache?.ttl || 200;
+    this.theme = container.resolve("theme");
+
+    if (!this.theme) {
+      throw new Error(
+        "Theme config not defined! " + JSON.stringify(this.theme),
+      );
+    }
+
+    const ttl = this.theme.cache?.ttl || 200;
 
     this.cacheManager = new Cache(ttl);
   }
@@ -46,12 +47,12 @@ export class SsrMiddleware implements MiddlewareTarget {
   }
 
   async onPostRequest(context: HttpContext) {
-    if (!this.theme || !this.cacheManager) {
+    // Workaround
+    if (!this.theme || !this.cacheManager || !this.ssr) {
       this.init();
     }
 
     const route = context.request.parserUrl;
-    // const rs = this.getRouteSettingsByRoute(route.pathname);
     const rs = this.getRouteSettingsByUrl(route);
 
     if (!rs) {
@@ -85,12 +86,15 @@ export class SsrMiddleware implements MiddlewareTarget {
       const render = async () => {
         if (!this.theme) {
           throw new Error(
-            "[SsrMiddleware] Theme config not defined! " +
-              JSON.stringify(this.theme),
+            "[SsrMiddleware] Theme config not defined!",
           );
         }
 
-        const sharedContext = await this.ssr.getSharedContext(
+        if (!this.ssr) {
+          throw new Error("[SsrMiddleware] SsrService not defined!");
+        }
+
+        const sharedContext = this.ssr.getSharedContext(
           req,
           this.theme.templateVars,
         );
@@ -118,7 +122,7 @@ export class SsrMiddleware implements MiddlewareTarget {
         result = this.cacheManager.get(cacheKey);
         this.log.debug(`[SsrMiddleware] Cache used`);
       } else {
-        // We need the try catch here because we are inside a callback
+        // We need the try-catch here because we are inside a callback
         try {
           result = await render();
         } catch (error) {
@@ -128,7 +132,6 @@ export class SsrMiddleware implements MiddlewareTarget {
         this.cacheManager.set(cacheKey, result);
       }
 
-      // TODO is this the right way?
       context.response.body = result;
       context.response.headers.set("Content-Type", "text/html");
       context.response.status;

@@ -1,6 +1,11 @@
+import {
+  AlosaurRequest,
+  AlosaurResponse,
+  HttpError,
+  Inject,
+} from "https://deno.land/x/alosaur@v0.35.1/mod.ts";
 import { ErrorObj, SsrService } from "../../deno-ssr/mod.ts";
 import type { FullThemeConfig } from "../types/index.ts";
-import { Request, Response } from "express";
 import {
   getMessage,
   getStack,
@@ -8,23 +13,20 @@ import {
   handleError,
 } from "../error-handler.ts";
 
-@Catch(HttpException, Error)
+@Catch(HttpError, Error)
 export class HttpExceptionFilter implements ExceptionFilter {
-  theme: FullThemeConfig;
-  log = new Logger(this.constructor.name);
+  log = console;
 
-  constructor(private config: ConfigService, private ssr: SsrService) {
-    const theme = this.config.get<FullThemeConfig>("theme");
-    if (!theme) {
-      throw new Error("Theme config not defined!");
-    }
-    this.theme = theme;
+  constructor(
+    @Inject("theme") private theme: FullThemeConfig,
+    private ssr: SsrService,
+  ) {
   }
 
   private getErrorObject(
-    exception: HttpException | Error,
+    exception: HttpError | Error,
     req: Request,
-    overwriteException?: HttpException | Error,
+    overwriteException?: HttpError | Error,
   ) {
     const status = getStatus(overwriteException || exception);
     const message = getMessage(overwriteException || exception);
@@ -46,13 +48,13 @@ export class HttpExceptionFilter implements ExceptionFilter {
   }
 
   private async renderErrorPage(
-    exception: HttpException,
+    exception: HttpError,
     host: ArgumentsHost,
     componentTagName: string,
   ) {
     const httpCtx = host.switchToHttp();
-    const req = httpCtx.getRequest<Request>();
-    let overwriteException: Error | HttpException | undefined;
+    const req = httpCtx.getRequest<AlosaurRequest>();
+    let overwriteException: Error | HttpError | undefined;
 
     const sharedContext = await this.ssr.getSharedContext(
       req,
@@ -84,12 +86,12 @@ export class HttpExceptionFilter implements ExceptionFilter {
     };
   }
 
-  async catch(exception: HttpException, host: ArgumentsHost) {
+  async catch(exception: HttpError, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
-    const res = ctx.getResponse<Response>();
-    const req = ctx.getRequest<Request>();
+    const res = ctx.getResponse<AlosaurResponse>();
+    const req = ctx.getRequest<AlosaurRequest>();
     let status = getStatus(exception);
-    let overwriteException: Error | HttpException | undefined;
+    let overwriteException: Error | HttpError | undefined;
 
     this.log.debug("catch error: " + JSON.stringify(exception));
 
