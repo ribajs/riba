@@ -65,7 +65,7 @@ const start = async () => {
     !SUPPORTED_TEMPLATE_ENGINES.includes(engine as SupportedTemplateEngines)
   ) {
     throw new Error(
-      'The theme config must contain a "viewEngine" property of a supported template engine string!'
+      `The theme config must contain a "viewEngine" property of a supported template engine string but is "${engine}"!`
     );
   }
 

@@ -72,6 +72,9 @@ class SsrService {
     }
     async render(layout, sharedContext, scriptFilenames = ["main.bundle.js"]) {
         sharedContext = sharedContext || (await this.getSharedContext());
+        if (!sharedContext?.events) {
+            sharedContext.events = new events_1.EventDispatcher();
+        }
         let { dom, virtualConsole } = (await this.createDomForLayout(layout));
         if (!dom) {
             throw new Error("Dom not defined!");
@@ -99,7 +102,6 @@ class SsrService {
                 return true;
             };
             const onDone = (lifecycleEventData) => {
-                this.log.debug("[Riba lifecycle] Done.");
                 if (!dom) {
                     throw new Error("Dom is not defined!");
                 }
@@ -116,8 +118,11 @@ class SsrService {
             const clear = () => {
                 virtualConsole?.sendTo(new dummy_console_1.DummyConsole());
                 virtualConsole?.off("jsdomError", onError);
-                sharedContext?.events.off("error", onError, this);
-                sharedContext?.events.off("ready", onDone, this);
+                if (!sharedContext?.events) {
+                    throw new Error("events are required in sharedContext object!");
+                }
+                sharedContext?.events?.off("error", onError, this);
+                sharedContext?.events?.off("ready", onDone, this);
                 if (typeof dom?.window?.removeEventListener === "function") {
                     dom.window.removeEventListener("error", onError);
                 }
@@ -136,12 +141,14 @@ class SsrService {
                 virtualConsole = null;
                 dom = null;
             };
+            if (!sharedContext?.events) {
+                throw new Error("events are required in sharedContext object!");
+            }
             sharedContext?.events.once("ready", onDone, this);
             virtualConsole?.on("jsdomError", onError);
             sharedContext?.events.once("error", onError, this);
             dom?.window.addEventListener("error", onError);
         });
-        this.log.debug("[Riba lifecycle] Wait...");
         return renderResult;
     }
     transformBrowserError(error) {

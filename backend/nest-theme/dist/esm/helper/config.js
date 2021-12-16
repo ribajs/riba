@@ -14,7 +14,7 @@ export const validateThemeConfig = (themeConfig) => {
         throw new Error('The theme config must contain a "viewsDir" property of type string!');
     }
     if (!SUPPORTED_TEMPLATE_ENGINES.includes(themeConfig.viewEngine)) {
-        throw new Error('The theme config must contain a "viewEngine" property of a supported template engine string!');
+        throw new Error(`The theme config must contain a "viewEngine" property of a supported template engine string but is "${themeConfig.viewEngine}"!`);
     }
     if (themeConfig.routes) {
         if (!Array.isArray(themeConfig.routes)) {

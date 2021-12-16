@@ -121,6 +121,10 @@ export class SsrService {
   ) {
     sharedContext = sharedContext || (await this.getSharedContext());
 
+    if (!sharedContext?.events) {
+      sharedContext.events = new EventDispatcher();
+    }
+
     let { dom, virtualConsole } = (await this.createDomForLayout(layout)) as {
       dom: JSDOM | null;
       virtualConsole: VirtualConsole | null;
@@ -156,7 +160,6 @@ export class SsrService {
       };
 
       const onDone = (lifecycleEventData: ComponentLifecycleEventData) => {
-        this.log.debug("[Riba lifecycle] Done.");
         if (!dom) {
           throw new Error("Dom is not defined!");
         }
@@ -176,8 +179,12 @@ export class SsrService {
         virtualConsole?.sendTo(new DummyConsole());
         virtualConsole?.off("jsdomError", onError);
 
-        sharedContext?.events.off("error", onError, this);
-        sharedContext?.events.off("ready", onDone, this);
+        if (!sharedContext?.events) {
+          throw new Error("events are required in sharedContext object!");
+        }
+
+        sharedContext?.events?.off("error", onError, this);
+        sharedContext?.events?.off("ready", onDone, this);
 
         if (typeof dom?.window?.removeEventListener === "function") {
           dom.window.removeEventListener("error", onError);
@@ -204,13 +211,15 @@ export class SsrService {
         dom = null;
       };
 
+      if (!sharedContext?.events) {
+        throw new Error("events are required in sharedContext object!");
+      }
+
       sharedContext?.events.once("ready", onDone, this);
       virtualConsole?.on("jsdomError", onError);
       sharedContext?.events.once("error", onError, this);
       dom?.window.addEventListener("error", onError);
     });
-
-    this.log.debug("[Riba lifecycle] Wait...");
 
     return renderResult;
   }

@@ -25,7 +25,7 @@ export const validateThemeConfig = (themeConfig: ThemeConfig) => {
   }
   if (!SUPPORTED_TEMPLATE_ENGINES.includes(themeConfig.viewEngine)) {
     throw new Error(
-      'The theme config must contain a "viewEngine" property of a supported template engine string!',
+      `The theme config must contain a "viewEngine" property of a supported template engine string but is "${themeConfig.viewEngine}"!`,
     );
   }
   // Optional

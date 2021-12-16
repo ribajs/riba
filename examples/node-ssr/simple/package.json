@@ -1,10 +1,11 @@
 {
-  "name": "@ribajs/node-ssr-example",
+  "name": "@ribajs/node-ssr-simple-example",
+  "private": true,
   "version": "0.0.1",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "yarn run build:theme && yarn run start:cli && yarn run start:cli",
+    "build": "yarn run build:theme && yarn run start:cli && yarn run start:node",
     "build:theme": "webpack --progress --color --env production",
     "build:theme:dev": "webpack --progress --color --env development",
     "build:theme:ssr": "webpack --progress --color --env production --config webpack.ssr.js",
@@ -16,8 +17,9 @@
     "lint": "eslint . --ext .ts,.tsx --fix && npm run lint:ssr && npm run lint:csr",
     "lint:ssr": "tsc -p tsconfig.ssr.json --noEmit",
     "lint:csr": "tsc -p tsconfig.json --noEmit",
-    "start:cli": "echo \"\nSSR CLI Example:\"; ssr --component=hello-ssr-page --source-file-dir=./assets/ssr --template-dir=. --pretty=true",
-    "start:api": "echo \"\nSSR API Example:\"; ts-node --project tsconfig.api.json api.ts"
+    "start:cli": "echo \"\nNode SSR CLI Example:\"; ssr --component=hello-ssr-page --source-file-dir=./assets/ssr --template-dir=. --pretty=true",
+    "start:node": "echo \"\nNode SSR API Example:\"; ts-node --project tsconfig.api.json api.ts",
+    "start:deno": "echo \"\nDeno SSR API Example:\";deno run --config ./deno.json --allow-env --allow-run deno-api.ts"
   },
   "author": "Art+Code Studio (Pascal Garber) <pascal@artandcode.studio>",
   "license": "AGPL",

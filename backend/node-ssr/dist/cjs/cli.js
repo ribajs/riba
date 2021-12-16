@@ -59,7 +59,7 @@ const start = async () => {
     }).argv;
     const engine = argv.engine;
     if (!constants_1.SUPPORTED_TEMPLATE_ENGINES.includes(engine)) {
-        throw new Error('The theme config must contain a "viewEngine" property of a supported template engine string!');
+        throw new Error(`The theme config must contain a "viewEngine" property of a supported template engine string but is "${engine}"!`);
     }
     const ssr = new ssr_service_1.SsrService({
         sourceFileDir: argv["source-file-dir"],

@@ -42,7 +42,7 @@ class TemplateFileService {
             this.log.error(`Template engine not installed, try to run "yarn add ${detected}"`);
         }
         if (!constants_1.SUPPORTED_TEMPLATE_ENGINES.includes(detected)) {
-            throw new Error('The theme config must contain a "viewEngine" property of a supported template engine string!');
+            throw new Error(`The theme config must contain a "viewEngine" property of a supported template engine string but is "${detected}"!`);
         }
         return detected;
     }

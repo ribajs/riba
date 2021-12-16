@@ -1,0 +1,4 @@
+{
+  "include": ["./api.ts"],
+  "exclude": ["dist"]
+}

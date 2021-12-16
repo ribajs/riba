@@ -70,4 +70,4 @@ Options:
   -p, --pretty           Prettify JSON output         [string] [Default: false]
 ```
 
-To try this examples see [examples/node-ssr/node-ssr-example](/examples/node-ssr/node-ssr-example).
+To try this examples see [examples/node-ssr/simple](/examples/node-ssr/simple).

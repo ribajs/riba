@@ -35,7 +35,7 @@ export class TemplateFileService {
       !SUPPORTED_TEMPLATE_ENGINES.includes(detected as SupportedTemplateEngines)
     ) {
       throw new Error(
-        'The theme config must contain a "viewEngine" property of a supported template engine string!'
+        `The theme config must contain a "viewEngine" property of a supported template engine string but is "${detected}"!`
       );
     }
 
