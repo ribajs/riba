@@ -70,8 +70,8 @@ class SsrService {
         });
         return { dom, virtualConsole };
     }
-    async render(layout, _sharedContext, scriptFilenames = ["main.bundle.js"]) {
-        const sharedContext = _sharedContext || (await this.getSharedContext());
+    async render(layout, sharedContext, scriptFilenames = ["main.bundle.js"]) {
+        sharedContext = sharedContext || (await this.getSharedContext());
         let { dom, virtualConsole } = (await this.createDomForLayout(layout));
         if (!dom) {
             throw new Error("Dom not defined!");
@@ -116,8 +116,8 @@ class SsrService {
             const clear = () => {
                 virtualConsole?.sendTo(new dummy_console_1.DummyConsole());
                 virtualConsole?.off("jsdomError", onError);
-                sharedContext.events.off("error", onError, this);
-                sharedContext.events.off("ready", onDone, this);
+                sharedContext?.events.off("error", onError, this);
+                sharedContext?.events.off("ready", onDone, this);
                 if (typeof dom?.window?.removeEventListener === "function") {
                     dom.window.removeEventListener("error", onError);
                 }
@@ -136,9 +136,9 @@ class SsrService {
                 virtualConsole = null;
                 dom = null;
             };
-            sharedContext.events.once("ready", onDone, this);
+            sharedContext?.events.once("ready", onDone, this);
             virtualConsole?.on("jsdomError", onError);
-            sharedContext.events.once("error", onError, this);
+            sharedContext?.events.once("error", onError, this);
             dom?.window.addEventListener("error", onError);
         });
         this.log.debug("[Riba lifecycle] Wait...");
@@ -155,6 +155,7 @@ class SsrService {
         return newError;
     }
     async renderComponent({ componentTagName, sharedContext, templateFile = this.options.defaultTemplateFile, rootTag = this.options.defaultRootTag, }) {
+        sharedContext = sharedContext || (await this.getSharedContext());
         const template = await this.templateFile.load(templateFile, rootTag, componentTagName, {
             env: sharedContext.env,
             templateVars: sharedContext.templateVars,

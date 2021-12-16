@@ -43,8 +43,8 @@ let HttpExceptionFilter = class HttpExceptionFilter {
         return errorObj;
     }
     async renderErrorPage(exception, host, componentTagName) {
-        const ctx = host.switchToHttp();
-        const req = ctx.getRequest();
+        const httpCtx = host.switchToHttp();
+        const req = httpCtx.getRequest();
         let overwriteException;
         const sharedContext = await this.ssr.getSharedContext(req, this.theme.templateVars, this.getErrorObject(exception, req, overwriteException));
         try {

@@ -104,9 +104,9 @@
     "backend/*",
     "demos/*",
     "!demos/vue",
-    "examples/*",
-    "!examples/electron",
-    "!examples/electron-nest"
+    "examples/*/*",
+    "!examples/electron/electron",
+    "!examples/electron/electron-nest"
   ],
   "dependenciesMeta": {
     "prettier": {

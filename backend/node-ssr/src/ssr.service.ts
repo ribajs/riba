@@ -116,11 +116,11 @@ export class SsrService {
    */
   async render(
     layout: string,
-    _sharedContext?: SharedContext,
+    sharedContext?: SharedContext,
     scriptFilenames = ["main.bundle.js"]
   ) {
-    const sharedContext: SharedContext =
-      _sharedContext || (await this.getSharedContext());
+    sharedContext = sharedContext || (await this.getSharedContext());
+
     let { dom, virtualConsole } = (await this.createDomForLayout(layout)) as {
       dom: JSDOM | null;
       virtualConsole: VirtualConsole | null;
@@ -176,8 +176,8 @@ export class SsrService {
         virtualConsole?.sendTo(new DummyConsole());
         virtualConsole?.off("jsdomError", onError);
 
-        sharedContext.events.off("error", onError, this);
-        sharedContext.events.off("ready", onDone, this);
+        sharedContext?.events.off("error", onError, this);
+        sharedContext?.events.off("ready", onDone, this);
 
         if (typeof dom?.window?.removeEventListener === "function") {
           dom.window.removeEventListener("error", onError);
@@ -204,9 +204,9 @@ export class SsrService {
         dom = null;
       };
 
-      sharedContext.events.once("ready", onDone, this);
+      sharedContext?.events.once("ready", onDone, this);
       virtualConsole?.on("jsdomError", onError);
-      sharedContext.events.once("error", onError, this);
+      sharedContext?.events.once("error", onError, this);
       dom?.window.addEventListener("error", onError);
     });
 
@@ -235,8 +235,10 @@ export class SsrService {
     templateFile?: string;
     rootTag?: string;
     componentTagName: string;
-    sharedContext: SharedContext;
+    sharedContext?: SharedContext;
   }): Promise<RenderResult> {
+    sharedContext = sharedContext || (await this.getSharedContext());
+
     const template = await this.templateFile.load(
       templateFile,
       rootTag,

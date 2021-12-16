@@ -8,12 +8,12 @@ export declare class SsrService {
     constructor(options: SsrServiceOptionsArg);
     getSharedContext(req?: Partial<RequestContext>, templateVars?: TemplateVars, errorObj?: ErrorObj): Promise<SharedContext>;
     private createDomForLayout;
-    render(layout: string, _sharedContext?: SharedContext, scriptFilenames?: string[]): Promise<RenderResult>;
+    render(layout: string, sharedContext?: SharedContext, scriptFilenames?: string[]): Promise<RenderResult>;
     private transformBrowserError;
     renderComponent({ componentTagName, sharedContext, templateFile, rootTag, }: {
         templateFile?: string;
         rootTag?: string;
         componentTagName: string;
-        sharedContext: SharedContext;
+        sharedContext?: SharedContext;
     }): Promise<RenderResult>;
 }

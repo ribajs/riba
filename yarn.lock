@@ -5397,9 +5397,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/demo-router-view@workspace:examples/router-view":
+"@ribajs/demo-router-view@workspace:demos/router-view":
   version: 0.0.0-use.local
-  resolution: "@ribajs/demo-router-view@workspace:examples/router-view"
+  resolution: "@ribajs/demo-router-view@workspace:demos/router-view"
   dependencies:
     "@babel/cli": ^7.16.0
     "@babel/core": ^7.16.5
@@ -5424,7 +5424,6 @@ __metadata:
     "@ribajs/types": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
-    "@ribajs/webpack-serve": "workspace:*"
     "@types/jest": ^27.0.3
     "@typescript-eslint/eslint-plugin": ^5.7.0
     "@typescript-eslint/parser": ^5.7.0
@@ -5834,9 +5833,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/examples-nest-classic-theme@workspace:examples/nest-classic-theme":
+"@ribajs/examples-nest-classic-theme@workspace:examples/nest-classic/nest-classic-theme":
   version: 0.0.0-use.local
-  resolution: "@ribajs/examples-nest-classic-theme@workspace:examples/nest-classic-theme"
+  resolution: "@ribajs/examples-nest-classic-theme@workspace:examples/nest-classic/nest-classic-theme"
   dependencies:
     "@babel/cli": ^7.16.0
     "@babel/core": ^7.16.5
@@ -5893,9 +5892,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/examples-nest-classic@workspace:examples/nest-classic":
+"@ribajs/examples-nest-classic@workspace:examples/nest-classic/nest-classic":
   version: 0.0.0-use.local
-  resolution: "@ribajs/examples-nest-classic@workspace:examples/nest-classic"
+  resolution: "@ribajs/examples-nest-classic@workspace:examples/nest-classic/nest-classic"
   dependencies:
     "@nestjs/cli": ^8.1.6
     "@nestjs/common": ^8.2.3
@@ -5941,9 +5940,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/examples-nest-riba-ssr-theme@workspace:examples/nest-riba-ssr-theme":
+"@ribajs/examples-nest-riba-ssr-theme@workspace:examples/nest-ssr/nest-riba-ssr-theme":
   version: 0.0.0-use.local
-  resolution: "@ribajs/examples-nest-riba-ssr-theme@workspace:examples/nest-riba-ssr-theme"
+  resolution: "@ribajs/examples-nest-riba-ssr-theme@workspace:examples/nest-ssr/nest-riba-ssr-theme"
   dependencies:
     "@babel/cli": ^7.16.0
     "@babel/core": ^7.16.5
@@ -6002,9 +6001,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/examples-nest-riba-ssr@workspace:examples/nest-riba-ssr":
+"@ribajs/examples-nest-riba-ssr@workspace:examples/nest-ssr/nest-riba-ssr":
   version: 0.0.0-use.local
-  resolution: "@ribajs/examples-nest-riba-ssr@workspace:examples/nest-riba-ssr"
+  resolution: "@ribajs/examples-nest-riba-ssr@workspace:examples/nest-ssr/nest-riba-ssr"
   dependencies:
     "@nestjs/cli": ^8.1.6
     "@nestjs/common": ^8.2.3
@@ -6543,9 +6542,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/node-ssr-example@workspace:examples/node-ssr-example":
+"@ribajs/node-ssr-example@workspace:examples/node-ssr/node-ssr-example":
   version: 0.0.0-use.local
-  resolution: "@ribajs/node-ssr-example@workspace:examples/node-ssr-example"
+  resolution: "@ribajs/node-ssr-example@workspace:examples/node-ssr/node-ssr-example"
   dependencies:
     "@babel/cli": ^7.16.0
     "@babel/core": ^7.16.5
@@ -6572,6 +6571,7 @@ __metadata:
     "@ribajs/tsconfig": "workspace:*"
     "@ribajs/utils": "workspace:*"
     "@ribajs/webpack-config": "workspace:*"
+    "@tsconfig/node16": ^1.0.2
     "@typescript-eslint/eslint-plugin": ^5.7.0
     "@typescript-eslint/experimental-utils": ^5.7.0
     "@typescript-eslint/parser": ^5.7.0
@@ -6592,6 +6592,7 @@ __metadata:
     sass: ^1.45.0
     style-loader: ^3.3.1
     terser-webpack-plugin: ^5.2.5
+    ts-node: ^10.4.0
     typescript: ^4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
@@ -7371,7 +7372,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/webpack-serve@workspace:*, @ribajs/webpack-serve@workspace:infra/webpack-serve":
+"@ribajs/webpack-serve@workspace:infra/webpack-serve":
   version: 0.0.0-use.local
   resolution: "@ribajs/webpack-serve@workspace:infra/webpack-serve"
   dependencies:
@@ -15229,13 +15230,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"es6-promise@npm:^4.2.5":
-  version: 4.2.8
-  resolution: "es6-promise@npm:4.2.8"
-  checksum: 95614a88873611cb9165a85d36afa7268af5c03a378b35ca7bda9508e1d4f1f6f19a788d4bc755b3fd37c8ebba40782018e02034564ff24c9d6fa37e959ad57d
-  languageName: node
-  linkType: hard
-
 "es6-symbol@npm:^3.1.1, es6-symbol@npm:~3.1.3":
   version: 3.1.3
   resolution: "es6-symbol@npm:3.1.3"
@@ -20763,11 +20757,9 @@ fsevents@~2.3.1:
   linkType: hard
 
 "locutus@npm:^2.0.11":
-  version: 2.0.14
-  resolution: "locutus@npm:2.0.14"
-  dependencies:
-    es6-promise: ^4.2.5
-  checksum: 8c84661159a1d3c4a0f2d37df7b30eed0e48c7775ba3f3e287c72bf9afff0a987ee2d671393b2d181371d188b0f6371432bccc3d3c3e4f7c0dfb3ab7b8840060
+  version: 2.0.15
+  resolution: "locutus@npm:2.0.15"
+  checksum: a9cfda8f14793b07b68b5803c45a31ede93ead8fea2bc45d24e192a43ceecc50b7be1633f4b857b3a9d82f2e61c205e026ad9d4a57e2255d6fc9f1f679858326
   languageName: node
   linkType: hard
 
@@ -29013,11 +29005,11 @@ typescript@4.3.5:
   linkType: hard
 
 "walk@npm:2.3.x":
-  version: 2.3.14
-  resolution: "walk@npm:2.3.14"
+  version: 2.3.15
+  resolution: "walk@npm:2.3.15"
   dependencies:
     foreachasync: ^3.0.0
-  checksum: 77b744e340e890f82eb836b197655cbe171e5b92557446a9a26b89594fbe3b7ea64337b8d93e15a12831c6bf1bf6f83511b52f7bfcc441978b605883ff33bfcb
+  checksum: d494df1924656cc4881ff8f70474f80be10d07d0c899620e02ff8627e4f339f37e74d1b30b70e7a714d0b873b0dc8b20129a619c4b407b39949c756637ebe3a6
   languageName: node
   linkType: hard
 

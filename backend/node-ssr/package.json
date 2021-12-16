@@ -20,7 +20,8 @@
     "build:cjs": "tsc --project ./tsconfig.json --declaration false --module commonjs --outDir dist/cjs",
     "watch": "npm run build -- --watch",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --ignore-pattern '*.spec.ts' --fix",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "help": "ssr --help"
   },
   "files": [
     "/dist"
