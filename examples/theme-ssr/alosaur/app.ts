@@ -6,7 +6,7 @@ const __dirname = new URL(".", import.meta.url).pathname;
 
 const bootstrap = async () => {
   const { themeAppSettings, viewRenderConfig } = await getSettings({
-    themeDir: __dirname + "../theme",
+    themeDir: __dirname + "..",
     active: "theme",
     templateVars: {},
   });

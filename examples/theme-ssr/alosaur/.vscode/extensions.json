@@ -1,7 +1,6 @@
 {
   "recommendations": [
-    "dbaeumer.vscode-eslint",
-    "arcanis.vscode-zipfs",
-    "esbenp.prettier-vscode"
+    "denoland.vscode-deno",
+    "laurencebahiirwa.deno-std-lib-snippets"
   ]
 }
