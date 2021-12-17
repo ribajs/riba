@@ -7,7 +7,6 @@ import {
 } from "./deps.ts";
 
 import { AlosaurThemeConfig } from "./types/index.ts";
-
 import { loadThemeConfig } from "./helper/config.ts";
 import { ThemeArea } from "./theme.area.ts";
 import { SsrMiddleware } from "./ssr.middleware.ts";

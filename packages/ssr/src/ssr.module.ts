@@ -1,6 +1,6 @@
 import "./types/global";
 
-import { RibaModule } from "@ribajs/core";
+import { RibaModule, LifecycleService } from "@ribajs/core";
 import * as binders from "./binders";
 import * as formatters from "./formatters";
 import * as services from "./services";
@@ -14,6 +14,19 @@ export const SSRModule: RibaModule<SSRModuleOptions> = {
   components,
   init(options = {}) {
     services.ModuleService.setSingleton(options);
+
+    const lifecycle = LifecycleService.getInstance();
+
+    // After all components are bound wie trigger the ssr ready event,
+    // as soon as this event is triggered the ssr rendering will be done returns the rendered html
+    lifecycle.events.on("ComponentLifecycle:allBound", () => {
+      window.ssr.events.trigger("ready");
+    });
+
+    lifecycle.events.on("ComponentLifecycle:error", (error: Error) => {
+      window.ssr.events.trigger("error", error);
+    });
+
     return this;
   },
 };

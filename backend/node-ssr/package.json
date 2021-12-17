@@ -38,10 +38,10 @@
     "express": "^4.17.1",
     "jsdom": "^19.0.0",
     "node-fetch": "^2.6.6",
+    "pug": "^3.0.2",
     "yargs": "^17.3.0"
   },
   "peerDependencies": {
-    "pug": "*",
     "tinyliquid": "*",
     "twig": "*"
   },

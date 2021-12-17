@@ -1,7 +1,7 @@
+import { AutoInjectable, cheerio, Inject } from "../deps.ts";
 import type { FullThemeConfig } from "../types/index.ts";
-import { Inject } from "https://deno.land/x/alosaur@v0.35.1/mod.ts";
-import { cheerio } from "https://deno.land/x/cheerio@1.0.4/mod.ts";
 
+@AutoInjectable()
 export class RefreshCacheService {
   private visited: string[] = [];
   private log = console;

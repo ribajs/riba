@@ -1,6 +1,4 @@
-import { YamlLoader } from "https://deno.land/x/yaml_loader@v0.1.0/mod.ts";
-import { exists } from "https://deno.land/std@0.117.0/fs/mod.ts";
-import { resolve } from "https://deno.land/std@0.117.0/path/mod.ts";
+import { exists, resolve, YamlLoader } from "../deps.ts";
 
 import type {} from "../../deno-ssr/mod.ts";
 import { SUPPORTED_TEMPLATE_ENGINES } from "../../deno-ssr/mod.ts";

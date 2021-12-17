@@ -1,10 +1,6 @@
-import {
-  AutoInjectable,
-  Inject,
-} from "https://deno.land/x/alosaur@v0.35.1/mod.ts";
+import { AutoInjectable, Inject, resolve } from "./deps.ts";
 import type { FullThemeConfig } from "./types/index.ts";
 import { SsrService as Ssr } from "../deno-ssr/mod.ts";
-import { resolve } from "https://deno.land/std@0.117.0/path/mod.ts";
 
 @AutoInjectable()
 export class SsrService {

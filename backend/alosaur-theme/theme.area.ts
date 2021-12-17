@@ -1,4 +1,4 @@
-import { Area } from "https://deno.land/x/alosaur@v0.35.1/mod.ts";
+import { Area } from "./deps.ts";
 
 @Area({
   controllers: [],

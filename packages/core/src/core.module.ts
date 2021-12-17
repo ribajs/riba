@@ -14,6 +14,14 @@ export const coreModule: RibaModule<CoreModuleOptions> = {
   adapters,
   init(options = {}) {
     services.CoreService.setSingleton(options);
+
+    window.onerror = (msg, url, line, col, error) => {
+      console.error(msg, url, line, col, error);
+    };
+    window.addEventListener("error", (event: Event) => {
+      console.error(event);
+    });
+
     return this;
   },
 };
