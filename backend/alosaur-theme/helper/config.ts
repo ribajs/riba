@@ -94,12 +94,22 @@ export const loadThemeConfig = async (
   alosaurThemeConfig: AlosaurThemeConfig,
   env = Deno.env.get("ENV") || "development",
 ) => {
-  const basePath = resolve(alosaurThemeConfig.themeDir, "config");
+  const basePath = resolve(
+    alosaurThemeConfig.themeDir,
+    alosaurThemeConfig.active,
+  );
+
+  console.debug("alosaurThemeConfig", alosaurThemeConfig);
+
+  const configPath = resolve(
+    basePath,
+    "config",
+  );
   const activeThemeConfig = await loadConfig<ThemeConfig>(
     [
-      resolve(basePath, "theme.js"),
-      resolve(basePath, "theme.ts"),
-      resolve(basePath, "theme.yaml"),
+      resolve(configPath, "theme.js"),
+      resolve(configPath, "theme.ts"),
+      resolve(configPath, "theme.yaml"),
     ],
     env,
   );
@@ -113,15 +123,15 @@ export const loadThemeConfig = async (
     basePath,
     templateVars: alosaurThemeConfig.templateVars || {},
     assetsDir: resolve(
-      alosaurThemeConfig.themeDir,
+      basePath,
       activeThemeConfig.assetsDir,
     ),
     viewsDir: resolve(
-      alosaurThemeConfig.themeDir,
+      basePath,
       activeThemeConfig.viewsDir,
     ),
     pageComponentsDir: resolve(
-      alosaurThemeConfig.themeDir,
+      basePath,
       activeThemeConfig.pageComponentsDir || "",
     ),
   };
