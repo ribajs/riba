@@ -5827,9 +5827,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/examples-nest-classic-theme@workspace:examples/theme-classic/nest-classic-theme":
+"@ribajs/examples-nest-classic-theme@workspace:examples/theme-classic/theme":
   version: 0.0.0-use.local
-  resolution: "@ribajs/examples-nest-classic-theme@workspace:examples/theme-classic/nest-classic-theme"
+  resolution: "@ribajs/examples-nest-classic-theme@workspace:examples/theme-classic/theme"
   dependencies:
     "@babel/cli": ^7.16.0
     "@babel/core": ^7.16.5
@@ -5886,9 +5886,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/examples-nest-classic@workspace:examples/theme-classic/nest-classic":
+"@ribajs/examples-nest-classic@workspace:examples/theme-classic/nest":
   version: 0.0.0-use.local
-  resolution: "@ribajs/examples-nest-classic@workspace:examples/theme-classic/nest-classic"
+  resolution: "@ribajs/examples-nest-classic@workspace:examples/theme-classic/nest"
   dependencies:
     "@nestjs/cli": ^8.1.6
     "@nestjs/common": ^8.2.3
