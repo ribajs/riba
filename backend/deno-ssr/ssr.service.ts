@@ -31,6 +31,7 @@ export class SsrService {
     if (!options.templateDir) {
       throw new Error("[SsrService] The templateDir option is required!");
     }
+
     this.options = options as SsrServiceOptions;
   }
 

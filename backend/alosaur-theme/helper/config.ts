@@ -1,6 +1,4 @@
 import { exists, resolve, YamlLoader } from "../deps.ts";
-
-import type {} from "../../deno-ssr/mod.ts";
 import { SUPPORTED_TEMPLATE_ENGINES } from "../../deno-ssr/mod.ts";
 import type {
   AlosaurThemeConfig,

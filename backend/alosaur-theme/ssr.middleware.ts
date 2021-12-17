@@ -61,10 +61,11 @@ export class SsrMiddleware implements MiddlewareTarget {
       this.log.warn(
         "[SsrMiddleware] routeSettings is not set! " + route.pathname,
       );
-      return await this.httpExceptionFilter?.catch(
-        new HttpError(404, "Not found!"),
-        context,
-      );
+      // return await this.httpExceptionFilter?.catch(
+      //   new HttpError(404, "Not found!"),
+      //   context,
+      // );
+      return;
     }
 
     const req: RequestContext = {

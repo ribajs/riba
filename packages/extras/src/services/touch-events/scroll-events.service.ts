@@ -7,9 +7,6 @@ export class ScrollEventsService extends BaseTouchEventsService {
 
   protected _scrollEvent: Array<"touchmove" | "scroll" | "scrollend">;
 
-  /** The element to trigger the events on */
-  protected el: HTMLUnknownElement | Window;
-
   protected delay = 300;
 
   protected startPosition: ScrollPosition | null = null;

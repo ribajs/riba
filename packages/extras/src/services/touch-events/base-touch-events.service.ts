@@ -1,11 +1,11 @@
 export abstract class BaseTouchEventsService {
   protected touchCapable = "ontouchstart" in window;
   /** The element to trigger the events on */
-  protected el: HTMLUnknownElement | Window;
+  protected el: HTMLUnknownElement | HTMLElement | Window;
   public get isTouchCapable() {
     return this.touchCapable;
   }
-  constructor(el: HTMLUnknownElement | Window) {
+  constructor(el: HTMLUnknownElement | HTMLElement | Window) {
     this.el = el;
   }
 

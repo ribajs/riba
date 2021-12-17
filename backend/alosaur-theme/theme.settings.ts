@@ -11,16 +11,30 @@ import { loadThemeConfig } from "./helper/config.ts";
 import { ThemeArea } from "./theme.area.ts";
 import { SsrMiddleware } from "./ssr.middleware.ts";
 
-const VIEW_BASE_PATH = Deno.env.get("VIEW_BASE_PATH") ||
-  `${Deno.cwd()}/../theme/views`;
-
-const STATIC_ROOT = Deno.env.get("STATIC_ROOT") ||
-  `${Deno.cwd()}/../theme/assets`;
+const SERVER_PORT = Deno.env.get("SERVER_PORT") || 8080;
 
 const LOGGING = Deno.env.get("LOGGING") === "true" || false;
 
-export const getSettings = async (alosaurThemeConfig: AlosaurThemeConfig) => {
-  const themeConfig = await loadThemeConfig(alosaurThemeConfig);
+export const getSettings = async (
+  alosaurThemeConfig: Partial<AlosaurThemeConfig>,
+) => {
+  alosaurThemeConfig.themeDir = alosaurThemeConfig.themeDir ||
+    Deno.env.get("THEME_DIR");
+
+  alosaurThemeConfig.active = alosaurThemeConfig.active ||
+    Deno.env.get("THEME_ACTIVE");
+
+  if (!alosaurThemeConfig.themeDir) {
+    throw new Error("themeDir is required!");
+  }
+
+  if (!alosaurThemeConfig.active) {
+    throw new Error("active is required!");
+  }
+
+  const themeConfig = await loadThemeConfig(
+    alosaurThemeConfig as AlosaurThemeConfig,
+  );
 
   const themeAppSettings: AppSettings = {
     middlewares: [SsrMiddleware],
@@ -33,14 +47,14 @@ export const getSettings = async (alosaurThemeConfig: AlosaurThemeConfig) => {
     areas: [ThemeArea],
     logging: LOGGING,
     staticConfig: {
-      root: STATIC_ROOT,
+      root: themeConfig.assetsDir,
     },
     container,
   };
 
   const viewRenderConfig: ViewRenderConfig = {
     type: "pug",
-    basePath: VIEW_BASE_PATH,
+    basePath: themeConfig.viewsDir,
     getBody: (path, model, config) => {
       if (!path.endsWith(".pug")) {
         path = path + ".pug";
@@ -59,8 +73,13 @@ export const getSettings = async (alosaurThemeConfig: AlosaurThemeConfig) => {
     },
   };
 
+  const serverSettings: Deno.ListenOptions = {
+    port: Number(SERVER_PORT),
+  };
+
   return {
     themeAppSettings,
     viewRenderConfig,
+    serverSettings,
   };
 };

@@ -108,9 +108,6 @@ export class TouchEventsService extends BaseTouchEventsService {
 
   // PROPERTIES:
 
-  /** The element to trigger the events on */
-  protected el: HTMLElement;
-
   /** Used internally for `taphold` */
   protected startPosition: Position = {
     x: 0,
@@ -221,13 +218,13 @@ export class TouchEventsService extends BaseTouchEventsService {
 
   protected removeEventListeners() {
     for (const eventName of this.settings.startevent) {
-      this.el.removeEventListener<any>(eventName, this.onStartEvent);
+      this.el.removeEventListener(eventName, this.onStartEvent as any as EventListener);
     }
     for (const eventName of this.settings.moveevent) {
-      this.el.removeEventListener<any>(eventName, this.onMoveEvent);
+      this.el.removeEventListener(eventName, this.onMoveEvent as any as EventListener);
     }
     for (const eventName of this.settings.endevent) {
-      this.el.removeEventListener<any>(eventName, this.onEndEvent);
+      this.el.removeEventListener(eventName, this.onEndEvent as any as EventListener);
     }
     // this.scrollEvents.destroy();
   }
@@ -301,7 +298,7 @@ export class TouchEventsService extends BaseTouchEventsService {
     type: TouchType = TouchType.DEFAULT,
     index = 0
   ): TouchOffset {
-    const boundingClientRect = this.el.getBoundingClientRect();
+    const boundingClientRect = (this.el as HTMLElement).getBoundingClientRect();
     let touchesTypes: TouchList;
     switch (type) {
       case TouchType.CHANGED:
@@ -356,17 +353,17 @@ export class TouchEventsService extends BaseTouchEventsService {
 
   protected addEventListeners() {
     for (const eventName of this.settings.startevent) {
-      this.el.addEventListener<any>(eventName, this.onStartEvent, {
+      this.el.addEventListener(eventName, this.onStartEvent as any as EventListener, {
         passive: true,
       });
     }
     for (const eventName of this.settings.moveevent) {
-      this.el.addEventListener<any>(eventName, this.onMoveEvent, {
+      this.el.addEventListener(eventName, this.onMoveEvent as any as EventListener, {
         passive: true,
       });
     }
     for (const eventName of this.settings.endevent) {
-      this.el.addEventListener<any>(eventName, this.onEndEvent, {
+      this.el.addEventListener(eventName, this.onEndEvent as any as EventListener, {
         passive: true,
       });
     }
@@ -499,7 +496,7 @@ export class TouchEventsService extends BaseTouchEventsService {
         const touches = new Array<Partial<TouchData>>();
 
         for (let i = 0; i < touchesLength; i++) {
-          const elOffset = this.el.getBoundingClientRect();
+          const elOffset = (this.el as HTMLElement).getBoundingClientRect();
           const touch = {
             position: {
               x: this.settings.touchCapable
@@ -654,7 +651,7 @@ export class TouchEventsService extends BaseTouchEventsService {
       const touches = new Array<Partial<TouchData>>();
 
       for (let i = 0; i < touchesLength; i++) {
-        const elOffset = this.el.getBoundingClientRect();
+        const elOffset = (this.el as HTMLElement).getBoundingClientRect();
         const touch = {
           position: {
             x: this.settings.touchCapable

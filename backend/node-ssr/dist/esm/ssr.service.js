@@ -18,6 +18,7 @@ export class SsrService {
         if (!options.templateDir) {
             throw new Error("[SsrService] The templateDir option is required!");
         }
+        console.error("sourceFileDir", options.sourceFileDir);
         this.options = options;
         this.sourceFile = new SourceFileService(options.sourceFileDir);
         this.templateFile = new TemplateFileService(options.templateDir, options.defaultTemplateEngine);
