@@ -1,13 +1,10 @@
-import "https://deno.land/x/dotenv@v3.1.0/mod.ts"; // Auto load .env file
 import {
   AppSettings,
-  container,
-  ViewRenderConfig,
-} from "https://deno.land/x/alosaur@v0.35.1/mod.ts";
-import {
   compileFile,
-  Options as PugOptions,
-} from "https://raw.githubusercontent.com/lumeland/pug/master/mod.ts";
+  container,
+  PugOptions,
+  ViewRenderConfig,
+} from "./deps.ts";
 
 import { AlosaurThemeConfig } from "./types/index.ts";
 
@@ -25,6 +22,7 @@ const LOGGING = Deno.env.get("LOGGING") === "true" || false;
 
 export const getSettings = async (alosaurThemeConfig: AlosaurThemeConfig) => {
   const themeConfig = await loadThemeConfig(alosaurThemeConfig);
+
   const themeAppSettings: AppSettings = {
     middlewares: [SsrMiddleware],
     providers: [

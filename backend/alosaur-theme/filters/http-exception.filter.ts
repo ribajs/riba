@@ -1,11 +1,13 @@
 import {
   AlosaurRequest,
-  AlosaurResponse,
+  AutoInjectable,
+  ErrorObj,
+  HttpContext,
   HttpError,
   Inject,
-} from "https://deno.land/x/alosaur@v0.35.1/mod.ts";
-import { ErrorObj, SsrService } from "../../deno-ssr/mod.ts";
-import type { FullThemeConfig } from "../types/index.ts";
+} from "../deps.ts";
+import { SsrService } from "../ssr.service.ts";
+import type { FullThemeConfig, HttpExceptionCatch } from "../types/index.ts";
 import {
   getMessage,
   getStack,
@@ -13,8 +15,11 @@ import {
   handleError,
 } from "../error-handler.ts";
 
-@Catch(HttpError, Error)
-export class HttpExceptionFilter implements ExceptionFilter {
+/**
+ * Renders errors on Theme Error page
+ */
+@AutoInjectable()
+export class HttpExceptionFilter {
   log = console;
 
   constructor(
@@ -25,7 +30,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
   private getErrorObject(
     exception: HttpError | Error,
-    req: Request,
+    req: AlosaurRequest,
     overwriteException?: HttpError | Error,
   ) {
     const status = getStatus(overwriteException || exception);
@@ -37,7 +42,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       message: message,
       timestamp: new Date().toISOString(),
       stack,
-      path: req.url,
+      path: req.parserUrl.pathname,
     };
 
     if (overwriteException) {
@@ -49,11 +54,10 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
   private async renderErrorPage(
     exception: HttpError,
-    host: ArgumentsHost,
+    httpCtx: HttpContext,
     componentTagName: string,
-  ) {
-    const httpCtx = host.switchToHttp();
-    const req = httpCtx.getRequest<AlosaurRequest>();
+  ): Promise<HttpExceptionCatch> {
+    const req = httpCtx.request;
     let overwriteException: Error | HttpError | undefined;
 
     const sharedContext = await this.ssr.getSharedContext(
@@ -63,16 +67,15 @@ export class HttpExceptionFilter implements ExceptionFilter {
     );
 
     try {
-      const page = await this.ssr.renderComponent({
+      const renderResult = await this.ssr.renderComponent({
         componentTagName,
         sharedContext,
       });
-      this.log.debug(`Rendered page component: not-found-page`);
+      this.log.debug(`Rendered page component: ${componentTagName}`);
       // this.log.debug(`page: ${page.html}`);
-      const html = page.html;
       return {
         hasError: false,
-        html,
+        renderResult,
       };
     } catch (error) {
       this.log.error(`Can't render "${componentTagName}":  ${error}`);
@@ -81,15 +84,16 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     return {
       hasError: true,
-      html: "",
-      exception: overwriteException,
+      exception,
+      overwriteException,
     };
   }
 
-  async catch(exception: HttpError, host: ArgumentsHost) {
-    const ctx = host.switchToHttp();
-    const res = ctx.getResponse<AlosaurResponse>();
-    const req = ctx.getRequest<AlosaurRequest>();
+  async catch(
+    exception: HttpError,
+    httpCtx: HttpContext,
+  ) {
+    const req = httpCtx.request;
     let status = getStatus(exception);
     let overwriteException: Error | HttpError | undefined;
 
@@ -104,25 +108,43 @@ export class HttpExceptionFilter implements ExceptionFilter {
     if (errorPageConfig) {
       const result = await this.renderErrorPage(
         exception,
-        host,
+        httpCtx,
         errorPageConfig.component,
       );
       if (result.hasError) {
         overwriteException = result.exception;
         status = overwriteException ? getStatus(overwriteException) : 500;
       } else {
-        return res.status(status).send(result.html);
+        return this.send(httpCtx, {
+          status,
+          ...result,
+        });
       }
     }
 
     // Fallback
-    res
-      .status(status)
-      .json(this.getErrorObject(exception, req, overwriteException));
+    return this.send(httpCtx, {
+      hasError: true,
+      status,
+      errorObj: this.getErrorObject(exception, req, overwriteException),
+    });
+  }
+
+  /**
+   * Rendered SSR Page response
+   */
+  private send(context: HttpContext, exception: HttpExceptionCatch) {
+    context.response.status = exception.status || 500;
+    if (exception.renderResult) {
+      context.response.body = exception.renderResult.html;
+      context.response.headers.set("Content-Type", "text/html");
+      return;
+    }
+
+    if (exception.errorObj) {
+      context.response.body = exception.errorObj;
+      context.response.headers.set("Content-Type", "application/json");
+      return;
+    }
   }
 }
-
-export const HttpExceptionFilterProvider = {
-  provide: APP_FILTER,
-  useClass: HttpExceptionFilter,
-};

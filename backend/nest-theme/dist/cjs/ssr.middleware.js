@@ -16,7 +16,7 @@ exports.SsrMiddleware = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const ssr_service_1 = require("./ssr.service");
-const error_handler_1 = require("./error-handler");
+const node_ssr_1 = require("@ribajs/node-ssr");
 let SsrMiddleware = class SsrMiddleware {
     constructor(config, ssr, cacheManager) {
         this.config = config;
@@ -44,30 +44,34 @@ let SsrMiddleware = class SsrMiddleware {
             const render = async () => {
                 const sharedContext = await this.ssr.getSharedContext(req, this.theme.templateVars);
                 this.log.debug(`START: Render page component: ${routeSettings.component} for ${req.url}`);
-                const page = await this.ssr.renderComponent({
+                const renderResult = await this.ssr.renderComponent({
                     componentTagName: routeSettings.component,
                     sharedContext,
+                    output: 'store',
                 });
                 this.log.debug(`END: Render page component: ${routeSettings.component} for ${req.url}`);
-                return page.html;
+                return renderResult;
             };
             this.cacheManager.get(cacheKey, async (error, result) => {
                 if (error) {
                     this.log.error(error);
-                    return next((0, error_handler_1.handleError)(error));
+                    return next((0, node_ssr_1.handleError)(error, result?.output));
                 }
                 if (result) {
                     this.log.debug(`Cache used`);
-                    return res.send(result);
+                    return res.send(result.html);
                 }
                 try {
                     result = await render();
                 }
                 catch (error) {
-                    return next((0, error_handler_1.handleError)(error));
+                    return next((0, node_ssr_1.handleError)(error, result?.output));
                 }
                 this.cacheManager.set(cacheKey, result, cacheOptions);
-                res.send(result);
+                if (result.output) {
+                    this.ssr.logOutput(result.output);
+                }
+                res.send(result.html);
                 if (global.gc) {
                     this.log.debug(`run garbage collector`);
                     global.gc();
@@ -77,7 +81,7 @@ let SsrMiddleware = class SsrMiddleware {
         }
         catch (error) {
             this.log.error(error);
-            return next((0, error_handler_1.handleError)(error));
+            return next((0, node_ssr_1.handleError)(error));
         }
     }
     getRouteSettingsByRoute(routePath) {

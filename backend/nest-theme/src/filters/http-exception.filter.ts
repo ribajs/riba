@@ -6,13 +6,22 @@ import {
   Logger,
 } from '@nestjs/common';
 import { ErrorObj } from '@ribajs/ssr';
+import {
+  RenderResult,
+  getMessage,
+  getStatus,
+  getStack,
+  handleError,
+} from '@ribajs/node-ssr';
 import { ConfigService } from '@nestjs/config';
 import { SsrService } from '../ssr.service';
 import type { FullThemeConfig } from '../types';
 import { APP_FILTER } from '@nestjs/core';
 import { Request, Response } from 'express';
-import { getMessage, getStatus, getStack, handleError } from '../error-handler';
 
+/**
+ * Renders errors on Theme Error page
+ */
 @Catch(HttpException, Error)
 export class HttpExceptionFilter implements ExceptionFilter {
   theme: FullThemeConfig;
@@ -65,17 +74,17 @@ export class HttpExceptionFilter implements ExceptionFilter {
       this.getErrorObject(exception, req, overwriteException),
     );
 
+    let renderResult: RenderResult;
+
     try {
-      const page = await this.ssr.renderComponent({
+      renderResult = await this.ssr.renderComponent({
         componentTagName,
         sharedContext,
       });
-      this.log.debug(`Rendered page component: not-found-page`);
-      // this.log.debug(`page: ${page.html}`);
-      const html = page.html;
+      this.log.debug(`Rendered page component: ` + componentTagName);
       return {
         hasError: false,
-        html,
+        ...renderResult,
       };
     } catch (error) {
       this.log.error(`Can't render "${componentTagName}":  ${error}`);
@@ -86,6 +95,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       hasError: true,
       html: '',
       exception: overwriteException,
+      output: [],
     };
   }
 
@@ -110,6 +120,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
         host,
         errorPageConfig.component,
       );
+      if (result.output) this.ssr.logOutput(result.output);
       if (result.hasError) {
         overwriteException = result.exception;
         status = overwriteException ? getStatus(overwriteException) : 500;

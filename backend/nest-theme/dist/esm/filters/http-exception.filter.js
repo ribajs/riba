@@ -8,10 +8,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Catch, HttpException, Logger, } from '@nestjs/common';
+import { getMessage, getStatus, getStack, handleError, } from '@ribajs/node-ssr';
 import { ConfigService } from '@nestjs/config';
 import { SsrService } from '../ssr.service';
 import { APP_FILTER } from '@nestjs/core';
-import { getMessage, getStatus, getStack, handleError } from '../error-handler';
 let HttpExceptionFilter = class HttpExceptionFilter {
     constructor(config, ssr) {
         this.config = config;
@@ -44,16 +44,16 @@ let HttpExceptionFilter = class HttpExceptionFilter {
         const req = httpCtx.getRequest();
         let overwriteException;
         const sharedContext = await this.ssr.getSharedContext(req, this.theme.templateVars, this.getErrorObject(exception, req, overwriteException));
+        let renderResult;
         try {
-            const page = await this.ssr.renderComponent({
+            renderResult = await this.ssr.renderComponent({
                 componentTagName,
                 sharedContext,
             });
-            this.log.debug(`Rendered page component: not-found-page`);
-            const html = page.html;
+            this.log.debug(`Rendered page component: ` + componentTagName);
             return {
                 hasError: false,
-                html,
+                ...renderResult,
             };
         }
         catch (error) {
@@ -64,6 +64,7 @@ let HttpExceptionFilter = class HttpExceptionFilter {
             hasError: true,
             html: '',
             exception: overwriteException,
+            output: [],
         };
     }
     async catch(exception, host) {
@@ -76,6 +77,8 @@ let HttpExceptionFilter = class HttpExceptionFilter {
         const errorPageConfig = this.theme.errorRoutes[status];
         if (errorPageConfig) {
             const result = await this.renderErrorPage(exception, host, errorPageConfig.component);
+            if (result.output)
+                this.ssr.logOutput(result.output);
             if (result.hasError) {
                 overwriteException = result.exception;
                 status = overwriteException ? getStatus(overwriteException) : 500;

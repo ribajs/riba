@@ -7,7 +7,15 @@ const yargs_1 = __importDefault(require("yargs/yargs"));
 const helpers_1 = require("yargs/helpers");
 const ssr_service_1 = require("./ssr.service");
 const constants_1 = require("./constants");
+const error_handler_1 = require("./error-handler");
 const utils_1 = require("./utils");
+const errorToObject = (error) => {
+    return {
+        message: error.message,
+        status: error.status,
+        stack: error.stack,
+    };
+};
 const start = async () => {
     const argv = await (0, yargs_1.default)((0, helpers_1.hideBin)(process.argv))
         .option("timeout", {
@@ -64,11 +72,11 @@ const start = async () => {
         description: "JSON string for request data",
         default: "{}",
     })
-        .option("pipe-output", {
-        alias: "po",
-        type: "boolean",
-        description: "Pipe node-ssr output to stdin and stderr",
-        default: false,
+        .option("console-output", {
+        alias: "co",
+        type: "string",
+        description: "How to deal with the console output. Possible values are: 'pipe' | 'ignore' | 'store' ",
+        default: "store",
     })
         .option("pretty", {
         alias: "p",
@@ -92,12 +100,21 @@ const start = async () => {
     const templateVarsJson = argv["template-vars-json"];
     const templateVars = (0, utils_1.parseJsonString)(templateVarsJson);
     const sharedContext = await ssr.getSharedContext(request, templateVars);
-    const page = await ssr.renderComponent({
-        componentTagName: argv.component,
-        sharedContext,
-        pipeOutput: argv["pipe-output"] || false,
-    });
-    console.log(JSON.stringify({ result: page }, null, argv.pretty ? 2 : undefined));
+    try {
+        const renderResult = await ssr.renderComponent({
+            componentTagName: argv.component,
+            sharedContext,
+            output: argv["console-output"] || "store",
+        });
+        console.log(JSON.stringify(renderResult, null, argv.pretty ? 2 : undefined));
+    }
+    catch (error) {
+        const renderError = {
+            error: errorToObject((0, error_handler_1.handleError)(error)),
+            hasError: true,
+        };
+        console.log(JSON.stringify(renderError, null, argv.pretty ? 2 : undefined));
+    }
 };
 start();
 //# sourceMappingURL=cli.js.map

@@ -2,8 +2,23 @@ import yargs from "yargs/yargs";
 import { hideBin } from "yargs/helpers";
 import { SsrService } from "./ssr.service";
 import { SUPPORTED_TEMPLATE_ENGINES } from "./constants";
-import type { SupportedTemplateEngines, RequestContext } from "./types";
+import type {
+  SupportedTemplateEngines,
+  RequestContext,
+  OutputType,
+  RenderError,
+  HttpError,
+} from "./types";
+import { handleError } from "./error-handler";
 import { parseJsonString } from "./utils";
+
+const errorToObject = (error: HttpError) => {
+  return {
+    message: error.message,
+    status: error.status,
+    stack: error.stack,
+  };
+};
 
 const start = async () => {
   const argv = await yargs(hideBin(process.argv))
@@ -65,11 +80,12 @@ const start = async () => {
       description: "JSON string for request data",
       default: "{}",
     })
-    .option("pipe-output", {
-      alias: "po",
-      type: "boolean",
-      description: "Pipe node-ssr output to stdin and stderr",
-      default: false,
+    .option("console-output", {
+      alias: "co",
+      type: "string",
+      description:
+        "How to deal with the console output. Possible values are: 'pipe' | 'ignore' | 'store' ",
+      default: "store",
     })
     .option("pretty", {
       alias: "p",
@@ -104,15 +120,23 @@ const start = async () => {
 
   const sharedContext = await ssr.getSharedContext(request, templateVars);
 
-  const page = await ssr.renderComponent({
-    componentTagName: argv.component,
-    sharedContext,
-    pipeOutput: argv["pipe-output"] || false,
-  });
+  try {
+    const renderResult = await ssr.renderComponent({
+      componentTagName: argv.component,
+      sharedContext,
+      output: (argv["console-output"] as OutputType) || "store",
+    });
 
-  console.log(
-    JSON.stringify({ result: page }, null, argv.pretty ? 2 : undefined)
-  );
+    console.log(
+      JSON.stringify(renderResult, null, argv.pretty ? 2 : undefined)
+    );
+  } catch (error) {
+    const renderError: RenderError = {
+      error: errorToObject(handleError(error)),
+      hasError: true,
+    };
+    console.log(JSON.stringify(renderError, null, argv.pretty ? 2 : undefined));
+  }
 };
 
 start();

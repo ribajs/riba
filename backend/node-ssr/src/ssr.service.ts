@@ -9,7 +9,8 @@ import type {
 import { EventDispatcher } from "@ribajs/events";
 import { SourceFileService } from "./source-file.service";
 import { TemplateFileService } from "./template-file.service";
-import { DummyConsole } from "./dummy-console";
+import { StoreConsole } from "./store-console";
+import { IgnoreConsole } from "./ignore-console";
 import type {
   TemplateVars,
   ResponseError,
@@ -18,6 +19,9 @@ import type {
   SsrServiceOptions,
   SsrServiceOptionsArg,
   SharedContext,
+  OutputType,
+  PipeConsole,
+  ConsoleMessage,
 } from "./types/index";
 
 export class SsrService {
@@ -63,12 +67,31 @@ export class SsrService {
     return sharedContext;
   }
 
-  private async createDomForLayout(layout: string, pipeOutput = true) {
-    const virtualConsole: VirtualConsole | null = new VirtualConsole();
+  private async createDomForLayout(
+    layout: string,
+    output: OutputType = "pipe"
+  ) {
+    const virtualConsole: VirtualConsole = new VirtualConsole({
+      captureRejections: true,
+    });
 
-    if (pipeOutput) {
-      virtualConsole.sendTo(console);
+    let pipeToConsole: PipeConsole;
+    switch (output) {
+      case "pipe":
+        pipeToConsole = console;
+        break;
+      case "store":
+        pipeToConsole = new StoreConsole();
+        break;
+      case "ignore":
+        pipeToConsole = new IgnoreConsole();
+        break;
+      default:
+        pipeToConsole = new IgnoreConsole();
+        break;
     }
+
+    virtualConsole.sendTo(pipeToConsole);
 
     const dom = new JSDOM(layout, {
       virtualConsole,
@@ -78,6 +101,9 @@ export class SsrService {
         if (!window.fetch) {
           window.fetch = fetch as any;
         }
+
+        // Workaround, virtualConsole is not working?
+        window.console = pipeToConsole;
 
         if (!window.requestAnimationFrame) {
           // Dummy
@@ -102,7 +128,7 @@ export class SsrService {
         }
       },
     });
-    return { dom, virtualConsole };
+    return { dom, virtualConsole, pipeToConsole };
   }
 
   /**
@@ -117,7 +143,7 @@ export class SsrService {
     layout: string,
     sharedContext?: SharedContext,
     scriptFilenames = ["main.bundle.js"],
-    pipeOutput = true
+    output: OutputType = "pipe"
   ) {
     sharedContext = sharedContext || (await this.getSharedContext());
 
@@ -125,13 +151,8 @@ export class SsrService {
       sharedContext.events = new EventDispatcher();
     }
 
-    let { dom, virtualConsole } = (await this.createDomForLayout(
-      layout,
-      pipeOutput
-    )) as {
-      dom: JSDOM | null;
-      virtualConsole: VirtualConsole | null;
-    };
+    const { dom, virtualConsole, pipeToConsole } =
+      await this.createDomForLayout(layout, output);
     if (!dom) {
       throw new Error("Dom not defined!");
     }
@@ -157,7 +178,14 @@ export class SsrService {
     const renderResult = new Promise<RenderResult>((resolve, reject) => {
       const onError = (error: Error | ErrorEvent) => {
         this.log.error("SSR error");
-        reject(this.transformBrowserError(error));
+
+        const output: ConsoleMessage[] = [];
+
+        if (pipeToConsole.type === "store") {
+          output.push(...(pipeToConsole as StoreConsole).messages);
+        }
+
+        reject(this.transformBrowserError(error, output));
         clear();
         return true;
       };
@@ -171,8 +199,12 @@ export class SsrService {
           ...lifecycleEventData,
           html: html,
           css: [],
-          // output: {} // TODO send output to dummy console to return the output here
         };
+
+        if (output === "store" && pipeToConsole.type === "store") {
+          result.output = (pipeToConsole as StoreConsole).messages;
+        }
+
         resolve(result);
         clear();
         return;
@@ -180,7 +212,6 @@ export class SsrService {
 
       const clear = () => {
         // Ignore clear errors
-        virtualConsole?.sendTo(new DummyConsole());
         virtualConsole?.off("jsdomError", onError);
 
         if (!sharedContext?.events) {
@@ -211,8 +242,7 @@ export class SsrService {
         }
         files = null;
         vmContext = null;
-        virtualConsole = null;
-        dom = null;
+        // virtualConsole?.sendTo(new IgnoreConsole());
       };
 
       if (!sharedContext?.events) {
@@ -228,8 +258,17 @@ export class SsrService {
     return renderResult;
   }
 
-  private transformBrowserError(error: ResponseError | ErrorEvent) {
-    const newError = new Error(error.message);
+  private transformBrowserError(
+    error: ResponseError | ErrorEvent,
+    output: ConsoleMessage[]
+  ) {
+    const message = error.message;
+
+    if (output.length) {
+      message + "\n" + this.logToErrorMessage(output);
+    }
+
+    const newError = new Error(message);
     if ((error as Error).stack) {
       newError.stack = (error as Error).stack;
     }
@@ -244,13 +283,13 @@ export class SsrService {
     sharedContext,
     templateFile = this.options.defaultTemplateFile,
     rootTag = this.options.defaultRootTag,
-    pipeOutput = true,
+    output = "pipe",
   }: {
     templateFile?: string;
     rootTag?: string;
     componentTagName: string;
     sharedContext?: SharedContext;
-    pipeOutput?: boolean;
+    output?: OutputType;
   }): Promise<RenderResult> {
     sharedContext = sharedContext || (await this.getSharedContext());
 
@@ -269,12 +308,30 @@ export class SsrService {
         template.layout,
         sharedContext,
         undefined,
-        pipeOutput
+        output
       );
     } catch (error) {
       this.log.error(`Error on render component! rootTag: "${rootTag}"`);
       this.log.error(error);
       throw error;
     }
+  }
+
+  public logOutput(logs: ConsoleMessage[]) {
+    if (logs?.length) {
+      this.log.log("[SsrService] Console output:");
+      for (const log of logs) {
+        this.log[log.type](log.message, ...(log.optionalParams || []));
+      }
+    }
+  }
+
+  public logToErrorMessage(logs: ConsoleMessage[]) {
+    logs = logs.filter((log) => log.type === "error" || log.type === "warn");
+    return logs
+      .map((log) => {
+        return JSON.stringify(log);
+      })
+      .join("\n");
   }
 }

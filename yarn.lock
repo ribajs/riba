@@ -5827,9 +5827,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/examples-nest-classic-theme@workspace:examples/nest-classic/nest-classic-theme":
+"@ribajs/examples-nest-classic-theme@workspace:examples/theme-classic/nest-classic-theme":
   version: 0.0.0-use.local
-  resolution: "@ribajs/examples-nest-classic-theme@workspace:examples/nest-classic/nest-classic-theme"
+  resolution: "@ribajs/examples-nest-classic-theme@workspace:examples/theme-classic/nest-classic-theme"
   dependencies:
     "@babel/cli": ^7.16.0
     "@babel/core": ^7.16.5
@@ -5886,9 +5886,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/examples-nest-classic@workspace:examples/nest-classic/nest-classic":
+"@ribajs/examples-nest-classic@workspace:examples/theme-classic/nest-classic":
   version: 0.0.0-use.local
-  resolution: "@ribajs/examples-nest-classic@workspace:examples/nest-classic/nest-classic"
+  resolution: "@ribajs/examples-nest-classic@workspace:examples/theme-classic/nest-classic"
   dependencies:
     "@nestjs/cli": ^8.1.6
     "@nestjs/common": ^8.2.3
@@ -5934,9 +5934,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/examples-nest-riba-ssr-theme@workspace:examples/nest-ssr/theme":
+"@ribajs/examples-nest-riba-ssr-theme@workspace:examples/theme-ssr/theme":
   version: 0.0.0-use.local
-  resolution: "@ribajs/examples-nest-riba-ssr-theme@workspace:examples/nest-ssr/theme"
+  resolution: "@ribajs/examples-nest-riba-ssr-theme@workspace:examples/theme-ssr/theme"
   dependencies:
     "@babel/cli": ^7.16.0
     "@babel/core": ^7.16.5
@@ -5967,7 +5967,7 @@ __metadata:
     "@ribajs/webpack-config": "workspace:*"
     "@types/component-emitter": ^1.2.11
     "@types/debug": ^4.1.7
-    "@types/node": ^16.11.14
+    "@types/node": ^17.0.0
     "@types/socket.io-client": ^3.0.0
     "@typescript-eslint/eslint-plugin": ^5.7.0
     "@typescript-eslint/experimental-utils": ^5.7.0
@@ -5996,9 +5996,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/examples-nest-riba-ssr@workspace:examples/nest-ssr/nest":
+"@ribajs/examples-nest-riba-ssr@workspace:examples/theme-ssr/nest":
   version: 0.0.0-use.local
-  resolution: "@ribajs/examples-nest-riba-ssr@workspace:examples/nest-ssr/nest"
+  resolution: "@ribajs/examples-nest-riba-ssr@workspace:examples/theme-ssr/nest"
   dependencies:
     "@nestjs/cli": ^8.1.6
     "@nestjs/common": ^8.2.3
@@ -6530,9 +6530,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/node-ssr-simple-example@workspace:examples/node-ssr/simple":
+"@ribajs/node-ssr-simple-example@workspace:examples/raw-ssr/simple":
   version: 0.0.0-use.local
-  resolution: "@ribajs/node-ssr-simple-example@workspace:examples/node-ssr/simple"
+  resolution: "@ribajs/node-ssr-simple-example@workspace:examples/raw-ssr/simple"
   dependencies:
     "@babel/cli": ^7.16.0
     "@babel/core": ^7.16.5
@@ -8303,6 +8303,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:^17.0.0":
+  version: 17.0.0
+  resolution: "@types/node@npm:17.0.0"
+  checksum: 30970a70c2eb78dbe80613d73243c255aaa9ce057d9e8595069ca0aef0363db0af45dc0d35f445cc804576a99df2970c170130663d76cd60319b779872e92ad6
+  languageName: node
+  linkType: hard
+
 "@types/open@npm:^6.2.1":
   version: 6.2.1
   resolution: "@types/open@npm:6.2.1"
@@ -9774,9 +9781,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"alosaur-riba-ssr-example@workspace:examples/nest-ssr/alosaur":
+"alosaur-riba-ssr-example@workspace:examples/theme-ssr/alosaur":
   version: 0.0.0-use.local
-  resolution: "alosaur-riba-ssr-example@workspace:examples/nest-ssr/alosaur"
+  resolution: "alosaur-riba-ssr-example@workspace:examples/theme-ssr/alosaur"
   dependencies:
     "@ribajs/node-ssr": "workspace:*"
     pug: ^3.0.2

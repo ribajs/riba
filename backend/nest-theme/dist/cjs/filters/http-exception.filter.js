@@ -11,10 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HttpExceptionFilterProvider = exports.HttpExceptionFilter = void 0;
 const common_1 = require("@nestjs/common");
+const node_ssr_1 = require("@ribajs/node-ssr");
 const config_1 = require("@nestjs/config");
 const ssr_service_1 = require("../ssr.service");
 const core_1 = require("@nestjs/core");
-const error_handler_1 = require("../error-handler");
 let HttpExceptionFilter = class HttpExceptionFilter {
     constructor(config, ssr) {
         this.config = config;
@@ -27,9 +27,9 @@ let HttpExceptionFilter = class HttpExceptionFilter {
         this.theme = theme;
     }
     getErrorObject(exception, req, overwriteException) {
-        const status = (0, error_handler_1.getStatus)(overwriteException || exception);
-        const message = (0, error_handler_1.getMessage)(overwriteException || exception);
-        const stack = (0, error_handler_1.getStack)(overwriteException || exception);
+        const status = (0, node_ssr_1.getStatus)(overwriteException || exception);
+        const message = (0, node_ssr_1.getMessage)(overwriteException || exception);
+        const stack = (0, node_ssr_1.getStack)(overwriteException || exception);
         const errorObj = {
             statusCode: status,
             message: message,
@@ -47,41 +47,44 @@ let HttpExceptionFilter = class HttpExceptionFilter {
         const req = httpCtx.getRequest();
         let overwriteException;
         const sharedContext = await this.ssr.getSharedContext(req, this.theme.templateVars, this.getErrorObject(exception, req, overwriteException));
+        let renderResult;
         try {
-            const page = await this.ssr.renderComponent({
+            renderResult = await this.ssr.renderComponent({
                 componentTagName,
                 sharedContext,
             });
-            this.log.debug(`Rendered page component: not-found-page`);
-            const html = page.html;
+            this.log.debug(`Rendered page component: ` + componentTagName);
             return {
                 hasError: false,
-                html,
+                ...renderResult,
             };
         }
         catch (error) {
             this.log.error(`Can't render "${componentTagName}":  ${error}`);
-            overwriteException = (0, error_handler_1.handleError)(error);
+            overwriteException = (0, node_ssr_1.handleError)(error);
         }
         return {
             hasError: true,
             html: '',
             exception: overwriteException,
+            output: [],
         };
     }
     async catch(exception, host) {
         const ctx = host.switchToHttp();
         const res = ctx.getResponse();
         const req = ctx.getRequest();
-        let status = (0, error_handler_1.getStatus)(exception);
+        let status = (0, node_ssr_1.getStatus)(exception);
         let overwriteException;
         this.log.debug('catch error: ' + JSON.stringify(exception));
         const errorPageConfig = this.theme.errorRoutes[status];
         if (errorPageConfig) {
             const result = await this.renderErrorPage(exception, host, errorPageConfig.component);
+            if (result.output)
+                this.ssr.logOutput(result.output);
             if (result.hasError) {
                 overwriteException = result.exception;
-                status = overwriteException ? (0, error_handler_1.getStatus)(overwriteException) : 500;
+                status = overwriteException ? (0, node_ssr_1.getStatus)(overwriteException) : 500;
             }
             else {
                 return res.status(status).send(result.html);

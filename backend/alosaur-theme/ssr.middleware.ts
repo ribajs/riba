@@ -1,26 +1,28 @@
 import {
+  Cache,
   container,
   HttpContext,
+  HttpError,
+  Key,
   Middleware,
   MiddlewareTarget,
-} from "https://deno.land/x/alosaur@v0.35.1/mod.ts";
+  pathToRegexp,
+  qs,
+  RenderResult,
+  RequestContext,
+} from "./deps.ts";
 import type { FullThemeConfig } from "./types/index.ts";
-import type { RequestContext } from "../deno-ssr/mod.ts";
 import { SsrService } from "./ssr.service.ts";
 import { handleError } from "./error-handler.ts";
-import { Cache } from "https://deno.land/x/local_cache@1.0/mod.ts";
-import {
-  Key,
-  pathToRegexp,
-} from "https://deno.land/x/path_to_regexp@v6.2.0/index.ts";
-import { qs } from "https://deno.land/x/deno_qs@0.0.1/mod.ts";
+import { HttpExceptionFilter } from "./filters/http-exception.filter.ts";
 
 @Middleware(new RegExp("/"))
 export class SsrMiddleware implements MiddlewareTarget {
   log = console;
-  cacheManager?: Cache<string, string>;
+  cacheManager?: Cache<string, RenderResult>;
   private theme?: FullThemeConfig;
   private ssr?: SsrService;
+  private httpExceptionFilter?: HttpExceptionFilter;
   constructor() {}
 
   // Workaround
@@ -28,8 +30,8 @@ export class SsrMiddleware implements MiddlewareTarget {
     this.log.debug("[SsrMiddleware] Init");
 
     this.ssr = container.resolve(SsrService);
-
     this.theme = container.resolve("theme");
+    this.httpExceptionFilter = container.resolve(HttpExceptionFilter);
 
     if (!this.theme) {
       throw new Error(
@@ -59,7 +61,10 @@ export class SsrMiddleware implements MiddlewareTarget {
       this.log.warn(
         "[SsrMiddleware] routeSettings is not set! " + route.pathname,
       );
-      return;
+      return await this.httpExceptionFilter?.catch(
+        new HttpError(404, "Not found!"),
+        context,
+      );
     }
 
     const req: RequestContext = {
@@ -83,7 +88,7 @@ export class SsrMiddleware implements MiddlewareTarget {
     try {
       const cacheKey = req.url;
 
-      const render = async () => {
+      const render = async (): Promise<RenderResult> => {
         if (!this.theme) {
           throw new Error(
             "[SsrMiddleware] Theme config not defined!",
@@ -103,43 +108,62 @@ export class SsrMiddleware implements MiddlewareTarget {
           `[SsrMiddleware] START: Render page component: ${rs.settings.component} for ${req.url}`,
         );
         try {
-          const page = await this.ssr.renderComponent({
+          const renderResult = await this.ssr.renderComponent({
             componentTagName: rs.settings.component,
             sharedContext,
           });
           this.log.debug(
             `[SsrMiddleware] END: Render page component: ${rs.settings.component} for ${req.url}`,
           );
-          return page.html;
-        } catch (error) {
+          return renderResult;
+        } catch (error: any) {
           this.log.error(error);
           throw handleError(error);
         }
       };
 
-      let result: string;
+      let renderResult: RenderResult;
       if (this.cacheManager.has(cacheKey)) {
-        result = this.cacheManager.get(cacheKey);
+        renderResult = this.cacheManager.get(cacheKey);
         this.log.debug(`[SsrMiddleware] Cache used`);
       } else {
         // We need the try-catch here because we are inside a callback
         try {
-          result = await render();
+          renderResult = await render();
+          // TODO send log to browser console
+          if (renderResult.output && this.ssr) {
+            this.ssr.logOutput(renderResult.output);
+          }
         } catch (error) {
           this.log.error(error);
-          throw handleError(error);
+          return await this.httpExceptionFilter?.catch(
+            handleError(error),
+            context,
+          );
         }
-        this.cacheManager.set(cacheKey, result);
+        this.cacheManager.set(cacheKey, renderResult);
       }
 
-      context.response.body = result;
-      context.response.headers.set("Content-Type", "text/html");
-      context.response.status;
-      return;
+      return this.send(context, renderResult.html);
     } catch (error) {
       this.log.error(error);
-      throw handleError(error);
+      return await this.httpExceptionFilter?.catch(
+        handleError(error),
+        context,
+      );
     }
+  }
+
+  /**
+   * Rendered SSR Page response
+   * @param context
+   * @param body
+   * @param status
+   */
+  private send(context: HttpContext, body: string, status = 200) {
+    context.response.body = body;
+    context.response.headers.set("Content-Type", "text/html");
+    context.response.status = status;
   }
 
   private parseRoutePath = (url: URL, path: string) => {

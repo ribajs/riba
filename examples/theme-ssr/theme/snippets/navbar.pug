@@ -1,0 +1,17 @@
+bs5-navbar.navbar.navbar-main.fixed-top.navbar-dark.bg-primary
+  .container-fluid.d-block
+    .row.justify-content-between
+      //- Left
+      .col-auto.d-flex.align-items-center
+        bs5-toggle-button.text-light(target-id="main-sidebar")
+          ul.nav
+            li.nav-item.d-flex.align-items-center
+              bs5-icon(src="/iconset/svg/icon_menu.svg" size="32" csr-rv-hide="isActive" csr-rv-on-click="toggle")
+            li.nav-item.d-flex.align-items-center
+              bs5-icon(src="/iconset/svg/icon_close.svg" size="32" csr-rv-show="isActive" csr-rv-on-click="toggle")
+      //- Right
+      link-list.col-auto.d-flex.align-items-center
+        //- Only on desktop
+        ul.nav.d-none.d-lg-flex
+          li.nav.d-flex(ssr-rv-each-item="items")
+            a.nav-link.text-light(rv-route-class-active ssr-rv-href="item.url") [ item.label ]

@@ -15,4 +15,5 @@ __exportStar(require("./constants"), exports);
 __exportStar(require("./source-file.service"), exports);
 __exportStar(require("./ssr.service"), exports);
 __exportStar(require("./template-file.service"), exports);
+__exportStar(require("./error-handler"), exports);
 //# sourceMappingURL=index.js.map

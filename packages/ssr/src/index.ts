@@ -10,3 +10,4 @@ export type {
 } from "@ribajs/core";
 export { PageComponent } from "./page-component";
 export { SSRModule } from "./ssr.module";
+export * from "./http-error";

@@ -5,5 +5,7 @@ export declare class SsrService {
     getSharedContext: Ssr['getSharedContext'];
     render: Ssr['render'];
     renderComponent: Ssr['renderComponent'];
+    logOutput: Ssr['logOutput'];
+    logToErrorMessage: Ssr['logToErrorMessage'];
     constructor(config: ConfigService);
 }

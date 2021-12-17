@@ -3,7 +3,8 @@ import fetch from "node-fetch";
 import { EventDispatcher } from "@ribajs/events";
 import { SourceFileService } from "./source-file.service";
 import { TemplateFileService } from "./template-file.service";
-import { DummyConsole } from "./dummy-console";
+import { StoreConsole } from "./store-console";
+import { IgnoreConsole } from "./ignore-console";
 export class SsrService {
     constructor(options) {
         this.log = console;
@@ -34,11 +35,26 @@ export class SsrService {
         };
         return sharedContext;
     }
-    async createDomForLayout(layout, pipeOutput = true) {
-        const virtualConsole = new VirtualConsole();
-        if (pipeOutput) {
-            virtualConsole.sendTo(console);
+    async createDomForLayout(layout, output = "pipe") {
+        const virtualConsole = new VirtualConsole({
+            captureRejections: true,
+        });
+        let pipeToConsole;
+        switch (output) {
+            case "pipe":
+                pipeToConsole = console;
+                break;
+            case "store":
+                pipeToConsole = new StoreConsole();
+                break;
+            case "ignore":
+                pipeToConsole = new IgnoreConsole();
+                break;
+            default:
+                pipeToConsole = new IgnoreConsole();
+                break;
         }
+        virtualConsole.sendTo(pipeToConsole);
         const dom = new JSDOM(layout, {
             virtualConsole,
             runScripts: "outside-only",
@@ -47,6 +63,7 @@ export class SsrService {
                 if (!window.fetch) {
                     window.fetch = fetch;
                 }
+                window.console = pipeToConsole;
                 if (!window.requestAnimationFrame) {
                     window.requestAnimationFrame = () => {
                     };
@@ -60,14 +77,14 @@ export class SsrService {
                 }
             },
         });
-        return { dom, virtualConsole };
+        return { dom, virtualConsole, pipeToConsole };
     }
-    async render(layout, sharedContext, scriptFilenames = ["main.bundle.js"], pipeOutput = true) {
+    async render(layout, sharedContext, scriptFilenames = ["main.bundle.js"], output = "pipe") {
         sharedContext = sharedContext || (await this.getSharedContext());
         if (!sharedContext?.events) {
             sharedContext.events = new EventDispatcher();
         }
-        let { dom, virtualConsole } = (await this.createDomForLayout(layout, pipeOutput));
+        const { dom, virtualConsole, pipeToConsole } = await this.createDomForLayout(layout, output);
         if (!dom) {
             throw new Error("Dom not defined!");
         }
@@ -89,7 +106,11 @@ export class SsrService {
         const renderResult = new Promise((resolve, reject) => {
             const onError = (error) => {
                 this.log.error("SSR error");
-                reject(this.transformBrowserError(error));
+                const output = [];
+                if (pipeToConsole.type === "store") {
+                    output.push(...pipeToConsole.messages);
+                }
+                reject(this.transformBrowserError(error, output));
                 clear();
                 return true;
             };
@@ -103,12 +124,14 @@ export class SsrService {
                     html: html,
                     css: [],
                 };
+                if (output === "store" && pipeToConsole.type === "store") {
+                    result.output = pipeToConsole.messages;
+                }
                 resolve(result);
                 clear();
                 return;
             };
             const clear = () => {
-                virtualConsole?.sendTo(new DummyConsole());
                 virtualConsole?.off("jsdomError", onError);
                 if (!sharedContext?.events) {
                     throw new Error("events are required in sharedContext object!");
@@ -130,8 +153,6 @@ export class SsrService {
                 }
                 files = null;
                 vmContext = null;
-                virtualConsole = null;
-                dom = null;
             };
             if (!sharedContext?.events) {
                 throw new Error("events are required in sharedContext object!");
@@ -143,8 +164,12 @@ export class SsrService {
         });
         return renderResult;
     }
-    transformBrowserError(error) {
-        const newError = new Error(error.message);
+    transformBrowserError(error, output) {
+        const message = error.message;
+        if (output.length) {
+            message + "\n" + this.logToErrorMessage(output);
+        }
+        const newError = new Error(message);
         if (error.stack) {
             newError.stack = error.stack;
         }
@@ -153,20 +178,36 @@ export class SsrService {
         }
         return newError;
     }
-    async renderComponent({ componentTagName, sharedContext, templateFile = this.options.defaultTemplateFile, rootTag = this.options.defaultRootTag, pipeOutput = true, }) {
+    async renderComponent({ componentTagName, sharedContext, templateFile = this.options.defaultTemplateFile, rootTag = this.options.defaultRootTag, output = "pipe", }) {
         sharedContext = sharedContext || (await this.getSharedContext());
         const template = await this.templateFile.load(templateFile, rootTag, componentTagName, {
             env: sharedContext.env,
             templateVars: sharedContext.templateVars,
         });
         try {
-            return await this.render(template.layout, sharedContext, undefined, pipeOutput);
+            return await this.render(template.layout, sharedContext, undefined, output);
         }
         catch (error) {
             this.log.error(`Error on render component! rootTag: "${rootTag}"`);
             this.log.error(error);
             throw error;
         }
+    }
+    logOutput(logs) {
+        if (logs?.length) {
+            this.log.log("[SsrService] Console output:");
+            for (const log of logs) {
+                this.log[log.type](log.message, ...(log.optionalParams || []));
+            }
+        }
+    }
+    logToErrorMessage(logs) {
+        logs = logs.filter((log) => log.type === "error" || log.type === "warn");
+        return logs
+            .map((log) => {
+            return JSON.stringify(log);
+        })
+            .join("\n");
     }
 }
 //# sourceMappingURL=ssr.service.js.map

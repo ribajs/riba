@@ -9,8 +9,9 @@ import { ConfigService } from '@nestjs/config';
 import type { FullThemeConfig } from './types';
 import { SsrService } from './ssr.service';
 import type { Request, Response, NextFunction } from 'express';
-import { handleError } from './error-handler';
 import type { Cache } from 'cache-manager';
+import type { RenderResult } from '@ribajs/node-ssr';
+import { handleError } from '@ribajs/node-ssr';
 @Injectable()
 export class SsrMiddleware implements NestMiddleware {
   theme: FullThemeConfig;
@@ -42,7 +43,7 @@ export class SsrMiddleware implements NestMiddleware {
         this.theme.cache || { ttl: 200 };
       const cacheKey = req.url;
 
-      const render = async () => {
+      const render = async (): Promise<RenderResult> => {
         const sharedContext = await this.ssr.getSharedContext(
           req,
           this.theme.templateVars,
@@ -51,44 +52,41 @@ export class SsrMiddleware implements NestMiddleware {
         this.log.debug(
           `START: Render page component: ${routeSettings.component} for ${req.url}`,
         );
-        const page = await this.ssr.renderComponent({
+        const renderResult = await this.ssr.renderComponent({
           componentTagName: routeSettings.component,
           sharedContext,
+          output: 'store',
         });
         this.log.debug(
           `END: Render page component: ${routeSettings.component} for ${req.url}`,
         );
-        return page.html;
+        return renderResult;
       };
 
-      // const html = await this.cacheManager.wrap<string>(
-      //   cacheKey,
-      //   render,
-      //   cacheOptions,
-      // );
-      // return res.send(html);
-
-      // TODO use the wrap method (see comment above)
-      this.cacheManager.get(cacheKey, async (error, result) => {
+      this.cacheManager.get<RenderResult>(cacheKey, async (error, result) => {
         if (error) {
           this.log.error(error);
-          return next(handleError(error));
+          return next(handleError(error, result?.output));
         }
 
         if (result) {
           this.log.debug(`Cache used`);
-          return res.send(result);
+          return res.send(result.html);
         }
 
         // We need the try catch here because we are inside if a callback
         try {
           result = await render();
         } catch (error) {
-          return next(handleError(error));
+          return next(handleError(error, result?.output));
         }
 
-        this.cacheManager.set(cacheKey, result, cacheOptions);
-        res.send(result);
+        this.cacheManager.set<RenderResult>(cacheKey, result, cacheOptions);
+        // TODO send log to browser console
+        if (result.output) {
+          this.ssr.logOutput(result.output);
+        }
+        res.send(result.html);
         if (global.gc) {
           this.log.debug(`run garbage collector`);
           global.gc();

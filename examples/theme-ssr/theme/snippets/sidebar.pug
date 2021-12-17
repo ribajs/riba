@@ -1,0 +1,4 @@
+bs5-sidebar#main-sidebar.bg-primary.text-light.py-5(container-selector="#main-container" position="left" mode="overlap")
+  link-list.list-group
+    .list-group-item.list-group-item-action.bg-transparent.border-0(ssr-rv-each-item="items")
+      a.nav-link.text-light(csr-rv-route-class-active ssr-rv-href="item.url") [ item.label ]

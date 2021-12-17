@@ -1,7 +1,9 @@
 // See https://github.com/ribajs/riba/blob/master/backend/node-ssr/src/ssr.service.ts
 
 import {
+  ConsoleMessage,
   ErrorObj,
+  RenderError,
   RenderResult,
   RequestContext,
   SharedContext,
@@ -92,6 +94,8 @@ export class SsrService {
         toJsonString(sharedContext.templateVars || {}),
         "--request-json",
         toJsonString(sharedContext.ctx || {}),
+        "--console-output",
+        "store",
       ],
       stdout: "piped",
       stderr: "piped",
@@ -102,20 +106,55 @@ export class SsrService {
     if (!status.success) {
       const stderr = new TextDecoder().decode(await process.stderrOutput());
       const stdin = new TextDecoder().decode(await process.output());
-      console.error("stderr", stderr);
-      console.error("stdin", stdin);
+      if (stderr) {
+        this.log.error("[SsrService] stderr", stderr);
+      }
+      if (stdin) {
+        this.log.log("[SsrService] stdin", stdin);
+      }
       throw new Error(stderr);
     }
     const output = new TextDecoder().decode(await process.output());
-    let result: RenderResult;
+    const stderr = new TextDecoder().decode(await process.stderrOutput());
+
+    if (stderr) {
+      this.log.error("[SsrService] stderr", stderr);
+    }
+
+    let result: RenderResult | RenderError;
     try {
-      result = JSON.parse(output).result;
+      result = JSON.parse(output);
     } catch (error) {
       throw new Error(
         `You can not use JSON.parse on ${JSON.stringify(output)}.\n` +
           error?.message,
       );
     }
+    if ((result as RenderError).hasError) {
+      throw result as RenderError;
+    }
     return result as RenderResult;
+  }
+
+  /**
+   * Log stored console logs from SSR script
+   * @param logs
+   */
+  public logOutput(logs: ConsoleMessage[]) {
+    if (logs?.length) {
+      this.log.log("[SsrService] Console output:");
+      for (const log of logs) {
+        this.log[log.type](log.message, ...(log.optionalParams || []));
+      }
+    }
+  }
+
+  public logToErrorMessage(logs: ConsoleMessage[]) {
+    logs = logs.filter((log) => log.type === "error" || log.type === "warn");
+    return logs
+      .map((log) => {
+        return JSON.stringify(log);
+      })
+      .join("\n");
   }
 }

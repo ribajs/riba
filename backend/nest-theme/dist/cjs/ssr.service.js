@@ -30,6 +30,8 @@ let SsrService = class SsrService {
         this.getSharedContext = this.ssr.getSharedContext.bind(this.ssr);
         this.render = this.ssr.render.bind(this.ssr);
         this.renderComponent = this.ssr.renderComponent.bind(this.ssr);
+        this.logOutput = this.ssr.logOutput.bind(this.ssr);
+        this.logToErrorMessage = this.ssr.logToErrorMessage.bind(this.ssr);
     }
 };
 SsrService = __decorate([

@@ -13,6 +13,8 @@ export class SsrService {
   getSharedContext: Ssr["getSharedContext"];
   // render: Ssr["render"];
   renderComponent: Ssr["renderComponent"];
+  logOutput: Ssr["logOutput"];
+  logToErrorMessage: Ssr["logToErrorMessage"];
 
   constructor(@Inject("theme") readonly theme: FullThemeConfig) {
     if (!theme) {
@@ -28,5 +30,7 @@ export class SsrService {
     this.getSharedContext = this.ssr.getSharedContext.bind(this.ssr);
     // this.render = this.ssr.render.bind(this.ssr);
     this.renderComponent = this.ssr.renderComponent.bind(this.ssr);
+    this.logOutput = this.ssr.logOutput.bind(this.ssr);
+    this.logToErrorMessage = this.ssr.logToErrorMessage.bind(this.ssr);
   }
 }

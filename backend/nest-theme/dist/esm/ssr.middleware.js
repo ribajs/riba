@@ -13,7 +13,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 import { Injectable, Inject, CACHE_MANAGER, Logger, } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { SsrService } from './ssr.service';
-import { handleError } from './error-handler';
+import { handleError } from '@ribajs/node-ssr';
 let SsrMiddleware = class SsrMiddleware {
     constructor(config, ssr, cacheManager) {
         this.config = config;
@@ -41,30 +41,34 @@ let SsrMiddleware = class SsrMiddleware {
             const render = async () => {
                 const sharedContext = await this.ssr.getSharedContext(req, this.theme.templateVars);
                 this.log.debug(`START: Render page component: ${routeSettings.component} for ${req.url}`);
-                const page = await this.ssr.renderComponent({
+                const renderResult = await this.ssr.renderComponent({
                     componentTagName: routeSettings.component,
                     sharedContext,
+                    output: 'store',
                 });
                 this.log.debug(`END: Render page component: ${routeSettings.component} for ${req.url}`);
-                return page.html;
+                return renderResult;
             };
             this.cacheManager.get(cacheKey, async (error, result) => {
                 if (error) {
                     this.log.error(error);
-                    return next(handleError(error));
+                    return next(handleError(error, result?.output));
                 }
                 if (result) {
                     this.log.debug(`Cache used`);
-                    return res.send(result);
+                    return res.send(result.html);
                 }
                 try {
                     result = await render();
                 }
                 catch (error) {
-                    return next(handleError(error));
+                    return next(handleError(error, result?.output));
                 }
                 this.cacheManager.set(cacheKey, result, cacheOptions);
-                res.send(result);
+                if (result.output) {
+                    this.ssr.logOutput(result.output);
+                }
+                res.send(result.html);
                 if (global.gc) {
                     this.log.debug(`run garbage collector`);
                     global.gc();
