@@ -31,7 +31,7 @@ export abstract class BaseTransition implements Transition {
     this.oldContainer = oldContainer;
 
     this.deferred = deferred();
-    const newContainerLoading = deferred();
+    const newContainerLoading = deferred<HTMLElement>();
     this.newContainerLoading = newContainerLoading.promise;
 
     this.start();
@@ -57,7 +57,7 @@ export abstract class BaseTransition implements Transition {
       throw new Error("Can't show new container");
     }
     this.newContainer.style.visibility = "visible";
-    return this.deferred.resolve();
+    return this.deferred.resolve(undefined);
   }
 
   /**

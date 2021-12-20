@@ -1,5 +1,5 @@
-export interface Deferred {
-  resolve: (value?: unknown) => void;
+export interface Deferred<T = any> {
+  resolve: (value: T | PromiseLike<T>) => void;
   reject: (reason?: any) => void;
-  promise: Promise<any>;
+  promise: Promise<T>;
 }

@@ -1,4 +1,4 @@
-import { Deferred } from "./types";
+import { Deferred, TimeoutPromise } from "./types";
 
 export const noop = () => {
   /** do nothing */
@@ -31,14 +31,14 @@ export const waitForProp = async <T = any>(
  *
  * @return
  */
-export const deferred = () => {
-  const obj: Partial<Deferred> = {};
-  const prom = new Promise((resolve, reject) => {
+export const deferred = <T = any>() => {
+  const obj: Partial<Deferred<T>> = {};
+  const prom = new Promise<T>((resolve, reject) => {
     obj.resolve = resolve;
     obj.reject = reject;
   });
   obj.promise = prom;
-  return obj as Deferred;
+  return obj as Deferred<T>;
 };
 
 /**
@@ -121,4 +121,38 @@ export const throttle = (fn: (...params: any[]) => any, wait = 100) => {
     }
     return promise;
   };
+};
+
+/**
+ * Cancel promise on timeout.
+ */
+ export const pTimeout = <T>(
+  value: Promise<T>,
+  ms: number,
+  error?: Error,
+) => {
+  const def = deferred<T>();
+
+  const p: TimeoutPromise<T> = {
+    _timeout: setTimeout(() => {
+      def.reject(error || new Error(`Timeout after ${ms}ms`));
+    }, ms),
+    promise: def.promise,
+    cancel: () => {
+      def.resolve(value);
+      clearTimeout(p._timeout);
+    },
+  };
+
+  value
+    .then((value: T) => {
+      p.cancel();
+      def.resolve(value);
+    })
+    .catch((error) => {
+      p.cancel();
+      def.reject(error);
+    });
+
+  return p.promise;
 };
