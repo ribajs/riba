@@ -140,7 +140,9 @@ export const throttle = (fn: (...params: any[]) => any, wait = 100) => {
     promise: def.promise,
     cancel: () => {
       def.resolve(value);
-      clearTimeout(p._timeout);
+      if (p._timeout) {
+        clearTimeout(p._timeout);
+      }
     },
   };
 
