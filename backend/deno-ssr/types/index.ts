@@ -1,6 +1,7 @@
 export * from "./component-lifecycle-event-data.ts";
 export * from "./component.ts";
 export * from "./console-message.ts";
+export * from "./deferred.ts";
 export * from "./error-obj.ts";
 export * from "./event-dispatcher.ts";
 export * from "./parsed-query.ts";
@@ -12,3 +13,4 @@ export * from "./ssr-service-options-arg.ts";
 export * from "./ssr-service-options.ts";
 export * from "./supported-template-engines.ts";
 export * from "./template-vars.ts";
+export * from "./timeout-promise.ts";

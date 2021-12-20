@@ -12,8 +12,7 @@ import {
   TemplateVars,
 } from "./types/index.ts";
 
-import { toJsonString } from "./utils.ts";
-import { HttpError } from "./http-error.ts";
+import { pTimeout, toJsonString } from "./utils.ts";
 
 export class SsrService {
   log = console;
@@ -75,37 +74,56 @@ export class SsrService {
 
     const sourceFileDir = this.options.sourceFileDir;
     const templateDir = this.options.templateDir;
+    const timeout = this.options.timeout || 5000;
+
+    const cmd = [
+      "yarn",
+      "ssr",
+      "--root-tag",
+      rootTag,
+      "--component",
+      componentTagName,
+      "--engine",
+      templateEngine,
+      "--template-file",
+      templateFile,
+      "--source-file-dir",
+      sourceFileDir,
+      "--template-dir",
+      templateDir,
+      "--template-vars-json",
+      toJsonString(sharedContext.templateVars || {}),
+      "--request-json",
+      toJsonString(sharedContext.ctx || {}),
+      "--console-output",
+      "store",
+      "---timeout",
+      timeout.toString(),
+    ];
 
     const process = Deno.run({
-      cmd: [
-        "yarn",
-        "ssr",
-        "--root-tag",
-        rootTag,
-        "--component",
-        componentTagName,
-        "--engine",
-        templateEngine,
-        "--template-file",
-        templateFile,
-        "--source-file-dir",
-        sourceFileDir,
-        "--template-dir",
-        templateDir,
-        "--template-vars-json",
-        toJsonString(sharedContext.templateVars || {}),
-        "--request-json",
-        toJsonString(sharedContext.ctx || {}),
-        "--console-output",
-        "store",
-      ],
+      cmd,
       stdout: "piped",
       stderr: "piped",
     });
 
-    const status = await process.status();
-    const stdin = new TextDecoder().decode(await process.output());
-    const stderr = new TextDecoder().decode(await process.stderrOutput());
+    let status: Deno.ProcessStatus;
+    let stdin: string;
+    let stderr: string;
+
+    try {
+      status = await pTimeout<Deno.ProcessStatus>(
+        process.status(),
+        timeout,
+      );
+      stdin = new TextDecoder().decode(await process.output());
+      stderr = new TextDecoder().decode(await process.stderrOutput());
+    } catch (error) {
+      process.close();
+      throw error;
+    }
+
+    process.close();
 
     if (stderr) {
       this.log.error("[deno-ssr][SsrService] stderr", stderr);
