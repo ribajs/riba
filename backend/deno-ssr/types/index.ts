@@ -3,7 +3,6 @@ export * from "./component.ts";
 export * from "./console-message.ts";
 export * from "./error-obj.ts";
 export * from "./event-dispatcher.ts";
-export * from "./http-error.ts";
 export * from "./parsed-query.ts";
 export * from "./render-error.ts";
 export * from "./render-result.ts";

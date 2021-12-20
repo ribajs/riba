@@ -13,6 +13,7 @@ import {
 } from "./types/index.ts";
 
 import { toJsonString } from "./utils.ts";
+import { HttpError } from "./http-error.ts";
 
 export class SsrService {
   log = console;
@@ -103,33 +104,25 @@ export class SsrService {
     });
 
     const status = await process.status();
-
-    if (!status.success) {
-      const stderr = new TextDecoder().decode(await process.stderrOutput());
-      const stdin = new TextDecoder().decode(await process.output());
-      if (stderr) {
-        this.log.error("[SsrService] stderr", stderr);
-      }
-      if (stdin) {
-        this.log.log("[SsrService] stdin", stdin);
-      }
-      throw new Error(stderr);
-    }
-    const output = new TextDecoder().decode(await process.output());
+    const stdin = new TextDecoder().decode(await process.output());
     const stderr = new TextDecoder().decode(await process.stderrOutput());
 
     if (stderr) {
-      this.log.error("[SsrService] stderr", stderr);
+      this.log.error("[deno-ssr][SsrService] stderr", stderr);
+    }
+    if (!status.success && stdin) {
+      this.log.log("[deno-ssr][SsrService] stdin", stdin);
+    }
+
+    if (stderr) {
+      throw new Error(stderr);
     }
 
     let result: RenderResult | RenderError;
     try {
-      result = JSON.parse(output);
-    } catch (error) {
-      throw new Error(
-        `You can not use JSON.parse on ${JSON.stringify(output)}.\n` +
-          error?.message,
-      );
+      result = JSON.parse(stdin);
+    } catch (_) {
+      throw new Error(stdin);
     }
     if ((result as RenderError).hasError) {
       throw result as RenderError;

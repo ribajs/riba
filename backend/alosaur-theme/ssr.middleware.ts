@@ -61,10 +61,6 @@ export class SsrMiddleware implements MiddlewareTarget {
       this.log.warn(
         "[SsrMiddleware] routeSettings is not set! " + route.pathname,
       );
-      // return await this.httpExceptionFilter?.catch(
-      //   new HttpError(404, "Not found!"),
-      //   context,
-      // );
       return;
     }
 
@@ -86,72 +82,69 @@ export class SsrMiddleware implements MiddlewareTarget {
       );
     }
 
-    try {
-      const cacheKey = req.url;
+    const cacheKey = req.url;
 
-      const render = async (): Promise<RenderResult> => {
-        if (!this.theme) {
-          throw new Error(
-            "[SsrMiddleware] Theme config not defined!",
-          );
-        }
-
-        if (!this.ssr) {
-          throw new Error("[SsrMiddleware] SsrService not defined!");
-        }
-
-        const sharedContext = this.ssr.getSharedContext(
-          req,
-          this.theme.templateVars,
+    const render = async (): Promise<RenderResult> => {
+      if (!this.theme) {
+        throw new Error(
+          "[SsrMiddleware] Theme config not defined!",
         );
-
-        this.log.debug(
-          `[SsrMiddleware] START: Render page component: ${rs.settings.component} for ${req.url}`,
-        );
-        try {
-          const renderResult = await this.ssr.renderComponent({
-            componentTagName: rs.settings.component,
-            sharedContext,
-          });
-          this.log.debug(
-            `[SsrMiddleware] END: Render page component: ${rs.settings.component} for ${req.url}`,
-          );
-          return renderResult;
-        } catch (error: any) {
-          this.log.error(error);
-          throw handleError(error);
-        }
-      };
-
-      let renderResult: RenderResult;
-      if (this.cacheManager.has(cacheKey)) {
-        renderResult = this.cacheManager.get(cacheKey);
-        this.log.debug(`[SsrMiddleware] Cache used`);
-      } else {
-        // We need the try-catch here because we are inside a callback
-        try {
-          renderResult = await render();
-          // TODO send log to browser console
-          if (renderResult.output && this.ssr) {
-            this.ssr.logOutput(renderResult.output);
-          }
-        } catch (error) {
-          this.log.error(error);
-          return await this.httpExceptionFilter?.catch(
-            handleError(error),
-            context,
-          );
-        }
-        this.cacheManager.set(cacheKey, renderResult);
       }
 
+      if (!this.ssr) {
+        throw new Error("[SsrMiddleware] SsrService not defined!");
+      }
+
+      const sharedContext = this.ssr.getSharedContext(
+        req,
+        this.theme.templateVars,
+      );
+
+      this.log.debug(
+        `[SsrMiddleware] START: Render page component: ${rs.settings.component} for ${req.url}`,
+      );
+      try {
+        const renderResult = await this.ssr.renderComponent({
+          componentTagName: rs.settings.component,
+          sharedContext,
+        });
+        this.log.debug(
+          `[SsrMiddleware] END: Render page component: ${rs.settings.component} for ${req.url}`,
+        );
+        return renderResult;
+      } catch (error: any) {
+        this.log.error(error);
+        throw handleError(error);
+      }
+    };
+
+    let renderResult: RenderResult;
+    if (this.cacheManager.has(cacheKey)) {
+      renderResult = this.cacheManager.get(cacheKey);
+      this.log.debug(`[SsrMiddleware] Cache used`);
+    } else {
+      // We need the try-catch here because we are inside a callback
+      try {
+        renderResult = await render();
+        // TODO send log to browser console
+        if (renderResult.output && this.ssr) {
+          this.ssr.logOutput(renderResult.output);
+        }
+      } catch (error) {
+        this.log.error(error);
+        return await this.httpExceptionFilter?.catch(
+          handleError(error),
+          context,
+        );
+      }
+      this.cacheManager.set(cacheKey, renderResult);
+    }
+
+    try {
       return this.send(context, renderResult.html);
     } catch (error) {
       this.log.error(error);
-      return await this.httpExceptionFilter?.catch(
-        handleError(error),
-        context,
-      );
+      throw error;
     }
   }
 

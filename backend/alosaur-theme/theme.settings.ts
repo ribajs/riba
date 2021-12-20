@@ -2,7 +2,9 @@ import {
   AppSettings,
   compileFile,
   container,
+  dotenv,
   PugOptions,
+  resolve,
   ViewRenderConfig,
 } from "./deps.ts";
 
@@ -11,18 +13,20 @@ import { loadThemeConfig } from "./helper/config.ts";
 import { ThemeArea } from "./theme.area.ts";
 import { SsrMiddleware } from "./ssr.middleware.ts";
 
-const SERVER_PORT = Deno.env.get("SERVER_PORT") || 8080;
+const env = dotenv.config({ path: resolve(Deno.cwd(), ".env") });
 
-const LOGGING = Deno.env.get("LOGGING") === "true" || false;
+const SERVER_PORT = env.SERVER_PORT || 8080;
+
+const LOGGING = env.LOGGING === "true" || false;
 
 export const getSettings = async (
   alosaurThemeConfig: Partial<AlosaurThemeConfig>,
 ) => {
   alosaurThemeConfig.themeDir = alosaurThemeConfig.themeDir ||
-    Deno.env.get("THEME_DIR");
+    env.THEME_DIR;
 
   alosaurThemeConfig.active = alosaurThemeConfig.active ||
-    Deno.env.get("THEME_ACTIVE");
+    env.THEME_ACTIVE;
 
   if (!alosaurThemeConfig.themeDir) {
     throw new Error("themeDir is required!");
@@ -42,6 +46,10 @@ export const getSettings = async (
       {
         token: "theme",
         useValue: themeConfig,
+      },
+      {
+        token: SsrMiddleware,
+        useClass: SsrMiddleware,
       },
     ],
     areas: [ThemeArea],

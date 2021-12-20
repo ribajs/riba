@@ -111,18 +111,18 @@ export class HttpExceptionFilter {
         httpCtx,
         errorPageConfig.component,
       );
-      if (result.hasError) {
-        overwriteException = result.exception;
-        status = overwriteException ? getStatus(overwriteException) : 500;
-      } else {
+      if (!result.hasError) {
         return this.send(httpCtx, {
           status,
           ...result,
         });
       }
+
+      overwriteException = result.exception;
+      status = overwriteException ? getStatus(overwriteException) : status;
     }
 
-    // Fallback
+    // Error on rendering error page
     return this.send(httpCtx, {
       hasError: true,
       status,
@@ -135,14 +135,17 @@ export class HttpExceptionFilter {
    */
   private send(context: HttpContext, exception: HttpExceptionCatch) {
     context.response.status = exception.status || 500;
+
     if (exception.renderResult) {
       context.response.body = exception.renderResult.html;
       context.response.headers.set("Content-Type", "text/html");
       return;
     }
 
-    if (exception.errorObj) {
-      context.response.body = exception.errorObj;
+    // Error on rendering error page
+    if (exception.hasError) {
+      console.debug("Error on rendering error page", exception);
+      context.response.body = JSON.stringify(exception.errorObj);
       context.response.headers.set("Content-Type", "application/json");
       return;
     }

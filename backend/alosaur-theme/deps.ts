@@ -1,4 +1,4 @@
-import "https://deno.land/x/dotenv@v3.1.0/mod.ts"; // Auto load .env file
+export * as dotenv from "https://deno.land/x/dotenv@v3.1.0/mod.ts"; // Auto load .env file
 
 export {
   AlosaurRequest,

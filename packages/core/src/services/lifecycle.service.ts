@@ -176,6 +176,7 @@ export class LifecycleService {
     const states = this.getStates();
     if (Object.keys(states).length <= 0) {
       console.warn("No component found");
+      this.events.trigger("ComponentLifecycle:noComponents");
       return;
     }
 

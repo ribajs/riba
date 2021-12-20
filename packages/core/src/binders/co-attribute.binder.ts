@@ -3,6 +3,8 @@ import { BasicComponent } from "../component/basic-component";
 import type { Observer } from "../observer";
 import { isCustomElement, waitForCustomElement } from "@ribajs/utils";
 
+const NO_RIBA_COMPONENT_ERROR_MESSAGE = '[componentAttributeBinder] You can only use the "rv-co-*" binder on Riba components, but "{tagName}" is not registered.';
+
 /**
  * co-*
  * Pass a riba model / scope value to your component without first converting it as an attribute
@@ -21,7 +23,7 @@ export class ComponentAttributeBinder extends Binder<any, BasicComponent> {
       }
     } else {
       console.warn(
-        "[componentAttributeBinder] You can only use this binder on Riba components",
+        NO_RIBA_COMPONENT_ERROR_MESSAGE.replace("{tagName}", el.tagName),
         el
       );
     }
@@ -35,7 +37,7 @@ export class ComponentAttributeBinder extends Binder<any, BasicComponent> {
       this.routineIntern(el, value);
     } else {
       console.warn(
-        "[componentAttributeBinder] You can only use this binder on Riba components",
+        NO_RIBA_COMPONENT_ERROR_MESSAGE.replace("{tagName}", el.tagName),
         el
       );
     }
@@ -45,7 +47,7 @@ export class ComponentAttributeBinder extends Binder<any, BasicComponent> {
     const attrName = (this.args[0] as string).trim();
     if (typeof el.observeAttribute !== "function") {
       console.warn(
-        "[componentAttributeBinder] You can only use this binder on Riba components",
+        NO_RIBA_COMPONENT_ERROR_MESSAGE.replace("{tagName}", el.tagName),
         el
       );
       return;
@@ -65,7 +67,7 @@ export class ComponentAttributeBinder extends Binder<any, BasicComponent> {
       this.bindIntern(el);
     } else {
       console.warn(
-        "[componentAttributeBinder] You can only use this binder on Riba components",
+        NO_RIBA_COMPONENT_ERROR_MESSAGE.replace("{tagName}", el.tagName),
         el
       );
     }

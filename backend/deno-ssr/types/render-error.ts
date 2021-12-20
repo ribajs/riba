@@ -1,4 +1,4 @@
-import type { HttpError } from "./http-error.ts";
+import type { HttpError } from "../http-error.ts";
 
 export interface RenderError {
   hasError: true;
