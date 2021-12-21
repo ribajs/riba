@@ -40,8 +40,15 @@ export class HttpExceptionFilter implements ExceptionFilter {
     req: Request,
     overwriteException?: HttpException | Error,
   ) {
-    const status = getStatus(overwriteException || exception);
+
+    const currentMessage = getMessage(exception);
     const message = getMessage(overwriteException || exception);
+
+    if(currentMessage === message) {
+      return undefined;
+    }
+
+    const status = getStatus(overwriteException || exception);
     const stack = getStack(overwriteException || exception);
 
     const errorObj: ErrorObj = {
