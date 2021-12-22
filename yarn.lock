@@ -3755,7 +3755,7 @@ __metadata:
     postcss: ^8.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -3764,7 +3764,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -3819,7 +3819,7 @@ __metadata:
     postcss: ^8.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -3828,7 +3828,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -3883,7 +3883,7 @@ __metadata:
     mini-css-extract-plugin: ^2.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -3892,7 +3892,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -3945,7 +3945,7 @@ __metadata:
     mini-css-extract-plugin: ^2.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -3954,7 +3954,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -4004,7 +4004,7 @@ __metadata:
     mini-css-extract-plugin: ^2.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     sass: ^1.45.1
     sass-loader: ^12.4.0
     serve: ^13.0.2
@@ -4013,7 +4013,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -4062,7 +4062,7 @@ __metadata:
     mini-css-extract-plugin: ^2.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     sass: ^1.45.1
     sass-loader: ^12.4.0
     serve: ^13.0.2
@@ -4070,7 +4070,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -4126,7 +4126,7 @@ __metadata:
     postcss: ^8.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -4138,7 +4138,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -4192,7 +4192,7 @@ __metadata:
     postcss: ^8.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -4201,7 +4201,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -4254,7 +4254,7 @@ __metadata:
     postcss: ^8.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -4263,7 +4263,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -4317,7 +4317,7 @@ __metadata:
     postcss: ^8.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -4326,7 +4326,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -4382,7 +4382,7 @@ __metadata:
     mini-css-extract-plugin: ^2.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -4391,7 +4391,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -4447,7 +4447,7 @@ __metadata:
     mini-css-extract-plugin: ^2.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -4458,7 +4458,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -4511,7 +4511,7 @@ __metadata:
     mini-css-extract-plugin: ^2.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -4520,7 +4520,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -4576,7 +4576,7 @@ __metadata:
     postcss: ^8.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -4588,7 +4588,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -4642,7 +4642,7 @@ __metadata:
     postcss: ^8.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -4651,7 +4651,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -4705,7 +4705,7 @@ __metadata:
     mini-css-extract-plugin: ^2.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -4715,7 +4715,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -4766,7 +4766,7 @@ __metadata:
     mini-css-extract-plugin: ^2.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     sass: ^1.45.1
     sass-loader: ^12.4.0
@@ -4776,7 +4776,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -4827,7 +4827,7 @@ __metadata:
     mini-css-extract-plugin: ^2.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     sass: ^1.45.1
     sass-loader: ^12.4.0
@@ -4837,7 +4837,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -4888,7 +4888,7 @@ __metadata:
     postcss: ^8.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -4897,7 +4897,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -4945,7 +4945,7 @@ __metadata:
     mini-css-extract-plugin: ^2.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     sass: ^1.45.1
     sass-loader: ^12.4.0
     serve: ^13.0.2
@@ -4954,7 +4954,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -5004,7 +5004,7 @@ __metadata:
     mini-css-extract-plugin: ^2.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     sass-loader: ^12.4.0
     serve: ^13.0.2
     terser-webpack-plugin: ^5.3.0
@@ -5012,7 +5012,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -5064,7 +5064,7 @@ __metadata:
     mini-css-extract-plugin: ^2.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     sass: ^1.45.1
     sass-loader: ^12.4.0
@@ -5074,7 +5074,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -5125,7 +5125,7 @@ __metadata:
     mini-css-extract-plugin: ^2.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     sass: ^1.45.1
     sass-loader: ^12.4.0
@@ -5135,7 +5135,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -5189,7 +5189,7 @@ __metadata:
     postcss: ^8.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -5198,7 +5198,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -5251,7 +5251,7 @@ __metadata:
     mini-css-extract-plugin: ^2.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     resolve-url-loader: ^4.0.0
@@ -5263,7 +5263,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -5315,7 +5315,7 @@ __metadata:
     mini-css-extract-plugin: ^2.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -5325,7 +5325,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -5376,7 +5376,7 @@ __metadata:
     mini-css-extract-plugin: ^2.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -5386,7 +5386,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -5438,7 +5438,7 @@ __metadata:
     mini-css-extract-plugin: ^2.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -5448,7 +5448,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -5503,7 +5503,7 @@ __metadata:
     postcss: ^8.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -5513,7 +5513,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -5568,7 +5568,7 @@ __metadata:
     mini-css-extract-plugin: ^2.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -5579,7 +5579,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -5632,7 +5632,7 @@ __metadata:
     mini-css-extract-plugin: ^2.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -5643,7 +5643,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -6458,7 +6458,7 @@ __metadata:
     file-loader: ^6.2.0
     fork-ts-checker-webpack-plugin: ^6.5.0
     html-loader: ^3.0.1
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug: ^3.0.2
     pug-loader: ^2.4.0
@@ -6704,7 +6704,7 @@ __metadata:
     postcss: ^8.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -6713,7 +6713,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -6766,7 +6766,7 @@ __metadata:
     postcss: ^8.4.5
     postcss-loader: ^6.2.1
     postcss-modules: ^4.2.2
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
     prettier: 2.5.1
     pug-loader: ^2.4.0
     sass: ^1.45.1
@@ -6775,7 +6775,7 @@ __metadata:
     typescript: 4.5.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
   languageName: unknown
   linkType: soft
 
@@ -6819,7 +6819,7 @@ __metadata:
     "@ribajs/shopify-tda": "workspace:*"
     leaflet: ^1.7.1
     postcss: ^8.4.5
-    postcss-preset-env: ^7.0.2
+    postcss-preset-env: ^7.1.0
   dependenciesMeta:
     "@ribajs/bs4":
       optional: true
@@ -7237,7 +7237,7 @@ __metadata:
     style-loader: ^3.3.1
     terser-webpack-plugin: ^5.3.0
     typescript: ^4.5.4
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
     webpack-node-externals: ^3.0.0
     webpackbar: ^5.0.2
   peerDependencies:
@@ -7258,7 +7258,7 @@ __metadata:
     pkg-dir: ^6.0.1
     typescript: ^4.5.4
     webpack: ^5.65.0
-    webpack-dev-server: ^4.6.0
+    webpack-dev-server: ^4.7.1
     yargs: ^17.3.0
   bin:
     webpack-serve: dist/cjs/index.js
@@ -7505,7 +7505,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/bonjour@npm:*":
+"@types/bonjour@npm:*, @types/bonjour@npm:^3.5.9":
   version: 3.5.9
   resolution: "@types/bonjour@npm:3.5.9"
   dependencies:
@@ -7585,7 +7585,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/connect-history-api-fallback@npm:*":
+"@types/connect-history-api-fallback@npm:*, @types/connect-history-api-fallback@npm:^1.3.5":
   version: 1.3.5
   resolution: "@types/connect-history-api-fallback@npm:1.3.5"
   dependencies:
@@ -8295,7 +8295,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/serve-index@npm:*":
+"@types/serve-index@npm:*, @types/serve-index@npm:^1.9.1":
   version: 1.9.1
   resolution: "@types/serve-index@npm:1.9.1"
   dependencies:
@@ -8327,6 +8327,15 @@ __metadata:
   dependencies:
     socket.io-client: "*"
   checksum: 6eef7529afc1d732fb4091864aa6396a2f676ad25eda0035dd1f2c228cbcaf8520b15236ee0f2c714e061307eeab2b6c8edad637bc83a317c326ae70729d88b0
+  languageName: node
+  linkType: hard
+
+"@types/sockjs@npm:^0.3.33":
+  version: 0.3.33
+  resolution: "@types/sockjs@npm:0.3.33"
+  dependencies:
+    "@types/node": "*"
+  checksum: b9bbb2b5c5ead2fb884bb019f61a014e37410bddd295de28184e1b2e71ee6b04120c5ba7b9954617f0bdf962c13d06249ce65004490889c747c80d3f628ea842
   languageName: node
   linkType: hard
 
@@ -8565,6 +8574,15 @@ __metadata:
     "@types/webpack-sources": "*"
     source-map: ^0.6.0
   checksum: e502f308846bae6d2e94df083022be1bf151f7e6be73738854d6c7cf7fb581218712114717190b91f6d16a827f6d977bf9c04deda2e8a81203ad2a712cc9121f
+  languageName: node
+  linkType: hard
+
+"@types/ws@npm:^8.2.2":
+  version: 8.2.2
+  resolution: "@types/ws@npm:8.2.2"
+  dependencies:
+    "@types/node": "*"
+  checksum: 308957864b9a5a0378ac82f1b084fa31b1bbe85106fb0d84ed2b392e4829404f21ab6ab2c1eb782d556e59cd33d57c75ad2d0cedc4b9b9d0ca3b2311bc915578
   languageName: node
   linkType: hard
 
@@ -11175,10 +11193,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:^1.0.30001286, caniuse-lite@npm:^1.0.30001287":
+"caniuse-lite@npm:^1.0.30001286":
   version: 1.0.30001287
   resolution: "caniuse-lite@npm:1.0.30001287"
   checksum: b53c26a3a267a2920394e4aa5d1f60a76f891943914068066700e5497dda512f096d8a77dfefda17306a9df06e16ce9c6b5179f8856cc0efbcd8873d13b2fbea
+  languageName: node
+  linkType: hard
+
+"caniuse-lite@npm:^1.0.30001291":
+  version: 1.0.30001292
+  resolution: "caniuse-lite@npm:1.0.30001292"
+  checksum: 930d02514769243f26033919f56536a307db83bba933374e6955c6678878fe8a8105051796868947d230f31d237b782fa2cf7390b84b69b555077add12469966
   languageName: node
   linkType: hard
 
@@ -20801,13 +20826,13 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"postcss-preset-env@npm:^7.0.2":
-  version: 7.0.2
-  resolution: "postcss-preset-env@npm:7.0.2"
+"postcss-preset-env@npm:^7.1.0":
+  version: 7.1.0
+  resolution: "postcss-preset-env@npm:7.1.0"
   dependencies:
     autoprefixer: ^10.4.0
     browserslist: ^4.19.1
-    caniuse-lite: ^1.0.30001287
+    caniuse-lite: ^1.0.30001291
     css-blank-pseudo: ^3.0.0
     css-has-pseudo: ^3.0.0
     css-prefers-color-scheme: ^6.0.0
@@ -20842,7 +20867,7 @@ fsevents@~2.3.1:
     postcss: ^8.3
   bin:
     postcss-preset-env: dist/cli.mjs
-  checksum: 198a90f35f4d7ea88cb035e89ecb7c9009c528f8e0cffc44670d18e07bbc362f9eb486fd329f57043e1530862032cade3f4ff5df6bfd8e99b371d508b9e0173e
+  checksum: b7d128ca1cae90a6c351d1a7705108c99710264f2b7c13ea47964fd96f0e2a33889d4c7bc24a8c6d5bc095c3d6d360367fbdc65ce1072836ac7dd854e8afedbc
   languageName: node
   linkType: hard
 
@@ -21421,13 +21446,6 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"punycode@npm:1.3.2":
-  version: 1.3.2
-  resolution: "punycode@npm:1.3.2"
-  checksum: b8807fd594b1db33335692d1f03e8beeddde6fda7fbb4a2e32925d88d20a3aa4cd8dcc0c109ccaccbd2ba761c208dfaaada83007087ea8bfb0129c9ef1b99ed6
-  languageName: node
-  linkType: hard
-
 "punycode@npm:^1.3.2":
   version: 1.4.1
   resolution: "punycode@npm:1.4.1"
@@ -21508,13 +21526,6 @@ fsevents@~2.3.1:
     object-assign: ^4.1.0
     strict-uri-encode: ^1.0.0
   checksum: 4ac760d9778d413ef5f94f030ed14b1a07a1708dd13fd3bc54f8b9ef7b425942c7577f30de0bf5a7d227ee65a9a0350dfa3a43d1d266880882fb7ce4c434a4dd
-  languageName: node
-  linkType: hard
-
-"querystring@npm:0.2.0":
-  version: 0.2.0
-  resolution: "querystring@npm:0.2.0"
-  checksum: 8258d6734f19be27e93f601758858c299bdebe71147909e367101ba459b95446fbe5b975bf9beb76390156a592b6f4ac3a68b6087cea165c259705b8b4e56a69
   languageName: node
   linkType: hard
 
@@ -25103,16 +25114,6 @@ typescript@4.3.5:
   languageName: node
   linkType: hard
 
-"url@npm:^0.11.0":
-  version: 0.11.0
-  resolution: "url@npm:0.11.0"
-  dependencies:
-    punycode: 1.3.2
-    querystring: 0.2.0
-  checksum: 50d100d3dd2d98b9fe3ada48cadb0b08aa6be6d3ac64112b867b56b19be4bfcba03c2a9a0d7922bfd7ac17d4834e88537749fe182430dfd9b68e520175900d90
-  languageName: node
-  linkType: hard
-
 "use@npm:^3.1.0":
   version: 3.1.1
   resolution: "use@npm:3.1.1"
@@ -25443,25 +25444,30 @@ typescript@4.3.5:
   languageName: node
   linkType: hard
 
-"webpack-dev-middleware@npm:^5.2.1":
-  version: 5.2.1
-  resolution: "webpack-dev-middleware@npm:5.2.1"
+"webpack-dev-middleware@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "webpack-dev-middleware@npm:5.3.0"
   dependencies:
     colorette: ^2.0.10
     memfs: ^3.2.2
     mime-types: ^2.1.31
     range-parser: ^1.2.1
-    schema-utils: ^3.1.0
+    schema-utils: ^4.0.0
   peerDependencies:
     webpack: ^4.0.0 || ^5.0.0
-  checksum: 06f3ef14ec983d115d7109f37312fc691c867c95fe7579784c7b80db0a2be77392fa27de444d0a937546da68c7e99640c13df73dc1351bbed7ebab4cc5569f14
+  checksum: 01f9e11583bb682cd5ab5a1b9d6dc99545f777513c4c15aa67d10f5d057fc3d0c6f9365e02c07792d3c9b17bd47a16c8185e66eb66e9de74d8ccf561e75085e7
   languageName: node
   linkType: hard
 
-"webpack-dev-server@npm:^4.6.0":
-  version: 4.6.0
-  resolution: "webpack-dev-server@npm:4.6.0"
+"webpack-dev-server@npm:^4.7.1":
+  version: 4.7.1
+  resolution: "webpack-dev-server@npm:4.7.1"
   dependencies:
+    "@types/bonjour": ^3.5.9
+    "@types/connect-history-api-fallback": ^1.3.5
+    "@types/serve-index": ^1.9.1
+    "@types/sockjs": ^0.3.33
+    "@types/ws": ^8.2.2
     ansi-html-community: ^0.0.8
     bonjour: ^3.5.0
     chokidar: ^3.5.2
@@ -25484,8 +25490,7 @@ typescript@4.3.5:
     sockjs: ^0.3.21
     spdy: ^4.0.2
     strip-ansi: ^7.0.0
-    url: ^0.11.0
-    webpack-dev-middleware: ^5.2.1
+    webpack-dev-middleware: ^5.3.0
     ws: ^8.1.0
   peerDependencies:
     webpack: ^4.37.0 || ^5.0.0
@@ -25494,7 +25499,7 @@ typescript@4.3.5:
       optional: true
   bin:
     webpack-dev-server: bin/webpack-dev-server.js
-  checksum: 941ecdc7bff9021afa5dc28a0e89c6e11fa5eb3778c6dced2c2a58ccdca45e2324b4792dc21fdcbf684b0fd88c8840b622230d57663377c5b25e215f4b0029de
+  checksum: a47bff0f6371e63db19424831ce3804c85f7dc69b4feb3a401958fb5edfe1080d1dd8be80fb6e1960eb66b0d3b0aeeb2c92e1a49b3344c3ab14c902b2e74a5e7
   languageName: node
   linkType: hard
 

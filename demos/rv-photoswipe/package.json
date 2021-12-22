@@ -61,7 +61,7 @@
     "mini-css-extract-plugin": "^2.4.5",
     "postcss-loader": "^6.2.1",
     "postcss-modules": "^4.2.2",
-    "postcss-preset-env": "^7.0.2",
+    "postcss-preset-env": "^7.1.0",
     "prettier": "2.5.1",
     "pug-loader": "^2.4.0",
     "sass": "^1.45.1",
@@ -72,7 +72,7 @@
     "typescript": "4.5.4",
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.6.0"
+    "webpack-dev-server": "^4.7.1"
   },
   "dependencies": {
     "@ribajs/bs4": "workspace:*",

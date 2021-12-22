@@ -57,7 +57,7 @@
     "file-loader": "^6.2.0",
     "fork-ts-checker-webpack-plugin": "^6.5.0",
     "html-loader": "^3.0.1",
-    "postcss-preset-env": "^7.0.2",
+    "postcss-preset-env": "^7.1.0",
     "prettier": "2.5.1",
     "pug": "^3.0.2",
     "pug-loader": "^2.4.0",

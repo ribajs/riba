@@ -30,7 +30,7 @@
     "pkg-dir": "^6.0.1",
     "typescript": "^4.5.4",
     "webpack": "^5.65.0",
-    "webpack-dev-server": "^4.6.0",
+    "webpack-dev-server": "^4.7.1",
     "yargs": "^17.3.0"
   },
   "devDependencies": {
