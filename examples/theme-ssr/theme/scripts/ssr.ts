@@ -33,7 +33,4 @@ riba.module.regist(SSRModule.init());
 
 console.log("Hello from Riba");
 
-const view = riba.bind(document.body);
-
-// WORKAROUND / FIXME view.traverse method seems not to be working in jsdom
-// view.registComponents();
+riba.bind(document.body);

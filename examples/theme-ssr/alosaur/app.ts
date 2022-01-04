@@ -1,5 +1,4 @@
-import { App } from "https://deno.land/x/alosaur@v0.35.1/mod.ts";
-import { getSettings } from "../../../backend/alosaur-theme/mod.ts";
+import { App, getSettings } from "./deps.ts";
 
 const SERVER_PORT = Deno.env.get("SERVER_PORT") || "8080";
 const __dirname = new URL(".", import.meta.url).pathname;

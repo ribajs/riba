@@ -1,8 +1,14 @@
-import { AlosaurOpenApiBuilder } from "alosaur/openapi/mod.ts";
+import { AlosaurOpenApiBuilder, getSettings } from "./deps.ts";
 
-import { appSettings } from "./settings.ts";
+const __dirname = new URL(".", import.meta.url).pathname;
 
-AlosaurOpenApiBuilder.create(appSettings)
+const { themeAppSettings } = await getSettings({
+  themeDir: __dirname + "..",
+  active: "theme",
+  templateVars: {},
+});
+
+AlosaurOpenApiBuilder.create(themeAppSettings)
   .addTitle("SevdeskAutoReceipts")
   .addVersion("1.0.0")
   .addDescription("Example Alosaur OpenApi generate")

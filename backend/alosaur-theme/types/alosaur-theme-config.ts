@@ -1,4 +1,4 @@
-import { TemplateVars } from "../../deno-ssr/mod.ts";
+import { TemplateVars } from "../../deno-node-ssr/mod.ts";
 
 export interface AlosaurThemeConfig {
   themeDir: string;

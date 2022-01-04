@@ -126,10 +126,10 @@ export class SsrService {
     process.close();
 
     if (stderr) {
-      this.log.error("[deno-ssr][SsrService] stderr", stderr);
+      this.log.error("[deno-node-ssr][SsrService] stderr", stderr);
     }
     if (!status.success && stdin) {
-      this.log.log("[deno-ssr][SsrService] stdin", stdin);
+      this.log.log("[deno-node-ssr][SsrService] stdin", stdin);
     }
 
     if (stderr) {

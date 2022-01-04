@@ -2,7 +2,6 @@ import {
   Cache,
   container,
   HttpContext,
-  HttpError,
   Key,
   Middleware,
   MiddlewareTarget,

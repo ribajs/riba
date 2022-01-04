@@ -1,7 +1,7 @@
 import type { Route } from "./route.ts";
 import type { ErrorRoutes } from "./error-routes.ts";
 import type { Cache } from "./cache.ts";
-import { SupportedTemplateEngines } from "../../deno-ssr/mod.ts";
+import { SupportedTemplateEngines } from "../../deno-node-ssr/mod.ts";
 
 export interface ThemeConfig {
   /** The name name of the theme, e.g. "Demo Theme" */

@@ -1,4 +1,4 @@
-# Deno SSR
+# Deno Node SSR
 
 This is currently just a wrapper for [@ribajs/node-ssr](/backend/node-ssr) with
 the same API until we have found a replacement for the Node.js vm module. That's why Node.js and a package.json with the module "@ribajs/node-ssr" is required to use this Deno module.

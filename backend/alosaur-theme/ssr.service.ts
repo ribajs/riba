@@ -1,6 +1,6 @@
 import { AutoInjectable, Inject, resolve } from "./deps.ts";
 import type { FullThemeConfig } from "./types/index.ts";
-import { SsrService as Ssr } from "../deno-ssr/mod.ts";
+import { SsrService as Ssr } from "../deno-node-ssr/mod.ts";
 
 @AutoInjectable()
 export class SsrService {
