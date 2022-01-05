@@ -27,11 +27,11 @@
   "module": "src/index.ts",
   "source": "src/index.ts",
   "devDependencies": {
-    "@babel/runtime": "^7.16.5",
-    "@babel/runtime-corejs3": "^7.16.5",
+    "@babel/runtime": "^7.16.7",
+    "@babel/runtime-corejs3": "^7.16.7",
     "@ribajs/tsconfig": "workspace:*",
-    "@types/node": "^16.11.15",
-    "eslint": "^8.5.0",
+    "@types/node": "^16.11.19",
+    "eslint": "^8.6.0",
     "typescript": "4.5.4"
   }
 }
