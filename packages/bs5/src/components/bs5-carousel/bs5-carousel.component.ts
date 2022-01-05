@@ -6,8 +6,7 @@ export interface Scope {
   // Properties
   interval: CarouselOptions["interval"];
   keyboard: CarouselOptions["keyboard"];
-  slide: CarouselOptions["slide"];
-  pauseOn: CarouselOptions["pause"];
+  pause: CarouselOptions["pause"];
   wrap: CarouselOptions["wrap"];
   touch: CarouselOptions["touch"];
   fade: boolean;
@@ -15,7 +14,7 @@ export interface Scope {
   next: Bs5CarouselComponent["next"];
   nextWhenVisible: Bs5CarouselComponent["nextWhenVisible"];
   prev: Bs5CarouselComponent["prev"];
-  pause: Bs5CarouselComponent["pause"];
+  startPause: Bs5CarouselComponent["pause"];
   cycle: Bs5CarouselComponent["cycle"];
   to: Bs5CarouselComponent["to"];
   dispose: Bs5CarouselComponent["dispose"];
@@ -28,8 +27,7 @@ export class Bs5CarouselComponent extends Component {
     return [
       "interval",
       "keyboard",
-      "slide",
-      "pauseOn",
+      "pause",
       "wrap",
       "touch",
       "fade",
@@ -44,8 +42,7 @@ export class Bs5CarouselComponent extends Component {
     // Properties
     interval: Carousel.Default.interval,
     keyboard: Carousel.Default.keyboard,
-    slide: Carousel.Default.slide,
-    pauseOn: Carousel.Default.pause || false, // changed from pause to pauseOn
+    pause: Carousel.Default.pause || false, // changed from pause to pause
     wrap: Carousel.Default.wrap,
     touch: Carousel.Default.touch,
     fade: false,
@@ -53,7 +50,7 @@ export class Bs5CarouselComponent extends Component {
     next: this.next,
     nextWhenVisible: this.nextWhenVisible,
     prev: this.prev,
-    pause: this.pause,
+    startPause: this.pause,
     cycle: this.cycle,
     to: this.to,
     dispose: this.dispose,
@@ -76,8 +73,7 @@ export class Bs5CarouselComponent extends Component {
     this.carouselService = new Carousel(this, {
       interval: this.scope.interval,
       keyboard: this.scope.keyboard,
-      slide: this.scope.slide,
-      pause: this.scope.pauseOn,
+      pause: this.scope.pause,
       wrap: this.scope.wrap,
       touch: this.scope.touch,
     });
