@@ -17,7 +17,7 @@
     "lint": "eslint . --ext .ts,.tsx --fix && npm run lint:ssr && npm run lint:csr",
     "lint:ssr": "tsc -p tsconfig.ssr.json --noEmit",
     "lint:csr": "tsc -p tsconfig.json --noEmit",
-    "start:cli": "echo \"\nNode SSR CLI Example:\"; ssr --component=hello-ssr-page --source-file-dir=./assets/ssr --template-dir=. --pretty=true",
+    "start:cli": "echo \"\nNode SSR CLI Example:\"; ssr render --component=hello-ssr-page --source-file-dir=./assets/ssr --template-dir=. --pretty=true",
     "start:node": "echo \"\nNode SSR API Example:\"; ts-node --project tsconfig.api.json api.ts",
     "start:deno": "echo \"\nDeno SSR API Example:\";deno run --config ./deno.json --allow-env --allow-run deno-api.ts"
   },

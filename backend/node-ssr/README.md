@@ -45,7 +45,7 @@ start();
 ## CLI
 
 ```bash
-$ ssr --help
+$ ssr render --help
 Options:
       --help             Show help                                     [boolean]
       --version          Show version                                  [boolean]

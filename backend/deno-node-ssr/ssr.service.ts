@@ -79,6 +79,7 @@ export class SsrService {
     const cmd = [
       "yarn",
       "ssr",
+      "render",
       "--root-tag",
       rootTag,
       "--component",

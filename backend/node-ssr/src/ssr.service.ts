@@ -1,6 +1,4 @@
-import { VirtualConsole, JSDOM } from "jsdom";
 import { Context } from "vm";
-import fetch from "node-fetch";
 import type {
   ComponentLifecycleEventData,
   ErrorObj,
@@ -10,7 +8,7 @@ import { EventDispatcher } from "@ribajs/events";
 import { SourceFileService } from "./source-file.service";
 import { TemplateFileService } from "./template-file.service";
 import { StoreConsole } from "./store-console";
-import { IgnoreConsole } from "./ignore-console";
+import { createDomForLayout } from "./dom";
 import type {
   TemplateVars,
   ResponseError,
@@ -20,7 +18,6 @@ import type {
   SsrServiceOptionsArg,
   SharedContext,
   OutputType,
-  PipeConsole,
   ConsoleMessage,
 } from "./types/index";
 
@@ -67,70 +64,6 @@ export class SsrService {
     return sharedContext;
   }
 
-  private async createDomForLayout(
-    layout: string,
-    output: OutputType = "pipe"
-  ) {
-    const virtualConsole: VirtualConsole = new VirtualConsole({
-      captureRejections: true,
-    });
-
-    let pipeToConsole: PipeConsole;
-    switch (output) {
-      case "pipe":
-        pipeToConsole = console;
-        break;
-      case "store":
-        pipeToConsole = new StoreConsole();
-        break;
-      case "ignore":
-        pipeToConsole = new IgnoreConsole();
-        break;
-      default:
-        pipeToConsole = new IgnoreConsole();
-        break;
-    }
-
-    virtualConsole.sendTo(pipeToConsole);
-
-    const dom = new JSDOM(layout, {
-      virtualConsole,
-      runScripts: "outside-only", // 'dangerously',
-      includeNodeLocations: true,
-      beforeParse(window) {
-        if (!window.fetch) {
-          window.fetch = fetch as any;
-        }
-
-        // Workaround, virtualConsole is not working?
-        window.console = pipeToConsole;
-
-        if (!window.requestAnimationFrame) {
-          // Dummy
-          (window as any).requestAnimationFrame = () => {
-            /** Do nothing */
-          };
-        }
-
-        if (!window.indexedDB) {
-          /**
-           * Dummy
-           * Maybe in the future:
-           * * https://www.npmjs.com/package/indexeddb
-           * * https://github.com/metagriffin/indexeddb-js
-           * * ...
-           */
-          (window as any).indexedDB = {
-            open: () => {
-              return {};
-            },
-          };
-        }
-      },
-    });
-    return { dom, virtualConsole, pipeToConsole };
-  }
-
   /**
    * Start ssr using jsdom
    * @see https://github.com/jsdom/jsdom
@@ -151,8 +84,11 @@ export class SsrService {
       sharedContext.events = new EventDispatcher();
     }
 
-    const { dom, virtualConsole, pipeToConsole } =
-      await this.createDomForLayout(layout, output);
+    const { dom, virtualConsole, pipeToConsole } = await createDomForLayout(
+      layout,
+      output
+    );
+
     if (!dom) {
       throw new Error("Dom not defined!");
     }
@@ -242,7 +178,6 @@ export class SsrService {
         }
         files = null;
         vmContext = null;
-        // virtualConsole?.sendTo(new IgnoreConsole());
       };
 
       if (!sharedContext?.events) {

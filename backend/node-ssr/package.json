@@ -21,7 +21,7 @@
     "watch": "npm run build -- --watch",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --ignore-pattern '*.spec.ts' --fix",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "help": "ssr --help"
+    "help": "ssr render --help"
   },
   "files": [
     "/dist"

@@ -7,7 +7,6 @@ export declare class SsrService {
     private options;
     constructor(options: SsrServiceOptionsArg);
     getSharedContext(req?: Partial<RequestContext>, templateVars?: TemplateVars, errorObj?: ErrorObj): Promise<SharedContext>;
-    private createDomForLayout;
     render(layout: string, sharedContext?: SharedContext, scriptFilenames?: string[], output?: OutputType): Promise<RenderResult>;
     private transformBrowserError;
     renderComponent({ componentTagName, sharedContext, templateFile, rootTag, output, }: {

@@ -20,80 +20,7 @@ const errorToObject = (error: HttpError) => {
   };
 };
 
-const start = async () => {
-  const argv = await yargs(hideBin(process.argv))
-    .option("timeout", {
-      alias: "t",
-      type: "number",
-      description: "Timeout if the SSR does not respond",
-      default: 5000,
-    })
-    .option("root-tag", {
-      alias: "rt",
-      type: "string",
-      description:
-        "The root tag is an html tag name you defined in your initial template. This will be exchanged with the tag name of the page component in the render process.",
-      default: "ssr-root-page",
-    })
-    .option("component", {
-      alias: "c",
-      type: "string",
-      description:
-        "The page component tag name which will be exchanged with the tag name of the page component in the render process.",
-      demandOption: true,
-    })
-    .option("engine", {
-      alias: "e",
-      type: "string",
-      description: 'The template engine you use, e.g. "pug"',
-      default: "pug",
-    })
-    .option("template-file", {
-      alias: "tf",
-      type: "string",
-      description:
-        "The template file name of your entry template in which you defined the rootTag",
-      default: "page-component.pug",
-    })
-    .option("source-file-dir", {
-      alias: "sf",
-      type: "string",
-      description:
-        "The directory in which your javascript source files are stored",
-      demandOption: true,
-    })
-    .option("template-dir", {
-      alias: "td",
-      type: "string",
-      description: "The directory in which your template view files are stored",
-      demandOption: true,
-    })
-    .option("template-vars-json", {
-      alias: "tvj",
-      type: "string",
-      description: "JSON string for template variables",
-      default: "{}",
-    })
-    .option("request-json", {
-      alias: "rj",
-      type: "string",
-      description: "JSON string for request data",
-      default: "{}",
-    })
-    .option("console-output", {
-      alias: "co",
-      type: "string",
-      description:
-        "How to deal with the console output. Possible values are: 'pipe' | 'ignore' | 'store' ",
-      default: "store",
-    })
-    .option("pretty", {
-      alias: "p",
-      type: "string",
-      description: "Prettify JSON output",
-      default: false,
-    }).argv;
-
+const render = async (argv: any) => {
   const engine = argv.engine;
 
   if (
@@ -136,6 +63,90 @@ const start = async () => {
       hasError: true,
     };
     console.log(JSON.stringify(renderError, null, argv.pretty ? 2 : undefined));
+  }
+};
+
+const start = async () => {
+  const argv = await yargs(hideBin(process.argv))
+    .scriptName("ssr")
+    .command("render", "Render a component", (yargs) => {
+      yargs
+        .option("timeout", {
+          alias: "t",
+          type: "number",
+          description: "Timeout if the SSR does not respond",
+          default: 5000,
+        })
+        .option("root-tag", {
+          alias: "rt",
+          type: "string",
+          description:
+            "The root tag is an html tag name you defined in your initial template. This will be exchanged with the tag name of the page component in the render process.",
+          default: "ssr-root-page",
+        })
+        .option("component", {
+          alias: "c",
+          type: "string",
+          description:
+            "The page component tag name which will be exchanged with the tag name of the page component in the render process.",
+          demandOption: true,
+        })
+        .option("engine", {
+          alias: "e",
+          type: "string",
+          description: 'The template engine you use, e.g. "pug"',
+          default: "pug",
+        })
+        .option("template-file", {
+          alias: "tf",
+          type: "string",
+          description:
+            "The template file name of your entry template in which you defined the rootTag",
+          default: "page-component.pug",
+        })
+        .option("source-file-dir", {
+          alias: "sf",
+          type: "string",
+          description:
+            "The directory in which your javascript source files are stored",
+          demandOption: true,
+        })
+        .option("template-dir", {
+          alias: "td",
+          type: "string",
+          description:
+            "The directory in which your template view files are stored",
+          demandOption: true,
+        })
+        .option("template-vars-json", {
+          alias: "tvj",
+          type: "string",
+          description: "JSON string for template variables",
+          default: "{}",
+        })
+        .option("request-json", {
+          alias: "rj",
+          type: "string",
+          description: "JSON string for request data",
+          default: "{}",
+        })
+        .option("console-output", {
+          alias: "co",
+          type: "string",
+          description:
+            "How to deal with the console output. Possible values are: 'pipe' | 'ignore' | 'store' ",
+          default: "store",
+        })
+        .option("pretty", {
+          alias: "p",
+          type: "string",
+          description: "Prettify JSON output",
+          default: false,
+        });
+    }).argv;
+
+  if (argv._.includes("render")) {
+    await render(argv);
   }
 };
 

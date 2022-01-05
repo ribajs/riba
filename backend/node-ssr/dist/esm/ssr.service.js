@@ -1,10 +1,7 @@
-import { VirtualConsole, JSDOM } from "jsdom";
-import fetch from "node-fetch";
 import { EventDispatcher } from "@ribajs/events";
 import { SourceFileService } from "./source-file.service";
 import { TemplateFileService } from "./template-file.service";
-import { StoreConsole } from "./store-console";
-import { IgnoreConsole } from "./ignore-console";
+import { createDomForLayout } from "./dom";
 export class SsrService {
     constructor(options) {
         this.log = console;
@@ -35,56 +32,12 @@ export class SsrService {
         };
         return sharedContext;
     }
-    async createDomForLayout(layout, output = "pipe") {
-        const virtualConsole = new VirtualConsole({
-            captureRejections: true,
-        });
-        let pipeToConsole;
-        switch (output) {
-            case "pipe":
-                pipeToConsole = console;
-                break;
-            case "store":
-                pipeToConsole = new StoreConsole();
-                break;
-            case "ignore":
-                pipeToConsole = new IgnoreConsole();
-                break;
-            default:
-                pipeToConsole = new IgnoreConsole();
-                break;
-        }
-        virtualConsole.sendTo(pipeToConsole);
-        const dom = new JSDOM(layout, {
-            virtualConsole,
-            runScripts: "outside-only",
-            includeNodeLocations: true,
-            beforeParse(window) {
-                if (!window.fetch) {
-                    window.fetch = fetch;
-                }
-                window.console = pipeToConsole;
-                if (!window.requestAnimationFrame) {
-                    window.requestAnimationFrame = () => {
-                    };
-                }
-                if (!window.indexedDB) {
-                    window.indexedDB = {
-                        open: () => {
-                            return {};
-                        },
-                    };
-                }
-            },
-        });
-        return { dom, virtualConsole, pipeToConsole };
-    }
     async render(layout, sharedContext, scriptFilenames = ["main.bundle.js"], output = "pipe") {
         sharedContext = sharedContext || (await this.getSharedContext());
         if (!sharedContext?.events) {
             sharedContext.events = new EventDispatcher();
         }
-        const { dom, virtualConsole, pipeToConsole } = await this.createDomForLayout(layout, output);
+        const { dom, virtualConsole, pipeToConsole } = await createDomForLayout(layout, output);
         if (!dom) {
             throw new Error("Dom not defined!");
         }

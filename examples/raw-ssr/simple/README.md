@@ -11,7 +11,7 @@ yarn run start:cli
 As you can see in the package.json, this executes the following command:
 
 ```bash
-ssr --component=hello-ssr-page --source-file-dir=./assets/ssr --template-dir=. --pretty=true
+ssr render --component=hello-ssr-page --source-file-dir=./assets/ssr --template-dir=. --pretty=true
 ```
 
 ## Node.js API
