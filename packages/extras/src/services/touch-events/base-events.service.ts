@@ -1,4 +1,4 @@
-export abstract class BaseTouchEventsService {
+export abstract class BaseEventsService {
   protected touchCapable = "ontouchstart" in window;
   /** The element to trigger the events on */
   protected el: HTMLUnknownElement | HTMLElement | Window;

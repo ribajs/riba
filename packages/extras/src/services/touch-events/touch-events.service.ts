@@ -9,7 +9,7 @@ import {
   TouchDirection,
 } from "../../types";
 
-import { BaseTouchEventsService } from "./base-touch-events.service";
+import { BaseEventsService } from "./base-events.service";
 
 /**
  * Vanilla version of jQuery Mobile Events
@@ -37,7 +37,7 @@ import { BaseTouchEventsService } from "./base-touch-events.service";
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-export class TouchEventsService extends BaseTouchEventsService {
+export class TouchEventsService extends BaseEventsService {
   // GETTERS:
 
   public get isTouchCapable() {

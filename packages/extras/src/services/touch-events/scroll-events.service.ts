@@ -1,8 +1,8 @@
 import { ScrollPosition, ScrollEventsOptions } from "../../types";
 import { getScrollPosition } from "../../helper/scroll";
-import { BaseTouchEventsService } from "./base-touch-events.service";
+import { BaseEventsService } from "./base-events.service";
 
-export class ScrollEventsService extends BaseTouchEventsService {
+export class ScrollEventsService extends BaseEventsService {
   public isScrolling = false;
 
   protected _scrollEvent: Array<"touchmove" | "scroll" | "scrollend">;
