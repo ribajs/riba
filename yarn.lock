@@ -3393,6 +3393,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ribajs/accessibility@workspace:*, @ribajs/accessibility@workspace:packages/accessibility":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/accessibility@workspace:packages/accessibility"
+  dependencies:
+    "@babel/runtime": ^7.16.7
+    "@babel/runtime-corejs3": ^7.16.7
+    "@ribajs/core": "workspace:*"
+    "@ribajs/tsconfig": "workspace:*"
+    "@ribajs/utils": "workspace:*"
+    "@types/node": ^16.11.19
+    gamecontroller.js: "workspace:*"
+  languageName: unknown
+  linkType: soft
+
 "@ribajs/artcodestudio@workspace:*, @ribajs/artcodestudio@workspace:packages/artcodestudio":
   version: 0.0.0-use.local
   resolution: "@ribajs/artcodestudio@workspace:packages/artcodestudio"
@@ -3714,6 +3728,66 @@ __metadata:
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
     webpack-glob-entry: ^2.1.1
+  languageName: unknown
+  linkType: soft
+
+"@ribajs/demo-accessibility-gamepad@workspace:demos/accessibility-gamepad":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/demo-accessibility-gamepad@workspace:demos/accessibility-gamepad"
+  dependencies:
+    "@babel/cli": ^7.16.7
+    "@babel/core": ^7.16.7
+    "@babel/plugin-proposal-class-properties": ^7.16.7
+    "@babel/plugin-proposal-export-default-from": ^7.16.7
+    "@babel/plugin-proposal-object-rest-spread": ^7.16.7
+    "@babel/plugin-proposal-optional-chaining": ^7.16.7
+    "@babel/plugin-syntax-export-default-from": ^7.16.7
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
+    "@babel/plugin-transform-runtime": ^7.16.7
+    "@babel/plugin-transform-typescript": ^7.16.7
+    "@babel/preset-env": ^7.16.7
+    "@babel/preset-typescript": ^7.16.7
+    "@babel/runtime": ^7.16.7
+    "@babel/runtime-corejs3": ^7.16.7
+    "@ribajs/accessibility": "workspace:*"
+    "@ribajs/babel-config": "workspace:*"
+    "@ribajs/core": "workspace:*"
+    "@ribajs/eslint-config": "workspace:*"
+    "@ribajs/tsconfig": "workspace:*"
+    "@ribajs/utils": "workspace:*"
+    "@ribajs/webpack-config": "workspace:*"
+    "@types/jest": ^27.4.0
+    "@typescript-eslint/eslint-plugin": ^5.9.0
+    "@typescript-eslint/experimental-utils": ^5.9.0
+    "@typescript-eslint/parser": ^5.9.0
+    "@yarnpkg/pnpify": ^3.1.1-rc.10
+    babel-jest: ^27.4.6
+    babel-loader: ^8.2.3
+    babel-plugin-array-includes: ^2.0.3
+    babelify: ^10.0.0
+    core-js: ^3.20.2
+    css-loader: ^6.5.1
+    eslint: ^8.6.0
+    eslint-config-prettier: ^8.3.0
+    eslint-plugin-prettier: ^4.0.0
+    html-loader: ^3.0.1
+    inspectpack: ^4.7.1
+    jest: ^27.4.7
+    jest-extended: ^1.2.0
+    mini-css-extract-plugin: ^2.4.5
+    postcss: ^8.4.5
+    postcss-loader: ^6.2.1
+    postcss-modules: ^4.3.0
+    postcss-preset-env: ^7.2.0
+    prettier: 2.5.1
+    pug-loader: ^2.4.0
+    sass: ^1.45.2
+    sass-loader: ^12.4.0
+    serve: ^13.0.2
+    typescript: 4.5.4
+    webpack: ^5.65.0
+    webpack-cli: ^4.9.1
+    webpack-dev-server: ^4.7.2
   languageName: unknown
   linkType: soft
 
@@ -11399,6 +11473,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"basic-auth@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "basic-auth@npm:2.0.1"
+  dependencies:
+    safe-buffer: 5.1.2
+  checksum: 3419b805d5dfc518f3a05dcf42aa53aa9ce820e50b6df5097f9e186322e1bc733c36722b624802cd37e791035aa73b828ed814d8362333d42d7f5cd04d7a5e48
+  languageName: node
+  linkType: hard
+
 "batch@npm:0.6.1":
   version: 0.6.1
   resolution: "batch@npm:0.6.1"
@@ -13130,7 +13213,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"colors@npm:^1.1.2":
+"colors@npm:^1.1.2, colors@npm:^1.4.0":
   version: 1.4.0
   resolution: "colors@npm:1.4.0"
   checksum: 98aa2c2418ad87dedf25d781be69dc5fc5908e279d9d30c34d8b702e586a0474605b3a189511482b9d5ed0d20c867515d22749537f7bc546256c6014f3ebdcec
@@ -13635,6 +13718,13 @@ __metadata:
     object-assign: ^4
     vary: ^1
   checksum: ced838404ccd184f61ab4fdc5847035b681c90db7ac17e428f3d81d69e2989d2b680cc254da0e2554f5ed4f8a341820a1ce3d1c16b499f6e2f47a1b9b07b5006
+  languageName: node
+  linkType: hard
+
+"corser@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "corser@npm:2.0.1"
+  checksum: 9ff6944eda760c8c3118747a636afc3ede53b41e7b9960513a15b88032209a728e630ae4b41e20a941e34da129fe9094d1f5d95123ef64ac2e16cdad8dce9c87
   languageName: node
   linkType: hard
 
@@ -16936,6 +17026,23 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"gamecontroller.js@workspace:*, gamecontroller.js@workspace:vendor/gamecontroller.js":
+  version: 0.0.0-use.local
+  resolution: "gamecontroller.js@workspace:vendor/gamecontroller.js"
+  dependencies:
+    "@babel/core": ^7.16.7
+    "@babel/plugin-transform-typescript": ^7.16.7
+    "@babel/preset-env": ^7.16.7
+    "@babel/preset-typescript": ^7.16.7
+    babel-loader: ^8.2.3
+    http-server: ^14.0.0
+    jest: ^27.4.7
+    typescript: ^4.5.4
+    webpack: ^5.65.0
+    webpack-cli: ^4.9.1
+  languageName: unknown
+  linkType: soft
+
 "gauge@npm:~2.7.3":
   version: 2.7.4
   resolution: "gauge@npm:2.7.4"
@@ -18306,6 +18413,29 @@ fsevents@~2.3.1:
     follow-redirects: ^1.0.0
     requires-port: ^1.0.0
   checksum: f5bd96bf83e0b1e4226633dbb51f8b056c3e6321917df402deacec31dd7fe433914fc7a2c1831cf7ae21e69c90b3a669b8f434723e9e8b71fd68afe30737b6a5
+  languageName: node
+  linkType: hard
+
+"http-server@npm:^14.0.0":
+  version: 14.0.0
+  resolution: "http-server@npm:14.0.0"
+  dependencies:
+    basic-auth: ^2.0.1
+    colors: ^1.4.0
+    corser: ^2.0.1
+    he: ^1.2.0
+    html-encoding-sniffer: ^3.0.0
+    http-proxy: ^1.18.1
+    mime: ^1.6.0
+    minimist: ^1.2.5
+    opener: ^1.5.1
+    portfinder: ^1.0.28
+    secure-compare: 3.0.1
+    union: ~0.5.0
+    url-join: ^4.0.1
+  bin:
+    http-server: bin/http-server
+  checksum: 2b7d0f86e7779aafca3a19c5f6a2452c54e3d1cb31656f0ea26b45e86ebbaea713634d9d04eb48101bb84dcce5ebad4c0359d43c7f5f51c5846cda257a30b20b
   languageName: node
   linkType: hard
 
@@ -21719,7 +21849,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"mime@npm:1.6.0":
+"mime@npm:1.6.0, mime@npm:^1.6.0":
   version: 1.6.0
   resolution: "mime@npm:1.6.0"
   bin:
@@ -22622,6 +22752,15 @@ fsevents@~2.3.1:
     is-docker: ^2.1.1
     is-wsl: ^2.2.0
   checksum: e9545bec64cdbf30a0c35c1bdc310344adf8428a117f7d8df3c0af0a0a24c513b304916a6d9b11db0190ff7225c2d578885080b761ed46a3d5f6f1eebb98b63c
+  languageName: node
+  linkType: hard
+
+"opener@npm:^1.5.1":
+  version: 1.5.2
+  resolution: "opener@npm:1.5.2"
+  bin:
+    opener: bin/opener-bin.js
+  checksum: 33b620c0d53d5b883f2abc6687dd1c5fd394d270dbe33a6356f2d71e0a2ec85b100d5bac94694198ccf5c30d592da863b2292c5539009c715a9c80c697b4f6cc
   languageName: node
   linkType: hard
 
@@ -24765,7 +24904,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"qs@npm:^6.10.2":
+"qs@npm:^6.10.2, qs@npm:^6.4.0":
   version: 6.10.2
   resolution: "qs@npm:6.10.2"
   dependencies:
@@ -26031,6 +26170,13 @@ fsevents@~2.3.1:
     ajv-formats: ^2.1.1
     ajv-keywords: ^5.0.0
   checksum: c843e92fdd1a5c145dbb6ffdae33e501867f9703afac67bdf35a685e49f85b1dcc10ea250033175a64bd9d31f0555bc6785b8359da0c90bcea30cf6dfbb55a8f
+  languageName: node
+  linkType: hard
+
+"secure-compare@npm:3.0.1":
+  version: 3.0.1
+  resolution: "secure-compare@npm:3.0.1"
+  checksum: 0a8d8d3e54d5772d2cf1c02325f01fc7366d0bd33f964a08a84fe3ee5f34d46435a6ae729c1d239c750e160ef9b58c764d3efb945a1d07faf47978a8e4161594
   languageName: node
   linkType: hard
 
@@ -28753,6 +28899,15 @@ typescript@4.3.5:
     is-extendable: ^0.1.1
     set-value: ^2.0.1
   checksum: a3464097d3f27f6aa90cf103ed9387541bccfc006517559381a10e0dffa62f465a9d9a09c9b9c3d26d0f4cbe61d4d010e2fbd710fd4bf1267a768ba8a774b0ba
+  languageName: node
+  linkType: hard
+
+"union@npm:~0.5.0":
+  version: 0.5.0
+  resolution: "union@npm:0.5.0"
+  dependencies:
+    qs: ^6.4.0
+  checksum: 021530d02363fb7470ce45d4cb06ae28a97d5a245666e6d0fca6bab0673bea8c7988e7d2f8046acfbab120908cedcb099ca216b357d4483bcd96518b39101be0
   languageName: node
   linkType: hard
 

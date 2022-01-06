@@ -1,0 +1,37 @@
+h2
+  span(rv-if="connected | eq 0") Connect your gamepad and press any button...
+  span(rv-if="connected | eq 1") One gamepad is connected, press any button...
+  span(rv-if="connected | gt 1") { connected } gamepads are connected, press any button...
+svg(viewBox='0 0 250 110')
+  g(fill='#aaaaaa')
+    rect#button-l.button(rv-class-active="controls.l.active" width='60', height='30', rx='10', ry='10', x='25', y='5')
+    rect#button-r.button(rv-class-active="controls.r.active" width='60', height='30', rx='10', ry='10', x='165', y='5')
+  rect(x='50', y='10', width='150', height='90', fill='#cfcfcd')
+  circle(cx='50', cy='60', r='50', fill='#cfcfcd')
+  circle(cx='200', cy='60', r='50', fill='#cfcfcd')
+  circle(cx='200', cy='60', r='45', fill='#a5a7a4')
+  circle(cx='50', cy='60', r='28', fill='#c8c8c8')
+  g(fill='#cfcfcd', stroke='#cfcfcd', stroke-width='25', stroke-linecap='round')
+    path(d='M180,60 200,40')
+    path(d='M202,82 222,62')
+  circle#button-x.button(rv-class-active="controls.buttonX.active" cx='200', cy='40', r='10', fill='#000080')
+  circle#button-y.button(rv-class-active="controls.buttonY.active" cx='180', cy='60', r='10', fill='#009922')
+  circle#button-a.button(rv-class-active="controls.buttonA.active" cx='222', cy='62', r='10', fill='#cc0000')
+  circle#button-b.button(rv-class-active="controls.buttonB.active" cx='202', cy='82', r='10', fill='#ccbb00')
+  g(fill='#444', stroke='#444', stroke-width='5', stroke-linecap='round')
+    path#button-select.button(rv-class-active="controls.select.active" d='M100,70 110,60')
+    path#button-start.button(rv-class-active="controls.start.active" d='M125,70 135,60')
+  path(d='M43,53 43,39 57,39 57,53 71,53 71,67 57,67 57,81 43,81 43,67 29,67 29,53 43,53Z', fill='#444', stroke-linecap='round', stroke-linejoin='round')
+  g(fill='#333')
+    path#button-up.button(rv-class-active="controls.up.active" d='M 45,51 50,41 55,51 Z')
+    path#button-right.button(rv-class-active="controls.right.active" d='M 59,55 69,60 59,65 Z')
+    path#button-down.button(rv-class-active="controls.down.active" d='M 45,69 50,79 55,69 Z')
+    path#button-left.button(rv-class-active="controls.left.active" d='M 41,55 31,60 41,65 Z')
+    circle#button-center.button(cx='50', cy='60', r='3')
+  g(dominant-baseline='middle', text-anchor='middle', fill='#cfcfcd', font-size='8', font-family='\'Arial Narrow\',Arial,sans-serif')
+    text(x='215', y='30') X
+    text(x='235', y='49') A
+    text(x='167', y='75') Y
+    text(x='190', y='97') B
+    text(x='130', y='80', fill='#999', font-size='6') START
+    text(x='105', y='80', fill='#999', font-size='6') SELECT

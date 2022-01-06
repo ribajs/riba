@@ -10,21 +10,23 @@ import { Binder } from "../binder";
  * @example
  * <li rv-class-completed="todo.done">{ todo.name }</li>
  */
-export class ClassStarBinder extends Binder<boolean, HTMLElement> {
+export class ClassStarBinder extends Binder<boolean, HTMLElement | SVGElement> {
   static key = "class-*";
-  routine(el: HTMLElement, value: boolean) {
+  routine(el: HTMLElement | SVGElement, value: boolean) {
     if (this.args === null) {
       throw new Error("args is null");
     }
-    const classList = el.className.split(" ").filter((ele) => ele !== "");
+    // Note: We use el.getAttribute("class") instead of el.className here to also support svg elements
+    const className = el.getAttribute("class") || "";
+    const classList = className.split(" ").filter((ele: string) => ele !== "");
     const arg = (this.args[0] as string).trim();
     const idx = classList.indexOf(arg);
     if (idx === -1) {
       if (value) {
-        el.className += ` ${arg}`;
+        el.setAttribute("class", `${className} ${arg}`);
       }
     } else if (!value) {
-      el.className = classList.filter((_, i) => i !== idx).join(" ");
+      el.setAttribute("class", classList.filter((_, i) => i !== idx).join(" "));
     }
   }
 }

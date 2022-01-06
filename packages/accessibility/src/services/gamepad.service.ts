@@ -1,6 +1,6 @@
 import { AccessibilityModuleOptions } from "../types";
-import { isGamepadSupported, gameControl } from 'gamecontroller.js';
-
+import { isGamepadSupported, gameControl } from "gamecontroller.js";
+import test from "gamecontroller.js";
 export class GamepadService {
   protected _options: AccessibilityModuleOptions;
   protected _control: typeof gameControl;
@@ -16,8 +16,9 @@ export class GamepadService {
 
   protected constructor(options: AccessibilityModuleOptions = {}) {
     this._options = options;
+    console.debug("test", test);
     if (!isGamepadSupported()) {
-        console.warn("[GamepadService] Gamepad is not supported!");
+      console.warn("[GamepadService] Gamepad is not supported!");
     }
     this._control = gameControl;
   }

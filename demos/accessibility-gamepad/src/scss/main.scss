@@ -1,0 +1,11 @@
+@import '~@ribajs/core/src/index';
+@import '~@ribajs/accessibility/src/index';
+@import '../ts/components/index';
+
+html,
+body {
+  font-size: 16px;
+  font-family: 'Press Start 2P', arial, sans-serif;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+}

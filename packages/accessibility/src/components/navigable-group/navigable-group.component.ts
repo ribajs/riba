@@ -4,15 +4,13 @@ import { hasChildNodesTrim } from "@ribajs/utils";
 import template from "./navigable-group.component.pug";
 
 export class NavigableGroupComponent extends Component {
-  public static tagName = "navigable-group";
+  public static tagName = "a11y-navigable-group";
 
   static get observedAttributes() {
-    return ["foobar"];
+    return [];
   }
 
-  public scope: NavigableGroupComponentScope = {
-    foobar: "",
-  };
+  public scope: NavigableGroupComponentScope = {};
 
   constructor() {
     super();

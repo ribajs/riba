@@ -1,3 +1,1 @@
-export interface NavigableGroupComponentScope {
-  foobar: string;
-}
+export type NavigableGroupComponentScope = Record<string, never>;
