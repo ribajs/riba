@@ -97,6 +97,7 @@
   },
   "workspaces": [
     "packages/*",
+    "vendor/*",
     "infra/*",
     "!infra/cli",
     "infra/doc",
