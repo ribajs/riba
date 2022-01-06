@@ -3,4 +3,4 @@
 	url = https://github.com/ribajs/doc.git
 [submodule "vendor/gamecontroller.js"]
 	path = vendor/gamecontroller.js
-	url = git@github.com:PixelRPG/gamecontroller.js.git
+	url = https://github.com/PixelRPG/gamecontroller.js.git
