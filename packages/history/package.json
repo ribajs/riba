@@ -48,7 +48,7 @@
   "directories": {},
   "devDependencies": {
     "@babel/runtime": "^7.16.7",
-    "@babel/runtime-corejs3": "^7.16.7",
+    "@babel/runtime-corejs3": "^7.16.8",
     "@ribajs/eslint-config": "workspace:*",
     "@ribajs/tsconfig": "workspace:*",
     "@types/jest": "^27.4.0",
