@@ -23,12 +23,12 @@
   },
   "dependencies": {
     "@ribajs/webpack-config": "workspace:*",
-    "@types/node": "^16.11.19",
+    "@types/node": "^16.11.21",
     "@types/yargs": "^17.0.8",
     "get-port": "^6.0.0",
     "pkg-dir": "^6.0.1",
-    "typescript": "^4.5.4",
-    "webpack": "^5.66.0",
+    "typescript": "^4.5.5",
+    "webpack": "^5.67.0",
     "webpack-dev-server": "^4.7.3",
     "yargs": "^17.3.1"
   },

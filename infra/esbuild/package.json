@@ -20,12 +20,12 @@
     "@ribajs/postcss-config": "workspace:*",
     "@ribajs/tsconfig": "workspace:*",
     "@types/find-root": "^1.1.2",
-    "@types/node": "^16.11.19",
+    "@types/node": "^16.11.21",
     "@types/pkg-dir": "^2.0.1",
-    "@yarnpkg/esbuild-plugin-pnp": "^2.0.0",
-    "@yarnpkg/pnpify": "^3.1.1-rc.10",
+    "@yarnpkg/esbuild-plugin-pnp": "^2.0.1-rc.1",
+    "@yarnpkg/pnpify": "^3.1.1-rc.12",
     "find-root": "^1.1.0",
-    "typescript": "4.5.4"
+    "typescript": "4.5.5"
   },
   "devDependencies": {
     "@tsconfig/node14": "^1.0.1"
