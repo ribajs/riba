@@ -53,6 +53,12 @@ This branch contains submodules, to check out this repository with it submodules
 git clone --recurse-submodules https://github.com/ribajs/riba.git
 ```
 
+If you have already cloned this repository, you can also check out the submodules afterwards:
+
+```bash
+git submodule update --init --recursive --rebase --force
+```
+
 ### Bug Reporting
 
 1. Ensure the bug can be reproduced on the latest master.
