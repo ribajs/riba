@@ -1,4 +1,5 @@
 import { clone, parseJsonString, justDigits } from "./type";
+import { JsonStringify } from "./type";
 
 export const MAX_UID = 1000;
 
@@ -25,6 +26,66 @@ export const parseAttribute = (attr?: string | null) => {
     value = jsonString ? jsonString : value;
   }
   return value;
+};
+
+/**
+ * Sets an attribute. The peculiarity of this custom method is that when an object is passed, it is converted to a json string.
+ * This is useful if, for example, an object is to be passed to a custom element via an attribute.
+ * @note This method is used by the AttributeBinder.
+ * @param el
+ * @param attributeName
+ * @param newValue
+ * @returns
+ */
+export const setAttribute = (
+  el: HTMLElement,
+  attributeName: string,
+  newValue: any
+) => {
+  if (!attributeName) {
+    throw new Error("Can't set attribute of " + attributeName);
+  }
+
+  const oldValue = el.getAttribute(attributeName);
+  let newValueFormatted: any;
+  let changed = false;
+  switch (typeof newValue) {
+    case "string":
+      newValueFormatted = newValue;
+      break;
+    case "number":
+      newValueFormatted = newValue;
+      break;
+    case "boolean":
+      newValueFormatted = newValue;
+      break;
+    case "object":
+      if (newValue === null) {
+        newValue = null;
+      } else {
+        newValueFormatted = JsonStringify(newValue, 0);
+      }
+      break;
+    default:
+      newValueFormatted = newValue;
+      break;
+  }
+
+  if (newValueFormatted != null) {
+    if (String(oldValue).toString() !== String(newValueFormatted).toString()) {
+      el.setAttribute(attributeName, newValueFormatted);
+      changed = true;
+    }
+  } else {
+    el.removeAttribute(attributeName);
+    changed = true;
+  }
+  return {
+    name: attributeName,
+    newValue: newValueFormatted,
+    oldValue,
+    changed,
+  };
 };
 
 export const getDataset = (element: HTMLElement) => {

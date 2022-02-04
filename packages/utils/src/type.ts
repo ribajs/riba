@@ -8,6 +8,27 @@ export const toType = (obj: any) => {
   return matches ? matches[1].toLowerCase() : null;
 };
 
+/**
+ * Formats an object to a json string with the special feature that single qoutes are replaced.
+ * This way there are no conflicts when this json string is used as attribute value afterwards.
+ * @note This function is used by the JsonFormatter
+ * @param object
+ * @param space
+ * @param replaceSingleQuote
+ * @returns
+ */
+export const JsonStringify = (
+  object: any,
+  space = 2,
+  replaceSingleQuote = true
+) => {
+  const result = JSON.stringify(object, null, space);
+  if (replaceSingleQuote && result) {
+    return result.replace(/'/g, `&#39;`);
+  }
+  return result;
+};
+
 export const couldBeJson = (str?: string | null) => {
   if (!str || typeof str !== "string") {
     return false;
