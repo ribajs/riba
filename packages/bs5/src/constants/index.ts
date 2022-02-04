@@ -1,5 +1,7 @@
 import { Bs5ModuleOptions, Breakpoint } from "../types";
 
+export * from "./theme-choices";
+
 // Breakpoints
 export const DEFAULT_BP_XS: Breakpoint = {
   dimension: 0,

@@ -15,6 +15,8 @@ export * from "./slideshow-slide-position";
 export * from "./slideshow-slide";
 export * from "./slideshow-state";
 export * from "./tagged-image-tag";
+export * from "./theme-button-component-scope";
+export * from "./theme-choice";
 export * from "./toggle-attribute";
 export * from "./toggle-class";
 export * from "./tooltip-options";
