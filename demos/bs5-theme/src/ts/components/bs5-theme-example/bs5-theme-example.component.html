@@ -1,0 +1,43 @@
+<div>
+  <bs5-sidebar
+    class="bg-theme text-theme-light-dark text-theme-dark-light d-flex justify-content-center align-items-center"
+    id="left-sidebar" container-selector="#main-container" position="left" auto-hide-on-slimmer-than="xl"
+    auto-show-on-wider-than="xl">
+    <h1>Left</h1>
+  </bs5-sidebar>
+
+  <bs5-navbar class="navbar navbar-top fixed-top navbar-theme bg-theme">
+    <div class="container-fluid d-block">
+      <div class="row justify-content-start">
+        <div class="col-12 d-flex align-items-center justify-content-between">
+          <bs5-toggle-button target-id="left-sidebar">
+            <ul class="nav">
+              <li class="nav-item d-flex align-items-center">
+                <bs5-icon src="/iconset/svg/icon_menu.svg" size="32" rv-hide="isActive" rv-on-click="toggle"></bs5-icon>
+              </li>
+              <li class="nav-item d-flex align-items-center">
+                <bs5-icon src="/iconset/svg/icon_close.svg" size="32" rv-show="isActive" rv-on-click="toggle">
+                </bs5-icon>
+              </li>
+            </ul>
+          </bs5-toggle-button>
+          <bs5-theme-button></bs5-theme-button>
+        </div>
+      </div>
+    </div>
+  </bs5-navbar>
+
+  <div id="main-container" class="py-5">
+    <div class="container-fluid">
+      <div class="row">
+        <section class="col-12 mb-5 text-center">
+          <h1 class="theme-dark-invert">
+            Switch your OS or this site to
+            <span class="d-theme-light-none"> Light Mode</span>
+            <span class="d-theme-dark-none"> Dark Mode</span>
+          </h1>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
