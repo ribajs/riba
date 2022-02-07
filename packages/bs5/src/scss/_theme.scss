@@ -5,79 +5,143 @@
 // - .bg-theme-dark-blue    | Blue background on dark theme
 // - .navbar-theme          | Dark navbar on dark theme, light navbar on light theme
 // - .bg-theme              | Dark background on dark theme, light background on light theme
+// - .theme-light-invert    | Inverts all colors (including childs) on the light theme
+// - .theme-dark-invert     | Inverts all colors (including childs) on the dark theme
 
-.theme-os {
+// Forms
+@import "./dark-theme//form-control";
 
-    .navbar-theme {
+:root {
+    &.theme-os {
+
+        // Root css variables
+        // See https://github.com/twbs/bootstrap/blob/main/scss/_root.scss
+        @include color-scheme(dark) {
+            --#{$variable-prefix}body-color: #{$dark-theme-body-color};
+            --#{$variable-prefix}body-bg: #{$dark-theme-body-bg};
+        }
+
+        .navbar-theme {
+            @include color-scheme(light) {
+                @include navbar-light;
+            }
+            @include color-scheme(dark) {
+                @include navbar-dark;
+            }
+        }
+    
+        .bg-theme {
+            @include color-scheme(light) {
+                @include bg-theme-color("light");
+            }
+            @include color-scheme(dark) {
+                @include bg-theme-color("dark");
+            }
+        }
+    
+        // Backgrounds on light theme
         @include color-scheme(light) {
+            @each $name, $value in $utilities-bg-colors {
+                .bg-theme-light-#{$name} {
+                    @include bg-theme-color($name);
+                }
+            }
+        }
+    
+        // Backgrounds on dark theme
+        @include color-scheme(dark) {
+            @each $name, $value in $utilities-bg-colors {
+                .bg-theme-dark-#{$name} {
+                    @include bg-theme-color($name);
+                }
+            }
+        }
+    
+        // Text colors on light theme
+        @include color-scheme(light) {
+            @each $name, $value in $theme-colors {
+                .text-theme-light-#{$name} {
+                    @include text-theme-color($name);
+                }
+            }
+        }
+    
+        // Text colors on dark theme
+        @include color-scheme(dark) {
+            @each $name, $value in $theme-colors {
+                .text-theme-dark-#{$name} {
+                    @include text-theme-color($name);
+                }
+            }
+        }
+    
+        // Invert colors on light theme
+        @include color-scheme(light) {
+            .theme-light-invert {
+                filter: invert(100%);
+            }
+        }
+    
+        // Invert colors on dark theme
+        @include color-scheme(dark) {
+            .theme-dark-invert {
+                filter: invert(100%);
+            }
+        }
+    
+        // Show/Hide on light theme
+        @include color-scheme(light) {
+            .d-theme-light-none {
+                display: none;
+            }
+        
+            // Show on light theme
+            .d-theme-light-block {
+                display: block;
+            }
+        }
+    
+        // Show/Hide on dark theme
+        @include color-scheme(dark) {
+            .d-theme-dark-none {
+                display: none;
+            }
+        
+            // Show on dark theme
+            .d-theme-dark-block {
+                display: block;
+            }
+        }
+    
+    }
+    
+    &.theme-light {
+        .navbar-theme {
             @include navbar-light;
         }
-        @include color-scheme(dark) {
-            @include navbar-dark;
-        }
-    }
-
-    .bg-theme {
-        @include color-scheme(light) {
+    
+        .bg-theme {
             @include bg-theme-color("light");
         }
-        @include color-scheme(dark) {
-            @include bg-theme-color("dark");
-        }
-    }
-
-    // Backgrounds on light theme
-    @include color-scheme(light) {
+    
         @each $name, $value in $utilities-bg-colors {
             .bg-theme-light-#{$name} {
                 @include bg-theme-color($name);
             }
         }
-    }
-
-    // Backgrounds on dark theme
-    @include color-scheme(dark) {
-        @each $name, $value in $utilities-bg-colors {
-            .bg-theme-dark-#{$name} {
-                @include bg-theme-color($name);
-            }
-        }
-    }
-
-    // Text colors on light theme
-    @include color-scheme(light) {
+    
         @each $name, $value in $theme-colors {
             .text-theme-light-#{$name} {
                 @include text-theme-color($name);
             }
         }
-    }
-
-    // Text colors on dark theme
-    @include color-scheme(dark) {
-        @each $name, $value in $theme-colors {
-            .text-theme-dark-#{$name} {
-                @include text-theme-color($name);
-            }
-        }
-    }
-
-    // Invert colors on light theme
-    @include color-scheme(light) {
+    
+        // Invert colors on light theme
         .theme-light-invert {
             filter: invert(100%);
         }
-    }
-
-    // Invert colors on dark theme
-    @include color-scheme(dark) {
-        .theme-dark-invert {
-            filter: invert(100%);
-        }
-    }
-
-    // Show/Hide on light theme
-    @include color-scheme(light) {
+    
+        // Hide on light theme
         .d-theme-light-none {
             display: none;
         }
@@ -87,9 +151,40 @@
             display: block;
         }
     }
+    
+    &.theme-dark {
 
-    // Show/Hide on dark theme
-    @include color-scheme(dark) {
+        // Root css variables
+        // See https://github.com/twbs/bootstrap/blob/main/scss/_root.scss
+        --#{$variable-prefix}body-color: #{$dark-theme-body-color};
+        --#{$variable-prefix}body-bg: #{$dark-theme-body-bg};
+
+        .navbar-theme {
+            @include navbar-dark;
+        }
+    
+        .bg-theme {
+            @include bg-theme-color("dark");
+        }
+    
+        @each $name, $value in $utilities-bg-colors {
+            .bg-theme-dark-#{$name} {
+                @include bg-theme-color($name);
+            }
+        }
+    
+        @each $name, $value in $theme-colors {
+            .text-theme-dark-#{$name} {
+                @include text-theme-color($name);
+            }
+        }
+    
+        // Invert colors on dark theme
+        .theme-dark-invert {
+            filter: invert(100%);
+        }
+    
+        // Hide on dark theme
         .d-theme-dark-none {
             display: none;
         }
@@ -99,79 +194,6 @@
             display: block;
         }
     }
-
+    
 }
 
-.theme-light {
-    .navbar-theme {
-        @include navbar-light;
-    }
-
-    .bg-theme {
-        @include bg-theme-color("light");
-    }
-
-    @each $name, $value in $utilities-bg-colors {
-        .bg-theme-light-#{$name} {
-            @include bg-theme-color($name);
-        }
-    }
-
-    @each $name, $value in $theme-colors {
-        .text-theme-light-#{$name} {
-            @include text-theme-color($name);
-        }
-    }
-
-    // Invert colors on light theme
-    .theme-light-invert {
-        filter: invert(100%);
-    }
-
-    // Hide on light theme
-    .d-theme-light-none {
-        display: none;
-    }
-
-    // Show on light theme
-    .d-theme-light-block {
-        display: block;
-    }
-}
-
-.theme-dark {
-    .navbar-theme {
-        @include navbar-dark;
-    }
-
-    .bg-theme {
-        @include bg-theme-color("dark");
-    }
-
-    @each $name, $value in $utilities-bg-colors {
-        .bg-theme-dark-#{$name} {
-            @include bg-theme-color($name);
-        }
-    }
-
-    @each $name, $value in $theme-colors {
-        .text-theme-dark-#{$name} {
-            @include text-theme-color($name);
-        }
-    }
-
-    // Invert colors on dark theme
-    .theme-dark-invert {
-        filter: invert(100%);
-    }
-
-    // Hide on dark theme
-    .d-theme-dark-none {
-        display: none;
-    }
-
-    // Show on dark theme
-    .d-theme-dark-block {
-        display: block;
-    }
-}

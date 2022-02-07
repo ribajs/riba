@@ -8,6 +8,7 @@
 !packages/events/dist/
 !packages/podcast/dist/
 /demos/*/dist
+/demos/*/public
 /examples/*/dist
 node_modules/
 /.cache

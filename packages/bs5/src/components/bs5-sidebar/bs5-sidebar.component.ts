@@ -41,9 +41,9 @@ interface Scope {
    */
   position: "left" | "right";
   /**
-   * The sidebar can be `move` the full page (iPhone style) or `overlap` (Android style)
+   * The sidebar can be `move` the full page (iPhone style), `overlap` (Android style) or `side` (shrinks the container)
    */
-  mode: "overlap" | "move";
+  mode: "overlap" | "move" | "side";
   /**
    * Auto show the sidebar if the viewport width is wider than this value. Set this to -1 to disable this option.
    * You can also use bootstrap breakpoint names like "sm", "md", "xl", etc.
@@ -189,13 +189,7 @@ export class Bs5SidebarComponent extends Component {
   }
 
   public hide() {
-    if (this.modeIsActive()) {
-      this.setState("hidden");
-    } else {
-      console.warn(
-        `Ignore hide because the mode "${this.scope.mode}" is inactive. You can change this by the "mode-on-slimmer-than" attribute (Current value is ${this.scope.modeOnSlimmerThan})!`
-      );
-    }
+    this.setState("hidden");
   }
 
   public show() {
@@ -204,6 +198,7 @@ export class Bs5SidebarComponent extends Component {
   }
 
   public toggle() {
+    console.debug("toggle", this.scope.state, this.scope.mode);
     this.debug("toggle state: " + this.scope.state);
     if (this.scope.state === "hidden") {
       this.show();

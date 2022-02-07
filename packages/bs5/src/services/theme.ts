@@ -127,7 +127,7 @@ export class ThemeService {
   }
 
   /**
-   * Sets the theme class to the body.
+   * Sets the theme class to the <html>.
    * - `theme-os` means that the theme will be used by the operating system (which corresponds to theme-light or theme-dark)
    * - `theme-light` means that the light theme will be used
    * - `theme-dark` means that the dark theme will be used
@@ -143,8 +143,12 @@ export class ThemeService {
       newColorScheme = "theme-os";
     }
     localStorage.setItem("bs5-theme", newColorScheme);
-    document.body.classList.remove("theme-light", "theme-dark", "theme-os");
-    document.body.classList.add(newColorScheme);
+    document.documentElement.classList.remove(
+      "theme-light",
+      "theme-dark",
+      "theme-os"
+    );
+    document.documentElement.classList.add(newColorScheme);
     return this.triggerChange(oldData);
   }
 
@@ -155,7 +159,7 @@ export class ThemeService {
     ).matches;
     data.systemIsLight = !data.systemIsDark;
 
-    if (document.body.classList.contains("theme-os")) {
+    if (document.documentElement.classList.contains("theme-os")) {
       data.bySystem = true;
       data.byUser = false;
       data.choice = "theme-os";
@@ -164,11 +168,11 @@ export class ThemeService {
     } else {
       data.bySystem = false;
       data.byUser = true;
-      if (document.body.classList.contains("theme-dark")) {
+      if (document.documentElement.classList.contains("theme-dark")) {
         data.isDark = true;
         data.choice = "theme-dark";
       }
-      if (document.body.classList.contains("theme-light")) {
+      if (document.documentElement.classList.contains("theme-light")) {
         data.isLight = true;
         data.choice = "theme-light";
       }

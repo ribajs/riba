@@ -20,3 +20,22 @@ $languages: de en !default;
 //   (21 9),
 //   (9 21),
 // ) !default;
+
+// Theme mode colors
+$dark-theme-body-color:         map-get($theme-colors, "light") !default;
+$dark-theme-body-bg:            $gray-900 !default;
+
+// Dark Forms
+$dark-theme-input-color:        $dark-theme-body-color !default;
+$dark-theme-input-bg:           $dark-theme-body-bg !default;
+$dark-theme-input-border-color:         darken($input-border-color, 50%) !default;
+$dark-theme-input-focus-color:          invert($input-focus-color, 100%) !default;
+$dark-theme-input-focus-bg:             $dark-theme-input-bg !default;
+$dark-theme-input-focus-border-color:   darken($input-focus-border-color, 50%) !default;
+$dark-theme-input-placeholder-color:    invert($input-placeholder-color, 100%) !default;
+$dark-theme-input-disabled-bg:          invert($input-disabled-bg, 100%) !default;
+$dark-theme-input-disabled-border-color:    if($input-disabled-border-color == null, null, invert($input-disabled-border-color, 100%)) !default;
+$dark-theme-form-file-button-color:         invert($form-file-button-color, 100%) !default;
+$dark-theme-form-file-button-bg:            invert($form-file-button-bg, 100%) !default;
+$dark-theme-form-file-button-hover-bg:      invert($form-file-button-hover-bg, 100%) !default;
+$dark-theme-input-plaintext-color:          invert($input-plaintext-color, 100%) !default;
