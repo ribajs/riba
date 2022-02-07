@@ -305,7 +305,8 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
       if (config.tsIndexPath) {
         config.entry.main.push(config.tsIndexPath);
       }
-      config.publicPath = config.publicPath || resolve(rootPath, "theme/assets/");
+      config.publicPath =
+        config.publicPath || resolve(rootPath, "theme/assets/");
       config.output = config.output || {
         path: config.publicPath,
         filename: "[name].bundle.js",
@@ -399,9 +400,11 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
         port: 8080,
         host: "0.0.0.0",
         hot: true,
-        static: [{
-          directory: config.publicPath
-        }]
+        static: [
+          {
+            directory: config.publicPath,
+          },
+        ],
       };
 
       // https://github.com/nuxt/nuxt.js/blob/dev/packages/webpack/src/config/base.js#L435

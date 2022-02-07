@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
-const { isAvailable, ribaPackages } = require('@ribajs/npm-package');
+const { isAvailable, ribaPackages } = require("@ribajs/npm-package");
 const path = require("path");
 const fs = require("fs");
 const glob = require("glob");
@@ -12,18 +12,17 @@ const rootPath = process.cwd();
 const getCopyPluginConfigForScssRibaModule = (config, moduleName) => {
   const modulePath = isAvailable(moduleName);
   if (modulePath) {
-
-    const publicPath = config.copyAssets.path || path.resolve(
-      rootPath,
-      config.copyAssets.foldername);
+    const publicPath =
+      config.copyAssets.path ||
+      config.publicPath ||
+      path.resolve(rootPath, config.copyAssets.foldername);
 
     // Copy @ribajs/xyz scss files
     var moduleConfig = {
       from: modulePath + "/**/*.scss",
-      to: path.resolve(publicPath, 'scss/vendors', moduleName
-      ),
+      to: path.resolve(publicPath, "scss/vendors", moduleName),
       toType: "dir",
-      context: modulePath + '/src',
+      context: modulePath + "/src",
     };
     return moduleConfig;
   }
@@ -33,18 +32,15 @@ const getCopyPluginConfigForScssRibaModule = (config, moduleName) => {
 const getCopyPluginConfigForImages = (config, moduleName) => {
   const modulePath = isAvailable(moduleName);
   if (modulePath) {
-
-    const publicPath = config.copyAssets.path || path.resolve(
-      rootPath,
-      config.copyAssets.foldername);
+    const publicPath =
+      config.copyAssets.path ||
+      config.publicPath ||
+      path.resolve(rootPath, config.copyAssets.foldername);
 
     // Copy @ribajs/xyz scss files
     var moduleConfig = {
       from: modulePath + "/**/*.{png,svg}",
-      to: path.resolve(
-        publicPath,
-        `images/vendors/${moduleName}`,
-      ),
+      to: path.resolve(publicPath, `images/vendors/${moduleName}`),
       toType: "dir",
       context: modulePath,
     };
@@ -56,16 +52,14 @@ const getCopyPluginConfigForImages = (config, moduleName) => {
 const getCopyPluginConfigForIconsetRibaModule = (config, moduleName) => {
   const modulePath = isAvailable(moduleName);
   if (modulePath) {
-    const publicPath = config.copyAssets.path || path.resolve(
-      rootPath,
-      config.copyAssets.foldername);
+    const publicPath =
+      config.copyAssets.path ||
+      config.publicPath ||
+      path.resolve(rootPath, config.copyAssets.foldername);
 
     // Copy iconset svg's
     const moduleConfig = {
-      from: path.resolve(
-        modulePath,
-        "dist/svg/*.svg"
-      ),
+      from: path.resolve(modulePath, "dist/svg/*.svg"),
       to: path.resolve(publicPath, `iconset`),
       toType: "dir",
       context: path.join(modulePath, "dist"),
@@ -83,22 +77,15 @@ const getCopyPluginConfigForScssThirdPartyModule = (
 ) => {
   const modulePath = isAvailable(moduleName);
   if (modulePath) {
-
-    const publicPath = config.copyAssets.path || path.resolve(
-      rootPath,
-      config.copyAssets.foldername);
+    const publicPath =
+      config.copyAssets.path ||
+      config.publicPath ||
+      path.resolve(rootPath, config.copyAssets.foldername);
 
     // Copy bootstrap scss files. Note: `require.resolve('bootstrap')` resolves to `'bootstrap/dist/js/bootstrap.js'` because this is the main file in package.json
     const moduleConfig = {
-      from: path.join(
-        modulePath,
-        scssPath,
-        glob
-      ),
-      to: path.resolve(publicPath,
-        `scss/vendors`,
-        moduleName
-      ),
+      from: path.join(modulePath, scssPath, glob),
+      to: path.resolve(publicPath, `scss/vendors`, moduleName),
       toType: "dir",
       context: path.join(modulePath, scssPath),
     };
@@ -131,7 +118,9 @@ const getCopyPluginPatterns = (config) => {
       patterns.push(getCopyPluginConfigForImages(config, "leaflet"));
     }
     if (isAvailable("@ribajs/artcodestudio")) {
-      patterns.push(getCopyPluginConfigForImages(config, "@ribajs/artcodestudio"));
+      patterns.push(
+        getCopyPluginConfigForImages(config, "@ribajs/artcodestudio")
+      );
     }
   }
 
@@ -161,8 +150,8 @@ const copy = (copyPluginPatterns) => {
       fs.mkdirSync(path.dirname(dest), { recursive: true });
       logger.debug("\ncopy file from: " + file);
       logger.debug("copy file to: " + dest);
-      logger.debug('context: ' + context);
-      logger.debug('appendDestPath: ' + appendDestPath);
+      logger.debug("context: " + context);
+      logger.debug("appendDestPath: " + appendDestPath);
       fs.copyFileSync(file, dest);
     }
   }
