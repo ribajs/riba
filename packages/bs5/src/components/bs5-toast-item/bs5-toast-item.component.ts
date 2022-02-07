@@ -67,7 +67,7 @@ export class Bs5ToastItemComponent extends Component {
         once: true,
       });
 
-      // show toast using the toastservice
+      // show toast using the `ToastService`
       this.toastService.show();
     }
   }

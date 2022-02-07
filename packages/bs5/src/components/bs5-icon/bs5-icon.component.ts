@@ -100,7 +100,7 @@ export class Bs5IconComponent extends BasicComponent {
     icon = await this.fetchIcon(this.scope.src);
 
     if (!icon) {
-      console.error("Error on fetch icon!");
+      console.error(`Error on fetch icon "${this.scope.src}"!`);
       return;
     }
 

@@ -39,5 +39,16 @@
   }
 }
 
-
-//custom buttons
+.btn-icon {
+  @extend .btn-link;
+  padding: 0;
+  text-decoration: none;
+  color: inherit;
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+  &:focus {
+    box-shadow: none;
+  }
+}

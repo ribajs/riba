@@ -1,10 +1,14 @@
 import { Component, TemplateFunction } from "@ribajs/core";
-import { initTheme, setTheme } from "../../services/theme";
+import { ThemeService } from "../../services/theme";
 import { hasChildNodesTrim } from "@ribajs/utils";
 import template from "./bs5-theme-button.component.pug";
 import { themeChoices } from "../../constants";
 
-import type { Bs5ThemeButtonComponentScope, ThemeChoice } from "../../types";
+import type {
+  Bs5ThemeButtonComponentScope,
+  ThemeChoice,
+  ThemeChangedData,
+} from "../../types";
 
 /**
  * @see https://github.com/TypeStrong/typedoc/blob/master/src/lib/output/themes/default/assets/typedoc/Theme.ts
@@ -12,30 +16,51 @@ import type { Bs5ThemeButtonComponentScope, ThemeChoice } from "../../types";
 export class Bs5ThemeButtonComponent extends Component {
   public static tagName = "bs5-theme-button";
 
+  protected theme: ThemeService;
+
   static get observedAttributes() {
-    return [];
+    return ["mode", "labels", "light-icon-src", "icon-size", "dark-icon-src"];
   }
 
   public scope: Bs5ThemeButtonComponentScope = {
-    setTheme: this.setTheme.bind(this),
-    selectTheme: this.selectTheme.bind(this),
-    selected: undefined,
-    choices: themeChoices,
+    // Options // Attributes
+    mode: "dropdown",
     labels: {
       "theme-os": "OS",
       "theme-light": "Light",
       "theme-dark": "Dark",
     },
+    lightIconSrc: "/iconset/svg/icon_sun.svg",
+    darkIconSrc: "/iconset/svg/icon_moon.svg",
+    iconSize: 32,
+    // Methods / Properties
+    setTheme: this.setTheme.bind(this),
+    selectTheme: this.selectTheme.bind(this),
+    toggleTheme: this.toggleTheme.bind(this),
+    selected: undefined,
+    choices: themeChoices,
   };
 
   constructor() {
     super();
+    this.theme = ThemeService.getSingleton();
   }
 
   protected connectedCallback() {
     super.connectedCallback();
     this.init(Bs5ThemeButtonComponent.observedAttributes);
+    this.addEventListeners();
     this.initTheme();
+  }
+
+  protected addEventListeners() {
+    this.theme.onChange((data) => {
+      this.onChange(data);
+    });
+  }
+
+  protected onChange(data: ThemeChangedData) {
+    this.scope.selected = data.newValue.choice;
   }
 
   protected async beforeBind() {
@@ -44,15 +69,40 @@ export class Bs5ThemeButtonComponent extends Component {
 
   initTheme() {
     const selectEl = this.getElementsByTagName("select")?.item(0);
-    this.scope.selected = initTheme(selectEl) || undefined;
+    const data = this.theme.init();
+    this.scope.selected = data.choice || undefined;
+    if (selectEl) this.theme.select(this.scope.selected, selectEl);
   }
 
   public setTheme(theme: ThemeChoice) {
-    setTheme(theme);
+    this.theme.set(theme);
   }
 
+  /**
+   * Used in `dropdown` mode (which uses a select element)
+   */
   public selectTheme() {
-    if (this.scope.selected) setTheme(this.scope.selected);
+    if (this.scope.selected) this.theme.set(this.scope.selected);
+  }
+
+  /**
+   * Used in `icon` mode (which uses a button element)
+   */
+  public toggleTheme() {
+    const current = this.theme.get();
+    if (current.isDark) {
+      if (current.supported && current.systemIsLight) {
+        this.theme.set("theme-os");
+      } else {
+        this.theme.set("theme-light");
+      }
+    } else {
+      if (current.supported && current.systemIsDark) {
+        this.theme.set("theme-os");
+      } else {
+        this.theme.set("theme-dark");
+      }
+    }
   }
 
   protected template(): ReturnType<TemplateFunction> {

@@ -10,6 +10,7 @@
     <div class="container-fluid d-block">
       <div class="row justify-content-start">
         <div class="col-12 d-flex align-items-center justify-content-between">
+          <!-- Left -->
           <bs5-toggle-button target-id="left-sidebar">
             <ul class="nav">
               <li class="nav-item d-flex align-items-center">
@@ -21,7 +22,11 @@
               </li>
             </ul>
           </bs5-toggle-button>
-          <bs5-theme-button></bs5-theme-button>
+          <!-- Right -->
+          <div class="d-flex flex-row align-items-center">
+            <bs5-theme-button class="mx-3" mode="icon"></bs5-theme-button>
+            <bs5-theme-button mode="dropdown"></bs5-theme-button>
+          </div>
         </div>
       </div>
     </div>
