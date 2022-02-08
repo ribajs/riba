@@ -41,6 +41,9 @@
 
 .btn-icon {
   @extend .btn-link;
+  @extend .d-flex;
+  @extend .justify-content-start;
+  @extend .align-items-center;
   padding: 0;
   text-decoration: none;
   color: inherit;

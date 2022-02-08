@@ -356,7 +356,7 @@ export class Bs5SidebarComponent extends Component {
   }
 
   /**
-   * Internal "undebounced" version of `onEnvironmentChanges`.
+   * Internal (not debounced) version of `onEnvironmentChanges`.
    */
   protected _onEnvironmentChanges() {
     this.setStateByEnvironment();
