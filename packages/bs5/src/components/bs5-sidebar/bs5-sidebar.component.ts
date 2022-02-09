@@ -128,7 +128,7 @@ export class Bs5SidebarComponent extends Component {
 
   protected routerEvents = new EventDispatcher("main");
 
-  public scope: Scope = {
+  public defaults: Scope = {
     // Template properties
     containerSelector: undefined,
     state: "hidden",
@@ -151,6 +151,10 @@ export class Bs5SidebarComponent extends Component {
     hide: this.hide,
     show: this.show,
     toggle: this.toggle,
+  };
+
+  public scope: Scope = {
+    ...this.defaults
   };
 
   constructor() {
@@ -268,28 +272,30 @@ export class Bs5SidebarComponent extends Component {
   protected onSwipe = this._onSwipe.bind(this);
 
   protected onHidden() {
-    this.setContainersStyle(this.scope.state);
     const translateX = this.scope.position === "left" ? "-100%" : "100%";
     this.style.transform = `translateX(${translateX})`;
-    this.style.width = this.scope.width;
+    this.width = this.scope.width;
+    this.setContainersStyle(this.scope.state);
   }
 
   protected onMove(state: SlideshowState) {
-    this.setContainersStyle(state);
     this.style.transform = `translateX(0)`;
     this.style.width = this.scope.width;
+    this.width = this.scope.width;
+    this.setContainersStyle(state);
   }
 
   protected onSide(state: SlideshowState) {
-    this.setContainersStyle(state);
     this.style.transform = `translateX(0)`;
     this.style.width = this.scope.width;
+    this.width = this.scope.width;
+    this.setContainersStyle(state);
   }
 
   protected onOverlap(state: SlideshowState) {
-    this.setContainersStyle(state);
     this.style.transform = `translateX(0)`;
-    this.style.width = this.scope.width;
+    this.width = this.scope.width;
+    this.setContainersStyle(state);
   }
 
   protected triggerState() {
@@ -326,7 +332,15 @@ export class Bs5SidebarComponent extends Component {
   }
 
   protected get width() {
-    return this.offsetWidth ? this.offsetWidth + "px" : this.scope.width;
+    if (this.scope.width === this.defaults.width) {
+      return this.offsetWidth + "px";
+    }
+    return this.scope.width;
+  }
+
+  protected set width(width: string) {
+    this.scope.width = width;
+    this.style.width = width;
   }
 
   protected setStateByEnvironment() {
@@ -582,8 +596,10 @@ export class Bs5SidebarComponent extends Component {
           this.parseBreakpointAttributes(attributeName, newValue);
         break;
         case "width":
+          this.width = newValue;
         case "mode":
             this.onStateChange();
+            this.initContainers(this.scope.state);
           break;
       default:
         break;
