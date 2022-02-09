@@ -564,18 +564,29 @@ export class Bs5SidebarComponent extends Component {
       namespace
     );
     if (attributeName === "containerSelector") {
-      this.initContainers(this.scope.state);
+      
     }
     if (attributeName === "id") {
       this.initToggleButtonEventDispatcher();
     }
-
-    if (
-      attributeName === "autoShowOnWiderThan" ||
-      attributeName === "autoHideOnSlimmerThan" ||
-      attributeName === "modeOnSlimmerThan"
-    ) {
-      this.parseBreakpointAttributes(attributeName, newValue);
+    switch (attributeName) {
+      case "containerSelector":
+        this.initContainers(this.scope.state);
+        break;
+        case "id":
+          this.initToggleButtonEventDispatcher();
+          break;
+        case "autoShowOnWiderThan":
+        case "autoHideOnSlimmerThan":
+        case "modeOnSlimmerThan":
+          this.parseBreakpointAttributes(attributeName, newValue);
+        break;
+        case "width":
+        case "mode":
+            this.onStateChange();
+          break;
+      default:
+        break;
     }
   }
 

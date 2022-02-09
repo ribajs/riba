@@ -48,13 +48,13 @@
   "homepage": "https://github.com/ribajs/riba#readme",
   "directories": {},
   "devDependencies": {
-    "@babel/runtime": "^7.16.7",
-    "@babel/runtime-corejs3": "^7.16.8",
+    "@babel/runtime": "^7.17.2",
+    "@babel/runtime-corejs3": "^7.17.2",
     "@ribajs/eslint-config": "workspace:*",
     "@ribajs/tsconfig": "workspace:*",
     "@types/jest": "^27.4.0",
-    "babel-jest": "^27.4.6",
-    "eslint": "^8.7.0",
+    "babel-jest": "^27.5.1",
+    "eslint": "^8.8.0",
     "typescript": "4.5.5"
   }
 }
