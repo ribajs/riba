@@ -1,4 +1,4 @@
-import { JsonStringify } from "@ribajs/utils";
+import { jsonStringify } from "@ribajs/utils";
 
 /**
  * Converts a string into a JSON string.
@@ -6,6 +6,6 @@ import { JsonStringify } from "@ribajs/utils";
 export const jsonFormatter = {
   name: "json",
   read(object: any, space = 2, replaceSingleQuote = true) {
-    return JsonStringify(object, space, replaceSingleQuote);
+    return jsonStringify(object, space, replaceSingleQuote);
   },
 };

@@ -2,7 +2,7 @@ export * from "./animate-classname.binder";
 export * from "./add-class.binder";
 export * from "./assign-property.binder";
 export * from "./assign.binder";
-// export * from "./attribute.binder";
+export * from "./attribute.binder";
 export * from "./block.binder";
 export * from "./checked.binder";
 export * from "./class-name.binder";

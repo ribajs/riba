@@ -6,8 +6,8 @@ import { setAttribute } from "@ribajs/utils";
  * Sets the attribute on the element. If no binder above is matched it will fall
  * back to using this binder.
  */
-export class AttributeBinder extends Binder<string, HTMLElement> {
-  static key = "*";
+export class AttributeBinder extends Binder<any, HTMLElement> {
+  static key = "attr-*";
 
   routine(el: HTMLElement, newValue: any) {
     if (!this.type) {

@@ -451,9 +451,9 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
     }
   }
 
-  private getStarArguments(identifier: string, type: string): string[] {
-    const regexp = new RegExp(`^${identifier.replace(/\*/g, "(.+)")}$`);
-    const match = type.match(regexp);
-    return (match && match.slice(1)) || [];
+  protected getStarArguments(identifier: string, type: string): string[] {
+    const regexp = this.view.binderRegex(identifier);
+    const match = type.match(regexp)?.slice(1) || [];
+    return match;
   }
 }

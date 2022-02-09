@@ -151,6 +151,10 @@ export abstract class BasicComponent extends HTMLElement {
 
   protected parseAttribute(attr: string | null) {
     let value: any = attr;
+    if (typeof attr !== "string") {
+      return attr;
+    }
+
     if (attr === "true") {
       value = true;
     } else if (attr === "false") {
@@ -171,6 +175,7 @@ export abstract class BasicComponent extends HTMLElement {
       const jsonString = parseJsonString(value);
       value = jsonString ? jsonString : value;
     }
+
     return value;
   }
 

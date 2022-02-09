@@ -215,6 +215,19 @@ export class View {
     return undefined;
   }
 
+  public binderRegex(identifier: string) {
+    const wildcards = identifier.match(/\*/g)?.length || 0;
+    let regexp: RegExp;
+    if (wildcards > 1) {
+      regexp = new RegExp(
+        `^${identifier.replace("*", "([^-]*)").replaceAll("-*", "-(.+)")}$`
+      );
+    } else {
+      regexp = new RegExp(`^${identifier.replaceAll("*", "(.+)")}$`);
+    }
+    return regexp;
+  }
+
   /**
    *
    */
@@ -248,7 +261,7 @@ export class View {
           // Check if any attributeBinder match's
           for (let k = 0; k < attributeBinders.length; k++) {
             identifier = attributeBinders[k];
-            const regexp = new RegExp(`^${identifier.replace(/\*/g, ".+")}$`);
+            const regexp = this.binderRegex(identifier);
             if (regexp.test(nodeName)) {
               Binder = this.options.binders[identifier];
               break;
