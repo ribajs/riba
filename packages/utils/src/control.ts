@@ -53,9 +53,9 @@ export const deferred = <T = any>() => {
  */
 export const debounceCb = <T = any>(fn: (...args: any[]) => T, wait = 100) => {
   let timeout: ReturnType<typeof setTimeout>;
-  return (...args: any[]) => {
+  return (...params: any[]) => {
     clearTimeout(timeout);
-    timeout = setTimeout(() => fn(args), wait);
+    timeout = setTimeout(() => fn(...params), wait);
   };
 };
 
@@ -67,20 +67,29 @@ export const debounceCb = <T = any>(fn: (...args: any[]) => T, wait = 100) => {
  * the attached function will be executed only after the specified time once the user stops firing the event.
  * This method uses internally the setTimeout method
  */
-export const debounceT = <T = any>(
-  fn: (...params: any[]) => any,
-  wait = 100
-) => {
+export const debounceT = <T = any>(fn: (...args: any[]) => any, wait = 100) => {
+  let resolve: (val: any) => any;
+  let reject: (error: any) => void;
+  const promise = new Promise<T>((res, rej) => {
+    resolve = res;
+    reject = rej;
+  });
+  let debounce: undefined | ((...params: any[]) => void) = undefined;
+
   return (...params: any[]) => {
-    return new Promise<T>((resolve, reject) => {
-      debounceCb(() => {
+    if (!debounce)
+      debounce = debounceCb(() => {
         try {
           resolve(fn(...params));
+          // Reset
+          debounce = undefined;
         } catch (error) {
           reject(error);
         }
       }, wait);
-    });
+    debounce(...params);
+
+    return promise;
   };
 };
 
@@ -94,7 +103,7 @@ export const debounceT = <T = any>(
  * @see https://css-tricks.com/styling-based-on-scroll-position/
  * @see https://www.telerik.com/blogs/debouncing-and-throttling-in-javascript
  */
-export const debounce = (fn: (...params: any) => any) => {
+export const debounceF = (fn: (...params: any) => any) => {
   // This holds the requestAnimationFrame reference, so we can cancel it if we wish
   let frame: number | null = null;
   let resolve: (val: any) => any;
@@ -129,6 +138,22 @@ export const debounce = (fn: (...params: any) => any) => {
 
     return promise;
   };
+};
+
+/**
+ * debounce (RequestAnimationFrame + Promise edition)
+ * The debounce function receives our function as a parameter
+ * It is recommended to use this method for scroll events, but the event should still be passive.
+ * In the debouncing technique, no matter how many times the user fires the event,
+ * the attached function will be executed only after the specified time once the user stops firing the event.
+ * This method uses requestAnimationFrame method if no delay is passed, otherwise a timeout
+ */
+export const debounce = (fn: (...params: any) => any, wait?: number) => {
+  if (typeof wait === "number") {
+    return debounceT(fn, wait);
+  } else {
+    return debounceF(fn);
+  }
 };
 
 /**
