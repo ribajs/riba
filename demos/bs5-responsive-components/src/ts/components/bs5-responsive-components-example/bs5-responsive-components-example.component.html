@@ -1,0 +1,114 @@
+<div class="mt-5">
+  <bs5-sidebar
+    class="bg-theme text-theme-light-dark text-theme-dark-light d-flex justify-content-center align-items-center"
+    id="left-sidebar"
+    container-selector="#main-container"
+    position="left"
+    rv-bs5-co-xs-auto-hide="true"
+    rv-bs5-co-xl-auto-hide="false"
+    rv-bs5-co-xs-auto-show="false"
+    rv-bs5-co-xl-auto-show="true"
+    rv-bs5-co-xs-mode="'overlap'"
+    rv-bs5-co-xl-mode="'side'"
+  >
+    <h1>Left</h1>
+  </bs5-sidebar>
+
+  <bs5-navbar class="navbar navbar-top fixed-top navbar-theme bg-theme">
+    <div class="container-fluid d-block">
+      <div class="row justify-content-start">
+        <div class="col-12 d-flex align-items-center justify-content-between">
+          <!-- Left -->
+          <bs5-toggle-button target-id="left-sidebar">
+            <ul class="nav">
+              <li class="nav-item d-flex align-items-center">
+                <bs5-icon src="/iconset/svg/icon_menu.svg" size="32" rv-hide="isActive" rv-on-click="toggle"></bs5-icon>
+              </li>
+              <li class="nav-item d-flex align-items-center">
+                <bs5-icon src="/iconset/svg/icon_close.svg" size="32" rv-show="isActive" rv-on-click="toggle">
+                </bs5-icon>
+              </li>
+            </ul>
+          </bs5-toggle-button>
+          <!-- Right -->
+          <div class="d-flex flex-row align-items-center">
+            <bs5-theme-button class="mx-3" mode="icon"></bs5-theme-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </bs5-navbar>
+
+  <div id="main-container" class="py-5">
+    <div class="container-fluid">
+      <div class="row">
+        <section class="col-12 mb-5 text-center">
+          <h1>
+            Resize your browser to see what happens
+          </h1>
+          <p>
+            Current breakpoint
+            <span class="d-block d-sm-none">XS</span>
+            <span class="d-none d-sm-block d-md-none">SM</span>
+            <span class="d-none d-md-block d-lg-none">MD</span>
+            <span class="d-none d-lg-block d-xl-none">LG</span>
+            <span class="d-none d-xl-block d-xxl-none">XL</span>
+            <span class="d-none d-xxl-block">XXL</span>
+          </p>
+        </section>
+        <section class="col-12 mb-5 d-flex flex-column align-items-center text-center">
+          <h2>Use of <code>rv-bs5-attr-[breakpoint]-[attribute]</code></h2>
+          <p>Set the attribute at the appropriate breakpoint</p>
+          <bs5-icon
+            rv-bs5-attr-xs-src="'/iconset/svg/icon_cone.svg'"
+            rv-bs5-attr-md-src="'/iconset/svg/icon_house.svg'"
+            rv-bs5-attr-xl-src="'/iconset/svg/icon_building.svg'"
+            rv-bs5-attr-xs-size="32"
+            rv-bs5-attr-sm-size="64"
+            rv-bs5-attr-md-size="128"
+            rv-bs5-attr-lg-size="256"
+            rv-bs5-attr-xl-color="'warning'"
+            rv-bs5-attr-xxl-color="'danger'"
+          ></bs5-icon>
+          <p class="mt-3">This also works for normal HTML elements</p>
+          <img
+            rv-bs5-attr-xs-src="'https://picsum.photos/100'"
+            rv-bs5-attr-md-src="'https://picsum.photos/200'"
+            rv-bs5-attr-xl-src="'https://picsum.photos/500/200'"
+            rv-bs5-attr-xxl-src="'https://picsum.photos/1000/500'"
+          />
+        </section>
+
+        <section class="col-12 mb-5 d-flex flex-column align-items-center text-center">
+          <h2>Use of <code>rv-bs5-co-[breakpoint]-[attribute]</code></h2>
+          <p>Pass the value to the component at the appropriate breakpoint</p>
+          <bs5-icon
+            rv-bs5-co-xs-src="'/iconset/svg/icon_cone.svg'"
+            rv-bs5-co-md-src="'/iconset/svg/icon_house.svg'"
+            rv-bs5-co-xl-src="'/iconset/svg/icon_building.svg'"
+            rv-bs5-co-xs-size="32"
+            rv-bs5-co-sm-size="64"
+            rv-bs5-co-md-size="128"
+            rv-bs5-co-lg-size="256"
+            rv-bs5-co-xl-color="'warning'"
+            rv-bs5-co-xxl-color="'danger'"
+          ></bs5-icon>
+        </section>
+
+        <section class="col-12 col-xl-8 mx-auto mb-5 text-center alert alert-warning" role="alert">
+          <h4 class="alert-heading"><code>rv-bs5-attr</code> vs <code>rv-bs5-co</code></h4>
+          <p>
+            The difference between the normal attribute binder and the component attribute binder is
+            that the attribute binder sets normal attributes and the component attribute binder passes
+            the value directly to the component (without the detour via the attribute).</p>
+          <p>
+            So, if larger data like an object should be passed to a component,
+            then the <code></code>ComponentAttributeBinder</code> should be used,
+            otherwise a very long JSON string would be passed as attribute.
+          </p>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</div>

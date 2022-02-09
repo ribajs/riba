@@ -111,7 +111,15 @@ export class Bs5IconComponent extends BasicComponent {
     }
   }
 
-  protected setColor(color: string) {
+  protected removeColor() {
+    this.className = this.className.replace(/(^|\s)color-\S+/g, "");
+    this.style.color = "";
+  }
+
+  protected setColor(color?: string) {
+    if (!color) {
+      return this.removeColor();
+    }
     if (color.includes(",")) {
       const colorArr = color.split(",");
       if (colorArr.length > 0) {

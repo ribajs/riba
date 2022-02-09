@@ -2,7 +2,7 @@ import { Breakpoint, Bs5ModuleOptions } from "../types";
 import { DEFAULT_MODULE_OPTIONS } from "../constants";
 import { debounce } from "@ribajs/utils/src/control";
 import { getViewportDimensions } from "@ribajs/utils/src/dom";
-import { EventDispatcher } from "@ribajs/events";
+import { EventDispatcher, EventCallback } from "@ribajs/events";
 
 /**
  * Events:
@@ -13,40 +13,13 @@ export class Bs5Service {
   protected _events = EventDispatcher.getInstance("bs5");
   protected _activeBreakpoint: Breakpoint | null = null;
 
-  public get options() {
-    return this._options;
-  }
-
-  public get activeBreakpoint() {
-    return this._activeBreakpoint;
-  }
-
-  get breakpointNames() {
-    return this.options.breakpoints.map((breakpoint) => breakpoint.name);
-  }
-
-  public get events() {
-    return this._events;
-  }
-
   public static instance?: Bs5Service;
 
   protected constructor(options: Bs5ModuleOptions) {
     this._options = options;
-    this._options.breakpoints.sort((a, b) => a.dimension - b.dimension);
+    this.sortBreakpoints(this._options.breakpoints);
     this._onViewChanges();
     this.addEventListeners();
-  }
-
-  protected onBreakpointChanges() {
-    this._events.trigger("breakpoint:changed", this.activeBreakpoint);
-  }
-
-  protected setActiveBreakpoint(breakpoint: Breakpoint) {
-    if (breakpoint && breakpoint.name !== this.activeBreakpoint?.name) {
-      this._activeBreakpoint = breakpoint;
-      this.onBreakpointChanges();
-    }
   }
 
   public static getSingleton() {
@@ -69,6 +42,17 @@ export class Bs5Service {
     return Bs5Service.instance;
   }
 
+  protected onBreakpointChanges() {
+    this._events.trigger("breakpoint:changed", this.activeBreakpoint);
+  }
+
+  protected setActiveBreakpoint(breakpoint: Breakpoint) {
+    if (breakpoint && breakpoint.name !== this.activeBreakpoint?.name) {
+      this._activeBreakpoint = breakpoint;
+      this.onBreakpointChanges();
+    }
+  }
+
   protected addEventListeners() {
     window.addEventListener("resize", this.onViewChanges, { passive: true });
   }
@@ -87,6 +71,53 @@ export class Bs5Service {
   }
 
   protected onViewChanges = debounce(this._onViewChanges.bind(this));
+
+  public sortBreakpoints(breakpoints: Breakpoint[]) {
+    breakpoints.sort((a, b) => a.dimension - b.dimension);
+  }
+
+  public get options() {
+    return this._options;
+  }
+
+  public get activeBreakpoint() {
+    return this._activeBreakpoint;
+  }
+
+  public get breakpointNames() {
+    return this.options.breakpoints.map((breakpoint) => breakpoint.name);
+  }
+
+  public get events() {
+    return this._events;
+  }
+
+  public on(
+    eventName: "breakpoint:changed",
+    cb: (activeBreakpoint: Breakpoint) => void,
+    thisContext?: any
+  ): void;
+  public on(eventName: string, cb: EventCallback, thisContext?: any) {
+    return this.events.on(eventName, cb, thisContext);
+  }
+
+  public once(
+    eventName: "breakpoint:changed",
+    cb: (activeBreakpoint: Breakpoint) => void,
+    thisContext?: any
+  ): void;
+  public once(eventName: string, cb: EventCallback, thisContext?: any) {
+    return this.events.once(eventName, cb, thisContext);
+  }
+
+  public off(
+    eventName: "breakpoint:changed",
+    cb: (activeBreakpoint: Breakpoint) => void,
+    thisContext?: any
+  ): void;
+  public off(eventName: string, cb: EventCallback, thisContext?: any) {
+    return this.events.off(eventName, cb, thisContext);
+  }
 
   /**
    * Get breakpoint for width
@@ -135,6 +166,32 @@ export class Bs5Service {
       return null;
     }
     return found;
+  }
+
+  public getNextBreakpointByName(name: string) {
+    const breakpoints = this.breakpointNames;
+    const index = breakpoints.indexOf(name);
+    if (index < 0) {
+      throw new Error(`the breakpoint "${name}" does not exist!`);
+    }
+    // There is no next breakpoint
+    if (index === breakpoints.length - 1) {
+      return null;
+    }
+    return breakpoints[index + 1];
+  }
+
+  public getPrevBreakpointByName(name: string) {
+    const breakpoints = this.breakpointNames;
+    const index = breakpoints.indexOf(name);
+    if (index < 0) {
+      throw new Error(`the breakpoint "${name}" does not exist!`);
+    }
+    // There is no previous breakpoint
+    if (index === 0) {
+      return null;
+    }
+    return breakpoints[index - 1];
   }
 
   public isBreakpointGreaterThan(

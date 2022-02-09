@@ -38,10 +38,9 @@ export class TouchEventsExampleComponent extends Component {
   }
 
   protected async beforeBind() {
-    return super.beforeBind().then(() => {
-      this.consoleElement = this.querySelector(".console");
-      this.touchZoneElement = this.querySelector(".touch-zone");
-    });
+    await super.beforeBind();
+    this.consoleElement = this.querySelector(".console");
+    this.touchZoneElement = this.querySelector(".touch-zone");
   }
 
   protected template(): ReturnType<TemplateFunction> {

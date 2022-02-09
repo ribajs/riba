@@ -4,10 +4,7 @@ import { EventDispatcher } from "@ribajs/events";
 import { TOGGLE_BUTTON } from "../../constants";
 import { Bs5Service } from "../../services";
 import { SlideshowState } from "../../types";
-import {
-  getViewportDimensions,
-  hasChildNodesTrim,
-} from "@ribajs/utils/src/dom";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { debounce } from "@ribajs/utils/src/control";
 
 interface Scope {
@@ -45,15 +42,15 @@ interface Scope {
    */
   mode: "overlap" | "move" | "side";
   /**
-   * Auto show the sidebar if the viewport width is wider than this value. Set this to -1 to disable this option.
-   * You can also use bootstrap breakpoint names like "sm", "md", "xl", etc.
+   * Auto show the sidebar.
+   * It is recommended to use the `bs5-co-[breakpoint]-auto-hide` for this attribute.
    */
-  autoShowOnWiderThan: number | string;
+  autoShow: boolean;
   /**
-   * Auto hide the sidebar if the viewport width is slimmer than this value. Set this to -1 to disable this option.
-   * You can also use bootstrap breakpoint names like "sm", "md", "xl", etc.
+   * Auto hide the sidebar.
+   * It is recommended to use the `bs5-co-[breakpoint]-auto-hide` for this attribute.
    */
-  autoHideOnSlimmerThan: number | string;
+  autoHide: boolean;
   /**
    * Watch the routers `newPageReady` event to update the sidebar state, e.g. hide on slime than after route changes
    */
@@ -66,13 +63,6 @@ interface Scope {
    * Like `force-hide-on-location-pathnames`, but to force to open the sidebar
    */
   forceShowOnLocationPathnames: Array<string>;
-  /**
-   * If the viewport width is wider than this value the mode is active.
-   * You can disable the mode for all widths with "0" or enable the mode for all widths with "-1"
-   * You can also use bootstrap breakpoint names like "sm", "md", "xl", etc.
-   */
-  modeOnSlimmerThan: number | string;
-
   /**
    * Close sidebar on swipe
    */
@@ -114,11 +104,10 @@ export class Bs5SidebarComponent extends Component {
       "position",
       "mode",
       "width",
-      "auto-show-on-wider-than",
-      "auto-hide-on-slimmer-than",
+      "auto-show",
+      "auto-hide",
       "force-hide-on-location-pathnames",
       "force-show-on-location-pathnames",
-      "mode-on-slimmer-than",
       "watch-new-page-ready-event",
       "close-on-swipe",
     ];
@@ -139,12 +128,11 @@ export class Bs5SidebarComponent extends Component {
     // Options
     position: "left",
     mode: "overlap",
-    autoShowOnWiderThan: -1,
-    autoHideOnSlimmerThan: -1,
+    autoShow: false,
+    autoHide: false,
     watchNewPageReadyEvent: true,
     forceHideOnLocationPathnames: [],
     forceShowOnLocationPathnames: [],
-    modeOnSlimmerThan: -1,
     closeOnSwipe: true,
 
     // Template methods
@@ -154,7 +142,7 @@ export class Bs5SidebarComponent extends Component {
   };
 
   public scope: Scope = {
-    ...this.defaults
+    ...this.defaults,
   };
 
   constructor() {
@@ -174,21 +162,9 @@ export class Bs5SidebarComponent extends Component {
     return this.scope.state;
   }
 
-  public modeIsActive() {
-    if (this.scope.modeOnSlimmerThan === -1) {
-      return true;
-    }
-    const vw = getViewportDimensions().w;
-    return vw < this.scope.modeOnSlimmerThan;
-  }
-
   public getShowMode() {
-    let mode: SlideshowState;
-    if (this.modeIsActive()) {
-      mode = `${this.scope.mode}-${this.scope.position}` as SlideshowState;
-    } else {
-      mode = `side-${this.scope.position}` as SlideshowState;
-    }
+    const mode: SlideshowState =
+      `${this.scope.mode}-${this.scope.position}` as SlideshowState;
     return mode;
   }
 
@@ -354,17 +330,10 @@ export class Bs5SidebarComponent extends Component {
     ) {
       return this.show();
     }
-    const vw = getViewportDimensions().w;
-    if (
-      this.scope.autoHideOnSlimmerThan > -1 &&
-      vw < this.scope.autoHideOnSlimmerThan
-    ) {
+    if (this.scope.autoHide) {
       return this.hide();
     }
-    if (
-      this.scope.autoShowOnWiderThan > -1 &&
-      vw > this.scope.autoShowOnWiderThan
-    ) {
+    if (this.scope.autoShow) {
       return this.show();
     }
   }
@@ -577,8 +546,8 @@ export class Bs5SidebarComponent extends Component {
       newValue,
       namespace
     );
+    console.debug("parsedAttributeChangedCallback", attributeName, newValue);
     if (attributeName === "containerSelector") {
-      
     }
     if (attributeName === "id") {
       this.initToggleButtonEventDispatcher();
@@ -587,69 +556,21 @@ export class Bs5SidebarComponent extends Component {
       case "containerSelector":
         this.initContainers(this.scope.state);
         break;
-        case "id":
-          this.initToggleButtonEventDispatcher();
-          break;
-        case "autoShowOnWiderThan":
-        case "autoHideOnSlimmerThan":
-        case "modeOnSlimmerThan":
-          this.parseBreakpointAttributes(attributeName, newValue);
+      case "id":
+        this.initToggleButtonEventDispatcher();
         break;
-        case "width":
-          this.width = newValue;
-        case "mode":
-            this.onStateChange();
-            this.initContainers(this.scope.state);
-          break;
+      case "width":
+        this.width = newValue;
+      case "mode":
+        this.onStateChange();
+        this.initContainers(this.scope.state);
+        break;
+      case "autoHide":
+      case "autoShow":
+        this.setStateByEnvironment();
+        break;
       default:
         break;
-    }
-  }
-
-  protected parseBreakpointAttributes(
-    attributeName: string,
-    newValue: string | number
-  ) {
-    if (
-      attributeName === "autoShowOnWiderThan" &&
-      typeof newValue === "string"
-    ) {
-      const bp = this.bs5.getBreakpointByName(newValue);
-      if (typeof bp?.dimension === "number") {
-        this.scope.autoShowOnWiderThan = bp.dimension - 1;
-      } else {
-        console.warn(
-          "Unknown breakpoint for autoShowOnWiderThan attribute: " + newValue
-        );
-        this.scope.autoShowOnWiderThan = -1;
-      }
-    }
-
-    if (
-      attributeName === "autoHideOnSlimmerThan" &&
-      typeof newValue === "string"
-    ) {
-      const bp = this.bs5.getBreakpointByName(newValue);
-      if (typeof bp?.dimension === "number") {
-        this.scope.autoHideOnSlimmerThan = bp.dimension - 1;
-      } else {
-        console.warn(
-          "Unknown breakpoint for autoHideOnSlimmerThan attribute: " + newValue
-        );
-        this.scope.autoHideOnSlimmerThan = -1;
-      }
-    }
-
-    if (attributeName === "modeOnSlimmerThan" && typeof newValue === "string") {
-      const bp = this.bs5.getBreakpointByName(newValue);
-      if (typeof bp?.dimension === "number") {
-        this.scope.modeOnSlimmerThan = bp.dimension - 1;
-      } else {
-        console.warn(
-          "Unknown breakpoint for modeOnSlimmerThan attribute: " + newValue
-        );
-        this.scope.modeOnSlimmerThan = -1;
-      }
     }
   }
 

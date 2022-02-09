@@ -9,15 +9,16 @@ export const toType = (obj: any) => {
 };
 
 /**
- * Formats an object to a json string with the special feature that single qoutes are replaced.
+ * Formats an object to a json string with the special feature that single quotes are replaced.
  * This way there are no conflicts when this json string is used as attribute value afterwards.
  * @note This function is used by the JsonFormatter
+ * @see parseJsonString
  * @param object
  * @param space
  * @param replaceSingleQuote
  * @returns
  */
-export const JsonStringify = (
+export const jsonStringify = (
   object: any,
   space = 2,
   replaceSingleQuote = true
@@ -27,6 +28,29 @@ export const JsonStringify = (
     return result.replace(/'/g, `&#39;`);
   }
   return result;
+};
+
+/**
+ * Parses a json string with the special feature that json strings
+ * can also have single quotations for defining the properties and values
+ * @see jsonStringify
+ */
+export const parseJsonString = (value: string) => {
+  let object = null;
+  if (!couldBeJson(value)) {
+    return object;
+  }
+  if (isJson(value)) {
+    object = JSON.parse(value) || null;
+  } else {
+    try {
+      // Transform an invalid json string with single quotation to a valid json string with double quotation
+      object = JSON.parse(value.replace(/'/g, '"')) || null;
+    } catch (error) {
+      console.warn(error);
+    }
+  }
+  return object;
 };
 
 export const couldBeJson = (str?: string | null) => {
@@ -80,28 +104,6 @@ export const parseType = (input?: string) => {
   }
   type = typeof value;
   return { type, value };
-};
-
-/**
- * Parses a json string with the special feature that json strings
- * can also have single quotations for defining the properties and values
- */
-export const parseJsonString = (value: string) => {
-  let object = null;
-  if (!couldBeJson(value)) {
-    return object;
-  }
-  if (isJson(value)) {
-    object = JSON.parse(value) || null;
-  } else {
-    try {
-      // Transform an invalid json string with single quotation to a valid json string with double quotation
-      object = JSON.parse(value.replace(/'/g, '"')) || null;
-    } catch (error) {
-      console.warn(error);
-    }
-  }
-  return object;
 };
 
 /**

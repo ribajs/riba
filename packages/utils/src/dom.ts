@@ -1,5 +1,5 @@
 import { clone, parseJsonString, justDigits } from "./type";
-import { JsonStringify } from "./type";
+import { jsonStringify } from "./type";
 
 export const MAX_UID = 1000;
 
@@ -51,34 +51,32 @@ export const setAttribute = (
   let changed = false;
   switch (typeof newValue) {
     case "string":
-      newValueFormatted = newValue;
-      break;
     case "number":
-      newValueFormatted = newValue;
-      break;
     case "boolean":
-      newValueFormatted = newValue;
+      newValueFormatted = String(newValue);
       break;
+    case "undefined":
+      newValueFormatted = undefined;
     case "object":
       if (newValue === null) {
-        newValue = null;
+        newValueFormatted = null;
       } else {
-        newValueFormatted = JsonStringify(newValue, 0);
+        newValueFormatted = jsonStringify(newValue, 0);
       }
       break;
     default:
-      newValueFormatted = newValue;
+      newValueFormatted = String(newValue);
       break;
   }
 
-  if (newValueFormatted != null) {
-    if (String(oldValue).toString() !== String(newValueFormatted).toString()) {
+  if (newValueFormatted === null || newValueFormatted === undefined) {
+    el.removeAttribute(attributeName);
+    changed = true;
+  } else {
+    if (oldValue !== newValueFormatted) {
       el.setAttribute(attributeName, newValueFormatted);
       changed = true;
     }
-  } else {
-    el.removeAttribute(attributeName);
-    changed = true;
   }
   return {
     name: attributeName,
