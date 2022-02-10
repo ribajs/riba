@@ -16,6 +16,6 @@
     "noImplicitThis": true,
     "allowSyntheticDefaultImports": true,
     "incremental": true,
-    "lib": ["ES2015", "ESNext", "DOM"]
+    "lib": ["ESNext", "DOM"]
   }
 }

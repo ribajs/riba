@@ -9,6 +9,7 @@ export * from "./class-name.binder";
 export * from "./co-attribute.binder";
 export * from "./disabled.binder";
 export * from "./each-item.binder";
+export * from "./element.binder";
 export * from "./enabled.binder";
 export * from "./flex-sort-childs.binder";
 export * from "./hide.binder";

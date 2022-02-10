@@ -343,7 +343,11 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
   }
 
   /**
-   * Publishes the value currently set on the input element (or any other wich implements getValue) back to the model.
+   * Publishes the value currently set on the input element (or any other which implements getValue) back to the model.
+   * An example of the use of this method are the following binders:
+   * - ElementBinder
+   * - ValueBinder
+   * - (Un)CheckedBinder
    */
   public publish() {
     if (this.observer) {

@@ -178,7 +178,6 @@ export class Bs5SidebarComponent extends Component {
   }
 
   public toggle() {
-    console.debug("toggle", this.scope.state, this.scope.mode);
     this.debug("toggle state: " + this.scope.state);
     if (this.scope.state === "hidden") {
       this.show();
@@ -546,7 +545,6 @@ export class Bs5SidebarComponent extends Component {
       newValue,
       namespace
     );
-    console.debug("parsedAttributeChangedCallback", attributeName, newValue);
     if (attributeName === "containerSelector") {
     }
     if (attributeName === "id") {
