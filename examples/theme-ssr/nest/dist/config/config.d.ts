@@ -13,7 +13,7 @@ export declare const session: {
     cookie: {
         maxAge: number;
         secure: boolean;
-        sameSite: boolean | "none" | "lax" | "strict";
+        sameSite: boolean | "strict" | "none" | "lax";
     };
 };
 export declare const appConfig: (() => {

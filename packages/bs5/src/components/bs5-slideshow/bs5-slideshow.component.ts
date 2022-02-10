@@ -1,12 +1,9 @@
 import { TemplatesComponent, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
-import { Breakpoint } from "@ribajs/bs5";
 import { hasChildNodesTrim, scrollTo } from "@ribajs/utils/src/dom";
-import { clone, camelCase } from "@ribajs/utils/src/type";
 import { throttle, debounce } from "@ribajs/utils/src/control";
 import { Bs5Service } from "../../services";
 import {
-  Bs5SlideshowComponentResponsiveOptions,
   SlideshowControlsPosition,
   SlideshowIndicatorsPosition,
   SlideshowSlidePosition,
@@ -53,77 +50,75 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   static get observedAttributes(): string[] {
-    const staticAttributes = ["items"];
-    const breakpointNames = Bs5Service.getSingleton().breakpointNames;
-
-    const responsiveAttributes: string[] = [];
-    for (const breakpointName of breakpointNames) {
-      responsiveAttributes.push(
-        ...this.responsiveAttributes.map((prop) => `${breakpointName}-${prop}`)
-      );
-    }
-    return [...staticAttributes, ...responsiveAttributes];
+    return [
+      "items",
+      "breakpoint",
+      "name",
+      "slides-to-scroll",
+      "controls",
+      "controls-position",
+      "drag",
+      "autoplay",
+      "autoplay-interval",
+      "autoplay-velocity",
+      "control-prev-icon-src",
+      "control-next-icon-src",
+      "indicator-inactive-icon-src",
+      "indicator-active-icon-src",
+      "angle",
+      "set-active-slide",
+      "pause-on-hover",
+      "sticky",
+      "indicators",
+      "indicators-position",
+      "pause",
+      "infinite",
+    ];
   }
 
-  static responsiveAttributes = [
-    "breakpoint",
-    "name",
-    "slides-to-scroll",
-    "controls",
-    "controls-position",
-    "drag",
-    "autoplay",
-    "autoplay-interval",
-    "autoplay-velocity",
-    "control-prev-icon-src",
-    "control-next-icon-src",
-    "indicator-inactive-icon-src",
-    "indicator-active-icon-src",
-    "angle",
-    "set-active-slide",
-    "pause-on-hover",
-    "sticky",
-    "indicators",
-    "indicators-position",
-    "pause",
-    "infinite",
-  ];
+  protected defaultScope: Bs5SlideshowComponentScope = {
+    // Options
+    slidesToScroll: 1,
+    controls: true,
+    controlsPosition: "inside-middle",
+    pauseOnHover: true,
+    sticky: false,
+    indicators: true,
+    indicatorsPosition: "inside-bottom",
+    pause: false,
+    drag: true,
+    touchScroll: true,
+    autoplay: false,
+    autoplayInterval: 0,
+    autoplayVelocity: 0.8,
+    controlPrevIconSrc: "",
+    controlNextIconSrc: "",
+    indicatorActiveIconSrc: "",
+    indicatorInactiveIconSrc: "",
+    angle: "horizontal",
+    breakpoint: 0,
+    name: "xs",
+    infinite: true,
 
-  static get responsiveProperties() {
-    return this.responsiveAttributes.map((attribute) =>
-      camelCase(attribute)
-    ) as (keyof Bs5SlideshowComponentResponsiveOptions)[];
-  }
+    // Template methods
+    next: this.next.bind(this),
+    prev: this.prev.bind(this),
+    goTo: this.goTo.bind(this),
+    enableTouchScroll: this.enableTouchScroll.bind(this),
+    disableTouchScroll: this.disableTouchScroll.bind(this),
 
-  protected _defaultBreakpointOptions: Bs5SlideshowComponentResponsiveOptions =
-    {
-      // Options
-      slidesToScroll: 1,
-      controls: true,
-      controlsPosition: "inside-middle",
-      pauseOnHover: true,
-      sticky: false,
-      indicators: true,
-      indicatorsPosition: "inside-bottom",
-      pause: false,
-      drag: true,
-      touchScroll: true,
-      autoplay: false,
-      autoplayInterval: 0,
-      autoplayVelocity: 0.8,
-      controlPrevIconSrc: "",
-      controlNextIconSrc: "",
-      indicatorActiveIconSrc: "",
-      indicatorInactiveIconSrc: "",
-      angle: "horizontal",
-      breakpoint: 0,
-      name: "xs",
-      infinite: true,
-    };
+    // Template properties
+    items: undefined,
 
-  protected getDefaultBreakpointOptions() {
-    return clone(true, this._defaultBreakpointOptions);
-  }
+    // Classes
+    controlsPositionClass: "",
+    indicatorsPositionClass: "",
+    intervalCount: 0,
+    intervalProgress: 0,
+    nextIndex: -1,
+    prevIndex: -1,
+    activeIndex: 0,
+  };
 
   public static tagName = "bs5-slideshow";
 
@@ -183,27 +178,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   protected activeBreakpointName = "xs";
 
   public scope: Bs5SlideshowComponentScope = {
-    breakpoints: {},
-    activeBreakpoint: this.getDefaultBreakpointOptions(),
-
-    // Template methods
-    next: this.next.bind(this),
-    prev: this.prev.bind(this),
-    goTo: this.goTo.bind(this),
-    enableTouchScroll: this.enableTouchScroll.bind(this),
-    disableTouchScroll: this.disableTouchScroll.bind(this),
-
-    // Template properties
-    items: undefined,
-
-    // Classes
-    controlsPositionClass: "",
-    indicatorsPositionClass: "",
-    intervalCount: 0,
-    intervalProgress: 0,
-    nextIndex: -1,
-    prevIndex: -1,
-    activeIndex: 0,
+    ...this.defaultScope,
   };
 
   constructor() {
@@ -259,17 +234,17 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
         this.slideElements[index],
         0,
         this.slideshowInner,
-        this.scope.activeBreakpoint.angle
+        this.scope.angle
       );
       this.setSlideActive(index);
     }
   }
 
   public getNextIndex(centeredIndex: number) {
-    let nextIndex = centeredIndex + this.scope.activeBreakpoint.slidesToScroll;
+    let nextIndex = centeredIndex + this.scope.slidesToScroll;
 
     if (nextIndex >= this.slideElements.length) {
-      if (!this.scope.activeBreakpoint.infinite) {
+      if (!this.scope.infinite) {
         return this.slideElements.length - 1;
       }
       nextIndex = nextIndex - this.slideElements.length;
@@ -279,10 +254,10 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   public getPrevIndex(centeredIndex: number) {
-    let prevIndex = centeredIndex - this.scope.activeBreakpoint.slidesToScroll;
+    let prevIndex = centeredIndex - this.scope.slidesToScroll;
 
     if (prevIndex < 0) {
-      if (!this.scope.activeBreakpoint.infinite) {
+      if (!this.scope.infinite) {
         return 0;
       }
       prevIndex = this.slideElements.length - 1 + (prevIndex + 1);
@@ -311,137 +286,22 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     return this.goTo(prevIndex);
   }
 
-  protected setOptions(
-    dest: Partial<Bs5SlideshowComponentResponsiveOptions>,
-    source: Partial<Bs5SlideshowComponentResponsiveOptions>
-  ) {
-    const props = Bs5SlideshowComponent.responsiveProperties;
-    for (const prop of props) {
-      (dest[prop] as any) =
-        typeof source[prop] !== "undefined"
-          ? clone(false, source[prop])
-          : dest[prop];
-    }
+  protected initOptions() {
+    this.setOptions();
   }
 
-  protected setOptionsIfUndefined(
-    dest: Partial<Bs5SlideshowComponentResponsiveOptions>,
-    source: Partial<Bs5SlideshowComponentResponsiveOptions>
-  ) {
-    const props = Bs5SlideshowComponent.responsiveProperties;
-    for (const prop of props) {
-      (dest[prop] as any) =
-        typeof dest[prop] === "undefined"
-          ? clone(false, source[prop])
-          : dest[prop];
-    }
-  }
-
-  protected initResponsiveOptions() {
-    const breakpointNames = Bs5Service.getSingleton().breakpointNames;
-    for (let i = 1; i < breakpointNames.length; i++) {
-      const currName = breakpointNames[i];
-      const prevName = breakpointNames[i - 1];
-
-      this.scope.breakpoints[currName] = this.scope.breakpoints[currName] || {};
-      this.scope.breakpoints[prevName] = this.scope.breakpoints[prevName] || {};
-
-      const currOptions = this.scope.breakpoints[currName];
-      const prevOptions = this.scope.breakpoints[prevName];
-
-      // Set the breakpoint min width
-      currOptions.breakpoint =
-        this.bs5.getBreakpointByName(currName)?.dimension || 0;
-      currOptions.name = currName;
-
-      if (prevOptions) {
-        if (i === 1) {
-          this.setOptionsIfUndefined(
-            prevOptions,
-            this.getDefaultBreakpointOptions()
-          );
-        }
-
-        this.setOptionsIfUndefined(currOptions, prevOptions);
-      }
-    }
-
-    this.setOptionsByBreakpoint(this.bs5.activeBreakpoint);
-  }
-
-  protected setControlsOptions() {
-    let result = "";
-    let count = 0;
-    for (const infix in this.scope.breakpoints) {
-      const breakpoint = this.scope.breakpoints[infix];
-      const position = breakpoint.controlsPosition?.split(
-        "-"
-      ) as SlideshowControlsPosition[];
-      if (breakpoint.controls && position.length === 2) {
-        if (count === 0) {
-          // Do not use xs on class
-          result += `control-${position[0]} control-${position[1]} `;
-        } else {
-          result += `control-${infix}-${position[0]} control-${infix}-${position[1]} `;
-        }
-      }
-      count++;
-    }
-
-    this.scope.controlsPositionClass = result.trim();
-  }
-
-  protected setIndicatorsOptions() {
-    let result = "";
-    let count = 0;
-
-    for (const infix in this.scope.breakpoints) {
-      const breakpoint = this.scope.breakpoints[infix];
-      const positions = breakpoint.indicatorsPosition?.split(
-        "-"
-      ) as SlideshowIndicatorsPosition[];
-      if (breakpoint.indicators && positions.length === 2) {
-        if (count === 0) {
-          // Do not use xs on class
-          result += `indicators-${positions[0]} indicators-${positions[1]} `;
-        } else {
-          result += `indicators-${infix}-${positions[0]} indicators-${infix}-${positions[1]} `;
-        }
-      }
-      count++;
-    }
-
-    this.scope.indicatorsPositionClass = result.trim();
-  }
-
-  protected getBreakpointOptionsByBreakpointName(name: string) {
-    return this.scope.breakpoints[name];
-  }
-
-  protected setOptionsByBreakpoint(breakpoint: Breakpoint | null) {
-    if (!breakpoint) {
-      console.warn(`Breakpoint not found!`);
-      return;
-    }
-    const breakpointOptions = this.getBreakpointOptionsByBreakpointName(
-      breakpoint.name
-    );
-    if (!breakpointOptions) {
-      console.warn(`Breakpoint options for "${breakpoint.name}" not found!`);
-      return;
-    }
-    this.setOptions(this.scope.activeBreakpoint, breakpointOptions);
-    if (this.scope.activeBreakpoint.autoplay) {
+  protected setOptions() {
+    if (this.scope.autoplay) {
       this.enableAutoplay();
     } else {
       this.disableAutoplay();
     }
-    if (this.scope.activeBreakpoint.drag) {
+    if (this.scope.drag) {
       this.enableDesktopDragscroll();
     } else {
       this.disableDesktopDragscroll();
     }
-    if (this.scope.activeBreakpoint.touchScroll) {
+    if (this.scope.touchScroll) {
       this.enableTouchScroll();
     } else {
       this.disableTouchScroll();
@@ -450,11 +310,27 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     this.setIndicatorsOptions();
   }
 
-  protected _onBreakpointChanges(breakpoint: Breakpoint) {
-    this.setOptionsByBreakpoint(breakpoint);
+  protected setControlsOptions() {
+    const position = this.scope.controlsPosition?.split(
+      "-"
+    ) as SlideshowControlsPosition[];
+    if (this.scope.controls && position.length === 2) {
+      this.scope.controlsPositionClass = `control-${position[0]} control-${position[1]}`;
+    } else {
+      this.scope.controlsPositionClass = "";
+    }
   }
 
-  protected onBreakpointChanges = this._onBreakpointChanges.bind(this);
+  protected setIndicatorsOptions() {
+    const positions = this.scope.indicatorsPosition?.split(
+      "-"
+    ) as SlideshowIndicatorsPosition[];
+    if (this.scope.indicators && positions.length === 2) {
+      this.scope.indicatorsPositionClass = `indicators-${positions[0]} indicators-${positions[1]}`;
+    } else {
+      this.scope.indicatorsPositionClass = "";
+    }
+  }
 
   protected _onViewChanges() {
     this.debug("onViewChanges");
@@ -464,7 +340,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     try {
       this.setSlidePositions();
       const index = this.setCenteredSlideActive();
-      if (this.scope.activeBreakpoint.sticky) {
+      if (this.scope.sticky) {
         this.goTo(index);
       }
     } catch (error: any) {
@@ -494,7 +370,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     try {
       this.setSlidePositions();
       this.setCenteredSlideActive();
-      if (this.scope.activeBreakpoint.sticky) {
+      if (this.scope.sticky) {
         this.scrollToNearestSlide();
       }
     } catch (error: any) {
@@ -503,8 +379,8 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected onMouseIn() {
-    if (this.scope.activeBreakpoint.pauseOnHover) {
-      this.scope.activeBreakpoint.pause = true;
+    if (this.scope.pauseOnHover) {
+      this.scope.pause = true;
     }
   }
 
@@ -520,7 +396,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   protected _resume() {
     this.setSlidePositions();
-    this.scope.activeBreakpoint.pause = false;
+    this.scope.pause = false;
   }
 
   /** Resume if this method was not called up for [delay] milliseconds */
@@ -547,8 +423,6 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
     // If window resizes
     window.addEventListener("resize", this.onViewChanges, { passive: true });
-
-    this.bs5.events.on("breakpoint:changed", this.onBreakpointChanges);
 
     // Custom event triggered by some parent components when this component changes his visibility, e.g. triggered in the bs5-tabs component
     this.addEventListener(
@@ -614,7 +488,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   protected initAll() {
     this.initSlideshowInner();
-    this.initResponsiveOptions();
+    this.initOptions();
     this.addEventListeners();
     // initial
     this.onViewChanges();
@@ -671,9 +545,9 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   protected enableContinuousAutoplay() {
     if (!this.continuousAutoplayService && this.slideshowInner) {
       const autoscrollOptions: AutoscrollOptions = {
-        velocity: this.scope.activeBreakpoint.autoplayVelocity,
-        angle: this.scope.activeBreakpoint.angle,
-        pauseOnHover: this.scope.activeBreakpoint.pauseOnHover,
+        velocity: this.scope.autoplayVelocity,
+        angle: this.scope.angle,
+        pauseOnHover: this.scope.pauseOnHover,
       };
       this.continuousAutoplayService = new Autoscroll(
         this.slideshowInner,
@@ -681,10 +555,9 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       );
     }
     // on continuous autoplay the scrollended event is never triggered, so call this method all `intervalsTimeMs` milliseconds as a WORKAROUND
-    if (!this.continuousAutoplayIntervalIndex) {
+    if (this.continuousAutoplayIntervalIndex === null) {
       // intervals are depending on the autoscrolling speed (autoplayVelocity)
-      const intervalsTimeMs =
-        this.scope.activeBreakpoint.autoplayVelocity * 10000;
+      const intervalsTimeMs = this.scope.autoplayVelocity * 10000;
       // this.debug('intervalsTimeMs', intervalsTimeMs);
       this.continuousAutoplayIntervalIndex = window.setInterval(
         this.onScrollend.bind(this),
@@ -695,10 +568,11 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   protected disableContinuousAutoplay() {
     if (this.continuousAutoplayService) {
+      this.continuousAutoplayService.pause();
       this.continuousAutoplayService.destroy();
       this.continuousAutoplayService = undefined;
     }
-    if (this.continuousAutoplayIntervalIndex) {
+    if (this.continuousAutoplayIntervalIndex !== null) {
       window.clearInterval(this.continuousAutoplayIntervalIndex);
       this.continuousAutoplayIntervalIndex = null;
     }
@@ -711,15 +585,12 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   protected enableIntervalAutoplay() {
     const steps = 100;
-    this.resetIntervalAutoplay();
     if (this.autoplayIntervalIndex === null) {
       this.autoplayIntervalIndex = window.setInterval(() => {
-        if (!this.scope.activeBreakpoint.pause) {
+        if (!this.scope.pause) {
           this.scope.intervalCount += steps;
           this.scope.intervalProgress =
-            (this.scope.intervalCount /
-              this.scope.activeBreakpoint.autoplayInterval) *
-            100;
+            (this.scope.intervalCount / this.scope.autoplayInterval) * 100;
           if (this.scope.intervalProgress >= 100) {
             this.next();
           }
@@ -729,7 +600,9 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected disableIntervalAutoplay() {
-    if (this.autoplayIntervalIndex) {
+    this.resetIntervalAutoplay();
+    console.debug("disableIntervalAutoplay", this.autoplayIntervalIndex);
+    if (this.autoplayIntervalIndex !== null) {
       window.clearInterval(this.autoplayIntervalIndex);
       this.autoplayIntervalIndex = null;
     }
@@ -741,8 +614,9 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   protected enableAutoplay() {
+    this.disableAutoplay();
     // continuous scrolling
-    if (this.scope.activeBreakpoint.autoplayInterval <= 0) {
+    if (this.scope.autoplayInterval <= 0) {
       this.enableContinuousAutoplay();
     } else {
       this.enableIntervalAutoplay();
@@ -869,7 +743,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     }
 
     let nearZero = Math.abs(
-      this.scope.activeBreakpoint.angle === "vertical"
+      this.scope.angle === "vertical"
         ? this.scope.items[0].position.centerY
         : this.scope.items[0].position.centerX
     );
@@ -877,7 +751,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
     for (let i = 1; i < this.scope.items.length; i++) {
       const position = Math.abs(
-        this.scope.activeBreakpoint.angle === "vertical"
+        this.scope.angle === "vertical"
           ? this.scope.items[i].position.centerY
           : this.scope.items[i].position.centerX
       );
@@ -942,11 +816,11 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       return false;
     }
     const maxScrollTo =
-      this.scope.activeBreakpoint.angle === "vertical"
+      this.scope.angle === "vertical"
         ? scrollPosition.maxY
         : scrollPosition.maxX;
     const scrollTo =
-      this.scope.activeBreakpoint.angle === "vertical"
+      this.scope.angle === "vertical"
         ? this.slideshowInner.scrollTop +
           this.scope.items[index].position.centerY
         : this.slideshowInner.scrollLeft +
@@ -997,67 +871,6 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   }
 
   /**
-   * Default custom Element method
-   * Invoked when an attribute on the custom element changes.
-   * @param attributeName
-   * @param oldValue
-   * @param newValue
-   * @param namespace
-   */
-  protected async attributeChangedCallback(
-    attributeName: string,
-    oldValue: any,
-    newValue: any,
-    namespace: string | null
-  ) {
-    let responsiveAttributeName:
-      | keyof Bs5SlideshowComponentResponsiveOptions
-      | null = null;
-
-    if (
-      this.observedAttributesToCheck &&
-      this.observedAttributesToCheck[attributeName]
-    ) {
-      this.observedAttributesToCheck[attributeName].initialized = true;
-    }
-
-    newValue = this.parseAttribute(newValue);
-    const breakpointNames = Bs5Service.getSingleton().breakpointNames;
-
-    for (const name of breakpointNames) {
-      const affix = name + "-";
-      if (attributeName.startsWith(affix)) {
-        this.scope.breakpoints[name] = this.scope.breakpoints[name] || {};
-        responsiveAttributeName = camelCase(
-          attributeName.slice(affix.length)
-        ) as keyof Bs5SlideshowComponentResponsiveOptions;
-        (this.scope.breakpoints[name][responsiveAttributeName] as any) =
-          newValue;
-        break;
-      }
-    }
-
-    if (!responsiveAttributeName) {
-      await super.attributeChangedCallback(
-        attributeName,
-        oldValue,
-        newValue,
-        namespace
-      );
-
-      if (attributeName === "items") {
-        this.validateItems();
-      }
-    } else {
-      try {
-        await this.bindIfReady();
-      } catch (error: any) {
-        this.throw(error);
-      }
-    }
-  }
-
-  /**
    * Similar to attributeChangedCallback but attribute arguments are already parsed as they are stored in the scope
    * @param attributeName
    * @param oldValue
@@ -1065,17 +878,55 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
    * @param namespace
    */
   protected parsedAttributeChangedCallback(
-    attributeName: string,
+    attributeName: keyof Bs5SlideshowComponentScope,
     oldValue: any,
     newValue: any,
     namespace: string | null
   ) {
-    return super.parsedAttributeChangedCallback(
+    super.parsedAttributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
       namespace
     );
+
+    if (attributeName === "items") {
+      this.validateItems();
+    }
+
+    if (attributeName === "autoplay") {
+      if (this.scope.autoplay) {
+        this.enableAutoplay();
+      } else {
+        this.disableAutoplay();
+      }
+    }
+
+    if (attributeName === "drag") {
+      if (this.scope.drag) {
+        this.enableDesktopDragscroll();
+      } else {
+        this.disableDesktopDragscroll();
+      }
+    }
+
+    if (attributeName === "touchScroll") {
+      if (this.scope.touchScroll) {
+        this.enableTouchScroll();
+      } else {
+        this.disableTouchScroll();
+      }
+    }
+    if (attributeName === "controls" || attributeName === "controlsPosition") {
+      this.setControlsOptions();
+    }
+
+    if (
+      attributeName === "indicators" ||
+      attributeName === "indicatorsPosition"
+    ) {
+      this.setIndicatorsOptions();
+    }
   }
 
   // deconstruction

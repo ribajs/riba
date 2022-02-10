@@ -44,52 +44,39 @@ bs5-slideshow {
       }
     }
 
-    @each $breakpoint in map-keys($grid-breakpoints) {
-      $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-      @include media-breakpoint-up($breakpoint) {
-        &.control#{$infix}-middle {
-          flex-direction: column;
-          justify-content: center;
-        }
-        &.control#{$infix}-bottom {
-          flex-direction: column;
-          justify-content: start;
-        }
-        &.control#{$infix}-top {
-          flex-direction: column;
-          justify-content: end;
-        }
-      }
+    &.control-middle {
+      flex-direction: column;
+      justify-content: center;
+    }
+    &.control-bottom {
+      flex-direction: column;
+      justify-content: start;
+    }
+    &.control-top {
+      flex-direction: column;
+      justify-content: end;
     }
 
     &.slideshow-control-prev {
       @extend .carousel-control-prev !optional;
       left: 0; // default
-      @each $breakpoint in map-keys($grid-breakpoints) {
-        $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-        @include media-breakpoint-up($breakpoint) {
-          &.control#{$infix}-insite {
-            left: 0;
-          }
-          &.control#{$infix}-outsite {
-            left: -$bs5-slideshow-control-outsite-spacing;
-          }
-        }
+
+      &.control-insite {
+        left: 0;
+      }
+      &.control-outsite {
+        left: -$bs5-slideshow-control-outsite-spacing;
       }
     }
     &.slideshow-control-next {
       @extend .carousel-control-next !optional;
       right: 0; // default
-      @each $breakpoint in map-keys($grid-breakpoints) {
-        $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-        @include media-breakpoint-up($breakpoint) {
-          &.control#{$infix}-insite {
-            right: 0;
-          }
-          &.control#{$infix}-outsite {
-            right: -$bs5-slideshow-control-outsite-spacing;
-          }
-        }
+
+      &.control-insite {
+        right: 0;
+      }
+      &.control-outsite {
+        right: -$bs5-slideshow-control-outsite-spacing;
       }
     }
   
@@ -127,58 +114,52 @@ bs5-slideshow {
       cursor: pointer;
     }
 
-
-    @each $breakpoint in map-keys($grid-breakpoints) {
-      $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-      @include media-breakpoint-up($breakpoint) {
-        &.indicators#{$infix}-bottom {
-          top: auto;
-          right: 0;
-          bottom:  $bs5-slideshow-indicators-insite-spacing;
-          left: 0;
-          &.indicators#{$infix}-insite {
-            bottom:  $bs5-slideshow-indicators-insite-spacing;
-          }
-          &.indicators#{$infix}-outsite {
-            bottom: -$bs5-slideshow-indicators-outsite-spacing;
-          }
-        }
-        &.indicators#{$infix}-top {
-          top: 0;
-          right: 0;
-          bottom: auto;
-          left:  $bs5-slideshow-indicators-insite-spacing;
-          &.indicators#{$infix}-insite {
-            top:  $bs5-slideshow-indicators-insite-spacing;
-          }
-          &.indicators#{$infix}-outsite {
-            top: -$bs5-slideshow-indicators-outsite-spacing;
-          }
-        }
-        &.indicators#{$infix}-right {
-          top: 0;
-          right:  $bs5-slideshow-indicators-insite-spacing;
-          bottom: 0;
-          left: auto;
-          &.indicators#{$infix}-insite {
-            right:  $bs5-slideshow-indicators-insite-spacing;
-          }
-          &.indicators#{$infix}-outsite {
-            right: -$bs5-slideshow-indicators-outsite-spacing;
-          }
-        }
-        &.indicators#{$infix}-left {
-          top: 0;
-          right: auto;
-          bottom: 0;
-          left:  $bs5-slideshow-indicators-insite-spacing;
-          &.indicators#{$infix}-insite {
-            left:  $bs5-slideshow-indicators-insite-spacing;
-          }
-          &.indicators#{$infix}-outsite {
-            left: -$bs5-slideshow-indicators-outsite-spacing;
-          }
-        }
+    &.indicators-bottom {
+      top: auto;
+      right: 0;
+      bottom:  $bs5-slideshow-indicators-insite-spacing;
+      left: 0;
+      &.indicators-insite {
+        bottom:  $bs5-slideshow-indicators-insite-spacing;
+      }
+      &.indicators-outsite {
+        bottom: -$bs5-slideshow-indicators-outsite-spacing;
+      }
+    }
+    &.indicators-top {
+      top: 0;
+      right: 0;
+      bottom: auto;
+      left:  $bs5-slideshow-indicators-insite-spacing;
+      &.indicators-insite {
+        top:  $bs5-slideshow-indicators-insite-spacing;
+      }
+      &.indicators-outsite {
+        top: -$bs5-slideshow-indicators-outsite-spacing;
+      }
+    }
+    &.indicators-right {
+      top: 0;
+      right:  $bs5-slideshow-indicators-insite-spacing;
+      bottom: 0;
+      left: auto;
+      &.indicators-insite {
+        right:  $bs5-slideshow-indicators-insite-spacing;
+      }
+      &.indicators-outsite {
+        right: -$bs5-slideshow-indicators-outsite-spacing;
+      }
+    }
+    &.indicators-left {
+      top: 0;
+      right: auto;
+      bottom: 0;
+      left:  $bs5-slideshow-indicators-insite-spacing;
+      &.indicators-insite {
+        left:  $bs5-slideshow-indicators-insite-spacing;
+      }
+      &.indicators-outsite {
+        left: -$bs5-slideshow-indicators-outsite-spacing;
       }
     }
 

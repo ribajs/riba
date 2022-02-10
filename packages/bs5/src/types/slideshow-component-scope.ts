@@ -6,7 +6,33 @@ import type {
   SlideshowIndicatorsPosition,
 } from ".";
 
-export interface Bs5SlideshowComponentResponsiveOptions {
+export interface Bs5SlideshowComponentScope {
+  // TEMPLATE METHODS
+
+  next: Bs5SlideshowComponent["next"];
+  prev: Bs5SlideshowComponent["prev"];
+  goTo: Bs5SlideshowComponent["goTo"];
+  enableTouchScroll: Bs5SlideshowComponent["enableTouchScroll"];
+  disableTouchScroll: Bs5SlideshowComponent["disableTouchScroll"];
+
+  // TEMPLATE PROPERTIES
+
+  items?: SlideshowSlide[];
+
+  // CLASSES
+
+  controlsPositionClass: string;
+  indicatorsPositionClass: string;
+  /** If interval autoplay is active, this is the interval count. */
+  intervalCount: number;
+  /** If interval autoplay is active, this is the progress (in percent) until the next page is switched to. */
+  intervalProgress: number;
+  nextIndex: number;
+  prevIndex: number;
+  activeIndex: number;
+
+  // OPTIONS
+
   /** Show controls */
   controls: boolean;
   /** Position of the controls */
@@ -49,31 +75,4 @@ export interface Bs5SlideshowComponentResponsiveOptions {
   name: string;
   /** Disables wraparound to first/last element of slideshow  */
   infinite: boolean;
-}
-
-export type Bs5SlideshowComponentOptions = {
-  breakpoints: {
-    [bp: string]: Partial<Bs5SlideshowComponentResponsiveOptions>;
-  };
-};
-
-export interface Bs5SlideshowComponentScope
-  extends Bs5SlideshowComponentOptions {
-  next: Bs5SlideshowComponent["next"];
-  prev: Bs5SlideshowComponent["prev"];
-  goTo: Bs5SlideshowComponent["goTo"];
-  enableTouchScroll: Bs5SlideshowComponent["enableTouchScroll"];
-  disableTouchScroll: Bs5SlideshowComponent["disableTouchScroll"];
-  controlsPositionClass: string;
-  indicatorsPositionClass: string;
-  items?: SlideshowSlide[];
-  /** Active breakpoint options */
-  activeBreakpoint: Bs5SlideshowComponentResponsiveOptions;
-  /** If interval autoplay is active, this is the interval count. */
-  intervalCount: number;
-  /** If interval autoplay is active, this is the progress (in percent) until the next page is switched to. */
-  intervalProgress: number;
-  nextIndex: number;
-  prevIndex: number;
-  activeIndex: number;
 }
