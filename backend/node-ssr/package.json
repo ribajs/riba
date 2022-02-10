@@ -27,9 +27,9 @@
     "/dist"
   ],
   "dependencies": {
-    "@ribajs/core": "workspace:*",
-    "@ribajs/events": "workspace:*",
-    "@ribajs/ssr": "workspace:*",
+    "@ribajs/core": "workspace:^",
+    "@ribajs/events": "workspace:^",
+    "@ribajs/ssr": "workspace:^",
     "@types/consolidate": "^0.14.1",
     "@types/express": "^4.17.13",
     "@types/jsdom": "^16.2.14",

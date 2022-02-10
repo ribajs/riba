@@ -7,7 +7,7 @@
   "module": "src/index.ts",
   "source": "src/index.ts",
   "dependencies": {
-    "@ribajs/core": "workspace:*",
+    "@ribajs/core": "workspace:^",
     "@vue/compiler-sfc": "latest",
     "vue": "next"
   },

@@ -38,11 +38,11 @@
     "@babel/preset-typescript": "^7.16.7",
     "@babel/runtime": "^7.17.2",
     "@babel/runtime-corejs3": "^7.17.2",
-    "@ribajs/babel-config": "workspace:*",
-    "@ribajs/eslint-config": "workspace:*",
+    "@ribajs/babel-config": "workspace:^",
+    "@ribajs/eslint-config": "workspace:^",
     "@ribajs/nest-theme": "workspace:^",
-    "@ribajs/tsconfig": "workspace:*",
-    "@ribajs/webpack-config": "workspace:*",
+    "@ribajs/tsconfig": "workspace:^",
+    "@ribajs/webpack-config": "workspace:^",
     "@types/component-emitter": "^1.2.11",
     "@types/debug": "^4.1.7",
     "@types/node": "^17.0.12",
@@ -72,14 +72,14 @@
     "webpack-node-externals": "^3.0.0"
   },
   "dependencies": {
-    "@ribajs/bs5": "workspace:*",
-    "@ribajs/core": "workspace:*",
-    "@ribajs/i18n": "workspace:*",
-    "@ribajs/iconset": "workspace:*",
-    "@ribajs/router": "workspace:*",
-    "@ribajs/ssr": "workspace:*",
-    "@ribajs/types": "workspace:*",
-    "@ribajs/utils": "workspace:*",
+    "@ribajs/bs5": "workspace:^",
+    "@ribajs/core": "workspace:^",
+    "@ribajs/i18n": "workspace:^",
+    "@ribajs/iconset": "workspace:^",
+    "@ribajs/router": "workspace:^",
+    "@ribajs/ssr": "workspace:^",
+    "@ribajs/types": "workspace:^",
+    "@ribajs/utils": "workspace:^",
     "bootstrap": "^5.1.3"
   }
 }

@@ -2,8 +2,8 @@
   "name": "@ribajs/accessibility",
   "version": "2.0.0-alpha.0",
   "dependencies": {
-    "@ribajs/core": "workspace:*",
-    "@ribajs/utils": "workspace:*"
+    "@ribajs/core": "workspace:^",
+    "@ribajs/utils": "workspace:^"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -11,8 +11,8 @@
   "devDependencies": {
     "@babel/runtime": "^7.17.2",
     "@babel/runtime-corejs3": "^7.17.2",
-    "@ribajs/tsconfig": "workspace:*",
+    "@ribajs/tsconfig": "workspace:^",
     "@types/node": "^17.0.16",
-    "gamecontroller.js": "workspace:*"
+    "gamecontroller.js": "workspace:^"
   }
 }

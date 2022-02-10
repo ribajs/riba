@@ -50,8 +50,8 @@
   "devDependencies": {
     "@babel/runtime": "^7.17.2",
     "@babel/runtime-corejs3": "^7.17.2",
-    "@ribajs/eslint-config": "workspace:*",
-    "@ribajs/tsconfig": "workspace:*",
+    "@ribajs/eslint-config": "workspace:^",
+    "@ribajs/tsconfig": "workspace:^",
     "@types/jest": "^27.4.0",
     "@typescript-eslint/eslint-plugin": "^5.11.0",
     "@typescript-eslint/parser": "^5.11.0",

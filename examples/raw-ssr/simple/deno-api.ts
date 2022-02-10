@@ -1,4 +1,7 @@
-import { SsrService, RequestContext } from "../../../backend/deno-node-ssr/mod.ts";
+import {
+  SsrService,
+  RequestContext,
+} from "../../../backend/deno-node-ssr/mod.ts";
 
 const ssr = new SsrService({
   sourceFileDir: "./assets/ssr",

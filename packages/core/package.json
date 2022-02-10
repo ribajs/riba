@@ -56,9 +56,9 @@
     "@babel/preset-typescript": "^7.16.7",
     "@babel/runtime": "^7.17.2",
     "@babel/runtime-corejs3": "^7.17.2",
-    "@ribajs/eslint-config": "workspace:*",
-    "@ribajs/tsconfig": "workspace:*",
-    "@ribajs/types": "workspace:*",
+    "@ribajs/eslint-config": "workspace:^",
+    "@ribajs/tsconfig": "workspace:^",
+    "@ribajs/types": "workspace:^",
     "@types/core-js": "^2.5.5",
     "@types/jest": "^27.4.0",
     "@types/node": "^17.0.16",
@@ -89,9 +89,9 @@
     "lib": "lib"
   },
   "dependencies": {
-    "@ribajs/events": "workspace:*",
-    "@ribajs/history": "workspace:*",
-    "@ribajs/ssr": "workspace:*",
-    "@ribajs/utils": "workspace:*"
+    "@ribajs/events": "workspace:^",
+    "@ribajs/history": "workspace:^",
+    "@ribajs/ssr": "workspace:^",
+    "@ribajs/utils": "workspace:^"
   }
 }

@@ -39,9 +39,9 @@
     "@babel/preset-typescript": "^7.16.7",
     "@babel/runtime": "^7.17.2",
     "@babel/runtime-corejs3": "^7.17.2",
-    "@ribajs/eslint-config": "workspace:*",
-    "@ribajs/tsconfig": "workspace:*",
-    "@ribajs/webpack-config": "workspace:*",
+    "@ribajs/eslint-config": "workspace:^",
+    "@ribajs/tsconfig": "workspace:^",
+    "@ribajs/webpack-config": "workspace:^",
     "@types/jest": "^27.4.0",
     "@typescript-eslint/eslint-plugin": "^5.11.0",
     "@typescript-eslint/parser": "^5.11.0",
@@ -57,10 +57,10 @@
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
-    "@ribajs/bs4": "workspace:*",
-    "@ribajs/core": "workspace:*",
-    "@ribajs/events": "workspace:*",
-    "@ribajs/utils": "workspace:*"
+    "@ribajs/bs4": "workspace:^",
+    "@ribajs/core": "workspace:^",
+    "@ribajs/events": "workspace:^",
+    "@ribajs/utils": "workspace:^"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

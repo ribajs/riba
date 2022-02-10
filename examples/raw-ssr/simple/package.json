@@ -40,10 +40,10 @@
     "@babel/runtime": "^7.17.2",
     "@babel/runtime-corejs3": "^7.17.2",
     "@graphql-tools/webpack-loader": "^6.6.1",
-    "@ribajs/babel-config": "workspace:*",
-    "@ribajs/eslint-config": "workspace:*",
-    "@ribajs/tsconfig": "workspace:*",
-    "@ribajs/webpack-config": "workspace:*",
+    "@ribajs/babel-config": "workspace:^",
+    "@ribajs/eslint-config": "workspace:^",
+    "@ribajs/tsconfig": "workspace:^",
+    "@ribajs/webpack-config": "workspace:^",
     "@typescript-eslint/eslint-plugin": "^5.11.0",
     "@typescript-eslint/experimental-utils": "^5.11.0",
     "@typescript-eslint/parser": "^5.11.0",
@@ -69,11 +69,11 @@
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
-    "@ribajs/core": "workspace:*",
-    "@ribajs/events": "workspace:*",
-    "@ribajs/node-ssr": "workspace:*",
-    "@ribajs/ssr": "workspace:*",
-    "@ribajs/utils": "workspace:*",
+    "@ribajs/core": "workspace:^",
+    "@ribajs/events": "workspace:^",
+    "@ribajs/node-ssr": "workspace:^",
+    "@ribajs/ssr": "workspace:^",
+    "@ribajs/utils": "workspace:^",
     "@tsconfig/node16": "^1.0.2",
     "ts-node": "^10.5.0"
   }

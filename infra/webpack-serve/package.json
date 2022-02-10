@@ -22,7 +22,7 @@
     "build:cjs": "tsc --project ./tsconfig.json --declaration false --module commonjs --outDir dist/cjs"
   },
   "dependencies": {
-    "@ribajs/webpack-config": "workspace:*",
+    "@ribajs/webpack-config": "workspace:^",
     "@types/node": "^17.0.16",
     "@types/yargs": "^17.0.8",
     "get-port": "^6.0.0",

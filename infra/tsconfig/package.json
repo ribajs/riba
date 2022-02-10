@@ -30,7 +30,7 @@
     "tsconfig"
   ],
   "devDependencies": {
-    "@ribajs/types": "workspace:*"
+    "@ribajs/types": "workspace:^"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

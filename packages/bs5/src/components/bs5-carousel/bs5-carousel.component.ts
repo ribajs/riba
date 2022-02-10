@@ -24,14 +24,7 @@ export class Bs5CarouselComponent extends Component {
   public static tagName = "bs5-carousel";
 
   static get observedAttributes(): string[] {
-    return [
-      "interval",
-      "keyboard",
-      "pause",
-      "wrap",
-      "touch",
-      "fade",
-    ];
+    return ["interval", "keyboard", "pause", "wrap", "touch", "fade"];
   }
 
   protected requiredAttributes(): string[] {

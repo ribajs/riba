@@ -218,13 +218,22 @@ export class TouchEventsService extends BaseEventsService {
 
   protected removeEventListeners() {
     for (const eventName of this.settings.startevent) {
-      this.el.removeEventListener(eventName, this.onStartEvent as any as EventListener);
+      this.el.removeEventListener(
+        eventName,
+        this.onStartEvent as any as EventListener
+      );
     }
     for (const eventName of this.settings.moveevent) {
-      this.el.removeEventListener(eventName, this.onMoveEvent as any as EventListener);
+      this.el.removeEventListener(
+        eventName,
+        this.onMoveEvent as any as EventListener
+      );
     }
     for (const eventName of this.settings.endevent) {
-      this.el.removeEventListener(eventName, this.onEndEvent as any as EventListener);
+      this.el.removeEventListener(
+        eventName,
+        this.onEndEvent as any as EventListener
+      );
     }
     // this.scrollEvents.destroy();
   }
@@ -353,19 +362,31 @@ export class TouchEventsService extends BaseEventsService {
 
   protected addEventListeners() {
     for (const eventName of this.settings.startevent) {
-      this.el.addEventListener(eventName, this.onStartEvent as any as EventListener, {
-        passive: true,
-      });
+      this.el.addEventListener(
+        eventName,
+        this.onStartEvent as any as EventListener,
+        {
+          passive: true,
+        }
+      );
     }
     for (const eventName of this.settings.moveevent) {
-      this.el.addEventListener(eventName, this.onMoveEvent as any as EventListener, {
-        passive: true,
-      });
+      this.el.addEventListener(
+        eventName,
+        this.onMoveEvent as any as EventListener,
+        {
+          passive: true,
+        }
+      );
     }
     for (const eventName of this.settings.endevent) {
-      this.el.addEventListener(eventName, this.onEndEvent as any as EventListener, {
-        passive: true,
-      });
+      this.el.addEventListener(
+        eventName,
+        this.onEndEvent as any as EventListener,
+        {
+          passive: true,
+        }
+      );
     }
   }
 

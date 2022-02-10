@@ -3,6 +3,6 @@
     "description": "This file is needed to make use of node in deno-ssr",
     "private": true,
     "dependencies": {
-        "@ribajs/node-ssr": "workspace:*"
+        "@ribajs/node-ssr": "workspace:^"
     }
 }
