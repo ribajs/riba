@@ -33,7 +33,7 @@
     "@ribajs/tsconfig": "workspace:^",
     "@ribajs/types": "workspace:^",
     "@types/jest": "^27.4.0",
-    "@types/node": "^17.0.16",
+    "@types/node": "^17.0.17",
     "@typescript-eslint/eslint-plugin": "^5.11.0",
     "@typescript-eslint/parser": "^5.11.0",
     "@yarnpkg/pnpify": "^3.1.1-rc.14",

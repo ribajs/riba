@@ -88,7 +88,7 @@
     "pkg-dir": "^6.0.1",
     "prettier": "2.5.1",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.5.3",
+    "rxjs": "^7.5.4",
     "sass": "^1.49.7",
     "source-map-support": "^0.5.21",
     "ts-jest": "^27.1.3",
