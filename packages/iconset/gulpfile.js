@@ -1,5 +1,5 @@
 const gulp = require("gulp");
-const svg = require("gulp-svgmin");
+const svgmin = require("gulp-svgmin");
 const exec = require("gulp-exec");
 const clean = require("gulp-clean");
 const debug = require("gulp-debug");
@@ -15,7 +15,39 @@ gulp.task("build:svg", () => {
   return gulp
     .src(svgSource)
     .pipe(debug())
-    .pipe(svg())
+    // TODO: Wait for MR: https://github.com/ben-eb/gulp-svgmin/issues/125
+    .pipe(svgmin((file) => {
+      const name = file.basename.split('.')[0];
+      return {
+        // This should be set so that the plugins list is passed directly to SVGO
+        full: true,
+        plugins: [
+          // You can declare the preset-default, override some of its plugins settings, and then extend it with other built-in plugins
+          {
+            name: 'preset-default',
+            params: {
+                overrides: {
+                  addAttributesToSVGElement: true,
+                  removeDimensions: true
+                }
+            }
+          },
+          {
+            name: "removeDimensions",
+          },
+          {
+            name: "addAttributesToSVGElement",
+            params: {
+              attributes: [
+                {
+                  class: `iconset-${name}`
+                }
+              ],
+            },
+          },
+        ],
+      }
+    }))
     .pipe(gulp.dest("./dist/svg"));
 });
 
