@@ -1,0 +1,20 @@
+.theme-os {
+  // Text colors on dark theme
+  @include color-scheme(dark) {
+    a {
+      color: $dark-link-color;
+      &:hover {
+        color: $dark-link-hover-color;
+      }
+    }
+  }
+}
+
+.theme-dark {
+  a {
+    color: $dark-link-color;
+    &:hover {
+      color: $dark-link-hover-color;
+    }
+  }
+}

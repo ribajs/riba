@@ -4,7 +4,7 @@ import {
   HttpService,
   HttpServiceResponse,
 } from "@ribajs/core";
-
+import { getLocation } from "@ribajs/utils";
 import { BaseCache } from "@ribajs/cache";
 
 export class Bs5IconComponent extends BasicComponent {
@@ -12,7 +12,7 @@ export class Bs5IconComponent extends BasicComponent {
   public static cache = new BaseCache<Promise<HttpServiceResponse<string>>>();
 
   static get observedAttributes(): string[] {
-    return ["size", "width", "height", "src", "color", "direction"];
+    return ["size", "width", "height", "src", "color", "direction", "alt"];
   }
 
   public scope: any = {};
@@ -81,6 +81,16 @@ export class Bs5IconComponent extends BasicComponent {
     return "";
   }
 
+  protected getBasename(src: string) {
+    const pathnames = getLocation(this.scope.src).pathname.split('/');
+    return pathnames?.[pathnames.length - 1];
+  }
+
+  protected getAlternativeText(src: string) {
+    const basename = this.getBasename(src);
+    return basename.split('.')[0]?.replaceAll("_", " ");
+  }
+
   protected async onSrcChanged() {
     let icon = "";
 
@@ -88,6 +98,8 @@ export class Bs5IconComponent extends BasicComponent {
       this.innerHTML = "";
       return;
     }
+    const alt = this.getAlternativeText(this.scope.src);
+    if (alt) this.setAttribute("alt", alt);
 
     const currentSvg = this.getSvg();
     const oldSrc = currentSvg ? currentSvg.getAttribute("src") : "";
@@ -244,7 +256,8 @@ export class Bs5IconComponent extends BasicComponent {
   protected connectedCallback() {
     super.connectedCallback();
     this.setAttribute("aria-hidden", "true");
-    this.setAttribute("role", "img");
+    this.setAttribute("role", "icon");
+    this.setAttribute("alt", "icon");
     this.classList.add("iconset");
     this.init(Bs5IconComponent.observedAttributes);
     // set default values

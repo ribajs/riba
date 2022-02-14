@@ -1,0 +1,59 @@
+//
+// Styles for light, dark and os default background theme
+// Background colors examples
+// - .bg-td-white  | White background on light theme
+// - .bg-td-blue    | Blue background on dark theme
+// - .bg-theme              | Dark background on dark theme, light background on light theme
+
+.theme-os {
+    .bg-theme {
+        @include color-scheme(light) {
+            @include bg-theme-color("light");
+        }
+        @include color-scheme(dark) {
+            @include bg-theme-color("dark");
+        }
+    }
+
+    // Backgrounds on light theme
+    @include color-scheme(light) {
+        @each $name, $value in $utilities-bg-colors {
+            .bg-tl-#{$name} {
+                @include bg-theme-color($name);
+            }
+        }
+    }
+
+    // Backgrounds on dark theme
+    @include color-scheme(dark) {
+        @each $name, $value in $utilities-bg-colors {
+            .bg-td-#{$name} {
+                @include bg-theme-color($name);
+            }
+        }
+    }
+}
+
+.theme-light {
+    .bg-theme {
+        @include bg-theme-color("light");
+    }
+
+    @each $name, $value in $utilities-bg-colors {
+        .bg-tl-#{$name} {
+            @include bg-theme-color($name);
+        }
+    }
+}
+
+.theme-dark {
+    .bg-theme {
+        @include bg-theme-color("dark");
+    }
+
+    @each $name, $value in $utilities-bg-colors {
+        .bg-td-#{$name} {
+            @include bg-theme-color($name);
+        }
+    }
+}

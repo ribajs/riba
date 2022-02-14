@@ -1,0 +1,56 @@
+//
+// Styles for light, dark and os default theme
+// Background colors examples
+// - .d-td-none      | display: none on light theme
+// - .d-td-block      | display: block on dark theme
+
+.theme-os {
+    // Show/Hide on light theme
+    @include color-scheme(light) {
+        .d-tl-none {
+            display: none;
+        }
+    
+        // Show on light theme
+        .d-tl-block {
+            display: block;
+        }
+    }
+
+    // Show/Hide on dark theme
+    @include color-scheme(dark) {
+        .d-td-none {
+            display: none;
+        }
+    
+        // Show on dark theme
+        .d-td-block {
+            display: block;
+        }
+    }
+
+}
+
+.theme-light {
+    // Hide on light theme
+    .d-tl-none {
+        display: none;
+    }
+
+    // Show on light theme
+    .d-tl-block {
+        display: block;
+    }
+}
+
+.theme-dark {
+    // Hide on dark theme
+    .d-td-none {
+        display: none;
+    }
+
+    // Show on dark theme
+    .d-td-block {
+        display: block;
+    }
+}

@@ -35,7 +35,8 @@ export interface Scope {
    * */
   shareItems: ShareItem[];
 
-  dropdownDirection: "up" | "down" | "right" | "left";
+  dropdownDirection: "up" | "down" | "start" | "end";
+  dropdownAlignment: "end" | "start" | "auto";
 
   labelFacebook: string;
   labelTwitter: string;
@@ -90,6 +91,7 @@ export class Bs5ShareComponent extends Component {
       "filename",
       "label",
       "dropdown-direction",
+      "dropdown-alignment",
       "label-facebook",
       "label-twitter",
       "label-pinterest",
@@ -245,6 +247,7 @@ export class Bs5ShareComponent extends Component {
       dropdownId: "dropdownShare" + Bs5ShareComponent.count,
       shareItems: [],
       dropdownDirection: "down",
+      dropdownAlignment: "auto",
       // Service labels
       labelFacebook: "Facebook",
       labelTwitter: "Twitter",

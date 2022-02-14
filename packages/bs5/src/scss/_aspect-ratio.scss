@@ -3,7 +3,7 @@
  */
 
 
-@each $breakpoint in map-keys($grid-breakpoints) {
+ @each $breakpoint in map-keys($grid-breakpoints) {
   $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
   @each $key, $ratio in $aspect-ratios {
     @include media-breakpoint-up($breakpoint) {
@@ -14,3 +14,24 @@
   }
 }
 
+.ratio {
+  // default fit is cover
+  > * {
+    object-fit: cover;
+  }
+  &.fit-cover {
+    > * {
+      object-fit: cover !important;
+    }
+  }
+  &.fit-contain {
+    > * {
+      object-fit: contain !important;
+    }
+  }
+  &.fit-initial {
+    > * {
+      object-fit: initial !important;
+    }
+  }
+}

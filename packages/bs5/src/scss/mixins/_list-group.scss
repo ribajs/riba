@@ -1,0 +1,67 @@
+@mixin list-group-light {
+  .list-group-item {
+    color: $list-group-color;
+    background-color: $list-group-bg;
+    border-color: $list-group-border-color;
+
+    &.disabled,
+    &:disabled {
+      color: $list-group-disabled-color;
+      background-color: $list-group-disabled-bg;
+    }
+
+    &.active {
+      color: $list-group-active-color;
+      background-color: $list-group-active-bg;
+      border-color: $list-group-active-border-color;
+    }
+
+    &.list-group-item-action {
+      color: $list-group-action-color;
+      &:hover,
+      &:focus {
+        color: $list-group-action-hover-color;
+        background-color: $list-group-hover-bg;
+      }
+    
+      &:active {
+        color: $list-group-action-active-color;
+        background-color: $list-group-action-active-bg;
+      }
+    }
+  }
+}
+
+@mixin list-group-dark {
+  .list-group-item {
+    color: $dark-list-group-color;
+    background-color: $dark-list-group-bg;
+    border-color: $dark-list-group-border-color;
+
+    &.disabled,
+    &:disabled {
+      color: $dark-list-group-disabled-color;
+      background-color: $dark-list-group-disabled-bg;
+    }
+
+    &.active {
+      color: $dark-list-group-active-color;
+      background-color: $dark-list-group-active-bg;
+      border-color: $dark-list-group-active-border-color;
+    }
+
+    &.list-group-item-action {
+      color: $dark-list-group-action-color;
+      &:hover,
+      &:focus {
+        color: $dark-list-group-action-hover-color;
+        background-color: $dark-list-group-hover-bg;
+      }
+    
+      &:active {
+        color: $dark-list-group-action-active-color;
+        background-color: $dark-list-group-action-active-bg;
+      }
+    }
+  }
+}

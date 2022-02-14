@@ -47,9 +47,9 @@
         }
     }
 
-    bs5-icon {
-        color: $navbar-light-active-color;
-    }
+    // bs5-icon {
+    //     color: $navbar-light-color;
+    // }
 }
 
 @mixin navbar-dark {
@@ -100,16 +100,7 @@
         }
     }
 
-    bs5-icon {
-        color: $navbar-dark-active-color;
-    }
-}
-
-@mixin bg-theme-color($name) {
-    --bs-bg-opacity: 1;
-    background-color: map-get($utilities-bg-colors, $name);
-}
-
-@mixin text-theme-color($name) {
-    color: map-get($theme-colors, $name);
+    // bs5-icon {
+    //     color: $navbar-dark-color;
+    // }
 }

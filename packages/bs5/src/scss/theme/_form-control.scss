@@ -1,0 +1,18 @@
+
+//
+// General dark form controls (plus a few specific high-level interventions)
+//
+
+.theme-os {
+    @include color-scheme(dark) {
+        .form-control {
+            @include dark-theme-form-control;
+        }
+    }
+}
+
+.theme-dark {
+    .form-control {
+        @include dark-theme-form-control;
+    }
+}
