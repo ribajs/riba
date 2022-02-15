@@ -4,7 +4,6 @@
 // - .list-group-tl-light          | Light dark group on light theme
 
 .theme-os {
-
     @include color-scheme(light) {
         // Makes default list-group dark on light theme (tl)
         .list-group {
@@ -54,4 +53,4 @@
 // Light list group on all themes
 .list-group.list-group-light {
     @include list-group-light;
-  }
+}

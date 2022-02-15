@@ -251,9 +251,44 @@ export const scrollTo = async (
   return scrollPromise;
 };
 
+export const getScrollHeight = (scrollElement: HTMLElement | (Window & typeof globalThis)): number => {
+  // if element is window
+  if ((scrollElement as Window).document) {
+    const win = scrollElement as Window;
+    const doc = win.document;
+    return (win as any).scrollMaxY ||
+      Math.max(
+        doc.body.scrollHeight,
+        doc.body.offsetHeight,
+        doc.documentElement.clientHeight,
+        doc.documentElement.scrollHeight,
+        doc.documentElement.offsetHeight,
+        0
+      );
+  }
+  return (scrollElement as HTMLElement).scrollHeight;
+}
+
+export const getScrollWidth = (scrollElement: HTMLElement | (Window & typeof globalThis)): number => {
+  // if element is window
+  if ((scrollElement as Window).document) {
+    const win = scrollElement as Window;
+    const doc = win.document;
+    return            (win as any).scrollMaxX ||
+      Math.max(
+        doc.body.scrollWidth,
+        doc.body.offsetWidth,
+        doc.documentElement.clientWidth,
+        doc.documentElement.scrollWidth,
+        doc.documentElement.offsetWidth
+      );
+  }
+  return (scrollElement as HTMLElement).scrollWidth;   
+}
+
 export const scrollToPosition = async (
   scrollElement: HTMLElement | (Window & typeof globalThis) | null,
-  position: number | "end" | "start",
+  position: number | "end" | "start" | "center",
   angle: "horizontal" | "vertical" | "both" = "vertical",
   behavior: "auto" | "smooth" | undefined = "smooth"
 ) => {
@@ -272,21 +307,18 @@ export const scrollToPosition = async (
         top = 0;
         break;
       case "end":
-        // if element is window
-        if ((scrollElement as Window).document) {
-          const win = scrollElement as Window;
-          const doc = win.document;
-          top =
-            (win as any).scrollMaxY ||
-            Math.max(
-              doc.body.scrollHeight,
-              doc.body.offsetHeight,
-              doc.documentElement.clientHeight,
-              doc.documentElement.scrollHeight,
-              doc.documentElement.offsetHeight
-            );
-        } else {
-          top = (scrollElement as HTMLElement).scrollHeight;
+        top = getScrollHeight(scrollElement);
+        break;
+      case "center":
+        top = getScrollHeight(scrollElement);
+        if (top) {
+          top /= 2;
+          // if element is window
+          if ((scrollElement as Window).document) {
+            top -= ((scrollElement as Window).visualViewport.height / 2);
+          } else {
+            top -= ((scrollElement as HTMLElement).clientHeight / 2);
+          }
         }
         break;
       default:
@@ -301,21 +333,18 @@ export const scrollToPosition = async (
         left = 0;
         break;
       case "end":
-        // if element is window
-        if ((scrollElement as Window).document) {
-          const win = scrollElement as Window;
-          const doc = win.document;
-          left =
-            (win as any).scrollMaxX ||
-            Math.max(
-              doc.body.scrollWidth,
-              doc.body.offsetWidth,
-              doc.documentElement.clientWidth,
-              doc.documentElement.scrollWidth,
-              doc.documentElement.offsetWidth
-            );
-        } else {
-          left = (scrollElement as HTMLElement).scrollWidth;
+        left = getScrollWidth(scrollElement);
+        break;
+      case "center":
+        left = getScrollWidth(scrollElement);
+        if (left) {
+          left /=  2;
+          // if element is window
+          if ((scrollElement as Window).document) {
+            left -= ((scrollElement as Window).visualViewport.width / 2);
+          } else {
+            left -= ((scrollElement as HTMLElement).clientWidth / 2);
+          }
         }
         break;
       default:

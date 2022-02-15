@@ -25,7 +25,7 @@ $languages: de en !default;
 $dark-theme-body-color:         map-get($theme-colors, "light") !default;
 $dark-theme-body-bg:            $gray-900 !default;
 
-$dark-link-color:               invert($link-color, 100%) !default;
+$dark-link-color:               $link-color;
 $dark-link-hover-color:         $link-hover-color !default;
 
 // Dark Forms
@@ -49,13 +49,13 @@ $dark-list-group-bg: $dark !default;
 $dark-list-group-border-color: darken($list-group-border-color, 50%) !default;
 
 $dark-list-group-disabled-color: invert($list-group-disabled-color, 100%) !default;
-$dark-list-group-disabled-bg: invert($list-group-disabled-bg, 100%) !default;
+$dark-list-group-disabled-bg: $list-group-disabled-bg !default;
 
 $dark-list-group-active-color: $list-group-active-color !default;
 $dark-list-group-active-bg: $list-group-active-bg !default;
 $dark-list-group-active-border-color: darken($list-group-active-border-color, 50%) !default;
 $dark-list-group-action-color: invert($list-group-action-color, 100%) !default;
 $dark-list-group-action-hover-color: invert($list-group-action-hover-color, 100%) !default;
-$dark-list-group-hover-bg: invert($list-group-hover-bg, 100%) !default;
+$dark-list-group-hover-bg: $list-group-hover-bg !default;
 $dark-list-group-action-active-color: invert($list-group-action-active-color, 100%) !default;
-$dark-list-group-action-active-bg: invert($list-group-action-active-bg, 100%) !default;
+$dark-list-group-action-active-bg: $list-group-action-active-bg !default;
