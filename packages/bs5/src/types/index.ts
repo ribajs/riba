@@ -1,7 +1,10 @@
+export * from "./jsx";
+
 export * from "./breakpoint";
 export * from "./carousel-options";
 export * from "./collapse-on-event-binder";
 export * from "./color-picker-options";
+export * from "./jsx/intrinsic-elements";
 export * from "./modal-notification-button";
 export * from "./module-options";
 export * from "./notification-event-binder-data";
@@ -20,6 +23,5 @@ export * from "./theme-changed-callback";
 export * from "./theme-changed-data";
 export * from "./theme-choice";
 export * from "./theme-data";
-export * from "./toggle-attribute";
 export * from "./toggle-class";
 export * from "./tooltip-options";

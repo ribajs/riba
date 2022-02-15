@@ -10,6 +10,8 @@ import {
   TemplateFunction,
   ObserverSyncCallback,
 } from "../types";
+import type { JsxElement } from "@ribajs/jsx";
+import { renderElement } from "@ribajs/jsx";
 import { Binder } from "../binder";
 import { Observer } from "../observer";
 import { parseJsonString, camelCase } from "@ribajs/utils/src/type";
@@ -299,7 +301,9 @@ export abstract class BasicComponent extends HTMLElement {
     this.debug("adoptedCallback called", oldDocument, newDocument);
   }
 
-  protected async loadTemplate(): Promise<HTMLElement | string | null> {
+  protected async loadTemplate(): Promise<
+    JsxElement | HTMLElement | string | null
+  > {
     if (this.templateLoaded === true) {
       // this.debug("template already loaded");
       return null;
@@ -312,23 +316,25 @@ export abstract class BasicComponent extends HTMLElement {
 
     this.templateLoaded = true;
 
+    const template = await this.template();
+
     // if innerHTML is null this component uses the innerHTML which he already has!
-    return Promise.resolve(this.template())
-      .then((template) => {
+    try {
+      if (template) {
         if (template instanceof HTMLElement) {
           this.innerHTML = "";
           this.appendChild(template as HTMLElement);
-        } else if (template !== null) {
-          this.innerHTML = template as string;
+        } else if (typeof template === "string") {
+          this.innerHTML = template;
+        } else if ((template as JsxElement).tag) {
+          this.innerHTML = renderElement(template as JsxElement);
         }
-
-        return template;
-      })
-      .catch((error) => {
-        console.error(error);
-        this.templateLoaded = false;
-        return null;
-      });
+      }
+      return template;
+    } catch (error) {
+      this.templateLoaded = false;
+      throw error;
+    }
   }
 
   protected async beforeTemplate(): Promise<any> {
@@ -336,7 +342,7 @@ export abstract class BasicComponent extends HTMLElement {
   }
 
   protected async afterTemplate(
-    template: HTMLElement | string | null
+    template: JsxElement | HTMLElement | string | null
   ): Promise<any> {
     this.debug("afterTemplate", template);
   }

@@ -16,6 +16,9 @@
     "noImplicitThis": true,
     "allowSyntheticDefaultImports": true,
     "incremental": true,
-    "lib": ["ESNext", "DOM"]
+    "lib": ["ESNext", "DOM"],
+    "jsx": "react",
+    "jsxFactory": "window.jsxCreateElement",
+    "jsxFragmentFactory": "window.jsxFragment"
   }
 }

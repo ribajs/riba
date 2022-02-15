@@ -1,9 +1,20 @@
 /* eslint-disable no-undef */
 module.exports = {
   presets: [
+    // Needed to transpile *.tsx files
     [
-      "@babel/typescript",
+      "@babel/preset-react",
       {
+        "pragma": "window.jsxCreateElement", // default pragma is React.createElement (only in classic runtime)
+        "pragmaFrag": "window.jsxFragment", // default is React.Fragment (only in classic runtime)
+        "throwIfNamespace": false, // defaults to true
+        "runtime": "classic" // defaults to classic
+      }
+    ],
+    [
+      "@babel/preset-typescript",
+      {
+        isTSX: true,
         allExtensions: true,
       },
     ],

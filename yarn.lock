@@ -1495,6 +1495,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/plugin-syntax-jsx@npm:^7.16.7":
+  version: 7.16.7
+  resolution: "@babel/plugin-syntax-jsx@npm:7.16.7"
+  dependencies:
+    "@babel/helper-plugin-utils": ^7.16.7
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: cd9b0e53c50e8ddb0afaf0f42e0b221a94e4f59aee32a591364266a31195c48cac5fef288d02c1c935686bda982d2e0f1ed61cceb995fc9f6fb09ef5ebecdd2b
+  languageName: node
+  linkType: hard
+
 "@babel/plugin-syntax-logical-assignment-operators@npm:^7.10.4, @babel/plugin-syntax-logical-assignment-operators@npm:^7.8.3":
   version: 7.10.4
   resolution: "@babel/plugin-syntax-logical-assignment-operators@npm:7.10.4"
@@ -1905,6 +1916,55 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/plugin-transform-react-display-name@npm:^7.16.7":
+  version: 7.16.7
+  resolution: "@babel/plugin-transform-react-display-name@npm:7.16.7"
+  dependencies:
+    "@babel/helper-plugin-utils": ^7.16.7
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 483154413671ab0a25ae37520b7cf5bfab0958c484a3707c6799b1f1436d1e51481bcc03fbfcdbf90bf6b46818d931ae35e515141d8354c3287351b4467376ba
+  languageName: node
+  linkType: hard
+
+"@babel/plugin-transform-react-jsx-development@npm:^7.16.7":
+  version: 7.16.7
+  resolution: "@babel/plugin-transform-react-jsx-development@npm:7.16.7"
+  dependencies:
+    "@babel/plugin-transform-react-jsx": ^7.16.7
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 697c71cb0ac9647a9b8c6f1aca99767cf06197f6c0b5d1f2e0c01f641e0706a380779f06836fdb941d3aa171f868091270fbe9fcfbfbcc2a24df5e60e04545e8
+  languageName: node
+  linkType: hard
+
+"@babel/plugin-transform-react-jsx@npm:^7.16.7":
+  version: 7.16.7
+  resolution: "@babel/plugin-transform-react-jsx@npm:7.16.7"
+  dependencies:
+    "@babel/helper-annotate-as-pure": ^7.16.7
+    "@babel/helper-module-imports": ^7.16.7
+    "@babel/helper-plugin-utils": ^7.16.7
+    "@babel/plugin-syntax-jsx": ^7.16.7
+    "@babel/types": ^7.16.7
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 0e82346d7c99b4467946d535a8c626a988e5670f65a15dee8520ce9cf4f0147c99decc1cbb4bd352083eaafd259ee3e4299854cac6304a83666d488edf4e58f6
+  languageName: node
+  linkType: hard
+
+"@babel/plugin-transform-react-pure-annotations@npm:^7.16.7":
+  version: 7.16.7
+  resolution: "@babel/plugin-transform-react-pure-annotations@npm:7.16.7"
+  dependencies:
+    "@babel/helper-annotate-as-pure": ^7.16.7
+    "@babel/helper-plugin-utils": ^7.16.7
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 715fe9c5fd10c5605a6de1d4436d29087878924758969427ba4d0b2bc274a436d3ac8f2777b744c988bdbb90f7e68dc2a82491db333ae7e0079fab776b543fae
+  languageName: node
+  linkType: hard
+
 "@babel/plugin-transform-regenerator@npm:^7.16.7":
   version: 7.16.7
   resolution: "@babel/plugin-transform-regenerator@npm:7.16.7"
@@ -2144,6 +2204,22 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: 8430e0e9e9d520b53e22e8c4c6a5a080a12b63af6eabe559c2310b187bd62ae113f3da82ba33e9d1d0f3230930ca702843aae9dd226dec51f7d7114dc1f51c10
+  languageName: node
+  linkType: hard
+
+"@babel/preset-react@npm:^7.16.7":
+  version: 7.16.7
+  resolution: "@babel/preset-react@npm:7.16.7"
+  dependencies:
+    "@babel/helper-plugin-utils": ^7.16.7
+    "@babel/helper-validator-option": ^7.16.7
+    "@babel/plugin-transform-react-display-name": ^7.16.7
+    "@babel/plugin-transform-react-jsx": ^7.16.7
+    "@babel/plugin-transform-react-jsx-development": ^7.16.7
+    "@babel/plugin-transform-react-pure-annotations": ^7.16.7
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: d0a052a418891ab6a02df9c75f0202964ad3b936c20bc44c81bcf3f02c057383f2fa329e0cc79baaac1b4e5e5c8924d3df93a2dd9319efe8042e3b33849978b3
   languageName: node
   linkType: hard
 
@@ -3565,6 +3641,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -3610,6 +3687,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -3639,6 +3717,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -3685,6 +3764,7 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.7
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -3729,6 +3809,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -3738,6 +3819,7 @@ __metadata:
     "@ribajs/eslint-config": "workspace:^"
     "@ribajs/events": "workspace:^"
     "@ribajs/extras": "workspace:^"
+    "@ribajs/jsx": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/types": "workspace:^"
     "@ribajs/utils": "workspace:^"
@@ -3799,6 +3881,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -3842,12 +3925,14 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
     "@ribajs/eslint-config": "workspace:^"
     "@ribajs/events": "workspace:^"
     "@ribajs/history": "workspace:^"
+    "@ribajs/jsx": "workspace:^"
     "@ribajs/ssr": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/types": "workspace:^"
@@ -3891,6 +3976,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -3951,6 +4037,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -4013,6 +4100,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -4077,6 +4165,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -4141,6 +4230,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -4203,6 +4293,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -4262,6 +4353,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -4319,6 +4411,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -4387,6 +4480,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -4450,6 +4544,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -4512,6 +4607,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -4575,6 +4671,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -4640,6 +4737,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -4707,6 +4805,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -4770,6 +4869,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -4832,6 +4932,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -4900,6 +5001,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -4963,6 +5065,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -5026,6 +5129,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -5090,6 +5194,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -5151,6 +5256,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -5212,6 +5318,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -5272,6 +5379,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -5329,6 +5437,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -5387,6 +5496,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -5449,6 +5559,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -5510,6 +5621,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -5519,6 +5631,71 @@ __metadata:
     "@ribajs/eslint-config": "workspace:^"
     "@ribajs/events": "workspace:^"
     "@ribajs/iconset": "workspace:^"
+    "@ribajs/tsconfig": "workspace:^"
+    "@ribajs/utils": "workspace:^"
+    "@ribajs/webpack-config": "workspace:^"
+    "@types/jest": ^27.4.0
+    "@typescript-eslint/eslint-plugin": ^5.11.0
+    "@typescript-eslint/experimental-utils": ^5.11.0
+    "@typescript-eslint/parser": ^5.11.0
+    "@yarnpkg/pnpify": ^3.1.1-rc.14
+    babel-jest: ^27.5.1
+    babel-loader: ^8.2.3
+    babel-plugin-array-includes: ^2.0.3
+    babelify: ^10.0.0
+    bootstrap: ^5.1.3
+    core-js: ^3.21.0
+    css-loader: ^6.6.0
+    eslint: ^8.8.0
+    eslint-config-prettier: ^8.3.0
+    eslint-plugin-prettier: ^4.0.0
+    html-loader: ^3.1.0
+    inspectpack: ^4.7.1
+    jest: ^27.5.1
+    jest-extended: ^1.2.1
+    mini-css-extract-plugin: ^2.5.3
+    postcss: ^8.4.6
+    postcss-loader: ^6.2.1
+    postcss-modules: ^4.3.0
+    postcss-preset-env: ^7.3.1
+    prettier: 2.5.1
+    pug-loader: ^2.4.0
+    sass: ^1.49.7
+    sass-loader: ^12.4.0
+    serve: ^13.0.2
+    typescript: 4.5.5
+    webpack: ^5.68.0
+    webpack-cli: ^4.9.2
+    webpack-dev-server: ^4.7.4
+  languageName: unknown
+  linkType: soft
+
+"@ribajs/demo-jsx@workspace:demos/jsx":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/demo-jsx@workspace:demos/jsx"
+  dependencies:
+    "@babel/cli": ^7.17.0
+    "@babel/core": ^7.17.2
+    "@babel/plugin-proposal-class-properties": ^7.16.7
+    "@babel/plugin-proposal-export-default-from": ^7.16.7
+    "@babel/plugin-proposal-object-rest-spread": ^7.16.7
+    "@babel/plugin-proposal-optional-chaining": ^7.16.7
+    "@babel/plugin-syntax-export-default-from": ^7.16.7
+    "@babel/plugin-syntax-top-level-await": ^7.14.5
+    "@babel/plugin-transform-runtime": ^7.17.0
+    "@babel/plugin-transform-typescript": ^7.16.8
+    "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
+    "@babel/preset-typescript": ^7.16.7
+    "@babel/runtime": ^7.17.2
+    "@babel/runtime-corejs3": ^7.17.2
+    "@ribajs/babel-config": "workspace:^"
+    "@ribajs/bs5": "workspace:^"
+    "@ribajs/core": "workspace:^"
+    "@ribajs/eslint-config": "workspace:^"
+    "@ribajs/extras": "workspace:^"
+    "@ribajs/iconset": "workspace:^"
+    "@ribajs/jsx": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
@@ -5573,6 +5750,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -5638,6 +5816,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -5700,6 +5879,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -5761,6 +5941,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -5823,6 +6004,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -5888,6 +6070,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -5954,6 +6137,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -6017,6 +6201,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -6198,6 +6383,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -6305,6 +6491,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -6414,6 +6601,7 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.7
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -6466,6 +6654,7 @@ __metadata:
     "@babel/plugin-proposal-class-properties": ^7.16.7
     "@babel/plugin-proposal-object-rest-spread": ^7.16.7
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -6518,6 +6707,7 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.7
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -6548,6 +6738,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@ribajs/jsx@workspace:^, @ribajs/jsx@workspace:packages/jsx":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/jsx@workspace:packages/jsx"
+  dependencies:
+    "@babel/runtime": ^7.17.2
+    "@babel/runtime-corejs3": ^7.17.2
+    "@ribajs/core": "workspace:^"
+    "@ribajs/tsconfig": "workspace:^"
+    "@ribajs/utils": "workspace:^"
+    "@types/node": ^17.0.17
+  languageName: unknown
+  linkType: soft
+
 "@ribajs/leaflet-map@workspace:^, @ribajs/leaflet-map@workspace:packages/leaflet-map":
   version: 0.0.0-use.local
   resolution: "@ribajs/leaflet-map@workspace:packages/leaflet-map"
@@ -6561,6 +6764,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -6605,6 +6809,7 @@ __metadata:
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -6643,6 +6848,7 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.7
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -6686,6 +6892,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -6725,6 +6932,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -6902,6 +7110,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -7045,6 +7254,7 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.7
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -7096,6 +7306,7 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.7
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -7141,6 +7352,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -7203,6 +7415,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -7332,6 +7545,7 @@ __metadata:
     "@babel/plugin-proposal-class-properties": ^7.16.7
     "@babel/plugin-proposal-object-rest-spread": ^7.16.7
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -7372,6 +7586,7 @@ __metadata:
     "@babel/plugin-proposal-class-properties": ^7.16.7
     "@babel/plugin-proposal-object-rest-spread": ^7.16.7
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -7430,6 +7645,7 @@ __metadata:
     "@babel/plugin-proposal-class-properties": ^7.16.7
     "@babel/plugin-proposal-object-rest-spread": ^7.16.7
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -7469,6 +7685,7 @@ __metadata:
     "@babel/plugin-proposal-class-properties": ^7.16.7
     "@babel/plugin-proposal-object-rest-spread": ^7.16.7
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -7589,6 +7806,7 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.16.7
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
@@ -17323,6 +17541,7 @@ fsevents@~2.3.1:
     "@babel/core": ^7.17.2
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     babel-loader: ^8.2.3
     http-server: ^14.1.0
@@ -26214,6 +26433,7 @@ fsevents@~2.3.1:
     "@babel/plugin-transform-runtime": ^7.17.0
     "@babel/plugin-transform-typescript": ^7.16.8
     "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
