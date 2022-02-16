@@ -1,200 +1,171 @@
 /*! PhotoSwipe original skin CSS by Dmitry Semenov | photoswipe.com | MIT license */
 
-.pswp__button {
-	width: 44px;
-	height: 44px;
-	position: relative;
-	background: none;
-	cursor: pointer;
-	overflow: visible;
-	-webkit-appearance: none;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border: 0;
-	padding: 0;
-	margin: 10px;
-	float: right;
-	opacity: 0.75;
-	transition: opacity 0.2s;
-	box-shadow: none;
-
-	&:focus,
-	&:hover {
-		opacity: 1;
-	}
-	
-	&:active {
-		outline: none;
-		opacity: 0.9;
-	}
-
-	&::-moz-focus-inner {
-		padding: 0;
-		border: 0
-	}
-}
-
-.pswp-control-prev,
-.pswp-control-next {
-	background: none;
-	top: 50%;
-	margin-top: -50px;
-	width: 70px;
-	height: 100px;
-	position: absolute;
-	padding: 5px;
-	background-color: var(--#{$pswp-variable-prefix}control-prev-next-bg-color);
-	color: var(--#{$pswp-variable-prefix}control-prev-next-icons-color);
-	backdrop-filter: blur($pswp-control-prev-next-blur);
-}
-
-.pswp-control-prev {
-	left: 0;
-}
-
-.pswp-control-next {
-	right: 0;
-}
-
-.pswp__counter {
-	position: absolute;
-	left: 0;
-	top: 0;
-	height: 44px;
-	font-size: 13px;
-	line-height: 44px;
-	color: #000;
-	opacity: 0.75;
-	padding: 0 10px;
-}
-
-.pswp__caption {
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	min-height: 44px;
-	
-	small {
-		font-size: 11px;
-		color: var(--#{$pswp-variable-prefix}color);
-	}
-}
-
-.pswp__caption__center {
-	text-align: center;
-	margin: 0 auto;
-	font-size: 13px;
-	padding: 10px;
-	line-height: 20px;
-	color: var(--#{$pswp-variable-prefix}color);
-}
-
-.pswp__caption--empty {
-	display: none;
-}
-
-.pswp__caption--fake {
-	visibility: hidden;
-}
-
-.pswp__ui {
-	-webkit-font-smoothing: auto;
-	visibility: visible;
-	opacity: 1;
-	z-index: $pswp-root-z-index + 50;
-}
-
-.pswp__top-bar, .pswp__bottom-bar {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-
-	position: absolute;
-	left: 0;
-	right: 0;
-	height: 44px;
-	width: 100%;
-	backdrop-filter: blur($pswp-top-bar-blur);
-	color: var(--#{$pswp-variable-prefix}top-bar-icons-color);
-	.pswp__bar-left, .pswp__bar-middle, .pswp__bar-right {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-}
-
-.pswp__top-bar {
-	top: 0;
-}
-
-.pswp__bottom-bar {
-	bottom: 0;
-}
-
-.pswp__caption,
-.pswp__top-bar,
-.pswp__bottom-bar,
-.pswp--has_mouse .pswp-control-prev,
-.pswp--has_mouse .pswp-control-next {
-	backface-visibility: hidden; 
-	will-change: opacity;
-	transition: opacity $pswp-controls-transition-duration cubic-bezier(.4,0,.22,1);
-}
-
-.pswp--has_mouse {
-	.pswp-control-prev,
-	.pswp-control-next {
-		visibility: visible;
-	}
-}
-
-.pswp__top-bar,
-.pswp__caption {
-	background-color: var(--#{$pswp-variable-prefix}top-bar-bg-color);
-}
-
-.pswp__ui--fit {
-	.pswp__top-bar,
-	.pswp__caption {
-		background-color: rgba(255,255,255,0.3);
-	}
-}
-	
-.pswp__ui--idle {
-	.pswp__top-bar { 
-		opacity: 0; 
+bs5-photoswipe {
+	.btn {
+		margin: 8px;
 	}
 
 	.pswp-control-prev,
 	.pswp-control-next {
-		opacity: 0;
+		background: none;
+		top: 50%;
+		margin-top: -50px;
+		width: 70px;
+		height: 100px;
+		position: absolute;
+		padding: 5px;
+		background-color: var(--#{$pswp-variable-prefix}control-prev-next-bg-color);
+		color: var(--#{$pswp-variable-prefix}control-prev-next-icons-color);
+		backdrop-filter: blur($pswp-control-prev-next-blur);
 	}
-}
-
-.pswp__ui--hidden {
-	.pswp__top-bar,
-	.pswp__caption,
-	.pswp-control-prev,
+	
+	.pswp-control-prev {
+		left: 0;
+	}
+	
 	.pswp-control-next {
-		/* Force paint & create composition layer for controls. */
-		opacity: 0.001; 
+		right: 0;
 	}
-}
-
-.pswp__ui--one-slide {
-	.pswp-control-prev,
-	.pswp-control-next,
+	
 	.pswp__counter {
-		display: none;
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 44px;
+		font-size: 13px;
+		line-height: 44px;
+		color: #000;
+		opacity: 0.75;
+		padding: 0 10px;
 	}
-}
-
-@if $pswp-include-minimal-style == true {
-	.pswp--minimal--dark {
-		.pswp__top-bar {
-			background: none;
+	
+	.pswp__caption {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		min-height: 44px;
+		
+		small {
+			font-size: 11px;
+			color: var(--#{$pswp-variable-prefix}color);
 		}
 	}
+	
+	.pswp__caption__center {
+		text-align: center;
+		margin: 0 auto;
+		font-size: 13px;
+		padding: 10px;
+		line-height: 20px;
+		color: var(--#{$pswp-variable-prefix}color);
+	}
+	
+	.pswp__caption--empty {
+		display: none;
+	}
+	
+	.pswp__caption--fake {
+		visibility: hidden;
+	}
+	
+	.pswp__ui {
+		-webkit-font-smoothing: auto;
+		visibility: visible;
+		opacity: 1;
+		z-index: $pswp-root-z-index + 50;
+	}
+	
+	.pswp__top-bar, .pswp__bottom-bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	
+		position: absolute;
+		left: 0;
+		right: 0;
+		height: 44px;
+		width: 100%;
+		backdrop-filter: blur($pswp-top-bar-blur);
+		color: var(--#{$pswp-variable-prefix}top-bar-icons-color);
+		.pswp__bar-left, .pswp__bar-middle, .pswp__bar-right {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+	
+	.pswp__top-bar {
+		top: 0;
+	}
+	
+	.pswp__bottom-bar {
+		bottom: 0;
+	}
+	
+	.pswp__caption,
+	.pswp__top-bar,
+	.pswp__bottom-bar,
+	.pswp--has_mouse .pswp-control-prev,
+	.pswp--has_mouse .pswp-control-next {
+		backface-visibility: hidden; 
+		will-change: opacity;
+		transition: opacity $pswp-controls-transition-duration cubic-bezier(.4,0,.22,1);
+	}
+	
+	.pswp--has_mouse {
+		.pswp-control-prev,
+		.pswp-control-next {
+			visibility: visible;
+		}
+	}
+	
+	.pswp__top-bar,
+	.pswp__caption {
+		background-color: var(--#{$pswp-variable-prefix}top-bar-bg-color);
+	}
+	
+	.pswp__ui--fit {
+		.pswp__top-bar,
+		.pswp__caption {
+			background-color: rgba(255,255,255,0.3);
+		}
+	}
+		
+	.pswp__ui--idle {
+		.pswp__top-bar { 
+			opacity: 0; 
+		}
+	
+		.pswp-control-prev,
+		.pswp-control-next {
+			opacity: 0;
+		}
+	}
+	
+	.pswp__ui--hidden {
+		.pswp__top-bar,
+		.pswp__caption,
+		.pswp-control-prev,
+		.pswp-control-next {
+			/* Force paint & create composition layer for controls. */
+			opacity: 0.001; 
+		}
+	}
+	
+	.pswp__ui--one-slide {
+		.pswp-control-prev,
+		.pswp-control-next,
+		.pswp__counter {
+			display: none;
+		}
+	}
+	
+	@if $pswp-include-minimal-style == true {
+		.pswp--minimal--dark {
+			.pswp__top-bar {
+				background: none;
+			}
+		}
+	}	
 }

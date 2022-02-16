@@ -23,23 +23,31 @@
 }
 
 // Default
-:root {
+bs5-photoswipe {
   @include photoswipe-light;
 }
 
 .theme-os {
   @include color-scheme(light) {
-    @include photoswipe-light;
+    bs5-photoswipe {
+      @include photoswipe-light;
+    }
   }
   @include color-scheme(dark) {
-    @include photoswipe-dark;
+    bs5-photoswipe {
+      @include photoswipe-dark;
+    }
   }
 }
 
 .theme-light {
-  @include photoswipe-light;
+  bs5-photoswipe {
+    @include photoswipe-light;
+  }
 }
 
 .theme-dark {
-  @include photoswipe-dark;
+  bs5-photoswipe {
+    @include photoswipe-dark;
+  }
 }
