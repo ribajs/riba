@@ -12,7 +12,7 @@
     "@babel/runtime": "^7.17.2",
     "@babel/runtime-corejs3": "^7.17.2",
     "@ribajs/tsconfig": "workspace:^",
-    "@types/node": "^17.0.17",
+    "@types/node": "^17.0.18",
     "gamecontroller.js": "workspace:^"
   }
 }
