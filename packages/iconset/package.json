@@ -52,7 +52,7 @@
   ],
   "devDependencies": {
     "@babel/runtime-corejs3": "^7.17.2",
-    "core-js": "^3.21.0",
+    "core-js": "^3.21.1",
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
     "gulp-debug": "^4.0.0",
