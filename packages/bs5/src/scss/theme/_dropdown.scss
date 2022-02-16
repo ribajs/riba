@@ -1,0 +1,52 @@
+.theme-os {
+    @include color-scheme(light) {
+        // Makes default dropdown-menu light on light theme
+        .dropdown-menu {
+            @include dropdown-menu-light;
+        }
+        // Dark group on light theme (tl)
+        .dropdown-menu-tl-dark {
+            @include dropdown-menu-dark;
+        }
+    }
+
+    @include color-scheme(dark) {
+        // Makes default dropdown-menu dark on dark theme (td)
+        .dropdown-menu {
+            @include dropdown-menu-dark;
+        }
+        // Light list group on dark theme (td)
+        .dropdown-menu-td-light {
+            @include dropdown-menu-light;
+        }
+    }
+}
+
+.theme-dark {
+    // Makes default dropdown-menu dark on dark theme (td)
+    .dropdown-menu {
+        @include dropdown-menu-dark;
+    }
+    // Light list group on dark theme (td)
+    .dropdown-menu-td-light {
+        @include dropdown-menu-light;
+    }
+}
+
+.theme-light {
+    // Dark list group on light theme (tl)
+    .dropdown-menu-tl-dark {
+        @include dropdown-menu-dark;
+    }
+}
+
+// Dark list group on all themes
+// There is already a official dropdown-menu-dark
+// .dropdown-menu.dropdown-menu-dark {
+//   @include dropdown-menu-dark;
+// }
+
+// Light list group on all themes
+.dropdown-menu.dropdown-menu-light {
+    @include dropdown-menu-light;
+}

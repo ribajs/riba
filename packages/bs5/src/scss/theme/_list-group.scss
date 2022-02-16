@@ -5,9 +5,9 @@
 
 .theme-os {
     @include color-scheme(light) {
-        // Makes default list-group dark on light theme (tl)
+        // Makes default list-group light on light theme
         .list-group {
-            @include list-group-dark;
+            @include list-group-light;
         }
         // Dark group on light theme (tl)
         .list-group-tl-dark {
@@ -16,7 +16,7 @@
     }
 
     @include color-scheme(dark) {
-        // Makes default list-group dark on dark theme (td)
+        // Makes default list-group dark on dark theme
         .list-group {
             @include list-group-dark;
         }
