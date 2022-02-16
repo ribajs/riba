@@ -1,5 +1,5 @@
 <div rv-add-class="'drop' | append dropdownDirection">
-  <div class="dropdown-toggle dropdown-toggle-share d-flex align-items-center" rv-id="dropdownId" rv-template="labelTemplate"></div>
+  <button class="btn btn-icon dropdown-toggle dropdown-toggle-share d-flex align-items-center" rv-id="dropdownId" rv-template="labelTemplate"></button>
   <div class="dropdown-menu" rv-aria-labelledby="dropdownId" rv-add-class="'dropdown-menu-' | append dropdownAlignment">
 
     <div rv-each-item="shareItems" rv-show="item.available" rv-on-click="shareOnService | args item">
