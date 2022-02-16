@@ -21,13 +21,14 @@ $pswp-control-prev-next-blur: $pswp-top-bar-blur !default;
 
 // LIGHT
 $pswp-bg: $body-bg !default;
-$pswp-placeholder-color: $body-color !default;
+$pswp-color: $body-color !default;
+$pswp-placeholder-color: $pswp-color !default;
 
 // "Image not loaded" text color
 $pswp-error-text-color: $gray-300 !default;
 
-$pswp-top-bar-icons-color: $body-color !default;
-$pswp-top-bar-bg-color: rgba($body-bg, 0.5) !default;
+$pswp-top-bar-icons-color: $pswp-color !default;
+$pswp-top-bar-bg-color: rgba($pswp-bg, 0.5) !default;
 
 $pswp-control-prev-next-bg-color: $pswp-top-bar-bg-color !default;
 $pswp-control-prev-next-icons-color: $pswp-top-bar-icons-color !default;
@@ -35,12 +36,13 @@ $pswp-control-prev-next-icons-color: $pswp-top-bar-icons-color !default;
 
 // DARK
 $pswp-dark-bg: $dark-body-bg !default;
-$pswp-dark-placeholder-color: $dark-body-color !default;
+$pswp-dark-color: $dark-body-color !default;
+$pswp-dark-placeholder-color: $pswp-dark-color !default;
 
 // "Image not loaded" text color
 $pswp-dark-error-text-color: $gray-700 !default;
 
-$pswp-dark-top-bar-icons-color: $dark-body-color !default;
+$pswp-dark-top-bar-icons-color: $pswp-dark-color !default;
 $pswp-dark-top-bar-bg-color: rgba($dark-body-bg, 0.5) !default;
 
 $pswp-dark-control-prev-next-bg-color: $pswp-dark-top-bar-bg-color !default;

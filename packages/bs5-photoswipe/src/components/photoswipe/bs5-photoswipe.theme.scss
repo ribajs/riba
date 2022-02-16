@@ -1,6 +1,7 @@
 // The default dropdown menu
 @mixin photoswipe-light {
   --#{$pswp-variable-prefix}bg: #{$pswp-bg};
+  --#{$pswp-variable-prefix}color: #{$pswp-color};
   --#{$pswp-variable-prefix}placeholder-color: #{$pswp-placeholder-color};
   --#{$pswp-variable-prefix}error-text-color: #{$pswp-error-text-color};
   --#{$pswp-variable-prefix}top-bar-icons-color: #{$pswp-top-bar-icons-color};
@@ -12,12 +13,18 @@
 // Bootstrap has already a dark variant, we just set the official css variables here
 @mixin photoswipe-dark {
   --#{$pswp-variable-prefix}bg: #{$pswp-dark-bg};
+  --#{$pswp-variable-prefix}color: #{$pswp-dark-color};
   --#{$pswp-variable-prefix}placeholder-color: #{$pswp-dark-placeholder-color};
   --#{$pswp-variable-prefix}error-text-color: #{$pswp-dark-error-text-color};
   --#{$pswp-variable-prefix}top-bar-icons-color: #{$pswp-dark-top-bar-icons-color};
   --#{$pswp-variable-prefix}top-bar-bg-color: #{$pswp-dark-top-bar-bg-color};
   --#{$pswp-variable-prefix}control-prev-next-bg-color: #{$pswp-dark-control-prev-next-bg-color};
   --#{$pswp-variable-prefix}control-prev-next-icons-color: #{$pswp-dark-control-prev-next-icons-color};
+}
+
+// Default
+:root {
+  @include photoswipe-light;
 }
 
 .theme-os {
