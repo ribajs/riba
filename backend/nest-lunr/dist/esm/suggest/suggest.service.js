@@ -84,7 +84,7 @@ let SuggestService = class SuggestService {
                         exists.score += result.score;
                     }
                     else {
-                        allResults.push(Object.assign(Object.assign({}, result), { ns: [ns] }));
+                        allResults.push({ ...result, ns: [ns] });
                     }
                 }
             }
@@ -102,9 +102,8 @@ let SuggestService = class SuggestService {
         return suggest.lucky(word, alphabet);
     }
     luckyAll(word, alphabet) {
-        var _a;
         const suggestions = this.suggestAll(word, alphabet);
-        return (_a = suggestions[0]) === null || _a === void 0 ? void 0 : _a.word;
+        return suggestions[0]?.word;
     }
     export(ns) {
         const suggest = this.get(ns);

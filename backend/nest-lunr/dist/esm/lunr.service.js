@@ -14,9 +14,8 @@ let LunrService = LunrService_1 = class LunrService {
         this.data = {};
     }
     getData(ns = 'main', resultRef) {
-        var _a;
         const ref = this.getRef(ns);
-        const data = (_a = this.data[ns]) === null || _a === void 0 ? void 0 : _a.find((data) => data[ref] === resultRef);
+        const data = this.data[ns]?.find((data) => data[ref] === resultRef);
         return Object.assign({}, data);
     }
     getSortedPositions(metadata) {
@@ -45,14 +44,13 @@ let LunrService = LunrService_1 = class LunrService {
         return [target.slice(0, position), insert, target.slice(position)].join('');
     }
     highlightResult(result) {
-        var _a;
         const metadata = result.matchData.metadata;
         const sortedPositions = this.getSortedPositions(metadata);
         for (const sortPos of sortedPositions) {
             const prop = sortPos.prop;
             const start = sortPos.start;
             const end = sortPos.end;
-            if ((_a = result.data) === null || _a === void 0 ? void 0 : _a[prop]) {
+            if (result.data?.[prop]) {
                 let text = result.data[prop];
                 if (typeof text === 'string') {
                     text = this.insertAt(text, '</span>', end);
@@ -67,16 +65,13 @@ let LunrService = LunrService_1 = class LunrService {
         return results.map((result) => this.highlightResult(result));
     }
     getRef(ns = 'main') {
-        var _a;
-        return ((_a = this.getOptions(ns)) === null || _a === void 0 ? void 0 : _a.ref) || 'id';
+        return this.getOptions(ns)?.ref || 'id';
     }
     getOptions(ns = 'main') {
-        var _a;
-        return (_a = this.builders[ns]) === null || _a === void 0 ? void 0 : _a.options;
+        return this.builders[ns]?.options;
     }
     create(namespace = 'main', options = {}) {
-        var _a, _b;
-        if ((_a = this.builders[namespace]) === null || _a === void 0 ? void 0 : _a.builder) {
+        if (this.builders[namespace]?.builder) {
             return this.builders[namespace].builder;
         }
         options.metadataAllowList = options.metadataAllowList || ['position'];
@@ -143,18 +138,16 @@ let LunrService = LunrService_1 = class LunrService {
             this.builders[namespace].builder = builder;
             this.builders[namespace].options = options;
         });
-        return (_b = this.builders[namespace]) === null || _b === void 0 ? void 0 : _b.builder;
+        return this.builders[namespace]?.builder;
     }
     buildIndex(namespace) {
-        var _a, _b;
         if (this.builders[namespace]) {
-            this.indices[namespace] = (_b = (_a = this.builders[namespace]) === null || _a === void 0 ? void 0 : _a.builder) === null || _b === void 0 ? void 0 : _b.build();
+            this.indices[namespace] = this.builders[namespace]?.builder?.build();
         }
         return this.indices[namespace];
     }
     getBuilder(namespace) {
-        var _a;
-        return (_a = this.builders[namespace]) === null || _a === void 0 ? void 0 : _a.builder;
+        return this.builders[namespace]?.builder;
     }
     getIndex(namespace) {
         if (!this.indices[namespace]) {
@@ -166,13 +159,12 @@ let LunrService = LunrService_1 = class LunrService {
         return Object.keys(this.indices);
     }
     add(ns, doc, attributes) {
-        var _a;
         const builder = this.getBuilder(ns);
         if (!builder) {
             return null;
         }
         const options = this.getOptions(ns);
-        if ((_a = options.data) === null || _a === void 0 ? void 0 : _a.include) {
+        if (options.data?.include) {
             this.data[ns] = this.data[ns] || [];
             this.data[ns].push(doc);
         }
@@ -202,7 +194,6 @@ let LunrService = LunrService_1 = class LunrService {
         return builder.use(plugin, ...args);
     }
     search(ns, query) {
-        var _a, _b, _c;
         const index = this.getIndex(ns);
         if (!index) {
             return null;
@@ -214,13 +205,16 @@ let LunrService = LunrService_1 = class LunrService {
             return null;
         }
         for (const result of results) {
-            const resultExt = Object.assign(Object.assign({}, result), { ns });
-            if ((_a = options.data) === null || _a === void 0 ? void 0 : _a.include) {
+            const resultExt = {
+                ...result,
+                ns,
+            };
+            if (options.data?.include) {
                 resultExt.data = this.getData(ns, result.ref);
             }
             resultsExt.push(resultExt);
         }
-        if (((_b = options.data) === null || _b === void 0 ? void 0 : _b.include) && ((_c = options.data) === null || _c === void 0 ? void 0 : _c.highlight)) {
+        if (options.data?.include && options.data?.highlight) {
             this.highlightResults(resultsExt);
         }
         resultsExt.sort((a, b) => {

@@ -27,8 +27,12 @@ let HttpExceptionFilter = class HttpExceptionFilter {
         this.theme = theme;
     }
     getErrorObject(exception, req, overwriteException) {
-        const status = (0, node_ssr_1.getStatus)(overwriteException || exception);
+        const currentMessage = (0, node_ssr_1.getMessage)(exception);
         const message = (0, node_ssr_1.getMessage)(overwriteException || exception);
+        if (currentMessage === message) {
+            return undefined;
+        }
+        const status = (0, node_ssr_1.getStatus)(overwriteException || exception);
         const stack = (0, node_ssr_1.getStack)(overwriteException || exception);
         const errorObj = {
             statusCode: status,

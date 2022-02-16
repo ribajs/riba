@@ -89,7 +89,7 @@ class Suggest {
         if (Array.isArray(ignoreWords)) {
             ignoreWords = ignoreWords.map((ignoreWord) => ignoreWord.toLowerCase());
         }
-        if ((opts === null || opts === void 0 ? void 0 : opts.reset) === true) {
+        if (opts?.reset === true) {
             this.ignoreWords = ignoreWords;
         }
         else {

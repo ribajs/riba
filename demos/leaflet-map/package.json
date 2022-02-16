@@ -65,7 +65,7 @@
     "postcss-preset-env": "^7.4.0",
     "prettier": "2.5.1",
     "pug-loader": "^2.4.0",
-    "resolve-url-loader": "^4.0.0",
+    "resolve-url-loader": "^5.0.0",
     "sass": "^1.49.7",
     "sass-loader": "^12.6.0",
     "serve": "^13.0.2",
