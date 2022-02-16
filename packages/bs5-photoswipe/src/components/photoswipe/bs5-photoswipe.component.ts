@@ -210,14 +210,14 @@ export class PhotoswipeComponent extends Component {
     shareText: undefined,
     shareLabel: undefined,
     shareDropdownDirection: undefined,
-    shareLabelFacebook: undefined,
-    shareLabelTwitter: undefined,
-    shareLabelPinterest: undefined,
-    shareLabelWhatsapp: undefined,
-    shareLabelTelegram: undefined,
-    shareLabelEmail: undefined,
-    shareLabelDownload: undefined,
-    shareLabelClipboard: undefined,
+    shareLabelFacebook: "Facebook",
+    shareLabelTwitter: "Twitter",
+    shareLabelPinterest: "Pinterest",
+    shareLabelWhatsapp: "Whatsapp",
+    shareLabelTelegram: "Telegram",
+    shareLabelEmail: "Email",
+    shareLabelDownload: "Download",
+    shareLabelClipboard: "Copy to clipboard",
   };
 
   constructor() {
