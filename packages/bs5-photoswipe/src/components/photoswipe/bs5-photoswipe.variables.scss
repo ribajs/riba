@@ -1,20 +1,47 @@
+// GENERAL
+
+$pswp-variable-prefix: pswp- !default;
+
 $pswp-show-hide-transition-duration: 333ms !default;
 $pswp-controls-transition-duration: 333ms !default;
-$pswp-background-color: $body-bg !default;
-$pswp-placeholder-color: $body-color !default;
+
 // disable .pswp * { box-sizing:border-box } (in case you already have it in your site css)
 $pswp-box-sizing-border-box: true !default;
+
 $pswp-root-z-index: 3500 !default;
+
 // path to skin assets folder (preloader, PNG and SVG sprite)
 $pswp-assets-path: './assets' !default;
-// "Image not loaded" text color
-$pswp-error-text-color: #CCC !default;
+
 $pswp-include-minimal-style: true !default;
 
 $pswp-top-bar-blur: 2px !default;
+
+$pswp-control-prev-next-blur: $pswp-top-bar-blur !default;
+
+// LIGHT
+$pswp-bg: $body-bg !default;
+$pswp-placeholder-color: $body-color !default;
+
+// "Image not loaded" text color
+$pswp-error-text-color: $gray-300 !default;
+
 $pswp-top-bar-icons-color: $body-color !default;
 $pswp-top-bar-bg-color: rgba($body-bg, 0.5) !default;
 
-$pswp-control-prev-next-blur: $pswp-top-bar-blur !default;
 $pswp-control-prev-next-bg-color: $pswp-top-bar-bg-color !default;
 $pswp-control-prev-next-icons-color: $pswp-top-bar-icons-color !default;
+
+
+// DARK
+$pswp-dark-bg: $dark-body-bg !default;
+$pswp-dark-placeholder-color: $dark-body-color !default;
+
+// "Image not loaded" text color
+$pswp-dark-error-text-color: $gray-700 !default;
+
+$pswp-dark-top-bar-icons-color: $dark-body-color !default;
+$pswp-dark-top-bar-bg-color: rgba($dark-body-bg, 0.5) !default;
+
+$pswp-dark-control-prev-next-bg-color: $pswp-dark-top-bar-bg-color !default;
+$pswp-dark-control-prev-next-icons-color: $pswp-dark-top-bar-icons-color !default;

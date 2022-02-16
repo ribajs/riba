@@ -1,6 +1,6 @@
 $pswp-show-hide-transition-duration: 333ms !default;
 $pswp-controls-transition-duration: 333ms !default;
-$pswp-background-color: $body-bg !default;
+$pswp-bg: $body-bg !default;
 $pswp-placeholder-color: $body-color !default;
 // disable .pswp * { box-sizing:border-box } (in case you already have it in your site css)
 $pswp-box-sizing-border-box: true !default;

@@ -14,8 +14,8 @@
     // Root css variables
     // See https://github.com/twbs/bootstrap/blob/main/scss/_root.scss
     @include color-scheme(dark) {
-        --#{$variable-prefix}body-color: #{$dark-theme-body-color};
-        --#{$variable-prefix}body-bg: #{$dark-theme-body-bg};
+        --#{$variable-prefix}body-color: #{$dark-body-color};
+        --#{$variable-prefix}body-bg: #{$dark-body-bg};
     }
 }
 
@@ -25,6 +25,6 @@
 .theme-dark {
     // Root css variables
     // See https://github.com/twbs/bootstrap/blob/main/scss/_root.scss
-    --#{$variable-prefix}body-color: #{$dark-theme-body-color};
-    --#{$variable-prefix}body-bg: #{$dark-theme-body-bg};
+    --#{$variable-prefix}body-color: #{$dark-body-color};
+    --#{$variable-prefix}body-bg: #{$dark-body-bg};
 }

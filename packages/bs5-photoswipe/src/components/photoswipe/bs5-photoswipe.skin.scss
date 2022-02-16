@@ -1,29 +1,5 @@
-/*! PhotoSwipe Default UI CSS by Dmitry Semenov | photoswipe.com | MIT license */
+/*! PhotoSwipe original skin CSS by Dmitry Semenov | photoswipe.com | MIT license */
 
-/*
-
-	Contents:
-
-	1. Buttons
-	2. Share modal and links
-	3. Index indicator ("1 of X" counter)
-	4. Caption
-	5. Loading indicator
-	6. Additional styles (root element, top bar, idle state, hidden state, etc.)
-
-*/
-
-// PhotoSwipe uses Autoprefixer, so vendor prefixed are added automatically when needed.
-
-
-
-/*
-	
-	1. Buttons
-
- */
-
-/* <button> css reset */
 .pswp__button {
 	width: 44px;
 	height: 44px;
@@ -59,10 +35,6 @@
 	}
 }
 
-/*
-	Arrow buttons hit area
-	(icon is added to :before pseudo-element)
-*/
 .pswp-control-prev,
 .pswp-control-next {
 	background: none;
@@ -72,8 +44,8 @@
 	height: 100px;
 	position: absolute;
 	padding: 5px;
-	background-color: $pswp-control-prev-next-bg-color;
-	color: $pswp-control-prev-next-icons-color;
+	background-color: var(--#{$pswp-variable-prefix}control-prev-next-bg-color);
+	color: var(--#{$pswp-variable-prefix}control-prev-next-icons-color);
 	backdrop-filter: blur($pswp-control-prev-next-blur);
 }
 
@@ -84,13 +56,6 @@
 .pswp-control-next {
 	right: 0;
 }
-
-
-/*
-
-	3. Index indicator ("1 of X" counter)
-
- */
 
 .pswp__counter {
 	position: absolute;
@@ -103,13 +68,6 @@
 	opacity: 0.75;
 	padding: 0 10px;
 }
-
-
-/*
-	
-	4. Caption
-
- */
 
 .pswp__caption {
 	position: absolute;
@@ -125,8 +83,7 @@
 }
 
 .pswp__caption__center {
-	text-align: left;
-	max-width: 420px;
+	text-align: center;
 	margin: 0 auto;
 	font-size: 13px;
 	padding: 10px;
@@ -138,18 +95,10 @@
 	display: none;
 }
 
-/* Fake caption element, used to calculate height of next/prev image */
 .pswp__caption--fake {
 	visibility: hidden;
 }
 
-/*
-	
-	6. Additional styles
-
- */
-
-/* root element of UI */
 .pswp__ui {
 	-webkit-font-smoothing: auto;
 	visibility: visible;
@@ -157,7 +106,6 @@
 	z-index: $pswp-root-z-index + 50;
 }
 
-/* top black bar with buttons and "1 of X" indicator */
 .pswp__top-bar, .pswp__bottom-bar {
 	display: flex;
 	align-items: center;
@@ -169,7 +117,7 @@
 	height: 44px;
 	width: 100%;
 	backdrop-filter: blur($pswp-top-bar-blur);
-	color: $pswp-top-bar-icons-color;
+	color: var(--#{$pswp-variable-prefix}top-bar-icons-color);
 	.pswp__bar-left, .pswp__bar-middle, .pswp__bar-right {
 		display: flex;
 		align-items: center;
@@ -195,7 +143,6 @@
 	transition: opacity $pswp-controls-transition-duration cubic-bezier(.4,0,.22,1);
 }
 
-/* pswp--has_mouse class is added only when two subsequent mousemove events occur */
 .pswp--has_mouse {
 	.pswp-control-prev,
 	.pswp-control-next {
@@ -205,18 +152,15 @@
 
 .pswp__top-bar,
 .pswp__caption {
-	background-color: $pswp-top-bar-bg-color;
+	background-color: var(--#{$pswp-variable-prefix}top-bar-bg-color);
 }
 
-/* pswp__ui--fit class is added when main image "fits" between top bar and bottom bar (caption) */
 .pswp__ui--fit {
 	.pswp__top-bar,
 	.pswp__caption {
 		background-color: rgba(255,255,255,0.3);
 	}
 }
-
-/* pswp__ui--idle class is added when mouse isn't moving for several seconds (JS option timeToIdle) */
 	
 .pswp__ui--idle {
 	.pswp__top-bar { 
@@ -229,10 +173,6 @@
 	}
 }
 
-/*
-	pswp__ui--hidden class is added when controls are hidden
-	e.g. when user taps to toggle visibility of controls
-*/
 .pswp__ui--hidden {
 	.pswp__top-bar,
 	.pswp__caption,
@@ -243,7 +183,6 @@
 	}
 }
 
-/* pswp__ui--one-slide class is added when there is just one item in gallery */
 .pswp__ui--one-slide {
 	.pswp-control-prev,
 	.pswp-control-next,

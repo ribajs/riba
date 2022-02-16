@@ -1,4 +1,4 @@
 @mixin bg-theme-color($color-name) {
-  --bs-bg-opacity: 1;
+  --#{$variable-prefix}bg-opacity: 1;
   background-color: map-get($utilities-bg-colors, $color-name);
 }

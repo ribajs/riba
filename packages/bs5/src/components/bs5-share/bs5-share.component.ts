@@ -72,7 +72,6 @@ declare global {
  *  * https://github.com/nimiq/web-share-shim
  *  * http://webintents.org/
  *  * http://chriswren.github.io/native-social-interactions/
- *  * https://www.sharethis.com/platform/share-buttons/
  *  * https://github.com/dimsemenov/PhotoSwipe/blob/master/src/js/ui/photoswipe-ui-default.js
  *
  */

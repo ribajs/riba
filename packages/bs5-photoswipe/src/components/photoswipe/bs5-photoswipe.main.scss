@@ -1,12 +1,5 @@
-/*! PhotoSwipe main CSS by Dmitry Semenov | photoswipe.com | MIT license */
+/*! PhotoSwipe original main CSS by Dmitry Semenov | photoswipe.com | MIT license */
 
-/*
-	Styles for basic PhotoSwipe functionality (sliding area, open/close transitions)
-*/
-
-// PhotoSwipe uses Autoprefixer, so vendor prefixed are added automatically when needed.
-
-/* pswp = photoswipe */
 .pswp {
 	display: none;
 	position:absolute;
@@ -68,17 +61,13 @@
 	cursor: grabbing;
 }
 
-/*
-	Background is added as a separate element.
-	As animating opacity is much faster than animating rgba() background-color.
-*/
 .pswp__bg {
 	position: absolute;
 	left: 0;
 	top: 0;
 	width: 100%;
 	height: 100%;
-	background: $pswp-background-color;
+	background: var(--#{$pswp-variable-prefix}bg);
 	opacity: 0;
 	transform: translateZ(0);
 	backface-visibility: hidden;
@@ -175,7 +164,7 @@
 	large image loads on top of it
 */
 .pswp__img--placeholder--blank {
-	background: $pswp-placeholder-color;
+	background: var(--#{$pswp-variable-prefix}placeholder-color);
 }
 
 .pswp--ie .pswp__img {
@@ -198,10 +187,10 @@
 	font-size: 14px;
 	line-height: 16px;
 	margin-top: -8px;
-	color: $pswp-error-text-color;
+	color: var(--#{$pswp-variable-prefix}error-text-color);
 }
 
 .pswp__error-msg a {
-	color: $pswp-error-text-color;
+	color: var(--#{$pswp-variable-prefix}error-text-color);
 	text-decoration: underline;
 }
