@@ -82,13 +82,13 @@ export class Bs5IconComponent extends BasicComponent {
   }
 
   protected getBasename(src: string) {
-    const pathnames = getLocation(this.scope.src).pathname.split('/');
+    const pathnames = getLocation(src).pathname.split("/");
     return pathnames?.[pathnames.length - 1];
   }
 
   protected getAlternativeText(src: string) {
     const basename = this.getBasename(src);
-    return basename.split('.')[0]?.replaceAll("_", " ");
+    return basename.split(".")[0]?.replaceAll("_", " ");
   }
 
   protected async onSrcChanged() {

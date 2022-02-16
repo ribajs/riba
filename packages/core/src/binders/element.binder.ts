@@ -7,11 +7,11 @@ export class ElementBinder extends Binder<HTMLElement, HTMLElement> {
   static key = "element";
   publishes = true;
 
-  bind(el: HTMLInputElement) {
+  bind() {
     this.publish();
   }
 
-  routine(el: HTMLElement, modelEl: HTMLElement) {
+  routine() {
     //
   }
 

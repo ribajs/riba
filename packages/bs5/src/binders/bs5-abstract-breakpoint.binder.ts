@@ -1,6 +1,5 @@
 import { BasicComponent, Binder, View } from "@ribajs/core";
 import { Bs5Service } from "../services/bs5.service";
-import { Breakpoint } from "../types";
 import { parseJsonString, jsonStringify, camelCase } from "@ribajs/utils";
 
 export abstract class Bs5AbstractBreakpointBinder<
@@ -42,7 +41,7 @@ export abstract class Bs5AbstractBreakpointBinder<
     this.attributeName = attributeName;
   }
 
-  protected onBreakpointChanges(activeBreakpoint: Breakpoint) {
+  protected onBreakpointChanges(/* activeBreakpoint: Breakpoint */) {
     this.setAttributeOnMatch();
   }
 

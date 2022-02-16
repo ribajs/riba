@@ -251,12 +251,15 @@ export const scrollTo = async (
   return scrollPromise;
 };
 
-export const getScrollHeight = (scrollElement: HTMLElement | (Window & typeof globalThis)): number => {
+export const getScrollHeight = (
+  scrollElement: HTMLElement | (Window & typeof globalThis)
+): number => {
   // if element is window
   if ((scrollElement as Window).document) {
     const win = scrollElement as Window;
     const doc = win.document;
-    return (win as any).scrollMaxY ||
+    return (
+      (win as any).scrollMaxY ||
       Math.max(
         doc.body.scrollHeight,
         doc.body.offsetHeight,
@@ -264,27 +267,32 @@ export const getScrollHeight = (scrollElement: HTMLElement | (Window & typeof gl
         doc.documentElement.scrollHeight,
         doc.documentElement.offsetHeight,
         0
-      );
+      )
+    );
   }
   return (scrollElement as HTMLElement).scrollHeight;
-}
+};
 
-export const getScrollWidth = (scrollElement: HTMLElement | (Window & typeof globalThis)): number => {
+export const getScrollWidth = (
+  scrollElement: HTMLElement | (Window & typeof globalThis)
+): number => {
   // if element is window
   if ((scrollElement as Window).document) {
     const win = scrollElement as Window;
     const doc = win.document;
-    return            (win as any).scrollMaxX ||
+    return (
+      (win as any).scrollMaxX ||
       Math.max(
         doc.body.scrollWidth,
         doc.body.offsetWidth,
         doc.documentElement.clientWidth,
         doc.documentElement.scrollWidth,
         doc.documentElement.offsetWidth
-      );
+      )
+    );
   }
-  return (scrollElement as HTMLElement).scrollWidth;   
-}
+  return (scrollElement as HTMLElement).scrollWidth;
+};
 
 export const scrollToPosition = async (
   scrollElement: HTMLElement | (Window & typeof globalThis) | null,
@@ -315,9 +323,9 @@ export const scrollToPosition = async (
           top /= 2;
           // if element is window
           if ((scrollElement as Window).document) {
-            top -= ((scrollElement as Window).visualViewport.height / 2);
+            top -= (scrollElement as Window).visualViewport.height / 2;
           } else {
-            top -= ((scrollElement as HTMLElement).clientHeight / 2);
+            top -= (scrollElement as HTMLElement).clientHeight / 2;
           }
         }
         break;
@@ -338,12 +346,12 @@ export const scrollToPosition = async (
       case "center":
         left = getScrollWidth(scrollElement);
         if (left) {
-          left /=  2;
+          left /= 2;
           // if element is window
           if ((scrollElement as Window).document) {
-            left -= ((scrollElement as Window).visualViewport.width / 2);
+            left -= (scrollElement as Window).visualViewport.width / 2;
           } else {
-            left -= ((scrollElement as HTMLElement).clientWidth / 2);
+            left -= (scrollElement as HTMLElement).clientWidth / 2;
           }
         }
         break;
