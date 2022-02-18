@@ -49,11 +49,11 @@
   <g
      transform="translate(-50,-6)"
      id="g11"
-     style="fill:#000000">
+     fill="currentColor">
     <path
        inkscape:connector-curvature="0"
        d="m 62,24 v 5 h -2 v -3 h -3 v -2 z m 0,-4 h -5 v -2 h 3 v -3 h 2 z m 8,0 v -5 h 2 v 3 h 3 v 2 z m 0,4 h 5 v 2 h -3 v 3 h -2 z"
        id="path9"
-       style="fill:#000000" />
+       fill="currentColor" />
   </g>
 </svg>
