@@ -5,5 +5,5 @@ export interface JsxBs5ThemeButtonProps extends JsxHtmlGlobalProps {
   labels?: string; // JSON string
   "light-icon-src"?: string;
   "dark-icon-src"?: string;
-  "icon-size"?: string;
+  "icon-size"?: number;
 }

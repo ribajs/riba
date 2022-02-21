@@ -69,10 +69,6 @@ export interface Bs5SlideshowComponentScope {
   angle: "vertical" | "horizontal";
   /** Pause on autoplay (with interval) */
   pause: boolean;
-  /** min width of responsive view port of from which these options take effect */
-  breakpoint: number;
-  /** Name of the current breakpoint, e.g. xs, sm, md, ... */
-  name: string;
   /** Disables wraparound to first/last element of slideshow  */
   infinite: boolean;
 }

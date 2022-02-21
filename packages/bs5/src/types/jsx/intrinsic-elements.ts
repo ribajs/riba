@@ -7,6 +7,7 @@ import type {
   JsxBs5SidebarProps,
   JsxBs5ThemeButtonProps,
   JsxBs5ToggleButtonProps,
+  JsxBs5SlideshowProps,
 } from "./";
 
 export interface Bs5IntrinsicElements {
@@ -15,6 +16,7 @@ export interface Bs5IntrinsicElements {
   "bs5-toggle-button": JsxBs5ToggleButtonProps;
   "bs5-icon": JsxBs5IconProps;
   "bs5-navbar": JsxBs5NavbarProps;
+  "bs5-slideshow": JsxBs5SlideshowProps;
 }
 
 declare global {

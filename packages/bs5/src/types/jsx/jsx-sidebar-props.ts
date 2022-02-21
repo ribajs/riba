@@ -1,12 +1,13 @@
 import type { JsxHtmlGlobalProps } from "@ribajs/jsx";
 
 export interface JsxBs5SidebarProps extends JsxHtmlGlobalProps {
+  "id": string;
   "container-selector"?: string;
   position?: "left" | "right";
   mode?: "overlap" | "move" | "side";
   width?: string;
-  "auto-show-on-wider-than"?: string;
-  "auto-hide-on-slimmer-than"?: string;
+  "auto-show"?: boolean;
+  "auto-hide"?: boolean;
   "force-hide-on-location-pathnames"?: string;
   "force-show-on-location-pathnames"?: string;
   "mode-on-slimmer-than"?: string;

@@ -173,5 +173,5 @@ declare global {
 declare const global: any;
 
 // Set as global variable in Browser, Deno or Node
-((global as any) || window).jsxCreateElement = createElement;
-((global as any) || window).jsxFragment = JsxFragment;
+((global) || window).jsxCreateElement = createElement;
+((global) || window).jsxFragment = JsxFragment;

@@ -29,4 +29,5 @@ export interface JsxLinkElementProps extends JsxHtmlGlobalProps {
   rel?: string;
   sizes?: string;
   type?: string;
+  color?: string;
 }

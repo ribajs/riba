@@ -15,4 +15,5 @@ export interface JsxMetaElementProps extends JsxHtmlGlobalProps {
   charSet?: "utf-8";
   content?: string;
   media?: string;
+  name?: string;
 }

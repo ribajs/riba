@@ -1,3 +1,4 @@
+export * from "./jsx";
 export * from "./module-options";
 export * from "./pjax-options";
 export * from "./response";

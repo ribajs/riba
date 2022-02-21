@@ -35,18 +35,18 @@ export class ImageEventsBinder extends Binder<string, HTMLImageElement> {
     this.events = imagesLoaded(el);
 
     // Forward the events as native events
-    this.events.on("always", this.onAlways);
-    this.events.on("done", this.onDone);
-    this.events.on("fail", this.onFail);
-    this.events.on("progress", this.onProgress);
+    this.events?.on("always", this.onAlways);
+    this.events?.on("done", this.onDone);
+    this.events?.on("fail", this.onFail);
+    this.events?.on("progress", this.onProgress);
   }
 
   unbind() {
     if (this.events) {
-      this.events.off("always", this.onAlways);
-      this.events.off("done", this.onDone);
-      this.events.off("fail", this.onFail);
-      this.events.off("progress", this.onProgress);
+      this.events?.off("always", this.onAlways);
+      this.events?.off("done", this.onDone);
+      this.events?.off("fail", this.onFail);
+      this.events?.off("progress", this.onProgress);
     }
   }
 

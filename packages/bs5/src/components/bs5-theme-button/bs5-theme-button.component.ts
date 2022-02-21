@@ -8,6 +8,7 @@ import type {
   Bs5ThemeButtonComponentScope,
   ThemeChoice,
   ThemeChangedData,
+  JsxBs5ThemeButtonProps,
 } from "../../types";
 
 /**
@@ -18,7 +19,7 @@ export class Bs5ThemeButtonComponent extends Component {
 
   protected theme: ThemeService;
 
-  static get observedAttributes() {
+  static get observedAttributes(): (keyof JsxBs5ThemeButtonProps)[] {
     return ["mode", "labels", "light-icon-src", "icon-size", "dark-icon-src"];
   }
 

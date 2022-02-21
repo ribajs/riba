@@ -1,4 +1,4 @@
-export type SlideshowState =
+export type SidebarState =
   | "overlap-left"
   | "overlap-right"
   | "side-left"

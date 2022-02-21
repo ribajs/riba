@@ -10,6 +10,7 @@
 import { Component, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { JsxBs5ToggleButtonProps } from "../../types"
 import { TOGGLE_BUTTON } from "../../constants";
 
 type State =
@@ -33,12 +34,12 @@ interface Scope {
 
 // TODO extend from Bs5ButtonComponent
 export class Bs5ToggleButtonComponent extends Component {
-  static get observedAttributes(): string[] {
+  static get observedAttributes(): (keyof JsxBs5ToggleButtonProps)[] {
     return ["target-id"];
   }
 
-  protected requiredAttributes(): string[] {
-    return ["targetId"];
+  protected requiredAttributes(): (keyof JsxBs5ToggleButtonProps)[] {
+    return ["target-id"];
   }
 
   public static tagName = "bs5-toggle-button";

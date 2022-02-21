@@ -78,6 +78,7 @@
     "@ribajs/core": "workspace:^",
     "@ribajs/events": "workspace:^",
     "@ribajs/history": "workspace:^",
+    "@ribajs/jsx": "workspace:^",
     "@ribajs/utils": "workspace:^"
   }
 }

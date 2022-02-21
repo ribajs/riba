@@ -3,86 +3,9 @@ import { TouchEventsService, TouchSwipeData } from "@ribajs/extras";
 import { EventDispatcher } from "@ribajs/events";
 import { TOGGLE_BUTTON } from "../../constants";
 import { Bs5Service } from "../../services";
-import { SlideshowState } from "../../types";
+import { JsxBs5SidebarProps, Bs5SidebarComponentScope, SidebarState } from "../../types";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
 import { debounce } from "@ribajs/utils/src/control";
-
-interface Scope {
-  // Template properties
-
-  /**
-   * Selector string to get the container element from DOM
-   */
-  containerSelector?: string;
-  /**
-   * The current state of the sidebar, can be `'hidden'`, `'side-left'`, `'side-right'`, `'overlap-left'` or `'overlap-right'`
-   */
-  state: SlideshowState;
-  /**
-   * The last state before the state was changed
-   */
-  oldState: SlideshowState;
-  /**
-   * The 'id' is required to react to events of the `bs5-toggle-button`, the `target-id` attribute of the `bs5-toggle-button` must be identical to this `id`
-   */
-  id?: string;
-  /**
-   * The width of the sidebar with unit
-   */
-  width: string;
-
-  // Options
-
-  /**
-   * The sidebar can be positioned `right` or `left`
-   */
-  position: "left" | "right";
-  /**
-   * The sidebar can be `move` the full page (iPhone style), `overlap` (Android style) or `side` (shrinks the container)
-   */
-  mode: "overlap" | "move" | "side";
-  /**
-   * Auto show the sidebar.
-   * It is recommended to use the `bs5-co-[breakpoint]-auto-hide` for this attribute.
-   */
-  autoShow: boolean;
-  /**
-   * Auto hide the sidebar.
-   * It is recommended to use the `bs5-co-[breakpoint]-auto-hide` for this attribute.
-   */
-  autoHide: boolean;
-  /**
-   * Watch the routers `newPageReady` event to update the sidebar state, e.g. hide on slime than after route changes
-   */
-  watchNewPageReadyEvent: boolean;
-  /**
-   * You can force to hide the sidebar on corresponding URL pathnames e.g. you can hide the sidebar on home with `['/']`.
-   */
-  forceHideOnLocationPathnames: Array<string>;
-  /**
-   * Like `force-hide-on-location-pathnames`, but to force to open the sidebar
-   */
-  forceShowOnLocationPathnames: Array<string>;
-  /**
-   * Close sidebar on swipe
-   */
-  closeOnSwipe: boolean;
-
-  // Template methods
-
-  /**
-   * Hides / closes the sidebar
-   */
-  hide: Bs5SidebarComponent["hide"];
-  /**
-   * Shows / opens the sidebar
-   */
-  show: Bs5SidebarComponent["show"];
-  /**
-   * Toggles (closes or opens) the sidebar
-   */
-  toggle: Bs5SidebarComponent["toggle"];
-}
 
 export class Bs5SidebarComponent extends Component {
   public static tagName = "bs5-sidebar";
@@ -97,7 +20,7 @@ export class Bs5SidebarComponent extends Component {
 
   protected touch: TouchEventsService = new TouchEventsService(this);
 
-  static get observedAttributes(): string[] {
+  static get observedAttributes(): (keyof JsxBs5SidebarProps)[] {
     return [
       "id",
       "container-selector",
@@ -117,7 +40,7 @@ export class Bs5SidebarComponent extends Component {
 
   protected routerEvents = new EventDispatcher("main");
 
-  public defaults: Scope = {
+  public defaults: Bs5SidebarComponentScope = {
     // Template properties
     containerSelector: undefined,
     state: "hidden",
@@ -141,7 +64,7 @@ export class Bs5SidebarComponent extends Component {
     toggle: this.toggle,
   };
 
-  public scope: Scope = {
+  public scope: Bs5SidebarComponentScope = {
     ...this.defaults,
   };
 
@@ -152,7 +75,7 @@ export class Bs5SidebarComponent extends Component {
     this.onEnvironmentChanges = this.onEnvironmentChanges.bind(this);
   }
 
-  public setState(state: SlideshowState) {
+  public setState(state: SidebarState) {
     this.scope.oldState = this.scope.state;
     this.scope.state = state;
     this.onStateChange();
@@ -163,8 +86,8 @@ export class Bs5SidebarComponent extends Component {
   }
 
   public getShowMode() {
-    const mode: SlideshowState =
-      `${this.scope.mode}-${this.scope.position}` as SlideshowState;
+    const mode: SidebarState =
+      `${this.scope.mode}-${this.scope.position}` as SidebarState;
     return mode;
   }
 
@@ -253,21 +176,21 @@ export class Bs5SidebarComponent extends Component {
     this.setContainersStyle(this.scope.state);
   }
 
-  protected onMove(state: SlideshowState) {
+  protected onMove(state: SidebarState) {
     this.style.transform = `translateX(0)`;
     this.style.width = this.scope.width;
     this.width = this.scope.width;
     this.setContainersStyle(state);
   }
 
-  protected onSide(state: SlideshowState) {
+  protected onSide(state: SidebarState) {
     this.style.transform = `translateX(0)`;
     this.style.width = this.scope.width;
     this.width = this.scope.width;
     this.setContainersStyle(state);
   }
 
-  protected onOverlap(state: SlideshowState) {
+  protected onOverlap(state: SidebarState) {
     this.style.transform = `translateX(0)`;
     this.width = this.scope.width;
     this.setContainersStyle(state);
@@ -359,11 +282,11 @@ export class Bs5SidebarComponent extends Component {
       : undefined;
   }
 
-  protected initContainers(state: SlideshowState) {
+  protected initContainers(state: SidebarState) {
     this.setContainersStyle(state);
   }
 
-  protected setContainersStyle(state: SlideshowState) {
+  protected setContainersStyle(state: SidebarState) {
     const containers:
       | NodeListOf<HTMLUnknownElement>
       | Array<HTMLUnknownElement> = this.getContainers() || [];
@@ -384,7 +307,7 @@ export class Bs5SidebarComponent extends Component {
    */
   protected setContainerStyle(
     container: HTMLUnknownElement,
-    state: SlideshowState
+    state: SidebarState
   ) {
     const currStyle = container.style;
     if (state) {

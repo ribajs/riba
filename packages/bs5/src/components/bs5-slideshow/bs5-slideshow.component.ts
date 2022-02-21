@@ -8,6 +8,7 @@ import {
   SlideshowIndicatorsPosition,
   SlideshowSlidePosition,
   Bs5SlideshowComponentScope,
+  JsxBs5SlideshowProps,
 } from "../../types";
 import {
   Dragscroll,
@@ -49,11 +50,9 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     return this.querySelector(".slideshow-indicators");
   }
 
-  static get observedAttributes(): string[] {
+  static get observedAttributes(): (keyof JsxBs5SlideshowProps)[] {
     return [
       "items",
-      "breakpoint",
-      "name",
       "slides-to-scroll",
       "controls",
       "controls-position",
@@ -66,7 +65,6 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       "indicator-inactive-icon-src",
       "indicator-active-icon-src",
       "angle",
-      "set-active-slide",
       "pause-on-hover",
       "sticky",
       "indicators",
@@ -96,8 +94,6 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     indicatorActiveIconSrc: "",
     indicatorInactiveIconSrc: "",
     angle: "horizontal",
-    breakpoint: 0,
-    name: "xs",
     infinite: true,
 
     // Template methods
@@ -171,11 +167,6 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   protected resumeTimer: number | null = null;
 
   protected routerEvents = new EventDispatcher("main");
-
-  /**
-   * Current breakpoint
-   */
-  protected activeBreakpointName = "xs";
 
   public scope: Bs5SlideshowComponentScope = {
     ...this.defaultScope,

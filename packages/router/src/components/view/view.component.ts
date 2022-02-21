@@ -3,7 +3,7 @@ import { EventDispatcher } from "@ribajs/events";
 import { scrollTo, scrollToPosition } from "@ribajs/utils/src/dom";
 import { State } from "@ribajs/history";
 import { Pjax, Prefetch, RouterService } from "../../services";
-import type { RouterViewOptions, PjaxOptions } from "../../types";
+import type { RouterViewOptions, PjaxOptions, JsxRouterViewProps } from "../../types";
 
 export interface Scope extends RouterViewOptions {
   dataset: any;
@@ -17,7 +17,7 @@ export class RouterViewComponent extends Component {
   protected pjax: Pjax | null = null;
   protected prefetch: Prefetch | null = null;
 
-  static get observedAttributes(): string[] {
+  static get observedAttributes(): (keyof JsxRouterViewProps)[] {
     return [
       "id",
       "action",
