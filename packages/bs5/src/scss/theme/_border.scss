@@ -1,0 +1,41 @@
+//
+// Styles for light, dark and os default border theme
+// Background colors examples
+// - .border-tl-dark      | Dark border on light theme
+// - .border-td-yellow    | Yellow border on dark theme
+
+.theme-os {
+    // border colors on light theme
+    @include color-scheme(light) {
+        @each $name, $value in $theme-colors {
+            .border-tl-#{$name} {
+                border-color: $value !important;
+            }
+        }
+    }
+
+    // border colors on dark theme
+    @include color-scheme(dark) {
+        @each $name, $value in $theme-colors {
+            .border-td-#{$name} {
+                border-color: $value !important;
+            }
+        }
+    }
+}
+
+.theme-light {
+    @each $name, $value in $theme-colors {
+        .border-tl-#{$name} {
+            border-color: $value !important;
+        }
+    }
+}
+
+.theme-dark {
+    @each $name, $value in $theme-colors {
+        .border-td-#{$name} {
+            border-color: $value !important;
+        }
+    }
+}
