@@ -23,7 +23,9 @@ const onGlobalMessage = function (event: MessageEvent) {
   }
 };
 
-window.addEventListener("message", onGlobalMessage, false);
+if (window) {
+  window.addEventListener("message", onGlobalMessage, false);
+}
 
 function registerImmediate(handle: number) {
   window.postMessage(messagePrefix + handle, "*");
@@ -74,6 +76,6 @@ function runIfPresent(handle: any) {
 }
 
 export const setImmediate: typeof _setImmediate =
-  (window as any).setImmediate || _setImmediate;
+  (window as any)?.setImmediate || _setImmediate;
 export const clearImmediate: typeof _clearImmediate =
-  (window as any).clearImmediate || _clearImmediate;
+  (window as any)?.clearImmediate || _clearImmediate;

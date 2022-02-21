@@ -212,16 +212,18 @@ export const justDigits = (str: string | number) => {
   }
 };
 
-export const escapeHtml = (str: string) => {
-  const tagsToReplace = {
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-  };
-
-  return str.replace(/[&<>]/g, (tag) => {
-    return tagsToReplace[tag as "&" | "<" | ">"] || tag;
-  });
+export const escapeHtml = (html: string) => {
+  return html.replace(
+    /[&<>'"]/g,
+    (c) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      }[c as never])
+  );
 };
 
 /**

@@ -10,6 +10,7 @@ export * from "./jsx-canvas-element-props";
 export * from "./jsx-children";
 export * from "./jsx-col-element-props";
 export * from "./jsx-colgroup-element-props";
+export * from "./jsx-component-boolean";
 export * from "./jsx-component";
 export * from "./jsx-data-element-props";
 export * from "./jsx-del-element-props";

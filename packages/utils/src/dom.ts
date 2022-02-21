@@ -370,8 +370,6 @@ export const scrollToPosition = async (
   return scrollPromise;
 };
 
-(window as any).scrollToPosition = scrollToPosition;
-
 export const getElementFromEvent = <T = HTMLAnchorElement | HTMLUnknownElement>(
   event: Event | MouseEvent | TouchEvent
 ) => {
@@ -568,19 +566,22 @@ export const getUID = (prefix: string): string => {
 };
 
 /**
- * Detects if dom element is custom element or native / default html element
+ * Detects if dom element is custom element and a registered riba component
  * @see https://stackoverflow.com/a/47737765/1465919
- * @param element The element you want to test
+ * @param element The element or tag name you want to test
+ * @param isRegistered If true the element must also be a registered as a custom element,
+ * @param isUpgraded
  */
 export const isCustomElement = (
-  element: HTMLUnknownElement,
+  element: HTMLUnknownElement | string,
   isRegistered = false,
   isUpgraded = false
 ) => {
   // A custom element's name is required to contain a -, whereas an HTML-defined element will not. So:
-  const isCustomElement = element.localName.includes("-");
+  const localName = typeof element === "string" ? element : element.localName;
+  const isCustomElement = localName.includes("-");
   if (isCustomElement && isRegistered && customElements) {
-    const customConstructor = customElements.get(element.localName);
+    const customConstructor = customElements.get(localName);
     if (!customConstructor) {
       return false;
     }

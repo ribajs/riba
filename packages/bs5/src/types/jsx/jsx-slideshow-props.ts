@@ -1,4 +1,4 @@
-import type { JsxHtmlGlobalProps } from "@ribajs/jsx";
+import type { JsxHtmlGlobalProps, JSXComponentBoolean } from "@ribajs/jsx";
 import { SlideshowIndicatorsPosition, SlideshowControlsPosition } from ".."
 
 export interface JsxBs5SlideshowProps extends JsxHtmlGlobalProps {
@@ -6,13 +6,13 @@ export interface JsxBs5SlideshowProps extends JsxHtmlGlobalProps {
   /** number of slides to be scrolled by clicking on the controls */
   "slides-to-scroll"?: number;
   /** Show controls */
-  "controls"?: boolean;
+  "controls"?: JSXComponentBoolean;
   /** Position of the controls */
   "controls-position"?: SlideshowControlsPosition;
   /** Slides are draggable on desktop browsers */
-  "drag"?: boolean;
+  "drag"?: JSXComponentBoolean;
   /** Enables autoplay continuously or with interval */
-  "autoplay"?: boolean;
+  "autoplay"?: JSXComponentBoolean;
   /** Pause between autoscroll, 0 for continuously autoscrolling */
   "autoplay-interval"?: number;
   /** Scroll speed for continuously autoscrolling */
@@ -28,17 +28,17 @@ export interface JsxBs5SlideshowProps extends JsxHtmlGlobalProps {
   /** Slide angle, can be vertical or horizontal */
   "angle"?: "vertical" | "horizontal";
   /** Pauses auto scroll on hover or focus */
-  "pause-on-hover"?: boolean;
+  "pause-on-hover"?: JSXComponentBoolean;
   /** Autoscroll to the nearest slide after manual scroll or dragscroll */
-  "sticky"?: boolean;
+  "sticky"?: JSXComponentBoolean;
   /** Show indicators */
   "indicators"?: string;
   /** Position of the indicators */
   "indicators-position"?: SlideshowIndicatorsPosition;
   /** Pause on autoplay (with interval) */
-  "pause"?: boolean;
+  "pause"?: JSXComponentBoolean;
   /** Disables wraparound to first/last element of slideshow  */
-  "infinite"?: boolean;
+  "infinite"?: JSXComponentBoolean;
   /** Slides are scrollable through touch on touch devices */
-  "touch-scroll"?: boolean;
+  "touch-scroll"?: JSXComponentBoolean;
 }

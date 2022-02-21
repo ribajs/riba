@@ -1,4 +1,4 @@
-import type { JsxHtmlGlobalProps } from "@ribajs/jsx";
+import type { JsxHtmlGlobalProps, JSXComponentBoolean } from "@ribajs/jsx";
 
 export interface JsxBs5SidebarProps extends JsxHtmlGlobalProps {
   "id": string;
@@ -6,8 +6,8 @@ export interface JsxBs5SidebarProps extends JsxHtmlGlobalProps {
   position?: "left" | "right";
   mode?: "overlap" | "move" | "side";
   width?: string;
-  "auto-show"?: boolean;
-  "auto-hide"?: boolean;
+  "auto-show"?: JSXComponentBoolean;
+  "auto-hide"?: JSXComponentBoolean;
   "force-hide-on-location-pathnames"?: string;
   "force-show-on-location-pathnames"?: string;
   "mode-on-slimmer-than"?: string;

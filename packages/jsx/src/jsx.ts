@@ -23,35 +23,11 @@ import type {
   JsxComponent,
   BasicIntrinsicElements,
 } from "./types";
-
+import { isCustomElement, jsonStringify, escapeHtml } from "@ribajs/utils";
 import { JsxFragment } from "./jsx-fragment";
+import { Raw } from "./jsx-raw";
 
-/**
- * Used to inject HTML directly into the document.
- */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function Raw(_props: { html: string }) {
-  // This is handled specially by the renderElement function. Instead of being
-  // called, the tag is compared to this function and the `html` prop will be
-  // returned directly.
-  return null;
-}
-
-function escapeHtml(html: string) {
-  return html.replace(
-    /[&<>'"]/g,
-    (c) =>
-      ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#39;",
-      }[c as never])
-  );
-}
-
-const voidElements = new Set([
+export const htmlVoidElements = new Set([
   "area",
   "base",
   "br",
@@ -76,7 +52,7 @@ const voidElements = new Set([
  */
 export function createElement(
   tag: typeof JsxFragment | string | JsxComponent<any>,
-  props: object | null,
+  props: Record<string, unknown> | null,
   ...children: JsxChildren[]
 ): JsxElement {
   return { tag, props, children };
@@ -104,12 +80,12 @@ export function renderElement(element: JsxElement | null | undefined): string {
     for (const [key, val] of Object.entries(props ?? {})) {
       if (val == null) continue;
 
-      if (typeof val == "boolean") {
+      if (typeof val == "boolean" && !isCustomElement(tag)) {
         if (val) {
           html.push(" ", key);
         }
       } else {
-        html.push(" ", key, "=", JSON.stringify(val));
+        html.push(" ", key, "=", jsonStringify(val));
       }
     }
   }
@@ -123,7 +99,7 @@ export function renderElement(element: JsxElement | null | undefined): string {
 
   if (tag !== JsxFragment) {
     if (!hasChildren) {
-      if (voidElements.has(tag)) {
+      if (htmlVoidElements.has(tag)) {
         html.push("/>");
       } else {
         html.push("></", tag, ">");
