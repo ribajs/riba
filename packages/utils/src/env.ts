@@ -2,6 +2,7 @@
 
 // For real types see https://github.com/denoland/deno/blob/main/core/lib.deno_core.d.ts
 declare const Deno: any;
+declare const process: any;
 
 const isBrowser =
   typeof window !== "undefined" && typeof window.document !== "undefined";

@@ -18,7 +18,7 @@
     "incremental": true,
     "lib": ["ESNext", "DOM"],
     "jsx": "react",
-    "jsxFactory": "window.jsxCreateElement",
-    "jsxFragmentFactory": "window.jsxFragment"
+    "jsxFactory": "jsxCreateElement",
+    "jsxFragmentFactory": "jsxFragment"
   }
 }

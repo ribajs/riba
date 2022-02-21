@@ -6855,7 +6855,6 @@ __metadata:
     "@ribajs/core": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
-    "@types/node": ^17.0.18
   languageName: unknown
   linkType: soft
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 /* eslint-disable @typescript-eslint/no-namespace */
 /**
@@ -150,10 +151,8 @@ export function renderElement(element: JsxElement | null | undefined): string {
 }
 
 declare global {
-  interface Window {
-    jsxCreateElement: typeof createElement;
-    jsxFragment: typeof JsxFragment;
-  }
+  var jsxCreateElement: typeof createElement;
+  var jsxFragment: typeof JsxFragment;
   /**
    * TypeScript's rules for looking up the JSX.IntrinsicElements and JSX.Element
    * interfaces are incredibly strange. It will find them if they are included as
@@ -171,6 +170,8 @@ declare global {
     export { JsxElement as Element };
   }
 }
+declare const global: any;
 
-window.jsxCreateElement = createElement;
-window.jsxFragment = JsxFragment;
+// Set as global variable in Browser, Deno or Node
+((global as any) || window).jsxCreateElement = createElement;
+((global as any) || window).jsxFragment = JsxFragment;
