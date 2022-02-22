@@ -8,8 +8,7 @@ const findRoot = require("find-root");
 const config_1 = require("@nestjs/config");
 const THEME_ACTIVE = process.env.THEME_ACTIVE || 'nest-riba-ssr-theme';
 const ROOT = findRoot(process.cwd());
-const PACKAGES = (0, path_1.resolve)(ROOT, '..');
-const THEME_DIR = process.env.THEME_DIR || (0, path_1.resolve)(PACKAGES, THEME_ACTIVE);
+const THEME_DIR = process.env.THEME_DIR || (0, path_1.dirname)(require.resolve(THEME_ACTIVE));
 exports.app = {
     root: ROOT,
     port: Number(process.env.PORT) || 3000,
@@ -30,5 +29,7 @@ exports.session = {
         sameSite: 'none',
     },
 };
-exports.appConfig = (0, config_1.registerAs)('app', () => (Object.assign({}, exports.app)));
+exports.appConfig = (0, config_1.registerAs)('app', () => ({
+    ...exports.app,
+}));
 //# sourceMappingURL=config.js.map

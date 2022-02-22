@@ -6591,7 +6591,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/examples-nest-riba-ssr-theme@workspace:examples/theme-ssr/theme":
+"@ribajs/examples-nest-riba-ssr-theme@workspace:^, @ribajs/examples-nest-riba-ssr-theme@workspace:examples/theme-ssr/theme":
   version: 0.0.0-use.local
   resolution: "@ribajs/examples-nest-riba-ssr-theme@workspace:examples/theme-ssr/theme"
   dependencies:
@@ -6667,6 +6667,7 @@ __metadata:
     "@nestjs/testing": ^8.3.1
     "@ribajs/core": "workspace:^"
     "@ribajs/events": "workspace:^"
+    "@ribajs/examples-nest-riba-ssr-theme": "workspace:^"
     "@ribajs/nest-theme": "workspace:^"
     "@ribajs/ssr": "workspace:^"
     "@types/consolidate": ^0.14.1

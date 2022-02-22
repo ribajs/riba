@@ -1,14 +1,14 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
-import { resolve } from 'path';
+import { dirname } from 'path';
 import findRoot = require('find-root');
 import { registerAs } from '@nestjs/config';
 import { NestThemeConfig } from '@ribajs/nest-theme';
 
 const THEME_ACTIVE = process.env.THEME_ACTIVE || 'nest-riba-ssr-theme';
 const ROOT = findRoot(process.cwd());
-const PACKAGES = resolve(ROOT, '..');
-const THEME_DIR = process.env.THEME_DIR || resolve(PACKAGES, THEME_ACTIVE);
+const THEME_DIR =
+  process.env.THEME_DIR || dirname(require.resolve(THEME_ACTIVE));
 
 export const app = {
   root: ROOT,

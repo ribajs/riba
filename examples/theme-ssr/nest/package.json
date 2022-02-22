@@ -23,6 +23,7 @@
     "@nestjs/platform-express": "^8.3.1",
     "@ribajs/core": "workspace:^",
     "@ribajs/events": "workspace:^",
+    "@ribajs/examples-nest-riba-ssr-theme": "workspace:^",
     "@ribajs/nest-theme": "workspace:^",
     "@ribajs/ssr": "workspace:^",
     "@types/consolidate": "^0.14.1",
