@@ -1,2 +1,2 @@
-export * from "./empty-template-component-scope";
-export * from "./empty-template-module-options";
+export * from "./component-scope";
+export * from "./module-options";
