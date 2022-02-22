@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 /* eslint-disable @typescript-eslint/no-namespace */
 
-import type { JsxRouterViewProps } from "./";
+import type { JsxSSRRootPageProps } from "./";
 
-export interface RouterIntrinsicElements {
-  "router-view": JsxRouterViewProps;
+export interface SSRIntrinsicElements {
+  "ssr-root-page": JsxSSRRootPageProps;
 }
 
 declare global {
   namespace JSX {
     // This extends the IntrinsicElements interface defined in @ribajs/jsx
-    interface IntrinsicElements extends RouterIntrinsicElements {}
+    interface IntrinsicElements extends SSRIntrinsicElements {}
   }
 }

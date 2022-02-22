@@ -14,6 +14,7 @@ import type {
   JsxDelElementProps,
   JsxDetailsElementProps,
   JsxDialogElementProps,
+  JsxDivElementProps,
   JsxEmbedElementProps,
   JsxFieldsetElementProps,
   JsxFormElementProps,
@@ -82,7 +83,7 @@ export interface BasicIntrinsicElements {
   details: JsxDetailsElementProps;
   dfn: JsxHtmlGlobalProps;
   dialog: JsxDialogElementProps;
-  div: JsxHtmlGlobalProps;
+  div: JsxDivElementProps;
   dl: JsxHtmlGlobalProps;
   dt: JsxHtmlGlobalProps;
   em: JsxHtmlGlobalProps;

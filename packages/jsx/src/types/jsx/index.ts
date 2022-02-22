@@ -16,6 +16,7 @@ export * from "./jsx-data-element-props";
 export * from "./jsx-del-element-props";
 export * from "./jsx-details-element-props";
 export * from "./jsx-dialog-element-props";
+export * from "./jsx-div-element-props";
 export * from "./jsx-element";
 export * from "./jsx-embed-element-props";
 export * from "./jsx-fieldset-element-props";

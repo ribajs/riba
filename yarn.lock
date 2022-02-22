@@ -7932,6 +7932,7 @@ __metadata:
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
     "@ribajs/events": "workspace:^"
+    "@ribajs/jsx": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
     "@types/express": ^4.17.13
