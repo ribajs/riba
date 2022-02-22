@@ -28,9 +28,9 @@ export class Suggest {
     /**/
   }
 
-  protected isEmpty(obj: any) {
+  protected isEmpty(obj?: any) {
     for (const key in obj) {
-      if (obj.hasOwnProperty(key)) return false;
+      if (Object.hasOwnProperty.bind(obj)(key)) return false;
     }
     return true;
   }

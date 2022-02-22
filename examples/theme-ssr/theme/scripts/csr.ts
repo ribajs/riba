@@ -21,7 +21,7 @@ const bootstrap = () => {
   riba.configure({
     prefix: ["rv", "csr-rv"],
     blockUnknownCustomElements: false,
-    templateDelimiters: ["[", "]"],
+    templateDelimiters: ["{", "}"],
   });
 
   // Regist custom components

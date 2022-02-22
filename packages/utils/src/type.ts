@@ -336,7 +336,7 @@ export const extend = (
   // Merge the object into the extended object
   const merge = (obj: any) => {
     for (const prop in obj) {
-      if (obj.hasOwnProperty(prop)) {
+      if (Object.hasOwnProperty.bind(obj)(prop)) {
         if (
           options.deep &&
           Object.prototype.toString.call(obj[prop]) === "[object Object]"
