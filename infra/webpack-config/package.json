@@ -13,12 +13,12 @@
     "./*.js"
   ],
   "dependencies": {
-    "@babel/core": "^7.17.4",
+    "@babel/core": "^7.17.5",
     "@graphql-tools/webpack-loader": "^6.6.1",
     "@ribajs/eslint-config": "workspace:^",
     "@ribajs/npm-package": "workspace:^",
     "@ribajs/postcss-config": "workspace:^",
-    "@yarnpkg/pnpify": "^3.1.1-rc.15",
+    "@yarnpkg/pnpify": "^3.1.1",
     "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^9.1.0",
     "css-loader": "^6.6.0",
@@ -38,7 +38,7 @@
     "pug-loader": "^2.4.0",
     "raw-loader": "^4.0.2",
     "resolve-url-loader": "^5.0.0",
-    "sass": "^1.49.7",
+    "sass": "^1.49.8",
     "sass-loader": "^12.6.0",
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.1",
