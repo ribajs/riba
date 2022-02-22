@@ -10510,14 +10510,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"alosaur-riba-ssr-example@workspace:examples/theme-ssr/alosaur":
-  version: 0.0.0-use.local
-  resolution: "alosaur-riba-ssr-example@workspace:examples/theme-ssr/alosaur"
-  dependencies:
-    "@ribajs/node-ssr": "workspace:^"
-  languageName: unknown
-  linkType: soft
-
 "ansi-align@npm:^3.0.0":
   version: 3.0.1
   resolution: "ansi-align@npm:3.0.1"
