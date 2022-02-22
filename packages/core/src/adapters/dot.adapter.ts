@@ -23,7 +23,7 @@ export class DotAdapter implements Adapter {
   public weakmap: any = {};
 
   public weakReference(obj: any) {
-    if (!obj.hasOwnProperty("__rv")) {
+    if (!Object.hasOwnProperty.bind(obj)("__rv")) {
       const id = this.counter++;
 
       Object.defineProperty(obj, "__rv", {
@@ -122,6 +122,7 @@ export class DotAdapter implements Adapter {
 
   public observe(obj: any, keypath: string, callback: ObserverSyncCallback) {
     let value: any;
+
     const callbacks = this.weakReference(obj).callbacks;
 
     if (!callbacks[keypath]) {

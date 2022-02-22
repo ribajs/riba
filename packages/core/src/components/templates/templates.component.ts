@@ -52,7 +52,7 @@ export abstract class TemplatesComponent extends Component {
         if (typeof value === "string") {
           return value;
         }
-        if (typeof value.toString === "function") {
+        if (typeof value?.toString === "function") {
           return value.toString();
         }
       case "object":
