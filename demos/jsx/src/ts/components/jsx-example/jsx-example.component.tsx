@@ -51,7 +51,7 @@ export class JsxExampleComponent extends Component {
                     <li class="nav-item d-flex align-items-center">
                       <bs5-icon
                         src="/iconset/svg/icon_menu.svg"
-                        size="32"
+                        size={32}
                         rv-hide="isActive"
                         rv-on-click="toggle"
                       ></bs5-icon>
@@ -59,7 +59,7 @@ export class JsxExampleComponent extends Component {
                     <li class="nav-item d-flex align-items-center">
                       <bs5-icon
                         src="/iconset/svg/icon_close.svg"
-                        size="32"
+                        size={32}
                         rv-show="isActive"
                         rv-on-click="toggle"
                       ></bs5-icon>
