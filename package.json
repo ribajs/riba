@@ -71,7 +71,7 @@
     "@ribajs/tsconfig": "next",
     "@ribajs/types": "next",
     "@types/core-js": "^2.5.5",
-    "@types/jest": "^27.4.0",
+    "@types/jest": "^27.4.1",
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/experimental-utils": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
@@ -151,5 +151,5 @@
     "glob": "^7.2.0",
     "pug": "^3.0.2"
   },
-  "packageManager": "yarn@3.1.1"
+  "packageManager": "yarn@3.2.0"
 }
