@@ -1,0 +1,21 @@
+tsd-member-signatures {
+	.tsd-signatures {
+		&.active {
+			& > .tsd-signature {
+				cursor: pointer;
+			}
+		}
+	}
+	ul {
+		&.tsd-descriptions {
+			&.active {
+				& > .tsd-description {
+					display: none;
+					&.current {
+						display: block;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,128 @@
+tsd-navigation {
+    .tsd-navigation {
+        a {
+            display: block;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            border-left: 2px solid transparent;
+            color: var(--bs-body-color);
+            text-decoration: none;
+            transition: border-left-color 0.1s;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        li {
+            padding: 0;
+        }
+
+        &.primary {
+            // padding-bottom: 40px;
+            a {
+                display: block;
+                padding-top: 6px;
+                padding-bottom: 6px;
+            }
+            ul {
+                li {
+                    a {
+                        padding-left: 5px;
+                    }
+                    li {
+                        a {
+                            padding-left: 25px;
+                        }
+                        li {
+                            a {
+                                padding-left: 45px;
+                            }
+                            li {
+                                a {
+                                    padding-left: 65px;
+                                }
+                                li {
+                                    a {
+                                        padding-left: 85px;
+                                    }
+                                    li {
+                                        a {
+                                            padding-left: 105px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            li {
+                &.current {
+                    & > a {
+                        font-weight: bold;
+                    }
+                }
+                &.label {
+                    span {
+                        display: block;
+                        padding: 20px 0 6px 5px;
+                        color: var(--color-menu-label);
+                    }
+                }
+            }
+        }
+
+        &.secondary {
+            ul {
+                transition: opacity 0.2s;
+                li {
+                    a {
+                        padding-left: 25px;
+                    }
+                    li {
+                        a {
+                            padding-left: 45px;
+                        }
+                        li {
+                            a {
+                                padding-left: 65px;
+                            }
+                            li {
+                                a {
+                                    padding-left: 85px;
+                                }
+                                li {
+                                    a {
+                                        padding-left: 105px;
+                                    }
+                                    li {
+                                        a {
+                                            padding-left: 125px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            li {
+                &.current {
+                    margin-top: 20px;
+                    margin-bottom: 20px;
+                    & > a {
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+        &.primary li.globals + li > span,
+        &.primary li.globals + li > a {
+            padding-top: 20px;
+        }
+    }
+}
