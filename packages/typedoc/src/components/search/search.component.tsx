@@ -2,7 +2,17 @@ import { Component, TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim, debounce } from "@ribajs/utils";
 import { NavbarComponent } from "../navbar/navbar.component";
 
-import type { SearchComponentScope, SearchResult } from "../../types";
+import type {
+  SearchComponentScope,
+  SearchResult,
+  SearchOptions,
+} from "../../types";
+
+declare global {
+  interface Window {
+    remoteSearchOptions?: Partial<SearchOptions>;
+  }
+}
 
 export class SearchComponent extends Component {
   public static tagName = "tsd-search";
