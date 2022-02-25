@@ -10,7 +10,7 @@
 import { Component, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import { JsxBs5ToggleButtonProps } from "../../types"
+import { JsxBs5ToggleButtonProps } from "../../types";
 import { TOGGLE_BUTTON } from "../../constants";
 
 type State =
@@ -28,7 +28,7 @@ interface Scope {
   toggle: Bs5ToggleButtonComponent["toggle"];
   state: State;
   isActive: boolean;
-  // depricated, use !isActive instead
+  /** @deprecated use !isActive instead */
   isClosed: boolean;
 }
 

@@ -1,5 +1,6 @@
 import { EventDispatcher } from "@ribajs/events";
 import { themeChoices } from "../constants";
+import { Bs5Service } from "./bs5.service";
 
 import type { ThemeChoice, ThemeData, ThemeChangedCallback } from "../types";
 
@@ -12,6 +13,7 @@ export class ThemeService {
   protected eventDispatcher = EventDispatcher.getInstance();
 
   protected static instance?: ThemeService;
+  protected bs5 = Bs5Service.getSingleton();
 
   protected constructor() {
     this.addEventListeners();
@@ -54,8 +56,11 @@ export class ThemeService {
    * @returns The selected theme or or `null` in case of an error
    */
   public init() {
-    const savedTheme =
-      (localStorage.getItem("bs5-theme") as ThemeChoice) || "theme-os";
+    let savedTheme: ThemeChoice = "theme-os";
+    if (this.bs5.options.allowStoreDataInBrowser) {
+      savedTheme = (localStorage.getItem("bs5-theme") ||
+        "theme-os") as ThemeChoice;
+    }
 
     return this.set(savedTheme);
   }
@@ -142,7 +147,9 @@ export class ThemeService {
       );
       newColorScheme = "theme-os";
     }
-    localStorage.setItem("bs5-theme", newColorScheme);
+    if (this.bs5.options.allowStoreDataInBrowser) {
+      localStorage.setItem("bs5-theme", newColorScheme);
+    }
     document.documentElement.classList.remove(
       "theme-light",
       "theme-dark",

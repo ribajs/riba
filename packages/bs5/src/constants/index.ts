@@ -37,6 +37,7 @@ export const DEFAULT_MODULE_OPTIONS: Bs5ModuleOptions = {
     DEFAULT_BP_XL,
     DEFAULT_BP_XXL,
   ],
+  allowStoreDataInBrowser: true,
 };
 
 // EventDispatcher events
