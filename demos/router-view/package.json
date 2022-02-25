@@ -63,7 +63,7 @@
     "postcss-preset-env": "^7.4.1",
     "prettier": "2.5.1",
     "pug-loader": "^2.4.0",
-    "sass": "^1.49.8",
+    "sass": "^1.49.9",
     "sass-loader": "^12.6.0",
     "terser-webpack-plugin": "^5.3.1",
     "ts-jest": "^27.1.3",

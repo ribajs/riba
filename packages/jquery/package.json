@@ -67,7 +67,7 @@
     "@ribajs/cache": "workspace:^",
     "@ribajs/core": "workspace:^",
     "@ribajs/utils": "workspace:^",
-    "@types/jquery": "^3.5.13",
+    "@types/jquery": "^3.5.14",
     "jquery": "^3.6.0"
   },
   "bugs": {

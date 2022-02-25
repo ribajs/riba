@@ -57,7 +57,7 @@
     "postcss-loader": "^6.2.1",
     "postcss-modules": "^4.3.1",
     "postcss-preset-env": "^7.4.1",
-    "sass": "^1.49.8",
+    "sass": "^1.49.9",
     "sass-loader": "^12.6.0",
     "serve": "^13.0.2",
     "ts-jest": "^27.1.3",
