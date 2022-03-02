@@ -314,15 +314,19 @@ class Pjax {
       return false;
     }
 
+    if (url.startsWith("http")) {
+      url = normalizeUrl(url).url;
+    }
+
     if (!url.startsWith("http")) {
       if (this.changeBrowserUrl) {
         window.history.pushState(null, "", url);
       }
       return this.onStateChange(undefined, url);
+    } else {
+      // fallback
+      this.forceGoTo(url);
     }
-
-    // fallback
-    this.forceGoTo(url);
   }
 
   /**
