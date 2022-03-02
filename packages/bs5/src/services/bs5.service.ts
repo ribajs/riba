@@ -28,7 +28,7 @@ export class Bs5Service {
     }
 
     throw new Error(
-      `Singleton of Bs5Service not defined, please call setSingleton first!`
+      "Singleton of Bs5Service not defined, please call `Bs5Service.setSingleton` or `bs5Module.init` first!"
     );
   }
 

@@ -26,19 +26,4 @@ tsd-navbar {
       width: 100%;
     }
   }
-  &.tsd-page-toolbar--hide {
-    transform: translateY(-100%);
-  }
-
-  .navbar-brand {
-    height: 36px;
-  }
-
-  @include media-breakpoint-down(sm) {
-    &.search-has-focus {
-      .navbar-brand, bs5-theme-button {
-        display: none !important;
-      }
-    }
-  }
 }

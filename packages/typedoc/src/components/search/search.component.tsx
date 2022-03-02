@@ -1,5 +1,6 @@
 import { Component, TemplateFunction } from "@ribajs/core";
-import { hasChildNodesTrim, debounce } from "@ribajs/utils";
+import { Pjax } from "@ribajs/router";
+import { hasChildNodesTrim, debounce, normalizeUrl } from "@ribajs/utils";
 import { NavbarComponent } from "../navbar/navbar.component";
 
 import type {
@@ -18,13 +19,11 @@ export class SearchComponent extends Component {
   public static tagName = "tsd-search";
 
   static get observedAttributes() {
-    return ["base", "port", "hostname"];
+    return ["server-base-url"];
   }
 
   public scope: SearchComponentScope = {
-    port: 0,
-    hostname: "localhost",
-    base: "./",
+    serverBaseUrl: location.href,
     isLoading: false,
     isReady: false,
     hasFailure: false,
@@ -37,6 +36,8 @@ export class SearchComponent extends Component {
     onInput: this.onInput,
     onKeydown: this.onKeydown,
     onKeypress: this.onKeypress,
+    onSearchResultHover: this.onSearchResultHover,
+    onSearchResultClick: this.onSearchResultClick,
   };
 
   constructor() {
@@ -66,13 +67,10 @@ export class SearchComponent extends Component {
 
   initSettings() {
     if (
-      this.scope.hostname === "localhost" &&
-      window.remoteSearchOptions?.hostname
+      this.scope.serverBaseUrl === "localhost" &&
+      window.remoteSearchOptions?.serverBaseUrl
     ) {
-      this.scope.hostname = window.remoteSearchOptions.hostname;
-    }
-    if (!this.scope.port && window.remoteSearchOptions?.port) {
-      this.scope.port = window.remoteSearchOptions.port;
+      this.scope.serverBaseUrl = window.remoteSearchOptions.serverBaseUrl;
     }
   }
 
@@ -93,7 +91,7 @@ export class SearchComponent extends Component {
     this.dispatchEvent(new Event("focus"));
   }
 
-  protected onBlur() {
+  protected onBlur(e: Event) {
     this.classList.remove("has-focus");
     this.dispatchEvent(new Event("blur"));
   }
@@ -123,7 +121,35 @@ export class SearchComponent extends Component {
   }
 
   public onKeypress(e: KeyboardEvent) {
-    if (this.scope.preventPress) e.preventDefault();
+    if (this.scope.preventPress) {
+      e.preventDefault();
+    }
+  }
+
+  public onSearchResultHover(
+    e: MouseEvent,
+    scope: SearchComponentScope,
+    newActive: HTMLLIElement
+  ) {
+    const oldActive = this.getActiveSearchResult();
+    oldActive?.classList.remove("active");
+    newActive.classList.add("active");
+  }
+
+  // Workaround
+  public onSearchResultClick(
+    e: MouseEvent | TouchEvent,
+    scope: SearchComponentScope,
+    el: HTMLAnchorElement
+  ) {
+    // Ignore right click
+    if (e.type === "mousedown" && (e as MouseEvent).button !== 0) {
+      return;
+    }
+    const anchor = el.firstChild as HTMLAnchorElement | null;
+    if (anchor?.href) {
+      this.goTo(anchor.href);
+    }
   }
 
   initSearchHotkey() {
@@ -143,7 +169,6 @@ export class SearchComponent extends Component {
     this.scope.results = [];
 
     const searchText = this.scope.query.trim();
-    console.debug("updateResults", searchText);
     if (searchText.length < 2) {
       return;
     }
@@ -151,11 +176,11 @@ export class SearchComponent extends Component {
     this.scope.isLoading = true;
     this.scope.isReady = false;
 
-    const url = new URL(window.location.toString());
-    url.hostname = this.scope.hostname;
-    url.port = this.scope.port.toString();
+    const url = new URL(this.scope.serverBaseUrl);
+    const separator = url.pathname.endsWith("/") ? "" : "/";
+
     // Perform a wildcard search
-    url.pathname = `search/*${searchText}*`;
+    url.pathname += `${separator}search/*${searchText}*`;
     const results: SearchResult[] = [];
 
     try {
@@ -168,6 +193,7 @@ export class SearchComponent extends Component {
     }
 
     this.validateResult(results);
+    this.transformResult(results);
 
     this.scope.results = results;
     this.scope.isLoading = false;
@@ -175,7 +201,6 @@ export class SearchComponent extends Component {
   }
 
   public updateResults = debounce(async () => {
-    console.debug("input");
     await this._updateResults();
   }, 500);
 
@@ -190,22 +215,35 @@ export class SearchComponent extends Component {
     }
   }
 
+  protected transformResult(results: SearchResult[]) {
+    const separator = this.scope.serverBaseUrl.endsWith("/") ? "" : "/";
+    for (const result of results) {
+      if (!result.url.startsWith("http")) {
+        result.url = this.scope.serverBaseUrl + separator + result.url;
+      }
+      result.url = normalizeUrl(result.url).url;
+    }
+  }
+
+  getActiveSearchResult(dir = 1, fallbackByDir = false) {
+    let active = this.scope.resultsEl?.querySelector(".active:not(.disabled)");
+    if (fallbackByDir && !active) {
+      active = this.scope.resultsEl?.querySelector(
+        dir == 1 ? "li:first-child" : "li:last-child"
+      );
+      if (active) {
+        active.classList.add("active");
+      }
+    }
+    return active || null;
+  }
+
   /**
    * Move the highlight within the result set.
    */
   setCurrentResult(dir: number) {
-    console.debug("setCurrentResult");
-    let active = this.scope.resultsEl?.querySelector(".active:not(.disabled)");
-    console.debug("setCurrentResult", this.scope.resultsEl);
-    if (!active) {
-      active = this.scope.resultsEl?.querySelector(
-        dir == 1 ? "li:first-child" : "li:last-child"
-      );
-      console.debug("setCurrentResult", active);
-      if (active) {
-        active.classList.add("active");
-      }
-    } else {
+    const active = this.getActiveSearchResult(dir, true);
+    if (active) {
       let rel: Element | undefined = active;
       // Tricky: We have to check that rel has an offsetParent so that users can't mark a hidden result as
       // active with the arrow keys.
@@ -217,6 +255,19 @@ export class SearchComponent extends Component {
         do {
           rel = rel.previousElementSibling || undefined;
         } while (rel instanceof HTMLElement && rel.offsetParent == null);
+      }
+
+      // Restart on last or first element
+      if (!rel) {
+        if (dir === -1 && !active.previousElementSibling) {
+          // If active element is the first, restart on the end
+          rel =
+            this.scope.resultsEl?.querySelector("li:last-child") || undefined;
+        } else if (dir === 1 && !active.nextElementSibling) {
+          // If active element is the first, restart on the last
+          rel =
+            this.scope.resultsEl?.querySelector("li:first-child") || undefined;
+        }
       }
 
       if (rel) {
@@ -240,10 +291,19 @@ export class SearchComponent extends Component {
 
     if (active) {
       const link = active.querySelector("a");
-      if (link) {
-        window.location.href = link.href;
+      if (link?.href) {
+        this.goTo(link.href);
       }
       this.scope.fieldEl?.blur();
+    }
+  }
+
+  protected goTo(href: string) {
+    const pjax = Pjax.getInstance("main");
+    if (!pjax) {
+      window.location.href = href;
+    } else {
+      pjax.goTo(href, false);
     }
   }
 
@@ -290,10 +350,13 @@ export class SearchComponent extends Component {
               rv-show="results | size | gt 0"
               rv-each-item="results"
               rv-add-class="item.classes"
+              rv-on-mouseover="onSearchResultHover"
+              rv-on-mousedown="onSearchResultClick"
+              rv-on-ontouchend="onSearchResultClick"
             >
               <a
                 class="tsd-kind-icon"
-                rv-href="base | append item.url"
+                rv-href="item.url"
                 rv-html="item.name"
               ></a>
             </li>

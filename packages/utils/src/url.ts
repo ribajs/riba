@@ -52,8 +52,8 @@ export const normalizeUrl = (
   url?: string
 ): { url: string; location: Location } => {
   const location = getLocation(url);
-  const hostname = getLocation().hostname;
-  if (location.hostname === hostname) {
+  const curHostname = getLocation().hostname;
+  if (location.hostname === curHostname) {
     return {
       url: location.pathname + location.search + location.hash,
       location,

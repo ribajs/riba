@@ -3,12 +3,8 @@ import type { SearchComponent } from "../components/search/search.component";
 import type { NavbarComponent } from "../components/navbar/navbar.component";
 
 export interface SearchComponentScope {
-  /** Port of the search server */
-  port: number;
-  /** A domain name or IP address of the search server */
-  hostname: string;
-  /** Base url */
-  base: string;
+  /** The base url of the remote search server */
+  serverBaseUrl: string;
   /** `true` as log as we are waiting for the search response */
   isLoading: boolean;
   /** `true` if the search response has an error */
@@ -32,4 +28,6 @@ export interface SearchComponentScope {
   onInput: SearchComponent["onInput"];
   onKeydown: SearchComponent["onKeydown"];
   onKeypress: SearchComponent["onKeypress"];
+  onSearchResultHover: SearchComponent["onSearchResultHover"];
+  onSearchResultClick: SearchComponent["onSearchResultClick"];
 }

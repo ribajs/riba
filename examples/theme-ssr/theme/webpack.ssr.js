@@ -12,6 +12,7 @@ const tsIndexPath = resolve(tsSourceDir, "ssr.ts");
 
 const config = {
   template: "ssr",
+  publicPath: outputPath,
   tsSourceDir,
   tsIndexPath,
   output: {

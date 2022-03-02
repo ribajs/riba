@@ -55,9 +55,10 @@ export class ShopifyCartButtonComponent extends Component {
       if (ShopifyCartButtonComponent.cartUrl) {
         const pjax = Pjax.getInstance("main");
         if (!pjax) {
-          return;
+          window.location.href = ShopifyCartButtonComponent.cartUrl;
+        } else {
+          pjax.goTo(ShopifyCartButtonComponent.cartUrl, false);
         }
-        pjax.goTo(ShopifyCartButtonComponent.cartUrl, false);
       }
     }
   }
