@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
+import { Config } from "./types";
+import webpack from "webpack";
 
-const webpack = require("webpack");
-
-module.exports.getDependencies = (config = {}) => {
+export const getDependencies = (config: Partial<Config> = {}) => {
   // Modules you can overwrite
   config.DefinePlugin = config.DefinePlugin || webpack.DefinePlugin;
   config.TerserPlugin = config.TerserPlugin || require("terser-webpack-plugin");
@@ -23,8 +23,9 @@ module.exports.getDependencies = (config = {}) => {
   config.htmlLoaderPath =
     config.htmlLoaderPath || require.resolve("html-loader");
 
-  config.fileLoaderPath =
-    config.fileLoaderPath || require.resolve("file-loader");
+    config.markdownLoaderPath =
+    config.markdownLoaderPath || require.resolve("markdown-loader");
+
   config.fileLoaderPath =
     config.fileLoaderPath || require.resolve("file-loader");
 
@@ -52,7 +53,7 @@ module.exports.getDependencies = (config = {}) => {
       config.DuplicatesPlugin || require("inspectpack/plugin").DuplicatesPlugin;
   }
 
-  switch (config.template.toLowerCase()) {
+  switch (config.template?.toLowerCase()) {
     case "local":
       if (Array.isArray(config.htmlTemplatePaths)) {
         config.HtmlWebpackPlugin =

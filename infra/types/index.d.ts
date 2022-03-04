@@ -1,12 +1,14 @@
-// import type { RequestDocument } from "graphql-request/dist/types";
-// import "resize-observer-browser";
-
-/** Type definition for html-loader */
+/** Type definition for html-loader / html template files */
 declare module "*.html" {
   const html: string;
   export default html;
 }
-/** Type definition for pug-loader: https://github.com/pugjs/pug-loader */
+/** Type definition for remark-loader / markdown template files */
+declare module "*.md" {
+  const markdown: string;
+  export default markdown;
+}
+/** Type definition for pug-loader/ pug template files */
 declare module "*.pug" {
   const pug: (locals?: any) => string;
   export default pug;
@@ -66,30 +68,3 @@ declare module "@sphinxxxx/color-conversion" {
     printHex(alpha?: boolean): string;
   }
 }
-
-// declare module "@popperjs/core" {
-//   // See https://github.com/popperjs/popper-core/blob/master/src/types.js
-//   export interface Options {
-//     placement?: "start" | "end";
-//     modifiers: Array<any>;
-//     strategy: any;
-//     onFirstUpdate?: (shape: any) => void;
-//   }
-
-//   // TODO
-//   export type preventOverflow = any;
-//   export type flip = any;
-//   export type Boundary = any;
-
-//   export function createPopper(
-//     button: HTMLUnknownElement,
-//     tooltip: HTMLUnknownElement,
-//     options: Options
-//   ): void;
-
-//   export function createPopperLite(
-//     button: HTMLUnknownElement,
-//     tooltip: HTMLUnknownElement,
-//     options: Options
-//   ): void;
-// }

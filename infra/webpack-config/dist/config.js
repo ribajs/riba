@@ -48,6 +48,25 @@ module.exports.getConfig = (config = {}, env = {}) => {
         },
       ],
     },
+    // markdown templates
+    {
+      test: /\.md$/,
+      use: [
+        {
+          loader: config.htmlLoaderPath,
+          options: {
+            minimize: true,
+          },
+        },
+        {
+          loader: config.markdownLoaderPath,
+          options: {
+            // Pass options to marked
+            // See https://marked.js.org/using_advanced#options
+          },
+        },
+      ],
+    },
     // image templates and other assets
     {
       test: /\.(png|jpe?g|gif|ttf|woff2|svg)$/i,

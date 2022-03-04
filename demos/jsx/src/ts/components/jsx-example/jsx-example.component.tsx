@@ -90,6 +90,8 @@ export class JsxExampleComponent extends Component {
                   Okay
                 </button>
               </section>
+
+              <md-example></md-example>
             </div>
           </div>
         </div>
