@@ -23,6 +23,9 @@ export const getDependencies = (config: Partial<Config> = {}) => {
   config.htmlLoaderPath =
     config.htmlLoaderPath || require.resolve("html-loader");
 
+    config.remarkLoaderPath =
+    config.remarkLoaderPath || require.resolve("remark-loader");
+
   config.fileLoaderPath =
     config.fileLoaderPath || require.resolve("file-loader");
 

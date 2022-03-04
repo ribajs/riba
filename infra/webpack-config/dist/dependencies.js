@@ -19,6 +19,8 @@ const getDependencies = (config = {}) => {
         config.babelLoaderPath || require.resolve("babel-loader");
     config.htmlLoaderPath =
         config.htmlLoaderPath || require.resolve("html-loader");
+    config.remarkLoaderPath =
+        config.remarkLoaderPath || require.resolve("remark-loader");
     config.fileLoaderPath =
         config.fileLoaderPath || require.resolve("file-loader");
     config.pugLoaderPath = config.pugLoaderPath || require.resolve("pug-loader");
