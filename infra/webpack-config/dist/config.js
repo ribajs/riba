@@ -3,7 +3,6 @@
 const { getStyleLoaderRule } = require("./style");
 const { basename } = require("path");
 const { logger } = require("./logger");
-const RemarkHTML = require("remark-html");
 
 module.exports.getConfig = (config = {}, env = {}) => {
   // config defaults for config templates
@@ -60,11 +59,10 @@ module.exports.getConfig = (config = {}, env = {}) => {
           },
         },
         {
-          loader: config.remakrLoaderPath,
+          loader: config.markdownLoaderPath,
           options: {
-            remarkOptions: {
-              plugins: [RemarkHTML],
-            },
+            // Pass options to marked
+            // See https://marked.js.org/using_advanced#options
           },
         },
       ],

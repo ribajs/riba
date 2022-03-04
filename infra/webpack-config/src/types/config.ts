@@ -35,7 +35,7 @@ export interface Config {
   babelLoaderPath: string;
   htmlLoaderPath: string;
   /** Markdown templates: https://webpack.js.org/loaders/remark-loader/ */
-  remarkLoaderPath: string;
+  markdownLoaderPath: string;
   fileLoaderPath: string;
   pugLoaderPath: string;
   gqlLoaderPath: string;
