@@ -2,16 +2,19 @@
   "name": "@ribajs/webpack-config",
   "version": "2.0.0-alpha.0",
   "description": "Default webpack configs used in Riba.js projects",
-  "main": "index.js",
-  "module": "index.js",
-  "source": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "source": "src/index.ts",
   "author": "Pascal Garber <pascal@artandcode.studio",
   "license": "MIT",
   "files": [
     "LICENSE",
     "README.md",
-    "./*.js"
+    "./dist"
   ],
+  "scripts": {
+    "build": "tsc --project tsconfig.json"
+  },
   "dependencies": {
     "@babel/core": "^7.17.5",
     "@graphql-tools/webpack-loader": "^6.6.1",
@@ -21,7 +24,7 @@
     "@yarnpkg/pnpify": "^3.1.1",
     "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^9.1.0",
-    "css-loader": "^6.6.0",
+    "css-loader": "^6.7.0",
     "file-loader": "^6.2.0",
     "find-root": "^1.1.0",
     "fork-ts-checker-webpack-plugin": "^7.2.1",
@@ -30,7 +33,7 @@
     "html-loader": "^3.1.0",
     "html-webpack-plugin": "^5.5.0",
     "inspectpack": "^4.7.1",
-    "mini-css-extract-plugin": "^2.5.3",
+    "mini-css-extract-plugin": "^2.6.0",
     "pkg-dir": "^6.0.1",
     "postcss": "^8.4.7",
     "postcss-loader": "^6.2.1",
@@ -49,5 +52,15 @@
   },
   "peerDependencies": {
     "webpack": "^5.x.x"
+  },
+  "devDependencies": {
+    "@types/copy-webpack-plugin": "^10.1.0",
+    "@types/find-root": "^1.1.2",
+    "@types/fork-ts-checker-webpack-plugin": "^0.4.5",
+    "@types/html-webpack-plugin": "^3.2.6",
+    "@types/mini-css-extract-plugin": "^2.5.1",
+    "@types/webpack": "^5.28.0",
+    "@types/webpack-node-externals": "^2.5.3",
+    "@types/webpackbar": "^4.0.3"
   }
 }
