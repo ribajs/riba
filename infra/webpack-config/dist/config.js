@@ -3,6 +3,7 @@
 const { getStyleLoaderRule } = require("./style");
 const { basename } = require("path");
 const { logger } = require("./logger");
+const RemarkHTML = require("remark-html");
 
 module.exports.getConfig = (config = {}, env = {}) => {
   // config defaults for config templates
@@ -44,6 +45,26 @@ module.exports.getConfig = (config = {}, env = {}) => {
           loader: config.htmlLoaderPath,
           options: {
             minimize: true,
+          },
+        },
+      ],
+    },
+    // markdown templates
+    {
+      test: /\.md$/,
+      use: [
+        {
+          loader: config.htmlLoaderPath,
+          options: {
+            minimize: true,
+          },
+        },
+        {
+          loader: config.remakrLoaderPath,
+          options: {
+            remarkOptions: {
+              plugins: [RemarkHTML],
+            },
           },
         },
       ],
