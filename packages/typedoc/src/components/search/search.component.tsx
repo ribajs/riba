@@ -67,7 +67,7 @@ export class SearchComponent extends Component {
 
   initSettings() {
     if (
-      this.scope.serverBaseUrl === "localhost" &&
+      this.scope.serverBaseUrl === location.href &&
       window.remoteSearchOptions?.serverBaseUrl
     ) {
       this.scope.serverBaseUrl = window.remoteSearchOptions.serverBaseUrl;
