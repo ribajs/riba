@@ -51,10 +51,10 @@ export class ParentRouteClassStarBinder extends Binder<
     this.url = url;
     this.className = this.args[0].toString() || "active";
     const isAnkerHTMLElement = el.tagName === "A";
-    if (!url && isAnkerHTMLElement) {
+    if (!this.url && isAnkerHTMLElement) {
       const href = el.getAttribute("href");
       if (href) {
-        url = href;
+        this.url = href;
       }
     }
     this.onUrlChange();

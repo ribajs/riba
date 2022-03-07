@@ -44,10 +44,10 @@ export class RouteClassStarBinder extends Binder<string, HTMLInputElement> {
     this.url = url;
     this.className = this.args[0].toString() || "active";
     const isAnchorElement = el.tagName === "A";
-    if (!url && isAnchorElement) {
+    if (!this.url && isAnchorElement) {
       const href = el.getAttribute("href");
       if (href) {
-        url = href;
+        this.url = href;
       }
     }
 
