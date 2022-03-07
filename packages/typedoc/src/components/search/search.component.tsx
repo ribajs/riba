@@ -91,7 +91,7 @@ export class SearchComponent extends Component {
     this.dispatchEvent(new Event("focus"));
   }
 
-  protected onBlur(e: Event) {
+  protected onBlur() {
     this.classList.remove("has-focus");
     this.dispatchEvent(new Event("blur"));
   }

@@ -1,11 +1,11 @@
 import { Component, TemplateFunction } from "@ribajs/core";
-import markdownTemplate from "./md-example.component.md"
+import markdownTemplate from "./md-example.component.md";
 import type { JsxHtmlGlobalProps } from "@ribajs/jsx";
 
 export type MdExampleProps = JsxHtmlGlobalProps;
 
-
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     // This extends the IntrinsicElements interface defined in @ribajs/jsx
     interface IntrinsicElements {
