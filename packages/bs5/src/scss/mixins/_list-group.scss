@@ -14,6 +14,10 @@
       color: $list-group-active-color;
       background-color: $list-group-active-bg;
       border-color: $list-group-active-border-color;
+      &.list-group-item-action {
+        color: $list-group-action-active-color;
+        background-color: $list-group-action-active-bg;
+      }
     }
 
     &.list-group-item-action {
@@ -22,11 +26,6 @@
       &:focus {
         color: $list-group-action-hover-color;
         background-color: $list-group-hover-bg;
-      }
-    
-      &:active {
-        color: $list-group-action-active-color;
-        background-color: $list-group-action-active-bg;
       }
     }
   }

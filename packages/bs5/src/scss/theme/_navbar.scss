@@ -8,7 +8,7 @@
 .theme-os {
     @include color-scheme(light) {
         // Auto light navbar on light theme
-        .navbar-theme {
+        .navbar {
             @include navbar-light;
         }
         // Dark navbar on light theme
@@ -18,7 +18,7 @@
     }
     @include color-scheme(dark) {
         // Auto dark navbar on dark theme
-        .navbar-theme {
+        .navbar {
             @include navbar-dark;
         }
         // Light navbar on dark theme
@@ -30,7 +30,7 @@
 
 .theme-light {
     // Auto light navbar on light theme
-    .navbar-theme {
+    .navbar {
         @include navbar-light;
     }
     // Dark navbar on light theme
@@ -41,7 +41,7 @@
 
 .theme-dark {
     // Auto dark navbar on dark theme
-    .navbar-theme {
+    .navbar {
         @include navbar-dark;
     }
     // Light navbar on dark theme

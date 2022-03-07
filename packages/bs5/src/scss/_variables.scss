@@ -22,26 +22,30 @@ $languages: de en !default;
 // ) !default;
 
 // Theme mode colors
-$dark-body-color:         map-get($theme-colors, "light") !default;
-$dark-body-bg:            $gray-900 !default;
+$dark-body-color: map-get($theme-colors, "light") !default;
+$dark-body-bg: $gray-900 !default;
 
-$dark-link-color:               $link-color;
-$dark-link-hover-color:         $link-hover-color !default;
+$dark-link-color: $link-color;
+$dark-link-hover-color: $link-hover-color !default;
 
 // Dark Forms
-$dark-input-color:        $dark-body-color !default;
-$dark-input-bg:           $dark-body-bg !default;
-$dark-input-border-color:         darken($input-border-color, 50%) !default;
-$dark-input-focus-color:          invert($input-focus-color, 100%) !default;
-$dark-input-focus-bg:             $dark-input-bg !default;
-$dark-input-focus-border-color:   darken($input-focus-border-color, 50%) !default;
-$dark-input-placeholder-color:    invert($input-placeholder-color, 100%) !default;
-$dark-input-disabled-bg:          invert($input-disabled-bg, 100%) !default;
-$dark-input-disabled-border-color:    if($input-disabled-border-color == null, null, invert($input-disabled-border-color, 100%)) !default;
-$dark-form-file-button-color:         invert($form-file-button-color, 100%) !default;
-$dark-form-file-button-bg:            invert($form-file-button-bg, 100%) !default;
-$dark-form-file-button-hover-bg:      invert($form-file-button-hover-bg, 100%) !default;
-$dark-input-plaintext-color:          invert($input-plaintext-color, 100%) !default;
+$dark-input-color: $dark-body-color !default;
+$dark-input-bg: $dark-body-bg !default;
+$dark-input-border-color: darken($input-border-color, 50%) !default;
+$dark-input-focus-color: invert($input-focus-color, 100%) !default;
+$dark-input-focus-bg: $dark-input-bg !default;
+$dark-input-focus-border-color: darken($input-focus-border-color, 50%) !default;
+$dark-input-placeholder-color: invert($input-placeholder-color, 100%) !default;
+$dark-input-disabled-bg: invert($input-disabled-bg, 100%) !default;
+$dark-input-disabled-border-color: if(
+    $input-disabled-border-color == null,
+    null,
+    invert($input-disabled-border-color, 100%)
+) !default;
+$dark-form-file-button-color: invert($form-file-button-color, 100%) !default;
+$dark-form-file-button-bg: invert($form-file-button-bg, 100%) !default;
+$dark-form-file-button-hover-bg: invert($form-file-button-hover-bg, 100%) !default;
+$dark-input-plaintext-color: invert($input-plaintext-color, 100%) !default;
 
 // Dark list group TODO: fine tune colors
 $dark-list-group-color: $light !default;
@@ -49,13 +53,13 @@ $dark-list-group-bg: $dark !default;
 $dark-list-group-border-color: darken($list-group-border-color, 50%) !default;
 
 $dark-list-group-disabled-color: invert($list-group-disabled-color, 100%) !default;
-$dark-list-group-disabled-bg: $list-group-disabled-bg !default;
+$dark-list-group-disabled-bg: invert($list-group-disabled-bg, 100%) !default;
 
 $dark-list-group-active-color: $list-group-active-color !default;
 $dark-list-group-active-bg: $list-group-active-bg !default;
 $dark-list-group-active-border-color: darken($list-group-active-border-color, 50%) !default;
 $dark-list-group-action-color: invert($list-group-action-color, 100%) !default;
-$dark-list-group-action-hover-color: invert($list-group-action-hover-color, 100%) !default;
+$dark-list-group-action-hover-color: $list-group-action-hover-color !default;
 $dark-list-group-hover-bg: $list-group-hover-bg !default;
-$dark-list-group-action-active-color: invert($list-group-action-active-color, 100%) !default;
+$dark-list-group-action-active-color: $list-group-action-active-color !default;
 $dark-list-group-action-active-bg: $list-group-action-active-bg !default;
