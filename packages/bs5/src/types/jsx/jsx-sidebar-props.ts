@@ -1,7 +1,7 @@
 import type { JsxHtmlGlobalProps, JSXComponentBoolean } from "@ribajs/jsx";
 
 export interface JsxBs5SidebarProps extends JsxHtmlGlobalProps {
-  "id": string;
+  id: string;
   "container-selector"?: string;
   position?: "left" | "right";
   mode?: "overlap" | "move" | "side";
