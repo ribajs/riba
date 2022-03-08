@@ -85,7 +85,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^27.5.1",
     "jest-config": "^27.5.1",
-    "jest-extended": "^1.2.1",
+    "jest-extended": "^2.0.0",
     "pkg-dir": "^6.0.1",
     "prettier": "2.5.1",
     "reflect-metadata": "^0.1.13",

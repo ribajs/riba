@@ -31,7 +31,7 @@
     "@types/find-root": "^1.1.2",
     "consolidate": "^0.16.0",
     "cookie-parser": "^1.4.6",
-    "dotenv": "^10.0.0",
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
     "find-root": "^1.1.0",

@@ -3082,19 +3082,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/types@npm:^26.6.2":
-  version: 26.6.2
-  resolution: "@jest/types@npm:26.6.2"
-  dependencies:
-    "@types/istanbul-lib-coverage": ^2.0.0
-    "@types/istanbul-reports": ^3.0.0
-    "@types/node": "*"
-    "@types/yargs": ^15.0.0
-    chalk: ^4.0.0
-  checksum: a0bd3d2f22f26ddb23f41fddf6e6a30bf4fab2ce79ec1cb6ce6fdfaf90a72e00f4c71da91ec61e13db3b10c41de22cf49d07c57ff2b59171d64b29f909c1d8d6
-  languageName: node
-  linkType: hard
-
 "@jest/types@npm:^27.0.1":
   version: 27.0.1
   resolution: "@jest/types@npm:27.0.1"
@@ -3725,7 +3712,7 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     prettier: 2.5.1
     ts-jest: ^27.1.3
     typescript: 4.6.2
@@ -3804,7 +3791,7 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     popper.js: ^1.16.1
     prettier: 2.5.1
     ts-jest: ^27.1.3
@@ -3847,7 +3834,7 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     photoswipe: ^4.1.3
     prettier: 2.5.1
     ts-jest: ^27.1.3
@@ -3899,7 +3886,7 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     prettier: 2.5.1
     ts-jest: ^27.1.3
     typescript: 4.6.2
@@ -3964,7 +3951,7 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     prettier: 2.5.1
     ts-jest: ^27.1.3
     typescript: 4.6.2
@@ -4010,7 +3997,7 @@ __metadata:
     eslint-plugin-prettier: ^4.0.0
     jest: ^27.5.1
     jest-config: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     prettier: 2.5.1
     source-map-support: ^0.5.21
     ts-jest: ^27.1.3
@@ -4058,14 +4045,14 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss: ^8.4.8
     postcss-loader: ^6.2.1
@@ -4121,14 +4108,14 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: ^4.6.1
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss: ^8.4.8
     postcss-loader: ^6.2.1
@@ -4186,14 +4173,14 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: ^4.6.1
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss: ^8.4.8
     postcss-loader: ^6.2.1
@@ -4252,14 +4239,14 @@ __metadata:
     bootstrap: ^4.6.1
     copy-webpack-plugin: ^9.1.0
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss-loader: ^6.2.1
     postcss-modules: ^4.3.1
@@ -4315,14 +4302,14 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: ^4.6.1
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss-loader: ^6.2.1
     postcss-modules: ^4.3.1
@@ -4376,13 +4363,13 @@ __metadata:
     bootstrap: ^4.6.1
     copy-webpack-plugin: ^9.1.0
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     html-loader: ^3.1.0
     html-webpack-plugin: ^5.5.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss-loader: ^6.2.1
     postcss-modules: ^4.3.1
@@ -4435,13 +4422,13 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: ^4.6.1
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     html-loader: ^3.1.0
     html-webpack-plugin: ^5.5.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss-loader: ^6.2.1
     postcss-modules: ^4.3.1
@@ -4497,7 +4484,7 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: ^4.6.1
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
@@ -4505,7 +4492,7 @@ __metadata:
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss: ^8.4.8
     postcss-loader: ^6.2.1
@@ -4565,14 +4552,14 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: ^4.6.1
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss: ^8.4.8
     postcss-loader: ^6.2.1
@@ -4628,14 +4615,14 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: ^5.1.3
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss: ^8.4.8
     postcss-loader: ^6.2.1
@@ -4692,14 +4679,14 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: ^5.1.3
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss: ^8.4.8
     postcss-loader: ^6.2.1
@@ -4759,14 +4746,14 @@ __metadata:
     bootstrap: ^5.1.3
     copy-webpack-plugin: ^9.1.0
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss-loader: ^6.2.1
     postcss-modules: ^4.3.1
@@ -4825,14 +4812,14 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: ^5.1.3
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss-loader: ^6.2.1
     postcss-modules: ^4.3.1
@@ -4890,14 +4877,14 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: ^5.1.3
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss: ^8.4.8
     postcss-loader: ^6.2.1
@@ -4954,14 +4941,14 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: ^5.1.3
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss-loader: ^6.2.1
     postcss-modules: ^4.3.1
@@ -5018,7 +5005,7 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: ^5.1.3
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
@@ -5026,7 +5013,7 @@ __metadata:
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss: ^8.4.8
     postcss-loader: ^6.2.1
@@ -5086,14 +5073,14 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: ^5.1.3
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss: ^8.4.8
     postcss-loader: ^6.2.1
@@ -5150,14 +5137,14 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: ^5.1.3
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss: ^8.4.8
     postcss-loader: ^6.2.1
@@ -5214,7 +5201,7 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: ^5.1.3
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
@@ -5222,7 +5209,7 @@ __metadata:
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss-loader: ^6.2.1
     postcss-modules: ^4.3.1
@@ -5276,7 +5263,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
@@ -5284,7 +5271,7 @@ __metadata:
     html-webpack-plugin: ^5.5.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss-loader: ^6.2.1
     postcss-modules: ^4.3.1
@@ -5338,7 +5325,7 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
@@ -5346,7 +5333,7 @@ __metadata:
     html-webpack-plugin: ^5.5.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss-loader: ^6.2.1
     postcss-modules: ^4.3.1
@@ -5400,14 +5387,14 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss: ^8.4.8
     postcss-loader: ^6.2.1
@@ -5460,13 +5447,13 @@ __metadata:
     babel-plugin-array-includes: ^2.0.3
     babelify: ^10.0.0
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     html-loader: ^3.1.0
     html-webpack-plugin: ^5.5.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss-loader: ^6.2.1
     postcss-modules: ^4.3.1
@@ -5520,13 +5507,13 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: ^5.1.3
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     html-loader: ^3.1.0
     html-webpack-plugin: ^5.5.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss-loader: ^6.2.1
     postcss-modules: ^4.3.1
@@ -5579,7 +5566,7 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: 5.1.3
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
@@ -5587,7 +5574,7 @@ __metadata:
     html-webpack-plugin: ^5.5.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss-loader: ^6.2.1
     postcss-modules: ^4.3.1
@@ -5641,7 +5628,7 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: 5.1.3
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
@@ -5649,7 +5636,7 @@ __metadata:
     html-webpack-plugin: ^5.5.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss-loader: ^6.2.1
     postcss-modules: ^4.3.1
@@ -5706,14 +5693,14 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: ^5.1.3
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss: ^8.4.8
     postcss-loader: ^6.2.1
@@ -5771,14 +5758,14 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: ^5.1.3
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss: ^8.4.8
     postcss-loader: ^6.2.1
@@ -5833,7 +5820,7 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: 5.1.3
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
@@ -5841,7 +5828,7 @@ __metadata:
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     leaflet: ^1.7.1
     mini-css-extract-plugin: ^2.6.0
     postcss-loader: ^6.2.1
@@ -5899,7 +5886,7 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: 5.1.3
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
@@ -5907,7 +5894,7 @@ __metadata:
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss-loader: ^6.2.1
     postcss-modules: ^4.3.1
@@ -5961,7 +5948,7 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: 5.1.3
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
@@ -5969,7 +5956,7 @@ __metadata:
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss-loader: ^6.2.1
     postcss-modules: ^4.3.1
@@ -6024,7 +6011,7 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: 5.1.3
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
@@ -6032,7 +6019,7 @@ __metadata:
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss-loader: ^6.2.1
     postcss-modules: ^4.3.1
@@ -6087,7 +6074,7 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: 5.1.3
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
@@ -6095,7 +6082,7 @@ __metadata:
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     monaco-editor: 0.30.1
     monaco-editor-webpack-plugin: 6.0.0
@@ -6157,14 +6144,14 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: ^4.6.1
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss-loader: ^6.2.1
     postcss-modules: ^4.3.1
@@ -6221,7 +6208,7 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: ^5.1.3
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
@@ -6229,7 +6216,7 @@ __metadata:
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss-loader: ^6.2.1
     postcss-modules: ^4.3.1
@@ -6296,11 +6283,11 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: ^4.6.1
     clean-css-cli: ^5.5.2
-    concurrently: ^6.5.1
+    concurrently: ^7.0.0
     config-chain: ^1.1.13
     core-js: ^3.21.1
     css-flip: ^0.5.0
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     csso-cli: ^3.0.0
     debug: ^4.3.3
     eslint: ^8.10.0
@@ -6423,7 +6410,7 @@ __metadata:
     eslint: ^8.10.0
     jest: ^27.5.1
     jest-config: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     ts-jest: ^27.1.3
     typescript: 4.6.2
   languageName: unknown
@@ -6469,7 +6456,7 @@ __metadata:
     babel-loader: ^8.2.3
     babel-plugin-array-includes: ^2.0.3
     bootstrap: 5.1.3
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
@@ -6509,7 +6496,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.14.0
     "@typescript-eslint/parser": ^5.14.0
     cookie-parser: ^1.4.6
-    dotenv: ^10.0.0
+    dotenv: ^16.0.0
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
@@ -6518,7 +6505,7 @@ __metadata:
     find-root: ^1.1.0
     jest: ^27.5.1
     jest-config: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     prettier: 2.5.1
     pug: ^3.0.2
     reflect-metadata: ^0.1.13
@@ -6580,7 +6567,7 @@ __metadata:
     babel-loader: ^8.2.3
     babel-plugin-array-includes: ^2.0.3
     bootstrap: ^5.1.3
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
@@ -6627,7 +6614,7 @@ __metadata:
     "@typescript-eslint/parser": ^5.14.0
     consolidate: ^0.16.0
     cookie-parser: ^1.4.6
-    dotenv: ^10.0.0
+    dotenv: ^16.0.0
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
@@ -6682,9 +6669,9 @@ __metadata:
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
-    imagesloaded: ^4.1.4
+    imagesloaded: ^5.0.0
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     prettier: 2.5.1
     ts-jest: ^27.1.3
     typescript: 4.6.2
@@ -6790,7 +6777,7 @@ __metadata:
     eslint-plugin-prettier: ^4.0.0
     jest: ^27.5.1
     jest-config: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     jquery: ^3.6.0
     prettier: 2.5.1
     ts-jest: ^27.1.3
@@ -6848,7 +6835,7 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     leaflet: ^1.7.1
     prettier: 2.5.1
     ts-jest: ^27.1.3
@@ -6888,7 +6875,7 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     luxon: ^1.28.0
     prettier: 2.5.1
     ts-jest: ^27.1.3
@@ -6930,7 +6917,7 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     masonry-layout: ^4.2.2
     prettier: 2.5.1
     ts-jest: ^27.1.3
@@ -6974,7 +6961,7 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     moment: ^2.29.1
     prettier: 2.5.1
     ts-jest: ^27.1.3
@@ -7015,7 +7002,7 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     monaco-editor: 0.30.1
     prettier: 2.5.1
     ts-jest: ^27.1.3
@@ -7050,7 +7037,7 @@ __metadata:
     eslint-plugin-prettier: ^4.0.0
     jest: ^27.5.1
     jest-config: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     lunr: ^2.3.9
     prettier: 2.5.1
     reflect-metadata: ^0.1.13
@@ -7102,7 +7089,7 @@ __metadata:
     cheerio: ^1.0.0-rc.10
     consolidate: ^0.16.0
     cookie-parser: ^1.4.6
-    dotenv: ^10.0.0
+    dotenv: ^16.0.0
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
@@ -7110,7 +7097,7 @@ __metadata:
     express-session: ^1.17.2
     jest: ^27.5.1
     jest-config: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     jsdom: ^19.0.0
     node-fetch: ^2.6.7
     path-to-regexp: ^6.2.0
@@ -7196,7 +7183,7 @@ __metadata:
     "@typescript-eslint/typescript-estree": ^5.14.0
     babel-loader: ^8.2.3
     babel-plugin-array-includes: ^2.0.3
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
@@ -7349,7 +7336,7 @@ __metadata:
     gulp-yaml-merge: ^2.0.0
     hex-color-regex: ^1.1.0
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     js-yaml: ^4.1.0
     prettier: 2.5.1
     rgb-regex: ^1.0.1
@@ -7392,7 +7379,7 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     photoswipe: ^4.1.3
     prettier: 2.5.1
     ts-jest: ^27.1.3
@@ -7440,14 +7427,14 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: ^5.1.3
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss: ^8.4.8
     postcss-loader: ^6.2.1
@@ -7503,14 +7490,14 @@ __metadata:
     babelify: ^10.0.0
     bootstrap: ^5.1.3
     core-js: ^3.21.1
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     html-loader: ^3.1.0
     inspectpack: ^4.7.1
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     mini-css-extract-plugin: ^2.6.0
     postcss: ^8.4.8
     postcss-loader: ^6.2.1
@@ -7541,7 +7528,7 @@ __metadata:
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
     "@types/node": ^17.0.21
-    concurrently: ^6.5.1
+    concurrently: ^7.0.0
     eslint: ^8.10.0
     typescript: 4.6.2
   languageName: unknown
@@ -7780,7 +7767,7 @@ __metadata:
     "@types/gulp-cheerio": ^0.0.34
     "@types/gulp-plumber": ^0.0.33
     "@types/gulp-rename": ^2.0.1
-    "@types/gulp-size": ^2.1.2
+    "@types/gulp-size": ^4.0.0
     "@types/gulp-sourcemaps": ^0.0.35
     "@types/gulp-svgmin": ^1.2.1
     "@types/gulp-terser": ^1.2.1
@@ -7824,7 +7811,7 @@ __metadata:
     gulp-jsoncombine: ^1.0.4
     gulp-print: ^5.0.2
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     js-yaml: ^4.1.0
     lodash: ^4.17.21
     moment: ^2.29.1
@@ -7895,7 +7882,7 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     jest: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     prettier: 2.5.1
     ts-jest: ^27.1.3
     typescript: 4.6.2
@@ -7999,7 +7986,7 @@ __metadata:
     "@yarnpkg/pnpify": ^3.1.1
     babel-loader: ^8.2.3
     copy-webpack-plugin: ^9.1.0
-    css-loader: ^6.7.0
+    css-loader: ^6.7.1
     file-loader: ^6.2.0
     find-root: ^1.1.0
     fork-ts-checker-webpack-plugin: ^7.2.1
@@ -8682,12 +8669,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/gulp-size@npm:^2.1.2":
-  version: 2.1.2
-  resolution: "@types/gulp-size@npm:2.1.2"
+"@types/gulp-size@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@types/gulp-size@npm:4.0.0"
   dependencies:
     "@types/node": "*"
-  checksum: ba58d9e65284bf39dbf6368e9d132d7c0abcaf537145392d8c181f5ea8fe75b83ecd2cceef64a789b5b6ca24b4559e80ce93db44bd4c372b32ea896250247816
+  checksum: 1c220d11104b5579b44a83695f42fce8ebdcd793f80dc0edeab4929001ff74452a626db0974603c39579560cdd4c612e09a201febcb429b2457300c344d2165b
   languageName: node
   linkType: hard
 
@@ -9492,15 +9479,6 @@ __metadata:
   version: 15.0.0
   resolution: "@types/yargs-parser@npm:15.0.0"
   checksum: 333ab73a1f9c82c64b2fac2441558e58f062fbe7affc35bb53b8e755b62cdd32b1bbc6f4da23773887a2189bf04395e2a8c710df344df4cd578993aeefe98053
-  languageName: node
-  linkType: hard
-
-"@types/yargs@npm:^15.0.0":
-  version: 15.0.14
-  resolution: "@types/yargs@npm:15.0.14"
-  dependencies:
-    "@types/yargs-parser": "*"
-  checksum: 8e358aeb8f0c3758e59e2b8fcfdee5627ab2fe3d92f50f380503d966c7f33287be3322155516a50d27727fde1ad3878f48f60cd6648439126d4b0bbb1a1153ed
   languageName: node
   linkType: hard
 
@@ -14079,9 +14057,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"concurrently@npm:^6.5.1":
-  version: 6.5.1
-  resolution: "concurrently@npm:6.5.1"
+"concurrently@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "concurrently@npm:7.0.0"
   dependencies:
     chalk: ^4.1.0
     date-fns: ^2.16.1
@@ -14092,8 +14070,8 @@ __metadata:
     tree-kill: ^1.2.2
     yargs: ^16.2.0
   bin:
-    concurrently: bin/concurrently.js
-  checksum: 3f4d89b464fa5c9fb6f9489b46594c30ba54eff6ff10ab3cb5f30f64b74c83be664623a0f0cc731a3cb3f057a1f4a3292f7d3470c012a292c44aca31f214a3fa
+    concurrently: dist/bin/concurrently.js
+  checksum: 1be78f24bf814f097adaf2e61a37563eb73f12272bbeda90e3e616a23525f793268e22a3c6aedf34e5bad44459f7c30ee053c617905416ba11ce2bee55f089a5
   languageName: node
   linkType: hard
 
@@ -14642,9 +14620,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-loader@npm:^6.7.0":
-  version: 6.7.0
-  resolution: "css-loader@npm:6.7.0"
+"css-loader@npm:^6.7.1":
+  version: 6.7.1
+  resolution: "css-loader@npm:6.7.1"
   dependencies:
     icss-utils: ^5.1.0
     postcss: ^8.4.7
@@ -14656,7 +14634,7 @@ __metadata:
     semver: ^7.3.5
   peerDependencies:
     webpack: ^5.0.0
-  checksum: 222bbde35315f4cf723fb1dd3a7c5a21e073de2018e8a9475f89631a090f6fd829ef756972a0f15ed6298f6c852d0f45e46ee729625256397ee17638c0b4ae9d
+  checksum: 170fdbc630a05a43679ef60fa97694766b568dbde37adccc0faafa964fc675f08b976bc68837bb73b61d60240e8d2cbcbf51540fe94ebc9dafc56e7c46ba5527
   languageName: node
   linkType: hard
 
@@ -15391,13 +15369,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"diff-sequences@npm:^26.6.2":
-  version: 26.6.2
-  resolution: "diff-sequences@npm:26.6.2"
-  checksum: 79af871776ef149a7ff3345d6b1bf37fe6e81f68632aa5542787851f6f60fba19b0be22fdd1e06046f56ae7382763ccfe94a982c39ee72bd107aef435ecbc0cf
-  languageName: node
-  linkType: hard
-
 "diff-sequences@npm:^27.0.6":
   version: 27.0.6
   resolution: "diff-sequences@npm:27.0.6"
@@ -15658,17 +15629,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:16.0.0":
+"dotenv@npm:16.0.0, dotenv@npm:^16.0.0":
   version: 16.0.0
   resolution: "dotenv@npm:16.0.0"
   checksum: 664cebb51f0a9a1d1b930f51f0271e72e26d62feaecc9dc03df39453dd494b4e724809ca480fb3ec3213382b1ed3f791aaeb83569a137f9329ce58efd4853dbf
-  languageName: node
-  linkType: hard
-
-"dotenv@npm:^10.0.0":
-  version: 10.0.0
-  resolution: "dotenv@npm:10.0.0"
-  checksum: f412c5fe8c24fbe313d302d2500e247ba8a1946492db405a4de4d30dd0eb186a88a43f13c958c5a7de303938949c4231c56994f97d05c4bc1f22478d631b4005
   languageName: node
   linkType: hard
 
@@ -16453,6 +16417,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ev-emitter@npm:^2.1.2":
+  version: 2.1.2
+  resolution: "ev-emitter@npm:2.1.2"
+  checksum: 1102823ef040684869256100e19a6c6aeeecd422d09a267d7c74e77023136eede2ee86ee475ad1019d30d1f7917557d74542d5665e9f91c398bd5814260af6b3
+  languageName: node
+  linkType: hard
+
 "event-stream@npm:^4.0.1":
   version: 4.0.1
   resolution: "event-stream@npm:4.0.1"
@@ -16615,20 +16586,6 @@ __metadata:
   dependencies:
     homedir-polyfill: ^1.0.1
   checksum: 2efe6ed407d229981b1b6ceb552438fbc9e5c7d6a6751ad6ced3e0aa5cf12f0b299da695e90d6c2ac79191b5c53c613e508f7149e4573abfbb540698ddb7301a
-  languageName: node
-  linkType: hard
-
-"expect@npm:^26.6.2":
-  version: 26.6.2
-  resolution: "expect@npm:26.6.2"
-  dependencies:
-    "@jest/types": ^26.6.2
-    ansi-styles: ^4.0.0
-    jest-get-type: ^26.3.0
-    jest-matcher-utils: ^26.6.2
-    jest-message-util: ^26.6.2
-    jest-regex-util: ^26.0.0
-  checksum: 79a9b888c5c6d37d11f2cb76def6cf1dc8ff098d38662ee20c9f2ee0da67e9a93435f2327854b2e7554732153870621843e7f83e8cefb1250447ee2bc39883a4
   languageName: node
   linkType: hard
 
@@ -19300,12 +19257,12 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"imagesloaded@npm:^4.1.4":
-  version: 4.1.4
-  resolution: "imagesloaded@npm:4.1.4"
+"imagesloaded@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "imagesloaded@npm:5.0.0"
   dependencies:
-    ev-emitter: ^1.0.0
-  checksum: 6c25b6c11d7595f2c5a116723cf82b99e7b1a21e0e787e4b32a5813b371152980602e9eb1ea95019d848c0e775fbd5d39fbde5e54e9a0b6e0434be503370c0a2
+    ev-emitter: ^2.1.2
+  checksum: aec1826e866bcf2f92fc533b78e431597096c32dda3cf6de060f9dc2bdf1e39bb600eda244a7280ed09a7d12462fb63cf01e723799d35a86a326592e2f23751b
   languageName: node
   linkType: hard
 
@@ -20534,18 +20491,6 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"jest-diff@npm:^26.6.2":
-  version: 26.6.2
-  resolution: "jest-diff@npm:26.6.2"
-  dependencies:
-    chalk: ^4.0.0
-    diff-sequences: ^26.6.2
-    jest-get-type: ^26.3.0
-    pretty-format: ^26.6.2
-  checksum: d00d297f31e1ac0252127089892432caa7a11c69bde29cf3bb6c7a839c8afdb95cf1fd401f9df16a4422745da2e6a5d94b428b30666a2540c38e1c5699915c2d
-  languageName: node
-  linkType: hard
-
 "jest-diff@npm:^27.2.5":
   version: 27.2.5
   resolution: "jest-diff@npm:27.2.5"
@@ -20621,22 +20566,15 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"jest-extended@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "jest-extended@npm:1.2.1"
+"jest-extended@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "jest-extended@npm:2.0.0"
   dependencies:
-    expect: ^26.6.2
     jest-diff: ^27.2.5
     jest-get-type: ^27.0.6
-    jest-matcher-utils: ^27.2.4
-  checksum: e7ce0b66786e84600c6c442ad9632ab402eb07ba60125e7a3a71c828553971fd5ba2b69e5ded300252416c5941a3ad1470170284d62fa64e66a373ea71b179c5
-  languageName: node
-  linkType: hard
-
-"jest-get-type@npm:^26.3.0":
-  version: 26.3.0
-  resolution: "jest-get-type@npm:26.3.0"
-  checksum: 1cc6465ae4f5e880be22ba52fd270fa64c21994915f81b41f8f7553a7957dd8e077cc8d03035de9412e2d739f8bad6a032ebb5dab5805692a5fb9e20dd4ea666
+  peerDependencies:
+    jest: ">=27.2.5"
+  checksum: cd645b460ac68dec41918f1c55e84406828961a7dfa5b8a88e2f38d946399c9b6678c2443fcb88c375c7212008a6ccb2f1ad2eb98cccc0e3f8abcc68c4e68890
   languageName: node
   linkType: hard
 
@@ -20713,18 +20651,6 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"jest-matcher-utils@npm:^26.6.2":
-  version: 26.6.2
-  resolution: "jest-matcher-utils@npm:26.6.2"
-  dependencies:
-    chalk: ^4.0.0
-    jest-diff: ^26.6.2
-    jest-get-type: ^26.3.0
-    pretty-format: ^26.6.2
-  checksum: 74d2165c1ac7fe98fe27cd2b5407499478e6b2fe99dd54e26d8ee5c9f5f913bdd7bdc07c7221b9b04df0c15e9be0e866ff3455b03e38cc66c480d9996d6d5405
-  languageName: node
-  linkType: hard
-
 "jest-matcher-utils@npm:^27.0.0, jest-matcher-utils@npm:^27.5.1":
   version: 27.5.1
   resolution: "jest-matcher-utils@npm:27.5.1"
@@ -20734,35 +20660,6 @@ fsevents@~2.3.1:
     jest-get-type: ^27.5.1
     pretty-format: ^27.5.1
   checksum: bb2135fc48889ff3fe73888f6cc7168ddab9de28b51b3148f820c89fdfd2effdcad005f18be67d0b9be80eda208ad47290f62f03d0a33f848db2dd0273c8217a
-  languageName: node
-  linkType: hard
-
-"jest-matcher-utils@npm:^27.2.4":
-  version: 27.2.5
-  resolution: "jest-matcher-utils@npm:27.2.5"
-  dependencies:
-    chalk: ^4.0.0
-    jest-diff: ^27.2.5
-    jest-get-type: ^27.0.6
-    pretty-format: ^27.2.5
-  checksum: 92f285c8e2a50f2b6761a1d81db98858416b6ccb6559c9ce954ef9cad6b76729ac18b8c1e98e2e81e1a55fca4dc9d8571d5dfbc2161583ed5716119e35b2a089
-  languageName: node
-  linkType: hard
-
-"jest-message-util@npm:^26.6.2":
-  version: 26.6.2
-  resolution: "jest-message-util@npm:26.6.2"
-  dependencies:
-    "@babel/code-frame": ^7.0.0
-    "@jest/types": ^26.6.2
-    "@types/stack-utils": ^2.0.0
-    chalk: ^4.0.0
-    graceful-fs: ^4.2.4
-    micromatch: ^4.0.2
-    pretty-format: ^26.6.2
-    slash: ^3.0.0
-    stack-utils: ^2.0.2
-  checksum: ffe5a715591c41240b9ed4092faf10f3eaf9ddfdf25d257a0c9f903aaa8d9eed5baa7e38016d2ec4f610fd29225e0f5231a91153e087a043e62824972c83d015
   languageName: node
   linkType: hard
 
@@ -20802,13 +20699,6 @@ fsevents@~2.3.1:
     jest-resolve:
       optional: true
   checksum: bd85dcc0e76e0eb0c3d56382ec140f08d25ff4068cda9d0e360bb78fb176cb726d0beab82dc0e8694cafd09f55fee7622b8bcb240afa5fad301f4ed3eebb4f47
-  languageName: node
-  linkType: hard
-
-"jest-regex-util@npm:^26.0.0":
-  version: 26.0.0
-  resolution: "jest-regex-util@npm:26.0.0"
-  checksum: 930a00665e8dfbedc29140678b4a54f021b41b895cf35050f76f557c1da3ac48ff42dd7b18ba2ccba6f4e518c6445d6753730d03ec7049901b93992db1ef0483
   languageName: node
   linkType: hard
 
@@ -25087,18 +24977,6 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"pretty-format@npm:^26.6.2":
-  version: 26.6.2
-  resolution: "pretty-format@npm:26.6.2"
-  dependencies:
-    "@jest/types": ^26.6.2
-    ansi-regex: ^5.0.0
-    ansi-styles: ^4.0.0
-    react-is: ^17.0.1
-  checksum: e3b808404d7e1519f0df1aa1f25cee0054ab475775c6b2b8c5568ff23194a92d54bf93274139b6f584ca70fd773be4eaa754b0e03f12bb0a8d1426b07f079976
-  languageName: node
-  linkType: hard
-
 "pretty-format@npm:^27.0.0":
   version: 27.1.1
   resolution: "pretty-format@npm:27.1.1"
@@ -26695,7 +26573,7 @@ fsevents@~2.3.1:
     glob: ^7.2.0
     jest: ^27.5.1
     jest-config: ^27.5.1
-    jest-extended: ^1.2.1
+    jest-extended: ^2.0.0
     pkg-dir: ^6.0.1
     prettier: 2.5.1
     pug: ^3.0.2
@@ -27924,15 +27802,6 @@ fsevents@~2.3.1:
   version: 0.0.10
   resolution: "stack-trace@npm:0.0.10"
   checksum: 473036ad32f8c00e889613153d6454f9be0536d430eb2358ca51cad6b95cea08a3cc33cc0e34de66b0dad221582b08ed2e61ef8e13f4087ab690f388362d6610
-  languageName: node
-  linkType: hard
-
-"stack-utils@npm:^2.0.2":
-  version: 2.0.5
-  resolution: "stack-utils@npm:2.0.5"
-  dependencies:
-    escape-string-regexp: ^2.0.0
-  checksum: 76b69da0f5b48a34a0f93c98ee2a96544d2c4ca2557f7eef5ddb961d3bdc33870b46f498a84a7c4f4ffb781df639840e7ebf6639164ed4da5e1aeb659615b9c7
   languageName: node
   linkType: hard
 
