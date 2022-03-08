@@ -57,7 +57,7 @@
   },
   "devDependencies": {
     "@nestjs/cli": "^8.2.2",
-    "@nestjs/schematics": "^8.0.7",
+    "@nestjs/schematics": "^8.0.8",
     "@nestjs/testing": "^8.4.0",
     "@types/cache-manager": "^3.4.3",
     "@types/cookie-parser": "^1.4.2",
@@ -68,8 +68,8 @@
     "@types/path-to-regexp": "^1.7.0",
     "@types/qs": "^6.9.7",
     "@types/supertest": "^2.0.11",
-    "@typescript-eslint/eslint-plugin": "^5.13.0",
-    "@typescript-eslint/parser": "^5.13.0",
+    "@typescript-eslint/eslint-plugin": "^5.14.0",
+    "@typescript-eslint/parser": "^5.14.0",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
@@ -80,9 +80,9 @@
     "rimraf": "^3.0.2",
     "supertest": "^6.2.2",
     "ts-jest": "^27.1.3",
-    "ts-node": "^10.6.0",
+    "ts-node": "^10.7.0",
     "tsconfig-paths": "^3.13.0",
-    "typescript": "4.5.5"
+    "typescript": "4.6.2"
   },
   "jest": {
     "moduleFileExtensions": [

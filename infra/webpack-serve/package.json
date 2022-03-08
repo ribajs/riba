@@ -27,7 +27,7 @@
     "@types/yargs": "^17.0.9",
     "get-port": "^6.1.2",
     "pkg-dir": "^6.0.1",
-    "typescript": "^4.5.5",
+    "typescript": "4.6.2",
     "webpack": "^5.70.0",
     "webpack-dev-server": "^4.7.4",
     "yargs": "^17.3.1"
