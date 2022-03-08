@@ -341,6 +341,9 @@ export class View {
   public traverse(node: BindableElement): boolean {
     /** If true stop / block the parseNode recursion */
     let block = this.options.blockNodeNames.includes(node.nodeName);
+    if (block) {
+      return block;
+    }
     const attributes = node.attributes;
 
     // bind attribute binders if available
