@@ -1,4 +1,0 @@
-{
-  "extends": "electron-webpack/tsconfig-base.json",
-  "files": ["src/ts/main/main.ts"]
-}

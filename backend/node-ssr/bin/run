@@ -1,2 +1,0 @@
-#!/usr/bin/env node
-require("@ribajs/node-ssr/dist/cjs/cli.js");

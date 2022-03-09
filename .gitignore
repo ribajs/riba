@@ -9,7 +9,6 @@
 !packages/podcast/dist/
 /demos/*/dist
 /demos/*/public
-/examples/*/dist
 node_modules/
 /.cache
 
@@ -71,12 +70,6 @@ lerna-debug.log*
 !/demos/*/.yarn/plugins
 !/demos/*/.yarn/sdks
 !/demos/*/.yarn/versions
-
-/examples/*/.yarn/*
-!/examples/*/.yarn/releases
-!/examples/*/.yarn/plugins
-!/examples/*/.yarn/sdks
-!/examples/*/.yarn/versions
 
 # Demos
 /demos/*/src/iconset/

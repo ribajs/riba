@@ -1,1 +1,0 @@
-{"version":3,"file":"lunr.module.js","sourceRoot":"","sources":["../../src/lunr.module.ts"],"names":[],"mappings":";;;;;;;;;AAAA,2CAAwC;AACxC,iDAA6C;AAC7C,+DAA2D;AAO3D,IAAa,UAAU,GAAvB,MAAa,UAAU;CAAG,CAAA;AAAb,UAAU;IALtB,IAAA,eAAM,EAAC;QACN,SAAS,EAAE,CAAC,0BAAW,EAAE,gCAAc,CAAC;QACxC,WAAW,EAAE,EAAE;QACf,OAAO,EAAE,CAAC,0BAAW,EAAE,gCAAc,CAAC;KACvC,CAAC;GACW,UAAU,CAAG;AAAb,gCAAU"}
