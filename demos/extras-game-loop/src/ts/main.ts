@@ -1,4 +1,4 @@
-import { coreModule, Riba } from "@ribajs/core";
+import { coreModule, Riba } from "@ribajs/core/src/index.js";
 
 import { ExtrasGameLoopModule } from "./extras-game-loop.module";
 

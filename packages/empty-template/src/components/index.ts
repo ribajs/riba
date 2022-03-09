@@ -1,1 +1,1 @@
-export * from "./empty-template/empty-template.component";
+export * from "./empty-template/empty-template.component.js";

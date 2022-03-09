@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import { NpmRunner } from "./npm.runner";
-import { Runner } from "../../interfaces/index";
+import { Runner } from "../../interfaces/index.js";
 import { SchematicRunner } from "./schematic.runner";
 import { YarnRunner } from "./yarn.runner";
 

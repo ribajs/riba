@@ -1,8 +1,10 @@
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { resolve, rootPath, findDir, findFile } = require("./path");
-const { logger } = require("./logger");
-const { colors } = require("./colors");
+const { resolve, rootPath, findDir, findFile } = require("./path.cjs");
+const { logger } = require("./logger.cjs");
+const { colors } = require("./colors.cjs");
+
+const ResolveTypeScriptPlugin = require("resolve-typescript-plugin");
 
 module.exports.getBaseConfig = (config = {}, env = {}) => {
   env.development =
@@ -194,7 +196,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
   config.resolve = config.resolve || {
     symlinks: true,
     alias: {},
-    plugins: [],
+    plugins: [new ResolveTypeScriptPlugin()],
   };
   config.resolve.extensions = config.resolve.extensions || [
     ".ts",

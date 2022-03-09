@@ -1,4 +1,4 @@
-import { isObject, isString, isNumber } from "@ribajs/utils/src/type";
+import { isObject, isString, isNumber } from "@ribajs/utils/src/type.js";
 
 /**
  * Get property of object or array

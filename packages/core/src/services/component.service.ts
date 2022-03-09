@@ -1,6 +1,6 @@
-import { Components, ModuleElementType } from "../types";
-import { Component } from "../component";
-import { ModuleElementService } from "./module-element.service";
+import { Components, ModuleElementType } from "../types/index.js";
+import { Component } from "../component/index.js";
+import { ModuleElementService } from "./module-element.service.js";
 
 export class ComponentService extends ModuleElementService {
   protected type: ModuleElementType = "components";

@@ -1,7 +1,7 @@
-import { Formatters } from "./formatters";
-import { Binders } from "./binders";
-import { Adapters } from "./adapters";
-import { Components } from "./components";
+import { Formatters } from "./formatters.js";
+import { Binders } from "./binders.js";
+import { Adapters } from "./adapters.js";
+import { Components } from "./components.js";
 
 export interface Extensions {
   binders?: Binders;

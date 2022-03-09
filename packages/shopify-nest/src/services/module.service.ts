@@ -1,4 +1,4 @@
-import { ShopifyNestModuleOptions } from "../types";
+import { ShopifyNestModuleOptions } from "../types/index.js";
 
 export class ModuleService {
   protected static _options: ShopifyNestModuleOptions;

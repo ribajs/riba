@@ -1,5 +1,5 @@
-import { Formatter } from "../../types/formatter";
-import { isBoolean } from "@ribajs/utils/src/type";
+import { Formatter } from "../../types/formatter.js";
+import { isBoolean } from "@ribajs/utils/src/type.js";
 
 /**
  * Checks if value is an boolean

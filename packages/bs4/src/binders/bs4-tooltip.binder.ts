@@ -1,5 +1,5 @@
 import Popper from "popper.js";
-import { Binder } from "@ribajs/core";
+import { Binder } from "@ribajs/core/src/index.js";
 
 /**
  *

@@ -1,7 +1,7 @@
 import "../scss/main.scss";
 
 import { bs4Module } from "@ribajs/bs4";
-import { coreModule, Riba } from "@ribajs/core";
+import { coreModule, Riba } from "@ribajs/core/src/index.js";
 import { extrasModule } from "@ribajs/extras";
 import { Bs4TaggedImageDemoModule } from "./bs4-taggedimage-demo.module";
 

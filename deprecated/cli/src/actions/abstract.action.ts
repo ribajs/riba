@@ -1,9 +1,9 @@
 import {
   CommandInput,
   ConfigurationLoader as IConfigurationLoader,
-} from "../interfaces/index";
-import { ConfigurationLoader } from "../lib/configuration/index";
-import { FileSystemReader } from "../lib/readers/index";
+} from "../interfaces/index.js";
+import { ConfigurationLoader } from "../lib/configuration/index.js";
+import { FileSystemReader } from "../lib/readers/index.js";
 import { join } from "path";
 
 export abstract class AbstractAction {

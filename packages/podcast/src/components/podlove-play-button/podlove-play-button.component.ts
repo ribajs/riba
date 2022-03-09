@@ -1,5 +1,5 @@
-import { Component, TemplateFunction } from "@ribajs/core";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { waitForProp } from "@ribajs/utils/src/control";
 import { requestPlay, selectEpisode } from "../../mixins/actions.mixins";
 import { getEpisodeConfig, getPlayerConfig } from "../../mixins/config.mixins";
@@ -8,8 +8,8 @@ import { DEFAULT_MAIN_PLAYER_ID } from "../../constants";
 import type {
   PodlovePlayButtonComponentScope,
   PodloveWebPlayerStore,
-} from "../../types";
-import type { PodloveWebPlayerComponent } from "../podlove-web-player/podlove-web-player.component";
+} from "../../types/index.js";
+import type { PodloveWebPlayerComponent } from "../podlove-web-player/podlove-web-player.component.js";
 import TEMPLATE from "./podlove-play-button.component.template";
 
 const PLAY_ICON = `<svg width="25" height="25" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" background="currentColor" aria-hidden="true"><path d="M6 5.76341C6 5.19411 6.60936 4.83238 7.10914 5.10498L18.5429 11.3416C19.064 11.6258 19.064 12.3742 18.5429 12.6584L7.10914 18.895C6.60936 19.1676 6 18.8059 6 18.2366V5.76341Z" rv-style-fill="styles.play.color"></path></svg>`;

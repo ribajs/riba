@@ -1,20 +1,34 @@
-const { spawn } = require('child_process');
-const gs=require('glob').sync;
-const ws=require('../package.json').workspaces;
-const match = '{'+ws.filter(s=>!s.startsWith('!')).join(',')+'}';
-const ignore ='{'+ws.filter(s=>s.startsWith('!')).map(s=>s.substr(1)).join(',')+'}';
-console.log('match', match);
-console.log('ignore', ignore);
+import { spawn } from 'child_process';
+import glob from 'glob';
+const { sync: gs } = glob;
+import { readFile } from 'fs/promises';
+
+const loadJson = async (path) => {
+  const url = new URL(path, import.meta.url);
+  return JSON.parse(
+    await readFile(
+      new URL(path, import.meta.url), "utf8"
+    )
+  );
+}
 
 (async () => {
+
+  const ws = (await loadJson('../package.json')).workspaces;
+
+  const match = '{' + ws.filter(s => !s.startsWith('!')).join(',') + '}';
+  const ignore = '{' + ws.filter(s => s.startsWith('!')).map(s => s.substr(1)).join(',') + '}';
+  console.log('match', match);
+  console.log('ignore', ignore);
+
   const results = [];
   const dirs = gs(match, { ignore });
   for (const [i, dir] of dirs.entries()) {
-    results.push(await new Promise((resolve) => {
+    results.push(await new Promise(async (resolve) => {
       console.log(dir);
       let pkg;
       try {
-        pkg = require(`../${dir}/package.json`);
+        pkg = await loadJson(`../${dir}/package.json`);
       } catch (error) {
         console.warn(`Package ${dir} has no package.json. Skipping...`);
         return resolve({dir, code: 0});
@@ -39,10 +53,12 @@ console.log('ignore', ignore);
       childProcess.stderr.pipe(process.stderr);
     }));
   }
-  const errors = results.filter(({code}) => code !== 0);
+  const errors = results.filter(({ code }) => code !== 0);
   if (errors.length > 0) {
     for (error of errors) {
-      console.error(`${error.dir} ${error.cmd} failed with code`, error.code);
+      if (error) {
+        console.error(`${error.dir} ${error.cmd} failed with code`, error.code);
+      }
     }
     process.exit(1);
   }

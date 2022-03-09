@@ -1,11 +1,11 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import { Pjax } from "@ribajs/router";
 import {
   getViewportDimensions,
   hasChildNodesTrim,
-} from "@ribajs/utils/src/dom";
+} from "@ribajs/utils/src/dom.js";
 import type { InstagramMedia } from "../../interfaces/instagram-api";
-import { InstagramApiService } from "../../services/instagram-api.service";
+import { InstagramApiService } from "../../services/instagram-api.service.js";
 import template from "./instagram-scrollbar.component.html";
 
 export interface Scope {

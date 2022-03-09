@@ -1,4 +1,4 @@
-import { shopifyTDAModule } from "./index";
+import { shopifyTDAModule } from "./index.js";
 
 declare global {
   interface Window {

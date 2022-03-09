@@ -1,9 +1,13 @@
-import { Component, View, TemplateFunction } from "@ribajs/core";
+import { Component, View, TemplateFunction } from "@ribajs/core/src/index.js";
 import { EventDispatcher } from "@ribajs/events";
-import { scrollTo, scrollToPosition } from "@ribajs/utils/src/dom";
-import { State } from "@ribajs/history";
+import { scrollTo, scrollToPosition } from "@ribajs/utils/src/dom.js";
+import { State } from "@ribajs/history/src/index.js";
 import { Pjax, Prefetch, RouterService } from "../../services";
-import type { RouterViewOptions, PjaxOptions, JsxRouterViewProps } from "../../types";
+import type {
+  RouterViewOptions,
+  PjaxOptions,
+  JsxRouterViewProps,
+} from "../../types/index.js";
 
 export interface Scope extends RouterViewOptions {
   dataset: any;

@@ -23,7 +23,7 @@ import {
   // ShopifyApp,
 } from "../interfaces/shopify-easdk";
 
-import { WrapperService } from "./wrapper.service";
+import { WrapperService } from "./wrapper.service.js";
 
 export class UserWrapperService extends WrapperService implements User {
   // Singleton instace

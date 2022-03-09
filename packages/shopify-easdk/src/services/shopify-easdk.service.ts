@@ -30,10 +30,10 @@ import {
   // ShopifyApp,
 } from "../interfaces/shopify-easdk";
 
-import { WrapperService } from "./wrapper.service";
-import { BarWrapperService } from "./shopify-easdk-bar.service";
-import { ModalWrapperService } from "./shopify-easdk-modal.service";
-import { UserWrapperService } from "./shopify-easdk-user.service";
+import { WrapperService } from "./wrapper.service.js";
+import { BarWrapperService } from "./shopify-easdk-bar.service.js";
+import { ModalWrapperService } from "./shopify-easdk-modal.service.js";
+import { UserWrapperService } from "./shopify-easdk-user.service.js";
 
 // import { AlertComponent } from './alert/alert.component';
 // import { ConfirmComponent } from './confirm/confirm.component';

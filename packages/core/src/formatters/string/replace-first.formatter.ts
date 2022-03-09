@@ -1,5 +1,5 @@
 /* tslint:disable:variable-name */
-import { Formatter } from "../../types";
+import { Formatter } from "../../types/index.js";
 
 /**
  * Replaces the first occurrence of a string with a substring.

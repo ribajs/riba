@@ -1,11 +1,11 @@
 import "./types/global";
 
-import { RibaModule, LifecycleService } from "@ribajs/core";
-import * as binders from "./binders";
-import * as formatters from "./formatters";
-import * as services from "./services";
-import * as components from "./components";
-import { SSRModuleOptions } from "./types";
+import { RibaModule, LifecycleService } from "@ribajs/core/src/index.js";
+import * as binders from "./binders/index.js";
+import * as formatters from "./formatters/index.js";
+import * as services from "./services/index.js";
+import * as components from "./components/index.js";
+import { SSRModuleOptions } from "./types/index.js";
 
 export const SSRModule: RibaModule<SSRModuleOptions> = {
   binders,

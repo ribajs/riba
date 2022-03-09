@@ -2,11 +2,15 @@
   "name": "@ribajs/shopify-easdk",
   "description": "Shopify Embedded App SDK module for Riba.js",
   "version": "2.0.0-alpha.0",
+  "type": "module",
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [],
   "url": "https://github.com/ribajs/riba/tree/master/packages/shopify-easdk",
   "homepage": "https://github.com/ribajs/riba#readme",
-  "main": "src/index.ts",
+  "main": "./src/index.ts",
   "module": "src/index.ts",
   "source": "src/index.ts",
   "license": "MIT",

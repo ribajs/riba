@@ -1,6 +1,6 @@
-import { Riba } from "../riba";
-import { dotAdapter } from "../adapters/dot.adapter";
-import { AssignPropertyBinder } from "./assign-property.binder";
+import { Riba } from "../riba.js";
+import { dotAdapter } from "../adapters/dot.adapter.js";
+import { AssignPropertyBinder } from "./assign-property.binder.js";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);

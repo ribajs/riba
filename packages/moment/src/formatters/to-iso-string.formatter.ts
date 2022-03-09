@@ -1,4 +1,4 @@
-import { Formatter } from "@ribajs/core";
+import { Formatter } from "@ribajs/core/src/index.js";
 import moment from "moment";
 
 /**

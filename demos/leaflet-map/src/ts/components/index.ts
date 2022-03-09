@@ -1,1 +1,1 @@
-export { LeafletExampleComponent } from "./leaflet-example/leaflet-example.component";
+export { LeafletExampleComponent } from "./leaflet-example/leaflet-example.component.js";

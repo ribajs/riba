@@ -1,1 +1,1 @@
-export { PodcastExampleComponent } from "./podcast-example/podcast-example.component";
+export { PodcastExampleComponent } from "./podcast-example/podcast-example.component.js";

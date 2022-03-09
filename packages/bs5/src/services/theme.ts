@@ -1,8 +1,12 @@
 import { EventDispatcher } from "@ribajs/events";
 import { themeChoices } from "../constants";
-import { Bs5Service } from "./bs5.service";
+import { Bs5Service } from "./bs5.service.js";
 
-import type { ThemeChoice, ThemeData, ThemeChangedCallback } from "../types";
+import type {
+  ThemeChoice,
+  ThemeData,
+  ThemeChangedCallback,
+} from "../types/index.js";
 
 /**
  * The theme service is used to change and observe the color scheme from the OS or the user.

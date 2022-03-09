@@ -1,4 +1,4 @@
-import { monacoEditorModule } from "./index";
+import { monacoEditorModule } from "./index.js";
 
 declare global {
   interface Window {

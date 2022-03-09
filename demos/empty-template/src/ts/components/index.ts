@@ -1,1 +1,1 @@
-export { EmptyTemplateExampleComponent } from "./empty-template-example/empty-template-example.component";
+export { EmptyTemplateExampleComponent } from "./empty-template-example/empty-template-example.component.js";

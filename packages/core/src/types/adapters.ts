@@ -1,4 +1,4 @@
-import { Adapter } from "./adapter";
+import { Adapter } from "./adapter.js";
 
 export interface Adapters {
   [name: string]: Adapter;

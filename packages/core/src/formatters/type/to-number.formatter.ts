@@ -1,4 +1,4 @@
-import { getNumber } from "@ribajs/utils/src/type";
+import { getNumber } from "@ribajs/utils/src/type.js";
 
 /**
  * Parse a string to number / float

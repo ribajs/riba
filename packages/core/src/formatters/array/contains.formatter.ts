@@ -3,7 +3,7 @@ import {
   isObject,
   isDefined,
   isNumber,
-} from "@ribajs/utils/src/type";
+} from "@ribajs/utils/src/type.js";
 
 /**
  * Returns true if an object, array or string contains an index, object, property or substring.

@@ -1,4 +1,4 @@
-import { isNumber } from "@ribajs/utils/src/type";
+import { isNumber } from "@ribajs/utils/src/type.js";
 
 /**
  * Custom version of shopify tools like api.jquery.js / option-selection.js

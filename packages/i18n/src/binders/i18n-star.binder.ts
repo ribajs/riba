@@ -1,7 +1,11 @@
-import { Binder, BinderAttributeChangedEvent } from "@ribajs/core";
-import { extend } from "@ribajs/utils/src/type";
-import { I18nService } from "../services/i18n.service";
-import { LocalesService, LocalVar, LocalPluralization } from "../types";
+import { Binder, BinderAttributeChangedEvent } from "@ribajs/core/src/index.js";
+import { extend } from "@ribajs/utils/src/type.js";
+import { I18nService } from "../services/i18n.service.js";
+import {
+  LocalesService,
+  LocalVar,
+  LocalPluralization,
+} from "../types/index.js";
 
 /**
  *

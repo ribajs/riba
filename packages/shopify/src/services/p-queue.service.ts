@@ -1,6 +1,6 @@
 // https://github.com/sindresorhus/p-queue
 
-import { PriorityQueue } from "./priority-queue.service";
+import { PriorityQueue } from "./priority-queue.service.js";
 
 export class PQueue {
   public queue = new PriorityQueue(); // eslint-disable-line new-cap

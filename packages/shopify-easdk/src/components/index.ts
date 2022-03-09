@@ -1,1 +1,1 @@
-export { BarComponent } from "./bar/bar.component";
+export { BarComponent } from "./bar/bar.component.js";

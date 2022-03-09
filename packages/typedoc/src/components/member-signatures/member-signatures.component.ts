@@ -1,6 +1,6 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 
-import type { MemberSignaturesComponentScope } from "../../types";
+import type { MemberSignaturesComponentScope } from "../../types/index.js";
 
 export class MemberSignaturesComponent extends Component {
   public static tagName = "tsd-member-signatures";

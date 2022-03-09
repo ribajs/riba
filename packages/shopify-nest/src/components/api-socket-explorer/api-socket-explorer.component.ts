@@ -1,12 +1,12 @@
-import { Component, TemplateFunction } from "@ribajs/core";
-import { htmlToElement, hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { htmlToElement, hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import Debug from "debug";
 import { LocalesStaticService } from "@ribajs/i18n";
 import { Product } from "@ribajs/shopify-tda";
-import { WebhooksService } from "../../services/webhooks.service";
-import { ShopifyApiProductService } from "../../services/shopify-api-product.service";
-import productCreatesTestDatas from "../../tests/data/products/creates.data";
-import productUpdatesTestDatas from "../../tests/data/products/updates.data";
+import { WebhooksService } from "../../services/webhooks.service.js";
+import { ShopifyApiProductService } from "../../services/shopify-api-product.service.js";
+import productCreatesTestDatas from "../../tests/data/products/creates.data.js";
+import productUpdatesTestDatas from "../../tests/data/products/updates.data.js";
 
 import pugTemplate from "./api-socket-explorer.component.pug";
 

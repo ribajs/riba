@@ -1,4 +1,4 @@
-import { jsonStringify } from "@ribajs/utils";
+import { jsonStringify } from "@ribajs/utils/src/index.js";
 
 /**
  * Converts a string into a JSON string.

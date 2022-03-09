@@ -1,7 +1,7 @@
-import { coreModule, Riba } from "@ribajs/core";
+import { coreModule, Riba } from "@ribajs/core/src/index.js";
 import { extrasModule } from "@ribajs/extras";
-import { Bs4SlideshowComponent } from "@ribajs/bs4/src/components/bs4-slideshow/bs4-slideshow.component";
-import { Bs4IconComponent } from "@ribajs/bs4/src/components/bs4-icon/bs4-icon.component";
+import { Bs4SlideshowComponent } from "@ribajs/bs4/src/components/bs4-slideshow/bs4-slideshow.component.js";
+import { Bs4IconComponent } from "@ribajs/bs4/src/components/bs4-icon/bs4-icon.component.js";
 import { SlideshowDemoModule } from "./slideshow.module";
 
 const riba = new Riba();

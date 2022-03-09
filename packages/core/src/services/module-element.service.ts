@@ -1,5 +1,5 @@
-import { isObject } from "@ribajs/utils/src/type";
-import { ModuleElementType, Elements } from "../types";
+import { isObject } from "@ribajs/utils/src/type.js";
+import { ModuleElementType, Elements } from "../types/index.js";
 
 export abstract class ModuleElementService<T = any> {
   protected elements: Elements<T>;

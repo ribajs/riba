@@ -1,7 +1,7 @@
-import { Riba } from "../riba";
-import { dotAdapter } from "../adapters/dot.adapter";
-import { UnlessBinder } from "./unless.binder";
-import { EachStarBinder } from "./each-item.binder";
+import { Riba } from "../riba.js";
+import { dotAdapter } from "../adapters/dot.adapter.js";
+import { UnlessBinder } from "./unless.binder.js";
+import { EachStarBinder } from "./each-item.binder.js";
 
 describe("unless", () => {
   const riba = new Riba();

@@ -1,6 +1,6 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import { ThemeService } from "../../services/theme";
-import { hasChildNodesTrim } from "@ribajs/utils";
+import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
 import template from "./bs5-theme-button.component.pug";
 import { themeChoices } from "../../constants";
 
@@ -9,7 +9,7 @@ import type {
   ThemeChoice,
   ThemeChangedData,
   JsxBs5ThemeButtonProps,
-} from "../../types";
+} from "../../types/index.js";
 
 /**
  * @see https://github.com/TypeStrong/typedoc/blob/master/src/lib/output/themes/default/assets/typedoc/Theme.ts

@@ -1,5 +1,5 @@
-import { Binder } from "../binder";
-import { camelCase } from "@ribajs/utils/src/type";
+import { Binder } from "../binder.js";
+import { camelCase } from "@ribajs/utils/src/type.js";
 
 /**
  * assign-*

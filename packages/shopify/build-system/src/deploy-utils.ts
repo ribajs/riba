@@ -9,7 +9,7 @@ import fs from "fs";
 import gutil from "gulp-util";
 import open from "open";
 import * as yaml from "js-yaml";
-import { ThemeConfigByEnv, ThemeConfig } from "./types";
+import { ThemeConfigByEnv, ThemeConfig } from "./types/index.js";
 import * as themekit from "@shopify/themekit";
 
 import { config } from "./includes/config";

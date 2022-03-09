@@ -1,1 +1,1 @@
-export { VideoExampleComponent } from "./video-example/video-example.component";
+export { VideoExampleComponent } from "./video-example/video-example.component.js";

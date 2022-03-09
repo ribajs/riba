@@ -1,1 +1,1 @@
-export * from "./photoswipe/bs5-photoswipe.component";
+export * from "./photoswipe/bs5-photoswipe.component.js";

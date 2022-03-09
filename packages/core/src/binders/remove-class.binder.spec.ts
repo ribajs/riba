@@ -1,8 +1,8 @@
-import { Riba } from "../riba";
+import { Riba } from "../riba.js";
 
-import { dotAdapter } from "../adapters/dot.adapter";
+import { dotAdapter } from "../adapters/dot.adapter.js";
 
-import { RemoveClassBinder } from "./remove-class.binder";
+import { RemoveClassBinder } from "./remove-class.binder.js";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);

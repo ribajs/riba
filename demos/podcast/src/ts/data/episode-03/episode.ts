@@ -7,7 +7,7 @@ import {
   michaelaLehr,
   ericTeubert,
   simon,
-} from "../contributors/index";
+} from "../contributors/index.js";
 import { show } from "../show";
 
 /**

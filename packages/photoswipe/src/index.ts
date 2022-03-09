@@ -1,6 +1,6 @@
 import "./types/photoswipe/index.d";
-export * from "./services";
-export * from "./binders";
-export * from "./components";
+export * from "./services/index.js";
+export * from "./binders/index.js";
+export * from "./components/index.js";
 export * from "./photoswipe.module";
-export * from "./types";
+export * from "./types/index.js";

@@ -5,11 +5,11 @@ module.exports = {
     [
       "@babel/preset-react",
       {
-        "pragma": "window.jsxCreateElement", // default pragma is React.createElement (only in classic runtime)
-        "pragmaFrag": "window.jsxFragment", // default is React.Fragment (only in classic runtime)
-        "throwIfNamespace": false, // defaults to true
-        "runtime": "classic" // defaults to classic
-      }
+        pragma: "window.jsxCreateElement", // default pragma is React.createElement (only in classic runtime)
+        pragmaFrag: "window.jsxFragment", // default is React.Fragment (only in classic runtime)
+        throwIfNamespace: false, // defaults to true
+        runtime: "classic", // defaults to classic
+      },
     ],
     [
       "@babel/preset-typescript",

@@ -1,4 +1,4 @@
-import { getElementIndex } from "@ribajs/utils/src/dom";
+import { getElementIndex } from "@ribajs/utils/src/dom.js";
 import {
   Position,
   TouchData,
@@ -7,9 +7,9 @@ import {
   TouchType,
   TouchSwipeData,
   TouchDirection,
-} from "../../types";
+} from "../../types/index.js";
 
-import { BaseEventsService } from "./base-events.service";
+import { BaseEventsService } from "./base-events.service.js";
 
 /**
  * Vanilla version of jQuery Mobile Events

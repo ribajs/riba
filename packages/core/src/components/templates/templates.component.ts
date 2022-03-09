@@ -1,5 +1,5 @@
-import { Component, parseType } from "@ribajs/core";
-import { camelCase, parseJsonString } from "@ribajs/utils";
+import { Component, parseType } from "@ribajs/core/src/index.js";
+import { camelCase, parseJsonString } from "@ribajs/utils/src/index.js";
 
 export type AttributeType = string;
 

@@ -1,1 +1,1 @@
-export { MomentExampleComponent } from "./moment-example/moment-example.component";
+export { MomentExampleComponent } from "./moment-example/moment-example.component.js";

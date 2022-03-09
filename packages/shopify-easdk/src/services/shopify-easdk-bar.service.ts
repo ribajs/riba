@@ -28,7 +28,7 @@ import { EventDispatcher } from "@ribajs/events";
 
 import { State } from "@ribajs/router";
 
-import { WrapperService } from "./wrapper.service";
+import { WrapperService } from "./wrapper.service.js";
 
 export class BarWrapperService extends WrapperService implements BarWrapper {
   /**

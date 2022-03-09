@@ -1,4 +1,4 @@
-import { photoswipeModule } from "./index";
+import { photoswipeModule } from "./index.js";
 
 declare global {
   interface Window {

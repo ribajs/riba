@@ -1,4 +1,4 @@
-import { Riba, coreModule } from "./index";
+import { Riba, coreModule } from "./index.js";
 
 declare global {
   interface Window {

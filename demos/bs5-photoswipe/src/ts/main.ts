@@ -1,5 +1,5 @@
 import { bs5Module } from "@ribajs/bs5";
-import { coreModule, Riba } from "@ribajs/core";
+import { coreModule, Riba } from "@ribajs/core/src/index.js";
 import { extrasModule } from "@ribajs/extras";
 import { bs5PhotoswipeModule } from "@ribajs/bs5-photoswipe";
 import { masonryModule } from "@ribajs/masonry";

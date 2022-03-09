@@ -1,4 +1,4 @@
-import { CoreModuleOptions } from "../types";
+import { CoreModuleOptions } from "../types/index.js";
 
 export class CoreService {
   protected static _options: CoreModuleOptions = {};

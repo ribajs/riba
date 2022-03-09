@@ -1,6 +1,6 @@
-import { HttpService } from "@ribajs/core";
+import { HttpService } from "@ribajs/core/src/index.js";
 import { Blog } from "../interfaces/shopify-api/blog";
-import { BaseApiService } from "./base.service";
+import { BaseApiService } from "./base.service.js";
 
 export class ShopifyApiBlogsService extends BaseApiService {
   public static instance?: ShopifyApiBlogsService;

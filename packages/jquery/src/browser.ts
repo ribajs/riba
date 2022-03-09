@@ -1,4 +1,4 @@
-import { jqueryModule } from "./index";
+import { jqueryModule } from "./index.js";
 
 declare global {
   interface Window {

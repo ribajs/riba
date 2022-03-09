@@ -15,7 +15,11 @@ import {
   typeCheckConfig,
 } from "../helper/utils";
 
-import { classOf, getUID, getElementFromEvent } from "@ribajs/utils";
+import {
+  classOf,
+  getUID,
+  getElementFromEvent,
+} from "@ribajs/utils/src/index.js";
 import { sanitizeHtml } from "../helper/sanitizer";
 import { setData, getData, removeData } from "../helper/dom/data";
 import { on, one, off, trigger } from "../helper/dom/event-handler";

@@ -1,10 +1,10 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 
 import template from "./bs4-modal-item.component.html";
 import { Modal } from "../../interfaces";
-import { getElementFromEvent } from "@ribajs/utils/src/dom";
-import { ModalService, EVENT_HIDDEN } from "../../services/modal.service";
-import { Scope as Bs4NotificationContainerScope } from "../bs4-notification-container/bs4-notification-container.component";
+import { getElementFromEvent } from "@ribajs/utils/src/dom.js";
+import { ModalService, EVENT_HIDDEN } from "../../services/modal.service.js";
+import { Scope as Bs4NotificationContainerScope } from "../bs4-notification-container/bs4-notification-container.component.js";
 
 interface Scope {
   iconUrl?: string;

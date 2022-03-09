@@ -1,4 +1,4 @@
-import type { Component } from "../component";
+import type { Component } from "../component/index.js";
 
 export interface ComponentLifecycleObject {
   components: Component[];

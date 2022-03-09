@@ -1,1 +1,1 @@
-export { AccessibilityGamepadExampleComponent } from "./accessibility-gamepad-example/accessibility-gamepad-example.component";
+export { AccessibilityGamepadExampleComponent } from "./accessibility-gamepad-example/accessibility-gamepad-example.component.js";

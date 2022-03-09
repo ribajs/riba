@@ -1,7 +1,7 @@
 import { config, getYamlConfig } from "./config";
 import { Bitbucket } from "bitbucket";
 import { asnycTimeout } from "./utilities";
-import { ReleaseConfig } from "../types";
+import { ReleaseConfig } from "../types/index.js";
 import messages from "./messages";
 import FormData from "form-data";
 import fs from "fs";

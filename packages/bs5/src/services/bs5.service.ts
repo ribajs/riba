@@ -1,7 +1,7 @@
-import { Breakpoint, Bs5ModuleOptions } from "../types";
+import { Breakpoint, Bs5ModuleOptions } from "../types/index.js";
 import { DEFAULT_MODULE_OPTIONS } from "../constants";
 import { debounce } from "@ribajs/utils/src/control";
-import { getViewportDimensions } from "@ribajs/utils/src/dom";
+import { getViewportDimensions } from "@ribajs/utils/src/dom.js";
 import { EventDispatcher, EventCallback } from "@ribajs/events";
 
 /**

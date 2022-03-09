@@ -2,7 +2,7 @@ import gutil from "gulp-util";
 import { Octokit } from "@octokit/rest";
 import path from "path";
 import { config, getYamlConfig } from "./config";
-import { ReleaseConfig } from "../types";
+import { ReleaseConfig } from "../types/index.js";
 
 /**
  * Get a release by tag name

@@ -5,7 +5,7 @@ import { CommanderStatic } from "commander";
 import { GenerateAction, InfoAction, NewAction } from "../actions";
 
 // Commands
-import { GenerateCommand, InfoCommand, NewCommand } from "./index";
+import { GenerateCommand, InfoCommand, NewCommand } from "./index.js";
 
 export class CommandLoader {
   public static load(program: CommanderStatic): void {

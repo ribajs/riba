@@ -1,1 +1,1 @@
-export { tFormatter } from "./t.formatter";
+export { tFormatter } from "./t.formatter.js";

@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import { ChildProcess, spawn, SpawnOptions } from "child_process";
-import { messages } from "../ui/index";
+import { messages } from "../ui/index.js";
 
 export class AbstractRunner {
   constructor(protected binary: string) {}

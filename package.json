@@ -2,10 +2,14 @@
   "name": "ribajs",
   "description": "Declarative data binding + template solution.",
   "version": "2.0.0-alpha.0",
+  "type": "module",
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
   "private": true,
   "author": "Art+Code Studio (Pascal Garber) <pascal@artandcode.studio>",
   "contributors": [],
-  "main": "src/index.ts",
+  "main": "./src/index.ts",
   "url": "https://github.com/ribajs/riba",
   "license": "MIT",
   "licenses": [

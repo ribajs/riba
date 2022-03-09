@@ -1,5 +1,9 @@
-import { Component, TemplateFunction, HttpService } from "@ribajs/core";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import {
+  Component,
+  TemplateFunction,
+  HttpService,
+} from "@ribajs/core/src/index.js";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import template from "./addresses-form.component.html";
 
 // TODO move to general validation component class we can extend from

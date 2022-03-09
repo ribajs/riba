@@ -1,9 +1,9 @@
-import { Riba } from "../riba";
-import { Adapter, ObserverSyncCallback } from "../types";
-import { dotAdapter } from "../adapters/dot.adapter";
-import { TextBinder } from "../binders/text.binder";
-import { ValueBinder } from "../binders/value.binder";
-import { Data } from "../../spec/lib/moch.data";
+import { Riba } from "../riba.js";
+import { Adapter, ObserverSyncCallback } from "../types/index.js";
+import { dotAdapter } from "../adapters/dot.adapter.js";
+import { TextBinder } from "../binders/text.binder.js";
+import { ValueBinder } from "../binders/value.binder.js";
+import { Data } from "../../spec/lib/moch.data.js";
 
 describe("Functional", () => {
   let data: Data;

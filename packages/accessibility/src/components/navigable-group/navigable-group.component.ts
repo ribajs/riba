@@ -1,6 +1,6 @@
-import { Component, TemplateFunction } from "@ribajs/core";
-import { NavigableGroupComponentScope } from "../../types";
-import { hasChildNodesTrim } from "@ribajs/utils";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { NavigableGroupComponentScope } from "../../types/index.js";
+import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
 import template from "./navigable-group.component.pug";
 
 export class NavigableGroupComponent extends Component {

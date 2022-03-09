@@ -4,11 +4,11 @@ import {
   Formatters,
   Components,
   RibaModule,
-} from "../types";
-import { BindersService } from "./binder.service";
-import { ComponentService } from "./component.service";
-import { FormatterService } from "./formatter.service";
-import { AdapterService } from "./adapter.service";
+} from "../types/index.js";
+import { BindersService } from "./binder.service.js";
+import { ComponentService } from "./component.service.js";
+import { FormatterService } from "./formatter.service.js";
+import { AdapterService } from "./adapter.service.js";
 
 export class ModulesService {
   public binder: BindersService;

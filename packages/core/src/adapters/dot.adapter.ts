@@ -4,7 +4,7 @@ import {
   Ref,
   ObserverSyncCallback,
   RVArray,
-} from "../types";
+} from "../types/index.js";
 
 export class DotAdapter implements Adapter {
   public static ARRAY_METHODS = [

@@ -1,4 +1,4 @@
-import { isString, isDefined } from "@ribajs/utils/src/type";
+import { isString, isDefined } from "@ribajs/utils/src/type.js";
 
 /**
  * Sets a default value if the first value is not set

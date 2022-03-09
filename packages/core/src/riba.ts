@@ -5,14 +5,14 @@ import {
   Root,
   Components,
   Options,
-} from "./types";
-import { parseTemplate } from "./parse-template";
-import { parseType } from "./parse-type";
-import { Binder } from "./binder";
-import { View } from "./view";
-import { Observer } from "./observer";
-import { ModulesService } from "./services/module.service";
-import { LifecycleService } from "./services/lifecycle.service";
+} from "./types/index.js";
+import { parseTemplate } from "./parse-template.js";
+import { parseType } from "./parse-type.js";
+import { Binder } from "./binder.js";
+import { View } from "./view.js";
+import { Observer } from "./observer.js";
+import { ModulesService } from "./services/module.service.js";
+import { LifecycleService } from "./services/lifecycle.service.js";
 
 export class Riba {
   /**

@@ -1,2 +1,2 @@
-export * from "./photoswipe-ui.service";
-export * from "./photoswipe.service";
+export * from "./photoswipe-ui.service.js";
+export * from "./photoswipe.service.js";

@@ -1,5 +1,5 @@
-import type { View } from "../view";
-import type { Binder } from "../binder";
+import type { View } from "../view.js";
+import type { Binder } from "../binder.js";
 
 /**
  * Interface for type of class

@@ -1,10 +1,10 @@
-import { Component } from "../../component/component";
+import { Component } from "../../component/component.js";
 import {
   TemplateFunction,
   VideoComponentScope,
   MediaReadyState,
-} from "../../types";
-import { justDigits } from "@ribajs/utils";
+} from "../../types/index.js";
+import { justDigits } from "@ribajs/utils/src/index.js";
 
 export class VideoComponent extends Component {
   public static tagName = "rv-video";

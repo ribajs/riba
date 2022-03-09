@@ -1,4 +1,4 @@
-import type { Observer } from "../observer";
+import type { Observer } from "../observer.js";
 
 export interface FormatterObservers {
   [key: string]: {

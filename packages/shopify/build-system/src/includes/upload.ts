@@ -3,7 +3,7 @@ import path from "path";
 import { config, getYamlConfig } from "./config";
 import * as bithucket from "./bitbucket";
 import * as github from "./github";
-import { ReleaseConfig } from "../types";
+import { ReleaseConfig } from "../types/index.js";
 
 export const uploadFile = async (filePath: string) => {
   const releaseConfig: ReleaseConfig = getYamlConfig(

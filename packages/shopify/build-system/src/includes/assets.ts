@@ -1,4 +1,4 @@
-import { ExternalAssetsConfig, ThemeConfig } from "../types";
+import { ExternalAssetsConfig, ThemeConfig } from "../types/index.js";
 import { Assets, Models } from "shopify-admin-api";
 import gutil from "gulp-util";
 import { isNumber } from "./utilities";

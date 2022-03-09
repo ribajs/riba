@@ -1,1 +1,1 @@
-export * from "./i18n-star.binder";
+export * from "./i18n-star.binder.js";

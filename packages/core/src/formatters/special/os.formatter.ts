@@ -1,4 +1,4 @@
-import { getOS } from "@ribajs/utils";
+import { getOS } from "@ribajs/utils/src/index.js";
 
 export const osFormatter = {
   name: "os",

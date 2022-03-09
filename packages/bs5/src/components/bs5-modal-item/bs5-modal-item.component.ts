@@ -1,9 +1,9 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 
 import template from "./bs5-modal-item.component.html";
-import { getElementFromEvent } from "@ribajs/utils/src/dom";
+import { getElementFromEvent } from "@ribajs/utils/src/dom.js";
 import { Modal, ModalNotification } from "../../services";
-import { Scope as Bs5NotificationContainerScope } from "../bs5-notification-container/bs5-notification-container.component";
+import { Scope as Bs5NotificationContainerScope } from "../bs5-notification-container/bs5-notification-container.component.js";
 
 interface Scope {
   iconUrl?: string;

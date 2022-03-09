@@ -1,5 +1,5 @@
-import { Formatter } from "../../types/formatter";
-import { isDefined } from "@ribajs/utils/src/type";
+import { Formatter } from "../../types/formatter.js";
+import { isDefined } from "@ribajs/utils/src/type.js";
 
 /**
  * Checks if value is defined

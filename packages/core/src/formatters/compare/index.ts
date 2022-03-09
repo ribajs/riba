@@ -6,13 +6,13 @@
  * @see https://github.com/matthieuriolo/rivetsjs-stdlib
  * @see https://github.com/JumpLinkNetwork/shopify-productjs
  */
-export { andFormatter } from "./and.formatter";
-export { betweenFormatter } from "./between.formatter";
-export { egtFormatter } from "./egt.formatter";
-export { eqFormatter } from "./eq.formatter";
-export { gtFormatter } from "./gt.formatter";
-export { neFormatter } from "./ne.formatter";
-export { ltFormatter } from "./lt.formatter";
-export { eltFormatter } from "./elt.formatter";
-export { orFormatter } from "./or.formatter";
-export { notFormatter } from "./not.formatter";
+export { andFormatter } from "./and.formatter.js";
+export { betweenFormatter } from "./between.formatter.js";
+export { egtFormatter } from "./egt.formatter.js";
+export { eqFormatter } from "./eq.formatter.js";
+export { gtFormatter } from "./gt.formatter.js";
+export { neFormatter } from "./ne.formatter.js";
+export { ltFormatter } from "./lt.formatter.js";
+export { eltFormatter } from "./elt.formatter.js";
+export { orFormatter } from "./or.formatter.js";
+export { notFormatter } from "./not.formatter.js";

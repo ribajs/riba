@@ -1,4 +1,4 @@
-import { Config } from "./types"
+import { Config } from "./types";
 import { RuleSetRule, RuleSetUseItem } from "webpack";
 
 /* eslint-disable no-undef */
@@ -23,7 +23,7 @@ module.exports.getStyleLoaderRule = (config: Partial<Config> = {}) => {
         loader: config.styleLoaderPath,
       });
     }
-  
+
     if (
       config.styles?.resolveUrl === "onlyImports" ||
       config.styles?.resolveUrl === "notForAssets"
@@ -39,7 +39,7 @@ module.exports.getStyleLoaderRule = (config: Partial<Config> = {}) => {
         },
       };
     }
-  
+
     if (config.styles?.resolveUrl !== undefined) {
       rule.use.push({
         loader: config.cssLoaderPath,
@@ -50,7 +50,7 @@ module.exports.getStyleLoaderRule = (config: Partial<Config> = {}) => {
         },
       });
     }
-  
+
     if (config.postcssOptions) {
       rule.use.push({
         loader: config.postcssLoaderPath,
@@ -60,7 +60,7 @@ module.exports.getStyleLoaderRule = (config: Partial<Config> = {}) => {
         },
       });
     }
-  
+
     rule.use.push({
       loader: config.sassLoaderPath,
       options: {

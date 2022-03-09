@@ -1,4 +1,4 @@
-import { EventDispatcherInstances, Events, EventCallback } from "../types/event-dispatcher";
+import { EventDispatcherInstances, Events, EventCallback } from "../types/event-dispatcher.js";
 export declare class EventDispatcher {
     protected static instances: EventDispatcherInstances;
     static getNamespaces(): string[];

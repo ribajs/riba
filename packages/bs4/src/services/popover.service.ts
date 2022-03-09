@@ -8,7 +8,7 @@
 
 import { getData } from "../helper/dom/data";
 import { findOne } from "../helper/dom/selector-engine";
-import { TooltipService } from "./tooltip.service";
+import { TooltipService } from "./tooltip.service.js";
 import {
   TooltipContentFn,
   PopoverOptions,

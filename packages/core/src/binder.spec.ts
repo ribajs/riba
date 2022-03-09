@@ -1,4 +1,4 @@
-import { Riba, View, Binder } from "./index";
+import { Riba, View, Binder } from "./index.js";
 import { Data } from "../spec/lib/moch.data";
 import { dotAdapter } from "./adapters";
 import {
@@ -8,7 +8,7 @@ import {
   ValueBinder,
   AddClassBinder
 } from "./binders";
-import { Formatter, Adapter } from "./types";
+import { Formatter, Adapter } from "./types/index.js";
 
 describe("riba.Binder", () => {
 

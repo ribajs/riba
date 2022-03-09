@@ -1,4 +1,4 @@
-import { extrasModule } from "./index";
+import { extrasModule } from "./index.js";
 
 declare global {
   interface Window {

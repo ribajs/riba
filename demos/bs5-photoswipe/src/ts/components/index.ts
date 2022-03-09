@@ -1,1 +1,1 @@
-export { PhotoswipeExampleComponent } from "./photoswipe-example/photoswipe-example.component";
+export { PhotoswipeExampleComponent } from "./photoswipe-example/photoswipe-example.component.js";

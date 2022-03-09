@@ -10,7 +10,7 @@ import gutil from "gulp-util";
 import yaml from "js-yaml";
 import fs from "fs";
 import { processSvg } from "./utilities";
-import { Config } from "../types";
+import { Config } from "../types/index.js";
 import { isAvailable } from "@ribajs/npm-package";
 
 const themeRoot = findRoot.toString();

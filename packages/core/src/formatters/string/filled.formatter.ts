@@ -1,6 +1,6 @@
-import { Formatter } from "../../types";
-import { emptyFormatter } from "../array/empty.formatter";
-import { isString } from "@ribajs/utils/src/type";
+import { Formatter } from "../../types/index.js";
+import { emptyFormatter } from "../array/empty.formatter.js";
+import { isString } from "@ribajs/utils/src/type.js";
 
 /**
  * Check if value is a string and not empty

@@ -1,4 +1,4 @@
-import { JQueryModuleOptions } from "../types";
+import { JQueryModuleOptions } from "../types/index.js";
 
 export class JQueryService {
   protected static _options: JQueryModuleOptions;

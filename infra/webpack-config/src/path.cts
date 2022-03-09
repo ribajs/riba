@@ -31,10 +31,4 @@ const findFile = (rootDir: string, searchForFiles: string[]) => {
   return result;
 };
 
-export {
-  rootPath,
-  findDir,
-  findFile,
-  resolve,
-  dirname,
-};
+export { rootPath, findDir, findFile, resolve, dirname };

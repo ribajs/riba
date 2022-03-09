@@ -1,7 +1,7 @@
-import { Formatter } from "../../types";
-import { isNumber } from "@ribajs/utils/src/type";
-import { toDecimalFormatter } from "../type/to-decimal.formatter";
-import { isIntegerFormatter } from "../type/is-integer.formatter";
+import { Formatter } from "../../types/index.js";
+import { isNumber } from "@ribajs/utils/src/type.js";
+import { toDecimalFormatter } from "../type/to-decimal.formatter.js";
+import { isIntegerFormatter } from "../type/is-integer.formatter.js";
 
 // TODO set by current locale
 const DEFAULT_DECIMAL_SEPARATOR = ".";

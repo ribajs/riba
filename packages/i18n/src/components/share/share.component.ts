@@ -1,13 +1,13 @@
-import { TemplateFunction } from "@ribajs/core";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { TemplateFunction } from "@ribajs/core/src/index.js";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import {
   Bs4ShareComponent,
   Scope as Bs4ShareScope,
-} from "@ribajs/bs4/src/components/bs4-share/bs4-share.component";
+} from "@ribajs/bs4/src/components/bs4-share/bs4-share.component.js";
 import template from "@ribajs/bs4/src/components/bs4-share/bs4-share.component.html";
 import labelTemplate from "./share.label.html";
 import { I18nService } from "../../services";
-import { LocalesService } from "../../types";
+import { LocalesService } from "../../types/index.js";
 
 interface Scope extends Bs4ShareScope {
   textI18n?: string;

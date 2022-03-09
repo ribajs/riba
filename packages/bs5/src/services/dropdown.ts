@@ -1,5 +1,5 @@
 import { Dropdown as _Dropdown } from "bootstrap";
-import { Bs5DropdownComponent } from "../components/bs5-dropdown/bs5-dropdown.component";
+import { Bs5DropdownComponent } from "../components/bs5-dropdown/bs5-dropdown.component.js";
 
 const DROPDOWN_DATA_KEY = "bs.dropdown";
 const DROPDOWN_EVENT_KEY = `.${DROPDOWN_DATA_KEY}`;

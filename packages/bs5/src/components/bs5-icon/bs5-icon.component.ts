@@ -3,8 +3,8 @@ import {
   TemplateFunction,
   HttpService,
   HttpServiceResponse,
-} from "@ribajs/core";
-import { getLocation } from "@ribajs/utils";
+} from "@ribajs/core/src/index.js";
+import { getLocation } from "@ribajs/utils/src/index.js";
 import { BaseCache } from "@ribajs/cache";
 
 export class Bs5IconComponent extends BasicComponent {

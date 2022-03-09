@@ -4,18 +4,18 @@ import {
   ClassOfBinder,
   ClassOfComponent,
   DataElement,
-} from "./types";
+} from "./types/index.js";
 import { parseNode } from "./parse-node";
 import { parseDeclaration } from "./parse-declaration";
 import { BasicComponent, Component } from "./component";
-import { isCustomElement } from "@ribajs/utils";
+import { isCustomElement } from "@ribajs/utils/src/index.js";
 import { Binder } from "./binder";
 
 /**
  * Sets the attribute on the element. If no binder is matched it will fall
  * back to using this binder.
  */
-import { AttributeBinder } from "./binders/attribute.binder";
+import { AttributeBinder } from "./binders/attribute.binder.js";
 
 /**
  * A collection of bindings built from a set of parent nodes.

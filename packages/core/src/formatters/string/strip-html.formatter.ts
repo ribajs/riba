@@ -1,5 +1,5 @@
-import { Formatter } from "../../types";
-import { stripHtml } from "@ribajs/utils/src/type";
+import { Formatter } from "../../types/index.js";
+import { stripHtml } from "@ribajs/utils/src/type.js";
 
 /**
  * Strips all HTML tags from a string.

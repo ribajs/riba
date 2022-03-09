@@ -1,5 +1,5 @@
-import { Binder } from "../binder";
-import { kebabCase } from "@ribajs/utils";
+import { Binder } from "../binder.js";
+import { kebabCase } from "@ribajs/utils/src/index.js";
 
 /**
  * style

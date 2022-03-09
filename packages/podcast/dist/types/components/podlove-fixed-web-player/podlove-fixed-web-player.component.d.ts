@@ -1,7 +1,7 @@
-import { Component } from "@ribajs/core";
-import type { PodloveWebPlayerEpisode, PodloveWebPlayerConfig } from "../../types";
-import type { PodloveWebPlayerComponent } from "../podlove-web-player/podlove-web-player.component";
-import type { PodloveWebPlayerStore } from "../../types";
+import { Component } from "@ribajs/core/src/index.js";
+import type { PodloveWebPlayerEpisode, PodloveWebPlayerConfig } from "../../types/index.js";
+import type { PodloveWebPlayerComponent } from "../podlove-web-player/podlove-web-player.component.js";
+import type { PodloveWebPlayerStore } from "../../types/index.js";
 export interface Scope {
     episode?: PodloveWebPlayerEpisode;
     config?: PodloveWebPlayerConfig;

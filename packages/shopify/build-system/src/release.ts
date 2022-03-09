@@ -24,7 +24,7 @@ import {
   getReleaseZipFilename,
   getReleaseName,
 } from "./includes/config";
-import { ThemeConfigByEnv } from "./types";
+import { ThemeConfigByEnv } from "./types/index.js";
 import "./theme"; // import theme tasks
 import "./build"; // import build tasks
 

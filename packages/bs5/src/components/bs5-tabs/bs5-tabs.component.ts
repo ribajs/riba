@@ -3,10 +3,10 @@ import {
   FormatterFn,
   TemplateFunction,
   TemplatesComponent,
-} from "@ribajs/core";
+} from "@ribajs/core/src/index.js";
 import templateHorizontal from "./bs5-tabs-horizontal.component.html";
 import templateVertical from "./bs5-tabs-vertical.component.html";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { throttle } from "@ribajs/utils/src/control";
 
 const handleize = handleizeFormatter.read as FormatterFn;

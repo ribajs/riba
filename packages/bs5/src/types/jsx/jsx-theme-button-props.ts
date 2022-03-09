@@ -1,4 +1,4 @@
-import type { JsxHtmlGlobalProps } from "@ribajs/jsx";
+import type { JsxHtmlGlobalProps } from "@ribajs/jsx/src/index.js";
 
 export interface JsxBs5ThemeButtonProps extends JsxHtmlGlobalProps {
   mode?: "dropdown" | "icon";

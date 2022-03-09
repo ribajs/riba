@@ -1,9 +1,9 @@
 import {
   Bs4ContentsComponent,
   Scope as Bs4ContentsComponentScope,
-} from "../bs4-contents/bs4-contents.component";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import { TemplateFunction } from "@ribajs/core";
+} from "../bs4-contents/bs4-contents.component.js";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
+import { TemplateFunction } from "@ribajs/core/src/index.js";
 import template from "./bs4-scrollspy.component.html";
 
 export interface Anchor {

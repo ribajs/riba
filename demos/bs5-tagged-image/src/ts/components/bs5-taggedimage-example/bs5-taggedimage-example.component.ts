@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import template from "./bs5-taggedimage-example.component.html";
 import { TaggedImageTag as Tag } from "@ribajs/bs5";
 

@@ -1,4 +1,4 @@
-import { AbstractRunner } from "../runners/index";
+import { AbstractRunner } from "../runners/index.js";
 import { SchematicOption } from "./schematic.option";
 import { debug as Debug } from "debug";
 import { Debugger } from "debug";

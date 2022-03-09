@@ -1,4 +1,4 @@
-import { leafletModule } from "./index";
+import { leafletModule } from "./index.js";
 
 declare global {
   interface Window {

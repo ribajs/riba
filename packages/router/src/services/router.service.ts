@@ -1,4 +1,4 @@
-import { RouterModuleOptions } from "../types";
+import { RouterModuleOptions } from "../types/index.js";
 import { HideShowTransition } from "./Transition/HideShowTransition";
 
 export class RouterService {

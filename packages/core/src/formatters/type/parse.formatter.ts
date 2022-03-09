@@ -1,4 +1,4 @@
-import { isString, parseJsonString, isObject } from "@ribajs/utils/src/type";
+import { isString, parseJsonString, isObject } from "@ribajs/utils/src/type.js";
 
 /**
  * parse json string to object

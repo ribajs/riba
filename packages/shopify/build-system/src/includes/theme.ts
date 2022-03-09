@@ -1,11 +1,11 @@
 import { Themes } from "shopify-admin-api";
 
-import { ThemesByEnv, ThemeByEnv, ThemeData, ThemeConfig } from "../types";
+import { ThemesByEnv, ThemeByEnv, ThemeData, ThemeConfig } from "../types/index.js";
 import { getAsset } from "./shopify-api";
 import { config, getYamlConfig } from "./config";
 import Moment from "moment";
 import { Models } from "shopify-admin-api";
-import { ThemeConfigByEnv } from "../types";
+import { ThemeConfigByEnv } from "../types/index.js";
 
 /**
  * Print theme data

@@ -1,4 +1,4 @@
-import { Formatter } from "../../types";
+import { Formatter } from "../../types/index.js";
 
 /**
  * The padEnd formatters pads the current string with a given string (repeated, if needed) so that the resulting string reaches a given length.

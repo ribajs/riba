@@ -1,4 +1,4 @@
-import { parseJsonString, couldBeJson } from "@ribajs/utils";
+import { parseJsonString, couldBeJson } from "@ribajs/utils/src/index.js";
 import { PRIMITIVE, QUOTED_STR, KEYPATH } from "./constants/parser";
 
 /**

@@ -1,5 +1,5 @@
-import type { VideoComponent } from "../components/video/video.component";
-import type { MediaReadyState } from "./media-ready-state";
+import type { VideoComponent } from "../components/video/video.component.js";
+import type { MediaReadyState } from "./media-ready-state.js";
 
 export interface VideoComponentScope {
   // properties

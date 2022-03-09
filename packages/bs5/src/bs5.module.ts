@@ -1,11 +1,11 @@
-import { RibaModule } from "@ribajs/core";
-import { extend } from "@ribajs/utils/src/type";
-import { Bs5ModuleOptions } from "./types";
+import { RibaModule } from "@ribajs/core/src/index.js";
+import { extend } from "@ribajs/utils/src/type.js";
+import { Bs5ModuleOptions } from "./types/index.js";
 
-import * as binders from "./binders";
-import * as components from "./components";
-import * as formatters from "./formatters";
-import * as services from "./services";
+import * as binders from "./binders/index.js";
+import * as components from "./components/index.js";
+import * as formatters from "./formatters/index.js";
+import * as services from "./services/index.js";
 import * as constants from "./constants";
 
 export const bs5Module: RibaModule<Partial<Bs5ModuleOptions>> = {

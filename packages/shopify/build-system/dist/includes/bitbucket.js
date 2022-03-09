@@ -38,7 +38,6 @@ const uploadFileExists = (filename) => __awaiter(void 0, void 0, void 0, functio
         repo_slug,
         workspace,
     });
-    // console.debug("[uploadFileExists]", files.data.values);
     // TODO implement pagination?
     return files.data.values.some((e) => e.name === filename);
 });

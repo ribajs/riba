@@ -47,7 +47,7 @@ export interface Config {
   ForkTsCheckerPlugin: typeof ForkTsCheckerPlugin;
   CssExtractPlugin: typeof CssExtractPlugin;
   HtmlWebpackPlugin: typeof HtmlWebpackPlugin;
-  nodeExternalsPlugin: typeof NodeExternalsPlugin; 
+  nodeExternalsPlugin: typeof NodeExternalsPlugin;
   CopyPlugin: any; // TODO: typeof CopyPlugin;
   DuplicatesPlugin: any; // TODO: typeof DuplicatesPlugin;
 }

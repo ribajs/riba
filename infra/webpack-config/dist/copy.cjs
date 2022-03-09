@@ -4,7 +4,7 @@ const { isAvailable, ribaPackages } = require("@ribajs/npm-package");
 const path = require("path");
 const fs = require("fs");
 const glob = require("glob");
-const { logger } = require("./logger");
+const { logger } = require("./logger.cjs");
 
 // const normalize = require("copy-webpack-plugin/dist/utils/normalize").default;
 const rootPath = process.cwd();

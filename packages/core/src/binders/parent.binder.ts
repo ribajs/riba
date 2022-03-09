@@ -1,6 +1,9 @@
-import { Binder } from "../binder";
-import { BasicComponent } from "../component/basic-component";
-import { isCustomElement, waitForCustomElement } from "@ribajs/utils";
+import { Binder } from "../binder.js";
+import { BasicComponent } from "../component/basic-component.js";
+import {
+  isCustomElement,
+  waitForCustomElement,
+} from "@ribajs/utils/src/index.js";
 
 /**
  * parent

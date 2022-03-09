@@ -4,11 +4,11 @@ import { readFile } from "fs";
 import ora from "ora";
 import { join } from "path";
 import { AbstractRunner } from "../runners/abstract.runner";
-import { messages } from "../ui/index";
+import { messages } from "../ui/index.js";
 import {
   PackageManagerCommands,
   ProjectDependency,
-} from "../../interfaces/index";
+} from "../../interfaces/index.js";
 
 export abstract class AbstractPackageManager {
   constructor(protected runner: AbstractRunner) {}

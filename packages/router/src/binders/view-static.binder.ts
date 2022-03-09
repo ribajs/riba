@@ -1,5 +1,10 @@
-import { Binder, View, handleizeFormatter, FormatterFn } from "@ribajs/core";
-import { isObject } from "@ribajs/utils/src/type";
+import {
+  Binder,
+  View,
+  handleizeFormatter,
+  FormatterFn,
+} from "@ribajs/core/src/index.js";
+import { isObject } from "@ribajs/utils/src/type.js";
 import { Pjax, HideShowTransition } from "../services";
 
 const handleize = handleizeFormatter.read as FormatterFn;

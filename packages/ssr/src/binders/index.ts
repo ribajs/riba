@@ -1,1 +1,1 @@
-export * from "./csr.binder";
+export * from "./csr.binder.js";

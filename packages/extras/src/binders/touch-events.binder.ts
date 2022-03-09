@@ -1,5 +1,5 @@
-import { Binder } from "@ribajs/core";
-import { TouchEventsService } from "../services/touch-events/touch-events.service";
+import { Binder } from "@ribajs/core/src/index.js";
+import { TouchEventsService } from "../services/touch-events/touch-events.service.js";
 
 export class TouchEventsBinder extends Binder<string, HTMLElement> {
   static key = "touch-events";

@@ -1,5 +1,5 @@
-import { Pjax } from "./index";
-import { getElementFromEvent } from "@ribajs/utils/src/dom";
+import { Pjax } from "./index.js";
+import { getElementFromEvent } from "@ribajs/utils/src/dom.js";
 import { normalizeUrl } from "@ribajs/utils/src/url";
 import { IGNORE_CLASS_PREFETCH, ROUTE_ERROR_CLASS } from "../../constants";
 

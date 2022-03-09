@@ -1,4 +1,4 @@
-import { coreModule, Riba } from "@ribajs/core";
+import { coreModule, Riba } from "@ribajs/core/src/index.js";
 import { momentModule } from "@ribajs/moment";
 import { MomentDemoModule } from "./moment-demo.module";
 

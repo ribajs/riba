@@ -1,5 +1,5 @@
 import { EventDispatcher } from "@ribajs/events";
-import { clone } from "@ribajs/utils/src/type";
+import { clone } from "@ribajs/utils/src/type.js";
 import { Langcode, LocalPluralization, LocalVar } from ".";
 
 export abstract class LocalesService {

@@ -3,11 +3,11 @@
  */
 
 import Color from "@sphinxxxx/color-conversion";
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import { EventDispatcher } from "@ribajs/events";
 import template from "./bs5-colorpicker.component.html";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import { ColorPickerOptions } from "../../types";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
+import { ColorPickerOptions } from "../../types/index.js";
 import { debounce } from "@ribajs/utils/src/control";
 
 interface EventBucketItem {

@@ -1,6 +1,6 @@
-import { Binder } from "@ribajs/core";
+import { Binder } from "@ribajs/core/src/index.js";
 import { debounce } from "@ribajs/utils/src/control";
-import { isInViewport } from "@ribajs/utils/src/dom";
+import { isInViewport } from "@ribajs/utils/src/dom.js";
 
 /**
  * scrollspy-class

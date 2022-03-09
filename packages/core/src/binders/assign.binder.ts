@@ -1,6 +1,6 @@
-import { Binder } from "../binder";
-import type { Assign } from "../types/assign";
-import { extend } from "@ribajs/utils/src/type";
+import { Binder } from "../binder.js";
+import type { Assign } from "../types/assign.js";
+import { extend } from "@ribajs/utils/src/type.js";
 
 /**
  * assign

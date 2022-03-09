@@ -1,5 +1,5 @@
 import "./types/esbuild";
-import { Config } from "./types";
+import { Config } from "./types/index.js";
 import esbuild from "esbuild";
 import { parseConfig } from "./config";
 

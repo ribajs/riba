@@ -1,8 +1,12 @@
 {
   "name": "@ribajs/demo-bs5-responsive-components",
   "version": "2.0.0-alpha.0",
+  "type": "module",
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
   "description": "",
-  "main": "src/index.html",
+  "exports": "./src/index.html",
   "private": true,
   "scripts": {
     "build": "webpack --progress --color --env production",

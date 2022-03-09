@@ -9,13 +9,13 @@ import {
   ObservedAttributesToCheck,
   TemplateFunction,
   ObserverSyncCallback,
-} from "../types";
-import type { JsxElement } from "@ribajs/jsx";
-import { renderElement } from "@ribajs/jsx";
-import { Binder } from "../binder";
-import { Observer } from "../observer";
-import { parseJsonString, camelCase } from "@ribajs/utils/src/type";
-import { getRandomColor, consoleColoured } from "@ribajs/utils/src/color";
+} from "../types/index.js";
+import type { JsxElement } from "@ribajs/jsx/src/index.js";
+import { renderElement } from "@ribajs/jsx/src/index.js";
+import { Binder } from "../binder.js";
+import { Observer } from "../observer.js";
+import { parseJsonString, camelCase } from "@ribajs/utils/src/type.js";
+import { getRandomColor, consoleColoured } from "@ribajs/utils/src/color.js";
 
 export abstract class BasicComponent extends HTMLElement {
   public static tagName: string;

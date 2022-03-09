@@ -1,7 +1,7 @@
-import * as binders from "./binders";
-import * as formatters from "./formatters";
-import * as services from "./services";
-import * as components from "./components";
+import * as binders from "./binders/index.js";
+import * as formatters from "./formatters/index.js";
+import * as services from "./services/index.js";
+import * as components from "./components/index.js";
 export const podcastModule = {
     binders,
     services,
@@ -11,4 +11,4 @@ export const podcastModule = {
         return this;
     },
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicG9kY2FzdC5tb2R1bGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvcG9kY2FzdC5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0EsT0FBTyxLQUFLLE9BQU8sTUFBTSxXQUFXLENBQUM7QUFDckMsT0FBTyxLQUFLLFVBQVUsTUFBTSxjQUFjLENBQUM7QUFDM0MsT0FBTyxLQUFLLFFBQVEsTUFBTSxZQUFZLENBQUM7QUFDdkMsT0FBTyxLQUFLLFVBQVUsTUFBTSxjQUFjLENBQUM7QUFFM0MsTUFBTSxDQUFDLE1BQU0sYUFBYSxHQUFlO0lBQ3ZDLE9BQU87SUFDUCxRQUFRO0lBQ1IsVUFBVTtJQUNWLFVBQVU7SUFDVixJQUFJO1FBQ0YsT0FBTyxJQUFJLENBQUM7SUFDZCxDQUFDO0NBQ0YsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicG9kY2FzdC5tb2R1bGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvcG9kY2FzdC5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0EsT0FBTyxLQUFLLE9BQU8sTUFBTSxvQkFBb0IsQ0FBQztBQUM5QyxPQUFPLEtBQUssVUFBVSxNQUFNLHVCQUF1QixDQUFDO0FBQ3BELE9BQU8sS0FBSyxRQUFRLE1BQU0scUJBQXFCLENBQUM7QUFDaEQsT0FBTyxLQUFLLFVBQVUsTUFBTSx1QkFBdUIsQ0FBQztBQUVwRCxNQUFNLENBQUMsTUFBTSxhQUFhLEdBQWU7SUFDdkMsT0FBTztJQUNQLFFBQVE7SUFDUixVQUFVO0lBQ1YsVUFBVTtJQUNWLElBQUk7UUFDRixPQUFPLElBQUksQ0FBQztJQUNkLENBQUM7Q0FDRixDQUFDIn0=

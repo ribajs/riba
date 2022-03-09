@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import template from "./vue-example-wrapper.component.html";
 
 export class VueExampleWrapperComponent extends Component {

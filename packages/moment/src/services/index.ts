@@ -1,1 +1,1 @@
-export * from "./moment.service";
+export * from "./moment.service.js";

@@ -1,4 +1,4 @@
-import { OctobercmsModuleOptions } from "../types";
+import { OctobercmsModuleOptions } from "../types/index.js";
 
 export class OctobercmsService {
   protected static _options: OctobercmsModuleOptions;

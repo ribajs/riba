@@ -1,6 +1,9 @@
-import { TemplatesComponent, TemplateFunction } from "@ribajs/core";
+import {
+  TemplatesComponent,
+  TemplateFunction,
+} from "@ribajs/core/src/index.js";
 import { EventDispatcher } from "@ribajs/events";
-import { hasChildNodesTrim, scrollTo } from "@ribajs/utils/src/dom";
+import { hasChildNodesTrim, scrollTo } from "@ribajs/utils/src/dom.js";
 import { throttle, debounce } from "@ribajs/utils/src/control";
 import { Bs5Service } from "../../services";
 import {
@@ -9,7 +12,7 @@ import {
   SlideshowSlidePosition,
   Bs5SlideshowComponentScope,
   JsxBs5SlideshowProps,
-} from "../../types";
+} from "../../types/index.js";
 import {
   Dragscroll,
   DragscrollOptions,

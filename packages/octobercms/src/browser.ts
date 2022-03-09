@@ -1,4 +1,4 @@
-import { octobercmsModule } from "./index";
+import { octobercmsModule } from "./index.js";
 
 declare global {
   interface Window {

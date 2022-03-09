@@ -1,5 +1,5 @@
-import { Component, TemplateFunction } from "@ribajs/core";
-import { elementIsVisible, hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { elementIsVisible, hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import template from "./debug-bar.component.html";
 
 export class ShopifyDebugBarComponent extends Component {

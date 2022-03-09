@@ -1,6 +1,6 @@
-import { Riba } from "../riba";
-import { AnimateStarBinder } from "./animate-classname.binder";
-import { dotAdapter } from "../adapters/dot.adapter";
+import { Riba } from "../riba.js";
+import { AnimateStarBinder } from "./animate-classname.binder.js";
+import { dotAdapter } from "../adapters/dot.adapter.js";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);

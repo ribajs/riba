@@ -1,9 +1,9 @@
 /* eslint-disable no-case-declarations */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
-const { getDependencies } = require("./dependencies");
-const { getBaseConfig } = require("./base-config");
-const { getConfig } = require("./config");
+const { getDependencies } = require("./dependencies.cjs");
+const { getBaseConfig } = require("./base-config.cjs");
+const { getConfig } = require("./config.cjs");
 
 module.exports = (config = {}) => {
   return (env = {}) => {

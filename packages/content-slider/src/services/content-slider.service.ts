@@ -1,4 +1,4 @@
-import { ContentSliderModuleOptions } from "../types";
+import { ContentSliderModuleOptions } from "../types/index.js";
 
 export class ContentSliderService {
   protected static _options: ContentSliderModuleOptions;

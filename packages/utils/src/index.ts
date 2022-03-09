@@ -1,4 +1,4 @@
-export * from "./types";
+export * from "./types/index.js";
 export * from "./color";
 export * from "./control";
 export * from "./dom";

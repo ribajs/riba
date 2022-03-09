@@ -1,5 +1,5 @@
-import { Riba } from "../riba";
-import { Binder } from "../binder";
+import { Riba } from "../riba.js";
+import { Binder } from "../binder.js";
 
 /**
  * Sets the element's text value.

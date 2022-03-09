@@ -1,3 +1,3 @@
-export * from "./i18n.service";
-export * from "./locales-rest.service";
-export * from "./locales-static.service";
+export * from "./i18n.service.js";
+export * from "./locales-rest.service.js";
+export * from "./locales-static.service.js";

@@ -4,7 +4,7 @@ import {
   HttpService,
   HttpMethod,
   HttpDataType,
-} from "@ribajs/core";
+} from "@ribajs/core/src/index.js";
 import template from "./bs4-form.component.html";
 import {
   scrollTo,
@@ -12,7 +12,7 @@ import {
   getUID,
   hasChildNodesTrim,
   stripHtml,
-} from "@ribajs/utils";
+} from "@ribajs/utils/src/index.js";
 
 export interface ValidationObject {
   fields:

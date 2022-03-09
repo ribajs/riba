@@ -1,8 +1,8 @@
-import { Riba, coreModule } from "@ribajs/core";
-import { ready } from "@ribajs/utils/src/dom";
+import { Riba, coreModule } from "@ribajs/core/src/index.js";
+import { ready } from "@ribajs/utils/src/dom.js";
 import routerModule from "@ribajs/router";
 
-// import * as CustomBinders from './binders';
+// import * as CustomBinders from "./binders/index.js";
 // import * as CustomComponents from './components';
 
 export class Main {

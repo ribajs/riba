@@ -6,20 +6,20 @@ import * as fs from "fs";
 import { Answers, Question, createPromptModule, PromptModule } from "inquirer";
 import { join } from "path";
 import { promisify } from "util";
-import { CommandInput, PackageManager } from "../interfaces/index";
-import { defaultGitIgnore } from "../lib/configuration/index";
+import { CommandInput, PackageManager } from "../interfaces/index.js";
+import { defaultGitIgnore } from "../lib/configuration/index.js";
 import {
   AbstractPackageManager,
   PackageManagerFactory,
-} from "../lib/package-managers/index";
+} from "../lib/package-managers/index.js";
 import {
   generateInput,
   generateSelect,
   messages,
   emojis,
-} from "../lib/ui/index";
+} from "../lib/ui/index.js";
 import { GitRunner } from "../lib/runners/git.runner";
-import { Collection, SchematicOption } from "../lib/schematics/index";
+import { Collection, SchematicOption } from "../lib/schematics/index.js";
 import { AbstractAction } from "./abstract.action";
 import { GenerateAction } from "./generate.action";
 

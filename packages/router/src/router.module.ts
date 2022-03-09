@@ -1,8 +1,8 @@
-import { RibaModule } from "@ribajs/core";
-import * as binders from "./binders";
-import * as components from "./components";
-import * as services from "./services";
-import { RouterModuleOptions } from "./types";
+import { RibaModule } from "@ribajs/core/src/index.js";
+import * as binders from "./binders/index.js";
+import * as components from "./components/index.js";
+import * as services from "./services/index.js";
+import { RouterModuleOptions } from "./types/index.js";
 
 export const routerModule: RibaModule<Partial<RouterModuleOptions>> = {
   binders,

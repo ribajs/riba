@@ -3,9 +3,9 @@ import {
   FormatterFn,
   TemplatesComponent,
   TemplateFunction,
-} from "@ribajs/core";
+} from "@ribajs/core/src/index.js";
 import { Collapse } from "../../services/collapse";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 
 import template from "./bs5-accordion.component.html";
 

@@ -1,6 +1,6 @@
 import gulp from "gulp";
 import gutil from "gulp-util";
-import { ThemeConfigByEnv, ExternalScriptsConfigByEnv } from "./types";
+import { ThemeConfigByEnv, ExternalScriptsConfigByEnv } from "./types/index.js";
 import { config, getYamlConfig } from "./includes/config";
 import { list, updateOrCreate } from "./includes/assets";
 import "./release"; // Imports the generate:config:live task

@@ -1,8 +1,8 @@
-import { Riba } from "../riba";
+import { Riba } from "../riba.js";
 
-import { dotAdapter } from "../adapters/dot.adapter";
+import { dotAdapter } from "../adapters/dot.adapter.js";
 
-import { SrcsetSizeBinder } from "./srcset-size.binder";
+import { SrcsetSizeBinder } from "./srcset-size.binder.js";
 
 describe("riba.binders", () => {
   let el: HTMLDivElement;

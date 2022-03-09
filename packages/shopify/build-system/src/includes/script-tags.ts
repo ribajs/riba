@@ -1,4 +1,4 @@
-import { ScriptTagsConfig, ThemeConfig } from "../types";
+import { ScriptTagsConfig, ThemeConfig } from "../types/index.js";
 import { ScriptTags, Models } from "shopify-admin-api";
 import gutil from "gulp-util";
 

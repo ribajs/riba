@@ -1,15 +1,15 @@
-import { parseType } from "./parse-type";
-import { PRIMITIVE, KEYPATH } from "./constants/parser";
-import { Observer } from "./observer";
+import { parseType } from "./parse-type.js";
+import { PRIMITIVE, KEYPATH } from "./constants/parser.js";
+import { Observer } from "./observer.js";
 import type {
   FormatterObservers,
   eventHandlerFunction,
   ObserverSyncCallback,
   Bindable,
-} from "./types";
-import { FORMATTER_ARGS, FORMATTER_SPLIT } from "./constants/formatter";
-import type { View } from "./view";
-import { getInputValue } from "@ribajs/utils/src/dom";
+} from "./types/index.js";
+import { FORMATTER_ARGS, FORMATTER_SPLIT } from "./constants/formatter.js";
+import type { View } from "./view.js";
+import { getInputValue } from "@ribajs/utils/src/dom.js";
 
 /**
  * A single binding between a model attribute and a DOM element.

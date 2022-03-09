@@ -1,6 +1,6 @@
-import { coreModule, Riba } from "@ribajs/core";
-import { accessibilityModule } from "@ribajs/accessibility";
-import { AccessibilityGamepadDemoModule } from "./accessibility-gamepad-demo.module";
+import { coreModule, Riba } from "@ribajs/core/src/index.js";
+import { accessibilityModule } from "@ribajs/accessibility/src/index.js";
+import { AccessibilityGamepadDemoModule } from "./accessibility-gamepad-demo.module.js";
 
 const riba = new Riba();
 const model = {};

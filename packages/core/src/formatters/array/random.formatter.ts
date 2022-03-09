@@ -1,4 +1,4 @@
-import { isNumber } from "@ribajs/utils/src/type";
+import { isNumber } from "@ribajs/utils/src/type.js";
 
 /**
  * Gets back random value of array

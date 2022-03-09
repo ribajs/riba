@@ -1,4 +1,4 @@
-import { MonacoEditorModuleOptions } from "../types";
+import { MonacoEditorModuleOptions } from "../types/index.js";
 
 export class MonacoEditorService {
   protected static _options: MonacoEditorModuleOptions;

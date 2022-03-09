@@ -1,4 +1,4 @@
-import { isObject, getString } from "@ribajs/utils/src/type";
+import { isObject, getString } from "@ribajs/utils/src/type.js";
 
 /**
  * Parses a value to string

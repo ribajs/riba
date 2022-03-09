@@ -1,11 +1,11 @@
-const { dirname } = require('path');
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { dirname } = require("path");
 
 const isAvailable = (moduleName) => {
-
   // See https://yarnpkg.com/advanced/pnpapi
   if (process.versions.pnp) {
-    const pnpApi = require('pnpapi');
-    const rootLocator = pnpApi.findPackageLocator('./')
+    const pnpApi = require("pnpapi");
+    const rootLocator = pnpApi.findPackageLocator("./");
     const rootPgk = pnpApi.getPackageInformation(rootLocator);
     // console.log("rootPgk", rootPgk)
     const available = rootPgk.packageDependencies.get(moduleName);
@@ -16,7 +16,7 @@ const isAvailable = (moduleName) => {
   }
 
   try {
-    const modulePackagePath = require.resolve(moduleName + '/package.json');
+    const modulePackagePath = require.resolve(moduleName + "/package.json");
     const modulePath = dirname(modulePackagePath);
     return modulePath;
   } catch (error) {

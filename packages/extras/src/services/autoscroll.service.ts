@@ -1,5 +1,5 @@
 import { getScrollPosition } from "../helper/scroll";
-import { Gameloop } from "./gameloop.service";
+import { Gameloop } from "./gameloop.service.js";
 import { throttle } from "@ribajs/utils/src/control";
 
 export interface AutoscrollOptions {

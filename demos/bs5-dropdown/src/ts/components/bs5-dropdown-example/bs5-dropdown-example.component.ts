@@ -1,7 +1,7 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import { Dropdown } from "@ribajs/bs5";
 import template from "./bs5-dropdown-example.component.html";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 
 interface DropdownItem {
   label: string;

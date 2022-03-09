@@ -1,6 +1,6 @@
-import { Binder } from "@ribajs/core";
-import { ShopifyCartService } from "../services";
-import { ShopifyCartObject } from "../interfaces";
+import { Binder } from "@ribajs/core/src/index.js";
+import { ShopifyCartService } from "../services/index.js";
+import { ShopifyCartObject } from "../interfaces/index.js";
 
 /**
  * Sets the shopify items count

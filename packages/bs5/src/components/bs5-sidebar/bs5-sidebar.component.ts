@@ -1,10 +1,14 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import { TouchEventsService, TouchSwipeData } from "@ribajs/extras";
 import { EventDispatcher } from "@ribajs/events";
 import { TOGGLE_BUTTON } from "../../constants";
 import { Bs5Service } from "../../services";
-import { JsxBs5SidebarProps, Bs5SidebarComponentScope, SidebarState } from "../../types";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import {
+  JsxBs5SidebarProps,
+  Bs5SidebarComponentScope,
+  SidebarState,
+} from "../../types/index.js";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { debounce } from "@ribajs/utils/src/control";
 
 export class Bs5SidebarComponent extends Component {

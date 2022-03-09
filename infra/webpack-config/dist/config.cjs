@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { getStyleLoaderRule } = require("./style");
+const { getStyleLoaderRule } = require("./style.cjs");
 const { basename } = require("path");
-const { logger } = require("./logger");
+const { logger } = require("./logger.cjs");
 
 module.exports.getConfig = (config = {}, env = {}) => {
   // config defaults for config templates
@@ -122,7 +122,7 @@ module.exports.getConfig = (config = {}, env = {}) => {
   }
 
   if (config.copyAssets && config.copyAssets.enable === true) {
-    const { getCopyPluginPatterns, copy } = require("./copy");
+    const { getCopyPluginPatterns, copy } = require("./copy.cjs");
     config.copyPluginConfig = config.copyPluginConfig || {};
     config.copyPluginConfig.patterns =
       config.copyPluginConfig.patterns || getCopyPluginPatterns(config);

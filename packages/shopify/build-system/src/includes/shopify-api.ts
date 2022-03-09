@@ -1,5 +1,5 @@
 import { Assets, Shops, Options } from "shopify-admin-api";
-import { ThemeConfig } from "../types";
+import { ThemeConfig } from "../types/index.js";
 import { isNumber } from "./utilities";
 
 /**

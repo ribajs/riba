@@ -1,11 +1,11 @@
-import { Component, TemplateFunction } from "@ribajs/core";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import template from "./rv-photoswipe.component.html";
 import fullscreenTemplate from "./rv-photoswipe.fullscreen.component.html";
 
 import PhotoSwipe from "photoswipe";
-import { PhotoSwipeUI } from "../../services/photoswipe-ui.service";
-import { Options, Item } from "../../types";
+import { PhotoSwipeUI } from "../../services/photoswipe-ui.service.js";
+import { Options, Item } from "../../types/index.js";
 
 interface Scope {
   // Properties

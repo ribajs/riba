@@ -1,6 +1,6 @@
 import { EventDispatcher } from "@ribajs/events";
-import { State } from "@ribajs/history";
-import { extend } from "@ribajs/utils/src/type";
+import { State } from "@ribajs/history/src/index.js";
+import { extend } from "@ribajs/utils/src/type.js";
 
 /**
  * BaseView to be extended

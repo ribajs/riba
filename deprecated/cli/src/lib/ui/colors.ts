@@ -1,5 +1,5 @@
 import setString from "chalk";
-import { Color } from "../../interfaces/index";
+import { Color } from "../../interfaces/index.js";
 
 export { setString };
 

@@ -1,4 +1,4 @@
-import { isObject } from "@ribajs/utils/src/type";
+import { isObject } from "@ribajs/utils/src/type.js";
 
 /**
  * Sets property of object, array or value

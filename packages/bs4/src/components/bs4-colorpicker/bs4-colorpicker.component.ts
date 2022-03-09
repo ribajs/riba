@@ -3,10 +3,10 @@
  */
 
 import Color from "@sphinxxxx/color-conversion";
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import { EventDispatcher } from "@ribajs/events";
 import template from "./bs4-colorpicker.component.html";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { ColorPickerOptions } from "../../interfaces";
 import { debounce } from "@ribajs/utils/src/control";
 

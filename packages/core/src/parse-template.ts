@@ -1,5 +1,5 @@
-import { Tokens } from "./types";
-import { BINDING, TEXT } from "./constants/parser";
+import { Tokens } from "./types/index.js";
+import { BINDING, TEXT } from "./constants/parser.js";
 
 /**
  * Template parser and tokenizer for {{ mustache-style }} text content bindings.

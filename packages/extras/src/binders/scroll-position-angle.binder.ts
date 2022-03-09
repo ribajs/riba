@@ -1,5 +1,5 @@
-import { Binder } from "@ribajs/core";
-import { scrollToPosition } from "@ribajs/utils/src/dom";
+import { Binder } from "@ribajs/core/src/index.js";
+import { scrollToPosition } from "@ribajs/utils/src/dom.js";
 
 /**
  * rv-scroll-position-*

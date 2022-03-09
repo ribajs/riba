@@ -7237,6 +7237,7 @@ __metadata:
     pug: ^3.0.2
     pug-loader: ^2.4.0
     raw-loader: ^4.0.2
+    resolve-typescript-plugin: ^1.1.5
     resolve-url-loader: ^5.0.0
     sass: ^1.49.9
     sass-loader: ^12.6.0
@@ -24536,6 +24537,17 @@ fsevents@~2.3.1:
   dependencies:
     value-or-function: ^3.0.0
   checksum: 437813d9418b49e52c367b980b6b48b3ea1ea39105aac97c39f104724abb6cda224ed92ebf12499cf00993589d38c8195eb2be730d0ba8b45df9bdf7cec65b33
+  languageName: node
+  linkType: hard
+
+"resolve-typescript-plugin@npm:^1.1.5":
+  version: 1.1.5
+  resolution: "resolve-typescript-plugin@npm:1.1.5"
+  dependencies:
+    tslib: 2.3.1
+  peerDependencies:
+    webpack: ^5.0.0
+  checksum: c924e316d1dbdaeb10c21ff152597f6e96d8f7e6a18cb8be1b0f0bc3e9d6dd1a9db50dc1a736fe766e375c173bfdca901a65ede86d278d263b924751eb6a056b
   languageName: node
   linkType: hard
 

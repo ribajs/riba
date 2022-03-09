@@ -1,6 +1,6 @@
-export * from "./types";
-export * from "./binders";
-export * from "./formatters";
-export * from "./services";
-export * from "./components";
+export * from "./types/index.js";
+export * from "./binders/index.js";
+export * from "./formatters/index.js";
+export * from "./services/index.js";
+export * from "./components/index.js";
 export { strapiModule } from "./strapi.module";

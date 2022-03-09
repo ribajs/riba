@@ -1,5 +1,5 @@
-import { Binder } from "@ribajs/core";
-import { scrollTo } from "@ribajs/utils/src/dom";
+import { Binder } from "@ribajs/core/src/index.js";
+import { scrollTo } from "@ribajs/utils/src/dom.js";
 
 export class ScrollToOnEventBinder extends Binder<string, HTMLElement> {
   static key = "scroll-to-on-*";

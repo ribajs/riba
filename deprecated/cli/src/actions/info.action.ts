@@ -6,10 +6,10 @@ import { join } from "path";
 import {
   AbstractPackageManager,
   PackageManagerFactory,
-} from "../lib/package-managers/index";
-import { BANNER, messages } from "../lib/ui/index";
+} from "../lib/package-managers/index.js";
+import { BANNER, messages } from "../lib/ui/index.js";
 import { AbstractAction } from "./abstract.action";
-import { PackageJsonDependencies, RibaDependency } from "../interfaces/index";
+import { PackageJsonDependencies, RibaDependency } from "../interfaces/index.js";
 
 export class InfoAction extends AbstractAction {
   public async handle() {

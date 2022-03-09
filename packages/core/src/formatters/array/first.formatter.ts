@@ -1,4 +1,4 @@
-import { getFormatter } from "./get.formatter";
+import { getFormatter } from "./get.formatter.js";
 
 /**
  * Array formatter to get the first element of an array

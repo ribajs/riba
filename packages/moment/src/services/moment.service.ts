@@ -1,4 +1,4 @@
-import { MomentModuleOptions } from "../types";
+import { MomentModuleOptions } from "../types/index.js";
 
 export class MomentService {
   protected static _options: MomentModuleOptions;

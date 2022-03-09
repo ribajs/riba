@@ -1,6 +1,6 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import template from "./bs5-toggle-button-sidebar-example.component.html";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 
 export class Bs5ToggleButtonSidebarExampleComponent extends Component {
   public static tagName = "rv-bs5-toggle-button-sidebar-example";

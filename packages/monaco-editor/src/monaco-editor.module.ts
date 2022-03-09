@@ -1,9 +1,9 @@
-import { RibaModule } from "@ribajs/core";
-import * as components from "./components";
-import * as formatters from "./formatters";
-import * as binders from "./binders";
-import * as services from "./services";
-import { MonacoEditorModuleOptions } from "./types";
+import { RibaModule } from "@ribajs/core/src/index.js";
+import * as components from "./components/index.js";
+import * as formatters from "./formatters/index.js";
+import * as binders from "./binders/index.js";
+import * as services from "./services/index.js";
+import { MonacoEditorModuleOptions } from "./types/index.js";
 
 export const monacoEditorModule: RibaModule<MonacoEditorModuleOptions> = {
   formatters,

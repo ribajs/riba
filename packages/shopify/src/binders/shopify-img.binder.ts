@@ -1,6 +1,6 @@
-import { Binder } from "@ribajs/core";
-import { getViewportDimensions, throttle } from "@ribajs/utils";
-import { imgUrlFormatter } from "../formatters/img-url.formatter";
+import { Binder } from "@ribajs/core/src/index.js";
+import { getViewportDimensions, throttle } from "@ribajs/utils/src/index.js";
+import { imgUrlFormatter } from "../formatters/img-url.formatter.js";
 
 const PX_OFFSET = 10;
 const OVERWRITE_ORIGINAL_SRC = true;

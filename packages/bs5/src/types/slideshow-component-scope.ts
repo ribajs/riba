@@ -1,4 +1,4 @@
-import type { Bs5SlideshowComponent } from "../components/bs5-slideshow/bs5-slideshow.component";
+import type { Bs5SlideshowComponent } from "../components/bs5-slideshow/bs5-slideshow.component.js";
 
 import type {
   SlideshowSlide,

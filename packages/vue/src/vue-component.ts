@@ -5,7 +5,7 @@ import {
   WritableComputedOptions,
   ComponentPublicInstance,
 } from "vue";
-import { BasicComponent } from "@ribajs/core";
+import { BasicComponent } from "@ribajs/core/src/index.js";
 
 export abstract class VueComponent extends BasicComponent {
   protected vue?: App;

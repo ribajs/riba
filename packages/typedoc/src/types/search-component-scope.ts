@@ -1,6 +1,6 @@
 import type { SearchResult } from ".";
-import type { SearchComponent } from "../components/search/search.component";
-import type { NavbarComponent } from "../components/navbar/navbar.component";
+import type { SearchComponent } from "../components/search/search.component.js";
+import type { NavbarComponent } from "../components/navbar/navbar.component.js";
 
 export interface SearchComponentScope {
   /** The base url of the remote search server */
