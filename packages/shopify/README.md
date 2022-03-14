@@ -46,7 +46,7 @@ Add webpack to `resolutions` in your package.json to be shure to use the latest 
 ### Gulp 4 and (Slate) tools
 
 ```bash
-yarn add -D gulp gulp-cheerio gulp-ext-replace gulp-plumber gulp-rename gulp-size gulp-svgmin gulp-util gulp-zip @ribajs/webpack-config
+yarn add -D @ribajs/shopify-gulp gulp gulp-cheerio gulp-ext-replace gulp-plumber gulp-rename gulp-size gulp-svgmin gulp-util gulp-zip @ribajs/webpack-config
 ```
 
 ## Regist Riba
@@ -85,9 +85,7 @@ const requireDir = require("require-dir");
 
 // Gets the gulp tasks path of @ribajs/shopify
 const ribaShopifyTaskDir = path.resolve(
-  path.dirname(require.resolve("@ribajs/shopify/package.json")),
-  "build-system",
-  "dist",
+  path.dirname(require.resolve("@ribajs/shopify-gulp")),
   "tasks"
 );
 
@@ -97,7 +95,7 @@ if (argv.environment && argv.environment !== "undefined") {
 }
 
 // imports gulp tasks from the @ribajs/shopify's `build-system/dist/tasks` directory
-requireDir(ribaShopifyTaskDir);
+requireDir(ribaShopifyTaskDir, { extensions: [".js", ".cjs"] });
 ```
 
 ### Gulp tasks

@@ -1,1 +1,1 @@
-module.exports = require('@ribajs/babel-config');
+module.exports = require("@ribajs/babel-config");
