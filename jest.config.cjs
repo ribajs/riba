@@ -27,7 +27,11 @@ module.exports = {
    *
    * @see https://github.com/facebook/jest/issues/8114#issuecomment-475068766
    */
-  modulePathIgnorePatterns: ["<rootDir>/infra", "<rootDir>/demos/vue"],
+  modulePathIgnorePatterns: [
+    "<rootDir>/.yarn",
+    "<rootDir>/infra",
+    "<rootDir>/demos/vue",
+  ],
   // https://www.npmjs.com/package/jest-ts-webcompat-resolver
   resolver: require.resolve("jest-ts-webcompat-resolver"),
 };

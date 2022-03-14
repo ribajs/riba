@@ -1,6 +1,6 @@
 import { HttpService } from "@ribajs/core/src/index.js";
-import type { PodloveWebPlayerEpisode } from "../types/podlove-web-player-episode";
-import type { PodloveWebPlayerConfig } from "../types/podlove-web-player-config";
+import type { PodloveWebPlayerEpisode } from "../types/podlove-web-player-episode.js";
+import type { PodloveWebPlayerConfig } from "../types/podlove-web-player-config.js";
 
 export class PodloveService {
   static getEpisodeConfig(episodeConfigUrl: string) {

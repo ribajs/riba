@@ -17,7 +17,7 @@ export declare class PodlovePlayButtonComponent extends Component {
     play(): Promise<void>;
     protected getEpisodePlaylistIndex(): number;
     protected selectEpisode(index: number): Promise<{
-        type: import("../../types/podlove-web-player-store-action-type").PodloveWebPlayerStoreActionType;
+        type: import("../../types/podlove-web-player-store-action-type.js").PodloveWebPlayerStoreActionType;
         payload: any;
     } | undefined>;
     protected afterBind(): Promise<void>;

@@ -1,4 +1,4 @@
-import type { PodloveWebPlayerStoreActionType } from "../types/podlove-web-player-store-action-type";
+import type { PodloveWebPlayerStoreActionType } from "../types/podlove-web-player-store-action-type.js";
 
 export const createAction = (
   type: PodloveWebPlayerStoreActionType,

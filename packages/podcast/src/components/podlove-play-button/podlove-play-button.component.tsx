@@ -1,16 +1,19 @@
 import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
-import { waitForProp } from "@ribajs/utils/src/control";
-import { requestPlay, selectEpisode } from "../../mixins/actions.mixins";
-import { getEpisodeConfig, getPlayerConfig } from "../../mixins/config.mixins";
-import { DEFAULT_MAIN_PLAYER_ID } from "../../constants";
+import { waitForProp } from "@ribajs/utils/src/control.js";
+import { requestPlay, selectEpisode } from "../../mixins/actions.mixins.js";
+import {
+  getEpisodeConfig,
+  getPlayerConfig,
+} from "../../mixins/config.mixins.js";
+import { DEFAULT_MAIN_PLAYER_ID } from "../../constants.js";
 
 import type {
   PodlovePlayButtonComponentScope,
   PodloveWebPlayerStore,
 } from "../../types/index.js";
 import type { PodloveWebPlayerComponent } from "../podlove-web-player/podlove-web-player.component.js";
-import TEMPLATE from "./podlove-play-button.component.template";
+// import TEMPLATE from "./podlove-play-button.component.template.js";
 
 const PLAY_ICON = `<svg width="25" height="25" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" background="currentColor" aria-hidden="true"><path d="M6 5.76341C6 5.19411 6.60936 4.83238 7.10914 5.10498L18.5429 11.3416C19.064 11.6258 19.064 12.3742 18.5429 12.6584L7.10914 18.895C6.60936 19.1676 6 18.8059 6 18.2366V5.76341Z" rv-style-fill="styles.play.color"></path></svg>`;
 
@@ -228,7 +231,48 @@ export class PodlovePlayButtonComponent extends Component {
 
   protected template(): ReturnType<TemplateFunction> {
     if (!hasChildNodesTrim(this)) {
-      return TEMPLATE;
+      return (
+        <>
+          <div class="poster" rv-if="episode.poster | or episode.show.poster">
+            <img src="" rv-src="episode.poster | or episode.show.poster" />
+          </div>
+          <div class="info">
+            <div class="header">
+              <h1
+                class="name"
+                rv-style="styles.infoName"
+                rv-text="episode.show.title"
+              ></h1>
+              <h1
+                class="title"
+                rv-style="styles.infoTitle"
+                rv-text="episode.title"
+              ></h1>
+              <p
+                class="subtitle"
+                rv-style="styles.infoSubtitle"
+                rv-text="episode.subtitle"
+              ></p>
+              <div rv-if="error">
+                <pre>
+                  <code rv-text="error"></code>
+                </pre>
+              </div>
+            </div>
+            <div class="controls">
+              <button
+                class="play"
+                rv-on-click="play"
+                rv-style="styles.play"
+                rv-class-has-label="playLabel"
+              >
+                <span rv-template="icons.play"></span>
+                <span rv-text="playLabel"></span>
+              </button>
+            </div>
+          </div>
+        </>
+      );
     } else {
       return null;
     }

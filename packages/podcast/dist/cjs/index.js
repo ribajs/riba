@@ -20,6 +20,6 @@ __exportStar(require("./binders/index.js"), exports);
 __exportStar(require("./formatters/index.js"), exports);
 __exportStar(require("./services/index.js"), exports);
 __exportStar(require("./components/index.js"), exports);
-var podcast_module_1 = require("./podcast.module");
-Object.defineProperty(exports, "podcastModule", { enumerable: true, get: function () { return podcast_module_1.podcastModule; } });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxtREFBaUM7QUFDakMscURBQW1DO0FBQ25DLHdEQUFzQztBQUN0QyxzREFBb0M7QUFDcEMsd0RBQXNDO0FBQ3RDLG1EQUFpRDtBQUF4QywrR0FBQSxhQUFhLE9BQUEifQ==
+var podcast_module_js_1 = require("./podcast.module.js");
+Object.defineProperty(exports, "podcastModule", { enumerable: true, get: function () { return podcast_module_js_1.podcastModule; } });
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxtREFBaUM7QUFDakMscURBQW1DO0FBQ25DLHdEQUFzQztBQUN0QyxzREFBb0M7QUFDcEMsd0RBQXNDO0FBQ3RDLHlEQUFvRDtBQUEzQyxrSEFBQSxhQUFhLE9BQUEifQ==
