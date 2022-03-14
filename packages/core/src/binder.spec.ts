@@ -772,13 +772,13 @@ describe("Functional", () => {
     });
 
     describe("Priority", () => {
-      let mockA: jest.Mock<any, any>;
-      let mockB: jest.Mock<any, any>;
-      let mockC: jest.Mock<any, any>;
-      let mockD: jest.Mock<any, any>;
-      let mockE: jest.Mock<any, any>;
-      let mockF: jest.Mock<any, any>;
-      let mockG: jest.Mock<any, any>;
+      let mockA: any; // TODO: jest.Mock<any, any>;
+      let mockB: any; // TODO: jest.Mock<any, any>;
+      let mockC: any; // TODO: jest.Mock<any, any>;
+      let mockD: any; // TODO: jest.Mock<any, any>;
+      let mockE: any; // TODO: jest.Mock<any, any>;
+      let mockF: any; // TODO: jest.Mock<any, any>;
+      let mockG: any; // TODO: jest.Mock<any, any>;
       beforeEach(() => {
         mockA = jest.fn();
         mockB = jest.fn();
