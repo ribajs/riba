@@ -1,4 +1,4 @@
-import { MemberSignaturesComponent } from "../components/member-signatures/member-signatures.component";
+import { MemberSignaturesComponent } from "../components/member-signatures/member-signatures.component.js";
 
 export interface MemberSignaturesComponentScope {
   signaturesEl?: HTMLUListElement;

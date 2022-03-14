@@ -1,5 +1,5 @@
-import { eventHandlerFunction } from "../types";
-import { Binder } from "../binder";
+import { eventHandlerFunction } from "../types/index.js";
+import { Binder } from "../binder.js";
 
 /**
  * Binds an event handler on the element.

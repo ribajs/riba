@@ -1,4 +1,4 @@
-import { Binder } from "../binder";
+import { Binder } from "../binder.js";
 
 /**
  * Toggles a boolean variable to true/false if the event is triggered.

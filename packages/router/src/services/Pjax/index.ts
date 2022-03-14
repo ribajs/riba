@@ -2,7 +2,7 @@ export * from "./Dom";
 export * from "./Prefetch";
 
 import { EventDispatcher } from "@ribajs/events";
-import { HttpService, HttpServiceOptions } from "@ribajs/core";
+import { HttpService, HttpServiceOptions } from "@ribajs/core/src/index.js";
 import {
   cleanLink,
   getPort,
@@ -12,13 +12,13 @@ import {
   getElementFromEvent,
   getDataset,
   scrollTo,
-} from "@ribajs/utils";
+} from "@ribajs/utils/src/index.js";
 
 import { BaseCache } from "@ribajs/cache";
 import { HideShowTransition } from "../Transition";
-import { Transition, Response, PjaxOptions } from "../../types";
+import { Transition, Response, PjaxOptions } from "../../types/index.js";
 import { Dom } from "./Dom";
-import { HistoryManager } from "@ribajs/history";
+import { HistoryManager } from "@ribajs/history/src/index.js";
 import { ROUTE_ERROR_CLASS, IGNORE_CLASS_LINK } from "../../constants";
 import { RouterService } from "../../services";
 

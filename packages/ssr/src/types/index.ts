@@ -1,4 +1,4 @@
-export * from "./jsx"
+export * from "./jsx";
 export * from "./error-obj";
 export * from "./html-head";
 export * from "./module-options";

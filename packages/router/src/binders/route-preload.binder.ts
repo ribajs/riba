@@ -1,4 +1,4 @@
-import { Binder } from "@ribajs/core";
+import { Binder } from "@ribajs/core/src/index.js";
 import { Pjax } from "@ribajs/router";
 
 export class RoutePreloadBinder extends Binder<string, HTMLAnchorElement> {

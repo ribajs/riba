@@ -1,4 +1,4 @@
-import { SSRModuleOptions } from "../types";
+import { SSRModuleOptions } from "../types/index.js";
 
 export class ModuleService {
   protected static _options: SSRModuleOptions;

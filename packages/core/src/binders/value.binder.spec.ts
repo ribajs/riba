@@ -1,7 +1,8 @@
-import { Riba } from "../riba";
-import { dotAdapter } from "../adapters/dot.adapter";
-import { ValueBinder } from "./value.binder";
-import { Adapters } from "../types";
+import { jest } from '@jest/globals';
+import { Riba } from "../riba.js";
+import { dotAdapter } from "../adapters/dot.adapter.js";
+import { ValueBinder } from "./value.binder.js";
+import { Adapters } from "../types/index.js";
 
 describe("riba.binders", () => {
   describe("value", () => {

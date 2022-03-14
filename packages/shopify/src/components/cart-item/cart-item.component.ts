@@ -1,5 +1,5 @@
-import { Component, TemplateFunction } from "@ribajs/core";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { ShopifyCartLineItem, ShopifyCartObject } from "../../interfaces";
 import { ShopifyCartService } from "../../services";
 import template from "./cart-item.component.html";

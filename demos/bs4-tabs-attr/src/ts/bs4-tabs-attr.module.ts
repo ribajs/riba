@@ -1,5 +1,5 @@
-import { RibaModule } from "@ribajs/core";
-import * as components from "./components";
+import { RibaModule } from "@ribajs/core/src/index.js";
+import * as components from "./components/index.js";
 
 export const Bs4TabsAttrModule: RibaModule = {
   binders: {},

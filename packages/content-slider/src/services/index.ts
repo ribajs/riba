@@ -1,1 +1,1 @@
-export * from "./content-slider.service";
+export * from "./content-slider.service.js";

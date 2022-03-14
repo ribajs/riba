@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 
 import template from "./bs4-tabs-attr-example.component.html";
 

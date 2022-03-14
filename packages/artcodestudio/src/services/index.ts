@@ -1,1 +1,1 @@
-export * from "./art-code-studio.service";
+export * from "./art-code-studio.service.js";

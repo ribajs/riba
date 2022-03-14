@@ -1,1 +1,1 @@
-export * from "./octobercms.service";
+export * from "./octobercms.service.js";

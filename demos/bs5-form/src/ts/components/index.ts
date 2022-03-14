@@ -1,1 +1,1 @@
-export { FormExampleComponent } from "./form-example/form-example.component";
+export { FormExampleComponent } from "./form-example/form-example.component.js";

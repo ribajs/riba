@@ -1,10 +1,11 @@
 {
   "name": "@ribajs/babel-config",
   "version": "2.0.0-alpha.0",
+  "type": "commonjs",
   "description": "Default babel config used in Riba.js projects",
   "author": "Pascal Garber <pascal@artandcode.studio",
   "license": "MIT",
-  "main": "index.js",
+  "main": "index.cjs",
   "files": [
     "LICENSE",
     "README.md",

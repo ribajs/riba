@@ -1,4 +1,4 @@
-import { Formatter } from "../../types/formatter";
+import { Formatter } from "../../types/formatter.js";
 /**
  * equal or greater than
  * a >= b

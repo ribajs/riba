@@ -1,4 +1,4 @@
-import { Binder } from "../binder";
+import { Binder } from "../binder.js";
 
 /**
  * not-draggable

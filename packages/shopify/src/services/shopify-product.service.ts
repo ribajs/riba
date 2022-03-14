@@ -1,4 +1,4 @@
-import { HttpService } from "@ribajs/core";
+import { HttpService } from "@ribajs/core/src/index.js";
 
 import { ShopifyProduct, ShopifyProductVariant } from "../interfaces";
 

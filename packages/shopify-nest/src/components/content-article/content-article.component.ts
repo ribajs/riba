@@ -1,8 +1,8 @@
 import Debug from "debug";
-import { TemplateFunction } from "@ribajs/core";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import { ShopifyNestContentComponent } from "../content/content.component";
-import { ShopifyApiArticleService } from "../../services/shopify-api-article.service";
+import { TemplateFunction } from "@ribajs/core/src/index.js";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
+import { ShopifyNestContentComponent } from "../content/content.component.js";
+import { ShopifyApiArticleService } from "../../services/shopify-api-article.service.js";
 import { Article } from "@ribajs/shopify-tda";
 import pugTemplate from "./content-article.component.pug";
 

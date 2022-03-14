@@ -1,1 +1,1 @@
-export { EventDispatcher } from "./event-dispatcher.service";
+export { EventDispatcher } from "./event-dispatcher.service.js";

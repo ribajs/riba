@@ -1,5 +1,5 @@
-import { PodloveWebPlayerEpisode } from "./podlove-web-player-episode";
-import { PodloveWebPlayerStore } from "./podlove-web-player-store";
+import { PodloveWebPlayerEpisode } from "./podlove-web-player-episode.js";
+import { PodloveWebPlayerStore } from "./podlove-web-player-store.js";
 
 declare global {
   interface Window {

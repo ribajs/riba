@@ -1,6 +1,6 @@
-import { Binder } from "../binder";
-import { getInputValue } from "@ribajs/utils/src/dom";
-import { getString } from "@ribajs/utils/src/type";
+import { Binder } from "../binder.js";
+import { getInputValue } from "@ribajs/utils/src/dom.js";
+import { getString } from "@ribajs/utils/src/type.js";
 
 /**
  * checked

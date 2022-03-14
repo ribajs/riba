@@ -1,4 +1,4 @@
-export { Bs5Service } from "./bs5.service";
+export { Bs5Service } from "./bs5.service.js";
 export { Carousel } from "./carousel";
 export { Collapse } from "./collapse";
 export { Dropdown } from "./dropdown";

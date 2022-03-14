@@ -1,4 +1,4 @@
-import { Formatter } from "../../types";
+import { Formatter } from "../../types/index.js";
 
 /**
  * Converts a string into lowercase.

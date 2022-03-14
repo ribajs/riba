@@ -1,6 +1,11 @@
-import { Adapter, Adapters, ModuleElementType, AnyConstructor } from "../types";
-import { ModuleElementService } from "./module-element.service";
-import { Observer } from "../observer";
+import {
+  Adapter,
+  Adapters,
+  ModuleElementType,
+  AnyConstructor,
+} from "../types/index.js";
+import { ModuleElementService } from "./module-element.service.js";
+import { Observer } from "../observer.js";
 
 export class AdapterService
   extends ModuleElementService

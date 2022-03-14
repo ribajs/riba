@@ -1,4 +1,4 @@
-import { coreModule, Riba } from "@ribajs/core";
+import { coreModule, Riba } from "@ribajs/core/src/index.js";
 import { routerModule } from "@ribajs/router";
 import { bs4Module } from "@ribajs/bs4";
 import { RouterViewDemoModule } from "./router-view-demo.module";

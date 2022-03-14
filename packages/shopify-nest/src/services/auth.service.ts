@@ -1,4 +1,4 @@
-import { HttpService } from "@ribajs/core";
+import { HttpService } from "@ribajs/core/src/index.js";
 import Debug from "debug";
 import { ShopifyConnect } from "./../interfaces/shopify-connect/connect";
 import { FacebookConnect } from "./../interfaces/facebook-connect/connect";

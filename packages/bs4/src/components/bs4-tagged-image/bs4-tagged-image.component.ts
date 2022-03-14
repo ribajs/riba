@@ -1,11 +1,11 @@
-import { extend } from "@ribajs/utils";
+import { extend } from "@ribajs/utils/src/index.js";
 
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import { PopoverOptions } from "@ribajs/bs4";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import { TaggedImageTag as Tag } from "../../interfaces";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
+import { TaggedImageTag as Tag } from "../../interfaces/index.js";
 import template from "./bs4-tagged-image.component.html";
-import { debounce } from "@ribajs/utils/src/control";
+import { debounce } from "@ribajs/utils/src/control.js";
 
 interface Options {
   popoverOptions: Partial<PopoverOptions>;

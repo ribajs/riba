@@ -1,1 +1,1 @@
-export * from "./monaco-editor.service";
+export * from "./monaco-editor.service.js";

@@ -1,4 +1,4 @@
-import { routerModule } from "./index";
+import { routerModule } from "./index.js";
 
 declare global {
   interface Window {

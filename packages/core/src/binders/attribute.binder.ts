@@ -1,6 +1,6 @@
-import { Binder } from "../binder";
-import { BinderAttributeChangedEvent } from "../types";
-import { setAttribute } from "@ribajs/utils";
+import { Binder } from "../binder.js";
+import { BinderAttributeChangedEvent } from "../types/index.js";
+import { setAttribute } from "@ribajs/utils/src/index.js";
 
 /**
  * Sets the attribute on the element. If no binder above is matched it will fall

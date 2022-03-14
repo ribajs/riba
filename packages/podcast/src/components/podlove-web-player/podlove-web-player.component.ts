@@ -1,7 +1,7 @@
-import { Component, TemplateFunction } from "@ribajs/core";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import { loadScript } from "@ribajs/utils";
-import { getPlayerConfig } from "../../mixins/config.mixins";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
+import { loadScript } from "@ribajs/utils/src/index.js";
+import { getPlayerConfig } from "../../mixins/config.mixins.js";
 import {
   DEFAULT_MAIN_PLAYER_ID,
   DEFAULT_POLYFILLS_URL,
@@ -11,13 +11,13 @@ import {
   LOADING_CLASS,
   READY_CLASS,
   HAS_PLAYED_CLASS,
-} from "../../constants";
+} from "../../constants.js";
 
 import type {
   PodloveWebPlayerComponentScope,
   PodloveWebPlayerStore,
   PodloveWebPlayerStoreAction,
-} from "../../types";
+} from "../../types/index.js";
 
 export class PodloveWebPlayerComponent extends Component {
   public static tagName = "podlove-web-player";

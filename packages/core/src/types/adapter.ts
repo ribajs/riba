@@ -4,7 +4,7 @@
  * `Object.defineProperty`.
  */
 
-import { ObserverSyncCallback } from "./observer";
+import { ObserverSyncCallback } from "./observer.js";
 
 export interface Ref {
   callbacks: any[];

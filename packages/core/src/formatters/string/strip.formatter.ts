@@ -1,4 +1,4 @@
-import { Formatter } from "../../types";
+import { Formatter } from "../../types/index.js";
 
 /**
  * Strips tabs, spaces, and newlines (all whitespace) from the left and right side of a string.

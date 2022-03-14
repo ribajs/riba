@@ -1,4 +1,4 @@
-import { Formatter } from "../../types";
+import { Formatter } from "../../types/index.js";
 
 /**
  * The `slice` formatter returns a substring, starting at the specified index.

@@ -1,5 +1,5 @@
 import { LocalesRestService } from "@ribajs/i18n";
-import { BASE_HOST_URL } from "../constants/index";
+import { BASE_HOST_URL } from "../constants/index.js";
 
 export class LocalesService extends LocalesRestService {
   public static instance: LocalesService;

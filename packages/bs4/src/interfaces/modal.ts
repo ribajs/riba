@@ -1,5 +1,5 @@
 import { Notification } from "./notification";
-import { ModalService, Config } from "../services/modal.service";
+import { ModalService, Config } from "../services/modal.service.js";
 
 export interface Button {
   /**

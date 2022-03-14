@@ -1,8 +1,8 @@
-import { DataElement } from "./types";
-import { MustacheTextBinder } from "./binders/mustache-text.binder";
-import { View } from "./view";
-import { BINDING } from "./constants/parser";
-import { parseTemplate } from "./parse-template";
+import { DataElement } from "./types/index.js";
+import { MustacheTextBinder } from "./binders/mustache-text.binder.js";
+import { View } from "./view.js";
+import { BINDING } from "./constants/parser.js";
+import { parseTemplate } from "./parse-template.js";
 
 export function parseNode(
   view: View,

@@ -1,7 +1,7 @@
 // @see https://github.com/twbs/bootstrap/blob/master/js/src/util/index.js
 
 import { MILLISECONDS_MULTIPLIER, TRANSITION_END } from "../constants";
-import { toType } from "@ribajs/utils/src/type";
+import { toType } from "@ribajs/utils/src/type.js";
 
 export const getSelector = (element: HTMLElement) => {
   let selector = element.getAttribute("data-target");

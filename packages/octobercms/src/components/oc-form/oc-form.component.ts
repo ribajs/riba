@@ -1,5 +1,5 @@
 import { Bs4FormComponent } from "@ribajs/bs4";
-import { OcFormComponentScope as Scope } from "../../types";
+import { OcFormComponentScope as Scope } from "../../types/index.js";
 
 export class OcFormComponent extends Bs4FormComponent {
   public static tagName = "oc-form";

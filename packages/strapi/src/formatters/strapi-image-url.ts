@@ -1,4 +1,4 @@
-import type { StrapiImage, StrapiImageFormatType } from "../types";
+import type { StrapiImage, StrapiImageFormatType } from "../types/index.js";
 import { strapiImageFormatter } from "./strapi-image";
 import { strapiFormatter } from "./strapi";
 

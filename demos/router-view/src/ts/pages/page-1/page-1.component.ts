@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 
 export class Page1PageComponent extends Component {
   public static tagName = "page-1-page";

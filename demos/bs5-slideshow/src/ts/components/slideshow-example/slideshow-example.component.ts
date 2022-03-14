@@ -1,5 +1,5 @@
-import { Component, TemplateFunction } from "@ribajs/core";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import template from "./slideshow-example.component.html";
 
 export class SlideshowExampleComponent extends Component {

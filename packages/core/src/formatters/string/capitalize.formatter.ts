@@ -1,5 +1,5 @@
-import { Formatter } from "../../types";
-import { capitalize } from "@ribajs/utils/src/type";
+import { Formatter } from "../../types/index.js";
+import { capitalize } from "@ribajs/utils/src/type.js";
 
 /**
  * Uppercases the first letter of a string

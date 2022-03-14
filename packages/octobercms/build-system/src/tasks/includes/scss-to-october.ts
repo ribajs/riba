@@ -1,7 +1,7 @@
 import * as Stream from "stream";
 import * as Path from "path";
 import * as yaml from "js-yaml";
-import "../../types/index";
+import "../../types/index.js";
 import rgbRegex from "rgb-regex";
 import hexRegex = require("hex-color-regex");
 

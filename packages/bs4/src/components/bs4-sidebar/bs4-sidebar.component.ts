@@ -1,9 +1,9 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import { EventDispatcher } from "@ribajs/events";
 import {
   getViewportDimensions,
   hasChildNodesTrim,
-} from "@ribajs/utils/src/dom";
+} from "@ribajs/utils/src/dom.js";
 import { TOGGLE_BUTTON } from "../../constants";
 import { debounce } from "@ribajs/utils/src/control";
 import {

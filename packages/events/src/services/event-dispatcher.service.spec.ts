@@ -1,4 +1,4 @@
-import { EventDispatcher } from './event-dispatcher.service';
+import { EventDispatcher } from './event-dispatcher.service.js';
 
 describe("riba.core", () => {
   describe("EventDispatcher", () => {

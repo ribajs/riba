@@ -1,4 +1,4 @@
-import { sizeFormatter } from "./size.formatter";
+import { sizeFormatter } from "./size.formatter.js";
 
 export const emptyFormatter = {
   name: "empty",

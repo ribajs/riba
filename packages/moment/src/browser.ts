@@ -1,4 +1,4 @@
-import { momentModule } from "./index";
+import { momentModule } from "./index.js";
 
 declare global {
   interface Window {

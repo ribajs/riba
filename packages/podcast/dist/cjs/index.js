@@ -1,7 +1,11 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -11,11 +15,11 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.podcastModule = void 0;
-__exportStar(require("./types"), exports);
-__exportStar(require("./binders"), exports);
-__exportStar(require("./formatters"), exports);
-__exportStar(require("./services"), exports);
-__exportStar(require("./components"), exports);
-var podcast_module_1 = require("./podcast.module");
-Object.defineProperty(exports, "podcastModule", { enumerable: true, get: function () { return podcast_module_1.podcastModule; } });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7OztBQUFBLDBDQUF3QjtBQUN4Qiw0Q0FBMEI7QUFDMUIsK0NBQTZCO0FBQzdCLDZDQUEyQjtBQUMzQiwrQ0FBNkI7QUFDN0IsbURBQWlEO0FBQXhDLCtHQUFBLGFBQWEsT0FBQSJ9
+__exportStar(require("./types/index.js"), exports);
+__exportStar(require("./binders/index.js"), exports);
+__exportStar(require("./formatters/index.js"), exports);
+__exportStar(require("./services/index.js"), exports);
+__exportStar(require("./components/index.js"), exports);
+var podcast_module_js_1 = require("./podcast.module.js");
+Object.defineProperty(exports, "podcastModule", { enumerable: true, get: function () { return podcast_module_js_1.podcastModule; } });
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxtREFBaUM7QUFDakMscURBQW1DO0FBQ25DLHdEQUFzQztBQUN0QyxzREFBb0M7QUFDcEMsd0RBQXNDO0FBQ3RDLHlEQUFvRDtBQUEzQyxrSEFBQSxhQUFhLE9BQUEifQ==

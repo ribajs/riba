@@ -1,5 +1,5 @@
-import { Component, TemplateFunction } from "@ribajs/core";
-import { loadScript, getUID } from "@ribajs/utils/src/dom";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { loadScript, getUID } from "@ribajs/utils/src/dom.js";
 
 interface Scope {
   src: string;

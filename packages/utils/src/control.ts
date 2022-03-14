@@ -1,4 +1,4 @@
-import { Deferred, TimeoutPromise } from "./types";
+import { Deferred, TimeoutPromise } from "./types/index.js";
 
 export const noop = () => {
   /** do nothing */

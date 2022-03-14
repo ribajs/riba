@@ -4,9 +4,9 @@ import {
   APIParam,
   APIListItem,
   Scope as IBaseScope,
-} from "../api-explorer/api-explorer.component";
+} from "../api-explorer/api-explorer.component.js";
 
-import { FacebookApiService } from "../../services/facebook-api.service";
+import { FacebookApiService } from "../../services/facebook-api.service.js";
 
 export interface Scope extends IBaseScope {
   langcode?: string;

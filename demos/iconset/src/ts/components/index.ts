@@ -1,1 +1,1 @@
-export { IconsetExampleComponent } from "./iconset-example/iconset-example.component";
+export { IconsetExampleComponent } from "./iconset-example/iconset-example.component.js";

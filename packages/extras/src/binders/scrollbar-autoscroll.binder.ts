@@ -1,6 +1,9 @@
-import { Binder } from "@ribajs/core";
-import { isString } from "@ribajs/utils/src/type";
-import { Autoscroll, AutoscrollOptions } from "../services/autoscroll.service";
+import { Binder } from "@ribajs/core/src/index.js";
+import { isString } from "@ribajs/utils/src/type.js";
+import {
+  Autoscroll,
+  AutoscrollOptions,
+} from "../services/autoscroll.service.js";
 
 /**
  * Slideout click event to toggle the slideout

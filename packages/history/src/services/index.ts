@@ -1,1 +1,1 @@
-export * from "./history-manager.service";
+export * from "./history-manager.service.js";

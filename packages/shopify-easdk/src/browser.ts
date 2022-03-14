@@ -1,4 +1,4 @@
-import { shopifyEasdkModule } from "./index";
+import { shopifyEasdkModule } from "./index.js";
 
 declare global {
   interface Window {

@@ -1,4 +1,4 @@
-import { HistoryManager } from "./index";
+import { HistoryManager } from "./index.js";
 
 declare global {
   interface Window {

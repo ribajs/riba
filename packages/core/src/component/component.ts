@@ -3,13 +3,13 @@
  *
  * @see https://developer.mozilla.org/de/docs/Web/Web_Components/Using_custom_elements
  */
-import { View } from "../view";
-import { Riba } from "../riba";
-import { Binder } from "../binder";
-import { BasicComponent } from "./basic-component";
-import { Formatter } from "../types";
+import { View } from "../view.js";
+import { Riba } from "../riba.js";
+import { Binder } from "../binder.js";
+import { BasicComponent } from "./basic-component.js";
+import { Formatter } from "../types/index.js";
 import { EventDispatcher } from "@ribajs/events";
-import type { ComponentLifecycleEventData } from "../types";
+import type { ComponentLifecycleEventData } from "../types/index.js";
 
 export abstract class Component extends BasicComponent {
   protected view?: View | null = null;

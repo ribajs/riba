@@ -1,5 +1,5 @@
 import { Component } from "@ribajs/core";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.ts";
 import pugTemplate from "./gy-podcast-fixed-web-player.component.pug";
 export class GyPodcastFixedWebPlayerComponent extends Component {
     static tagName = "gy-podcast-fixed-web-player";

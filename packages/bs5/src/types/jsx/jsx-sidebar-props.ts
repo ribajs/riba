@@ -1,4 +1,7 @@
-import type { JsxHtmlGlobalProps, JSXComponentBoolean } from "@ribajs/jsx";
+import type {
+  JsxHtmlGlobalProps,
+  JSXComponentBoolean,
+} from "@ribajs/jsx/src/index.js";
 
 export interface JsxBs5SidebarProps extends JsxHtmlGlobalProps {
   id: string;

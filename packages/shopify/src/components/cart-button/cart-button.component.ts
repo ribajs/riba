@@ -1,8 +1,8 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import { Pjax } from "@ribajs/router";
 import { ShopifyCartService, ShopifyCartObject } from "@ribajs/shopify";
 import { onRoute } from "@ribajs/utils/src/url";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import template from "./cart-button.component.html";
 
 interface Scope {

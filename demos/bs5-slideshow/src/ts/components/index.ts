@@ -1,1 +1,1 @@
-export { SlideshowExampleComponent } from "./slideshow-example/slideshow-example.component";
+export { SlideshowExampleComponent } from "./slideshow-example/slideshow-example.component.js";

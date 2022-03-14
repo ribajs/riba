@@ -4,10 +4,10 @@ import {
   APIParam,
   APIListItem,
   Scope,
-} from "../api-explorer/api-explorer.component";
+} from "../api-explorer/api-explorer.component.js";
 
-import { ShopifyApiThemesService } from "../../services/shopify-api-theme.service";
-import { ShopifyApiProductService } from "../../services/shopify-api-product.service";
+import { ShopifyApiThemesService } from "../../services/shopify-api-theme.service.js";
+import { ShopifyApiProductService } from "../../services/shopify-api-product.service.js";
 
 export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplorerComponent {
   public static tagName = "shopify-nest-api-explorer-shopify";

@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import {
   ShopifyProductVariant,
   ShopifyProduct,
@@ -6,7 +6,7 @@ import {
   ShopifyCartService,
   ShopifyProductService,
 } from "@ribajs/shopify";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import template from "./product.component.html";
 
 export interface PreparedProductVariant extends ShopifyProductVariant {

@@ -1,14 +1,14 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import { getUrl } from "@ribajs/utils/src/url";
 import template from "./bs5-share.component.html";
 import labelTemplate from "./bs5-share.label.html";
-import { ShareItem, ShareUrlType } from "../../types";
+import { ShareItem, ShareUrlType } from "../../types/index.js";
 import { Dropdown } from "@ribajs/bs5";
 import {
   hasChildNodesTrim,
   copyTextToClipboard,
   stripHtml,
-} from "@ribajs/utils";
+} from "@ribajs/utils/src/index.js";
 
 export interface Scope {
   type: ShareUrlType;

@@ -1,5 +1,5 @@
-import { ParsedDeclarations } from "./types";
-import { DECLARATION_SPLIT } from "./constants/parser";
+import { ParsedDeclarations } from "./types/index.js";
+import { DECLARATION_SPLIT } from "./constants/parser.js";
 
 /**
  * Parses an attribute argument to his keypath and splits the formatter names into a pipes array.

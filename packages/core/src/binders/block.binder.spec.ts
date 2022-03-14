@@ -1,6 +1,6 @@
-import { Riba } from "../riba";
-import { BlockBinder } from "./block.binder";
-import { dotAdapter } from "../adapters/dot.adapter";
+import { Riba } from "../riba.js";
+import { BlockBinder } from "./block.binder.js";
+import { dotAdapter } from "../adapters/dot.adapter.js";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);

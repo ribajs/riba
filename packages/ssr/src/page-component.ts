@@ -1,6 +1,6 @@
-import { Component } from "@ribajs/core";
+import { Component } from "@ribajs/core/src/index.js";
 import { EventDispatcher } from "@ribajs/events";
-import type { SsrHtmlHead, SharedContext } from "./types";
+import type { SsrHtmlHead, SharedContext } from "./types/index.js";
 
 export abstract class PageComponent extends Component {
   protected lifecycleEvents = EventDispatcher.getInstance("lifecycle");

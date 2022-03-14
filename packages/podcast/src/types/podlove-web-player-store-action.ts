@@ -1,4 +1,4 @@
-import { PodloveWebPlayerStoreActionType } from "./podlove-web-player-store-action-type";
+import { PodloveWebPlayerStoreActionType } from "./podlove-web-player-store-action-type.js";
 
 export interface PodloveWebPlayerStoreAction {
   type?: PodloveWebPlayerStoreActionType;

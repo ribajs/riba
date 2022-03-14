@@ -1,4 +1,4 @@
-import { HttpService } from "@ribajs/core";
+import { HttpService } from "@ribajs/core/src/index.js";
 import { EventDispatcher } from "@ribajs/events";
 import Debug from "debug";
 import { SyncOptions, SyncProgress } from "../interfaces/shopify-sync";

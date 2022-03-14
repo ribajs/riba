@@ -1,7 +1,7 @@
-import { Riba } from "../riba";
-import { IfBinder } from "./if.binder";
+import { Riba } from "../riba.js";
+import { IfBinder } from "./if.binder.js";
 import { EachStarBinder } from "../binders";
-import { dotAdapter } from "../adapters/dot.adapter";
+import { dotAdapter } from "../adapters/dot.adapter.js";
 
 describe("if", () => {
   const riba = new Riba();

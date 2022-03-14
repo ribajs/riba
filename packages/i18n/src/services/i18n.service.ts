@@ -1,4 +1,4 @@
-import { I18nModuleOptions } from "../types";
+import { I18nModuleOptions } from "../types/index.js";
 
 export class I18nService {
   protected static _options: I18nModuleOptions;

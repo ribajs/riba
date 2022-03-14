@@ -1,5 +1,5 @@
-import { Binder } from "../binder";
-import { View } from "../view";
+import { Binder } from "../binder.js";
+import { View } from "../view.js";
 
 /**
  * template

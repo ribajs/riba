@@ -1,5 +1,5 @@
-import type { Binder } from "../binder";
-import type { ClassOfBinder } from "./class-of-binder";
+import type { Binder } from "../binder.js";
+import type { ClassOfBinder } from "./class-of-binder.js";
 
 /**
  * A list of binders with it's key name

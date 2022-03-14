@@ -5,7 +5,7 @@ import {
   alexanderHeimbuch,
   michaelaLehr,
   ericTeubert,
-} from "../contributors/index";
+} from "../contributors/index.js";
 import { show } from "../show";
 
 export const episode01: PodloveWebPlayerEpisode = {

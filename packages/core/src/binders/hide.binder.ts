@@ -1,4 +1,4 @@
-import { Binder } from "../binder";
+import { Binder } from "../binder.js";
 
 /**
  * Hides the element when value is true (negated version of `show` binder).

@@ -1,4 +1,4 @@
-import { Config, ESBuildConfig } from "./types";
+import { Config, ESBuildConfig } from "./types/index.js";
 import * as DEF from "./constants/defaults";
 import { findFile, basename, rootPath, resolve, extname } from "./path";
 import { pnpPlugin } from "@yarnpkg/esbuild-plugin-pnp";

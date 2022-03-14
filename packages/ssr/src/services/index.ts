@@ -1,2 +1,2 @@
-export * from "./module.service";
-export * from "./open-graph.service";
+export * from "./module.service.js";
+export * from "./open-graph.service.js";

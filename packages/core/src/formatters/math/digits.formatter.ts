@@ -1,4 +1,4 @@
-import { justDigits, isNumber } from "@ribajs/utils/src/type";
+import { justDigits, isNumber } from "@ribajs/utils/src/type.js";
 
 /**
  * Just get the digits of a string, useful to remove px from css value

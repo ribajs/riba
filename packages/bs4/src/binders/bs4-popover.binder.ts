@@ -1,5 +1,5 @@
 import { PopoverService, PopoverOptions } from "@ribajs/bs4";
-import { Binder } from "@ribajs/core";
+import { Binder } from "@ribajs/core/src/index.js";
 
 /**
  *

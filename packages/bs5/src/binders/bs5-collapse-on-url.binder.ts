@@ -1,4 +1,4 @@
-import { Binder } from "@ribajs/core";
+import { Binder } from "@ribajs/core/src/index.js";
 import { EventDispatcher } from "@ribajs/events";
 import { Collapse } from "../services/collapse";
 import { onRoute } from "@ribajs/utils/src/url";

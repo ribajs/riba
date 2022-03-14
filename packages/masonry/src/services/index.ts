@@ -1,1 +1,1 @@
-export * from "./masonry.service";
+export * from "./masonry.service.js";

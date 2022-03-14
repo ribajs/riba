@@ -1,6 +1,6 @@
-import { Component, TemplateFunction } from "@ribajs/core";
-import { EmptyTemplateComponentScope } from "../../types";
-import { hasChildNodesTrim } from "@ribajs/utils";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { EmptyTemplateComponentScope } from "../../types/index.js";
+import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
 import template from "./empty-template.component.pug";
 
 export class EmptyTemplateComponent extends Component {

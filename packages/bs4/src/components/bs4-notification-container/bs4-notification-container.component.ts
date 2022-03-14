@@ -1,6 +1,6 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import { EventDispatcher } from "@ribajs/events";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import template from "./bs4-notification-container.component.html";
 import { Notification } from "../../interfaces";
 

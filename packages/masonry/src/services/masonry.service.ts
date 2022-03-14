@@ -1,4 +1,4 @@
-import { MasonryModuleOptions } from "../types";
+import { MasonryModuleOptions } from "../types/index.js";
 
 export class MasonryService {
   protected static _options: MasonryModuleOptions;

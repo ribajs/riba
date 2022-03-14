@@ -1,4 +1,4 @@
-import { BASE_HOST_URL } from "../constants/index";
+import { BASE_HOST_URL } from "../constants/index.js";
 
 export class BaseApiService {
   public host: string;

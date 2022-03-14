@@ -1,4 +1,4 @@
-import { ShopifyEasdkModuleOptions } from "../types";
+import { ShopifyEasdkModuleOptions } from "../types/index.js";
 
 export class ModuleService {
   protected static _options: ShopifyEasdkModuleOptions;

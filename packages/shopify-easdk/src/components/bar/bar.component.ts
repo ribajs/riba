@@ -1,5 +1,5 @@
-import { Component, TemplateFunction } from "@ribajs/core";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import {
   BarConfig,
   BarWrapper,
@@ -8,7 +8,7 @@ import {
   PaginationConfig,
   ButtonConfig,
   BarWrapperService,
-} from "../../index";
+} from "../../index.js";
 
 import pugTemplate from "./bar.component.pug";
 

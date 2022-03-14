@@ -1,4 +1,4 @@
-import { ExtrasModuleOptions } from "../types";
+import { ExtrasModuleOptions } from "../types/index.js";
 
 export class ExtrasService {
   protected static _options: ExtrasModuleOptions;

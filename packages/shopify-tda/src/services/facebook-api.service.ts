@@ -1,8 +1,8 @@
-import { HttpService } from "@ribajs/core";
+import { HttpService } from "@ribajs/core/src/index.js";
 import { IFbRequest } from "./../interfaces/facebook-api/base";
 import { FbPage } from "./../interfaces/facebook-api/pages";
 import { IFbPostData } from "./../interfaces/facebook-api/post";
-import { BaseApiService } from "./base.service";
+import { BaseApiService } from "./base.service.js";
 
 export class FacebookApiService extends BaseApiService {
   public static instance?: FacebookApiService;

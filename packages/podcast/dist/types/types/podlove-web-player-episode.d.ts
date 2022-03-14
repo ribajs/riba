@@ -1,9 +1,9 @@
-import { PodloveWebPlayerShow } from "./podlove-web-player-show";
-import { PodloveWebPlayerChapter } from "./podlove-web-player-chapter";
-import { PodloveWebPlayerAudio } from "./podlove-web-player-audio";
-import { PodloveWebPlayerFile } from "./podlove-web-player-file";
-import { PodloveWebPlayerContributor } from "./podlove-web-player-contributor";
-import { PodloveWebPlayerTranscript } from "./podlove-web-player-transcript";
+import { PodloveWebPlayerShow } from "./podlove-web-player-show.js";
+import { PodloveWebPlayerChapter } from "./podlove-web-player-chapter.js";
+import { PodloveWebPlayerAudio } from "./podlove-web-player-audio.js";
+import { PodloveWebPlayerFile } from "./podlove-web-player-file.js";
+import { PodloveWebPlayerContributor } from "./podlove-web-player-contributor.js";
+import { PodloveWebPlayerTranscript } from "./podlove-web-player-transcript.js";
 export interface PodloveWebPlayerEpisode {
     version: 5;
     show: PodloveWebPlayerShow;

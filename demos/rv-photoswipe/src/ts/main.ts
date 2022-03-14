@@ -1,5 +1,5 @@
 import { bs4Module } from "@ribajs/bs4";
-import { coreModule, Riba } from "@ribajs/core";
+import { coreModule, Riba } from "@ribajs/core/src/index.js";
 import { extrasModule } from "@ribajs/extras";
 import { photoswipeModule } from "@ribajs/photoswipe";
 import { PhotoswipeDemoModule } from "./photoswipe-demo.module";

@@ -1,8 +1,11 @@
-import type { JsxHtmlGlobalProps, JSXComponentBoolean } from "@ribajs/jsx";
+import type {
+  JsxHtmlGlobalProps,
+  JSXComponentBoolean,
+} from "@ribajs/jsx/src/index.js";
 
 export interface JsxRouterViewProps extends JsxHtmlGlobalProps {
-  id?: string
-  action?: "replace" | "append",
+  id?: string;
+  action?: "replace" | "append";
   "container-selector"?: string;
   "scroll-to-top"?: JSXComponentBoolean;
   "listen-all-links"?: JSXComponentBoolean;

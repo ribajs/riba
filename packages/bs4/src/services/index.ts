@@ -1,9 +1,9 @@
-export * from "./bs4.service";
-export * from "./carousel.service";
-export { CollapseService } from "./collapse.service";
-export { DropdownService } from "./dropdown.service";
-export { ModalService } from "./modal.service";
-export * from "./tooltip.service";
-export * from "./popover.service";
-export { ToastService } from "./toast.service";
-export { TooltipService } from "./tooltip.service";
+export * from "./bs4.service.js";
+export * from "./carousel.service.js";
+export { CollapseService } from "./collapse.service.js";
+export { DropdownService } from "./dropdown.service.js";
+export { ModalService } from "./modal.service.js";
+export * from "./tooltip.service.js";
+export * from "./popover.service.js";
+export { ToastService } from "./toast.service.js";
+export { TooltipService } from "./tooltip.service.js";

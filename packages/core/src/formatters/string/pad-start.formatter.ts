@@ -1,4 +1,4 @@
-import { Formatter } from "../../types";
+import { Formatter } from "../../types/index.js";
 
 /**
  * The padStart formatter pads the current string with another string (multiple times, if needed) until the resulting string reaches the given length.

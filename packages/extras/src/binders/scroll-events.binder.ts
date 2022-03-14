@@ -1,5 +1,5 @@
-import { Binder } from "@ribajs/core";
-import { ScrollEventsService } from "../services/touch-events/scroll-events.service";
+import { Binder } from "@ribajs/core/src/index.js";
+import { ScrollEventsService } from "../services/touch-events/scroll-events.service.js";
 
 export class ScrollEventsBinder extends Binder<string, HTMLElement> {
   static key = "scroll-events";

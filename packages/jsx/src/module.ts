@@ -1,5 +1,5 @@
-import { RibaModule } from "@ribajs/core";
-import { JSXModuleOptions } from "./types";
+import { RibaModule } from "@ribajs/core/src/index.js";
+import { JSXModuleOptions } from "./types/index.js";
 
 export const jsxModule: RibaModule<JSXModuleOptions> = {
   init(options = {}) {

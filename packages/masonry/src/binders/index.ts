@@ -1,1 +1,1 @@
-export * from "./masonry.binder";
+export * from "./masonry.binder.js";

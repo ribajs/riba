@@ -6,7 +6,7 @@
  * Built just using public methods/properties of PhotoSwipe.
  */
 
-import { Item, Options, UIElement } from "../types";
+import { Item, Options, UIElement } from "../types/index.js";
 import * as PhotoSwipe from "photoswipe";
 
 import { FullscreenService } from "@ribajs/extras";

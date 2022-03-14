@@ -1,7 +1,7 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import Debug from "debug";
 import pugTemplate from "./permissions-card.component.pug";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 
 export class ShopifyNestPermissionsCardComponent extends Component {
   public static tagName = "shopify-nest-permissions-card";

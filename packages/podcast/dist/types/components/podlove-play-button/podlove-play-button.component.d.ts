@@ -1,6 +1,6 @@
-import { Component, TemplateFunction } from "@ribajs/core";
-import type { PodlovePlayButtonComponentScope, PodloveWebPlayerStore } from "../../types";
-import type { PodloveWebPlayerComponent } from "../podlove-web-player/podlove-web-player.component";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import type { PodlovePlayButtonComponentScope, PodloveWebPlayerStore } from "../../types/index.js";
+import type { PodloveWebPlayerComponent } from "../podlove-web-player/podlove-web-player.component.js";
 export declare class PodlovePlayButtonComponent extends Component {
     static tagName: string;
     protected player?: PodloveWebPlayerComponent;
@@ -17,7 +17,7 @@ export declare class PodlovePlayButtonComponent extends Component {
     play(): Promise<void>;
     protected getEpisodePlaylistIndex(): number;
     protected selectEpisode(index: number): Promise<{
-        type: import("../../types").PodloveWebPlayerStoreActionType;
+        type: import("../../types/podlove-web-player-store-action-type.js").PodloveWebPlayerStoreActionType;
         payload: any;
     } | undefined>;
     protected afterBind(): Promise<void>;

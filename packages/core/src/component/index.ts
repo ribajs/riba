@@ -1,3 +1,2 @@
-export * from "../services/component.service";
-export * from "../component/component";
-export * from "../component/basic-component";
+export * from "./component.js";
+export * from "./basic-component.js";

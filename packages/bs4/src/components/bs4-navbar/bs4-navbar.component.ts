@@ -1,11 +1,11 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import { EventDispatcher } from "@ribajs/events";
 import {
   CollapseService,
   EVENT_SHOWN,
   EVENT_HIDDEN,
   CLASS_NAME_COLLAPSED,
-} from "../../services/collapse.service";
+} from "../../services/collapse.service.js";
 
 export class Bs4NavbarComponent extends Component {
   public static tagName = "bs4-navbar";

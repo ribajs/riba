@@ -1,4 +1,4 @@
-import { ArtCodeStudioModuleOptions } from "../types";
+import { ArtCodeStudioModuleOptions } from "../types/index.js";
 
 export class ArtCodeStudioService {
   protected static _options: ArtCodeStudioModuleOptions;

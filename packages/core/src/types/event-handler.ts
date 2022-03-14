@@ -1,4 +1,4 @@
-import type { Binder } from "../binder";
+import type { Binder } from "../binder.js";
 
 /** Interface for the event handler, augment the event handler of the on-* binder */
 export type EventHandler = (

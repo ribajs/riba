@@ -1,4 +1,4 @@
-import { PhotoswipeModuleOptions } from "../types";
+import { PhotoswipeModuleOptions } from "../types/index.js";
 
 export class PhotoswipeService {
   protected static _options: PhotoswipeModuleOptions;

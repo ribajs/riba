@@ -1,10 +1,10 @@
-import { Riba } from "../riba";
+import { Riba } from "../riba.js";
 
-import { EachStarBinder } from "./each-item.binder";
+import { EachStarBinder } from "./each-item.binder.js";
 
-import { TextBinder } from "./text.binder";
+import { TextBinder } from "./text.binder.js";
 
-import { dotAdapter } from "../adapters/dot.adapter";
+import { dotAdapter } from "../adapters/dot.adapter.js";
 
 describe("each-*", () => {
   const riba = new Riba();

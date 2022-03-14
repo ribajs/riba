@@ -1,4 +1,4 @@
-import type { ArtCodeCreditsComponent } from "../components/credits/credits.component";
+import type { ArtCodeCreditsComponent } from "../components/credits/credits.component.js";
 
 export interface CreditsComponentScope {
   popupVisible: boolean;

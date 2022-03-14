@@ -1,5 +1,5 @@
-import { AnyConstructor } from "./any-constructor";
-import { AnySingleton } from "./any-singleton";
+import { AnyConstructor } from "./any-constructor.js";
+import { AnySingleton } from "./any-singleton.js";
 
 /**
  * Type of any class

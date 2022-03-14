@@ -1,6 +1,10 @@
 {
   "name": "@ribajs/demo-extras-scroll-events",
   "version": "2.0.0-alpha.0",
+  "type": "module",
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
   "description": "",
   "main": "index.html",
   "private": true,
@@ -11,7 +15,7 @@
     "start:dev": "webpack serve --env development",
     "serve": "serve dist",
     "clear": "rm -rf ./dist",
-    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx && tsc --noEmit",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts && tsc --noEmit",
     "test": "jest",
     "packages:npm:link": "npm link @ribajs/bs4 @ribajs/core @ribajs/extras"
   },

@@ -1,8 +1,8 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 
-import type { NavbarComponentScope } from "../../types";
+import type { NavbarComponentScope } from "../../types/index.js";
 import type { Bs5SidebarComponent } from "@ribajs/bs5";
-import { SearchComponent } from "../search/search.component";
+import { SearchComponent } from "../search/search.component.js";
 
 export class NavbarComponent extends Component {
   public static tagName = "tsd-navbar";

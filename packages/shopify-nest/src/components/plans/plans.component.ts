@@ -1,7 +1,11 @@
-import { Component, TemplateFunction, HttpService } from "@ribajs/core";
+import {
+  Component,
+  TemplateFunction,
+  HttpService,
+} from "@ribajs/core/src/index.js";
 import Debug from "debug";
 import pugTemplate from "./plans.component.pug";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { RecurringCharge } from "../../interfaces/shopify-api/recurring_charge";
 import { Plan } from "../../interfaces/plan";
 

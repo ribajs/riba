@@ -1,1 +1,1 @@
-export * from "./leaflet/leaflet-map.component";
+export * from "./leaflet/leaflet-map.component.js";

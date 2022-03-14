@@ -1,9 +1,13 @@
 {
   "name": "@ribajs/ssr",
   "version": "2.0.0-alpha.0",
+  "type": "module",
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
   "scripts": {
-    "test": "npm run type-check && jest --config=jest.config.js",
-    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
+    "test": "npm run type-check && jest --config=jest.config.cjs",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix && tsc --noEmit",
     "build": "tsc",
     "clean": "rm -rf ./dist ./lib"
   },
@@ -14,7 +18,7 @@
     "@ribajs/utils": "workspace:^",
     "@types/express": "^4.17.13"
   },
-  "main": "src/index.ts",
+  "main": "./src/index.ts",
   "module": "src/index.ts",
   "source": "src/index.ts",
   "devDependencies": {

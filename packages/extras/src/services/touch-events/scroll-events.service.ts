@@ -1,6 +1,6 @@
-import { ScrollPosition, ScrollEventsOptions } from "../../types";
+import { ScrollPosition, ScrollEventsOptions } from "../../types/index.js";
 import { getScrollPosition } from "../../helper/scroll";
-import { BaseEventsService } from "./base-events.service";
+import { BaseEventsService } from "./base-events.service.js";
 
 export class ScrollEventsService extends BaseEventsService {
   public isScrolling = false;

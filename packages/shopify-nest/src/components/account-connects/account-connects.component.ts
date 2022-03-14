@@ -1,5 +1,9 @@
-import { Component, TemplateFunction, HttpService } from "@ribajs/core";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import {
+  Component,
+  TemplateFunction,
+  HttpService,
+} from "@ribajs/core/src/index.js";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import Debug from "debug";
 
 import pugTemplate from "./account-connects.component.pug";
@@ -7,7 +11,7 @@ import pugTemplate from "./account-connects.component.pug";
 import { ShopifyConnect } from "../../interfaces/shopify-connect/connect";
 import { FacebookConnect } from "../../interfaces/facebook-connect/connect";
 import { FbUserPictureData } from "@ribajs/shopify-tda";
-import { AuthService } from "../../services/auth.service";
+import { AuthService } from "../../services/auth.service.js";
 
 import { EASDKWrapperService } from "@ribajs/shopify-easdk";
 

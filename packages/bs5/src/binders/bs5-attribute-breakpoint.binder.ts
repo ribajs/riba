@@ -1,5 +1,5 @@
-import { AttributeBinder, View } from "@ribajs/core";
-import { Bs5AbstractBreakpointBinder } from "./bs5-abstract-breakpoint.binder";
+import { AttributeBinder, View } from "@ribajs/core/src/index.js";
+import { Bs5AbstractBreakpointBinder } from "./bs5-abstract-breakpoint.binder.js";
 
 export class Bs5AttributeBreakpointBinder extends Bs5AbstractBreakpointBinder<HTMLElement> {
   static key = "bs5-attr-*-*";

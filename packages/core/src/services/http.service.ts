@@ -1,6 +1,6 @@
-import { extend, isJson } from "@ribajs/utils/src/type";
-import { HttpMethod } from "../types/http-method";
-import { HttpServiceOptions, HttpServiceResponse } from "../types";
+import { extend, isJson } from "@ribajs/utils/src/type.js";
+import { HttpMethod } from "../types/http-method.js";
+import { HttpServiceOptions, HttpServiceResponse } from "../types/index.js";
 
 export class HttpService {
   /**

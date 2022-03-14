@@ -1,7 +1,7 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import template from "./contact-form.component.html";
-import { selectAll, hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import { stripHtml } from "@ribajs/utils/src/type";
+import { selectAll, hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
+import { stripHtml } from "@ribajs/utils/src/type.js";
 
 // TODO move to general validation component class we can extend from
 export interface ValidationObject {

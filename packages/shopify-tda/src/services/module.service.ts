@@ -1,4 +1,4 @@
-import { ShopifyTDAModuleOptions } from "../types";
+import { ShopifyTDAModuleOptions } from "../types/index.js";
 
 export class ModuleService {
   protected static _options: ShopifyTDAModuleOptions;

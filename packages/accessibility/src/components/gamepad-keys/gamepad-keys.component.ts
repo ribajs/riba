@@ -1,7 +1,7 @@
-import { Component, TemplateFunction } from "@ribajs/core";
-import { GamepadService } from "../../services/gamepad.service";
-import { GamepadKeysComponentScope } from "../../types";
-import { hasChildNodesTrim } from "@ribajs/utils";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { GamepadService } from "../../services/gamepad.service.js";
+import { GamepadKeysComponentScope } from "../../types/index.js";
+import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
 import template from "./gamepad-keys.component.pug";
 
 /**

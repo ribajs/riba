@@ -1,6 +1,10 @@
 {
   "name": "@ribajs/typedoc",
   "version": "2.0.0-alpha.0",
+  "type": "module",
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
   "dependencies": {
     "@ribajs/bs5": "workspace:*",
     "@ribajs/core": "workspace:*",
@@ -11,7 +15,7 @@
     "@ribajs/types": "workspace:*",
     "@ribajs/utils": "workspace:^"
   },
-  "main": "src/index.ts",
+  "main": "./src/index.ts",
   "module": "src/index.ts",
   "source": "src/index.ts",
   "devDependencies": {

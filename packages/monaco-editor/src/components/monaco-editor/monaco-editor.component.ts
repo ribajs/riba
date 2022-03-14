@@ -1,6 +1,6 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import * as monaco from "monaco-editor";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import pugTemplate from "./monaco-editor.component.pug";
 
 interface Scope {

@@ -1,4 +1,4 @@
-import { i18nModule } from "./index";
+import { i18nModule } from "./index.js";
 
 declare global {
   interface Window {

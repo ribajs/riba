@@ -1,4 +1,4 @@
-import { LeafletModuleOptions } from "../types";
+import { LeafletModuleOptions } from "../types/index.js";
 
 export class LeafletService {
   protected static _options: LeafletModuleOptions;

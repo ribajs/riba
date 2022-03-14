@@ -1,1 +1,1 @@
-export * from "./on-event.binder";
+export * from "./on-event.binder.js";

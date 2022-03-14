@@ -1,7 +1,11 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -20,10 +24,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.podcastModule = void 0;
-const binders = __importStar(require("./binders"));
-const formatters = __importStar(require("./formatters"));
-const services = __importStar(require("./services"));
-const components = __importStar(require("./components"));
+const binders = __importStar(require("./binders/index.js"));
+const formatters = __importStar(require("./formatters/index.js"));
+const services = __importStar(require("./services/index.js"));
+const components = __importStar(require("./components/index.js"));
 exports.podcastModule = {
     binders,
     services,
@@ -33,4 +37,4 @@ exports.podcastModule = {
         return this;
     },
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicG9kY2FzdC5tb2R1bGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvcG9kY2FzdC5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUNBLG1EQUFxQztBQUNyQyx5REFBMkM7QUFDM0MscURBQXVDO0FBQ3ZDLHlEQUEyQztBQUU5QixRQUFBLGFBQWEsR0FBZTtJQUN2QyxPQUFPO0lBQ1AsUUFBUTtJQUNSLFVBQVU7SUFDVixVQUFVO0lBQ1YsSUFBSTtRQUNGLE9BQU8sSUFBSSxDQUFDO0lBQ2QsQ0FBQztDQUNGLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicG9kY2FzdC5tb2R1bGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvcG9kY2FzdC5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFDQSw0REFBOEM7QUFDOUMsa0VBQW9EO0FBQ3BELDhEQUFnRDtBQUNoRCxrRUFBb0Q7QUFFdkMsUUFBQSxhQUFhLEdBQWU7SUFDdkMsT0FBTztJQUNQLFFBQVE7SUFDUixVQUFVO0lBQ1YsVUFBVTtJQUNWLElBQUk7UUFDRixPQUFPLElBQUksQ0FBQztJQUNkLENBQUM7Q0FDRixDQUFDIn0=

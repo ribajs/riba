@@ -1,6 +1,6 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import template from "./bs5-theme-example.component.html";
-import { hasChildNodesTrim } from "@ribajs/utils";
+import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
 
 export class Bs5ThemeExampleComponent extends Component {
   public static tagName = "bs5-theme-example";

@@ -1,4 +1,4 @@
-import { Binder } from "../binder";
+import { Binder } from "../binder.js";
 
 /**
  * Disables the element when value is true (negated version of `enabled` binder).

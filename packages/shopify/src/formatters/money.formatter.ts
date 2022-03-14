@@ -1,5 +1,5 @@
-import { Formatter } from "@ribajs/core";
-import { ShopifyService } from "../services/shopify.service";
+import { Formatter } from "@ribajs/core/src/index.js";
+import { ShopifyService } from "../services/shopify.service.js";
 
 /**
  * Formats the price based on the shop's HTML with currency setting (if the format is not overwritten by passing a format parameter).

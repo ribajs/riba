@@ -1,5 +1,9 @@
-import { Binder } from "../binder";
-import { getInputValue, getString, setAttribute } from "@ribajs/utils";
+import { Binder } from "../binder.js";
+import {
+  getInputValue,
+  getString,
+  setAttribute,
+} from "@ribajs/utils/src/index.js";
 
 const DEFAULT_EVENTS = "change input paste blur focus";
 

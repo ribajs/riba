@@ -1,14 +1,14 @@
-import { Component } from "@ribajs/core";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import { waitForProp } from "@ribajs/utils/src/control";
-import template from "./podlove-fixed-web-player.component.template";
+import { Component } from "@ribajs/core/src/index.js";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
+import { waitForProp } from "@ribajs/utils/src/control.js";
+import template from "./podlove-fixed-web-player.component.template.js";
 import type {
   PodloveWebPlayerEpisode,
   PodloveWebPlayerConfig,
-} from "../../types";
-import { DEFAULT_MAIN_PLAYER_ID } from "../../constants";
-import type { PodloveWebPlayerComponent } from "../podlove-web-player/podlove-web-player.component";
-import type { PodloveWebPlayerStore } from "../../types";
+} from "../../types/index.js";
+import { DEFAULT_MAIN_PLAYER_ID } from "../../constants.js";
+import type { PodloveWebPlayerComponent } from "../podlove-web-player/podlove-web-player.component.js";
+import type { PodloveWebPlayerStore } from "../../types/index.js";
 
 export interface Scope {
   episode?: PodloveWebPlayerEpisode;

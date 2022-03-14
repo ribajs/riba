@@ -1,5 +1,5 @@
-import { DataElement } from "../types";
-import { Binder } from "../binder";
+import { DataElement } from "../types/index.js";
+import { Binder } from "../binder.js";
 
 export class MustacheTextBinder extends Binder<string, DataElement> {
   static key = "mustache-text";

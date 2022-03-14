@@ -1,5 +1,5 @@
 import { bs4Module } from "@ribajs/bs4";
-import { coreModule, Riba } from "@ribajs/core";
+import { coreModule, Riba } from "@ribajs/core/src/index.js";
 import { extrasModule } from "@ribajs/extras";
 import { Bs4ToastModule } from "./bs4-toast.module";
 

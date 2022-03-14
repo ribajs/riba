@@ -3,7 +3,7 @@ import {
   Events,
   EventCallback,
   BoundEventCallback,
-} from "../types/event-dispatcher";
+} from "../types/event-dispatcher.js";
 
 /**
  * Little Dispatcher inspired by MicroEvent.js

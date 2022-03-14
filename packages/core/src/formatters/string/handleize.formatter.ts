@@ -1,5 +1,5 @@
-import { Formatter } from "../../types";
-import { handleize } from "@ribajs/utils/src/type";
+import { Formatter } from "../../types/index.js";
+import { handleize } from "@ribajs/utils/src/type.js";
 
 /**
  * Formats a string into a handle.

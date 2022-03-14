@@ -3,13 +3,13 @@ import {
   TemplateFunction,
   FormatterFn,
   TemplatesComponent,
-} from "@ribajs/core";
+} from "@ribajs/core/src/index.js";
 import {
   CollapseService,
   EVENT_HIDE,
   EVENT_SHOW,
-} from "../../services/collapse.service";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+} from "../../services/collapse.service.js";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 
 import template from "./bs4-accordion.component.html";
 

@@ -1,5 +1,5 @@
 import { bs5Module } from "@ribajs/bs5";
-import { coreModule, Riba } from "@ribajs/core";
+import { coreModule, Riba } from "@ribajs/core/src/index.js";
 import { Bs5DropdownModule } from "./bs5-dropdown.module";
 
 const riba = new Riba();

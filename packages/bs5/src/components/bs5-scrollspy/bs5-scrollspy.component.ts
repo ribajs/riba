@@ -1,10 +1,10 @@
 import {
   Bs5ContentsComponent,
   Scope as Bs5ContentsComponentScope,
-} from "../bs5-contents/bs5-contents.component";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+} from "../bs5-contents/bs5-contents.component.js";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import template from "./bs5-scrollspy.component.html";
-import { TemplateFunction } from "@ribajs/core";
+import { TemplateFunction } from "@ribajs/core/src/index.js";
 
 export interface Anchor {
   element: HTMLHeadingElement;

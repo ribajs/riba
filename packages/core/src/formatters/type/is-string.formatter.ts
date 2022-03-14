@@ -1,4 +1,4 @@
-import { isString } from "@ribajs/utils/src/type";
+import { isString } from "@ribajs/utils/src/type.js";
 
 /**
  * Check if value is a string

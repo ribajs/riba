@@ -1,5 +1,5 @@
-import { Formatter } from "../../types/formatter";
-import { isUndefined } from "@ribajs/utils/src/type";
+import { Formatter } from "../../types/formatter.js";
+import { isUndefined } from "@ribajs/utils/src/type.js";
 
 /**
  * Check if value is undefined

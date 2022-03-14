@@ -4,9 +4,9 @@ import {
   APIParam,
   APIListItem,
   Scope,
-} from "../api-explorer/api-explorer.component";
+} from "../api-explorer/api-explorer.component.js";
 
-import { InstagramApiService } from "../../services/instagram-api.service";
+import { InstagramApiService } from "../../services/instagram-api.service.js";
 
 export class ShopifyNestApiExplorerInstagramComponent extends ShopifyNestApiExplorerComponent {
   public static tagName = "shopify-nest-api-explorer-instagram";

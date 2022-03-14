@@ -1,9 +1,9 @@
 import { Riba } from "../../riba";
 
-import { dotAdapter } from "../../adapters/dot.adapter";
+import { dotAdapter } from "../../adapters/dot.adapter.js";
 
-import { callFormatter } from "./call.formatter";
-import { TextBinder } from "../../binders/text.binder";
+import { callFormatter } from "./call.formatter.js";
+import { TextBinder } from "../../binders/text.binder.js";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);

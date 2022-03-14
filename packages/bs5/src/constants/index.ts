@@ -1,4 +1,4 @@
-import { Bs5ModuleOptions, Breakpoint } from "../types";
+import { Bs5ModuleOptions, Breakpoint } from "../types/index.js";
 
 export * from "./theme-choices";
 

@@ -1,4 +1,4 @@
-import { Formatter } from "../../types/formatter";
+import { Formatter } from "../../types/formatter.js";
 /**
  * euqal or lower than
  * a <= b

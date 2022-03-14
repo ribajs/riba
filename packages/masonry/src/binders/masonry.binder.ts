@@ -1,7 +1,7 @@
-import { Binder, LifecycleService } from "@ribajs/core";
+import { Binder, LifecycleService } from "@ribajs/core/src/index.js";
 import Masonry from "masonry-layout";
 import type { Options } from "masonry-layout";
-import { debounce } from "@ribajs/utils";
+import { debounce } from "@ribajs/utils/src/index.js";
 import { EventDispatcher } from "@ribajs/events";
 
 /**

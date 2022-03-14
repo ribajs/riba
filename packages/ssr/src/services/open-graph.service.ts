@@ -3,7 +3,7 @@ import {
   OpenGraph,
   OpenGraphProperty,
   OpenGraphNamespaces,
-} from "../types";
+} from "../types/index.js";
 
 export class OpenGraphService {
   public static getHeadElement(): HTMLHeadElement {

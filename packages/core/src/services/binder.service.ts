@@ -1,5 +1,5 @@
-import { Binders, ModuleElementType, ClassOfBinder } from "../types";
-import { ModuleElementService } from "./module-element.service";
+import { Binders, ModuleElementType, ClassOfBinder } from "../types/index.js";
+import { ModuleElementService } from "./module-element.service.js";
 
 /**
  *

@@ -1,1 +1,1 @@
-export * from "./credits/credits.component";
+export * from "./credits/credits.component.js";

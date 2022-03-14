@@ -1,5 +1,5 @@
-import { Formatter, Formatters } from "../types";
-import { ModuleElementService } from "./module-element.service";
+import { Formatter, Formatters } from "../types/index.js";
+import { ModuleElementService } from "./module-element.service.js";
 
 export class FormatterService extends ModuleElementService {
   protected type: "binder" | "formatter" | "components" | "services" =

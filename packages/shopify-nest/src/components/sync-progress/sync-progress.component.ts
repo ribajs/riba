@@ -1,8 +1,8 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import Debug from "debug";
 import pugTemplate from "./sync-progress.component.pug";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
-import { ShopifyApiSyncService } from "../../services/shopify-api-sync.service";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
+import { ShopifyApiSyncService } from "../../services/shopify-api-sync.service.js";
 import { SyncProgress, SyncOptions } from "../../interfaces/shopify-sync";
 
 interface Scope {

@@ -1,4 +1,5 @@
-import { Riba, View, Binder } from "./index";
+import { jest } from '@jest/globals';
+import { Riba, View, Binder } from "./index.js";
 import { Data } from "../spec/lib/moch.data";
 import { dotAdapter } from "./adapters";
 import {
@@ -8,7 +9,7 @@ import {
   ValueBinder,
   AddClassBinder
 } from "./binders";
-import { Formatter, Adapter } from "./types";
+import { Formatter, Adapter } from "./types/index.js";
 
 describe("riba.Binder", () => {
 
@@ -771,13 +772,13 @@ describe("Functional", () => {
     });
 
     describe("Priority", () => {
-      let mockA: jest.Mock<any, any>;
-      let mockB: jest.Mock<any, any>;
-      let mockC: jest.Mock<any, any>;
-      let mockD: jest.Mock<any, any>;
-      let mockE: jest.Mock<any, any>;
-      let mockF: jest.Mock<any, any>;
-      let mockG: jest.Mock<any, any>;
+      let mockA: any; // TODO: jest.Mock<any, any>;
+      let mockB: any; // TODO: jest.Mock<any, any>;
+      let mockC: any; // TODO: jest.Mock<any, any>;
+      let mockD: any; // TODO: jest.Mock<any, any>;
+      let mockE: any; // TODO: jest.Mock<any, any>;
+      let mockF: any; // TODO: jest.Mock<any, any>;
+      let mockG: any; // TODO: jest.Mock<any, any>;
       beforeEach(() => {
         mockA = jest.fn();
         mockB = jest.fn();

@@ -2,13 +2,17 @@
   "name": "@ribajs/core",
   "description": "Core module of Riba.js",
   "version": "2.0.0-alpha.0",
+  "type": "module",
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [
     "Michael Richards",
     "Luiz Américo Pereira Câmara"
   ],
   "url": "https://github.com/ribajs/riba/tree/master/packages/core",
-  "main": "src/index.ts",
+  "main": "./src/index.ts",
   "module": "src/index.ts",
   "source": "src/index.ts",
   "sass": "src/scss/index.scss",
@@ -33,7 +37,7 @@
     "Browser"
   ],
   "scripts": {
-    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix && tsc --noEmit",
     "build": "npm run lint && npm run build:ts",
     "build:ts": "tsc",
     "build:browser": "npm run lint && npm run webpack:browser",
@@ -57,6 +61,7 @@
     "@babel/preset-typescript": "^7.16.7",
     "@babel/runtime": "^7.17.2",
     "@babel/runtime-corejs3": "^7.17.2",
+    "@jest/globals": "^27.5.1",
     "@ribajs/eslint-config": "workspace:^",
     "@ribajs/tsconfig": "workspace:^",
     "@ribajs/types": "workspace:^",

@@ -1,4 +1,10 @@
-import { Binders, Formatters, Components, Services, Adapters } from ".";
+import {
+  Binders,
+  Formatters,
+  Components,
+  Services,
+  Adapters,
+} from "./index.js";
 
 export interface RibaModule<O = any> {
   /**

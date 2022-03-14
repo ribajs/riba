@@ -1,1 +1,1 @@
-export { LuxonExampleComponent } from "./luxon-example/luxon-example.component";
+export { LuxonExampleComponent } from "./luxon-example/luxon-example.component.js";

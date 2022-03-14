@@ -1,7 +1,7 @@
-import { Riba } from "../riba";
-import { dotAdapter } from "../adapters/dot.adapter";
-import { ShowBinder } from "./show.binder";
-import { Adapters } from "../types";
+import { Riba } from "../riba.js";
+import { dotAdapter } from "../adapters/dot.adapter.js";
+import { ShowBinder } from "./show.binder.js";
+import { Adapters } from "../types/index.js";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);

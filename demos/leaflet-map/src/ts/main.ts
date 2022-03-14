@@ -1,4 +1,4 @@
-import { Riba } from "@ribajs/core";
+import { Riba } from "@ribajs/core/src/index.js";
 import { leafletModule } from "@ribajs/leaflet-map";
 import { LeafletDemoModule } from "./leaflet-demo.module";
 

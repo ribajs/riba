@@ -1,3 +1,3 @@
-import type { JsxHtmlGlobalProps } from "@ribajs/jsx";
+import type { JsxHtmlGlobalProps } from "@ribajs/jsx/src/index.js";
 
-export interface JsxSSRRootPageProps extends JsxHtmlGlobalProps {}
+export type JsxSSRRootPageProps = JsxHtmlGlobalProps;

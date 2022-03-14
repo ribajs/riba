@@ -1,7 +1,7 @@
-import { Riba } from "../riba";
-import { HtmlBinder } from "./html.binder";
-import { dotAdapter } from "../adapters/dot.adapter";
-import { Adapters } from "../types";
+import { Riba } from "../riba.js";
+import { HtmlBinder } from "./html.binder.js";
+import { dotAdapter } from "../adapters/dot.adapter.js";
+import { Adapters } from "../types/index.js";
 
 describe("riba.binders", () => {
   let el: HTMLUnknownElement;

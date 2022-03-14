@@ -1,4 +1,4 @@
 import createCache from "keshi";
-export * from "./base-cache.service";
-export * from "./idb-cache.service";
+export * from "./base-cache.service.js";
+export * from "./idb-cache.service.js";
 export { createCache };

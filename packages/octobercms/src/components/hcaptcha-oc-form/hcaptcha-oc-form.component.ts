@@ -1,6 +1,6 @@
-import { OcFormComponent } from "../oc-form/oc-form.component";
-import { HCaptchaFormComponentScope as Scope } from "../../types";
-import { loadScript, getUID } from "@ribajs/utils/src/dom";
+import { OcFormComponent } from "../oc-form/oc-form.component.js";
+import { HCaptchaFormComponentScope as Scope } from "../../types/index.js";
+import { loadScript, getUID } from "@ribajs/utils/src/dom.js";
 
 export class HCaptchaFormComponent extends OcFormComponent {
   public static tagName = "hcaptcha-oc-form";

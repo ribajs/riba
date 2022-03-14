@@ -1,4 +1,4 @@
-import type { Binder } from "@ribajs/core";
+import type { Binder } from "@ribajs/core/src/index.js";
 import type { EventDispatcher } from "@ribajs/events";
 
 export interface Bs5ToggleClass extends Binder<boolean> {

@@ -1,6 +1,6 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import template from "./form-example.component.html";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 
 export class FormExampleComponent extends Component {
   public static tagName = "rv-form-example";

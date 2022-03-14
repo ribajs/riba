@@ -1,4 +1,4 @@
-import { Notification, ModalNotificationButton } from "../types";
+import { Notification, ModalNotificationButton } from "../types/index.js";
 import { Modal } from "../services/modal";
 
 export class ModalNotification extends Notification {

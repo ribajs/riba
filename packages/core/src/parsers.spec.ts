@@ -1,4 +1,4 @@
-import { Riba } from "./index";
+import { Riba } from "./index.js";
 
 const riba = new Riba();
 

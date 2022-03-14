@@ -1,5 +1,13 @@
-import { Component, TemplateFunction, HttpService } from "@ribajs/core";
-import { isNumber, extend, hasChildNodesTrim } from "@ribajs/utils";
+import {
+  Component,
+  TemplateFunction,
+  HttpService,
+} from "@ribajs/core/src/index.js";
+import {
+  isNumber,
+  extend,
+  hasChildNodesTrim,
+} from "@ribajs/utils/src/index.js";
 import Debug from "debug";
 
 import { DropdownService } from "@ribajs/bs4";

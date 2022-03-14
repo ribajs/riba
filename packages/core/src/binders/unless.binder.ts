@@ -1,4 +1,4 @@
-import { IfBinder } from "./if.binder";
+import { IfBinder } from "./if.binder.js";
 
 /**
  * unless

@@ -1,4 +1,4 @@
-import type { SearchComponent } from "../components/search/search.component";
+import type { SearchComponent } from "../components/search/search.component.js";
 
 export interface NavbarComponentScope {
   searchEl?: SearchComponent;

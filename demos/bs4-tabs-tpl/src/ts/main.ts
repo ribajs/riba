@@ -1,5 +1,5 @@
 import { bs4Module } from "@ribajs/bs4";
-import { coreModule, Riba } from "@ribajs/core";
+import { coreModule, Riba } from "@ribajs/core/src/index.js";
 import { Bs4TabsTplModule } from "./bs4-tabs-tpl.module";
 
 const riba = new Riba();

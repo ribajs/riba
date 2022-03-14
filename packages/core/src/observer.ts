@@ -6,8 +6,8 @@ import type {
   ObserverSyncCallback,
   Obj,
   Options,
-} from "./types";
-import { isObject } from "@ribajs/utils/src/type";
+} from "./types/index.js";
+import { isObject } from "@ribajs/utils/src/type.js";
 
 export class Observer {
   public static adapters: Adapters;

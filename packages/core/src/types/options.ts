@@ -1,5 +1,5 @@
-import { Extensions } from "./extensions";
-import { EventHandler } from "./event-handler";
+import { Extensions } from "./extensions.js";
+import { EventHandler } from "./event-handler.js";
 
 export interface Options extends Extensions {
   /** Attribute / web-component prefix in templates */

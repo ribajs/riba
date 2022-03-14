@@ -1,6 +1,6 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import markdownTemplate from "./md-example.component.md";
-import type { JsxHtmlGlobalProps } from "@ribajs/jsx";
+import type { JsxHtmlGlobalProps } from "@ribajs/jsx/src/index.js";
 
 export type MdExampleProps = JsxHtmlGlobalProps;
 

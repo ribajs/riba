@@ -1,4 +1,4 @@
-import { bs5PhotoswipeModule } from "./index";
+import { bs5PhotoswipeModule } from "./index.js";
 
 declare global {
   interface Window {

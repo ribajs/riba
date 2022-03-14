@@ -1,4 +1,4 @@
-import type { Bs4SidebarComponent } from "../components/bs4-sidebar/bs4-sidebar.component";
+import type { Bs4SidebarComponent } from "../components/bs4-sidebar/bs4-sidebar.component.js";
 import { Bs4SidebarComponentState } from "./sidebar-component-state";
 
 export interface Bs4SidebarComponentScope {

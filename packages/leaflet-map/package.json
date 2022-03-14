@@ -2,11 +2,15 @@
   "name": "@ribajs/leaflet-map",
   "description": "Leaflet map module for Riba.js",
   "version": "2.0.0-alpha.0",
+  "type": "module",
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [],
   "url": "https://github.com/ribajs/riba/tree/master/packages/leaflet-map",
   "homepage": "https://github.com/ribajs/riba#readme",
-  "main": "src/index.ts",
+  "main": "./src/index.ts",
   "module": "src/index.ts",
   "source": "src/index.ts",
   "license": "MIT",
@@ -21,8 +25,8 @@
     "url": "git+https://github.com/ribajs/riba.git"
   },
   "scripts": {
-    "test": "npm run lint && jest --config=jest.config.js",
-    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
+    "test": "npm run lint && jest --config=jest.config.cjs",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix && tsc --noEmit",
     "build": "npm run build:module",
     "build:module": "tsc",
     "packages:link": "npm link @ribajs/core",

@@ -1,4 +1,4 @@
-import type { Bs5ThemeButtonComponent } from "../components/bs5-theme-button/bs5-theme-button.component";
+import type { Bs5ThemeButtonComponent } from "../components/bs5-theme-button/bs5-theme-button.component.js";
 import type { ThemeChoice } from "./theme-choice";
 
 export interface Bs5ThemeButtonComponentScope {

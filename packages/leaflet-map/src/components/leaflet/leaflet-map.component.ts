@@ -1,7 +1,7 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import { EventDispatcher } from "@ribajs/events";
-import { isNumber, justDigits } from "@ribajs/utils/src/type";
-import { getUID } from "@ribajs/utils/src/dom";
+import { isNumber, justDigits } from "@ribajs/utils/src/type.js";
+import { getUID } from "@ribajs/utils/src/dom.js";
 import template from "./leaflet-map.component.html";
 import * as Leaflet from "leaflet";
 import { PointTuple, IconOptions } from "leaflet";
