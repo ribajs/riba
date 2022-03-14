@@ -3,11 +3,7 @@ module.exports = {
   testEnvironment: "jsdom",
   moduleFileExtensions: ["js", "json", "ts", "tsx", "cjs", "cts"],
   resetModules: true,
-  transform: {
-    "^.+\\.tsx?$": require.resolve("ts-jest"),
-  },
   testRegex: "/src/.*\\.(test|spec).(ts|tsx)$",
-  transformIgnorePatterns: ["node_modules/(?!(@ribajs)/)", "\\.pnp\\.[^\\/]+$"],
   testPathIgnorePatterns: ["/node_modules/", "/packages/*/dist/"],
   coverageReporters: ["json", "lcov"],
   setupFilesAfterEnv: [require.resolve("jest-extended/all")],

@@ -10,7 +10,7 @@ export class TextBinder extends Binder<string, HTMLElement> {
       if (typeof value?.toString === "function") {
         value = value.toString();
       } else {
-        console.error("[TextBinder] Can't convert value to string: ", value);
+        console.warn("[TextBinder] Can't convert value to string: ", value);
       }
     }
 
