@@ -26,7 +26,7 @@
   },
   "scripts": {
     "test": "npm run lint && jest --config=jest.config.js",
-    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix && tsc --noEmit",
     "build": "npm run lint && npm run build:module && npm run build:build-system",
     "build:build-system": "tsc --project tsconfig.build-system.json",
     "build:module": "tsc",

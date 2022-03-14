@@ -26,7 +26,7 @@
   },
   "scripts": {
     "test": "npm run lint && jest --config=jest.config.js",
-    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix && tsc --noEmit",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix && tsc --noEmit",
     "build": "npm run build:module",
     "build:module": "tsc",
     "packages:link": "npm link @ribajs/core",

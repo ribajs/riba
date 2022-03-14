@@ -11,7 +11,7 @@
   "module": "dist/esm/index.js",
   "source": "src/index.ts",
   "scripts": {
-    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix",
     "build": "npm run lint &&  npm run build:types && npm run build:esm && npm run build:cjs",
     "build:types": "tsc --project ./tsconfig.json --declaration true --emitDeclarationOnly --outDir dist/types",
     "build:esm": "tsc --project ./tsconfig.json --declaration false --module esnext --outDir dist/esm",

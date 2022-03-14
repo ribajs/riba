@@ -15,7 +15,7 @@
     "start:dev": "webpack serve --env development",
     "serve": "serve dist",
     "clear": "rm -rf ./dist",
-    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx && tsc --noEmit",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts && tsc --noEmit",
     "test": "jest",
     "packages:npm:link": "npm link @ribajs/core @ribajs/extras"
   },

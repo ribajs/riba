@@ -7,7 +7,7 @@
 
 import gutil from "gulp-util";
 import _ from "lodash";
-import Bluebird from "bluebird"; // TODO: Replace with https://github.com/VeryCrazyDog/native-promise-util
+import Bluebird from "bluebird"; // TODO: Replace with a native solution, e.g. https://github.com/VeryCrazyDog/native-promise-util
 import { existsSync, lstatSync } from "fs";
 import { resolve } from "path";
 
