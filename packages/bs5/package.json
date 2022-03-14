@@ -38,7 +38,7 @@
     "Browser"
   ],
   "scripts": {
-    "test": "yarn run clean && yarn run lint && jest --config=jest.config.js",
+    "test": "yarn run clean && yarn run lint && jest --config=jest.config.cjs",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix && tsc --noEmit",
     "build": "npm run lint && npm run build:module",
     "build:module": "tsc",

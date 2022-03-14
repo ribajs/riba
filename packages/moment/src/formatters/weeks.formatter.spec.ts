@@ -1,5 +1,5 @@
 import { Riba, TextBinder, dotAdapter } from '@ribajs/core';
-import { WeeksFormatter } from './weeks.formatter';
+import { WeeksFormatter } from './weeks.formatter.js';
 import moment from 'moment';
 
 const riba = new Riba();

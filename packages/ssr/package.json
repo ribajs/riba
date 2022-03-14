@@ -6,7 +6,7 @@
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   },
   "scripts": {
-    "test": "npm run type-check && jest --config=jest.config.js",
+    "test": "npm run type-check && jest --config=jest.config.cjs",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix && tsc --noEmit",
     "build": "tsc",
     "clean": "rm -rf ./dist ./lib"

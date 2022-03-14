@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { Riba, ValueBinder, dotAdapter } from "@ribajs/core/src/index.js";
 import { OnEventBinder } from "./on-event.binder.js";
 

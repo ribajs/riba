@@ -38,7 +38,7 @@
   "scripts": {
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix && tsc --noEmit",
     "build": "npm run lint && tsc",
-    "test": "npm run type-check && jest --config=jest.config.js",
+    "test": "npm run type-check && jest --config=jest.config.cjs",
     "clean": "rm -rf ./dist ./lib"
   },
   "files": [

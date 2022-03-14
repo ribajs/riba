@@ -3661,6 +3661,7 @@ __metadata:
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
+    "@jest/globals": ^27.5.1
     "@ribajs/eslint-config": "workspace:^"
     "@ribajs/events": "workspace:^"
     "@ribajs/history": "workspace:^"
@@ -6222,6 +6223,7 @@ __metadata:
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
+    "@jest/globals": ^27.5.1
     "@ribajs/cache": "workspace:^"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
@@ -6409,6 +6411,7 @@ __metadata:
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
+    "@jest/globals": ^27.5.1
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
@@ -6424,6 +6427,7 @@ __metadata:
     eslint-plugin-prettier: ^4.0.0
     jest: ^27.5.1
     jest-extended: ^2.0.0
+    jest-ts-webcompat-resolver: ^1.0.0
     moment: ^2.29.1
     prettier: 2.5.1
     ts-jest: ^27.1.3
@@ -19319,6 +19323,15 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"jest-ts-webcompat-resolver@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "jest-ts-webcompat-resolver@npm:1.0.0"
+  peerDependencies:
+    jest-resolve: "*"
+  checksum: 649984e6b38afe96783316993d75d7385520158ef4bcca67941fe1e96589aa4d612254e3da4046f44df8d067d6a913c0b71daa26b363d560787778d7458d9563
+  languageName: node
+  linkType: hard
+
 "jest-util@npm:^27.0.0":
   version: 27.0.1
   resolution: "jest-util@npm:27.0.1"
@@ -24778,6 +24791,7 @@ fsevents@~2.3.1:
     "@babel/runtime": ^7.17.2
     "@babel/runtime-corejs3": ^7.17.2
     "@babel/types": ^7.17.0
+    "@jest/globals": ^27.5.1
     "@nestjs/common": ^8.4.0
     "@nestjs/core": ^8.4.0
     "@nestjs/testing": ^8.4.0
@@ -24803,6 +24817,7 @@ fsevents@~2.3.1:
     jest: ^27.5.1
     jest-config: ^27.5.1
     jest-extended: ^2.0.0
+    jest-ts-webcompat-resolver: ^1.0.0
     pkg-dir: ^6.0.1
     prettier: 2.5.1
     pug: ^3.0.2

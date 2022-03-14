@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { Riba } from "../riba.js";
 import { Adapter, ObserverSyncCallback } from "../types/index.js";
 import { dotAdapter } from "../adapters/dot.adapter.js";

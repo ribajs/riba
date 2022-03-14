@@ -1,5 +1,5 @@
 import { Riba, TextBinder, dotAdapter } from '@ribajs/core';
-import { mapFormatter } from './map.formatter';
+import { mapFormatter } from './map.formatter.js';
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
