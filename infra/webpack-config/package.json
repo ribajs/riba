@@ -20,7 +20,7 @@
     "build": "tsc --project tsconfig.json"
   },
   "dependencies": {
-    "@babel/core": "^7.17.5",
+    "@babel/core": "^7.17.7",
     "@graphql-tools/webpack-loader": "^6.6.1",
     "@ribajs/eslint-config": "workspace:^",
     "@ribajs/npm-package": "workspace:^",
