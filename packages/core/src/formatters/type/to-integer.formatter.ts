@@ -13,5 +13,5 @@ export const toIntegerFormatter: Formatter = {
   read(target: any) {
     const ret = parseInt((target * 1) as any, 10);
     return isNaN(ret) ? 0 : ret;
-  },
+  }
 };

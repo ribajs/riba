@@ -10,7 +10,7 @@ export const JsxExampleModule: RibaModule = {
   services: {},
   init() {
     return this;
-  },
+  }
 };
 
 export default JsxExampleModule;

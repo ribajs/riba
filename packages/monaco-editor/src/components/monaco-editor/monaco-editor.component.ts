@@ -90,7 +90,7 @@ export class MonacoEditorComponent extends Component {
       "html-format-maxPreserveNewLines",
       "html-format-endWithNewline",
       "html-format-indentInnerHtml",
-      "html-format-wrapAttributes",
+      "html-format-wrapAttributes"
     ];
   }
 
@@ -118,7 +118,7 @@ export class MonacoEditorComponent extends Component {
     htmlFormatMaxPreserveNewLines: 20,
     htmlFormatEndWithNewline: true,
     htmlFormatIndentInnerHtml: true,
-    htmlFormatWrapAttributes: "force-aligned",
+    htmlFormatWrapAttributes: "force-aligned"
   };
 
   constructor() {
@@ -171,8 +171,8 @@ export class MonacoEditorComponent extends Component {
         maxPreserveNewLines: this.scope.htmlFormatMaxPreserveNewLines,
         endWithNewline: this.scope.htmlFormatEndWithNewline,
         indentInnerHtml: this.scope.htmlFormatIndentInnerHtml,
-        wrapAttributes: this.scope.htmlFormatWrapAttributes,
-      },
+        wrapAttributes: this.scope.htmlFormatWrapAttributes
+      }
     });
 
     this.editor = monaco.editor.create(this, {
@@ -184,8 +184,8 @@ export class MonacoEditorComponent extends Component {
       formatOnType: true, // TODO
       formatOnPaste: true, // TODO
       minimap: {
-        enabled: this.scope.minimapEnabled,
-      },
+        enabled: this.scope.minimapEnabled
+      }
     });
 
     this.editor.onDidChangeModelContent((/*event*/) => {
@@ -194,7 +194,7 @@ export class MonacoEditorComponent extends Component {
         if (this.scope.dataValue) {
           this.dispatchEvent(
             new CustomEvent<string>("change", {
-              detail: this.scope.dataValue,
+              detail: this.scope.dataValue
             })
           );
         }

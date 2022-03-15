@@ -14,5 +14,5 @@ export const LuxonPlusFormatter: Formatter = {
    */
   read(target: DateTime, duration: DurationInput): DateTime {
     return target.plus(duration);
-  },
+  }
 };

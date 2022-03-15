@@ -36,7 +36,7 @@ export class Bs4ToastItemComponent extends Component {
     onHidden: this.onHidden.bind(this),
     index: -1,
     dismiss: this.dismiss.bind(this),
-    toast: undefined,
+    toast: undefined
   };
 
   constructor() {
@@ -67,12 +67,12 @@ export class Bs4ToastItemComponent extends Component {
         animation:
           toast.animation !== undefined
             ? toast.animation
-            : ToastService.Default.animation,
+            : ToastService.Default.animation
       });
 
       // Call onHidden on hidden event once
       toastEl.addEventListener(EVENT_HIDDEN, this.scope.onHidden, {
-        once: true,
+        once: true
       });
 
       // show toast using the toastservice

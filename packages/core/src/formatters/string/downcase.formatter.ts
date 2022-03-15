@@ -8,5 +8,5 @@ export const downcaseFormatter: Formatter = {
   name: "downcase",
   read(str: string) {
     return str.toLowerCase();
-  },
+  }
 };

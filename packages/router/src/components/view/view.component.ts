@@ -6,7 +6,7 @@ import { Pjax, Prefetch, RouterService } from "../../services";
 import type {
   RouterViewOptions,
   PjaxOptions,
-  JsxRouterViewProps,
+  JsxRouterViewProps
 } from "../../types/index.js";
 
 export interface Scope extends RouterViewOptions {
@@ -34,7 +34,7 @@ export class RouterViewComponent extends Component {
       "dataset-to-model",
       "parse-title",
       "change-browser-url",
-      "prefetch-links",
+      "prefetch-links"
     ];
   }
 
@@ -51,7 +51,7 @@ export class RouterViewComponent extends Component {
     changeBrowserUrl: true,
     prefetchLinks: true,
     transition: RouterService.options.defaultTransition,
-    dataset: {},
+    dataset: {}
   };
 
   constructor() {
@@ -100,7 +100,7 @@ export class RouterViewComponent extends Component {
       parseTitle: !!this.scope.parseTitle,
       changeBrowserUrl: !!this.scope.changeBrowserUrl,
       prefetchLinks: !!this.scope.prefetchLinks,
-      scrollToTop: !!this.scope.scrollToTop,
+      scrollToTop: !!this.scope.scrollToTop
     };
     this.pjax = new Pjax(pjaxOptions);
     this.pjax.setActiveWrapper(this);

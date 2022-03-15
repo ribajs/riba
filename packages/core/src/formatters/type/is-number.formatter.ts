@@ -6,5 +6,5 @@ import { isNumber } from "@ribajs/utils/src/type.js";
  */
 export const isNumberFormatter: Formatter = {
   name: "is-number",
-  read: isNumber,
+  read: isNumber
 };

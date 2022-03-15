@@ -21,5 +21,5 @@ export const LuxonToLocalePartsFormatter: Formatter = {
     opts?: LocaleOptions & Intl.DateTimeFormatOptions
   ): { type: string; value: string }[] {
     return target.toLocaleParts(opts);
-  },
+  }
 };

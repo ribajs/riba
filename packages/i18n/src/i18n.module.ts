@@ -16,5 +16,5 @@ export const i18nModule: RibaModule<I18nModuleOptions> = {
     }
     services.I18nService.setSingleton(options);
     return this;
-  },
+  }
 };

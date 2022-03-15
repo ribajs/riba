@@ -8,12 +8,12 @@ export const alexanderHeimbuch: PodloveWebPlayerContributor = {
   role: {
     id: "1",
     slug: "team",
-    title: "Team",
+    title: "Team"
   },
   group: {
     id: "2",
     slug: "on-air",
-    title: "On Air",
+    title: "On Air"
   },
-  comment: null,
+  comment: null
 };

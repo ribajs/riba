@@ -14,5 +14,5 @@ export const LuxonIntervalCountFormatter: Formatter = {
    */
   read(target: Interval, unit: keyof DurationObjectUnits): number {
     return target.count(unit);
-  },
+  }
 };

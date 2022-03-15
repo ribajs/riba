@@ -51,7 +51,7 @@ export class ShopifyLinklistComponent extends Component {
       "pills",
       "vertical",
       "collapse-on-new-page",
-      "show-on-child-url",
+      "show-on-child-url"
     ];
   }
 
@@ -66,7 +66,7 @@ export class ShopifyLinklistComponent extends Component {
     collapse: this.collapse,
     collapseAll: this.collapseAll,
     show: this.show,
-    showAll: this.showAll,
+    showAll: this.showAll
   };
 
   constructor() {

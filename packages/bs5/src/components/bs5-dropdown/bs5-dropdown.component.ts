@@ -5,7 +5,7 @@ export class Bs5DropdownComponent extends Component {
   public static tagName = "bs5-dropdown";
 
   public scope: any = {
-    toggle: this.toggle,
+    toggle: this.toggle
   };
 
   public dropdown?: Dropdown;

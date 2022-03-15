@@ -17,5 +17,5 @@ export const LuxonResolvedLocaleOptsFormatter: Formatter = {
     opts: Intl.DateTimeFormatOptions & LocaleOptions
   ): Intl.ResolvedDateTimeFormatOptions {
     return target.resolvedLocaleOpts(opts);
-  },
+  }
 };

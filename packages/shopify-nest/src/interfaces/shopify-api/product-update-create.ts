@@ -2,7 +2,7 @@ import type {
   ShopifyObject,
   ProductImage,
   ProductOption,
-  ProductVariant,
+  ProductVariant
 } from "@ribajs/shopify-tda";
 import type { MetafieldUpdateCreate } from "./metafield-update-create";
 

@@ -11,5 +11,5 @@ export const podcastModule: RibaModule = {
   components,
   init(/*options = {}*/) {
     return this;
-  },
+  }
 };

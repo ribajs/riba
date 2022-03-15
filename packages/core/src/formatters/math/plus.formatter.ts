@@ -6,5 +6,5 @@ export const plusFormatter = {
   name: "plus",
   read(a: string | number, b: string | number) {
     return Number(a) + Number(b);
-  },
+  }
 };

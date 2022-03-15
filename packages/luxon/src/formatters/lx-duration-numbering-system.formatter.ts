@@ -13,5 +13,5 @@ export const LuxonDurationNumberingSystemFormatter: Formatter = {
    */
   read(target: Duration): string {
     return target.numberingSystem;
-  },
+  }
 };

@@ -14,5 +14,5 @@ export const MillisecondsFormatter: Formatter = {
    */
   read(target: Moment | Duration) {
     return target.milliseconds();
-  },
+  }
 };

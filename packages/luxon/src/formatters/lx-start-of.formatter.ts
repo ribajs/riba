@@ -14,5 +14,5 @@ export const LuxonStartOfFormatter: Formatter = {
    */
   read(target: DateTime, unit: keyof DurationObjectUnits): DateTime {
     return target.startOf(unit);
-  },
+  }
 };

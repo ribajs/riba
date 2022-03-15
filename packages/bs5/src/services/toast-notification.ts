@@ -21,7 +21,7 @@ export class ToastNotification extends Notification {
     contextualClass,
     channel,
     $event,
-    $context,
+    $context
   }: {
     title?: string;
     message: string;

@@ -5,7 +5,7 @@ export class Component1Component extends Component {
   public static tagName = "rv-component-1";
 
   public scope = {
-    inputVal: "",
+    inputVal: ""
   };
 
   constructor() {

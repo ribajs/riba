@@ -17,5 +17,5 @@ export const LuxonToUTCFormatter: Formatter = {
    */
   read(target: DateTime, offset: number, opts?: ZoneOptions): DateTime {
     return target.toUTC(offset, opts);
-  },
+  }
 };

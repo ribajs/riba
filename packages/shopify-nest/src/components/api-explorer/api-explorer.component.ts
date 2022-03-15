@@ -1,12 +1,12 @@
 import {
   Component,
   TemplateFunction,
-  HttpService,
+  HttpService
 } from "@ribajs/core/src/index.js";
 import {
   isNumber,
   extend,
-  hasChildNodesTrim,
+  hasChildNodesTrim
 } from "@ribajs/utils/src/index.js";
 import Debug from "debug";
 
@@ -131,8 +131,8 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
         readOnly: true,
         automaticLayout: true,
         minimap: {
-          enabled: false,
-        },
+          enabled: false
+        }
       });
     }
   }
@@ -287,7 +287,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
             dynamic: isDynamic,
             ready: !isDynamic, // dynamic params not ready by default, we need to load the values first
             dependenciesResolved: !isDynamic,
-            active: true,
+            active: true
           });
         }
       }
@@ -330,7 +330,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
           dynamic: true,
           ready,
           dependenciesResolved: true,
-          active: false,
+          active: false
         });
       });
     }

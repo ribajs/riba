@@ -13,5 +13,5 @@ export const LuxonToBSONFormatter: Formatter = {
    */
   read(target: DateTime): Date {
     return target.toBSON();
-  },
+  }
 };

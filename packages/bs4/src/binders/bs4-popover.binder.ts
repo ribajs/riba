@@ -22,7 +22,7 @@ export class PopoverBinder extends Binder<string, HTMLElement> {
 
     const popover = new PopoverService(el, {
       ...PopoverService.Default,
-      ...options,
+      ...options
     });
 
     // destroy previous popover if it already exists
@@ -45,7 +45,7 @@ export class PopoverBinder extends Binder<string, HTMLElement> {
       "enable",
       "disable",
       "toggleEnabled",
-      "update", // render update
+      "update" // render update
     ];
 
     // remove listeners of previous Popover if there already was one

@@ -6,5 +6,5 @@ export const dividedByFormatter = {
   name: "dividedBy",
   read(a: string | number, b: string | number) {
     return Number(a) / Number(b);
-  },
+  }
 };

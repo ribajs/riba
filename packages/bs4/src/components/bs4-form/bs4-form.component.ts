@@ -3,7 +3,7 @@ import {
   TemplateFunction,
   HttpService,
   HttpMethod,
-  HttpDataType,
+  HttpDataType
 } from "@ribajs/core/src/index.js";
 import template from "./bs4-form.component.html";
 import {
@@ -11,7 +11,7 @@ import {
   getViewportDimensions,
   getUID,
   hasChildNodesTrim,
-  stripHtml,
+  stripHtml
 } from "@ribajs/utils/src/index.js";
 
 export interface ValidationObject {
@@ -82,7 +82,7 @@ export class Bs4FormComponent extends Component {
       "auto-set-form-data",
       "strip-html",
       "scroll-invalid-element",
-      "animate-invalid-element",
+      "animate-invalid-element"
     ];
   }
 
@@ -95,7 +95,7 @@ export class Bs4FormComponent extends Component {
       form: {
         fields: {},
         valid: false,
-        error: undefined,
+        error: undefined
       },
 
       disableSubmitUntilChange: false,
@@ -108,7 +108,7 @@ export class Bs4FormComponent extends Component {
       autoSetFormData: true,
       stripHtml: true,
       scrollToInvalidElement: true,
-      animateInvalidElement: true,
+      animateInvalidElement: true
     };
     return scope;
   }
@@ -267,7 +267,7 @@ export class Bs4FormComponent extends Component {
       action,
       method: method.toUpperCase() as HttpMethod,
       target,
-      type: this.scope.ajaxRequestType,
+      type: this.scope.ajaxRequestType
     };
 
     return settings;
@@ -296,7 +296,7 @@ export class Bs4FormComponent extends Component {
 
     this.dispatchEvent(
       new CustomEvent("invalid", {
-        detail: { elements: invalidElements },
+        detail: { elements: invalidElements }
       })
     );
   }
@@ -319,7 +319,7 @@ export class Bs4FormComponent extends Component {
     this.debug("onErrorSubmit");
     this.dispatchEvent(
       new CustomEvent("submit-error", {
-        detail: { status, message: message, response },
+        detail: { status, message: message, response }
       })
     );
   }
@@ -332,7 +332,7 @@ export class Bs4FormComponent extends Component {
 
     this.dispatchEvent(
       new CustomEvent("submit-success", {
-        detail: { status, message: message, response },
+        detail: { status, message: message, response }
       })
     );
   }

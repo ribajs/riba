@@ -13,5 +13,5 @@ export const LuxonDurationToJSONFormatter: Formatter = {
    */
   read(target: Duration): string {
     return target.toJSON();
-  },
+  }
 };

@@ -13,5 +13,5 @@ export const LuxonYearFormatter: Formatter = {
    */
   read(target: DateTime): number {
     return target.year;
-  },
+  }
 };

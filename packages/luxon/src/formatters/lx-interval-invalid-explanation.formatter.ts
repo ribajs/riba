@@ -13,5 +13,5 @@ export const LuxonIntervalInvalidExplanationFormatter: Formatter = {
    */
   read(target: Interval): string | null {
     return target.invalidExplanation;
-  },
+  }
 };

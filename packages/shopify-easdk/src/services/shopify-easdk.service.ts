@@ -26,7 +26,7 @@ import {
   // ProductPickerCallback,
   // User,
   // UserData,
-  ReceiveMessage,
+  ReceiveMessage
   // ShopifyApp,
 } from "../interfaces/shopify-easdk";
 
@@ -87,7 +87,7 @@ export class EASDKWrapperService
         }
         this.message = {
           message,
-          data,
+          data
         };
         console.debug("Receive message:", event, message, data);
       },

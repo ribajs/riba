@@ -9,5 +9,5 @@ export const CalendarFormatter: Formatter = {
   name: "calendar",
   read(target: Moment | MomentInput, referenceDay?: moment.MomentInput) {
     return moment(target).calendar(referenceDay);
-  },
+  }
 };

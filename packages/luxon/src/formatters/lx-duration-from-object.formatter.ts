@@ -13,5 +13,5 @@ export const LuxonDurationFromObjectFormatter: Formatter = {
    */
   read(obj: DurationObject): Duration {
     return Duration.fromObject(obj);
-  },
+  }
 };

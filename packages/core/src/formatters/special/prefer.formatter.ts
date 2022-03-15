@@ -5,5 +5,5 @@ export const preferFormatter = {
   name: "prefer",
   read(value: any, preferValue: any) {
     return preferValue || value;
-  },
+  }
 };

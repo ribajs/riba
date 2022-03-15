@@ -13,5 +13,5 @@ export const LuxonDaysInMonthFormatter: Formatter = {
    */
   read(target: DateTime): number {
     return target.daysInMonth;
-  },
+  }
 };

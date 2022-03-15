@@ -10,7 +10,7 @@ export const ContentSliderDemoModule: RibaModule = {
   services: {},
   init() {
     return this;
-  },
+  }
 };
 
 export default ContentSliderDemoModule;

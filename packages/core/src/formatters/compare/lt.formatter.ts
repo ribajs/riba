@@ -7,5 +7,5 @@ export const ltFormatter: Formatter = {
   name: "lt",
   read(a: number, b: number) {
     return a < b;
-  },
+  }
 };

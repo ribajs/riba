@@ -14,5 +14,5 @@ export const LuxonIntervalIntersectionFormatter: Formatter = {
    */
   read(target: Interval, other: Interval): Interval | null {
     return target.intersection(other);
-  },
+  }
 };

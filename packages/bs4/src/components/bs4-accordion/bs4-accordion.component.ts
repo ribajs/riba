@@ -2,12 +2,12 @@ import {
   handleizeFormatter,
   TemplateFunction,
   FormatterFn,
-  TemplatesComponent,
+  TemplatesComponent
 } from "@ribajs/core/src/index.js";
 import {
   CollapseService,
   EVENT_HIDE,
-  EVENT_SHOW,
+  EVENT_SHOW
 } from "../../services/collapse.service.js";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 
@@ -48,16 +48,16 @@ export class Bs4AccordionComponent extends TemplatesComponent {
   protected templateAttributes = [
     {
       name: "title",
-      required: true,
+      required: true
     },
     {
       name: "show",
-      required: false,
+      required: false
     },
     {
       name: "icon-direction",
-      required: false,
-    },
+      required: false
+    }
   ];
 
   // protected collapseServices: CollapseService[] = [];
@@ -72,7 +72,7 @@ export class Bs4AccordionComponent extends TemplatesComponent {
     show: this.show,
     hide: this.hide,
     collapseIconSize: 16,
-    showOnlyOne: true,
+    showOnlyOne: true
   };
 
   constructor() {

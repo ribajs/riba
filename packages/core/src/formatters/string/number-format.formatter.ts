@@ -65,5 +65,5 @@ export const numberFormatFormatter: Formatter = {
     }
 
     return ret[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousandSeparator);
-  },
+  }
 };

@@ -10,7 +10,7 @@ export const Bs4TaggedImageDemoModule: RibaModule = {
   services: {},
   init() {
     return this;
-  },
+  }
 };
 
 export default Bs4TaggedImageDemoModule;

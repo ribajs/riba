@@ -27,7 +27,7 @@ export class ShopifyNestSocketEventCardComponent extends Component {
     close: this.close,
     event: undefined,
     data: undefined,
-    role: undefined,
+    role: undefined
   };
 
   constructor() {

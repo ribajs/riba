@@ -10,5 +10,5 @@ export const luxonModule: RibaModule<LuxonModuleOptions> = {
   components,
   init(/* options: LuxonModuleOptions = {} */) {
     return this;
-  },
+  }
 };

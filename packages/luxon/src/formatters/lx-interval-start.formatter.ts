@@ -13,5 +13,5 @@ export const LuxonIntervalStartFormatter: Formatter = {
    */
   read(target: Interval): DateTime {
     return target.start;
-  },
+  }
 };

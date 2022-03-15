@@ -6,7 +6,7 @@ import {
   TouchSettings,
   TouchType,
   TouchSwipeData,
-  TouchDirection,
+  TouchDirection
 } from "../../types/index.js";
 
 import { BaseEventsService } from "./base-events.service.js";
@@ -111,25 +111,25 @@ export class TouchEventsService extends BaseEventsService {
   /** Used internally for `taphold` */
   protected startPosition: Position = {
     x: 0,
-    y: 0,
+    y: 0
   };
 
   /** Used internally for `taphold` */
   protected endPosition: Position = {
     x: 0,
-    y: 0,
+    y: 0
   };
 
   /** Used internally for `swipe` */
   protected originalCoord: Position = {
     x: 0,
-    y: 0,
+    y: 0
   };
 
   /** Used internally for `swipe` */
   protected finalCoord: Position = {
     x: 0,
-    y: 0,
+    y: 0
   };
 
   /** Used internally for `swipe` */
@@ -188,7 +188,7 @@ export class TouchEventsService extends BaseEventsService {
       startevent: ["touchstart"],
       endevent: ["touchend"],
       moveevent: ["touchmove"],
-      tapevent: ["tap"],
+      tapevent: ["tap"]
     }
   ) {
     super(el);
@@ -297,7 +297,7 @@ export class TouchEventsService extends BaseEventsService {
         : (event as MouseEvent).pageX,
       y: this.settings.touchCapable
         ? touchesTypes[index].pageY
-        : (event as MouseEvent).pageY,
+        : (event as MouseEvent).pageY
     };
     return position;
   }
@@ -338,7 +338,7 @@ export class TouchEventsService extends BaseEventsService {
         : Math.round(
             (event as any as MouseEvent).pageY -
               (boundingClientRect ? boundingClientRect.top : 0)
-          ),
+          )
     };
     return offset;
   }
@@ -352,7 +352,7 @@ export class TouchEventsService extends BaseEventsService {
     const touchData: TouchData = {
       position: this.getPosition(event, positionType),
       offset: this.getOffset(event, offsetType),
-      time: Date.now(),
+      time: Date.now()
     };
     if (withIndex) {
       touchData.index = getElementIndex(event.target as Element | null);
@@ -366,7 +366,7 @@ export class TouchEventsService extends BaseEventsService {
         eventName,
         this.onStartEvent as any as EventListener,
         {
-          passive: true,
+          passive: true
         }
       );
     }
@@ -375,7 +375,7 @@ export class TouchEventsService extends BaseEventsService {
         eventName,
         this.onMoveEvent as any as EventListener,
         {
-          passive: true,
+          passive: true
         }
       );
     }
@@ -384,7 +384,7 @@ export class TouchEventsService extends BaseEventsService {
         eventName,
         this.onEndEvent as any as EventListener,
         {
-          passive: true,
+          passive: true
         }
       );
     }
@@ -399,7 +399,7 @@ export class TouchEventsService extends BaseEventsService {
     this.startPosition = this.getPosition(event, TouchType.TARGET);
     this.endPosition = {
       x: this.startPosition.x,
-      y: this.startPosition.y,
+      y: this.startPosition.y
     };
     this.startTime = Date.now();
 
@@ -496,7 +496,7 @@ export class TouchEventsService extends BaseEventsService {
     this.holdTimer = window.setTimeout(() => {
       const diffPosition: Position = {
         x: this.startPosition.x - this.endPosition.x,
-        y: this.startPosition.y - this.endPosition.y,
+        y: this.startPosition.y - this.endPosition.y
       };
 
       // helded?
@@ -525,7 +525,7 @@ export class TouchEventsService extends BaseEventsService {
                 : (event as MouseEvent).pageX,
               y: this.settings.touchCapable
                 ? (event as TouchEvent).changedTouches[i].pageY
-                : (event as MouseEvent).pageY,
+                : (event as MouseEvent).pageY
             },
             offset: {
               x: this.settings.touchCapable
@@ -543,8 +543,8 @@ export class TouchEventsService extends BaseEventsService {
                   )
                 : Math.round(
                     (event as MouseEvent).pageY - (elOffset ? elOffset.top : 0)
-                  ),
-            },
+                  )
+            }
           };
 
           touches.push(touch);
@@ -555,7 +555,7 @@ export class TouchEventsService extends BaseEventsService {
         const touchData = {
           touches,
           time: Date.now(),
-          duration,
+          duration
         };
 
         this.triggerCustomEvent(eventName, event, touchData);
@@ -591,7 +591,7 @@ export class TouchEventsService extends BaseEventsService {
       const touchData = {
         firstTap: this.firstTap,
         secondTap: lastTap,
-        interval: lastTap.time - this.firstTap.time,
+        interval: lastTap.time - this.firstTap.time
       };
       if (!this.cooling) {
         this.triggerCustomEvent("doubletap", event, touchData);
@@ -622,7 +622,7 @@ export class TouchEventsService extends BaseEventsService {
     this.tapTimer = window.setTimeout(() => {
       const diffPosition: Position = {
         x: this.startPosition.x - this.endPosition.x,
-        y: this.startPosition.y - this.endPosition.y,
+        y: this.startPosition.y - this.endPosition.y
       };
       if (
         !this.doubletapped &&
@@ -653,7 +653,7 @@ export class TouchEventsService extends BaseEventsService {
   protected tap(event: TouchEvent | MouseEvent) {
     const diffPosition: Position = {
       x: this.startPosition.x - this.endPosition.x,
-      y: this.startPosition.y - this.endPosition.y,
+      y: this.startPosition.y - this.endPosition.y
     };
 
     if (
@@ -680,7 +680,7 @@ export class TouchEventsService extends BaseEventsService {
               : (event as MouseEvent).pageX,
             y: this.settings.touchCapable
               ? (event as TouchEvent).changedTouches[i].pageY
-              : (event as MouseEvent).pageY,
+              : (event as MouseEvent).pageY
           },
           offset: {
             x: this.settings.touchCapable
@@ -698,8 +698,8 @@ export class TouchEventsService extends BaseEventsService {
                 )
               : Math.round(
                   (event as MouseEvent).pageY - (elOffset ? elOffset.top : 0)
-                ),
-          },
+                )
+          }
         };
 
         touches.push(touch);
@@ -707,7 +707,7 @@ export class TouchEventsService extends BaseEventsService {
 
       const touchData = {
         touches,
-        time: Date.now(),
+        time: Date.now()
       };
 
       const eventName = touchesLength > 1 ? "tap" + touchesLength : "tap";
@@ -748,7 +748,7 @@ export class TouchEventsService extends BaseEventsService {
         direction: swipeDir.replace("swipe", "") as TouchDirection,
         xAmount,
         yAmount,
-        duration: endEvnt.time - this.startEvnt.time,
+        duration: endEvnt.time - this.startEvnt.time
       };
       this.hasSwiped = true;
       this.triggerCustomEvent("swipe", event, touchData);
@@ -783,7 +783,7 @@ export class TouchEventsService extends BaseEventsService {
         direction: swipeDir.replace("swipe", "") as TouchDirection,
         xAmount,
         yAmount,
-        duration: endEvnt.time - this.startEvnt.time,
+        duration: endEvnt.time - this.startEvnt.time
       };
       this.triggerCustomEvent("swipeend", event, touchData);
     }

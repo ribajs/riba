@@ -11,5 +11,5 @@ export const booleanFormatter = {
     } else {
       return !!value;
     }
-  },
+  }
 };

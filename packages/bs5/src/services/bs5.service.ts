@@ -95,7 +95,7 @@ export class Bs5Service {
   public on(
     eventName: "breakpoint:changed",
     cb: (activeBreakpoint: Breakpoint) => void,
-    thisContext?: any
+    thisContext?: any,
   ): void;
   public on(eventName: string, cb: EventCallback, thisContext?: any) {
     return this.events.on(eventName, cb, thisContext);
@@ -104,7 +104,7 @@ export class Bs5Service {
   public once(
     eventName: "breakpoint:changed",
     cb: (activeBreakpoint: Breakpoint) => void,
-    thisContext?: any
+    thisContext?: any,
   ): void;
   public once(eventName: string, cb: EventCallback, thisContext?: any) {
     return this.events.once(eventName, cb, thisContext);
@@ -113,7 +113,7 @@ export class Bs5Service {
   public off(
     eventName: "breakpoint:changed",
     cb: (activeBreakpoint: Breakpoint) => void,
-    thisContext?: any
+    thisContext?: any,
   ): void;
   public off(eventName: string, cb: EventCallback, thisContext?: any) {
     return this.events.off(eventName, cb, thisContext);

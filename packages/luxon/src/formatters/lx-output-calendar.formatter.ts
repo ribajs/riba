@@ -13,5 +13,5 @@ export const LuxonOutputCalendarFormatter: Formatter = {
    */
   read(target: DateTime): string {
     return target.outputCalendar;
-  },
+  }
 };

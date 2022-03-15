@@ -14,5 +14,5 @@ export const LuxonGetFormatter: Formatter = {
    */
   read(target: DateTime, unit: keyof DateTime): number {
     return target.get(unit);
-  },
+  }
 };

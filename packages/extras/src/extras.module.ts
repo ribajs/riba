@@ -15,5 +15,5 @@ export const extrasModule: RibaModule<ExtrasModuleOptions> = {
   init(options = {}) {
     services.ExtrasService.setSingleton(options);
     return this;
-  },
+  }
 };

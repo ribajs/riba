@@ -13,5 +13,5 @@ export const jqueryModule: RibaModule<JQueryModuleOptions> = {
   init(options = {}) {
     services.JQueryService.setSingleton(options);
     return this;
-  },
+  }
 };

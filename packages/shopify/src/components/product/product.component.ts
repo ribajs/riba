@@ -4,7 +4,7 @@ import {
   ShopifyProduct,
   ShopifyProductVariantOption,
   ShopifyCartService,
-  ShopifyProductService,
+  ShopifyProductService
 } from "@ribajs/shopify";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import template from "./product.component.html";
@@ -59,7 +59,7 @@ export class ShopifyProductComponent extends Component {
     /**
      * If the variant is available, used to disable the add to cart button
      */
-    available: false,
+    available: false
   };
 
   private colorOption: ShopifyProductVariantOption | null = null;
@@ -348,7 +348,7 @@ export class ShopifyProductComponent extends Component {
         height: 0,
         width: 0,
         id: 0,
-        updated_at: this.scope.product.created_at,
+        updated_at: this.scope.product.created_at
       };
       return featuredImage;
     }

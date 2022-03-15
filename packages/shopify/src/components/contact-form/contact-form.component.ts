@@ -36,15 +36,15 @@ export class ShopifyContactFormComponent extends Component {
         company: "",
         phone: "",
         email: "",
-        message: "",
+        message: ""
       },
       valid: false,
-      error: undefined,
+      error: undefined
     },
     /** send form function */
     send: this.send,
     /** select all text function */
-    selectAll: this.selectAll,
+    selectAll: this.selectAll
   };
 
   constructor() {

@@ -5,5 +5,5 @@ export const joinFormatter = {
   name: "join",
   read(value: any[], delimeter: string | undefined) {
     return value.join(delimeter);
-  },
+  }
 };

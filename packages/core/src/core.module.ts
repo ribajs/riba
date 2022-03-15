@@ -23,5 +23,5 @@ export const coreModule: RibaModule<CoreModuleOptions> = {
     });
 
     return this;
-  },
+  }
 };

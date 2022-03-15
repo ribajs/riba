@@ -25,5 +25,5 @@ export const cutFormatter: Formatter = {
     } else {
       return str;
     }
-  },
+  }
 };

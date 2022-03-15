@@ -8,7 +8,7 @@ import {
   EventHandler,
   ObservedAttributesToCheck,
   TemplateFunction,
-  ObserverSyncCallback,
+  ObserverSyncCallback
 } from "../types/index.js";
 import type { JsxElement } from "@ribajs/jsx/src/index.js";
 import { renderElement } from "@ribajs/jsx/src/index.js";

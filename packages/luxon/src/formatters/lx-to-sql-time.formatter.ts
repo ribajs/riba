@@ -14,5 +14,5 @@ export const LuxonToSQLTimeFormatter: Formatter = {
    */
   read(target: DateTime, opts?: ToSQLOptions): string {
     return target.toSQLTime(opts);
-  },
+  }
 };

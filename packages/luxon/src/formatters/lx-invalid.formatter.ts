@@ -14,5 +14,5 @@ export const LuxonInvalidFormatter: Formatter = {
    */
   read(reason: string, explanation: string): DateTime {
     return DateTime.invalid(reason, explanation);
-  },
+  }
 };

@@ -2,7 +2,7 @@ import {
   handleizeFormatter,
   FormatterFn,
   TemplateFunction,
-  TemplatesComponent,
+  TemplatesComponent
 } from "@ribajs/core/src/index.js";
 import templateHorizontal from "./bs4-tabs-horizontal.component.html";
 import templateVertical from "./bs4-tabs-vertical.component.html";
@@ -35,24 +35,24 @@ export class Bs4TabsComponent extends TemplatesComponent {
   protected templateAttributes = [
     {
       name: "title",
-      required: true,
+      required: true
     },
     {
       name: "handle",
-      required: false,
+      required: false
     },
     {
       name: "type",
-      required: false,
+      required: false
     },
     {
       name: "active",
-      required: false,
+      required: false
     },
     {
       name: "index",
-      required: false,
-    },
+      required: false
+    }
   ];
 
   public scope: Scope = {
@@ -61,7 +61,7 @@ export class Bs4TabsComponent extends TemplatesComponent {
     deactivate: this.deactivate,
     deactivateAll: this.deactivateAll,
     optionTabsAutoHeight: false,
-    optionTabsAngle: "horizontal",
+    optionTabsAngle: "horizontal"
   };
 
   protected tabs?: NodeListOf<Element>;
@@ -131,7 +131,7 @@ export class Bs4TabsComponent extends TemplatesComponent {
       "tab-18-handle",
       "tab-19-title",
       "tab-19-content",
-      "tab-19-handle",
+      "tab-19-handle"
     ];
   }
 
@@ -272,7 +272,7 @@ export class Bs4TabsComponent extends TemplatesComponent {
         title: "",
         content: "",
         active: false,
-        index: this.scope.items.length - 1,
+        index: this.scope.items.length - 1
       });
     }
   }

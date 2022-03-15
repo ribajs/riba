@@ -14,5 +14,5 @@ export const LuxonFromHTTPFormatter: Formatter = {
    */
   read(text: string, options?: DateTimeOptions): DateTime {
     return DateTime.fromHTTP(text, options);
-  },
+  }
 };

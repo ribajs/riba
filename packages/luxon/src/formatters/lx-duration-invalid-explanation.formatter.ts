@@ -13,5 +13,5 @@ export const LuxonDurationInvalidExplanationFormatter: Formatter = {
    */
   read(target: Duration): string | null {
     return target.invalidExplanation;
-  },
+  }
 };

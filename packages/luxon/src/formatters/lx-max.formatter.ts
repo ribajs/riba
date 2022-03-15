@@ -14,5 +14,5 @@ export const LuxonMaxFormatter: Formatter = {
    */
   read(target: DateTime, ...dateTimes: DateTime[]): DateTime {
     return DateTime.max(target, ...dateTimes);
-  },
+  }
 };

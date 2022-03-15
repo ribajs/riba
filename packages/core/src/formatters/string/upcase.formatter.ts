@@ -8,5 +8,5 @@ export const upcaseFormatter: Formatter = {
   name: "upcase",
   read(str: string) {
     return str.toUpperCase();
-  },
+  }
 };

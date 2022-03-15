@@ -16,7 +16,7 @@ export class IconsetExampleComponent extends Component {
     iconset: [] as string[],
     // Icon colors
     color: "",
-    namespace: "main",
+    namespace: "main"
   };
 
   constructor() {

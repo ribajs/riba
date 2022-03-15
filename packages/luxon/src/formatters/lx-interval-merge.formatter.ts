@@ -14,5 +14,5 @@ export const LuxonIntervalMergeFormatter: Formatter = {
    */
   read(intervals: Interval[]): Interval[] {
     return Interval.merge(intervals);
-  },
+  }
 };

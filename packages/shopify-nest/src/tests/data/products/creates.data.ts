@@ -9,7 +9,7 @@ const products: ProductUpdateCreate[] = [
     body_html: "<strong>Good snowboard!</strong>",
     vendor: "Burton",
     product_type: "Snowboard",
-    tags: `Barnes & Noble, John's Fav, "Big Air"`,
+    tags: `Barnes & Noble, John's Fav, "Big Air"`
   },
   /**
    * Create a new unpublished product
@@ -19,7 +19,7 @@ const products: ProductUpdateCreate[] = [
     body_html: "<strong>Good snowboard!</strong>",
     vendor: "Burton",
     product_type: "Snowboard",
-    published: false,
+    published: false
   },
   /**
    * Create a new product with multiple product variants
@@ -33,14 +33,14 @@ const products: ProductUpdateCreate[] = [
       {
         option1: "First",
         price: "10.00",
-        sku: "123",
+        sku: "123"
       },
       {
         option1: "Second",
         price: "20.00",
-        sku: "123",
-      },
-    ],
+        sku: "123"
+      }
+    ]
   },
   /**
    * Create a new product with multiple product variants and multiple options
@@ -53,23 +53,23 @@ const products: ProductUpdateCreate[] = [
     variants: [
       {
         option1: "Blue",
-        option2: "155",
+        option2: "155"
       },
       {
         option1: "Black",
-        option2: "159",
-      },
+        option2: "159"
+      }
     ],
     options: [
       {
         name: "Color",
-        values: ["Blue", "Black"],
+        values: ["Blue", "Black"]
       },
       {
         name: "Size",
-        values: ["155", "159"],
-      },
-    ],
+        values: ["155", "159"]
+      }
+    ]
   },
   /**
    * Create a new product with the default variant and base64 encoded image
@@ -82,9 +82,9 @@ const products: ProductUpdateCreate[] = [
     images: [
       {
         attachment:
-          "R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\n",
-      },
-    ],
+          "R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\n"
+      }
+    ]
   },
   /**
    * Create a new product with the default variant and a product image that will be downloaded by Shopify
@@ -96,16 +96,16 @@ const products: ProductUpdateCreate[] = [
     product_type: "Snowboard",
     images: [
       {
-        src: "http://example.com/rails_logo.gif",
-      },
-    ],
+        src: "http://example.com/rails_logo.gif"
+      }
+    ]
   },
   /**
    * Creating a product without a title will return an error
    */
   {
-    body_html: "A mystery!",
-  },
+    body_html: "A mystery!"
+  }
 ];
 
 export default products;

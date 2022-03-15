@@ -6,5 +6,5 @@ export const moduloFormatter = {
   name: "modulo",
   read(a: string | number, b: string | number) {
     return Number(a) % Number(b);
-  },
+  }
 };

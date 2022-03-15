@@ -15,5 +15,5 @@ export const rangeFormatter = {
       return [];
     }
     return arr.slice(Number(start || 0), 1 + end);
-  },
+  }
 };

@@ -22,7 +22,7 @@ export class ExtrasGameLoopExampleComponent extends Component {
   public scope = {
     fps: 60,
     left: "10px",
-    color: "red",
+    color: "red"
   };
 
   constructor() {

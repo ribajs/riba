@@ -21,7 +21,7 @@ export class RouterLoadScriptComponent extends Component {
     src: "",
     id: "",
     async: true,
-    defer: true,
+    defer: true
   };
 
   constructor() {

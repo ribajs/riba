@@ -6,7 +6,7 @@ import { Bs5Service } from "../../services";
 import {
   JsxBs5SidebarProps,
   Bs5SidebarComponentScope,
-  SidebarState,
+  SidebarState
 } from "../../types/index.js";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { debounce } from "@ribajs/utils/src/control";
@@ -36,7 +36,7 @@ export class Bs5SidebarComponent extends Component {
       "force-hide-on-location-pathnames",
       "force-show-on-location-pathnames",
       "watch-new-page-ready-event",
-      "close-on-swipe",
+      "close-on-swipe"
     ];
   }
 
@@ -65,11 +65,11 @@ export class Bs5SidebarComponent extends Component {
     // Template methods
     hide: this.hide,
     show: this.show,
-    toggle: this.toggle,
+    toggle: this.toggle
   };
 
   public scope: Bs5SidebarComponentScope = {
-    ...this.defaults,
+    ...this.defaults
   };
 
   constructor() {
@@ -125,7 +125,7 @@ export class Bs5SidebarComponent extends Component {
 
   protected addEventListeners() {
     window.addEventListener("resize", this.onEnvironmentChanges, {
-      passive: true,
+      passive: true
     });
     this.addEventListener("swipe" as any, this.onSwipe);
   }
@@ -228,7 +228,7 @@ export class Bs5SidebarComponent extends Component {
     }
     this.dispatchEvent(
       new CustomEvent(TOGGLE_BUTTON.eventNames.toggled, {
-        detail: this.scope.state,
+        detail: this.scope.state
       })
     );
   }

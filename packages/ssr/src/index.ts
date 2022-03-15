@@ -6,7 +6,7 @@ export * from "./components/index.js";
 export type {
   ClassOfComponent,
   Component,
-  ComponentLifecycleEventData,
+  ComponentLifecycleEventData
 } from "@ribajs/core/src/index.js";
 export { PageComponent } from "./page-component";
 export { SSRModule } from "./ssr.module";

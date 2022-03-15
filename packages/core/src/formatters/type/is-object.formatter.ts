@@ -6,5 +6,5 @@ import { isObject } from "@ribajs/utils/src/type.js";
  */
 export const isObjectFormatter: Formatter = {
   name: "is-object",
-  read: isObject,
+  read: isObject
 };

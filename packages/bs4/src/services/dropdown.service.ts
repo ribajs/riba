@@ -37,7 +37,7 @@ export const EVENT = {
   CLICK: `click${EVENT_KEY}`,
   CLICK_DATA_API: `click${EVENT_KEY}${DATA_API_KEY}`,
   KEYDOWN_DATA_API: `keydown${EVENT_KEY}${DATA_API_KEY}`,
-  KEYUP_DATA_API: `keyup${EVENT_KEY}${DATA_API_KEY}`,
+  KEYUP_DATA_API: `keyup${EVENT_KEY}${DATA_API_KEY}`
 };
 
 export const CLASSNAME = {
@@ -48,7 +48,7 @@ export const CLASSNAME = {
   DROPLEFT: "dropleft",
   MENURIGHT: "dropdown-menu-right",
   MENULEFT: "dropdown-menu-left",
-  POSITION_STATIC: "position-static",
+  POSITION_STATIC: "position-static"
 };
 
 export const SELECTOR = {
@@ -56,7 +56,7 @@ export const SELECTOR = {
   FORM_CHILD: ".dropdown form",
   MENU: ".dropdown-menu",
   NAVBAR_NAV: ".navbar-nav",
-  VISIBLE_ITEMS: ".dropdown-menu .dropdown-item:not(.disabled):not(:disabled)",
+  VISIBLE_ITEMS: ".dropdown-menu .dropdown-item:not(.disabled):not(:disabled)"
 };
 
 export const ATTACHMENTMAP = {
@@ -67,7 +67,7 @@ export const ATTACHMENTMAP = {
   RIGHT: "right-start",
   RIGHTEND: "right-end",
   LEFT: "left-start",
-  LEFTEND: "left-end",
+  LEFTEND: "left-end"
 };
 
 export const DEFAULT = {
@@ -75,7 +75,7 @@ export const DEFAULT = {
   flip: true,
   boundary: "scrollParent",
   reference: "toggle",
-  display: "dynamic",
+  display: "dynamic"
 };
 
 export const DEFAULTTYPE = {
@@ -83,7 +83,7 @@ export const DEFAULTTYPE = {
   flip: "boolean",
   boundary: "(string|element)",
   reference: "(string|element)",
-  display: "string",
+  display: "string"
 };
 
 /**
@@ -130,7 +130,7 @@ export class DropdownService {
     dropdown?: Element
   ) {
     const relatedTarget = {
-      relatedTarget: triggerCloseElement,
+      relatedTarget: triggerCloseElement
     };
 
     if (menu && menu.classList.contains(CLASSNAME.SHOW)) {
@@ -182,7 +182,7 @@ export class DropdownService {
 
   public show() {
     const relatedTarget = {
-      relatedTarget: this._element,
+      relatedTarget: this._element
     };
 
     const parent = this._element.parentElement;
@@ -218,7 +218,7 @@ export class DropdownService {
     }
 
     const relatedTarget = {
-      relatedTarget: this._element,
+      relatedTarget: this._element
     };
     const showEvent = new CustomEvent(EVENT.SHOW, { detail: relatedTarget });
 
@@ -323,7 +323,7 @@ export class DropdownService {
     config = {
       ...DropdownService.Default,
       ...this._element.dataset,
-      ...config,
+      ...config
     };
 
     typeCheckConfig(NAME, config, DropdownService.DefaultType);
@@ -379,7 +379,7 @@ export class DropdownService {
       offsetConf.fn = (data: any) => {
         data.offsets = {
           ...data.offsets,
-          ...(this._config.offset(data.offsets) || {}),
+          ...(this._config.offset(data.offsets) || {})
         };
         return data;
       };
@@ -392,18 +392,18 @@ export class DropdownService {
       modifiers: {
         offset: offsetConf,
         flip: {
-          enabled: this._config.flip,
+          enabled: this._config.flip
         },
         preventOverflow: {
-          boundariesElement: this._config.boundary,
-        },
-      } as any,
+          boundariesElement: this._config.boundary
+        }
+      } as any
     };
 
     // Disable Popper.js if we have a static display
     if (this._config.display === "static") {
       popperConfig.modifiers.applyStyle = {
-        enabled: false,
+        enabled: false
       };
     }
     return popperConfig;

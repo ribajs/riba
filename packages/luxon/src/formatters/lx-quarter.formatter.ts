@@ -13,5 +13,5 @@ export const LuxonQuarterFormatter: Formatter = {
    */
   read(target: DateTime): number {
     return target.quarter;
-  },
+  }
 };

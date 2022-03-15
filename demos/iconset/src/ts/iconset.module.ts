@@ -10,7 +10,7 @@ export const IconsetModule: RibaModule = {
   services: {},
   init() {
     return this;
-  },
+  }
 };
 
 export default IconsetModule;

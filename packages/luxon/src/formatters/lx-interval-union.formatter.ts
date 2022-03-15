@@ -14,5 +14,5 @@ export const LuxonIntervalUnionFormatter: Formatter = {
    */
   read(target: Interval, other: Interval): Interval {
     return target.union(other);
-  },
+  }
 };

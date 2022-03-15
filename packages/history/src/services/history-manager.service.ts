@@ -45,7 +45,7 @@ export class HistoryManager {
   public add(url: string, namespace: string | null = null) {
     this.history.push({
       namespace,
-      url,
+      url
     });
   }
 }

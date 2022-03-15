@@ -13,5 +13,5 @@ export const LuxonDurationLocaleFormatter: Formatter = {
    */
   read(target: Duration): string {
     return target.locale;
-  },
+  }
 };

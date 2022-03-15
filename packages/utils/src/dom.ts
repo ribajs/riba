@@ -82,7 +82,7 @@ export const setAttribute = (
     name: attributeName,
     newValue: newValueFormatted,
     oldValue,
-    changed,
+    changed
   };
 };
 
@@ -245,7 +245,7 @@ export const scrollTo = async (
   scrollElement.scroll({
     behavior,
     left,
-    top,
+    top
   });
 
   return scrollPromise;
@@ -364,13 +364,13 @@ export const scrollToPosition = async (
   scrollElement.scroll({
     behavior,
     top,
-    left,
+    left
   });
 
   return scrollPromise;
 };
 
-export const getElementFromEvent = <T = HTMLAnchorElement | HTMLUnknownElement>(
+export const getElementFromEvent = <T = HTMLAnchorElement | HTMLUnknownElement,>(
   event: Event | MouseEvent | TouchEvent
 ) => {
   const el =
@@ -394,7 +394,7 @@ export const getViewportDimensions = () => {
   );
   return {
     h,
-    w,
+    w
   };
 };
 

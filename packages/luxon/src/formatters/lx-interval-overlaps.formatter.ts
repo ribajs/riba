@@ -14,5 +14,5 @@ export const LuxonIntervalOverlapsFormatter: Formatter = {
    */
   read(target: Interval, other: Interval): boolean {
     return target.overlaps(other);
-  },
+  }
 };

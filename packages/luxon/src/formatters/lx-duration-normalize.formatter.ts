@@ -13,5 +13,5 @@ export const LuxonDurationNormalizeFormatter: Formatter = {
    */
   read(target: Duration): Duration {
     return target.normalize();
-  },
+  }
 };

@@ -16,5 +16,5 @@ export const DurationFormatter: Formatter = {
       end = moment.now();
     }
     return moment.duration(moment(end).diff(start));
-  },
+  }
 };

@@ -27,7 +27,7 @@ export class ShopifyApiSyncService extends EventDispatcher {
     // https:///tda-dev.artandcode.studio/shopify/sync/socket.io or https://the-developer-app.artandcode.studio/shopify/sync/socket.io
     this.socket = io({
       path: "/shopify/sync/socket.io",
-      transports: ["websocket", "polling"],
+      transports: ["websocket", "polling"]
     });
     this.socket?.on("connect", () => {
       this.debug("connect");

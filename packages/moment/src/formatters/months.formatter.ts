@@ -16,5 +16,5 @@ export const MonthsFormatter: Formatter = {
     return typeof (target as Moment).month === "function"
       ? (target as Moment).month()
       : (target as Duration).months();
-  },
+  }
 };

@@ -15,12 +15,12 @@ export const getRelease = async (filename: string) => {
     config.releaseConfig
   ) as ReleaseConfig;
   const octokit = new Octokit({
-    auth: releaseConfig.github.token,
+    auth: releaseConfig.github.token
   });
   const release = await octokit.repos.getReleaseByTag({
     owner: releaseConfig.github.org || releaseConfig.github.owner,
     repo: releaseConfig.github.repo,
-    tag: filename,
+    tag: filename
   });
   gutil.log("getRelease", release);
   return release;
@@ -38,7 +38,7 @@ export const createRelease = async (filename: string) => {
   ) as ReleaseConfig;
 
   const octokit = new Octokit({
-    auth: releaseConfig.github.token,
+    auth: releaseConfig.github.token
   });
 
   let isPrerelease = false;
@@ -57,7 +57,7 @@ export const createRelease = async (filename: string) => {
     repo: releaseConfig.github.repo,
     name: filename,
     tag_name: filename,
-    prerelease: isPrerelease,
+    prerelease: isPrerelease
   });
 
   gutil.log("createRelease", release);
@@ -71,7 +71,7 @@ export const uploadFile = async (filePath: string) => {
   ) as ReleaseConfig;
 
   const octokit = new Octokit({
-    auth: releaseConfig.github.token,
+    auth: releaseConfig.github.token
   });
   const filename = path.basename(filePath);
   const existingRelease = await getRelease(filename);
@@ -92,7 +92,7 @@ export const uploadFile = async (filePath: string) => {
     owner: releaseConfig.github.org || releaseConfig.github.owner,
     repo: releaseConfig.github.repo,
     release_id: releaseID,
-    data: filePath,
+    data: filePath
   });
 };
 

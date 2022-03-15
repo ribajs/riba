@@ -14,5 +14,5 @@ export const LuxonToRelativeFormatter: Formatter = {
    */
   read(target: DateTime, options?: ToRelativeOptions): string | null {
     return target.toRelative(options);
-  },
+  }
 };

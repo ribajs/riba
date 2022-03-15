@@ -41,18 +41,18 @@ export class TooltipBinder extends Binder<string, HTMLInputElement> {
       placement,
       modifiers: {
         offset: {
-          offset,
+          offset
         },
         flip: {
-          behavior: "flip",
+          behavior: "flip"
         },
         arrow: {
-          element: ".arrow",
+          element: ".arrow"
         },
         preventOverflow: {
-          boundariesElement: "scrollParent",
-        },
-      },
+          boundariesElement: "scrollParent"
+        }
+      }
     });
     document.body.appendChild(this.tip);
     this.tip.classList.add("show");

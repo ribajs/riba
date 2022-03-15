@@ -2,7 +2,7 @@ import { Binder } from "@ribajs/core/src/index.js";
 import { isString } from "@ribajs/utils/src/type.js";
 import {
   Autoscroll,
-  AutoscrollOptions,
+  AutoscrollOptions
 } from "../services/autoscroll.service.js";
 
 /**

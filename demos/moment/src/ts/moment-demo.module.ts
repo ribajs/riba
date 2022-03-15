@@ -10,7 +10,7 @@ export const MomentDemoModule: RibaModule = {
   services: {},
   init() {
     return this;
-  },
+  }
 };
 
 export default MomentDemoModule;

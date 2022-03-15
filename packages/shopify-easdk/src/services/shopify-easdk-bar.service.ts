@@ -8,7 +8,7 @@ import {
   // Config,
   PaginationConfig,
   ButtonConfig,
-  ButtonsConfig,
+  ButtonsConfig
   // ButtonCallback,
   // Modal,
   // ModalWrapper,
@@ -69,7 +69,7 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
    * @memberof BarWrapperService
    */
   public loading: LoadingStateWrapper = {
-    on: false,
+    on: false
   };
 
   /**
@@ -107,7 +107,7 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
       breadcrumb: this.breadcrumb,
       title: this.title,
       icon: this.icon,
-      pagination: this.pagination,
+      pagination: this.pagination
     });
     return this.shopifyApp.Bar.initialize(config);
   }
@@ -139,7 +139,7 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
     if (this.loading.on !== true) {
       const fallback = this.useFallback(forceFallback);
       this.loading = {
-        on: true,
+        on: true
       };
       console.debug("loadingOn", fallback, this.loading);
       this.event.trigger("bar:loading", fallback, this.loading);
@@ -155,7 +155,7 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
   public loadingOff(): void {
     if (this.loading.on !== false) {
       this.loading = {
-        on: false,
+        on: false
       };
       const fallback = this.useFallback(false);
       console.debug("loadingOff", fallback);

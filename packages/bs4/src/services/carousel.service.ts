@@ -17,7 +17,7 @@ import {
   getTransitionDurationFromElement,
   emulateTransitionEnd,
   isVisible,
-  triggerTransitionEnd,
+  triggerTransitionEnd
 } from "../helper/utils";
 import { on, one, off, trigger } from "../helper/dom/event-handler";
 import { findOne, find } from "../helper/dom/selector-engine";
@@ -43,7 +43,7 @@ const Default: CarouselOption = {
   slide: false,
   pause: "hover",
   wrap: true,
-  touch: true,
+  touch: true
 };
 
 const DefaultType = {
@@ -52,14 +52,14 @@ const DefaultType = {
   slide: "(boolean|string)",
   pause: "(string|boolean)",
   wrap: "boolean",
-  touch: "boolean",
+  touch: "boolean"
 };
 
 const Direction = {
   NEXT: "next" as CarouselDirection,
   PREV: "prev" as CarouselDirection,
   LEFT: "left" as CarouselDirection,
-  RIGHT: "right" as CarouselDirection,
+  RIGHT: "right" as CarouselDirection
 };
 
 const Event = {
@@ -75,7 +75,7 @@ const Event = {
   POINTERUP: `pointerup${EVENT_KEY}`,
   DRAG_START: `dragstart${EVENT_KEY}`,
   LOAD_DATA_API: `load${EVENT_KEY}${DATA_API_KEY}`,
-  CLICK_DATA_API: `click${EVENT_KEY}${DATA_API_KEY}`,
+  CLICK_DATA_API: `click${EVENT_KEY}${DATA_API_KEY}`
 };
 
 const ClassName = {
@@ -87,7 +87,7 @@ const ClassName = {
   NEXT: "carousel-item-next" as CarouselClassName,
   PREV: "carousel-item-prev" as CarouselClassName,
   ITEM: "carousel-item" as CarouselClassName,
-  POINTER_EVENT: "pointer-event" as CarouselClassName,
+  POINTER_EVENT: "pointer-event" as CarouselClassName
 };
 
 const Selector = {
@@ -96,12 +96,12 @@ const Selector = {
   ITEM: ".carousel-item",
   ITEM_IMG: ".carousel-item img",
   NEXT_PREV: ".carousel-item-next, .carousel-item-prev",
-  INDICATORS: ".carousel-indicators",
+  INDICATORS: ".carousel-indicators"
 };
 
 const PointerType = {
   TOUCH: "touch",
-  PEN: "pen",
+  PEN: "pen"
 };
 
 /**
@@ -246,7 +246,7 @@ class CarouselService {
   private getConfig(config: CarouselOption) {
     config = {
       ...Default,
-      ...config,
+      ...config
     } as CarouselOption;
     typeCheckConfig(NAME, config, DefaultType);
     return config;
@@ -474,7 +474,7 @@ class CarouselService {
       relatedTarget,
       direction: eventDirectionName,
       from: fromIndex,
-      to: targetIndex,
+      to: targetIndex
     });
   }
 
@@ -587,7 +587,7 @@ class CarouselService {
             relatedTarget: nextElement,
             direction: eventDirectionName,
             from: activeElementIndex,
-            to: nextElementIndex,
+            to: nextElementIndex
           });
         }, 0);
       });
@@ -602,7 +602,7 @@ class CarouselService {
         relatedTarget: nextElement,
         direction: eventDirectionName,
         from: activeElementIndex,
-        to: nextElementIndex,
+        to: nextElementIndex
       });
     }
 

@@ -3,7 +3,7 @@ import {
   BindableElement,
   ClassOfBinder,
   ClassOfComponent,
-  DataElement,
+  DataElement
 } from "./types/index.js";
 import { parseNode } from "./parse-node";
 import { parseDeclaration } from "./parse-declaration";

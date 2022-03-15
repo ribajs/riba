@@ -9,5 +9,5 @@ export const replaceFirstFormatter: Formatter = {
   name: "replaceFirst",
   read(str: string, value: string, replaceValue: string) {
     return str.replace(value, replaceValue);
-  },
+  }
 };

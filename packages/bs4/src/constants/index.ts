@@ -7,22 +7,22 @@ export const TOGGLE_BUTTON = {
     toggle: "toggle",
     toggled: "toggled",
     init: "init",
-    state: "state",
-  },
+    state: "state"
+  }
 };
 
 export const TOGGLE_ATTRIBUTE = {
   elEventNames: {
     removed: "removed",
-    added: "added",
-  },
+    added: "added"
+  }
 };
 
 export const TOGGLE_CLASS = {
   elEventNames: {
     removed: "removed",
-    added: "added",
-  },
+    added: "added"
+  }
 };
 
 export const URI_ATTRS = [
@@ -33,7 +33,7 @@ export const URI_ATTRS = [
   "longdesc",
   "poster",
   "src",
-  "xlink:href",
+  "xlink:href"
 ];
 
 export const ARIA_ATTRIBUTE_PATTERN = /^aria-[\w-]*$/i;
@@ -85,7 +85,7 @@ export const DEFAULT_ALLOWLIST = {
   sup: [] as string[],
   strong: [] as string[],
   u: [] as string[],
-  ul: [] as string[],
+  ul: [] as string[]
 };
 
 export const MILLISECONDS_MULTIPLIER = 1000;

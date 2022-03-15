@@ -14,7 +14,7 @@ export const promptInput = async (
     message: "$",
     type: "string",
     required: true,
-    default: defaultName,
+    default: defaultName
   };
 
   return new Promise<string>((resolve, reject) => {
@@ -43,7 +43,7 @@ export const promptYesNo = async (
     validator: /y[es]*|n[o]?/,
     type: "string",
     warning: "Must respond yes or no",
-    default: "no",
+    default: "no"
   };
   return new Promise<boolean>((resolve, reject) => {
     prompt.start();

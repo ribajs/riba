@@ -22,8 +22,8 @@ export class Bs4NotificationsExampleComponent extends Component {
       title: "Title example",
       contextualClass: "warning",
       channel: "toast-right",
-      delay: 10000,
-    },
+      delay: 10000
+    }
   };
 
   constructor() {
@@ -43,7 +43,7 @@ export class Bs4NotificationsExampleComponent extends Component {
     const toast: Toast = new Toast({
       ...this.scope.fromComponent,
       $event: event,
-      $context: this.scope,
+      $context: this.scope
     });
     notificationDispatcher.trigger("show-notification", toast);
   }
@@ -55,7 +55,7 @@ export class Bs4NotificationsExampleComponent extends Component {
     const modal: Modal = new Modal({
       ...this.scope.fromComponent,
       $event: event,
-      $context: this.scope,
+      $context: this.scope
     });
     notificationDispatcher.trigger("show-notification", modal);
   }

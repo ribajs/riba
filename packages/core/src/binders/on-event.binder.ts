@@ -29,7 +29,7 @@ export class OnEventBinder extends Binder<eventHandlerFunction, HTMLElement> {
 
     // see https://github.com/microsoft/TypeScript/issues/32912
     const options: AddEventListenerOptions & EventListenerOptions = {
-      passive: this.el.dataset.passive === "true", // data-passive="true"
+      passive: this.el.dataset.passive === "true" // data-passive="true"
     };
     if (this.handler) {
       el.removeEventListener(eventName, this.handler, options);

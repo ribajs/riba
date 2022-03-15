@@ -10,13 +10,13 @@ import {
   DEFAULT_WEB_PLAYER_SCRIPT_ID,
   LOADING_CLASS,
   READY_CLASS,
-  HAS_PLAYED_CLASS,
+  HAS_PLAYED_CLASS
 } from "../../constants.js";
 
 import type {
   PodloveWebPlayerComponentScope,
   PodloveWebPlayerStore,
-  PodloveWebPlayerStoreAction,
+  PodloveWebPlayerStoreAction
 } from "../../types/index.js";
 
 export class PodloveWebPlayerComponent extends Component {
@@ -38,7 +38,7 @@ export class PodloveWebPlayerComponent extends Component {
     episode: undefined,
     config: undefined,
     episodeUrl: "",
-    configUrl: "",
+    configUrl: ""
   };
 
   constructor() {

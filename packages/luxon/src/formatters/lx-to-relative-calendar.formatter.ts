@@ -14,5 +14,5 @@ export const LuxonToRelativeCalendarFormatter: Formatter = {
    */
   read(target: DateTime, options?: ToRelativeCalendarOptions): string | null {
     return target.toRelativeCalendar(options);
-  },
+  }
 };

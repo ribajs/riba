@@ -15,5 +15,5 @@ export const ToISOStringFormatter: Formatter = {
    */
   read(target: moment.MomentInput, keepOffset = false) {
     return moment(target).toISOString(keepOffset);
-  },
+  }
 };

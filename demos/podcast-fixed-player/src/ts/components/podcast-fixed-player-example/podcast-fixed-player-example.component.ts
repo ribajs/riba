@@ -17,7 +17,7 @@ export class PodcastFixedPlayerExampleComponent extends Component {
   public scope = {
     episode03,
     episode01,
-    config,
+    config
   };
 
   constructor() {

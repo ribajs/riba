@@ -46,7 +46,7 @@ export const ACCESS_SCOPES = [
   "read_translations",
   "write_translations",
   "read_locales",
-  "write_locales",
+  "write_locales"
 ];
 
 export const ACCESS_SCOPES_SHOPIFY_PLUS = ["read_users", "write_users"];

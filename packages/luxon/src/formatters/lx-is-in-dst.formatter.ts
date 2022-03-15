@@ -13,5 +13,5 @@ export const LuxonIsInDSTFormatter: Formatter = {
    */
   read(target: DateTime): boolean {
     return target.isInDST;
-  },
+  }
 };

@@ -14,5 +14,5 @@ export const LuxonToObjectFormatter: Formatter = {
    */
   read(target: DateTime, includeConfig?: boolean): DateObject {
     return target.toObject({ includeConfig });
-  },
+  }
 };

@@ -5,5 +5,5 @@ import { Formatter } from "../../types/formatter.js";
  */
 export const isArrayFormatter: Formatter = {
   name: "is-array",
-  read: Array.isArray,
+  read: Array.isArray
 };

@@ -29,7 +29,7 @@ export class PriorityQueue {
   public enqueue(run: any, options: any) {
     options = Object.assign(
       {
-        priority: 0,
+        priority: 0
       },
       options
     );

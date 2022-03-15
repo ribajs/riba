@@ -14,5 +14,5 @@ export const LuxonIntervalContainsFormatter: Formatter = {
    */
   read(target: Interval, dateTime: DateTime): boolean {
     return target.contains(dateTime);
-  },
+  }
 };

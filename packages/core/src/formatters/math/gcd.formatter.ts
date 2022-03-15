@@ -8,5 +8,5 @@ const _gcd = (a: number, b: number): number => {
 
 export const gcdFormatter = {
   name: "gcd",
-  read: _gcd,
+  read: _gcd
 };

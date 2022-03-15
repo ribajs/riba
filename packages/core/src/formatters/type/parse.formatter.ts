@@ -19,5 +19,5 @@ export const parseFormatter = {
       return jsonString;
     }
     return null;
-  },
+  }
 };

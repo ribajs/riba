@@ -3,11 +3,11 @@ import { Bs5Service } from "../services/bs5.service.js";
 import {
   parseJsonString,
   jsonStringify,
-  camelCase,
+  camelCase
 } from "@ribajs/utils/src/index.js";
 
 export abstract class Bs5AbstractBreakpointBinder<
-  E extends HTMLElement = HTMLElement
+  E extends HTMLElement = HTMLElement,
 > extends Binder<string, E> {
   protected abstract defaultAttributeBinder: Binder<
     any,

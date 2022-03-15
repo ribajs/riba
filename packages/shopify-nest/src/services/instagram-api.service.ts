@@ -1,7 +1,7 @@
 import { HttpService } from "@ribajs/core/src/index.js";
 import {
   InstagramApiService as _InstagramApiService,
-  InstagramData,
+  InstagramData
 } from "@ribajs/shopify-tda";
 import Debug from "debug";
 import { InstagramAccounts } from "./../interfaces/instagram-api/accounts";

@@ -4,7 +4,7 @@ import { clone, camelCase } from "@ribajs/utils/src/type.js";
 import { throttle, debounce } from "@ribajs/utils/src/control";
 import {
   TemplateFunction,
-  TemplatesComponent,
+  TemplatesComponent
 } from "@ribajs/core/src/index.js";
 
 import {
@@ -14,7 +14,7 @@ import {
   AutoscrollOptions,
   ScrollPosition,
   ScrollEventsService,
-  getScrollPosition,
+  getScrollPosition
 } from "@ribajs/extras";
 
 import templateSlides from "./bs4-slideshow-slides.component.html";
@@ -268,7 +268,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       "xl-sticky",
       "xl-indicators",
       "xl-indicators-position",
-      "xl-pause",
+      "xl-pause"
     ];
   }
 
@@ -277,26 +277,26 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   protected templateAttributes = [
     {
       name: "class",
-      required: false,
+      required: false
     },
     {
       name: "handle",
-      required: false,
+      required: false
     },
     {
       name: "type",
-      required: true,
+      required: true
     },
     {
       name: "active",
       type: "boolean",
-      required: false,
+      required: false
     },
     {
       name: "index",
       type: "number",
-      required: false,
-    },
+      required: false
+    }
   ];
 
   protected autobind = true;
@@ -360,24 +360,24 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
     // Responsive options
     xs: {
-      minWidth: 0,
+      minWidth: 0
     },
     sm: {
-      minWidth: 576,
+      minWidth: 576
     },
     md: {
-      minWidth: 768,
+      minWidth: 768
     },
     lg: {
-      minWidth: 992,
+      minWidth: 992
     },
     xl: {
-      minWidth: 1200,
+      minWidth: 1200
     },
 
     // Classes
     controlsPositionClass: "",
-    indicatorsPositionClass: "",
+    indicatorsPositionClass: ""
   };
 
   constructor() {
@@ -449,7 +449,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
         this.slideshowInner.scroll({
           behavior: "smooth",
           left,
-          top,
+          top
         });
       } else {
         if (this.scope.angle === "vertical") {
@@ -787,10 +787,10 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     );
 
     this.slideshowInner.addEventListener("scroll", this.onScroll, {
-      passive: true,
+      passive: true
     });
     this.slideshowInner.addEventListener("scrollended", this.onScrollend, {
-      passive: true,
+      passive: true
     });
 
     this.addEventListener("mouseenter", this.onMouseIn, { passive: true });
@@ -887,7 +887,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       const autoscrollOptions: AutoscrollOptions = {
         velocity: this.scope.autoplayVelocity,
         angle: this.scope.angle,
-        pauseOnHover: this.scope.pauseOnHover,
+        pauseOnHover: this.scope.pauseOnHover
       };
       this.continuousAutoplayService = new Autoscroll(
         this.slideshowInner,
@@ -1010,8 +1010,8 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
         position: {
           ...slideElement.getBoundingClientRect(),
           centerY: 0,
-          centerX: 0,
-        },
+          centerX: 0
+        }
       };
       this.scope.items.push(attributes);
     });
@@ -1171,7 +1171,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
         // 0 if element is in the middle / center
         centerY: rect.y + rect.height / 2 - mainBoundingClient.height / 2,
         // 0 if element is in the middle / center
-        centerX: rect.x + rect.width / 2 - mainBoundingClient.width / 2,
+        centerX: rect.x + rect.width / 2 - mainBoundingClient.width / 2
       };
     }
   }

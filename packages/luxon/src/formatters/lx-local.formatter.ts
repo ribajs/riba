@@ -24,8 +24,8 @@ export const LuxonLocalFormatter: Formatter = {
     hour,
     minute,
     second,
-    millisecond,
+    millisecond
   ]: number[]): DateTime {
     return DateTime.local(year, month, day, hour, minute, second, millisecond);
-  },
+  }
 };

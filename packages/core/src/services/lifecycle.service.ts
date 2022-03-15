@@ -4,7 +4,7 @@ import type { State } from "@ribajs/history/src/index.js";
 import type {
   ComponentLifecycleEventData,
   ComponentLifecycleObject,
-  ComponentLifecycleStates,
+  ComponentLifecycleStates
 } from "../types/index.js";
 
 /**
@@ -38,7 +38,7 @@ export class LifecycleService {
 
   protected getEmpty(): ComponentLifecycleObject {
     return {
-      components: [],
+      components: []
     };
   }
 
@@ -116,7 +116,7 @@ export class LifecycleService {
 
     return {
       connected,
-      bound,
+      bound
     };
   }
 
@@ -130,7 +130,7 @@ export class LifecycleService {
 
       states[tagName] = {
         state,
-        components: this.components[tagName].components,
+        components: this.components[tagName].components
       };
     }
 
@@ -152,7 +152,7 @@ export class LifecycleService {
     }
     return {
       states,
-      allBound,
+      allBound
     };
   }
 

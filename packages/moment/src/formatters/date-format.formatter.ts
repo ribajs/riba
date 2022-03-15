@@ -19,5 +19,5 @@ export const DateFormatFormatter: Formatter = {
    */
   read(target: moment.MomentInput, formatStr: string) {
     return moment(target).format(formatStr);
-  },
+  }
 };

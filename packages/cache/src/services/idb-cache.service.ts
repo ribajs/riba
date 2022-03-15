@@ -9,11 +9,11 @@ const idbStorage: Storage = {
   del,
   clear: () => {
     return clear() as any;
-  },
+  }
 };
 const idbCache = createCache({
   // Use default memory storage on ssr
-  customStorage: (window as any).ssr ? undefined : idbStorage,
+  customStorage: (window as any).ssr ? undefined : idbStorage
 });
 
 export { idbCache };

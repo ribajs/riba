@@ -17,5 +17,5 @@ export const LuxonDurationMapUnitsFormatter: Formatter = {
     fn: (x: number, u: keyof DurationObjectUnits) => number
   ): Duration {
     return target.mapUnits(fn);
-  },
+  }
 };

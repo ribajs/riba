@@ -15,5 +15,5 @@ export const LuxonDiffNowFormatter: Formatter = {
    */
   read(target: DateTime, unit?: DurationUnits, opts?: DiffOptions): Duration {
     return target.diffNow(unit, opts);
-  },
+  }
 };

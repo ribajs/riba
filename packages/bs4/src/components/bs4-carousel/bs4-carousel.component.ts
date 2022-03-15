@@ -34,7 +34,7 @@ export class Bs4CarouselComponent extends Component {
       "wrap",
       "touch",
       "ride",
-      "fade",
+      "fade"
     ];
   }
 
@@ -59,7 +59,7 @@ export class Bs4CarouselComponent extends Component {
     pause: this.pause,
     cycle: this.cycle,
     to: this.to,
-    dispose: this.dispose,
+    dispose: this.dispose
   };
 
   protected autobind = true;
@@ -82,7 +82,7 @@ export class Bs4CarouselComponent extends Component {
       slide: this.scope.slide,
       pause: this.scope.pauseOn,
       wrap: this.scope.wrap,
-      touch: this.scope.touch,
+      touch: this.scope.touch
     });
     if (this.scope.fade) {
       this.classList.add("carousel-fade");

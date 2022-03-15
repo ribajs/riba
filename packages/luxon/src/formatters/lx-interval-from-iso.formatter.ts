@@ -14,5 +14,5 @@ export const LuxonIntervalFromISOFormatter: Formatter = {
    */
   read(text: string, opts?: DateTimeOptions): Interval {
     return Interval.fromISO(text, opts);
-  },
+  }
 };

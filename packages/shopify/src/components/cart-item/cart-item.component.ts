@@ -64,7 +64,7 @@ export class ShopifyCartItemComponent extends Component {
       "variant-title",
       "variant-options",
       "variant-id",
-      "key",
+      "key"
     ];
   }
 
@@ -85,7 +85,7 @@ export class ShopifyCartItemComponent extends Component {
       increase: this.increase,
       decrease: this.decrease,
       onInputQuantityChanged: this.onInputQuantityChanged,
-      pending: false,
+      pending: false
     };
   }
 

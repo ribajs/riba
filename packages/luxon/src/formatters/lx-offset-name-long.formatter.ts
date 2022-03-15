@@ -13,5 +13,5 @@ export const LuxonOffsetNameLongFormatter: Formatter = {
    */
   read(target: DateTime): string {
     return target.offsetNameLong;
-  },
+  }
 };

@@ -14,5 +14,5 @@ export const LuxonIntervalDivideEquallyFormatter: Formatter = {
    */
   read(target: Interval, numberOfParts: number): Interval[] {
     return target.divideEqually(numberOfParts);
-  },
+  }
 };

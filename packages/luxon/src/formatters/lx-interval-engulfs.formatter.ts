@@ -14,5 +14,5 @@ export const LuxonIntervalEngulfsFormatter: Formatter = {
    */
   read(target: Interval, other: Interval): boolean {
     return target.engulfs(other);
-  },
+  }
 };

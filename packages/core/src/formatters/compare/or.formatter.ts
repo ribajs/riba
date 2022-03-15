@@ -6,5 +6,5 @@ export const orFormatter: Formatter = {
   name: "or",
   read(a: boolean, b: boolean) {
     return a || b;
-  },
+  }
 };

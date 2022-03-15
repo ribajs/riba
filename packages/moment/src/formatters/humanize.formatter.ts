@@ -18,5 +18,5 @@ export const HumanizeFormatter: Formatter = {
    */
   read(duration: Duration, withSuffix = false, thresholds?: any) {
     return duration.humanize(withSuffix, thresholds);
-  },
+  }
 };

@@ -16,5 +16,5 @@ export const DaysFormatter: Formatter = {
    */
   read(target: Moment | Duration) {
     return target.days();
-  },
+  }
 };

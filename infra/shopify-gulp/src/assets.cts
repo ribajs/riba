@@ -2,7 +2,7 @@ import gulp from "gulp";
 import gutil from "gulp-util";
 import {
   ThemeConfigByEnv,
-  ExternalScriptsConfigByEnv,
+  ExternalScriptsConfigByEnv
 } from "./types/index.cjs";
 import { config, getYamlConfig } from "./includes/config.cjs";
 import { list, updateOrCreate } from "./includes/assets.cjs";

@@ -9,5 +9,5 @@ export const stripHtmlFormatter: Formatter = {
   name: "strip-html",
   read(html: string) {
     return stripHtml(html);
-  },
+  }
 };

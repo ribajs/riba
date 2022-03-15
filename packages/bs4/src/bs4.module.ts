@@ -17,5 +17,5 @@ export const bs4Module: RibaModule<Bs4ModuleOptions> = {
   init(options: Bs4ModuleOptions = {}) {
     services.Bs4Service.setSingleton(options);
     return this;
-  },
+  }
 };

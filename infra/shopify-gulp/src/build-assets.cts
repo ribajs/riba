@@ -14,7 +14,7 @@ import { config } from "./includes/config.cjs";
 import {
   errorHandler,
   createEventCache,
-  processCache,
+  processCache
 } from "./includes/utilities.cjs";
 import messages from "./includes/messages.cjs";
 
@@ -25,7 +25,7 @@ const assetsPaths = [
   config.src.snippets,
   config.src.locales,
   config.src.config,
-  config.src.layout,
+  config.src.layout
 ];
 
 const assetsPathsRibaShopify = [
@@ -35,7 +35,7 @@ const assetsPathsRibaShopify = [
   config.ribaShopify.src.snippets,
   config.ribaShopify.src.locales,
   config.ribaShopify.src.config,
-  config.ribaShopify.src.layout,
+  config.ribaShopify.src.layout
 ];
 
 const assetsPathsRibaShopifyTda: string[] = [];
@@ -67,7 +67,7 @@ const processAssetsTheme = (files: string[]) => {
     .pipe(
       size({
         showFiles: true,
-        pretty: true,
+        pretty: true
       })
     )
     .pipe(gulp.dest(config.dist.root));
@@ -81,7 +81,7 @@ const processAssetsRibaShopify = (files: string[]) => {
     .pipe(
       size({
         showFiles: true,
-        pretty: true,
+        pretty: true
       })
     )
     .pipe(gulp.dest(config.dist.root));
@@ -95,7 +95,7 @@ const processAssetsRibaShopifyTda = (files: string[]) => {
     .pipe(
       size({
         showFiles: true,
-        pretty: true,
+        pretty: true
       })
     )
     .pipe(gulp.dest(config.dist.root));
@@ -125,7 +125,7 @@ async function removeAssets(files: string[]) {
     .pipe(
       size({
         showFiles: true,
-        pretty: true,
+        pretty: true
       })
     );
 }
@@ -174,7 +174,7 @@ gulp.task("watch:assets", () => {
   return chokidar
     .watch(assetsPaths, {
       ignored: /(^|[/\\])\../,
-      ignoreInitial: true,
+      ignoreInitial: true
     })
     .on("all", (event, path) => {
       messages.logFileEvent(event, path);
@@ -189,7 +189,7 @@ gulp.task("watch:assets:riba-shopify", () => {
   return chokidar
     .watch(assetsPathsRibaShopify, {
       ignored: /(^|[/\\])\../,
-      ignoreInitial: true,
+      ignoreInitial: true
     })
     .on("all", (event, path) => {
       messages.logFileEvent(event, path);
@@ -204,7 +204,7 @@ gulp.task("watch:assets:riba-shopify-tda", () => {
   return chokidar
     .watch(assetsPathsRibaShopifyTda, {
       ignored: /(^|[/\\])\../,
-      ignoreInitial: true,
+      ignoreInitial: true
     })
     .on("all", (event, path) => {
       messages.logFileEvent(event, path);

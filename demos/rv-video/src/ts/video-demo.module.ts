@@ -10,7 +10,7 @@ export const VideoDemoModule: RibaModule = {
   services: {},
   init() {
     return this;
-  },
+  }
 };
 
 export default VideoDemoModule;

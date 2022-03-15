@@ -11,7 +11,7 @@ import {
   generateEnvYoungestThemeConfig,
   getStoreThemes,
   print as printTheme,
-  remove as deleteTheme,
+  remove as deleteTheme
 } from "./includes/theme.cjs";
 import { uploadFile, getDownloadFileUrl } from "./includes/upload.cjs";
 import { getAsset, getShop } from "./includes/shopify-api.cjs";
@@ -22,7 +22,7 @@ import {
   config,
   getYamlConfig,
   getReleaseZipFilename,
-  getReleaseName,
+  getReleaseName
 } from "./includes/config.cjs";
 import { ThemeConfigByEnv } from "./types/index.cjs";
 import "./theme.cjs"; // import theme tasks

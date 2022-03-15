@@ -61,7 +61,7 @@ deploy = function async(cmd, files, env) {
       {
         "allow-live": true,
         env: env,
-        files: files,
+        files: files
       },
       { cwd: config.dist.root }
     )
@@ -118,7 +118,7 @@ gulp.task("watch:dist", async () => {
   const watcher = chokidar.watch(["./"], {
     cwd: config.dist.root,
     ignored: [/(^|[/\\])\../, "config.yml"], // ignore dotfiles
-    ignoreInitial: true,
+    ignoreInitial: true
   });
 
   return watcher.on("all", (event, path) => {

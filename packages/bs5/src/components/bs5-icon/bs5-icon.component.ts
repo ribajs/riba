@@ -2,7 +2,7 @@ import {
   BasicComponent,
   TemplateFunction,
   HttpService,
-  HttpServiceResponse,
+  HttpServiceResponse
 } from "@ribajs/core/src/index.js";
 import { getLocation } from "@ribajs/utils/src/index.js";
 import { BaseCache } from "@ribajs/cache";

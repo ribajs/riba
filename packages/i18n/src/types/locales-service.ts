@@ -149,7 +149,7 @@ export abstract class LocalesService {
     for (const langcode of Object.keys(locals)) {
       langcodes.push({
         code: langcode,
-        active: langcode === activeCode,
+        active: langcode === activeCode
       });
     }
     return langcodes;

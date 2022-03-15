@@ -8,5 +8,5 @@ export const debugFormatter: Formatter = {
   ) {
     console[level](toPrint);
     return toPrint;
-  },
+  }
 };

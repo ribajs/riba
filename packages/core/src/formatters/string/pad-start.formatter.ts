@@ -17,5 +17,5 @@ export const padStartFormatter: Formatter = {
    */
   read(target: string, length = 2, padString = "0") {
     return target.padStart(length, padString);
-  },
+  }
 };

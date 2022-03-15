@@ -1,7 +1,7 @@
 import {
   Component,
   TemplateFunction,
-  HttpService,
+  HttpService
 } from "@ribajs/core/src/index.js";
 import Debug from "debug";
 import pugTemplate from "./plans.component.pug";
@@ -29,7 +29,7 @@ export class ShopifyNestPlansComponent extends Component {
     plans: [],
     active: undefined,
     hasActive: false,
-    activate: this.activate,
+    activate: this.activate
   };
 
   constructor() {

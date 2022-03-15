@@ -5,7 +5,7 @@ import type {
   FormatterObservers,
   eventHandlerFunction,
   ObserverSyncCallback,
-  Bindable,
+  Bindable
 } from "./types/index.js";
 import { FORMATTER_ARGS, FORMATTER_SPLIT } from "./constants/formatter.js";
 import type { View } from "./view.js";
@@ -14,7 +14,7 @@ import { getInputValue } from "@ribajs/utils/src/dom.js";
 /**
  * A single binding between a model attribute and a DOM element.
  */
-export abstract class Binder<T = any, E = HTMLUnknownElement>
+export abstract class Binder<T = any, E = HTMLUnknownElement,>
   implements Bindable<E>
 {
   /**

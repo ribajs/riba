@@ -2,13 +2,13 @@ import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import { EventDispatcher } from "@ribajs/events";
 import {
   getViewportDimensions,
-  hasChildNodesTrim,
+  hasChildNodesTrim
 } from "@ribajs/utils/src/dom.js";
 import { TOGGLE_BUTTON } from "../../constants";
 import { debounce } from "@ribajs/utils/src/control";
 import {
   Bs4SidebarComponentScope as Scope,
-  Bs4SidebarComponentState as State,
+  Bs4SidebarComponentState as State
 } from "../../interfaces";
 
 export class Bs4SidebarComponent extends Component {
@@ -29,7 +29,7 @@ export class Bs4SidebarComponent extends Component {
       "force-hide-on-location-pathnames",
       "force-show-on-location-pathnames",
       "overlay-on-slimmer-than",
-      "watch-new-page-ready-event",
+      "watch-new-page-ready-event"
     ];
   }
 
@@ -57,7 +57,7 @@ export class Bs4SidebarComponent extends Component {
     // template methods
     hide: this.hide,
     show: this.show,
-    toggle: this.toggle,
+    toggle: this.toggle
   };
 
   constructor() {
@@ -109,7 +109,7 @@ export class Bs4SidebarComponent extends Component {
     this.init(Bs4SidebarComponent.observedAttributes);
     this.computedStyle = window.getComputedStyle(this);
     window.addEventListener("resize", this.onEnvironmentChanges, {
-      passive: true,
+      passive: true
     });
     // initial
     this.onEnvironmentChanges();

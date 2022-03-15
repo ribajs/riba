@@ -8,5 +8,5 @@ export const stripFormatter: Formatter = {
   name: "strip",
   read(str: string) {
     return str.trim();
-  },
+  }
 };

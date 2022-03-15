@@ -3,7 +3,7 @@ import {
   ShopifyNestApiExplorerComponent,
   APIParam,
   APIListItem,
-  Scope,
+  Scope
 } from "../api-explorer/api-explorer.component.js";
 
 import { ShopifyApiThemesService } from "../../services/shopify-api-theme.service.js";
@@ -23,7 +23,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       label: "Freestyle",
       url: "/shopify/api/themes",
       short_desc: "components.apiExplorer.freestyle.short_desc",
-      freestyle: true,
+      freestyle: true
     },
     /**
      * Get a list of all themes
@@ -32,7 +32,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       label: "/shopify/api/themes",
       url: "/shopify/api/themes",
       short_desc: "components.apiExplorer.shopify.themes.all.short_desc",
-      roles: ["shopify-staff-member"],
+      roles: ["shopify-staff-member"]
     },
     /**
      * Get single active theme
@@ -41,7 +41,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       label: "/shopify/api/themes/active",
       url: "/shopify/api/themes/active",
       short_desc: "components.apiExplorer.shopify.themes.active.short_desc",
-      roles: ["shopify-staff-member"],
+      roles: ["shopify-staff-member"]
     },
     /**
      * Get informations about a theme by id
@@ -50,7 +50,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       label: "/shopify/api/themes/:theme_id",
       url: "/shopify/api/themes/:theme_id",
       short_desc: "components.apiExplorer.shopify.themes.theme_id.short_desc",
-      roles: ["shopify-staff-member"],
+      roles: ["shopify-staff-member"]
     },
     /**
      * Get a list of all assets files
@@ -61,7 +61,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       url: "/shopify/api/themes/:theme_id/assets",
       short_desc:
         "components.apiExplorer.shopify.themes.assets.list.short_desc",
-      roles: ["shopify-staff-member"],
+      roles: ["shopify-staff-member"]
     },
     /**
      * Get theme asset file by filename
@@ -72,7 +72,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       url: "/shopify/api/themes/:theme_id/assets/:assets_filename",
       short_desc:
         "components.apiExplorer.shopify.themes.assets.assets_filename.short_desc",
-      roles: [],
+      roles: []
     },
     /**
      * Get theme templates file by filename
@@ -84,7 +84,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       url: "/shopify/api/themes/:theme_id/assets/:templates_filename",
       short_desc:
         "components.apiExplorer.shopify.themes.assets.templates_filename.short_desc",
-      roles: [],
+      roles: []
     },
     /**
      * Get theme snippets file by filename
@@ -95,7 +95,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       url: "/shopify/api/themes/:theme_id/assets/:snippets_filename",
       short_desc:
         "components.apiExplorer.shopify.themes.assets.snippets_filename.short_desc",
-      roles: [],
+      roles: []
     },
     /**
      * Get theme config file by filename
@@ -106,7 +106,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       url: "/shopify/api/themes/:theme_id/assets/:config_filename",
       short_desc:
         "components.apiExplorer.shopify.themes.assets.config_filename.short_desc",
-      roles: ["shopify-staff-member"],
+      roles: ["shopify-staff-member"]
     },
     /**
      * Get theme layout file by filename
@@ -117,7 +117,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       url: "/shopify/api/themes/:theme_id/assets/:layout_filename",
       short_desc:
         "components.apiExplorer.shopify.themes.assets.layout_filename.short_desc",
-      roles: ["shopify-staff-member"],
+      roles: ["shopify-staff-member"]
     },
     /**
      * Get theme locales file by filename
@@ -128,7 +128,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       url: "/shopify/api/themes/:theme_id/assets/:locales_filename",
       short_desc:
         "components.apiExplorer.shopify.themes.assets.locales_filename.short_desc",
-      roles: ["shopify-staff-member"],
+      roles: ["shopify-staff-member"]
     },
     /**
      * Get theme sections file by filename
@@ -139,7 +139,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       url: "/shopify/api/themes/:theme_id/assets/:sections_filename",
       short_desc:
         "components.apiExplorer.shopify.themes.assets.sections_filename.short_desc",
-      roles: ["shopify-staff-member"],
+      roles: ["shopify-staff-member"]
     },
     /**
      * Get all language translations for a theme
@@ -149,7 +149,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       url: "/shopify/api/themes/:theme_id/locales",
       short_desc:
         "components.apiExplorer.shopify.themes.locales.all.short_desc",
-      roles: [],
+      roles: []
     },
     /**
      * Get a list of locale asset files for a theme
@@ -159,7 +159,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       url: "/shopify/api/themes/:theme_id/locales/list",
       short_desc:
         "components.apiExplorer.shopify.themes.locales.list.short_desc",
-      roles: [],
+      roles: []
     },
     /**
      * Get locales json file
@@ -169,7 +169,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       url: "/shopify/api/themes/:theme_id/locales/*.json",
       short_desc:
         "components.apiExplorer.shopify.themes.locales.json.short_desc",
-      roles: [],
+      roles: []
     },
     /**
      * Get locals of sections file
@@ -179,7 +179,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       url: "/shopify/api/themes/:theme_id/locales/*.liquid",
       short_desc:
         "components.apiExplorer.shopify.themes.locales.liquid.short_desc",
-      roles: [],
+      roles: []
     },
     /**
      * Get all locales or get a subset by iterate into the json e.g. by the language code or deeper
@@ -189,7 +189,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       url: "/shopify/api/themes/:theme_id/locales/:property_path*",
       short_desc:
         "components.apiExplorer.shopify.themes.locales.property_path.short_desc",
-      roles: [],
+      roles: []
     },
     /**
      * Retrieves a list of products directly from shopify.
@@ -199,7 +199,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       label: "/shopify/api/products",
       url: '/shopify/api/products?collection_id=""&created_at_max=""&created_at_min=""&ids=""&page=""&fields=""&limit=0&product_type=""&published_at_max=""&published_at_min=""&since_id=0&title=""&updated_at_max=""&updated_at_min=""&vendor=""',
       short_desc: "components.apiExplorer.shopify.products.short_desc",
-      roles: [],
+      roles: []
     },
     /**
      * Retrieves a count of products directly from shopify.
@@ -209,7 +209,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       label: "/shopify/api/products/count",
       url: '/shopify/api/products/count?collection_id=""&created_at_max=""&created_at_min=""&product_type=""&published_at_max=""&published_at_min=""&updated_at_max=""&updated_at_min=""&vendor=""',
       short_desc: "components.apiExplorer.shopify.products.count.short_desc",
-      roles: [],
+      roles: []
     },
     /**
      * Retrieves a single product directly from shopify.
@@ -220,7 +220,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       url: "/shopify/api/products/:product_id",
       short_desc:
         "components.apiExplorer.shopify.products.product_id.short_desc",
-      roles: [],
+      roles: []
     },
 
     /**
@@ -230,7 +230,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       label: "/shopify/api/pages",
       url: '/shopify/api/pages?created_at_max=""&created_at_min=""&page=""&fields=""&handle=""&limit=0&published_at_max=""&published_at_min=""&since_id=0&title=""&updated_at_max=""&updated_at_min=""',
       short_desc: "components.apiExplorer.shopify.pages.short_desc",
-      roles: [],
+      roles: []
     },
     /**
      * Retrieves a count of pages directly from shopify.
@@ -239,7 +239,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       label: "/shopify/api/pages/count",
       url: '/shopify/api/pages/count?created_at_max=""&created_at_min=""&title=""&published_at_max=""&published_at_min=""&updated_at_max=""&updated_at_min=""',
       short_desc: "components.apiExplorer.shopify.pages.count.short_desc",
-      roles: [],
+      roles: []
     },
     /**
      * Retrieves a single product directly from shopify.
@@ -248,7 +248,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       label: "/shopify/api/pages/:page_id",
       url: "/shopify/api/pages/:page_id",
       short_desc: "components.apiExplorer.shopify.pages.page_id.short_desc",
-      roles: [],
+      roles: []
     },
     /**
      * Retrieves a list of smart collections from shopify.
@@ -258,7 +258,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       url: "/shopify/api/smart-collections",
       short_desc:
         "components.apiExplorer.shopify.pages.smart-collections.short_desc",
-      roles: [],
+      roles: []
     },
     /**
      * Retrieves a count of smart collections directly from shopify.
@@ -268,7 +268,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       url: "/shopify/api/smart-collections/count",
       short_desc:
         "components.apiExplorer.shopify.pages.smart-collections.short_desc",
-      roles: [],
+      roles: []
     },
     /**
      * Retrieves a single smart collection by it's id directly from shopify.
@@ -278,7 +278,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       url: "/shopify/api/smart-collections/:smart-collections_id",
       short_desc:
         "components.apiExplorer.shopify.pages.smart-collections.smart-collections_id.short_desc",
-      roles: [],
+      roles: []
     },
 
     /**
@@ -289,7 +289,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       url: "/shopify/api/custom-collections",
       short_desc:
         "components.apiExplorer.shopify.pages.custom-collections.short_desc",
-      roles: [],
+      roles: []
     },
     /**
      * Retrieves a count of custom collections directly from shopify.
@@ -299,7 +299,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       url: "/shopify/api/custom-collections/count",
       short_desc:
         "components.apiExplorer.shopify.pages.custom-collections.short_desc",
-      roles: [],
+      roles: []
     },
     /**
      * Retrieves a single custom collection by it's id directly from shopify.
@@ -309,8 +309,8 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
       url: "/shopify/api/custom-collections/:custom-collections_id",
       short_desc:
         "components.apiExplorer.shopify.pages.custom-collections.custom-collections_id.short_desc",
-      roles: [],
-    },
+      roles: []
+    }
   ];
 
   public scope: Scope = {
@@ -326,7 +326,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
     selectApi: this.selectApi,
     selectFreestyleApi: this.selectFreestyleApi,
     selectApiParamValue: this.selectApiParamValue,
-    selectApiQueryValue: this.selectApiQueryValue,
+    selectApiQueryValue: this.selectApiQueryValue
   };
 
   static get observedAttributes(): string[] {

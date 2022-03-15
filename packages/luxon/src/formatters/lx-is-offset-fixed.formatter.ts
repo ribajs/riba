@@ -13,5 +13,5 @@ export const LuxonIsOffsetFixedFormatter: Formatter = {
    */
   read(target: DateTime): boolean {
     return target.isOffsetFixed;
-  },
+  }
 };

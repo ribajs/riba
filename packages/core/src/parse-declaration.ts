@@ -30,6 +30,6 @@ export function parseDeclaration(declaration: string): ParsedDeclarations {
 
   return {
     keypath,
-    pipes,
+    pipes
   } as ParsedDeclarations;
 }

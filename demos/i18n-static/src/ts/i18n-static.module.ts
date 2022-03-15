@@ -8,7 +8,7 @@ export const I18nStaticModule: RibaModule = {
   services: {},
   init() {
     return this;
-  },
+  }
 };
 
 export default I18nStaticModule;

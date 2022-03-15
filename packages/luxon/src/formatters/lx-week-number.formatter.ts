@@ -13,5 +13,5 @@ export const LuxonWeekNumberFormatter: Formatter = {
    */
   read(target: DateTime): number {
     return target.weekNumber;
-  },
+  }
 };

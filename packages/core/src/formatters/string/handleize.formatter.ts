@@ -14,5 +14,5 @@ export const handleizeFormatter: Formatter = {
       return "";
     }
     return handleize(str);
-  },
+  }
 };

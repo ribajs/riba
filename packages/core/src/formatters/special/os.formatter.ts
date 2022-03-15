@@ -4,5 +4,5 @@ export const osFormatter = {
   name: "os",
   read() {
     return getOS();
-  },
+  }
 };

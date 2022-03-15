@@ -24,8 +24,8 @@ export const LuxonUTCFormatter: Formatter = {
     hour,
     minute,
     second,
-    millisecond,
+    millisecond
   ]: number[]): DateTime {
     return DateTime.utc(year, month, day, hour, minute, second, millisecond);
-  },
+  }
 };

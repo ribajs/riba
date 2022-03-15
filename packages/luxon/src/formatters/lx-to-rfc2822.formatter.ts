@@ -13,5 +13,5 @@ export const LuxonToRFC2822Formatter: Formatter = {
    */
   read(target: DateTime): string {
     return target.toRFC2822();
-  },
+  }
 };

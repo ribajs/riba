@@ -2,7 +2,7 @@ import {
   isString,
   isObject,
   isDefined,
-  isNumber,
+  isNumber
 } from "@ribajs/utils/src/type.js";
 
 /**
@@ -46,5 +46,5 @@ export const containsFormatter = {
       }
     }
     return false;
-  },
+  }
 };

@@ -2,7 +2,7 @@ import {
   EventDispatcherInstances,
   Events,
   EventCallback,
-  BoundEventCallback,
+  BoundEventCallback
 } from "../types/event-dispatcher.js";
 
 /**
@@ -97,7 +97,7 @@ export class EventDispatcher {
       this.eventsOnce[eventName].push({
         cb: cb.bind(thisContext),
         orgCb: cb,
-        thisContext,
+        thisContext
       });
     } else {
       this.eventsOnce[eventName].push(cb);
@@ -119,7 +119,7 @@ export class EventDispatcher {
       this.events[eventName].push({
         cb: cb.bind(thisContext),
         orgCb: cb,
-        thisContext,
+        thisContext
       });
     } else {
       this.events[eventName].push(cb);

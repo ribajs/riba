@@ -28,7 +28,7 @@ export const config: PodloveWebPlayerConfig = {
       shadeDark: "#807E7C",
       shadeBase: "#807E7C",
       contrast: "#000",
-      alt: "#fff",
+      alt: "#fff"
     },
 
     /**
@@ -50,10 +50,10 @@ export const config: PodloveWebPlayerConfig = {
           "Candara",
           "Arial",
           "Helvetica",
-          "sans-serif",
+          "sans-serif"
         ],
         weight: 900,
-        src: ["./assets/roboto-black.woff2"],
+        src: ["./assets/roboto-black.woff2"]
       },
       regular: {
         name: "FiraSansLight",
@@ -63,10 +63,10 @@ export const config: PodloveWebPlayerConfig = {
           "Candara",
           "Arial",
           "Helvetica",
-          "sans-serif",
+          "sans-serif"
         ],
         weight: 300,
-        src: ["./assets/fira-sans-light.woff2"],
+        src: ["./assets/fira-sans-light.woff2"]
       },
       bold: {
         name: "FiraSansBold",
@@ -76,12 +76,12 @@ export const config: PodloveWebPlayerConfig = {
           "Candara",
           "Arial",
           "Helvetica",
-          "sans-serif",
+          "sans-serif"
         ],
         weight: 700,
-        src: ["./assets/fira-sans-normal.woff2"],
-      },
-    },
+        src: ["./assets/fira-sans-normal.woff2"]
+      }
+    }
   },
 
   /**
@@ -101,77 +101,77 @@ export const config: PodloveWebPlayerConfig = {
     clients: [
       {
         id: "apple-podcasts",
-        service: "id1523714548", // https://podcasts.apple.com/podcast/[service]
+        service: "id1523714548" // https://podcasts.apple.com/podcast/[service]
       },
       {
-        id: "antenna-pod",
+        id: "antenna-pod"
       },
       {
-        id: "beyond-pod",
+        id: "beyond-pod"
       },
       // {
       //   id: "castbox",
       //   service: "castbox-id"
       // },
       {
-        id: "castro",
+        id: "castro"
       },
       {
-        id: "clementine",
+        id: "clementine"
       },
       // {
       //   id: "deezer",
       //   service: "" https://www.deezer.com/en/show/[service]
       // },
       {
-        id: "downcast",
+        id: "downcast"
       },
       {
         id: "google-podcasts",
-        service: "https://feeds.podlovers.org/mp3", // feed
+        service: "https://feeds.podlovers.org/mp3" // feed
       },
       {
-        id: "gpodder",
+        id: "gpodder"
       },
       {
-        id: "itunes",
+        id: "itunes"
       },
       {
-        id: "i-catcher",
+        id: "i-catcher"
       },
       {
-        id: "instacast",
+        id: "instacast"
       },
       {
-        id: "overcast",
+        id: "overcast"
       },
       {
-        id: "player-fm",
+        id: "player-fm"
+      },
+      {
+        id: "pocket-casts"
       },
       {
         id: "pocket-casts",
+        service: "https://feeds.podlovers.org/mp3" // feed
       },
       {
-        id: "pocket-casts",
-        service: "https://feeds.podlovers.org/mp3", // feed
+        id: "pod-grasp"
       },
       {
-        id: "pod-grasp",
+        id: "podcast-addict"
       },
       {
-        id: "podcast-addict",
+        id: "podcast-republic"
       },
       {
-        id: "podcast-republic",
+        id: "podcat"
       },
       {
-        id: "podcat",
+        id: "podscout"
       },
       {
-        id: "podscout",
-      },
-      {
-        id: "rss-radio",
+        id: "rss-radio"
       },
       // {
       //   id: "soundcloud",
@@ -190,9 +190,9 @@ export const config: PodloveWebPlayerConfig = {
       //   service: "" // https://www.youtube.com/channel/[service]
       // },
       {
-        id: "rss",
-      },
-    ],
+        id: "rss"
+      }
+    ]
   },
 
   /**
@@ -218,10 +218,10 @@ export const config: PodloveWebPlayerConfig = {
       // "pinterest",
       // "xing",
       "mail",
-      "link",
+      "link"
     ],
     // share outlet, if not provided embed snippet is not available
     outlet: "/share.html",
-    sharePlaytime: true,
-  },
+    sharePlaytime: true
+  }
 };

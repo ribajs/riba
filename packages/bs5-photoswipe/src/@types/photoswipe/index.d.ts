@@ -372,7 +372,7 @@ declare namespace PhotoSwipe {
 /**
  * Base PhotoSwipe class. Derived from http://photoswipe.com/documentation/api.html
  */
-declare class PhotoSwipe<T extends PhotoSwipe.Options, UI> {
+declare class PhotoSwipe<T extends PhotoSwipe.Options, UI,> {
   /**
    * Constructs a PhotoSwipe.
    *

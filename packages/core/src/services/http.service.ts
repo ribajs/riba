@@ -11,7 +11,7 @@ export class HttpService {
   public static setRequestHeaderEachRequest(name: string, value: string) {
     this._requestHeadersEachRequest.push({
       name,
-      value,
+      value
     });
   }
 
@@ -21,7 +21,7 @@ export class HttpService {
    * @param data A plain object or string that is sent to the server with the request.
    * @see https://api.jquery.com/jquery.getjson/
    */
-  public static async getJSON<T = any>(
+  public static async getJSON<T = any,>(
     url: string,
     data?: any,
     headers: any = {},
@@ -37,7 +37,7 @@ export class HttpService {
    * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html).
    * @see https://api.jquery.com/jquery.post/
    */
-  public static async post<T = any>(
+  public static async post<T = any,>(
     url: string,
     data?: any,
     dataType?: string,
@@ -47,7 +47,7 @@ export class HttpService {
     return this.fetch<T>(url, "POST", data, dataType, headers, options);
   }
 
-  public static async delete<T = any>(
+  public static async delete<T = any,>(
     url: string,
     data?: any,
     dataType?: string,
@@ -57,7 +57,7 @@ export class HttpService {
     return this.fetch<T>(url, "DELETE", data, dataType, headers, options);
   }
 
-  public static async put<T = any>(
+  public static async put<T = any,>(
     url: string,
     data?: any,
     dataType?: string,
@@ -74,7 +74,7 @@ export class HttpService {
    * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html).
    * @see https://api.jquery.com/jquery.get/
    */
-  public static async get<T = any>(
+  public static async get<T = any,>(
     url: string,
     data?: any,
     dataType?: string,
@@ -127,7 +127,7 @@ export class HttpService {
     return headers;
   }
 
-  public static async fetch<T = any>(
+  public static async fetch<T = any,>(
     url: string,
     method: HttpMethod = "GET",
     data: any = {},
@@ -176,7 +176,7 @@ export class HttpService {
       method,
       body,
       headers,
-      mode: options.mode || "cors",
+      mode: options.mode || "cors"
     });
 
     let bodyResult = (await response.text()) as unknown as T;
@@ -216,7 +216,7 @@ export class HttpService {
       clone: response.clone,
       formData: response.formData,
       text: response.text,
-      body: bodyResult,
+      body: bodyResult
     };
     return result;
   }

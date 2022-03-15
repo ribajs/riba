@@ -35,7 +35,7 @@ export class Bs4ModalItemComponent extends Component {
   public scope: Scope = {
     onHidden: this.onHidden.bind(this),
     index: -1,
-    dismiss: this.dismiss.bind(this),
+    dismiss: this.dismiss.bind(this)
   };
 
   constructor() {
@@ -67,12 +67,12 @@ export class Bs4ModalItemComponent extends Component {
           modal.backdrop !== undefined
             ? modal.backdrop
             : ModalService.Default.backdrop,
-        show: modal.show !== undefined ? modal.show : ModalService.Default.show,
+        show: modal.show !== undefined ? modal.show : ModalService.Default.show
       });
 
       // Call onHidden on hidden event once
       modalEl.addEventListener(EVENT_HIDDEN, this.scope.onHidden, {
-        once: true,
+        once: true
       });
 
       // show modal using the modalservice

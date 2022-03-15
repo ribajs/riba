@@ -34,7 +34,7 @@ export class TimerComponent extends Component {
       "countdown-days",
       "countdown-hours",
       "countdown-minutes",
-      "countdown-seconds",
+      "countdown-seconds"
     ];
   }
 
@@ -56,7 +56,7 @@ export class TimerComponent extends Component {
     remainingHours: 0,
     remainingMinutes: 0,
     remainingSeconds: 0,
-    time: "",
+    time: ""
   };
 
   private updateIntervalId?: number;

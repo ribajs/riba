@@ -22,5 +22,5 @@ export const bs5Module: RibaModule<Partial<Bs5ModuleOptions>> = {
     ) as Bs5ModuleOptions;
     services.Bs5Service.setSingleton(options);
     return this;
-  },
+  }
 };

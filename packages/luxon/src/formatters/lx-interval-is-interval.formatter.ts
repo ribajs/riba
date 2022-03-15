@@ -14,5 +14,5 @@ export const LuxonIntervalIsIntervalFormatter: Formatter = {
   // eslint-disable-next-line @typescript-eslint/ban-types
   read(o: object): boolean {
     return Interval.isInterval(o);
-  },
+  }
 };

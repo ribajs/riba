@@ -14,5 +14,5 @@ export const LuxonFromRFC2822Formatter: Formatter = {
    */
   read(text: string, options?: DateTimeOptions): DateTime {
     return DateTime.fromRFC2822(text, options);
-  },
+  }
 };

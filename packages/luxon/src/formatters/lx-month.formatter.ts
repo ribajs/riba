@@ -13,5 +13,5 @@ export const LuxonMonthFormatter: Formatter = {
    */
   read(target: DateTime): number {
     return target.month;
-  },
+  }
 };

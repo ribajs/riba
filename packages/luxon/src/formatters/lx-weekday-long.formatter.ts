@@ -13,5 +13,5 @@ export const LuxonWeekdayLongFormatter: Formatter = {
    */
   read(target: DateTime): string {
     return target.weekdayLong;
-  },
+  }
 };

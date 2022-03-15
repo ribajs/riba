@@ -7,7 +7,7 @@ import { Dropdown } from "@ribajs/bs5";
 import {
   hasChildNodesTrim,
   copyTextToClipboard,
-  stripHtml,
+  stripHtml
 } from "@ribajs/utils/src/index.js";
 
 export interface Scope {
@@ -98,7 +98,7 @@ export class Bs5ShareComponent extends Component {
       "label-telegram",
       "label-email",
       "label-download",
-      "label-clipboard",
+      "label-clipboard"
     ];
   }
 
@@ -139,7 +139,7 @@ export class Bs5ShareComponent extends Component {
           "https://www.facebook.com/sharer/sharer.php?u={{media_url}}",
         type: "popup",
         url: "",
-        availableFor: ["page", "image", "video"],
+        availableFor: ["page", "image", "video"]
       },
       {
         id: "twitter",
@@ -148,7 +148,7 @@ export class Bs5ShareComponent extends Component {
           "https://twitter.com/intent/tweet?text={{text}}&url={{url}}",
         mediaUrlTemplate: `https://twitter.com/intent/tweet?text={{text}}&url={{media_url}}${newLine}({{url}})`,
         url: "",
-        availableFor: ["page", "image", "video"],
+        availableFor: ["page", "image", "video"]
       },
       {
         id: "pinterest",
@@ -159,7 +159,7 @@ export class Bs5ShareComponent extends Component {
         type: "popup",
         url: "",
 
-        availableFor: ["image", "video"],
+        availableFor: ["image", "video"]
       },
       {
         id: "whatsapp",
@@ -168,7 +168,7 @@ export class Bs5ShareComponent extends Component {
         mediaUrlTemplate: `https://api.whatsapp.com/send?text={{text}}${newLine}${newLine}{{media_url}}${newLine}({{url}})`,
         type: "popup",
         url: "",
-        availableFor: ["page", "image", "video"],
+        availableFor: ["page", "image", "video"]
       },
       {
         id: "telegram",
@@ -177,7 +177,7 @@ export class Bs5ShareComponent extends Component {
         mediaUrlTemplate: `https://telegram.me/share/url?url={{media_url}}&text={{text}}${newLine}({{url}})`,
         type: "popup",
         url: "",
-        availableFor: ["page", "image", "video"],
+        availableFor: ["page", "image", "video"]
       },
       {
         id: "email",
@@ -186,7 +186,7 @@ export class Bs5ShareComponent extends Component {
         mediaUrlTemplate: `mailto:?subject={{title}}&body={{text}}${newLine}${newLine}{{media_url}}${newLine}({{url}})`,
         type: "href",
         url: "",
-        availableFor: ["page", "image", "video"],
+        availableFor: ["page", "image", "video"]
       },
       // {
       //   id: "sms",
@@ -204,7 +204,7 @@ export class Bs5ShareComponent extends Component {
         type: "download",
         url: "",
         availableFor: ["image", "video"],
-        filename: this.scope.filename,
+        filename: this.scope.filename
       },
       {
         id: "clipboard",
@@ -213,8 +213,8 @@ export class Bs5ShareComponent extends Component {
         mediaUrlTemplate: `{{media_url}}`,
         type: "clipboard",
         url: "",
-        availableFor: ["page", "image", "video"],
-      },
+        availableFor: ["page", "image", "video"]
+      }
     ];
     return shareItems;
   }
@@ -259,7 +259,7 @@ export class Bs5ShareComponent extends Component {
       // Methods
       share: this.share,
       shareOnService: this.shareOnService,
-      getFilename: this.getFilename,
+      getFilename: this.getFilename
     };
 
     // on those two support "mobile deep links", so HTTP based fallback for all others.
@@ -414,7 +414,7 @@ export class Bs5ShareComponent extends Component {
         await navigator.share({
           title: this.scope.title,
           text: `${this.scope.text}\r\n\r\n`,
-          url: this.scope.url || window.location.href,
+          url: this.scope.url || window.location.href
         });
       } catch (error: any) {
         if (error.name === "AbortError") {

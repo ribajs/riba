@@ -29,7 +29,7 @@ export class PQueue {
         interval: 0,
         concurrency: Infinity,
         autoStart: true,
-        queueClass: PriorityQueue,
+        queueClass: PriorityQueue
       },
       options
     );

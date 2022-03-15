@@ -28,7 +28,7 @@ async function deploy(env: string) {
       "deploy",
       {
         "allow-live": true,
-        env: env,
+        env: env
       },
       { cwd: config.dist.root }
     )
@@ -87,7 +87,7 @@ gulp.task("validate:id", async () => {
       envObj = tkConfig[environment];
       const envSettings = {
         themeId: envObj.theme_id,
-        environment,
+        environment
       };
 
       return validateId(envSettings);

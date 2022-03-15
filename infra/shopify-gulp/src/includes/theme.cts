@@ -4,7 +4,7 @@ import {
   ThemesByEnv,
   ThemeByEnv,
   ThemeData,
-  ThemeConfig,
+  ThemeConfig
 } from "../types/index.cjs";
 import { getAsset } from "./shopify-api.cjs";
 import { config, getYamlConfig } from "./config.cjs";
@@ -93,7 +93,7 @@ export const createStoreTheme = async (
   return themeApi.create({
     role: "unpublished",
     src: zipSrc,
-    name: themeName,
+    name: themeName
   });
 };
 

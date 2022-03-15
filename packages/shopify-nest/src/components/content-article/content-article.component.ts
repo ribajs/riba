@@ -34,7 +34,7 @@ export class ShopifyNestContentBlogArticleComponent extends ShopifyNestContentCo
 
   public scope: Scope = {
     save: this.save,
-    new_body_html: "",
+    new_body_html: ""
   };
 
   constructor(

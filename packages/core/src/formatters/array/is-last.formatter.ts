@@ -9,5 +9,5 @@ export const isLastFormatter = {
   name: "isLast",
   read(array: any[], i: number) {
     return array.length === i + 1;
-  },
+  }
 };

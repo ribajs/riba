@@ -7,31 +7,31 @@ const locales = {
   de: {
     examples: {
       i18n: {
-        switch_language: "Klicke auf eine Sprache um sie zu ändern",
+        switch_language: "Klicke auf eine Sprache um sie zu ändern"
       },
       newsletter: {
         description_html:
           "Abonnieren Sie unseren Newsletter und erhalten Sie <strong>10% Rabatt</strong> auf Ihren nächsten Einkauf.",
         input_value: "Unbekannt",
         placeholder_last_name: "Nachname",
-        title: "Melde dich für den Newsletter an",
-      },
-    },
+        title: "Melde dich für den Newsletter an"
+      }
+    }
   },
   en: {
     examples: {
       i18n: {
-        switch_language: "Click on a language to change it",
+        switch_language: "Click on a language to change it"
       },
       newsletter: {
         description_html:
           "Subscribe to our newsletter and get <strong>10% off</strong> your next purchase.",
         input_value: "Unknown",
         placeholder_last_name: "Surname",
-        title: "Sign up for the newsletter",
-      },
-    },
-  },
+        title: "Sign up for the newsletter"
+      }
+    }
+  }
 };
 
 const riba = new Riba();

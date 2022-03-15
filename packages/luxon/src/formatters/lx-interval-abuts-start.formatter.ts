@@ -14,5 +14,5 @@ export const LuxonIntervalAbutsStartFormatter: Formatter = {
    */
   read(target: Interval, other: Interval): boolean {
     return target.abutsStart(other);
-  },
+  }
 };

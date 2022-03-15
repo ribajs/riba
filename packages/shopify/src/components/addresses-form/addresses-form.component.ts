@@ -1,7 +1,7 @@
 import {
   Component,
   TemplateFunction,
-  HttpService,
+  HttpService
 } from "@ribajs/core/src/index.js";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import template from "./addresses-form.component.html";
@@ -64,14 +64,14 @@ export class ShopifyAddressesComponent extends Component {
   public scope: Scope = {
     createAddress: {
       validation: {
-        valid: false,
-      },
+        valid: false
+      }
     },
     showFormId: "",
     editAddress: {},
     edit: this.edit,
     create: this.create,
-    delete: this.delete,
+    delete: this.delete
   };
 
   constructor() {

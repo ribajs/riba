@@ -14,5 +14,5 @@ export const LuxonIntervalEqualsFormatter: Formatter = {
    */
   read(target: Interval, other: Interval): boolean {
     return target.equals(other);
-  },
+  }
 };

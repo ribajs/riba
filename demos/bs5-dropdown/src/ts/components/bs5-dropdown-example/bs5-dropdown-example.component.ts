@@ -21,50 +21,50 @@ export class Bs5DropdownExampleComponent extends Component {
     items: [
       {
         label: "Click me",
-        value: 0,
+        value: 0
       },
       {
         label: "Click ME!",
-        value: 1,
+        value: 1
       },
       {
         label: "No, click ME!",
-        value: 2,
+        value: 2
       },
       {
         label: "NO, ME!!1!1",
-        value: 3,
+        value: 3
       },
       {
         label: "Select me, please",
-        value: 4,
+        value: 4
       },
       {
         label: "I do not care",
-        value: 5,
+        value: 5
       },
       {
         label: "Do what ever you want..",
-        value: 6,
+        value: 6
       },
       {
         label: "Who am I?",
-        value: 7,
+        value: 7
       },
       {
         label: "Don't click me",
-        value: 8,
+        value: 8
       },
       {
         label: "...",
-        value: 9,
-      },
+        value: 9
+      }
     ] as DropdownItem[],
     selected: {
       label: "Select an item",
-      value: null,
+      value: null
     } as DropdownItem,
-    select: this.select,
+    select: this.select
   };
 
   constructor() {

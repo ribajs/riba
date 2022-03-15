@@ -221,7 +221,7 @@ export const escapeHtml = (html: string) => {
         "<": "&lt;",
         ">": "&gt;",
         '"': "&quot;",
-        "'": "&#39;",
+        "'": "&#39;"
       }[c as never])
   );
 };
@@ -383,7 +383,7 @@ export const extend = (
  * @param deep If true, the merge becomes recursive (aka. deep copy).
  * @param val The value(s) to clone
  */
-export const clone = <T = any>(deep: boolean, val: T): T => {
+export const clone = <T = any,>(deep: boolean, val: T): T => {
   if (Array.isArray(val)) {
     if (deep) {
       return (val as any).map((x: any) => clone<any>(true, x));

@@ -14,5 +14,5 @@ export const LuxonMinFormatter: Formatter = {
    */
   read(target: DateTime, ...dateTimes: DateTime[]): DateTime {
     return DateTime.min(target, ...dateTimes);
-  },
+  }
 };

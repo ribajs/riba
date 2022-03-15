@@ -31,5 +31,5 @@ export const mapFormatter: Formatter = {
     const args = Array.prototype.slice.call(arguments);
     args.splice(1, 2);
     return obj[prop].apply(obj, args);
-  },
+  }
 };

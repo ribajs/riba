@@ -11,7 +11,7 @@ export class ComponentsExampleComponent extends Component {
 
   public scope: ComponentsExampleScope = {
     defaultInputVal: "Hello as attribute",
-    anotherVal: "Hello as parent",
+    anotherVal: "Hello as parent"
   };
 
   constructor() {

@@ -1,7 +1,7 @@
 import {
   BasicComponent,
   ComponentAttributeBinder,
-  View,
+  View
 } from "@ribajs/core/src/index.js";
 import { Bs5AbstractBreakpointBinder } from "./bs5-abstract-breakpoint.binder.js";
 

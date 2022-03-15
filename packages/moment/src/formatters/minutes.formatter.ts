@@ -16,5 +16,5 @@ export const MinutesFormatter: Formatter = {
    */
   read(target: Moment | Duration) {
     return target.minutes();
-  },
+  }
 };

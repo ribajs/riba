@@ -14,5 +14,5 @@ export const LuxonIntervalDifferenceFormatter: Formatter = {
    */
   read(target: Interval, ...intervals: Interval[]): Interval[] {
     return target.difference(...intervals);
-  },
+  }
 };

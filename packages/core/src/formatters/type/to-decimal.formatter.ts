@@ -14,5 +14,5 @@ export const toDecimalFormatter: Formatter = {
     const retI = toIntegerFormatter.read(target * 1);
     const retF = toFloatFormatter.read(target);
     return retI == retF ? retI : retF;
-  },
+  }
 };

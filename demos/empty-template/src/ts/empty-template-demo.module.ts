@@ -10,7 +10,7 @@ export const EmptyTemplateDemoModule: RibaModule = {
   services: {},
   init() {
     return this;
-  },
+  }
 };
 
 export default EmptyTemplateDemoModule;

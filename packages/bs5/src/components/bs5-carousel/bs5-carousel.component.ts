@@ -46,7 +46,7 @@ export class Bs5CarouselComponent extends Component {
     startPause: this.pause,
     cycle: this.cycle,
     to: this.to,
-    dispose: this.dispose,
+    dispose: this.dispose
   };
 
   protected autobind = true;
@@ -68,7 +68,7 @@ export class Bs5CarouselComponent extends Component {
       keyboard: this.scope.keyboard,
       pause: this.scope.pause,
       wrap: this.scope.wrap,
-      touch: this.scope.touch,
+      touch: this.scope.touch
     });
     if (this.scope.fade) {
       this.classList.add("carousel-fade");

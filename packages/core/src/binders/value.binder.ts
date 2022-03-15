@@ -2,7 +2,7 @@ import { Binder } from "../binder.js";
 import {
   getInputValue,
   getString,
-  setAttribute,
+  setAttribute
 } from "@ribajs/utils/src/index.js";
 
 const DEFAULT_EVENTS = "change input paste blur focus";
@@ -24,7 +24,7 @@ export class ValueBinder extends Binder<any, HTMLElement> {
       tagName: el.tagName,
       contenteditable: el.getAttribute("contenteditable") ? true : false,
       isRadio: false,
-      isOption: false,
+      isOption: false
     };
     data.isRadio = data.tagName === "INPUT" && data.type === "radio";
     data.isOption = data.tagName === "OPTION";

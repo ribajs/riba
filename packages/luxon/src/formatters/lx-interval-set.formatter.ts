@@ -14,5 +14,5 @@ export const LuxonIntervalSetFormatter: Formatter = {
    */
   read(target: Interval, values?: IntervalObject): Interval {
     return target.set(values);
-  },
+  }
 };

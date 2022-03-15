@@ -17,5 +17,5 @@ export const ToDateFormatter: Formatter = {
     } else {
       return target.toDate();
     }
-  },
+  }
 };

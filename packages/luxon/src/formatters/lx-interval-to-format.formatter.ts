@@ -15,5 +15,5 @@ export const LuxonIntervalToFormatFormatter: Formatter = {
    */
   read(target: Interval, dateFormat: string, separator?: string): string {
     return target.toFormat(dateFormat, separator ? { separator } : undefined);
-  },
+  }
 };

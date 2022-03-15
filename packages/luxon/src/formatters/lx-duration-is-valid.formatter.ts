@@ -13,5 +13,5 @@ export const LuxonDurationIsValidFormatter: Formatter = {
    */
   read(target: Duration): boolean {
     return target.isValid;
-  },
+  }
 };

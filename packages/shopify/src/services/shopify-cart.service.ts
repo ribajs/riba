@@ -11,7 +11,7 @@ import {
   ShopifyCustomerAddress,
   ShopifyShippingRates,
   ShopifyShippingRate,
-  ShopifyShippingRatesNormalized,
+  ShopifyShippingRatesNormalized
 } from "../interfaces";
 
 export interface ShopifyCartRequestOptions {
@@ -190,7 +190,7 @@ export class ShopifyCartService {
         return HttpService.post(
           this.CART_POST_UPDATE_URL,
           {
-            updates,
+            updates
           },
           "form"
         );
@@ -423,7 +423,7 @@ export class ShopifyCartService {
   protected static requestOptionDefaults = {
     triggerOnStart: true,
     triggerOnComplete: true,
-    triggerOnChange: true,
+    triggerOnChange: true
   };
 
   protected static waitForComplete = false;
@@ -475,7 +475,7 @@ export class ShopifyCartService {
     ShopifyCartService.shopifyCartEventDispatcher.trigger("ShopifyCart:add", {
       id,
       quantity,
-      properties,
+      properties
     });
   }
 

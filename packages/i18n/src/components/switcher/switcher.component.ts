@@ -25,7 +25,7 @@ export class I18nSwitcherComponent extends Component {
     langcodes: [],
     switch: this.switch,
     toggle: this.toggle,
-    ready: false,
+    ready: false
   };
 
   protected connectedCallback() {

@@ -14,5 +14,5 @@ export const LuxonDurationInvalidFormatter: Formatter = {
    */
   read(reason: string, explanation: string): Duration {
     return Duration.invalid(reason, explanation);
-  },
+  }
 };

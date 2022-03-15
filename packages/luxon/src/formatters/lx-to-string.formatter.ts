@@ -13,5 +13,5 @@ export const LuxonToStringFormatter: Formatter = {
    */
   read(target: DateTime): string {
     return target.toString();
-  },
+  }
 };

@@ -13,5 +13,5 @@ export const LuxonIntervalXorFormatter: Formatter = {
    */
   read(intervals: Interval[]): Interval[] {
     return Interval.xor(intervals);
-  },
+  }
 };

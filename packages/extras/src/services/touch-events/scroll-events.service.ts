@@ -70,7 +70,7 @@ export class ScrollEventsService extends BaseEventsService {
   protected addEventListeners() {
     for (const eventName of this._scrollEvent) {
       this.el.addEventListener(eventName, this.onScrollEvent, {
-        passive: true,
+        passive: true
       });
     }
   }
@@ -114,7 +114,7 @@ export class ScrollEventsService extends BaseEventsService {
     this.triggerCustomEvent("scrollended", event, {
       startPosition: this.startPosition,
       endPosition: this.endPosition,
-      direction,
+      direction
     });
   }
 
@@ -125,7 +125,7 @@ export class ScrollEventsService extends BaseEventsService {
     this.isScrolling = true;
     this.startPosition = getScrollPosition(this.el);
     this.triggerCustomEvent("scrollstart", event, {
-      startPosition: this.startPosition,
+      startPosition: this.startPosition
     });
   }
 
@@ -138,12 +138,12 @@ export class ScrollEventsService extends BaseEventsService {
     this.triggerCustomEvent("scroll" + direction, event, {
       startPosition: this.startPosition,
       currentPosition,
-      direction,
+      direction
     });
     this.triggerCustomEvent("scrolling", event, {
       startPosition: this.startPosition,
       currentPosition,
-      direction,
+      direction
     });
   }
 

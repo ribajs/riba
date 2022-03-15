@@ -27,7 +27,7 @@ export class InstagramApiService extends BaseApiService {
     const url = `${this.baseUrl}/media/${instagramBusinessAccountID}`;
     const data: any = {
       fields,
-      limit,
+      limit
     };
     if ((window as any).Shopify.shop) {
       data.shop = (window as any).Shopify.shop;

@@ -13,5 +13,5 @@ export const toFloatFormatter: Formatter = {
   read(target: any) {
     const ret = parseFloat((target * 1.0) as any);
     return isNaN(ret) ? 0.0 : ret;
-  },
+  }
 };

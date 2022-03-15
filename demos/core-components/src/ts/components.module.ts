@@ -8,5 +8,5 @@ export const componentsModule: RibaModule = {
   services: {},
   init() {
     return this;
-  },
+  }
 };

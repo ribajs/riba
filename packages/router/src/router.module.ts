@@ -12,5 +12,5 @@ export const routerModule: RibaModule<Partial<RouterModuleOptions>> = {
   init(options = {}) {
     services.RouterService.setSingleton(options);
     return this;
-  },
+  }
 };

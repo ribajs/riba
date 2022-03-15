@@ -36,29 +36,29 @@ export class TooltipBinder extends Binder<string, HTMLElement> {
           options: {
             altBoundary: true,
             // fallbackPlacements: this.config.fallbackPlacements
-            behavior: "flip",
-          },
+            behavior: "flip"
+          }
         },
         {
           name: "offset",
           options: {
-            offset: offset,
-          },
+            offset: offset
+          }
         },
         {
           name: "arrow",
           options: {
-            element: `.arrow`,
-          },
+            element: `.arrow`
+          }
         },
         {
           name: "preventOverflow",
           options: {
-            boundariesElement: "scrollParent",
-          },
-        },
+            boundariesElement: "scrollParent"
+          }
+        }
       ],
-      strategy: undefined,
+      strategy: undefined
     });
     document.body.appendChild(this.tip);
     this.tip.classList.add("show");

@@ -1,7 +1,7 @@
 import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import {
   getElementFromEvent,
-  hasChildNodesTrim,
+  hasChildNodesTrim
 } from "@ribajs/utils/src/dom.js";
 import Debug from "debug";
 import { ACCESS_SCOPES } from "../../constants";
@@ -49,7 +49,7 @@ export class ShopifyNestPermissionsComponent extends Component {
     accessScopes: {},
     toggleAll: this.toggleAll,
     resetSelection: this.resetSelection,
-    shop: (window as any).shop,
+    shop: (window as any).shop
   };
 
   constructor() {
@@ -87,8 +87,8 @@ export class ShopifyNestPermissionsComponent extends Component {
       this.scope.accessScopes[groupKey] = this.scope.accessScopes[groupKey] || {
         items: [],
         i18n: {
-          desc: `shopify.accessScopes.${groupKey}`,
-        },
+          desc: `shopify.accessScopes.${groupKey}`
+        }
       };
 
       if (ACCESS_SCOPE.endsWith(groupKey)) {
@@ -99,7 +99,7 @@ export class ShopifyNestPermissionsComponent extends Component {
             [...this.scope.defaultScopes, ...this.scope.selectedScopes].indexOf(
               ACCESS_SCOPE
             ) !== -1,
-          disabled: this.scope.defaultScopes.indexOf(ACCESS_SCOPE) !== -1,
+          disabled: this.scope.defaultScopes.indexOf(ACCESS_SCOPE) !== -1
         });
       }
     }

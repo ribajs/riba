@@ -2,7 +2,7 @@ import {
   OpenGraphTree,
   OpenGraph,
   OpenGraphProperty,
-  OpenGraphNamespaces,
+  OpenGraphNamespaces
 } from "../types/index.js";
 
 export class OpenGraphService {

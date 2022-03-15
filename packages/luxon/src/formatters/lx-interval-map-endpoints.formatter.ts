@@ -14,5 +14,5 @@ export const LuxonIntervalMapEndpointsFormatter: Formatter = {
    */
   read(target: Interval, mapFn: (dt: DateTime) => DateTime): Interval {
     return target.mapEndpoints(mapFn);
-  },
+  }
 };

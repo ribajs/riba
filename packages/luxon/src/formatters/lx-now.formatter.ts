@@ -15,5 +15,5 @@ export const LuxonNowFormatter: Formatter = {
    */
   read(): DateTime {
     return DateTime.now();
-  },
+  }
 };

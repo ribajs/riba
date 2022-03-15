@@ -11,7 +11,7 @@ import {
   reflow,
   getTransitionDurationFromElement,
   emulateTransitionEnd,
-  typeCheckConfig,
+  typeCheckConfig
 } from "../helper/utils";
 import { setData, getData, removeData } from "../helper/dom/data";
 import { on, one, trigger } from "../helper/dom/event-handler";
@@ -47,13 +47,13 @@ export interface Config {
 export const DefaultType = {
   animation: "boolean",
   autohide: "boolean",
-  delay: "number",
+  delay: "number"
 };
 
 export const Default = {
   animation: true,
   autohide: true,
-  delay: 2000,
+  delay: 2000
 };
 
 // const SELECTOR_DATA_DISMISS = '[data-dismiss="toast"]';
@@ -192,7 +192,7 @@ export class ToastService {
     config = {
       ...Default,
       ...(this._element?.dataset || {}),
-      ...(typeof config === "object" && config ? config : {}),
+      ...(typeof config === "object" && config ? config : {})
     };
 
     typeCheckConfig(NAME, config, ToastService.DefaultType);

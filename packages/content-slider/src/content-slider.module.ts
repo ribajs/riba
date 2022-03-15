@@ -13,5 +13,5 @@ export const contentSliderModule: RibaModule<ContentSliderModuleOptions> = {
   init(options = {}) {
     services.ContentSliderService.setSingleton(options);
     return this;
-  },
+  }
 };

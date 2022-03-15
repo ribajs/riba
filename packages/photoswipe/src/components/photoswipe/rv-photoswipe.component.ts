@@ -81,7 +81,7 @@ export class PhotoswipeComponent extends Component {
     counterEl: false,
     preloaderEl: true,
 
-    closeElClasses: [], // 'item', 'caption', 'zoom-wrap', 'ui', 'top-bar'
+    closeElClasses: [] // 'item', 'caption', 'zoom-wrap', 'ui', 'top-bar'
   };
 
   static get observedAttributes(): string[] {
@@ -115,7 +115,7 @@ export class PhotoswipeComponent extends Component {
       "control-zoom-out-icon-size",
       "control-fullscreen-on-icon-size",
       "control-fullscreen-off-icon-size",
-      "control-share-icon-size",
+      "control-share-icon-size"
     ];
   }
 
@@ -166,7 +166,7 @@ export class PhotoswipeComponent extends Component {
     controlZoomOutIconSize: 32,
     controlFullscreenOnIconSize: 32,
     controlFullscreenOffIconSize: 32,
-    controlShareIconSize: 16,
+    controlShareIconSize: 16
   };
 
   constructor() {
@@ -527,7 +527,7 @@ export class PhotoswipeComponent extends Component {
         msrc: this.images[i].currentSrc || this.images[i].src || src,
         w: Number(width),
         h: Number(height),
-        element: this.images[i],
+        element: this.images[i]
       });
     }
   }

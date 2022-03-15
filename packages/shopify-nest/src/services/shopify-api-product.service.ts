@@ -1,7 +1,7 @@
 import { HttpService } from "@ribajs/core/src/index.js";
 import {
   ShopifyApiProductService as _ShopifyApiProductService,
-  Product,
+  Product
 } from "@ribajs/shopify-tda";
 
 import type { ProductUpdateCreate } from "../interfaces/shopify-api/product-update-create";

@@ -13,5 +13,5 @@ export const shopifyModule: RibaModule<ShopifyModuleOptions> = {
   init(options = {}) {
     services.ModuleService.setSingleton(options);
     return this;
-  },
+  }
 };

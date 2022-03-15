@@ -30,9 +30,9 @@ export class Bs5TaggedImageExampleComponent extends Component {
         color: `rgb(${n * 50}, ${m * 50}, 0)`,
         popoverOptions: {
           title: `(${n}, ${m})`,
-          content: `(${n}, ${m})`,
-        },
-      })),
+          content: `(${n}, ${m})`
+        }
+      }))
     ];
 
     return [0, 1, 2, 3, 4, 5].reduce(cb, []);
@@ -50,7 +50,7 @@ export class Bs5TaggedImageExampleComponent extends Component {
       tags: [1, 2, 3, 4, 5, 6, 7].map((n) => ({
         popoverOptions: {
           title: `Title tag ${n}`,
-          content: `Content tag ${n}`,
+          content: `Content tag ${n}`
         },
 
         x: Math.random(),
@@ -67,15 +67,15 @@ export class Bs5TaggedImageExampleComponent extends Component {
 
         ...((size) => ({
           smallSize: Math.floor(size * (0.25 + Math.random() / 3)) + "px",
-          fullSize: size + "px",
-        }))(24 + Math.floor(Math.random() * 50)),
-      })),
+          fullSize: size + "px"
+        }))(24 + Math.floor(Math.random() * 50))
+      }))
     }));
   }
 
   public scope: Scope = {
     responsiveTags: this.getResponsiveTags(),
-    fadeshowImages: this.getFadeshowImageTags(),
+    fadeshowImages: this.getFadeshowImageTags()
   };
 
   constructor() {

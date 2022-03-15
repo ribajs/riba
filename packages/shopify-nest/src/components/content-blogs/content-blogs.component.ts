@@ -28,7 +28,7 @@ export class ShopifyNestContentBlogsComponent extends ShopifyNestContentComponen
   );
 
   public scope: Scope = {
-    blogs: [],
+    blogs: []
   };
 
   constructor(

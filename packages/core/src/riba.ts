@@ -4,7 +4,7 @@ import {
   Adapters,
   Root,
   Components,
-  Options,
+  Options
 } from "./types/index.js";
 import { parseTemplate } from "./parse-template.js";
 import { parseType } from "./parse-type.js";
@@ -184,22 +184,22 @@ export class Riba {
       attributeBinders: [],
 
       // sightglass
-      rootInterface: {} as Root,
+      rootInterface: {} as Root
     };
 
     if (options) {
       viewOptions.binders = { ...viewOptions.binders, ...options.binders };
       viewOptions.formatters = {
         ...viewOptions.formatters,
-        ...options.formatters,
+        ...options.formatters
       };
       viewOptions.components = {
         ...viewOptions.components,
-        ...options.components,
+        ...options.components
       };
       viewOptions.adapters = {
         ...viewOptions.adapters,
-        ...options.adapters,
+        ...options.adapters
       };
     }
 
