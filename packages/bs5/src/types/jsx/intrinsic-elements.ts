@@ -3,6 +3,7 @@
 
 import type {
   JsxBs5AccordionProps,
+  JsxBs5CollapseProps,
   JsxBs5DropdownProps,
   JsxBs5IconProps,
   JsxBs5NavbarProps,
@@ -14,6 +15,7 @@ import type {
 
 export interface Bs5IntrinsicElements {
   "bs5-accordion": JsxBs5AccordionProps;
+  "bs5-collapse": JsxBs5CollapseProps;
   "bs5-dropdown": JsxBs5DropdownProps;
   "bs5-sidebar": JsxBs5SidebarProps;
   "bs5-toggle-button": JsxBs5ToggleButtonProps;

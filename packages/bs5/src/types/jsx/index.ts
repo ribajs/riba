@@ -1,5 +1,6 @@
 export * from "./intrinsic-elements.js";
 export * from "./jsx-accordion-props.js";
+export * from "./jsx-collapse-props.js";
 export * from "./jsx-dropdown-props.js";
 export * from "./jsx-icon-props.js";
 export * from "./jsx-navbar.js";

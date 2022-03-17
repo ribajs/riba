@@ -2,6 +2,7 @@ export { Bs5DropdownComponent } from "./bs5-dropdown/bs5-dropdown.component.js";
 export { Bs5AccordionComponent } from "./bs5-accordion/bs5-accordion.component.js";
 export { Bs5ButtonComponent } from "./bs5-button/bs5-button.component.js";
 export { Bs5CarouselComponent } from "./bs5-carousel/bs5-carousel.component.js";
+export { Bs5CollapseComponent } from "./bs5-collapse/bs5-collapse.component.js";
 export { Bs5ColorPickerComponent } from "./bs5-colorpicker/bs5-colorpicker.component.js";
 export { Bs5ContentsComponent } from "./bs5-contents/bs5-contents.component.js";
 export { Bs5FormComponent } from "./bs5-form/bs5-form.component.js";

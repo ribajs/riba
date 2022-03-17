@@ -68,6 +68,12 @@ export class As5accordionExampleComponent extends Component {
 
         </bs5-accordion>
       </section>
+      <section class="col-12 my-5">
+        <h2>bs5-collapse</h2>
+        <bs5-collapse title="Collapse example" collapsed={true}>
+
+        </bs5-collapse>
+      </section>
     </div>;
     }
   }
