@@ -124,7 +124,7 @@
     "moment": "^2.29.1",
     "open": "^8.4.0",
     "package-json-type": "^1.0.3",
-    "prettier": "2.5.1",
+    "prettier": "^2.6.0",
     "prompt": "^1.2.2",
     "shopify-admin-api": "^2.17.1",
     "svgo": "^2.8.0",
