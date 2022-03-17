@@ -1,4 +1,4 @@
-import { Formatter } from "@ribajs/core/src/index.js";
+import { Formatter } from "@ribajs/core";
 import { Duration, DurationObject } from "luxon";
 
 /**

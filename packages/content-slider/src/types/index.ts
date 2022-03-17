@@ -1,2 +1,2 @@
-export * from "./module-options";
-export * from "./slide-item";
+export * from "./module-options.js";
+export * from "./slide-item.js";

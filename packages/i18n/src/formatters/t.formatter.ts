@@ -1,6 +1,6 @@
-import { Formatter } from "@ribajs/core/src/index.js";
+import { Formatter } from "@ribajs/core";
 import { I18nService } from "../services/i18n.service.js";
-import { LocalesService } from "../types/locales-service";
+import { LocalesService } from "../types/locales-service.js";
 
 const translate = async (
   translateMePathString: string,

@@ -1,5 +1,5 @@
-import { Binder } from "@ribajs/core/src/index.js";
-import { Collapse } from "../services/collapse";
+import { Binder } from "@ribajs/core";
+import { Collapse } from "../services/collapse.js";
 
 /**
  *

@@ -21,11 +21,11 @@ import type {
   JsxElement,
   JsxChildren,
   JsxComponent,
-  BasicIntrinsicElements,
+  BasicIntrinsicElements
 } from "./types/index.js";
 import { isCustomElement, jsonStringify, escapeHtml } from "@ribajs/utils/src/index.js";
-import { JsxFragment } from "./jsx-fragment";
-import { Raw } from "./jsx-raw";
+import { JsxFragment } from "./jsx-fragment.js";
+import { Raw } from "./jsx-raw.js";
 
 export const htmlVoidElements = new Set([
   "area",
@@ -41,7 +41,7 @@ export const htmlVoidElements = new Set([
   "param",
   "source",
   "track",
-  "wbr",
+  "wbr"
 ]);
 
 /**

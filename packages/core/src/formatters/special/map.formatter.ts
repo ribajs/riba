@@ -1,6 +1,6 @@
 /* eslint-disable prefer-spread */
 /* eslint-disable prefer-rest-params */
-import { Formatter } from "@ribajs/core/src/index.js";
+import { Formatter } from "@ribajs/core";
 
 /**
  * Calls a method on the given object. The first parameters defines the object and the second the methodname.

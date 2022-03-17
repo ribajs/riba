@@ -1,7 +1,7 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 
 import template from "./bs4-toast-item.component.html";
-import { Toast } from "../../interfaces";
+import { Toast } from "../../interfaces/index.js";
 import { ToastService, EVENT_HIDDEN } from "../../services/toast.service.js";
 import { Scope as Bs4NotificationContainerScope } from "../bs4-notification-container/bs4-notification-container.component.js";
 import { getElementFromEvent } from "@ribajs/utils/src/dom.js";

@@ -1,4 +1,4 @@
-import { SlideshowSlidePosition } from "./slideshow-slide-position";
+import { SlideshowSlidePosition } from "./slideshow-slide-position.js";
 
 export interface SlideshowSlide {
   title?: string;

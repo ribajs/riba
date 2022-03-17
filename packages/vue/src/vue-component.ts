@@ -3,9 +3,9 @@ import {
   App,
   Component,
   WritableComputedOptions,
-  ComponentPublicInstance,
+  ComponentPublicInstance
 } from "vue";
-import { BasicComponent } from "@ribajs/core/src/index.js";
+import { BasicComponent } from "@ribajs/core";
 
 export abstract class VueComponent extends BasicComponent {
   protected vue?: App;
@@ -185,7 +185,7 @@ export abstract class VueComponent extends BasicComponent {
       beforeCreate: this.beforeCreate.bind(this),
       beforeUpdate: this.beforeUpdate.bind(this),
       name: VueComponent.tagName,
-      watch: this.getAttributeWatchOption(),
+      watch: this.getAttributeWatchOption()
     };
     this.vue = createApp(VueOptions);
     this.vueVm = this.vue.mount(this);

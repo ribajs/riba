@@ -1,5 +1,5 @@
 import { EventDispatcher } from "@ribajs/events";
-import { themeChoices } from "../constants";
+import { themeChoices } from "../constants/index.js";
 import { Bs5Service } from "./bs5.service.js";
 
 import type {

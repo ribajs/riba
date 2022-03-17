@@ -1,4 +1,4 @@
-import { Component, View, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, View, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { scrollTo, scrollToPosition } from "@ribajs/utils/src/dom.js";
 import { State } from "@ribajs/history/src/index.js";

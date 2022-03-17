@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 
 import template from "./i18n-static-example.component.html";
 

@@ -1,7 +1,7 @@
-import { CarouselOption } from "../interfaces/carousel-option";
-import { CarouselDirection } from "../interfaces/carousel-direction";
-import { CarouselClassName } from "../interfaces/carousel-class-name";
-import { TRANSITION_END } from "../constants";
+import { CarouselOption } from "../interfaces/carousel-option.js";
+import { CarouselDirection } from "../interfaces/carousel-direction.js";
+import { CarouselClassName } from "../interfaces/carousel-class-name.js";
+import { TRANSITION_END } from "../constants/index.js";
 
 /**
  * --------------------------------------------------------------------------
@@ -18,9 +18,9 @@ import {
   emulateTransitionEnd,
   isVisible,
   triggerTransitionEnd
-} from "../helper/utils";
-import { on, one, off, trigger } from "../helper/dom/event-handler";
-import { findOne, find } from "../helper/dom/selector-engine";
+} from "../helper/utils.js";
+import { on, one, off, trigger } from "../helper/dom/event-handler.js";
+import { findOne, find } from "../helper/dom/selector-engine.js";
 
 /**
  * ------------------------------------------------------------------------

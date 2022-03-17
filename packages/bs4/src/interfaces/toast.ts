@@ -1,5 +1,5 @@
-import { ToastService } from "../services";
-import { Notification } from "./notification";
+import { ToastService } from "../services/index.js";
+import { Notification } from "./notification.js";
 
 export class Toast extends Notification {
   message: string;

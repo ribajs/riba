@@ -1,4 +1,4 @@
-import { Riba, coreModule } from "@ribajs/core/src/index.js";
+import { Riba, coreModule } from "@ribajs/core";
 import { componentsModule } from "./components.module";
 
 const riba = new Riba();

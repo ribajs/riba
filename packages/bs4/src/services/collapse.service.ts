@@ -4,7 +4,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
-import { TRANSITION_END } from "../constants";
+import { TRANSITION_END } from "../constants/index.js";
 import {
   getTransitionDurationFromElement,
   emulateTransitionEnd,
@@ -12,10 +12,10 @@ import {
   getElementFromSelector,
   typeCheckConfig,
   isElement
-} from "../helper/utils";
-import { one, trigger } from "../helper/dom/event-handler";
-import * as SelectorEngine from "../helper/dom/selector-engine";
-import { setData, getData, removeData } from "../helper/dom/data";
+} from "../helper/utils.js";
+import { one, trigger } from "../helper/dom/event-handler.js";
+import * as SelectorEngine from "../helper/dom/selector-engine.js";
+import { setData, getData, removeData } from "../helper/dom/data.js";
 
 export interface Config {
   toggle: boolean;

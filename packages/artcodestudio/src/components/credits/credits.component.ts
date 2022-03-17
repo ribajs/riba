@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { CreditsComponentScope } from "../../types/index.js";
 import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
 import template from "./credits.component.pug";

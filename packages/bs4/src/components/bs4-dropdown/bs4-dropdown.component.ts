@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { DropdownService } from "../../services/dropdown.service.js";
 
 export class Bs4DropdownComponent extends Component {

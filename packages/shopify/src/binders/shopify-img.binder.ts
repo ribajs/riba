@@ -1,4 +1,4 @@
-import { Binder } from "@ribajs/core/src/index.js";
+import { Binder } from "@ribajs/core";
 import { getViewportDimensions, throttle } from "@ribajs/utils/src/index.js";
 import { imgUrlFormatter } from "../formatters/img-url.formatter.js";
 

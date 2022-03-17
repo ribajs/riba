@@ -1,4 +1,4 @@
-import { Binder } from "@ribajs/core/src/index.js";
+import { Binder } from "@ribajs/core";
 import { TouchEventsService } from "../services/touch-events/touch-events.service.js";
 
 export class TouchEventsBinder extends Binder<string, HTMLElement> {

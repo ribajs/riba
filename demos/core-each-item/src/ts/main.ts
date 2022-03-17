@@ -1,5 +1,5 @@
-import { Riba, coreModule } from "@ribajs/core/src/index.js";
-import { eachItemModule } from "./each-item.module";
+import { Riba, coreModule } from "@ribajs/core";
+import { eachItemModule } from "./each-item.module.js";
 
 const riba = new Riba();
 const model = {};

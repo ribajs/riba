@@ -1,6 +1,6 @@
 import { bs4Module } from "@ribajs/bs4";
-import { coreModule, Riba } from "@ribajs/core/src/index.js";
-import { Bs4TabsTplModule } from "./bs4-tabs-tpl.module";
+import { coreModule, Riba } from "@ribajs/core";
+import { Bs4TabsTplModule } from "./bs4-tabs-tpl.module.js";
 
 const riba = new Riba();
 const model = {};

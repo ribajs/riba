@@ -22,7 +22,7 @@ import {
   // UserData,
   // ReceiveMessage,
   // ShopifyApp,
-} from "../interfaces/shopify-easdk";
+} from "../interfaces/shopify-easdk.js";
 
 import { EventDispatcher } from "@ribajs/events";
 

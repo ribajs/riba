@@ -1,4 +1,4 @@
-import { coreModule, Riba } from "@ribajs/core/src/index.js";
+import { coreModule, Riba } from "@ribajs/core";
 import { luxonModule } from "@ribajs/luxon";
 import { LuxonDemoModule } from "./luxon-demo.module";
 

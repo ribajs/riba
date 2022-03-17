@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { GamepadService } from "../../services/gamepad.service.js";
 import { GamepadKeysComponentScope } from "../../types/index.js";
 import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
@@ -18,43 +18,43 @@ export class GamepadKeysComponent extends Component {
   public scope: GamepadKeysComponentScope = {
     controls: {
       buttonB: {
-        active: false,
+        active: false
       },
       buttonA: {
-        active: false,
+        active: false
       },
       buttonY: {
-        active: false,
+        active: false
       },
       buttonX: {
-        active: false,
+        active: false
       },
       up: {
-        active: false,
+        active: false
       },
       down: {
-        active: false,
+        active: false
       },
       right: {
-        active: false,
+        active: false
       },
       left: {
-        active: false,
+        active: false
       },
       start: {
-        active: false,
+        active: false
       },
       select: {
-        active: false,
+        active: false
       },
       l: {
-        active: false,
+        active: false
       },
       r: {
-        active: false,
-      },
+        active: false
+      }
     },
-    connected: 0,
+    connected: 0
   };
 
   constructor() {

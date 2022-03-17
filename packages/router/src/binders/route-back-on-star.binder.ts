@@ -1,4 +1,4 @@
-import { Binder, eventHandlerFunction } from "@ribajs/core/src/index.js";
+import { Binder, eventHandlerFunction } from "@ribajs/core";
 
 const goBack = () => {
   window.history.back();

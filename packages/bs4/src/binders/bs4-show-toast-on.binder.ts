@@ -1,4 +1,4 @@
-import { Binder } from "@ribajs/core/src/index.js";
+import { Binder } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { Toast } from "@ribajs/bs4/src/interfaces";
 

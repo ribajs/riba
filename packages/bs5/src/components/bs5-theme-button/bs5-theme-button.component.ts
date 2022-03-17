@@ -1,8 +1,8 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
-import { ThemeService } from "../../services/theme";
+import { Component, TemplateFunction } from "@ribajs/core";
+import { ThemeService } from "../../services/theme.js";
 import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
 import template from "./bs5-theme-button.component.pug";
-import { themeChoices } from "../../constants";
+import { themeChoices } from "../../constants/index.js";
 
 import type {
   Bs5ThemeButtonComponentScope,

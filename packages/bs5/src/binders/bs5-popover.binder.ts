@@ -1,4 +1,4 @@
-import { Binder } from "@ribajs/core/src/index.js";
+import { Binder } from "@ribajs/core";
 import { Popover, PopoverOptions } from "@ribajs/bs5";
 
 /**

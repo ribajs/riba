@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 
 import type { NavbarComponentScope } from "../../types/index.js";
 import type { Bs5SidebarComponent } from "@ribajs/bs5";
@@ -12,7 +12,7 @@ export class NavbarComponent extends Component {
   }
 
   public scope: NavbarComponentScope = {
-    searchHasFocus: false,
+    searchHasFocus: false
   };
 
   constructor() {

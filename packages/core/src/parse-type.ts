@@ -1,5 +1,5 @@
 import { parseJsonString, couldBeJson } from "@ribajs/utils/src/index.js";
-import { PRIMITIVE, QUOTED_STR, KEYPATH } from "./constants/parser";
+import { PRIMITIVE, QUOTED_STR, KEYPATH } from "./constants/parser.js";
 
 /**
  * Parser and tokenizer for getting the type and value from a string.

@@ -2,17 +2,16 @@ import gulp from "gulp";
 import gutil from "gulp-util";
 import { compressForStore } from "./includes/release.cjs";
 import { promptInput, promptYesNo } from "./includes/prompts.cjs";
-import { createStoreTheme, getOldestEnvTheme } from "./includes/theme.cjs";
-import messages from "./includes/messages.cjs";
-import { Models } from "shopify-admin-api";
-
-import {
+import { createStoreTheme, getOldestEnvTheme ,
   generateEnvLiveThemeConfig,
   generateEnvYoungestThemeConfig,
   getStoreThemes,
   print as printTheme,
   remove as deleteTheme
 } from "./includes/theme.cjs";
+import messages from "./includes/messages.cjs";
+import { Models } from "shopify-admin-api";
+
 import { uploadFile, getDownloadFileUrl } from "./includes/upload.cjs";
 import { getAsset, getShop } from "./includes/shopify-api.cjs";
 import { promises as fs } from "fs";

@@ -1,2 +1,2 @@
-export * from "./intrinsic-elements";
-export * from "./jsx-ssr-root-page-props";
+export * from "./intrinsic-elements.js";
+export * from "./jsx-ssr-root-page-props.js";

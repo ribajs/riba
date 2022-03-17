@@ -1,5 +1,5 @@
 import { createPopper, Options } from "@popperjs/core";
-import { Binder } from "@ribajs/core/src/index.js";
+import { Binder } from "@ribajs/core";
 
 const template = document.createElement("div");
 template.classList.add("tooltip");

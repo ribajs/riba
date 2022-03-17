@@ -1,5 +1,5 @@
 import { RouterModuleOptions } from "../types/index.js";
-import { HideShowTransition } from "./Transition/HideShowTransition";
+import { HideShowTransition } from "./Transition/HideShowTransition.js";
 
 export class RouterService {
   protected static _options: RouterModuleOptions;

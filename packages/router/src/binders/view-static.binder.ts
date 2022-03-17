@@ -3,9 +3,9 @@ import {
   View,
   handleizeFormatter,
   FormatterFn
-} from "@ribajs/core/src/index.js";
+} from "@ribajs/core";
 import { isObject } from "@ribajs/utils/src/type.js";
-import { Pjax, HideShowTransition } from "../services";
+import { Pjax, HideShowTransition } from "../services/index.js";
 
 const handleize = handleizeFormatter.read as FormatterFn;
 

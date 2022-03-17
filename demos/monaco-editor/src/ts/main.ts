@@ -1,4 +1,4 @@
-import { coreModule, Riba } from "@ribajs/core/src/index.js";
+import { coreModule, Riba } from "@ribajs/core";
 import { monacoEditorModule } from "@ribajs/monaco-editor";
 import { MonacoDemoModule } from "./monaco-demo.module";
 

@@ -17,7 +17,7 @@ export * from "./html.binder.js";
 export * from "./if.binder.js";
 export * from "./maxlength.binder.js";
 // export * from "./mustache-text.binder.js";
-export * from "./not-draggable";
+export * from "./not-draggable.js";
 export * from "./on-event.binder.js";
 export * from "./parent.binder.js";
 export * from "./readonly.binder.js";

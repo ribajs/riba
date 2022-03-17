@@ -1,7 +1,7 @@
-import { HttpService } from "@ribajs/core/src/index.js";
-import { ITheme } from "../interfaces/shopify-api/theme";
-import { Asset } from "../interfaces/shopify-api/asset";
-import { AssetLocale } from "../interfaces/shopify-api/asset-locale";
+import { HttpService } from "@ribajs/core";
+import { ITheme } from "../interfaces/shopify-api/theme.js";
+import { Asset } from "../interfaces/shopify-api/asset.js";
+import { AssetLocale } from "../interfaces/shopify-api/asset-locale.js";
 import { BaseApiService } from "./base.service.js";
 
 export class ShopifyApiThemesService extends BaseApiService {

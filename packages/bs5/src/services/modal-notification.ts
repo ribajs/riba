@@ -1,5 +1,5 @@
 import { Notification, ModalNotificationButton } from "../types/index.js";
-import { Modal } from "../services/modal";
+import { Modal } from "../services/modal.js";
 
 export class ModalNotification extends Notification {
   message: string;

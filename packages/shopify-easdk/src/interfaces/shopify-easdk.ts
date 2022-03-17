@@ -1,4 +1,4 @@
-import { WrapperService } from "../services";
+import { WrapperService } from "../services/index.js";
 
 /**
  * type definitions for Shopify's Embedded App SDK

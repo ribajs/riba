@@ -1,4 +1,4 @@
-import { getScrollPosition } from "../helper/scroll";
+import { getScrollPosition } from "../helper/scroll.js";
 import { Gameloop } from "./gameloop.service.js";
 import { throttle } from "@ribajs/utils/src/control";
 

@@ -1,1 +1,1 @@
-export * from './gamepad.service'; 
+export * from './gamepad.service.js'; 

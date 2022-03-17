@@ -1,7 +1,7 @@
 import type {
   StrapiImage,
   StrapiImageFormat,
-  StrapiImageFormatType,
+  StrapiImageFormatType
 } from "../types/index.js";
 
 /**
@@ -41,5 +41,5 @@ export const strapiImageFormatter = {
         throw new Error("Unknown image format: " + format + " !");
     }
     return imageFormat;
-  },
+  }
 };

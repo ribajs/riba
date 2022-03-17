@@ -55,7 +55,7 @@ export class EventDispatcher {
             this.eventsOnce[eventName].push({
                 cb: cb.bind(thisContext),
                 orgCb: cb,
-                thisContext,
+                thisContext
             });
         }
         else {
@@ -68,7 +68,7 @@ export class EventDispatcher {
             this.events[eventName].push({
                 cb: cb.bind(thisContext),
                 orgCb: cb,
-                thisContext,
+                thisContext
             });
         }
         else {

@@ -1,3 +1,3 @@
-export * from "./strapi-image-url";
-export * from "./strapi-image";
-export * from "./strapi";
+export * from "./strapi-image-url.js";
+export * from "./strapi-image.js";
+export * from "./strapi.js";

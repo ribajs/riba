@@ -1,4 +1,4 @@
-import { Binder } from "@ribajs/core/src/index.js";
+import { Binder } from "@ribajs/core";
 import { ShopifyCartService } from "../services/index.js";
 import { ShopifyCartObject } from "../interfaces/index.js";
 

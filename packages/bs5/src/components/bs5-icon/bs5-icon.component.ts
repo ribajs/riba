@@ -3,7 +3,7 @@ import {
   TemplateFunction,
   HttpService,
   HttpServiceResponse
-} from "@ribajs/core/src/index.js";
+} from "@ribajs/core";
 import { getLocation } from "@ribajs/utils/src/index.js";
 import { BaseCache } from "@ribajs/cache";
 

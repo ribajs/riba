@@ -1,4 +1,4 @@
-import { Formatter } from "@ribajs/core/src/index.js";
+import { Formatter } from "@ribajs/core";
 
 /**
  * Return a resized shopify image URL

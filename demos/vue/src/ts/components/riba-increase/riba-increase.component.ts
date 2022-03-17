@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 import template from "./riba-increase.component.html";
 
 export class RibaIncreaseComponent extends Component {

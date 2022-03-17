@@ -1,6 +1,6 @@
-import { OrderSyncProgress } from "./order";
-import { ProductSyncProgress } from "./product";
-import { SyncOptions } from "./options";
+import { OrderSyncProgress } from "./order.js";
+import { ProductSyncProgress } from "./product.js";
+import { SyncOptions } from "./options.js";
 
 export interface SyncProgress {
   shop: string;

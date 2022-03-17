@@ -1,4 +1,4 @@
-import { State } from "../types/state";
+import { State } from "../types/state.js";
 /**
  * HistoryManager helps to keep track of the navigation
  */

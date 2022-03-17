@@ -1,10 +1,10 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 import {
   getElementFromEvent,
   hasChildNodesTrim
 } from "@ribajs/utils/src/dom.js";
 import Debug from "debug";
-import { ACCESS_SCOPES } from "../../constants";
+import { ACCESS_SCOPES } from "../../constants/index.js";
 import pugTemplate from "./permissions.component.pug";
 
 interface AccessScopeItem {

@@ -1,7 +1,7 @@
 import { jest } from '@jest/globals';
 import { Riba, View, Binder } from "./index.js";
 import { Data } from "../spec/lib/moch.data";
-import { dotAdapter } from "./adapters";
+import { dotAdapter } from "./adapters/index.js";
 import {
   TextBinder,
   HtmlBinder,

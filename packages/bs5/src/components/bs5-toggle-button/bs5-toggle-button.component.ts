@@ -7,11 +7,11 @@
  * @property targetId Passed attribute value, see `target-id` attribute
  */
 
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { JsxBs5ToggleButtonProps } from "../../types/index.js";
-import { TOGGLE_BUTTON } from "../../constants";
+import { TOGGLE_BUTTON } from "../../constants/index.js";
 
 type State =
   | "undefined"

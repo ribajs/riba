@@ -1,4 +1,4 @@
-import { RibaModule } from "@ribajs/core/src/index.js";
+import { RibaModule } from "@ribajs/core";
 import * as binders from "./binders/index.js";
 import * as formatters from "./formatters/index.js";
 import * as services from "./services/index.js";
@@ -10,7 +10,8 @@ export const emptyTemplateModule: RibaModule<EmptyTemplateModuleOptions> = {
   services,
   formatters,
   components,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   init(options = {}) {
     return this;
-  },
+  }
 };

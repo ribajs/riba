@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { Dropdown } from "@ribajs/bs5";
 import template from "./bs5-dropdown-example.component.html";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";

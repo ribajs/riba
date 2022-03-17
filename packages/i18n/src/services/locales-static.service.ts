@@ -1,4 +1,4 @@
-import { LocalesService } from "../types/locales-service";
+import { LocalesService } from "../types/locales-service.js";
 
 export class LocalesStaticService extends LocalesService {
   public static instances: {

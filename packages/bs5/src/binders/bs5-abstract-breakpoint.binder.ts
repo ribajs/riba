@@ -1,4 +1,4 @@
-import { BasicComponent, Binder, View } from "@ribajs/core/src/index.js";
+import { BasicComponent, Binder, View } from "@ribajs/core";
 import { Bs5Service } from "../services/bs5.service.js";
 import {
   parseJsonString,

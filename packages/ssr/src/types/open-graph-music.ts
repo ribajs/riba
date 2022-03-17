@@ -1,5 +1,5 @@
-import { OpenGraphMusicAlbum } from "./open-graph-music-album";
-import { OpenGraphMusicSong } from "./open-graph-music-song";
+import { OpenGraphMusicAlbum } from "./open-graph-music-album.js";
+import { OpenGraphMusicSong } from "./open-graph-music-song.js";
 
 export interface OpenGraphMusic {
   // og:type value: music.song

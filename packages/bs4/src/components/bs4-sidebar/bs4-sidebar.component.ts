@@ -1,15 +1,15 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import {
   getViewportDimensions,
   hasChildNodesTrim
 } from "@ribajs/utils/src/dom.js";
-import { TOGGLE_BUTTON } from "../../constants";
+import { TOGGLE_BUTTON } from "../../constants/index.js";
 import { debounce } from "@ribajs/utils/src/control";
 import {
   Bs4SidebarComponentScope as Scope,
   Bs4SidebarComponentState as State
-} from "../../interfaces";
+} from "../../interfaces/index.js";
 
 export class Bs4SidebarComponent extends Component {
   public static tagName = "bs4-sidebar";

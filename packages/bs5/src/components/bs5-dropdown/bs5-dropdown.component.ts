@@ -1,5 +1,5 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
-import { Dropdown } from "../../services/dropdown";
+import { Component, TemplateFunction } from "@ribajs/core";
+import { Dropdown } from "../../services/dropdown.js";
 
 export class Bs5DropdownComponent extends Component {
   public static tagName = "bs5-dropdown";

@@ -1,7 +1,7 @@
 import {
   TemplatesComponent,
   TemplateFunction
-} from "@ribajs/core/src/index.js";
+} from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { debounce } from "@ribajs/utils/src/control";
 import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";

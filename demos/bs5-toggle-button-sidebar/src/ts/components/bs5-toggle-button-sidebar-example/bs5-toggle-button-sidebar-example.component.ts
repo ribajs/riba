@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 import template from "./bs5-toggle-button-sidebar-example.component.html";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 

@@ -1,6 +1,6 @@
 import { extend } from "@ribajs/utils/src/index.js";
 
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { PopoverOptions } from "@ribajs/bs5";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { TaggedImageTag as Tag } from "../../types/index.js";

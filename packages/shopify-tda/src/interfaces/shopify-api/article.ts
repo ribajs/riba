@@ -1,5 +1,5 @@
-import { ShopifyObject } from "./base";
-import { ArticleImage } from "./article-image";
+import { ShopifyObject } from "./base.js";
+import { ArticleImage } from "./article-image.js";
 
 export interface Article extends ShopifyObject {
   /**

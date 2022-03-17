@@ -1,4 +1,4 @@
-import { isScrollable } from "../helper/scroll";
+import { isScrollable } from "../helper/scroll.js";
 import { throttle } from "@ribajs/utils/src/control";
 
 export interface DragscrollOptions {

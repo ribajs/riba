@@ -1,5 +1,5 @@
-import { HttpService } from "@ribajs/core/src/index.js";
-import { LocalesService } from "../types/locales-service";
+import { HttpService } from "@ribajs/core";
+import { LocalesService } from "../types/locales-service.js";
 
 /**
  * LocalesRestService get locales object from url

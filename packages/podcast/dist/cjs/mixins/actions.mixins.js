@@ -4,7 +4,7 @@ exports.requestPlay = exports.requestPause = exports.selectEpisode = exports.cre
 const createAction = (type, payload) => {
     return {
         type,
-        payload,
+        payload
     };
 };
 exports.createAction = createAction;

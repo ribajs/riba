@@ -1,4 +1,4 @@
-import { TemplateFunction } from "@ribajs/core/src/index.js";
+import { TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import {
   Bs4ShareComponent,

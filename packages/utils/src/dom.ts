@@ -1,5 +1,4 @@
-import { clone, parseJsonString, justDigits } from "./type";
-import { jsonStringify } from "./type";
+import { clone, parseJsonString, justDigits , jsonStringify } from "./type.js";
 
 export const MAX_UID = 1000;
 

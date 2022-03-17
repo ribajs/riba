@@ -1,4 +1,4 @@
-import { Formatter } from "@ribajs/core/src/index.js";
+import { Formatter } from "@ribajs/core";
 import { toIntegerFormatter } from "./to-integer.formatter.js";
 import { toFloatFormatter } from "./to-float.formatter.js";
 

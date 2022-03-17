@@ -1,5 +1,5 @@
 import { deferred } from "@ribajs/utils/src/index.js";
-import { Transition } from "../../types/transition";
+import { Transition } from "../../types/transition.js";
 
 /**
  * BaseTransition to extend

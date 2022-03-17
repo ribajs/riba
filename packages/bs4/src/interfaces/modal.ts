@@ -1,4 +1,4 @@
-import { Notification } from "./notification";
+import { Notification } from "./notification.js";
 import { ModalService, Config } from "../services/modal.service.js";
 
 export interface Button {

@@ -1,4 +1,4 @@
-import { Item } from "./item";
+import { Item } from "./item.js";
 import * as PhotoSwipe from "photoswipe";
 
 /**

@@ -1,5 +1,5 @@
-import { TouchData } from "./touch-data";
-import { TouchDirection } from "./touch-direction";
+import { TouchData } from "./touch-data.js";
+import { TouchDirection } from "./touch-direction.js";
 
 export interface TouchSwipeData {
   direction: TouchDirection;

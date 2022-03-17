@@ -1,1 +1,1 @@
-export * from "./access-scopes";
+export * from "./access-scopes.js";

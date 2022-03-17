@@ -1,7 +1,7 @@
-import { HttpService } from "@ribajs/core/src/index.js";
+import { HttpService } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
-import { Product } from "./../interfaces/shopify-api";
-import { io, Socket } from "../dependencies/socket-io-client";
+import { Product } from "./../interfaces/shopify-api/index.js";
+import { io, Socket } from "../dependencies/socket-io-client.js";
 import { BaseApiService } from "./base.service.js";
 
 export class ShopifyApiProductService extends BaseApiService {

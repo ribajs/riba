@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core/src/index.js";
+import { Component } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import type { SsrHtmlHead, SharedContext } from "./types/index.js";
 

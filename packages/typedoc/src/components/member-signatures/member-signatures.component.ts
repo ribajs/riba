@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 
 import type { MemberSignaturesComponentScope } from "../../types/index.js";
 
@@ -12,7 +12,7 @@ export class MemberSignaturesComponent extends Component {
   public scope: MemberSignaturesComponentScope = {
     signatureEls: [],
     descriptionEls: [],
-    showDescByIndex: this.showDescByIndex,
+    showDescByIndex: this.showDescByIndex
   };
 
   constructor() {

@@ -1,5 +1,5 @@
-import { Toast } from ".";
-import { Notification } from "../types/notification";
+import { Toast } from "./index.js";
+import { Notification } from "../types/notification.js";
 
 export class ToastNotification extends Notification {
   message: string;

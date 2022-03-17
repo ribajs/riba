@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 
 import template from "./bs5-modal-item.component.html";
 import { getElementFromEvent } from "@ribajs/utils/src/dom.js";

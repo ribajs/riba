@@ -3,7 +3,7 @@
  */
 
 import Color from "@sphinxxxx/color-conversion";
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import template from "./bs5-colorpicker.component.html";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";

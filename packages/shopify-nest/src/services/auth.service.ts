@@ -1,7 +1,7 @@
-import { HttpService } from "@ribajs/core/src/index.js";
+import { HttpService } from "@ribajs/core";
 import Debug from "debug";
-import { ShopifyConnect } from "./../interfaces/shopify-connect/connect";
-import { FacebookConnect } from "./../interfaces/facebook-connect/connect";
+import { ShopifyConnect } from "./../interfaces/shopify-connect/connect.js";
+import { FacebookConnect } from "./../interfaces/facebook-connect/connect.js";
 import { EASDKWrapperService } from "@ribajs/shopify-easdk";
 export class AuthService {
   public static instance?: AuthService;

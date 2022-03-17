@@ -1,5 +1,5 @@
-import { ErrorObj } from "./error-obj";
-import { ParsedQs } from "./parsed-query";
+import { ErrorObj } from "./error-obj.js";
+import { ParsedQs } from "./parsed-query.js";
 
 export interface RequestContext {
   params: {

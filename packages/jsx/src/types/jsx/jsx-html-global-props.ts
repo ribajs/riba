@@ -1,4 +1,4 @@
-import { JsxChildren } from "./jsx-children";
+import { JsxChildren } from "./jsx-children.js";
 
 /**
  * The common properties that may appear on any HTML element.

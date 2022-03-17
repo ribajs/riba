@@ -1,10 +1,10 @@
-import { HttpService } from "@ribajs/core/src/index.js";
+import { HttpService } from "@ribajs/core";
 import {
   InstagramApiService as _InstagramApiService,
   InstagramData
 } from "@ribajs/shopify-tda";
 import Debug from "debug";
-import { InstagramAccounts } from "./../interfaces/instagram-api/accounts";
+import { InstagramAccounts } from "./../interfaces/instagram-api/accounts.js";
 
 export class InstagramApiService extends _InstagramApiService {
   public static instance?: InstagramApiService;

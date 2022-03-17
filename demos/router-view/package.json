@@ -7,7 +7,9 @@
   },
   "private": true,
   "description": "",
-  "exports": "./src/index.html",
+  "main": "./src/ts/main.ts",
+  "module": "src/ts/main.ts",
+  "source": "src/ts/main.ts",
   "scripts": {
     "build": "webpack --progress --color --env production",
     "build:dev": "webpack --progress --color --env development",

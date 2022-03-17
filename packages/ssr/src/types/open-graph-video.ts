@@ -1,4 +1,4 @@
-import { OpenGraphVideoActor } from "./open-graph-video-actor";
+import { OpenGraphVideoActor } from "./open-graph-video-actor.js";
 
 export interface OpenGraphVideo {
   /** Identical to og:video. */

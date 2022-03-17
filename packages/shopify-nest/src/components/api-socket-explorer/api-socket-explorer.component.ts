@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { htmlToElement, hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import Debug from "debug";
 import { LocalesStaticService } from "@ribajs/i18n";

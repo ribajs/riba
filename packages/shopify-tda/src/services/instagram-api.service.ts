@@ -1,6 +1,6 @@
-import { HttpService } from "@ribajs/core/src/index.js";
+import { HttpService } from "@ribajs/core";
 import { BaseApiService } from "./base.service.js";
-import { InstagramMediaResponse } from "../interfaces/instagram-api/media-response";
+import { InstagramMediaResponse } from "../interfaces/instagram-api/media-response.js";
 
 export class InstagramApiService extends BaseApiService {
   public static instance?: InstagramApiService;

@@ -1,6 +1,6 @@
-import { Binder } from "@ribajs/core/src/index.js";
+import { Binder } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
-import { TOGGLE_BUTTON, TOGGLE_CLASS } from "../constants";
+import { TOGGLE_BUTTON, TOGGLE_CLASS } from "../constants/index.js";
 
 /**
  * Adds / removes the class on click on the bs4-toggle-button with the same id

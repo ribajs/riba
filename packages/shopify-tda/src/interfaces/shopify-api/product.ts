@@ -1,7 +1,7 @@
-import { ProductImage } from "./product_image";
-import { ProductOption } from "./product_option";
-import { ProductVariant } from "./product_variant";
-import { ShopifyObject } from "./base";
+import { ProductImage } from "./product_image.js";
+import { ProductOption } from "./product_option.js";
+import { ProductVariant } from "./product_variant.js";
+import { ShopifyObject } from "./base.js";
 
 export interface Product extends ShopifyObject {
   /**

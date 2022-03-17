@@ -1,4 +1,4 @@
-import { JsxElement } from "./jsx-element";
+import { JsxElement } from "./jsx-element.js";
 
 export declare type JsxChildren =
   | JsxElement

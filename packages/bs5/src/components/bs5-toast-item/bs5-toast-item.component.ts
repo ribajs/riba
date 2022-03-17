@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 
 import template from "./bs5-toast-item.component.html";
 import { Toast, ToastNotification } from "../../services/index.js";

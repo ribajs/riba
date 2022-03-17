@@ -1,4 +1,4 @@
-import { Bs4ModuleOptions } from "../interfaces";
+import { Bs4ModuleOptions } from "../interfaces/index.js";
 
 export class Bs4Service {
   protected static _options: Bs4ModuleOptions;

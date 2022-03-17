@@ -1,6 +1,6 @@
-import { Models } from "shopify-admin-api";
+import type { Interfaces } from "shopify-admin-api";
 
-export interface ScriptTagsConfig extends Models.ScriptTag {
+export interface ScriptTagsConfig extends Interfaces.ScriptTag {
   event: "onload";
   src: string;
 }

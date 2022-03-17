@@ -1,7 +1,7 @@
 import { Pjax } from "./index.js";
 import { getElementFromEvent } from "@ribajs/utils/src/dom.js";
 import { normalizeUrl } from "@ribajs/utils/src/url";
-import { IGNORE_CLASS_PREFETCH, ROUTE_ERROR_CLASS } from "../../constants";
+import { IGNORE_CLASS_PREFETCH, ROUTE_ERROR_CLASS } from "../../constants.js";
 
 export interface PrefetchInstances {
   [key: string]: Prefetch;

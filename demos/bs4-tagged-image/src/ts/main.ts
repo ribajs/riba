@@ -1,9 +1,9 @@
 import "../scss/main.scss";
 
 import { bs4Module } from "@ribajs/bs4";
-import { coreModule, Riba } from "@ribajs/core/src/index.js";
+import { coreModule, Riba } from "@ribajs/core";
 import { extrasModule } from "@ribajs/extras";
-import { Bs4TaggedImageDemoModule } from "./bs4-taggedimage-demo.module";
+import { Bs4TaggedImageDemoModule } from "./bs4-taggedimage-demo.module.js";
 
 const riba = new Riba();
 const model = {};

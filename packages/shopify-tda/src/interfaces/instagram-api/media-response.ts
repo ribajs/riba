@@ -1,4 +1,4 @@
-import { InstagramMedia } from "./media";
+import { InstagramMedia } from "./media.js";
 
 export interface InstagramMediaResponse {
   id: string;

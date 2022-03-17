@@ -6,14 +6,14 @@
  * --------------------------------------------------------------------------
  */
 
-import { getData } from "../helper/dom/data";
-import { findOne } from "../helper/dom/selector-engine";
+import { getData } from "../helper/dom/data.js";
+import { findOne } from "../helper/dom/selector-engine.js";
 import { TooltipService } from "./tooltip.service.js";
 import {
   TooltipContentFn,
   PopoverOptions,
   TooltipOptions
-} from "../interfaces";
+} from "../interfaces/index.js";
 
 /**
  * ------------------------------------------------------------------------

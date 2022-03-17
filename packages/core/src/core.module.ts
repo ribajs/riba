@@ -1,10 +1,9 @@
-import { RibaModule } from "./types/index.js";
+import { RibaModule , CoreModuleOptions } from "./types/index.js";
 import * as binders from "./binders/index.js";
 import * as formatters from "./formatters/index.js";
 import * as services from "./services/index.js";
 import * as components from "./components/index.js";
-import * as adapters from "./adapters";
-import { CoreModuleOptions } from "./types/index.js";
+import * as adapters from "./adapters/index.js";
 
 export const coreModule: RibaModule<CoreModuleOptions> = {
   formatters,

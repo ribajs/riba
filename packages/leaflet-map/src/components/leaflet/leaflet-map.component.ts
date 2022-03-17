@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { isNumber, justDigits } from "@ribajs/utils/src/type.js";
 import { getUID } from "@ribajs/utils/src/dom.js";

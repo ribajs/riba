@@ -1,4 +1,4 @@
-import { HttpService } from "@ribajs/core/src/index.js";
+import { HttpService } from "@ribajs/core";
 import type { PodloveWebPlayerEpisode } from "../types/podlove-web-player-episode.js";
 import type { PodloveWebPlayerConfig } from "../types/podlove-web-player-config.js";
 

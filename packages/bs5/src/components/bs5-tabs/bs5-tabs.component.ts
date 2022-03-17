@@ -3,7 +3,7 @@ import {
   FormatterFn,
   TemplateFunction,
   TemplatesComponent
-} from "@ribajs/core/src/index.js";
+} from "@ribajs/core";
 import templateHorizontal from "./bs5-tabs-horizontal.component.html";
 import templateVertical from "./bs5-tabs-vertical.component.html";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";

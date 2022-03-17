@@ -1,6 +1,5 @@
 import { AccessibilityModuleOptions } from "../types/index.js";
-import { isGamepadSupported, gameControl } from "gamecontroller.js";
-import test from "gamecontroller.js";
+import test, { isGamepadSupported, gameControl } from "gamecontroller.js";
 export class GamepadService {
   protected _options: AccessibilityModuleOptions;
   protected _control: typeof gameControl;

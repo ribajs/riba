@@ -1,4 +1,4 @@
-import { HttpService } from "@ribajs/core/src/index.js";
+import { HttpService } from "@ribajs/core";
 import Debug from "debug";
 import {
   Article,

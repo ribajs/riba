@@ -1,11 +1,11 @@
-import { OpenGraphType } from "./open-graph-type";
-import { OpenGraphDeterminer } from "./open-graph-determiner";
-import { OpenGraphImage } from "./open-graph-image";
-import { OpenGraphVideo } from "./open-graph-video";
-import { OpenGraphAudio } from "./open-graph-audio";
-import { OpenGraphLocale } from "./open-graph-locale";
-import { OpenGraphBook } from "./open-graph-book";
-import { OpenGraphProfile } from "./open-graph-profile";
+import { OpenGraphType } from "./open-graph-type.js";
+import { OpenGraphDeterminer } from "./open-graph-determiner.js";
+import { OpenGraphImage } from "./open-graph-image.js";
+import { OpenGraphVideo } from "./open-graph-video.js";
+import { OpenGraphAudio } from "./open-graph-audio.js";
+import { OpenGraphLocale } from "./open-graph-locale.js";
+import { OpenGraphBook } from "./open-graph-book.js";
+import { OpenGraphProfile } from "./open-graph-profile.js";
 
 export interface OpenGraph {
   // Basic

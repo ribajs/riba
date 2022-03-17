@@ -1,4 +1,4 @@
-import { FbPaging } from "./base";
+import { FbPaging } from "./base.js";
 
 export interface IFbDescriptionTagsData {
   id: string;

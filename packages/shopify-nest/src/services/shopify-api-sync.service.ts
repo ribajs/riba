@@ -1,7 +1,7 @@
-import { HttpService } from "@ribajs/core/src/index.js";
+import { HttpService } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import Debug from "debug";
-import { SyncOptions, SyncProgress } from "../interfaces/shopify-sync";
+import { SyncOptions, SyncProgress } from "../interfaces/shopify-sync/index.js";
 import { io, Socket } from "@ribajs/shopify-tda";
 
 // TODO singleton?

@@ -1,4 +1,4 @@
-import { Binder, BinderAttributeChangedEvent } from "@ribajs/core/src/index.js";
+import { Binder, BinderAttributeChangedEvent } from "@ribajs/core";
 import { extend } from "@ribajs/utils/src/type.js";
 import { I18nService } from "../services/i18n.service.js";
 import {

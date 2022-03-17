@@ -1,7 +1,7 @@
 import { bs4Module } from "@ribajs/bs4";
-import { coreModule, Riba } from "@ribajs/core/src/index.js";
+import { coreModule, Riba } from "@ribajs/core";
 import { extrasModule } from "@ribajs/extras";
-import { BS4ToggleButtonSidebarModule } from "./bs4-toggle-button-sidebar.module";
+import { BS4ToggleButtonSidebarModule } from "./bs4-toggle-button-sidebar.module.js";
 
 const riba = new Riba();
 const model = {};

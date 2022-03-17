@@ -1,2 +1,2 @@
-export * from "./deferred";
-export * from "./timeout-promise";
+export * from "./deferred.js";
+export * from "./timeout-promise.js";

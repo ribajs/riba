@@ -1,2 +1,2 @@
-export * from "./jsx";
-export * from "./jsx-module-options";
+export * from "./jsx/index.js";
+export * from "./jsx-module-options.js";

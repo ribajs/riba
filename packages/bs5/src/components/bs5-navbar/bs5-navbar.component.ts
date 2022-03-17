@@ -1,6 +1,6 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
-import { Collapse } from "../../services/collapse";
+import { Collapse } from "../../services/collapse.js";
 
 export class Bs5NavbarComponent extends Component {
   public static tagName = "bs5-navbar";

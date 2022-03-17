@@ -1,4 +1,4 @@
-import { Formatter } from "@ribajs/core/src/index.js";
+import { Formatter } from "@ribajs/core";
 
 /**
  * Returns the integer representation of the given target.

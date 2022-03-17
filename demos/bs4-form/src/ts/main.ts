@@ -1,7 +1,7 @@
 import { bs4Module } from "@ribajs/bs4";
-import { coreModule, Riba } from "@ribajs/core/src/index.js";
+import { coreModule, Riba } from "@ribajs/core";
 import { extrasModule } from "@ribajs/extras";
-import { FormModule } from "./form.module";
+import { FormModule } from "./form.module.js";
 
 const riba = new Riba();
 const model = {};

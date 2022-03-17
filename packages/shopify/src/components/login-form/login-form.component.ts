@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 import template from "./login-form.component.html";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 

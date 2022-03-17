@@ -1,5 +1,5 @@
-import { Placement } from "./placement";
-import { TooltipOptions } from "./tooltip-options";
+import { Placement } from "./placement.js";
+import { TooltipOptions } from "./tooltip-options.js";
 
 export interface PopoverOptions extends TooltipOptions {
   placement: Placement;

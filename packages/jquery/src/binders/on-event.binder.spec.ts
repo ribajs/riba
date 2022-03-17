@@ -1,5 +1,5 @@
 import { jest } from '@jest/globals';
-import { Riba, ValueBinder, dotAdapter } from "@ribajs/core/src/index.js";
+import { Riba, ValueBinder, dotAdapter } from "@ribajs/core";
 import { OnEventBinder } from "./on-event.binder.js";
 
 describe("riba.binders", () => {

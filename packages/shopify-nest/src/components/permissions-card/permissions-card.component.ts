@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 import Debug from "debug";
 import pugTemplate from "./permissions-card.component.pug";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";

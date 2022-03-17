@@ -1,4 +1,4 @@
-import { ScrollPosition } from "../types/scroll-position";
+import { ScrollPosition } from "../types/scroll-position.js";
 
 export const getScrollPosition = (
   element: HTMLUnknownElement | Window

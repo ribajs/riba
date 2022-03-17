@@ -1,5 +1,5 @@
-import { ShopifyObject } from "./base";
-import { BlogCommentable } from "./blog-commentable";
+import { ShopifyObject } from "./base.js";
+import { BlogCommentable } from "./blog-commentable.js";
 
 export interface Blog extends ShopifyObject {
   /**

@@ -1,4 +1,4 @@
-import { Riba, dotAdapter } from "@ribajs/core/src/index.js";
+import { Riba, dotAdapter } from "@ribajs/core";
 import { ShopifyImgBinder } from "./shopify-img.binder.js";
 
 describe("riba.binders", () => {

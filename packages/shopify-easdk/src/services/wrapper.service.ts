@@ -23,7 +23,7 @@ import {
   // UserData,
   // ReceiveMessage,
   ShopifyApp
-} from "../interfaces/shopify-easdk";
+} from "../interfaces/shopify-easdk.js";
 
 export class WrapperService {
   public static inIframe() {

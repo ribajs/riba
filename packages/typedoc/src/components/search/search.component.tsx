@@ -1,13 +1,13 @@
 import { Component, TemplateFunction } from "@ribajs/core";
 import { Pjax } from "@ribajs/router";
 import { hasChildNodesTrim, debounce, normalizeUrl } from "@ribajs/utils";
-import { NavbarComponent } from "../navbar/navbar.component";
+import { NavbarComponent } from "../navbar/navbar.component.js";
 
 import type {
   SearchComponentScope,
   SearchResult,
-  SearchOptions,
-} from "../../types";
+  SearchOptions
+} from "../../types/index.js";
 
 declare global {
   interface Window {
@@ -37,7 +37,7 @@ export class SearchComponent extends Component {
     onKeydown: this.onKeydown,
     onKeypress: this.onKeypress,
     onSearchResultHover: this.onSearchResultHover,
-    onSearchResultClick: this.onSearchResultClick,
+    onSearchResultClick: this.onSearchResultClick
   };
 
   constructor() {

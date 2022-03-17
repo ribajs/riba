@@ -1,8 +1,8 @@
-export * from "./Dom";
-export * from "./Prefetch";
+export * from "./Dom.js";
+export * from "./Prefetch.js";
 
 import { EventDispatcher } from "@ribajs/events";
-import { HttpService, HttpServiceOptions } from "@ribajs/core/src/index.js";
+import { HttpService, HttpServiceOptions } from "@ribajs/core";
 import {
   cleanLink,
   getPort,
@@ -15,11 +15,11 @@ import {
 } from "@ribajs/utils/src/index.js";
 
 import { BaseCache } from "@ribajs/cache";
-import { HideShowTransition } from "../Transition";
+import { HideShowTransition } from "../Transition/index.js";
 import { Transition, Response, PjaxOptions } from "../../types/index.js";
-import { Dom } from "./Dom";
+import { Dom } from "./Dom.js";
 import { HistoryManager } from "@ribajs/history/src/index.js";
-import { ROUTE_ERROR_CLASS, IGNORE_CLASS_LINK } from "../../constants";
+import { ROUTE_ERROR_CLASS, IGNORE_CLASS_LINK } from "../../constants.js";
 import { RouterService } from "../../services/index.js";
 
 export interface PjaxInstances {

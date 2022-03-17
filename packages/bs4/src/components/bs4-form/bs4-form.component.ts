@@ -4,7 +4,7 @@ import {
   HttpService,
   HttpMethod,
   HttpDataType
-} from "@ribajs/core/src/index.js";
+} from "@ribajs/core";
 import template from "./bs4-form.component.html";
 import {
   scrollTo,

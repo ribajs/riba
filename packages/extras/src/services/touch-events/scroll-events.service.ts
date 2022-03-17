@@ -1,5 +1,5 @@
 import { ScrollPosition, ScrollEventsOptions } from "../../types/index.js";
-import { getScrollPosition } from "../../helper/scroll";
+import { getScrollPosition } from "../../helper/scroll.js";
 import { BaseEventsService } from "./base-events.service.js";
 
 export class ScrollEventsService extends BaseEventsService {

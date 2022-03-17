@@ -1,7 +1,6 @@
-import { TemplateFunction, Component } from "@ribajs/core/src/index.js";
+import { TemplateFunction, Component } from "@ribajs/core";
 import { I18nService } from "../../services/index.js";
-import { LocalesService } from "../../types/index.js";
-import { Langcode } from "../../types/index.js";
+import { LocalesService , Langcode } from "../../types/index.js";
 
 export interface Scope {
   langcodes: Langcode[];

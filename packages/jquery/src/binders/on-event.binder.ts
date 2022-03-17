@@ -1,6 +1,6 @@
-import { Binder, eventHandlerFunction } from "@ribajs/core/src/index.js";
+import { Binder, eventHandlerFunction } from "@ribajs/core";
 import { extend } from "@ribajs/utils/src/type.js";
-import { JQuery } from "../vendors/jquery.module";
+import { JQuery } from "../vendors/jquery.module.js";
 
 /**
  * Binds an event handler on the element.

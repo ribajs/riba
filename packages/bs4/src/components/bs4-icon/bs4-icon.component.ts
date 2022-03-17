@@ -1,4 +1,4 @@
-import { BasicComponent, TemplateFunction } from "@ribajs/core/src/index.js";
+import { BasicComponent, TemplateFunction } from "@ribajs/core";
 
 export class Bs4IconComponent extends BasicComponent {
   public static tagName = "bs4-icon";

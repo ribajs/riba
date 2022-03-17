@@ -1,5 +1,5 @@
-import { Position } from "./position";
-import { TouchOffset } from "./touch-offset";
+import { Position } from "./position.js";
+import { TouchOffset } from "./touch-offset.js";
 
 export interface TouchData {
   position: Position;

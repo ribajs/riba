@@ -1,4 +1,4 @@
-import { coreModule, Riba } from "@ribajs/core/src/index.js";
+import { coreModule, Riba } from "@ribajs/core";
 import { extrasModule } from "@ribajs/extras";
 import { touchEventsModule } from "./touch-events.module";
 

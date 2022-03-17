@@ -1,1 +1,1 @@
-export * from "./shopify-easdk";
+export * from "./shopify-easdk.js";

@@ -11,8 +11,8 @@ module.exports = {
     "ts-jest": {
       babelConfig: require("./babel.config.cjs"),
       tsconfig: "./tsconfig.spec.json",
-      isolatedModules: true,
-    },
+      isolatedModules: true
+    }
   },
   preset: "ts-jest",
   testMatch: null,
@@ -26,8 +26,8 @@ module.exports = {
   modulePathIgnorePatterns: [
     "<rootDir>/.yarn",
     "<rootDir>/infra",
-    "<rootDir>/demos/vue",
+    "<rootDir>/demos/vue"
   ],
   // https://www.npmjs.com/package/jest-ts-webcompat-resolver
-  resolver: require.resolve("jest-ts-webcompat-resolver"),
+  resolver: require.resolve("jest-ts-webcompat-resolver")
 };

@@ -1,6 +1,5 @@
-import { Formatter } from "@ribajs/core/src/index.js";
-import { Moment } from "moment";
-import moment from "moment";
+import { Formatter } from "@ribajs/core";
+import moment, { Moment } from "moment";
 
 /**
  * Returns the JS Date object representing the given unix timestamp or Moment object

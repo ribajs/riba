@@ -1,4 +1,4 @@
-import { Binder } from "@ribajs/core/src/index.js";
+import { Binder } from "@ribajs/core";
 import { debounce } from "@ribajs/utils/src/control";
 
 const DEFAULT_OFFSET = 10;

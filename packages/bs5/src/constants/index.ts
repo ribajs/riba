@@ -1,6 +1,6 @@
 import { Bs5ModuleOptions, Breakpoint } from "../types/index.js";
 
-export * from "./theme-choices";
+export * from "./theme-choices.js";
 
 // Breakpoints
 export const DEFAULT_BP_XS: Breakpoint = {

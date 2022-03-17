@@ -28,7 +28,7 @@ import {
   // UserData,
   ReceiveMessage
   // ShopifyApp,
-} from "../interfaces/shopify-easdk";
+} from "../interfaces/shopify-easdk.js";
 
 import { WrapperService } from "./wrapper.service.js";
 import { BarWrapperService } from "./shopify-easdk-bar.service.js";

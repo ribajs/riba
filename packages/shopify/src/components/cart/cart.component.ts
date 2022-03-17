@@ -1,11 +1,11 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 import {
   ShopifyCartLineItem,
   ShopifyCartObject,
   ShopifyCustomerAddress,
   ShopifyShippingRates,
   ShopifyShippingRatesNormalized
-} from "../../interfaces";
+} from "../../interfaces/index.js";
 import { ShopifyCartService } from "../../services/index.js";
 import { getInputValue, hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import template from "./cart.component.html";

@@ -6,15 +6,15 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  * --------------------------------------------------------------------------
  */
-import { TRANSITION_END } from "../constants";
+import { TRANSITION_END } from "../constants/index.js";
 import {
   reflow,
   getTransitionDurationFromElement,
   emulateTransitionEnd,
   typeCheckConfig
-} from "../helper/utils";
-import { setData, getData, removeData } from "../helper/dom/data";
-import { on, one, trigger } from "../helper/dom/event-handler";
+} from "../helper/utils.js";
+import { setData, getData, removeData } from "../helper/dom/data.js";
+import { on, one, trigger } from "../helper/dom/event-handler.js";
 
 /**
  * ------------------------------------------------------------------------

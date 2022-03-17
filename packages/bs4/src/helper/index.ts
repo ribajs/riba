@@ -1,3 +1,3 @@
-export * from "./dom";
-export * from "./sanitizer";
-export * from "./utils";
+export * from "./dom/index.js";
+export * from "./sanitizer.js";
+export * from "./utils.js";

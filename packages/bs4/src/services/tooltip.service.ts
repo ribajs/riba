@@ -5,7 +5,7 @@
  * @see https://github.com/twbs/bootstrap/blob/main/js/src/tooltip.js
  * --------------------------------------------------------------------------
  */
-import { TRANSITION_END, DEFAULT_ALLOWLIST } from "../constants";
+import { TRANSITION_END, DEFAULT_ALLOWLIST } from "../constants/index.js";
 import {
   emulateTransitionEnd,
   findShadowRoot,
@@ -13,24 +13,24 @@ import {
   isElement,
   noop,
   typeCheckConfig
-} from "../helper/utils";
+} from "../helper/utils.js";
 
 import {
   classOf,
   getUID,
   getElementFromEvent
 } from "@ribajs/utils/src/index.js";
-import { sanitizeHtml } from "../helper/sanitizer";
-import { setData, getData, removeData } from "../helper/dom/data";
-import { on, one, off, trigger } from "../helper/dom/event-handler";
-import * as Manipulator from "../helper/dom/manipulator";
+import { sanitizeHtml } from "../helper/sanitizer.js";
+import { setData, getData, removeData } from "../helper/dom/data.js";
+import { on, one, off, trigger } from "../helper/dom/event-handler.js";
+import * as Manipulator from "../helper/dom/manipulator.js";
 import Popper from "popper.js";
-import { findOne } from "../helper/dom/selector-engine";
+import { findOne } from "../helper/dom/selector-engine.js";
 import {
   TooltipOptions,
   TooltipTitleFn,
   TooltipOffsetFn
-} from "./../interfaces/tooltip-options";
+} from "./../interfaces/tooltip-options.js";
 
 /**
  * ------------------------------------------------------------------------

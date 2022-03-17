@@ -7,7 +7,7 @@ export type {
   ClassOfComponent,
   Component,
   ComponentLifecycleEventData
-} from "@ribajs/core/src/index.js";
-export { PageComponent } from "./page-component";
-export { SSRModule } from "./ssr.module";
-export * from "./http-error";
+} from "@ribajs/core";
+export { PageComponent } from "./page-component.js";
+export { SSRModule } from "./ssr.module.js";
+export * from "./http-error.js";

@@ -5,7 +5,7 @@ import { throttle, debounce } from "@ribajs/utils/src/control";
 import {
   TemplateFunction,
   TemplatesComponent
-} from "@ribajs/core/src/index.js";
+} from "@ribajs/core";
 
 import {
   Dragscroll,

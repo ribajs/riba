@@ -5,11 +5,11 @@ import {
   ClassOfComponent,
   DataElement
 } from "./types/index.js";
-import { parseNode } from "./parse-node";
-import { parseDeclaration } from "./parse-declaration";
-import { BasicComponent, Component } from "./component";
+import { parseNode } from "./parse-node.js";
+import { parseDeclaration } from "./parse-declaration.js";
+import { BasicComponent, Component } from "./component/index.js";
 import { isCustomElement } from "@ribajs/utils/src/index.js";
-import { Binder } from "./binder";
+import { Binder } from "./binder.js";
 
 /**
  * Sets the attribute on the element. If no binder is matched it will fall

@@ -1,4 +1,4 @@
-import { Binder } from "@ribajs/core/src/index.js";
+import { Binder } from "@ribajs/core";
 import { isString } from "@ribajs/utils/src/type.js";
 import {
   Autoscroll,

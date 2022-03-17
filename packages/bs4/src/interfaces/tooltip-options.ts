@@ -1,5 +1,5 @@
-import { AllowList } from "../helper/sanitizer";
-import { Placement } from "./placement";
+import { AllowList } from "../helper/sanitizer.js";
+import { Placement } from "./placement.js";
 
 export type TooltipOffsetFn = (
   offsets: any /*TODO*/,

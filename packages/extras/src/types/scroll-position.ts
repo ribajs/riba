@@ -1,4 +1,4 @@
-import { Position } from "./position";
+import { Position } from "./position.js";
 
 export interface ScrollPosition extends Position {
   /** horizontal: left / right / width */

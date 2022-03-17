@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 import template from "./contact-form.component.html";
 import { selectAll, hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { stripHtml } from "@ribajs/utils/src/type.js";

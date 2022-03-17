@@ -3,7 +3,7 @@ import {
   TemplateFunction,
   FormatterFn,
   TemplatesComponent
-} from "@ribajs/core/src/index.js";
+} from "@ribajs/core";
 import {
   CollapseService,
   EVENT_HIDE,

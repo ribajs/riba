@@ -1,4 +1,4 @@
-import { RibaModule } from "@ribajs/core/src/index.js";
+import { RibaModule } from "@ribajs/core";
 import * as vueComponents from "./components/index.js";
 
 export const vueExampleModule: RibaModule = {
@@ -8,5 +8,5 @@ export const vueExampleModule: RibaModule = {
   services: {},
   init() {
     return this;
-  },
+  }
 };

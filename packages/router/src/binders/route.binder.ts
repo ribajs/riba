@@ -1,8 +1,8 @@
-import { Pjax, Prefetch } from "../services";
-import { Binder } from "@ribajs/core/src/index.js";
+import { Pjax, Prefetch } from "../services/index.js";
+import { Binder } from "@ribajs/core";
 import { isObject, isString } from "@ribajs/utils/src/type.js";
 import { onRoute, normalizeUrl, isExternalUrl } from "@ribajs/utils/src/url";
-import { RouteOptions } from "../types/route-options";
+import { RouteOptions } from "../types/route-options.js";
 
 /**
  * Open link with pajax if the route is not the active route

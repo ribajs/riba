@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { loadScript } from "@ribajs/utils/src/index.js";
 import { getPlayerConfig } from "../../mixins/config.mixins.js";

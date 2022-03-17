@@ -1,2 +1,2 @@
-export * from "./component-scope";
-export * from "./module-options";
+export * from "./component-scope.js";
+export * from "./module-options.js";

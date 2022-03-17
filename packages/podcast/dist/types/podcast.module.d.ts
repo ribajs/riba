@@ -1,2 +1,2 @@
-import { RibaModule } from "@ribajs/core/src/index.js";
+import { RibaModule } from "@ribajs/core";
 export declare const podcastModule: RibaModule;

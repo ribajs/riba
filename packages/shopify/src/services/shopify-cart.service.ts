@@ -1,4 +1,4 @@
-import { HttpService } from "@ribajs/core/src/index.js";
+import { HttpService } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { isObject, clone, getNumber } from "@ribajs/utils/src/type.js";
 import { PQueue } from "./p-queue.service.js"; // https://github.com/sindresorhus/p-queue

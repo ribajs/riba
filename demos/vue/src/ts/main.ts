@@ -1,4 +1,4 @@
-import { Riba, coreModule } from "@ribajs/core/src/index.js";
+import { Riba, coreModule } from "@ribajs/core";
 import { vueExampleModule } from "./vue-example.module";
 
 const riba = new Riba();

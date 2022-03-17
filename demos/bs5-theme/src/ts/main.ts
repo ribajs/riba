@@ -1,7 +1,7 @@
 import { bs5Module } from "@ribajs/bs5";
-import { coreModule, Riba } from "@ribajs/core/src/index.js";
+import { coreModule, Riba } from "@ribajs/core";
 import { extrasModule } from "@ribajs/extras";
-import { Bs5ThemeExampleModule } from "./bs5-theme-example.module";
+import { Bs5ThemeExampleModule } from "./bs5-theme-example.module.js";
 
 const riba = new Riba();
 const model = {};

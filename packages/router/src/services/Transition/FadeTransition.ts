@@ -1,5 +1,5 @@
-import { BaseTransition } from "./BaseTransition";
-import { Transition } from "../../types/transition";
+import { BaseTransition } from "./BaseTransition.js";
+import { Transition } from "../../types/transition.js";
 import { scrollToPosition } from "@ribajs/utils/src/index.js";
 
 /**

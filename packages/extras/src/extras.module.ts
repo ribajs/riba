@@ -1,5 +1,5 @@
-import { RibaModule } from "@ribajs/core/src/index.js";
-import * as helper from "./helper";
+import { RibaModule } from "@ribajs/core";
+import * as helper from "./helper/index.js";
 import * as binders from "./binders/index.js";
 // import * as formatters from "./formatters/index.js";
 import * as services from "./services/index.js";

@@ -6,7 +6,9 @@
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   },
   "description": "",
-  "exports": "./src/index.html",
+  "main": "./src/ts/main.ts",
+  "module": "src/ts/main.ts",
+  "source": "src/ts/main.ts",
   "private": true,
   "scripts": {
     "build": "webpack --progress --color --env production",

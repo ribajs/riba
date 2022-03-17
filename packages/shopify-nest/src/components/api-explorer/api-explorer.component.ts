@@ -2,7 +2,7 @@ import {
   Component,
   TemplateFunction,
   HttpService
-} from "@ribajs/core/src/index.js";
+} from "@ribajs/core";
 import {
   isNumber,
   extend,

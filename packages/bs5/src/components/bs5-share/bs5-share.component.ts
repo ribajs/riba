@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { getUrl } from "@ribajs/utils/src/url";
 import template from "./bs5-share.component.html";
 import labelTemplate from "./bs5-share.label.html";

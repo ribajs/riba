@@ -1,2 +1,2 @@
-export * from "./ease";
-export * from "./scroll";
+export * from "./ease.js";
+export * from "./scroll.js";

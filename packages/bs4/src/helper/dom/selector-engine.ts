@@ -5,9 +5,9 @@
  * see https://github.com/twbs/bootstrap/blob/master/js/src/dom/selector-engine.js
  * --------------------------------------------------------------------------
  */
-import { NODE_TEXT } from "../../constants";
+import { NODE_TEXT } from "../../constants/index.js";
 
-import { makeArray } from "../utils";
+import { makeArray } from "../utils.js";
 
 export const matches = (
   element: HTMLElement | (Node & ParentNode),

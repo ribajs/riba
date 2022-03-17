@@ -1,4 +1,4 @@
-import { Binder } from "@ribajs/core/src/index.js";
+import { Binder } from "@ribajs/core";
 import { DropdownService } from "../services/dropdown.service.js";
 
 /**

@@ -1,4 +1,4 @@
-import { coreModule, Riba } from "@ribajs/core/src/index.js";
+import { coreModule, Riba } from "@ribajs/core";
 import { podcastModule } from "@ribajs/podcast";
 import { PodcastDemoModule } from "./podcast-demo.module";
 

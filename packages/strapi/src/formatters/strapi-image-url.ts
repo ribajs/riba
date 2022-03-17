@@ -1,6 +1,6 @@
 import type { StrapiImage, StrapiImageFormatType } from "../types/index.js";
-import { strapiImageFormatter } from "./strapi-image";
-import { strapiFormatter } from "./strapi";
+import { strapiImageFormatter } from "./strapi-image.js";
+import { strapiFormatter } from "./strapi.js";
 
 /**
  * Get strapi image url for format
@@ -14,5 +14,5 @@ export const strapiImageUrlFormatter = {
   ) {
     const imageFormat = strapiImageFormatter.read(image, format);
     return strapiFormatter.read(imageFormat?.url);
-  },
+  }
 };

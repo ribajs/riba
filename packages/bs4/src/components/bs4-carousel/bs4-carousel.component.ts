@@ -1,6 +1,6 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 import CarouselService from "../../services/carousel.service.js";
-import { CarouselOption } from "../../interfaces";
+import { CarouselOption } from "../../interfaces/index.js";
 
 export interface Scope {
   // Properties
