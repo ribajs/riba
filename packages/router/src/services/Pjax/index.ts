@@ -20,7 +20,7 @@ import { Transition, Response, PjaxOptions } from "../../types/index.js";
 import { Dom } from "./Dom";
 import { HistoryManager } from "@ribajs/history/src/index.js";
 import { ROUTE_ERROR_CLASS, IGNORE_CLASS_LINK } from "../../constants";
-import { RouterService } from "../../services";
+import { RouterService } from "../../services/index.js";
 
 export interface PjaxInstances {
   [key: string]: Pjax;

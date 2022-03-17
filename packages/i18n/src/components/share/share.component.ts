@@ -6,7 +6,7 @@ import {
 } from "@ribajs/bs4/src/components/bs4-share/bs4-share.component.js";
 import template from "@ribajs/bs4/src/components/bs4-share/bs4-share.component.html";
 import labelTemplate from "./share.label.html";
-import { I18nService } from "../../services";
+import { I18nService } from "../../services/index.js";
 import { LocalesService } from "../../types/index.js";
 
 interface Scope extends Bs4ShareScope {

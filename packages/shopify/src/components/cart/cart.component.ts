@@ -6,7 +6,7 @@ import {
   ShopifyShippingRates,
   ShopifyShippingRatesNormalized
 } from "../../interfaces";
-import { ShopifyCartService } from "../../services";
+import { ShopifyCartService } from "../../services/index.js";
 import { getInputValue, hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import template from "./cart.component.html";
 

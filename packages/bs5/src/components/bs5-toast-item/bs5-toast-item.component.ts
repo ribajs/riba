@@ -1,7 +1,7 @@
 import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 
 import template from "./bs5-toast-item.component.html";
-import { Toast, ToastNotification } from "../../services";
+import { Toast, ToastNotification } from "../../services/index.js";
 import { Scope as Bs5NotificationContainerScope } from "../bs5-notification-container/bs5-notification-container.component.js";
 import { getElementFromEvent } from "@ribajs/utils/src/dom.js";
 

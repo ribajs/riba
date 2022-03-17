@@ -1,5 +1,5 @@
 import { TemplateFunction, Component } from "@ribajs/core/src/index.js";
-import { I18nService } from "../../services";
+import { I18nService } from "../../services/index.js";
 import { LocalesService } from "../../types/index.js";
 import { Langcode } from "../../types/index.js";
 

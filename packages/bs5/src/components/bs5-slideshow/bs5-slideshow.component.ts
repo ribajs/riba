@@ -5,7 +5,7 @@ import {
 import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim, scrollTo } from "@ribajs/utils/src/dom.js";
 import { throttle, debounce } from "@ribajs/utils/src/control";
-import { Bs5Service } from "../../services";
+import { Bs5Service } from "../../services/index.js";
 import {
   SlideshowControlsPosition,
   SlideshowIndicatorsPosition,

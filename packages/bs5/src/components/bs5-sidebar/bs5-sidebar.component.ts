@@ -2,7 +2,7 @@ import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
 import { TouchEventsService, TouchSwipeData } from "@ribajs/extras";
 import { EventDispatcher } from "@ribajs/events";
 import { TOGGLE_BUTTON } from "../../constants";
-import { Bs5Service } from "../../services";
+import { Bs5Service } from "../../services/index.js";
 import {
   JsxBs5SidebarProps,
   Bs5SidebarComponentScope,
