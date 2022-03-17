@@ -10,6 +10,7 @@ export const accessibilityModule: RibaModule<AccessibilityModuleOptions> = {
   services,
   formatters,
   components,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   init(options = {}) {
     services.GamepadService.setSingleton(options);
     return this;

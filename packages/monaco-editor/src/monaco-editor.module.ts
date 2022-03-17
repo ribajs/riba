@@ -10,6 +10,7 @@ export const monacoEditorModule: RibaModule<MonacoEditorModuleOptions> = {
   binders,
   services,
   components,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   init(options = {}) {
     services.MonacoEditorService.setSingleton(options);
     return this;

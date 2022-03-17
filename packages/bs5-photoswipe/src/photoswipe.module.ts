@@ -10,6 +10,7 @@ export const bs5PhotoswipeModule: RibaModule<PhotoswipeModuleOptions> = {
   binders,
   services,
   components,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   init(options = {}) {
     services.PhotoswipeService.setSingleton(options);
     return this;

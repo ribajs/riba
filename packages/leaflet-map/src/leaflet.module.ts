@@ -10,6 +10,7 @@ export const leafletModule: RibaModule<LeafletModuleOptions> = {
   binders,
   services,
   components,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   init(options = {}) {
     services.LeafletService.setSingleton(options);
     return this;

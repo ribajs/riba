@@ -10,6 +10,7 @@ export const shopifyNestModule: RibaModule<ShopifyNestModuleOptions> = {
   services,
   formatters,
   components,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   init(options = {}) {
     services.ModuleService.setSingleton(options);
     return this;

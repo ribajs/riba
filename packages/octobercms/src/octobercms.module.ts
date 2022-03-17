@@ -17,6 +17,7 @@ export const octobercmsModule: RibaModule<OctobercmsModuleOptions> = {
   binders,
   services,
   components,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   init(options = {}) {
     services.OctobercmsService.setSingleton(options);
     return this;

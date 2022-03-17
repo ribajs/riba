@@ -9,6 +9,7 @@ export const momentModule: RibaModule<MomentModuleOptions> = {
   binders: {},
   services: {},
   components,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   init(options = {}) {
     services.MomentService.setSingleton(options);
     return this;

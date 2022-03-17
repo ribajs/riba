@@ -10,6 +10,7 @@ export const contentSliderModule: RibaModule<ContentSliderModuleOptions> = {
   binders,
   services,
   components,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   init(options = {}) {
     services.ContentSliderService.setSingleton(options);
     return this;
