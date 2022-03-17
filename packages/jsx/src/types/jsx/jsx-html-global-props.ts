@@ -1,11 +1,12 @@
 import { JsxChildren } from "./jsx-children.js";
+import { JsxHtmlCustomGlobalProps } from "./jsx-html-custom-global-props";
 
 /**
  * The common properties that may appear on any HTML element.
  *
  * Reference: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes#list_of_global_attributes
  */
-export interface JsxHtmlGlobalProps {
+ export interface JsxHtmlGlobalProps extends JsxHtmlCustomGlobalProps {
   accessKey?: string;
   autocapitalize?: string;
   children?: JsxChildren;

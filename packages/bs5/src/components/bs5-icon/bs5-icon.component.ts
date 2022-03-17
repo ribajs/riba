@@ -6,12 +6,13 @@ import {
 } from "@ribajs/core";
 import { getLocation } from "@ribajs/utils/src/index.js";
 import { BaseCache } from "@ribajs/cache";
+import { JsxBs5IconProps } from "../../types/jsx/jsx-icon-props";
 
 export class Bs5IconComponent extends BasicComponent {
   public static tagName = "bs5-icon";
   public static cache = new BaseCache<Promise<HttpServiceResponse<string>>>();
 
-  static get observedAttributes(): string[] {
+  static get observedAttributes(): (keyof JsxBs5IconProps)[] {
     return ["size", "width", "height", "src", "color", "direction", "alt"];
   }
 

@@ -35,7 +35,7 @@ export class NavigationComponent extends Component {
 
   protected onNewPage() {
     const templateEl = document.getElementById(
-      "tsd-navigation-template"
+      "tsd-navigation-secondary-template"
     ) as HTMLTemplateElement | null;
     if (!templateEl) {
       console.warn("[NavigationComponent] No template found!");

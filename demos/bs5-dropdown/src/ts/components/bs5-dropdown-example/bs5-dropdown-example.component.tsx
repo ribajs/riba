@@ -1,6 +1,5 @@
 import { Component, TemplateFunction } from "@ribajs/core";
 import { Dropdown } from "@ribajs/bs5";
-import template from "./bs5-dropdown-example.component.html";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 
 interface DropdownItem {
@@ -90,7 +89,43 @@ export class Bs5DropdownExampleComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      return template;
+      return <div class="row my-5">
+      <section class="col-12 my-5">
+        <h2>bs5-dropdown component</h2>
+        <bs5-dropdown class="dropdown">
+          <a rv-on-click="toggle" class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false">
+            Dropdown link
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+          </div>
+        </bs5-dropdown>
+        <bs5-dropdown class="dropup">
+          <a rv-on-click="toggle" class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropupMenuLink" aria-haspopup="true" aria-expanded="false">
+            Dropdown link
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropupMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+          </div>
+        </bs5-dropdown>
+      </section>
+    
+      <section class="col-12 my-5">
+        <h2>bs5-dropdown binder</h2>
+    
+          <div class="dropdown">
+            <button class="btn btn-outline-dark text-truncate dropdown-toggle" rv-bs5-dropdown="" rv-text="selected.label"></button>
+            <div class="dropdown-menu scrollbar-y-scroll scrollbar-primary">
+                <div rv-each-item="items">
+                    <div class="dropdown-item cursor-pointer" rv-on-click="select | args item"><span class="text-primary" rv-text="item.label"></span></div>
+                </div>
+            </div>
+          </div>
+    
+      </section>
+    </div>;
     }
   }
 }

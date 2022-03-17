@@ -21,6 +21,7 @@ export * from "./jsx-element.js";
 export * from "./jsx-embed-element-props.js";
 export * from "./jsx-fieldset-element-props.js";
 export * from "./jsx-form-element-props.js";
+export * from "./jsx-html-custom-global-props.js";
 export * from "./jsx-html-element-props.js";
 export * from "./jsx-html-global-props.js";
 export * from "./jsx-iframe-element-props.js";

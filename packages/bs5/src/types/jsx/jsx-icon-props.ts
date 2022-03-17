@@ -7,4 +7,5 @@ export interface JsxBs5IconProps extends JsxHtmlGlobalProps {
   src: string;
   color?: string;
   direction?: string;
+  alt?: string;
 }
