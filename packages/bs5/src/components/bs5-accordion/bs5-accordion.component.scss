@@ -1,14 +1,8 @@
 bs5-accordion {
   display: block;
-  .card-header {
-    &.btn {
-      text-align: inherit;
-      &.btn-link {
-        text-decoration: none;
-        &:hover {
-          text-decoration: none;
-        }
-      }
-    }
+
+  .accordion-button::after {
+    display: none;
+    background: none;
   }
 }

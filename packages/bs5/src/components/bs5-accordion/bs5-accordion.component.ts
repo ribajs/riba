@@ -6,25 +6,11 @@ import {
 } from "@ribajs/core";
 import { Collapse } from "../../services/collapse.js";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
+import { JsxBs5AccordionProps, CollapseEvents, AccordionItem } from "../../types/index.js";
 
 import template from "./bs5-accordion.component.html";
 
 const handleize = handleizeFormatter.read as FormatterFn;
-
-interface AccordionItem {
-  title: string;
-  content: string;
-  show: boolean;
-  iconDirection:
-    | "left"
-    | "left-up"
-    | "up"
-    | "up-right"
-    | "right"
-    | "right-down"
-    | "down"
-    | "down-left";
-}
 
 interface Scope {
   items: AccordionItem[];
@@ -58,8 +44,8 @@ export class Bs5AccordionComponent extends TemplatesComponent {
 
   // protected collapseServices: Collapse[] = [];
 
-  static get observedAttributes(): string[] {
-    return ["collapse-icon-src", "collapse-icon-size", "show-only-one"];
+  static get observedAttributes(): (keyof JsxBs5AccordionProps)[] {
+    return ["items", "collapse-icon-src", "collapse-icon-size", "show-only-one"];
   }
 
   public scope: Scope = {
@@ -121,20 +107,20 @@ export class Bs5AccordionComponent extends TemplatesComponent {
 
   protected initItemEventListeners(item: AccordionItem, element: HTMLElement) {
     element.removeEventListener(
-      Collapse.Events.hide,
+      CollapseEvents.hide,
       this.onHide.bind(this, element, item)
     );
     element.removeEventListener(
-      Collapse.Events.show,
+      CollapseEvents.show,
       this.onShow.bind(this, element, item)
     );
     element.addEventListener(
-      Collapse.Events.hide,
+      CollapseEvents.hide,
       this.onHide.bind(this, element, item),
       { once: true }
     );
     element.addEventListener(
-      Collapse.Events.show,
+      CollapseEvents.show,
       this.onShow.bind(this, element, item),
       { once: true }
     );

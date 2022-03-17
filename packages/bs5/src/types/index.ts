@@ -1,7 +1,9 @@
 export * from "./jsx/index.js";
 
+export * from "./accordion-item";
 export * from "./breakpoint.js";
 export * from "./carousel-options.js";
+export * from "./collapse-events.js";
 export * from "./collapse-on-event-binder.js";
 export * from "./color-picker-options.js";
 export * from "./jsx/intrinsic-elements.js";

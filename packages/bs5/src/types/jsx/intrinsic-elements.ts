@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 
 import type {
+  JsxBs5AccordionProps,
   JsxBs5DropdownProps,
   JsxBs5IconProps,
   JsxBs5NavbarProps,
@@ -12,6 +13,7 @@ import type {
 } from "./";
 
 export interface Bs5IntrinsicElements {
+  "bs5-accordion": JsxBs5AccordionProps;
   "bs5-dropdown": JsxBs5DropdownProps;
   "bs5-sidebar": JsxBs5SidebarProps;
   "bs5-toggle-button": JsxBs5ToggleButtonProps;
