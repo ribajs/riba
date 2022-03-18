@@ -21,8 +21,9 @@ jobs:
       - name: Install dependencies
         run: |
           yarn --version
-          yarn install
-      - name: Lint source files
+          yarn install > install.log
+          cat install.log
+      - name: Lint source files 
         run: |
           yarn run lint
         env:
