@@ -38,6 +38,7 @@ describe("riba.binders", () => {
       riba.bind(fragment, model);
 
       expect(model).toEqual({
+        $root: {}, // Added on riba.bind
         value: "world",
         newValue: "hello",
         setMeToValue: { value: "hey man!" },

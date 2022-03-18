@@ -29,7 +29,11 @@ describe("riba.binders", () => {
 
       riba.bind(fragment, model);
 
-      expect(model).toEqual({ value: "world", new: "hello" });
+      expect(model).toEqual({
+        $root: {}, // Added on riba.bind
+        value: "world",
+        new: "hello"
+      });
     });
   });
 });
