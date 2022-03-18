@@ -1,3 +1,5 @@
+import { BASE64_PREFIX, KEYPATH, PRIMITIVE, QUOTED_STR } from "./constants";
+
 /**
  * Fixed version of typeof operator
  * @param obj
@@ -35,8 +37,13 @@ export const jsonStringify = (
  * can also have single quotations for defining the properties and values
  * @see jsonStringify
  */
-export const parseJsonString = (value: string) => {
+export const parseJsonString = (value?: string | null) => {
   let object = null;
+
+  if (!value) {
+    return object;
+  }
+
   if (!couldBeJson(value)) {
     return object;
   }
@@ -62,6 +69,56 @@ export const couldBeJson = (str?: string | null) => {
 };
 
 /**
+ * Test if a string is base64 encoded
+ * Note, this is not a general function and is used internally by Riba.js by prefixing a base64 string with "base64:".
+ * So if you want to use this method make sure that you prefix your base64 strings with "base64:".
+ */
+export const isBase64 = (str?: string | null) => {
+  if (!str) return false;
+  if (typeof str !== 'string') return false;
+  return str.startsWith(BASE64_PREFIX)
+}
+
+/**
+ * Decode an string or object to base64
+ * @see https://developer.mozilla.org/en-US/docs/Glossary/Base64#solution_2_%E2%80%93_rewriting_atob_and_btoa_using_typedarrays_and_utf-8
+ * @param obj 
+ * @returns 
+ */
+export const toBase64 = (obj: any) => {
+  if (isObject(obj)) {
+    obj = JSON.stringify(obj, null, 0);
+  }
+  return BASE64_PREFIX + btoa(encodeURIComponent(obj));
+}
+
+/**
+ * Encode an base64 string back
+ * @see https://developer.mozilla.org/en-US/docs/Glossary/Base64#solution_2_%E2%80%93_rewriting_atob_and_btoa_using_typedarrays_and_utf-8
+ * @param obj 
+ * @returns 
+ */
+export const fromBase64 = (base64?: string | null) => {
+  if (typeof base64 !== 'string') {
+    return "Not a base64 string!";
+  }
+
+  if (base64.startsWith(BASE64_PREFIX)) {
+    base64 = base64.substring(BASE64_PREFIX.length)
+  }
+
+  const maybeDecodedUri = atob(base64);
+  let encoded: any;
+  try {
+    encoded = decodeURIComponent(maybeDecodedUri);
+  } catch (error) {
+    encoded = maybeDecodedUri;
+  }
+
+  return parseType(encoded, false).value;
+}
+
+/**
  * Test if string is a json string
  * @param str
  */
@@ -78,15 +135,21 @@ export const isJson = (str?: string | null) => {
 };
 
 /**
- * TODO merge with parseType in ./packages/core/src/parsers.ts
+ * Parser and tokenizer for getting the type and value from a string.
+ * @param string
  */
-export const parseType = (input?: string) => {
-  let type = "undefined";
+export const parseType = (input?: string | null, isAttribute = false) => {
+  let type = PRIMITIVE;
   let value: any = input;
   if (input === undefined) {
     return { type, value: undefined };
   }
-  if (input === "true") {
+  if (input === null) {
+    return { type, value: null };
+  }
+  if (QUOTED_STR.test(input)) {
+    value = parseType(input.slice(1, -1), isAttribute).value;
+  } else if (input === "true") {
     value = true;
   } else if (input === "false") {
     value = false;
@@ -95,14 +158,26 @@ export const parseType = (input?: string) => {
   } else if (input === "undefined") {
     value = undefined;
   } else if (input === "") {
-    value = "";
+    // An empty attribute should be handled has a true value 
+    if (isAttribute) {
+      value = true;
+    } else {
+      value = "";
+    }
   } else if (!isNaN(Number(input))) {
     value = Number(input);
+    // If number is too large store the value as string
+    if (value >= Number.MAX_SAFE_INTEGER) {
+      value = input;
+    }
+  } else if (isBase64(value)) {
+    value = fromBase64(value);
   } else if (couldBeJson(value)) {
     const jsonString = parseJsonString(value);
     value = jsonString ? jsonString : value;
+  } else {
+    type = KEYPATH;
   }
-  type = typeof value;
   return { type, value };
 };
 

@@ -11,7 +11,6 @@ export * from "./binder.js";
 export * from "./parse-declaration.js";
 export * from "./parse-node.js";
 export * from "./parse-template.js";
-export * from "./parse-type.js";
 export * from "./riba.js";
 export * from "./view.js";
 export * from "./core.module.js";

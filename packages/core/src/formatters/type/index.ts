@@ -10,6 +10,7 @@ export { isStringFormatter } from "./is-string.formatter.js";
 export { isUndefinedFormatter } from "./is-undefined.formatter.js";
 export { jsonFormatter } from "./json.formatter.js";
 export { parseFormatter } from "./parse.formatter.js";
+export { toBase64Formatter } from "./to-base64.formatter.js";
 export { toStringFormatter } from "./to-string.formatter.js";
 export { toDecimalFormatter } from "./to-decimal.formatter.js";
 export { toFloatFormatter } from "./to-float.formatter.js";

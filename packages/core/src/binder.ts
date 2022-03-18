@@ -1,5 +1,4 @@
-import { parseType } from "./parse-type.js";
-import { PRIMITIVE, KEYPATH } from "./constants/parser.js";
+import { parseType, PRIMITIVE, KEYPATH } from "@ribajs/utils/src/index.js";
 import { Observer } from "./observer.js";
 import type {
   FormatterObservers,
@@ -146,7 +145,7 @@ export abstract class Binder<T = any, E = HTMLUnknownElement,>
 
   public parseTarget() {
     if (this.keypath) {
-      const token = parseType(this.keypath);
+      const token = parseType(this.keypath, true);
       if (token.type === PRIMITIVE) {
         this.value = token.value;
       } else if (token.type === KEYPATH) {
@@ -161,7 +160,7 @@ export abstract class Binder<T = any, E = HTMLUnknownElement,>
   }
 
   /**
-   * Get the iteration alias, used in the interation binders like `each-*`
+   * Get the iteration alias, used in the interaction binders like `each-*`
    * @param {*} modelName
    * @see https://github.com/mikeric/rivets/blob/master/dist/rivets.js#L26
    * @see https://github.com/mikeric/rivets/blob/master/dist/rivets.js#L1175
@@ -174,7 +173,7 @@ export abstract class Binder<T = any, E = HTMLUnknownElement,>
     args: string[],
     formatterIndex: number
   ): string[] {
-    return args.map(parseType).map(({ type, value }, ai) => {
+    return args.map((arg) => parseType(arg, true)).map(({ type, value }, ai) => {
       if (type === PRIMITIVE) {
         const primitiveValue = value;
         return primitiveValue;
