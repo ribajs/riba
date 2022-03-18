@@ -1,7 +1,8 @@
 import {
   Component,
   TemplateFunction,
-  HttpService
+  HttpService,
+  ScopeBase
 } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import Debug from "debug";
@@ -15,7 +16,7 @@ import { AuthService } from "../../services/auth.service.js";
 
 import { EASDKWrapperService } from "@ribajs/shopify-easdk";
 
-interface Scope {
+interface Scope extends ScopeBase {
   myshopify_domain?: string;
   type?: "shopify" | "facebook" | "vimeo";
   avatarUrl?: string;

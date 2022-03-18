@@ -1,11 +1,11 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 
 import template from "./bs5-toast-item.component.html";
 import { Toast, ToastNotification } from "../../services/index.js";
 import { Scope as Bs5NotificationContainerScope } from "../bs5-notification-container/bs5-notification-container.component.js";
 import { getElementFromEvent } from "@ribajs/utils/src/dom.js";
 
-interface Scope {
+interface Scope extends ScopeBase {
   iconUrl?: string;
   toast?: ToastNotification;
   onHidden: Bs5ToastItemComponent["onHidden"];

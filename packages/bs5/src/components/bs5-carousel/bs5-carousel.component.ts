@@ -1,8 +1,8 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { Carousel } from "../../services/carousel.js";
 import { CarouselOptions } from "../../types/index.js";
 
-export interface Scope {
+export interface Scope extends ScopeBase {
   // Properties
   interval: CarouselOptions["interval"];
   keyboard: CarouselOptions["keyboard"];

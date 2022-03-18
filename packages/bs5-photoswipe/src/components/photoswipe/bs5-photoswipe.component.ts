@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import template from "./bs5-photoswipe.component.html";
 import fullscreenTemplate from "./bs5-photoswipe.fullscreen.component.html";
@@ -8,7 +8,7 @@ import PhotoSwipe from "photoswipe";
 import { PhotoSwipeUI } from "../../services/photoswipe-ui.service.js";
 import { Options, Item } from "../../types/index.js";
 
-interface Scope {
+interface Scope extends ScopeBase {
   // Properties
   items: Item[];
   /** Current item */

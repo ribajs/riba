@@ -3,7 +3,8 @@ import {
   TemplateFunction,
   HttpService,
   HttpMethod,
-  HttpDataType
+  HttpDataType,
+  ScopeBase
 } from "@ribajs/core";
 import template from "./bs4-form.component.html";
 import {
@@ -31,7 +32,7 @@ export interface SubmitSettings {
   type: HttpDataType;
 }
 
-export interface Scope {
+export interface Scope extends ScopeBase {
   id: string;
   form: ValidationObject;
   onSubmit: Bs4FormComponent["onSubmit"];

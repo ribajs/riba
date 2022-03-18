@@ -1,8 +1,8 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import template from "./bs4-taggedimage-example.component.html";
 import { TaggedImageTag as Tag } from "@ribajs/bs4";
 
-interface Scope {
+interface Scope extends ScopeBase {
   fadeshowImages: {
     src: string;
     srcset: string;

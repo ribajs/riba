@@ -1,8 +1,8 @@
-import { TemplateFunction, Component } from "@ribajs/core";
+import { TemplateFunction, Component, ScopeBase } from "@ribajs/core";
 import { I18nService } from "../../services/index.js";
 import { LocalesService , Langcode } from "../../types/index.js";
 
-export interface Scope {
+export interface Scope extends ScopeBase {
   langcodes: Langcode[];
   switch: I18nSwitcherComponent["switch"];
   toggle: I18nSwitcherComponent["toggle"];

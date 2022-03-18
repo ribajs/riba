@@ -1,12 +1,12 @@
 import Debug from "debug";
-import { TemplateFunction } from "@ribajs/core";
+import { TemplateFunction, ScopeBase } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { ShopifyNestContentComponent } from "../content/content.component.js";
 import { ShopifyApiBlogsService } from "../../services/shopify-api-blog.service.js";
 import { Blog } from "@ribajs/shopify-tda";
 import pugTemplate from "./content-blogs.component.pug";
 
-export interface Scope {
+export interface Scope extends ScopeBase {
   blogs: Blog[];
 }
 

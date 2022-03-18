@@ -38,6 +38,8 @@ export * from "./observed-attributes-to-check.js";
 export * from "./observer.js";
 export * from "./options.js";
 export * from "./parsed-declarations.js";
+export * from "./scope-base.js";
+export * from "./scope-root-base.js";
 export * from "./services.js";
 export * from "./template-function.js";
 export * from "./tokens.js";

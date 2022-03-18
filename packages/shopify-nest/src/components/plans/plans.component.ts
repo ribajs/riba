@@ -1,7 +1,8 @@
 import {
   Component,
   TemplateFunction,
-  HttpService
+  HttpService,
+  ScopeBase
 } from "@ribajs/core";
 import Debug from "debug";
 import pugTemplate from "./plans.component.pug";
@@ -9,7 +10,7 @@ import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { RecurringCharge } from "../../interfaces/shopify-api/recurring_charge.js";
 import { Plan } from "../../interfaces/plan.js";
 
-interface Scope {
+interface Scope extends ScopeBase {
   plans: Plan[];
   active?: RecurringCharge;
   hasActive: boolean;

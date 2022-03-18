@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import template from "./contact-form.component.html";
 import { selectAll, hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { stripHtml } from "@ribajs/utils/src/type.js";
@@ -12,7 +12,7 @@ export interface ValidationObject {
   error?: string;
 }
 
-interface Scope {
+interface Scope extends ScopeBase {
   form: ValidationObject;
   send: ShopifyContactFormComponent["send"];
   selectAll: ShopifyContactFormComponent["selectAll"];

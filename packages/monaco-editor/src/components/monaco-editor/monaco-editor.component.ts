@@ -1,9 +1,9 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import * as monaco from "monaco-editor";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import pugTemplate from "./monaco-editor.component.pug";
 
-interface Scope {
+interface Scope extends ScopeBase {
   dataValue: string;
   language?: string;
   theme: "vs" | "vs-dark" | "hc-black";

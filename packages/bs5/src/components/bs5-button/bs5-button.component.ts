@@ -1,6 +1,6 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 
-interface Scope {
+interface Scope extends ScopeBase {
   animationClass: string;
   onClick: Bs5ButtonComponent["onClick"];
 }

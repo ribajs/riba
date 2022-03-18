@@ -1,9 +1,9 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { Pjax } from "@ribajs/router";
 import template from "./instagram.component.html";
 import { InstagramMedia, InstagramApiService } from "@ribajs/shopify-tda";
 
-export interface Scope {
+export interface Scope extends ScopeBase {
   media?: InstagramMedia;
   instagramId?: string;
   openLinks: boolean;

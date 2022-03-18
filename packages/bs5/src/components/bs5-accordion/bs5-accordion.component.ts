@@ -2,7 +2,8 @@ import {
   handleizeFormatter,
   FormatterFn,
   TemplatesComponent,
-  TemplateFunction
+  TemplateFunction,
+  ScopeBase
 } from "@ribajs/core";
 import { Collapse } from "../../services/collapse.js";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
@@ -12,7 +13,7 @@ import template from "./bs5-accordion.component.html";
 
 const handleize = handleizeFormatter.read as FormatterFn;
 
-interface Scope {
+interface Scope extends ScopeBase {
   items: AccordionItem[];
   toggle: Bs5AccordionComponent["toggle"];
   show: Bs5AccordionComponent["show"];

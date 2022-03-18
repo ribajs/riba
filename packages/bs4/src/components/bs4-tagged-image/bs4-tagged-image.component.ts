@@ -1,6 +1,6 @@
 import { extend } from "@ribajs/utils/src/index.js";
 
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { PopoverOptions } from "@ribajs/bs4";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { TaggedImageTag as Tag } from "../../interfaces/index.js";
@@ -13,7 +13,7 @@ interface Options {
   multiPopover?: boolean;
 }
 
-interface Scope {
+interface Scope extends ScopeBase {
   debug: boolean;
   options: Options;
   tags: Tag[];

@@ -1,4 +1,4 @@
-import { Component, View, TemplateFunction } from "@ribajs/core";
+import { Component, View, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { scrollTo, scrollToPosition } from "@ribajs/utils/src/dom.js";
 import { State } from "@ribajs/history/src/index.js";
@@ -9,8 +9,8 @@ import type {
   JsxRouterViewProps
 } from "../../types/index.js";
 
-export interface Scope extends RouterViewOptions {
-  dataset: any;
+interface RouterViewScope extends RouterViewOptions, ScopeBase {
+
 }
 
 export class RouterViewComponent extends Component {
@@ -31,14 +31,14 @@ export class RouterViewComponent extends Component {
       "listen-popstate",
       "scroll-to-anchor-hash",
       "scroll-to-anchor-offset",
-      "dataset-to-model",
+      "dataset-to-root-scope",
       "parse-title",
       "change-browser-url",
       "prefetch-links"
     ];
   }
 
-  public scope: Scope = {
+  public scope: RouterViewScope = {
     id: "main",
     action: "replace",
     scrollToTop: true,
@@ -46,12 +46,11 @@ export class RouterViewComponent extends Component {
     listenPopstate: true,
     scrollToAnchorHash: true,
     scrollToAnchorOffset: RouterService.options.scrollToAnchorOffset,
-    datasetToModel: true,
+    datasetToRootScope: true,
     parseTitle: true,
     changeBrowserUrl: true,
     prefetchLinks: true,
-    transition: RouterService.options.defaultTransition,
-    dataset: {}
+    transition: RouterService.options.defaultTransition
   };
 
   constructor() {
@@ -118,22 +117,27 @@ export class RouterViewComponent extends Component {
     dataset: any,
     isInit: boolean
   ) {
-    if (this.scope.datasetToModel) {
-      this.scope.dataset = dataset;
+
+    // Only continue if the viewID is equal (in this way it is possible to have multiple views)
+    if (viewId !== this.scope.id) {
+      console.warn("not the right view", this.scope.id, viewId, dataset);
+      return;
+    }
+
+
+    this.debug("New page ready!", this.innerHTML);
+
+    if (this.scope.datasetToRootScope) {
+      if (!this.scope.$root) {
+        this.scope.$root = {};
+      }
+      this.scope.$root.dataset = dataset;
     }
 
     // Ignore rest on first page requests
     if (isInit) {
       return;
     }
-
-    // Only to anything if the viewID is equal (in this way it is possible to have multiple views)
-    if (viewId !== this.scope.id) {
-      console.warn("not the right view", this.scope.id, viewId, dataset);
-      return;
-    }
-
-    this.debug("New page ready!", this.innerHTML);
 
     this.view = this.getView();
 

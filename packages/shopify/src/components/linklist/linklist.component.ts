@@ -1,11 +1,11 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import template from "./linklist.component.html";
 
 import { Linklist, LinklistLink } from "../../interfaces/index.js";
 
-export interface Scope {
+export interface Scope extends ScopeBase {
   // Properties
   /** The linklist as a json string */
   linklist?: Linklist;

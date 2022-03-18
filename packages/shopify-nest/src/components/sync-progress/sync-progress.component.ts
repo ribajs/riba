@@ -1,11 +1,11 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import Debug from "debug";
 import pugTemplate from "./sync-progress.component.pug";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { ShopifyApiSyncService } from "../../services/shopify-api-sync.service.js";
 import { SyncProgress, SyncOptions } from "../../interfaces/shopify-sync/index.js";
 
-interface Scope {
+interface Scope extends ScopeBase {
   start: ShopifyNestSyncProgressComponent["start"];
   cancel: ShopifyNestSyncProgressComponent["cancel"];
   restart: ShopifyNestSyncProgressComponent["restart"];

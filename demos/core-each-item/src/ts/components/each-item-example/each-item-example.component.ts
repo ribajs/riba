@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import template from "./each-item-example.component.html";
 
 export class EachItemExampleComponent extends Component {
@@ -78,7 +78,7 @@ interface Item {
   value?: number;
 }
 
-interface Scope {
+interface Scope extends ScopeBase {
   items: Item[];
   push: EachItemExampleComponent["push"];
   pop: EachItemExampleComponent["pop"];

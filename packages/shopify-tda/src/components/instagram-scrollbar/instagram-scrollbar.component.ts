@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { Pjax } from "@ribajs/router";
 import {
   getViewportDimensions,
@@ -8,7 +8,7 @@ import type { InstagramMedia } from "../../interfaces/instagram-api";
 import { InstagramApiService } from "../../services/instagram-api.service.js";
 import template from "./instagram-scrollbar.component.html";
 
-export interface Scope {
+export interface Scope extends ScopeBase {
   instagramId?: string;
   openLinks: boolean;
   openUrl?: string;

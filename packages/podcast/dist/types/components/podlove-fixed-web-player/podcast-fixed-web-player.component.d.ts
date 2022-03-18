@@ -1,6 +1,6 @@
-import { Component } from "@ribajs/core";
+import { Component, ScopeBase } from "@ribajs/core";
 import type { PodloveWebPlayerEpisode, PodloveWebPlayerConfig } from "../../types";
-export interface Scope {
+export interface Scope extends ScopeBase {
     episode?: PodloveWebPlayerEpisode;
     config?: PodloveWebPlayerConfig;
     episodeUrl: string;

@@ -8,7 +8,8 @@ export interface RouterViewOptions {
   listenPopstate: boolean;
   scrollToAnchorHash: boolean;
   scrollToAnchorOffset: number;
-  datasetToModel?: boolean;
+  /** If true the dataset of the first view child is added to the root scope, default is `true` */
+  datasetToRootScope?: boolean;
   parseTitle: boolean;
   changeBrowserUrl: boolean;
   prefetchLinks: boolean;

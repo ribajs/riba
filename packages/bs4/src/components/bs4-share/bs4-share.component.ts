@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { getUrl } from "@ribajs/utils/src/url";
 import template from "./bs4-share.component.html";
 import labelTemplate from "./bs4-share.label.html";
@@ -6,7 +6,7 @@ import { ShareItem, ShareUrlType } from "../../interfaces/index.js";
 import { DropdownService } from "@ribajs/bs4";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 
-export interface Scope {
+export interface Scope extends ScopeBase {
   type: ShareUrlType;
   title: string;
   text: string;

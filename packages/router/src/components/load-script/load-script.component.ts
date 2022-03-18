@@ -1,7 +1,7 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { loadScript, getUID } from "@ribajs/utils/src/dom.js";
 
-interface Scope {
+interface Scope extends ScopeBase {
   src: string;
   id: string;
   async: boolean;

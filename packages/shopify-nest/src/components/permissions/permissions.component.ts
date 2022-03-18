@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import {
   getElementFromEvent,
   hasChildNodesTrim
@@ -23,7 +23,7 @@ interface AccessScopes {
   };
 }
 
-interface Scope {
+interface Scope extends ScopeBase {
   defaultScopes: string[];
   selectedScopes: string[];
   accessScopes: AccessScopes;

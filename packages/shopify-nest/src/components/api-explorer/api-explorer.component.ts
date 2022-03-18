@@ -1,7 +1,8 @@
 import {
   Component,
   TemplateFunction,
-  HttpService
+  HttpService,
+  ScopeBase
 } from "@ribajs/core";
 import {
   isNumber,
@@ -83,7 +84,7 @@ export interface APIListItem {
   roles?: string[];
 }
 
-export interface Scope {
+export interface Scope extends ScopeBase {
   langcode?: string;
   self: Component; // WORKAROUND
   result: string;

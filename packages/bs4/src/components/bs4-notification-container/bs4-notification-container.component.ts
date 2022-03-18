@@ -1,10 +1,10 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import template from "./bs4-notification-container.component.html";
 import { Notification } from "../../interfaces/index.js";
 
-export interface Scope {
+export interface Scope extends ScopeBase {
   iconUrl?: string;
   positionClass: string;
   notifications: Notification[];

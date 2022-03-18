@@ -1,10 +1,10 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { ShopifyCartLineItem, ShopifyCartObject } from "../../interfaces/index.js";
 import { ShopifyCartService } from "../../services/index.js";
 import template from "./cart-item.component.html";
 
-export interface Scope {
+export interface Scope extends ScopeBase {
   id: ShopifyCartLineItem["id"];
   title?: ShopifyCartLineItem["title"];
   price?: ShopifyCartLineItem["id"];

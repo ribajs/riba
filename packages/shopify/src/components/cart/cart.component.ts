@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import {
   ShopifyCartLineItem,
   ShopifyCartObject,
@@ -10,7 +10,7 @@ import { ShopifyCartService } from "../../services/index.js";
 import { getInputValue, hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import template from "./cart.component.html";
 
-export interface Scope {
+export interface Scope extends ScopeBase {
   cart: ShopifyCartObject | null;
   shippingAddress: ShopifyCustomerAddress | null;
   estimateShippingRate: boolean;

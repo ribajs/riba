@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import {
   ShopifyProductVariant,
   ShopifyProduct,
@@ -9,7 +9,7 @@ import {
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import template from "./product-item.component.html";
 
-export interface Scope {
+export interface Scope extends ScopeBase {
   handle: string | null;
   product: ShopifyProduct | null;
   variant: ShopifyProductVariant | null;

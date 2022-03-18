@@ -1,3 +1,3 @@
-export interface PrimaryNavigationComponentScope {
+export interface NavigationPrimaryComponentScope {
   template?: string;
 }

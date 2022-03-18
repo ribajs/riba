@@ -12,7 +12,7 @@ export interface JsxRouterViewProps extends JsxHtmlGlobalProps {
   "listen-popstate"?: JSXComponentBoolean;
   "scroll-to-anchor-hash"?: JSXComponentBoolean;
   "scroll-to-anchor-offset"?: JSXComponentBoolean;
-  "dataset-to-model"?: JSXComponentBoolean;
+  "dataset-to-root-scope"?: JSXComponentBoolean;
   "parse-title"?: JSXComponentBoolean;
   "change-browser-url"?: JSXComponentBoolean;
   "prefetch-links"?: JSXComponentBoolean;

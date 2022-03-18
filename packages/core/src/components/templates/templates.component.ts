@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, ScopeBase } from "@ribajs/core";
 import { camelCase, parseJsonString, parseType } from "@ribajs/utils/src/index.js";
 
 export type AttributeType = string;
@@ -11,7 +11,7 @@ export interface TemplateAttribute {
 
 export type TemplateAttributes = Array<TemplateAttribute>;
 
-export interface Scope {
+export interface Scope extends ScopeBase {
   items?: Array<any>;
 }
 

@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import template from "./comments-form.component.html";
 
@@ -21,7 +21,7 @@ export interface ValidationObject {
   };
 }
 
-interface Scope {
+interface Scope extends ScopeBase {
   form: {
     customer: {
       email: string;

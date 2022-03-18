@@ -253,15 +253,18 @@ export class Riba {
 
   /**
    * Binds some data to a template / element. Returns a riba.View instance.
+   * @param el 
+   * @param models The root
+   * @param options 
+   * @returns 
    */
   public bind(
     el: HTMLElement | DocumentFragment | HTMLUnknownElement[],
-    models?: any,
+    models: any = {},
     options?: Options
   ) {
     const viewOptions: Options = this.getViewOptions(options);
 
-    models = models || Object.create(null);
     Observer.updateOptions(viewOptions);
 
     const view = new View(el, models, viewOptions);

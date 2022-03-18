@@ -2,7 +2,8 @@ import {
   handleizeFormatter,
   TemplateFunction,
   FormatterFn,
-  TemplatesComponent
+  TemplatesComponent,
+  ScopeBase
 } from "@ribajs/core";
 import {
   CollapseService,
@@ -30,7 +31,7 @@ interface AccordionItem {
     | "down-left";
 }
 
-interface Scope {
+interface Scope extends ScopeBase {
   items: AccordionItem[];
   toggle: Bs4AccordionComponent["toggle"];
   show: Bs4AccordionComponent["show"];

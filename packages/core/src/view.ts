@@ -21,6 +21,10 @@ import { AttributeBinder } from "./binders/attribute.binder.js";
  * A collection of bindings built from a set of parent nodes.
  */
 export class View {
+
+  /** Global root scope */
+  public static $rootScope: any = {};
+
   public static bindingComparator = (a: Binder, b: Binder) => {
     const aPriority = a.priority || 0;
     const bPriority = b.priority || 0;
@@ -79,7 +83,18 @@ export class View {
     } else {
       this.els = [els] as HTMLElement[] | Node[];
     }
+
     this.models = models;
+
+    // If $root property exists in model merge this with the global root scope / model
+    if (this.models.$root) {
+      for (const key of Object.keys(this.models.$root)) {
+        View.$rootScope[key] = this.models.$root[key]
+      }
+    }
+
+    this.models.$root = View.$rootScope;
+
     this.options = options;
 
     this.build();

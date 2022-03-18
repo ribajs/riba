@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import template from "./bs5-contents.component.html";
 
@@ -9,7 +9,7 @@ export interface Anchor {
   childs: Anchor[];
 }
 
-export interface Scope {
+export interface Scope extends ScopeBase {
   /**
    * If start is `2` and depth is `2` depth starts on `h2` and ends on `h2`.
    */

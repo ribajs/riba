@@ -1,11 +1,11 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { Pjax } from "@ribajs/router";
 import { ShopifyCartService, ShopifyCartObject } from "@ribajs/shopify";
 import { onRoute } from "@ribajs/utils/src/url";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import template from "./cart-button.component.html";
 
-interface Scope {
+interface Scope extends ScopeBase {
   cartItemCount: number;
   toggle: ShopifyCartButtonComponent["toggle"];
   pending: boolean;

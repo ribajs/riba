@@ -1,7 +1,7 @@
-import { Component } from "@ribajs/core";
+import { Component, ScopeBase } from "@ribajs/core";
 import type { PodloveWebPlayerEpisode, PodloveWebPlayerConfig, PodloveWebPlayerStore } from "../../types/index.js";
 import type { PodloveWebPlayerComponent } from "../podlove-web-player/podlove-web-player.component.js";
-export interface Scope {
+export interface Scope extends ScopeBase {
     episode?: PodloveWebPlayerEpisode;
     config?: PodloveWebPlayerConfig;
     episodeUrl: string;

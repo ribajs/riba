@@ -7,7 +7,7 @@
  * @property targetId Passed attribute value, see `target-id` attribute
  */
 
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { JsxBs5ToggleButtonProps } from "../../types/index.js";
@@ -23,7 +23,7 @@ type State =
   | "added"
   | "removed";
 
-interface Scope {
+interface Scope extends ScopeBase {
   targetId?: string;
   toggle: Bs5ToggleButtonComponent["toggle"];
   state: State;

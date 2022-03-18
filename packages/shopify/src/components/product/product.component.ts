@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import {
   ShopifyProductVariant,
   ShopifyProduct,
@@ -13,7 +13,7 @@ export interface PreparedProductVariant extends ShopifyProductVariant {
   images?: string[];
 }
 
-export interface Scope {
+export interface Scope extends ScopeBase {
   handle: string | null;
   product: ShopifyProduct | null;
   variant: PreparedProductVariant | null;

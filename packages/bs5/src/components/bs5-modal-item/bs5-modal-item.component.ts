@@ -1,11 +1,11 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 
 import template from "./bs5-modal-item.component.html";
 import { getElementFromEvent } from "@ribajs/utils/src/dom.js";
 import { Modal, ModalNotification } from "../../services/index.js";
 import { Scope as Bs5NotificationContainerScope } from "../bs5-notification-container/bs5-notification-container.component.js";
 
-interface Scope {
+interface Scope extends ScopeBase {
   iconUrl?: string;
   modal?: ModalNotification;
   onHidden: Bs5ModalItemComponent["onHidden"];

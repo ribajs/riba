@@ -1,9 +1,9 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import Debug from "debug";
 import pugTemplate from "./shop-input.component.pug";
 
-interface Scope {
+interface Scope extends ScopeBase {
   shop: string;
   submitted: boolean;
 }

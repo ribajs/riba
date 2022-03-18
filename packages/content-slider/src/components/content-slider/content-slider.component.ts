@@ -1,6 +1,7 @@
 import {
   TemplatesComponent,
-  TemplateFunction
+  TemplateFunction,
+  ScopeBase
 } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { debounce } from "@ribajs/utils/src/control";
@@ -8,7 +9,7 @@ import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
 import { SlideItem } from "../../types/index.js";
 import template from "./content-slider.component.html";
 
-interface Scope {
+interface Scope extends ScopeBase {
   // States
   items: SlideItem[];
   /** Current / start index, by default 0. You can also change this attribute from outside to change the current active item */

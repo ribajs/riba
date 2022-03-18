@@ -13,14 +13,14 @@ export type JsxTsdNavbarProps = JsxHtmlGlobalProps;
 
 export type JsxTsdNavigationProps = JsxHtmlGlobalProps;
 
-export type JsxTsdPrimaryNavigationProps = JsxHtmlGlobalProps;
+export type JsxTsdNavigationPrimaryProps = JsxHtmlGlobalProps;
 
 export type JsxTsdMemberSignaturesProps = JsxHtmlGlobalProps;
 
 export interface TsdIntrinsicElements {
   // Custom Elements
   "tsd-search": JsxTsdSearchProps;
-  "tsd-primary-navigation": JsxTsdPrimaryNavigationProps;
+  "tsd-primary-navigation": JsxTsdNavigationPrimaryProps;
   "tsd-navigation": JsxTsdNavigationProps;
   "tsd-navbar": JsxTsdNavbarProps;
   "tsd-member-signatures": JsxTsdMemberSignaturesProps;

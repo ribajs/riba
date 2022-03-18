@@ -1,4 +1,4 @@
-import { Component } from "@ribajs/core";
+import { Component, ScopeBase } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { waitForProp } from "@ribajs/utils/src/control.js";
 import template from "./podlove-fixed-web-player.component.template.js";
@@ -9,7 +9,7 @@ import type {
 import { DEFAULT_MAIN_PLAYER_ID } from "../../constants.js";
 import type { PodloveWebPlayerComponent } from "../podlove-web-player/podlove-web-player.component.js";
 
-export interface Scope {
+export interface Scope extends ScopeBase {
   episode?: PodloveWebPlayerEpisode;
   config?: PodloveWebPlayerConfig;
   episodeUrl: string;

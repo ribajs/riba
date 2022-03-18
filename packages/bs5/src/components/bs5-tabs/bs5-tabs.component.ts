@@ -2,7 +2,8 @@ import {
   handleizeFormatter,
   FormatterFn,
   TemplateFunction,
-  TemplatesComponent
+  TemplatesComponent,
+  ScopeBase
 } from "@ribajs/core";
 import templateHorizontal from "./bs5-tabs-horizontal.component.html";
 import templateVertical from "./bs5-tabs-vertical.component.html";
@@ -20,7 +21,7 @@ export interface Tab {
   index: number;
 }
 
-export interface Scope {
+export interface Scope extends ScopeBase {
   items: Tab[];
   activate: Bs5TabsComponent["activate"];
   deactivate: Bs5TabsComponent["activate"];

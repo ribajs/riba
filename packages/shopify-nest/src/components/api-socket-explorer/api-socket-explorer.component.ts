@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { htmlToElement, hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import Debug from "debug";
 import { LocalesStaticService } from "@ribajs/i18n";
@@ -10,7 +10,7 @@ import productUpdatesTestDatas from "../../tests/data/products/updates.data.js";
 
 import pugTemplate from "./api-socket-explorer.component.pug";
 
-interface Scope {
+interface Scope extends ScopeBase {
   simulate?: ShopifyNestApiSocketExplorerComponent["simulate"];
   langcode?: string;
 }

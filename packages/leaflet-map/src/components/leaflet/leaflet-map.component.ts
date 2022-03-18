@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { isNumber, justDigits } from "@ribajs/utils/src/type.js";
 import { getUID } from "@ribajs/utils/src/dom.js";
@@ -6,7 +6,7 @@ import template from "./leaflet-map.component.html";
 import * as Leaflet from "leaflet";
 import { PointTuple, IconOptions } from "leaflet";
 
-interface Scope {
+interface Scope extends ScopeBase {
   mapSelector: string;
   initialLat: number;
   initialLng: number;
