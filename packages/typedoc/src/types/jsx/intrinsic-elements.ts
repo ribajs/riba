@@ -20,8 +20,8 @@ export type JsxTsdMemberSignaturesProps = JsxHtmlGlobalProps;
 export interface TsdIntrinsicElements {
   // Custom Elements
   "tsd-search": JsxTsdSearchProps;
-  "tsd-primary-navigation": JsxTsdNavigationPrimaryProps;
-  "tsd-navigation": JsxTsdNavigationProps;
+  "tsd-navigation-primary": JsxTsdNavigationPrimaryProps;
+  "tsd-navigation-secondary": JsxTsdNavigationProps;
   "tsd-navbar": JsxTsdNavbarProps;
   "tsd-member-signatures": JsxTsdMemberSignaturesProps;
 }

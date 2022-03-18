@@ -2,10 +2,10 @@ import { Component, TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils";
 import { EventDispatcher } from "@ribajs/events";
 
-import type { NavigationComponentScope } from "../../types/index.js";
+import type { NavigationSecondaryComponentScope } from "../../types/index.js";
 
 export class NavigationComponent extends Component {
-  public static tagName = "tsd-navigation";
+  public static tagName = "tsd-navigation-secondary";
 
   static get observedAttributes() {
     return [];
@@ -13,7 +13,7 @@ export class NavigationComponent extends Component {
 
   protected routerEvents = new EventDispatcher("main");
 
-  public scope: NavigationComponentScope = {};
+  public scope: NavigationSecondaryComponentScope = {};
 
   constructor() {
     super();

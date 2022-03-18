@@ -35,7 +35,7 @@ export class NavigationPrimaryComponent extends Component {
 
   protected onNewPage() {
     const templateEl = document.getElementById(
-      "tsd-navigation-primary-template"
+      "-template"
     ) as HTMLTemplateElement | null;
     if (!templateEl) {
       console.warn("[NavigationPrimaryComponent] No template found!");
