@@ -30,17 +30,13 @@ interface Model {
 
 describe("riba.formatters", () => {
   describe("parse", () => {
-    let model: Model = {};
-
-    beforeEach(() => {
-      model = {
-        numStr: '42',
-        bolStr: 'true',
-        strArrStr: "['a', 'b', 'c']",
-        objStr: "{'a': 1, 'b': 2, 'c': 3}",
-        base64Str: "base64:QSUyMHB1cHBldCUyMHRoYXQlMjBjYW4lMjBubyUyMGxvbmdlciUyMGJlJTIwdXNlZCUyMGlzJTIwbWVyZSUyMGdhcmJhZ2UuJTIwVGhpcyUyMHB1cHBldCdzJTIwcm9sZSUyMGhhcyUyMGp1c3QlMjBlbmRlZC4uLg=="
-      };
-    });
+    let model: Model = {
+      numStr: '42',
+      bolStr: 'true',
+      strArrStr: "['a', 'b', 'c']",
+      objStr: "{'a': 1, 'b': 2, 'c': 3}",
+      base64Str: "base64:QSUyMHB1cHBldCUyMHRoYXQlMjBjYW4lMjBubyUyMGxvbmdlciUyMGJlJTIwdXNlZCUyMGlzJTIwbWVyZSUyMGdhcmJhZ2UuJTIwVGhpcyUyMHB1cHBldCdzJTIwcm9sZSUyMGhhcyUyMGp1c3QlMjBlbmRlZC4uLg=="
+    };
 
     it("A string number should be parsed to a number", () => {
       const el = document.createElement("div");
