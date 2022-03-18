@@ -12,8 +12,6 @@ jobs:
         uses: actions/checkout@v3
         with:
           submodules: 'true'
-      - name: Checkout submodules
-        run: git submodule update --init --recursive --force
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
@@ -21,8 +19,7 @@ jobs:
       - name: Install dependencies
         run: |
           yarn --version
-          yarn install > install.log
-          cat install.log
+          yarn install
       - name: Lint source files 
         run: |
           yarn run lint
