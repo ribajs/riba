@@ -1,1 +1,4 @@
-export type TypedocModuleOptions = Record<string, never>;
+export interface TypedocModuleOptions {
+  /** The base url of the remote search server */
+  serverBaseUrl?: string;
+}

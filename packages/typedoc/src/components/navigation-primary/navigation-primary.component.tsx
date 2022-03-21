@@ -1,10 +1,8 @@
-import { Component, TemplateFunction } from "@ribajs/core";
-import {  parseType } from "@ribajs/utils";
+import { Component, TemplateFunction, HttpService } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
-
 import childTemplate from "./child-template.html";
 
-import type { NavigationPrimaryComponentScope } from "../../types/index.js";
+import type { NavigationPrimaryComponentScope, NavigationPrimary } from "../../types/index.js";
 
 export class NavigationPrimaryComponent extends Component {
   public static tagName = "tsd-navigation-primary";
@@ -31,6 +29,7 @@ export class NavigationPrimaryComponent extends Component {
   protected async beforeBind() {
     await super.beforeBind();
     this.addEventListeners();
+    await this.fetchData();
   }
 
   protected addEventListeners() {
@@ -38,18 +37,14 @@ export class NavigationPrimaryComponent extends Component {
     this.onNewPage();
   }
 
-  protected onNewPage() {
-    const objectTemplateEl = document.getElementById(
-      "tsd-navigation-primary-object"
-    ) as HTMLTemplateElement | null;
-    if (!objectTemplateEl) {
-      console.warn("[NavigationPrimaryComponent] No object template found!");
-      return;
-    }
-    const base64 = objectTemplateEl.innerHTML;
-    const primaryNav = parseType(base64).value;
-    this.scope.primaryNav = primaryNav;
-    console.debug("NavigationPrimaryComponent", primaryNav);
+  protected async onNewPage() {
+    // TODO
+  }
+
+  protected async fetchData() {
+    const data = await HttpService.getJSON<NavigationPrimary>("/assets/primary-navigation.json");
+    this.scope.primaryNav = data.body;
+    console.debug("NavigationPrimaryComponent", this.scope.primaryNav);
   }
 
   protected template(): ReturnType<TemplateFunction> {
