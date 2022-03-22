@@ -1,4 +1,4 @@
-tsd-navigation-secondary, tsd-navigation-primary {
+tsd-navigation-secondary {
     .tsd-navigation {
         a {
             display: block;
@@ -19,61 +19,6 @@ tsd-navigation-secondary, tsd-navigation-primary {
         }
         li {
             padding: 0;
-        }
-
-        &.primary {
-            // padding-bottom: 40px;
-            a {
-                display: block;
-                padding-top: 6px;
-                padding-bottom: 6px;
-            }
-            ul {
-                li {
-                    a {
-                        padding-left: 5px;
-                    }
-                    li {
-                        a {
-                            padding-left: 25px;
-                        }
-                        li {
-                            a {
-                                padding-left: 45px;
-                            }
-                            li {
-                                a {
-                                    padding-left: 65px;
-                                }
-                                li {
-                                    a {
-                                        padding-left: 85px;
-                                    }
-                                    li {
-                                        a {
-                                            padding-left: 105px;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            li {
-                &.current {
-                    & > a {
-                        font-weight: bold;
-                    }
-                }
-                &.label {
-                    span {
-                        display: block;
-                        padding: 20px 0 6px 5px;
-                        color: var(--color-menu-label);
-                    }
-                }
-            }
         }
 
         &.secondary {
@@ -119,10 +64,6 @@ tsd-navigation-secondary, tsd-navigation-primary {
                     }
                 }
             }
-        }
-        &.primary li.globals + li > span,
-        &.primary li.globals + li > a {
-            padding-top: 20px;
         }
     }
 }

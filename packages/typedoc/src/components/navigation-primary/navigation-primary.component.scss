@@ -1,4 +1,18 @@
-tsd-navigation {
+tsd-navigation-primary {
+
+    .dropdown-toggle {
+        min-width: 150px;
+        &::after {
+            display: none;
+        }
+    }
+
+    .dropdown-item {
+        &.parent-active {
+            @extend .active;
+        }
+    }
+
     .tsd-navigation {
         a {
             display: block;
@@ -61,7 +75,7 @@ tsd-navigation {
                 }
             }
             li {
-                &.current {
+                &.active, &.parent-active {
                     & > a {
                         font-weight: bold;
                     }
@@ -73,56 +87,13 @@ tsd-navigation {
                         color: var(--color-menu-label);
                     }
                 }
-            }
-        }
 
-        &.secondary {
-            ul {
-                transition: opacity 0.2s;
-                li {
-                    a {
-                        padding-left: 25px;
-                    }
-                    li {
-                        a {
-                            padding-left: 45px;
-                        }
-                        li {
-                            a {
-                                padding-left: 65px;
-                            }
-                            li {
-                                a {
-                                    padding-left: 85px;
-                                }
-                                li {
-                                    a {
-                                        padding-left: 105px;
-                                    }
-                                    li {
-                                        a {
-                                            padding-left: 125px;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                &.globals + li > span,
+                &.globals + li > a {
+                    padding-top: 20px;
                 }
             }
-            li {
-                &.current {
-                    margin-top: 20px;
-                    margin-bottom: 20px;
-                    & > a {
-                        font-weight: bold;
-                    }
-                }
-            }
-        }
-        &.primary li.globals + li > span,
-        &.primary li.globals + li > a {
-            padding-top: 20px;
+
         }
     }
 }

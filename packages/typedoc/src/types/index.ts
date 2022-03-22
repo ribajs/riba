@@ -1,8 +1,11 @@
 export * from "./jsx/index.js";
 
+export * from "./dataset.js";
 export * from "./member-signatures-component-scope.js";
+export * from "./module-info.js";
 export * from "./module-options.js";
 export * from "./navbar-component-scope.js";
+export * from "./navigation-flat.js";
 export * from "./navigation-primary-component-scope.js";
 export * from "./navigation-primary.js";
 export * from "./navigation-secondary-component-scope.js";

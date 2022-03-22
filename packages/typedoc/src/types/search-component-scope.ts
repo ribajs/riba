@@ -1,8 +1,9 @@
-import type { SearchResult } from ".";
+import type { ScopeBase } from "@ribajs/core"
+import type { SearchResult, Dataset } from "./index.js";
 import type { SearchComponent } from "../components/search/search.component.js";
 import type { NavbarComponent } from "../components/navbar/navbar.component.js";
 
-export interface SearchComponentScope {
+export interface SearchComponentScope extends ScopeBase<{dataset: Dataset}> {
   /** The base url of the remote search server */
   serverBaseUrl: string;
   /** `true` as log as we are waiting for the search response */
