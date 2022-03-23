@@ -24,7 +24,7 @@
     "@ribajs/postcss-config": "workspace:^",
     "@ribajs/tsconfig": "workspace:^",
     "@types/find-root": "^1.1.2",
-    "@types/node": "^17.0.21",
+    "@types/node": "^17.0.22",
     "@types/pkg-dir": "^2.0.1",
     "@yarnpkg/esbuild-plugin-pnp": "^2.0.1",
     "@yarnpkg/pnpify": "^3.1.1",

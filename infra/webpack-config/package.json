@@ -20,13 +20,13 @@
     "build": "tsc --project tsconfig.json"
   },
   "dependencies": {
-    "@babel/core": "^7.17.7",
+    "@babel/core": "^7.17.8",
     "@graphql-tools/webpack-loader": "^6.6.2",
     "@ribajs/eslint-config": "workspace:^",
     "@ribajs/npm-package": "workspace:^",
     "@ribajs/postcss-config": "workspace:^",
     "@yarnpkg/pnpify": "^3.1.1",
-    "babel-loader": "^8.2.3",
+    "babel-loader": "^8.2.4",
     "copy-webpack-plugin": "^9.1.0",
     "css-loader": "^6.7.1",
     "file-loader": "^6.2.0",
