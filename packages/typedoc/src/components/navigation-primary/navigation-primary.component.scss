@@ -13,6 +13,10 @@ tsd-navigation-primary {
         }
     }
 
+    .dropdown-menu .scrollbar-y-scroll {
+        max-height: 200px;
+    }
+
     .tsd-navigation {
         a {
             display: block;
