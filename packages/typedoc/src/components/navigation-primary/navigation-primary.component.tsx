@@ -2,6 +2,7 @@ import { Component, HttpService, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { Dropdown } from "@ribajs/bs5";
 import { Pjax } from "@ribajs/router";
+import type {  } from "@ribajs/fuse";
 import childTemplateList from "./child-template-list.html";
 import childTemplateDropdown from "./child-template-dropdown.html";
 
@@ -102,9 +103,29 @@ export class NavigationPrimaryComponent extends Component {
           <button rv-bs5-dropdown="" class="btn btn-outline-primary dropdown-toggle d-flex justify-content-between align-items-center" id="dropdownMenuModules" aria-haspopup="true" aria-expanded="false" >
             <span rv-text="selectedModule">Modules</span> <bs5-icon src="/assets/iconset/svg/arrow_carrot_thin.svg" size={16} direction="down"></bs5-icon>
           </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuModules">
-            <li class="dropdown-item cursor-pointer" rv-each-mod="primaryNav" rv-add-class="mod.classNames" rv-route-class-active="mod.href" rv-route-class-parent-active="mod.parent.href" rv-template="childTemplateDropdown" rv-on-click="onModuleSelect | args mod"></li>
-          </ul>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuModules">
+            <fuse-search rv-parent rv-co-items="primaryNav" options="{'keys': ['name', 'parent.name']}">
+              <div class="mx-2 mb-2">
+                <input type="search" class="form-control" placeholder="Filter..." aria-label="Filter" rv-value="searchPattern" rv-on-input="search" rv-on-cut="search" rv-on-paste="search" />
+              </div>
+              <div class="scrollbar-y-scroll scrollbar-primary">
+                <div rv-show="searchPattern | size" rv-each-result="results">
+                  <div class="dropdown-item cursor-pointer" rv-add-class="result.item.classNames" rv-route-class-active="result.item.href" rv-route-class-parent-active="result.item.parent.href" rv-on-click="$parent.$parent.onModuleSelect | args result.item">
+                    <a rv-href="result.item.href" rv-text="result.item.parent.name"></a>
+                  </div>
+                </div>
+                <div rv-if="results | size | eq 0" rv-show="searchPattern | size" >
+                  <div class="dropdown-item"><span>No result</span></div>
+                </div>
+                <div rv-hide="searchPattern | size" rv-each-item="items">
+                  <div class="dropdown-item cursor-pointer" rv-add-class="item.classNames" rv-route-class-active="item.href" rv-route-class-parent-active="item.parent.href" rv-on-click="$parent.$parent.onModuleSelect | args item">
+                    <span class="text-primary" rv-text="item.label"></span>
+                    <a rv-href="item.href" rv-text="item.parent.name"></a>
+                  </div>
+                </div>
+              </div>
+            </fuse-search>
+          </div>
         </div>
       );
     }

@@ -130,7 +130,7 @@ export class Bs5DropdownExampleComponent extends Component {
           <button class="btn btn-outline-success text-truncate dropdown-toggle" rv-bs5-dropdown="" rv-text="selected.label"></button>
           <div class="dropdown-menu">
             <fuse-search rv-parent rv-co-items="items">
-              <div class="mx-2">
+              <div class="m-2">
                 <input type="search" class="form-control" placeholder="Filter..." aria-label="Filter" rv-value="searchPattern" rv-on-input="search" rv-on-cut="search" rv-on-paste="search" />
               </div>
               <div class="scrollbar-y-scroll scrollbar-success">

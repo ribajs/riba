@@ -42,8 +42,18 @@ export class FuseSearchComponent<T = any,> extends Component {
     this.init(FuseSearchComponent.observedAttributes);
   }
 
-  protected async beforeBind() {
-    await super.beforeBind();
+  protected parsedAttributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
+    super.parsedAttributeChangedCallback(attributeName, oldValue, newValue, namespace);
+
+    if (attributeName === 'items') {
+      console.debug("parsedAttributeChangedCallback items", newValue);
+      this.initFuse();
+    }
+  }
+
+
+  protected async afterBind() {
+    await super.afterBind();
     this.initFuse();
   }
 
@@ -51,15 +61,15 @@ export class FuseSearchComponent<T = any,> extends Component {
     let testItem: any;
     if (Array.isArray(items) && items.length > 0) {
       testItem = items[0];
+    } else {
+      testItem = items;
     }
-    
     if (!testItem) {
-      console.warn("No key for items found!");
       return [];
     }
     const keys: string[] = [];
     for (const key of Object.keys(testItem)) {
-      if (testItem[key] && typeof (testItem[key]) === "object" && Object.keys(testItem[key]).length > 0) {
+      if (testItem[key] && (typeof (testItem[key]) === "object" || Array.isArray(testItem[key]))) {
         const childKeys = this.getAllFuseKeys(testItem[key]);
         for (const childKey of childKeys) {
           keys.push(`${key}.${childKey}`);
@@ -72,7 +82,10 @@ export class FuseSearchComponent<T = any,> extends Component {
   }
 
   protected initFuse() {
-    if (!this.scope.options.keys) {
+    if (!this.scope.items?.length) {
+      return;
+    }
+    if (!this.scope.options.keys?.length) {
       this.scope.options.keys = this.getAllFuseKeys(this.scope.items);
     }
     this.fuse = new Fuse(this.scope.items, this.scope.options);

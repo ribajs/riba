@@ -16,6 +16,7 @@
     "@ribajs/core": "workspace:^",
     "@ribajs/events": "workspace:^",
     "@ribajs/extras": "workspace:^",
+    "@ribajs/fuse": "workspace:^",
     "@ribajs/iconset": "workspace:^",
     "@ribajs/jsx": "workspace:^",
     "@ribajs/router": "workspace:^",
