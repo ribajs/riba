@@ -1,12 +1,11 @@
 import { Component, TemplateFunction } from "@ribajs/core";
-import { EmptyTemplateComponentScope } from "../../types/index.js";
+import { EmptyTemplateComponentScope, JsxEmptyTemplateProps } from "../../types/index.js";
 import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
-import template from "./empty-template.component.pug";
 
 export class EmptyTemplateComponent extends Component {
   public static tagName = "empty-template";
 
-  static get observedAttributes() {
+  static get observedAttributes(): (keyof JsxEmptyTemplateProps)[] {
     return ["foobar"];
   }
 
@@ -25,7 +24,7 @@ export class EmptyTemplateComponent extends Component {
 
   protected template(): ReturnType<TemplateFunction> {
     if (!hasChildNodesTrim(this)) {
-      return template(this.scope);
+      return <span>Hello from empty component template.<br />foobar: <span rv-text="foobar"></span> </span>
     } else {
       return null;
     }

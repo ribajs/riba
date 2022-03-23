@@ -1,15 +1,17 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 /* eslint-disable @typescript-eslint/no-namespace */
 
-import type { JsxSSRRootPageProps } from "./index.js";
+import type {
+  JsxEmptyTemplateProps
+} from "./index.js";
 
-export interface SSRIntrinsicElements {
-  "ssr-root-page": JsxSSRRootPageProps;
+export interface EmptyTemplateIntrinsicElements {
+  "empty-template": JsxEmptyTemplateProps;
 }
 
 declare global {
   namespace JSX {
     // This extends the IntrinsicElements interface defined in @ribajs/jsx
-    interface IntrinsicElements extends SSRIntrinsicElements {}
+    interface IntrinsicElements extends EmptyTemplateIntrinsicElements {}
   }
 }

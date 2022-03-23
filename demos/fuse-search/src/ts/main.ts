@@ -1,7 +1,7 @@
 import { coreModule, Riba } from "@ribajs/core";
 import { bs5Module } from "@ribajs/bs5";
 import { fuseModule } from "@ribajs/fuse";
-import { Bs5DropdownModule } from "./bs5-dropdown.module.js";
+import { FuseSearchModule } from "./module.js";
 
 const riba = new Riba();
 const model = {};
@@ -10,7 +10,7 @@ const model = {};
 riba.module.regist(coreModule.init());
 riba.module.regist(bs5Module.init({}));
 riba.module.regist(fuseModule.init({}));
-riba.module.regist(Bs5DropdownModule.init());
+riba.module.regist(FuseSearchModule.init());
 
 riba.bind(document.body, model);
 

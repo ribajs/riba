@@ -11,7 +11,7 @@ import type {
   JsxBs5ThemeButtonProps,
   JsxBs5ToggleButtonProps,
   JsxBs5SlideshowProps
-} from "./";
+} from "./index.js";
 
 export interface Bs5IntrinsicElements {
   "bs5-accordion": JsxBs5AccordionProps;

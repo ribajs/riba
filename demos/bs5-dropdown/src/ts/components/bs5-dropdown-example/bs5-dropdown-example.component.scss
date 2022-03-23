@@ -1,6 +1,6 @@
 bs5-dropdown-example {
   display: block;
-  .dropdown-menu.scrollbar-y-scroll {
+  .dropdown-menu.scrollbar-y-scroll, .dropdown-menu .scrollbar-y-scroll {
     max-height: 200px;
   } 
 }

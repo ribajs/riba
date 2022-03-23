@@ -7,10 +7,11 @@ interface DropdownItem {
   value: any;
 }
 
-export class Bs5DropdownExampleComponent extends Component {
-  public static tagName = "bs5-dropdown-example";
+export class FuseSearchExampleComponent extends Component {
+  public static tagName = "fuse-search-example";
 
   protected autobind = true;
+
   static get observedAttributes(): string[] {
     return [];
   }
@@ -19,48 +20,48 @@ export class Bs5DropdownExampleComponent extends Component {
     dropdownBinderLabel: "Dropdown binder",
     items: [
       {
-        label: "Click me",
+        label: "Agahnim",
         value: 0
       },
       {
-        label: "Click ME!",
+        label: "Bongo Bongo",
         value: 1
       },
       {
-        label: "No, click ME!",
+        label: "Daruk",
         value: 2
       },
       {
-        label: "NO, ME!!1!1",
+        label: "Great Deku Tree",
         value: 3
       },
       {
-        label: "Select me, please",
+        label: "Hestu",
         value: 4
       },
       {
-        label: "I do not care",
+        label: "Komali",
         value: 5
       },
       {
-        label: "Do what ever you want..",
+        label: "Linkle",
         value: 6
       },
       {
-        label: "Who am I?",
+        label: "Maple",
         value: 7
       },
       {
-        label: "Don't click me",
+        label: "Navi",
         value: 8
       },
       {
-        label: "...",
+        label: "Zant",
         value: 9
       }
     ] as DropdownItem[],
     selected: {
-      label: "Select an item",
+      label: "Choose a character",
       value: null
     } as DropdownItem,
     select: this.select.bind(this)
@@ -72,7 +73,7 @@ export class Bs5DropdownExampleComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    super.init(Bs5DropdownExampleComponent.observedAttributes);
+    super.init(FuseSearchExampleComponent.observedAttributes);
   }
 
   protected requiredAttributes(): string[] {
@@ -91,41 +92,16 @@ export class Bs5DropdownExampleComponent extends Component {
     } else {
       return <div class="row my-5">
       <section class="col-12 my-5">
-        <h2>bs5-dropdown component</h2>
-        <bs5-dropdown class="dropdown">
-          <a rv-on-click="toggle" class="btn btn-secondary dropdown-toggle me-2" href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false">
-            Dropdown link
-          </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-          </div>
-        </bs5-dropdown>
-        <bs5-dropdown class="dropup">
-          <a rv-on-click="toggle" class="btn btn-secondary dropdown-toggle ms-2" href="#" role="button" id="dropupMenuLink" aria-haspopup="true" aria-expanded="false">
-            Dropdown link
-          </a>
-          <div class="dropdown-menu" aria-labelledby="dropupMenuLink">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-          </div>
-        </bs5-dropdown>
+        <h2>Fuse.js search component</h2>
+        <fuse-search rv-co-items="items">
+          <input type="search" class="form-control" placeholder="Search character..." aria-label="Search" rv-value="searchPattern" rv-on-input="search" rv-on-cut="search" rv-on-paste="search" />
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-action" rv-each-item="results" rv-text="item.item.label"></li>
+          </ul>
+        </fuse-search>
       </section>
-    
       <section class="col-12 my-5">
-        <h2>bs5-dropdown binder</h2>
-        <div class="dropdown">
-          <button class="btn btn-outline-primary text-truncate dropdown-toggle" rv-bs5-dropdown="" rv-text="selected.label"></button>
-          <div class="dropdown-menu scrollbar-y-scroll scrollbar-primary">
-            <div rv-each-item="items">
-              <div class="dropdown-item cursor-pointer" rv-on-click="select | args item"><span class="text-primary" rv-text="item.label"></span></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="col-12 my-5">
-        <h2>bs5-dropdown binder with Fuse.js search component</h2>
+        <h2>Fuse.js search component in bs5-dropdown binder</h2>
         <div class="dropdown">
           <button class="btn btn-outline-success text-truncate dropdown-toggle" rv-bs5-dropdown="" rv-text="selected.label"></button>
           <div class="dropdown-menu">
@@ -138,7 +114,7 @@ export class Bs5DropdownExampleComponent extends Component {
                   <div class="dropdown-item cursor-pointer" rv-on-click="$parent.$parent.select | args item.item"><span class="text-success" rv-text="item.item.label"></span></div>
                 </div>
                 <div rv-if="results | size | eq 0" rv-show="searchPattern | size" >
-                  <div class="dropdown-item"><span class="text-success"> No result</span></div>
+                  <div class="dropdown-item"><span class="text-success">No result</span></div>
                 </div>
                 <div rv-hide="searchPattern | size" rv-each-item="items">
                   <div class="dropdown-item cursor-pointer" rv-on-click="$parent.$parent.select | args item"><span class="text-success" rv-text="item.label"></span></div>

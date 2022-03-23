@@ -64,9 +64,7 @@ export class As5accordionExampleComponent extends Component {
       <section class="col-12 my-5">
         <h2>bs5-accordion component using items attribute</h2>
         <p>Set items using the items attribute:</p>
-        <bs5-accordion collapse-icon-src="/iconset/svg/arrow_carrot.svg" collapse-icon-size={32} rv-co-items="items2">
-
-        </bs5-accordion>
+        <bs5-accordion collapse-icon-src="/iconset/svg/arrow_carrot.svg" collapse-icon-size={32} rv-co-items="items2"></bs5-accordion>
       </section>
       <section class="col-12 my-5">
         <h2>bs5-collapse</h2>
