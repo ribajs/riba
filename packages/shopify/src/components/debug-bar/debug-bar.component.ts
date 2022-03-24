@@ -14,7 +14,7 @@ export class ShopifyDebugBarComponent extends Component {
     hasAdminBar: false,
     toggleBar: this.toggleBar,
     hide: this.hide,
-    hidden: false
+    hidden: false,
   };
 
   protected autobind = true;

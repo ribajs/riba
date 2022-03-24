@@ -4,8 +4,9 @@ import { waitForProp } from "@ribajs/utils/src/control.js";
 import template from "./podlove-fixed-web-player.component.template.js";
 import type {
   PodloveWebPlayerEpisode,
-  PodloveWebPlayerConfig
-, PodloveWebPlayerStore } from "../../types/index.js";
+  PodloveWebPlayerConfig,
+  PodloveWebPlayerStore,
+} from "../../types/index.js";
 import { DEFAULT_MAIN_PLAYER_ID } from "../../constants.js";
 import type { PodloveWebPlayerComponent } from "../podlove-web-player/podlove-web-player.component.js";
 
@@ -35,7 +36,7 @@ export class PodloveFixedWebPlayerComponent extends Component {
     playerId: DEFAULT_MAIN_PLAYER_ID,
     position: "bottom",
     show: this.show,
-    hide: this.hide
+    hide: this.hide,
   };
 
   static get observedAttributes(): string[] {
@@ -45,7 +46,7 @@ export class PodloveFixedWebPlayerComponent extends Component {
       "config-url",
       "episode",
       "config",
-      "position"
+      "position",
     ];
   }
 

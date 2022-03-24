@@ -14,5 +14,5 @@ export const LuxonUntilFormatter: Formatter = {
    */
   read(target: DateTime, otherDateTime: DateTime): Interval {
     return target.until(otherDateTime);
-  }
+  },
 };

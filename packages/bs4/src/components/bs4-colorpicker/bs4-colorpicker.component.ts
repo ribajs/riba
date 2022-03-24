@@ -24,7 +24,7 @@ class EventBucket {
     this.events.push({
       target,
       type,
-      handler
+      handler,
     });
   }
 
@@ -188,7 +188,7 @@ export class Bs4ColorPickerComponent extends Component {
       "editor-format",
       "cancel-button",
       "okay-button",
-      "color"
+      "color",
     ];
   }
 
@@ -208,7 +208,7 @@ export class Bs4ColorPickerComponent extends Component {
     editor: true,
     editorFormat: "hex",
     cancelButton: false,
-    okayButton: false
+    okayButton: false,
   };
 
   protected events = new EventBucket();
@@ -400,7 +400,7 @@ export class Bs4ColorPickerComponent extends Component {
       const input = e.target as HTMLInputElement;
       this.setColor(input.value, {
         fromEditor: true,
-        failSilently: true
+        failSilently: true,
       });
     });
     // Select all text on focus:

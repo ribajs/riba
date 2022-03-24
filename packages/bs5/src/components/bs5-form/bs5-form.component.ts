@@ -4,11 +4,16 @@ import {
   HttpService,
   HttpMethod,
   HttpDataType,
-  ScopeBase
+  ScopeBase,
 } from "@ribajs/core";
 import template from "./bs5-form.component.html";
 import { stripHtml } from "@ribajs/utils/src/type.js";
-import { getUID, hasChildNodesTrim , scrollTo, getViewportDimensions } from "@ribajs/utils/src/dom.js";
+import {
+  getUID,
+  hasChildNodesTrim,
+  scrollTo,
+  getViewportDimensions,
+} from "@ribajs/utils/src/dom.js";
 
 export interface ValidationObject {
   fields:
@@ -78,7 +83,7 @@ export class Bs5FormComponent extends Component {
       "auto-set-form-data",
       "strip-html",
       "scroll-invalid-element",
-      "animate-invalid-element"
+      "animate-invalid-element",
     ];
   }
 
@@ -91,7 +96,7 @@ export class Bs5FormComponent extends Component {
       form: {
         fields: {},
         valid: false,
-        error: undefined
+        error: undefined,
       },
 
       disableSubmitUntilChange: false,
@@ -104,7 +109,7 @@ export class Bs5FormComponent extends Component {
       autoSetFormData: true,
       stripHtml: true,
       scrollToInvalidElement: true,
-      animateInvalidElement: true
+      animateInvalidElement: true,
     };
     return scope;
   }
@@ -267,7 +272,7 @@ export class Bs5FormComponent extends Component {
       action,
       method: method.toUpperCase() as HttpMethod,
       target,
-      type: this.scope.ajaxRequestType
+      type: this.scope.ajaxRequestType,
     };
 
     return settings;
@@ -296,7 +301,7 @@ export class Bs5FormComponent extends Component {
 
     this.dispatchEvent(
       new CustomEvent("invalid", {
-        detail: { elements: invalidElements }
+        detail: { elements: invalidElements },
       })
     );
   }
@@ -319,7 +324,7 @@ export class Bs5FormComponent extends Component {
     this.debug("onErrorSubmit");
     this.dispatchEvent(
       new CustomEvent("submit-error", {
-        detail: { status, message: message, response }
+        detail: { status, message: message, response },
       })
     );
   }
@@ -332,7 +337,7 @@ export class Bs5FormComponent extends Component {
 
     this.dispatchEvent(
       new CustomEvent("submit-success", {
-        detail: { status, message: message, response }
+        detail: { status, message: message, response },
       })
     );
   }

@@ -12,7 +12,7 @@ import { TooltipService } from "./tooltip.service.js";
 import {
   TooltipContentFn,
   PopoverOptions,
-  TooltipOptions
+  TooltipOptions,
 } from "../interfaces/index.js";
 
 /**
@@ -37,12 +37,12 @@ const Default: PopoverOptions = {
     '<div class="popover" role="tooltip">' +
     '<div class="popover-arrow arrow"></div>' +
     '<h3 class="popover-header"></h3>' +
-    '<div class="popover-body"></div></div>'
+    '<div class="popover-body"></div></div>',
 };
 
 const DefaultType = {
   ...TooltipService.DefaultType,
-  content: "(string|element|function)"
+  content: "(string|element|function)",
 };
 
 const Event = {
@@ -55,7 +55,7 @@ const Event = {
   FOCUSIN: `focusin${EVENT_KEY}`,
   FOCUSOUT: `focusout${EVENT_KEY}`,
   MOUSEENTER: `mouseenter${EVENT_KEY}`,
-  MOUSELEAVE: `mouseleave${EVENT_KEY}`
+  MOUSELEAVE: `mouseleave${EVENT_KEY}`,
 };
 
 const CLASS_NAME_FADE = "fade";
@@ -88,7 +88,7 @@ export class PopoverService extends TooltipService {
     CLASS_NAME_SHOW,
 
     SELECTOR_TITLE,
-    SELECTOR_CONTENT
+    SELECTOR_CONTENT,
   };
 
   // Getters

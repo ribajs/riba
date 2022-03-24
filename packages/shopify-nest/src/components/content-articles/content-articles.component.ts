@@ -29,7 +29,7 @@ export class ShopifyNestContentBlogArticlesComponent extends ShopifyNestContentC
   );
 
   public scope: Scope = {
-    articles: []
+    articles: [],
   };
 
   constructor(

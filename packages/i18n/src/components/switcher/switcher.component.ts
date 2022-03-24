@@ -1,6 +1,6 @@
 import { TemplateFunction, Component, ScopeBase } from "@ribajs/core";
 import { I18nService } from "../../services/index.js";
-import { LocalesService , Langcode } from "../../types/index.js";
+import { LocalesService, Langcode } from "../../types/index.js";
 
 export interface Scope extends ScopeBase {
   langcodes: Langcode[];
@@ -24,7 +24,7 @@ export class I18nSwitcherComponent extends Component {
     langcodes: [],
     switch: this.switch,
     toggle: this.toggle,
-    ready: false
+    ready: false,
   };
 
   protected connectedCallback() {

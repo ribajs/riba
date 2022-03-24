@@ -16,5 +16,5 @@ export const startsWithFormatter: Formatter = {
       return str;
     }
     return str.startsWith(checkStart);
-  }
+  },
 };

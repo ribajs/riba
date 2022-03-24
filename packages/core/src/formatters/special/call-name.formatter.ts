@@ -10,5 +10,5 @@ export const callNameFormatter: Formatter = {
   name: "call-name",
   read: function (object: any, name: string, ...args: any[]) {
     return object[name](...args);
-  }
+  },
 };

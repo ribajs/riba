@@ -28,14 +28,14 @@ export const updateOrCreate = async (
       scriptTag: await scriptTags.update(
         existingScriptTag.id,
         scriptTagsConfig
-      )
+      ),
     };
   }
 
   // create
   return {
     action: "created",
-    scriptTag: await scriptTags.create(scriptTagsConfig)
+    scriptTag: await scriptTags.create(scriptTagsConfig),
   };
 };
 

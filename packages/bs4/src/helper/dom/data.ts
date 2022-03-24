@@ -32,7 +32,7 @@ const mapData = (() => {
 
       const keyProperties = {
         key: element.dataset.key,
-        id: element.dataset.id
+        id: element.dataset.id,
       };
       if (
         keyProperties.key === key &&
@@ -50,7 +50,7 @@ const mapData = (() => {
 
       const keyProperties = {
         key: element.dataset.key,
-        id: element.dataset.id
+        id: element.dataset.id,
       };
       if (
         keyProperties.key === key &&
@@ -59,7 +59,7 @@ const mapData = (() => {
         delete storeData[keyProperties.id];
         delete element.dataset.key;
       }
-    }
+    },
   };
 })();
 

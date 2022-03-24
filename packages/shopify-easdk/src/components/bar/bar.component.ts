@@ -7,7 +7,7 @@ import {
   ButtonsConfig,
   PaginationConfig,
   ButtonConfig,
-  BarWrapperService
+  BarWrapperService,
 } from "../../index.js";
 
 import pugTemplate from "./bar.component.pug";
@@ -59,14 +59,14 @@ export class BarComponent extends Component {
       "pagination",
       "breadcrumb",
       "loading",
-      "show-fallback-bar"
+      "show-fallback-bar",
     ];
   }
 
   protected bar: BarWrapper = new BarWrapperService();
 
   public scope: Scope = {
-    showFallbackBar: false
+    showFallbackBar: false,
   };
 
   constructor() {

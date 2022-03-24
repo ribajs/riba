@@ -14,5 +14,5 @@ export const LuxonIntervalHasSameFormatter: Formatter = {
    */
   read(target: Interval, unit: keyof DurationObjectUnits): boolean {
     return target.hasSame(unit);
-  }
+  },
 };

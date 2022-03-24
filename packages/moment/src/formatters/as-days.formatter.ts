@@ -14,5 +14,5 @@ export const AsDaysFormatter: Formatter = {
    */
   read(duration: Duration) {
     return duration.asDays();
-  }
+  },
 };

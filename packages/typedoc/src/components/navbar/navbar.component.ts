@@ -12,7 +12,7 @@ export class NavbarComponent extends Component {
   }
 
   public scope: NavbarComponentScope = {
-    searchHasFocus: false
+    searchHasFocus: false,
   };
 
   constructor() {

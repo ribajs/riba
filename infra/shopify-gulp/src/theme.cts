@@ -3,7 +3,7 @@ import {
   getStoresThemesByRole,
   print,
   getOldestEnvTheme,
-  getYoungestEnvTheme
+  getYoungestEnvTheme,
 } from "./includes/theme.cjs";
 
 gulp.task("themes:list:live", async () => {

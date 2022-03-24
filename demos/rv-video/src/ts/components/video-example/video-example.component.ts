@@ -21,10 +21,10 @@ export class VideoExampleComponent extends Component {
     videos: [
       "/videos/desktop.mp4",
       "/videos/mobile.mp4",
-      "https://jumplink.eu/storage/app/media/spring_blender_open_movie_1080p.mp4"
+      "https://jumplink.eu/storage/app/media/spring_blender_open_movie_1080p.mp4",
     ],
     selectedVideo: "",
-    selectVideo: this.selectVideo
+    selectVideo: this.selectVideo,
   };
 
   constructor() {

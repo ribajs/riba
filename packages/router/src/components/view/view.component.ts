@@ -6,12 +6,10 @@ import { Pjax, Prefetch, RouterService } from "../../services/index.js";
 import type {
   RouterViewOptions,
   PjaxOptions,
-  JsxRouterViewProps
+  JsxRouterViewProps,
 } from "../../types/index.js";
 
-interface RouterViewScope extends RouterViewOptions, ScopeBase {
-
-}
+interface RouterViewScope extends RouterViewOptions, ScopeBase {}
 
 export class RouterViewComponent extends Component {
   public static tagName = "router-view";
@@ -34,7 +32,7 @@ export class RouterViewComponent extends Component {
       "dataset-to-root-scope",
       "parse-title",
       "change-browser-url",
-      "prefetch-links"
+      "prefetch-links",
     ];
   }
 
@@ -50,7 +48,7 @@ export class RouterViewComponent extends Component {
     parseTitle: true,
     changeBrowserUrl: true,
     prefetchLinks: true,
-    transition: RouterService.options.defaultTransition
+    transition: RouterService.options.defaultTransition,
   };
 
   constructor() {
@@ -99,7 +97,7 @@ export class RouterViewComponent extends Component {
       parseTitle: !!this.scope.parseTitle,
       changeBrowserUrl: !!this.scope.changeBrowserUrl,
       prefetchLinks: !!this.scope.prefetchLinks,
-      scrollToTop: !!this.scope.scrollToTop
+      scrollToTop: !!this.scope.scrollToTop,
     };
     this.pjax = new Pjax(pjaxOptions);
     this.pjax.setActiveWrapper(this);
@@ -117,13 +115,11 @@ export class RouterViewComponent extends Component {
     dataset: any,
     isInit: boolean
   ) {
-
     // Only continue if the viewID is equal (in this way it is possible to have multiple views)
     if (viewId !== this.scope.id) {
       console.warn("not the right view", this.scope.id, viewId, dataset);
       return;
     }
-
 
     this.debug("New page ready!", this.innerHTML);
 

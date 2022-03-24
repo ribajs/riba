@@ -4,7 +4,7 @@ import { I18nService } from "../services/i18n.service.js";
 import {
   LocalesService,
   LocalVar,
-  LocalPluralization
+  LocalPluralization,
 } from "../types/index.js";
 
 /**

@@ -12,7 +12,7 @@ export class EachItemExampleComponent extends Component {
     shift: this.shift,
     sort: this.sort,
     splice: this.splice,
-    unshift: this.unshift
+    unshift: this.unshift,
   };
 
   constructor() {
@@ -58,7 +58,7 @@ export class EachItemExampleComponent extends Component {
     return [
       { name: "x", value: 2 },
       { name: "y", value: 1 },
-      { name: "z", value: 3 }
+      { name: "z", value: 3 },
     ];
   }
 

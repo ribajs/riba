@@ -13,5 +13,5 @@ export const emptyTemplateModule: RibaModule<EmptyTemplateModuleOptions> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   init(options = {}) {
     return this;
-  }
+  },
 };

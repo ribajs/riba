@@ -53,25 +53,25 @@ export class ShopifyCommentsFormComponent extends Component {
     form: {
       customer: {
         email: "",
-        password: ""
-      }
+        password: "",
+      },
     },
     loginCustomer: {
       validation: {
-        valid: false
-      }
+        valid: false,
+      },
     },
     createCustomer: {
       validation: {
-        valid: false
-      }
+        valid: false,
+      },
     },
     recoverCustomer: {
       validation: {
-        valid: false
-      }
+        valid: false,
+      },
     },
-    post: this.post
+    post: this.post,
   };
 
   constructor() {

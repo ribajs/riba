@@ -52,7 +52,7 @@ export class Bs4ToggleButtonComponent extends Component {
     toggle: this.toggle,
     state: "undefined",
     isActive: true,
-    isClosed: false
+    isClosed: false,
   };
 
   constructor() {

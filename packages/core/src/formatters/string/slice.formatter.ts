@@ -10,5 +10,5 @@ export const sliceFormatter: Formatter = {
   name: "slice",
   read(value: any, start: number, end: number) {
     return value.slice(start, end);
-  }
+  },
 };

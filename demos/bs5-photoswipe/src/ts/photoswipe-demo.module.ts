@@ -10,7 +10,7 @@ export const PhotoswipeDemoModule: RibaModule = {
   services: {},
   init() {
     return this;
-  }
+  },
 };
 
 export default PhotoswipeDemoModule;

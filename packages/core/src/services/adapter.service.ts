@@ -2,7 +2,7 @@ import {
   Adapter,
   Adapters,
   ModuleElementType,
-  AnyConstructor
+  AnyConstructor,
 } from "../types/index.js";
 import { ModuleElementService } from "./module-element.service.js";
 import { Observer } from "../observer.js";

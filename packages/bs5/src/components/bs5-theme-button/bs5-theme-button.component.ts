@@ -8,7 +8,7 @@ import type {
   Bs5ThemeButtonComponentScope,
   ThemeChoice,
   ThemeChangedData,
-  JsxBs5ThemeButtonProps
+  JsxBs5ThemeButtonProps,
 } from "../../types/index.js";
 
 /**
@@ -29,7 +29,7 @@ export class Bs5ThemeButtonComponent extends Component {
     labels: {
       "theme-os": "OS",
       "theme-light": "Light",
-      "theme-dark": "Dark"
+      "theme-dark": "Dark",
     },
     lightIconSrc: "/iconset/svg/icon_sun.svg",
     darkIconSrc: "/iconset/svg/icon_moon.svg",
@@ -39,7 +39,7 @@ export class Bs5ThemeButtonComponent extends Component {
     selectTheme: this.selectTheme.bind(this),
     toggleTheme: this.toggleTheme.bind(this),
     selected: undefined,
-    choices: themeChoices
+    choices: themeChoices,
   };
 
   constructor() {

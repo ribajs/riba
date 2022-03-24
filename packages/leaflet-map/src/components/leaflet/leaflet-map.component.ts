@@ -41,7 +41,7 @@ export class LeafletMapComponent extends Component {
       "initial-zoom",
       "tile-url",
       "attribution",
-      "assets-dir"
+      "assets-dir",
     ];
   }
 
@@ -53,7 +53,7 @@ export class LeafletMapComponent extends Component {
     assetsDir: "/images/vendors/leaflet/dist/images/",
     tileUrl: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   };
 
   constructor() {
@@ -92,14 +92,14 @@ export class LeafletMapComponent extends Component {
     );
 
     Leaflet.tileLayer(this.scope.tileUrl, {
-      attribution: this.scope.attribution
+      attribution: this.scope.attribution,
     }).addTo(this.map);
 
     for (const marker of this.markers) {
       let leafletMarker;
       if (marker.icon !== undefined && marker.icon !== null) {
         leafletMarker = Leaflet.marker([marker.lat, marker.lng], {
-          icon: this.icons[marker.icon]
+          icon: this.icons[marker.icon],
         });
       } else {
         leafletMarker = Leaflet.marker([marker.lat, marker.lng]);
@@ -162,7 +162,7 @@ export class LeafletMapComponent extends Component {
         if (iconName && iconUrl && shadowUrl) {
           const iconOptions: IconOptions = {
             iconUrl,
-            shadowUrl
+            shadowUrl,
           };
 
           if (iconSizeAttr) {
@@ -206,7 +206,7 @@ export class LeafletMapComponent extends Component {
             icon: icon,
             openByDefault: el.hasAttribute("open-by-default")
               ? el.getAttribute("open-by-default") === "true"
-              : true
+              : true,
           });
         } else {
           console.warn("marker without enough data found");

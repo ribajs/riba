@@ -75,36 +75,36 @@ export const couldBeJson = (str?: string | null) => {
  */
 export const isBase64 = (str?: string | null) => {
   if (!str) return false;
-  if (typeof str !== 'string') return false;
-  return str.startsWith(BASE64_PREFIX)
-}
+  if (typeof str !== "string") return false;
+  return str.startsWith(BASE64_PREFIX);
+};
 
 /**
  * Decode an string or object to base64
  * @see https://developer.mozilla.org/en-US/docs/Glossary/Base64#solution_2_%E2%80%93_rewriting_atob_and_btoa_using_typedarrays_and_utf-8
- * @param obj 
- * @returns 
+ * @param obj
+ * @returns
  */
 export const toBase64 = (obj: any) => {
   if (isObject(obj)) {
     obj = JSON.stringify(obj, null, 0);
   }
   return BASE64_PREFIX + btoa(encodeURIComponent(obj));
-}
+};
 
 /**
  * Encode an base64 string back
  * @see https://developer.mozilla.org/en-US/docs/Glossary/Base64#solution_2_%E2%80%93_rewriting_atob_and_btoa_using_typedarrays_and_utf-8
- * @param obj 
- * @returns 
+ * @param obj
+ * @returns
  */
 export const fromBase64 = (base64?: string | null) => {
-  if (typeof base64 !== 'string') {
+  if (typeof base64 !== "string") {
     return "Not a base64 string!";
   }
 
   if (base64.startsWith(BASE64_PREFIX)) {
-    base64 = base64.substring(BASE64_PREFIX.length)
+    base64 = base64.substring(BASE64_PREFIX.length);
   }
 
   const maybeDecodedUri = atob(base64);
@@ -116,7 +116,7 @@ export const fromBase64 = (base64?: string | null) => {
   }
 
   return parseType(encoded, false).value;
-}
+};
 
 /**
  * Test if string is a json string
@@ -158,7 +158,7 @@ export const parseType = (input?: string | null, isAttribute = false) => {
   } else if (input === "undefined") {
     value = undefined;
   } else if (input === "") {
-    // An empty attribute should be handled has a true value 
+    // An empty attribute should be handled has a true value
     if (isAttribute) {
       value = true;
     } else {
@@ -296,7 +296,7 @@ export const escapeHtml = (html: string) => {
         "<": "&lt;",
         ">": "&gt;",
         '"': "&quot;",
-        "'": "&#39;"
+        "'": "&#39;",
       }[c as never])
   );
 };
@@ -458,7 +458,7 @@ export const extend = (
  * @param deep If true, the merge becomes recursive (aka. deep copy).
  * @param val The value(s) to clone
  */
-export const clone = <T = any,>(deep: boolean, val: T): T => {
+export const clone = <T = any>(deep: boolean, val: T): T => {
   if (Array.isArray(val)) {
     if (deep) {
       return (val as any).map((x: any) => clone<any>(true, x));

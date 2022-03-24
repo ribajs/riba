@@ -13,5 +13,5 @@ export const LuxonDurationNegateFormatter: Formatter = {
    */
   read(target: Duration): Duration {
     return target.negate();
-  }
+  },
 };

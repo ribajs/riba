@@ -14,5 +14,5 @@ export const LuxonDurationToObjectFormatter: Formatter = {
    */
   read(target: Duration, includeConfig?: boolean): DurationObject {
     return target.toObject(includeConfig ? { includeConfig } : undefined);
-  }
+  },
 };

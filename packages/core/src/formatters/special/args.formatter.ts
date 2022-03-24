@@ -21,5 +21,5 @@ export const argsFormatter: Formatter = {
       fnArgs.push(binder);
       return fn.apply(this, fnArgs);
     };
-  }
+  },
 };

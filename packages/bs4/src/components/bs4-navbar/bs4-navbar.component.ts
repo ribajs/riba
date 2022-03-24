@@ -4,7 +4,7 @@ import {
   CollapseService,
   EVENT_SHOWN,
   EVENT_HIDDEN,
-  CLASS_NAME_COLLAPSED
+  CLASS_NAME_COLLAPSED,
 } from "../../services/collapse.service.js";
 
 export class Bs4NavbarComponent extends Component {
@@ -15,7 +15,7 @@ export class Bs4NavbarComponent extends Component {
     show: this.show,
     hide: this.hide,
     isCollapsed: true,
-    collapseSelector: ".navbar-collapse"
+    collapseSelector: ".navbar-collapse",
   };
 
   protected collapseTargets: Map<HTMLElement, CollapseService> = new Map();

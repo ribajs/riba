@@ -1,4 +1,4 @@
-export interface HttpServiceResponse<T,> {
+export interface HttpServiceResponse<T> {
   status: Response["status"];
   headers: Response["headers"];
   ok: Response["ok"];

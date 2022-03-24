@@ -13,5 +13,5 @@ export const LuxonOrdinalFormatter: Formatter = {
    */
   read(target: DateTime): number {
     return target.ordinal;
-  }
+  },
 };

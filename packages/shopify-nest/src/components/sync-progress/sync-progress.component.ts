@@ -3,7 +3,10 @@ import Debug from "debug";
 import pugTemplate from "./sync-progress.component.pug";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { ShopifyApiSyncService } from "../../services/shopify-api-sync.service.js";
-import { SyncProgress, SyncOptions } from "../../interfaces/shopify-sync/index.js";
+import {
+  SyncProgress,
+  SyncOptions,
+} from "../../interfaces/shopify-sync/index.js";
 
 interface Scope extends ScopeBase {
   start: ShopifyNestSyncProgressComponent["start"];
@@ -35,14 +38,14 @@ export class ShopifyNestSyncProgressComponent extends Component {
     includeProducts: true,
     includePages: true,
     includeSmartCollections: true,
-    includeCustomCollections: true
+    includeCustomCollections: true,
   };
 
   public scope: Scope = {
     start: this.start,
     cancel: this.cancel,
     restart: this.restart,
-    progress: null
+    progress: null,
   };
 
   constructor() {
@@ -67,7 +70,7 @@ export class ShopifyNestSyncProgressComponent extends Component {
       includeSmartCollections: this.options.includeSmartCollections === true,
       includeCustomCollections: this.options.includeCustomCollections === true,
       resync: true,
-      cancelExisting: false
+      cancelExisting: false,
     };
 
     if (this.scope.progress) {
@@ -80,7 +83,7 @@ export class ShopifyNestSyncProgressComponent extends Component {
         options,
         createdAt: new Date(),
         updatedAt: new Date(),
-        lastError: null
+        lastError: null,
       };
     }
 
@@ -116,7 +119,7 @@ export class ShopifyNestSyncProgressComponent extends Component {
       includeSmartCollections: this.options.includeSmartCollections === true,
       includeCustomCollections: this.options.includeCustomCollections === true,
       resync: true,
-      cancelExisting: true
+      cancelExisting: true,
     };
     this.debug("restart", options);
 

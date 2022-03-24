@@ -6,5 +6,5 @@ export const sizeFormatter = {
   name: "size",
   read(value: any[] | string) {
     return value && value.length ? value.length : 0;
-  }
+  },
 };

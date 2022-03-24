@@ -36,7 +36,7 @@ function separatePath(path: string) {
 
   return {
     file: tmp.pop(),
-    dir: tmp.join("/")
+    dir: tmp.join("/"),
   };
 }
 
@@ -151,7 +151,7 @@ const messages = {
       "Multiple environments:",
       gutil.colors.green("Deploy completed for all environments in series")
     );
-  }
+  },
 };
 
 module.exports = messages;

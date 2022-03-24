@@ -10,7 +10,7 @@ export const extrasScrollEventsModule: RibaModule = {
   services: {},
   init() {
     return this;
-  }
+  },
 };
 
 export default extrasScrollEventsModule;

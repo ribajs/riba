@@ -13,5 +13,5 @@ export const LuxonDurationQuartersFormatter: Formatter = {
    */
   read(target: Duration): number {
     return target.quarters;
-  }
+  },
 };

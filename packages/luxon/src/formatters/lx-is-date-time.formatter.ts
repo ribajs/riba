@@ -13,5 +13,5 @@ export const LuxonIsDateTimeFormatter: Formatter = {
    */
   read(o: any): boolean {
     return DateTime.isDateTime(o);
-  }
+  },
 };

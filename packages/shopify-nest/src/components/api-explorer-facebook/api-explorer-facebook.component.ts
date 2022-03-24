@@ -3,7 +3,7 @@ import {
   ShopifyNestApiExplorerComponent,
   APIParam,
   APIListItem,
-  Scope as IBaseScope
+  Scope as IBaseScope,
 } from "../api-explorer/api-explorer.component.js";
 
 import { FacebookApiService } from "../../services/facebook-api.service.js";
@@ -35,49 +35,49 @@ export class ShopifyNestApiExplorerFacebookComponent extends ShopifyNestApiExplo
       label: "Freestyle",
       url: "/facebook/api",
       short_desc: "components.apiExplorer.freestyle.short_desc",
-      freestyle: true
+      freestyle: true,
     },
     {
       // Retrieves your facebook user name and id.
       label: "facebook/api/user",
       url: "facebook/api/user",
       short_desc: "components.apiExplorer.facebook.user.short_desc",
-      roles: ["shopify-staff-member"]
+      roles: ["shopify-staff-member"],
     },
     {
       // Retrieves your facebook user picture image.
       label: "facebook/api/user/picture",
       url: "facebook/api/user/picture?type=small",
       short_desc: "components.apiExplorer.facebook.user.picture.short_desc",
-      roles: ["shopify-staff-member"]
+      roles: ["shopify-staff-member"],
     },
     {
       // Retrieves your facebook user pages your user has access to
       label: "facebook/api/user/pages",
       url: "facebook/api/user/pages",
       short_desc: "components.apiExplorer.facebook.user.pages.short_desc",
-      roles: ["shopify-staff-member"]
+      roles: ["shopify-staff-member"],
     },
     {
       // Retrieves a list of facebook posts by your user account.
       label: "facebook/api/posts/user",
       url: "facebook/api/posts/user?limit=0",
       short_desc: "components.apiExplorer.facebook.posts.user.short_desc",
-      roles: ["shopify-staff-member"]
+      roles: ["shopify-staff-member"],
     },
     {
       // Retrieves a list of facebook posts by a page.
       label: "facebook/api/posts/:page_id",
       url: "facebook/api/posts/:page_id?limit=0",
       short_desc: "components.apiExplorer.facebook.posts.pageId.short_desc",
-      roles: []
+      roles: [],
     },
     {
       // Retrieves a single facebook post by post id.
       label: "facebook/api/post/:post_id",
       url: "facebook/api/post/:post_id",
       short_desc: "components.apiExplorer.facebook.post.postId.short_desc",
-      roles: []
+      roles: [],
     },
     {
       // Retrieves a list of comments of a post by post id. Mainly used for comments pagination
@@ -85,8 +85,8 @@ export class ShopifyNestApiExplorerFacebookComponent extends ShopifyNestApiExplo
       url: "facebook/api/post/:post_id/comments?limit=0",
       short_desc:
         "components.apiExplorer.facebook.post.postId.comments.short_desc",
-      roles: []
-    }
+      roles: [],
+    },
   ];
 
   public scope: Scope = {
@@ -102,7 +102,7 @@ export class ShopifyNestApiExplorerFacebookComponent extends ShopifyNestApiExplo
     selectApi: this.selectApi,
     selectFreestyleApi: this.selectFreestyleApi,
     selectApiParamValue: this.selectApiParamValue,
-    selectApiQueryValue: this.selectApiQueryValue
+    selectApiQueryValue: this.selectApiQueryValue,
   };
 
   static get observedAttributes(): string[] {

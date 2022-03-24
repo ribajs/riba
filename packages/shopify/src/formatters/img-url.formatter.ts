@@ -40,5 +40,5 @@ export const imgUrlFormatter: Formatter = {
       console.error(error);
       return url;
     }
-  }
+  },
 };

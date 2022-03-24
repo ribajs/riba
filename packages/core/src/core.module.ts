@@ -1,4 +1,4 @@
-import { RibaModule , CoreModuleOptions } from "./types/index.js";
+import { RibaModule, CoreModuleOptions } from "./types/index.js";
 import * as binders from "./binders/index.js";
 import * as formatters from "./formatters/index.js";
 import * as services from "./services/index.js";
@@ -22,5 +22,5 @@ export const coreModule: RibaModule<CoreModuleOptions> = {
     });
 
     return this;
-  }
+  },
 };

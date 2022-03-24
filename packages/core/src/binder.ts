@@ -4,7 +4,7 @@ import type {
   FormatterObservers,
   eventHandlerFunction,
   ObserverSyncCallback,
-  Bindable
+  Bindable,
 } from "./types/index.js";
 import { FORMATTER_ARGS, FORMATTER_SPLIT } from "./constants/formatter.js";
 import type { View } from "./view.js";
@@ -13,7 +13,7 @@ import { getInputValue } from "@ribajs/utils/src/dom.js";
 /**
  * A single binding between a model attribute and a DOM element.
  */
-export abstract class Binder<T = any, E = HTMLUnknownElement,>
+export abstract class Binder<T = any, E = HTMLUnknownElement>
   implements Bindable<E>
 {
   /**
@@ -173,28 +173,30 @@ export abstract class Binder<T = any, E = HTMLUnknownElement,>
     args: string[],
     formatterIndex: number
   ): string[] {
-    return args.map((arg) => parseType(arg, true)).map(({ type, value }, ai) => {
-      if (type === PRIMITIVE) {
-        const primitiveValue = value;
-        return primitiveValue;
-      } else if (type === KEYPATH) {
-        // keypath is string
-        const keypath = value as string;
-        if (!this.formatterObservers[formatterIndex]) {
-          this.formatterObservers[formatterIndex] = {};
-        }
+    return args
+      .map((arg) => parseType(arg, true))
+      .map(({ type, value }, ai) => {
+        if (type === PRIMITIVE) {
+          const primitiveValue = value;
+          return primitiveValue;
+        } else if (type === KEYPATH) {
+          // keypath is string
+          const keypath = value as string;
+          if (!this.formatterObservers[formatterIndex]) {
+            this.formatterObservers[formatterIndex] = {};
+          }
 
-        let observer = this.formatterObservers[formatterIndex][ai];
+          let observer = this.formatterObservers[formatterIndex][ai];
 
-        if (!observer) {
-          observer = this.observe(this.view.models, keypath, this);
-          this.formatterObservers[formatterIndex][ai] = observer;
+          if (!observer) {
+            observer = this.observe(this.view.models, keypath, this);
+            this.formatterObservers[formatterIndex][ai] = observer;
+          }
+          return observer.value();
+        } else {
+          throw new Error(`[${this.name}] Unknown argument type`);
         }
-        return observer.value();
-      } else {
-        throw new Error(`[${this.name}] Unknown argument type`);
-      }
-    });
+      });
   }
 
   /**

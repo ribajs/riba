@@ -2,7 +2,7 @@ import { Component } from "../../component/component.js";
 import {
   TemplateFunction,
   VideoComponentScope,
-  MediaReadyState
+  MediaReadyState,
 } from "../../types/index.js";
 import { justDigits } from "@ribajs/utils/src/index.js";
 
@@ -192,7 +192,7 @@ export class VideoComponent extends Component {
     pause: this.pause,
     togglePlay: this.togglePlay,
     togglePause: this.togglePause,
-    reset: this.reset
+    reset: this.reset,
   };
 
   constructor() {

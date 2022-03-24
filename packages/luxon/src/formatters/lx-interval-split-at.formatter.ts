@@ -14,5 +14,5 @@ export const LuxonIntervalSplitAtFormatter: Formatter = {
    */
   read(target: Interval, ...dateTimes: DateTime[]): Interval[] {
     return target.splitAt(...dateTimes);
-  }
+  },
 };

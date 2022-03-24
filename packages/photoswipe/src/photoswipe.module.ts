@@ -14,5 +14,5 @@ export const photoswipeModule: RibaModule<PhotoswipeModuleOptions> = {
   init(options = {}) {
     services.PhotoswipeService.setSingleton(options);
     return this;
-  }
+  },
 };

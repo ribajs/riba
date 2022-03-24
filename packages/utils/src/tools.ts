@@ -63,7 +63,7 @@ export const getOS = () => {
     osxCatalina: /macintosh.+10(_|\.)15/i,
     osxBigSur: /macintosh.+((10(_|\.)16)|(11(_|\.)))/i,
     osx: /macintosh/i,
-    mac: /mac/i
+    mac: /mac/i,
   };
 
   const platforms = {
@@ -84,7 +84,7 @@ export const getOS = () => {
 
     palmos: /palmos/i,
 
-    symbian: /(nokia_series_40|s60|symbian)/i
+    symbian: /(nokia_series_40|s60|symbian)/i,
   };
 
   for (const uAKey of Object.keys(uAs) as Array<keyof typeof uAs>) {
@@ -148,7 +148,7 @@ export const getOSType = () => {
   return {
     isMobile,
     isDesktop,
-    isGameConsole
+    isGameConsole,
   };
 };
 

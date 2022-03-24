@@ -6,7 +6,7 @@ import {
   alexanderHeimbuch,
   michaelaLehr,
   ericTeubert,
-  simon
+  simon,
 } from "../contributors/index.js";
 import { show } from "../show";
 
@@ -53,8 +53,8 @@ export const episode03: PodloveWebPlayerEpisode = {
       url: "https://files.podlovers.org/LOV003.mp3",
       size: "76976929",
       title: "MP3 Audio (mp3)",
-      mimeType: "audio/mpeg"
-    }
+      mimeType: "audio/mpeg",
+    },
   ],
 
   /**
@@ -73,14 +73,14 @@ export const episode03: PodloveWebPlayerEpisode = {
       url: "https://files.podlovers.org/LOV003.mp3",
       size: "76976929",
       title: "MP3 Audio",
-      mimeType: "audio/mpeg"
+      mimeType: "audio/mpeg",
     },
     {
       url: "https://files.podlovers.org/LOV003.vtt",
       size: "108401",
       title: "Transkripte",
-      mimeType: "text/plain"
-    }
+      mimeType: "text/plain",
+    },
   ],
 
   /**
@@ -107,5 +107,5 @@ export const episode03: PodloveWebPlayerEpisode = {
    * - can be a plain list or a reference to a json file
    * - if present transcripts tab will be available
    */
-  transcripts
+  transcripts,
 };

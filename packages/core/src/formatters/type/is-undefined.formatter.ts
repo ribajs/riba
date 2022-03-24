@@ -6,5 +6,5 @@ import { isUndefined } from "@ribajs/utils/src/type.js";
  */
 export const isUndefinedFormatter: Formatter = {
   name: "is-undefined",
-  read: isUndefined
+  read: isUndefined,
 };

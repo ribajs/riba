@@ -10,7 +10,7 @@ export const Bs5ResponsiveComponentsExampleModule: RibaModule = {
   services: {},
   init() {
     return this;
-  }
+  },
 };
 
 export default Bs5ResponsiveComponentsExampleModule;

@@ -6,7 +6,11 @@
  * --------------------------------------------------------------------------
  */
 
-import { URI_ATTRS, DATA_URL_PATTERN, SAFE_URL_PATTERN } from "../constants/index.js";
+import {
+  URI_ATTRS,
+  DATA_URL_PATTERN,
+  SAFE_URL_PATTERN,
+} from "../constants/index.js";
 
 // TODO check type
 export type AttributeList = (string | RegExp)[];

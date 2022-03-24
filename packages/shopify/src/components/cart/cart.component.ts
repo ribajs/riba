@@ -4,7 +4,7 @@ import {
   ShopifyCartObject,
   ShopifyCustomerAddress,
   ShopifyShippingRates,
-  ShopifyShippingRatesNormalized
+  ShopifyShippingRatesNormalized,
 } from "../../interfaces/index.js";
 import { ShopifyCartService } from "../../services/index.js";
 import { getInputValue, hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
@@ -47,7 +47,7 @@ export class ShopifyCartComponent extends Component {
       decreaseItem: this.decreaseItem,
       getItem: this.getItem,
       onItemQuantityChanged: this.onItemQuantityChanged,
-      pending: false
+      pending: false,
     };
   }
 
@@ -59,7 +59,7 @@ export class ShopifyCartComponent extends Component {
       ShopifyCartService.getShippingRates(this.scope.shippingAddress, true, {
         triggerOnChange: false,
         triggerOnComplete: false,
-        triggerOnStart: false
+        triggerOnStart: false,
       }).then(
         (
           shippingRates: ShopifyShippingRates | ShopifyShippingRatesNormalized

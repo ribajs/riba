@@ -10,7 +10,7 @@ export const FuseSearchModule: RibaModule = {
   services: {},
   init() {
     return this;
-  }
+  },
 };
 
 export default FuseSearchModule;

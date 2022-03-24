@@ -7,5 +7,5 @@ export const toBase64Formatter = {
   name: "toBase64",
   read(object: any) {
     return toBase64(object);
-  }
+  },
 };

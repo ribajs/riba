@@ -14,5 +14,5 @@ export const LuxonDurationMinusFormatter: Formatter = {
    */
   read(target: Duration, duration: DurationInput): Duration {
     return target.minus(duration);
-  }
+  },
 };

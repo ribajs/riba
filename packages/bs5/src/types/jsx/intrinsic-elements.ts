@@ -10,7 +10,7 @@ import type {
   JsxBs5SidebarProps,
   JsxBs5ThemeButtonProps,
   JsxBs5ToggleButtonProps,
-  JsxBs5SlideshowProps
+  JsxBs5SlideshowProps,
 } from "./index.js";
 
 export interface Bs5IntrinsicElements {

@@ -13,5 +13,5 @@ export const LuxonDurationToISOFormatter: Formatter = {
    */
   read(target: Duration): string {
     return target.toISO();
-  }
+  },
 };

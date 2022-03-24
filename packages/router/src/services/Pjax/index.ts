@@ -11,7 +11,7 @@ import {
   isBoolean,
   getElementFromEvent,
   getDataset,
-  scrollTo
+  scrollTo,
 } from "@ribajs/utils/src/index.js";
 
 import { BaseCache } from "@ribajs/cache";
@@ -220,7 +220,7 @@ class Pjax {
     changeBrowserUrl = true,
     prefetchLinks = true,
     scrollToTop = true,
-    scrollToAnchorOffset = RouterService.options.scrollToAnchorOffset
+    scrollToAnchorOffset = RouterService.options.scrollToAnchorOffset,
   }: PjaxOptions) {
     if (id) {
       this.viewId = id;
@@ -451,7 +451,7 @@ class Pjax {
         if (responsePromise) {
           return {
             fromCache: true,
-            responsePromise
+            responsePromise,
           };
         }
       }
@@ -471,7 +471,7 @@ class Pjax {
 
     return {
       fromCache: false,
-      responsePromise
+      responsePromise,
     };
   }
 

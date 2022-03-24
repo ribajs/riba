@@ -17,7 +17,7 @@ export class RouteBinder extends Binder<string, HTMLAnchorElement> {
     viewId: "main",
     removeAfterActivation: false,
     newTab: false,
-    newTabOnExtern: true
+    newTabOnExtern: true,
   };
 
   private _onClick(event: Event) {

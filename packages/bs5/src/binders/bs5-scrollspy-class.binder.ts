@@ -54,7 +54,7 @@ export class ScrollspyClassBinder extends Binder<string, HTMLInputElement> {
 
   bind() {
     window.addEventListener("scroll", this.onScroll, {
-      passive: true
+      passive: true,
     });
     this.onScroll();
   }

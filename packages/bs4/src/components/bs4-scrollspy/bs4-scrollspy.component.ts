@@ -1,6 +1,6 @@
 import {
   Bs4ContentsComponent,
-  Scope as Bs4ContentsComponentScope
+  Scope as Bs4ContentsComponentScope,
 } from "../bs4-contents/bs4-contents.component.js";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { TemplateFunction } from "@ribajs/core";
@@ -37,7 +37,7 @@ export class Bs4ScrollspyComponent extends Bs4ContentsComponent {
       "header-parent-selector",
       "offset",
       "offset-bottom",
-      "scroll-offset"
+      "scroll-offset",
     ];
   }
 
@@ -49,7 +49,7 @@ export class Bs4ScrollspyComponent extends Bs4ContentsComponent {
     offset: 0,
     offsetBottom: 0,
     scrollOffset: 0,
-    anchors: []
+    anchors: [],
   };
 
   constructor() {

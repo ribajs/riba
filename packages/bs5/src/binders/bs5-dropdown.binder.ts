@@ -38,5 +38,6 @@ export class DropdownBinder extends Binder<
     // To detect this element as an dropdown by the bootstrap logic
     this.toggler.dataset.bsToggle = "dropdown";
     this.dropdownService = dropdownService;
+    this.dropdownService.hide();
   }
 }

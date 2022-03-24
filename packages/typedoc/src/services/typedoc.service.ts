@@ -27,7 +27,7 @@ export class TypedocService {
       throw new Error(`Singleton of TypedocService already defined!`);
     }
 
-    if(!options.serverBaseUrl) {
+    if (!options.serverBaseUrl) {
       options.serverBaseUrl = window.remoteSearchOptions?.serverBaseUrl;
     }
 

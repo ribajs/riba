@@ -14,7 +14,7 @@ export const sleep = (time: number) => {
   return new Promise((resolve) => setTimeout(resolve, time));
 };
 
-export const waitForProp = async <T = any,>(
+export const waitForProp = async <T = any>(
   propName: string,
   obj: any = window,
   delay = 1000
@@ -31,7 +31,7 @@ export const waitForProp = async <T = any,>(
  *
  * @return
  */
-export const deferred = <T = any,>() => {
+export const deferred = <T = any>() => {
   const obj: Partial<Deferred<T>> = {};
   const prom = new Promise<T>((resolve, reject) => {
     obj.resolve = resolve;
@@ -51,7 +51,7 @@ export const deferred = <T = any,>() => {
  * @see https://css-tricks.com/styling-based-on-scroll-position/
  * @see https://www.telerik.com/blogs/debouncing-and-throttling-in-javascript
  */
-export const debounceCb = <T = any,>(fn: (...args: any[]) => T, wait = 100) => {
+export const debounceCb = <T = any>(fn: (...args: any[]) => T, wait = 100) => {
   let timeout: ReturnType<typeof setTimeout>;
   return (...params: any[]) => {
     clearTimeout(timeout);
@@ -67,7 +67,7 @@ export const debounceCb = <T = any,>(fn: (...args: any[]) => T, wait = 100) => {
  * the attached function will be executed only after the specified time once the user stops firing the event.
  * This method uses internally the setTimeout method
  */
-export const debounceT = <T = any,>(fn: (...args: any[]) => any, wait = 100) => {
+export const debounceT = <T = any>(fn: (...args: any[]) => any, wait = 100) => {
   let resolve: (val: any) => any;
   let reject: (error: any) => void;
   const promise = new Promise<T>((res, rej) => {
@@ -196,7 +196,7 @@ export const throttle = (fn: (...params: any[]) => any, wait = 100) => {
 /**
  * Cancel promise on timeout.
  */
-export const pTimeout = <T,>(value: Promise<T>, ms: number, error?: Error) => {
+export const pTimeout = <T>(value: Promise<T>, ms: number, error?: Error) => {
   const def = deferred<T>();
 
   const p: TimeoutPromise<T> = {
@@ -209,7 +209,7 @@ export const pTimeout = <T,>(value: Promise<T>, ms: number, error?: Error) => {
       if (p._timeout) {
         clearTimeout(p._timeout);
       }
-    }
+    },
   };
 
   value

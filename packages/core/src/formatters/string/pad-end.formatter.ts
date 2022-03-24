@@ -19,5 +19,5 @@ export const padEndFormatter: Formatter = {
    */
   read(target: string, length = 2, padString = "0") {
     return target.padEnd(length, padString);
-  }
+  },
 };

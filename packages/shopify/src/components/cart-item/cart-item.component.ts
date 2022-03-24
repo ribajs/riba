@@ -1,6 +1,9 @@
 import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
-import { ShopifyCartLineItem, ShopifyCartObject } from "../../interfaces/index.js";
+import {
+  ShopifyCartLineItem,
+  ShopifyCartObject,
+} from "../../interfaces/index.js";
 import { ShopifyCartService } from "../../services/index.js";
 import template from "./cart-item.component.html";
 
@@ -64,7 +67,7 @@ export class ShopifyCartItemComponent extends Component {
       "variant-title",
       "variant-options",
       "variant-id",
-      "key"
+      "key",
     ];
   }
 
@@ -85,7 +88,7 @@ export class ShopifyCartItemComponent extends Component {
       increase: this.increase,
       decrease: this.decrease,
       onInputQuantityChanged: this.onInputQuantityChanged,
-      pending: false
+      pending: false,
     };
   }
 

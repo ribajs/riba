@@ -1,0 +1,121 @@
+$keyboard-button-color: rgba(0, 0, 0, 0.7) !default;
+$keyboard-button-bg: white !default;
+$keyboard-selected-button-color: white !default;
+$keyboard-selected-button-bg: rgba(5, 25, 70, 0.53) !default;
+$keyboard-bg: #ececec !default;
+$keyboard-font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !default;
+
+a11y-keyboard-keys {
+  display: block;
+  .simple-keyboard {
+    max-width: 850px;
+    /**
+    * simple-keyboard
+    * Theme: hg-theme-default
+    * Copyright: https://github.com/hodgef/simple-keyboard
+    */
+    &.hg-theme-default {
+      width: 100%;
+      user-select: none;
+      box-sizing: border-box;
+      overflow: hidden;
+      touch-action: manipulation;
+      font-family: $keyboard-font-family;
+      background-color: $keyboard-bg;
+      padding: 5px;
+      border-radius: 5px;
+      .hg-button {
+        span {
+          pointer-events: none;
+        }
+
+        color: $keyboard-button-color;
+        font-weight: 300;
+        font-size: 20px;
+        font-size: 17px;
+
+        display: inline-block;
+        flex-grow: 1;
+        cursor: pointer;
+        box-shadow: 0px 0px 3px -1px rgba(0, 0, 0, 0.3);
+        height: 40px;
+        border-radius: 5px;
+        box-sizing: border-box;
+        padding: 5px;
+        background: $keyboard-button-bg;
+        border-bottom: 1px solid #b5b5b5;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      button.hg-button {
+        border-width: 0;
+        outline: 0;
+        font-size: inherit;
+      }
+      .hg-row {
+        display: flex;
+        &:not(:last-child) {
+          margin-bottom: 5px;
+        }
+        .hg-button {
+          &:not(:last-child) {
+            margin-right: 5px;
+          }
+        }
+        .hg-button-container {
+          margin-right: 5px;
+          display: flex;
+        }
+        >div {
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+      .hg-button.hg-standardBtn {
+        width: 20px;
+      }
+      .hg-button.hg-activeButton {
+        background: #efefef;
+      }
+      .hg-button.hg-button-numpadadd {
+        height: 85px;
+      }
+      .hg-button.hg-button-numpadenter {
+        height: 85px;
+      }
+      .hg-button.hg-button-numpad0 {
+        width: 105px;
+      }
+      .hg-button.hg-button-com {
+        max-width: 85px;
+      }
+      .hg-button.hg-standardBtn.hg-button-at {
+        max-width: 45px;
+      }
+      .hg-button.hg-selectedButton {
+        background: $keyboard-selected-button-bg;
+        color: $keyboard-selected-button-color;
+      }
+      .hg-button.hg-standardBtn[data-skbtn=".com"] {
+        max-width: 82px;
+      }
+      .hg-button.hg-standardBtn[data-skbtn="@"] {
+        max-width: 60px;
+      }
+      &.hg-layout-numeric {
+        .hg-button {
+          width: 33.3%;
+          height: 60px;
+          align-items: center;
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
+

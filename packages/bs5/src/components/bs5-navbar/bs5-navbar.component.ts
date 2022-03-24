@@ -10,7 +10,7 @@ export class Bs5NavbarComponent extends Component {
     show: this.show,
     hide: this.hide,
     isCollapsed: true,
-    collapseSelector: ".navbar-collapse"
+    collapseSelector: ".navbar-collapse",
   };
 
   protected collapseTargets: Map<HTMLElement, Collapse> = new Map();

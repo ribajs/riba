@@ -24,7 +24,7 @@ export class HCaptchaFormComponent extends OcFormComponent {
       "hcaptcha-tabindex",
       "hcaptcha-expired-callback",
       "hcaptcha-error-callback",
-      "hcaptcha-container-selector"
+      "hcaptcha-container-selector",
     ];
   }
 
@@ -46,7 +46,7 @@ export class HCaptchaFormComponent extends OcFormComponent {
         ".h-captcha-container, .re-captcha-container, .hcaptcha-container, .recaptcha-container",
 
       // Methods
-      onSubmit: this.onSubmit
+      onSubmit: this.onSubmit,
     };
 
     return scope;
@@ -124,7 +124,7 @@ export class HCaptchaFormComponent extends OcFormComponent {
       tabindex: this.scope.hcaptchaTabindex,
       foobar: this.scope.hcaptchaExpiredCallback,
       "expired-callback": this.scope.hcaptchaErrorCallback,
-      "error-callback": this.scope.hcaptchaErrorCallback
+      "error-callback": this.scope.hcaptchaErrorCallback,
     };
   }
 
@@ -189,7 +189,7 @@ export class HCaptchaFormComponent extends OcFormComponent {
       "hcaptchaRender",
       "hcaptchaSitekey",
       "hcaptchaSize",
-      "hcaptchaCallback"
+      "hcaptchaCallback",
     ];
   }
 

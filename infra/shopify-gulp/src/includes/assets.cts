@@ -46,7 +46,7 @@ export const updateOrCreate = async (
 
   asset = await assets.update(themeId, {
     key: extAssetsConfig.key,
-    src: extAssetsConfig.src
+    src: extAssetsConfig.src,
   });
 
   return asset;

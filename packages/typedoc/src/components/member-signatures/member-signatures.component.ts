@@ -12,7 +12,7 @@ export class MemberSignaturesComponent extends Component {
   public scope: MemberSignaturesComponentScope = {
     signatureEls: [],
     descriptionEls: [],
-    showDescByIndex: this.showDescByIndex
+    showDescByIndex: this.showDescByIndex,
   };
 
   constructor() {

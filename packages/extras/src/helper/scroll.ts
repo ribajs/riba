@@ -19,7 +19,7 @@ export const getScrollPosition = (
       /** vertical: top / bottom / height */
       maxY:
         document.documentElement.scrollHeight -
-        document.documentElement.clientHeight
+        document.documentElement.clientHeight,
     };
     return scrollPosition;
   }
@@ -31,7 +31,7 @@ export const getScrollPosition = (
     /** horizontal: left / right / width */
     maxX: el.scrollWidth - el.clientWidth,
     /** vertical: top / bottom / height */
-    maxY: el.scrollHeight - el.clientHeight
+    maxY: el.scrollHeight - el.clientHeight,
   };
 
   return scrollPosition;

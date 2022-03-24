@@ -13,5 +13,5 @@ export const toNumberFormatter = {
       return num ? num : def;
     }
     return num;
-  }
+  },
 };

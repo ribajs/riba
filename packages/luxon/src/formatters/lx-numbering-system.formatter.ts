@@ -13,5 +13,5 @@ export const LuxonNumberingSystemFormatter: Formatter = {
    */
   read(target: DateTime): string {
     return target.numberingSystem;
-  }
+  },
 };

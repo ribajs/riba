@@ -34,7 +34,7 @@ export class Bs5ModalItemComponent extends Component {
   public scope: Scope = {
     onHidden: this.onHidden.bind(this),
     index: -1,
-    dismiss: this.dismiss.bind(this)
+    dismiss: this.dismiss.bind(this),
   };
 
   constructor() {
@@ -58,12 +58,12 @@ export class Bs5ModalItemComponent extends Component {
       this.modalService = new Modal(modalEl, {
         focus: modal.focus !== undefined ? modal.focus : true,
         keyboard: modal.keyboard !== undefined ? modal.keyboard : true,
-        backdrop: modal.backdrop !== undefined ? modal.backdrop : true
+        backdrop: modal.backdrop !== undefined ? modal.backdrop : true,
       });
 
       // Call onHidden on hidden event once
       modalEl.addEventListener(Modal.EVENT_HIDDEN, this.scope.onHidden, {
-        once: true
+        once: true,
       });
 
       // show modal using the modal service

@@ -2,7 +2,7 @@ import { TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import {
   Bs4ShareComponent,
-  Scope as Bs4ShareScope
+  Scope as Bs4ShareScope,
 } from "@ribajs/bs4/src/components/bs4-share/bs4-share.component.js";
 import template from "@ribajs/bs4/src/components/bs4-share/bs4-share.component.html";
 import labelTemplate from "./share.label.html";
@@ -40,7 +40,7 @@ export class I18nShareComponent extends Bs4ShareComponent {
       ...Bs4ShareComponent.observedAttributes,
       "text-i18n",
       "label-i18n",
-      "service-label-i18n"
+      "service-label-i18n",
     ];
   }
 

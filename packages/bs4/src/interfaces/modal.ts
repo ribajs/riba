@@ -48,7 +48,7 @@ export class Modal extends Notification implements Config {
     contextualClass,
     channel,
     $event,
-    $context
+    $context,
   }: {
     title?: string;
     message: string;

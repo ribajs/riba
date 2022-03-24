@@ -2,7 +2,7 @@ import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { Pjax } from "@ribajs/router";
 import {
   getViewportDimensions,
-  hasChildNodesTrim
+  hasChildNodesTrim,
 } from "@ribajs/utils/src/dom.js";
 import type { InstagramMedia } from "../../interfaces/instagram-api";
 import { InstagramApiService } from "../../services/instagram-api.service.js";
@@ -32,7 +32,7 @@ export class ShopifyTdaInstagramScrollbarComponent extends Component {
     limit: 0,
     onScroll: this.onScroll,
     onTap: this.onTap,
-    media: undefined
+    media: undefined,
   };
 
   protected scollWith: HTMLElement | null = null;

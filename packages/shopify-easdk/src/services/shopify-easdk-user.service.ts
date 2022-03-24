@@ -18,7 +18,7 @@ import {
   // ProductPickerOptions,
   // ProductPickerCallback,
   User,
-  UserData
+  UserData,
   // ReceiveMessage,
   // ShopifyApp,
 } from "../interfaces/shopify-easdk.js";

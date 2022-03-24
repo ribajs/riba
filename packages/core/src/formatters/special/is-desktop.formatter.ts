@@ -4,5 +4,5 @@ export const isDesktopFormatter = {
   name: "is-desktop",
   read() {
     return isDesktop();
-  }
+  },
 };

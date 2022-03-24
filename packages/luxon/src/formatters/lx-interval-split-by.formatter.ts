@@ -14,5 +14,5 @@ export const LuxonIntervalSplitByFormatter: Formatter = {
    */
   read(target: Interval, duration: DurationInput): Interval[] {
     return target.splitBy(duration);
-  }
+  },
 };

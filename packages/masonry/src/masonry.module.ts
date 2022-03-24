@@ -13,5 +13,5 @@ export const masonryModule: RibaModule = {
   init(options: MasonryModuleOptions = {}) {
     services.MasonryService.setSingleton(options);
     return this;
-  }
+  },
 };

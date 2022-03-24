@@ -13,5 +13,5 @@ export const LuxonIntervalToStringFormatter: Formatter = {
    */
   read(target: Interval): string {
     return target.toString();
-  }
+  },
 };

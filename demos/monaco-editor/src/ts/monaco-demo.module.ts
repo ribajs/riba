@@ -10,7 +10,7 @@ export const MonacoDemoModule: RibaModule = {
   services: {},
   init() {
     return this;
-  }
+  },
 };
 
 export default MonacoDemoModule;

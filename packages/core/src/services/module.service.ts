@@ -3,7 +3,7 @@ import {
   Binders,
   Formatters,
   Components,
-  RibaModule
+  RibaModule,
 } from "../types/index.js";
 import { BindersService } from "./binder.service.js";
 import { ComponentService } from "./component.service.js";

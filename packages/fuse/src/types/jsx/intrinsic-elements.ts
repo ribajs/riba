@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 /* eslint-disable @typescript-eslint/no-namespace */
 
-import type {
-  JsxFuseSearchProps
-} from "./index.js";
+import type { JsxFuseSearchProps } from "./index.js";
 
 export interface FuseIntrinsicElements {
   "fuse-search": JsxFuseSearchProps;

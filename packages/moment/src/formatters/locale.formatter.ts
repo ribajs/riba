@@ -9,5 +9,5 @@ export const LocaleFormatter: Formatter = {
   name: "moment-locale",
   read(target: Moment | MomentInput, locale: string) {
     return moment(target).locale(locale);
-  }
+  },
 };

@@ -18,5 +18,5 @@ export const YearsFormatter: Formatter = {
     return typeof (target as Moment).year === "function"
       ? (target as Moment).year()
       : (target as Duration).years();
-  }
+  },
 };

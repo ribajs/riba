@@ -3,7 +3,7 @@ import {
   BindableElement,
   ClassOfBinder,
   ClassOfComponent,
-  DataElement
+  DataElement,
 } from "./types/index.js";
 import { parseNode } from "./parse-node.js";
 import { parseDeclaration } from "./parse-declaration.js";
@@ -21,7 +21,6 @@ import { AttributeBinder } from "./binders/attribute.binder.js";
  * A collection of bindings built from a set of parent nodes.
  */
 export class View {
-
   /** Global root scope */
   public static $rootScope: any = {};
 
@@ -89,7 +88,7 @@ export class View {
     // If $root property exists in model merge this with the global root scope / model
     if (this.models.$root) {
       for (const key of Object.keys(this.models.$root)) {
-        View.$rootScope[key] = this.models.$root[key]
+        View.$rootScope[key] = this.models.$root[key];
       }
     }
 

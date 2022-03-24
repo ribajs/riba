@@ -12,7 +12,7 @@ export class ShopifyProductScrollbarComponent extends Component {
     onScroll: this.onScroll,
     onProductTap: this.onProductTap,
     onProductMouseenter: this.onProductMouseenter,
-    title: ""
+    title: "",
   };
 
   protected products: NodeListOf<HTMLElement> | null = null;

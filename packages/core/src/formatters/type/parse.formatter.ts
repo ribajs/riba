@@ -19,10 +19,10 @@ export const parseFormatter = {
       return str;
     }
 
-    if (typeof str === 'string') {
+    if (typeof str === "string") {
       return parseType(str, true).value;
     } else {
       return null;
     }
-  }
+  },
 };

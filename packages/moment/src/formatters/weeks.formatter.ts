@@ -16,5 +16,5 @@ export const WeeksFormatter: Formatter = {
    */
   read(target: Moment | Duration) {
     return target.weeks();
-  }
+  },
 };

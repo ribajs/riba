@@ -1,7 +1,7 @@
 import { Binder } from "@ribajs/core";
 import {
   Dragscroll,
-  DragscrollOptions
+  DragscrollOptions,
 } from "../services/dragscroll.service.js";
 
 /**

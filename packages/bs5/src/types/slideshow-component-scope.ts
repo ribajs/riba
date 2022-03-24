@@ -3,7 +3,7 @@ import type { Bs5SlideshowComponent } from "../components/bs5-slideshow/bs5-slid
 import type {
   SlideshowSlide,
   SlideshowControlsPosition,
-  SlideshowIndicatorsPosition
+  SlideshowIndicatorsPosition,
 } from ".";
 
 export interface Bs5SlideshowComponentScope {

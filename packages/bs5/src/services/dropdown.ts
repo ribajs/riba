@@ -32,6 +32,10 @@ export class Dropdown extends _Dropdown {
     }
   }
 
+  constructor(element: string | Element, options?: Partial<_Dropdown.Options>) {
+    super(element, options);
+  }
+
   static NAME = "dropdown";
   static get DATA_KEY() {
     return DROPDOWN_DATA_KEY;

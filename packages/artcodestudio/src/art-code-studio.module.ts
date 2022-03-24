@@ -13,5 +13,5 @@ export const artAndCodeStudioModule: RibaModule = {
   init(options: ArtCodeStudioModuleOptions = {}) {
     services.ArtCodeStudioService.setSingleton(options);
     return this;
-  }
+  },
 };

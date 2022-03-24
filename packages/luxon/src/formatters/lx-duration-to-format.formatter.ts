@@ -15,5 +15,5 @@ export const LuxonDurationToFormatFormatter: Formatter = {
    */
   read(target: Duration, fmt: string, opts?: DurationToFormatOptions): string {
     return target.toFormat(fmt, opts);
-  }
+  },
 };

@@ -21,9 +21,13 @@ import type {
   JsxElement,
   JsxChildren,
   JsxComponent,
-  BasicIntrinsicElements
+  BasicIntrinsicElements,
 } from "./types/index.js";
-import { isCustomElement, jsonStringify, escapeHtml } from "@ribajs/utils/src/index.js";
+import {
+  isCustomElement,
+  jsonStringify,
+  escapeHtml,
+} from "@ribajs/utils/src/index.js";
 import { JsxFragment } from "./jsx-fragment.js";
 import { Raw } from "./jsx-raw.js";
 
@@ -41,7 +45,7 @@ export const htmlVoidElements = new Set([
   "param",
   "source",
   "track",
-  "wbr"
+  "wbr",
 ]);
 
 /**
@@ -149,5 +153,5 @@ declare global {
 declare const global: any;
 
 // Set as global variable in Browser, Deno or Node
-((global) || window).jsxCreateElement = createElement;
-((global) || window).jsxFragment = JsxFragment;
+(global || window).jsxCreateElement = createElement;
+(global || window).jsxFragment = JsxFragment;

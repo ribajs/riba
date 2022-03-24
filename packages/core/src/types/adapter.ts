@@ -30,22 +30,22 @@ export abstract class Adapter {
   public abstract observeMutations?: (
     obj: any,
     ref: string,
-    keypath: string,
+    keypath: string
   ) => void;
   public abstract unobserveMutations?: (
     obj: RVArray,
     ref: string,
-    keypath: string,
+    keypath: string
   ) => void;
   public abstract observe: (
     obj: any,
     keypath: string,
-    callback: ObserverSyncCallback,
+    callback: ObserverSyncCallback
   ) => void;
   public abstract unobserve: (
     obj: any,
     keypath: string,
-    callback: ObserverSyncCallback,
+    callback: ObserverSyncCallback
   ) => void;
   public abstract get: (obj: any, keypath: string) => any;
   public abstract set: (obj: any, keypath: string, value: any) => void;

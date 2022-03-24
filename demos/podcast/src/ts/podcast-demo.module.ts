@@ -10,7 +10,7 @@ export const PodcastDemoModule: RibaModule = {
   services: {},
   init() {
     return this;
-  }
+  },
 };
 
 export default PodcastDemoModule;

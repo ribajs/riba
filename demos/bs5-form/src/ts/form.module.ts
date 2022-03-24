@@ -10,7 +10,7 @@ export const FormModule: RibaModule = {
   services: {},
   init() {
     return this;
-  }
+  },
 };
 
 export default FormModule;

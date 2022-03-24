@@ -51,5 +51,5 @@ export const moneyFormatter: Formatter = {
 
     console.warn(`Can't parse format: ${formatString}`);
     return "0";
-  }
+  },
 };

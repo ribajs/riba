@@ -28,7 +28,7 @@ export class Bs4NotificationContainerComponent extends Component {
     notifications: [],
     positionClass: "absolute-bottom absolute-center",
     channelName: "toast",
-    onItemHide: this.onItemHide
+    onItemHide: this.onItemHide,
   };
 
   constructor() {

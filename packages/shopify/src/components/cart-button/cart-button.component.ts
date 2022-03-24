@@ -25,7 +25,7 @@ export class ShopifyCartButtonComponent extends Component {
     cartItemCount: 0,
     toggle: this.toggle,
     pending: false,
-    startAddAnimation: false
+    startAddAnimation: false,
   };
 
   protected set cart(cart: ShopifyCartObject) {

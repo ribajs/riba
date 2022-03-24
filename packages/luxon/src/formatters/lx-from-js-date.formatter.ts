@@ -14,5 +14,5 @@ export const LuxonFromJSDateFormatter: Formatter = {
    */
   read(date: Date, options?: DateTimeJSOptions): DateTime {
     return DateTime.fromJSDate(date, options);
-  }
+  },
 };

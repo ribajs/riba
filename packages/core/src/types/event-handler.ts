@@ -6,5 +6,5 @@ export type EventHandler = (
   context: Binder<any, any>,
   ev: Event,
   binding: Binder<any, any>,
-  el: HTMLElement,
+  el: HTMLElement
 ) => void;

@@ -8,7 +8,7 @@ export const ExtrasGameLoopModule: RibaModule = {
   services: {},
   init() {
     return this;
-  }
+  },
 };
 
 export default ExtrasGameLoopModule;

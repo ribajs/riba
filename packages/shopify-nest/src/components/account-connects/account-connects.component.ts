@@ -2,7 +2,7 @@ import {
   Component,
   TemplateFunction,
   HttpService,
-  ScopeBase
+  ScopeBase,
 } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import Debug from "debug";
@@ -52,12 +52,12 @@ export class ShopifyNestAccountConnectsComponent extends Component {
     locales: {
       title: "components.accountConnects.{type}.title",
       info: "components.accountConnects.{type}.info",
-      notConnected: "components.accountConnects.{type}.notConnected"
+      notConnected: "components.accountConnects.{type}.notConnected",
     },
     connect: this.connect,
     disconnect: this.disconnect,
     logout: this.logout,
-    inIframe: EASDKWrapperService.inIframe()
+    inIframe: EASDKWrapperService.inIframe(),
   };
 
   constructor() {

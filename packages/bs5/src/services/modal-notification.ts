@@ -29,7 +29,7 @@ export class ModalNotification extends Notification {
     contextualClass,
     channel,
     $event,
-    $context
+    $context,
   }: {
     title?: string;
     message: string;

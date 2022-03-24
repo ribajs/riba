@@ -12,5 +12,5 @@ export enum MediaReadyState {
   /** data for the current and at least the next frame is available */
   HAVE_FUTURE_DATA,
   /** enough data available to start playing */
-  HAVE_ENOUGH_DATA
+  HAVE_ENOUGH_DATA,
 }

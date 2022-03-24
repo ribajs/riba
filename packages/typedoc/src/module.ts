@@ -14,5 +14,5 @@ export const typedocModule: RibaModule<TypedocModuleOptions> = {
   init(options = {}) {
     services.TypedocService.setSingleton(options);
     return this;
-  }
+  },
 };

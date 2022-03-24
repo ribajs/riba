@@ -6,7 +6,7 @@ import { JsxHtmlCustomGlobalProps } from "./jsx-html-custom-global-props";
  *
  * Reference: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes#list_of_global_attributes
  */
- export interface JsxHtmlGlobalProps extends JsxHtmlCustomGlobalProps {
+export interface JsxHtmlGlobalProps extends JsxHtmlCustomGlobalProps {
   accessKey?: string;
   autocapitalize?: string;
   children?: JsxChildren;

@@ -6,7 +6,7 @@ import { NavbarComponent } from "../navbar/navbar.component.js";
 import type {
   SearchComponentScope,
   SearchResult,
-  SearchOptions
+  SearchOptions,
 } from "../../types/index.js";
 
 declare global {
@@ -37,7 +37,7 @@ export class SearchComponent extends Component {
     onKeydown: this.onKeydown,
     onKeypress: this.onKeypress,
     onSearchResultHover: this.onSearchResultHover,
-    onSearchResultClick: this.onSearchResultClick
+    onSearchResultClick: this.onSearchResultClick,
   };
 
   constructor() {

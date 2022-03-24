@@ -5,7 +5,7 @@ import type {
   Key,
   ObserverSyncCallback,
   Obj,
-  Options
+  Options,
 } from "./types/index.js";
 import { isObject } from "@ribajs/utils/src/type.js";
 
@@ -145,7 +145,7 @@ export class Observer {
 
     return {
       key: this.key,
-      tokens: this.tokens
+      tokens: this.tokens,
     };
   }
 

@@ -5,7 +5,7 @@ export interface FbPaging {
   };
 }
 
-export interface IFbRequest<T,> {
+export interface IFbRequest<T> {
   data: T[];
   paging: FbPaging;
 }

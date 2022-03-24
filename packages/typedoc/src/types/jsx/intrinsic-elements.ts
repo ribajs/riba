@@ -1,6 +1,12 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 /* eslint-disable @typescript-eslint/no-namespace */
-import type { JsxTsdSearchProps, JsxTsdNavigationPrimaryProps, JsxTsdNavigationSecondaryProps, JsxTsdNavbarProps, JsxTsdMemberSignaturesProps } from "./index.js"
+import type {
+  JsxTsdSearchProps,
+  JsxTsdNavigationPrimaryProps,
+  JsxTsdNavigationSecondaryProps,
+  JsxTsdNavbarProps,
+  JsxTsdMemberSignaturesProps,
+} from "./index.js";
 
 export interface TsdIntrinsicElements {
   // Custom Elements

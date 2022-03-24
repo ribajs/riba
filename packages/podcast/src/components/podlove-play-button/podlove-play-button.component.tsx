@@ -4,13 +4,13 @@ import { waitForProp } from "@ribajs/utils/src/control.js";
 import { requestPlay, selectEpisode } from "../../mixins/actions.mixins.js";
 import {
   getEpisodeConfig,
-  getPlayerConfig
+  getPlayerConfig,
 } from "../../mixins/config.mixins.js";
 import { DEFAULT_MAIN_PLAYER_ID } from "../../constants.js";
 
 import type {
   PodlovePlayButtonComponentScope,
-  PodloveWebPlayerStore
+  PodloveWebPlayerStore,
 } from "../../types/index.js";
 import type { PodloveWebPlayerComponent } from "../podlove-web-player/podlove-web-player.component.js";
 // import TEMPLATE from "./podlove-play-button.component.template.js";
@@ -31,7 +31,7 @@ export class PodlovePlayButtonComponent extends Component {
       "config-url",
       "web-player-id",
       "play-label",
-      "id"
+      "id",
     ];
   }
 
@@ -51,12 +51,12 @@ export class PodlovePlayButtonComponent extends Component {
     styles: {
       play: null,
       infoName: null,
-      infoTitle: null
+      infoTitle: null,
     },
     icons: {
-      play: PLAY_ICON
+      play: PLAY_ICON,
     },
-    play: this.play
+    play: this.play,
   };
 
   constructor() {
@@ -92,22 +92,22 @@ export class PodlovePlayButtonComponent extends Component {
     const playBtn = {
       backgroundColor: this.scope.config.theme.tokens.brandDark,
       color: this.scope.config.theme.tokens.brandLightest,
-      fontFamily: this.scope.config.theme.fonts.bold.family.join(", ")
+      fontFamily: this.scope.config.theme.fonts.bold.family.join(", "),
     };
 
     const infoName = {
       color: this.scope.config.theme.tokens.brand,
-      fontFamily: this.scope.config.theme.fonts.bold.family.join(", ")
+      fontFamily: this.scope.config.theme.fonts.bold.family.join(", "),
     };
 
     const infoTitle = {
       color: this.scope.config.theme.tokens.contrast,
-      fontFamily: this.scope.config.theme.fonts.bold.family.join(", ")
+      fontFamily: this.scope.config.theme.fonts.bold.family.join(", "),
     };
 
     const infoSubtitle = {
       color: this.scope.config.theme.tokens.contrast,
-      fontFamily: this.scope.config.theme.fonts.regular.family.join(", ")
+      fontFamily: this.scope.config.theme.fonts.regular.family.join(", "),
     };
 
     this.scope.styles["play"] = playBtn;

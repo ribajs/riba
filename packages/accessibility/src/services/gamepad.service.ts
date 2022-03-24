@@ -1,9 +1,12 @@
 import { AccessibilityModuleOptions } from "../types/index.js";
 import test, { isGamepadSupported, gameControl } from "gamecontroller.js";
+import type { GameControl } from "gamecontroller.js";
 export class GamepadService {
   protected _options: AccessibilityModuleOptions;
   protected _control: typeof gameControl;
   public static instance?: GamepadService;
+
+  public on: GameControl["on"];
 
   public get options() {
     return this._options;
@@ -20,6 +23,7 @@ export class GamepadService {
       console.warn("[GamepadService] Gamepad is not supported!");
     }
     this._control = gameControl;
+    this.on = this._control.on;
   }
 
   public static getSingleton() {

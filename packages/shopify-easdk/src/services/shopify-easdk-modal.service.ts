@@ -16,7 +16,7 @@ import {
   ModalConfirmOptions,
   ModalInputOptions,
   ProductPickerOptions,
-  ProductPickerCallback
+  ProductPickerCallback,
   // User,
   // UserData,
   // ReceiveMessage,

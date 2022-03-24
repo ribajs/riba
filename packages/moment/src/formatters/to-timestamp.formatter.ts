@@ -8,5 +8,5 @@ export const ToTimestampFormatter: Formatter = {
   name: "toTimestamp",
   read(target: moment.MomentInput) {
     return moment(target).format("X");
-  }
+  },
 };

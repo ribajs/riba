@@ -53,7 +53,7 @@ export const getDataAttributes = (
   }
 
   const attributes = {
-    ...element.dataset
+    ...element.dataset,
   };
 
   Object.keys(attributes).forEach((key) => {
@@ -75,14 +75,14 @@ export const offset = (element: Element | HTMLUnknownElement | HTMLElement) => {
 
   return {
     top: rect.top + document.body.scrollTop,
-    left: rect.left + document.body.scrollLeft
+    left: rect.left + document.body.scrollLeft,
   };
 };
 
 export const position = (element: HTMLUnknownElement | HTMLElement) => {
   return {
     top: element.offsetTop,
-    left: element.offsetLeft
+    left: element.offsetLeft,
   };
 };
 

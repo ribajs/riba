@@ -101,7 +101,7 @@ export class PhotoswipeComponent extends Component {
     counterEl: false, // We have or own logic here
     preloaderEl: true,
 
-    closeElClasses: [] // 'item', 'caption', 'zoom-wrap', 'ui', 'top-bar'
+    closeElClasses: [], // 'item', 'caption', 'zoom-wrap', 'ui', 'top-bar'
   };
 
   static get observedAttributes(): string[] {
@@ -151,7 +151,7 @@ export class PhotoswipeComponent extends Component {
       "share-label-telegram",
       "share-label-email",
       "share-label-download",
-      "share-label-clipboard"
+      "share-label-clipboard",
     ];
   }
 
@@ -217,7 +217,7 @@ export class PhotoswipeComponent extends Component {
     shareLabelTelegram: "Telegram",
     shareLabelEmail: "Email",
     shareLabelDownload: "Download",
-    shareLabelClipboard: "Copy to clipboard"
+    shareLabelClipboard: "Copy to clipboard",
   };
 
   constructor() {
@@ -595,7 +595,7 @@ export class PhotoswipeComponent extends Component {
         h: Number(height),
         title,
         element: this.images[i],
-        index: i
+        index: i,
       });
     }
   }

@@ -8,5 +8,5 @@ export const ToMomentFormatter: Formatter = {
   name: "toMoment",
   read(date: moment.MomentInput) {
     return moment(date);
-  }
+  },
 };

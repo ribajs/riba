@@ -8,5 +8,5 @@ export const eachItemModule: RibaModule = {
   services: {},
   init() {
     return this;
-  }
+  },
 };

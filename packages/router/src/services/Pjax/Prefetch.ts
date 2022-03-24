@@ -46,10 +46,10 @@ class Prefetch {
     if (autobindLinks) {
       this.deInit();
       document.body.addEventListener("mouseover", this.onLinkEnterIntern, {
-        passive: true
+        passive: true,
       });
       document.body.addEventListener("touchstart", this.onLinkEnterIntern, {
-        passive: true
+        passive: true,
       });
     }
   }
@@ -69,10 +69,10 @@ class Prefetch {
     }
     this.deInitBinder(el, url);
     el.addEventListener("mouseover", this.onLinkEnter.bind(this, url, el), {
-      passive: true
+      passive: true,
     });
     el.addEventListener("touchstart", this.onLinkEnter.bind(this, url, el), {
-      passive: true
+      passive: true,
     });
   }
 

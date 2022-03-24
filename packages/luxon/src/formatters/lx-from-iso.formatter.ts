@@ -14,5 +14,5 @@ export const LuxonFromISOFormatter: Formatter = {
    */
   read(text: string, options?: DateTimeOptions): DateTime {
     return DateTime.fromISO(text, options);
-  }
+  },
 };

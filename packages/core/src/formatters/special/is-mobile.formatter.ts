@@ -4,5 +4,5 @@ export const isMobileFormatter = {
   name: "is-mobile",
   read() {
     return isMobile();
-  }
+  },
 };

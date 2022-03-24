@@ -36,7 +36,7 @@ export class Dragscroll {
 
     el.removeEventListener("mousedown", this.onMouseDown);
     el.addEventListener("mousedown", this.onMouseDown, {
-      passive: true
+      passive: true,
     });
 
     window.addEventListener("resize", this.checkDraggable);
@@ -47,20 +47,20 @@ export class Dragscroll {
       window.removeEventListener("mousemove", this.onMouseMove);
 
       window.addEventListener("mouseup", this.onMouseUp, {
-        passive: true
+        passive: true,
       });
       window.addEventListener("mousemove", this.onMouseMove, {
-        passive: true
+        passive: true,
       });
     } else {
       el.removeEventListener("mouseup", this.onMouseUp);
       el.removeEventListener("mousemove", this.onMouseMove);
 
       el.addEventListener("mouseup", this.onMouseUp, {
-        passive: true
+        passive: true,
       });
       el.addEventListener("mousemove", this.onMouseMove, {
-        passive: true
+        passive: true,
       });
     }
 

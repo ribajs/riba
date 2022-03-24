@@ -3,11 +3,15 @@ import {
   FormatterFn,
   TemplatesComponent,
   TemplateFunction,
-  ScopeBase
+  ScopeBase,
 } from "@ribajs/core";
 import { Collapse } from "../../services/collapse.js";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
-import { JsxBs5AccordionProps, CollapseEvents, AccordionItem } from "../../types/index.js";
+import {
+  JsxBs5AccordionProps,
+  CollapseEvents,
+  AccordionItem,
+} from "../../types/index.js";
 
 import template from "./bs5-accordion.component.html";
 
@@ -31,22 +35,27 @@ export class Bs5AccordionComponent extends TemplatesComponent {
   protected templateAttributes = [
     {
       name: "title",
-      required: true
+      required: true,
     },
     {
       name: "show",
-      required: false
+      required: false,
     },
     {
       name: "icon-direction",
-      required: false
-    }
+      required: false,
+    },
   ];
 
   // protected collapseServices: Collapse[] = [];
 
   static get observedAttributes(): (keyof JsxBs5AccordionProps)[] {
-    return ["items", "collapse-icon-src", "collapse-icon-size", "show-only-one"];
+    return [
+      "items",
+      "collapse-icon-src",
+      "collapse-icon-size",
+      "show-only-one",
+    ];
   }
 
   public scope: Scope = {
@@ -55,7 +64,7 @@ export class Bs5AccordionComponent extends TemplatesComponent {
     show: this.show,
     hide: this.hide,
     collapseIconSize: 16,
-    showOnlyOne: true
+    showOnlyOne: true,
   };
 
   constructor() {

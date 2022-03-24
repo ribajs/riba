@@ -106,56 +106,56 @@ export class Autoscroll {
     this.updateMove = this.updateMove.bind(this);
 
     window.addEventListener("resize", this.onResize, {
-      passive: true
+      passive: true,
     });
 
     this.el.addEventListener("mouseenter", this.onMouseIn, {
-      passive: true
+      passive: true,
     });
     this.el.addEventListener("mouseover", this.onMouseIn, {
-      passive: true
+      passive: true,
     });
     this.el.addEventListener("focusin", this.onMouseIn, {
-      passive: true
+      passive: true,
     });
     this.el.addEventListener("touchstart", this.onMouseIn, {
-      passive: true
+      passive: true,
     });
 
     this.el.addEventListener("mouseleave", this.onMouseOut, {
-      passive: true
+      passive: true,
     });
     this.el.addEventListener("focusout", this.onMouseOut, {
-      passive: true
+      passive: true,
     });
 
     this.el.addEventListener("mouseup", this.onMouseUp, {
-      passive: true
+      passive: true,
     });
     this.el.addEventListener("touchend", this.onMouseUp, {
-      passive: true
+      passive: true,
     });
 
     if (this.touchCapable) {
       this.el.addEventListener("scroll", this.onMouseUp, {
-        passive: true
+        passive: true,
       });
       this.el.addEventListener("scrollend", this.onMouseUp, {
-        passive: true
+        passive: true,
       });
       // See ScrollEventsService for "scrollended" event
       this.el.addEventListener("scrollended", this.onMouseUp, {
-        passive: true
+        passive: true,
       });
     } else {
       this.el.addEventListener("scroll", this.onScroll, {
-        passive: true
+        passive: true,
       });
       this.el.addEventListener("scrollend", this.onScroll, {
-        passive: true
+        passive: true,
       });
       this.el.addEventListener("scrollended", this.onScroll, {
-        passive: true
+        passive: true,
       });
     }
 

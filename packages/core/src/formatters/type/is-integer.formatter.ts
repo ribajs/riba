@@ -12,5 +12,5 @@ export const isIntegerFormatter: Formatter = {
      * http://stackoverflow.com/questions/3885817/how-to-check-if-a-number-is-float-or-integer
      */
     return n === +n && n === (n | 0);
-  }
+  },
 };

@@ -14,9 +14,9 @@ export class MonacoExampleComponent extends Component {
   public scope = {
     article: {
       title: "How to use the monaco-editor from VSCode in Riba.js",
-      body_html: ""
+      body_html: "",
     },
-    save: this.save
+    save: this.save,
   };
 
   constructor() {

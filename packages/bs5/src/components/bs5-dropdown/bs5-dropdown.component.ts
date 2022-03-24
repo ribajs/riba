@@ -4,10 +4,11 @@ import { Dropdown as BSDropdown } from "bootstrap";
 import { JsxBs5DropdownProps } from "../../types/jsx/jsx-dropdown-props";
 
 interface Scope extends Partial<BSDropdown.Options> {
-  toggle: Bs5DropdownComponent['toggle'];
-  show: Bs5DropdownComponent['show'];
-  hide: Bs5DropdownComponent['hide'];
-  update: Bs5DropdownComponent['update'];
+  toggle: Bs5DropdownComponent["toggle"];
+  show: Bs5DropdownComponent["show"];
+  hide: Bs5DropdownComponent["hide"];
+  update: Bs5DropdownComponent["update"];
+  isShown: boolean;
 }
 
 export class Bs5DropdownComponent extends Component {
@@ -17,18 +18,31 @@ export class Bs5DropdownComponent extends Component {
     toggle: this.toggle,
     show: this.show,
     hide: this.hide,
-    update: this.update
+    update: this.update,
+    isShown: false,
   };
 
   public dropdown?: Dropdown;
   protected toggler: HTMLElement | Bs5DropdownComponent | null = null;
 
   static get observedAttributes(): (keyof JsxBs5DropdownProps)[] {
-    return ['offset', 'boundary', 'reference', 'display', 'popper-config', 'auto-close'];
+    return [
+      "offset",
+      "boundary",
+      "reference",
+      "display",
+      "popper-config",
+      "auto-close",
+    ];
   }
 
   constructor() {
     super();
+  }
+
+  public isShown() {
+    // TODO: Do not access private methods
+    return (this.dropdown as any)?._isShown() || false;
   }
 
   public toggle(event: Event, ctx: Scope, el: any) {
@@ -72,6 +86,12 @@ export class Bs5DropdownComponent extends Component {
   }
 
   async afterBind() {
+    this.initDropdown();
+    this.addEventListeners();
+    await super.afterBind();
+  }
+
+  protected initDropdown() {
     this.toggler = this.classList.contains("dropdown-toggle")
       ? this
       : this.querySelector<HTMLElement>(".dropdown-toggle") || this;
@@ -80,7 +100,26 @@ export class Bs5DropdownComponent extends Component {
     this.toggler.dataset.bsToggle = "dropdown";
     this.dropdown = new Dropdown(this.toggler, this.scope);
     this.dropdown.hide();
-    await super.afterBind();
+    this.scope.isShown = this.isShown();
+  }
+
+  protected _onShown() {
+    console.debug("onShown");
+    this.scope.isShown = this.isShown();
+  }
+
+  protected onShown = this._onShown.bind(this);
+
+  protected _onHidden() {
+    console.debug("onHidden");
+    this.scope.isShown = this.isShown();
+  }
+
+  protected onHidden = this._onHidden.bind(this);
+
+  protected addEventListeners() {
+    this.toggler?.addEventListener(Dropdown.EVENT_SHOWN, this.onShown);
+    this.toggler?.addEventListener(Dropdown.EVENT_HIDDEN, this.onHidden);
   }
 
   protected template(): ReturnType<TemplateFunction> {

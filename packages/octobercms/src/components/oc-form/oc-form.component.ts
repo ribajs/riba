@@ -62,7 +62,7 @@ export class OcFormComponent extends Bs4FormComponent {
         } else {
           this.onErrorSubmit(statusText, statusText, jqXHR);
         }
-      }
+      },
     });
 
     // See October CMS JavaScript API AJAX handlers: https://octobercms.com/docs/ajax/handlers

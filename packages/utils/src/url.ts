@@ -56,12 +56,12 @@ export const normalizeUrl = (
   if (location.hostname === curHostname) {
     return {
       url: location.pathname + location.search + location.hash,
-      location
+      location,
     };
   } else {
     return {
       url: getUrl(url),
-      location
+      location,
     };
   }
 };

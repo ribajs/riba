@@ -15,5 +15,5 @@ export const moneyWithCurrencyFormatter: Formatter = {
       return cents;
     }
     return moneyFormatter.read(cents, formatString);
-  }
+  },
 };

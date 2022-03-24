@@ -8,5 +8,5 @@ export const Bs4TabsAttrModule: RibaModule = {
   services: {},
   init() {
     return this;
-  }
+  },
 };

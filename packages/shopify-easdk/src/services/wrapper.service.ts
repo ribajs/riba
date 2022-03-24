@@ -22,7 +22,7 @@ import {
   // User,
   // UserData,
   // ReceiveMessage,
-  ShopifyApp
+  ShopifyApp,
 } from "../interfaces/shopify-easdk.js";
 
 export class WrapperService {
@@ -37,7 +37,7 @@ export class WrapperService {
   protected static ERRORS = {
     EASDK_NOT_FOUND: `Shopify's EASDK is required!
     Add <script src="https://cdn.shopify.com/s/assets/external/app.js"></script> to your html head.
-    See https://help.shopify.com/en/api/embedded-apps/embedded-app-sdk for more informations.`
+    See https://help.shopify.com/en/api/embedded-apps/embedded-app-sdk for more informations.`,
   };
 
   public event = new EventDispatcher("shopify-easdk");

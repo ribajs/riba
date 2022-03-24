@@ -4,7 +4,7 @@ import {
   ShopifyProduct,
   ShopifyProductVariantOption,
   ShopifyCartService,
-  ShopifyProductService
+  ShopifyProductService,
 } from "@ribajs/shopify";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import template from "./product-item.component.html";
@@ -64,7 +64,7 @@ export class ShopifyProductItemComponent extends Component {
     /**
      * If the variant is available, used to disable the add to cart button
      */
-    available: false
+    available: false,
   };
 
   /**

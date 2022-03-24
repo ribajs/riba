@@ -6,5 +6,5 @@ import { isBoolean } from "@ribajs/utils/src/type.js";
  */
 export const isBooleanFormatter: Formatter = {
   name: "is-boolean",
-  read: isBoolean
+  read: isBoolean,
 };

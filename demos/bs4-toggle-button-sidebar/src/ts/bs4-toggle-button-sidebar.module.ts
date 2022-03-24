@@ -10,7 +10,7 @@ export const BS4ToggleButtonSidebarModule: RibaModule = {
   services: {},
   init() {
     return this;
-  }
+  },
 };
 
 export default BS4ToggleButtonSidebarModule;

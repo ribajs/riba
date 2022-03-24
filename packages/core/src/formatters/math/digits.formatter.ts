@@ -11,5 +11,5 @@ export const digitsFormatter = {
       return str;
     }
     return justDigits(str);
-  }
+  },
 };

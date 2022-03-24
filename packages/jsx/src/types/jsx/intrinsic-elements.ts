@@ -50,7 +50,7 @@ import type {
   JsxTrackElementProps,
   JsxVideoElementProps,
   JsxSvgElementProps,
-  JsxPathElementProps
+  JsxPathElementProps,
 } from ".";
 
 export interface BasicIntrinsicElements {

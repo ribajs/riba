@@ -40,7 +40,7 @@ export class WebhooksService extends EventDispatcher {
     this.socket = io({
       path: "/socket.io/shopify/api/webhooks",
       transports: ["polling"], // ['polling', 'websocket']
-      autoConnect: true
+      autoConnect: true,
     });
     this.socket?.on("connect", () => {
       this.debug("connect");

@@ -3,7 +3,7 @@ import {
   AdapterFunction,
   Ref,
   ObserverSyncCallback,
-  RVArray
+  RVArray,
 } from "../types/index.js";
 
 export class DotAdapter implements Adapter {
@@ -14,7 +14,7 @@ export class DotAdapter implements Adapter {
     "unshift",
     "sort",
     "reverse",
-    "splice"
+    "splice",
   ];
 
   public name = ".";
@@ -27,13 +27,13 @@ export class DotAdapter implements Adapter {
       const id = this.counter++;
 
       Object.defineProperty(obj, "__rv", {
-        value: id
+        value: id,
       });
     }
 
     if (!this.weakmap[obj.__rv]) {
       this.weakmap[obj.__rv] = {
-        callbacks: {}
+        callbacks: {},
       };
     }
 
@@ -157,7 +157,7 @@ export class DotAdapter implements Adapter {
                 this.observeMutations(newValue, obj.__rv, keypath);
               }
             }
-          }
+          },
         });
       }
     }

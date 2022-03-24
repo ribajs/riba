@@ -1,6 +1,6 @@
 import type {
   JsxHtmlGlobalProps,
-  JSXComponentBoolean
+  JSXComponentBoolean,
 } from "@ribajs/jsx/src/index.js";
 import { SlideshowIndicatorsPosition, SlideshowControlsPosition } from "..";
 

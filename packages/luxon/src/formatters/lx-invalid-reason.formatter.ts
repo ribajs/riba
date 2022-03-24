@@ -13,5 +13,5 @@ export const LuxonInvalidReasonFormatter: Formatter = {
    */
   read(target: DateTime): string | null {
     return target.invalidReason;
-  }
+  },
 };

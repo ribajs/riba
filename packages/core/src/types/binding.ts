@@ -1,7 +1,7 @@
 import type { ObserverSyncCallback } from "./observer.js";
 import type { Observer } from "../observer.js";
 
-export interface Bindable<E = HTMLElement,> {
+export interface Bindable<E = HTMLElement> {
   /**
    * Name of the binder without the prefix
    */

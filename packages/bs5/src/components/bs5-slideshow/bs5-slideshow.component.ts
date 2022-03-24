@@ -1,7 +1,4 @@
-import {
-  TemplatesComponent,
-  TemplateFunction
-} from "@ribajs/core";
+import { TemplatesComponent, TemplateFunction } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim, scrollTo } from "@ribajs/utils/src/dom.js";
 import { throttle, debounce } from "@ribajs/utils/src/control";
@@ -11,7 +8,7 @@ import {
   SlideshowIndicatorsPosition,
   SlideshowSlidePosition,
   Bs5SlideshowComponentScope,
-  JsxBs5SlideshowProps
+  JsxBs5SlideshowProps,
 } from "../../types/index.js";
 import {
   Dragscroll,
@@ -20,7 +17,7 @@ import {
   AutoscrollOptions,
   ScrollPosition,
   ScrollEventsService,
-  getScrollPosition
+  getScrollPosition,
 } from "@ribajs/extras";
 import templateSlides from "./bs5-slideshow-slides.component.html";
 import templateControls from "./bs5-slideshow-controls.component.html";
@@ -73,7 +70,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       "indicators",
       "indicators-position",
       "pause",
-      "infinite"
+      "infinite",
     ];
   }
 
@@ -116,7 +113,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     intervalProgress: 0,
     nextIndex: -1,
     prevIndex: -1,
-    activeIndex: 0
+    activeIndex: 0,
   };
 
   public static tagName = "bs5-slideshow";
@@ -124,31 +121,31 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   protected templateAttributes = [
     {
       name: "class",
-      required: false
+      required: false,
     },
     {
       name: "handle",
-      required: false
+      required: false,
     },
     {
       name: "type",
-      required: true
+      required: true,
     },
     {
       name: "active",
       type: "boolean",
-      required: false
+      required: false,
     },
     {
       name: "index",
       type: "number",
-      required: false
+      required: false,
     },
     {
       name: "src",
       type: "string",
-      required: false
-    }
+      required: false,
+    },
   ];
 
   protected autobind = true;
@@ -172,7 +169,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
   protected routerEvents = new EventDispatcher("main");
 
   public scope: Bs5SlideshowComponentScope = {
-    ...this.defaultScope
+    ...this.defaultScope,
   };
 
   constructor() {
@@ -425,10 +422,10 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     );
 
     this.slideshowInner?.addEventListener("scroll", this.onScroll, {
-      passive: true
+      passive: true,
     });
     this.slideshowInner?.addEventListener("scrollended", this.onScrollend, {
-      passive: true
+      passive: true,
     });
 
     this.addEventListener("mouseenter", this.onMouseIn, { passive: true });
@@ -541,7 +538,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       const autoscrollOptions: AutoscrollOptions = {
         velocity: this.scope.autoplayVelocity,
         angle: this.scope.angle,
-        pauseOnHover: this.scope.pauseOnHover
+        pauseOnHover: this.scope.pauseOnHover,
       };
       this.continuousAutoplayService = new Autoscroll(
         this.slideshowInner,
@@ -641,7 +638,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
         item.position ||
         ({
           centerX: 0,
-          centerY: 0
+          centerY: 0,
         } as SlideshowSlidePosition);
 
       item.class = item.class || "";
@@ -701,8 +698,8 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
         position: {
           ...slideElement.getBoundingClientRect(),
           centerY: 0,
-          centerX: 0
-        }
+          centerX: 0,
+        },
       };
       if (!this.scope.items) {
         this.scope.items = [];
@@ -855,7 +852,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
         // 0 if element is in the middle / center
         centerY: rect.y + rect.height / 2 - mainBoundingClient.height / 2,
         // 0 if element is in the middle / center
-        centerX: rect.x + rect.width / 2 - mainBoundingClient.width / 2
+        centerX: rect.x + rect.width / 2 - mainBoundingClient.width / 2,
       };
     }
   }

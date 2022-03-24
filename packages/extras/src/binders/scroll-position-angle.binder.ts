@@ -57,7 +57,7 @@ export class ScrollPositionAngleBinder extends Binder<
     }
 
     window.addEventListener("resize", this.onResize, {
-      passive: true
+      passive: true,
     });
 
     scrollToPosition(el, this.position, this.angle);

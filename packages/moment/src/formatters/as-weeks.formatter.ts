@@ -14,5 +14,5 @@ export const AsWeeksFormatter: Formatter = {
    */
   read(duration: Duration) {
     return duration.asWeeks();
-  }
+  },
 };

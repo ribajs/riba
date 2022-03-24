@@ -36,5 +36,5 @@ export const SSRModule: RibaModule<SSRModuleOptions> = {
     });
 
     return this;
-  }
+  },
 };

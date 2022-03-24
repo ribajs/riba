@@ -1,8 +1,11 @@
-import Fuse from 'fuse.js';
+import Fuse from "fuse.js";
 import { Component, TemplateFunction } from "@ribajs/core";
-import { FuseSearchComponentScope, JsxFuseSearchProps } from "../../types/index.js";
+import {
+  FuseSearchComponentScope,
+  JsxFuseSearchProps,
+} from "../../types/index.js";
 
-export class FuseSearchComponent<T = any,> extends Component {
+export class FuseSearchComponent<T = any> extends Component {
   public static tagName = "fuse-search";
 
   public fuse?: Fuse<any>;
@@ -21,7 +24,7 @@ export class FuseSearchComponent<T = any,> extends Component {
     options: {},
     limit: -1,
     results: [],
-    search: this.search
+    search: this.search,
   };
 
   constructor() {
@@ -42,15 +45,24 @@ export class FuseSearchComponent<T = any,> extends Component {
     this.init(FuseSearchComponent.observedAttributes);
   }
 
-  protected parsedAttributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
-    super.parsedAttributeChangedCallback(attributeName, oldValue, newValue, namespace);
+  protected parsedAttributeChangedCallback(
+    attributeName: string,
+    oldValue: any,
+    newValue: any,
+    namespace: string | null
+  ) {
+    super.parsedAttributeChangedCallback(
+      attributeName,
+      oldValue,
+      newValue,
+      namespace
+    );
 
-    if (attributeName === 'items') {
+    if (attributeName === "items") {
       console.debug("parsedAttributeChangedCallback items", newValue);
       this.initFuse();
     }
   }
-
 
   protected async afterBind() {
     await super.afterBind();
@@ -69,7 +81,10 @@ export class FuseSearchComponent<T = any,> extends Component {
     }
     const keys: string[] = [];
     for (const key of Object.keys(testItem)) {
-      if (testItem[key] && (typeof (testItem[key]) === "object" || Array.isArray(testItem[key]))) {
+      if (
+        testItem[key] &&
+        (typeof testItem[key] === "object" || Array.isArray(testItem[key]))
+      ) {
         const childKeys = this.getAllFuseKeys(testItem[key]);
         for (const childKey of childKeys) {
           keys.push(`${key}.${childKey}`);
@@ -89,7 +104,7 @@ export class FuseSearchComponent<T = any,> extends Component {
       this.scope.options.keys = this.getAllFuseKeys(this.scope.items);
     }
     this.fuse = new Fuse(this.scope.items, this.scope.options);
-    console.debug("initFuse", this.scope.items, this.scope.options, this.fuse );
+    console.debug("initFuse", this.scope.items, this.scope.options, this.fuse);
   }
 
   protected template(): ReturnType<TemplateFunction> {

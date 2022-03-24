@@ -13,5 +13,5 @@ export const LuxonToISOWeekDateFormatter: Formatter = {
    */
   read(target: DateTime): string {
     return target.toISOWeekDate();
-  }
+  },
 };

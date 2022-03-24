@@ -13,5 +13,5 @@ export const LuxonIntervalIsValidFormatter: Formatter = {
    */
   read(target: Interval): boolean {
     return target.isValid;
-  }
+  },
 };

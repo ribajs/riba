@@ -1,7 +1,4 @@
-import {
-  Component,
-  TemplateFunction
-} from "@ribajs/core";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { Collapse } from "../../services/collapse.js";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { JsxBs5CollapseProps, CollapseEvents } from "../../types/index.js";
@@ -33,11 +30,12 @@ export class Bs5CollapseComponent extends Component {
 
   public scope: Scope = {
     title: "",
-    content: "Please set the content of the collapse using the content attribute or just by set the content as the child of this element",
+    content:
+      "Please set the content of the collapse using the content attribute or just by set the content as the child of this element",
     collapsed: true,
     toggle: this.toggle,
     show: this.show,
-    hide: this.hide
+    hide: this.hide,
   };
 
   constructor() {
@@ -67,7 +65,7 @@ export class Bs5CollapseComponent extends Component {
   }
 
   protected addEventListeners() {
-    if(this.scope.collapseEl) {
+    if (this.scope.collapseEl) {
       this.scope.collapseEl.addEventListener(
         CollapseEvents.hide,
         this.onHide.bind(this)
@@ -80,7 +78,7 @@ export class Bs5CollapseComponent extends Component {
   }
 
   protected removeEventListeners() {
-    if(this.scope.collapseEl) {
+    if (this.scope.collapseEl) {
       this.scope.collapseEl.removeEventListener(
         CollapseEvents.hide,
         this.onHide.bind(this)
@@ -109,12 +107,11 @@ export class Bs5CollapseComponent extends Component {
    * Se also bsf-tabs
    * @param visible
    */
-  protected triggerVisibilityChangedForElement(
-    visible: boolean
-  ) {
+  protected triggerVisibilityChangedForElement(visible: boolean) {
     setTimeout(() => {
-
-      const event = new CustomEvent("visibility-changed", { detail: { visible } });
+      const event = new CustomEvent("visibility-changed", {
+        detail: { visible },
+      });
 
       // Use this event to update any custom element when it becomes visible
       this.dispatchEvent(event);
@@ -132,12 +129,14 @@ export class Bs5CollapseComponent extends Component {
 
   protected async afterBind() {
     console.debug("afterBind", this.scope.collapsed);
-    this.scope.collapseEl = this.querySelector('.collapse') || undefined;
+    this.scope.collapseEl = this.querySelector(".collapse") || undefined;
     // this.addEventListeners(); TODO: Fixme calls onShow every time
     if (!this.scope.collapseEl) {
       throw new Error("No collapse element found!");
     }
-    this.collapse = new Collapse(this.scope.collapseEl, { toggle: !this.scope.collapsed });
+    this.collapse = new Collapse(this.scope.collapseEl, {
+      toggle: !this.scope.collapsed,
+    });
   }
 
   protected template(): ReturnType<TemplateFunction> {
@@ -147,8 +146,14 @@ export class Bs5CollapseComponent extends Component {
 
     return (
       <div>
-        <button rv-on-click="toggle" class="btn btn-primary" type="button" aria-expanded="false" rv-aria-controls="title | handleize" rv-text="title">
-        </button>
+        <button
+          rv-on-click="toggle"
+          class="btn btn-primary"
+          type="button"
+          aria-expanded="false"
+          rv-aria-controls="title | handleize"
+          rv-text="title"
+        ></button>
         <div class="collapse mt-2" rv-id="title">
           <div class="card card-body" rv-template="content"></div>
         </div>

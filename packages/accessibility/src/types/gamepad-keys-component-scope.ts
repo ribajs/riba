@@ -1,33 +1,31 @@
-export interface Button {
-  active: boolean;
-}
+import type { InputButton } from "./input-button";
 
-export type GamepadKeysComponentScope = {
+export interface GamepadKeysComponentScope {
   controls: {
     /** button0 */
-    buttonB: Button;
+    buttonB: InputButton;
     /** button1 */
-    buttonA: Button;
+    buttonA: InputButton;
     /** button2 */
-    buttonY: Button;
+    buttonY: InputButton;
     /** button3 */
-    buttonX: Button;
+    buttonX: InputButton;
     /** up1, button12 */
-    up: Button;
+    up: InputButton;
     /** down1, button13 */
-    down: Button;
+    down: InputButton;
     /** right1, button15 */
-    right: Button;
+    right: InputButton;
     /** left1, button14 */
-    left: Button;
+    left: InputButton;
     /** start */
-    start: Button;
+    start: InputButton;
     /** start */
-    select: Button;
+    select: InputButton;
     /** l1 */
-    l: Button;
+    l: InputButton;
     /** r2 */
-    r: Button;
+    r: InputButton;
   };
   connected: number;
-};
+}

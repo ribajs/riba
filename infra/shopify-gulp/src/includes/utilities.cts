@@ -138,7 +138,7 @@ export const createEventCache = (options: any = {}) => {
   _.defaults((options = options || {}), {
     // eslint-disable-line no-param-reassign
     changeEvents: ["add", "change"],
-    unlinkEvents: ["unlink"]
+    unlinkEvents: ["unlink"],
   });
 
   /**
@@ -172,7 +172,7 @@ export const createEventCache = (options: any = {}) => {
           this.unlink.push(path);
         }
       });
-    }
+    },
   };
 };
 

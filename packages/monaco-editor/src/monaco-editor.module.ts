@@ -14,5 +14,5 @@ export const monacoEditorModule: RibaModule<MonacoEditorModuleOptions> = {
   init(options = {}) {
     services.MonacoEditorService.setSingleton(options);
     return this;
-  }
+  },
 };

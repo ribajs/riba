@@ -13,6 +13,7 @@ export const accessibilityModule: RibaModule<AccessibilityModuleOptions> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   init(options = {}) {
     services.GamepadService.setSingleton(options);
+    services.KeyboardService.setSingleton(options);
     return this;
-  }
+  },
 };

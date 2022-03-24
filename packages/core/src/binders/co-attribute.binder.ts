@@ -3,7 +3,7 @@ import { BasicComponent } from "../component/basic-component.js";
 import type { Observer } from "../observer.js";
 import {
   isCustomElement,
-  waitForCustomElement
+  waitForCustomElement,
 } from "@ribajs/utils/src/index.js";
 
 const NO_RIBA_COMPONENT_ERROR_MESSAGE =
@@ -58,7 +58,7 @@ export class ComponentAttributeBinder extends Binder<any, BasicComponent> {
     this.componentAttributeObserver = el.observeAttribute(this.attributeName, {
       sync: () => {
         this.publish();
-      }
+      },
     });
   }
 

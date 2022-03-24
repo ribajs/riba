@@ -6,5 +6,5 @@ import { isDefined } from "@ribajs/utils/src/type.js";
  */
 export const isDefinedFormatter: Formatter = {
   name: "is-defined",
-  read: isDefined
+  read: isDefined,
 };

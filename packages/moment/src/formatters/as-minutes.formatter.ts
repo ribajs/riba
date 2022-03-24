@@ -14,5 +14,5 @@ export const AsMinutesFormatter: Formatter = {
    */
   read(duration: Duration) {
     return duration.asMinutes();
-  }
+  },
 };

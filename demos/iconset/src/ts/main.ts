@@ -8,7 +8,7 @@ declare global {
 
 const riba = new Riba();
 const model = {
-  ICONSET: ICONSET
+  ICONSET: ICONSET,
 };
 
 // Register modules

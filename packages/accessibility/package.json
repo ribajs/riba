@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@ribajs/core": "workspace:^",
+    "@ribajs/events": "workspace:^",
     "@ribajs/utils": "workspace:^"
   },
   "main": "./src/index.ts",

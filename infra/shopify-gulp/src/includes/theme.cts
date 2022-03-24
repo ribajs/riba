@@ -1,11 +1,12 @@
-import { Themes , Models } from "shopify-admin-api";
+import { Themes, Models } from "shopify-admin-api";
 
 import {
   ThemesByEnv,
   ThemeByEnv,
   ThemeData,
-  ThemeConfig
-, ThemeConfigByEnv } from "../types/index.cjs";
+  ThemeConfig,
+  ThemeConfigByEnv,
+} from "../types/index.cjs";
 import { getAsset } from "./shopify-api.cjs";
 import { config, getYamlConfig } from "./config.cjs";
 import Moment from "moment";
@@ -91,7 +92,7 @@ export const createStoreTheme = async (
   return themeApi.create({
     role: "unpublished",
     src: zipSrc,
-    name: themeName
+    name: themeName,
   });
 };
 

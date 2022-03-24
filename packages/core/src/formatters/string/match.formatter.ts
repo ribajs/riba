@@ -7,5 +7,5 @@ export const matchFormatter: Formatter = {
       return false;
     }
     return a.match(new RegExp(regexp, flags));
-  }
+  },
 };

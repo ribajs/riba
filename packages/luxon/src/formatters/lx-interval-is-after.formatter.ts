@@ -14,5 +14,5 @@ export const LuxonIntervalIsAfterFormatter: Formatter = {
    */
   read(target: Interval, dateTime: DateTime): boolean {
     return target.isAfter(dateTime);
-  }
+  },
 };

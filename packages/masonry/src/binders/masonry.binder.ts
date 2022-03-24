@@ -37,7 +37,7 @@ export class MasonryBinder extends Binder<Options, HTMLElement> {
     } else {
       window.removeEventListener("resize", this.layout);
       window.addEventListener("resize", this.layout, {
-        passive: true
+        passive: true,
       });
     }
 
@@ -87,7 +87,7 @@ export class MasonryBinder extends Binder<Options, HTMLElement> {
       // Additional event from images-events binder
       img.removeEventListener("load-always", this.layout);
       img.addEventListener("load-always", this.layout, {
-        once: true
+        once: true,
       });
       // Image size changed
       this.resizeObserver?.observe(img);

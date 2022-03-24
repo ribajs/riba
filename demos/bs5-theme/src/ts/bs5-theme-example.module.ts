@@ -10,7 +10,7 @@ export const Bs5ThemeExampleModule: RibaModule = {
   services: {},
   init() {
     return this;
-  }
+  },
 };
 
 export default Bs5ThemeExampleModule;

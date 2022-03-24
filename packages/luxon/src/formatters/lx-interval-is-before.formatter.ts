@@ -14,5 +14,5 @@ export const LuxonIntervalIsBeforeFormatter: Formatter = {
    */
   read(target: Interval, dateTime: DateTime): boolean {
     return target.isBefore(dateTime);
-  }
+  },
 };

@@ -13,5 +13,5 @@ export const LuxonDayFormatter: Formatter = {
    */
   read(target: DateTime): number {
     return target.day;
-  }
+  },
 };

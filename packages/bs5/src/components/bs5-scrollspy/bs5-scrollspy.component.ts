@@ -1,6 +1,6 @@
 import {
   Bs5ContentsComponent,
-  Scope as Bs5ContentsComponentScope
+  Scope as Bs5ContentsComponentScope,
 } from "../bs5-contents/bs5-contents.component.js";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import template from "./bs5-scrollspy.component.html";
@@ -37,7 +37,7 @@ export class Bs5ScrollspyComponent extends Bs5ContentsComponent {
       "header-parent-selector",
       "offset",
       "offset-bottom",
-      "scroll-offset"
+      "scroll-offset",
     ];
   }
 
@@ -49,7 +49,7 @@ export class Bs5ScrollspyComponent extends Bs5ContentsComponent {
     offset: 0,
     offsetBottom: 0,
     scrollOffset: 0,
-    anchors: []
+    anchors: [],
   };
 
   constructor() {

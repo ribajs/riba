@@ -21,12 +21,12 @@ export const uploadFileExists = async (filename: string) => {
   const bitbucket = new Bitbucket({
     auth: {
       username,
-      password
-    }
+      password,
+    },
   });
   const files = await bitbucket.repositories.listDownloads({
     repo_slug,
-    workspace
+    workspace,
   });
 
   // TODO implement pagination?
@@ -58,8 +58,8 @@ export const uploadFile = async (filePath: string) => {
   const bitbucket = new Bitbucket({
     auth: {
       username,
-      password
-    }
+      password,
+    },
   });
 
   const form = new FormData();
@@ -70,7 +70,7 @@ export const uploadFile = async (filePath: string) => {
     repo_slug,
     workspace,
     // WORAROUND
-    _body: form as unknown as globalThis.FormData
+    _body: form as unknown as globalThis.FormData,
   });
 
   // WORKAROUND
@@ -96,8 +96,8 @@ export const getDownloadFileUrl = async (filename: string): Promise<string> => {
   const bitbucket = new Bitbucket({
     auth: {
       username,
-      password
-    }
+      password,
+    },
   });
 
   let url: string;
@@ -106,7 +106,7 @@ export const getDownloadFileUrl = async (filename: string): Promise<string> => {
     const result = await bitbucket.repositories.getDownload({
       repo_slug,
       workspace,
-      filename
+      filename,
     });
     url = result.url;
   } catch (error) {

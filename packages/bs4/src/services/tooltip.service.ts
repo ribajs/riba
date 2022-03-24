@@ -12,13 +12,13 @@ import {
   getTransitionDurationFromElement,
   isElement,
   noop,
-  typeCheckConfig
+  typeCheckConfig,
 } from "../helper/utils.js";
 
 import {
   classOf,
   getUID,
-  getElementFromEvent
+  getElementFromEvent,
 } from "@ribajs/utils/src/index.js";
 import { sanitizeHtml } from "../helper/sanitizer.js";
 import { setData, getData, removeData } from "../helper/dom/data.js";
@@ -29,7 +29,7 @@ import { findOne } from "../helper/dom/selector-engine.js";
 import {
   TooltipOptions,
   TooltipTitleFn,
-  TooltipOffsetFn
+  TooltipOffsetFn,
 } from "./../interfaces/tooltip-options.js";
 
 /**
@@ -62,7 +62,7 @@ const DefaultType = {
   sanitize: "boolean",
   sanitizeFn: "(null|function)",
   allowList: "object",
-  popperConfig: "(null|object)"
+  popperConfig: "(null|object)",
 };
 
 const AttachmentMap = {
@@ -70,7 +70,7 @@ const AttachmentMap = {
   TOP: "top",
   RIGHT: "right",
   BOTTOM: "bottom",
-  LEFT: "left"
+  LEFT: "left",
 };
 
 const Default: TooltipOptions = {
@@ -92,7 +92,7 @@ const Default: TooltipOptions = {
   sanitize: true,
   sanitizeFn: null,
   allowList: DEFAULT_ALLOWLIST,
-  popperConfig: null
+  popperConfig: null,
 };
 
 const Event = {
@@ -105,7 +105,7 @@ const Event = {
   FOCUSIN: `focusin${EVENT_KEY}`,
   FOCUSOUT: `focusout${EVENT_KEY}`,
   MOUSEENTER: `mouseenter${EVENT_KEY}`,
-  MOUSELEAVE: `mouseleave${EVENT_KEY}`
+  MOUSELEAVE: `mouseleave${EVENT_KEY}`,
 };
 
 const CLASS_NAME_FADE = "fade";
@@ -155,7 +155,7 @@ export class TooltipService {
     TRIGGER_HOVER,
     TRIGGER_FOCUS,
     TRIGGER_CLICK,
-    TRIGGER_MANUAL
+    TRIGGER_MANUAL,
   };
   private _isEnabled = true;
   private _timeout = 0;
@@ -519,26 +519,26 @@ export class TooltipService {
       modifiers: {
         offset: this._getOffset(),
         flip: {
-          behavior: this.config.fallbackPlacement
+          behavior: this.config.fallbackPlacement,
         },
         arrow: {
-          element: `.${TooltipService.NAME}-arrow`
+          element: `.${TooltipService.NAME}-arrow`,
         },
         preventOverflow: {
-          boundariesElement: this.config.boundary
-        }
+          boundariesElement: this.config.boundary,
+        },
       },
       onCreate: (data: any) => {
         if (data.originalPlacement !== data.placement) {
           this._handlePopperPlacementChange(data);
         }
       },
-      onUpdate: (data: any) => this._handlePopperPlacementChange(data)
+      onUpdate: (data: any) => this._handlePopperPlacementChange(data),
     };
 
     return {
       ...defaultBsConfig,
-      ...this.config.popperConfig
+      ...this.config.popperConfig,
     };
   }
 
@@ -556,7 +556,7 @@ export class TooltipService {
           ...((this.config.offset as TooltipOffsetFn)(
             data.offsets,
             this.element
-          ) || {})
+          ) || {}),
         };
 
         return data;
@@ -639,7 +639,7 @@ export class TooltipService {
       this.config = {
         ...this.config,
         trigger: "manual",
-        selector: ""
+        selector: "",
       };
     } else {
       this._fixTitle();
@@ -773,13 +773,13 @@ export class TooltipService {
     config = {
       ...TooltipService.Default,
       ...dataAttributes,
-      ...(typeof config === "object" && config ? config : {})
+      ...(typeof config === "object" && config ? config : {}),
     };
 
     if (typeof config.delay === "number") {
       config.delay = {
         show: config.delay,
-        hide: config.delay
+        hide: config.delay,
       };
     }
 

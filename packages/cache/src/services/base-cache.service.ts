@@ -1,7 +1,7 @@
 /**
  * BaseCache it's a simple static cache
  */
-class BaseCache<T = any,> {
+class BaseCache<T = any> {
   /**
    * The Object that keeps all the key value information
    */

@@ -11,7 +11,7 @@ export class ExtrasScrollEventsExampleComponent extends Component {
   protected touchZoneElement: HTMLDivElement | null = null;
 
   public scope: any = {
-    log: this.log
+    log: this.log,
   };
 
   constructor() {

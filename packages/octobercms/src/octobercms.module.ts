@@ -21,5 +21,5 @@ export const octobercmsModule: RibaModule<OctobercmsModuleOptions> = {
   init(options = {}) {
     services.OctobercmsService.setSingleton(options);
     return this;
-  }
+  },
 };

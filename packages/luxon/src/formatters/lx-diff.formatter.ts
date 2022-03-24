@@ -21,5 +21,5 @@ export const LuxonDiffFormatter: Formatter = {
     opts?: DiffOptions
   ): Duration {
     return target.diff(otherDateTime, unit, opts);
-  }
+  },
 };

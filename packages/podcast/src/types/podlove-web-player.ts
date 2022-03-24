@@ -27,7 +27,7 @@ declare global {
     podlovePlayer?: (
       selector: string | Node,
       episode: string | PodloveWebPlayerEpisode,
-      configuration: string | any, // TODO configuration type
+      configuration: string | any // TODO configuration type
     ) => Promise<PodloveWebPlayerStore>;
   }
 }

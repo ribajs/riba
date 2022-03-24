@@ -19,5 +19,5 @@ export const LuxonHasSameFormatter: Formatter = {
     unit: keyof DurationObjectUnits
   ): boolean {
     return target.hasSame(otherDateTime, unit);
-  }
+  },
 };

@@ -2,7 +2,7 @@ import { HttpService } from "@ribajs/core";
 import Debug from "debug";
 import {
   Article,
-  ShopifyApiArticleService as _ShopifyApiArticleService
+  ShopifyApiArticleService as _ShopifyApiArticleService,
 } from "@ribajs/shopify-tda";
 
 export class ShopifyApiArticleService extends _ShopifyApiArticleService {

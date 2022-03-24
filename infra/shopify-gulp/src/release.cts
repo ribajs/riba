@@ -2,12 +2,14 @@ import gulp from "gulp";
 import gutil from "gulp-util";
 import { compressForStore } from "./includes/release.cjs";
 import { promptInput, promptYesNo } from "./includes/prompts.cjs";
-import { createStoreTheme, getOldestEnvTheme ,
+import {
+  createStoreTheme,
+  getOldestEnvTheme,
   generateEnvLiveThemeConfig,
   generateEnvYoungestThemeConfig,
   getStoreThemes,
   print as printTheme,
-  remove as deleteTheme
+  remove as deleteTheme,
 } from "./includes/theme.cjs";
 import messages from "./includes/messages.cjs";
 import { Models } from "shopify-admin-api";
@@ -21,7 +23,7 @@ import {
   config,
   getYamlConfig,
   getReleaseZipFilename,
-  getReleaseName
+  getReleaseName,
 } from "./includes/config.cjs";
 import { ThemeConfigByEnv } from "./types/index.cjs";
 import "./theme.cjs"; // import theme tasks

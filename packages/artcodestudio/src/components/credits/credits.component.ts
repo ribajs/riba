@@ -20,7 +20,7 @@ export class ArtCodeCreditsComponent extends Component {
     popupVisible: false,
     toggle: this.toggle,
     align: "top",
-    iconSrc: "images/pixelherz.svg"
+    iconSrc: "images/pixelherz.svg",
   };
 
   constructor() {

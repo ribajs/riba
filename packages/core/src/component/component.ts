@@ -161,7 +161,7 @@ export abstract class Component extends BasicComponent {
     const data: ComponentLifecycleEventData = {
       tagName: this.tagName.toLowerCase(),
       // scope: this.scope,
-      component: this
+      component: this,
       // id: this.id,
     };
     return data;
@@ -270,7 +270,7 @@ export abstract class Component extends BasicComponent {
           );
         }
         return fn.apply(self, args);
-      }
+      },
     };
   }
 
@@ -299,7 +299,7 @@ export abstract class Component extends BasicComponent {
           fnArgs.push(binding);
           return fn.apply(self, fnArgs);
         };
-      }
+      },
     };
   }
 
@@ -342,8 +342,8 @@ export abstract class Component extends BasicComponent {
         handler: this.eventHandler(this),
         formatters: {
           call: this.callFormatterHandler(this),
-          args: this.argsFormatterHandler(this)
-        }
+          args: this.argsFormatterHandler(this),
+        },
       });
 
       if (viewOptions) {

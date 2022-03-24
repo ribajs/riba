@@ -8,5 +8,5 @@ export const capitalizeFormatter: Formatter = {
   name: "capitalize",
   read(str: string) {
     return capitalize(str);
-  }
+  },
 };

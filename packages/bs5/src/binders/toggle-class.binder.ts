@@ -44,7 +44,7 @@ export class ToggleClassBinder extends Binder<string, HTMLButtonElement> {
     this.state = "removed";
     el.dispatchEvent(
       new CustomEvent(TOGGLE_CLASS.elEventNames.removed, {
-        detail: { className }
+        detail: { className },
       })
     );
     this.triggerState();
@@ -57,7 +57,7 @@ export class ToggleClassBinder extends Binder<string, HTMLButtonElement> {
     this.state = "added";
     el.dispatchEvent(
       new CustomEvent(TOGGLE_CLASS.elEventNames.added, {
-        detail: { className }
+        detail: { className },
       })
     );
     this.triggerState();

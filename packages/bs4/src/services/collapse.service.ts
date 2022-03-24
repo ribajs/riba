@@ -11,7 +11,7 @@ import {
   reflow,
   getElementFromSelector,
   typeCheckConfig,
-  isElement
+  isElement,
 } from "../helper/utils.js";
 import { one, trigger } from "../helper/dom/event-handler.js";
 import * as SelectorEngine from "../helper/dom/selector-engine.js";
@@ -35,12 +35,12 @@ export const EVENT_KEY = `.${DATA_KEY}`;
 
 export const Default = {
   toggle: true,
-  parent: ""
+  parent: "",
 };
 
 export const DefaultType = {
   toggle: "boolean",
-  parent: "(string|element)"
+  parent: "(string|element)",
 };
 
 export const EVENT_SHOW = `show${EVENT_KEY}`;
@@ -344,7 +344,7 @@ export class CollapseService {
   _getConfig(config: Partial<Config>): Config {
     config = {
       ...Default,
-      ...config
+      ...config,
     };
     config.toggle = Boolean(config.toggle); // Coerce string values
     typeCheckConfig(NAME, config, DefaultType);
@@ -420,7 +420,7 @@ export class CollapseService {
     const _config: Config = {
       ...Default,
       ...element.dataset,
-      ...(typeof config === "object" && config ? config : {})
+      ...(typeof config === "object" && config ? config : {}),
     };
 
     if (!data && _config.toggle && /show|hide/.test(config)) {

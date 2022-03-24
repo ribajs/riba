@@ -13,5 +13,5 @@ export const LuxonMonthShortFormatter: Formatter = {
    */
   read(target: DateTime): string {
     return target.monthShort;
-  }
+  },
 };

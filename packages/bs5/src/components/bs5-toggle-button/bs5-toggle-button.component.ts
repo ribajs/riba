@@ -57,7 +57,7 @@ export class Bs5ToggleButtonComponent extends Component {
     toggle: this.toggle,
     state: "undefined",
     isActive: true,
-    isClosed: false
+    isClosed: false,
   };
 
   constructor() {

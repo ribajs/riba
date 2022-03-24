@@ -11,7 +11,7 @@ import {
   getTransitionDurationFromElement,
   emulateTransitionEnd,
   typeCheckConfig,
-  reflow
+  reflow,
 } from "../helper/utils.js";
 import { setData, getData, removeData } from "../helper/dom/data.js";
 import { on, one, off, trigger } from "../helper/dom/event-handler.js";
@@ -41,14 +41,14 @@ export const Default: Config = {
   backdrop: true,
   keyboard: true,
   focus: true,
-  show: true
+  show: true,
 };
 
 export const DefaultType = {
   backdrop: "(boolean|string)",
   keyboard: "boolean",
   focus: "boolean",
-  show: "boolean"
+  show: "boolean",
 };
 
 export const EVENT_HIDE = `hide${EVENT_KEY}`;
@@ -131,7 +131,7 @@ export class ModalService {
     }
 
     const showEvent = trigger(this._element, EVENT_SHOW, {
-      relatedTarget
+      relatedTarget,
     });
 
     if (this._isShown || showEvent.defaultPrevented) {
@@ -248,7 +248,7 @@ export class ModalService {
   _getConfig(config: Config): Config {
     config = {
       ...Default,
-      ...config
+      ...config,
     };
     typeCheckConfig(NAME, config, DefaultType);
     return config;
@@ -295,7 +295,7 @@ export class ModalService {
 
       this._isTransitioning = false;
       trigger(this._element, EVENT_SHOWN, {
-        relatedTarget
+        relatedTarget,
       });
     };
 

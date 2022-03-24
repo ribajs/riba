@@ -75,7 +75,7 @@ export class DataScrollPositionYBinder extends Binder<
     // Watch new element for scroll event
     if (this.watchScrollOnElement) {
       this.watchScrollOnElement.addEventListener("scroll", this.onScroll, {
-        passive: true
+        passive: true,
       });
     }
 

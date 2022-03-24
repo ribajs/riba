@@ -58,28 +58,28 @@ export class ShopifyLoginFormComponent extends Component {
     form: {
       customer: {
         email: "",
-        password: ""
-      }
+        password: "",
+      },
     },
     loginCustomer: {
       validation: {
-        valid: false
-      }
+        valid: false,
+      },
     },
     createCustomer: {
       validation: {
-        valid: false
-      }
+        valid: false,
+      },
     },
     recoverCustomer: {
       validation: {
-        valid: false
-      }
+        valid: false,
+      },
     },
     login: this.login,
     create: this.create,
     recover: this.recover,
-    recoverBack: this.recoverBack
+    recoverBack: this.recoverBack,
   };
 
   constructor() {

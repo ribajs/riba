@@ -19,5 +19,5 @@ export const LuxonToFormatFormatter: Formatter = {
     opts: LocaleOptions & Intl.DateTimeFormatOptions
   ): string {
     return target.toFormat(fmt, opts);
-  }
+  },
 };

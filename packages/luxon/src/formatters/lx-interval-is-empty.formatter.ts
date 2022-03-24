@@ -13,5 +13,5 @@ export const LuxonIntervalIsEmptyFormatter: Formatter = {
    */
   read(target: Interval): boolean {
     return target.isEmpty();
-  }
+  },
 };

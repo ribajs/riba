@@ -13,5 +13,5 @@ export const LuxonIsInLeapYearFormatter: Formatter = {
    */
   read(target: DateTime): boolean {
     return target.isInLeapYear;
-  }
+  },
 };

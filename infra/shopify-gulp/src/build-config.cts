@@ -20,7 +20,7 @@ const processConfig = (file: string) => {
     .pipe(
       size({
         showFiles: true,
-        pretty: true
+        pretty: true,
       })
     )
     .pipe(rename("config.yml"))

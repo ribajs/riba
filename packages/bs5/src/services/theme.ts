@@ -5,7 +5,7 @@ import { Bs5Service } from "./bs5.service.js";
 import type {
   ThemeChoice,
   ThemeData,
-  ThemeChangedCallback
+  ThemeChangedCallback,
 } from "../types/index.js";
 
 /**
@@ -94,7 +94,7 @@ export class ThemeService {
       systemIsLight: true,
       bySystem: true,
       byUser: false,
-      choice: "theme-os"
+      choice: "theme-os",
     };
   }
 
@@ -105,7 +105,7 @@ export class ThemeService {
     const newValue = this.get();
     this.eventDispatcher.trigger("theme-change", {
       oldValue,
-      newValue
+      newValue,
     });
     return newValue;
   }

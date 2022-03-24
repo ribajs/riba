@@ -16,13 +16,13 @@ export class AttributeBinder extends Binder<any, HTMLElement> {
     const {
       newValue: newValueFormatted,
       oldValue,
-      changed
+      changed,
     } = setAttribute(el, this.type, newValue);
 
     if (changed) {
       el.dispatchEvent(
         new CustomEvent("binder-changed", {
-          detail: { name: this.type, newValue: newValueFormatted, oldValue }
+          detail: { name: this.type, newValue: newValueFormatted, oldValue },
         } as BinderAttributeChangedEvent)
       );
     }

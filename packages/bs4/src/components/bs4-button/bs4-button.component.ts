@@ -16,7 +16,7 @@ export class Bs4ButtonComponent extends Component {
 
   public scope: Scope = {
     animationClass: "btn-animation-start",
-    onClick: this.onClick.bind(this)
+    onClick: this.onClick.bind(this),
   };
 
   constructor() {

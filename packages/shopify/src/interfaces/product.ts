@@ -10,7 +10,7 @@ export declare enum ShopifyProductWeightUnit {
   GRAMS = "g",
   KILOGRAMS = "kg",
   OUNCES = "oz",
-  POUNDS = "lb"
+  POUNDS = "lb",
 }
 
 export declare interface ShopifyProductVariant {

@@ -94,7 +94,7 @@ export const config: Config = {
     config: "src/config/*",
     layout: "src/layout/*",
     favicons: "src/favicons/*",
-    schema: "./src/schema/*.json"
+    schema: "./src/schema/*.json",
   },
 
   dist: {
@@ -104,7 +104,7 @@ export const config: Config = {
     sections: "theme/sections/",
     layout: "theme/layout/",
     templates: "theme/templates/",
-    locales: "theme/locales/"
+    locales: "theme/locales/",
   },
 
   ribaShopify: {
@@ -119,36 +119,36 @@ export const config: Config = {
       sections: path.resolve(ribaShopifyRoot, "src/sections/") + "/*",
       locales: path.resolve(ribaShopifyRoot, "src/locales/") + "/*",
       config: path.resolve(ribaShopifyRoot, "src/config/") + "/*",
-      layout: path.resolve(ribaShopifyRoot, "src/layout/") + "/*"
-    }
+      layout: path.resolve(ribaShopifyRoot, "src/layout/") + "/*",
+    },
   },
 
   ribaShopifyTda: {
-    root: ribaShopifyTdaRoot
+    root: ribaShopifyTdaRoot,
   },
 
   plugins: {
     cheerio: {
-      run: processSvg
+      run: processSvg,
     },
     svgmin: {
       plugins: [
         {
-          name: "removeTitle"
+          name: "removeTitle",
         },
         {
-          name: "removeDesc"
+          name: "removeDesc",
         },
         {
-          name: "removeAttrs"
+          name: "removeAttrs",
         },
         {
           name: "cleanupIDs",
-          active: false
-        }
-      ]
-    }
-  }
+          active: false,
+        },
+      ],
+    },
+  },
 };
 
 if (ribaShopifyTdaRoot) {
@@ -162,7 +162,7 @@ if (ribaShopifyTdaRoot) {
     sections: path.resolve(ribaShopifyTdaRoot, "src/sections/"),
     locales: path.resolve(ribaShopifyTdaRoot, "src/locales/"),
     config: path.resolve(ribaShopifyTdaRoot, "src/config/"),
-    layout: path.resolve(ribaShopifyTdaRoot, "src/layout/")
+    layout: path.resolve(ribaShopifyTdaRoot, "src/layout/"),
   };
 }
 

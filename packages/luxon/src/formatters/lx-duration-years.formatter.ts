@@ -13,5 +13,5 @@ export const LuxonDurationYearsFormatter: Formatter = {
    */
   read(target: Duration): number {
     return target.years;
-  }
+  },
 };

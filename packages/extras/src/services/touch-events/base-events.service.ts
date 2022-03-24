@@ -18,7 +18,7 @@ export abstract class BaseEventsService {
     extraParameters.target = originalEvent.target;
     // create and dispatch the event
     const event = new CustomEvent(eventName, {
-      detail: extraParameters
+      detail: extraParameters,
     });
     this.el.dispatchEvent(event);
   }

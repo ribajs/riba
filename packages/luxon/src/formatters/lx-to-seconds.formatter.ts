@@ -13,5 +13,5 @@ export const LuxonToSecondsFormatter: Formatter = {
    */
   read(target: DateTime): number {
     return target.toSeconds();
-  }
+  },
 };

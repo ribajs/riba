@@ -18,7 +18,7 @@ interface Scope extends ScopeBase {
   options: Options;
   tags: Tag[];
   fillPopoverOptions: (
-    options: Partial<PopoverOptions>,
+    options: Partial<PopoverOptions>
   ) => Partial<PopoverOptions>;
   triggerOnFocus: (options: Partial<PopoverOptions>) => any;
   onPopoverBound: EventListener;
@@ -49,13 +49,13 @@ export class Bs4TaggedImageComponent extends Component {
     options: {
       popoverOptions: {}, // set container = this in constructor
       multiPopover: false,
-      tagOptions: {}
+      tagOptions: {},
     },
     fillPopoverOptions: (options: Partial<PopoverOptions>) => {
       return {
         ...this.scope.options.popoverOptions,
         ...this.scope.options.tagOptions.popoverOptions,
-        ...options
+        ...options,
       };
     },
     triggerOnFocus: (options: Partial<PopoverOptions>) => {
@@ -65,7 +65,7 @@ export class Bs4TaggedImageComponent extends Component {
     onPopoverBound: this.onPopoverBound.bind(this),
     onPopoverShown: this.onPopoverShown.bind(this),
     onPopoverHidden: this.onPopoverHidden.bind(this),
-    updateTagPositions: debounce(this.updateTagPositions.bind(this))
+    updateTagPositions: debounce(this.updateTagPositions.bind(this)),
   };
 
   /**
@@ -116,7 +116,7 @@ export class Bs4TaggedImageComponent extends Component {
     img.addEventListener("load", this.scope.updateTagPositions);
     img.addEventListener("click", this.scope.onClick);
     window.addEventListener("resize", this.scope.updateTagPositions, {
-      passive: true
+      passive: true,
     });
   }
 
@@ -171,7 +171,7 @@ export class Bs4TaggedImageComponent extends Component {
         popoverOptions: this.scope.fillPopoverOptions({
           title,
           content,
-          html: true
+          html: true,
         }),
         x,
         y,
@@ -179,7 +179,7 @@ export class Bs4TaggedImageComponent extends Component {
         color,
         borderRadius,
         fullSize,
-        smallSize
+        smallSize,
       };
       this.scope.tags.push(tagData);
     }
@@ -224,7 +224,7 @@ export class Bs4TaggedImageComponent extends Component {
         width,
         height,
         naturalWidth,
-        naturalHeight
+        naturalHeight,
       } = img;
       const { clientX, clientY } = e as any;
       let x = clientX - clientLeft;

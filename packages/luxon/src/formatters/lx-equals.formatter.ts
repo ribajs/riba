@@ -14,5 +14,5 @@ export const LuxonEqualsFormatter: Formatter = {
    */
   read(target: DateTime, other: DateTime): boolean {
     return target.equals(other);
-  }
+  },
 };

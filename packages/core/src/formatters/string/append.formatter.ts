@@ -8,5 +8,5 @@ export const appendFormatter: Formatter = {
   name: "append",
   read(a: string, b: string) {
     return a + b;
-  }
+  },
 };

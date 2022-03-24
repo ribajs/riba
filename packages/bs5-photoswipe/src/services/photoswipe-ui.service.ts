@@ -54,7 +54,7 @@ export class PhotoSwipeUI {
     clickToCloseNonZoomable: true,
 
     indexIndicatorSep: " / ",
-    fitControlsWidth: 1200
+    fitControlsWidth: 1200,
   } as Options;
   _blockControlsTap: any;
   _blockControlsTapTimeout: any;
@@ -69,15 +69,15 @@ export class PhotoSwipeUI {
       option: "captionEl",
       onInit: (el: HTMLElement) => {
         this._captionContainer = el;
-      }
+      },
     },
     {
       name: "counter",
       option: "counterEl",
       onInit: (el: HTMLElement) => {
         this._indexIndicator = el;
-      }
-    }
+      },
+    },
   ] as UIElement[];
 
   constructor(
@@ -659,7 +659,7 @@ export class PhotoSwipeUI {
         } else {
           this.enter(el);
         }
-      }
+      },
     };
   }
 }

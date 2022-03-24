@@ -7,11 +7,11 @@ export const simon: PodloveWebPlayerContributor = {
   role: {
     id: "2",
     slug: "guest",
-    title: "Gast"
+    title: "Gast",
   },
   group: {
     id: "2",
     slug: "on-air",
-    title: "On Air"
-  }
+    title: "On Air",
+  },
 };

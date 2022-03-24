@@ -18,5 +18,5 @@ export const setFormatter = {
       obj = value;
     }
     return obj;
-  }
+  },
 };

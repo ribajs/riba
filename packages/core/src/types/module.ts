@@ -3,10 +3,10 @@ import {
   Formatters,
   Components,
   Services,
-  Adapters
+  Adapters,
 } from "./index.js";
 
-export interface RibaModule<O = any,> {
+export interface RibaModule<O = any> {
   /**
    * Binders can be a object of binders named by property key (Binders<any>)
    * or an array of binders with binder and name property (Binder<any>)

@@ -1,8 +1,4 @@
-import {
-  TemplatesComponent,
-  TemplateFunction,
-  ScopeBase
-} from "@ribajs/core";
+import { TemplatesComponent, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { debounce } from "@ribajs/utils/src/control";
 import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
@@ -47,23 +43,23 @@ export class ContentSliderComponent extends TemplatesComponent {
     {
       name: "image-src",
       required: true,
-      type: "string"
+      type: "string",
     },
     {
       name: "active",
       required: false,
-      type: "boolean"
+      type: "boolean",
     },
     {
       name: "index",
-      required: false
+      required: false,
     },
     // Additional optional data
     {
       name: "data",
       required: false,
-      type: "object"
-    }
+      type: "object",
+    },
   ];
 
   static get observedAttributes(): string[] {
@@ -75,7 +71,7 @@ export class ContentSliderComponent extends TemplatesComponent {
       "controls",
       "control-prev-icon-src",
       "control-next-icon-src",
-      "controls-button-classes"
+      "controls-button-classes",
     ];
   }
 
@@ -97,14 +93,14 @@ export class ContentSliderComponent extends TemplatesComponent {
       "col-sm-10",
       "col-md-6",
       "col-lg-5",
-      "col-xl-4"
+      "col-xl-4",
     ],
     inactiveColumnClasses: [
       "col-6",
       "col-sm-6",
       "col-md-2",
       "col-lg-2",
-      "col-xl-2"
+      "col-xl-2",
     ],
     controls: true,
     controlPrevIconSrc: "",
@@ -114,7 +110,7 @@ export class ContentSliderComponent extends TemplatesComponent {
     // Methods
     prev: this.prev,
     next: this.next,
-    goTo: this.goTo
+    goTo: this.goTo,
   };
 
   constructor() {
@@ -229,7 +225,7 @@ export class ContentSliderComponent extends TemplatesComponent {
   protected setInactiveClasses(el: Element) {
     this.removeClasses(el, [
       ...this.scope.activeColumnClasses,
-      this.scope.activeClass
+      this.scope.activeClass,
     ]);
 
     this.addClasses(el, this.scope.inactiveColumnClasses);
@@ -240,7 +236,7 @@ export class ContentSliderComponent extends TemplatesComponent {
 
     this.addClasses(el, [
       ...this.scope.activeColumnClasses,
-      this.scope.activeClass
+      this.scope.activeClass,
     ]);
   }
 

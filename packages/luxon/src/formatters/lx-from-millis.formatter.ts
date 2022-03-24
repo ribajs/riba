@@ -14,5 +14,5 @@ export const LuxonFromMillisFormatter: Formatter = {
    */
   read(milliseconds: number, options: DateTimeOptions): DateTime {
     return DateTime.fromMillis(milliseconds, options);
-  }
+  },
 };

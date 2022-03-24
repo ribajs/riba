@@ -14,5 +14,5 @@ export const AsYearsFormatter: Formatter = {
    */
   read(duration: Duration) {
     return duration.asYears();
-  }
+  },
 };

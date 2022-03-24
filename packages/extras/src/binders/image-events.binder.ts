@@ -21,7 +21,7 @@ export class ImageEventsBinder extends Binder<string, HTMLImageElement> {
   ) {
     this.el.dispatchEvent(
       new CustomEvent(customEventName, {
-        detail: { load, image }
+        detail: { load, image },
       })
     );
   }

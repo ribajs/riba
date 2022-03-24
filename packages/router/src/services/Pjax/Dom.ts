@@ -52,7 +52,7 @@ class Dom {
     return {
       container,
       title,
-      prefetchLinks: prefetchLinkElements
+      prefetchLinks: prefetchLinkElements,
     };
   }
 
@@ -85,7 +85,7 @@ class Dom {
     return {
       container: container,
       title,
-      prefetchLinks: prefetchLinkElements
+      prefetchLinks: prefetchLinkElements,
     };
   }
 

@@ -12,7 +12,7 @@ export class Component2Component extends Component {
 
   public scope: Component2Scope = {
     myInputVal: "",
-    $parent: null
+    $parent: null,
   };
 
   constructor() {

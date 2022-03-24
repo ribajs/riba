@@ -13,5 +13,5 @@ export const LuxonFromObjectFormatter: Formatter = {
    */
   read(object: DateObject): DateTime {
     return DateTime.fromObject(object);
-  }
+  },
 };

@@ -21,5 +21,5 @@ export const defaultFormatter = {
       return value;
     }
     return defaultValue;
-  }
+  },
 };

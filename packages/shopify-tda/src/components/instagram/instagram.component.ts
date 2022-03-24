@@ -27,7 +27,7 @@ export class ShopifyTdaInstagramComponent extends Component {
     openLinks: false,
     limit: 0,
     instagramId: undefined,
-    onTap: this.onTap
+    onTap: this.onTap,
   };
 
   constructor() {

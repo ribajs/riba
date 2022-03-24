@@ -16,7 +16,7 @@ import { config } from "./includes/config.cjs";
 import {
   errorHandler,
   createEventCache,
-  processCache
+  processCache,
 } from "./includes/utilities.cjs";
 import messages from "./includes/messages.cjs";
 
@@ -43,7 +43,7 @@ function processSnippetIcons(files: string[]) {
     .pipe(
       size({
         showFiles: true,
-        pretty: true
+        pretty: true,
       })
     )
     .pipe(gulp.dest(config.dist.snippets));
@@ -74,7 +74,7 @@ const removeSnippetIcons = async (files: string[]) => {
     .pipe(
       size({
         showFiles: true,
-        pretty: true
+        pretty: true,
       })
     );
 };
@@ -99,7 +99,7 @@ function processAssetIcons(files: string[]) {
     .pipe(
       size({
         showFiles: true,
-        pretty: true
+        pretty: true,
       })
     )
     .pipe(gulp.dest(config.dist.assets));
@@ -129,7 +129,7 @@ const removeAssetIcons = async (files: string[]) => {
     .pipe(
       size({
         showFiles: true,
-        pretty: true
+        pretty: true,
       })
     );
 };
@@ -140,7 +140,7 @@ const removeAssetIcons = async (files: string[]) => {
 gulp.task("build:svg:snippet", () => {
   return processSnippetIcons([
     config.src.iconset,
-    config.ribaShopify.src.iconset
+    config.ribaShopify.src.iconset,
   ]);
 });
 
@@ -152,7 +152,7 @@ gulp.task("watch:svg:snippet", () => {
 
   return chokidar
     .watch([config.src.iconset, config.ribaShopify.src.iconset], {
-      ignoreInitial: true
+      ignoreInitial: true,
     })
     .on("all", (event, path) => {
       messages.logFileEvent(event, path);
@@ -167,7 +167,7 @@ gulp.task("watch:svg:snippet", () => {
 gulp.task("build:svg:asset", () => {
   return processAssetIcons([
     config.src.iconset,
-    config.ribaShopify.src.iconset
+    config.ribaShopify.src.iconset,
   ]);
 });
 
@@ -179,7 +179,7 @@ gulp.task("watch:svg:asset", () => {
 
   return chokidar
     .watch([config.src.iconset, config.ribaShopify.src.iconset], {
-      ignoreInitial: true
+      ignoreInitial: true,
     })
     .on("all", (event, path) => {
       messages.logFileEvent(event, path);

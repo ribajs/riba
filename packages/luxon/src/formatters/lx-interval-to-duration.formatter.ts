@@ -19,5 +19,5 @@ export const LuxonIntervalToDurationFormatter: Formatter = {
     opts?: DiffOptions
   ): Duration {
     return target.toDuration(unit, opts);
-  }
+  },
 };

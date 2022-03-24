@@ -54,7 +54,7 @@ export class Bs4ContentsComponent extends Component {
       "find-header-id-depth",
       "header-parent-selector",
       "scroll-offset",
-      "scroll-element"
+      "scroll-element",
     ];
   }
 
@@ -64,7 +64,7 @@ export class Bs4ContentsComponent extends Component {
     findHeaderIdDepth: 1,
     headerParentSelector: undefined,
     scrollOffset: 0,
-    anchors: []
+    anchors: [],
   };
 
   constructor() {
@@ -109,7 +109,7 @@ export class Bs4ContentsComponent extends Component {
         element: headerElement,
         href: "#" + id,
         title: headerElement.innerHTML,
-        childs: []
+        childs: [],
       });
       if (headerElement.parentElement && headersDepth >= headersStart + 1) {
         this.pushHeaders(

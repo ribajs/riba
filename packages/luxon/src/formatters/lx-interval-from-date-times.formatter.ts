@@ -14,5 +14,5 @@ export const LuxonIntervalFromDateTimesFormatter: Formatter = {
    */
   read(start: DateInput, end: DateInput): Interval {
     return Interval.fromDateTimes(start, end);
-  }
+  },
 };

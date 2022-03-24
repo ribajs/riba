@@ -14,5 +14,5 @@ export const LuxonDurationReconfigureFormatter: Formatter = {
    */
   read(target: Duration, objectPattern: DurationOptions): Duration {
     return target.reconfigure(objectPattern);
-  }
+  },
 };

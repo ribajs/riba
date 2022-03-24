@@ -35,7 +35,7 @@ export class Bs5ToastItemComponent extends Component {
     onHidden: this.onHidden.bind(this),
     index: -1,
     dismiss: this.dismiss.bind(this),
-    toast: undefined
+    toast: undefined,
   };
 
   constructor() {
@@ -59,12 +59,12 @@ export class Bs5ToastItemComponent extends Component {
       this.toastService = new Toast(toastEl, {
         delay: toast.delay !== undefined ? toast.delay : 5000,
         autohide: toast.autoHide !== undefined ? toast.autoHide : true,
-        animation: toast.animation !== undefined ? toast.animation : true
+        animation: toast.animation !== undefined ? toast.animation : true,
       });
 
       // Call onHidden on hidden event once
       toastEl.addEventListener(Toast.EVENT_HIDDEN, this.scope.onHidden, {
-        once: true
+        once: true,
       });
 
       // show toast using the `ToastService`

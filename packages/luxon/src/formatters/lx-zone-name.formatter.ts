@@ -13,5 +13,5 @@ export const LuxonZoneNameFormatter: Formatter = {
    */
   read(target: DateTime): string {
     return target.zoneName;
-  }
+  },
 };

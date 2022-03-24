@@ -14,5 +14,5 @@ export const LuxonReconfigureFormatter: Formatter = {
    */
   read(target: DateTime, properties: LocaleOptions): DateTime {
     return target.reconfigure(properties);
-  }
+  },
 };

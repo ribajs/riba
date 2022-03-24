@@ -14,5 +14,5 @@ export const leafletModule: RibaModule<LeafletModuleOptions> = {
   init(options = {}) {
     services.LeafletService.setSingleton(options);
     return this;
-  }
+  },
 };

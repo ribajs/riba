@@ -3,7 +3,7 @@ import {
   ShopifyNestApiExplorerComponent,
   APIParam,
   APIListItem,
-  Scope
+  Scope,
 } from "../api-explorer/api-explorer.component.js";
 
 import { InstagramApiService } from "../../services/instagram-api.service.js";
@@ -19,29 +19,29 @@ export class ShopifyNestApiExplorerInstagramComponent extends ShopifyNestApiExpl
       label: "Freestyle",
       url: "/instagram/api/user/accounts",
       short_desc: "components.apiExplorer.freestyle.short_desc",
-      freestyle: true
+      freestyle: true,
     },
     {
       // Recive your facebook user
       label: "/instagram/api/user",
       url: "/instagram/api/user",
       short_desc: "components.apiExplorer.instagram.user.short_desc",
-      roles: ["shopify-staff-member"]
+      roles: ["shopify-staff-member"],
     },
     {
       // Recive a list of your instagram accounts
       label: "/instagram/api/user/accounts",
       url: "/instagram/api/user/accounts",
       short_desc: "components.apiExplorer.instagram.user.accounts.short_desc",
-      roles: ["shopify-staff-member"]
+      roles: ["shopify-staff-member"],
     },
     {
       // Recive a list of your instagram media
       label: "/instagram/api/media/:instagramBusinessAccountID",
       url: "/instagram/api/media/:instagramBusinessAccountID?limit=0",
       short_desc: "components.apiExplorer.instagram.media.short_desc",
-      roles: []
-    }
+      roles: [],
+    },
   ];
 
   public scope: Scope = {
@@ -57,7 +57,7 @@ export class ShopifyNestApiExplorerInstagramComponent extends ShopifyNestApiExpl
     selectApi: this.selectApi,
     selectFreestyleApi: this.selectFreestyleApi,
     selectApiParamValue: this.selectApiParamValue,
-    selectApiQueryValue: this.selectApiQueryValue
+    selectApiQueryValue: this.selectApiQueryValue,
   };
 
   static get observedAttributes(): string[] {

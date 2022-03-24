@@ -14,5 +14,5 @@ export const LuxonSetLocaleFormatter: Formatter = {
    */
   read(target: DateTime, locale: string): DateTime {
     return target.setLocale(locale);
-  }
+  },
 };

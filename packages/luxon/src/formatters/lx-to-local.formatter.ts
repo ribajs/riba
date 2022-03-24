@@ -14,5 +14,5 @@ export const LuxonToLocalFormatter: Formatter = {
    */
   read(target: DateTime): DateTime {
     return target.toLocal();
-  }
+  },
 };

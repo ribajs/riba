@@ -13,5 +13,5 @@ export const LuxonDurationWeeksFormatter: Formatter = {
    */
   read(target: Duration): number {
     return target.weeks;
-  }
+  },
 };

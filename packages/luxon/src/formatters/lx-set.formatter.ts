@@ -15,5 +15,5 @@ export const LuxonSetFormatter: Formatter = {
    */
   read(target: DateTime, values: DateObjectUnits): DateTime {
     return target.set(values);
-  }
+  },
 };

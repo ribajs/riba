@@ -13,5 +13,5 @@ export const momentModule: RibaModule<MomentModuleOptions> = {
   init(options = {}) {
     services.MomentService.setSingleton(options);
     return this;
-  }
+  },
 };

@@ -13,5 +13,5 @@ export const LuxonDurationIsDurationFormatter: Formatter = {
    */
   read(o: any): boolean {
     return Duration.isDuration(o);
-  }
+  },
 };

@@ -19,7 +19,7 @@ export class ShopifyNestShopInputComponent extends Component {
 
   public scope: Scope = {
     shop: "",
-    submitted: false
+    submitted: false,
   };
 
   constructor() {

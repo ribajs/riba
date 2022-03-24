@@ -27,12 +27,12 @@ export const LuxonToMomentCalendarFormatter: Formatter = {
         month: "2-digit",
         day: "2-digit",
         hour: "2-digit",
-        minute: "2-digit"
+        minute: "2-digit",
       });
     } else {
       const hourMinute = target.toLocaleString({
         hour: "2-digit",
-        minute: "2-digit"
+        minute: "2-digit",
       });
       if (Math.abs(daysDiff) <= 2) {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -43,5 +43,5 @@ export const LuxonToMomentCalendarFormatter: Formatter = {
         target.toLocaleString({ weekday: "long" }) + ", " + hourMinute
       );
     }
-  }
+  },
 };

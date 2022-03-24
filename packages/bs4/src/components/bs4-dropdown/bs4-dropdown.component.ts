@@ -5,7 +5,7 @@ export class Bs4DropdownComponent extends Component {
   public static tagName = "bs4-dropdown";
 
   public scope: any = {
-    toggle: this.toggle
+    toggle: this.toggle,
   };
 
   protected dropdownService?: DropdownService;

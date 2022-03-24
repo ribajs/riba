@@ -36,7 +36,7 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
 
   public scope: Scope = {
     simulate: this.simulate,
-    langcode: "en"
+    langcode: "en",
   };
 
   constructor() {

@@ -18,7 +18,7 @@ let webpackCheckoutConfigPath: string | null = null;
 const webpackConfigFilenames = ["webpack.config.js", "webpack.config.cjs"];
 const webpackCheckoutConfigFilenames = [
   "webpack-checkout.config.js",
-  "webpack-checkout.config.cjs"
+  "webpack-checkout.config.cjs",
 ];
 
 // webpack.config
