@@ -13,8 +13,8 @@ export declare class EventDispatcher {
     protected _namespace: string;
     get namespace(): string;
     constructor(namespace?: string);
-    once(eventName: string, cb: EventCallback, thisContext?: any): void;
-    on(eventName: string, cb: EventCallback, thisContext?: any): void;
-    off(eventName?: string, cb?: EventCallback, thisContext?: any): void;
-    trigger(eventName: string, ...args: any[]): void;
+    once(eventName: string, cb: EventCallback, thisContext?: any): this;
+    on(eventName: string, cb: EventCallback, thisContext?: any): this;
+    off(eventName?: string, cb?: EventCallback, thisContext?: any): this;
+    trigger(eventName: string, ...args: any[]): this;
 }

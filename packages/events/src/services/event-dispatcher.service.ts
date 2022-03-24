@@ -102,6 +102,7 @@ export class EventDispatcher {
     } else {
       this.eventsOnce[eventName].push(cb);
     }
+    return this;
   }
 
   /**
@@ -124,7 +125,9 @@ export class EventDispatcher {
     } else {
       this.events[eventName].push(cb);
     }
+    return this;
   }
+
   /**
    * Unbind event
    *
@@ -136,7 +139,7 @@ export class EventDispatcher {
     if (eventName === undefined) {
       this.events = {};
       this.eventsOnce = {};
-      return;
+      return this;
     }
     if (cb !== undefined) {
       if (thisContext !== undefined) {
@@ -178,6 +181,7 @@ export class EventDispatcher {
       this.events[eventName] = [];
       this.eventsOnce[eventName] = [];
     }
+    return this;
   }
 
   /**
@@ -207,5 +211,6 @@ export class EventDispatcher {
         }
       }
     }
+    return this;
   }
 }
