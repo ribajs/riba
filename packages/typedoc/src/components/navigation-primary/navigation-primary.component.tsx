@@ -109,17 +109,17 @@ export class NavigationPrimaryComponent extends Component {
                 <input type="search" class="form-control" placeholder="Filter..." aria-label="Filter" rv-value="searchPattern" rv-on-input="search" rv-on-cut="search" rv-on-paste="search" />
               </div>
               <div class="scrollbar-y-scroll scrollbar-primary">
+                <div class="dropdown-header">Modules</div>
                 <div rv-show="searchPattern | size" rv-each-result="results">
                   <div class="dropdown-item cursor-pointer" rv-add-class="result.item.classNames" rv-route-class-active="result.item.href" rv-route-class-parent-active="result.item.parent.href" rv-on-click="$parent.$parent.onModuleSelect | args result.item">
                     <a rv-href="result.item.href" rv-text="result.item.parent.name"></a>
                   </div>
                 </div>
                 <div rv-if="results | size | eq 0" rv-show="searchPattern | size" >
-                  <div class="dropdown-item"><span>No result</span></div>
+                  <div class="dropdown-item">No result</div>
                 </div>
                 <div rv-hide="searchPattern | size" rv-each-item="items">
                   <div class="dropdown-item cursor-pointer" rv-add-class="item.classNames" rv-route-class-active="item.href" rv-route-class-parent-active="item.parent.href" rv-on-click="$parent.$parent.onModuleSelect | args item">
-                    <span class="text-primary" rv-text="item.label"></span>
                     <a rv-href="item.href" rv-text="item.parent.name"></a>
                   </div>
                 </div>
