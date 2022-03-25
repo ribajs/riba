@@ -1,38 +1,41 @@
-export const KEYBOARD_LAYOUT_DEFAULT = [
-  "` 1 2 3 4 5 6 7 8 9 0 - = {bksp}",
-  "{tab} q w e r t y u i o p [ ] \\",
-  "{lock} a s d f g h j k l ; ' {enter}",
-  "{shift} z x c v b n m , . / {shift}",
-  ".com @ {space}",
+import { KeyboardLayoutKey } from "../types/index.js";
+
+export const KEYBOARD_LAYOUT_DEFAULT: KeyboardLayoutKey[][] = [
+  "` 1 2 3 4 5 6 7 8 9 0 - = {bksp}".split(" ") as KeyboardLayoutKey[],
+  "{tab} q w e r t y u i o p [ ] \\".split(" ") as KeyboardLayoutKey[],
+  "{capl} a s d f g h j k l ; ' {enter}".split(" ") as KeyboardLayoutKey[],
+  "{sftl} z x c v b n m , . / {sftr}".split(" ") as KeyboardLayoutKey[],
+  ".com @ {space}".split(" ") as KeyboardLayoutKey[],
 ];
 
 export const KEYBOARD_LAYOUT_SHIFT = [
-  "~ ! @ # $ % ^ & * ( ) _ + {bksp}",
-  "{tab} Q W E R T Y U I O P { } |",
-  '{lock} A S D F G H J K L : " {enter}',
-  "{shift} Z X C V B N M < > ? {shift}",
-  ".com @ {space}",
+  "~ ! @ # $ % ^ & * ( ) _ + {bksp}".split(" ") as KeyboardLayoutKey[],
+  "{tab} Q W E R T Y U I O P { } |".split(" ") as KeyboardLayoutKey[],
+  '{capl} A S D F G H J K L : " {enter}'.split(" ") as KeyboardLayoutKey[],
+  "{sftl} Z X C V B N M < > ? {sftr}".split(" ") as KeyboardLayoutKey[],
+  ".com @ {space}".split(" ") as KeyboardLayoutKey[],
 ];
 
 /**
  * Default button display labels
  * TODO: Use i18n module for this
  */
-export const KEYBOARD_LAYOUT_LABELS_DEFAULT = {
+export const KEYBOARD_LAYOUT_LABELS_DEFAULT: {
+  [layoutkey in KeyboardLayoutKey]?: string;
+} = {
   "{bksp}": "backspace",
   "{enter}": "enter",
-  "{shift}": "shift",
-  "{shiftleft}": "shift",
-  "{shiftright}": "shift",
-  "{alt}": "alt",
-  "{s}": "shift",
+  "{sftl}": "shift",
+  "{sftr}": "shift",
+  "{altl}": "alt",
+  "{altr}": "alt",
   "{tab}": "tab",
-  "{lock}": "caps",
-  "{capslock}": "caps",
-  "{accept}": "Submit",
+  "{capl}": "caps",
+  "{controlleft}": "cmd", // TODO:
+  "{controlright}": "cmd", // TODO:
+  // TODO: "{accept}": "Submit",
   "{space}": " ",
-  "{//}": " ",
-  "{esc}": "esc",
+  // TODO: "{esc}": "esc",
   "{escape}": "esc",
   "{f1}": "f1",
   "{f2}": "f2",
@@ -52,21 +55,22 @@ export const KEYBOARD_LAYOUT_LABELS_DEFAULT = {
   "{arrowleft}": "←",
   "{arrowdown}": "↓",
   "{arrowright}": "→",
-  "{prtscr}": "print",
+  // TODO: "{prtscr}": "print",
+  "{printscreen}": "print", // TODO:
   "{scrolllock}": "scroll",
   "{pause}": "pause",
   "{insert}": "ins",
   "{home}": "home",
   "{pageup}": "up",
   "{delete}": "del",
-  "{forwarddelete}": "del",
+  // TODO: "{forwarddelete}": "del",
   "{end}": "end",
   "{pagedown}": "down",
   "{numpadmultiply}": "*",
   "{numpadsubtract}": "-",
   "{numpadadd}": "+",
-  "{numpadenter}": "enter",
-  "{period}": ".",
+  // TODO: "{numpadenter}": "enter",
+  // TODO: "{period}": ".",
   "{numpaddecimal}": ".",
   "{numpad0}": "0",
   "{numpad1}": "1",

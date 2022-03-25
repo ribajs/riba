@@ -1,9 +1,11 @@
 import { AccessibilityModuleOptions } from "../types/index.js";
 import { EventDispatcher } from "@ribajs/events";
-import { KEYBOARD_KEYS } from "../constants/keyboard-keys.js";
+import { KEYBOARD_KEY_DESCS } from "../constants/keyboard-key-descs.js";
 import type {
   KeyboardEventName,
-  KeyboardKey,
+  KeyboardLayoutKey,
+  KeyboardKeyDesc,
+  KeyboardKeyData,
   KeyboardEventCallback,
 } from "../types/index.js";
 
@@ -166,10 +168,11 @@ export class KeyboardService {
     this._options = options;
 
     this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
 
     this.setEventListeners();
+
+    this.printKeyboardTypeDesc();
   }
 
   public static getSingleton() {
@@ -190,18 +193,111 @@ export class KeyboardService {
     return this.instance;
   }
 
-  protected getEventName(event: KeyboardEvent): KeyboardEventName {
+  public getEventName(
+    event: KeyboardEvent | KeyboardKeyDesc
+  ): KeyboardEventName {
     return (event.code || event.key) as KeyboardEventName;
   }
 
-  protected getKeyData(eventName: KeyboardEventName): KeyboardKey {
-    const keyData = KEYBOARD_KEYS.find(
-      (key) => key.code === eventName || key.key === eventName
-    );
-    if (!keyData) {
-      throw new Error(`No key data found for "${eventName}"!`);
+  /**
+   * Transforms a KeyboardEvent's "key.code" string into a simple-keyboard layout format
+   * @param  {object} event The KeyboardEvent
+   */
+  public getLayoutKey(
+    event: KeyboardEvent | KeyboardKeyDesc
+  ): KeyboardLayoutKey {
+    let output = "";
+    const keyId = event.code || event.key;
+
+    if (
+      keyId?.includes("Numpad") ||
+      keyId?.includes("Shift") ||
+      keyId?.includes("Space") ||
+      keyId?.includes("Backspace") ||
+      keyId?.includes("Control") ||
+      keyId?.includes("Alt") ||
+      keyId?.includes("Meta")
+    ) {
+      output = event.code || "";
+    } else {
+      output = event.key || "";
+    }
+
+    output = output.length > 1 ? `{${output?.toLowerCase()}}` : output;
+
+    switch (output) {
+      case "{backspace}":
+        output = "{bksp}";
+        break;
+      case "{shiftleft}":
+        output = "{sftl}";
+        break;
+      case "{shiftright}":
+        output = "{sftr}";
+        break;
+      case "{altleft}":
+        output = "{altl}";
+        break;
+      case "{altright}":
+        output = "{altr}";
+        break;
+      case "{capslock}":
+        output = "{capl}";
+        break;
+    }
+
+    return output as KeyboardLayoutKey;
+  }
+
+  public getKeyData(event: KeyboardEvent | KeyboardKeyDesc): KeyboardKeyData {
+    return {
+      eventName: this.getEventName(event),
+      layoutKey: this.getLayoutKey(event),
+    };
+  }
+
+  /**
+   * This method can probably be deleted together with `printKeyboardTypeDesc`.
+   */
+  public getAllKeyData() {
+    const keyData: KeyboardKeyData[] = [];
+    for (const desc of KEYBOARD_KEY_DESCS) {
+      keyData.push(this.getKeyData(desc));
     }
     return keyData;
+  }
+
+  /**
+   * Generates the type description for all possible layout key values.
+   * This method can be deleted later when the interface is fixed.
+   * @deprecated
+   */
+  protected printKeyboardTypeDesc() {
+    const keyData = this.getAllKeyData();
+    const keyboardLayoutKeyDesc = `export type KeyboardLayoutKey = "${keyData
+      .map((data) => (data.layoutKey === "\\" ? "\\\\" : data.layoutKey))
+      .join('" | "')}";`;
+    const keyboardEventNameDesc = `export type KeyboardEventName = "${keyData
+      .map((data) => data.eventName)
+      .join('" | "')}";`;
+
+    console.log(keyboardLayoutKeyDesc);
+    console.log(keyboardEventNameDesc);
+  }
+
+  /**
+   * @deprecated
+   * @param eventName
+   * @returns
+   */
+  public getKeyDesc(eventName: KeyboardEventName): KeyboardKeyDesc {
+    const keyDesc = KEYBOARD_KEY_DESCS.find(
+      (key) => key.code === eventName || key.key === eventName
+    );
+    if (!keyDesc) {
+      throw new Error(`No key data found for "${eventName}"!`);
+    }
+    return keyDesc;
   }
 
   protected setEventListeners(): void {
@@ -209,31 +305,25 @@ export class KeyboardService {
      * Event Listeners
      */
     document.addEventListener("keydown", this.handleKeyDown);
-    document.addEventListener("keypress", this.handleKeyPress);
     document.addEventListener("keyup", this.handleKeyUp);
   }
 
   protected handleKeyDown(event: KeyboardEvent) {
-    const eventName = this.getEventName(event);
-    const keyData = this.getKeyData(eventName);
+    const keyData = this.getKeyData(event);
 
     this._onEvents.trigger("beforeCycle", keyData, this, event);
+    this._beforeEvents.trigger("any", keyData, this, event);
+    this._beforeEvents.trigger(keyData.eventName, keyData, this, event);
 
-    this._beforeEvents.trigger(eventName, keyData, this, event);
-  }
-
-  protected handleKeyPress(event: KeyboardEvent) {
-    const eventName = this.getEventName(event);
-    const keyData = this.getKeyData(eventName);
     this._onEvents.trigger("any", keyData, this, event);
-    this._onEvents.trigger(eventName, keyData, this, event);
+    this._onEvents.trigger(keyData.eventName, keyData, this, event);
   }
 
   protected handleKeyUp(event: KeyboardEvent) {
-    const eventName = this.getEventName(event);
-    const keyData = this.getKeyData(eventName);
+    const keyData = this.getKeyData(event);
 
-    this._afterEvents.trigger(eventName, keyData, this, event);
+    this._afterEvents.trigger("any", keyData, this, event);
+    this._afterEvents.trigger(keyData.eventName, keyData, this, event);
 
     this._onEvents.trigger("afterCycle", keyData, this, event);
   }

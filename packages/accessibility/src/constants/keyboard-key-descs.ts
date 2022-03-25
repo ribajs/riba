@@ -1,9 +1,9 @@
-import type { KeyboardKey } from "../types/keyboard-key.js";
+import type { KeyboardKeyDesc } from "../types/keyboard-key-desc.js";
 
 /**
  * @copyright https://github.com/atapas/js-keyevents-demo/blob/master/keycode.json
  */
-export const KEYBOARD_KEYS: KeyboardKey[] = [
+export const KEYBOARD_KEY_DESCS: KeyboardKeyDesc[] = [
   {
     name: "backspace",
     which: 8,

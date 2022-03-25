@@ -1,2 +1,2 @@
-export * from "./keyboard-keys.js";
+export * from "./keyboard-key-descs.js";
 export * from "./keyboard-layout.js";

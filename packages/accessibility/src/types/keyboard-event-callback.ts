@@ -1,8 +1,8 @@
-import type { KeyboardKey } from "../types/index.js";
+import type { KeyboardKeyData } from "../types/index.js";
 import type { KeyboardService } from "../services/index.js";
 
 export type KeyboardEventCallback = (
-  keyData: KeyboardKey,
+  keyData: KeyboardKeyData,
   keyboard: KeyboardService,
   event: KeyboardEvent
 ) => any;

@@ -1,4 +1,4 @@
-export interface KeyboardKey {
+export interface KeyboardKeyDesc {
   name: string;
   /** event.which */
   which: number;

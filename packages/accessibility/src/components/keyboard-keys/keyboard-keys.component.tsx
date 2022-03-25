@@ -2,11 +2,10 @@ import { Component, TemplateFunction } from "@ribajs/core";
 import { KeyboardService } from "../../services/keyboard.service.js";
 import {
   KeyboardKeysComponentScope,
-  KeyboardEventName,
+  KeyboardLayoutKey,
 } from "../../types/index.js";
 import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
 import {
-  KEYBOARD_KEYS,
   KEYBOARD_LAYOUT_DEFAULT,
   KEYBOARD_LAYOUT_SHIFT,
   KEYBOARD_LAYOUT_LABELS_DEFAULT,
@@ -26,9 +25,11 @@ export class KeyboardKeysComponent extends Component {
       shift: [],
     },
     controls: {},
+    shift: false,
     getButtonType: this.getButtonType,
     getButtonClass: this.getButtonClass,
     getKeyLabel: this.getKeyLabel,
+    onKeyClick: this.onKeyClick,
   };
 
   constructor() {
@@ -38,15 +39,16 @@ export class KeyboardKeysComponent extends Component {
 
   protected initScope() {
     for (const row of KEYBOARD_LAYOUT_DEFAULT) {
-      this.scope.layout.default.push(row.split(" "));
+      this.scope.layout.default.push(row);
     }
     for (const row of KEYBOARD_LAYOUT_SHIFT) {
-      this.scope.layout.shift.push(row.split(" "));
+      this.scope.layout.shift.push(row);
     }
 
-    for (const key of KEYBOARD_KEYS) {
-      const eventName = (key.code || key.key) as KeyboardEventName;
-      this.scope.controls[eventName] = {
+    const keyData = this.keyboard.getAllKeyData();
+
+    for (const key of keyData) {
+      this.scope.controls[key.layoutKey] = {
         active: false,
       };
     }
@@ -55,34 +57,29 @@ export class KeyboardKeysComponent extends Component {
   /**
    * Retrieve button type
    *
-   * @param  {string} button The button's layout name
+   * @param  {string} layoutKey The button's layout name
    * @return {string} The button type
    */
-  public getButtonType(button: string): string {
-    return button.includes("{") && button.includes("}") && button !== "{//}"
-      ? "functionBtn"
+  public getButtonType(layoutKey: KeyboardLayoutKey): string {
+    return layoutKey.includes("{") && layoutKey.includes("}")
+      ? // layoutKey !== "{//}"
+        "functionBtn"
       : "standardBtn";
   }
 
   /**
    * Adds default classes to a given button
    *
-   * @param  {string} button The button's layout name
+   * @param  {string} layoutKey The button's layout name
    * @return {string} The classes to be added to the button
    */
-  public getButtonClass(button: string): string {
-    const buttonTypeClass = this.getButtonType(button);
-    const buttonWithoutBraces = button.replace("{", "").replace("}", "");
+  public getButtonClass(layoutKey: KeyboardLayoutKey): string {
+    const buttonTypeClass = this.getButtonType(layoutKey);
+    const buttonWithoutBraces = layoutKey.replace("{", "").replace("}", "");
     let buttonNormalized = "";
 
     if (buttonTypeClass !== "standardBtn")
       buttonNormalized = ` hg-button-${buttonWithoutBraces}`;
-
-    console.debug(
-      "getButtonClass",
-      button,
-      `hg-${buttonTypeClass}${buttonNormalized}`
-    );
 
     return `hg-${buttonTypeClass}${buttonNormalized}`;
   }
@@ -90,10 +87,23 @@ export class KeyboardKeysComponent extends Component {
   /**
    * Returns the display (label) name for a given button
    *
-   * @param  {string} button The button's layout name
+   * @param  {string} layoutKey The button's layout name
    */
-  public getKeyLabel(button: string) {
-    return (KEYBOARD_LAYOUT_LABELS_DEFAULT as any)[button] || button;
+  public getKeyLabel(layoutKey: KeyboardLayoutKey) {
+    return KEYBOARD_LAYOUT_LABELS_DEFAULT[layoutKey] || layoutKey;
+  }
+
+  public onKeyClick(layoutKey: KeyboardLayoutKey) {
+    console.debug("TODO: " + layoutKey);
+    this.scope.controls[layoutKey].active = true;
+    this.setShift();
+  }
+
+  protected setShift() {
+    this.scope.shift =
+      this.scope.controls["{sftl}"]?.active ||
+      this.scope.controls["{sftr}"]?.active ||
+      this.scope.controls["{capl}"]?.active;
   }
 
   protected connectedCallback() {
@@ -104,27 +114,22 @@ export class KeyboardKeysComponent extends Component {
   protected async afterBind() {
     this.keyboard
       .on("any", (keyData) => {
-        const eventName = (keyData.code || keyData.key) as KeyboardEventName;
-        this.scope.controls[eventName].active = true;
-        console.debug(`pressed "${keyData.name}" still pressed...`, keyData);
+        this.scope.controls[keyData.layoutKey].active = true;
+        this.setShift();
+        console.debug(
+          `On press "${keyData.layoutKey}"...`,
+          keyData,
+          this.scope.controls[keyData.layoutKey]
+        );
       })
-      .on("beforeCycle", (keyData) => {
-        console.debug(`Key "${keyData.name}" pressed...`, keyData);
-        const buttons: KeyboardEventName[] = Object.keys(
-          this.scope.controls
-        ) as Array<keyof KeyboardKeysComponentScope["controls"]>;
-        for (const button of buttons) {
-          this.scope.controls[button].active = false;
-        }
-      })
-      .on("afterCycle", (keyData) => {
-        console.debug(`Key "${keyData.name}" was released`, keyData);
-        const buttons: KeyboardEventName[] = Object.keys(
-          this.scope.controls
-        ) as Array<keyof KeyboardKeysComponentScope["controls"]>;
-        for (const button of buttons) {
-          this.scope.controls[button].active = false;
-        }
+      .after("any", (keyData) => {
+        this.scope.controls[keyData.layoutKey].active = false;
+        this.setShift();
+        console.debug(
+          `After press "${keyData.layoutKey}"`,
+          keyData,
+          this.scope.controls[keyData.layoutKey]
+        );
       });
   }
 
@@ -133,7 +138,17 @@ export class KeyboardKeysComponent extends Component {
       return (
         <div class="simple-keyboard hg-theme-default hg-layout-default">
           <div class="hg-rows">
-            <div rv-each-row="layout.default" class="hg-row">
+            <div rv-hide="shift" rv-each-row="layout.default" class="hg-row">
+              <div
+                rv-each-key="row"
+                class="hg-button"
+                rv-add-class="getButtonClass | call key"
+                rv-data-skbtn="key"
+                rv-text="getKeyLabel | call key"
+                rv-on-click="onKeyClick | args key"
+              ></div>
+            </div>
+            <div rv-show="shift" rv-each-row="layout.shift" class="hg-row">
               <div
                 rv-each-key="row"
                 class="hg-button"
