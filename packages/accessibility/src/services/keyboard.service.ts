@@ -16,6 +16,8 @@ export class KeyboardService {
   protected _options: AccessibilityModuleOptions;
   public static instance?: KeyboardService;
 
+  protected _releaseTime: { [keyCode: string]: number } = {};
+
   /** on / keydown events */
   protected _onEvents = new EventDispatcher("keyboard:keydown");
   /** before keydown events */
@@ -131,7 +133,7 @@ export class KeyboardService {
     cb: KeyboardEventCallback,
     thisContext?: any
   ) {
-    this._afterEvents.once(eventName, cb, thisContext);
+    this._afterEvents.on(eventName, cb, thisContext);
     return this;
   }
 
@@ -244,6 +246,12 @@ export class KeyboardService {
       case "{capslock}":
         output = "{capl}";
         break;
+      case "{printscreen}":
+        output = "{prtscr}";
+        break;
+      case "{escape}":
+        output = "{esc}";
+        break;
     }
 
     return output as KeyboardLayoutKey;
@@ -253,18 +261,42 @@ export class KeyboardService {
     return {
       eventName: this.getEventName(event),
       layoutKey: this.getLayoutKey(event),
+      event,
     };
   }
 
   /**
    * This method can probably be deleted together with `printKeyboardTypeDesc`.
    */
-  public getAllKeyData() {
-    const keyData: KeyboardKeyData[] = [];
+  public getAllEventsNames() {
+    const eventNames: KeyboardEventName[] = [];
+
     for (const desc of KEYBOARD_KEY_DESCS) {
-      keyData.push(this.getKeyData(desc));
+      const keyData = this.getKeyData(desc);
+      if (!eventNames.find((eventNames) => eventNames === keyData.eventName)) {
+        eventNames.push(keyData.eventName);
+      }
     }
-    return keyData;
+
+    return eventNames;
+  }
+
+  /**
+   * This method can probably be deleted together with `printKeyboardTypeDesc`.
+   */
+  public getAllLayoutKeys() {
+    const layoutKeys = KEYBOARD_KEY_DESCS.map((desc) => {
+      let layoutKey = this.getKeyData(desc).layoutKey;
+      layoutKey = (
+        layoutKey === "\\" ? "\\\\" : layoutKey
+      ) as KeyboardLayoutKey;
+      return layoutKey;
+    });
+
+    // Custom on screen keys
+    layoutKeys.push(".com" as any);
+
+    return layoutKeys;
   }
 
   /**
@@ -273,13 +305,15 @@ export class KeyboardService {
    * @deprecated
    */
   protected printKeyboardTypeDesc() {
-    const keyData = this.getAllKeyData();
-    const keyboardLayoutKeyDesc = `export type KeyboardLayoutKey = "${keyData
-      .map((data) => (data.layoutKey === "\\" ? "\\\\" : data.layoutKey))
-      .join('" | "')}";`;
-    const keyboardEventNameDesc = `export type KeyboardEventName = "${keyData
-      .map((data) => data.eventName)
-      .join('" | "')}";`;
+    const eventNames = this.getAllEventsNames();
+    const layoutKeys = this.getAllLayoutKeys();
+
+    const keyboardLayoutKeyDesc = `export type KeyboardLayoutKey = "${layoutKeys.join(
+      '" | "'
+    )}";`;
+    const keyboardEventNameDesc = `export type KeyboardEventName = "${eventNames.join(
+      '" | "'
+    )}";`;
 
     console.log(keyboardLayoutKeyDesc);
     console.log(keyboardEventNameDesc);
@@ -312,6 +346,7 @@ export class KeyboardService {
     const keyData = this.getKeyData(event);
 
     this._onEvents.trigger("beforeCycle", keyData, this, event);
+
     this._beforeEvents.trigger("any", keyData, this, event);
     this._beforeEvents.trigger(keyData.eventName, keyData, this, event);
 
@@ -320,6 +355,8 @@ export class KeyboardService {
   }
 
   protected handleKeyUp(event: KeyboardEvent) {
+    this._releaseTime[event.code] = new Date().getTime();
+
     const keyData = this.getKeyData(event);
 
     this._afterEvents.trigger("any", keyData, this, event);

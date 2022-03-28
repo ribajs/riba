@@ -1,0 +1,11 @@
+@import '~@ribajs/core/src/index.scss';
+@import '~@ribajs/accessibility/src/index.scss';
+@import '../ts/components/index.scss';
+
+html,
+body {
+  font-size: 16px;
+  font-family: 'Press Start 2P', arial, sans-serif;
+  background: #333333;
+  color: white;
+}

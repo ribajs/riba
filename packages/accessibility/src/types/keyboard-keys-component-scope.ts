@@ -1,11 +1,13 @@
 import type { KeyboardKeysComponent } from "../components/keyboard-keys/keyboard-keys.component.js";
-import type { InputButton, KeyboardLayoutKey } from "./index.js";
+import type {
+  InputButton,
+  KeyboardLayoutKey,
+  KeyboardLayout,
+} from "./index.js";
 
 export interface KeyboardKeysComponentScope {
-  layout: {
-    default: string[][];
-    shift: string[][];
-  };
+  layoutName: string;
+  layout: KeyboardLayout;
   controls:
     | {
         [eventName in KeyboardLayoutKey]: InputButton;
@@ -16,5 +18,6 @@ export interface KeyboardKeysComponentScope {
   getButtonType: KeyboardKeysComponent["getButtonType"];
   getButtonClass: KeyboardKeysComponent["getButtonClass"];
   getKeyLabel: KeyboardKeysComponent["getKeyLabel"];
-  onKeyClick: KeyboardKeysComponent["onKeyClick"];
+  onScreenKeyDown: KeyboardKeysComponent["onScreenKeyDown"];
+  onScreenKeyUp: KeyboardKeysComponent["onScreenKeyUp"];
 }

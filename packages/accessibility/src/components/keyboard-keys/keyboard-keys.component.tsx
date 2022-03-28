@@ -3,33 +3,59 @@ import { KeyboardService } from "../../services/keyboard.service.js";
 import {
   KeyboardKeysComponentScope,
   KeyboardLayoutKey,
+  KeyboardKeyData,
 } from "../../types/index.js";
 import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
-import {
-  KEYBOARD_LAYOUT_DEFAULT,
-  KEYBOARD_LAYOUT_SHIFT,
-  KEYBOARD_LAYOUT_LABELS_DEFAULT,
-} from "../../constants/index.js";
+import { KEYBOARD_LAYOUT_LABELS_DEFAULT } from "../../constants/index.js";
+import * as _layouts from "./layouts/index.js";
 
 export class KeyboardKeysComponent extends Component {
   public static tagName = "a11y-keyboard-keys";
   protected keyboard = KeyboardService.getSingleton();
 
   static get observedAttributes() {
-    return [];
+    return ["layout-name", "layout"];
+  }
+
+  public layouts = _layouts;
+
+  protected parsedAttributeChangedCallback(
+    attributeName: string,
+    oldValue: any,
+    newValue: any,
+    namespace: string | null
+  ) {
+    super.parsedAttributeChangedCallback(
+      attributeName,
+      oldValue,
+      newValue,
+      namespace
+    );
+
+    if (attributeName === "layoutName") {
+      this.onLayoutNameChanged();
+    }
+  }
+
+  protected onLayoutNameChanged() {
+    console.debug("onLayoutNameChanged", this.scope.layoutName);
+    if (!(this.layouts as any)[this.scope.layoutName]) {
+      console.error(`No layout with name "${this.scope.layoutName}" found"`);
+      return false;
+    }
+    this.scope.layout = (this.layouts as any)[this.scope.layoutName].layout;
   }
 
   public scope: KeyboardKeysComponentScope = {
-    layout: {
-      default: [],
-      shift: [],
-    },
+    layoutName: "english",
+    layout: this.layouts.english.layout,
     controls: {},
     shift: false,
     getButtonType: this.getButtonType,
     getButtonClass: this.getButtonClass,
     getKeyLabel: this.getKeyLabel,
-    onKeyClick: this.onKeyClick,
+    onScreenKeyDown: this.onScreenKeyDown,
+    onScreenKeyUp: this.onScreenKeyUp,
   };
 
   constructor() {
@@ -38,17 +64,10 @@ export class KeyboardKeysComponent extends Component {
   }
 
   protected initScope() {
-    for (const row of KEYBOARD_LAYOUT_DEFAULT) {
-      this.scope.layout.default.push(row);
-    }
-    for (const row of KEYBOARD_LAYOUT_SHIFT) {
-      this.scope.layout.shift.push(row);
-    }
+    const layoutKeys = this.keyboard.getAllLayoutKeys();
 
-    const keyData = this.keyboard.getAllKeyData();
-
-    for (const key of keyData) {
-      this.scope.controls[key.layoutKey] = {
+    for (const key of layoutKeys) {
+      this.scope.controls[key] = {
         active: false,
       };
     }
@@ -61,7 +80,7 @@ export class KeyboardKeysComponent extends Component {
    * @return {string} The button type
    */
   public getButtonType(layoutKey: KeyboardLayoutKey): string {
-    return layoutKey.includes("{") && layoutKey.includes("}")
+    return layoutKey.startsWith("{") && layoutKey.endsWith("}")
       ? // layoutKey !== "{//}"
         "functionBtn"
       : "standardBtn";
@@ -93,9 +112,34 @@ export class KeyboardKeysComponent extends Component {
     return KEYBOARD_LAYOUT_LABELS_DEFAULT[layoutKey] || layoutKey;
   }
 
-  public onKeyClick(layoutKey: KeyboardLayoutKey) {
-    console.debug("TODO: " + layoutKey);
+  public onScreenKeyDown(
+    layoutKey: KeyboardLayoutKey
+    // event: Event,
+    // scope: KeyboardKeysComponentScope,
+    // el: HTMLElement
+  ) {
+    console.debug("onScreenKeyDown: " + layoutKey);
+    if (!this.scope.controls[layoutKey]) {
+      this.scope.controls[layoutKey] = {
+        active: false,
+      };
+    }
     this.scope.controls[layoutKey].active = true;
+    this.onKeyboardChange();
+  }
+
+  public onScreenKeyUp(
+    layoutKey: KeyboardLayoutKey
+    // event: Event,
+    // scope: KeyboardKeysComponentScope,
+    // el: HTMLElement
+  ) {
+    console.debug("onScreenKeyUp: " + layoutKey);
+    this.scope.controls[layoutKey].active = false;
+    this.onKeyboardChange();
+  }
+
+  protected onKeyboardChange() {
     this.setShift();
   }
 
@@ -111,26 +155,43 @@ export class KeyboardKeysComponent extends Component {
     this.init(KeyboardKeysComponent.observedAttributes);
   }
 
+  protected onAnyKey(keyData: KeyboardKeyData) {
+    if (!this.scope.controls[keyData.layoutKey]) {
+      this.scope.controls[keyData.layoutKey] = {
+        active: false,
+      };
+      console.warn("Unknown key: ", keyData);
+    }
+    this.scope.controls[keyData.layoutKey].active = true;
+    this.onKeyboardChange();
+    console.debug(
+      `On press "${keyData.layoutKey}"...`,
+      keyData,
+      this.scope.controls[keyData.layoutKey]
+    );
+  }
+
+  protected afterAnyKey(keyData: KeyboardKeyData) {
+    if (!this.scope.controls[keyData.layoutKey]) {
+      this.scope.controls[keyData.layoutKey] = {
+        active: false,
+      };
+      console.warn("Unknown key: ", keyData);
+    }
+
+    this.scope.controls[keyData.layoutKey].active = false;
+    this.onKeyboardChange();
+    console.debug(
+      `After press "${keyData.layoutKey}"`,
+      keyData,
+      this.scope.controls[keyData.layoutKey]
+    );
+  }
+
   protected async afterBind() {
     this.keyboard
-      .on("any", (keyData) => {
-        this.scope.controls[keyData.layoutKey].active = true;
-        this.setShift();
-        console.debug(
-          `On press "${keyData.layoutKey}"...`,
-          keyData,
-          this.scope.controls[keyData.layoutKey]
-        );
-      })
-      .after("any", (keyData) => {
-        this.scope.controls[keyData.layoutKey].active = false;
-        this.setShift();
-        console.debug(
-          `After press "${keyData.layoutKey}"`,
-          keyData,
-          this.scope.controls[keyData.layoutKey]
-        );
-      });
+      .on("any", this.onAnyKey, this)
+      .after("any", this.afterAnyKey, this);
   }
 
   protected template(): ReturnType<TemplateFunction> {
@@ -141,20 +202,31 @@ export class KeyboardKeysComponent extends Component {
             <div rv-hide="shift" rv-each-row="layout.default" class="hg-row">
               <div
                 rv-each-key="row"
+                rv-assign-control="controls | get key"
                 class="hg-button"
                 rv-add-class="getButtonClass | call key"
-                rv-data-skbtn="key"
+                rv-class-active="control.active"
+                rv-data-key="key"
                 rv-text="getKeyLabel | call key"
-                rv-on-click="onKeyClick | args key"
+                rv-on-mousedown="onScreenKeyDown | args key"
+                rv-on-touchstart="onScreenKeyDown | args key"
+                rv-on-mouseup="onScreenKeyUp | args key"
+                rv-on-touchend="onScreenKeyUp | args key"
               ></div>
             </div>
             <div rv-show="shift" rv-each-row="layout.shift" class="hg-row">
               <div
                 rv-each-key="row"
+                rv-assign-control="controls | get key"
                 class="hg-button"
                 rv-add-class="getButtonClass | call key"
-                rv-data-skbtn="key"
+                rv-class-active="control.active"
+                rv-data-key="key"
                 rv-text="getKeyLabel | call key"
+                rv-on-mousedown="onScreenKeyDown | args key"
+                rv-on-touchstart="onScreenKeyDown | args key"
+                rv-on-mouseup="onScreenKeyUp | args key"
+                rv-on-touchend="onScreenKeyUp | args key"
               ></div>
             </div>
           </div>

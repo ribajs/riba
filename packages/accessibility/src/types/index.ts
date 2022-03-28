@@ -7,4 +7,5 @@ export * from "./keyboard-key-data.js";
 export * from "./keyboard-key-desc.js";
 export * from "./keyboard-keys-component-scope.js";
 export * from "./keyboard-layout-key.js";
+export * from "./keyboard-layout.js";
 export * from "./navigable-group-component-scope.js";
