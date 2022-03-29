@@ -1,6 +1,7 @@
-import { AccessibilityModuleOptions } from "../types/index.js";
+import { AccessibilityModuleOptions, KeyboardLayout } from "../types/index.js";
 import { EventDispatcher } from "@ribajs/events";
 import { KEYBOARD_KEY_DESCS } from "../constants/keyboard-key-descs.js";
+import * as layouts from "./layouts/index.js";
 import type {
   KeyboardEventName,
   KeyboardLayoutKey,
@@ -16,6 +17,8 @@ export class KeyboardService {
   protected _options: AccessibilityModuleOptions;
   public static instance?: KeyboardService;
 
+  protected _layouts = layouts;
+
   protected _releaseTime: { [keyCode: string]: number } = {};
 
   /** on / keydown events */
@@ -24,6 +27,10 @@ export class KeyboardService {
   protected _beforeEvents = new EventDispatcher("keyboard:before-keydown");
   /** after / keyup events */
   protected _afterEvents = new EventDispatcher("keyboard:keyup");
+
+  public get layouts() {
+    return this._layouts;
+  }
 
   public get options() {
     return this._options;
@@ -281,10 +288,7 @@ export class KeyboardService {
     return eventNames;
   }
 
-  /**
-   * This method can probably be deleted together with `printKeyboardTypeDesc`.
-   */
-  public getAllLayoutKeys() {
+  public getLayoutKeysFromKeyDesc() {
     const layoutKeys = KEYBOARD_KEY_DESCS.map((desc) => {
       let layoutKey = this.getKeyData(desc).layoutKey;
       layoutKey = (
@@ -292,9 +296,47 @@ export class KeyboardService {
       ) as KeyboardLayoutKey;
       return layoutKey;
     });
+    return layoutKeys;
+  }
 
-    // Custom on screen keys
-    layoutKeys.push(".com" as any);
+  public getLayoutKeys(layout: KeyboardLayout) {
+    const layoutKeys: KeyboardLayoutKey[] = [];
+    for (const row of [...layout.default, ...layout.shift]) {
+      for (const key of row) {
+        // WORKAROUND this unicode char seems to make problems
+        if ((key as string) === "\u0651") {
+          continue;
+        }
+        if (!layoutKeys.find((_key) => _key === key)) {
+          layoutKeys.push(key);
+        }
+      }
+    }
+    return layoutKeys;
+  }
+
+  public getFunctionLayoutKeys() {
+    const layoutKeys = this.getLayoutKeysFromKeyDesc();
+
+    return layoutKeys.filter((key) => key.startsWith("{") && key.endsWith("}"));
+  }
+
+  /**
+   * This method can probably be deleted together with `printKeyboardTypeDesc`.
+   */
+  public getAllLayoutKeys() {
+    const layoutKeys = this.getLayoutKeysFromKeyDesc();
+
+    for (const layoutName in this._layouts) {
+      const layout = (this._layouts as any)[layoutName].layout;
+      if (!layout) continue;
+      const _layoutKeys = this.getLayoutKeys(layout);
+      for (const key of _layoutKeys) {
+        if (!layoutKeys.find((_key) => _key === key)) {
+          layoutKeys.push(key);
+        }
+      }
+    }
 
     return layoutKeys;
   }
@@ -306,15 +348,19 @@ export class KeyboardService {
    */
   protected printKeyboardTypeDesc() {
     const eventNames = this.getAllEventsNames();
-    const layoutKeys = this.getAllLayoutKeys();
+    const layoutFnKeys = this.getFunctionLayoutKeys();
 
-    const keyboardLayoutKeyDesc = `export type KeyboardLayoutKey = "${layoutKeys.join(
+    const keyboardFnLayoutKeyDesc = `export type KeyboardLayoutFunctionKey = "${layoutFnKeys.join(
       '" | "'
     )}";`;
+
+    const keyboardLayoutKeyDesc = `export type KeyboardLayoutKey = KeyboardLayoutFunctionKey | string;`;
+
     const keyboardEventNameDesc = `export type KeyboardEventName = "${eventNames.join(
       '" | "'
     )}";`;
 
+    console.log(keyboardFnLayoutKeyDesc);
     console.log(keyboardLayoutKeyDesc);
     console.log(keyboardEventNameDesc);
   }

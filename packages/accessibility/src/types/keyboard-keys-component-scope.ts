@@ -20,4 +20,5 @@ export interface KeyboardKeysComponentScope {
   getKeyLabel: KeyboardKeysComponent["getKeyLabel"];
   onScreenKeyDown: KeyboardKeysComponent["onScreenKeyDown"];
   onScreenKeyUp: KeyboardKeysComponent["onScreenKeyUp"];
+  setLayout: KeyboardKeysComponent["setLayout"];
 }

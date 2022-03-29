@@ -7,7 +7,6 @@ import {
 } from "../../types/index.js";
 import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
 import { KEYBOARD_LAYOUT_LABELS_DEFAULT } from "../../constants/index.js";
-import * as _layouts from "./layouts/index.js";
 
 export class KeyboardKeysComponent extends Component {
   public static tagName = "a11y-keyboard-keys";
@@ -16,8 +15,6 @@ export class KeyboardKeysComponent extends Component {
   static get observedAttributes() {
     return ["layout-name", "layout"];
   }
-
-  public layouts = _layouts;
 
   protected parsedAttributeChangedCallback(
     attributeName: string,
@@ -37,18 +34,25 @@ export class KeyboardKeysComponent extends Component {
     }
   }
 
+  protected onLayoutChanged() {
+    // console.debug("onLayoutChanged", this.scope.layout);
+  }
+
   protected onLayoutNameChanged() {
-    console.debug("onLayoutNameChanged", this.scope.layoutName);
-    if (!(this.layouts as any)[this.scope.layoutName]) {
+    if (!(this.keyboard.layouts as any)[this.scope.layoutName]) {
       console.error(`No layout with name "${this.scope.layoutName}" found"`);
       return false;
     }
-    this.scope.layout = (this.layouts as any)[this.scope.layoutName].layout;
+    this.scope.layout = (this.keyboard.layouts as any)[
+      this.scope.layoutName
+    ].layout;
+
+    this.onLayoutChanged();
   }
 
   public scope: KeyboardKeysComponentScope = {
     layoutName: "english",
-    layout: this.layouts.english.layout,
+    layout: this.keyboard.layouts.english.layout,
     controls: {},
     shift: false,
     getButtonType: this.getButtonType,
@@ -56,6 +60,7 @@ export class KeyboardKeysComponent extends Component {
     getKeyLabel: this.getKeyLabel,
     onScreenKeyDown: this.onScreenKeyDown,
     onScreenKeyUp: this.onScreenKeyUp,
+    setLayout: this.setLayout,
   };
 
   constructor() {
@@ -71,6 +76,8 @@ export class KeyboardKeysComponent extends Component {
         active: false,
       };
     }
+
+    this.onLayoutChanged();
   }
 
   /**
@@ -137,6 +144,12 @@ export class KeyboardKeysComponent extends Component {
     console.debug("onScreenKeyUp: " + layoutKey);
     this.scope.controls[layoutKey].active = false;
     this.onKeyboardChange();
+  }
+
+  public setLayout(layoutName: string) {
+    console.debug("setLayout: " + layoutName);
+    this.scope.layoutName = layoutName;
+    this.onLayoutNameChanged();
   }
 
   protected onKeyboardChange() {

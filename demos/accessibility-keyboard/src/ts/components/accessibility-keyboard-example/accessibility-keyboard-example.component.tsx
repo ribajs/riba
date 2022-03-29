@@ -1,16 +1,21 @@
 import { Component, TemplateFunction } from "@ribajs/core";
-import { KeyboardKeysComponent } from "@ribajs/accessibility";
+import { KeyboardKeysComponent, KeyboardService } from "@ribajs/accessibility";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import template from "./accessibility-keyboard-example.component.pug";
 
 interface Scope {
   layouts: string[];
   activeLayout: string;
+  selectedValue: string;
   setLayout: AccessibilityGamepadExampleComponent["setLayout"];
 }
 
 export class AccessibilityGamepadExampleComponent extends Component {
   public static tagName = "accessibility-keyboard-example";
+
+  protected keyboardEl?: KeyboardKeysComponent;
+
+  protected keyboard = KeyboardService.getSingleton();
 
   protected autobind = true;
   static get observedAttributes(): string[] {
@@ -20,6 +25,7 @@ export class AccessibilityGamepadExampleComponent extends Component {
   public scope: Scope = {
     layouts: [],
     activeLayout: "english",
+    selectedValue: "english",
     setLayout: this.setLayout,
   };
 
@@ -39,12 +45,13 @@ export class AccessibilityGamepadExampleComponent extends Component {
 
   protected async afterAllBind(): Promise<any> {
     super.afterAllBind();
-    const keyboardKeysEl = this.querySelector<KeyboardKeysComponent>(
-      KeyboardKeysComponent.tagName
-    );
+    this.keyboardEl =
+      this.querySelector<KeyboardKeysComponent>(
+        KeyboardKeysComponent.tagName
+      ) || undefined;
 
-    if (keyboardKeysEl) {
-      this.scope.layouts = Object.keys(keyboardKeysEl.layouts);
+    if (this.keyboardEl) {
+      this.scope.layouts = Object.keys(this.keyboard.layouts);
     }
   }
 

@@ -1,5 +1,6 @@
-ul
-  li(rv-each-layout="layouts", rv-text="layout", rv-on-click="setLayout | args layout")
+select(name="layouts" id="layouts", rv-value="selectedValue", rv-on-change="setLayout | args selectedValue")
+  option(rv-each-layout="layouts", rv-value="layout", rv-text="layout") Volvo
+
 a11y-keyboard-keys(rv-co-layout-name="activeLayout")
 footer
   | The keyboard is based on the demo from 
