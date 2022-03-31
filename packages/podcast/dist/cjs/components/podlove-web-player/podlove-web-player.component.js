@@ -20,7 +20,7 @@ class PodloveWebPlayerComponent extends core_1.Component {
         episode: undefined,
         config: undefined,
         episodeUrl: "",
-        configUrl: ""
+        configUrl: "",
     };
     constructor() {
         super();

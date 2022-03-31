@@ -1,7 +1,7 @@
 export const createAction = (type, payload) => {
     return {
         type,
-        payload
+        payload,
     };
 };
 export const selectEpisode = (payload) => {

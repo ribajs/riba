@@ -20,7 +20,7 @@ class PodlovePlayButtonComponent extends index_js_1.Component {
             "config-url",
             "web-player-id",
             "play-label",
-            "id"
+            "id",
         ];
     }
     requiredAttributes() {
@@ -37,12 +37,12 @@ class PodlovePlayButtonComponent extends index_js_1.Component {
         styles: {
             play: null,
             infoName: null,
-            infoTitle: null
+            infoTitle: null,
         },
         icons: {
-            play: PLAY_ICON
+            play: PLAY_ICON,
         },
-        play: this.play
+        play: this.play,
     };
     constructor() {
         super();
@@ -72,19 +72,19 @@ class PodlovePlayButtonComponent extends index_js_1.Component {
         const playBtn = {
             backgroundColor: this.scope.config.theme.tokens.brandDark,
             color: this.scope.config.theme.tokens.brandLightest,
-            fontFamily: this.scope.config.theme.fonts.bold.family.join(", ")
+            fontFamily: this.scope.config.theme.fonts.bold.family.join(", "),
         };
         const infoName = {
             color: this.scope.config.theme.tokens.brand,
-            fontFamily: this.scope.config.theme.fonts.bold.family.join(", ")
+            fontFamily: this.scope.config.theme.fonts.bold.family.join(", "),
         };
         const infoTitle = {
             color: this.scope.config.theme.tokens.contrast,
-            fontFamily: this.scope.config.theme.fonts.bold.family.join(", ")
+            fontFamily: this.scope.config.theme.fonts.bold.family.join(", "),
         };
         const infoSubtitle = {
             color: this.scope.config.theme.tokens.contrast,
-            fontFamily: this.scope.config.theme.fonts.regular.family.join(", ")
+            fontFamily: this.scope.config.theme.fonts.regular.family.join(", "),
         };
         this.scope.styles["play"] = playBtn;
         this.scope.styles["infoName"] = infoName;

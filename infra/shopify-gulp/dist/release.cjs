@@ -18,7 +18,6 @@ const release_cjs_1 = require("./includes/release.cjs");
 const prompts_cjs_1 = require("./includes/prompts.cjs");
 const theme_cjs_1 = require("./includes/theme.cjs");
 const messages_cjs_1 = __importDefault(require("./includes/messages.cjs"));
-const theme_cjs_2 = require("./includes/theme.cjs");
 const upload_cjs_1 = require("./includes/upload.cjs");
 const shopify_api_cjs_1 = require("./includes/shopify-api.cjs");
 const fs_1 = require("fs");
@@ -31,7 +30,7 @@ gulp_1.default.task("generate:config:live", () => __awaiter(void 0, void 0, void
     const baseConfig = config_cjs_1.config.deployConfig;
     const targetConfig = config_cjs_1.config.liveConfig;
     gulp_util_1.default.log(`Load ${baseConfig} as base config file for store and password...`);
-    const liveConfigs = yield (0, theme_cjs_2.generateEnvLiveThemeConfig)(baseConfig);
+    const liveConfigs = yield (0, theme_cjs_1.generateEnvLiveThemeConfig)(baseConfig);
     const configPath = path_1.default.resolve(config_cjs_1.config.themeRoot, targetConfig);
     const yamlConfig = js_yaml_1.default.dump(liveConfigs);
     gulp_util_1.default.log(`Write "${targetConfig}" to ${configPath}...`);
@@ -41,7 +40,7 @@ gulp_1.default.task("generate:config:deploy", () => __awaiter(void 0, void 0, vo
     const baseConfig = config_cjs_1.config.deployConfig;
     const targetConfig = config_cjs_1.config.deployConfig;
     gulp_util_1.default.log(`Load ${baseConfig} as base config file for store and password...`);
-    const liveConfigs = yield (0, theme_cjs_2.generateEnvYoungestThemeConfig)(baseConfig);
+    const liveConfigs = yield (0, theme_cjs_1.generateEnvYoungestThemeConfig)(baseConfig);
     const configPath = path_1.default.resolve(config_cjs_1.config.themeRoot, targetConfig);
     const yamlConfig = js_yaml_1.default.dump(liveConfigs);
     gulp_util_1.default.log(`Overwrite "${targetConfig}" to ${configPath}...`);
@@ -151,18 +150,18 @@ gulp_1.default.task("theme:delete-oldest-on-limit", () => __awaiter(void 0, void
     const promises = [];
     const baseConfig = (0, config_cjs_1.getYamlConfig)(config_cjs_1.config.deployConfig);
     for (const envKey in baseConfig) {
-        const themes = yield (0, theme_cjs_2.getStoreThemes)(baseConfig[envKey]);
+        const themes = yield (0, theme_cjs_1.getStoreThemes)(baseConfig[envKey]);
         const count = themes.length;
         gulp_util_1.default.log(`[${envKey}] Count of themes: ${count}/${LIMIT}`);
         if (count >= LIMIT) {
             const oldestEnvTheme = yield (0, theme_cjs_1.getOldestEnvTheme)();
             gulp_util_1.default.log(messages_cjs_1.default.colorize(`[${envKey}] Are you sure that you want to delete the following theme unrecoverably? (type "yes" or "no")`, "danger"));
-            (0, theme_cjs_2.print)(envKey, oldestEnvTheme[envKey]);
+            (0, theme_cjs_1.print)(envKey, oldestEnvTheme[envKey]);
             const remove = yield (0, prompts_cjs_1.promptYesNo)(`[${envKey}] You have reached the maximum limit of themes (${LIMIT}) in your shop "${oldestEnvTheme[envKey].store}", do you want to delete the oldest theme "${oldestEnvTheme[envKey].name}"?`, "danger");
             if (!remove) {
                 return process.exit(0);
             }
-            promises.push((0, theme_cjs_2.remove)(baseConfig[envKey], oldestEnvTheme[envKey].id));
+            promises.push((0, theme_cjs_1.remove)(baseConfig[envKey], oldestEnvTheme[envKey].id));
         }
     }
     return Promise.all(promises);
