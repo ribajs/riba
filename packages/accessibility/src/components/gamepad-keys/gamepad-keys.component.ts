@@ -10,6 +10,7 @@ import template from "./gamepad-keys.component.pug";
 export class GamepadKeysComponent extends Component {
   public static tagName = "a11y-gamepad-keys";
   protected gamepad = GamepadService.getSingleton();
+  public _debug = false;
 
   static get observedAttributes() {
     return [];

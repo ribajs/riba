@@ -22,7 +22,8 @@ export class GamepadService {
       console.warn("[GamepadService] Gamepad is not supported!");
     }
     this._control = gameControl;
-    this.on = this._control.on;
+    // TODO add custom on event using EventDispatcher
+    this.on = this._control.on.bind(this._control);
   }
 
   public static getSingleton() {
