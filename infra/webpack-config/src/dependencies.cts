@@ -23,7 +23,7 @@ export const getDependencies = (config: Partial<Config> = {}) => {
   config.htmlLoaderPath =
     config.htmlLoaderPath || require.resolve("html-loader");
 
-    config.markdownLoaderPath =
+  config.markdownLoaderPath =
     config.markdownLoaderPath || require.resolve("markdown-loader");
 
   config.fileLoaderPath =

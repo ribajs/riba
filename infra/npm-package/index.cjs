@@ -20,7 +20,7 @@ const isAvailable = (moduleName) => {
     const modulePath = dirname(modulePackagePath);
     return modulePath;
   } catch (error) {
-    console.warn(error);
+    // console.warn(error);
     return false;
   }
 };
@@ -39,7 +39,6 @@ const ribaPackages = [
   "@ribajs/shopify",
   "@ribajs/shopify-easdk",
   "@ribajs/shopify-tda",
-  "@ribajs/tagged-image",
   "@ribajs/artcodestudio",
 ];
 

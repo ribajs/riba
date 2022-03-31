@@ -13,7 +13,7 @@ To regist the module include `import bs5Module from '@ribajs/bs5';` in your `mai
 ```ts
 import { Riba, coreModule } from '@ribajs/core';
 import { ready } from '@ribajs/utils/src/dom';
-import bs5Module from '@ribajs/bs5';
+import { bs5Module } from '@ribajs/bs5';
 const riba = new Riba();
 const model = {};
 riba.module.regist(coreModule.init());

@@ -5,7 +5,7 @@ import type ForkTsCheckerPlugin from "fork-ts-checker-webpack-plugin";
 import type CssExtractPlugin from "mini-css-extract-plugin";
 import type HtmlWebpackPlugin from "html-webpack-plugin";
 import type NodeExternalsPlugin from "webpack-node-externals";
-// import type CopyPlugin from "copy-webpack-plugin";
+// import type CopyPlugin from "copy-webpack-plugin"
 
 import { ConfigStyle, LoaderItem } from ".";
 

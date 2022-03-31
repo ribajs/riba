@@ -114,8 +114,11 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
     if (typeof config.forkTsCheckerConfig.eslint === "undefined") {
       const eslintConfigPath = findFile(rootPath, [
         ".eslintrc.js",
+        ".eslintrc.cjs",
         "../.eslintrc.js",
+        "../.eslintrc.cjs",
         "../../.eslintrc.js",
+        "../../.eslintrc.cjs",
       ]);
 
       const eslintConfig = {
@@ -149,8 +152,11 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
   if (typeof config.postcssOptions === "undefined") {
     const postcssConfigPath = findFile(rootPath, [
       "postcss.config.js",
+      "postcss.config.cjs",
       "../postcss.config.js",
+      "../postcss.config.cjs",
       "../../postcss.config.js",
+      "../../postcss.config.cjs",
     ]);
 
     if (postcssConfigPath) {
@@ -196,12 +202,13 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
   config.resolve = config.resolve || {
     symlinks: true,
     alias: {},
-    plugins: [new ResolveTypeScriptPlugin()],
+    plugins: [new ResolveTypeScriptPlugin({ includeNodeModules: true })],
   };
   config.resolve.extensions = config.resolve.extensions || [
     ".ts",
     ".tsx",
     ".js",
+    ".jsx",
     ".json",
     ".scss",
     ".pug",
