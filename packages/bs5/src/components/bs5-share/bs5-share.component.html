@@ -2,12 +2,15 @@
   <button class="btn btn-icon dropdown-toggle dropdown-toggle-share d-flex align-items-center" rv-id="dropdownId" rv-template="labelTemplate"></button>
   <div class="dropdown-menu" rv-aria-labelledby="dropdownId" rv-add-class="'dropdown-menu-' | append dropdownAlignment">
 
-    <div rv-each-item="shareItems" rv-show="item.available" rv-on-click="shareOnService | args item">
-      <a rv-if="item.type | eq 'download'" class="dropdown-item no-barba cursor-pointer" rv-type="item.type"
-        target="_blank" rv-download="getFilename | call item" rv-href="item.url" rv-html="item.label">
-      </a>
-      <div class="dropdown-item cursor-pointer" rv-unless="item.type | eq 'download'" rv-type="item.type"
-        rv-html="item.label"></div>
+    <div rv-each-item="shareItems">
+      <div rv-if="item.available" rv-on-click="shareOnService | args item">
+        <a rv-if="item.type | eq 'download'" class="dropdown-item no-barba cursor-pointer" rv-type="item.type"
+          target="_blank" rv-download="getFilename | call item" rv-href="item.url" rv-html="item.label">
+        </a>
+        <div class="dropdown-item cursor-pointer" rv-unless="item.type | eq 'download'" rv-type="item.type"
+          rv-html="item.label"></div>
+      </div>
+
     </div>
 
   </div>
