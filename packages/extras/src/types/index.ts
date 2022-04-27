@@ -1,3 +1,4 @@
+export * from "./media-ready-state.js";
 export * from "./module-options.js";
 export * from "./position.js";
 export * from "./scroll-events-options.js";
@@ -8,3 +9,4 @@ export * from "./touch-offset.js";
 export * from "./touch-settings.js";
 export * from "./touch-swipe-data.js";
 export * from "./touch-type.js";
+export * from "./video-component-scope.js";

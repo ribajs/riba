@@ -2,7 +2,8 @@ import type { VideoComponent } from "../components/video/video.component.js";
 import type { MediaReadyState } from "./media-ready-state.js";
 
 export interface VideoComponentScope {
-  // properties
+  // Properties
+
   muted: boolean;
   volume: number;
   loop: boolean;
@@ -16,7 +17,9 @@ export interface VideoComponentScope {
   loading: boolean;
   duration: number;
   readyState: MediaReadyState;
-  // methods
+
+  // Methods
+
   toggleMute: VideoComponent["toggleMute"];
   toggleControls: VideoComponent["toggleControls"];
   play: VideoComponent["play"];
@@ -25,7 +28,8 @@ export interface VideoComponentScope {
   togglePause: VideoComponent["togglePause"];
   reset: VideoComponent["reset"];
 
-  // custom
+  // Custom
+
   /** If the user will pass the video source for some reason */
   videoSrc?: string;
   autoplayOnMinBuffer: number;

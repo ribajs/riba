@@ -1,9 +1,5 @@
-import { Component } from "../../component/component.js";
-import {
-  TemplateFunction,
-  VideoComponentScope,
-  MediaReadyState,
-} from "../../types/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
+import { VideoComponentScope, MediaReadyState } from "../../types/index.js";
 import { justDigits } from "@ribajs/utils/src/index.js";
 
 export class VideoComponent extends Component {
