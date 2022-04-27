@@ -29,7 +29,7 @@ webpackConfigPath = findFile(
 
 if (!webpackConfigPath) {
   webpackConfigPath = findFile(
-    path.resolve(__dirname, ".."),
+    path.resolve(config.dist.root, ".."),
     webpackConfigFilenames
   );
 }
@@ -42,7 +42,7 @@ webpackCheckoutConfigPath = findFile(
 
 if (!webpackCheckoutConfigPath) {
   webpackCheckoutConfigPath = findFile(
-    path.resolve(__dirname, ".."),
+    path.resolve(config.dist.root, ".."),
     webpackCheckoutConfigFilenames
   );
 }

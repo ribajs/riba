@@ -25,12 +25,12 @@ const webpackCheckoutConfigFilenames = [
 // webpack.config
 webpackConfigPath = (0, utilities_cjs_1.findFile)(path_1.default.resolve(config_cjs_1.config.dist.root), webpackConfigFilenames);
 if (!webpackConfigPath) {
-    webpackConfigPath = (0, utilities_cjs_1.findFile)(path_1.default.resolve(__dirname, ".."), webpackConfigFilenames);
+    webpackConfigPath = (0, utilities_cjs_1.findFile)(path_1.default.resolve(config_cjs_1.config.dist.root, ".."), webpackConfigFilenames);
 }
 // webpack-checkout.config
 webpackCheckoutConfigPath = (0, utilities_cjs_1.findFile)(path_1.default.resolve(config_cjs_1.config.dist.root), webpackCheckoutConfigFilenames);
 if (!webpackCheckoutConfigPath) {
-    webpackCheckoutConfigPath = (0, utilities_cjs_1.findFile)(path_1.default.resolve(__dirname, ".."), webpackCheckoutConfigFilenames);
+    webpackCheckoutConfigPath = (0, utilities_cjs_1.findFile)(path_1.default.resolve(config_cjs_1.config.dist.root, ".."), webpackCheckoutConfigFilenames);
 }
 webpackConfig = require(webpackConfigPath)(gulp_util_1.default.env.environments);
 webpackCheckoutConfig = require(webpackCheckoutConfigPath)(gulp_util_1.default.env.environments);
