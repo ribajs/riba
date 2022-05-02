@@ -11,10 +11,14 @@ import { findFile } from "./includes/utilities.cjs";
 
 // Try to get the webpack.config.js from root of the project, otherwise use the default babel config
 let webpackConfig: any | null = null; // TODO
-let webpackCheckoutConfig: any; // TODO
+let webpackCheckoutConfig: any | null = null; // TODO
 let webpackConfigPath: string | null = null;
 let webpackCheckoutConfigPath: string | null = null;
 
+const searchPath = [
+  path.resolve(config.dist.root),
+  path.resolve(config.dist.root, ".."),
+];
 const webpackConfigFilenames = ["webpack.config.js", "webpack.config.cjs"];
 const webpackCheckoutConfigFilenames = [
   "webpack-checkout.config.js",
@@ -22,39 +26,27 @@ const webpackCheckoutConfigFilenames = [
 ];
 
 // webpack.config
-webpackConfigPath = findFile(
-  path.resolve(config.dist.root),
-  webpackConfigFilenames
-);
-
-if (!webpackConfigPath) {
-  webpackConfigPath = findFile(
-    path.resolve(config.dist.root, ".."),
-    webpackConfigFilenames
-  );
-}
+webpackConfigPath = findFile(searchPath, webpackConfigFilenames);
 
 // webpack-checkout.config
 webpackCheckoutConfigPath = findFile(
-  path.resolve(config.dist.root),
+  searchPath,
   webpackCheckoutConfigFilenames
 );
 
-if (!webpackCheckoutConfigPath) {
-  webpackCheckoutConfigPath = findFile(
-    path.resolve(config.dist.root, ".."),
-    webpackCheckoutConfigFilenames
+if (webpackConfigPath) {
+  webpackConfig = require(webpackConfigPath)(gutil.env.environments);
+}
+if (webpackCheckoutConfigPath) {
+  webpackCheckoutConfig = require(webpackCheckoutConfigPath)(
+    gutil.env.environments
   );
 }
-
-webpackConfig = require(webpackConfigPath)(gutil.env.environments);
-webpackCheckoutConfig = require(webpackCheckoutConfigPath)(
-  gutil.env.environments
-);
 
 gulp.task("build:wp:main", (done) => {
   messages.logProcessFiles("build:wp:main");
   if (!webpackConfig.entry.main || webpackConfig.entry.main?.length <= 0) {
+    gutil.log("Webpack checkout config not found, ignore task build:wp:main");
     return done();
   }
   return gulp
@@ -66,7 +58,8 @@ gulp.task("build:wp:main", (done) => {
 
 gulp.task("watch:wp:main", (done) => {
   messages.logProcessFiles("watch:wp:main");
-  if (!webpackConfig.entry.main || webpackConfig.entry.main?.length <= 0) {
+  if (!webpackConfig?.entry.main || webpackConfig.entry.main?.length <= 0) {
+    gutil.log("Webpack checkout config not found, ignore task watch:wp:main");
     return done();
   }
   webpackConfig.watch = true;
@@ -80,9 +73,12 @@ gulp.task("watch:wp:main", (done) => {
 gulp.task("build:wp:checkout", (done) => {
   messages.logProcessFiles("build:wp:checkout");
   if (
-    !webpackCheckoutConfig.entry.checkout ||
+    !webpackCheckoutConfig?.entry.checkout ||
     webpackCheckoutConfig.entry.checkout?.length <= 0
   ) {
+    gutil.log(
+      "Webpack checkout config not found, ignore task build:wp:checkout"
+    );
     return done();
   }
   return gulp
@@ -98,6 +94,9 @@ gulp.task("watch:wp:checkout", (done) => {
     !webpackCheckoutConfig.entry.checkout ||
     webpackCheckoutConfig.entry.checkout?.length <= 0
   ) {
+    gutil.log(
+      "Webpack checkout config not found, ignore task watch:wp:checkout"
+    );
     return done();
   }
   webpackCheckoutConfig.watch = true;

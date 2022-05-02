@@ -196,12 +196,17 @@ exports.processCache = lodash_1.default.debounce((cache, changeFn, delFn) => {
         cache.unlink = [];
     }
 }, 320);
-const findFile = (rootDir, searchForFiles) => {
+const findFile = (rootDirs, searchForFiles) => {
     let result = null;
-    for (let searchPath of searchForFiles) {
-        searchPath = (0, path_1.resolve)(rootDir, searchPath);
-        if (!result && (0, fs_1.existsSync)(searchPath) && (0, fs_1.lstatSync)(searchPath).isFile()) {
-            result = searchPath;
+    if (!Array.isArray(rootDirs))
+        rootDirs = [rootDirs];
+    for (let rootDir of rootDirs) {
+        for (let searchPath of searchForFiles) {
+            searchPath = (0, path_1.resolve)(rootDir, searchPath);
+            if (!result && (0, fs_1.existsSync)(searchPath) && (0, fs_1.lstatSync)(searchPath).isFile()) {
+                result = searchPath;
+                return result;
+            }
         }
     }
     return result;

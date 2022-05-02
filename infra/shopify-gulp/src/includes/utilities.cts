@@ -210,12 +210,19 @@ export const processCache = _.debounce(
   320
 );
 
-export const findFile = (rootDir: string, searchForFiles: string[]) => {
+export const findFile = (
+  rootDirs: string[] | string,
+  searchForFiles: string[]
+) => {
   let result = null;
-  for (let searchPath of searchForFiles) {
-    searchPath = resolve(rootDir, searchPath);
-    if (!result && existsSync(searchPath) && lstatSync(searchPath).isFile()) {
-      result = searchPath;
+  if (!Array.isArray(rootDirs)) rootDirs = [rootDirs];
+  for (let rootDir of rootDirs) {
+    for (let searchPath of searchForFiles) {
+      searchPath = resolve(rootDir, searchPath);
+      if (!result && existsSync(searchPath) && lstatSync(searchPath).isFile()) {
+        result = searchPath;
+        return result;
+      }
     }
   }
   return result;

@@ -14,26 +14,30 @@ const messages_cjs_1 = __importDefault(require("./includes/messages.cjs"));
 const utilities_cjs_1 = require("./includes/utilities.cjs");
 // Try to get the webpack.config.js from root of the project, otherwise use the default babel config
 let webpackConfig = null; // TODO
-let webpackCheckoutConfig; // TODO
+let webpackCheckoutConfig = null; // TODO
 let webpackConfigPath = null;
 let webpackCheckoutConfigPath = null;
+const searchPath = [
+    path_1.default.resolve(config_cjs_1.config.dist.root),
+    path_1.default.resolve(config_cjs_1.config.dist.root, ".."),
+];
 const webpackConfigFilenames = ["webpack.config.js", "webpack.config.cjs"];
 const webpackCheckoutConfigFilenames = [
     "webpack-checkout.config.js",
     "webpack-checkout.config.cjs",
 ];
 // webpack.config
-webpackConfigPath = (0, utilities_cjs_1.findFile)(path_1.default.resolve(config_cjs_1.config.dist.root), webpackConfigFilenames);
-if (!webpackConfigPath) {
-    webpackConfigPath = (0, utilities_cjs_1.findFile)(path_1.default.resolve(config_cjs_1.config.dist.root, ".."), webpackConfigFilenames);
-}
+webpackConfigPath = (0, utilities_cjs_1.findFile)(searchPath, webpackConfigFilenames);
 // webpack-checkout.config
-webpackCheckoutConfigPath = (0, utilities_cjs_1.findFile)(path_1.default.resolve(config_cjs_1.config.dist.root), webpackCheckoutConfigFilenames);
-if (!webpackCheckoutConfigPath) {
-    webpackCheckoutConfigPath = (0, utilities_cjs_1.findFile)(path_1.default.resolve(config_cjs_1.config.dist.root, ".."), webpackCheckoutConfigFilenames);
+webpackCheckoutConfigPath = (0, utilities_cjs_1.findFile)(searchPath, webpackCheckoutConfigFilenames);
+console.debug("webpackConfigPath", webpackConfigPath);
+console.debug("webpackCheckoutConfigPath", webpackCheckoutConfigPath);
+if (webpackConfigPath) {
+    webpackConfig = require(webpackConfigPath)(gulp_util_1.default.env.environments);
 }
-webpackConfig = require(webpackConfigPath)(gulp_util_1.default.env.environments);
-webpackCheckoutConfig = require(webpackCheckoutConfigPath)(gulp_util_1.default.env.environments);
+if (webpackCheckoutConfigPath) {
+    webpackCheckoutConfig = require(webpackCheckoutConfigPath)(gulp_util_1.default.env.environments);
+}
 gulp_1.default.task("build:wp:main", (done) => {
     var _a;
     messages_cjs_1.default.logProcessFiles("build:wp:main");
@@ -49,7 +53,8 @@ gulp_1.default.task("build:wp:main", (done) => {
 gulp_1.default.task("watch:wp:main", (done) => {
     var _a;
     messages_cjs_1.default.logProcessFiles("watch:wp:main");
-    if (!webpackConfig.entry.main || ((_a = webpackConfig.entry.main) === null || _a === void 0 ? void 0 : _a.length) <= 0) {
+    if (!(webpackConfig === null || webpackConfig === void 0 ? void 0 : webpackConfig.entry.main) || ((_a = webpackConfig.entry.main) === null || _a === void 0 ? void 0 : _a.length) <= 0) {
+        gulp_util_1.default.log("Webpack checkout config not found, ignore task build:wp:main");
         return done();
     }
     webpackConfig.watch = true;
@@ -62,8 +67,9 @@ gulp_1.default.task("watch:wp:main", (done) => {
 gulp_1.default.task("build:wp:checkout", (done) => {
     var _a;
     messages_cjs_1.default.logProcessFiles("build:wp:checkout");
-    if (!webpackCheckoutConfig.entry.checkout ||
+    if (!(webpackCheckoutConfig === null || webpackCheckoutConfig === void 0 ? void 0 : webpackCheckoutConfig.entry.checkout) ||
         ((_a = webpackCheckoutConfig.entry.checkout) === null || _a === void 0 ? void 0 : _a.length) <= 0) {
+        gulp_util_1.default.log("Webpack checkout config not found, ignore task build:wp:checkout");
         return done();
     }
     return gulp_1.default
