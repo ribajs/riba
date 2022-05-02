@@ -30,8 +30,6 @@ const webpackCheckoutConfigFilenames = [
 webpackConfigPath = (0, utilities_cjs_1.findFile)(searchPath, webpackConfigFilenames);
 // webpack-checkout.config
 webpackCheckoutConfigPath = (0, utilities_cjs_1.findFile)(searchPath, webpackCheckoutConfigFilenames);
-console.debug("webpackConfigPath", webpackConfigPath);
-console.debug("webpackCheckoutConfigPath", webpackCheckoutConfigPath);
 if (webpackConfigPath) {
     webpackConfig = require(webpackConfigPath)(gulp_util_1.default.env.environments);
 }
@@ -42,6 +40,7 @@ gulp_1.default.task("build:wp:main", (done) => {
     var _a;
     messages_cjs_1.default.logProcessFiles("build:wp:main");
     if (!webpackConfig.entry.main || ((_a = webpackConfig.entry.main) === null || _a === void 0 ? void 0 : _a.length) <= 0) {
+        gulp_util_1.default.log("Webpack checkout config not found, ignore task build:wp:main");
         return done();
     }
     return gulp_1.default
@@ -54,7 +53,7 @@ gulp_1.default.task("watch:wp:main", (done) => {
     var _a;
     messages_cjs_1.default.logProcessFiles("watch:wp:main");
     if (!(webpackConfig === null || webpackConfig === void 0 ? void 0 : webpackConfig.entry.main) || ((_a = webpackConfig.entry.main) === null || _a === void 0 ? void 0 : _a.length) <= 0) {
-        gulp_util_1.default.log("Webpack checkout config not found, ignore task build:wp:main");
+        gulp_util_1.default.log("Webpack checkout config not found, ignore task watch:wp:main");
         return done();
     }
     webpackConfig.watch = true;
@@ -83,6 +82,7 @@ gulp_1.default.task("watch:wp:checkout", (done) => {
     messages_cjs_1.default.logProcessFiles("watch:wp:checkout");
     if (!webpackCheckoutConfig.entry.checkout ||
         ((_a = webpackCheckoutConfig.entry.checkout) === null || _a === void 0 ? void 0 : _a.length) <= 0) {
+        gulp_util_1.default.log("Webpack checkout config not found, ignore task watch:wp:checkout");
         return done();
     }
     webpackCheckoutConfig.watch = true;
