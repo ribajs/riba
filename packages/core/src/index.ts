@@ -1,5 +1,4 @@
 export * from "./types/index.js";
-export * from "./vendors/index.js";
 export * from "./services/index.js";
 export * from "./adapters/index.js";
 export * from "./binders/index.js";
