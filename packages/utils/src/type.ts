@@ -54,7 +54,7 @@ export const parseJsonString = (value?: string | null) => {
       // Transform an invalid json string with single quotation to a valid json string with double quotation
       object = JSON.parse(value.replace(/'/g, '"')) || null;
     } catch (error) {
-      console.warn(error);
+      console.warn(`Can't parse json string of "${value}" `, error);
     }
   }
   return object;
@@ -65,7 +65,10 @@ export const couldBeJson = (str?: string | null) => {
     return false;
   }
   str = str.trim();
-  return str.charAt(0) === "{" || str.charAt(0) === "[";
+  return (
+    (str.charAt(0) === "{" && str.charAt(str.length - 1) === "}") ||
+    (str.charAt(0) === "[" && str.charAt(str.length - 1) === "]")
+  );
 };
 
 /**
