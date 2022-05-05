@@ -1,11 +1,17 @@
 export interface ShopifyCartObject {
   attributes: any;
+  cart_level_discount_applications: []; // TODO https://shopify.dev/api/liquid/objects/discount-application
   currency: string;
   item_count: number;
+  discount_applications: []; // TODO https://shopify.dev/api/liquid/objects/discount-application
   items: ShopifyCartLineItem[];
+  items_subtotal_price: number;
   note: string | null;
   original_total_price: number;
+  taxes_included: boolean;
+  /** depreciated or undocumented? */
   requires_shipping: boolean;
+  /** depreciated or undocumented? */
   token: string;
   total_discount: number;
   total_price: number;

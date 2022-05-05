@@ -28,6 +28,35 @@ export class ShopifyCartService {
   public static shopifyCartEventDispatcher = new EventDispatcher("ShopifyCart");
 
   /**
+   * Use this method to force an update of the shopping cart object, e.g. if the shopping cart was updated outside Riba.
+   * @param options
+   */
+  public static async updateExtern(
+    options: ShopifyCartRequestOptions = this.requestOptionDefaults
+  ) {
+    if (options.triggerOnStart) {
+      this.triggerOnStart();
+    }
+
+    const newCart = await this.refresh();
+    const oldCart = this.cart;
+    this.cart = newCart;
+
+    if (options.triggerOnChange) {
+      if (
+        oldCart?.total_price !== newCart?.total_price ||
+        oldCart?.item_count !== oldCart?.item_count
+      ) {
+        this.triggerOnChange(this.cart);
+      }
+    }
+
+    if (options.triggerOnComplete) {
+      this.triggerOnComplete();
+    }
+  }
+
+  /**
    * Use this to add a variant to the cart.
    * @param id Variant id
    * @param quantity Quantity
@@ -90,7 +119,15 @@ export class ShopifyCartService {
       "json"
     );
 
-    return cartRes.body;
+    let cart: ShopifyCartObject;
+
+    if (typeof cartRes.body === "string") {
+      cart = JSON.parse(cartRes.body);
+    } else {
+      cart = cartRes.body;
+    }
+
+    return cart;
   }
 
   public static _get(): Promise<ShopifyCartObject> {
