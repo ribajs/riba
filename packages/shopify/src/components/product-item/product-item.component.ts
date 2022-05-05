@@ -41,9 +41,14 @@ export class ShopifyProductItemComponent extends Component {
   /**
    * handle is the product handle to get the product json object
    * extras are product data which is only available over liquid and not over the product json object
+   * product is the product object itself if you want to pass it directly
    */
   static get observedAttributes(): string[] {
-    return ["handle", "extras"];
+    return ["handle", "extras", "product"];
+  }
+
+  protected requiredAttributes(): string[] {
+    return ["handle"];
   }
 
   public scope: Scope = {
@@ -110,6 +115,8 @@ export class ShopifyProductItemComponent extends Component {
   protected set product(product: ShopifyProduct | null) {
     if (product) {
       this.scope.product = ShopifyProductService.prepare(product);
+
+      this.scope.handle = this.scope.product.handle;
 
       this.scope.colorOption =
         ShopifyProductService.getOption(this.scope.product, "color") || null;
@@ -248,21 +255,41 @@ export class ShopifyProductItemComponent extends Component {
     if (this.scope.handle === null) {
       throw new Error("Product handle not set");
     }
-    return ShopifyProductService.get(this.scope.handle).then(
-      (product: ShopifyProduct) => {
-        this.product = product;
-        return product;
-      }
+    if (!this.product) {
+      this.fetchProduct(this.scope.handle);
+    }
+  }
+
+  protected async fetchProduct(handle: string) {
+    const product = await ShopifyProductService.get(handle);
+    if (product) {
+      this.product = product;
+    }
+    return product;
+  }
+
+  protected parsedAttributeChangedCallback(
+    attributeName: string,
+    oldValue: any,
+    newValue: any,
+    namespace: string | null
+  ) {
+    super.parsedAttributeChangedCallback(
+      attributeName,
+      oldValue,
+      newValue,
+      namespace
     );
+    switch (attributeName) {
+      case "product":
+        this.product = newValue;
+        break;
+    }
   }
 
   protected async afterBind() {
     await super.afterBind();
     this.activateOptions();
-  }
-
-  protected requiredAttributes(): string[] {
-    return ["handle"];
   }
 
   protected template(): ReturnType<TemplateFunction> {
