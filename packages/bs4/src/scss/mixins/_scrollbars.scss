@@ -15,16 +15,16 @@
  @mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white,  50%)) {
   // For Google Chrome
   &::-webkit-scrollbar {
-    width:  $size !important;;
-    height: $size !important;;
+    width:  $size !important;
+    height: $size !important;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: $foreground-color !important;;
+    background: $foreground-color !important;
   }
 
   &::-webkit-scrollbar-track {
-    background: $background-color !important;;
+    background: $background-color !important;
   }
 
   // For Internet Explorer
