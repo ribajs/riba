@@ -200,7 +200,7 @@ const findFile = (rootDirs, searchForFiles) => {
     let result = null;
     if (!Array.isArray(rootDirs))
         rootDirs = [rootDirs];
-    for (let rootDir of rootDirs) {
+    for (const rootDir of rootDirs) {
         for (let searchPath of searchForFiles) {
             searchPath = (0, path_1.resolve)(rootDir, searchPath);
             if (!result && (0, fs_1.existsSync)(searchPath) && (0, fs_1.lstatSync)(searchPath).isFile()) {

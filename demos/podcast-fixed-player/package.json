@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/podcast-fixed-player-example",
-  "version": "2.0.0-alpha.5",
+  "version": "2.0.0-alpha.6",
   "type": "module",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
