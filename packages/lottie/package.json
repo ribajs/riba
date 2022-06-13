@@ -1,0 +1,35 @@
+{
+  "name": "@ribajs/lottie",
+  "description": "Lottie Web Player ported to Riba.js",
+  "version": "2.0.0-alpha.5",
+  "type": "module",
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
+  "scripts": {
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix && tsc --noEmit",
+    "build": "npm run lint && npm run build:module && npm run build:sass",
+    "build:module": "tsc",
+    "build:sass": "sass index.scss:dist/index.css",
+    "clean": "rm -rf ./dist ./lib"
+  },
+  "dependencies": {
+    "@ribajs/core": "workspace:^",
+    "@ribajs/jsx": "workspace:^",
+    "@ribajs/utils": "workspace:^",
+    "lottie-web": "^5.9.4"
+  },
+  "main": "./src/index.ts",
+  "module": "src/index.ts",
+  "source": "src/index.ts",
+  "devDependencies": {
+    "@babel/runtime": "^7.17.9",
+    "@babel/runtime-corejs3": "^7.17.9",
+    "@ribajs/tsconfig": "workspace:^",
+    "@types/eslint": "^8.4.1",
+    "@types/node": "^17.0.25",
+    "eslint": "^8.13.0",
+    "sass": "^1.52.3",
+    "typescript": "^4.6.3"
+  }
+}

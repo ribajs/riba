@@ -24,7 +24,7 @@ export interface JsxInputElementProps extends JsxHtmlGlobalProps {
   list?: string;
   max?: number;
   maxLength?: number;
-  min?: string;
+  min?: number;
   minLength?: number;
   multiple?: boolean;
   name?: string;

@@ -120,7 +120,7 @@ export class ShopifyProductService {
 
     // all option names to lower case
     for (const option of product.options) {
-      option.name = option.name.toString().toLocaleLowerCase();
+      option.name = option.name.toLowerCase();
     }
 
     return product;

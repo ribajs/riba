@@ -1,6 +1,10 @@
 import { AttributeBinder, View } from "@ribajs/core";
 import { Bs5AbstractBreakpointBinder } from "./bs5-abstract-breakpoint.binder.js";
 
+/**
+ * Responsive attribute breakpoint binder
+ * This binder is used to pass attributes to an element that should only be set at certain breakpoints (viewport widths).
+ */
 export class Bs5AttributeBreakpointBinder extends Bs5AbstractBreakpointBinder<HTMLElement> {
   static key = "bs5-attr-*-*";
 

@@ -153,6 +153,7 @@ export interface JsxSvgElementProps
   width?: string | number;
   x?: string | number;
   y?: string | number;
+  focusable?: boolean;
 }
 /**
  * Properties permitted on the `<path>` element.
