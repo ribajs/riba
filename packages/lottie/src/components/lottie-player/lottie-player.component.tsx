@@ -250,7 +250,6 @@ export class LottiePlayer extends Component {
    * Stops animation play.
    */
   public stop(): void {
-    console.debug("stop");
     if (!this._lottie) {
       return;
     }
@@ -287,9 +286,6 @@ export class LottiePlayer extends Component {
 
     // Extract frame number from either number or percentage value
     const matches = /^(\d+)(%?)$/.exec(value.toString());
-
-    console.debug("seek", value);
-    console.debug("matches", matches);
 
     if (!matches) {
       return;
@@ -508,8 +504,6 @@ export class LottiePlayer extends Component {
       return;
     }
 
-    console.debug("_handleSeekChange");
-
     const frame: number = Math.round(
       (Number(el.value) / 100) * this._lottie.totalFrames
     );
@@ -536,7 +530,6 @@ export class LottiePlayer extends Component {
 
     // Handle animation play complete
     this._lottie.addEventListener("complete", () => {
-      console.debug("on complete");
       if (this.scope.currentState !== PlayerState.Playing) {
         this.dispatchEvent(new CustomEvent(PlayerEvents.Complete));
 

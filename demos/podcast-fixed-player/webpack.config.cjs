@@ -9,7 +9,7 @@ const webpackConfig = ribaWebpackConfig({
     foldername: "dist",
     patterns: [
       {
-        from: "*.*",
+        from: "src/*",
         to: "assets",
         toType: "dir",
         context: "./src/assets",
