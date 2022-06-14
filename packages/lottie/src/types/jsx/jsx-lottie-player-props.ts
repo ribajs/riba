@@ -74,8 +74,9 @@ export interface JsxLottiePlayerProps extends JsxHtmlGlobalProps {
 
   /**
    * Bodymovin JSON data or URL to JSON.
+   * Required but type is optional because we can also use `rv-co-src` or `rv-src`
    */
-  src: any | string; // TODO
+  src?: any | string;
 
   /**
    * Enable web workers

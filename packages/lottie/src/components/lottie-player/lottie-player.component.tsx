@@ -63,7 +63,7 @@ async function fromURL(url: string): Promise<Record<string, any>> {
  * LottiePlayer web component class ported to Riba.js
  * @see https://github.com/LottieFiles/lottie-player/blob/master/src/lottie-player.ts
  */
-export class LottiePlayer extends Component {
+export class LottiePlayerComponent extends Component {
   /**
    * The tag name of the element, in this case `<lottie-player>...</lottie-player>`
    */
@@ -80,7 +80,7 @@ export class LottiePlayer extends Component {
     hover: false,
     intermission: 1,
     loop: false,
-    mode: PlayMode.Bounce,
+    mode: PlayMode.Normal,
     preserveAspectRatio: "xMidYMid meet",
     renderer: "svg",
     seeker: 0,
@@ -138,7 +138,7 @@ export class LottiePlayer extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init(LottiePlayer.observedAttributes);
+    this.init(LottiePlayerComponent.observedAttributes);
   }
 
   protected async afterBind() {

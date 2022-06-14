@@ -1,4 +1,4 @@
-import type { LottiePlayer } from "../components/lottie-player/lottie-player.component.js";
+import type { LottiePlayerComponent } from "../components/lottie-player/lottie-player.component.js";
 import type { PlayMode, PlayerState } from "./index.js";
 
 export interface LottiePlayerComponentScope {
@@ -96,10 +96,10 @@ export interface LottiePlayerComponentScope {
 
   // METHODS
 
-  handleSeekChange: LottiePlayer["_handleSeekChange"];
-  onInputMousedown: LottiePlayer["_onInputMousedown"];
-  onInputMouseup: LottiePlayer["_onInputMouseup"];
-  togglePlay: LottiePlayer["togglePlay"];
-  toggleLooping: LottiePlayer["toggleLooping"];
-  stop: LottiePlayer["stop"];
+  handleSeekChange: LottiePlayerComponent["_handleSeekChange"];
+  onInputMousedown: LottiePlayerComponent["_onInputMousedown"];
+  onInputMouseup: LottiePlayerComponent["_onInputMouseup"];
+  togglePlay: LottiePlayerComponent["togglePlay"];
+  toggleLooping: LottiePlayerComponent["toggleLooping"];
+  stop: LottiePlayerComponent["stop"];
 }
