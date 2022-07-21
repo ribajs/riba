@@ -177,7 +177,7 @@ describe("riba.Binder", () => {
       binding.bind = () => {
         return;
       };
-      jest.spyOn(binding, "bind");
+      jest.spyOn(binding, "bind" as any);
 
       binding._bind();
       expect(binding.bind).toHaveBeenCalled();
@@ -219,7 +219,7 @@ describe("riba.Binder", () => {
       });
 
       it(`calls the binder's unbind method`, () => {
-        jest.spyOn(binding, "unbind");
+        jest.spyOn(binding, "unbind" as any);
         binding._unbind();
         expect(binding.unbind).toHaveBeenCalled();
       });

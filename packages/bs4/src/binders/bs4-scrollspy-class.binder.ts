@@ -46,7 +46,7 @@ export class ScrollspyClassBinder extends Binder<string, HTMLInputElement> {
     }
     const offsetTop = Number(this.el.dataset.offset || 0);
     const offsetBottom = Number(this.el.dataset.offsetBottom || 0);
-    return isInViewport(elem, offsetTop, offsetBottom);
+    return isInViewport(elem, { top: offsetTop, bottom: offsetBottom });
   }
 
   private isInViewport = this._isInViewport.bind(this);
