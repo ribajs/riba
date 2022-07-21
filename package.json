@@ -111,7 +111,6 @@
     "!infra/schematics",
     "backend/*",
     "demos/*",
-    "!demos/vue",
     "examples/*/*",
     "!examples/electron/electron",
     "!examples/electron/electron-nest"
