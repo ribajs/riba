@@ -4,6 +4,8 @@ const { getStyleLoaderRule } = require("./style.cjs");
 const { basename } = require("path");
 const { logger } = require("./logger.cjs");
 
+const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
+
 module.exports.getConfig = (config = {}, env = {}) => {
   // config defaults for config templates
   switch (config.template.toLowerCase()) {
@@ -186,5 +188,6 @@ module.exports.getConfig = (config = {}, env = {}) => {
     ];
   }
 
+  config.plugins.push(new WebpackManifestPlugin({}));
   return config;
 };

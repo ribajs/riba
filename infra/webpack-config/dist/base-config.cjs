@@ -235,12 +235,12 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
     minimize: config.production, // config.production disabled until terser works with webpack 5 and yarn 2
   };
 
-  let commonsName = "vendors";
-  switch (config.template) {
-    case "shopify-checkout":
-      commonsName = "vendors-checkout";
-      break;
-  }
+  // let commonsName = "vendors";
+  // switch (config.template) {
+  //   case "shopify-checkout":
+  //     commonsName = "vendors-checkout";
+  //     break;
+  // }
 
   config.optimization = config.optimization || {
     minimize: config.scripts.minimize,
@@ -249,12 +249,12 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
       automaticNameDelimiter: ".",
       chunks: "all",
       cacheGroups: {
-        defaultVendors: {
-          test: /[\\/]node_modules[\\/]/,
-          name: commonsName,
-          chunks: "all",
-          reuseExistingChunk: true,
-        },
+        // defaultVendors: {
+        //   test: /[\\/]node_modules[\\/]/,
+        //   name: commonsName,
+        //   chunks: "all",
+        //   reuseExistingChunk: true,
+        // },
         styles: {
           name: "styles",
           test: /\.css$/,
@@ -262,16 +262,28 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
           enforce: true,
           reuseExistingChunk: true,
         },
-        templates: {
-          name: "templates",
-          test: /\.[html|pug]$/,
-          chunks: "all",
-          enforce: true,
-          reuseExistingChunk: true,
-        },
+        // templates: {
+        //   name: "templates",
+        //   test: /\.[html|pug]$/,
+        //   chunks: "all",
+        //   enforce: true,
+        //   reuseExistingChunk: true,
+        // },
       },
     },
   };
+
+  if (
+    config.template === "shopify-checkout" &&
+    config.optimization.splitChunks.cacheGroups
+  ) {
+    config.optimization.splitChunks.cacheGroups.defaultVendors = {
+      test: /[\\/]node_modules[\\/]/,
+      name: commonsName,
+      chunks: "all",
+      reuseExistingChunk: true,
+    };
+  }
 
   // config defaults for config templates
   switch (config.template) {
