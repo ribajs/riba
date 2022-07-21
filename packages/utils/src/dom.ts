@@ -375,14 +375,18 @@ export const getViewportDimensions = () => {
 /**
  * Determine if an element is in the viewport
  * @param elem The element
- * @param offsetTop (Default  Distance to the top of the screen, if this is 0, the element must be scrolled until the top of the screen.
- * @param offsetBottom Distance to the bottom of the screen, if this is 0, the scroll position must be over the element
+ * @param offset.top Distance to the top of the screen, if this is 0, the element must be scrolled until the top of the screen
+ * @param offset.bottom Distance to the bottom of the screen, if this is 0, the scroll position must be over the element
  * @return Returns true if element is in the viewport
  */
 export const isInViewport = (
   elem: Element,
-  offsetTop?: number,
-  offsetBottom = 0
+  offset: {
+    top?: number;
+    bottom?: number;
+    left?: number;
+    right?: number;
+  } = {}
 ) => {
   if (!elem) {
     return false;
@@ -390,15 +394,25 @@ export const isInViewport = (
 
   const distance = elem.getBoundingClientRect();
 
-  if (!offsetTop) {
-    const vp = getViewportDimensions();
-    offsetTop = vp.h - distance.height;
-  }
+  const vp = getViewportDimensions();
 
-  return (
-    distance.top + distance.height >= offsetBottom &&
-    distance.bottom - distance.height <= offsetTop
-  );
+  offset.top ||= 0;
+  offset.left ||= 0;
+  offset.bottom ||= 0;
+  offset.right ||= 0;
+
+  offset.top += vp.h - distance.height;
+  offset.left += vp.w - distance.width;
+
+  const vertical =
+    distance.top + distance.height >= offset.bottom &&
+    distance.bottom - distance.height <= offset.top;
+
+  const horizontal =
+    distance.left + distance.width >= offset.right &&
+    distance.right - distance.width <= offset.left;
+
+  return vertical && horizontal;
 };
 
 /**

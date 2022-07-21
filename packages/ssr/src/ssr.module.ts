@@ -18,7 +18,7 @@ export const SSRModule: RibaModule<SSRModuleOptions> = {
 
     const lifecycle = LifecycleService.getInstance();
 
-    // After all components are bound wie trigger the ssr ready event,
+    // After all components are bound we trigger the ssr ready event,
     // as soon as this event is triggered the ssr rendering will be done and returns the rendered html
     lifecycle.events.on("ComponentLifecycle:allBound", () => {
       window.ssr.events?.trigger("ready");

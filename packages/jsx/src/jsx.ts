@@ -150,8 +150,7 @@ declare global {
     export { JsxElement as Element };
   }
 }
-declare const global: any;
 
 // Set as global variable in Browser, Deno or Node
-(global || window).jsxCreateElement = createElement;
-(global || window).jsxFragment = JsxFragment;
+globalThis.jsxCreateElement = createElement;
+globalThis.jsxFragment = JsxFragment;
