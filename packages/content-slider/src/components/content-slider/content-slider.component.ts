@@ -1,9 +1,8 @@
-import { TemplatesComponent, TemplateFunction, ScopeBase } from "@ribajs/core";
+import { TemplatesComponent, ScopeBase } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { debounce } from "@ribajs/utils/src/control";
 import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
 import { SlideItem } from "../../types/index.js";
-import template from "./content-slider.component.html";
 
 interface Scope extends ScopeBase {
   // States
@@ -322,9 +321,12 @@ export class ContentSliderComponent extends TemplatesComponent {
     this.scope.transform = `translateX(-${x}px)`;
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     // Only set the component template if there no childs or the childs are templates
     if (!hasChildNodesTrim(this) || this.hasOnlyTemplateChilds()) {
+      const { default: template } = await import(
+        "./content-slider.component.html"
+      );
       this.debug("Use template", template);
       return template;
     } else {

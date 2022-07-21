@@ -1,6 +1,5 @@
-import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
+import { Component, ScopeBase } from "@ribajs/core";
 
-import template from "./bs5-modal-item.component.html";
 import { getElementFromEvent } from "@ribajs/utils/src/dom.js";
 import { Modal, ModalNotification } from "../../services/index.js";
 import { Scope as Bs5NotificationContainerScope } from "../bs5-notification-container/bs5-notification-container.component.js";
@@ -96,7 +95,10 @@ export class Bs5ModalItemComponent extends Component {
       );
     }
   }
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
+    const { default: template } = await import(
+      "./bs5-modal-item.component.html"
+    );
     return template;
   }
 }

@@ -1,5 +1,4 @@
-import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
-import template from "./contact-form.component.html";
+import { Component, ScopeBase } from "@ribajs/core";
 import { selectAll, hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { stripHtml } from "@ribajs/utils/src/type.js";
 
@@ -103,11 +102,14 @@ export class ShopifyContactFormComponent extends Component {
     return [];
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     // Only set the component template if there no childs already
     if (this && hasChildNodesTrim(this)) {
       return null;
     } else {
+      const { default: template } = await import(
+        "./contact-form.component.html"
+      );
       return template;
     }
   }

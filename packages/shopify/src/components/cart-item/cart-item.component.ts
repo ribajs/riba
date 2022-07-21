@@ -1,11 +1,10 @@
-import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
+import { Component, ScopeBase } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import {
   ShopifyCartLineItem,
   ShopifyCartObject,
 } from "../../interfaces/index.js";
 import { ShopifyCartService } from "../../services/index.js";
-import template from "./cart-item.component.html";
 
 export interface Scope extends ScopeBase {
   id: ShopifyCartLineItem["id"];
@@ -275,11 +274,12 @@ export class ShopifyCartItemComponent extends Component {
     );
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
+      const { default: template } = await import("./cart-item.component.html");
       return template;
     }
   }

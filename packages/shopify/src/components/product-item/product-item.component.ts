@@ -1,4 +1,4 @@
-import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
+import { Component, ScopeBase } from "@ribajs/core";
 import {
   ShopifyProductVariant,
   ShopifyProduct,
@@ -7,7 +7,6 @@ import {
   ShopifyProductService,
 } from "@ribajs/shopify";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
-import template from "./product-item.component.html";
 
 export interface Scope extends ScopeBase {
   handle: string | null;
@@ -292,11 +291,14 @@ export class ShopifyProductItemComponent extends Component {
     this.activateOptions();
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     // Only set the component template if there no childs already
     if (this && hasChildNodesTrim(this)) {
       return null;
     } else {
+      const { default: template } = await import(
+        "./product-item.component.html"
+      );
       return template;
     }
   }

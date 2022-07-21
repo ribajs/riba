@@ -1,7 +1,6 @@
 import { Component, ScopeBase } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { waitForProp } from "@ribajs/utils/src/control.js";
-import template from "./podlove-fixed-web-player.component.template.js";
 import type {
   PodloveWebPlayerEpisode,
   PodloveWebPlayerConfig,
@@ -122,8 +121,11 @@ export class PodloveFixedWebPlayerComponent extends Component {
     await this.initWebPlayer();
   }
 
-  protected template() {
+  protected async template() {
     if (!hasChildNodesTrim(this)) {
+      const { default: template } = await import(
+        "./podlove-fixed-web-player.component.template.js"
+      );
       return template;
     } else {
       return null;

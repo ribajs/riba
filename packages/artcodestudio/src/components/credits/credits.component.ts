@@ -1,7 +1,6 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component } from "@ribajs/core";
 import { CreditsComponentScope } from "../../types/index.js";
 import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
-import template from "./credits.component.pug";
 
 export class ArtCodeCreditsComponent extends Component {
   public static tagName = "ac-credits";
@@ -69,8 +68,9 @@ export class ArtCodeCreditsComponent extends Component {
     );
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     if (!hasChildNodesTrim(this)) {
+      const { default: template } = await import("./credits.component.pug");
       return template(this.scope);
     } else {
       return null;

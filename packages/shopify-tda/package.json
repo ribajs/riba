@@ -47,6 +47,7 @@
     "@ribajs/eslint-config": "workspace:^",
     "@ribajs/tsconfig": "workspace:^",
     "@types/jest": "^28.1.6",
+    "@types/node": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7",
     "babel-loader": "^8.2.5",
@@ -68,7 +69,6 @@
     "@ribajs/router": "workspace:^",
     "@ribajs/shopify": "workspace:^",
     "@ribajs/utils": "workspace:^",
-    "@types/socket.io-client": "3.0.0",
     "socket.io-client": "4.5.1"
   },
   "bugs": {

@@ -1,7 +1,6 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component } from "@ribajs/core";
 import { NavigableGroupComponentScope } from "../../types/index.js";
 import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
-import template from "./navigable-group.component.pug";
 
 export class NavigableGroupComponent extends Component {
   public static tagName = "a11y-navigable-group";
@@ -21,8 +20,11 @@ export class NavigableGroupComponent extends Component {
     this.init(NavigableGroupComponent.observedAttributes);
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     if (!hasChildNodesTrim(this)) {
+      const { default: template } = await import(
+        "./navigable-group.component.pug"
+      );
       return template(this.scope);
     } else {
       return null;

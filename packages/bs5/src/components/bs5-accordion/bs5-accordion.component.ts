@@ -2,7 +2,6 @@ import {
   handleizeFormatter,
   FormatterFn,
   TemplatesComponent,
-  TemplateFunction,
   ScopeBase,
 } from "@ribajs/core";
 import { Collapse } from "../../services/collapse.js";
@@ -12,8 +11,6 @@ import {
   CollapseEvents,
   AccordionItem,
 } from "../../types/index.js";
-
-import template from "./bs5-accordion.component.html";
 
 const handleize = handleizeFormatter.read as FormatterFn;
 
@@ -227,9 +224,12 @@ export class Bs5AccordionComponent extends TemplatesComponent {
     super.disconnectedCallback();
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     // Only set the component template if there no childs or the childs are templates
     if (!hasChildNodesTrim(this) || this.hasOnlyTemplateChilds()) {
+      const { default: template } = await import(
+        "./bs5-accordion.component.html"
+      );
       return template;
     } else {
       return null;

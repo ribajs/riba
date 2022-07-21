@@ -1,7 +1,6 @@
-import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
+import { Component, ScopeBase } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
-import template from "./linklist.component.html";
 
 import { Linklist, LinklistLink } from "../../interfaces/index.js";
 
@@ -245,10 +244,11 @@ export class ShopifyLinklistComponent extends Component {
   /**
    * Only set the component template if there no childs already
    */
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
+      const { default: template } = await import("./linklist.component.html");
       return template;
     }
   }

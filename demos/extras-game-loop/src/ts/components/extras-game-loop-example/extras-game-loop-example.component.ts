@@ -2,11 +2,8 @@
  * This example and the Gameloop are based on this greate blo article: https://isaacsukin.com/news/2015/01/detailed-explanation-javascript-game-loops-and-timing
  */
 
-import { Component, TemplateFunction } from "@ribajs/core";
-
+import { Component } from "@ribajs/core";
 import { Gameloop } from "@ribajs/extras";
-
-import template from "./extras-game-loop-example.component.html";
 
 export class ExtrasGameLoopExampleComponent extends Component {
   public static tagName = "rv-extras-game-loop-example";
@@ -60,7 +57,10 @@ export class ExtrasGameLoopExampleComponent extends Component {
     }
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
+    const { default: template } = await import(
+      "./extras-game-loop-example.component.html"
+    );
     return template;
   }
 }

@@ -1,6 +1,5 @@
-import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
+import { Component, ScopeBase } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
-import template from "./bs5-contents.component.html";
 
 export interface Anchor {
   element: HTMLHeadingElement;
@@ -169,11 +168,14 @@ export class Bs5ContentsComponent extends Component {
     this.scope.anchors = [];
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
+      const { default: template } = await import(
+        "./bs5-contents.component.html"
+      );
       return template;
     }
   }

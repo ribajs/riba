@@ -1,10 +1,8 @@
-import { TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import {
   Bs4ShareComponent,
   Scope as Bs4ShareScope,
 } from "@ribajs/bs4/src/components/bs4-share/bs4-share.component.js";
-import template from "@ribajs/bs4/src/components/bs4-share/bs4-share.component.html";
 import labelTemplate from "./share.label.html";
 import { I18nService } from "../../services/index.js";
 import { LocalesService } from "../../types/index.js";
@@ -117,13 +115,18 @@ export class I18nShareComponent extends Bs4ShareComponent {
     await super.afterBind();
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     this.debug("template", this, hasChildNodesTrim(this));
     if (this && hasChildNodesTrim(this)) {
       // If a child is set, this is a custom label template
       this.scope.labelTemplate = this.innerHTML;
       this.debug("Custom label template: ", this.scope.labelTemplate);
     }
+
+    const { default: template } = await import(
+      "@ribajs/bs4/src/components/bs4-share/bs4-share.component.html"
+    );
+
     return template;
   }
 }

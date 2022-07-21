@@ -1,11 +1,5 @@
-import {
-  Component,
-  TemplateFunction,
-  HttpService,
-  ScopeBase,
-} from "@ribajs/core";
+import { Component, HttpService, ScopeBase } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
-import template from "./addresses-form.component.html";
 
 // TODO move to general validation component class we can extend from
 export interface ValidationRule {
@@ -162,11 +156,14 @@ export class ShopifyAddressesComponent extends Component {
     return [];
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     // Only set the component template if there no childs already
     if (this && hasChildNodesTrim(this)) {
       return null;
     } else {
+      const { default: template } = await import(
+        "./addresses-form.component.html"
+      );
       return template;
     }
   }

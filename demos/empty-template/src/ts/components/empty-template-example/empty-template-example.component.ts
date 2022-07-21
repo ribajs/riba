@@ -1,6 +1,5 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
-import template from "./empty-template-example.component.pug";
 
 export class EmptyTemplateExampleComponent extends Component {
   public static tagName = "empty-template-example";
@@ -21,11 +20,14 @@ export class EmptyTemplateExampleComponent extends Component {
     super.init(EmptyTemplateExampleComponent.observedAttributes);
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
+      const { default: template } = await import(
+        "./empty-template-example.component.pug"
+      );
       return template(this.scope);
     }
   }

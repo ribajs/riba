@@ -1,5 +1,4 @@
-import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
-import template from "./bs4-taggedimage-example.component.html";
+import { Component, ScopeBase } from "@ribajs/core";
 import { TaggedImageTag as Tag } from "@ribajs/bs4";
 
 interface Scope extends ScopeBase {
@@ -87,7 +86,10 @@ export class Bs4TaggedImageExampleComponent extends Component {
     this.init(Bs4TaggedImageExampleComponent.observedAttributes);
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
+    const { default: template } = await import(
+      "./bs4-taggedimage-example.component.html"
+    );
     return template;
   }
 }

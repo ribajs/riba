@@ -1,6 +1,5 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component } from "@ribajs/core";
 import { DropdownService } from "@ribajs/bs4";
-import template from "./bs4-dropdown-example.component.html";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 
 interface DropdownItem {
@@ -85,11 +84,14 @@ export class Bs4DropdownExampleComponent extends Component {
     this.scope.selected = item;
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
+      const { default: template } = await import(
+        "./bs4-dropdown-example.component.html"
+      );
       return template;
     }
   }

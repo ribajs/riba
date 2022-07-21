@@ -1,4 +1,4 @@
-import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
+import { Component, ScopeBase } from "@ribajs/core";
 import { Pjax } from "@ribajs/router";
 import {
   getViewportDimensions,
@@ -6,7 +6,6 @@ import {
 } from "@ribajs/utils/src/dom.js";
 import type { InstagramMedia } from "../../interfaces/instagram-api";
 import { InstagramApiService } from "../../services/instagram-api.service.js";
-import template from "./instagram-scrollbar.component.html";
 
 export interface Scope extends ScopeBase {
   instagramId?: string;
@@ -129,11 +128,14 @@ export class ShopifyTdaInstagramScrollbarComponent extends Component {
     return ["instagramId", "limit"];
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
+      const { default: template } = await import(
+        "./instagram-scrollbar.component.html"
+      );
       return template;
     }
   }

@@ -1,8 +1,7 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component } from "@ribajs/core";
 import { GamepadService } from "../../services/gamepad.service.js";
 import { GamepadKeysComponentScope } from "../../types/index.js";
 import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
-import template from "./gamepad-keys.component.pug";
 
 /**
  * @credits https://github.com/alvaromontoro/gamecontroller.js/blob/master/examples/example-4-snes-controller.html
@@ -173,8 +172,11 @@ export class GamepadKeysComponent extends Component {
       });
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     if (!hasChildNodesTrim(this)) {
+      const { default: template } = await import(
+        "./gamepad-keys.component.pug"
+      );
       return template(this.scope);
     } else {
       return null;

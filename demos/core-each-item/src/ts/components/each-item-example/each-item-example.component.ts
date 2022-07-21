@@ -1,5 +1,4 @@
-import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
-import template from "./each-item-example.component.html";
+import { Component, ScopeBase } from "@ribajs/core";
 
 export class EachItemExampleComponent extends Component {
   public static tagName = "rv-each-item-example";
@@ -68,7 +67,10 @@ export class EachItemExampleComponent extends Component {
     });
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
+    const { default: template } = await import(
+      "./each-item-example.component.html"
+    );
     return template;
   }
 }

@@ -1,6 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
-
-import template from "./bs4-tabs-tpl-example.component.html";
+import { Component } from "@ribajs/core";
 
 export class Bs4TabsTplExampleComponent extends Component {
   public static tagName = "rv-bs4-tabs-tpl-example";
@@ -12,7 +10,10 @@ export class Bs4TabsTplExampleComponent extends Component {
     super.connectedCallback();
     this.init([]);
   }
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
+    const { default: template } = await import(
+      "./bs4-tabs-tpl-example.component.html"
+    );
     return template;
   }
 }

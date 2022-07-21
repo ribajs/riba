@@ -1,5 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
-import template from "./form-example.component.html";
+import { Component } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 
 export class FormExampleComponent extends Component {
@@ -25,11 +24,14 @@ export class FormExampleComponent extends Component {
     return [];
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
+      const { default: template } = await import(
+        "./form-example.component.html"
+      );
       return template;
     }
   }

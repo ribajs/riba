@@ -1,6 +1,5 @@
-import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
+import { Component, ScopeBase } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
-import template from "./bs5-photoswipe.component.html";
 import fullscreenTemplate from "./bs5-photoswipe.fullscreen.component.html";
 import { EventDispatcher } from "@ribajs/events";
 
@@ -659,11 +658,14 @@ export class PhotoswipeComponent extends Component {
     this.removeEventListeners();
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     // Only set the component template if there no child's already: `<bs5-photoswipe> any child's here.. <bs5-photoswipe/>`
     if (hasChildNodesTrim(this)) {
       return (this as HTMLElement).innerHTML + fullscreenTemplate;
     } else {
+      const { default: template } = await import(
+        "./bs5-photoswipe.component.html"
+      );
       return template + fullscreenTemplate;
     }
   }

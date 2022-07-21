@@ -1,5 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
-import template from "./component-1.component.html";
+import { Component } from "@ribajs/core";
 
 export class Component1Component extends Component {
   public static tagName = "rv-component-1";
@@ -21,7 +20,8 @@ export class Component1Component extends Component {
     this.init(Component1Component.observedAttributes);
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
+    const { default: template } = await import("./component-1.component.html");
     return template;
   }
 }

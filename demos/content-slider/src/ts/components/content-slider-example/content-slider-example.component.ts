@@ -1,6 +1,5 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
-import template from "./content-slider-example.component.html";
 
 export class ContentSliderExampleComponent extends Component {
   public static tagName = "content-slider-example";
@@ -26,11 +25,14 @@ export class ContentSliderExampleComponent extends Component {
     return [];
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
+      const { default: template } = await import(
+        "./content-slider-example.component.html"
+      );
       return template;
     }
   }

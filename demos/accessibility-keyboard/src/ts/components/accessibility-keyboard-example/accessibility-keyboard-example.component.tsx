@@ -1,7 +1,6 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component } from "@ribajs/core";
 import { KeyboardKeysComponent, KeyboardService } from "@ribajs/accessibility";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
-import template from "./accessibility-keyboard-example.component.pug";
 
 interface Scope {
   layouts: string[];
@@ -55,11 +54,14 @@ export class AccessibilityGamepadExampleComponent extends Component {
     }
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
+      const { default: template } = await import(
+        "./accessibility-keyboard-example.component.pug"
+      );
       return template(this.scope);
     }
   }

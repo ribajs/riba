@@ -1,5 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
-import template from "./components-example.component.html";
+import { Component } from "@ribajs/core";
 
 export interface ComponentsExampleScope {
   defaultInputVal: string;
@@ -23,7 +22,10 @@ export class ComponentsExampleComponent extends Component {
     this.init([]);
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
+    const { default: template } = await import(
+      "./components-example.component.html"
+    );
     return template;
   }
 }

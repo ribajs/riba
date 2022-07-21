@@ -1,6 +1,5 @@
-import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
+import { Component, ScopeBase } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
-import template from "./comments-form.component.html";
 
 export interface ValidationRule {
   required: boolean;
@@ -125,11 +124,14 @@ export class ShopifyCommentsFormComponent extends Component {
     return [];
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     // Only set the component template if there no childs already
     if (this && hasChildNodesTrim(this)) {
       return null;
     } else {
+      const { default: template } = await import(
+        "./comments-form.component.html"
+      );
       return template;
     }
   }

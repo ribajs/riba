@@ -1,6 +1,5 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
-import template from "./extras-scroll-events-example.component.html";
 
 export class ExtrasScrollEventsExampleComponent extends Component {
   public static tagName = "rv-extras-scroll-events-example";
@@ -42,11 +41,14 @@ export class ExtrasScrollEventsExampleComponent extends Component {
     this.touchZoneElement = this.querySelector(".touch-zone");
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
+      const { default: template } = await import(
+        "./extras-scroll-events-example.component.html"
+      );
       return template;
     }
   }

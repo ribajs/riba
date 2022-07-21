@@ -1,12 +1,10 @@
 import {
   Component,
-  TemplateFunction,
   HttpService,
   HttpMethod,
   HttpDataType,
   ScopeBase,
 } from "@ribajs/core";
-import template from "./bs5-form.component.html";
 import { stripHtml } from "@ribajs/utils/src/type.js";
 import {
   getUID,
@@ -379,11 +377,12 @@ export class Bs5FormComponent extends Component {
     }
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     if (hasChildNodesTrim(this)) {
       this.initForm();
       return null;
     } else {
+      const { default: template } = await import("./bs5-form.component.html");
       return template;
     }
   }

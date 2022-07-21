@@ -1,8 +1,7 @@
-import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
+import { Component, ScopeBase } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { isNumber, justDigits } from "@ribajs/utils/src/type.js";
 import { getUID } from "@ribajs/utils/src/dom.js";
-import template from "./leaflet-map.component.html";
 import * as Leaflet from "leaflet";
 import { PointTuple, IconOptions } from "leaflet";
 
@@ -148,7 +147,9 @@ export class LeafletMapComponent extends Component {
     return numberArr as PointTuple;
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
+    const { default: template } = await import("./leaflet-map.component.html");
+
     for (const el of Array.from(this.children)) {
       if (el.tagName === "ICON") {
         const iconName = el.getAttribute("name");
@@ -213,6 +214,7 @@ export class LeafletMapComponent extends Component {
         }
       }
     }
+
     return template;
   }
 }

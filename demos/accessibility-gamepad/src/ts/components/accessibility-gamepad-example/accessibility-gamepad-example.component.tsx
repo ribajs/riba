@@ -1,6 +1,5 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
-import template from "./accessibility-gamepad-example.component.pug";
 
 export class AccessibilityGamepadExampleComponent extends Component {
   public static tagName = "accessibility-gamepad-example";
@@ -21,12 +20,15 @@ export class AccessibilityGamepadExampleComponent extends Component {
     super.init(AccessibilityGamepadExampleComponent.observedAttributes);
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      return template(this.scope);
+      const template = await import(
+        "./accessibility-gamepad-example.component.pug"
+      );
+      return template.default(this.scope);
     }
   }
 }

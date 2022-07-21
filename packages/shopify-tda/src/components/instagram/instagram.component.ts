@@ -1,6 +1,5 @@
-import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
+import { Component, ScopeBase } from "@ribajs/core";
 import { Pjax } from "@ribajs/router";
-import template from "./instagram.component.html";
 import { InstagramMedia, InstagramApiService } from "@ribajs/shopify-tda";
 
 export interface Scope extends ScopeBase {
@@ -81,11 +80,12 @@ export class ShopifyTdaInstagramComponent extends Component {
     return ["instagramId", "limit"];
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     // Only set the component template if there no childs already
     if (this && this.hasChildNodes()) {
       return null;
     } else {
+      const { default: template } = await import("./instagram.component.html");
       return template;
     }
   }

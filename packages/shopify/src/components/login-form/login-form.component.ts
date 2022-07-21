@@ -1,5 +1,4 @@
-import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
-import template from "./login-form.component.html";
+import { Component, ScopeBase } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 
 export interface ValidationRule {
@@ -229,11 +228,12 @@ export class ShopifyLoginFormComponent extends Component {
     return [];
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     // Only set the component template if there no childs already
     if (this && hasChildNodesTrim(this)) {
       return null;
     } else {
+      const { default: template } = await import("./login-form.component.html");
       return template;
     }
   }

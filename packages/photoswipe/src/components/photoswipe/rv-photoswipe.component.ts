@@ -1,7 +1,5 @@
-import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
+import { Component, ScopeBase } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
-import template from "./rv-photoswipe.component.html";
-import fullscreenTemplate from "./rv-photoswipe.fullscreen.component.html";
 
 import PhotoSwipe from "photoswipe";
 import { PhotoSwipeUI } from "../../services/photoswipe-ui.service.js";
@@ -589,11 +587,17 @@ export class PhotoswipeComponent extends Component {
     this.removeEventListeners();
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
+    const { default: fullscreenTemplate } = await import(
+      "./rv-photoswipe.fullscreen.component.html"
+    );
     // Only set the component template if there no childs already: `<rv-photoswipe> any childs here.. <rv-photoswipe/>`
     if (hasChildNodesTrim(this)) {
       return (this as HTMLElement).innerHTML + fullscreenTemplate;
     } else {
+      const { default: template } = await import(
+        "./rv-photoswipe.component.html"
+      );
       return template + fullscreenTemplate;
     }
   }
