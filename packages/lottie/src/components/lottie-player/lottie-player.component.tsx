@@ -1,6 +1,6 @@
 import { Component, TemplateFunction } from "@ribajs/core";
 import { JsxElement } from "@ribajs/jsx";
-import lottie from "lottie-web/build/player/lottie";
+
 import {
   PlayMode,
   PlayerEvents,
@@ -182,6 +182,10 @@ export class LottiePlayerComponent extends Component {
       // if (this.scope.webworkers) {
       //   lottie.useWebWorker(true);
       // }
+
+      const { default: lottie } = await import(
+        "lottie-web/build/player/lottie"
+      );
 
       // Initialize lottie player and load animation
       this._lottie = lottie.loadAnimation({
