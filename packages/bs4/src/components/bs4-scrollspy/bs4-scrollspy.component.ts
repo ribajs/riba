@@ -3,8 +3,6 @@ import {
   Scope as Bs4ContentsComponentScope,
 } from "../bs4-contents/bs4-contents.component.js";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
-import { TemplateFunction } from "@ribajs/core";
-import template from "./bs4-scrollspy.component.html";
 
 export interface Anchor {
   element: HTMLHeadingElement;
@@ -65,11 +63,14 @@ export class Bs4ScrollspyComponent extends Bs4ContentsComponent {
     return ["headersStart", "headersDepth", "headerParentSelector"];
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
+      const { default: template } = await import(
+        "./bs4-scrollspy.component.html"
+      );
       return template;
     }
   }

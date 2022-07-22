@@ -1,6 +1,5 @@
-import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
+import { Component, ScopeBase } from "@ribajs/core";
 import { getUrl } from "@ribajs/utils/src/url";
-import template from "./bs4-share.component.html";
 import labelTemplate from "./bs4-share.label.html";
 import { ShareItem, ShareUrlType } from "../../interfaces/index.js";
 import { DropdownService } from "@ribajs/bs4";
@@ -388,13 +387,14 @@ export class Bs4ShareComponent extends Component {
     return ["url"];
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     this.debug("template", this, hasChildNodesTrim(this));
     if (this && hasChildNodesTrim(this)) {
       // If a child is set, this is a custom label template
       this.scope.labelTemplate = this.innerHTML;
       this.debug("Custom label template: ", this.scope.labelTemplate);
     }
+    const { default: template } = await import("./bs4-share.component.html");
     return template;
   }
 }

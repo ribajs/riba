@@ -1,6 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
-
-import template from "./i18n-static-example.component.html";
+import { Component } from "@ribajs/core";
 
 export class I18nStaticExampleComponent extends Component {
   public static tagName = "rv-i18n-static-example";
@@ -32,7 +30,10 @@ export class I18nStaticExampleComponent extends Component {
     return [];
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
+    const { default: template } = await import(
+      "./i18n-static-example.component.html"
+    );
     return template;
   }
 }

@@ -3,9 +3,8 @@
  */
 
 import Color from "@sphinxxxx/color-conversion";
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
-import template from "./bs4-colorpicker.component.html";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { ColorPickerOptions } from "../../interfaces/index.js";
 import { debounce } from "@ribajs/utils/src/control";
@@ -267,10 +266,13 @@ export class Bs4ColorPickerComponent extends Component {
     this.eventDispatcher?.trigger("done", color);
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
+      const { default: template } = await import(
+        "./bs4-colorpicker.component.html"
+      );
       return template;
     }
   }

@@ -1,6 +1,5 @@
 import {
   handleizeFormatter,
-  TemplateFunction,
   FormatterFn,
   TemplatesComponent,
   ScopeBase,
@@ -11,8 +10,6 @@ import {
   EVENT_SHOW,
 } from "../../services/collapse.service.js";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
-
-import template from "./bs4-accordion.component.html";
 
 const handleize = handleizeFormatter.read as FormatterFn;
 
@@ -236,9 +233,12 @@ export class Bs4AccordionComponent extends TemplatesComponent {
     super.disconnectedCallback();
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     // Only set the component template if there no childs or the childs are templates
     if (!hasChildNodesTrim(this) || this.hasOnlyTemplateChilds()) {
+      const { default: template } = await import(
+        "./bs4-accordion.component.html"
+      );
       return template;
     } else {
       return null;

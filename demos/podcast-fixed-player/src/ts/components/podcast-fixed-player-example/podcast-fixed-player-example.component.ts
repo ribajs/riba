@@ -1,6 +1,5 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
-import template from "./podcast-fixed-player-example.component.pug";
 
 import { episode03 } from "../../data/episode-03/episode";
 import { episode01 } from "../../data/episode-01/episode";
@@ -29,11 +28,14 @@ export class PodcastFixedPlayerExampleComponent extends Component {
     super.init(PodcastFixedPlayerExampleComponent.observedAttributes);
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
+      const { default: template } = await import(
+        "./podcast-fixed-player-example.component.pug"
+      );
       return template(this.scope);
     }
   }

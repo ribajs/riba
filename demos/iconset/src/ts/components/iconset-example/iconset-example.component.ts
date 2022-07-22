@@ -1,6 +1,5 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
-import template from "./iconset-example.component.html";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import Color from "@sphinxxxx/color-conversion";
 
@@ -44,11 +43,14 @@ export class IconsetExampleComponent extends Component {
     return [];
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     // Only set the component template if there no childs already
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
+      const { default: template } = await import(
+        "./iconset-example.component.html"
+      );
       return template;
     }
   }

@@ -1,5 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
-import template from "./nav.component.html";
+import { Component } from "@ribajs/core";
 
 export class NavComponent extends Component {
   public static tagName = "rv-nav";
@@ -23,7 +22,8 @@ export class NavComponent extends Component {
     return [];
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
+    const { default: template } = await import("./nav.component.html");
     return template;
   }
 }

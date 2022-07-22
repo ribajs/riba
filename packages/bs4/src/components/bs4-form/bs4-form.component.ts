@@ -1,12 +1,10 @@
 import {
   Component,
-  TemplateFunction,
   HttpService,
   HttpMethod,
   HttpDataType,
   ScopeBase,
 } from "@ribajs/core";
-import template from "./bs4-form.component.html";
 import {
   scrollTo,
   getViewportDimensions,
@@ -375,11 +373,12 @@ export class Bs4FormComponent extends Component {
     }
   }
 
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
     if (hasChildNodesTrim(this)) {
       this.initForm();
       return null;
     } else {
+      const { default: template } = await import("./bs4-form.component.html");
       return template;
     }
   }

@@ -1,6 +1,4 @@
-import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
-
-import template from "./bs4-modal-item.component.html";
+import { Component, ScopeBase } from "@ribajs/core";
 import { Modal } from "../../interfaces/index.js";
 import { getElementFromEvent } from "@ribajs/utils/src/dom.js";
 import { ModalService, EVENT_HIDDEN } from "../../services/modal.service.js";
@@ -105,7 +103,10 @@ export class Bs4ModalItemComponent extends Component {
       );
     }
   }
-  protected template(): ReturnType<TemplateFunction> {
+  protected async template() {
+    const { default: template } = await import(
+      "./bs4-modal-item.component.html"
+    );
     return template;
   }
 }
