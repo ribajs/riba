@@ -279,7 +279,7 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
   ) {
     config.optimization.splitChunks.cacheGroups.defaultVendors = {
       test: /[\\/]node_modules[\\/]/,
-      name: commonsName,
+      name: "vendors-checkout",
       chunks: "all",
       reuseExistingChunk: true,
     };

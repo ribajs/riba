@@ -206,10 +206,12 @@ export class LottiePlayerComponent extends Component {
       }
 
       if (!isLottie(jsonData)) {
+        console.error("Json data is not a valid lottie json: ", jsonData);
         this.scope.currentState = PlayerState.Error;
         this.dispatchEvent(new CustomEvent(PlayerEvents.Error));
       }
     } catch (err) {
+      console.error(err);
       this.scope.currentState = PlayerState.Error;
       this.dispatchEvent(new CustomEvent(PlayerEvents.Error));
     }
@@ -612,6 +614,7 @@ export class LottiePlayerComponent extends Component {
 
     // Set error state when animation load fail event triggers
     this._lottie.addEventListener("data_failed", () => {
+      console.error("data_failed event was triggered!");
       this.scope.currentState = PlayerState.Error;
 
       this.dispatchEvent(new CustomEvent(PlayerEvents.Error));
