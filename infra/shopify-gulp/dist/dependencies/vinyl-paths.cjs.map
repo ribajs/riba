@@ -1,1 +1,0 @@
-{"version":3,"file":"vinyl-paths.cjs","sourceRoot":"","sources":["../../src/dependencies/vinyl-paths.cts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAEA,6BAA6B;AAC7B,4EAA4E;AACrE,MAAM,UAAU,GAAG,CAAO,QAA8B,EAAE,EAAE;IACjE,MAAM,EAAE,OAAO,EAAE,UAAU,EAAE,GAAG,wDAAa,aAAa,GAAC,CAAC;IAC5D,OAAO,UAAU,CAAC,QAAQ,CAAC,CAAC;AAC9B,CAAC,CAAA,CAAC;AAHW,QAAA,UAAU,cAGrB"}
