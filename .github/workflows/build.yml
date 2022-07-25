@@ -1,4 +1,4 @@
-name: "build-test"
+name: Build
 on:
   pull_request:
   push:
@@ -19,14 +19,6 @@ jobs:
         run: |
           yarn --version
           yarn install
-      - name: Lint source files 
-        run: |
-          yarn run lint
-        env:
-          NODE_OPTIONS: '--max-old-space-size=4096'
-      - name: Test
-        run: |
-          yarn run test
       - name: Build each package
         run: |
           yarn run build
